@@ -1,32 +1,44 @@
-# Prerequisites
-*.d
-
-# Compiled Object files
-*.slo
-*.lo
-*.o
+*.bak
+*.bin
+*.cof
+*.err
+*.hex
+*.out
+*.sta
+*.suo
+*.sym
+*.tmp
+*.tre
+*.lib
+*.*pdb
+*.uvgui*
+*.dat
+JLink*
+*.pch*
 *.obj
 
-# Precompiled Headers
-*.gch
-*.pch
+doc/doxygen/OSC/*
 
-# Compiled Dynamic libraries
-*.so
-*.dylib
-*.dll
+sources/.vs/*
 
-# Fortran module files
-*.mod
-*.smod
+sources/Device/DebugConfig/*
+sources/Device/Listings/*
+sources/Device/Objects/*
 
-# Compiled Static libraries
-*.lai
-*.la
-*.a
-*.lib
+sources/Panel/DebugConfig/*
+sources/Panel/Listings/*
+sources/Panel/Objects/*
 
-# Executables
-*.exe
-*.out
-*.app
+sources/OSC-VS/Device/Debug/*
+sources/OSC-VS/Panel/Debug/*
+
+sources/OSC-Open/Objects/*
+sources/OSC-Open/DebugConfig/*
+sources/OSC-Open/Listings/*
+
+sources/OSC-Open-VS/Debug/*
+
+sources/OSC-VS/Device/x64/*
+sources/OSC-VS/Panel/x64/*
+
+sources/ThirdParty/wxWidgets/docs/*
