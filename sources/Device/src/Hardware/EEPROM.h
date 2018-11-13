@@ -43,6 +43,8 @@ private:
     static void WriteBytes(uint address, uint8 *data, int size);
 
     static void ReadBytes(uint address, void *data, uint size);
+
+    static uint ReadDoubleWord(uint address);
 };
 
 

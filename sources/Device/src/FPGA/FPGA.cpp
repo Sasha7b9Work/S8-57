@@ -541,20 +541,6 @@ void FPGA::GPIO_Init()
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void FPGA::LoadSettings()
-{
-    LoadRanges();
-    LoadRShift(Chan::A);
-    LoadRShift(Chan::B);
-    LoadTrigSourceInput();
-    LoadTrigLev();
-    LoadTBase();
-    LoadTShift();
-
-    isRunning = false;
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void FPGA::IncreaseRange(Chan ch)
 {
     Math::LimitationIncrease<uint8>((uint8 *)(&SET_RANGE(ch)), (uint8)(Range::Number - 1));

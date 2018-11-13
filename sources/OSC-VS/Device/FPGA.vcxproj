@@ -78,6 +78,9 @@
     <ClCompile Include="..\..\Device\src\FPGA\FPGAMath.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="..\..\Device\src\FPGA\FPGA_437.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="..\..\Device\src\FPGA\RShift.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
@@ -98,6 +101,9 @@
     </ClCompile>
     <ClCompile Include="..\..\Device\src\Hardware\EEPROM.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Hardware\EEPROM_437.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="..\..\Device\src\Hardware\FSMC.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
@@ -356,6 +362,8 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="src\FPGA\FPGA_win.cpp" />
+    <ClCompile Include="src\Hardware\EEPROM_win.cpp" />
     <ClCompile Include="src\include\FatFS\ff.cpp" />
     <ClCompile Include="src\include\FatFS\ff_gen_drv.cpp" />
     <ClCompile Include="src\include\HAL\stm32f4xx_hal.cpp" />

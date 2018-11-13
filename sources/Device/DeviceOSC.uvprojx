@@ -2106,6 +2106,11 @@
               <FilePath>.\src\FPGA\FPGA.h</FilePath>
             </File>
             <File>
+              <FileName>FPGA_437.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\FPGA\FPGA_437.cpp</FilePath>
+            </File>
+            <File>
               <FileName>FPGAMath.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\FPGA\FPGAMath.cpp</FilePath>
@@ -2156,6 +2161,46 @@
           <GroupName>Hardware</GroupName>
           <Files>
             <File>
+              <FileName>AT25160N.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\AT25160N.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>AT25160N.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Hardware\AT25160N.h</FilePath>
+            </File>
+            <File>
+              <FileName>CPU.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\CPU.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>CPU.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Hardware\CPU.h</FilePath>
+            </File>
+            <File>
+              <FileName>CPU_IT.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\CPU_IT.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>EEPROM.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\EEPROM.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>EEPROM.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Hardware\EEPROM.h</FilePath>
+            </File>
+            <File>
+              <FileName>EEPROM_437.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\EEPROM_437.cpp</FilePath>
+            </File>
+            <File>
               <FileName>FSMC.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Hardware\FSMC.cpp</FilePath>
@@ -2164,6 +2209,16 @@
               <FileName>FSMC.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Hardware\FSMC.h</FilePath>
+            </File>
+            <File>
+              <FileName>GPIO.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\GPIO.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>GPIO.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Hardware\GPIO.h</FilePath>
             </File>
             <File>
               <FileName>Hardware.cpp</FileName>
@@ -2186,46 +2241,6 @@
               <FilePath>.\src\Hardware\Timer.h</FilePath>
             </File>
             <File>
-              <FileName>GPIO.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Hardware\GPIO.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>GPIO.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Hardware\GPIO.h</FilePath>
-            </File>
-            <File>
-              <FileName>EEPROM.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Hardware\EEPROM.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>EEPROM.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Hardware\EEPROM.h</FilePath>
-            </File>
-            <File>
-              <FileName>AT25160N.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Hardware\AT25160N.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>AT25160N.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Hardware\AT25160N.h</FilePath>
-            </File>
-            <File>
-              <FileName>CPU.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Hardware\CPU.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>CPU.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Hardware\CPU.h</FilePath>
-            </File>
-            <File>
               <FileName>Sound.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Hardware\Sound.cpp</FilePath>
@@ -2234,11 +2249,6 @@
               <FileName>Sound.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Hardware\Sound.h</FilePath>
-            </File>
-            <File>
-              <FileName>CPU_IT.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Hardware\CPU_IT.cpp</FilePath>
             </File>
           </Files>
         </Group>

@@ -28,8 +28,6 @@
 #define READ_BYTE(address)          (*((uint8 *)address))
 
 
-static uint ReadDoubleWord(uint address);
-
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void EEPROM::SaveSettings()
 {
@@ -65,20 +63,6 @@ void EEPROM::SaveSettings()
 
     set.size = sizeof(set);
     WriteBytes(address, (uint8 *)&set, sizeof(set));
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-bool EEPROM::LoadSettings()
-{
-    uint address = AddressSavedSettings(0);
-
-    if (address && ReadDoubleWord(address) == sizeof(set))
-    {
-        ReadBytes(address, &set, ReadDoubleWord(address));
-        return true;
-    }
-
-    return false;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -299,12 +283,8 @@ bool OTPmem::SaveSerialNumber(char *servialNumber)
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static uint ReadDoubleWord(uint address)
+uint EEPROM::ReadDoubleWord(uint address)
 {
-#ifdef WIN32
-    return 0;
-#else
     return (*((uint *)address));
-#endif
 }
 
