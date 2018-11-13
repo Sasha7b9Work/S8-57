@@ -16,3 +16,25 @@ void FSMC::WriteToFPGA16(uint8 *address, uint16 value)
     *address = (uint8)value;
     *(address + 1) = (uint8)(value >> 8);
 }
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void FSMC::WriteToFPGA8(uint8 *address, uint8 value)
+{
+    if (mode != ModeFPGA)
+    {
+        ConfigureForFPGA();
+    }
+
+    *address = value;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+uint8 FSMC::ReadFromFPGA(uint8 *address)
+{
+    if (mode != ModeFPGA)
+    {
+        ConfigureForFPGA();
+    }
+
+    return *address;
+}
