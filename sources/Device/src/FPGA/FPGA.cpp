@@ -527,7 +527,7 @@ GPIO_TypeDef *FPGA::GetPort(Pin pin)
     return pins[pin].gpioTD;
 }
 
-#ifdef _WIN32
+#ifdef WIN32
 #pragma warning(push)
 #pragma warning(disable:4310)
 #endif
@@ -572,7 +572,7 @@ static uint8 ValueForRange(Chan ch)
     return (uint8)(values[SET_RANGE(ch)][ch].val | datas[SET_COUPLE(ch)]);
 }
 
-#ifdef _WIN32
+#ifdef WIN32
 #pragma warning(pop)
 #endif
 
