@@ -513,6 +513,12 @@
     <ClCompile Include="src\Hardware\FSMC_win.cpp">
       <Filter>Hardware</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Device\src\Hardware\Timer_437.cpp">
+      <Filter>Hardware</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Hardware\Timer_win.cpp">
+      <Filter>Hardware</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Device\src\Display\Display.h">

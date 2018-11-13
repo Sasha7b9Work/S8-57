@@ -2246,6 +2246,11 @@
               <FilePath>.\src\Hardware\Timer.h</FilePath>
             </File>
             <File>
+              <FileName>Timer_437.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\Timer_437.cpp</FilePath>
+            </File>
+            <File>
               <FileName>Sound.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Hardware\Sound.cpp</FilePath>
