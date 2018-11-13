@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2036
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Panel", "OSC-Open-VS\OSC-Open.vcxproj", "{69B40DED-EDDE-4D55-B919-DB2780BAAD68}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{69B40DED-EDDE-4D55-B919-DB2780BAAD68}.Debug|x86.ActiveCfg = Debug|Win32
+		{69B40DED-EDDE-4D55-B919-DB2780BAAD68}.Debug|x86.Build.0 = Debug|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4843EE29-ED6D-4732-BEE3-ECD04FADE6FB}
+	EndGlobalSection
+EndGlobal
