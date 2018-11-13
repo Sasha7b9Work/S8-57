@@ -25,12 +25,6 @@ static void WriteColor(Color color);
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void Painter::Init()
-{
-    Timer::SetAndEnable(Timer::Type::FlashDisplay, OnTimerFlashDisplay, 500);
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void WriteColor(Color color)
 {
     static Color lastColor = Color::NUMBER;
@@ -70,48 +64,11 @@ static bool WriteFlashColor()
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Painter::BeginScene(Color color)
-{
-    uint8 buffer[2] = {Command::Paint_BeginScene, color.value};
-    FSMC::WriteToPanel(buffer, 2);
-
-
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Painter::EndScene()
-{
-    uint8 buffer[1] = {Command::Paint_EndScene};
-    FSMC::WriteToPanel(buffer, 1);
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Painter::FillRegion(int x, int y, int width, int height, Color color)
 {
     SetColor(color);
     uint8 buffer[7] = {Command::Paint_FillRegion, (uint8)x, (uint8)(x >> 8), (uint8)y, (uint8)width, (uint8)(width >> 8), (uint8)height};
     FSMC::WriteToPanel(buffer, 7);
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Painter::DrawTesterData(uint8 mode, Color color, uint8 x[240], uint8 y[240])
-{
-    uint8 *buffer = (uint8 *)malloc(483);
-    buffer[0] = Command::Paint_TesterLines;
-    buffer[1] = mode;
-    buffer[2] = color.value;
-    uint8 *pointer = buffer + 3;
-    for(int i = 0; i < 240; i++)
-    {
-        *pointer++ = x[i];
-    }
-    for(int i = 0; i < 240; i++)
-    {
-        *pointer++ = y[i];
-    }
-    FSMC::WriteToPanel(buffer, 483);
-
-    free(buffer);
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -145,14 +102,6 @@ int Painter::DrawText(int x, int y, const char *text, Color color)
     FSMC::WriteToPanel(buffer, (int)size);
 
     return x + 10;
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Painter::SetColorValue(Color color, uint value)
-{
-    uint8 buffer[6] = {Command::Paint_SetPalette, color.value, (uint8)value, (uint8)(value >> 8), (uint8)(value >> 16), (uint8)(value >> 24)};
-
-    FSMC::WriteToPanel(buffer, 6);
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -230,14 +179,6 @@ void Painter::DrawLine(int x0, int y0, int x1, int y1, Color color)
     SetColor(color);
     uint8 buffer[7] = {Command::Paint_DrawLine, (uint8)x0, (uint8)(x0 >> 8), (uint8)y0, (uint8)x1, (uint8)(x1 >> 8), (uint8)y1};
     FSMC::WriteToPanel(buffer, 7);
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Painter::SetPoint(int x, int y, Color color)
-{
-    SetColor(color);
-    uint8 buffer[4] = {Command::Paint_SetPoint, (uint8)x, (uint8)(x >> 8), (uint8)y};
-    FSMC::WriteToPanel(buffer, 4);
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

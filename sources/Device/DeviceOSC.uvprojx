@@ -1941,31 +1941,6 @@
           <GroupName>Display</GroupName>
           <Files>
             <File>
-              <FileName>Display.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Display\Display.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Display.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Display\Display.h</FilePath>
-            </File>
-            <File>
-              <FileName>Painter.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Display\Painter.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Painter.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Display\Painter.h</FilePath>
-            </File>
-            <File>
-              <FileName>TypeSymbols.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Display\TypeSymbols.h</FilePath>
-            </File>
-            <File>
               <FileName>Colors.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Display\Colors.cpp</FilePath>
@@ -1974,6 +1949,26 @@
               <FileName>Colors.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Display\Colors.h</FilePath>
+            </File>
+            <File>
+              <FileName>Console.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Display\Console.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Console.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Display\Console.h</FilePath>
+            </File>
+            <File>
+              <FileName>Display.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Display\Display.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Display.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Display\Display.h</FilePath>
             </File>
             <File>
               <FileName>DisplayPrimitives.cpp</FileName>
@@ -1991,19 +1986,19 @@
               <FilePath>.\src\Display\DisplayTypes.h</FilePath>
             </File>
             <File>
-              <FileName>Symbols.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Display\Symbols.h</FilePath>
-            </File>
-            <File>
-              <FileName>Console.cpp</FileName>
+              <FileName>Painter.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\Display\Console.cpp</FilePath>
+              <FilePath>.\src\Display\Painter.cpp</FilePath>
             </File>
             <File>
-              <FileName>Console.h</FileName>
+              <FileName>Painter_437.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Display\Painter_437.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Painter.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\src\Display\Console.h</FilePath>
+              <FilePath>.\src\Display\Painter.h</FilePath>
             </File>
             <File>
               <FileName>PainterMem.cpp</FileName>
@@ -2014,6 +2009,16 @@
               <FileName>PainterMem.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Display\PainterMem.h</FilePath>
+            </File>
+            <File>
+              <FileName>Symbols.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Display\Symbols.h</FilePath>
+            </File>
+            <File>
+              <FileName>TypeSymbols.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Display\TypeSymbols.h</FilePath>
             </File>
           </Files>
         </Group>

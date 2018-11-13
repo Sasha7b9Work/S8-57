@@ -102,9 +102,6 @@
     <ClCompile Include="..\..\Device\src\Display\Display.cpp">
       <Filter>Display</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Device\src\Display\Painter.cpp">
-      <Filter>Display</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Device\src\Hardware\FSMC.cpp">
       <Filter>Hardware</Filter>
     </ClCompile>
@@ -125,9 +122,6 @@
     </ClCompile>
     <ClCompile Include="..\..\Device\src\Settings\Settings.cpp">
       <Filter>Settings</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Device\src\main.cpp">
-      <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Device\src\Tester\Tester.cpp">
       <Filter>Tester</Filter>
@@ -402,9 +396,6 @@
     <ClCompile Include="..\..\Device\src\stdafx.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="src\vs_main.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
     <ClCompile Include="src\Application.cpp">
       <Filter>src</Filter>
     </ClCompile>
@@ -483,9 +474,6 @@
     <ClCompile Include="..\..\Device\src\log.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="src\Display\PainterSDL.cpp">
-      <Filter>Display</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Device\src\Data\Buffer.cpp">
       <Filter>Data</Filter>
     </ClCompile>
@@ -494,6 +482,18 @@
     </ClCompile>
     <ClCompile Include="..\..\Device\src\Data\StorageOld_.cpp">
       <Filter>Data</Filter>
+    </ClCompile>
+    <ClCompile Include="src\main_win.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Display\Painter_win.cpp">
+      <Filter>Display</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Display\Painter.cpp">
+      <Filter>Display</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Display\Painter_437.cpp">
+      <Filter>Display</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

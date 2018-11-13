@@ -1,5 +1,5 @@
 *.bak
-
+*.dll
 *.bin
 *.cof
 *.err
