@@ -2211,6 +2211,11 @@
               <FilePath>.\src\Hardware\FSMC.h</FilePath>
             </File>
             <File>
+              <FileName>FSMC_437.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\FSMC_437.cpp</FilePath>
+            </File>
+            <File>
               <FileName>GPIO.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Hardware\GPIO.cpp</FilePath>

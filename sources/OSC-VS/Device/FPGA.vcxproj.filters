@@ -507,6 +507,12 @@
     <ClCompile Include="src\FPGA\FPGA_win.cpp">
       <Filter>FPGA</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Device\src\Hardware\FSMC_437.cpp">
+      <Filter>Hardware</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Hardware\FSMC_win.cpp">
+      <Filter>Hardware</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Device\src\Display\Display.h">
