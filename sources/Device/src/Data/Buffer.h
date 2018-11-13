@@ -8,4 +8,6 @@ class Buffer
 
 public:
     static void Init();
+
+    static void Update();
 };

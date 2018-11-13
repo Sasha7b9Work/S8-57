@@ -25,9 +25,10 @@
                             FLASH_FLAG_PGSERR);  /* programming sequence error flag    */
 
 
-#define READ_DOUBLEWORD(address)    (*((uint *)address))
 #define READ_BYTE(address)          (*((uint8 *)address))
 
+
+static uint ReadDoubleWord(uint address);
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void EEPROM::SaveSettings()
@@ -71,9 +72,9 @@ bool EEPROM::LoadSettings()
 {
     uint address = AddressSavedSettings(0);
 
-    if (address && READ_DOUBLEWORD(address) == sizeof(set))
+    if (address && ReadDoubleWord(address) == sizeof(set))
     {
-        ReadBytes(address, &set, READ_DOUBLEWORD(address));
+        ReadBytes(address, &set, ReadDoubleWord(address));
         return true;
     }
 
@@ -87,7 +88,7 @@ uint EEPROM::FirstFreeAddressForSettings()
 
     do
     {
-        uint value = READ_DOUBLEWORD(address);
+        uint value = ReadDoubleWord(address);
 
         if (value == MAX_UINT)              // Это условие означает, что по этому адресу ещё ничего не записывалось, иначе здесь был бы записан
         {                                   // размер структуры (Settings), чьим первым байтом являлось бы это слово
@@ -109,10 +110,10 @@ uint EEPROM::AddressSavedSettings(int)
 
     uint address = ADDR_SECTOR_SETTINGS_1;
 
-    while (READ_DOUBLEWORD(address) != MAX_UINT)
+    while (ReadDoubleWord(address) != MAX_UINT)
     {
         addrPrev = address;
-        address += READ_DOUBLEWORD(address);
+        address += ReadDoubleWord(address);
     }
 
     return addrPrev;
@@ -122,7 +123,7 @@ uint EEPROM::AddressSavedSettings(int)
 uint EEPROM::AddressFirstEmptyByte()
 {
     uint address = AddressSavedSettings(0);
-    return address + READ_DOUBLEWORD(address);
+    return address + ReadDoubleWord(address);
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -296,3 +297,14 @@ bool OTPmem::SaveSerialNumber(char *servialNumber)
 
     return false;
 }
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+static uint ReadDoubleWord(uint address)
+{
+#ifdef WIN32
+    return 0;
+#else
+    return (*((uint *)address));
+#endif
+}
+

@@ -38,9 +38,9 @@ void Device::Init()
 
     FPGA::Init();
 
-#ifndef WIN32
-
     Settings::Load();
+
+#ifndef WIN32
 
     FrequencyCounter::Init();
 

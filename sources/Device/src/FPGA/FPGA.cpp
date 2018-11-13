@@ -9,6 +9,7 @@
 #include "Hardware/Timer.h"
 #include "Utils/Math.h"
 #include "Settings/Settings.h"
+#include "Data/Buffer.h"
 #include "Data/Storage.h"
 #include "TrigLev.h"
 #include <string.h>
@@ -174,6 +175,8 @@ void FPGA::Stop(bool)
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void FPGA::Update()
 {
+    Buffer::Update();
+
     if (!isRunning)
     {
         return;
