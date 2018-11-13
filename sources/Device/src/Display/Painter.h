@@ -112,4 +112,10 @@ private:
     static int DrawSubString(int x, int y, const char *text);
 
     static int DrawSpaces(int x, int y, const char *text, int *numSymbols);
+    /// Записывает мигающй цвет в дисплей. Возвращает false, если текущий цвет немигающий
+    static bool WriteFlashColor();
+    /// Записывает цвет в дисплей
+    static void WriteColor(Color color);
+    /// Текущий цвет рисования
+    static Color currentColor;
 };

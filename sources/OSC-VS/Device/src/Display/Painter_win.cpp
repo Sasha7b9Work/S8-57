@@ -125,18 +125,6 @@ void Painter::DrawTesterData(uint8 mode, Color color, uint8 x[240], uint8 y[240]
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Painter::DrawVPointLine(int x, int y0, int y1, float delta)
-{
-
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Painter::DrawHPointLine(int y, int x0, int x1, float delta)
-{
-
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Painter::DrawMultiHPointLine(int numLines, int x, uint8 y[], int delta, int count, Color color /* = Color::NUMBER */)
 {
 
@@ -245,34 +233,6 @@ int Painter::DrawChar(int eX, int eY, char _symbol, Color color)
     }
 
     return eX + width * size;
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-bool Painter::ByteFontNotEmpty(uint eChar, int byte)
-{
-    static const uint8 *bytes = 0;
-    static uint prevChar = 0xffffffff;
-    if (eChar != prevChar)
-    {
-        prevChar = eChar;
-        bytes = font->symbol[prevChar].bytes;
-    }
-    return bytes[byte];
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-bool Painter::BitInFontIsExist(int eChar, int numByte, int bit)
-{
-    static uint8 prevByte = 0;      /// \todo здесь точно статики нужны?
-    static int prevChar = -1;
-    static int prevNumByte = -1;
-    if (prevNumByte != numByte || prevChar != eChar)
-    {
-        prevByte = font->symbol[eChar].bytes[numByte];
-        prevChar = eChar;
-        prevNumByte = numByte;
-    }
-    return prevByte & (1 << bit);
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

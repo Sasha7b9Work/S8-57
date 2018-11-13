@@ -62,3 +62,21 @@ void Painter::DrawTesterData(uint8 mode, Color color, uint8 x[240], uint8 y[240]
 
     free(buffer);
 }
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Painter::SetFont(Font::Type::E typeFont)
+{
+    Font::SetFont(typeFont);
+    uint8 buffer[2] = { Command::Paint_SetFont, (uint8)typeFont };
+    FSMC::WriteToPanel(buffer, 2);
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Painter::SetColor(Color color)
+{
+    currentColor = color;
+    if (!WriteFlashColor())
+    {
+        WriteColor(currentColor);
+    }
+}
