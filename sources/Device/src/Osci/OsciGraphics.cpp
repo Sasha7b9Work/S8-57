@@ -51,6 +51,7 @@ void Osci::Graphics::Update()
 void Osci::Graphics::DrawCursorTrigLevel()
 {
     Trig::Source ch = TRIG_SOURCE;
+
     int trigLev = SET_TRIGLEV_SOURCE - (TRIG_SOURCE_IS_EXT ? 0 : -(SET_RSHIFT(ch) - RShift::ZERO));
     float scale = 1.0f / ((Trig::MAX - Trig::MIN) / 2.4f / Grid::Height());
     int y0 = (Grid::Top() + Grid::Bottom()) / 2 + (int)(scale * (Trig::ZERO - Trig::MIN));
@@ -83,10 +84,10 @@ void Osci::Graphics::DrawCursorTrigLevel()
 
     Painter::SetFont(Font::Type::_5);
 
-    const char symbols[3] = {'1', '2', 'Â'};
+    static const char symbols[2] = {'1', '2'};
     int dY = 0;
 
-    Painter::DrawChar(x + 5, y - 9 + dY, symbols[(uint8)TRIG_SOURCE], Color::BACK);
+    Painter::DrawChar(x + 5, y - 6 + dY, symbols[(uint8)TRIG_SOURCE], Color::BACK);
     Painter::SetFont(Font::Type::_8);
 
     DrawScaleLine(Display::WIDTH - 11, true);
@@ -99,7 +100,7 @@ void Osci::Graphics::DrawCursorTrigLevel()
     int yFull = Grid::Top() + DELTA + height - (int)(scale * (shiftFull - RShift::MIN - Trig::MIN) + 4);
     Painter::FillRegion(left + 2, yFull + 1, 4, 6, Color::Trig());
     Painter::SetFont(Font::Type::_5);
-    Painter::DrawChar(left + 3, yFull - 5 + dY, symbols[(uint8)TRIG_SOURCE], Color::BACK);
+    Painter::DrawChar(left + 3, yFull - 2 + dY, symbols[(uint8)TRIG_SOURCE], Color::BACK);
     Painter::SetFont(Font::Type::_8);
 }
 
