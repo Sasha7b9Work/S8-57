@@ -48,6 +48,7 @@ bool Storage::GetLimitation(Chan ch, uint8 *data, int direction)
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Storage::AddData(uint8 *dataA, uint8 *dataB, DataSettings ds)
+void Storage::AddData(DataSettings *ds)
 {
+
 }

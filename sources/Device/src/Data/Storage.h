@@ -9,7 +9,7 @@ public:
 
     static void Init();
 
-    static void AddData(uint8 *dataA, uint8 *dataB, DataSettings ds);
+    static void AddData(DataSettings *ds);
 
     static bool GetData(DataSettings *ds);
 

@@ -27,7 +27,8 @@ struct PackedTime
 
 struct DataSettings
 {
-    uint8      *addr;                   ///< Адрес данных во внешнем ОЗУ
+    uint8       *dataA;                 ///< Данные 1-го канала           
+    uint8       *dataB;                 ///< Данные 2-го канала
     uint16      rShift[2];
     uint16      trigLev[2];
     int16       tShift;                 ///< Смещение по времени
@@ -46,7 +47,7 @@ struct DataSettings
     uint        notUsed         : 12;
     PackedTime  time;
     int BytesInChannel();
-    void Fill();
+    void Fill(uint8 *datA = 0, uint8 *datB = 0);
 };
 
 #define RSHIFT(ds, ch)          ((ds)->rShift[ch])

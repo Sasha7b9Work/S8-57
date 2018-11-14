@@ -432,9 +432,9 @@ void FPGA::ReadData()
     ReadDataChanenl(Chan::B, dataB);
 
     DataSettings ds;
-    ds.Fill();
+    ds.Fill(dataA, dataB);
 
-    Storage::AddData(dataA, dataB, ds);
+    Storage::AddData(&ds);
     
     free(dataA);
     
