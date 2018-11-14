@@ -14,12 +14,12 @@ const Diskio_drvTypeDef  USBH_Driver =
     USBH_read
 };
 
-DRESULT USBH_read(BYTE lun, BYTE *buff, DWORD sector, UINT count)
+DRESULT USBH_read(BYTE /*lun*/, BYTE * /*buff*/, DWORD /*sector*/, UINT /*count*/)
 {
     return 0;
 }
 
-DSTATUS USBH_status(BYTE lun)
+DSTATUS USBH_status(BYTE /*lun*/)
 {
     return 0;
 }

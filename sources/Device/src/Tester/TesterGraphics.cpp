@@ -39,7 +39,7 @@ void Tester::Graphics::Update()
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Tester::Graphics::DrawData(int numStep, int x0, int y0)
+void Tester::Graphics::DrawData(int numStep, int /*x0*/, int /*y0*/)
 {
     if(!ready[numStep])
     {

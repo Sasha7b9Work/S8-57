@@ -184,23 +184,23 @@ void EEPROM::ReadBytes(uint address, void *data, uint size)
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-bool EEPROM::GetData(int num, DataSettings *ds, uint8 *dataA, uint8 *dataB)
+bool EEPROM::GetData(int /*num*/, DataSettings * /*ds*/, uint8 * /*dataA*/, uint8 * /*dataB*/)
 {
     return false;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void EEPROM::DeleteData(int num)
+void EEPROM::DeleteData(int /*num*/)
 {
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void EEPROM::GetDataInfo(bool existData[MAX_NUM_SAVED_WAVES])
+void EEPROM::GetDataInfo(bool /*existData*/[MAX_NUM_SAVED_WAVES])
 {
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void EEPROM::SaveData(int num, DataSettings *ds, uint8 *dataA, uint8 *dataB)
+void EEPROM::SaveData(int /*num*/, DataSettings * /*ds*/, uint8 * /*dataA*/, uint8 * /*dataB*/)
 {
 }
 

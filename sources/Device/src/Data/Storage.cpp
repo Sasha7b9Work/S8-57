@@ -13,7 +13,7 @@ void Storage::Init()
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-bool Storage::GetData(DataSettings *ds)
+bool Storage::GetData(DataSettings * /*ds*/)
 {
     return false;
 }
@@ -25,24 +25,24 @@ int Storage::NumElementsInStorage()
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-DataSettings *Storage::DataSettingsFromEnd(int fromEnd)
+DataSettings *Storage::DataSettingsFromEnd(int /*fromEnd*/)
 {
     return 0;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-uint8 *Storage::GetAverageData(Chan ch)
+uint8 *Storage::GetAverageData(Chan /*ch*/)
 {
     return 0;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Storage::GetDataFromEnd(int fromEnd, DataSettings *ds, uint8 *dataA, uint8 *dataB)
+void Storage::GetDataFromEnd(int /*fromEnd*/, DataSettings * /*ds*/, uint8 * /*dataA*/, uint8 * /*dataB*/)
 {
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-bool Storage::GetLimitation(Chan ch, uint8 *data, int direction)
+bool Storage::GetLimitation(Chan /*ch*/, uint8 * /*data*/, int /*direction*/)
 {
     return false;
 }

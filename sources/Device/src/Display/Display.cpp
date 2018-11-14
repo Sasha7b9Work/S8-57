@@ -224,7 +224,7 @@ static void OnRShiftMarkersAutoHide()
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Display::ChangedRShiftMarkers(bool active)
+void Display::ChangedRShiftMarkers(bool /*active*/)
 {
     drawRShiftMarkers = !ALT_MARKERS_HIDE;
     Timer::SetAndStartOnce(Timer::Type::RShiftMarkersAutoHide, OnRShiftMarkersAutoHide, 5000);

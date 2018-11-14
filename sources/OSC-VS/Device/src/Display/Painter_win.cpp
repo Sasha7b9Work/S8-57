@@ -119,13 +119,13 @@ void Painter::SetColorValue(Color color, uint value)
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Painter::DrawTesterData(uint8 mode, Color color, uint8 x[240], uint8 y[240])
+void Painter::DrawTesterData(uint8 /*mode*/, Color /*color*/, uint8 /*x*/[240], uint8 /*y*/[240])
 {
 
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Painter::DrawLine(int x0, int y0, int x1, int y1, Color color)
+void Painter::DrawLine(int /*x0*/, int /*y0*/, int /*x1*/, int /*y1*/, Color /*color*/)
 {
 
 }
@@ -203,7 +203,7 @@ void Painter::SetColor(Color color)
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Painter::SetBrightnessDisplay(int16 brightness)
+void Painter::SetBrightnessDisplay(int16 /*brightness*/)
 {
 
 }
@@ -219,7 +219,7 @@ void Painter::DrawRectangle(int x, int y, int width, int height, Color color)
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Painter::SetFont(Font::Type::E typeFont)
+void Painter::SetFont(Font::Type::E /*typeFont*/)
 {
 
 }

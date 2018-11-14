@@ -21,7 +21,7 @@ HAL_StatusTypeDef HAL_UART_Init(UART_HandleTypeDef *)
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void HAL_UART_IRQHandler(UART_HandleTypeDef *huart)
+void HAL_UART_IRQHandler(UART_HandleTypeDef * /*huart*/)
 {
 
 }
