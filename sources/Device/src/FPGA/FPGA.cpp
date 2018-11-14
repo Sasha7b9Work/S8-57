@@ -119,6 +119,7 @@ void FPGA::Update()
         if (START_MODE_IS_SINGLE)
         {
             OnPressStart();
+            Trig::pulse = false;
         }
         else
         {
