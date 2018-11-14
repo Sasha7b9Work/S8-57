@@ -3,6 +3,7 @@
 #include "defines.h"
 #include "Osci.h"
 #include "Display/Painter.h"
+#include "Display/Symbols.h"
 #include "Grid.h"
 #include "BottomPart.h"
 #include "HiPart.h"

@@ -3,6 +3,7 @@
 #include "defines.h"
 #include "Settings/Settings.h"
 #include "Display/Painter.h"
+#include "Display/Symbols.h"
 #include "FPGA/FPGA.h"
 #include "FPGA/FPGAMath.h"
 #include "Utils/StringUtils.h"
@@ -26,7 +27,7 @@ void RShift::Draw(Chan ch)
 
     int y = (Grid::Bottom() - Grid::Top()) / 2 + Grid::Top() - delta;
 
-    Painter::DrawChar(Grid::Left() - 8, y - 4, (char)SYMBOL_RSHIFT_MARKER);
+    Painter::DrawChar(Grid::Left() - 8, y - 4, (char)SYMBOL_RSHIFT_NORMAL);
 
     Painter::SetFont(Font::Type::_5);
 

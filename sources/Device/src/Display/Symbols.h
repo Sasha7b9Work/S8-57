@@ -11,6 +11,12 @@
  */
 
 
+ // Font::Type::_5
+
+#define SYMBOL_COUPLE_AC        '\x91'
+#define SYMBOL_COUPLE_DC        '\x92'
+#define SYMBOL_COUPLE_GND       '\x90'
+
 
 // Font::Type::_8
 #define SYMBOL_GOVERNOR_SHIFT_3 '\x0e'  ///< Символ регулятора

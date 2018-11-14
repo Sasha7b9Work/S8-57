@@ -2,6 +2,7 @@
 #ifndef WIN32
 #include "defines.h"
 #include "BottomPart.h"
+#include "Display/Symbols.h"
 #include "Settings/SettingsTime.h"
 #include "FPGA/FPGAMath.h"
 #include "Tables.h"

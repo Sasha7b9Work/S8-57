@@ -4,6 +4,7 @@
 #include "HiPart.h"
 #include "Settings/Settings.h"
 #include "Display/Painter.h"
+#include "Display/Symbols.h"
 #include "Grid.h"
 #include "Utils/Dictionary.h"
 #include "FPGA/FPGA.h"

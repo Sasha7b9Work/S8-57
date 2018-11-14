@@ -527,9 +527,6 @@
     <ClInclude Include="..\..\Device\src\Display\Painter.h">
       <Filter>Display</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Device\src\Display\TypeSymbols.h">
-      <Filter>Display</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Device\src\Hardware\FSMC.h">
       <Filter>Hardware</Filter>
     </ClInclude>
