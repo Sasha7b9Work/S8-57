@@ -1,6 +1,6 @@
 #pragma once
 
-#ifdef MSVC
+#ifdef WIN32
 #define __attribute(x)
 #endif
 
