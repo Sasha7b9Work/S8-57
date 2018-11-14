@@ -50,6 +50,8 @@ public:
 
     static int DrawTextWithLimitation(int x, int y, const char *text, int limitX, int limitY, int limitWidth, int limitHeight);
 
+    static void FillBoundedRegion(int x, int y, int widht, int height, Color colorFill, Color colorBound);
+
     static void ResetFlash();
     /// Пишет текст с переносами
     static int DrawTextInRectWithTransfers(int x, int y, int width, int height, const char *text);

@@ -86,7 +86,6 @@ static uint             timeWarnings[NUM_WARNINGS] = {0};   ///< Здесь время, ко
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 Key Display::key = Key::None;
-volatile static bool showLevelTrigLev = false;   ///< Нужно ли рисовать горизонтальную линию уровня смещения уровня синхронизации.
 volatile static bool drawRShiftMarkers = false;
 static pFuncVV funcOnHand       = 0;
 static uint timeStart = 0;
@@ -216,23 +215,6 @@ void Display::ShowWarning(Warning::E warning)
     {
         Sound::WarnBeepBad();
     }
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void DisableShowLevelTrigLev()
-{
-    showLevelTrigLev = false;
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Display::RotateTrigLev()
-{
-    if (TIME_SHOW_LEVELS && TRIG_MODE_FIND_HAND)
-    {
-        showLevelTrigLev = true;
-        Timer::SetAndStartOnce(Timer::Type::ShowLevelTrigLev, DisableShowLevelTrigLev, (uint)(TIME_SHOW_LEVELS * 1000));
-    }
-    NEED_FINISH_DRAW = 1;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

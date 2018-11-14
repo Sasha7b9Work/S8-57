@@ -102,6 +102,8 @@ void Osci::Graphics::DrawCursorTrigLevel()
     Painter::SetFont(Font::Type::_5);
     Painter::DrawChar(left + 3, yFull - 2 + dY, symbols[(uint8)TRIG_SOURCE], Color::BACK);
     Painter::SetFont(Font::Type::_8);
+
+    Trig::DrawOnGrid();
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

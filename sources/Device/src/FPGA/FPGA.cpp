@@ -79,7 +79,6 @@ void FPGA::GiveStart()
     value = (uint8)((value + 1) % 2);
     FSMC::WriteToFPGA8(WR_TRIG, value++);
     FSMC::WriteToFPGA8(WR_TRIG, (uint8)(value % 2));
-    Trig::timeSwitchingTrig = TIME_MS;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -515,6 +514,8 @@ void FPGA::TrigLevChange(int delta)
     Math::AdditionThisLimitation<uint16>(&SET_TRIGLEV_SOURCE, STEP_TRIGLEV * delta, Trig::MIN, Trig::MAX);
 
     LoadTrigLev();
+
+    Trig::NeedForDraw(2000);
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

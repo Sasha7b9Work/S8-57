@@ -630,10 +630,16 @@ int Painter::DrawSpaces(int x, int y, const char *text, int *numSymbols)
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 int Painter::DrawStringInCenterRectAndBoundItC(int x, int y, int width, int height, const char *text, Color colorBackground, Color colorFill)
 {
-    DrawRectangle(x, y, width, height, colorFill);
-    FillRegion(x + 1, y + 1, width - 2, height - 2, colorBackground);
+    FillBoundedRegion(x, y, width, height, colorBackground, colorFill);
     SetColor(colorFill);
     return DrawStringInCenterRect(x, y, width, height, text);
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Painter::FillBoundedRegion(int x, int y, int widht, int height, Color colorFill, Color colorBound)
+{
+    FillRegion(x + 1, y + 1, widht - 2, height - 2, colorFill);
+    DrawRectangle(x, y, widht, height, colorBound);
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

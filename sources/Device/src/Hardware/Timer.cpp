@@ -104,7 +104,10 @@ void Timer::ElapsedCallback()
         if (TIME_NEXT(type) <= time)            // Если пришло время срабатывания
         {
             TimerStruct *timer = &timers[type];
-            timer->func();
+            if(timer->func)
+            {
+                timer->func();
+            }
             if (timer->repeat)
             {
                 do      // Цикл нужен потому, что системный таймер SysTick, который отсчитываем миллисекунды, имеет наивысший приоритет,

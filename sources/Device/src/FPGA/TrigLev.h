@@ -45,6 +45,10 @@ public:
     static const int ZERO = 500;
     /// Возвращает true в случае наличия синхроимпульса
     static bool SyncPulse();
+    /// Вывести уровень синхронизации поверх сетки
+    static void DrawOnGrid();
+    /// После вызова этой функции уровень синхронизации будет отрисовываться поверх сигнала в течение timMS миллисекунд
+    static void NeedForDraw(uint timeMS);
 
     /// Источник синхронизации
     struct Source
@@ -104,6 +108,4 @@ public:
 private:
     /// Установленное в true значение означает, что нужно выводить значок синхроимпульса
     static bool pulse;
-    /// Время принудительного запуска
-    static uint timeSwitchingTrig;
 };
