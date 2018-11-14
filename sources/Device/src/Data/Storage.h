@@ -9,7 +9,7 @@ public:
 
     static void Init();
 
-    static void AddData(DataSettings *ds);
+    static void Push(DataSettings *ds);
 
     static bool GetData(DataSettings *ds);
 

@@ -228,7 +228,7 @@ static void FillDataP2P(StructDataDrawing *dataStruct, Chan ch)
     {
         int start = allPoints - bytesInScreen;  // Значения, начиная с этого, нужно записывать в экранный буфер.
         int end = allPoints - 1;                // Этим значением заканчиывается вывод на экран
-        LIMIT_BELOW(start, 0);
+        LIMIT_BELOW(start, 0u);
 
         if (end > NUM_BYTES_DS - 1)       // Если считано больше точек, чем помещается в память канала
         {

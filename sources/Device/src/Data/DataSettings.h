@@ -27,8 +27,8 @@ struct PackedTime
 
 struct DataSettings
 {
-    uint8       *dataA;                 ///< Данные 1-го канала           
-    uint8       *dataB;                 ///< Данные 2-го канала
+    uint8       *dataA;                 ///< По этому адресу хранятся данные 1-го канала
+    uint8       *dataB;                 ///< По этому адресу хранятся данные 2-го канала. При хранение в Buffer данные 2-го канала идут сразу после 1-го канала
     uint16      rShift[2];
     uint16      trigLev[2];
     int16       tShift;                 ///< Смещение по времени
@@ -46,8 +46,16 @@ struct DataSettings
     uint        enumPoints      : 3;
     uint        notUsed         : 12;
     PackedTime  time;
-    int BytesInChannel();
+    /// Возвращает размер занимаемый данными одного канала
+    int SizeChannel() const;
+    /// Возвращает размер данных обоих каналов
+    int SizeData() const;
+    /// Заполняет структуру в соответствии с текущими настройками
     void Fill(uint8 *datA = 0, uint8 *datB = 0);
+    /// Возвращает true, если не указывает на данные
+    bool IsEmpty () const { return (dataA == 0 && dataB == 0); }
+    uint8 *DataA() { return dataA; }
+    uint8 *DataB() { return dataB; }
 };
 
 #define RSHIFT(ds, ch)          ((ds)->rShift[ch])
@@ -108,7 +116,7 @@ struct DataSettings
 
 #define ENUM_POINTS(ds)         ((ds)->enumPoints)
 #define ENUM_BYTES(ds)          (ENUM_POINTS(ds) + ((PEAKDET(ds) ? 1 : 0)))
-#define NUM_BYTES(ds)           ((ds)->BytesInChannel())
+#define NUM_BYTES(ds)           ((ds)->SizeChannel())
 
 
 /** @}  @}

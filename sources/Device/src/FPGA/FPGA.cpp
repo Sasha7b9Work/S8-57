@@ -434,7 +434,7 @@ void FPGA::ReadData()
     DataSettings ds;
     ds.Fill(dataA, dataB);
 
-    Storage::AddData(&ds);
+    Storage::Push(&ds);
     
     free(dataA);
     

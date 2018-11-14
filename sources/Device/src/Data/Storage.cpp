@@ -48,7 +48,7 @@ bool Storage::GetLimitation(Chan ch, uint8 *data, int direction)
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Storage::AddData(DataSettings *ds)
+void Storage::Push(DataSettings *ds)
 {
-
+    Buffer::Push(ds);
 }
