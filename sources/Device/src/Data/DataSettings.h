@@ -56,6 +56,7 @@ struct DataSettings
     bool IsEmpty () const { return (dataA == 0 && dataB == 0); }
     uint8 *DataA() { return dataA; }
     uint8 *DataB() { return dataB; }
+    uint8 *Data() { return dataA ? dataA : dataB; }
 };
 
 #define RSHIFT(ds, ch)          ((ds)->rShift[ch])

@@ -79,19 +79,13 @@ void Buffer::Stack::Push(DataSettings *ds)
 {
     uint8 *address = Stack_AddressToPlace(ds);  // Находим адрес для записи данных
 
-    if(!address)                                // Если нет места для размещения новых данных
+    if(address == 0)                            // Если нет места для размещения новых данных
     {
         Stack_RemoveFirst();                    // то удаляем самые старые данные
         address = Stack_AddressToPlace(ds);
     }
 
     Stack_AddToEnd(ds, address);                // И добавляем в конец новые данные
-
-    static int count = 0;
-
-    count++;
-
-    LOG_WRITE("Добавлено %d раз по адресу %x", count, address);
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -116,7 +110,7 @@ static uint8 *Stack_AddressToPlace(DataSettings *_ds)
             int size = _ds->SizeData();                     // Размер одного "блока" в буфере данных
 
             uint8 *addressFirst = &buffer[0];               // Адрес начального "блока" данных
-            uint8 *address = ds->DataA();                   // Адрес найденного "блока" данных
+            uint8 *address = ds->Data();                    // Адрес найденного "блока" данных
 
             int index = (address - addressFirst) / size;    // Столько "блоков" данных разделяет начальный и текущий
 
@@ -126,9 +120,9 @@ static uint8 *Stack_AddressToPlace(DataSettings *_ds)
 
     // Теперь находим первый свободный блок данных
     int index = 0;
-    for(int i = 0; i < MAX_DATAS; i++)
+    for(; index < MAX_DATAS; index++)
     {
-        if(freeData[i])
+        if(freeData[index])
         {
             break;
         }
@@ -143,7 +137,7 @@ static uint8 *Stack_AddressToPlace(DataSettings *_ds)
 static void Stack_RemoveFirst()
 {
     // Просто смещаем все элементы влево на один
-    memcpy(&settings[0], &settings[1], MAX_DATAS - 1);
+    memcpy(&settings[0], &settings[1], sizeof(DataSettings) * (MAX_DATAS - 1));
 
     // И затираем последний элемент в массиве
     memset(&settings[MAX_DATAS - 1], 0, sizeof(DataSettings));
@@ -162,7 +156,7 @@ static void Stack_AddToEnd(DataSettings *ds, uint8 *address)
         settings[index].dataA = address;
         address += ds->SizeChannel();
     }
-    if(ds->dataB)
+    if(ds->DataB())
     {
         memcpy(address, ds->DataB(), (uint)ds->SizeChannel());
         settings[index].dataB = address;
