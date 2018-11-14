@@ -107,6 +107,10 @@ void FPGA::Update()
             GiveStart();
             givingStart = true;
         }
+        if(!GetFlag::TRIG_READY())
+        {
+            Trig::pulse = false;
+        }
     }
 
     if (GetFlag::DATA_READY())
@@ -128,7 +132,10 @@ void FPGA::ReadFlag()
 {
     flag = (uint16)(FSMC::ReadFromFPGA(RD_FLAG_LO) | (FSMC::ReadFromFPGA(RD_FLAG_HI) << 8));
 
-    Trig::pulse = GetFlag::TRIG_READY() && timeStart > Trig::timeSwitchingTrig;
+    if(GetFlag::TRIG_READY() && !givingStart)
+    {
+        Trig::pulse = true;
+    }
 
     FrequencyCounter::Update();
 }
