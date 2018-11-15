@@ -641,7 +641,6 @@ void Menu::CloseOpenedItem()
     {
         if (IS_PAGE_SB(item))
         {
-            //((Page *)item)->SmallButonFromPage(0)->funcOnPress();
             SMALL_BUTTON_FROM_PAGE(item, 0)->funcOnPress();
         }
         else

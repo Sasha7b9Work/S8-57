@@ -42,7 +42,6 @@ class PageBase;
 #define IS_TIME(item)           (item->type == Control::Type::Time)
     
 #define KEEPER(item)            ((PageBase *)item->keeper)
-//#define IS_ACTIVE(item)         (item->funcOfActive())
 
 
 class Control
