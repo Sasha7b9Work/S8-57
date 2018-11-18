@@ -20,15 +20,17 @@ int Font::GetSize(void)
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-int Font::GetLengthText(const char *text)
+int Font::GetLengthText(pString text)
 {
-    int retValue = 0;
-    while (*text)
+    int result = 0;
+    char *symbol = (char *)text;
+
+    while (*symbol)
     {
-        retValue += GetLengthSymbol((char)*text);
-        text++;
+        result += GetLengthSymbol(*symbol);
+        symbol++;
     }
-    return retValue;
+    return result;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -42,7 +44,7 @@ int Font::GetLengthSymbol(char symbol)
 {
     if (symbol < 0)
     {
-        symbol += 128;                  // Т.к. char имеет знак
+        symbol += 128;                  // Т.к. char имеет знак в некоторых системах
     }
     return font->symbol[symbol].width + 1;
 }

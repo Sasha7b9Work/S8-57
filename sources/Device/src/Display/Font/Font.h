@@ -26,7 +26,7 @@ struct Font
     Symbol symbol[256];
 
     static int  GetSize();
-    static int  GetLengthText(const char *text);
+    static int  GetLengthText(pString text);
     static int  GetHeightSymbol(char symbol);
     static int  GetLengthSymbol(char symbol);
     static void SetFont(Font::Type::E typeFont);
