@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #ifndef WIN32
 #include "defines.h"
-#include "Buffer.h"
+#include "DataBuffer.h"
 #include "DataSettings.h"
 #include <string.h>
 #include <limits.h>
@@ -42,7 +42,7 @@ static void Stack_AddToEnd(DataSettings *ds, uint8 *address);
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void Buffer::Init()
+void DataBuffer::Init()
 {
  
     Stack::Clear();
@@ -54,7 +54,7 @@ void Buffer::Init()
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Buffer::Update()
+void DataBuffer::Update()
 {
     for (int i = 0; i < SIZE_BUFFER; i++)
     {
@@ -63,19 +63,19 @@ void Buffer::Update()
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Buffer::Push(DataSettings *ds)
+void DataBuffer::Push(DataSettings *ds)
 {
     Stack::Push(ds);
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Buffer::Stack::Clear()
+void DataBuffer::Stack::Clear()
 {
     memset(settings, 0, sizeof(DataSettings) * MAX_DATAS);
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Buffer::Stack::Push(DataSettings *ds)
+void DataBuffer::Stack::Push(DataSettings *ds)
 {
     uint8 *address = Stack_AddressToPlace(ds);  // Находим адрес для записи данных
 

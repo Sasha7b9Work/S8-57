@@ -474,9 +474,6 @@
     <ClCompile Include="..\..\Device\src\log.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Device\src\Data\Buffer.cpp">
-      <Filter>Data</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Device\src\Data\Storage.cpp">
       <Filter>Data</Filter>
     </ClCompile>
@@ -518,6 +515,9 @@
     </ClCompile>
     <ClCompile Include="src\Hardware\Timer_win.cpp">
       <Filter>Hardware</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Data\DataBuffer.cpp">
+      <Filter>Data</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -911,13 +911,13 @@
     <ClInclude Include="..\..\Device\src\log.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Device\src\Data\Buffer.h">
-      <Filter>Data</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Device\src\Data\Storage.h">
       <Filter>Data</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Device\src\Data\StorageOld_.h">
+      <Filter>Data</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Device\src\Data\DataBuffer.h">
       <Filter>Data</Filter>
     </ClInclude>
   </ItemGroup>

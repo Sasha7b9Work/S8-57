@@ -201,6 +201,8 @@ private:
 
     static int CalculateShift(Chan ch);
 
+    static uint8 ValueForRange(Chan ch);
+
     static bool isRunning;
     /// True, если дан запуск
     static bool givingStart;

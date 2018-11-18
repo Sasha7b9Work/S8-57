@@ -9,7 +9,7 @@
 
 #include "Command.h"
 
-#include "Data/Buffer.h"
+#include "Data/DataBuffer.h"
 #include "Data/DataSettings.h"
 #include "Data/Reader.h"
 #include "Data/Storage.h"

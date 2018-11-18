@@ -3,7 +3,7 @@
 
 
 /// Здесь хранятся данные 
-class Buffer
+class DataBuffer
 {
     friend class Storage;
 

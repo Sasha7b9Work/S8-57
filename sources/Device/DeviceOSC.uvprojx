@@ -1896,14 +1896,14 @@
           <GroupName>Data</GroupName>
           <Files>
             <File>
-              <FileName>Buffer.cpp</FileName>
+              <FileName>DataBuffer.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\Data\Buffer.cpp</FilePath>
+              <FilePath>.\src\Data\DataBuffer.cpp</FilePath>
             </File>
             <File>
-              <FileName>Buffer.h</FileName>
+              <FileName>DataBuffer.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\src\Data\Buffer.h</FilePath>
+              <FilePath>.\src\Data\DataBuffer.h</FilePath>
             </File>
             <File>
               <FileName>DataSettings.cpp</FileName>
@@ -2014,11 +2014,6 @@
               <FileName>Symbols.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Display\Symbols.h</FilePath>
-            </File>
-            <File>
-              <FileName>TypeSymbols.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Display\TypeSymbols.h</FilePath>
             </File>
           </Files>
         </Group>

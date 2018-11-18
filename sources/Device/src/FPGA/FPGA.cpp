@@ -9,7 +9,7 @@
 #include "Hardware/Timer.h"
 #include "Utils/Math.h"
 #include "Settings/Settings.h"
-#include "Data/Buffer.h"
+#include "Data/DataBuffer.h"
 #include "Data/Storage.h"
 #include "TrigLev.h"
 #include <string.h>
@@ -63,8 +63,6 @@ const int Kr[] = {50, 20, 10,  5,   2};
 /// Здесь хранится адрес, начиная с которого будем читать данные по каналам. Если addrRead == 0xffff, то адрес вначале нужно считать
 static uint16 addrRead = 0xffff;
 
-static uint8 ValueForRange(Chan ch);
-
 bool          FPGA::isRunning = false;
 bool          FPGA::givingStart = false;
 uint          FPGA::timeStart = 0;
@@ -90,7 +88,7 @@ void FPGA::Stop(bool)
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void FPGA::Update()
 {
-    Buffer::Update();
+    DataBuffer::Update();
 
     if (!isRunning)
     {
@@ -423,25 +421,6 @@ bool FPGA::CalculateGate(uint16 rand, uint16 *eMin, uint16 *eMax)
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void FPGA::ReadData()
-{
-    uint8 *dataA = (uint8 *)malloc((uint)FPGA_NUM_POINTS);
-    uint8 *dataB = (uint8 *)malloc((uint)FPGA_NUM_POINTS);
-
-    ReadDataChanenl(Chan::A, dataA);
-    ReadDataChanenl(Chan::B, dataB);
-
-    DataSettings ds;
-    ds.Fill(dataA, dataB);
-
-    Storage::Push(&ds);
-    
-    free(dataA);
-    
-    free(dataB);
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void FPGA::GPIO_Init()
 {
     GPIO_InitTypeDef isGPIO =
@@ -542,7 +521,7 @@ GPIO_TypeDef *FPGA::GetPort(Pin pin)
 #endif
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static uint8 ValueForRange(Chan ch)
+uint8 FPGA::ValueForRange(Chan ch)
 {
     static const uint8 datas[ModeCouple::Size] =
     {

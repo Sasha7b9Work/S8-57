@@ -2,7 +2,11 @@
 #include "FPGA.h"
 #include "AD9286.h"
 #include "Data/Storage.h"
+#include "Display/Display.h"
 #include "Hardware/CPU.h"
+#include "Hardware/Timer.h"
+#include "Settings/Settings.h"
+#include <stdlib.h>
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -151,4 +155,23 @@ void FPGA::LoadRanges()
 
     WritePin(Pin::A3, _GET_BIT(valueB, 1));
     WritePin(Pin::A4, _GET_BIT(valueB, 0));
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void FPGA::ReadData()
+{
+    uint8 *dataA = (uint8 *)malloc((uint)FPGA_NUM_POINTS);
+    uint8 *dataB = (uint8 *)malloc((uint)FPGA_NUM_POINTS);
+
+    ReadDataChanenl(Chan::A, dataA);
+    ReadDataChanenl(Chan::B, dataB);
+
+    DataSettings ds;
+    ds.Fill(dataA, dataB);
+
+    Storage::Push(&ds);
+
+    free(dataA);
+
+    free(dataB);
 }
