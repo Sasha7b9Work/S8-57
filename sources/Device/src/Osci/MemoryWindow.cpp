@@ -4,7 +4,7 @@
 #include "MemoryWindow.h"
 #include "Grid.h"
 #include "Display/Painter.h"
-#include "Data/Storage.h"
+#include "Data/DataStorage.h"
 #include "Data/Reader.h"
 #include "Settings/Settings.h"
 #endif

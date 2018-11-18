@@ -1916,6 +1916,16 @@
               <FilePath>.\src\Data\DataSettings.h</FilePath>
             </File>
             <File>
+              <FileName>DataStorage.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Data\DataStorage.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>DataStorage.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Data\DataStorage.h</FilePath>
+            </File>
+            <File>
               <FileName>Reader.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Data\Reader.cpp</FilePath>
@@ -1924,16 +1934,6 @@
               <FileName>Reader.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Data\Reader.h</FilePath>
-            </File>
-            <File>
-              <FileName>Storage.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Data\Storage.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Storage.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Data\Storage.h</FilePath>
             </File>
           </Files>
         </Group>

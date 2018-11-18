@@ -10,7 +10,7 @@
 #include "Utils/Math.h"
 #include "Settings/Settings.h"
 #include "Data/DataBuffer.h"
-#include "Data/Storage.h"
+#include "Data/DataStorage.h"
 #include "TrigLev.h"
 #include <string.h>
 #include <stdlib.h>

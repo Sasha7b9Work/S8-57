@@ -5,7 +5,7 @@
 /// Здесь хранятся данные 
 class DataBuffer
 {
-    friend class Storage;
+    friend class DataStorage;
 
 public:
     static void Init();

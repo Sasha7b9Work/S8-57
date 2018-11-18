@@ -11,8 +11,8 @@
 
 #include "Data/DataBuffer.h"
 #include "Data/DataSettings.h"
+#include "Data/DataStorage.h"
 #include "Data/Reader.h"
-#include "Data/Storage.h"
 
 #include "Display/Console.h"
 #include "Display/DisplayPrimitives.h"

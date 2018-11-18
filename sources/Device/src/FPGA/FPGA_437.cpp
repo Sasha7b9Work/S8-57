@@ -1,7 +1,7 @@
 #include "defines.h"
 #include "FPGA.h"
 #include "AD9286.h"
-#include "Data/Storage.h"
+#include "Data/DataStorage.h"
 #include "Display/Display.h"
 #include "Hardware/CPU.h"
 #include "Hardware/Timer.h"
@@ -87,7 +87,7 @@ void FPGA::Init()
         ERROR_HANDLER();
     }
 
-    Storage::Init();
+    DataStorage::Init();
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -169,7 +169,7 @@ void FPGA::ReadData()
     DataSettings ds;
     ds.Fill(dataA, dataB);
 
-    Storage::Push(&ds);
+    DataStorage::Push(&ds);
 
     free(dataA);
 

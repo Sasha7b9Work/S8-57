@@ -4,7 +4,7 @@
 #include "Menu/Pages/Include/PageMemory.h"
 #include "Tables.h"
 #include "Data/Reader.h"
-#include "Data/Storage.h"
+#include "Data/DataStorage.h"
 #include "Osci/Grid.h"
 #include "Display/Symbols.h"
 #include "Display/Painter.h"
@@ -123,7 +123,7 @@ DEF_SMALL_BUTTON_EXIT(  bLast_Exit,                                             
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void OnPress_Last_Next()
 {
-    Math::CircleIncrease<int16>((int16 *)&NUM_RAM_SIGNAL, 0, (int16)(Storage::NumElementsInStorage() - 1));
+    Math::CircleIncrease<int16>((int16 *)&NUM_RAM_SIGNAL, 0, (int16)(DataStorage::NumElementsInStorage() - 1));
 }
 
 static void Draw_Last_Next(int x, int y)
@@ -143,7 +143,7 @@ DEF_SMALL_BUTTON(   bLast_Next,                                                 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void OnPress_Last_Prev()
 {
-    Math::CircleDecrease<int16>((int16 *)&NUM_RAM_SIGNAL, 0, (int16)(Storage::NumElementsInStorage() - 1));
+    Math::CircleDecrease<int16>((int16 *)&NUM_RAM_SIGNAL, 0, (int16)(DataStorage::NumElementsInStorage() - 1));
 }
 
 static void Draw_Last_Prev(int x, int y)
@@ -230,12 +230,12 @@ static void OnDraw_Last()
     Painter::DrawRectangle(Grid::Right() - width, Grid::Top(), width, height, Color::FILL);
     Painter::DrawText(Grid::Right() - width + 2, Grid::Top() + 1, Integer(NUM_RAM_SIGNAL + 1).ToString(false, 3, buffer));
     Painter::DrawText(Grid::Right() - width + 17, Grid::Top() + 1, "/");
-    Painter::DrawText(Grid::Right() - width + 23, Grid::Top() + 1, Integer(Storage::NumElementsInStorage()).ToString(false, 3, buffer));
+    Painter::DrawText(Grid::Right() - width + 23, Grid::Top() + 1, Integer(DataStorage::NumElementsInStorage()).ToString(false, 3, buffer));
 }
 
 static bool OnRegSet_Last(int angle)
 {
-    if (Storage::NumElementsInStorage() > 1)
+    if (DataStorage::NumElementsInStorage() > 1)
     {
         Sound::RegulatorSwitchRotate();
     }

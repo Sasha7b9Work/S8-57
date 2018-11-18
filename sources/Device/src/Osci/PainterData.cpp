@@ -6,7 +6,7 @@
 #include "Grid.h"
 #include "Display/Painter.h"
 #include "Display/PainterMem.h"
-#include "Data/Storage.h"
+#include "Data/DataStorage.h"
 #include "Hardware/Timer.h"
 #include "Settings/Settings.h"
 #include "Utils/Math.h"
