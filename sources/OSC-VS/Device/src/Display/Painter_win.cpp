@@ -174,7 +174,7 @@ void Painter::DrawVLine(int x, int y0, int y1, Color color)
 {
     SetColor(color);
 
-    SDL_Rect rect = {x, y0, 1, y1 - y0};
+    SDL_Rect rect = {x, y0, 1, y1 - y0 + 1};
 
     SDL_RenderFillRect(renderer, &rect);
 }
@@ -184,7 +184,7 @@ void Painter::DrawHLine(int y, int x0, int x1, Color color)
 {
     SetColor(color);
 
-    SDL_Rect rect = {x0, y, x1 - x0, 1};
+    SDL_Rect rect = {x0, y, x1 - x0 + 1, 1};
 
     SDL_RenderFillRect(renderer, &rect);
 }
@@ -244,7 +244,7 @@ void Painter::FillRegion(int x, int y, int width, int height, Color color)
 {
     SetColor(color);
 
-    SDL_Rect rect = {x, y, width, height};
+    SDL_Rect rect = { x, y, width + 1, height + 1 };
 
     SDL_RenderFillRect(renderer, &rect);
 }

@@ -647,8 +647,13 @@ void Menu::CloseOpenedItem()
         {
             ((Page *)item)->funcOnEnterExit(false);
         }
-        Page::Name name = KEEPER(item)->name;
-        ((Page *)KEEPER(item))->SetPosActItem(MENU_POS_ACT_ITEM(name) & 0x7f);
+
+        Page *keeper = (Page *)KEEPER(item);
+        if (keeper)
+        {
+            Page::Name name = keeper->name;
+            keeper->SetPosActItem(MENU_POS_ACT_ITEM(name) & 0x7f);
+        }
         if (item == (Control *)pageMain)
         {
             Menu::Show(false);
