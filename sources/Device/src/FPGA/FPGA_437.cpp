@@ -99,3 +99,56 @@ void FPGA::LoadSettings()
 
     isRunning = false;
 }
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void FPGA::LoadRShift(Chan ch)
+{
+    LAST_AFFECTED_CH = ch;
+
+    static const uint16 mask[2] = { 0x2000, 0x6000 };
+
+    WriteRegisters(Pin::SPI3_CS1, (uint16)(mask[ch] | (SET_RSHIFT(ch) << 2)));
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void FPGA::LoadRanges()
+{
+    uint16 value = (uint16)(ValueForRange(Chan::B) + (ValueForRange(Chan::A) << 8));
+
+    WriteRegisters(Pin::SPI3_CS2, value);
+
+    PAUSE_ON_MS(10);                // Задержка нужна, чтобы импульсные реле успели отработать
+
+    WriteRegisters(Pin::SPI3_CS2, 0);    // Записываем ноль, чтобы реле не потребляли энергии
+
+    static struct StructRange
+    {
+        uint8 value;
+        StructRange(uint8 v) : value(v) {};
+    } vals[Range::Number] =
+    {
+        StructRange(BIN_U8(00000000)),  // 2mV
+        StructRange(BIN_U8(00000001)),  // 5mV
+        StructRange(BIN_U8(00000010)),  // 10mV
+        StructRange(BIN_U8(00000011)),  // 20mV
+        StructRange(BIN_U8(00000001)),  // 50mV
+        StructRange(BIN_U8(00000010)),  // 100mV
+        StructRange(BIN_U8(00000011)),  // 200mV
+        StructRange(BIN_U8(00000001)),  // 500mV
+        StructRange(BIN_U8(00000010)),  // 1V
+        StructRange(BIN_U8(00000011)),  // 2V
+        StructRange(BIN_U8(00000001)),  // 5V
+        StructRange(BIN_U8(00000010)),  // 10V
+        StructRange(BIN_U8(00000011))   // 20V
+    };
+
+    uint8 valueA = vals[SET_RANGE_A].value;
+
+    WritePin(Pin::A1, _GET_BIT(valueA, 1));
+    WritePin(Pin::A2, _GET_BIT(valueA, 0));
+
+    uint8 valueB = vals[SET_RANGE_B].value;
+
+    WritePin(Pin::A3, _GET_BIT(valueB, 1));
+    WritePin(Pin::A4, _GET_BIT(valueB, 0));
+}
