@@ -7,6 +7,7 @@
 #include "Hardware/CPU.h"
 #include "Hardware/Timer.h"
 #include "Settings/Settings.h"
+#include "Utils/Buffer.h"
 #include <stdlib.h>
 
 
@@ -161,18 +162,14 @@ void FPGA::LoadRanges()
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void FPGA::ReadData()
 {
-    uint8 *dataA = (uint8 *)malloc((uint)FPGA_NUM_POINTS);
-    uint8 *dataB = (uint8 *)malloc((uint)FPGA_NUM_POINTS);
+    Buffer dataA(FPGA_NUM_POINTS);
+    Buffer dataB(FPGA_NUM_POINTS);
 
-    ReadDataChanenl(Chan::A, dataA);
-    ReadDataChanenl(Chan::B, dataB);
+    ReadDataChanenl(Chan::A, dataA.Data());
+    ReadDataChanenl(Chan::B, dataB.Data());
 
     DataSettings ds;
-    ds.Fill(dataA, dataB);
+    ds.Fill(dataA.Data(), dataB.Data());
 
     DataStorage::Push(&ds);
-
-    free(dataA);
-
-    free(dataB);
 }

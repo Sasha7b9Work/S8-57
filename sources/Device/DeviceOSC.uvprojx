@@ -54,7 +54,7 @@
           <CreateLib>0</CreateLib>
           <CreateHexFile>0</CreateHexFile>
           <DebugInformation>1</DebugInformation>
-          <BrowseInformation>0</BrowseInformation>
+          <BrowseInformation>1</BrowseInformation>
           <ListingPath>.\Listings\</ListingPath>
           <HexFormatSelection>1</HexFormatSelection>
           <Merge32K>0</Merge32K>
@@ -2866,6 +2866,16 @@
           <GroupName>Utils</GroupName>
           <Files>
             <File>
+              <FileName>Buffer.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Utils\Buffer.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Buffer.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Utils\Buffer.h</FilePath>
+            </File>
+            <File>
               <FileName>CommonFunctions.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Utils\CommonFunctions.cpp</FilePath>
@@ -2886,14 +2896,14 @@
               <FilePath>.\src\Utils\Debug.h</FilePath>
             </File>
             <File>
-              <FileName>StringUtils.cpp</FileName>
+              <FileName>Dictionary.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\Utils\StringUtils.cpp</FilePath>
+              <FilePath>.\src\Utils\Dictionary.cpp</FilePath>
             </File>
             <File>
-              <FileName>StringUtils.h</FileName>
+              <FileName>Dictionary.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\src\Utils\StringUtils.h</FilePath>
+              <FilePath>.\src\Utils\Dictionary.h</FilePath>
             </File>
             <File>
               <FileName>Math.cpp</FileName>
@@ -2906,26 +2916,6 @@
               <FilePath>.\src\Utils\Math.h</FilePath>
             </File>
             <File>
-              <FileName>Dictionary.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Utils\Dictionary.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Dictionary.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Utils\Dictionary.h</FilePath>
-            </File>
-            <File>
-              <FileName>tableslog.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Utils\tableslog.h</FilePath>
-            </File>
-            <File>
-              <FileName>TablesWindow.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Utils\TablesWindow.h</FilePath>
-            </File>
-            <File>
               <FileName>Measure.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Utils\Measure.cpp</FilePath>
@@ -2934,16 +2924,6 @@
               <FileName>Measure.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Utils\Measure.h</FilePath>
-            </File>
-            <File>
-              <FileName>Values.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Utils\Values.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Values.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Utils\Values.h</FilePath>
             </File>
             <File>
               <FileName>MeasureProcessing.cpp</FileName>
@@ -2959,6 +2939,36 @@
               <FileName>Stack.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Utils\Stack.h</FilePath>
+            </File>
+            <File>
+              <FileName>StringUtils.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Utils\StringUtils.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>StringUtils.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Utils\StringUtils.h</FilePath>
+            </File>
+            <File>
+              <FileName>tableslog.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Utils\tableslog.h</FilePath>
+            </File>
+            <File>
+              <FileName>TablesWindow.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Utils\TablesWindow.h</FilePath>
+            </File>
+            <File>
+              <FileName>Values.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Utils\Values.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Values.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Utils\Values.h</FilePath>
             </File>
           </Files>
         </Group>
