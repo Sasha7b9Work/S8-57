@@ -3,7 +3,7 @@
 #include "defines.h"
 #include "Console.h"
 #include "Display/Painter.h"
-#include <string.h>
+#include <cstring>
 #include <stdio.h>
 #endif
 
@@ -50,7 +50,7 @@ void Console::AddString(char *string)
         {
             for (int i = 1; i < SIZE_CONSOLE; i++)
             {
-                strcpy(buffer[i - 1], buffer[i]);
+                std::strcpy(buffer[i - 1], buffer[i]);
             }
             stringInConsole--;
         }

@@ -72,7 +72,7 @@
 #include <algorithm>
 #include <limits.h>
 #include <math.h>
-#include <string.h>
+#include <cstring>
 #include <stdarg.h>
 #include <cctype>
 

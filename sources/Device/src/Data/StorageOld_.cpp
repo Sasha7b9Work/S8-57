@@ -7,7 +7,7 @@
 #include "Settings/Settings.h"
 #include "Utils/Math.h"
 #include "Reader.h"
-#include <string.h>
+#include <cstring>
 #endif
 
 

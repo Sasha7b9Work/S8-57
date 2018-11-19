@@ -6,7 +6,7 @@
 #include "Utils/Math.h"
 #include "Hardware/FSMC.h"
 #include "Hardware/Timer.h"
-#include <string.h>
+#include <cstring>
 #include <stdarg.h>
 #include <stdlib.h>
 #include <stdio.h>
@@ -190,8 +190,8 @@ static bool FindNextTransfer(const char *letters, int8 *lettersInSyllable)
 #define VOWEL       0   // Гласная
 #define CONSONANT   1   // Согласная
 
-    * lettersInSyllable = (int8)strlen(letters);
-    if (strlen(letters) <= 3)
+    * lettersInSyllable = (int8)std::strlen(letters);
+    if (std::strlen(letters) <= 3)
     {
         return false;
     }
@@ -207,7 +207,7 @@ static bool FindNextTransfer(const char *letters, int8 *lettersInSyllable)
 
     bool consonant[20];
 
-    int size = (int)strlen(letters);
+    int size = (int)std::strlen(letters);
     for (int i = 0; i < size; i++)
     {
         consonant[i] = IsConsonant(letters[i]);
@@ -223,7 +223,7 @@ static bool FindNextTransfer(const char *letters, int8 *lettersInSyllable)
         *lettersInSyllable = 2;
         return true;
     }
-    if (strlen(letters) < 5)
+    if (std::strlen(letters) < 5)
     {
         return false;
     }
@@ -233,7 +233,7 @@ static bool FindNextTransfer(const char *letters, int8 *lettersInSyllable)
         *lettersInSyllable = 3;
         return true;
     }
-    if (strlen(letters) < 6)
+    if (std::strlen(letters) < 6)
     {
         return false;
     }
@@ -262,15 +262,15 @@ static int8 *BreakWord(char *word)
         num++;
     }
     lengthSyllables[num + 1] = 0;
-    if (strcmp(word, "структуру") == 0)
+    if (std::strcmp(word, "структуру") == 0)
     {
         int8 lengths[] = {5, 2, 2, 0};
-        memcpy(lengthSyllables, lengths, 4);
+        std::memcpy(lengthSyllables, lengths, 4);
     }
-    else if (strcmp(word, "соответствующей") == 0)
+    else if (std::strcmp(word, "соответствующей") == 0)
     {
         int8 lenghts[] = {4, 3, 4, 5, 3, 0};
-        memcpy(lengthSyllables, lenghts, 6);
+        std::memcpy(lengthSyllables, lenghts, 6);
     }
     return lengthSyllables;
 }
@@ -284,7 +284,7 @@ static char *PartWordForTransfer(char *word, int8 *lengthSyllables, int numSylla
     {
         length += (size_t)lengthSyllables[i];
     }
-    memcpy((void *)buffer, (void *)word, length);
+    std::memcpy((void *)buffer, (void *)word, length);
     buffer[length] = '-';
     buffer[length + 1] = '\0';
     return buffer;
@@ -316,7 +316,7 @@ static int DrawPartWord(char *word, int x, int y, int xRight, bool draw)
             {
                 Painter::DrawText(x, y, subString);
             }
-            return (int)strlen(subString) - 1;
+            return (int)std::strlen(subString) - 1;
         }
     }
 
@@ -332,7 +332,7 @@ int Painter::DrawTextInRectWithTransfers(int eX, int eY, int eWidth, int eHeight
     int bottom = eY + eHeight;
 
     char buffer[20];
-    int numSymbols = (int)strlen(text);
+    int numSymbols = (int)std::strlen(text);
 
     int y = top - 1;
     int x = left;
@@ -504,7 +504,7 @@ void Painter::DrawBigText(int eX, int eY, int size, const char *text, Color colo
 {
     SetColor(color);
 
-    uint numSymbols = strlen(text);
+    uint numSymbols = std::strlen(text);
 
     int x = eX;
 
@@ -648,7 +648,7 @@ void Painter::FillBoundedRegion(int x, int y, int widht, int height, Color color
 static bool GetHeightTextWithTransfers(int left, int top, int right, const char *text, int *height)
 {
     char buffer[20];
-    int numSymbols = (int)strlen(text);
+    int numSymbols = (int)std::strlen(text);
 
     int y = top - 1;
     int x = left;

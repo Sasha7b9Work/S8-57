@@ -9,7 +9,7 @@
 #include "Console.h"
 #include "Tables.h"
 #include "Recorder/Recorder.h"
-#include <string.h>
+#include <cstring>
 #endif
 
 
@@ -277,7 +277,7 @@ static void FuncOnWait()
     buf[0] = 0;
     for (uint i = 0; i < time; i++)
     {
-        strcat(buf, ".");
+        std::strcat(buf, ".");
     }
     Painter::DrawStringInCenterRect(x, y + 20, width, height - 20, buf);
     Painter::EndScene();

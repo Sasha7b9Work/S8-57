@@ -4,7 +4,7 @@
 #include "Hardware/FSMC.h"
 #include "Hardware/Timer.h"
 #include <stdlib.h>
-#include <string.h>
+#include <cstring>
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -134,13 +134,13 @@ int Painter::DrawText(int x, int y, const char *text, Color color)
 
 #define MAX_SIZE_BUFFER 100
 
-    if (strlen(text) + 1 > MAX_SIZE_BUFFER)
+    if (std::strlen(text) + 1 > MAX_SIZE_BUFFER)
     {
         return x + 10;
     }
 
     SetColor(color);
-    size_t size = (size_t)(1 + 2 + 1 + 1 + strlen(text));
+    size_t size = (size_t)(1 + 2 + 1 + 1 + std::strlen(text));
     uint8 buffer[MAX_SIZE_BUFFER] = { Command::Paint_DrawText, (uint8)x, (uint8)(x >> 8), (uint8)y, (uint8)(size - 5) };
 
     uint8 *pointer = &buffer[5];
