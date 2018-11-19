@@ -3,8 +3,8 @@
 #ifdef WIN32
 
 #include "defines.h"
-
 #include "device.h"
+#include "log.h"
 #include "tables.h"
 
 #include "Command.h"
@@ -57,6 +57,7 @@
 
 #include "Settings/Settings.h"
 
+#include "Utils/Debug.h"
 #include "Utils/Dictionary.h"
 #include "Utils/Math.h"
 #include "Utils/Values.h"
