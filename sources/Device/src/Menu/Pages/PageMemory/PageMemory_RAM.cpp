@@ -114,12 +114,20 @@ DEF_SMALL_BUTTON(bLast_SaveToDrive,                                             
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-static void OnPress_Last(bool)
+static void OnPress_Last(bool enter)
 {
-    NUM_RAM_SIGNAL = 0;
-    RUN_FPGA_BEFORE_SB = FPGA::IsRunning() ? 1u : 0u;
-    FPGA::Stop(false);
-    MODE_WORK.Set(ModeWork::RAM);
+    if (enter)
+    {
+        NUM_RAM_SIGNAL = 0;
+        RUN_FPGA_BEFORE_SB = FPGA::IsRunning() ? 1u : 0u;
+        FPGA::Stop(false);
+        MODE_WORK.Set(ModeWork::RAM);
+    }
+    else
+    {
+        MODE_WORK.Set(ModeWork::Dir);
+        FPGA::OnPressStart();
+    }
 }
 
 static void OnDraw_Last()

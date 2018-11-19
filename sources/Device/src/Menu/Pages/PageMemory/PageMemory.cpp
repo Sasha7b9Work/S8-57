@@ -23,11 +23,15 @@
 #endif
 
 
-extern const PageBase pMemory;
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+extern const PageBase pageMemory;
 extern const PageBase ppDrive;
 extern const PageBase pppDrive_Manager;
 extern const PageBase pppDrive_Mask;
 extern const PageBase pSetName;
+
+const PageBase *PageMemory::pointer = &pageMemory;
+
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 static void DrawSetMask();  // Ёта функци€ рисует, когда выбран режим задани€ маски.
@@ -81,7 +85,7 @@ void PageMemory::OnChanged_Points(bool active)
 
 static pString namesLengthMemory[] = {"512", "1k", "2k", "4k", "8k", "16k", "32k"};
 
-DEF_CHOICE_5(       cPoints,                                                                                                  //--- ѕјћя“№ - “очки ---
+DEF_CHOICE_5( cPoints,                                                                                                                                              //--- ѕјћя“№ - “очки ---
     "ƒлина пам€ти", "Mem length",
     "¬ыбор количества отсчЄтов дл€ сохран€емых сигналов. "
     "ѕри увеличении количества отсчЄтов уменьшаетс€ количество сохранЄнных в пам€ти сигналов.",
@@ -94,7 +98,7 @@ DEF_CHOICE_5(       cPoints,                                                    
     namesLengthMemory[4], namesLengthMemory[4],
     //namesLengthMemory[5], namesLengthMemory[5],
     //,namesLengthMemory[6], namesLengthMemory[6],
-    FPGA_ENUM_POINTS, pMemory, IsActive_Points, PageMemory::OnChanged_Points, FuncDraw
+    FPGA_ENUM_POINTS, pageMemory, IsActive_Points, PageMemory::OnChanged_Points, FuncDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -495,7 +499,7 @@ DEF_CHOICE_2(       cDrive_Autoconnect,                                         
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-DEF_PAGE_6(         ppDrive,                                                                                                  // ѕјћя“№ - ¬Ќ≈ЎЌ «” ///
+DEF_PAGE_6( ppDrive,                                                                                                                                                 // ѕјћя“№ - ¬Ќ≈ЎЌ «” ///
     "¬Ќ≈ЎЌ «”", "EXT STORAGE",
     "–абота с внешним запоминающим устройством.",
     "Work with external storage device.",
@@ -505,17 +509,17 @@ DEF_PAGE_6(         ppDrive,                                                    
     &cDrive_SaveAs,          // ѕјћя“№ - ¬Ќ≈ЎЌ «” - —охран€ть как
     &cDrive_ModeBtnMemory,   // ѕјћя“№ - ¬Ќ≈ЎЌ «” - –еж кн ѕјћя“№
     &cDrive_Autoconnect,     // ѕјћя“№ - ¬Ќ≈ЎЌ «” - јвтоподключение
-    Page::Name::Memory_Drive, &pMemory, FuncActive, EmptyPressPage
+    Page::Name::Memory_Drive, &pageMemory, FuncActive, EmptyPressPage
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-DEF_PAGE_4(         pMemory,                                                                                                             // ѕяћя“№ ///
+DEF_PAGE_4( pageMemory,                                                                                                                                                         // ѕяћя“№ ///
     "ѕјћя“№", "MEMORY",
     "–абота с внешней и внутренней пам€тью.",
     "Working with external and internal memory.",
     &cPoints,                           ///< ѕјћя“№ - “очки
-    &PageMemory::PageRAM::pointer,      ///< ѕјћя“№ - ѕќ—Ћ≈ƒЌ»≈
-    &PageMemory::PageROM::pointer,      ///< ѕјћя“№ - ¬Ќ”“– «”
+    PageMemory::PageRAM::pointer,      ///< ѕјћя“№ - ѕќ—Ћ≈ƒЌ»≈
+    PageMemory::PageROM::pointer,      ///< ѕјћя“№ - ¬Ќ”“– «”
     &ppDrive,                           ///< ѕјћя“№ - ¬Ќ≈ЎЌ «”
     Page::Name::Memory, Menu::pageMain, FuncActive, EmptyPressPage, FuncDrawPage, FuncRegSetPage
 )
@@ -709,9 +713,6 @@ DEF_SMALL_BUTTON(bSetName_Save,                                                 
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-const PageBase *PageMemory::pointer = &pMemory;
-
-
 static bool OnRegSet_SetName(int angle)
 {
     OnMemExtSetMaskNameRegSet(angle, sizeof(Tables::symbolsAlphaBet) / 4 - 7);
