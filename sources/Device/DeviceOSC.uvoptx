@@ -1341,7 +1341,7 @@
 
   <Group>
     <GroupName>Data</GroupName>
-    <tvExp>1</tvExp>
+    <tvExp>0</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
@@ -3124,30 +3124,6 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\src\Osci\Osci.cpp</PathWithFileName>
-      <FilenameWithoutPath>Osci.cpp</FilenameWithoutPath>
-      <RteFlg>0</RteFlg>
-      <bShared>0</bShared>
-    </File>
-    <File>
-      <GroupNumber>25</GroupNumber>
-      <FileNumber>225</FileNumber>
-      <FileType>5</FileType>
-      <tvExp>0</tvExp>
-      <tvExpOptDlg>0</tvExpOptDlg>
-      <bDave2>0</bDave2>
-      <PathWithFileName>.\src\Osci\Osci.h</PathWithFileName>
-      <FilenameWithoutPath>Osci.h</FilenameWithoutPath>
-      <RteFlg>0</RteFlg>
-      <bShared>0</bShared>
-    </File>
-    <File>
-      <GroupNumber>25</GroupNumber>
-      <FileNumber>226</FileNumber>
-      <FileType>8</FileType>
-      <tvExp>0</tvExp>
-      <tvExpOptDlg>0</tvExpOptDlg>
-      <bDave2>0</bDave2>
       <PathWithFileName>.\src\Osci\BottomPart.cpp</PathWithFileName>
       <FilenameWithoutPath>BottomPart.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
@@ -3155,7 +3131,7 @@
     </File>
     <File>
       <GroupNumber>25</GroupNumber>
-      <FileNumber>227</FileNumber>
+      <FileNumber>225</FileNumber>
       <FileType>5</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -3167,7 +3143,7 @@
     </File>
     <File>
       <GroupNumber>25</GroupNumber>
-      <FileNumber>228</FileNumber>
+      <FileNumber>226</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -3179,13 +3155,37 @@
     </File>
     <File>
       <GroupNumber>25</GroupNumber>
-      <FileNumber>229</FileNumber>
+      <FileNumber>227</FileNumber>
       <FileType>5</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
       <PathWithFileName>.\src\Osci\Cursors.h</PathWithFileName>
       <FilenameWithoutPath>Cursors.h</FilenameWithoutPath>
+      <RteFlg>0</RteFlg>
+      <bShared>0</bShared>
+    </File>
+    <File>
+      <GroupNumber>25</GroupNumber>
+      <FileNumber>228</FileNumber>
+      <FileType>8</FileType>
+      <tvExp>0</tvExp>
+      <tvExpOptDlg>0</tvExpOptDlg>
+      <bDave2>0</bDave2>
+      <PathWithFileName>.\src\Osci\FrequencyCounter.cpp</PathWithFileName>
+      <FilenameWithoutPath>FrequencyCounter.cpp</FilenameWithoutPath>
+      <RteFlg>0</RteFlg>
+      <bShared>0</bShared>
+    </File>
+    <File>
+      <GroupNumber>25</GroupNumber>
+      <FileNumber>229</FileNumber>
+      <FileType>5</FileType>
+      <tvExp>0</tvExp>
+      <tvExpOptDlg>0</tvExpOptDlg>
+      <bDave2>0</bDave2>
+      <PathWithFileName>.\src\Osci\FrequencyCounter.h</PathWithFileName>
+      <FilenameWithoutPath>FrequencyCounter.h</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -3268,6 +3268,30 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
+      <PathWithFileName>.\src\Osci\Osci.cpp</PathWithFileName>
+      <FilenameWithoutPath>Osci.cpp</FilenameWithoutPath>
+      <RteFlg>0</RteFlg>
+      <bShared>0</bShared>
+    </File>
+    <File>
+      <GroupNumber>25</GroupNumber>
+      <FileNumber>237</FileNumber>
+      <FileType>5</FileType>
+      <tvExp>0</tvExp>
+      <tvExpOptDlg>0</tvExpOptDlg>
+      <bDave2>0</bDave2>
+      <PathWithFileName>.\src\Osci\Osci.h</PathWithFileName>
+      <FilenameWithoutPath>Osci.h</FilenameWithoutPath>
+      <RteFlg>0</RteFlg>
+      <bShared>0</bShared>
+    </File>
+    <File>
+      <GroupNumber>25</GroupNumber>
+      <FileNumber>238</FileNumber>
+      <FileType>8</FileType>
+      <tvExp>0</tvExp>
+      <tvExpOptDlg>0</tvExpOptDlg>
+      <bDave2>0</bDave2>
       <PathWithFileName>.\src\Osci\OsciGraphics.cpp</PathWithFileName>
       <FilenameWithoutPath>OsciGraphics.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
@@ -3275,7 +3299,7 @@
     </File>
     <File>
       <GroupNumber>25</GroupNumber>
-      <FileNumber>237</FileNumber>
+      <FileNumber>239</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -3287,37 +3311,13 @@
     </File>
     <File>
       <GroupNumber>25</GroupNumber>
-      <FileNumber>238</FileNumber>
+      <FileNumber>240</FileNumber>
       <FileType>5</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
       <PathWithFileName>.\src\Osci\PainterData.h</PathWithFileName>
       <FilenameWithoutPath>PainterData.h</FilenameWithoutPath>
-      <RteFlg>0</RteFlg>
-      <bShared>0</bShared>
-    </File>
-    <File>
-      <GroupNumber>25</GroupNumber>
-      <FileNumber>239</FileNumber>
-      <FileType>8</FileType>
-      <tvExp>0</tvExp>
-      <tvExpOptDlg>0</tvExpOptDlg>
-      <bDave2>0</bDave2>
-      <PathWithFileName>.\src\Osci\FrequencyCounter.cpp</PathWithFileName>
-      <FilenameWithoutPath>FrequencyCounter.cpp</FilenameWithoutPath>
-      <RteFlg>0</RteFlg>
-      <bShared>0</bShared>
-    </File>
-    <File>
-      <GroupNumber>25</GroupNumber>
-      <FileNumber>240</FileNumber>
-      <FileType>5</FileType>
-      <tvExp>0</tvExp>
-      <tvExpOptDlg>0</tvExpOptDlg>
-      <bDave2>0</bDave2>
-      <PathWithFileName>.\src\Osci\FrequencyCounter.h</PathWithFileName>
-      <FilenameWithoutPath>FrequencyCounter.h</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>

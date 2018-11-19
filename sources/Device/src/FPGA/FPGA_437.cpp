@@ -1,4 +1,5 @@
 #include "defines.h"
+#include <stm32f4xx.h>
 #include "FPGA.h"
 #include "AD9286.h"
 #include "Data/DataStorage.h"

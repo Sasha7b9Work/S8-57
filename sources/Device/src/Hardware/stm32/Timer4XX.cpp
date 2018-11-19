@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #ifndef WIN32
+#include <stm32f4xx.h>
 #include "defines.h"
 #include "Timer4XX.h"
 #endif

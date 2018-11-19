@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #ifndef WIN32
 #include "defines.h"
+#include <stm32f4xx.h>
 #endif
 
 
@@ -9,9 +10,6 @@ DAC_HandleTypeDef handleDAC =
 {
     DAC
 };
-
-HCD_HandleTypeDef handleHCD;
-
 
 volatile BitField gBF =
 {

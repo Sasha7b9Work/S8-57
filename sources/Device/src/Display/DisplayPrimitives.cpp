@@ -3,6 +3,7 @@
 #include "defines.h"
 #include "DisplayPrimitives.h"
 #include "Display/Painter.h"
+#include <stdio.h>
 #endif
 
 

@@ -2,6 +2,7 @@
 #ifndef WIN32
 #include "defines.h"
 #include "Hardware/Hardware.h"
+#include <stm32f4xx_hal.h>
 #endif
 
 extern void _Error_Handler(char *, int);

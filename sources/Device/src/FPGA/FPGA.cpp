@@ -1,17 +1,14 @@
 #include "stdafx.h"
 #ifndef WIN32
+#include <stm32f4xx.h>
 #include "defines.h"
 #include "FPGA.h"
-#include "AD9286.h"
-#include "Hardware/CPU.h"
 #include "Hardware/FSMC.h"
 #include "Hardware/GPIO.h"
 #include "Hardware/Timer.h"
 #include "Utils/Math.h"
 #include "Settings/Settings.h"
 #include "Data/DataBuffer.h"
-#include "Data/DataStorage.h"
-#include "TrigLev.h"
 #include <string.h>
 #include <stdlib.h>
 #endif

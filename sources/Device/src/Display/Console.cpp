@@ -4,6 +4,7 @@
 #include "Console.h"
 #include "Display/Painter.h"
 #include <string.h>
+#include <stdio.h>
 #endif
 
 

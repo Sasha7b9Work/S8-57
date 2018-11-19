@@ -2666,16 +2666,6 @@
           <GroupName>Osci</GroupName>
           <Files>
             <File>
-              <FileName>Osci.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Osci\Osci.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Osci.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Osci\Osci.h</FilePath>
-            </File>
-            <File>
               <FileName>BottomPart.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Osci\BottomPart.cpp</FilePath>
@@ -2694,6 +2684,16 @@
               <FileName>Cursors.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Osci\Cursors.h</FilePath>
+            </File>
+            <File>
+              <FileName>FrequencyCounter.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Osci\FrequencyCounter.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>FrequencyCounter.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Osci\FrequencyCounter.h</FilePath>
             </File>
             <File>
               <FileName>Grid.cpp</FileName>
@@ -2726,6 +2726,16 @@
               <FilePath>.\src\Osci\MemoryWindow.h</FilePath>
             </File>
             <File>
+              <FileName>Osci.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Osci\Osci.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Osci.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Osci\Osci.h</FilePath>
+            </File>
+            <File>
               <FileName>OsciGraphics.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Osci\OsciGraphics.cpp</FilePath>
@@ -2739,16 +2749,6 @@
               <FileName>PainterData.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Osci\PainterData.h</FilePath>
-            </File>
-            <File>
-              <FileName>FrequencyCounter.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Osci\FrequencyCounter.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>FrequencyCounter.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Osci\FrequencyCounter.h</FilePath>
             </File>
           </Files>
         </Group>

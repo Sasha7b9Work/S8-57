@@ -3,6 +3,7 @@
 #include "defines.h"
 #include "AD9286.h"
 #include "Hardware/Timer.h"
+#include <stm32f4xx.h>
 #endif
 
 
