@@ -10,6 +10,7 @@
 #include "Utils/Math.h"
 #include "Settings/Settings.h"
 #include "Data/DataBuffer.h"
+#include "Data/DataStorage.h"
 #include <string.h>
 #include <stdlib.h>
 #endif
@@ -792,6 +793,8 @@ void FPGA::SetENumSignalsInSec(int /*numSigInSec*/)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void FPGA::Reset()
 {
+    DataStorage::Init();
+
     LoadTShift();
 
     if(SET_PEAKDET_EN)

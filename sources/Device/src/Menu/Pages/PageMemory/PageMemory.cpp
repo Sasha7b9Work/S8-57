@@ -96,8 +96,6 @@ DEF_CHOICE_5( cPoints,                                                          
     namesLengthMemory[2], namesLengthMemory[2],
     namesLengthMemory[3], namesLengthMemory[3],
     namesLengthMemory[4], namesLengthMemory[4],
-    //namesLengthMemory[5], namesLengthMemory[5],
-    //,namesLengthMemory[6], namesLengthMemory[6],
     FPGA_ENUM_POINTS, pageMemory, IsActive_Points, PageMemory::OnChanged_Points, FuncDraw
 )
 
@@ -109,7 +107,7 @@ static void Draw_Drive_Manager_Tab(int x, int y)
     Painter::SetFont(Font::Type::_8);
 }
 
-DEF_SMALL_BUTTON(   bDrive_Manager_Tab,                                                                    //--- ПАМЯТЬ - ВНЕШН ЗУ - КАТАЛОГ - Tab ---
+DEF_SMALL_BUTTON(   bDrive_Manager_Tab,                                                                                                           //--- ПАМЯТЬ - ВНЕШН ЗУ - КАТАЛОГ - Tab ---
     "Tab", "Tab",
     "Переход между каталогами и файлами",
     "The transition between the directories and files",
@@ -605,16 +603,6 @@ static void OnPress_SetName_Exit()
     }
     EXIT_FROM_SETNAME_TO = RETURN_TO_DISABLE_MENU;
 }
-
-// Кнопк для выхода из режима задания имени сохраняемому сигналу. Одновременно кнопка отказа от сохранения
-/*
-DEF_SMALL_BUTTON(   bSetName_Exit,                                                                                            // ИМЯ ФАЙЛА - Выход ///
-    "Выход", "Exit",
-    "Отказ от сохранения",
-    "Failure to save",
-    pSetName, FuncActive, OnPress_SetName_Exit, DrawSB_Exit
-)
-*/
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void OnPress_SetName_Delete()
