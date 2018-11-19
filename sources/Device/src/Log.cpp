@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #ifndef WIN32
 #include "defines.h"
+#include "log.h"
 #include "Display/Console.h"
 #include <stdarg.h>
 #include <string.h>

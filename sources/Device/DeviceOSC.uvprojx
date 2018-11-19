@@ -1856,39 +1856,39 @@
               <FilePath>.\src\main.h</FilePath>
             </File>
             <File>
-              <FileName>Log.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Log.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Log.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Log.h</FilePath>
-            </File>
-            <File>
-              <FileName>Device.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Device.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Device.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Device.h</FilePath>
-            </File>
-            <File>
-              <FileName>Tables.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Tables.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Tables.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Tables.h</FilePath>
-            </File>
-            <File>
               <FileName>defines.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\defines.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>device.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\device.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>device.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\device.h</FilePath>
+            </File>
+            <File>
+              <FileName>log.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\log.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>log.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\log.h</FilePath>
+            </File>
+            <File>
+              <FileName>tables.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\tables.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>tables.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\tables.h</FilePath>
             </File>
           </Files>
         </Group>

@@ -6,9 +6,6 @@
 #define __attribute(x)
 #endif
 
-//#include <stm32f4xx.h>
-//#include <stm32f4xx_hal.h>
-
 #define MODEL_RU "Осциллограф-мультиметр"
 #define MODEL_EN "Oscilloscope-multimeter"
 #define NUM_VER "0.0.1"
@@ -201,10 +198,6 @@ union BitSet64
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//extern DAC_HandleTypeDef handleDAC;
-
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #define RETURN_TO_MAIN_MENU     0
 #define RETURN_TO_LAST_MEM      1
 #define RETURN_TO_INT_MEM       2
@@ -283,6 +276,3 @@ enum StateWorkFPGA
     StateWorkFPGA_Work,     ///< Идёт работа.
     StateWorkFPGA_Pause     ///< Это состояние, когда временно приостановлен прибор, например, для чтения данных или для записи значений регистров.
 };
-
-#include "Log.h"
-#include "Utils/Debug.h"

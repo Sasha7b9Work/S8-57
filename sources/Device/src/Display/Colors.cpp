@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #ifndef WIN32
 #include "defines.h"
+#include "log.h"
 #include "Display/Painter.h"
 #include "Settings/Settings.h"
 #include "Utils/Math.h"

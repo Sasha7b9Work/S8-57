@@ -2,6 +2,7 @@
 #ifndef WIN32
 #include <stm32f4xx.h>
 #include "defines.h"
+#include "log.h"
 #include "FPGA.h"
 #include "Hardware/FSMC.h"
 #include "Hardware/GPIO.h"

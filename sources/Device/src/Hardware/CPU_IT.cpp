@@ -2,6 +2,7 @@
 #ifndef WIN32
 #include "defines.h"
 #include "Sound.h"
+#include "Utils/Debug.h"
 #include "FPGA/FPGA.h"
 #include "Hardware/Timer.h"
 #endif

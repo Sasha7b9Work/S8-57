@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #ifndef WIN32
 #include "defines.h"
+#include "log.h"
 #include "CommonFunctions.h"
 #include <stdlib.h>
 #include <string.h>
