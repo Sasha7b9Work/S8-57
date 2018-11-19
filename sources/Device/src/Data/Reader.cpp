@@ -98,7 +98,7 @@ void Reader::ReadFromRAM(int fromEnd, StructDataDrawing *dataStruct, bool forMem
 
     dataStruct->posBreak = 0;
 
-    dataStruct->forMode = ModeWork::RAM;
+    dataStruct->forMode.Set(ModeWork::RAM);
 
     if (RECORDER_MODE && FPGA::InStateStop())
     {
@@ -146,7 +146,7 @@ bool Reader::ReadFromROM(StructDataDrawing *dataStruct)
 
     dataStruct->posBreak = 0;
 
-    dataStruct->forMode = ModeWork::ROM;
+    dataStruct->forMode.Set(ModeWork::ROM);
 
     if (EEPROM::GetData(NUM_ROM_SIGNAL, &dataSettings, IN_A, IN_B))
     {
@@ -216,7 +216,7 @@ static void PrepareDataForDraw(StructDataDrawing *dataStruct)
         return;
     }
 
-    if (((IN_P2P_MODE && FPGA::IsRunning() && !STAND_P2P) || (FPGA::InStateStop() && RECORDER_MODE)) && dataStruct->forMode != ModeWork::ROM)
+    if (((IN_P2P_MODE && FPGA::IsRunning() && !STAND_P2P) || (FPGA::InStateStop() && RECORDER_MODE)) && dataStruct->forMode.ToUINT() != ModeWork::ROM)
                                                         // FPGA_IS_RUNNING - потому что в автоматическом режиме при считывании полного измерения 
     {                                                   // происходит остановка цикла считывания на некоторое время
         FillDataP2P(dataStruct, Chan::A);

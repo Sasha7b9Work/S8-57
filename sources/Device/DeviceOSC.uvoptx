@@ -164,7 +164,7 @@
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>.\src\Data\DataBuffer.cpp</Filename>
+          <Filename>&lt;1&gt;.\src\Data\DataBuffer.cpp</Filename>
           <ExecCommand></ExecCommand>
           <Expression>\\FPGA\src/Data/DataBuffer.cpp\96</Expression>
         </Bp>
@@ -180,7 +180,7 @@
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>.\src\Data\Reader.cpp</Filename>
+          <Filename>&lt;1&gt;.\src\Data\Reader.cpp</Filename>
           <ExecCommand></ExecCommand>
           <Expression>\\FPGA\src/Data/Reader.cpp\63</Expression>
         </Bp>
@@ -1374,7 +1374,7 @@
 
   <Group>
     <GroupName>Data</GroupName>
-    <tvExp>1</tvExp>
+    <tvExp>0</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>

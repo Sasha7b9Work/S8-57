@@ -32,8 +32,7 @@ void PainterData::DrawData()
             PainterData::DrawROM
         };
 
-        func[MODE_WORK]();
-
+        func[MODE_WORK.ToUINT()]();
     }
 }
 

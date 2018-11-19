@@ -164,12 +164,12 @@ DEF_SMALL_BUTTON(   bLast_Prev,                                                 
 static void OnPress_Last_SaveToROM()
 {
     ((Page *)&ppInternal)->SetCurrentPage();
-    MODE_WORK = ModeWork::ROM;   // Находимся в режиме внутренного ЗУ
-    EXIT_FROM_ROM_TO_RAM = 1;   // Этот признак мы устанавливаем для того, чтобы:
-                                // 1 - по нажатии кнопки Выход со страницы "ВНУТР ЗУ" выходить в "Последние", а не в основное меню;
-                                // 2 - для того, чтобы на странице "ВНУТР ЗУ" выводить не последний считанный сигнал, а выбранный на странице 
-                                // "Последние";
-                                // 3 - чтобы в Data_Load() устанавливать соответствующие указатели.
+    MODE_WORK.Set(ModeWork::ROM);   // Находимся в режиме внутренного ЗУ
+    EXIT_FROM_ROM_TO_RAM = 1;       // Этот признак мы устанавливаем для того, чтобы:
+                                    // 1 - по нажатии кнопки Выход со страницы "ВНУТР ЗУ" выходить в "Последние", а не в основное меню;
+                                    // 2 - для того, чтобы на странице "ВНУТР ЗУ" выводить не последний считанный сигнал, а выбранный на странице 
+                                    // "Последние";
+                                    // 3 - чтобы в Data_Load() устанавливать соответствующие указатели.
 }
 
 static void Draw_Last_SaveToROM(int x, int y)
@@ -217,7 +217,7 @@ static void OnPress_Last(bool)
     NUM_RAM_SIGNAL = 0;
     RUN_FPGA_BEFORE_SB = FPGA::IsRunning() ? 1u : 0u;
     FPGA::Stop(false);
-    MODE_WORK = ModeWork::RAM;
+    MODE_WORK.Set(ModeWork::RAM);
 }
 
 static void OnDraw_Last()
@@ -999,7 +999,7 @@ DEF_SMALL_BUTTON(   bInternal_SaveToDrive,                                      
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 static void OnPress_Internal(bool)
 {
-    MODE_WORK = ModeWork::ROM;
+    MODE_WORK.Set(ModeWork::ROM);
 }
 
 static void OnDraw_Internal()
