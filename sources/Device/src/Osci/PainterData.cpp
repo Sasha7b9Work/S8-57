@@ -25,8 +25,6 @@ void PainterData::DrawData()
 {
     if(Reader::ReadData())
     {
-        Measure::SetData(false);
-
         if(MODE_WORK_IS_DIR)
         {
             DrawData_ModeDir();

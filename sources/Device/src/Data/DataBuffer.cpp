@@ -80,11 +80,17 @@ DataSettings *DataBuffer::Top()
 void DataBuffer::Stack::Clear()
 {
     memset(settings, 0, sizeof(DataSettings) * MAX_DATAS);
+    for (int i = 0; i < MAX_DATAS; i++)
+    {
+        settings[i].exist = 0;
+    }
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void DataBuffer::Stack::Push(DataSettings *ds)
 {
+    volatile uint8 *dBuffer = &buffer[0];
+   
     uint8 *address = Stack_AddressToPlace(ds);  // Находим адрес для записи данных
 
     if(address == 0)                            // Если нет места для размещения новых данных
@@ -124,7 +130,8 @@ static uint8 *Stack_AddressToPlace(DataSettings *_ds)
     {
         DataSettings *ds = &settings[i];
 
-        if(!ds->IsEmpty())
+        if(ds->exist &&                 // Если данные имеют смысл
+            !ds->IsEmpty())             // и с данными
         {
             int size = _ds->SizeData();                     // Размер одного "блока" в буфере данных
 
@@ -190,7 +197,7 @@ static int Stack_FindFirstEmptyElement()
     for (int i = 0; i < MAX_DATAS; i++)
     {
         DataSettings *ds = &settings[i];
-        if (ds->IsEmpty())
+        if (ds->exist == 0 || ds->IsEmpty())
         {
             return i;
         }

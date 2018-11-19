@@ -59,4 +59,5 @@ void DataSettings::Fill(uint8 *datA, uint8 *datB)
     Lval_DIVIDER_B(this) = SET_DIVIDER_B;
     TIME_MS_DS(this) = 0;                        // Ёто важно дл€ режима поточеного вывода. ќзначает, что полный сигнал ещЄ не считан
     ENUM_POINTS(this) = FPGA_ENUM_POINTS;
+    exist = 1;
 }

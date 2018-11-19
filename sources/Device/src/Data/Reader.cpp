@@ -62,10 +62,22 @@ bool Reader::ReadData()
 {
     if(DataStorage::GetData(&dataSettings))
     {
+        volatile uint8 *out = 0;
+        volatile uint8 *dataA = 0;
+        volatile uint size = 0;
+
         DS = &dataSettings;
         if (DS->enableA)
         {
+            out = OUT_A;
+            dataA = DS->DataA();
+            size = (uint)DS->SizeChannel();
+
             memcpy(OUT_A, DS->DataA(), (uint)DS->SizeChannel());
+
+            out = out;
+            dataA = dataA;
+            size = size;
         }
         if (DS->enableB)
         {

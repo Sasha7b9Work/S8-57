@@ -44,7 +44,8 @@ struct DataSettings
     uint        multiplierA     : 1;
     uint        multiplierB     : 1;
     uint        enumPoints      : 3;
-    uint        notUsed         : 12;
+    uint        exist           : 1;    ///< Установленное в "1" значение означает, что стуктура имеет смысл
+    uint        notUsed         : 11;
     PackedTime  time;
     /// Возвращает размер занимаемый данными одного канала
     int SizeChannel() const;
