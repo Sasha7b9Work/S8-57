@@ -17,8 +17,8 @@
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-extern const PageBase pageLast;
-const PageBase *PageMemory::PageLast::pointer = &pageLast;
+extern const PageBase pageRAM;
+const PageBase *PageMemory::PageRAM::pointer = &pageRAM;
 
 
 
@@ -39,7 +39,7 @@ DEF_SMALL_BUTTON(bLast_Next,                                                    
     "Следующий", "Next",
     "Перейти к следующему сигналу",
     "Go to the next signal",
-    pageLast, FuncActive, OnPress_Last_Next, Draw_Last_Next
+    pageRAM, FuncActive, OnPress_Last_Next, Draw_Last_Next
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -59,13 +59,13 @@ DEF_SMALL_BUTTON(bLast_Prev,                                                    
     "Предыдущий", "Previous",
     "Перейти к предыдущему сигналу",
     "Go to the previous signal",
-    pageLast, FuncActive, OnPress_Last_Prev, Draw_Last_Prev
+    pageRAM, FuncActive, OnPress_Last_Prev, Draw_Last_Prev
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void OnPress_Last_SaveToROM()
 {
-    ((Page *)PageMemory::PageInternal::pointer)->SetCurrentPage();
+    ((Page *)PageMemory::PageRAM::pointer)->SetCurrentPage();
     MODE_WORK.Set(ModeWork::ROM);   // Находимся в режиме внутренного ЗУ
     EXIT_FROM_ROM_TO_RAM = 1;       // Этот признак мы устанавливаем для того, чтобы:
                                     // 1 - по нажатии кнопки Выход со страницы "ВНУТР ЗУ" выходить в "Последние", а не в основное меню;
@@ -85,7 +85,7 @@ DEF_SMALL_BUTTON(bLast_SaveToROM,                                               
     "Внутр ЗУ", "Internal storage",
     "Нажмите эту кнопку, чтобы сохранить сигнал во внутреннем запоминающем устройстве",
     "Press this button to keep a signal in an internal memory",
-    pageLast, FuncActive, OnPress_Last_SaveToROM, Draw_Last_SaveToROM
+    pageRAM, FuncActive, OnPress_Last_SaveToROM, Draw_Last_SaveToROM
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -109,7 +109,7 @@ DEF_SMALL_BUTTON(bLast_SaveToDrive,                                             
     "Сохранить", "Save",
     "Кнопка становится доступна при присоединённом внешнем ЗУ. Позволяет сохранить сигнал на внешем ЗУ",
     "Click this button to save the signal on the external FLASH",
-    pageLast, FuncActive, OnPress_Last_SaveToDrive, Draw_Last_SaveToDrive
+    pageRAM, FuncActive, OnPress_Last_SaveToDrive, Draw_Last_SaveToDrive
 )
 
 
@@ -153,7 +153,7 @@ static bool OnRegSet_Last(int angle)
     return true;
 }
 
-DEF_PAGE_4(pageLast,                                                                                                  // ПАМЯТЬ - ПОСЛЕДНИЕ ///
+DEF_PAGE_4(pageRAM,                                                                                                  // ПАМЯТЬ - ПОСЛЕДНИЕ ///
     "ПОСЛЕДНИЕ", "LATEST",
     "Переход в режим работы с последними полученными сигналами",
     "Transition to an operating mode with the last received signals",

@@ -18,8 +18,8 @@
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-extern const PageBase pageInternal;
-const PageBase *PageMemory::PageInternal::pointer = &pageInternal;
+extern const PageBase pageROM;
+const PageBase *PageMemory::PageROM::pointer = &pageROM;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -62,7 +62,7 @@ DEF_SMALL_BUTTON_HINTS_2(bInternal_ShowAlways,                                  
     "Показывать всегда", "To show always",
     "Позволяет всегда показывать выбранный сохранённый сигнал поверх текущего",
     "Allows to show always the chosen kept signal over the current",
-    pageInternal, FuncActive, OnPress_Internal_ShowAlways, Draw_Internal_ShowAlways,
+    pageROM, FuncActive, OnPress_Internal_ShowAlways, Draw_Internal_ShowAlways,
     Draw_Internal_ShowAlways_Yes, { "показывать выбранный сигнал из внутренней памяти поверх текущего",
                                     "to show the chosen signal from internal memory over the current" },
     Draw_Internal_ShowAlways_No, { "сигнал из внутренней памяти виден только в режиме работы с внутренним запоминающим устройством",
@@ -117,7 +117,7 @@ DEF_SMALL_BUTTON_HINTS_3(bInternal_ModeShow,                                    
     "Вид сигнала", "Type of a signal",
     "Показывать записанный или текущий сигнал в режиме ВНУТР ЗУ",
     "Show recorded or current signal in mode Internal Memory",
-    pageInternal, FuncActive, OnPress_Internal_ModeShow, Draw_Internal_ModeShow,
+    pageROM, FuncActive, OnPress_Internal_ModeShow, Draw_Internal_ModeShow,
     Draw_Internal_ModeShow_Direct, { "на дисплее текущий сигнал", "on the display current signal" },
     Draw_Internal_ModeShow_Saved, { "на дисплее сохранённый сигнал", "on the display the kept signal" },
     Draw_Internal_ModeShow_Both, { "на дисплее оба сигнала", "on the display both signals" }
@@ -142,7 +142,7 @@ DEF_SMALL_BUTTON(bInternal_Delete,                                              
     "Удалить", "Delete",
     "Удаляет выбранный сигнал из внутреннего запоминающего устройства",
     "Removes the selected signal from the internal storage device",
-    pageInternal, FuncActive, OnPress_Internal_Delete, Draw_Internal_Delete
+    pageROM, FuncActive, OnPress_Internal_Delete, Draw_Internal_Delete
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -177,7 +177,7 @@ DEF_SMALL_BUTTON(bInternal_SaveToMemory,                                        
     "Сохранить в памяти", "Save to memory",
     "Сохранить сигнал во внутреннем запоминующем устройстве",
     "To keep a signal in an internal memory",
-    pageInternal, FuncActive, OnPress_Internal_SaveToMemory, Draw_Internal_SaveToMemory
+    pageROM, FuncActive, OnPress_Internal_SaveToMemory, Draw_Internal_SaveToMemory
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -201,7 +201,7 @@ DEF_SMALL_BUTTON(bInternal_SaveToDrive,                                         
     "Сохранить на флешку", "Save to disk",
     "Сохраняет сигнал на флешку",
     "Save signal to flash drive",
-    pageInternal, FuncActive, OnPress_Internal_SaveToDrive, Draw_Internal_SaveToDrive
+    pageROM, FuncActive, OnPress_Internal_SaveToDrive, Draw_Internal_SaveToDrive
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -261,7 +261,7 @@ static bool OnRegSet_Internal(int delta)
 }
 
 
-DEF_PAGE_5(pageInternal,                                                                                                        // ПАМЯТЬ - ВНУТР ЗУ ///
+DEF_PAGE_5(pageROM,                                                                                                        // ПАМЯТЬ - ВНУТР ЗУ ///
     "ВНУТР ЗУ", "INT STORAGE",
     "Переход в режим работы с внутренней памятью",
     "Transition to an operating mode with internal memory",

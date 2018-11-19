@@ -514,8 +514,8 @@ DEF_PAGE_4(         pMemory,                                                    
     "Работа с внешней и внутренней памятью.",
     "Working with external and internal memory.",
     &cPoints,                           ///< ПАМЯТЬ - Точки
-    &PageMemory::PageLast::pointer,     ///< ПАМЯТЬ - ПОСЛЕДНИЕ
-    &PageMemory::PageInternal::pointer, ///< ПАМЯТЬ - ВНУТР ЗУ
+    &PageMemory::PageRAM::pointer,      ///< ПАМЯТЬ - ПОСЛЕДНИЕ
+    &PageMemory::PageROM::pointer,      ///< ПАМЯТЬ - ВНУТР ЗУ
     &ppDrive,                           ///< ПАМЯТЬ - ВНЕШН ЗУ
     Page::Name::Memory, Menu::pageMain, FuncActive, EmptyPressPage, FuncDrawPage, FuncRegSetPage
 )

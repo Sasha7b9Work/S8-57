@@ -24,13 +24,13 @@ public:
 
     static const PageBase *pointer;
 
-    class PageLast
+    class PageRAM
     {
     public:
         static const PageBase *pointer;
     };
 
-    class PageInternal
+    class PageROM
     {
     public:
         static const PageBase *pointer;
