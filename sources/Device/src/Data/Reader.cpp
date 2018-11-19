@@ -60,14 +60,21 @@ void Clear()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 bool Reader::ReadData()
 {
-    bool result = DataStorage::GetData(&dataSettings);
-
-    if(result)
+    if(DataStorage::GetData(&dataSettings))
     {
         DS = &dataSettings;
+        if (DS->enableA)
+        {
+            memcpy(OUT_A, DS->DataA(), (uint)DS->SizeChannel());
+        }
+        if (DS->enableB)
+        {
+            memcpy(OUT_B, DS->DataB(), (uint)DS->SizeChannel());
+        }
+        return true;
     }
 
-    return result;
+    return false;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

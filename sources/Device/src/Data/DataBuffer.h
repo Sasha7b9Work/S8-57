@@ -26,5 +26,7 @@ private:
         static void Clear();
 
         static void Push(DataSettings *ds);
+
+        static DataSettings *Top();
     };
 };
