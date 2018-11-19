@@ -334,6 +334,7 @@
     <ClCompile Include="..\..\Device\src\Tester\TesterGraphics.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="..\..\Device\src\Utils\Buffer.cpp" />
     <ClCompile Include="..\..\Device\src\Utils\CommonFunctions.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
@@ -607,6 +608,7 @@
     <ClInclude Include="..\..\Device\src\Tester\Tester.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClInclude>
+    <ClInclude Include="..\..\Device\src\Utils\Buffer.h" />
     <ClInclude Include="..\..\Device\src\Utils\CommonFunctions.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClInclude>
@@ -756,7 +758,7 @@
       <PreprocessorDefinitions>USE_HAL_DRIVER;STM32F437xx;MSVC;WIN32;OLD_RECORDER;wxUSE_GUI;wxUSE_EXCEPTIONS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalOptions>-MP %(AdditionalOptions)</AdditionalOptions>
       <MinimalRebuild>false</MinimalRebuild>
-      <DisableSpecificWarnings>4201;4211;4333;4355;4464;4514;4529;4599;4623;4626;4710;4774;4820;4996;5027;5039;5045</DisableSpecificWarnings>
+      <DisableSpecificWarnings>4201;4211;4333;4355;4464;4514;4529;4599;4623;4626;4710;4774;4820;4996;5027;5039;5045;26495</DisableSpecificWarnings>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <BufferSecurityCheck>true</BufferSecurityCheck>
       <PreprocessToFile>false</PreprocessToFile>

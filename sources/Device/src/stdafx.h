@@ -57,6 +57,7 @@
 
 #include "Settings/Settings.h"
 
+#include "Utils/Buffer.h"
 #include "Utils/Debug.h"
 #include "Utils/Dictionary.h"
 #include "Utils/Math.h"

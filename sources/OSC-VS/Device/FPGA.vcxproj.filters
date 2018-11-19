@@ -519,6 +519,9 @@
     <ClCompile Include="..\..\Device\src\Data\DataStorage.cpp">
       <Filter>Data</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Device\src\Utils\Buffer.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Device\src\Display\Display.h">
@@ -919,6 +922,9 @@
     </ClInclude>
     <ClInclude Include="..\..\Device\src\Data\DataStorage.h">
       <Filter>Data</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Device\src\Utils\Buffer.h">
+      <Filter>Utils</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

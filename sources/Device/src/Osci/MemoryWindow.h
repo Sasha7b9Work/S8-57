@@ -17,7 +17,7 @@ public:
 
 private:
 
-    static void DrawDataInRect(int x, int y, int width, int height, uint8 *data, int length);
+    static void DrawDataInRect(int x, int y, int width, int height, uint8 *data, uint length);
     /// Нарисовать область экрана
     static void DrawScreenArea();
 };
