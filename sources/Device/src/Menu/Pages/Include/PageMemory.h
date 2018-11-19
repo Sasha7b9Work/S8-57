@@ -23,6 +23,18 @@ public:
     static void SaveSignalToFlashDrive();
 
     static const PageBase *pointer;
+
+    class PageLast
+    {
+    public:
+        static const PageBase *pointer;
+    };
+
+    class PageInternal
+    {
+    public:
+        static const PageBase *pointer;
+    };
 };
 
 

@@ -2635,6 +2635,16 @@
               <FileType>8</FileType>
               <FilePath>.\src\Menu\Pages\PageMemory\PageMemory.cpp</FilePath>
             </File>
+            <File>
+              <FileName>PageMemory_Internal.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Menu\Pages\PageMemory\PageMemory_Internal.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>PageMemory_Last.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Menu\Pages\PageMemory\PageMemory_Last.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

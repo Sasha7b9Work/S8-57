@@ -522,6 +522,12 @@
     <ClCompile Include="..\..\Device\src\Utils\Buffer.cpp">
       <Filter>Utils</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Device\src\Menu\Pages\PageMemory\PageMemory_Last.cpp">
+      <Filter>Menu\Pages\PageMemory</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Menu\Pages\PageMemory\PageMemory_Internal.cpp">
+      <Filter>Menu\Pages\PageMemory</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Device\src\Display\Display.h">
