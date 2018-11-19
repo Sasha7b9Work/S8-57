@@ -27,6 +27,7 @@ struct PackedTime
 
 struct DataSettings
 {
+    uint        id;                     ///< Сквозной id данных. 1-й номер получают данные, считанные первыми после включения прибора и каждые следующие увиличиваются на 1
     uint8       *dataA;                 ///< По этому адресу хранятся данные 1-го канала
     uint8       *dataB;                 ///< По этому адресу хранятся данные 2-го канала. При хранение в Buffer данные 2-го канала идут сразу после 1-го канала
     uint16      rShift[2];
@@ -47,6 +48,7 @@ struct DataSettings
     uint        exist           : 1;    ///< Установленное в "1" значение означает, что стуктура имеет смысл
     uint        notUsed         : 11;
     PackedTime  time;
+    DataSettings() : id(++lastID) {};
     /// Возвращает размер занимаемый данными одного канала
     int SizeChannel() const;
     /// Возвращает размер данных обоих каналов
@@ -58,6 +60,8 @@ struct DataSettings
     uint8 *DataA() { return dataA; }
     uint8 *DataB() { return dataB; }
     uint8 *Data() { return dataA ? dataA : dataB; }
+
+    static uint lastID;
 };
 
 #define RSHIFT(ds, ch)          ((ds)->rShift[ch])
