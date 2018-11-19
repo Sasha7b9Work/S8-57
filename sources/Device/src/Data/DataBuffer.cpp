@@ -4,7 +4,7 @@
 #include "DataBuffer.h"
 #include "DataSettings.h"
 #include <cstring>
-#include <limits.h>
+#include <climits>
 #endif
 
 

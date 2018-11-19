@@ -7,8 +7,8 @@
 #include "Settings/Settings.h"
 #include "Utils/Values.h"
 #include "Utils/Math.h"
-#include <math.h>
-#include <limits.h>
+#include <cmath>
+#include <climits>
 #include <stdlib.h>
 #include <cstring>
 #include <limits>
@@ -272,7 +272,7 @@ float CalculateVoltageVybrosPlus(Chan ch)
     }
 
     uint16 rShift = RSHIFT_DS(ch);
-    return fabsf(MathFPGA::Point2Voltage(ROUND(uint8, maxSteady), RANGE_DS(ch), rShift) - MathFPGA::Point2Voltage(ROUND(uint8, max), RANGE_DS(ch), rShift));
+    return std::fabsf(MathFPGA::Point2Voltage(ROUND(uint8, maxSteady), RANGE_DS(ch), rShift) - MathFPGA::Point2Voltage(ROUND(uint8, max), RANGE_DS(ch), rShift));
 }
 
 
@@ -290,7 +290,7 @@ float CalculateVoltageVybrosMinus(Chan ch)
     }
 
     uint16 rShift = RSHIFT_DS(ch);
-    return fabsf(MathFPGA::Point2Voltage(ROUND(uint8, minSteady), RANGE_DS(ch), rShift) - MathFPGA::Point2Voltage(ROUND(uint8, min), RANGE_DS(ch), rShift));
+    return std::fabsf(MathFPGA::Point2Voltage(ROUND(uint8, minSteady), RANGE_DS(ch), rShift) - MathFPGA::Point2Voltage(ROUND(uint8, min), RANGE_DS(ch), rShift));
 }
 
 
@@ -363,7 +363,7 @@ float CalculateVoltageRMS(Chan ch)
         rms +=  volts * volts;
     }
 
-    rms = sqrtf(rms / period);
+    rms = std::sqrtf(rms / period);
 
     if(MEAS_MARKED == Measure::Type::VoltageRMS)
     {
@@ -1254,7 +1254,7 @@ void Measure::Processing::InterpolationSinX_X(uint8 *data, int numPoints, TBase 
         {
             int part = num % ((delta - 1) * 2);
             num++;
-            float sinX = (part < delta - 1) ? sinf(PI / delta * (part + 1)) : sinf(PI / delta * (part - (delta - 1) * 2));
+            float sinX = (part < delta - 1) ? std::sinf(PI / delta * (part + 1)) : std::sinf(PI / delta * (part - (delta - 1) * 2));
 
             if (tBase > TBase::_5ns)                 // Здесь используем более быструю, но более неправильную арифметику целвых чисел
             {

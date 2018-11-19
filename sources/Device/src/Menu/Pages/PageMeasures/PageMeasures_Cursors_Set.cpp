@@ -8,7 +8,7 @@
 #include "Settings/Settings.h"
 #include "Utils/Math.h"
 #include "Hardware/Sound.h"
-#include <math.h>
+#include <cmath>
 #endif
 
 
@@ -384,8 +384,8 @@ void PageMeasures::PageCursors::PageSet::IncCursCntrlT(Chan ch)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void PageMeasures::PageCursors::PageSet::SetCursPos100(Chan ch)
 {
-    dUperc(ch) = (float)fabsf(CURsU_POS(ch, 0) - CURsU_POS(ch, 1));
-    dTperc(ch) = (float)fabsf(CURsT_POS(ch, 0) - CURsT_POS(ch, 1));
+    dUperc(ch) = (float)std::fabsf(CURsU_POS(ch, 0) - CURsU_POS(ch, 1));
+    dTperc(ch) = (float)std::fabsf(CURsT_POS(ch, 0) - CURsT_POS(ch, 1));
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

@@ -411,10 +411,10 @@ void Menu::ProcessingLongPressureButton()
             if(item)
             {
                 item->LongPress();
-            }
-            if (NOT_PAGE(item))
-            {
-                TemporaryEnableStrNavi();
+                if (NOT_PAGE(item))
+                {
+                    TemporaryEnableStrNavi();
+                }
             }
         }
         longPressureButton = Key::None;

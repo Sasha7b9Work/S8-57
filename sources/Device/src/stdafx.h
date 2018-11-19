@@ -70,10 +70,10 @@
 #pragma warning(disable:4365 4710 4996)
 
 #include <algorithm>
-#include <limits.h>
-#include <math.h>
+#include <climits>
+#include <cmath>
 #include <cstring>
-#include <stdarg.h>
+#include <cstdarg>
 #include <cctype>
 
 #pragma warning(pop)

@@ -13,7 +13,7 @@
 #include "Settings/Settings.h"
 #include "Utils/Math.h"
 #include <stdlib.h>
-#include <math.h>
+#include <cmath>
 #endif
 
 

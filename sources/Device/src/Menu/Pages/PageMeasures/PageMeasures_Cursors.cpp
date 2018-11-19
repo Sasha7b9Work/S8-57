@@ -11,7 +11,7 @@
 #include "Utils/Math.h"
 #include "Utils/CommonFunctions.h"
 #include "Utils/Dictionary.h"
-#include <math.h>
+#include <cmath>
 #include <cstring>
 #endif
 

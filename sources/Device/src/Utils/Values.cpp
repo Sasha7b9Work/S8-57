@@ -5,7 +5,7 @@
 #include "Math.h"
 #include "Settings/Settings.h"
 #include <cstring>
-#include <math.h>
+#include <cmath>
 #include <stdlib.h>
 #include <limits>
 #endif
@@ -180,7 +180,7 @@ char *Time::ToString(bool alwaysSign, char buffer[20]) const
 
     static const float factor[4] = {1e9f, 1e6f, 1e3f, 1.0f};
 
-    float absTime = fabsf(time);
+    float absTime = std::fabsf(time);
 
     int num = 0;
 
@@ -214,7 +214,7 @@ char* Time::ToStringAccuracy(bool alwaysSign, char buffer[20], int numDigits) co
     buffer[0] = 0;
     const char *suffix = LANG_RU ? "ñ" : "s";
 
-    float fabsTime = fabsf(time);
+    float fabsTime = std::fabsf(time);
 
     if (Math::IsEquals(time, ERROR_VALUE_FLOAT))
     {
@@ -263,7 +263,7 @@ char* Voltage::ToString(bool alwaysSign, char buffer[20]) const
     static const float factor[4] = {1e6f, 1e3f, 1.0f, 1e-3f};
 
     int num = 0;
-    float absValue = fabsf(voltage) + 0.5e-4f;
+    float absValue = std::fabsf(voltage) + 0.5e-4f;
 
     if (absValue < 1e-3f)
     {
@@ -340,7 +340,7 @@ char *Float::ToString(bool alwaysSign, int numDigits, char bufferOut[20]) const
         format[5] = '.';
     }
     
-    float absValue = fabsf(_value);
+    float absValue = std::fabsf(_value);
     sprintf(pBuffer, (char *)format, (double)absValue);
     
     float val = (float)atof(pBuffer);

@@ -5,7 +5,7 @@
 #include "Timer.h"
 #include "Hardware.h"
 #include "Utils/Math.h"
-#include <math.h>
+#include <cmath>
 #endif
 
 
@@ -129,7 +129,7 @@ void Sound::CalculateSine()
     for(int i = 0; i < POINTS_IN_PERIOD_SOUND; i++)
     {
         float step = 2.0f * PI / (POINTS_IN_PERIOD_SOUND - 1);
-        float value = (sinf(i * step) + 1.0f) / 2.0f;
+        float value = (std::sinf(i * step) + 1.0f) / 2.0f;
         float v = value * amplitude * 255.0f;
         points[i] = (uint8)v;
     }

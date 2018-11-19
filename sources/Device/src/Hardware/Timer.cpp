@@ -5,7 +5,7 @@
 #include "log.h"
 #include "Timer.h"
 #include "stm32/Timer4XX.h"
-#include <limits.h>
+#include <climits>
 #endif
 
 

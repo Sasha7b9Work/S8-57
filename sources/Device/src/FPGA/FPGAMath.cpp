@@ -5,7 +5,7 @@
 #include "FPGAMath.h"
 #include "FPGA/FPGA.h"
 #include "Utils/Math.h"
-#include <math.h>
+#include <cmath>
 #endif
 
 
@@ -352,7 +352,7 @@ void MathFPGA::CalculateFFT(float *dataR, int numPoints, float *result, float *f
 
     for (int i = 0; i < 256; i++)
     {
-        result[i] = sqrtf(dataR[i] * dataR[i] + result[i] * result[i]);
+        result[i] = std::sqrtf(dataR[i] * dataR[i] + result[i] * result[i]);
     }
 
     result[0] = 0.0f;       /// \todo нулева€ составл€юща€ мешает посто€нно. надо еЄ убрать
@@ -366,7 +366,7 @@ void MathFPGA::CalculateFFT(float *dataR, int numPoints, float *result, float *f
         for (int i = 0; i < 256; i++)
         {
 #ifdef DEBUG
-            result[i] = 20 * log10f(result[i]);
+            result[i] = 20 * std::log10f(result[i]);
 #else
             result[i] = Log10[(int)(result[i] * 10000)];
 #endif
@@ -409,7 +409,7 @@ void MathFPGA::MultiplyToWindow(float *data, int numPoints)
     {
         for (int i = 0; i < numPoints; i++)
         {
-            data[i] *= 0.53836f - 0.46164f * cosf(2 * PI * i / (numPoints - 1));
+            data[i] *= 0.53836f - 0.46164f * std::cosf(2 * PI * i / (numPoints - 1));
         }
     }
     else if (WINDOW_FFT_IS_BLACKMAN)
@@ -420,14 +420,14 @@ void MathFPGA::MultiplyToWindow(float *data, int numPoints)
         float a2 = alpha / 2.0f;
         for (int i = 0; i < numPoints; i++)
         {
-            data[i] *= a0 - a1 * cosf(2 * PI * i / (numPoints - 1)) + a2 * cosf(4 * PI * i / (numPoints - 1));
+            data[i] *= a0 - a1 * std::cosf(2 * PI * i / (numPoints - 1)) + a2 * std::cosf(4 * PI * i / (numPoints - 1));
         }
     }
     else if (WINDOW_FFT_IS_HANN)
     {
         for (int i = 0; i < numPoints; i++)
         {
-            data[i] *= 0.5f * (1.0f - cosf(2.0f * PI * i / (numPoints - 1.0f)));
+            data[i] *= 0.5f * (1.0f - std::cosf(2.0f * PI * i / (numPoints - 1.0f)));
         }
     }
 #endif

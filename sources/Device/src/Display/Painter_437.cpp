@@ -3,6 +3,7 @@
 #include "Painter.h"
 #include "Hardware/FSMC.h"
 #include "Hardware/Timer.h"
+#include "Utils/Buffer.h"
 #include <stdlib.h>
 #include <cstring>
 
@@ -46,11 +47,11 @@ void Painter::SetColorValue(Color color, uint value)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Painter::DrawTesterData(uint8 mode, Color color, uint8 x[240], uint8 y[240])
 {
-    uint8 *buffer = (uint8 *)malloc(483);
-    buffer[0] = Command::Paint_TesterLines;
-    buffer[1] = mode;
-    buffer[2] = color.value;
-    uint8 *pointer = buffer + 3;
+    Buffer buffer(483);
+    buffer.Data()[0] = Command::Paint_TesterLines;
+    buffer.Data()[1] = mode;
+    buffer.Data()[2] = color.value;
+    uint8 *pointer = buffer.Data() + 3;
     for (int i = 0; i < 240; i++)
     {
         *pointer++ = x[i];
@@ -59,9 +60,7 @@ void Painter::DrawTesterData(uint8 mode, Color color, uint8 x[240], uint8 y[240]
     {
         *pointer++ = y[i];
     }
-    FSMC::WriteToPanel(buffer, 483);
-
-    free(buffer);
+    FSMC::WriteToPanel(buffer.Data(), 483);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
