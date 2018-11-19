@@ -3,7 +3,7 @@
 #include "defines.h"
 #include "DataBuffer.h"
 #include "DataSettings.h"
-#include <string.h>
+#include <cstring>
 #include <limits.h>
 #endif
 
@@ -85,10 +85,10 @@ uint DataBuffer::Size()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void DataBuffer::Stack::Clear()
 {
-    memset(settings, 0, sizeof(DataSettings) * MAX_DATAS);
+    std::memset(settings, 0, sizeof(DataSettings) * MAX_DATAS);
     for (int i = 0; i < MAX_DATAS; i++)
     {
-        settings[i].exist = 0;
+        settings[i].Erase();
     }
 }
 
@@ -123,7 +123,7 @@ uint DataBuffer::Stack::Size()
 
     for (int i = 0; i < MAX_DATAS; i++)
     {
-        if (settings[i].exist)
+        if (settings[i].IsExist())
         {
             result++;
         }
@@ -149,7 +149,7 @@ static uint8 *Stack_AddressToPlace(DataSettings *_ds)
     {
         DataSettings *ds = &settings[i];
 
-        if(ds->exist &&                 // Если данные имеют смысл
+        if(ds->IsExist() &&                 // Если данные имеют смысл
             !ds->IsEmpty())             // и с данными
         {
             int size = _ds->SizeData();                     // Размер одного "блока" в буфере данных
@@ -182,10 +182,10 @@ static uint8 *Stack_AddressToPlace(DataSettings *_ds)
 static void Stack_RemoveFirst()
 {
     // Просто смещаем все элементы влево на один
-    memcpy(&settings[0], &settings[1], sizeof(DataSettings) * (MAX_DATAS - 1));
+    std::memcpy(&settings[0], &settings[1], sizeof(DataSettings) * (MAX_DATAS - 1));
 
     // И затираем последний элемент в массиве
-    memset(&settings[MAX_DATAS - 1], 0, sizeof(DataSettings));
+    std::memset(&settings[MAX_DATAS - 1], 0, sizeof(DataSettings));
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -199,13 +199,13 @@ static void Stack_AddToEnd(DataSettings *ds, uint8 *address)
 
     if(ds->DataA())
     {
-        memcpy(address, ds->DataA(), (uint)ds->SizeChannel());
+        std::memcpy(address, ds->DataA(), (uint)ds->SizeChannel());
         settings[index].dataA = address;
         address += ds->SizeChannel();
     }
     if(ds->DataB())
     {
-        memcpy(address, ds->DataB(), (uint)ds->SizeChannel());
+        std::memcpy(address, ds->DataB(), (uint)ds->SizeChannel());
         settings[index].dataB = address;
     }
 }
@@ -216,7 +216,7 @@ static int Stack_FindFirstEmptyElement()
     for (int i = 0; i < MAX_DATAS; i++)
     {
         DataSettings *ds = &settings[i];
-        if (ds->exist == 0 || ds->IsEmpty())
+        if (!ds->IsExist() || ds->IsEmpty())
         {
             return i;
         }

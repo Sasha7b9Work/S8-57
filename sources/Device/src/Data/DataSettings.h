@@ -45,8 +45,7 @@ struct DataSettings
     uint        multiplierA     : 1;
     uint        multiplierB     : 1;
     uint        enumPoints      : 3;
-    uint        exist           : 1;    ///< Установленное в "1" значение означает, что стуктура имеет смысл
-    uint        notUsed         : 11;
+    uint        notUsed         : 12;
     PackedTime  time;
     DataSettings() : id(++lastID) {};
     /// Возвращает размер занимаемый данными одного канала
@@ -60,6 +59,8 @@ struct DataSettings
     uint8 *DataA() { return dataA; }
     uint8 *DataB() { return dataB; }
     uint8 *Data() { return dataA ? dataA : dataB; }
+    void Erase();
+    bool IsExist() const { return id != 0; }
 
     static uint lastID;
 };

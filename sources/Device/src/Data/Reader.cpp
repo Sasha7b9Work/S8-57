@@ -8,7 +8,7 @@
 #include "FPGA/FPGA.h"
 #include "Hardware/EEPROM.h"
 #include "Utils/Math.h"
-#include <string.h>
+#include <cstring>
 
 
 #ifdef WIN32
@@ -73,7 +73,7 @@ bool Reader::ReadData()
             dataA = DS->DataA();
             size = (uint)DS->SizeChannel();
 
-            memcpy(OUT_A, DS->DataA(), (uint)DS->SizeChannel());
+            std::memcpy(OUT_A, DS->DataA(), (uint)DS->SizeChannel());
 
             out = out;
             dataA = dataA;
@@ -81,7 +81,7 @@ bool Reader::ReadData()
         }
         if (DS->enableB)
         {
-            memcpy(OUT_B, DS->DataB(), (uint)DS->SizeChannel());
+            std::memcpy(OUT_B, DS->DataB(), (uint)DS->SizeChannel());
         }
         return true;
     }
@@ -110,11 +110,11 @@ void Reader::ReadFromRAM(int fromEnd, StructDataDrawing *dataStruct, bool forMem
         DS = &dataSettings;
         if (ENABLED_DS_A)
         {
-            memcpy(IN_A, DataStorage::GetAverageData(Chan::A), (uint)NUM_BYTES_DS);
+            std::memcpy(IN_A, DataStorage::GetAverageData(Chan::A), (uint)NUM_BYTES_DS);
         }
         if (ENABLED_DS_B)
         {
-            memcpy(IN_B, DataStorage::GetAverageData(Chan::B), (uint)NUM_BYTES_DS);
+            std::memcpy(IN_B, DataStorage::GetAverageData(Chan::B), (uint)NUM_BYTES_DS);
         }
         readed = true;
     }
@@ -232,7 +232,7 @@ static void PrepareDataForDraw(StructDataDrawing *dataStruct)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void FillDataP2P(StructDataDrawing *dataStruct, Chan ch)
 {
-    memset(dataStruct->data[ch], 0, 281 * 2);
+    std::memset(dataStruct->data[ch], 0, 281 * 2);
 
     if (!dataStruct->needDraw[ch])
     {

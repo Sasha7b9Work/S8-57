@@ -4,6 +4,7 @@
 #include "DataSettings.h"
 #include "Utils/Measure.h"
 #include "Settings/Settings.h"
+#include <cstring>
 #endif
 
 
@@ -12,6 +13,12 @@ uint DataSettings::lastID = 0;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+void DataSettings::Erase()
+{
+    std::memset(this, 0, sizeof(DataSettings));
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 int DataSettings::SizeChannel() const
 {
     static const int numPoints[ENumPointsFPGA::Size][3] =
@@ -63,5 +70,4 @@ void DataSettings::Fill(uint8 *datA, uint8 *datB)
     Lval_DIVIDER_B(this) = SET_DIVIDER_B;
     TIME_MS_DS(this) = 0;                        // Ёто важно дл€ режима поточеного вывода. ќзначает, что полный сигнал ещЄ не считан
     ENUM_POINTS(this) = FPGA_ENUM_POINTS;
-    exist = 1;
 }
