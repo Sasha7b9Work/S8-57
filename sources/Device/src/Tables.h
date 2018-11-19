@@ -8,8 +8,13 @@ class Tables
 public:
     static Display::ENumSignalsInSec ENumSignalsInSecToENUM(int numSignalsInSec);
     
-    static pString symbolsAlphaBet[0x48];
+    static pString Get(int index);
     /// Выводит строку из таблицы symbolsAlphaBet
     static void DrawStr(int index, int x, int y);
+
+    static int Size();
+
+private:
+    static pString symbolsAlphaBet[0x48];
 };
 
