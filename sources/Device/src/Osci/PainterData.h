@@ -13,8 +13,12 @@ public:
     static void DrawChannel(Chan ch);
 
 private:
-    
-    static void DrawData_ModeDir();
+    /// Нарисовать актуальные данные - соответствующие текущим установкам
+    static void DrawCurrent();
+    /// Нарисовать данные из ОЗУ
+    static void DrawRAM();
+    /// Нарисовать данные из ППЗУ
+    static void DrawROM();
 
     static void DrawTPos(int leftX, int rightX);
 

@@ -431,7 +431,7 @@ void Menu::ProcessingPressButton()
             itemUnderKey = itemUnderButton[pressButton];
         }
     }
-    if (pressButton == Key::Start && !MODE_WORK_IS_RAM)
+    if (pressButton == Key::Start && !MODE_WORK.Is(ModeWork::RAM))
     {
         FPGA::OnPressStart();
     }

@@ -111,7 +111,7 @@ void HiPart::DrawRightPart()
     static const int xses[3] ={280, 271, 251};
     int x = xses[MODE_WORK];
 
-    if(!MODE_WORK_IS_RAM)
+    if(!MODE_WORK.Is(ModeWork::RAM))
     {
         Painter::DrawVLine(x, 1, Grid::Top() - 2, Color::FILL);
 
@@ -132,7 +132,7 @@ void HiPart::DrawRightPart()
         {"ยอาะ", "INT"}
     };
 
-    if(!MODE_WORK_IS_DIR)
+    if(!MODE_WORK.Is(ModeWork::Dir))
     {
         x += 18;
         Painter::DrawVLine(x, 1, Grid::Top() - 2, Color::FILL);
@@ -145,7 +145,7 @@ void HiPart::DrawRightPart()
         x -= 9;
     }
 
-    if(!MODE_WORK_IS_RAM)
+    if(!MODE_WORK.Is(ModeWork::RAM))
     {
         x += 27;
         Painter::DrawVLine(x, 1, Grid::Top() - 2, Color::FILL);

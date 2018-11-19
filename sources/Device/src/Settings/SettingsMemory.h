@@ -26,13 +26,14 @@ struct ModeWork
 {
     enum E
     {
-        Dir,           ///< Основной режим.
-        RAM,           ///< В этом режиме можно просмотреть последние сохранённые измерения.
-        ROM,           ///< В этом режиме можно сохранять во flash-памяти измерения просматривать ранее сохранённые.
-        None           ///< Используется в модуле Data.c. Нужен, чтобы указать, что мудуль не настроен ни на какой режим.
+        Dir,        ///< Основной режим.
+        RAM,        ///< В этом режиме можно просмотреть последние сохранённые измерения.
+        ROM,        ///< В этом режиме можно сохранять во flash-памяти измерения просматривать ранее сохранённые.
+        Number      ///< Используется в модуле Data.c. Нужен, чтобы указать, что мудуль не настроен ни на какой режим.
     } value;
     ModeWork(E v = Dir) : value(v) {};
     operator uint8() const { return (uint8)value; };
+    bool Is(E v) const { return value == v; }
 };
 
 /// Число точек сигнала, с которым идёт работа.
@@ -96,10 +97,6 @@ struct FileNamingMode
 #define FILE_NAMING_MODE_MANUAL (FILE_NAMING_MODE == FileNamingMode::Manually)
 
 #define MODE_WORK               (set.mem_modeWork)
-#define MODE_WORK_IS_DIR        (MODE_WORK == ModeWork::Dir)
-#define MODE_WORK_IS_RAM        (MODE_WORK == ModeWork::RAM)
-#define MODE_WORK_IS_ROM        (MODE_WORK == ModeWork::ROM)
-
 
 #define SHOW_IN_INT             (set.mem_modeShowIntMem)
 #define SHOW_IN_INT_SAVED       (SHOW_IN_INT == ModeShowIntMem::Saved)

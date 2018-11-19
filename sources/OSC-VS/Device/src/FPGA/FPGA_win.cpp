@@ -48,10 +48,10 @@ void FPGA::ReadData()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void FillSine(uint8 *data, uint size)
 {
-    float speed = 20.0f;
+    float speed = 0.2f;
 
     for (uint i = 0; i < size; i++)
     {
-        data[i] = (uint8)(AVE_VALUE + (MAX_VALUE - AVE_VALUE) * sinf(speed * i));
+        data[i] = (uint8)(AVE_VALUE + (MAX_VALUE - AVE_VALUE - 20) * sinf(speed * i));
     }
 }
