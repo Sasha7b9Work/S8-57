@@ -237,7 +237,7 @@ DEF_SMALL_BUTTON(   bDrive_Mask_Delete,                                         
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void OnPress_Drive_Mask_Backspace()
 {
-    int size = (int)strlen(FILE_NAME_MASK);
+    int size = (int)std::strlen(FILE_NAME_MASK);
     if (size > 0)
     {
         if (size > 1 && FILE_NAME_MASK[size - 2] == 0x07)
@@ -269,7 +269,7 @@ DEF_SMALL_BUTTON(   bDrive_Mask_Backspace,                                      
 static void OnPress_Drive_Mask_Insert()
 {
     int index = INDEX_SYMBOL;
-    int size = (int)strlen(FILE_NAME_MASK);
+    int size = (int)std::strlen(FILE_NAME_MASK);
     if (size == MAX_SYMBOLS_IN_FILE_NAME - 1)
     {
         return;
@@ -627,7 +627,7 @@ DEF_SMALL_BUTTON(   bSetName_Delete,                                            
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void OnPress_SetName_Backspace()
 {
-    int size = (int)strlen(FILE_NAME);
+    int size = (int)std::strlen(FILE_NAME);
     if (size > 0)
     {
         FILE_NAME[size - 1] = '\0';
@@ -651,7 +651,7 @@ DEF_SMALL_BUTTON(   bSetName_Backspace,                                         
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void OnPress_SetName_Insert()
 {
-    int size = (int)strlen(FILE_NAME);
+    int size = (int)std::strlen(FILE_NAME);
     if (size < MAX_SYMBOLS_IN_FILE_NAME - 1)
     {
         FILE_NAME[size] = Tables::symbolsAlphaBet[INDEX_SYMBOL][0];

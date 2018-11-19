@@ -11,7 +11,7 @@
 #include "Settings/Settings.h"
 #include "Data/DataBuffer.h"
 #include "Data/DataStorage.h"
-#include <string.h>
+#include <cstring>
 #include <stdlib.h>
 #endif
 
@@ -323,7 +323,7 @@ void FPGA::ReadDataChanenlRand(Chan ch, uint8 *address, uint8 *data)
         dataRead += step;
     }
 
-    memcpy(data, &dataRand[ch][0], (uint)FPGA_NUM_POINTS);
+    std::memcpy(data, &dataRand[ch][0], (uint)FPGA_NUM_POINTS);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -698,7 +698,7 @@ void FPGA::LoadTBase()
         BIN_U8(01011110)     // 10s     100M    2Hz
     };
 
-    memset(&dataRand[0][0], 0, FPGA_MAX_NUM_POINTS * 2);
+    std::memset(&dataRand[0][0], 0, FPGA_MAX_NUM_POINTS * 2);
 
     FSMC::WriteToFPGA8(WR_TBASE, values[SET_TBASE]);
 

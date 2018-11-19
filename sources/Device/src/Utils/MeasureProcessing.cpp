@@ -10,7 +10,7 @@
 #include <math.h>
 #include <limits.h>
 #include <stdlib.h>
-#include <string.h>
+#include <cstring>
 #include <limits>
 #endif
 
@@ -1095,12 +1095,12 @@ void Measure::SetData(bool needSmoothing)
     if (ENABLED_DS_A)
     {
         Math::CalculateFiltrArray(IN_A, OUT_A, length, needSmoothing ? NUM_SMOOTHING : 1);
-        memcpy(IN_A, OUT_A, (uint)length);
+        std::memcpy(IN_A, OUT_A, (uint)length);
     };
     if (ENABLED_DS_B)
     {
         Math::CalculateFiltrArray(IN_B, OUT_B, length, needSmoothing ? NUM_SMOOTHING : 1);
-        memcpy(IN_B, OUT_B, (uint)length);
+        std::memcpy(IN_B, OUT_B, (uint)length);
     };
   
     //Processing::CountedToCurrentSettings();
@@ -1308,7 +1308,7 @@ char* Measure::Processing::GetStringMeasure(Measure::Type measure, Chan ch, char
     snprintf(buffer, 20, ch.IsA() ? "1: " : "2: ");
     if(!isSet || values[measure].value[ch] == ERROR_VALUE_FLOAT)
     {
-        strcat(buffer, "-.-");
+        std::strcat(buffer, "-.-");
     }
     else if(sMeas[measure].FuncCalculate)
     {
@@ -1322,10 +1322,10 @@ char* Measure::Processing::GetStringMeasure(Measure::Type measure, Chan ch, char
         }
                
         char *text = func(value, sMeas[measure].showSign, bufferForFunc);
-        int len = (int)strlen(text) + (int)strlen(buffer) + 1;
+        int len = (int)std::strlen(text) + (int)std::strlen(buffer) + 1;
         if (len + 1 <= lenBuf)
         {
-            strcat(buffer, text);
+            std::strcat(buffer, text);
         }
         else
         {
@@ -1356,8 +1356,8 @@ void Measure::Processing::CountedToCurrentSettings()
 
     CountedTShift();
 
-    memcpy(OUT_A, IN_A, (uint)NUM_BYTES_DS);
-    memcpy(OUT_B, IN_B, (uint)NUM_BYTES_DS);
+    std::memcpy(OUT_A, IN_A, (uint)NUM_BYTES_DS);
+    std::memcpy(OUT_B, IN_B, (uint)NUM_BYTES_DS);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -1402,8 +1402,8 @@ void Measure::Processing::CountedTShift()
             }
         }
 
-        memcpy(IN_A, OUT_A, (uint)numBytes);
-        memcpy(IN_B, OUT_B, (uint)numBytes);
+        std::memcpy(IN_A, OUT_A, (uint)numBytes);
+        std::memcpy(IN_B, OUT_B, (uint)numBytes);
     }
 }
 
@@ -1454,7 +1454,7 @@ void Measure::Processing::CountedRange(Chan ch)
             }
         }
 
-        memcpy(IN(ch), OUT(ch), (uint)numBytes);
+        std::memcpy(IN(ch), OUT(ch), (uint)numBytes);
     }
 }
 
@@ -1467,8 +1467,8 @@ void Measure::Processing::CountedTBase()
 
         int numBytes = NUM_BYTES_DS;
 
-        memset(OUT_A, NONE_VALUE, (uint)numBytes);
-        memset(OUT_B, NONE_VALUE, (uint)numBytes);
+        std::memset(OUT_A, NONE_VALUE, (uint)numBytes);
+        std::memset(OUT_B, NONE_VALUE, (uint)numBytes);
 
         const int index0 = TPOS.InBytes() - SET_TSHIFT.InPoints();
 
@@ -1485,8 +1485,8 @@ void Measure::Processing::CountedTBase()
         LinearInterpolation(OUT_A, numBytes);
         LinearInterpolation(OUT_B, numBytes);
 
-        memcpy(IN_A, OUT_A, (uint)numBytes);
-        memcpy(IN_B, OUT_B, (uint)numBytes);
+        std::memcpy(IN_A, OUT_A, (uint)numBytes);
+        std::memcpy(IN_B, OUT_B, (uint)numBytes);
     }
 }
 
@@ -1546,8 +1546,8 @@ void Measure::Processing::CountedEnumPoints()
 {
     int numBytes = NUM_BYTES_SET;
 
-    memset(OUT_A, NONE_VALUE, (uint)numBytes);
-    memset(OUT_B, NONE_VALUE, (uint)numBytes);
+    std::memset(OUT_A, NONE_VALUE, (uint)numBytes);
+    std::memset(OUT_B, NONE_VALUE, (uint)numBytes);
     
     int numBytesOld = NUM_BYTES_DS;                         // Это число байт в сигнале
 
@@ -1556,20 +1556,20 @@ void Measure::Processing::CountedEnumPoints()
         int index = 0;
         if (TPOS_IS_CENTER)    { index = (numBytes - numBytesOld) / 2; }
         else if(TPOS_IS_RIGHT) { index = numBytes - numBytesOld;       }
-        memcpy(OUT_A + index, IN_A, (uint)numBytesOld);
-        memcpy(OUT_B + index, IN_B, (uint)numBytesOld);
+        std::memcpy(OUT_A + index, IN_A, (uint)numBytesOld);
+        std::memcpy(OUT_B + index, IN_B, (uint)numBytesOld);
     }
     else
     {
         int index = 0;
         if(TPOS_IS_CENTER)      { index = (numBytesOld - numBytes) / 2; }
         else if (TPOS_IS_RIGHT) { index = numBytesOld - numBytes; }
-        memcpy(OUT_A, IN_A + index, (uint)numBytes);
-        memcpy(OUT_B, IN_B + index, (uint)numBytes);
+        std::memcpy(OUT_A, IN_A + index, (uint)numBytes);
+        std::memcpy(OUT_B, IN_B + index, (uint)numBytes);
     }
 
-    memcpy(IN_A, OUT_A, (uint)numBytes);
-    memcpy(IN_B, OUT_B, (uint)numBytes);
+    std::memcpy(IN_A, OUT_A, (uint)numBytes);
+    std::memcpy(IN_B, OUT_B, (uint)numBytes);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

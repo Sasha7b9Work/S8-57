@@ -37,7 +37,7 @@ static int numFiles = 0;
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void FileManager::Init()
 {
-    strcpy(currentDir, "\\");
+    std::strcpy(currentDir, "\\");
     numFirstDir = numFirstFile = numCurDir = numCurFile = 0;
 }
 
@@ -196,11 +196,11 @@ void FileManager::PressSB_LevelDown()
     StructForReadDir sfrd;
     if (FDrive::GetNameDir(currentDir, numCurDir, nameDir, &sfrd))
     {
-        if (strlen(currentDir) + strlen(nameDir) < 250)
+        if (std::strlen(currentDir) + std::strlen(nameDir) < 250)
         {
             FDrive::CloseCurrentDir(&sfrd);
-            strcat(currentDir, "\\");
-            strcat(currentDir, nameDir);
+            std::strcat(currentDir, "\\");
+            std::strcat(currentDir, nameDir);
             numFirstDir = numFirstFile = numCurDir = numCurFile = 0;
         }
 
@@ -212,11 +212,11 @@ void FileManager::PressSB_LevelDown()
 void FileManager::PressSB_LevelUp()
 {
     FM_NEED_REDRAW = FM_REDRAW_FULL;
-    if (strlen(currentDir) == 1)
+    if (std::strlen(currentDir) == 1)
     {
         return;
     }
-    char *pointer = currentDir + strlen(currentDir);
+    char *pointer = currentDir + std::strlen(currentDir);
     while (*pointer != '\\')
     {
         pointer--;
@@ -325,10 +325,10 @@ bool FileManager::GetNameForNewFile(char name[255])
 
     static int number = 0;
 
-    strcpy(name, currentDir);
-    strcat(name, "\\");
+    std::strcpy(name, currentDir);
+    std::strcat(name, "\\");
 
-    int size = (int)strlen(FILE_NAME);
+    int size = (int)std::strlen(FILE_NAME);
     if (size == 0)
     {
         return false;
@@ -337,9 +337,9 @@ bool FileManager::GetNameForNewFile(char name[255])
     if (FILE_NAMING_MODE_MANUAL)
     {
         LIMITATION(size, 1, 95);
-        strcat(name, FILE_NAME);
-        strcat(name, ".");
-        strcat(name, MODE_SAVE_BMP ? "bmp" : "txt");
+        std::strcat(name, FILE_NAME);
+        std::strcat(name, ".");
+        std::strcat(name, MODE_SAVE_BMP ? "bmp" : "txt");
         return true;
     }
     else
@@ -368,16 +368,16 @@ bool FileManager::GetNameForNewFile(char name[255])
                 if (*ch == 0x07)
                 {
                     number++;
-                    strcpy(wr, Integer(number).ToString(false, *(ch + 1), buffer));
-                    wr += strlen(buffer);
+                    std::strcpy(wr, Integer(number).ToString(false, *(ch + 1), buffer));
+                    wr += std::strlen(buffer);
                     ch++;
                 }
                 else
                 {
                     if (*ch >= 0x01 && *ch <= 0x06)
                     {
-                        strcpy(wr, Integer((int)values[*ch]).ToString(false, 2, buffer));
-                        wr += strlen(buffer);
+                        std::strcpy(wr, Integer((int)values[*ch]).ToString(false, 2, buffer));
+                        wr += std::strlen(buffer);
                     }
                 }
             }
@@ -387,7 +387,7 @@ bool FileManager::GetNameForNewFile(char name[255])
         *wr = '.';
         *(wr + 1) = '\0';
 
-        strcat(name, MODE_SAVE_BMP ? "bmp" : "txt");
+        std::strcat(name, MODE_SAVE_BMP ? "bmp" : "txt");
 
         return true;
     }

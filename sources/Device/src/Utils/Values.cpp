@@ -4,7 +4,7 @@
 #include "Values.h"
 #include "Math.h"
 #include "Settings/Settings.h"
-#include <string.h>
+#include <cstring>
 #include <math.h>
 #include <stdlib.h>
 #include <limits>
@@ -88,7 +88,7 @@ char* Integer::ToString(bool alwaysSign, int numMinFields, char buffer[20]) cons
     const int SIZE = 20;
     char format[SIZE] = "%";
     snprintf(&(format[1]), SIZE, "0%d", numMinFields);
-    strcat(format, "d");
+    std::strcat(format, "d");
     if (alwaysSign && value >= 0)
     {
         buffer[0] = '+';
@@ -110,7 +110,7 @@ char *Frequency::ToString(char bufferOut[20]) const
     const char *suffix = 0;
     if (Math::IsEquals(freq, ERROR_VALUE_FLOAT))
     {
-        strcat(bufferOut, ERROR_STRING_VALUE);
+        std::strcat(bufferOut, ERROR_STRING_VALUE);
         return bufferOut;
     }
     if (freq >= 1e6f)
@@ -128,8 +128,8 @@ char *Frequency::ToString(char bufferOut[20]) const
         suffix = LANG_RU ? "Ãö" : "Hz";
     }
     char buffer[20];
-    strcat(bufferOut, Float(freq).ToString(false, 4, buffer));
-    strcat(bufferOut, suffix);
+    std::strcat(bufferOut, Float(freq).ToString(false, 4, buffer));
+    std::strcat(bufferOut, suffix);
     return bufferOut;
 }
 
@@ -142,7 +142,7 @@ char *Frequency::ToStringAccuracy(char bufferOut[20], int numDigits) const
     const char *suffix = LANG_RU ? "Ãö" : "Hz";
     if (Math::IsEquals(freq, ERROR_VALUE_FLOAT))
     {
-        strcat(bufferOut, ERROR_STRING_VALUE);
+        std::strcat(bufferOut, ERROR_STRING_VALUE);
         return bufferOut;
     }
     if (freq >= 1e6f)
@@ -156,8 +156,8 @@ char *Frequency::ToStringAccuracy(char bufferOut[20], int numDigits) const
         freq /= 1e3f;
     }
     char buffer[20];
-    strcat(bufferOut, Float(freq).ToString(false, numDigits, buffer));
-    strcat(bufferOut, suffix);
+    std::strcat(bufferOut, Float(freq).ToString(false, numDigits, buffer));
+    std::strcat(bufferOut, suffix);
     return bufferOut;
 }
 
@@ -168,7 +168,7 @@ char *Time::ToString(bool alwaysSign, char buffer[20]) const
 
     if (Math::IsEquals(time, ERROR_VALUE_FLOAT))
     {
-        strcpy(buffer, ERROR_STRING_VALUE);
+        std::strcpy(buffer, ERROR_STRING_VALUE);
         return buffer;
     }
 
@@ -201,8 +201,8 @@ char *Time::ToString(bool alwaysSign, char buffer[20]) const
     }
 
     char bufferOut[20];
-    strcpy(buffer, Float(time * factor[num]).ToString(alwaysSign, 4, bufferOut));
-    strcat(buffer, suffix[LANG][num]);
+    std::strcpy(buffer, Float(time * factor[num]).ToString(alwaysSign, 4, bufferOut));
+    std::strcat(buffer, suffix[LANG][num]);
     return buffer;
 }
 
@@ -218,7 +218,7 @@ char* Time::ToStringAccuracy(bool alwaysSign, char buffer[20], int numDigits) co
 
     if (Math::IsEquals(time, ERROR_VALUE_FLOAT))
     {
-        strcat(buffer, ERROR_STRING_VALUE);
+        std::strcat(buffer, ERROR_STRING_VALUE);
         return buffer;
     }
     else if (fabsTime + 0.5e-10f < 1e-6f)
@@ -238,8 +238,8 @@ char* Time::ToStringAccuracy(bool alwaysSign, char buffer[20], int numDigits) co
     }
 
     char bufferOut[20];
-    strcat(buffer, Float(time).ToString(alwaysSign, numDigits, bufferOut));
-    strcat(buffer, suffix);
+    std::strcat(buffer, Float(time).ToString(alwaysSign, numDigits, bufferOut));
+    std::strcat(buffer, suffix);
 
     return buffer;
 }
@@ -250,7 +250,7 @@ char* Voltage::ToString(bool alwaysSign, char buffer[20]) const
 
     if (Math::IsEquals(voltage, ERROR_VALUE_FLOAT))
     {
-        strcpy(buffer, ERROR_STRING_VALUE);
+        std::strcpy(buffer, ERROR_STRING_VALUE);
         return buffer;
     }
 
@@ -286,8 +286,8 @@ char* Voltage::ToString(bool alwaysSign, char buffer[20]) const
 
     Float(voltage * factor[num]).ToString(alwaysSign, 4, bufferOut);
 
-    strcpy(buffer, bufferOut);
-    strcat(buffer, suf[LANG][num]);
+    std::strcpy(buffer, bufferOut);
+    std::strcat(buffer, suf[LANG][num]);
     return buffer;
 }
 
@@ -311,7 +311,7 @@ char *Float::ToString(bool alwaysSign, int numDigits, char bufferOut[20]) const
 
     if (Math::IsEquals(_value, ERROR_VALUE_FLOAT))
     {
-        strcpy(bufferOut, ERROR_STRING_VALUE);
+        std::strcpy(bufferOut, ERROR_STRING_VALUE);
         return bufferOut;
     }
     
@@ -357,9 +357,9 @@ char *Float::ToString(bool alwaysSign, int numDigits, char bufferOut[20]) const
     }
     
     bool signExist = alwaysSign || _value < 0;
-    while (strlen(bufferOut) < (size_t)(numDigits + (signExist ? 2 : 1)))
+    while (std::strlen(bufferOut) < (size_t)(numDigits + (signExist ? 2 : 1)))
     {
-        strcat(bufferOut, "0");
+        std::strcat(bufferOut, "0");
     }
     
     return bufferOut;

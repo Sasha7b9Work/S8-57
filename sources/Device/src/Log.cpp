@@ -4,7 +4,7 @@
 #include "log.h"
 #include "Display/Console.h"
 #include <stdarg.h>
-#include <string.h>
+#include <cstring>
 #include <stdio.h>
 #endif
 

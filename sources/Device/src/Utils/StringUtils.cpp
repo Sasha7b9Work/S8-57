@@ -3,7 +3,7 @@
 #include "defines.h"
 #include "Utils/StringUtils.h"
 #include "Values.h"
-#include <string.h>
+#include <cstring>
 #include <ctype.h>
 #endif
 
@@ -20,7 +20,7 @@ bool String2Int(char *str, int *value)
     {
         str++;
     }
-    uint length = strlen(str);
+    uint length = std::strlen(str);
     if (length == 0)
     {
         return false;
@@ -53,8 +53,8 @@ char *SU::Db2String(float value, int numDigits, char bufferOut[20])
 {
     bufferOut[0] = 0;
     char buffer[20];
-    strcat(bufferOut, Float(value).ToString(false, numDigits, buffer));
-    strcat(bufferOut, "Да");
+    std::strcat(bufferOut, Float(value).ToString(false, numDigits, buffer));
+    std::strcat(bufferOut, "Да");
     return bufferOut;
 }
 
@@ -196,7 +196,7 @@ bool SU::EqualsStrings(char *str1, char *str2, int size)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 bool SU::EqualsStrings(char *str1, char *str2)
 {
-    uint size = strlen(str1);
+    uint size = std::strlen(str1);
 
     for (uint i = 0; i < size; i++)
     {

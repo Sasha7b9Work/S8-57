@@ -121,11 +121,11 @@ void BottomPart::Draw()
         float freq = FrequencyCounter::GetFreq();
         if (freq == -1.0f)
         {
-            strcat(mesFreq, "******");
+            std::strcat(mesFreq, "******");
         }
         else
         {
-            strcat(mesFreq, Frequency(freq).ToString(buffer));
+            std::strcat(mesFreq, Frequency(freq).ToString(buffer));
         }
         Painter::DrawText(x + 3, Grid::Bottom() + 2, mesFreq, Color::FILL);
     }

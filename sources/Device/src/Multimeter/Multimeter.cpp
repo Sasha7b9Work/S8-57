@@ -7,7 +7,7 @@
 #include "Hardware/Hardware.h"
 #include "Hardware/Timer.h"
 #include "Device.h"
-#include <string.h>
+#include <cstring>
 #endif
 
 
@@ -26,7 +26,7 @@ static char out[SIZE_OUT];
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void Multimeter::SetMeasure(uint8 buf[10])
 {
-    memcpy(buffer, buf, 10);
+    std::memcpy(buffer, buf, 10);
     buffer[2] |= 0x30;
     buffer[3] |= 0x30;
     buffer[4] |= 0x30;
@@ -37,7 +37,7 @@ void Multimeter::SetMeasure(uint8 buf[10])
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Multimeter::ChangeMode()
 {
-    memset(buffer, '8', 10);
+    std::memset(buffer, '8', 10);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -122,7 +122,7 @@ void Multimeter::Graphics::Update()
 
     Painter::BeginScene(Color::BACK);
 
-    memset(out, 0, SIZE_OUT);
+    std::memset(out, 0, SIZE_OUT);
 
     Measure meas = Measure::ForSymbol(buffer[7]);
     if(meas == Measure::Number)

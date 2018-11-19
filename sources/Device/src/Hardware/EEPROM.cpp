@@ -4,7 +4,7 @@
 #include "EEPROM.h"
 #include "Hardware.h"
 #include "Hardware/Sound.h"
-#include <string.h>
+#include <cstring>
 #endif
 
 
@@ -239,7 +239,7 @@ int OTPmem::GetSerialNumber(char buffer[17])
         return allShotsMAX;
     }
 
-    strcpy(buffer, (char *)address);
+    std::strcpy(buffer, (char *)address);
 
     return allShotsMAX - (address - (uint8 *)FLASH_OTP_BASE) / 16 - 1;
 }
@@ -275,7 +275,7 @@ bool OTPmem::SaveSerialNumber(char *servialNumber)
 
     if (address < (uint8 *)FLASH_OTP_END - 16)
     {
-        WriteBufferBytes((uint)address, (uint8 *)servialNumber, (int)strlen(servialNumber) + 1);
+        WriteBufferBytes((uint)address, (uint8 *)servialNumber, (int)std::strlen(servialNumber) + 1);
         return true;
     }
 

@@ -8,7 +8,7 @@
 #include "FPGA/FPGAMath.h"
 #include "Utils/StringUtils.h"
 #include "Utils/Values.h"
-#include <string.h>
+#include <cstring>
 #endif
 
 
@@ -39,12 +39,12 @@ pString Cursors::Voltage(Chan source, int numCur, char buffer[20])
 float Cursors::PosT(Chan ch, int num)
 {
     float retValue = 0.0f;
-    memcpy(&retValue, &set.curs_posCurT[ch][num], sizeof(float));
+    std::memcpy(&retValue, &set.curs_posCurT[ch][num], sizeof(float));
     return retValue;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Cursors::SetCursPosT_temp(Chan ch, int num, float value)
 {
-    memcpy(&set.curs_posCurT[ch][num], &value, sizeof(float));
+    std::memcpy(&set.curs_posCurT[ch][num], &value, sizeof(float));
 }

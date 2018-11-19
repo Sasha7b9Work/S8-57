@@ -1,8 +1,7 @@
 #include "defines.h"
 #include "MenuTriggers.h"
 #include "Display/Display.h"
-
-#include <string.h>
+#include <cstring>
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -22,7 +21,7 @@ bool TriggerDebugConsole::Update(Key button)
         }
         bufferForButtons[0] = button;
 
-        if (memcmp(bufferForButtons, sampleBufferForButtons, SIZE_BUFFER_FOR_BUTTONS) == 0)
+        if (std::memcmp(bufferForButtons, sampleBufferForButtons, SIZE_BUFFER_FOR_BUTTONS) == 0)
         {
             SHOW_DEBUG_MENU = 1;
             Display::ShowWarning(Warning::MenuDebugEnabled);

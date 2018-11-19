@@ -8,7 +8,7 @@
 #include "Hardware/CPU.h"
 #include "Settings/Settings.h"
 
-#include <string.h>
+#include <cstring>
 
 #ifdef WIN32
 #include <cstdio>
@@ -561,14 +561,14 @@ void TimeControl::DrawOpened(int x, int y)
     };
 
     char strI[8][20];
-    strcpy(strI[iEXIT],  "Не сохранять");
-    strcpy(strI[iDAY],   Integer(*day).ToString(false, 2, buffer));
-    strcpy(strI[iMONTH], Integer(*month).ToString(false, 2, buffer));
-    strcpy(strI[iYEAR],  Integer(*year).ToString(false, 2, buffer));
-    strcpy(strI[iHOURS], Integer(*hours).ToString(false, 2, buffer));
-    strcpy(strI[iMIN],   Integer(*minutes).ToString(false, 2, buffer));
-    strcpy(strI[iSEC],   Integer(*seconds).ToString(false, 2, buffer));
-    strcpy(strI[iSET],   "Сохранить");
+    std::strcpy(strI[iEXIT],  "Не сохранять");
+    std::strcpy(strI[iDAY],   Integer(*day).ToString(false, 2, buffer));
+    std::strcpy(strI[iMONTH], Integer(*month).ToString(false, 2, buffer));
+    std::strcpy(strI[iYEAR],  Integer(*year).ToString(false, 2, buffer));
+    std::strcpy(strI[iHOURS], Integer(*hours).ToString(false, 2, buffer));
+    std::strcpy(strI[iMIN],   Integer(*minutes).ToString(false, 2, buffer));
+    std::strcpy(strI[iSEC],   Integer(*seconds).ToString(false, 2, buffer));
+    std::strcpy(strI[iSET],   "Сохранить");
 
     Painter::DrawText(x + 3, y + y0, "д м г - ", Color::WHITE);
     Painter::DrawText(x + 3, y + y1, "ч м с - ");

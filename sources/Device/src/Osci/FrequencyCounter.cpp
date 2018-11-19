@@ -12,7 +12,7 @@
 #include "Menu/Pages/Include/PageFunction.h"
 #include "Utils/Math.h"
 #include "Hardware/Timer.h"
-#include <string.h>
+#include <cstring>
 #include <limits>
 #endif
 
@@ -559,7 +559,7 @@ void FrequencyCounter::WriteStackToBuffer(Stack<uint> *stack, int point, char *s
         buffer[i] = ((char)stack->Pop() | 0x30);
     }
 
-    strcpy(&buffer[7], suffix);
+    std::strcpy(&buffer[7], suffix);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -603,23 +603,23 @@ pString FrequencyCounter::FreqSetToString(const BitSet32 *fr)
 
 #undef WRITE_SUFFIX
 #define WRITE_SUFFIX(suffix_E4)    \
-    if(giverFreq < _1kHz) { strcpy(buffer + 7, suffix_E4); } else if (giverFreq < _1MHz) { strcpy(buffer + 7, "к√ц"); } else { strcpy(buffer + 7, "ћ√ц"); }
+    if(giverFreq < _1kHz) { std::strcpy(buffer + 7, suffix_E4); } else if (giverFreq < _1MHz) { std::strcpy(buffer + 7, "к√ц"); } else { std::strcpy(buffer + 7, "ћ√ц"); }
 
-#define HIGH_FREQ                       \
-    if(giverFreq < _10MHz)              \
-    {                                   \
-        memcpy(buffer, buffer + 1, 2);  \
-        buffer[1] = '.';                \
-    }                                   \
-    else if (giverFreq < _100MHz)       \
-    {                                   \
-        memcpy(buffer, buffer + 1, 3);  \
-        buffer[2] = '.';                \
-    }                                   \
-    else                                \
-    {                                   \
-        memcpy(buffer, buffer + 1, 3);  \
-        buffer[3] = '.';                \
+#define HIGH_FREQ                           \
+    if(giverFreq < _10MHz)                  \
+    {                                       \
+        std::memcpy(buffer, buffer + 1, 2); \
+        buffer[1] = '.';                    \
+    }                                       \
+    else if (giverFreq < _100MHz)           \
+    {                                       \
+        std::memcpy(buffer, buffer + 1, 3); \
+        buffer[2] = '.';                    \
+    }                                       \
+    else                                    \
+    {                                       \
+        std::memcpy(buffer, buffer + 1, 3); \
+        buffer[3] = '.';                    \
     }
 
 
@@ -635,7 +635,7 @@ pString FrequencyCounter::FreqSetToString(const BitSet32 *fr)
             {
                 if(freq >= _10Hz)                       // Ѕольше или равно 10 √ц
                 {
-                    memcpy(buffer, buffer + 1, 5);
+                    std::memcpy(buffer, buffer + 1, 5);
                 }
                 buffer[4] = '.';
             }
@@ -655,12 +655,12 @@ pString FrequencyCounter::FreqSetToString(const BitSet32 *fr)
             {
                 if(giverFreq < _1kHz)                   // ћеньше 1 к√ц
                 {
-                    memcpy(buffer, buffer + 1, 6);
+                    std::memcpy(buffer, buffer + 1, 6);
                     buffer[6] = '.';
                 }
                 else
                 {
-                    memcpy(buffer, buffer + 1, 4);
+                    std::memcpy(buffer, buffer + 1, 4);
                     buffer[3] = '.';
                 }
             }
@@ -678,17 +678,17 @@ pString FrequencyCounter::FreqSetToString(const BitSet32 *fr)
             {
                 if (giverFreq < _1kHz)              // ћеньше 1 к√ц
                 {
-                    memcpy(buffer, buffer + 1, 5);
+                    std::memcpy(buffer, buffer + 1, 5);
                     buffer[5] = '.';
                 }
                 else if(giverFreq < _100kHz)
                 {
-                    memcpy(buffer, buffer + 1, 3);
+                    std::memcpy(buffer, buffer + 1, 3);
                     buffer[2] = '.';
                 }
                 else
                 {
-                    memcpy(buffer, buffer + 1, 3);
+                    std::memcpy(buffer, buffer + 1, 3);
                     buffer[3] = '.';
                 }
             }
