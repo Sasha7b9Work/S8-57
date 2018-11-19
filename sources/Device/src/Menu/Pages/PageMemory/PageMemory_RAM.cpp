@@ -114,7 +114,7 @@ DEF_SMALL_BUTTON(bLast_SaveToDrive,                                             
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-static void OnPress_Last(bool enter)
+static void OnPress_RAM(bool enter)
 {
     if (enter)
     {
@@ -130,7 +130,7 @@ static void OnPress_Last(bool enter)
     }
 }
 
-static void OnDraw_Last()
+static void OnDraw_RAM()
 {
     char buffer[20];
 
@@ -140,10 +140,10 @@ static void OnDraw_Last()
     Painter::DrawRectangle(Grid::Right() - width, Grid::Top(), width, height, Color::FILL);
     Painter::DrawText(Grid::Right() - width + 2, Grid::Top() + 1, Integer(NUM_RAM_SIGNAL + 1).ToString(false, 3, buffer));
     Painter::DrawText(Grid::Right() - width + 17, Grid::Top() + 1, "/");
-    Painter::DrawText(Grid::Right() - width + 23, Grid::Top() + 1, Integer(DataStorage::NumElementsInStorage()).ToString(false, 3, buffer));
+    Painter::DrawText(Grid::Right() - width + 23, Grid::Top() + 1, Integer((int)DataStorage::NumElementsInStorage()).ToString(false, 3, buffer));
 }
 
-static bool OnRegSet_Last(int angle)
+static bool OnRegSet_RAM(int angle)
 {
     if (DataStorage::NumElementsInStorage() > 1)
     {
@@ -161,7 +161,7 @@ static bool OnRegSet_Last(int angle)
     return true;
 }
 
-DEF_PAGE_4(pageRAM,                                                                                                  // ПАМЯТЬ - ПОСЛЕДНИЕ ///
+DEF_PAGE_4(pageRAM,                                                                                                                                                /// ПАМЯТЬ - ПОСЛЕДНИЕ ///
     "ПОСЛЕДНИЕ", "LATEST",
     "Переход в режим работы с последними полученными сигналами",
     "Transition to an operating mode with the last received signals",
@@ -169,5 +169,5 @@ DEF_PAGE_4(pageRAM,                                                             
     &bLast_Prev,                        ///< ПАМЯТЬ - ПОСЛЕДНИЕ - Предыдущий
     &bLast_SaveToROM,                   ///< ПАМЯТЬ - ПОСЛЕДНИЕ - Внутр ЗУ
     &bLast_SaveToDrive,                 ///< ПАМЯТЬ - ПОСЛЕДНИЕ - Сохранить
-    Page::Name::SB_Memory_Last, PageMemory::pointer, FuncActive, OnPress_Last, OnDraw_Last, OnRegSet_Last
+    Page::Name::SB_Memory_Last, PageMemory::pointer, FuncActive, OnPress_RAM, OnDraw_RAM, OnRegSet_RAM
 )

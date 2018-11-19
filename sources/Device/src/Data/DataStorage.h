@@ -13,7 +13,7 @@ public:
 
     static bool GetData(DataSettings *ds);
 
-    static int NumElementsInStorage();
+    static uint NumElementsInStorage();
 
     static DataSettings *DataSettingsFromEnd(int fromEnd);
 
