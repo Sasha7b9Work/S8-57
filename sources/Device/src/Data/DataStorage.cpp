@@ -3,6 +3,8 @@
 #include "defines.h"
 #include "DataBuffer.h"
 #include "DataStorage.h"
+#include "Reader.h"
+#include <string.h>
 #endif
 
 
@@ -15,7 +17,10 @@ void DataStorage::Init()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void DataStorage::Push(DataSettings *ds)
 {
-    DataBuffer::Push(ds);
+    //DataBuffer::Push(ds);
+
+    memcpy(OUT_A, ds->DataA(), FPGA_MAX_NUM_POINTS);
+    memcpy(OUT_B, ds->DataB(), FPGA_MAX_NUM_POINTS);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
