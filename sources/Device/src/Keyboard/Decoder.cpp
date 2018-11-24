@@ -48,15 +48,11 @@ void Decoder::Update()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Decoder::RunStep(uint8 data)
 {
-    static const struct StructFunc
-    {
-        pFuncBU8 func;
-        StructFunc(pFuncBU8 f) : func(f) {};
-    }
-    commands[Command::Number] =
+    DEF_STRUCT(StructFunc, pFuncBU8) commands[Command::Number] =
     {
         &Decoder::EmptyFunc,
         &Decoder::ButtonPress,
+        &Decoder::EmptyFunc,
         &Decoder::EmptyFunc,
         &Decoder::EmptyFunc,
         &Decoder::EmptyFunc,
@@ -77,7 +73,7 @@ void Decoder::RunStep(uint8 data)
 
         if (data < Command::Number)
         {
-            curFunc = commands[data].func;
+            curFunc = commands[data].value;
         }
         else
         {

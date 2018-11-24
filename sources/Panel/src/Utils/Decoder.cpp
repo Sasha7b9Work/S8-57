@@ -15,12 +15,7 @@ int      Decoder::step = 0;
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void Decoder::AddData(uint8 data)
 {
-    static const struct StructFunc
-    {
-        pFuncBU8 func;
-        StructFunc(pFuncBU8 f) : func(f) {};
-    }
-    command[Command::Number] =
+    DEF_STRUCT(StructFunc, pFuncBU8) command[Command::Number] =
     {
         &Decoder::EmptyFunc,
         &Decoder::InButtonPress,
@@ -36,14 +31,15 @@ void Decoder::AddData(uint8 data)
         &Decoder::SetFont,
         &Decoder::SetPoint,
         &Decoder::DrawLine,
-        &Decoder::DrawTesterPoints
+        &Decoder::DrawTesterPoints,
+        &Decoder::DrawBigText
     };
 
     if (step == 0)
     {
         if (data < Command::Number)
         {
-            curFunc = command[data].func;
+            curFunc = command[data].value;
         }
         else
         {
@@ -317,6 +313,42 @@ bool Decoder::DrawText(uint8 data)
                 return true;
             }
             break;
+    }
+    return false;
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+bool Decoder::DrawBigText(uint8 data)
+{
+    static int x;
+    static int y;
+    static uint8 size;
+    static int numSymbols;
+    static int readingSymbols;
+    static char *buffer;
+
+    switch (step)
+    {
+    case 0:                             break;
+    case 1:     x = data;               break;
+    case 2:     x += (int)data << 8;    break;
+    case 3:     y = data;               break;
+    case 4:     size = data;            break;
+    case 5:
+        numSymbols = data;
+        readingSymbols = 0;
+        buffer = new char[(uint)(numSymbols + 1)];
+        break;
+    default:
+        buffer[readingSymbols++] = (char)data;
+        if (readingSymbols == numSymbols)
+        {
+            buffer[readingSymbols] = 0;
+            Painter::DrawBigText(x, y, size, buffer);
+            delete[] buffer;
+            return true;
+        }
+        break;
     }
     return false;
 }

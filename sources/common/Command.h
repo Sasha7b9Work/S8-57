@@ -21,6 +21,7 @@ struct Command
 /* 12 */    Paint_SetPoint,         // 12 |   x[0:7] |  x[8:15]   |      y      |              |              |        |
 /* 13 */    Paint_DrawLine,         // 13 |  x0[0:7] | x0[8:15]   |     y0      |   x1[0:7]    |   x1[8:15]   |   y1   |
 /* 14 */    Paint_TesterLines,      // 14 |   mode   |   Color    | x[TESTER_NUM_POINTS]        y[TESTER_NUM_POINTS]              483
-/* 15 */    Number
+/* 15 */    Paint_DrawBigText,      // 15 |   x[0:7] |  x[8:15]   |      y      | num symbols  |              |        |
+/* 16 */    Number
     } value;
 };

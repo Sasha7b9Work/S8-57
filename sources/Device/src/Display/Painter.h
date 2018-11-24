@@ -20,6 +20,8 @@ public:
 
     static int DrawText(int x, int y, const char *text, Color color = Color::NUMBER);
 
+    static void DrawBigText(int x, int y, int size, const char *text, Color color = Color::NUMBER);
+
     static void SetColorValue(Color color, uint value);
 
     static void DrawRectangle(int x, int y, int width, int height, Color color = Color::NUMBER);
@@ -75,8 +77,6 @@ public:
     static void Draw10SymbolsInRect(int x, int y, char eChar);
 
     static void DrawTextRelativelyRight(int xRight, int y, const char *text, Color color = Color::NUMBER);
-
-    static void DrawBigText(int x, int y, int size, const char *text, Color color = Color::NUMBER);
 
     static void DrawTextInRect(int x, int y, int width, const char *text);
 

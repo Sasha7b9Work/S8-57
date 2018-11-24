@@ -27,6 +27,8 @@ private:
 
     static bool DrawText(uint8);
 
+    static bool DrawBigText(uint8);
+
     static bool SetPalette(uint8);
 
     static bool DrawRectangle(uint8);

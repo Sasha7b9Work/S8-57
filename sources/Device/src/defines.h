@@ -71,7 +71,7 @@ inline bool EmptyFuncBI(int) { return false; }
 #define _SET_BIT(value, bit) ((value) |= (1 << (bit)))
 
 
-#define DEF_STRUCT(name, type)      \
+#define DEF_STRUCT(name, type)  \
 static const struct name        \
 {                               \
     type value;                 \
