@@ -439,3 +439,9 @@ void Frame::OnUp(wxCommandEvent &event)
 
     Menu::ButtonEvent(KeyEvent(key, TypePress::Release));
 }
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Painter::DrawBigText(int /*eX*/, int /*eY*/, uint8 /*sizeSymbol*/, const char * /*text*/, Color /*color*/)
+{
+
+}
