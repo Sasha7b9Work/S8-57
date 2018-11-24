@@ -28,17 +28,28 @@ static void OnChanged_FreqMeter_Period(bool)
 }
 
 
-DEF_CHOICE_2(cFreqMeter_Enable,                                                                                                                   //--- ФУНКЦИЯ - ЧАСТОТОМЕР - Частотомер ---
+DEF_CHOICE_2( cEnable,                                                                                                                            //--- ФУНКЦИЯ - ЧАСТОТОМЕР - Частотомер ---
     "Частотомер", "Freq meter",
     "",
     "",
     DISABLE_RU, DISABLE_EN,
     ENABLE_RU, ENABLE_EN,
-    (FREQ_METER_ENABLED.value), ppFreqMeter, FuncActive, OnChanged_FreqMeter_Enable, FuncDraw
+    FREQ_METER_ENABLED, ppFreqMeter, FuncActive, OnChanged_FreqMeter_Enable, FuncDraw
 )
 
+
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-DEF_CHOICE_3(cFreqMeter_TimeF,                                                                                                                 //--- ФУНКЦИЯ - ЧАСТОТОМЕР - Время счёта F ---
+DEF_CHOICE_2( cModeView,                                                                                                                               //--- ФУНКЦИЯ - ЧАСТОТОМЕР - Режим ---
+    "Режим", "Mode",
+    "", "",
+    "Частота", "Frequency",
+    "Период",  "Period",
+    FREQ_METER_MODE_VIEW, ppFreqMeter, FuncActive, FuncChangedChoice, FuncDraw
+)
+
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+DEF_CHOICE_3( cTimeF,                                                                                                                          //--- ФУНКЦИЯ - ЧАСТОТОМЕР - Время счёта F ---
     "Время счёта F", "Time calc F",
     "Позволяет выбрать точность измерения частоты - чем больше время, тем больше точность и больше время измерения",
     "Allows to choose the accuracy of measurement of frequency - the more time, the accuracy more time of measurement is more",
@@ -48,8 +59,9 @@ DEF_CHOICE_3(cFreqMeter_TimeF,                                                  
     FREQ_METER_TIMECOUNTING, ppFreqMeter, FuncActive, OnChanged_FreqMeter_Frequency, FuncDraw
 )
 
+
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-DEF_CHOICE_4(cFreqMeter_FreqClc,                                                                                                               //--- ФУНКЦИЯ - ЧАСТОТОМЕР - Метки времени ---
+DEF_CHOICE_4( cFreqClc,                                                                                                                        //--- ФУНКЦИЯ - ЧАСТОТОМЕР - Метки времени ---
     "Метки времени", "Timestamps",
     "Выбор частоты следования счётных импульсов",
     "Choice of frequency of following of calculating impulses",
@@ -61,7 +73,7 @@ DEF_CHOICE_4(cFreqMeter_FreqClc,                                                
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-DEF_CHOICE_6(cFreqMeter_NumPeriods,                                                                                                          //--- ФУНКЦИЯ - ЧАСТОТОМЕР - Кол-во периодов ---
+DEF_CHOICE_6( cNumPeriods,                                                                                                                   //--- ФУНКЦИЯ - ЧАСТОТОМЕР - Кол-во периодов ---
     "Кол периодов", "Num periods",
     "Позволяет выбрать точность измерения периода - чем больше время, тем больше точность и больше время измерения",
     "Allows to choose the accuracy of measurement of period - the more time, the accuracy more time of measurement is more",
@@ -80,26 +92,27 @@ const PageBase *PageFunction::PageFrequencyCounter::pointer = &ppFreqMeter;
 
 const Choice *PageFunction::PageFrequencyCounter::GetChoiceTimeF()
 {
-    return (const Choice *)&cFreqMeter_TimeF;
+    return (const Choice *)&cTimeF;
 }
 
 const Choice *PageFunction::PageFrequencyCounter::GetChoiceFreqClc()
 {
-    return (const Choice *)&cFreqMeter_FreqClc;
+    return (const Choice *)&cFreqClc;
 }
 
 const Choice *PageFunction::PageFrequencyCounter::GetChoiceNumPeriods()
 {
-    return (const Choice *)&cFreqMeter_NumPeriods;
+    return (const Choice *)&cNumPeriods;
 }
 
-DEF_PAGE_4(ppFreqMeter,                                                                                                                                        //--- ФУНКЦИЯ - ЧАСТОТОМЕР ---
+DEF_PAGE_5(ppFreqMeter,                                                                                                                                        //--- ФУНКЦИЯ - ЧАСТОТОМЕР ---
     "ЧАСТОТОМЕР", "FREQ METER",
     "",
     "",
-    &cFreqMeter_Enable,      // ИЗМЕРЕНИЯ - ЧАСТОТОМЕР - Частотомер
-    &cFreqMeter_TimeF,       // ИЗМЕРЕНИЯ - ЧАСТОТОМЕР - Время счёта F
-    &cFreqMeter_FreqClc,     // ИЗМЕРЕНИЯ - ЧАСТОТОМЕР - Метки времени
-    &cFreqMeter_NumPeriods,  // ИЗМЕРЕНИЯ - ЧАСТОТОМЕР - Кол-во периодов
+    &cEnable,           ///< ИЗМЕРЕНИЯ - ЧАСТОТОМЕР - Частотомер
+    &cModeView,         ///< ИЗМЕРЕНИЯ - ЧАСТОТОМЕР - Режим
+    &cTimeF,            ///< ИЗМЕРЕНИЯ - ЧАСТОТОМЕР - Время счёта F
+    &cFreqClc,          ///< ИЗМЕРЕНИЯ - ЧАСТОТОМЕР - Метки времени
+    &cNumPeriods,       ///< ИЗМЕРЕНИЯ - ЧАСТОТОМЕР - Кол-во периодов
     Page::Name::Function_FrequencyCounter, PageFunction::pointer, FuncActive, EmptyPressPage, FuncDrawPage, FuncRegSetPage
 )

@@ -3,6 +3,7 @@
 
 
 #define FREQ_METER_ENABLED              (set.freq_enabled)
+#define FREQ_METER_MODE_VIEW            (set.freq_modeView)
 #define FREQ_METER_IS_ENABLED           (FREQ_METER_ENABLED.value == FrequencyCounter::Enabled::On)
 #define FREQ_METER_TIMECOUNTING         (set.freq_timeCounting)
 #define FREQ_METER_FREQ_CLC             (set.freq_freqClc)
@@ -76,6 +77,17 @@ public:
             On
         } value;
         uint8 ToUINT8() const { return (uint8)value; };
+    };
+
+    /// Что показывать - период или частоту
+    struct ModeView
+    {
+        enum E
+        {
+            Frequency,
+            Period,
+            Number
+        } value;
     };
 
 private:
