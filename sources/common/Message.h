@@ -5,8 +5,9 @@
 class Message
 {
 public:
-    Message(uint size, uint8);
-    Message(uint size, uint8, uint8);
+    explicit Message(uint size, uint8);
+    explicit Message(uint size, uint8, uint8);
+    explicit Message(uint size, uint8, uint16, uint8);
     ~Message();
 
     uint Size() const { return allocated; }
@@ -16,6 +17,8 @@ public:
 private:
     /// Положить один байт
     void PutByte(uint8);
+    /// Положить послова
+    void PutHalfWord(uint16);
     /// Выделить память
     bool Allocate(uint size);
     /// Освободить занятую память

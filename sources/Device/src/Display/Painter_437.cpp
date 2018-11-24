@@ -35,16 +35,22 @@ void Painter::EndScene()
 void Painter::SetPoint(int x, int y, Color color)
 {
     SetColor(color);
-    uint8 buffer[4] = { Command::Paint_SetPoint, (uint8)x, (uint8)(x >> 8), (uint8)y };
-    FSMC::WriteToPanel(buffer, 4);
+
+    Message message(4, Command::Paint_SetPoint, (uint16)x, (uint8)y);
+
+    FSMC::WriteToPanel(&message);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Painter::SetColorValue(Color color, uint value)
 {
+    /*
     uint8 buffer[6] = { Command::Paint_SetPalette, color.value, (uint8)value, (uint8)(value >> 8), (uint8)(value >> 16), (uint8)(value >> 24) };
 
     FSMC::WriteToPanel(buffer, 6);
+    */
+
+    Message message(6)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
