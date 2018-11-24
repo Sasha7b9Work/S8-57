@@ -269,7 +269,7 @@ void HAL_GPIO_EXTI_Callback(uint16_t pin)
 void Tester::LoadPolarity()
 {
     // ”станавливаем пол€рность
-    HAL_GPIO_WritePin(Port_PNP, Pin_PNP, TESTER_POLARITY_IS_POSITITVE ? GPIO_PIN_RESET : GPIO_PIN_SET);
+    HAL_GPIO_WritePin(Port_PNP, Pin_PNP, TESTER_POLARITY_IS_POSITITVE ? GPIO_PIN_SET : GPIO_PIN_RESET);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

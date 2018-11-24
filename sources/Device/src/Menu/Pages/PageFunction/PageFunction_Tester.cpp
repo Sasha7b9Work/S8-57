@@ -20,7 +20,7 @@ static void OnChanged_Polarity(bool)
 }
 
 
-DEF_CHOICE_2(   cPolarity,                                                                                     //--- ТЕСТЕР-КОМПОНЕНТ - Полярность ---
+DEF_CHOICE_2(   cPolarity,                                                                                                                            //--- ТЕСТЕР-КОМПОНЕНТ - Полярность ---
     "Полярность", "Polarity",
     "Полярность испытательного воздействия",
     "Polarity of the test exposure",
@@ -45,7 +45,7 @@ void PageFunction::PageTester::OnChanged_Control(bool)
 }
 
 
-DEF_CHOICE_2(   cControl,                                                                                      //--- ТЕСТЕР-КОМПОНЕНТ - Управление ---
+DEF_CHOICE_2(   cControl,                                                                                                                             //--- ТЕСТЕР-КОМПОНЕНТ - Управление ---
     "Управление", "Control",
     "Тип испытательного воздействия",
     "Type of test exposure",
@@ -60,7 +60,7 @@ static void OnChanged_Step(bool)
     Tester::LoadStep();
 }
 
-DEF_CHOICE_2(   cStepU,                                                                                                 //--- ТЕСТЕР-КОМПОНЕНТ - Шаг ---
+DEF_CHOICE_2(   cStepU,                                                                                                                                      //--- ТЕСТЕР-КОМПОНЕНТ - Шаг ---
     "Шаг", "Step",
     "Шаг испытательного напряжения",
     "Test voltage step",
