@@ -64,7 +64,9 @@ public:
 
     static int DrawText(int x, int y, const char *text, Color color = Color::NUMBER);
 
-    static int DrawBigText(int x, int y, uint8 size, pString text);
+    static void DrawBigText(int x, int y, uint8 size, pString text);
+
+    static int DrawBigChar(int eX, int eY, int size, char symbol);
 
     /// Выводит текст на прямоугольнике цвета colorBackgound
     static int DrawTextOnBackground(int x, int y, const char *text, Color colorBackground);

@@ -155,6 +155,25 @@ int Painter::DrawText(int x, int y, const char *text, Color color)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Painter::DrawBigText(int eX, int eY, uint8 sizeSymbol, const char *text, Color color)
+{
+    SetColor(color);
+
+    uint numSymbols = std::strlen(text);
+    uint size = 1 + 2 + 1 + 1 + numSymbols + 1;
+    uint8 buffer[MAX_SIZE_BUFFER] = { Command::Paint_DrawBigText, (uint8)eX, (uint8)(eX >> 8), (uint8)eY, sizeSymbol, (uint8)(size - 6) };
+
+    uint8 *pointer = &buffer[6];
+
+    while (*text)
+    {
+        *pointer++ = (uint8)*text++;
+    }
+
+    FSMC::WriteToPanel(buffer, (int)size);
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 int Painter::DrawChar(int x, int y, char symbol, Color color)
 {
     DrawFormatText(x, y, color, "%c", symbol);
