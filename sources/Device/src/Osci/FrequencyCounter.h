@@ -2,12 +2,14 @@
 #include "Utils/Stack.h"
 
 
-#define FREQ_METER_ENABLED              (set.freq_enabled)
-#define FREQ_METER_MODE_VIEW            (set.freq_modeView)
-#define FREQ_METER_IS_ENABLED           (FREQ_METER_ENABLED.value == FrequencyCounter::Enabled::On)
-#define FREQ_METER_TIMECOUNTING         (set.freq_timeCounting)
-#define FREQ_METER_FREQ_CLC             (set.freq_freqClc)
-#define FREQ_METER_NUM_PERIODS          (set.freq_numberPeriods)
+#define FREQ_METER_ENABLED                  (set.freq_enabled)
+#define FREQ_METER_IS_ENABLED               (FREQ_METER_ENABLED.value == FrequencyCounter::Enabled::On)
+#define FREQ_METER_MODE_VIEW                (set.freq_modeView)
+#define FREQ_METER_MODE_VIEW_IS_FREQUENCY   (FREQ_METER_MODE_VIEW.value == FrequencyCounter::ModeView::Frequency)
+#define FREQ_METER_MODE_VIEW_IS_PERIOD      (FREQ_METER_MODE_VIEW.value == FrequencyCounter::ModeView::Period)
+#define FREQ_METER_TIMECOUNTING             (set.freq_timeCounting)
+#define FREQ_METER_FREQ_CLC                 (set.freq_freqClc)
+#define FREQ_METER_NUM_PERIODS              (set.freq_numberPeriods)
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
