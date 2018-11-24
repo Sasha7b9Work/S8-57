@@ -8,6 +8,7 @@
 #include "tables.h"
 
 #include "Command.h"
+#include "Message.h"
 
 #include "Data/DataBuffer.h"
 #include "Data/DataSettings.h"

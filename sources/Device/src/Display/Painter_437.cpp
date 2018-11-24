@@ -1,5 +1,6 @@
 #include "defines.h"
 #include "Command.h"
+#include "Message.h"
 #include "Painter.h"
 #include "Hardware/FSMC.h"
 #include "Hardware/Timer.h"
@@ -17,8 +18,9 @@ void Painter::Init()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Painter::BeginScene(Color color)
 {
-    uint8 buffer[2] = { Command::Paint_BeginScene, color.value };
-    FSMC::WriteToPanel(buffer, 2);
+    Message message(2, Command::Paint_BeginScene, color.value);
+
+    FSMC::WriteToPanel(&message);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

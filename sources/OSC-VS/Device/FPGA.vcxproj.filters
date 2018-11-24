@@ -528,6 +528,9 @@
     <ClCompile Include="..\..\Device\src\Menu\Pages\PageMemory\PageMemory_RAM.cpp">
       <Filter>Menu\Pages\PageMemory</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\common\Message.cpp">
+      <Filter>common</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Device\src\Display\Display.h">
@@ -931,6 +934,9 @@
     </ClInclude>
     <ClInclude Include="..\..\Device\src\Utils\Buffer.h">
       <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\Message.h">
+      <Filter>common</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

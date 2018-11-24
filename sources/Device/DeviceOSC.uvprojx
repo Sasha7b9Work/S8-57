@@ -1838,6 +1838,26 @@
           </Files>
         </Group>
         <Group>
+          <GroupName>common</GroupName>
+          <Files>
+            <File>
+              <FileName>Command.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\common\Command.h</FilePath>
+            </File>
+            <File>
+              <FileName>Message.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\common\Message.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Message.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\common\Message.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
           <GroupName>src</GroupName>
           <Files>
             <File>

@@ -2,6 +2,7 @@
 #ifndef WIN32
 #include <stm32f4xx.h>
 #include "defines.h"
+#include "Message.h"
 #include "Keyboard/Decoder.h"
 #include "FSMC.h"
 #include "Timer.h"
@@ -221,11 +222,17 @@ void FSMC::WriteToPanel2bytes(uint8 byte0, uint8 byte1)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void FSMC::WriteToPanel(uint8 *data, int length)
+void FSMC::WriteToPanel(Message *msg)
+{
+    WriteToPanel(msg->Data(), msg->Size());
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void FSMC::WriteToPanel(uint8 *data, uint length)
 {
     interchangeWithPanel = true;
 
-    for (int i = 0; i < length;)                // !!!!! ВНИМАНИЕ !!!! Здесь счётчиком цикла управляем вручную
+    for (uint i = 0; i < length;)                // !!!!! ВНИМАНИЕ !!!! Здесь счётчиком цикла управляем вручную
     {
         while (!PAN_READY_RECEIVE)              // Ждём пока, панель не готова к приёму данных
         {

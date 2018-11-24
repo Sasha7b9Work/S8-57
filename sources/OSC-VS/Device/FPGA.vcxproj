@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\common\Message.cpp" />
     <ClCompile Include="..\..\Device\src\Data\DataBuffer.cpp" />
     <ClCompile Include="..\..\Device\src\Data\DataSettings.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
@@ -403,6 +404,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\common\Command.h" />
+    <ClInclude Include="..\..\common\Message.h" />
     <ClInclude Include="..\..\Device\src\Data\DataBuffer.h" />
     <ClInclude Include="..\..\Device\src\Data\DataSettings.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
