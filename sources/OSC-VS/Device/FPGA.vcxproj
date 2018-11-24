@@ -760,7 +760,7 @@
       <PreprocessorDefinitions>USE_HAL_DRIVER;STM32F437xx;MSVC;WIN32;OLD_RECORDER;wxUSE_GUI;wxUSE_EXCEPTIONS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalOptions>-MP %(AdditionalOptions)</AdditionalOptions>
       <MinimalRebuild>false</MinimalRebuild>
-      <DisableSpecificWarnings>4201;4211;4333;4355;4464;4514;4529;4599;4623;4626;4710;4774;4820;4996;5027;5039;5045;26495</DisableSpecificWarnings>
+      <DisableSpecificWarnings>4201;4211;4310;4333;4355;4464;4514;4529;4599;4623;4626;4710;4774;4820;4996;5027;5039;5045;26495</DisableSpecificWarnings>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <BufferSecurityCheck>true</BufferSecurityCheck>
       <PreprocessToFile>false</PreprocessToFile>
