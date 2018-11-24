@@ -18,8 +18,25 @@
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-BitSet32 FrequencyCounter::freqActual;
-BitSet32 FrequencyCounter::periodActual;
+/// «десь хранитс€ последнее действительное значение частоты. ƒл€ вывода в режиме частотомера. 0 означает, что значение выводить не надо
+static BitSet32 freqActual;
+/// «десь хранитс€ последнее действительное значение периода. ƒл€ вывода в режиме частотомера. 0 означает, что значение выводить не надо
+static BitSet32 periodActual;
+
+/// дл€ отладки
+/// \todo удалить
+static BitSet32 lastFreq;
+static BitSet32 lastPeriod;
+/// ѕоследнее врем€ разрешшени€ чтени€ частоты
+static uint lastFreqRead;
+/// ѕоследнее врем€ разрешени€ чтени€ периода
+static uint lastPeriodRead;
+/// ѕоследнее врем€ переполнени€ частоты
+static uint lastFreqOver;
+/// ѕоследнее врем€ переполени€ периода
+static uint lastPeriodOver;
+
+
 bool     FrequencyCounter::readPeriod;
 float    FrequencyCounter::prevFreq;
 float    FrequencyCounter::frequency;
@@ -29,13 +46,10 @@ bool     FrequencyCounter::lampPeriod = false;
 //                         0    1    2    3    4    5    6 
 static char buffer[11] = {'0', '0', '0', '0', '0', '0', '0', 0, 0, 0, 0};
 
-BitSet32 FrequencyCounter::lastFreq;
-BitSet32 FrequencyCounter::lastPeriod;
-uint     FrequencyCounter::lastFreqRead = 0;
-uint     FrequencyCounter::lastPeriodRead = 0;
-uint     FrequencyCounter::lastFreqOver = 0;
-uint     FrequencyCounter::lastPeriodOver = 0;
 
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/// ¬ыводит отладочную информацию
+static void DrawDebugInfo();
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -277,72 +291,9 @@ void FrequencyCounter::Draw()
     Painter::DrawBigText(x + dX, y + 10 * SIZE, SIZE, PeriodSetToString(&periodActual),
                          Choice::ColorMenuField(PageFunction::PageFrequencyCounter::GetChoiceNumPeriods()));
 
-
-    width = 50;
-    height = 27;
-    x = 50;
-    y = 120;
-    Painter::FillRegion(x, y, width, height, Color::BACK);
-    Painter::DrawRectangle(x - 1, y - 1, width + 2, height + 2, Color::FILL);
-    Painter::DrawFormatText(x + 4, y + 4, "%d", freqActual.word);
-    Painter::DrawFormatText(x + 4, y + 15, "%d", periodActual.word);
-
-    x += 100;
-    width = 120;
-
-
-    Painter::FillRegion(x, y, width, height, Color::BACK);
-    Painter::DrawRectangle(x - 1, y - 1, width + 2, height + 2, Color::FILL);
-
-    Painter::DrawFormatText(x + 4, y + 4, "%d", lastFreq.word);
-    Painter::DrawFormatText(x + 4, y + 15, "%d", lastPeriod.word);
-
-    int size = 8;
-
-    x += 60;
-
-#define TIME 250
-
-    Painter::DrawRectangle(x, y + 4, size, size, Color::FILL);
-
-    if(TIME_MS - lastFreqRead < TIME)
+    if(false)
     {
-        Painter::FillRegion(x + 1, y + 5, size - 2, size - 2, Color::BLUE);
-    }
-
-    Painter::DrawRectangle(x, y + 15, size, size, Color::FILL);
-
-    if(TIME_MS - lastPeriodRead < TIME)
-    {
-        Painter::FillRegion(x + 1, y + 16, size - 2, size - 2, Color::BLUE);
-    }
-
-    x += 20;
-
-    Painter::DrawRectangle(x, y + 4, size, size, Color::FILL);
-
-    if(TIME_MS - lastFreqOver < TIME)
-    {
-        Painter::FillRegion(x + 1, y + 5, size - 2, size - 2, Color::RED);
-    }
-
-    Painter::DrawRectangle(x, y + 15, size, size, Color::FILL);
-
-    if(TIME_MS - lastPeriodOver < TIME)
-    {
-        Painter::FillRegion(x + 1, y + 16, size - 2, size - 2, Color::RED);
-    }
-
-    x += 20;
-
-    if(FPGA::GetFlag::FREQ_IN_PROCESS())
-    {
-        Painter::FillRegion(x + 1, y + 5, size - 2, size - 2, Color::FILL);
-    }
-
-    if(FPGA::GetFlag::PERIOD_IN_PROCESS())
-    {
-        Painter::FillRegion(x + 1, y + 16, size - 2, size - 2, Color::FILL);
+        DrawDebugInfo();
     }
 }
 
@@ -756,5 +707,76 @@ void FrequencyCounter::SetStateLampPeriod()
         {
             lampPeriod = false;
         }
+    }
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+static void DrawDebugInfo()
+{
+    int width = 50;
+    int height = 27;
+    int x = 50;
+    int y = 120;
+    Painter::FillRegion(x, y, width, height, Color::BACK);
+    Painter::DrawRectangle(x - 1, y - 1, width + 2, height + 2, Color::FILL);
+    Painter::DrawFormatText(x + 4, y + 4, "%d", freqActual.word);
+    Painter::DrawFormatText(x + 4, y + 15, "%d", periodActual.word);
+
+    x += 100;
+    width = 120;
+
+
+    Painter::FillRegion(x, y, width, height, Color::BACK);
+    Painter::DrawRectangle(x - 1, y - 1, width + 2, height + 2, Color::FILL);
+
+    Painter::DrawFormatText(x + 4, y + 4, "%d", lastFreq.word);
+    Painter::DrawFormatText(x + 4, y + 15, "%d", lastPeriod.word);
+
+    int size = 8;
+
+    x += 60;
+
+#define TIME 250
+
+    Painter::DrawRectangle(x, y + 4, size, size, Color::FILL);
+
+    if (TIME_MS - lastFreqRead < TIME)
+    {
+        Painter::FillRegion(x + 1, y + 5, size - 2, size - 2, Color::BLUE);
+    }
+
+    Painter::DrawRectangle(x, y + 15, size, size, Color::FILL);
+
+    if (TIME_MS - lastPeriodRead < TIME)
+    {
+        Painter::FillRegion(x + 1, y + 16, size - 2, size - 2, Color::BLUE);
+    }
+
+    x += 20;
+
+    Painter::DrawRectangle(x, y + 4, size, size, Color::FILL);
+
+    if (TIME_MS - lastFreqOver < TIME)
+    {
+        Painter::FillRegion(x + 1, y + 5, size - 2, size - 2, Color::RED);
+    }
+
+    Painter::DrawRectangle(x, y + 15, size, size, Color::FILL);
+
+    if (TIME_MS - lastPeriodOver < TIME)
+    {
+        Painter::FillRegion(x + 1, y + 16, size - 2, size - 2, Color::RED);
+    }
+
+    x += 20;
+
+    if (FPGA::GetFlag::FREQ_IN_PROCESS())
+    {
+        Painter::FillRegion(x + 1, y + 5, size - 2, size - 2, Color::FILL);
+    }
+
+    if (FPGA::GetFlag::PERIOD_IN_PROCESS())
+    {
+        Painter::FillRegion(x + 1, y + 16, size - 2, size - 2, Color::FILL);
     }
 }

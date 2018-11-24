@@ -119,10 +119,6 @@ private:
     static void WriteStackToBuffer(Stack<uint> *stack, int point, char *suffix);
     /// Возвращает порядок младшего разряда считанного значения счётчика периода при данных настройках
     static int LowOrder(FreqClc freqCLC, NumberPeriods numPeriods);
-    /// Здесь хранится последнее действительное значение частоты. Для вывода в режиме частотомера. 0 означает, что значение выводить не надо
-    static BitSet32 freqActual;
-    /// Здесь хранится последнее действительное значение периода. Для вывода в режиме частотомера. 0 означает, что значение выводить не надо
-    static BitSet32 periodActual;
     /// Установленное в true значение означает, что частоту нужно считать по счётчику периода
     static bool readPeriod;
 
@@ -135,17 +131,4 @@ private:
     static bool lampFreq;
     /// Если false - горит лампочка счёта периода
     static bool lampPeriod;
-
-    /// для отладки
-    /// \todo удалить
-    static BitSet32 lastFreq;
-    static BitSet32 lastPeriod;
-    /// Последнее время разрешшения чтения частоты
-    static uint lastFreqRead;
-    /// Последнее время разрешения чтения периода
-    static uint lastPeriodRead;
-    /// Последнее время переполнения частоты
-    static uint lastFreqOver;
-    /// Последнее время переполения периода
-    static uint lastPeriodOver;
 };
