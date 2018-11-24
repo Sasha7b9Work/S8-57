@@ -56,11 +56,20 @@ void FrequencyCounter::LoadSettings()
     {
         const uint16 maskTime[3] = {0, 1, 2};
         const uint16 maskFreqClc[4] = {0, (1 << 2), (1 << 3), ((1 << 3) + (1 << 2))};
-        const uint16 maskPeriods[3] = {0, (1 << 4), (1 << 5)};
+
+        DEF_STRUCT(StructPeriod, uint16) maskPeriod[NumberPeriods::Number] =
+        {
+            0,
+            (1 << 4),
+            (1 << 5),
+            0,
+            0,
+            0
+        };
 
         data |= maskTime[FREQ_METER_TIMECOUNTING];
         data |= maskFreqClc[FREQ_METER_FREQ_CLC];
-        data |= maskPeriods[FREQ_METER_NUM_PERIODS];
+        data |= maskPeriod[FREQ_METER_NUM_PERIODS].value;
     }
     else
     {

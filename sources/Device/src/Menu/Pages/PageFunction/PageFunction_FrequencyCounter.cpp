@@ -61,13 +61,16 @@ DEF_CHOICE_4(cFreqMeter_FreqClc,                                                
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-DEF_CHOICE_3(cFreqMeter_NumPeriods,                                                                                                          //--- ФУНКЦИЯ - ЧАСТОТОМЕР - Кол-во периодов ---
+DEF_CHOICE_6(cFreqMeter_NumPeriods,                                                                                                          //--- ФУНКЦИЯ - ЧАСТОТОМЕР - Кол-во периодов ---
     "Кол периодов", "Num periods",
     "Позволяет выбрать точность измерения периода - чем больше время, тем больше точность и больше время измерения",
     "Allows to choose the accuracy of measurement of period - the more time, the accuracy more time of measurement is more",
-    "1", "1",
-    "10", "10",
-    "100", "100",
+    "1",      "1",
+    "10",     "10",
+    "100",    "100",
+    "1000",   "1000",
+    "10000",  "10000",
+    "100000", "100000",
     FREQ_METER_NUM_PERIODS, ppFreqMeter, FuncActive, OnChanged_FreqMeter_Period, FuncDraw
 )
 

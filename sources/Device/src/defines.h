@@ -71,6 +71,14 @@ inline bool EmptyFuncBI(int) { return false; }
 #define _SET_BIT(value, bit) ((value) |= (1 << (bit)))
 
 
+#define DEF_STRUCT(name, type)      \
+static const struct name        \
+{                               \
+    type value;                 \
+    name(type v) : value(v) {}; \
+}
+
+
 #define _bitset(bits)                               \
   ((uint8)(                                         \
   (((uint8)((uint)bits / 01)        % 010) << 0) |  \

@@ -60,6 +60,9 @@ public:
             _1,
             _10,
             _100,
+            _1k,
+            _10k,
+            _100k,
             Number
         } value;
         operator uint8() const { return (uint8)value; }
