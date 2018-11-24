@@ -28,7 +28,7 @@ static void OnChanged_FreqMeter_Period(bool)
 }
 
 
-DEF_CHOICE_2(cFreqMeter_Enable,                                                                            //--- ФУНКЦИЯ - ЧАСТОТОМЕР - Частотомер ---
+DEF_CHOICE_2(cFreqMeter_Enable,                                                                                                                   //--- ФУНКЦИЯ - ЧАСТОТОМЕР - Частотомер ---
     "Частотомер", "Freq meter",
     "",
     "",
@@ -38,7 +38,7 @@ DEF_CHOICE_2(cFreqMeter_Enable,                                                 
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-DEF_CHOICE_3(cFreqMeter_TimeF,                                                                          //--- ФУНКЦИЯ - ЧАСТОТОМЕР - Время счёта F ---
+DEF_CHOICE_3(cFreqMeter_TimeF,                                                                                                                 //--- ФУНКЦИЯ - ЧАСТОТОМЕР - Время счёта F ---
     "Время счёта F", "Time calc F",
     "Позволяет выбрать точность измерения частоты - чем больше время, тем больше точность и больше время измерения",
     "Allows to choose the accuracy of measurement of frequency - the more time, the accuracy more time of measurement is more",
@@ -49,7 +49,7 @@ DEF_CHOICE_3(cFreqMeter_TimeF,                                                  
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-DEF_CHOICE_4(cFreqMeter_FreqClc,                                                                        //--- ФУНКЦИЯ - ЧАСТОТОМЕР - Метки времени ---
+DEF_CHOICE_4(cFreqMeter_FreqClc,                                                                                                               //--- ФУНКЦИЯ - ЧАСТОТОМЕР - Метки времени ---
     "Метки времени", "Timestamps",
     "Выбор частоты следования счётных импульсов",
     "Choice of frequency of following of calculating impulses",
@@ -61,7 +61,7 @@ DEF_CHOICE_4(cFreqMeter_FreqClc,                                                
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-DEF_CHOICE_3(cFreqMeter_NumPeriods,                                                                   //--- ФУНКЦИЯ - ЧАСТОТОМЕР - Кол-во периодов ---
+DEF_CHOICE_3(cFreqMeter_NumPeriods,                                                                                                          //--- ФУНКЦИЯ - ЧАСТОТОМЕР - Кол-во периодов ---
     "Кол периодов", "Num periods",
     "Позволяет выбрать точность измерения периода - чем больше время, тем больше точность и больше время измерения",
     "Allows to choose the accuracy of measurement of period - the more time, the accuracy more time of measurement is more",
@@ -90,7 +90,7 @@ const Choice *PageFunction::PageFrequencyCounter::GetChoiceNumPeriods()
     return (const Choice *)&cFreqMeter_NumPeriods;
 }
 
-DEF_PAGE_4(ppFreqMeter,                                                                                                 //--- ФУНКЦИЯ - ЧАСТОТОМЕР ---
+DEF_PAGE_4(ppFreqMeter,                                                                                                                                        //--- ФУНКЦИЯ - ЧАСТОТОМЕР ---
     "ЧАСТОТОМЕР", "FREQ METER",
     "",
     "",
