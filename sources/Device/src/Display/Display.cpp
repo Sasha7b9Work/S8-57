@@ -116,12 +116,7 @@ void Display::Update()
 {
     typedef void (*pFuncDisplayVV)();
 
-    static const struct StructDraw
-    {
-        pFuncDisplayVV func;
-        StructDraw(pFuncDisplayVV f) : func(f) {};
-    }
-    funcs[Device::Mode::Number] =
+    DEF_STRUCT(StructDraw, pFuncDisplayVV) funcs[Device::Mode::Number] =
     {
         Osci::Graphics::Update,
         Tester::Graphics::Update,
@@ -129,7 +124,7 @@ void Display::Update()
         Recorder::Graphics::Update
     };
 
-    funcs[Device::CurrentMode()].func();
+    funcs[Device::CurrentMode()].val();
 
     Console::Draw();
 

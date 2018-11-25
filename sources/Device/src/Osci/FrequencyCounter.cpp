@@ -83,7 +83,7 @@ void FrequencyCounter::LoadSettings()
 
         data |= maskTime[FREQ_METER_TIMECOUNTING];
         data |= maskFreqClc[FREQ_METER_FREQ_CLC];
-        data |= maskPeriod[FREQ_METER_NUM_PERIODS].value;
+        data |= maskPeriod[FREQ_METER_NUM_PERIODS].val;
     }
     else
     {

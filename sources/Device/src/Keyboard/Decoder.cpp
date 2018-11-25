@@ -73,7 +73,7 @@ void Decoder::RunStep(uint8 data)
 
         if (data < Command::Number)
         {
-            curFunc = commands[data].value;
+            curFunc = commands[data].val;
         }
         else
         {

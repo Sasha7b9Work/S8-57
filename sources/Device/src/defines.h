@@ -74,8 +74,8 @@ inline bool EmptyFuncBI(int) { return false; }
 #define DEF_STRUCT(name, type)  \
 static const struct name        \
 {                               \
-    type value;                 \
-    name(type v) : value(v) {}; \
+    type val;                   \
+    name(type v) : val(v) {};   \
 }
 
 
