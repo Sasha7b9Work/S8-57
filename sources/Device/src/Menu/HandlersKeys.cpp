@@ -1,5 +1,6 @@
 #include "defines.h"
 #include <stm32f4xx.h>
+#include "log.h"
 #include "HandlersKeys.h"
 #include "FPGA/FPGA.h"
 #include "Menu/Menu.h"
