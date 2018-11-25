@@ -1,7 +1,7 @@
 #pragma once
 #include "FPGATypes.h"
 #include "Settings/SettingsService.h"
-#include <stm32f4xx_hal_adc.h>
+#include <stm32f4xx_hal.h>
 
 
 /// На столько единиц нужно изменить значение смещения, чтобы маркер смещения по напряжению передвинулся на одну точку.
@@ -90,6 +90,8 @@ public:
     static void StartForTester(int numPoints);
 
     static bool ReadForTester(uint8 *dataA, uint8 *dataB);
+
+    static uint NumPoints();
 
     static bool IsRunning()
     {

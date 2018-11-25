@@ -6,6 +6,7 @@
 #include "Display/Painter.h"
 #include "Data/DataStorage.h"
 #include "Data/Reader.h"
+#include "FPGA/FPGA.h"
 #include "Settings/Settings.h"
 #endif
 
@@ -23,7 +24,7 @@ void MemoryWindow::Draw()
         if (SET_ENABLED(chan))
         {
             Painter::SetColor(Color::Channel(chan));
-            DrawDataInRect(X(), Y(), Width(), Height(), OUT(chan), FPGA_NUM_POINTS);
+            DrawDataInRect(X(), Y(), Width(), Height(), OUT(chan), (uint)FPGA::NumPoints());
         }
     }
 }
@@ -65,8 +66,8 @@ void MemoryWindow::DrawDataInRect(int x, int y, int width, int height, uint8 *da
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void MemoryWindow::DrawScreenArea()
 {
-    float relBegin = (float)SHIFT_IN_MEMORY / FPGA_NUM_POINTS;          // Относительное начало экранной области относительно всей памяти
-    float relWidth = (float)(Grid::Width() + 1) / FPGA_NUM_POINTS;      // Относительное (относительно всей шириный окна) ширина видимой области
+    float relBegin = (float)SHIFT_IN_MEMORY / FPGA::NumPoints();          // Относительное начало экранной области относительно всей памяти
+    float relWidth = (float)(Grid::Width() + 1) / FPGA::NumPoints();      // Относительное (относительно всей шириный окна) ширина видимой области
 
     int begin = (int)(relBegin * Width() + 0.5f);   // Реальное начало экранной области относительно начала окна памяти
     int width = (int)(relWidth * Width() + 0.5f);   // Реальная ширина видимой области

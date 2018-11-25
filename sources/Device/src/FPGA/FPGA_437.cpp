@@ -162,8 +162,8 @@ void FPGA::LoadRanges()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void FPGA::ReadData()
 {
-    Buffer dataA(FPGA_NUM_POINTS);
-    Buffer dataB(FPGA_NUM_POINTS);
+    Buffer dataA(FPGA::NumPoints());
+    Buffer dataB(FPGA::NumPoints());
 
     ReadDataChanenl(Chan::A, dataA.Data());
     ReadDataChanenl(Chan::B, dataB.Data());

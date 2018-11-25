@@ -104,7 +104,6 @@ struct FileNamingMode
 #define SHOW_IN_INT_BOTH        (SHOW_IN_INT == ModeShowIntMem::Both)
 
 #define FPGA_ENUM_POINTS        (set.mem_enumPoints)
-#define FPGA_NUM_POINTS         ((uint)(1 << (FPGA_ENUM_POINTS + 9)))
 #define FPGA_POINTS_512         (FPGA_ENUM_POINTS == ENumPointsFPGA::_512)
 #define FPGA_POINTS_8k          (FPGA_ENUM_POINTS == ENumPointsFPGA::_8k)
 #define FPGA_POINTS_16k         (FPGA_ENUM_POINTS == ENumPointsFPGA::_16k)

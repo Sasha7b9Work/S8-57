@@ -19,8 +19,8 @@ void DataStorage::Push(DataSettings *ds)
 {
     //DataBuffer::Push(ds);
 
-    memcpy(OUT_A, ds->DataA(), FPGA_MAX_NUM_POINTS);
-    memcpy(OUT_B, ds->DataB(), FPGA_MAX_NUM_POINTS);
+    memcpy(OUT_A, ds->DataA(), (uint)ds->SizeChannel());
+    memcpy(OUT_B, ds->DataB(), (uint)ds->SizeChannel());
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

@@ -240,9 +240,11 @@ bool FPGA::ReadForTester(uint8 *dataA, uint8 *dataB)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void FPGA::ReadDataChanenl(Chan ch, uint8 data[FPGA_MAX_NUM_POINTS])
 {
+    uint numPoints = NumPoints();
+
     if (addrRead == 0xffff)
     {
-        addrRead = (uint16)(ReadLastRecord() - FPGA_NUM_POINTS);
+        addrRead = (uint16)(ReadLastRecord() - (int)numPoints);
     }
     
     FSMC::WriteToFPGA16(WR_PRED_LO, (uint16)(addrRead));
@@ -265,7 +267,7 @@ void FPGA::ReadDataChanenl(Chan ch, uint8 data[FPGA_MAX_NUM_POINTS])
 
         if(SET_PEAKDET_EN)
         {
-            for(uint i = 0; i < FPGA_NUM_POINTS / 2U; i++)
+            for(uint i = 0; i < numPoints / 2U; i++)
             {
                 *p++ = *addr0;
                 *p++ = *addr1;
@@ -274,7 +276,7 @@ void FPGA::ReadDataChanenl(Chan ch, uint8 data[FPGA_MAX_NUM_POINTS])
         }
         else
         {
-            for (uint i = 0; i < FPGA_NUM_POINTS / 4U; ++i)
+            for (uint i = 0; i < numPoints / 4U; ++i)
             {
                 *p++ = *addr1;
                 *p++ = *addr1;
@@ -315,7 +317,7 @@ void FPGA::ReadDataChanenlRand(Chan ch, uint8 *address, uint8 *data)
         //LOG_WRITE("%d %d", Tsm, dataRead - data0);
     }
 
-    uint8 *last = &dataRand[ch][FPGA_NUM_POINTS];
+    uint8 *last = &dataRand[ch][FPGA::NumPoints()];
 
     while (dataRead < last)
     {
@@ -323,7 +325,7 @@ void FPGA::ReadDataChanenlRand(Chan ch, uint8 *address, uint8 *data)
         dataRead += step;
     }
 
-    std::memcpy(data, &dataRand[ch][0], (uint)FPGA_NUM_POINTS);
+    std::memcpy(data, &dataRand[ch][0], (uint)FPGA::NumPoints());
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -625,7 +627,7 @@ void FPGA::ResetPin(Pin pin)
 void FPGA::LoadTShift()
 {
     post = (uint16)(SET_TSHIFT - TShift::Min());
-    int Pred = (int)FPGA_NUM_POINTS - (int)post;
+    int Pred = (int)FPGA::NumPoints() - (int)post;
 
     if(Pred < 0)
     {
@@ -880,4 +882,10 @@ bool FPGA::GetFlag::FREQ_IN_PROCESS()
 bool FPGA::GetFlag::PERIOD_IN_PROCESS()
 {
     return _GET_BIT(flag, Flag::_PERIOD_IN_PROCESS) == 1;
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+uint FPGA::NumPoints()
+{
+    return (uint)(1 << (FPGA_ENUM_POINTS + 9));
 }

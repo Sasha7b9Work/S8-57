@@ -33,11 +33,11 @@ void FPGA::LoadRanges()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void FPGA::ReadData()
 {
-    Buffer dataA(FPGA_NUM_POINTS);
-    Buffer dataB(FPGA_NUM_POINTS);
+    Buffer dataA(FPGA::NumPoints());
+    Buffer dataB(FPGA::NumPoints());
 
-    FillSine(dataA.Data(), FPGA_NUM_POINTS);
-    FillSine(dataB.Data(), FPGA_NUM_POINTS);
+    FillSine(dataA.Data(), FPGA::NumPoints());
+    FillSine(dataB.Data(), FPGA::NumPoints());
 
     DataSettings ds;
     ds.Fill(dataA.Data(), dataB.Data());
