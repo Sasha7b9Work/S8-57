@@ -534,12 +534,7 @@ uint8 FPGA::ValueForRange(Chan ch)
         return datas[ModeCouple::GND];
     }
 
-    static const struct StructRange
-    {
-        uint16 val;
-        StructRange(uint16 v) : val(v) {}
-    }
-    values[Range::Number][2] =
+    DEF_STRUCT(StructRange, uint16) values[Range::Number][2] =
     {   //             A                    B
         { BIN_U8(00100101), BIN_U8(00100101) },   // 2mV
         { BIN_U8(00100101), BIN_U8(00100101) },   // 5mV

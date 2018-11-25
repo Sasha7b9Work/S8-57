@@ -64,12 +64,7 @@ const float absStepTShift[TBase::Number] =
 
 /// Столько вольт содержится в одной точке сигнала по вертикали
 
-static const struct StructInPoints
-{
-    float val;
-    StructInPoints(float v) : val(v) {};
-}
-voltsInPoint[Range::Number] =
+DEF_STRUCT(StructInPoints, float) voltsInPoint[Range::Number] =
 {
     2e-3f   / 20 * Grid::Height() / (MAX_VALUE - MIN_VALUE),    // 2mV
     5e-3f   / 20 * Grid::Height() / (MAX_VALUE - MIN_VALUE),    // 5mV
@@ -461,12 +456,7 @@ int MathFPGA::RShift2Pixels(uint16 rShift, int heightGrid)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 float MathFPGA::MaxVoltageOnScreen(Range range)
 {
-    static const struct StructRange
-    {
-        float val;
-        StructRange(float v) : val(v) {}
-    }
-    table[Range::Number] =
+    DEF_STRUCT(StructRange, float) table[Range::Number] =
     {
         2e-3f, 5e-3f, 10e-3f, 20e-3f, 50e-3f, 100e-3f, 200e-3f, 500e-3f, 1.0f, 2.0f, 5.0f, 10.0f, 20.0f
     };
