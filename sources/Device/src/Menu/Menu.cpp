@@ -704,12 +704,7 @@ static void DrawHintItem(int x, int y, int width)
         return;
     }
 
-    static const struct StructName
-    {
-        pString name;
-        StructName(pString n) : name(n) {};
-    }
-    names[Control::Type::Number][2] =
+    DEF_STRUCT(StructName, pString) names[Control::Type::Number][2] =
     {
         {"",            ""},                    // Item_None
         {"",            ""},                    // Control::Type::Choice
@@ -727,7 +722,7 @@ static void DrawHintItem(int x, int y, int width)
 
     const int SIZE = 100;
     char title[SIZE];
-    snprintf(title, SIZE, "%s \"%s\"", names[Menu::itemHint->type][lang].name, item->titleHint[lang]);
+    snprintf(title, SIZE, "%s \"%s\"", names[Menu::itemHint->type][lang].val, item->titleHint[lang]);
 
     if (item->type == Control::Type::DrawButton)
     {
