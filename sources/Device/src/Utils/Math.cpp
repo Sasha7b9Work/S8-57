@@ -603,3 +603,11 @@ void Math::AdditionThisLimitation(T *value, int term, T min, T max)
         }
     }
 }
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+float Math::RandFloat(float min, float max)
+{
+    float range = max - min;
+    float scale = range / RAND_MAX;
+    return min + scale * rand();
+}

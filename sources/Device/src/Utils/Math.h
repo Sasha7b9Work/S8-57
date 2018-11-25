@@ -37,8 +37,6 @@ public:
 
     static bool IsEquals(float x, float y);
 
-    static float RandFloat(float min, float max);
-
     static void Smoothing(uint8 *data, int numPoints, int numSmooth);
     
     static int MinFrom2Int(int val0, int val1);
@@ -65,6 +63,8 @@ public:
     static void CalculateFiltrArray(const uint8 *dataIn, uint8 *dataOut, int numPoints, int numSmoothing);
     /// Ќайти первый элемент массива, не соотвествующий заданному
     static int FindAnotherElement(uint8 *data, uint8 value, int numElements);
+    /// ¬озвращает случайное число из диапазона [min; max]
+    static float RandFloat(float min, float max);
 
     static int DigitsInIntPart(float value);
     /// \brief ќкругл€ет число с плавающей точкой. numDigits - полное число знаков, по которым производитс€ округление.

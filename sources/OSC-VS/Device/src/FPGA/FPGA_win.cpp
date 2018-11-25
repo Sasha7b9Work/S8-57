@@ -46,12 +46,35 @@ void FPGA::ReadData()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+static float GetNextRandom()
+{
+    static const float range = 10.0f;
+
+    static const float step = 1.0f;
+
+    static float prev = Math::RandFloat(-step, step);
+
+    float random = range + 1.0f;
+
+    do 
+    {
+        random = prev + Math::RandFloat(-step, step);
+    } while (random < -range || random > range);
+
+    prev = random;
+
+    return random;
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void FillSine(uint8 *data, uint size)
 {
     float speed = 0.2f;
 
     for (uint i = 0; i < size; i++)
     {
-        data[i] = (uint8)(AVE_VALUE + (MAX_VALUE - AVE_VALUE - 20) * sinf(speed * i));
+        data[i] = (uint8)((AVE_VALUE + (MAX_VALUE - AVE_VALUE - 20) * sinf(speed * i)) + GetNextRandom());
     }
+
+    
 }
