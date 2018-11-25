@@ -36,12 +36,7 @@ pString Range::ToString(Divider divider)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 int Chan::PointsInChannel() const
 {
-    static const struct StructNumPoints
-    {
-        int value;
-        StructNumPoints(int v) : value(v) {};
-    }
-    numPoints[ENumPointsFPGA::Size] =
+    DEF_STRUCT(StructNumPoints, int) numPoints[ENumPointsFPGA::Size] =
     {
         512,
         1024,
@@ -50,7 +45,7 @@ int Chan::PointsInChannel() const
         8192
     };
 
-    return numPoints[(int)FPGA_ENUM_POINTS].value;
+    return numPoints[(int)FPGA_ENUM_POINTS].val;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
