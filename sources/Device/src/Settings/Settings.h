@@ -106,7 +106,7 @@ public:
 
     TShift              time_shift;
     TBase               time_base;
-    PeakDetMode         time_peakDet;
+    PeakDetMode::E      time_peakDet;
     TPos                time_TPos;
     SampleType          time_sampleType;
     FunctionTime        time_timeDivXPos;

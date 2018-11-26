@@ -99,7 +99,7 @@ struct DataSettings
 #define COUPLE(ds, ch)          (ch.IsA() ? COUPLE_A(ds) : COUPLE_B(ds))
 
 #define Lval_PEAKDET(ds)        ((ds)->peackDet)
-#define PEAKDET(ds)             ((PeakDetMode)Lval_PEAKDET(ds))
+#define PEAKDET(ds)             ((PeakDetMode::E)Lval_PEAKDET(ds))
 
 #define INVERSE_A(ds)           ((ds)->inverseA)
 #define INVERSE_B(ds)           ((ds)->inverseB)

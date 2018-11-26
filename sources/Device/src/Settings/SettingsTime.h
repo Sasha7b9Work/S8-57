@@ -19,7 +19,6 @@ struct PeakDetMode
     } value;
     PeakDetMode(E v = Disabled) : value(v) {};
     PeakDetMode(uint v) : value((E)v) {};
-    operator  uint8() const { return (uint8)value; };
 };
 
 struct TBase
