@@ -189,7 +189,7 @@ void PainterData::DrawTPos(int leftX, int rightX)
 void PainterData::DrawTShift(int leftX, int rightX, int numBytes)
 {
     float scale = (float)(rightX - leftX + 1) / ((float)numBytes - (numBytes == 281 ? 1 : 0));
-    int xShift = (int)(1.5f + (TPOS.InBytes() - SET_TSHIFT.InPoints()) * scale) - 1;
+    int xShift = (int)(1.5f + (TPos(TPOS).InBytes() - SET_TSHIFT.InPoints()) * scale) - 1;
     if (SET_PEAKDET_EN && TPOS_IS_RIGHT)
     {
         --xShift;

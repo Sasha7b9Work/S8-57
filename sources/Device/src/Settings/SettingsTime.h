@@ -56,8 +56,7 @@ struct TBase
         _10s,
         Number
     } value;
-    TBase(E v = _2ns) : value(v) {};
-    TBase(uint v = 0) : value((E)v) {};
+    explicit TBase(E v) : value(v) {};
     pString Name() const;
     pString ToString() const;
 
@@ -95,8 +94,7 @@ struct SampleType
         Real,    ///< реальное врем€ - в построении участвуют только реально считанные точки, ничего не рассчитываетс€.
         Equal    ///< эквивалентна€ - сигнал строитс€ по последним точкам, полученным от рандомизатора.
     } value;
-    SampleType(E v) : value(v) {};
-    operator uint8() const { return (uint8)value; };
+    explicit SampleType(E v) : value(v) {};
 };
 
 /// ѕоложение точки синхронизаци€ на сигнале.
@@ -108,9 +106,8 @@ struct TPos
         Center,        ///< ѕрив€зка к центру.
         Right          ///< ѕрив€зка к правому краю.
     } value;
-    operator uint8() const { return (uint8)value; };
+    explicit TPos(E v) : value(v) {};
     /// ”знать прив€зку отсительно уровн€ синхронизации в байтах
-    //int sTime_TPosInBytes();
     int InBytes();
 };
 

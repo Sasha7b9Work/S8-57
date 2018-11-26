@@ -1470,7 +1470,7 @@ void Measure::Processing::CountedTBase()
         std::memset(OUT_A, NONE_VALUE, (uint)numBytes);
         std::memset(OUT_B, NONE_VALUE, (uint)numBytes);
 
-        const int index0 = TPOS.InBytes() - SET_TSHIFT.InPoints();
+        const int index0 = TPos(TPOS).InBytes() - SET_TSHIFT.InPoints();
 
         for (int i = 0; i < numBytes; ++i)
         {

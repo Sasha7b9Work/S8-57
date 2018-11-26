@@ -107,11 +107,11 @@ public:
     TShift              time_shift;
     TBase::E            time_base;
     PeakDetMode::E      time_peakDet;
-    TPos                time_TPos;
-    SampleType          time_sampleType;
+    TPos::E             time_TPos;
+    SampleType::E       time_sampleType;
     FunctionTime        time_timeDivXPos;
     LinkingTShift       time_linkingTShift;                 ///< Тип привязки смещения по горизонтали
-    SampleType          time_sampleTypeOld;
+    SampleType::E       time_sampleTypeOld;
 
     // Меню КУРСОРЫ
 
