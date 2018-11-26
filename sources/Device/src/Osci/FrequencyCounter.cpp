@@ -2,6 +2,7 @@
 #ifndef WIN32
 #include <stm32f4xx.h>
 #include "defines.h"
+#include "log.h"
 #include "FrequencyCounter.h"
 #include "FPGA/FPGA.h"
 #include "Settings/Settings.h"
@@ -427,10 +428,13 @@ static int LowOrder(FrequencyCounter::FreqClc freqCLC, FrequencyCounter::NumberP
     +----------+-------------------------------------+-------------------------------------+-------------------------------------+-------------------------------------+
 */
 
-    //                           | 100ê/1 | 1Ì  /1  |  10Ì /1  | 100Ì/1   |          |
-    //                           |        | 100ê/10 |  1Ì  /10 | 10Ì /10  | 100Ì/1   |
-    //                           |        |         |  100ê/2  | 1Ì  /100 | 10Ì /100 | 100Ì/100
-    static const int order[6] = {  -5,      -6,        -7,       -8,        -9,        -10};
+    //                           | 100ê/1 | 1Ì  /1  |  10Ì /1   | 100Ì/1   |            |           |           |           |
+    //                           |        | 100ê/10 |  1Ì  /10  | 10Ì /10  | 100Ì/1     |           |           |           |
+    //                           |        |         |  100ê/100 | 1Ì  /100 | 10Ì /100   | 100Ì/100  |           |           |
+    //                           |        |         |           | 100ê/1ê  | 1Ì  /1ê    | 10Ì /1ê   | 100Ì/1ê   |           |
+    //                           |        |         |           |          | 100ê/10ê   | 1Ì  /10ê  | 10Ì /10ê  | 100Ì/10ê  |
+    //                           |        |         |           |          |            | 100ê/100ê | 1Ì  /100ê | 10ì /100ê | 100Ì/1ê
+    static const int order[9] = {  -5,      -6,        -7,        -8,         -9,         -10,        -11,        -12,        -13};
 
     return order[freqCLC + numPeriods];
 }
@@ -438,9 +442,20 @@ static int LowOrder(FrequencyCounter::FreqClc freqCLC, FrequencyCounter::NumberP
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static pString StackToString(Stack<uint> *stack, int order)
 {
-    if(order == -10)
+    if (order == -11)
     {
-        if(stack->NumFirstZeros()< 2)
+        if (stack->NumFirstZeros() < 1)
+        {
+            WriteStackToBuffer(stack, 1, "ìêñ");
+        }
+        else
+        {
+            WriteStackToBuffer(stack, 4, "íñ");
+        }
+    }
+    else if(order == -10)
+    {
+        if(stack->NumFirstZeros() < 2)
         {
             WriteStackToBuffer(stack, 2, "ìêñ");
         }
