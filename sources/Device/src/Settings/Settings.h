@@ -87,7 +87,7 @@ public:
     ModeCouple          chan_couple[Chan::Number];          ///< Связь по входу
     bool                chan_enabled[Chan::Number];         ///< Включен/выключен канал
     int8                chan_balanceShiftADC[2];            ///< Добавочное смещение для балансировки АЦП.
-    Bandwidth           chan_bandwidth[2];                  ///< Ограничение полосы.
+    Bandwidth::E        chan_bandwidth[2];                  ///< Ограничение полосы.
     Resistance          chan_resistance[2];                 ///< Сопротивление входа.
     bool                chan_inverse[2];
     Divider             chan_divider[2];                    ///< Множитель.
