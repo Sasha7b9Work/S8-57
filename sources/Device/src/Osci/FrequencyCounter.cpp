@@ -254,10 +254,14 @@ float FrequencyCounter::GetFreq()
 
 #define SIZE 4
 
+#define EMPTY_STRING    "\xa9\xa9\xa9.\xa9\xa9\xa9"
+#define OVERFLOW_STRING ">>>"
+
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void DrawFrequency(int x, int y)
 {
-    Painter::DrawBigText(x + 2, y + 1, SIZE, "F", Choice::ColorMenuField(PageFunction::PageFrequencyCounter::GetChoiceTimeF()));
+    Painter::DrawBigText(x + 2, y + 1, SIZE, "F", Color::FILL);
+    Painter::DrawBigText(x + 2, y + 10 * SIZE, SIZE, "T");
 
     Painter::DrawRectangle(x - 20, y, 10, 10);
     if (lampFreq)
@@ -267,18 +271,51 @@ static void DrawFrequency(int x, int y)
 
     int dX = 7 * SIZE;
 
-    Painter::DrawBigText(x + dX, y + 1, SIZE, "=", Choice::ColorMenuField(PageFunction::PageFrequencyCounter::GetChoiceTimeF()));
+    Painter::DrawBigText(x + dX, y + 1, SIZE, "=");
+    Painter::DrawBigText(x + dX, y + 10 * SIZE, SIZE, "=");
 
     dX = SIZE * 12;
 
-    Painter::DrawBigText(x + dX, y + 1, SIZE, FreqSetToString(&freqActual),
-        Choice::ColorMenuField(PageFunction::PageFrequencyCounter::GetChoiceTimeF()));
+    char strFreq[50];
+    std::strcpy(strFreq, FreqSetToString(&freqActual));
+
+    Painter::DrawBigText(x + dX, y + 1, SIZE, strFreq);
+
+    if (std::strcmp(strFreq, EMPTY_STRING) == 0)
+    {
+        return;
+    }
+
+    if (std::strcmp(strFreq, OVERFLOW_STRING) == 0)
+    {
+        return;
+    }
+
+    float freq = SU::StringToFloat(strFreq);
+
+    if (std::strcmp(&strFreq[std::strlen(strFreq) - 3], "ÌÃö") == 0)
+    {
+        freq *= 1e6f;
+    }
+    else if (std::strcmp(&strFreq[std::strlen(strFreq) - 3], "êÃö") == 0)
+    {
+        freq *= 1e3f;
+    }
+    else if (std::strcmp(&strFreq[std::strlen(strFreq) - 3], "ìÃö") == 0)
+    {
+        freq *= 1e-3f;
+    }
+
+    Time time(1.0f / freq);
+
+    Painter::DrawBigText(x + dX, y + 10 * SIZE, SIZE, time.ToStringAccuracy(false, strFreq, 6));
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void DrawPeriod(int x, int y)
 {
-    Painter::DrawBigText(x + 2, y + 1, SIZE, "T", Choice::ColorMenuField(PageFunction::PageFrequencyCounter::GetChoiceNumPeriods()));
+    Painter::DrawBigText(x + 2, y + 1, SIZE, "T", Color::FILL);
+    Painter::DrawBigText(x + 2, y + 10 * SIZE, SIZE, "F");
 
     Painter::DrawRectangle(x - 20, y + 1, 10, 10);
     if (lampPeriod)
@@ -288,12 +325,39 @@ static void DrawPeriod(int x, int y)
 
     int dX = 7 * SIZE;
 
-    Painter::DrawBigText(x + dX, y + 1, SIZE, "=", Choice::ColorMenuField(PageFunction::PageFrequencyCounter::GetChoiceNumPeriods()));
+    Painter::DrawBigText(x + dX, y + 1, SIZE, "=");
+    Painter::DrawBigText(x + dX, y + 10 * SIZE, SIZE, "=");
 
     dX = SIZE * 12;
 
-    Painter::DrawBigText(x + dX, y + 1, SIZE, PeriodSetToString(&periodActual),
-        Choice::ColorMenuField(PageFunction::PageFrequencyCounter::GetChoiceNumPeriods()));
+    char strPeriod[50];
+    std::strcpy(strPeriod, PeriodSetToString(&periodActual));
+
+    Painter::DrawBigText(x + dX, y + 1, SIZE, strPeriod);
+
+    if ((std::strcmp(strPeriod, EMPTY_STRING) == 0) || (std::strcmp(strPeriod, OVERFLOW_STRING) == 0))
+    {
+        return;
+    }
+
+    float period = SU::StringToFloat(strPeriod);
+
+    if (std::strcmp(&strPeriod[std::strlen(strPeriod) - 2], "íñ") == 0)
+    {
+        period *= 1e-9f;
+    }
+    else if (std::strcmp(&strPeriod[std::strlen(strPeriod) - 3], "ìêñ") == 0)
+    {
+        period *= 1e-6f;
+    }
+    else if (std::strcmp(&strPeriod[std::strlen(strPeriod) - 2], "ìñ") == 0)
+    {
+        period *= 1e-3f;
+    }
+
+    Frequency freq(1.0f / period);
+
+    Painter::DrawBigText(x + dX, y + 10 * SIZE, SIZE, freq.ToStringAccuracy(strPeriod, 6));
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -334,9 +398,6 @@ void FrequencyCounter::Draw()
     }
 }
 
-
-#define EMPTY_STRING    "\xa9\xa9\xa9.\xa9\xa9\xa9"
-#define OVERFLOW_STRING ">>>"
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 pString PeriodSetToString(const BitSet32 *pr)

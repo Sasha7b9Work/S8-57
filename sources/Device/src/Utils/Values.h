@@ -65,7 +65,7 @@ class Time
 {
 public:
 
-    Time(float v) : value(v) {};
+    explicit Time(float v) : value(v) {};
     /// Преобразует время в текстовую строку
     char* ToString(bool alwaysSign,      ///< если true, знак показывается даже если time > 0
                    char buffer[20]       ///< сюда записывается возвращаемое значение

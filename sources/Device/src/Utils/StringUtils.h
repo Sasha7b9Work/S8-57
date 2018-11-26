@@ -27,10 +27,8 @@ public:
     static bool EqualsStrings(char *str1, char *str2, int size);
 
     static bool EqualsZeroStrings(char *str1, char *str2);
-
-private:
-    /// Возвращает false, если выбор невозможен - строка кончилась.
-    static bool ChooseSymbols(const char **string);
-    /// Возвращает false, если выбор невозможен - строка кончилась.
-    static bool ChooseSpaces(const char **string);
+    /// Возвращает позицию первого символа, который не является цифрой либо точкой
+    static int FirstNotNumeral(char *buffer);
+    /// Преобразует строку в float. Обрабатываются символы до первого нецифрового символа
+    static float StringToFloat(char *string);
 };

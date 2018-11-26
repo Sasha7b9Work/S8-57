@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #ifndef WIN32
 #include "defines.h"
+#include "Utils/Stack.h"
 #include "Utils/StringUtils.h"
 #include "Values.h"
 #include <cstring>
@@ -11,6 +12,15 @@
 #define LANG 0
 #define LANG_RU true
 #endif
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/// ¬озвращает false, если выбор невозможен - строка кончилась.
+static bool ChooseSymbols(const char **string);
+/// ¬озвращает false, если выбор невозможен - строка кончилась.
+static bool ChooseSpaces(const char **string);
+
+
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 bool String2Int(char *str, int *value)
@@ -79,7 +89,7 @@ int BCD2Int(uint bcd)
 #define  SYMBOL(x) (*(*(x)))
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-bool SU::ChooseSymbols(const char **string)
+static bool ChooseSymbols(const char **string)
 {
     if (SYMBOL(string) == 0x0d && SYMBOL(string + 1) == 0x0a)
     {
@@ -95,7 +105,7 @@ bool SU::ChooseSymbols(const char **string)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-bool SU::ChooseSpaces(const char **string)
+static bool ChooseSpaces(const char **string)
 {
     if (SYMBOL(string) == 0x0d && SYMBOL(string + 1) == 0x0a)
     {
@@ -206,4 +216,75 @@ bool SU::EqualsStrings(char *str1, char *str2)
         }
     }
     return true;
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+int SU::FirstNotNumeral(char *buffer)
+{
+    int result = 0;
+
+    while (*buffer++)
+    {
+        char symbol = *buffer;
+
+        if ((symbol < 0x30 || symbol > 0x39) && symbol != '.')
+        {
+            break;
+        }
+
+        result++;
+    }
+
+    return result;
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+float SU::StringToFloat(char *string)
+{
+    float result = 0.0f;
+
+    Stack<int8> stack(20);
+
+    while (*string)
+    {
+        char symbol = *string;
+        if (symbol < 0x30 || symbol > 0x39)
+        {
+            break;
+        }
+        stack.Push(symbol & 0x0f);
+        string++;
+    }
+
+    int pow = 1;
+
+    while (stack.Size() > 0)
+    {
+        result += pow * stack.Pop();
+        pow *= 10;
+    }
+
+    // “еперь в result цела€ часть числа
+
+    if (*string == '.')
+    {
+        string++;
+
+        float pow = 0.1f;
+
+        while (*string)
+        {
+            char symbol = *string;
+            if (symbol < 0x30 || symbol > 0x39)
+            {
+                break;
+            }
+            result += pow * (symbol & 0x0f);
+            pow /= 10.0f;
+            string++;
+        }
+    }
+
+
+    return result;
 }
