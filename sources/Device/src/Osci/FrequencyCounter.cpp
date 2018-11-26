@@ -505,127 +505,41 @@ static int LowOrder(FrequencyCounter::FreqClc freqCLC, FrequencyCounter::NumberP
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static pString StackToString(Stack<uint> *stack, int order)
 {
-    if (order == -12)
+    static const struct StructOrder
     {
-        if (stack->NumFirstZeros() < 3)
-        {
-            WriteStackToBuffer(stack, 3, "нс");
-        }
-        else
-        {
-            WriteStackToBuffer(stack, 6, "пс");
-        }
+        int first;
+        int second;
+        char *s1;
+        char *s2;
     }
-    else if (order == -11)
+    structs[] =
     {
-        if (stack->NumFirstZeros() < 1)
-        {
-            WriteStackToBuffer(stack, 1, "мкс");
-        }
-        else
-        {
-            WriteStackToBuffer(stack, 4, "нс");
-        }
-    }
-    else if(order == -10)
+        {3, 6, "нс", "пс"},     // -12
+        {1, 4, "мкс", "нс"},    // -11
+        {2, 5, "мкс", "нс"},    // -10
+        {3, 6, "мкс", "нс"},    // -9
+        {1, 4, "мс", "мкс"},    // -8
+        {2, 5, "мс", "мкс"},    // -7
+        {3, 6, "мс", "мкс"},    // -6
+        {1, 4, "с", "мс"},      // -5
+        {2, 5, "с", "мс"},      // -4
+        {3, 6, "с", "мс"},      // -3
+        {4, 4, "с", "с"},       // -2
+        {5, 5, "с", "с"},       // -1
+        {6, 6, "с", "с"}        // 0
+    };
+
+    order += 12;
+
+    const StructOrder &str = structs[order];
+
+    if (stack->NumFirstZeros() < str.first)
     {
-        if(stack->NumFirstZeros() < 2)
-        {
-            WriteStackToBuffer(stack, 2, "мкс");
-        }
-        else
-        {
-            WriteStackToBuffer(stack, 5, "нс");
-        }
-    }
-    else if(order == -9)
-    {
-        if(stack->NumFirstZeros() < 3)
-        {
-            WriteStackToBuffer(stack, 3, "мкс");
-        }
-        else
-        {
-            WriteStackToBuffer(stack, 6, "нс");
-        }
-    }
-    else if(order == -8)
-    {
-        if(stack->NumFirstZeros() < 1)
-        {
-            WriteStackToBuffer(stack, 1, "мс");
-        }
-        else
-        {
-            WriteStackToBuffer(stack, 4, "мкс");
-        }
-    }
-    else if (order == -7)
-    {
-        if(stack->NumFirstZeros() < 2)
-        {
-            WriteStackToBuffer(stack, 2, "мс");
-        }
-        else
-        {
-            WriteStackToBuffer(stack, 5, "мкс");
-        }
-    }
-    else if (order == -6)
-    {
-        if(stack->NumFirstZeros() < 3)
-        {
-            WriteStackToBuffer(stack, 3, "мс");
-        }
-        else
-        {
-            WriteStackToBuffer(stack, 6, "мкс");
-        }
-    }
-    else if (order == -5)
-    {
-        if(stack->NumFirstZeros() < 1)
-        {
-            WriteStackToBuffer(stack, 1, "с");
-        }
-        else
-        {
-            WriteStackToBuffer(stack, 4, "мс");
-        }
-    }
-    else if (order == -4)
-    {
-        if(stack->NumFirstZeros() < 2)
-        {
-            WriteStackToBuffer(stack, 2, "с");
-        }
-        else
-        {
-            WriteStackToBuffer(stack, 5, "мс");
-        }
-    }
-    else if (order == -3)
-    {
-        if(stack->NumFirstZeros() < 3)
-        {
-            WriteStackToBuffer(stack, 3, "с");
-        }
-        else
-        {
-            WriteStackToBuffer(stack, 6, "мс");
-        }
-    }
-    else if (order == -2)
-    {
-        WriteStackToBuffer(stack, 4, "с");
-    }
-    else if (order == -1)
-    {
-        WriteStackToBuffer(stack, 5, "c");
+        WriteStackToBuffer(stack, str.first, str.s1);
     }
     else
     {
-        WriteStackToBuffer(stack, 6, "c");
+        WriteStackToBuffer(stack, str.second, str.s2);
     }
 
     return buffer;
