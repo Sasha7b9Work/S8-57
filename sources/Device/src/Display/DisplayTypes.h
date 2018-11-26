@@ -17,5 +17,4 @@ struct DrawMode
         Auto,
         Hand
     } value;
-    DrawMode(E v) : value(v) {};
 };

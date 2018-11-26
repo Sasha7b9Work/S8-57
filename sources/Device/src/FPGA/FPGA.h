@@ -27,8 +27,7 @@ struct Pin
         LFS,
         Number
     } value;
-    Pin(E v) : value(v) {};
-    operator uint8() const { return (uint8)value; };
+    explicit Pin(E v) : value(v) {};
 };
 
 #define FPGA_IN_STATE_STOP (FPGA::fpgaStateWork == StateWorkFPGA_Stop)
@@ -67,13 +66,13 @@ public:
 
     static void DecreaseTBase();
 
-    static void RShiftChange(Chan ch, int delta);
+    static void RShiftChange(Chan::E ch, int delta);
 
     static void TrigLevChange(int delta);
 
     static void TShiftChange(int delta);
 
-    static void SetRShift(Chan ch, uint16 rShift);
+    static void SetRShift(Chan::E ch, uint16 rShift);
 
     static void LoadTrigPolarity();
 
@@ -174,19 +173,19 @@ private:
 
     static void LoadTrigLev();
 
-    static void LoadRShift(Chan ch);
+    static void LoadRShift(Chan::E ch);
 
-    static void WritePin(Pin pin, int enable);
+    static void WritePin(Pin::E pin, int enable);
 
-    static void SetPin(Pin pin);
+    static void SetPin(Pin::E pin);
 
-    static void ResetPin(Pin pin);
+    static void ResetPin(Pin::E pin);
 
-    static uint GetPin(Pin pin);
+    static uint GetPin(Pin::E pin);
 
-    static GPIO_TypeDef *GetPort(Pin pin);
+    static GPIO_TypeDef *GetPort(Pin::E pin);
 
-    static void WriteRegisters(Pin cs, uint16 value);
+    static void WriteRegisters(Pin::E cs, uint16 value);
 
     static void ReadData();
 

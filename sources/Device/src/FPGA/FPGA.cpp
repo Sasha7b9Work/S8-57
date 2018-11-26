@@ -481,7 +481,7 @@ void FPGA::DecreaseTBase()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void FPGA::RShiftChange(Chan ch, int delta)
+void FPGA::RShiftChange(Chan::E ch, int delta)
 {
     Math::AdditionThisLimitation<uint16>(&SET_RSHIFT(ch), STEP_RSHIFT * delta, RShift::MIN, RShift::MAX);
 
@@ -505,13 +505,13 @@ void FPGA::TShiftChange(int delta)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-uint FPGA::GetPin(Pin pin)
+uint FPGA::GetPin(Pin::E pin)
 {
     return pins[pin].pin;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-GPIO_TypeDef *FPGA::GetPort(Pin pin)
+GPIO_TypeDef *FPGA::GetPort(Pin::E pin)
 {
     return pins[pin].gpioTD;
 }
@@ -561,7 +561,7 @@ uint8 FPGA::ValueForRange(Chan ch)
 #endif
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void FPGA::WriteRegisters(Pin cs, uint16 value)
+void FPGA::WriteRegisters(Pin::E cs, uint16 value)
 {
     ResetPin(cs);
 
@@ -599,7 +599,7 @@ void FPGA::LoadTrigLev()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void FPGA::WritePin(Pin pin, int enable)
+void FPGA::WritePin(Pin::E pin, int enable)
 {
     if (enable)
     {
@@ -612,13 +612,13 @@ void FPGA::WritePin(Pin pin, int enable)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void FPGA::SetPin(Pin pin)
+void FPGA::SetPin(Pin::E pin)
 {
     GetPort(pin)->BSRR = GetPin(pin);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void FPGA::ResetPin(Pin pin)
+void FPGA::ResetPin(Pin::E pin)
 {
     GetPort(pin)->BSRR = (uint)GetPin(pin) << 16;
 }
@@ -646,7 +646,7 @@ void FPGA::LoadTShift()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void FPGA::SetRShift(Chan ch, uint16 rShift)
+void FPGA::SetRShift(Chan::E ch, uint16 rShift)
 {
     Math::Limitation<uint16>(&rShift, RShift::MIN, RShift::MAX);
     SET_RSHIFT(ch) = rShift;
@@ -768,7 +768,7 @@ void FPGA::SetModeCouple(Chan ch, ModeCouple modeCoupe)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void FPGA::SetBandwidth(Chan ch)
 {
-    static const Pin pinsLF[2] = {Pin::LF1, Pin::LF2};
+    static const Pin::E pinsLF[2] = {Pin::LF1, Pin::LF2};
     WritePin(pinsLF[ch], SET_BANDWIDTH(ch) == Bandwidth::_20MHz);
 }
 
