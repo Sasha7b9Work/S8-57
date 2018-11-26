@@ -223,7 +223,6 @@ public:
             Around        ///< Усреднять приблизительно.
         } value;
         ModeAveraging(E v) : value(v) {};
-        operator uint8() const  { return (uint8)value; };
     };
 
     struct Orientation
