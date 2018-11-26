@@ -140,7 +140,7 @@ public:
     /// 2. DrawMode::Auto и func == 0 - в этом случае будет выполняться функция Update() в главном цикле.
     /// 3. DrawMode::Auto и func != 0 - в этом случае будет выполняться функция func(), определяемая пользователем, но в теле
     /// главного цикла, будучи вызываемой из Update() вместо Update().
-    static void SetDrawMode(DrawMode mode, pFuncVV func);
+    static void SetDrawMode(DrawMode::E mode, pFuncVV func);
 
     static void FuncOnWaitStart(const char *text, bool eraseBackground);
 

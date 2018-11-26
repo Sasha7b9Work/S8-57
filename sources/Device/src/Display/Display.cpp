@@ -226,7 +226,7 @@ void Display::ChangedRShiftMarkers(bool /*active*/)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Display::SetDrawMode(DrawMode mode, pFuncVV func)
+void Display::SetDrawMode(DrawMode::E mode, pFuncVV func)
 {
     funcOnHand = func;
     if (mode == DrawMode::Hand)
