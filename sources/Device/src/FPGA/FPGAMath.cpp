@@ -138,7 +138,7 @@ int MathFPGA::RShift2Rel(float rShiftAbs, Range::E range)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-float MathFPGA::TimeCursor(float shiftCurT, TBase tBase)
+float MathFPGA::TimeCursor(float shiftCurT, TBase::E tBase)
 {
     return shiftCurT * absStepTShift[tBase];
 }
@@ -200,7 +200,7 @@ void MathFPGA::PointsVoltage2Rel(const float *voltage, int numPoints, Range::E r
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-float MathFPGA::TShift2Abs(int tShift, TBase tBase)
+float MathFPGA::TShift2Abs(int tShift, TBase::E tBase)
 {
     return absStepTShift[tBase] * tShift;
 }

@@ -52,7 +52,7 @@ int Chan::PointsInChannel() const
 int Chan::RequestBytes(DataSettings *ds) const
 {
     ENumPointsFPGA numBytes;
-    PeakDetMode peakDet;
+    PeakDetMode::E peakDet;
 
     if (ds)
     {

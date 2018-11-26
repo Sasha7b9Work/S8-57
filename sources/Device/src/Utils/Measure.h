@@ -218,7 +218,7 @@ private:
 
     public:
         /// Аппроксимировать единичное измерение режима рандомизатора функцией sinX/X
-        static void InterpolationSinX_X(uint8 *data, int numPoints, TBase tBase);
+        static void InterpolationSinX_X(uint8 *data, int numPoints, TBase::E tBase);
         /// Возвращает строку автоматического измерения
         static char* GetStringMeasure(Measure::Type measure, Chan::E ch, char *buffer, int lenBuf);
         /// Расчитать все автоматические измерения

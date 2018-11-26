@@ -33,7 +33,7 @@ void BottomPart::Draw()
     const int SIZE = 100;
     char buffer[SIZE] = {0};
 
-    snprintf(buffer, SIZE, "ð\xa5%s", SET_TBASE.ToString());
+    snprintf(buffer, SIZE, "ð\xa5%s", TBase(SET_TBASE).ToString());
     Painter::DrawText(x, y0, buffer, Color::FILL);
 
     buffer[0] = 'a';
@@ -196,7 +196,7 @@ int BottomPart::WriteChannel(Chan::E ch, int x, int y)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void BottomPart::WriteTBase(int x, int y)
 {
-    Painter::DrawText(x, y, SET_TBASE.Name(), Color::FILL);
+    Painter::DrawText(x, y, TBase(SET_TBASE).Name(), Color::FILL);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

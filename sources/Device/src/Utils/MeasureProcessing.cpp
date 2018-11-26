@@ -594,7 +594,7 @@ float CalculateDurationPlus(Chan::E ch)
 
     EXIT_IF_ERROR_FLOAT(secondIntersection);
 
-    return MathFPGA::TShift2Abs(ROUND(uint16, (secondIntersection - firstIntersection) / 2.0f), (TBase)TBASE_DS);
+    return MathFPGA::TShift2Abs(ROUND(uint16, (secondIntersection - firstIntersection) / 2.0f), (TBase::E)TBASE_DS);
 }
 
 
@@ -1197,7 +1197,7 @@ float Measure::CalculateCursorT(Chan::E ch, float posCurU, int numCur)
 
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Measure::Processing::InterpolationSinX_X(uint8 *data, int numPoints, TBase tBase)
+void Measure::Processing::InterpolationSinX_X(uint8 *data, int numPoints, TBase::E tBase)
 {
 /*
      ѕоследовательности x в sin(x)   // Ёто, наверное, неправильно

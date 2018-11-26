@@ -17,8 +17,7 @@ struct PeakDetMode
         Enabled,
         Average
     } value;
-    PeakDetMode(E v = Disabled) : value(v) {};
-    PeakDetMode(uint v) : value((E)v) {};
+    explicit PeakDetMode(E v) : value(v) {};
 };
 
 struct TBase
@@ -59,7 +58,6 @@ struct TBase
     } value;
     TBase(E v = _2ns) : value(v) {};
     TBase(uint v = 0) : value((E)v) {};
-    operator uint8() const { return (uint8)value; };
     pString Name() const;
     pString ToString() const;
 

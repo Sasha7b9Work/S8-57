@@ -105,7 +105,7 @@ public:
     // Μενώ ΠΐΗΒ¨ΠÒΚΐ
 
     TShift              time_shift;
-    TBase               time_base;
+    TBase::E            time_base;
     PeakDetMode::E      time_peakDet;
     TPos                time_TPos;
     SampleType          time_sampleType;

@@ -18,7 +18,7 @@ public:
 
     operator int() const { return value; };
 
-    char *ToString(TBase tBase, char buffer[20]) const;
+    char *ToString(TBase::E tBase, char buffer[20]) const;
 
 private:
     int value;
