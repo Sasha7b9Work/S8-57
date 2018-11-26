@@ -241,7 +241,6 @@ public:
             Show,        /// Всегда выводить.
             AutoHide     /// Выводить и прятать через timeShowLevels.
         } value;
-        operator uint8() const { return (uint8)value; };
     };
 
     /// Тип привязки к смещению по вертикали
