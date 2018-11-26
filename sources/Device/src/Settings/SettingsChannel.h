@@ -17,8 +17,8 @@ struct Divider
         _1,
         _10
     } value;
-    explicit Divider(E v = _1) : value(v) { };
-    explicit Divider(uint v = _1) : value((E)v) { };
+    explicit Divider(E v) : value(v) { };
+    explicit Divider(uint v) : value((E)v) { };
     int ToAbs() const { return (value == _1) ? 1 : 10; };
 };
 
@@ -84,7 +84,6 @@ struct CalibrationMode
         x10,
         Disable
     } value;
-    operator uint8() const { return (uint8)value; };
 };
 
 /// –ежим канала по входу.
@@ -97,8 +96,7 @@ struct ModeCouple
         GND,     ///< ¬ход заземлЄн.
         Size
     } value;
-    ModeCouple(uint v = 0) : value((E)v) {};
-    operator uint8() const { return (uint8)value; };
+    explicit ModeCouple(uint v) : value((E)v) {};
 };
 
 struct Resistance

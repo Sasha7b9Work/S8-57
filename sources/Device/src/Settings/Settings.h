@@ -84,14 +84,14 @@ public:
 
     uint16              chan_shift[Chan::Number];           ///< Сдвиг канала по вертикали
     Range::E            chan_range[Chan::Number];           ///< Масштаб канала по вертикали
-    ModeCouple          chan_couple[Chan::Number];          ///< Связь по входу
+    ModeCouple::E       chan_couple[Chan::Number];          ///< Связь по входу
     bool                chan_enabled[Chan::Number];         ///< Включен/выключен канал
     int8                chan_balanceShiftADC[2];            ///< Добавочное смещение для балансировки АЦП.
     Bandwidth::E        chan_bandwidth[2];                  ///< Ограничение полосы.
     Resistance          chan_resistance[2];                 ///< Сопротивление входа.
     bool                chan_inverse[2];
     Divider::E          chan_divider[2];                    ///< Множитель.
-    CalibrationMode     chan_calibrationMode[2];            ///< Режим калибровки.
+    CalibrationMode::E  chan_calibrationMode[2];            ///< Режим калибровки.
 
     // Меню СИНХРОНИЗАЦИЯ
 

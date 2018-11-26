@@ -118,7 +118,7 @@ public:
 
     static void Reset();
 
-    static void SetModeCouple(Chan::E ch, ModeCouple couple);
+    static void SetModeCouple(Chan::E ch, ModeCouple::E couple);
 
     class FreqMeter
     {

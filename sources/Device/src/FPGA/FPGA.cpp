@@ -759,7 +759,7 @@ void FPGA::SetTShift(int tShift)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void FPGA::SetModeCouple(Chan::E ch, ModeCouple modeCoupe)
+void FPGA::SetModeCouple(Chan::E ch, ModeCouple::E modeCoupe)
 {
     SET_COUPLE(ch) = modeCoupe;
     LoadRanges();
