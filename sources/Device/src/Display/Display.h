@@ -44,7 +44,7 @@
 #define TIME_MESSAGES               (set.disp_timeMessages)
 #define ENUM_SIGNALS_IN_SEC         (set.disp_ENumSignalsInSec)
 #define LAST_AFFECTED_CH            (set.disp_lastAffectedChannel)
-#define LAST_AFFECTED_CH_IS_A       (LAST_AFFECTED_CH.IsA())
+#define LAST_AFFECTED_CH_IS_A       (LAST_AFFECTED_CH == Chan::A)
 #define DISPLAY_ORIENTATION         (set.dbg_Orientation)
 
 #define ALT_MARKERS                 (set.disp_altMarkers)
