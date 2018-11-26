@@ -285,7 +285,6 @@ public:
             _9points,
             _10points
         } value;
-        operator uint8() const { return (uint8)value; };
     };
 
     struct ModeAccumulation
@@ -295,7 +294,6 @@ public:
             NoReset,   /// В этом режиме показываются строго N последних.
             Reset      /// В этом режиме набираются N последних и потом сбрасываются.
         } value;
-        operator uint8() const { return (uint8)value; };
     };
 
     /// Количество накоплений.
@@ -313,7 +311,6 @@ public:
             _128,
             _Infinity
         } value;
-        operator uint8() const { return (uint8)value; };
     };
 
     /// Количество усреднений по измерениям.
