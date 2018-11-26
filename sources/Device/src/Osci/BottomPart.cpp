@@ -212,7 +212,7 @@ void BottomPart::WriteTextVoltage(Chan::E ch, int x, int y)
     Color color = Color::Channel(ch);
 
     bool inverse = SET_INVERSE(ch);
-    Divider divider = SET_DIVIDER(ch);
+    Divider::E divider = SET_DIVIDER(ch);
     Range::E range = SET_RANGE(ch);
 
     const int widthField = 91;

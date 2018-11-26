@@ -19,7 +19,6 @@ struct Divider
     } value;
     Divider(E v = _1) : value(v) { };
     Divider(uint v = _1) : value((E)v) { };
-    operator uint8() const  { return (uint8)value; };
     int ToAbs() const { return (value == _1) ? 1 : 10; };
 };
 
@@ -42,14 +41,9 @@ struct Range
         _20V,
         Number
     } value;
-    Range(E v = _2mV) : value(v) {};
-    Range& operator++()
-    {
-        value = (E)((uint)value + 1);
-        return *this;
-    }
+    explicit Range(E v) : value(v) {};
     pString Name() const;
-    pString ToString(Divider divider);
+    pString ToString(Divider::E divider);
 };
 
 struct DataSettings;

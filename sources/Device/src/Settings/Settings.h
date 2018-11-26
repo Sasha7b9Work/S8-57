@@ -90,7 +90,7 @@ public:
     Bandwidth::E        chan_bandwidth[2];                  ///< Ограничение полосы.
     Resistance          chan_resistance[2];                 ///< Сопротивление входа.
     bool                chan_inverse[2];
-    Divider             chan_divider[2];                    ///< Множитель.
+    Divider::E          chan_divider[2];                    ///< Множитель.
     CalibrationMode     chan_calibrationMode[2];            ///< Режим калибровки.
 
     // Меню СИНХРОНИЗАЦИЯ
