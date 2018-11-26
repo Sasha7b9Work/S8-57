@@ -314,7 +314,7 @@ void Display::SetAddDrawFunction(pFuncVV func)
 }
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------
-Display::ModeAveraging Display::GetModeAveraging()
+Display::ModeAveraging::E Display::GetModeAveraging()
 {
     if (IN_RANDOM_MODE)
     {

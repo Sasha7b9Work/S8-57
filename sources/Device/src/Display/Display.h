@@ -222,7 +222,6 @@ public:
             Accurately,   ///< Усреднять точно.
             Around        ///< Усреднять приблизительно.
         } value;
-        ModeAveraging(E v) : value(v) {};
     };
 
     struct Orientation
@@ -339,7 +338,7 @@ public:
 
     static void SetOrientation(Orientation orientation);
     /// Возвращает режим усреднения
-    static ModeAveraging GetModeAveraging();
+    static ModeAveraging::E GetModeAveraging();
     /// Устанавливает ограничение частоты кадров
     static void SetNumSignalsInS(int maxFPS);
     /// Возвращает число точек сглаживающего фильтра (режим ДИСПЛЕЙ - Сглаживание)
