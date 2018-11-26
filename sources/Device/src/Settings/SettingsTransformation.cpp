@@ -41,7 +41,7 @@ void Settings::TransformForSave(uint8 d[1024])
     //*data++ = DisplayBackground;
     //*data++ = disp_background;
     
-    SaveEnum16(DisplayShowStringNavigation, set.disp_showStringNavigation);
+    SaveEnum16(DisplayShowStringNavigation, (uint8)set.disp_showStringNavigation);
     SaveEnum16(DisplayENumMinMax, set.disp_ENumMinMax);
     SaveEnum16(DisplayModeAveraging, set.disp_modeAveraging);
     SaveEnum16(DisplayENumAverage, set.disp_ENumAverage);
