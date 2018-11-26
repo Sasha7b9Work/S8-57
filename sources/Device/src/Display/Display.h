@@ -271,7 +271,6 @@ public:
             _1
         } value;
         ENumSignalsInSec(E v = _25) : value(v) { };
-        operator uint8() const { return (uint8)value; };
         /// ¬озвращает количество кадров в секунду
         int ToFPS() const;
     };
