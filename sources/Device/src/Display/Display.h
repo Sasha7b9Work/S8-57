@@ -333,7 +333,6 @@ public:
             _256,
             _512
         } value;
-        operator uint8() const  { return (uint8)value; };
     };
 
     static void SetOrientation(Orientation orientation);

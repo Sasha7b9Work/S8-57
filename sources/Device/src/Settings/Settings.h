@@ -62,7 +62,7 @@ public:
     Display::ShowStrNavi::E         disp_showStringNavigation;  ///< Режим показа строки навигации меню.
     Display::ENumMinMax::E          disp_ENumMinMax;            ///< Перечисление количества измерений для определения минимумов и масимумов.
     Display::ModeAveraging::E       disp_modeAveraging;         ///< Тип усреднений по измерениям.
-    Display::ENumAverage            disp_ENumAverage;           ///< Число усреднений сигнала.
+    Display::ENumAverage::E         disp_ENumAverage;           ///< Число усреднений сигнала.
     Display::ENumAccum              disp_ENumAccum;             ///< Число накоплений сигнала на экране.
     Display::ModeAccumulation       disp_modeAccumulation;      ///< Режим накопления сигналов.
     Display::ENumSmoothing          disp_ENumSmoothing;         ///< Перечисление количества точек для скользящего фильтра.
