@@ -57,7 +57,7 @@ public:
     // Меню ДИСПЛЕЙ
                                                                 ///< вычисляется от первого байта, следующего за этим полем
     Display::ModeDrawSignal::E      disp_modeDrawSignal;
-    Display::ThicknessSignal        disp_thickness;             ///< Толщина линии, которой рисуется сигнал
+    Display::ThicknessSignal::E     disp_thickness;             ///< Толщина линии, которой рисуется сигнал
     Display::Background::E          disp_background;            ///< Цвет фона.
     Display::ShowStrNavi            disp_showStringNavigation;  ///< Режим показа строки навигации меню.
     Display::ENumMinMax             disp_ENumMinMax;            ///< Перечисление количества измерений для определения минимумов и масимумов.
