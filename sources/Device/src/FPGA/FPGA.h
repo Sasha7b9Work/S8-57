@@ -141,7 +141,7 @@ public:
     };
 
     /// Установить относительный уровень синхронизации
-    static void SetTrigLev(Trig::Source ch, uint16 trigLev);
+    static void SetTrigLev(Trig::Source::E ch, uint16 trigLev);
     /// Установить количество считываемых сигналов в секунду
     static void SetENumSignalsInSec(int numSigInSec);
     /// Установить количество измерений, по которым будут рассчитываться ворота в режиме рандомизатора

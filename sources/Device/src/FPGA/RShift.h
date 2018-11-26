@@ -12,7 +12,7 @@ public:
 
     static void Draw();
 
-    static pString ToString(uint16 rShiftRel, Range::E range ,Divider divider, char buffer[20]);
+    static pString ToString(uint16 rShiftRel, Range::E range, Divider::E divider, char buffer[20]);
 
 private:
 

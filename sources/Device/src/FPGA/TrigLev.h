@@ -8,7 +8,7 @@
 #define TRIG_SOURCE_IS_EXT      (TRIG_SOURCE == Trig::Source::Ext)
 
 #define SET_TRIGLEV(ch)         (set.trig_lev[(uint8)ch])
-#define SET_TRIGLEV_SOURCE      SET_TRIGLEV(TRIG_SOURCE.value)
+#define SET_TRIGLEV_SOURCE      SET_TRIGLEV(TRIG_SOURCE)
 #define SET_TRIGLEV_A           (SET_TRIGLEV(Chan::A))
 #define SET_TRIGLEV_B           (SET_TRIGLEV(Chan::B))
 
@@ -59,7 +59,6 @@ public:
             B,    /// Канал 2
             Ext   /// Внешняя
         } value;
-        operator uint8() const { return (uint8)value; }
     };
 
     /// Режим запуска.

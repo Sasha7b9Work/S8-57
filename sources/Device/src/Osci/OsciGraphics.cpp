@@ -50,7 +50,7 @@ void Osci::Graphics::Update()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Osci::Graphics::DrawCursorTrigLevel()
 {
-    Trig::Source ch = TRIG_SOURCE;
+    Trig::Source::E ch = TRIG_SOURCE;
 
     int trigLev = SET_TRIGLEV_SOURCE - (TRIG_SOURCE_IS_EXT ? 0 : -(SET_RSHIFT(ch) - RShift::ZERO));
     float scale = 1.0f / ((Trig::MAX - Trig::MIN) / 2.4f / Grid::Height());

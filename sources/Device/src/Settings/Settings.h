@@ -95,7 +95,7 @@ public:
 
     // Меню СИНХРОНИЗАЦИЯ
 
-    Trig::Source        trig_source;
+    Trig::Source::E     trig_source;
     Trig::Input         trig_input;
     Trig::Polarity      trig_polarity;
     uint16              trig_lev[Chan::Number];
@@ -182,7 +182,7 @@ public:
     Function            math_function;
     ModeRegSet          math_modeRegSet;                ///< Функция ручки УСТАНОВКА - масштаб по времени или смещение по вертикали.
     Range::E            math_range;
-    Divider             math_divider;
+    Divider::E          math_divider;
     uint16              math_rShift;
 
     // Настройки частотомера

@@ -19,7 +19,7 @@ volatile static bool needDraw = false;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /// Преобразует уровень синхронизации в текстовую строку
-static pString ToString(uint16 trigLev, Range::E range, Divider divider, char buffer[20]);
+static pString ToString(uint16 trigLev, Range::E range, Divider::E divider, char buffer[20]);
 /// Отключает отображение уровня синхронизации поверх сигнала
 static void DisableDrawing();
 
@@ -31,9 +31,9 @@ bool Trig::SyncPulse()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static pString ToString(uint16 trigLev, Range::E range, Divider divider, char buffer[20])
+static pString ToString(uint16 trigLev, Range::E range, Divider::E divider, char buffer[20])
 {
-    float trigLevVal = MathFPGA::RShift2Abs(trigLev, range) * divider.ToAbs();
+    float trigLevVal = MathFPGA::RShift2Abs(trigLev, range) * Divider(divider).ToAbs();
     return Voltage(trigLevVal).ToString(true, buffer);
 }
 

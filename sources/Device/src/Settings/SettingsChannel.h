@@ -17,8 +17,8 @@ struct Divider
         _1,
         _10
     } value;
-    Divider(E v = _1) : value(v) { };
-    Divider(uint v = _1) : value((E)v) { };
+    explicit Divider(E v = _1) : value(v) { };
+    explicit Divider(uint v = _1) : value((E)v) { };
     int ToAbs() const { return (value == _1) ? 1 : 10; };
 };
 
