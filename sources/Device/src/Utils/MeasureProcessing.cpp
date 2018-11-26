@@ -352,7 +352,7 @@ float CalculateVoltageRMS(Chan::E ch)
 
     float rms = 0.0f;
 
-    Range range = RANGE_DS(ch);
+    Range::E range = RANGE_DS(ch);
     uint16 rShift = RSHIFT_DS(ch);
 
     uint8 *dataIn = &CHOICE_BUFFER[firstByte];
@@ -1429,8 +1429,8 @@ void Measure::Processing::CountedRange(Chan::E ch)
     if (SET_RANGE(ch) != RANGE_DS(ch) || SET_RSHIFT(ch) != RSHIFT_DS(ch))
     {
         int numBytes = NUM_BYTES_DS;
-        Range rangeIn = RANGE_DS(ch);
-        Range rangeOut = SET_RANGE(ch);
+        Range::E rangeIn = RANGE_DS(ch);
+        Range::E rangeOut = SET_RANGE(ch);
         uint16 rShiftIn = RSHIFT_DS(ch);
         uint16 rShiftOut = SET_RSHIFT(ch);
 

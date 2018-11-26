@@ -33,7 +33,7 @@ struct DataSettings
     uint16      rShift[2];
     uint16      trigLev[2];
     int16       tShift;                 ///< Смещение по времени
-    Range       range[2];               ///< Масштаб по напряжению обоих каналов.
+    Range::E    range[2];               ///< Масштаб по напряжению обоих каналов.
     uint        tBase           : 5;    ///< Масштаб по времени
     uint        enableA         : 1;    ///< Включён ли канал A
     uint        enableB         : 1;    ///< Включен ли канал B

@@ -60,13 +60,9 @@ Display::ENumSignalsInSec::E Tables::ENumSignalsInSecToENUM(int numSignalsInSec)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-const char *Tables_RangeNameFromValue(Range range)
+const char *Tables_RangeNameFromValue(Range::E range)
 {
-    static struct StructName
-    {
-        pString name;
-        StructName(pString n) : name(n) {};
-    } names[Range::Number] =
+    DEF_STRUCT(StructName, pString) names[Range::Number] =
     {
         StructName("Range_2mV"),
         StructName("Range_5mV"),
@@ -82,7 +78,7 @@ const char *Tables_RangeNameFromValue(Range range)
         StructName("Range_10V"),
         StructName("Range_20V")
     };
-    return names[range].name;
+    return names[range].val;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

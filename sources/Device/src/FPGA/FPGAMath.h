@@ -8,23 +8,23 @@ class MathFPGA
 {
 public:
 
-    static float RShift2Abs(int rShift, Range range);
+    static float RShift2Abs(int rShift, Range::E range);
     /// —мещение относительно нулевого в пиксел€х экрана
     static int RShift2Pixels(uint16 rShift, int heightGrid);
 
-    static float VoltageCursor(float shiftCurU, Range range, uint16 rShift);
+    static float VoltageCursor(float shiftCurU, Range::E range, uint16 rShift);
 
-    static int RShift2Rel(float rShixftAbs, Range range);
+    static int RShift2Rel(float rShixftAbs, Range::E range);
 
     static float TimeCursor(float shiftCurT, TBase tBase);
 
-    static void PointsRel2Voltage(const uint8 *points, int numPoints, Range range, int16 rShift, float *voltage);
+    static void PointsRel2Voltage(const uint8 *points, int numPoints, Range::E range, int16 rShift, float *voltage);
 
-    static uint8 Voltage2Point(float voltage, Range range, uint16 rShift);
+    static uint8 Voltage2Point(float voltage, Range::E range, uint16 rShift);
 
-    static float Point2Voltage(uint8 value, Range range, uint16 rShift);
+    static float Point2Voltage(uint8 value, Range::E range, uint16 rShift);
 
-    static void PointsVoltage2Rel(const float *voltage, int numPoints, Range range, int16 rShift, uint8 *points);
+    static void PointsVoltage2Rel(const float *voltage, int numPoints, Range::E range, int16 rShift, uint8 *points);
 
     static void CalculateFFT(float *data, int numPoints, float *result, float *freq0, float *density0, float *freq1, float *density1, int *y0, int *y1);
 
@@ -34,5 +34,5 @@ private:
 
     static void Normalize(float *data, int numPoints);
     /// ¬озвращает напр€жение, соответствующее верхней границе сетки
-    static float MaxVoltageOnScreen(Range range);
+    static float MaxVoltageOnScreen(Range::E range);
 };

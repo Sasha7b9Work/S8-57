@@ -117,13 +117,13 @@ static const int voltsInPixelInt[] =   // Коэффициент 20000
 };
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-float MathFPGA::VoltageCursor(float shiftCurU, Range range, uint16 rShift)
+float MathFPGA::VoltageCursor(float shiftCurU, Range::E range, uint16 rShift)
 {
     return MaxVoltageOnScreen(range) - shiftCurU * voltsInPixel[range] - RShift2Abs(rShift, range);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-int MathFPGA::RShift2Rel(float rShiftAbs, Range range)
+int MathFPGA::RShift2Rel(float rShiftAbs, Range::E range)
 {
     int retValue = RShift::ZERO + (int)(rShiftAbs / absStepRShift[range]);
     if (retValue < RShift::MIN)
@@ -144,7 +144,7 @@ float MathFPGA::TimeCursor(float shiftCurT, TBase tBase)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void MathFPGA::PointsRel2Voltage(const uint8 *points, int numPoints, Range range, int16 rShift, float *voltage)
+void MathFPGA::PointsRel2Voltage(const uint8 *points, int numPoints, Range::E range, int16 rShift, float *voltage)
 {
     int voltInPixel = voltsInPixelInt[range];
     float maxVoltsOnScreen = MaxVoltageOnScreen(range);
@@ -158,7 +158,7 @@ void MathFPGA::PointsRel2Voltage(const uint8 *points, int numPoints, Range range
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-uint8 MathFPGA::Voltage2Point(float voltage, Range range, uint16 rShift)
+uint8 MathFPGA::Voltage2Point(float voltage, Range::E range, uint16 rShift)
 {
     int relValue = (int)((voltage + MaxVoltageOnScreen(range) + RShift2Abs(rShift, range)) / voltsInPoint[range].val + MIN_VALUE);
     Math::Limitation<int>(&relValue, 0, 255);
@@ -166,13 +166,13 @@ uint8 MathFPGA::Voltage2Point(float voltage, Range range, uint16 rShift)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-float MathFPGA::Point2Voltage(uint8 value, Range range, uint16 rShift)
+float MathFPGA::Point2Voltage(uint8 value, Range::E range, uint16 rShift)
 {
     return (value - MIN_VALUE) * voltsInPoint[range].val - MaxVoltageOnScreen(range) - RShift2Abs(rShift, range);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void MathFPGA::PointsVoltage2Rel(const float *voltage, int numPoints, Range range, int16 rShift, uint8 *points)
+void MathFPGA::PointsVoltage2Rel(const float *voltage, int numPoints, Range::E range, int16 rShift, uint8 *points)
 {
     float maxVoltOnScreen = MaxVoltageOnScreen(range);
     float rShiftAbs = RShift2Abs(rShift, range);
@@ -454,7 +454,7 @@ int MathFPGA::RShift2Pixels(uint16 rShift, int heightGrid)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-float MathFPGA::MaxVoltageOnScreen(Range range)
+float MathFPGA::MaxVoltageOnScreen(Range::E range)
 {
     DEF_STRUCT(StructRange, float) table[Range::Number] =
     {
@@ -465,7 +465,7 @@ float MathFPGA::MaxVoltageOnScreen(Range range)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-float MathFPGA::RShift2Abs(int rShift, Range range)
+float MathFPGA::RShift2Abs(int rShift, Range::E range)
 {
     return -(RShift::ZERO - (int)rShift) * absStepRShift[range];
 }

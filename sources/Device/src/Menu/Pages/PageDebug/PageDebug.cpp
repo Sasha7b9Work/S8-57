@@ -807,7 +807,7 @@ static void DebugShowSetInfo_Draw()
     {
         for (int ch = 0; ch < 2; ch++)
         {
-            for (Range range; range < Range::Number; ++range)
+            for (int range = 0; range < Range::Number; ++range)
             {
                 Painter::DrawFormatText(x + range * 20, y + dY * ddY, "%d", NRST_RSHIFT_ADD(ch, range, type));
             }

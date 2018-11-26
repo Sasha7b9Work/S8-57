@@ -83,7 +83,7 @@ public:
     // Меню КАНАЛ 1, КАНАЛ 2
 
     uint16              chan_shift[Chan::Number];           ///< Сдвиг канала по вертикали
-    Range               chan_range[Chan::Number];           ///< Масштаб канала по вертикали
+    Range::E            chan_range[Chan::Number];           ///< Масштаб канала по вертикали
     ModeCouple          chan_couple[Chan::Number];          ///< Связь по входу
     bool                chan_enabled[Chan::Number];         ///< Включен/выключен канал
     int8                chan_balanceShiftADC[2];            ///< Добавочное смещение для балансировки АЦП.
@@ -181,7 +181,7 @@ public:
     FFTmaxDB            math_FFTmaxDB;
     Function            math_function;
     ModeRegSet          math_modeRegSet;                ///< Функция ручки УСТАНОВКА - масштаб по времени или смещение по вертикали.
-    Range               math_range;
+    Range::E            math_range;
     Divider             math_divider;
     uint16              math_rShift;
 

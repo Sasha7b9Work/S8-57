@@ -180,7 +180,7 @@ int BottomPart::WriteChannel(Chan::E ch, int x, int y)
 
     x += 8;
 
-    Painter::DrawText(x, y, SET_RANGE(ch).Name());
+    Painter::DrawText(x, y, Range(SET_RANGE(ch)).Name());
 
     x += 22;
 
@@ -213,7 +213,7 @@ void BottomPart::WriteTextVoltage(Chan::E ch, int x, int y)
 
     bool inverse = SET_INVERSE(ch);
     Divider divider = SET_DIVIDER(ch);
-    Range range = SET_RANGE(ch);
+    Range::E range = SET_RANGE(ch);
 
     const int widthField = 91;
     const int heightField = 8;
@@ -224,7 +224,7 @@ void BottomPart::WriteTextVoltage(Chan::E ch, int x, int y)
     }
     const int SIZE = 100;
     char buffer[SIZE];
-    snprintf(buffer, SIZE, "%s\xa5%s\xa5%s", Chan(ch).IsA() ? DICT(D1ch) : DICT(D2ch), couple[SET_COUPLE(ch)], range.ToString(divider));
+    snprintf(buffer, SIZE, "%s\xa5%s\xa5%s", Chan(ch).IsA() ? DICT(D1ch) : DICT(D2ch), couple[SET_COUPLE(ch)], Range(range).ToString(divider));
     Painter::DrawText(x + 1, y, buffer, colorDraw);
     char bufferTemp[SIZE];
     snprintf(bufferTemp, SIZE, "\xa5%s", RShift::ToString((uint16)SET_RSHIFT(ch), range, divider, buffer));

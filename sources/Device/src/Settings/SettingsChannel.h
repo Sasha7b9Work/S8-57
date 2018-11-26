@@ -43,7 +43,6 @@ struct Range
         Number
     } value;
     Range(E v = _2mV) : value(v) {};
-    operator uint8() const { return (uint8)value; };
     Range& operator++()
     {
         value = (E)((uint)value + 1);
@@ -65,7 +64,7 @@ struct Chan
         Math,
         Number
     } value;
-    explicit Chan(E v = A) : value(v) { };
+    explicit Chan(E v) : value(v) { };
     bool IsA() { return value == A; };
     bool IsB() { return value == B; }
     int PointsInChannel() const;
