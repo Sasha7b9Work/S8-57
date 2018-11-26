@@ -108,17 +108,7 @@ private:
 
     static float FreqSetToFreq(const BitSet32 *fr);
 
-    static pString FreqSetToString(const BitSet32 *fr);
-
     static float PeriodSetToFreq(const BitSet32 *period);
-
-    static pString PeriodSetToString(const BitSet32 *pr);
-    /// Преобразует 6 разрядов числа, хранящиеся в стеке, в текстовую строку периода. Младший значащий разряд хранится на вершине стека. order - его порядок
-    static pString StackToString(Stack<uint> *stack, int order);
-    /// Записывает 6 разрядов из стека stack в буфер buffer. Младший разряд на вершине стека. Точку ставить на point позиции, начиная с buffer[0]
-    static void WriteStackToBuffer(Stack<uint> *stack, int point, char *suffix);
-    /// Возвращает порядок младшего разряда считанного значения счётчика периода при данных настройках
-    static int LowOrder(FreqClc freqCLC, NumberPeriods numPeriods);
     /// Установленное в true значение означает, что частоту нужно считать по счётчику периода
     static bool readPeriod;
 
@@ -127,8 +117,4 @@ private:
     static float frequency;
 
     static float period;
-    /// Если true - горит лампочка счёта частоты
-    static bool lampFreq;
-    /// Если false - горит лампочка счёта периода
-    static bool lampPeriod;
 };

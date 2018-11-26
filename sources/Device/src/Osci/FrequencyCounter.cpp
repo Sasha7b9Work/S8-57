@@ -35,13 +35,15 @@ static uint lastPeriodRead;
 static uint lastFreqOver;
 /// Последнее время переполения периода
 static uint lastPeriodOver;
+/// Если true - горит лампочка счёта частоты
+static bool lampFreq = false;
+/// Если false - горит лампочка счёта периода
+static bool lampPeriod = false;;
 
 
 bool     FrequencyCounter::readPeriod;
 float    FrequencyCounter::prevFreq;
 float    FrequencyCounter::frequency;
-bool     FrequencyCounter::lampFreq = false;
-bool     FrequencyCounter::lampPeriod = false;
 
 //                         0    1    2    3    4    5    6 
 static char buffer[11] = {'0', '0', '0', '0', '0', '0', '0', 0, 0, 0, 0};
@@ -50,6 +52,16 @@ static char buffer[11] = {'0', '0', '0', '0', '0', '0', '0', 0, 0, 0, 0};
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /// Выводит отладочную информацию
 static void DrawDebugInfo();
+
+static pString FreqSetToString(const BitSet32 *fr);
+
+static pString PeriodSetToString(const BitSet32 *pr);
+/// Возвращает порядок младшего разряда считанного значения счётчика периода при данных настройках
+static int LowOrder(FrequencyCounter::FreqClc freqCLC, FrequencyCounter::NumberPeriods numPeriods);
+/// Преобразует 6 разрядов числа, хранящиеся в стеке, в текстовую строку периода. Младший значащий разряд хранится на вершине стека. order - его порядок
+static pString StackToString(Stack<uint> *stack, int order);
+/// Записывает 6 разрядов из стека stack в буфер buffer. Младший разряд на вершине стека. Точку ставить на point позиции, начиная с buffer[0]
+static void WriteStackToBuffer(Stack<uint> *stack, int point, char *suffix);
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -239,12 +251,54 @@ float FrequencyCounter::GetFreq()
     return frequency;
 }
 
+#define SIZE 4
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+static void DrawFrequency(int x, int y)
+{
+    Painter::DrawBigText(x + 2, y + 1, SIZE, "F", Choice::ColorMenuField(PageFunction::PageFrequencyCounter::GetChoiceTimeF()));
+
+    Painter::DrawRectangle(x - 20, y, 10, 10);
+    if (lampFreq)
+    {
+        Painter::FillRegion(x - 20, y, 10, 10);
+    }
+
+    int dX = 7 * SIZE;
+
+    Painter::DrawBigText(x + dX, y + 1, SIZE, "=", Choice::ColorMenuField(PageFunction::PageFrequencyCounter::GetChoiceTimeF()));
+
+    dX = SIZE * 12;
+
+    Painter::DrawBigText(x + dX, y + 1, SIZE, FreqSetToString(&freqActual),
+        Choice::ColorMenuField(PageFunction::PageFrequencyCounter::GetChoiceTimeF()));
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+static void DrawPeriod(int x, int y)
+{
+    Painter::DrawBigText(x + 2, y + 10 * SIZE, SIZE, "T", Choice::ColorMenuField(PageFunction::PageFrequencyCounter::GetChoiceNumPeriods()));
+
+    Painter::DrawRectangle(x - 20, y + 10 * SIZE, 10, 10);
+    if (lampPeriod)
+    {
+        Painter::FillRegion(x - 20, y + 10 * SIZE, 10, 10);
+    }
+
+    int dX = 7 * SIZE;
+
+    Painter::DrawBigText(x + dX, y + 10 * SIZE, SIZE, "=", Choice::ColorMenuField(PageFunction::PageFrequencyCounter::GetChoiceNumPeriods()));
+
+    dX = SIZE * 12;
+
+    Painter::DrawBigText(x + dX, y + 10 * SIZE, SIZE, PeriodSetToString(&periodActual),
+        Choice::ColorMenuField(PageFunction::PageFrequencyCounter::GetChoiceNumPeriods()));
+}
+
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void FrequencyCounter::Draw()
 {
     /// \todo В этой строке точку ставить не где придётся, а в той позиции, где она стояла последний раз
-
-#define SIZE 4
 
     if (!FREQ_METER_IS_ENABLED)
     {
@@ -263,34 +317,10 @@ void FrequencyCounter::Draw()
     x += 2;
     y += 2;
 
-    Painter::DrawBigText(x + 2,  y + 1,         SIZE, "F", Choice::ColorMenuField(PageFunction::PageFrequencyCounter::GetChoiceTimeF()));
+    DrawFrequency(x, y);
 
-    Painter::DrawRectangle(x - 20, y, 10, 10);
-    if(lampFreq)
-    {
-        Painter::FillRegion(x - 20, y, 10, 10);
-    }
-
-    Painter::DrawBigText(x + 2,  y + 10 * SIZE, SIZE, "T", Choice::ColorMenuField(PageFunction::PageFrequencyCounter::GetChoiceNumPeriods()));
-
-    Painter::DrawRectangle(x - 20, y + 10 * SIZE, 10, 10);
-    if(lampPeriod)
-    {
-        Painter::FillRegion(x - 20, y + 10 * SIZE, 10, 10);
-    }
-
-    int dX = 7 * SIZE;
-    Painter::DrawBigText(x + dX, y + 1,         SIZE, "=", Choice::ColorMenuField(PageFunction::PageFrequencyCounter::GetChoiceTimeF()));
-    Painter::DrawBigText(x + dX, y + 10 * SIZE, SIZE, "=", Choice::ColorMenuField(PageFunction::PageFrequencyCounter::GetChoiceNumPeriods()));
-    
-    dX = SIZE * 12;
-
-    Painter::DrawBigText(x + dX, y + 1, SIZE, FreqSetToString(&freqActual),
-                         Choice::ColorMenuField(PageFunction::PageFrequencyCounter::GetChoiceTimeF()));
-
-    Painter::DrawBigText(x + dX, y + 10 * SIZE, SIZE, PeriodSetToString(&periodActual),
-                         Choice::ColorMenuField(PageFunction::PageFrequencyCounter::GetChoiceNumPeriods()));
-
+    DrawPeriod(x, y);
+   
     if(false)
     {
         DrawDebugInfo();
@@ -302,7 +332,7 @@ void FrequencyCounter::Draw()
 #define OVERFLOW_STRING ">>>"
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-pString FrequencyCounter::PeriodSetToString(const BitSet32 *pr)
+pString PeriodSetToString(const BitSet32 *pr)
 {
     if (pr->word == 0)
     {
@@ -351,7 +381,7 @@ pString FrequencyCounter::PeriodSetToString(const BitSet32 *pr)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-int FrequencyCounter::LowOrder(FreqClc freqCLC, NumberPeriods numPeriods)
+static int LowOrder(FrequencyCounter::FreqClc freqCLC, FrequencyCounter::NumberPeriods numPeriods)
 {
 /*
     Измеряемое значение | Принимаемое значение | Вывод на экран | последний значащий разряд
@@ -400,7 +430,7 @@ int FrequencyCounter::LowOrder(FreqClc freqCLC, NumberPeriods numPeriods)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-pString FrequencyCounter::StackToString(Stack<uint> *stack, int order)
+static pString StackToString(Stack<uint> *stack, int order)
 {
     if(order == -10)
     {
@@ -507,7 +537,7 @@ pString FrequencyCounter::StackToString(Stack<uint> *stack, int order)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void FrequencyCounter::WriteStackToBuffer(Stack<uint> *stack, int point, char *suffix)
+static void WriteStackToBuffer(Stack<uint> *stack, int point, char *suffix)
 {
     for(int i = 6; i >= 0; i--)
     {
@@ -523,7 +553,7 @@ void FrequencyCounter::WriteStackToBuffer(Stack<uint> *stack, int point, char *s
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-pString FrequencyCounter::FreqSetToString(const BitSet32 *fr)
+static pString FreqSetToString(const BitSet32 *fr)
 {
     if(fr->word == 0)
     {
