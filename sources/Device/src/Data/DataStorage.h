@@ -17,9 +17,9 @@ public:
 
     static DataSettings *DataSettingsFromEnd(int fromEnd);
 
-    static uint8 *GetAverageData(Chan ch);
+    static uint8 *GetAverageData(Chan::E ch);
 
     static void GetDataFromEnd(int fromEnd, DataSettings *ds, uint8 *dataA, uint8 *dataB);
 
-    static bool GetLimitation(Chan ch, uint8 *data, int direction);
+    static bool GetLimitation(Chan::E ch, uint8 *data, int direction);
 };

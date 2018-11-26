@@ -47,7 +47,7 @@ DataSettings *DataStorage::DataSettingsFromEnd(int /*fromEnd*/)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-uint8 *DataStorage::GetAverageData(Chan /*ch*/)
+uint8 *DataStorage::GetAverageData(Chan::E /*ch*/)
 {
     return 0;
 }
@@ -58,7 +58,7 @@ void DataStorage::GetDataFromEnd(int /*fromEnd*/, DataSettings * /*ds*/, uint8 *
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-bool DataStorage::GetLimitation(Chan /*ch*/, uint8 * /*data*/, int /*direction*/)
+bool DataStorage::GetLimitation(Chan::E /*ch*/, uint8 * /*data*/, int /*direction*/)
 {
     return false;
 }

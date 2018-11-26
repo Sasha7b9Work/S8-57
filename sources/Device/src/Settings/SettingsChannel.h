@@ -65,7 +65,7 @@ struct Chan
         Math,
         Number
     } value;
-    Chan(E v = A) : value(v) { };
+    explicit Chan(E v = A) : value(v) { };
     bool IsA() { return value == A; };
     bool IsB() { return value == B; }
     int PointsInChannel() const;
