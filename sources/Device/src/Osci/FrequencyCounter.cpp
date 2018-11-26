@@ -317,9 +317,15 @@ void FrequencyCounter::Draw()
     x += 2;
     y += 2;
 
-    DrawFrequency(x, y);
+    if (FREQ_METER_MODE_VIEW_IS_FREQUENCY)
+    {
 
-    DrawPeriod(x, y);
+        DrawFrequency(x, y);
+    }
+    else
+    {
+        DrawPeriod(x, y);
+    }
    
     if(false)
     {

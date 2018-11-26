@@ -17,6 +17,7 @@
 JLink*
 *.pch*
 *.obj
+archive.zip
 
 doc/doxygen/OSC/*
 
