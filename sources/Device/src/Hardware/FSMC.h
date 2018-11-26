@@ -14,6 +14,8 @@ public:
     static void Init();
 
     static void WriteToPanel(Message *message);
+
+    static void WriteToPanel(uint8 *data, uint length);         /// \todo Эта функция должна быть приватной
     /// Записать в панель команду, состоящую из двух байт
     static void WriteToPanel2bytes(uint8 byte0, uint8 byte1);
 
@@ -27,8 +29,6 @@ public:
     /// Установить функцию, которую нужно выполнить единоразово после завершения обмена с панелью
     static void RunFunctionAfterInteractionWitchPanel(pFuncTester func);
 private:
-
-    static void WriteToPanel(uint8 *data, uint length);
 
     enum ModeFSMC
     {
