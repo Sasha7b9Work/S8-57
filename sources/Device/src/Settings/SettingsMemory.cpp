@@ -13,7 +13,7 @@ int sMemory_NumBytesInChannel_()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-ENumPointsFPGA NumPoints_2_ENumPoints(int numPoints)
+ENumPointsFPGA::E NumPoints_2_ENumPoints(int numPoints)
 {
     if (numPoints == 8192)  { return ENumPointsFPGA::_8k; }
     else if (numPoints == 4096)  { return ENumPointsFPGA::_4k; }
@@ -24,7 +24,7 @@ ENumPointsFPGA NumPoints_2_ENumPoints(int numPoints)
 
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-int ENumPoints_2_NumPoints(ENumPointsFPGA numPoints)
+int ENumPoints_2_NumPoints(ENumPointsFPGA::E numPoints)
 {
     static const int n[ENumPointsFPGA::Size] =
     {

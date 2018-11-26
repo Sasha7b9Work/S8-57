@@ -49,21 +49,7 @@ int Chan::PointsInChannel() const
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-int Chan::RequestBytes(DataSettings *ds) const
+int Chan::RequestBytes(DataSettings *) const
 {
-    ENumPointsFPGA numBytes;
-    PeakDetMode::E peakDet;
-
-    if (ds)
-    {
-        numBytes = (ENumPointsFPGA::E)(ENUM_BYTES(ds));
-        peakDet = PEAKDET(ds);
-    }
-    else
-    {
-        numBytes = NumPoints_2_ENumPoints(NUM_BYTES(ds));
-        peakDet = SET_PEAKDET;
-    }
-
     return FPGA_MAX_NUM_POINTS;
 }

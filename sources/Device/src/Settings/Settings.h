@@ -131,7 +131,7 @@ public:
     // Меню ПАМЯТЬ
 
 #define MAX_SYMBOLS_IN_FILE_NAME 35
-    ENumPointsFPGA      mem_enumPoints;                             ///< Число точек
+    ENumPointsFPGA::E   mem_enumPoints;                             ///< Число точек
     ModeBtnMemory       mem_modeBtnMemory;
     ModeWork            mem_modeWork;                               ///< Режим работы.
     bool                mem_flashAutoConnect;                       ///< Если true, при подключении флешки автоматически выводится Файл-Менеджер.

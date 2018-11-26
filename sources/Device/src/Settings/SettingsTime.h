@@ -17,7 +17,6 @@ struct PeakDetMode
         Enabled,
         Average
     } value;
-    explicit PeakDetMode(E v) : value(v) {};
 };
 
 struct TBase

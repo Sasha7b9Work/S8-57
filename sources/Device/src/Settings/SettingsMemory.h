@@ -48,8 +48,7 @@ struct ENumPointsFPGA
         _8k,
         Size
     } value;
-    ENumPointsFPGA(E v = _512) : value(v) {};
-    operator uint8() const { return (uint8)value; };
+    explicit ENumPointsFPGA(E v) : value(v) {};
 };
 
 /// Что показывать в режиме Внутр ЗУ - считанный или записанный сигнал.
@@ -128,8 +127,8 @@ struct FileNamingMode
 int sMemory_NumPointsInChannel_();
 int sMemory_NumBytesInChannel_();
 
-ENumPointsFPGA NumPoints_2_ENumPoints(int numPoints);
-int ENumPoints_2_NumPoints(ENumPointsFPGA numPoints);
+ENumPointsFPGA::E NumPoints_2_ENumPoints(int numPoints);
+int ENumPoints_2_NumPoints(ENumPointsFPGA::E numPoints);
 
 /// Выделяет память из кучи для канала. Настройки длины памяти берёт из ds или set (если ds == 0)
 void *AllocMemForChannelFromHeap(Chan ch, DataSettings *ds);
