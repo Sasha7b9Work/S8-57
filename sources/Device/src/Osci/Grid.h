@@ -73,6 +73,5 @@ public:
             _4,
             Size
         } value;
-        operator uint8() const { return (uint8)value; };
     };
 };
