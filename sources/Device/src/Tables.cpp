@@ -34,7 +34,7 @@ int Tables::Size()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-Display::ENumSignalsInSec Tables::ENumSignalsInSecToENUM(int numSignalsInSec)
+Display::ENumSignalsInSec::E Tables::ENumSignalsInSecToENUM(int numSignalsInSec)
 {
     if(numSignalsInSec == 1)
     {

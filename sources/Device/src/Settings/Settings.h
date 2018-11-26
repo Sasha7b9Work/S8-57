@@ -55,30 +55,30 @@ public:
     uint                crc32;                              ///< \brief Контрольная сумма данной структуры с хранящимися в ней настройками
 
     // Меню ДИСПЛЕЙ
-                                                            ///< вычисляется от первого байта, следующего за этим полем
-    Display::ModeDrawSignal::E  disp_modeDrawSignal;
-    Display::ThicknessSignal    disp_thickness;             ///< Толщина линии, которой рисуется сигнал
-    Display::Background::E      disp_background;            ///< Цвет фона.
-    Display::ShowStrNavi        disp_showStringNavigation;  ///< Режим показа строки навигации меню.
-    Display::ENumMinMax         disp_ENumMinMax;            ///< Перечисление количества измерений для определения минимумов и масимумов.
-    Display::ModeAveraging      disp_modeAveraging;         ///< Тип усреднений по измерениям.
-    Display::ENumAverage        disp_ENumAverage;           ///< Число усреднений сигнала.
-    Display::ENumAccum          disp_ENumAccum;             ///< Число накоплений сигнала на экране.
-    Display::ModeAccumulation   disp_modeAccumulation;      ///< Режим накопления сигналов.
-    Display::ENumSmoothing      disp_ENumSmoothing;         ///< Перечисление количества точек для скользящего фильтра.
-    Display::ENumSignalsInSec   disp_ENumSignalsInSec;      ///< Перечисление числа считываний сигнала в секунда.
-    Grid::Type                  disp_typeGrid;              ///< Тип сетки
-    int16                       disp_brightnessGrid;        ///< Яркость сетки от 0 до 100.
-    Display::LinkingRShift      disp_linkingRShift;         ///< Тип привязки к смещению по вертикали.
-    int16                       disp_brightness;            ///< Яркость дисплея.
-    int16                       disp_timeShowLevels;        ///< Время, в течение которого нужно показывать уровин смещения.
-    int16                       disp_timeMessages;          ///< Время в секундах, на которое сообщение остаётся на экрне.
-    Display::AltMarkers         disp_altMarkers;            ///< Режим отображения дополнительных боковых маркеров смещений.
-    Menu::AutoHide              disp_menuAutoHide;          ///< Через сколько времени после последнего нажатия клавиши прятать меню.
-    int16                       disp_shiftInMemory;         ///< \brief Показывает смещение левого края стеки относительно нулевого байта памяти в 
-                                                            ///< байтах. Т.е. для пикового детектора будет в два раза больше количества точек на экране.
-    Chan                        disp_lastAffectedChannel;   ///< \brief Последний управляемый канал. Используется для правильного вывода сигналов
-                                                            ///< на экран с наложением один поверх другого
+                                                                ///< вычисляется от первого байта, следующего за этим полем
+    Display::ModeDrawSignal::E      disp_modeDrawSignal;
+    Display::ThicknessSignal        disp_thickness;             ///< Толщина линии, которой рисуется сигнал
+    Display::Background::E          disp_background;            ///< Цвет фона.
+    Display::ShowStrNavi            disp_showStringNavigation;  ///< Режим показа строки навигации меню.
+    Display::ENumMinMax             disp_ENumMinMax;            ///< Перечисление количества измерений для определения минимумов и масимумов.
+    Display::ModeAveraging          disp_modeAveraging;         ///< Тип усреднений по измерениям.
+    Display::ENumAverage            disp_ENumAverage;           ///< Число усреднений сигнала.
+    Display::ENumAccum              disp_ENumAccum;             ///< Число накоплений сигнала на экране.
+    Display::ModeAccumulation       disp_modeAccumulation;      ///< Режим накопления сигналов.
+    Display::ENumSmoothing          disp_ENumSmoothing;         ///< Перечисление количества точек для скользящего фильтра.
+    Display::ENumSignalsInSec::E    disp_ENumSignalsInSec;      ///< Перечисление числа считываний сигнала в секунда.
+    Grid::Type                      disp_typeGrid;              ///< Тип сетки
+    int16                           disp_brightnessGrid;        ///< Яркость сетки от 0 до 100.
+    Display::LinkingRShift          disp_linkingRShift;         ///< Тип привязки к смещению по вертикали.
+    int16                           disp_brightness;            ///< Яркость дисплея.
+    int16                           disp_timeShowLevels;        ///< Время, в течение которого нужно показывать уровин смещения.
+    int16                           disp_timeMessages;          ///< Время в секундах, на которое сообщение остаётся на экрне.
+    Display::AltMarkers             disp_altMarkers;            ///< Режим отображения дополнительных боковых маркеров смещений.
+    Menu::AutoHide                  disp_menuAutoHide;          ///< Через сколько времени после последнего нажатия клавиши прятать меню.
+    int16                           disp_shiftInMemory;         ///< \brief Показывает смещение левого края стеки относительно нулевого байта памяти в 
+                                                                ///< байтах. Т.е. для пикового детектора будет в два раза больше количества точек на экране.
+    Chan                            disp_lastAffectedChannel;   ///< \brief Последний управляемый канал. Используется для правильного вывода сигналов
+                                                                ///< на экран с наложением один поверх другого
 
     // Меню КАНАЛ 1, КАНАЛ 2
 

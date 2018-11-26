@@ -270,7 +270,7 @@ public:
             _2,
             _1
         } value;
-        ENumSignalsInSec(E v = _25) : value(v) { };
+        explicit ENumSignalsInSec(E v) : value(v) { };
         /// ¬озвращает количество кадров в секунду
         int ToFPS() const;
     };
