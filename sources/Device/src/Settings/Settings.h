@@ -69,12 +69,12 @@ public:
     Display::ENumSignalsInSec::E    disp_ENumSignalsInSec;      ///< ѕеречисление числа считываний сигнала в секунда.
     Grid::Type::E                   disp_typeGrid;              ///< “ип сетки
     int16                           disp_brightnessGrid;        ///< яркость сетки от 0 до 100.
-    Display::LinkingRShift          disp_linkingRShift;         ///< “ип прив€зки к смещению по вертикали.
+    Display::LinkingRShift::E       disp_linkingRShift;         ///< “ип прив€зки к смещению по вертикали.
     int16                           disp_brightness;            ///< яркость диспле€.
     int16                           disp_timeShowLevels;        ///< ¬рем€, в течение которого нужно показывать уровин смещени€.
     int16                           disp_timeMessages;          ///< ¬рем€ в секундах, на которое сообщение остаЄтс€ на экрне.
     Display::AltMarkers::E          disp_altMarkers;            ///< –ежим отображени€ дополнительных боковых маркеров смещений.
-    Menu::AutoHide                  disp_menuAutoHide;          ///< „ерез сколько времени после последнего нажати€ клавиши пр€тать меню.
+    Menu::AutoHide::E               disp_menuAutoHide;          ///< „ерез сколько времени после последнего нажати€ клавиши пр€тать меню.
     int16                           disp_shiftInMemory;         ///< \brief ѕоказывает смещение левого кра€ стеки относительно нулевого байта пам€ти в 
                                                                 ///< байтах. “.е. дл€ пикового детектора будет в два раза больше количества точек на экране.
     Chan                            disp_lastAffectedChannel;   ///< \brief ѕоследний управл€емый канал. »спользуетс€ дл€ правильного вывода сигналов

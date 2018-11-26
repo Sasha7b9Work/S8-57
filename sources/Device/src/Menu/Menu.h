@@ -175,7 +175,6 @@ public:
             _30 = 30,  ///< Через 30 секунд.
             _60 = 60   ///< Через 60 секунд.
         } value;
-        operator uint8() const { return (uint8)value; };
     };
 };
 
