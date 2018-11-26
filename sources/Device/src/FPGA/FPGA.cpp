@@ -238,7 +238,7 @@ bool FPGA::ReadForTester(uint8 *dataA, uint8 *dataB)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void FPGA::ReadDataChanenl(Chan ch, uint8 data[FPGA_MAX_NUM_POINTS])
+void FPGA::ReadDataChanenl(Chan::E ch, uint8 data[FPGA_MAX_NUM_POINTS])
 {
     uint numPoints = NumPoints();
 
@@ -251,7 +251,7 @@ void FPGA::ReadDataChanenl(Chan ch, uint8 data[FPGA_MAX_NUM_POINTS])
     FSMC::WriteToFPGA8(WR_START_ADDR, 0xff);
 
 
-    uint8 *addr0 = ch.IsA() ? RD_DATA_A : RD_DATA_B;
+    uint8 *addr0 = Chan(ch).IsA() ? RD_DATA_A : RD_DATA_B;
     uint8 *addr1 = addr0 + 1;
 
     if (IN_RANDOMIZE_MODE)
@@ -288,7 +288,7 @@ void FPGA::ReadDataChanenl(Chan ch, uint8 data[FPGA_MAX_NUM_POINTS])
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void FPGA::ReadDataChanenlRand(Chan ch, uint8 *address, uint8 *data)
+void FPGA::ReadDataChanenlRand(Chan::E ch, uint8 *address, uint8 *data)
 {
     int Tsm = CalculateShift(ch);
 
@@ -329,7 +329,7 @@ void FPGA::ReadDataChanenlRand(Chan ch, uint8 *address, uint8 *data)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-int FPGA::CalculateShift(Chan ch)
+int FPGA::CalculateShift(Chan::E ch)
 {
     uint16 min = 0;
     uint16 max = 0;
@@ -444,14 +444,14 @@ void FPGA::GPIO_Init()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void FPGA::IncreaseRange(Chan ch)
+void FPGA::IncreaseRange(Chan::E ch)
 {
     Math::LimitationIncrease<uint8>((uint8 *)(&SET_RANGE(ch)), (uint8)(Range::Number - 1));
     LoadRanges();
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void FPGA::DecreaseRange(Chan ch)
+void FPGA::DecreaseRange(Chan::E ch)
 {
     Math::LimitationDecrease<uint8>((uint8 *)(&SET_RANGE(ch)), 0);
     LoadRanges();
@@ -522,7 +522,7 @@ GPIO_TypeDef *FPGA::GetPort(Pin::E pin)
 #endif
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-uint8 FPGA::ValueForRange(Chan ch)
+uint8 FPGA::ValueForRange(Chan::E ch)
 {
     static const uint8 datas[ModeCouple::Size] =
     {
@@ -759,14 +759,14 @@ void FPGA::SetTShift(int tShift)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void FPGA::SetModeCouple(Chan ch, ModeCouple modeCoupe)
+void FPGA::SetModeCouple(Chan::E ch, ModeCouple modeCoupe)
 {
     SET_COUPLE(ch) = modeCoupe;
     LoadRanges();
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void FPGA::SetBandwidth(Chan ch)
+void FPGA::SetBandwidth(Chan::E ch)
 {
     static const Pin::E pinsLF[2] = {Pin::LF1, Pin::LF2};
     WritePin(pinsLF[ch], SET_BANDWIDTH(ch) == Bandwidth::_20MHz);

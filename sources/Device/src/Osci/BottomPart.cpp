@@ -166,9 +166,9 @@ void BottomPart::Draw()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-int BottomPart::WriteChannel(Chan ch, int x, int y)
+int BottomPart::WriteChannel(Chan::E ch, int x, int y)
 {
-    Painter::DrawText(x, y, ch.IsA() ? "1:" : "2:", Color::Channel(ch));
+    Painter::DrawText(x, y, Chan(ch).IsA() ? "1:" : "2:", Color::Channel(ch));
 
     x += 7;
 
@@ -200,7 +200,7 @@ void BottomPart::WriteTBase(int x, int y)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void BottomPart::WriteTextVoltage(Chan ch, int x, int y)
+void BottomPart::WriteTextVoltage(Chan::E ch, int x, int y)
 {
     if (!SET_ENABLED(ch))
     {
@@ -224,7 +224,7 @@ void BottomPart::WriteTextVoltage(Chan ch, int x, int y)
     }
     const int SIZE = 100;
     char buffer[SIZE];
-    snprintf(buffer, SIZE, "%s\xa5%s\xa5%s", ch.IsA() ? DICT(D1ch) : DICT(D2ch), couple[SET_COUPLE(ch)], range.ToString(divider));
+    snprintf(buffer, SIZE, "%s\xa5%s\xa5%s", Chan(ch).IsA() ? DICT(D1ch) : DICT(D2ch), couple[SET_COUPLE(ch)], range.ToString(divider));
     Painter::DrawText(x + 1, y, buffer, colorDraw);
     char bufferTemp[SIZE];
     snprintf(bufferTemp, SIZE, "\xa5%s", RShift::ToString((uint16)SET_RSHIFT(ch), range, divider, buffer));

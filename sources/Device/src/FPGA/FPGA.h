@@ -58,9 +58,9 @@ public:
 
     static void LoadSettings();
 
-    static void IncreaseRange(Chan ch);
+    static void IncreaseRange(Chan::E ch);
 
-    static void DecreaseRange(Chan ch);
+    static void DecreaseRange(Chan::E ch);
 
     static void IncreaseTBase();
 
@@ -118,7 +118,7 @@ public:
 
     static void Reset();
 
-    static void SetModeCouple(Chan ch, ModeCouple couple);
+    static void SetModeCouple(Chan::E ch, ModeCouple couple);
 
     class FreqMeter
     {
@@ -157,7 +157,7 @@ public:
     /// Установить добавочное смещение по времени для режима рандомизатора. В каждой развёртке это смещение должно быть разное
     static void SetDeltaTShift(int16 shift);
 
-    static void SetBandwidth(Chan ch);
+    static void SetBandwidth(Chan::E ch);
 
     static ADC_HandleTypeDef *HandleADC() { return &handleADC; };
 
@@ -193,17 +193,17 @@ private:
 
     static uint16 ReadLastRecord();
 
-    static void ReadDataChanenl(Chan ch, uint8 data[FPGA_MAX_NUM_POINTS]);
+    static void ReadDataChanenl(Chan::E ch, uint8 data[FPGA_MAX_NUM_POINTS]);
     /// Установить в соотвествующие положения выводы, отвечающие за источник и вход синхронизации
     static void LoadTrigSourceInput();
     /// Читать канал в рандомизаторе с адреса address
-    static void ReadDataChanenlRand(Chan ch, uint8 *address, uint8 *data);
+    static void ReadDataChanenlRand(Chan::E ch, uint8 *address, uint8 *data);
 
     static bool CalculateGate(uint16 rand, uint16 *eMin, uint16 *eMax);
 
-    static int CalculateShift(Chan ch);
+    static int CalculateShift(Chan::E ch);
 
-    static uint8 ValueForRange(Chan ch);
+    static uint8 ValueForRange(Chan::E ch);
 
     static bool isRunning;
     /// True, если дан запуск

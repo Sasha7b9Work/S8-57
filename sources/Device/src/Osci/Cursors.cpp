@@ -13,7 +13,7 @@
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-float Cursors::PosU(Chan ch, int numCur)
+float Cursors::PosU(Chan::E ch, int numCur)
 {
     return CURsU_POS(ch, numCur) / (Grid::Bottom() == Grid::FullBottom() ? 1.0f : 2.0f);
 }
@@ -25,7 +25,7 @@ bool Cursors::NecessaryDraw()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-pString Cursors::Voltage(Chan source, int numCur, char buffer[20])
+pString Cursors::Voltage(Chan::E source, int numCur, char buffer[20])
 {
     float voltage = MathFPGA::VoltageCursor(Cursors::PosU(source, numCur), SET_RANGE(source), SET_RSHIFT(source));
     if (SET_DIVIDER_10(source))
@@ -36,7 +36,7 @@ pString Cursors::Voltage(Chan source, int numCur, char buffer[20])
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-float Cursors::PosT(Chan ch, int num)
+float Cursors::PosT(Chan::E ch, int num)
 {
     float retValue = 0.0f;
     std::memcpy(&retValue, &set.curs_posCurT[ch][num], sizeof(float));
@@ -44,7 +44,7 @@ float Cursors::PosT(Chan ch, int num)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Cursors::SetCursPosT_temp(Chan ch, int num, float value)
+void Cursors::SetCursPosT_temp(Chan::E ch, int num, float value)
 {
     std::memcpy(&set.curs_posCurT[ch][num], &value, sizeof(float));
 }

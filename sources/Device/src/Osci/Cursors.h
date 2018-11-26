@@ -51,9 +51,9 @@
 /// Курсоры какого канала сейчас активны
 #define CURS_SOURCE                 (set.curs_source)
 /// Активны курсоры канала A
-#define CURS_SOURCE_A               (CURS_SOURCE.IsA())
+#define CURS_SOURCE_A               (CURS_SOURCE == Chan::A)
 /// Активны курсоры канала B
-#define CURS_SOURCE_B               (CURS_SOURCE.IsB())
+#define CURS_SOURCE_B               (CURS_SOURCE == Chan::B)
 
 /// Абсолютное значение напряжения, соответствующее 100%
 #define dUperc(ch)                  (set.curs_deltaU100percents[ch])
@@ -117,13 +117,13 @@ public:
     };
 
     /// Получить позицию курсора напряжения
-    static float PosU(Chan ch, int numCur);
+    static float PosU(Chan::E ch, int numCur);
     /// Возвращает true,если нужно рисовать курсоры
     static bool  NecessaryDraw();
     /// Получить строку курсора напряжения
-    static pString Voltage(Chan source, int numCur, char buffer[20]);
+    static pString Voltage(Chan::E source, int numCur, char buffer[20]);
     /// Возвращает значение курсора времени
-    static float PosT(Chan ch, int num);
+    static float PosT(Chan::E ch, int num);
 
-    static void SetCursPosT_temp(Chan ch, int num, float value);
+    static void SetCursPosT_temp(Chan::E ch, int num, float value);
 };

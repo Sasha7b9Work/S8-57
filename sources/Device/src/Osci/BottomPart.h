@@ -10,11 +10,11 @@ public:
     static void Draw();
 
 private:
-    static int WriteChannel(Chan ch, int x, int y);
+    static int WriteChannel(Chan::E ch, int x, int y);
 
     static void WriteTBase(int x, int y);
 
-    static void WriteTextVoltage(Chan ch, int x, int y); ///< Написать в нижней строке параметры вертикального тракта.
+    static void WriteTextVoltage(Chan::E ch, int x, int y); ///< Написать в нижней строке параметры вертикального тракта.
 
     static void WriteStringAndNumber(const char *text, int16 x, int16 y, int number);
 

@@ -19,7 +19,7 @@ void RShift::Draw()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void RShift::Draw(Chan ch)
+void RShift::Draw(Chan::E ch)
 {
     Painter::SetColor(Color::Channel(ch));
 
@@ -31,7 +31,7 @@ void RShift::Draw(Chan ch)
 
     Painter::SetFont(Font::Type::_5);
 
-    Painter::DrawChar(Grid::Left() - 7, y - 6, ch.IsA() ? '1' : '2', Color::BACK);
+    Painter::DrawChar(Grid::Left() - 7, y - 6, Chan(ch).IsA() ? '1' : '2', Color::BACK);
 
     Painter::SetFont(Font::Type::_8);
 }

@@ -4,7 +4,7 @@
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-float GetStretchADC(Chan ch)
+float GetStretchADC(Chan::E ch)
 {
     static const int16 *addStretch[Range::Number][2] =
     {
@@ -45,7 +45,7 @@ float GetStretchADC(Chan ch)
 
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------
-void SetStretchADC(Chan ch, float kStretch)
+void SetStretchADC(Chan::E ch, float kStretch)
 {
     NRST_STRETCH_ADC(ch, NRST_STRETCH_ADC_TYPE) = (int16)((kStretch - 1.0f) * 1e4f);
 }

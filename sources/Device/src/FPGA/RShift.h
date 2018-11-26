@@ -16,5 +16,5 @@ public:
 
 private:
 
-    static void Draw(Chan ch);
+    static void Draw(Chan::E ch);
 };

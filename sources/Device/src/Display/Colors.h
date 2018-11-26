@@ -45,8 +45,8 @@ public:
     explicit Color(uint8 val) : value(val) { }
     Color(const Color &color) : value(color.value) { }
 
-    static Color Channel(Chan ch);
-    static Color Cursors(Chan ch);
+    static Color Channel(Chan::E ch);
+    static Color Cursors(Chan::E ch);
     static Color Trig();
     static Color ChanAccum(Chan ch);     ///< Цвет канала в режиме накопления
     static Color MenuItem(bool shade);      ///< Цвет элемента меню.

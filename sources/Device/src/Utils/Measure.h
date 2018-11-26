@@ -101,13 +101,13 @@ public:
     /// Выходные данные, соответствующие текущим настройками set, рассчитываются сразу и записываются в outA, outB.
     static void SetData(bool needSmoothing);
     /// Рассчитать позицию курсора напряжения, соответствующю заданной позиции курсора posCurT
-    static float CalculateCursorU(Chan ch, float posCurT);
+    static float CalculateCursorU(Chan::E ch, float posCurT);
     /// Рассчитать позицию курсора времени, соответствующую заданной позиции курсора напряжения posCurU
-    static float CalculateCursorT(Chan ch, float posCurU, int numCur);
+    static float CalculateCursorT(Chan::E ch, float posCurU, int numCur);
 
-    static void SetMarkerVoltage(Chan ch, int num, float value);
+    static void SetMarkerVoltage(Chan::E ch, int num, float value);
 
-    static void SetMarkerTime(Chan ch, int num, int value);
+    static void SetMarkerTime(Chan::E ch, int num, int value);
    
     static char GetChar(Type measure);
 
@@ -220,7 +220,7 @@ private:
         /// Аппроксимировать единичное измерение режима рандомизатора функцией sinX/X
         static void InterpolationSinX_X(uint8 *data, int numPoints, TBase tBase);
         /// Возвращает строку автоматического измерения
-        static char* GetStringMeasure(Measure::Type measure, Chan ch, char *buffer, int lenBuf);
+        static char* GetStringMeasure(Measure::Type measure, Chan::E ch, char *buffer, int lenBuf);
         /// Расчитать все автоматические измерения
         static void CalculateMeasures();
 
@@ -232,7 +232,7 @@ private:
         /// Приведение сигнала к установленным в приборе настройкам
         static void CountedToCurrentSettings();
         /// Приведение сигнала к текущим Range и rShift
-        static void CountedRange(Chan ch);
+        static void CountedRange(Chan::E ch);
         /// Приведение сигнала к текущему TBase
         static void CountedTBase();
         /// Приведение сигнала к текущему tShift

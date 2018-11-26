@@ -38,8 +38,8 @@ void *extraMEM = 0;
 static void Clear();
 /// «аполн€ет структуру dataStruct данными дл€ отрисовки
 static void PrepareDataForDraw(StructDataDrawing *dataStruct);
-static void FillDataP2P(StructDataDrawing *dataStruct, Chan ch);
-static void FillDataNormal(StructDataDrawing *dataStruct, Chan ch);
+static void FillDataP2P(StructDataDrawing *dataStruct, Chan::E ch);
+static void FillDataNormal(StructDataDrawing *dataStruct, Chan::E ch);
 static void ReadMinMax(StructDataDrawing *dataStruct, int direction);
 
 
@@ -235,7 +235,7 @@ static void PrepareDataForDraw(StructDataDrawing *dataStruct)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void FillDataP2P(StructDataDrawing *dataStruct, Chan ch)
+static void FillDataP2P(StructDataDrawing *dataStruct, Chan::E ch)
 {
     std::memset(dataStruct->data[ch], 0, 281 * 2);
 
@@ -295,7 +295,7 @@ static void FillDataP2P(StructDataDrawing *dataStruct, Chan ch)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void FillDataNormal(StructDataDrawing *dataStruct, Chan ch)
+static void FillDataNormal(StructDataDrawing *dataStruct, Chan::E ch)
 {
     if (!dataStruct->needDraw[ch])
     {

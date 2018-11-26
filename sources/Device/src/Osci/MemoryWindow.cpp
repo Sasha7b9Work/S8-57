@@ -16,11 +16,11 @@ void MemoryWindow::Draw()
 {
     DrawScreenArea();
 
-    Chan chans[2] = {LAST_AFFECTED_CH_IS_A ? Chan(Chan::B) : Chan(Chan::A), LAST_AFFECTED_CH_IS_A ? Chan(Chan::A) : Chan(Chan::B)};
+    Chan::E chans[2] = {LAST_AFFECTED_CH_IS_A ? Chan::B : Chan::A, LAST_AFFECTED_CH_IS_A ? Chan::A : Chan::B};
 
     for (int i = 0; i < 2; i++)
     {
-        Chan chan = chans[i];
+        Chan::E chan = chans[i];
         if (SET_ENABLED(chan))
         {
             Painter::SetColor(Color::Channel(chan));

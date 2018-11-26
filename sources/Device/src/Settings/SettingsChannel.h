@@ -66,7 +66,6 @@ struct Chan
         Number
     } value;
     Chan(E v = A) : value(v) { };
-    operator uint8() const { return (uint8)value; };
     bool IsA() { return value == A; };
     bool IsB() { return value == B; }
     int PointsInChannel() const;

@@ -365,13 +365,13 @@ int Measure::Graphics::GetTop()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Measure::SetMarkerVoltage(Chan ch, int num, float value)
+void Measure::SetMarkerVoltage(Chan::E ch, int num, float value)
 {
     Processing::markerVoltage[ch][num] = (int)value;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Measure::SetMarkerTime(Chan ch, int num, int value)
+void Measure::SetMarkerTime(Chan::E ch, int num, int value)
 {
     Processing::markerTime[ch][num] = value;
 }

@@ -39,7 +39,7 @@ static void Draw_Set_ChannelB(int x, int y)
 
 void PageMeasures::PageCursors::PageSet::OnPress_Set_Channel()
 {
-    Chan source = CURS_SOURCE_A ? Chan(Chan::B) : Chan(Chan::A);
+    Chan::E source = CURS_SOURCE_A ? Chan::B : Chan::A;
     SetCursSource(source);
 }
 
@@ -108,7 +108,7 @@ static void Draw_Set_T(int x, int y)
         else
         {
             bool condLeft = false, condDown = false;
-            Chan source = CURS_SOURCE;
+            Chan::E source = CURS_SOURCE;
             CalculateConditions((int16)CURsT_POS(source, 0), (int16)CURsT_POS(source, 1), CURsT_CNTRL, &condLeft, &condDown);
             if (condLeft && condDown)
             {
@@ -175,7 +175,7 @@ void PageMeasures::PageCursors::PageSet::OnPress_Set_U()
 
 static void Draw_Set_U(int x, int y)
 {
-    Chan source = CURS_SOURCE;
+    Chan::E source = CURS_SOURCE;
     if (CURsU_DISABLED)
     {
         Draw_Set_U_disable(x, y);
@@ -364,32 +364,32 @@ DEF_PAGE_5(pageSet,                                                             
 const PageBase *PageMeasures::PageCursors::PageSet::pointer = &pageSet;
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void PageMeasures::PageCursors::PageSet::SetCursSource(Chan ch)
+void PageMeasures::PageCursors::PageSet::SetCursSource(Chan::E ch)
 {
     CURS_SOURCE = ch;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void PageMeasures::PageCursors::PageSet::IncCursCntrlU(Chan ch)
+void PageMeasures::PageCursors::PageSet::IncCursCntrlU(Chan::E ch)
 {
     Math::CircleIncrease<int8>((int8 *)&CURsU_CNTRL_CH(ch), 0, 3);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void PageMeasures::PageCursors::PageSet::IncCursCntrlT(Chan ch)
+void PageMeasures::PageCursors::PageSet::IncCursCntrlT(Chan::E ch)
 {
     Math::CircleIncrease<int8>((int8 *)&CURsT_CNTRL_CH(ch), 0, 3);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void PageMeasures::PageCursors::PageSet::SetCursPos100(Chan ch)
+void PageMeasures::PageCursors::PageSet::SetCursPos100(Chan::E ch)
 {
     dUperc(ch) = (float)std::fabsf(CURsU_POS(ch, 0) - CURsU_POS(ch, 1));
     dTperc(ch) = (float)std::fabsf(CURsT_POS(ch, 0) - CURsT_POS(ch, 1));
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void PageMeasures::PageCursors::PageSet::SetShiftCursPosU(Chan ch, int numCur, float delta)
+void PageMeasures::PageCursors::PageSet::SetShiftCursPosU(Chan::E ch, int numCur, float delta)
 {
     CURsU_POS(ch, numCur) = Math::LimitationRet(CURsU_POS(ch, numCur) - delta, 0.0f, MAX_POS_U);
 
@@ -400,7 +400,7 @@ void PageMeasures::PageCursors::PageSet::SetShiftCursPosU(Chan ch, int numCur, f
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void PageMeasures::PageCursors::PageSet::SetShiftCursPosT(Chan ch, int numCur, float delta)
+void PageMeasures::PageCursors::PageSet::SetShiftCursPosT(Chan::E ch, int numCur, float delta)
 {
     /// \todo одинаковые ветки
     // CURsT_POS(ch, numCur) = LimitationFloat(CURsT_POS(ch, numCur) + delta, 0, MAX_POS_T);   
@@ -415,7 +415,7 @@ void PageMeasures::PageCursors::PageSet::SetShiftCursPosT(Chan ch, int numCur, f
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void PageMeasures::PageCursors::PageSet::UpdateCursorsForLook()
 {
-    Chan source = CURS_SOURCE;
+    Chan::E source = CURS_SOURCE;
 
     if (CURS_ACTIVE_T && (CURS_LOOK_U(Chan::A) || CURS_LOOK_BOTH(Chan::A)))
     {
@@ -436,13 +436,13 @@ void PageMeasures::PageCursors::PageSet::UpdateCursorsForLook()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void PageMeasures::PageCursors::PageSet::SetCursorU(Chan ch, int numCur, float pos)
+void PageMeasures::PageCursors::PageSet::SetCursorU(Chan::E ch, int numCur, float pos)
 {
     CURsU_POS(ch, numCur) = Math::LimitationRet(pos, 0.0f, MAX_POS_U);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void PageMeasures::PageCursors::PageSet::SetCursorT(Chan ch, int numCur, float pos)
+void PageMeasures::PageCursors::PageSet::SetCursorT(Chan::E ch, int numCur, float pos)
 {
     // CURsT_POS(ch, numCur) = LimitationFloat(pos, 0, MAX_POS_T);      /// \todo одинаковые ветки
     Cursors::SetCursPosT_temp(ch, numCur, Math::LimitationRet(pos, 0.0f, MAX_POS_T));

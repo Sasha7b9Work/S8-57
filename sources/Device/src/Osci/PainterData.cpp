@@ -66,7 +66,7 @@ void PainterData::DrawROM()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void PainterData::DrawChannel(Chan ch)
+void PainterData::DrawChannel(Chan::E ch)
 {
     uint8 *data = OUT(ch);
 
@@ -237,7 +237,7 @@ int PainterData::Ordinate(uint8 x, float scale)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void PainterData::SendToDisplayDataInRect(Chan ch, int x, int *min, int *max, int width)
+void PainterData::SendToDisplayDataInRect(Chan::E ch, int x, int *min, int *max, int width)
 {
     LIMIT_ABOVE(width, 255);
 

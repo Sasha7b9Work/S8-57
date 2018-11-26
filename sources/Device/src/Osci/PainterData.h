@@ -10,7 +10,7 @@ public:
     
     static void DrawData();
 
-    static void DrawChannel(Chan ch);
+    static void DrawChannel(Chan::E ch);
 
 private:
     /// Нарисовать актуальные данные - соответствующие текущим установкам
@@ -27,7 +27,7 @@ private:
     static int Ordinate(uint8 x, float scale);
     /// \brief Возвращает точку в экранной координате. Если точка не считана (NONE_VALUE), возвращает -1.
     /// Процедура ограничивает width числом 255.
-    static void SendToDisplayDataInRect(Chan chan, int x, int *min, int *max, int width);
+    static void SendToDisplayDataInRect(Chan::E chan, int x, int *min, int *max, int width);
 
     static StructDataDrawing *dataStruct;
 };
