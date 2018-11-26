@@ -256,12 +256,14 @@ float SU::StringToFloat(char *string)
         string++;
     }
 
-    int pow = 1;
-
-    while (stack.Size() > 0)
     {
-        result += pow * stack.Pop();
-        pow *= 10;
+        int pow = 1;
+
+        while (stack.Size() > 0)
+        {
+            result += pow * stack.Pop();
+            pow *= 10;
+        }
     }
 
     // Теперь в result целая часть числа

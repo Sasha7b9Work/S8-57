@@ -166,7 +166,6 @@ public:
             Black,
             White
         } value;
-        operator uint8() const { return (uint8)value; };
     };
 
     struct ModeDrawSignal
