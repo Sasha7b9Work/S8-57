@@ -175,7 +175,6 @@ public:
             Lines,
             Points
         } value;
-        operator uint8() const { return (uint8)value; };
     };
 
     /// Толщина рисуемого сигнала

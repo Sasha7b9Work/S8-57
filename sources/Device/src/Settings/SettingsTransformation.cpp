@@ -36,7 +36,7 @@ void Settings::TransformForSave(uint8 d[1024])
     //*data++ = DisplayThicknessSignal;
     //*data++ = disp_thickness;
     
-    SaveEnum16(DisplayBackground, disp_background);
+    SaveEnum16(DisplayBackground, (uint8)disp_background);
     
     //*data++ = DisplayBackground;
     //*data++ = disp_background;
