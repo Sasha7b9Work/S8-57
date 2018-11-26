@@ -212,7 +212,6 @@ public:
             _64,
             _128
         } value;
-        operator uint8() const { return (uint8)value; };
     };
 
     /// Тип усреднений по измерениям
