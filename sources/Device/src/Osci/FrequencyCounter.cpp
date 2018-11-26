@@ -277,21 +277,21 @@ static void DrawFrequency(int x, int y)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void DrawPeriod(int x, int y)
 {
-    Painter::DrawBigText(x + 2, y + 10 * SIZE, SIZE, "T", Choice::ColorMenuField(PageFunction::PageFrequencyCounter::GetChoiceNumPeriods()));
+    Painter::DrawBigText(x + 2, y + 1, SIZE, "T", Choice::ColorMenuField(PageFunction::PageFrequencyCounter::GetChoiceNumPeriods()));
 
-    Painter::DrawRectangle(x - 20, y + 10 * SIZE, 10, 10);
+    Painter::DrawRectangle(x - 20, y + 1, 10, 10);
     if (lampPeriod)
     {
-        Painter::FillRegion(x - 20, y + 10 * SIZE, 10, 10);
+        Painter::FillRegion(x - 20, y, 10, 10);
     }
 
     int dX = 7 * SIZE;
 
-    Painter::DrawBigText(x + dX, y + 10 * SIZE, SIZE, "=", Choice::ColorMenuField(PageFunction::PageFrequencyCounter::GetChoiceNumPeriods()));
+    Painter::DrawBigText(x + dX, y + 1, SIZE, "=", Choice::ColorMenuField(PageFunction::PageFrequencyCounter::GetChoiceNumPeriods()));
 
     dX = SIZE * 12;
 
-    Painter::DrawBigText(x + dX, y + 10 * SIZE, SIZE, PeriodSetToString(&periodActual),
+    Painter::DrawBigText(x + dX, y + 1, SIZE, PeriodSetToString(&periodActual),
         Choice::ColorMenuField(PageFunction::PageFrequencyCounter::GetChoiceNumPeriods()));
 }
 

@@ -54,9 +54,15 @@ DEF_CHOICE_2( cModeView,                                                        
 
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static bool IsActive_SettingsPeriod()
+static bool IsActive_SettingsFrequency()
 {
     return FREQ_METER_IS_ENABLED && FREQ_METER_MODE_VIEW_IS_PERIOD;
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+static bool IsActive_SettingsPeriod()
+{
+    return FREQ_METER_IS_ENABLED && FREQ_METER_MODE_VIEW_IS_FREQUENCY;
 }
 
 DEF_CHOICE_3( cTimeF,                                                                                                                          //--- ‘”Õ ÷»ﬂ - ◊¿—“Œ“ŒÃ≈– - ¬ÂÏˇ Ò˜∏Ú‡ F ---
@@ -68,13 +74,6 @@ DEF_CHOICE_3( cTimeF,                                                           
     "10Ò", "10ms",
     FREQ_METER_TIMECOUNTING, ppFreqMeter, IsActive_SettingsPeriod, OnChanged_FreqMeter_Frequency, FuncDraw
 )
-
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static bool IsActive_SettingsFrequency()
-{
-    return FREQ_METER_IS_ENABLED && FREQ_METER_MODE_VIEW_IS_FREQUENCY;
-}
 
 
 DEF_CHOICE_4( cFreqClc,                                                                                                                        //--- ‘”Õ ÷»ﬂ - ◊¿—“Œ“ŒÃ≈– - ÃÂÚÍË ‚ÂÏÂÌË ---
