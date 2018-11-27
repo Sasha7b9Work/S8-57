@@ -87,39 +87,42 @@ void FPGA::Stop(bool)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void FPGA::Update()
 {
-    DataBuffer::Update();
-
     if (!isRunning)
     {
         return;
     };
 
-    ReadFlag();
+    int number = IN_RANDOMIZE_MODE ? Kr[SET_TBASE] : 1;
 
-    if (GetFlag::PRED() && !givingStart)
+    for (int i = 0; i < number; i++)
     {
-        if (START_MODE_IS_AUTO)
-        {
-            GiveStart();
-            givingStart = true;
-        }
-        if(!GetFlag::TRIG_READY())
-        {
-            Trig::pulse = false;
-        }
-    }
+        ReadFlag();
 
-    if (GetFlag::DATA_READY())
-    {
-        ReadData();
-        if (START_MODE_IS_SINGLE)
+        if (GetFlag::PRED() && !givingStart)
         {
-            OnPressStart();
-            Trig::pulse = false;
+            if (START_MODE_IS_AUTO)
+            {
+                GiveStart();
+                givingStart = true;
+            }
+            if(!GetFlag::TRIG_READY())
+            {
+                Trig::pulse = false;
+            }
         }
-        else
+
+        if (GetFlag::DATA_READY())
         {
-            Start();
+            ReadData();
+            if (START_MODE_IS_SINGLE)
+            {
+                OnPressStart();
+                Trig::pulse = false;
+            }
+            else
+            {
+                Start();
+            }
         }
     }
 }
@@ -310,11 +313,6 @@ void FPGA::ReadDataChanenlRand(Chan::E ch, uint8 *address, uint8 *data)
         d = d;
         index += step;
         dataRead += step;
-    }
-
-    if(ch == Chan::A)
-    {
-        //LOG_WRITE("%d %d", Tsm, dataRead - data0);
     }
 
     uint8 *last = &dataRand[ch][FPGA::NumPoints()];
