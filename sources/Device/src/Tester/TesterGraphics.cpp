@@ -55,7 +55,7 @@ void Tester::Graphics::DrawData(int numStep, int /*x0*/, int /*y0*/)
 
     if(TESTER_VIEW_MODE_IS_LINES)
     {
-        Painter::DrawTesterData(TESTER_VIEW_MODE, colors[numStep], x, y);
+        Painter::DrawTesterData((uint8)TESTER_VIEW_MODE, colors[numStep], x, y);
     }
     else
     {

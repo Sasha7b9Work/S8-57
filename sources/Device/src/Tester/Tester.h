@@ -74,7 +74,7 @@ public:
             Voltage,
             Current
         } value;
-        operator uint8() const { return (uint8)value; };
+        explicit Control(E v) : value(v) {};
     };
 
     struct Polarity
@@ -84,7 +84,7 @@ public:
             Positive,
             Negative
         } value;
-        operator uint8() const { return (uint8)value; };
+        explicit Polarity(E v) : value(v) {};
     };
 
     struct StepU
@@ -94,7 +94,7 @@ public:
             _100mV,
             _500mV
         } value;
-        operator uint8() const { return (uint8)value; };
+        explicit StepU(E v) : value(v) {};
     };
 
     struct StepI
@@ -104,7 +104,7 @@ public:
             _4mA,
             _20mA
         } value;
-        operator uint8() const { return (uint8)value; };
+        explicit StepI(E v) : value(v) {};
     };
 
     struct Smoothing
@@ -117,16 +117,16 @@ public:
             _4,
             _5
         } value;
-        operator uint8() const { return (uint8)value; };
+        explicit Smoothing(E v) : value(v) {};
     };
 
     struct ViewMode
     {
-        enum
+        enum E
         {
             Lines,
             Points
         } value;
-        operator uint8() const { return (uint8)value; };
+        explicit ViewMode(E v) : value(v) {};
     };
 };
