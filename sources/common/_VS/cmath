@@ -1,7 +1,8 @@
 #pragma once
 
+bool isnan(float);
+
 namespace std
 {
-    bool isnan();
 #include "math.h"
 }
