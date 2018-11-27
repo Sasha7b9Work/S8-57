@@ -65,7 +65,7 @@ void Handlers::Process(KeyEvent e)
     };
 
     Key::E code = event.key;
-    uint8 type = event.type;
+    TypePress::E type = event.type;
 
     if (code < Key::Number && type < TypePress::None)
     {
@@ -199,7 +199,7 @@ void Handlers::Arrow()
 {
     Control *item = Menu::OpenedItem();
 
-    TypePress type = event.type;
+    TypePress::E type = event.type;
 
     if(type != TypePress::Press)
     {

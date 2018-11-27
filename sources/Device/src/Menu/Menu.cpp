@@ -73,18 +73,18 @@ void Menu::Update()
 bool Menu::IsProcessed(KeyEvent *event)
 {
     Key::E key = event->key;
-    TypePress type = event->type;
+    TypePress::E type = event->type;
 
     switch(Device::CurrentMode())
     {
         case Device::Mode::Tester:
-            if(Key(key).IsFunctional() || (key == Key::Enter && !type.IsLong()))
+            if(Key(key).IsFunctional() || (key == Key::Enter && !TypePress(type).IsLong()))
             {
                 return true;
             }
             return false;
         case Device::Mode::Multimeter:
-            if(Key(key).IsFunctional() || (key == Key::Enter && !type.IsLong()))
+            if(Key(key).IsFunctional() || (key == Key::Enter && !TypePress(type).IsLong()))
             {
                 return true;
             }

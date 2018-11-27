@@ -47,7 +47,7 @@ public:
     /// Эту функцию надо вызывать перед записью/стиранием ППЗУ. Звук конфликтует с ППЗУ.
     static void WaitForCompletion();
 
-    static void Beep(TypePress type);
+    static void Beep(TypePress::E type);
 
     static void Test();
 

@@ -46,7 +46,6 @@ struct Key
 
     explicit Key(E v = None) : value(v) {};
     bool IsFunctional() const { return value >= F1 && value <= F5; };
-    operator uint8() const { return (uint8)value; };
     pString Name();
 };
 
@@ -63,8 +62,7 @@ struct TypePress
         None
     } value;
 
-    TypePress(E v = None) : value(v)  { };
-    operator uint8() const { return (uint8)value; };
+    explicit TypePress(E v) : value(v)  { };
     pString ToString();
     bool IsLong() const { return value == Long; };
 };
@@ -75,7 +73,7 @@ struct KeyEvent
 {
     KeyEvent(Key::E k = Key::None, TypePress::E t = TypePress::None) : key(k), type(t) { };
     Key::E key;
-    TypePress type;
+    TypePress::E type;
 };
 
 
