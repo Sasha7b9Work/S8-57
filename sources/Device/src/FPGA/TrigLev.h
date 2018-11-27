@@ -91,7 +91,6 @@ public:
             HF,
             LF
         } value;
-        operator uint8() const { return (uint8)value; };
     };
 
     struct Polarity
