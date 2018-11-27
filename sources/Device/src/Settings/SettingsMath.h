@@ -17,7 +17,7 @@ struct FuncModeDraw
         Separate,
         Together
     } value;
-    operator uint8() const { return (uint8)value; };
+    explicit FuncModeDraw(E v) : value(v) {};
 };
 
 struct ModeRegSet
@@ -27,7 +27,7 @@ struct ModeRegSet
         Range,
         RShift
     } value;
-    operator uint8() const { return (uint8)value; };
+    explicit ModeRegSet(E v) : value(v) {};
 };
 
 struct Function
@@ -37,7 +37,7 @@ struct Function
         Sum,
         Mul
     } value;
-    operator uint8() const { return (uint8)value; };
+    explicit Function(E v) : value(v) {};
 };
 
 struct WindowFFT
@@ -49,7 +49,7 @@ struct WindowFFT
         Blackman,
         Hann
     } value;
-    operator uint8() const { return (uint8)value; };
+    explicit WindowFFT(E v) : value(v) {};
 };
 
 struct SourceFFT
@@ -60,6 +60,7 @@ struct SourceFFT
         B,
         Both
     } value;
+    explicit SourceFFT(E v) : value(v) {};
 };
 
 struct ScaleFFT
@@ -69,7 +70,7 @@ struct ScaleFFT
         Log,           ///< Это значение означает логарифмическую шкалу вывода спектра.
         Linear         ///< Это значение означает линейную шкалу вывода спектра.
     } value;
-    operator uint8() const { return (uint8)value; };
+    explicit ScaleFFT(E v) : value(v) {};
 };
 
 struct FFTmaxDB
@@ -80,7 +81,7 @@ struct FFTmaxDB
         _60,
         _80
     } value;
-    operator uint8() const { return (uint8)value; };
+    explicit FFTmaxDB(E v) : value(v) {};
 };
 
 #define SOURCE_FFT                  (set.math_sourceFFT)
@@ -122,7 +123,7 @@ struct FFTmaxDB
 #define MATH_MODE_REG_SET_IS_RSHIFT (MATH_MODE_REG_SET == ModeRegSet::RShift)
 #define MATH_MODE_REG_SET_IS_RANGE  (MATH_MODE_REG_SET == ModeRegSet::Range)
 
-float MaxDBforFFT(FFTmaxDB maxDB);
+float MaxDBforFFT(FFTmaxDB::E maxDB);
 
 /** @}  @}
  */
