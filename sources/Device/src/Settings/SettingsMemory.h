@@ -18,7 +18,6 @@ struct ModeBtnMemory
         Menu,     ///< Будет открывааться соответствующая страница меню.
         Save      ///< Сохранение содержимого экрана на флешку.
     } value;
-    operator uint8() const { return (uint8)value; };
 };
 
  /// Режим работы.
@@ -60,7 +59,6 @@ struct ModeShowIntMem
         Saved,   ///< Показывать сохранённые данные.
         Both     ///< Показывать оба сигнала.
     } value;
-    operator uint8() const { return (uint8)value; };
 };
 
 /// Как сохранять данные на флешку.
@@ -71,7 +69,6 @@ struct ModeSaveSignal
         BMP,
         TXT
     } value;
-    operator uint8() const { return (uint8)value; };
 };
 
 /// Режим наименования файлов.
@@ -82,7 +79,6 @@ struct FileNamingMode
         Mask,        ///< Именовать по маске.
         Manually     ///< Именовать вручную.
     } value;
-    operator uint8() const { return (uint8)value; };
 };
 
 

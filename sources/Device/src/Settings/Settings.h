@@ -132,14 +132,14 @@ public:
 
 #define MAX_SYMBOLS_IN_FILE_NAME 35
     ENumPointsFPGA::E   mem_enumPoints;                             ///< Число точек
-    ModeBtnMemory       mem_modeBtnMemory;
+    ModeBtnMemory::E    mem_modeBtnMemory;
     ModeWork            mem_modeWork;                               ///< Режим работы.
     bool                mem_flashAutoConnect;                       ///< Если true, при подключении флешки автоматически выводится Файл-Менеджер.
     int8                mem_indexCurSymbolNameMask;                 ///< Индекс текущего символа в режиме задания маски или выбора имени.
-    ModeSaveSignal      mem_modeSaveSignal;                         ///< В каком виде сохранять сигнал.
+    ModeSaveSignal::E   mem_modeSaveSignal;                         ///< В каком виде сохранять сигнал.
     char                mem_fileName[MAX_SYMBOLS_IN_FILE_NAME];     ///< Имя файла для режима ручного задания.
-    ModeShowIntMem      mem_modeShowIntMem;                         ///< Что показывать в режиме ВНУТР ЗУ - считанный или записанный сигнал.
-    FileNamingMode      mem_fileNamingMode;                         ///< Режим именования файлов.
+    ModeShowIntMem::E   mem_modeShowIntMem;                         ///< Что показывать в режиме ВНУТР ЗУ - считанный или записанный сигнал.
+    FileNamingMode::E   mem_fileNamingMode;                         ///< Режим именования файлов.
     char                mem_fileNameMask[MAX_SYMBOLS_IN_FILE_NAME]; ///< \brief Здесь маска для автоматического именования файлов.
                         ///< \details Правила именования.\n
                         /// \code
