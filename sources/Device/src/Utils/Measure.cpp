@@ -79,7 +79,7 @@ void Measure::SetActive(int row, int col)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-char Measure::GetChar(Measure::Type measure)
+char Measure::GetChar(Measure::Type::E measure)
 {
     return sMeas[measure].UGO;
 }
@@ -143,7 +143,7 @@ pString Measure::Name()
 
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-Measure::Type Measure::GetType()
+Measure::Type::E Measure::GetType()
 {
     return set.meas_measures[row * NumCols() + col];
 }
@@ -251,7 +251,7 @@ void Measure::DrawPageChoice()
     int dY = 22;
     int maxRow = (NUM_MEASURES_IS_6_1 || NUM_MEASURES_IS_6_2) ? 8 : 5;
     int maxCol = (NUM_MEASURES_IS_6_1 || NUM_MEASURES_IS_6_2) ? 3 : 5;
-    Measure::Type meas = Measure::Type::None;
+    Measure::Type::E meas = Measure::Type::None;
     Painter::SetFont(Font::Type::_UGO);
     for(int row = 0; row < maxRow; row++)
     {
@@ -274,7 +274,7 @@ void Measure::DrawPageChoice()
                 Painter::DrawTextRelativelyRight(x0 + dX, y0 + 12, sMeas[meas].name, active ? Color::FLASH_01 : Color::FILL);
                 Painter::SetFont(Font::Type::_UGO);
             }
-            meas = (Measure::Type)((int)meas + 1);    // meas++;
+            meas = (Measure::Type::E)((int)meas + 1);    // meas++;
         }
     }
     Painter::SetFont(Font::Type::_8);
@@ -311,7 +311,7 @@ void Measure::Graphics::Draw()
             bool active = measure.IsActive() && Menu::GetNameOpenedPage() == Page::Name::Measures_Auto_Tune;
             Color color = active ? Color::BACK : Color::FILL;
 
-            Measure::Type type = measure.GetType();
+            Measure::Type::E type = measure.GetType();
             if (type != Measure::Type::None)
             {
                 Painter::FillRegion(x, y, dX, dY, Color::BACK);

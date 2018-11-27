@@ -85,15 +85,14 @@ public:
             PhazaMinus,
             Number
         } value;
-        Type(int8 v = 0) : value((E)v) {};
-        operator uint8() const { return (uint8)value; };
+        explicit Type(E v) : value(v) {};
     };
 
     Measure(int r, int c) : row(r), col(c) {};
     /// Возвращает сообщение из ячейки (row, col)
     static Measure Get(int row, int col) { return Measure(row, col); };
 
-    Type GetType();
+    Type::E GetType();
 
     /// Устанавливает активным следующее или предыдущее измерение
     static void ChangeActive(int delta);
@@ -109,7 +108,7 @@ public:
 
     static void SetMarkerTime(Chan::E ch, int num, int value);
    
-    static char GetChar(Type measure);
+    static char GetChar(Type::E measure);
 
     static int NumRows();
 
@@ -134,10 +133,7 @@ public:
             AsIs,       ///< Показывать сигналы как есть.
             Compress    ///< Сжимать сетку с сигналами.
         } value;
-        operator uint8() const
-        {
-            return (uint8)value;
-        };
+        explicit ModeViewSignals(E v) : value(v) {};
     };
 
     //------------------------------------------------------------------------------------------------------------------------------------------------
@@ -149,7 +145,7 @@ public:
             B,
             A_B
         } value;
-        operator uint8() const { return (uint8)value; };
+        explicit Source(E v) : value(v) {};
     };
 
     //------------------------------------------------------------------------------------------------------------------------------------------------
@@ -165,7 +161,7 @@ public:
             _6_1,    ///< 6 строк по 1 измерению.
             _6_2     ///< 6 строк по 2 измерения.
         } value;
-        operator uint8() const { return (uint8)value; };
+        explicit OnDisplay(E v) : value(v) {};
     };
 
     //------------------------------------------------------------------------------------------------------------------------------------------------
@@ -220,7 +216,7 @@ private:
         /// Аппроксимировать единичное измерение режима рандомизатора функцией sinX/X
         static void InterpolationSinX_X(uint8 *data, int numPoints, TBase::E tBase);
         /// Возвращает строку автоматического измерения
-        static char* GetStringMeasure(Measure::Type measure, Chan::E ch, char *buffer, int lenBuf);
+        static char* GetStringMeasure(Measure::Type::E measure, Chan::E ch, char *buffer, int lenBuf);
         /// Расчитать все автоматические измерения
         static void CalculateMeasures();
 

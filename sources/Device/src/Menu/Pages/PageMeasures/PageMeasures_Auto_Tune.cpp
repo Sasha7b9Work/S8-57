@@ -85,7 +85,7 @@ static bool OnRegSet_Tune(int angle)
         {
             Measure::posOnPageChoice = 0;
         }
-        set.meas_measures[Measure::posActive] = (Measure::Type)Measure::posOnPageChoice;
+        set.meas_measures[Measure::posActive] = (Measure::Type::E)Measure::posOnPageChoice;
         Painter::ResetFlash();
     }
     else

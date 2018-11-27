@@ -156,7 +156,7 @@ void Measure::Processing::CalculateMeasures()
         for(int elem = 0; elem < Measure::NumCols(); elem++)
         {
             Measure measure = Measure::Get(str, elem);
-            Measure::Type type = measure.GetType();
+            Measure::Type::E type = measure.GetType();
 
             pFuncFCh func = sMeas[type].FuncCalculate;
             if(func)
@@ -1298,7 +1298,7 @@ void Measure::Processing::InterpolationSinX_X(uint8 *data, int numPoints, TBase:
 
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-char* Measure::Processing::GetStringMeasure(Measure::Type measure, Chan::E ch, char* buffer, int lenBuf)
+char* Measure::Processing::GetStringMeasure(Measure::Type::E measure, Chan::E ch, char* buffer, int lenBuf)
 {
     if (!SET_ENABLED(ch))
     {
