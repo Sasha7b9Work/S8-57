@@ -276,7 +276,7 @@
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>0</BreakIfRCount>
-          <Filename>&lt;1&gt;.\src\Data\Reader.cpp</Filename>
+          <Filename>c:\My\Work\stm32\OSC_2\sources\Panel\src\Data\Reader.cpp</Filename>
           <ExecCommand></ExecCommand>
           <Expression></Expression>
         </Bp>
@@ -292,7 +292,7 @@
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>0</BreakIfRCount>
-          <Filename>&lt;1&gt;.\src\Osci\FrequencyCounter.cpp</Filename>
+          <Filename>c:\My\Work\stm32\OSC_2\sources\Panel\src\Osci\FrequencyCounter.cpp</Filename>
           <ExecCommand></ExecCommand>
           <Expression></Expression>
         </Bp>
