@@ -126,11 +126,11 @@ void DrawMenuCursVoltage(int x, int y, bool top, bool bottom)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void CalculateConditions(int16 pos0, int16 pos1, Cursors::Control cursCntrl, bool *cond0, bool *cond1)
+void CalculateConditions(int16 pos0, int16 pos1, Cursors::Control::E cursCntrl, bool *cond0, bool *cond1)
 {
     bool zeroLessFirst = pos0 < pos1;
-    *cond0 = cursCntrl == Cursors::Control::_1_2 || (cursCntrl == Cursors::Control::_1 && zeroLessFirst) || (cursCntrl == Cursors::Control::_2 && !zeroLessFirst);
-    *cond1 = cursCntrl == Cursors::Control::_1_2 || (cursCntrl == Cursors::Control::_1 && !zeroLessFirst) || (cursCntrl == Cursors::Control::_2 && zeroLessFirst);
+    *cond0 = (cursCntrl == Cursors::Control::_1_2) || (cursCntrl == Cursors::Control::_1 && zeroLessFirst) || (cursCntrl == Cursors::Control::_2 && !zeroLessFirst);
+    *cond1 = (cursCntrl == Cursors::Control::_1_2) || (cursCntrl == Cursors::Control::_1 && !zeroLessFirst) || (cursCntrl == Cursors::Control::_2 && zeroLessFirst);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

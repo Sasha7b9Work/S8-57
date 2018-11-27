@@ -115,18 +115,18 @@ public:
 
     // Меню КУРСОРЫ
 
-    bool                curs_showCursors;                   ///< Показывать ли курсоры.
-    Cursors::LookMode   curs_lookMode[2];                   ///< Режимы слежения за курсорами для двух пар курсоров.
-    bool                curs_showFreq;                      ///< Установленное в true значение, что нужно показывать на экране 1/dT между курсорами.
-    Cursors::Active     curs_active;                        ///< Какие курсоры сейас активны.
-    Chan::E             curs_source;                        ///< Источник - к какому каналу относятся курсоры.
-    Cursors::Control    curs_cntrlU[Chan::Number];          ///< Активные курсоры напряжения.
-    Cursors::Control    curs_cntrlT[Chan::Number];          ///< Активные курсоры времени.
-    Cursors::Movement   curs_movement;                      ///< Как перемещаться курсорам - по точкам или процентам.
-    float               curs_deltaU100percents[2];          ///< Расстояние между курсорами напряжения для 100%, для обоих каналов.
-    float               curs_deltaT100percents[2];          ///< Расстояние между курсорами времени для 100%, для обоих каналов.
-    float               curs_posCurU[Chan::Number][2];      ///< Текущие позиции курсоров напряжения обоих каналов.
-    float               curs_posCurT[Chan::Number][2];      ///< Текущие позиции курсоров времени обоих каналов.
+    bool                    curs_showCursors;                   ///< Показывать ли курсоры.
+    Cursors::LookMode::E    curs_lookMode[2];                   ///< Режимы слежения за курсорами для двух пар курсоров.
+    bool                    curs_showFreq;                      ///< Установленное в true значение, что нужно показывать на экране 1/dT между курсорами.
+    Cursors::Active::E      curs_active;                        ///< Какие курсоры сейас активны.
+    Chan::E                 curs_source;                        ///< Источник - к какому каналу относятся курсоры.
+    Cursors::Control::E     curs_cntrlU[Chan::Number];          ///< Активные курсоры напряжения.
+    Cursors::Control::E     curs_cntrlT[Chan::Number];          ///< Активные курсоры времени.
+    Cursors::Movement::E    curs_movement;                      ///< Как перемещаться курсорам - по точкам или процентам.
+    float                   curs_deltaU100percents[2];          ///< Расстояние между курсорами напряжения для 100%, для обоих каналов.
+    float                   curs_deltaT100percents[2];          ///< Расстояние между курсорами времени для 100%, для обоих каналов.
+    float                   curs_posCurU[Chan::Number][2];      ///< Текущие позиции курсоров напряжения обоих каналов.
+    float                   curs_posCurT[Chan::Number][2];      ///< Текущие позиции курсоров времени обоих каналов.
 
     // Меню ПАМЯТЬ
 

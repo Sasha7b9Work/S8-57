@@ -74,7 +74,6 @@ public:
             Pixels,    ///< По пикселям экрана
             Percents   ///< По процентам
         } value;
-        operator uint8() const { return (uint8)value; };
     };
 
     /// Какие курсоры сейчас активны. Какие активны, те и будут перемещаться по вращению ручки УСТАНОВКА.
@@ -86,8 +85,7 @@ public:
             T,
             None
         } value;
-        Active(E v) : value(v) {};
-        operator uint8() const { return (uint8)value; };
+        explicit Active(E v) : value(v) {};
     };
 
     /// Режим слежения курсоров.
@@ -100,7 +98,6 @@ public:
             Time,      ///< Курсоры следят за временем автоматически.
             Both       ///< Курсоры следят за временем и напряжением, в зависимости от того, какой курсоры вращали последним.
         } value;
-        operator uint8() const { return (uint8)value; };
     };
 
     /// Каким курсором управлять
@@ -113,7 +110,6 @@ public:
             _1_2,      ///< обоими
             Disable    ///< никаким
         } value;
-        operator uint8() const { return (uint8)value; };
     };
 
     /// Получить позицию курсора напряжения
