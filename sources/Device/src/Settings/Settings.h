@@ -97,10 +97,10 @@ public:
 
     Trig::Source::E     trig_source;
     Trig::Input::E      trig_input;
-    Trig::Polarity      trig_polarity;
+    Trig::Polarity::E   trig_polarity;
     uint16              trig_lev[Chan::Number];
-    Trig::StartMode     trig_startMode;                     ///< Режим запуска.
-    Trig::ModeFind      trig_modeFind;                      ///< Поиск синхронизации - вручную или автоматически.
+    Trig::StartMode::E  trig_startMode;                     ///< Режим запуска.
+    Trig::ModeFind::E   trig_modeFind;                      ///< Поиск синхронизации - вручную или автоматически.
 
     // Меню РАЗВЁРТКА
 
@@ -109,8 +109,8 @@ public:
     PeakDetMode::E      time_peakDet;
     TPos::E             time_TPos;
     SampleType::E       time_sampleType;
-    FunctionTime        time_timeDivXPos;
-    LinkingTShift       time_linkingTShift;                 ///< Тип привязки смещения по горизонтали
+    FunctionTime::E     time_timeDivXPos;
+    LinkingTShift::E    time_linkingTShift;                 ///< Тип привязки смещения по горизонтали
     SampleType::E       time_sampleTypeOld;
 
     // Меню КУРСОРЫ
