@@ -9,7 +9,7 @@
 #include "Utils/Math.h"
 #include <cmath>
 #include <climits>
-#include <stdlib.h>
+#include <cstdlib>
 #include <cstring>
 #include <limits>
 #endif
@@ -130,8 +130,8 @@ static bool periodIsCaclulating[2] = {false, false};
 static bool periodAccurateIsCalculating[2];
 static bool picIsCalculating[2] = {false, false};
 
-#define EXIT_IF_ERROR_FLOAT(x)      if(isnan(x))                return ERROR_VALUE_FLOAT;
-#define EXIT_IF_ERRORS_FLOAT(x, y)  if(isnan(x) || isnan(y))    return ERROR_VALUE_FLOAT;
+#define EXIT_IF_ERROR_FLOAT(x)      if(isnan(x))                   return ERROR_VALUE_FLOAT;
+#define EXIT_IF_ERRORS_FLOAT(x, y)  if(isnan(x) || isnan(y))  return ERROR_VALUE_FLOAT;
 #define EXIT_IF_ERROR_INT(x)        if((x) == ERROR_VALUE_INT)  return ERROR_VALUE_FLOAT;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -424,7 +424,7 @@ float CalculatePeriod(Chan::E ch)
 #define EXIT_FROM_PERIOD_ACCURACY           \
     period[ch] = ERROR_VALUE_INT;           \
     periodAccurateIsCalculating[ch] = true; \
-    free(sums);                             \
+    std::free(sums);                        \
     return period[ch];
 
 
@@ -433,7 +433,7 @@ int CalculatePeriodAccurately(Chan::E ch)
 {
     static int period[2];
 
-    int *sums = (int *)malloc(FPGA_MAX_NUM_POINTS);
+    int *sums = (int *)std::malloc(FPGA_MAX_NUM_POINTS);
 
     uint8 *dataIn = CHOICE_BUFFER;
 
@@ -512,7 +512,7 @@ int CalculatePeriodAccurately(Chan::E ch)
         periodAccurateIsCalculating[ch] = true;
     }
 
-    free(sums);
+    std::free(sums);
 
     return period[ch];
 }
@@ -1215,7 +1215,7 @@ void Measure::Processing::InterpolationSinX_X(uint8 *data, int numPoints, TBase:
     static const int deltas[5] = {100, 50, 20, 10, 5};
     int delta = deltas[tBase];
 
-    uint8 *signedData = (uint8 *)malloc((uint)numPoints / 2U);
+    uint8 *signedData = (uint8 *)std::malloc((uint)numPoints / 2U);
     int numSignedPoints = 0;
     
     for (int pos = 0; pos < numPoints; pos++)
@@ -1293,7 +1293,7 @@ void Measure::Processing::InterpolationSinX_X(uint8 *data, int numPoints, TBase:
         pos--;
     }
 
-    free(signedData);
+    std::free(signedData);
 }
 
 

@@ -13,5 +13,7 @@ namespace std
     {
     public:
         static float epsilon();
+        static float quiet_NaN();
+        static float infinity();
     };
 }
