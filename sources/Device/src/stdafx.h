@@ -72,6 +72,7 @@
 
 #include <algorithm>
 #include <climits>
+#include <limits>
 #include <cmath>
 #include <cstring>
 #include <cstdarg>

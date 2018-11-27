@@ -141,7 +141,7 @@ bool SU::GetWord(const char *string, Word *word, const int numWord)
             int numSymbols = word->numSymbols;
             for (int i = 0; i < numSymbols; i++)
             {
-                *pointer = (char)toupper(*pointer);
+                *pointer = (char)std::toupper(*pointer);
                 pointer++;
             }
             return true;
