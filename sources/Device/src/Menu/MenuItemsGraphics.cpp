@@ -25,13 +25,13 @@ static void DrawValueWithSelectedPosition(int x, int y, int value, int numDigits
 ///Возвращает функциональную кнопку, находящуюся на данном X.
 /// Расстояние между левой и правой границами выведенного меню делится на пять раввных промежутков и возвращается название той кнопки, которая
 /// попадает в даннуй промежуток.
-static Key GetFuncButtonFromX(int _x)
+static Key::E GetFuncButtonFromX(int _x)
 {
     int x = Grid::Left() + Grid::Width() / 10;
 
     int step = Grid::Width() / 5;
 
-    Key button = Key::F1;
+    Key::E button = Key::F1;
 
     for (int i = 0; i < 5; i++)
     {
@@ -39,7 +39,7 @@ static Key GetFuncButtonFromX(int _x)
         {
             return button;
         }
-        button = Key((Key::E)((int)button + 1));    // button++;
+        button = (Key::E)((int)button + 1);    // button++;
         x += step;
     }
     return  Key::F5;

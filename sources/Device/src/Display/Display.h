@@ -128,7 +128,7 @@ public:
 
     static void Update();
 
-    static void SetKey(Key key);
+    static void SetKey(Key::E key);
 
     static void RemoveAddDrawFunction();
 
@@ -154,7 +154,7 @@ public:
 
 private:
 
-    static Key key;
+    static Key::E key;
 
 public:
 

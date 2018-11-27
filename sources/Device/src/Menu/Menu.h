@@ -35,9 +35,9 @@ public:
     /// Функция должна вызываться в главном цикле.
     static void Update();
     /// Функция обработки короткого нажатия кнопки (менее 0.5 сек.).
-    static void ShortPressureButton(Key button);
+    static void ShortPressureButton(Key::E button);
     /// Функция обработки длинного нажатия кнопки (более 0.5 сек.).
-    static void LongPressureButton(Key button);
+    static void LongPressureButton(Key::E button);
     /// Функция вызывается при нажатии, повторе и отпускании кнопки
     static void ButtonEvent(KeyEvent event);
     /// Установить время автоматического сокрытия меню в соответствии с установками.
@@ -69,15 +69,15 @@ public:
     /// Уменьшает или увеличивает значение Governor, GovernorColor или Choice по адресу item в зависимости от знака delta
     static void ChangeItem(Control *item, int delta);
     /// Вернуть указатель на малую кнопку, соответствующую данной кнопки панели.
-    static const SButton* GetDrawButton(Key button);
+    static const SButton* GetDrawButton(Key::E button);
 
     static void SetItemForHint(void *item);
 
     static void SaveSettings();
     /// Нужно вызывать при отпускании функциональной кнпоки
-    static void ReleaseFunctionalButton(Key key);
+    static void ReleaseFunctionalButton(Key::E key);
     /// Нажно вызывать при "длинном" нажатии функциональной кнопки
-    static void LongFunctionalButton(Key key);
+    static void LongFunctionalButton(Key::E key);
     ///\brief  Здесь хранится адрес элемента меню, соответствующего функциональной клавише [1..5], если она находится в нижнем положении, и 0, 
     /// если ни одна кнопка не нажата.
     static Control *itemUnderKey;
@@ -113,7 +113,7 @@ private:
     /// Возвращает true, если лампочка УСТАНОВКА должна гореть
     static bool NeedForFireSetLED();
     
-    static void ProcessButtonForHint(Key button);
+    static void ProcessButtonForHint(Key::E button);
     
     static void ShortPress_ChoiceReg(void *choice);
     
@@ -121,15 +121,15 @@ private:
     /// Возвращает true, если данная кнопка обрабатыватся в данном режиме
     static bool IsProcessed(KeyEvent *event);
     /// Возвращает страницу меню, которая должна открываться по нажатию кнопки button.
-    static const void *PageForButton(Key button);
+    static const void *PageForButton(Key::E button);
     /// Если произошло короткое нажатие кнопки, то здесь хранится имя этой кнопки до обработки  этого нажатия.
-    static Key shortPressureButton;
+    static Key::E shortPressureButton;
     /// Если произошло длинное нажатие кнопки, то здесь хранится имя этой кнопки до обработки этого нажатия.
-    static Key longPressureButton;
+    static Key::E longPressureButton;
     /// При нажатии кнопки её имя записывается в эту переменную и хранится там до обратоки события нажатия кнопки.
-    static Key pressButton;
+    static Key::E pressButton;
     /// При отпускании кнопки её имя записывается в эту переменную и хранится там до обработки события отпускания кнопки.
-    static Key releaseButton;
+    static Key::E releaseButton;
     /// Эта функция будет вызывана один раз после Menu::Update().
     static pFuncVV funcAterUpdate;
     /// Время последнего нажатия кнопки. Нужно для того, чтобы периодически сохранять настройки

@@ -44,7 +44,7 @@ struct Key
         Number
     } value;
 
-    Key(E v = None) : value(v) {};
+    explicit Key(E v = None) : value(v) {};
     bool IsFunctional() const { return value >= F1 && value <= F5; };
     operator uint8() const { return (uint8)value; };
     pString Name();
@@ -73,10 +73,8 @@ struct TypePress
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 struct KeyEvent
 {
-    KeyEvent(Key::E k = Key::None, TypePress::E t = TypePress::None) : key(k), type(t)
-    {
-    };
-    Key key;
+    KeyEvent(Key::E k = Key::None, TypePress::E t = TypePress::None) : key(k), type(t) { };
+    Key::E key;
     TypePress type;
 };
 
@@ -89,7 +87,7 @@ public:
     /** Когда панель отключена, то происходит лишь обновление состояния переменной releasedButton */
     static void Disable();
     /// Ожидание нажатия клавиши
-    static Key WaitPressingButton();
+    static Key::E WaitPressingButton();
 
     static void Enable();
 };

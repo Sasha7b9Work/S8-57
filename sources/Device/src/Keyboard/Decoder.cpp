@@ -102,7 +102,7 @@ void Decoder::RunStep(uint8 data)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 bool Decoder::ButtonPress(uint8 data)
 {
-    static Key button;
+    static Key::E button;
     if (step == 0)
     {
         return false;
@@ -114,7 +114,7 @@ bool Decoder::ButtonPress(uint8 data)
     }
     else
     {
-        Menu::ButtonEvent(KeyEvent(button.value, (TypePress::E)data));
+        Menu::ButtonEvent(KeyEvent(button, (TypePress::E)data));
     }
 
     return true;

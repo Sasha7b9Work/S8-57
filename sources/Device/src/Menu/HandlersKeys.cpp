@@ -64,7 +64,7 @@ void Handlers::Process(KeyEvent e)
         /* F5          */ {E,           E,           FuncRelease,   FuncLong}
     };
 
-    uint8 code = event.key;
+    Key::E code = event.key;
     uint8 type = event.type;
 
     if (code < Key::Number && type < TypePress::None)
@@ -142,6 +142,7 @@ void Handlers::RangeLessA()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Handlers::RangeMoreA()
 {
+    LOG_FUNC_ENTER();
     FPGA::IncreaseRange(Chan::A);
 }
 
@@ -209,7 +210,7 @@ void Handlers::Arrow()
     {
         Page *page = (Page *)item;
 
-        switch (event.key)
+        switch ((uint8)event.key)
         {
             case Key::Left:
                 if(!page->funcRegSet(-1))
@@ -232,7 +233,7 @@ void Handlers::Arrow()
     {
         Choice *choice = (Choice *)item;
 
-        switch(event.key)
+        switch((uint8)event.key)
         {
             case Key::Up:
                 choice->ChangeIndex(-1);

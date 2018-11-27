@@ -13,10 +13,10 @@ class TriggerDebugConsole
 {
 public:
     /// Возвращает true, если триггер сработал - консоль открылась
-    static bool Update(Key key);
+    static bool Update(Key::E key);
 
 private:
     static const int SIZE_BUFFER_FOR_BUTTONS = 10;
-    static Key bufferForButtons[SIZE_BUFFER_FOR_BUTTONS];
-    static const Key sampleBufferForButtons[SIZE_BUFFER_FOR_BUTTONS];
+    static Key::E bufferForButtons[SIZE_BUFFER_FOR_BUTTONS];
+    static const Key::E sampleBufferForButtons[SIZE_BUFFER_FOR_BUTTONS];
 };

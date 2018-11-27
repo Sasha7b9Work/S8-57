@@ -22,16 +22,16 @@
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-       uint Menu::timeLastPressedButton = MAX_UINT;
-        Key Menu::shortPressureButton = Key::None;
-        Key Menu::longPressureButton = Key::None;
-        Key Menu::pressButton = Key::None;
-        Key Menu::releaseButton = Key::None;
-   Control *Menu::itemUnderKey = 0;
-    pFuncVV Menu::funcAterUpdate = 0;
-   Control *Menu::itemUnderButton[Key::Number] = {0};
-const char *Menu::stringForHint = 0;
-   Control *Menu::itemHint = 0;
+       uint    Menu::timeLastPressedButton = MAX_UINT;
+        Key::E Menu::shortPressureButton = Key::None;
+        Key::E Menu::longPressureButton = Key::None;
+        Key::E Menu::pressButton = Key::None;
+        Key::E Menu::releaseButton = Key::None;
+   Control    *Menu::itemUnderKey = 0;
+    pFuncVV    Menu::funcAterUpdate = 0;
+   Control    *Menu::itemUnderButton[Key::Number] = {0};
+const char    *Menu::stringForHint = 0;
+   Control    *Menu::itemHint = 0;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -72,19 +72,19 @@ void Menu::Update()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 bool Menu::IsProcessed(KeyEvent *event)
 {
-    Key key = event->key;
+    Key::E key = event->key;
     TypePress type = event->type;
 
     switch(Device::CurrentMode())
     {
         case Device::Mode::Tester:
-            if(key.IsFunctional() || (key == Key::Enter && !type.IsLong()))
+            if(Key(key).IsFunctional() || (key == Key::Enter && !type.IsLong()))
             {
                 return true;
             }
             return false;
         case Device::Mode::Multimeter:
-            if(key.IsFunctional() || (key == Key::Enter && !type.IsLong()))
+            if(Key(key).IsFunctional() || (key == Key::Enter && !type.IsLong()))
             {
                 return true;
             }
@@ -95,7 +95,7 @@ bool Menu::IsProcessed(KeyEvent *event)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Menu::ShortPressureButton(Key button)
+void Menu::ShortPressureButton(Key::E button)
 {
     if (!HINT_MODE_ENABLED)
     {
@@ -109,7 +109,7 @@ void Menu::ShortPressureButton(Key button)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Menu::LongPressureButton(Key button)
+void Menu::LongPressureButton(Key::E button)
 {
     if (!HINT_MODE_ENABLED)
     {
@@ -119,7 +119,7 @@ void Menu::LongPressureButton(Key button)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Menu::ProcessButtonForHint(Key button)
+void Menu::ProcessButtonForHint(Key::E button)
 {
     if (button == Key::Enter)
     {
@@ -296,7 +296,7 @@ void Menu::ProcessingShortPressureButton()
         NEED_FINISH_DRAW = 1;
         Menu::SetAutoHide(true);
 
-        Key button = shortPressureButton;
+        Key::E button = shortPressureButton;
 
         do
         {
@@ -315,7 +315,7 @@ void Menu::ProcessingShortPressureButton()
                     Menu::CloseOpenedItem();
                 }
             }
-            else if (Menu::IsShown() && button.IsFunctional())       // Если меню показано и нажата функциональная клавиша
+            else if (Menu::IsShown() && Key(button).IsFunctional())       // Если меню показано и нажата функциональная клавиша
             {
                 void *item = itemUnderButton[button];
                 if (HINT_MODE_ENABLED)
@@ -364,7 +364,7 @@ void Menu::ProcessingShortPressureButton()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Menu::ProcessingLongPressureButton()
 {
-    Key button = longPressureButton;
+    Key::E button = longPressureButton;
 
     if(button != Key::None)
     {
@@ -405,7 +405,7 @@ void Menu::ProcessingLongPressureButton()
                 }
             }
         }
-        else if(Menu::IsShown() && button.IsFunctional())
+        else if(Menu::IsShown() && Key(button).IsFunctional())
         {
             item = (Control *)itemUnderButton[button];
             if(item)
@@ -823,7 +823,7 @@ bool Menu::IsMinimize()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-const SButton *Menu::GetDrawButton(Key button)
+const SButton *Menu::GetDrawButton(Key::E button)
 {
     if (Menu::IsMinimize() && button >= Key::Enter && button <= Key::F5)
     {
@@ -863,7 +863,7 @@ void Menu::SaveSettings()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Menu::ReleaseFunctionalButton(Key key)
+void Menu::ReleaseFunctionalButton(Key::E key)
 {
     if(Menu::IsShown())
     {
@@ -876,7 +876,7 @@ void Menu::ReleaseFunctionalButton(Key key)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Menu::LongFunctionalButton(Key key)
+void Menu::LongFunctionalButton(Key::E key)
 {
     if(Menu::IsShown())
     {

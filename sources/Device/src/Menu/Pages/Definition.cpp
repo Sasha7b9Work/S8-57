@@ -46,7 +46,7 @@ DEF_PAGE_10(page,                                                               
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-const void *Menu::PageForButton(Key button)
+const void *Menu::PageForButton(Key::E button)
 {
     static const void *pages[Key::Number] =
     {  
