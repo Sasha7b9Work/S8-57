@@ -79,3 +79,49 @@ pString TypePress::ToString()
 
     return names[value];
 }
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+bool Key::IsControlSignal() const
+{
+    static const bool isControl[Key::Number] =
+    {
+        false, // None
+        false, // Function
+        false, // Measure
+        false, // Memory
+        false, // Service
+        false, // ChannelA
+        false, // ChannelB
+        false, // Time
+        false, // Start
+        false, // Trig
+        false, // Display
+        true,  // RangeMoreA
+        true,  // RangeLessA
+        true,  // RShiftMoreA
+        true,  // RShiftLessA
+        true,  // RangeMoreB
+        true,  // RangeLessB
+        true,  // RShiftMoreB
+        true,  // RShiftLessB
+        true,  // TBaseMore
+        true,  // TBaseLess
+        true,  // TShiftMore
+        true,  // TShiftLess
+        false, // TrigLevMore
+        false, // TrigLevLess
+        false, // Left
+        false, // Right
+        false, // Up
+        false, // Down
+        false, // Enter
+        false, // F1
+        false, // F2
+        false, // F3
+        false, // F4
+        false  // F5
+    };
+
+
+    return  isControl[value];
+}

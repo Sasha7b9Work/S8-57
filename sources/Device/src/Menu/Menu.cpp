@@ -78,7 +78,7 @@ bool Menu::IsProcessed(KeyEvent *event)
     switch(Device::CurrentMode())
     {
         case Device::Mode::Tester:
-            if(Key(key).IsFunctional() || (key == Key::Enter && !TypePress(type).IsLong()))
+            if(Key(key).IsControlSignal() || Key(key).IsFunctional() || (key == Key::Enter && !TypePress(type).IsLong()))
             {
                 return true;
             }

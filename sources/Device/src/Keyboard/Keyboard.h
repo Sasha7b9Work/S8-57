@@ -46,6 +46,8 @@ struct Key
 
     explicit Key(E v = None) : value(v) {};
     bool IsFunctional() const { return value >= F1 && value <= F5; };
+    /// Возвращает true, если кнопка управляет параметром сигнала - развёрткой там, смещением
+    bool IsControlSignal() const;
     pString Name();
 };
 
