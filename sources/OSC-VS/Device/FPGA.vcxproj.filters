@@ -495,9 +495,6 @@
     <ClCompile Include="src\Hardware\EEPROM_win.cpp">
       <Filter>Hardware</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Device\src\FPGA\FPGA_437.cpp">
-      <Filter>FPGA</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Device\src\Hardware\FSMC_437.cpp">
       <Filter>Hardware</Filter>
     </ClCompile>
@@ -527,6 +524,9 @@
     </ClCompile>
     <ClCompile Include="..\..\common\Message.cpp">
       <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="src\FPGA\FPGA_win.cpp">
+      <Filter>FPGA</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
