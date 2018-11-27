@@ -2,5 +2,8 @@
 
 namespace std
 {
-#include "stdlib.h"
+    void *malloc(size_t);
+    void free(void *);
+
+    #include <stdlib.h>
 }
