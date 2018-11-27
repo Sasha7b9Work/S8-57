@@ -3,6 +3,7 @@
 #include "log.h"
 #include "HandlersKeys.h"
 #include "FPGA/FPGA.h"
+#include "Hardware/Timer.h"
 #include "Menu/Menu.h"
 #include "Menu/Pages/Include/PageChannels.h"
 #include "Menu/Pages/Include/PageFunction.h"
@@ -12,6 +13,7 @@
 #include "Menu/Pages/Include/PageTime.h"
 #include "Menu/Pages/Include/PageTrig.h"
 #include "Menu/Pages/Include/PageDisplay.h"
+#include "Settings/Settings.h"
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -82,27 +84,53 @@ void Handlers::E()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+static void ChangeRShift(Chan::E ch, int delta)
+{
+    static bool stop[Chan::Number] = { false, false };      // Признак того, что смещение изменять не нужно - оно равно нулю и прошло мало времени
+    static uint timeStop[Chan::Number] = { 0, 0 };          // Время устновки признака stop
+
+    if (stop[ch])
+    {
+        if (TIME_MS - timeStop[ch] > 500)
+        {
+            stop[ch] = false;
+        }
+        return;
+    }
+    else
+    {
+        FPGA::RShiftChange(ch, delta);
+    }
+
+    if (SET_RSHIFT(ch) == RShift::ZERO)
+    {
+        stop[ch] = true;
+        timeStop[ch] = TIME_MS;
+    }
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Handlers::RShiftLessA()
 {
-    FPGA::RShiftChange(Chan::A, -1);
+    ChangeRShift(Chan::A, -1);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Handlers::RShiftMoreA()
 {
-    FPGA::RShiftChange(Chan::A, 1);
+    ChangeRShift(Chan::A, 1);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Handlers::RShiftLessB()
 {
-    FPGA::RShiftChange(Chan::B, -1);
+    ChangeRShift(Chan::B, -1);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Handlers::RShiftMoreB()
 {
-    FPGA::RShiftChange(Chan::B, 1);
+    ChangeRShift(Chan::B, 1);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

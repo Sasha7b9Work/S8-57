@@ -481,25 +481,7 @@ void FPGA::DecreaseTBase()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void FPGA::RShiftChange(Chan::E ch, int delta)
 {
-    static uint timeFirstZero[Chan::Number] = { 0, 0 };          // ¬ этот момент смещение первый раз достигло 0
-
-    if (timeFirstZero[ch] != 0)
-    {
-        if (TIME_MS - timeFirstZero[ch] < 500)
-        {
-            return;
-        }
-    }
-
-    timeFirstZero[ch] = 0;
-
     Math::AdditionThisLimitation<uint16>(&SET_RSHIFT(ch), STEP_RSHIFT * delta, RShift::MIN, RShift::MAX);
-
-    if (SET_RSHIFT(ch) == RShift::ZERO &&   // ≈сли смещение == 0
-        timeFirstZero[ch] == 0)                 // и оно ещЄ не было достигнуто
-    {
-        timeFirstZero[ch] = TIME_MS;            // запоминаем врем€ достижени€ нул€
-    }
 
     LoadRShift(ch);
 }
