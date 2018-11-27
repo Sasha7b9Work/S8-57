@@ -133,7 +133,7 @@ public:
 #define MAX_SYMBOLS_IN_FILE_NAME 35
     ENumPointsFPGA::E   mem_enumPoints;                             ///< Число точек
     ModeBtnMemory::E    mem_modeBtnMemory;
-    ModeWork            mem_modeWork;                               ///< Режим работы.
+    ModeWork::E         mem_modeWork;                               ///< Режим работы.
     bool                mem_flashAutoConnect;                       ///< Если true, при подключении флешки автоматически выводится Файл-Менеджер.
     int8                mem_indexCurSymbolNameMask;                 ///< Индекс текущего символа в режиме задания маски или выбора имени.
     ModeSaveSignal::E   mem_modeSaveSignal;                         ///< В каком виде сохранять сигнал.

@@ -109,9 +109,9 @@ void HiPart::DrawRightPart()
     int y = 2;
 
     static const int xses[3] ={280, 271, 251};
-    int x = xses[MODE_WORK.ToUINT()];
+    int x = xses[MODE_WORK];
 
-    if(!MODE_WORK.Is(ModeWork::RAM))
+    if(MODE_WORK != ModeWork::RAM)
     {
         Painter::DrawVLine(x, 1, Grid::Top() - 2, Color::FILL);
 
@@ -132,20 +132,20 @@ void HiPart::DrawRightPart()
         {"ยอาะ", "INT"}
     };
 
-    if(!MODE_WORK.Is(ModeWork::Dir))
+    if(MODE_WORK != ModeWork::Dir)
     {
         x += 18;
         Painter::DrawVLine(x, 1, Grid::Top() - 2, Color::FILL);
         x += 2;
         Painter::DrawText(LANG_RU ? x : x + 3, -1, DICT(DMode));
-        Painter::DrawStringInCenterRect(x + 1, 9, 25, 8, strs[MODE_WORK.ToUINT()][LANG]);
+        Painter::DrawStringInCenterRect(x + 1, 9, 25, 8, strs[MODE_WORK][LANG]);
     }
     else
     {
         x -= 9;
     }
 
-    if(!MODE_WORK.Is(ModeWork::RAM))
+    if(MODE_WORK != ModeWork::RAM)
     {
         x += 27;
         Painter::DrawVLine(x, 1, Grid::Top() - 2, Color::FILL);

@@ -30,9 +30,7 @@ struct ModeWork
         ROM,        ///< В этом режиме можно сохранять во flash-памяти измерения просматривать ранее сохранённые.
         Number      ///< Используется в модуле Data.c. Нужен, чтобы указать, что мудуль не настроен ни на какой режим.
     } value;
-    uint ToUINT() const { return (uint)value; }
-    bool Is(E v) const { return value == v; }
-    void Set(E v) { value = v; }
+    explicit ModeWork(E v) : value(v) {};
 };
 
 /// Число точек сигнала, с которым идёт работа.

@@ -66,7 +66,7 @@ DEF_SMALL_BUTTON(bLast_Prev,                                                    
 static void OnPress_Last_SaveToROM()
 {
     ((Page *)PageMemory::PageRAM::pointer)->SetCurrentPage();
-    MODE_WORK.Set(ModeWork::ROM);   // Находимся в режиме внутренного ЗУ
+    MODE_WORK = ModeWork::ROM;      // Находимся в режиме внутренного ЗУ
     EXIT_FROM_ROM_TO_RAM = 1;       // Этот признак мы устанавливаем для того, чтобы:
                                     // 1 - по нажатии кнопки Выход со страницы "ВНУТР ЗУ" выходить в "Последние", а не в основное меню;
                                     // 2 - для того, чтобы на странице "ВНУТР ЗУ" выводить не последний считанный сигнал, а выбранный на странице 
@@ -121,11 +121,11 @@ static void OnPress_RAM(bool enter)
         NUM_RAM_SIGNAL = 0;
         RUN_FPGA_BEFORE_SB = FPGA::IsRunning() ? 1u : 0u;
         FPGA::Stop(false);
-        MODE_WORK.Set(ModeWork::RAM);
+        MODE_WORK = ModeWork::RAM;
     }
     else
     {
-        MODE_WORK.Set(ModeWork::Dir);
+        MODE_WORK = ModeWork::Dir;
         FPGA::OnPressStart();
     }
 }

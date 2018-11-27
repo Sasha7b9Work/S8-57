@@ -44,7 +44,7 @@ void BottomPart::Draw()
 
     buffer[0] = 0;
     pString source[3] = {"1", "2", "\x82"};
-    if (MODE_WORK.Is(ModeWork::Dir))
+    if (MODE_WORK == ModeWork::Dir)
     {
         snprintf(buffer, 100, "с\xa5\x10%s", source[(uint8)TRIG_SOURCE]);
     }
@@ -71,7 +71,7 @@ void BottomPart::Draw()
         "\xb3\xb4",
         "\xb1\xb2"
     };
-    if (MODE_WORK.Is(ModeWork::Dir))
+    if (MODE_WORK == ModeWork::Dir)
     {
         snprintf(buffer, SIZE, "\xa5\x10%s\x10\xa5\x10%s\x10\xa5\x10", couple[TRIG_INPUT], polar[TRIG_POLARITY]);
         Painter::DrawText(x + 18, y1, buffer);
@@ -86,7 +86,7 @@ void BottomPart::Draw()
         '\xa0',
         '\xb0'
     };
-    if (MODE_WORK.Is(ModeWork::Dir))
+    if (MODE_WORK == ModeWork::Dir)
     {
         snprintf(buffer, 100, "\xa5\x10%c", mode[START_MODE]);
         Painter::DrawText(x + 63, y1, buffer);
@@ -103,7 +103,7 @@ void BottomPart::Draw()
     int y2 = y1 + 6;
     Painter::SetFont(Font::Type::_5);
 
-    if (MODE_WORK.Is(ModeWork::Dir))
+    if (MODE_WORK == ModeWork::Dir)
     {
         WriteStringAndNumber(LANG_RU ? "накопл" : "accum", (int16)x, (int16)y0, NUM_ACCUM);
         WriteStringAndNumber(LANG_RU ? "усредн" : "ave", (int16)x, (int16)y1, NUM_AVE);
@@ -115,7 +115,7 @@ void BottomPart::Draw()
 
     Painter::SetFont(Font::Type::_8);
 
-    if (MODE_WORK.Is(ModeWork::Dir))
+    if (MODE_WORK == ModeWork::Dir)
     {
         char mesFreq[20] = "\x7c=";
         float freq = FrequencyCounter::GetFreq();
@@ -157,7 +157,7 @@ void BottomPart::Draw()
         Painter::DrawChar(x + 46, Grid::Bottom() + 11, '\x13');
     }
 
-    if (MODE_WORK.Is(ModeWork::Dir))
+    if (MODE_WORK == ModeWork::Dir)
     {
         Painter::SetFont(Font::Type::_5);
         WriteStringAndNumber("СГЛАЖ.:", (int16)(x + 57), (int16)(Grid::Bottom() + 10), (int)ENUM_SMOOTHING + 1);
@@ -260,7 +260,7 @@ void BottomPart::DrawTime(int x, int y)
 
     Painter::SetColor(Color::FILL);
 
-    if (MODE_WORK.Is(ModeWork::ROM) || MODE_WORK.Is(ModeWork::RAM))
+    if ((MODE_WORK == ModeWork::ROM) || (MODE_WORK == ModeWork::RAM))
     {
         if (DS)
         {
