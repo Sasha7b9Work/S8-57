@@ -104,10 +104,10 @@ bool Key::IsControlSignal() const
         true,  // RangeLessB
         true,  // RShiftMoreB
         true,  // RShiftLessB
-        true,  // TBaseMore
-        true,  // TBaseLess
-        true,  // TShiftMore
-        true,  // TShiftLess
+        false, // TBaseMore
+        false, // TBaseLess
+        false, // TShiftMore
+        false, // TShiftLess
         false, // TrigLevMore
         false, // TrigLevLess
         false, // Left

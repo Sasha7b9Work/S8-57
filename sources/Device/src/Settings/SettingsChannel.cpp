@@ -53,3 +53,5 @@ int Chan::RequestBytes(DataSettings *) const
 {
     return FPGA_MAX_NUM_POINTS;
 }
+
+

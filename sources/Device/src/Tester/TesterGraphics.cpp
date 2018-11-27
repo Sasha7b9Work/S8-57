@@ -21,6 +21,13 @@ static array *dat = (array *)OUT_A;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/// Написать параметры вывода
+static void DrawParameters(int x, int y);
+/// Написать легенду изображения
+static void DrawInfo(int x, int y);
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void Tester::Graphics::Update()
 {
     Painter::BeginScene(Color::BACK);
@@ -34,6 +41,10 @@ void Tester::Graphics::Update()
 
     Painter::DrawRectangle(0, 0, size, size, Color::FILL);
     Painter::DrawRectangle(0, 0, Display::WIDTH - 1, Display::HEIGHT - 1);
+
+    DrawParameters(size + 10, 10);
+
+    DrawInfo(size + 10, 50);
 
     Menu::Graphics::Draw();
 }
@@ -86,4 +97,23 @@ void Tester::Graphics::SetPoints(int numStep, uint8 dx[TESTER_NUM_POINTS], uint8
         x[i] = (uint8)X;
         y[i] = (uint8)Y;
     }
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void DrawParameters(int x, int y)
+{
+    Painter::SetColor(Color::FILL);
+
+    for(int8 ch = 0; ch < 2; ch++)
+    {
+        Chan::E chan = (Chan::E)ch;
+
+        Painter::DrawText(x, y + ch * 10, Range(SET_RANGE(chan)).ToString(SET_DIVIDER(ch)));
+    }
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void DrawInfo(int x, int y)
+{
+
 }
