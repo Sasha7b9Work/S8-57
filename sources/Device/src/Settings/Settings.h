@@ -187,11 +187,11 @@ public:
 
     // Настройки частотомера
 
-    FrequencyCounter::Enabled       freq_enabled;
-    FrequencyCounter::ModeView      freq_modeView;      
-    FrequencyCounter::TimeCounting  freq_timeCounting;  ///< Время счёта частоты.
-    FrequencyCounter::FreqClc       freq_freqClc;       ///< Частота заполнения.
-    FrequencyCounter::NumberPeriods freq_numberPeriods; ///< Количество периодов.
+    FrequencyCounter::Enabled::E        freq_enabled;
+    FrequencyCounter::ModeView::E       freq_modeView;      
+    FrequencyCounter::TimeCounting::E   freq_timeCounting;  ///< Время счёта частоты.
+    FrequencyCounter::FreqClc::E        freq_freqClc;       ///< Частота заполнения.
+    FrequencyCounter::NumberPeriods::E  freq_numberPeriods; ///< Количество периодов.
 
     // Меню ОТЛАДКА
 

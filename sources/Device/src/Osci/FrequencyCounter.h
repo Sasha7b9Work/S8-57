@@ -3,10 +3,10 @@
 
 
 #define FREQ_METER_ENABLED                  (set.freq_enabled)
-#define FREQ_METER_IS_ENABLED               (FREQ_METER_ENABLED.value == FrequencyCounter::Enabled::On)
+#define FREQ_METER_IS_ENABLED               (FREQ_METER_ENABLED == FrequencyCounter::Enabled::On)
 #define FREQ_METER_MODE_VIEW                (set.freq_modeView)
-#define FREQ_METER_MODE_VIEW_IS_FREQUENCY   (FREQ_METER_MODE_VIEW.value == FrequencyCounter::ModeView::Frequency)
-#define FREQ_METER_MODE_VIEW_IS_PERIOD      (FREQ_METER_MODE_VIEW.value == FrequencyCounter::ModeView::Period)
+#define FREQ_METER_MODE_VIEW_IS_FREQUENCY   (FREQ_METER_MODE_VIEW == FrequencyCounter::ModeView::Frequency)
+#define FREQ_METER_MODE_VIEW_IS_PERIOD      (FREQ_METER_MODE_VIEW == FrequencyCounter::ModeView::Period)
 #define FREQ_METER_TIMECOUNTING             (set.freq_timeCounting)
 #define FREQ_METER_FREQ_CLC                 (set.freq_freqClc)
 #define FREQ_METER_NUM_PERIODS              (set.freq_numberPeriods)
@@ -38,7 +38,7 @@ public:
             _1s,
             _10s
         } value;
-        operator uint8() const { return (uint8)value; }
+        explicit TimeCounting(E v) : value(v) {};
     };
 
     /// Частота заполняющих импульсов для счёта частоты.
@@ -52,7 +52,7 @@ public:
             _100MHz,
             Number
         } value;
-        operator uint8() const { return (uint8)value; }
+        explicit FreqClc(E v) : value(v) {};
     };
 
     /// Количество периодов.
@@ -68,7 +68,7 @@ public:
             _100k,
             Number
         } value;
-        operator uint8() const { return (uint8)value; }
+        explicit NumberPeriods(E v) : value(v) {};
     };
 
     struct Enabled
@@ -78,7 +78,7 @@ public:
             Off,
             On
         } value;
-        uint8 ToUINT8() const { return (uint8)value; };
+        explicit Enabled(E v) : value(v) {};
     };
 
     /// Что показывать - период или частоту
@@ -90,6 +90,7 @@ public:
             Period,
             Number
         } value;
+        explicit ModeView(E v) : value(v) {};
     };
 
 private:
