@@ -76,6 +76,7 @@
 #include <cstring>
 #include <cstdarg>
 #include <cctype>
+#include <cstdlib>
 
 #pragma warning(pop)
 

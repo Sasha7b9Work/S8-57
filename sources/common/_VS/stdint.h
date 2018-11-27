@@ -10,7 +10,7 @@ typedef unsigned char	BYTE;
 /* These types MUST be 16-bit */
 typedef short			SHORT;
 typedef unsigned short	WORD;
-typedef unsigned short	WCHAR;
+//typedef unsigned short	WCHAR;
 
 /* These types MUST be 32-bit */
 typedef long			LONG;

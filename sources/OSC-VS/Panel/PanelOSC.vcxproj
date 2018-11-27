@@ -184,18 +184,20 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\..\common\Command.h" />
+    <ClInclude Include="..\..\common\_VS\cctype" />
+    <ClInclude Include="..\..\common\_VS\cmath.h" />
     <ClInclude Include="..\..\common\_VS\cmsis_armcc.h" />
     <ClInclude Include="..\..\common\_VS\cmsis_armcc_V6.h" />
     <ClInclude Include="..\..\common\_VS\core_cm4.h" />
     <ClInclude Include="..\..\common\_VS\core_cmFunc.h" />
     <ClInclude Include="..\..\common\_VS\core_cmInstr.h" />
     <ClInclude Include="..\..\common\_VS\core_cmSimd.h" />
+    <ClInclude Include="..\..\common\_VS\cstdarg" />
     <ClInclude Include="..\..\common\_VS\ctype.h" />
     <ClInclude Include="..\..\common\_VS\integer.h" />
     <ClInclude Include="..\..\common\_VS\inttypes.h" />
     <ClInclude Include="..\..\common\_VS\limits.h" />
     <ClInclude Include="..\..\common\_VS\math.h" />
-    <ClInclude Include="..\..\common\_VS\stdarg.h" />
     <ClInclude Include="..\..\common\_VS\stdint.h" />
     <ClInclude Include="..\..\common\_VS\stdio.h" />
     <ClInclude Include="..\..\common\_VS\stdlib.h" />

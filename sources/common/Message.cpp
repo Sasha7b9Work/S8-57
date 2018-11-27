@@ -165,7 +165,7 @@ void Message::PutWord(uint v)
 bool Message::Allocate(uint size)
 {
     Free();
-		data = (uint8 *)std::malloc(size);
+    data = (uint8 *)std::malloc(size);
     if (data)
     {
         allocated = size;

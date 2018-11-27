@@ -97,6 +97,9 @@
     <Filter Include="libs\HAL\Legacy">
       <UniqueIdentifier>{8caf6262-264e-4f57-8cef-66e4c033c986}</UniqueIdentifier>
     </Filter>
+    <Filter Include="common\_VS">
+      <UniqueIdentifier>{2f8e80b0-c991-4d1d-9a69-4f832a00c94c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Device\src\Display\Display.cpp">
@@ -134,9 +137,6 @@
     </ClCompile>
     <ClCompile Include="..\..\Device\src\libs\CMSIS\system_stm32f4xx.c">
       <Filter>libs\CMSIS</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Device\src\libs\HAL\stm32f4xx_hal_msp.cpp">
-      <Filter>libs\HAL</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Device\src\Hardware\CPU.cpp">
       <Filter>Hardware</Filter>
@@ -285,9 +285,6 @@
     <ClCompile Include="..\..\Device\src\Osci\FrequencyCounter.cpp">
       <Filter>Osci</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Device\src\libs\USBH\usbh_conf.cpp">
-      <Filter>libs\USBH</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Device\src\defines.cpp">
       <Filter>src</Filter>
     </ClCompile>
@@ -402,74 +399,14 @@
     <ClCompile Include="..\..\Device\src\device.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="src\include\HAL\stm32f4xx_hal.cpp">
-      <Filter>libs\HAL</Filter>
-    </ClCompile>
-    <ClCompile Include="src\include\HAL\stm32f4xx_hal_dac.cpp">
-      <Filter>libs\HAL</Filter>
-    </ClCompile>
-    <ClCompile Include="src\include\HAL\stm32f4xx_hal_cortex.cpp">
-      <Filter>libs\HAL</Filter>
-    </ClCompile>
-    <ClCompile Include="src\include\HAL\stm32f4xx_hal_uart.cpp">
-      <Filter>libs\HAL</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Device\src\tables.cpp">
       <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="src\include\HAL\stm32f4xx_hal_tim.cpp">
-      <Filter>libs\HAL</Filter>
-    </ClCompile>
-    <ClCompile Include="src\include\HAL\stm32f4xx_hal_tim_ex.cpp">
-      <Filter>libs\HAL</Filter>
-    </ClCompile>
-    <ClCompile Include="src\include\HAL\stm32f4xx_hal_dma.cpp">
-      <Filter>libs\HAL</Filter>
-    </ClCompile>
-    <ClCompile Include="src\include\HAL\stm32f4xx_hal_pcd.cpp">
-      <Filter>libs\HAL</Filter>
-    </ClCompile>
-    <ClCompile Include="src\include\HAL\stm32f4xx_hal_spi.cpp">
-      <Filter>libs\HAL</Filter>
-    </ClCompile>
-    <ClCompile Include="src\include\HAL\stm32f4xx_hal_crc.cpp">
-      <Filter>libs\HAL</Filter>
-    </ClCompile>
-    <ClCompile Include="src\include\HAL\stm32f4xx_hal_rcc.cpp">
-      <Filter>libs\HAL</Filter>
-    </ClCompile>
-    <ClCompile Include="src\include\HAL\stm32f4xx_ll_fmc.cpp">
-      <Filter>libs\HAL</Filter>
-    </ClCompile>
-    <ClCompile Include="src\include\HAL\stm32f4xx_hal_flash.cpp">
-      <Filter>libs\HAL</Filter>
-    </ClCompile>
-    <ClCompile Include="src\include\HAL\stm32f4xx_hal_flash_ex.cpp">
-      <Filter>libs\HAL</Filter>
-    </ClCompile>
-    <ClCompile Include="src\include\HAL\stm32f4xx_hal_adc.cpp">
-      <Filter>libs\HAL</Filter>
-    </ClCompile>
-    <ClCompile Include="src\include\HAL\stm32f4xx_hal_gpio.cpp">
-      <Filter>libs\HAL</Filter>
-    </ClCompile>
-    <ClCompile Include="src\include\HAL\stm32f4xx_hal_rtc.cpp">
-      <Filter>libs\HAL</Filter>
-    </ClCompile>
-    <ClCompile Include="src\include\USBH\usbh_diskio.cpp">
-      <Filter>libs\USBH</Filter>
-    </ClCompile>
-    <ClCompile Include="src\include\USBH\usbh_msc.cpp">
-      <Filter>libs\USBH</Filter>
     </ClCompile>
     <ClCompile Include="src\include\FatFS\ff_gen_drv.cpp">
       <Filter>libs\FatFS</Filter>
     </ClCompile>
     <ClCompile Include="src\include\FatFS\ff.cpp">
       <Filter>libs\FatFS</Filter>
-    </ClCompile>
-    <ClCompile Include="src\include\USBH\usbh_core.cpp">
-      <Filter>libs\USBH</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Device\src\log.cpp">
       <Filter>src</Filter>
@@ -574,9 +511,6 @@
     </ClInclude>
     <ClInclude Include="..\..\Device\src\Utils\Debug.h">
       <Filter>Utils</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Device\src\libs\HAL\stm32f4xx_hal_conf.h">
-      <Filter>libs\HAL</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Device\src\Hardware\CPU.h">
       <Filter>Hardware</Filter>
@@ -740,9 +674,6 @@
     <ClInclude Include="..\..\Device\src\Osci\FrequencyCounter.h">
       <Filter>Osci</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Device\src\libs\USBH\usbh_conf.h">
-      <Filter>libs\USBH</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Device\src\Utils\Measure.h">
       <Filter>Utils</Filter>
     </ClInclude>
@@ -800,15 +731,6 @@
     <ClInclude Include="src\include\CMSIS\stm32f437xx.h">
       <Filter>libs\CMSIS</Filter>
     </ClInclude>
-    <ClInclude Include="src\include\HAL\stm32f4xx_hal_dac.h">
-      <Filter>libs\HAL</Filter>
-    </ClInclude>
-    <ClInclude Include="src\include\HAL\stm32f4xx_hal_hcd.h">
-      <Filter>libs\HAL</Filter>
-    </ClInclude>
-    <ClInclude Include="src\include\HAL\stm32f4xx_hal_uart.h">
-      <Filter>libs\HAL</Filter>
-    </ClInclude>
     <ClInclude Include="src\include\FatFS\ff.h">
       <Filter>libs\FatFS</Filter>
     </ClInclude>
@@ -824,101 +746,14 @@
     <ClInclude Include="..\..\Device\src\device.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="src\include\HAL\stm32f4xx_hal_gpio.h">
-      <Filter>libs\HAL</Filter>
-    </ClInclude>
-    <ClInclude Include="src\include\HAL\stm32f4xx_hal_def.h">
-      <Filter>libs\HAL</Filter>
-    </ClInclude>
-    <ClInclude Include="src\include\HAL\stm32f4xx_hal_adc.h">
-      <Filter>libs\HAL</Filter>
-    </ClInclude>
-    <ClInclude Include="src\include\HAL\stm32f4xx_hal_dma.h">
-      <Filter>libs\HAL</Filter>
-    </ClInclude>
-    <ClInclude Include="src\include\HAL\stm32f4xx_hal_tim.h">
-      <Filter>libs\HAL</Filter>
-    </ClInclude>
     <ClInclude Include="src\include\FatFS\ff_gen_drv.h">
       <Filter>libs\FatFS</Filter>
     </ClInclude>
     <ClInclude Include="src\include\FatFS\diskio.h">
       <Filter>libs\FatFS</Filter>
     </ClInclude>
-    <ClInclude Include="src\include\HAL\stm32f4xx_hal_spi.h">
-      <Filter>libs\HAL</Filter>
-    </ClInclude>
-    <ClInclude Include="src\include\HAL\stm32f4xx.h">
-      <Filter>libs\HAL</Filter>
-    </ClInclude>
-    <ClInclude Include="src\include\HAL\stm32f4xx_hal.h">
-      <Filter>libs\HAL</Filter>
-    </ClInclude>
-    <ClInclude Include="src\include\HAL\stm32f4xx_hal_cortex.h">
-      <Filter>libs\HAL</Filter>
-    </ClInclude>
-    <ClInclude Include="src\include\HAL\stm32f4xx_hal_crc.h">
-      <Filter>libs\HAL</Filter>
-    </ClInclude>
-    <ClInclude Include="src\include\HAL\stm32f4xx_hal_flash.h">
-      <Filter>libs\HAL</Filter>
-    </ClInclude>
-    <ClInclude Include="src\include\HAL\stm32f4xx_hal_gpio_ex.h">
-      <Filter>libs\HAL</Filter>
-    </ClInclude>
-    <ClInclude Include="src\include\HAL\stm32f4xx_hal_nor.h">
-      <Filter>libs\HAL</Filter>
-    </ClInclude>
-    <ClInclude Include="src\include\HAL\stm32f4xx_hal_pcd.h">
-      <Filter>libs\HAL</Filter>
-    </ClInclude>
-    <ClInclude Include="src\include\HAL\stm32f4xx_hal_pwr.h">
-      <Filter>libs\HAL</Filter>
-    </ClInclude>
-    <ClInclude Include="src\include\HAL\stm32f4xx_hal_rcc.h">
-      <Filter>libs\HAL</Filter>
-    </ClInclude>
-    <ClInclude Include="src\include\HAL\stm32f4xx_hal_rtc.h">
-      <Filter>libs\HAL</Filter>
-    </ClInclude>
-    <ClInclude Include="src\include\HAL\stm32f4xx_hal_sram.h">
-      <Filter>libs\HAL</Filter>
-    </ClInclude>
-    <ClInclude Include="src\include\HAL\stm32f4xx_ll_fmc.h">
-      <Filter>libs\HAL</Filter>
-    </ClInclude>
-    <ClInclude Include="src\include\HAL\stm32f4xx_hal_pwr_ex.h">
-      <Filter>libs\HAL</Filter>
-    </ClInclude>
-    <ClInclude Include="src\include\HAL\stm32f4xx_hal_rcc_ex.h">
-      <Filter>libs\HAL</Filter>
-    </ClInclude>
-    <ClInclude Include="src\include\HAL\stm32f4xx_hal_flash_ex.h">
-      <Filter>libs\HAL</Filter>
-    </ClInclude>
-    <ClInclude Include="src\include\HAL\stm32f4xx_ll_usb.h">
-      <Filter>libs\HAL</Filter>
-    </ClInclude>
-    <ClInclude Include="src\include\HAL\Legacy\stm32_hal_legacy.h">
-      <Filter>libs\HAL\Legacy</Filter>
-    </ClInclude>
-    <ClInclude Include="src\include\HAL\stm32f4xx_hal_tim_ex.h">
-      <Filter>libs\HAL</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Device\src\tables.h">
       <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="src\include\USBH\usbh_core.h">
-      <Filter>libs\USBH</Filter>
-    </ClInclude>
-    <ClInclude Include="src\include\USBH\usbh_def.h">
-      <Filter>libs\USBH</Filter>
-    </ClInclude>
-    <ClInclude Include="src\include\USBH\usbh_msc.h">
-      <Filter>libs\USBH</Filter>
-    </ClInclude>
-    <ClInclude Include="src\include\USBH\usbh_diskio.h">
-      <Filter>libs\USBH</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Device\src\log.h">
       <Filter>src</Filter>
@@ -938,6 +773,60 @@
     <ClInclude Include="..\..\common\Message.h">
       <Filter>common</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\common\_VS\cmsis_armcc.h">
+      <Filter>common\_VS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\_VS\cmsis_armcc_V6.h">
+      <Filter>common\_VS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\_VS\core_cm4.h">
+      <Filter>common\_VS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\_VS\core_cmFunc.h">
+      <Filter>common\_VS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\_VS\core_cmInstr.h">
+      <Filter>common\_VS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\_VS\core_cmSimd.h">
+      <Filter>common\_VS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\_VS\ctype.h">
+      <Filter>common\_VS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\_VS\integer.h">
+      <Filter>common\_VS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\_VS\inttypes.h">
+      <Filter>common\_VS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\_VS\limits.h">
+      <Filter>common\_VS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\_VS\math.h">
+      <Filter>common\_VS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\_VS\stdarg.h">
+      <Filter>common\_VS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\_VS\stdint.h">
+      <Filter>common\_VS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\_VS\stdio.h">
+      <Filter>common\_VS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\_VS\stdlib.h">
+      <Filter>common\_VS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\_VS\string.h">
+      <Filter>common\_VS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\_VS\tchar.h">
+      <Filter>common\_VS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\_VS\windows.h">
+      <Filter>common\_VS</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\Device\src\libs\CMSIS\startup_stm32f437xx.s">
@@ -954,6 +843,30 @@
     </None>
     <None Include="..\..\Device\src\Display\Font\fontUGO.inc">
       <Filter>Display\Font</Filter>
+    </None>
+    <None Include="..\..\common\_VS\algorithm">
+      <Filter>common\_VS</Filter>
+    </None>
+    <None Include="..\..\common\_VS\cctype">
+      <Filter>common\_VS</Filter>
+    </None>
+    <None Include="..\..\common\_VS\climits">
+      <Filter>common\_VS</Filter>
+    </None>
+    <None Include="..\..\common\_VS\cmath">
+      <Filter>common\_VS</Filter>
+    </None>
+    <None Include="..\..\common\_VS\cstdarg">
+      <Filter>common\_VS</Filter>
+    </None>
+    <None Include="..\..\common\_VS\cstdlib">
+      <Filter>common\_VS</Filter>
+    </None>
+    <None Include="..\..\common\_VS\cstring">
+      <Filter>common\_VS</Filter>
+    </None>
+    <None Include="..\..\common\_VS\limits">
+      <Filter>common\_VS</Filter>
     </None>
   </ItemGroup>
 </Project>

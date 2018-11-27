@@ -44,3 +44,6 @@ sources/OSC-VS/Device/x64/*
 sources/OSC-VS/Panel/x64/*
 
 sources/ThirdParty/wxWidgets/docs/*
+
+sources/OSC-VS/Device/Debug_stm32/*
+sources/OSC-VS/Panel/Debug_stm32/*

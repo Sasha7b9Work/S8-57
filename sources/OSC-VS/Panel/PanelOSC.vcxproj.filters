@@ -171,9 +171,6 @@
     <ClInclude Include="..\..\common\_VS\math.h">
       <Filter>_VS</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\common\_VS\stdarg.h">
-      <Filter>_VS</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\common\_VS\stdint.h">
       <Filter>_VS</Filter>
     </ClInclude>
@@ -197,6 +194,15 @@
     </ClInclude>
     <ClInclude Include="..\..\common\Command.h">
       <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\_VS\cmath.h">
+      <Filter>_VS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\_VS\cstdarg">
+      <Filter>_VS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\_VS\cctype">
+      <Filter>_VS</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
