@@ -85,14 +85,13 @@ public:
     static void Stop(bool pause = false);
 
     static void LoadRanges();
-    /// Запустить цикл чтения для тестер-компонента. В течение time секунд должно быть считано numPoints точек
-    static void StartForTester(int numPoints);
-
     class ForTester
     {
     friend class Tester;
     private:
         static bool Read(uint8 *dataA, uint8 *dataB);
+        /// Запустить цикл чтения для тестер-компонента. В течение time секунд должно быть считано numPoints точек
+        static void Start();
     };
 
     static uint NumPoints();

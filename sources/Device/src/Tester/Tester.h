@@ -54,8 +54,6 @@ private:
     static void LoadFPGA();
     /// Считать данные очередной ступеньки
     static void ReadData();
-    /// Запустить процесс чтения очередной ступеньки
-    static void StartFPGA();
     /// Текущий шаг
     static int step;
     /// Шаг изменения напряжения
