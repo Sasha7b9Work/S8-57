@@ -117,7 +117,18 @@ void DrawParameters(int x, int y)
     {
         Chan::E chan = (Chan::E)ch;
 
-        Painter::DrawText(x, y + ch * 10, Range(SET_RANGE(chan)).ToString(SET_DIVIDER(ch)));
+        Painter::SetColor(Color::FILL);
+
+        Range::E range = SET_RANGE(chan);
+        Divider::E divider = SET_DIVIDER(ch);
+
+        Painter::DrawTextOnBackground(x, y + ch * 10, Range(range).ToString(divider), Color::BACK);
+
+        Painter::SetColor(Color::FILL);
+
+        char buffer[50];
+
+        Painter::DrawTextOnBackground(x + 20, y + ch * 10, RShift::ToString((uint16)SET_RSHIFT(chan), range, divider, buffer), Color::BACK);
     }
 }
 
