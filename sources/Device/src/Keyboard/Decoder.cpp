@@ -61,22 +61,22 @@ static void RunStep(uint8 data)
 {
     static const struct StructFunc { pFuncBU8 func; } commands[Command::Number] =
     {
-        EmptyFuncBtU8,
-        ButtonPress,
-        EmptyFuncBtU8,
-        EmptyFuncBtU8,
-        EmptyFuncBtU8,
-        EmptyFuncBtU8,
-        EmptyFuncBtU8,
-        EmptyFuncBtU8,
-        EmptyFuncBtU8,
-        EmptyFuncBtU8,
-        EmptyFuncBtU8,
-        EmptyFuncBtU8,
-        EmptyFuncBtU8,
-        EmptyFuncBtU8,
-        EmptyFuncBtU8,
-        EmptyFuncBtU8
+        EmptyFuncBtU8,      // None,
+        ButtonPress,        // ButtonPress,
+        EmptyFuncBtU8,      // Paint_BeginScene,
+        EmptyFuncBtU8,      // Paint_EndScene,
+        EmptyFuncBtU8,      // Paint_SetColor,
+        EmptyFuncBtU8,      // Paint_FillRegion,
+        EmptyFuncBtU8,      // Paint_DrawText,
+        EmptyFuncBtU8,      // Paint_SetPalette,
+        EmptyFuncBtU8,      // Paint_DrawRectangle,
+        EmptyFuncBtU8,      // Paint_DrawVLine,
+        EmptyFuncBtU8,      // Paint_DrawHLine,
+        EmptyFuncBtU8,      // Paint_SetFont,
+        EmptyFuncBtU8,      // Paint_SetPoint,
+        EmptyFuncBtU8,      // Paint_DrawLine,
+        EmptyFuncBtU8,      // Paint_TesterLines,
+        EmptyFuncBtU8       // Paint_DrawBigText,
     };
 
     if (step == 0)
