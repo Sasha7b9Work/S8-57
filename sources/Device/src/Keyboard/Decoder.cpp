@@ -61,22 +61,22 @@ static void RunStep(uint8 data)
 {
     static const struct StructFunc { pFuncBU8 func; } commands[Command::Number] =
     {
-        EmptyFuncVU8t,
+        EmptyFuncBtU8,
         ButtonPress,
-        EmptyFuncVU8t,
-        EmptyFuncVU8t,
-        EmptyFuncVU8t,
-        EmptyFuncVU8t,
-        EmptyFuncVU8t,
-        EmptyFuncVU8t,
-        EmptyFuncVU8t,
-        EmptyFuncVU8t,
-        EmptyFuncVU8t,
-        EmptyFuncVU8t,
-        EmptyFuncVU8t,
-        EmptyFuncVU8t,
-        EmptyFuncVU8t,
-        EmptyFuncVU8t
+        EmptyFuncBtU8,
+        EmptyFuncBtU8,
+        EmptyFuncBtU8,
+        EmptyFuncBtU8,
+        EmptyFuncBtU8,
+        EmptyFuncBtU8,
+        EmptyFuncBtU8,
+        EmptyFuncBtU8,
+        EmptyFuncBtU8,
+        EmptyFuncBtU8,
+        EmptyFuncBtU8,
+        EmptyFuncBtU8,
+        EmptyFuncBtU8,
+        EmptyFuncBtU8
     };
 
     if (step == 0)

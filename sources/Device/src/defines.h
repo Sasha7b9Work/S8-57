@@ -55,7 +55,7 @@ inline bool EmptyFuncBtV() { return true; }
 inline void EmptyFuncVI(int) {}
 inline void EmptyFuncVII(int, int) {}
 inline bool EmptyFuncBfI(int) { return false; }
-inline bool EmptyFuncVU8t(uint8) { return true; }
+inline bool EmptyFuncBtU8(uint8) { return true; }
 
 #define ERROR_VALUE_INT     INT_MAX
 #define ERROR_VALUE_INT16   SHRT_MAX
