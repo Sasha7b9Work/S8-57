@@ -111,7 +111,7 @@ int Grid::ChannelCenterHeight()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Grid::Draw()
 {
-    DEF_STRUCT(StructDraw, pFuncVV) funcs[Device::Mode::Number] =
+    static const struct StructDraw { pFuncVV func; } draw[Device::Mode::Number] =
     {
         DrawOsci,
         DrawTester,
@@ -119,7 +119,17 @@ void Grid::Draw()
         EmptyFuncVV
     };
 
-    funcs[Device::CurrentMode()].val();
+
+    pFuncVV func = draw[Device::CurrentMode()].func;
+
+    if (func)
+    {
+        func();
+    }
+    else
+    {
+        LOG_ERROR("Нету обработчика");
+    }
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
