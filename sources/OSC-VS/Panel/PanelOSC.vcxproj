@@ -103,6 +103,7 @@
     <ClInclude Include="..\..\Panel\src\Display\DisplayTypes.h" />
     <ClInclude Include="..\..\Panel\src\Display\font\Font.h" />
     <ClInclude Include="..\..\Panel\src\Display\Painter.h" />
+    <ClInclude Include="..\..\Panel\src\Display\Text.h" />
     <ClInclude Include="..\..\Panel\src\Hardware\Controls.h" />
     <ClInclude Include="..\..\Panel\src\Hardware\CPU.h" />
     <ClInclude Include="..\..\Panel\src\Hardware\FSMC.h" />
@@ -174,6 +175,8 @@
     <ClCompile Include="..\..\Panel\src\Display\PainterSTM429.cpp" />
     <ClCompile Include="..\..\Panel\src\Display\PainterText.cpp" />
     <ClCompile Include="..\..\Panel\src\Display\PainterTextSTM429.cpp" />
+    <ClCompile Include="..\..\Panel\src\Display\Text.cpp" />
+    <ClCompile Include="..\..\Panel\src\Display\Text_429.cpp" />
     <ClCompile Include="..\..\Panel\src\Hardware\CPU.cpp" />
     <ClCompile Include="..\..\Panel\src\Hardware\CPU_IT.cpp" />
     <ClCompile Include="..\..\Panel\src\Hardware\FSMC.cpp" />

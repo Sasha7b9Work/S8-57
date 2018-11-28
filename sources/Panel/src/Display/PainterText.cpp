@@ -4,38 +4,9 @@
 #include <stdarg.h>
 #include <stdio.h>
 #include <string.h>
-//#include "stub.h"
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-bool Painter::ByteFontNotEmpty(int eChar, int byte)
-{
-    static const uint8 *bytes = 0;
-    static int prevChar = -1;
-    if (eChar != prevChar)
-    {
-        prevChar = eChar;
-        bytes = font->symbol[prevChar].bytes;
-    }
-    return bytes[byte];
-}
-    
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-bool Painter::BitInFontIsExist(int eChar, int numByte, int bit)
-{
-    static uint8 prevByte = 0;      /// \todo здесь точно статики нужны?
-    static int prevChar = -1;
-    static int prevNumByte = -1;
-    if (prevNumByte != numByte || prevChar != eChar)
-    {
-        prevByte = font->symbol[eChar].bytes[numByte];
-        prevChar = eChar;
-        prevNumByte = numByte;
-    }
-    return prevByte & (1 << bit);
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 extern void CalculateCurrentColor();
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

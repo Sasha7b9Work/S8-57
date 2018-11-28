@@ -61,14 +61,7 @@ public:
 
     static void SetFont(Font::Type typeFont);
 
-    static int DrawChar(int x, int y, char symbol, Color color = Color::NUMBER);
-
     static int DrawText(int x, int y, const char *text, Color color = Color::NUMBER);
-
-    static void DrawBigText(int x, int y, uint8 size, pString text);
-
-    static int DrawBigChar(int eX, int eY, int size, char symbol);
-
     /// Выводит текст на прямоугольнике цвета colorBackgound
     static int DrawTextOnBackground(int x, int y, const char *text, Color colorBackground);
 
@@ -83,10 +76,6 @@ private:
     static Color currentColor;
 
     static Font::Type::E currentTypeFont;
-
-    static bool ByteFontNotEmpty(int eChar, int byte);
-
-    static bool BitInFontIsExist(int eChar, int numByte, int bit);
 };
 
 

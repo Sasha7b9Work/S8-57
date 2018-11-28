@@ -387,7 +387,7 @@ void Grid::DrawTester()
 
     x += deltaX;
 
-    int deltaPoint = 5;
+    float deltaPoint = 5.0f;
 
     while (x < Display::WIDTH)
     {
@@ -395,7 +395,7 @@ void Grid::DrawTester()
         x += deltaX;
     }
 
-    x = x0 + Display::WIDTH / 2 - deltaX;
+    x = (int)(x0 + Display::WIDTH / 2 - deltaX);
 
     while (x > 0)
     {
@@ -411,7 +411,7 @@ void Grid::DrawTester()
         y += deltaY;
     }
 
-    y = y0 + Display::HEIGHT / 2 - deltaY;
+    y = (int)(y0 + Display::HEIGHT / 2 - deltaY);
 
     while (y > 0)
     {

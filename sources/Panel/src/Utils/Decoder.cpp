@@ -2,6 +2,7 @@
 #include "Hardware/FSMC.h"
 #include "Display/Display.h"
 #include "Display/Painter.h"
+#include "Display/Text.h"
 #include "Hardware/Keyboard.h"
 
 
@@ -344,7 +345,7 @@ bool Decoder::DrawBigText(uint8 data)
         if (readingSymbols == numSymbols)
         {
             buffer[readingSymbols] = 0;
-            Painter::DrawBigText(x, y, size, buffer);
+            Text::DrawBigText(x, y, size, buffer);
             delete[] buffer;
             return true;
         }
