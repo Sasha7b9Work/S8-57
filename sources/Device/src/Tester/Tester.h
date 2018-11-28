@@ -37,6 +37,8 @@ public:
     /// Устанавливает шаг изменения напряжения в соотвествии с настройками Settings
     static void LoadStep();
 
+    static int DeltaRShiftA();
+
     class Graphics
     {
     public:

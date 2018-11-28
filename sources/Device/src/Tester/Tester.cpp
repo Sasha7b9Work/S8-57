@@ -138,12 +138,13 @@ void Tester::Enable()
 
     SET_COUPLE_A = SET_COUPLE_B = ModeCouple::GND;
 
-    SET_RANGE(Chan::A) = Range::_20V;
-    SET_RANGE(Chan::B) = Range::_20V;
-    SET_RSHIFT(Chan::A) = RShift::ZERO;
-    SET_RSHIFT(Chan::B) = RShift::ZERO;
+    SET_RANGE(Chan::A) = Range::_2V;
+    SET_RANGE(Chan::B) = Range::_2V;
 
     FPGA::LoadRanges();
+
+    FPGA::SetRShift(Chan::A, RShift::ZERO);
+    FPGA::SetRShift(Chan::B, RShift::ZERO);
 
     HAL_GPIO_WritePin(Port_TEST_ON, Pin_TEST_ON, GPIO_PIN_RESET);  // ¬ключаем тестер-компонент
 
@@ -158,6 +159,12 @@ void Tester::Enable()
     LoadStep();
 
     HAL_NVIC_EnableIRQ(EXTI9_5_IRQn);       // ¬ключаем прерывани€ от тактовых импульсов
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+int Tester::DeltaRShiftA()
+{
+    return 18;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

@@ -1,5 +1,6 @@
 #include "defines.h"
 #include "log.h"
+#include "device.h"
 #include <stm32f4xx.h>
 #include "FPGA.h"
 #include "AD9286.h"
@@ -115,7 +116,14 @@ void FPGA::LoadRShift(Chan::E ch)
 
     static const uint16 mask[2] = { 0x2000, 0x6000 };
 
-    WriteRegisters(Pin::SPI3_CS1, (uint16)(mask[ch] | (SET_RSHIFT(ch) << 2)));
+    uint16 shift = SET_RSHIFT(ch);
+
+    if (Chan(ch).IsA() && Device::CurrentMode() == Device::Mode::Tester)
+    {
+        shift = (uint16)((int)shift - Tester::DeltaRShiftA());
+    }
+
+    WriteRegisters(Pin::SPI3_CS1, (uint16)(mask[ch] | (shift << 2)));
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
