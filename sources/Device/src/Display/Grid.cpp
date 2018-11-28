@@ -366,11 +366,33 @@ void Grid::DrawTester()
     float scaleX = 0.8f;
     float scaleY = 0.6f;
 
-    int x0 = (RShift::ZERO - SET_RSHIFT(Chan::A)) * scaleX;
+    float x0 = (RShift::ZERO - SET_RSHIFT(Chan::A)) * scaleX;
 
-    int y0 = (SET_RSHIFT(Chan::B) - RShift::ZERO) * scaleY;
+    float y0 = (SET_RSHIFT(Chan::B) - RShift::ZERO) * scaleY;
 
-    Painter::DrawVLine(x0 + Width() / 2, 0, Height());
+    float deltaY = 20;
+    float deltaX = 10;
+    float stepX = deltaX / 5;
 
-    Painter::DrawHLine(y0 + Height() / 2, 0, Width());
+    int centerY = (int)(y0 + Display::HEIGHT / 2);
+    int left = (int)x0;
+
+    int right = Display::WIDTH;
+
+    int top = x0;
+    int bottom = 239;
+
+    int centerX = x0 + Display::WIDTH / 2;
+
+    Painter::SetColor(Color::GRID);
+
+    Painter::DrawHPointLine(centerY, left + stepX, right, (float)stepX);
+    uint8 masY[6] = { (uint8)(top + 1), (uint8)(top + 2), (uint8)(centerY - 1), (uint8)(centerY + 1), (uint8)(bottom - 2), (uint8)(bottom - 1) };
+    Painter::DrawMultiHPointLine(6, left + deltaX, masY, deltaX, (right - top) / deltaX, Color::GRID);
+
+    /*
+    Painter::DrawVPointLine(centerX, top + stepX, bottom - stepX, (float)stepX);
+    uint16 masX[6] = { (uint16)(left + 1), (uint16)(left + 2), (uint16)(centerX - 1), (uint16)(centerX + 1), (uint16)(right - 2), (uint16)(right - 1) };
+    Painter::DrawMultiVPointLine(6, top + deltaY, masX, deltaY, (bottom - top) / deltaY, Color::GRID);
+    */
 }
