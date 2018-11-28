@@ -123,12 +123,6 @@ void FPGA::LoadRanges()
 {
     uint16 value = (uint16)(ValueForRange(Chan::B) + (ValueForRange(Chan::A) << 8));
 
-    char buffer[50];
-
-    Hex val(value);
-
-    LOG_WRITE("%s", val.ToBin(16, buffer));
-
     WriteRegisters(Pin::SPI3_CS2, value);
 
     PAUSE_ON_MS(10);                // Задержка нужна, чтобы импульсные реле успели отработать

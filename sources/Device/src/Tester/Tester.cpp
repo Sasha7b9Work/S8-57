@@ -31,7 +31,7 @@ static DAC_HandleTypeDef hDAC = {DAC};
 #define Pin_TEST_STR    GPIO_PIN_9
 
 
-uint8 Tester::data[Chan::Number][NUM_STEPS][TESTER_NUM_POINTS];
+uint8 Tester::data[Chan::Number][NUM_STEPS][Tester::NUM_POINTS];
 
 static Settings oldSet = Settings::GetDefault();
 
@@ -84,7 +84,7 @@ void Tester::Init()
     {
         for (int j = 0; j < NUM_STEPS; j++)
         {
-            for (int k = 0; k < TESTER_NUM_POINTS; k++)
+            for (int k = 0; k < Tester::NUM_POINTS; k++)
             {
                 Tester::data[i][j][k] = 0;
             }

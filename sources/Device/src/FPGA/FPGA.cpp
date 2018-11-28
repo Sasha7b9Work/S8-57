@@ -216,14 +216,14 @@ bool FPGA::ForTester::Read(uint8 *dataA, uint8 *dataB)
         }
     }
 
-    uint16 aRead = (uint16)(ReadLastRecord() - TESTER_NUM_POINTS);
+    uint16 aRead = (uint16)(ReadLastRecord() - Tester::NUM_POINTS);
 
     FSMC::WriteToFPGA16(WR_PRED_LO, aRead);             // Указываем адрес, с которого будем читать данные
     FSMC::WriteToFPGA8(WR_START_ADDR, 0xff);            // И даём команду ПЛИС, чтобы чтение начиналось с него
 
     uint8 *addrA = RD_DATA_A;
     addrA++;
-    for (int i = 0; i < TESTER_NUM_POINTS; i++)         // Читаем данные первого канала
+    for (int i = 0; i < Tester::NUM_POINTS; i++)         // Читаем данные первого канала
     {
         *dataA++ = *addrA;
     }
@@ -233,7 +233,7 @@ bool FPGA::ForTester::Read(uint8 *dataA, uint8 *dataB)
 
     uint8 *addrB = RD_DATA_B;
     addrB++;
-    for (int i = 0; i < TESTER_NUM_POINTS; i++)         // Читаем данные второго канала
+    for (int i = 0; i < Tester::NUM_POINTS; i++)         // Читаем данные второго канала
     {
         *dataB++ = *addrB;
     }

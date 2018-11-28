@@ -13,7 +13,7 @@
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-typedef uint8 array[Chan::Number][Tester::NUM_STEPS][TESTER_NUM_POINTS];
+typedef uint8 array[Chan::Number][Tester::NUM_STEPS][Tester::NUM_POINTS];
 
 static bool ready[Tester::NUM_STEPS] = {false, false, false, false, false};
 
@@ -32,6 +32,8 @@ void Tester::Graphics::Update()
 {
     Painter::BeginScene(Color::BACK);
 
+    Grid::Draw();
+
     int size = 239;
 
     for (int i = 0; i < NUM_STEPS; i++)
@@ -39,8 +41,9 @@ void Tester::Graphics::Update()
         DrawData(i, 0, 0);
     }
 
-    Painter::DrawRectangle(0, 0, size, size, Color::FILL);
-    Painter::DrawRectangle(0, 0, Display::WIDTH - 1, Display::HEIGHT - 1);
+    Painter::SetColor(Color::FILL);
+
+    Painter::DrawRectangle(Grid::Left(), Grid::Top(), Grid::Width(), Grid::Height(), Color::FILL);
 
     DrawParameters(size + 10, 10);
 
@@ -61,8 +64,8 @@ void Tester::Graphics::DrawData(int numStep, int /*x0*/, int /*y0*/)
     uint8 *x = &(*dat)[Chan::A][numStep][0];
     uint8 *y = &(*dat)[Chan::B][numStep][0];
 
-    //MathOSC::Smoothing(x, TESTER_NUM_POINTS, TESTER_NUM_SMOOTH + 1);
-    //MathOSC::Smoothing(x, TESTER_NUM_POINTS, TESTER_NUM_SMOOTH + 1);
+    //MathOSC::Smoothing(x, NUM_POINTS, TESTER_NUM_SMOOTH + 1);
+    //MathOSC::Smoothing(x, NUM_POINTS, TESTER_NUM_SMOOTH + 1);
 
     if(TESTER_VIEW_MODE_IS_LINES)
     {
@@ -79,20 +82,20 @@ void Tester::Graphics::DrawData(int numStep, int /*x0*/, int /*y0*/)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Tester::Graphics::SetPoints(int numStep, uint8 dx[TESTER_NUM_POINTS], uint8 dy[TESTER_NUM_POINTS])
+void Tester::Graphics::SetPoints(int numStep, uint8 dx[NUM_POINTS], uint8 dy[NUM_POINTS])
 {
     ready[numStep] = true;
 
     uint8 *x = &(*dat)[Chan::A][numStep][0];
     uint8 *y = &(*dat)[Chan::B][numStep][0];
 
-    for(int i = 0; i < TESTER_NUM_POINTS; i++)
+    for(int i = 0; i < NUM_POINTS; i++)
     {
-        int X = TESTER_NUM_POINTS - (dx[i] - MIN_VALUE);
+        int X = NUM_POINTS - (dx[i] - MIN_VALUE);
         int Y = dy[i] - MIN_VALUE;
 
-        LIMITATION(X, 0, TESTER_NUM_POINTS - 1);
-        LIMITATION(Y, 0, TESTER_NUM_POINTS - 1);
+        LIMITATION(X, 0, NUM_POINTS - 1);
+        LIMITATION(Y, 0, NUM_POINTS - 1);
 
         x[i] = (uint8)X;
         y[i] = (uint8)Y;

@@ -18,7 +18,6 @@ public:
     static const int WIDTH = 280;
     static const int HEIGHT = 200;
     static const int SIZE_CELL = 20;
-    static const int LEFT = 20;
 
     /// Эти значения могут меняться в зависимости от выставленного режима
     static int Left();
@@ -59,6 +58,10 @@ private:
     static int  DeltaVforLineGrid();
     /// Возвращает расстояние между 
     static int  DeltaHforLineGrid();
+
+    static void DrawOsci();
+
+    static void DrawTester();
 
 public:
 
