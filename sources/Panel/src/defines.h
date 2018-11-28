@@ -9,14 +9,6 @@
 #include <stm32f4xx_hal.h>
 
 
-#define DEF_STRUCT(name, type)  \
-static const struct name        \
-{                               \
-    type val;                   \
-    name(type v) : val(v) {};   \
-}
-
-
 typedef const char *const   pString;
 typedef unsigned int        uint;
 typedef unsigned short int  uint16;
