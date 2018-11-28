@@ -21,19 +21,17 @@ public:
             Number
         } value;
 
-        Mode(E v) : value(v) {};
-
-        operator uint8() const { return (uint8)value; };
+        explicit Mode(E v) : value(v) {};
     };
 
     static void Init();
 
     static void Update();
 
-    static Mode CurrentMode();
+    static Mode::E CurrentMode();
     /// Устанавливает режим работы
-    static void SetMode(Mode mode);
+    static void SetMode(Mode::E mode);
 
 private:
-    static Mode currentMode;
+    static Mode::E currentMode;
 };

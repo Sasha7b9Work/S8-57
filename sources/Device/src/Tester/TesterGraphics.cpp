@@ -41,15 +41,11 @@ void Tester::Graphics::Update()
         DrawData(i, 0, 0);
     }
 
-    Painter::SetColor(Color::FILL);
-
-    Painter::DrawRectangle(Grid::Left(), Grid::Top(), Grid::Width(), Grid::Height(), Color::FILL);
-
     DrawParameters(size + 10, 10);
 
     DrawInfo(size + 10, 50);
-
-    Menu::Graphics::Draw();
+    
+    Menu::Draw();
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

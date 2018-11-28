@@ -18,5 +18,5 @@ void Recorder::Graphics::Update()
 {
     Painter::BeginScene(Color::BLUE_10);
 
-    Menu::Graphics::Draw();
+    Menu::Draw();
 }

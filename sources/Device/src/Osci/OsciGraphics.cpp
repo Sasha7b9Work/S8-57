@@ -42,7 +42,7 @@ void Osci::Graphics::Update()
 
     FrequencyCounter::Draw();
 
-    Menu::Graphics::Draw();
+    Menu::Draw();
 
     Measure::Graphics::Draw();
 }

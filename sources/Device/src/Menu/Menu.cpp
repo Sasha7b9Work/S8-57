@@ -75,7 +75,7 @@ bool Menu::IsProcessed(KeyEvent *event)
     Key::E key = event->key;
     TypePress::E type = event->type;
 
-    switch(Device::CurrentMode())
+    switch((uint8)Device::CurrentMode())
     {
         case Device::Mode::Tester:
             if(Key(key).IsControlSignal() || Key(key).IsFunctional() || (key == Key::Enter && !TypePress(type).IsLong()))
@@ -737,13 +737,13 @@ static void DrawHintItem(int x, int y, int width)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-int Menu::Graphics::Y()
+int Menu::Y()
 {
     return Display::HEIGHT - Item::HEIGHT - 2;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Menu::Graphics::Draw()
+void Menu::Draw()
 {
     if (Menu::IsShown() || NOT_PAGE(OpenedItem()))
     {

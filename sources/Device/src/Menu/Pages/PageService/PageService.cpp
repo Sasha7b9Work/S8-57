@@ -662,7 +662,7 @@ static void Information_Draw()
     Painter::DrawStringInCenterRect(0, 205 + dY, 320, 20, "Отдел маркетинга: тел./факс. 8-017-262-57-50");
     Painter::DrawStringInCenterRect(0, 220 + dY, 320, 20, "Разработчики: e-mail: mnipi-24(@)tut.by, тел. 8-017-262-57-51");
 
-    Menu::Graphics::Draw();
+    Menu::Draw();
     Painter::EndScene();
 }
 

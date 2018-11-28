@@ -358,5 +358,7 @@ int Grid::DeltaHforLineGrid()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Grid::DrawTester()
 {
+    Painter::SetColor(Color::FILL);
 
+    Painter::DrawRectangle(Left(), Top(), Width(), Height());
 }
