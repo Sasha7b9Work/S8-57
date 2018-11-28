@@ -85,6 +85,7 @@ public:
     static void Stop(bool pause = false);
 
     static void LoadRanges();
+
     class ForTester
     {
     friend class Tester;
@@ -107,17 +108,9 @@ public:
     }
 
     static void LoadTShift();
-
-    static struct State
-    {
-        bool needCalibration;                       ///< Установленное в true значение означает, что необходимо произвести калибровку.
-        StateWorkFPGA stateWorkBeforeCalibration;
-        StateCalibration stateCalibration;          ///< Текущее состояние калибровки. Используется в процессе калибровки.
-    } state;
-    
+  
     static StateWorkFPGA GetStateWork();
 
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     static void SetTShift(int tShift);
 
     static void Reset();
@@ -166,8 +159,8 @@ public:
     static ADC_HandleTypeDef *HandleADC() { return &handleADC; };
 
     static void SetValueADC(uint16 value) { valueADC = value; };
-
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /// Сделать калибровку
+    static void DoCalibration();
 
 private:
 
@@ -243,4 +236,12 @@ public:
 
     static uint16 post;
     static uint16 pred;
+
+private:
+    static struct State
+    {
+        bool needCalibration;                       ///< Установленное в true значение означает, что необходимо произвести калибровку.
+        StateWorkFPGA stateWorkBeforeCalibration;
+        StateCalibration stateCalibration;          ///< Текущее состояние калибровки. Используется в процессе калибровки.
+    } state;
 };
