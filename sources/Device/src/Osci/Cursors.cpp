@@ -3,7 +3,7 @@
 #include "defines.h"
 #include "Cursors.h"
 #include "Settings/Settings.h"
-#include "Osci/Grid.h"
+#include "Display/Grid.h"
 #include "Menu/Menu.h"
 #include "FPGA/FPGAMath.h"
 #include "Utils/StringUtils.h"

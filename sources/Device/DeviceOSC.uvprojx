@@ -2035,6 +2035,16 @@
               <FileType>5</FileType>
               <FilePath>.\src\Display\Symbols.h</FilePath>
             </File>
+            <File>
+              <FileName>Grid.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Display\Grid.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Grid.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Display\Grid.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -2724,16 +2734,6 @@
               <FileName>FrequencyCounter.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Osci\FrequencyCounter.h</FilePath>
-            </File>
-            <File>
-              <FileName>Grid.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Osci\Grid.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Grid.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Osci\Grid.h</FilePath>
             </File>
             <File>
               <FileName>HiPart.cpp</FileName>

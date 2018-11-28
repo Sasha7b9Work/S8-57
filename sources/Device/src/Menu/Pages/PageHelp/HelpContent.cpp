@@ -2,7 +2,7 @@
 #ifndef WIN32
 #include "defines.h"
 #include "Settings/Settings.h"
-#include "Osci/Grid.h"
+//#include "Osci/Grid.h"
 #include "Display/Font/Font.h"
 #include "Display/Painter.h"
 #include "Hardware/Timer.h"

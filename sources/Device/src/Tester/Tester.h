@@ -21,7 +21,7 @@ class Tester
 {
 public:
 
-    static const int NUM_POINTS = 320;
+    static const int NUM_POINTS = 256;
 
     static const int NUM_STEPS = 5;
     /// Инициализация аппаратной части

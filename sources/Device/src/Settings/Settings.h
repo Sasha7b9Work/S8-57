@@ -8,7 +8,7 @@
 #include "Osci/Cursors.h"
 #include "Osci/FrequencyCounter.h"
 #include "Menu/Menu.h"
-#include "Osci/Grid.h"
+#include "Display/Grid.h"
 #include "Display/Colors.h"
 #include "Multimeter/Multimeter.h"
 #include "Utils/Measure.h"

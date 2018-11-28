@@ -3,7 +3,7 @@
 #include "defines.h"
 #include "Menu/Pages/Include/PageDebug.h"
 #include "Data/Reader.h"
-#include "Osci/Grid.h"
+#include "Display/Grid.h"
 #include "Display/Symbols.h"
 #include "Display/Painter.h"
 #include "FlashDrive/FlashDrive.h"

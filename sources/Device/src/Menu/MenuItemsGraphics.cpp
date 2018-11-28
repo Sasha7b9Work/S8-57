@@ -1,7 +1,7 @@
 #include "defines.h"
 #include "log.h"
 #include "MenuItems.h"
-#include "Osci/Grid.h"
+#include "Display/Grid.h"
 #include "Display/Painter.h"
 #include "Menu/Menu.h"
 #include "Utils/Values.h"

@@ -2,7 +2,7 @@
 #ifndef WIN32
 #include "defines.h"
 #include "MemoryWindow.h"
-#include "Grid.h"
+//#include "rid.h"
 #include "Display/Painter.h"
 #include "Data/DataStorage.h"
 #include "Data/Reader.h"
