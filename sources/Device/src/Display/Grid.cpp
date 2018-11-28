@@ -363,9 +363,14 @@ void Grid::DrawTester()
 
     Painter::DrawRectangle(0, 0, Display::WIDTH - 1, Display::HEIGHT - 1);
 
-    int x0 = RShift::ZERO - SET_RSHIFT(Chan::A);
+    float scaleX = 0.8f;
+    float scaleY = 0.6f;
+
+    int x0 = (RShift::ZERO - SET_RSHIFT(Chan::A)) * scaleX;
+
+    int y0 = (SET_RSHIFT(Chan::B) - RShift::ZERO) * scaleY;
 
     Painter::DrawVLine(x0 + Width() / 2, 0, Height());
 
-    Painter::DrawHLine(Height() / 2, 0, Width());
+    Painter::DrawHLine(y0 + Height() / 2, 0, Width());
 }
