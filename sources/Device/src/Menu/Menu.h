@@ -60,8 +60,6 @@ public:
     static bool IsMinimize();
 
     static Page::Name::E GetNameOpenedPage();
-
-    static Page *PagePointerFromName(Page::Name name);
     /// Возвращает адрес текущего элемента меню (текущим, как правило, является элемент, кнопка которого была нажата последней
     static Control *CurrentItem();
     /// Закрыть открытый элемент меню

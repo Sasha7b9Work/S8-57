@@ -593,7 +593,7 @@ static void OnPress_SetName_Exit()
     OnPressSB_Exit();
     if (EXIT_FROM_SETNAME_TO == RETURN_TO_DISABLE_MENU)
     {
-        Menu::PagePointerFromName(Page::Name::SB_Memory_SetName)->ShortPressOnItem(0);
+        //Menu::PagePointerFromName(Page::Name::SB_Memory_SetName)->ShortPressOnItem(0);
     }
     else if (EXIT_FROM_SETNAME_TO == RETURN_TO_LAST_MEM)
     {
