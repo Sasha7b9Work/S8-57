@@ -249,11 +249,11 @@ public:
     int16               nrst_correctionTime;                            ///< Коэффициент коррекции времени.
 
     // Настройки мультиметра
-    Multimeter::AVP             multi_avp;
-    Multimeter::Measure         multi_meas;
-    Multimeter::RangeDC         multi_rangeDC;
-    Multimeter::RangeAC         multi_rangeAC;
-    Multimeter::RangeResistance multi_rangeResist;
+    Multimeter::AVP                 multi_avp;
+    Multimeter::Measure             multi_meas;
+    Multimeter::RangeDC             multi_rangeDC;
+    Multimeter::RangeAC::E          multi_rangeAC;
+    Multimeter::RangeResistance::E  multi_rangeResist;
 
     // Настройки регистратора
     Recorder::ViewAlways        rec_viewAlways;         ///< Показывать ли всегда данные регистратора

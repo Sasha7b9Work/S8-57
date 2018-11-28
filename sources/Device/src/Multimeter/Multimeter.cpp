@@ -89,8 +89,8 @@ void Multimeter::Update()
     
     uint8 range = 0;
     if(MULTI_MEASURE == Measure::VoltageDC)        { range = MULTI_RANGE_DC; }
-    else if(MULTI_MEASURE == Measure::VoltageAC)   { range = MULTI_RANGE_AC; }
-    else if(MULTI_MEASURE == Measure::Resistance)  { range = MULTI_RANGE_RESISTANCE; }
+    else if(MULTI_MEASURE == Measure::VoltageAC)   { range = (uint8)MULTI_RANGE_AC; }
+    else if(MULTI_MEASURE == Measure::Resistance)  { range = (uint8)MULTI_RANGE_RESISTANCE; }
 
     uint8 send[4] = {0x02, (uint8)MULTI_MEASURE.Symbol(), (uint8)(range + 0x30), 0x0a};
   //  trans[0] = (char)send[1];

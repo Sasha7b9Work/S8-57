@@ -112,8 +112,6 @@ public:
             _20V,
             _400V
         } value;
-        RangeAC(E v) : value(v) { };
-        operator uint8() const { return (uint8)value; };
     };
 
     /// ѕредел измерени€ сопротивлен€ посто€нному току
@@ -126,8 +124,6 @@ public:
             _200k,
             _10M
         } value;
-        RangeResistance(E v) : value(v) { };
-        operator uint8() const  { return (uint8)value; };
     };
 
 private:
