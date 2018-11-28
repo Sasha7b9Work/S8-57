@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #ifndef WIN32
 #include "defines.h"
+#include "log.h"
 #include "device.h"
 #include "Grid.h"
 #include "Display/Painter.h"
@@ -360,9 +361,11 @@ void Grid::DrawTester()
 {
     Painter::SetColor(Color::FILL);
 
-    Painter::DrawRectangle(Left(), Top(), Width(), Height());
+    Painter::DrawRectangle(0, 0, Display::WIDTH - 1, Display::HEIGHT - 1);
 
-    Painter::DrawVLine(Width() / 2, 0, Height());
+    int x0 = RShift::ZERO - SET_RSHIFT(Chan::A);
+
+    Painter::DrawVLine(x0 + Width() / 2, 0, Height());
 
     Painter::DrawHLine(Height() / 2, 0, Width());
 }
