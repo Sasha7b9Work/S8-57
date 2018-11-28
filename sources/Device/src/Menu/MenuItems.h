@@ -231,10 +231,9 @@ public:
             NoPage
         } value;
         Name(uint8 v) : value((E)v) {};
-        operator uint8() const { return (uint8)value; };
     };
 
-    Page::Name GetName() const;     ///< Возвращает имя страницы page
+    Page::Name::E GetName() const;     ///< Возвращает имя страницы page
 };
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// Button ///

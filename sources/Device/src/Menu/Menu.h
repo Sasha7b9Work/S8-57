@@ -59,7 +59,7 @@ public:
     /// Если true - меню находится в дополнительном режиме.
     static bool IsMinimize();
 
-    static Page::Name GetNameOpenedPage();
+    static Page::Name::E GetNameOpenedPage();
 
     static Page *PagePointerFromName(Page::Name name);
     /// Возвращает адрес текущего элемента меню (текущим, как правило, является элемент, кнопка которого была нажата последней

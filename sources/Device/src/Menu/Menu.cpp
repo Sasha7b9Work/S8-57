@@ -332,7 +332,7 @@ void Menu::ProcessingShortPressureButton()
             }
             else                                                        // Если меню не показано.
             {
-                Page::Name name = ((const Page *)OpenedItem())->GetName();
+                Page::Name::E name = ((const Page *)OpenedItem())->GetName();
                 if(button == Key::ChannelA && name == Page::Name::ChannelA && Menu::IsShown())
                 {
                     SET_ENABLED_A = !SET_ENABLED_A;
@@ -522,7 +522,7 @@ bool Menu::NeedForFireSetLED()
         return IS_CHOICE_REG(item) || IS_CHOICE(item) || IS_GOVERNOR(item);
     }
 
-    Page::Name name = GetNameOpenedPage();
+    Page::Name::E name = GetNameOpenedPage();
     if (
             name == Page::Name::SB_Debug_SerialNumber   ||
             name == Page::Name::SB_Service_FFT_Cursors  || 
@@ -595,7 +595,7 @@ Control *Menu::OpenedItem()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-Page::Name Menu::GetNameOpenedPage()
+Page::Name::E Menu::GetNameOpenedPage()
 {
     return ((const Page *)OpenedItem())->GetName();
 }
@@ -651,7 +651,7 @@ void Menu::CloseOpenedItem()
         Page *keeper = (Page *)KEEPER(item);
         if (keeper)
         {
-            Page::Name name = keeper->name;
+            Page::Name::E name = (Page::Name::E)keeper->name;
             keeper->SetPosActItem(MENU_POS_ACT_ITEM(name) & 0x7f);
         }
         if (item == (Control *)pageMain)
