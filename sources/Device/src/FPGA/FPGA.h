@@ -86,26 +86,11 @@ public:
 
     static void LoadRanges();
 
-    class ForTester
-    {
-    friend class Tester;
-    private:
-        static bool Read(uint8 *dataA, uint8 *dataB);
-        /// Запустить цикл чтения для тестер-компонента. В течение time секунд должно быть считано numPoints точек
-        static void Start();
-    };
-
     static uint NumPoints();
 
-    static bool IsRunning()
-    {
-        return isRunning; 
-    }
+    static bool IsRunning() { return isRunning; }
 
-    static bool InStateStop()
-    {
-        return false;
-    }
+    static bool InStateStop() { return false; }
 
     static void LoadTShift();
   
@@ -116,26 +101,6 @@ public:
     static void Reset();
 
     static void SetModeCouple(Chan::E ch, ModeCouple::E couple);
-
-    class FreqMeter
-    {
-    public:
-        static float GetFreq();
-    };
-
-    struct GetFlag
-    {
-        static bool DATA_READY();
-        static bool TRIG_READY();
-        static bool PRED();
-        static bool P2P();
-        static bool FREQ_READY();
-        static bool PERIOD_READY();
-        static bool FREQ_OVERFLOW();
-        static bool PERIOD_OVERFLOW();
-        static bool FREQ_IN_PROCESS();
-        static bool PERIOD_IN_PROCESS();
-    };
 
     /// Установить относительный уровень синхронизации
     static void SetTrigLev(Trig::Source::E ch, uint16 trigLev);
@@ -208,23 +173,6 @@ private:
     /// Время подачи старта
     static uint timeStart;
 
-    struct Flag
-    {
-        enum E
-        {
-            _DATA_READY        = 0,  ///< Данные готовы для считывания (окончание счётчика послезапуска)
-            _TRIG_READY        = 1,  ///< Флаг синхроимпульса
-            _PRED              = 2,  ///< Если 1, то предзапуск отсчитал, можно давать принудительный запуск (окончание
-            _P2P               = 3,  ///< 
-            _FREQ_READY        = 4,  ///< Флаг готовности измерения частоты
-            _PERIOD_READY      = 5,  ///< Флаг готовности измерения периода
-            _FREQ_OVERFLOW     = 8,  ///< Признак переполнения счётчика частоты
-            _PERIOD_OVERFLOW   = 9,  ///< Признак переполнения счётчика периода
-            _FREQ_IN_PROCESS   = 10, ///< Установленное в единицу значение означает, что идёт процесс измерения - счётчик запущен и считает
-            _PERIOD_IN_PROCESS = 11  ///< Установленное в единицу значение означает, что идёт процесс измерения - счётчик запущен и считает
-        } value;
-    };
-
     static uint16 flag;
     /// Используется в режиме рандомизатора
     static ADC_HandleTypeDef handleADC;
@@ -238,10 +186,59 @@ public:
     static uint16 pred;
 
 private:
+
     static struct State
     {
         bool needCalibration;                       ///< Установленное в true значение означает, что необходимо произвести калибровку.
         StateWorkFPGA stateWorkBeforeCalibration;
         StateCalibration stateCalibration;          ///< Текущее состояние калибровки. Используется в процессе калибровки.
     } state;
+
+    struct Flag
+    {
+        enum E
+        {
+            _DATA_READY = 0,  ///< Данные готовы для считывания (окончание счётчика послезапуска)
+            _TRIG_READY = 1,  ///< Флаг синхроимпульса
+            _PRED = 2,  ///< Если 1, то предзапуск отсчитал, можно давать принудительный запуск (окончание
+            _P2P = 3,  ///< 
+            _FREQ_READY = 4,  ///< Флаг готовности измерения частоты
+            _PERIOD_READY = 5,  ///< Флаг готовности измерения периода
+            _FREQ_OVERFLOW = 8,  ///< Признак переполнения счётчика частоты
+            _PERIOD_OVERFLOW = 9,  ///< Признак переполнения счётчика периода
+            _FREQ_IN_PROCESS = 10, ///< Установленное в единицу значение означает, что идёт процесс измерения - счётчик запущен и считает
+            _PERIOD_IN_PROCESS = 11  ///< Установленное в единицу значение означает, что идёт процесс измерения - счётчик запущен и считает
+        } value;
+    };
+
+public:
+
+    struct GetFlag
+    {
+        static bool DATA_READY();
+        static bool TRIG_READY();
+        static bool PRED();
+        static bool P2P();
+        static bool FREQ_READY();
+        static bool PERIOD_READY();
+        static bool FREQ_OVERFLOW();
+        static bool PERIOD_OVERFLOW();
+        static bool FREQ_IN_PROCESS();
+        static bool PERIOD_IN_PROCESS();
+    };
+
+    class FreqMeter
+    {
+    public:
+        static float GetFreq();
+    };
+
+    class ForTester
+    {
+        friend class Tester;
+    private:
+        static bool Read(uint8 *dataA, uint8 *dataB);
+        /// Запустить цикл чтения для тестер-компонента. В течение time секунд должно быть считано numPoints точек
+        static void Start();
+    };
 };
