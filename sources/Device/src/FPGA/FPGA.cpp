@@ -2,6 +2,7 @@
 #ifndef WIN32
 #include <stm32f4xx.h>
 #include "defines.h"
+#include "device.h"
 #include "log.h"
 #include "FPGA.h"
 #include "Hardware/FSMC.h"
@@ -529,26 +530,26 @@ uint8 FPGA::ValueForRange(Chan::E ch)
         BIN_U8(00000010)     // GND
     };
 
-    if (SET_COUPLE(ch) == ModeCouple::GND)
+    if (SET_COUPLE(ch) == ModeCouple::GND && Device::CurrentMode() == Device::Mode::Osci)
     {
         return datas[ModeCouple::GND];
     }
 
     DEF_STRUCT(StructRange, uint16) values[Range::Number][2] =
     {   //             A                    B
-        { BIN_U8(00100101), BIN_U8(00100101) },   // 2mV
-        { BIN_U8(00100101), BIN_U8(00100101) },   // 5mV
-        { BIN_U8(00100101), BIN_U8(00100101) },   // 10mV
-        { BIN_U8(00100101), BIN_U8(00100101) },   // 20mV
-        { BIN_U8(00010101), BIN_U8(00010101) },   // 50mV
-        { BIN_U8(00010101), BIN_U8(00010101) },   // 100mV
-        { BIN_U8(00010101), BIN_U8(00010101) },   // 200mV
-        { BIN_U8(00101001), BIN_U8(00101001) },   // 500mV
-        { BIN_U8(00101001), BIN_U8(00101001) },   // 1V
-        { BIN_U8(00101001), BIN_U8(00101001) },   // 2V
-        { BIN_U8(00011001), BIN_U8(00011001) },   // 5V
-        { BIN_U8(00011001), BIN_U8(00011001) },   // 10V
-        { BIN_U8(00011001), BIN_U8(00011001) }    // 20V
+        { BIN_U8(00100100), BIN_U8(00100100) },   // 2mV
+        { BIN_U8(00100100), BIN_U8(00100100) },   // 5mV
+        { BIN_U8(00100100), BIN_U8(00100100) },   // 10mV
+        { BIN_U8(00100100), BIN_U8(00100100) },   // 20mV
+        { BIN_U8(00010100), BIN_U8(00010100) },   // 50mV
+        { BIN_U8(00010100), BIN_U8(00010100) },   // 100mV
+        { BIN_U8(00010100), BIN_U8(00010100) },   // 200mV
+        { BIN_U8(00101000), BIN_U8(00101000) },   // 500mV
+        { BIN_U8(00101000), BIN_U8(00101000) },   // 1V
+        { BIN_U8(00101000), BIN_U8(00101000) },   // 2V
+        { BIN_U8(00011000), BIN_U8(00011000) },   // 5V
+        { BIN_U8(00011000), BIN_U8(00011000) },   // 10V
+        { BIN_U8(00011000), BIN_U8(00011000) }    // 20V
     };
 
     return (uint8)(values[SET_RANGE(ch)][ch].val | datas[SET_COUPLE(ch)]);

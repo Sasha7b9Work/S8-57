@@ -1,4 +1,5 @@
 #include "defines.h"
+#include "log.h"
 #include <stm32f4xx.h>
 #include "FPGA.h"
 #include "AD9286.h"
@@ -8,6 +9,7 @@
 #include "Hardware/Timer.h"
 #include "Settings/Settings.h"
 #include "Utils/Buffer.h"
+#include "Utils/Values.h"
 #include <stdlib.h>
 
 
@@ -120,6 +122,12 @@ void FPGA::LoadRShift(Chan::E ch)
 void FPGA::LoadRanges()
 {
     uint16 value = (uint16)(ValueForRange(Chan::B) + (ValueForRange(Chan::A) << 8));
+
+    char buffer[50];
+
+    Hex val(value);
+
+    LOG_WRITE("%s", val.ToBin(16, buffer));
 
     WriteRegisters(Pin::SPI3_CS2, value);
 
