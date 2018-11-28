@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #ifndef WIN32
 #include "defines.h"
+#include "log.h"
 #include "Decoder.h"
 #include "Menu/Menu.h"
 #endif
@@ -13,8 +14,18 @@ Decoder decoder;
 static uint8 buffer[SIZE_BUFFER];
 static int pointer = 0;
 
-pFuncBU8 Decoder::curFunc = 0;
-int      Decoder::step = 0;
+/// Выполняемая функция
+static pFuncBU8 curFunc;
+/// Текущий байт выполняемой функции
+static int step;
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+static void RunStep(uint8 data);
+
+static bool ButtonPress(uint8);
+/// Эту функцию надо вызывать после выполнения последнего шага
+static void FinishCommand();
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -46,26 +57,26 @@ void Decoder::Update()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Decoder::RunStep(uint8 data)
+static void RunStep(uint8 data)
 {
-    DEF_STRUCT(StructFunc, pFuncBU8) commands[Command::Number] =
+    static const struct StructFunc { pFuncBU8 func; } commands[Command::Number] =
     {
-        &Decoder::EmptyFunc,
-        &Decoder::ButtonPress,
-        &Decoder::EmptyFunc,
-        &Decoder::EmptyFunc,
-        &Decoder::EmptyFunc,
-        &Decoder::EmptyFunc,
-        &Decoder::EmptyFunc,
-        &Decoder::EmptyFunc,
-        &Decoder::EmptyFunc,
-        &Decoder::EmptyFunc,
-        &Decoder::EmptyFunc,
-        &Decoder::EmptyFunc,
-        &Decoder::EmptyFunc,
-        &Decoder::EmptyFunc,
-        &Decoder::EmptyFunc,
-        &Decoder::EmptyFunc
+        EmptyFuncVU8t,
+        ButtonPress,
+        EmptyFuncVU8t,
+        EmptyFuncVU8t,
+        EmptyFuncVU8t,
+        EmptyFuncVU8t,
+        EmptyFuncVU8t,
+        EmptyFuncVU8t,
+        EmptyFuncVU8t,
+        EmptyFuncVU8t,
+        EmptyFuncVU8t,
+        EmptyFuncVU8t,
+        EmptyFuncVU8t,
+        EmptyFuncVU8t,
+        EmptyFuncVU8t,
+        EmptyFuncVU8t
     };
 
     if (step == 0)
@@ -73,7 +84,11 @@ void Decoder::RunStep(uint8 data)
 
         if (data < Command::Number)
         {
-            curFunc = commands[data].val;
+            curFunc = commands[data].func;
+            if (curFunc == 0)
+            {
+                LOG_ERROR("Нет обработчика");
+            }
         }
         else
         {
@@ -100,7 +115,7 @@ void Decoder::RunStep(uint8 data)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-bool Decoder::ButtonPress(uint8 data)
+static bool ButtonPress(uint8 data)
 {
     static Key::E button;
     if (step == 0)
@@ -121,7 +136,7 @@ bool Decoder::ButtonPress(uint8 data)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Decoder::FinishCommand()
+static void FinishCommand()
 {
     step = 0;
     curFunc = 0;
