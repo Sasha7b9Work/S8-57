@@ -23,7 +23,7 @@ DEF_BUTTON( bReset,                                                             
     "—бросить", "Reset",
     "—брос всех цветов на значени€ по умолчанию",
     "Reset all colors to default values",
-    pageColors, EmptyFuncBV, OnPress_ResetColors, EmptyFuncVII
+    pageColors, EmptyFuncBtV, OnPress_ResetColors, EmptyFuncVII
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

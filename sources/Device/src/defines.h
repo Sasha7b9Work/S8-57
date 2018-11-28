@@ -51,7 +51,7 @@ typedef bool (*pFuncBI)(int);
 
 inline void EmptyFuncVV(){}
 inline void EmptyFuncVB(bool){}
-inline bool EmptyFuncBV() { return true; }
+inline bool EmptyFuncBtV() { return true; }
 inline void EmptyFuncVI(int) {}
 inline void EmptyFuncVII(int, int) {}
 inline bool EmptyFuncBI(int) { return false; }

@@ -64,7 +64,7 @@ DEF_BUTTON(         bResetSettings,                                             
     "—брос настр", "Reset set",
     "—брос настроек на настройки по умолчанию",
     "Reset to default settings",
-    pService, EmptyFuncBV, OnPress_ResetSettings, EmptyFuncVII
+    pService, EmptyFuncBtV, OnPress_ResetSettings, EmptyFuncVII
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
