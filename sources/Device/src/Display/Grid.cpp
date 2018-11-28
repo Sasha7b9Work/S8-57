@@ -361,4 +361,8 @@ void Grid::DrawTester()
     Painter::SetColor(Color::FILL);
 
     Painter::DrawRectangle(Left(), Top(), Width(), Height());
+
+    Painter::DrawVLine(Width() / 2, 0, Height());
+
+    Painter::DrawHLine(Height() / 2, 0, Width());
 }

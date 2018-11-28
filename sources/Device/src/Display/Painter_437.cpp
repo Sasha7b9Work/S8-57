@@ -5,6 +5,7 @@
 #include "Painter.h"
 #include "Hardware/FSMC.h"
 #include "Hardware/Timer.h"
+#include "Tester/Tester.h"
 #include "Utils/Buffer.h"
 #include <stdlib.h>
 #include <cstring>
@@ -55,11 +56,11 @@ void Painter::DrawTesterData(uint8 mode, Color color, uint8 x[240], uint8 y[240]
     buffer.Data()[1] = mode;
     buffer.Data()[2] = color.value;
     uint8 *pointer = buffer.Data() + 3;
-    for (int i = 0; i < 240; i++)
+    for (int i = 0; i < Tester::NUM_POINTS; i++)
     {
         *pointer++ = x[i];
     }
-    for (int i = 0; i < 240; i++)
+    for (int i = 0; i < Tester::NUM_POINTS; i++)
     {
         *pointer++ = y[i];
     }
@@ -125,9 +126,8 @@ void Painter::DrawVLine(int x, int y0, int y1, Color color)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-int Painter::DrawText(int x, int y, const char *text, Color color, bool log)
+int Painter::DrawText(int x, int y, const char *text, Color color, bool)
 {
-    uint sizeText = std::strlen(text);
     /// \todo Такую проверку нужно сделать и на приёмной стороне и тогда здесь убрать
 
     if (*text == 0)
@@ -154,9 +154,7 @@ int Painter::DrawText(int x, int y, const char *text, Color color, bool log)
         *pointer++ = (uint8)*text++;
     }
 
-    //LOG_WRITE("Записать в панель %d байт - %d, %d, %d, %d, %d, размер - %d", size, buffer[0], buffer[1], buffer[2], buffer[3], buffer[4], sizeText);
-
-    FSMC::WriteToPanel(buffer, (int)size);
+    FSMC::WriteToPanel(buffer, size);
 
     return x + 10;
 }
@@ -177,7 +175,7 @@ void Painter::DrawBigText(int eX, int eY, uint8 sizeSymbol, const char *text, Co
         *pointer++ = (uint8)*text++;
     }
 
-    FSMC::WriteToPanel(buffer, (int)size);
+    FSMC::WriteToPanel(buffer, size);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

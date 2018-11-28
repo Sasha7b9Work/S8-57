@@ -94,7 +94,7 @@ public:
     /// Нарисовать вертикальную линию от y0 до y1 точками через каждые delta пикселей
     static void DrawVPointLine(int x, int y0, int y1, float delta);
 
-    static void DrawTesterData(uint8 mode, Color color, uint8 x[240], uint8 y[240]);
+    static void DrawTesterData(uint8 mode, Color color, uint8 *x, uint8 *y);
 
 private:
 

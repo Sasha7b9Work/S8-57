@@ -526,7 +526,7 @@
       <Filter>libs\HAL</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Device\src\Display\Grid.cpp">
-      <Filter>Display\Font</Filter>
+      <Filter>Display</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -984,7 +984,7 @@
       <Filter>libs\HAL</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Device\src\Display\Grid.h">
-      <Filter>Display\Font</Filter>
+      <Filter>Display</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -60,9 +60,6 @@ void Tester::Graphics::DrawData(int numStep, int /*x0*/, int /*y0*/)
     uint8 *x = &(*dat)[Chan::A][numStep][0];
     uint8 *y = &(*dat)[Chan::B][numStep][0];
 
-    //MathOSC::Smoothing(x, NUM_POINTS, TESTER_NUM_SMOOTH + 1);
-    //MathOSC::Smoothing(x, NUM_POINTS, TESTER_NUM_SMOOTH + 1);
-
     if(TESTER_VIEW_MODE_IS_LINES)
     {
         Painter::DrawTesterData((uint8)TESTER_VIEW_MODE, colors[numStep], x, y);

@@ -138,8 +138,8 @@ void Tester::Enable()
 
     SET_COUPLE_A = SET_COUPLE_B = ModeCouple::GND;
 
-    SET_RANGE(Chan::A) = Range::_2V;
-    SET_RANGE(Chan::B) = Range::_2V;
+    SET_RANGE(Chan::A) = Range::_20V;
+    SET_RANGE(Chan::B) = Range::_20V;
     SET_RSHIFT(Chan::A) = RShift::ZERO;
     SET_RSHIFT(Chan::B) = RShift::ZERO;
 
