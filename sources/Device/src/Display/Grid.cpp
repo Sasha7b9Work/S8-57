@@ -359,6 +359,9 @@ int Grid::DeltaHforLineGrid()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Grid::DrawTester()
 {
+
+    bool shift = false;
+
     Painter::SetColor(Color::FILL);
 
     Painter::DrawRectangle(0, 0, Display::WIDTH - 1, Display::HEIGHT - 1);
@@ -366,33 +369,53 @@ void Grid::DrawTester()
     float scaleX = 0.8f;
     float scaleY = 0.6f;
 
-    float x0 = (RShift::ZERO - SET_RSHIFT(Chan::A)) * scaleX;
+    float x0 = shift ? (RShift::ZERO - SET_RSHIFT(Chan::A)) * scaleX : 0;
 
-    float y0 = (SET_RSHIFT(Chan::B) - RShift::ZERO) * scaleY;
-
-    float deltaY = 20;
-    float deltaX = 10;
-    float stepX = deltaX / 5;
-
-    int centerY = (int)(y0 + Display::HEIGHT / 2);
-    int left = (int)x0;
-
-    int right = Display::WIDTH;
-
-    int top = x0;
-    int bottom = 239;
-
-    int centerX = x0 + Display::WIDTH / 2;
+    float y0 = shift ? (SET_RSHIFT(Chan::B) - RShift::ZERO) * scaleY : 0;
 
     Painter::SetColor(Color::GRID);
 
-    Painter::DrawHPointLine(centerY, left + stepX, right, (float)stepX);
-    uint8 masY[6] = { (uint8)(top + 1), (uint8)(top + 2), (uint8)(centerY - 1), (uint8)(centerY + 1), (uint8)(bottom - 2), (uint8)(bottom - 1) };
-    Painter::DrawMultiHPointLine(6, left + deltaX, masY, deltaX, (right - top) / deltaX, Color::GRID);
+    int x = (int)(x0 + Display::WIDTH / 2);
+    int y = (int)(y0 + Display::HEIGHT / 2);
 
-    /*
-    Painter::DrawVPointLine(centerX, top + stepX, bottom - stepX, (float)stepX);
-    uint16 masX[6] = { (uint16)(left + 1), (uint16)(left + 2), (uint16)(centerX - 1), (uint16)(centerX + 1), (uint16)(right - 2), (uint16)(right - 1) };
-    Painter::DrawMultiVPointLine(6, top + deltaY, masX, deltaY, (bottom - top) / deltaY, Color::GRID);
-    */
+    Painter::DrawVLine(x, 0, Display::HEIGHT);
+
+    Painter::DrawHLine(y, 0, Display::WIDTH);
+
+    int deltaX = 32;
+    int deltaY = 24;
+
+    x += deltaX;
+
+    int deltaPoint = 5;
+
+    while (x < Display::WIDTH)
+    {
+        Painter::DrawVPointLine(x, 0, Display::HEIGHT, deltaPoint);
+        x += deltaX;
+    }
+
+    x = x0 + Display::WIDTH / 2 - deltaX;
+
+    while (x > 0)
+    {
+        Painter::DrawVPointLine(x, 0, Display::HEIGHT, deltaPoint);
+        x -= deltaX;
+    }
+
+    y += deltaY;
+
+    while (y < Display::HEIGHT)
+    {
+        Painter::DrawHPointLine(y, 0, Display::WIDTH, deltaPoint);
+        y += deltaY;
+    }
+
+    y = y0 + Display::HEIGHT / 2 - deltaY;
+
+    while (y > 0)
+    {
+        Painter::DrawHPointLine(y, 0, Display::WIDTH, deltaPoint);
+        y -= deltaY;
+    }
 }
