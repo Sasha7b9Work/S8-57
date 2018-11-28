@@ -5,19 +5,8 @@
 class Osci
 {
 public:
-    class Graphics
-    {
-    public:
-
-        static void Update();
-
-    private:
-
-        static void DrawCursorTrigLevel();
-
-        static void DrawScaleLine(int x, bool forTrigLev);
-
-        static void DrawMeasures();
-    };
-private:
+     static void Draw();
+     static void DrawCursorTrigLevel();
+     static void DrawScaleLine(int x, bool forTrigLev);
+     static void DrawMeasures();
 };

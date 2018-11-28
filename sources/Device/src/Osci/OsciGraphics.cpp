@@ -22,7 +22,7 @@
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void Osci::Graphics::Update()
+void Osci::Draw()
 {
     Painter::BeginScene(Color::BACK);
 
@@ -48,7 +48,7 @@ void Osci::Graphics::Update()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Osci::Graphics::DrawCursorTrigLevel()
+void Osci::DrawCursorTrigLevel()
 {
     Trig::Source::E ch = TRIG_SOURCE;
 
@@ -107,7 +107,7 @@ void Osci::Graphics::DrawCursorTrigLevel()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Osci::Graphics::DrawScaleLine(int x, bool forTrigLev)
+void Osci::DrawScaleLine(int x, bool forTrigLev)
 {
     int width = 6;
     int topY = Grid::Top() + DELTA;

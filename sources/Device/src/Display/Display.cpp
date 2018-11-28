@@ -110,7 +110,7 @@ void Display::Update()
 
     DEF_STRUCT(StructDraw, pFuncDisplayVV) funcs[Device::Mode::Number] =
     {
-        Osci::Graphics::Update,
+        Osci::Draw,
         Tester::Graphics::Update,
         Multimeter::Graphics::Update,
         Recorder::Graphics::Update
