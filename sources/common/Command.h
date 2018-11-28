@@ -25,3 +25,6 @@ struct Command
 /* 16 */    Number
     } value;
 };
+
+
+#define TESTER_NUM_POINTS 240

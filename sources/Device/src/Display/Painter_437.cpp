@@ -49,18 +49,18 @@ void Painter::SetColorValue(Color color, uint value)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Painter::DrawTesterData(uint8 mode, Color color, uint8 x[240], uint8 y[240])
+void Painter::DrawTesterData(uint8 mode, Color color, uint8 *x, uint8 *y)
 {
     Buffer buffer(483);
     buffer.Data()[0] = Command::Paint_TesterLines;
     buffer.Data()[1] = mode;
     buffer.Data()[2] = color.value;
     uint8 *pointer = buffer.Data() + 3;
-    for (int i = 0; i < Tester::NUM_POINTS; i++)
+    for (int i = 0; i < TESTER_NUM_POINTS; i++)
     {
         *pointer++ = x[i];
     }
-    for (int i = 0; i < Tester::NUM_POINTS; i++)
+    for (int i = 0; i < TESTER_NUM_POINTS; i++)
     {
         *pointer++ = y[i];
     }

@@ -1,5 +1,6 @@
 #pragma once
 #include "Settings/SettingsChannel.h"
+#include "Command.h"
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -20,9 +21,6 @@
 class Tester
 {
 public:
-
-    static const int NUM_POINTS = 256;
-
     static const int NUM_STEPS = 5;
     /// Инициализация аппаратной части
     static void Init();
@@ -44,7 +42,7 @@ public:
     public:
         static void Update();
 
-        static void SetPoints(int numStep, uint8 dx[NUM_POINTS], uint8 dy[NUM_POINTS]);
+        static void SetPoints(int numStep, uint8 dx[TESTER_NUM_POINTS], uint8 dy[TESTER_NUM_POINTS]);
 
     private:
         static void DrawData(int numStep, int x0, int y0);
@@ -62,7 +60,7 @@ private:
     /// Установленное в true значение означает, что вклюён режим тестера
     static bool enabled;
 
-    static uint8 data[Chan::Number][NUM_STEPS][NUM_POINTS];
+    static uint8 data[Chan::Number][NUM_STEPS][TESTER_NUM_POINTS];
 
 public:
     /// Чем будем управлять в тестер-компоненте - напряжением или током

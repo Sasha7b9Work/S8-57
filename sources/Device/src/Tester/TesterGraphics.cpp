@@ -13,7 +13,7 @@
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-typedef uint8 array[Chan::Number][Tester::NUM_STEPS][Tester::NUM_POINTS];
+typedef uint8 array[Chan::Number][Tester::NUM_STEPS][TESTER_NUM_POINTS];
 
 static bool ready[Tester::NUM_STEPS] = {false, false, false, false, false};
 
@@ -75,20 +75,20 @@ void Tester::Graphics::DrawData(int numStep, int /*x0*/, int /*y0*/)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Tester::Graphics::SetPoints(int numStep, uint8 dx[NUM_POINTS], uint8 dy[NUM_POINTS])
+void Tester::Graphics::SetPoints(int numStep, uint8 dx[TESTER_NUM_POINTS], uint8 dy[TESTER_NUM_POINTS])
 {
     ready[numStep] = true;
 
     uint8 *x = &(*dat)[Chan::A][numStep][0];
     uint8 *y = &(*dat)[Chan::B][numStep][0];
 
-    for(int i = 0; i < NUM_POINTS; i++)
+    for(int i = 0; i < TESTER_NUM_POINTS; i++)
     {
-        int X = NUM_POINTS - (dx[i] - MIN_VALUE);
+        int X = TESTER_NUM_POINTS - (dx[i] - MIN_VALUE);
         int Y = dy[i] - MIN_VALUE;
 
-        LIMITATION(X, 0, NUM_POINTS - 1);
-        LIMITATION(Y, 0, NUM_POINTS - 1);
+        LIMITATION(X, 0, TESTER_NUM_POINTS - 1);
+        LIMITATION(Y, 0, TESTER_NUM_POINTS - 1);
 
         x[i] = (uint8)X;
         y[i] = (uint8)Y;

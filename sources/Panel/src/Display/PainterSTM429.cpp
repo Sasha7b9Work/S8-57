@@ -205,20 +205,20 @@ void Painter::SetColor(Color color)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Painter::DrawTesterData(uint8 mode, Color color, uint8 x[240], uint8 y[240])
+void Painter::DrawTesterData(uint8 mode, Color color, uint8 x[TESTER_NUM_POINTS], uint8 y[TESTER_NUM_POINTS])
 {
     SetColor(color);
 
     if(mode == 1)
     {
-        for(int i = 1; i < 240; i++)
+        for(int i = 1; i < TESTER_NUM_POINTS; i++)
         {
             *(Display::GetBuffer() + y[i] * BUFFER_WIDTH + x[i]) = currentColor.value;
         }
     }
     else
     {
-        for(int i = 1; i < 239; i++)
+        for(int i = 1; i < TESTER_NUM_POINTS; i++)
         {
             DrawLine(x[i], y[i], x[i + 1], y[i + 1]);
         }

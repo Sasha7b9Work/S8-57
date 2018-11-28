@@ -97,7 +97,7 @@ bool Decoder::DrawTesterPoints(uint8 data)
     static Color color = Color::FILL;
     static uint8 mode = 0;
 
-    static uint8 buffer[480];
+    static uint8 buffer[TESTER_NUM_POINTS * 2];
 
     if(step == 0)
     {
@@ -115,9 +115,9 @@ bool Decoder::DrawTesterPoints(uint8 data)
     {
         buffer[numPoint++] = data;
 
-        if(numPoint == 480)
+        if(numPoint == TESTER_NUM_POINTS * 2)
         {
-            Painter::DrawTesterData(mode, color, buffer, buffer + 240);
+            Painter::DrawTesterData(mode, color, buffer, buffer + TESTER_NUM_POINTS);
             return true;
         }
     }
