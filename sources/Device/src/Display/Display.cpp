@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #ifndef WIN32
 #include "defines.h"
+#include "log.h"
 #include "Device.h"
 #include "Painter.h"
 #include "Hardware/Timer.h"
@@ -106,9 +107,7 @@ void Display::Init()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Display::Update()
 {
-    typedef void (*pFuncDisplayVV)();
-
-    DEF_STRUCT(StructDraw, pFuncDisplayVV) funcs[Device::Mode::Number] =
+    static const struct StructDraw { pFuncVV func; } draw[Device::Mode::Number] =
     {
         Osci::Draw,
         Tester::Graphics::Update,
@@ -116,7 +115,16 @@ void Display::Update()
         Recorder::Graphics::Update
     };
 
-    funcs[Device::CurrentMode()].val();
+    pFuncVV func = draw[Device::CurrentMode()].func;
+
+    if (func)
+    {
+        func();
+    }
+    else
+    {
+        LOG_ERROR("Нет обработчика");
+    }
 
     Console::Draw();
 
