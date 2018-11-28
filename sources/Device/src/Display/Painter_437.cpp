@@ -1,4 +1,5 @@
 #include "defines.h"
+#include "log.h"
 #include "Command.h"
 #include "Message.h"
 #include "Painter.h"
@@ -124,8 +125,9 @@ void Painter::DrawVLine(int x, int y0, int y1, Color color)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-int Painter::DrawText(int x, int y, const char *text, Color color)
+int Painter::DrawText(int x, int y, const char *text, Color color, bool log)
 {
+    uint sizeText = std::strlen(text);
     /// \todo Такую проверку нужно сделать и на приёмной стороне и тогда здесь убрать
 
     if (*text == 0)
@@ -142,6 +144,7 @@ int Painter::DrawText(int x, int y, const char *text, Color color)
 
     SetColor(color);
     size_t size = (size_t)(1 + 2 + 1 + 1 + std::strlen(text));
+
     uint8 buffer[MAX_SIZE_BUFFER] = { Command::Paint_DrawText, (uint8)x, (uint8)(x >> 8), (uint8)y, (uint8)(size - 5) };
 
     uint8 *pointer = &buffer[5];
@@ -150,6 +153,8 @@ int Painter::DrawText(int x, int y, const char *text, Color color)
     {
         *pointer++ = (uint8)*text++;
     }
+
+    //LOG_WRITE("Записать в панель %d байт - %d, %d, %d, %d, %d, размер - %d", size, buffer[0], buffer[1], buffer[2], buffer[3], buffer[4], sizeText);
 
     FSMC::WriteToPanel(buffer, (int)size);
 

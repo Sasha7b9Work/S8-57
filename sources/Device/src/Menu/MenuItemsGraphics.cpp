@@ -1,4 +1,5 @@
 #include "defines.h"
+#include "log.h"
 #include "MenuItems.h"
 #include "Osci/Grid.h"
 #include "Display/Painter.h"
@@ -593,7 +594,7 @@ static void DrawGovernorChoiceColorFormulaHiPart(Control *item, int x, int y, bo
 
     Painter::FillRegion(x + 1, y + (opened ? 1 : 2), width + (opened ? 2 : 1), Menu::Item::Value::HEIGHT - (opened ? 2 : 3), Color::MenuItem(false));
 
-    Painter::DrawText(x + delta + (opened ? 4 : 6), y + delta + (opened ? 2 : 3), item->Title(), color);
+    Painter::DrawText(x + delta + (opened ? 4 : 6), y + delta + (opened ? 2 : 3), item->Title(), color, true);
 
     if (opened)
     {
@@ -602,36 +603,36 @@ static void DrawGovernorChoiceColorFormulaHiPart(Control *item, int x, int y, bo
 
     if(Menu::CurrentItem() == item)
     {
-           char symbol = 0;
+        char symbol = 0;
    
-           if (IS_GOVERNOR(item))
-           {
-               symbol = Governor::GetSymbol(*((Governor*)item)->cell);
-           }
-           else if (IS_GOVERNOR(item) || IS_CHOICE_REG(item) ||  (item->IsOpened() && IS_CHOICE(item)))
-           {
-               symbol = Governor::GetSymbol(*((Choice*)item)->cell);
-           }
-           else if (IS_TIME(item))
-           {
-               TimeControl* time = (TimeControl*)item;
-               if ((Menu::OpenedItem() == item) && (*time->curField != iEXIT) && (*time->curField != iSET))
-               {
-                   int8 values[7] =
-                   {
-                       0,
-                       *time->day,
-                       *time->month,
-                       *time->year,
-                       *time->hours,
-                       *time->minutes,
-                       *time->seconds
-                   };
-                   symbol = Governor::GetSymbol(values[*time->curField]);
-               }
-           }
+        if (IS_GOVERNOR(item))
+        {
+            symbol = Governor::GetSymbol(*((Governor*)item)->cell);
+        }
+        else if (IS_GOVERNOR(item) || IS_CHOICE_REG(item) ||  (item->IsOpened() && IS_CHOICE(item)))
+        {
+            symbol = Governor::GetSymbol(*((Choice*)item)->cell);
+        }
+        else if (IS_TIME(item))
+        {
+            TimeControl* time = (TimeControl*)item;
+            if ((Menu::OpenedItem() == item) && (*time->curField != iEXIT) && (*time->curField != iSET))
+            {
+                int8 values[7] =
+                {
+                    0,
+                    *time->day,
+                    *time->month,
+                    *time->year,
+                    *time->hours,
+                    *time->minutes,
+                    *time->seconds
+                };
+                symbol = Governor::GetSymbol(values[*time->curField]);
+            }
+        }
 
-          Painter::Draw4SymbolsInRect(x + Menu::Item::WIDTH - 13, y + 5 + (item->IsOpened() ? 0 : 15), symbol, shade ? color : Color::BLACK);
+        Painter::Draw4SymbolsInRect(x + Menu::Item::WIDTH - 13, y + 5 + (item->IsOpened() ? 0 : 15), symbol, shade ? color : Color::BLACK);
     }
 }
 

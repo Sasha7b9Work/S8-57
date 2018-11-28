@@ -213,7 +213,7 @@ static const ChoiceBase name = {Control::Type::Choice, 4, false, Page::Name::NoP
     nameRu1, nameEn1, nameRu2, nameEn2, nameRu3, nameEn3, nameRu4, nameEn4, nameRu5, nameEn5, cell, keeper, funcActive, funcChanged, funcDraw)      \
 static pString hints##name[] = {nameRu1, nameEn1, nameRu2, nameEn2, nameRu3, nameEn3, nameRu4, nameEn4,                                             \
     nameRu5, nameEn5};                                                                                                                              \
-static const ChoiceBase name = {Control::Type::Choice, 5, false, Page::Name::NoPage, &keeper, funcActive, {titleRU, titleEN, hintRU, hintEN}, (int8 *)&cell,    \
+volatile static const ChoiceBase name = {Control::Type::Choice, 5, false, Page::Name::NoPage, &keeper, funcActive, {titleRU, titleEN, hintRU, hintEN}, (int8 *)&cell,    \
     hints##name, funcChanged, funcDraw};
 
 #define DEF_CHOICE_6(name, titleRU, titleEN, hintRU, hintEN,nameRu1, nameEn1, nameRu2, nameEn2, nameRu3, nameEn3, nameRu4,                          \

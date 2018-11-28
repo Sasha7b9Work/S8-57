@@ -116,24 +116,24 @@ static void OnEnterExit_Tester(bool enter)
 }
 
 
-DEF_PAGE_5( pTesterU,
+DEF_PAGE_4( pTesterU,
     "реяреп", "TESTER",
     "", "",
     &cControl,
     &cStepU,
     &cPolarity,
     &cViewMode,
-    &cSmoothing,
+    //&cSmoothing,
     Page::Name::Function_Tester, PageFunction::pointer, FuncActive, OnEnterExit_Tester, FuncDrawPage, FuncRegSetPage
 )
 
-DEF_PAGE_5(pTesterI,
+DEF_PAGE_4(pTesterI,
     "реяреп", "TESTER",
     "", "",
     &cControl,
     &cStepI,
     &cPolarity,
     &cViewMode,
-    &cSmoothing,
+    //&cSmoothing,
     Page::Name::Function_Tester, PageFunction::pointer, FuncActive, OnEnterExit_Tester, FuncDrawPage, FuncRegSetPage
 )

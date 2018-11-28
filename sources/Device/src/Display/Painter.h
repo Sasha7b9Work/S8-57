@@ -18,7 +18,7 @@ public:
 
     static void FillRegion(int x, int y, int width, int height, Color color = Color::NUMBER);
 
-    static int DrawText(int x, int y, const char *text, Color color = Color::NUMBER);
+    static int DrawText(int x, int y, const char *text, Color color = Color::NUMBER, bool log = false);
 
     static void DrawBigText(int x, int y, uint8 size, const char *text, Color color = Color::NUMBER);
 
