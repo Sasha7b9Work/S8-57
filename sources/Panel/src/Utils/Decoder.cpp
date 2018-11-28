@@ -1,3 +1,4 @@
+#include "log.h"
 #include "Decoder.h"
 #include "Hardware/FSMC.h"
 #include "Display/Display.h"
@@ -16,31 +17,35 @@ int      Decoder::step = 0;
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void Decoder::AddData(uint8 data)
 {
-    DEF_STRUCT(StructFunc, pFuncBU8) command[Command::Number] =
+    static const struct StructFunc { pFuncBU8 func; } command[Command::Number] =
     {
-        &Decoder::EmptyFunc,
-        &Decoder::InButtonPress,
-        &Decoder::BeginScene,
-        &Decoder::EndScene,
-        &Decoder::SetColor,
-        &Decoder::FillRegion,
-        &Decoder::DrawText,
-        &Decoder::SetPalette,
-        &Decoder::DrawRectangle,
-        &Decoder::DrawVLine,
-        &Decoder::DrawHLine,
-        &Decoder::SetFont,
-        &Decoder::SetPoint,
-        &Decoder::DrawLine,
-        &Decoder::DrawTesterPoints,
-        &Decoder::DrawBigText
+        EmptyFunc,
+        InButtonPress,
+        BeginScene,
+        EndScene,
+        SetColor,
+        FillRegion,
+        DrawText,
+        SetPalette,
+        DrawRectangle,
+        DrawVLine,
+        DrawHLine,
+        SetFont,
+        SetPoint,
+        DrawLine,
+        DrawTesterPoints,
+        DrawBigText
     };
 
     if (step == 0)
     {
         if (data < Command::Number)
         {
-            curFunc = command[data].value;
+            curFunc = command[data].func;
+            if (curFunc == 0)
+            {
+                LOG_ERROR("Не обнаржен обработчик");
+            }
         }
         else
         {

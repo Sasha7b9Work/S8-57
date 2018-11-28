@@ -225,21 +225,6 @@ void Painter::SetFont(Font::Type::E /*typeFont*/)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-int Painter::DrawText(int x, int y, const char *text, Color color)
-{
-    SetColor(color);
-
-    uint numSymbols = strlen(text);
-    for (uint i = 0; i < numSymbols; ++i)
-    {
-        x = DrawChar(x, y, text[i]);
-        ++x;
-    }
-
-    return x;
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Painter::FillRegion(int x, int y, int width, int height, Color color)
 {
     SetColor(color);
