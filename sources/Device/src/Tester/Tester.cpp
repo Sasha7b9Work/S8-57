@@ -138,6 +138,11 @@ void Tester::Enable()
 
     SET_COUPLE_A = SET_COUPLE_B = ModeCouple::GND;
 
+    SET_RANGE(Chan::A) = Range::_2V;
+    SET_RANGE(Chan::B) = Range::_2V;
+    SET_RSHIFT(Chan::A) = RShift::ZERO;
+    SET_RSHIFT(Chan::B) = RShift::ZERO;
+
     FPGA::LoadRanges();
 
     HAL_GPIO_WritePin(Port_TEST_ON, Pin_TEST_ON, GPIO_PIN_RESET);  // Включаем тестер-компонент
@@ -241,17 +246,11 @@ void Tester::StartFPGA()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Tester::ReadData()
 {
-    uint8 *x = &Tester::data[Chan::A][step / 2][0];
-    uint8 *y = &Tester::data[Chan::B][step / 2][0];
+    uint8 *x = &data[Chan::A][step / 2][0];
+    uint8 *y = &data[Chan::B][step / 2][0];
 
-    if(FPGA::ReadForTester(x, y))
+    if(FPGA::ForTester::Read(x, y))
     {
-
-        if(x[0] == x[1] == x[2])
-        {
-            //LOG_WRITE("%d, %d, %d", x[0], x[1], x[2]);
-        }
-
         Graphics::SetPoints(step / 2, x, y);
     }
 }

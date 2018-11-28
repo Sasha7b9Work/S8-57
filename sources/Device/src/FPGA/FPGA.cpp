@@ -202,7 +202,7 @@ void FPGA::StartForTester(int)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-bool FPGA::ReadForTester(uint8 *dataA, uint8 *dataB)
+bool FPGA::ForTester::Read(uint8 *dataA, uint8 *dataB)
 {
     uint start = TIME_MS;
     flag = 0;
