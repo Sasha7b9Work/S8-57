@@ -20,8 +20,6 @@ struct TypeWave
         Meandr,
         Triangle
     } value;
-    TypeWave(E v) : value(v) {};
-    operator uint8() const { return (uint8)value; };
 };
 
 
@@ -55,7 +53,7 @@ public:
 
 private:
 
-    static void Beep(const TypeWave newTypeWave, const float newFreq, const float newAmpl, const int newDuration);
+    static void Beep(const TypeWave::E newTypeWave, const float newFreq, const float newAmpl, const int newDuration);
 
     static void Stop();
 

@@ -16,7 +16,7 @@ DAC_HandleTypeDef Sound::handleDAC = {DAC};
 static uint8 points[POINTS_IN_PERIOD_SOUND] = {0};
 static float frequency = 0.0f;
 static float amplitude = 0.0f;
-static TypeWave typeWave = TypeWave::Sine;
+static TypeWave::E typeWave = TypeWave::Sine;
 static bool soundWarnIsBeep = false;
 static bool buttonIsPressed = false;    ///< \brief Когда запускается звук нажатой кнопки, устанавливается этот флаг, чтобы знать, проигрывать ли знак 
                                         ///< отпускания
@@ -194,7 +194,7 @@ void Sound::SetWave()
 
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Sound::Beep(const TypeWave newTypeWave, const float newFreq, const float newAmpl, const int newDuration)
+void Sound::Beep(const TypeWave::E newTypeWave, const float newFreq, const float newAmpl, const int newDuration)
 {
     if (soundWarnIsBeep)
     {
@@ -204,7 +204,7 @@ void Sound::Beep(const TypeWave newTypeWave, const float newFreq, const float ne
     {
         //return;
     }
-    if (frequency != newFreq || amplitude != newAmpl || typeWave != newTypeWave.value)
+    if (frequency != newFreq || amplitude != newAmpl || typeWave != newTypeWave)
     {
         frequency = newFreq;
         amplitude = newAmpl * SOUND_VOLUME / 100.0f;
