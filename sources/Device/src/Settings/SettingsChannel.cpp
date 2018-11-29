@@ -54,4 +54,9 @@ int Chan::RequestBytes(DataSettings *) const
     return FPGA_MAX_NUM_POINTS;
 }
 
-
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+pString ModeCouple::UGO() const
+{
+    static pString couple[] = { "\x92", "\x91", "\x90" };
+    return couple[value];
+}

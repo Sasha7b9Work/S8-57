@@ -212,8 +212,6 @@ static void WriteTextVoltage(Chan::E ch, int x, int y)
         return;
     }
 
-    static pString couple[] = {"\x92", "\x91", "\x90"};
-
     Color color = Color::Channel(ch);
 
     bool inverse = SET_INVERSE(ch);
@@ -229,7 +227,7 @@ static void WriteTextVoltage(Chan::E ch, int x, int y)
     }
     const int SIZE = 100;
     char buffer[SIZE];
-    snprintf(buffer, SIZE, "%s\xa5%s\xa5%s", Chan(ch).IsA() ? DICT(D1ch) : DICT(D2ch), couple[SET_COUPLE(ch)], Range(range).ToString(divider));
+    snprintf(buffer, SIZE, "%s\xa5%s\xa5%s", Chan(ch).IsA() ? DICT(D1ch) : DICT(D2ch), ModeCouple(SET_COUPLE(ch)).UGO(), Range(range).ToString(divider));
     Painter::DrawText(x + 1, y, buffer, colorDraw);
     char bufferTemp[SIZE];
     snprintf(bufferTemp, SIZE, "\xa5%s", RShift::ToString((uint16)SET_RSHIFT(ch), range, divider, buffer));

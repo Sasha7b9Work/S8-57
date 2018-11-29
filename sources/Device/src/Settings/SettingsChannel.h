@@ -96,7 +96,8 @@ struct ModeCouple
         GND,     ///< ¬ход заземлЄн.
         Size
     } value;
-    explicit ModeCouple(uint v) : value((E)v) {};
+    explicit ModeCouple(E v) : value(v) {};
+    pString UGO() const;
 };
 
 struct Resistance
