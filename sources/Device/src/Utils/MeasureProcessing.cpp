@@ -189,8 +189,21 @@ float CalculateVoltageMax(Chan::E ch)
     {
         Measure::SetMarkerVoltage(ch, 0, max);      // Здесь не округляем, потому что max может быть только целым
     }
+    
+    if (ch == Chan::A)
+    {
+        ch = ch;
+    }
 
-    return FPGAMath::Point2Voltage(ROUND(uint8, max), RANGE_DS(ch), RSHIFT_DS(ch));
+    volatile DataSettings *ds = DS;
+    
+    Range::E range = RANGE_DS(ch);
+
+    uint16 rShift = RSHIFT_DS(ch);
+
+    uint8 value = ROUND(uint8, max);
+
+    return FPGAMath::Point2Voltage(value, range, rShift);
 }
 
 

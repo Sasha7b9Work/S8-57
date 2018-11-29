@@ -168,7 +168,18 @@ uint8 FPGAMath::Voltage2Point(float voltage, Range::E range, uint16 rShift)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 float FPGAMath::Point2Voltage(uint8 value, Range::E range, uint16 rShift)
 {
-    return (value - MIN_VALUE) * voltsInPoint[range].val - MaxVoltageOnScreen(range) - RShift2Abs(rShift, range);
+    if(range == Range::_1V)
+    {
+        range = range;
+    }
+    
+    uint8 delta = (uint8)(value - MIN_VALUE);
+
+    float rShiftAbs = RShift2Abs(rShift, range);
+
+    float maxVoltage = MaxVoltageOnScreen(range);
+
+    return delta * voltsInPoint[range].val - maxVoltage - rShiftAbs;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

@@ -78,7 +78,7 @@ struct DataSettings
 #define Lval_RANGE(ds, ch)      ((ds)->range[ch])
 #define Lval_RANGE_A(ds)        (Lval_RANGE(ds, Chan::A))
 #define Lval_RANGE_B(ds)        (Lval_RANGE(ds, Chan::B))
-#define RANGE(ds, ch)           (Lval_RANGE(ds, ch))
+#define RANGE(ds, ch)           ((Range::E)Lval_RANGE(ds, ch))
 #define RANGE_A(ds)             (RANGE(ds, Chan::A))
 #define RANGE_B(ds)             (RANGE(ds, Chan::B))
 
