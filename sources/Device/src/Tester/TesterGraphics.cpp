@@ -21,10 +21,8 @@ static array *dat = (array *)OUT_A;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/// Написать параметры вывода
-static void DrawParameters(int x, int y);
 /// Написать легенду изображения
-static void DrawInfo(int x, int y);
+static void DrawLegend(int x, int y);
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -34,16 +32,12 @@ void Tester::Graphics::Update()
 
     Grid::Draw();
 
-    int size = 239;
-
     for (int i = 0; i < NUM_STEPS; i++)
     {
         DrawData(i, 0, 0);
     }
 
-    DrawParameters(size + 10, 10);
-
-    DrawInfo(size + 10, 50);
+    DrawLegend(250, 10);
     
     Menu::Draw();
 }
@@ -109,31 +103,7 @@ void Tester::Graphics::SetPoints(int numStep, uint8 dx[TESTER_NUM_POINTS], uint8
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void DrawParameters(int x, int y)
-{
-    Painter::SetColor(Color::FILL);
-
-    for(int8 ch = 0; ch < 2; ch++)
-    {
-        Chan::E chan = (Chan::E)ch;
-
-        Painter::SetColor(Color::FILL);
-
-        Range::E range = SET_RANGE(chan);
-        Divider::E divider = SET_DIVIDER(ch);
-
-        Painter::DrawTextOnBackground(x, y + ch * 10, Range(range).ToString(divider), Color::BACK);
-
-        Painter::SetColor(Color::FILL);
-
-        char buffer[50];
-
-        Painter::DrawTextOnBackground(x + 20, y + ch * 10, RShift::ToString((uint16)SET_RSHIFT(chan), range, divider, buffer), Color::BACK);
-    }
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void DrawInfo(int, int)
+static void DrawLegend(int, int)
 {
 
 }
