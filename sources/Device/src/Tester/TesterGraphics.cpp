@@ -23,6 +23,8 @@ static array *dat = (array *)OUT_A;
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /// Написать легенду изображения
 static void DrawLegend(int x, int y);
+/// Отображает параметры одного канала
+static void DrawParametersChannel(Chan::E ch, int x, int y);
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -38,6 +40,9 @@ void Tester::Graphics::Update()
     }
 
     DrawLegend(250, 10);
+
+    DrawParametersChannel(Chan::A, 258, 206);
+    DrawParametersChannel(Chan::B, 3, 3);
     
     Menu::Draw();
 }
@@ -105,5 +110,20 @@ void Tester::Graphics::SetPoints(int numStep, uint8 dx[TESTER_NUM_POINTS], uint8
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void DrawLegend(int, int)
 {
+
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+static void DrawParametersChannel(Chan::E ch, int x, int y)
+{
+    Range::E range = SET_RANGE(ch);
+    Divider::E divider = SET_DIVIDER(ch);
+    uint16 rShift = SET_RSHIFT(ch);
+
+    Painter::SetColor(Color::FILL);
+    Painter::DrawTextOnBackground(x, y, Range(range).ToString(divider), Color::BACK);
+    Painter::SetColor(Color::FILL);
+    char buffer[50];
+    Painter::DrawTextOnBackground(x + 15, y, RShift::ToString(rShift, range, divider, buffer), Color::BACK);
 
 }

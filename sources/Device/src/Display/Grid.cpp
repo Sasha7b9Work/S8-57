@@ -11,11 +11,6 @@
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/// Вывести параметры одного канала тестер-компонента
-static void DrawParametersTester(Chan::E ch, int x, int y);
-
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 int Grid::Left()
 {
     static const int left[Device::Mode::Number] = { 20, 0, 0, 0 };
@@ -375,7 +370,7 @@ int Grid::DeltaHforLineGrid()
 void Grid::DrawTester()
 {
 
-    bool shift = false;
+    bool shift = true;
 
     Painter::SetColor(Color::FILL);
 
@@ -396,6 +391,8 @@ void Grid::DrawTester()
     Painter::DrawVLine(x, 0, Display::HEIGHT);
 
     Painter::DrawHLine(y, 0, Display::WIDTH);
+
+    Painter::SetColor(Color::GRID);
 
     int deltaX = 32;
     int deltaY = 24;
@@ -433,23 +430,4 @@ void Grid::DrawTester()
         Painter::DrawHPointLine(y, 0, Display::WIDTH, deltaPoint);
         y -= deltaY;
     }
-
-    DrawParametersTester(Chan::A, 258, Display::HEIGHT / 2 - 9);
-
-    DrawParametersTester(Chan::B, Display::WIDTH / 2 + 2, 2);
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void DrawParametersTester(Chan::E ch, int x, int y)
-{
-    Range::E range = SET_RANGE(ch);
-    Divider::E divider = SET_DIVIDER(ch);
-    uint16 rShift = SET_RSHIFT(ch);
-
-    Painter::SetColor(Color::FILL);
-    Painter::DrawTextOnBackground(x, y, Range(range).ToString(divider), Color::BACK);
-    Painter::SetColor(Color::FILL);
-    char buffer[50];
-    Painter::DrawTextOnBackground(x + 15, y, RShift::ToString(rShift, range, divider, buffer), Color::BACK);
-
 }
