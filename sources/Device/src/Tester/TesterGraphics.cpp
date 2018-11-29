@@ -54,16 +54,6 @@ void Tester::Graphics::Update()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void RecountPoints(uint8 *points, float scale)
-{
-    for (int i = 0; i < TESTER_NUM_POINTS; i++)
-    {
-        *points = (uint8)(*points * scale);
-        points++;
-    }
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static Color ColorForStep(int _step)
 {
     static const Color colors[Tester::NUM_STEPS] = {Color::FILL, Color::GRID, Color::RED, Color::GREEN, Color::BLUE};
@@ -85,15 +75,12 @@ static void DrawData(int numStep, int /*x0*/, int /*y0*/)
 {
     if(!ready[numStep])
     {
-        //return;
+        return;
     }
 
     uint8 *x = &(*dat)[Chan::A][numStep][0];
     uint8 *y = &(*dat)[Chan::B][numStep][0];
-
-    RecountPoints(x, 320.0f / 256.0f);
-    RecountPoints(y, 240.0f / 256.0f);
-      
+    
     if(TESTER_VIEW_MODE_IS_LINES)
     {
         Painter::DrawTesterData((uint8)TESTER_VIEW_MODE, ColorForStep(numStep), x, y);
