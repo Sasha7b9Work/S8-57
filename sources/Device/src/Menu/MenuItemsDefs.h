@@ -46,7 +46,7 @@ static const GovernorColorBase name = {Control::Type::GovernorColor, 0, false, P
     namePage, keeper, funcActive, funcPress, funcDraw, funcRegSet)                                                                              \
 static const Control * const  items##name[] = {(Control *)item0, (Control *)item1, (Control *)item2, (Control *)item3, (Control *)item4,        \
     (Control *)item5};                                                                                                                          \
-const PageBase name = {Control::Type::Page, 6, true, namePage, keeper, funcActive, {titleRU, titleEN, hintRU, hintEN},                          \
+static const PageBase name = {Control::Type::Page, 6, true, namePage, keeper, funcActive, {titleRU, titleEN, hintRU, hintEN},                   \
     items##name, funcPress, funcDraw, funcRegSet};
 
 #define DEF_PAGE_1(name, titleRU, titleEN, hintRU, hintEN, item1, namePage, keeper, funcActive, funcPress, funcDraw, funcRegSet)                \
@@ -60,7 +60,7 @@ static const PageBase name = {Control::Type::Page, 2, false, namePage, keeper, f
     items##name, funcPress, funcDraw, funcRegSet};
 
 #define DEF_PAGE_3(name, titleRU, titleEN, hintRU, hintEN, item1, item2, item3, namePage, keeper, funcActive, funcPress, funcDraw, funcRegSet)  \
-static Control * items##name[] = {(Control *)item1, (Control *)item2, (Control *)item3};                                                 \
+static const Control * items##name[] = {(Control *)item1, (Control *)item2, (Control *)item3};                                                  \
 static const PageBase name = {Control::Type::Page, 3, false, namePage, keeper, funcActive, {titleRU, titleEN, hintRU, hintEN},                  \
     items##name, funcPress, funcDraw, funcRegSet};
 
@@ -199,13 +199,13 @@ static const ChoiceBase name = {Control::Type::Choice, 2, false, Page::Name::NoP
 
 #define DEF_CHOICE_3(name, titleRU, titleEN, hintRU, hintEN,                                                                                                            \
     nameRu1, nameEn1, nameRu2, nameEn2, nameRu3, nameEn3, cell, keeper, funcActive, funcChanged, funcDraw)                                                              \
-static pString hints##name[] = {nameRu1, nameEn1, nameRu2, nameEn2, nameRu3, nameEn3};                                                                                  \
+static const pString hints##name[] = {nameRu1, nameEn1, nameRu2, nameEn2, nameRu3, nameEn3};                                                                            \
 volatile static const ChoiceBase name = {Control::Type::Choice, 3, false, Page::Name::NoPage, &keeper, funcActive, {titleRU, titleEN, hintRU, hintEN},                  \
     (int8 *)&cell, hints##name, funcChanged, funcDraw};
 
 #define DEF_CHOICE_4(name, titleRU, titleEN, hintRU, hintEN,                                                                                                            \
     nameRu1, nameEn1, nameRu2, nameEn2, nameRu3, nameEn3, nameRu4, nameEn4, cell, keeper, funcActive, funcChanged, funcDraw)                                            \
-static pString hints##name[] = {nameRu1, nameEn1, nameRu2, nameEn2, nameRu3, nameEn3, nameRu4, nameEn4};                                                                \
+static const pString hints##name[] = {nameRu1, nameEn1, nameRu2, nameEn2, nameRu3, nameEn3, nameRu4, nameEn4};                                                                \
 volatile static const ChoiceBase name = {Control::Type::Choice, 4, false, Page::Name::NoPage, &keeper, funcActive, {titleRU, titleEN, hintRU, hintEN},                  \
     (int8 *)&cell, hints##name, funcChanged, funcDraw};
 
