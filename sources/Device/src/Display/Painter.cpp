@@ -91,6 +91,7 @@ void Painter::DrawBoundedRegion(int x, int y, int width, int height, Color color
     Color color = currentColor;
     DrawRectangle(x, y, width, height, colorBound);
     FillRegion(x + 1, y + 1, width - 2, height - 2, colorFill);
+    /// \todo Почему-то цвет не восстанавливается
     SetColor(color);
 }
 

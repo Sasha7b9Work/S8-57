@@ -34,8 +34,12 @@ static Chan drawingChan = Chan(Chan::A);
 static void RangeMoreB();
 /// Общий обработчик изменения параметра канала - масштаба или смещения
 static void OnChangeParameterChannel(pFuncVChI, Chan::E, int);
+/// Функция отрисовки параметров канала
+static void DrawParametersChannel();
 /// Общий обработчик изменения временных параметров
 static void OnChangeParameterTime(pFuncVI, int);
+/// Функция отрисовки временных параметров
+static void DrawParametersTime();
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -176,6 +180,26 @@ static void RangeMoreB()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+static void DrawParametersTime()
+{
+    int x = Grid::Left() + 5;
+    int y = Grid::Top() + 5;
+    int width = 126;
+    int height = 15;
+
+    Painter::DrawBoundedRegion(x, y, width, height, Color::BACK, Color::FILL);
+
+    char buffer[50];
+    sprintf(buffer, "Разв : %s",TBase(SET_TBASE).Name());
+
+    Painter::DrawText(x + 3, y + 3, buffer, Color::FILL);
+
+    TShift shift(SET_TSHIFT);
+
+    Painter::DrawText(x + 64, y + 3, shift.ToString(SET_TBASE, buffer));
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void DrawParametersChannel()
 {
     int x = Grid::Left() + 5;
@@ -186,7 +210,6 @@ static void DrawParametersChannel()
 
     Painter::DrawBoundedRegion(x, y, width, height, Color::BACK, Color::Channel(ch));
 
-    char forRShift[50];
     char buffer[50];
     sprintf(buffer, "%s : %s %s",
         drawingChan.Name(),
@@ -196,7 +219,7 @@ static void DrawParametersChannel()
 
     Painter::DrawBigText(x + 3, y + 3, 1, buffer, Color::Channel(ch));
 
-    Painter::DrawBigText(x + 80, y + 3, 1, RShift::ToString(SET_RSHIFT(ch), SET_RANGE(ch), SET_DIVIDER(ch), forRShift));
+    Painter::DrawBigText(x + 80, y + 3, 1, RShift::ToString(SET_RSHIFT(ch), SET_RANGE(ch), SET_DIVIDER(ch), buffer));
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -212,6 +235,8 @@ static void OnChangeParameterChannel(pFuncVChI func, Chan::E ch, int delta)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void OnChangeParameterTime(pFuncVI func, int delta)
 {
+    Display::SetAddDrawFunction(DrawParametersTime, 5000);
+
     func(delta);
 }
 
