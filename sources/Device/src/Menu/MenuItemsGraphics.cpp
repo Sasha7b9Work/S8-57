@@ -342,9 +342,9 @@ void Page::Draw(int x, int y, bool opened)
             Control *item = Item(posCurItem);
             for (int i = 0; i < 5; i++)
             {
-                if (Menu::itemUnderButton[i + Key::F1] != item)
+                if (Menu::ItemUnderButton((Key::E)(Key::F1 + i)) != item)
                 {
-                    Menu::itemUnderButton[i + Key::F1] = 0;
+                    Menu::SetItemUnderButton((Key::E)(Key::F1 + i), 0);
                 }
             }
             x = ItemOpenedPosX(item);
@@ -414,7 +414,7 @@ void Page::DrawTitle(int x, int yTop)
         //Painter::Draw4SymbolsInRect(x + 4, yTop + 11, Governor::GetSymbol(CurrentSubPage()), colorText);
     }
 
-    Menu::itemUnderButton[GetFuncButtonFromX(yTop)] = this;
+    Menu::SetItemUnderButton(GetFuncButtonFromX(yTop), this);
 
     delta = 0;
 
@@ -436,7 +436,7 @@ void Page::DrawItems(int x, int y)
         if (item)
         {
             item->Draw(x, y, false);
-            Menu::itemUnderButton[GetFuncButtonFromX(x)] = item;
+            Menu::SetItemUnderButton(GetFuncButtonFromX(x), item);
         }
 
         x += Menu::Item::WIDTH;

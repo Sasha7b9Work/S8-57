@@ -29,10 +29,11 @@
         Key::E Menu::releaseButton = Key::None;
    Control    *Menu::itemUnderKey = 0;
     pFuncVV    Menu::funcAterUpdate = 0;
-   Control    *Menu::itemUnderButton[Key::Number] = {0};
 const char    *Menu::stringForHint = 0;
    Control    *Menu::itemHint = 0;
 
+/// Элементы управления, назначенные в данный момент соответствующим кнопкам
+static Control *underButton[Key::Number];
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void Menu::Update()
@@ -317,7 +318,7 @@ void Menu::ProcessingShortPressureButton()
             }
             else if (Menu::IsShown() && Key(button).IsFunctional())       // Если меню показано и нажата функциональная клавиша
             {
-                void *item = itemUnderButton[button];
+                Control *item = Menu::ItemUnderButton(button);
                 if (HINT_MODE_ENABLED)
                 {
                     SetItemForHint(item);
@@ -407,11 +408,11 @@ void Menu::ProcessingLongPressureButton()
         }
         else if(Menu::IsShown() && Key(button).IsFunctional())
         {
-            item = (Control *)itemUnderButton[button];
-            if(item)
+            Control *control = Menu::ItemUnderButton(button);
+            if(control)
             {
-                item->LongPress();
-                if (NOT_PAGE(item))
+                control->LongPress();
+                if (NOT_PAGE(control))
                 {
                     TemporaryEnableStrNavi();
                 }
@@ -428,7 +429,7 @@ void Menu::ProcessingPressButton()
     {
         if (pressButton != Key::Enter)
         {
-            itemUnderKey = itemUnderButton[pressButton];
+            itemUnderKey = Menu::ItemUnderButton(pressButton);
         }
     }
     if ((pressButton == Key::Start) && (MODE_WORK != ModeWork::RAM))
@@ -806,7 +807,7 @@ void Menu::ResetItemsUnderButton()
 {
     for (int i = 0; i < Key::Number; i++)
     {
-        itemUnderButton[i] = 0;
+        underButton[i] = 0;
     }
 }
 
@@ -861,7 +862,7 @@ void Menu::ReleaseFunctionalButton(Key::E key)
 {
     if(Menu::IsShown())
     {
-        Control *control = (Control *)itemUnderButton[key];
+        Control *control = Menu::ItemUnderButton(key);
         if(control)
         {
             control->ShortPress();
@@ -874,10 +875,22 @@ void Menu::LongFunctionalButton(Key::E key)
 {
     if(Menu::IsShown())
     {
-        Control *control = (Control *)itemUnderButton[key];
+        Control *control = Menu::ItemUnderButton(key);
         if(control)
         {
             control->LongPress();
         }
     }
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Control *Menu::ItemUnderButton(Key::E button)
+{
+    return underButton[button];
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Menu::SetItemUnderButton(Key::E button, Control *control)
+{
+    underButton[button] = control;
 }

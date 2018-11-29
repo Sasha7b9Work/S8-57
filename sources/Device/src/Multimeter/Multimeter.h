@@ -19,7 +19,7 @@ public:
     class Graphics
     {
     public:
-        static void Update();
+        static void Draw();
     private:
         static void PrepareConstantVoltage();
         static void PrepareVariableVoltage();

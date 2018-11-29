@@ -59,6 +59,10 @@ public:
     /// Если true - меню находится в дополнительном режиме.
     static bool IsMinimize();
 
+    static Control *ItemUnderButton(Key::E button);
+
+    static void SetItemUnderButton(Key::E button, Control *control);
+
     static Page::Name::E GetNameOpenedPage();
     /// Возвращает адрес текущего элемента меню (текущим, как правило, является элемент, кнопка которого была нажата последней
     static Control *CurrentItem();
@@ -128,8 +132,6 @@ private:
     static pFuncVV funcAterUpdate;
     /// Время последнего нажатия кнопки. Нужно для того, чтобы периодически сохранять настройки
     static uint timeLastPressedButton;
-    /// Элементы управления, назначенные в данный момент соответствующим кнопкам
-    static Control *itemUnderButton[Key::Number];
     /// Эта функция будет вызываться каждый кадр
     static pFuncVV funcUpdate;
 
