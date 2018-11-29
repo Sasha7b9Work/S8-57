@@ -5,6 +5,7 @@
 #include "Display/Display.h"
 #include "FPGA/FPGA.h"
 #include "Menu/Menu.h"
+#include "Menu/Pages/Include/PageFunction.h"
 #include "Hardware/Timer.h"
 #include "Keyboard/Decoder.h"
 #include "Hardware/FSMC.h"
@@ -51,6 +52,11 @@ void Device::Init()
     FPGA::OnPressStart();
 
     Multimeter::Init();
+
+    if (Menu::OpenedItem() == (Page *)PageFunction::PageMultimeter::pointer)
+    {
+        SetMode(Mode::Multimeter);
+    }
 
 #endif
 }
