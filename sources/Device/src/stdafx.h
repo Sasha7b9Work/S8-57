@@ -63,6 +63,7 @@
 #include "Utils/Dictionary.h"
 #include "Utils/Math.h"
 #include "Utils/Values.h"
+#include "Utils/String.h"
 #include "Utils/StringUtils.h"
 
 #include "libs/USBH/usbh_diskio.h"

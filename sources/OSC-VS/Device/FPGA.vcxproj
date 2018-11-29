@@ -463,6 +463,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug_stm32|Win32'">false</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="..\..\Device\src\Utils\String.cpp" />
     <ClCompile Include="..\..\Device\src\Utils\StringUtils.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug_stm32|Win32'">false</ExcludedFromBuild>
@@ -865,6 +866,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug_stm32|Win32'">false</ExcludedFromBuild>
     </ClInclude>
+    <ClInclude Include="..\..\Device\src\Utils\String.h" />
     <ClInclude Include="..\..\Device\src\Utils\StringUtils.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug_stm32|Win32'">false</ExcludedFromBuild>

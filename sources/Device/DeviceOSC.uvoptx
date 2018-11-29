@@ -1906,7 +1906,7 @@
 
   <Group>
     <GroupName>FPGA</GroupName>
-    <tvExp>1</tvExp>
+    <tvExp>0</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
@@ -3905,6 +3905,30 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
+      <PathWithFileName>.\src\Utils\String.cpp</PathWithFileName>
+      <FilenameWithoutPath>String.cpp</FilenameWithoutPath>
+      <RteFlg>0</RteFlg>
+      <bShared>0</bShared>
+    </File>
+    <File>
+      <GroupNumber>30</GroupNumber>
+      <FileNumber>281</FileNumber>
+      <FileType>5</FileType>
+      <tvExp>0</tvExp>
+      <tvExpOptDlg>0</tvExpOptDlg>
+      <bDave2>0</bDave2>
+      <PathWithFileName>.\src\Utils\String.h</PathWithFileName>
+      <FilenameWithoutPath>String.h</FilenameWithoutPath>
+      <RteFlg>0</RteFlg>
+      <bShared>0</bShared>
+    </File>
+    <File>
+      <GroupNumber>30</GroupNumber>
+      <FileNumber>282</FileNumber>
+      <FileType>8</FileType>
+      <tvExp>0</tvExp>
+      <tvExpOptDlg>0</tvExpOptDlg>
+      <bDave2>0</bDave2>
       <PathWithFileName>.\src\Utils\StringUtils.cpp</PathWithFileName>
       <FilenameWithoutPath>StringUtils.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
@@ -3912,7 +3936,7 @@
     </File>
     <File>
       <GroupNumber>30</GroupNumber>
-      <FileNumber>281</FileNumber>
+      <FileNumber>283</FileNumber>
       <FileType>5</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -3924,7 +3948,7 @@
     </File>
     <File>
       <GroupNumber>30</GroupNumber>
-      <FileNumber>282</FileNumber>
+      <FileNumber>284</FileNumber>
       <FileType>5</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -3936,7 +3960,7 @@
     </File>
     <File>
       <GroupNumber>30</GroupNumber>
-      <FileNumber>283</FileNumber>
+      <FileNumber>285</FileNumber>
       <FileType>5</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -3948,7 +3972,7 @@
     </File>
     <File>
       <GroupNumber>30</GroupNumber>
-      <FileNumber>284</FileNumber>
+      <FileNumber>286</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -3960,7 +3984,7 @@
     </File>
     <File>
       <GroupNumber>30</GroupNumber>
-      <FileNumber>285</FileNumber>
+      <FileNumber>287</FileNumber>
       <FileType>5</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>

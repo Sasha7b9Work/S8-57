@@ -528,6 +528,9 @@
     <ClCompile Include="..\..\Device\src\Display\Grid.cpp">
       <Filter>Display</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Device\src\Utils\String.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Device\src\Display\Display.h">
@@ -985,6 +988,9 @@
     </ClInclude>
     <ClInclude Include="..\..\Device\src\Display\Grid.h">
       <Filter>Display</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Device\src\Utils\String.h">
+      <Filter>Utils</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
