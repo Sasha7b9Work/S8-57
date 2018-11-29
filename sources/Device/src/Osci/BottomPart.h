@@ -8,8 +8,6 @@ class BottomPart
 {
 public:
     static void Draw();
-    /// Написать параметры вертикального тракта заданного канала
-    static void WriteTextVoltage(Chan::E ch, int x, int y);
 
 private:
     static int WriteChannel(Chan::E ch, int x, int y);

@@ -146,7 +146,7 @@ public:
 
     static void FuncOnWaitStop();
 
-    static void SetAddDrawFunction(pFuncVV func);
+    static void SetAddDrawFunction(pFuncVV func, uint time = MAX_UINT);
 
     static void ChangedRShiftMarkers(bool active);
 

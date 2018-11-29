@@ -236,11 +236,11 @@ void Display::SetDrawMode(DrawMode::E mode, pFuncVV func)
     funcOnHand = func;
     if (mode == DrawMode::Hand)
     {
-        Timer::SetAndEnable(Timer::Type::TimerDisplay, funcOnHand, 40);
+        Timer::SetAndEnable(Timer::Type::Display, funcOnHand, 40);
     }
     else
     {
-        Timer::Disable(Timer::Type::TimerDisplay);
+        Timer::Disable(Timer::Type::Display);
     }
 }
 
@@ -313,9 +313,10 @@ void Display::SetOrientation(Orientation orientation)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Display::SetAddDrawFunction(pFuncVV func)
+void Display::SetAddDrawFunction(pFuncVV func, uint time)
 {
     funcAdditionDraw = func;
+    Timer::SetAndStartOnce(Timer::Type::RemoveAddFunction, RemoveAddDrawFunction, time);
 }
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------

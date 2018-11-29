@@ -175,13 +175,12 @@ static void RangeMoreB()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void DrawParametersChannel()
 {
-    BottomPart::WriteTextVoltage(drawingChan, Grid::Left(), Grid::Top());
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void OnChangeParameterChannel(pFuncVChI func, Chan::E ch, int delta)
 {
-    Display::SetAddDrawFunction(DrawParametersChannel);
+    Display::SetAddDrawFunction(DrawParametersChannel, 1000);
 
     func(ch, delta);
 }
