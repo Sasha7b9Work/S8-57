@@ -31,17 +31,17 @@ PageBase *Menu::pageMain = (PageBase *)&page;
 DEF_PAGE_10(page,                                                                                                                       //--- ÌÅÍŞ ---
     "ÌÅÍŞ", "MENU",
     "", "",
-    PageDisplay::pointer,      // ÄÈÑÏËÅÉ
-    PageChannelA::pointer,     // ÊÀÍÀË 1
-    PageChannelB::pointer,     // ÊÀÍÀË 2
-    PageTrig::pointer,         // ÑÈÍÕĞ
-    PageTime::pointer,         // ĞÀÇÂÅĞÒÊÀ
-    PageFunction::pointer,     // ÔÓÍÊÖÈß
-    PageMemory::pointer,       // ÏÀÌßÒÜ
-    PageMeasures::pointer,     // ÈÇÌÅĞÅÍÈß
-    PageService::pointer,      // ÑÅĞÂÈÑ
-    //pHelp,                    // ÏÎÌÎÙÜ
-    PageDebug::pointer,        // ÎÒËÀÄÊÀ
+    PageDisplay::pointer,   // ÄÈÑÏËÅÉ
+    PageChannelA::pointer,  // ÊÀÍÀË 1
+    PageChannelB::pointer,  // ÊÀÍÀË 2
+    PageTrig::pointer,      // ÑÈÍÕĞ
+    PageTime::pointer,      // ĞÀÇÂÅĞÒÊÀ
+    PageFunction::pointer,  // ÔÓÍÊÖÈß
+    PageMemory::pointer,    // ÏÀÌßÒÜ
+    PageMeasures::pointer,  // ÈÇÌÅĞÅÍÈß
+    PageService::pointer,   // ÑÅĞÂÈÑ
+    //pHelp,                // ÏÎÌÎÙÜ
+    PageDebug::pointer,     // ÎÒËÀÄÊÀ
     Page::Name::Main, 0, FuncActive, EmptyPressPage
 )
 

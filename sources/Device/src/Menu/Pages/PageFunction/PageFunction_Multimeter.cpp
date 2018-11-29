@@ -9,11 +9,9 @@
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-extern const PageBase pageDC;
-extern const PageBase pageAC;
-extern const PageBase pageResistance;
+extern const PageBase pageMultimeter;
 
-const PageBase *PageFunction::PageMultimeter::pointer = &pageDC;
+const PageBase *PageFunction::PageMultimeter::pointer = &pageMultimeter;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -36,7 +34,7 @@ DEF_CHOICE_3(   cRangesVoltageDC,                                               
     "2 В",   "2 V",
     "20 В",  "20 V",
     "500 В", "500 V",
-    MULTI_RANGE_DC, pageDC, FuncActive_RangesVoltageDC, OnChange_VoltageDC, FuncDraw
+    MULTI_RANGE_DC, pageMultimeter, FuncActive_RangesVoltageDC, OnChange_VoltageDC, FuncDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -59,7 +57,7 @@ DEF_CHOICE_3(   cRangesVoltageAC,                                               
     "2 В",   "2 V",
     "20 В",  "20 V",
     "400 В", "400 V",
-    MULTI_RANGE_AC, pageAC, FuncActive_RnagesVoltageAC, OnChange_VoltageAC, FuncDraw
+    MULTI_RANGE_AC, pageMultimeter, FuncActive_RnagesVoltageAC, OnChange_VoltageAC, FuncDraw
 )
 
 
@@ -84,7 +82,7 @@ DEF_CHOICE_4(   cRangesResistance,                                              
     "20 кОм", "20 kOhm",
     "200 кОм", "200 kOhm",
     "10 МОм", "10 MOhm",
-    MULTI_RANGE_RESISTANCE, pageResistance, FuncActive_RangesReistance, OnChange_Resistance, FuncDraw
+    MULTI_RANGE_RESISTANCE, pageMultimeter, FuncActive_RangesReistance, OnChange_Resistance, FuncDraw
 )
 
 DEF_CHOICE_7(   cMode,
@@ -115,7 +113,7 @@ DEF_CHOICE_7(   cMode,
     "R",    "R",
     "VD",   "VD",
     "BELL", "BELL",
-    MULTI_MEASURE, pageDC, FuncActive, PageFunction::PageMultimeter::OnChanged_Mode, FuncDraw
+    MULTI_MEASURE, pageMultimeter, FuncActive, PageFunction::PageMultimeter::OnChanged_Mode, FuncDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -130,30 +128,10 @@ DEF_CHOICE_2 (cAVP,
     "Auto-select limit",
     DISABLE_RU, DISABLE_EN,
     ENABLE_RU, ENABLE_EN,
-    MULTI_AVP, pageDC, FuncActive, OnChanged_AVP, FuncDraw
+    MULTI_AVP, pageMultimeter, FuncActive, OnChanged_AVP, FuncDraw
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void PageFunction::PageMultimeter::OnChanged_Mode(bool)
-{
-    if(MULTI_MEASURE == Multimeter::Measure::VoltageDC)
-    {
-        pointer = &pageDC ;
-    }
-    else if(MULTI_MEASURE == Multimeter::Measure::VoltageAC)
-    {
-        pointer = &pageAC;
-    }
-    else if(MULTI_MEASURE == Multimeter::Measure::Resistance)
-    {
-        pointer = &pageResistance;
-    }
-
-    Multimeter::ChangeMode();
-}
-
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void PageFunction::PageMultimeter::Init()
 {
     OnChanged_Mode(true);
@@ -164,7 +142,7 @@ static void OnPress_Page(bool enter)
     Device::SetMode(enter ? Device::Mode::Multimeter : Device::Mode::Osci);
 }
 
-DEF_PAGE_3( pageDC,
+DEF_PAGE_3( pageMultimeter,
     "МУЛЬТИМЕТР", "MULTIMETER",
     "Управление прибором в режиме мультиметра",
     "Instrument control in multimeter mode",
@@ -174,22 +152,25 @@ DEF_PAGE_3( pageDC,
     Page::Name::Function_Multimeter, PageFunction::pointer, FuncActive, OnPress_Page, FuncDrawPage, FuncRegSetPage
 )
 
-DEF_PAGE_3(pageAC,
-    "МУЛЬТИМЕТР", "MULTIMETER",
-    "Управление прибором в режиме мультиметра",
-    "Instrument control in multimeter mode",
-    &cMode,
-    &cRangesVoltageAC,
-    &cAVP,
-    Page::Name::Function_Multimeter, PageFunction::pointer, FuncActive, OnPress_Page, FuncDrawPage, FuncRegSetPage
-)
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void PageFunction::PageMultimeter::OnChanged_Mode(bool)
+{
+    PageBase *page = (PageBase *)&pageMultimeter;
 
-DEF_PAGE_3(pageResistance,
-    "МУЛЬТИМЕТР", "MULTIMETER",
-    "Управление прибором в режиме мультиметра",
-    "Instrument control in multimeter mode",
-    &cMode,
-    &cRangesResistance,
-    &cAVP,
-    Page::Name::Function_Multimeter, PageFunction::pointer, FuncActive, OnPress_Page, FuncDrawPage, FuncRegSetPage
-)
+    Control **items = (Control **)page->items;
+
+    if (MULTI_MEASURE == Multimeter::Measure::VoltageDC)
+    {
+        items[1] = (Control *)&cRangesVoltageDC;
+    }
+    else if (MULTI_MEASURE == Multimeter::Measure::VoltageAC)
+    {
+        items[1] = (Control *)&cRangesVoltageAC;
+    }
+    else if (MULTI_MEASURE == Multimeter::Measure::Resistance)
+    {
+        items[1] = (Control *)&cRangesResistance;
+    }
+
+    Multimeter::ChangeMode();
+}
