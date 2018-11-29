@@ -60,3 +60,15 @@ pString ModeCouple::UGO() const
     static pString couple[] = { "\x92", "\x91", "\x90" };
     return couple[value];
 }
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+pString Chan::Name() const
+{
+    static pString names[Chan::Number][2] =
+    {
+        "Канал 1", "Channel 1",
+        "Канал 2", "Channel 2"
+    };
+
+    return names[value][LANG];
+}

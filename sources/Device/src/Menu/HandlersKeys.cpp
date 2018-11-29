@@ -2,6 +2,7 @@
 #include <stm32f4xx.h>
 #include "log.h"
 #include "HandlersKeys.h"
+#include "Display/Painter.h"
 #include "FPGA/FPGA.h"
 #include "Hardware/Timer.h"
 #include "Menu/Menu.h"
@@ -26,7 +27,7 @@ typedef void(*pFuncVChI)(Chan::E, int);
 /// ќбрабатываемое событие
 static KeyEvent event;
 ///  анал, параметры которого нужно временно выводить
-static Chan::E drawingChan = Chan::A;
+static Chan drawingChan = Chan(Chan::A);
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -175,15 +176,33 @@ static void RangeMoreB()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void DrawParametersChannel()
 {
-    
+    int x = Grid::Left() + 5;
+    int y = Grid::Top() + 5;
+    int width = 126;
+    int height = 15;
+    Chan::E ch = drawingChan.value;
+
+    Painter::DrawBoundedRegion(x, y, width, height, Color::BACK, Color::Channel(ch));
+
+    char forRShift[50];
+    char buffer[50];
+    sprintf(buffer, "%s : %s %s",
+        drawingChan.Name(),
+        ModeCouple(SET_COUPLE(ch)).UGO(),
+        Range(SET_RANGE(ch)).Name()
+    );
+
+    Painter::DrawBigText(x + 3, y + 3, 1, buffer, Color::Channel(ch));
+
+    Painter::DrawBigText(x + 80, y + 3, 1, RShift::ToString(SET_RSHIFT(ch), SET_RANGE(ch), SET_DIVIDER(ch), forRShift));
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void OnChangeParameterChannel(pFuncVChI func, Chan::E ch, int delta)
 {
-    drawingChan = ch;
+    drawingChan = Chan(ch);
 
-    Display::SetAddDrawFunction(DrawParametersChannel, 1000);
+    Display::SetAddDrawFunction(DrawParametersChannel, 5000);
 
     func(ch, delta);
 }

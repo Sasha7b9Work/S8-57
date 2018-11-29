@@ -88,8 +88,10 @@ void Painter::DrawVLine(int x, float y0, float y1, Color color)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Painter::DrawBoundedRegion(int x, int y, int width, int height, Color colorFill, Color colorBound)
 {
+    Color color = currentColor;
     DrawRectangle(x, y, width, height, colorBound);
     FillRegion(x + 1, y + 1, width - 2, height - 2, colorFill);
+    SetColor(color);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

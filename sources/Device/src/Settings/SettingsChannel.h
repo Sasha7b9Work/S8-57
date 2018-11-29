@@ -64,6 +64,7 @@ struct Chan
     int PointsInChannel() const;
     /// Возвращает количество памяти, требуемой для сохранения данных одного канала
     int RequestBytes(DataSettings *ds) const;
+    pString Name() const;
 };
 
 struct Bandwidth
