@@ -305,8 +305,8 @@ char *Current::ToString(char buffer[50]) const
 
     pString suf[2][4] =
     {
-        {"\x10ÏÍA", "\x10ÏA", "\x10A", "\x10ÍA"},
-        {"\x10uA",  "\x10mA", "\x10A", "\x10kA"}
+        { "\x10ÏÍ¿", "\x10Ï¿", "\x10¿", "\x10Í¿" },
+        { "\x10u¿",  "\x10m¿", "\x10¿", "\x10k¿"}
     };
 
     static const float factor[4] = { 1e6f, 1e3f, 1.0f, 1e-3f };
