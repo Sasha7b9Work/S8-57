@@ -30,7 +30,7 @@ static void OnChange_VoltageDC(bool active)
     }
 }
 
-DEF_CHOICE_3(   cRangesVoltageDC,                                                                                        //--- МУЛЬТИМЕТР - Предел ---
+DEF_CHOICE_3(   cRangesVoltageDC,                                                                                                                               //--- МУЛЬТИМЕТР - Предел ---
     "Предел", "Range",
     "Диапазон измерения", "Мeasurement range",
     "2 В",   "2 V",
@@ -53,7 +53,7 @@ static void OnChange_VoltageAC(bool active)
     }
 }
 
-DEF_CHOICE_3(   cRangesVoltageAC,                                                                                        //--- МУЛЬТИМЕТР - Предел ---
+DEF_CHOICE_3(   cRangesVoltageAC,                                                                                                                               //--- МУЛЬТИМЕТР - Предел ---
     "Предел", "Range",
     "Диапазон измерения", "Measurement range",
     "2 В",   "2 V",
@@ -77,7 +77,7 @@ static void OnChange_Resistance(bool active)
     }
 }
 
-DEF_CHOICE_4(   cRangesResistance,                                                                                       //--- Мультиметр - Предел ---
+DEF_CHOICE_4(   cRangesResistance,                                                                                                                              //--- Мультиметр - Предел ---
     "Предел", "Range",
     "Диапазон измерения", "Measurement range",
     "2 кОм", "2 kOhm",
