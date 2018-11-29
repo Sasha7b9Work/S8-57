@@ -20,6 +20,9 @@ public:
 
     char *ToString(TBase::E tBase, char buffer[20]) const;
 
+    char *CString(TBase::E tBase) const;
+
 private:
     int value;
+//    String string;
 };

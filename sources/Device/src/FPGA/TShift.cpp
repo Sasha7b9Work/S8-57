@@ -78,3 +78,9 @@ char *TShift::ToString(TBase::E tBase, char buffer[20]) const
     
     return Time(FPGAMath::TShift2Abs(val, tBase)).ToString(true, buffer);
 }
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+char *TShift::CString(TBase::E) const
+{
+    return 0;
+}
