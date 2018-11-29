@@ -5,10 +5,12 @@
 #include "Tester.h"
 #include "Display/Display.h"
 #include "FPGA/FPGA.h"
+#include "FPGA/FPGAMath.h"
 #include "Hardware/FSMC.h"
 #include "Hardware/Hardware.h"
 #include "Hardware/Timer.h"
 #include "Settings/Settings.h"
+#include "Utils/Values.h"
 #endif
 
 
@@ -326,4 +328,17 @@ pString Tester::Scale::ToString() const
     }
 
     return 0;
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+pString Tester::Shift::ToString(Scale::E scale, char buffer[50])
+{
+    if (ch == Chan::A)
+    {
+        return RShift::ToString(shift, (Range::E)scale, Divider::_1, buffer);
+    }
+
+    float shiftAbs = FPGAMath::RShift2Abs(shift,  (Range::E)scale) * 1e-3f;
+
+    return Current(shiftAbs).ToString(buffer);
 }

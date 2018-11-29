@@ -27,7 +27,7 @@ bool Cursors::NecessaryDraw()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 pString Cursors::Voltage(Chan::E source, int numCur, char buffer[20])
 {
-    float voltage = MathFPGA::VoltageCursor(Cursors::PosU(source, numCur), SET_RANGE(source), SET_RSHIFT(source));
+    float voltage = FPGAMath::VoltageCursor(Cursors::PosU(source, numCur), SET_RANGE(source), SET_RSHIFT(source));
     if (SET_DIVIDER_10(source))
     {
         voltage *= 10.0f;

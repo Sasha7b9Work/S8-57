@@ -33,7 +33,7 @@ bool Trig::SyncPulse()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static pString ToString(uint16 trigLev, Range::E range, Divider::E divider, char buffer[20])
 {
-    float trigLevVal = MathFPGA::RShift2Abs(trigLev, range) * Divider(divider).ToAbs();
+    float trigLevVal = FPGAMath::RShift2Abs(trigLev, range) * Divider(divider).ToAbs();
     return Voltage(trigLevVal).ToString(true, buffer);
 }
 

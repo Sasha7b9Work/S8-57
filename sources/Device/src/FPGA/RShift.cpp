@@ -39,6 +39,6 @@ void RShift::Draw(Chan::E ch)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 pString RShift::ToString(uint16 rShiftRel, Range::E range, Divider::E divider, char buffer[20])
 {
-    float rShiftVal = MathFPGA::RShift2Abs(rShiftRel, range) * Divider(divider).ToAbs();
+    float rShiftVal = FPGAMath::RShift2Abs(rShiftRel, range) * Divider(divider).ToAbs();
     return Voltage(rShiftVal).ToString(true, buffer);
 }

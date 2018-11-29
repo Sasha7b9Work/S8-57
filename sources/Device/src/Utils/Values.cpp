@@ -244,6 +244,7 @@ char* Time::ToStringAccuracy(bool alwaysSign, char buffer[20], int numDigits) co
     return buffer;
 }
 
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 char* Voltage::ToString(bool alwaysSign, char buffer[20]) const
 {
     float voltage = value;
@@ -285,6 +286,55 @@ char* Voltage::ToString(bool alwaysSign, char buffer[20]) const
     CHAR_BUF(bufferOut, 20);
 
     Float(voltage * factor[num]).ToString(alwaysSign, 4, bufferOut);
+
+    std::strcpy(buffer, bufferOut);
+    std::strcat(buffer, suf[LANG][num]);
+    return buffer;
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+char *Current::ToString(char buffer[50]) const
+{
+    float current = value;
+
+    if (Math::IsEquals(current, ERROR_VALUE_FLOAT))
+    {
+        std::strcpy(buffer, ERROR_STRING_VALUE);
+        return buffer;
+    }
+
+    pString suf[2][4] =
+    {
+        {"\x10ÏÍA", "\x10ÏA", "\x10A", "\x10ÍA"},
+        {"\x10uA",  "\x10mA", "\x10A", "\x10kA"}
+    };
+
+    static const float factor[4] = { 1e6f, 1e3f, 1.0f, 1e-3f };
+
+    int num = 0;
+
+    float absValue = std::fabsf(current) + 0.5e-4f;
+
+    if (absValue < 1e-3f)
+    {
+        num = 0;
+    }
+    else if (absValue < 1.0f)
+    {
+        num = 1;
+    }
+    else if (absValue < 1e3f)
+    {
+        num = 2;
+    }
+    else
+    {
+        num = 3;
+    }
+
+    CHAR_BUF(bufferOut, 20);
+
+    Float(current * factor[num]).ToString(true, 4, bufferOut);
 
     std::strcpy(buffer, bufferOut);
     std::strcat(buffer, suf[LANG][num]);

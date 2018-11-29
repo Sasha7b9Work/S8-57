@@ -39,30 +39,6 @@ public:
 
     static int DeltaRShiftA();
 
-    struct Scale
-    {
-        enum E
-        {
-            _2uA,
-            _5uA,
-            _10uA,
-            _20uA,
-            _50uA,
-            _100uA,
-            _200uA,
-            _500uA,
-            _1mA,
-            _2mA,
-            _5mA,
-            _10mA,
-            _20mA,
-            Number
-        } value;
-        Chan::E ch;
-        explicit Scale(Range::E range, Chan::E _ch) : value((E)range), ch(_ch) {};
-        pString ToString() const;
-    };
-
     struct Graphics
     {
     public:
@@ -151,5 +127,40 @@ public:
             Points
         } value;
         explicit ViewMode(E v) : value(v) {};
+    };
+
+    /// Масштаб
+    struct Scale
+    {
+        enum E
+        {
+            _2uA,
+            _5uA,
+            _10uA,
+            _20uA,
+            _50uA,
+            _100uA,
+            _200uA,
+            _500uA,
+            _1mA,
+            _2mA,
+            _5mA,
+            _10mA,
+            _20mA,
+            Number
+        } value;
+        Chan::E ch;
+        explicit Scale(Range::E range, Chan::E _ch) : value((E)range), ch(_ch) {};
+        pString ToString() const;
+    };
+
+    /// Смещение
+    struct Shift
+    {
+        Shift(uint16 rShift, Chan::E _ch) : shift(rShift), ch(_ch) {};
+        pString ToString(Scale::E scale, char buffer[50]);
+    private:
+        uint16 shift;
+        Chan::E ch;
     };
 };

@@ -503,14 +503,14 @@ static bool OnRegSet_Function(int delta)
         static int sum = 0;
         sum -= delta;
 
-        float rShiftAbs = MathFPGA::RShift2Abs(SET_RSHIFT_MATH, SET_RANGE_MATH);
+        float rShiftAbs = FPGAMath::RShift2Abs(SET_RSHIFT_MATH, SET_RANGE_MATH);
 
         if (sum > 2)
         {
             if (SET_RANGE_MATH < Range::Number - 1)
             {
                 SET_RANGE_MATH = (Range::E)((uint8)(SET_RANGE_MATH + 1));  // SET_RANGE_MATH++;
-                SET_RSHIFT_MATH = (uint16)MathFPGA::RShift2Rel(rShiftAbs, SET_RANGE_MATH);
+                SET_RSHIFT_MATH = (uint16)FPGAMath::RShift2Rel(rShiftAbs, SET_RANGE_MATH);
                 Sound::RegulatorSwitchRotate();
             }
             sum = 0;
@@ -520,7 +520,7 @@ static bool OnRegSet_Function(int delta)
             if (SET_RANGE_MATH > 0)
             {
                 SET_RANGE_MATH = (Range::E)((uint8)(SET_RANGE_MATH - 1));  // SET_RANGE_MATH--;
-                SET_RSHIFT_MATH = (uint16)MathFPGA::RShift2Rel(rShiftAbs, SET_RANGE_MATH);
+                SET_RSHIFT_MATH = (uint16)FPGAMath::RShift2Rel(rShiftAbs, SET_RANGE_MATH);
                 Sound::RegulatorSwitchRotate();
             }
             sum = 0;
