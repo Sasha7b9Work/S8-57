@@ -443,16 +443,16 @@ void FPGA::GPIO_Init()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void FPGA::IncreaseRange(Chan::E ch)
+void FPGA::ChangeRange(Chan::E ch, int delta)
 {
-    Math::LimitationIncrease<uint8>((uint8 *)(&SET_RANGE(ch)), (uint8)(Range::Number - 1));
-    LoadRanges();
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void FPGA::DecreaseRange(Chan::E ch)
-{
-    Math::LimitationDecrease<uint8>((uint8 *)(&SET_RANGE(ch)), 0);
+    if (delta > 0)
+    {
+        Math::LimitationIncrease<uint8>((uint8 *)(&SET_RANGE(ch)), (uint8)(Range::Number - 1));
+    }
+    else
+    {
+        Math::LimitationDecrease<uint8>((uint8 *)(&SET_RANGE(ch)), 0);
+    }
     LoadRanges();
 }
 

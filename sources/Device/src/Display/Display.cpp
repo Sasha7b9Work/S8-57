@@ -128,6 +128,11 @@ void Display::Update()
 
     Console::Draw();
 
+    if (funcAdditionDraw)
+    {
+        funcAdditionDraw();
+    }
+
     Painter::EndScene();
 }
 

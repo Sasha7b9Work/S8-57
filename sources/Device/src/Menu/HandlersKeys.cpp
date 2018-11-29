@@ -13,6 +13,7 @@
 #include "Menu/Pages/Include/PageTime.h"
 #include "Menu/Pages/Include/PageTrig.h"
 #include "Menu/Pages/Include/PageDisplay.h"
+#include "Osci/BottomPart.h"
 #include "Settings/Settings.h"
 
 
@@ -22,13 +23,15 @@ typedef void(*pFuncVChI)(Chan::E, int);
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-KeyEvent Handlers::event;
+/// Обрабатываемое событие
+static KeyEvent event;
+/// Канал, параметры которого нужно временно выводить
+static Chan::E drawingChan;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 static void RangeMoreB();
 /// Общий обработчик изменения параметра канала - масштаба или смещения
-static void OnChangeParameterChannel(pFuncVCh, Chan::E);
 static void OnChangeParameterChannel(pFuncVChI, Chan::E, int);
 
 
@@ -41,7 +44,7 @@ void Handlers::Process(KeyEvent e)
     {                   // Press        Repead       Release        Long
         /* None        */ {E,           E,           E,             E},
         /* Function    */ {E,           E,           Function,      E},
-        /* Measure    */  {Measure,     Measure,     Measure,       Measure},
+        /* Measure     */ {Measure,     Measure,     Measure,       Measure},
         /* Memory      */ {Memory,      Memory,      Memory,        Memory},
         /* Service     */ {Service,     Service,     Service,       Service},
         /* ChannelA    */ {ChannelA,    E,           E,             E},
@@ -148,36 +151,38 @@ void Handlers::RShiftMoreB()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Handlers::RangeLessA()
 {
-    OnChangeParameterChannel(FPGA::DecreaseRange, Chan::A);
+    OnChangeParameterChannel(FPGA::ChangeRange, Chan::A, -1);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Handlers::RangeMoreA()
 {
-    OnChangeParameterChannel(FPGA::IncreaseRange, Chan::A);
+    OnChangeParameterChannel(FPGA::ChangeRange, Chan::A, +1);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Handlers::RangeLessB()
 {
-    OnChangeParameterChannel(FPGA::DecreaseRange, Chan::B);
+    OnChangeParameterChannel(FPGA::ChangeRange, Chan::B, -1);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void RangeMoreB()
 {
-    OnChangeParameterChannel(FPGA::IncreaseRange, Chan::B);
+    OnChangeParameterChannel(FPGA::ChangeRange, Chan::B, +1);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void OnChangeParameterChannel(pFuncVCh func, Chan::E ch)
+static void DrawParametersChannel()
 {
-    func(ch);
+    BottomPart::WriteTextVoltage(drawingChan, Grid::Left(), Grid::Top());
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void OnChangeParameterChannel(pFuncVChI func, Chan::E ch, int delta)
 {
+    Display::SetAddDrawFunction(DrawParametersChannel);
+
     func(ch, delta);
 }
 

@@ -45,8 +45,6 @@ private:
     static void Display();
 
     static void OpenPage(const PageBase *page);
-
-    static KeyEvent event;
 };
 
 

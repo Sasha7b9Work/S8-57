@@ -58,9 +58,7 @@ public:
 
     static void LoadSettings();
 
-    static void IncreaseRange(Chan::E ch);
-
-    static void DecreaseRange(Chan::E ch);
+    static void ChangeRange(Chan::E ch, int delta);
 
     static void IncreaseTBase();
 
