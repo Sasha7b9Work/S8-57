@@ -61,6 +61,7 @@ static bool isSet = false;          ///< Если true, то сигнал назначен.
 
 static int firstByte = 0;
 static int lastByte = 0;
+/// Количество байт, по которым производятся расчёты
 static int nBytes = 0;
 
 
@@ -189,13 +190,6 @@ float CalculateVoltageMax(Chan::E ch)
     {
         Measure::SetMarkerVoltage(ch, 0, max);      // Здесь не округляем, потому что max может быть только целым
     }
-    
-    if (ch == Chan::A)
-    {
-        ch = ch;
-    }
-
-    volatile DataSettings *ds = DS;
     
     Range::E range = RANGE_DS(ch);
 
@@ -444,7 +438,13 @@ int CalculatePeriodAccurately(Chan::E ch)
 {
     static int period[2];
 
-    int *sums = (int *)std::malloc(FPGA_MAX_NUM_POINTS);
+    int *sums = (int *)std::malloc(nBytes);
+
+    if (sums == 0)
+    {
+        LOG_ERROR("Нет памяти");
+        return 0;
+    }
 
     uint8 *dataIn = CHOICE_BUFFER;
 
