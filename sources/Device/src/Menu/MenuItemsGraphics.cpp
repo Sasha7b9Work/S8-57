@@ -28,9 +28,9 @@ static void DrawValueWithSelectedPosition(int x, int y, int value, int numDigits
 /// попадает в даннуй промежуток.
 static Key::E GetFuncButtonFromX(int _x)
 {
-    int x = Grid::Left() + Grid::Width() / 10;
+    int x = Display::WIDTH / 10;
 
-    int step = Grid::Width() / 5;
+    int step = Display::WIDTH / 5;
 
     Key::E button = Key::F1;
 
@@ -436,7 +436,8 @@ void Page::DrawItems(int x, int y)
         if (item)
         {
             item->Draw(x, y, false);
-            Menu::SetItemUnderButton(GetFuncButtonFromX(x), item);
+            Key::E button = GetFuncButtonFromX(x);
+            Menu::SetItemUnderButton(button, item);
         }
 
         x += Menu::Item::WIDTH;

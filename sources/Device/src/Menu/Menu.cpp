@@ -807,7 +807,7 @@ void Menu::ResetItemsUnderButton()
 {
     for (int i = 0; i < Key::Number; i++)
     {
-        underButton[i] = 0;
+        SetItemUnderButton((Key::E)i, 0);
     }
 }
 
