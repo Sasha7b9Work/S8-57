@@ -20,13 +20,6 @@ const float PageMeasures::PageCursors::PageSet::MAX_POS_T = 280.0f;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/*
-DEF_SMALL_BUTTON_EXIT(bSet_Exit,                                                                    //--- ИЗМЕРЕНИЯ - КУРСОРЫ - УСТАНОВИТЬ - Выход ---
-    pageSet, FuncActive, OnPressSB_Exit, DrawSB_Exit
-)
-*/
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void Draw_Set_ChannelA(int x, int y)
 {
     Painter::DrawText(x + 7, y + 5, "1");
@@ -49,7 +42,7 @@ void PageMeasures::PageCursors::PageSet::Draw_Set_Channel(int x, int y)
     func[CURS_SOURCE](x, y);
 }
 
-DEF_SMALL_BUTTON_HINTS_2(bSet_Channel,                                                              //--- ИЗМЕРЕНИЯ - КУРСОРЫ - УСТАНОВИТЬ - Канал ---
+DEF_SMALL_BUTTON_HINTS_2(bSet_Channel,                                                                                                     //--- ИЗМЕРЕНИЯ - КУРСОРЫ - УСТАНОВИТЬ - Канал ---
     "Канал", "Chan",
     "Выбор канала для курсорных измерений",
     "Chan choice for measurements",
@@ -126,7 +119,7 @@ static void Draw_Set_T(int x, int y)
     }
 }
 
-DEF_SMALL_BUTTON_HINTS_5(bSet_T,                                                                //--- ИЗМЕРЕНИЯ - КУРСОРЫ - УСТАНОВИТЬ - Курсоры Т ---
+DEF_SMALL_BUTTON_HINTS_5(bSet_T,                                                                                                       //--- ИЗМЕРЕНИЯ - КУРСОРЫ - УСТАНОВИТЬ - Курсоры Т ---
     "Курсоры T", "Cursors T",
     "Выбор курсоров времени для индикации и управления",
     "Choice of cursors of time for indication and management",
@@ -207,7 +200,7 @@ static void Draw_Set_U(int x, int y)
 }
 
 // Выбор курсора напряжения - курсор 1, курсор 2, оба курсора или отключены.
-DEF_SMALL_BUTTON_HINTS_5(bSet_U,                                                                //--- ИЗМЕРЕНИЯ - КУРСОРЫ - УСТАНОВИТЬ - Курсоры U ---
+DEF_SMALL_BUTTON_HINTS_5(bSet_U,                                                                                                       //--- ИЗМЕРЕНИЯ - КУРСОРЫ - УСТАНОВИТЬ - Курсоры U ---
     "Курсоры U", "Cursors U",
     "Выбор курсоров напряжения для индикации и управления",
     "Choice of cursors of voltage for indication and management",
@@ -238,7 +231,7 @@ static void Draw_Set_100(int x, int y)
 }
 
 // Установка 100 процентов в текущие места курсоров.
-DEF_SMALL_BUTTON(bSet_100,                                                                           //--- ИЗМЕРЕНИЯ - КУРСОРЫ - УСТАНОВИТЬ - 100% ---
+DEF_SMALL_BUTTON(bSet_100,                                                                                                                  //--- ИЗМЕРЕНИЯ - КУРСОРЫ - УСТАНОВИТЬ - 100% ---
     "100%", "100%",
     "Используется для процентных измерений. Нажатие помечает расстояние между активными курсорами как 100%",
     "It is used for percentage measurements. Pressing marks distance between active cursors as 100%",
@@ -275,7 +268,7 @@ static void Draw_Set_Movement(int x, int y)
     }
 }
 
-DEF_SMALL_BUTTON_HINTS_2(bSet_Movement,                                                       //--- ИЗМЕРЕНИЯ - КУРСОРЫ - УСТАНОВИТЬ - Перемещение ---
+DEF_SMALL_BUTTON_HINTS_2(bSet_Movement,                                                                                              //--- ИЗМЕРЕНИЯ - КУРСОРЫ - УСТАНОВИТЬ - Перемещение ---
     "Перемещение", "Movement",
     "Выбор шага перемещения курсоров - проценты или точки",
     "Choice of a step of movement of cursors - percent or points",
@@ -330,7 +323,7 @@ bool PageMeasures::PageCursors::PageSet::OnRegSet(int angle)
 }
 
 /*
-DEF_PAGE_SB(pageSet,                                                                                        //--- ИЗМЕРЕНИЯ - КУРСОРЫ - УСТАНОВИТЬ ---
+DEF_PAGE_SB(pageSet,                                                                                                                               //--- ИЗМЕРЕНИЯ - КУРСОРЫ - УСТАНОВИТЬ ---
     "УСТАНОВИТЬ", "SET",
     "Переход в режим курсорных измерений",
     "Switch to cursor measures",
@@ -346,7 +339,7 @@ DEF_PAGE_SB(pageSet,                                                            
 */
 
 
-DEF_PAGE_5(pageSet,                                                                                        //--- ИЗМЕРЕНИЯ - КУРСОРЫ - УСТАНОВИТЬ ---
+DEF_PAGE_5(pageSet,                                                                                                                                //--- ИЗМЕРЕНИЯ - КУРСОРЫ - УСТАНОВИТЬ ---
     "УСТАНОВИТЬ", "SET",
     "Переход в режим курсорных измерений",
     "Switch to cursor measures",

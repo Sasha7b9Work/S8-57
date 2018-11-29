@@ -438,7 +438,7 @@ int CalculatePeriodAccurately(Chan::E ch)
 {
     static int period[2];
 
-    int *sums = (int *)std::malloc(nBytes);
+    int *sums = (int *)std::malloc((uint)nBytes);
 
     if (sums == 0)
     {
@@ -1073,7 +1073,7 @@ float CalculatePhazaMinus(Chan::E ch)
 
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Measure::SetData(bool needSmoothing)
+void Measure::SetData(bool /*needSmoothing*/)
 {
     isSet = true;
 
@@ -1101,7 +1101,7 @@ void Measure::SetData(bool needSmoothing)
         }
     }
     
-    int length = NUM_BYTES_DS;
+//    int length = NUM_BYTES_DS;
 
     if (ENABLED_DS_A)
     {
