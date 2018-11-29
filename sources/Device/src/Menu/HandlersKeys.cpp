@@ -1,4 +1,5 @@
 #include "defines.h"
+#include "device.h"
 #include <stm32f4xx.h>
 #include "log.h"
 #include "HandlersKeys.h"
@@ -224,9 +225,12 @@ static void DrawParametersChannel()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void OnChangeParameterChannel(pFuncVChI func, Chan::E ch, int delta)
 {
-    drawingChan = Chan(ch);
+    if (Device::CurrentMode() == Device::Mode::Osci)
+    {
+        drawingChan = Chan(ch);
 
-    Display::SetAddDrawFunction(DrawParametersChannel, 5000);
+        Display::SetAddDrawFunction(DrawParametersChannel, 5000);
+    }
 
     func(ch, delta);
 }
@@ -234,7 +238,10 @@ static void OnChangeParameterChannel(pFuncVChI func, Chan::E ch, int delta)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void OnChangeParameterTime(pFuncVI func, int delta)
 {
-    Display::SetAddDrawFunction(DrawParametersTime, 5000);
+    if (Device::CurrentMode() == Device::Mode::Osci)
+    {
+        Display::SetAddDrawFunction(DrawParametersTime, 5000);
+    }
 
     func(delta);
 }

@@ -58,6 +58,11 @@ void Device::Init()
         SetMode(Mode::Multimeter);
     }
 
+    if (Menu::OpenedItem() == (Page *)PageFunction::PageTester::pointer)
+    {
+        SetMode(Mode::Tester);
+    }
+
 #endif
 }
 

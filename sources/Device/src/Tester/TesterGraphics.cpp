@@ -137,7 +137,7 @@ static void DrawLegend(int x, int y)
     for (int i = 0; i < Tester::NUM_STEPS; i++)
     {
         Painter::DrawHLine(y + 4 + i * 8, x + 1, x + 10, ColorForStep(i));
-        Painter::DrawText(x + 12, y + i * 8, ValueForStep(i), Color::FILL);
+        Painter::DrawText(x + 12, y + i * 8, ValueForStep(i));
     }
 }
 
