@@ -103,7 +103,7 @@ bool Decoder::DrawTesterPoints(uint8 data)
     static Color color = Color::FILL;
     static uint8 mode = 0;
 
-    static uint8 buffer[TESTER_NUM_POINTS * 2];
+    static uint8 buffer[TESTER_NUM_POINTS * 3];
 
     if(step == 0)
     {
@@ -119,11 +119,20 @@ bool Decoder::DrawTesterPoints(uint8 data)
     }
     else
     {
-        buffer[numPoint++] = data;
+        if (numPoint < TESTER_NUM_POINTS)   // Если первые точки, то это иксы - ложим их в младшие байты полуслов
+        {
+            uint16 *pointer = (uint16 *)buffer;
+            pointer[numPoint++] = data;
+        }
+        else
+        {
+            buffer[numPoint + TESTER_NUM_POINTS] = data;
+            numPoint++;
+        }
 
         if(numPoint == TESTER_NUM_POINTS * 2)
         {
-            Painter::DrawTesterData(mode, color, buffer, buffer + TESTER_NUM_POINTS);
+            Painter::DrawTesterData(mode, color, (uint16 *)buffer, buffer + TESTER_NUM_POINTS * 2);
             return true;
         }
     }

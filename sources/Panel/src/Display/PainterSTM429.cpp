@@ -205,9 +205,24 @@ void Painter::SetColor(Color color)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Painter::DrawTesterData(uint8 mode, Color color, uint8 x[TESTER_NUM_POINTS], uint8 y[TESTER_NUM_POINTS])
+template<typename T>
+static void RecountPoints(T *points, float scale)
+{
+    for (int i = 0; i < TESTER_NUM_POINTS; i++)
+    {
+        *points = (T)(*points * scale);
+        points++;
+    }
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Painter::DrawTesterData(uint8 mode, Color color, uint16 x[TESTER_NUM_POINTS], uint8 y[TESTER_NUM_POINTS])
 {
     SetColor(color);
+
+    RecountPoints(x, 320.0f / 240.0f);
+
+    RecountPoints(y, 240.0f / 255.0f);
 
     if(mode == 1)
     {

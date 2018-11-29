@@ -31,7 +31,7 @@ public:
     /// Загружает в дисплей все цвета
     static void LoadPalette();
 
-    static void DrawTesterData(uint8 mode, Color color, uint8 x[TESTER_NUM_POINTS], uint8 y[TESTER_NUM_POINTS]);
+    static void DrawTesterData(uint8 mode, Color color, uint16 x[TESTER_NUM_POINTS], uint8 y[TESTER_NUM_POINTS]);
     /// Установить цвет рисования
     /// Нарисовать точку текущим цветом
     static void SetPoint(int x, int y);
