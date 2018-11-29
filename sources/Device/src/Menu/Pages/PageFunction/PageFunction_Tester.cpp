@@ -10,8 +10,7 @@
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-extern const PageBase pTesterU;
-extern const PageBase pTesterI;
+extern const PageBase pageTester;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -27,32 +26,17 @@ DEF_CHOICE_2(   cPolarity,                                                      
     "Polarity of the test exposure",
     "+", "+",
     "-", "-",
-    TESTER_POLARITY, pTesterU, FuncActive, OnChanged_Polarity, FuncDraw
+    TESTER_POLARITY, pageTester, FuncActive, OnChanged_Polarity, FuncDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void PageFunction::PageTester::OnChanged_Control(bool)
-{
-    if(TESTER_CONTROL_IS_U)
-    {
-        pointer = &pTesterU;
-    }
-    else
-    {
-        pointer = &pTesterI;
-    }
-
-    Tester::LoadStep();
-}
-
-
 DEF_CHOICE_2(   cControl,                                                                                                                             //--- ÒÅÑÒÅÐ-ÊÎÌÏÎÍÅÍÒ - Óïðàâëåíèå ---
     "Óïðàâëåíèå", "Control",
     "Òèï èñïûòàòåëüíîãî âîçäåéñòâèÿ",
     "Type of test exposure",
     "Íàïðÿæåíèå", "Voltage",
     "Òîê", "Current",
-    TESTER_CONTROL, pTesterU, FuncActive, PageFunction::PageTester::OnChanged_Control, FuncDraw
+    TESTER_CONTROL, pageTester, FuncActive, PageFunction::PageTester::OnChanged_Control, FuncDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -67,7 +51,7 @@ DEF_CHOICE_2(   cStepU,                                                         
     "Test voltage step",
     "100 ìÂ", "100 mV",
     "500 ìÂ", "500 mV",
-    TESTER_STEP_U, pTesterU, FuncActive, OnChanged_Step, FuncDraw
+    TESTER_STEP_U, pageTester, FuncActive, OnChanged_Step, FuncDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -77,7 +61,7 @@ DEF_CHOICE_2(   cStepI,
     "Step test current",
     "4 ìÀ",  "4 mA",
     "20 ìÀ", "20 mA",
-    TESTER_STEP_I, pTesterI, FuncActive, OnChanged_Step, FuncDraw
+    TESTER_STEP_I, pageTester, FuncActive, OnChanged_Step, FuncDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -86,7 +70,7 @@ DEF_CHOICE_2(   cViewMode,
     "", "",
     "Ëèíèè", "Lines",
     "Òî÷êè", "Points",
-    TESTER_VIEW_MODE, pTesterU, FuncActive, FuncChangedChoice, FuncDraw
+    TESTER_VIEW_MODE, pageTester, FuncActive, FuncChangedChoice, FuncDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -98,12 +82,12 @@ DEF_CHOICE_5(   cSmoothing,
     "3", "3",
     "4", "4",
     "5", "5",
-    TESTER_NUM_SMOOTH, pTesterU, FuncActive, FuncChangedChoice, FuncDraw
+    TESTER_NUM_SMOOTH, pageTester, FuncActive, FuncChangedChoice, FuncDraw
 )
 
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-const PageBase *PageFunction::PageTester::pointer = &pTesterU;
+const PageBase *PageFunction::PageTester::pointer = &pageTester;
 
 void PageFunction::PageTester::Init()
 {
@@ -116,7 +100,7 @@ static void OnEnterExit_Tester(bool enter)
 }
 
 
-DEF_PAGE_4( pTesterU,
+DEF_PAGE_4( pageTester,
     "ÒÅÑÒÅÐ", "TESTER",
     "", "",
     &cControl,
@@ -127,13 +111,21 @@ DEF_PAGE_4( pTesterU,
     Page::Name::Function_Tester, PageFunction::pointer, FuncActive, OnEnterExit_Tester, FuncDrawPage, FuncRegSetPage
 )
 
-DEF_PAGE_4(pTesterI,
-    "ÒÅÑÒÅÐ", "TESTER",
-    "", "",
-    &cControl,
-    &cStepI,
-    &cPolarity,
-    &cViewMode,
-    //&cSmoothing,
-    Page::Name::Function_Tester, PageFunction::pointer, FuncActive, OnEnterExit_Tester, FuncDrawPage, FuncRegSetPage
-)
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void PageFunction::PageTester::OnChanged_Control(bool)
+{
+    PageBase *page = (PageBase *)&pageTester;
+
+    Control **items = (Control **)page->items;
+
+    if (TESTER_CONTROL_IS_U)
+    {
+        items[1] = (Control *)&cStepU;
+    }
+    else
+    {
+        items[1] = (Control *)&cStepI;
+    }
+
+    Tester::LoadStep();
+}
