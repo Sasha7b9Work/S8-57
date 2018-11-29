@@ -39,7 +39,31 @@ public:
 
     static int DeltaRShiftA();
 
-    class Graphics
+    struct Scale
+    {
+        enum E
+        {
+            _2uA,
+            _5uA,
+            _10uA,
+            _20uA,
+            _50uA,
+            _100uA,
+            _200uA,
+            _500uA,
+            _1mA,
+            _2mA,
+            _5mA,
+            _10mA,
+            _20mA,
+            Number
+        } value;
+        Chan::E ch;
+        explicit Scale(Range::E range, Chan::E _ch) : value((E)range), ch(_ch) {};
+        pString ToString() const;
+    };
+
+    struct Graphics
     {
     public:
         static void Update();

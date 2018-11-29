@@ -41,7 +41,7 @@ void Tester::Graphics::Update()
 
     DrawLegend(250, 10);
 
-    DrawParametersChannel(Chan::A, 258, 206);
+    DrawParametersChannel(Chan::A, 250, 206);
     DrawParametersChannel(Chan::B, 3, 3);
     
     Menu::Draw();
@@ -116,14 +116,15 @@ static void DrawLegend(int, int)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void DrawParametersChannel(Chan::E ch, int x, int y)
 {
-    Range::E range = SET_RANGE(ch);
+    Range range = Range(SET_RANGE(ch));
     Divider::E divider = SET_DIVIDER(ch);
     uint16 rShift = SET_RSHIFT(ch);
+    Tester::Scale scale(range.value, ch);
 
     Painter::SetColor(Color::FILL);
-    Painter::DrawTextOnBackground(x, y, Range(range).ToString(divider), Color::BACK);
+    Painter::DrawTextOnBackground(x, y, scale.ToString(), Color::BACK);
     Painter::SetColor(Color::FILL);
     char buffer[50];
-    Painter::DrawTextOnBackground(x + 15, y, RShift::ToString(rShift, range, divider, buffer), Color::BACK);
+    Painter::DrawTextOnBackground(x + ((ch == Chan::A) ? 25 : 35), y, RShift::ToString(rShift, range.value, divider, buffer), Color::BACK);
 
 }
