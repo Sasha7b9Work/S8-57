@@ -16,6 +16,7 @@
 #include "Menu/Pages/Include/PageDisplay.h"
 #include "Osci/BottomPart.h"
 #include "Settings/Settings.h"
+#include "Utils/String.h"
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -190,9 +191,7 @@ static void DrawParametersTime()
     Painter::DrawBoundedRegion(x, y, width, height, Color::BACK, Color::FILL);
 
     char buffer[50];
-    sprintf(buffer, "Разв : %s",TBase(SET_TBASE).Name());
-
-    Painter::DrawText(x + 3, y + 3, buffer, Color::FILL);
+    Painter::DrawText(x + 3, y + 3, String("Разв : %s",TBase(SET_TBASE).Name()).CString(), Color::FILL);
 
     TShift shift(SET_TSHIFT);
 

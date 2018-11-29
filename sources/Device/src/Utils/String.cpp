@@ -5,7 +5,7 @@
 #include <cstring>
 #include <cstdio>
 #include <cstdlib>
-#include <cstdarg>
+#include <stdarg.h>
 #endif
 
 
@@ -14,7 +14,7 @@ String::String(char *format, ...)
 {
     char buf[100];
 
-    std::va_list args;
+    va_list args;
     va_start(args, format);
     vsprintf(buf, format, args);
     va_end(args);
