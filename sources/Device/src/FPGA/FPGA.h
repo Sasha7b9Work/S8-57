@@ -60,9 +60,7 @@ public:
 
     static void ChangeRange(Chan::E ch, int delta);
 
-    static void IncreaseTBase();
-
-    static void DecreaseTBase();
+    static void TBaseChange(int delta);
 
     static void RShiftChange(Chan::E ch, int delta);
 
