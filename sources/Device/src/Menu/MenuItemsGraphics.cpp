@@ -594,7 +594,7 @@ static void DrawGovernorChoiceColorFormulaHiPart(Control *item, int x, int y, bo
 
     Painter::FillRegion(x + 1, y + (opened ? 1 : 2), width + (opened ? 2 : 1), Menu::Item::Value::HEIGHT - (opened ? 2 : 3), Color::MenuItem(false));
 
-    Painter::DrawText(x + delta + (opened ? 4 : 6), y + delta + (opened ? 2 : 3), item->Title(), color, true);
+    Painter::DrawText(x + delta + (opened ? 4 : 6), y + delta + (opened ? 2 : 3), item->Title(), color);
 
     if (opened)
     {

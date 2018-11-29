@@ -126,7 +126,7 @@ void Painter::DrawVLine(int x, int y0, int y1, Color color)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-int Painter::DrawText(int x, int y, const char *text, Color color, bool)
+int Painter::DrawText(int x, int y, const char *text, Color color)
 {
     /// \todo Такую проверку нужно сделать и на приёмной стороне и тогда здесь убрать
 

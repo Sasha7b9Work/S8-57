@@ -305,7 +305,7 @@ char *Current::ToString(char buffer[50]) const
 
     pString suf[2][4] =
     {
-        { "\x10ÏÍ¿", "\x10Ï¿", "\x10¿", "\x10Í¿" },
+            { "\x10ÏÍ¿", "\x10Ï¿", "\x10¿", "\x10Í¿" },
         { "\x10u¿",  "\x10m¿", "\x10¿", "\x10k¿"}
     };
 

@@ -1,4 +1,5 @@
 #pragma once
+#include "Display/Colors.h"
 #include "Settings/SettingsChannel.h"
 #include "Command.h"
 
@@ -45,9 +46,6 @@ public:
         static void Update();
 
         static void SetPoints(int numStep, uint8 dx[TESTER_NUM_POINTS], uint8 dy[TESTER_NUM_POINTS]);
-
-    private:
-        static void DrawData(int numStep, int x0, int y0);
     };
 
 private:

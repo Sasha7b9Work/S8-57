@@ -25,6 +25,12 @@ static array *dat = (array *)OUT_A;
 static void DrawLegend(int x, int y);
 /// Отображает параметры одного канала
 static void DrawParametersChannel(Chan::E ch, int x, int y);
+/// Возвращает цвет, которым нужно рисовать соответствующую "ступеньку"
+static Color ColorForStep(int step);
+/// Рисовать данные ступеньки numStep
+static void DrawData(int step, int x0, int y0);
+/// Возвращает числовое значение величины соответствующей "ступеньки"
+static pString ValueForStep(int step);
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -39,7 +45,7 @@ void Tester::Graphics::Update()
         DrawData(i, 0, 0);
     }
 
-    DrawLegend(250, 10);
+    DrawLegend(274, 2);
 
     DrawParametersChannel(Chan::A, 250, 206);
     DrawParametersChannel(Chan::B, 3, 3);
@@ -58,13 +64,29 @@ static void RecountPoints(uint8 *points, float scale)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Tester::Graphics::DrawData(int numStep, int /*x0*/, int /*y0*/)
+static Color ColorForStep(int _step)
+{
+    static const Color colors[Tester::NUM_STEPS] = {Color::FILL, Color::GRID, Color::RED, Color::GREEN, Color::BLUE};
+
+    if (_step < Tester::NUM_STEPS)
+    {
+        return colors[_step];
+    }
+    else
+    {
+        LOG_ERROR("Неправильный шаг");
+    }
+
+    return Color::FILL;
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+static void DrawData(int numStep, int /*x0*/, int /*y0*/)
 {
     if(!ready[numStep])
     {
         //return;
     }
-    static const Color colors[5] = {Color::FILL, Color::GRID, Color::RED, Color::GREEN, Color::BLUE};
 
     uint8 *x = &(*dat)[Chan::A][numStep][0];
     uint8 *y = &(*dat)[Chan::B][numStep][0];
@@ -74,11 +96,11 @@ void Tester::Graphics::DrawData(int numStep, int /*x0*/, int /*y0*/)
       
     if(TESTER_VIEW_MODE_IS_LINES)
     {
-        Painter::DrawTesterData((uint8)TESTER_VIEW_MODE, colors[numStep], x, y);
+        Painter::DrawTesterData((uint8)TESTER_VIEW_MODE, ColorForStep(numStep), x, y);
     }
     else
     {
-        Painter::SetColor(colors[numStep]);
+        Painter::SetColor(ColorForStep(numStep));
         for(int i = 1; i < 240; i++)
         {
             Painter::SetPoint(x[i], y[i]);
@@ -108,9 +130,21 @@ void Tester::Graphics::SetPoints(int numStep, uint8 dx[TESTER_NUM_POINTS], uint8
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void DrawLegend(int, int)
+static void DrawLegend(int x, int y)
 {
+    Painter::FillRegion(x, y, 43, 40, Color::BACK);
 
+    for (int i = 0; i < Tester::NUM_STEPS; i++)
+    {
+        Painter::DrawHLine(y + 4 + i * 8, x + 1, x + 10, ColorForStep(i));
+        Painter::DrawText(x + 12, y + i * 8, ValueForStep(i), Color::FILL);
+    }
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+static pString ValueForStep(int step)
+{
+    return "100мкА";
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -126,5 +160,4 @@ static void DrawParametersChannel(Chan::E ch, int x, int y)
     Painter::SetColor(Color::FILL);
     char buffer[50];
     Painter::DrawTextOnBackground(x + ((ch == Chan::A) ? 25 : 35), y, shift.ToString(scale.value, buffer), Color::BACK);
-
 }
