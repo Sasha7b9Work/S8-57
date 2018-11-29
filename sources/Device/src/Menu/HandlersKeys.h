@@ -19,7 +19,6 @@ private:
     static void RangeLessA();
     static void RangeMoreA();
     static void RangeLessB();
-    static void RangeMoreB();
 
     static void TShiftLess();
     static void TShiftMore();

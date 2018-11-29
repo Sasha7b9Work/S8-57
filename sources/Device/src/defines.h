@@ -48,6 +48,7 @@ typedef void (*pFuncVII)(int, int);
 typedef void (*pFuncVpIII)(int *, int, int);
 typedef void (*pFuncVpI8I8I8)(int8 *, int8, int8);
 typedef bool (*pFuncBI)(int);
+typedef void (*pFuncVU8)(uint8);
 
 inline void EmptyFuncVV(){}
 inline void EmptyFuncVB(bool){}
