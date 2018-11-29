@@ -25,6 +25,8 @@ void PainterData::DrawData()
 {
     if(Reader::ReadData())
     {
+        Measure::SetData(false);
+
         static const pFuncVV func[ModeWork::Number] =
         {
             PainterData::DrawCurrent,

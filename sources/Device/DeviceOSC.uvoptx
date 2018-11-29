@@ -157,7 +157,7 @@
           <Type>0</Type>
           <LineNumber>347</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134242496</Address>
+          <Address>134242612</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
@@ -171,18 +171,18 @@
         <Bp>
           <Number>1</Number>
           <Type>0</Type>
-          <LineNumber>439</LineNumber>
+          <LineNumber>186</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134294716</Address>
+          <Address>134255540</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>&lt;1&gt;.\src\Menu\MenuItemsGraphics.cpp</Filename>
+          <Filename>&lt;1&gt;.\src\Utils\MeasureProcessing.cpp</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\\src/Menu/MenuItemsGraphics.cpp\439</Expression>
+          <Expression>\\FPGA\src/Utils/MeasureProcessing.cpp\186</Expression>
         </Bp>
       </Breakpoint>
       <WatchWindow1>
@@ -3238,7 +3238,7 @@
 
   <Group>
     <GroupName>Osci</GroupName>
-    <tvExp>0</tvExp>
+    <tvExp>1</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>

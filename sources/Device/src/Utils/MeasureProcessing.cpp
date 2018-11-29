@@ -130,8 +130,8 @@ static bool periodIsCaclulating[2] = {false, false};
 static bool periodAccurateIsCalculating[2];
 static bool picIsCalculating[2] = {false, false};
 
-#define EXIT_IF_ERROR_FLOAT(x)      if(isnan(x))                   return ERROR_VALUE_FLOAT;
-#define EXIT_IF_ERRORS_FLOAT(x, y)  if(isnan(x) || isnan(y))  return ERROR_VALUE_FLOAT;
+#define EXIT_IF_ERROR_FLOAT(x)      if(isnan(x))                return ERROR_VALUE_FLOAT;
+#define EXIT_IF_ERRORS_FLOAT(x, y)  if(isnan(x) || isnan(y))    return ERROR_VALUE_FLOAT;
 #define EXIT_IF_ERROR_INT(x)        if((x) == ERROR_VALUE_INT)  return ERROR_VALUE_FLOAT;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -142,8 +142,6 @@ void Measure::Processing::CalculateMeasures()
         return;
     }
     
-//    int length = NUM_BYTES_DS;
-
     maxIsCalculating[0] = maxIsCalculating[1] = maxSteadyIsCalculating[0] = maxSteadyIsCalculating[1] = false;
     minIsCalculating[0] = minIsCalculating[1] = minSteadyIsCalculating[0] = minSteadyIsCalculating[1] = false;
     aveIsCalculating[0] = aveIsCalculating[1] = false;
@@ -313,7 +311,7 @@ float CalculateVoltageAmpl(Chan::E ch)
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 /// ¬ходной буфер данных канала ch
-#define CHOICE_BUFFER (IN(ch))
+#define CHOICE_BUFFER (OUT(ch))
 
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -1094,13 +1092,13 @@ void Measure::SetData(bool needSmoothing)
 
     if (ENABLED_DS_A)
     {
-        Math::CalculateFiltrArray(IN_A, OUT_A, length, needSmoothing ? NUM_SMOOTHING : 1);
-        std::memcpy(IN_A, OUT_A, (uint)length);
+//        Math::CalculateFiltrArray(IN_A, OUT_A, length, needSmoothing ? NUM_SMOOTHING : 1);
+//        std::memcpy(IN_A, OUT_A, (uint)length);
     };
     if (ENABLED_DS_B)
     {
-        Math::CalculateFiltrArray(IN_B, OUT_B, length, needSmoothing ? NUM_SMOOTHING : 1);
-        std::memcpy(IN_B, OUT_B, (uint)length);
+//        Math::CalculateFiltrArray(IN_B, OUT_B, length, needSmoothing ? NUM_SMOOTHING : 1);
+//        std::memcpy(IN_B, OUT_B, (uint)length);
     };
   
     //Processing::CountedToCurrentSettings();
