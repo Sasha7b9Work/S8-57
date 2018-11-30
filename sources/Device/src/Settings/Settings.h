@@ -162,8 +162,8 @@ public:
 
     // Меню СЕРВИС
 
-    Language            serv_lang;
-    Color::Scheme       serv_colorScheme;
+    Language::E         serv_lang;
+    Color::Scheme::E    serv_colorScheme;
     bool                serv_recorder;                  ///< Включён ли режим регистратора.
     CalibratorMode::E   serv_calibratorMode;            ///< Режим работы калибратора.
     bool                serv_soundEnable;               ///< Включены ли звуки.

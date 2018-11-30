@@ -712,7 +712,7 @@ static void DrawHintItem(int x, int y, int width)
         {"Кнопка",      "Button"},              // Control::Type::DrawButton
         {"Выбор параметра", "Choice parameter"} // Control::Type::ChoiceParameter
     };
-    Language lang = LANG;
+    Language::E lang = LANG;
     Page *item = (Page *)Menu::itemHint;
 
     const int SIZE = 100;

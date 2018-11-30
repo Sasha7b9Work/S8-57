@@ -17,7 +17,7 @@ struct Language
         EN,
         Number
     } value;
-    operator uint8() const { return (uint8)value; };
+    explicit Language(E v) : value(v) {};
 };
 
 struct CalibratorMode
@@ -28,6 +28,7 @@ struct CalibratorMode
         DC,
         GND
     } value;
+    explicit CalibratorMode(E v) : value(v) {};
 };
 
  
