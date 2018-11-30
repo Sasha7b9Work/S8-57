@@ -38,6 +38,8 @@ void Osci::Draw()
 
     DrawCursorTrigLevel();
 
+    Cursors::Draw();
+
     HiPart::Draw();
 
     FrequencyCounter::Draw();

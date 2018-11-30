@@ -3,7 +3,9 @@
 #include "defines.h"
 #include "Cursors.h"
 #include "Settings/Settings.h"
+#include "Display/Colors.h"
 #include "Display/Grid.h"
+#include "Display/Painter.h"
 #include "Menu/Menu.h"
 #include "FPGA/FPGAMath.h"
 #include "Utils/StringUtils.h"
@@ -47,4 +49,47 @@ float Cursors::PosT(Chan::E ch, int num)
 void Cursors::SetCursPosT_temp(Chan::E ch, int num, float value)
 {
     std::memcpy(&set.curs_posCurT[ch][num], &value, sizeof(float));
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Cursors::Draw()
+{
+    Chan::E source = CURS_SOURCE;
+
+    Painter::SetColor(Color::Cursors(source));
+
+    if (NecessaryDraw())
+    {
+        bool bothCursors = CURsT_ENABLED && CURsU_ENABLED;  // Признак того, что включены и вертикальные и горизонтальные курсоры - надо нарисовать 
+                                                            // квадраты в местах пересечения
+
+        int x0 = -1;
+        int x1 = -1;
+        int y0 = -1;
+        int y1 = -1;
+
+        if (bothCursors)
+        {
+            x0 = Grid::Left() + (int)CURsT_POS(source, 0);
+            x1 = Grid::Left() + (int)CURsT_POS(source, 1);
+            y0 = GRID_TOP + (int)sCursors_GetCursPosU(source, 0);
+            y1 = GRID_TOP + (int)sCursors_GetCursPosU(source, 1);
+
+            Painter::DrawRectangle(x0 - 2, y0 - 2, 4, 4);
+            Painter::DrawRectangle(x1 - 2, y1 - 2, 4, 4);
+        }
+
+        if (CURsT_ENABLED)
+        {
+            DrawVerticalCursor((int)CURsT_POS(source, 0), y0);
+            DrawVerticalCursor((int)CURsT_POS(source, 1), y1);
+        }
+        if (CURsU_ENABLED)
+        {
+            DrawHorizontalCursor((int)sCursors_GetCursPosU(source, 0), x0);
+            DrawHorizontalCursor((int)sCursors_GetCursPosU(source, 1), x1);
+        }
+
+        UpdateCursorsForLook();
+    }
 }

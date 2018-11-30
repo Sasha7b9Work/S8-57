@@ -66,6 +66,20 @@
 class Cursors
 {
 public:
+    /// Нарисовать курсоры и результаты курсорных измерений
+    static void Draw();
+    /// Получить позицию курсора напряжения
+    static float PosU(Chan::E ch, int numCur);
+    /// Возвращает true,если нужно рисовать курсоры
+    static bool  NecessaryDraw();
+    /// Получить строку курсора напряжения
+    static pString Voltage(Chan::E source, int numCur, char buffer[20]);
+    /// Возвращает значение курсора времени
+    static float PosT(Chan::E ch, int num);
+
+    static void SetCursPosT_temp(Chan::E ch, int num, float value);
+
+public:
     /// Дискретность перемещения курсоров.
     struct Movement
     {
@@ -74,6 +88,7 @@ public:
             Pixels,    ///< По пикселям экрана
             Percents   ///< По процентам
         } value;
+        explicit Movement(E v) : value(v) {};
     };
 
     /// Какие курсоры сейчас активны. Какие активны, те и будут перемещаться по вращению ручки УСТАНОВКА.
@@ -98,6 +113,7 @@ public:
             Time,      ///< Курсоры следят за временем автоматически.
             Both       ///< Курсоры следят за временем и напряжением, в зависимости от того, какой курсоры вращали последним.
         } value;
+        explicit LookMode(E v) : value(v) {};
     };
 
     /// Каким курсором управлять
@@ -110,16 +126,6 @@ public:
             _1_2,      ///< обоими
             Disable    ///< никаким
         } value;
+        explicit Control(E v) : value(v) {};
     };
-
-    /// Получить позицию курсора напряжения
-    static float PosU(Chan::E ch, int numCur);
-    /// Возвращает true,если нужно рисовать курсоры
-    static bool  NecessaryDraw();
-    /// Получить строку курсора напряжения
-    static pString Voltage(Chan::E source, int numCur, char buffer[20]);
-    /// Возвращает значение курсора времени
-    static float PosT(Chan::E ch, int num);
-
-    static void SetCursPosT_temp(Chan::E ch, int num, float value);
 };
