@@ -18,7 +18,8 @@
 #define WR_UPR                  (ADDR_ALTERA + 6)           ///< Управление
 #define BIT_UPR_RAND            0                           ///< Вкл. рандомизатор
 #define BIT_UPR_PEAK            1                           ///< Пиковый детектор
-#define BIT_UPR_CALIBR          2                           ///< Калибратор
+#define BIT_UPR_CALIBR_AC_DC    2                           ///< Калибратор AC/DC
+#define BIT_UPR_CALIBR_ZERO     3                           ///< Калибратор 0/4В
 
 #define WR_FREQMETER            (ADDR_ALTERA + 8)           ///< Управление частотомером
 #define WR_TRIG                 (ADDR_ALTERA + 9)           ///< Управление синхронизацией/запуском

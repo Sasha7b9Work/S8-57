@@ -9,12 +9,11 @@
 
   <project>
     <PathAndName>.\Device\DeviceOSC.uvprojx</PathAndName>
-    <NodeIsExpanded>1</NodeIsExpanded>
+    <NodeIsActive>1</NodeIsActive>
   </project>
 
   <project>
     <PathAndName>.\Panel\PanelOSC.uvprojx</PathAndName>
-    <NodeIsActive>1</NodeIsActive>
   </project>
 
 </ProjectWorkspace>

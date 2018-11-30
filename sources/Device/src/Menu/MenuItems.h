@@ -277,10 +277,10 @@ public:
 class SButton : public Control
 {
 public:
-    pFuncVV                         funcOnPress;    ///< Эта функция вызвается для обработки нажатия кнопки.
-    pFuncVII                        funcForDraw;    ///< Эта функция вызывается для отрисовки кнопки в месте с координатами x, y.
-    const StructHelpDrawButton    *hintUGO; 
-    int                             numHints;
+    pFuncVV                     funcOnPress;    ///< Эта функция вызвается для обработки нажатия кнопки.
+    pFuncVII                    funcForDraw;    ///< Эта функция вызывается для отрисовки кнопки в месте с координатами x, y.
+    const StructHelpDrawButton *hintUGO; 
+    int                         numHints;
     void Draw(int x, int y);
     void DrawHints(int x, int y, int width);
 };

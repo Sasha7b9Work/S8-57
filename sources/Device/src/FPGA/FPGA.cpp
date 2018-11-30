@@ -793,19 +793,36 @@ void FPGA::Reset()
 
     LoadTShift();
 
-    if(SET_PEAKDET_EN)
-    {
-        FSMC::WriteToFPGA8(WR_UPR, 1 << BIT_UPR_PEAK);
-    }
-    else
-    {
-        FSMC::WriteToFPGA8(WR_UPR, 0);
-    }
+    LoadRegUPR();
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void FPGA::SetCalibratorMode(CalibratorMode)
+void FPGA::LoadRegUPR()
 {
+    uint8 data = 0;
+
+    if (SET_PEAKDET_EN)
+    {
+        data |= 1 << BIT_UPR_PEAK;
+    }
+
+    static const uint8 mask[3] =
+    {
+        (1 << BIT_UPR_CALIBR_AC_DC),
+        (1 << BIT_UPR_CALIBR_ZERO),
+        (0)
+    };
+
+    data |= mask[CALIBRATOR_MODE];
+
+    FSMC::WriteToFPGA8(WR_UPR, data);
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void FPGA::SetCalibratorMode(CalibratorMode::E mode)
+{
+    CALIBRATOR_MODE = mode;
+    LoadRegUPR();
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

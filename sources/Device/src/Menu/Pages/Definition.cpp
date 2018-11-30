@@ -111,8 +111,8 @@ static void CalculateXY(int *x0, int *x1, int *y0, int *y1)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void DrawMenuCursVoltage(int x, int y, bool top, bool bottom)
 {
-    x -= 65;
-    y -= 21;
+    x -= 49;
+    y -= 14;
     int x0 = x, x1 = x, y0 = y, y1 = y;
     CalculateXY(&x0, &x1, &y0, &y1);
     for (int i = 0; i < (top ? 3 : 1); i++)
@@ -136,8 +136,8 @@ void CalculateConditions(int16 pos0, int16 pos1, Cursors::Control::E cursCntrl, 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void DrawMenuCursTime(int x, int y, bool left, bool right)
 {
-    x -= 58;
-    y -= 16;
+    x -= 40;
+    y -= 10;
     int x0 = x, x1 = x, y0 = y, y1 = y;
     CalculateXY(&x0, &x1, &y0, &y1);
     for (int i = 0; i < (left ? 3 : 1); i++)

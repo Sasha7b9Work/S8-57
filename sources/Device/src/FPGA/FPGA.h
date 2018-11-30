@@ -96,6 +96,8 @@ public:
 
     static void Reset();
 
+    static void LoadRegUPR();
+
     static void SetModeCouple(Chan::E ch, ModeCouple::E couple);
 
     /// Установить относительный уровень синхронизации
@@ -109,7 +111,7 @@ public:
     /// Найти и установить уровень синхронизации по последнему считанному сигналу
     static void FindAndSetTrigLevel();
     /// Включить/выключить калибратор.
-    static void SetCalibratorMode(CalibratorMode calibratorMode);
+    static void SetCalibratorMode(CalibratorMode::E calibratorMode);
 
     static void EnableRecorderMode(bool enable);
     /// Установить добавочное смещение по времени для режима рандомизатора. В каждой развёртке это смещение должно быть разное

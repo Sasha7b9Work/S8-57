@@ -165,7 +165,7 @@ public:
     Language            serv_lang;
     Color::Scheme       serv_colorScheme;
     bool                serv_recorder;                  ///< ¬ключЄн ли режим регистратора.
-    CalibratorMode      serv_calibratorMode;            ///< –ежим работы калибратора.
+    CalibratorMode::E   serv_calibratorMode;            ///< –ежим работы калибратора.
     bool                serv_soundEnable;               ///< ¬ключены ли звуки.
     int16               serv_soundVolume;               ///< √ромкость звука [0...100].
 
