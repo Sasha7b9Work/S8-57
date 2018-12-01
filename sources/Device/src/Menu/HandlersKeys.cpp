@@ -480,7 +480,7 @@ void Handlers::Display()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Handlers::OpenPage(const PageBase *page)
 {
-    ((Page *)page)->SetCurrentPage();
+    ((Page *)page)->SetAsCurrent();
     ((Page *)page)->Open(true);
     Menu::Show(true);
 }

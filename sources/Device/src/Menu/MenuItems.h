@@ -130,7 +130,7 @@ public:
     /// Возвращает количество элементов в странице по адресу page
     int NumItems() const;
     /// Установить текущей данную страницу.
-    void SetCurrentPage();
+    void SetAsCurrent();
     int8 CurrentSubPage() const;
     void SetCurrentSubPage(int8 pos);
     ///< Устанавливает позицию активного пункта меню

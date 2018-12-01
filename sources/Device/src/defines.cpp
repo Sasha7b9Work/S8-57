@@ -17,7 +17,7 @@ volatile BitField gBF =
     0,  // currentNumROMSignal
     0,  // showHelpHints
     0,  // needFinishDraw
-    0,  // showDebugMenu
+    1,  // showDebugMenu
     0,  // needForSaveToFlashDrive
     0,  // exitFromModeSetNameTo
     0,  // temporaryShowStrNavi
