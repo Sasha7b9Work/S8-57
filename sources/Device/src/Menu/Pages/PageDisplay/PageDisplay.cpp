@@ -144,5 +144,5 @@ DEF_PAGE_10( pageDisplay,                                                       
     &cScaleYtype,                           ///< ÄÈÑÏËÅÉ - Ñìåùåíèå
     PageDisplay::PageSettings::pointer,     ///< ÄÈÑÏËÅÉ - ÍÀÑÒÐÎÉÊÈ
     &cThickness,                            ///< ÄÈÑÏËÅÉ - Òîëùèíà
-    Page::Name::Display, Menu::pageMain, FuncActive, EmptyPressPage
+    Page::Name::Display, Menu::pageMain, FuncActive, EmptyPressPage, FuncDrawPage, FuncRegSetPage
 )

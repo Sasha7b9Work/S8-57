@@ -698,20 +698,20 @@ DEF_PAGE_SB(ppInformation,                                                      
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 const PageBase *PageService::pointer = &pService;
 
-DEF_PAGE_9_GLOBAL(pService,                                                                                                            // СЕРВИС ///
+DEF_PAGE_9(pService,                                                                                                                                                         //--- СЕРВИС ---
     "СЕРВИС", "SERVICE",
     "Дополнительные настройки, калибровка, поиск сигнала, математические функции",
     "Additional settings, calibration, signal search, mathematical functions",
-    &bResetSettings,    // СЕРВИС - Сброс настроек
-    &bAutoSearch,       // СЕРВИС - Поиск сигнала
-    &ppCalibrator,      // СЕРВИС - КАЛИБРАТОР
-    &cRecorder,         // СЕРВИС - Регистратор
-    &ppFunction,        // СЕРВИС - ФУНКЦИЯ
-    &ppSound,           // СЕРВИС - ЗВУК
-    &ppRTC,             // СЕРВИС - ВРЕМЯ
-    &cLanguage,         // СЕРВИС - Язык
-    &ppInformation,     // СЕРВИС - ИНФОРМАЦИЯ
-    Page::Name::Service, Menu::pageMain, FuncActive, EmptyPressPage
+    &bResetSettings,        ///< СЕРВИС - Сброс настроек
+    &bAutoSearch,           ///< СЕРВИС - Поиск сигнала
+    &ppCalibrator,          ///< СЕРВИС - КАЛИБРАТОР
+    &cRecorder,             ///< СЕРВИС - Регистратор
+    &ppFunction,            ///< СЕРВИС - ФУНКЦИЯ
+    &ppSound,               ///< СЕРВИС - ЗВУК
+    &ppRTC,                 ///< СЕРВИС - ВРЕМЯ
+    &cLanguage,             ///< СЕРВИС - Язык
+    &ppInformation,         ///< СЕРВИС - ИНФОРМАЦИЯ
+    Page::Name::Service, Menu::pageMain, FuncActive, EmptyPressPage, FuncDrawPage, FuncRegSetPage
 )
 
 

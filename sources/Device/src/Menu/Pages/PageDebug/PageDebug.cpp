@@ -1086,7 +1086,7 @@ DEF_BUTTON(         bEraseData,                                                 
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-DEF_PAGE_12( pageDebug,                                                                                                                                                     //--- Œ“À¿ƒ ¿ ---
+DEF_PAGE_9( pageDebug,                                                                                                                                                     //--- Œ“À¿ƒ ¿ ---
     "Œ“À¿ƒ ¿", "DEBUG",
     "",
     "",
@@ -1099,8 +1099,8 @@ DEF_PAGE_12( pageDebug,                                                         
     &mgPred,			        ///< Œ“À¿ƒ ¿ - œÂ‰Á‡ÔÛÒÍ
     &mgPost,			        ///< Œ“À¿ƒ ¿ - œÓÒÎÂÁ‡ÔÛÒÍ
     &ppSettings,		        ///< Œ“À¿ƒ ¿ - Õ¿—“–Œ… »
-    &bSaveFirmware,             ///< Œ“À¿ƒ ¿ - —Óı. ÔÓ¯Ë‚ÍÛ
-    &ppSerialNumber,            ///< Œ“À¿ƒ ¿ - —/Õ
-    &bEraseData,                ///< Œ“À¿ƒ ¿ - —ÚÂÂÚ¸ ‰‡ÌÌ˚Â
+//    &bSaveFirmware,             ///< Œ“À¿ƒ ¿ - —Óı. ÔÓ¯Ë‚ÍÛ
+//    &ppSerialNumber,            ///< Œ“À¿ƒ ¿ - —/Õ
+//    &bEraseData,                ///< Œ“À¿ƒ ¿ - —ÚÂÂÚ¸ ‰‡ÌÌ˚Â
     Page::Name::Debug, Menu::pageMain, FuncActive, EmptyPressPage, FuncDrawPage, FuncRegSetPage
 )

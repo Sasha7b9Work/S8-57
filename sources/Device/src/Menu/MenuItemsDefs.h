@@ -98,35 +98,27 @@ static const PageBase name = {Control::Type::Page, 8, false, namePage, keeper, f
     items##name, funcPress, FuncDrawPage, FuncRegSetPage};
 
 #define DEF_PAGE_9(name, titleRU, titleEN, hintRU, hintEN,                                                                                      \
-    item1, item2, item3, item4, item5, item6, item7, item8, item9, namePage, keeper, funcActive, funcPress)                                     \
+    item1, item2, item3, item4, item5, item6, item7, item8, item9, namePage, keeper, funcActive, funcPress, funcDraw, funcRegSet)                                     \
 static const Control * const  items##name[] = {                                                                                                 \
     (Control *)item1, (Control *)item2, (Control *)item3, (Control *)item4, (Control *)item5, (Control *)item6, (Control *)item7,               \
     (Control *)item8, (Control *)item9};                                                                                                        \
 static const PageBase name = {Control::Type::Page, 9, false, namePage, keeper, funcActive, {titleRU, titleEN, hintRU, hintEN},                  \
-    items##name, funcPress, FuncDrawPage, FuncRegSetPage};
-
-#define DEF_PAGE_9_GLOBAL(name, titleRU, titleEN, hintRU, hintEN,                                                                               \
-    item1, item2, item3, item4, item5, item6, item7, item8, item9, namePage, keeper, funcActive, funcPress)                                     \
-static const Control * const  items##name[] = {(Control *)item1, (Control *)item2, (Control *)item3, (Control *)item4, (Control *)item5,        \
-    (Control *)item6, (Control *)item7, (Control *)item8, (Control *)item9};                                                                    \
-static const PageBase name = {Control::Type::Page, 10, false, namePage, keeper, funcActive, {titleRU, titleEN, hintRU, hintEN},                 \
-    items##name, funcPress, FuncDrawPage, FuncRegSetPage};
-
+    items##name, funcPress, funcDraw, funcRegSet};
 
 #define DEF_PAGE_10(name, titleRU, titleEN, hintRU, hintEN,                                                                                     \
-    item1, item2, item3, item4, item5, item6, item7, item8, item9, item10, namePage, keeper, funcActive, funcPress)                             \
+    item1, item2, item3, item4, item5, item6, item7, item8, item9, item10, namePage, keeper, funcActive, funcPress, funcDraw, funcRegSet)                             \
 static const Control * const  items##name[] = {                                                                                                 \
     (Control *)item1, (Control *)item2, (Control *)item3, (Control *)item4, (Control *)item5, (Control *)item6, (Control *)item7,               \
     (Control *)item8, (Control *)item9, (Control *)item10};                                                                                     \
 static const PageBase name = {Control::Type::Page, 10, false, namePage, keeper, funcActive, {titleRU, titleEN, hintRU, hintEN},                 \
-    items##name, funcPress, FuncDrawPage, FuncRegSetPage};
+    items##name, funcPress, funcDraw, funcRegSet};
 
-#define DEF_PAGE_11_GLOBAL(name, titleRU, titleEN, hintRU, hintEN,                                                                              \
-    item1, item2, item3, item4, item5, item6, item7, item8, item9, item10, item11, namePage, keeper, funcActive, funcPress)                     \
+#define DEF_PAGE_11(name, titleRU, titleEN, hintRU, hintEN,                                                                              \
+    item1, item2, item3, item4, item5, item6, item7, item8, item9, item10, item11, namePage, keeper, funcActive, funcPress, funcDraw, funcRegSet)                     \
 static const Control * const  items##name[] = {(Control *)item1, (Control *)item2, (Control *)item3, (Control *)item4, (Control *)item5,        \
     (Control *)item6, (Control *)item7, (Control *)item8, (Control *)item9, (Control *)item10, (Control *)item11};                              \
 static const PageBase name = {Control::Type::Page, 11, false, namePage, keeper, funcActive, {titleRU, titleEN, hintRU, hintEN},                 \
-    items##name, funcPress, FuncDrawPage, FuncRegSetPage};
+    items##name, funcPress, funcDraw, funcRegSet};
 
 #define DEF_PAGE_12(name, titleRU, titleEN, hintRU, hintEN,                                                                                     \
     item1, item2, item3, item4, item5, item6, item7, item8, item9, item10, item11, item12, namePage, keeper, funcActive, funcPress, funcDraw, funcRegSet) \
