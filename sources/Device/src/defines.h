@@ -290,4 +290,15 @@ enum StateWorkFPGA
 };
 
 
+/// Защищённый обработчик с двумя параметрами. Защищённый - потому что в случае его отсутствия выводится сообщение об ошибке
+#define SAFE_HANDLER_3(handler, param1, param2, param3)     \
+    if(handler) { handler(param1, param2, param3); }        \
+    else { LOG_WRITE("Отсутствует обработчик");  }
+
+/// Выбрать обработчик и защищённо его выполнить
+#define HANDLER_CHOISE_AND_SAFE_RUN_3(type, index, param1, param2, param3)  \
+    type func = funcs[index].val;                                           \
+    SAFE_HANDLER_3(func, param1, param2, param3)
+
+
 #include "log.h"

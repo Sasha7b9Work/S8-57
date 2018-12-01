@@ -21,7 +21,7 @@
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 extern const PageBase mainPage;
-extern const PageBase pDebug;
+extern const PageBase pageDebug;
 extern const PageBase ppConsole;
 extern const PageBase pppConsole_Registers;
 extern const PageBase ppADC;
@@ -33,7 +33,7 @@ extern const PageBase ppChannels;
 extern const PageBase ppSettings;
 extern const PageBase ppSerialNumber;
 
-const PageBase *PageDebug::pointer = &pDebug;
+const PageBase *PageDebug::pointer = &pageDebug;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /// В этой структуре будут храниться данные серийного номера при открытой странице ppSerialNumer
@@ -199,7 +199,6 @@ DEF_CHOICE_2(       cConsole_Registers_TShift,                                  
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 DEF_PAGE_12(        pppConsole_Registers,                                                                          // ОТЛАДКА - КОНСОЛЬ - РЕГИСТРЫ ///
-    Page::Name::Debug_Console_Registers, &ppConsole, FuncActive, EmptyPressPage,
     "РЕГИСТРЫ", "REGISTERS",
     "",
     "",
@@ -214,7 +213,8 @@ DEF_PAGE_12(        pppConsole_Registers,                                       
     &cConsole_Registers_ChanParamA,  // ОТЛАДКА - КОНСОЛЬ - РЕГИСТРЫ - Парам. кан. 1
     &cConsole_Registers_ChanParamB,  // ОТЛАДКА - КОНСОЛЬ - РЕГИСТРЫ - Парам. кан. 2
     &cConsole_Registers_TBase,       // ОТЛАДКА - КОНСОЛЬ - РЕГИСТРЫ - ВРЕМЯ/ДЕЛ
-    &cConsole_Registers_TShift       // ОТЛАДКА - КОНСОЛЬ - РЕГИСТРЫ - Т см.
+    &cConsole_Registers_TShift,      // ОТЛАДКА - КОНСОЛЬ - РЕГИСТРЫ - Т см.
+    Page::Name::Debug_Console_Registers, &ppConsole, FuncActive, EmptyPressPage, FuncDrawPage, FuncRegSetPage
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -242,7 +242,7 @@ DEF_PAGE_5(         ppConsole,                                                  
     &cConsole_ModeStop,          // ОТЛАДКА - КОНСОЛЬ - Реж. останова
     &pppConsole_Registers,       // ОТЛАДКА - КОНСОЛЬ - РЕГИСТРЫ
     &bConsole_SizeSettings,      // ОТЛАДКА - КОНСОЛЬ - Размер настроек
-    Page::Name::Debug_Console, &pDebug, FuncActive, EmptyPressPage, FuncDrawPage, FuncRegSetPage
+    Page::Name::Debug_Console, &pageDebug, FuncActive, EmptyPressPage, FuncDrawPage, FuncRegSetPage
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -558,7 +558,7 @@ DEF_PAGE_3(         ppADC,                                                      
     &pppADC_Balance, // ОТЛАДКА - АЦП - БАЛАНС
     &pppADC_Stretch, // ОТЛАДКА - АЦП - РАСТЯЖКА
     &pppADC_Shift,   // ОТЛАДКА - АЦП - ДОП СМЕЩ
-    Page::Name::Debug_ADC, &pDebug, FuncActive, EmptyPressPage, FuncDrawPage, FuncRegSetPage
+    Page::Name::Debug_ADC, &pageDebug, FuncActive, EmptyPressPage, FuncDrawPage, FuncRegSetPage
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -663,7 +663,7 @@ DEF_PAGE_8(         ppRand,                                                     
     &gRand_TimeCompensation, // ОТЛАДКА - РАНД-ТОР - Компенсация задержки
     &gRand_AddTimeShift,     // ОТЛАДКА - РАНД-ТОР - Смещение
     &gRand_Pretriggered,     // ОТЛАДКА - РAНД-ТОР - Предзапуск
-    Page::Name::Debug_Rand, &pDebug, FuncActive, EmptyPressPage
+    Page::Name::Debug_Rand, &pageDebug, FuncActive, EmptyPressPage
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -713,7 +713,7 @@ DEF_PAGE_2(         ppChannels,                                                 
     "",
     &cChannels_BandwidthA,   // ОТЛАДКА - КАНАЛЫ - Полоса 1
     &cChannels_BandwidthB,   // ОТЛАДКА - КАНАЛЫ - Полоса 2
-    Page::Name::Debug_Channels, &pDebug, FuncActive, EmptyPressPage, FuncDrawPage, FuncRegSetPage
+    Page::Name::Debug_Channels, &pageDebug, FuncActive, EmptyPressPage, FuncDrawPage, FuncRegSetPage
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -724,7 +724,7 @@ DEF_CHOICE_2(       cStats,                                                     
     "To show/not to show a time/shot, frames per second, quantity of signals with the last settings in memory/quantity of the signals kept in memory",
     "Не показывать", "Hide",
     "Показывать",    "Show",
-    SHOW_STAT, pDebug, FuncActive, FuncChangedChoice, FuncDraw
+    SHOW_STAT, pageDebug, FuncActive, FuncChangedChoice, FuncDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -739,7 +739,7 @@ DEF_CHOICE_2(       cDisplayOrientation,                                        
     "Sets display orientation",
     "Прямая",   "Direct",
     "Обратная", "Back",
-    DISPLAY_ORIENTATION, pDebug, FuncActive, PageDebug::OnChanged_DisplayOrientation, FuncDraw
+    DISPLAY_ORIENTATION, pageDebug, FuncActive, PageDebug::OnChanged_DisplayOrientation, FuncDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -753,7 +753,7 @@ static void OnChanged_Pred()
 DEF_GOVERNOR(       mgPred,                                                                                             //--- ОТЛАДКА - Предзапуск ---
     "Предзапуск", "",
     "", "",
-    pred, 0, 15000, pDebug, FuncActive, OnChanged_Pred, FuncBeforeDraw
+    pred, 0, 15000, pageDebug, FuncActive, OnChanged_Pred, FuncBeforeDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -767,7 +767,7 @@ static void OnChanged_Post()
 DEF_GOVERNOR(       mgPost,                                                                                            //--- ОТЛАДКА - Послезапуск ---
     "Послезапуск", "",
     "", "",
-    post, 0, 15000, pDebug, FuncActive, OnChanged_Post, FuncBeforeDraw
+    post, 0, 15000, pageDebug, FuncActive, OnChanged_Post, FuncBeforeDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -867,7 +867,7 @@ DEF_PAGE_SB(        ppSettings,                                                 
     0,
     0,
     0,
-    Page::Name::SB_Debug_Settings, &pDebug, FuncActive, OnPress_Settings, FuncDrawPage, FuncRegSetPage
+    Page::Name::SB_Debug_Settings, &pageDebug, FuncActive, OnPress_Settings, FuncDrawPage, FuncRegSetPage
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -906,7 +906,7 @@ DEF_BUTTON(         bSaveFirmware,                                              
     "Сохр. прошивку", "Save firmware",
     "Сохранение прошивки - секторов 5, 6, 7 общим объёмом 3 х 128 кБ, где хранится программа",
     "Saving firmware - sectors 5, 6, 7 with a total size of 3 x 128 kB, where the program is stored",
-    pDebug, IsActive_SaveFirmware, OnPress_SaveFirmware, FuncDraw
+    pageDebug, IsActive_SaveFirmware, OnPress_SaveFirmware, FuncDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -1067,7 +1067,7 @@ DEF_PAGE_SB(        ppSerialNumber,                                             
     0,
     0,
     &bSerialNumber_Save,            // ОТЛАДКА - С/Н - Сохранить
-    Page::Name::SB_Debug_SerialNumber, &pDebug, FuncActive, OnPress_SerialNumber, FuncDrawPage, OnRegSet_SerialNumber
+    Page::Name::SB_Debug_SerialNumber, &pageDebug, FuncActive, OnPress_SerialNumber, FuncDrawPage, OnRegSet_SerialNumber
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -1082,12 +1082,11 @@ DEF_BUTTON(         bEraseData,                                                 
     "Стереть данне", "Erase data",
     "Стирает сохранённые данные из ППЗУ",
     "Erase all saved datas from EEPROM",
-    pDebug, FuncActive, OnPress_EraseData, FuncDraw
+    pageDebug, FuncActive, OnPress_EraseData, FuncDraw
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-DEF_PAGE_12(        pDebug,                                                                                                          //--- ОТЛАДКА ---
-    Page::Name::Debug, Menu::pageMain, FuncActive, EmptyPressPage,
+DEF_PAGE_12(        pageDebug,                                                                                                          //--- ОТЛАДКА ---
     "ОТЛАДКА", "DEBUG",
     "",
     "",
@@ -1102,5 +1101,6 @@ DEF_PAGE_12(        pDebug,                                                     
     &ppSettings,		        // ОТЛАДКА - НАСТРОЙКИ
     &bSaveFirmware,          // ОТЛАДКА - Сохр. прошивку
     &ppSerialNumber,         // ОТЛАДКА - С/Н
-    &bEraseData              // ОТЛАДКА - Стереть данные
+    &bEraseData,              // ОТЛАДКА - Стереть данные
+    Page::Name::Debug, Menu::pageMain, FuncActive, EmptyPressPage, FuncDrawPage, FuncRegSetPage
 )

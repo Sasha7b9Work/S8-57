@@ -93,9 +93,7 @@ void FPGA::Update()
         return;
     };
 
-    int number = (IN_RANDOMIZE_MODE && !START_MODE_IS_SINGLE) ? Kr[SET_TBASE] : 1;
-
-    number = 1;
+    int number = (IN_RANDOMIZE_MODE) ? Kr[SET_TBASE] : 1;
 
     for (int i = 0; i < number; i++)
     {
@@ -340,15 +338,15 @@ int FPGA::CalculateShift(Chan::E ch)
         return NULL_TSHIFT;
     }
 
+    if (valueADC > max - 100)
+    {
+        return NULL_TSHIFT;
+    }
+
     if (IN_RANDOMIZE_MODE)
     {
         float tin = (float)(valueADC - min) / (max - min);
         int retValue = (int)(tin * Kr[SET_TBASE]);
-
-        if(ch == Chan::A)
-        {
-            //LOG_WRITE("%d %d %d %d", adcValueFPGA, min, max, retValue);
-        }
 
         return retValue;
     }
@@ -918,5 +916,5 @@ void FPGA::DoCalibration()
 void FPGA::SetValueADC(uint16 value)
 {
     valueADC = value;
-    LOG_WRITE("%d", valueADC);
+//    LOG_WRITE("%d", valueADC);
 }

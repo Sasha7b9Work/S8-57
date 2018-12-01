@@ -34,6 +34,18 @@ static Chan drawingChan = Chan(Chan::A);
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 static void RangeMoreB();
+/// Обработчик отпускания функциональной кнопки
+static void FuncRelease();
+/// Обработчик длительного нажатия функциональной кнопки
+static void FuncLong();
+/// Обработчик нажатия стрелки
+static void Arrow();
+/// Обработка события стрелки на открытой странице
+static void ArrowChoice(Control *item, Key::E key, TypePress::E type);
+/// Обработка события стрелки на открытом Choice
+static void ArrowPage(Control *item, Key::E key, TypePress::E type);
+
+
 /// Общий обработчик изменения параметра канала - масштаба или смещения
 static void OnChangeParameterChannel(pFuncVChI, Chan::E, int);
 /// Функция отрисовки параметров канала
@@ -271,25 +283,59 @@ void Handlers::TBaseMore()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Handlers::FuncRelease()
+static void FuncRelease()
 {
     Menu::ReleaseFunctionalButton(event.key);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Handlers::FuncLong()
+static void FuncLong()
 {
     Menu::LongFunctionalButton(event.key);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Handlers::Arrow()
+static void ArrowChoice(Control *item, Key::E key, TypePress::E type)
+{
+    if (type != TypePress::Press)
+    {
+        return;
+    }
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+static void ArrowPage(Control *item, Key::E key, TypePress::E type)
+{
+    if (type != TypePress::Press)
+    {
+        return;
+    }
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+static void Arrow()
 {
     Control *item = Menu::OpenedItem();
 
     TypePress::E type = event.type;
+    /*
 
-    if(type != TypePress::Press)
+    Key::E key = event.key;
+
+    typedef void(*pFuncKey)(Control *item, Key::E, TypePress::E);
+
+    static const struct StructFunc { pFuncKey val; } funcs[Control::Type::Number] =
+    {
+        0,
+        ArrowChoice,
+        0,
+        ArrowPage
+    };
+
+    HANDLER_CHOISE_AND_SAFE_RUN_3(pFuncKey, item->type, item, event.key, event.type);
+    */
+
+    if (type != TypePress::Press)
     {
         return;
     }

@@ -28,9 +28,6 @@ private:
     static void TrigLevLess();
     static void TrigLevMore();
 
-    static void FuncRelease();
-    static void FuncLong();
-    static void Arrow();
     static void EnterRelease();
     static void EnterLong();
     static void ChannelA();
