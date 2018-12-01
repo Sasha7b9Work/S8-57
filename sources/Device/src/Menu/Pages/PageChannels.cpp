@@ -145,7 +145,7 @@ static void OnChanged_BandwidthB(bool)
     FPGA::SetBandwidth(Chan::B);
 }
 
-DEF_CHOICE_2(cChanB_Bandwidth,                                                                                       //--- КАНАЛ 2 - Полоса ---
+DEF_CHOICE_2( cChanB_Bandwidth,                                                                                                                                    //--- КАНАЛ 2 - Полоса ---
     "Полоса", "Bandwidth",
     "",
     "",
@@ -154,31 +154,15 @@ DEF_CHOICE_2(cChanB_Bandwidth,                                                  
     SET_BANDWIDTH_B, pChanB, FuncActive, OnChanged_BandwidthB, FuncDraw
 )
 
-
-DEF_CHOICE_8 (gGate,
-    "Ворота", "Gates",
-    "", "",
-    "10", "10",
-    "20", "20",
-    "30", "30",
-    "40", "40",
-    "50", "50",
-    "60", "60",
-    "70", "70",
-    "80", "80",
-    set.dbg_enum_gate, pChanB, FuncActive, FuncChangedChoice, FuncDraw
-)
-
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 const PageBase *PageChannelB::pointer = &pChanB;
 
-DEF_PAGE_4(         pChanB,                                                                                                             // КАНАЛ 2 ///
+DEF_PAGE_3( pChanB,                                                                                                                                                         //--- КАНАЛ 2 ---
     "КАНАЛ 2", "CHANNEL 2",
     "Содержит настройки канала 2.",
     "Contains settings of the channel 2.",
     &cChanB_Input,       // КАНАЛ 2 - Вход
     &cChanB_Couple,      // КАНАЛ 2 - Связь
     &cChanB_Bandwidth,   // КАНАЛ 2 - Полоса
-    &gGate,
     Page::Name::ChannelB, Menu::pageMain, FuncActive, EmptyPressPage, FuncDrawPage, FuncRegSetPage
 )
