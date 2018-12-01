@@ -184,9 +184,9 @@ static const SButtonBase name = { Control::Type::DrawButton, 0, false, Page::Nam
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-#define DEF_CHOICE_2(name, titleRU, titleEN, hintRU, hintEN, nameRu1, nameEn1, nameRu2, nameEn2, cell, keeper, funcActive, funcChanged, funcDraw)   \
-static pString hints##name[] = {nameRu1, nameEn1, nameRu2, nameEn2};                                                                                \
-volatile static const ChoiceBase name = {Control::Type::Choice, 2, false, Page::Name::NoPage, &keeper, funcActive, {titleRU, titleEN, hintRU, hintEN},       \
+#define DEF_CHOICE_2(name, titleRU, titleEN, hintRU, hintEN, nameRu1, nameEn1, nameRu2, nameEn2, cell, keeper, funcActive, funcChanged, funcDraw)       \
+static const pString hints##name[] = {nameRu1, nameEn1, nameRu2, nameEn2};                                                                              \
+volatile static const ChoiceBase name = {Control::Type::Choice, 2, false, Page::Name::NoPage, &keeper, funcActive, {titleRU, titleEN, hintRU, hintEN},  \
     (int8 *)&cell, hints##name, funcChanged, funcDraw};
 
 #define DEF_CHOICE_3(name, titleRU, titleEN, hintRU, hintEN,                                                                                                            \
