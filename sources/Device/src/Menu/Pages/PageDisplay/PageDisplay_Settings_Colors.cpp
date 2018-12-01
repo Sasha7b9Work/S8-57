@@ -100,5 +100,5 @@ DEF_PAGE_6( pageColors,                                                         
     &gcChannelB,          ///< ÄÈÑÏËÅÉ - ÍÀÑÒÐÎÉÊÈ - ÖÂÅÒÀ - Êàíàë 2
     &gcGrid,              ///< ÄÈÑÏËÅÉ - ÍÀÑÒÐÎÉÊÈ - ÖÂÅÒÀ - Ñåòêà
     &cBackground,         ///< ÄÈÑÏËÅÉ - ÍÀÑÒÐÎÉÊÈ - ÖÂÅÒÀ - Ôîí
-    Page::Name::Display_Settings_Colors, PageDisplay::PageSettings::pointer, FuncActive, EmptyPressPage
+    Page::Name::Display_Settings_Colors, PageDisplay::PageSettings::pointer, FuncActive, EmptyPressPage, FuncDrawPage, FuncRegSetPage
 )

@@ -163,5 +163,5 @@ DEF_PAGE_6(ppFFT,                                                               
     &cFFT_Window,       ///< ÑÅÐÂÈÑ - ÑÏÅÊÒÐ - Îêíî 
     &pppFFT_Cursors,    ///< ÑÅÐÂÈÑ - ÑÏÅÊÒÐ - ÊÓÐÑÎÐÛ
     &cFFT_Range,        ///< ÑÅÐÂÈÑ - ÑÏÅÊÒÐ - Äèàïàçîí
-    Page::Name::Function_FFT, PageFunction::pointer, IsActive_FFT, OnPress_FFT
+    Page::Name::Function_FFT, PageFunction::pointer, IsActive_FFT, OnPress_FFT, FuncDrawPage, FuncRegSetPage
 )

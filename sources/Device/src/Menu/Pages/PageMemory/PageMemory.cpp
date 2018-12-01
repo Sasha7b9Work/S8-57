@@ -507,7 +507,7 @@ DEF_PAGE_6( ppDrive,                                                            
     &cDrive_SaveAs,          // ПАМЯТЬ - ВНЕШН ЗУ - Сохранять как
     &cDrive_ModeBtnMemory,   // ПАМЯТЬ - ВНЕШН ЗУ - Реж кн ПАМЯТЬ
     &cDrive_Autoconnect,     // ПАМЯТЬ - ВНЕШН ЗУ - Автоподключение
-    Page::Name::Memory_Drive, &pageMemory, FuncActive, EmptyPressPage
+    Page::Name::Memory_Drive, &pageMemory, FuncActive, EmptyPressPage, FuncDrawPage, FuncRegSetPage
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

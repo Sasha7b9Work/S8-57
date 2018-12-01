@@ -547,7 +547,7 @@ DEF_PAGE_7(         pppADC_Shift,                                               
     &gADC_Shift_B5mV,    // ОТЛАДКА - АЦП - ДОП СМЕЩ - См 2к 5мВ пост
     &gADC_Shift_A10mV,   // ОТЛАДКА - АЦП - ДОП СМЕЩ - См 1к 10мВ пост
     &gADC_Shift_B10mV,   // ОТЛАДКА - АЦП - ДОП СМЕЩ - См 2к 10мВ пост
-    Page::Name::Debug_ADC_Shift, &ppADC, FuncActive, EmptyPressPage
+    Page::Name::Debug_ADC_Shift, &ppADC, FuncActive, EmptyPressPage, FuncDrawPage, FuncRegSetPage
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -663,7 +663,7 @@ DEF_PAGE_8(         ppRand,                                                     
     &gRand_TimeCompensation, // ОТЛАДКА - РАНД-ТОР - Компенсация задержки
     &gRand_AddTimeShift,     // ОТЛАДКА - РАНД-ТОР - Смещение
     &gRand_Pretriggered,     // ОТЛАДКА - РAНД-ТОР - Предзапуск
-    Page::Name::Debug_Rand, &pageDebug, FuncActive, EmptyPressPage
+    Page::Name::Debug_Rand, &pageDebug, FuncActive, EmptyPressPage, FuncDrawPage, FuncRegSetPage
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -1086,7 +1086,7 @@ DEF_BUTTON(         bEraseData,                                                 
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-DEF_PAGE_9( pageDebug,                                                                                                                                                     //--- ОТЛАДКА ---
+DEF_PAGE_6( pageDebug,                                                                                                                                                     //--- ОТЛАДКА ---
     "ОТЛАДКА", "DEBUG",
     "",
     "",
@@ -1096,9 +1096,9 @@ DEF_PAGE_9( pageDebug,                                                          
     &ppChannels,		        ///< ОТЛАДКА - КАНАЛЫ
     &cStats,			        ///< ОТЛАДКА - Статистика
     &cDisplayOrientation,       ///< ОТЛАДКА - Ориентация
-    &mgPred,			        ///< ОТЛАДКА - Предзапуск
-    &mgPost,			        ///< ОТЛАДКА - Послезапуск
-    &ppSettings,		        ///< ОТЛАДКА - НАСТРОЙКИ
+//    &mgPred,			        ///< ОТЛАДКА - Предзапуск
+//    &mgPost,			        ///< ОТЛАДКА - Послезапуск
+//    &ppSettings,		        ///< ОТЛАДКА - НАСТРОЙКИ
 //    &bSaveFirmware,             ///< ОТЛАДКА - Сохр. прошивку
 //    &ppSerialNumber,            ///< ОТЛАДКА - С/Н
 //    &bEraseData,                ///< ОТЛАДКА - Стереть данные
