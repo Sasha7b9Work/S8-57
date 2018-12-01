@@ -4,6 +4,7 @@
 #include "DataBuffer.h"
 #include "DataStorage.h"
 #include "Reader.h"
+#include "Utils/Math.h"
 #include <string.h>
 #endif
 
@@ -17,7 +18,15 @@ void DataStorage::Init()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void DataStorage::Push(DataSettings *ds)
 {
-    //DataBuffer::Push(ds);
+    uint size = (uint)ds->SizeChannel();
+    uint8 *dataA = ds->DataA();
+    uint8 *dataB = ds->DataB();
+
+    for (uint i = 0; i < size; i++)
+    {
+        LIMITATION(dataA[i], MIN_VALUE, MAX_VALUE);
+        LIMITATION(dataB[i], MIN_VALUE, MAX_VALUE);
+    }
 
     std::memcpy(OUT_A, ds->DataA(), (uint)ds->SizeChannel());
     std::memcpy(OUT_B, ds->DataB(), (uint)ds->SizeChannel());
