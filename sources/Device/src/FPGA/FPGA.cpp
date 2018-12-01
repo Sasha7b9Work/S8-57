@@ -339,7 +339,7 @@ int FPGA::CalculateShift(Chan::E ch)
         return NULL_TSHIFT;
     }
 
-    int delta = (set.dbg_gate + 1) * 10;
+    int delta = (set.dbg_enum_gate + 1) * 10;
 
     if (valueADC > max - delta)
     {

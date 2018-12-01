@@ -295,7 +295,7 @@ static void FuncLong()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void ArrowChoice(Control *item, Key::E key, TypePress::E type)
+static void ArrowChoice(Control * /*item*/, Key::E, TypePress::E type)
 {
     if (type != TypePress::Press)
     {
@@ -304,7 +304,7 @@ static void ArrowChoice(Control *item, Key::E key, TypePress::E type)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void ArrowPage(Control *item, Key::E key, TypePress::E type)
+static void ArrowPage(Control * /*item*/, Key::E /*key*/, TypePress::E type)
 {
     if (type != TypePress::Press)
     {

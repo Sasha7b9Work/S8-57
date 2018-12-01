@@ -264,7 +264,7 @@ public:
     Recorder::DataStorage       rec_storagePlay;        ///< Откуда брать сохранённые данные
 
 
-    int16   dbg_gate;           ///< Ограничение ворот в рандомизаторе
+    int16   dbg_enum_gate;           ///< Ограничение ворот в рандомизаторе
 };
 
 #pragma pack(pop)
