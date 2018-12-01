@@ -96,6 +96,10 @@ public:
 
     static void DrawTesterData(uint8 mode, Color color, uint8 *x, uint8 *y);
 
+    static void DrawDashedVLine(int x, int y0, int y1, int deltaFill, int deltaEmtpy, int deltaStart);
+
+    static void DrawDashedHLine(int y, int x0, int x1, int deltaFill, int deltaEmpty, int deltaStart);
+
 private:
 
     static int DrawCharWithLimitation(int eX, int eY, char symbol, int limitX, int limitY, int limitWidth, int limitHeight);

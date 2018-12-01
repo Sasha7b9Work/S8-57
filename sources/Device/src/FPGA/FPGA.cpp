@@ -93,7 +93,9 @@ void FPGA::Update()
         return;
     };
 
-    int number = IN_RANDOMIZE_MODE ? Kr[SET_TBASE] : 1;
+    int number = (IN_RANDOMIZE_MODE && !START_MODE_IS_SINGLE) ? Kr[SET_TBASE] : 1;
+
+    number = 1;
 
     for (int i = 0; i < number; i++)
     {
@@ -910,4 +912,11 @@ uint FPGA::NumPoints()
 void FPGA::DoCalibration()
 {
     state.needCalibration = true;
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void FPGA::SetValueADC(uint16 value)
+{
+    valueADC = value;
+    LOG_WRITE("%d", valueADC);
 }

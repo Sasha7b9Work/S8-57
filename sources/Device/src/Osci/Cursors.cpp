@@ -15,6 +15,15 @@
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/// Нарисовать вертикальный курсор
+static void DrawVertical(int x, int yTearing);
+/// Нарисовать горизонтальный курсор
+static void DrawHorizontal(int y, int xTearing);
+
+static void UpdateCursorsForLook();
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 float Cursors::PosU(Chan::E ch, int numCur)
 {
     return CURsU_POS(ch, numCur) / (Grid::Bottom() == Grid::FullBottom() ? 1.0f : 2.0f);
@@ -72,8 +81,8 @@ void Cursors::Draw()
         {
             x0 = Grid::Left() + (int)CURsT_POS(source, 0);
             x1 = Grid::Left() + (int)CURsT_POS(source, 1);
-            y0 = GRID_TOP + (int)sCursors_GetCursPosU(source, 0);
-            y1 = GRID_TOP + (int)sCursors_GetCursPosU(source, 1);
+            y0 = Grid::Top() + (int)CURsU_POS(source, 0);
+            y1 = Grid::Top() + (int)CURsU_POS(source, 1);
 
             Painter::DrawRectangle(x0 - 2, y0 - 2, 4, 4);
             Painter::DrawRectangle(x1 - 2, y1 - 2, 4, 4);
@@ -81,15 +90,72 @@ void Cursors::Draw()
 
         if (CURsT_ENABLED)
         {
-            DrawVerticalCursor((int)CURsT_POS(source, 0), y0);
-            DrawVerticalCursor((int)CURsT_POS(source, 1), y1);
+            DrawVertical((int)CURsT_POS(source, 0), y0);
+            DrawVertical((int)CURsT_POS(source, 1), y1);
         }
         if (CURsU_ENABLED)
         {
-            DrawHorizontalCursor((int)sCursors_GetCursPosU(source, 0), x0);
-            DrawHorizontalCursor((int)sCursors_GetCursPosU(source, 1), x1);
+            DrawHorizontal((int)CURsU_POS(source, 0), x0);
+            DrawHorizontal((int)CURsU_POS(source, 1), x1);
         }
 
         UpdateCursorsForLook();
+    }
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+static void DrawVertical(int x, int yTearing)
+{
+    x += Grid::Left();
+    if (yTearing == -1)
+    {
+        Painter::DrawDashedVLine(x, Grid::Top() + 2, Grid::ChannelBottom() - 1, 1, 1, 0);
+    }
+    else
+    {
+        Painter::DrawDashedVLine(x, Grid::Top() + 2, yTearing - 2, 1, 1, 0);
+        Painter::DrawDashedVLine(x, yTearing + 2, Grid::ChannelBottom() - 1, 1, 1, 0);
+    }
+    Painter::DrawRectangle(x - 1, Grid::Top() - 1, 2, 2);
+    Painter::DrawRectangle(x - 1, Grid::ChannelBottom() - 1, 2, 2);
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+static void DrawHorizontal(int y, int xTearing)
+{
+    y += Grid::Top();
+    if (xTearing == -1)
+    {
+        Painter::DrawDashedHLine(y, Grid::Left() + 2, Grid::Right() - 1, 1, 1, 0);
+    }
+    else
+    {
+        Painter::DrawDashedHLine(y, Grid::Left() + 2, xTearing - 2, 1, 1, 0);
+        Painter::DrawDashedHLine(y, xTearing + 2, Grid::Right() - 1, 1, 1, 0);
+    }
+    Painter::DrawRectangle(Grid::Left() - 1, y - 1, 2, 2);
+    Painter::DrawRectangle(Grid::Right() - 1, y - 1, 2, 2);
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+static void UpdateCursorsForLook()
+{
+//    Chan::E source = CURS_SOURCE;
+
+    if (CURS_ACTIVE_T && (CURS_LOOK_U(Chan::A) || CURS_LOOK_BOTH(Chan::A)))
+    {
+        //SetCursorU(source, 0, Processing::CalculateCursorU(source, CURsT_POS(source, 0)));
+    }
+    if (CURS_ACTIVE_T && (CURS_LOOK_U(Chan::B) || CURS_LOOK_BOTH(Chan::B)))
+    {
+        //SetCursorU(source, 1, Processing::CalculateCursorU(source, CURsT_POS(source, 1)));
+    }
+    if (CURS_ACTIVE_U && (CURS_LOOK_T(Chan::A) || CURS_LOOK_BOTH(Chan::A)))
+    {
+        //SetCursorT(source, 0, Processing::CalculateCursorT(source, CURsU_POS(source, 0), 0));
+    }
+    if (CURS_ACTIVE_U && (CURS_LOOK_T(Chan::B) || CURS_LOOK_BOTH(Chan::B)))
+    {
+        //SetCursorT(source, 1, Processing::CalculateCursorT(source, CURsU_POS(source, 1), 1));
     }
 }

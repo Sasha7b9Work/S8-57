@@ -121,7 +121,7 @@ public:
 
     static ADC_HandleTypeDef *HandleADC() { return &handleADC; };
 
-    static void SetValueADC(uint16 value) { valueADC = value; };
+    static void SetValueADC(uint16 value);
     /// Сделать калибровку
     static void DoCalibration();
 
