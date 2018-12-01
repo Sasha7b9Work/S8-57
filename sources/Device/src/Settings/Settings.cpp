@@ -207,7 +207,9 @@ static const Settings defaultSettings =
     /* rec_sourceChanB */   false,
     /* rec_sourceSensor */  false,
     /* rec_storageRecord */ Recorder::DataStorage::Flash,
-    /* rec_storagePlay */   Recorder::DataStorage::Flash
+    /* rec_storagePlay */   Recorder::DataStorage::Flash,
+
+    /* dbg_gate */          0
 };
 
 Settings set = defaultSettings;

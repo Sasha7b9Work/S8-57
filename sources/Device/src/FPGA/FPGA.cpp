@@ -8,6 +8,7 @@
 #include "Hardware/FSMC.h"
 #include "Hardware/GPIO.h"
 #include "Hardware/Timer.h"
+#include "Menu/Pages/Include/PageChannels.h"
 #include "Utils/Math.h"
 #include "Settings/Settings.h"
 #include "Data/DataBuffer.h"
@@ -338,14 +339,16 @@ int FPGA::CalculateShift(Chan::E ch)
         return NULL_TSHIFT;
     }
 
-    if (valueADC > max - 100)
+    int delta = (set.dbg_gate + 1) * 10;
+
+    if (valueADC > max - delta)
     {
         return NULL_TSHIFT;
     }
 
     if (IN_RANDOMIZE_MODE)
     {
-        float tin = (float)(valueADC - min) / (max - min);
+        float tin = (float)(valueADC - min) / (max - delta - min);
         int retValue = (int)(tin * Kr[SET_TBASE]);
 
         return retValue;

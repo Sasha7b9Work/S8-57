@@ -262,6 +262,9 @@ public:
     bool                        rec_sourceSensor;       ///< Включение записи показаний датчика
     Recorder::DataStorage       rec_storageRecord;      ///< Куда сохранять данные
     Recorder::DataStorage       rec_storagePlay;        ///< Откуда брать сохранённые данные
+
+
+    int16   dbg_gate;           ///< Ограничение ворот в рандомизаторе
 };
 
 #pragma pack(pop)
