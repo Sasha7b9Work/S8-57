@@ -192,19 +192,21 @@ const char *Control::Title() const
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-bool Control::ChangeOpened(int delta)
+bool Control::ProcessArrow(Key::E key)
 {
     if (type == Control::Type::Page)
     {
-        ((Page *)this)->ChangeSubPage(delta);
+        ((Page *)this)->ChangeSubPage(key == Key::Left ? -1 : 1);
     }
     else if (type == Control::Type::ChoiceReg || type == Control::Type::Choice)
     {
+        int delta = (key == Key::Up) ? 1 : -1;
+
         ((Choice *)this)->ChangeIndex(Menu::IsShown() ? delta : -delta);
     }
     else if (type == Control::Type::Governor)
     {
-        ((Governor *)this)->ChangeValue(delta);
+        ((Governor *)this)->ChangeValue((key == Key::Left || key == Key::Down) ? -1 : 1);
     }
 
     return true;

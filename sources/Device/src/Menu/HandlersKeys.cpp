@@ -328,14 +328,14 @@ static void ArrowPage(Control *item, Key::E key, TypePress::E type)
     {
         if (!page->funcRegSet(-1))
         {
-            page->ChangeOpened(-1);
+            page->ProcessArrow(key);
         }
     }
     else if (key == Key::Right)
     {
         if (!page->funcRegSet(1))
         {
-            page->ChangeOpened(1);
+            page->ProcessArrow(key);
         }
     }
     else if (key == Key::Up)
