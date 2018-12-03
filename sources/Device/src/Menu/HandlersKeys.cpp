@@ -328,14 +328,14 @@ static void ArrowPage(Control *item, Key::E key, TypePress::E type)
     {
         if (!page->funcRegSet(-1))
         {
-            page->ProcessArrow(key);
+            page->ProcessKey(event);
         }
     }
     else if (key == Key::Right)
     {
         if (!page->funcRegSet(1))
         {
-            page->ProcessArrow(key);
+            page->ProcessKey(event);
         }
     }
     else if (key == Key::Up)
@@ -346,11 +346,15 @@ static void ArrowPage(Control *item, Key::E key, TypePress::E type)
     {
 
     }
+
+    LOG_WRITE("%d", sizeof(KeyEvent));
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void Arrow()
 {
+//    Menu::OpenedItem()->ProcessKey(event);
+
     typedef void(*pFuncKey)(Control *, Key::E, TypePress::E);
 
     static const struct StructFunc { pFuncKey val; } funcs[Control::Type::Number] =

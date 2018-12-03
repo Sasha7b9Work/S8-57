@@ -63,8 +63,8 @@ public:
     void Open(bool open);
     /// Возвращает название элемента, как оно выглядит на дисплее прибора
     const char *Title() const;
-    /// Обработка нажатия стрелки
-    bool ProcessArrow(Key::E key);
+    /// Обработка события кнопки
+    bool ProcessKey(KeyEvent event);
     /// Вызывается при "коротком" нажатии
     void ShortPress();
     /// Вызывается при "длинном" нажатии

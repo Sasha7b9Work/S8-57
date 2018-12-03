@@ -192,8 +192,10 @@ const char *Control::Title() const
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-bool Control::ProcessArrow(Key::E key)
+bool Control::ProcessKey(KeyEvent event)
 {
+    Key::E key = event.key;
+
     if (type == Control::Type::Page)
     {
         ((Page *)this)->ChangeSubPage(key == Key::Left ? -1 : 1);
