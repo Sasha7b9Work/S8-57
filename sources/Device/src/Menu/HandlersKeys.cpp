@@ -325,25 +325,26 @@ static void ArrowPage()
 
     Key::E key = event.key;
 
-    if (type != TypePress::Press)
-    {
-        return;
-    }
-
     Page *page = (Page *)Menu::OpenedItem();
 
     if (key == Key::Left)
     {
         if (!page->funcKey(event))
         {
-            page->ProcessKey(event);
+            if (type == TypePress::Press)
+            {
+                page->ProcessKey(event);
+            }
         }
     }
     else if (key == Key::Right)
     {
         if (!page->funcKey(event))
         {
-            page->ProcessKey(event);
+            if (type == TypePress::Press)
+            {
+                page->ProcessKey(event);
+            }
         }
     }
     else if (key == Key::Up)
