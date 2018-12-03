@@ -345,8 +345,6 @@ static void Arrow()
         ArrowPage
     };
 
-    LOG_WRITE("%s", TypePress(event.type).ToString());
-
     HANDLER_CHOICE_AND_SAFE_RUN(pFuncVV, Menu::OpenedItem()->type);
 }
 
