@@ -35,7 +35,7 @@ void Device::Init()
 
     Display::Init();
 
-     
+    PAUSE_ON_MS(500);
 
     FPGA::Init();
 
