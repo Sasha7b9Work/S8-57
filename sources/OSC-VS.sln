@@ -6,6 +6,7 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "doc", "doc", "{5872F067-A3F3-45AF-B64A-17FC770A9068}"
 	ProjectSection(SolutionItems) = preProject
 		doc\Page01 Межпроцессорные коммуникации.h = doc\Page01 Межпроцессорные коммуникации.h
+		doc\Page02 Подсистема обновления.h = doc\Page02 Подсистема обновления.h
 		doc\Page03 Задействованные аппаратные ресурсы.h = doc\Page03 Задействованные аппаратные ресурсы.h
 		doc\Page04 Задействованные таймеры.h = doc\Page04 Задействованные таймеры.h
 		doc\Page05 Новый алгоритм хранения настроек.h = doc\Page05 Новый алгоритм хранения настроек.h
