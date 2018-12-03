@@ -281,9 +281,14 @@ DEF_SMALL_BUTTON_HINTS_2(bSet_Movement,                                         
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 bool PageMeasures::PageCursors::PageSet::OnKey(KeyEvent event)
 {
-    Key::E key = event.key;
+    TypePress::E type = event.type;
 
-//    TypePress::E type = event.type;
+    if (type == TypePress::Release || type == TypePress::Long)
+    {
+        return true;
+    }
+
+    Key::E key = event.key;
 
     float value = event.IsAboveZero() ? 1.0f : -1.0f;
 
@@ -304,7 +309,7 @@ bool PageMeasures::PageCursors::PageSet::OnKey(KeyEvent event)
         }
         UpdateCursorsForLook();
     }
-    else if(CURS_ACTIVE_T && event.IsAboveZero())
+    else if(CURS_ACTIVE_T && (key == Key::Left || key == Key::Right))
     {
         if (CURS_MOVEMENT_IN_PERCENTS)
         {

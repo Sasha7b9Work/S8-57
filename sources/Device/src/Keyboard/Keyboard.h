@@ -61,7 +61,8 @@ struct TypePress
         Repeat,     ///< Автоматический повтор
         Release,    ///< Отпускание кнопки
         Long,       ///< "Длинное" нажатие кнопки
-        None
+        None,
+        Number
     } value;
 
     explicit TypePress(E v) : value(v)  { };

@@ -273,7 +273,11 @@ bool Control::IsRepeatable() const
         value == B_TShiftLess ||
         value == B_TShiftMore ||
         value == B_TrigLevLess ||
-        value == B_TrigLevMore;
+        value == B_TrigLevMore ||
+        value == B_Left ||
+        value == B_Right ||
+        value == B_Down ||
+        value == B_Up;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

@@ -323,37 +323,14 @@ static void ArrowPage()
 {
     TypePress::E type = event.type;
 
-    Key::E key = event.key;
-
     Page *page = (Page *)Menu::OpenedItem();
 
-    if (key == Key::Left)
+    if (!page->funcKey(event))
     {
-        if (!page->funcKey(event))
+        if (type == TypePress::Press)
         {
-            if (type == TypePress::Press)
-            {
-                page->ProcessKey(event);
-            }
+            page->ProcessKey(event);
         }
-    }
-    else if (key == Key::Right)
-    {
-        if (!page->funcKey(event))
-        {
-            if (type == TypePress::Press)
-            {
-                page->ProcessKey(event);
-            }
-        }
-    }
-    else if (key == Key::Up)
-    {
-
-    }
-    else if (key == Key::Down)
-    {
-
     }
 }
 
@@ -367,6 +344,8 @@ static void Arrow()
         0,
         ArrowPage
     };
+
+    LOG_WRITE("%s", TypePress(event.type).ToString());
 
     HANDLER_CHOICE_AND_SAFE_RUN(pFuncVV, Menu::OpenedItem()->type);
 }

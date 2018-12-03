@@ -367,7 +367,7 @@ bool FPGA::CalculateGate(uint16 rand, uint16 *eMin, uint16 *eMax)
 
     if (rand < 500 || rand > 4000)
     {
-        LOG_WRITE("ОШИБКА!!! считано %d", rand);
+        ///LOG_WRITE("ОШИБКА!!! считано %d", rand);
         return false;
     }
 
