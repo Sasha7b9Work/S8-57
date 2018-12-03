@@ -295,34 +295,63 @@ static void FuncLong()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void ArrowChoice(Control * /*item*/, Key::E, TypePress::E type)
+static void ArrowChoice(Control *item, Key::E key, TypePress::E type)
 {
     if (type != TypePress::Press)
     {
         return;
     }
+
+    Choice *choice = (Choice *)item;
+
+    if (key == Key::Up)
+    {
+        choice->ChangeIndex(-1);
+    }
+    else if (key == Key::Down)
+    {
+        choice->ChangeIndex(1);
+    }
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void ArrowPage(Control * /*item*/, Key::E /*key*/, TypePress::E type)
+static void ArrowPage(Control *item, Key::E key, TypePress::E type)
 {
     if (type != TypePress::Press)
     {
         return;
+    }
+
+    Page *page = (Page *)item;
+
+    if (key == Key::Left)
+    {
+        if (!page->funcRegSet(-1))
+        {
+            page->ChangeOpened(-1);
+        }
+    }
+    else if (key == Key::Right)
+    {
+        if (!page->funcRegSet(1))
+        {
+            page->ChangeOpened(1);
+        }
+    }
+    else if (key == Key::Up)
+    {
+
+    }
+    else if (key == Key::Down)
+    {
+
     }
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void Arrow()
 {
-    Control *item = Menu::OpenedItem();
-
-    TypePress::E type = event.type;
-    /*
-
-    Key::E key = event.key;
-
-    typedef void(*pFuncKey)(Control *item, Key::E, TypePress::E);
+    typedef void(*pFuncKey)(Control *, Key::E, TypePress::E);
 
     static const struct StructFunc { pFuncKey val; } funcs[Control::Type::Number] =
     {
@@ -332,54 +361,9 @@ static void Arrow()
         ArrowPage
     };
 
+    Control *item = Menu::OpenedItem();
+
     HANDLER_CHOISE_AND_SAFE_RUN_3(pFuncKey, item->type, item, event.key, event.type);
-    */
-
-    if (type != TypePress::Press)
-    {
-        return;
-    }
-
-    if(IS_PAGE(item))
-    {
-        Page *page = (Page *)item;
-
-        switch ((uint8)event.key)
-        {
-            case Key::Left:
-                if(!page->funcRegSet(-1))
-                {
-                    page->ChangeOpened(-1);
-                }
-                break;
-            case Key::Right:
-                if(!page->funcRegSet(1))
-                {
-                    page->ChangeOpened(1);
-                }
-                break;
-            case Key::Up:
-            case Key::Down:
-                break;
-        }
-    }
-    else if(IS_CHOICE(item))
-    {
-        Choice *choice = (Choice *)item;
-
-        switch((uint8)event.key)
-        {
-            case Key::Up:
-                choice->ChangeIndex(-1);
-                break;
-            case Key::Down:
-                choice->ChangeIndex(1);
-                break;
-            case Key::Left:
-            case Key::Right:
-                break;
-        }
-    }
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
