@@ -41,9 +41,9 @@ static void FuncLong();
 /// Обработчик нажатия стрелки
 static void Arrow();
 /// Обработка события стрелки на открытой странице
-static void ArrowChoice(Control *item, Key::E key, TypePress::E type);
+static void ArrowChoice();
 /// Обработка события стрелки на открытом Choice
-static void ArrowPage(Control *item, Key::E key, TypePress::E type);
+static void ArrowPage();
 
 
 /// Общий обработчик изменения параметра канала - масштаба или смещения
@@ -295,14 +295,18 @@ static void FuncLong()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void ArrowChoice(Control *item, Key::E key, TypePress::E type)
+static void ArrowChoice()
 {
+    TypePress::E type = event.type;
+
+    Key::E key = event.key;
+
     if (type != TypePress::Press)
     {
         return;
     }
 
-    Choice *choice = (Choice *)item;
+    Choice *choice = (Choice *)Menu::OpenedItem();
 
     if (key == Key::Up)
     {
@@ -315,14 +319,18 @@ static void ArrowChoice(Control *item, Key::E key, TypePress::E type)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void ArrowPage(Control *item, Key::E key, TypePress::E type)
+static void ArrowPage()
 {
+    TypePress::E type = event.type;
+
+    Key::E key = event.key;
+
     if (type != TypePress::Press)
     {
         return;
     }
 
-    Page *page = (Page *)item;
+    Page *page = (Page *)Menu::OpenedItem();
 
     if (key == Key::Left)
     {
@@ -351,11 +359,7 @@ static void ArrowPage(Control *item, Key::E key, TypePress::E type)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void Arrow()
 {
-//    Menu::OpenedItem()->ProcessKey(event);
-
-    typedef void(*pFuncKey)(Control *, Key::E, TypePress::E);
-
-    static const struct StructFunc { pFuncKey val; } funcs[Control::Type::Number] =
+    static const struct StructFunc { pFuncVV val; } funcs[Control::Type::Number] =
     {
         0,
         ArrowChoice,
@@ -363,9 +367,7 @@ static void Arrow()
         ArrowPage
     };
 
-    Control *item = Menu::OpenedItem();
-
-    HANDLER_CHOISE_AND_SAFE_RUN_3(pFuncKey, item->type, item, event.key, event.type);
+    HANDLER_CHOICE_AND_SAFE_RUN(pFuncVV, Menu::OpenedItem()->type);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
