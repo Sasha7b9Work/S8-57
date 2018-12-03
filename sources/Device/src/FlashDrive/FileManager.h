@@ -1,4 +1,5 @@
-#pragma once 
+#pragma once
+#include "Keyboard/Keyboard.h"
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -21,7 +22,7 @@ public:
     
     static void PressSB_LevelDown();
     
-    static bool RotateRegSet(int angle);
+    static bool HandlerKey(KeyEvent event);
     
     static bool GetNameForNewFile(char name[255]);
 

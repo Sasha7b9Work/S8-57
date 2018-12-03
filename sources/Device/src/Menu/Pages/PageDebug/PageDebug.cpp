@@ -932,9 +932,9 @@ static void OnPress_SerialNumber(bool)
     s->curDigt = 0;
 }
 
-static bool OnRegSet_SerialNumber(int angle)
+static bool HandlerKey_SerialNumber(KeyEvent event)
 {
-    pFuncVpIII p = (angle > 0) ? (Math::CircleIncrease<int>) : (Math::CircleDecrease<int>);
+    pFuncVpIII p = event.IsAboveZero() ? (Math::CircleIncrease<int>) : (Math::CircleDecrease<int>);
 
     ACCESS_EXTRAMEM(StructForSN, s);
 
@@ -951,7 +951,7 @@ static bool OnRegSet_SerialNumber(int angle)
     return true;
 }
 
-DEF_PAGE_SB(        ppSerialNumber,                                                                                               // ОТЛАДКА - С/Н ///
+DEF_PAGE_SB(        ppSerialNumber,                                                                                                                                   //--- ОТЛАДКА - С/Н ---
     "С/Н", "S/N",
     "Запись серийного номера в OTP-память. ВНИМАНИЕ!!! ОТP-память - память с однократной записью.",
     "Serial number recording in OTP-memory. ATTENTION!!! OTP memory is a one-time programming memory.",
@@ -961,7 +961,7 @@ DEF_PAGE_SB(        ppSerialNumber,                                             
     0,
     0,
     &bSerialNumber_Save,            // ОТЛАДКА - С/Н - Сохранить
-    Page::Name::SB_Debug_SerialNumber, &pageDebug, FuncActive, OnPress_SerialNumber, FuncDrawPage, OnRegSet_SerialNumber
+    Page::Name::SB_Debug_SerialNumber, &pageDebug, FuncActive, OnPress_SerialNumber, FuncDrawPage, HandlerKey_SerialNumber
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

@@ -244,14 +244,16 @@ static void DrawMemoryWave(int num, bool exist)
     }
 }
 
-static bool OnRegSet_Internal(int delta)
+static bool HandlerKey_Internal(KeyEvent event)
 {
+    Key::E key = event.key;
+
     Sound::RegulatorSwitchRotate();
-    if (delta < 0)
+    if (key == Key::Left || key == Key::Down)
     {
         Math::CircleDecrease<int8>((int8 *)&NUM_ROM_SIGNAL, 0, MAX_NUM_SAVED_WAVES - 1);
     }
-    else if (delta > 0)
+    else if (key == Key::Right || key == Key::Up)
     {
         Math::CircleIncrease<int8>((int8 *)&NUM_ROM_SIGNAL, 0, MAX_NUM_SAVED_WAVES - 1);
     }
@@ -261,14 +263,14 @@ static bool OnRegSet_Internal(int delta)
 }
 
 
-DEF_PAGE_5(pageROM,                                                                                                        // ПАМЯТЬ - ВНУТР ЗУ ///
+DEF_PAGE_5(pageROM,                                                                                                                                               //--- ПАМЯТЬ - ВНУТР ЗУ ---
     "ВНУТР ЗУ", "INT STORAGE",
     "Переход в режим работы с внутренней памятью",
     "Transition to an operating mode with internal memory",
-    &bInternal_ShowAlways,      // ПАМЯТЬ - ВНУТР ЗУ - Показывать всегда
-    &bInternal_ModeShow,        // ПАМЯТЬ - ВНУТР ЗУ - Вид сигнала
-    &bInternal_Delete,          // ПАМЯТЬ - ВНУТР ЗУ - Удалить
-    &bInternal_SaveToMemory,    // ПАМЯТЬ - ВНУТР ЗУ - Сохранить
-    &bInternal_SaveToDrive,     // ПАМЯТЬ - ВНУТР ЗУ - Сохранить на флешку
-    Page::Name::SB_Memory_Internal, PageMemory::pointer, FuncActive, OnPress_Internal, OnDraw_Internal, OnRegSet_Internal
+    &bInternal_ShowAlways,      ///< ПАМЯТЬ - ВНУТР ЗУ - Показывать всегда
+    &bInternal_ModeShow,        ///< ПАМЯТЬ - ВНУТР ЗУ - Вид сигнала
+    &bInternal_Delete,          ///< ПАМЯТЬ - ВНУТР ЗУ - Удалить
+    &bInternal_SaveToMemory,    ///< ПАМЯТЬ - ВНУТР ЗУ - Сохранить
+    &bInternal_SaveToDrive,     ///< ПАМЯТЬ - ВНУТР ЗУ - Сохранить на флешку
+    Page::Name::SB_Memory_Internal, PageMemory::pointer, FuncActive, OnPress_Internal, OnDraw_Internal, HandlerKey_Internal
 )

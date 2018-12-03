@@ -326,14 +326,14 @@ static void ArrowPage(Control *item, Key::E key, TypePress::E type)
 
     if (key == Key::Left)
     {
-        if (!page->funcRegSet(-1))
+        if (!page->funcKey(event))
         {
             page->ProcessKey(event);
         }
     }
     else if (key == Key::Right)
     {
-        if (!page->funcRegSet(1))
+        if (!page->funcKey(event))
         {
             page->ProcessKey(event);
         }
@@ -346,8 +346,6 @@ static void ArrowPage(Control *item, Key::E key, TypePress::E type)
     {
 
     }
-
-    LOG_WRITE("%d", sizeof(KeyEvent));
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

@@ -301,17 +301,21 @@ static void DecCurrentFile()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-bool FileManager::RotateRegSet(int angle)
+bool FileManager::HandlerKey(KeyEvent event)
 {
+    Key::E key = event.key;
+
+    int delta = (key == Key::Up || key == Key::Right) ? 1 : -1;
+
     Sound::RegulatorSwitchRotate();
     if (FM_CURSOR_IN_DIRS)
     {
-        angle > 0 ? DecCurrentDir() : IncCurrentDir();
+        delta > 0 ? DecCurrentDir() : IncCurrentDir();
         FM_NEED_REDRAW = FM_REDRAW_FOLDERS;
     }
     else
     {
-        angle > 0 ? DecCurrentFile() : IncCurrentFile();
+        delta > 0 ? DecCurrentFile() : IncCurrentFile();
         FM_NEED_REDRAW = FM_REDRAW_FILES;
     }
 

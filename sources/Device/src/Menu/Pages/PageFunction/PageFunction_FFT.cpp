@@ -104,9 +104,13 @@ static bool IsActive_FFT_Cursors()
     return FFT_ENABLED;
 }
 
-static bool OnRegSet_FFT_Cursors(int angle)
+static bool HandlerKey_FFT_Cursors(KeyEvent event)
 {
-    FFT_POS_CURSOR(MATH_CURRENT_CUR) += (uint8)angle;
+    Key::E key = event.key;
+
+    int delta = (key == Key::Up || key == Key::Right) ? 1 : -1;
+
+    FFT_POS_CURSOR(MATH_CURRENT_CUR) += (uint8)delta;
     Sound::RegulatorShiftRotate();
 
     return true;
@@ -127,12 +131,12 @@ DEF_PAGE_SB(pppFFT_Cursors,                                                     
 )
 */
 
-DEF_PAGE_1(pppFFT_Cursors,                                                                                       //--- ФУНКЦИЯ - СПЕКТР - КУРСОРЫ ---
+DEF_PAGE_1(pppFFT_Cursors,                                                                                                                               //--- ФУНКЦИЯ - СПЕКТР - КУРСОРЫ ---
     "КУРСОРЫ", "CURSORS",
     "Включает курсоры для измерения параметров спектра",
     "Includes cursors to measure the parameters of the spectrum",
     &bFFT_Cursors_Source,   ///< СЕРВИС - СПЕКТР - КУРСОРЫ - Источник
-    Page::Name::SB_Service_FFT_Cursors, &ppFFT, IsActive_FFT_Cursors, EmptyPressPage, FuncDrawPage, OnRegSet_FFT_Cursors
+    Page::Name::SB_Service_FFT_Cursors, &ppFFT, IsActive_FFT_Cursors, EmptyPressPage, FuncDrawPage, HandlerKey_FFT_Cursors
 )
 
 

@@ -71,11 +71,15 @@ static bool IsActive_Tune()
     return SHOW_MEASURES;
 }
 
-static bool OnRegSet_Tune(int angle)
+static bool HandlerKey_Tune(KeyEvent event)
 {
+    Key::E key = event.key;
+
+    int8 delta = (key == Key::Up || key == Key::Right) ? 1 : -1;
+
     if (Measure::pageChoiceIsActive)
     {
-        Measure::posOnPageChoice += (int8)Math::Sign(angle);
+        Measure::posOnPageChoice += delta;
         Sound::RegulatorSwitchRotate();
         if (Measure::posOnPageChoice < 0)
         {
@@ -90,7 +94,7 @@ static bool OnRegSet_Tune(int angle)
     }
     else
     {
-        Measure::ChangeActive(angle);
+        Measure::ChangeActive(delta);
 
         Sound::RegulatorSwitchRotate();
     }
@@ -104,5 +108,5 @@ DEF_PAGE_2(pageTune,
     "Transition to the fine tuning mode of the number and types of measurements",
     &bTune_Markers,
     &bTune_Settings,
-    Page::Name::Measures_Auto_Tune, PageMeasures::PageAuto::pointer, IsActive_Tune, EmptyPressPage, FuncDrawPage, OnRegSet_Tune
+    Page::Name::Measures_Auto_Tune, PageMeasures::PageAuto::pointer, IsActive_Tune, EmptyPressPage, FuncDrawPage, HandlerKey_Tune
 )

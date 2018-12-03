@@ -73,9 +73,13 @@ struct TypePress
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 struct KeyEvent
 {
-    KeyEvent(Key::E k = Key::None, TypePress::E t = TypePress::None) : key(k), type(t) { };
+    explicit KeyEvent(Key::E k = Key::None, TypePress::E t = TypePress::None) : key(k), type(t) { };
     Key::E key;
     TypePress::E type;
+    /// Возвращает true, если кнопка означает увеличение
+    bool IsAboveZero() const { return key == Key::Up || key == Key::Right; }
+    /// Возвращает 1, если кнопка означает увеличение, и -1 в обратном случае
+    int Delta() const { return IsAboveZero() ? 1 : -1; }
 };
 
 

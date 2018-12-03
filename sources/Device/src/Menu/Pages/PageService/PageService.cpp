@@ -458,12 +458,16 @@ static void OnPress_Function(bool)
     }
 }
 
-static bool OnRegSet_Function(int delta)
+static bool HandlerKey_Function(KeyEvent event)
 {
     if (!FUNC_MODE_DRAW_IS_ENABLED)
     {
         return false;
     }
+
+    Key::E key = event.key;
+
+    int delta = (key == Key::Up || key == Key::Right) ? 1 : -1;
 
     if (MATH_MODE_REG_SET_IS_RSHIFT)
     {
@@ -540,7 +544,7 @@ DEF_PAGE_5(ppFunction,                                                          
     &bFunction_ModeRegSet,  // СЕРВИС - ФУНКЦИЯ - Режим ручки УСТАНОВКА
     &bFunction_RangeA,      // СЕРВИС - ФУНКЦИЯ - Масштаб 1-го канала
     &bFunction_RangeB,
-    Page::Name::SB_Service_Function, &pService, IsActive_Function, OnPress_Function, FuncDrawPage, OnRegSet_Function
+    Page::Name::SB_Service_Function, &pService, IsActive_Function, OnPress_Function, FuncDrawPage, HandlerKey_Function
 )
 
 

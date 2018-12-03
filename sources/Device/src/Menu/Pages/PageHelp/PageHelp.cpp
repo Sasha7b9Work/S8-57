@@ -48,7 +48,7 @@ static void DrawSB_Help_ParagraphNext(int x, int y)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static bool OnHelpRegSet(int)
+static bool HandlerKey_Help(KeyEvent)
 {
     return true;
 }
@@ -94,7 +94,7 @@ static void PressSB_Help_Exit()
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 /*
-DEF_SMALL_BUTTON_EXIT(  sbExitHelp,                                                                                           //--- ѕќћќў№ - ¬ыход ---
+DEF_SMALL_BUTTON_EXIT(  sbExitHelp,                                                                                                                                  //--- ѕќћќў№ - ¬ыход ---
     pHelp, FuncActive, PressSB_Help_Exit, DrawSB_Help_ParagraphNext
 )
 */
@@ -102,7 +102,7 @@ DEF_SMALL_BUTTON_EXIT(  sbExitHelp,                                             
 const PageBase *PageHelp::pointer = &pHelp;
 
 /*
-DEF_PAGE_SB(        pHelp,                                                                                                               // ѕќћќў№ ///
+DEF_PAGE_SB(        pHelp,                                                                                                                                                   //--- ѕќћќў№ ---
     "ѕќћќў№", "HELP",
     "ќткрыть разделы помощи",
     "To open sections of the help",
@@ -112,11 +112,11 @@ DEF_PAGE_SB(        pHelp,                                                      
     0,
     &sbHelpParagraphPrev,
     &sbHelpParagraphNext,
-    Page::Name::SB_Help, Menu::pageMain, FuncActive, EmptyPressPage, HelpContent_Draw, OnHelpRegSet
+    Page::Name::SB_Help, Menu::pageMain, FuncActive, EmptyPressPage, HelpContent_Draw, HandlerKey_Help
 )
 */
 
-DEF_PAGE_4(pHelp,                                                                                                               // ѕќћќў№ ///
+DEF_PAGE_4(pHelp,                                                                                                                                                            //--- ѕќћќў№ ---
     "ѕќћќў№", "HELP",
     "ќткрыть разделы помощи",
     "To open sections of the help",
@@ -124,5 +124,5 @@ DEF_PAGE_4(pHelp,                                                               
     &sbHelpParagraphLeave,
     &sbHelpParagraphPrev,
     &sbHelpParagraphNext,
-    Page::Name::SB_Help, Menu::pageMain, FuncActive, EmptyPressPage, HelpContent_Draw, OnHelpRegSet
+    Page::Name::SB_Help, Menu::pageMain, FuncActive, EmptyPressPage, HelpContent_Draw, HandlerKey_Help
 )

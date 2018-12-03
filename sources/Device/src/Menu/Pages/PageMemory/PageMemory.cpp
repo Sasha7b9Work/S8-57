@@ -179,19 +179,19 @@ DEF_PAGE_SB(        pppDrive_Manager,                                           
 )
 */
 
-DEF_PAGE_3(pppDrive_Manager,                                                                               // ПАМЯТЬ - ВНЕШН ЗУ - КАТАЛОГ ///
+DEF_PAGE_3(pppDrive_Manager,                                                                                                                            //--- ПАМЯТЬ - ВНЕШН ЗУ - КАТАЛОГ ---
     "КАТАЛОГ", "DIRECTORY",
     "Открывает доступ к файловой системе подключенного накопителя",
     "Provides access to the file system of the connected drive",
     &bDrive_Manager_Tab,        // ПАМЯТЬ - ВНЕШН ЗУ - КАТАЛОГ - Tab
     &bDrive_Manager_LevelUp,    // ПАМЯТЬ - ВНЕШН ЗУ - КАТАЛОГ - Выйти из каталога
     &bDrive_Manager_LevelDown,  // ПАМЯТЬ - ВНЕШН ЗУ - КАТАЛОГ - Войти в каталог
-    Page::Name::SB_Memory_Drive_Manager, &ppDrive, IsActive_Drive_Manager, PageMemory::OnPress_Drive_Manager, FuncDrawPage, FileManager::RotateRegSet
+    Page::Name::SB_Memory_Drive_Manager, &ppDrive, IsActive_Drive_Manager, PageMemory::OnPress_Drive_Manager, FuncDrawPage, FileManager::HandlerKey
 )
 
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-DEF_CHOICE_2(       cDrive_Name,                                                                               //--- ПАМЯТЬ - ВНЕШН ЗУ - Имя файла ---
+DEF_CHOICE_2(       cDrive_Name,                                                                                                                      //--- ПАМЯТЬ - ВНЕШН ЗУ - Имя файла ---
     "Имя файла", "File name"
     ,
     "Задаёт режим наименования файлов при сохранении на внешний накопитель:\n"
@@ -451,8 +451,12 @@ static void DrawFileMask(int x, int y)
     Painter::FillRegion(x, y, 5, 8, Color::FLASH_10);
 }
 
-static bool OnRegSet_Drive_Mask(int angle)
+static bool HandlerKey_Drive_Mask(KeyEvent event)
 {
+    Key::E key = event.key;
+
+    int angle = (key == Key::Up || key == Key::Right) ? 1 : -1;
+
     OnMemExtSetMaskNameRegSet(angle, Tables::Size() / 4);
 
     return true;
@@ -460,7 +464,7 @@ static bool OnRegSet_Drive_Mask(int angle)
 
 
 /*
-DEF_PAGE_SB(        pppDrive_Mask,                                                                                    // Память - ВНЕШН ЗУ - МАСКА ///
+DEF_PAGE_SB(        pppDrive_Mask,                                                                                                                        //--- Память - ВНЕШН ЗУ - МАСКА ---
     "МАСКА", "MASK",
     "Режим ввода маски для автоматического именования файлов",
     "Input mode mask for automatic file naming",
@@ -475,19 +479,19 @@ DEF_PAGE_SB(        pppDrive_Mask,                                              
 */
 
 
-DEF_PAGE_3(pppDrive_Mask,                                                                                    // Память - ВНЕШН ЗУ - МАСКА ///
+DEF_PAGE_3(pppDrive_Mask,                                                                                                                                 //--- Память - ВНЕШН ЗУ - МАСКА ---
     "МАСКА", "MASK",
     "Режим ввода маски для автоматического именования файлов",
     "Input mode mask for automatic file naming",
     &bDrive_Mask_Delete,    // ПАМЯТЬ - ВНЕШН ЗУ - МАСКА - Удалить
     &bDrive_Mask_Backspace, // ПАМЯТЬ - ВНЕШН ЗУ - МАСКА - Backspace
     &bDrive_Mask_Insert,    // ПАМЯТЬ - ВНЕШН ЗУ - МАСКА - Вставить
-    Page::Name::SB_Memory_Drive_Mask, &ppDrive, IsActive_Drive_Mask, OnPress_Drive_Mask, FuncDrawPage, OnRegSet_Drive_Mask
+    Page::Name::SB_Memory_Drive_Mask, &ppDrive, IsActive_Drive_Mask, OnPress_Drive_Mask, FuncDrawPage, HandlerKey_Drive_Mask
 )
 
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-DEF_CHOICE_2(       cDrive_Autoconnect,                                                                  //--- ПАМЯТЬ - ВНЕШН ЗУ - Автоподключение ---
+DEF_CHOICE_2(       cDrive_Autoconnect,                                                                                                         //--- ПАМЯТЬ - ВНЕШН ЗУ - Автоподключение ---
     "Автоподкл.", "AutoConnect",
     "Eсли \"Вкл\", при подключении внешнего накопителя происходит автоматический переход на страницу ПАМЯТЬ - Внешн ЗУ",
     "If \"Enable\", when you connect an external drive is automatically transferred to the page MEMORY - Ext.StorageOld",
@@ -701,9 +705,9 @@ DEF_SMALL_BUTTON(bSetName_Save,                                                 
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-static bool OnRegSet_SetName(int angle)
+static bool HandlerKey_SetName(KeyEvent event)
 {
-    OnMemExtSetMaskNameRegSet(angle, Tables::Size() / 4 - 7);
+    OnMemExtSetMaskNameRegSet(event.Delta(), Tables::Size() / 4 - 7);
 
     return true;
 }
@@ -735,5 +739,5 @@ DEF_PAGE_4(pSetName,                                                            
     &bSetName_Backspace,    // ВВОД ИМЕНИ ФАЙЛА - Backspace
     &bSetName_Insert,       // ВВОД ИМЕНИ ФАЙЛА - Вставить
     &bSetName_Save,         // ВВОД ИМЕНИ ФАЙЛА - Сохранить
-    Page::Name::SB_Memory_SetName, 0, FuncActive, EmptyPressPage, FuncDrawPage, OnRegSet_SetName
+    Page::Name::SB_Memory_SetName, 0, FuncActive, EmptyPressPage, FuncDrawPage, HandlerKey_SetName
 )

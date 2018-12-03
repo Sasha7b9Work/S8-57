@@ -279,9 +279,9 @@ DEF_SMALL_BUTTON_HINTS_2(bSet_Movement,                                         
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-bool PageMeasures::PageCursors::PageSet::OnRegSet(int angle)
+bool PageMeasures::PageCursors::PageSet::OnKey(KeyEvent event)
 {
-    float value = (float)angle;
+    float value = (event.key == Key::Up || event.key == Key::Right) ? 1.0f : -1.0f;
 
     if (CURS_ACTIVE_U)
     {
@@ -332,7 +332,7 @@ DEF_PAGE_5(pageSet,                                                             
     &bSet_100,              ///< ÈÇÌÅÐÅÍÈß - ÊÓÐÑÎÐÛ - ÓÑÒÀÍÎÂÈÒÜ - 100%
     &bSet_Movement,         ///< ÈÇÌÅÐÅÍÈß - ÊÓÐÑÎÐÛ - ÓÑÒÀÍÎÂÈÒÜ - Ïåðåìåùåíèå
     Page::Name::Measures_Cursors_Set, PageMeasures::PageCursors::pointer, FuncActive, EmptyPressPage, FuncDrawPage,
-    PageMeasures::PageCursors::PageSet::OnRegSet
+    PageMeasures::PageCursors::PageSet::OnKey
 )
 
 

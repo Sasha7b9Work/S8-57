@@ -143,13 +143,15 @@ static void OnDraw_RAM()
     Painter::DrawText(Grid::Right() - width + 23, Grid::Top() + 1, Integer((int)DataStorage::NumElementsInStorage()).ToString(false, 3, buffer));
 }
 
-static bool OnRegSet_RAM(int angle)
+static bool HandlerKey_RAM(KeyEvent event)
 {
+    Key::E key = event.key;
+
     if (DataStorage::NumElementsInStorage() > 1)
     {
         Sound::RegulatorSwitchRotate();
     }
-    if (Math::Sign(angle) > 0)
+    if (key == Key::Up || key == Key::Right)
     {
         OnPress_Last_Next();
     }
@@ -169,5 +171,5 @@ DEF_PAGE_4(pageRAM,                                                             
     &bLast_Prev,                        ///< ÏÀÌßÒÜ - ÏÎÑËÅÄÍÈÅ - Ïðåäûäóùèé
     &bLast_SaveToROM,                   ///< ÏÀÌßÒÜ - ÏÎÑËÅÄÍÈÅ - Âíóòð ÇÓ
     &bLast_SaveToDrive,                 ///< ÏÀÌßÒÜ - ÏÎÑËÅÄÍÈÅ - Ñîõðàíèòü
-    Page::Name::SB_Memory_Last, PageMemory::pointer, FuncActive, OnPress_RAM, OnDraw_RAM, OnRegSet_RAM
+    Page::Name::SB_Memory_Last, PageMemory::pointer, FuncActive, OnPress_RAM, OnDraw_RAM, HandlerKey_RAM
 )
