@@ -349,7 +349,8 @@ int FPGA::CalculateShift(Chan::E ch)
 
     if (IN_RANDOMIZE_MODE)
     {
-        float tin = (float)(valueADC - min + deltaMIN) / (max - deltaMAX - min);
+
+        float tin = (float)(valueADC - min + deltaMIN) / (max - deltaMAX - (min + deltaMIN));
         int retValue = (int)(tin * Kr[SET_TBASE]);
 
         return retValue;
