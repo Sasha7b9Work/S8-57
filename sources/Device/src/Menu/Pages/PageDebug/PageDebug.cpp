@@ -28,7 +28,6 @@ extern const PageBase ppADC;
 extern const PageBase pppADC_Balance;
 extern const PageBase pppADC_Stretch;
 extern const PageBase pppADC_Shift;
-extern const PageBase ppRand;
 extern const PageBase ppChannels;
 extern const PageBase ppSettings;
 extern const PageBase ppSerialNumber;
@@ -562,129 +561,6 @@ DEF_PAGE_3(         ppADC,                                                      
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-DEF_GOVERNOR(       gRand_NumAverage,                                                                           //--- ОТЛАДКА - РАНД-ТОР - Усредн. ---
-    "Усредн.", "Average",
-    "",
-    "",
-    NRST_NUM_AVE_FOR_RAND, 1, 32, ppRand, FuncActive, FuncChanged, FuncBeforeDraw
-)
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-DEF_GOVERNOR(       gRand_NumSmooth,                                                                        //--- ОТЛАДКА - РАНД-ТОР - Сглаживание ---
-    "Сглаживание", "Smoothing",
-    "",
-    "",
-    NRST_NUM_SMOOTH_FOR_RAND, 1, 10, ppRand, FuncActive, FuncChanged, FuncBeforeDraw
-)
-
-static void OnChanged_Rand_NumMeasures()
-{
-    FPGA::SetNumberMeasuresForGates(NUM_MEASURES_FOR_GATES);
-}
-
-DEF_GOVERNOR(       gRand_NumMeasures,                                                                     //--- ОТЛАДКА - РАНД-ТОР - Выб-к/ворота ---
-    "Выб-к/ворота", "Samples/gates",
-    "",
-    "",
-    NUM_MEASURES_FOR_GATES, 1, 2500, ppRand, FuncActive, OnChanged_Rand_NumMeasures, FuncBeforeDraw
-)
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-DEF_CHOICE_2(       cRand_ShowInfo,                                                                          //--- ОТЛАДКА - РАНД-ТОР - Информация ---
-    "Информация", "Information",
-    "Показывать информацию о воротах рандомизатора",
-    "To show information on randomizer gate",
-    "Не показывать", "Hide",
-    "Показывать", "Show",
-    SHOW_RAND_INFO, ppRand, FuncActive, FuncChangedChoice, FuncDraw
-)
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-DEF_CHOICE_2(       gRand_ShowStat,                                                                          //--- ОТЛАДКА - РАНД-ТОР - Статистика ---
-    "Статистика", "Statistics",
-    "Показывать график статистики",
-    "Statistics show schedule",
-    "Не показывать", "Hide",
-    "Показывать", "Show",
-    SHOW_RAND_STAT, ppRand, FuncActive, FuncChangedChoice, FuncDraw
-)
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void OnChanged_Rand_TimeCompensation()
-{
-    FPGA::SetDeltaTShift(TIME_COMPENSATION);
-}
-
-DEF_GOVERNOR(   gRand_TimeCompensation,                                                            //--- ОТЛАДКА - РАНД-ТОР - Компенсация задержки ---
-    "Компенсация задержки", "Compenstaion time",
-    "Подстройка компенсации задержки АЦП 40 нс",
-    "",
-    TIME_COMPENSATION, 0, 510, ppRand, FuncActive, OnChanged_Rand_TimeCompensation, FuncBeforeDraw
-)
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void OnChanged_Rand_AddTimeShift()
-{
-    FPGA::SetTShift(SET_TSHIFT);
-}
-
-static int16 addShift = 0;
-
-DEF_GOVERNOR(       gRand_AddTimeShift,                                                                        //--- ОТЛАДКА - РАНД-ТОР - Смещение ---
-    "Доп смещение", "Add shift",
-    "Добавочное смщение при вращении tShift",
-    "",
-    addShift, -100, 100, ppRand, FuncActive, OnChanged_Rand_AddTimeShift, FuncBeforeDraw
-)
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void OnChanged_Rand_Pretriggered()
-{
-    FPGA::LoadTShift();
-}
-
-DEF_GOVERNOR(       gRand_Pretriggered,                                                                      //--- ОТЛАДКА - РАНД-ТОР - Предзапуск ---
-    "Предзапуск", "Pretiggered",
-    "Величина предзапуска, которая пишется в рандомизатор",
-    "",
-    PRETRIGGERED, 0, 30000, ppRand, FuncActive, OnChanged_Rand_Pretriggered, FuncBeforeDraw
-)
-
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-DEF_CHOICE_8(gGate,
-    "Ворота", "Gates",
-    "Устанавливает учитываемое расстояние от максимума ворот для рандомизатора",
-    "",
-    "10", "10",
-    "20", "20",
-    "30", "30",
-    "40", "40",
-    "50", "50",
-    "60", "60",
-    "70", "70",
-    "80", "80",
-    set.dbg_enum_gate, ppRand, FuncActive, FuncChangedChoice, FuncDraw
-)
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-DEF_PAGE_9( ppRand,                                                                                                                                              //--- ОТЛАДКА - РАНД-ТОР ---
-    "РАНД-ТОР", "RANDOMIZER",
-    "",
-    "",
-    &gGate,                     ///< ОТЛАДКА - РАНД-ТОР - Ворота
-    &gRand_NumAverage,          ///< ОТЛАДКА - РАНД-ТОР - Усредн.
-    &gRand_NumSmooth,           ///< ОТЛАДКА - РАНД-ТОР - Сглаживание
-    &gRand_NumMeasures,         ///< ОТЛАДКА - РАНД-ТОР - Выб-к/ворота
-    &cRand_ShowInfo,            ///< ОТЛАДКА - РАНД-ТОР - Информация
-    &gRand_ShowStat,            ///< ОТЛАДКА - РАНД-ТОР - Статистика
-    &gRand_TimeCompensation,    ///< ОТЛАДКА - РАНД-ТОР - Компенсация задержки
-    &gRand_AddTimeShift,        ///< ОТЛАДКА - РАНД-ТОР - Смещение
-    &gRand_Pretriggered,        ///< ОТЛАДКА - РAНД-ТОР - Предзапуск
-    Page::Name::Debug_Rand, &pageDebug, FuncActive, EmptyPressPage, FuncDrawPage, FuncRegSetPage
-)
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void OnChanged_Channels_BandwidthA(bool)
 {
     FPGA::SetBandwidth(Chan::A);
@@ -1108,11 +984,11 @@ DEF_PAGE_5( pageDebug,                                                          
     "ОТЛАДКА", "DEBUG",
     "",
     "",
-    &ppConsole,                 ///< ОТЛАДКА - КОНСОЛЬ
-    &ppADC,                     ///< ОТЛАДКА - АЦП
-    &ppRand,			        ///< ОТЛАДКА - РАНД-ТОР
-    &ppChannels,		        ///< ОТЛАДКА - КАНАЛЫ
-    &cStats,			        ///< ОТЛАДКА - Статистика
+    &ppConsole,                     ///< ОТЛАДКА - КОНСОЛЬ
+    &ppADC,                         ///< ОТЛАДКА - АЦП
+    PageDebug::PageRand::pointer,   ///< ОТЛАДКА - РАНД-ТОР
+    &ppChannels,		            ///< ОТЛАДКА - КАНАЛЫ
+    &cStats,			            ///< ОТЛАДКА - Статистика
 //    &cDisplayOrientation,       ///< ОТЛАДКА - Ориентация
 //    &mgPred,			        ///< ОТЛАДКА - Предзапуск
 //    &mgPost,			        ///< ОТЛАДКА - Послезапуск

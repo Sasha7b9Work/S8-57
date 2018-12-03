@@ -231,6 +231,15 @@ static pString hints##name[] = {nameRu1, nameEn1, nameRu2, nameEn2, nameRu3, nam
 static const ChoiceBase name = {Control::Type::Choice, 8, false, Page::Name::NoPage, &keeper, funcActive, {titleRU, titleEN, hintRU, hintEN}, (int8 *)&cell,    \
     hints##name, funcChanged, funcDraw};
 
+#define DEF_CHOICE_16(name, titleRU, titleEN, hintRU, hintEN,                                                                                                                               \
+    nameRu1, nameEn1, nameRu2, nameEn2, nameRu3, nameEn3, nameRu4, nameEn4, nameRu5, nameEn5, nameRu6, nameEn6, nameRu7, nameEn7, nameRu8, nameEn8, nameRu9, nameEn9, nameRu10, nameEn10,   \
+    nameRu11, nameEn11, nameRu12, nameEn12, nameRu13, nameEn13, nameRu14, nameEn14, nameRu15, nameEn15, nameRu16, nameEn16,                                                                 \
+    cell, keeper, funcActive, funcChanged, funcDraw)                                                                                                                                        \
+static pString hints##name[] = {nameRu1, nameEn1, nameRu2, nameEn2, nameRu3, nameEn3, nameRu4, nameEn4, nameRu5, nameEn5, nameRu6, nameEn6, nameRu7, nameEn7, nameRu8, nameEn8,             \
+    nameRu9, nameEn9, nameRu10, nameEn10, nameRu11, nameEn11, nameRu12, nameEn12, nameRu13, nameEn13, nameRu14, nameEn14, nameRu15, nameEn15, nameRu16, nameEn16 };                         \
+volatile static const ChoiceBase name = {Control::Type::Choice, 16, false, Page::Name::NoPage, &keeper, funcActive, {titleRU, titleEN, hintRU, hintEN}, (int8 *)&cell,                      \
+    hints##name, funcChanged, funcDraw};
+
 #define DEF_CHOICE_REG_9(name, titleRU, titleEN, hintRU, hintEN,                                                                                    \
     nameRu1, nameEn1, nameRu2, nameEn2, nameRu3, nameEn3, nameRu4, nameEn4, nameRu5, nameEn5,                                                       \
     nameRu6, nameEn6, nameRu7, nameEn7, nameRu8, nameEn8, nameRu9, nameEn9, cell, keeper, funcActive, funcChanged, funcDraw)                        \

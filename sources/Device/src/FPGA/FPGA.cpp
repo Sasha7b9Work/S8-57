@@ -339,16 +339,17 @@ int FPGA::CalculateShift(Chan::E ch)
         return NULL_TSHIFT;
     }
 
-    int delta = (set.dbg_enum_gate + 1) * 10;
+    int deltaMAX = set.dbg_enum_gate_max * 10;
+    int deltaMIN = set.dbg_enum_gate_min * 10;
 
-    if (valueADC > max - delta)
+    if (valueADC > max - deltaMAX || valueADC < min + deltaMIN)
     {
         return NULL_TSHIFT;
     }
 
     if (IN_RANDOMIZE_MODE)
     {
-        float tin = (float)(valueADC - min) / (max - delta - min);
+        float tin = (float)(valueADC - min + deltaMIN) / (max - deltaMAX - min);
         int retValue = (int)(tin * Kr[SET_TBASE]);
 
         return retValue;

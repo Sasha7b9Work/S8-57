@@ -534,6 +534,9 @@
     <ClCompile Include="..\..\Device\src\main.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Device\src\Menu\Pages\PageDebug\PageDebug_Rand.cpp">
+      <Filter>Menu\Pages\PageDebug</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Device\src\Display\Display.h">

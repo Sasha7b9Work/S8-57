@@ -209,7 +209,8 @@ static const Settings defaultSettings =
     /* rec_storageRecord */ Recorder::DataStorage::Flash,
     /* rec_storagePlay */   Recorder::DataStorage::Flash,
 
-    /* dbg_gate */          0
+    /* dbg_gate_max */      0,
+    /* dbg_gate_min */      0
 };
 
 Settings set = defaultSettings;
