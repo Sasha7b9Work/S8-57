@@ -47,6 +47,14 @@ pString Cursors::Voltage(Chan::E source, int numCur, char buffer[20])
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+pString Cursors::Time(Chan::E source, int numCur, char buffer[20])
+{
+    float time = FPGAMath::TimeCursor(CURsT_POS(source, numCur), SET_TBASE);
+
+    return ::Time(time).ToString(true, buffer);
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 float Cursors::PosT(Chan::E ch, int num)
 {
     float retValue = 0.0f;

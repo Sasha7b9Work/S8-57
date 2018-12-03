@@ -77,6 +77,8 @@ public:
     /// ¬озвращает значение курсора времени
     static float PosT(Chan::E ch, int num);
 
+    static pString Time(Chan::E source, int numCur, char buffer[20]);
+
     static void SetCursPosT_temp(Chan::E ch, int num, float value);
 
 public:

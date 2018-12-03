@@ -71,8 +71,8 @@ void HiPart::WriteCursors()
             Painter::DrawText(x, y1, "1:");
             Painter::DrawText(x, y2, "2:");
             x += 7;
-            //Painter::DrawText(x, y1, Cursors:: sCursors_GetCursorTime(source, 0, buffer));
-            //Painter::DrawText(x, y2, sCursors_GetCursorTime(source, 1, buffer));
+            Painter::DrawText(x, y1, Cursors::Time(source, 0, buffer));
+            Painter::DrawText(x, y2, Cursors::Time(source, 1, buffer));
             x = startX + 153;
 
             /// \todo Дичь.

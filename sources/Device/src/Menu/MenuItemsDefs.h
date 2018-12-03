@@ -156,7 +156,7 @@ ChoiceParameterBase name = {Item_ChoiceParameter, 0, false, Page::Name::NoPage, 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #define DEF_SMALL_BUTTON(name, titleRU, titleEN, hintRU, hintEN, keeper, funcActive, funcPress, funcDraw)                                           \
-static const SButtonBase name = { Control::Type::DrawButton, 0, false, Page::Name::NoPage, &keeper, funcActive, {titleRU, titleEN, hintRU, hintEN},\
+volatile static const SButtonBase name = { Control::Type::DrawButton, 0, false, Page::Name::NoPage, &keeper, funcActive, {titleRU, titleEN, hintRU, hintEN},\
     funcPress, funcDraw, 0, 0};
 
 #define DEF_SMALL_BUTTON_EXIT(name, keeper, funcActive, funcPress, funcDraw)                                                                        \
@@ -166,7 +166,7 @@ static const SButtonBase name = { Control::Type::DrawButton, 0, false, Page::Nam
 #define DEF_SMALL_BUTTON_HINTS_2(name, titleRU, titleEN, hintRU, hintEN, keeper, funcActive, funcPress, funcDraw,                                   \
     FuncDrawHint1, hintRu1, hintEn1, FuncDrawHint2, hintRu2, hintEn2)                                                                               \
 static const StructHelpDrawButton hints##name[] = {{ FuncDrawHint1, hintRu1, hintEn1 }, { FuncDrawHint2, hintRu2, hintEn2 }};                      \
-static const SButtonBase name = { Control::Type::DrawButton, 0, false, Page::Name::NoPage, &keeper, funcActive, {titleRU, titleEN, hintRU, hintEN},\
+volatile static const SButtonBase name = { Control::Type::DrawButton, 0, false, Page::Name::NoPage, &keeper, funcActive, {titleRU, titleEN, hintRU, hintEN},\
     funcPress, funcDraw, hints##name, 2};
 
 #define DEF_SMALL_BUTTON_HINTS_3(name, titleRU, titleEN, hintRU, hintEN, keeper, funcActive, funcPress, funcDraw,                                   \

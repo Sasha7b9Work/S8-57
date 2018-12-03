@@ -331,15 +331,15 @@ bool PageMeasures::PageCursors::PageSet::OnKey(KeyEvent event)
     return true;
 }
 
-DEF_PAGE_5(pageSet,                                                                                                                                //--- хглепемхъ - йспянпш - сярюмнбхрэ ---
+DEF_PAGE_3(pageSet,                                                                                                                                //--- хглепемхъ - йспянпш - сярюмнбхрэ ---
     "сярюмнбхрэ", "SET",
     "оЕПЕУНД Б ПЕФХЛ ЙСПЯНПМШУ ХГЛЕПЕМХИ",
     "Switch to cursor measures",
     &bSet_Channel,          ///< хглепемхъ - йспянпш - сярюмнбхрэ - йЮМЮК
     &bSet_U,                ///< хглепемхъ - йспянпш - сярюмнбхрэ - йСПЯНПШ U
     &bSet_T,                ///< хглепемхъ - йспянпш - сярюмнбхрэ - йСПЯНПШ р
-    &bSet_100,              ///< хглепемхъ - йспянпш - сярюмнбхрэ - 100%
-    &bSet_Movement,         ///< хглепемхъ - йспянпш - сярюмнбхрэ - оЕПЕЛЕЫЕМХЕ
+    //&bSet_100,              ///< хглепемхъ - йспянпш - сярюмнбхрэ - 100%
+    //&bSet_Movement,         ///< хглепемхъ - йспянпш - сярюмнбхрэ - оЕПЕЛЕЫЕМХЕ
     Page::Name::Measures_Cursors_Set, PageMeasures::PageCursors::pointer, FuncActive, EmptyPressPage, FuncDrawPage,
     PageMeasures::PageCursors::PageSet::OnKey
 )
