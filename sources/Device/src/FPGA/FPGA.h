@@ -111,7 +111,7 @@ public:
     /// Найти и установить уровень синхронизации по последнему считанному сигналу
     static void FindAndSetTrigLevel();
     /// Включить/выключить калибратор.
-    static void SetCalibratorMode(CalibratorMode::E calibratorMode);
+    static void LoadCalibratorMode();
 
     static void EnableRecorderMode(bool enable);
     /// Установить добавочное смещение по времени для режима рандомизатора. В каждой развёртке это смещение должно быть разное
@@ -161,7 +161,7 @@ private:
 
     static bool CalculateGate(uint16 rand, uint16 *eMin, uint16 *eMax);
 
-    static int CalculateShift(Chan::E ch);
+    static int CalculateShift();
 
     static uint8 ValueForRange(Chan::E ch);
 

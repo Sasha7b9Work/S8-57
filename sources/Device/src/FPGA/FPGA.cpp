@@ -295,7 +295,7 @@ void FPGA::ReadDataChanenl(Chan::E ch, uint8 data[FPGA_MAX_NUM_POINTS])
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void FPGA::ReadDataChanenlRand(Chan::E ch, uint8 *address, uint8 *data)
 {
-    int Tsm = CalculateShift(ch);
+    int Tsm = CalculateShift();
 
     if (Tsm == NULL_TSHIFT)
     {
@@ -329,7 +329,7 @@ void FPGA::ReadDataChanenlRand(Chan::E ch, uint8 *address, uint8 *data)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-int FPGA::CalculateShift(Chan::E ch)
+int FPGA::CalculateShift()
 {
     uint16 min = 0;
     uint16 max = 0;
@@ -824,9 +824,8 @@ void FPGA::LoadRegUPR()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void FPGA::SetCalibratorMode(CalibratorMode::E mode)
+void FPGA::LoadCalibratorMode()
 {
-    CALIBRATOR_MODE = mode;
     LoadRegUPR();
 }
 

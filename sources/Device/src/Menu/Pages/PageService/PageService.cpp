@@ -83,7 +83,7 @@ DEF_BUTTON(         bAutoSearch,                                                
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void OnChanged_Calibrator_Calibrator(bool)
 {
-    FPGA::SetCalibratorMode(CALIBRATOR_MODE);
+    FPGA::LoadCalibratorMode();
 }
 
 DEF_CHOICE_2( cCalibrator_Calibrator,                                                                                                              //--- СЕРВИС - КАЛИБРАТОР - Калибратор ---

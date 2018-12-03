@@ -105,6 +105,7 @@ void FPGA::LoadSettings()
     LoadTrigLev();
     LoadTBase();
     LoadTShift();
+    LoadCalibratorMode();
 
     isRunning = false;
 }
