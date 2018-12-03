@@ -80,8 +80,12 @@ static const Settings defaultSettings =
     /* curs_movement;                */ Cursors::Movement::Pixels,
     /* curs_deltaU100percents[2];    */ {100, 100},
     /* curs_deltaT100percents[2];    */ {100, 100},
-    /* curs_posCurU[Chan::Number][2];   */ {{ 100, 100 },{ 100, 100 }},
-    /* curs_posCurT[Chan::Number][2];   */ {{ 100, 100 },{ 100, 100 }},
+    /* curs_posCurU[Chan::Number][2];   */ {
+                                        { 60, 140 },        // Канал 1
+                                        { 60, 140 }},       // Канал 2
+    /* curs_posCurT[Chan::Number][2];   */ {
+                                        { 80, 200 },        // Канал 1
+                                        { 80, 200 }},       // Канал 2
     
                                             // Меню ПАМЯТЬ
     
