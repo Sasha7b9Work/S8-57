@@ -3,5 +3,5 @@
 
 #define va_list char *
 #define va_start(x, y) x = (char *)y;
-#define vsprintf(x, y, z)
+int vsprintf(void *, void *, void *);
 #define va_end(x)

@@ -40,7 +40,7 @@ int Painter::DrawFormText(int x, int y, Color color, pString text, ...)
     char buffer[SIZE_BUFFER_DRAW_FORM_TEXT];
     va_list args;
     va_start(args, text);
-    vsprintf(buffer, text, args);
+    vsprintf(buffer, (char *)text, args);
     va_end(args);
     return DrawText(x, y, buffer, color);
 }

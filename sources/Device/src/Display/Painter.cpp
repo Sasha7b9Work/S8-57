@@ -56,7 +56,7 @@ int Painter::DrawFormatText(int x, int y, Color color, char *text, ...)
     CHAR_BUF(buffer, SIZE_BUFFER_DRAW_FORM_TEXT);
     va_list args;
     va_start(args, text);
-    vsprintf(buffer, text, args);
+    std::vsprintf(buffer, text, args);
     va_end(args);
     return DrawText(x, y, buffer);
 }
@@ -68,7 +68,7 @@ int Painter::DrawFormatText(int x, int y, char *text, ...)
     CHAR_BUF(buffer, SIZE_BUFFER_DRAW_FORM_TEXT);
     va_list args;
     va_start(args, text);
-    vsprintf(buffer, text, args);
+    std::vsprintf(buffer, text, args);
     va_end(args);
     return DrawText(x, y, buffer);
 }
@@ -512,7 +512,7 @@ int Painter::DrawFormText(int x, int y, Color color, pString text, ...)
     char buffer[SIZE_BUFFER_DRAW_FORM_TEXT];
     va_list args;
     va_start(args, text);
-    vsprintf(buffer, text, args);
+    std::vsprintf(buffer, (char *)text, args);
     va_end(args);
     return DrawText(x, y, buffer, color);
 }

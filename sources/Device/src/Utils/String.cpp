@@ -27,12 +27,18 @@ String::String(const String &rhs) : buffer(0)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 String::String(char *format, ...)
 {
-    char buf[100];
+#define SIZE 100
+    char buf[SIZE + 1];
 
     va_list args;
     va_start(args, format);
-    vsprintf(buf, format, args);
+    int numSymbols = std::vsprintf(buf, format, args);
     va_end(args);
+
+    if (numSymbols < 0 || numSymbols > SIZE)
+    {
+        LOG_ERROR("Буфер слишком мал");
+    }
 
     if (Allocate(std::strlen(buf) + 1))
     {
