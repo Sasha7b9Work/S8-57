@@ -49,20 +49,6 @@ bool Painter::WriteFlashColor()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-/*
-int Painter::DrawFormatText(int x, int y, char *text, ...)
-{
-#define SIZE_BUFFER_DRAW_FORM_TEXT 200
-    CHAR_BUF(buffer, SIZE_BUFFER_DRAW_FORM_TEXT);
-    va_list args;
-    va_start(args, text);
-    std::vsprintf(buffer, text, args);
-    va_end(args);
-    return DrawText(x, y, buffer);
-}
-*/
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Painter::DrawHLine(float y, int x0, int x1, Color color)
 {
     DrawHLine((int)y, x0, x1, color);
@@ -490,20 +476,6 @@ void Painter::OnTimerFlashDisplay()
 {
     inverseColor = !inverseColor;
     WriteFlashColor();
-}
-
-
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-int Painter::DrawFormText(int x, int y, Color color, pString text, ...)
-{
-#define SIZE_BUFFER_DRAW_FORM_TEXT 200
-    char buffer[SIZE_BUFFER_DRAW_FORM_TEXT];
-    va_list args;
-    va_start(args, text);
-    std::vsprintf(buffer, (char *)text, args);
-    va_end(args);
-    return DrawText(x, y, buffer, color);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

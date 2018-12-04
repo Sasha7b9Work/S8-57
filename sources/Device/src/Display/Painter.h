@@ -64,8 +64,6 @@ public:
                                                     Color colorBackground);
     /// Выводит текст на прямоугольнике цвета colorBackgound
     static int DrawTextOnBackground(int x, int y, const char *text, Color colorBackground);
-    /// Пишет строку в позиции x, y
-    static int DrawFormText(int x, int y, Color color, pString text, ...);
     /// Установить яркость дисплея.
     static void SetBrightnessDisplay(int16 brightness);
 

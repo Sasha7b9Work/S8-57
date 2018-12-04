@@ -919,9 +919,9 @@ static void Draw_EnterSerialNumber()
     int allShots = 0;
     String serialNumber = OTPmem::GetSerialNumber(&allShots);
 
-    Painter::DrawFormText(x0 + deltaX, y0 + 130, Color::FILL, "Текущий сохранённый номер %s", serialNumber.CString()[0] == 0 ? "-- ----" : serialNumber.CString());
+    String("Текущий сохранённый номер %s", serialNumber.CString()[0] == 0 ? "-- ----" : serialNumber.CString()).Draw(x0 + deltaX, y0 + 130, Color::FILL);
 
-    Painter::DrawFormText(x0 + deltaX, y0 + 100, Color::FILL, "Осталось места для %d попыток", allShots);
+    String("Осталось места для %d попыток", allShots).Draw(x0 + deltaX, y0 + 100, Color::FILL);
 }
 
 static void OnPress_SerialNumber(bool)
