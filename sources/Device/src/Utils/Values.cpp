@@ -12,6 +12,10 @@
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+static char *FrequencyToString(float freq, char buffer[20]);
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 Float::Float(float val) : m_val(val)
 {
 }
@@ -102,10 +106,8 @@ char* Integer::ToString(bool alwaysSign, int numMinFields, char buffer[20]) cons
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-char *Frequency::ToString(char bufferOut[20]) const
+static char *FrequencyToString(float freq, char bufferOut[20])
 {
-    float freq = value;
-
     bufferOut[0] = 0;
     const char *suffix = 0;
     if (Math::IsEquals(freq, ERROR_VALUE_FLOAT))
@@ -172,7 +174,7 @@ String Time::ToString(bool alwaysSign) const
 String Frequency::ToString() const
 {
     char buffer[50];
-    return String(ToString(buffer));
+    return String(FrequencyToString(value, buffer));
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

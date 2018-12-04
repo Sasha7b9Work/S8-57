@@ -59,8 +59,6 @@ public:
 
 private:
 
-    char* ToString(char bufferOut[20]) const;
-
     float value;
 };
 
