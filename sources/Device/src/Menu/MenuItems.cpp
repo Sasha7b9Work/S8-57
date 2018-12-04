@@ -209,15 +209,11 @@ void Control::ProcessKey(KeyEvent event)
 {
     Key::E key = event.key;
 
-    TypePress::E typePress = event.type;
-
-    if (type == Control::Type::Page)
+    switch (type)
     {
-        ((Page *)this)->ProcessKey(event);
-    }
-    else if (type == Control::Type::ChoiceReg || type == Control::Type::Choice)
-    {
-        if (typePress == TypePress::Press)
+    case Control::Type::Choice:
+    case Control::Type::ChoiceReg:
+        if (event.type == TypePress::Press)
         {
             int delta = (key == Key::Down || key == Key::Right) ? 1 : -1;
 
@@ -225,10 +221,13 @@ void Control::ProcessKey(KeyEvent event)
 
             choice->ChangeIndex(Menu::IsShown() ? delta : -delta);
         }
-    }
-    else if (type == Control::Type::Governor)
-    {
+        break;
+    case Control::Type::Page:
+        ((Page *)this)->ProcessKey(event);
+        break;
+    case Control::Type::Governor:
         ((Governor *)this)->ChangeValue((key == Key::Left || key == Key::Down) ? -1 : 1);
+        break;
     }
 }
 
