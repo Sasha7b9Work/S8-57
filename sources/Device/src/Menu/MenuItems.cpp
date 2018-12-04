@@ -211,22 +211,30 @@ void Governor::ProcessKey(KeyEvent event)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Choice::ProcessKey(KeyEvent event)
+{
+    if (event.type == TypePress::Press)
+    {
+        Key::E key = event.key;
+
+        int delta = (key == Key::Down || key == Key::Right) ? 1 : -1;
+
+        Choice *choice = (Choice *)this;
+
+        choice->ChangeIndex(Menu::IsShown() ? delta : -delta);
+    }
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Control::ProcessKey(KeyEvent event)
 {
-    Key::E key = event.key;
-
     switch (type)
     {
     case Control::Type::Choice:
+        ((Choice *)this)->ProcessKey(event);
+        break;
     case Control::Type::ChoiceReg:
-        if (event.type == TypePress::Press)
-        {
-            int delta = (key == Key::Down || key == Key::Right) ? 1 : -1;
-
-            Choice *choice = (Choice *)this;
-
-            choice->ChangeIndex(Menu::IsShown() ? delta : -delta);
-        }
+        ((Choice *)this)->ProcessKey(event);
         break;
     case Control::Type::Page:
         ((Page *)this)->ProcessKey(event);
