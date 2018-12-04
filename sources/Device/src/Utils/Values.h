@@ -95,6 +95,8 @@ public:
 
 private:
 
+    
+
     float value;
 };
 

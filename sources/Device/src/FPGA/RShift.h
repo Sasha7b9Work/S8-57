@@ -1,5 +1,6 @@
 #pragma once
 #include "Settings/SettingsChannel.h"
+#include "Utils/String.h"
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -12,9 +13,11 @@ public:
 
     static void Draw();
 
-    static pString ToString(uint16 rShiftRel, Range::E range, Divider::E divider, char buffer[20]);
+    static String ToString(uint16 rShiftRel, Range::E range, Divider::E divider);
 
 private:
+
+    //static pString ToString(uint16 rShiftRel, Range::E range, Divider::E divider, char buffer[20]);
 
     static void Draw(Chan::E ch);
 };

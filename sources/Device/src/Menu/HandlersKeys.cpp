@@ -225,7 +225,7 @@ static void DrawParametersChannel()
 
     Painter::DrawBigText(x + 3, y + 3, 1, buffer, Color::Channel(ch));
 
-    Painter::DrawBigText(x + 80, y + 3, 1, RShift::ToString(SET_RSHIFT(ch), SET_RANGE(ch), SET_DIVIDER(ch), buffer));
+    Painter::DrawBigText(x + 80, y + 3, 1, RShift::ToString(SET_RSHIFT(ch), SET_RANGE(ch), SET_DIVIDER(ch)).CString());
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

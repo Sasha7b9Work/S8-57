@@ -331,14 +331,16 @@ pString Tester::Scale::ToString() const
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-pString Tester::Shift::ToString(Scale::E scale, char buffer[50])
+String Tester::Shift::ToString(Scale::E scale)
 {
     if (ch == Chan::A)
     {
-        return RShift::ToString(shift, (Range::E)scale, Divider::_1, buffer);
+        return RShift::ToString(shift, (Range::E)scale, Divider::_1);
     }
 
     float shiftAbs = FPGAMath::RShift2Abs(shift,  (Range::E)scale) * 1e-3f;
+
+    char buffer[50];
 
     return Current(shiftAbs).ToString(buffer);
 }

@@ -230,7 +230,7 @@ static void WriteTextVoltage(Chan::E ch, int x, int y)
     snprintf(buffer, SIZE, "%s\xa5%s\xa5%s", Chan(ch).IsA() ? DICT(D1ch) : DICT(D2ch), ModeCouple(SET_COUPLE(ch)).UGO(), Range(range).ToString(divider));
     Painter::DrawText(x + 1, y, buffer, colorDraw);
     char bufferTemp[SIZE];
-    snprintf(bufferTemp, SIZE, "\xa5%s", RShift::ToString((uint16)SET_RSHIFT(ch), range, divider, buffer));
+    snprintf(bufferTemp, SIZE, "\xa5%s", RShift::ToString((uint16)SET_RSHIFT(ch), range, divider).CString());
     Painter::DrawText(x + 46, y, bufferTemp);
 }
 

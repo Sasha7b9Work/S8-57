@@ -1,6 +1,7 @@
 #pragma once
 #include "Display/Colors.h"
 #include "Settings/SettingsChannel.h"
+#include "Utils/String.h"
 #include "Command.h"
 
 
@@ -156,7 +157,7 @@ public:
     struct Shift
     {
         Shift(uint16 rShift, Chan::E _ch) : shift(rShift), ch(_ch) {};
-        pString ToString(Scale::E scale, char buffer[50]);
+        String ToString(Scale::E scale);
     private:
         uint16 shift;
         Chan::E ch;
