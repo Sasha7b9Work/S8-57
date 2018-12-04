@@ -74,6 +74,13 @@ void FrequencyCounter::Init()
     freqActual.word = periodActual.word = 0;
 }
 
+
+#ifdef WIN32
+#pragma warning(push)
+#pragma warning(disable:4310)   // cast truncates constant value
+#endif
+
+
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void FrequencyCounter::LoadSettings()
 {
@@ -105,6 +112,12 @@ void FrequencyCounter::LoadSettings()
 
     FSMC::WriteToFPGA8(WR_FREQMETER, data);
 }
+
+
+#ifdef WIN32
+#pragma warning(pop)
+#endif
+
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void FrequencyCounter::LoadFreqSettings()
