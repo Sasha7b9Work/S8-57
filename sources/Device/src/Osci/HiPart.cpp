@@ -57,7 +57,7 @@ void HiPart::WriteCursors()
                 delta *= 10;
             }
             Painter::DrawText(x, y1, ":dU=");
-            Painter::DrawText(x + 17, y1, Voltage(delta).ToString(false, buffer));
+            Painter::DrawText(x + 17, y1, Voltage(delta).ToString(false).CString());
             Painter::DrawText(x, y2, ":");
             //Painter::DrawText(x + 10, y2, Cursors:: sCursors_GetCursorPercentsU(source, buffer));
         }

@@ -91,11 +91,9 @@ public:
 
     String ToString(bool alwaysSign) const;
 
-    char* ToString(bool alwaysSign, char buffer[20]) const;
-
 private:
 
-    
+    char* ToString(bool alwaysSign, char buffer[20]) const;
 
     float value;
 };

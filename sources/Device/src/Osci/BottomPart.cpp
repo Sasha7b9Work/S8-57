@@ -189,11 +189,7 @@ int BottomPart::WriteChannel(Chan::E ch, int x, int y)
 
     x += 22;
 
-    CHAR_BUF(buf, 20);
-
-    Voltage(FPGAMath::RShift2Abs(SET_RSHIFT(ch), SET_RANGE(ch))).ToString(true, buf);
-
-    Painter::DrawText(x, y, buf);
+    Painter::DrawText(x, y, Voltage(FPGAMath::RShift2Abs(SET_RSHIFT(ch), SET_RANGE(ch))).ToString(true).CString());
 
     return x + 47;
 }

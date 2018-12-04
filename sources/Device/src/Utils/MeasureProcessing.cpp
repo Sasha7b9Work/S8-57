@@ -1598,7 +1598,8 @@ char* Time2String(float time, bool always, char buffer[20])
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 char* Voltage2String(float voltage, bool always, char buffer[20])
 {
-    return Voltage(voltage).ToString(always, buffer);
+    std::strcpy(buffer, Voltage(voltage).ToString(always).CString());
+    return buffer;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
