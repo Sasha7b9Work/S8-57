@@ -13,6 +13,16 @@
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 static char *FrequencyToString(float freq, char buffer[20]);
+/// ѕреобразует врем€ в текстовую строку
+static char* TimeToString(float time, bool alwaysSign, char buffer[20]);
+
+
+
+
+
+
+
+
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -167,7 +177,7 @@ char *Frequency::ToStringAccuracy(char bufferOut[20], int numDigits) const
 String Time::ToString(bool alwaysSign) const
 {
     char buffer[20];
-    return String(ToString(alwaysSign, buffer));
+    return String(TimeToString(value, alwaysSign, buffer));
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -178,10 +188,8 @@ String Frequency::ToString() const
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-char *Time::ToString(bool alwaysSign, char buffer[20]) const
+char *TimeToString(float time, bool alwaysSign, char buffer[20])
 {
-    float time = value;
-
     if (Math::IsEquals(time, ERROR_VALUE_FLOAT))
     {
         std::strcpy(buffer, ERROR_STRING_VALUE);

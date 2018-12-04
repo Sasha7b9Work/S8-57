@@ -77,12 +77,6 @@ public:
     String ToString(bool alwaysSign) const;
 
 private:
-
-        /// Преобразует время в текстовую строку
-    char* ToString( bool alwaysSign,      ///< если true, знак показывается даже если time > 0
-                    char buffer[20]       ///< сюда записывается возвращаемое значение
-    ) const;
-
     float value;
 };
 
