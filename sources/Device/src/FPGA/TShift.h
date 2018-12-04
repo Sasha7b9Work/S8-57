@@ -22,7 +22,5 @@ public:
 
 private:
 
-    char *ToString(TBase::E tBase, char buffer[20]) const;
-
     int value;
 };
