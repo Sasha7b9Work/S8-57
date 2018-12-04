@@ -40,12 +40,6 @@ static void FuncRelease();
 static void FuncLong();
 /// Обработчик нажатия стрелки
 static void Arrow();
-/// Обработка события стрелки на открытой странице
-static void ArrowChoice();
-/// Обработка события стрелки на открытом Choice
-static void ArrowPage();
-
-
 /// Общий обработчик изменения параметра канала - масштаба или смещения
 static void OnChangeParameterChannel(pFuncVChI, Chan::E, int);
 /// Функция отрисовки параметров канала
