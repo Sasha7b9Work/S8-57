@@ -7,7 +7,6 @@
 #include "Hardware/FSMC.h"
 #include "Hardware/Timer.h"
 #include <cstring>
-#include <stdarg.h>
 #include <stdlib.h>
 #include <stdio.h>
 #endif
