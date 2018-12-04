@@ -89,14 +89,14 @@ void OnPressSB_Exit()
 //---------------------------------------------------------------------------------------------------------------------------------------------------
 static int CalculateYforCurs(int y, bool top)
 {
-    return y + 18 + (top ? 3 : -3);
+    return y + 18 + (top ? -3 : 3);
 }
 
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------
 static int CalculateXforCurs(int x, bool left)
 {
-    return x + 52 + (left ? -5 : +5);
+    return x + 52 + (left ? -5 : 5);
 }
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------
@@ -113,24 +113,32 @@ void DrawMenuCursVoltage(int x, int y, bool top, bool bottom)
 {
     x -= 49;
     y -= 14;
-    int x0 = x, x1 = x, y0 = y, y1 = y;
-    CalculateXY(&x0, &x1, &y0, &y1);
+    int x0 = x, x1 = x, yTop = y, yBottom = y;
+
+    CalculateXY(&x0, &x1, &yTop, &yBottom);
+
     for (int i = 0; i < (top ? 3 : 1); i++)
     {
-        Painter::DrawHLine(y0 + i, x0, x1);
+        Painter::DrawHLine(yTop + i, x0, x1);
     }
+
     for (int i = 0; i < (bottom ? 3 : 1); i++)
     {
-        Painter::DrawHLine(y1 - i, x0, x1);
+        Painter::DrawHLine(yBottom - i, x0, x1);
     }
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void CalculateConditions(int16 pos0, int16 pos1, Cursors::Control::E cursCntrl, bool *cond0, bool *cond1)
+void CalculateConditions(int16 pos0, int16 pos1, Cursors::Control::E cursCntrl, bool *condTopLeft, bool *condBottomRight)
 {
     bool zeroLessFirst = pos0 < pos1;
-    *cond0 = (cursCntrl == Cursors::Control::_1_2) || (cursCntrl == Cursors::Control::_1 && zeroLessFirst) || (cursCntrl == Cursors::Control::_2 && !zeroLessFirst);
-    *cond1 = (cursCntrl == Cursors::Control::_1_2) || (cursCntrl == Cursors::Control::_1 && !zeroLessFirst) || (cursCntrl == Cursors::Control::_2 && zeroLessFirst);
+    *condTopLeft     =  (cursCntrl == Cursors::Control::_1_2) ||                    // если управление двумя курсорами одновременно
+                        (cursCntrl == Cursors::Control::_1 && zeroLessFirst) ||     // или управление первым курсором и позиция первого меньше, чем позиция второго
+                        (cursCntrl == Cursors::Control::_2 && !zeroLessFirst);      // или управление вторым курсором и позиция второго курсора меньше
+
+    *condBottomRight =  (cursCntrl == Cursors::Control::_1_2) || 
+                        (cursCntrl == Cursors::Control::_1 && !zeroLessFirst) || 
+                        (cursCntrl == Cursors::Control::_2 && zeroLessFirst);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
