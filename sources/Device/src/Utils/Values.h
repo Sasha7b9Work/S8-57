@@ -132,10 +132,6 @@ public:
     String ToString(bool alwaysSign, int numDigits) const;
 
 private:
-    /// \brief Переводит число с плавающей точкой в текстовый вид. numDigits - число цифровых знакомест
-    /// \attention Строка будет храниться до следующего вызова функции. Если результат нужен большее количество времени, то его нужно скопироавать себе.
-    /// \retval указатель на строку с числом.
-    char *ToString(bool alwaysSign, int numDigits, char bufferOut[20]) const;
 
     float m_val;
 };

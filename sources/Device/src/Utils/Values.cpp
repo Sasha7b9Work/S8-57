@@ -15,15 +15,13 @@
 /// Преобразует значение частоты в текстовую строку
 static char *FrequencyToString(float freq, char buffer[20]);
 /// Преобразует время в текстовую строку
-static char* TimeToString(float time, bool alwaysSign, char buffer[20]);
+static char *TimeToString(float time, bool alwaysSign, char buffer[20]);
 /// Преобразует значение напряжения в текстовую строку
-static char* VoltageToString(float voltts, bool alwaysSign, char buffer[20]);
-
-
-
-
-
-
+static char *VoltageToString(float voltts, bool alwaysSign, char buffer[20]);
+/// \brief Переводит число с плавающей точкой в текстовый вид. numDigits - число цифровых знакомест
+/// \attention Строка будет храниться до следующего вызова функции. Если результат нужен большее количество времени, то его нужно скопироавать себе.
+/// \retval указатель на строку с числом.
+static char *FloatToString(float value, bool alwaysSign, int numDigits, char bufferOut[20]);
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -377,13 +375,13 @@ char* Phase::ToString(char bufferOut[20]) const
 String Float::ToString(bool alwaysSign, int numDigits) const
 {
     char buffer[30];
-    return String(ToString(alwaysSign, numDigits, buffer));
+    return String(FloatToString(m_val, alwaysSign, numDigits, buffer));
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-char *Float::ToString(bool alwaysSign, int numDigits, char bufferOut[20]) const
+static char *FloatToString(float value, bool alwaysSign, int numDigits, char bufferOut[20])
 {
-    float _value = m_val;
+    float _value = value;
     
     if(_value == std::numeric_limits<float>::infinity())
     {
