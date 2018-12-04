@@ -105,7 +105,7 @@ void Handlers::Process(KeyEvent e)
 
     if (code < Key::Number && type < TypePress::None)
     {
-        func[event.key][event.type]();
+        func[code][type]();
     }
     else
     {
