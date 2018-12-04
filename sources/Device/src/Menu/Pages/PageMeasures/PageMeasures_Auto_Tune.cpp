@@ -73,6 +73,11 @@ static bool IsActive_Tune()
 
 static bool HandlerKey_Tune(KeyEvent event)
 {
+    if (event.type != TypePress::Press)
+    {
+        return true;
+    }
+
     Key::E key = event.key;
 
     int8 delta = (key == Key::Up || key == Key::Right) ? 1 : -1;
