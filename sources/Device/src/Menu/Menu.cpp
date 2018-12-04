@@ -85,7 +85,9 @@ bool Menu::IsProcessed(KeyEvent *event)
             }
             return false;
         case Device::Mode::Multimeter:
-            if(Key(key).IsFunctional() || (key == Key::Enter && !TypePress(type).IsLong()))
+            if  (Key(key).IsFunctional()    ||                      // мультиметр реагирует на функциональные кнопки
+                Key(key).IsArrow()          ||                      // на стрелки
+                (key == Key::Enter && !TypePress(type).IsLong()))
             {
                 return true;
             }
