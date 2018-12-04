@@ -53,6 +53,7 @@ typedef void (*pFuncVU8)(uint8);
 inline void EmptyFuncVV(){}
 inline void EmptyFuncVB(bool){}
 inline bool EmptyFuncBtV() { return true; }
+inline bool EmptyFuncBfV() { return false; }
 inline void EmptyFuncVI(int) {}
 inline void EmptyFuncVII(int, int) {}
 inline bool EmptyFuncBfI(int) { return false; }

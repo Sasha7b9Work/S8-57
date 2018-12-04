@@ -28,7 +28,7 @@ static void OnChange_VoltageDC(bool active)
     }
 }
 
-DEF_CHOICE_3(   cRangesVoltageDC,                                                                                                                               //--- МУЛЬТИМЕТР - Предел ---
+DEF_CHOICE_3( cRangesVoltageDC,                                                                                                                                 //--- МУЛЬТИМЕТР - Предел ---
     "Предел", "Range",
     "Диапазон измерения", "Мeasurement range",
     "2 В",   "2 V",
@@ -51,13 +51,26 @@ static void OnChange_VoltageAC(bool active)
     }
 }
 
-DEF_CHOICE_3(   cRangesVoltageAC,                                                                                                                               //--- МУЛЬТИМЕТР - Предел ---
+DEF_CHOICE_3( cRangesVoltageAC,                                                                                                                                 //--- МУЛЬТИМЕТР - Предел ---
     "Предел", "Range",
     "Диапазон измерения", "Measurement range",
-    "2 В",   "2 V",
-    "20 В",  "20 V",
+    "2 В", "2 V",
+    "20 В", "20 V",
     "400 В", "400 V",
     MULTI_RANGE_AC, pageMultimeter, FuncActive_RnagesVoltageAC, OnChange_VoltageAC, FuncDraw
+)
+
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+static uint8 rangeCurrent;
+
+DEF_CHOICE_2( cRangesCurrent,
+    "Предел", "Range",
+    "Диапазон измерения", "Measurement range",
+    "2А", "2А",
+    "2А", "2А",
+    rangeCurrent, pageMultimeter, EmptyFuncBfV, FuncChangedChoice, FuncDraw
 )
 
 
@@ -166,6 +179,10 @@ void PageFunction::PageMultimeter::OnChanged_Mode(bool)
     else if (MULTI_MEASURE == Multimeter::Measure::VoltageAC)
     {
         items[1] = (Control *)&cRangesVoltageAC;
+    }
+    else if (MULTI_MEASURE == Multimeter::Measure::CurrentDC || MULTI_MEASURE == Multimeter::Measure::CurrentAC)
+    {
+        items[1] = (Control *)&cRangesCurrent;
     }
     else if (MULTI_MEASURE == Multimeter::Measure::Resistance)
     {
