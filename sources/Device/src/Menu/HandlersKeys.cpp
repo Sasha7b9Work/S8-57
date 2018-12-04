@@ -295,57 +295,9 @@ static void FuncLong()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void ArrowChoice()
-{
-    TypePress::E type = event.type;
-
-    Key::E key = event.key;
-
-    if (type != TypePress::Press)
-    {
-        return;
-    }
-
-    Choice *choice = (Choice *)Menu::OpenedItem();
-
-    if (key == Key::Up)
-    {
-        choice->ChangeIndex(-1);
-    }
-    else if (key == Key::Down)
-    {
-        choice->ChangeIndex(1);
-    }
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void ArrowPage()
-{
-    TypePress::E type = event.type;
-
-    Page *page = (Page *)Menu::OpenedItem();
-
-    if (!page->funcKey(event))
-    {
-        if (type == TypePress::Press)
-        {
-            page->ProcessKey(event);
-        }
-    }
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void Arrow()
 {
-    static const struct StructFunc { pFuncVV val; } funcs[Control::Type::Number] =
-    {
-        0,
-        ArrowChoice,
-        0,
-        ArrowPage
-    };
-
-    HANDLER_CHOICE_AND_SAFE_RUN(pFuncVV, Menu::OpenedItem()->type);
+    Menu::OpenedItem()->ProcessKey(event);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

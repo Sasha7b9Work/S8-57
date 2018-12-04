@@ -196,15 +196,29 @@ bool Control::ProcessKey(KeyEvent event)
 {
     Key::E key = event.key;
 
+    TypePress::E typePress = event.type;
+
     if (type == Control::Type::Page)
     {
-        ((Page *)this)->ChangeSubPage(key == Key::Left ? -1 : 1);
+        Page *page = (Page *)this;
+        if (!page->funcKey(event))
+        {
+            if (typePress == TypePress::Press)
+            {
+                page->ChangeSubPage(key == Key::Left ? -1 : 1);
+            }
+        }
     }
     else if (type == Control::Type::ChoiceReg || type == Control::Type::Choice)
     {
-        int delta = (key == Key::Up) ? 1 : -1;
+        if (typePress == TypePress::Press)
+        {
+            int delta = (key == Key::Down || key == Key::Right) ? 1 : -1;
 
-        ((Choice *)this)->ChangeIndex(Menu::IsShown() ? delta : -delta);
+            Choice *choice = (Choice *)this;
+
+            choice->ChangeIndex(Menu::IsShown() ? delta : -delta);
+        }
     }
     else if (type == Control::Type::Governor)
     {
