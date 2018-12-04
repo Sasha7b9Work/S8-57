@@ -133,5 +133,5 @@ public:
 
 private:
 
-    float m_val;
+    float value;
 };

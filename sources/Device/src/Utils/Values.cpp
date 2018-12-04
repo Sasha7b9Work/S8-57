@@ -25,7 +25,7 @@ static char *FloatToString(float value, bool alwaysSign, int numDigits, char buf
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-Float::Float(float val) : m_val(val)
+Float::Float(float val) : value(val)
 {
 }
 
@@ -375,30 +375,28 @@ char* Phase::ToString(char bufferOut[20]) const
 String Float::ToString(bool alwaysSign, int numDigits) const
 {
     char buffer[30];
-    return String(FloatToString(m_val, alwaysSign, numDigits, buffer));
+    return String(FloatToString(value, alwaysSign, numDigits, buffer));
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static char *FloatToString(float value, bool alwaysSign, int numDigits, char bufferOut[20])
 {
-    float _value = value;
-    
-    if(_value == std::numeric_limits<float>::infinity())
+    if(value == std::numeric_limits<float>::infinity())
     {
-        _value = _value;
+        value = value;
     }
 
-    if (Math::IsEquals(_value, ERROR_VALUE_FLOAT))
+    if (Math::IsEquals(value, ERROR_VALUE_FLOAT))
     {
         std::strcpy(bufferOut, ERROR_STRING_VALUE);
         return bufferOut;
     }
     
-    _value = Math::RoundFloat(_value, numDigits);
+    value = Math::RoundFloat(value, numDigits);
     
     char *pBuffer = bufferOut;
     
-    if (_value < 0)
+    if (value < 0)
     {
         *pBuffer++ = '-';
     }
@@ -411,7 +409,7 @@ static char *FloatToString(float value, bool alwaysSign, int numDigits, char buf
     
     format[1] = (char)numDigits + 0x30;
     
-    int numDigitsInInt = Math::DigitsInIntPart(_value);
+    int numDigitsInInt = Math::DigitsInIntPart(value);
     
     format[3] = (char)((numDigits - numDigitsInInt) + 0x30);
     if (numDigits == numDigitsInInt)
@@ -419,7 +417,7 @@ static char *FloatToString(float value, bool alwaysSign, int numDigits, char buf
         format[5] = '.';
     }
     
-    float absValue = std::fabsf(_value);
+    float absValue = std::fabsf(value);
     sprintf(pBuffer, (char *)format, (double)absValue);
     
     float val = (float)atof(pBuffer);
@@ -432,10 +430,10 @@ static char *FloatToString(float value, bool alwaysSign, int numDigits, char buf
         {
             format[5] = '.';
         }
-        sprintf(pBuffer, format, (double)_value);
+        sprintf(pBuffer, format, (double)value);
     }
     
-    bool signExist = alwaysSign || _value < 0;
+    bool signExist = alwaysSign || value < 0;
     while (std::strlen(bufferOut) < (size_t)(numDigits + (signExist ? 2 : 1)))
     {
         std::strcat(bufferOut, "0");
