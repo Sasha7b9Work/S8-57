@@ -43,8 +43,7 @@ void BottomPart::Draw()
 
     buffer[0] = 'a';
     buffer[1] = 0;
-    char bufForVal[20];
-    snprintf(buffer, SIZE, "\xa5%s", SET_TSHIFT.ToString(SET_TBASE, bufForVal));
+    snprintf(buffer, SIZE, "\xa5%s", SET_TSHIFT.ToString(SET_TBASE).CString());
     Painter::DrawText(x + 35, y0, buffer);
 
     buffer[0] = 0;

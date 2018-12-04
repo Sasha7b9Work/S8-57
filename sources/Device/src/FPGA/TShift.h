@@ -18,11 +18,11 @@ public:
 
     operator int() const { return value; };
 
-    char *ToString(TBase::E tBase, char buffer[20]) const;
-
-    char *CString(TBase::E tBase) const;
+    String ToString(TBase::E tBase) const;
 
 private:
+
+    char *ToString(TBase::E tBase, char buffer[20]) const;
+
     int value;
-//    String string;
 };

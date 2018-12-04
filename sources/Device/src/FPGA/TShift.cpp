@@ -80,7 +80,8 @@ char *TShift::ToString(TBase::E tBase, char buffer[20]) const
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-char *TShift::CString(TBase::E) const
+String TShift::ToString(TBase::E tBase) const
 {
-    return 0;
+    char buffer[20];
+    return String(ToString(tBase, buffer));
 }

@@ -17,7 +17,5 @@ public:
 
 private:
 
-    //static pString ToString(uint16 rShiftRel, Range::E range, Divider::E divider, char buffer[20]);
-
     static void Draw(Chan::E ch);
 };

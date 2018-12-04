@@ -197,12 +197,11 @@ static void DrawParametersTime()
 
     Painter::DrawBoundedRegion(x, y, width, height, Color::BACK, Color::FILL);
 
-    char buffer[50];
     Painter::DrawText(x + 3, y + 3, String("Разв : %s",TBase(SET_TBASE).Name()).CString(), Color::FILL);
 
     TShift shift(SET_TSHIFT);
 
-    Painter::DrawText(x + 64, y + 3, shift.ToString(SET_TBASE, buffer));
+    Painter::DrawText(x + 64, y + 3, shift.ToString(SET_TBASE).CString());
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
