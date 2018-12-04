@@ -686,9 +686,9 @@ static void DebugShowSetInfo_Draw()
     int y = y0 - dY;
 
 #define Y_AND_INCREASE (y += dY, y)
-#define DRAW_TEXT(str)                  Painter::DrawText(x0, Y_AND_INCREASE, str);
-#define DRAW_FORMAT(str, value)         Painter::DrawFormatText(x0, Y_AND_INCREASE, str, value)
-#define DRAW_FORMAT2(str, val1, val2)   Painter::DrawFormatText(x0, Y_AND_INCREASE, str, val1, val2);
+#define DRAW_TEXT(str)                  Painter::DrawText(x0, Y_AND_INCREASE, str)
+#define DRAW_FORMAT(str, value)         String(str, value).Draw(x0, Y_AND_INCREASE)
+#define DRAW_FORMAT2(str, val1, val2)   String(str, val1, val2).Draw(x0, Y_AND_INCREASE)
 
     //Painter_DrawFormatText(x0, Y_AND_INCREASE, "Размер основной структуры %d", sizeof(set));
     DRAW_FORMAT("Размер основной структуры : %d", sizeof(set));
@@ -703,7 +703,7 @@ static void DebugShowSetInfo_Draw()
         {
             for (int range = 0; range < Range::Number; ++range)
             {
-                Painter::DrawFormatText(x + range * 20, y + dY * ddY, "%d", NRST_RSHIFT_ADD(ch, range, type));
+                String("%d", NRST_RSHIFT_ADD(ch, range, type)).Draw(x + range * 20, y + dY * ddY);
             }
             ddY++;
         }
@@ -725,7 +725,7 @@ static void DebugShowSetInfo_Draw()
     {
         for (int num = 0; num < 3; num++)
         {
-            Painter::DrawFormatText(x + num * 20, y + dY * ch, "%d", NRST_STRETCH_ADC(ch, num));
+            String("%d", NRST_STRETCH_ADC(ch, num)).Draw(x + num * 20, y + dY * ch);
         }
     }
 

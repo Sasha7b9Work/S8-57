@@ -771,8 +771,9 @@ static void DrawDebugInfo()
     int y = 120;
     Painter::FillRegion(x, y, width, height, Color::BACK);
     Painter::DrawRectangle(x - 1, y - 1, width + 2, height + 2, Color::FILL);
-    Painter::DrawFormatText(x + 4, y + 4, "%d", freqActual.word);
-    Painter::DrawFormatText(x + 4, y + 15, "%d", periodActual.word);
+
+    String("%d", freqActual.word).Draw(x + 4, y + 4);
+    String("%d", periodActual.word).Draw(x + 4, y + 15);
 
     x += 100;
     width = 120;
@@ -781,8 +782,8 @@ static void DrawDebugInfo()
     Painter::FillRegion(x, y, width, height, Color::BACK);
     Painter::DrawRectangle(x - 1, y - 1, width + 2, height + 2, Color::FILL);
 
-    Painter::DrawFormatText(x + 4, y + 4, "%d", lastFreq.word);
-    Painter::DrawFormatText(x + 4, y + 15, "%d", lastPeriod.word);
+    String("%d", lastFreq.word).Draw(x + 4, y + 4);
+    String("%d", lastPeriod.word).Draw(x + 4, y + 15);
 
     int size = 8;
 

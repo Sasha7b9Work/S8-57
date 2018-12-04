@@ -49,6 +49,7 @@ bool Painter::WriteFlashColor()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+/*
 int Painter::DrawFormatText(int x, int y, char *text, ...)
 {
 #define SIZE_BUFFER_DRAW_FORM_TEXT 200
@@ -59,6 +60,7 @@ int Painter::DrawFormatText(int x, int y, char *text, ...)
     va_end(args);
     return DrawText(x, y, buffer);
 }
+*/
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Painter::DrawHLine(float y, int x0, int x1, Color color)
