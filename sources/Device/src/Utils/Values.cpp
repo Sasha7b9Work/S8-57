@@ -140,8 +140,7 @@ static char *FrequencyToString(float freq, char bufferOut[20])
     {
         suffix = LANG_RU ? "Ãö" : "Hz";
     }
-    char buffer[20];
-    std::strcat(bufferOut, Float(freq).ToString(false, 4, buffer));
+    std::strcat(bufferOut, Float(freq).ToString(false, 4).CString());
     std::strcat(bufferOut, suffix);
     return bufferOut;
 }
@@ -168,8 +167,7 @@ char *Frequency::ToStringAccuracy(char bufferOut[20], int numDigits) const
     suffix = LANG_RU ? "êÃö" : "kHz";
     freq /= 1e3f;
     }
-    char buffer[20];
-    std::strcat(bufferOut, Float(freq).ToString(false, numDigits, buffer));
+    std::strcat(bufferOut, Float(freq).ToString(false, numDigits).CString());
     std::strcat(bufferOut, suffix);
     return bufferOut;
 }
@@ -225,10 +223,9 @@ char *TimeToString(float time, bool alwaysSign, char buffer[20])
         num = 3;
     }
 
-    char bufferOut[20];
-std::strcpy(buffer, Float(time * factor[num]).ToString(alwaysSign, 4, bufferOut));
-std::strcat(buffer, suffix[LANG][num]);
-return buffer;
+    std::strcpy(buffer, Float(time * factor[num]).ToString(alwaysSign, 4).CString());
+    std::strcat(buffer, suffix[LANG][num]);
+    return buffer;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -262,8 +259,7 @@ char* Time::ToStringAccuracy(bool alwaysSign, char buffer[20], int numDigits) co
         time *= 1e3f;
     }
 
-    char bufferOut[20];
-    std::strcat(buffer, Float(time).ToString(alwaysSign, numDigits, bufferOut));
+    std::strcat(buffer, Float(time).ToString(alwaysSign, numDigits).CString());
     std::strcat(buffer, suffix);
 
     return buffer;
@@ -313,11 +309,7 @@ static char* VoltageToString(float voltage, bool alwaysSign, char buffer[20])
         num = 3;
     }
 
-    CHAR_BUF(bufferOut, 20);
-
-    Float(voltage * factor[num]).ToString(alwaysSign, 4, bufferOut);
-
-    std::strcpy(buffer, bufferOut);
+    std::strcpy(buffer, Float(voltage * factor[num]).ToString(alwaysSign, 4).CString());
     std::strcat(buffer, suf[LANG][num]);
     return buffer;
 }
@@ -369,11 +361,7 @@ char *Current::ToString(char buffer[50]) const
         num = 3;
     }
 
-    CHAR_BUF(bufferOut, 20);
-
-    Float(current * factor[num]).ToString(true, 4, bufferOut);
-
-    std::strcpy(buffer, bufferOut);
+    std::strcpy(buffer, Float(current * factor[num]).ToString(true, 4).CString());
     std::strcat(buffer, suf[LANG][num]);
     return buffer;
 }
@@ -381,9 +369,15 @@ char *Current::ToString(char buffer[50]) const
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 char* Phase::ToString(char bufferOut[20]) const
 {
-    char buffer[20];
-    sprintf(bufferOut, "%s\xa8", Float(value).ToString(false, 4, buffer));
+    sprintf(bufferOut, "%s\xa8", Float(value).ToString(false, 4).CString());
     return bufferOut;
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+String Float::ToString(bool alwaysSign, int numDigits) const
+{
+    char buffer[30];
+    return String(ToString(alwaysSign, numDigits, buffer));
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
