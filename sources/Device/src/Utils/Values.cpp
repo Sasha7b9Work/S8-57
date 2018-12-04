@@ -162,6 +162,14 @@ char *Frequency::ToStringAccuracy(char bufferOut[20], int numDigits) const
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+String Time::ToString(bool alwaysSign) const
+{
+    char buffer[20];
+    return String(ToString(alwaysSign, buffer));
+}
+
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 char *Time::ToString(bool alwaysSign, char buffer[20]) const
 {
     float time = value;

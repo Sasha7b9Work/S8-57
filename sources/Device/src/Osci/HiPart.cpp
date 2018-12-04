@@ -88,7 +88,7 @@ void HiPart::WriteCursors()
             float pos1 = FPGAMath::TimeCursor(CURsT_POS(source, 1), SET_TBASE);
             float delta = std::fabsf(pos1 - pos0);
             Painter::DrawText(x, y1, ":dT=");
-            Painter::DrawText(x + 17, y1, Time(delta).ToString(false, buffer));
+            Painter::DrawText(x + 17, y1, Time(delta).ToString(false).CString());
             Painter::DrawText(x, y2, ":");
 //            Painter::DrawText(x + 8, y2, sCursors_GetCursorPercentsT(source, buffer));
 
