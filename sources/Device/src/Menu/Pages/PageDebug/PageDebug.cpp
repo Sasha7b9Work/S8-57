@@ -916,9 +916,10 @@ static void Draw_EnterSerialNumber()
 
     // Теперь выведем информацию об оставшемся месте в OTP-памяти для записи
 
-    int allShots = OTPmem::GetSerialNumber(buffer);
+    int allShots = 0;
+    String serialNumber = OTPmem::GetSerialNumber(&allShots);
 
-    Painter::DrawFormText(x0 + deltaX, y0 + 130, Color::FILL, "Текущий сохранённый номер %s", buffer[0] == 0 ? "-- ----" : buffer);
+    Painter::DrawFormText(x0 + deltaX, y0 + 130, Color::FILL, "Текущий сохранённый номер %s", serialNumber.CString()[0] == 0 ? "-- ----" : serialNumber.CString());
 
     Painter::DrawFormText(x0 + deltaX, y0 + 100, Color::FILL, "Осталось места для %d попыток", allShots);
 }

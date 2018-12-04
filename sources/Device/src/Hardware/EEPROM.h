@@ -1,4 +1,5 @@
 #pragma once
+#include "Utils/String.h"
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -53,7 +54,7 @@ class OTPmem
 {
 public:
     static bool SaveSerialNumber(char *servialNumber);
-    /// ¬озвращает число свободных мест дл€ записи. ≈сли 0, то места в OTP уже не осталось.
-    static int GetSerialNumber(char buffer[17]);
+    /// ¬озвращает текстовое представление серийного номера. ¬ freeForWrite количество свободных мест дл€ записи
+    static String GetSerialNumber(int *freeForWrite);
 };
 
