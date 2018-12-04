@@ -26,8 +26,6 @@ public:
 
     static void DrawRectangle(int x, int y, int width, int height, Color color = Color::NUMBER);
 
-    static int DrawFormatText(int x, int y, Color color, char *format, ...);
-
     static int DrawChar(int x, int y, char symbol, Color color = Color::NUMBER);
 
     static void DrawHLine(int y, int x0, int x1, Color color = Color::NUMBER);

@@ -2,6 +2,7 @@
 #ifndef WIN32
 #include "defines.h"
 #include "String.h"
+#include "Display/Painter.h"
 #include <cstring>
 #include <cstdio>
 #include <cstdlib>
@@ -71,4 +72,11 @@ bool String::Allocate(uint size)
         LOG_ERROR("Не хватает памяти");
     }
     return false;
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+int String::Draw(int x, int y, Color color) const
+{
+    Painter::SetColor(color);
+    return Painter::DrawText(x, y, CString());
 }

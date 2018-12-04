@@ -181,7 +181,7 @@ void Painter::DrawBigText(int eX, int eY, uint8 sizeSymbol, const char *text, Co
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 int Painter::DrawChar(int x, int y, char symbol, Color color)
 {
-    DrawFormatText(x, y, color, "%c", symbol);
+    String("%c", symbol).Draw(x, y, color);
 
     return 8;
 }

@@ -49,19 +49,6 @@ bool Painter::WriteFlashColor()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-int Painter::DrawFormatText(int x, int y, Color color, char *text, ...)
-{
-    SetColor(color);
-#define SIZE_BUFFER_DRAW_FORM_TEXT 200
-    CHAR_BUF(buffer, SIZE_BUFFER_DRAW_FORM_TEXT);
-    va_list args;
-    va_start(args, text);
-    std::vsprintf(buffer, text, args);
-    va_end(args);
-    return DrawText(x, y, buffer);
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 int Painter::DrawFormatText(int x, int y, char *text, ...)
 {
 #define SIZE_BUFFER_DRAW_FORM_TEXT 200
