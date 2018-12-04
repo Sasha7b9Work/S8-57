@@ -147,13 +147,13 @@ char *Frequency::ToStringAccuracy(char bufferOut[20], int numDigits) const
     }
     if (freq >= 1e6f)
     {
-        suffix = LANG_RU ? "ÌÃö" : "MHz";
-        freq /= 1e6f;
+    suffix = LANG_RU ? "ÌÃö" : "MHz";
+    freq /= 1e6f;
     }
     else if (freq >= 1e3f)
     {
-        suffix = LANG_RU ? "êÃö" : "kHz";
-        freq /= 1e3f;
+    suffix = LANG_RU ? "êÃö" : "kHz";
+    freq /= 1e3f;
     }
     char buffer[20];
     std::strcat(bufferOut, Float(freq).ToString(false, numDigits, buffer));
@@ -178,7 +178,7 @@ char *Time::ToString(bool alwaysSign, char buffer[20]) const
         {"ns", "us",  "ms", "s"}
     };
 
-    static const float factor[4] = {1e9f, 1e6f, 1e3f, 1.0f};
+    static const float factor[4] = { 1e9f, 1e6f, 1e3f, 1.0f };
 
     float absTime = std::fabsf(time);
 
@@ -242,6 +242,13 @@ char* Time::ToStringAccuracy(bool alwaysSign, char buffer[20], int numDigits) co
     std::strcat(buffer, suffix);
 
     return buffer;
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+String Voltage::ToString(bool alwaysSign) const
+{
+    char buffer[20];
+    return String(ToString(alwaysSign, buffer));
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

@@ -46,8 +46,8 @@ void HiPart::WriteCursors()
             Painter::DrawText(x, y1, "1:", colorText);
             Painter::DrawText(x, y2, "2:");
             x += 7;
-            Painter::DrawText(x, y1, Cursors::Voltage(source, 0, buffer));
-            Painter::DrawText(x, y2, Cursors::Voltage(source, 1, buffer));
+            Painter::DrawText(x, y1, Cursors::Voltage(source, 0).CString());
+            Painter::DrawText(x, y2, Cursors::Voltage(source, 1).CString());
             x = startX + 49;
             float pos0 = FPGAMath::VoltageCursor(Cursors::PosU(source, 0), SET_RANGE(source), SET_RSHIFT(source));
             float pos1 = FPGAMath::VoltageCursor(Cursors::PosU(source, 1), SET_RANGE(source), SET_RSHIFT(source));
@@ -59,7 +59,7 @@ void HiPart::WriteCursors()
             Painter::DrawText(x, y1, ":dU=");
             Painter::DrawText(x + 17, y1, Voltage(delta).ToString(false, buffer));
             Painter::DrawText(x, y2, ":");
-//            Painter::DrawText(x + 10, y2, Cursors:: sCursors_GetCursorPercentsU(source, buffer));
+            //Painter::DrawText(x + 10, y2, Cursors:: sCursors_GetCursorPercentsU(source, buffer));
         }
 
         x = startX + 101;
@@ -71,8 +71,8 @@ void HiPart::WriteCursors()
             Painter::DrawText(x, y1, "1:");
             Painter::DrawText(x, y2, "2:");
             x += 7;
-            Painter::DrawText(x, y1, Cursors::Time(source, 0, buffer));
-            Painter::DrawText(x, y2, Cursors::Time(source, 1, buffer));
+            Painter::DrawText(x, y1, Cursors::Time(source, 0).CString());
+            Painter::DrawText(x, y2, Cursors::Time(source, 1).CString());
             x = startX + 153;
 
             /// \todo Дичь.

@@ -75,15 +75,15 @@ static const Settings defaultSettings =
     /* curs_showFreq;                */ true,
     /* curs_active;                  */ Cursors::Active::None,
     /* curs_source;                  */ Chan::A,
-    /* curs_cntrlU[Chan::Number];       */ {Cursors::Control::Disable, Cursors::Control::Disable},
-    /* curs_cntrlT[Chan::Number];       */ {Cursors::Control::Disable, Cursors::Control::Disable},
+    /* curs_cntrlU[Chan::Number];    */ {Cursors::Control::Disable, Cursors::Control::Disable},
+    /* curs_cntrlT[Chan::Number];    */ {Cursors::Control::Disable, Cursors::Control::Disable},
     /* curs_movement;                */ Cursors::Movement::Pixels,
-    /* curs_deltaU100percents[2];    */ {100, 100},
-    /* curs_deltaT100percents[2];    */ {100, 100},
-    /* curs_posCurU[Chan::Number][2];   */ {
+    /* curs_deltaU100percents[2];    */ {80,  80},
+    /* curs_deltaT100percents[2];    */ {120, 120},
+    /* curs_posCurU[Chan::Number][2];*/ {
                                         { 60, 140 },        // Канал 1
                                         { 60, 140 }},       // Канал 2
-    /* curs_posCurT[Chan::Number][2];   */ {
+    /* curs_posCurT[Chan::Number][2];*/ {
                                         { 80, 200 },        // Канал 1
                                         { 80, 200 }},       // Канал 2
     

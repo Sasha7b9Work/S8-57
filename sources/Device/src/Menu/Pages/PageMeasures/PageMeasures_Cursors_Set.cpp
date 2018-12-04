@@ -331,14 +331,14 @@ bool PageMeasures::PageCursors::PageSet::OnKey(KeyEvent event)
     return true;
 }
 
-DEF_PAGE_3(pageSet,                                                                                                                                //--- хглепемхъ - йспянпш - сярюмнбхрэ ---
+DEF_PAGE_4(pageSet,                                                                                                                                //--- хглепемхъ - йспянпш - сярюмнбхрэ ---
     "сярюмнбхрэ", "SET",
     "оЕПЕУНД Б ПЕФХЛ ЙСПЯНПМШУ ХГЛЕПЕМХИ",
     "Switch to cursor measures",
     &bSet_Channel,          ///< хглепемхъ - йспянпш - сярюмнбхрэ - йЮМЮК
     &bSet_U,                ///< хглепемхъ - йспянпш - сярюмнбхрэ - йСПЯНПШ U
     &bSet_T,                ///< хглепемхъ - йспянпш - сярюмнбхрэ - йСПЯНПШ р
-    //&bSet_100,              ///< хглепемхъ - йспянпш - сярюмнбхрэ - 100%
+    &bSet_100,              ///< хглепемхъ - йспянпш - сярюмнбхрэ - 100%
     //&bSet_Movement,         ///< хглепемхъ - йспянпш - сярюмнбхрэ - оЕПЕЛЕЫЕМХЕ
     Page::Name::Measures_Cursors_Set, PageMeasures::PageCursors::pointer, FuncActive, EmptyPressPage, FuncDrawPage,
     PageMeasures::PageCursors::PageSet::OnKey
@@ -429,7 +429,8 @@ void PageMeasures::PageCursors::PageSet::SetCursorU(Chan::E ch, int numCur, floa
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void PageMeasures::PageCursors::PageSet::SetCursorT(Chan::E ch, int numCur, float pos)
 {
-    // CURsT_POS(ch, numCur) = LimitationFloat(pos, 0, MAX_POS_T);      /// \todo НДХМЮЙНБШЕ БЕРЙХ
+    /// \todo НДХМЮЙНБШЕ БЕРЙХ
+    // CURsT_POS(ch, numCur) = LimitationFloat(pos, 0, MAX_POS_T);      
     Cursors::SetCursPosT_temp(ch, numCur, Math::LimitationRet(pos, 0.0f, MAX_POS_T));
 }
 

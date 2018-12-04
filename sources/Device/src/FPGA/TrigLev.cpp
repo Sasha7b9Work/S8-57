@@ -19,7 +19,7 @@ volatile static bool needDraw = false;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /// Преобразует уровень синхронизации в текстовую строку
-static pString ToString(uint16 trigLev, Range::E range, Divider::E divider, char buffer[20]);
+static String ToString(uint16 trigLev, Range::E range, Divider::E divider);
 /// Отключает отображение уровня синхронизации поверх сигнала
 static void DisableDrawing();
 
@@ -31,10 +31,10 @@ bool Trig::SyncPulse()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static pString ToString(uint16 trigLev, Range::E range, Divider::E divider, char buffer[20])
+static String ToString(uint16 trigLev, Range::E range, Divider::E divider)
 {
     float trigLevVal = FPGAMath::RShift2Abs(trigLev, range) * Divider(divider).ToAbs();
-    return Voltage(trigLevVal).ToString(true, buffer);
+    return Voltage(trigLevVal).ToString(true);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -42,9 +42,8 @@ void Trig::DrawOnGrid()
 {
     if(needDraw)
     {
-        char value[20];
         char buffer[20];
-        sprintf(buffer, "Синхр %s", ToString(SET_TRIGLEV_SOURCE, SET_RANGE(TRIG_SOURCE), SET_DIVIDER(TRIG_SOURCE), value));
+        sprintf(buffer, "Синхр %s", ToString(SET_TRIGLEV_SOURCE, SET_RANGE(TRIG_SOURCE), SET_DIVIDER(TRIG_SOURCE)).CString());
 
         int width = 85;
         int height = 18;

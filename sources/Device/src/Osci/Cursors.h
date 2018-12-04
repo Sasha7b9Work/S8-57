@@ -1,5 +1,6 @@
 #pragma once
 #include "Settings/SettingsChannel.h"
+#include "Utils/String.h"
 
 
 /// Перемемещение курсоров при вращении ручки УСТАНОВКА - по точкам или процентам
@@ -68,18 +69,22 @@ class Cursors
 public:
     /// Нарисовать курсоры и результаты курсорных измерений
     static void Draw();
-    /// Получить позицию курсора напряжения
-    static float PosU(Chan::E ch, int numCur);
     /// Возвращает true,если нужно рисовать курсоры
     static bool  NecessaryDraw();
-    /// Получить строку курсора напряжения
-    static pString Voltage(Chan::E source, int numCur, char buffer[20]);
+    /// Получить позицию курсора напряжения
+    static float PosU(Chan::E ch, int numCur);
     /// Возвращает значение курсора времени
     static float PosT(Chan::E ch, int num);
-
-    static pString Time(Chan::E source, int numCur, char buffer[20]);
+    /// Получить строку курсора напряжения
+    static String Voltage(Chan::E source, int numCur);
+    /// Получть строку курсора времени
+    static String Time(Chan::E source, int numCur);
 
     static void SetCursPosT_temp(Chan::E ch, int num, float value);
+
+private:
+    /// Получить строку курсора времени
+    static pString Time(Chan::E source, int numCur, char buffer[20]);
 
 public:
     /// Дискретность перемещения курсоров.

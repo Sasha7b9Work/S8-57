@@ -36,14 +36,23 @@ bool Cursors::NecessaryDraw()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-pString Cursors::Voltage(Chan::E source, int numCur, char buffer[20])
+String Cursors::Voltage(Chan::E source, int numCur)
 {
     float voltage = FPGAMath::VoltageCursor(Cursors::PosU(source, numCur), SET_RANGE(source), SET_RSHIFT(source));
     if (SET_DIVIDER_10(source))
     {
         voltage *= 10.0f;
     }
-    return ::Voltage(voltage).ToString(true, buffer);
+
+    return ::Voltage(voltage).ToString(true);
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+String Cursors::Time(Chan::E source, int numCur)
+{
+    char buffer[20];
+
+    return String((char *)Time(source, numCur, buffer));
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
