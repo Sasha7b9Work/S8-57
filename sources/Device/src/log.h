@@ -6,16 +6,15 @@
 class Log
 {
 public:
-    static void MessageString(char *message);
-    static void Message(char *format, ...);
-    static void MessageTrace(char *file, int line, char *format, ...);
+    static void Message(char *message);
+    static void Message(char *file, int line, char *message);
 private:
 };
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-#define LOG_WRITE(...)      Log::MessageString(String(__VA_ARGS__).CString());
-//#define LOG_WRITE(...)       Log::Message(__VA_ARGS__)
-#define LOG_ERROR_TRACE(...) Log::Message(__VA_ARGS__)
-#define LOG_ERROR(...)       Log::MessageTrace(__FILE__, __LINE__, __VA_ARGS__)
-#define LOG_FUNC_ENTER()     Log::Message("%s %d enter", __FUNCTION__, __LINE__)
-#define LOG_FUNC_LEAVE()     Log::Message("%s %d leave", __FUNCTION__, __LINE__)
+#define LOG_WRITE(...)      Log::Message(String(__VA_ARGS__).CString())
+#define LOG_ERROR(...)      Log::Message(__FILE__, __LINE__, String(__VA_ARGS__).CString())
+
+
+#define LOG_FUNC_ENTER()     Log::Message(String("%s %d enter", __FUNCTION__, __LINE__).CString())
+#define LOG_FUNC_LEAVE()     Log::Message(String("%s %d leave", __FUNCTION__, __LINE__).CString())

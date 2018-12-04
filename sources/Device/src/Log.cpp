@@ -15,43 +15,13 @@
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void Log::Message(char *format, ...)
-{
-    char buffer[SIZE_BUFFER + 1] = { 0 };
-    
-    va_list args;
-    va_start(args, format);
-    int numSymbols = std::vsprintf(buffer, format, args);
-    va_end(args);
-
-    if (numSymbols < 0 || numSymbols > SIZE_BUFFER)
-    {
-        LOG_ERROR("Буфер слишком мал");
-    }
-
-    Console::AddString(buffer);
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Log::MessageString(char *message)
+void Log::Message(char *message)
 {
     Console::AddString(message);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Log::MessageTrace(char *file, int line, char *format, ...)
+void Log::Message(char *file, int line, char *message)
 {
-    char buffer[SIZE_BUFFER + 1] = { 0 };
-
-    va_list args;
-    va_start(args, format);
-    int numSymbols = std::vsprintf(buffer, format, args);
-    va_end(args);
-
-    if (numSymbols < 0 || numSymbols > SIZE_BUFFER)
-    {
-        LOG_ERROR("Буфер слишком мал");
-    }
-
-    Console::AddString(String("%s %d %s", file, line, buffer).CString());
+    Console::AddString(String("%s %d %s", file, line, message).CString());
 }
