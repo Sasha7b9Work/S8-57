@@ -82,10 +82,6 @@ public:
 
     static void SetCursPosT_temp(Chan::E ch, int num, float value);
 
-private:
-    /// Получить строку курсора времени
-    static pString Time(Chan::E source, int numCur, char buffer[20]);
-
 public:
     /// Дискретность перемещения курсоров.
     struct Movement

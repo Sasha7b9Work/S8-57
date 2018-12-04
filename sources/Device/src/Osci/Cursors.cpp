@@ -50,17 +50,9 @@ String Cursors::Voltage(Chan::E source, int numCur)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 String Cursors::Time(Chan::E source, int numCur)
 {
-    char buffer[20];
-
-    return String((char *)Time(source, numCur, buffer));
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-pString Cursors::Time(Chan::E source, int numCur, char buffer[20])
-{
     float time = FPGAMath::TimeCursor(CURsT_POS(source, numCur), SET_TBASE);
 
-    return ::Time(time).ToString(true, buffer);
+    return ::Time(time).ToString(true);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
