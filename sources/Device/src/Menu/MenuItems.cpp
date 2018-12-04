@@ -203,6 +203,12 @@ void Page::ProcessKey(KeyEvent event)
     }
 }
 
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Governor::ProcessKey(KeyEvent event)
+{
+    Key::E key = event.key;
+    ChangeValue((key == Key::Left || key == Key::Down) ? -1 : 1);
+}
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Control::ProcessKey(KeyEvent event)
@@ -226,7 +232,7 @@ void Control::ProcessKey(KeyEvent event)
         ((Page *)this)->ProcessKey(event);
         break;
     case Control::Type::Governor:
-        ((Governor *)this)->ChangeValue((key == Key::Left || key == Key::Down) ? -1 : 1);
+        ((Governor *)this)->ProcessKey(event);
         break;
     }
 }
