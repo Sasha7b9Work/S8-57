@@ -12,11 +12,12 @@
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/// ѕреобразует значение частоты в текстовую строку
 static char *FrequencyToString(float freq, char buffer[20]);
 /// ѕреобразует врем€ в текстовую строку
 static char* TimeToString(float time, bool alwaysSign, char buffer[20]);
-
-
+/// ѕреобразует значение напр€жени€ в текстовую строку
+static char* VoltageToString(float voltts, bool alwaysSign, char buffer[20]);
 
 
 
@@ -272,14 +273,12 @@ char* Time::ToStringAccuracy(bool alwaysSign, char buffer[20], int numDigits) co
 String Voltage::ToString(bool alwaysSign) const
 {
     char buffer[20];
-    return String(ToString(alwaysSign, buffer));
+    return String(VoltageToString(value, alwaysSign, buffer));
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-char* Voltage::ToString(bool alwaysSign, char buffer[20]) const
+static char* VoltageToString(float voltage, bool alwaysSign, char buffer[20])
 {
-    float voltage = value;
-
     if (Math::IsEquals(voltage, ERROR_VALUE_FLOAT))
     {
         std::strcpy(buffer, ERROR_STRING_VALUE);
