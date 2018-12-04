@@ -183,7 +183,11 @@ String Cursors::PercentsU(Chan::E source)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-String Cursors::PercentsT(Chan::E /*source*/)
+String Cursors::PercentsT(Chan::E source)
 {
-    return String("");
+    float dPerc = 100.0f;
+    std::memcpy(&dPerc, &dTperc(source), sizeof(float));
+
+    float dValue = std::fabsf(CURsT_POS(source, 0) - CURsT_POS(source, 1));
+    return String("%s%%", Float(dValue / dPerc * 100.0f).ToString(false, 6).CString());
 }
