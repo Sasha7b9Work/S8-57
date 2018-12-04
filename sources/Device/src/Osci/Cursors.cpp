@@ -10,6 +10,7 @@
 #include "FPGA/FPGAMath.h"
 #include "Utils/StringUtils.h"
 #include "Utils/Values.h"
+#include <cmath>
 #include <cstring>
 #endif
 
@@ -167,4 +168,22 @@ static void UpdateCursorsForLook()
     {
         //SetCursorT(source, 1, Processing::CalculateCursorT(source, CURsU_POS(source, 1), 1));
     }
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+String Cursors::PercentsU(Chan::E source)
+{
+    /// \todo Тут дикая дичь. Эта строчка вызывает HardFault. Возможно, из-за включенного выравнивания Settings. Надо подумать
+    // float dPerc = dUperc(source);     
+    float dPerc = 100.0f;
+    std::memcpy(&dPerc, &dUperc(source), sizeof(float));
+
+    float dValue = std::fabsf(PosU(source, 0) - PosU(source, 1));
+    return String("%s%%", Float(dValue / dPerc * 100.0f).ToString(false, 5).CString());
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+String Cursors::PercentsT(Chan::E /*source*/)
+{
+    return String("");
 }

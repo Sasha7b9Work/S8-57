@@ -58,7 +58,7 @@ void HiPart::WriteCursors()
             Painter::DrawText(x, y1, ":dU=");
             Painter::DrawText(x + 17, y1, Voltage(delta).ToString(false).CString());
             Painter::DrawText(x, y2, ":");
-            //Painter::DrawText(x + 10, y2, Cursors:: sCursors_GetCursorPercentsU(source, buffer));
+            Painter::DrawText(x + 10, y2, Cursors::PercentsU(source).CString());
         }
 
         x = startX + 101;
@@ -72,16 +72,7 @@ void HiPart::WriteCursors()
             x += 7;
             Painter::DrawText(x, y1, Cursors::Time(source, 0).CString());
             Painter::DrawText(x, y2, Cursors::Time(source, 1).CString());
-            x = startX + 153;
-
-            /// \todo Дичь.
-
-            
-            // float p0 = 0.0f;
-            // memcpy(&p0, &CURsT_POS(source, 0), sizeof(float));
-            // float p1 = 0.0f;
-            // memcpy(&p1, &CURsT_POS(source, 1), sizeof(float));
-            
+            x = startX + 153;          
 
             float pos0 = FPGAMath::TimeCursor(CURsT_POS(source, 0), SET_TBASE);
             float pos1 = FPGAMath::TimeCursor(CURsT_POS(source, 1), SET_TBASE);
@@ -89,7 +80,7 @@ void HiPart::WriteCursors()
             Painter::DrawText(x, y1, ":dT=");
             Painter::DrawText(x + 17, y1, Time(delta).ToString(false).CString());
             Painter::DrawText(x, y2, ":");
-//            Painter::DrawText(x + 8, y2, sCursors_GetCursorPercentsT(source, buffer));
+            Painter::DrawText(x + 8, y2, Cursors::PercentsT(source).CString());
 
             if(CURSORS_SHOW_FREQ)
             {
