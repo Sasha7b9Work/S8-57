@@ -192,7 +192,20 @@ const char *Control::Title() const
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-bool Control::ProcessKey(KeyEvent event)
+void Page::ProcessKey(KeyEvent event)
+{
+    if (!funcKey(event))
+    {
+        if (event.type == TypePress::Press)
+        {
+            ChangeSubPage((event.key == Key::Left) ? -1 : 1);
+        }
+    }
+}
+
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Control::ProcessKey(KeyEvent event)
 {
     Key::E key = event.key;
 
@@ -200,14 +213,7 @@ bool Control::ProcessKey(KeyEvent event)
 
     if (type == Control::Type::Page)
     {
-        Page *page = (Page *)this;
-        if (!page->funcKey(event))
-        {
-            if (typePress == TypePress::Press)
-            {
-                page->ChangeSubPage(key == Key::Left ? -1 : 1);
-            }
-        }
+        ((Page *)this)->ProcessKey(event);
     }
     else if (type == Control::Type::ChoiceReg || type == Control::Type::Choice)
     {
@@ -224,8 +230,6 @@ bool Control::ProcessKey(KeyEvent event)
     {
         ((Governor *)this)->ChangeValue((key == Key::Left || key == Key::Down) ? -1 : 1);
     }
-
-    return true;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

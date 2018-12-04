@@ -64,7 +64,7 @@ public:
     /// Возвращает название элемента, как оно выглядит на дисплее прибора
     const char *Title() const;
     /// Обработка события кнопки
-    bool ProcessKey(KeyEvent event);
+    void ProcessKey(KeyEvent event);
     /// Вызывается при "коротком" нажатии
     void ShortPress();
     /// Вызывается при "длинном" нажатии
@@ -134,11 +134,13 @@ public:
     int NumItems() const;
     /// Установить текущей данную страницу.
     void SetAsCurrent();
+    /// Возвращает номер текущей подстраницы (той, которая индицируется в данный момент)
     int8 CurrentSubPage() const;
+    /// Установить текущей данную подстраницу
     void SetCurrentSubPage(int8 pos);
     ///< Устанавливает позицию активного пункта меню
     void SetPosActItem(int8 pos);
-    ///< Возвращает адрес элемента меню заданной страницы
+    ///< Возвращает указатель на заданный элемент страницы
     Control *Item(int numElement) const;
     /// \todo Возвращает позицию первого элемента страницы по адресу page на экране. Если текущая подстраница 0, это будет 0, если текущая 
     /// подстраница 1, это будет 5 и т.д.
@@ -147,10 +149,12 @@ public:
     void ShortPressOnItem(int numItem);
     /// Возвращает позицию текущего элемента странцы page
     int8 PosCurrentItem() const;
-    
+    /// Изменить номер текущей подстраницы на значение delta
     void ChangeSubPage(int delta);
-
+    /// Нарисовать в заданных координатах
     void Draw(int x, int y, bool opened);
+    /// Обработка события кнопки
+    void ProcessKey(KeyEvent event);
 
     void DrawTitle(int x, int y);
 
