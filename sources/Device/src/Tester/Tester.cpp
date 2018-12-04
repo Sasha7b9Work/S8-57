@@ -340,7 +340,5 @@ String Tester::Shift::ToString(Scale::E scale)
 
     float shiftAbs = FPGAMath::RShift2Abs(shift,  (Range::E)scale) * 1e-3f;
 
-    char buffer[50];
-
-    return Current(shiftAbs).ToString(buffer);
+    return Current(shiftAbs).ToString();
 }

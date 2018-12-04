@@ -111,9 +111,11 @@ class Current
 public:
     Current(float v) : value(v) {};
 
-    char *ToString(char buffer[50]) const;
+    String ToString() const;
 
 private:
+    char *ToString(char buffer[50]) const;
+
     float value;
 };
 

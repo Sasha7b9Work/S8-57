@@ -215,9 +215,9 @@ char *Time::ToString(bool alwaysSign, char buffer[20]) const
     }
 
     char bufferOut[20];
-    std::strcpy(buffer, Float(time * factor[num]).ToString(alwaysSign, 4, bufferOut));
-    std::strcat(buffer, suffix[LANG][num]);
-    return buffer;
+std::strcpy(buffer, Float(time * factor[num]).ToString(alwaysSign, 4, bufferOut));
+std::strcat(buffer, suffix[LANG][num]);
+return buffer;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -282,7 +282,7 @@ char* Voltage::ToString(bool alwaysSign, char buffer[20]) const
         {"\x10uV",  "\x10mV", "\x10V", "\x10kV"}
     };
 
-    static const float factor[4] = {1e6f, 1e3f, 1.0f, 1e-3f};
+    static const float factor[4] = { 1e6f, 1e3f, 1.0f, 1e-3f };
 
     int num = 0;
     float absValue = std::fabsf(voltage) + 0.5e-4f;
@@ -311,6 +311,13 @@ char* Voltage::ToString(bool alwaysSign, char buffer[20]) const
     std::strcpy(buffer, bufferOut);
     std::strcat(buffer, suf[LANG][num]);
     return buffer;
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+String Current::ToString() const
+{
+    char buffer[50];
+    return String(ToString(buffer));
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
