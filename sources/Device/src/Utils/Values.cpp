@@ -27,6 +27,10 @@ static char *FloatToString(float value, bool alwaysSign, int numDigits, char buf
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 Float::Float(float val) : value(val)
 {
+    if (value == std::numeric_limits<float>::infinity())
+    {
+        LOG_ERROR("Неправильное число");
+    }
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -138,8 +142,8 @@ static char *FrequencyToString(float freq, char bufferOut[20])
     {
         suffix = LANG_RU ? "Гц" : "Hz";
     }
-    std::strcat(bufferOut, Float(freq).ToString(false, 4).CString());
-    std::strcat(bufferOut, suffix);
+
+    sprintf(bufferOut, "%s%s", Float(freq).ToString(false, 4).CString(), suffix);
     return bufferOut;
 }
 
@@ -381,11 +385,6 @@ String Float::ToString(bool alwaysSign, int numDigits) const
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static char *FloatToString(float value, bool alwaysSign, int numDigits, char bufferOut[20])
 {
-    if(value == std::numeric_limits<float>::infinity())
-    {
-        value = value;
-    }
-
     if (Math::IsEquals(value, ERROR_VALUE_FLOAT))
     {
         std::strcpy(bufferOut, ERROR_STRING_VALUE);
