@@ -52,12 +52,15 @@ class Frequency
 {
 public:
     Frequency(float v) : value(v) {};
-
-    char* ToString(char bufferOut[20]) const;
     /// Преобразует freq герц в текстовую строку. При этом число количество цифр в строке равно numDigits
     char* ToStringAccuracy(char bufferOut[20], int numDigits) const;
 
+    String ToString() const;
+
 private:
+
+    char* ToString(char bufferOut[20]) const;
+
     float value;
 };
 

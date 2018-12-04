@@ -130,7 +130,7 @@ void BottomPart::Draw()
         }
         else
         {
-            std::strcat(mesFreq, Frequency(freq).ToString(buffer));
+            std::strcat(mesFreq, Frequency(freq).ToString().CString());
         }
         Painter::DrawText(x + 3, Grid::Bottom() + 2, mesFreq, Color::FILL);
     }
