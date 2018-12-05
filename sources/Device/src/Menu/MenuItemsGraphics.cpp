@@ -3,6 +3,7 @@
 #include "MenuItems.h"
 #include "Display/Grid.h"
 #include "Display/Painter.h"
+#include "Display/Symbols.h"
 #include "Menu/Menu.h"
 #include "Utils/Values.h"
 #include "Data/DataSettings.h"
@@ -179,7 +180,8 @@ void Governor::DrawLowPart(int x, int y, bool, bool shade)
         colorTextDown = Color::MenuItem(false);
     }
 
-    x = Painter::DrawText(x + 4, y + 21, "\x80", colorTextDown);
+    x = Painter::DrawChar(x + 4, y + 21, SYMBOL_GOVERNOR_LEFT, colorTextDown);
+
     if (Menu::OpenedItem() != this)
     {
         int delta = (int)Step();
@@ -211,7 +213,10 @@ void Governor::DrawLowPart(int x, int y, bool, bool shade)
     {
         x = Painter::DrawText(x + 1, y + 21, Integer(*cell).ToString(false, 1).CString(), Color::WHITE);
     }
-    Painter::DrawText(x + 1, y + 21, "\x81", colorTextDown);
+    char symbol = Governor::GetSymbol(*cell);
+    Painter::Draw4SymbolsInRect(x + 20, y + 19, symbol, Color::BLACK);
+
+    Painter::DrawChar(x + 1, y + 21, SYMBOL_GOVERNOR_RIGHT, colorTextDown);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -597,11 +602,7 @@ static void DrawGovernorChoiceColorFormulaHiPart(Control *item, int x, int y, bo
     {
         char symbol = 0;
    
-        if (IS_GOVERNOR(item))
-        {
-            symbol = Governor::GetSymbol(*((Governor*)item)->cell);
-        }
-        else if (IS_GOVERNOR(item) || IS_CHOICE_REG(item) ||  (item->IsOpened() && IS_CHOICE(item)))
+        if (IS_CHOICE_REG(item) ||  (item->IsOpened() && IS_CHOICE(item)))
         {
             symbol = Governor::GetSymbol(*((Choice*)item)->cell);
         }

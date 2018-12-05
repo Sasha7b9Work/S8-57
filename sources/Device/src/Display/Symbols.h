@@ -39,6 +39,8 @@
 #define SYMBOL_GOVERNOR_SHIFT_1 '\xac'  ///< Символ регулятора
 #define SYMBOL_PLAY             '\xae'  ///< Символ работы справа вверху экрана
 #define SYMBOL_TPOS_1           '\x8a'  ///< 2-я часть символа TPos
+#define SYMBOL_GOVERNOR_LEFT    '\x80'
+#define SYMBOL_GOVERNOR_RIGHT   '\x81'
 
 
 // Font::Type::_UGO2
