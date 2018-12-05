@@ -26,7 +26,7 @@ static const TimeBase name = { Control::Type::Time, 0, false, Page::Name::NoPage
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #define DEF_GOVERNOR(name, titleRU, titleEN, hintRU, hintEN, cell, min, max, keeper, funcActive, funcChanged, funcBeforeDraw)                   \
 volatile static const GovernorBase name = {Control::Type::Governor, 0, false, Page::Name::NoPage, &keeper, funcActive, {titleRU, titleEN, hintRU, hintEN},\
-    min, max, (int16 *)(&(cell)), funcChanged, funcBeforeDraw};
+    (int16 *)(&(cell)), min, max, funcChanged, funcBeforeDraw};
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #define DEF_IP_ADDRESS(name, titleRU, titleEN, hintRU, hintEN, ip0, ip1, ip2, ip3, port, keeper, funcActive, funcOfChanged)                     \

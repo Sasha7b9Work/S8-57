@@ -173,6 +173,7 @@ void Governor::DrawLowPart(int x, int y, bool, bool shade)
     Color colorTextDown = Color::BLACK;
 
     Painter::FillRegion(x + 1, y + 17, Menu::Item::Value::WIDTH + 2, Menu::Item::Value::HEIGHT + 3, Color::MENU_FIELD);
+
     if (shade)
     {
         colorTextDown = Color::MenuItem(false);

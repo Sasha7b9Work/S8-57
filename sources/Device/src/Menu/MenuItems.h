@@ -293,9 +293,9 @@ class GovernorBase
 {
 public:
     COMMON_PART_MENU_ITEM;
+    int16  *cell;
     int16   minValue;       ///< Минмальное значение, которое может принимать регулятор.
     int16   maxValue;       ///< Максимальное значение.
-    int16  *cell;
     pFuncVV funcOfChanged;  ///< Функция, которую нужно вызывать после того, как значение регулятора изменилось.
     pFuncVV funcBeforeDraw; ///< Функция, которая вызывается перед отрисовкой
 };
@@ -303,9 +303,9 @@ public:
 class Governor : public Control
 {
 public:
+    int16  *cell;
     int16   minValue;       ///< Минмальное значение, которое может принимать регулятор.
     int16   maxValue;       ///< Максимальное значение.
-    int16  *cell;
     pFuncVV funcOfChanged;  ///< Функция, которую нужно вызывать после того, как значение регулятора изменилось.
     pFuncVV funcBeforeDraw; ///< Функция, которая вызывается перед отрисовкой
     /// Обработка события кнопки
