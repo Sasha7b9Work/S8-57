@@ -39,12 +39,13 @@ void BottomPart::Draw()
     char buffer[SIZE] = {0};
 
     snprintf(buffer, SIZE, "ð\xa5%s", TBase(SET_TBASE).ToString());
-    Painter::DrawText(x, y0, buffer, Color::FILL);
+
+    String(buffer).Draw(x, y0, Color::FILL);
 
     buffer[0] = 'a';
     buffer[1] = 0;
     snprintf(buffer, SIZE, "\xa5%s", SET_TSHIFT.ToString(SET_TBASE).CString());
-    Painter::DrawText(x + 35, y0, buffer);
+    String(buffer).Draw(x + 35, y0);
 
     buffer[0] = 0;
     pString source[3] = {"1", "2", "\x82"};
@@ -53,7 +54,7 @@ void BottomPart::Draw()
         snprintf(buffer, 100, "ñ\xa5\x10%s", source[(uint8)TRIG_SOURCE]);
     }
 
-    Painter::DrawText(x, y1, buffer, Color::Trig());
+    String(buffer).Draw(x, y1, Color::Trig());
 
     buffer[0] = 0;
     static pString couple[] =
@@ -78,7 +79,8 @@ void BottomPart::Draw()
     if (MODE_WORK == ModeWork::Dir)
     {
         snprintf(buffer, SIZE, "\xa5\x10%s\x10\xa5\x10%s\x10\xa5\x10", couple[TRIG_INPUT], polar[TRIG_POLARITY]);
-        Painter::DrawText(x + 18, y1, buffer);
+        String(buffer).Draw(x + 18, y1);
+
         Painter::DrawChar(x + 45, y1, filtr[TRIG_INPUT][0]);
         Painter::DrawChar(x + 53, y1, filtr[TRIG_INPUT][1]);
     }
@@ -93,7 +95,7 @@ void BottomPart::Draw()
     if (MODE_WORK == ModeWork::Dir)
     {
         snprintf(buffer, 100, "\xa5\x10%c", mode[START_MODE]);
-        Painter::DrawText(x + 63, y1, buffer);
+        String(buffer).Draw(x + 63, y1);
     }
 
     Painter::DrawVLine(x + 79, Grid::Bottom() + 2, Display::HEIGHT - 2, Color::SEPARATOR);
@@ -131,7 +133,8 @@ void BottomPart::Draw()
         {
             std::strcat(mesFreq, Frequency(freq).ToString().CString());
         }
-        Painter::DrawText(x + 3, Grid::Bottom() + 2, mesFreq, Color::FILL);
+
+        String(mesFreq).Draw(x + 3, Grid::Bottom() + 2, Color::FILL);
     }
 
     DrawTime(x + 3, Grid::Bottom() + 11);
@@ -172,7 +175,7 @@ void BottomPart::Draw()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 int BottomPart::WriteChannel(Chan::E ch, int x, int y)
 {
-    Painter::DrawText(x, y, Chan(ch).IsA() ? "1:" : "2:", Color::Channel(ch));
+    String(Chan(ch).IsA() ? "1:" : "2:").Draw(x, y, Color::Channel(ch));
 
     x += 7;
 
@@ -180,7 +183,7 @@ int BottomPart::WriteChannel(Chan::E ch, int x, int y)
 
     char string[2] = {symbols[SET_COUPLE(ch)], 0};
 
-    Painter::DrawText(x, y, string);
+    String(string).Draw(x, y);
 
     x += 8;
 

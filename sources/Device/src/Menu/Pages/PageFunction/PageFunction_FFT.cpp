@@ -88,7 +88,7 @@ static void OnPress_FFT_Cursors_Source()
 
 static void Draw_FFT_Cursors_Source(int x, int y)
 {
-    Painter::DrawText(x + 7, y + 5, MATH_CURRENT_CUR_IS_0 ? "1" : "2");
+    String(MATH_CURRENT_CUR_IS_0 ? "1" : "2").Draw(x + 7, y + 5);
 }
 
 DEF_SMALL_BUTTON(bFFT_Cursors_Source,                                                                  //--- ‘”Õ ÷»ﬂ - —œ≈ “– -  ”–—Œ–€ - »ÒÚÓ˜ÌËÍ ---

@@ -119,7 +119,7 @@ static void DrawNameCurrentDir(int left, int top)
     int length = Font::GetLengthText(currentDir);
     if (length < 277)
     {
-        Painter::DrawText(left + 1, top + 1, currentDir);
+        String(currentDir).Draw(left + 1, top + 1);
     }
     else
     {
@@ -136,7 +136,7 @@ static void DrawNameCurrentDir(int left, int top)
             }
             length = Font::GetLengthText(++pointer);
         }
-        Painter::DrawText(left + 1, top + 1, pointer);
+        String(pointer).Draw(left + 1, top + 1);
     }
 }
 

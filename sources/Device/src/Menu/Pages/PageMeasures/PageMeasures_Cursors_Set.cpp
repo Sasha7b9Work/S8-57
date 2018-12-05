@@ -22,12 +22,12 @@ const float PageMeasures::PageCursors::PageSet::MAX_POS_T = 280.0f;
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 static void Draw_Set_ChannelA(int x, int y)
 {
-    Painter::DrawText(x + 7, y + 5, "1");
+    String("1").Draw(x + 7, y + 5);
 }
 
 static void Draw_Set_ChannelB(int x, int y)
 {
-    Painter::DrawText(x + 7, y + 5, "2");
+    String("2").Draw(x + 7, y + 5);
 }
 
 void PageMeasures::PageCursors::PageSet::OnPress_Set_Channel()
@@ -54,7 +54,7 @@ DEF_SMALL_BUTTON_HINTS_2(bSet_Channel,                                          
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void Draw_Set_T_disable(int x, int y)
 {
-    Painter::DrawText(x + 7, y + 5, "T");
+    String("T").Draw(x + 7, y + 5);
 }
 
 static void Draw_Set_T_disableBoth(int x, int y)
@@ -134,7 +134,7 @@ DEF_SMALL_BUTTON_HINTS_5(bSet_T,                                                
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void Draw_Set_U_disable(int x, int y)
 {
-    Painter::DrawText(x + 7, y + 5, "U");
+    String('U').Draw(x + 7, y + 5);
 }
 
 static void Draw_Set_U_disableBoth(int x, int y)
@@ -226,7 +226,7 @@ static void OnPress_Set_100()
 static void Draw_Set_100(int x, int y)
 {
     Painter::SetFont(Font::Type::_5);
-    Painter::DrawText(x + 2, y + 3, "100%");
+    String("100%").Draw(x + 2, y + 3);
     Painter::SetFont(Font::Type::_8);
 }
 
@@ -241,13 +241,13 @@ DEF_SMALL_BUTTON(bSet_100,                                                      
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void Draw_Set_Movement_Percents(int x, int y)
 {
-    Painter::DrawText(x + 6, y + 5, "\x83");
+    String('\x83').Draw(x + 6, y + 5);
 }
 
 static void Draw_Set_Movement_Points(int x, int y)
 {
     Painter::SetFont(Font::Type::_5);
-    Painter::DrawText(x + 4, y + 3, "ò÷ê");
+    String("ò÷ê").Draw(x + 4, y + 3);
     Painter::SetFont(Font::Type::_8);
 }
 
