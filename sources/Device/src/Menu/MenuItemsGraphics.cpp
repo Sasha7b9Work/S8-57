@@ -442,6 +442,7 @@ void Page::DrawItems(int x, int y)
         if (item)
         {
             item->Draw(x, y, false);
+            item->LogInfo();
             Key::E button = GetFuncButtonFromX(x);
             Menu::SetItemUnderButton(button, item);
         }

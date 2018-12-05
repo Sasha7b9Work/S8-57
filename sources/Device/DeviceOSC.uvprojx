@@ -2526,6 +2526,11 @@
               <FilePath>.\src\Menu\Pages\PageDebug\PageDebug.cpp</FilePath>
             </File>
             <File>
+              <FileName>PageDebug_Console.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Menu\Pages\PageDebug\PageDebug_Console.cpp</FilePath>
+            </File>
+            <File>
               <FileName>PageDebug_Rand.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Menu\Pages\PageDebug\PageDebug_Rand.cpp</FilePath>

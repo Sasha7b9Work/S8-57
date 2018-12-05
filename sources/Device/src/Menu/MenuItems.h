@@ -75,6 +75,8 @@ public:
     void Draw(int x, int y, bool opened);
 
     bool IsCurrentItem() const;
+    /// Вывести информацию в лог
+    void LogInfo() const;
 
     /// Разные виды пунктов меню
     struct Type
