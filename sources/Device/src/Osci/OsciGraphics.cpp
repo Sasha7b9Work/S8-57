@@ -26,27 +26,27 @@ void Osci::Draw()
 {
     Painter::BeginScene(Color::BACK);
 
-    //Grid::Draw();
-    //
-    //PainterData::DrawData();
-    //
-    //Painter::DrawRectangle(Grid::Left(), Grid::Top(), Grid::Width(), Grid::Height(), Color::FILL);
-    //
-    //BottomPart::Draw();
-    //
-    //RShift::Draw();
-    //
-    //DrawCursorTrigLevel();
-    //
-    //Cursors::Draw();
-    //
-    //HiPart::Draw();
-    //
-    //FrequencyCounter::Draw();
+    Grid::Draw();
+    
+    PainterData::DrawData();
+    
+    Painter::DrawRectangle(Grid::Left(), Grid::Top(), Grid::Width(), Grid::Height(), Color::FILL);
+    
+    BottomPart::Draw();
+    
+    RShift::Draw();
+    
+    DrawCursorTrigLevel();
+    
+    Cursors::Draw();
+    
+    HiPart::Draw();
+    
+    FrequencyCounter::Draw();
 
     Menu::Draw();
 
-    //Measure::Graphics::Draw();
+    Measure::Graphics::Draw();
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

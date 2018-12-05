@@ -7,6 +7,8 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 class Painter
 {
+    friend class String;
+
 public:
     static void Init();
 
@@ -17,8 +19,6 @@ public:
     static void SetColor(Color color = Color::NUMBER);
 
     static void FillRegion(int x, int y, int width, int height, Color color = Color::NUMBER);
-
-    static int DrawText(int x, int y, const char *text, Color color = Color::NUMBER);
 
     static void DrawBigText(int x, int y, uint8 size, const char *text, Color color = Color::NUMBER);
 
@@ -95,7 +95,11 @@ public:
 
     static void DrawDashedHLine(int y, int x0, int x1, int deltaFill, int deltaEmpty, int deltaStart);
 
+    static int DrawText(int x, int y, const char *text, Color color = Color::NUMBER);
+
 private:
+
+    
 
     static int DrawCharWithLimitation(int eX, int eY, char symbol, int limitX, int limitY, int limitWidth, int limitHeight);
 

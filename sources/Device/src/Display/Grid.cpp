@@ -213,7 +213,7 @@ void Grid::DrawGridSpectrum()
             if (!Menu::IsMinimize())
             {
                 Painter::SetColor(Color::FILL);
-                Painter::DrawText(3, y - 4, strs[i]);
+                String((char *)strs[i]).Draw(3, y - 4);
             }
         }
         if (!Menu::IsMinimize())

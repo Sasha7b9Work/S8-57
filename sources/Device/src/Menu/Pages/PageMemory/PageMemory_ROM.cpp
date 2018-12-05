@@ -92,7 +92,7 @@ static void Draw_Internal_ModeShow_Saved(int x, int y)
 
 static void Draw_Internal_ModeShow_Both(int x, int y)
 {
-    Painter::DrawText(x + 1, y + 5, "наю");
+    String("наю").Draw(x + 1, y + 5);
     Painter::DrawVLine(x + 1, y + 2, y + 14, Color::BACK);
     Painter::DrawVLine(x + 2, y + 6, y + 11, Color::FILL);
 }
@@ -234,11 +234,11 @@ static void DrawMemoryWave(int num, bool exist)
     Painter::SetColor(num == NUM_ROM_SIGNAL ? Color::FLASH_01 : Color::FILL);
     if (exist)
     {
-        Painter::DrawText(x + 2, y + 1, Integer(num + 1).ToString(false, 2).CString());
+        Integer(num + 1).ToString(false, 2).Draw(x + 2, y + 1);
     }
     else
     {
-        Painter::DrawText(x + 3, y + 1, "\x88");
+        String("\x88").Draw(x + 3, y + 1);
     }
 }
 
