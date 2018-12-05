@@ -71,7 +71,7 @@ void GovernorColor::DrawOpened(int x, int y)
     Painter::FillRegion(x + 1, y + 1, Menu::Item::Value::WIDTH + 2 + delta, Menu::Item::Value::HEIGHT + 3, Color::MenuItem(false));
     Painter::DrawHLine(y + Menu::Item::HEIGHT / 2 + 2, x, x + Menu::Item::WIDTH + delta, Color::MenuTitle(false));
     Painter::DrawStringInCenterRect(x + (IsPressed() ? 2 : 1), y + (IsPressed() ? 2 : 1), Menu::Item::WIDTH + delta, Menu::Item::HEIGHT / 2 + 2, 
-                                    Title(), Color::WHITE);
+                                    Title().CString(), Color::WHITE);
     DrawValue(x + 1, y + 19, delta);
 }
 
@@ -304,7 +304,7 @@ void Button::Draw(int x, int y)
 
     int delta = (pressed && (!shade)) ? 2 : 1;
 
-    Painter::DrawStringInCenterRect(x + delta, y + delta, Menu::Item::WIDTH, Menu::Item::HEIGHT, Title(), color);
+    Painter::DrawStringInCenterRect(x + delta, y + delta, Menu::Item::WIDTH, Menu::Item::HEIGHT, Title().CString(), color);
 
     funcForDraw(x, y);
 }
@@ -379,7 +379,7 @@ void Page::Draw(int x, int y, bool opened)
     else
     {
         Painter::FillRegion(x + 1, y + 2, Menu::Item::WIDTH - 3, Menu::Item::HEIGHT - 2, Color::MenuItem(false));
-        Painter::DrawStringInCenterRect(x, y + 1, Menu::Item::WIDTH, Menu::Item::HEIGHT, Title(), IsAcitve() ? Color::FILL : Color::MENU_TITLE_DARK);
+        Painter::DrawStringInCenterRect(x, y + 1, Menu::Item::WIDTH, Menu::Item::HEIGHT, Title().CString(), IsAcitve() ? Color::FILL : Color::MENU_TITLE_DARK);
     }
 }
 
@@ -414,7 +414,7 @@ void Page::DrawTitle(int x, int yTop)
         NOT_GOVERNOR(Menu::CurrentItem()) && IS_PAGE(Menu::OpenedItem());
     int delta = condDrawRSet ? -10 : 0;
     Color colorText = Color::FILL;
-    x = Painter::DrawStringInCenterRect(x, yTop, Menu::Title::WIDTH + 2 + delta, Menu::Title::HEIGHT, Title(), colorText);
+    x = Painter::DrawStringInCenterRect(x, yTop, Menu::Title::WIDTH + 2 + delta, Menu::Title::HEIGHT, Title().CString(), colorText);
     if (condDrawRSet)
     {
         //Painter::Draw4SymbolsInRect(x + 4, yTop + 11, Governor::GetSymbol(CurrentSubPage()), colorText);
@@ -598,7 +598,7 @@ static void DrawGovernorChoiceColorFormulaHiPart(Control *item, int x, int y, bo
 
     Painter::FillRegion(x + 1, y + (opened ? 1 : 2), width + (opened ? 2 : 1), Menu::Item::Value::HEIGHT - (opened ? 2 : 3), Color::MenuItem(false));
 
-    String(item->Title()).Draw(x + delta + (opened ? 4 : 6), y + delta + (opened ? 2 : 3), color);
+    item->Title().Draw(x + delta + (opened ? 4 : 6), y + delta + (opened ? 2 : 3), color);
 
     if (opened)
     {

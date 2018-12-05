@@ -62,7 +62,7 @@ public:
 
     void Open(bool open);
     /// Возвращает название элемента, как оно выглядит на дисплее прибора
-    const char *Title() const;
+    String Title() const;
     /// Обработка события кнопки
     bool ProcessKey(KeyEvent event);
     /// Вызывается при "коротком" нажатии

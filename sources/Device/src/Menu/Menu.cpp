@@ -261,7 +261,7 @@ char *Menu::StringNavigation(char buffer[100])
     }
     while(!IsMainPage(item))
     {
-        titles[numTitle++] = item->Title();
+        titles[numTitle++] = item->Title().CString();
         item = (Control *)item->keeper;
     }
     for(int i = 9; i >= 0; i--)
