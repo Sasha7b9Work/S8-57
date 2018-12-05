@@ -491,7 +491,7 @@ static void DebugShowSetInfo_Draw()
     DRAW_FORMAT("Размер основной структуры : %d", sizeof(set));
     String("Несбрасываемая структура:").Draw(x0, Y_AND_INCREASE);
 
-    int x = Painter::DrawText(x0, Y_AND_INCREASE, "rShiftAdd :") + 5;
+    int x = String("rShiftAdd :").Draw(x0, Y_AND_INCREASE) + 5;
 
     int ddY = 0;
 
@@ -517,7 +517,7 @@ static void DebugShowSetInfo_Draw()
     DRAW_FORMAT("balanceADCtype : %s", (NRST_BALANCE_ADC_TYPE < 3 ? s[NRST_BALANCE_ADC_TYPE] : "!!! неправильное значение !!!"));
     DRAW_FORMAT("stretchADCtype : %s", (NRST_STRETCH_ADC_TYPE < 3 ? s[NRST_STRETCH_ADC_TYPE] : "!!! неправильное значение !!!"));
 
-    x = Painter::DrawText(x0, Y_AND_INCREASE, "stretchADC :") + 5;
+    x = String("stretchADC :").Draw(x0, Y_AND_INCREASE) + 5;
 
     for (int ch = 0; ch < 2; ch++)
     {

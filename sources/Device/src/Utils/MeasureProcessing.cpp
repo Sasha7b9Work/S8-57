@@ -1309,11 +1309,11 @@ void Measure::Processing::InterpolationSinX_X(uint8 *data, int numPoints, TBase:
 
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-char* Measure::Processing::GetStringMeasure(Measure::Type::E measure, Chan::E ch, char* buffer, int lenBuf)
+String Measure::Processing::GetStringMeasure(Measure::Type::E measure, Chan::E ch, char* buffer, int lenBuf)
 {
     if (!SET_ENABLED(ch))
     {
-        return "";
+        return String("");
     }
     buffer[0] = '\0';
     snprintf(buffer, 20, Chan(ch).IsA() ? "1: " : "2: ");
@@ -1345,9 +1345,9 @@ char* Measure::Processing::GetStringMeasure(Measure::Type::E measure, Chan::E ch
     }
     else
     {
-        return buffer;
+        return String(buffer);
     }
-    return buffer;
+    return String(buffer);
 }
 
 

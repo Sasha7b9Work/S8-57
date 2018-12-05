@@ -136,9 +136,9 @@ int Measure::DX()
 
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-pString Measure::Name()
+String Measure::Name()
 {
-    return sMeas[GetType()].name;
+    return String(sMeas[GetType()].name);
 }
 
 
@@ -327,26 +327,25 @@ void Measure::Graphics::Draw()
 #define SIZE_BUFFER 20
                 char buffer[SIZE_BUFFER];
 
-                Painter::DrawText(x + 4, y + 2, measure.Name(), color);
+                measure.Name().Draw(x + 4, y + 2, color);
+
                 if (type == MEAS_MARKED)
                 {
                     Painter::FillRegion(x + 1, y + 1, dX - 2, 9, active ? Color::BACK : Color::FILL);
-                    Painter::DrawText(x + 4, y + 2, measure.Name(), active ? Color::FILL : Color::BACK);
+                    measure.Name().Draw(x + 4, y + 2, active ? Color::FILL : Color::BACK);
                 }
                 if(VIEW_MEASURES_BOTH)
                 {
-                    Painter::DrawText(x + 2, y + 11, Processing::GetStringMeasure(type, Chan::A, buffer, SIZE_BUFFER),
-                                      Color::Channel(Chan::A));
-                    Painter::DrawText(x + 2, y + (SET_ENABLED_A ? 20 : 11), Processing::GetStringMeasure(type, Chan::B, buffer, SIZE_BUFFER),
-                                      Color::Channel(Chan::B));
+                    Processing::GetStringMeasure(type, Chan::A, buffer, SIZE_BUFFER).Draw(x + 2, y + 11, Color::Channel(Chan::A));
+                    Processing::GetStringMeasure(type, Chan::B, buffer, SIZE_BUFFER).Draw(x + 2, y + (SET_ENABLED_A ? 20 : 11), Color::Channel(Chan::B));
                 }
                 else if (VIEW_MEASURES_A)
                 {
-                    Painter::DrawText(x + 2, y + 11, Processing::GetStringMeasure(type, Chan::A, buffer, SIZE_BUFFER), Color::Channel(Chan::A));
+                    Processing::GetStringMeasure(type, Chan::A, buffer, SIZE_BUFFER).Draw(x + 2, y + 11, Color::Channel(Chan::A));
                 }
                 else if (VIEW_MEASURES_B)
                 {
-                    Painter::DrawText(x + 2, y + 11, Processing::GetStringMeasure(type, Chan::B, buffer, SIZE_BUFFER), Color::Channel(Chan::B));
+                    Processing::GetStringMeasure(type, Chan::B, buffer, SIZE_BUFFER).Draw(x + 2, y + 11, Color::Channel(Chan::B));
                 }
             }
         }

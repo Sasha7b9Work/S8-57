@@ -199,7 +199,7 @@ private:
     /// На сколько сжимать сетку по вертикали
     static int GetDeltaGridBottom();
 
-    pString Name();
+    String Name();
     /// Нарисовать страницу выбора измерений
     static void DrawPageChoice();
     /// Строка в таблице, в которой находится данное измерение
@@ -216,7 +216,7 @@ private:
         /// Аппроксимировать единичное измерение режима рандомизатора функцией sinX/X
         static void InterpolationSinX_X(uint8 *data, int numPoints, TBase::E tBase);
         /// Возвращает строку автоматического измерения
-        static char* GetStringMeasure(Measure::Type::E measure, Chan::E ch, char *buffer, int lenBuf);
+        static String GetStringMeasure(Measure::Type::E measure, Chan::E ch, char *buffer, int lenBuf);
         /// Расчитать все автоматические измерения
         static void CalculateMeasures();
 

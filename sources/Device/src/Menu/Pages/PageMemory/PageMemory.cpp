@@ -443,7 +443,7 @@ static void DrawFileMask(int x, int y)
             }
             else
             {
-                x = Painter::DrawText(x, y, Tables::Get(*ch + 0x40));
+                x = String(Tables::Get(*ch + 0x40)).Draw(x, y);
             }
         }
         ch++;
@@ -587,7 +587,8 @@ static void DrawSetName()
         position++;
     }
 
-    int x = Painter::DrawText(x0 + deltaX, y0 + 65, FILE_NAME, Color::FILL);
+    int x = String(FILE_NAME).Draw(x0 + deltaX, y0 + 65, Color::FILL);
+
     Painter::FillRegion(x, y0 + 65, 5, 8, Color::FLASH_10);
 }
 

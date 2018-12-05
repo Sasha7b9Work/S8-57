@@ -87,7 +87,7 @@ void GovernorColor::DrawClosed(int x, int y)
 void GovernorColor::DrawValue(int x, int y, int delta)
 {
     int8 field = ct->currentField;
-    char *texts[4] = {"ßð", "Ñí", "Çë", "Êð"};
+    const pString texts[4] = {"ßð", "Ñí", "Çë", "Êð"};
 
     uint color = COLOR(ct->color.value);
     uint red = R_FROM_COLOR(color);
@@ -104,8 +104,8 @@ void GovernorColor::DrawValue(int x, int y, int delta)
         Color colorBack = (field == i) ? Color::WHITE : Color::BLACK;
         Color colorDraw = (field == i) ? Color::BLACK : Color::WHITE;
         Painter::FillRegion(x - 1, y + 1, 29, 10, colorBack);
-        Painter::DrawText(x, y + 2, texts[i], colorDraw);
-        Painter::DrawText(x + 14, y + 2, Integer(vals[i]).ToString(false, 1).CString());
+        String(texts[i]).Draw(x, y + 2, colorDraw);
+        Integer(vals[i]).ToString(false, 1).Draw(x + 14, y + 2);
         x -= 30;
     }
 
@@ -156,8 +156,8 @@ void Governor::DrawValue(int x, int y)
     }
     Painter::SetFont(Font::Type::_5);
     bool sign = minValue < 0;
-    Painter::DrawText(x + 55, y - 5, Integer(maxValue).ToString(sign, 1).CString(), Color::WHITE);
-    Painter::DrawText(x + 55, y + 2, Integer(minValue).ToString(sign, 1).CString());
+    Integer(maxValue).ToString(sign, 1).Draw(x + 55, y - 5, Color::WHITE);
+    Integer(minValue).ToString(sign, 1).Draw(x + 55, y + 2);
     Painter::SetFont(Font::Type::_8);
 
     DrawValueWithSelectedPosition(startX, y, value, NumDigits(), gCurDigit, true, true);
@@ -189,7 +189,7 @@ void Governor::DrawLowPart(int x, int y, bool, bool shade)
         int delta = (int)Step();
         if (delta == 0)
         {
-            x = Painter::DrawText(x + 1, y, Integer(*cell).ToString(false, 1).CString());
+            x = Integer(*cell).ToString(false, 1).Draw(x + 1, y);
         }
         else
         {
@@ -213,7 +213,7 @@ void Governor::DrawLowPart(int x, int y, bool, bool shade)
     }
     else
     {
-        x = Painter::DrawText(x + 1, y, Integer(*cell).ToString(false, 1).CString(), Color::WHITE);
+        x = Integer(*cell).ToString(false, 1).Draw(x + 1, y, Color::WHITE);
     }
 
     if (IsCurrentItem())
@@ -256,7 +256,7 @@ void Choice::DrawOpened(int x, int y)
         {
             Painter::FillRegion(x + 1, yItem + 2, Menu::Item::WIDTH_OPENED - 2, MOSI_HEIGHT - 1, ColorMenuField(this));
         }
-        Painter::DrawText(x + 4, yItem + 2, NameSubItem(i), pressed ? Color::BLACK : ColorMenuField(this));
+        NameSubItem(i).Draw(x + 4, yItem + 2, pressed ? Color::BLACK : ColorMenuField(this));
     }
 }
 
@@ -273,12 +273,12 @@ void Choice::DrawClosed(int x, int y)
     Painter::SetColor(colorText);
     if (deltaY == 0)
     {
-        Painter::DrawText(x + 4, y + Menu::Item::Value::HEIGHT + 1, NameCurrentSubItem());
+        NameCurrentSubItem().Draw(x + 4, y + Menu::Item::Value::HEIGHT + 1);
     }
     else
     {
         Painter::SetColor(Color::BACK);
-        Painter::DrawTextWithLimitation(x + 4, y + Menu::Item::Value::HEIGHT - deltaY + 1, NameCurrentSubItem(), x, y + 11, Menu::Item::Value::WIDTH, Menu::Item::Value::HEIGHT - 1);
+        Painter::DrawTextWithLimitation(x + 4, y + Menu::Item::Value::HEIGHT - deltaY + 1, NameCurrentSubItem().CString(), x, y + 11, Menu::Item::Value::WIDTH, Menu::Item::Value::HEIGHT - 1);
         Painter::DrawHLine(y + (deltaY > 0 ? 24 : 19) - deltaY, x + 1, x + Menu::Item::Value::WIDTH + 2);
         Painter::DrawTextWithLimitation(x + 4, y + (deltaY > 0 ? (Menu::Item::Value::HEIGHT + 13) : 9) - deltaY, deltaY > 0 ? NameNextSubItem() : NamePrevSubItem(),
                                         x, y + 11, Menu::Item::Value::WIDTH, Menu::Item::Value::HEIGHT - 1);
@@ -511,18 +511,18 @@ void TimeControl::DrawClosed(int x, int y)
     int startX = 3;
     y += 21;
     PackedTime time = CPU::RTC_::GetPackedTime();
-    Painter::DrawText(x + startX, y, Integer((int)time.hours).ToString(false, 2).CString(), shade ? Color::MenuItem(true) : Color::BLACK);
-    Painter::DrawText(x + startX + deltaField, y, ":");
-    Painter::DrawText(x + startX + deltaField + deltaSeparator, y, Integer((int)time.minutes).ToString(false, 2).CString());
-    Painter::DrawText(x + startX + 2 * deltaField + deltaSeparator, y, ":");
-    Painter::DrawText(x + startX + 2 * deltaField + 2 * deltaSeparator, y, Integer((int)time.seconds).ToString(false, 2).CString());
+    Integer((int)time.hours).ToString(false, 2).Draw(x + startX, y, shade ? Color::MenuItem(true) : Color::BLACK);
+    String(':').Draw(x + startX + deltaField, y);
+    Integer((int)time.minutes).ToString(false, 2).Draw(x + startX + deltaField + deltaSeparator, y);
+    String(':').Draw(x + startX + 2 * deltaField + deltaSeparator, y);
+    Integer((int)time.seconds).ToString(false, 2).Draw(x + startX + 2 * deltaField + 2 * deltaSeparator, y);
 
     startX = 44;
-    Painter::DrawText(x + startX, y, Integer((int)time.day).ToString(false, 2).CString());
-    Painter::DrawText(x + startX + deltaField, y, ":");
-    Painter::DrawText(x + startX + deltaField + deltaSeparator, y, Integer((int)time.month).ToString(false, 2).CString());
-    Painter::DrawText(x + startX + 2 * deltaField + deltaSeparator, y, ":");
-    Painter::DrawText(x + startX + 2 * deltaField + 2 * deltaSeparator, y, Integer((int)time.year).ToString(false, 2).CString());
+    Integer((int)time.day).ToString(false, 2).Draw(x + startX, y);
+    String(':').Draw(x + startX + deltaField, y);
+    Integer((int)time.month).ToString(false, 2).Draw(x + startX + deltaField + deltaSeparator, y);
+    String(':').Draw(x + startX + 2 * deltaField + deltaSeparator, y);
+    Integer((int)time.year).ToString(false, 2).Draw(x + startX + 2 * deltaField + 2 * deltaSeparator, y);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -575,8 +575,8 @@ void TimeControl::DrawOpened(int x, int y)
     std::strcpy(strI[iSEC],   Integer(*seconds).ToString(false, 2).CString());
     std::strcpy(strI[iSET],   "Ñîõðàíèòü");
 
-    Painter::DrawText(x + 3, y + y0, "ä ì ã - ", Color::WHITE);
-    Painter::DrawText(x + 3, y + y1, "÷ ì ñ - ");
+    String("ä ì ã - ").Draw(x + 3, y + y0, Color::WHITE);
+    String("÷ ì ñ - ").Draw(x + 3, y + y1);
 
     for (int i = 0; i < 8; i++)
     {
@@ -584,7 +584,7 @@ void TimeControl::DrawOpened(int x, int y)
         {
             Painter::FillRegion(x + strPaint[i].x - 1, y + strPaint[i].y, strPaint[i].width, 8, Color::FLASH_10);
         }
-        Painter::DrawText(x + strPaint[i].x, y + strPaint[i].y, strI[i], *curField == i ? Color::FLASH_01 : Color::WHITE);
+        String(strI[i]).Draw(x + strPaint[i].x, y + strPaint[i].y, *curField == i ? Color::FLASH_01 : Color::WHITE);
     }
 }
 
@@ -598,7 +598,7 @@ static void DrawGovernorChoiceColorFormulaHiPart(Control *item, int x, int y, bo
 
     Painter::FillRegion(x + 1, y + (opened ? 1 : 2), width + (opened ? 2 : 1), Menu::Item::Value::HEIGHT - (opened ? 2 : 3), Color::MenuItem(false));
 
-    Painter::DrawText(x + delta + (opened ? 4 : 6), y + delta + (opened ? 2 : 3), item->Title(), color);
+    String(item->Title()).Draw(x + delta + (opened ? 4 : 6), y + delta + (opened ? 2 : 3), color);
 
     if (opened)
     {

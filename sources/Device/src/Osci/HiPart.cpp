@@ -42,11 +42,11 @@ void HiPart::WriteCursors()
         Color colorText = Color::Channel(source);
         if (CURsU_ENABLED)
         {
-            Painter::DrawText(x, y1, "1:", colorText);
-            Painter::DrawText(x, y2, "2:");
+            String("1:").Draw(x, y1, colorText);
+            String("2:").Draw(x, y2);
             x += 7;
-            Painter::DrawText(x, y1, Cursors::Voltage(source, 0).CString());
-            Painter::DrawText(x, y2, Cursors::Voltage(source, 1).CString());
+            Cursors::Voltage(source, 0).Draw(x, y1);
+            Cursors::Voltage(source, 1).Draw(x, y2);
             x = startX + 49;
             float pos0 = FPGAMath::VoltageCursor(Cursors::PosU(source, 0), SET_RANGE(source), SET_RSHIFT(source));
             float pos1 = FPGAMath::VoltageCursor(Cursors::PosU(source, 1), SET_RANGE(source), SET_RSHIFT(source));
@@ -55,10 +55,10 @@ void HiPart::WriteCursors()
             {
                 delta *= 10;
             }
-            Painter::DrawText(x, y1, ":dU=");
-            Painter::DrawText(x + 17, y1, Voltage(delta).ToString(false).CString());
-            Painter::DrawText(x, y2, ":");
-            Painter::DrawText(x + 10, y2, Cursors::PercentsU(source).CString());
+            String(":dU=").Draw(x, y1);
+            Voltage(delta).ToString(false).Draw(x + 17, y1);
+            String(':').Draw(x, y2);
+            Cursors::PercentsU(source).Draw(x + 10, y2);
         }
 
         x = startX + 101;
@@ -67,20 +67,20 @@ void HiPart::WriteCursors()
         if(CURsT_ENABLED)
         {
             Painter::SetColor(colorText);
-            Painter::DrawText(x, y1, "1:");
-            Painter::DrawText(x, y2, "2:");
+            String("1:").Draw(x, y1);
+            String("2:").Draw(x, y2);
             x += 7;
-            Painter::DrawText(x, y1, Cursors::Time(source, 0).CString());
-            Painter::DrawText(x, y2, Cursors::Time(source, 1).CString());
+            Cursors::Time(source, 0).Draw(x, y1);
+            Cursors::Time(source, 1).Draw(x, y2);
             x = startX + 153;          
 
             float pos0 = FPGAMath::TimeCursor(CURsT_POS(source, 0), SET_TBASE);
             float pos1 = FPGAMath::TimeCursor(CURsT_POS(source, 1), SET_TBASE);
             float delta = std::fabsf(pos1 - pos0);
-            Painter::DrawText(x, y1, ":dT=");
-            Painter::DrawText(x + 17, y1, Time(delta).ToString(false).CString());
-            Painter::DrawText(x, y2, ":");
-            Painter::DrawText(x + 8, y2, Cursors::PercentsT(source).CString());
+            String(":dT=").Draw(x, y1);
+            Time(delta).ToString(false).Draw(x + 17, y1);
+            String(':').Draw(x, y2);
+            Cursors::PercentsT(source).Draw(x + 8, y2);
 
             if(CURSORS_SHOW_FREQ)
             {
@@ -88,10 +88,10 @@ void HiPart::WriteCursors()
                 x = Grid::Right() - width;
                 Painter::DrawRectangle(x, Grid::Top(), width, 12, Color::FILL);
                 Painter::FillRegion(x + 1, Grid::Top() + 1, width - 2, 10, Color::BACK);
-                Painter::DrawText(x + 1, Grid::Top() + 2, "1/dT=", colorText);
+                String("1/dT=").Draw(x + 1, Grid::Top() + 2, colorText);
                 if (delta != 0.0f)
                 {
-                    Painter::DrawText(x + 25, Grid::Top() + 2, Frequency(1.0f / delta).ToString().CString());
+                    Frequency(1.0f / delta).ToString().Draw(x + 25, Grid::Top() + 2);
                 }
             }
         }
@@ -116,7 +116,7 @@ void HiPart::DrawRightPart()
         if(Trig::SyncPulse())
         {
             Painter::FillRegion(x, 1 + y, Grid::Top() - 3, Grid::Top() - 7, Color::FILL);
-            Painter::DrawText(x + 3, 3 + y, DICT(DTrig), Color::BACK);
+            String(DICT(DTrig)).Draw(x + 3, y + 3, Color::BACK);
         }
     }
 
@@ -133,7 +133,7 @@ void HiPart::DrawRightPart()
         x += 18;
         Painter::DrawVLine(x, 1, Grid::Top() - 2, Color::FILL);
         x += 2;
-        Painter::DrawText(LANG_RU ? x : x + 3, -1, DICT(DMode));
+        String(DICT(DMode)).Draw(LANG_RU ? x : x + 3, -1);
         Painter::DrawStringInCenterRect(x + 1, 9, 25, 8, strs[MODE_WORK][LANG]);
     }
     else

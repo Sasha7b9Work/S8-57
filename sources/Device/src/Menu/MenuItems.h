@@ -372,13 +372,13 @@ public:
 
     void  DrawClosed(int x, int y);
     /// Возвращает имя текущего варианта выбора элемента choice, как оно записано в исходном коде программы
-    const char *NameCurrentSubItem();
+    String NameCurrentSubItem() const;
     /// Возвращает имя следующего варианта выбора элемента choice, как оно записано в исходном коде программы
     const char *NameNextSubItem();
 
     const char *NamePrevSubItem();
     /// Возвращает имя варианта выбора элемента choice в позиции i как оно записано в исходном коде программы
-    const char *NameSubItem(int i);
+    String NameSubItem(int i);
     /// Возвращает цвет, которым нужно заполнять участок выбора
     static Color ColorMenuField(const Choice *choice);
 };

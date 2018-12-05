@@ -6,10 +6,10 @@
 class String
 {
 public:
-    String();
-    String(const String &);
-    String(char symbol);
-    String(const char *format, ...);
+    explicit String();
+             String(const String &);
+    explicit String(char symbol);
+    explicit String(const char *format, ...);
     ~String();
 
     char *CString() const;

@@ -30,7 +30,7 @@ static Color ColorForStep(int step);
 /// Рисовать данные ступеньки numStep
 static void DrawData(int step, int x0, int y0);
 /// Возвращает числовое значение величины соответствующей "ступеньки"
-static pString ValueForStep(int step);
+static String ValueForStep(int step);
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -124,12 +124,12 @@ static void DrawLegend(int x, int y)
     for (int i = 0; i < Tester::NUM_STEPS; i++)
     {
         Painter::DrawHLine(y + 4 + i * 8, x + 1, x + 10, ColorForStep(i));
-        Painter::DrawText(x + 12, y + i * 8, ValueForStep(i));
+        ValueForStep(i).Draw(x + 12, y + i * 8);
     }
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static pString ValueForStep(int step)
+static String ValueForStep(int step)
 {
     static pString valuesU[2][5] =
     {
@@ -139,7 +139,7 @@ static pString ValueForStep(int step)
 
     if (TESTER_CONTROL_IS_U)
     {
-        return valuesU[TESTER_STEP_U][step];
+        return String(valuesU[TESTER_STEP_U][step]);
     }
 
     static pString valuesI[2][5] =
@@ -148,7 +148,7 @@ static pString ValueForStep(int step)
         {"0мА", "20мА", "40мА", "60мА", "80мА"}
     };
 
-    return valuesI[TESTER_STEP_I][step];
+    return String(valuesI[TESTER_STEP_I][step]);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

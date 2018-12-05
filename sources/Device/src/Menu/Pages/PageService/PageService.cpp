@@ -302,7 +302,7 @@ static void OnPress_Function_Screen()
 
 static void Draw_Function_Screen_Disable(int x, int y)
 {
-    Painter::DrawText(x + 2 + (LANG_EN ? 2 : 0), y + 5, DICT(DDis));
+    String(DICT(DDis)).Draw(x + 2 + (LANG_EN ? 2 : 0), y + 5);
 }
 
 static void Draw_Function_Screen_Separate(int x, int y)
@@ -388,7 +388,7 @@ static void Draw_Function_ModeRegSet_Range(int x, int y)
 
 static void Draw_Function_ModeRegSet_RShift(int x, int y)
 {
-    Painter::DrawText(x + 5 - (LANG_EN ? 3 : 0), y + 5, DICT(DShift));
+    String(DICT(DShift)).Draw(x + 5 - (LANG_EN ? 3 : 0), y + 5);
 }
 
 static void Draw_Function_ModeRegSet(int x, int y)
@@ -643,20 +643,20 @@ static void Information_Draw()
     int y = 20;
     Painter::DrawRectangle(0, 0, 319, 239, Color::FILL);
     y += dY;
-    Painter::DrawText(x, y, DICT(DInformation));
+    String(DICT(DInformation)).Draw(x, y);
     y += dY;
 
     char buffer[100];
 
     sprintf(buffer, "%s : %s", DICT(DModel), LANG_RU ? MODEL_RU : MODEL_EN);
-    Painter::DrawText(x, y, buffer);
+    String(buffer).Draw(x, y);
 
     y += 2 * dY;
 
-    Painter::DrawText(x, y, DICT(DSoftware));
+    String(DICT(DSoftware)).Draw(x, y);
     y += dY;
     sprintf(buffer, (const char *)DICT(DVersion), NUM_VER);
-    Painter::DrawText(x, y, buffer);
+    String(buffer).Draw(x, y);
     y += dY;
 
     //Painter::DrawFormText(x, y, Color::FILL, "CRC32 : %X", Hardware::CalculateCRC32());

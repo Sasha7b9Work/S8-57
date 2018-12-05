@@ -187,11 +187,11 @@ int BottomPart::WriteChannel(Chan::E ch, int x, int y)
 
     x += 8;
 
-    Painter::DrawText(x, y, Range(SET_RANGE(ch)).Name());
+    String(Range(SET_RANGE(ch)).Name()).Draw(x, y);
 
     x += 22;
 
-    Painter::DrawText(x, y, Voltage(FPGAMath::RShift2Abs(SET_RSHIFT(ch), SET_RANGE(ch))).ToString(true).CString());
+    Voltage(FPGAMath::RShift2Abs(SET_RSHIFT(ch), SET_RANGE(ch))).ToString(true).Draw(x, y);
 
     return x + 47;
 }
@@ -199,7 +199,7 @@ int BottomPart::WriteChannel(Chan::E ch, int x, int y)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void BottomPart::WriteTBase(int x, int y)
 {
-    Painter::DrawText(x, y, TBase(SET_TBASE).Name(), Color::FILL);
+    String(TBase(SET_TBASE).Name()).Draw(x, y, Color::FILL);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -226,10 +226,10 @@ static void WriteTextVoltage(Chan::E ch, int x, int y)
     const int SIZE = 100;
     char buffer[SIZE];
     snprintf(buffer, SIZE, "%s\xa5%s\xa5%s", Chan(ch).IsA() ? DICT(D1ch) : DICT(D2ch), ModeCouple(SET_COUPLE(ch)).UGO(), Range(range).ToString(divider));
-    Painter::DrawText(x + 1, y, buffer, colorDraw);
+    String(buffer).Draw(x + 1, y, colorDraw);
     char bufferTemp[SIZE];
     snprintf(bufferTemp, SIZE, "\xa5%s", RShift::ToString((uint16)SET_RSHIFT(ch), range, divider).CString());
-    Painter::DrawText(x + 46, y, bufferTemp);
+    String(bufferTemp).Draw(x + 46, y);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -237,7 +237,7 @@ void BottomPart::WriteStringAndNumber(const char *text, int16 x, int16 y, int nu
 {
     const int SIZE = 100;
     char buffer[SIZE];
-    Painter::DrawText(x, y, text, Color::FILL);
+    String(text).Draw(x, y, Color::FILL);
     if (number == 0)
     {
         snprintf(buffer, SIZE, "-");
@@ -270,11 +270,12 @@ void BottomPart::DrawTime(int x, int y)
             time.seconds = TIME_SECONDS_DS;
             time.month = TIME_MONTH_DS;
             time.year = TIME_YEAR_DS;
-            Painter::DrawText(x, y, Integer((int)time.day).ToString(false, 2).CString());
-            Painter::DrawText(x + dField, y, ":");
-            Painter::DrawText(x + dField + dSeparator, y, Integer((int)time.month).ToString(false, 2).CString());
-            Painter::DrawText(x + 2 * dField + dSeparator, y, ":");
-            Painter::DrawText(x + 2 * dField + 2 * dSeparator, y, Integer((int)time.year + 2000).ToString(false, 4).CString());
+            Integer((int)time.day).ToString(false, 2).Draw(x, y);
+            String(':').Draw(x + dField, y);
+            Integer((int)time.month).ToString(false, 2).Draw(x + dField + dSeparator, y);
+            String(':').Draw(x + 2 * dField + dSeparator, y);
+            Integer((int)time.year + 2000).ToString(false, 4).Draw(x + 2 * dField + 2 * dSeparator, y);
+
             y += 9;
         }
         else
@@ -283,9 +284,9 @@ void BottomPart::DrawTime(int x, int y)
         }
     }
 
-    Painter::DrawText(x, y, Integer((int)time.hours).ToString(false, 2).CString());
-    Painter::DrawText(x + dField, y, ":");
-    Painter::DrawText(x + dField + dSeparator, y, Integer((int)time.minutes).ToString(false, 2).CString());
-    Painter::DrawText(x + 2 * dField + dSeparator, y, ":");
-    Painter::DrawText(x + 2 * dField + 2 * dSeparator, y, Integer((int)time.seconds).ToString(false, 2).CString());
+    Integer((int)time.hours).ToString(false, 2).Draw(x, y);
+    String(':').Draw(x + dField, y);
+    Integer((int)time.minutes).ToString(false, 2).Draw(x + dField + dSeparator, y);
+    String(':').Draw(x + 2 * dField + dSeparator, y);
+    Integer((int)time.seconds).ToString(false, 2).Draw(x + 2 * dField + 2 * dSeparator, y);
 }
