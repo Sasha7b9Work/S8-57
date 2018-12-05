@@ -180,7 +180,7 @@ void Governor::DrawLowPart(int x, int y, bool, bool shade)
         colorTextDown = Color::MenuItem(false);
     }
 
-    y += 21;
+    y += 20;
 
     x = Painter::DrawChar(x + 4, y, SYMBOL_GOVERNOR_LEFT, colorTextDown);
 
@@ -216,7 +216,7 @@ void Governor::DrawLowPart(int x, int y, bool, bool shade)
         x = Painter::DrawText(x + 1, y, Integer(*cell).ToString(false, 1).CString(), Color::WHITE);
     }
     char symbol = Governor::GetSymbol(*cell);
-    Painter::Draw4SymbolsInRect(x + 20, y - 2, symbol, Color::BLACK);
+    Painter::Draw4SymbolsInRect(x + 20, y - 1, symbol, Color::BLACK);
 
     Painter::DrawChar(x + 1, y, SYMBOL_GOVERNOR_RIGHT, colorTextDown);
 }
