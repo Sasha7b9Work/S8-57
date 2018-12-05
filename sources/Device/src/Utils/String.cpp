@@ -77,6 +77,5 @@ bool String::Allocate(uint size)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 int String::Draw(int x, int y, Color color) const
 {
-    Painter::SetColor(color);
-    return Painter::DrawText(x, y, CString());
+    return Painter::DrawText(x, y, CString(), color);
 }

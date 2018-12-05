@@ -192,12 +192,10 @@ DEF_PAGE_12(pageRegisters,                                                      
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void Draw_Console_SizeSettings(int x, int y)
 {
-    char buffer[30];
-    sprintf(buffer, "Разм.настр. %d", sizeof(Settings));
-    Painter::DrawText(x + 6, y + 13, buffer, Color::BACK);
+    String("Разм.настр. %d", sizeof(Settings)).Draw(x + 6, y + 13, Color::BACK);
 }
 
-DEF_BUTTON(bSizeSettings,                                                                                                               //--- ОТЛАДКА - КОНСОЛЬ - Размер настроек ---
+DEF_BUTTON( bSizeSettings,                                                                                                                      //--- ОТЛАДКА - КОНСОЛЬ - Размер настроек ---
     "", "",
     "Показывает текущий размер структуры для сохранения настроек",
     "Displays the current size of the structure to save settings",
@@ -205,7 +203,7 @@ DEF_BUTTON(bSizeSettings,                                                       
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-DEF_PAGE_5(pageConsole,                                                                                                                                             //--- ОТЛАДКА - КОНСОЛЬ ---
+DEF_PAGE_5( pageConsole,                                                                                                                                          //--- ОТЛАДКА - КОНСОЛЬ ---
     "КОНСОЛЬ", "CONSOLE",
     "",
     "",
