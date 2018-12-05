@@ -325,8 +325,6 @@ bool FileManager::HandlerKey(KeyEvent event)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 bool FileManager::GetNameForNewFile(char name[255])
 {
-    char buffer[20];
-
     static int number = 0;
 
     std::strcpy(name, currentDir);
@@ -372,16 +370,18 @@ bool FileManager::GetNameForNewFile(char name[255])
                 if (*ch == 0x07)
                 {
                     number++;
-                    std::strcpy(wr, Integer(number).ToString(false, *(ch + 1), buffer));
-                    wr += std::strlen(buffer);
+                    char *strNumber = Integer(number).ToString(false, *(ch + 1)).CString();
+                    std::strcpy(wr, strNumber);
+                    wr += std::strlen(strNumber);
                     ch++;
                 }
                 else
                 {
                     if (*ch >= 0x01 && *ch <= 0x06)
                     {
-                        std::strcpy(wr, Integer((int)values[*ch]).ToString(false, 2, buffer));
-                        wr += std::strlen(buffer);
+                        char *strValue = Integer((int)values[*ch]).ToString(false, 2).CString();
+                        std::strcpy(wr, strValue);
+                        wr += std::strlen(strValue);
                     }
                 }
             }

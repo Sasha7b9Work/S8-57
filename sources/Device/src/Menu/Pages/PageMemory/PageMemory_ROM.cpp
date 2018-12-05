@@ -226,8 +226,6 @@ static void OnDraw_Internal()
 
 static void DrawMemoryWave(int num, bool exist)
 {
-    char buffer[20];
-
     int x = Grid::Left() + 2 + num * 12;
     int y = Grid::FullBottom() - 10;
     int width = 12;
@@ -236,7 +234,7 @@ static void DrawMemoryWave(int num, bool exist)
     Painter::SetColor(num == NUM_ROM_SIGNAL ? Color::FLASH_01 : Color::FILL);
     if (exist)
     {
-        Painter::DrawText(x + 2, y + 1, Integer(num + 1).ToString(false, 2, buffer));
+        Painter::DrawText(x + 2, y + 1, Integer(num + 1).ToString(false, 2).CString());
     }
     else
     {

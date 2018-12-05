@@ -383,6 +383,13 @@ String Float::ToString(bool alwaysSign, int numDigits) const
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+String Integer::ToString(bool alwaysSign, int numMinFields) const
+{
+    char buffer[30];
+    return String(ToString(alwaysSign, numMinFields, buffer));
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static char *FloatToString(float value, bool alwaysSign, int numDigits, char bufferOut[20])
 {
     if (Math::IsEquals(value, ERROR_VALUE_FLOAT))

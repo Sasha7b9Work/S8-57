@@ -254,8 +254,6 @@ void BottomPart::DrawTime(int x, int y)
 
     PackedTime time = CPU::RTC_::GetPackedTime();
 
-    char buffer[20];
-
     Painter::SetColor(Color::FILL);
 
     if ((MODE_WORK == ModeWork::ROM) || (MODE_WORK == ModeWork::RAM))
@@ -269,11 +267,11 @@ void BottomPart::DrawTime(int x, int y)
             time.seconds = TIME_SECONDS_DS;
             time.month = TIME_MONTH_DS;
             time.year = TIME_YEAR_DS;
-            Painter::DrawText(x, y, Integer((int)time.day).ToString(false, 2, buffer));
+            Painter::DrawText(x, y, Integer((int)time.day).ToString(false, 2).CString());
             Painter::DrawText(x + dField, y, ":");
-            Painter::DrawText(x + dField + dSeparator, y, Integer((int)time.month).ToString(false, 2, buffer));
+            Painter::DrawText(x + dField + dSeparator, y, Integer((int)time.month).ToString(false, 2).CString());
             Painter::DrawText(x + 2 * dField + dSeparator, y, ":");
-            Painter::DrawText(x + 2 * dField + 2 * dSeparator, y, Integer((int)time.year + 2000).ToString(false, 4, buffer));
+            Painter::DrawText(x + 2 * dField + 2 * dSeparator, y, Integer((int)time.year + 2000).ToString(false, 4).CString());
             y += 9;
         }
         else
@@ -282,9 +280,9 @@ void BottomPart::DrawTime(int x, int y)
         }
     }
 
-    Painter::DrawText(x, y, Integer((int)time.hours).ToString(false, 2, buffer));
+    Painter::DrawText(x, y, Integer((int)time.hours).ToString(false, 2).CString());
     Painter::DrawText(x + dField, y, ":");
-    Painter::DrawText(x + dField + dSeparator, y, Integer((int)time.minutes).ToString(false, 2, buffer));
+    Painter::DrawText(x + dField + dSeparator, y, Integer((int)time.minutes).ToString(false, 2).CString());
     Painter::DrawText(x + 2 * dField + dSeparator, y, ":");
-    Painter::DrawText(x + 2 * dField + 2 * dSeparator, y, Integer((int)time.seconds).ToString(false, 2, buffer));
+    Painter::DrawText(x + 2 * dField + 2 * dSeparator, y, Integer((int)time.seconds).ToString(false, 2).CString());
 }

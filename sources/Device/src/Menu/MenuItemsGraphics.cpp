@@ -85,8 +85,6 @@ void GovernorColor::DrawClosed(int x, int y)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void GovernorColor::DrawValue(int x, int y, int delta)
 {
-    char buffer[20];
-
     int8 field = ct->currentField;
     char *texts[4] = {"Яр", "Сн", "Зл", "Кр"};
 
@@ -106,7 +104,7 @@ void GovernorColor::DrawValue(int x, int y, int delta)
         Color colorDraw = (field == i) ? Color::BLACK : Color::WHITE;
         Painter::FillRegion(x - 1, y + 1, 29, 10, colorBack);
         Painter::DrawText(x, y + 2, texts[i], colorDraw);
-        Painter::DrawText(x + 14, y + 2, Integer(vals[i]).ToString(false, 1, buffer));
+        Painter::DrawText(x + 14, y + 2, Integer(vals[i]).ToString(false, 1).CString());
         x -= 30;
     }
 
@@ -141,15 +139,13 @@ void Governor::DrawClosed(int x, int y)
 {
     bool pressed = IsPressed();
     bool shade = IsShade() || !IsAcitve();
-    DrawLowPart(x, y, pressed, shade);
+    DrawLowPart(x, y - 6, pressed, shade);
     DrawGovernorChoiceColorFormulaHiPart(this, x, y, pressed, shade);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Governor::DrawValue(int x, int y)
 {
-    char buffer[20];
-
     int startX = x + 40;
     int16 value = *cell;
     int signGovernor = *cell < 0 ? -1 : 1;
@@ -159,8 +155,8 @@ void Governor::DrawValue(int x, int y)
     }
     Painter::SetFont(Font::Type::_5);
     bool sign = minValue < 0;
-    Painter::DrawText(x + 55, y - 5, Integer(maxValue).ToString(sign, 1, buffer), Color::WHITE);
-    Painter::DrawText(x + 55, y + 2, Integer(minValue).ToString(sign, 1, buffer));
+    Painter::DrawText(x + 55, y - 5, Integer(maxValue).ToString(sign, 1).CString(), Color::WHITE);
+    Painter::DrawText(x + 55, y + 2, Integer(minValue).ToString(sign, 1).CString());
     Painter::SetFont(Font::Type::_8);
 
     DrawValueWithSelectedPosition(startX, y, value, NumDigits(), gCurDigit, true, true);
@@ -174,8 +170,6 @@ void Governor::DrawValue(int x, int y)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Governor::DrawLowPart(int x, int y, bool, bool shade)
 {
-    char buffer[20];
-
     Color colorTextDown = Color::BLACK;
 
     Painter::FillRegion(x + 1, y + 17, Menu::Item::Value::WIDTH + 2, Menu::Item::Value::HEIGHT + 3, Color::MENU_FIELD);
@@ -190,7 +184,7 @@ void Governor::DrawLowPart(int x, int y, bool, bool shade)
         int delta = (int)Step();
         if (delta == 0)
         {
-            x = Painter::DrawText(x + 1, y + 21, Integer(*cell).ToString(false, 1, buffer));
+            x = Painter::DrawText(x + 1, y + 21, Integer(*cell).ToString(false, 1).CString());
         }
         else
         {
@@ -202,19 +196,19 @@ void Governor::DrawLowPart(int x, int y, bool, bool shade)
             Painter::SetColor(Color::BLACK);
             if (delta > 0)
             {
-                x = Painter::DrawTextWithLimitation(drawX, y + 21 - delta, Integer(*cell).ToString(false, 1, buffer), limX, limY, limWidth, limHeight);
-                Painter::DrawTextWithLimitation(drawX, y + 21 + 10 - delta, Integer(NextValue()).ToString(false, 1, buffer), limX, limY, limWidth, limHeight);
+                x = Painter::DrawTextWithLimitation(drawX, y + 21 - delta, Integer(*cell).ToString(false, 1).CString(), limX, limY, limWidth, limHeight);
+                Painter::DrawTextWithLimitation(drawX, y + 21 + 10 - delta, Integer(NextValue()).ToString(false, 1).CString(), limX, limY, limWidth, limHeight);
             }
             if (delta < 0)
             {
-                x = Painter::DrawTextWithLimitation(drawX, y + 21 - delta, Integer(*cell).ToString(false, 1, buffer), limX, limY, limWidth, limHeight);
-                Painter::DrawTextWithLimitation(drawX, y + 21 - 10 - delta, Integer(PrevValue()).ToString(false, 1, buffer), limX, limY, limWidth, limHeight);
+                x = Painter::DrawTextWithLimitation(drawX, y + 21 - delta, Integer(*cell).ToString(false, 1).CString(), limX, limY, limWidth, limHeight);
+                Painter::DrawTextWithLimitation(drawX, y + 21 - 10 - delta, Integer(PrevValue()).ToString(false, 1).CString(), limX, limY, limWidth, limHeight);
             }
         }
     }
     else
     {
-        x = Painter::DrawText(x + 1, y + 21, Integer(*cell).ToString(false, 1, buffer), Color::WHITE);
+        x = Painter::DrawText(x + 1, y + 21, Integer(*cell).ToString(false, 1).CString(), Color::WHITE);
     }
     Painter::DrawText(x + 1, y + 21, "\x81", colorTextDown);
 }
@@ -493,8 +487,6 @@ void TimeControl::Draw(int x, int y, bool opened)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void TimeControl::DrawClosed(int x, int y)
 {
-    char buffer[20];
-
     bool pressed = IsPressed();
     bool shade = IsShade();
     DrawGovernorChoiceColorFormulaHiPart(this, x, y, pressed, shade);
@@ -506,25 +498,23 @@ void TimeControl::DrawClosed(int x, int y)
     int startX = 3;
     y += 21;
     PackedTime time = CPU::RTC_::GetPackedTime();
-    Painter::DrawText(x + startX, y, Integer((int)time.hours).ToString(false, 2, buffer), shade ? Color::MenuItem(true) : Color::BLACK);
+    Painter::DrawText(x + startX, y, Integer((int)time.hours).ToString(false, 2).CString(), shade ? Color::MenuItem(true) : Color::BLACK);
     Painter::DrawText(x + startX + deltaField, y, ":");
-    Painter::DrawText(x + startX + deltaField + deltaSeparator, y, Integer((int)time.minutes).ToString(false, 2, buffer));
+    Painter::DrawText(x + startX + deltaField + deltaSeparator, y, Integer((int)time.minutes).ToString(false, 2).CString());
     Painter::DrawText(x + startX + 2 * deltaField + deltaSeparator, y, ":");
-    Painter::DrawText(x + startX + 2 * deltaField + 2 * deltaSeparator, y, Integer((int)time.seconds).ToString(false, 2, buffer));
+    Painter::DrawText(x + startX + 2 * deltaField + 2 * deltaSeparator, y, Integer((int)time.seconds).ToString(false, 2).CString());
 
     startX = 44;
-    Painter::DrawText(x + startX, y, Integer((int)time.day).ToString(false, 2, buffer));
+    Painter::DrawText(x + startX, y, Integer((int)time.day).ToString(false, 2).CString());
     Painter::DrawText(x + startX + deltaField, y, ":");
-    Painter::DrawText(x + startX + deltaField + deltaSeparator, y, Integer((int)time.month).ToString(false, 2, buffer));
+    Painter::DrawText(x + startX + deltaField + deltaSeparator, y, Integer((int)time.month).ToString(false, 2).CString());
     Painter::DrawText(x + startX + 2 * deltaField + deltaSeparator, y, ":");
-    Painter::DrawText(x + startX + 2 * deltaField + 2 * deltaSeparator, y, Integer((int)time.year).ToString(false, 2, buffer));
+    Painter::DrawText(x + startX + 2 * deltaField + 2 * deltaSeparator, y, Integer((int)time.year).ToString(false, 2).CString());
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void TimeControl::DrawOpened(int x, int y)
 {
-    char buffer[20];
-
     int width = Menu::Item::Value::WIDTH + 3;
     int height = 61;
     Painter::DrawRectangle(x - 1, y - 1, width + 2, height + 3, Color::BACK);
@@ -564,12 +554,12 @@ void TimeControl::DrawOpened(int x, int y)
 
     char strI[8][20];
     std::strcpy(strI[iEXIT],  "Не сохранять");
-    std::strcpy(strI[iDAY],   Integer(*day).ToString(false, 2, buffer));
-    std::strcpy(strI[iMONTH], Integer(*month).ToString(false, 2, buffer));
-    std::strcpy(strI[iYEAR],  Integer(*year).ToString(false, 2, buffer));
-    std::strcpy(strI[iHOURS], Integer(*hours).ToString(false, 2, buffer));
-    std::strcpy(strI[iMIN],   Integer(*minutes).ToString(false, 2, buffer));
-    std::strcpy(strI[iSEC],   Integer(*seconds).ToString(false, 2, buffer));
+    std::strcpy(strI[iDAY],   Integer(*day).ToString(false, 2).CString());
+    std::strcpy(strI[iMONTH], Integer(*month).ToString(false, 2).CString());
+    std::strcpy(strI[iYEAR],  Integer(*year).ToString(false, 2).CString());
+    std::strcpy(strI[iHOURS], Integer(*hours).ToString(false, 2).CString());
+    std::strcpy(strI[iMIN],   Integer(*minutes).ToString(false, 2).CString());
+    std::strcpy(strI[iSEC],   Integer(*seconds).ToString(false, 2).CString());
     std::strcpy(strI[iSET],   "Сохранить");
 
     Painter::DrawText(x + 3, y + y0, "д м г - ", Color::WHITE);
