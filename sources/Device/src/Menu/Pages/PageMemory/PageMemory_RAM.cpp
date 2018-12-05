@@ -136,9 +136,9 @@ static void OnDraw_RAM()
     int height = 10;
     Painter::FillRegion(Grid::Right() - width, Grid::Top(), width, height, Color::BACK);
     Painter::DrawRectangle(Grid::Right() - width, Grid::Top(), width, height, Color::FILL);
-    Painter::DrawText(Grid::Right() - width + 2, Grid::Top() + 1, Integer(NUM_RAM_SIGNAL + 1).ToString(false, 3).CString());
-    Painter::DrawText(Grid::Right() - width + 17, Grid::Top() + 1, "/");
-    Painter::DrawText(Grid::Right() - width + 23, Grid::Top() + 1, Integer((int)DataStorage::NumElementsInStorage()).ToString(false, 3).CString());
+    Integer(NUM_RAM_SIGNAL + 1).ToString(false, 3).Draw(Grid::Right() - width + 2, Grid::Top() + 1);
+    String("/").Draw(Grid::Right() - width + 17, Grid::Top() + 1);
+    Integer((int)DataStorage::NumElementsInStorage()).ToString(false, 3).Draw(Grid::Right() - width + 23, Grid::Top() + 1);
 }
 
 static bool HandlerKey_RAM(KeyEvent event)

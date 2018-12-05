@@ -55,13 +55,13 @@ static void DrawLongString(int x, int y, char *string, bool hightlight)
 
     if (length <= WIDTH_COL)
     {
-        Painter::DrawText(x, y, string, color);
+        String(string).Draw(x, y, color);
     }
     else
     {
         Painter::SetColor(color);
         Painter::DrawTextWithLimitation(x, y, string, x, y, WIDTH_COL, 10);
-        Painter::DrawText(x + WIDTH_COL + 3, y, "...");
+        String("...").Draw(x + WIDTH_COL + 3, y);
     }
 }
 

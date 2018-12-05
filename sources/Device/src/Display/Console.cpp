@@ -30,7 +30,7 @@ void Console::Draw()
     {
         int length = Font::GetLengthText(buffer[i]);
         Painter::FillRegion(x0, y + 3, length, 6, Color::BACK);
-        Painter::DrawText(x0 + 1, y, buffer[i], Color::FILL);
+        String(buffer[i]).Draw(x0 + 1, y, Color::FILL);
         y += 6;
     }
 

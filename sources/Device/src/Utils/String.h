@@ -8,7 +8,7 @@ class String
 public:
     String();
     String(const String &);
-    String(char *format, ...);
+    String(const char *format, ...);
     ~String();
         
     char *CString() const;

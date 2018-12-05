@@ -219,7 +219,7 @@ void Grid::DrawGridSpectrum()
         if (!Menu::IsMinimize())
         {
             Painter::SetColor(Color::FILL);
-            Painter::DrawText(5, MathTop() + 1, "Да");
+            String("Да").Draw(5, MathTop() + 1);
         }
     }
     else if (SCALE_FFT_IS_LINEAR)
@@ -232,7 +232,7 @@ void Grid::DrawGridSpectrum()
             Painter::DrawHLine(y, Left(), Left() + 256, Color::GRID);
             if (!Menu::IsMinimize())
             {
-                Painter::DrawText(5, y - 4, strs[i], Color::FILL);
+                String((char *)strs[i]).Draw(5, y - 4, Color::FILL);
             }
         }
     }

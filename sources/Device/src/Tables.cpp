@@ -98,5 +98,6 @@ void Tables::DrawStr(int index, int x, int y)
     {
         Painter::FillRegion(x - 1, y, Font::GetLengthText(str), 9, Color::FLASH_10);
     }
-    Painter::DrawText(x, y, symbolsAlphaBet[index], index == INDEX_SYMBOL ? Color::FLASH_01 : Color::FILL);
+
+    String(symbolsAlphaBet[index]).Draw(x, y, index == INDEX_SYMBOL ? Color::FLASH_01 : Color::FILL);
 }

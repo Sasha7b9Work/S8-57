@@ -292,7 +292,7 @@ static int DrawPartWord(char *word, int x, int y, int xRight, bool draw)
         {
             if (draw)
             {
-                Painter::DrawText(x, y, subString);
+                String(subString).Draw(x, y);
             }
             return (int)std::strlen(subString) - 1;
         }
