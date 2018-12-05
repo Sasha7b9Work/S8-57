@@ -489,7 +489,8 @@ static void DebugShowSetInfo_Draw()
 
     //Painter_DrawFormatText(x0, Y_AND_INCREASE, "Размер основной структуры %d", sizeof(set));
     DRAW_FORMAT("Размер основной структуры : %d", sizeof(set));
-    Painter::DrawText(x0, Y_AND_INCREASE, "Несбрасываемая структура:");
+    String("Несбрасываемая структура:").Draw(x0, Y_AND_INCREASE);
+
     int x = Painter::DrawText(x0, Y_AND_INCREASE, "rShiftAdd :") + 5;
 
     int ddY = 0;

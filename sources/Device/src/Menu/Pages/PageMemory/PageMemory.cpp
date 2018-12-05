@@ -417,7 +417,7 @@ static void DrawSetMask()
     Painter::SetColor(Color::FILL);
     for (int i = 0; i < (int)sizeof(strings) / 4; i++)
     {
-        Painter::DrawText(x0 + deltaX, y0 + 100 + deltaY * i, strings[i]);
+        String(strings[i]).Draw(x0 + deltaX, y0 + 100 + deltaY * i);
     }
 }
 
