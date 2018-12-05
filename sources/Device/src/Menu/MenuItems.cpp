@@ -192,26 +192,34 @@ const char *Control::Title() const
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Page::ProcessKey(KeyEvent event)
+bool Page::ProcessKey(KeyEvent event)
 {
-    if (!funcKey(event))
+    if (funcKey(event))
     {
-        if (event.type == TypePress::Press)
-        {
-            ChangeSubPage((event.key == Key::Left) ? -1 : 1);
-        }
+        return true;
     }
+    else if (event.type == TypePress::Press)
+    {
+        ChangeSubPage((event.key == Key::Left) ? -1 : 1);
+        return true;
+    }
+
+    return false;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Governor::ProcessKey(KeyEvent event)
+bool Governor::ProcessKey(KeyEvent event)
 {
-    Key::E key = event.key;
-    ChangeValue((key == Key::Left || key == Key::Down) ? -1 : 1);
+    if (event.type == TypePress::Press || event.type == TypePress::Repeat)
+    {
+        ChangeValue(event.IsAboveZero() ? 1 : -1);
+        return true;
+    }
+    return true;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Choice::ProcessKey(KeyEvent event)
+bool Choice::ProcessKey(KeyEvent event)
 {
     if (event.type == TypePress::Press)
     {
@@ -222,27 +230,35 @@ void Choice::ProcessKey(KeyEvent event)
         Choice *choice = (Choice *)this;
 
         choice->ChangeIndex(Menu::IsShown() ? delta : -delta);
+
+        return true;
     }
+
+    return false;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Control::ProcessKey(KeyEvent event)
+bool Control::ProcessKey(KeyEvent event)
 {
     switch (type)
     {
     case Control::Type::Choice:
-        ((Choice *)this)->ProcessKey(event);
-        break;
+        return ((Choice *)this)->ProcessKey(event);
+    
     case Control::Type::ChoiceReg:
-        ((Choice *)this)->ProcessKey(event);
-        break;
+        return ((Choice *)this)->ProcessKey(event);
+
     case Control::Type::Page:
-        ((Page *)this)->ProcessKey(event);
-        break;
+        return ((Page *)this)->ProcessKey(event);
+
     case Control::Type::Governor:
-        ((Governor *)this)->ProcessKey(event);
+        return ((Governor *)this)->ProcessKey(event);
+    
+    default:
         break;
     }
+
+    return false;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

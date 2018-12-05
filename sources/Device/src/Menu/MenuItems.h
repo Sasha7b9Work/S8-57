@@ -64,7 +64,7 @@ public:
     /// Возвращает название элемента, как оно выглядит на дисплее прибора
     const char *Title() const;
     /// Обработка события кнопки
-    void ProcessKey(KeyEvent event);
+    bool ProcessKey(KeyEvent event);
     /// Вызывается при "коротком" нажатии
     void ShortPress();
     /// Вызывается при "длинном" нажатии
@@ -156,7 +156,7 @@ public:
     /// Нарисовать в заданных координатах
     void Draw(int x, int y, bool opened);
     /// Обработка события кнопки
-    void ProcessKey(KeyEvent event);
+    bool ProcessKey(KeyEvent event);
 
     void DrawTitle(int x, int y);
 
@@ -311,7 +311,7 @@ public:
     pFuncVV funcOfChanged;  ///< Функция, которую нужно вызывать после того, как значение регулятора изменилось.
     pFuncVV funcBeforeDraw; ///< Функция, которая вызывается перед отрисовкой
     /// Обработка события кнопки
-    void ProcessKey(KeyEvent event);
+    bool ProcessKey(KeyEvent event);
     /// Запускает процессс анимации инкремента или декремента элемента меню типа Governor (в зависимости от знака delta).
     void StartChange(int detla);
     /// Возвращает следующее большее значение, которое может принять governor.
@@ -362,7 +362,7 @@ public:
     /// Возвращает количество вариантов выбора в элементе по адресу choice
     int   NumSubItems();
 
-    void ProcessKey(KeyEvent event);
+    bool ProcessKey(KeyEvent event);
 
     void  Draw(int x, int y, bool opened);
 
