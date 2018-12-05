@@ -478,7 +478,7 @@ void Menu::ShortPress_ChoiceReg(void *choice_)
     } 
     else if(OpenedItem() != choice) 
     {
-        choice->SetCurrent(CurrentItem() != choice);
+        choice->SetCurrent(!choice->IsCurrentItem());
     }
 }
 

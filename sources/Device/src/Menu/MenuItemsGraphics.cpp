@@ -215,8 +215,12 @@ void Governor::DrawLowPart(int x, int y, bool, bool shade)
     {
         x = Painter::DrawText(x + 1, y, Integer(*cell).ToString(false, 1).CString(), Color::WHITE);
     }
-    char symbol = Governor::GetSymbol(*cell);
-    Painter::Draw4SymbolsInRect(x + 20, y - 1, symbol, Color::BLACK);
+
+    if (IsCurrentItem())
+    {
+        char symbol = Governor::GetSymbol(*cell);
+        Painter::Draw4SymbolsInRect(x + 20, y - 1, symbol, Color::BLACK);
+    }
 
     Painter::DrawChar(x + 1, y, SYMBOL_GOVERNOR_RIGHT, colorTextDown);
 }
@@ -600,7 +604,7 @@ static void DrawGovernorChoiceColorFormulaHiPart(Control *item, int x, int y, bo
         Painter::DrawHLine(y + Menu::Item::Value::HEIGHT, x + 1, x + width + 3, Color::FILL);
     }
 
-    if(Menu::CurrentItem() == item)
+    if(item->IsCurrentItem())
     {
         char symbol = 0;
    

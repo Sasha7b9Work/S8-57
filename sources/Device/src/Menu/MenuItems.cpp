@@ -261,6 +261,12 @@ bool Page::CurrentItemIsOpened() const
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+bool Control::IsCurrentItem() const
+{
+    return this == Menu::CurrentItem();
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Control::ShortPress()
 {
     if(type == Control::Type::Choice)
@@ -272,7 +278,7 @@ void Control::ShortPress()
         }
         else if(!IsOpened())
         {
-            choice->SetCurrent(Menu::CurrentItem() != this);
+            choice->SetCurrent(!IsCurrentItem());
             choice->StartChange(1);
         }
         else
@@ -305,7 +311,7 @@ void Control::ShortPress()
             }
             else
             {
-                governor->SetCurrent(Menu::CurrentItem() != this);
+                governor->SetCurrent(!IsCurrentItem());
             }
         }
     }
@@ -334,7 +340,7 @@ void Control::ShortPress()
             }
             else
             {
-                if(Menu::CurrentItem() != this)
+                if(!IsCurrentItem())
                 {
                     SetCurrent(true);
                 }
@@ -347,7 +353,7 @@ void Control::ShortPress()
         Choice *choice = (Choice *)this;
         if(IsAcitve())
         {
-            choice->SetCurrent(Menu::CurrentItem() != this);
+            choice->SetCurrent(!IsCurrentItem());
         }
         else
         {
@@ -370,7 +376,7 @@ void Control::LongPress()
     }
     else if(type == Control::Type::Time)
     {
-        if(Menu::CurrentItem() != this)
+        if(!IsCurrentItem())
         {
             SetCurrent(true);
         }
@@ -390,7 +396,7 @@ void Control::LongPress()
     }
     else
     {
-        if(Menu::CurrentItem() != this)
+        if(!IsCurrentItem())
         {
             SetCurrent(true);
         }

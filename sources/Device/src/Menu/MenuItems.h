@@ -74,6 +74,8 @@ public:
 
     void Draw(int x, int y, bool opened);
 
+    bool IsCurrentItem() const;
+
     /// Разные виды пунктов меню
     struct Type
     {
