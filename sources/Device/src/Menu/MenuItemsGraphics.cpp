@@ -180,43 +180,45 @@ void Governor::DrawLowPart(int x, int y, bool, bool shade)
         colorTextDown = Color::MenuItem(false);
     }
 
-    x = Painter::DrawChar(x + 4, y + 21, SYMBOL_GOVERNOR_LEFT, colorTextDown);
+    y += 21;
+
+    x = Painter::DrawChar(x + 4, y, SYMBOL_GOVERNOR_LEFT, colorTextDown);
 
     if (Menu::OpenedItem() != this)
     {
         int delta = (int)Step();
         if (delta == 0)
         {
-            x = Painter::DrawText(x + 1, y + 21, Integer(*cell).ToString(false, 1).CString());
+            x = Painter::DrawText(x + 1, y, Integer(*cell).ToString(false, 1).CString());
         }
         else
         {
             int drawX = x + 1;
             int limX = x + 1;
-            int limY = y + 19;
+            int limY = y - 2;
             int limWidth = Menu::Item::Value::WIDTH;
             int limHeight = Menu::Item::Value::HEIGHT - 1;
             Painter::SetColor(Color::BLACK);
             if (delta > 0)
             {
-                x = Painter::DrawTextWithLimitation(drawX, y + 21 - delta, Integer(*cell).ToString(false, 1).CString(), limX, limY, limWidth, limHeight);
-                Painter::DrawTextWithLimitation(drawX, y + 21 + 10 - delta, Integer(NextValue()).ToString(false, 1).CString(), limX, limY, limWidth, limHeight);
+                x = Painter::DrawTextWithLimitation(drawX, y - delta, Integer(*cell).ToString(false, 1).CString(), limX, limY, limWidth, limHeight);
+                Painter::DrawTextWithLimitation(drawX, y + 10 - delta, Integer(NextValue()).ToString(false, 1).CString(), limX, limY, limWidth, limHeight);
             }
             if (delta < 0)
             {
-                x = Painter::DrawTextWithLimitation(drawX, y + 21 - delta, Integer(*cell).ToString(false, 1).CString(), limX, limY, limWidth, limHeight);
-                Painter::DrawTextWithLimitation(drawX, y + 21 - 10 - delta, Integer(PrevValue()).ToString(false, 1).CString(), limX, limY, limWidth, limHeight);
+                x = Painter::DrawTextWithLimitation(drawX, y - delta, Integer(*cell).ToString(false, 1).CString(), limX, limY, limWidth, limHeight);
+                Painter::DrawTextWithLimitation(drawX, y - 10 - delta, Integer(PrevValue()).ToString(false, 1).CString(), limX, limY, limWidth, limHeight);
             }
         }
     }
     else
     {
-        x = Painter::DrawText(x + 1, y + 21, Integer(*cell).ToString(false, 1).CString(), Color::WHITE);
+        x = Painter::DrawText(x + 1, y, Integer(*cell).ToString(false, 1).CString(), Color::WHITE);
     }
     char symbol = Governor::GetSymbol(*cell);
-    Painter::Draw4SymbolsInRect(x + 20, y + 19, symbol, Color::BLACK);
+    Painter::Draw4SymbolsInRect(x + 20, y - 2, symbol, Color::BLACK);
 
-    Painter::DrawChar(x + 1, y + 21, SYMBOL_GOVERNOR_RIGHT, colorTextDown);
+    Painter::DrawChar(x + 1, y, SYMBOL_GOVERNOR_RIGHT, colorTextDown);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
