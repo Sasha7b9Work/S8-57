@@ -22,6 +22,9 @@ static char *VoltageToString(float voltts, bool alwaysSign, char buffer[20]);
 /// \attention Строка будет храниться до следующего вызова функции. Если результат нужен большее количество времени, то его нужно скопироавать себе.
 /// \retval указатель на строку с числом.
 static char *FloatToString(float value, bool alwaysSign, int numDigits, char bufferOut[20]);
+/// \brief Преобразует value в текстовую строку
+/// \attention Строка будет храниться до следующего вызова функции. Если результат нужен большее количество времени, то его нужно скопировать себе
+static char *IntegerToString(int value, bool alwaysSign, int numMinFields, char bufferOut[20]);
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -100,7 +103,7 @@ char Hex::DigitInPosition(int pos) const
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-char* Integer::ToString(bool alwaysSign, int numMinFields, char buffer[20]) const
+static char *IntegerToString(int value, bool alwaysSign, int numMinFields, char buffer[20])
 {
     const int SIZE = 20;
     char format[SIZE] = "%";
@@ -386,7 +389,7 @@ String Float::ToString(bool alwaysSign, int numDigits) const
 String Integer::ToString(bool alwaysSign, int numMinFields) const
 {
     char buffer[30];
-    return String(ToString(alwaysSign, numMinFields, buffer));
+    return String(IntegerToString(value, alwaysSign, numMinFields, buffer));
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

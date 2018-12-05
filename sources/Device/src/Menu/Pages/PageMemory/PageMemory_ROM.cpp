@@ -197,7 +197,7 @@ static void Draw_Internal_SaveToDrive(int x, int y)
     }
 }
 
-DEF_SMALL_BUTTON(bInternal_SaveToDrive,                                                           //--- ПАМЯТЬ - ВНУТР ЗУ - Сохранить на флешку ---
+DEF_SMALL_BUTTON(bInternal_SaveToDrive,                                                                                                     //--- ПАМЯТЬ - ВНУТР ЗУ - Сохранить на флешку ---
     "Сохранить на флешку", "Save to disk",
     "Сохраняет сигнал на флешку",
     "Save signal to flash drive",
