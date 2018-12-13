@@ -133,8 +133,8 @@ USBD_StatusTypeDef  USBD_LL_Init (USBD_HandleTypeDef *pdev)
   
     /*Set LL Driver parameters */
 
-    VCP::handlePCD.Instance = USB_OTG_HS;
-    VCP::handlePCD.Init.speed = PCD_SPEED_HIGH_IN_FULL;
+    VCP::handlePCD.Instance = USB_OTG_FS;
+    VCP::handlePCD.Init.speed = PCD_SPEED_FULL;
     VCP::handlePCD.Init.dev_endpoints = 6; 
     VCP::handlePCD.Init.use_dedicated_ep1 = 0;
     VCP::handlePCD.Init.ep0_mps = 0x40;  
