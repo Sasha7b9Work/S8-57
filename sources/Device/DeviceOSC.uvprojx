@@ -556,11 +556,6 @@
               <FilePath>..\common\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_gpio.c</FilePath>
             </File>
             <File>
-              <FileName>stm32f4xx_hal_msp.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\libs\HAL\stm32f4xx_hal_msp.cpp</FilePath>
-            </File>
-            <File>
               <FileName>stm32f4xx_hal_nor.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\common\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_nor.c</FilePath>
@@ -784,6 +779,11 @@
               <FileName>stm32f4xx_ll_usb.h</FileName>
               <FileType>5</FileType>
               <FilePath>..\common\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_ll_usb.h</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f4xx_hal_msp.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\libs\HAL\stm32f4xx_hal_msp.cpp</FilePath>
             </File>
             <File>
               <FileName>stm32f4xx_hal_conf.h</FileName>

@@ -11,6 +11,7 @@
 #include "Hardware/FSMC.h"
 #include "Hardware/Timer.h"
 #include "Hardware/Sound.h"
+#include "Hardware/VCP.h"
 #include "Settings/Settings.h"
 #include "Utils/Math.h"
 #include <stdlib.h>
@@ -28,6 +29,8 @@ void Device::Init()
 #ifndef WIN32
 
     Hardware::Init();
+
+    VCP::Init();
 
     Tester::Init();
 

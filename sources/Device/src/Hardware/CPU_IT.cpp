@@ -5,6 +5,7 @@
 #include "Utils/Debug.h"
 #include "FPGA/FPGA.h"
 #include "Hardware/Timer.h"
+#include "Hardware/VCP.h"
 #endif
 
 
@@ -78,6 +79,13 @@ void SysTick_Handler(void)
 void EXTI9_5_IRQHandler(void)
 {
     HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_9);
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void OTG_HS_IRQHandler()
+{
+    LOG_FUNC_ENTER();
+    HAL_PCD_IRQHandler(&VCP::handlePCD);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

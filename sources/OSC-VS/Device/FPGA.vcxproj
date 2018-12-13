@@ -195,6 +195,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug_stm32|Win32'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="..\..\Device\src\libs\HAL\stm32f4xx_hal_msp.cpp" />
     <ClCompile Include="..\..\Device\src\libs\USBD\usbd_cdc_interface.cpp" />
     <ClCompile Include="..\..\Device\src\libs\USBD\usbd_conf.cpp" />
     <ClCompile Include="..\..\Device\src\libs\USBD\usbd_core.cpp" />
@@ -746,6 +747,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug_stm32|Win32'">false</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="..\..\Device\src\libs\FatFS\ffconf.h" />
+    <ClInclude Include="..\..\Device\src\libs\HAL\stm32f4xx_hal_conf.h" />
     <ClInclude Include="..\..\Device\src\libs\USBD\usbd_cdc_interface.h" />
     <ClInclude Include="..\..\Device\src\libs\USBD\usbd_conf.h" />
     <ClInclude Include="..\..\Device\src\libs\USBD\usbd_desc.h" />
