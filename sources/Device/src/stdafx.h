@@ -38,6 +38,7 @@
 #include "Hardware/GPIO.h"
 #include "Hardware/Sound.h"
 #include "Hardware/Timer.h"
+#include "Hardware/VCP.h"
 #include "Hardware/stm32/Timer4XX.h"
 
 #include "Menu/Pages/Include/Definition.h"
@@ -56,6 +57,7 @@
 #include "Osci/MemoryWindow.h"
 #include "Osci/PainterData.h"
 
+#include "SCPI/SCPI.h"
 #include "Settings/Settings.h"
 
 #include "Utils/Buffer.h"
@@ -67,6 +69,8 @@
 #include "Utils/StringUtils.h"
 
 #include "libs/USBH/usbh_diskio.h"
+#include <usbd_def.h>
+#include <usbd_cdc.h>
 
 #pragma warning(push)
 #pragma warning(disable:4365 4710 4996)

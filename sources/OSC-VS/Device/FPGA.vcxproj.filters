@@ -100,6 +100,12 @@
     <Filter Include="common\_VS">
       <UniqueIdentifier>{2f8e80b0-c991-4d1d-9a69-4f832a00c94c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="SCPI">
+      <UniqueIdentifier>{c6d0dec9-ff49-44cb-85b8-338d73e23062}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="libs\USBD">
+      <UniqueIdentifier>{ade3bb3f-fecd-4bb1-81e8-905776a37bf4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Device\src\Display\Display.cpp">
@@ -539,6 +545,36 @@
     </ClCompile>
     <ClCompile Include="..\..\Device\src\Menu\Pages\PageDebug\PageDebug_Console.cpp">
       <Filter>Menu\Pages\PageDebug</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\libs\USBD\usbd_cdc_interface.cpp">
+      <Filter>libs\USBD</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\libs\USBD\usbd_conf.cpp">
+      <Filter>libs\USBD</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\libs\USBD\usbd_core.cpp">
+      <Filter>libs\USBD</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\libs\USBD\usbd_desc.cpp">
+      <Filter>libs\USBD</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\libs\STM32Cube_F4\Middlewares\ST\STM32_USB_Device_Library\Core\Src\usbd_core.c">
+      <Filter>libs\USBD</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\libs\STM32Cube_F4\Middlewares\ST\STM32_USB_Device_Library\Core\Src\usbd_ctlreq.c">
+      <Filter>libs\USBD</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\libs\STM32Cube_F4\Middlewares\ST\STM32_USB_Device_Library\Core\Src\usbd_ioreq.c">
+      <Filter>libs\USBD</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\libs\STM32Cube_F4\Middlewares\ST\STM32_USB_Device_Library\Class\CDC\Src\usbd_cdc.c">
+      <Filter>libs\USBD</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Hardware\VCP.cpp">
+      <Filter>Hardware</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\SCPI\SCPI.cpp">
+      <Filter>SCPI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1000,6 +1036,33 @@
     </ClInclude>
     <ClInclude Include="..\..\Device\src\Utils\String.h">
       <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Device\src\SCPI\SCPI.h">
+      <Filter>SCPI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Device\src\Hardware\VCP.h">
+      <Filter>Hardware</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Device\src\libs\USBD\usbd_cdc_interface.h">
+      <Filter>libs\USBD</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Device\src\libs\USBD\usbd_conf.h">
+      <Filter>libs\USBD</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Device\src\libs\USBD\usbd_desc.h">
+      <Filter>libs\USBD</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\libs\STM32Cube_F4\Middlewares\ST\STM32_USB_Device_Library\Core\Inc\usbd_core.h">
+      <Filter>libs\USBD</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\libs\STM32Cube_F4\Middlewares\ST\STM32_USB_Device_Library\Core\Inc\usbd_ctlreq.h">
+      <Filter>libs\USBD</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\libs\STM32Cube_F4\Middlewares\ST\STM32_USB_Device_Library\Core\Inc\usbd_ioreq.h">
+      <Filter>libs\USBD</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\libs\STM32Cube_F4\Middlewares\ST\STM32_USB_Device_Library\Class\CDC\Inc\usbd_cdc.h">
+      <Filter>libs\USBD</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

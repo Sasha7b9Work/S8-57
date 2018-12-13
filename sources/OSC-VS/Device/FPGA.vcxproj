@@ -11,6 +11,18 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\common\libs\STM32Cube_F4\Middlewares\ST\STM32_USB_Device_Library\Class\CDC\Src\usbd_cdc.c">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug_stm32|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\common\libs\STM32Cube_F4\Middlewares\ST\STM32_USB_Device_Library\Core\Src\usbd_core.c">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug_stm32|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\common\libs\STM32Cube_F4\Middlewares\ST\STM32_USB_Device_Library\Core\Src\usbd_ctlreq.c">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug_stm32|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\common\libs\STM32Cube_F4\Middlewares\ST\STM32_USB_Device_Library\Core\Src\usbd_ioreq.c">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug_stm32|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="..\..\common\Message.cpp" />
     <ClCompile Include="..\..\Device\src\Data\DataBuffer.cpp" />
     <ClCompile Include="..\..\Device\src\Data\DataSettings.cpp">
@@ -170,6 +182,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug_stm32|Win32'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="..\..\Device\src\Hardware\VCP.cpp" />
     <ClCompile Include="..\..\Device\src\Keyboard\Decoder.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug_stm32|Win32'">false</ExcludedFromBuild>
@@ -182,6 +195,10 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug_stm32|Win32'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="..\..\Device\src\libs\USBD\usbd_cdc_interface.cpp" />
+    <ClCompile Include="..\..\Device\src\libs\USBD\usbd_conf.cpp" />
+    <ClCompile Include="..\..\Device\src\libs\USBD\usbd_core.cpp" />
+    <ClCompile Include="..\..\Device\src\libs\USBD\usbd_desc.cpp" />
     <ClCompile Include="..\..\Device\src\log.cpp" />
     <ClCompile Include="..\..\Device\src\main.cpp" />
     <ClCompile Include="..\..\Device\src\Menu\BufferButtons.cpp">
@@ -386,6 +403,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug_stm32|Win32'">false</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="..\..\Device\src\SCPI\SCPI.cpp" />
     <ClCompile Include="..\..\Device\src\Settings\Settings.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug_stm32|Win32'">NotUsing</PrecompiledHeader>
@@ -561,6 +579,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\common\Command.h" />
+    <ClInclude Include="..\..\common\libs\STM32Cube_F4\Middlewares\ST\STM32_USB_Device_Library\Class\CDC\Inc\usbd_cdc.h" />
+    <ClInclude Include="..\..\common\libs\STM32Cube_F4\Middlewares\ST\STM32_USB_Device_Library\Core\Inc\usbd_core.h" />
+    <ClInclude Include="..\..\common\libs\STM32Cube_F4\Middlewares\ST\STM32_USB_Device_Library\Core\Inc\usbd_ctlreq.h" />
+    <ClInclude Include="..\..\common\libs\STM32Cube_F4\Middlewares\ST\STM32_USB_Device_Library\Core\Inc\usbd_ioreq.h" />
     <ClInclude Include="..\..\common\Message.h" />
     <ClInclude Include="..\..\common\_VS\cmsis_armcc.h" />
     <ClInclude Include="..\..\common\_VS\cmsis_armcc_V6.h" />
@@ -714,6 +736,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug_stm32|Win32'">false</ExcludedFromBuild>
     </ClInclude>
+    <ClInclude Include="..\..\Device\src\Hardware\VCP.h" />
     <ClInclude Include="..\..\Device\src\Keyboard\Decoder.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug_stm32|Win32'">false</ExcludedFromBuild>
@@ -723,6 +746,9 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug_stm32|Win32'">false</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="..\..\Device\src\libs\FatFS\ffconf.h" />
+    <ClInclude Include="..\..\Device\src\libs\USBD\usbd_cdc_interface.h" />
+    <ClInclude Include="..\..\Device\src\libs\USBD\usbd_conf.h" />
+    <ClInclude Include="..\..\Device\src\libs\USBD\usbd_desc.h" />
     <ClInclude Include="..\..\Device\src\log.h" />
     <ClInclude Include="..\..\Device\src\main.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
@@ -799,6 +825,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug_stm32|Win32'">false</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="..\..\Device\src\Recorder\Recorder.h" />
+    <ClInclude Include="..\..\Device\src\SCPI\SCPI.h" />
     <ClInclude Include="..\..\Device\src\Settings\Settings.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug_stm32|Win32'">false</ExcludedFromBuild>
@@ -1005,7 +1032,7 @@
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{C23F96B0-1550-4A0F-8E49-0DC211BCED2C}</ProjectGuid>
     <RootNamespace>FPGA</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
     <ProjectName>Device</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -1039,7 +1066,7 @@
     <LibraryPath>..\..\ThirdParty\SDL2\lib\x86;..\..\ThirdParty\wxWidgets\lib\vc_lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug_stm32|Win32'">
-    <IncludePath>..\..\common\_VS;..\..\Device\src\libs\FatFS;..\..\Device\src;..\..\Device\src\libs\HAL;..\..\Device\src\libs\USBH;..\..\common;..\..\ThirdParty\wxWidgets\include;..\..\ThirdParty\wxWidgets\include\msvc;..\..\ThirdParty\SDL2\include;..\..\common\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc;..\..\common\libs\STM32Cube_F4\Drivers\CMSIS\Device\ST\STM32F4xx\Include;..\..\common\libs\STM32Cube_F4\Middlewares\Third_Party\FatFs\src;..\..\common\libs\STM32Cube_F4\Middlewares\ST\STM32_USB_Host_Library\Core\Inc;..\..\common\libs\STM32Cube_F4\Middlewares\ST\STM32_USB_Host_Library\Class\MSC\Inc</IncludePath>
+    <IncludePath>..\..\common\_VS;..\..\Device\src\libs\FatFS;..\..\Device\src;..\..\Device\src\libs\HAL;..\..\Device\src\libs\USBD;..\..\Device\src\libs\USBH;..\..\common;..\..\ThirdParty\wxWidgets\include;..\..\ThirdParty\wxWidgets\include\msvc;..\..\ThirdParty\SDL2\include;..\..\common\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc;..\..\common\libs\STM32Cube_F4\Drivers\CMSIS\Device\ST\STM32F4xx\Include;..\..\common\libs\STM32Cube_F4\Middlewares\Third_Party\FatFs\src;..\..\common\libs\STM32Cube_F4\Middlewares\ST\STM32_USB_Host_Library\Core\Inc;..\..\common\libs\STM32Cube_F4\Middlewares\ST\STM32_USB_Host_Library\Class\MSC\Inc;..\..\common\libs\STM32Cube_F4\Middlewares\ST\STM32_USB_Device_Library\Core\Inc;..\..\common\libs\STM32Cube_F4\Middlewares\ST\STM32_USB_Device_Library\Class\CDC\Inc</IncludePath>
     <OutDir>.\Debug\</OutDir>
     <LibraryPath>..\..\ThirdParty\SDL2\lib\x86;..\..\ThirdParty\wxWidgets\lib\vc_lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
