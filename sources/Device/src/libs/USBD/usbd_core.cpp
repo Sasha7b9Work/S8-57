@@ -123,7 +123,7 @@ USBD_StatusTypeDef USBD_LL_SetupStage(USBD_HandleTypeDef *pdev, uint8_t *psetup)
 
     case USB_REQ_RECIPIENT_INTERFACE:
         USBD_StdItfReq(pdev, &pdev->request);
-        CONNECTED_TO_USB = true;
+        CONNECTED_TO_USB = false;
         break;
 
     case USB_REQ_RECIPIENT_ENDPOINT:
@@ -306,7 +306,7 @@ USBD_StatusTypeDef USBD_LL_IsoOUTIncomplete(USBD_HandleTypeDef  *, uint8_t)
 USBD_StatusTypeDef USBD_LL_DevConnected(USBD_HandleTypeDef  *)
 {
     CABLE_USB_IS_CONNECTED = true;
-    CONNECTED_TO_USB = true;
+    CONNECTED_TO_USB = false;
     return USBD_OK;
 }
 

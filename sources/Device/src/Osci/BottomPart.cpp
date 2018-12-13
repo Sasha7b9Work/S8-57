@@ -12,6 +12,7 @@
 #include "Utils/Dictionary.h"
 #include "Utils/Values.h"
 #include "Hardware/CPU.h"
+#include "Hardware/VCP.h"
 #include "Data/Reader.h"
 #endif
 
@@ -149,12 +150,10 @@ void BottomPart::Draw()
         Painter::Draw4SymbolsInRect(x + 57, Grid::Bottom() + 2, SYMBOL_FLASH_DRIVE);
     }
 
-    /*
     if (CONNECTED_TO_USB || CABLE_USB_IS_CONNECTED)
     {
-        Painter::Draw4SymbolsInRect(x + 72, Grid::Bottom(); + 2, SYMBOL_USB, CONNECTED_TO_USB ? Color::WHITE : Color::FLASH_01);
+        Painter::Draw4SymbolsInRect(x + 72, Grid::Bottom() + 2, SYMBOL_USB, CONNECTED_TO_USB ? Color::WHITE : Color::FLASH_01);
     }
-    */
 
     Painter::SetColor(Color::FILL);
     // Пиковый детектор

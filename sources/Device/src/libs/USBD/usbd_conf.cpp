@@ -34,7 +34,7 @@ void HAL_PCD_SetupStageCallback(PCD_HandleTypeDef *hpcd)
             if (prevLength != 0)                                    //
             {                                                       //
                 CABLE_USB_IS_CONNECTED = true;  // Это потому, что при включении прибора с подключенным шнуром
-                CONNECTED_TO_USB = true;                            // GOVNOCODE Таким вот замысловатым образом определяем, что к нам подконнектился хост (
+                CONNECTED_TO_USB = false;                           // GOVNOCODE Таким вот замысловатым образом определяем, что к нам подконнектился хост (
             }                                                       //
             else                                                    //
             {                                                       //

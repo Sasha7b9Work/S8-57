@@ -20,7 +20,7 @@ static USBD_CDC_LineCodingTypeDef LineCoding =
     0x08    /* nb. of bits 8*/
 };
 
-#define APP_RX_DATA_SIZE  32
+#define APP_RX_DATA_SIZE  64
 static uint8_t UserRxBuffer[APP_RX_DATA_SIZE];/* Received Data over USB are stored in this buffer */
 
 
@@ -32,10 +32,10 @@ static int8_t CDC_Itf_Receive  (uint8* pbuf, uint *Len);
 
 USBD_CDC_ItfTypeDef USBD_CDC_fops = 
 {
-  CDC_Itf_Init,
-  CDC_Itf_DeInit,
-  CDC_Itf_Control,
-  CDC_Itf_Receive
+    CDC_Itf_Init,
+    CDC_Itf_DeInit,
+    CDC_Itf_Control,
+    CDC_Itf_Receive
 };
 
 
