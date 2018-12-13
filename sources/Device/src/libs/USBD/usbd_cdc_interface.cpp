@@ -26,8 +26,8 @@ static uint8_t UserRxBuffer[APP_RX_DATA_SIZE];/* Received Data over USB are stor
 
 static int8_t CDC_Itf_Init     ();
 static int8_t CDC_Itf_DeInit   ();
-static int8_t CDC_Itf_Control  (uint8_t cmd, uint8_t* pbuf, uint16_t length);
-static int8_t CDC_Itf_Receive  (uint8_t* pbuf, uint32_t *Len);
+static int8_t CDC_Itf_Control  (uint8 cmd, uint8* pbuf, uint16 length);
+static int8_t CDC_Itf_Receive  (uint8* pbuf, uint *Len);
 
 
 USBD_CDC_ItfTypeDef USBD_CDC_fops = 
@@ -68,7 +68,7 @@ static int8_t CDC_Itf_DeInit()
 
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-static int8_t CDC_Itf_Control (uint8_t cmd, uint8_t* pbuf, uint16_t)
+static int8_t CDC_Itf_Control (uint8 cmd, uint8* pbuf, uint16)
 { 
     switch (cmd)
     {
