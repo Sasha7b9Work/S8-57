@@ -68,10 +68,16 @@ void VCP::Flush()
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void VCP::SendDataSynch(const uint8 *buffer, int size)
+void VCP::SendDataSynch(const void *_buffer, uint size)
 {
     if (CONNECTED_TO_USB)
     {
+        char *buffer = (char *)_buffer;
+        if (size == 0)
+        {
+            size = std::strlen(buffer);
+        }
+
         USBD_CDC_HandleTypeDef *pCDC = (USBD_CDC_HandleTypeDef *)handleUSBD.pClassData;
     
         do 
@@ -79,7 +85,7 @@ void VCP::SendDataSynch(const uint8 *buffer, int size)
             if (sizeBuffer + size > SIZE_BUFFER_VCP)
             {
                 int reqBytes = SIZE_BUFFER_VCP - sizeBuffer;
-                LIMITATION(reqBytes, 0, size);
+                LIMITATION(reqBytes, 0, (int)size);
                 while (pCDC->TxState == 1) {};
                 std::memcpy(buffSend + sizeBuffer, (void *)buffer, (uint)reqBytes);
                 USBD_CDC_SetTxBuffer(&handleUSBD, buffSend, SIZE_BUFFER_VCP);
@@ -107,7 +113,7 @@ void VCP::SendStringAsynch(char *data)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void VCP::SendStringSynch(char *data)
 {
-    SendDataSynch((uint8 *)data, (int)std::strlen(data));
+    SendDataSynch((uint8 *)data, std::strlen(data));
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -134,7 +140,7 @@ void VCP::SendFormatStringSynch(char *format, ...)
     std::vsprintf(buffer, format, args);
     va_end(args);
     std::strcat(buffer, "\r\n");
-    SendDataSynch((uint8 *)buffer, (int)std::strlen(buffer));
+    SendDataSynch((uint8 *)buffer, std::strlen(buffer));
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------

@@ -34,7 +34,7 @@ void HAL_PCD_SetupStageCallback(PCD_HandleTypeDef *hpcd)
             if (prevLength != 0)                                    //
             {                                                       //
                 CABLE_USB_IS_CONNECTED = true;  // Это потому, что при включении прибора с подключенным шнуром
-                CONNECTED_TO_USB = false;                           // GOVNOCODE Таким вот замысловатым образом определяем, что к нам подконнектился хост (
+                CONNECTED_TO_USB = true;                           // GOVNOCODE Таким вот замысловатым образом определяем, что к нам подконнектился хост (
             }                                                       //
             else                                                    //
             {                                                       //
@@ -93,14 +93,14 @@ void HAL_PCD_ResetCallback(PCD_HandleTypeDef *hpcd)
 void HAL_PCD_SuspendCallback(PCD_HandleTypeDef *hpcd)
 {
     USBD_LL_Suspend((USBD_HandleTypeDef *)hpcd->pData);
-      __HAL_PCD_GATE_PHYCLOCK(hpcd);
-  /* Enter in STOP mode. */
-  /* USER CODE BEGIN 2 */
-  if (hpcd->Init.low_power_enable)
-  {
-    /* Set SLEEPDEEP bit and SleepOnExit of Cortex System Control Register. */
-    SCB->SCR |= (uint32_t)((uint32_t)(SCB_SCR_SLEEPDEEP_Msk | SCB_SCR_SLEEPONEXIT_Msk));
-  }
+//      __HAL_PCD_GATE_PHYCLOCK(hpcd);
+//  /* Enter in STOP mode. */
+//  /* USER CODE BEGIN 2 */
+//  if (hpcd->Init.low_power_enable)
+//  {
+//    /* Set SLEEPDEEP bit and SleepOnExit of Cortex System Control Register. */
+//    SCB->SCR |= (uint32_t)((uint32_t)(SCB_SCR_SLEEPDEEP_Msk | SCB_SCR_SLEEPONEXIT_Msk));
+//  }
 }
 
 void HAL_PCD_ResumeCallback(PCD_HandleTypeDef *hpcd)
