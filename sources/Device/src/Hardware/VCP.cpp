@@ -21,7 +21,7 @@ bool               VCP::connectedToUSB = false;
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void VCP::Init()
 {
-    USBD_Init(&handleUSBD, &VCP_Desc, 0);
+    USBD_Init(&handleUSBD, &VCP_Desc, DEVICE_FS);
     USBD_RegisterClass(&handleUSBD, &USBD_CDC);
     USBD_CDC_RegisterInterface(&handleUSBD, &USBD_CDC_fops);
     USBD_Start(&handleUSBD);

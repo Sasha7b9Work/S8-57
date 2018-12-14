@@ -18,6 +18,8 @@
 class VCP
 {
 public:
+    static const int DEVICE_FS = 0;
+
     /// Инициализация
     static void Init();
 

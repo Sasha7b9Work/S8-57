@@ -93,6 +93,14 @@ void HAL_PCD_ResetCallback(PCD_HandleTypeDef *hpcd)
 void HAL_PCD_SuspendCallback(PCD_HandleTypeDef *hpcd)
 {
     USBD_LL_Suspend((USBD_HandleTypeDef *)hpcd->pData);
+      __HAL_PCD_GATE_PHYCLOCK(hpcd);
+  /* Enter in STOP mode. */
+  /* USER CODE BEGIN 2 */
+  if (hpcd->Init.low_power_enable)
+  {
+    /* Set SLEEPDEEP bit and SleepOnExit of Cortex System Control Register. */
+    SCB->SCR |= (uint32_t)((uint32_t)(SCB_SCR_SLEEPDEEP_Msk | SCB_SCR_SLEEPONEXIT_Msk));
+  }
 }
 
 void HAL_PCD_ResumeCallback(PCD_HandleTypeDef *hpcd)
@@ -128,26 +136,31 @@ USBD_StatusTypeDef  USBD_LL_Init (USBD_HandleTypeDef *pdev)
 { 
     NVIC_SetPriority (SysTick_IRQn, 0);  
   
-    VCP::handlePCD.Instance = USB_OTG_FS;
-    VCP::handlePCD.Init.speed = PCD_SPEED_FULL;
-    VCP::handlePCD.Init.dev_endpoints = 6; 
-    VCP::handlePCD.Init.use_dedicated_ep1 = DISABLE;
-    VCP::handlePCD.Init.ep0_mps = DEP0CTL_MPS_64;  
-    VCP::handlePCD.Init.dma_enable = DISABLE;
-    VCP::handlePCD.Init.low_power_enable = DISABLE;
-    VCP::handlePCD.Init.phy_itface = PCD_PHY_EMBEDDED; 
-    VCP::handlePCD.Init.Sof_enable = DISABLE;
-    VCP::handlePCD.Init.vbus_sensing_enable = ENABLE;
+    if(pdev->id == VCP::DEVICE_FS)
+    {
+        // Link The driver to the stack
+        VCP::handlePCD.pData = pdev;
+        pdev->pData = &VCP::handlePCD;
 
-    // Link The driver to the stack
-    VCP::handlePCD.pData = pdev;
-    pdev->pData = &VCP::handlePCD;
-    // Initialize LL Driver
-    HAL_PCD_Init(&VCP::handlePCD);
-  
-    HAL_PCD_SetRxFiFo(&VCP::handlePCD, 0x200);
-    HAL_PCD_SetTxFiFo(&VCP::handlePCD, 0, 0x80);
-    HAL_PCD_SetTxFiFo(&VCP::handlePCD, 1, 0x174); 
+        VCP::handlePCD.Instance = USB_OTG_FS;
+        VCP::handlePCD.Init.dev_endpoints = 4;
+        VCP::handlePCD.Init.speed = PCD_SPEED_FULL;
+        VCP::handlePCD.Init.dma_enable = DISABLE;
+        VCP::handlePCD.Init.ep0_mps = DEP0CTL_MPS_64;
+        VCP::handlePCD.Init.phy_itface = PCD_PHY_EMBEDDED;
+        VCP::handlePCD.Init.Sof_enable = DISABLE;
+        VCP::handlePCD.Init.low_power_enable = DISABLE;
+        VCP::handlePCD.Init.lpm_enable = DISABLE;
+        VCP::handlePCD.Init.vbus_sensing_enable = ENABLE;
+        VCP::handlePCD.Init.use_dedicated_ep1 = DISABLE;
+    
+        // Initialize LL Driver
+        HAL_PCD_Init(&VCP::handlePCD);
+    
+        HAL_PCDEx_SetRxFiFo(&VCP::handlePCD, 0x80);
+        HAL_PCDEx_SetTxFiFo(&VCP::handlePCD, 0, 0x40);
+        HAL_PCDEx_SetTxFiFo(&VCP::handlePCD, 1, 0x80); 
+    }
 
     return USBD_OK;
 }

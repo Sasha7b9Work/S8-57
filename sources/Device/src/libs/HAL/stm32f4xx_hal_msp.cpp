@@ -163,7 +163,7 @@ void HAL_PCD_MspInit(PCD_HandleTypeDef *)
         GPIO_PIN_11 | GPIO_PIN_12,
         GPIO_MODE_AF_PP,
         GPIO_NOPULL,
-        GPIO_SPEED_FAST,
+        GPIO_SPEED_FREQ_VERY_HIGH,
         GPIO_AF10_OTG_FS
     };
 
@@ -175,7 +175,7 @@ void HAL_PCD_MspInit(PCD_HandleTypeDef *)
 
     HAL_GPIO_Init(GPIOA, &isGPIO);
 
-    HAL_NVIC_SetPriority(OTG_FS_IRQn, 10, 0);
+    HAL_NVIC_SetPriority(OTG_FS_IRQn, 0, 0);
 
     HAL_NVIC_EnableIRQ(OTG_FS_IRQn);
 }
