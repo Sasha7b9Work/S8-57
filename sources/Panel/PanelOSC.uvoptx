@@ -164,7 +164,7 @@
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>.\src\Utils\Decoder.cpp</Filename>
+          <Filename>D:\Projects\stm32\OSC_02\sources\Device\src\Utils\Decoder.cpp</Filename>
           <ExecCommand></ExecCommand>
           <Expression>\\PanelOSC\src/Utils/Decoder.cpp\172</Expression>
         </Bp>

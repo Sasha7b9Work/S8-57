@@ -2,6 +2,7 @@
 
 #ifdef WIN32
 #define __attribute(x)
+#define __attribute__(x)
 #endif
 
 

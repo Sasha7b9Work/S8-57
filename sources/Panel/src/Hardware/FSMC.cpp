@@ -105,8 +105,8 @@ uint8 FSMC::ReadByte()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void FSMC::WriteBuffer(uint8 *data, int length)
 {
-#define SIZE_BUFFER (1024 * 10)
-    static uint8 buffer[SIZE_BUFFER];
+#define SIZE_BUFFER (1024 * 64)
+    static uint8 buffer[SIZE_BUFFER] __attribute__ ((section("CCM_DATA")));
     static int pointer = 0;
 
     if (inReadState)                                        // Если идёт процесс приёма
