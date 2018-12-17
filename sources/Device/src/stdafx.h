@@ -38,7 +38,7 @@
 #include "Hardware/GPIO.h"
 #include "Hardware/Sound.h"
 #include "Hardware/Timer.h"
-#include "Hardware/VCP.h"
+#include <Hardware/VCP.h>
 #include "Hardware/stm32/Timer4XX.h"
 
 #include "Menu/Pages/Include/Definition.h"
