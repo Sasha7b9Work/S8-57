@@ -15,6 +15,11 @@ int      Decoder::step = 0;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/// Обработка запроса на изображение экрана
+static bool FuncScreen(uint8);
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void Decoder::AddData(uint8 data)
 {
     static const struct StructFunc { pFuncBU8 func; } command[Command::Number] =
@@ -34,7 +39,8 @@ void Decoder::AddData(uint8 data)
         SetPoint,
         DrawLine,
         DrawTesterPoints,
-        DrawBigText
+        DrawBigText,
+        FuncScreen
     };
 
     if (step == 0)
@@ -157,6 +163,13 @@ bool Decoder::SetColor(uint8 data)
     {
         Painter::SetColor((Color)data);
     }
+    return true;
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+static bool FuncScreen(uint8)
+{
+    Painter::SendScreenToDevice();
     return true;
 }
 

@@ -93,7 +93,6 @@ void OTG_FS_IRQHandler()
 // Флешка
 void OTG_HS_IRQHandler()
 {
-    LOG_FUNC_ENTER();
     HAL_HCD_IRQHandler(&FDrive::handleHCD);
 }
 

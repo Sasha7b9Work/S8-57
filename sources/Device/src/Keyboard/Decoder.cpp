@@ -24,6 +24,8 @@ static int step;
 static void RunStep(uint8 data);
 
 static bool ButtonPress(uint8);
+
+static bool FuncScreen(uint8);
 /// Эту функцию надо вызывать после выполнения последнего шага
 static void FinishCommand();
 
@@ -76,7 +78,8 @@ static void RunStep(uint8 data)
         EmptyFuncBtU8,      // Paint_SetPoint,
         EmptyFuncBtU8,      // Paint_DrawLine,
         EmptyFuncBtU8,      // Paint_TesterLines,
-        EmptyFuncBtU8       // Paint_DrawBigText,
+        EmptyFuncBtU8,      // Paint_DrawBigText,
+        FuncScreen          // Screen
     };
 
     if (step == 0)
@@ -132,6 +135,12 @@ static bool ButtonPress(uint8 data)
         Menu::ButtonEvent(KeyEvent(button, (TypePress::E)data));
     }
 
+    return true;
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+static bool FuncScreen(uint8)
+{
     return true;
 }
 
