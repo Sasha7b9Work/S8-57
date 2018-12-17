@@ -35,9 +35,9 @@ bool VCP::PrevSendingComplete()
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void VCP::SendDataAsynch(uint8 *buffer, int size)
+void VCP::SendDataAsynch(uint8 *buffer, uint size)
 {
-#define SIZE_BUFFER 64
+#define SIZE_BUFFER 64U
     static uint8 trBuf[SIZE_BUFFER];
 
     size = Math::Min(size, SIZE_BUFFER);
@@ -107,7 +107,7 @@ void VCP::SendDataSynch(const void *_buffer, uint size)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void VCP::SendStringAsynch(char *data)
 {
-    SendDataAsynch((uint8 *)data, (int)std::strlen(data));
+    SendDataAsynch((uint8 *)data, std::strlen(data));
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -127,7 +127,7 @@ void VCP::SendFormatStringAsynch(char *format, ...)
         std::vsprintf(buffer, format, args);
         va_end(args);
         std::strcat(buffer, "\r\n");
-        SendDataAsynch((uint8 *)buffer, (int)std::strlen(buffer));
+        SendDataAsynch((uint8 *)buffer, std::strlen(buffer));
     }
 }
 

@@ -332,7 +332,7 @@ DEF_CHOICE_2(       cDrive_SaveAs,                                              
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-DEF_CHOICE_2(       cDrive_ModeBtnMemory,                                                                  //--- ÏÀÌ‗ÒÜ - ÂÍÅØÍ ÇÓ - Ðוז ךם ÏÀÌ‗ÒÜ ---
+DEF_CHOICE_2( cDrive_ModeBtnMemory,                                                                                                               //--- ÏÀÌ‗ÒÜ - ÂÍÅØÍ ÇÓ - Ðוז ךם ÏÀÌ‗ÒÜ ---
     "Ðוז ךם ÏÀÌ‗ÒÜ", "Mode btn MEMORY",
     "",
     "",
@@ -501,16 +501,16 @@ DEF_CHOICE_2(       cDrive_Autoconnect,                                         
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-DEF_PAGE_6( ppDrive,                                                                                                                                                 // ÏÀÌ‗ÒÜ - ÂÍÅØÍ ÇÓ ///
+DEF_PAGE_6( ppDrive,                                                                                                                                              //--- ÏÀÌ‗ÒÜ - ÂÍÅØÍ ÇÓ ---
     "ÂÍÅØÍ ÇÓ", "EXT STORAGE",
     "Ðאבמעא ס גםורםטל חאןמלטםא‏שטל ףסענמיסעגמל.",
     "Work with external storage device.",
-    &pppDrive_Manager,       // ÏÀÌ‗ÒÜ - ÂÍÅØÍ ÇÓ - ÊÀÒÀËÎÃ
-    &cDrive_Name,            // ÏÀÌ‗ÒÜ - ÂÍÅØÍ ÇÓ - Èלÿ פאיכא
-    &pppDrive_Mask,          // Ïאלÿעü - ÂÍÅØÍ ÇÓ - ÌÀÑÊÀ
-    &cDrive_SaveAs,          // ÏÀÌ‗ÒÜ - ÂÍÅØÍ ÇÓ - Ñמץנאםÿעü ךאך
-    &cDrive_ModeBtnMemory,   // ÏÀÌ‗ÒÜ - ÂÍÅØÍ ÇÓ - Ðוז ךם ÏÀÌ‗ÒÜ
-    &cDrive_Autoconnect,     // ÏÀÌ‗ÒÜ - ÂÍÅØÍ ÇÓ - Àגעמןמהךכ‏קוםטו
+    &pppDrive_Manager,       ///< ÏÀÌ‗ÒÜ - ÂÍÅØÍ ÇÓ - ÊÀÒÀËÎÃ
+    &cDrive_Name,            ///< ÏÀÌ‗ÒÜ - ÂÍÅØÍ ÇÓ - Èלÿ פאיכא
+    &pppDrive_Mask,          ///< Ïאלÿעü - ÂÍÅØÍ ÇÓ - ÌÀÑÊÀ
+    &cDrive_SaveAs,          ///< ÏÀÌ‗ÒÜ - ÂÍÅØÍ ÇÓ - Ñמץנאםÿעü ךאך
+    &cDrive_ModeBtnMemory,   ///< ÏÀÌ‗ÒÜ - ÂÍÅØÍ ÇÓ - Ðוז ךם ÏÀÌ‗ÒÜ
+    &cDrive_Autoconnect,     ///< ÏÀÌ‗ÒÜ - ÂÍÅØÍ ÇÓ - Àגעמןמהךכ‏קוםטו
     Page::Name::Memory_Drive, &pageMemory, FuncActive, EmptyPressPage, FuncDrawPage, FuncRegSetPage
 )
 

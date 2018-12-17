@@ -207,6 +207,9 @@
     <ClInclude Include="..\..\Panel\src\Display\Text.h">
       <Filter>Display</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Panel\src\Log.h">
+      <Filter>src</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\common\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal.c">
@@ -310,6 +313,9 @@
     </ClCompile>
     <ClCompile Include="..\..\Panel\src\Display\Text_429.cpp">
       <Filter>Display</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Panel\src\Log.cpp">
+      <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

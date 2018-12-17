@@ -161,6 +161,7 @@
     <ClInclude Include="..\..\Panel\src\Hardware\stm32\Timer4XX.h" />
     <ClInclude Include="..\..\Panel\src\libs\HAL\stm32f4xx_hal_conf.h" />
     <ClInclude Include="..\..\Panel\src\libs\HAL\stm32f4xx_it.h" />
+    <ClInclude Include="..\..\Panel\src\Log.h" />
     <ClInclude Include="..\..\Panel\src\Settings\SettingsDisplay.h" />
     <ClInclude Include="..\..\Panel\src\Settings\SettingsTypes.h" />
     <ClInclude Include="..\..\Panel\src\Utils\Decoder.h" />
@@ -189,6 +190,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug_stm32|Win32'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="..\..\Panel\src\libs\HAL\stm32f4xx_it.c" />
+    <ClCompile Include="..\..\Panel\src\Log.cpp" />
     <ClCompile Include="..\..\Panel\src\main.cpp" />
     <ClCompile Include="..\..\common\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal.c">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>

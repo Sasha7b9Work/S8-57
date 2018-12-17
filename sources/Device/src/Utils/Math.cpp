@@ -36,6 +36,7 @@ template uint8 Math::LimitationRet<uint8>(uint8, uint8, uint8);
 template void  Math::AdditionThisLimitation<uint16>(uint16 *, int, uint16, uint16);
 template float Math::Max<float>(float, float, float);
 template int   Math::Min<int>(int, int);
+template uint  Math::Min<uint>(uint, uint);
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

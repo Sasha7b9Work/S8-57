@@ -73,7 +73,7 @@
         <LExpSel>0</LExpSel>
       </OPTXL>
       <OPTFL>
-        <tvExp>1</tvExp>
+        <tvExp>0</tvExp>
         <tvExpOptDlg>0</tvExpOptDlg>
         <IsCurrentTarget>1</IsCurrentTarget>
       </OPTFL>
@@ -117,6 +117,11 @@
       <TargetDriverDllRegistry>
         <SetRegEntry>
           <Number>0</Number>
+          <Key>DLGUARM</Key>
+          <Name>јц5</Name>
+        </SetRegEntry>
+        <SetRegEntry>
+          <Number>0</Number>
           <Key>ARMRTXEVENTFLAGS</Key>
           <Name>-L70 -Z18 -C0 -M0 -T1</Name>
         </SetRegEntry>
@@ -152,14 +157,14 @@
           <Type>0</Type>
           <LineNumber>295</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134295056</Address>
+          <Address>134295020</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>&lt;1&gt;.\src\Menu\HandlersKeys.cpp</Filename>
+          <Filename>.\src\Menu\HandlersKeys.cpp</Filename>
           <ExecCommand></ExecCommand>
           <Expression>\\FPGA\src/Menu/HandlersKeys.cpp\295</Expression>
         </Bp>
@@ -168,32 +173,16 @@
           <Type>0</Type>
           <LineNumber>25</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134325026</Address>
+          <Address>134324990</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>&lt;1&gt;.\src\SCPI\SCPI.cpp</Filename>
+          <Filename>.\src\SCPI\SCPI.cpp</Filename>
           <ExecCommand></ExecCommand>
           <Expression>\\FPGA\src/SCPI/SCPI.cpp\25</Expression>
-        </Bp>
-        <Bp>
-          <Number>2</Number>
-          <Type>0</Type>
-          <LineNumber>56</LineNumber>
-          <EnabledFlag>1</EnabledFlag>
-          <Address>134256480</Address>
-          <ByteObject>0</ByteObject>
-          <HtxType>0</HtxType>
-          <ManyObjects>0</ManyObjects>
-          <SizeOfObject>0</SizeOfObject>
-          <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>1</BreakIfRCount>
-          <Filename>&lt;1&gt;.\src\libs\USBH\usbh_conf.cpp</Filename>
-          <ExecCommand></ExecCommand>
-          <Expression>\\FPGA\src/libs/USBH/usbh_conf.cpp\56</Expression>
         </Bp>
       </Breakpoint>
       <WatchWindow1>
