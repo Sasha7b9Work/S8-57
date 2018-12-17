@@ -23,6 +23,7 @@ static struct BitFieldFlashDrive
 
 
 USBH_HandleTypeDef FDrive::hUSB_Host;
+HCD_HandleTypeDef  FDrive::handleHCD;
 static FATFS USBDISKFatFs;
 static char USBDISKPath[4];
 static bool gFlashDriveIsConnected = false;

@@ -179,3 +179,28 @@ void HAL_PCD_MspInit(PCD_HandleTypeDef *)
 
     HAL_NVIC_EnableIRQ(OTG_FS_IRQn);
 }
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+// Инициалзиация флешки
+void HAL_HCD_MspInit(HCD_HandleTypeDef *)
+{
+    __GPIOB_CLK_ENABLE();
+    __USB_OTG_HS_CLK_ENABLE();
+    __HAL_RCC_USB_OTG_HS_CLK_ENABLE();
+    __SYSCFG_CLK_ENABLE();
+
+    GPIO_InitTypeDef isGPIO =
+    {
+        GPIO_PIN_14 | GPIO_PIN_15,
+        GPIO_MODE_AF_PP,
+        GPIO_NOPULL,
+        GPIO_SPEED_FAST,
+        GPIO_AF12_OTG_HS_FS
+    };
+
+    HAL_GPIO_Init(GPIOB, &isGPIO);
+
+    HAL_NVIC_SetPriority(OTG_HS_IRQn, 5, 1);
+
+    HAL_NVIC_EnableIRQ(OTG_HS_IRQn);
+}

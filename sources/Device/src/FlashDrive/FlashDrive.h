@@ -58,6 +58,8 @@ public:
     static bool AppendStringToFile(const char *string);
     
     static USBH_HandleTypeDef hUSB_Host;
+
+    static HCD_HandleTypeDef handleHCD;
 };
 
 

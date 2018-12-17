@@ -197,6 +197,8 @@
     <ClCompile Include="..\..\Device\src\libs\USBD\usbd_conf.cpp" />
     <ClCompile Include="..\..\Device\src\libs\USBD\usbd_core.cpp" />
     <ClCompile Include="..\..\Device\src\libs\USBD\usbd_desc.cpp" />
+    <ClCompile Include="..\..\Device\src\libs\USBH\usbh_conf.cpp" />
+    <ClCompile Include="..\..\Device\src\libs\USBH\usbh_diskio.cpp" />
     <ClCompile Include="..\..\Device\src\log.cpp" />
     <ClCompile Include="..\..\Device\src\main.cpp" />
     <ClCompile Include="..\..\Device\src\Menu\BufferButtons.cpp">
@@ -747,6 +749,8 @@
     <ClInclude Include="..\..\Device\src\libs\USBD\usbd_cdc_interface.h" />
     <ClInclude Include="..\..\Device\src\libs\USBD\usbd_conf.h" />
     <ClInclude Include="..\..\Device\src\libs\USBD\usbd_desc.h" />
+    <ClInclude Include="..\..\Device\src\libs\USBH\usbh_conf.h" />
+    <ClInclude Include="..\..\Device\src\libs\USBH\usbh_diskio.h" />
     <ClInclude Include="..\..\Device\src\log.h" />
     <ClInclude Include="..\..\Device\src\main.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>

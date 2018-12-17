@@ -576,6 +576,12 @@
     <ClCompile Include="..\..\Device\src\libs\USBD\usbd_core.cpp">
       <Filter>libs\USBD</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Device\src\libs\USBH\usbh_conf.cpp">
+      <Filter>libs\USBH</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\libs\USBH\usbh_diskio.cpp">
+      <Filter>libs\USBH</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Device\src\Display\Display.h">
@@ -1063,6 +1069,12 @@
     </ClInclude>
     <ClInclude Include="..\..\Device\src\libs\HAL\stm32f4xx_hal_conf.h">
       <Filter>libs\HAL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Device\src\libs\USBH\usbh_conf.h">
+      <Filter>libs\USBH</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Device\src\libs\USBH\usbh_diskio.h">
+      <Filter>libs\USBH</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

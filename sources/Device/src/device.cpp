@@ -3,6 +3,7 @@
 #include "defines.h"
 #include "Device.h"
 #include "Display/Display.h"
+#include "FlashDrive/FlashDrive.h"
 #include "FPGA/FPGA.h"
 #include "Menu/Menu.h"
 #include "Menu/Pages/Include/PageFunction.h"
@@ -56,6 +57,8 @@ void Device::Init()
 
     Multimeter::Init();
 
+    FDrive::Init();
+
     if (Menu::OpenedItem() == (Page *)PageFunction::PageMultimeter::pointer)
     {
         SetMode(Mode::Multimeter);
@@ -85,6 +88,8 @@ void Device::Update()
     Multimeter::Update();
 
     Menu::Update();
+
+    FDrive::Update();
 
     Decoder::Update();
 }
