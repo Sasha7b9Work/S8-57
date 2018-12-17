@@ -1,5 +1,5 @@
 #include "log.h"
-#include "Decoder.h"
+#include "DecoderPanel.h"
 #include "Hardware/FSMC.h"
 #include "Display/Display.h"
 #include "Display/Painter.h"
@@ -169,7 +169,18 @@ bool Decoder::SetColor(uint8 data)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static bool FuncScreen(uint8)
 {
-    Painter::SendScreenToDevice();
+    FSMC::SetNowMode(true);
+
+    uint8 data = 0;
+
+    for (int i = 0; i < 10; i++)
+    {
+        FSMC::WriteBuffer(&data, 1);
+        data++;
+    }
+
+    FSMC::SetNowMode(false);
+
     return true;
 }
 

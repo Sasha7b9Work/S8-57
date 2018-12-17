@@ -2,7 +2,7 @@
 #ifndef WIN32
 #include "defines.h"
 #include "Painter.h"
-#include "Keyboard/Decoder.h"
+#include "Keyboard/DecoderDevice.h"
 #include "Utils/Math.h"
 #include "Hardware/FSMC.h"
 #include "Hardware/Timer.h"

@@ -70,7 +70,7 @@ public:
     static int DrawFormText(int x, int y, Color color, pString text, ...);
 
     static int DrawStringInCenterRect(int x, int y, int width, int height, const char *text, Color color = Color::NUMBER);
-    /// ѕосылает копию изображени€ в устройство
+    /// ѕосылает строку изображени€ numString в устройство
     static void SendScreenToDevice();
 
 private:

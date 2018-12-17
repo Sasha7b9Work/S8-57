@@ -4,6 +4,7 @@
 
 float atof(char *);
 void *malloc(size_t);
+void memcpy(void *, void *, unsigned int);
 void free(void *);
 #define RAND_MAX 0x7fffffff
 

@@ -73,7 +73,7 @@
         <LExpSel>0</LExpSel>
       </OPTXL>
       <OPTFL>
-        <tvExp>0</tvExp>
+        <tvExp>1</tvExp>
         <tvExpOptDlg>0</tvExpOptDlg>
         <IsCurrentTarget>1</IsCurrentTarget>
       </OPTFL>
@@ -118,7 +118,7 @@
         <SetRegEntry>
           <Number>0</Number>
           <Key>DLGUARM</Key>
-          <Name>јц5</Name>
+          <Name>/</Name>
         </SetRegEntry>
         <SetRegEntry>
           <Number>0</Number>
@@ -157,7 +157,7 @@
           <Type>0</Type>
           <LineNumber>295</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134295020</Address>
+          <Address>134295068</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
@@ -173,7 +173,7 @@
           <Type>0</Type>
           <LineNumber>25</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134324990</Address>
+          <Address>134325042</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
@@ -298,7 +298,7 @@
 
   <Group>
     <GroupName>libs/CMSIS</GroupName>
-    <tvExp>0</tvExp>
+    <tvExp>1</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
@@ -2514,7 +2514,7 @@
 
   <Group>
     <GroupName>Hardware/stm32</GroupName>
-    <tvExp>1</tvExp>
+    <tvExp>0</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
@@ -2605,8 +2605,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\src\Keyboard\Decoder.cpp</PathWithFileName>
-      <FilenameWithoutPath>Decoder.cpp</FilenameWithoutPath>
+      <PathWithFileName>.\src\Keyboard\DecoderDevice.cpp</PathWithFileName>
+      <FilenameWithoutPath>DecoderDevice.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -2617,8 +2617,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\src\Keyboard\Decoder.h</PathWithFileName>
-      <FilenameWithoutPath>Decoder.h</FilenameWithoutPath>
+      <PathWithFileName>.\src\Keyboard\DecoderDevice.h</PathWithFileName>
+      <FilenameWithoutPath>DecoderDevice.h</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>

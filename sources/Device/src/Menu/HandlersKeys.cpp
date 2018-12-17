@@ -360,8 +360,10 @@ void Handlers::Memory()
 {
     if (MODE_BTN_MEMORY_IS_SAVE)
     {
-        if(event.type == TypePress::Press)
-        Painter::SaveScreenToDrive();
+        if (event.type == TypePress::Press)
+        {
+            Painter::SaveScreenToDrive();
+        }
     }
     else
     {

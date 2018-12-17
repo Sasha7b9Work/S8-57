@@ -29,3 +29,6 @@ struct Command
 
 
 #define TESTER_NUM_POINTS 240
+
+
+#define SIZE_STRING (320)

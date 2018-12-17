@@ -111,9 +111,6 @@
     <ClInclude Include="..\..\Panel\src\Hardware\Keyboard.h">
       <Filter>Hardware</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Panel\src\Utils\Decoder.h">
-      <Filter>Utils</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Panel\src\Settings\SettingsTypes.h">
       <Filter>Settings</Filter>
     </ClInclude>
@@ -210,6 +207,9 @@
     <ClInclude Include="..\..\Panel\src\Log.h">
       <Filter>src</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Panel\src\Utils\DecoderPanel.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\common\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal.c">
@@ -275,9 +275,6 @@
     <ClCompile Include="..\..\Panel\src\Hardware\Keyboard.cpp">
       <Filter>Hardware</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Panel\src\Utils\Decoder.cpp">
-      <Filter>Utils</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Panel\src\Display\Colors.cpp">
       <Filter>Display</Filter>
     </ClCompile>
@@ -316,6 +313,9 @@
     </ClCompile>
     <ClCompile Include="..\..\Panel\src\Log.cpp">
       <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Panel\src\Utils\DecoderPanel.cpp">
+      <Filter>Utils</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

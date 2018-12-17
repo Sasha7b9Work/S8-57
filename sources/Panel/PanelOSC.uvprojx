@@ -1417,14 +1417,14 @@
           <GroupName>Utils</GroupName>
           <Files>
             <File>
-              <FileName>Decoder.cpp</FileName>
+              <FileName>DecoderPanel.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\Utils\Decoder.cpp</FilePath>
+              <FilePath>.\src\Utils\DecoderPanel.cpp</FilePath>
             </File>
             <File>
-              <FileName>Decoder.h</FileName>
+              <FileName>DecoderPanel.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\src\Utils\Decoder.h</FilePath>
+              <FilePath>.\src\Utils\DecoderPanel.h</FilePath>
             </File>
             <File>
               <FileName>Math.cpp</FileName>

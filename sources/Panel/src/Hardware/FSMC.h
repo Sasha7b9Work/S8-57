@@ -5,6 +5,11 @@
 class FSMC
 {
 public:
+    /// ≈сли true, то идЄт непосредственна€ запись по шине - нельз€ использовать прерывани€ в клаиватуре
+    static void SetNowMode(bool nowMode);
+
+    static bool InNowMode();
+
     static void Init();
 
     static uint8 ReadByte();

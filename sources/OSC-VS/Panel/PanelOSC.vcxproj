@@ -164,7 +164,7 @@
     <ClInclude Include="..\..\Panel\src\Log.h" />
     <ClInclude Include="..\..\Panel\src\Settings\SettingsDisplay.h" />
     <ClInclude Include="..\..\Panel\src\Settings\SettingsTypes.h" />
-    <ClInclude Include="..\..\Panel\src\Utils\Decoder.h" />
+    <ClInclude Include="..\..\Panel\src\Utils\DecoderPanel.h" />
     <ClInclude Include="..\..\Panel\src\Utils\Math.h" />
   </ItemGroup>
   <ItemGroup>
@@ -240,7 +240,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug_stm32|Win32'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\Panel\src\Utils\Decoder.cpp" />
+    <ClCompile Include="..\..\Panel\src\Utils\DecoderPanel.cpp" />
     <ClCompile Include="..\..\Panel\src\Utils\Math.cpp" />
   </ItemGroup>
   <ItemGroup>

@@ -8,7 +8,7 @@
 #include "Menu/Menu.h"
 #include "Menu/Pages/Include/PageFunction.h"
 #include "Hardware/Timer.h"
-#include "Keyboard/Decoder.h"
+#include "Keyboard/DecoderDevice.h"
 #include "Hardware/FSMC.h"
 #include "Hardware/Timer.h"
 #include "Hardware/Sound.h"

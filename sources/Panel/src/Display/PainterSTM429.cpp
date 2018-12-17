@@ -1,16 +1,17 @@
 #include "Painter.h"
 #include "Hardware/CPU.h"
+#include "Hardware/FSMC.h"
 #include "Hardware/LTDC.h"
 #include "Utils/Math.h"
 #include "Colors.h"
 #include "Display/Display.h"
 #include <math.h>
+#include <string.h>
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /// Установленное в true значение означает, что скриншот нужно заслать в устройство
-static bool needSendToDevice;
-
+static int sendingString = -1;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void Painter::BeginScene(Color col)
@@ -46,12 +47,22 @@ void Painter::LoadPalette()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Painter::EndScene(void)
 {
-    LTDC_::ToggleBuffers();
-
-    if (needSendToDevice)
+    if (sendingString >= 0)                                               // Если нужно отправить картинку
     {
-        needSendToDevice = false;
+#define SIZE  (SIZE_STRING + 2)
+        uint8 buffer[SIZE] = { Command::Screen, (uint8)sendingString };
+        memcpy(buffer + 2, Display::GetBuffer() + sendingString * SIZE_STRING, SIZE_STRING);
+
+        FSMC::WriteBuffer(buffer, SIZE_STRING);
+
+        sendingString++;
+        if (sendingString == 120)
+        {
+            sendingString = -1;
+        }
     }
+
+    LTDC_::ToggleBuffers();
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -278,5 +289,5 @@ uint Painter::ReduceBrightness(uint colorValue, float newBrightness)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Painter::SendScreenToDevice()
 {
-    needSendToDevice = true;
+    sendingString = 0;
 }

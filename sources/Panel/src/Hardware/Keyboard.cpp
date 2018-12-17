@@ -1,7 +1,7 @@
 #include "Keyboard.h"
 #include "Display/Display.h"
 #include "Hardware/CPU.h"
-#include "Utils/Decoder.h"
+#include "Utils/DecoderPanel.h"
 #include "Hardware/FSMC.h"
 #include "Hardware/Timer.h"
 #include "Utils/Math.h"
@@ -137,6 +137,11 @@ void Keyboard::Init()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Keyboard::Update()
 {
+    if (FSMC::InNowMode())
+    {
+        return;
+    }
+
     if (!init)
     {
         return;

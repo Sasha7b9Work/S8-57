@@ -222,9 +222,6 @@
     <ClCompile Include="..\..\Device\src\Menu\MenuTriggers.cpp">
       <Filter>Menu</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Device\src\Keyboard\Decoder.cpp">
-      <Filter>Keyboard</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Device\src\Keyboard\Keyboard.cpp">
       <Filter>Keyboard</Filter>
     </ClCompile>
@@ -582,6 +579,9 @@
     <ClCompile Include="..\..\Device\src\libs\USBH\usbh_diskio.cpp">
       <Filter>libs\USBH</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Device\src\Keyboard\DecoderDevice.cpp">
+      <Filter>Keyboard</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Device\src\Display\Display.h">
@@ -721,9 +721,6 @@
     </ClInclude>
     <ClInclude Include="..\..\Device\src\Menu\MenuTriggers.h">
       <Filter>Menu</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Device\src\Keyboard\Decoder.h">
-      <Filter>Keyboard</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Device\src\Keyboard\Keyboard.h">
       <Filter>Keyboard</Filter>
@@ -1075,6 +1072,9 @@
     </ClInclude>
     <ClInclude Include="..\..\Device\src\libs\USBH\usbh_diskio.h">
       <Filter>libs\USBH</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Device\src\Keyboard\DecoderDevice.h">
+      <Filter>Keyboard</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

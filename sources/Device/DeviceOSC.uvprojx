@@ -1461,14 +1461,14 @@
           <GroupName>Keyboard</GroupName>
           <Files>
             <File>
-              <FileName>Decoder.cpp</FileName>
+              <FileName>DecoderDevice.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\Keyboard\Decoder.cpp</FilePath>
+              <FilePath>.\src\Keyboard\DecoderDevice.cpp</FilePath>
             </File>
             <File>
-              <FileName>Decoder.h</FileName>
+              <FileName>DecoderDevice.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\src\Keyboard\Decoder.h</FilePath>
+              <FilePath>.\src\Keyboard\DecoderDevice.h</FilePath>
             </File>
             <File>
               <FileName>Keyboard.cpp</FileName>

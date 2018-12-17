@@ -29,7 +29,7 @@
 #include "FPGA/FPGA.h"
 #include "FPGA/FPGAMath.h"
 
-#include "Keyboard/Decoder.h"
+#include "Keyboard/DecoderDevice.h"
 
 #include "Hardware/AT25160N.h"
 #include "Hardware/CPU.h"

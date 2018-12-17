@@ -3,7 +3,7 @@
 #include <stm32f4xx.h>
 #include "defines.h"
 #include "Message.h"
-#include "Keyboard/Decoder.h"
+#include "Keyboard/DecoderDevice.h"
 #include "FSMC.h"
 #include "Timer.h"
 #endif
@@ -289,6 +289,30 @@ LabelReadByte:
         goto LabelReadByte;
     }
     CONFIGURE_TO_WRITE_PANEL;
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+uint8 FSMC::ReadByteNow()
+{
+    uint8 result = 0;
+
+    CONFIGURE_TO_READ_PANEL;
+LabelReadByte:
+    NE4_RESET;
+    while (PAN_READY_TRANSMIT) {};
+    if (PAN_RECIEVE_TRANSMIT_CONFIRM)
+    {
+        result = GetOutData();
+        NE4_SET;
+        while (PAN_RECIEVE_TRANSMIT_CONFIRM) {};
+    }
+    if (PAN_READY_TRANSMIT)
+    {
+        goto LabelReadByte;
+    }
+    CONFIGURE_TO_WRITE_PANEL;
+
+    return result;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

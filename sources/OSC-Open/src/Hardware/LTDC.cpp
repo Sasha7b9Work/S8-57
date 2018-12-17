@@ -185,7 +185,7 @@ void LTDC_::ToggleBuffers()
         {
             if (HAL_DMA2D_Start(&hDMA2D, backBuffer, frontBuffer, BUFFER_WIDTH, BUFFER_HEIGHT) == HAL_OK)
             {
-                HAL_DMA2D_PollForTransfer(&hDMA2D, 20);
+                HAL_DMA2D_PollForTransfer(&hDMA2D, 1);
             }
         }
     }
