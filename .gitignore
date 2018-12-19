@@ -1,27 +1,9 @@
-*.bak 
-*.dll
-*.bin
-*.cof
-*.err
-*.hex
 *.out
-*.sta
-*.suo
-*.sym
-*.tmp
-*.tre
-*.lib
-*.*pdb
-*.uvgui*
-*.dat
-JLink*
-*.pch*
-*.obj
-archive.zip
+
+JLinkLog.txt
+JLinkSettings.ini
 
 doc/doxygen/OSC/*
-
-sources/.vs/*
 
 sources/Device/DebugConfig/*
 sources/Device/Listings/*
@@ -31,19 +13,7 @@ sources/Panel/DebugConfig/*
 sources/Panel/Listings/*
 sources/Panel/Objects/*
 
-sources/OSC-VS/Device/Debug/*
-sources/OSC-VS/Panel/Debug/*
+sources/VS/OSC/Device/Debug/*
 
-sources/OSC-Open/Objects/*
-sources/OSC-Open/DebugConfig/*
-sources/OSC-Open/Listings/*
-
-sources/OSC-Open-VS/Debug/*
-
-sources/OSC-VS/Device/x64/*
-sources/OSC-VS/Panel/x64/*
-
-sources/ThirdParty/wxWidgets/docs/*
-
-sources/OSC-VS/Device/Debug_stm32/*
-sources/OSC-VS/Panel/Debug_stm32/*
+sources/VS/ThirdParty/SDL2/lib/*
+sources/VS/ThirdParty/wxWidgets/lib/vc_lib/*
