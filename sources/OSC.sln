@@ -19,18 +19,13 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Panel", "OSC-VS\Panel\Panel
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
-		Debug|stm32 = Debug|stm32
-		Debug|x86 = Debug|x86
+		Debug|win32 = Debug|win32
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{C23F96B0-1550-4A0F-8E49-0DC211BCED2C}.Debug|stm32.ActiveCfg = Debug_stm32|Win32
-		{C23F96B0-1550-4A0F-8E49-0DC211BCED2C}.Debug|stm32.Build.0 = Debug_stm32|Win32
-		{C23F96B0-1550-4A0F-8E49-0DC211BCED2C}.Debug|x86.ActiveCfg = Debug_stm32|Win32
-		{C23F96B0-1550-4A0F-8E49-0DC211BCED2C}.Debug|x86.Build.0 = Debug|Win32
-		{69B40DED-EDDE-4D55-B919-DB2780BAAD68}.Debug|stm32.ActiveCfg = Debug_stm32|Win32
-		{69B40DED-EDDE-4D55-B919-DB2780BAAD68}.Debug|stm32.Build.0 = Debug_stm32|Win32
-		{69B40DED-EDDE-4D55-B919-DB2780BAAD68}.Debug|x86.ActiveCfg = Debug_stm32|Win32
-		{69B40DED-EDDE-4D55-B919-DB2780BAAD68}.Debug|x86.Build.0 = Debug|Win32
+		{C23F96B0-1550-4A0F-8E49-0DC211BCED2C}.Debug|win32.ActiveCfg = Debug_stm32|Win32
+		{C23F96B0-1550-4A0F-8E49-0DC211BCED2C}.Debug|win32.Build.0 = Debug_stm32|Win32
+		{69B40DED-EDDE-4D55-B919-DB2780BAAD68}.Debug|win32.ActiveCfg = Debug_stm32|Win32
+		{69B40DED-EDDE-4D55-B919-DB2780BAAD68}.Debug|win32.Build.0 = Debug_stm32|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
