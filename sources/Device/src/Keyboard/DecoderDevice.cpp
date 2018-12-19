@@ -142,7 +142,7 @@ static bool FuncScreen(uint8 data)
 {
     static uint8 numString = 0;
 
-    static uint8 buffer[SIZE_STRING];
+    static uint8 buff[SIZE_STRING];
 
     if (step == 0)
     {
