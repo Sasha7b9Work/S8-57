@@ -13,7 +13,6 @@ sources/Panel/DebugConfig/*
 sources/Panel/Listings/*
 sources/Panel/Objects/*
 
-sources/VS/OSC/Device/Debug/*
+sources/VS/.vs/*
 
-sources/VS/ThirdParty/SDL2/lib/*
-sources/VS/ThirdParty/wxWidgets/lib/vc_lib/*
+sources/VS/Device56/Debug/*
