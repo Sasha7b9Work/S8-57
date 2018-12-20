@@ -19,3 +19,5 @@ sources/VS/Debug/*
 sources/VS/Device56/Debug/*
 sources/VS/Panel56/Debug/*
 sources/VS/Device56-win32/Debug/*
+
+sources/VS/ThirdParty/wxWidgets/lib/vc_lib/*
