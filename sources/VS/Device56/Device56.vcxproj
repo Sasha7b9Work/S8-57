@@ -22,14 +22,104 @@
     <ClCompile Include="..\..\Device\src\Display\Console.cpp" />
     <ClCompile Include="..\..\Device\src\Display\Display.cpp" />
     <ClCompile Include="..\..\Device\src\Display\DisplayPrimitives.cpp" />
+    <ClCompile Include="..\..\Device\src\Display\Font\Font.cpp" />
     <ClCompile Include="..\..\Device\src\Display\Grid.cpp" />
     <ClCompile Include="..\..\Device\src\Display\Painter.cpp" />
     <ClCompile Include="..\..\Device\src\Display\PainterMem.cpp" />
     <ClCompile Include="..\..\Device\src\Display\Painter_437.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="..\..\Device\src\FlashDrive\FileManager.cpp" />
+    <ClCompile Include="..\..\Device\src\FlashDrive\FlashDrive.cpp" />
+    <ClCompile Include="..\..\Device\src\FPGA\AD9286.cpp" />
+    <ClCompile Include="..\..\Device\src\FPGA\FPGA.cpp" />
+    <ClCompile Include="..\..\Device\src\FPGA\FPGAMath.cpp" />
+    <ClCompile Include="..\..\Device\src\FPGA\FPGA_437.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\FPGA\RShift.cpp" />
+    <ClCompile Include="..\..\Device\src\FPGA\TrigLev.cpp" />
+    <ClCompile Include="..\..\Device\src\FPGA\TShift.cpp" />
+    <ClCompile Include="..\..\Device\src\Hardware\AT25160N.cpp" />
+    <ClCompile Include="..\..\Device\src\Hardware\CPU.cpp" />
+    <ClCompile Include="..\..\Device\src\Hardware\CPU_IT.cpp" />
+    <ClCompile Include="..\..\Device\src\Hardware\EEPROM.cpp" />
+    <ClCompile Include="..\..\Device\src\Hardware\EEPROM_437.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Hardware\FSMC.cpp" />
+    <ClCompile Include="..\..\Device\src\Hardware\FSMC_437.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Hardware\GPIO.cpp" />
+    <ClCompile Include="..\..\Device\src\Hardware\Hardware.cpp" />
+    <ClCompile Include="..\..\Device\src\Hardware\Sound.cpp" />
+    <ClCompile Include="..\..\Device\src\Hardware\stm32\stm32.cpp" />
+    <ClCompile Include="..\..\Device\src\Hardware\stm32\stm437.cpp" />
+    <ClCompile Include="..\..\Device\src\Hardware\stm32\Timer4XX.cpp" />
+    <ClCompile Include="..\..\Device\src\Hardware\Timer.cpp" />
+    <ClCompile Include="..\..\Device\src\Hardware\Timer_437.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Hardware\VCP.cpp" />
+    <ClCompile Include="..\..\Device\src\Keyboard\DecoderDevice.cpp" />
+    <ClCompile Include="..\..\Device\src\Keyboard\Keyboard.cpp" />
     <ClCompile Include="..\..\Device\src\log.cpp" />
     <ClCompile Include="..\..\Device\src\main.cpp" />
+    <ClCompile Include="..\..\Device\src\Menu\BufferButtons.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Menu\HandlersKeys.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Menu\Menu.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Menu\MenuItems.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Menu\MenuItemsGraphics.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Menu\MenuItemsLogic.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Menu\MenuTriggers.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Menu\Pages\Definition.cpp" />
+    <ClCompile Include="..\..\Device\src\Menu\Pages\PageChannels.cpp" />
+    <ClCompile Include="..\..\Device\src\Menu\Pages\PageDebug\PageDebug.cpp" />
+    <ClCompile Include="..\..\Device\src\Menu\Pages\PageDebug\PageDebug_Console.cpp" />
+    <ClCompile Include="..\..\Device\src\Menu\Pages\PageDebug\PageDebug_Rand.cpp" />
+    <ClCompile Include="..\..\Device\src\Menu\Pages\PageDisplay\PageDisplay.cpp" />
+    <ClCompile Include="..\..\Device\src\Menu\Pages\PageDisplay\PageDisplay_Accumulation.cpp" />
+    <ClCompile Include="..\..\Device\src\Menu\Pages\PageDisplay\PageDisplay_Average.cpp" />
+    <ClCompile Include="..\..\Device\src\Menu\Pages\PageDisplay\PageDisplay_Grid.cpp" />
+    <ClCompile Include="..\..\Device\src\Menu\Pages\PageDisplay\PageDisplay_Settings.cpp" />
+    <ClCompile Include="..\..\Device\src\Menu\Pages\PageDisplay\PageDisplay_Settings_Colors.cpp" />
+    <ClCompile Include="..\..\Device\src\Menu\Pages\PageFunction\PageFunction.cpp" />
+    <ClCompile Include="..\..\Device\src\Menu\Pages\PageFunction\PageFunction_FFT.cpp" />
+    <ClCompile Include="..\..\Device\src\Menu\Pages\PageFunction\PageFunction_FrequencyCounter.cpp" />
+    <ClCompile Include="..\..\Device\src\Menu\Pages\PageFunction\PageFunction_Multimeter.cpp" />
+    <ClCompile Include="..\..\Device\src\Menu\Pages\PageFunction\PageFunction_Recorder.cpp" />
+    <ClCompile Include="..\..\Device\src\Menu\Pages\PageFunction\PageFunction_Recorder_Play.cpp" />
+    <ClCompile Include="..\..\Device\src\Menu\Pages\PageFunction\PageFunction_Recorder_Record.cpp" />
+    <ClCompile Include="..\..\Device\src\Menu\Pages\PageFunction\PageFunction_Recorder_Source.cpp" />
+    <ClCompile Include="..\..\Device\src\Menu\Pages\PageFunction\PageFunction_Tester.cpp" />
+    <ClCompile Include="..\..\Device\src\Menu\Pages\PageHelp\HelpContent.cpp" />
+    <ClCompile Include="..\..\Device\src\Menu\Pages\PageHelp\PageHelp.cpp" />
+    <ClCompile Include="..\..\Device\src\Menu\Pages\PageMeasures\PageMeasures.cpp" />
+    <ClCompile Include="..\..\Device\src\Menu\Pages\PageMeasures\PageMeasures_Auto.cpp" />
+    <ClCompile Include="..\..\Device\src\Menu\Pages\PageMeasures\PageMeasures_Auto_Tune.cpp" />
+    <ClCompile Include="..\..\Device\src\Menu\Pages\PageMeasures\PageMeasures_Cursors.cpp" />
+    <ClCompile Include="..\..\Device\src\Menu\Pages\PageMeasures\PageMeasures_Cursors_Set.cpp" />
+    <ClCompile Include="..\..\Device\src\Menu\Pages\PageMemory\PageMemory.cpp" />
+    <ClCompile Include="..\..\Device\src\Menu\Pages\PageMemory\PageMemory_RAM.cpp" />
+    <ClCompile Include="..\..\Device\src\Menu\Pages\PageMemory\PageMemory_ROM.cpp" />
+    <ClCompile Include="..\..\Device\src\Menu\Pages\PageService\PageService.cpp" />
+    <ClCompile Include="..\..\Device\src\Menu\Pages\PageTime.cpp" />
+    <ClCompile Include="..\..\Device\src\Menu\Pages\PageTrig.cpp" />
     <ClCompile Include="..\..\Device\src\stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
     </ClCompile>
@@ -49,15 +139,65 @@
     <ClInclude Include="..\..\Device\src\Display\Display.h" />
     <ClInclude Include="..\..\Device\src\Display\DisplayPrimitives.h" />
     <ClInclude Include="..\..\Device\src\Display\DisplayTypes.h" />
+    <ClInclude Include="..\..\Device\src\Display\Font\Font.h" />
     <ClInclude Include="..\..\Device\src\Display\Grid.h" />
     <ClInclude Include="..\..\Device\src\Display\Painter.h" />
     <ClInclude Include="..\..\Device\src\Display\PainterMem.h" />
     <ClInclude Include="..\..\Device\src\Display\Symbols.h" />
+    <ClInclude Include="..\..\Device\src\FlashDrive\FileManager.h" />
+    <ClInclude Include="..\..\Device\src\FlashDrive\FlashDrive.h" />
+    <ClInclude Include="..\..\Device\src\FPGA\AD9286.h" />
+    <ClInclude Include="..\..\Device\src\FPGA\FPGA.h" />
+    <ClInclude Include="..\..\Device\src\FPGA\FPGAMath.h" />
+    <ClInclude Include="..\..\Device\src\FPGA\FPGATypes.h" />
+    <ClInclude Include="..\..\Device\src\FPGA\RShift.h" />
+    <ClInclude Include="..\..\Device\src\FPGA\TrigLev.h" />
+    <ClInclude Include="..\..\Device\src\FPGA\TShift.h" />
+    <ClInclude Include="..\..\Device\src\Hardware\AT25160N.h" />
+    <ClInclude Include="..\..\Device\src\Hardware\CPU.h" />
+    <ClInclude Include="..\..\Device\src\Hardware\EEPROM.h" />
+    <ClInclude Include="..\..\Device\src\Hardware\FSMC.h" />
+    <ClInclude Include="..\..\Device\src\Hardware\GPIO.h" />
+    <ClInclude Include="..\..\Device\src\Hardware\Hardware.h" />
+    <ClInclude Include="..\..\Device\src\Hardware\Sound.h" />
+    <ClInclude Include="..\..\Device\src\Hardware\stm32\stm32.h" />
+    <ClInclude Include="..\..\Device\src\Hardware\stm32\stm437.h" />
+    <ClInclude Include="..\..\Device\src\Hardware\stm32\Timer4XX.h" />
+    <ClInclude Include="..\..\Device\src\Hardware\Timer.h" />
+    <ClInclude Include="..\..\Device\src\Hardware\VCP.h" />
+    <ClInclude Include="..\..\Device\src\Keyboard\DecoderDevice.h" />
+    <ClInclude Include="..\..\Device\src\Keyboard\Keyboard.h" />
     <ClInclude Include="..\..\Device\src\log.h" />
     <ClInclude Include="..\..\Device\src\main.h" />
+    <ClInclude Include="..\..\Device\src\Menu\BufferButtons.h" />
+    <ClInclude Include="..\..\Device\src\Menu\HandlersKeys.h" />
+    <ClInclude Include="..\..\Device\src\Menu\Menu.h" />
+    <ClInclude Include="..\..\Device\src\Menu\MenuItems.h" />
+    <ClInclude Include="..\..\Device\src\Menu\MenuItemsAdd.h" />
+    <ClInclude Include="..\..\Device\src\Menu\MenuItemsDefs.h" />
+    <ClInclude Include="..\..\Device\src\Menu\MenuTriggers.h" />
+    <ClInclude Include="..\..\Device\src\Menu\Pages\Include\Definition.h" />
+    <ClInclude Include="..\..\Device\src\Menu\Pages\Include\HelpContent.h" />
+    <ClInclude Include="..\..\Device\src\Menu\Pages\Include\HelpContentPages.h" />
+    <ClInclude Include="..\..\Device\src\Menu\Pages\Include\PageChannels.h" />
+    <ClInclude Include="..\..\Device\src\Menu\Pages\Include\PageDebug.h" />
+    <ClInclude Include="..\..\Device\src\Menu\Pages\Include\PageDisplay.h" />
+    <ClInclude Include="..\..\Device\src\Menu\Pages\Include\PageFunction.h" />
+    <ClInclude Include="..\..\Device\src\Menu\Pages\Include\PageHelp.h" />
+    <ClInclude Include="..\..\Device\src\Menu\Pages\Include\PageMeasures.h" />
+    <ClInclude Include="..\..\Device\src\Menu\Pages\Include\PageMemory.h" />
+    <ClInclude Include="..\..\Device\src\Menu\Pages\Include\PageService.h" />
+    <ClInclude Include="..\..\Device\src\Menu\Pages\Include\PageTime.h" />
+    <ClInclude Include="..\..\Device\src\Menu\Pages\Include\PageTrig.h" />
     <ClInclude Include="..\..\Device\src\object.h" />
     <ClInclude Include="..\..\Device\src\stdafx.h" />
     <ClInclude Include="..\..\Device\src\tables.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\Device\src\Display\Font\font5.inc" />
+    <None Include="..\..\Device\src\Display\Font\font8.inc" />
+    <None Include="..\..\Device\src\Display\Font\fontUGO.inc" />
+    <None Include="..\..\Device\src\Display\Font\fontUGO2.inc" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
@@ -105,11 +245,12 @@
       <WarningLevel>EnableAllWarnings</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;STM32F437xx;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;STM32F437xx;OLD_RECORDER;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
       <DisableSpecificWarnings>
       </DisableSpecificWarnings>
+      <ExceptionHandling>false</ExceptionHandling>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

@@ -13,6 +13,54 @@
     <Filter Include="Display">
       <UniqueIdentifier>{1757d0a7-8c43-4887-ada1-73cfcd9a67a2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Display\Font">
+      <UniqueIdentifier>{61d8fb81-0f7b-4826-afc8-a2e85915ec07}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FlashDrive">
+      <UniqueIdentifier>{1329665e-51df-42ed-a923-5850963791b5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FPGA">
+      <UniqueIdentifier>{a118cd8d-5a26-4fd8-8bcf-10eebc6e7576}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Hardware">
+      <UniqueIdentifier>{8ab25778-30d1-43c0-9502-ee42c5c736e3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Hardware\stm32">
+      <UniqueIdentifier>{7f286dba-7427-4095-b152-f20cd478873c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Keyboard">
+      <UniqueIdentifier>{62780a7a-16ac-4654-b68c-9a6595972747}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Menu">
+      <UniqueIdentifier>{a5d554dd-0f57-4ea8-99a8-12d462a3bd3a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Menu\Pages">
+      <UniqueIdentifier>{540e73d0-6b14-4626-aee8-a563f035ae4a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Menu\Pages\Include">
+      <UniqueIdentifier>{7520334b-94a3-496b-8cd6-7f8f0f637904}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Menu\Pages\PageDebug">
+      <UniqueIdentifier>{bc95bf67-30da-467f-8918-0b048fab04c6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Menu\Pages\PageDisplay">
+      <UniqueIdentifier>{be98c33f-7330-487b-8023-a1686a1f1fb5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Menu\Pages\PageFunction">
+      <UniqueIdentifier>{b819b453-31bb-4d04-8fff-cf704ef0d675}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Menu\Pages\PageHelp">
+      <UniqueIdentifier>{23a48d4b-79ac-472b-b6d7-edbc97b349cd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Menu\Pages\PageMeasures">
+      <UniqueIdentifier>{dabee29f-3437-422f-8eda-3a1e8a70f632}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Menu\Pages\PageMemory">
+      <UniqueIdentifier>{7759e74d-0802-4d0a-942a-18d93fe7b7a1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Menu\Pages\PageService">
+      <UniqueIdentifier>{393ce8ed-d776-4953-827e-0305795bae5b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Device\src\defines.cpp">
@@ -71,6 +119,210 @@
     </ClCompile>
     <ClCompile Include="..\..\Device\src\Display\PainterMem.cpp">
       <Filter>Display</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Display\Font\Font.cpp">
+      <Filter>Display\Font</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\FlashDrive\FileManager.cpp">
+      <Filter>FlashDrive</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\FlashDrive\FlashDrive.cpp">
+      <Filter>FlashDrive</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\FPGA\AD9286.cpp">
+      <Filter>FPGA</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\FPGA\FPGA.cpp">
+      <Filter>FPGA</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\FPGA\FPGA_437.cpp">
+      <Filter>FPGA</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\FPGA\FPGAMath.cpp">
+      <Filter>FPGA</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\FPGA\RShift.cpp">
+      <Filter>FPGA</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\FPGA\TrigLev.cpp">
+      <Filter>FPGA</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\FPGA\TShift.cpp">
+      <Filter>FPGA</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Hardware\AT25160N.cpp">
+      <Filter>Hardware</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Hardware\CPU.cpp">
+      <Filter>Hardware</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Hardware\CPU_IT.cpp">
+      <Filter>Hardware</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Hardware\EEPROM.cpp">
+      <Filter>Hardware</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Hardware\EEPROM_437.cpp">
+      <Filter>Hardware</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Hardware\FSMC.cpp">
+      <Filter>Hardware</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Hardware\FSMC_437.cpp">
+      <Filter>Hardware</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Hardware\GPIO.cpp">
+      <Filter>Hardware</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Hardware\Hardware.cpp">
+      <Filter>Hardware</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Hardware\Sound.cpp">
+      <Filter>Hardware</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Hardware\Timer.cpp">
+      <Filter>Hardware</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Hardware\Timer_437.cpp">
+      <Filter>Hardware</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Hardware\VCP.cpp">
+      <Filter>Hardware</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Hardware\stm32\stm32.cpp">
+      <Filter>Hardware\stm32</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Hardware\stm32\stm437.cpp">
+      <Filter>Hardware\stm32</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Hardware\stm32\Timer4XX.cpp">
+      <Filter>Hardware\stm32</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Keyboard\DecoderDevice.cpp">
+      <Filter>Keyboard</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Keyboard\Keyboard.cpp">
+      <Filter>Keyboard</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Menu\BufferButtons.cpp">
+      <Filter>Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Menu\HandlersKeys.cpp">
+      <Filter>Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Menu\Menu.cpp">
+      <Filter>Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Menu\MenuItems.cpp">
+      <Filter>Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Menu\MenuItemsGraphics.cpp">
+      <Filter>Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Menu\MenuItemsLogic.cpp">
+      <Filter>Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Menu\MenuTriggers.cpp">
+      <Filter>Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Menu\Pages\Definition.cpp">
+      <Filter>Menu\Pages</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Menu\Pages\PageChannels.cpp">
+      <Filter>Menu\Pages</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Menu\Pages\PageTime.cpp">
+      <Filter>Menu\Pages</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Menu\Pages\PageTrig.cpp">
+      <Filter>Menu\Pages</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Menu\Pages\PageDebug\PageDebug.cpp">
+      <Filter>Menu\Pages\PageDebug</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Menu\Pages\PageDebug\PageDebug_Console.cpp">
+      <Filter>Menu\Pages\PageDebug</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Menu\Pages\PageDebug\PageDebug_Rand.cpp">
+      <Filter>Menu\Pages\PageDebug</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Menu\Pages\PageDisplay\PageDisplay.cpp">
+      <Filter>Menu\Pages\PageDisplay</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Menu\Pages\PageDisplay\PageDisplay_Accumulation.cpp">
+      <Filter>Menu\Pages\PageDisplay</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Menu\Pages\PageDisplay\PageDisplay_Average.cpp">
+      <Filter>Menu\Pages\PageDisplay</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Menu\Pages\PageDisplay\PageDisplay_Grid.cpp">
+      <Filter>Menu\Pages\PageDisplay</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Menu\Pages\PageDisplay\PageDisplay_Settings.cpp">
+      <Filter>Menu\Pages\PageDisplay</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Menu\Pages\PageDisplay\PageDisplay_Settings_Colors.cpp">
+      <Filter>Menu\Pages\PageDisplay</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Menu\Pages\PageFunction\PageFunction.cpp">
+      <Filter>Menu\Pages\PageFunction</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Menu\Pages\PageFunction\PageFunction_FFT.cpp">
+      <Filter>Menu\Pages\PageFunction</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Menu\Pages\PageFunction\PageFunction_FrequencyCounter.cpp">
+      <Filter>Menu\Pages\PageFunction</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Menu\Pages\PageFunction\PageFunction_Multimeter.cpp">
+      <Filter>Menu\Pages\PageFunction</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Menu\Pages\PageFunction\PageFunction_Recorder.cpp">
+      <Filter>Menu\Pages\PageFunction</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Menu\Pages\PageFunction\PageFunction_Recorder_Play.cpp">
+      <Filter>Menu\Pages\PageFunction</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Menu\Pages\PageFunction\PageFunction_Recorder_Record.cpp">
+      <Filter>Menu\Pages\PageFunction</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Menu\Pages\PageFunction\PageFunction_Recorder_Source.cpp">
+      <Filter>Menu\Pages\PageFunction</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Menu\Pages\PageFunction\PageFunction_Tester.cpp">
+      <Filter>Menu\Pages\PageFunction</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Menu\Pages\PageHelp\HelpContent.cpp">
+      <Filter>Menu\Pages\PageHelp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Menu\Pages\PageHelp\PageHelp.cpp">
+      <Filter>Menu\Pages\PageHelp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Menu\Pages\PageMeasures\PageMeasures.cpp">
+      <Filter>Menu\Pages\PageMeasures</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Menu\Pages\PageMeasures\PageMeasures_Auto.cpp">
+      <Filter>Menu\Pages\PageMeasures</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Menu\Pages\PageMeasures\PageMeasures_Auto_Tune.cpp">
+      <Filter>Menu\Pages\PageMeasures</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Menu\Pages\PageMeasures\PageMeasures_Cursors.cpp">
+      <Filter>Menu\Pages\PageMeasures</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Menu\Pages\PageMeasures\PageMeasures_Cursors_Set.cpp">
+      <Filter>Menu\Pages\PageMeasures</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Menu\Pages\PageMemory\PageMemory.cpp">
+      <Filter>Menu\Pages\PageMemory</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Menu\Pages\PageMemory\PageMemory_RAM.cpp">
+      <Filter>Menu\Pages\PageMemory</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Menu\Pages\PageMemory\PageMemory_ROM.cpp">
+      <Filter>Menu\Pages\PageMemory</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Menu\Pages\PageService\PageService.cpp">
+      <Filter>Menu\Pages\PageService</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -140,5 +392,151 @@
     <ClInclude Include="..\..\Device\src\Display\Symbols.h">
       <Filter>Display</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Device\src\Display\Font\Font.h">
+      <Filter>Display\Font</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Device\src\FlashDrive\FileManager.h">
+      <Filter>FlashDrive</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Device\src\FlashDrive\FlashDrive.h">
+      <Filter>FlashDrive</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Device\src\FPGA\AD9286.h">
+      <Filter>FPGA</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Device\src\FPGA\FPGA.h">
+      <Filter>FPGA</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Device\src\FPGA\FPGAMath.h">
+      <Filter>FPGA</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Device\src\FPGA\FPGATypes.h">
+      <Filter>FPGA</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Device\src\FPGA\RShift.h">
+      <Filter>FPGA</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Device\src\FPGA\TrigLev.h">
+      <Filter>FPGA</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Device\src\FPGA\TShift.h">
+      <Filter>FPGA</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Device\src\Hardware\AT25160N.h">
+      <Filter>Hardware</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Device\src\Hardware\CPU.h">
+      <Filter>Hardware</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Device\src\Hardware\EEPROM.h">
+      <Filter>Hardware</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Device\src\Hardware\FSMC.h">
+      <Filter>Hardware</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Device\src\Hardware\GPIO.h">
+      <Filter>Hardware</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Device\src\Hardware\Hardware.h">
+      <Filter>Hardware</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Device\src\Hardware\Sound.h">
+      <Filter>Hardware</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Device\src\Hardware\Timer.h">
+      <Filter>Hardware</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Device\src\Hardware\VCP.h">
+      <Filter>Hardware</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Device\src\Hardware\stm32\stm32.h">
+      <Filter>Hardware\stm32</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Device\src\Hardware\stm32\stm437.h">
+      <Filter>Hardware\stm32</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Device\src\Hardware\stm32\Timer4XX.h">
+      <Filter>Hardware\stm32</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Device\src\Keyboard\DecoderDevice.h">
+      <Filter>Keyboard</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Device\src\Keyboard\Keyboard.h">
+      <Filter>Keyboard</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Device\src\Menu\BufferButtons.h">
+      <Filter>Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Device\src\Menu\HandlersKeys.h">
+      <Filter>Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Device\src\Menu\Menu.h">
+      <Filter>Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Device\src\Menu\MenuItems.h">
+      <Filter>Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Device\src\Menu\MenuItemsAdd.h">
+      <Filter>Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Device\src\Menu\MenuItemsDefs.h">
+      <Filter>Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Device\src\Menu\MenuTriggers.h">
+      <Filter>Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Device\src\Menu\Pages\Include\Definition.h">
+      <Filter>Menu\Pages\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Device\src\Menu\Pages\Include\HelpContent.h">
+      <Filter>Menu\Pages\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Device\src\Menu\Pages\Include\HelpContentPages.h">
+      <Filter>Menu\Pages\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Device\src\Menu\Pages\Include\PageChannels.h">
+      <Filter>Menu\Pages\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Device\src\Menu\Pages\Include\PageDebug.h">
+      <Filter>Menu\Pages\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Device\src\Menu\Pages\Include\PageDisplay.h">
+      <Filter>Menu\Pages\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Device\src\Menu\Pages\Include\PageFunction.h">
+      <Filter>Menu\Pages\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Device\src\Menu\Pages\Include\PageHelp.h">
+      <Filter>Menu\Pages\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Device\src\Menu\Pages\Include\PageMeasures.h">
+      <Filter>Menu\Pages\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Device\src\Menu\Pages\Include\PageMemory.h">
+      <Filter>Menu\Pages\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Device\src\Menu\Pages\Include\PageService.h">
+      <Filter>Menu\Pages\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Device\src\Menu\Pages\Include\PageTime.h">
+      <Filter>Menu\Pages\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Device\src\Menu\Pages\Include\PageTrig.h">
+      <Filter>Menu\Pages\Include</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\Device\src\Display\Font\font5.inc">
+      <Filter>Display\Font</Filter>
+    </None>
+    <None Include="..\..\Device\src\Display\Font\font8.inc">
+      <Filter>Display\Font</Filter>
+    </None>
+    <None Include="..\..\Device\src\Display\Font\fontUGO.inc">
+      <Filter>Display\Font</Filter>
+    </None>
+    <None Include="..\..\Device\src\Display\Font\fontUGO2.inc">
+      <Filter>Display\Font</Filter>
+    </None>
   </ItemGroup>
 </Project>

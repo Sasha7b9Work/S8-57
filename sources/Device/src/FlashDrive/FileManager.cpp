@@ -66,7 +66,7 @@ static void DrawLongString(int x, int y, char *string, bool hightlight)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void DrawHat(int x, int y, char *string, int num1, int num2)
+static void DrawHat(int x, int y, const char *string, int num1, int num2)
 {
     Painter::FillRegion(x - 1, y, WIDTH_COL + 9, RECS_ON_PAGE * 9 + 11, Color::BACK);
     String(string, num1, num2).Draw(x + 60, y, Color::FILL);
