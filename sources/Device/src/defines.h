@@ -31,11 +31,7 @@ typedef unsigned int   UINT;
 typedef unsigned char  uint8_t;
 typedef unsigned short uint16_t;
 typedef unsigned int   uint32_t;
-
-#ifndef _STM32
-#define TCHAR unsigned char
-#endif
-
+//#define TCHAR unsigned char
 #define __IO
 #endif
 

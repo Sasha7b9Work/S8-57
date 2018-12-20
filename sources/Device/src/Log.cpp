@@ -14,13 +14,13 @@
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void Log::Message(char *message)
+void Log::Message(const char *message)
 {
-    Console::AddString(message);
+    Console::AddString((char *)message);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Log::Message(char *file, int line, char *message)
+void Log::Message(const char *file, int line, char *message)
 {
     Console::AddString(String("%s %d %s", file, line, message).CString());
 }
