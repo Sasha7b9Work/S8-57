@@ -4,6 +4,13 @@
 
 #ifdef WIN32
 #define __attribute(x)
+#pragma warning(disable:4201)   // nonstandard extension used: nameless struct/union
+#pragma warning(disable:4514)   // unreferenced inline function has been removed
+#pragma warning(disable:4623)   // default constructor was implicitly defined as deleted
+#pragma warning(disable:4626)   // assignment operator was implicitly defined as deleted
+#pragma warning(disable:4820)   // ... bytes padding added after data member ...
+#pragma warning(disable:5027)   // move assignment operator was implicitly defined as deleted
+#pragma warning(disable:5045)   // Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
 #endif
 
 #define MODEL_RU "Осциллограф-мультиметр"

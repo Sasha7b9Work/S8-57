@@ -11,8 +11,23 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\common\Message.cpp" />
+    <ClCompile Include="..\..\Device\src\Data\DataBuffer.cpp" />
+    <ClCompile Include="..\..\Device\src\Data\DataSettings.cpp" />
+    <ClCompile Include="..\..\Device\src\Data\DataStorage.cpp" />
+    <ClCompile Include="..\..\Device\src\Data\Reader.cpp" />
     <ClCompile Include="..\..\Device\src\defines.cpp" />
     <ClCompile Include="..\..\Device\src\device.cpp" />
+    <ClCompile Include="..\..\Device\src\Display\Colors.cpp" />
+    <ClCompile Include="..\..\Device\src\Display\Console.cpp" />
+    <ClCompile Include="..\..\Device\src\Display\Display.cpp" />
+    <ClCompile Include="..\..\Device\src\Display\DisplayPrimitives.cpp" />
+    <ClCompile Include="..\..\Device\src\Display\Grid.cpp" />
+    <ClCompile Include="..\..\Device\src\Display\Painter.cpp" />
+    <ClCompile Include="..\..\Device\src\Display\PainterMem.cpp" />
+    <ClCompile Include="..\..\Device\src\Display\Painter_437.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="..\..\Device\src\log.cpp" />
     <ClCompile Include="..\..\Device\src\main.cpp" />
     <ClCompile Include="..\..\Device\src\stdafx.cpp">
@@ -21,8 +36,23 @@
     <ClCompile Include="..\..\Device\src\tables.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\common\Command.h" />
+    <ClInclude Include="..\..\common\Message.h" />
+    <ClInclude Include="..\..\Device\src\Data\DataBuffer.h" />
+    <ClInclude Include="..\..\Device\src\Data\DataSettings.h" />
+    <ClInclude Include="..\..\Device\src\Data\DataStorage.h" />
+    <ClInclude Include="..\..\Device\src\Data\Reader.h" />
     <ClInclude Include="..\..\Device\src\defines.h" />
     <ClInclude Include="..\..\Device\src\device.h" />
+    <ClInclude Include="..\..\Device\src\Display\Colors.h" />
+    <ClInclude Include="..\..\Device\src\Display\Console.h" />
+    <ClInclude Include="..\..\Device\src\Display\Display.h" />
+    <ClInclude Include="..\..\Device\src\Display\DisplayPrimitives.h" />
+    <ClInclude Include="..\..\Device\src\Display\DisplayTypes.h" />
+    <ClInclude Include="..\..\Device\src\Display\Grid.h" />
+    <ClInclude Include="..\..\Device\src\Display\Painter.h" />
+    <ClInclude Include="..\..\Device\src\Display\PainterMem.h" />
+    <ClInclude Include="..\..\Device\src\Display\Symbols.h" />
     <ClInclude Include="..\..\Device\src\log.h" />
     <ClInclude Include="..\..\Device\src\main.h" />
     <ClInclude Include="..\..\Device\src\object.h" />
@@ -72,12 +102,14 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <PrecompiledHeader>Use</PrecompiledHeader>
-      <WarningLevel>Level3</WarningLevel>
+      <WarningLevel>EnableAllWarnings</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;STM32F437xx;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
+      <DisableSpecificWarnings>
+      </DisableSpecificWarnings>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

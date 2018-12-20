@@ -4,6 +4,15 @@
     <Filter Include="src">
       <UniqueIdentifier>{3ac11334-3c61-4860-9ba2-45e1ff54eed6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="common">
+      <UniqueIdentifier>{be3ab5a3-138c-43df-8057-4828e9e87351}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Data">
+      <UniqueIdentifier>{af04bb33-db51-4ab4-8b55-0eb53bd424bf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Display">
+      <UniqueIdentifier>{1757d0a7-8c43-4887-ada1-73cfcd9a67a2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Device\src\defines.cpp">
@@ -23,6 +32,45 @@
     </ClCompile>
     <ClCompile Include="..\..\Device\src\tables.cpp">
       <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\Message.cpp">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Data\DataBuffer.cpp">
+      <Filter>Data</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Data\DataSettings.cpp">
+      <Filter>Data</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Data\DataStorage.cpp">
+      <Filter>Data</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Data\Reader.cpp">
+      <Filter>Data</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Display\Colors.cpp">
+      <Filter>Display</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Display\Console.cpp">
+      <Filter>Display</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Display\Display.cpp">
+      <Filter>Display</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Display\DisplayPrimitives.cpp">
+      <Filter>Display</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Display\Grid.cpp">
+      <Filter>Display</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Display\Painter.cpp">
+      <Filter>Display</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Display\Painter_437.cpp">
+      <Filter>Display</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Display\PainterMem.cpp">
+      <Filter>Display</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -46,6 +94,51 @@
     </ClInclude>
     <ClInclude Include="..\..\Device\src\tables.h">
       <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\Command.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\Message.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Device\src\Data\DataBuffer.h">
+      <Filter>Data</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Device\src\Data\DataSettings.h">
+      <Filter>Data</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Device\src\Data\DataStorage.h">
+      <Filter>Data</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Device\src\Data\Reader.h">
+      <Filter>Data</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Device\src\Display\Colors.h">
+      <Filter>Display</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Device\src\Display\Console.h">
+      <Filter>Display</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Device\src\Display\Display.h">
+      <Filter>Display</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Device\src\Display\DisplayPrimitives.h">
+      <Filter>Display</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Device\src\Display\DisplayTypes.h">
+      <Filter>Display</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Device\src\Display\Grid.h">
+      <Filter>Display</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Device\src\Display\Painter.h">
+      <Filter>Display</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Device\src\Display\PainterMem.h">
+      <Filter>Display</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Device\src\Display\Symbols.h">
+      <Filter>Display</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

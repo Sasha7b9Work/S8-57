@@ -17,18 +17,16 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #define NEED_SET_ORIENTATION    (bf.needSetOrientation)
 
-typedef struct
-{
-    Warning         warning;
-    bool            good;
-    uint8           notUsed[2];
-    char * const    message[2][3];
-} StructWarning;
-
-
 #define NU {0, 0}
 
-static const StructWarning warns[Warning::Number] =
+static struct StructWarning
+{
+    Warning             warning;
+    bool                good;
+    uint8               notUsed[2];
+    const char * const  message[2][3];
+}
+warns[Warning::Number] =
 {
     {Warning::LimitChan1_Volts, false, NU,           {{"ÏÐÅÄÅË ÊÀÍÀË 1 - ÂÎËÜÒ/ÄÅË"},                                            {"LIMIT CHANNEL 1 - VOLTS/DIV"}}},
     {Warning::LimitChan2_Volts, false, NU,           {{"ÏÐÅÄÅË ÊÀÍÀË 2 - ÂÎËÜÒ/ÄÅË"},                                            {"LIMIT CHANNEL 2 - VOLTS/DIV"}}},
@@ -201,7 +199,7 @@ void Display::ShowWarning(Warning::E warning)
     Painter::ResetFlash();
     for (int i = 2; i >= 0; i--)
     {
-        char *message = warns[warning].message[LANG][i];
+        const char *message = warns[warning].message[LANG][i];
         if (message)
         {
             ShowWarn(message);
