@@ -1,6 +1,5 @@
 *.out
 
-
 JLinkLog.txt
 JLinkSettings.ini
 
@@ -16,4 +15,5 @@ sources/Panel/Objects/*
 
 sources/VS/.vs/*
 
+sources/VS/Debug/*
 sources/VS/Device56/Debug/*
