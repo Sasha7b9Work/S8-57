@@ -15,7 +15,7 @@
 #define SIZE_BUFFER_LOG 200
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void Log::Write(TypeTrace type, char *format, ...)
+void Log::Write(TypeTrace type, const char *format, ...)
 {
     char buffer[SIZE_BUFFER_LOG];
     char *pointer = buffer;

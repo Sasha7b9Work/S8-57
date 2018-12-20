@@ -1,6 +1,6 @@
 #pragma once   
 
-#if defined(DEBUG) && !defined(MSVC)
+#if defined(DEBUG) && !defined(WIN32)
 #define LOG_WRITE(...)          Log::Write(TypeTrace_Info, __VA_ARGS__)
 #define LOG_ERROR(...)          Log::Write(TypeTrace_Error, __VA_ARGS__)
 #define LOG_WRITE_TRACE(...)    Log::Trace(TypeTrace_Info, __MODULE__, __FUNCTION__, __LINE__, __VA_ARGS__)
@@ -12,7 +12,7 @@
 #define LOG_TRACE               Log::Write(TypeTrace_Info, "%s : %d", __FILE__, __LINE__);
 #define ASSEERT(cond, ...)      if(cond)(LOG_ERROR_TRACE(__VA_ARGS__));
 #define ASSERT_RET(cond, ...)   if(cond) {LOG_ERROR_TRACE(__VA_ARGS__); return; }
-#elif defined(MSVC)
+#elif defined(WIN32)
 #define ASSERT_RET(cont, ...)
 #define LOG_ERROR_TRACE(...)
 #define LOG_WRITE(...)          Log::Write(TypeTrace_Info, __VA_ARGS__)
@@ -44,7 +44,7 @@ class Log
 {
 public:
     static void Trace(TypeTrace type, const char *module, const char *func, int numLine, char *format, ...);
-    static void Write(TypeTrace type, char *format, ...);
+    static void Write(TypeTrace type, const char *format, ...);
     static void DisconnectLoggerUSB();
     static void EnableLoggerUSB(bool enable);
     static int GetNumStrings();
