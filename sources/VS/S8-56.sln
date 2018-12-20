@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.28307.168
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Device56", "Device56\Device56.vcxproj", "{0498279A-EEBA-45F5-80E4-103C966831CC}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Panel56", "Panel56\Panel56.vcxproj", "{722394AE-1149-47C6-ABF2-125628F08E7B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
@@ -15,6 +17,10 @@ Global
 		{0498279A-EEBA-45F5-80E4-103C966831CC}.Debug|x86.Build.0 = Debug|Win32
 		{0498279A-EEBA-45F5-80E4-103C966831CC}.Release|x86.ActiveCfg = Release|Win32
 		{0498279A-EEBA-45F5-80E4-103C966831CC}.Release|x86.Build.0 = Release|Win32
+		{722394AE-1149-47C6-ABF2-125628F08E7B}.Debug|x86.ActiveCfg = Debug|Win32
+		{722394AE-1149-47C6-ABF2-125628F08E7B}.Debug|x86.Build.0 = Debug|Win32
+		{722394AE-1149-47C6-ABF2-125628F08E7B}.Release|x86.ActiveCfg = Release|Win32
+		{722394AE-1149-47C6-ABF2-125628F08E7B}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
