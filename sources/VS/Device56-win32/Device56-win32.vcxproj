@@ -166,28 +166,27 @@
     <ClCompile Include="..\..\Device\src\Utils\String.cpp" />
     <ClCompile Include="..\..\Device\src\Utils\StringUtils.cpp" />
     <ClCompile Include="..\..\Device\src\Utils\Values.cpp" />
+    <ClCompile Include="src\include\HAL\stm32f4xx_hal.cpp" />
+    <ClCompile Include="src\include\HAL\stm32f4xx_hal_adc.cpp" />
+    <ClCompile Include="src\include\HAL\stm32f4xx_hal_cortex.cpp" />
+    <ClCompile Include="src\include\HAL\stm32f4xx_hal_crc.cpp" />
+    <ClCompile Include="src\include\HAL\stm32f4xx_hal_dac.cpp" />
+    <ClCompile Include="src\include\HAL\stm32f4xx_hal_dma.cpp" />
+    <ClCompile Include="src\include\HAL\stm32f4xx_hal_flash.cpp" />
+    <ClCompile Include="src\include\HAL\stm32f4xx_hal_flash_ex.cpp" />
+    <ClCompile Include="src\include\HAL\stm32f4xx_hal_gpio.cpp" />
+    <ClCompile Include="src\include\HAL\stm32f4xx_hal_pcd.cpp" />
+    <ClCompile Include="src\include\HAL\stm32f4xx_hal_rcc.cpp" />
+    <ClCompile Include="src\include\HAL\stm32f4xx_hal_rtc.cpp" />
+    <ClCompile Include="src\include\HAL\stm32f4xx_hal_spi.cpp" />
+    <ClCompile Include="src\include\HAL\stm32f4xx_hal_tim.cpp" />
+    <ClCompile Include="src\include\HAL\stm32f4xx_hal_tim_ex.cpp" />
+    <ClCompile Include="src\include\HAL\stm32f4xx_hal_uart.cpp" />
+    <ClCompile Include="src\include\HAL\stm32f4xx_ll_fmc.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\common\Command.h" />
     <ClInclude Include="..\..\common\Message.h" />
-    <ClInclude Include="..\..\common\_VS\cmsis_armcc.h" />
-    <ClInclude Include="..\..\common\_VS\cmsis_armcc_V6.h" />
-    <ClInclude Include="..\..\common\_VS\core_cm4.h" />
-    <ClInclude Include="..\..\common\_VS\core_cmFunc.h" />
-    <ClInclude Include="..\..\common\_VS\core_cmInstr.h" />
-    <ClInclude Include="..\..\common\_VS\core_cmSimd.h" />
-    <ClInclude Include="..\..\common\_VS\ctype.h" />
-    <ClInclude Include="..\..\common\_VS\integer.h" />
-    <ClInclude Include="..\..\common\_VS\inttypes.h" />
-    <ClInclude Include="..\..\common\_VS\limits.h" />
-    <ClInclude Include="..\..\common\_VS\math.h" />
-    <ClInclude Include="..\..\common\_VS\stdarg.h" />
-    <ClInclude Include="..\..\common\_VS\stdint.h" />
-    <ClInclude Include="..\..\common\_VS\stdio.h" />
-    <ClInclude Include="..\..\common\_VS\stdlib.h" />
-    <ClInclude Include="..\..\common\_VS\string.h" />
-    <ClInclude Include="..\..\common\_VS\tchar.h" />
-    <ClInclude Include="..\..\common\_VS\windows.h" />
     <ClInclude Include="..\..\Device\src\Data\DataBuffer.h" />
     <ClInclude Include="..\..\Device\src\Data\DataSettings.h" />
     <ClInclude Include="..\..\Device\src\Data\DataStorage.h" />
@@ -227,6 +226,7 @@
     <ClInclude Include="..\..\Device\src\Hardware\VCP.h" />
     <ClInclude Include="..\..\Device\src\Keyboard\DecoderDevice.h" />
     <ClInclude Include="..\..\Device\src\Keyboard\Keyboard.h" />
+    <ClInclude Include="..\..\Device\src\libs\HAL\stm32f4xx_hal_conf.h" />
     <ClInclude Include="..\..\Device\src\log.h" />
     <ClInclude Include="..\..\Device\src\main.h" />
     <ClInclude Include="..\..\Device\src\Menu\BufferButtons.h" />
@@ -283,17 +283,38 @@
     <ClInclude Include="..\..\Device\src\Utils\tableslog.h" />
     <ClInclude Include="..\..\Device\src\Utils\TablesWindow.h" />
     <ClInclude Include="..\..\Device\src\Utils\Values.h" />
+    <ClInclude Include="src\include\HAL\stm32f4xx.h" />
+    <ClInclude Include="src\include\HAL\stm32f4xx_hal.h" />
+    <ClInclude Include="src\include\HAL\stm32f4xx_hal_adc.h" />
+    <ClInclude Include="src\include\HAL\stm32f4xx_hal_cortex.h" />
+    <ClInclude Include="src\include\HAL\stm32f4xx_hal_crc.h" />
+    <ClInclude Include="src\include\HAL\stm32f4xx_hal_dac.h" />
+    <ClInclude Include="src\include\HAL\stm32f4xx_hal_def.h" />
+    <ClInclude Include="src\include\HAL\stm32f4xx_hal_dma.h" />
+    <ClInclude Include="src\include\HAL\stm32f4xx_hal_flash.h" />
+    <ClInclude Include="src\include\HAL\stm32f4xx_hal_flash_ex.h" />
+    <ClInclude Include="src\include\HAL\stm32f4xx_hal_gpio.h" />
+    <ClInclude Include="src\include\HAL\stm32f4xx_hal_gpio_ex.h" />
+    <ClInclude Include="src\include\HAL\stm32f4xx_hal_hcd.h" />
+    <ClInclude Include="src\include\HAL\stm32f4xx_hal_nor.h" />
+    <ClInclude Include="src\include\HAL\stm32f4xx_hal_pcd.h" />
+    <ClInclude Include="src\include\HAL\stm32f4xx_hal_pwr.h" />
+    <ClInclude Include="src\include\HAL\stm32f4xx_hal_pwr_ex.h" />
+    <ClInclude Include="src\include\HAL\stm32f4xx_hal_rcc.h" />
+    <ClInclude Include="src\include\HAL\stm32f4xx_hal_rcc_ex.h" />
+    <ClInclude Include="src\include\HAL\stm32f4xx_hal_rtc.h" />
+    <ClInclude Include="src\include\HAL\stm32f4xx_hal_spi.h" />
+    <ClInclude Include="src\include\HAL\stm32f4xx_hal_sram.h" />
+    <ClInclude Include="src\include\HAL\stm32f4xx_hal_tim.h" />
+    <ClInclude Include="src\include\HAL\stm32f4xx_hal_tim_ex.h" />
+    <ClInclude Include="src\include\HAL\stm32f4xx_hal_uart.h" />
+    <ClInclude Include="src\include\HAL\stm32f4xx_ll_fmc.h" />
+    <ClInclude Include="src\include\HAL\stm32f4xx_ll_usb.h" />
+    <ClInclude Include="src\include\USBD\usbd_cdc.h" />
+    <ClInclude Include="src\include\USBD\usbd_core.h" />
+    <ClInclude Include="src\include\USBD\usbd_def.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\common\_VS\algorithm" />
-    <None Include="..\..\common\_VS\cctype" />
-    <None Include="..\..\common\_VS\climits" />
-    <None Include="..\..\common\_VS\cmath" />
-    <None Include="..\..\common\_VS\cstdarg" />
-    <None Include="..\..\common\_VS\cstdio" />
-    <None Include="..\..\common\_VS\cstdlib" />
-    <None Include="..\..\common\_VS\cstring" />
-    <None Include="..\..\common\_VS\limits" />
     <None Include="..\..\Device\src\Display\Font\font5.inc" />
     <None Include="..\..\Device\src\Display\Font\font8.inc" />
     <None Include="..\..\Device\src\Display\Font\fontUGO.inc" />
@@ -308,7 +329,7 @@
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
@@ -334,7 +355,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>..\..\common;..\..\common\_VS;..\..\common\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc;..\..\common\libs\STM32Cube_F4\Drivers\CMSIS\Device\ST\STM32F4xx\Include;..\..\common\libs\STM32Cube_F4\Drivers\CMSIS\Include;..\..\common\libs\STM32Cube_F4\Middlewares\Third_Party\FatFs\src;..\..\common\libs\STM32Cube_F4\Middlewares\ST\STM32_USB_Host_Library\Core\Inc;..\..\common\libs\STM32Cube_F4\Middlewares\ST\STM32_USB_Host_Library\Class\MSC\Inc;..\..\common\libs\STM32Cube_F4\Middlewares\ST\STM32_USB_Device_Library\Core\Inc;..\..\common\libs\STM32Cube_F4\Middlewares\ST\STM32_USB_Device_Library\Class\CDC\Inc;..\..\Device\src;..\..\Device\src\libs\HAL;..\..\Device\src\libs\FatFS;..\..\Device\src\libs\USBH;..\..\Device\src\libs\USBD</IncludePath>
+    <IncludePath>src\include\CMSIS;src\include\HAL;src\include\FatFS;src\include\USBD;src\include\USBH;..\..\common;..\..\Device\src;..\..\Device\src\libs\HAL;..\..\Device\src\libs\FatFS;..\..\Device\src\libs\USBH;..\..\Device\src\libs\USBD;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -345,12 +366,14 @@
       <WarningLevel>EnableAllWarnings</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;STM32F437xx;OLD_RECORDER;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;STM32F437xx;OLD_RECORDER;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
       <DisableSpecificWarnings>
       </DisableSpecificWarnings>
-      <ExceptionHandling>false</ExceptionHandling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <AdditionalOptions>-MP %(AdditionalOptions)</AdditionalOptions>
+      <BufferSecurityCheck>true</BufferSecurityCheck>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

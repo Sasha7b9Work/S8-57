@@ -351,6 +351,7 @@
       <DisableSpecificWarnings>
       </DisableSpecificWarnings>
       <ExceptionHandling>false</ExceptionHandling>
+      <AdditionalOptions>-MP %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

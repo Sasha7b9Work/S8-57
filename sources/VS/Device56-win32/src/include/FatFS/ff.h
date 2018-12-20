@@ -3,6 +3,9 @@
 #include "ffconf.h"
 
 
+#define TCHAR char
+
+
 #define	AM_RDO	0x01	/* Read only */
 #define	AM_HID	0x02	/* Hidden */
 #define	AM_SYS	0x04	/* System */
