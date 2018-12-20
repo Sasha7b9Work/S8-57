@@ -70,7 +70,7 @@ typedef char *(*pFuncPCFBPC)(float, bool, char*);
 
 typedef struct
 {
-    char        *name;
+    const char *name;
     pFuncFCh    FuncCalculate;
     pFuncPCFBPC FucnConvertate;
     bool        showSign;           ///< Если true, нужно показывать знак.
@@ -1316,7 +1316,7 @@ String Measure::Processing::GetStringMeasure(Measure::Type::E measure, Chan::E c
         return String("");
     }
     buffer[0] = '\0';
-    snprintf(buffer, 20, Chan(ch).IsA() ? "1: " : "2: ");
+    std::strcpy(buffer, Chan(ch).IsA() ? "1: " : "2: ");
     if(!isSet || values[measure].value[ch] == ERROR_VALUE_FLOAT)
     {
         std::strcat(buffer, "-.-");

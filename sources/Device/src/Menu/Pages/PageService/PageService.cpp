@@ -656,16 +656,7 @@ static void Information_Draw()
     String(DICT(DSoftware)).Draw(x, y);
     y += dY;
 
-#ifdef WIN32
-#pragma warning(push)
-#pragma warning(disable:4774)
-#endif
-
     sprintf(buffer, DICT(DVersion), NUM_VER);
-
-#ifdef WIN32
-#pragma warning(pop)
-#endif
 
     String(buffer).Draw(x, y);
     y += dY;

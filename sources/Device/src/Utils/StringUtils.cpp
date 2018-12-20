@@ -190,7 +190,7 @@ bool SU::EqualsZeroStrings(char *str1, char *str2)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-bool SU::EqualsStrings(uint8 *str1, char *str2, uint size)
+bool SU::EqualsStrings(uint8 *str1, const char * const str2, uint size)
 {
     return EqualsStrings((void *)str1, (void *)str2, size);
 }

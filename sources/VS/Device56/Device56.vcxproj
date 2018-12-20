@@ -120,14 +120,74 @@
     <ClCompile Include="..\..\Device\src\Menu\Pages\PageService\PageService.cpp" />
     <ClCompile Include="..\..\Device\src\Menu\Pages\PageTime.cpp" />
     <ClCompile Include="..\..\Device\src\Menu\Pages\PageTrig.cpp" />
+    <ClCompile Include="..\..\Device\src\Multimeter\Multimeter.cpp" />
+    <ClCompile Include="..\..\Device\src\Osci\BottomPart.cpp" />
+    <ClCompile Include="..\..\Device\src\Osci\Cursors.cpp" />
+    <ClCompile Include="..\..\Device\src\Osci\FrequencyCounter.cpp" />
+    <ClCompile Include="..\..\Device\src\Osci\HiPart.cpp" />
+    <ClCompile Include="..\..\Device\src\Osci\MemoryWindow.cpp" />
+    <ClCompile Include="..\..\Device\src\Osci\Osci.cpp" />
+    <ClCompile Include="..\..\Device\src\Osci\OsciGraphics.cpp" />
+    <ClCompile Include="..\..\Device\src\Osci\PainterData.cpp" />
+    <ClCompile Include="..\..\Device\src\Recorder\Recorder.cpp" />
+    <ClCompile Include="..\..\Device\src\SCPI\SCPI.cpp" />
+    <ClCompile Include="..\..\Device\src\Settings\Settings.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Settings\SettingsChannel.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Settings\SettingsDebug.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Settings\SettingsMemory.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Settings\SettingsTime.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Settings\SettingsTransformation.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="..\..\Device\src\stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="..\..\Device\src\tables.cpp" />
+    <ClCompile Include="..\..\Device\src\Tester\Tester.cpp" />
+    <ClCompile Include="..\..\Device\src\Tester\TesterGraphics.cpp" />
+    <ClCompile Include="..\..\Device\src\Utils\Buffer.cpp" />
+    <ClCompile Include="..\..\Device\src\Utils\CommonFunctions.cpp" />
+    <ClCompile Include="..\..\Device\src\Utils\Debug.cpp" />
+    <ClCompile Include="..\..\Device\src\Utils\Dictionary.cpp" />
+    <ClCompile Include="..\..\Device\src\Utils\Math.cpp" />
+    <ClCompile Include="..\..\Device\src\Utils\Measure.cpp" />
+    <ClCompile Include="..\..\Device\src\Utils\MeasureProcessing.cpp" />
+    <ClCompile Include="..\..\Device\src\Utils\Stack.cpp" />
+    <ClCompile Include="..\..\Device\src\Utils\String.cpp" />
+    <ClCompile Include="..\..\Device\src\Utils\StringUtils.cpp" />
+    <ClCompile Include="..\..\Device\src\Utils\Values.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\common\Command.h" />
     <ClInclude Include="..\..\common\Message.h" />
+    <ClInclude Include="..\..\common\_VS\cmsis_armcc.h" />
+    <ClInclude Include="..\..\common\_VS\cmsis_armcc_V6.h" />
+    <ClInclude Include="..\..\common\_VS\core_cm4.h" />
+    <ClInclude Include="..\..\common\_VS\core_cmFunc.h" />
+    <ClInclude Include="..\..\common\_VS\core_cmInstr.h" />
+    <ClInclude Include="..\..\common\_VS\core_cmSimd.h" />
+    <ClInclude Include="..\..\common\_VS\ctype.h" />
+    <ClInclude Include="..\..\common\_VS\integer.h" />
+    <ClInclude Include="..\..\common\_VS\inttypes.h" />
+    <ClInclude Include="..\..\common\_VS\limits.h" />
+    <ClInclude Include="..\..\common\_VS\math.h" />
+    <ClInclude Include="..\..\common\_VS\stdarg.h" />
+    <ClInclude Include="..\..\common\_VS\stdint.h" />
+    <ClInclude Include="..\..\common\_VS\stdio.h" />
+    <ClInclude Include="..\..\common\_VS\stdlib.h" />
+    <ClInclude Include="..\..\common\_VS\string.h" />
+    <ClInclude Include="..\..\common\_VS\tchar.h" />
+    <ClInclude Include="..\..\common\_VS\windows.h" />
     <ClInclude Include="..\..\Device\src\Data\DataBuffer.h" />
     <ClInclude Include="..\..\Device\src\Data\DataSettings.h" />
     <ClInclude Include="..\..\Device\src\Data\DataStorage.h" />
@@ -189,11 +249,51 @@
     <ClInclude Include="..\..\Device\src\Menu\Pages\Include\PageService.h" />
     <ClInclude Include="..\..\Device\src\Menu\Pages\Include\PageTime.h" />
     <ClInclude Include="..\..\Device\src\Menu\Pages\Include\PageTrig.h" />
+    <ClInclude Include="..\..\Device\src\Multimeter\Multimeter.h" />
     <ClInclude Include="..\..\Device\src\object.h" />
+    <ClInclude Include="..\..\Device\src\Osci\BottomPart.h" />
+    <ClInclude Include="..\..\Device\src\Osci\Cursors.h" />
+    <ClInclude Include="..\..\Device\src\Osci\FrequencyCounter.h" />
+    <ClInclude Include="..\..\Device\src\Osci\HiPart.h" />
+    <ClInclude Include="..\..\Device\src\Osci\MemoryWindow.h" />
+    <ClInclude Include="..\..\Device\src\Osci\Osci.h" />
+    <ClInclude Include="..\..\Device\src\Osci\PainterData.h" />
+    <ClInclude Include="..\..\Device\src\Recorder\Recorder.h" />
+    <ClInclude Include="..\..\Device\src\SCPI\SCPI.h" />
+    <ClInclude Include="..\..\Device\src\Settings\Settings.h" />
+    <ClInclude Include="..\..\Device\src\Settings\SettingsChannel.h" />
+    <ClInclude Include="..\..\Device\src\Settings\SettingsDebug.h" />
+    <ClInclude Include="..\..\Device\src\Settings\SettingsMath.h" />
+    <ClInclude Include="..\..\Device\src\Settings\SettingsMemory.h" />
+    <ClInclude Include="..\..\Device\src\Settings\SettingsNRST.h" />
+    <ClInclude Include="..\..\Device\src\Settings\SettingsService.h" />
+    <ClInclude Include="..\..\Device\src\Settings\SettingsTime.h" />
     <ClInclude Include="..\..\Device\src\stdafx.h" />
     <ClInclude Include="..\..\Device\src\tables.h" />
+    <ClInclude Include="..\..\Device\src\Tester\Tester.h" />
+    <ClInclude Include="..\..\Device\src\Utils\Buffer.h" />
+    <ClInclude Include="..\..\Device\src\Utils\CommonFunctions.h" />
+    <ClInclude Include="..\..\Device\src\Utils\Debug.h" />
+    <ClInclude Include="..\..\Device\src\Utils\Dictionary.h" />
+    <ClInclude Include="..\..\Device\src\Utils\Math.h" />
+    <ClInclude Include="..\..\Device\src\Utils\Measure.h" />
+    <ClInclude Include="..\..\Device\src\Utils\Stack.h" />
+    <ClInclude Include="..\..\Device\src\Utils\String.h" />
+    <ClInclude Include="..\..\Device\src\Utils\StringUtils.h" />
+    <ClInclude Include="..\..\Device\src\Utils\tableslog.h" />
+    <ClInclude Include="..\..\Device\src\Utils\TablesWindow.h" />
+    <ClInclude Include="..\..\Device\src\Utils\Values.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\..\common\_VS\algorithm" />
+    <None Include="..\..\common\_VS\cctype" />
+    <None Include="..\..\common\_VS\climits" />
+    <None Include="..\..\common\_VS\cmath" />
+    <None Include="..\..\common\_VS\cstdarg" />
+    <None Include="..\..\common\_VS\cstdio" />
+    <None Include="..\..\common\_VS\cstdlib" />
+    <None Include="..\..\common\_VS\cstring" />
+    <None Include="..\..\common\_VS\limits" />
     <None Include="..\..\Device\src\Display\Font\font5.inc" />
     <None Include="..\..\Device\src\Display\Font\font8.inc" />
     <None Include="..\..\Device\src\Display\Font\fontUGO.inc" />

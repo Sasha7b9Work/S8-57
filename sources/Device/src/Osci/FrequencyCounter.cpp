@@ -62,7 +62,7 @@ static int LowOrder(FrequencyCounter::FreqClc::E freqCLC, FrequencyCounter::Numb
 /// Преобразует 6 разрядов числа, хранящиеся в стеке, в текстовую строку периода. Младший значащий разряд хранится на вершине стека. order - его порядок
 static pString StackToString(Stack<uint> *stack, int order);
 /// Записывает 6 разрядов из стека stack в буфер buffer. Младший разряд на вершине стека. Точку ставить на point позиции, начиная с buffer[0]
-static void WriteStackToBuffer(Stack<uint> *stack, int point, char *suffix);
+static void WriteStackToBuffer(Stack<uint> *stack, int point, const char *suffix);
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -522,8 +522,8 @@ static pString StackToString(Stack<uint> *stack, int order)
     {
         int first;
         int second;
-        char *s1;
-        char *s2;
+        const char *s1;
+        const char *s2;
     }
     structs[] =
     {
@@ -559,7 +559,7 @@ static pString StackToString(Stack<uint> *stack, int order)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void WriteStackToBuffer(Stack<uint> *stack, int point, char *suffix)
+static void WriteStackToBuffer(Stack<uint> *stack, int point, const char *suffix)
 {
     for(int i = 6; i >= 0; i--)
     {

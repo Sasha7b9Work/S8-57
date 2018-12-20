@@ -61,6 +61,30 @@
     <Filter Include="Menu\Pages\PageService">
       <UniqueIdentifier>{393ce8ed-d776-4953-827e-0305795bae5b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Multimeter">
+      <UniqueIdentifier>{23d51961-b00f-4baa-abf9-e853db871e47}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Osci">
+      <UniqueIdentifier>{4e7a6e53-5569-4124-b631-4971405992a6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Recorder">
+      <UniqueIdentifier>{fc95c29d-4ca9-4033-a0f6-9f7fa784ccfa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Settings">
+      <UniqueIdentifier>{d31aed50-04ba-4920-acc3-9d443e424677}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tester">
+      <UniqueIdentifier>{6102cf15-2aab-4b0f-8984-6953e9e697fc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utils">
+      <UniqueIdentifier>{8f0beea4-3404-4e1b-b6c1-713ccb28ad68}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="_VS">
+      <UniqueIdentifier>{721fa5cf-ac48-42c9-afa1-745734c914e0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SCPI">
+      <UniqueIdentifier>{8b32c9a2-ed2d-4215-92b4-faaaf478ee54}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Device\src\defines.cpp">
@@ -324,6 +348,96 @@
     <ClCompile Include="..\..\Device\src\Menu\Pages\PageService\PageService.cpp">
       <Filter>Menu\Pages\PageService</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Device\src\Multimeter\Multimeter.cpp">
+      <Filter>Multimeter</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Osci\BottomPart.cpp">
+      <Filter>Osci</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Osci\Cursors.cpp">
+      <Filter>Osci</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Osci\FrequencyCounter.cpp">
+      <Filter>Osci</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Osci\HiPart.cpp">
+      <Filter>Osci</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Osci\MemoryWindow.cpp">
+      <Filter>Osci</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Osci\Osci.cpp">
+      <Filter>Osci</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Osci\OsciGraphics.cpp">
+      <Filter>Osci</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Osci\PainterData.cpp">
+      <Filter>Osci</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Recorder\Recorder.cpp">
+      <Filter>Recorder</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Settings\Settings.cpp">
+      <Filter>Settings</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Settings\SettingsChannel.cpp">
+      <Filter>Settings</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Settings\SettingsDebug.cpp">
+      <Filter>Settings</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Settings\SettingsMemory.cpp">
+      <Filter>Settings</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Settings\SettingsTime.cpp">
+      <Filter>Settings</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Settings\SettingsTransformation.cpp">
+      <Filter>Settings</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Tester\Tester.cpp">
+      <Filter>Tester</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Tester\TesterGraphics.cpp">
+      <Filter>Tester</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Utils\Buffer.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Utils\CommonFunctions.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Utils\Debug.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Utils\Dictionary.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Utils\Math.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Utils\Measure.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Utils\MeasureProcessing.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Utils\Stack.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Utils\String.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Utils\StringUtils.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Utils\Values.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\SCPI\SCPI.cpp">
+      <Filter>SCPI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Device\src\defines.h">
@@ -524,6 +638,153 @@
     <ClInclude Include="..\..\Device\src\Menu\Pages\Include\PageTrig.h">
       <Filter>Menu\Pages\Include</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Device\src\Multimeter\Multimeter.h">
+      <Filter>Multimeter</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Device\src\Osci\BottomPart.h">
+      <Filter>Osci</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Device\src\Osci\Cursors.h">
+      <Filter>Osci</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Device\src\Osci\FrequencyCounter.h">
+      <Filter>Osci</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Device\src\Osci\HiPart.h">
+      <Filter>Osci</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Device\src\Osci\MemoryWindow.h">
+      <Filter>Osci</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Device\src\Osci\Osci.h">
+      <Filter>Osci</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Device\src\Osci\PainterData.h">
+      <Filter>Osci</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Device\src\Recorder\Recorder.h">
+      <Filter>Recorder</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Device\src\Settings\Settings.h">
+      <Filter>Settings</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Device\src\Settings\SettingsChannel.h">
+      <Filter>Settings</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Device\src\Settings\SettingsDebug.h">
+      <Filter>Settings</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Device\src\Settings\SettingsMath.h">
+      <Filter>Settings</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Device\src\Settings\SettingsMemory.h">
+      <Filter>Settings</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Device\src\Settings\SettingsNRST.h">
+      <Filter>Settings</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Device\src\Settings\SettingsService.h">
+      <Filter>Settings</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Device\src\Settings\SettingsTime.h">
+      <Filter>Settings</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Device\src\Tester\Tester.h">
+      <Filter>Tester</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Device\src\Utils\Buffer.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Device\src\Utils\CommonFunctions.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Device\src\Utils\Debug.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Device\src\Utils\Dictionary.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Device\src\Utils\Math.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Device\src\Utils\Measure.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Device\src\Utils\Stack.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Device\src\Utils\String.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Device\src\Utils\StringUtils.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Device\src\Utils\tableslog.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Device\src\Utils\TablesWindow.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Device\src\Utils\Values.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\_VS\cmsis_armcc.h">
+      <Filter>_VS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\_VS\cmsis_armcc_V6.h">
+      <Filter>_VS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\_VS\core_cm4.h">
+      <Filter>_VS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\_VS\core_cmFunc.h">
+      <Filter>_VS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\_VS\core_cmInstr.h">
+      <Filter>_VS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\_VS\core_cmSimd.h">
+      <Filter>_VS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\_VS\ctype.h">
+      <Filter>_VS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\_VS\integer.h">
+      <Filter>_VS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\_VS\inttypes.h">
+      <Filter>_VS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\_VS\limits.h">
+      <Filter>_VS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\_VS\math.h">
+      <Filter>_VS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\_VS\stdarg.h">
+      <Filter>_VS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\_VS\stdint.h">
+      <Filter>_VS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\_VS\stdio.h">
+      <Filter>_VS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\_VS\stdlib.h">
+      <Filter>_VS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\_VS\string.h">
+      <Filter>_VS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\_VS\tchar.h">
+      <Filter>_VS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\_VS\windows.h">
+      <Filter>_VS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Device\src\SCPI\SCPI.h">
+      <Filter>SCPI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\Device\src\Display\Font\font5.inc">
@@ -537,6 +798,33 @@
     </None>
     <None Include="..\..\Device\src\Display\Font\fontUGO2.inc">
       <Filter>Display\Font</Filter>
+    </None>
+    <None Include="..\..\common\_VS\algorithm">
+      <Filter>_VS</Filter>
+    </None>
+    <None Include="..\..\common\_VS\cctype">
+      <Filter>_VS</Filter>
+    </None>
+    <None Include="..\..\common\_VS\climits">
+      <Filter>_VS</Filter>
+    </None>
+    <None Include="..\..\common\_VS\cmath">
+      <Filter>_VS</Filter>
+    </None>
+    <None Include="..\..\common\_VS\cstdarg">
+      <Filter>_VS</Filter>
+    </None>
+    <None Include="..\..\common\_VS\cstdio">
+      <Filter>_VS</Filter>
+    </None>
+    <None Include="..\..\common\_VS\cstdlib">
+      <Filter>_VS</Filter>
+    </None>
+    <None Include="..\..\common\_VS\cstring">
+      <Filter>_VS</Filter>
+    </None>
+    <None Include="..\..\common\_VS\limits">
+      <Filter>_VS</Filter>
     </None>
   </ItemGroup>
 </Project>

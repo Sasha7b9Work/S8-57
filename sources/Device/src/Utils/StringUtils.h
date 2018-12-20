@@ -26,7 +26,7 @@ public:
 
     static bool EqualsStrings(void *str1, void *str2, uint size);
 
-    static bool EqualsStrings(uint8 *str1, char *str2, uint size);
+    static bool EqualsStrings(uint8 *str1, const char * const str2, uint size);
 
     static bool EqualsZeroStrings(char *str1, char *str2);
     /// Возвращает позицию первого символа, который не является цифрой либо точкой
