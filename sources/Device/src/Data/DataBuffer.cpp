@@ -98,7 +98,7 @@ void DataBuffer::Stack::Push(DataSettings *ds)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-DataSettings *DataBuffer::Stack::Top()
+DataSettings *DataBuffer::Stack::Top()  // -V2506
 {
     if (lastIndex == -1)
     {
@@ -202,7 +202,7 @@ static void Stack_AddToEnd(DataSettings *ds, uint8 *address)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static int Stack_FindFirstEmptyElement()
+static int Stack_FindFirstEmptyElement() // -V2506
 {
     for (int i = 0; i < MAX_DATAS; i++)
     {

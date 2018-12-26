@@ -318,7 +318,7 @@ void Display::SetAddDrawFunction(pFuncVV func, uint time)
 }
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------
-Display::ModeAveraging::E Display::GetModeAveraging()
+Display::ModeAveraging::E Display::GetModeAveraging() // -V2506
 {
     if (IN_RANDOM_MODE)
     {
@@ -410,7 +410,7 @@ void SetBrightness(int16 brightness)
 }
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------
-int Display::NumAverage()
+int Display::NumAverage() // -V2506
 {
     /*
     if (MODE_EMS && (ENUM_AVE < ENumAverage_8))
@@ -432,7 +432,7 @@ int Display::NumAverage()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-int Display::ShiftInMemoryInPoints()
+int Display::ShiftInMemoryInPoints() // -V2506
 {
     if (SET_PEAKDET_DIS)
     {
@@ -442,7 +442,7 @@ int Display::ShiftInMemoryInPoints()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-int Display::ENumSignalsInSec::ToFPS() const
+int Display::ENumSignalsInSec::ToFPS() const // -V2506
 {
     static const int fps[] = {25, 10, 5, 2, 1};
     if (value <= Display::ENumSignalsInSec::_1)

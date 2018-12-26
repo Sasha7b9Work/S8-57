@@ -25,13 +25,13 @@ static struct BitFieldFlashDrive
 USBH_HandleTypeDef FDrive::hUSB_Host;
 HCD_HandleTypeDef  FDrive::handleHCD;
 static FATFS USBDISKFatFs;
-static char USBDISKPath[4];
+static char USBDISKPath[4]; // -V112
 static bool gFlashDriveIsConnected = false;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /// Устанавливает текущее время для файла nameFile
-static void SetTimeForFile(char *nameFile);
+static void SetTimeForFile(const char *nameFile);
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -72,6 +72,7 @@ static void USBH_UserProcess(USBH_HandleTypeDef *, uint8 id)
             break;
 
         default:
+            // ничего не надо делать
             break;
     }
 }
@@ -98,7 +99,7 @@ bool FDrive::IsConnected()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void FDrive::Init()
 {
-    if(FATFS_LinkDriver(&USBH_Driver, USBDISKPath) == FR_OK) 
+    if(FATFS_LinkDriver(&USBH_Driver, USBDISKPath) == FR_OK)    // -V2001
     {
         USBH_StatusTypeDef res = USBH_Init(&hUSB_Host, USBH_UserProcess, 0);
         res = USBH_RegisterClass(&hUSB_Host, USBH_MSC_CLASS);
@@ -215,7 +216,7 @@ void FDrive::GetNumDirsAndFiles(const char *fullPath, int *numDirs, int *numFile
 
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-bool FDrive::GetNameDir(const char *fullPath, int numDir, char *nameDirOut, StructForReadDir *s)
+bool FDrive::GetNameDir(const char *fullPath, int numDir, char *nameDirOut, StructForReadDir *s) // -V2506
 {
     std::memcpy(s->nameDir, (void *)fullPath, std::strlen(fullPath));
     s->nameDir[std::strlen(fullPath)] = '\0';
@@ -260,7 +261,7 @@ bool FDrive::GetNameDir(const char *fullPath, int numDir, char *nameDirOut, Stru
 
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-bool FDrive::GetNextNameDir(char *nameDirOut, StructForReadDir *s)
+bool FDrive::GetNextNameDir(char *nameDirOut, StructForReadDir *s) // -V2506
 {
     DIR *pDir = &s->dir;
     FILINFO *pFNO = &s->fno;
@@ -303,7 +304,7 @@ void FDrive::CloseCurrentDir(StructForReadDir *s)
 
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-bool FDrive::GetNameFile(const char *fullPath, int numFile, char *nameFileOut, StructForReadDir *s)
+bool FDrive::GetNameFile(const char *fullPath, int numFile, char *nameFileOut, StructForReadDir *s) // -V2506
 {
     std::memcpy(s->nameDir, (void *)fullPath, std::strlen(fullPath));
     s->nameDir[std::strlen(fullPath)] = '\0';
@@ -348,7 +349,7 @@ bool FDrive::GetNameFile(const char *fullPath, int numFile, char *nameFileOut, S
 
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-bool FDrive::GetNextNameFile(char *nameFileOut, StructForReadDir *s)
+bool FDrive::GetNextNameFile(char *nameFileOut, StructForReadDir *s) // -V2506
 {
     FILINFO *pFNO = &s->fno;
     bool alreadyNull = false;
@@ -383,7 +384,7 @@ bool FDrive::GetNextNameFile(char *nameFileOut, StructForReadDir *s)
 
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-bool FDrive::OpenNewFileForWrite(const char *fullPathToFile, StructForWrite *structForWrite)
+bool FDrive::OpenNewFileForWrite(const char *fullPathToFile, StructForWrite *structForWrite) // -V2506
 {
     if (f_open(&structForWrite->fileObj, fullPathToFile, FA_CREATE_ALWAYS | FA_WRITE) != FR_OK)
     {
@@ -396,7 +397,7 @@ bool FDrive::OpenNewFileForWrite(const char *fullPathToFile, StructForWrite *str
 
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-bool FDrive::WriteToFile(uint8 *data, int sizeData, StructForWrite *structForWrite)
+bool FDrive::WriteToFile(uint8 *data, int sizeData, StructForWrite *structForWrite) // -V2506
 {
     while (sizeData > 0)
     {
@@ -407,7 +408,7 @@ bool FDrive::WriteToFile(uint8 *data, int sizeData, StructForWrite *structForWri
         }
         sizeData -= dataToCopy;
         std::memcpy(structForWrite->tempBuffer + structForWrite->sizeData, data, (uint)dataToCopy);
-        data += dataToCopy;
+        data += dataToCopy; // -V102
         structForWrite->sizeData += dataToCopy;
         if (structForWrite->sizeData == SIZE_FLASH_TEMP_BUFFER)
         {
@@ -425,7 +426,7 @@ bool FDrive::WriteToFile(uint8 *data, int sizeData, StructForWrite *structForWri
 
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-bool FDrive::CloseFile(StructForWrite *structForWrite)
+bool FDrive::CloseFile(StructForWrite *structForWrite) // -V2506
 {
     if (structForWrite->sizeData != 0)
     {
@@ -444,14 +445,14 @@ bool FDrive::CloseFile(StructForWrite *structForWrite)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void SetTimeForFile(char *name)
+static void SetTimeForFile(const char *name)
 {
     FILINFO info;
 
     PackedTime time = CPU::RTC_::GetPackedTime();
 
-    info.fdate = (WORD)(((time.year + 2000 - 1980) * 512) | time.month * 32 | time.day);
-    info.ftime = (WORD)(time.hours * 2048 | time.minutes * 32 | time.seconds / 2);
+    info.fdate = (WORD)(((time.year + 2000 - 1980) * 512) | time.month * 32 | time.day);        // -V112
+    info.ftime = (WORD)(time.hours * 2048 | time.minutes * 32 | time.seconds / 2);              // -V112
 
     f_utime(name, &info);
 }
