@@ -35,16 +35,21 @@ struct Pin
 #define FPGA_IN_STATE_WAIT (FPGA::fpgaStateWork == StateWorkFPGA_Wait)
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-class HardwareFPGA
+struct HardwareFPGA
 {
-    friend class FPGA;
-private:
+public:
+    static void LoadTrigSource();
 };
 
 class FPGA
 {
 friend class TrigLev;
+friend struct HardwareFPGA;
 public:
+
+    static int temp;
+
+    static HardwareFPGA hardware;
 
     static void Init();
 
@@ -73,8 +78,6 @@ public:
     static void LoadTrigPolarity();
 
     static void LoadTrigMode();
-
-    static void LoadTrigSource();
 
     static void LoadTrigInput();
 
@@ -159,7 +162,7 @@ private:
     /// Установить в соотвествующие положения выводы, отвечающие за источник и вход синхронизации
     static void LoadTrigSourceInput();
     /// Читать канал в рандомизаторе с адреса address
-    static void ReadDataChanenlRand(Chan::E ch, uint8 *address, uint8 *data);
+    static void ReadDataChanenlRand(Chan::E ch, const uint8 *address, uint8 *data);
 
     static bool CalculateGate(uint16 rand, uint16 *eMin, uint16 *eMax);
 

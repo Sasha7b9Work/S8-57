@@ -23,6 +23,7 @@
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+HardwareFPGA FPGA::hardware;
 ADC_HandleTypeDef FPGA::handleADC;
 uint16 FPGA::valueADC = 0;
 
@@ -87,7 +88,7 @@ void FPGA::Stop(bool)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void FPGA::Update()
+void FPGA::Update() // -V2506
 {
     if (!isRunning)
     {
@@ -175,7 +176,7 @@ void FPGA::Start()
 
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void FPGA::ForTester::Start()
+void FPGA::ForTester::Start() // -V2506
 {
     // У нас двенадцать делений. На двенадцать делений должно приходиться не менее 2.5 мс
     // 2.5мс / 12дел = 0.2 мс/дел = 10мкс/тчк
@@ -203,7 +204,7 @@ void FPGA::ForTester::Start()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-bool FPGA::ForTester::Read(uint8 *dataA, uint8 *dataB)
+bool FPGA::ForTester::Read(uint8 *dataA, uint8 *dataB) // -V2506
 {
     uint start = TIME_MS;
     flag = 0;
@@ -222,7 +223,7 @@ bool FPGA::ForTester::Read(uint8 *dataA, uint8 *dataB)
     FSMC::WriteToFPGA16(WR_PRED_LO, aRead);             // Указываем адрес, с которого будем читать данные
     FSMC::WriteToFPGA8(WR_START_ADDR, 0xff);            // И даём команду ПЛИС, чтобы чтение начиналось с него
 
-    uint8 *addrA = RD_DATA_A;
+    uint8 *addrA = RD_DATA_A; // -V566
     addrA++;
     for (int i = 0; i < TESTER_NUM_POINTS; i++)         // Читаем данные первого канала
     {
@@ -232,7 +233,7 @@ bool FPGA::ForTester::Read(uint8 *dataA, uint8 *dataB)
     FSMC::WriteToFPGA16(WR_PRED_LO, aRead);             // Указываем адрес, с котонрого будем читать данные
     FSMC::WriteToFPGA8(WR_START_ADDR, 0xff);            // И даём команду ПЛИС, чтобы чтение начиналось с него
 
-    uint8 *addrB = RD_DATA_B;
+    uint8 *addrB = RD_DATA_B; // -V566
     addrB++;
     for (int i = 0; i < TESTER_NUM_POINTS; i++)         // Читаем данные второго канала
     {
@@ -256,7 +257,7 @@ void FPGA::ReadDataChanenl(Chan::E ch, uint8 data[FPGA_MAX_NUM_POINTS])
     FSMC::WriteToFPGA8(WR_START_ADDR, 0xff);
 
 
-    uint8 *addr0 = Chan(ch).IsA() ? RD_DATA_A : RD_DATA_B;
+    uint8 *addr0 = Chan(ch).IsA() ? RD_DATA_A : RD_DATA_B;  // -V566
     uint8 *addr1 = addr0 + 1;
 
     if (IN_RANDOMIZE_MODE)
@@ -268,7 +269,7 @@ void FPGA::ReadDataChanenl(Chan::E ch, uint8 data[FPGA_MAX_NUM_POINTS])
         uint8 *p = data;
 
         *p = *addr0;    // Первая точка почему-то неправильная читается. Просто откидываем её.
-        *p = *addr1;
+        *p = *addr1;    // -V519
 
         if(SET_PEAKDET_EN)
         {
@@ -281,7 +282,7 @@ void FPGA::ReadDataChanenl(Chan::E ch, uint8 data[FPGA_MAX_NUM_POINTS])
         }
         else
         {
-            for (uint i = 0; i < numPoints / 4U; ++i)
+            for (uint i = 0; i < numPoints / 4U; ++i)   // -V112
             {
                 *p++ = *addr1;
                 *p++ = *addr1;
@@ -293,7 +294,7 @@ void FPGA::ReadDataChanenl(Chan::E ch, uint8 data[FPGA_MAX_NUM_POINTS])
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void FPGA::ReadDataChanenlRand(Chan::E ch, uint8 *address, uint8 *data)
+void FPGA::ReadDataChanenlRand(Chan::E ch, const uint8 *address, uint8 *data) // -V2506
 {
     int Tsm = CalculateShift();
 
@@ -307,7 +308,7 @@ void FPGA::ReadDataChanenlRand(Chan::E ch, uint8 *address, uint8 *data)
     int index = Tsm - step;
 
     uint8 *dataRead = &dataRand[ch][0];
-    dataRead = &dataRand[ch][index];
+    dataRead = &dataRand[ch][index];    // -V519
 
     while(index < 0)
     {
@@ -329,7 +330,7 @@ void FPGA::ReadDataChanenlRand(Chan::E ch, uint8 *address, uint8 *data)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-int FPGA::CalculateShift()
+int FPGA::CalculateShift() // -V2506
 {
     uint16 min = 0;
     uint16 max = 0;
@@ -360,10 +361,10 @@ int FPGA::CalculateShift()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-bool FPGA::CalculateGate(uint16 rand, uint16 *eMin, uint16 *eMax)
+bool FPGA::CalculateGate(uint16 rand, uint16 *eMin, uint16 *eMax) // -V2506
 {
-    static float minGate = 0.0f;
-    static float maxGate = 0.0f;
+    static float minGate = 0.0F;
+    static float maxGate = 0.0F;
 
     if (rand < 500 || rand > 4000)
     {
@@ -388,7 +389,7 @@ bool FPGA::CalculateGate(uint16 rand, uint16 *eMin, uint16 *eMax)
         max = rand;
     }
 
-    if (minGate == 0.0f)
+    if (minGate == 0.0F)    // -V550
     {
         *eMin = min;
         *eMax = max;
@@ -405,17 +406,16 @@ bool FPGA::CalculateGate(uint16 rand, uint16 *eMin, uint16 *eMax)
 
     if (numElements >= numberMeasuresForGates)
     {
-        minGate = 0.8f * minGate + min * 0.2f;
-        maxGate = 0.8f * maxGate + max * 0.2f;
+        minGate = 0.8F * minGate + min * 0.2F;
+        maxGate = 0.8F * maxGate + max * 0.2F;
 
         numElements = 0;
         min = 0xffff;
         max = 0;
     }
 
-    *eMin = (uint16)(minGate);
-    //*eMax = (uint16)(maxGate);
-    *eMax = (uint16)(maxGate - 50);
+    *eMin = (uint16)(minGate);      // -V519 // -V2004
+    *eMax = (uint16)(maxGate - 50); // -V519 // -V2004
 
     if(rand < *eMin || rand > *eMax)
     {
@@ -452,21 +452,21 @@ void FPGA::ChangeRange(Chan::E ch, int delta)
 {
     if (delta > 0)
     {
-        Math::LimitationIncrease<uint8>((uint8 *)(&SET_RANGE(ch)), (uint8)(Range::Number - 1));
+        Math::LimitationIncrease<uint8>((uint8 *)(&SET_RANGE(ch)), (uint8)(Range::Number - 1)); // -V206
     }
     else
     {
-        Math::LimitationDecrease<uint8>((uint8 *)(&SET_RANGE(ch)), 0);
+        Math::LimitationDecrease<uint8>((uint8 *)(&SET_RANGE(ch)), 0);  // -V206
     }
     LoadRanges();
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void FPGA::TBaseChange(int delta)
+void FPGA::TBaseChange(int delta) // -V2506
 {
     if (delta > 0)
     {
-        Math::LimitationIncrease<uint8>((uint8 *)(&SET_TBASE), (uint8)(TBase::Number - 1));
+        Math::LimitationIncrease<uint8>((uint8 *)(&SET_TBASE), (uint8)(TBase::Number - 1)); // -V206
     }
     else
     {
@@ -477,7 +477,7 @@ void FPGA::TBaseChange(int delta)
             return;                                         // и выходим
         }
 
-        Math::LimitationDecrease<uint8>((uint8 *)(&SET_TBASE), 0);
+        Math::LimitationDecrease<uint8>((uint8 *)(&SET_TBASE), 0); // -V206
     }
 
     LoadTBase();
@@ -526,13 +526,13 @@ GPIO_TypeDef *FPGA::GetPort(Pin::E pin)
 #endif
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-uint8 FPGA::ValueForRange(Chan::E ch)
+uint8 FPGA::ValueForRange(Chan::E ch) // -V2506
 {
     static const uint8 datas[ModeCouple::Size] =
     {
-        BIN_U8(01000001),    // DC
-        BIN_U8(10000001),    // AC
-        BIN_U8(00000010)     // GND
+        BIN_U8(01000001),  // -V2501  // DC
+        BIN_U8(10000001),  // -V2501  // AC
+        BIN_U8(00000010)   // -V2501  // GND
     };
 
     if (SET_COUPLE(ch) == ModeCouple::GND && Device::CurrentMode() == Device::Mode::Osci)
@@ -542,19 +542,19 @@ uint8 FPGA::ValueForRange(Chan::E ch)
 
     DEF_STRUCT(StructRange, uint16) values[Range::Number][2] =
     {   //             A                    B
-        { BIN_U8(00100100), BIN_U8(00100100) },   // 2mV
-        { BIN_U8(00100100), BIN_U8(00100100) },   // 5mV
-        { BIN_U8(00100100), BIN_U8(00100100) },   // 10mV
-        { BIN_U8(00100100), BIN_U8(00100100) },   // 20mV
-        { BIN_U8(00010100), BIN_U8(00010100) },   // 50mV
-        { BIN_U8(00010100), BIN_U8(00010100) },   // 100mV
-        { BIN_U8(00010100), BIN_U8(00010100) },   // 200mV
-        { BIN_U8(00101000), BIN_U8(00101000) },   // 500mV
-        { BIN_U8(00101000), BIN_U8(00101000) },   // 1V
-        { BIN_U8(00101000), BIN_U8(00101000) },   // 2V
-        { BIN_U8(00011000), BIN_U8(00011000) },   // 5V
-        { BIN_U8(00011000), BIN_U8(00011000) },   // 10V
-        { BIN_U8(00011000), BIN_U8(00011000) }    // 20V
+        { BIN_U8(00100100), BIN_U8(00100100) }, // -V2501  // 2mV
+        { BIN_U8(00100100), BIN_U8(00100100) }, // -V2501  // 5mV
+        { BIN_U8(00100100), BIN_U8(00100100) }, // -V2501  // 10mV
+        { BIN_U8(00100100), BIN_U8(00100100) }, // -V2501  // 20mV
+        { BIN_U8(00010100), BIN_U8(00010100) }, // -V2501  // 50mV
+        { BIN_U8(00010100), BIN_U8(00010100) }, // -V2501  // 100mV
+        { BIN_U8(00010100), BIN_U8(00010100) }, // -V2501  // 200mV
+        { BIN_U8(00101000), BIN_U8(00101000) }, // -V2501  // 500mV
+        { BIN_U8(00101000), BIN_U8(00101000) }, // -V2501  // 1V
+        { BIN_U8(00101000), BIN_U8(00101000) }, // -V2501  // 2V
+        { BIN_U8(00011000), BIN_U8(00011000) }, // -V2501  // 5V
+        { BIN_U8(00011000), BIN_U8(00011000) }, // -V2501  // 10V
+        { BIN_U8(00011000), BIN_U8(00011000) }  // -V2501  // 20V
     };
 
     return (uint8)(values[SET_RANGE(ch)][ch].val | datas[SET_COUPLE(ch)]);
@@ -588,6 +588,10 @@ void FPGA::WriteRegisters(Pin::E cs, uint16 value)
             SetPin(Pin::SPI3_SCK);
             ResetPin(Pin::SPI3_SCK);
         }
+    }
+    else
+    {
+        // нет действий
     }
 
     SetPin(cs);
@@ -667,39 +671,39 @@ void FPGA::LoadTBase()
 {
     static const uint8 values[TBase::Number] =
     {
-        BIN_U8(00000000),    // 2ns     1       200MHz
-        BIN_U8(00000000),    // 5ns     1       200MHz
-        BIN_U8(00000000),    // 10ns    1       200MHz
-        BIN_U8(00000000),    // 20ns    1       200MHz
-        BIN_U8(00000000),    // 50ns    1       200MHz
-        BIN_U8(00000000),    // 100ns   1       200MHz
-        BIN_U8(00100000),    // 200ns   2       100MHz
-        BIN_U8(00100001),    // 500ns   5       40MHz
-        BIN_U8(00100010),    // 1us     10      20MHz
-        BIN_U8(00100011),    // 2us     20      10MHz
-        BIN_U8(01000101),    // 5us     50      4MHz
-        BIN_U8(01000110),    // 10us    100     2MHz
-        BIN_U8(01000111),    // 20us    200     1MHz
-        BIN_U8(01001001),    // 50us    500     400kHz
-        BIN_U8(01001010),    // 100us   1k      200kHz
-        BIN_U8(01001011),    // 200us   2k      100kHz
-        BIN_U8(01001101),    // 500us   5k      40kHz
-        BIN_U8(01001110),    // 1ms     10k     20kHz
-        BIN_U8(01001111),    // 2ms     20k     10kHz
-        BIN_U8(01010001),    // 5ms     50k     4kHz
-        BIN_U8(01010010),    // 10ms    100k    2kHz
-        BIN_U8(01010011),    // 20ms    200k    1kHz
-        BIN_U8(01010101),    // 50ms    500k    400Hz
-        BIN_U8(01010110),    // 100ms   1M      200Hz
-        BIN_U8(01010111),    // 200ms   2M      100Hz
-        BIN_U8(01011001),    // 500ms   5M      40Hz
-        BIN_U8(01011010),    // 1s      10M     20Hz
-        BIN_U8(01011011),    // 2s      20M     10Hz
-        BIN_U8(01011101),    // 5s      50M     4Hz
-        BIN_U8(01011110)     // 10s     100M    2Hz
+        BIN_U8(00000000),  // -V2501  // 2ns     1       200MHz
+        BIN_U8(00000000),  // -V2501  // 5ns     1       200MHz
+        BIN_U8(00000000),  // -V2501  // 10ns    1       200MHz
+        BIN_U8(00000000),  // -V2501  // 20ns    1       200MHz
+        BIN_U8(00000000),  // -V2501  // 50ns    1       200MHz
+        BIN_U8(00000000),  // -V2501  // 100ns   1       200MHz
+        BIN_U8(00100000),  // -V2501  // 200ns   2       100MHz
+        BIN_U8(00100001),  // -V2501  // 500ns   5       40MHz
+        BIN_U8(00100010),  // -V2501  // 1us     10      20MHz
+        BIN_U8(00100011),  // -V2501  // 2us     20      10MHz
+        BIN_U8(01000101),  // -V2501  // 5us     50      4MHz
+        BIN_U8(01000110),  // -V2501  // 10us    100     2MHz
+        BIN_U8(01000111),  // -V2501  // 20us    200     1MHz
+        BIN_U8(01001001),  // -V2501  // 50us    500     400kHz
+        BIN_U8(01001010),  // -V2501  // 100us   1k      200kHz
+        BIN_U8(01001011),  // -V2501  // 200us   2k      100kHz
+        BIN_U8(01001101),  // -V2501  // 500us   5k      40kHz
+        BIN_U8(01001110),  // -V2501  // 1ms     10k     20kHz
+        BIN_U8(01001111),  // -V2501  // 2ms     20k     10kHz
+        BIN_U8(01010001),  // -V2501  // 5ms     50k     4kHz
+        BIN_U8(01010010),  // -V2501  // 10ms    100k    2kHz
+        BIN_U8(01010011),  // -V2501  // 20ms    200k    1kHz
+        BIN_U8(01010101),  // -V2501  // 50ms    500k    400Hz
+        BIN_U8(01010110),  // -V2501  // 100ms   1M      200Hz
+        BIN_U8(01010111),  // -V2501  // 200ms   2M      100Hz
+        BIN_U8(01011001),  // -V2501  // 500ms   5M      40Hz
+        BIN_U8(01011010),  // -V2501  // 1s      10M     20Hz
+        BIN_U8(01011011),  // -V2501  // 2s      20M     10Hz
+        BIN_U8(01011101),  // -V2501  // 5s      50M     4Hz
+        BIN_U8(01011110)   // -V2501  // 10s     100M    2Hz
     };
 
-    std::memset(&dataRand[0][0], 0, FPGA_MAX_NUM_POINTS * 2);
+    std::memset(dataRand, 0, FPGA_MAX_NUM_POINTS * 2 * sizeof(uint8));  // -V512
 
     FSMC::WriteToFPGA8(WR_TBASE, values[SET_TBASE]);
 
@@ -723,9 +727,9 @@ void FPGA::LoadTrigInput()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void FPGA::LoadTrigSource()
+void HardwareFPGA::LoadTrigSource()
 {
-    LoadTrigSourceInput();
+    FPGA::LoadTrigSourceInput();
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -739,9 +743,9 @@ void FPGA::LoadTrigSourceInput()
 {
     static const uint8 datas[3][2] =
     {//       A                 B
-        {BIN_U8(00000010), BIN_U8(00000100)}, // ПС
-        {BIN_U8(00000011), BIN_U8(00000101)}, // ВЧ
-        {BIN_U8(00000000), BIN_U8(00000110)}  // НЧ
+        {BIN_U8(00000010), BIN_U8(00000100)}, // -V2501      // ПС 
+        {BIN_U8(00000011), BIN_U8(00000101)}, // -V2501      // ВЧ
+        {BIN_U8(00000000), BIN_U8(00000110)}  // -V2501      // НЧ
     };
     
     WritePin(Pin::A1S, _GET_BIT(datas[TRIG_INPUT][TRIG_SOURCE], 2));
