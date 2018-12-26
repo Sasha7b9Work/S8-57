@@ -22,8 +22,8 @@ void HardFault_Handler()
 
     while (1)
     {
-        file = file;
-        line = line;
+        file = file;    // -V570
+        line = line;    // -V570
     }
 }
 

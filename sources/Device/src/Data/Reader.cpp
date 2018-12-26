@@ -126,15 +126,16 @@ void Reader::ReadFromRAM(int fromEnd, StructDataDrawing *dataStruct, bool forMem
         }
         readed = true;
     }
-    else if(!IN_P2P_MODE ||                                     // ≈сли не в поточечном режиме
-            (IN_P2P_MODE && STAND_P2P && !forMemoryWindow) ||   // или в поточечном и ждущем режиме, но нужно выоводить статический сигнал
-            (IN_P2P_MODE && !FPGA::IsRunning()))                  // или в поточечном, но процесс чтени€ остановлен
+    else if(!(IN_P2P_MODE) ||                                           // ≈сли не в поточечном режиме
+            (IN_P2P_MODE && STAND_P2P && !forMemoryWindow) || // -V501  // или в поточечном и ждущем режиме, но нужно выоводить статический сигнал
+            (IN_P2P_MODE && !FPGA::IsRunning()))                        // или в поточечном, но процесс чтени€ остановлен
     {
         DataStorage::GetDataFromEnd(fromEnd, &dataSettings, IN_A, IN_B);
         readed = true;
     }
     else
     {
+        // нечего делать
     }
 
     if (readed)
@@ -148,7 +149,7 @@ void Reader::ReadFromRAM(int fromEnd, StructDataDrawing *dataStruct, bool forMem
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-bool Reader::ReadFromROM(StructDataDrawing *dataStruct)
+bool Reader::ReadFromROM(StructDataDrawing *dataStruct) // -V2506
 {
     Clear();
 
@@ -164,7 +165,7 @@ bool Reader::ReadFromROM(StructDataDrawing *dataStruct)
 
         PrepareDataForDraw(dataStruct);
         
-        return true;
+        return true;    // -V2506
     }
     
     return false;
@@ -202,7 +203,7 @@ void ReadMinMax(StructDataDrawing *dataStruct, int direction)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void PrepareDataForDraw(StructDataDrawing *dataStruct)
+static void PrepareDataForDraw(StructDataDrawing *dataStruct)   // -V2506
 {
     if (!dataStruct)
     {
@@ -238,7 +239,7 @@ static void PrepareDataForDraw(StructDataDrawing *dataStruct)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void FillDataP2P(StructDataDrawing *dataStruct, Chan::E ch)
+static void FillDataP2P(StructDataDrawing *dataStruct, Chan::E ch)  // -V2506
 {
     std::memset(dataStruct->data[ch], 0, 281 * 2);
 
@@ -255,7 +256,7 @@ static void FillDataP2P(StructDataDrawing *dataStruct, Chan::E ch)
     {
         int start = allPoints - bytesInScreen;  // «начени€, начина€ с этого, нужно записывать в экранный буфер.
         int end = allPoints - 1;                // Ётим значением заканчиываетс€ вывод на экран
-        LIMIT_BELOW(start, 0u);
+        LIMIT_BELOW(start, 0U);
 
         if (end > NUM_BYTES_DS - 1)       // ≈сли считано больше точек, чем помещаетс€ в пам€ть канала
         {
@@ -294,11 +295,11 @@ static void FillDataP2P(StructDataDrawing *dataStruct, Chan::E ch)
 
     }
 
-    LIMITATION(dataStruct->posBreak, 0, 281);
+    LIMITATION(dataStruct->posBreak, 0, 281);   // -V2516
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void FillDataNormal(StructDataDrawing *dataStruct, Chan::E ch)
+static void FillDataNormal(StructDataDrawing *dataStruct, Chan::E ch)   // -V2506
 {
     if (!dataStruct->needDraw[ch])
     {
