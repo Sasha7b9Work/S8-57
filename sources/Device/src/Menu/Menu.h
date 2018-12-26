@@ -155,7 +155,7 @@ public:
         {
         public:
             static const int HEIGHT = 13;
-            static const int WIDTH = Menu::Item::WIDTH - 4;
+            static const int WIDTH = Menu::Item::WIDTH - 4; // -V112
         };
     };
 

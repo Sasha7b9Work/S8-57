@@ -75,9 +75,9 @@ inline bool EmptyFuncBtU8(uint8) { return true; }
 #endif
 
 
-#define _SET_BIT_VALUE(value, numBit, bitValue) (value |= (bitValue << numBit))
-#define _GET_BIT(value, numBit) ((value >> numBit) & 1)
-#define _CLEAR_BIT(value, bit) ((value) &= (~(1 << bit)))
+#define _SET_BIT_VALUE(value, numBit, bitValue) ((value) |= ((bitValue) << (numBit)))
+#define _GET_BIT(value, numBit) (((value) >> (numBit)) & 1)
+#define _CLEAR_BIT(value, bit) ((value) &= (~(1 << (bit))))
 #define _SET_BIT(value, bit) ((value) |= (1 << (bit)))
 
 
@@ -111,7 +111,7 @@ static const struct name        \
 #define ERROR_STRING_VALUE  "--.--"
 #define ERROR_VALUE_UINT8   255
 
-#define MAX_UINT 0xffffffff
+#define MAX_UINT 0xffffffffU
 
 
 // Для определения задания буферов лучше пользоваться этими макросами, чтобы потом легче было отследить, где можно памяти освободить
@@ -149,7 +149,7 @@ union BitSet32
         uint16 halfWord0;
         uint16 halfWord1;
     };
-    uint8   byte[4];
+    uint8   byte[sizeof(uint)];
     struct
     {
         uint8 byte0;

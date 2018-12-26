@@ -80,10 +80,10 @@ public:
     static void DrawVLineArray(int x, int numLines, uint8 *y0y1, Color color);
     /// \brief Нарисовать numLines вертикальных линий, состоящих из count точек каждая с расстоянием между точками delta. Горизонтальная координата
     /// первой точки каждой линии соответствует очередному элементу массива x[]
-    static void DrawMultiVPointLine(int numLines, int y, uint16 x[], int delta, int count, Color color = Color::NUMBER);
+    static void DrawMultiVPointLine(int numLines, int y, uint16 *x, int delta, int count, Color color = Color::NUMBER);
     /// \brief Нарисовать numLines горизонтальных линий, состоящих из count точек каждая с расстоянием между точками delta. Вертикальная координата
     /// первой точки каждой линии соответствует очередному элементу массива y[]
-    static void DrawMultiHPointLine(int numLines, int x, uint8 y[], int delta, int count, Color color = Color::NUMBER);
+    static void DrawMultiHPointLine(int numLines, int x, uint8 *y, int delta, int count, Color color = Color::NUMBER);
     /// Нарисовать горизонтальную линию от x0 до x1 точками через каждые delta пикселей
     static void DrawHPointLine(int y, int x0, int x1, float delta);
     /// Нарисовать вертикальную линию от y0 до y1 точками через каждые delta пикселей

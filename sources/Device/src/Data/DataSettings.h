@@ -47,7 +47,7 @@ struct DataSettings
     uint        enumPoints      : 3;
     uint        notUsed         : 12;
     PackedTime  time;
-    DataSettings() : id(++lastID) {};
+    DataSettings() : id(++lastID) {};		// -V730
     /// ¬озвращает размер занимаемый данными одного канала
     int SizeChannel() const;
     /// ¬озвращает размер данных обоих каналов

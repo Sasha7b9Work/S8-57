@@ -65,16 +65,31 @@ public:
         }
         static Measure ForSymbol(char symbol)
         {
+			Measure result = Measure::Number;
+
             switch(symbol)
             {
-                case 'V':   return Measure::VoltageAC;
-                case 'I':   return Measure::CurrentDC;  
-                case 'J':   return Measure::CurrentAC;  
-                case 'R':   return Measure::Resistance; 
-                case 'Y':   return Measure::TestDiode;  
-                case 'W':   return Measure::Bell;       
+				case 'V':
+					result = Measure::VoltageAC;
+					break;
+				case 'I':
+					result = Measure::CurrentDC;
+					break;
+				case 'J':
+					result = Measure::CurrentAC;
+					break;
+				case 'R':
+					result = Measure::Resistance;
+					break;
+				case 'Y':
+					result = Measure::TestDiode;
+					break;
+				case 'W':
+					result = Measure::Bell;
+					break;
             }
-            return Measure::Number;
+
+            return result;
         }
     };
 
