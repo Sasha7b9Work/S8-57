@@ -11,7 +11,7 @@ const Key::E TriggerDebugConsole::sampleBufferForButtons[SIZE_BUFFER_FOR_BUTTONS
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-bool TriggerDebugConsole::Update(Key::E button)
+bool TriggerDebugConsole::Update(Key::E button) // -V2506
 {
     if (Key(button).IsFunctional())
     {
@@ -21,7 +21,7 @@ bool TriggerDebugConsole::Update(Key::E button)
         }
         bufferForButtons[0] = button;
 
-        if (std::memcmp(bufferForButtons, sampleBufferForButtons, SIZE_BUFFER_FOR_BUTTONS) == 0)
+        if (std::memcmp(bufferForButtons, sampleBufferForButtons, SIZE_BUFFER_FOR_BUTTONS * sizeof(Key::E)) == 0)
         {
             SHOW_DEBUG_MENU = 1;
             Display::ShowWarning(Warning::MenuDebugEnabled);

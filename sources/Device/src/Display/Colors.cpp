@@ -5,6 +5,7 @@
 #include "Display/Painter.h"
 #include "Settings/Settings.h"
 #include "Utils/Math.h"
+#include <cmath>
 #endif
 
 
@@ -122,14 +123,21 @@ Color Color::LightShadingText()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Color Color::MenuItem(bool shade)
 {
-    return shade ? Color::GRAY_10 : Color::BLUE_10;
+    return MenuTitle(shade);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-Color Color::Contrast(Color color)
+Color Color::Contrast(Color color) // -V2506
 {
     uint colorValue = COLOR(color.value);
-    if (R_FROM_COLOR(colorValue) > 16 || G_FROM_COLOR(colorValue) > 32 || B_FROM_COLOR(colorValue) > 16)
+
+#define HALF_RED   16
+#define HALF_GREEN 32
+#define HALF_BLUE  16
+
+    if (R_FROM_COLOR(colorValue) > HALF_RED ||
+        G_FROM_COLOR(colorValue) > HALF_GREEN ||
+        B_FROM_COLOR(colorValue) > HALF_BLUE)
     {
         return Color(COLOR_BLACK);
     }
@@ -174,11 +182,11 @@ void ColorType::Init(bool forced)
 
         SetBrightness();
         
-        if (red == 0.0f && green == 0.0f && blue == 0.0f)
+        if (red == 0.0F && green == 0.0F && blue == 0.0F)   // -V550
         {
-            stepRed = 0.31f;
-            stepGreen = 0.63f;
-            stepBlue = 0.31f;
+            stepRed = 0.31F;
+            stepGreen = 0.63F;
+            stepBlue = 0.31F;
         }
     }
 }
@@ -186,15 +194,15 @@ void ColorType::Init(bool forced)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void ColorType::SetBrightness(float bright)
 {
-    if (Math::IsEquals(bright, -1.0f))
+    if (Math::IsEquals(bright, -1.0F))
     {
-        brightness = Math::Max(red / 31.0f, green / 63.0f, blue / 31.0f);
+        brightness = Math::Max(red / 31.0F, green / 63.0F, blue / 31.0F);
 
         CalcSteps();
     }
     else
     {
-        int delta = (int)((bright + 0.0005f) * 100.0f) - (int)(brightness * 100.0f);
+        int delta = (int)((bright + 0.0005F) * 100.0F) - (int)(brightness * 100.0F);
 
         if (delta > 0)
         {
@@ -226,17 +234,17 @@ void ColorType::SetBrightness(float bright)
 */
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void ColorType::BrightnessChange(int delta)
+void ColorType::BrightnessChange(int delta) // -V2506
 {
-    if ((delta > 0 && brightness == 1.0f) || (delta < 0 && brightness == 0.0f))
+    if ((delta > 0 && brightness == 1.0F) || (delta < 0 && brightness == 0.0F)) // -V550
     {
         return;
     }
 
     int sign = Math::Sign(delta);
 
-    brightness += sign * 0.01f;
-    LIMITATION(brightness, 0.0f, 1.0f);
+    brightness += sign * 0.01F;
+    LIMITATION(brightness, 0.0F, 1.0F); // -V2516
 
     red += sign * stepRed;
     green += sign * stepGreen;
@@ -244,20 +252,20 @@ void ColorType::BrightnessChange(int delta)
 
     SetColor();
 
-    if (stepRed < 0.01f && stepGreen < 0.01f && stepBlue < 0.01f)
+    if (stepRed < 0.01F && stepGreen < 0.01F && stepBlue < 0.01F)
     {
-        stepRed = 0.31f;
-        stepGreen = 0.63f;
-        stepBlue = 0.31f;
+        stepRed = 0.31F;
+        stepGreen = 0.63F;
+        stepBlue = 0.31F;
     }
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void ColorType::CalcSteps()
 {
-    stepRed = red / (brightness * 100.0f);
-    stepGreen = green / (brightness * 100.0f);
-    stepBlue = blue / (brightness * 100.0f);
+    stepRed = red / (brightness * 100.0F);
+    stepGreen = green / (brightness * 100.0F);
+    stepBlue = blue / (brightness * 100.0F);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -270,14 +278,14 @@ void ColorType::SetColor()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void ColorType::ComponentChange(int delta)
 {
-    static const float maxs[4] = {0.0f, 31.0f, 63.0f, 31.0f};
+    static const float maxs[4] = {0.0F, 31.0F, 63.0F, 31.0F};
     float * const pointers[4] = {0, &blue, &green, &red};
     int8 index = currentField;
 
     if (index >= 1 && index <= 3)
     {
         *(pointers[index]) += (float)Math::Sign(delta);
-        Math::Limitation<float>(pointers[index], 0.0f, maxs[index]);
+        Math::Limitation<float>(pointers[index], 0.0F, maxs[index]);
     }
 
     SetColor();
@@ -307,15 +315,22 @@ Color Color::ChanHalf(Chan::E ch)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Color Color::Trig()
 {
-    if(TRIG_SOURCE == Trig::Source::A)
+    Color result = Color::FILL;
+
+    if(TRIG_SOURCE_IS_A)
     {
-        return Channel(Chan::A);
+        result = Channel(Chan::A);
     }
-    else if(TRIG_SOURCE == Trig::Source::B)
+    else if(TRIG_SOURCE_IS_B)
     {
-        return Channel(Chan::B);
+        result = Channel(Chan::B);
     }
-    return Color::FILL;
+    else
+    {
+        // нет действий
+    }
+
+    return result;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
