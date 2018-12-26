@@ -99,8 +99,8 @@ void FPGA::Init()
 void FPGA::LoadSettings()
 {
     hardware.LoadRanges();
-    LoadRShift(Chan::A);
-    LoadRShift(Chan::B);
+    hardware.LoadRShift(Chan::A);
+    hardware.LoadRShift(Chan::B);
     hardware.LoadTrigSourceInput();
     LoadTrigLev();
     LoadTBase();
@@ -118,7 +118,7 @@ void FPGA::LoadHoldfOff()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void FPGA::LoadRShift(Chan::E ch)
+void HardwareFPGA::LoadRShift(Chan::E ch)
 {
     LAST_AFFECTED_CH = ch;
 
@@ -131,7 +131,7 @@ void FPGA::LoadRShift(Chan::E ch)
         shift = (uint16)((int)shift - Tester::DeltaRShiftA());
     }
 
-    WriteRegisters(Pin::SPI3_CS1, (uint16)(mask[ch] | (shift << 2)));
+    FPGA::WriteRegisters(Pin::SPI3_CS1, (uint16)(mask[ch] | (shift << 2)));
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

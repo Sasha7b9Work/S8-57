@@ -44,6 +44,8 @@ public:
 
     static void LoadRanges();
 
+    static void LoadRShift(Chan::E ch);
+
 private:
     static uint8 ValueForRange(Chan::E ch);
 };
@@ -140,8 +142,6 @@ private:
     static void LoadTBase();
 
     static void LoadTrigLev();
-
-    static void LoadRShift(Chan::E ch);
 
     static void WritePin(Pin::E pin, int enable);
 

@@ -489,7 +489,7 @@ void FPGA::RShiftChange(Chan::E ch, int delta)
 {
     Math::AdditionThisLimitation<uint16>(&SET_RSHIFT(ch), STEP_RSHIFT * delta, RShift::MIN, RShift::MAX);
 
-    LoadRShift(ch);
+    HardwareFPGA::LoadRShift(ch);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -658,7 +658,7 @@ void FPGA::SetRShift(Chan::E ch, uint16 rShift)
 {
     Math::Limitation<uint16>(&rShift, RShift::MIN, RShift::MAX);
     SET_RSHIFT(ch) = rShift;
-    LoadRShift(ch);
+    HardwareFPGA::LoadRShift(ch);
 }
 
 #ifdef _WIN32
