@@ -101,7 +101,7 @@ void FPGA::LoadSettings()
     LoadRanges();
     LoadRShift(Chan::A);
     LoadRShift(Chan::B);
-    LoadTrigSourceInput();
+    hardware.LoadTrigSourceInput();
     LoadTrigLev();
     LoadTBase();
     LoadTShift();

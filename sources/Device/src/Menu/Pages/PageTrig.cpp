@@ -68,8 +68,7 @@ DEF_CHOICE_3( cMode, // -V206                                                   
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void OnChanged_Source(bool)
 {
-    FPGA::temp = 0;
-    FPGA::hardware::LoadTrigSource();
+    FPGA::hardware.LoadTrigSource();
 }
 
 DEF_CHOICE_3( cSource, // -V206                                                                                                                                    //--- СИНХР - Источник ---

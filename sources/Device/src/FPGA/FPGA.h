@@ -39,6 +39,8 @@ struct HardwareFPGA
 {
 public:
     static void LoadTrigSource();
+    /// Установить в соотвествующие положения выводы, отвечающие за источник и вход синхронизации
+    static void LoadTrigSourceInput();
 };
 
 class FPGA
@@ -46,8 +48,6 @@ class FPGA
 friend class TrigLev;
 friend struct HardwareFPGA;
 public:
-
-    static int temp;
 
     static HardwareFPGA hardware;
 
@@ -159,8 +159,6 @@ private:
     static uint16 ReadLastRecord();
 
     static void ReadDataChanenl(Chan::E ch, uint8 data[FPGA_MAX_NUM_POINTS]);
-    /// Установить в соотвествующие положения выводы, отвечающие за источник и вход синхронизации
-    static void LoadTrigSourceInput();
     /// Читать канал в рандомизаторе с адреса address
     static void ReadDataChanenlRand(Chan::E ch, const uint8 *address, uint8 *data);
 
