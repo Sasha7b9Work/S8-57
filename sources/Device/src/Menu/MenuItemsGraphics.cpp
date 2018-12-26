@@ -410,8 +410,11 @@ void Page::DrawTitle(int x, int yTop)
         Painter::FillRegion(x + 1, yTop + 1, Menu::Title::WIDTH - 1, Menu::Title::HEIGHT - 1, Color::MenuTitle(false));
     }
 
-    bool condDrawRSet = NumSubPages() > 1 && NOT_CHOICE_REG(Menu::CurrentItem()) &&
-        NOT_GOVERNOR(Menu::CurrentItem()) && IS_PAGE(Menu::OpenedItem());
+    bool condDrawRSet = NumSubPages() > 1 &&
+        NOT_CHOICE_REG(Menu::CurrentItem()) &&
+        NOT_GOVERNOR(Menu::CurrentItem()) &&
+        IS_PAGE(Menu::OpenedItem());
+
     int delta = condDrawRSet ? -10 : 0;
     Color colorText = Color::FILL;
     x = Painter::DrawStringInCenterRect(x, yTop, Menu::Title::WIDTH + 2 + delta, Menu::Title::HEIGHT, Title().CString(), colorText);

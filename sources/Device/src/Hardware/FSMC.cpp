@@ -83,10 +83,10 @@ void FSMC::Init()
     // GPIOD 14, 15, 0, 1 - D0, D1, D2, D3
     // GPIOE  7, 8, 9, 10 - D4, D5, D6, D7
 
-    GPIOD->PUPDR &= 0x0ffffff0;     // Обнуляем пины 15, 14, 1, 0
+    GPIOD->PUPDR &= 0x0ffffff0U;     // Обнуляем пины 15, 14, 1, 0
     GPIOD->PUPDR |= 0xa000000a;     // Устанавливаем для этих пинов GPIO_PULLDOWN
 
-    GPIOE->PUPDR &= 0xffc03fff;     // Обнуляем пины 7, 8, 9, 10
+    GPIOE->PUPDR &= 0xffc03fffU;     // Обнуляем пины 7, 8, 9, 10
     GPIOE->PUPDR |= 0x00268000;     // Устанавливаем для этих пинов GPIO_PULLDOWN
 
     CONFIGURE_TO_WRITE_PANEL;

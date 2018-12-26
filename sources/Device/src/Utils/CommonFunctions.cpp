@@ -103,7 +103,7 @@ char *CF::GetWord(char *string, int n, char *out, int size)
 
     if (length + 1 > size)
     {
-        return (char *)0xffffffff;              // Не хватит места в выходном буфере - выходим с соответствующим кодом
+        return (char *)0xffffffffU;              // Не хватит места в выходном буфере - выходим с соответствующим кодом
     }
 
     for (int i = 0; i < length; i++)

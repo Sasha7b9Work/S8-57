@@ -410,7 +410,7 @@ int Painter::DrawTextWithLimitation(int x, int y, const char *text, int limitX, 
 bool Painter::ByteFontNotEmpty(uint eChar, int byte)
 {
     static const uint8 *bytes = 0;
-    static uint prevChar = 0xffffffff;
+    static uint prevChar = 0xffffffffU;
     if (eChar != prevChar)
     {
         prevChar = eChar;
