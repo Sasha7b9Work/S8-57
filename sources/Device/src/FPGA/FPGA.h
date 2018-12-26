@@ -51,6 +51,8 @@ public:
     static void LoadTBase();
 
     static void LoadTShift();
+    /// Включить/выключить калибратор.
+    static void LoadCalibratorMode();
 
 private:
     static uint8 ValueForRange(Chan::E ch);
@@ -124,8 +126,6 @@ public:
     static void SetTBase(TBase tBase);
     /// Найти и установить уровень синхронизации по последнему считанному сигналу
     static void FindAndSetTrigLevel();
-    /// Включить/выключить калибратор.
-    static void LoadCalibratorMode();
 
     static void EnableRecorderMode(bool enable);
     /// Установить добавочное смещение по времени для режима рандомизатора. В каждой развёртке это смещение должно быть разное

@@ -105,7 +105,7 @@ void FPGA::LoadSettings()
     hardware.LoadTrigLev();
     hardware.LoadTBase();
     hardware.LoadTShift();
-    LoadCalibratorMode();
+    hardware.LoadCalibratorMode();
     LoadHoldfOff();
 
     isRunning = false;

@@ -83,10 +83,10 @@ DEF_BUTTON(         bAutoSearch,                                                
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void OnChanged_Calibrator_Calibrator(bool)
 {
-    FPGA::LoadCalibratorMode();
+    FPGA::hardware.LoadCalibratorMode();
 }
 
-DEF_CHOICE_2( cCalibrator_Calibrator,                                                                                                              //--- СЕРВИС - КАЛИБРАТОР - Калибратор ---
+DEF_CHOICE_2( cCalibrator_Calibrator, // -V206                                                                                                     //--- СЕРВИС - КАЛИБРАТОР - Калибратор ---
     "Калибратор", "Calibrator",
     "Режим работы калибратора",
     "Mode of operation of the calibrator",
@@ -107,7 +107,7 @@ static void OnPress_Calibrator_Calibrate()
     FPGA::DoCalibration();
 }
 
-DEF_BUTTON(         bCalibrator_Calibrate,                                                                 //--- СЕРВИС - КАЛИБРАТОР - Калибровать ---
+DEF_BUTTON( bCalibrator_Calibrate,                                                                                                                //--- СЕРВИС - КАЛИБРАТОР - Калибровать ---
     "Калибровать", "Calibrate",
     "Запуск процедуры калибровки",
     "Running the calibration procedure",
@@ -115,7 +115,7 @@ DEF_BUTTON(         bCalibrator_Calibrate,                                      
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-DEF_PAGE_2(         ppCalibrator,                                                                                           // СЕРВИС - КАЛИБРАТОР ///
+DEF_PAGE_2( ppCalibrator, // -V641 // -V1027                                                                                                                    //--- СЕРВИС - КАЛИБРАТОР ---
     "КАЛИБРАТОР", "CALIBRATOR",
     "Управлением калибратором и калибровка осциллографа",
     "Control of the calibrator and calibration of an oscillograph",
@@ -132,7 +132,7 @@ static void OnChanged_Recorder(bool)
     FPGA::EnableRecorderMode(RECORDER_MODE);
 }
 
-DEF_CHOICE_2(       cRecorder,                                                                                          //--- СЕРВИС - Регистратор ---
+DEF_CHOICE_2( cRecorder,                                                                                                                                       //--- СЕРВИС - Регистратор ---
     "Регистратор", "Recorder",
     "Включает/выключает режим регистратора. Этот режим доступен на развёртках 50 мс/дел и более медленных.",
     "Turn on/off recorder mode. This mode is available for scanning 20ms/div and slower.",
@@ -349,14 +349,14 @@ static void OnPress_Function_Type()
 
 static void Draw_Function_Type_Sum(int x, int y)
 {
-    Painter::DrawHLine(y + 9, x + 4, x + 14);
-    Painter::DrawVLine(x + 9, y + 4, y + 14);
+    Painter::DrawHLine(y + 9, x + 4, x + 14);   // -V112
+    Painter::DrawVLine(x + 9, y + 4, y + 14);   // -V112
 }
 
 static void Draw_Function_Type_Mul(int x, int y)
 {
     Painter::SetFont(Font::Type::_UGO2);
-    Painter::Draw4SymbolsInRect(x + 4, y + 3, SYMBOL_MATH_FUNC_MUL);
+    Painter::Draw4SymbolsInRect(x + 4, y + 3, SYMBOL_MATH_FUNC_MUL);    // -V112
     Painter::SetFont(Font::Type::_8);
 }
 
@@ -458,7 +458,7 @@ static void OnPress_Function(bool)
     }
 }
 
-static bool HandlerKey_Function(KeyEvent event)
+static bool HandlerKey_Function(KeyEvent event) // -V2506
 {
     if (!FUNC_MODE_DRAW_IS_ENABLED)
     {
@@ -477,7 +477,7 @@ static bool HandlerKey_Function(KeyEvent event)
         {
             if (rShift < RShift::MAX)
             {
-                rShift += 4 * STEP_RSHIFT;
+                rShift += 4 * STEP_RSHIFT;  // -V112
                 LIMIT_ABOVE(rShift, RShift::MAX);
                 if (prevRShift < RShift::ZERO && rShift > RShift::ZERO)
                 {
@@ -487,11 +487,11 @@ static bool HandlerKey_Function(KeyEvent event)
                 SET_RSHIFT_MATH = rShift;
             }
         }
-        else if (delta < 0)
+        else
         {
             if (rShift > RShift::MIN)
             {
-                rShift -= 4 * STEP_RSHIFT;
+                rShift -= 4 * STEP_RSHIFT; // -V112
                 LIMIT_BELOW(rShift, RShift::MIN);
                 if (prevRShift > RShift::ZERO && rShift < RShift::ZERO)
                 {
@@ -529,13 +529,17 @@ static bool HandlerKey_Function(KeyEvent event)
             }
             sum = 0;
         }
+        else
+        {
+            // ничего делать не нужно
+        }
     }
 
     return true;
 }
 
 
-DEF_PAGE_5(ppFunction,                                                                                                         // СЕРВИС - ФУНКЦИЯ ///
+DEF_PAGE_5( ppFunction, // -V641                                                                                                                                   //--- СЕРВИС - ФУНКЦИЯ ---
     "ФУНКЦИЯ", "FUNCTION",
     "Установка и выбор математической функции - сложения или умножения",
     "Installation and selection of mathematical functions - addition or multiplication",
@@ -551,7 +555,7 @@ DEF_PAGE_5(ppFunction,                                                          
 
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-DEF_CHOICE_2(       cSound_Enable,                                                                                      //--- СЕРВИС - ЗВУК - Звук ---
+DEF_CHOICE_2( cSound_Enable,                                                                                                                                   //--- СЕРВИС - ЗВУК - Звук ---
     "Звук", "Sound",
     "Включение/выключение звука",
     "Inclusion/switching off of a sound",
@@ -561,7 +565,7 @@ DEF_CHOICE_2(       cSound_Enable,                                              
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-DEF_GOVERNOR(       gSound_Volume,                                                                                 //--- СЕРВИС - ЗВУК - Громкость ---
+DEF_GOVERNOR( gSound_Volume,                                                                                                                              //--- СЕРВИС - ЗВУК - Громкость ---
     "Громкость", "Volume",
     "Установка громкости звука",
     "Set the volume",
@@ -569,7 +573,7 @@ DEF_GOVERNOR(       gSound_Volume,                                              
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-DEF_PAGE_2(         ppSound,                                                                                                      // СЕРВИС - ЗВУК ///
+DEF_PAGE_2( ppSound, // -V641 // -V1027                                                                                                                               //--- СЕРВИС - ЗВУК ---
     "ЗВУК", "SOUND",
     "В этом меню можно настроить громкость звука",
     "In this menu, you can adjust the volume",
@@ -581,8 +585,7 @@ DEF_PAGE_2(         ppSound,                                                    
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static int8 dServicetime = 0;
 static int8 hours = 0, minutes = 0, secondes = 0, year = 0, month = 0, day = 0;
-DEF_TIME(                                                                                                             //--- СЕРВИС - ВРЕМЯ - Время ---
-    tRTC_Time,
+DEF_TIME(tRTC_Time,                                                                                                                                          //--- СЕРВИС - ВРЕМЯ - Время ---
     "Время", "Time",
     "Установка текущего времени.\nПорядок работы:\n"
     "Нажать на элемент меню \"Время\". Откроется меню установки текущего времени. Короткими нажатиями кнопки на цифровой клавиатуре, соответсвующей "
@@ -607,7 +610,7 @@ static void OnChanged_Time_Correction()
     CPU::RTC_::SetCorrection((int8)NRST_CORRECTION_TIME);
 }
 
-DEF_GOVERNOR(       tRTC_Correction,                                                                              //--- СЕРВИС - ВРЕМЯ - Коррекция ---
+DEF_GOVERNOR( tRTC_Correction,                                                                                                                           //--- СЕРВИС - ВРЕМЯ - Коррекция ---
     "Коррекция", "Correction",
     "Установка корректирующего коэффициента для компенсации хода времени",
     "Setting correction factor to compensate for time travel",
@@ -615,7 +618,7 @@ DEF_GOVERNOR(       tRTC_Correction,                                            
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-DEF_PAGE_2(         ppRTC,                                                                                                       // СЕРВИС - ВРЕМЯ ///
+DEF_PAGE_2( ppRTC, // -V641 // -V1027                                                                                                                                //--- СЕРВИС - ВРЕМЯ ---
     "ВРЕМЯ", "TIME",
     "Установка и настройка времени",
     "Set and setup time",
@@ -625,7 +628,7 @@ DEF_PAGE_2(         ppRTC,                                                      
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-DEF_CHOICE_2(       cLanguage,                                                                                                 //--- СЕРВИС - Язык ---
+DEF_CHOICE_2( cLanguage,                                                                                                                                              //--- СЕРВИС - Язык ---
     "Language", "Язык",
     "Позволяет выбрать язык меню",
     "Allows you to select the menu language",
@@ -682,12 +685,12 @@ static void OnPress_Information_Exit()
     Display::SetDrawMode(DrawMode::Auto, 0);
 }
 
-DEF_SMALL_BUTTON_EXIT(bInformation_Exit,                                                                       //--- СЕРВИС - ИНФОРМАЦИЯ - Выход ---
-                      ppInformation, FuncActive, OnPress_Information_Exit, DrawSB_Exit
+DEF_SMALL_BUTTON_EXIT( bInformation_Exit,                                                                                                               //--- СЕРВИС - ИНФОРМАЦИЯ - Выход ---
+    ppInformation, FuncActive, OnPress_Information_Exit, DrawSB_Exit
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-DEF_PAGE_SB(ppInformation,                                                                                          // СЕРВИС - ИНФОРМАЦИЯ ///
+DEF_PAGE_SB( ppInformation, // -V641                                                                                                                            //--- СЕРВИС - ИНФОРМАЦИЯ ---
     "ИНФОРМАЦИЯ", "INFORMATION",
     "Показывает информацию о приборе",
     "Displays information about the device",
@@ -704,7 +707,7 @@ DEF_PAGE_SB(ppInformation,                                                      
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 const PageBase *PageService::pointer = &pService;
 
-DEF_PAGE_9(pService,                                                                                                                                                         //--- СЕРВИС ---
+DEF_PAGE_9( pService, // -V641 // -V1027                                                                                                                                     //--- СЕРВИС ---
     "СЕРВИС", "SERVICE",
     "Дополнительные настройки, калибровка, поиск сигнала, математические функции",
     "Additional settings, calibration, signal search, mathematical functions",
