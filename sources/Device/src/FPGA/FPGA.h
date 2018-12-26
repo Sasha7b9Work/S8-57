@@ -50,6 +50,8 @@ public:
 
     static void LoadTBase();
 
+    static void LoadTShift();
+
 private:
     static uint8 ValueForRange(Chan::E ch);
 };
@@ -100,8 +102,6 @@ public:
 
     static bool InStateStop() { return false; }
 
-    static void LoadTShift();
-  
     static StateWorkFPGA GetStateWork();
 
     static void SetTShift(int tShift);

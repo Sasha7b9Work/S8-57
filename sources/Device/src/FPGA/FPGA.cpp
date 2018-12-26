@@ -632,25 +632,22 @@ void FPGA::ResetPin(Pin::E pin)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void FPGA::LoadTShift()
+void HardwareFPGA::LoadTShift()
 {
-    post = (uint16)(SET_TSHIFT - TShift::Min());
-    int Pred = (int)FPGA::NumPoints() - (int)post;
+    FPGA::post = (uint16)(SET_TSHIFT - TShift::Min());
+    int Pred = (int)FPGA::NumPoints() - (int)FPGA::post;
 
     if(Pred < 0)
     {
         Pred = 0;
     }
-    pred = (uint16)Pred;
+    FPGA::pred = (uint16)Pred;
 
-    //LOG_WRITE("tShift = %d, tShiftMin = %d, post = %D", SET_TSHIFT, TShift::Min(), post);
-    //LOG_WRITE("NUM_POINTS = %d, pred = %d", FPGA_NUM_POINTS, pred);
+    FPGA::post = (uint16)(~(FPGA::post + 1));
+    FPGA::pred = (uint16)(~(FPGA::pred + 3));
 
-    post = (uint16)(~(post + 1));
-    pred = (uint16)(~(pred + 3));
-
-    FSMC::WriteToFPGA16(WR_PRED_LO, post);
-    FSMC::WriteToFPGA16(WR_POST_LO, pred);
+    FSMC::WriteToFPGA16(WR_PRED_LO, FPGA::post);
+    FSMC::WriteToFPGA16(WR_POST_LO, FPGA::pred);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -707,7 +704,7 @@ void HardwareFPGA::LoadTBase()
 
     FSMC::WriteToFPGA8(WR_TBASE, values[SET_TBASE]);
 
-    FPGA::LoadTShift();
+    LoadTShift();
 }
 
 #ifdef _WIN32
@@ -748,7 +745,7 @@ void FPGA::SetTShift(int tShift)
 {
     SET_TSHIFT.Set(tShift);
 
-    LoadTShift();
+    hardware.LoadTShift();
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -785,7 +782,7 @@ void FPGA::Reset()
 {
     DataStorage::Init();
 
-    LoadTShift();
+    hardware.LoadTShift();
 
     LoadRegUPR();
 }
