@@ -91,14 +91,14 @@ static const struct name        \
 
 #define _bitset(bits)                               \
   ((uint8)(                                         \
-  (((uint8)((uint)bits / 0x000001) % 0x08) << 0) |  \
-  (((uint8)((uint)bits / 0x000008) % 0x08) << 1) |  \
-  (((uint8)((uint)bits / 0x000040) % 0x08) << 2) |  \
-  (((uint8)((uint)bits / 0x000200) % 0x08) << 3) |  \
-  (((uint8)((uint)bits / 0x001000) % 0x08) << 4) |  \
-  (((uint8)((uint)bits / 0x008000) % 0x08) << 5) |  \
-  (((uint8)((uint)bits / 0x040000) % 0x08) << 6) |  \
-  (((uint8)((uint)bits / 0x200000) % 0x08) << 7)))
+  (((uint8)((uint)bits / 01)        % 010) << 0) |  \
+  (((uint8)((uint)bits / 010)       % 010) << 1) |  \
+  (((uint8)((uint)bits / 0100)      % 010) << 2) |  \
+  (((uint8)((uint)bits / 01000)     % 010) << 3) |  \
+  (((uint8)((uint)bits / 010000)    % 010) << 4) |  \
+  (((uint8)((uint)bits / 0100000)   % 010) << 5) |  \
+  (((uint8)((uint)bits / 01000000)  % 010) << 6) |  \
+  (((uint8)((uint)bits / 010000000) % 010) << 7)))
 
 
 #define BIN_U8(bits) (_bitset(0##bits))

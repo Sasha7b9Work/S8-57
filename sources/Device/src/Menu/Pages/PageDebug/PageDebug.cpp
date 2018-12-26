@@ -104,7 +104,7 @@ DEF_GOVERNOR(       gADC_Balance_ShiftB,                                        
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-DEF_PAGE_3(         pppADC_Balance,                                                                                      // ОТЛАДКА - АЦП - БАЛАНС ///
+DEF_PAGE_3( pppADC_Balance, // -V641                                                                                                                         //--- ОТЛАДКА - АЦП - БАЛАНС ---
     "БАЛАНС", "BALANCE",
     "",
     "",
@@ -242,7 +242,7 @@ DEF_GOVERNOR(       gADC_Stretch_Bk2V,                                          
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //static const ChoiceBase emptyChoice = {Control::Type::Choice, 0, false, Page::Name::NoPage, 0, FuncActive, {}, 0, 0, 0, 0};
 
-DEF_PAGE_3(        pppADC_Stretch,                                                                                    // ОТЛАДКА - АЦП - РАСТЯЖКА ///
+DEF_PAGE_3( pppADC_Stretch, // -V641                                                                                                                       //--- ОТЛАДКА - АЦП - РАСТЯЖКА ---
     "РАСТЯЖКА", "STRETCH",
     "Устанавливает режим и величину растяжки (для ручного режима)",
     "Sets mode and the value of stretching (manual mode)",
@@ -324,7 +324,7 @@ DEF_GOVERNOR(       gADC_Shift_A10mV,                                           
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-DEF_GOVERNOR(       gADC_Shift_B10mV,                                                             //--- ОТЛАДКА - АЦП - ДОП СМЕЩ - См 2к 10мВ пост ---
+DEF_GOVERNOR( gADC_Shift_B10mV,                                                                                                          //--- ОТЛАДКА - АЦП - ДОП СМЕЩ - См 2к 10мВ пост ---
     "См 2к 10мВ пост", "Shift 2ch 10mV DC",
     "",
     "",
@@ -332,7 +332,7 @@ DEF_GOVERNOR(       gADC_Shift_B10mV,                                           
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-DEF_PAGE_7(         pppADC_Shift,                                                                                      // ОТЛАДКА - АЦП - ДОП СМЕЩ ///
+DEF_PAGE_7( pppADC_Shift, // -V641  // -V1027                                                                                                              //--- ОТЛАДКА - АЦП - ДОП СМЕЩ ---
     "ДОП СМЕЩ", "ADD RSHFIT",
     "",
     "",
@@ -347,7 +347,7 @@ DEF_PAGE_7(         pppADC_Shift,                                               
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-DEF_PAGE_3(         ppADC,                                                                                                        // ОТЛАДКА - АЦП ///
+DEF_PAGE_3( ppADC, // -V641                                                                                                                                           //--- ОТЛАДКА - АЦП ---
     "АЦП", "ADC",
     "",
     "",
@@ -363,7 +363,7 @@ static void OnChanged_Channels_BandwidthA(bool)
     FPGA::SetBandwidth(Chan::A);
 }
 
-DEF_CHOICE_7(       cChannels_BandwidthA,                                                                        //--- ОТЛАДКА - КАНЛАЫ - Полоса 1 ---
+DEF_CHOICE_7( cChannels_BandwidthA,                                                                                                                     //--- ОТЛАДКА - КАНЛАЫ - Полоса 1 ---
     "Полоса 1", "Bandwidth 1",
     "Здесь можно выбрать полосу, которая будет действовать в КАНАЛ1-Полоса при выборе значения Полная",
     "Here you can select the bandwidth, which will operate in CHANNEL1-Bandwidth when set to Full",
@@ -398,7 +398,7 @@ DEF_CHOICE_7(       cChannels_BandwidthB,                                       
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-DEF_PAGE_2(         ppChannels,                                                                                                                                    //--- ОТЛАДКА - КАНАЛЫ ---
+DEF_PAGE_2( ppChannels, // -V641                                                                                                                                   //--- ОТЛАДКА - КАНАЛЫ ---
     "КАНАЛЫ", "CHANNELS",
     "",
     "",
@@ -549,7 +549,7 @@ static void OnPress_Settings(bool)
     Display::SetDrawMode(DrawMode::Auto, DebugShowSetInfo_Draw);
 }
 
-DEF_PAGE_SB(        ppSettings,                                                                                             // ОТЛАДКА - НАСТРОЙКИ ///
+DEF_PAGE_SB( ppSettings, // -V641 // -V1027                                                                                                                     //--- ОТЛАДКА - НАСТРОЙКИ ---
     "НАСТРОЙКИ", "SETTINGS",
     "Показать информацию о настройках",
     "Show settings information",
@@ -576,7 +576,7 @@ static void OnPress_SaveFirmware()
 
     FDrive::OpenNewFileForWrite("S8-54.bin", &structForWrite);
 
-    uint8 *address = (uint8 *)0x08020000;
+    uint8 *address = (uint8 *)0x08020000;   // -V566
     uint8 *endAddress = address + 128 * 1024 * 3;
 
     int sizeBlock = 512;
@@ -726,7 +726,7 @@ static void OnPress_SerialNumber(bool)
 {
     Display::SetAddDrawFunction(Draw_EnterSerialNumber);
     MALLOC_EXTRAMEM(StructForSN, s);
-    s->number = 01;
+    s->number =  1; // -V522
     s->year = 2017;
     s->curDigt = 0;
 }
@@ -750,7 +750,7 @@ static bool HandlerKey_SerialNumber(KeyEvent event)
     return true;
 }
 
-DEF_PAGE_SB(        ppSerialNumber,                                                                                                                                   //--- ОТЛАДКА - С/Н ---
+DEF_PAGE_SB( ppSerialNumber, // -V641 // -V1027                                                                                                                       //--- ОТЛАДКА - С/Н ---
     "С/Н", "S/N",
     "Запись серийного номера в OTP-память. ВНИМАНИЕ!!! ОТP-память - память с однократной записью.",
     "Serial number recording in OTP-memory. ATTENTION!!! OTP memory is a one-time programming memory.",
@@ -779,7 +779,7 @@ DEF_BUTTON(         bEraseData,                                                 
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-DEF_PAGE_5( pageDebug,                                                                                                                                                     //--- ОТЛАДКА ---
+DEF_PAGE_5( pageDebug, // -V641                                                                                                                                             //--- ОТЛАДКА ---
     "ОТЛАДКА", "DEBUG",
     "",
     "",

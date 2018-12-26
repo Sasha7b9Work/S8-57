@@ -62,7 +62,7 @@ static const PageBase name = {Control::Type::Page, 2, false, namePage, keeper, f
     items##name, funcPress, funcDraw, funcRegSet};
 
 #define DEF_PAGE_3(name, titleRU, titleEN, hintRU, hintEN, item1, item2, item3, namePage, keeper, funcActive, funcPress, funcDraw, funcRegSet)  \
-static const Control * items##name[] = {(Control *)item1, (Control *)item2, (Control *)item3};                                                  \
+static const Control * items##name[] = {(Control *)(item1), (Control *)(item2), (Control *)(item3)};                                                  \
 static const PageBase name = {Control::Type::Page, 3, false, namePage, keeper, funcActive, {titleRU, titleEN, hintRU, hintEN},                  \
     items##name, funcPress, funcDraw, funcRegSet};
 

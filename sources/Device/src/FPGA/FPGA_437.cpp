@@ -147,19 +147,19 @@ void FPGA::LoadRanges()
 
     DEF_STRUCT(StructRange, uint8) vals[Range::Number] =
     {
-        StructRange(BIN_U8(00000000)),  // 2mV
-        StructRange(BIN_U8(00000001)),  // 5mV
-        StructRange(BIN_U8(00000010)),  // 10mV
-        StructRange(BIN_U8(00000011)),  // 20mV
-        StructRange(BIN_U8(00000001)),  // 50mV
-        StructRange(BIN_U8(00000010)),  // 100mV
-        StructRange(BIN_U8(00000011)),  // 200mV
-        StructRange(BIN_U8(00000001)),  // 500mV
-        StructRange(BIN_U8(00000010)),  // 1V
-        StructRange(BIN_U8(00000011)),  // 2V
-        StructRange(BIN_U8(00000001)),  // 5V
-        StructRange(BIN_U8(00000010)),  // 10V
-        StructRange(BIN_U8(00000011))   // 20V
+        StructRange(BIN_U8(00000000)),  // 2mV      // -V2501
+        StructRange(BIN_U8(00000001)),  // 5mV      // -V2501
+        StructRange(BIN_U8(00000010)),  // 10mV     // -V2501
+        StructRange(BIN_U8(00000011)),  // 20mV     // -V2501
+        StructRange(BIN_U8(00000001)),  // 50mV     // -V2501
+        StructRange(BIN_U8(00000010)),  // 100mV    // -V2501
+        StructRange(BIN_U8(00000011)),  // 200mV    // -V2501
+        StructRange(BIN_U8(00000001)),  // 500mV    // -V2501
+        StructRange(BIN_U8(00000010)),  // 1V       // -V2501
+        StructRange(BIN_U8(00000011)),  // 2V       // -V2501
+        StructRange(BIN_U8(00000001)),  // 5V       // -V2501
+        StructRange(BIN_U8(00000010)),  // 10V      // -V2501
+        StructRange(BIN_U8(00000011))   // 20V      // -V2501
     };
 
     uint8 valueA = vals[SET_RANGE_A].val;
@@ -176,8 +176,8 @@ void FPGA::LoadRanges()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void FPGA::ReadData()
 {
-    Buffer dataA(FPGA::NumPoints());
-    Buffer dataB(FPGA::NumPoints());
+    Buffer dataA(FPGA::NumPoints());    // -V656
+    Buffer dataB(FPGA::NumPoints());    // -V656
 
     ReadDataChanenl(Chan::A, dataA.Data());
     ReadDataChanenl(Chan::B, dataB.Data());
