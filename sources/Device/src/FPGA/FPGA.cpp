@@ -497,7 +497,7 @@ void FPGA::TrigLevChange(int delta)
 {
     Math::AdditionThisLimitation<uint16>(&SET_TRIGLEV_SOURCE, STEP_TRIGLEV * delta, Trig::MIN, Trig::MAX);
 
-    LoadTrigLev();
+    HardwareFPGA::LoadTrigLev();
 
     Trig::NeedForDraw(2000);
 }
@@ -598,12 +598,12 @@ void FPGA::WriteRegisters(Pin::E cs, uint16 value)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void FPGA::LoadTrigLev()
+void HardwareFPGA::LoadTrigLev()
 {
     /// \todo Здесь много лишних движений. Нужно что-то сделать с вводом SET_TRIGLEV_SOURCE
     uint16 value = (uint16)((Trig::MAX + Trig::MIN) - SET_TRIGLEV_SOURCE);
 
-    WriteRegisters(Pin::SPI3_CS1, (uint16)(0xa000 | (value << 2)));
+    FPGA::WriteRegisters(Pin::SPI3_CS1, (uint16)(0xa000 | (value << 2)));
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

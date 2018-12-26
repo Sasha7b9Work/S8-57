@@ -46,6 +46,8 @@ public:
 
     static void LoadRShift(Chan::E ch);
 
+    static void LoadTrigLev();
+
 private:
     static uint8 ValueForRange(Chan::E ch);
 };
@@ -140,8 +142,6 @@ private:
     static void GPIO_Init();
 
     static void LoadTBase();
-
-    static void LoadTrigLev();
 
     static void WritePin(Pin::E pin, int enable);
 
