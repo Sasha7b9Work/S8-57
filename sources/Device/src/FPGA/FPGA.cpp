@@ -458,7 +458,7 @@ void FPGA::ChangeRange(Chan::E ch, int delta)
     {
         Math::LimitationDecrease<uint8>((uint8 *)(&SET_RANGE(ch)), 0);  // -V206
     }
-    LoadRanges();
+    hardware.LoadRanges();
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -526,7 +526,7 @@ GPIO_TypeDef *FPGA::GetPort(Pin::E pin)
 #endif
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-uint8 FPGA::ValueForRange(Chan::E ch) // -V2506
+uint8 HardwareFPGA::ValueForRange(Chan::E ch) // -V2506
 {
     static const uint8 datas[ModeCouple::Size] =
     {
@@ -755,7 +755,7 @@ void FPGA::SetTShift(int tShift)
 void FPGA::SetModeCouple(Chan::E ch, ModeCouple::E modeCoupe)
 {
     SET_COUPLE(ch) = modeCoupe;
-    LoadRanges();
+    hardware.LoadRanges();
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

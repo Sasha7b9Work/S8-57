@@ -41,6 +41,11 @@ public:
     static void LoadTrigSource();
     /// Установить в соотвествующие положения выводы, отвечающие за источник и вход синхронизации
     static void LoadTrigSourceInput();
+
+    static void LoadRanges();
+
+private:
+    static uint8 ValueForRange(Chan::E ch);
 };
 
 class FPGA
@@ -82,8 +87,6 @@ public:
     static void LoadTrigInput();
 
     static void Stop(bool pause = false);
-
-    static void LoadRanges();
 
     static uint NumPoints();
 
@@ -165,8 +168,6 @@ private:
     static bool CalculateGate(uint16 rand, uint16 *eMin, uint16 *eMax);
 
     static int CalculateShift();
-
-    static uint8 ValueForRange(Chan::E ch);
 
     static bool isRunning;
     /// True, если дан запуск

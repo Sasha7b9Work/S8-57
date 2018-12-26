@@ -98,7 +98,7 @@ void FPGA::Init()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void FPGA::LoadSettings()
 {
-    LoadRanges();
+    hardware.LoadRanges();
     LoadRShift(Chan::A);
     LoadRShift(Chan::B);
     hardware.LoadTrigSourceInput();
@@ -135,15 +135,15 @@ void FPGA::LoadRShift(Chan::E ch)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void FPGA::LoadRanges()
+void HardwareFPGA::LoadRanges()
 {
     uint16 value = (uint16)(ValueForRange(Chan::B) + (ValueForRange(Chan::A) << 8));
 
-    WriteRegisters(Pin::SPI3_CS2, value);
+    FPGA::WriteRegisters(Pin::SPI3_CS2, value);
 
     PAUSE_ON_MS(10);                // Задержка нужна, чтобы импульсные реле успели отработать
 
-    WriteRegisters(Pin::SPI3_CS2, 0);    // Записываем ноль, чтобы реле не потребляли энергии
+    FPGA::WriteRegisters(Pin::SPI3_CS2, 0);    // Записываем ноль, чтобы реле не потребляли энергии
 
     DEF_STRUCT(StructRange, uint8) vals[Range::Number] =
     {
@@ -164,13 +164,13 @@ void FPGA::LoadRanges()
 
     uint8 valueA = vals[SET_RANGE_A].val;
 
-    WritePin(Pin::A1, _GET_BIT(valueA, 1));
-    WritePin(Pin::A2, _GET_BIT(valueA, 0));
+    FPGA::WritePin(Pin::A1, _GET_BIT(valueA, 1));
+    FPGA::WritePin(Pin::A2, _GET_BIT(valueA, 0));
 
     uint8 valueB = vals[SET_RANGE_B].val;
 
-    WritePin(Pin::A3, _GET_BIT(valueB, 1));
-    WritePin(Pin::A4, _GET_BIT(valueB, 0));
+    FPGA::WritePin(Pin::A3, _GET_BIT(valueB, 1));
+    FPGA::WritePin(Pin::A4, _GET_BIT(valueB, 0));
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

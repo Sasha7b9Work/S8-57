@@ -143,7 +143,7 @@ void Tester::Enable()
     SET_RANGE(Chan::A) = Range::_2V;
     SET_RANGE(Chan::B) = Range::_2V;
 
-    FPGA::LoadRanges();
+    FPGA::hardware.LoadRanges();
 
     FPGA::SetRShift(Chan::A, RShift::ZERO);
     FPGA::SetRShift(Chan::B, RShift::ZERO);
