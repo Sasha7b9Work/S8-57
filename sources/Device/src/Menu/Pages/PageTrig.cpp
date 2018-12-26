@@ -49,7 +49,7 @@ void PageTrig::OnChanged_TrigMode(bool)
     }
 }
 
-DEF_CHOICE_3(       cMode,                                                                                                     //--- СИНХР - Режим ---
+DEF_CHOICE_3( cMode, // -V206                                                                                                                                         //--- СИНХР - Режим ---
     "Режим", "Mode",
     "Задаёт режим запуска:\n"
     "1. \"Авто\" - запуск происходит автоматически.\n"
@@ -71,7 +71,7 @@ static void OnChanged_Source(bool)
     FPGA::LoadTrigSource();
 }
 
-DEF_CHOICE_3(       cSource,                                                                                                //--- СИНХР - Источник ---
+DEF_CHOICE_3( cSource, // -V206                                                                                                                                    //--- СИНХР - Источник ---
     "Источник", "Source",
     "Выбор источника сигнала синхронизации.",
     "Synchronization signal source choice.",
@@ -87,7 +87,7 @@ static void OnChanged_Polarity(bool)
     FPGA::LoadTrigPolarity();
 }
 
-DEF_CHOICE_2(       cPolarity,                                                                                            //--- СИНХР - Полярность ---
+DEF_CHOICE_2( cPolarity, //-V206                                                                                                                                 //--- СИНХР - Полярность ---
     "Полярность", "Polarity",
     "1. \"Фронт\" - запуск происходит по фронту синхроимпульса.\n"
     "2. \"Срез\" - запуск происходит по срезу синхроимпульса.",
@@ -104,7 +104,7 @@ static void OnChanged_Input(bool)
     FPGA::LoadTrigInput();
 }
 
-DEF_CHOICE_3(       cInput,                                                                                                     //--- СИНХР - Вход ---
+DEF_CHOICE_3( cInput, // -V206                                                                                                                                         //--- СИНХР - Вход ---
     "Вход", "Input",
     "Выбор связи с источником синхронизации:\n"
     "1. \"ПС\" - полный сигнал.\n"
@@ -120,10 +120,10 @@ DEF_CHOICE_3(       cInput,                                                     
     TRIG_INPUT, pTrig, FuncActive, OnChanged_Input, FuncDraw
 )
 
-//-------------------------------------------------------------------------------------------------------------------------- СИНХР - ПОИСК - Режим ---
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static const char *hintsSearch_Mode[] ={ "Ручной", "Hand", "Автоматический",  "Auto" };
 
-static const ChoiceBase cSearch_Mode =
+static const ChoiceBase cSearch_Mode =                                                                                                                        //--- СИНХР - ПОИСК - Режим ---
 {
     Control::Type::Choice, 2, false, Page::Name::NoPage, &ppSearch, FuncActive,
     {
@@ -139,7 +139,7 @@ static const ChoiceBase cSearch_Mode =
         "\"SERVICE\x99Mode long СИНХР\x99\x41utolevel\".\n"
         "2. \"Auto\" - the search is automatically."
     },
-    (int8 *)&TRIG_MODE_FIND,
+    (int8 *)&TRIG_MODE_FIND, // -V206
     hintsSearch_Mode, FuncChangedChoice, FuncDraw
 };
 
@@ -163,7 +163,7 @@ DEF_BUTTON( bSearch_Search,                                                     
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-DEF_PAGE_2( ppSearch, // -V641                                                                                                                                        //--- СИНХР - ПОИСК ---
+DEF_PAGE_2( ppSearch, // -V641 // -V1027                                                                                                                              //--- СИНХР - ПОИСК ---
     "ПОИСК", "SEARCH",
     "Управление автоматическим поиском уровня синхронизации.",
     "Office of the automatic search the trigger level.",
@@ -175,7 +175,7 @@ DEF_PAGE_2( ppSearch, // -V641                                                  
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 const PageBase *PageTrig::pointer = &pTrig;
 
-DEF_PAGE_5( pTrig, // -V641                                                                                                                                                   //--- СИНХР ---
+DEF_PAGE_5( pTrig, // -V641 // -V1027                                                                                                                                         //--- СИНХР ---
     "СИНХР", "TRIG",
     "Содержит настройки синхронизации.",
     "Contains synchronization settings.",

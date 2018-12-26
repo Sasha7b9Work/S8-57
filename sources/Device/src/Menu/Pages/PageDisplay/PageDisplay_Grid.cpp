@@ -14,7 +14,7 @@ const PageBase *PageDisplay::PageGrid::pointer = &pageGrid;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-DEF_CHOICE_4( cType,                                                                                                   //--- ДИСПЛЕЙ - СЕТКА - Тип ---
+DEF_CHOICE_4( cType, // -V206                                                                                                                                 //--- ДИСПЛЕЙ - СЕТКА - Тип ---
     "Тип", "Type",
     "Выбор типа сетки.",
     "Choice like Grid::",
@@ -28,16 +28,16 @@ DEF_CHOICE_4( cType,                                                            
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void OnChanged_Grid_Brightness()
 {
-    PageDisplay::PageSettings::PageColors::colorTypeGrid.SetBrightness(BRIGHTNESS_GRID / 100.0f);
+    PageDisplay::PageSettings::PageColors::colorTypeGrid.SetBrightness(BRIGHTNESS_GRID / 100.0F);
 }
 
 static void BeforeDraw_Grid_Brightness()
 {
     PageDisplay::PageSettings::PageColors::colorTypeGrid.Init(false);
-    BRIGHTNESS_GRID = (int16)(PageDisplay::PageSettings::PageColors::colorTypeGrid.brightness * 100.0f);
+    BRIGHTNESS_GRID = (int16)(PageDisplay::PageSettings::PageColors::colorTypeGrid.brightness * 100.0F);
 }
 
-DEF_GOVERNOR( gBrightness,                                                                                         //--- ДИСПЛЕЙ - СЕТКА - Яркость ---
+DEF_GOVERNOR( gBrightness,                                                                                                                                //--- ДИСПЛЕЙ - СЕТКА - Яркость ---
     "Яркость", "Brightness",
     "Устанавливает яркость сетки.",
     "Adjust the brightness of the Grid::",
@@ -46,7 +46,7 @@ DEF_GOVERNOR( gBrightness,                                                      
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-DEF_PAGE_2(pageGrid,                                                                                                         //--- ДИСПЛЕЙ - СЕТКА ---
+DEF_PAGE_2( pageGrid, // -V641 // -V1027                                                                                                                            //--- ДИСПЛЕЙ - СЕТКА ---
     "СЕТКА", "GRID",
     "Содержит настройки отображения координатной сетки.",
     "Contains settings of display of a coordinate Grid::",
