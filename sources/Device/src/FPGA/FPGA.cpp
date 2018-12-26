@@ -183,7 +183,7 @@ void FPGA::ForTester::Start() // -V2506
 
     SET_TBASE = TBase::_500us;
 
-    LoadTBase();
+    hardware.LoadTBase();
     
     FSMC::WriteToFPGA16(WR_POST_LO, (uint16)(~(400 + 1)));
     FSMC::WriteToFPGA16(WR_PRED_LO, (uint16)(~(0+ 3)));
@@ -480,7 +480,7 @@ void FPGA::TBaseChange(int delta) // -V2506
         Math::LimitationDecrease<uint8>((uint8 *)(&SET_TBASE), 0); // -V206
     }
 
-    LoadTBase();
+    hardware.LoadTBase();
     Start();
 }
 
@@ -667,7 +667,7 @@ void FPGA::SetRShift(Chan::E ch, uint16 rShift)
 #endif
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void FPGA::LoadTBase()
+void HardwareFPGA::LoadTBase()
 {
     static const uint8 values[TBase::Number] =
     {
@@ -707,7 +707,7 @@ void FPGA::LoadTBase()
 
     FSMC::WriteToFPGA8(WR_TBASE, values[SET_TBASE]);
 
-    LoadTShift();
+    FPGA::LoadTShift();
 }
 
 #ifdef _WIN32
