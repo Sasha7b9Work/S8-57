@@ -126,9 +126,9 @@ void Reader::ReadFromRAM(int fromEnd, StructDataDrawing *dataStruct, bool forMem
         }
         readed = true;
     }
-    else if(!(IN_P2P_MODE) ||                                           // Если не в поточечном режиме
-            (IN_P2P_MODE && STAND_P2P && !forMemoryWindow) || // -V501  // или в поточечном и ждущем режиме, но нужно выоводить статический сигнал
-            (IN_P2P_MODE && !FPGA::IsRunning()))                        // или в поточечном, но процесс чтения остановлен
+    else if(!(IN_P2P_MODE) ||                               // Если не в поточечном режиме
+            ((STAND_P2P) && !forMemoryWindow) || // -V728   // или в поточечном и ждущем режиме, но нужно выоводить статический сигнал  
+            (!FPGA::IsRunning()))                           // или в поточечном, но процесс чтения остановлен
     {
         DataStorage::GetDataFromEnd(fromEnd, &dataSettings, IN_A, IN_B);
         readed = true;
@@ -219,13 +219,13 @@ static void PrepareDataForDraw(StructDataDrawing *dataStruct)   // -V2506
     dataStruct->needDraw[Chan::A] = ENABLED_DS_A && SET_ENABLED_A;
     dataStruct->needDraw[Chan::B] = ENABLED_DS_B && SET_ENABLED_B;
 
-    if ((IN_P2P_MODE && numPointsP2P < 2 && !STAND_P2P) || (PEAKDET_DS != SET_PEAKDET))
+    if (((IN_P2P_MODE) && numPointsP2P < 2 && (!STAND_P2P)) || (PEAKDET_DS != SET_PEAKDET)) // -V560
     {
         dataStruct->needDraw[Chan::A] = dataStruct->needDraw[Chan::B] = false;
         return;
     }
 
-    if (((IN_P2P_MODE && FPGA::IsRunning() && !STAND_P2P) || (FPGA::InStateStop() && RECORDER_MODE)) && dataStruct->forMode != ModeWork::ROM)
+    if (((IN_P2P_MODE && FPGA::IsRunning() && !STAND_P2P) || (FPGA::InStateStop() && RECORDER_MODE)) && dataStruct->forMode != ModeWork::ROM)   // -V560
                                                         // FPGA_IS_RUNNING - потому что в автоматическом режиме при считывании полного измерения 
     {                                                   // происходит остановка цикла считывания на некоторое время
         FillDataP2P(dataStruct, Chan::A);
@@ -268,7 +268,7 @@ static void FillDataP2P(StructDataDrawing *dataStruct, Chan::E ch)  // -V2506
 
         for (; index <= end; index++)
         {
-            dataStruct->data[ch][index - start] = OUT(ch)[index];
+            dataStruct->data[ch][index - start] = OUT(ch)[index];   // -V108
         }
         dataStruct->posBreak = PEAKDET_DS ? (index / 2) : (index - 1);
     }
@@ -286,7 +286,7 @@ static void FillDataP2P(StructDataDrawing *dataStruct, Chan::E ch)  // -V2506
             }
             while (allPoints > 0)
             {
-                dataStruct->data[ch][index++] = OUT(ch)[pointer++];
+                dataStruct->data[ch][index++] = OUT(ch)[pointer++];     // -V108
                 SET_IF_LARGER(index, bytesInScreen, 0);
                 --allPoints;
             }
@@ -309,7 +309,7 @@ static void FillDataNormal(StructDataDrawing *dataStruct, Chan::E ch)   // -V250
     BitSet64 points = Display::BytesOnDisplay();
 
     uint8 *dest = dataStruct->data[ch];
-    uint8 *src = &OUT(ch)[points.word0];
+    uint8 *src = &OUT(ch)[points.word0];    // -V108
 
     int numBytes = PEAKDET_DS ? 281 * 2 : 281;
 

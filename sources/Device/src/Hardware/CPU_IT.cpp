@@ -20,7 +20,7 @@ void HardFault_Handler()
     __IO char *file = Debug::file;
     __IO int line = Debug::line;
 
-    while (1)
+    while (1)           // -V776
     {
         file = file;    // -V570
         line = line;    // -V570

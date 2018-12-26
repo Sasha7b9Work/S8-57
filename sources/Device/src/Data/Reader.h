@@ -28,7 +28,7 @@ extern uint8 *dataOUT[Chan::Number]; ///< —читанные данные второго канала
 #define IN(ch)  (dataIN[ch])
 #define IN_A    IN(Chan::A)
 #define IN_B    IN(Chan::B)
-#define OUT(ch) (dataOUT[ch])
+#define OUT(ch) (dataOUT[(size_t)ch])
 #define OUT_A   OUT(Chan::A)
 #define OUT_B   OUT(Chan::B)
 

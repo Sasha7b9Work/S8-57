@@ -116,7 +116,7 @@ DEF_PAGE_SB(        pHelp,                                                      
 )
 */
 
-DEF_PAGE_4(pHelp,                                                                                                                                                            //--- ѕќћќў№ ---
+DEF_PAGE_4( pHelp, // -V641 // -V1027                                                                                                                                        //--- ѕќћќў№ ---
     "ѕќћќў№", "HELP",
     "ќткрыть разделы помощи",
     "To open sections of the help",
