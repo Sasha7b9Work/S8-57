@@ -39,8 +39,8 @@ static void BeforeDraw_Grid_Brightness()
 
 DEF_GOVERNOR( gBrightness,                                                                                                                                //--- ƒ»—ѕЋ≈… - —≈“ ј - яркость ---
     "яркость", "Brightness",
-    "”станавливает €ркость сетки.",
-    "Adjust the brightness of the Grid::",
+    "”станавливает €ркость сетки",
+    "Adjust the brightness of the Grid",
     BRIGHTNESS_GRID, 0, 100, pageGrid, FuncActive, OnChanged_Grid_Brightness, BeforeDraw_Grid_Brightness
 )
 

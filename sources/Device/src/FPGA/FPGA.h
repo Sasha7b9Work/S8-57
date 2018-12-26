@@ -97,6 +97,8 @@ public:
     static void Reset();
 
     static void LoadRegUPR();
+    /// Установить значение удержания синхронизации
+    static void LoadHoldfOff();
 
     static void SetModeCouple(Chan::E ch, ModeCouple::E couple);
 

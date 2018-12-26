@@ -56,6 +56,7 @@ static const Settings defaultSettings =
     /* trig_lev[Chan::Number];  */      {Trig::ZERO, Trig::ZERO},
     /* trig_startMode;          */      Trig::StartMode::Auto,
     /* trig_modeFind;           */      Trig::ModeFind::Hand,
+    /* trig_holdOff;            */      0,
     
                                             // Μενώ ΠΐΗΒ¨ΠÒΚΐ
     
