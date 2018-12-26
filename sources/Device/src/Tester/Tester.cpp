@@ -38,7 +38,7 @@ uint8 Tester::data[Chan::Number][NUM_STEPS][TESTER_NUM_POINTS];
 static Settings oldSet = Settings::GetDefault();
 
 int   Tester::step = 0;
-float Tester::stepU = 0.0f;
+float Tester::stepU = 0.0F;
 bool  Tester::enabled = false;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -127,7 +127,7 @@ void Tester::Update()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Tester::Enable()
+void Tester::Enable() // -V2506
 {
     if(enabled)
     {
@@ -170,7 +170,7 @@ int Tester::DeltaRShiftA()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Tester::Disable()
+void Tester::Disable() // -V2506
 {
     if(!enabled)
     {
@@ -222,7 +222,7 @@ void Tester::ProcessStep()
     {
         if ((step % 2) == 0)        // Если шаг кратен двум, то нужно устанавливать напряжение
         {
-            HAL_DAC_SetValue(&hDAC, DAC1_CHANNEL_2, DAC_ALIGN_8B_R, (uint)(stepU * step / 2));
+            HAL_DAC_SetValue(&hDAC, DAC1_CHANNEL_2, DAC_ALIGN_8B_R, (uint)(stepU * step / 2));  // -V2004
             // Запускаем ПЛИС для записи необходимого количества точек. Набор будет производиться в течение 2.5 мс (длительсность одного такта)
             FPGA::ForTester::Start();
         }
@@ -283,16 +283,16 @@ void Tester::LoadStep()
 
     if (TESTER_CONTROL_IS_U)
     {
-        stepU =  255.0f / 3 * ((TESTER_STEP_U == Tester::StepU::_500mV) ? 2 : 0.4f) / 5;
+        stepU =  255.0F / 3 * ((TESTER_STEP_U == Tester::StepU::_500mV) ? 2 : 0.4F) / 5;
     }
     else
     {
-        stepU = 255.0f / 3 * ((TESTER_STEP_I == Tester::StepI::_20mA) ? 2 : 0.4f) / 5;
+        stepU = 255.0F / 3 * ((TESTER_STEP_I == Tester::StepI::_20mA) ? 2 : 0.4F) / 5;
     }
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-pString Tester::Scale::ToString() const
+pString Tester::Scale::ToString() const // -V2506
 {
     if (Chan(ch).IsA())
     {
@@ -331,14 +331,14 @@ pString Tester::Scale::ToString() const
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-String Tester::Shift::ToString(Scale::E scale)
+String Tester::Shift::ToString(Scale::E scale) // -V2506
 {
     if (ch == Chan::A)
     {
         return RShift::ToString(shift, (Range::E)scale, Divider::_1);
     }
 
-    float shiftAbs = FPGAMath::RShift2Abs(shift,  (Range::E)scale) * 1e-3f;
+    float shiftAbs = FPGAMath::RShift2Abs(shift,  (Range::E)scale) * 1e-3F;
 
     return Current(shiftAbs).ToString();
 }
