@@ -28,6 +28,11 @@
 #define WR_RESET_COUNTER_FREQ   (ADDR_ALTERA + 12)          ///< Записывать сюда после изменения настройки частотомера для обнуления счётчика частоты
 #define WR_RESET_COUNTER_PERIOD (ADDR_ALTERA + 13)          ///< Записывать сюда после изменения настройки частотомера для обнуления счётчика периода
 
+#define WR_TRIG_HOLD_ENABLE     (ADDR_ALTERA + 16)          ///< Управление задержкой синхронизации. "0" - выкл, "1" - вкл
+#define WR_TRIG_HOLD_VALUE_LOW  (ADDR_ALTERA + 17)          ///< Младший байт задержки синхронизации
+#define WR_TRIG_HOLD_VALUE_MID  (ADDR_ALTERA + 18)          ///<           Значение рассчитывается по формуле N = 0 - (задержка / 100нс). Максимальная задержка - 1.5 сек
+#define WR_TRIG_HOLD_VALUE_HI   (ADDR_ALTERA + 19)          ///< Старший байт задержки синхронизации
+
 #define RD_DATA_A               (ADDR_ALTERA + 0)           ///< Данные первого канала
 #define RD_DATA_A_PEAK_MAX      (RD_DATA_A)                 ///< Данные пикового детектора первого канала
 #define RD_DATA_A_PEAK_MIN      (RD_DATA_A_PEAK_MAX + 1)

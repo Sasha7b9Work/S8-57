@@ -36,7 +36,7 @@ static int lastIndex = -1;
 // ¬озвращает индекс первого пустого элемента в settings
 static int Stack_FindFirstEmptyElement();
 // ¬озвращает адрес в буфере, куда можно записать данные. ≈сли 0, то места дл€ записи нет
-static uint8 *Stack_AddressToPlace(DataSettings *ds);
+static uint8 *Stack_AddressToPlace(const DataSettings *ds);
 // ”дал€ет самые старые данные 
 static void Stack_RemoveFirst();
 // ƒописывает в конец новые данные
@@ -124,7 +124,7 @@ uint DataBuffer::Stack::Size()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static uint8 *Stack_AddressToPlace(DataSettings *_ds)
+static uint8 *Stack_AddressToPlace(const DataSettings *_ds)
 {
     // ¬ этом массиве хранитс€ true, если участок пам€ти свободен
     bool freeData[MAX_DATAS];
@@ -148,7 +148,7 @@ static uint8 *Stack_AddressToPlace(DataSettings *_ds)
             uint8 *addressFirst = &buffer[0];               // јдрес начального "блока" данных
             uint8 *address = ds->Data();                    // јдрес найденного "блока" данных
 
-            int index = (address - addressFirst) / size;    // —только "блоков" данных раздел€ет начальный и текущий
+            uint index = (uint)(address - addressFirst) / size;    // —только "блоков" данных раздел€ет начальный и текущий    // -V104
 
             freeData[index] = false;                        // ”станавливаем признак того, что данный блок зан€т
         }
@@ -166,7 +166,7 @@ static uint8 *Stack_AddressToPlace(DataSettings *_ds)
 
     uint8 *address = &buffer[0] + index * _ds->SizeData();          // Ќаходим адрес первого свободного блока данных
 
-    return (&buffer[SIZE_BUFFER] - address) >= _ds->SizeData() ? address : 0;
+    return (&buffer[SIZE_BUFFER] - address) >= _ds->SizeData() ? address : 0;   // -V104
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -192,7 +192,7 @@ static void Stack_AddToEnd(DataSettings *ds, uint8 *address)
     {
         std::memcpy(address, ds->DataA(), (uint)ds->SizeChannel());
         settings[index].dataA = address;
-        address += ds->SizeChannel();
+        address += ds->SizeChannel();   // -V102
     }
     if(ds->DataB())
     {

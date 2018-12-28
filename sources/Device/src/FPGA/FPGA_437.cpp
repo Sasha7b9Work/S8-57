@@ -7,6 +7,7 @@
 #include "Data/DataStorage.h"
 #include "Display/Display.h"
 #include "Hardware/CPU.h"
+#include "Hardware/FSMC.h"
 #include "Hardware/Timer.h"
 #include "Settings/Settings.h"
 #include "Utils/Buffer.h"
@@ -106,6 +107,7 @@ void FPGA::LoadSettings()
     hardware.LoadTBase();
     hardware.LoadTShift();
     hardware.LoadCalibratorMode();
+    FSMC::WriteToFPGA8(WR_TRIG_HOLD_ENABLE, 1);
     LoadHoldfOff();
 
     isRunning = false;
@@ -114,7 +116,15 @@ void FPGA::LoadSettings()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void FPGA::LoadHoldfOff()
 {
+    uint value = (uint)(0 - TRIG_HOLDOFF);
 
+    BitSet32 bs(value);
+
+    LOG_WRITE("%x", bs.word);
+
+    FSMC::WriteToFPGA8(WR_TRIG_HOLD_VALUE_LOW, bs.byte0);
+    FSMC::WriteToFPGA8(WR_TRIG_HOLD_VALUE_MID, bs.byte1);
+    FSMC::WriteToFPGA8(WR_TRIG_HOLD_VALUE_HI, bs.byte2);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
