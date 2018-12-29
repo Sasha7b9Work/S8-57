@@ -39,8 +39,6 @@ static void RangeMoreB();
 static void FuncRelease();
 /// Обработчик длительного нажатия функциональной кнопки
 static void FuncLong();
-/// Обработчик нажатия стрелки
-static void Arrow();
 /// Общий обработчик изменения параметра канала - масштаба или смещения
 static void OnChangeParameterChannel(pFuncVChI, Chan::E, int);
 /// Функция отрисовки параметров канала
@@ -50,6 +48,39 @@ static void OnChangeParameterTime(pFuncVI, int);
 /// Функция отрисовки временных параметров
 static void DrawParametersTime();
 
+static void OpenPage(const PageBase *page);
+
+
+/// Пустой обработчик
+static void Empty();
+/// Обработчик нажатия стрелки
+static void Arrow();
+static void RShiftLessA();
+static void RShiftMoreA();
+static void RShiftLessB();
+static void RShiftMoreB();
+static void RangeLessA();
+static void RangeMoreA();
+static void RangeLessB();
+static void TShiftLess();
+static void TShiftMore();
+static void TBaseLess();
+static void TBaseMore();
+static void TrigLevLess();
+static void TrigLevMore();
+static void EnterRelease();
+static void EnterLong();
+static void ChannelA();
+static void ChannelB();
+static void Function();
+static void Measure();
+static void Memory();
+static void Service();
+static void Time();
+static void Start();
+static void Trig();
+static void Display();
+
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void Handlers::Process(KeyEvent e)
@@ -58,41 +89,41 @@ void Handlers::Process(KeyEvent e)
 
     static const pFuncVV func[Key::Number][4] =
     {                   // Press        Repead       Release        Long
-        /* None        */ {E,           E,           E,             E},
-        /* Function    */ {E,           E,           Function,      E},
+        /* None        */ {Empty,           Empty,           Empty,  Empty},
+        /* Function    */ {Empty,           Empty,           Function,      Empty},
         /* Measure     */ {Measure,     Measure,     Measure,       Measure},
         /* Memory      */ {Memory,      Memory,      Memory,        Memory},
         /* Service     */ {Service,     Service,     Service,       Service},
-        /* ChannelA    */ {ChannelA,    E,           E,             E},
-        /* ChannelB    */ {ChannelB,    E,           E,             E},
+        /* ChannelA    */ {ChannelA,    Empty,           Empty,             Empty},
+        /* ChannelB    */ {ChannelB,    Empty,           Empty,             Empty},
         /* Time        */ {Time,        Time,        Time,          Time},
-        /* Start       */ {Start,       E,           E,             E},
+        /* Start       */ {Start,       Empty,           Empty,             Empty},
         /* Trig        */ {Trig,        Trig,        Trig,          Trig},
         /* Display     */ {Display,     Display,     Display,       Display},
-        /* RangeMoreA  */ {RangeMoreA,  E,           E,             E},
-        /* RangeLessA  */ {RangeLessA,  E,           E,             E},
-        /* RShiftMoreA */ {RShiftMoreA, RShiftMoreA, E,             E},
-        /* RShiftLessA */ {RShiftLessA, RShiftLessA, E,             E},
-        /* RangeMoreB  */ {RangeMoreB,  E,           E,             E},
-        /* RangeLessB  */ {RangeLessB,  E,           E,             E},
-        /* RShiftMoreB */ {RShiftMoreB, RShiftMoreB, E,             E},
-        /* RShiftLessB */ {RShiftLessB, RShiftLessB, E,             E},
-        /* TBaseMore   */ {TBaseMore,   E,           E,             E},
-        /* TBaseLess   */ {TBaseLess,   E,           E,             E},
-        /* TShiftMore  */ {TShiftMore,  TShiftMore,  E,             E},
-        /* TShiftLess  */ {TShiftLess,  TShiftLess,  E,             E},
-        /* TrigLevMore */ {TrigLevMore, TrigLevMore, E,             E},
-        /* TrigLevLess */ {TrigLevLess, TrigLevLess, E,             E},
+        /* RangeMoreA  */ {RangeMoreA,  Empty,           Empty,             Empty},
+        /* RangeLessA  */ {RangeLessA,  Empty,           Empty,             Empty},
+        /* RShiftMoreA */ {RShiftMoreA, RShiftMoreA, Empty,             Empty},
+        /* RShiftLessA */ {RShiftLessA, RShiftLessA, Empty,             Empty},
+        /* RangeMoreB  */ {RangeMoreB,  Empty,           Empty,             Empty},
+        /* RangeLessB  */ {RangeLessB,  Empty,           Empty,             Empty},
+        /* RShiftMoreB */ {RShiftMoreB, RShiftMoreB, Empty,             Empty},
+        /* RShiftLessB */ {RShiftLessB, RShiftLessB, Empty,             Empty},
+        /* TBaseMore   */ {TBaseMore,   Empty,           Empty,             Empty},
+        /* TBaseLess   */ {TBaseLess,   Empty,           Empty,             Empty},
+        /* TShiftMore  */ {TShiftMore,  TShiftMore,  Empty,             Empty},
+        /* TShiftLess  */ {TShiftLess,  TShiftLess,  Empty,             Empty},
+        /* TrigLevMore */ {TrigLevMore, TrigLevMore, Empty,             Empty},
+        /* TrigLevLess */ {TrigLevLess, TrigLevLess, Empty,             Empty},
         /* Left        */ {Arrow,       Arrow,       Arrow,         Arrow},
         /* Right       */ {Arrow,       Arrow,       Arrow,         Arrow},
         /* Up          */ {Arrow,       Arrow,       Arrow,         Arrow},
         /* Down        */ {Arrow,       Arrow,       Arrow,         Arrow},
-        /* Enter       */ {E,           E,           EnterRelease,  EnterLong},
-        /* F1          */ {E,           E,           FuncRelease,   FuncLong},
-        /* F2          */ {E,           E,           FuncRelease,   FuncLong},
-        /* F3          */ {E,           E,           FuncRelease,   FuncLong},
-        /* F4          */ {E,           E,           FuncRelease,   FuncLong},
-        /* F5          */ {E,           E,           FuncRelease,   FuncLong}
+        /* Enter       */ {Empty,           Empty,           EnterRelease,  EnterLong},
+        /* F1          */ {Empty,           Empty,           FuncRelease,   FuncLong},
+        /* F2          */ {Empty,           Empty,           FuncRelease,   FuncLong},
+        /* F3          */ {Empty,           Empty,           FuncRelease,   FuncLong},
+        /* F4          */ {Empty,           Empty,           FuncRelease,   FuncLong},
+        /* F5          */ {Empty,           Empty,           FuncRelease,   FuncLong}
     };
 
     Key::E code = event.key;
@@ -110,7 +141,7 @@ void Handlers::Process(KeyEvent e)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Handlers::E()
+static void Empty()
 {
 }
 
@@ -141,43 +172,43 @@ static void ChangeRShift(Chan::E ch, int delta)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Handlers::RShiftLessA()
+static void RShiftLessA()
 {
     OnChangeParameterChannel(ChangeRShift, Chan::A, -1);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Handlers::RShiftMoreA()
+static void RShiftMoreA()
 {
     OnChangeParameterChannel(ChangeRShift, Chan::A, 1);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Handlers::RShiftLessB()
+static void RShiftLessB()
 {
     OnChangeParameterChannel(ChangeRShift, Chan::B, -1);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Handlers::RShiftMoreB()
+static void RShiftMoreB()
 {
     OnChangeParameterChannel(ChangeRShift, Chan::B, 1);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Handlers::RangeLessA()
+static void RangeLessA()
 {
     OnChangeParameterChannel(FPGA::ChangeRange, Chan::A, -1);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Handlers::RangeMoreA()
+static void RangeMoreA()
 {
     OnChangeParameterChannel(FPGA::ChangeRange, Chan::A, +1);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Handlers::RangeLessB()
+static void RangeLessB()
 {
     OnChangeParameterChannel(FPGA::ChangeRange, Chan::B, -1);
 }
@@ -253,25 +284,25 @@ static void OnChangeParameterTime(pFuncVI func, int delta)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Handlers::TShiftLess()
+static void TShiftLess()
 {
     OnChangeParameterTime(FPGA::TShiftChange, -1);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Handlers::TShiftMore()
+static void TShiftMore()
 {
     OnChangeParameterTime(FPGA::TShiftChange, 1);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Handlers::TBaseLess()
+static void TBaseLess()
 {
     OnChangeParameterTime(FPGA::TBaseChange, -1);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Handlers::TBaseMore()
+static void TBaseMore()
 {
     OnChangeParameterTime(FPGA::TBaseChange, 1);
 }
@@ -298,7 +329,7 @@ static void Arrow()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Handlers::EnterRelease()
+static void EnterRelease()
 {
     if (!Menu::IsShown())
     {
@@ -311,25 +342,25 @@ void Handlers::EnterRelease()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Handlers::EnterLong()
+static void EnterLong()
 {
     Menu::Show(!Menu::IsShown());
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Handlers::TrigLevMore()
+static void TrigLevMore()
 {
     FPGA::TrigLevChange(1);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Handlers::TrigLevLess()
+static void TrigLevLess()
 {
     FPGA::TrigLevChange(-1);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Handlers::ChannelA()
+static void ChannelA()
 {
     //SET_ENABLED_A = !SET_ENABLED_A;
 
@@ -337,7 +368,7 @@ void Handlers::ChannelA()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Handlers::ChannelB()
+static void ChannelB()
 {
     //SET_ENABLED_B = !SET_ENABLED_B;
 
@@ -345,19 +376,19 @@ void Handlers::ChannelB()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Handlers::Function()
+static void Function()
 {
     OpenPage(PageFunction::pointer);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Handlers::Measure()
+static void Measure()
 {
     OpenPage(PageMeasures::pointer);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Handlers::Memory()
+static void Memory()
 {
     if (MODE_BTN_MEMORY_IS_SAVE)
     {
@@ -373,37 +404,37 @@ void Handlers::Memory()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Handlers::Service()
+static void Service()
 {
     OpenPage(PageService::pointer);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Handlers::Time()
+static void Time()
 {
     OpenPage(PageTime::pointer);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Handlers::Start()
+static void Start()
 {
     FPGA::OnPressStart();
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Handlers::Trig()
+static void Trig()
 {
     OpenPage(PageTrig::pointer);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Handlers::Display()
+static void Display()
 {
     OpenPage(PageDisplay::pointer);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Handlers::OpenPage(const PageBase *page)
+static void OpenPage(const PageBase *page)
 {
     ((Page *)page)->SetAsCurrent();
     ((Page *)page)->Open(true);
