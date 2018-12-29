@@ -50,8 +50,8 @@ Message::Message(uint size, uint8 v0, uint8 v1, uint v2) : allocated(0), used(0)
 {
     if (Allocate(size))
     {
-        PutByte(v0);
-        PutByte(v1);
+        PutByte(v0);    // -V525
+        PutByte(v1);    // -V525
         PutWord(v2);
     }
 }
@@ -71,7 +71,7 @@ Message::Message(uint size, uint8 v0, uint16 v1, uint8 v2, uint8 v3) : allocated
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Message::Message(uint8 v0, uint8 v1, uint8 v2, uint8 *b0, uint16 s0, uint8 *b1, uint16 s1) : allocated(0), used(0), data(0)
 {   //          v0 | v1 | v2 | b0[s0] | b1[s1]
-    uint size = 1u + 1u + 1u + s0 +     s1;
+    uint size = 1U + 1U + 1U + s0 +     s1;
 
     if (Allocate(size))
     {
@@ -134,7 +134,7 @@ void Message::PutByte(uint8 v0)
 {
     if (used < allocated)
     {
-        data[used++] = v0;
+        data[used++] = v0;  // -V108
     }
 }
 
@@ -155,7 +155,7 @@ void Message::PutWord(uint v)
     if (used + 3 < allocated)
     {
         BitSet32 bs(v);
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < sizeof(uint); i++)
         {
             PutByte(bs.byte[i]);
         }
@@ -166,7 +166,7 @@ void Message::PutWord(uint v)
 bool Message::Allocate(uint size)
 {
     Free();
-    data = (uint8 *)std::malloc(size);
+    data = (uint8 *)std::malloc(size);  // -V106
     if (data)
     {
         allocated = size;
