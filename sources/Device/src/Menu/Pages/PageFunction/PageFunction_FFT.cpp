@@ -117,7 +117,7 @@ static bool HandlerKey_FFT_Cursors(KeyEvent event)
 }
 
 /*
-DEF_PAGE_SB(pppFFT_Cursors,                                                                                       //--- ФУНКЦИЯ - СПЕКТР - КУРСОРЫ ---
+DEF_PAGE_SB( pppFFT_Cursors,                                                                                                                             //--- ФУНКЦИЯ - СПЕКТР - КУРСОРЫ ---
     "КУРСОРЫ", "CURSORS",
     "Включает курсоры для измерения параметров спектра",
     "Includes cursors to measure the parameters of the spectrum",
@@ -131,7 +131,7 @@ DEF_PAGE_SB(pppFFT_Cursors,                                                     
 )
 */
 
-DEF_PAGE_1(pppFFT_Cursors,                                                                                                                               //--- ФУНКЦИЯ - СПЕКТР - КУРСОРЫ ---
+DEF_PAGE_1( pppFFT_Cursors, // -V641 // -V1027                                                                                                           //--- ФУНКЦИЯ - СПЕКТР - КУРСОРЫ ---
     "КУРСОРЫ", "CURSORS",
     "Включает курсоры для измерения параметров спектра",
     "Includes cursors to measure the parameters of the spectrum",
@@ -157,7 +157,7 @@ static void OnPress_FFT(bool)
 const PageBase *PageFunction::PageFFT::pointer = &ppFFT;
 
 
-DEF_PAGE_6(ppFFT,                                                                                                            //--- СЕРВИС - СПЕКТР ---
+DEF_PAGE_6( ppFFT, // -V641 // -V1027                                                                                                                               //--- СЕРВИС - СПЕКТР ---
     "СПЕКТР", "SPECTRUM",
     "Отображение спектра входного сигнала",
     "Mapping the input signal spectrum",

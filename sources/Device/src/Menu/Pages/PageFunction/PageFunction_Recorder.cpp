@@ -13,7 +13,7 @@ extern const PageBase pageRecorder;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-DEF_CHOICE_2(cViewAlways,                                                                                     //--- ФУНКЦИЯ - РЕГИСТРАТОР - Всегда ---
+DEF_CHOICE_2( cViewAlways,                                                                                                                           //--- ФУНКЦИЯ - РЕГИСТРАТОР - Всегда ---
     "Всегда", "Always",
     "Позволяет выводить данные регистратора при выключенном меню РЕГИСТРАТОР",
     "Allows you to display data from the recorder when the recorder menu is off",
@@ -29,7 +29,7 @@ static void OnEnterExit_Recorder(bool enter)
 }
 
 
-DEF_PAGE_4( pageRecorder,                                                                                              //--- ФУНКЦИЯ - РЕГИСТРАТОР ---
+DEF_PAGE_4( pageRecorder, // -V641 // -V1027                                                                                                                  //--- ФУНКЦИЯ - РЕГИСТРАТОР ---
     "РЕГИСТРАТОР", "RECORDER",
     "Запись и воспроизведение сигналов входов и датчиков",
     "Recording and playback of input signals and sensors",

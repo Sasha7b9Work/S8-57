@@ -15,8 +15,8 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 extern const PageBase pageSet;
 
-const float PageMeasures::PageCursors::PageSet::MAX_POS_U = 200.0f;
-const float PageMeasures::PageCursors::PageSet::MAX_POS_T = 280.0f;
+const float PageMeasures::PageCursors::PageSet::MAX_POS_U = 200.0F;
+const float PageMeasures::PageCursors::PageSet::MAX_POS_T = 280.0F;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -279,7 +279,7 @@ DEF_SMALL_BUTTON_HINTS_2(bSet_Movement,                                         
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-bool PageMeasures::PageCursors::PageSet::OnKey(KeyEvent event)
+bool PageMeasures::PageCursors::PageSet::OnKey(KeyEvent event) //-V2506
 {
     TypePress::E type = event.type;
 
@@ -290,13 +290,13 @@ bool PageMeasures::PageCursors::PageSet::OnKey(KeyEvent event)
 
     Key::E key = event.key;
 
-    float value = event.IsAboveZero() ? 1.0f : -1.0f;
+    float value = event.IsAboveZero() ? 1.0F : -1.0F;
 
     if (CURS_ACTIVE_U && (key == Key::Up || key == Key::Down))
     {
         if (CURS_MOVEMENT_IN_PERCENTS)
         {
-            value *= dUperc(CURS_SOURCE) / 100.0f;
+            value *= dUperc(CURS_SOURCE) / 100.0F;
         }
 
         if (CURsU_CNTRL_1 || CURsU_CNTRL_1_2)
@@ -313,7 +313,7 @@ bool PageMeasures::PageCursors::PageSet::OnKey(KeyEvent event)
     {
         if (CURS_MOVEMENT_IN_PERCENTS)
         {
-            value *= dTperc(CURS_SOURCE) / 100.0f;
+            value *= dTperc(CURS_SOURCE) / 100.0F;
         }
 
         if (CURsT_CNTRL_1 || CURsT_CNTRL_1_2)
@@ -326,12 +326,17 @@ bool PageMeasures::PageCursors::PageSet::OnKey(KeyEvent event)
         }
         UpdateCursorsForLook();
     }
+    else
+    {
+        // ничего не делаем
+    }
+
     Sound::RegulatorShiftRotate();
 
     return true;
 }
 
-DEF_PAGE_4(pageSet,                                                                                                                                //--- ИЗМЕРЕНИЯ - КУРСОРЫ - УСТАНОВИТЬ ---
+DEF_PAGE_4( pageSet, // -V641 // -V1027                                                                                                            //--- ИЗМЕРЕНИЯ - КУРСОРЫ - УСТАНОВИТЬ ---
     "УСТАНОВИТЬ", "SET",
     "Переход в режим курсорных измерений",
     "Switch to cursor measures",
@@ -376,7 +381,7 @@ void PageMeasures::PageCursors::PageSet::SetCursPos100(Chan::E ch)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void PageMeasures::PageCursors::PageSet::SetShiftCursPosU(Chan::E ch, int numCur, float delta)
 {
-    CURsU_POS(ch, numCur) = Math::LimitationRet(CURsU_POS(ch, numCur) - delta, 0.0f, MAX_POS_U);
+    CURsU_POS(ch, numCur) = Math::LimitationRet(CURsU_POS(ch, numCur) - delta, 0.0F, MAX_POS_U);
 
     if (CURS_MOVEMENT_IN_PIXELS)                        // Если перемещение по пикселям, то нужно привести к пиксельной сетке экрана
     {
@@ -389,7 +394,7 @@ void PageMeasures::PageCursors::PageSet::SetShiftCursPosT(Chan::E ch, int numCur
 {
     /// \todo одинаковые ветки
     // CURsT_POS(ch, numCur) = LimitationFloat(CURsT_POS(ch, numCur) + delta, 0, MAX_POS_T);   
-    Cursors::SetCursPosT_temp(ch, numCur, Math::LimitationRet(CURsT_POS(ch, numCur) + delta, 0.0f, MAX_POS_T));
+    Cursors::SetCursPosT_temp(ch, numCur, Math::LimitationRet(CURsT_POS(ch, numCur) + delta, 0.0F, MAX_POS_T));
 
     if (CURS_MOVEMENT_IN_PIXELS)                        // Если перемещение по пикселям, то нужно привести к пиксельной сетке экрана
     {
@@ -423,7 +428,7 @@ void PageMeasures::PageCursors::PageSet::UpdateCursorsForLook()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void PageMeasures::PageCursors::PageSet::SetCursorU(Chan::E ch, int numCur, float pos)
 {
-    CURsU_POS(ch, numCur) = Math::LimitationRet(pos, 0.0f, MAX_POS_U);
+    CURsU_POS(ch, numCur) = Math::LimitationRet(pos, 0.0F, MAX_POS_U);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -431,7 +436,7 @@ void PageMeasures::PageCursors::PageSet::SetCursorT(Chan::E ch, int numCur, floa
 {
     /// \todo одинаковые ветки
     // CURsT_POS(ch, numCur) = LimitationFloat(pos, 0, MAX_POS_T);      
-    Cursors::SetCursPosT_temp(ch, numCur, Math::LimitationRet(pos, 0.0f, MAX_POS_T));
+    Cursors::SetCursPosT_temp(ch, numCur, Math::LimitationRet(pos, 0.0F, MAX_POS_T));
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
