@@ -26,6 +26,7 @@
 
 #define TRIG_MODE                   (set.trig_mode)
 #define TRIG_HOLDOFF                (set.trig_holdOff)
+#define TRIG_HOLDOFF_ENABLED        (set.trig_holdOffEnabled)
 
 /// Возвращает позицию активного пункта на странице Page::Name.
 #define MENU_POS_ACT_ITEM(name)     (set.menu_posActItem[name])
@@ -103,6 +104,7 @@ public:
     Trig::StartMode::E  trig_startMode;                     ///< Режим запуска.
     Trig::ModeFind::E   trig_modeFind;                      ///< Поиск синхронизации - вручную или автоматически.
     uint16              trig_holdOff;                       ///< Удержание синхронизации
+    bool                trig_holdOffEnabled;                ///< Включение удержания синхронизации
 
     // Меню РАЗВЁРТКА
 
