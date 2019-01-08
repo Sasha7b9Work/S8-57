@@ -18,8 +18,6 @@ static CHAR_BUF2(buffer, SIZE_CONSOLE, 100);
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void Console::Draw()
 {
-    int x0 = 00;
-
     inProcessDrawConsole = true;
 
     Painter::SetFont(Font::Type::_5);
@@ -29,8 +27,8 @@ void Console::Draw()
     for (int i = 0; i < stringInConsole; i++)
     {
         int length = Font::GetLengthText(buffer[i]);
-        Painter::FillRegion(x0, y + 3, length, 6, Color::BACK);
-        String(buffer[i]).Draw(x0 + 1, y, Color::FILL);
+        Painter::FillRegion(0, y + 3, length, 6, Color::BACK);
+        String(buffer[i]).Draw(1, y, Color::FILL);
         y += 6;
     }
 
@@ -50,7 +48,7 @@ void Console::AddString(char *string)
         {
             for (int i = 1; i < SIZE_CONSOLE; i++)
             {
-                std::strcpy(buffer[i - 1], buffer[i]);
+                std::strcpy(buffer[i - 1], buffer[i]); //-V2513
             }
             stringInConsole--;
         }

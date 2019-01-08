@@ -183,6 +183,7 @@ void Grid::DrawGridSignal(int left, int top, int width, int height)
     float centerY = (float)(top + height / 2);
 
     Painter::SetColor(Color::GRID);
+
     if (TYPE_GRID_1)
     {
         DrawGridType1(left, top, right, bottom, centerX, centerY, deltaX, deltaY, stepX, stepY);
@@ -194,6 +195,10 @@ void Grid::DrawGridSignal(int left, int top, int width, int height)
     else if (TYPE_GRID_3)
     {
         DrawGridType3(left, top, right, bottom, (int)centerX, (int)centerY, (int)deltaX, (int)deltaY, (int)stepX);
+    }
+    else
+    {
+        // дл€ других типов сетки ничего делать не нужно
     }
 }
 
@@ -222,7 +227,7 @@ void Grid::DrawGridSpectrum()
             String("дЅ").Draw(5, MathTop() + 1);
         }
     }
-    else if (SCALE_FFT_IS_LINEAR)
+    else // SCALE_FFT_IS_LINEAR
     {
         static pString strs[] = {"1.0", "0.8", "0.6", "0.4", "0.2"};
         float scale = (float)MathHeight() / 5;
@@ -236,20 +241,21 @@ void Grid::DrawGridSpectrum()
             }
         }
     }
+
     Painter::DrawVLine(Left() + 256, MathTop(), MathBottom(), Color::FILL);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 float Grid::DeltaY()
 {
-    float delta = (FullBottom() - Top()) / 10.0f;
-    return Display::IsSeparate() ? (delta / 2.0f) : delta;
+    float delta = (FullBottom() - Top()) / 10.0F;
+    return Display::IsSeparate() ? (delta / 2.0F) : delta;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 float Grid::DeltaX()
 {
-    float delta = (Right() - Left()) / 14.0f;
+    float delta = (Right() - Left()) / 14.0F;
     return delta;
 }
 
@@ -268,7 +274,7 @@ void Grid::DrawGridType1(int left, int top, int right, int bottom, float centerX
     }
     for (int i = 10; i < 16; i++)
     {
-        masX[i] = (uint16)(centerX + deltaX * (i - 9));
+        masX[i] = (uint16)(centerX + deltaX * (i - 9)); //-V2004
     }
     masX[16] = (uint16)(right - 1);
 
@@ -328,7 +334,7 @@ void Grid::DrawGridType3(int left, int top, int right, int bottom, int centerX, 
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-int Grid::DeltaVforLineGrid()
+int Grid::DeltaVforLineGrid() //-V2506
 {
     if (SHOW_MEASURES && MODE_VIEW_SIGNALS_IS_COMPRESS)
     {
@@ -350,7 +356,7 @@ int Grid::DeltaVforLineGrid()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-int Grid::DeltaHforLineGrid()
+int Grid::DeltaHforLineGrid() //-V2506
 {
     if (MODE_VIEW_SIGNALS_IS_COMPRESS)
     {
@@ -369,18 +375,13 @@ int Grid::DeltaHforLineGrid()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Grid::DrawTester()
 {
-    bool shift = false;
-
     Painter::SetColor(Color::FILL);
 
     Painter::DrawRectangle(0, 0, Display::WIDTH - 1, Display::HEIGHT - 1);
 
-    float scaleX = 0.8f;
-    float scaleY = 0.6f;
+    float x0 = 0;
 
-    float x0 = shift ? (RShift::ZERO - SET_RSHIFT(Chan::A)) * scaleX : 0;
-
-    float y0 = shift ? (SET_RSHIFT(Chan::B) - RShift::ZERO) * scaleY : 0;
+    float y0 = 0;
 
     Painter::SetColor(Color::GRID);
 
@@ -398,7 +399,7 @@ void Grid::DrawTester()
 
     x += deltaX;
 
-    float deltaPoint = 5.0f;
+    float deltaPoint = 5.0F;
 
     while (x < Display::WIDTH)
     {

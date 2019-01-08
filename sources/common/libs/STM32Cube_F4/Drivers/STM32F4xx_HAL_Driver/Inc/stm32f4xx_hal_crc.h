@@ -150,8 +150,8 @@ void HAL_CRC_MspDeInit(CRC_HandleTypeDef *hcrc);
 /** @defgroup CRC_Exported_Functions_Group2 Peripheral Control functions
   * @{
   */
-uint32_t HAL_CRC_Accumulate(CRC_HandleTypeDef *hcrc, uint32_t pBuffer[], uint32_t BufferLength);
-uint32_t HAL_CRC_Calculate(CRC_HandleTypeDef *hcrc, uint32_t pBuffer[], uint32_t BufferLength);
+uint32_t HAL_CRC_Accumulate(CRC_HandleTypeDef *hcrc, uint32_t pBuffer[], uint32_t BufferLength); //-V2504
+uint32_t HAL_CRC_Calculate(CRC_HandleTypeDef *hcrc, uint32_t pBuffer[], uint32_t BufferLength); //-V2504
 /**
   * @}
   */ 

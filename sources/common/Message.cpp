@@ -106,14 +106,14 @@ Message::Message(uint size, uint8 v0, uint16 v1, uint8 v2, uint16 v3, uint8 v4) 
 Message::Message(uint8 v0, uint16 v1, uint8 v2, char *string) : allocated(0), used(0), data(0)
 {
     //          v0  | v1  | v2  | размер_строки | string
-    uint size = 1 +   2 +   1 +   1 +             std::strlen(string);
+    uint size = 1 +   2 +   1 +   1 +             std::strlen(string); //-V2513
 
     if (Allocate(size))
     {
         PutByte(v0);
         PutHalfWord(v1);
         PutByte(v2);
-        PutByte((uint8)std::strlen(string));
+        PutByte((uint8)std::strlen(string)); //-V2513
 
         uint8 *pointer = Data(5);
         while (*string)
@@ -186,7 +186,7 @@ void Message::Free()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Message::Create::DrawBigText(Message &message, int x, int y, uint8 sizeSymbol, pString string)
 {
-    uint numSymbols = std::strlen(string);
+    uint numSymbols = std::strlen(string); //-V2513
     //          command | x | y | размер_символов | размер_строки | string
     uint size = 1 +       2 + 1 + 1 +               1;
 

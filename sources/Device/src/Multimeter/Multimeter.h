@@ -61,7 +61,7 @@ public:
         char Symbol() const
         {
             static const char symbols[Number] = {'U', 'V', 'I', 'J', 'R', 'Y', 'W' };
-            return symbols[value];
+            return symbols[value]; //-V2006
         }
         static Measure ForSymbol(char symbol)
         {

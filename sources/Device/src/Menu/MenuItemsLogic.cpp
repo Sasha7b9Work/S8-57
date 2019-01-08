@@ -37,40 +37,42 @@ int8 gCurDigit = 0;
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void Choice::StartChange(int delta)
 {
-    if (tsChoice.address != 0)
+    if (tsChoice.address == 0)
     {
-        return;
-    }
-    Sound::GovernorChangedValue();
-    if (HINT_MODE_ENABLED)
-    {
-        Menu::SetItemForHint(this);
-    }
-    else if (!IsAcitve())
-    {
-        CHOICE_RUN_FUNC_CHANGED(this, false);
-    }
-    else
-    {
-        tsChoice.address = this;
-        tsChoice.timeStart = TIME_MS;
-        tsChoice.dir = delta > 0 ? INCREASE : DECREASE;
+        Sound::GovernorChangedValue();
+
+        if (HINT_MODE_ENABLED)
+        {
+            Menu::SetItemForHint(this);
+        }
+        else if (!IsAcitve())
+        {
+            CHOICE_RUN_FUNC_CHANGED(this, false);
+        }
+        else
+        {
+            tsChoice.address = this;
+            tsChoice.timeStart = TIME_MS;
+            tsChoice.dir = delta > 0 ? INCREASE : DECREASE;
+        }
     }
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-float Choice::Step()
+float Choice::Step() //-V2506
 {
-    static const float speed = 0.1f;
+    static const float speed = 0.1F;
     static const int numLines = 12;
+
     if (tsChoice.address == this)
     {
         float delta = speed * (TIME_MS - tsChoice.timeStart);
-        if (delta == 0.0f)  // -V550
+        if (delta == 0.0F)  // -V550
         {
-            delta = 0.001f; // Таймер в несколько первых кадров может показать, что прошло 0 мс, но мы возвращаем большее число, потому что ноль будет говорить о том, что движения нет
+            delta = 0.001F; // Таймер в несколько первых кадров может показать, что прошло 0 мс, но мы возвращаем большее число, потому что ноль будет говорить о том, что движения нет
         }
         int8 index = *cell;
+
         if (tsChoice.dir == INCREASE)
         {
             if (delta <= numLines)
@@ -89,14 +91,20 @@ float Choice::Step()
             }
             Math::CircleDecrease<int8>(&index, 0, (int8)NumSubItems() - 1);
         }
+        else
+        {
+            // NONE
+        }
+
         *cell = index;
         tsChoice.address = 0;
         CHOICE_RUN_FUNC_CHANGED(this, IsAcitve());
         NEED_FINISH_DRAW = 1;
         tsChoice.dir = NONE;
-        return 0.0f;
+        return 0.0F;
     }
-    return 0.0f;
+
+    return 0.0F;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -152,32 +160,34 @@ void Governor::StartChange(int delta)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-int16 Governor::NextValue()
+int Governor::NextValue()
 {
     return ((*cell) < maxValue) ? ((*cell) + 1) : minValue;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-int16 Governor::PrevValue()
+int Governor::PrevValue()
 {
     return ((*cell) > minValue) ? ((*cell) - 1) : maxValue;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-float Governor::Step()
+float Governor::Step() //-V2506
 {
-    static const float speed = 0.05f;
+    static const float speed = 0.05F;
     static const int numLines = 10;
-    float delta = 0.0f;
+    float delta = 0.0F;
+
     if (tsGovernor.address == this)
     {
         delta = speed * (TIME_MS - tsGovernor.timeStart);
+
         if (tsGovernor.dir == DECREASE)
         {
-            delta *= -1.0f;
-            if (delta == 0.0f)  // -V550
+            delta *= -1.0F;
+            if (delta == 0.0F)  // -V550
             {
-                return -0.001f;
+                return -0.001F;
             }
             if (delta < -numLines)
             {
@@ -187,15 +197,15 @@ float Governor::Step()
                 {
                     funcOfChanged();
                 }
-                delta = 0.0f;
+                delta = 0.0F;
                 tsGovernor.address = 0;
             }
         }
         else if (tsGovernor.dir == INCREASE)
         {
-            if (delta == 0.0f)  // -V550
+            if (delta == 0.0F)  // -V550
             {
-                return 0.001f;
+                return 0.001F;
             }
             if (delta > numLines)
             {
@@ -205,10 +215,15 @@ float Governor::Step()
                 {
                     funcOfChanged();
                 }
-                delta = 0.0f;
+                delta = 0.0F;
                 tsGovernor.address = 0;
             }
         }
+        else
+        {
+            // NONE
+        }
+
     }
     return delta;
 }
@@ -216,9 +231,11 @@ float Governor::Step()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Governor::ChangeValue(int delta)
 {
-    int16 oldValue = *cell;
-    *cell += (int16)(Math::Sign(delta) * Math::Pow10(gCurDigit));
-    LIMITATION(*cell, minValue, maxValue);
+    int oldValue = *cell;
+    *cell += (int)(Math::Sign(delta) * Math::Pow10(gCurDigit));
+
+    LIMITATION(*cell, minValue, maxValue); //-V2516
+
     if (*cell != oldValue)
     {
         if (funcOfChanged)
@@ -275,7 +292,7 @@ int Page::NumSubPages() const
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-int Page::NumItems() const
+int Page::NumItems() const //-V2506
 {
     if(PAGE_IS_MAIN)
     {
@@ -312,7 +329,11 @@ void TimeControl::IncCurrentPosition()
     {
         static const int8 max[] = { 0, 31, 12, 99, 23, 59, 59 };
         static const int8 min[] = { 0, 1, 1, 15, 0, 0, 0 };
-        *(value[position]) = (*(value[position]))++;
+
+        int8 val = (*(value[position]))++;
+
+        *(value[position]) = val;
+
         if (*value[position] > max[position])
         {
             *value[position] = min[position];

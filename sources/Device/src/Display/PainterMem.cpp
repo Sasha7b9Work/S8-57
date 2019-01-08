@@ -14,7 +14,7 @@ int   PainterMem::height = 0;
 Color PainterMem::color = Color::FILL;
 
 /// ¬озвращает адрес байта с координатами x, y.
-#define ADDRESS_BYTE(x, y) (buffer + (y * width + x))
+#define ADDRESS_BYTE(x, y) (buffer + ((y) * width + (x)))
 
 #define SET_POINT(x, y)                             \
     uint8 *address = ADDRESS_BYTE(x, y);            \
@@ -31,7 +31,14 @@ uint8 *PainterMem::CreateBuffer(int w, int h)
         width = w;
         height = h;
         buffer = (uint8 *)malloc((uint)(width * height));
-        endBuffer = buffer + width * height;
+        if (buffer != nullptr)
+        {
+            endBuffer = buffer + width * height;
+        }
+        else
+        {
+            endBuffer = nullptr;
+        }
     }
 
     return buffer;

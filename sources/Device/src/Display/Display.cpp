@@ -177,6 +177,7 @@ static void ShowWarn(const char *message)
         Timer::SetAndEnable(Timer::Type::ShowMessages, OnTimerShowWarning, 100);
     }
     bool alreadyStored = false;
+
     for (int i = 0; i < NUM_WARNINGS; i++)
     {
         if (warnings[i] == 0 && !alreadyStored)
@@ -189,6 +190,10 @@ static void ShowWarn(const char *message)
         {
             timeWarnings[i] = TIME_MS;
             return;
+        }
+        else
+        {
+            // ничего делать не надо
         }
     }
 }
@@ -275,7 +280,7 @@ static void FuncOnWait()
     buf[0] = 0;
     for (uint i = 0; i < time; i++)
     {
-        std::strcat(buf, ".");
+        std::strcat(buf, "."); //-V2513
     }
     Painter::DrawStringInCenterRect(x, y + 20, width, height - 20, buf);
     Painter::EndScene();
@@ -427,6 +432,10 @@ int Display::NumAverage() // -V2506
     {
         return NRST_NUM_AVE_FOR_RAND;
     }
+    else
+    {
+        // ничего не делаем
+    }
 
     return NUM_AVE;
 }
@@ -445,9 +454,6 @@ int Display::ShiftInMemoryInPoints() // -V2506
 int Display::ENumSignalsInSec::ToFPS() const // -V2506
 {
     static const int fps[] = {25, 10, 5, 2, 1};
-    if (value <= Display::ENumSignalsInSec::_1)
-    {
-        return fps[value];
-    }
-    return 1;
+
+    return fps[value];
 }
