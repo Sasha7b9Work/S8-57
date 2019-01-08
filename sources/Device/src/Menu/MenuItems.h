@@ -312,6 +312,8 @@ public:
 
 class Governor : public Control
 {
+friend class Governor32;
+
 public:
     int16  *cell;
     int16   minValue;       ///< Минмальное значение, которое может принимать регулятор.
@@ -347,7 +349,7 @@ public:
 
 private:
 
-    void DrawLowPart(int x, int y, bool pressed, bool shade);
+    void DrawLowPart(int x, int y, bool shade);
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// Governor32 ///
@@ -400,7 +402,7 @@ public:
 
 private:
 
-    void DrawLowPart(int x, int y, bool pressed, bool shade);
+    void DrawLowPart(int x, int y, bool shade);
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// Choice ///
