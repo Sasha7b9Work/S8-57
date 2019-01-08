@@ -29,7 +29,7 @@ static void DrawMemoryWave(int num, bool exist);
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 static void OnPress_Internal_ShowAlways()
 {
-    ALWAYS_SHOW_ROM_SIGNAL = ALWAYS_SHOW_ROM_SIGNAL ? 0u : 1u;
+    ALWAYS_SHOW_ROM_SIGNAL = ALWAYS_SHOW_ROM_SIGNAL ? 0U : 1U;
 }
 
 static void Draw_Internal_ShowAlways_Yes(int x, int y)
@@ -247,6 +247,7 @@ static bool HandlerKey_Internal(KeyEvent event)
     Key::E key = event.key;
 
     Sound::RegulatorSwitchRotate();
+
     if (key == Key::Left || key == Key::Down)
     {
         Math::CircleDecrease<int8>((int8 *)&NUM_ROM_SIGNAL, 0, MAX_NUM_SAVED_WAVES - 1);
@@ -255,6 +256,11 @@ static bool HandlerKey_Internal(KeyEvent event)
     {
         Math::CircleIncrease<int8>((int8 *)&NUM_ROM_SIGNAL, 0, MAX_NUM_SAVED_WAVES - 1);
     }
+    else
+    {
+        // остальные кнопки не обрабатываем
+    }
+
     Painter::ResetFlash();
 
     return true;

@@ -65,6 +65,7 @@ void PageMemory::OnChanged_Points(bool active)
     {
         width *= 2;
     }
+
     if (TPOS_IS_LEFT)
     {
         SHIFT_IN_MEMORY = 0;
@@ -73,7 +74,7 @@ void PageMemory::OnChanged_Points(bool active)
     {
         SHIFT_IN_MEMORY = (int16)(NUM_BYTES_SET / 2 - width / 2);
     }
-    else if (TPOS_IS_RIGHT)
+    else // TPOS_IS_RIGHT
     {
         SHIFT_IN_MEMORY = (int16)(NUM_BYTES_SET - width - 2);
     }
@@ -179,7 +180,7 @@ DEF_PAGE_SB(        pppDrive_Manager,                                           
 )
 */
 
-DEF_PAGE_3(pppDrive_Manager,                                                                                                                            //--- ПАМЯТЬ - ВНЕШН ЗУ - КАТАЛОГ ---
+DEF_PAGE_3( pppDrive_Manager, // -V641                                                                                                                  //--- ПАМЯТЬ - ВНЕШН ЗУ - КАТАЛОГ ---
     "КАТАЛОГ", "DIRECTORY",
     "Открывает доступ к файловой системе подключенного накопителя",
     "Provides access to the file system of the connected drive",
@@ -208,30 +209,23 @@ DEF_CHOICE_2(       cDrive_Name,                                                
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-/*
-DEF_SMALL_BUTTON_EXIT(  bDrive_Mask_Exit,                                                                  //--- ПАМЯТЬ - ВНЕШН ЗУ - МАСКА - Выход ---
-    pppDrive_Mask, FuncActive, OnPressSB_Exit, DrawSB_Exit
-)
-*/
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void OnPress_Drive_Mask_Delete()
 {
     FILE_NAME_MASK[0] = '\0';
 }
 
-static void Draw_Drive_Mask_Delete(int x, int y)
+static void Draw_Delete(int x, int y)
 {
     Painter::SetFont(Font::Type::_UGO2);
     Painter::Draw4SymbolsInRect(x + 2, y + 1, SYMBOL_DELETE);
     Painter::SetFont(Font::Type::_8);
 }
 
-DEF_SMALL_BUTTON(   bDrive_Mask_Delete,                                                                  //--- ПАМЯТЬ - ВНЕШН ЗУ - МАСКА - Удалить ---
+DEF_SMALL_BUTTON( bDrive_Mask_Delete,                                                                                                           //--- ПАМЯТЬ - ВНЕШН ЗУ - МАСКА - Удалить ---
     "Удалить", "Delete",
     "Удаляет все введённые символы",
     "Deletes all entered symbols",
-    pppDrive_Mask, FuncActive, OnPress_Drive_Mask_Delete, Draw_Drive_Mask_Delete
+    pppDrive_Mask, FuncActive, OnPress_Drive_Mask_Delete, Draw_Delete
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -251,7 +245,7 @@ static void OnPress_Drive_Mask_Backspace()
     }
 }
 
-static void Draw_Drive_Mask_Backspace(int x, int y)
+static void Draw_Backspace(int x, int y)
 {
     Painter::SetFont(Font::Type::_UGO2);
     Painter::Draw4SymbolsInRect(x + 2, y + 1, SYMBOL_BACKSPACE);
@@ -262,7 +256,7 @@ DEF_SMALL_BUTTON(   bDrive_Mask_Backspace,                                      
     "Backspace", "Backspace",
     "Удаляет последний введённый символ",
     "Deletes the last entered symbol",
-    pppDrive_Mask, FuncActive, OnPress_Drive_Mask_Backspace, Draw_Drive_Mask_Backspace
+    pppDrive_Mask, FuncActive, OnPress_Drive_Mask_Backspace, Draw_Backspace
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -302,22 +296,22 @@ static void OnPress_Drive_Mask_Insert()
     }
 }
 
-static void Draw_Drive_Mask_Insert(int x, int y)
+static void Draw_Insert(int x, int y)
 {
     Painter::SetFont(Font::Type::_UGO2);
     Painter::Draw4SymbolsInRect(x + 2, y + 2, SYMBOL_INSERT);
     Painter::SetFont(Font::Type::_8);
 }
 
-DEF_SMALL_BUTTON(   bDrive_Mask_Insert,                                                                 //--- ПАМЯТЬ - ВНЕШН ЗУ - МАСКА - Вставить ---
+DEF_SMALL_BUTTON( bDrive_Mask_Insert,                                                                                                          //--- ПАМЯТЬ - ВНЕШН ЗУ - МАСКА - Вставить ---
     "Вставить", "Insert",
     "Вставляет выбранный символ",
     "Inserts the chosen symbol",
-    pppDrive_Mask, FuncActive, OnPress_Drive_Mask_Insert, Draw_Drive_Mask_Insert
+    pppDrive_Mask, FuncActive, OnPress_Drive_Mask_Insert, Draw_Insert
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-DEF_CHOICE_2(       cDrive_SaveAs,                                                                         //--- ПАМЯТЬ - ВНЕШН ЗУ - Сохранять как ---
+DEF_CHOICE_2( cDrive_SaveAs,                                                                                                                      //--- ПАМЯТЬ - ВНЕШН ЗУ - Сохранять как ---
     "Сохранять как", "Save as"
     ,
     "Если выбран вариант \"Изображение\", сигнал будет сохранён в текущем каталоге в графическом файле с расширением BMP\n"
@@ -515,7 +509,7 @@ DEF_PAGE_6( ppDrive,                                                            
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-DEF_PAGE_4( pageMemory,                                                                                                                                                         // ПЯМЯТЬ ///
+DEF_PAGE_4( pageMemory,                                                                                                                                                      //--- ПЯМЯТЬ ---
     "ПАМЯТЬ", "MEMORY",
     "Работа с внешней и внутренней памятью.",
     "Working with external and internal memory.",
@@ -596,6 +590,7 @@ static void DrawSetName()
 static void OnPress_SetName_Exit()
 {
     OnPressSB_Exit();
+
     if (EXIT_FROM_SETNAME_TO == RETURN_TO_DISABLE_MENU)
     {
         //Menu::PagePointerFromName(Page::Name::SB_Memory_SetName)->ShortPressOnItem(0);
@@ -606,6 +601,11 @@ static void OnPress_SetName_Exit()
     else if (EXIT_FROM_SETNAME_TO == RETURN_TO_INT_MEM)
     {
     }
+    else
+    {
+        //
+    }
+
     EXIT_FROM_SETNAME_TO = RETURN_TO_DISABLE_MENU;
 }
 
@@ -615,18 +615,11 @@ static void OnPress_SetName_Delete()
     FILE_NAME[0] = '\0';
 }
 
-static void Draw_SetName_Delete(int x, int y)
-{
-    Painter::SetFont(Font::Type::_UGO2);
-    Painter::Draw4SymbolsInRect(x + 2, y + 1, SYMBOL_DELETE);
-    Painter::SetFont(Font::Type::_8);
-}
-
-DEF_SMALL_BUTTON(   bSetName_Delete,                                                                                     //--- ИМЯ ФАЙЛА - Удалить ---
+DEF_SMALL_BUTTON( bSetName_Delete,                                                                                                                              //--- ИМЯ ФАЙЛА - Удалить ---
     "Удалить", "Delete",
     "Удаляет все введённые символы",
     "Deletes all entered characters",
-    pSetName, FuncActive, OnPress_SetName_Delete, Draw_SetName_Delete
+    pSetName, FuncActive, OnPress_SetName_Delete, Draw_Delete
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -639,18 +632,11 @@ static void OnPress_SetName_Backspace()
     }
 }
 
-static void Draw_SetName_Backspace(int x, int y)
-{
-    Painter::SetFont(Font::Type::_UGO2);
-    Painter::Draw4SymbolsInRect(x + 2, y + 1, SYMBOL_BACKSPACE);
-    Painter::SetFont(Font::Type::_8);
-}
-
-DEF_SMALL_BUTTON(   bSetName_Backspace,                                                                                //--- ИМЯ ФАЙЛА - Backspace ---
+DEF_SMALL_BUTTON( bSetName_Backspace,                                                                                                                         //--- ИМЯ ФАЙЛА - Backspace ---
     "Backspace", "Backspace",
     "Удаляет последний символ",
     "Delete the last character",
-    pSetName, FuncActive, OnPress_SetName_Backspace, Draw_SetName_Backspace
+    pSetName, FuncActive, OnPress_SetName_Backspace, Draw_Backspace
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -664,18 +650,11 @@ static void OnPress_SetName_Insert()
     }
 }
 
-static void Draw_SetName_Insert(int x, int y)
-{
-    Painter::SetFont(Font::Type::_UGO2);
-    Painter::Draw4SymbolsInRect(x + 2, y + 2, '\x26');
-    Painter::SetFont(Font::Type::_8);
-}
-
-DEF_SMALL_BUTTON(   bSetName_Insert,                                                                                    //--- ИМЯ ФАЙЛА - Вставить ---
+DEF_SMALL_BUTTON( bSetName_Insert,                                                                                                                             //--- ИМЯ ФАЙЛА - Вставить ---
     "Вставить", "Insert",
     "Вводит очередной символ",
     "Print the next character",
-    pSetName, FuncActive, OnPress_SetName_Insert, Draw_SetName_Insert
+    pSetName, FuncActive, OnPress_SetName_Insert, Draw_Insert
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

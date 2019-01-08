@@ -120,20 +120,6 @@ DEF_CHOICE_3( cInput, // -V206                                                  
     TRIG_INPUT, pTrig, FuncActive, OnChanged_Input, FuncDraw
 )
 
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void OnChanged_HoldOff()
-{
-    FPGA::LoadHoldfOff();
-}
-
-DEF_GOVERNOR( gHolfOff,
-    "Удержание", "Holfoff",
-    "Задаёт длительность промежутка между импульсами синхронизации",
-    "Sets the duration of the gap between synchronization pulses",
-    TRIG_HOLDOFF, 0, 30000, pTrig, FuncActive, OnChanged_HoldOff, FuncBeforeDraw
-)
-
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static const char *hintsSearch_Mode[] ={ "Ручной", "Hand", "Автоматический",  "Auto" };
 
@@ -193,11 +179,11 @@ DEF_PAGE_6( pTrig, // -V641 // -V1027                                           
     "СИНХР", "TRIG",
     "Содержит настройки синхронизации.",
     "Contains synchronization settings.",
-    &cMode,         ///< СИНХР - Режим
-    &cSource,       ///< СИНХР - Источник
-    &cPolarity,     ///< СИНХР - Полярность
-    &cInput,        ///< СИНХР - Вход
-    &gHolfOff,      ///< СИНХР - Удержание
-    &ppSearch,      ///< СИНХР - ПОИСК
+    &cMode,                         ///< СИНХР - Режим
+    &cSource,                       ///< СИНХР - Источник
+    &cPolarity,                     ///< СИНХР - Полярность
+    &cInput,                        ///< СИНХР - Вход
+    PageTrig::PageHoldOff::pointer, ///< СИНХР - УДЕРЖАНИЕ
+    &ppSearch,                      ///< СИНХР - ПОИСК
     Page::Name::Trig, Menu::pageMain, FuncActive, EmptyPressPage, FuncDrawPage, FuncRegSetPage
 )

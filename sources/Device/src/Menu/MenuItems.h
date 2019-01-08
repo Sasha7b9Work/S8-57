@@ -207,6 +207,7 @@ public:
             ChannelB,                   ///< ÊÀÍÀË 2
             Trig,                       ///< ÑÈÍÕÐ
             Trig_Search,                ///< ÑÈÍÕÐ - ÏÎÈÑÊ
+            Trig_HoldOff,               ///< ÑÈÍÕÐ - ÓÄÅÐÆÀÍÈÅ
             Time,                       ///< ÐÀÇÂÅÐÒÊÀ
             Memory,                     ///< ÏÀÌßÒÜ
             SB_Memory_Last,             ///< ÏÀÌßÒÜ - ÏÎÑËÅÄÍÈÅ

@@ -9,4 +9,10 @@ public:
     static void OnChanged_TrigMode(bool active);
 
     static const PageBase *pointer;
+
+    class PageHoldOff
+    {
+    public:
+        static const PageBase *pointer;
+    };
 };

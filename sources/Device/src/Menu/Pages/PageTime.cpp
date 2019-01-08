@@ -21,7 +21,7 @@ static bool IsActive_Sample()
     return IN_RANDOM_MODE && !START_MODE_IS_SINGLE;
 }
 
-DEF_CHOICE_2(       cSample,                                                                                             //--- РАЗВЕРТКА - Выборка ---
+DEF_CHOICE_2( cSample,                                                                                                                                          //--- РАЗВЕРТКА - Выборка ---
     "Выборка", "Sampling",
     "\"Реальная\" - \n"
     "\"Эквивалентная\" -",
@@ -50,7 +50,7 @@ void PageTime::OnChanged_PeakDet(bool active)
     }
 }
 
-DEF_CHOICE_2(       cPeakDet,                                                                                            //--- РАЗВЕРТКА - Пик дет ---
+DEF_CHOICE_2( cPeakDet,                                                                                                                                         //--- РАЗВЕРТКА - Пик дет ---
     "Пик дет", "Pic deat",
     "Включает/выключает пиковый детектор.",
     "Turns on/off peak detector.",

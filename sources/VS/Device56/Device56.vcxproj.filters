@@ -85,6 +85,9 @@
     <Filter Include="SCPI">
       <UniqueIdentifier>{8b32c9a2-ed2d-4215-92b4-faaaf478ee54}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Menu\Pages\PageTrig">
+      <UniqueIdentifier>{aa43efdd-d7f6-40a9-8383-17e3959e8238}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Device\src\defines.cpp">
@@ -256,9 +259,6 @@
       <Filter>Menu\Pages</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Device\src\Menu\Pages\PageTime.cpp">
-      <Filter>Menu\Pages</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Device\src\Menu\Pages\PageTrig.cpp">
       <Filter>Menu\Pages</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Device\src\Menu\Pages\PageDebug\PageDebug.cpp">
@@ -437,6 +437,12 @@
     </ClCompile>
     <ClCompile Include="..\..\Device\src\SCPI\SCPI.cpp">
       <Filter>SCPI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Menu\Pages\PageTrig\PageTrig.cpp">
+      <Filter>Menu\Pages\PageTrig</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Menu\Pages\PageTrig\PageTrig_HoldOff.cpp">
+      <Filter>Menu\Pages\PageTrig</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

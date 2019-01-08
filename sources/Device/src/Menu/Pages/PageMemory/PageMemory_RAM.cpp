@@ -119,7 +119,7 @@ static void OnPress_RAM(bool enter)
     if (enter)
     {
         NUM_RAM_SIGNAL = 0;
-        RUN_FPGA_BEFORE_SB = FPGA::IsRunning() ? 1u : 0u;
+        RUN_FPGA_BEFORE_SB = FPGA::IsRunning() ? 1U : 0U;
         FPGA::Stop(false);
         MODE_WORK = ModeWork::RAM;
     }
@@ -161,7 +161,7 @@ static bool HandlerKey_RAM(KeyEvent event)
     return true;
 }
 
-DEF_PAGE_4(pageRAM,                                                                                                                                                /// ПАМЯТЬ - ПОСЛЕДНИЕ ///
+DEF_PAGE_4( pageRAM, // -V1027                                                                                                                                   //--- ПАМЯТЬ - ПОСЛЕДНИЕ ---
     "ПОСЛЕДНИЕ", "LATEST",
     "Переход в режим работы с последними полученными сигналами",
     "Transition to an operating mode with the last received signals",
