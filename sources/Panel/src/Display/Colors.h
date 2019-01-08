@@ -120,7 +120,7 @@ public:
 
     /// Если forced == false, то инициализация происходит только при первом вызове функции
     void Init(bool forced);
-    void SetBrightness(float brightness = -1.0f);
+    void SetBrightness(float brightness = -1.0F);
     void BrightnessChange(int delta);
     void ComponentChange(int delta);
 private:
@@ -135,7 +135,7 @@ private:
 #pragma warning(pop)
 #endif
 
-#define MAKE_COLOR(r, g, b) ((uint)(b + (g << 8) + (r << 16)))
+#define MAKE_COLOR(r, g, b) ((uint)((b) + ((g) << 8) + ((r) << 16)))
 #define R_FROM_COLOR(color) (((uint)(color) >> 16) & 0xff)
 #define G_FROM_COLOR(color) (((uint)(color) >> 8)  & 0xff)
 #define B_FROM_COLOR(color) (((uint)(color))       & 0xff)

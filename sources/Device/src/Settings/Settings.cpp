@@ -56,7 +56,7 @@ static const Settings defaultSettings =
     /* trig_lev[Chan::Number];  */      {Trig::ZERO, Trig::ZERO},
     /* trig_startMode;          */      Trig::StartMode::Auto,
     /* trig_modeFind;           */      Trig::ModeFind::Hand,
-    /* trig_holdOff;            */      0,
+    /* trig_holdOff;            */      (1 << 24) - 1,
     /* trig_holdOffEnable       */      false,
     
                                             // Ìåíþ ÐÀÇÂ¨ÐÒÊÀ

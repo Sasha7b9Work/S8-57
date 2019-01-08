@@ -26,11 +26,6 @@ static const TimeBase name = { Control::Type::Time, 0, false, Page::Name::NoPage
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #define DEF_GOVERNOR(name, titleRU, titleEN, hintRU, hintEN, cell, min, max, keeper, funcActive, funcChanged, funcBeforeDraw)                                   \
 volatile static const GovernorBase name = {Control::Type::Governor, 0, false, Page::Name::NoPage, &keeper, funcActive, {titleRU, titleEN, hintRU, hintEN},      \
-    (int16 *)(&(cell)), min, max, funcChanged, funcBeforeDraw};
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-#define DEF_GOVERNOR32(name, titleRU, titleEN, hintRU, hintEN, cell, min, max, keeper, funcActive, funcChanged, funcBeforeDraw)                                 \
-volatile static const Governor32Base name = {Control::Type::Governor32, 0, false, Page::Name::NoPage, &keeper, funcActive, {titleRU, titleEN, hintRU, hintEN},  \
     (int *)(&(cell)), min, max, funcChanged, funcBeforeDraw};
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

@@ -129,31 +129,7 @@ void Governor::Draw(int x, int y, bool opened)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Governor32::Draw(int x, int y, bool opened)
-{
-    if (funcBeforeDraw)
-    {
-        funcBeforeDraw();
-    }
-    if (opened)
-    {
-        DrawOpened(x, y);
-    }
-    else
-    {
-        DrawClosed(x, y);
-    }
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Governor::DrawOpened(int x, int y)
-{
-    GovernorIpCommon_DrawOpened(this, x, y, 0);
-    DrawValue(x, y + 22);
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Governor32::DrawOpened(int x, int y)
 {
     GovernorIpCommon_DrawOpened(this, x, y, 0);
     DrawValue(x, y + 22);
@@ -169,25 +145,10 @@ void Governor::DrawClosed(int x, int y)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Governor32::DrawClosed(int x, int y)
-{
-    bool pressed = IsPressed();
-    bool shade = IsShade() || !IsAcitve();
-    DrawLowPart(x, y + 14, shade);
-    DrawGovernorChoiceColorFormulaHiPart(this, x, y, pressed, shade);
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Governor32::DrawValue(int x, int y)
-{
-
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Governor::DrawValue(int x, int y)
 {
     int startX = x + 40;
-    int16 value = *cell;
+    int value = *cell;
     int signGovernor = *cell < 0 ? -1 : 1;
     if (signGovernor == -1)
     {
@@ -205,12 +166,6 @@ void Governor::DrawValue(int x, int y)
     {
         Painter::DrawChar(startX - 30, y, signGovernor < 0 ? '\x9b' : '\x9a');
     }
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Governor32::DrawLowPart(int x, int y, bool shade)
-{
-    ((Governor *)this)->DrawLowPart(x, y, shade);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -515,10 +470,6 @@ void Control::Draw(int x, int y, bool opened)
     else if (type == Control::Type::Governor)
     {
         ((Governor *)this)->Draw(x, y, opened);
-    }
-    else if (type == Control::Type::Governor32)
-    {
-        ((Governor32 *)this)->Draw(x, y, opened);
     }
     else if (type == Control::Type::Time)
     {

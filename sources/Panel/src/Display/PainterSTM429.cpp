@@ -241,20 +241,20 @@ void Painter::DrawTesterData(uint8 mode, Color color, uint16 x[TESTER_NUM_POINTS
 {
     SetColor(color);
 
-    RecountPoints(x, 320.0f / 240.0f);
+    RecountPoints(x, 320.0F / 240.0F);
 
-    RecountPoints(y, 240.0f / 255.0f);
+    RecountPoints(y, 240.0F / 255.0F);
 
     if(mode == 1)
     {
-        for(int i = 1; i < TESTER_NUM_POINTS; i++)
+        for(int i = 1; i < TESTER_NUM_POINTS - 1; i++)
         {
             *(Display::GetBuffer() + y[i] * BUFFER_WIDTH + x[i]) = currentColor.value;
         }
     }
     else
     {
-        for(int i = 1; i < TESTER_NUM_POINTS; i++)
+        for(int i = 1; i < TESTER_NUM_POINTS - 1; i++)
         {
             DrawLine(x[i], y[i], x[i + 1], y[i + 1]);
         }
@@ -278,11 +278,11 @@ void Painter::SetPoint(int x, int y)
 uint Painter::ReduceBrightness(uint colorValue, float newBrightness)
 {
     int red = (int)(R_FROM_COLOR(colorValue) * newBrightness);
-    LIMITATION(red, 0, 0xff);
+    LIMITATION(red, 0, 0xff);                                       // -V2516
     int green = (int)(G_FROM_COLOR(colorValue) * newBrightness);
-    LIMITATION(green, 0, 0xff);
+    LIMITATION(green, 0, 0xff);                                     // -V2516
     int blue = (int)(B_FROM_COLOR(colorValue) * newBrightness);
-    LIMITATION(blue, 0, 0xff);
+    LIMITATION(blue, 0, 0xff);                                      // -V2516
     return MAKE_COLOR(red, green, blue);
 }
 

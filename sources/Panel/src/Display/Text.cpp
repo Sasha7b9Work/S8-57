@@ -12,33 +12,25 @@ int Text::DrawChar(int eX, int eY, char symbol, Color color)
     int8 width = (int8)font->symbol[symbol].width;
     int8 height = (int8)font->height;
 
-    int size = 1;
-
     for (int b = 0; b < height; b++)
     {
         if (ByteFontNotEmpty(symbol, b))
         {
             int x = eX;
-            int y = eY + b * size + 9 - height;
+            int y = eY + b + 9 - height;
             int endBit = 8 - width;
             for (int bit = 7; bit >= endBit; bit--)
             {
                 if (BitInFontIsExist(symbol, b, bit))
                 {
-                    for (int i = 0; i < size; i++)
-                    {
-                        for (int j = 0; j < size; j++)
-                        {
-                            Painter::SetPoint(x + i, y + j);
-                        }
-                    }
+                    Painter::SetPoint(x, y);
                 }
-                x += size;
+                x++;
             }
         }
     }
 
-    return eX + width * size;
+    return eX + width;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
