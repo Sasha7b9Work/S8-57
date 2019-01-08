@@ -76,7 +76,7 @@ static void OnChanged_ChanA_Bandwidth(bool)
     FPGA::SetBandwidth(Chan::A);
 }
 
-DEF_CHOICE_2(       cChanA_Bandwidth,                                                                                       //--- КАНАЛ 1 - Полоса ---
+DEF_CHOICE_2( cChanA_Bandwidth,                                                                                                                                    //--- КАНАЛ 1 - Полоса ---
     "Полоса", "Bandwidth",
     "Задаёт полосу пропускания канала",
     "Sets the channel bandwidth",
@@ -88,19 +88,13 @@ DEF_CHOICE_2(       cChanA_Bandwidth,                                           
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 const PageBase *PageChannelA::pointer = &pChanA;
 
-DEF_PAGE_3(         pChanA,                                                                                                             // КАНАЛ 1 ///
+DEF_PAGE_3( pChanA, // -V641                                                                                                                                                //--- КАНАЛ 1 ---
     "КАНАЛ 1", "CHANNEL 1",
     "Содержит настройки канала 1.",
     "Contains settings of the channel 1.",
-    &cChanA_Input,      // КАНАЛ 1 - Вход
-    &cChanA_Couple,     // КАНАЛ 1 - Связь
-    &cChanA_Bandwidth,  // КАНАЛ 1 - Полоса
-    /*
-    cChanA_Resistance, // КАНАЛ 1 - Вх сопр
-    cChanA_Inverse,    // КАНАЛ 1 - Инверсия
-    cChanA_Divider,    // КАНАЛ 1 - Делитель
-    bChanA_Balance,    // КАНАЛ 1 - Балансировать
-    */
+    &cChanA_Input,              ///< КАНАЛ 1 - Вход
+    &cChanA_Couple,             ///< КАНАЛ 1 - Связь
+    &cChanA_Bandwidth,          ///< КАНАЛ 1 - Полоса
     Page::Name::ChannelA, Menu::pageMain, FuncActive, EmptyPressPage, FuncDrawPage, FuncRegSetPage
 )
 
@@ -114,7 +108,7 @@ void PageChannelB::OnChanged_Input(bool active)
     }
 }
 
-DEF_CHOICE_2(       cChanB_Input,                                                                                             //--- КАНАЛ 2 - Вход ---
+DEF_CHOICE_2( cChanB_Input,                                                                                                                                          //--- КАНАЛ 2 - Вход ---
     "Вход", "Input",
     chanInputRu,
     chanInputEn,
@@ -129,7 +123,7 @@ void PageChannelB::OnChanged_Couple(bool)
     FPGA::SetModeCouple(Chan::B, SET_COUPLE_B);
 }
 
-DEF_CHOICE_3(       cChanB_Couple,                                                                                           //--- КАНАЛ 2 - Связь ---
+DEF_CHOICE_3( cChanB_Couple,                                                                                                                                        //--- КАНАЛ 2 - Связь ---
     "Связь", "Couple",
     chanCoupleRu,
     chanCoupleEn,
@@ -157,7 +151,7 @@ DEF_CHOICE_2( cChanB_Bandwidth,                                                 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 const PageBase *PageChannelB::pointer = &pChanB;
 
-DEF_PAGE_3( pChanB,                                                                                                                                                         //--- КАНАЛ 2 ---
+DEF_PAGE_3( pChanB, // -V641                                                                                                                                                //--- КАНАЛ 2 ---
     "КАНАЛ 2", "CHANNEL 2",
     "Содержит настройки канала 2.",
     "Contains settings of the channel 2.",
