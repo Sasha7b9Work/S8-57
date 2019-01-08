@@ -19,7 +19,6 @@
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 static void DrawCommonHiPart(Control *item, int x, int y, bool pressed, bool shade, bool opened = false);
-static void GovernorCommon_DrawOpened(Control *item, int x, int y, int dWidth);
 static void DrawValueWithSelectedPosition(int x, int y, int value, int numDigits, int selPos, bool hLine, bool fillNull);
 
 
@@ -131,7 +130,7 @@ void Governor::Draw(int x, int y, bool opened)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Governor::DrawOpened(int x, int y)
 {
-    GovernorCommon_DrawOpened(this, x, y, 0);
+    DrawCommonHiPart(this, x, y, IsPressed(), IsShade(), true);
     DrawValue(x, y + 22);
 }
 
@@ -669,18 +668,6 @@ static void DrawValueWithSelectedPosition(int x, int y, int value, int numDigits
 
         x -= 6;
     }
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void GovernorCommon_DrawOpened(Control *item, int x, int y, int dWidth)
-{
-    int height = 34;
-    Control *control = (Control *)item;
-    Painter::DrawRectangle(x - 2, y - 1, Menu::Title::WIDTH + 3 + dWidth, height + 3, Color::BACK);
-    Painter::DrawRectangle(x - 1, y, Menu::Title::WIDTH + 1 + dWidth, height + 1, Color::MenuTitle(false));
-    Painter::DrawHLine(y + MOI_HEIGHT_TITLE - 1, x, x + item->Width() + dWidth);
-    DrawCommonHiPart(item, x - 1, y - 1, control->IsPressed(), false);
-    Painter::FillRegion(x, y + MOI_HEIGHT_TITLE, item->Width() - 1 + dWidth, height - MOI_HEIGHT_TITLE, Color::BLACK);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
