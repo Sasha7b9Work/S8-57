@@ -148,7 +148,7 @@ static uint8 *Stack_AddressToPlace(const DataSettings *_ds)
             uint8 *addressFirst = &buffer[0];               // јдрес начального "блока" данных
             uint8 *address = ds->Data();                    // јдрес найденного "блока" данных
 
-            uint index = (uint)(address - addressFirst) / size;    // —только "блоков" данных раздел€ет начальный и текущий    // -V104
+            uint index = (uint)(address - addressFirst) / (uint)size;    // —только "блоков" данных раздел€ет начальный и текущий   // -V202
 
             freeData[index] = false;                        // ”станавливаем признак того, что данный блок зан€т
         }
