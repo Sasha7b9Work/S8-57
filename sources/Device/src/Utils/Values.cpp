@@ -82,7 +82,9 @@ char* Hex::ToHex(int depth, char buffer[9]) const
         case 8:     sprintf(buffer, "%02X", value); break;
         case 16:    sprintf(buffer, "%04X", value); break;
         case 32:    sprintf(buffer, "%08X", value); break;
-        default:                                    break;
+        default:
+            // тут ничего не делаем
+            break;
     }
 
     return buffer;
@@ -108,7 +110,8 @@ static char *IntegerToString(int value, bool alwaysSign, int numMinFields, char 
     const int SIZE = 20;
     char format[SIZE] = "%";
     snprintf(&(format[1]), SIZE, "0%d", numMinFields);
-    std::strcat(format, "d");
+    std::strcat(format, "d"); //-V2513
+
     if (alwaysSign && value >= 0)
     {
         buffer[0] = '+';
@@ -118,28 +121,31 @@ static char *IntegerToString(int value, bool alwaysSign, int numMinFields, char 
     {
         snprintf(buffer, SIZE, format, value);
     }
+
     return buffer;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static char *FrequencyToString(float freq, char bufferOut[20])
+static char *FrequencyToString(float freq, char bufferOut[20]) //-V2506
 {
     bufferOut[0] = 0;
     const char *suffix = 0;
+
     if (Math::IsEquals(freq, ERROR_VALUE_FLOAT))
     {
-        std::strcat(bufferOut, ERROR_STRING_VALUE);
+        std::strcat(bufferOut, ERROR_STRING_VALUE); //-V2513
         return bufferOut;
     }
-    if (freq >= 1e6f)
+
+    if (freq >= 1e6F)
     {
         suffix = LANG_RU ? "ћ√ц" : "MHz";
-        freq /= 1e6f;
+        freq /= 1e6F;
     }
-    else if (freq >= 1e3f)
+    else if (freq >= 1e3F)
     {
         suffix = LANG_RU ? "к√ц" : "kHz";
-        freq /= 1e3f;
+        freq /= 1e3F;
     }
     else
     {
@@ -151,29 +157,36 @@ static char *FrequencyToString(float freq, char bufferOut[20])
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-char *Frequency::ToStringAccuracy(char bufferOut[20], int numDigits) const
+char *Frequency::ToStringAccuracy(char bufferOut[20], int numDigits) const //-V2506
 {
     float freq = value;
 
     bufferOut[0] = 0;
     const char *suffix = LANG_RU ? "√ц" : "Hz";
+
     if (Math::IsEquals(freq, ERROR_VALUE_FLOAT))
     {
-        std::strcat(bufferOut, ERROR_STRING_VALUE);
+        std::strcat(bufferOut, ERROR_STRING_VALUE); //-V2513
         return bufferOut;
     }
-    if (freq >= 1e6f)
+
+    if (freq >= 1e6F)
     {
-    suffix = LANG_RU ? "ћ√ц" : "MHz";
-    freq /= 1e6f;
+        suffix = LANG_RU ? "ћ√ц" : "MHz";
+        freq /= 1e6F;
     }
-    else if (freq >= 1e3f)
+    else if (freq >= 1e3F)
     {
-    suffix = LANG_RU ? "к√ц" : "kHz";
-    freq /= 1e3f;
+        suffix = LANG_RU ? "к√ц" : "kHz";
+        freq /= 1e3F;
     }
-    std::strcat(bufferOut, Float(freq).ToString(false, numDigits).CString());
-    std::strcat(bufferOut, suffix);
+    else
+    {
+        // тут ничего не делаем
+    }
+
+    std::strcat(bufferOut, Float(freq).ToString(false, numDigits).CString()); //-V2513
+    std::strcat(bufferOut, suffix); //-V2513
     return bufferOut;
 }
 
@@ -192,11 +205,11 @@ String Frequency::ToString() const
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-char *TimeToString(float time, bool alwaysSign, char buffer[20])
+char *TimeToString(float time, bool alwaysSign, char buffer[20]) //-V2506
 {
     if (Math::IsEquals(time, ERROR_VALUE_FLOAT))
     {
-        std::strcpy(buffer, ERROR_STRING_VALUE);
+        std::strcpy(buffer, ERROR_STRING_VALUE); //-V2513
         return buffer;
     }
 
@@ -206,20 +219,20 @@ char *TimeToString(float time, bool alwaysSign, char buffer[20])
         {"ns", "us",  "ms", "s"}
     };
 
-    static const float factor[4] = { 1e9f, 1e6f, 1e3f, 1.0f };
+    static const float factor[4] = { 1e9F, 1e6F, 1e3F, 1.0F };
 
     float absTime = std::fabsf(time);
 
     int num = 0;
 
-    if (absTime + 0.5e-10f < 1e-6f)
+    if (absTime + 0.5e-10F < 1e-6F)
     {
     }
-    else if (absTime + 0.5e-7f < 1e-3f)
+    else if (absTime + 0.5e-7F < 1e-3F)
     {
         num = 1;
     }
-    else if (absTime + 0.5e-3f < 1.0f)
+    else if (absTime + 0.5e-3F < 1.0F)
     {
         num = 2;
     }
@@ -228,13 +241,13 @@ char *TimeToString(float time, bool alwaysSign, char buffer[20])
         num = 3;
     }
 
-    std::strcpy(buffer, Float(time * factor[num]).ToString(alwaysSign, 4).CString());
-    std::strcat(buffer, suffix[LANG][num]);
+    std::strcpy(buffer, Float(time * factor[num]).ToString(alwaysSign, 4).CString()); //-V2513
+    std::strcat(buffer, suffix[LANG][num]); //-V2513
     return buffer;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-char* Time::ToStringAccuracy(bool alwaysSign, char buffer[20], int numDigits) const
+char* Time::ToStringAccuracy(bool alwaysSign, char buffer[20], int numDigits) const //-V2506
 {
     float time = value;
 
@@ -245,27 +258,31 @@ char* Time::ToStringAccuracy(bool alwaysSign, char buffer[20], int numDigits) co
 
     if (Math::IsEquals(time, ERROR_VALUE_FLOAT))
     {
-        std::strcat(buffer, ERROR_STRING_VALUE);
+        std::strcat(buffer, ERROR_STRING_VALUE); //-V2513
         return buffer;
     }
-    else if (fabsTime + 0.5e-10f < 1e-6f)
+    else if (fabsTime + 0.5e-10F < 1e-6F)
     {
         suffix = LANG_RU ? "нс" : "ns";
-        time *= 1e9f;
+        time *= 1e9F;
     }
-    else if (fabsTime + 0.5e-7f < 1e-3f)
+    else if (fabsTime + 0.5e-7F < 1e-3F)
     {
         suffix = LANG_RU ? "мкс" : "us";
-        time *= 1e6f;
+        time *= 1e6F;
     }
-    else if (fabsTime + 0.5e-3f < 1.0f)
+    else if (fabsTime + 0.5e-3F < 1.0F)
     {
         suffix = LANG_RU ? "мс" : "ms";
-        time *= 1e3f;
+        time *= 1e3F;
+    }
+    else
+    {
+        // тут ничего не делаем
     }
 
-    std::strcat(buffer, Float(time).ToString(alwaysSign, numDigits).CString());
-    std::strcat(buffer, suffix);
+    std::strcat(buffer, Float(time).ToString(alwaysSign, numDigits).CString()); //-V2513
+    std::strcat(buffer, suffix); //-V2513
 
     return buffer;
 }
@@ -278,11 +295,11 @@ String Voltage::ToString(bool alwaysSign) const
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static char* VoltageToString(float voltage, bool alwaysSign, char buffer[20])
+static char* VoltageToString(float voltage, bool alwaysSign, char buffer[20]) //-V2506
 {
     if (Math::IsEquals(voltage, ERROR_VALUE_FLOAT))
     {
-        std::strcpy(buffer, ERROR_STRING_VALUE);
+        std::strcpy(buffer, ERROR_STRING_VALUE); //-V2513
         return buffer;
     }
 
@@ -292,20 +309,20 @@ static char* VoltageToString(float voltage, bool alwaysSign, char buffer[20])
         {"\x10uV",  "\x10mV", "\x10V", "\x10kV"}
     };
 
-    static const float factor[4] = { 1e6f, 1e3f, 1.0f, 1e-3f };
+    static const float factor[4] = { 1e6F, 1e3F, 1.0F, 1e-3F };
 
     int num = 0;
-    float absValue = std::fabsf(voltage) + 0.5e-4f;
+    float absValue = std::fabsf(voltage) + 0.5e-4F;
 
-    if (absValue < 1e-3f)
+    if (absValue < 1e-3F)
     {
         num = 0;
     }
-    else if (absValue < 1.0f)
+    else if (absValue < 1.0F)
     {
         num = 1;
     }
-    else if (absValue < 1e3f)
+    else if (absValue < 1e3F)
     {
         num = 2;
     }
@@ -314,8 +331,8 @@ static char* VoltageToString(float voltage, bool alwaysSign, char buffer[20])
         num = 3;
     }
 
-    std::strcpy(buffer, Float(voltage * factor[num]).ToString(alwaysSign, 4).CString());
-    std::strcat(buffer, suf[LANG][num]);
+    std::strcpy(buffer, Float(voltage * factor[num]).ToString(alwaysSign, 4).CString()); //-V2513
+    std::strcat(buffer, suf[LANG][num]); //-V2513
     return buffer;
 }
 
@@ -327,13 +344,13 @@ String Current::ToString() const
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-char *Current::ToString(char buffer[50]) const
+char *Current::ToString(char buffer[50]) const //-V2506
 {
     float current = value;
 
     if (Math::IsEquals(current, ERROR_VALUE_FLOAT))
     {
-        std::strcpy(buffer, ERROR_STRING_VALUE);
+        std::strcpy(buffer, ERROR_STRING_VALUE); //-V2513
         return buffer;
     }
 
@@ -343,21 +360,21 @@ char *Current::ToString(char buffer[50]) const
         { "\x10uј",  "\x10mј", "\x10ј", "\x10kј"}
     };
 
-    static const float factor[4] = { 1e6f, 1e3f, 1.0f, 1e-3f };
+    static const float factor[4] = { 1e6F, 1e3F, 1.0F, 1e-3F };
 
     int num = 0;
 
-    float absValue = std::fabsf(current) + 0.5e-4f;
+    float absValue = std::fabsf(current) + 0.5e-4F;
 
-    if (absValue < 1e-3f)
+    if (absValue < 1e-3F)
     {
         num = 0;
     }
-    else if (absValue < 1.0f)
+    else if (absValue < 1.0F)
     {
         num = 1;
     }
-    else if (absValue < 1e3f)
+    else if (absValue < 1e3F)
     {
         num = 2;
     }
@@ -366,8 +383,8 @@ char *Current::ToString(char buffer[50]) const
         num = 3;
     }
 
-    std::strcpy(buffer, Float(current * factor[num]).ToString(true, 4).CString());
-    std::strcat(buffer, suf[LANG][num]);
+    std::strcpy(buffer, Float(current * factor[num]).ToString(true, 4).CString()); //-V2513
+    std::strcat(buffer, suf[LANG][num]); //-V2513
     return buffer;
 }
 
@@ -393,11 +410,11 @@ String Integer::ToString(bool alwaysSign, int numMinFields) const
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static char *FloatToString(float value, bool alwaysSign, int numDigits, char bufferOut[20])
+static char *FloatToString(float value, bool alwaysSign, int numDigits, char bufferOut[20]) //-V2506
 {
     if (Math::IsEquals(value, ERROR_VALUE_FLOAT))
     {
-        std::strcpy(bufferOut, ERROR_STRING_VALUE);
+        std::strcpy(bufferOut, ERROR_STRING_VALUE); //-V2513
         return bufferOut;
     }
     
@@ -412,6 +429,10 @@ static char *FloatToString(float value, bool alwaysSign, int numDigits, char buf
     else if (alwaysSign)
     {
         *pBuffer++ = '+';
+    }
+    else
+    {
+        // здесь ничего не делаем
     }
     
     char format[10] = "%4.2f\0\0";
@@ -429,7 +450,7 @@ static char *FloatToString(float value, bool alwaysSign, int numDigits, char buf
     float absValue = std::fabsf(value);
     sprintf(pBuffer, (char *)format, (double)absValue);
     
-    float val = (float)atof(pBuffer);
+    float val = (float)atof(pBuffer); //-V2508
     
     if (Math::DigitsInIntPart(val) != numDigitsInInt)
     {
@@ -443,9 +464,9 @@ static char *FloatToString(float value, bool alwaysSign, int numDigits, char buf
     }
     
     bool signExist = alwaysSign || value < 0;
-    while (std::strlen(bufferOut) < (size_t)(numDigits + (signExist ? 2 : 1)))
+    while (std::strlen(bufferOut) < (size_t)(numDigits + (signExist ? 2 : 1))) //-V2513
     {
-        std::strcat(bufferOut, "0");
+        std::strcat(bufferOut, "0"); //-V2513
     }
     
     return bufferOut;
