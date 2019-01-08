@@ -10,7 +10,7 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 extern int8 gCurDigit;
 
-#define NAME_FROM_INDEX(index) (names[index * 2 + LANG])
+#define NAME_FROM_INDEX(index) (names[(index) * 2 + LANG])
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -79,7 +79,7 @@ String Choice::NameSubItem(int i)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 char Choice::GetSymbol()
 {
-    return ((Governor*)this)->GetSymbol();
+    return ((Governor*)this)->GetSymbol();  // -V1027
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -98,7 +98,9 @@ char TimeControl::GetSymbol()
 
     int8 value = values[*curField];
 
-    static const char chars[] =
+#define NUM_POSITIONS 4
+
+    static const char chars[NUM_POSITIONS] =
     {
         SYMBOL_GOVERNOR_SHIFT_0,
         SYMBOL_GOVERNOR_SHIFT_1,
@@ -106,7 +108,7 @@ char TimeControl::GetSymbol()
         SYMBOL_GOVERNOR_SHIFT_3
     };
 
-    return chars[value % 4];
+    return chars[value % NUM_POSITIONS];
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -123,6 +125,10 @@ char Control::GetSymbol()
     else if (type == Control::Type::Time)
     {
         return ((TimeControl *)this)->GetSymbol();
+    }
+    else
+    {
+        // здесь ничего не делаем
     }
 
     return 0;
@@ -141,12 +147,16 @@ Color Choice::ColorMenuField(const Choice *choice)
     {
         return Color(Color::YELLOW);
     }
+    else
+    {
+        // здесь ничего не делаем
+    }
 
     return Color::MENU_FIELD;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Page::ShortPressOnItem(int numItem)
+void Page::ShortPressOnItem(uint numItem)
 {
     ((Button *)items[numItem])->funcOnPress();
 }
@@ -170,6 +180,10 @@ void Page::ChangeSubPage(int delta)
         Sound::RegulatorSwitchRotate();
         SetCurrentSubPage(CurrentSubPage() - 1);
     }
+    else
+    {
+        // здесь ничего не делаем
+    }
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -178,13 +192,18 @@ int Control::HeightOpened() const
     if (type == Control::Type::Page)
     {
         int numItems = ((const Page *)this)->NumItems() - ((Page *)this)->CurrentSubPage() * MENU_ITEMS_ON_DISPLAY;
-        LIMITATION(numItems, 0, MENU_ITEMS_ON_DISPLAY);
+        LIMITATION(numItems, 0, MENU_ITEMS_ON_DISPLAY); // -V2516
         return Menu::Title::HEIGHT + Menu::Item::HEIGHT * numItems;
     }
     else if (type == Control::Type::Choice || type == Control::Type::ChoiceReg)
     {
         return MOI_HEIGHT_TITLE + ((Choice *)this)->NumSubItems() * MOSI_HEIGHT - 5;
     }
+    else
+    {
+        // здесь ничего не делаем
+    }
+
     return Menu::Item::HEIGHT;
 }
 
@@ -256,6 +275,10 @@ bool Page::ProcessKey(KeyEvent event)
         ChangeSubPage((event.key == Key::Left) ? -1 : 1);
         return true;
     }
+    else
+    {
+        // остальные типы событий не обрабатываются
+    }
 
     return false;
 }
@@ -297,17 +320,18 @@ bool Control::ProcessKey(KeyEvent event)
     {
     case Control::Type::Choice:
         return ((Choice *)this)->ProcessKey(event);
+        break;
     
     case Control::Type::ChoiceReg:
         return ((Choice *)this)->ProcessKey(event);
+        break;
 
     case Control::Type::Page:
         return ((Page *)this)->ProcessKey(event);
+        break;
 
     case Control::Type::Governor:
         return ((Governor *)this)->ProcessKey(event);
-    
-    default:
         break;
     }
 
@@ -433,6 +457,10 @@ void Control::ShortPress()
     {
         SButton *button = (SButton *)this;
         button->funcOnPress();
+    }
+    else
+    {
+        // остальные типы контролов не обрабатываются
     }
 }
 

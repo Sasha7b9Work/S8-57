@@ -66,7 +66,7 @@ void PageDisplay::PageAccumulation::OnPress_Accumulation_Clear()
     NEED_FINISH_DRAW = 1;
 }
 
-DEF_BUTTON( bAccum_Clear,                                                                                    //--- ДИСПЛЕЙ - НАКОПЛЕНИЕ - Очистить ---
+DEF_BUTTON( bAccum_Clear,                                                                                                                           //--- ДИСПЛЕЙ - НАКОПЛЕНИЕ - Очистить ---
     "Очистить", "Clear",
     "Очищает экран от накопленных сигналов.",
     "Clears the screen of the saved-up signals.",
@@ -79,7 +79,7 @@ static bool IsActive_Accum()
     return SET_TBASE > TBase::_20ns;
 }
 
-DEF_PAGE_3(pageAccum,                                                                                                   //--- ДИСПЛЕЙ - НАКОПЛЕНИЕ ---
+DEF_PAGE_3(pageAccum, // -V641 // -V1027                                                                                                                       //--- ДИСПЛЕЙ - НАКОПЛЕНИЕ ---
     "НАКОПЛ", "ACCUM",
     "Настройки режима отображения последних сигналов на экране",
     "Mode setting signals to display the last screen",

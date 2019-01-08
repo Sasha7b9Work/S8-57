@@ -724,7 +724,7 @@ void Page::DrawNestingPage(int left, int bottom)
         {
             page = (Page *)parent;
             parent = KEEPER(page);
-            nesting++;
+            nesting++;                                  // -V127
         }
 
         int size = 4;

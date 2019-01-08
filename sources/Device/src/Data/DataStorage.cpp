@@ -24,8 +24,8 @@ void DataStorage::Push(DataSettings *ds)
 
     for (uint i = 0; i < size; i++)
     {
-        LIMITATION(dataA[i], MIN_VALUE, MAX_VALUE);     // -V108 // -V2516
-        LIMITATION(dataB[i], MIN_VALUE, MAX_VALUE);     // -V108 // -V2516
+        LIMITATION(dataA[i], MIN_VALUE, MAX_VALUE);     // -V2516
+        LIMITATION(dataB[i], MIN_VALUE, MAX_VALUE);     // -V2516
     }
 
     std::memcpy(OUT_A, ds->DataA(), (uint)ds->SizeChannel());

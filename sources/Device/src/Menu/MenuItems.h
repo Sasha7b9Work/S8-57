@@ -152,7 +152,7 @@ public:
     /// подстраница 1, это будет 5 и т.д.
     int PosItemOnLeft();
     /// Вызывает функцию короткого нажатия кнопки над итемом numItem страницы page
-    void ShortPressOnItem(int numItem);
+    void ShortPressOnItem(uint numItem);
     /// Возвращает позицию текущего элемента странцы page
     int8 PosCurrentItem() const;
     /// Изменить номер текущей подстраницы на значение delta

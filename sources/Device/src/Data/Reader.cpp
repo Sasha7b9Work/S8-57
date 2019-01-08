@@ -268,7 +268,7 @@ static void FillDataP2P(StructDataDrawing *dataStruct, Chan::E ch)  // -V2506
 
         for (; index <= end; index++)
         {
-            dataStruct->data[ch][index - start] = OUT(ch)[index];   // -V108
+            dataStruct->data[ch][index - start] = OUT(ch)[index];
         }
         dataStruct->posBreak = PEAKDET_DS ? (index / 2) : (index - 1);
     }
@@ -286,7 +286,7 @@ static void FillDataP2P(StructDataDrawing *dataStruct, Chan::E ch)  // -V2506
             }
             while (allPoints > 0)
             {
-                dataStruct->data[ch][index++] = OUT(ch)[pointer++];     // -V108
+                dataStruct->data[ch][index++] = OUT(ch)[pointer++];
                 SET_IF_LARGER(index, bytesInScreen, 0);
                 --allPoints;
             }
@@ -309,7 +309,7 @@ static void FillDataNormal(StructDataDrawing *dataStruct, Chan::E ch)   // -V250
     BitSet64 points = Display::BytesOnDisplay();
 
     uint8 *dest = dataStruct->data[ch];
-    uint8 *src = &OUT(ch)[points.word0];    // -V108
+    uint8 *src = &OUT(ch)[points.word0];
 
     int numBytes = PEAKDET_DS ? 281 * 2 : 281;
 

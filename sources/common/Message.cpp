@@ -134,7 +134,7 @@ void Message::PutByte(uint8 v0)
 {
     if (used < allocated)
     {
-        data[used++] = v0;  // -V108
+        data[used++] = v0;
     }
 }
 
