@@ -30,7 +30,7 @@ void Painter::WriteColor(Color color)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-bool Painter::WriteFlashColor()
+bool Painter::WriteFlashColor() //-V2506
 {
     if(currentColor == Color::FLASH_01)
     {
@@ -146,7 +146,7 @@ static bool IsConsonant(char symbol)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static bool CompareArrays(const bool *array1, const bool *array2, int numElems)
+static bool CompareArrays(const bool *array1, const bool *array2, int numElems) //-V2506
 {
     for (int i = 0; i < numElems; i++)
     {
@@ -161,14 +161,15 @@ static bool CompareArrays(const bool *array1, const bool *array2, int numElems)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 /// \brief Находит следующий перенос. C letters начинается часть слово, где нужно найти перенос, в lettersInSyllable будет записано число букв в 
 /// найденном слоге. Если слово закончилось, функция возвращает false
-static bool FindNextTransfer(const char *letters, int8 *lettersInSyllable)
+static bool FindNextTransfer(const char *letters, int8 *lettersInSyllable) //-V2506
 {
 
 #define VOWEL       0   // Гласная
 #define CONSONANT   1   // Согласная
 
-    * lettersInSyllable = (int8)std::strlen(letters);
-    if (std::strlen(letters) <= 3)
+    * lettersInSyllable = (int8)std::strlen(letters); //-V2513
+
+    if (std::strlen(letters) <= 3) //-V2513
     {
         return false;
     }
@@ -184,7 +185,8 @@ static bool FindNextTransfer(const char *letters, int8 *lettersInSyllable)
 
     bool consonant[20];
 
-    int size = (int)std::strlen(letters);
+    int size = (int)std::strlen(letters); //-V2513
+
     for (int i = 0; i < size; i++)
     {
         consonant[i] = IsConsonant(letters[i]);
@@ -195,35 +197,42 @@ static bool FindNextTransfer(const char *letters, int8 *lettersInSyllable)
         *lettersInSyllable = 2;
         return true;
     }
+
     if (CompareArrays(template2, consonant, 4))
     {
         *lettersInSyllable = 2;
         return true;
     }
-    if (std::strlen(letters) < 5)
+
+    if (std::strlen(letters) < 5) //-V2513
     {
         return false;
     }
+
     if (CompareArrays(template3, consonant, 4) || CompareArrays(template4, consonant, 4) || CompareArrays(template5, consonant, 4) ||
         CompareArrays(template6, consonant, 4))
     {
         *lettersInSyllable = 3;
         return true;
     }
-    if (std::strlen(letters) < 6)
+
+    if (std::strlen(letters) < 6) //-V2513
     {
         return false;
     }
+
     if (CompareArrays(template7, consonant, 5))
     {
         *lettersInSyllable = 3;
         return true;
     }
+
     if (CompareArrays(template8, consonant, 5))
     {
         *lettersInSyllable = 4;
         return true;
     }
+
     return false;
 }
 
@@ -239,22 +248,28 @@ static int8 *BreakWord(char *word)
         num++;
     }
     lengthSyllables[num + 1] = 0;
-    if (std::strcmp(word, "структуру") == 0)
+
+    if (std::strcmp(word, "структуру") == 0) //-V2513
     {
         int8 lengths[] = {5, 2, 2, 0};
         std::memcpy(lengthSyllables, lengths, 4);
     }
-    else if (std::strcmp(word, "соответствующей") == 0)
+    else if (std::strcmp(word, "соответствующей") == 0) //-V2513
     {
         int8 lenghts[] = {4, 3, 4, 5, 3, 0};
         std::memcpy(lengthSyllables, lenghts, 6);
     }
+    else
+    {
+        // здесь ничего не делаем
+    }
+
     return lengthSyllables;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 // Возвращает часть слова до слога numSyllable(включительн) вместе со знаком переноса
-static char *PartWordForTransfer(char *word, int8 *lengthSyllables, int numSyllable, char buffer[30])
+static char *PartWordForTransfer(char *word, const int8 *lengthSyllables, int numSyllable, char buffer[30])
 {
     size_t length = 0;
     for (int i = 0; i <= numSyllable; i++)
@@ -269,7 +284,7 @@ static char *PartWordForTransfer(char *word, int8 *lengthSyllables, int numSylla
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 // Если draw == false, то рисовать символ не надо, фунция используется только для вычислений
-static int DrawPartWord(char *word, int x, int y, int xRight, bool draw)
+static int DrawPartWord(char *word, int x, int y, int xRight, bool draw) //-V2506
 {
     int8 *lengthSyllables = BreakWord(word);
     int numSyllabels = 0;
@@ -293,7 +308,7 @@ static int DrawPartWord(char *word, int x, int y, int xRight, bool draw)
             {
                 String(subString).Draw(x, y);
             }
-            return (int)std::strlen(subString) - 1;
+            return (int)std::strlen(subString) - 1; //-V2513
         }
     }
 
@@ -309,7 +324,7 @@ int Painter::DrawTextInRectWithTransfers(int eX, int eY, int eWidth, int eHeight
     int bottom = eY + eHeight;
 
     char buffer[20];
-    int numSymbols = (int)std::strlen(text);
+    int numSymbols = (int)std::strlen(text); //-V2513
 
     int y = top - 1;
     int x = left;
@@ -560,7 +575,7 @@ void Painter::FillBoundedRegion(int x, int y, int widht, int height, Color color
 static bool GetHeightTextWithTransfers(int left, int top, int right, const char *text, int *height)
 {
     char buffer[20];
-    int numSymbols = (int)std::strlen(text);
+    int numSymbols = (int)std::strlen(text); //-V2513
 
     int y = top - 1;
     int x = left;
@@ -610,7 +625,8 @@ static bool GetHeightTextWithTransfers(int left, int top, int right, const char 
     }
 
     *height = y - top + 4;
-    LIMITATION(*height, 0, 239);
+
+    LIMITATION(*height, 0, 239); //-V2516
 
     return curSymbol == numSymbols;
 }
@@ -685,7 +701,7 @@ void Painter::DrawVLineArray(int x, int numLines, uint8 *y0y1, Color color)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Painter::DrawMultiVPointLine(int numLines, int y0, uint16 x0[], int delta, int count, Color color)
+void Painter::DrawMultiVPointLine(int numLines, int y0, const uint16 *x0, int delta, int count, Color color)
 {
     SetColor(color);
 
@@ -701,7 +717,7 @@ void Painter::DrawMultiVPointLine(int numLines, int y0, uint16 x0[], int delta, 
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Painter::DrawMultiHPointLine(int numLines, int x0, uint8 y0[], int delta, int count, Color color)
+void Painter::DrawMultiHPointLine(int numLines, int x0, const uint8 *y0, int delta, int count, Color color)
 {
     SetColor(color);
 
@@ -735,7 +751,7 @@ void Painter::DrawVPointLine(int x, int y0, int y1, float delta)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Painter::DrawDashedVLine(int x, int y0, int y1, int deltaFill, int deltaEmtpy, int deltaStart)
+void Painter::DrawDashedVLine(int x, int y0, int y1, int deltaFill, int deltaEmtpy, int deltaStart) //-V2506
 {
     if (deltaStart < 0 || deltaStart >= (deltaFill + deltaEmtpy))
     {
@@ -760,7 +776,7 @@ void Painter::DrawDashedVLine(int x, int y0, int y1, int deltaFill, int deltaEmt
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Painter::DrawDashedHLine(int y, int x0, int x1, int deltaFill, int deltaEmpty, int deltaStart)
+void Painter::DrawDashedHLine(int y, int x0, int x1, int deltaFill, int deltaEmpty, int deltaStart) //-V2506
 {
     if (deltaStart < 0 || deltaStart >= (deltaFill + deltaEmpty))
     {
