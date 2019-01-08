@@ -18,7 +18,7 @@
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-static void DrawCommonHiPart(Control *item, int x, int y, bool pressed, bool shade, bool opened = false);
+static void DrawCommonHiPart(Control *item, int x, int y, bool pressed, bool shade, bool opened);
 static void DrawValueWithSelectedPosition(int x, int y, int value, int numDigits, int selPos, bool hLine, bool fillNull);
 
 
@@ -78,7 +78,7 @@ void GovernorColor::DrawOpened(int x, int y)
 void GovernorColor::DrawClosed(int x, int y)
 {
     ct->Init(false);
-    DrawCommonHiPart(this, x, y, IsPressed(), IsShade() || !IsAcitve());
+    DrawCommonHiPart(this, x, y, IsPressed(), IsShade() || !IsAcitve(), false);
     Painter::FillRegion(x + 2, y + 20, Menu::Item::Value::WIDTH, Menu::Item::Value::HEIGHT - 1, ct->color);
 }
 
@@ -130,17 +130,17 @@ void Governor::Draw(int x, int y, bool opened)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Governor::DrawOpened(int x, int y)
 {
-    DrawCommonHiPart(this, x, y, IsPressed(), IsShade(), true);
-    DrawValue(x, y + 22);
+    bool shade = IsShade() || !IsAcitve();
+    DrawCommonHiPart(this, x, y, IsPressed(), shade, true);
+    DrawValue(x, y + 10);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Governor::DrawClosed(int x, int y)
 {
-    bool pressed = IsPressed();
     bool shade = IsShade() || !IsAcitve();
     DrawLowPart(x, y + 14, shade);
-    DrawCommonHiPart(this, x, y, pressed, shade);
+    DrawCommonHiPart(this, x, y, IsPressed(), shade, false);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -284,7 +284,7 @@ void Choice::DrawClosed(int x, int y)
     {
         funcForDraw(x, y);
     }
-    DrawCommonHiPart(this, x, y, pressed, shade);
+    DrawCommonHiPart(this, x, y, pressed, shade, false);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -506,7 +506,7 @@ void TimeControl::DrawClosed(int x, int y)
 {
     bool pressed = IsPressed();
     bool shade = IsShade();
-    DrawCommonHiPart(this, x, y, pressed, shade);
+    DrawCommonHiPart(this, x, y, pressed, shade, false);
 
     Painter::FillRegion(x + 1, y + 17, Menu::Item::Value::WIDTH + 2, Menu::Item::Value::HEIGHT + 3, Color::MENU_FIELD);
 
@@ -535,7 +535,7 @@ void TimeControl::DrawOpened(int x, int y)
     int width = Menu::Item::Value::WIDTH + 3;
     int height = 61;
     Painter::DrawRectangle(x - 1, y - 1, width + 2, height + 3, Color::BACK);
-    DrawCommonHiPart(this, x - 1, y - 1, IsPressed(), false);
+    DrawCommonHiPart(this, x - 1, y - 1, IsPressed(), false, false);
 
     Painter::DrawRectangle(x - 1, y, width + 1, height + 1, Color::MenuTitle(false));
 
