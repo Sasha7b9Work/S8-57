@@ -71,7 +71,7 @@ void EEPROM::SaveSettings()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-uint EEPROM::FirstFreeAddressForSettings()
+uint EEPROM::FirstFreeAddressForSettings() //-V2506
 {
     uint address = ADDR_SECTOR_SETTINGS_1;
 
@@ -116,7 +116,7 @@ uint EEPROM::AddressFirstEmptyByte()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-uint EEPROM::GetSector(uint address)
+uint EEPROM::GetSector(uint address) //-V2506
 {
     if (address == ADDR_SECTOR_SETTINGS_1)
     {
@@ -126,7 +126,10 @@ uint EEPROM::GetSector(uint address)
     {
         return FLASH_SECTOR_11;
     }
-
+    else
+    {
+        // ничего не делаем
+    }
 
 
     return FLASH_SECTOR_0;
@@ -159,7 +162,7 @@ void EEPROM::EraseSector(uint address)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void EEPROM::WriteBytes(uint address, uint8 *data, int size)
+void EEPROM::WriteBytes(uint address, const uint8 *data, int size)
 {
     CLEAR_FLASH_FLAGS;
 
@@ -225,18 +228,18 @@ void EEPROM::DeleteAllData()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static int GetSerialNumber(char buffer[17])
+static int GetSerialNumber(char buffer[17]) //-V2506
 {
     /// \todo улучшить - нельзя разбрасываться байтами. Каждая запись должна занимать столько места, сколько в ней символов, а не 16, как сейчас.
 
     const int allShotsMAX = 512 / 16;   // Максимальное число записей в OTP серийного номера.
 
-    uint8 *address = (uint8 *)FLASH_OTP_END - 15;
+    uint8 *address = (uint8 *)FLASH_OTP_END - 15; //-V566
 
     do
     {
         address -= 16;
-    } while (*address == 0xff && address > (uint8 *)FLASH_OTP_BASE);
+    } while (*address == 0xff && address > (uint8 *)FLASH_OTP_BASE); //-V566
 
     if (*address == 0xff)   // Не нашли строки с информацией, дойдя до начального адреса OTP
     {
@@ -244,9 +247,9 @@ static int GetSerialNumber(char buffer[17])
         return allShotsMAX;
     }
 
-    std::strcpy(buffer, (char *)address);
+    std::strcpy(buffer, (char *)address); //-V2513
 
-    return allShotsMAX - (address - (uint8 *)FLASH_OTP_BASE) / 16 - 1;
+    return allShotsMAX - (address - (uint8 *)FLASH_OTP_BASE) / 16 - 1; //-V566
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -275,18 +278,18 @@ static void WriteBufferBytes(uint address, void *buffer, int size)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-bool OTPmem::SaveSerialNumber(char *servialNumber)
+bool OTPmem::SaveSerialNumber(char *servialNumber) //-V2506
 {
     // Находим первую пустую строку длиной 16 байт в области OTP, начиная с начала
-    uint8 *address = (uint8 *)FLASH_OTP_BASE;
+    uint8 *address = (uint8 *)FLASH_OTP_BASE; //-V566
 
     while ((*address) != 0xff &&                    // *address != 0xff означает, что запись в эту строку уже производилась
-           address < (uint8 *)FLASH_OTP_END - 16)
+           address < (uint8 *)FLASH_OTP_END - 16) //-V566
     {
         address += 16;
     }
 
-    if (address < (uint8 *)FLASH_OTP_END - 16)
+    if (address < (uint8 *)FLASH_OTP_END - 16) //-V566
     {
         WriteBufferBytes((uint)address, (uint8 *)servialNumber, (int)std::strlen(servialNumber) + 1);
         return true;

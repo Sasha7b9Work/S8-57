@@ -41,7 +41,7 @@ private:
 
     static void EraseSector(uint address);
 
-    static void WriteBytes(uint address, uint8 *data, int size);
+    static void WriteBytes(uint address, const uint8 *data, int size);
 
     static void ReadBytes(uint address, void *data, uint size);
 

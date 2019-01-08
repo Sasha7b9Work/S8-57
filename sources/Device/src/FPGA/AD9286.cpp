@@ -48,7 +48,7 @@ void AD9286::Init()
     isGPI0.Pin = PIN_SCK;                       // Инициализация SCK
     HAL_GPIO_Init(PORT_SCK, &isGPI0);
 
-    SetPin(CS);
+    SetPin(CS); //-V525
     ResetPin(DAT);
     ResetPin(SCK);
 
