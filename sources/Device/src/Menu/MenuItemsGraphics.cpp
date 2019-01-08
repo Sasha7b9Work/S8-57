@@ -67,10 +67,10 @@ void GovernorColor::DrawOpened(int x, int y)
     x -= delta;
     ct->Init(false);
     Painter::DrawRectangle(x - 1, y - 1, Menu::Item::HEIGHT + delta + 2, Menu::Item::HEIGHT + 2, Color::BLACK);
-    Painter::DrawRectangle(x, y, Menu::Item::WIDTH + delta, Menu::Item::HEIGHT, Color::MenuTitle(false));
+    Painter::DrawRectangle(x, y, Width() + delta, Menu::Item::HEIGHT, Color::MenuTitle(false));
     Painter::FillRegion(x + 1, y + 1, Menu::Item::Value::WIDTH + 2 + delta, Menu::Item::Value::HEIGHT + 3, Color::MenuItem(false));
-    Painter::DrawHLine(y + Menu::Item::HEIGHT / 2 + 2, x, x + Menu::Item::WIDTH + delta, Color::MenuTitle(false));
-    Painter::DrawStringInCenterRect(x + (IsPressed() ? 2 : 1), y + (IsPressed() ? 2 : 1), Menu::Item::WIDTH + delta, Menu::Item::HEIGHT / 2 + 2, 
+    Painter::DrawHLine(y + Menu::Item::HEIGHT / 2 + 2, x, x + Width() + delta, Color::MenuTitle(false));
+    Painter::DrawStringInCenterRect(x + (IsPressed() ? 2 : 1), y + (IsPressed() ? 2 : 1), Width() + delta, Menu::Item::HEIGHT / 2 + 2, 
                                     Title().CString(), Color::WHITE);
     DrawValue(x + 1, y + 19, delta);
 }
@@ -96,7 +96,7 @@ void GovernorColor::DrawValue(int x, int y, int delta)
     ct->Init(false);
     int16 vals[4] = {(int16)(ct->brightness * 100.0F), (int16)blue, (int16)green, (int16)red};
 
-    Painter::FillRegion(x, y, Menu::Item::WIDTH + delta - 2, Menu::Item::HEIGHT / 2 - 3, Color::BLACK);
+    Painter::FillRegion(x, y, Width() + delta - 2, Menu::Item::HEIGHT / 2 - 3, Color::BLACK);
     x += 92;
 
     for (int i = 0; i < 4; i++)
@@ -242,10 +242,10 @@ void Choice::DrawOpened(int x, int y)
 {
     int height = HeightOpened();
     
-    Painter::DrawRectangle(x, y, Menu::Item::WIDTH, height, Color::FILL);
+    Painter::DrawRectangle(x, y, Width(), height, Color::FILL);
     DrawGovernorChoiceColorFormulaHiPart(this, x, y, IsPressed(), false, true);
 
-    Painter::FillRegion(x + 1, y + MOI_HEIGHT_TITLE - 5, Menu::Item::WIDTH - 2, height - MOI_HEIGHT_TITLE + 4, Color::BACK);
+    Painter::FillRegion(x + 1, y + MOI_HEIGHT_TITLE - 5, Width() - 2, height - MOI_HEIGHT_TITLE + 4, Color::BACK);
     int8 index = *cell;
     for (int i = 0; i < NumSubItems(); i++)
     {
@@ -253,7 +253,7 @@ void Choice::DrawOpened(int x, int y)
         bool pressed = i == index;
         if (pressed)
         {
-            Painter::FillRegion(x + 1, yItem + 2, Menu::Item::WIDTH_OPENED - 2, MOSI_HEIGHT - 1, ColorMenuField(this));
+            Painter::FillRegion(x + 1, yItem + 2, Width() - 2, MOSI_HEIGHT - 1, ColorMenuField(this));
         }
         NameSubItem(i).Draw(x + 4, yItem + 2, pressed ? Color::BLACK : ColorMenuField(this));
     }
@@ -296,14 +296,14 @@ void Button::Draw(int x, int y)
     bool pressed = IsPressed();
     bool shade = IsShade() || !funcOfActive();
 
-    Painter::DrawHLine(y + 1, x, x + Menu::Item::WIDTH, Color::MenuTitle(shade));
+    Painter::DrawHLine(y + 1, x, x + Width(), Color::MenuTitle(shade));
     Color color = shade ? Color::MenuItem(true) : Color::WHITE;
-    Painter::FillRegion(x + 1, y + 2, Menu::Item::WIDTH - 2, Menu::Item::HEIGHT - 2, Color::MenuItem(false));
-    Painter::FillRegion(x + 3, y + 4, Menu::Item::WIDTH - 6, Menu::Item::HEIGHT - 6, Color::MenuItem(false));
+    Painter::FillRegion(x + 1, y + 2, Width() - 2, Menu::Item::HEIGHT - 2, Color::MenuItem(false));
+    Painter::FillRegion(x + 3, y + 4, Width() - 6, Menu::Item::HEIGHT - 6, Color::MenuItem(false));
 
     int delta = (pressed && (!shade)) ? 2 : 1;
 
-    Painter::DrawStringInCenterRect(x + delta, y + delta, Menu::Item::WIDTH, Menu::Item::HEIGHT, Title().CString(), color);
+    Painter::DrawStringInCenterRect(x + delta, y + delta, Width(), Menu::Item::HEIGHT, Title().CString(), color);
 
     funcForDraw(x, y);
 }
@@ -381,8 +381,8 @@ void Page::Draw(int x, int y, bool opened)
     }
     else
     {
-        Painter::FillRegion(x + 1, y + 2, Menu::Item::WIDTH - 3, Menu::Item::HEIGHT - 2, Color::MenuItem(false));
-        Painter::DrawStringInCenterRect(x, y + 1, Menu::Item::WIDTH, Menu::Item::HEIGHT, Title().CString(), IsAcitve() ? Color::FILL : Color::MENU_TITLE_DARK);
+        Painter::FillRegion(x + 1, y + 2, Width() - 3, Menu::Item::HEIGHT - 2, Color::MenuItem(false));
+        Painter::DrawStringInCenterRect(x, y + 1, Width(), Menu::Item::HEIGHT, Title().CString(), IsAcitve() ? Color::FILL : Color::MENU_TITLE_DARK);
     }
 }
 
@@ -439,8 +439,8 @@ void Page::DrawItems(int x, int y)
     {
         /// \todo Ќадо бы не делать это дл€ пунктов меню, которые существуют и всЄ равно отрисовыватьс€ будут - зачем зр€ грузить процессор
 
-        Painter::DrawRectangle(x, y + 1, Menu::Item::WIDTH - 1, Menu::Item::HEIGHT, Color::FILL);
-        Painter::FillRegion(x + 1, y + 2, Menu::Item::WIDTH - 3, Menu::Item::HEIGHT - 2, Color::BACK);
+        Painter::DrawRectangle(x, y + 1, Width() - 1, Menu::Item::HEIGHT, Color::FILL);
+        Painter::FillRegion(x + 1, y + 2, Width() - 3, Menu::Item::HEIGHT - 2, Color::BACK);
 
         Control *item = Item(PosItemOnLeft() + i);
         if (item)
@@ -450,7 +450,7 @@ void Page::DrawItems(int x, int y)
             Menu::SetItemUnderButton(button, item);
         }
 
-        x += Menu::Item::WIDTH;
+        x += Width();
     }
 }
 
@@ -542,8 +542,8 @@ void TimeControl::DrawOpened(int x, int y)
 
     Painter::DrawRectangle(x - 1, y, width + 1, height + 1, Color::MenuTitle(false));
 
-    Painter::DrawHLine(y + MOI_HEIGHT_TITLE - 1, x, x + Menu::Item::WIDTH_OPENED);
-    Painter::FillRegion(x, y + MOI_HEIGHT_TITLE, Menu::Item::WIDTH_OPENED - 1, height - MOI_HEIGHT_TITLE, Color::BLACK);
+    Painter::DrawHLine(y + MOI_HEIGHT_TITLE - 1, x, x + Width());
+    Painter::FillRegion(x, y + MOI_HEIGHT_TITLE, Width() - 1, height - MOI_HEIGHT_TITLE, Color::BLACK);
 
     int y0 = 21;
     int y1 = 31;
@@ -633,7 +633,7 @@ static void DrawGovernorChoiceColorFormulaHiPart(Control *item, int x, int y, bo
             // дл€ остальных контролов не нужно
         }
 
-        Painter::Draw4SymbolsInRect(x + Menu::Item::WIDTH - 13, y + (item->IsOpened() ? 0 : 13), symbol, shade ? color : Color::BLACK);
+        Painter::Draw4SymbolsInRect(x + item->Width() - 13, y + (item->IsOpened() ? 0 : 13), symbol, shade ? color : Color::BLACK);
     }
 }
 
@@ -680,16 +680,16 @@ static void GovernorIpCommon_DrawOpened(Control *item, int x, int y, int dWidth)
     Control *control = (Control *)item;
     Painter::DrawRectangle(x - 2, y - 1, Menu::Title::WIDTH + 3 + dWidth, height + 3, Color::BACK);
     Painter::DrawRectangle(x - 1, y, Menu::Title::WIDTH + 1 + dWidth, height + 1, Color::MenuTitle(false));
-    Painter::DrawHLine(y + MOI_HEIGHT_TITLE - 1, x, x + Menu::Item::WIDTH_OPENED + dWidth);
+    Painter::DrawHLine(y + MOI_HEIGHT_TITLE - 1, x, x + item->Width() + dWidth);
     DrawGovernorChoiceColorFormulaHiPart(item, x - 1, y - 1, control->IsPressed(), false);
-    Painter::FillRegion(x, y + MOI_HEIGHT_TITLE, Menu::Item::WIDTH_OPENED - 1 + dWidth, height - MOI_HEIGHT_TITLE, Color::BLACK);
+    Painter::FillRegion(x, y + MOI_HEIGHT_TITLE, item->Width() - 1 + dWidth, height - MOI_HEIGHT_TITLE, Color::BLACK);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 int Page::ItemOpenedPosX(Control *item)
 {
     Page *page = (Page *)KEEPER(item);
-    return (page->PosCurrentItem() % MENU_ITEMS_ON_DISPLAY) * Menu::Item::WIDTH;
+    return (page->PosCurrentItem() % MENU_ITEMS_ON_DISPLAY) * item->Width();
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

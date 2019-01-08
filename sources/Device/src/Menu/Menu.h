@@ -148,14 +148,12 @@ public:
     {
     public:
         static const int HEIGHT = 23;
-        static const int WIDTH = 320 / 5;
-        static const int WIDTH_OPENED = WIDTH;
 
         class Value
         {
         public:
             static const int HEIGHT = 13;
-            static const int WIDTH = Menu::Item::WIDTH - 4; // -V112
+            static const int WIDTH = 320 / 5 - 4; // -V112
         };
     };
 
