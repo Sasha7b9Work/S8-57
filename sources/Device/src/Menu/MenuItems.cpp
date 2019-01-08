@@ -316,26 +316,28 @@ bool Choice::ProcessKey(KeyEvent event)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 bool Control::ProcessKey(KeyEvent event)
 {
+    bool result = false;
+    
     switch (type)
     {
     case Control::Type::Choice:
-        return ((Choice *)this)->ProcessKey(event);
+        result = ((Choice *)this)->ProcessKey(event);
         break;
     
     case Control::Type::ChoiceReg:
-        return ((Choice *)this)->ProcessKey(event);
+        result = ((Choice *)this)->ProcessKey(event);
         break;
 
     case Control::Type::Page:
-        return ((Page *)this)->ProcessKey(event);
+        result = ((Page *)this)->ProcessKey(event);
         break;
 
     case Control::Type::Governor:
-        return ((Governor *)this)->ProcessKey(event);
+        result = ((Governor *)this)->ProcessKey(event);
         break;
     }
 
-    return false;
+    return result;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

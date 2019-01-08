@@ -89,7 +89,7 @@ public:
     /// Нарисовать вертикальную линию от y0 до y1 точками через каждые delta пикселей
     static void DrawVPointLine(int x, int y0, int y1, float delta);
 
-    static void DrawTesterData(uint8 mode, Color color, uint8 *x, uint8 *y);
+    static void DrawTesterData(uint8 mode, Color color, const uint8 *x, const uint8 *y);
 
     static void DrawDashedVLine(int x, int y0, int y1, int deltaFill, int deltaEmtpy, int deltaStart);
 
@@ -99,7 +99,7 @@ public:
 
 private:
 
-    static int DrawText(int x, int y, const char *text, Color color = Color::NUMBER);    
+    static int DrawText(int x, int y, const char *text, Color color = Color::NUMBER);
 
     static int DrawCharWithLimitation(int eX, int eY, char symbol, int limitX, int limitY, int limitWidth, int limitHeight);
 

@@ -19,7 +19,7 @@ String::String() : buffer(0)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 String::String(const String &rhs) : buffer(0)
 {
-    if (Allocate(std::strlen(rhs.CString())) + 1)
+    if (Allocate(std::strlen(rhs.CString()) + 1))
     {
         std::strcpy(buffer, rhs.CString());
     }

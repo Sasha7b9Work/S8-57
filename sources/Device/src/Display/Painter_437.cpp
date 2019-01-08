@@ -70,7 +70,7 @@ void Painter::SetColorValue(Color color, uint value)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Painter::DrawTesterData(uint8 mode, Color color, uint8 *x, uint8 *y)
+void Painter::DrawTesterData(uint8 mode, Color color, const uint8 *x, const uint8 *y)
 {
     Buffer buffer(483);
     buffer.Data()[0] = Command::Paint_TesterLines;
@@ -115,10 +115,10 @@ void Painter::SetColor(Color color)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Painter::SetBrightnessDisplay(int16 brightness)
 {
-    volatile float recValue = 1601.0f;
+    volatile float recValue = 1601.0F;
     if (brightness < 100)
     {
-        recValue = 64.0f + (600.0f - 63.0f) / 100.0f / 100.0f * brightness * brightness;
+        recValue = 64.0F + (600.0F - 63.0F) / 100.0F / 100.0F * brightness * brightness;
     }
     /*
     uint8 command[4] = {SET_BRIGHTNESS};
@@ -162,6 +162,8 @@ int Painter::DrawText(int x, int y, const char *text, Color color)
         return x;
     }
 
+    int result = x + Font::GetLengthText(text) + 1;
+
 #define MAX_SIZE_BUFFER 100
 
     if (std::strlen(text) + 1 > MAX_SIZE_BUFFER)
@@ -183,7 +185,7 @@ int Painter::DrawText(int x, int y, const char *text, Color color)
 
     FSMC::WriteToPanel(buffer, size);
 
-    return x + 10;
+    return result;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -210,7 +212,7 @@ int Painter::DrawChar(int x, int y, char symbol, Color color)
 {
     String("%c", symbol).Draw(x, y, color);
 
-    return 8;
+    return x + Font::GetLengthSymbol(symbol) + 1;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
