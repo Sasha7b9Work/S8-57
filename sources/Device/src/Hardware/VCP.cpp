@@ -35,7 +35,7 @@ bool VCP::PrevSendingComplete()
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void VCP::SendDataAsynch(uint8 *buffer, uint size)
+void VCP::SendDataAsynch(const uint8 *buffer, uint size)
 {
 #define SIZE_BUFFER 64U
     static uint8 trBuf[SIZE_BUFFER];
@@ -62,7 +62,7 @@ void VCP::Flush()
         while (pCDC->TxState == 1) {};
         USBD_CDC_SetTxBuffer(&handleUSBD, buffSend, (uint16)sizeBuffer);
         USBD_CDC_TransmitPacket(&handleUSBD);
-        while (pCDC->TxState == 1) {};
+        while (pCDC->TxState == 1) {}; //-V654
     }
     sizeBuffer = 0;
 }

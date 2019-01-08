@@ -23,7 +23,7 @@ public:
     /// Инициализация
     static void Init();
 
-    static void SendDataAsynch(uint8 *data, uint size);
+    static void SendDataAsynch(const uint8 *data, uint size);
 
     static void SendDataSynch(const void *data, uint size = 0);
     /// Передаётся строка без завершающего нуля

@@ -49,9 +49,10 @@ void BottomPart::Draw()
     String(buffer).Draw(x + 35, y0);
 
     buffer[0] = 0;
-    pString source[3] = {"1", "2", "\x82"};
+
     if (MODE_WORK == ModeWork::Dir)
     {
+        pString source[3] = { "1", "2", "\x82" };
         snprintf(buffer, 100, "ñ\xa5\x10%s", source[(uint8)TRIG_SOURCE]);
     }
 
@@ -126,7 +127,7 @@ void BottomPart::Draw()
     {
         char mesFreq[20] = "\x7c=";
         float freq = FrequencyCounter::GetFreq();
-        if (freq == -1.0f)
+        if (freq == -1.0F) //-V550
         {
             std::strcat(mesFreq, "******");
         }

@@ -42,7 +42,7 @@ void FileManager::Init()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void DrawLongString(int x, int y, char *string, bool hightlight)
+static void DrawLongString(int x, int y, const char *string, bool hightlight)
 {
     int length = Font::GetLengthText(string);
 
@@ -84,7 +84,7 @@ static void DrawDirs(int x, int y)
     if (FDrive::GetNameDir(currentDir, numFirstDir, nameDir, &sfrd))
     {
         int  drawingDirs = 0;
-        DrawLongString(x, y, nameDir, FM_CURSOR_IN_DIRS && ( numFirstDir + drawingDirs == numCurDir));
+        DrawLongString(x, y, nameDir, FM_CURSOR_IN_DIRS && ( numFirstDir == numCurDir));
         while (drawingDirs < (RECS_ON_PAGE - 1) && FDrive::GetNextNameDir(nameDir, &sfrd))
         {
             drawingDirs++;
@@ -103,7 +103,7 @@ static void DrawFiles(int x, int y)
     if (FDrive::GetNameFile(currentDir, numFirstFile, nameFile, &sfrd))
     {
         int drawingFiles = 0;
-        DrawLongString(x, y, nameFile, !FM_CURSOR_IN_DIRS && (numFirstFile + drawingFiles == numCurFile));
+        DrawLongString(x, y, nameFile, !FM_CURSOR_IN_DIRS && (numFirstFile == numCurFile));
         while (drawingFiles < (RECS_ON_PAGE - 1) && FDrive::GetNextNameFile(nameFile, &sfrd))
         {
             drawingFiles++;
@@ -113,7 +113,7 @@ static void DrawFiles(int x, int y)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void DrawNameCurrentDir(int left, int top)
+static void DrawNameCurrentDir(int left, int top) //-V2506
 {
     Painter::SetColor(Color::FILL);
     int length = Font::GetLengthText(currentDir);
@@ -141,7 +141,7 @@ static void DrawNameCurrentDir(int left, int top)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void FileManager::Draw()
+void FileManager::Draw() //-V2506
 {
     if (!FM_NEED_REDRAW)
     {
@@ -185,7 +185,7 @@ void FileManager::Draw()
     //FSMC::SetMode(mode);
 }
 
-void FileManager::PressSB_LevelDown()
+void FileManager::PressSB_LevelDown() //-V2506
 {
     FM_NEED_REDRAW = FM_REDRAW_FULL;
     if (!FM_CURSOR_IN_DIRS)
@@ -209,7 +209,7 @@ void FileManager::PressSB_LevelDown()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void FileManager::PressSB_LevelUp()
+void FileManager::PressSB_LevelUp() //-V2506
 {
     FM_NEED_REDRAW = FM_REDRAW_FULL;
     if (std::strlen(currentDir) == 1)
@@ -250,12 +250,14 @@ static void DecCurrentDir()
     if (numDirs > 1)
     {
         numCurDir--;
+
         if (numCurDir < 0)
         {
             numCurDir = numDirs - 1;
             numFirstDir = numDirs - RECS_ON_PAGE;
-            LIMITATION(numFirstDir, 0, numCurDir);
+            LIMITATION(numFirstDir, 0, numCurDir); //-V2516
         }
+
         if (numCurDir < numFirstDir)
         {
             numFirstDir = numCurDir;
@@ -287,12 +289,14 @@ static void DecCurrentFile()
     if (numFiles > 1)
     {
         numCurFile--;
+
         if (numCurFile < 0)
         {
             numCurFile = numFiles - 1;
             numFirstFile = numFiles - RECS_ON_PAGE;;
-            LIMITATION(numFirstFile, 0, numCurFile);
+            LIMITATION(numFirstFile, 0, numCurFile); //-V2516
         }
+
         if (numCurFile < numFirstFile)
         {
             numFirstFile = numCurFile;
@@ -323,7 +327,7 @@ bool FileManager::HandlerKey(KeyEvent event)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-bool FileManager::GetNameForNewFile(char name[255])
+bool FileManager::GetNameForNewFile(char name[255]) //-V2506
 {
     static int number = 0;
 
@@ -338,7 +342,7 @@ bool FileManager::GetNameForNewFile(char name[255])
 
     if (FILE_NAMING_MODE_MANUAL)
     {
-        LIMITATION(size, 1, 95);
+        LIMITATION(size, 1, 95); //-V2516
         std::strcat(name, FILE_NAME);
         std::strcat(name, ".");
         std::strcat(name, MODE_SAVE_BMP ? "bmp" : "txt");
@@ -348,7 +352,7 @@ bool FileManager::GetNameForNewFile(char name[255])
     {
         PackedTime time = CPU::RTC_::GetPackedTime();
                            //  1          2           3         4           5             6
-        uint values[] = {0u, time.year, time.month, time.day, time.hours, time.minutes, time.seconds};
+        uint values[] = {0U, time.year, time.month, time.day, time.hours, time.minutes, time.seconds};
 
         char *ch = FILE_NAME_MASK;
         char *wr = name;

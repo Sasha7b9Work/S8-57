@@ -153,7 +153,7 @@ void FPGAMath::PointsRel2Voltage(const uint8 *points, int numPoints, Range::E ra
     float koeff = 1.0f / 20e3f;
     for (int i = 0; i < numPoints; i++)
     {
-        voltage[i] = (points[i] * voltInPixel - diff) * koeff;
+        voltage[i] = (points[i] * voltInPixel - diff) * koeff; //-V636
     }
 }
 

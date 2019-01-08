@@ -58,7 +58,7 @@ DEF_GOVERNOR_COLOR( gcChannelB,                                                 
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ColorType PageDisplay::PageSettings::PageColors::colorTypeGrid = COLOR_TYPE(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, Color::GRID)
-DEF_GOVERNOR_COLOR( gcGrid,                                                                              //--- ДИСПЛЕЙ - НАСТРОЙКИ - ЦВЕТА - Сетка ---
+DEF_GOVERNOR_COLOR( gcGrid,                                                                                                                     //--- ДИСПЛЕЙ - НАСТРОЙКИ - ЦВЕТА - Сетка ---
     "Сетка", "Grid",
     "Устанавливает цвет сетки",
     "Sets the grid color",
@@ -79,7 +79,7 @@ void PageDisplay::PageSettings::PageColors::OnChanged_Settings_Colors_Background
     gcGrid.ct->Init(true);
 }
 
-DEF_CHOICE_2( cBackground,                                                                                 //--- ДИСПЛЕЙ - НАСТРОЙКИ - ЦВЕТА - Фон ---
+DEF_CHOICE_2( cBackground,                                                                                                                        //--- ДИСПЛЕЙ - НАСТРОЙКИ - ЦВЕТА - Фон ---
     "Фон", "Background",
     "Выбор цвета фона",
     "Choice of color of a background",
@@ -90,7 +90,7 @@ DEF_CHOICE_2( cBackground,                                                      
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /// \todo Добавить дополнительные цвета 1-го и 2-го каналов
-DEF_PAGE_6( pageColors,                                                                                          //--- ДИСПЛЕЙ - НАСТРОЙКИ - ЦВЕТА ---
+DEF_PAGE_6( pageColors, // -V1027                                                                                                                       //--- ДИСПЛЕЙ - НАСТРОЙКИ - ЦВЕТА ---
     "ЦВЕТА", "COLORS",
     "Выбор цветов дисплея",
     "The choice of colors display",
