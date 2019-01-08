@@ -140,7 +140,7 @@ void Governor::DrawClosed(int x, int y)
 {
     bool pressed = IsPressed();
     bool shade = IsShade() || !IsAcitve();
-    DrawLowPart(x, y - 6, pressed, shade);
+    DrawLowPart(x, y + 14, pressed, shade);
     DrawGovernorChoiceColorFormulaHiPart(this, x, y, pressed, shade);
 }
 
@@ -173,14 +173,17 @@ void Governor::DrawLowPart(int x, int y, bool, bool shade)
 {
     Color colorTextDown = Color::BLACK;
 
-    Painter::FillRegion(x + 1, y + 19, Menu::Item::Value::WIDTH + 1, Menu::Item::Value::HEIGHT - 3, Color::MENU_FIELD);
+    Painter::FillRegion(x + 1, y - 1, Menu::Item::Value::WIDTH + 1, Menu::Item::Value::HEIGHT - 3, Color::MENU_FIELD);
+
+    if (IsCurrentItem())
+    {
+        Painter::Draw4SymbolsInRect(x + Width() - 12, y - 1, GetSymbol(), Color::BACK);
+    }
 
     if (shade)
     {
         colorTextDown = Color::MenuItem(false);
     }
-
-    y += 20;
 
     x = Painter::DrawChar(x + 4, y, SYMBOL_GOVERNOR_LEFT, colorTextDown);
 
@@ -217,11 +220,6 @@ void Governor::DrawLowPart(int x, int y, bool, bool shade)
     }
 
     Painter::DrawChar(x + 1, y, SYMBOL_GOVERNOR_RIGHT, colorTextDown);
-
-    if (IsCurrentItem())
-    {
-        Painter::Draw4SymbolsInRect(x + 20, y - 1, GetSymbol(), Color::BLACK);
-    }
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
