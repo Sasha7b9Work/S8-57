@@ -250,7 +250,7 @@ int Governor::NumDigits()
     return max;
 }
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-char Governor::GetSymbol(int value)
+char Governor::GetSymbol()
 {
     static const char chars[] =
     {
@@ -259,6 +259,7 @@ char Governor::GetSymbol(int value)
         SYMBOL_GOVERNOR_SHIFT_2,
         SYMBOL_GOVERNOR_SHIFT_3
     };
+    int value = *cell;
     while (value < 0)
     {
         value += 4;

@@ -171,6 +171,7 @@ void Governor::DrawValue(int x, int y)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Governor::DrawLowPart(int x, int y, bool, bool shade)
 {
+    LOG_WRITE("");
     Color colorTextDown = Color::BLACK;
 
     Painter::FillRegion(x + 1, y + 19, Menu::Item::Value::WIDTH + 1, Menu::Item::Value::HEIGHT - 3, Color::MENU_FIELD);
@@ -183,6 +184,7 @@ void Governor::DrawLowPart(int x, int y, bool, bool shade)
     y += 20;
 
     x = Painter::DrawChar(x + 4, y, SYMBOL_GOVERNOR_LEFT, colorTextDown);
+    LOG_WRITE("1 = %d", x);
 
     if (Menu::OpenedItem() != this)
     {
@@ -190,6 +192,7 @@ void Governor::DrawLowPart(int x, int y, bool, bool shade)
         if (delta == 0)
         {
             x = Integer(*cell).ToString(false, 1).Draw(x + 1, y);
+            LOG_WRITE("2 = %d", x);
         }
         else
         {
@@ -202,11 +205,13 @@ void Governor::DrawLowPart(int x, int y, bool, bool shade)
             if (delta > 0)
             {
                 x = Painter::DrawTextWithLimitation(drawX, y - delta, Integer(*cell).ToString(false, 1).CString(), limX, limY, limWidth, limHeight);
+                LOG_WRITE("3 = %d", x);
                 Painter::DrawTextWithLimitation(drawX, y + 10 - delta, Integer(NextValue()).ToString(false, 1).CString(), limX, limY, limWidth, limHeight);
             }
             if (delta < 0)
             {
                 x = Painter::DrawTextWithLimitation(drawX, y - delta, Integer(*cell).ToString(false, 1).CString(), limX, limY, limWidth, limHeight);
+                LOG_WRITE("4 = %d", x);
                 Painter::DrawTextWithLimitation(drawX, y - 10 - delta, Integer(PrevValue()).ToString(false, 1).CString(), limX, limY, limWidth, limHeight);
             }
         }
@@ -214,12 +219,13 @@ void Governor::DrawLowPart(int x, int y, bool, bool shade)
     else
     {
         x = Integer(*cell).ToString(false, 1).Draw(x + 1, y, Color::WHITE);
+        LOG_WRITE("4 = %d", x);
     }
 
     if (IsCurrentItem())
     {
-        char symbol = Governor::GetSymbol(*cell);
-        Painter::Draw4SymbolsInRect(x + 20, y - 1, symbol, Color::BLACK);
+        char symbol = Governor::GetSymbol();
+        Painter::Draw4SymbolsInRect(x, y - 1, symbol, Color::BLACK);
     }
 
     Painter::DrawChar(x + 1, y, SYMBOL_GOVERNOR_RIGHT, colorTextDown);
@@ -611,30 +617,20 @@ static void DrawGovernorChoiceColorFormulaHiPart(Control *item, int x, int y, bo
     {
         char symbol = 0;
    
-        if (IS_CHOICE_REG(item) ||  (item->IsOpened() && IS_CHOICE(item)))
+        if (IS_CHOICE_REG(item) || (item->IsOpened() && IS_CHOICE(item)))
         {
-            symbol = Governor::GetSymbol(*((Choice*)item)->cell);
+            symbol = item->GetSymbol();
         }
         else if (IS_TIME(item))
         {
             TimeControl* time = (TimeControl*)item;
             if ((Menu::OpenedItem() == item) && (*time->curField != iEXIT) && (*time->curField != iSET))
             {
-                int8 values[7] =
-                {
-                    0,
-                    *time->day,
-                    *time->month,
-                    *time->year,
-                    *time->hours,
-                    *time->minutes,
-                    *time->seconds
-                };
-                symbol = Governor::GetSymbol(values[*time->curField]);
+                symbol = time->GetSymbol();
             }
         }
 
-        Painter::Draw4SymbolsInRect(x + Menu::Item::WIDTH - 13, y + 5 + (item->IsOpened() ? 0 : 15), symbol, shade ? color : Color::BLACK);
+        Painter::Draw4SymbolsInRect(x + Menu::Item::WIDTH - 13, y + (item->IsOpened() ? 0 : 13), symbol, shade ? color : Color::BLACK);
     }
 }
 

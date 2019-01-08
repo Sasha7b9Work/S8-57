@@ -77,6 +77,8 @@ public:
     bool IsCurrentItem() const;
     /// ¬ывести информацию в лог
     void LogInfo() const;
+    /// ¬озвращает изображение регул€тора, соответствующее его текущему положению
+    char GetSymbol();
 
     /// –азные виды пунктов меню
     struct Type
@@ -333,8 +335,7 @@ public:
     void DrawClosed(int x, int y);
     void DrawValue(int x, int y);
     void DrawLowPart(int x, int y, bool pressed, bool shade);
-    /// ¬озвращает изображение регул€тора, соответствующее его текущему положению
-    static char GetSymbol(int value);
+    char GetSymbol();
 };
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// Choice ///
@@ -381,6 +382,8 @@ public:
     String NameSubItem(int i);
     /// ¬озвращает цвет, которым нужно заполн€ть участок выбора
     static Color ColorMenuField(const Choice *choice);
+
+    char GetSymbol();
 };
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// GovernorColor ///
@@ -450,6 +453,7 @@ public:
     void Draw(int x, int y, bool opened);
     void DrawClosed(int x, int y);
     void DrawOpened(int x, int y);
+    char GetSymbol();
 };
 
 #define CHOICE_RUN_FUNC_CHANGED(c, val)     \

@@ -1,4 +1,5 @@
 #include "defines.h"
+#include "Display/Symbols.h"
 #include "MenuItems.h"
 #include "Settings/Settings.h"
 #include "Menu/Pages/Include/PageFunction.h"
@@ -55,7 +56,7 @@ const char *Choice::NamePrevSubItem()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Control *Page::Item(int numElement) const
 {
-    if(numElement >= num)
+    if (numElement >= num)
     {
         return 0;
     }
@@ -73,6 +74,58 @@ int Page::PosItemOnLeft()
 String Choice::NameSubItem(int i)
 {
     return String(NAME_FROM_INDEX(i));
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+char Choice::GetSymbol()
+{
+    return ((Governor*)this)->GetSymbol();
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+char TimeControl::GetSymbol()
+{
+    int8 values[7] =
+    {
+        0,
+        *day,
+        *month,
+        *year,
+        *hours,
+        *minutes,
+        *seconds
+    };
+
+    int8 value = values[*curField];
+
+    static const char chars[] =
+    {
+        SYMBOL_GOVERNOR_SHIFT_0,
+        SYMBOL_GOVERNOR_SHIFT_1,
+        SYMBOL_GOVERNOR_SHIFT_2,
+        SYMBOL_GOVERNOR_SHIFT_3
+    };
+
+    return chars[value % 4];
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+char Control::GetSymbol()
+{
+    if (type == Control::Type::Governor)
+    {
+        return ((Governor *)this)->GetSymbol();
+    }
+    else if (type == Control::Type::Choice)
+    {
+        return ((Choice *)this)->GetSymbol();
+    }
+    else if (type == Control::Type::Time)
+    {
+        return ((TimeControl *)this)->GetSymbol();
+    }
+
+    return 0;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -279,7 +332,7 @@ bool Page::CurrentItemIsOpened() const
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 bool Control::IsCurrentItem() const
 {
-    return this == Menu::CurrentItem();
+    return (this == Menu::CurrentItem());
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
