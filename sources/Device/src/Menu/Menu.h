@@ -117,7 +117,7 @@ private:
     
     static void ResetItemsUnderButton();
     /// Возвращает true, если данная кнопка обрабатыватся в данном режиме
-    static bool IsProcessed(KeyEvent *event);
+    static bool IsProcessed(const KeyEvent *event);
     /// Возвращает страницу меню, которая должна открываться по нажатию кнопки button.
     static const void *PageForButton(Key::E button);
     /// Если произошло короткое нажатие кнопки, то здесь хранится имя этой кнопки до обработки  этого нажатия.

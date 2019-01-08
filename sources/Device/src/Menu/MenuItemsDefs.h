@@ -14,41 +14,46 @@ bool EmptyFuncBKE(KeyEvent);
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-#define DEF_BUTTON(name, titleRU, titleEN, hintRU, hintEN, keeper, funcActive, funcPress, funcDraw)                                             \
-volatile static const ButtonBase name = { Control::Type::Button, 0, false, Page::Name::NoPage, &keeper, funcActive, {titleRU, titleEN, hintRU, hintEN},  \
+#define DEF_BUTTON(name, titleRU, titleEN, hintRU, hintEN, keeper, funcActive, funcPress, funcDraw)                                                             \
+volatile static const ButtonBase name = { Control::Type::Button, 0, false, Page::Name::NoPage, &keeper, funcActive, {titleRU, titleEN, hintRU, hintEN},         \
     funcPress, funcDraw };
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-#define DEF_TIME(name, titleRU, titleEN, hintRU, hintEN, keeper, funcActive, cur, h, mi, s, mo, d, y)                                           \
-static const TimeBase name = { Control::Type::Time, 0, false, Page::Name::NoPage, &keeper, funcActive, {titleRU, titleEN, hintRU, hintEN},      \
+#define DEF_TIME(name, titleRU, titleEN, hintRU, hintEN, keeper, funcActive, cur, h, mi, s, mo, d, y)                                                           \
+static const TimeBase name = { Control::Type::Time, 0, false, Page::Name::NoPage, &keeper, funcActive, {titleRU, titleEN, hintRU, hintEN},                      \
     &cur, &h, &mi, &s, &mo, &d, &y };
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-#define DEF_GOVERNOR(name, titleRU, titleEN, hintRU, hintEN, cell, min, max, keeper, funcActive, funcChanged, funcBeforeDraw)                   \
-volatile static const GovernorBase name = {Control::Type::Governor, 0, false, Page::Name::NoPage, &keeper, funcActive, {titleRU, titleEN, hintRU, hintEN},\
+#define DEF_GOVERNOR(name, titleRU, titleEN, hintRU, hintEN, cell, min, max, keeper, funcActive, funcChanged, funcBeforeDraw)                                   \
+volatile static const GovernorBase name = {Control::Type::Governor, 0, false, Page::Name::NoPage, &keeper, funcActive, {titleRU, titleEN, hintRU, hintEN},      \
     (int16 *)(&(cell)), min, max, funcChanged, funcBeforeDraw};
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-#define DEF_IP_ADDRESS(name, titleRU, titleEN, hintRU, hintEN, ip0, ip1, ip2, ip3, port, keeper, funcActive, funcOfChanged)                     \
-static const IPaddressBase name = {Item_IP, 0, false, Page::Name::NoPage, &keeper, funcActive, {titleRU, titleEN, hintRU, hintEN},              \
+#define DEF_GOVERNOR32(name, titleRU, titleEN, hintRU, hintEN, cell, min, max, keeper, funcActive, funcChanged, funcBeforeDraw)                                 \
+volatile static const Governor32Base name = {Control::Type::Governor32, 0, false, Page::Name::NoPage, &keeper, funcActive, {titleRU, titleEN, hintRU, hintEN},  \
+    (int *)(&(cell)), min, max, funcChanged, funcBeforeDraw};
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+#define DEF_IP_ADDRESS(name, titleRU, titleEN, hintRU, hintEN, ip0, ip1, ip2, ip3, port, keeper, funcActive, funcOfChanged)                                     \
+static const IPaddressBase name = {Item_IP, 0, false, Page::Name::NoPage, &keeper, funcActive, {titleRU, titleEN, hintRU, hintEN},                              \
     &ip0, &ip1, &ip2, &ip3, funcOfChanged, port};
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-#define DEF_MAC_ADDRESS(name, titleRU, titleEN, hintRU, hintEN, mac0, mac1, mac2, mac3, mac4, mac5, keeper, funcActive, funcOfChanged)          \
-static const MACaddressBase name = {Item_MAC, 0, false, Page::Name::NoPage, &keeper, funcActive, {titleRU, titleEN, hintRU, hintEN},            \
+#define DEF_MAC_ADDRESS(name, titleRU, titleEN, hintRU, hintEN, mac0, mac1, mac2, mac3, mac4, mac5, keeper, funcActive, funcOfChanged)                          \
+static const MACaddressBase name = {Item_MAC, 0, false, Page::Name::NoPage, &keeper, funcActive, {titleRU, titleEN, hintRU, hintEN},                            \
     &mac0, &mac1, &mac2, &mac3, &mac4, &mac5, funcOfChanged};
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-#define DEF_GOVERNOR_COLOR(name, titleRU, titleEN, hintRU, hintEN, colorType, keeper)                                                           \
-static const GovernorColorBase name = {Control::Type::GovernorColor, 0, false, Page::Name::NoPage, &keeper, FuncActive,                         \
+#define DEF_GOVERNOR_COLOR(name, titleRU, titleEN, hintRU, hintEN, colorType, keeper)                                                                           \
+static const GovernorColorBase name = {Control::Type::GovernorColor, 0, false, Page::Name::NoPage, &keeper, FuncActive,                                         \
     {titleRU, titleEN, hintRU, hintEN}, &colorType, 0};
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-#define DEF_PAGE_SB(name, titleRU, titleEN, hintRU, hintEN, item0, item1, item2, item3, item4, item5,                                           \
-    namePage, keeper, funcActive, funcPress, funcDraw, funcRegSet)                                                                              \
-static const Control * const  items##name[] = {(Control *)item0, (Control *)item1, (Control *)item2, (Control *)item3, (Control *)item4,        \
-    (Control *)item5};                                                                                                                          \
-static const PageBase name = {Control::Type::Page, 6, true, namePage, keeper, funcActive, {titleRU, titleEN, hintRU, hintEN},                   \
+#define DEF_PAGE_SB(name, titleRU, titleEN, hintRU, hintEN, item0, item1, item2, item3, item4, item5,                                                           \
+    namePage, keeper, funcActive, funcPress, funcDraw, funcRegSet)                                                                                              \
+static const Control * const  items##name[] = {(Control *)item0, (Control *)item1, (Control *)item2, (Control *)item3, (Control *)item4,                        \
+    (Control *)item5};                                                                                                                                          \
+static const PageBase name = {Control::Type::Page, 6, true, namePage, keeper, funcActive, {titleRU, titleEN, hintRU, hintEN},                                   \
     items##name, funcPress, funcDraw, funcRegSet};
 
 #define DEF_PAGE_1(name, titleRU, titleEN, hintRU, hintEN, item1, namePage, keeper, funcActive, funcPress, funcDraw, funcRegSet)                \

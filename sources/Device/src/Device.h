@@ -29,6 +29,11 @@ public:
     static void Update();
 
     static Mode::E CurrentMode();
+
+    static bool InModeTester();
+
+    static bool InModeMultimeter();
+
     /// Устанавливает режим работы
     static void SetMode(Mode::E mode);
 

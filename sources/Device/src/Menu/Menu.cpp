@@ -71,27 +71,29 @@ void Menu::Update()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-bool Menu::IsProcessed(KeyEvent *event)
+bool Menu::IsProcessed(const KeyEvent *event)
 {
     Key::E key = event->key;
     TypePress::E type = event->type;
 
-    switch((uint8)Device::CurrentMode())
+    if (Device::InModeTester())
     {
-        case Device::Mode::Tester:
-            if(Key(key).IsControlSignal() || Key(key).IsFunctional() || (key == Key::Enter && !TypePress(type).IsLong()))
-            {
-                return true;
-            }
-            return false;
-        case Device::Mode::Multimeter:
-            if  (Key(key).IsFunctional()    ||                      // мультиметр реагирует на функциональные кнопки
-                Key(key).IsArrow()          ||                      // на стрелки
-                (key == Key::Enter && !TypePress(type).IsLong()))
-            {
-                return true;
-            }
-            return false;
+        if (Key(key).IsControlSignal() || Key(key).IsFunctional() || (key == Key::Enter && !TypePress(type).IsLong()))
+        {
+            return true;
+        }
+        return false;
+    }
+    
+    if (Device::InModeMultimeter())
+    {
+        if (Key(key).IsFunctional() ||          // мультиметр реагирует на функциональные кнопки
+            Key(key).IsArrow() ||               // на стрелки
+            (key == Key::Enter && !TypePress(type).IsLong()))
+        {
+            return true;
+        }
+        return false;
     }
 
     return true;
@@ -262,7 +264,7 @@ char *Menu::StringNavigation(char buffer[100])
     while(!IsMainPage(item))
     {
         titles[numTitle++] = item->Title().CString();
-        item = (Control *)item->keeper;
+        item = (Control *)item->keeper;                     // -V1027
     }
     for(int i = 9; i >= 0; i--)
     {
@@ -420,6 +422,10 @@ void Menu::ProcessingLongPressureButton()
                 }
             }
         }
+        else
+        {
+            // остальные кнопки не обрабатываются
+        }
         longPressureButton = Key::None;
     }
 }
@@ -480,6 +486,10 @@ void Menu::ShortPress_ChoiceReg(void *choice_)
     {
         choice->SetCurrent(!choice->IsCurrentItem());
     }
+    else
+    {
+        // остальные ситуации не обрабатываются
+    }
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -495,6 +505,10 @@ void Menu::ChangeStateFlashDrive()
     else if(FLASH_AUTOCONNECT)
     {
         PageMemory::OnPress_Drive_Manager();
+    }
+    else
+    {
+        // остальные ситуации не обрабатываются
     }
 }
 
@@ -640,6 +654,7 @@ Control *Menu::CurrentItem()
 void Menu::CloseOpenedItem()
 {
     Control *item = OpenedItem();
+
     if (IS_PAGE(item))
     {
         if (IS_PAGE_SB(item))
@@ -652,12 +667,14 @@ void Menu::CloseOpenedItem()
         }
 
         Page *keeper = (Page *)KEEPER(item);
+
         if (keeper)
         {
             Page::Name::E name = (Page::Name::E)keeper->name;
             keeper->SetPosActItem(MENU_POS_ACT_ITEM(name) & 0x7f);
         }
-        if (item == (Control *)pageMain)
+
+        if (item == (Control *)pageMain)    // -V1027
         {
             Menu::Show(false);
         }
@@ -691,6 +708,10 @@ void Menu::ChangeItem(Control *item, int delta)
     {
         ((GovernorColor *)item)->ChangeValue(delta);
     }
+    else
+    {
+        // остальные контролы не обрабатываются
+    }
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -703,17 +724,19 @@ static void DrawHintItem(int x, int y, int width)
 
     DEF_STRUCT(StructName, pString) names[Control::Type::Number][2] =
     {
-        {"",            ""},                    // Item_None
-        {"",            ""},                    // Control::Type::Choice
-        {"Кнопка",      "Button"},              // Control::Type::Button
-        {"Страница",    "Page"},                // Control::Type::Page
-        {"",            ""},                    // Control::Type::Governor
-        {"",            ""},                    // Control::Type::Time
-        {"",            ""},                    // Control::Type::GovernorColor
-        {"",            ""},                    // Control::Type::ChoiceReg
-        {"Кнопка",      "Button"},              // Control::Type::DrawButton
-        {"Выбор параметра", "Choice parameter"} // Control::Type::ChoiceParameter
+        {"",                ""},                    // Item_None
+        {"",                ""},                    // Control::Type::Choice
+        {"Кнопка",          "Button"},              // Control::Type::Button
+        {"Страница",        "Page"},                // Control::Type::Page
+        {"Регулятор",       "Governor"},            // Control::Type::Governor
+        {"Регулятор 32",    "Governor 32"},         // Control::Type::Governor32
+        {"",                ""},                    // Control::Type::Time
+        {"",                ""},                    // Control::Type::GovernorColor
+        {"",                ""},                    // Control::Type::ChoiceReg
+        {"Кнопка",          "Button"},              // Control::Type::DrawButton
+        {"Выбор параметра", "Choice parameter"},    // Control::Type::ChoiceParameter
     };
+
     Language::E lang = LANG;
     Page *item = (Page *)Menu::itemHint;
 
@@ -729,7 +752,7 @@ static void DrawHintItem(int x, int y, int width)
     y = Painter::DrawTextInBoundedRectWithTransfers(x, y + 15, width, item->titleHint[2 + lang], Color::BACK, Color::FILL);
     if (item->type == Control::Type::DrawButton)
     {
-        ((SButton*)item)->DrawHints(x, y, width);
+        ((SButton*)item)->DrawHints(x, y, width);   // -V1027
     }
 }
 
@@ -774,6 +797,10 @@ void Menu::Draw()
                 Painter::DrawHLine(Grid::Top(), 0 - 2, Grid::Right(), Color::FILL);
                 Painter::DrawVLine(Grid::Right(), Grid::Top(), Grid::Top() + 40);
             }
+            else
+            {
+                // остальные контролы не обрабатываются
+            }
         }
     }
 
@@ -800,6 +827,10 @@ void Menu::Draw()
         else if (Menu::itemHint)
         {
             DrawHintItem(x, y, width);
+        }
+        else
+        {
+            // ничего не делаем
         }
     }
 }

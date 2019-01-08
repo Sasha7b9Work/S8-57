@@ -103,7 +103,7 @@ public:
     uint16              trig_lev[Chan::Number];
     Trig::StartMode::E  trig_startMode;                     ///< Режим запуска.
     Trig::ModeFind::E   trig_modeFind;                      ///< Поиск синхронизации - вручную или автоматически.
-    uint16              trig_holdOff;                       ///< Удержание синхронизации
+    int                 trig_holdOff;                       ///< Удержание синхронизации
     bool                trig_holdOffEnabled;                ///< Включение удержания синхронизации
 
     // Меню РАЗВЁРТКА

@@ -34,11 +34,11 @@ static void OnChanged_Duration()
     FPGA::LoadHoldfOff();
 }
 
-DEF_GOVERNOR( gDuration,                                                                                                                           //--- СИНХР - УДЕРЖАНИЕ - Длительность ---
+DEF_GOVERNOR32( gDuration,                                                                                                                         //--- СИНХР - УДЕРЖАНИЕ - Длительность ---
     "Длительность", "Duration",
     "Задаёт длительность промежутка между импульсами синхронизации",
     "Sets the duration of the gap between synchronization pulses",
-    TRIG_HOLDOFF, 0, 30000, pageHoldOff, FuncActive, OnChanged_Duration, FuncBeforeDraw
+    TRIG_HOLDOFF, 0, (1 << 24) - 1, pageHoldOff, FuncActive, OnChanged_Duration, FuncBeforeDraw
 )
 
 

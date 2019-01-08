@@ -117,7 +117,7 @@ void FPGA::LoadHoldfOff()
 {
     FSMC::WriteToFPGA8(WR_TRIG_HOLD_ENABLE, TRIG_HOLDOFF_ENABLED ? 1U : 0U);
 
-    uint value = (uint)(0 - TRIG_HOLDOFF);
+    uint value = (uint)(0 - TRIG_HOLDOFF + 1);
 
     BitSet32 bs(value);
 
