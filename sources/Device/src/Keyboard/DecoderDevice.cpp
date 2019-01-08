@@ -138,9 +138,9 @@ static bool ButtonPress(uint8 data)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static bool FuncScreen(uint8 data)
+static bool FuncScreen(uint8 /*data*/)
 {
-    volatile uint8 numString = 0;
+    //volatile uint8 numString = 0;
 
     //static uint8 buff[SIZE_STRING];
 
@@ -154,13 +154,17 @@ static bool FuncScreen(uint8 data)
     else if (step == 1)
     {
         // Сохраняем номер строки
-        numString = data;
+        //numString = data;
         return false;
     }
     else if (step < SIZE_STRING + 2)
     {
         // Сохраняем строку на флешку
         return false;
+    }
+    else
+    {
+        // этот случай не рассматриваем
     }
 
     return true;
