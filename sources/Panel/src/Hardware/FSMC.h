@@ -14,7 +14,7 @@ public:
 
     static uint8 ReadByte();
     /// Передать буфер по шине. Если параметры равны нулю, передаётся ранеее не переданный из-за того, что шёл процесс приём
-    static void WriteBuffer(uint8 *data = 0, int length = 0);
+    static void WriteBuffer(const uint8 *data = 0, int length = 0);
 
 private:
     /// Шина переходит в режим чтения данных

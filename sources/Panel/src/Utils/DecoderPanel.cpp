@@ -109,7 +109,7 @@ bool Decoder::DrawTesterPoints(uint8 data)
     static Color color = Color::FILL;
     static uint8 mode = 0;
 
-    static uint8 buffer[TESTER_NUM_POINTS * 3];
+    static uint8 buffer[TESTER_NUM_POINTS * 3] __attribute__((aligned(2)));
 
     if(step == 0)
     {
@@ -127,7 +127,7 @@ bool Decoder::DrawTesterPoints(uint8 data)
     {
         if (numPoint < TESTER_NUM_POINTS)   // Если первые точки, то это иксы - ложим их в младшие байты полуслов
         {
-            uint16 *pointer = (uint16 *)buffer;
+            uint16 *pointer = (uint16 *)buffer; //-V1032
             pointer[numPoint++] = data;
         }
         else
@@ -191,6 +191,8 @@ bool Decoder::FillRegion(uint8 data)
     static int y;
     static int width;
     static int height;
+    
+    bool result = false;
 
     switch (step)
     {
@@ -202,11 +204,14 @@ bool Decoder::FillRegion(uint8 data)
         case 5:     width += (((int)data) << 8);    break;
         case 6:     height = (int)data;
             Painter::FillRegion(x, y, width, height);
-            return true;
+            result = true;
+            break;
         default:
-            return true;
+            result = true;
+            break;
     }
-    return false;
+    
+    return result;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -216,6 +221,8 @@ bool Decoder::DrawRectangle(uint8 data)
     static int y;
     static int width;
     static int height;
+    
+    bool result = false;
 
     switch (step)
     {
@@ -227,11 +234,14 @@ bool Decoder::DrawRectangle(uint8 data)
         case 5:     width += (((int)data) << 8);    break;
         case 6:     height = (int)data;
             Painter::DrawRectangle(x, y, width, height);
-            return true;
+            result = true;
+            break;
         default:
-            return true;
+            result = true;
+            break;
     }
-    return false;
+    
+    return result;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -240,6 +250,8 @@ bool Decoder::DrawVLine(uint8 data)
     static int x;
     static int y0;
     static int y1;
+    
+    bool result = false;
 
     switch (step)
     {
@@ -249,11 +261,14 @@ bool Decoder::DrawVLine(uint8 data)
         case 3: y0 = data;                  break;
         case 4: y1 = data;
             Painter::DrawVLine(x, y0, y1);
-            return true;
+            result = true;
+            break;
         default:
-            return true;
+            result = true;
+            break;
     }
-    return false;
+    
+    return result;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -262,6 +277,8 @@ bool Decoder::DrawHLine(uint8 data)
     __IO static int y;  /// \todo эти штуки __IO вставлены потому, что без них c оптимизацией экран ничего не хочет выводить. Надо потом разобраться
     __IO static int x0;
     __IO static int x1;
+    
+    bool result = false;
 
     switch (step)
     {
@@ -272,11 +289,14 @@ bool Decoder::DrawHLine(uint8 data)
         case 4:     x1 = data;              break;
         case 5:     x1 += (int)data << 8;
             Painter::DrawHLine(y, x0, x1);
-            return true;
+            result = true;
+            break;
         default:
-            return true;
+            result = true;
+            break;
     }
-    return false;
+    
+    return result;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -285,6 +305,8 @@ bool Decoder::DrawLine(uint8 data)
     __IO static int x0;
     __IO static int y0;
     __IO static int x1;
+    
+    bool result = false;
 
     switch (step)
     {
@@ -295,18 +317,22 @@ bool Decoder::DrawLine(uint8 data)
         case 4: x1 = data;              break;
         case 5: x1 += ((int)data << 8); break;
         case 6: Painter::DrawLine(x0, y0, x1, data);
-            return true;
+            result = true;
+            break;
         default:
-            return true;
+            result = true;
+            break;
     }
 
-    return false;
+    return result;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 bool Decoder::SetPoint(uint8 data)
 {
     static int x = 0;
+    
+    bool result = false;
 
     switch (step)
     {
@@ -314,12 +340,14 @@ bool Decoder::SetPoint(uint8 data)
         case 1: x = data;               break;
         case 2: x += ((int)data << 8);  break;
         case 3: Painter::SetPoint(x, data);
-            return true;
+            result = true;
+            break;
         default:
-            return true;
+            result = true;
+            break;
     }
 
-    return false;
+    return result;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -397,6 +425,8 @@ bool Decoder::SetPalette(uint8 data)
 {
     static uint8 numColor;
     static uint valueColor;
+    
+    bool result = false;
 
     switch (step)
     {
@@ -407,11 +437,14 @@ bool Decoder::SetPalette(uint8 data)
         case 4: valueColor |= (uint)data << 16; break;
         case 5: valueColor |= (uint)data << 24;
             Painter::SetColorValue(Color(numColor), valueColor);
-            return true;
+            result = true;
+            break;
         default:
-            return true;
+            result = true;
+            break;
     }
-    return false;
+    
+    return result;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

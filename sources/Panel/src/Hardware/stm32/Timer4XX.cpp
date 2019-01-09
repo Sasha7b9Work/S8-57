@@ -13,6 +13,10 @@ void Timer4XX::Init(TIM_TypeDef *instance, uint prescaler, uint counterMode, uin
     {
         __HAL_RCC_TIM3_CLK_ENABLE();
     }
+    else
+    {
+        // других таймеров не бывает
+    }
 
     handler.Instance = instance;
     handler.Init.Prescaler = prescaler;
@@ -40,6 +44,7 @@ IRQn_Type Timer4XX::GetIRQn_Type()
     {
         return TIM3_IRQn;
     }
+
     return SysTick_IRQn;
 }
 
@@ -87,5 +92,9 @@ void Timer4XX::DeInit()
     else if (handler.Instance == TIM3)
     {
         __HAL_RCC_TIM3_CLK_DISABLE();
+    }
+    else
+    {
+        // других таймеров не бывает
     }
 }

@@ -196,6 +196,10 @@ void Keyboard::Update()
                             FillCommand(controls[rl][sl], Control::Action::Long);
                             alreadyLong[rl][sl] = true;
                         }
+                        else
+                        {
+                            // остальное не обрабатываем
+                        }
                     }
                 }
                 else if (BUTTON_IS_PRESS(state) && !alreadyLong[rl][sl])
@@ -203,6 +207,10 @@ void Keyboard::Update()
                     timePress[rl][sl] = time;
                     FillCommand(controls[rl][sl], Control::Action::Press);
                     prevRepeat = 0;
+                }
+                else
+                {
+                    // остальное не обрабатываем
                 }
             }
         }
@@ -288,7 +296,7 @@ bool Control::IsRepeatable() const
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 uint Keyboard::TimeBetweenRepeats(uint prev)
 {
-    uint retValue = (uint)(prev / 1.1f);
+    uint retValue = (uint)(prev / 1.1F);
 
     if (retValue < 10)
     {
@@ -315,7 +323,7 @@ extern "C" {
 #endif
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) //-V2009
 {
     if (htim == &handleTIM4)
     {
