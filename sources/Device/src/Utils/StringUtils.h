@@ -22,7 +22,7 @@ public:
 
     static char *Db2String(float value, int numDigits, char bufferOut[20]);
     /// Сравнивает две строки. Число символов берётся из str1
-    static bool EqualsStrings(char *str1, char *str2);
+    static bool EqualsStrings(const char *str1, const char *str2);
 
     static bool EqualsStrings(void *str1, void *str2, uint size);
 

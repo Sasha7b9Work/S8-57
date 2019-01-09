@@ -96,7 +96,7 @@ static void DrawData(int numStep, int /*x0*/, int /*y0*/)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Tester::Graphics::SetPoints(int numStep, uint8 dx[TESTER_NUM_POINTS], uint8 dy[TESTER_NUM_POINTS])
+void Tester::Graphics::SetPoints(int numStep, const uint8 dx[TESTER_NUM_POINTS], const uint8 dy[TESTER_NUM_POINTS])
 {
     ready[numStep] = true;
 
@@ -108,8 +108,8 @@ void Tester::Graphics::SetPoints(int numStep, uint8 dx[TESTER_NUM_POINTS], uint8
         int X = TESTER_NUM_POINTS - (dx[i] - MIN_VALUE);
         int Y = dy[i] - MIN_VALUE;
 
-        LIMITATION(X, 0, TESTER_NUM_POINTS - 1);
-        LIMITATION(Y, 0, TESTER_NUM_POINTS - 1);
+        LIMITATION(X, 0, TESTER_NUM_POINTS - 1); //-V2516
+        LIMITATION(Y, 0, TESTER_NUM_POINTS - 1); //-V2516
 
         x[i] = (uint8)X;
         y[i] = (uint8)Y;

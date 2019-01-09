@@ -89,9 +89,9 @@ void HiPart::WriteCursors()
                 Painter::DrawRectangle(x, Grid::Top(), width, 12, Color::FILL);
                 Painter::FillRegion(x + 1, Grid::Top() + 1, width - 2, 10, Color::BACK);
                 String("1/dT=").Draw(x + 1, Grid::Top() + 2, colorText);
-                if (delta != 0.0f) //-V550
+                if (delta != 0.0F) //-V550
                 {
-                    Frequency(1.0f / delta).ToString().Draw(x + 25, Grid::Top() + 2);
+                    Frequency(1.0F / delta).ToString().Draw(x + 25, Grid::Top() + 2);
                 }
             }
         }
@@ -148,6 +148,7 @@ void HiPart::DrawRightPart()
 
         x += 2;
         y = 1;
+
         if(FPGA::IsRunning())       // –абочий режим
         {
             Painter::Draw4SymbolsInRect(x, 1, SYMBOL_PLAY);
@@ -164,6 +165,10 @@ void HiPart::DrawRightPart()
             x = x + 2;
             Painter::FillRegion(x, y + 1, w, h);
             Painter::FillRegion(x + w + delta, y + 1, w, h);
+        }
+        else
+        {
+            // больше ничего не обрабатываем
         }
     }
 }

@@ -11,9 +11,15 @@
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void CF::LogBufferU8(uint8 *buffer, int num)
+void CF::LogBufferU8(const uint8 *buffer, int num)
 {
     char *message = (char *)malloc((uint)(num * 3));
+
+    if (message == nullptr)
+    {
+        LOG_WRITE("Нет памяти");
+        return;
+    }
 
     message[0] = 0;
 
@@ -103,7 +109,7 @@ char *CF::GetWord(char *string, int n, char *out, int size)
 
     if (length + 1 > size)
     {
-        return (char *)0xffffffffU;              // Не хватит места в выходном буфере - выходим с соответствующим кодом
+        return (char *)0xffffffffU;              // Не хватит места в выходном буфере - выходим с соответствующим кодом //-V566
     }
 
     for (int i = 0; i < length; i++)

@@ -6,7 +6,7 @@ class CF
 {
 public:
     /// Выводит в консоль num первых значений из buffer
-    static void LogBufferU8(uint8 *buffer, int num);
+    static void LogBufferU8(const uint8 *buffer, int num);
     /// Возвращает число слов в строке string
     static int NumWords(char *string);
     /// Возвращает указатель на n слово в строке. Если char == 0 - слова нет, если ret value == 0xffffffff - выходной буфер слишком мал

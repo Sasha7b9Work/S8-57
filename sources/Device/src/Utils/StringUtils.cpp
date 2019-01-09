@@ -212,7 +212,7 @@ bool SU::EqualsStrings(void *_str1, void *_str2, uint size)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-bool SU::EqualsStrings(char *str1, char *str2)
+bool SU::EqualsStrings(const char *str1, const char *str2)
 {
     uint size = std::strlen(str1);
 
@@ -249,7 +249,7 @@ int SU::FirstNotNumeral(char *buffer)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 float SU::StringToFloat(char *string)
 {
-    float result = 0.0f;
+    float result = 0.0F;
 
     Stack<int8> stack(20);
 
@@ -269,7 +269,7 @@ float SU::StringToFloat(char *string)
 
         while (stack.Size() > 0)
         {
-            result += pow * stack.Pop();
+            result += (float)pow * stack.Pop();
             pow *= 10;
         }
     }
@@ -280,7 +280,7 @@ float SU::StringToFloat(char *string)
     {
         string++;
 
-        float pow = 0.1f;
+        float pow = 0.1F;
 
         while (*string)
         {
@@ -290,7 +290,7 @@ float SU::StringToFloat(char *string)
                 break;
             }
             result += pow * (symbol & 0x0f);
-            pow /= 10.0f;
+            pow /= 10.0F;
             string++;
         }
     }

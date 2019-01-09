@@ -35,7 +35,7 @@ void MemoryWindow::Draw()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void MemoryWindow::DrawDataInRect(int x, int y, int width, int height, uint8 *data, uint length)
+void MemoryWindow::DrawDataInRect(int x, int y, int width, int height, const uint8 *data, uint length)
 {
     int numIntervals = width + 1;            // Количество интервалов, в которых будем рисовать наш сигнал - фактически, количество вертикальных линий
     float pointsInInterval = (float)length / numIntervals;   // Количество точек, рисуемых в одном интервале.
@@ -46,8 +46,8 @@ void MemoryWindow::DrawDataInRect(int x, int y, int width, int height, uint8 *da
 
     for (int i = 0; i < numIntervals - 1; i++)
     {
-        int start = (int)(i * pointsInInterval + 0.5f);          // Начальная точка в интервале
-        int end = (int)((i + 1) * pointsInInterval + 0.5f) - 1;  // Конечная точка в интервале
+        int start = (int)(i * pointsInInterval + 0.5F);          // Начальная точка в интервале
+        int end = (int)((i + 1) * pointsInInterval + 0.5F) - 1;  // Конечная точка в интервале
 
         int min = 255;
         int max = 0;
@@ -64,7 +64,7 @@ void MemoryWindow::DrawDataInRect(int x, int y, int width, int height, uint8 *da
             }
         }
 
-        Painter::DrawVLine(x + i, y0 - (int)(min * stepY + 0.5f), y0 - (int)(max * stepY + 0.5f));
+        Painter::DrawVLine(x + i, y0 - (int)(min * stepY + 0.5F), y0 - (int)(max * stepY + 0.5F));
     }
 }
 
@@ -74,8 +74,8 @@ void MemoryWindow::DrawScreenArea()
     float relBegin = (float)SHIFT_IN_MEMORY / FPGA::NumPoints();          // Относительное начало экранной области относительно всей памяти
     float relWidth = (float)(Grid::Width() + 1) / FPGA::NumPoints();      // Относительное (относительно всей шириный окна) ширина видимой области
 
-    int begin = (int)(relBegin * Width() + 0.5f);   // Реальное начало экранной области относительно начала окна памяти
-    int width = (int)(relWidth * Width() + 0.5f);   // Реальная ширина видимой области
+    int begin = (int)(relBegin * Width() + 0.5F);   // Реальное начало экранной области относительно начала окна памяти
+    int width = (int)(relWidth * Width() + 0.5F);   // Реальная ширина видимой области
 
     Painter::FillRegion(X() + begin, Y(), width, Height(), Color::GRAY_20);
 

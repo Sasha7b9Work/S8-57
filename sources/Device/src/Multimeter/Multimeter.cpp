@@ -37,7 +37,7 @@ void Multimeter::SetMeasure(const uint8 buf[10])
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Multimeter::ChangeMode()
 {
-    std::memset(buffer, '8', 10);
+    std::memset(buffer, '8', 10); //-V512
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -91,6 +91,10 @@ void Multimeter::Update()
     if(MULTI_MEASURE == Measure::VoltageDC)        { range = MULTI_RANGE_DC; }
     else if(MULTI_MEASURE == Measure::VoltageAC)   { range = (uint8)MULTI_RANGE_AC; }
     else if(MULTI_MEASURE == Measure::Resistance)  { range = (uint8)MULTI_RANGE_RESISTANCE; }
+    else
+    {
+        // больше выборов нету
+    }
 
     uint8 send[4] = {0x02, (uint8)MULTI_MEASURE.Symbol(), (uint8)(range + 0x30), 0x0a};
   //  trans[0] = (char)send[1];
