@@ -112,6 +112,10 @@ void Measure::ChangeActive(int delta)
             row = 0;
         }
     }
+    else
+    {
+        // здесь ничего
+    }
 
     SetActive(row, col);
 }
@@ -197,6 +201,10 @@ int Measure::GetDeltaGridLeft()
         {
             return DX() * 2;
         }
+        else
+        {
+            // других вариантов нет
+        }
     }
     return 0;
 }
@@ -218,6 +226,10 @@ int Measure::GetDeltaGridBottom()
         else if(NUM_MEASURES_IS_3_5)
         {
             return DY() * 3;
+        }
+        else
+        {
+            // других вариантов нет
         }
     }
     return 0;
@@ -263,17 +275,14 @@ void Measure::DrawPageChoice()
             }
             int x0 = x + col * dX;
             int y0 = y + row * dY;
-            bool active = meas == posOnPageChoice;
+            bool active = (meas == posOnPageChoice);
             Painter::DrawRectangle(x0, y0, dX, dY, Color::WHITE);
             Painter::FillRegion(x0 + 1, y0 + 1, dX - 2, dY - 2, (active ? Color::FLASH_10 : Color::BACK));
             Painter::SetColor(active ? Color::FLASH_01 : Color::FILL);
             Painter::Draw10SymbolsInRect(x0 + 2, y0 + 1, GetChar(meas));
-            if(meas < Measure::Type::Number)
-            {
-                Painter::SetFont(Font::Type::_5);
-                Painter::DrawTextRelativelyRight(x0 + dX, y0 + 12, sMeas[meas].name, active ? Color::FLASH_01 : Color::FILL);
-                Painter::SetFont(Font::Type::_UGO);
-            }
+            Painter::SetFont(Font::Type::_5);
+            Painter::DrawTextRelativelyRight(x0 + dX, y0 + 12, sMeas[meas].name, active ? Color::FLASH_01 : Color::FILL);
+            Painter::SetFont(Font::Type::_UGO);
             meas = (Measure::Type::E)((int)meas + 1);    // meas++;
         }
     }
@@ -309,7 +318,6 @@ void Measure::Graphics::Draw()
             Measure measure = Measure::Get(str, elem);
 
             bool active = measure.IsActive() && Menu::GetNameOpenedPage() == Page::Name::Measures_Auto_Tune;
-            Color color = active ? Color::BACK : Color::FILL;
 
             Measure::Type::E type = measure.GetType();
             if (type != Measure::Type::None)
@@ -324,6 +332,8 @@ void Measure::Graphics::Draw()
             }
             if (type != Measure::Type::None)
             {
+                Color color = active ? Color::BACK : Color::FILL;
+
 #define SIZE_BUFFER 20
                 char buffer[SIZE_BUFFER];
 
@@ -346,6 +356,10 @@ void Measure::Graphics::Draw()
                 else if (VIEW_MEASURES_B)
                 {
                     Processing::GetStringMeasure(type, Chan::B, buffer, SIZE_BUFFER).Draw(x + 2, y + 11, Color::Channel(Chan::B));
+                }
+                else
+                {
+                    // других вариантов нет
                 }
             }
         }
