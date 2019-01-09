@@ -38,7 +38,7 @@ DEF_GOVERNOR( gDuration,                                                        
     "Длительность", "Duration",
     "Задаёт длительность промежутка между импульсами синхронизации",
     "Sets the duration of the gap between synchronization pulses",
-    TRIG_HOLDOFF, 10, (1 << 24) - 1, pageHoldOff, FuncActive, OnChanged_Duration, FuncBeforeDraw
+    TRIG_HOLDOFF, 10, 15000000, pageHoldOff, FuncActive, OnChanged_Duration, FuncBeforeDraw
 )
 
 

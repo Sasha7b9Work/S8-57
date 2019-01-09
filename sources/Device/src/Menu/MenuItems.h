@@ -333,8 +333,8 @@ public:
     void ChangeValue(int delta);
     /// При открытом элементе переставляет курсор на следующую позицию.
     void NextPosition();
-    /// Возвращает число знакомест в поле для ввода элемента governor. Зависит от максимального значения, которое может принимать governor.
-    int  NumDigits();
+    /// При открытом элементе переставляет курсор не предыдущую позицию
+    void PrevPosition();
 
     void Draw(int x, int y, bool opened);
 
@@ -349,6 +349,8 @@ public:
 private:
 
     void DrawLowPart(int x, int y, bool shade);
+    /// Возвращает число знакомест в поле для ввода элемента governor. Зависит от максимального значения, которое может принимать governor.
+    int  NumDigits();
 };
 
 

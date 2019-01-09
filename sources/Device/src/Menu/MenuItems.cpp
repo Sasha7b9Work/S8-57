@@ -297,6 +297,7 @@ bool Governor::ProcessKey(KeyEvent event)
     {
         if(event.IsPress())
         {
+            PrevPosition();
         }
     }
     else if(event.IsUp() || event.IsDown())
