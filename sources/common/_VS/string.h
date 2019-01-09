@@ -10,4 +10,4 @@ char    tolower(char);
 void    memcpy(void *dest, const void *src, unsigned int size);
 void    memset(void *, int, unsigned int);
 int     memcmp(void *, const void *, int);
-
+void   *memmove(void *dest, const void *src, unsigned int size);

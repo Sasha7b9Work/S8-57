@@ -93,12 +93,12 @@ void FrequencyCounter::LoadSettings()
 
         DEF_STRUCT(StructPeriod, uint16) maskPeriod[NumberPeriods::Number] =
         { //        654 - задействованные биты
-            BIN_U8(00000000),
-            BIN_U8(00010000),
-            BIN_U8(00100000),
-            BIN_U8(00110000),
-            BIN_U8(01000000),
-            BIN_U8(01010000)
+            BIN_U8(00000000), //-V2501
+            BIN_U8(00010000), //-V2501
+            BIN_U8(00100000), //-V2501
+            BIN_U8(00110000), //-V2501
+            BIN_U8(01000000), //-V2501 // -V536
+            BIN_U8(01010000)  //-V2501
         };
 
         data |= maskTime[FREQ_METER_TIMECOUNTING];
@@ -206,7 +206,7 @@ void FrequencyCounter::ReadFreq()
     else
     {
         float fr = FreqSetToFreq(&freqSet);
-        if (fr < prevFreq * 0.9f || fr > prevFreq * 1.1f)
+        if (fr < prevFreq * 0.9F || fr > prevFreq * 1.1F)
         {
             frequency = ERROR_VALUE_FLOAT;
         }
@@ -226,7 +226,7 @@ void FrequencyCounter::ReadPeriod()
     lastPeriod.Set(periodSet.word);
 
     float fr = PeriodSetToFreq(&periodSet);
-    if (fr < prevFreq * 0.9f || fr > prevFreq * 1.1f)
+    if (fr < prevFreq * 0.9F || fr > prevFreq * 1.1F)
     {
         frequency = ERROR_VALUE_FLOAT;
     }
@@ -241,8 +241,8 @@ void FrequencyCounter::ReadPeriod()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 float FrequencyCounter::FreqSetToFreq(const BitSet32 *fr)
 {
-    const float k[3] = {10.0f, 1.0f, 0.1f};
-    return FREQ_METER_IS_ENABLED ? (fr->word * k[FREQ_METER_TIMECOUNTING]) : (fr->word * 10.0f);
+    const float k[3] = {10.0F, 1.0F, 0.1F};
+    return FREQ_METER_IS_ENABLED ? (fr->word * k[FREQ_METER_TIMECOUNTING]) : (fr->word * 10.0F);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -250,13 +250,13 @@ float FrequencyCounter::PeriodSetToFreq(const BitSet32 *period_)
 {
     if (period_->word == 0)
     {
-        return 0.0f;
+        return 0.0F;
     }
 
-    const float k[4] = {10e4f, 10e5f, 10e6f, 10e7f};
-    const float kP[3] = {1.0f, 10.0f, 100.0f};
+    const float k[4] = {10e4F, 10e5F, 10e6F, 10e7F};
+    const float kP[3] = {1.0F, 10.0F, 100.0F};
 
-    return FREQ_METER_IS_ENABLED ? (k[FREQ_METER_FREQ_CLC] * kP[FREQ_METER_NUM_PERIODS] / (float)period_->word) : (10e5f / (float)period_->word);
+    return FREQ_METER_IS_ENABLED ? (k[FREQ_METER_FREQ_CLC] * kP[FREQ_METER_NUM_PERIODS] / (float)period_->word) : (10e5F / (float)period_->word);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -308,18 +308,22 @@ static void DrawFrequency(int x, int y)
 
     if (std::strcmp(&strFreq[std::strlen(strFreq) - 3], "ћ√ц") == 0)
     {
-        freq *= 1e6f;
+        freq *= 1e6F;
     }
     else if (std::strcmp(&strFreq[std::strlen(strFreq) - 3], "к√ц") == 0)
     {
-        freq *= 1e3f;
+        freq *= 1e3F;
     }
     else if (std::strcmp(&strFreq[std::strlen(strFreq) - 3], "м√ц") == 0)
     {
-        freq *= 1e-3f;
+        freq *= 1e-3F;
+    }
+    else
+    {
+        // сюда никогда не дойдЄм
     }
 
-    Time time(1.0f / freq);
+    Time time(1.0F / freq);
 
     Painter::DrawBigText(x + dX, y + 10 * SIZE, SIZE, time.ToStringAccuracy(false, strFreq, 6));
 }
@@ -357,18 +361,22 @@ static void DrawPeriod(int x, int y)
 
     if (std::strcmp(&strPeriod[std::strlen(strPeriod) - 2], "нс") == 0)
     {
-        period *= 1e-9f;
+        period *= 1e-9F;
     }
     else if (std::strcmp(&strPeriod[std::strlen(strPeriod) - 3], "мкс") == 0)
     {
-        period *= 1e-6f;
+        period *= 1e-6F;
     }
     else if (std::strcmp(&strPeriod[std::strlen(strPeriod) - 2], "мс") == 0)
     {
-        period *= 1e-3f;
+        period *= 1e-3F;
+    }
+    else
+    {
+        LOG_ERROR("«десь мы никогда не должны оказатьс€");
     }
 
-    Frequency freq(1.0f / period);
+    Frequency freq(1.0F / period);
 
     Painter::DrawBigText(x + dX, y + 10 * SIZE, SIZE, freq.ToStringAccuracy(strPeriod, 6));
 }
@@ -422,6 +430,10 @@ pString PeriodSetToString(const BitSet32 *pr)
     else if (pr->word == MAX_UINT)
     {
         return OVERFLOW_STRING;
+    }
+    else
+    {
+        // все случаи обработаны
     }
 
     Stack<uint> stack(20);
@@ -585,6 +597,10 @@ static pString FreqSetToString(const BitSet32 *fr)
     {
         return OVERFLOW_STRING;
     }
+    else
+    {
+        LOG_ERROR("ќшибка");
+    }
 
     Hex value(fr->word);
 
@@ -617,21 +633,21 @@ static pString FreqSetToString(const BitSet32 *fr)
 #define WRITE_SUFFIX(suffix_E4)    \
     if(giverFreq < _1kHz) { std::strcpy(buffer + 7, suffix_E4); } else if (giverFreq < _1MHz) { std::strcpy(buffer + 7, "к√ц"); } else { std::strcpy(buffer + 7, "ћ√ц"); }
 
-#define HIGH_FREQ                           \
-    if(giverFreq < _10MHz)                  \
-    {                                       \
-        std::memcpy(buffer, buffer + 1, 2); \
-        buffer[1] = '.';                    \
-    }                                       \
-    else if (giverFreq < _100MHz)           \
-    {                                       \
-        std::memcpy(buffer, buffer + 1, 3); \
-        buffer[2] = '.';                    \
-    }                                       \
-    else                                    \
-    {                                       \
-        std::memcpy(buffer, buffer + 1, 3); \
-        buffer[3] = '.';                    \
+#define HIGH_FREQ                            \
+    if(giverFreq < _10MHz)                   \
+    {                                        \
+        std::memmove(buffer, buffer + 1, 2); \
+        buffer[1] = '.';                     \
+    }                                        \
+    else if (giverFreq < _100MHz)            \
+    {                                        \
+        std::memmove(buffer, buffer + 1, 3); \
+        buffer[2] = '.';                     \
+    }                                        \
+    else                                     \
+    {                                        \
+        std::memmove(buffer, buffer + 1, 3); \
+        buffer[3] = '.';                     \
     }
 
 
@@ -647,7 +663,7 @@ static pString FreqSetToString(const BitSet32 *fr)
             {
                 if(freq >= _10Hz)                       // Ѕольше или равно 10 √ц
                 {
-                    std::memcpy(buffer, buffer + 1, 5);
+                    std::memmove(buffer, buffer + 1, 5);
                 }
                 buffer[4] = '.';
             }
@@ -667,12 +683,12 @@ static pString FreqSetToString(const BitSet32 *fr)
             {
                 if(giverFreq < _1kHz)                   // ћеньше 1 к√ц
                 {
-                    std::memcpy(buffer, buffer + 1, 6);
+                    std::memmove(buffer, buffer + 1, 6);
                     buffer[6] = '.';
                 }
                 else
                 {
-                    std::memcpy(buffer, buffer + 1, 4);
+                    std::memmove(buffer, buffer + 1, 4);
                     buffer[3] = '.';
                 }
             }
@@ -690,17 +706,17 @@ static pString FreqSetToString(const BitSet32 *fr)
             {
                 if (giverFreq < _1kHz)              // ћеньше 1 к√ц
                 {
-                    std::memcpy(buffer, buffer + 1, 5);
+                    std::memmove(buffer, buffer + 1, 5);
                     buffer[5] = '.';
                 }
                 else if(giverFreq < _100kHz)
                 {
-                    std::memcpy(buffer, buffer + 1, 3);
+                    std::memmove(buffer, buffer + 1, 3);
                     buffer[2] = '.';
                 }
                 else
                 {
-                    std::memcpy(buffer, buffer + 1, 3);
+                    std::memmove(buffer, buffer + 1, 3);
                     buffer[3] = '.';
                 }
             }
@@ -710,6 +726,7 @@ static pString FreqSetToString(const BitSet32 *fr)
             }
             break;
         default:
+            LOG_ERROR("");
             break;
     }
 
