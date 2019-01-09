@@ -97,8 +97,8 @@ void PainterData::DrawChannel(Chan::E ch)
 
             for (int i = 1; i < 281; i++)
             {
-                int value = (int)(center - ((data[i] - AVE_VALUE) * scale) + 0.5f);
-                int valuePrev = (int)(center - ((data[i - 1] - AVE_VALUE) * scale) + 0.5f);
+                int value = (int)(center - ((data[i] - AVE_VALUE) * scale) + 0.5F);
+                int valuePrev = (int)(center - ((data[i - 1] - AVE_VALUE) * scale) + 0.5F);
 
                 if (value == valuePrev)
                 {
@@ -130,8 +130,8 @@ void PainterData::DrawChannel(Chan::E ch)
         {
             for(int i = 0; i < 281 * 2; i += 2)
             {
-                int min = (int)(center - (data[i] - AVE_VALUE) * scale + 0.5f);
-                int max = (int)(center - (data[i + 1] - AVE_VALUE) * scale + 0.5f);
+                int min = (int)(center - (data[i] - AVE_VALUE) * scale + 0.5F);
+                int max = (int)(center - (data[i + 1] - AVE_VALUE) * scale + 0.5F);
                 Painter::DrawVLine(x++, max, min);
             }
         }
@@ -139,8 +139,8 @@ void PainterData::DrawChannel(Chan::E ch)
         {
             for (int i = 1; i < 281; i++)
             {
-                int value = (int)(center - (data[i] - AVE_VALUE) * scale + 0.5f);
-                int valuePrev = (int)(center - (data[i - 1] - AVE_VALUE) * scale + 0.5f);
+                int value = (int)(center - (data[i] - AVE_VALUE) * scale + 0.5F);
+                int valuePrev = (int)(center - (data[i - 1] - AVE_VALUE) * scale + 0.5F);
 
                 if(value == valuePrev)
                 {
@@ -162,8 +162,8 @@ void PainterData::DrawChannel(Chan::E ch)
             int x = left;
             for(int i = 0; i < 281 * 2; i += 2)
             {
-                Painter::SetPoint(x, (int)(center - (data[i] - AVE_VALUE) * scale + 0.5f));
-                Painter::SetPoint(x, (int)(center - (data[i + 1] - AVE_VALUE) * scale + 0.5f));
+                Painter::SetPoint(x, (int)(center - (data[i] - AVE_VALUE) * scale + 0.5F));
+                Painter::SetPoint(x, (int)(center - (data[i + 1] - AVE_VALUE) * scale + 0.5F));
                 x++;
             }
         }
@@ -191,7 +191,7 @@ void PainterData::DrawTPos(int leftX, int rightX)
 void PainterData::DrawTShift(int leftX, int rightX, int numBytes)
 {
     float scale = (float)(rightX - leftX + 1) / ((float)numBytes - (numBytes == 281 ? 1 : 0));
-    int xShift = (int)(1.5f + (TPos(TPOS).InBytes() - SET_TSHIFT.InPoints()) * scale) - 1;
+    int xShift = (int)(1.5F + (TPos(TPOS).InBytes() - SET_TSHIFT.InPoints()) * scale) - 1;
     if (SET_PEAKDET_EN && TPOS_IS_RIGHT)
     {
         --xShift;
@@ -235,11 +235,11 @@ int PainterData::Ordinate(uint8 x, float scale)
 
     Math::LimitationRet<uint8>((uint8)(x - MIN_VALUE), 0, (MAX_VALUE - MIN_VALUE));
 
-    return (int)((17.0f - scale * x) + 0.5f);
+    return (int)((17.0F - scale * x) + 0.5F);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void PainterData::SendToDisplayDataInRect(Chan::E ch, int x, int *min, int *max, int width)
+void PainterData::SendToDisplayDataInRect(Chan::E ch, int x, const int *min, const int *max, int width)
 {
     LIMIT_ABOVE(width, 255);
 

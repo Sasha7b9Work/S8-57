@@ -68,25 +68,28 @@ void Math::Smoothing(uint8 *data, int numPoints, int numSmooth)
     float *buffer = (float *)malloc((size_t)(numPoints * (int)sizeof(float)));
     int  *num = (int *)malloc((size_t)(numPoints * (int)sizeof(int)));
 
-    for (int i = 1; i < numPoints; i++)
+    if (num != 0 && buffer != 0)
     {
-        buffer[i] = 0.0f;
-
-        num[i] = 0;
-        for (int j = -numSmooth / 2; j < numSmooth / 2; j++)
+        for (int i = 1; i < numPoints; i++)
         {
-            int index = i + j;
-            if (index >= 1 && index < numPoints)
+            buffer[i] = 0.0F;
+
+            num[i] = 0;
+            for (int j = -numSmooth / 2; j < numSmooth / 2; j++)
             {
-                buffer[i] += data[index];
-                ++num[i];
+                int index = i + j;
+                if (index >= 1 && index < numPoints)
+                {
+                    buffer[i] += data[index];
+                    ++num[i];
+                }
             }
         }
-    }
-    
-    for (int i = 1; i < numPoints; i++)
-    {
-        data[i] = (uint8)(buffer[i] / num[i] + 0.5f);
+
+        for (int i = 1; i < numPoints; i++)
+        {
+            data[i] = (uint8)(buffer[i] / num[i] + 0.5F);
+        }
     }
 
     free(buffer);
@@ -223,7 +226,7 @@ float Math::GetIntersectionWithHorizontalLine(int x0, int y0, int x1, int y1, in
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Math::CalculateMathFunction(float *dataAandResult, float *dataB, int numPoints)
+void Math::CalculateMathFunction(float *dataAandResult, const float *dataB, int numPoints)
 {
     if (MATH_FUNC_IS_SUM)
     {
@@ -244,6 +247,10 @@ void Math::CalculateMathFunction(float *dataAandResult, float *dataB, int numPoi
             *dataAandResult *= *(dataAandResult + delta);
             dataAandResult++;
         }
+    }
+    else
+    {
+        // здесь ничего
     }
 }
 
@@ -385,7 +392,7 @@ uint8 Math::MinFromArray_RAM(const uint16 *data, int firstPoint, int lastPoint)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-int Math::FindAnotherElement(uint8 *data, uint8 value, int numElements)
+int Math::FindAnotherElement(const uint8 *data, uint8 value, int numElements)
 {
     for (int i = 0; i < numElements; i++)
     {
@@ -414,8 +421,8 @@ int Math::DigitsInIntPart(float value)
     do
     {
         ++num;
-        absValue /= 10.0f;
-    } while (absValue >= 1.0f);
+        absValue /= 10.0F;
+    } while (absValue >= 1.0F);
 
     return num;
 }
@@ -435,10 +442,10 @@ float Math::RoundFloat(float value, int numDigits)
     if (digsInInt < numDigits)  // Подстрахуемся
     {
         int pow = Pow10(numDigits - digsInInt);
-        absValue = ((int)(absValue * pow + 0.5f)) / (float)pow;
+        absValue = ((int)(absValue * pow + 0.5F)) / (float)pow;
     }
 
-    return value > 0.0f ? absValue : -absValue;
+    return value > 0.0F ? absValue : -absValue;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -549,6 +556,10 @@ void Math::Limitation(T *value, T min, T max)
     else if (*value > max)
     {
         *value = max;
+    }
+    else
+    {
+        // значения совпадают - ничего не делаем
     }
 }
 

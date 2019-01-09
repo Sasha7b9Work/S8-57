@@ -56,13 +56,13 @@ public:
     /// ординатой yHorLine.
     static float GetIntersectionWithHorizontalLine(int x0, int y0, int x1, int y1, int yHorLine);
     
-    static void CalculateMathFunction(float *dataAandResult, float *dataB, int numPoints);
+    static void CalculateMathFunction(float *dataAandResult, const float *dataB, int numPoints);
 
     static uint8 CalculateFiltr(const uint8 *data, int x, int numPoints, int numSmoothing);
 
     static void CalculateFiltrArray(const uint8 *dataIn, uint8 *dataOut, int numPoints, int numSmoothing);
     /// Ќайти первый элемент массива, не соотвествующий заданному
-    static int FindAnotherElement(uint8 *data, uint8 value, int numElements);
+    static int FindAnotherElement(const uint8 *data, uint8 value, int numElements);
     /// ¬озвращает случайное число из диапазона [min; max]
     static float RandFloat(float min, float max);
 
