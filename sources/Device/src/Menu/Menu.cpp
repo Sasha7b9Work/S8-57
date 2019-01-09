@@ -607,7 +607,7 @@ void Menu::RunAfterUpdate(pFuncVV func)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Control *Menu::OpenedItem()
 {
-    Control::Type type = Control::Type::None;
+    Control::Type type(Control::Type::None);
     return (Control *)RetLastOpened((Page *)pageMain, &type);
 }
 
@@ -633,14 +633,14 @@ void *Menu::RetLastOpened(Page *page, Control::Type *type)
             return item;
         }
     }
-    *type = Control::Type::Page;
+    *type = Control::Type(Control::Type::Page);
     return page;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Control *Menu::CurrentItem()
 {
-    Control::Type type = Control::Type::None;
+    Control::Type type(Control::Type::None);
     void *lastOpened = RetLastOpened((Page *)pageMain, &type);
     int8 pos = ((const Page *)lastOpened)->PosCurrentItem();
     if (type == Control::Type::Page && pos != 0x7f)

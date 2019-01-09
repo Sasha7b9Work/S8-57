@@ -100,7 +100,7 @@ public:
             Number
         } value;
 
-        Type(E v) : value(v) {};
+        explicit Type(E v) : value(v) {};
         operator uint8() const { return (uint8)value; };
     };
 };
