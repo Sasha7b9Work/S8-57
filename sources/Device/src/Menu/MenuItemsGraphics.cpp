@@ -21,7 +21,7 @@
 static void DrawCommonHiPart(Control *item, int x, int y, bool pressed, bool shade, bool opened);
 /// Нарисовать значение регулятора в режиме поразрядной регулировки
 /// setPosFromEnd - подсвеченный (активный) разряд, начиная с конца. Если selPosFromEnd == -1, подсвечивать не нужно
-static void DrawValueWithSelectedPosition(int x, int y, int value, int numDigits, int selPosFromEnd, bool fillNull);
+static void DrawValueWithSelectedPosition(int x, int y, int value, uint numDigits, int selPosFromEnd, bool fillNull);
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////q
@@ -646,7 +646,7 @@ static void DrawCommonHiPart(Control *item, int x, int y, bool pressed, bool sha
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void DrawValueWithSelectedPosition(int x, int y, int value, int numDigits, int selPosFromEnd, bool fillNull)
+static void DrawValueWithSelectedPosition(int x, int y, int value, uint numDigits, int selPosFromEnd, bool fillNull)
 {
     Stack<uint8> stack(numDigits);
     

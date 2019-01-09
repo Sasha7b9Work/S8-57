@@ -350,7 +350,7 @@ private:
 
     void DrawLowPart(int x, int y, bool shade);
     /// Возвращает число знакомест в поле для ввода элемента governor. Зависит от максимального значения, которое может принимать governor.
-    int  NumDigits();
+    uint  NumDigits();
 };
 
 

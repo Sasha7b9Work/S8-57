@@ -271,7 +271,7 @@ void Governor::PrevPosition()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-int Governor::NumDigits()
+uint Governor::NumDigits()
 {
     int min = Integer(Math::Abs(minValue)).NumDigits();
     int max = Integer(Math::Abs(maxValue)).NumDigits();
@@ -279,7 +279,7 @@ int Governor::NumDigits()
     {
         max = min;
     }
-    return max;
+    return (uint)max;
 }
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 char Governor::GetSymbol()

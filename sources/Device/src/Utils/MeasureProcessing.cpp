@@ -53,7 +53,7 @@ static float FindIntersectionWithHorLine(Chan::E ch, int numIntersection, bool d
 /// Линейная интерполяция
 static void LinearInterpolation(uint8 *data, int numPoints);
 /// Возвращает индекс следующей за prevIndex ненулевой точки. Возвращает -1, если точки таковой не найдено
-static bool IndexNextPoint(uint8 *data, int numPoints, int prevIndex, int *nextIndex);
+static bool IndexNextPoint(const uint8 *data, int numPoints, int prevIndex, int *nextIndex);
 /// Делить val1 на val2. Возвращает nan, если результат неопределён
 static float Divide(float val1, float val2);
 
@@ -390,7 +390,7 @@ float CalculatePeriod(Chan::E ch)
     if(!periodIsCaclulating[ch])
     {
         float aveValue = CalculateAverageRel(ch);
-        if(aveValue == ERROR_VALUE_UINT8)
+        if(aveValue == ERROR_VALUE_UINT8) //-V550
         {
             period[ch] = ERROR_VALUE_FLOAT;
         }
@@ -1537,7 +1537,7 @@ static void LinearInterpolation(uint8 *data, int numPoints)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static bool IndexNextPoint(uint8 *data, int numPoints, int prevIndex, int *nextIndex)
+static bool IndexNextPoint(const uint8 *data, int numPoints, int prevIndex, int *nextIndex)
 {
     for (int i = prevIndex + 1; i < numPoints; ++i)
     {
