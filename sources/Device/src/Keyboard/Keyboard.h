@@ -82,6 +82,14 @@ struct KeyEvent
     bool IsAboveZero() const { return key == Key::Up || key == Key::Right; }
     /// Возвращает 1, если кнопка означает увеличение, и -1 в обратном случае
     int Delta() const { return IsAboveZero() ? 1 : -1; }
+    
+    bool IsLeft() const { return key == Key::Left; };
+    bool IsRight() const { return key == Key::Right; };
+    bool IsUp() const { return key == Key::Up; };
+    bool IsDown() const { return key == Key::Down; };
+    
+    bool IsPress() const { return type == TypePress::Press; };
+    bool IsRepeat() const { return type == TypePress::Repeat; };
 };
 
 

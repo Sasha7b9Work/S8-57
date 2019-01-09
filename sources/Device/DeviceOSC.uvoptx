@@ -118,7 +118,7 @@
         <SetRegEntry>
           <Number>0</Number>
           <Key>DLGUARM</Key>
-          <Name>Мс6</Name>
+          <Name>/</Name>
         </SetRegEntry>
         <SetRegEntry>
           <Number>0</Number>
@@ -157,7 +157,7 @@
           <Type>0</Type>
           <LineNumber>25</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134325410</Address>
+          <Address>134325442</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
@@ -173,7 +173,7 @@
           <Type>0</Type>
           <LineNumber>327</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134294908</Address>
+          <Address>134294898</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
@@ -187,9 +187,25 @@
         <Bp>
           <Number>2</Number>
           <Type>0</Type>
-          <LineNumber>325</LineNumber>
+          <LineNumber>367</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134294886</Address>
+          <Address>134337166</Address>
+          <ByteObject>0</ByteObject>
+          <HtxType>0</HtxType>
+          <ManyObjects>0</ManyObjects>
+          <SizeOfObject>0</SizeOfObject>
+          <BreakByAccess>0</BreakByAccess>
+          <BreakIfRCount>1</BreakIfRCount>
+          <Filename>&lt;1&gt;.\src\Menu\MenuItems.cpp</Filename>
+          <ExecCommand></ExecCommand>
+          <Expression>\\FPGA\src/Menu/MenuItems.cpp\367</Expression>
+        </Bp>
+        <Bp>
+          <Number>3</Number>
+          <Type>0</Type>
+          <LineNumber>334</LineNumber>
+          <EnabledFlag>1</EnabledFlag>
+          <Address>134294942</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
@@ -198,7 +214,23 @@
           <BreakIfRCount>1</BreakIfRCount>
           <Filename>&lt;1&gt;.\src\Menu\HandlersKeys.cpp</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\FPGA\src/Menu/HandlersKeys.cpp\325</Expression>
+          <Expression>\\FPGA\src/Menu/HandlersKeys.cpp\334</Expression>
+        </Bp>
+        <Bp>
+          <Number>4</Number>
+          <Type>0</Type>
+          <LineNumber>383</LineNumber>
+          <EnabledFlag>1</EnabledFlag>
+          <Address>0</Address>
+          <ByteObject>0</ByteObject>
+          <HtxType>0</HtxType>
+          <ManyObjects>0</ManyObjects>
+          <SizeOfObject>0</SizeOfObject>
+          <BreakByAccess>0</BreakByAccess>
+          <BreakIfRCount>0</BreakIfRCount>
+          <Filename>&lt;1&gt;.\src\Menu\MenuItems.cpp</Filename>
+          <ExecCommand></ExecCommand>
+          <Expression></Expression>
         </Bp>
       </Breakpoint>
       <WatchWindow1>

@@ -286,11 +286,27 @@ bool Page::ProcessKey(KeyEvent event)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 bool Governor::ProcessKey(KeyEvent event)
 {
-    if (event.type == TypePress::Press || event.type == TypePress::Repeat)
+    if(event.IsLeft())
     {
-        ChangeValue(event.IsAboveZero() ? 1 : -1);
-        return true;
+        if(event.IsPress())
+        {
+            NextPosition();
+        }
     }
+    else if(event.IsRight())
+    {
+        if(event.IsPress())
+        {
+        }
+    }
+    else if(event.IsUp() || event.IsDown())
+    {
+        if(event.IsPress() || event.IsRepeat())
+        {
+            ChangeValue(event.IsUp() ? 1 : -1);
+        }
+    }
+    
     return true;
 }
 
@@ -525,4 +541,10 @@ void Page::SetCurrentSubPage(int8 pos)
 void Control::LogInfo() const
 {
     LOG_WRITE("%x %s", this, Title().CString());
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+bool Control::IsPage() const
+{
+    return (type == Control::Type::Page);
 }

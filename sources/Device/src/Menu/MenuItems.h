@@ -81,6 +81,8 @@ public:
     char GetSymbol();
     /// Возвращает ширину контрола
     int Width() { return 320 / 5; };
+    /// Возвращает true, если тип контрола - Page
+    bool IsPage() const;
 
     /// Разные виды пунктов меню
     struct Type
@@ -311,8 +313,6 @@ public:
 
 class Governor : public Control
 {
-friend class Governor32;
-
 public:
     int    *cell;
     int     minValue;       ///< Минмальное значение, которое может принимать регулятор.
