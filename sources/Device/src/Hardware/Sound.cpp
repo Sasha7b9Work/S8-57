@@ -14,8 +14,8 @@ DAC_HandleTypeDef Sound::handleDAC = {DAC};
 
 #define POINTS_IN_PERIOD_SOUND 10
 static uint8 points[POINTS_IN_PERIOD_SOUND] = {0};
-static float frequency = 0.0f;
-static float amplitude = 0.0f;
+static float frequency = 0.0F;
+static float amplitude = 0.0F;
 static TypeWave::E typeWave = TypeWave::Sine;
 static bool soundWarnIsBeep = false;
 static bool buttonIsPressed = false;    ///< \brief  огда запускаетс€ звук нажатой кнопки, устанавливаетс€ этот флаг, чтобы знать, проигрывать ли знак 
@@ -118,7 +118,7 @@ void Sound::ConfigTIM7(uint16 prescaler, uint16 period)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 uint16 Sound::CalculatePeriodForTIM()
 {
-#define MULTIPLIER_CALCPERFORTIM 30e6f
+#define MULTIPLIER_CALCPERFORTIM 30e6F
 
     return (uint16)(MULTIPLIER_CALCPERFORTIM / frequency / POINTS_IN_PERIOD_SOUND);
 }
@@ -128,9 +128,9 @@ void Sound::CalculateSine()
 {
     for(int i = 0; i < POINTS_IN_PERIOD_SOUND; i++)
     {
-        float step = 2.0f * PI / (POINTS_IN_PERIOD_SOUND - 1);
-        float value = (std::sinf(i * step) + 1.0f) / 2.0f;
-        float v = value * amplitude * 255.0f;
+        float step = 2.0F * PI / (POINTS_IN_PERIOD_SOUND - 1);
+        float value = (std::sinf(i * step) + 1.0F) / 2.0F;
+        float v = value * amplitude * 255.0F;
         points[i] = (uint8)v;
     }
 
@@ -142,7 +142,7 @@ void Sound::CalculateSine()
         }
         else
         {
-            points[i] = (uint8)(255.0f * amplitude);
+            points[i] = (uint8)(255.0F * amplitude);
         }
     }
 }
@@ -153,7 +153,7 @@ void Sound::CalculateMeandr()
 {
     for(int i = 0; i < POINTS_IN_PERIOD_SOUND / 2; i++)
     {
-        points[i] = (uint8)(255.0f * amplitude);
+        points[i] = (uint8)(255.0F * amplitude);
     }
     for(int i = POINTS_IN_PERIOD_SOUND / 2; i < POINTS_IN_PERIOD_SOUND; i++)
     {
@@ -165,7 +165,7 @@ void Sound::CalculateMeandr()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Sound::CalculateTriangle()
 {
-    float k = 255.0 / POINTS_IN_PERIOD_SOUND;
+    float k = 255.0F / POINTS_IN_PERIOD_SOUND;
     for(int i = 0; i < POINTS_IN_PERIOD_SOUND; i++)
     {
         points[i] = (uint8)(k * (float)i * amplitude);
@@ -186,9 +186,13 @@ void Sound::SetWave()
     {
         CalculateMeandr();
     }
-    else if(typeWave == TypeWave::Triangle)
+    else if(typeWave == TypeWave::Triangle) //-V547
     {
         CalculateTriangle();
+    }
+    else
+    {
+        // больше нет видов волн
     }
 }
 
@@ -204,10 +208,10 @@ void Sound::Beep(const TypeWave::E newTypeWave, const float newFreq, const float
     {
         //return;
     }
-    if (frequency != newFreq || amplitude != newAmpl || typeWave != newTypeWave)
+    if (frequency != newFreq || amplitude != newAmpl || typeWave != newTypeWave) //-V550
     {
         frequency = newFreq;
-        amplitude = newAmpl * SOUND_VOLUME / 100.0f;
+        amplitude = newAmpl * SOUND_VOLUME / 100.0F;
         typeWave = newTypeWave;
         
         Stop();
@@ -218,7 +222,7 @@ void Sound::Beep(const TypeWave::E newTypeWave, const float newFreq, const float
     
     isBeep = true;
     
-    HAL_DAC_Start_DMA(&handleDAC, DAC_CHANNEL_1, (uint32_t*)points, POINTS_IN_PERIOD_SOUND, DAC_ALIGN_8B_R);
+    HAL_DAC_Start_DMA(&handleDAC, DAC_CHANNEL_1, (uint32_t*)points, POINTS_IN_PERIOD_SOUND, DAC_ALIGN_8B_R); //-V1032 //-V641
 
     Timer::SetAndStartOnce(Timer::Type::StopSound, Stop, (uint)newDuration);
 }
@@ -234,7 +238,7 @@ void Sound::WaitForCompletion()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Sound::ButtonPress()
 {
-    Beep(TypeWave::Sine, 2000.0f, 0.75f, 50);
+    Beep(TypeWave::Sine, 2000.0F, 0.75F, 50);
     buttonIsPressed = true;
 }
 
@@ -243,7 +247,7 @@ void Sound::ButtonRelease()
 {
     if (buttonIsPressed)
     {
-        Beep(TypeWave::Sine, 1000.0f, 0.5f, 50);
+        Beep(TypeWave::Sine, 1000.0F, 0.5F, 50);
         buttonIsPressed = false;
     }
 }
@@ -252,7 +256,7 @@ void Sound::ButtonRelease()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Sound::GovernorChangedValue()
 {
-    Beep(TypeWave::Sine, 1000.0f, 0.5f, 50);
+    Beep(TypeWave::Sine, 1000.0F, 0.5F, 50);
     buttonIsPressed = false;
 }
 
@@ -260,7 +264,7 @@ void Sound::GovernorChangedValue()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Sound::RegulatorShiftRotate()
 {
-    Beep(TypeWave::Sine, 1.0f, 0.2f, 3);
+    Beep(TypeWave::Sine, 1.0F, 0.2F, 3);
     buttonIsPressed = false;
 }
 
@@ -268,7 +272,7 @@ void Sound::RegulatorShiftRotate()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Sound::RegulatorSwitchRotate()
 {
-    Beep(TypeWave::Sine, 500.0f, 0.5f, 75);
+    Beep(TypeWave::Sine, 500.0F, 0.5F, 75);
     buttonIsPressed = false;
 }
 
@@ -276,7 +280,7 @@ void Sound::RegulatorSwitchRotate()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Sound::WarnBeepBad()
 {
-    Beep(TypeWave::Meandr, 500.0f, 1.0f, 500);
+    Beep(TypeWave::Meandr, 500.0F, 1.0F, 500);
     soundWarnIsBeep = true;
     buttonIsPressed = false;
 }
@@ -284,7 +288,7 @@ void Sound::WarnBeepBad()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Sound::WarnBeepGood()
 {
-    Beep(TypeWave::Triangle, 1000.0f, 1.0f, 500);
+    Beep(TypeWave::Triangle, 1000.0F, 1.0F, 500);
     buttonIsPressed = false;
 }
 

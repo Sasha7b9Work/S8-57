@@ -14,7 +14,7 @@ extern const PageBase pageMeasures;
 const PageBase *PageMeasures::pointer = &pageMeasures;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-DEF_PAGE_2( pageMeasures,                                                                                                          //--- ИЗМЕРЕНИЯ ---
+DEF_PAGE_2( pageMeasures, // -V1027                                                                                                                                       //--- ИЗМЕРЕНИЯ ---
     "ИЗМЕРЕНИЯ", "MEASURES",
     "Доступ к настройкам измерений - курсорных и автоматических",
     "Access to measurement settings - cursor and automatic",

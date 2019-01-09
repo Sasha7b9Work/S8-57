@@ -19,7 +19,9 @@
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 static void DrawCommonHiPart(Control *item, int x, int y, bool pressed, bool shade, bool opened);
-static void DrawValueWithSelectedPosition(int x, int y, int value, int numDigits, int selPos, bool hLine, bool fillNull);
+/// Нарисовать значение регулятора в режиме поразрядной регулировки
+/// setPosFromEnd - подсвеченный (активный) разряд, начиная с конца. Если selPosFromEnd == -1, подсвечивать не нужно
+static void DrawValueWithSelectedPosition(int x, int y, int value, int numDigits, int selPosFromEnd, bool fillNull);
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////q
@@ -132,7 +134,7 @@ void Governor::DrawOpened(int x, int y)
 {
     bool shade = IsShade() || !IsAcitve();
     DrawCommonHiPart(this, x, y, IsPressed(), shade, true);
-    DrawValue(x, y + 10);
+    DrawLowPart(x, y + 13, shade);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -147,19 +149,28 @@ void Governor::DrawClosed(int x, int y)
 void Governor::DrawValue(int x, int y)
 {
     int startX = x + 40;
+    int signGovernor = (*cell < 0) ? -1 : 1;
+    
     int value = *cell;
-    int signGovernor = *cell < 0 ? -1 : 1;
+    
+    
     if (signGovernor == -1)
     {
         value = -value;
     }
+    
     Painter::SetFont(Font::Type::_5);
-    bool sign = minValue < 0;
-    Integer(maxValue).ToString(sign, 1).Draw(x + 55, y - 5, Color::WHITE);
-    Integer(minValue).ToString(sign, 1).Draw(x + 55, y + 2);
+    bool sign = (minValue < 0);
+    
+    if(maxValue < 65536)
+    {
+        Integer(maxValue).ToString(sign, 1).Draw(x + 55, y - 5, Color::WHITE);
+        Integer(minValue).ToString(sign, 1).Draw(x + 55, y + 2);
+    }
+    
     Painter::SetFont(Font::Type::_8);
 
-    DrawValueWithSelectedPosition(startX, y, value, NumDigits(), gCurDigit, true, true);
+    DrawValueWithSelectedPosition(x + 2, y, value, NumDigits(), gCurDigit, true);
 
     if (sign)
     {
@@ -174,20 +185,20 @@ void Governor::DrawLowPart(int x, int y, bool shade)
 
     Painter::FillRegion(x + 1, y - 1, Menu::Item::Value::WIDTH + 1, Menu::Item::Value::HEIGHT - 3, Color::MENU_FIELD);
 
-    if (IsCurrentItem())
-    {
-        Painter::Draw4SymbolsInRect(x + Width() - 12, y - 1, GetSymbol(), Color::BACK);
-    }
-
     if (shade)
     {
         colorTextDown = Color::MenuItem(false);
     }
 
-    x = Painter::DrawChar(x + 4, y, SYMBOL_GOVERNOR_LEFT, colorTextDown);
-
     if (Menu::OpenedItem() != this)
     {
+        if (IsCurrentItem())
+        {
+            Painter::Draw4SymbolsInRect(x + Width() - 12, y - 1, GetSymbol(), Color::BACK);
+        }
+    
+        x = Painter::DrawChar(x + 4, y, SYMBOL_GOVERNOR_LEFT, colorTextDown);
+        
         int delta = (int)Step();
         if (delta == 0)
         {
@@ -212,13 +223,13 @@ void Governor::DrawLowPart(int x, int y, bool shade)
                 Painter::DrawTextWithLimitation(drawX, y - 10 - delta, Integer(PrevValue()).ToString(false, 1).CString(), limX, limY, limWidth, limHeight);
             }
         }
+        
+        Painter::DrawChar(x + 1, y, SYMBOL_GOVERNOR_RIGHT, colorTextDown);
     }
     else
     {
-        x = Integer(*cell).ToString(false, 1).Draw(x + 1, y, Color::WHITE);
+        DrawValue(x, y);
     }
-
-    Painter::DrawChar(x + 1, y, SYMBOL_GOVERNOR_RIGHT, colorTextDown);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -635,38 +646,34 @@ static void DrawCommonHiPart(Control *item, int x, int y, bool pressed, bool sha
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-// Если selPos == -1, подсвечивать не нужно
-static void DrawValueWithSelectedPosition(int x, int y, int value, int numDigits, int selPos, bool hLine, bool fillNull)
+static void DrawValueWithSelectedPosition(int x, int y, int value, int numDigits, int selPosFromEnd, bool fillNull)
 {
-    int firstValue = value;
-    int height = hLine ? 9 : 8;
+    Stack<uint8> stack(numDigits);
+    
+    for(int i = 0; i < numDigits; i++)
+    {
+        stack.Push(value % 10);
+        value /= 10;
+    }
+    
+    int height = 8;
+    
+    Color fill = Color::BACK;
+    Color back = Color::FILL;
+    
+    
     for (int i = 0; i < numDigits; i++)
     {
-        int rest = value % 10;
-        value /= 10;
-        if (selPos == i)
+        if (selPosFromEnd == (numDigits - i - 1))
         {
-            Painter::FillRegion(x - 1, y, 5, height, Color::FILL);
+            Painter::FillRegion(x - 1, y, 5, height, back);
         }
-        if (!(rest == 0 && value == 0) || (firstValue == 0 && i == 0))
-        {
-            Painter::DrawChar(x, y, (char)(rest + 48), selPos == i ? Color::BLACK : Color::WHITE);
-        }
-        else if (fillNull)
-        {
-            Painter::DrawChar(x, y, '0', selPos == i ? Color::BLACK : Color::WHITE);
-        }
-        else
-        {
-            //
-        }
-
-        if (hLine)
-        {
-            Painter::DrawLine(x, y + 9, x + 3, y + 9, Color::WHITE);
-        }
-
-        x -= 6;
+        
+        uint8 val = stack.Pop();
+        
+        Painter::DrawChar(x, y, (char)(val + 48), fill);
+        
+        x += 6;
     }
 }
 

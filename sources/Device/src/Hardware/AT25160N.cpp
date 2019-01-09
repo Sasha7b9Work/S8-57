@@ -155,7 +155,7 @@ void AT25160N::Write32BytesOrLess(uint address, const uint8 *data, uint size)
 
     ResetPin(PIN_CS);
 
-    WriteByte(WRITE);
+    WriteByte(WRITE); //-V2501
 
     WriteByte((address >> 8) & 0xff);
 
@@ -186,7 +186,7 @@ void AT25160N::SetWriteLatch()
     //WaitFinishWrite();
 
     ResetPin(PIN_CS);
-    WriteByte(WREN);
+    WriteByte(WREN); //-V2501
     SetPin(PIN_CS);
 }
 
@@ -196,7 +196,7 @@ void AT25160N::ResetWriteLatch()
     WaitFinishWrite();
 
     ResetPin(PIN_CS);
-    WriteByte(WRDI);
+    WriteByte(WRDI); //-V2501
     SetPin(PIN_CS);
 }
 
@@ -204,7 +204,7 @@ void AT25160N::ResetWriteLatch()
 uint8 AT25160N::ReadStatusRegister()
 {
     ResetPin(PIN_CS);
-    WriteByte(RDSR);
+    WriteByte(RDSR); //-V2501
     uint8 result = ReadByte();
     SetPin(PIN_CS);
     return result;
@@ -216,7 +216,7 @@ void AT25160N::WriteStatusRegister(uint8 data)
     WaitFinishWrite();
 
     ResetPin(PIN_CS);
-    WriteByte(WRSR);
+    WriteByte(WRSR); //-V2501
     WriteByte(data);
     SetPin(PIN_CS);
 }
@@ -295,7 +295,7 @@ void AT25160N::ReadData(uint address, uint8 *data, uint size)
 
     ResetPin(PIN_CS);
 
-    WriteByte(READ);
+    WriteByte(READ); //-V2501
     WriteByte((address >> 8) & 0xff);
     WriteByte(address & 0xff);
 

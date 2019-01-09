@@ -29,7 +29,7 @@ void FSMC::WriteToFPGA8(uint8 *address, uint8 value)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-uint8 FSMC::ReadFromFPGA(uint8 *address)
+uint8 FSMC::ReadFromFPGA(const uint8 *address)
 {
     if (mode != ModeFPGA)
     {

@@ -86,6 +86,7 @@ static bool HandlerKey_Tune(KeyEvent event)
     {
         Measure::posOnPageChoice += delta;
         Sound::RegulatorSwitchRotate();
+
         if (Measure::posOnPageChoice < 0)
         {
             Measure::posOnPageChoice = Measure::Type::Number - 1;
@@ -94,6 +95,11 @@ static bool HandlerKey_Tune(KeyEvent event)
         {
             Measure::posOnPageChoice = 0;
         }
+        else
+        {
+            // здесь ничего делать не нужно
+        }
+
         set.meas_measures[Measure::posActive] = (Measure::Type::E)Measure::posOnPageChoice;
         Painter::ResetFlash();
     }
@@ -107,7 +113,7 @@ static bool HandlerKey_Tune(KeyEvent event)
     return true;
 }
 
-DEF_PAGE_2(pageTune,
+DEF_PAGE_2( pageTune, // -V641 // -V1027
     "НАСТРОИТЬ", "CONFIGURE",
     "Переход в режим точной настройки количества и видов измерений",
     "Transition to the fine tuning mode of the number and types of measurements",

@@ -228,7 +228,7 @@ void FSMC::WriteToPanel(Message *msg)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void FSMC::WriteToPanel(uint8 *data, uint length)
+void FSMC::WriteToPanel(const uint8 *data, uint length)
 {
     interchangeWithPanel = true;
 

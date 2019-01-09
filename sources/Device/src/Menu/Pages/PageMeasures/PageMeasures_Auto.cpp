@@ -16,7 +16,7 @@ const PageBase *PageMeasures::PageAuto::pointer = &pageAuto;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-DEF_CHOICE_2(       cIsShow,                                                                                //--- ИЗМЕРЕНИЯ - АВТОМАТ - Показывать ---
+DEF_CHOICE_2( cIsShow,                                                                                                                             //--- ИЗМЕРЕНИЯ - АВТОМАТ - Показывать ---
     "Показывать", "Show",
     "Выводить или не выводить измерения на экран",
     "Output or output measurements on screen",
@@ -26,12 +26,12 @@ DEF_CHOICE_2(       cIsShow,                                                    
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static bool IsActive_Number()
+static bool IsActive_NumberChannels()
 {
     return SHOW_MEASURES;
 }
 
-DEF_CHOICE_7(       cNumber,                                                                                //--- ИЗМЕРЕНИЯ - АВТОМАТ - Количество ---
+DEF_CHOICE_7( cNumber,                                                                                                                             //--- ИЗМЕРЕНИЯ - АВТОМАТ - Количество ---
     "Количество", "Number"
     ,
     "Устанавливает максимальное количество выводимых измерений:\n"
@@ -58,15 +58,10 @@ DEF_CHOICE_7(       cNumber,                                                    
     "3x5", "3x5",
     "6x1", "6x1",
     "6x2", "6x2",
-    NUM_MEASURES, pageAuto, IsActive_Number, FuncChangedChoice, FuncDraw
+    NUM_MEASURES, pageAuto, IsActive_NumberChannels, FuncChangedChoice, FuncDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static bool IsActive_Channels()
-{
-    return SHOW_MEASURES;
-}
-
 DEF_CHOICE_3(       cChannels,                                                                                  //--- ИЗМЕРЕНИЯ - АВТОМАТ - Каналы ---
     "Каналы", "Channels",
     "По каким каналам выводить измерения",
@@ -74,7 +69,7 @@ DEF_CHOICE_3(       cChannels,                                                  
     "1",     "1",
     "2",     "2",
     "1 и 2", "1 and 2",
-    SOURCE_MEASURES, pageAuto, IsActive_Channels, FuncChangedChoice, FuncDraw
+    SOURCE_MEASURES, pageAuto, IsActive_NumberChannels, FuncChangedChoice, FuncDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -84,7 +79,7 @@ static bool IsActive_Mode()
     return SHOW_MEASURES;
 }
 
-DEF_CHOICE_2(       cMode,                                                                                         //--- ИЗМЕРЕНИЯ - АВТОМАТ - Вид ---
+DEF_CHOICE_2( cMode,                                                                                                                                      //--- ИЗМЕРЕНИЯ - АВТОМАТ - Вид ---
     "Вид", "View",
     "Уменьшать или нет зону вывода сигнала для исключения перекрытия его результами измерений",
     "Decrease or no zone output signal to avoid overlapping of its measurement results",
@@ -96,7 +91,7 @@ DEF_CHOICE_2(       cMode,                                                      
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-DEF_PAGE_4(         pageAuto,                                                                                               //--- ИЗМЕРЕНИЯ - АВТО ---
+DEF_PAGE_4( pageAuto, // -V641 // -V1027                                                                                                                           //--- ИЗМЕРЕНИЯ - АВТО ---
     "АВТОМАТ", "AUTO",
     "Доступ к настройкам автоматических измерений",
     "Access to automatic measurement settings",

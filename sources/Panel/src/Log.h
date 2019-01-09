@@ -34,11 +34,11 @@
 #endif
 
 
-typedef enum
+enum TypeTrace
 {
     TypeTrace_Info,
     TypeTrace_Error
-} TypeTrace;
+};
 
 class Log
 {

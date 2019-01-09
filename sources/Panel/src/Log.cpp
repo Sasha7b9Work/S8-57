@@ -47,14 +47,16 @@ void Log::Trace(TypeTrace type, const char *module, const char *func, int numLin
     char numBuffer[SIZE];
     snprintf(numBuffer, 100, ":%d", numLine);
     message[0] = 0;
+
     if (type == TypeTrace_Error)
     {
         strcat(message, "!!!ERROR!!! ");
     }
-    else if (type == TypeTrace_Info)
+    else if (type == TypeTrace_Info) //-V547
     {
         strcat(message, "            ");
     }
+
     strcat(message, module);
     strcat(message, " ");
     strcat(message, func);
