@@ -646,13 +646,13 @@ static void DrawCommonHiPart(Control *item, int x, int y, bool pressed, bool sha
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void DrawValueWithSelectedPosition(int x, int y, int value, uint numDigits, int selPosFromEnd, bool fillNull)
+static void DrawValueWithSelectedPosition(int x, int y, int value, uint numDigits, int selPosFromEnd, bool)
 {
     Stack<uint8> stack(numDigits);
     
-    for(int i = 0; i < numDigits; i++)
+    for(uint i = 0; i < numDigits; i++)
     {
-        stack.Push(value % 10);
+        stack.Push((uint8)(value % 10));
         value /= 10;
     }
     
@@ -662,9 +662,9 @@ static void DrawValueWithSelectedPosition(int x, int y, int value, uint numDigit
     Color back = Color::FILL;
     
     
-    for (int i = 0; i < numDigits; i++)
+    for (uint i = 0; i < numDigits; i++)
     {
-        if (selPosFromEnd == (numDigits - i - 1))
+        if (selPosFromEnd == ((int)numDigits - (int)i - 1))
         {
             Painter::FillRegion(x - 1, y, 5, height, back);
         }

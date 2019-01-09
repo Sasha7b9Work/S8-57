@@ -89,7 +89,7 @@ void HiPart::WriteCursors()
                 Painter::DrawRectangle(x, Grid::Top(), width, 12, Color::FILL);
                 Painter::FillRegion(x + 1, Grid::Top() + 1, width - 2, 10, Color::BACK);
                 String("1/dT=").Draw(x + 1, Grid::Top() + 2, colorText);
-                if (delta != 0.0f)
+                if (delta != 0.0f) //-V550
                 {
                     Frequency(1.0f / delta).ToString().Draw(x + 25, Grid::Top() + 2);
                 }

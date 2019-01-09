@@ -38,7 +38,7 @@ public:
 
     static void ChangeAVP();
     /// Через эту функцию поступает измерение от прибора
-    static void SetMeasure(uint8 buffer[10]);
+    static void SetMeasure(const uint8 buffer[10]);
 
     static UART_HandleTypeDef handlerUART;
 
