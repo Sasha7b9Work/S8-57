@@ -45,7 +45,7 @@ void Log::Trace(TypeTrace type, const char *module, const char *func, int numLin
     va_end(args);
     const int SIZE = 20;
     char numBuffer[SIZE];
-    snprintf(numBuffer, 100, ":%d", numLine);
+    snprintf(numBuffer, 19, ":%d", numLine);
     message[0] = 0;
 
     if (type == TypeTrace_Error)
@@ -55,6 +55,10 @@ void Log::Trace(TypeTrace type, const char *module, const char *func, int numLin
     else if (type == TypeTrace_Info) //-V547
     {
         strcat(message, "            ");
+    }
+    else
+    {
+        // больше типов нет
     }
 
     strcat(message, module);

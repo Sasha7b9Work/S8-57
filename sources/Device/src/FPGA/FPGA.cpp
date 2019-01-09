@@ -103,7 +103,7 @@ void FPGA::Update() // -V2506
 
         if (GetFlag::PRED() && !givingStart)
         {
-            if (START_MODE_IS_AUTO)
+            if (START_MODE_IS_AUTO && GetFlag::HOLD_OFF())
             {
                 GiveStart();
                 givingStart = true;
@@ -846,6 +846,12 @@ bool FPGA::GetFlag::DATA_READY()
 bool FPGA::GetFlag::TRIG_READY()
 {
     return _GET_BIT(flag, Flag::_TRIG_READY) == 1;
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+bool FPGA::GetFlag::HOLD_OFF()
+{
+    return _GET_BIT(flag, Flag::_HOLD_OFF_FLAG) == 1;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
