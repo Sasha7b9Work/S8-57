@@ -91,6 +91,9 @@
     <Filter Include="libs\HAL">
       <UniqueIdentifier>{5728b362-a78f-4c91-ba60-1c7caf71a530}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Menu\Pages\PageTrig">
+      <UniqueIdentifier>{44830883-b72a-4888-a945-6afb524c6a07}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Device\src\defines.cpp">
@@ -262,9 +265,6 @@
       <Filter>Menu\Pages</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Device\src\Menu\Pages\PageTime.cpp">
-      <Filter>Menu\Pages</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Device\src\Menu\Pages\PageTrig.cpp">
       <Filter>Menu\Pages</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Device\src\Menu\Pages\PageDebug\PageDebug.cpp">
@@ -494,6 +494,12 @@
     </ClCompile>
     <ClCompile Include="src\include\HAL\stm32f4xx_ll_fmc.cpp">
       <Filter>libs\HAL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Menu\Pages\PageTrig\PageTrig.cpp">
+      <Filter>Menu\Pages\PageTrig</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Menu\Pages\PageTrig\PageTrig_HoldOff.cpp">
+      <Filter>Menu\Pages\PageTrig</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

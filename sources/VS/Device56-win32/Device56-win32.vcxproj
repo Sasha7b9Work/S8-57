@@ -119,7 +119,8 @@
     <ClCompile Include="..\..\Device\src\Menu\Pages\PageMemory\PageMemory_ROM.cpp" />
     <ClCompile Include="..\..\Device\src\Menu\Pages\PageService\PageService.cpp" />
     <ClCompile Include="..\..\Device\src\Menu\Pages\PageTime.cpp" />
-    <ClCompile Include="..\..\Device\src\Menu\Pages\PageTrig.cpp" />
+    <ClCompile Include="..\..\Device\src\Menu\Pages\PageTrig\PageTrig.cpp" />
+    <ClCompile Include="..\..\Device\src\Menu\Pages\PageTrig\PageTrig_HoldOff.cpp" />
     <ClCompile Include="..\..\Device\src\Multimeter\Multimeter.cpp" />
     <ClCompile Include="..\..\Device\src\Osci\BottomPart.cpp" />
     <ClCompile Include="..\..\Device\src\Osci\Cursors.cpp" />

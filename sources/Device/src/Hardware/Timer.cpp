@@ -60,7 +60,7 @@ static void TuneTIM(Timer::Type::E type);
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 bool Timer::IsRun(Timer::Type::E type)
 {
-    return TIME_NEXT(type) != UINT_MAX;
+    return TIME_NEXT(type) != UINT_MAX; //-V2523
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -68,7 +68,7 @@ void Timer::Init()
 {
     for(uint i = 0; i < Timer::Type::Number; i++)
     {
-        timers[i].timeNextMS = UINT_MAX;
+        timers[i].timeNextMS = UINT_MAX; //-V2523
     }
    
     tim3.Init(TIM3, 54000 - 1, TIM_COUNTERMODE_UP, 1, TIM_CLOCKDIVISION_DIV1);
@@ -120,7 +120,7 @@ void Timer::ElapsedCallback()
             }
             else
             {
-                timer->timeNextMS = UINT_MAX;
+                timer->timeNextMS = UINT_MAX; //-V2523
             }
         }
     }
@@ -183,14 +183,14 @@ static void TuneTIM(Timer::Type::E type)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Timer::Disable(Timer::Type::E type)
 {
-    timers[type].timeNextMS = UINT_MAX;
+    timers[type].timeNextMS = UINT_MAX; //-V2523
     timers[type].repeat = false;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static uint NearestTime()
 {
-    uint time = UINT_MAX;
+    uint time = UINT_MAX; //-V2523
 
     for(uint type = 0; type < Timer::Type::Number; type++)
     {
@@ -208,7 +208,7 @@ static void StartTIM(uint timeStopMS)
 {
     StopTIM();
 
-    if(timeStopMS == UINT_MAX)
+    if(timeStopMS == UINT_MAX) //-V2523
     {
         return;
     }
