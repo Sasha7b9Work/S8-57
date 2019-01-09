@@ -27,7 +27,7 @@ static void UpdateCursorsForLook();
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 float Cursors::PosU(Chan::E ch, int numCur)
 {
-    return CURsU_POS(ch, numCur) / (Grid::Bottom() == Grid::FullBottom() ? 1.0f : 2.0f);
+    return CURsU_POS(ch, numCur) / (Grid::Bottom() == Grid::FullBottom() ? 1.0F : 2.0F);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -42,7 +42,7 @@ String Cursors::Voltage(Chan::E source, int numCur)
     float voltage = FPGAMath::VoltageCursor(Cursors::PosU(source, numCur), SET_RANGE(source), SET_RSHIFT(source));
     if (SET_DIVIDER_10(source))
     {
-        voltage *= 10.0f;
+        voltage *= 10.0F;
     }
 
     return ::Voltage(voltage).ToString(true);
@@ -59,7 +59,7 @@ String Cursors::Time(Chan::E source, int numCur)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 float Cursors::PosT(Chan::E ch, int num)
 {
-    float retValue = 0.0f;
+    float retValue = 0.0F;
     std::memcpy(&retValue, &set.curs_posCurT[ch][num], sizeof(float));
     return retValue;
 }
@@ -175,19 +175,19 @@ String Cursors::PercentsU(Chan::E source)
 {
     /// \todo Тут дикая дичь. Эта строчка вызывает HardFault. Возможно, из-за включенного выравнивания Settings. Надо подумать
     // float dPerc = dUperc(source);     
-    float dPerc = 100.0f;
+    float dPerc = 100.0F;
     std::memcpy(&dPerc, &dUperc(source), sizeof(float));
 
     float dValue = std::fabsf(PosU(source, 0) - PosU(source, 1));
-    return String("%s%%", Float(dValue / dPerc * 100.0f).ToString(false, 5).CString());
+    return String("%s%%", Float(dValue / dPerc * 100.0F).ToString(false, 5).CString());
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 String Cursors::PercentsT(Chan::E source)
 {
-    float dPerc = 100.0f;
+    float dPerc = 100.0F;
     std::memcpy(&dPerc, &dTperc(source), sizeof(float));
 
     float dValue = std::fabsf(CURsT_POS(source, 0) - CURsT_POS(source, 1));
-    return String("%s%%", Float(dValue / dPerc * 100.0f).ToString(false, 6).CString());
+    return String("%s%%", Float(dValue / dPerc * 100.0F).ToString(false, 6).CString());
 }

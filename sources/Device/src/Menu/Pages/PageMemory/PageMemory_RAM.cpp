@@ -161,7 +161,7 @@ static bool HandlerKey_RAM(KeyEvent event)
     return true;
 }
 
-DEF_PAGE_4( pageRAM, // -V1027                                                                                                                                   //--- ПАМЯТЬ - ПОСЛЕДНИЕ ---
+DEF_PAGE_4( pageRAM, // -V641 // -V1027                                                                                                                          //--- ПАМЯТЬ - ПОСЛЕДНИЕ ---
     "ПОСЛЕДНИЕ", "LATEST",
     "Переход в режим работы с последними полученными сигналами",
     "Transition to an operating mode with the last received signals",

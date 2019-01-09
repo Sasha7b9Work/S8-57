@@ -40,12 +40,12 @@ float GetStretchADC(Chan::E ch)
         stretch += (*address);
     }
 
-    return stretch * 1e-4f + 1.0f;
+    return stretch * 1e-4F + 1.0F;
 }
 
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------
 void SetStretchADC(Chan::E ch, float kStretch)
 {
-    NRST_STRETCH_ADC(ch, NRST_STRETCH_ADC_TYPE) = (int16)((kStretch - 1.0f) * 1e4f);
+    NRST_STRETCH_ADC(ch, NRST_STRETCH_ADC_TYPE) = (int16)((kStretch - 1.0F) * 1e4F);
 }

@@ -57,6 +57,11 @@ Display::ENumSignalsInSec::E Tables::ENumSignalsInSecToENUM(int numSignalsInSec)
     {
         return Display::ENumSignalsInSec::_25;
     }
+    else
+    {
+        LOG_ERROR("");
+    }
+
     return Display::ENumSignalsInSec::_1;
 }
 

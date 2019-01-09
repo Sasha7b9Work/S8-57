@@ -267,7 +267,7 @@ static bool HandlerKey_Internal(KeyEvent event)
 }
 
 
-DEF_PAGE_5(pageROM,                                                                                                                                               //--- ѕјћя“№ - ¬Ќ”“– «” ---
+DEF_PAGE_5( pageROM, // -V641                                                                                                                                     //--- ѕјћя“№ - ¬Ќ”“– «” ---
     "¬Ќ”“– «”", "INT STORAGE",
     "ѕереход в режим работы с внутренней пам€тью",
     "Transition to an operating mode with internal memory",

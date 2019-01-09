@@ -120,7 +120,7 @@ const Choice *PageFunction::PageFrequencyCounter::GetChoiceNumPeriods()
     return (const Choice *)&cNumPeriods;
 }
 
-DEF_PAGE_5(ppFreqMeter,                                                                                                                                        //--- ‘”Õ ÷»ﬂ - ◊¿—“Œ“ŒÃ≈– ---
+DEF_PAGE_5( ppFreqMeter, // -V641                                                                                                                              //--- ‘”Õ ÷»ﬂ - ◊¿—“Œ“ŒÃ≈– ---
     "◊¿—“Œ“ŒÃ≈–", "FREQ METER",
     "",
     "",

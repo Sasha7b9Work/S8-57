@@ -307,6 +307,10 @@ bool Governor::ProcessKey(KeyEvent event)
             ChangeValue(event.IsUp() ? 1 : -1);
         }
     }
+    else
+    {
+        // остальные случаи не обрабатываем
+    }
     
     return true;
 }

@@ -4,4 +4,4 @@
 #endif
 
 
-volatile int i = 0;
+volatile int i = 0; //-V707

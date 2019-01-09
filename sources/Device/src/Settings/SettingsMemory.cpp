@@ -19,6 +19,10 @@ ENumPointsFPGA::E NumPoints_2_ENumPoints(int numPoints)
     else if (numPoints == 4096)  { return ENumPointsFPGA::_4k; }
     else if (numPoints == 2048)  { return ENumPointsFPGA::_2k; }
     else if (numPoints == 1024)  { return ENumPointsFPGA::_1k; }
+    else
+    {
+        LOG_ERROR("");
+    }
     return ENumPointsFPGA::_512;
 }
 

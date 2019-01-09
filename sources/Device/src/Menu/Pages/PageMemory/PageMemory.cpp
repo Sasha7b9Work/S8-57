@@ -458,7 +458,7 @@ static bool HandlerKey_Drive_Mask(KeyEvent event)
 
 
 /*
-DEF_PAGE_SB(        pppDrive_Mask,                                                                                                                        //--- Память - ВНЕШН ЗУ - МАСКА ---
+DEF_PAGE_SB( pppDrive_Mask,                                                                                                                               //--- Память - ВНЕШН ЗУ - МАСКА ---
     "МАСКА", "MASK",
     "Режим ввода маски для автоматического именования файлов",
     "Input mode mask for automatic file naming",
@@ -473,7 +473,7 @@ DEF_PAGE_SB(        pppDrive_Mask,                                              
 */
 
 
-DEF_PAGE_3(pppDrive_Mask,                                                                                                                                 //--- Память - ВНЕШН ЗУ - МАСКА ---
+DEF_PAGE_3( pppDrive_Mask, // -V641                                                                                                                       //--- Память - ВНЕШН ЗУ - МАСКА ---
     "МАСКА", "MASK",
     "Режим ввода маски для автоматического именования файлов",
     "Input mode mask for automatic file naming",
@@ -485,7 +485,7 @@ DEF_PAGE_3(pppDrive_Mask,                                                       
 
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-DEF_CHOICE_2(       cDrive_Autoconnect,                                                                                                         //--- ПАМЯТЬ - ВНЕШН ЗУ - Автоподключение ---
+DEF_CHOICE_2( cDrive_Autoconnect,                                                                                                               //--- ПАМЯТЬ - ВНЕШН ЗУ - Автоподключение ---
     "Автоподкл.", "AutoConnect",
     "Eсли \"Вкл\", при подключении внешнего накопителя происходит автоматический переход на страницу ПАМЯТЬ - Внешн ЗУ",
     "If \"Enable\", when you connect an external drive is automatically transferred to the page MEMORY - Ext.StorageOld",
@@ -495,7 +495,7 @@ DEF_CHOICE_2(       cDrive_Autoconnect,                                         
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-DEF_PAGE_6( ppDrive,                                                                                                                                              //--- ПАМЯТЬ - ВНЕШН ЗУ ---
+DEF_PAGE_6( ppDrive,  //-V641                                                                                                                                     //--- ПАМЯТЬ - ВНЕШН ЗУ ---
     "ВНЕШН ЗУ", "EXT STORAGE",
     "Работа с внешним запоминающим устройством.",
     "Work with external storage device.",
@@ -509,7 +509,7 @@ DEF_PAGE_6( ppDrive,                                                            
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-DEF_PAGE_4( pageMemory,                                                                                                                                                      //--- ПЯМЯТЬ ---
+DEF_PAGE_4( pageMemory, // -V641                                                                                                                                             //--- ПЯМЯТЬ ---
     "ПАМЯТЬ", "MEMORY",
     "Работа с внешней и внутренней памятью.",
     "Working with external and internal memory.",
@@ -711,7 +711,7 @@ void OnMemExtSetMaskNameRegSet(int angle, int maxIndex)
 
 }
 
-DEF_PAGE_4(pSetName,                                                                         // Страница вызывается для ввода имени файла ///
+DEF_PAGE_4(pSetName, // -V641                                                                                                                // Страница вызывается для ввода имени файла ///
     "", "",
     "",
     "",

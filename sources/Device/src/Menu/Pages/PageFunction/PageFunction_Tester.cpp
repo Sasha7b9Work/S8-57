@@ -100,7 +100,7 @@ static void OnEnterExit_Tester(bool enter)
 }
 
 
-DEF_PAGE_4( pageTester,
+DEF_PAGE_4( pageTester, // -V641
     "реяреп", "TESTER",
     "", "",
     &cControl,
@@ -120,11 +120,11 @@ void PageFunction::PageTester::OnChanged_Control(bool)
 
     if (TESTER_CONTROL_IS_U)
     {
-        items[1] = (Control *)&cStepU;
+        items[1] = (Control *)&cStepU; //-V641
     }
     else
     {
-        items[1] = (Control *)&cStepI;
+        items[1] = (Control *)&cStepI; //-V641
     }
 
     Tester::LoadStep();

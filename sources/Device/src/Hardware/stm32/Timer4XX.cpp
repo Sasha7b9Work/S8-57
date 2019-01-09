@@ -17,6 +17,10 @@ void Timer4XX::Init(TIM_TypeDef *instance, uint prescaler, uint counterMode, uin
     {
         __HAL_RCC_TIM3_CLK_ENABLE();
     }
+    else
+    {
+        LOG_ERROR("");
+    }
 
     handler.Instance = instance;
     handler.Init.Prescaler = prescaler;
@@ -91,5 +95,9 @@ void Timer4XX::DeInit()
     else if (handler.Instance == TIM3)
     {
         __HAL_RCC_TIM3_CLK_DISABLE();
+    }
+    else
+    {
+        LOG_ERROR("");
     }
 }

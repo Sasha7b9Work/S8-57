@@ -155,7 +155,7 @@ static void OnPress_Page(bool enter)
     Device::SetMode(enter ? Device::Mode::Multimeter : Device::Mode::Osci);
 }
 
-DEF_PAGE_3( pageMultimeter,
+DEF_PAGE_3( pageMultimeter, // -V641
     "МУЛЬТИМЕТР", "MULTIMETER",
     "Управление прибором в режиме мультиметра",
     "Instrument control in multimeter mode",
@@ -174,19 +174,23 @@ void PageFunction::PageMultimeter::OnChanged_Mode(bool)
 
     if (MULTI_MEASURE == Multimeter::Measure::VoltageDC)
     {
-        items[1] = (Control *)&cRangesVoltageDC;
+        items[1] = (Control *)&cRangesVoltageDC; //-V641
     }
     else if (MULTI_MEASURE == Multimeter::Measure::VoltageAC)
     {
-        items[1] = (Control *)&cRangesVoltageAC;
+        items[1] = (Control *)&cRangesVoltageAC; //-V641
     }
     else if (MULTI_MEASURE == Multimeter::Measure::CurrentDC || MULTI_MEASURE == Multimeter::Measure::CurrentAC)
     {
-        items[1] = (Control *)&cRangesCurrent;
+        items[1] = (Control *)&cRangesCurrent;  // -V641
     }
     else if (MULTI_MEASURE == Multimeter::Measure::Resistance)
     {
-        items[1] = (Control *)&cRangesResistance;
+        items[1] = (Control *)&cRangesResistance; //-V641
+    }
+    else
+    {
+        LOG_ERROR("");
     }
 
     Multimeter::ChangeMode();
