@@ -231,7 +231,13 @@ float Governor::Step() //-V2506
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Governor::ChangeValue(int delta)
 {
+    if(!IsOpened())
+    {
+        gCurDigit = 0;
+    }
+    
     int oldValue = *cell;
+
     *cell += (int)(Math::Sign(delta) * Math::Pow10(gCurDigit));
 
     LIMITATION(*cell, minValue, maxValue); //-V2516
