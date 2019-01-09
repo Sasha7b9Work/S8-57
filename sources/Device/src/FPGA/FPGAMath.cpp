@@ -12,53 +12,53 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 const float absStepRShift[] =
 {
-    2e-3f   / 20 / STEP_RSHIFT,
-    5e-3f   / 20 / STEP_RSHIFT,
-    10e-3f  / 20 / STEP_RSHIFT,
-    20e-3f  / 20 / STEP_RSHIFT,
-    50e-3f  / 20 / STEP_RSHIFT,
-    100e-3f / 20 / STEP_RSHIFT,
-    200e-3f / 20 / STEP_RSHIFT,
-    500e-3f / 20 / STEP_RSHIFT,
-    1.0f    / 20 / STEP_RSHIFT,
-    2.0f    / 20 / STEP_RSHIFT,
-    5.0f    / 20 / STEP_RSHIFT,
-    10.0f   / 20 / STEP_RSHIFT,
-    20.0f   / 20 / STEP_RSHIFT
+    2e-3F   / 20 / STEP_RSHIFT,
+    5e-3F   / 20 / STEP_RSHIFT,
+    10e-3F  / 20 / STEP_RSHIFT,
+    20e-3F  / 20 / STEP_RSHIFT,
+    50e-3F  / 20 / STEP_RSHIFT,
+    100e-3F / 20 / STEP_RSHIFT,
+    200e-3F / 20 / STEP_RSHIFT,
+    500e-3F / 20 / STEP_RSHIFT,
+    1.0F    / 20 / STEP_RSHIFT,
+    2.0F    / 20 / STEP_RSHIFT,
+    5.0F    / 20 / STEP_RSHIFT,
+    10.0F   / 20 / STEP_RSHIFT,
+    20.0F   / 20 / STEP_RSHIFT
 };
 
 const float absStepTShift[TBase::Number] =
 {
-    /* 2 нс    */ 2e-9f   / 20, 
-    /* 5 нс    */ 5e-9f   / 20, 
-    /* 10 нс   */ 10e-9f  / 20, 
-    /* 20 нс   */ 20e-9f  / 20,
-    /* 50 нс   */ 50e-9f  / 20,   // 1.0  Это коэффициенты для реализации алгоритма прореживания отсчётов
-    /* 100 нс  */ 100e-9f / 20,   // 2.0
-    /* 200 нс  */ 200e-9f / 20,   // 4.0
-    /* 500 нс  */ 500e-9f / 20,   // 10.0
-    /* 1 мкс   */ 1e-6f   / 20,   // 20.0
-    /* 2 мкс   */ 2e-6f   / 20,   // 40.0
-    /* 5 мкс   */ 5e-6f   / 20,   // 100.0
-    /* 10 мкс  */ 10e-6f  / 20,   // 200.0
-    /* 20 мкс  */ 20e-6f  / 20,   // 400.0
-    /* 50 мкс  */ 50e-6f  / 20,   // 1e3
-    /* 100 мкс */ 100e-6f / 20,   // 2e3
-    /* 200 мкс */ 200e-6f / 20,   // 4e3
-    /* 500 мкс */ 500e-6f / 20,   // 10e3
-    /* 1 мс    */ 1e-3f   / 20,   // 20e3
-    /* 2 мс    */ 2e-3f   / 20,   // 40e3
-    /* 5 мс    */ 5e-3f   / 20,   // 100e3
-    /* 10 мс   */ 10e-3f  / 20,   // 200e3
-    /* 20 мс   */ 20e-3f  / 20,   // 400e3
-    /* 50 мс   */ 50e-3f  / 20,   // 1e4
-    /* 100 мс  */ 100e-3f / 20,   // 2e4
-    /* 200 мс  */ 200e-3f / 20,   // 4e4
-    /* 500 мс  */ 500e-3f / 20,   // 10e4
-    /* 1 с     */ 1.0f    / 20,   // 20e4
-    /* 2 с     */ 2.0f    / 20,   // 40e4
-    /* 5 с     */ 5.0f    / 20,   // 100e4
-    /* 10 с    */ 10.0f   / 20    // 200e4
+    /* 2 нс    */ 2e-9F   / 20, 
+    /* 5 нс    */ 5e-9F   / 20, 
+    /* 10 нс   */ 10e-9F  / 20, 
+    /* 20 нс   */ 20e-9F  / 20,
+    /* 50 нс   */ 50e-9F  / 20,   // 1.0  Это коэффициенты для реализации алгоритма прореживания отсчётов
+    /* 100 нс  */ 100e-9F / 20,   // 2.0
+    /* 200 нс  */ 200e-9F / 20,   // 4.0
+    /* 500 нс  */ 500e-9F / 20,   // 10.0
+    /* 1 мкс   */ 1e-6F   / 20,   // 20.0
+    /* 2 мкс   */ 2e-6F   / 20,   // 40.0
+    /* 5 мкс   */ 5e-6F   / 20,   // 100.0
+    /* 10 мкс  */ 10e-6F  / 20,   // 200.0
+    /* 20 мкс  */ 20e-6F  / 20,   // 400.0
+    /* 50 мкс  */ 50e-6F  / 20,   // 1e3
+    /* 100 мкс */ 100e-6F / 20,   // 2e3
+    /* 200 мкс */ 200e-6F / 20,   // 4e3
+    /* 500 мкс */ 500e-6F / 20,   // 10e3
+    /* 1 мс    */ 1e-3F   / 20,   // 20e3
+    /* 2 мс    */ 2e-3F   / 20,   // 40e3
+    /* 5 мс    */ 5e-3F   / 20,   // 100e3
+    /* 10 мс   */ 10e-3F  / 20,   // 200e3
+    /* 20 мс   */ 20e-3F  / 20,   // 400e3
+    /* 50 мс   */ 50e-3F  / 20,   // 1e4
+    /* 100 мс  */ 100e-3F / 20,   // 2e4
+    /* 200 мс  */ 200e-3F / 20,   // 4e4
+    /* 500 мс  */ 500e-3F / 20,   // 10e4
+    /* 1 с     */ 1.0F    / 20,   // 20e4
+    /* 2 с     */ 2.0F    / 20,   // 40e4
+    /* 5 с     */ 5.0F    / 20,   // 100e4
+    /* 10 с    */ 10.0F   / 20    // 200e4
 };
 
 
@@ -66,37 +66,37 @@ const float absStepTShift[TBase::Number] =
 
 DEF_STRUCT(StructInPoints, float) voltsInPoint[Range::Number] =
 {
-    2e-3f   / 20 * Grid::Height() / (MAX_VALUE - MIN_VALUE),    // 2mV
-    5e-3f   / 20 * Grid::Height() / (MAX_VALUE - MIN_VALUE),    // 5mV
-    10e-3f  / 20 * Grid::Height() / (MAX_VALUE - MIN_VALUE),    // 10mV
-    20e-3f  / 20 * Grid::Height() / (MAX_VALUE - MIN_VALUE),    // 20mV
-    50e-3f  / 20 * Grid::Height() / (MAX_VALUE - MIN_VALUE),    // 50mV
-    100e-3f / 20 * Grid::Height() / (MAX_VALUE - MIN_VALUE),    // 100mV
-    200e-3f / 20 * Grid::Height() / (MAX_VALUE - MIN_VALUE),    // 200mV
-    500e-3f / 20 * Grid::Height() / (MAX_VALUE - MIN_VALUE),    // 500mV
-    1.0f    / 20 * Grid::Height() / (MAX_VALUE - MIN_VALUE),    // 1V
-    2.0f    / 20 * Grid::Height() / (MAX_VALUE - MIN_VALUE),    // 2V
-    5.0f    / 20 * Grid::Height() / (MAX_VALUE - MIN_VALUE),    // 5V
-    10.0f   / 20 * Grid::Height() / (MAX_VALUE - MIN_VALUE),    // 10V
-    20.0f   / 20 * Grid::Height() / (MAX_VALUE - MIN_VALUE)     // 20V
+    2e-3F   / 20 * Grid::Height() / (MAX_VALUE - MIN_VALUE),    // 2mV
+    5e-3F   / 20 * Grid::Height() / (MAX_VALUE - MIN_VALUE),    // 5mV
+    10e-3F  / 20 * Grid::Height() / (MAX_VALUE - MIN_VALUE),    // 10mV
+    20e-3F  / 20 * Grid::Height() / (MAX_VALUE - MIN_VALUE),    // 20mV
+    50e-3F  / 20 * Grid::Height() / (MAX_VALUE - MIN_VALUE),    // 50mV
+    100e-3F / 20 * Grid::Height() / (MAX_VALUE - MIN_VALUE),    // 100mV
+    200e-3F / 20 * Grid::Height() / (MAX_VALUE - MIN_VALUE),    // 200mV
+    500e-3F / 20 * Grid::Height() / (MAX_VALUE - MIN_VALUE),    // 500mV
+    1.0F    / 20 * Grid::Height() / (MAX_VALUE - MIN_VALUE),    // 1V
+    2.0F    / 20 * Grid::Height() / (MAX_VALUE - MIN_VALUE),    // 2V
+    5.0F    / 20 * Grid::Height() / (MAX_VALUE - MIN_VALUE),    // 5V
+    10.0F   / 20 * Grid::Height() / (MAX_VALUE - MIN_VALUE),    // 10V
+    20.0F   / 20 * Grid::Height() / (MAX_VALUE - MIN_VALUE)     // 20V
 };
 
 /// Столько вольт в одной точке экрана
 static const float voltsInPixel[] =
 {
-    2e-3f   / GRID_DELTA,   // 2mV
-    5e-3f   / GRID_DELTA,   // 5mV
-    10e-3f  / GRID_DELTA,   // 10mV
-    20e-3f  / GRID_DELTA,   // 20mV
-    50e-3f  / GRID_DELTA,   // 50mV
-    100e-3f / GRID_DELTA,   // 100mV
-    200e-3f / GRID_DELTA,   // 200mV
-    500e-3f / GRID_DELTA,   // 500mV
-    1.0f    / GRID_DELTA,   // 1V
-    2.0f    / GRID_DELTA,   // 2V
-    5.0f    / GRID_DELTA,   // 5V
-    10.0f   / GRID_DELTA,   // 10V
-    20.0f   / GRID_DELTA    // 20V
+    2e-3F   / GRID_DELTA,   // 2mV
+    5e-3F   / GRID_DELTA,   // 5mV
+    10e-3F  / GRID_DELTA,   // 10mV
+    20e-3F  / GRID_DELTA,   // 20mV
+    50e-3F  / GRID_DELTA,   // 50mV
+    100e-3F / GRID_DELTA,   // 100mV
+    200e-3F / GRID_DELTA,   // 200mV
+    500e-3F / GRID_DELTA,   // 500mV
+    1.0F    / GRID_DELTA,   // 1V
+    2.0F    / GRID_DELTA,   // 2V
+    5.0F    / GRID_DELTA,   // 5V
+    10.0F   / GRID_DELTA,   // 10V
+    20.0F   / GRID_DELTA    // 20V
 };
 
 static const int voltsInPixelInt[] =   // Коэффициент 20000
@@ -126,6 +126,7 @@ float FPGAMath::VoltageCursor(float shiftCurU, Range::E range, uint16 rShift)
 int FPGAMath::RShift2Rel(float rShiftAbs, Range::E range)
 {
     int retValue = RShift::ZERO + (int)(rShiftAbs / absStepRShift[range]);
+
     if (retValue < RShift::MIN)
     {
         retValue = RShift::MIN;
@@ -134,6 +135,11 @@ int FPGAMath::RShift2Rel(float rShiftAbs, Range::E range)
     {
         retValue = RShift::MAX;
     }
+    else
+    {
+        // здесь ничего делать не нужно
+    }
+
     return retValue;
 }
 
@@ -149,8 +155,8 @@ void FPGAMath::PointsRel2Voltage(const uint8 *points, int numPoints, Range::E ra
     int voltInPixel = voltsInPixelInt[range];
     float maxVoltsOnScreen = MaxVoltageOnScreen(range);
     float rShiftAbs = RShift2Abs(rShift, range);
-    int diff = (int)((MIN_VALUE * voltInPixel) + (maxVoltsOnScreen + rShiftAbs) * 20e3f);
-    float koeff = 1.0f / 20e3f;
+    int diff = (int)((MIN_VALUE * voltInPixel) + (maxVoltsOnScreen + rShiftAbs) * 20e3F);
+    float koeff = 1.0F / 20e3F;
     for (int i = 0; i < numPoints; i++)
     {
         voltage[i] = (points[i] * voltInPixel - diff) * koeff; //-V636
@@ -187,7 +193,7 @@ void FPGAMath::PointsVoltage2Rel(const float *voltage, int numPoints, Range::E r
 {
     float maxVoltOnScreen = MaxVoltageOnScreen(range);
     float rShiftAbs = RShift2Abs(rShift, range);
-    float voltInPixel = 1.0f / (voltsInPoint[range].val / ((MAX_VALUE - MIN_VALUE) / 200.0f));
+    float voltInPixel = 1.0F / (voltsInPoint[range].val / ((MAX_VALUE - MIN_VALUE) / 200.0F));
 
     float add = maxVoltOnScreen + rShiftAbs;
 
@@ -196,6 +202,7 @@ void FPGAMath::PointsVoltage2Rel(const float *voltage, int numPoints, Range::E r
     for (int i = 0; i < numPoints; i++)
     {
         int value = (int)(voltage[i] * voltInPixel + delta);
+
         if (value < 0)
         {
             points[i] = 0;
@@ -206,6 +213,11 @@ void FPGAMath::PointsVoltage2Rel(const float *voltage, int numPoints, Range::E r
             points[i] = 255;
             continue;
         }
+        else
+        {
+            // здесь ничего не делаем
+        }
+
         points[i] = (uint8)value;
     }
 }
@@ -252,12 +264,13 @@ static float const *Koeff(int numPoints)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void FPGAMath::CalculateFFT(float *dataR, int numPoints, float *result, float *freq0, float *density0, float *freq1, float *density1, int *y0, int *y1)
 {
-    float scale = 1.0f / absStepTShift[SET_TBASE] / 1024.0f;
+    float scale = 1.0F / absStepTShift[SET_TBASE] / 1024.0F;
 
-    float koeff = 1024.0f / numPoints;
+    float koeff = 1024.0F / numPoints;
 
     *freq0 = scale * FFT_POS_CURSOR_0 * koeff;
     *freq1 = scale * FFT_POS_CURSOR_1 * koeff;
+
     if (SET_PEAKDET)
     {
         *freq0 *= 2;
@@ -266,12 +279,13 @@ void FPGAMath::CalculateFFT(float *dataR, int numPoints, float *result, float *f
 
     for (int i = 0; i < numPoints; i++)
     {
-        result[i] = 0.0f;
+        result[i] = 0.0F;
     }
 
     MultiplyToWindow(dataR, numPoints);
 
     int logN = 8;
+
     if (numPoints == 512)
     {
         logN = 9;
@@ -280,6 +294,11 @@ void FPGAMath::CalculateFFT(float *dataR, int numPoints, float *result, float *f
     {
         logN = 10;
     }
+    else
+    {
+        // другое количество точек не обрабатываем
+    }
+
     static const float Rcoef[14] =
     {
         -1.0000000000000000F, 0.0000000000000000F, 0.7071067811865475F,
@@ -306,8 +325,8 @@ void FPGAMath::CalculateFFT(float *dataR, int numPoints, float *result, float *f
         float rw = Rcoef[logN - n];
         float iw = Icoef[logN - n];
         int in = ie >> 1;
-        float ru = 1.0f;
-        float iu = 0.0f;
+        float ru = 1.0F;
+        float iu = 0.0F;
         for (int j = 0; j < in; j++)
         {
             for (int i = j; i < numPoints; i += ie)
@@ -361,7 +380,7 @@ void FPGAMath::CalculateFFT(float *dataR, int numPoints, float *result, float *f
         result[i] = std::sqrtf(dataR[i] * dataR[i] + result[i] * result[i]);
     }
 
-    result[0] = 0.0f;       /// \todo нулевая составляющая мешает постоянно. надо её убрать
+    result[0] = 0.0F;       /// \todo нулевая составляющая мешает постоянно. надо её убрать
 
     Normalize(result, 256);
 
@@ -376,6 +395,7 @@ void FPGAMath::CalculateFFT(float *dataR, int numPoints, float *result, float *f
 #else
             result[i] = Log10[(int)(result[i] * 10000)];
 #endif
+
             if (i == FFT_POS_CURSOR_0)
             {
                 *density0 = result[i];
@@ -384,11 +404,17 @@ void FPGAMath::CalculateFFT(float *dataR, int numPoints, float *result, float *f
             {
                 *density1 = result[i];
             }
+            else
+            {
+                // остальные варианты не обрабатываем
+            }
+
             if (result[i] < minDB)
             {
                 result[i] = minDB;
             }
-            result[i] = 1.0f - result[i] / minDB;
+
+            result[i] = 1.0F - result[i] / minDB;
         }
     }
     else
@@ -411,19 +437,20 @@ void FPGAMath::MultiplyToWindow(float *data, int numPoints)
         data[i] *= koeff[i];
     }
 #else
+
     if (WINDOW_FFT_IS_HAMMING)
     {
         for (int i = 0; i < numPoints; i++)
         {
-            data[i] *= 0.53836f - 0.46164f * std::cosf(2 * PI * i / (numPoints - 1));
+            data[i] *= 0.53836F - 0.46164F * std::cosf(2 * PI * i / (numPoints - 1));
         }
     }
     else if (WINDOW_FFT_IS_BLACKMAN)
     {
-        float alpha = 0.16f;
-        float a0 = (1.0f - alpha) / 2.0f;
-        float a1 = 0.5f;
-        float a2 = alpha / 2.0f;
+        float alpha = 0.16F;
+        float a0 = (1.0F - alpha) / 2.0F;
+        float a1 = 0.5F;
+        float a2 = alpha / 2.0F;
         for (int i = 0; i < numPoints; i++)
         {
             data[i] *= a0 - a1 * std::cosf(2 * PI * i / (numPoints - 1)) + a2 * std::cosf(4 * PI * i / (numPoints - 1));
@@ -433,9 +460,14 @@ void FPGAMath::MultiplyToWindow(float *data, int numPoints)
     {
         for (int i = 0; i < numPoints; i++)
         {
-            data[i] *= 0.5f * (1.0f - std::cosf(2.0f * PI * i / (numPoints - 1.0f)));
+            data[i] *= 0.5F * (1.0F - std::cosf(2.0F * PI * i / (numPoints - 1.0F)));
         }
     }
+    else
+    {
+        // а других-то окон и нету
+    }
+
 #endif
 }
 
@@ -469,10 +501,10 @@ float FPGAMath::MaxVoltageOnScreen(Range::E range)
 {
     DEF_STRUCT(StructRange, float) table[Range::Number] =
     {
-        2e-3f, 5e-3f, 10e-3f, 20e-3f, 50e-3f, 100e-3f, 200e-3f, 500e-3f, 1.0f, 2.0f, 5.0f, 10.0f, 20.0f
+        2e-3F, 5e-3F, 10e-3F, 20e-3F, 50e-3F, 100e-3F, 200e-3F, 500e-3F, 1.0F, 2.0F, 5.0F, 10.0F, 20.0F
     };
 
-    return table[range].val * 5.0f;
+    return table[range].val * 5.0F;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
