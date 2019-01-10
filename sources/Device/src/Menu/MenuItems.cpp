@@ -553,3 +553,19 @@ bool Control::IsPage() const
 {
     return (type == Control::Type::Page);
 }
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+bool Control::ExistKeeper(const PageBase *_keeper)
+{
+    const PageBase *item = keeper;
+    while (item)
+    {
+        if (item == _keeper)
+        {
+            return true;
+        }
+        item = item->keeper;
+    }
+
+    return false;
+}

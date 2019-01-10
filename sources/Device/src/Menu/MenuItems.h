@@ -83,6 +83,10 @@ public:
     int Width() { return 320 / 5; };
     /// Возвращает true, если тип контрола - Page
     bool IsPage() const;
+    /// Возвращает адрес родителя
+    const PageBase *Keeper() { return keeper; }
+    /// Возвращает true, если в древе предков стоит keeper
+    bool ExistKeeper(const PageBase *keeper);
 
     /// Разные виды пунктов меню
     struct Type

@@ -25,6 +25,12 @@ static Device::Mode::E currentMode = Device::Mode::Osci;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/// Настроить устройство в соответствии с установленным режимом
+static void SetCurrentMode();
+/// Установить режим работы mode, если открыта страница page или в числе предков открытой страницы есть page
+static bool SetCurrentMode(const PageBase *page, Device::Mode::E mode);
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void Device::Init()
 {
     Hardware::Init();
@@ -53,15 +59,36 @@ void Device::Init()
 
     FDrive::Init();
 
-    if (Menu::OpenedItem() == (Page *)PageFunction::PageMultimeter::pointer)
+    SetCurrentMode();
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+static void SetCurrentMode()
+{
+    if (!SetCurrentMode(PageFunction::PageMultimeter::pointer, Device::Mode::Multimeter))
     {
-        SetMode(Mode::Multimeter);
+        if (!SetCurrentMode(PageFunction::PageTester::pointer, Device::Mode::Tester))
+        {
+            if (!SetCurrentMode(PageFunction::PageRecorder::pointer, Device::Mode::Recorder))
+            {
+
+            }
+        }
+    }
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+static bool SetCurrentMode(const PageBase *page, Device::Mode::E mode)
+{
+    Control *opened = Menu::OpenedItem();
+
+    if (opened == (Page *)page || opened->ExistKeeper(page))
+    {
+        SetMode(mode);
+        return true;
     }
 
-    if (Menu::OpenedItem() == (Page *)PageFunction::PageTester::pointer)
-    {
-        SetMode(Mode::Tester);
-    }
+    return false;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
