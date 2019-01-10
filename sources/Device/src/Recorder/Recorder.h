@@ -34,7 +34,7 @@ namespace Recorder
         } value;
     };
 
-    static void Init();
+    //static void Init();
 
     class Graphics
     {

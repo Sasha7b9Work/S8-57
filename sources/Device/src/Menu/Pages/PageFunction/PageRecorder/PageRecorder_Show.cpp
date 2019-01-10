@@ -49,14 +49,15 @@ DEF_BUTTON( bPrev,                                                              
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-DEF_PAGE_3( pageShow, // -V641 // -V1027                                                                                                           //--- тсмйжхъ - пецхярпюрнп - опнялнрп ---
+DEF_PAGE_4( pageShow, // -V641 // -V1027                                                                                                           //--- тсмйжхъ - пецхярпюрнп - опнялнрп ---
     "опнялнрп", "VIEW",
     "оПНЯЛНРП ГЮОХЯЮММШУ ДЮММШУ",
     "View recorded data",
-    &cSource,       ///< тсмйжхъ - пецхярпюрнп - опнялнрп - хЯРНВМХЙ
-    &bNext,         ///< тсмйжхъ - пецхярпюрнп - опнялнрп - яКЕДСЧЫХИ
-    &bPrev,         ///< тсмйжхъ - пецхярпюрнп - опнялнрп - оПЕДШДСЫХИ
-    Page::Name::Function_Recorder_Play, PageFunction::PageRecorder::pointer, FuncActive, EmptyPressPage, FuncDrawPage, FuncRegSetPage
+    &cSource,                                                       ///< тсмйжхъ - пецхярпюрнп - опнялнрп - хЯРНВМХЙ
+    &bNext,                                                         ///< тсмйжхъ - пецхярпюрнп - опнялнрп - яКЕДСЧЫХИ
+    &bPrev,                                                         ///< тсмйжхъ - пецхярпюрнп - опнялнрп - оПЕДШДСЫХИ
+    PageFunction::PageRecorder::PageShow::PageOperations::pointer,  ///< тсмйжхъ - пецхярпюрнп - опнялнрп - ноепюжхх
+    Page::Name::Function_Recorder_Show, PageFunction::PageRecorder::pointer, FuncActive, EmptyPressPage, FuncDrawPage, FuncRegSetPage
 )
 
 const PageBase *PageFunction::PageRecorder::PageShow::pointer = &pageShow;
