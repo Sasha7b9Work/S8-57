@@ -121,7 +121,7 @@ DEF_PAGE_2( ppCalibrator, // -V641 // -V1027                                    
     "Control of the calibrator and calibration of an oscillograph",
     &cCalibrator_Calibrator,     // ÑÅĞÂÈÑ - ÊÀËÈÁĞÀÒÎĞ - Êàëèáğàòîğ
     &bCalibrator_Calibrate,      // ÑÅĞÂÈÑ - ÊÀËÈÁĞÀÒÎĞ - Êàëèáğîâàòü
-    Page::Name::Service_Calibrator, &pService, FuncActive, EmptyPressPage, FuncDrawPage, FuncRegSetPage
+    Page::Name::Service_Calibrator, &pService, FuncActive, FuncPressPage, FuncDrawPage, FuncRegSetPage
 )
 
 #ifdef OLD_RECORDER
@@ -579,7 +579,7 @@ DEF_PAGE_2( ppSound, // -V641 // -V1027                                         
     "In this menu, you can adjust the volume",
     &cSound_Enable,  // ÑÅĞÂÈÑ - ÇÂÓÊ - Çâóê
     &gSound_Volume,  // ÑÅĞÂÈÑ - ÇÂÓÊ - Ãğîìêîñòü
-    Page::Name::Service_Sound, &pService, FuncActive, EmptyPressPage, FuncDrawPage, FuncRegSetPage
+    Page::Name::Service_Sound, &pService, FuncActive, FuncPressPage, FuncDrawPage, FuncRegSetPage
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -624,7 +624,7 @@ DEF_PAGE_2( ppRTC, // -V641 // -V1027                                           
     "Set and setup time",
     &tRTC_Time,          // ÑÅĞÂÈÑ - ÂĞÅÌß - Âğåìÿ
     &tRTC_Correction,    // CÅĞÂÈÑ - ÂĞÅÌß - Êîğğåêöèÿ
-    Page::Name::Service_RTC, &pService, FuncActive, EmptyPressPage, FuncDrawPage, FuncRegSetPage
+    Page::Name::Service_RTC, &pService, FuncActive, FuncPressPage, FuncDrawPage, FuncRegSetPage
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -720,7 +720,7 @@ DEF_PAGE_9( pService, // -V641 // -V1027                                        
     &ppRTC,                 ///< ÑÅĞÂÈÑ - ÂĞÅÌß
     &cLanguage,             ///< ÑÅĞÂÈÑ - ßçûê
     &ppInformation,         ///< ÑÅĞÂÈÑ - ÈÍÔÎĞÌÀÖÈß
-    Page::Name::Service, Menu::pageMain, FuncActive, EmptyPressPage, FuncDrawPage, FuncRegSetPage
+    Page::Name::Service, Menu::pageMain, FuncActive, FuncPressPage, FuncDrawPage, FuncRegSetPage
 )
 
 

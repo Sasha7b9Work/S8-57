@@ -86,5 +86,5 @@ DEF_PAGE_3(pageAccum, // -V641 // -V1027                                        
     &cAccum_Num,                          ///< ÄÈÑÏËÅÉ - ÍÀÊÎÏËÅÍÈÅ - Êîëè÷åñòâî
     &cAccum_Mode,                         ///< ÄÈÑÏËÅÉ - ÍÀÊÎÏËÅÍÈÅ - Ðåæèì
     &bAccum_Clear,                        ///< ÄÈÑÏËÅÉ - ÍÀÊÎÏËÅÍÈÅ - Î÷èñòèòü
-    Page::Name::Display_Accumulation, PageDisplay::pointer, IsActive_Accum, EmptyPressPage, FuncDrawPage, FuncRegSetPage
+    Page::Name::Display_Accumulation, PageDisplay::pointer, IsActive_Accum, FuncPressPage, FuncDrawPage, FuncRegSetPage
 )

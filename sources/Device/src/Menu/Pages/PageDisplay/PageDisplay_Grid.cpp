@@ -52,5 +52,5 @@ DEF_PAGE_2( pageGrid, // -V641 // -V1027                                        
     "Contains settings of display of a coordinate Grid::",
     &cType,                    ///< ÄÈÑÏËÅÉ - ÑÅÒÊÀ - Òèï
     &gBrightness,              ///< ÄÈÑÏËÅÉ - ÑÅÒÊÀ - ßðêîñòü
-    Page::Name::Display_Grid, PageDisplay::pointer, FuncActive, EmptyPressPage, FuncDrawPage, FuncRegSetPage
+    Page::Name::Display_Grid, PageDisplay::pointer, FuncActive, FuncPressPage, FuncDrawPage, FuncRegSetPage
 )

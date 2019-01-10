@@ -4,7 +4,7 @@
 #define FuncDrawPage        EmptyFuncVV
 #define FuncActive          EmptyFuncBtV
 #define FuncPress           EmptyFuncVV
-#define EmptyPressPage      EmptyFuncVB
+#define FuncPressPage       EmptyFuncVB
 #define FuncChanged         EmptyFuncVV
 #define FuncChangedChoice   EmptyFuncVB
 #define FuncBeforeDraw      EmptyFuncVV

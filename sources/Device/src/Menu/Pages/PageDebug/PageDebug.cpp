@@ -83,7 +83,7 @@ static void OnChanged_ADC_Balance_ShiftA()
     NRST_BALANCE_ADC_A = shiftADCA;
 }
 
-DEF_GOVERNOR(       gADC_Balance_ShiftA,                                                                 //--- ОТЛАДКА - АЦП - БАЛАНС - Смещение 1 ---
+DEF_GOVERNOR( gADC_Balance_ShiftA,                                                                                                              //--- ОТЛАДКА - АЦП - БАЛАНС - Смещение 1 ---
     "Смещение 1", "Offset 1",
     "",
     "",
@@ -96,7 +96,7 @@ static void OnChanged_ADC_Balance_ShiftB()
     NRST_BALANCE_ADC_B = shiftADCB;
 }
 
-DEF_GOVERNOR(       gADC_Balance_ShiftB,                                                                 //--- ОТЛАДКА - АЦП - БАЛАНС - Смещение 2 ---
+DEF_GOVERNOR( gADC_Balance_ShiftB,                                                                                                              //--- ОТЛАДКА - АЦП - БАЛАНС - Смещение 2 ---
     "Смещение 2", "Offset 2",
     "",
     "",
@@ -111,7 +111,7 @@ DEF_PAGE_3( pppADC_Balance, // -V641                                            
     &cADC_Balance_Mode,      // ОТЛАДКА - АЦП - БАЛАНС - Режим
     &gADC_Balance_ShiftA,    // ОТЛАДКА - АЦП - БАЛАНС - Смещение 1
     &gADC_Balance_ShiftB,    // ОТЛАДКА - АЦП - БАЛАНС - Смещение 2
-    Page::Name::Debug_ADC_Balance, &ppADC, FuncActive, EmptyPressPage, FuncDrawPage, FuncRegSetPage
+    Page::Name::Debug_ADC_Balance, &ppADC, FuncActive, FuncPressPage, FuncDrawPage, FuncRegSetPage
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -249,7 +249,7 @@ DEF_PAGE_3( pppADC_Stretch, // -V641                                            
     &cADC_Stretch_Mode,      // ОТЛАДКА - АЦП - РАСТЯЖКА - Режим
     &gADC_Stretch_A,         // ОТЛАДКА - АЦП - РАСТЯЖКА - Растяжка 1к
     &gADC_Stretch_B,
-    Page::Name::Debug_ADC_Stretch, &ppADC, FuncActive, EmptyPressPage, FuncDrawPage, FuncRegSetPage
+    Page::Name::Debug_ADC_Stretch, &ppADC, FuncActive, FuncPressPage, FuncDrawPage, FuncRegSetPage
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -343,7 +343,7 @@ DEF_PAGE_7( pppADC_Shift, // -V641  // -V1027                                   
     &gADC_Shift_B5mV,    // ОТЛАДКА - АЦП - ДОП СМЕЩ - См 2к 5мВ пост
     &gADC_Shift_A10mV,   // ОТЛАДКА - АЦП - ДОП СМЕЩ - См 1к 10мВ пост
     &gADC_Shift_B10mV,   // ОТЛАДКА - АЦП - ДОП СМЕЩ - См 2к 10мВ пост
-    Page::Name::Debug_ADC_Shift, &ppADC, FuncActive, EmptyPressPage, FuncDrawPage, FuncRegSetPage
+    Page::Name::Debug_ADC_Shift, &ppADC, FuncActive, FuncPressPage, FuncDrawPage, FuncRegSetPage
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -354,7 +354,7 @@ DEF_PAGE_3( ppADC, // -V641                                                     
     &pppADC_Balance, // ОТЛАДКА - АЦП - БАЛАНС
     &pppADC_Stretch, // ОТЛАДКА - АЦП - РАСТЯЖКА
     &pppADC_Shift,   // ОТЛАДКА - АЦП - ДОП СМЕЩ
-    Page::Name::Debug_ADC, &pageDebug, FuncActive, EmptyPressPage, FuncDrawPage, FuncRegSetPage
+    Page::Name::Debug_ADC, &pageDebug, FuncActive, FuncPressPage, FuncDrawPage, FuncRegSetPage
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -404,7 +404,7 @@ DEF_PAGE_2( ppChannels, // -V641                                                
     "",
     &cChannels_BandwidthA,   // ОТЛАДКА - КАНАЛЫ - Полоса 1
     &cChannels_BandwidthB,   // ОТЛАДКА - КАНАЛЫ - Полоса 2
-    Page::Name::Debug_Channels, &pageDebug, FuncActive, EmptyPressPage, FuncDrawPage, FuncRegSetPage
+    Page::Name::Debug_Channels, &pageDebug, FuncActive, FuncPressPage, FuncDrawPage, FuncRegSetPage
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -795,5 +795,5 @@ DEF_PAGE_5( pageDebug, // -V641                                                 
 //    &bSaveFirmware,             ///< ОТЛАДКА - Сохр. прошивку
 //    &ppSerialNumber,            ///< ОТЛАДКА - С/Н
 //    &bEraseData,                ///< ОТЛАДКА - Стереть данные
-    Page::Name::Debug, Menu::pageMain, FuncActive, EmptyPressPage, FuncDrawPage, FuncRegSetPage
+    Page::Name::Debug, Menu::pageMain, FuncActive, FuncPressPage, FuncDrawPage, FuncRegSetPage
 )

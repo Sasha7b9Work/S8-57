@@ -58,7 +58,7 @@ DEF_PAGE_5( pageShow, // -V641 // -V1027                                        
     &bPrev,                                                         ///< ÔÓÍÊÖÈß - ÐÅÃÈÑÒÐÀÒÎÐ - ÏÐÎÑÌÎÒÐ - Ïðåäûäóùèé
     PageFunction::PageRecorder::PageShow::PageOperations::pointer,  ///< ÔÓÍÊÖÈß - ÐÅÃÈÑÒÐÀÒÎÐ - ÏÐÎÑÌÎÒÐ - ÎÏÅÐÀÖÈÈ
     PageFunction::PageRecorder::PageShow::PageView::pointer,        ///< ÔÓÍÊÖÈß - ÐÅÃÈÑÒÐÀÒÎÐ - ÏÐÎÑÌÒÎÐ - ÏÐÎÑÌÎÒÐ
-    Page::Name::Function_Recorder_Show, PageFunction::PageRecorder::pointer, FuncActive, EmptyPressPage, FuncDrawPage, FuncRegSetPage
+    Page::Name::Function_Recorder_Show, PageFunction::PageRecorder::pointer, FuncActive, FuncPressPage, FuncDrawPage, FuncRegSetPage
 )
 
 const PageBase *PageFunction::PageRecorder::PageShow::pointer = &pageShow;

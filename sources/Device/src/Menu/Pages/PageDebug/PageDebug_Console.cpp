@@ -186,7 +186,7 @@ DEF_PAGE_12( pageRegisters, // -V641                                            
     &cRegisters_ChanParamB,     ///< ÎÒËÀÄÊÀ - ÊÎÍÑÎËÜ - ÐÅÃÈÑÒÐÛ - Ïàðàì. êàí. 2
     &cRegisters_TBase,          ///< ÎÒËÀÄÊÀ - ÊÎÍÑÎËÜ - ÐÅÃÈÑÒÐÛ - ÂÐÅÌß/ÄÅË
     &cRegisters_TShift,         ///< ÎÒËÀÄÊÀ - ÊÎÍÑÎËÜ - ÐÅÃÈÑÒÐÛ - Ò ñì.
-    Page::Name::Debug_Console_Registers, &pageConsole, FuncActive, EmptyPressPage, FuncDrawPage, FuncRegSetPage
+    Page::Name::Debug_Console_Registers, &pageConsole, FuncActive, FuncPressPage, FuncDrawPage, FuncRegSetPage
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -212,6 +212,6 @@ DEF_PAGE_5( pageConsole, // -V641 // -V1027                                     
     &cModeStop,         ///< ÎÒËÀÄÊÀ - ÊÎÍÑÎËÜ - Ðåæ. îñòàíîâà
     &pageRegisters,     ///< ÎÒËÀÄÊÀ - ÊÎÍÑÎËÜ - ÐÅÃÈÑÒÐÛ
     &bSizeSettings,     ///< ÎÒËÀÄÊÀ - ÊÎÍÑÎËÜ - Ðàçìåð íàñòðîåê
-    Page::Name::Debug_Console, PageDebug::pointer, FuncActive, EmptyPressPage, FuncDrawPage, FuncRegSetPage
+    Page::Name::Debug_Console, PageDebug::pointer, FuncActive, FuncPressPage, FuncDrawPage, FuncRegSetPage
 )
 

@@ -245,7 +245,6 @@ public:
             Number,
             NoPage
         } value;
-        //Name(uint8 v) : value((E)v) {};
     };
 
     Page::Name::E GetName() const;     ///< Возвращает имя страницы page

@@ -112,7 +112,7 @@ DEF_PAGE_SB(        pHelp,                                                      
     0,
     &sbHelpParagraphPrev,
     &sbHelpParagraphNext,
-    Page::Name::SB_Help, Menu::pageMain, FuncActive, EmptyPressPage, HelpContent_Draw, HandlerKey_Help
+    Page::Name::SB_Help, Menu::pageMain, FuncActive, FuncPressPage, HelpContent_Draw, HandlerKey_Help
 )
 */
 
@@ -124,5 +124,5 @@ DEF_PAGE_4( pHelp, // -V641 // -V1027                                           
     &sbHelpParagraphLeave,
     &sbHelpParagraphPrev,
     &sbHelpParagraphNext,
-    Page::Name::SB_Help, Menu::pageMain, FuncActive, EmptyPressPage, HelpContent_Draw, HandlerKey_Help
+    Page::Name::SB_Help, Menu::pageMain, FuncActive, FuncPressPage, HelpContent_Draw, HandlerKey_Help
 )

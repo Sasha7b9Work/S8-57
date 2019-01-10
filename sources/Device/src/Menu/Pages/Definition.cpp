@@ -42,7 +42,7 @@ DEF_PAGE_10(page,                                                               
     PageService::pointer,   // —≈–¬»—
     //pHelp,                // œŒÃŒŸ‹
     PageDebug::pointer,     // Œ“À¿ƒ ¿
-    Page::Name::Main, 0, FuncActive, EmptyPressPage, FuncDrawPage, FuncRegSetPage
+    Page::Name::Main, 0, FuncActive, FuncPressPage, FuncDrawPage, FuncRegSetPage
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

@@ -119,5 +119,5 @@ DEF_PAGE_2( pageTune, // -V641 // -V1027
     "Transition to the fine tuning mode of the number and types of measurements",
     &bTune_Markers,
     &bTune_Settings,
-    Page::Name::Measures_Auto_Tune, PageMeasures::PageAuto::pointer, IsActive_Tune, EmptyPressPage, FuncDrawPage, HandlerKey_Tune
+    Page::Name::Measures_Auto_Tune, PageMeasures::PageAuto::pointer, IsActive_Tune, FuncPressPage, FuncDrawPage, HandlerKey_Tune
 )

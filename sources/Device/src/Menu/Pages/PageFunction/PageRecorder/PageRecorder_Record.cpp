@@ -29,7 +29,7 @@ DEF_PAGE_1( pageRecord, // -V641 // -V1027                                      
     "Выбор места хранения данных",
     "Choosing a storage location",
     &cDestination,        ///< ФУНКЦИЯ - РЕГИСТРАТОР - ЗАПИСЬ - Сохранять в
-    Page::Name::Function_Recorder_Record, PageFunction::PageRecorder::pointer, FuncActive, EmptyPressPage, FuncDrawPage, FuncRegSetPage
+    Page::Name::Function_Recorder_Record, PageFunction::PageRecorder::pointer, FuncActive, FuncPressPage, FuncDrawPage, FuncRegSetPage
 )
 
 const PageBase *PageFunction::PageRecorder::PageRecord::pointer = &pageRecord;

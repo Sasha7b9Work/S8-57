@@ -505,7 +505,7 @@ DEF_PAGE_6( ppDrive,  //-V641                                                   
     &cDrive_SaveAs,          ///< ÏÀÌßÒÜ - ÂÍÅØÍ ÇÓ - Ñîõðàíÿòü êàê
     &cDrive_ModeBtnMemory,   ///< ÏÀÌßÒÜ - ÂÍÅØÍ ÇÓ - Ðåæ êí ÏÀÌßÒÜ
     &cDrive_Autoconnect,     ///< ÏÀÌßÒÜ - ÂÍÅØÍ ÇÓ - Àâòîïîäêëþ÷åíèå
-    Page::Name::Memory_Drive, &pageMemory, FuncActive, EmptyPressPage, FuncDrawPage, FuncRegSetPage
+    Page::Name::Memory_Drive, &pageMemory, FuncActive, FuncPressPage, FuncDrawPage, FuncRegSetPage
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -517,7 +517,7 @@ DEF_PAGE_4( pageMemory, // -V641                                                
     PageMemory::PageRAM::pointer,      ///< ÏÀÌßÒÜ - ÏÎÑËÅÄÍÈÅ
     PageMemory::PageROM::pointer,      ///< ÏÀÌßÒÜ - ÂÍÓÒÐ ÇÓ
     &ppDrive,                           ///< ÏÀÌßÒÜ - ÂÍÅØÍ ÇÓ
-    Page::Name::Memory, Menu::pageMain, FuncActive, EmptyPressPage, FuncDrawPage, FuncRegSetPage
+    Page::Name::Memory, Menu::pageMain, FuncActive, FuncPressPage, FuncDrawPage, FuncRegSetPage
 )
 
 void PageMemory::SaveSignalToFlashDrive()
@@ -719,5 +719,5 @@ DEF_PAGE_4(pSetName, // -V641                                                   
     &bSetName_Backspace,    // ÂÂÎÄ ÈÌÅÍÈ ÔÀÉËÀ - Backspace
     &bSetName_Insert,       // ÂÂÎÄ ÈÌÅÍÈ ÔÀÉËÀ - Âñòàâèòü
     &bSetName_Save,         // ÂÂÎÄ ÈÌÅÍÈ ÔÀÉËÀ - Ñîõðàíèòü
-    Page::Name::SB_Memory_SetName, 0, FuncActive, EmptyPressPage, FuncDrawPage, HandlerKey_SetName
+    Page::Name::SB_Memory_SetName, 0, FuncActive, FuncPressPage, FuncDrawPage, HandlerKey_SetName
 )

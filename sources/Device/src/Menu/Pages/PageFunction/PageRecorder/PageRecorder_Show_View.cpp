@@ -20,14 +20,24 @@ DEF_CHOICE_2( cMove,                                                            
     RECORDER_AXIS_MOVE, pageView, FuncActive, FuncChangedChoice, FuncDraw
 )
 
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+DEF_CHOICE_2( cZoom,
+    "Ã‡Ò¯Ú‡·", "Zoom",
+    "",
+    "",
+    "X", "X",
+    "Y", "Y",
+    RECORDER_AXIS_ZOOM, pageView, FuncActive, FuncChangedChoice, FuncDraw
+)
+
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-DEF_PAGE_1( pageView,                                                                                                                   //--- ‘”Õ ÷»ﬂ - –≈√»—“–¿“Œ– - œ–Œ—ÃŒ“– - œ–Œ—ÃŒ“– ---
+DEF_PAGE_1( pageView, // -V641 // -V1027                                                                                                //--- ‘”Õ ÷»ﬂ - –≈√»—“–¿“Œ– - œ–Œ—ÃŒ“– - œ–Œ—ÃŒ“– ---
     "œ–Œ—ÃŒ“–", "VIEW",
     "",
     "",
     &cMove, ///< ‘”Õ ÷»ﬂ - –≈√»—“–¿“Œ– - œ–Œ—ÃŒ“– - œ–Œ—ÃŒ“– - œÂÂÏÂ˘ÂÌËÂ
-    Page::Name::Function_Recorder_Show_View, PageFunction::PageRecorder::PageShow::pointer, FuncActive, EmptyPressPage, FuncDrawPage, FuncRegSetPage
+    Page::Name::Function_Recorder_Show_View, PageFunction::PageRecorder::PageShow::pointer, FuncActive, FuncPressPage, FuncDrawPage, FuncRegSetPage
 )
 
 
