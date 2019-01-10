@@ -15,19 +15,33 @@ static void OnPress_Rename()
 
 }
 
-DEF_BUTTON( bRename,
+DEF_BUTTON( bRename,                                                                                                    //--- ФУНКЦИЯ - РЕГИСТРАТОР - ПРОСМОТР - ОПЕРАЦИИ - Переименовать ---
     "Переименовать", "Rename",
     "",
     "",
     pageOperations, FuncActive, OnPress_Rename, FuncDraw
 )
 
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+static void OnPress_Copy()
+{
+
+}
+
+DEF_BUTTON( bCopy,                                                                                                         //--- ФУНКЦИЯ - РЕГИСТРАТОР - ПРОСМОТР - ОПЕРАЦИИ - Копировать ---
+    "Копировать", "Copy",
+    "",
+    "",
+    pageOperations, FuncActive, OnPress_Copy, FuncDraw
+)
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-DEF_PAGE_1( pageOperations,
+DEF_PAGE_2( pageOperations,                                                                                                             //--- ФУНКЦИЯ - РЕГИСТРАТОР - ПРОСМОТР - ОПЕРАЦИИ ---
     "ОПЕРАЦИИ", "OPERATIONS",
     "",
     "",
-    &bRename,
+    &bRename,   ///< ФУНКЦИЯ - РЕГИСТРАТОР - ПРОСМОТР - ОПЕРАЦИИ - Переименовать
+    &bCopy,     ///< ФУНКЦИЯ - РЕГИСТРАТОР - ПРОСМОТР - ОПЕРАЦИИ - Копировать
     Page::Name::Function_Recorder_Show_Operations, PageFunction::PageRecorder::PageShow::pointer, FuncActive, EmptyPressPage, FuncDrawPage, FuncRegSetPage
 )
 
