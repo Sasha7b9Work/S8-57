@@ -6,7 +6,7 @@
 #endif
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-extern const PageBase pageCursors;
+extern const PageBase pageRecorderCursors;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 static void OnPress_Center()
@@ -18,7 +18,7 @@ DEF_BUTTON( bCenter,
     "В центр", "To the center",
     "",
     "",
-    pageCursors, FuncActive, OnPress_Center, FuncDraw
+    pageRecorderCursors, FuncActive, OnPress_Center, FuncDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -31,7 +31,7 @@ DEF_BUTTON( bLeft,
     "Лево", "Left",
     "",
     "",
-    pageCursors, FuncActive, OnPress_Left, FuncDraw
+    pageRecorderCursors, FuncActive, OnPress_Left, FuncDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -44,11 +44,11 @@ DEF_BUTTON( bRight,
     "Право", "Right",
     "",
     "",
-    pageCursors, FuncActive, OnPress_Right, FuncDraw
+    pageRecorderCursors, FuncActive, OnPress_Right, FuncDraw
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-DEF_PAGE_3( pageCursors, // -V641 // -V1027
+DEF_PAGE_3( pageRecorderCursors, // -V641 // -V1027
     "КУРСОРЫ", "CURSORS",
     "",
     "",
@@ -58,5 +58,4 @@ DEF_PAGE_3( pageCursors, // -V641 // -V1027
     Page::Name::Function_Recorder_Show_View_Cursors, PageFunction::PageRecorder::PageShow::PageView::pointer, FuncActive, FuncPressPage, FuncDrawPage, FuncRegSetPage
 )
 
-
-const PageBase *PageFunction::PageRecorder::PageShow::PageView::PageCursors::pointer = &pageCursors;
+const PageBase *PageFunction::PageRecorder::PageShow::PageView::PageCursors::pointer = &pageRecorderCursors;
