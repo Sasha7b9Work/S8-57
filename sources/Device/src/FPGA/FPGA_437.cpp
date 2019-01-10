@@ -121,8 +121,6 @@ void FPGA::LoadHoldfOff()
 
     BitSet32 bs(value);
 
-    LOG_WRITE("%x", bs.word);
-
     FSMC::WriteToFPGA8(WR_TRIG_HOLD_VALUE_LOW, bs.byte0);
     FSMC::WriteToFPGA8(WR_TRIG_HOLD_VALUE_MID, bs.byte1);
     FSMC::WriteToFPGA8(WR_TRIG_HOLD_VALUE_HI, bs.byte2);
