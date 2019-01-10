@@ -13,12 +13,12 @@ extern const PageBase pageRecorder;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-DEF_CHOICE_2( cViewAlways,                                                                                                                           //--- ФУНКЦИЯ - РЕГИСТРАТОР - Всегда ---
-    "Всегда", "Always",
+DEF_CHOICE_2( cShow,                                                                                                                                 //--- ФУНКЦИЯ - РЕГИСТРАТОР - Всегда ---
+    "Показывать", "Show",
     "Позволяет выводить данные регистратора при выключенном меню РЕГИСТРАТОР",
     "Allows you to display data from the recorder when the recorder menu is off",
-    DISABLE_RU, DISABLE_EN,
-    ENABLE_RU,  ENABLE_EN,
+    "В режиме", "In mode",
+    "Всегда",   "In always",
     RECORDER_VIEW_ALLWAYS, pageRecorder, FuncActive, FuncChangedChoice, FuncDraw
 )
 
@@ -33,7 +33,7 @@ DEF_PAGE_4( pageRecorder, // -V641 // -V1027                                    
     "РЕГИСТРАТОР", "RECORDER",
     "Запись и воспроизведение сигналов входов и датчиков",
     "Recording and playback of input signals and sensors",
-    &cViewAlways,                                       ///< ФУНКЦИЯ - РЕГИСТРАТОР - Всегда
+    &cShow,                                             ///< ФУНКЦИЯ - РЕГИСТРАТОР - Показывать
     PageFunction::PageRecorder::PageSource::pointer,    ///< ФУНКЦИЯ - РЕГИСТРАТОР - ИСТОЧНИК
     PageFunction::PageRecorder::PageRecord::pointer,    ///< ФУНКЦИЯ - РЕГИСТРАТОР - ЗАПИСЬ
     PageFunction::PageRecorder::PagePlay::pointer,      ///< ФУНКЦИЯ - РЕГИСТРАТОР - ПРОСМОТР

@@ -208,7 +208,7 @@ static const Settings defaultSettings =
     /* multi_rangeResist */ Multimeter::RangeResistance::_10M,
 
                                 // Настройки регистратора
-    /* rec_viewAlways */    Recorder::ViewAlways::Off,
+    /* rec_viewAlways */    Recorder::ViewAlways::InMode,
     /* rec_sourceChanA */   false,
     /* rec_sourceChanB */   false,
     /* rec_sourceSensor */  false,

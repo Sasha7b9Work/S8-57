@@ -18,8 +18,8 @@ namespace Recorder
     {
         enum E
         {
-            Off,
-            On
+            InMode,
+            InAlways
         } value;
     };
 
