@@ -28,8 +28,9 @@ namespace Recorder
     {
         enum E
         {
-            PC,
-            Flash
+            RAM,
+            Flash,
+            PC
         } value;
     };
 

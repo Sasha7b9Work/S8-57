@@ -266,7 +266,7 @@ static void OnPress_ADC_Shift_Reset()
     FPGA::SetRShift(Chan::B, SET_RSHIFT_B);
 }
 
-DEF_BUTTON(         bADC_Shift_Reset,                                                                        //-- нркюдйю - южо - дно ялеы - яАПНЯ ---
+DEF_BUTTON( bADC_Shift_Reset,                                                                                                                       //-- нркюдйю - южо - дно ялеы - яАПНЯ ---
     "яАПНЯ", "Reset",
     "",
     "",
@@ -279,7 +279,7 @@ static void OnChanged_ADC_Shift_A()
     FPGA::SetRShift(Chan::A, SET_RSHIFT_A);
 }
 
-DEF_GOVERNOR(       gADC_Shift_A2mV,                                                               //--- нркюдйю - южо - дно ялеы - яЛ 1Й 2Лб ОНЯР ---
+DEF_GOVERNOR( gADC_Shift_A2mV,                                                                                                            //--- нркюдйю - южо - дно ялеы - яЛ 1Й 2Лб ОНЯР ---
     "яЛ 1Й 2Лб ОНЯР", "Shift 1ch 2mV DC",
     "",
     "",

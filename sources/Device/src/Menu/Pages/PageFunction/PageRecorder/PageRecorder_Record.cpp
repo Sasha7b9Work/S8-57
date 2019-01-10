@@ -12,12 +12,13 @@ extern const PageBase pageRecord;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-DEF_CHOICE_2( cDestinationSource,                                                                                                      //--- ФУНКЦИЯ - РЕГИСТРАТОР - ЗАПИСЬ - Сохранять в ---
+DEF_CHOICE_3( cDestination,                                                                                                            //--- ФУНКЦИЯ - РЕГИСТРАТОР - ЗАПИСЬ - Сохранять в ---
     "Сохранять в", "Save to",
     "Куда сохранять данные",
     "Where to save data",
-    "USB-PC",    "USB-PC",
+    "ОЗУ",       "RAM",
     "USB-Flash", "USB-Flash",
+    "USB-PC",    "USB-PC",
     RECORDER_STORAGE_RECORD, pageRecord, FuncActive, FuncChangedChoice, FuncDraw
 )
 
@@ -25,9 +26,9 @@ DEF_CHOICE_2( cDestinationSource,                                               
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 DEF_PAGE_1( pageRecord, // -V641 // -V1027                                                                                                           //--- ФУНКЦИЯ - РЕГИСТРАТОР - ЗАПИСЬ ---
     "ЗАПИСЬ", "RECORD",
-    "Доступ к записи данных",
-    "Access to data record",
-    &cDestinationSource,        ///< ФУНКЦИЯ - РЕГИСТРАТОР - ЗАПИСЬ - Сохранять в
+    "Выбор места хранения данных",
+    "Choosing a storage location",
+    &cDestination,        ///< ФУНКЦИЯ - РЕГИСТРАТОР - ЗАПИСЬ - Сохранять в
     Page::Name::Function_Recorder_Record, PageFunction::PageRecorder::pointer, FuncActive, EmptyPressPage, FuncDrawPage, FuncRegSetPage
 )
 

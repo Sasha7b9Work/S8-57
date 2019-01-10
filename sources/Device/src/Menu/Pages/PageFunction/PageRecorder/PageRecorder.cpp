@@ -36,7 +36,7 @@ DEF_PAGE_4( pageRecorder, // -V641 // -V1027                                    
     &cShow,                                             ///< ÔÓÍÊÖÈß - ÐÅÃÈÑÒÐÀÒÎÐ - Ïîêàçûâàòü
     PageFunction::PageRecorder::PageSource::pointer,    ///< ÔÓÍÊÖÈß - ÐÅÃÈÑÒÐÀÒÎÐ - ÈÑÒÎ×ÍÈÊ
     PageFunction::PageRecorder::PageRecord::pointer,    ///< ÔÓÍÊÖÈß - ÐÅÃÈÑÒÐÀÒÎÐ - ÇÀÏÈÑÜ
-    PageFunction::PageRecorder::PagePlay::pointer,      ///< ÔÓÍÊÖÈß - ÐÅÃÈÑÒÐÀÒÎÐ - ÏÐÎÑÌÎÒÐ
+    PageFunction::PageRecorder::PageShow::pointer,      ///< ÔÓÍÊÖÈß - ÐÅÃÈÑÒÐÀÒÎÐ - ÏÐÎÑÌÎÒÐ
     Page::Name::Function_Recorder, PageFunction::pointer, FuncActive, OnEnterExit_Recorder, FuncDrawPage, FuncRegSetPage
 )
 

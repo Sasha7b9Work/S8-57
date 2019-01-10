@@ -3258,7 +3258,7 @@
 
   <Group>
     <GroupName>Menu/Pages/PageFunction/PageRecorder</GroupName>
-    <tvExp>0</tvExp>
+    <tvExp>1</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
@@ -3281,8 +3281,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\src\Menu\Pages\PageFunction\PageRecorder\PageRecorder_Play.cpp</PathWithFileName>
-      <FilenameWithoutPath>PageRecorder_Play.cpp</FilenameWithoutPath>
+      <PathWithFileName>.\src\Menu\Pages\PageFunction\PageRecorder\PageRecorder_Record.cpp</PathWithFileName>
+      <FilenameWithoutPath>PageRecorder_Record.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -3293,8 +3293,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\src\Menu\Pages\PageFunction\PageRecorder\PageRecorder_Record.cpp</PathWithFileName>
-      <FilenameWithoutPath>PageRecorder_Record.cpp</FilenameWithoutPath>
+      <PathWithFileName>.\src\Menu\Pages\PageFunction\PageRecorder\PageRecorder_Show.cpp</PathWithFileName>
+      <FilenameWithoutPath>PageRecorder_Show.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>

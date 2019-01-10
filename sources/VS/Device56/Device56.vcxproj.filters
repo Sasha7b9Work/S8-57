@@ -438,13 +438,13 @@
     <ClCompile Include="..\..\Device\src\Menu\Pages\PageFunction\PageRecorder\PageRecorder.cpp">
       <Filter>Menu\Pages\PageFunction\PageRecorder</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Device\src\Menu\Pages\PageFunction\PageRecorder\PageRecorder_Play.cpp">
-      <Filter>Menu\Pages\PageFunction\PageRecorder</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Device\src\Menu\Pages\PageFunction\PageRecorder\PageRecorder_Record.cpp">
       <Filter>Menu\Pages\PageFunction\PageRecorder</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Device\src\Menu\Pages\PageFunction\PageRecorder\PageRecorder_Source.cpp">
+      <Filter>Menu\Pages\PageFunction\PageRecorder</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Menu\Pages\PageFunction\PageRecorder\PageRecorder_Show.cpp">
       <Filter>Menu\Pages\PageFunction\PageRecorder</Filter>
     </ClCompile>
   </ItemGroup>

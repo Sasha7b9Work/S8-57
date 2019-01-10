@@ -1741,14 +1741,14 @@
               <FilePath>.\src\Menu\Pages\PageFunction\PageRecorder\PageRecorder.cpp</FilePath>
             </File>
             <File>
-              <FileName>PageRecorder_Play.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Menu\Pages\PageFunction\PageRecorder\PageRecorder_Play.cpp</FilePath>
-            </File>
-            <File>
               <FileName>PageRecorder_Record.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Menu\Pages\PageFunction\PageRecorder\PageRecorder_Record.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>PageRecorder_Show.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Menu\Pages\PageFunction\PageRecorder\PageRecorder_Show.cpp</FilePath>
             </File>
             <File>
               <FileName>PageRecorder_Source.cpp</FileName>
