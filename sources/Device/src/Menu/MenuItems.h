@@ -180,19 +180,20 @@ public:
     {
         enum E
         {
-            Main,                       ///< Ãëàâíàÿ ñòğàíèöà ìåíş
+            Main,                                   ///< Ãëàâíàÿ ñòğàíèöà ìåíş
 
-            Function,                   ///< ÔÓÍÊÖÈß
-            Function_FrequencyCounter,  ///< ÔÓÍÊÖÈß - ×ÀÑÒÎÒÎÌÅĞ
-            Function_FFT,               ///< ÔÓÍÊÖÈß - ÑÏÅÊÒĞ
-            Function_Multimeter,        ///< ÔÓÍÊÖÈß - ÌÓËÜÒÈÌÅÒĞ
-            Function_Tester,            ///< ÔÓÍÊÖÈß - ÒÅÑÒÅĞ
-            Function_Recorder,          ///< ÔÓÍÊÖÈß - ĞÅÃÈÑÒĞÀÒÎĞ
-            Function_Recorder_Source,   ///< ÔÓÍÊÖÈß - ĞÅÃÈÑÒĞÀÒÎĞ - ÈÑÒÎ×ÍÈÊ
-            Function_Recorder_Record,   ///< ÔÓÍÊÖÈß - ĞÅÃÈÑÒĞÀÒÎĞ - ÇÀÏÈÑÜ
-            Function_Recorder_Show,     ///< ÔÓÍÊÖÈß - ĞÅÃÈÑÒĞÀÒÎĞ - ÏĞÎÑÌÎÒĞ
-            Function_Recorder_Show_Operations,  ///< ÔÓÍÊÖÈß - ĞÅÃÈÑÒĞÀÒÎĞ - ÏĞÎÑÌÎÒĞ - ÎÏÅĞÀÖÈÈ
-            Function_Recorder_Show_View,        ///< ÔÓÍÊÖÈß - ĞÅÃÈÑÒĞÀÒÎĞ - ÏĞÎÑÌÎÒĞ - ÏĞÎÑÌÎÒĞ
+            Function,                               ///< ÔÓÍÊÖÈß
+            Function_FrequencyCounter,              ///< ÔÓÍÊÖÈß - ×ÀÑÒÎÒÎÌÅĞ
+            Function_FFT,                           ///< ÔÓÍÊÖÈß - ÑÏÅÊÒĞ
+            Function_Multimeter,                    ///< ÔÓÍÊÖÈß - ÌÓËÜÒÈÌÅÒĞ
+            Function_Tester,                        ///< ÔÓÍÊÖÈß - ÒÅÑÒÅĞ
+            Function_Recorder,                      ///< ÔÓÍÊÖÈß - ĞÅÃÈÑÒĞÀÒÎĞ
+            Function_Recorder_Source,               ///< ÔÓÍÊÖÈß - ĞÅÃÈÑÒĞÀÒÎĞ - ÈÑÒÎ×ÍÈÊ
+            Function_Recorder_Record,               ///< ÔÓÍÊÖÈß - ĞÅÃÈÑÒĞÀÒÎĞ - ÇÀÏÈÑÜ
+            Function_Recorder_Show,                 ///< ÔÓÍÊÖÈß - ĞÅÃÈÑÒĞÀÒÎĞ - ÏĞÎÑÌÎÒĞ
+            Function_Recorder_Show_Operations,      ///< ÔÓÍÊÖÈß - ĞÅÃÈÑÒĞÀÒÎĞ - ÏĞÎÑÌÎÒĞ - ÎÏÅĞÀÖÈÈ
+            Function_Recorder_Show_View,            ///< ÔÓÍÊÖÈß - ĞÅÃÈÑÒĞÀÒÎĞ - ÏĞÎÑÌÎÒĞ - ÏĞÎÑÌÎÒĞ
+            Function_Recorder_Show_View_Cursors,    ///< ÔÓÍÊÖÈß - ĞÅÃÈÑÒĞÀÒÎĞ - ÏĞÎÑÌÎÒĞ - ÏĞÎÑÌÎÒĞ - ÊÓĞÑÎĞÛ
 
             Measures,                   ///< ÈÇÌÅĞÅÍÈß
             Measures_Auto,              ///< ÈÇÌÅĞÅÍÈß - ÀÂÒÎÌÀÒ

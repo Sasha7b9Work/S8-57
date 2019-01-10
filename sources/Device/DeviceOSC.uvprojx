@@ -1761,6 +1761,11 @@
               <FilePath>.\src\Menu\Pages\PageFunction\PageRecorder\PageRecorder_Show_View.cpp</FilePath>
             </File>
             <File>
+              <FileName>PageRecorder_Show_View_Cursors.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Menu\Pages\PageFunction\PageRecorder\PageRecorder_Show_View_Cursors.cpp</FilePath>
+            </File>
+            <File>
               <FileName>PageRecorder_Source.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Menu\Pages\PageFunction\PageRecorder\PageRecorder_Source.cpp</FilePath>
