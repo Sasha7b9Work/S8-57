@@ -303,9 +303,8 @@ void Button::Draw(int x, int y)
 {
     bool pressed = IsPressed();
     bool shade = IsShade() || !funcOfActive();
-
-    Painter::DrawHLine(y + 1, x, x + Width(), Color::MenuTitle(shade));
     Color color = shade ? Color::MenuItem(true) : Color::WHITE;
+    
     Painter::FillRegion(x + 1, y + 2, Width() - 2, Menu::Item::HEIGHT - 2, Color::MenuItem(false));
     Painter::FillRegion(x + 3, y + 4, Width() - 6, Menu::Item::HEIGHT - 6, Color::MenuItem(false));
 
