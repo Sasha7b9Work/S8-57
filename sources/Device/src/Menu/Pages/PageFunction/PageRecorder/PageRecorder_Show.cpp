@@ -49,7 +49,7 @@ DEF_BUTTON( bPrev,                                                              
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-DEF_PAGE_4( pageShow, // -V641 // -V1027                                                                                                           //--- тсмйжхъ - пецхярпюрнп - опнялнрп ---
+DEF_PAGE_5( pageShow, // -V641 // -V1027                                                                                                           //--- тсмйжхъ - пецхярпюрнп - опнялнрп ---
     "опнялнрп", "VIEW",
     "оПНЯЛНРП ГЮОХЯЮММШУ ДЮММШУ",
     "View recorded data",
@@ -57,6 +57,7 @@ DEF_PAGE_4( pageShow, // -V641 // -V1027                                        
     &bNext,                                                         ///< тсмйжхъ - пецхярпюрнп - опнялнрп - яКЕДСЧЫХИ
     &bPrev,                                                         ///< тсмйжхъ - пецхярпюрнп - опнялнрп - оПЕДШДСЫХИ
     PageFunction::PageRecorder::PageShow::PageOperations::pointer,  ///< тсмйжхъ - пецхярпюрнп - опнялнрп - ноепюжхх
+    PageFunction::PageRecorder::PageShow::PageView::pointer,        ///< тсмйжхъ - пецхярпюрнп - опнялрнп - опнялнрп
     Page::Name::Function_Recorder_Show, PageFunction::PageRecorder::pointer, FuncActive, EmptyPressPage, FuncDrawPage, FuncRegSetPage
 )
 

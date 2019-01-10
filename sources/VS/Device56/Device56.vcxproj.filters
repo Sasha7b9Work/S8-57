@@ -450,6 +450,9 @@
     <ClCompile Include="..\..\Device\src\Menu\Pages\PageFunction\PageRecorder\PageRecorder_Show_Operations.cpp">
       <Filter>Menu\Pages\PageFunction\PageRecorder</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Device\src\Menu\Pages\PageFunction\PageRecorder\PageRecorder_Show_View.cpp">
+      <Filter>Menu\Pages\PageFunction\PageRecorder</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Device\src\defines.h">

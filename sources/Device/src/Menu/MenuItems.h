@@ -191,7 +191,8 @@ public:
             Function_Recorder_Source,   ///< ÔÓÍÊÖÈß - ÐÅÃÈÑÒÐÀÒÎÐ - ÈÑÒÎ×ÍÈÊ
             Function_Recorder_Record,   ///< ÔÓÍÊÖÈß - ÐÅÃÈÑÒÐÀÒÎÐ - ÇÀÏÈÑÜ
             Function_Recorder_Show,     ///< ÔÓÍÊÖÈß - ÐÅÃÈÑÒÐÀÒÎÐ - ÏÐÎÑÌÎÒÐ
-            Function_Recorder_Show_Operations, ///< ÔÓÍÊÖÈß - ÐÅÃÈÑÒÐÀÒÎÐ - ÏÐÎÑÌÎÒÐ - ÎÏÅÐÀÖÈÈ
+            Function_Recorder_Show_Operations,  ///< ÔÓÍÊÖÈß - ÐÅÃÈÑÒÐÀÒÎÐ - ÏÐÎÑÌÎÒÐ - ÎÏÅÐÀÖÈÈ
+            Function_Recorder_Show_View,        ///< ÔÓÍÊÖÈß - ÐÅÃÈÑÒÐÀÒÎÐ - ÏÐÎÑÌÎÒÐ - ÏÐÎÑÌÎÒÐ
 
             Measures,                   ///< ÈÇÌÅÐÅÍÈß
             Measures_Auto,              ///< ÈÇÌÅÐÅÍÈß - ÀÂÒÎÌÀÒ

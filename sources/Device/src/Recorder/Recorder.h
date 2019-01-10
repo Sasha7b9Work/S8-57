@@ -8,6 +8,8 @@
 #define RECORDER_SOURCE_SENSOR  (set.rec_sourceSensor)
 #define RECORDER_STORAGE_RECORD (set.rec_storageRecord)
 #define RECORDER_STORAGE_PLAY   (set.rec_storagePlay)
+#define RECORDER_AXIS_MOVE      (set.rec_axisMove)
+#define RECORDER_AXIS_ZOOM      (set.rec_axisZoom)
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -31,6 +33,16 @@ namespace Recorder
             RAM,
             Flash,
             PC
+        } value;
+    };
+
+    /// Используется при выборе оси
+    struct Axis
+    {
+        enum E
+        {
+            X,
+            Y
         } value;
     };
 

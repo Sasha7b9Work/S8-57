@@ -266,6 +266,8 @@ public:
     bool                        rec_sourceSensor;       ///< Включение записи показаний датчика
     Recorder::DataStorage       rec_storageRecord;      ///< Куда сохранять данные
     Recorder::DataStorage       rec_storagePlay;        ///< Откуда брать сохранённые данные
+    Recorder::Axis              rec_axisMove;           ///< Текущая ось перемещения
+    Recorder::Axis              rec_axisZoom;           ///< Текущая ось масштабирования
 
 
     int16   dbg_enum_gate_max;      ///< Ограничение ворот в рандомизаторе сверху

@@ -107,6 +107,7 @@
     <ClCompile Include="..\..\Device\src\Menu\Pages\PageFunction\PageRecorder\PageRecorder_Show.cpp" />
     <ClCompile Include="..\..\Device\src\Menu\Pages\PageFunction\PageRecorder\PageRecorder_Record.cpp" />
     <ClCompile Include="..\..\Device\src\Menu\Pages\PageFunction\PageRecorder\PageRecorder_Show_Operations.cpp" />
+    <ClCompile Include="..\..\Device\src\Menu\Pages\PageFunction\PageRecorder\PageRecorder_Show_View.cpp" />
     <ClCompile Include="..\..\Device\src\Menu\Pages\PageFunction\PageRecorder\PageRecorder_Source.cpp" />
     <ClCompile Include="..\..\Device\src\Menu\Pages\PageHelp\HelpContent.cpp" />
     <ClCompile Include="..\..\Device\src\Menu\Pages\PageHelp\PageHelp.cpp" />

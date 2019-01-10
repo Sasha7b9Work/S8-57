@@ -214,6 +214,8 @@ static const Settings defaultSettings =
     /* rec_sourceSensor */  false,
     /* rec_storageRecord */ Recorder::DataStorage::Flash,
     /* rec_storagePlay */   Recorder::DataStorage::Flash,
+    /* rec_axisMove */      Recorder::Axis::X,
+    /* rec_axisZoom */      Recorder::Axis::X,
 
     /* dbg_gate_max */      0,
     /* dbg_gate_min */      0
