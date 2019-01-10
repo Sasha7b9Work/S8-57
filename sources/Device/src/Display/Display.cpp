@@ -121,7 +121,7 @@ void Display::Update()
     }
     else
     {
-        LOG_ERROR("Нет обработчика");
+        LOG_ERROR("");
     }
 
     Console::Draw();

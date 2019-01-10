@@ -6,10 +6,8 @@
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-class Device
+namespace Device
 {
-public:
-
     struct Mode
     {
         enum E
@@ -24,19 +22,16 @@ public:
         explicit Mode(E v) : value(v) {};
     };
 
-    static void Init();
+    void Init();
 
-    static void Update();
+    void Update();
 
-    static Mode::E CurrentMode();
+    Mode::E CurrentMode();
 
-    static bool InModeTester();
+    bool InModeTester();
 
-    static bool InModeMultimeter();
+    bool InModeMultimeter();
 
     /// Устанавливает режим работы
-    static void SetMode(Mode::E mode);
-
-private:
-    static Mode::E currentMode;
+    void SetMode(Mode::E mode);
 };
