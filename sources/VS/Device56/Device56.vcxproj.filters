@@ -88,6 +88,9 @@
     <Filter Include="Menu\Pages\PageTrig">
       <UniqueIdentifier>{aa43efdd-d7f6-40a9-8383-17e3959e8238}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Menu\Pages\PageFunction\PageRecorder">
+      <UniqueIdentifier>{32a80485-3de8-47d1-9c63-bb5628ebe570}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Device\src\defines.cpp">
@@ -300,18 +303,6 @@
     <ClCompile Include="..\..\Device\src\Menu\Pages\PageFunction\PageFunction_Multimeter.cpp">
       <Filter>Menu\Pages\PageFunction</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Device\src\Menu\Pages\PageFunction\PageFunction_Recorder.cpp">
-      <Filter>Menu\Pages\PageFunction</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Device\src\Menu\Pages\PageFunction\PageFunction_Recorder_Play.cpp">
-      <Filter>Menu\Pages\PageFunction</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Device\src\Menu\Pages\PageFunction\PageFunction_Recorder_Record.cpp">
-      <Filter>Menu\Pages\PageFunction</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Device\src\Menu\Pages\PageFunction\PageFunction_Recorder_Source.cpp">
-      <Filter>Menu\Pages\PageFunction</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Device\src\Menu\Pages\PageFunction\PageFunction_Tester.cpp">
       <Filter>Menu\Pages\PageFunction</Filter>
     </ClCompile>
@@ -443,6 +434,18 @@
     </ClCompile>
     <ClCompile Include="..\..\Device\src\Menu\Pages\PageTrig\PageTrig_HoldOff.cpp">
       <Filter>Menu\Pages\PageTrig</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Menu\Pages\PageFunction\PageRecorder\PageRecorder.cpp">
+      <Filter>Menu\Pages\PageFunction\PageRecorder</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Menu\Pages\PageFunction\PageRecorder\PageRecorder_Play.cpp">
+      <Filter>Menu\Pages\PageFunction\PageRecorder</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Menu\Pages\PageFunction\PageRecorder\PageRecorder_Record.cpp">
+      <Filter>Menu\Pages\PageFunction\PageRecorder</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Menu\Pages\PageFunction\PageRecorder\PageRecorder_Source.cpp">
+      <Filter>Menu\Pages\PageFunction\PageRecorder</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

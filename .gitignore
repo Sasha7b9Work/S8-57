@@ -1,6 +1,6 @@
 *.out
-*.*~*
 *.bak
+*~*
 
 JLinkLog.txt
 JLinkSettings.ini
