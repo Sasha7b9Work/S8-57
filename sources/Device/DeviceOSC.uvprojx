@@ -1970,6 +1970,21 @@
               <FileType>5</FileType>
               <FilePath>.\src\Recorder\Recorder.h</FilePath>
             </File>
+            <File>
+              <FileName>Graphics_Recorder.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Recorder\Graphics_Recorder.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Graphics_Recorder.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Recorder\Graphics_Recorder.h</FilePath>
+            </File>
+            <File>
+              <FileName>Types_Recorder.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Recorder\Types_Recorder.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

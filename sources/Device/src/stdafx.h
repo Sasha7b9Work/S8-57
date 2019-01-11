@@ -58,6 +58,7 @@
 #include "Osci/PainterData.h"
 
 #include "Recorder/Recorder.h"
+#include "Recorder/Graphics_Recorder.h"
 
 #include "SCPI/SCPI.h"
 #include "Settings/Settings.h"

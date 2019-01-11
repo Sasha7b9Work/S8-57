@@ -9,7 +9,7 @@
 #include "Utils/Math.h"
 #include "Console.h"
 #include "Tables.h"
-#include "Recorder/Recorder.h"
+#include "Recorder/Graphics_Recorder.h"
 #include <cstring>
 #endif
 
