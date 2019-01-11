@@ -2,6 +2,7 @@
 #ifndef WIN32
 #include "defines.h"
 #include "Osci.h"
+#include "Display/Display_Primitives.h"
 #include "Display/Grid.h"
 #include "Display/Painter.h"
 #include "Display/Symbols.h"
@@ -15,6 +16,10 @@
 #include "FPGA/RShift.h"
 #include "FrequencyCounter.h"
 #endif
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+using Display::Region;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -99,7 +104,7 @@ void Osci::DrawCursorTrigLevel()
     scale = (float)height / (shiftFullMax - shiftFullMin);
     int shiftFull = SET_TRIGLEV_SOURCE + (TRIG_SOURCE_IS_EXT ? 0 : SET_RSHIFT(ch));
     int yFull = Grid::Top() + DELTA + height - (int)(scale * (shiftFull - RShift::MIN - Trig::MIN) + 4);
-    Painter::FillRegion(left + 2, yFull + 1, 4, 6, Color::Trig());
+    Region(4, 6).Draw(left + 2, yFull + 1, Color::Trig());
     Painter::SetFont(Font::Type::_5);
     Painter::DrawChar(left + 3, yFull - 2, symbols[(uint8)TRIG_SOURCE], Color::BACK);
     Painter::SetFont(Font::Type::_8);

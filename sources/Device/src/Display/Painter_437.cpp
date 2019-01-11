@@ -129,12 +129,14 @@ void Painter::SetBrightnessDisplay(int16 brightness)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Painter::FillRegion(int x, int y, int width, int height, Color color)
+/*
+void Region(int x, int y, int width, int height, Color color)
 {
     SetColor(color);
     uint8 buffer[7] = { Command::Paint_FillRegion, (uint8)x, (uint8)(x >> 8), (uint8)y, (uint8)width, (uint8)(width >> 8), (uint8)height };
     FSMC::WriteToPanel(buffer, 7);
 }
+*/
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Painter::DrawLine(int x0, int y0, int x1, int y1, Color color)

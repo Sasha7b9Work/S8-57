@@ -16,7 +16,7 @@
 #include "Data/Reader.h"
 
 #include "Display/Console.h"
-//#include "Display/DisplayPrimitives.h"
+#include "Display/Display_Primitives.h"
 #include "Display/Grid.h"
 #include "Display/Painter.h"
 #include "Display/PainterMem.h"

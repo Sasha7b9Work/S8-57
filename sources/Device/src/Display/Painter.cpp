@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #ifndef WIN32
 #include "defines.h"
+#include "Display_Primitives.h"
 #include "Painter.h"
 #include "Keyboard/DecoderDevice.h"
 #include "Utils/Math.h"
@@ -10,6 +11,10 @@
 #include <stdlib.h>
 #include <stdio.h>
 #endif
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+using Display::Region;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -67,7 +72,7 @@ void Painter::DrawBoundedRegion(int x, int y, int width, int height, Color color
 {
     Color color = currentColor;
     DrawRectangle(x, y, width, height, colorBound);
-    FillRegion(x + 1, y + 1, width - 2, height - 2, colorFill);
+    Region(width - 2, height - 2).Draw(x + 1, y + 1, colorFill);
     /// \todo Почему-то цвет не восстанавливается
     SetColor(color);
 }
@@ -506,7 +511,7 @@ int Painter::DrawStringInCenterRectAndBoundItC(int x, int y, int width, int heig
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Painter::FillBoundedRegion(int x, int y, int widht, int height, Color colorFill, Color colorBound)
 {
-    FillRegion(x + 1, y + 1, widht - 2, height - 2, colorFill);
+    Region(widht - 2, height - 2).Draw(x + 1, y + 1, colorFill);
     DrawRectangle(x, y, widht, height, colorBound);
 }
 
@@ -578,7 +583,7 @@ int Painter::DrawTextInBoundedRectWithTransfers(int x, int y, int width, const c
     GetHeightTextWithTransfers(x + 3, y + 3, x + width - 8, text, &height);
 
     DrawRectangle(x, y, width, height, colorFill);
-    FillRegion(x + 1, y + 1, width - 2, height - 2, colorBackground);
+    Region(width - 2, height - 2).Draw(x + 1, y + 1, colorBackground);
     DrawTextInRectWithTransfersC(x + 3, y + 3, width - 8, height, text, colorFill);
     return y + height;
 }
@@ -602,7 +607,7 @@ void Painter::DrawStringInCenterRectOnBackgroundC(int x, int y, int width, int h
     int eX = DrawStringInCenterRect(x, y, width, height, text, colorBackground);
     int w = lenght + widthBorder * 2 - 2;
     int h = 7 + widthBorder * 2 - 1;
-    FillRegion(eX - lenght - widthBorder, y - widthBorder + 1, w, h);
+    Region(w, h).Draw(eX - lenght - widthBorder, y - widthBorder + 1);
     DrawStringInCenterRect(x, y, width, height, text, colorText);
 }
 
@@ -613,7 +618,7 @@ int Painter::DrawTextOnBackground(int x, int y, const char *text, Color colorBac
     int height = Font::GetSize();
 
     Color colorText(GetColor());
-    FillRegion(x - 1, y, width, height, colorBackground);
+    Region(width, height).Draw(x - 1, y, colorBackground);
 
     SetColor(colorText);
 

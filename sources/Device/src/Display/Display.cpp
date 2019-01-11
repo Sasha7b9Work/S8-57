@@ -4,6 +4,7 @@
 #include "log.h"
 #include "Device.h"
 #include "Painter.h"
+#include "Display_Primitives.h"
 #include "Hardware/Timer.h"
 #include "Hardware/Sound.h"
 #include "Utils/Math.h"
@@ -12,6 +13,10 @@
 #include "Recorder/Graphics_Recorder.h"
 #include <cstring>
 #endif
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+using Display::Region;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -275,7 +280,7 @@ static void FuncOnWait()
     int x = 160 - width / 2;
     int y = 120 - height / 2;
 
-    Painter::FillRegion(x, y, width, height, Color::BACK);
+    Region(width, height).Draw(x, y, Color::BACK);
     Painter::DrawRectangle(x, y, width, height, Color::FILL);
     Painter::DrawStringInCenterRect(x, y, width, height - 20, textWait);
     char buf[100];
@@ -302,7 +307,7 @@ void Display::FuncOnWaitStart(const char *text, bool eraseBackground)
 /*
 void Display::Clear()
 {
-    Painter::FillRegion(0, 0, Display::WIDTH - 1, Display::HEIGHT - 2, Color::BACK);
+    Region(0, 0, Display::WIDTH - 1, Display::HEIGHT - 2, Color::BACK).Draw();
 }
 */
 

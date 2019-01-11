@@ -3,6 +3,7 @@
 #include <stm32f4xx.h>
 #include "defines.h"
 #include "log.h"
+#include "Display/Display_Primitives.h"
 #include "Display/Grid.h"
 #include "Display/Painter.h"
 #include "FrequencyCounter.h"
@@ -17,6 +18,10 @@
 #include <cstring>
 #include <limits>
 #endif
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+using Display::Region;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -280,7 +285,7 @@ static void DrawFrequency(int x, int y)
     Painter::DrawRectangle(x - 20, y, 10, 10);
     if (lampFreq)
     {
-        Painter::FillRegion(x - 20, y, 10, 10);
+        Region(10, 10).Draw(x - 20, y);
     }
 
     int dX = 7 * SIZE;
@@ -338,7 +343,7 @@ static void DrawPeriod(int x, int y)
     Painter::DrawRectangle(x - 20, y + 1, 10, 10);
     if (lampPeriod)
     {
-        Painter::FillRegion(x - 20, y, 10, 10);
+        Region(10, 10).Draw(x - 20, y);
     }
 
     int dX = 7 * SIZE;
@@ -398,7 +403,7 @@ void FrequencyCounter::Draw()
     int y = Grid::Top() + (Grid::Height() / 2 - height) / 2;
 
     
-    Painter::FillRegion(x + 1,   y + 1, width - 2, height - 2, Color::BACK);
+    Region(width - 2, height - 2).Draw(x + 1, y + 1, Color::BACK);
     Painter::DrawRectangle(x,    y,     width,     height,     Color::FILL);
 
     x += 2;
@@ -787,7 +792,7 @@ static void DrawDebugInfo()
     int height = 27;
     int x = 50;
     int y = 120;
-    Painter::FillRegion(x, y, width, height, Color::BACK);
+    Region(width, height).Draw(x, y, Color::BACK);
     Painter::DrawRectangle(x - 1, y - 1, width + 2, height + 2, Color::FILL);
 
     String("%d", freqActual.word).Draw(x + 4, y + 4);
@@ -797,7 +802,7 @@ static void DrawDebugInfo()
     width = 120;
 
 
-    Painter::FillRegion(x, y, width, height, Color::BACK);
+    Region(width, height).Draw(x, y, Color::BACK);
     Painter::DrawRectangle(x - 1, y - 1, width + 2, height + 2, Color::FILL);
 
     String("%d", lastFreq.word).Draw(x + 4, y + 4);
@@ -813,14 +818,14 @@ static void DrawDebugInfo()
 
     if (TIME_MS - lastFreqRead < TIME)
     {
-        Painter::FillRegion(x + 1, y + 5, size - 2, size - 2, Color::BLUE);
+        Region(size - 2, size - 2).Draw(x + 1, y + 5, Color::BLUE);
     }
 
     Painter::DrawRectangle(x, y + 15, size, size, Color::FILL);
 
     if (TIME_MS - lastPeriodRead < TIME)
     {
-        Painter::FillRegion(x + 1, y + 16, size - 2, size - 2, Color::BLUE);
+        Region(size - 2, size - 2).Draw(x + 1, y + 16, Color::BLUE);
     }
 
     x += 20;
@@ -829,25 +834,25 @@ static void DrawDebugInfo()
 
     if (TIME_MS - lastFreqOver < TIME)
     {
-        Painter::FillRegion(x + 1, y + 5, size - 2, size - 2, Color::RED);
+        Region(size - 2, size - 2).Draw(x + 1, y + 5, Color::RED);
     }
 
     Painter::DrawRectangle(x, y + 15, size, size, Color::FILL);
 
     if (TIME_MS - lastPeriodOver < TIME)
     {
-        Painter::FillRegion(x + 1, y + 16, size - 2, size - 2, Color::RED);
+        Region(size - 2, size - 2).Draw(x + 1, y + 16, Color::RED);
     }
 
     x += 20;
 
     if (FPGA::GetFlag::FREQ_IN_PROCESS())
     {
-        Painter::FillRegion(x + 1, y + 5, size - 2, size - 2, Color::FILL);
+        Region(size - 2, size - 2).Draw(x + 1, y + 5, Color::FILL);
     }
 
     if (FPGA::GetFlag::PERIOD_IN_PROCESS())
     {
-        Painter::FillRegion(x + 1, y + 16, size - 2, size - 2, Color::FILL);
+        Region(size - 2, size - 2).Draw(x + 1, y + 16, Color::FILL);
     }
 }

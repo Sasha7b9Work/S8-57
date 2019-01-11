@@ -15,7 +15,7 @@ namespace Painter
     /// Елси не передавать значение цвета, то цвет останется прежним
     void SetColor(Color color = Color::NUMBER);
 
-    void FillRegion(int x, int y, int width, int height, Color color = Color::NUMBER);
+    //void FillRegion(int x, int y, int width, int height, Color color = Color::NUMBER);
 
     void DrawBigText(int x, int y, uint8 size, const char *text, Color color = Color::NUMBER);
 

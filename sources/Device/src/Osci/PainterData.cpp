@@ -5,6 +5,7 @@
 #include "Data/DataStorage.h"
 #include "Data/Reader.h"
 #include "Display/Colors.h"
+#include "Display/Display_Primitives.h"
 #include "Display/Grid.h"
 #include "Display/Painter.h"
 #include "Display/PainterMem.h"
@@ -14,6 +15,10 @@
 #include "Utils/Math.h"
 #include "MemoryWindow.h"
 #endif
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+using Display::Region;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -183,7 +188,7 @@ void PainterData::DrawTPos(int leftX, int rightX)
 {
     int x[] = {leftX, (rightX - leftX) / 2 + leftX, rightX};
     int x0 = x[TPOS];
-    Painter::FillRegion(x0 - 3, 10, 6, 6, Color::BACK);
+    Region(6, 6).Draw(x0 - 3, 10, Color::BACK);
     Painter::DrawChar(x0 - 3, 10, SYMBOL_TPOS_1, Color::FILL);
 }
 
@@ -219,8 +224,8 @@ void PainterData::DrawTShift(int leftX, int rightX, int numBytes)
         dY11 = 5; dY12 = 7;
     }
 
-    Painter::FillRegion((int)xShift - 1, 1, 6, 6, Color::BACK);
-    Painter::FillRegion((int)xShift, 2, 4, 4, Color::FILL);
+    Region(6, 6).Draw((int)xShift - 1, 1, Color::BACK);
+    Region(4, 4).Draw((int)xShift, 2, Color::FILL);
     Painter::DrawLine((int)xShift + dX01, 3, (int)xShift + dX11, dY11 - 2, Color::BACK);
     Painter::DrawLine((int)xShift + dX02, 4, (int)xShift + 2, dY12 - 2);
 }

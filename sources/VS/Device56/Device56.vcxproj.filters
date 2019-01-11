@@ -456,6 +456,9 @@
     <ClCompile Include="..\..\Device\src\Recorder\Graphics_Recorder.cpp">
       <Filter>Recorder</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Device\src\Display\Display_Primitives.cpp">
+      <Filter>Display</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Device\src\defines.h">
@@ -807,6 +810,9 @@
       <Filter>Display</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Device\src\Display\Display_Types.h">
+      <Filter>Display</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Device\src\Display\Display_Primitives.h">
       <Filter>Display</Filter>
     </ClInclude>
   </ItemGroup>

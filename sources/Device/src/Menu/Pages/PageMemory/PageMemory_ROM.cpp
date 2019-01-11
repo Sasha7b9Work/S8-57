@@ -2,6 +2,7 @@
 #ifndef WIN32
 #include "defines.h"
 #include "Data/Reader.h"
+#include "Display/Display_Primitives.h"
 #include "Display/Grid.h"
 #include "Display/Painter.h"
 #include "Display/Symbols.h"
@@ -16,6 +17,10 @@
 #include "Utils/Math.h"
 #include "Utils/Values.h"
 #endif
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+using Display::Region;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -230,7 +235,7 @@ static void DrawMemoryWave(int num, bool exist)
     int x = Grid::Left() + 2 + num * 12;
     int y = Grid::FullBottom() - 10;
     int width = 12;
-    Painter::FillRegion(x, y, width, 10, num == NUM_ROM_SIGNAL ? Color::FLASH_10 : Color::BACK);
+    Region(width, 10).Draw(x, y, num == NUM_ROM_SIGNAL ? Color::FLASH_10 : Color::BACK);
     Painter::DrawRectangle(x, y, width, 10, Color::FILL);
     Painter::SetColor(num == NUM_ROM_SIGNAL ? Color::FLASH_01 : Color::FILL);
     if (exist)

@@ -3,6 +3,7 @@
 #include "defines.h"
 #include "Tester.h"
 #include "Data/Reader.h"
+#include "Display/Display_Primitives.h"
 #include "Display/Grid.h"
 #include "Display/Painter.h"
 #include "Display/Display.h"
@@ -11,6 +12,10 @@
 #include "Utils/Math.h"
 #include "Settings/Settings.h"
 #endif
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+using Display::Region;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -120,7 +125,7 @@ void Tester::Graphics::SetPoints(int numStep, const uint8 dx[TESTER_NUM_POINTS],
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void DrawLegend(int x, int y)
 {
-    Painter::FillRegion(x, y, 43, 40, Color::BACK);
+    Region(43, 40).Draw(x, y, Color::BACK);
 
     for (int i = 0; i < Tester::NUM_STEPS; i++)
     {

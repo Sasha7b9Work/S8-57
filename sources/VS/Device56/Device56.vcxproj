@@ -21,6 +21,7 @@
     <ClCompile Include="..\..\Device\src\Display\Colors.cpp" />
     <ClCompile Include="..\..\Device\src\Display\Console.cpp" />
     <ClCompile Include="..\..\Device\src\Display\Display.cpp" />
+    <ClCompile Include="..\..\Device\src\Display\Display_Primitives.cpp" />
     <ClCompile Include="..\..\Device\src\Display\Font\Font.cpp" />
     <ClCompile Include="..\..\Device\src\Display\Grid.cpp" />
     <ClCompile Include="..\..\Device\src\Display\Painter.cpp" />
@@ -201,6 +202,7 @@
     <ClInclude Include="..\..\Device\src\Display\Colors.h" />
     <ClInclude Include="..\..\Device\src\Display\Console.h" />
     <ClInclude Include="..\..\Device\src\Display\Display.h" />
+    <ClInclude Include="..\..\Device\src\Display\Display_Primitives.h" />
     <ClInclude Include="..\..\Device\src\Display\Display_Types.h" />
     <ClInclude Include="..\..\Device\src\Display\Font\Font.h" />
     <ClInclude Include="..\..\Device\src\Display\Grid.h" />

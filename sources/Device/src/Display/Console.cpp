@@ -2,10 +2,15 @@
 #ifndef WIN32
 #include "defines.h"
 #include "Console.h"
+#include "Display/Display_Primitives.h"
 #include "Display/Painter.h"
 #include <cstring>
 #include <stdio.h>
 #endif
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+using Display::Region;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -27,7 +32,7 @@ void Console::Draw()
     for (int i = 0; i < stringInConsole; i++)
     {
         int length = Font::GetLengthText(buffer[i]);
-        Painter::FillRegion(0, y + 3, length, 6, Color::BACK);
+        Region(length, 6).Draw(0, y + 3, Color::BACK);
         String(buffer[i]).Draw(1, y, Color::FILL);
         y += 6;
     }

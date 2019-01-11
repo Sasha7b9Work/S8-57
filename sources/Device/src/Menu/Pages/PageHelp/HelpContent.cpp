@@ -2,6 +2,7 @@
 #ifndef WIN32
 #include "defines.h"
 #include "Settings/Settings.h"
+#include "Display/Display_Primitives.h"
 #include "Display/Font/Font.h"
 #include "Display/Grid.h"
 #include "Display/Painter.h"
@@ -10,6 +11,10 @@
 #endif
 #include "Menu/Pages/Include/HelpContentPages.h"
 #include "Menu/Pages/Include/HelpContent.h"
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+using Display::Region;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -57,9 +62,9 @@ static void DrawPageDescription()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void HelpContent_Draw()
 {
-    Painter::FillRegion(Grid::Right(), 0, 319 - Grid::Right(), 20, Color::BACK);
-    Painter::FillRegion(Grid::Right(), 219, 319 - Grid::Right(), 21);
-    Painter::FillRegion(1, 1, WIDTH, 237);
+    Region(319 - Grid::Right(), 20).Draw(Grid::Right(), 0, Color::BACK);
+    Region(319 - Grid::Right(), 21).Draw(Grid::Right(), 219);
+    Region(WIDTH, 237).Draw(1, 1);
     Painter::DrawRectangle(1, 0, WIDTH + 1, 239, Color::FILL);   /** \todo Здесь непонятно, почему так. Координаты верхнего левого угла должны быть 
                                                                 0, 0, но в таком случае левой вертикальной полосы не видно */
 

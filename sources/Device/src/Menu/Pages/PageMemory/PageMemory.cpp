@@ -5,6 +5,7 @@
 #include "Tables.h"
 #include "Data/Reader.h"
 #include "Data/DataStorage.h"
+#include "Display/Display_Primitives.h"
 #include "Display/Grid.h"
 #include "Display/Symbols.h"
 #include "Display/Painter.h"
@@ -21,6 +22,10 @@
 #include "Utils/Values.h"
 #include "Utils/CommonFunctions.h"
 #endif
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+using Display::Region;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -354,7 +359,7 @@ static void DrawSetMask()
     int height = 160;
 
     Painter::DrawRectangle(x0, y0, width, height, Color::FILL);
-    Painter::FillRegion(x0 + 1, y0 + 1, width - 2, height - 2, Color::BACK);
+    Region(width - 2, height - 2).Draw(x0 + 1, y0 + 1, Color::BACK);
 
     int index = 0;
     int position = 0;
@@ -442,7 +447,7 @@ static void DrawFileMask(int x, int y)
         }
         ch++;
     }
-    Painter::FillRegion(x, y, 5, 8, Color::FLASH_10);
+    Region(5, 8).Draw(x, y, Color::FLASH_10);
 }
 
 static bool HandlerKey_Drive_Mask(KeyEvent event)
@@ -547,7 +552,7 @@ static void DrawSetName()
     int height = 80;
 
     Painter::DrawRectangle(x0, y0, width, height, Color::FILL);
-    Painter::FillRegion(x0 + 1, y0 + 1, width - 2, height - 2, Color::BACK);
+    Region(width - 2, height - 2).Draw(x0 + 1, y0 + 1, Color::BACK);
 
     int index = 0;
     int position = 0;
@@ -583,7 +588,7 @@ static void DrawSetName()
 
     int x = String(FILE_NAME).Draw(x0 + deltaX, y0 + 65, Color::FILL);
 
-    Painter::FillRegion(x, y0 + 65, 5, 8, Color::FLASH_10);
+    Region(5, 8).Draw(x, y0 + 65, Color::FLASH_10);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

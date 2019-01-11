@@ -3,6 +3,7 @@
 #include "defines.h"
 #include "BottomPart.h"
 #include "Data/Reader.h"
+#include "Display/Display_Primitives.h"
 #include "Display/Grid.h"
 #include "Display/Painter.h"
 #include "Display/Symbols.h"
@@ -16,6 +17,10 @@
 #include "Hardware/CPU.h"
 #include "Hardware/VCP.h"
 #endif
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+using Display::Region;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -222,7 +227,7 @@ static void WriteTextVoltage(Chan::E ch, int x, int y)
     Color colorDraw = inverse ? Color::WHITE : color;
     if (inverse)
     {
-        Painter::FillRegion(x, y, widthField, heightField, color);
+        Region(widthField, heightField).Draw(x, y, color);
     }
     const int SIZE = 100;
     char buffer[SIZE];

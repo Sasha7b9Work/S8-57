@@ -1,11 +1,16 @@
 #include "stdafx.h"
 #ifndef WIN32
 #include "defines.h"
+#include "Display/Display_Primitives.h"
 #include "Display/Grid.h"
 #include "Display/Painter.h"
 #include "Hardware/Sound.h"
 #include "Utils/Math.h"
 #endif
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+using Display::Region;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -278,7 +283,7 @@ void Measure::DrawPageChoice()
             int y0 = y + row * dY;
             bool active = (meas == posOnPageChoice);
             Painter::DrawRectangle(x0, y0, dX, dY, Color::WHITE);
-            Painter::FillRegion(x0 + 1, y0 + 1, dX - 2, dY - 2, (active ? Color::FLASH_10 : Color::BACK));
+            Region(dX - 2, dY - 2).Draw(x0 + 1, y0 + 1, (active ? Color::FLASH_10 : Color::BACK));
             Painter::SetColor(active ? Color::FLASH_01 : Color::FILL);
             Painter::Draw10SymbolsInRect(x0 + 2, y0 + 1, GetChar(meas));
             Painter::SetFont(Font::Type::_5);
@@ -323,13 +328,13 @@ void Measure::Graphics::Draw()
             Measure::Type::E type = measure.GetType();
             if (type != Measure::Type::None)
             {
-                Painter::FillRegion(x, y, dX, dY, Color::BACK);
+                Region(dX, dY).Draw(x, y, Color::BACK);
                 Painter::DrawRectangle(x, y, dX, dY, Color::FILL);
                 top = Math::Min(top, y);
             }
             if (active)
             {
-                Painter::FillRegion(x + 2, y + 2, dX - 4, dY - 4, Color::FILL);
+                Region(dX - 4, dY - 4).Draw(x + 2, y + 2, Color::FILL);
             }
             if (type != Measure::Type::None)
             {
@@ -342,7 +347,7 @@ void Measure::Graphics::Draw()
 
                 if (type == MEAS_MARKED)
                 {
-                    Painter::FillRegion(x + 1, y + 1, dX - 2, 9, active ? Color::BACK : Color::FILL);
+                    Region(dX - 2, 9).Draw(x + 1, y + 1, active ? Color::BACK : Color::FILL);
                     measure.Name().Draw(x + 4, y + 2, active ? Color::FILL : Color::BACK);
                 }
                 if(VIEW_MEASURES_BOTH)

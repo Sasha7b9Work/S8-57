@@ -3,6 +3,7 @@
 #include "defines.h"
 #include "Menu/Pages/Include/PageDebug.h"
 #include "Data/Reader.h"
+#include "Display/Display_Primitives.h"
 #include "Display/Grid.h"
 #include "Display/Symbols.h"
 #include "Display/Painter.h"
@@ -17,6 +18,10 @@
 #include "Utils/Math.h"
 #include "Utils/StringUtils.h"
 #endif
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+using Display::Region;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -673,7 +678,7 @@ static void Draw_EnterSerialNumber()
     int height = 160;
 
     Painter::DrawRectangle(x0, y0, width, height, Color::FILL);
-    Painter::FillRegion(x0 + 1, y0 + 1, width - 2, height - 2, Color::BACK);
+    Region(width - 2, height - 2).Draw(x0 + 1, y0 + 1, Color::BACK);
 
     int deltaX = 10;
 

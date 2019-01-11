@@ -4,11 +4,16 @@
 #include "MemoryWindow.h"
 #include "Data/DataStorage.h"
 #include "Data/Reader.h"
+#include "Display/Display_Primitives.h"
 #include "Display/Grid.h"
 #include "Display/Painter.h"
 #include "FPGA/FPGA.h"
 #include "Settings/Settings.h"
 #endif
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+using Display::Region;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -77,7 +82,7 @@ void MemoryWindow::DrawScreenArea()
     int begin = (int)(relBegin * Width() + 0.5F);   // Реальное начало экранной области относительно начала окна памяти
     int width = (int)(relWidth * Width() + 0.5F);   // Реальная ширина видимой области
 
-    Painter::FillRegion(X() + begin, Y(), width, Height(), Color::GRAY_20);
+    Region(width, Height()).Draw(X() + begin, Y(), Color::GRAY_20);
 
     Painter::DrawRectangle(X() + begin, Y(), width, Height(), Color::FILL);
 }

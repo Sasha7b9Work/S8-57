@@ -2,6 +2,7 @@
 #ifndef WIN32
 #include "defines.h"
 #include "Data/DataStorage.h"
+#include "Display/Display_Primitives.h"
 #include "Display/Grid.h"
 #include "Display/Painter.h"
 #include "Display/Symbols.h"
@@ -18,9 +19,12 @@
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+using Display::Region;
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 extern const PageBase pageRAM;
 const PageBase *PageMemory::PageRAM::pointer = &pageRAM;
-
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -135,7 +139,7 @@ static void OnDraw_RAM()
 {
     int width = 40;
     int height = 10;
-    Painter::FillRegion(Grid::Right() - width, Grid::Top(), width, height, Color::BACK);
+    Region(width, height).Draw(Grid::Right() - width, Grid::Top(), Color::BACK);
     Painter::DrawRectangle(Grid::Right() - width, Grid::Top(), width, height, Color::FILL);
     Integer(NUM_RAM_SIGNAL + 1).ToString(false, 3).Draw(Grid::Right() - width + 2, Grid::Top() + 1);
     String("/").Draw(Grid::Right() - width + 17, Grid::Top() + 1);

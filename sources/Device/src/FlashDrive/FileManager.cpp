@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #ifndef WIN32
 #include "defines.h"
+#include "Display/Display_Primitives.h"
 #include "Display/Grid.h"
 #include "Display/Painter.h"
 #include "FileManager.h"
@@ -11,6 +12,10 @@
 #include "Utils/StringUtils.h"
 #include "Utils/Values.h"
 #endif
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+using Display::Region;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -50,7 +55,7 @@ static void DrawLongString(int x, int y, const char *string, bool hightlight)
     Color color = Color::FILL;
     if (hightlight)
     {
-        Painter::FillRegion(x - 1, y, WIDTH_COL + 9, 8, color);
+        Region(WIDTH_COL + 9, 8).Draw(x - 1, y, color);
         color = Color::BACK;
     }
 
@@ -69,7 +74,7 @@ static void DrawLongString(int x, int y, const char *string, bool hightlight)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void DrawHat(int x, int y, const char *string, int num1, int num2)
 {
-    Painter::FillRegion(x - 1, y, WIDTH_COL + 9, RECS_ON_PAGE * 9 + 11, Color::BACK);
+    Region(WIDTH_COL + 9, RECS_ON_PAGE * 9 + 11).Draw(x - 1, y, Color::BACK);
     String(string, num1, num2).Draw(x + 60, y, Color::FILL);
     Painter::DrawHLine(y + 10, x + 2, x + 140);
 }
@@ -162,7 +167,7 @@ void FileManager::Draw() //-V2506
         Painter::BeginScene(Color::BACK);
         Menu::Draw();
         Painter::DrawRectangle(0, 0, width, 239, Color::FILL);
-        Painter::FillRegion(left, top, Grid::Width() - 2, Grid::Height() - 2, Color::BACK);
+        Region(Grid::Width() - 2, Grid::Height() - 2).Draw(left, top, Color::BACK);
         FDrive::GetNumDirsAndFiles(currentDir, &numDirs, &numFiles);
         DrawNameCurrentDir(left, top + 2);
         Painter::DrawVLine(left2col, top + 16, 239, Color::FILL);
