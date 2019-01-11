@@ -58,138 +58,127 @@ private:
     static uint8 ValueForRange(Chan::E ch);
 };
 
-class FPGA
+namespace FPGA
 {
-friend class TrigLev;
-friend struct HardwareFPGA;
-public:
+    extern HardwareFPGA hardware;
 
-    static HardwareFPGA hardware;
+    void Init();
 
-    static void Init();
+    bool InStateStop();
 
-    static void Update();
+    void Update();
 
     static void Start();
 
-    static void OnPressStart();
+    void OnPressStart();
 
     static void GiveStart();
 
-    static void LoadSettings();
+    void LoadSettings();
 
-    static void ChangeRange(Chan::E ch, int delta);
+    void ChangeRange(Chan::E ch, int delta);
 
-    static void TBaseChange(int delta);
+    void TBaseChange(int delta);
 
-    static void RShiftChange(Chan::E ch, int delta);
+    void RShiftChange(Chan::E ch, int delta);
 
-    static void TrigLevChange(int delta);
+    void TrigLevChange(int delta);
 
-    static void TShiftChange(int delta);
+    void TShiftChange(int delta);
 
-    static void SetRShift(Chan::E ch, uint16 rShift);
+    void SetRShift(Chan::E ch, uint16 rShift);
 
-    static void LoadTrigPolarity();
+    void LoadTrigPolarity();
 
-    static void LoadTrigMode();
+    //static void LoadTrigMode();
 
-    static void LoadTrigInput();
+    void LoadTrigInput();
 
-    static void Stop(bool pause = false);
+    void Stop(bool pause = false);
 
-    static uint NumPoints();
+    uint NumPoints();
 
-    static bool IsRunning() { return isRunning; }
+    bool IsRunning();
 
-    static bool InStateStop() { return false; }
+    //static StateWorkFPGA GetStateWork();
 
-    static StateWorkFPGA GetStateWork();
+    void SetTShift(int tShift);
 
-    static void SetTShift(int tShift);
-
-    static void Reset();
+    void Reset();
 
     static void LoadRegUPR();
     /// Установить значение удержания синхронизации
-    static void LoadHoldfOff();
+    void LoadHoldfOff();
 
-    static void SetModeCouple(Chan::E ch, ModeCouple::E couple);
+    void SetModeCouple(Chan::E ch, ModeCouple::E couple);
 
     /// Установить относительный уровень синхронизации
-    static void SetTrigLev(Trig::Source::E ch, uint16 trigLev);
+    void SetTrigLev(Trig::Source::E ch, uint16 trigLev);
     /// Установить количество считываемых сигналов в секунду
-    static void SetENumSignalsInSec(int numSigInSec);
+    void SetENumSignalsInSec(int numSigInSec);
     /// Установить количество измерений, по которым будут рассчитываться ворота в режиме рандомизатора
-    static void SetNumberMeasuresForGates(int number);
+    void SetNumberMeasuresForGates(int number);
     /// Установить масштаб по времени
-    static void SetTBase(TBase tBase);
+    //static void SetTBase(TBase tBase);
     /// Найти и установить уровень синхронизации по последнему считанному сигналу
-    static void FindAndSetTrigLevel();
+    void FindAndSetTrigLevel();
 
-    static void EnableRecorderMode(bool enable);
+    void EnableRecorderMode(bool enable);
     /// Установить добавочное смещение по времени для режима рандомизатора. В каждой развёртке это смещение должно быть разное
-    static void SetDeltaTShift(int16 shift);
+    void SetDeltaTShift(int16 shift);
 
-    static void SetBandwidth(Chan::E ch);
+    void SetBandwidth(Chan::E ch);
 
-    static ADC_HandleTypeDef *HandleADC() { return &handleADC; };
+    ADC_HandleTypeDef *HandleADC();
 
-    static void SetValueADC(uint16 value);
+    void SetValueADC(uint16 value);
     /// Сделать калибровку
-    static void DoCalibration();
+    void DoCalibration();
 
-private:
+    void GPIO_Init();
 
-    static void GPIO_Init();
+    void WritePin(Pin::E pin, int enable);
 
-    static void WritePin(Pin::E pin, int enable);
+    void SetPin(Pin::E pin);
 
-    static void SetPin(Pin::E pin);
-
-    static void ResetPin(Pin::E pin);
+    void ResetPin(Pin::E pin);
 
     static uint GetPin(Pin::E pin);
 
     static GPIO_TypeDef *GetPort(Pin::E pin);
 
-    static void WriteRegisters(Pin::E cs, uint16 value);
+    void WriteRegisters(Pin::E cs, uint16 value);
 
-    static void ReadData();
+    void ReadData();
 
     static void ReadFlag();
 
     static uint16 ReadLastRecord();
 
-    static void ReadDataChanenl(Chan::E ch, uint8 data[FPGA_MAX_NUM_POINTS]);
+    void ReadDataChanenl(Chan::E ch, uint8 data[FPGA_MAX_NUM_POINTS]);
     /// Читать канал в рандомизаторе с адреса address
     static void ReadDataChanenlRand(Chan::E ch, const uint8 *address, uint8 *data);
 
     static bool CalculateGate(uint16 rand, uint16 *eMin, uint16 *eMax);
 
     static int CalculateShift();
-
-    static bool isRunning;
     /// True, если дан запуск
-    static bool givingStart;
+    extern bool givingStart;
     /// Время подачи старта
-    static uint timeStart;
+    extern uint timeStart;
 
-    static uint16 flag;
-    /// Используется в режиме рандомизатора
-    static ADC_HandleTypeDef handleADC;
+    extern uint16 flag;
     /// Значение, считанное из handleADC
-    static uint16 valueADC;
+    extern uint16 valueADC;
     
-public:
-    static StateWorkFPGA fpgaStateWork;
+    extern StateWorkFPGA fpgaStateWork;
 
-    static uint16 post;
-    static uint16 pred;
+    extern uint16 post;
+    extern uint16 pred;
 
-private:
+    extern bool isRunning;
 
-    static struct State
+    extern struct State
     {
         bool needCalibration;                       ///< Установленное в true значение означает, что необходимо произвести калибровку.
         StateWorkFPGA stateWorkBeforeCalibration;
@@ -214,8 +203,6 @@ private:
         } value;
     };
 
-public:
-
     struct GetFlag
     {
         static bool DATA_READY();
@@ -239,8 +226,7 @@ public:
 
     class ForTester
     {
-        friend class Tester;
-    private:
+    public:
         static bool Read(uint8 *dataA, uint8 *dataB);
         /// Запустить цикл чтения для тестер-компонента. В течение time секунд должно быть считано numPoints точек
         static void Start();
