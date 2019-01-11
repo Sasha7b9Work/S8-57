@@ -72,8 +72,8 @@ void GovernorColor::DrawOpened(int x, int y)
     static const int delta = 43;
     x -= delta;
     ct->Init(false);
-    Painter::DrawRectangle(x - 1, y - 1, Menu::Item::HEIGHT + delta + 2, Menu::Item::HEIGHT + 2, Color::BLACK);
-    Painter::DrawRectangle(x, y, Width() + delta, Menu::Item::HEIGHT, Color::MenuTitle(false));
+    Rectangle(x - 1, y - 1, Menu::Item::HEIGHT + delta + 2, Menu::Item::HEIGHT + 2, Color::BLACK);
+    Rectangle(x, y, Width() + delta, Menu::Item::HEIGHT, Color::MenuTitle(false));
     Region(Menu::Item::Value::WIDTH + 2 + delta, Menu::Item::Value::HEIGHT + 3).Draw(x + 1, y + 1, Color::MenuItem(false));
     Painter::DrawHLine(y + Menu::Item::HEIGHT / 2 + 2, x, x + Width() + delta, Color::MenuTitle(false));
     Painter::DrawStringInCenterRect(x + (IsPressed() ? 2 : 1), y + (IsPressed() ? 2 : 1), Width() + delta, Menu::Item::HEIGHT / 2 + 2, 
@@ -255,7 +255,7 @@ void Choice::DrawOpened(int x, int y)
 {
     int height = HeightOpened();
     
-    Painter::DrawRectangle(x, y, Width(), height, Color::FILL);
+    Rectangle(x, y, Width(), height, Color::FILL);
     DrawCommonHiPart(this, x, y, IsPressed(), false, true);
 
     Region(Width() - 2, height - MOI_HEIGHT_TITLE + 4).Draw(x + 1, y + MOI_HEIGHT_TITLE - 5, Color::BACK);
@@ -413,7 +413,7 @@ void Page::DrawTitle(int x, int yTop)
 
     Region(Menu::Title::WIDTH + 2, Menu::Title::HEIGHT + 2).Draw(x - 1, yTop, Color::BACK);
 
-    Painter::DrawRectangle(x, yTop, Menu::Title::WIDTH + 1, Menu::Title::HEIGHT + 1, Color::BorderMenu(shade));
+    Rectangle(x, yTop, Menu::Title::WIDTH + 1, Menu::Title::HEIGHT + 1, Color::BorderMenu(shade));
 
     if (shade)
     {
@@ -451,7 +451,7 @@ void Page::DrawItems(int x, int y)
     {
         /// \todo Ќадо бы не делать это дл€ пунктов меню, которые существуют и всЄ равно отрисовыватьс€ будут - зачем зр€ грузить процессор
 
-        Painter::DrawRectangle(x, y + 1, Width() - 1, Menu::Item::HEIGHT, Color::FILL);
+        Rectangle(x, y + 1, Width() - 1, Menu::Item::HEIGHT, Color::FILL);
         Region(Width() - 3, Menu::Item::HEIGHT - 2).Draw(x + 1, y + 2, Color::BACK);
 
         Control *item = Item(PosItemOnLeft() + i);
@@ -549,10 +549,10 @@ void TimeControl::DrawOpened(int x, int y)
 {
     int width = Menu::Item::Value::WIDTH + 3;
     int height = 61;
-    Painter::DrawRectangle(x - 1, y - 1, width + 2, height + 3, Color::BACK);
+    Rectangle(x - 1, y - 1, width + 2, height + 3, Color::BACK);
     DrawCommonHiPart(this, x - 1, y - 1, IsPressed(), false, false);
 
-    Painter::DrawRectangle(x - 1, y, width + 1, height + 1, Color::MenuTitle(false));
+    Rectangle(x - 1, y, width + 1, height + 1, Color::MenuTitle(false));
 
     Painter::DrawHLine(y + MOI_HEIGHT_TITLE - 1, x, x + Width());
     Region(Width() - 1, height - MOI_HEIGHT_TITLE).Draw(x, y + MOI_HEIGHT_TITLE, Color::BLACK);
@@ -709,7 +709,7 @@ void Page::DrawPagesUGO(int right, int bottom)
         }
         else
         {
-            Painter::DrawRectangle(x, top, size, size);
+            Rectangle(x, top, size, size);
         }
     }
 }
@@ -738,7 +738,7 @@ void Page::DrawNestingPage(int left, int bottom)
         for (int i = 0; i <= nesting; i++)
         {
             int x = left + i * (size + delta);
-            Painter::DrawRectangle(x, bottom, size, size);
+            Rectangle(x, bottom, size, size);
         }
     }
 }
@@ -751,13 +751,13 @@ void SButton::DrawHints(int x, int y, int width)
         return;
     }
     Region(width, 239 - y).Draw(x, y, Color::BACK);
-    Painter::DrawRectangle(x, y, width, 239 - y, Color::FILL);
+    Rectangle(x, y, width, 239 - y, Color::FILL);
     const StructHelpDrawButton *structHelp = &hintUGO[0];
     x += 3;
     y += 3;
     for (int i = 0; i < numHints; i++)
     {
-        Painter::DrawRectangle(x, y, WIDTH_SB, WIDTH_SB);
+        Rectangle(x, y, WIDTH_SB, WIDTH_SB);
         structHelp->funcDrawUGO(x, y);
         int yNew = Painter::DrawTextInRectWithTransfers(x + 23, y + 1, width - 30, 20, structHelp->helpUGO[LANG]);
         y = ((yNew - y) < 22) ? (y + 22) : yNew;

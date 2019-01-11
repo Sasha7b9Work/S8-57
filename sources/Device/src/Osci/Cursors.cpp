@@ -15,6 +15,9 @@
 #endif
 
 
+using Display::Rectangle;
+
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /// Нарисовать вертикальный курсор
 static void DrawVertical(int x, int yTearing);
@@ -94,8 +97,8 @@ void Cursors::Draw()
             y0 = Grid::Top() + (int)CURsU_POS(source, 0);
             y1 = Grid::Top() + (int)CURsU_POS(source, 1);
 
-            Painter::DrawRectangle(x0 - 2, y0 - 2, 4, 4);
-            Painter::DrawRectangle(x1 - 2, y1 - 2, 4, 4);
+            Rectangle(4, 4).Draw(x0 - 2, y0 - 2);
+            Rectangle(4, 4).Draw(x1 - 2, y1 - 2);
         }
 
         if (CURsT_ENABLED)
@@ -126,8 +129,8 @@ static void DrawVertical(int x, int yTearing)
         Painter::DrawDashedVLine(x, Grid::Top() + 2, yTearing - 2, 1, 1, 0);
         Painter::DrawDashedVLine(x, yTearing + 2, Grid::ChannelBottom() - 1, 1, 1, 0);
     }
-    Painter::DrawRectangle(x - 1, Grid::Top() - 1, 2, 2);
-    Painter::DrawRectangle(x - 1, Grid::ChannelBottom() - 1, 2, 2);
+    Rectangle(2, 2).Draw(x - 1, Grid::Top() - 1);
+    Rectangle(2, 2).Draw(x - 1, Grid::ChannelBottom() - 1);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -143,8 +146,8 @@ static void DrawHorizontal(int y, int xTearing)
         Painter::DrawDashedHLine(y, Grid::Left() + 2, xTearing - 2, 1, 1, 0);
         Painter::DrawDashedHLine(y, xTearing + 2, Grid::Right() - 1, 1, 1, 0);
     }
-    Painter::DrawRectangle(Grid::Left() - 1, y - 1, 2, 2);
-    Painter::DrawRectangle(Grid::Right() - 1, y - 1, 2, 2);
+    Rectangle(2, 2).Draw(Grid::Left() - 1, y - 1);
+    Rectangle(Grid::Right() - 1, y - 1, 2, 2).Draw();
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

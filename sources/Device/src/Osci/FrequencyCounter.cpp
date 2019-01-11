@@ -282,7 +282,7 @@ static void DrawFrequency(int x, int y)
     Painter::DrawBigText(x + 2, y + 1, SIZE, "F", Color::FILL);
     Painter::DrawBigText(x + 2, y + 10 * SIZE, SIZE, "T");
 
-    Painter::DrawRectangle(x - 20, y, 10, 10);
+    Rectangle(x - 20, y, 10, 10);
     if (lampFreq)
     {
         Region(10, 10).Draw(x - 20, y);
@@ -340,7 +340,7 @@ static void DrawPeriod(int x, int y)
     Painter::DrawBigText(x + 2, y + 1, SIZE, "T", Color::FILL);
     Painter::DrawBigText(x + 2, y + 10 * SIZE, SIZE, "F");
 
-    Painter::DrawRectangle(x - 20, y + 1, 10, 10);
+    Rectangle(x - 20, y + 1, 10, 10);
     if (lampPeriod)
     {
         Region(10, 10).Draw(x - 20, y);
@@ -404,7 +404,7 @@ void FrequencyCounter::Draw()
 
     
     Region(width - 2, height - 2).Draw(x + 1, y + 1, Color::BACK);
-    Painter::DrawRectangle(x,    y,     width,     height,     Color::FILL);
+    Rectangle(x,    y,     width,     height,     Color::FILL);
 
     x += 2;
     y += 2;
@@ -793,7 +793,7 @@ static void DrawDebugInfo()
     int x = 50;
     int y = 120;
     Region(width, height).Draw(x, y, Color::BACK);
-    Painter::DrawRectangle(x - 1, y - 1, width + 2, height + 2, Color::FILL);
+    Rectangle(x - 1, y - 1, width + 2, height + 2, Color::FILL);
 
     String("%d", freqActual.word).Draw(x + 4, y + 4);
     String("%d", periodActual.word).Draw(x + 4, y + 15);
@@ -803,7 +803,7 @@ static void DrawDebugInfo()
 
 
     Region(width, height).Draw(x, y, Color::BACK);
-    Painter::DrawRectangle(x - 1, y - 1, width + 2, height + 2, Color::FILL);
+    Rectangle(x - 1, y - 1, width + 2, height + 2, Color::FILL);
 
     String("%d", lastFreq.word).Draw(x + 4, y + 4);
     String("%d", lastPeriod.word).Draw(x + 4, y + 15);
@@ -814,14 +814,14 @@ static void DrawDebugInfo()
 
 #define TIME 250
 
-    Painter::DrawRectangle(x, y + 4, size, size, Color::FILL);
+    Rectangle(x, y + 4, size, size, Color::FILL);
 
     if (TIME_MS - lastFreqRead < TIME)
     {
         Region(size - 2, size - 2).Draw(x + 1, y + 5, Color::BLUE);
     }
 
-    Painter::DrawRectangle(x, y + 15, size, size, Color::FILL);
+    Rectangle(x, y + 15, size, size, Color::FILL);
 
     if (TIME_MS - lastPeriodRead < TIME)
     {
@@ -830,14 +830,14 @@ static void DrawDebugInfo()
 
     x += 20;
 
-    Painter::DrawRectangle(x, y + 4, size, size, Color::FILL);
+    Rectangle(x, y + 4, size, size, Color::FILL);
 
     if (TIME_MS - lastFreqOver < TIME)
     {
         Region(size - 2, size - 2).Draw(x + 1, y + 5, Color::RED);
     }
 
-    Painter::DrawRectangle(x, y + 15, size, size, Color::FILL);
+    Rectangle(x, y + 15, size, size, Color::FILL);
 
     if (TIME_MS - lastPeriodOver < TIME)
     {

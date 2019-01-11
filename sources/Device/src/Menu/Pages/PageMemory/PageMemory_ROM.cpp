@@ -20,6 +20,7 @@
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+using Display::Rectangle;
 using Display::Region;
 
 
@@ -236,7 +237,7 @@ static void DrawMemoryWave(int num, bool exist)
     int y = Grid::FullBottom() - 10;
     int width = 12;
     Region(width, 10).Draw(x, y, num == NUM_ROM_SIGNAL ? Color::FLASH_10 : Color::BACK);
-    Painter::DrawRectangle(x, y, width, 10, Color::FILL);
+    Rectangle(width, 10).Draw(x, y, Color::FILL);
     Painter::SetColor(num == NUM_ROM_SIGNAL ? Color::FLASH_01 : Color::FILL);
     if (exist)
     {

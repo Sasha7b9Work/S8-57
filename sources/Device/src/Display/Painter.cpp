@@ -14,6 +14,7 @@
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+using Display::Rectangle;
 using Display::Region;
 
 
@@ -71,7 +72,7 @@ void Painter::DrawVLine(int x, float y0, float y1, Color color)
 void Painter::DrawBoundedRegion(int x, int y, int width, int height, Color colorFill, Color colorBound)
 {
     Color color = currentColor;
-    DrawRectangle(x, y, width, height, colorBound);
+    Rectangle(width, height).Draw(x, y, colorBound);
     Region(width - 2, height - 2).Draw(x + 1, y + 1, colorFill);
     /// \todo Почему-то цвет не восстанавливается
     SetColor(color);
@@ -512,7 +513,7 @@ int Painter::DrawStringInCenterRectAndBoundItC(int x, int y, int width, int heig
 void Painter::FillBoundedRegion(int x, int y, int widht, int height, Color colorFill, Color colorBound)
 {
     Region(widht - 2, height - 2).Draw(x + 1, y + 1, colorFill);
-    DrawRectangle(x, y, widht, height, colorBound);
+    Rectangle(widht, height).Draw(x, y, colorBound);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -582,7 +583,7 @@ int Painter::DrawTextInBoundedRectWithTransfers(int x, int y, int width, const c
     int height = 0;
     GetHeightTextWithTransfers(x + 3, y + 3, x + width - 8, text, &height);
 
-    DrawRectangle(x, y, width, height, colorFill);
+    Rectangle(width, height).Draw(x, y, colorFill);
     Region(width - 2, height - 2).Draw(x + 1, y + 1, colorBackground);
     DrawTextInRectWithTransfersC(x + 3, y + 3, width - 8, height, text, colorFill);
     return y + height;

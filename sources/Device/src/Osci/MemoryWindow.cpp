@@ -84,7 +84,7 @@ void MemoryWindow::DrawScreenArea()
 
     Region(width, Height()).Draw(X() + begin, Y(), Color::GRAY_20);
 
-    Painter::DrawRectangle(X() + begin, Y(), width, Height(), Color::FILL);
+    Rectangle(X() + begin, Y(), width, Height(), Color::FILL);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

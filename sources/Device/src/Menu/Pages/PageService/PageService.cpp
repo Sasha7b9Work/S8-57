@@ -28,6 +28,8 @@ extern const PageBase ppSound;
 extern const PageBase ppRTC;
 extern const PageBase ppInformation;
 
+using Display::Rectangle;
+
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 /*
@@ -307,14 +309,14 @@ static void Draw_Function_Screen_Disable(int x, int y)
 
 static void Draw_Function_Screen_Separate(int x, int y)
 {
-    Painter::DrawRectangle(x + 3, y + 5, 13, 9);
+    Rectangle(13, 9).Draw(x + 3, y + 5);
     Painter::DrawHLine(y + 9, x + 3, x + 16);
     Painter::DrawHLine(y + 10, x + 3, x + 16);
 }
 
 static void Draw_Function_Screen_Together(int x, int y)
 {
-    Painter::DrawRectangle(x + 3, y + 5, 13, 9);
+    Rectangle(13, 9).Draw(x + 3, y + 5);
 }
 
 static void Draw_Function_Screen(int x, int y)
@@ -644,7 +646,7 @@ static void Information_Draw()
     int x = 100;
     int dY = 20;
     int y = 20;
-    Painter::DrawRectangle(0, 0, 319, 239, Color::FILL);
+    Rectangle(0, 0, 319, 239, Color::FILL);
     y += dY;
     String(DICT(DInformation)).Draw(x, y);
     y += dY;

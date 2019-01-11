@@ -19,6 +19,7 @@
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+using Display::Rectangle;
 using Display::Region;
 
 
@@ -140,7 +141,7 @@ static void OnDraw_RAM()
     int width = 40;
     int height = 10;
     Region(width, height).Draw(Grid::Right() - width, Grid::Top(), Color::BACK);
-    Painter::DrawRectangle(Grid::Right() - width, Grid::Top(), width, height, Color::FILL);
+    Rectangle(width, height).Draw(Grid::Right() - width, Grid::Top(), Color::FILL);
     Integer(NUM_RAM_SIGNAL + 1).ToString(false, 3).Draw(Grid::Right() - width + 2, Grid::Top() + 1);
     String("/").Draw(Grid::Right() - width + 17, Grid::Top() + 1);
     Integer((int)DataStorage::NumElementsInStorage()).ToString(false, 3).Draw(Grid::Right() - width + 23, Grid::Top() + 1);

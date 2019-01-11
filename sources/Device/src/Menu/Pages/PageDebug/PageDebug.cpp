@@ -21,6 +21,7 @@
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+using Display::Rectangle;
 using Display::Region;
 
 
@@ -480,7 +481,7 @@ DEF_SMALL_BUTTON_EXIT(  bSettings_Exit,                                         
 static void DebugShowSetInfo_Draw()
 {
     Painter::BeginScene(Color::BACK);
-    Painter::DrawRectangle(0, 0, 319, 239, Color::FILL);
+    Rectangle(0, 0, 319, 239, Color::FILL);
 
     int x0 = 30;
     int y0 = 25;
@@ -677,7 +678,7 @@ static void Draw_EnterSerialNumber()
     int width = Grid::Width() - 80;
     int height = 160;
 
-    Painter::DrawRectangle(x0, y0, width, height, Color::FILL);
+    Rectangle(x0, y0, width, height, Color::FILL);
     Region(width - 2, height - 2).Draw(x0 + 1, y0 + 1, Color::BACK);
 
     int deltaX = 10;

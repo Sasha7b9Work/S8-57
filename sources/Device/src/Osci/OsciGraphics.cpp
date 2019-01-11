@@ -35,7 +35,7 @@ void Osci::Draw()
     
     PainterData::DrawData();
     
-    Painter::DrawRectangle(Grid::Left(), Grid::Top(), Grid::Width(), Grid::Height(), Color::FILL);
+    Rectangle(Grid::Left(), Grid::Top(), Grid::Width(), Grid::Height(), Color::FILL);
     
     BottomPart::Draw();
     

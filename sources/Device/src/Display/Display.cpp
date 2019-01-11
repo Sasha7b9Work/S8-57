@@ -16,6 +16,7 @@
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+using Display::Rectangle;
 using Display::Region;
 
 
@@ -281,7 +282,7 @@ static void FuncOnWait()
     int y = 120 - height / 2;
 
     Region(width, height).Draw(x, y, Color::BACK);
-    Painter::DrawRectangle(x, y, width, height, Color::FILL);
+    Rectangle(width, height).Draw(x, y, Color::FILL);
     Painter::DrawStringInCenterRect(x, y, width, height - 20, textWait);
     char buf[100];
     buf[0] = 0;

@@ -15,6 +15,7 @@
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+using Display::Rectangle;
 using Display::Region;
 
 
@@ -166,7 +167,7 @@ void FileManager::Draw() //-V2506
     {
         Painter::BeginScene(Color::BACK);
         Menu::Draw();
-        Painter::DrawRectangle(0, 0, width, 239, Color::FILL);
+        Rectangle(width, 239).Draw(0, 0, Color::FILL);
         Region(Grid::Width() - 2, Grid::Height() - 2).Draw(left, top, Color::BACK);
         FDrive::GetNumDirsAndFiles(currentDir, &numDirs, &numFiles);
         DrawNameCurrentDir(left, top + 2);

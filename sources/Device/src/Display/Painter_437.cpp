@@ -226,9 +226,11 @@ void Painter::DrawHLine(int y, int x0, int x1, Color color)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Painter::DrawRectangle(int x, int y, int width, int height, Color color)
+/*
+void Rectangle(int x, int y, int width, int height, Color color)
 {
     SetColor(color);
     uint8 buffer[7] = { Command::Paint_DrawRectangle, (uint8)x, (uint8)(x >> 8), (uint8)y, (uint8)width, (uint8)(width >> 8), (uint8)height };
     FSMC::WriteToPanel(buffer, 7);
 }
+*/
