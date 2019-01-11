@@ -57,6 +57,8 @@
 #include "Osci/MemoryWindow.h"
 #include "Osci/PainterData.h"
 
+#include "Recorder/Recorder.h"
+
 #include "SCPI/SCPI.h"
 #include "Settings/Settings.h"
 

@@ -803,6 +803,9 @@
     <ClInclude Include="..\..\Device\src\SCPI\SCPI.h">
       <Filter>SCPI</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Device\src\Recorder\Types_Recorder.h">
+      <Filter>Recorder</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\Device\src\Display\Font\font5.inc">

@@ -263,6 +263,7 @@
     <ClInclude Include="..\..\Device\src\Osci\Osci.h" />
     <ClInclude Include="..\..\Device\src\Osci\PainterData.h" />
     <ClInclude Include="..\..\Device\src\Recorder\Recorder.h" />
+    <ClInclude Include="..\..\Device\src\Recorder\Types_Recorder.h" />
     <ClInclude Include="..\..\Device\src\SCPI\SCPI.h" />
     <ClInclude Include="..\..\Device\src\Settings\Settings.h" />
     <ClInclude Include="..\..\Device\src\Settings\SettingsChannel.h" />
