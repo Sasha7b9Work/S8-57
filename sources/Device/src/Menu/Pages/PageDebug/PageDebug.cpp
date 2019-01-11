@@ -464,7 +464,7 @@ DEF_GOVERNOR(       mgPost,                                                     
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void OnPress_Settings_Exit()
 {
-    Display::SetDrawMode(DrawMode::Auto, 0);
+    Display::SetDrawMode(Display::DrawMode::Auto, 0);
 }
 
 DEF_SMALL_BUTTON_EXIT(  bSettings_Exit,                                                                          //--- Œ“À¿ƒ ¿ - Õ¿—“–Œ… » - ¬˚ıÓ‰ ---
@@ -546,7 +546,7 @@ static void DebugShowSetInfo_Draw()
 
 static void OnPress_Settings(bool)
 {
-    Display::SetDrawMode(DrawMode::Auto, DebugShowSetInfo_Draw);
+    Display::SetDrawMode(Display::DrawMode::Auto, DebugShowSetInfo_Draw);
 }
 
 DEF_PAGE_SB( ppSettings, // -V641 // -V1027                                                                                                                     //--- Œ“À¿ƒ ¿ - Õ¿—“–Œ… » ---

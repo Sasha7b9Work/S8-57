@@ -677,12 +677,12 @@ static void Information_Draw()
 
 static void OnPress_Information(bool)
 {
-    Display::SetDrawMode(DrawMode::Auto, Information_Draw);
+    Display::SetDrawMode(Display::DrawMode::Auto, Information_Draw);
 }
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void OnPress_Information_Exit()
 {
-    Display::SetDrawMode(DrawMode::Auto, 0);
+    Display::SetDrawMode(Display::DrawMode::Auto, 0);
 }
 
 DEF_SMALL_BUTTON_EXIT( bInformation_Exit,                                                                                                               //--- —≈–¬»— - »Õ‘Œ–Ã¿÷»ﬂ - ¬˚ıÓ‰ ---

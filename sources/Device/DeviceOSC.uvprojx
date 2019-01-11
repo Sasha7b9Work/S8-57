@@ -1116,6 +1116,11 @@
               <FilePath>.\src\Display\Display.h</FilePath>
             </File>
             <File>
+              <FileName>Display_Types.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Display\Display_Types.h</FilePath>
+            </File>
+            <File>
               <FileName>DisplayPrimitives.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Display\DisplayPrimitives.cpp</FilePath>
@@ -1124,11 +1129,6 @@
               <FileName>DisplayPrimitives.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Display\DisplayPrimitives.h</FilePath>
-            </File>
-            <File>
-              <FileName>DisplayTypes.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Display\DisplayTypes.h</FilePath>
             </File>
             <File>
               <FileName>Painter.cpp</FileName>

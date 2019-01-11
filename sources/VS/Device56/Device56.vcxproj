@@ -203,7 +203,7 @@
     <ClInclude Include="..\..\Device\src\Display\Console.h" />
     <ClInclude Include="..\..\Device\src\Display\Display.h" />
     <ClInclude Include="..\..\Device\src\Display\DisplayPrimitives.h" />
-    <ClInclude Include="..\..\Device\src\Display\DisplayTypes.h" />
+    <ClInclude Include="..\..\Device\src\Display\Display_Types.h" />
     <ClInclude Include="..\..\Device\src\Display\Font\Font.h" />
     <ClInclude Include="..\..\Device\src\Display\Grid.h" />
     <ClInclude Include="..\..\Device\src\Display\Grid_Types.h" />

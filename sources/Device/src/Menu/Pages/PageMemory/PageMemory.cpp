@@ -156,7 +156,7 @@ void PageMemory::OnPress_Drive_Manager(bool)
     if (FDrive::IsConnected())
     {
         FDrive::Mount();
-        Display::SetDrawMode(DrawMode::Auto, FileManager::Draw);
+        Display::SetDrawMode(Display::DrawMode::Auto, FileManager::Draw);
         FM_NEED_REDRAW = FM_REDRAW_FULL;
     }
     else

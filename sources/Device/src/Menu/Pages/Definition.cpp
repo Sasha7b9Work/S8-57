@@ -4,7 +4,7 @@
 #include "Menu/Menu.h"
 #include "Menu/Pages/Include/Definition.h"
 #include "Display/Painter.h"
-#include "Display/DisplayTypes.h"
+#include "Display/Display_Types.h"
 #include "Settings/Settings.h"
 #include "Utils/CommonFunctions.h"
 #include "Device.h"

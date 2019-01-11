@@ -512,9 +512,6 @@
     <ClInclude Include="..\..\Device\src\Display\DisplayPrimitives.h">
       <Filter>Display</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Device\src\Display\DisplayTypes.h">
-      <Filter>Display</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Device\src\Display\Grid.h">
       <Filter>Display</Filter>
     </ClInclude>
@@ -813,6 +810,9 @@
       <Filter>Recorder</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Device\src\Display\Grid_Types.h">
+      <Filter>Display</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Device\src\Display\Display_Types.h">
       <Filter>Display</Filter>
     </ClInclude>
   </ItemGroup>
