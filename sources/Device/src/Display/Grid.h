@@ -10,40 +10,29 @@
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-class Grid
+namespace Grid
 {
-public:
-
     /// Константы используются для расчёта размеров, которые остаются одинаковыми при любых размерах и пропорциях сетки - например, элементов меню
     static const int WIDTH = 280;
     static const int HEIGHT = 200;
     static const int SIZE_CELL = 20;
 
     /// Эти значения могут меняться в зависимости от выставленного режима
-    static int Left();
-    static int Top();
-    static int Width();
-    static int Height();
-    static int Bottom();
-    static int Right();
-    static int NumRows();
-    static int NumCols();
-    static int ChannelCenterHeight();
-    static int Delta();
-    static int FullBottom();
-    static int MathBottom();
-    static int MathHeight();
-    static int ChannelBottom();
+    int Left();
+    int Top();
+    int Width();
+    int Height();
+    int Bottom();
+    int Right();
+    int ChannelCenterHeight();
+    int FullBottom();
+    int MathBottom();
+    int MathHeight();
+    int ChannelBottom();
     static int MathTop();
 
     /// Нарисовать сетку
-    static void Draw();
-
-private:
-
-    static void DrawGridSignal(int left, int top, int width, int height);
-
-    static void DrawGridSpectrum();
+    void Draw();
 
     static float DeltaY();
 
@@ -58,12 +47,6 @@ private:
     static int  DeltaVforLineGrid();
     /// Возвращает расстояние между 
     static int  DeltaHforLineGrid();
-
-    static void DrawOsci();
-
-    static void DrawTester();
-
-public:
 
     /// Тип сетки на экране.
     struct Type
