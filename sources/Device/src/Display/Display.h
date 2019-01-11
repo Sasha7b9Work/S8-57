@@ -115,24 +115,21 @@ struct Warning
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-class Display
+namespace Display
 {
-    friend class LogEntity;
-public:
-    
     static const int HEIGHT = 240;
 
     static const int WIDTH = 320;
 
-    static void Init();
+    void Init();
 
-    static void Update();
+    void Update();
 
-    static void SetKey(Key::E key);
+    //static void SetKey(Key::E key);
 
-    static void RemoveAddDrawFunction();
+    void RemoveAddDrawFunction();
 
-    static void ShowWarning(Warning::E warning);
+    void ShowWarning(Warning::E warning);
     /// @brief Установить функцию и режим отрисовки экрана.
     /// @details Возможны три варианта.
     /// 1. DrawMode_Hand - в этом случае будет вызываться функция func(), определяемая пользователем, с частотой 25 раз в секунду.
@@ -140,23 +137,19 @@ public:
     /// 2. DrawMode::Auto и func == 0 - в этом случае будет выполняться функция Update() в главном цикле.
     /// 3. DrawMode::Auto и func != 0 - в этом случае будет выполняться функция func(), определяемая пользователем, но в теле
     /// главного цикла, будучи вызываемой из Update() вместо Update().
-    static void SetDrawMode(DrawMode::E mode, pFuncVV func);
+    void SetDrawMode(DrawMode::E mode, pFuncVV func);
 
-    static void FuncOnWaitStart(const char *text, bool eraseBackground);
+    void FuncOnWaitStart(const char *text, bool eraseBackground);
 
-    static void FuncOnWaitStop();
+    void FuncOnWaitStop();
 
-    static void SetAddDrawFunction(pFuncVV func, uint time = MAX_UINT);
+    void SetAddDrawFunction(pFuncVV func, uint time = MAX_UINT);
 
-    static void ChangedRShiftMarkers(bool active);
+    void ChangedRShiftMarkers(bool active);
 
-    static void Clear();
+    //static void Clear();
 
-private:
-
-    static Key::E key;
-
-public:
+    extern Key::E key;
 
     /// Выбор цвета фона.
     struct Background
@@ -331,25 +324,25 @@ public:
         } value;
     };
 
-    static void SetOrientation(Orientation orientation);
+    void SetOrientation(Orientation orientation);
     /// Возвращает режим усреднения
-    static ModeAveraging::E GetModeAveraging();
+    //static ModeAveraging::E GetModeAveraging();
     /// Устанавливает ограничение частоты кадров
     static void SetNumSignalsInS(int maxFPS);
     /// Возвращает число точек сглаживающего фильтра (режим ДИСПЛЕЙ - Сглаживание)
-    static int NumPointSmoothing();
+    //static int NumPointSmoothing();
     /// Возвращает адрес первой и последней точки на экране в координатах экрана
-    static BitSet64 PointsOnDisplay();
+    BitSet64 PointsOnDisplay();
     /// \brief Возращает адрес первой и последней точки в координатах экрана
-    static BitSet64 BytesOnDisplay();
+    BitSet64 BytesOnDisplay();
     /// Возвращает время, через которое меню автоматически скрывается, если не было больше нажатий
-    static int TimeMenuAutoHide();
+    int TimeMenuAutoHide();
     /// Если экран разделён на две части и основной сигнал выводится сверху - например, в режиме вывода спектра
-    static bool IsSeparate();
+    bool IsSeparate();
     /// brightness = 1..100
     static void SetBrightness(int16 brightness);
 
-    static int NumAverage();
+    //static int NumAverage();
     /// Это смещение экрана по памяти в режиме пикового детектора оно будет в два раза меньше, чем байт, потому что каждая точка представлена двумя байтами
-    static int ShiftInMemoryInPoints();
+    //static int ShiftInMemoryInPoints();
 };

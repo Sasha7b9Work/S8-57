@@ -80,7 +80,7 @@ static void Service();
 static void Time();
 static void Start();
 static void Trig();
-static void Display();
+static void HandlerDisplay();
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -100,7 +100,7 @@ void Handlers::Process(KeyEvent e)
         /* Time        */ {Time,        Time,        Time,          Time},
         /* Start       */ {Start,       Empty,       Empty,         Empty},
         /* Trig        */ {Trig,        Trig,        Trig,          Trig},
-        /* Display     */ {Display,     Display,     Display,       Display},
+        /* Display     */ {HandlerDisplay, HandlerDisplay, HandlerDisplay, HandlerDisplay},
         /* RangeMoreA  */ {RangeMoreA,  Empty,       Empty,         Empty},
         /* RangeLessA  */ {RangeLessA,  Empty,       Empty,         Empty},
         /* RShiftMoreA */ {RShiftMoreA, RShiftMoreA, Empty,         Empty},
@@ -436,7 +436,7 @@ static void Trig()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void Display()
+static void HandlerDisplay()
 {
     OpenPage(PageDisplay::pointer);
 }
