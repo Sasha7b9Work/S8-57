@@ -13,7 +13,7 @@
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-Color Painter::currentColor = Color::NUMBER;
+static Color Painter::currentColor = Color::NUMBER;
 static bool  inverseColor = false;
 
 
@@ -47,16 +47,20 @@ bool Painter::WriteFlashColor() //-V2506
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+/*
 void Painter::DrawHLine(float y, int x0, int x1, Color color)
 {
     DrawHLine((int)y, x0, x1, color);
 }
+*/
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+/*
 void Painter::DrawVLine(int x, float y0, float y1, Color color)
 {
     DrawVLine((int)x, (int)y0, (int)y1, color);
 }
+*/
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Painter::DrawBoundedRegion(int x, int y, int width, int height, Color colorFill, Color colorBound)
@@ -489,70 +493,6 @@ void Painter::OnTimerFlashDisplay()
 {
     inverseColor = !inverseColor;
     WriteFlashColor();
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Painter::DrawTextInRect(int x, int y, int width, const char *text)
-{
-    int xStart = x;
-    int xEnd = xStart + width;
-
-    while (*text != 0)
-    {
-        int length = GetLenghtSubString(text);
-        if (length + x > xEnd)
-        {
-            x = xStart;
-            y += Font::GetHeightSymbol(*text);
-        }
-        int numSymbols = 0;
-        numSymbols = DrawSubString(x, y, text);
-        text += numSymbols;
-        x += length;
-        x = DrawSpaces(x, y, text, &numSymbols);
-        text += numSymbols;
-    }
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-int Painter::GetLenghtSubString(const char *text)
-{
-    int retValue = 0;
-    while (((*text) != ' ') && ((*text) != '\0'))
-    {
-        retValue += Font::GetLengthSymbol(*text);
-        text++;
-    }
-    return retValue;
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-int Painter::DrawSubString(int x, int y, const char *text)
-{
-    int numSymbols = 0;
-    while (((*text) != ' ') && ((*text) != '\0'))
-    {
-        x = DrawChar(x, y, *text);
-#ifndef OPEN
-        ++x;
-#endif
-        numSymbols++;
-        text++;
-    }
-    return numSymbols;
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-int Painter::DrawSpaces(int x, int y, const char *text, int *numSymbols)
-{
-    *numSymbols = 0;
-    while (*text == ' ')
-    {
-        x = DrawChar(x, y, *text);
-        text++;
-        (*numSymbols)++;
-    }
-    return x;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
