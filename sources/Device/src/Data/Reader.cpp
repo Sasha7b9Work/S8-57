@@ -108,10 +108,7 @@ void Reader::ReadFromRAM(int fromEnd, StructDataDrawing *dataStruct, bool forMem
 
     dataStruct->forMode = ModeWork::RAM;
 
-    if (RECORDER_MODE && FPGA::InStateStop())
-    {
-    }
-    else if ((IN_AVERAGING_MODE || (IN_RANDOM_MODE && NRST_NUM_AVE_FOR_RAND))       // ≈сли включено усреднение
+    if ((IN_AVERAGING_MODE || (IN_RANDOM_MODE && NRST_NUM_AVE_FOR_RAND))       // ≈сли включено усреднение
         && fromEnd == 0)                                                            // » запрашиваем псоледний считанный сигнал
     {
         dataSettings = *DataStorage::DataSettingsFromEnd(0);
@@ -225,7 +222,7 @@ static void PrepareDataForDraw(StructDataDrawing *dataStruct)   // -V2506
         return;
     }
 
-    if (((IN_P2P_MODE && FPGA::IsRunning() && !STAND_P2P) || (FPGA::InStateStop() && RECORDER_MODE)) && dataStruct->forMode != ModeWork::ROM)   // -V560
+    if ((IN_P2P_MODE && FPGA::IsRunning() && !STAND_P2P) && dataStruct->forMode != ModeWork::ROM)   // -V560
                                                         // FPGA_IS_RUNNING - потому что в автоматическом режиме при считывании полного измерени€ 
     {                                                   // происходит остановка цикла считывани€ на некоторое врем€
         FillDataP2P(dataStruct, Chan::A);

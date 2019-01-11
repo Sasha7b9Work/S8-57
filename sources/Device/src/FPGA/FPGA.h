@@ -64,8 +64,6 @@ namespace FPGA
 
     void Init();
 
-    bool InStateStop();
-
     void Update();
 
     static void Start();
