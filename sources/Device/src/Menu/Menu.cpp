@@ -17,6 +17,7 @@
 #include "Hardware/Sound.h"
 #include "FPGA/FPGA.h"
 #include "Utils/Math.h"
+#include "Display/Grid.h"
 #include "Display/Painter.h"
 #include <cstdio>
 

@@ -2,18 +2,19 @@
 #ifndef WIN32
 #include "defines.h"
 #include "BottomPart.h"
+#include "Data/Reader.h"
+#include "Display/Grid.h"
+#include "Display/Painter.h"
 #include "Display/Symbols.h"
 #include "Settings/SettingsTime.h"
 #include "FPGA/FPGAMath.h"
 #include "Tables.h"
-#include "Display/Painter.h"
 #include "Utils/StringUtils.h"
 #include "FlashDrive/FlashDrive.h"
 #include "Utils/Dictionary.h"
 #include "Utils/Values.h"
 #include "Hardware/CPU.h"
 #include "Hardware/VCP.h"
-#include "Data/Reader.h"
 #endif
 
 

@@ -2,16 +2,16 @@
 #ifndef WIN32
 #include "defines.h"
 #include "PainterData.h"
+#include "Data/DataStorage.h"
+#include "Data/Reader.h"
 #include "Display/Colors.h"
-//#include "Grid.h"
+#include "Display/Grid.h"
 #include "Display/Painter.h"
 #include "Display/PainterMem.h"
-#include "Data/DataStorage.h"
+#include "Display/Symbols.h"
 #include "Hardware/Timer.h"
 #include "Settings/Settings.h"
 #include "Utils/Math.h"
-#include "Data/Reader.h"
-#include "Display/Symbols.h"
 #include "MemoryWindow.h"
 #endif
 

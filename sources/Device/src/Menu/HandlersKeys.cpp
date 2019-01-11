@@ -3,6 +3,7 @@
 #include <stm32f4xx.h>
 #include "log.h"
 #include "HandlersKeys.h"
+#include "Display/Grid.h"
 #include "Display/Painter.h"
 #include "FPGA/FPGA.h"
 #include "Hardware/Timer.h"

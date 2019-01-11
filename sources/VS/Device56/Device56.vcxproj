@@ -206,6 +206,7 @@
     <ClInclude Include="..\..\Device\src\Display\DisplayTypes.h" />
     <ClInclude Include="..\..\Device\src\Display\Font\Font.h" />
     <ClInclude Include="..\..\Device\src\Display\Grid.h" />
+    <ClInclude Include="..\..\Device\src\Display\Grid_Types.h" />
     <ClInclude Include="..\..\Device\src\Display\Painter.h" />
     <ClInclude Include="..\..\Device\src\Display\PainterMem.h" />
     <ClInclude Include="..\..\Device\src\Display\Symbols.h" />

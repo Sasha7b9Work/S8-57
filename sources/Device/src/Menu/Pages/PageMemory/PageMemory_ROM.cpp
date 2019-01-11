@@ -2,6 +2,7 @@
 #ifndef WIN32
 #include "defines.h"
 #include "Data/Reader.h"
+#include "Display/Grid.h"
 #include "Display/Painter.h"
 #include "Display/Symbols.h"
 #include "FlashDrive/FlashDrive.h"

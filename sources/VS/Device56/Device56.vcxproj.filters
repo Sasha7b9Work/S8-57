@@ -812,6 +812,9 @@
     <ClInclude Include="..\..\Device\src\Recorder\Graphics_Recorder.h">
       <Filter>Recorder</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Device\src\Display\Grid_Types.h">
+      <Filter>Display</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\Device\src\Display\Font\font5.inc">

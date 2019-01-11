@@ -17,6 +17,7 @@
 
 #include "Display/Console.h"
 #include "Display/DisplayPrimitives.h"
+#include "Display/Grid.h"
 #include "Display/Painter.h"
 #include "Display/PainterMem.h"
 #include "Display/Symbols.h"

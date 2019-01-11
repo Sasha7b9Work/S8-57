@@ -3,10 +3,11 @@
 #include <stm32f4xx.h>
 #include "defines.h"
 #include "log.h"
+#include "Display/Grid.h"
+#include "Display/Painter.h"
 #include "FrequencyCounter.h"
 #include "FPGA/FPGA.h"
 #include "Settings/Settings.h"
-#include "Display/Painter.h"
 #include "Utils/StringUtils.h"
 #include "Utils/Values.h"
 #include "Hardware/FSMC.h"

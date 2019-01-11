@@ -1,9 +1,10 @@
 #include "stdafx.h"
 #ifndef WIN32
 #include "defines.h"
-#include "Settings/Settings.h"
+#include "Display/Grid.h"
 #include "FPGAMath.h"
 #include "FPGA/FPGA.h"
+#include "Settings/Settings.h"
 #include "Utils/Math.h"
 #include <cmath>
 #endif

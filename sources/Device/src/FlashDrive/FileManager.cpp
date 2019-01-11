@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #ifndef WIN32
 #include "defines.h"
+#include "Display/Grid.h"
 #include "Display/Painter.h"
 #include "FileManager.h"
 #include "FlashDrive/FlashDrive.h"

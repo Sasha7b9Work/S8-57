@@ -2,10 +2,10 @@
 #ifndef WIN32
 #include "defines.h"
 #include "MemoryWindow.h"
-//#include "rid.h"
-#include "Display/Painter.h"
 #include "Data/DataStorage.h"
 #include "Data/Reader.h"
+#include "Display/Grid.h"
+#include "Display/Painter.h"
 #include "FPGA/FPGA.h"
 #include "Settings/Settings.h"
 #endif

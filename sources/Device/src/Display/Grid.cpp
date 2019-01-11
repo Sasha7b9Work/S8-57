@@ -21,6 +21,22 @@ namespace Grid
     static void DrawGridSignal(int left, int top, int width, int height);
 
     static void DrawGridSpectrum();
+    /// Возвращает расстояние между 
+    static int  DeltaHforLineGrid();
+
+    static int  DeltaVforLineGrid();
+
+    static void DrawGridType1(int left, int top, int right, int bottom, float centerX, float centerY, float deltaX, float deltaY, float stepX, float stepY);
+
+    static void DrawGridType2(int left, int top, int right, int bottom, int deltaX, int deltaY, int stepX, int stepY);
+
+    static void DrawGridType3(int left, int top, int right, int bottom, int centerX, int centerY, int deltaX, int deltaY, int stepX);
+
+    static float DeltaY();
+
+    static float DeltaX();
+
+    static int MathTop();
 };
 
 
@@ -75,7 +91,7 @@ int Grid::Right()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-int Grid::MathTop()
+static int Grid::MathTop()
 {
     return Top();
 }
@@ -242,21 +258,21 @@ void Grid::DrawGridSpectrum()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-float Grid::DeltaY()
+static float Grid::DeltaY()
 {
     float delta = (FullBottom() - Top()) / 10.0F;
     return Display::IsSeparate() ? (delta / 2.0F) : delta;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-float Grid::DeltaX()
+static float Grid::DeltaX()
 {
     float delta = (Right() - Left()) / 14.0F;
     return delta;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Grid::DrawGridType1(int left, int top, int right, int bottom, float centerX, float centerY, float deltaX, float deltaY, float stepX, float stepY)
+static void Grid::DrawGridType1(int left, int top, int right, int bottom, float centerX, float centerY, float deltaX, float deltaY, float stepX, float stepY)
 {
     uint16 masX[17];
     masX[0] = (uint16)(left + 1);
@@ -296,7 +312,7 @@ void Grid::DrawGridType1(int left, int top, int right, int bottom, float centerX
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Grid::DrawGridType2(int left, int top, int right, int bottom, int deltaX, int deltaY, int stepX, int stepY)
+static void Grid::DrawGridType2(int left, int top, int right, int bottom, int deltaX, int deltaY, int stepX, int stepY)
 {
     uint16 masX[15];
     masX[0] = (uint16)(left + 1);
@@ -318,7 +334,7 @@ void Grid::DrawGridType2(int left, int top, int right, int bottom, int deltaX, i
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Grid::DrawGridType3(int left, int top, int right, int bottom, int centerX, int centerY, int deltaX, int deltaY, int stepX)
+static void Grid::DrawGridType3(int left, int top, int right, int bottom, int centerX, int centerY, int deltaX, int deltaY, int stepX)
 {
     Painter::DrawHPointLine(centerY, left + stepX, right, (float)stepX);
     uint8 masY[6] = {(uint8)(top + 1), (uint8)(top + 2), (uint8)(centerY - 1), (uint8)(centerY + 1), (uint8)(bottom - 2), (uint8)(bottom - 1)};
@@ -330,7 +346,7 @@ void Grid::DrawGridType3(int left, int top, int right, int bottom, int centerX, 
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-int Grid::DeltaVforLineGrid() //-V2506
+static int Grid::DeltaVforLineGrid()
 {
     if (SHOW_MEASURES && MODE_VIEW_SIGNALS_IS_COMPRESS)
     {
@@ -352,7 +368,7 @@ int Grid::DeltaVforLineGrid() //-V2506
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-int Grid::DeltaHforLineGrid() //-V2506
+static int Grid::DeltaHforLineGrid()
 {
     if (MODE_VIEW_SIGNALS_IS_COMPRESS)
     {
