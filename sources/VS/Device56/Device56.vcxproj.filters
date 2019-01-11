@@ -135,9 +135,6 @@
     <ClCompile Include="..\..\Device\src\Display\Display.cpp">
       <Filter>Display</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Device\src\Display\DisplayPrimitives.cpp">
-      <Filter>Display</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Device\src\Display\Grid.cpp">
       <Filter>Display</Filter>
     </ClCompile>
@@ -507,9 +504,6 @@
       <Filter>Display</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Device\src\Display\Display.h">
-      <Filter>Display</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Device\src\Display\DisplayPrimitives.h">
       <Filter>Display</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Device\src\Display\Grid.h">
