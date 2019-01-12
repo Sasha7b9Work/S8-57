@@ -646,7 +646,7 @@ static void Information_Draw()
     int x = 100;
     int dY = 20;
     int y = 20;
-    Rectangle(0, 0, 319, 239, Color::FILL);
+    Rectangle(319, 239).Draw(0, 0, Color::FILL);
     y += dY;
     String(DICT(DInformation)).Draw(x, y);
     y += dY;

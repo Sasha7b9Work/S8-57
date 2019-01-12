@@ -16,6 +16,7 @@
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+using Display::Rectangle;
 using Display::Region;
 
 
@@ -91,7 +92,7 @@ void HiPart::WriteCursors()
             {
                 int width = 65;
                 x = Grid::Right() - width;
-                Rectangle(x, Grid::Top(), width, 12, Color::FILL);
+                Rectangle(width, 12).Draw(x, Grid::Top(), Color::FILL);
                 Region(width - 2, 10).Draw(x + 1, Grid::Top() + 1, Color::BACK);
                 String("1/dT=").Draw(x + 1, Grid::Top() + 2, colorText);
                 if (delta != 0.0F) //-V550

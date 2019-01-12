@@ -147,7 +147,7 @@ static void DrawHorizontal(int y, int xTearing)
         Painter::DrawDashedHLine(y, xTearing + 2, Grid::Right() - 1, 1, 1, 0);
     }
     Rectangle(2, 2).Draw(Grid::Left() - 1, y - 1);
-    Rectangle(Grid::Right() - 1, y - 1, 2, 2).Draw();
+    Rectangle(2, 2).Draw(Grid::Right() - 1, y - 1);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

@@ -19,6 +19,7 @@
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+using Display::Rectangle;
 using Display::Region;
 
 
@@ -35,7 +36,7 @@ void Osci::Draw()
     
     PainterData::DrawData();
     
-    Rectangle(Grid::Left(), Grid::Top(), Grid::Width(), Grid::Height(), Color::FILL);
+    Rectangle(Grid::Width(), Grid::Height()).Draw(Grid::Left(), Grid::Top(), Color::FILL);
     
     BottomPart::Draw();
     
