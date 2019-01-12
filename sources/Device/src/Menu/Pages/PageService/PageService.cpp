@@ -28,6 +28,7 @@ extern const PageBase ppSound;
 extern const PageBase ppRTC;
 extern const PageBase ppInformation;
 
+using Display::HLine;
 using Display::Rectangle;
 
 
@@ -310,8 +311,14 @@ static void Draw_Function_Screen_Disable(int x, int y)
 static void Draw_Function_Screen_Separate(int x, int y)
 {
     Rectangle(13, 9).Draw(x + 3, y + 5);
-    Painter::DrawHLine(y + 9, x + 3, x + 16);
-    Painter::DrawHLine(y + 10, x + 3, x + 16);
+
+	HLine line(13);
+
+    //Painter::DrawHLine(y + 9, x + 3, x + 16);
+	line.Draw(x + 3, y + 9);
+
+    //Painter::DrawHLine(y + 10, x + 3, x + 16);
+	line.Draw(x + 3, y + 10);
 }
 
 static void Draw_Function_Screen_Together(int x, int y)
@@ -351,7 +358,9 @@ static void OnPress_Function_Type()
 
 static void Draw_Function_Type_Sum(int x, int y)
 {
-    Painter::DrawHLine(y + 9, x + 4, x + 14);   // -V112
+    //Painter::DrawHLine(y + 9, x + 4, x + 14);   // -V112
+    HLine(10).Draw(x + 4, y + 9);
+
     Painter::DrawVLine(x + 9, y + 4, y + 14);   // -V112
 }
 

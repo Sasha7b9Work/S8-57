@@ -25,7 +25,7 @@ namespace Painter
 
     int DrawChar(int x, int y, char symbol, Color color = Color::NUMBER);
 
-    void DrawHLine(int y, int x0, int x1, Color color = Color::NUMBER);
+    //void DrawHLine(int y, int x0, int x1, Color color = Color::NUMBER);
 
     void DrawVLine(int x, int y0, int y1, Color color = Color::NUMBER);
 

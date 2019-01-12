@@ -20,6 +20,9 @@
 #endif
 
 
+using Display::HLine;
+
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 extern const PageBase page;
 
@@ -117,14 +120,18 @@ void DrawMenuCursVoltage(int x, int y, bool top, bool bottom)
 
     CalculateXY(&x0, &x1, &yTop, &yBottom);
 
+	HLine line(x1 - x0);
+
     for (int i = 0; i < (top ? 3 : 1); i++)
     {
-        Painter::DrawHLine(yTop + i, x0, x1);
+        //Painter::DrawHLine(yTop + i, x0, x1);
+		line.Draw(x0, yTop + i);
     }
 
     for (int i = 0; i < (bottom ? 3 : 1); i++)
     {
-        Painter::DrawHLine(yBottom - i, x0, x1);
+        //Painter::DrawHLine(yBottom - i, x0, x1);
+		line.Draw(x0, yBottom - i);
     }
 }
 

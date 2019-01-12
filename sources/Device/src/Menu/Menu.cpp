@@ -17,9 +17,13 @@
 #include "Hardware/Sound.h"
 #include "FPGA/FPGA.h"
 #include "Utils/Math.h"
+#include "Display/Display_Primitives.h"
 #include "Display/Grid.h"
 #include "Display/Painter.h"
 #include <cstdio>
+
+
+using Display::HLine;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -789,12 +793,17 @@ void Menu::Draw()
                 Painter::DrawVLine(0 + 1, Grid::Top() + 1, Grid::Top() + 34);
                 Painter::DrawVLine(Grid::Right(), Grid::Top() + 30, Grid::Top() + 40, Color::FILL);
                 Painter::DrawVLine(0 - 1, Grid::Top() + 1, Grid::Top() + 35, Color::BACK);
-                Painter::DrawHLine(Grid::Top() + 35, 0 - 1, Grid::Right() - 1);
+
+                //Painter::DrawHLine(Grid::Top() + 35, 0 - 1, Grid::Right() - 1);
+                HLine(Grid::Right()).Draw(-1, Grid::Top() + 35);
             }
             else if (IS_GOVERNOR(item))
             {
                 ((Governor *)item)->Draw(0, Grid::Top(), true);
-                Painter::DrawHLine(Grid::Top(), 0 - 2, Grid::Right(), Color::FILL);
+
+                //Painter::DrawHLine(Grid::Top(), 0 - 2, Grid::Right(), Color::FILL);
+                HLine(Grid::Right() + 2).Draw(-2, Grid::Top());
+
                 Painter::DrawVLine(Grid::Right(), Grid::Top(), Grid::Top() + 40);
             }
             else

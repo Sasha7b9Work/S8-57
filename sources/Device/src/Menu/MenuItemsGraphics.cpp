@@ -19,6 +19,7 @@
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+using Display::HLine;
 using Display::Rectangle;
 using Display::Region;
 
@@ -76,7 +77,10 @@ void GovernorColor::DrawOpened(int x, int y)
     Rectangle(Menu::Item::HEIGHT + delta + 2, Menu::Item::HEIGHT + 2).Draw(x - 1, y - 1, Color::BLACK);
     Rectangle(Width() + delta, Menu::Item::HEIGHT).Draw(x, y, Color::MenuTitle(false));
     Region(Menu::Item::Value::WIDTH + 2 + delta, Menu::Item::Value::HEIGHT + 3).Draw(x + 1, y + 1, Color::MenuItem(false));
-    Painter::DrawHLine(y + Menu::Item::HEIGHT / 2 + 2, x, x + Width() + delta, Color::MenuTitle(false));
+
+    //Painter::DrawHLine(y + Menu::Item::HEIGHT / 2 + 2, x, x + Width() + delta, Color::MenuTitle(false));
+    HLine(Width() + delta).Draw(x, y + Menu::Item::HEIGHT / 2 + 2, Color::MenuTitle(false));
+
     Painter::DrawStringInCenterRect(x + (IsPressed() ? 2 : 1), y + (IsPressed() ? 2 : 1), Width() + delta, Menu::Item::HEIGHT / 2 + 2, 
                                     Title().CString(), Color::WHITE);
     DrawValue(x + 1, y + 19, delta);
@@ -292,7 +296,10 @@ void Choice::DrawClosed(int x, int y)
     {
         Painter::SetColor(Color::BACK);
         Painter::DrawTextWithLimitation(x + 4, y + Menu::Item::Value::HEIGHT - deltaY + 1, NameCurrentSubItem().CString(), x, y + 11, Menu::Item::Value::WIDTH, Menu::Item::Value::HEIGHT - 1);
-        Painter::DrawHLine(y + (deltaY > 0 ? 24 : 19) - deltaY, x + 1, x + Menu::Item::Value::WIDTH + 2);
+
+        //Painter::DrawHLine(y + (deltaY > 0 ? 24 : 19) - deltaY, x + 1, x + Menu::Item::Value::WIDTH + 2);
+        HLine(Menu::Item::Value::WIDTH + 1).Draw(x + 1, y + (deltaY > 0 ? 24 : 19) - deltaY);
+
         Painter::DrawTextWithLimitation(x + 4, y + (deltaY > 0 ? (Menu::Item::Value::HEIGHT + 13) : 9) - deltaY, deltaY > 0 ? NameNextSubItem() : NamePrevSubItem(),
                                         x, y + 11, Menu::Item::Value::WIDTH, Menu::Item::Value::HEIGHT - 1);
     }
@@ -555,7 +562,9 @@ void TimeControl::DrawOpened(int x, int y)
 
     Rectangle(width + 1, height + 1).Draw(x - 1, y, Color::MenuTitle(false));
 
-    Painter::DrawHLine(y + MOI_HEIGHT_TITLE - 1, x, x + Width());
+    //Painter::DrawHLine(y + MOI_HEIGHT_TITLE - 1, x, x + Width());
+    HLine(Width()).Draw(x, y + MOI_HEIGHT_TITLE - 1);
+
     Region(Width() - 1, height - MOI_HEIGHT_TITLE).Draw(x, y + MOI_HEIGHT_TITLE, Color::BLACK);
 
     int y0 = 21;
@@ -622,7 +631,8 @@ static void DrawCommonHiPart(Control *item, int x, int y, bool pressed, bool sha
 
     if (opened)
     {
-        Painter::DrawHLine(y + Menu::Item::Value::HEIGHT, x + 1, x + width + 3, Color::FILL);
+        //Painter::DrawHLine(y + Menu::Item::Value::HEIGHT, x + 1, x + width + 3, Color::FILL);
+        HLine(width + 2).Draw(x + 1, y + Menu::Item::Value::HEIGHT, Color::FILL);
     }
 
     if(item->IsCurrentItem())

@@ -18,6 +18,7 @@
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+using Display::HLine;
 using Display::Region;
 
 
@@ -107,7 +108,9 @@ void PainterData::DrawChannel(Chan::E ch)
 
                 if (value == valuePrev)
                 {
-                    Painter::DrawHLine(value, x - 1, x + 1);
+                    //Painter::DrawHLine(value, x - 1, x + 1);
+                    HLine(2).Draw(x - 1, value);
+
                     Painter::DrawVLine(x++, value - 1, value + 1);
                 }
                 else

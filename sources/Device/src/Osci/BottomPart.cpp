@@ -20,6 +20,7 @@
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+using Display::HLine;
 using Display::Region;
 
 
@@ -35,8 +36,15 @@ void BottomPart::Draw()
     int y1 = Display::HEIGHT - 10;
     int x = -1;
 
-    Painter::DrawHLine(Grid::ChannelBottom(), 1, Grid::Left() - Measure::GetDeltaGridLeft() - 2, Color::SEPARATOR);
-    Painter::DrawHLine(Grid::FullBottom(), 1, Grid::Left() - Measure::GetDeltaGridLeft() - 2);
+	HLine line(Grid::Left() - Measure::GetDeltaGridLeft() - 1);
+
+    //Painter::DrawHLine(Grid::ChannelBottom(), 1, Grid::Left() - Measure::GetDeltaGridLeft() - 2, Color::SEPARATOR);
+	line.Draw(1, Grid::ChannelBottom(), Color::SEPARATOR);
+
+    //Painter::DrawHLine(Grid::FullBottom(), 1, Grid::Left() - Measure::GetDeltaGridLeft() - 2);
+	line.Draw(1, Grid::FullBottom());
+
+
     WriteTextVoltage(Chan::A, x + 2, y0);
     WriteTextVoltage(Chan::B, x + 2, y1);
     Painter::DrawVLine(x + 95, Grid::Bottom() + 2, Display::HEIGHT - 2, Color::SEPARATOR);
@@ -108,8 +116,13 @@ void BottomPart::Draw()
 
     Painter::DrawVLine(x + 79, Grid::Bottom() + 2, Display::HEIGHT - 2, Color::SEPARATOR);
 
-    Painter::DrawHLine(Grid::Bottom(), Grid::Right() + 2, Display::WIDTH - 2, Color::FILL);
-    Painter::DrawHLine(Grid::ChannelBottom(), Grid::Right() + 2, Display::WIDTH - 2);
+	HLine line2(Display::WIDTH - Grid::Right() - 4);
+
+    //Painter::DrawHLine(Grid::Bottom(), Grid::Right() + 2, Display::WIDTH - 2, Color::FILL);
+    line2.Draw(Grid::Right() + 2, Grid::Bottom(), Color::FILL);
+
+    //Painter::DrawHLine(Grid::ChannelBottom(), Grid::Right() + 2, Display::WIDTH - 2);
+    line2.Draw(Grid::Right() + 2, Grid::ChannelBottom());
 
     x += 82;
     y0 = y0 - 3;

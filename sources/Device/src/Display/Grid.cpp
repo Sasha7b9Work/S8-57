@@ -11,6 +11,7 @@
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+using Display::HLine;
 using Display::Rectangle;
 
 
@@ -154,15 +155,18 @@ static void Grid::DrawOsci()
     if (Display::IsSeparate())
     {
         DrawGridSignal(Left(), Top(), Width(), Height() / 2);
+
         if (FFT_ENABLED)
         {
             DrawGridSpectrum();
         }
+
         if (FUNC_MODE_DRAW_IS_ENABLED)
         {
             DrawGridSignal(Left(), Top() + Height() / 2, Width(), Height() / 2);
         }
-        Painter::DrawHLine(Top() + Height() / 2, Left(), Left() + Width(), Color::FILL);
+
+		HLine(Width()).Draw(Left(), Top() + Height() / 2, Color::FILL);
     }
     else
     {
@@ -180,8 +184,11 @@ void Grid::DrawGridSignal(int left, int top, int width, int height)
 
     if (top == Top())
     {
-        Painter::DrawHLine(top, 1, left - 2);
-        Painter::DrawHLine(top, right + 2, Display::WIDTH - 2);
+        // Painter::DrawHLine(top, 1, left - 2);
+		HLine(left - 1).Draw(1, top);
+
+        // Painter::DrawHLine(top, right + 2, Display::WIDTH - 2);
+		HLine(Display::WIDTH - right - 4).Draw(right + 2, top);
 
         if (!Menu::IsMinimize() || !Menu::IsShown())
         {
@@ -230,7 +237,10 @@ void Grid::DrawGridSpectrum()
         for (int i = 1; i < numParts; i++)
         {
             int y = MathTop() + (int)(i * scale);
-            Painter::DrawHLine(y, Left(), Left() + 256, Color::GRID);
+
+            //Painter::DrawHLine(y, Left(), Left() + 256, Color::GRID);
+			HLine(256).Draw(Left(), y, Color::GRID);
+
             if (!Menu::IsMinimize())
             {
                 Painter::SetColor(Color::FILL);
@@ -250,7 +260,10 @@ void Grid::DrawGridSpectrum()
         for (int i = 1; i < 5; i++)
         {
             int y = MathTop() + (int)(i * scale);
-            Painter::DrawHLine(y, Left(), Left() + 256, Color::GRID);
+
+            //Painter::DrawHLine(y, Left(), Left() + 256, Color::GRID);
+			HLine(256).Draw(Left(), y, Color::GRID);
+
             if (!Menu::IsMinimize())
             {
                 String((char *)strs[i]).Draw(5, y - 4, Color::FILL);
@@ -406,7 +419,8 @@ static void Grid::DrawTester()
 
     Painter::DrawVLine(x, 0, Display::HEIGHT);
 
-    Painter::DrawHLine(y, 0, Display::WIDTH);
+    //Painter::DrawHLine(y, 0, Display::WIDTH);
+	HLine(Display::WIDTH).Draw(0, y);
 
     Painter::SetColor(Color::GRID);
 

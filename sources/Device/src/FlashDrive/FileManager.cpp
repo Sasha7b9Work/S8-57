@@ -15,6 +15,7 @@
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+using Display::HLine;
 using Display::Rectangle;
 using Display::Region;
 
@@ -77,7 +78,9 @@ static void DrawHat(int x, int y, const char *string, int num1, int num2)
 {
     Region(WIDTH_COL + 9, RECS_ON_PAGE * 9 + 11).Draw(x - 1, y, Color::BACK);
     String(string, num1, num2).Draw(x + 60, y, Color::FILL);
-    Painter::DrawHLine(y + 10, x + 2, x + 140);
+
+	//Painter::DrawHLine(y + 10, x + 2, x + 140);
+	HLine(138).Draw(x + 2, y + 10);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -172,7 +175,9 @@ void FileManager::Draw() //-V2506
         FDrive::GetNumDirsAndFiles(currentDir, &numDirs, &numFiles);
         DrawNameCurrentDir(left, top + 2);
         Painter::DrawVLine(left2col, top + 16, 239, Color::FILL);
-        Painter::DrawHLine(top + 15, 0, width);
+
+        //Painter::DrawHLine(top + 15, 0, width);
+		HLine(width).Draw(0, top + 15);
     }
 
     if (FM_NEED_REDRAW != FM_REDRAW_FILES)

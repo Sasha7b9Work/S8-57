@@ -14,6 +14,7 @@
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+using Display::HLine;
 using Display::Rectangle;
 using Display::Region;
 
@@ -735,13 +736,16 @@ void Painter::DrawDashedHLine(int y, int x0, int x1, int deltaFill, int deltaEmp
         x += (deltaFill + deltaEmpty - deltaStart);
         if (deltaStart < deltaFill)     // Если начало линии приходится на штрих
         {
-            DrawHLine(y, x0, x - 1);
+            //DrawHLine(y, x0, x - 1);
+			HLine(x - 1 - x0).Draw(x0, y);
         }
     }
 
     while (x < x1)
     {
-        DrawHLine(y, x, x + deltaFill - 1);
+        //DrawHLine(y, x, x + deltaFill - 1);
+		HLine(deltaFill - 1).Draw(x, y);
+
         x += (deltaFill + deltaEmpty);
     }
 }
