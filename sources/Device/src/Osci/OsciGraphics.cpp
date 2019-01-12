@@ -19,6 +19,8 @@
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+using Display::Char;
+using Display::Line;
 using Display::Rectangle;
 using Display::Region;
 
@@ -75,26 +77,31 @@ void Osci::DrawCursorTrigLevel()
 
     if (y > Grid::Bottom())
     {
-        Painter::DrawChar(x + 3, Grid::Bottom() - 11, SYMBOL_TRIG_LEV_LOWER);
+        //Painter::DrawChar(x + 3, Grid::Bottom() - 11, SYMBOL_TRIG_LEV_LOWER);
+        Char(SYMBOL_TRIG_LEV_LOWER).Draw(x + 3, Grid::Bottom() - 11);
         Painter::SetPoint(x + 5, Grid::Bottom() - 2);
         y = Grid::Bottom() - 7;
         x--;
     }
     else if (y < Grid::Top())
     {
-        Painter::DrawChar(x + 3, Grid::Top() + 2, SYMBOL_TRIG_LEV_ABOVE);
+        //Painter::DrawChar(x + 3, Grid::Top() + 2, SYMBOL_TRIG_LEV_ABOVE);
+        Char(SYMBOL_TRIG_LEV_ABOVE).Draw(x + 3, Grid::Top() + 2);
         Painter::SetPoint(x + 5, Grid::Top() + 2);
     }
     else
     {
-        Painter::DrawChar(x + 1, y - 4, SYMBOL_TRIG_LEV_NORMAL);
+        //Painter::DrawChar(x + 1, y - 4, SYMBOL_TRIG_LEV_NORMAL);
+        Char(SYMBOL_TRIG_LEV_NORMAL).Draw(x + 1, y - 4);
     }
 
     Painter::SetFont(Font::Type::_5);
 
     static const char symbols[2] = {'1', '2'};
 
-    Painter::DrawChar(x + 5, y - 6, symbols[(uint8)TRIG_SOURCE], Color::BACK);
+    //Painter::DrawChar(x + 5, y - 6, symbols[(uint8)TRIG_SOURCE], Color::BACK);
+    Char(symbols[(uint8)TRIG_SOURCE]).Draw(x + 5, y - 6, Color::BACK);
+
     Painter::SetFont(Font::Type::_8);
 
     DrawScaleLine(Display::WIDTH - 11, true);
@@ -107,7 +114,8 @@ void Osci::DrawCursorTrigLevel()
     int yFull = Grid::Top() + DELTA + height - (int)(scale * (shiftFull - RShift::MIN - Trig::MIN) + 4);
     Region(4, 6).Draw(left + 2, yFull + 1, Color::Trig());
     Painter::SetFont(Font::Type::_5);
-    Painter::DrawChar(left + 3, yFull - 2, symbols[(uint8)TRIG_SOURCE], Color::BACK);
+    //Painter::DrawChar(left + 3, yFull - 2, symbols[(uint8)TRIG_SOURCE], Color::BACK);
+    Char(symbols[(uint8)TRIG_SOURCE]).Draw(left + 3, yFull - 2, Color::BACK);
     Painter::SetFont(Font::Type::_8);
 
     Trig::DrawOnGrid();
@@ -133,5 +141,6 @@ void Osci::DrawScaleLine(int x, bool forTrigLev)
     for (int i = 0; i < 5; i++)
     {
         //Painter::DrawLine(x + 1, levels[i], x2 - 1, levels[i], Color::FILL);
+        Line(x + 1, levels[i], x2 - 1, levels[i]).Draw(Color::FILL);
     }
 }

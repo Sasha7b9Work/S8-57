@@ -12,6 +12,9 @@
 #endif
 
 
+using Display::Char;
+
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void RShift::Draw()
 {
@@ -28,11 +31,13 @@ void RShift::Draw(Chan::E ch)
 
     int y = (Grid::Bottom() - Grid::Top()) / 2 + Grid::Top() - delta;
 
-    Painter::DrawChar(Grid::Left() - 8, y - 4, (char)SYMBOL_RSHIFT_NORMAL);
+    //Painter::DrawChar(Grid::Left() - 8, y - 4, (char)SYMBOL_RSHIFT_NORMAL);
+    Char((char)SYMBOL_RSHIFT_NORMAL).Draw(Grid::Left() - 8, y - 4);
 
     Painter::SetFont(Font::Type::_5);
 
-    Painter::DrawChar(Grid::Left() - 7, y - 6, Chan(ch).IsA() ? '1' : '2', Color::BACK);
+    //Painter::DrawChar(Grid::Left() - 7, y - 6, Chan(ch).IsA() ? '1' : '2', Color::BACK);
+    Char(Chan(ch).IsA() ? '1' : '2').Draw(Grid::Left() - 7, y - 6, Color::BACK);
 
     Painter::SetFont(Font::Type::_8);
 }

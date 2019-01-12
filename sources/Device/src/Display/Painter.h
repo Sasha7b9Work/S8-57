@@ -23,7 +23,7 @@ namespace Painter
 
     //void DrawRectangle(int x, int y, int width, int height, Color color = Color::NUMBER);
 
-    int DrawChar(int x, int y, char symbol, Color color = Color::NUMBER);
+    //int DrawChar(int x, int y, char symbol, Color color = Color::NUMBER);
 
     //void DrawHLine(int y, int x0, int x1, Color color = Color::NUMBER);
 

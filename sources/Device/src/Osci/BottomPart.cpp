@@ -20,6 +20,7 @@
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+using Display::Char;
 using Display::HLine;
 using Display::Region;
 using Display::VLine;
@@ -100,8 +101,10 @@ void BottomPart::Draw()
         snprintf(buffer, SIZE, "\xa5\x10%s\x10\xa5\x10%s\x10\xa5\x10", couple[TRIG_INPUT], polar[TRIG_POLARITY]);
         String(buffer).Draw(x + 18, y1);
 
-        Painter::DrawChar(x + 45, y1, filtr[TRIG_INPUT][0]);
-        Painter::DrawChar(x + 53, y1, filtr[TRIG_INPUT][1]);
+        //Painter::DrawChar(x + 45, y1, filtr[TRIG_INPUT][0]);
+        Char(filtr[TRIG_INPUT][0]).Draw(x + 45, y1);
+        //Painter::DrawChar(x + 53, y1, filtr[TRIG_INPUT][1]);
+        Char(filtr[TRIG_INPUT][1]).Draw(x + 53, y1);
     }
 
     buffer[0] = '\0';
@@ -186,8 +189,10 @@ void BottomPart::Draw()
     // Пиковый детектор
     if (!SET_PEAKDET_DIS)
     {
-        Painter::DrawChar(x + 38, Grid::Bottom() + 11, '\x12');
-        Painter::DrawChar(x + 46, Grid::Bottom() + 11, '\x13');
+        //Painter::DrawChar(x + 38, Grid::Bottom() + 11, '\x12');
+        Char('\x12').Draw(x + 38, Grid::Bottom() + 11);
+        //Painter::DrawChar(x + 46, Grid::Bottom() + 11, '\x13');
+        Char('\x13').Draw(x + 46, Grid::Bottom() + 11);
     }
 
     if (MODE_WORK == ModeWork::Dir)

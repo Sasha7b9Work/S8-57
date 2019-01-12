@@ -19,6 +19,7 @@
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+using Display::Char;
 using Display::HLine;
 using Display::Rectangle;
 using Display::Region;
@@ -184,7 +185,8 @@ void Governor::DrawValue(int x, int y)
 
     if (sign)
     {
-        Painter::DrawChar(startX - 30, y, signGovernor < 0 ? '\x9b' : '\x9a');
+        //Painter::DrawChar(startX - 30, y, signGovernor < 0 ? '\x9b' : '\x9a');
+        Char(signGovernor < 0 ? '\x9b' : '\x9a').Draw(startX - 30, y);
     }
 }
 
@@ -207,7 +209,8 @@ void Governor::DrawLowPart(int x, int y, bool shade)
             Painter::Draw4SymbolsInRect(x + Width() - 12, y - 1, GetSymbol(), Color::BACK);
         }
     
-        x = Painter::DrawChar(x + 4, y, SYMBOL_GOVERNOR_LEFT, colorTextDown);
+        //x = Painter::DrawChar(x + 4, y, SYMBOL_GOVERNOR_LEFT, colorTextDown);
+        x = Char(SYMBOL_GOVERNOR_LEFT).Draw(x + 4, y, colorTextDown);
         
         int delta = (int)Step();
         if (delta == 0)
@@ -234,7 +237,8 @@ void Governor::DrawLowPart(int x, int y, bool shade)
             }
         }
         
-        Painter::DrawChar(x + 1, y, SYMBOL_GOVERNOR_RIGHT, colorTextDown);
+        //Painter::DrawChar(x + 1, y, SYMBOL_GOVERNOR_RIGHT, colorTextDown);
+        Char(SYMBOL_GOVERNOR_RIGHT).Draw(x + 1, y, colorTextDown);
     }
     else
     {
@@ -686,7 +690,8 @@ static void DrawValueWithSelectedPosition(int x, int y, int value, uint numDigit
         
         uint8 val = stack.Pop();
         
-        Painter::DrawChar(x, y, (char)(val + 48), fill);
+        //Painter::DrawChar(x, y, (char)(val + 48), fill);
+        Char((char)(val + 48)).Draw(x, y, fill);
         
         x += 6;
     }

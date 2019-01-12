@@ -25,6 +25,7 @@
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+using Display::Char;
 using Display::Rectangle;
 using Display::Region;
 
@@ -430,15 +431,19 @@ static void DrawFileMask(int x, int y)
     {
         if (*ch >= 32)
         {
-            x = Painter::DrawChar(x, y, *ch);
+            //x = Painter::DrawChar(x, y, *ch);
+            Char(*ch).Draw(x, y);
         }
         else
         {
             if (*ch == 0x07)
             {
-                x = Painter::DrawChar(x, y, '%');
-                x = Painter::DrawChar(x, y, (char)(0x30 | *(ch + 1)));
-                x = Painter::DrawChar(x, y, 'N');
+                //x = Painter::DrawChar(x, y, '%');
+                x = Char('%').Draw(x, y);
+                //x = Painter::DrawChar(x, y, (char)(0x30 | *(ch + 1)));
+                x = Char((char)(0x30 | *(ch + 1))).Draw(x, y);
+                //x = Painter::DrawChar(x, y, 'N');
+                x = Char('N').Draw(x, y);
                 ch++;
             }
             else

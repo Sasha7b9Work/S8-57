@@ -14,6 +14,7 @@
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+using Display::Char;
 using Display::HLine;
 using Display::Rectangle;
 using Display::Region;
@@ -362,7 +363,8 @@ int Painter::DrawTextInRectWithTransfers(int eX, int eY, int eWidth, int eHeight
                 {
                     continue;
                 }
-                x = DrawChar(x, y, symbol);
+                //x = DrawChar(x, y, symbol);
+                x = Char(symbol).Draw(x, y);
             }
             else                                            // ј здесь найдено по крайней мере два буквенных символа, т.е. найдено слово
             {
@@ -473,8 +475,11 @@ void Painter::Draw10SymbolsInRect(int x, int y, char eChar)
 {
     for (char i = 0; i < 5; i++)
     {
-        DrawChar(x + 8 * i, y, eChar + i);
-        DrawChar(x + 8 * i, y + 8, eChar + i + 16);
+        //DrawChar(x + 8 * i, y, eChar + i);
+        Char(eChar + i).Draw(x + 8 * i, y);
+
+        //DrawChar(x + 8 * i, y + 8, eChar + i + 16);
+        Char(eChar + i + 16).Draw(x + 8 * i, y + 8);
     }
 }
 
@@ -594,13 +599,16 @@ int Painter::DrawTextInBoundedRectWithTransfers(int x, int y, int width, const c
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Painter::Draw4SymbolsInRect(int x, int y, char eChar, Color color)
 {
-     SetColor(color);
+    SetColor(color);
  
-     for (char i = 0; i < 2; i++)
-     {
-          DrawChar(x + 8 * i, y, eChar + i);
-          DrawChar(x + 8 * i, y + 8, eChar + i + 16);
-     }
+    for (char i = 0; i < 2; i++)
+    {
+        //DrawChar(x + 8 * i, y, eChar + i);
+        Char(eChar + i).Draw(x + 8 * i, y);
+
+        //DrawChar(x + 8 * i, y + 8, eChar + i + 16);
+        Char(eChar + i + 16).Draw(x + 8 * i, y + 8);
+    }
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

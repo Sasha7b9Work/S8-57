@@ -18,6 +18,7 @@
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+using Display::Char;
 using Display::HLine;
 using Display::Line;
 using Display::Region;
@@ -204,7 +205,8 @@ void PainterData::DrawTPos(int leftX, int rightX)
     int x[] = {leftX, (rightX - leftX) / 2 + leftX, rightX};
     int x0 = x[TPOS];
     Region(6, 6).Draw(x0 - 3, 10, Color::BACK);
-    Painter::DrawChar(x0 - 3, 10, SYMBOL_TPOS_1, Color::FILL);
+    //Painter::DrawChar(x0 - 3, 10, SYMBOL_TPOS_1, Color::FILL);
+    Char(SYMBOL_TPOS_1).Draw(x0 - 3, 10, Color::FILL);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

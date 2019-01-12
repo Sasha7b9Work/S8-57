@@ -28,6 +28,7 @@ extern const PageBase ppSound;
 extern const PageBase ppRTC;
 extern const PageBase ppInformation;
 
+using Display::Char;
 using Display::HLine;
 using Display::Rectangle;
 using Display::VLine;
@@ -396,7 +397,8 @@ static void OnPress_Function_ModeRegSet()
 
 static void Draw_Function_ModeRegSet_Range(int x, int y)
 {
-    Painter::DrawChar(x + 7, y + 5, LANG_RU ? 'M' : 'S');
+    //Painter::DrawChar(x + 7, y + 5, LANG_RU ? 'M' : 'S');
+    Char(LANG_RU ? 'M' : 'S').Draw(x + 7, y + 5);
 }
 
 static void Draw_Function_ModeRegSet_RShift(int x, int y)
@@ -428,7 +430,8 @@ static void OnPress_Function_RangeA()
 
 static void Draw_Function_RangeA(int x, int y)
 {
-    Painter::DrawChar(x + 8, y + 5, '1');
+    //Painter::DrawChar(x + 8, y + 5, '1');
+    Char('1').Draw(x + 8, y + 5);
 }
 
 DEF_SMALL_BUTTON(   bFunction_RangeA,                                                                 //--- —≈–¬»— - ‘”Õ ÷»ﬂ - Ã‡Ò¯Ú‡· 1-„Ó Í‡Ì‡Î‡ ---
@@ -447,7 +450,8 @@ static void OnPress_Function_RangeB()
 
 static void Draw_Function_RangeB(int x, int y)
 {
-    Painter::DrawChar(x + 8, y + 5, '2');
+    //Painter::DrawChar(x + 8, y + 5, '2');
+    Char('2').Draw(x + 8, y + 5);
 }
 
 DEF_SMALL_BUTTON(   bFunction_RangeB,                                                                 //--- —≈–¬»— - ‘”Õ ÷»ﬂ - Ã‡Ò¯Ú‡· 2-„Ó Í‡Ì‡Î‡ ---
