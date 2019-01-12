@@ -57,4 +57,14 @@ namespace Display
         void Draw(int x, int y, Color = Color::NUMBER);
     private:
     };
+
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    class Line
+    {
+    public:
+        Line(int x0, int y0, int x1, int y2);
+        void Draw(Color = Color::NUMBER);
+    private:
+    };
 }

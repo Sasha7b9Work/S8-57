@@ -19,6 +19,7 @@
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 using Display::HLine;
+using Display::Line;
 using Display::Region;
 using Display::VLine;
 
@@ -240,8 +241,12 @@ void PainterData::DrawTShift(int leftX, int rightX, int numBytes)
 
     Region(6, 6).Draw((int)xShift - 1, 1, Color::BACK);
     Region(4, 4).Draw((int)xShift, 2, Color::FILL);
-    Painter::DrawLine((int)xShift + dX01, 3, (int)xShift + dX11, dY11 - 2, Color::BACK);
-    Painter::DrawLine((int)xShift + dX02, 4, (int)xShift + 2, dY12 - 2);
+
+    //Painter::DrawLine((int)xShift + dX01, 3, (int)xShift + dX11, dY11 - 2, Color::BACK);
+    Line((int)xShift + dX01, 3, (int)xShift + dX11, dY11 - 2).Draw(Color::BACK);
+
+    //Painter::DrawLine((int)xShift + dX02, 4, (int)xShift + 2, dY12 - 2);
+    Line((int)xShift + dX02, 4, (int)xShift + 2, dY12 - 2).Draw();
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

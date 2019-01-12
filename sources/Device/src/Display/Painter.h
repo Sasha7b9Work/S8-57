@@ -29,7 +29,7 @@ namespace Painter
 
     //void DrawVLine(int x, int y0, int y1, Color color = Color::NUMBER);
 
-    void DrawLine(int x0, int y0, int x1, int y1, Color color = Color::NUMBER);
+    //void DrawLine(int x0, int y0, int x1, int y1, Color color = Color::NUMBER);
 
     void SetFont(Font::Type::E typeFont);
 

@@ -139,12 +139,14 @@ void Region(int x, int y, int width, int height, Color color)
 */
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+/*
 void Painter::DrawLine(int x0, int y0, int x1, int y1, Color color)
 {
     SetColor(color);
     uint8 buffer[7] = { Command::Paint_DrawLine, (uint8)x0, (uint8)(x0 >> 8), (uint8)y0, (uint8)x1, (uint8)(x1 >> 8), (uint8)y1 };
     FSMC::WriteToPanel(buffer, 7);
 }
+*/
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 /*
@@ -212,6 +214,7 @@ void Painter::DrawBigText(int eX, int eY, uint8 sizeSymbol, const char *text, Co
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+/**/
 int Painter::DrawChar(int x, int y, char symbol, Color color)
 {
     String("%c", symbol).Draw(x, y, color);

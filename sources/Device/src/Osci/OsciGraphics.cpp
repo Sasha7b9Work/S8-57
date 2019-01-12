@@ -132,6 +132,6 @@ void Osci::DrawScaleLine(int x, bool forTrigLev)
 
     for (int i = 0; i < 5; i++)
     {
-        Painter::DrawLine(x + 1, levels[i], x2 - 1, levels[i], Color::FILL);
+        //Painter::DrawLine(x + 1, levels[i], x2 - 1, levels[i], Color::FILL);
     }
 }
