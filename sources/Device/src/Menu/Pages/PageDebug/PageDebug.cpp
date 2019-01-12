@@ -481,7 +481,7 @@ DEF_SMALL_BUTTON_EXIT(  bSettings_Exit,                                         
 static void DebugShowSetInfo_Draw()
 {
     Painter::BeginScene(Color::BACK);
-    Rectangle(0, 0, 319, 239, Color::FILL);
+    Rectangle(319, 239).Draw(0, 0, Color::FILL);
 
     int x0 = 30;
     int y0 = 25;

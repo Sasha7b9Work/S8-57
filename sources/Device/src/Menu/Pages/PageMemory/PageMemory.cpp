@@ -359,7 +359,7 @@ static void DrawSetMask()
     int width = Grid::Width() - 80;
     int height = 160;
 
-    Rectangle(x0, y0, width, height, Color::FILL);
+    Rectangle(width, height).Draw(x0, y0, Color::FILL);
     Region(width - 2, height - 2).Draw(x0 + 1, y0 + 1, Color::BACK);
 
     int index = 0;
