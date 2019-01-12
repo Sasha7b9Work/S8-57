@@ -19,7 +19,7 @@ namespace Painter
 
     void SetFont(Font::Type::E typeFont);
 
-    void DrawBoundedRegion(int x, int y, int width, int height, Color colorFill, Color colorBound);
+    //void DrawBoundedRegion(int x, int y, int width, int height, Color colorFill, Color colorBound);
 
     void Draw4SymbolsInRect(int x, int y, char eChar, Color color = Color::NUMBER);
 

@@ -73,6 +73,7 @@ void Painter::DrawVLine(int x, float y0, float y1, Color color)
 */
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+/*
 void Painter::DrawBoundedRegion(int x, int y, int width, int height, Color colorFill, Color colorBound)
 {
     Color color = currentColor;
@@ -81,6 +82,7 @@ void Painter::DrawBoundedRegion(int x, int y, int width, int height, Color color
     /// \todo Почему-то цвет не восстанавливается
     SetColor(color);
 }
+*/
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 int Painter::DrawTextInRectWithTransfersC(int x, int y, int width, int height, const char *text, Color color)
