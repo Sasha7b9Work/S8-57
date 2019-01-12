@@ -14,6 +14,7 @@
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+using Display::BoundedRegion;
 using Display::Char;
 using Display::HLine;
 using Display::Point;
@@ -518,7 +519,9 @@ void Painter::OnTimerFlashDisplay()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 int Painter::DrawStringInCenterRectAndBoundItC(int x, int y, int width, int height, const char *text, Color colorBackground, Color colorFill)
 {
-    FillBoundedRegion(x, y, width, height, colorBackground, colorFill);
+    //FillBoundedRegion(x, y, width, height, colorBackground, colorFill);
+    BoundedRegion(width, height).Draw(x, y, colorBackground, colorFill);
+
     SetColor(colorFill);
     //return DrawStringInCenterRect(x, y, width, height, text);
 
@@ -526,11 +529,13 @@ int Painter::DrawStringInCenterRectAndBoundItC(int x, int y, int width, int heig
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+/*
 void Painter::FillBoundedRegion(int x, int y, int widht, int height, Color colorFill, Color colorBound)
 {
     Region(widht - 2, height - 2).Draw(x + 1, y + 1, colorFill);
     Rectangle(widht, height).Draw(x, y, colorBound);
 }
+*/
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 // Возвращает высоту экрана, которую займёт текст text, при выводе от left до right в переменной height. Если bool == false, то текст не влезет на экран 

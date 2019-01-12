@@ -11,6 +11,9 @@
 #endif
 
 
+using Display::BoundedRegion;
+
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 bool Trig::pulse = false;
 ///< Ќужно ли рисовать горизонтальную линию уровн€ смещени€ уровн€ синхронизации.
@@ -40,8 +43,8 @@ void Trig::DrawOnGrid()
         int x = (Grid::Right() - Grid::Left()) / 2 + Grid::Left() - width / 2;
         int y = Grid::Bottom() - height - 20;
 
-        Painter::FillBoundedRegion(x, y, width, height, Color::BACK, Color::FILL);
-
+        //Painter::FillBoundedRegion(x, y, width, height, Color::BACK, Color::FILL);
+        BoundedRegion(width, height).Draw(x, y, Color::BACK, Color::FILL);
 
         float trigLevVal = FPGAMath::RShift2Abs(SET_TRIGLEV_SOURCE, SET_RANGE(TRIG_SOURCE)) * Divider(SET_DIVIDER(TRIG_SOURCE)).ToAbs();
 
