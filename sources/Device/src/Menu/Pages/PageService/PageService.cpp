@@ -31,6 +31,7 @@ extern const PageBase ppInformation;
 using Display::Char;
 using Display::HLine;
 using Display::Rectangle;
+using Display::Text;
 using Display::VLine;
 
 
@@ -684,9 +685,15 @@ static void Information_Draw()
     //Painter::DrawFormText(x, y, Color::FILL, "CRC32 : %X", Hardware::CalculateCRC32());
 
     dY = -10;
-    Painter::DrawStringInCenterRect(0, 190 + dY, 320, 20, "Для получения помощи нажмите и удерживайте кнопку ПОМОЩЬ");
-    Painter::DrawStringInCenterRect(0, 205 + dY, 320, 20, "Отдел маркетинга: тел./факс. 8-017-262-57-50");
-    Painter::DrawStringInCenterRect(0, 220 + dY, 320, 20, "Разработчики: e-mail: mnipi-24(@)tut.by, тел. 8-017-262-57-51");
+
+    //Painter::DrawStringInCenterRect(0, 190 + dY, 320, 20, "Для получения помощи нажмите и удерживайте кнопку ПОМОЩЬ");
+    Text("Для получения помощи нажмите и удерживайте кнопку ПОМОЩЬ").DrawInCenterRect(0, 190 + dY, 320, 20);
+
+    //Painter::DrawStringInCenterRect(0, 205 + dY, 320, 20, "Отдел маркетинга: тел./факс. 8-017-262-57-50");
+    Text("Отдел маркетинга: тел./факс. 8-017-262-57-50").DrawInCenterRect(0, 205 + dY, 320, 20);
+
+    //Painter::DrawStringInCenterRect(0, 220 + dY, 320, 20, "Разработчики: e-mail: mnipi-24(@)tut.by, тел. 8-017-262-57-51");
+    Text("Разработчики: e-mail: mnipi-24(@)tut.by, тел. 8-017-262-57-51").DrawInCenterRect(0, 220 + dY, 320, 20);
 
     Menu::Draw();
     Painter::EndScene();

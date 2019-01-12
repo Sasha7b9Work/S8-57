@@ -16,6 +16,7 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 using Display::Rectangle;
 using Display::Region;
+using Display::Text;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -30,7 +31,9 @@ static const int WIDTH = 295;
 static void DrawPageContent()
 {
     int y = 50;
-    Painter::DrawStringInCenterRect(0, y, WIDTH, 10, currentPage->titleHint[LANG]);
+
+    //Painter::DrawStringInCenterRect(0, y, WIDTH, 10, currentPage->titleHint[LANG]);
+    Text(currentPage->titleHint[LANG]).DrawInCenterRect(0, y, WIDTH, 10);
 
     int numPage = 0;
 
@@ -46,7 +49,8 @@ static void DrawPageContent()
         }
         else
         {
-            Painter::DrawStringInCenterRect(0, y, WIDTH, 10, title, Color::FILL);
+            //Painter::DrawStringInCenterRect(0, y, WIDTH, 10, title, Color::FILL);
+            Text(title).DrawInCenterRect(0, y, WIDTH, 10, Color::FILL);
         }
         y += 16;
         numPage++;
@@ -56,7 +60,9 @@ static void DrawPageContent()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void DrawPageDescription()
 {
-    Painter::DrawStringInCenterRect(0, 3, WIDTH, 10, currentPage->titleHint[LANG]);
+    //Painter::DrawStringInCenterRect(0, 3, WIDTH, 10, currentPage->titleHint[LANG]);
+    Text(currentPage->titleHint[LANG]).DrawInCenterRect(0, 3, WIDTH, 10);
+
     Painter::DrawTextInRectWithTransfers(2, 15, WIDTH - 5, 240, currentPage->titleHint[2 + LANG]);
 }
 

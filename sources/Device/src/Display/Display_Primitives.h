@@ -55,7 +55,7 @@ namespace Display
 	{
 	public:
 		HLine(int width);
-		void Draw(int x, int y, Color = Color::NUMBER);
+		void Draw(int x, int y, Color color = Color::NUMBER);
 	private:
 	};
 
@@ -75,7 +75,7 @@ namespace Display
     {
     public:
         Line(int x0, int y0, int x1, int y2);
-        void Draw(Color = Color::NUMBER);
+        void Draw(Color color = Color::NUMBER);
     private:
     };
 
@@ -85,7 +85,7 @@ namespace Display
     {
     public:
         Char(char ch);
-        int Draw(int x, int y, Color = Color::NUMBER);
+        int Draw(int x, int y, Color color = Color::NUMBER);
     private:
     };
 
@@ -95,7 +95,7 @@ namespace Display
     {
     public:
         Point();
-        int Draw(int x, int y, Color = Color::NUMBER);
+        int Draw(int x, int y, Color color = Color::NUMBER);
     private:
     };
 
@@ -105,7 +105,8 @@ namespace Display
     {
     public:
         Text(const char *text, uint8 size = 1);
-        int Draw(int x, int y, Color = Color::NUMBER);
+        int Draw(int x, int y, Color color = Color::NUMBER);
+        int DrawInCenterRect(int x, int y, int width, int height, Color color = Color::NUMBER);
     private:
     };
 }

@@ -19,6 +19,7 @@
 using Display::Rectangle;
 using Display::Region;
 using Display::VLine;
+using Display::Text;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -150,7 +151,8 @@ void HiPart::DrawRightPart()
 
         x += 2;
         String(DICT(DMode)).Draw(LANG_RU ? x : x + 3, -1);
-        Painter::DrawStringInCenterRect(x + 1, 9, 25, 8, strs[MODE_WORK][LANG]);
+        //Painter::DrawStringInCenterRect(x + 1, 9, 25, 8, strs[MODE_WORK][LANG]);
+        Text(strs[MODE_WORK][LANG]).DrawInCenterRect(x + 1, 9, 25, 8);
     }
     else
     {

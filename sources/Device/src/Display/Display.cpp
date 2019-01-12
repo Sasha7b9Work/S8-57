@@ -18,6 +18,7 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 using Display::Rectangle;
 using Display::Region;
+using Display::Text;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -283,14 +284,21 @@ static void FuncOnWait()
 
     Region(width, height).Draw(x, y, Color::BACK);
     Rectangle(width, height).Draw(x, y, Color::FILL);
-    Painter::DrawStringInCenterRect(x, y, width, height - 20, textWait);
+
+    //Painter::DrawStringInCenterRect(x, y, width, height - 20, textWait);
+    Text(textWait).DrawInCenterRect(x, y, width, height - 20);
+
     char buf[100];
     buf[0] = 0;
+
     for (uint i = 0; i < time; i++)
     {
         std::strcat(buf, "."); //-V2513
     }
-    Painter::DrawStringInCenterRect(x, y + 20, width, height - 20, buf);
+
+    //Painter::DrawStringInCenterRect(x, y + 20, width, height - 20, buf);
+    Text(buf).DrawInCenterRect(x, y + 20, width, height - 20);
+
     Painter::EndScene();
 }
 

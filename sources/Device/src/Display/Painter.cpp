@@ -19,6 +19,7 @@ using Display::HLine;
 using Display::Point;
 using Display::Rectangle;
 using Display::Region;
+using Display::Text;
 using Display::VLine;
 
 
@@ -488,6 +489,7 @@ void Painter::Draw10SymbolsInRect(int x, int y, char eChar)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+/*
 int Painter::DrawStringInCenterRect(int eX, int eY, int width, int eHeight, const char *text, Color color)
 {
     int lenght = Font::GetLengthText(text);
@@ -496,6 +498,7 @@ int Painter::DrawStringInCenterRect(int eX, int eY, int width, int eHeight, cons
     int y = eY + (eHeight - height) / 2 + 1;
     return DrawText(x, y, text, color);
 }
+*/
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Painter::ResetFlash()
@@ -517,7 +520,9 @@ int Painter::DrawStringInCenterRectAndBoundItC(int x, int y, int width, int heig
 {
     FillBoundedRegion(x, y, width, height, colorBackground, colorFill);
     SetColor(colorFill);
-    return DrawStringInCenterRect(x, y, width, height, text);
+    //return DrawStringInCenterRect(x, y, width, height, text);
+
+    return Text(text).DrawInCenterRect(x, y, width, height);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -619,11 +624,13 @@ void Painter::Draw4SymbolsInRect(int x, int y, char eChar, Color color)
 void Painter::DrawStringInCenterRectOnBackgroundC(int x, int y, int width, int height, const char *text, Color colorText, int widthBorder, Color colorBackground)
 {
     int lenght = Font::GetLengthText(text);
-    int eX = DrawStringInCenterRect(x, y, width, height, text, colorBackground);
+    //int eX = DrawStringInCenterRect(x, y, width, height, text, colorBackground);
+    int eX = Text(text).DrawInCenterRect(x, y, width, height, colorBackground);
     int w = lenght + widthBorder * 2 - 2;
     int h = 7 + widthBorder * 2 - 1;
     Region(w, h).Draw(eX - lenght - widthBorder, y - widthBorder + 1);
-    DrawStringInCenterRect(x, y, width, height, text, colorText);
+    //DrawStringInCenterRect(x, y, width, height, text, colorText);
+    Text(text).DrawInCenterRect(x, y, width, height, colorText);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

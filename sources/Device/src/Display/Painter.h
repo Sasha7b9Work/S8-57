@@ -19,11 +19,9 @@ namespace Painter
 
     void SetFont(Font::Type::E typeFont);
 
-    //void DrawBoundedRegion(int x, int y, int width, int height, Color colorFill, Color colorBound);
-
     void Draw4SymbolsInRect(int x, int y, char eChar, Color color = Color::NUMBER);
 
-    int DrawStringInCenterRect(int x, int y, int width, int height, const char *text, Color color = Color::NUMBER);
+    //int DrawStringInCenterRect(int x, int y, int width, int height, const char *text, Color color = Color::NUMBER);
 
     int DrawTextWithLimitation(int x, int y, const char *text, int limitX, int limitY, int limitWidth, int limitHeight);
 

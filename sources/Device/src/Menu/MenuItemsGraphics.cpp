@@ -23,6 +23,7 @@ using Display::Char;
 using Display::HLine;
 using Display::Rectangle;
 using Display::Region;
+using Display::Text;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -82,8 +83,10 @@ void GovernorColor::DrawOpened(int x, int y)
     //Painter::DrawHLine(y + Menu::Item::HEIGHT / 2 + 2, x, x + Width() + delta, Color::MenuTitle(false));
     HLine(Width() + delta).Draw(x, y + Menu::Item::HEIGHT / 2 + 2, Color::MenuTitle(false));
 
-    Painter::DrawStringInCenterRect(x + (IsPressed() ? 2 : 1), y + (IsPressed() ? 2 : 1), Width() + delta, Menu::Item::HEIGHT / 2 + 2, 
-                                    Title().CString(), Color::WHITE);
+    //Painter::DrawStringInCenterRect(x + (IsPressed() ? 2 : 1), y + (IsPressed() ? 2 : 1), Width() + delta, Menu::Item::HEIGHT / 2 + 2, 
+    //                                Title().CString(), Color::WHITE);
+    Text(Title().CString()).DrawInCenterRect(x + (IsPressed() ? 2 : 1), y + (IsPressed() ? 2 : 1), Width() + delta, Menu::Item::HEIGHT / 2 + 2, Color::WHITE);
+
     DrawValue(x + 1, y + 19, delta);
 }
 
@@ -327,7 +330,8 @@ void Button::Draw(int x, int y)
 
     int delta = (pressed && (!shade)) ? 2 : 1;
 
-    Painter::DrawStringInCenterRect(x + delta, y + delta, Width(), Menu::Item::HEIGHT, Title().CString(), color);
+    //Painter::DrawStringInCenterRect(x + delta, y + delta, Width(), Menu::Item::HEIGHT, Title().CString(), color);
+    Text(Title().CString()).DrawInCenterRect(x + delta, y + delta, Width(), Menu::Item::HEIGHT, color);
 
     funcForDraw(x, y);
 }
@@ -406,7 +410,8 @@ void Page::Draw(int x, int y, bool opened)
     else
     {
         Region(Width() - 3, Menu::Item::HEIGHT - 2).Draw(x + 1, y + 2, Color::MenuItem(false));
-        Painter::DrawStringInCenterRect(x, y + 1, Width(), Menu::Item::HEIGHT, Title().CString(), IsAcitve() ? Color::FILL : Color::MENU_TITLE_DARK);
+        //Painter::DrawStringInCenterRect(x, y + 1, Width(), Menu::Item::HEIGHT, Title().CString(), IsAcitve() ? Color::FILL : Color::MENU_TITLE_DARK);
+        Text(Title().CString()).DrawInCenterRect(x, y + 1, Width(), Menu::Item::HEIGHT, IsAcitve() ? Color::FILL : Color::MENU_TITLE_DARK);
     }
 }
 
@@ -444,7 +449,10 @@ void Page::DrawTitle(int x, int yTop)
 
     int delta = condDrawRSet ? -10 : 0;
     Color colorText = Color::FILL;
-    x = Painter::DrawStringInCenterRect(x, yTop, Menu::Title::WIDTH + 2 + delta, Menu::Title::HEIGHT, Title().CString(), colorText);
+
+    //x = Painter::DrawStringInCenterRect(x, yTop, Menu::Title::WIDTH + 2 + delta, Menu::Title::HEIGHT, Title().CString(), colorText);
+    x = Text(Title().CString()).DrawInCenterRect(x, yTop, Menu::Title::WIDTH + 2 + delta, Menu::Title::HEIGHT, colorText);
+
     if (condDrawRSet)
     {
         //Painter::Draw4SymbolsInRect(x + 4, yTop + 11, Governor::GetSymbol(CurrentSubPage()), colorText);
