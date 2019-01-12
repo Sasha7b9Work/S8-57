@@ -17,6 +17,7 @@
 using Display::HLine;
 using Display::Rectangle;
 using Display::Region;
+using Display::VLine;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -643,7 +644,8 @@ void Painter::DrawVLineArray(int x, int numLines, uint8 *y0y1, Color color)
         uint8 y0 = *y0y1++;
         uint8 y1 = *y0y1++;
 
-        DrawVLine(x, y0, y1);
+        //DrawVLine(x, y0, y1);
+        VLine(y1 - y0).Draw(x, y0);
     }
 }
 
@@ -711,13 +713,16 @@ void Painter::DrawDashedVLine(int x, int y0, int y1, int deltaFill, int deltaEmt
         y += (deltaFill + deltaEmtpy - deltaStart);
         if (deltaStart < deltaFill)     // Если начало линии приходится на штрих
         {
-            DrawVLine(x, y0, y - 1);
+            //DrawVLine(x, y0, y - 1);
+            VLine(y - y0 - 1).Draw(x, y0);
         }
     }
 
     while (y < y1)
     {
-        DrawVLine(x, y, y + deltaFill - 1);
+        //DrawVLine(x, y, y + deltaFill - 1);
+        VLine(deltaFill - 1).Draw(x, y);
+
         y += (deltaFill + deltaEmtpy);
     }
 }

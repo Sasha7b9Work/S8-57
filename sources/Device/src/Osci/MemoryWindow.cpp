@@ -15,6 +15,7 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 using Display::Rectangle;
 using Display::Region;
+using Display::VLine;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -70,7 +71,11 @@ void MemoryWindow::DrawDataInRect(int x, int y, int width, int height, const uin
             }
         }
 
-        Painter::DrawVLine(x + i, y0 - (int)(min * stepY + 0.5F), y0 - (int)(max * stepY + 0.5F));
+        int deltaMIN = (int)(min * stepY + 0.5F);
+        int deltaMAX = (int)(max * stepY + 0.5F);
+
+        //Painter::DrawVLine(x + i, y0 - deltaMIN, y0 - deltaMAX);
+        VLine(deltaMIN - deltaMAX).Draw(x + i, y0 - deltaMIN);
     }
 }
 

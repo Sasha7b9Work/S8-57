@@ -22,6 +22,7 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 using Display::HLine;
 using Display::Region;
+using Display::VLine;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -47,7 +48,9 @@ void BottomPart::Draw()
 
     WriteTextVoltage(Chan::A, x + 2, y0);
     WriteTextVoltage(Chan::B, x + 2, y1);
-    Painter::DrawVLine(x + 95, Grid::Bottom() + 2, Display::HEIGHT - 2, Color::SEPARATOR);
+
+    //Painter::DrawVLine(x + 95, Grid::Bottom() + 2, Display::HEIGHT - 2, Color::SEPARATOR);
+    VLine(Display::HEIGHT - Grid::Bottom() - 4).Draw(x + 95, Grid::Bottom() + 2, Color::SEPARATOR);
 
     x += 98;
     const int SIZE = 100;
@@ -114,7 +117,8 @@ void BottomPart::Draw()
         String(buffer).Draw(x + 63, y1);
     }
 
-    Painter::DrawVLine(x + 79, Grid::Bottom() + 2, Display::HEIGHT - 2, Color::SEPARATOR);
+    //Painter::DrawVLine(x + 79, Grid::Bottom() + 2, Display::HEIGHT - 2, Color::SEPARATOR);
+    VLine(Display::HEIGHT - Grid::Bottom() - 4).Draw(x + 79, Grid::Bottom() + 2, Color::SEPARATOR);
 
 	HLine line2(Display::WIDTH - Grid::Right() - 4);
 
@@ -138,7 +142,9 @@ void BottomPart::Draw()
     }
 
     x += 42;
-    Painter::DrawVLine(x, Grid::Bottom() + 2, Display::HEIGHT - 2, Color::SEPARATOR);
+
+    //Painter::DrawVLine(x, Grid::Bottom() + 2, Display::HEIGHT - 2, Color::SEPARATOR);
+    VLine(Display::HEIGHT - Grid::Bottom() - 4).Draw(x, Grid::Bottom(), Color::SEPARATOR);
 
     Painter::SetFont(Font::Type::_8);
 
@@ -160,7 +166,8 @@ void BottomPart::Draw()
 
     DrawTime(x + 3, Grid::Bottom() + 11);
 
-    Painter::DrawVLine(x + 55, Grid::Bottom() + 2, Display::HEIGHT - 2, Color::GRAY_50);
+    //Painter::DrawVLine(x + 55, Grid::Bottom() + 2, Display::HEIGHT - 2, Color::GRAY_50);
+    VLine(Display::HEIGHT - Grid::Bottom() - 4).Draw(x + 55, Grid::Bottom() + 2, Color::GRAY_50);
 
     Painter::SetFont(Font::Type::_UGO2);
 

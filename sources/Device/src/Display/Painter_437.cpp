@@ -147,12 +147,14 @@ void Painter::DrawLine(int x0, int y0, int x1, int y1, Color color)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+/*
 void Painter::DrawVLine(int x, int y0, int y1, Color color)
 {
     SetColor(color);
     uint8 buffer[5] = { Command::Paint_DrawVLine, (uint8)x, (uint8)(x >> 8), (uint8)y0, (uint8)y1 };
     FSMC::WriteToPanel(buffer, 5);
 }
+*/
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 int Painter::DrawText(int x, int y, const char *text, Color color) //-V2506

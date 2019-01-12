@@ -12,6 +12,7 @@
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 using Display::HLine;
+using Display::VLine;
 using Display::Rectangle;
 
 
@@ -192,8 +193,13 @@ void Grid::DrawGridSignal(int left, int top, int width, int height)
 
         if (!Menu::IsMinimize() || !Menu::IsShown())
         {
-            Painter::DrawVLine(1, top + 2, bottom - 2);
-            Painter::DrawVLine(318, top + 2, bottom - 2);
+            VLine line(bottom - top - 4);
+
+            //Painter::DrawVLine(1, top + 2, bottom - 2);
+            line.Draw(1, top + 2);
+
+            //Painter::DrawVLine(318, top + 2, bottom - 2);
+            line.Draw(318, top + 2);
         }
     }
 
@@ -271,7 +277,8 @@ void Grid::DrawGridSpectrum()
         }
     }
 
-    Painter::DrawVLine(Left() + 256, MathTop(), MathBottom(), Color::FILL);
+    //Painter::DrawVLine(Left() + 256, MathTop(), MathBottom(), Color::FILL);
+    VLine(MathBottom() - MathTop()).Draw(Left() + 256, MathTop(), Color::FILL);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -417,7 +424,8 @@ static void Grid::DrawTester()
     int x = (int)(x0 + Display::WIDTH / 2);
     int y = (int)(y0 + Display::HEIGHT / 2);
 
-    Painter::DrawVLine(x, 0, Display::HEIGHT);
+    //Painter::DrawVLine(x, 0, Display::HEIGHT);
+    VLine(Display::HEIGHT).Draw(x, 0);
 
     //Painter::DrawHLine(y, 0, Display::WIDTH);
 	HLine(Display::WIDTH).Draw(0, y);

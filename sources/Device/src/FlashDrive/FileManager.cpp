@@ -18,6 +18,7 @@
 using Display::HLine;
 using Display::Rectangle;
 using Display::Region;
+using Display::VLine;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -174,7 +175,9 @@ void FileManager::Draw() //-V2506
         Region(Grid::Width() - 2, Grid::Height() - 2).Draw(left, top, Color::BACK);
         FDrive::GetNumDirsAndFiles(currentDir, &numDirs, &numFiles);
         DrawNameCurrentDir(left, top + 2);
-        Painter::DrawVLine(left2col, top + 16, 239, Color::FILL);
+
+        //Painter::DrawVLine(left2col, top + 16, 239, Color::FILL);
+        VLine(223 - top).Draw(left2col, top + 16, Color::FILL);
 
         //Painter::DrawHLine(top + 15, 0, width);
 		HLine(width).Draw(0, top + 15);

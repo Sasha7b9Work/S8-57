@@ -18,6 +18,7 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 using Display::Rectangle;
 using Display::Region;
+using Display::VLine;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -42,7 +43,9 @@ void HiPart::WriteCursors()
     int y2 = 9;
     if(Cursors::NecessaryDraw())
     {
-        Painter::DrawVLine(x, 1, Grid::Top() - 2, Color::FILL);
+        //Painter::DrawVLine(x, 1, Grid::Top() - 2, Color::FILL);
+        VLine(Grid::Top() - 3).Draw(x, 1, Color::FILL);
+
         x += 3;
         Chan::E source = CURS_SOURCE;
         Color colorText = Color::Channel(source);
@@ -68,7 +71,10 @@ void HiPart::WriteCursors()
         }
 
         x = startX + 101;
-        Painter::DrawVLine(x, 1, Grid::Top() - 2, Color::FILL);
+
+        //Painter::DrawVLine(x, 1, Grid::Top() - 2, Color::FILL);
+        VLine(Grid::Top() - 3).Draw(x, 1, Color::FILL);
+
         x += 3;
         if(CURsT_ENABLED)
         {
@@ -115,7 +121,8 @@ void HiPart::DrawRightPart()
 
     if(MODE_WORK != ModeWork::RAM)
     {
-        Painter::DrawVLine(x, 1, Grid::Top() - 2, Color::FILL);
+        //Painter::DrawVLine(x, 1, Grid::Top() - 2, Color::FILL);
+        VLine(Grid::Top() - 3).Draw(x, 1, Color::FILL);
 
         x += 2;
 
@@ -137,7 +144,10 @@ void HiPart::DrawRightPart()
     if(MODE_WORK != ModeWork::Dir)
     {
         x += 18;
-        Painter::DrawVLine(x, 1, Grid::Top() - 2, Color::FILL);
+
+        //Painter::DrawVLine(x, 1, Grid::Top() - 2, Color::FILL);
+        VLine(Grid::Top() - 3).Draw(x, 1, Color::FILL);
+
         x += 2;
         String(DICT(DMode)).Draw(LANG_RU ? x : x + 3, -1);
         Painter::DrawStringInCenterRect(x + 1, 9, 25, 8, strs[MODE_WORK][LANG]);
@@ -150,7 +160,9 @@ void HiPart::DrawRightPart()
     if(MODE_WORK != ModeWork::RAM)
     {
         x += 27;
-        Painter::DrawVLine(x, 1, Grid::Top() - 2, Color::FILL);
+
+        //Painter::DrawVLine(x, 1, Grid::Top() - 2, Color::FILL);
+        VLine(Grid::Top() - 3).Draw(x, 1, Color::FILL);
 
         x += 2;
         y = 1;

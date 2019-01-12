@@ -30,6 +30,7 @@ extern const PageBase ppInformation;
 
 using Display::HLine;
 using Display::Rectangle;
+using Display::VLine;
 
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -361,7 +362,8 @@ static void Draw_Function_Type_Sum(int x, int y)
     //Painter::DrawHLine(y + 9, x + 4, x + 14);   // -V112
     HLine(10).Draw(x + 4, y + 9);
 
-    Painter::DrawVLine(x + 9, y + 4, y + 14);   // -V112
+    //Painter::DrawVLine(x + 9, y + 4, y + 14);   // -V112
+    VLine(10).Draw(x + 9, y + 4);
 }
 
 static void Draw_Function_Type_Mul(int x, int y)

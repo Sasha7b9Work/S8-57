@@ -20,6 +20,7 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 using Display::HLine;
 using Display::Region;
+using Display::VLine;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -111,7 +112,8 @@ void PainterData::DrawChannel(Chan::E ch)
                     //Painter::DrawHLine(value, x - 1, x + 1);
                     HLine(2).Draw(x - 1, value);
 
-                    Painter::DrawVLine(x++, value - 1, value + 1);
+                    //Painter::DrawVLine(x++, value - 1, value + 1);
+                    VLine(2).Draw(x++, value - 1);
                 }
                 else
                 {
@@ -123,9 +125,14 @@ void PainterData::DrawChannel(Chan::E ch)
                         Math::Swap(&valuePrev, &value);
                     }
 
-                    Painter::DrawVLine(x - 1, value, valuePrev);
-                    Painter::DrawVLine(x + 1, value, valuePrev);
-                    Painter::DrawVLine(x++, valuePrev + 1, value - 1);
+                    //Painter::DrawVLine(x - 1, value, valuePrev);
+                    VLine(valuePrev - value).Draw(x - 1, value);
+
+                    //Painter::DrawVLine(x + 1, value, valuePrev);
+                    VLine(valuePrev - value).Draw(x + 1, value);
+
+                    //Painter::DrawVLine(x++, valuePrev + 1, value - 1);
+                    VLine(value - valuePrev - 2).Draw(x++, valuePrev + 1);
                 }
             }
         }
@@ -140,7 +147,9 @@ void PainterData::DrawChannel(Chan::E ch)
             {
                 int min = (int)(center - (data[i] - AVE_VALUE) * scale + 0.5F);
                 int max = (int)(center - (data[i + 1] - AVE_VALUE) * scale + 0.5F);
-                Painter::DrawVLine(x++, max, min);
+
+                //Painter::DrawVLine(x++, max, min);
+                VLine(min - max).Draw(x++, max);
             }
         }
         else
@@ -156,7 +165,9 @@ void PainterData::DrawChannel(Chan::E ch)
                 }
                 else
                 {
-                    Painter::DrawVLine(x++, valuePrev, valuePrev > value ? (value + 1) : (value - 1));
+                    int val = valuePrev > value ? (value + 1) : (value - 1);
+                    //Painter::DrawVLine(x++, valuePrev, val);
+                    VLine(val - valuePrev).Draw(x++, valuePrev);
                 }
             }
         }

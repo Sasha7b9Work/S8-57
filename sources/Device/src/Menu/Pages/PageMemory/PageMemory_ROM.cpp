@@ -22,6 +22,7 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 using Display::Rectangle;
 using Display::Region;
+using Display::VLine;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -100,8 +101,10 @@ static void Draw_Internal_ModeShow_Saved(int x, int y)
 static void Draw_Internal_ModeShow_Both(int x, int y)
 {
     String("наю").Draw(x + 1, y + 5);
-    Painter::DrawVLine(x + 1, y + 2, y + 14, Color::BACK);
-    Painter::DrawVLine(x + 2, y + 6, y + 11, Color::FILL);
+    //Painter::DrawVLine(x + 1, y + 2, y + 14, Color::BACK);
+    VLine(12).Draw(x + 1, y + 2, Color::BACK);
+    //Painter::DrawVLine(x + 2, y + 6, y + 11, Color::FILL);
+    VLine(5).Draw(x + 2, y + 6, Color::FILL);
 }
 
 static void Draw_Internal_ModeShow(int x, int y)
