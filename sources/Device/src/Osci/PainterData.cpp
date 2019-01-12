@@ -21,6 +21,7 @@
 using Display::Char;
 using Display::HLine;
 using Display::Line;
+using Display::Point;
 using Display::Region;
 using Display::VLine;
 
@@ -163,7 +164,8 @@ void PainterData::DrawChannel(Chan::E ch)
 
                 if(value == valuePrev)
                 {
-                    Painter::SetPoint(x++, valuePrev);
+                    //Painter::SetPoint(x++, valuePrev);
+                    Point().Draw(x++, valuePrev);
                 }
                 else
                 {
@@ -183,8 +185,10 @@ void PainterData::DrawChannel(Chan::E ch)
             int x = left;
             for(int i = 0; i < 281 * 2; i += 2)
             {
-                Painter::SetPoint(x, (int)(center - (data[i] - AVE_VALUE) * scale + 0.5F));
-                Painter::SetPoint(x, (int)(center - (data[i + 1] - AVE_VALUE) * scale + 0.5F));
+                //Painter::SetPoint(x, (int)(center - (data[i] - AVE_VALUE) * scale + 0.5F));
+                Point().Draw(x, (int)(center - (data[i] - AVE_VALUE) * scale + 0.5F));
+                //Painter::SetPoint(x, (int)(center - (data[i + 1] - AVE_VALUE) * scale + 0.5F));
+                Point().Draw(x, (int)(center - (data[i + 1] - AVE_VALUE) * scale + 0.5F));
                 x++;
             }
         }
@@ -193,7 +197,8 @@ void PainterData::DrawChannel(Chan::E ch)
             for (int i = 0; i < 280; i++)
             {
                 float value = center - (data[i] - AVE_VALUE) * scale;
-                Painter::SetPoint(left + i, ROUND(uint8, value));
+                //Painter::SetPoint(left + i, ROUND(uint8, value));
+                Point().Draw(left + i, ROUND(uint8, value));
             }
         }
     }

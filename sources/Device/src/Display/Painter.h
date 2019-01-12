@@ -33,7 +33,7 @@ namespace Painter
 
     void SetFont(Font::Type::E typeFont);
 
-    void SetPoint(int x, int y, Color color = Color::NUMBER);
+    //void SetPoint(int x, int y, Color color = Color::NUMBER);
 
     void DrawBoundedRegion(int x, int y, int width, int height, Color colorFill, Color colorBound);
 

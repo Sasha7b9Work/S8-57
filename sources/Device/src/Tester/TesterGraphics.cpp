@@ -16,6 +16,7 @@
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 using Display::HLine;
+using Display::Point;
 using Display::Region;
 
 
@@ -97,7 +98,8 @@ static void DrawData(int numStep, int /*x0*/, int /*y0*/)
         Painter::SetColor(ColorForStep(numStep));
         for(int i = 1; i < 240; i++)
         {
-            Painter::SetPoint(x[i], y[i]);
+            //Painter::SetPoint(x[i], y[i]);
+            Point().Draw(x[i], y[i]);
         }
     }
 }

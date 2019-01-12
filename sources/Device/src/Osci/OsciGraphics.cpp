@@ -21,6 +21,7 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 using Display::Char;
 using Display::Line;
+using Display::Point;
 using Display::Rectangle;
 using Display::Region;
 
@@ -79,7 +80,8 @@ void Osci::DrawCursorTrigLevel()
     {
         //Painter::DrawChar(x + 3, Grid::Bottom() - 11, SYMBOL_TRIG_LEV_LOWER);
         Char(SYMBOL_TRIG_LEV_LOWER).Draw(x + 3, Grid::Bottom() - 11);
-        Painter::SetPoint(x + 5, Grid::Bottom() - 2);
+        //Painter::SetPoint(x + 5, Grid::Bottom() - 2);
+        Point().Draw(x + 5, Grid::Bottom() - 2);
         y = Grid::Bottom() - 7;
         x--;
     }
@@ -87,7 +89,8 @@ void Osci::DrawCursorTrigLevel()
     {
         //Painter::DrawChar(x + 3, Grid::Top() + 2, SYMBOL_TRIG_LEV_ABOVE);
         Char(SYMBOL_TRIG_LEV_ABOVE).Draw(x + 3, Grid::Top() + 2);
-        Painter::SetPoint(x + 5, Grid::Top() + 2);
+        //Painter::SetPoint(x + 5, Grid::Top() + 2);
+        Point().Draw(x + 5, Grid::Top() + 2);
     }
     else
     {

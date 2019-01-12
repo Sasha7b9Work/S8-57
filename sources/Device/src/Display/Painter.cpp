@@ -16,6 +16,7 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 using Display::Char;
 using Display::HLine;
+using Display::Point;
 using Display::Rectangle;
 using Display::Region;
 using Display::VLine;
@@ -411,7 +412,8 @@ int Painter::DrawCharWithLimitation(int eX, int eY, char _symbol, int limitX, in
                 {
                     if ((x >= limitX) && (x <= (limitX + limitWidth)) && (y >= limitY) && (y <= limitY + limitHeight))
                     {
-                        Painter::SetPoint(x, y);
+                        //Painter::SetPoint(x, y);
+                        Point().Draw(x, y);
                     }
                 }
                 x++;
@@ -668,7 +670,8 @@ void Painter::DrawMultiVPointLine(int numLines, int y0, const uint16 *x0, int de
         for(int numPoint = 0; numPoint < count; numPoint++)
         {
             int y = y0 + numPoint * delta;
-            SetPoint(x, y);
+            //SetPoint(x, y);
+            Point().Draw(x, y);
         }
     }
 }
@@ -684,7 +687,8 @@ void Painter::DrawMultiHPointLine(int numLines, int x0, const uint8 *y0, int del
         for(int numPoint = 0; numPoint < count; numPoint++)
         {
             int x = x0 + numPoint * delta;
-            SetPoint(x, y);
+            //SetPoint(x, y);
+            Point().Draw(x, y);
         }
     }
 }
@@ -694,7 +698,8 @@ void Painter::DrawHPointLine(int y, int x0, int x1, float delta)
 {
     for (int x = x0; x <= x1; x += (int)delta)
     {
-        SetPoint(x, y);
+        //SetPoint(x, y);
+        Point().Draw(x, y);
     }
 }
 
@@ -703,7 +708,8 @@ void Painter::DrawVPointLine(int x, int y0, int y1, float delta)
 {
     for (int y = y0; y <= y1; y += (int)delta)
     {
-        SetPoint(x, y);
+        //SetPoint(x, y);
+        Point().Draw(x, y);
     }
 }
 
