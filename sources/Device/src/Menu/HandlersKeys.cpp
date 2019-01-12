@@ -4,6 +4,7 @@
 #include "log.h"
 #include "HandlersKeys.h"
 #include "Display/Grid.h"
+#include "Display/Display_Primitives.h"
 #include "Display/Painter.h"
 #include "FPGA/FPGA.h"
 #include "Hardware/Timer.h"
@@ -20,6 +21,9 @@
 #include "Settings/Settings.h"
 #include "Utils/String.h"
 #include <stdio.h>
+
+
+using Display::Text;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -255,9 +259,11 @@ static void DrawParametersChannel()
         Range(SET_RANGE(ch)).Name()
     );
 
-    Painter::DrawBigText(x + 3, y + 3, 1, buffer, Color::Channel(ch));
+    //Painter::DrawBigText(x + 3, y + 3, 1, buffer, Color::Channel(ch));
+    Text(buffer).Draw(x + 3, y + 3, Color::Channel(ch));
 
-    Painter::DrawBigText(x + 80, y + 3, 1, RShift::ToString(SET_RSHIFT(ch), SET_RANGE(ch), SET_DIVIDER(ch)).CString());
+    //Painter::DrawBigText(x + 80, y + 3, 1, RShift::ToString(SET_RSHIFT(ch), SET_RANGE(ch), SET_DIVIDER(ch)).CString());
+    Text(RShift::ToString(SET_RSHIFT(ch), SET_RANGE(ch), SET_DIVIDER(ch)).CString()).Draw(x + 80, y + 3);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

@@ -11,6 +11,9 @@
 #endif
 
 
+using Display::Text;
+
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 char                Multimeter::buffer[11] = {0};
 UART_HandleTypeDef  Multimeter::handlerUART;
@@ -136,7 +139,8 @@ void Multimeter::Graphics::Draw()
 
     funcs[meas].func();
 
-    Painter::DrawBigText(30, 30, 5, out, buffer[0] == '8' ? Color::GRAY_50 : Color::FILL);
+    //Painter::DrawBigText(30, 30, 5, out, buffer[0] == '8' ? Color::GRAY_50 : Color::FILL);
+
 
     Painter::SetColor(Color::FILL);
 

@@ -15,25 +15,9 @@ namespace Painter
     /// Елси не передавать значение цвета, то цвет останется прежним
     void SetColor(Color color = Color::NUMBER);
 
-    //void FillRegion(int x, int y, int width, int height, Color color = Color::NUMBER);
-
-    void DrawBigText(int x, int y, uint8 size, const char *text, Color color = Color::NUMBER);
-
     void SetColorValue(Color color, uint value);
 
-    //void DrawRectangle(int x, int y, int width, int height, Color color = Color::NUMBER);
-
-    //int DrawChar(int x, int y, char symbol, Color color = Color::NUMBER);
-
-    //void DrawHLine(int y, int x0, int x1, Color color = Color::NUMBER);
-
-    //void DrawVLine(int x, int y0, int y1, Color color = Color::NUMBER);
-
-    //void DrawLine(int x0, int y0, int x1, int y1, Color color = Color::NUMBER);
-
     void SetFont(Font::Type::E typeFont);
-
-    //void SetPoint(int x, int y, Color color = Color::NUMBER);
 
     void DrawBoundedRegion(int x, int y, int width, int height, Color colorFill, Color colorBound);
 

@@ -23,6 +23,7 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 using Display::Rectangle;
 using Display::Region;
+using Display::Text;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -280,8 +281,11 @@ float FrequencyCounter::GetFreq()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void DrawFrequency(int x, int y)
 {
-    Painter::DrawBigText(x + 2, y + 1, SIZE, "F", Color::FILL);
-    Painter::DrawBigText(x + 2, y + 10 * SIZE, SIZE, "T");
+    //Painter::DrawBigText(x + 2, y + 1, SIZE, "F", Color::FILL);
+    Text("F", SIZE).Draw(x + 2, y + 1, Color::FILL);
+
+    //Painter::DrawBigText(x + 2, y + 10 * SIZE, SIZE, "T");
+    Text("T", SIZE).Draw(x + 2, y + 10 * SIZE);
 
     Rectangle(10, 10).Draw(x - 20, y);
     if (lampFreq)
@@ -291,15 +295,19 @@ static void DrawFrequency(int x, int y)
 
     int dX = 7 * SIZE;
 
-    Painter::DrawBigText(x + dX, y + 1, SIZE, "=");
-    Painter::DrawBigText(x + dX, y + 10 * SIZE, SIZE, "=");
+    //Painter::DrawBigText(x + dX, y + 1, SIZE, "=");
+    Text("=", SIZE).Draw(x + dX, y + 1);
+
+    //Painter::DrawBigText(x + dX, y + 10 * SIZE, SIZE, "=");
+    Text("=", SIZE).Draw(x + dX, y + 10 * SIZE);
 
     dX = SIZE * 12;
 
     char strFreq[50];
     std::strcpy(strFreq, FreqSetToString(&freqActual));
 
-    Painter::DrawBigText(x + dX, y + 1, SIZE, strFreq);
+    //Painter::DrawBigText(x + dX, y + 1, SIZE, strFreq);
+    Text(strFreq, SIZE).Draw(x + dX, y + 1);
 
     if (std::strcmp(strFreq, EMPTY_STRING) == 0)
     {
@@ -332,14 +340,18 @@ static void DrawFrequency(int x, int y)
 
     Time time(1.0F / freq);
 
-    Painter::DrawBigText(x + dX, y + 10 * SIZE, SIZE, time.ToStringAccuracy(false, strFreq, 6));
+    //Painter::DrawBigText(x + dX, y + 10 * SIZE, SIZE, time.ToStringAccuracy(false, strFreq, 6));
+    Text(time.ToStringAccuracy(false, strFreq, 6), SIZE).Draw(x + dX, y + 10 * SIZE);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void DrawPeriod(int x, int y)
 {
-    Painter::DrawBigText(x + 2, y + 1, SIZE, "T", Color::FILL);
-    Painter::DrawBigText(x + 2, y + 10 * SIZE, SIZE, "F");
+    //Painter::DrawBigText(x + 2, y + 1, SIZE, "T", Color::FILL);
+    Text("T", SIZE).Draw(x + 2, y + 1, Color::FILL);
+
+    //Painter::DrawBigText(x + 2, y + 10 * SIZE, SIZE, "F");
+    Text("F", SIZE).Draw(x + 2, y + 10 * SIZE);
 
     Rectangle(10, 10).Draw(x - 20, y + 1);
     if (lampPeriod)
@@ -349,15 +361,19 @@ static void DrawPeriod(int x, int y)
 
     int dX = 7 * SIZE;
 
-    Painter::DrawBigText(x + dX, y + 1, SIZE, "=");
-    Painter::DrawBigText(x + dX, y + 10 * SIZE, SIZE, "=");
+    //Painter::DrawBigText(x + dX, y + 1, SIZE, "=");
+    Text("=", SIZE).Draw(x + dX, y + 1);
+
+    //Painter::DrawBigText(x + dX, y + 10 * SIZE, SIZE, "=");
+    Text("=", SIZE).Draw(x + dX, y + 10 * SIZE);
 
     dX = SIZE * 12;
 
     char strPeriod[50];
     std::strcpy(strPeriod, PeriodSetToString(&periodActual));
 
-    Painter::DrawBigText(x + dX, y + 1, SIZE, strPeriod);
+    //Painter::DrawBigText(x + dX, y + 1, SIZE, strPeriod);
+    Text(strPeriod, SIZE).Draw(x + dX, y + 1);
 
     if ((std::strcmp(strPeriod, EMPTY_STRING) == 0) || (std::strcmp(strPeriod, OVERFLOW_STRING) == 0))
     {
@@ -385,7 +401,8 @@ static void DrawPeriod(int x, int y)
 
     Frequency freq(1.0F / period);
 
-    Painter::DrawBigText(x + dX, y + 10 * SIZE, SIZE, freq.ToStringAccuracy(strPeriod, 6));
+    //Painter::DrawBigText(x + dX, y + 10 * SIZE, SIZE, freq.ToStringAccuracy(strPeriod, 6));
+    Text(freq.ToStringAccuracy(strPeriod, 6), SIZE).Draw(x + dX, y + 10 * SIZE);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

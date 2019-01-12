@@ -197,6 +197,7 @@ int Painter::DrawText(int x, int y, const char *text, Color color) //-V2506
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+/*
 void Painter::DrawBigText(int eX, int eY, uint8 sizeSymbol, const char *text, Color color)
 {
     SetColor(color);
@@ -214,6 +215,7 @@ void Painter::DrawBigText(int eX, int eY, uint8 sizeSymbol, const char *text, Co
 
     FSMC::WriteToPanel(buffer, size);
 }
+*/
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 /*
