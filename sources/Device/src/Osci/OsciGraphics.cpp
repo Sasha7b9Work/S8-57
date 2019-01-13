@@ -74,7 +74,7 @@ void Osci::DrawCursorTrigLevel()
     }
 
     int x = Grid::Right();
-    Painter::SetColor(Color::Trig());
+    Color::SetCurrent(Color::Trig());
 
     if (y > Grid::Bottom())
     {

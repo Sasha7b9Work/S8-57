@@ -55,6 +55,14 @@ public:
     static Color LightShadingText();        ///< Светлый цвет в тени.
     static Color Contrast(Color color);     ///< Возвращает цвет, контрастный к color. Может быть белым или чёрным.
     static Color ChanHalf(Chan::E ch);
+    /// Устанавливает текущий цвет отрисовки
+    static void SetCurrent(Color color = Color::NUMBER);
+    /// Возвращает текущий цвет отрисовки
+    static Color GetCurent();
+
+    static void ResetFlash();
+    /// Это системная функция. Вызывать самому нельзя
+    static void OnTimerFlashDisplay();
     
     uint8 value;
 
@@ -104,6 +112,11 @@ private:
         COLOR_FLASH_01 = 34,
         COLOR_INVERSE = 35
     };
+
+    /// Записывает мигающй цвет в дисплей. Возвращает false, если текущий цвет немигающий
+    static bool WriteFlashColor();
+    /// Записывает цвет в дисплей
+    static void WriteToDisplay(Color color);
 
 public:
 

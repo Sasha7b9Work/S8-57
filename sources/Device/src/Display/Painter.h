@@ -12,8 +12,6 @@ namespace Painter
     void BeginScene(Color color);
 
     void EndScene();
-    /// Елси не передавать значение цвета, то цвет останется прежним
-    void SetColor(Color color = Color::NUMBER);
 
     void SetColorValue(Color color, uint value);
 
@@ -21,7 +19,6 @@ namespace Painter
 
     void Draw4SymbolsInRect(int x, int y, char eChar, Color color = Color::NUMBER);
 
-    void ResetFlash();
     /// Пишет текст с переносами
     int DrawTextInRectWithTransfers(int x, int y, int width, int height, const char *text);
 
@@ -39,8 +36,6 @@ namespace Painter
     void Draw10SymbolsInRect(int x, int y, char eChar);
 
     void DrawTextRelativelyRight(int xRight, int y, const char *text, Color color = Color::NUMBER);
-    /// Возвращает текущий цвет рисования
-    Color GetColor();
     /// Нарисовать массив вертикальных линий. Линии рисуются одна за другой. y0y1 - массив вертикальных координат.
     void DrawVLineArray(int x, int numLines, uint8 *y0y1, Color color);
     /// \brief Нарисовать numLines вертикальных линий, состоящих из count точек каждая с расстоянием между точками delta. Горизонтальная координата
@@ -67,12 +62,4 @@ namespace Painter
     static bool ByteFontNotEmpty(uint eChar, int byte);
 
     static bool BitInFontIsExist(int eChar, int numByte, int bit);
-
-    void OnTimerFlashDisplay();
-    /// Записывает мигающй цвет в дисплей. Возвращает false, если текущий цвет немигающий
-    bool WriteFlashColor();
-    /// Записывает цвет в дисплей
-    void WriteColor(Color color);
-
-    extern Color currentColor;
 };

@@ -185,7 +185,7 @@ void BottomPart::Draw()
         Painter::Draw4SymbolsInRect(x + 72, Grid::Bottom() + 2, SYMBOL_USB, CONNECTED_TO_USB ? Color::WHITE : Color::FLASH_01);
     }
 
-    Painter::SetColor(Color::FILL);
+    Color::SetCurrent(Color::FILL);
     // Пиковый детектор
     if (!SET_PEAKDET_DIS)
     {
@@ -288,7 +288,7 @@ void BottomPart::DrawTime(int x, int y)
 
     PackedTime time = CPU::RTC_::GetPackedTime();
 
-    Painter::SetColor(Color::FILL);
+    Color::SetCurrent(Color::FILL);
 
     if ((MODE_WORK == ModeWork::ROM) || (MODE_WORK == ModeWork::RAM))
     {

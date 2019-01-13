@@ -35,7 +35,7 @@ void MemoryWindow::Draw()
         Chan::E chan = chans[i];
         if (SET_ENABLED(chan))
         {
-            Painter::SetColor(Color::Channel(chan));
+            Color::SetCurrent(Color::Channel(chan));
             DrawDataInRect(X(), Y(), Width(), Height(), OUT(chan), (uint)FPGA::NumPoints());
         }
     }

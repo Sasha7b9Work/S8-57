@@ -3,6 +3,8 @@
 #include "defines.h"
 #include "log.h"
 #include "Display/Painter.h"
+#include "Hardware/FSMC.h"
+#include "Hardware/Timer.h"
 #include "Settings/Settings.h"
 #include "Utils/Math.h"
 #include <cmath>
@@ -76,6 +78,10 @@ Color Color::CHAN[4] = {Color(COLOR_DATA_A), Color(COLOR_DATA_B), Color(COLOR_WH
 Color Color::FILL(COLOR_WHITE);
 Color Color::BACK(COLOR_BLACK);
 Color Color::GRID(COLOR_GRID);
+
+
+static Color currentColor = Color::NUMBER;
+static bool  inverseColor = false;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -337,4 +343,64 @@ Color Color::Trig()
 Color Color::ChanAccum(Chan ch)
 {
     return ch.IsA() ? Color(COLOR_DATA_WHITE_ACCUM_A) : Color(COLOR_DATA_WHITE_ACCUM_B);
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Color::SetCurrent(Color color)
+{
+    currentColor = color;
+    if (!WriteFlashColor())
+    {
+        WriteToDisplay(currentColor);
+    }
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Color Color::GetCurent()
+{
+    return currentColor;
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+bool Color::WriteFlashColor()
+{
+    if (currentColor == Color::FLASH_01)
+    {
+        WriteToDisplay(inverseColor ? Color::FILL : Color::BACK);
+        return true;
+    }
+    if (currentColor == Color::FLASH_10)
+    {
+        WriteToDisplay(inverseColor ? Color::BACK : Color::FILL);
+        return true;
+    }
+
+    return false;
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Color::ResetFlash()
+{
+    Timer::SetAndEnable(Timer::Type::FlashDisplay, OnTimerFlashDisplay, 500);
+    inverseColor = false;
+    WriteFlashColor();
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Color::OnTimerFlashDisplay()
+{
+    inverseColor = !inverseColor;
+    WriteFlashColor();
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Color::WriteToDisplay(Color color)
+{
+    static Color lastColor = Color::NUMBER;
+
+    if (color != lastColor)
+    {
+        lastColor = color;
+        FSMC::WriteToPanel2bytes(Command::Paint_SetColor, lastColor.value);
+    }
 }

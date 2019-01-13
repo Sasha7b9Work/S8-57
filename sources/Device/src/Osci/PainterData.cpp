@@ -101,7 +101,7 @@ void PainterData::DrawChannel(Chan::E ch)
     {
         if (THICKNESS_SIGNAL_IS_3)
         {
-            Painter::SetColor(Color::ChanHalf(ch));
+            Color::SetCurrent(Color::ChanHalf(ch));
 
             int x = left;
 
@@ -140,7 +140,7 @@ void PainterData::DrawChannel(Chan::E ch)
             }
         }
 
-        Painter::SetColor(Color::Channel(ch));
+        Color::SetCurrent(Color::Channel(ch));
 
         int x = left;
          
@@ -178,7 +178,7 @@ void PainterData::DrawChannel(Chan::E ch)
     }
     else
     {
-        Painter::SetColor(Color::Channel(ch));
+        Color::SetCurrent(Color::Channel(ch));
 
         if(SET_PEAKDET_EN)
         {

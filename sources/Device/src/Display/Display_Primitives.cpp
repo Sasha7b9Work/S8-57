@@ -23,7 +23,7 @@ Display::Region::Region(int _width, int _height) : width(_width), height(_height
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Display::Region::Draw(int x, int y, Color color)
 {
-    Painter::SetColor(color);
+    Color::SetCurrent(color);
     uint8 buffer[7] = { Command::Paint_FillRegion, (uint8)x, (uint8)(x >> 8), (uint8)y, (uint8)width, (uint8)(width >> 8), (uint8)height };
     FSMC::WriteToPanel(buffer, 7);
 }
@@ -31,11 +31,11 @@ void Display::Region::Draw(int x, int y, Color color)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Display::Region::DrawBounded(int x, int y, Color colorFill, Color colorBound)
 {
-    Color color = Painter::currentColor;
+    Color color = Color::GetCurent();
     Rectangle(width, height).Draw(x, y, colorBound);
     Region(width - 2, height - 2).Draw(x + 1, y + 1, colorFill);
     /// \todo Почему-то цвет не восстанавливается
-    Painter::SetColor(color);
+    Color::SetCurrent(color);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -46,7 +46,7 @@ Display::Rectangle::Rectangle(int _width, int _height) : width(_width), height(_
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Display::Rectangle::Draw(int x, int y, Color color)
 {
-    Painter::SetColor(color);
+    Color::SetCurrent(color);
     uint8 buffer[7] = { Command::Paint_DrawRectangle, (uint8)x, (uint8)(x >> 8), (uint8)y, (uint8)width, (uint8)(width >> 8), (uint8)height };
     FSMC::WriteToPanel(buffer, 7);
 }
@@ -59,7 +59,7 @@ Display::HLine::HLine(int _width) : width(_width)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Display::HLine::Draw(int x, int y, Color color)
 {
-	Painter::SetColor(color);
+	Color::SetCurrent(color);
 	int x0 = x;
 	int x1 = x0 + width;
 	uint8 buffer[6] = { Command::Paint_DrawHLine, (uint8)y, (uint8)x0, (uint8)(x0 >> 8), (uint8)x1, (uint8)(x1 >> 8) };
@@ -74,7 +74,7 @@ Display::VLine::VLine(int _height) : height(_height)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Display::VLine::Draw(int x, int y, Color color)
 {
-	Painter::SetColor(color);
+	Color::SetCurrent(color);
 	int y0 = y;
 	int y1 = y0 + height;
 	uint8 buffer[5] = { Command::Paint_DrawVLine, (uint8)x, (uint8)(x >> 8), (uint8)y0, (uint8)y1 };
@@ -84,7 +84,7 @@ void Display::VLine::Draw(int x, int y, Color color)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Display::Point::Draw(int x, int y, Color color)
 {
-	Painter::SetColor(color);
+	Color::SetCurrent(color);
 	uint8 buffer[4] = { Command::Paint_SetPoint, (uint8)x, (uint8)(x >> 8), (uint8)y };
 	FSMC::WriteToPanel(buffer, 4);
 }
@@ -97,7 +97,7 @@ Display::Line::Line(int _x0, int _y0, int _x1, int _y1) : x0(_x0), y0(_y0), x1(_
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Display::Line::Draw(Color color)
 {
-	Painter::SetColor(color);
+	Color::SetCurrent(color);
 	uint8 buffer[7] = { Command::Paint_DrawLine, (uint8)x0, (uint8)(x0 >> 8), (uint8)y0, (uint8)x1, (uint8)(x1 >> 8), (uint8)y1 };
 	FSMC::WriteToPanel(buffer, 7);
 }
@@ -146,7 +146,7 @@ void Display::Text::DrawBig(int x, int y, Color color)
 {
 #define MAX_SIZE_BUFFER 100
 
-    Painter::SetColor(color);
+    Color::SetCurrent(color);
 
     uint numSymbols = std::strlen(text); //-V2513
     uint8 buffer[MAX_SIZE_BUFFER] = { Command::Paint_DrawBigText, (uint8)x, (uint8)(x >> 8), (uint8)y, size, (uint8)(numSymbols) };
@@ -265,7 +265,7 @@ int Display::Text::DrawSmall(int x, int y, Color color)
         return x + 10;
     }
 
-    Painter::SetColor(color);
+    Color::SetCurrent(color);
 
     uint8 buffer[MAX_SIZE_BUFFER] = { Command::Paint_DrawText, (uint8)x, (uint8)(x >> 8), (uint8)y, (uint8)std::strlen(text) };
 
@@ -287,10 +287,10 @@ int Display::Text::DrawOnBackground(int x, int y, Color colorBackground)
     int width = Font::GetLengthText(text);
     int height = Font::GetSize();
 
-    Color colorText(Painter::GetColor());
+    Color colorText(Color::GetCurent());
     Region(width, height).Draw(x - 1, y, colorBackground);
 
-    Painter::SetColor(colorText);
+    Color::SetCurrent(colorText);
 
     //return DrawText(x, y, text);
     return Text(text).Draw(x, y);

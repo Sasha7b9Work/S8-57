@@ -143,7 +143,7 @@ void Multimeter::Graphics::Draw()
     //Painter::DrawBigText(30, 30, 5, out, buffer[0] == '8' ? Color::GRAY_50 : Color::FILL);
 
 
-    Painter::SetColor(Color::FILL);
+    Color::SetCurrent(Color::FILL);
 
     Menu::Draw();
 }

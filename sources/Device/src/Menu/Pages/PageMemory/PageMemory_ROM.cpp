@@ -241,7 +241,7 @@ static void DrawMemoryWave(int num, bool exist)
     int width = 12;
     Region(width, 10).Draw(x, y, num == NUM_ROM_SIGNAL ? Color::FLASH_10 : Color::BACK);
     Rectangle(width, 10).Draw(x, y, Color::FILL);
-    Painter::SetColor(num == NUM_ROM_SIGNAL ? Color::FLASH_01 : Color::FILL);
+    Color::SetCurrent(num == NUM_ROM_SIGNAL ? Color::FLASH_01 : Color::FILL);
     if (exist)
     {
         Integer(num + 1).ToString(false, 2).Draw(x + 2, y + 1);
@@ -271,7 +271,7 @@ static bool HandlerKey_Internal(KeyEvent event)
         // остальные кнопки не обрабатываем
     }
 
-    Painter::ResetFlash();
+    Color::ResetFlash();
 
     return true;
 }

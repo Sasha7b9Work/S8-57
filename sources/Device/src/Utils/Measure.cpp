@@ -285,7 +285,7 @@ void Measure::DrawPageChoice()
             bool active = (meas == posOnPageChoice);
             Rectangle(dX, dY).Draw(x0, y0, Color::WHITE);
             Region(dX - 2, dY - 2).Draw(x0 + 1, y0 + 1, (active ? Color::FLASH_10 : Color::BACK));
-            Painter::SetColor(active ? Color::FLASH_01 : Color::FILL);
+            Color::SetCurrent(active ? Color::FLASH_01 : Color::FILL);
             Painter::Draw10SymbolsInRect(x0 + 2, y0 + 1, GetChar(meas));
             Painter::SetFont(Font::Type::_5);
             Painter::DrawTextRelativelyRight(x0 + dX, y0 + 12, sMeas[meas].name, active ? Color::FLASH_01 : Color::FILL);

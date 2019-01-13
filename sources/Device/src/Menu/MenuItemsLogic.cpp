@@ -366,7 +366,7 @@ void TimeControl::SetNewTime()
 void TimeControl::SelectNextPosition()
 {
     Math::CircleIncrease<int8>(curField, 0, 7);
-    Painter::ResetFlash();
+    Color::ResetFlash();
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

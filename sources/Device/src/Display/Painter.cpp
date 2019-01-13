@@ -24,43 +24,9 @@ using Display::VLine;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-static Color Painter::currentColor = Color::NUMBER;
-static bool  inverseColor = false;
-
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void Painter::WriteColor(Color color)
-{
-    static Color lastColor = Color::NUMBER;
-
-    if(color != lastColor)
-    {
-        lastColor = color;
-        FSMC::WriteToPanel2bytes(Command::Paint_SetColor, lastColor.value);
-    }
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-bool Painter::WriteFlashColor() //-V2506
-{
-    if(currentColor == Color::FLASH_01)
-    {
-        WriteColor(inverseColor ? Color::FILL : Color::BACK);
-        return true;
-    }
-    if(currentColor == Color::FLASH_10)
-    {
-        WriteColor(inverseColor ? Color::BACK : Color::FILL);
-        return true;
-    }
-
-    return false;
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 int Painter::DrawTextInRectWithTransfersC(int x, int y, int width, int height, const char *text, Color color)
 {
-    SetColor(color);
+    Color::SetCurrent(color);
     return DrawTextInRectWithTransfers(x, y, width, height, text);
 }
 
@@ -389,27 +355,12 @@ void Painter::Draw10SymbolsInRect(int x, int y, char eChar)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Painter::ResetFlash()
-{
-    Timer::SetAndEnable(Timer::Type::FlashDisplay, OnTimerFlashDisplay, 500);
-    inverseColor = false;
-    WriteFlashColor();
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Painter::OnTimerFlashDisplay()
-{
-    inverseColor = !inverseColor;
-    WriteFlashColor();
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 int Painter::DrawStringInCenterRectAndBoundItC(int x, int y, int width, int height, const char *text, Color colorBackground, Color colorFill)
 {
     //FillBoundedRegion(x, y, width, height, colorBackground, colorFill);
     Region(width, height).DrawBounded(x, y, colorBackground, colorFill);
 
-    SetColor(colorFill);
+    Color::SetCurrent(colorFill);
     //return DrawStringInCenterRect(x, y, width, height, text);
 
     return Text(text).DrawInCenterRect(x, y, width, height);
@@ -500,7 +451,7 @@ int Painter::DrawTextInBoundedRectWithTransfers(int x, int y, int width, const c
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Painter::Draw4SymbolsInRect(int x, int y, char eChar, Color color)
 {
-    SetColor(color);
+    Color::SetCurrent(color);
  
     for (char i = 0; i < 2; i++)
     {
@@ -526,15 +477,9 @@ void Painter::DrawStringInCenterRectOnBackgroundC(int x, int y, int width, int h
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-Color Painter::GetColor()
-{
-    return currentColor;
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Painter::DrawVLineArray(int x, int numLines, uint8 *y0y1, Color color)
 {
-    SetColor(color);
+    Color::SetCurrent(color);
 
     for(int i = 0; i < numLines; i++)
     {
@@ -549,7 +494,7 @@ void Painter::DrawVLineArray(int x, int numLines, uint8 *y0y1, Color color)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Painter::DrawMultiVPointLine(int numLines, int y0, const uint16 *x0, int delta, int count, Color color)
 {
-    SetColor(color);
+    Color::SetCurrent(color);
 
     for(int i = 0; i < numLines; i++)
     {
@@ -566,7 +511,7 @@ void Painter::DrawMultiVPointLine(int numLines, int y0, const uint16 *x0, int de
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Painter::DrawMultiHPointLine(int numLines, int x0, const uint8 *y0, int delta, int count, Color color)
 {
-    SetColor(color);
+    Color::SetCurrent(color);
 
     for(int i = 0; i < numLines; i++)
     {

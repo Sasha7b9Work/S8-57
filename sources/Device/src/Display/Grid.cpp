@@ -182,7 +182,7 @@ void Grid::DrawGridSignal(int left, int top, int width, int height)
     int right = left + width;
     int bottom = top + height;
 
-    Painter::SetColor(Color::FILL);
+    Color::SetCurrent(Color::FILL);
 
     if (top == Top())
     {
@@ -212,7 +212,7 @@ void Grid::DrawGridSignal(int left, int top, int width, int height)
     float centerX = (float)(left + width / 2);
     float centerY = (float)(top + height / 2);
 
-    Painter::SetColor(Color::GRID);
+    Color::SetCurrent(Color::GRID);
 
     if (TYPE_GRID_1)
     {
@@ -250,13 +250,13 @@ void Grid::DrawGridSpectrum()
 
             if (!Menu::IsMinimize())
             {
-                Painter::SetColor(Color::FILL);
+                Color::SetCurrent(Color::FILL);
                 String((char *)strs[i]).Draw(3, y - 4);
             }
         }
         if (!Menu::IsMinimize())
         {
-            Painter::SetColor(Color::FILL);
+            Color::SetCurrent(Color::FILL);
             String("Да").Draw(5, MathTop() + 1);
         }
     }
@@ -364,7 +364,7 @@ static void Grid::DrawGridType3(int left, int top, int right, int bottom, int ce
     Painter::DrawHPointLine(centerY, left + stepX, right, (float)stepX);
     uint8 masY[6] = {(uint8)(top + 1), (uint8)(top + 2), (uint8)(centerY - 1), (uint8)(centerY + 1), (uint8)(bottom - 2), (uint8)(bottom - 1)};
     Painter::DrawMultiHPointLine(6, left + deltaX, masY, deltaX, (right - top) / deltaX, Color::GRID);
-    Painter::SetColor(Color::GRID);
+    Color::SetCurrent(Color::GRID);
     Painter::DrawVPointLine(centerX, top + stepX, bottom - stepX, (float)stepX);
     uint16 masX[6] = {(uint16)(left + 1), (uint16)(left + 2), (uint16)(centerX - 1), (uint16)(centerX + 1), (uint16)(right - 2), (uint16)(right - 1)};
     Painter::DrawMultiVPointLine(6, top + deltaY, masX, deltaY, (bottom - top) / deltaY, Color::GRID);
@@ -412,7 +412,7 @@ static int Grid::DeltaHforLineGrid()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void Grid::DrawTester()
 {
-    Painter::SetColor(Color::FILL);
+    Color::SetCurrent(Color::FILL);
 
     Rectangle(Display::WIDTH - 1, Display::HEIGHT - 1).Draw(0, 0);
 
@@ -420,7 +420,7 @@ static void Grid::DrawTester()
 
     float y0 = 0;
 
-    Painter::SetColor(Color::GRID);
+    Color::SetCurrent(Color::GRID);
 
     int x = (int)(x0 + Display::WIDTH / 2);
     int y = (int)(y0 + Display::HEIGHT / 2);
@@ -431,7 +431,7 @@ static void Grid::DrawTester()
     //Painter::DrawHLine(y, 0, Display::WIDTH);
 	HLine(Display::WIDTH).Draw(0, y);
 
-    Painter::SetColor(Color::GRID);
+    Color::SetCurrent(Color::GRID);
 
     int deltaX = 32;
     int deltaY = 24;

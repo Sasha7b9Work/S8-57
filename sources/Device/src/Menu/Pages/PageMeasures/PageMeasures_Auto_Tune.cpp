@@ -101,7 +101,7 @@ static bool HandlerKey_Tune(KeyEvent event)
         }
 
         set.meas_measures[Measure::posActive] = (Measure::Type::E)Measure::posOnPageChoice;
-        Painter::ResetFlash();
+        Color::ResetFlash();
     }
     else
     {

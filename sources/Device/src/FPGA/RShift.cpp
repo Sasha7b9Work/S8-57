@@ -26,7 +26,7 @@ void RShift::Draw()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void RShift::Draw(Chan::E ch)
 {
-    Painter::SetColor(Color::Channel(ch));
+    Color::SetCurrent(Color::Channel(ch));
 
     int delta = (SET_RSHIFT(ch) - RShift::ZERO) / STEP_RSHIFT;
 

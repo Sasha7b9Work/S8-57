@@ -79,7 +79,7 @@ void HiPart::WriteCursors()
         x += 3;
         if(CURsT_ENABLED)
         {
-            Painter::SetColor(colorText);
+            Color::SetCurrent(colorText);
             String("1:").Draw(x, y1);
             String("2:").Draw(x, y2);
             x += 7;

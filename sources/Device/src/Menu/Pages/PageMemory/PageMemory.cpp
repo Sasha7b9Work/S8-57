@@ -415,7 +415,7 @@ static void DrawSetMask()
     };
 
     deltaY--;
-    Painter::SetColor(Color::FILL);
+    Color::SetCurrent(Color::FILL);
     for (int i = 0; i < (int)sizeof(strings) / 4; i++)
     {
         String(strings[i]).Draw(x0 + deltaX, y0 + 100 + deltaY * i);
@@ -426,7 +426,7 @@ static void DrawFileMask(int x, int y)
 {
     char *ch = FILE_NAME_MASK;
 
-    Painter::SetColor(Color::FILL);
+    Color::SetCurrent(Color::FILL);
     while (*ch != '\0')
     {
         if (*ch >= 32)
@@ -712,7 +712,7 @@ void OnMemExtSetMaskNameRegSet(int angle, int maxIndex)
         Math::CircleIncrease<int8>
     };
 
-    Painter::ResetFlash();
+    Color::ResetFlash();
     if (INDEX_SYMBOL > maxIndex)
     {
         INDEX_SYMBOL = (int8)(maxIndex - 1);

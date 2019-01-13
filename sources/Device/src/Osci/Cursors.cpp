@@ -79,7 +79,7 @@ void Cursors::Draw()
 {
     Chan::E source = CURS_SOURCE;
 
-    Painter::SetColor(Color::Cursors(source));
+    Color::SetCurrent(Color::Cursors(source));
 
     if (NecessaryDraw())
     {

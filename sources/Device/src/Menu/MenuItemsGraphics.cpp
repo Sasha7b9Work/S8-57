@@ -227,7 +227,7 @@ void Governor::DrawLowPart(int x, int y, bool shade)
             int limY = y - 2;
             int limWidth = Menu::Item::Value::WIDTH;
             int limHeight = Menu::Item::Value::HEIGHT - 1;
-            Painter::SetColor(Color::BLACK);
+            Color::SetCurrent(Color::BLACK);
             if (delta > 0)
             {
                 //x = Painter::DrawTextWithLimitation(drawX, y - delta, Integer(*cell).ToString(false, 1).CString(), limX, limY, limWidth, limHeight);
@@ -300,14 +300,14 @@ void Choice::DrawClosed(int x, int y)
 
     int deltaY = (int)Step();
     Color colorText = shade ? Color::MenuItem(true) : Color::BLACK;
-    Painter::SetColor(colorText);
+    Color::SetCurrent(colorText);
     if (deltaY == 0)
     {
         NameCurrentSubItem().Draw(x + 4, y + Menu::Item::Value::HEIGHT + 1);
     }
     else
     {
-        Painter::SetColor(Color::BACK);
+        Color::SetCurrent(Color::BACK);
         //Painter::DrawTextWithLimitation(x + 4, y + Menu::Item::Value::HEIGHT - deltaY + 1, NameCurrentSubItem().CString(), x, y + 11, Menu::Item::Value::WIDTH, Menu::Item::Value::HEIGHT - 1);
 		Text(NameCurrentSubItem()).DrawWithLimitation(x + 4, y + Menu::Item::Value::HEIGHT - deltaY + 1, x, y + 11, Menu::Item::Value::WIDTH, Menu::Item::Value::HEIGHT - 1);
 
@@ -355,17 +355,17 @@ void SButton::Draw(int x, int y)
         if (IsPressed())
         {
             Region(WIDTH_SB, WIDTH_SB).Draw(x, y, Color::FILL);
-            Painter::SetColor(Color::BLACK);
+            Color::SetCurrent(Color::BLACK);
         }
         else
         {
-            Painter::SetColor(Color::FILL);
+            Color::SetCurrent(Color::FILL);
         }
         funcForDraw(x, y);
     }
     else
     {
-        Painter::SetColor(Color::FILL);
+        Color::SetCurrent(Color::FILL);
     }
 }
 
@@ -468,7 +468,7 @@ void Page::DrawTitle(int x, int yTop)
 
     Menu::SetItemUnderButton(GetFuncButtonFromX(yTop), this);
 
-    Painter::SetColor(Color::GRAY_75);
+    Color::SetCurrent(Color::GRAY_75);
     DrawPagesUGO(eX + Menu::Title::WIDTH - 3, yTop + Menu::Title::HEIGHT);
     DrawNestingPage(eX + 5, yTop + Menu::Title::HEIGHT - 6);
 }

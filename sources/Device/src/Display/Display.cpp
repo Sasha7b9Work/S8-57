@@ -210,7 +210,7 @@ static void ShowWarn(const char *message)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Display::ShowWarning(Warning::E warning)
 {
-    Painter::ResetFlash();
+    Color::ResetFlash();
     for (int i = 2; i >= 0; i--)
     {
         const char *message = warns[warning].message[LANG][i];

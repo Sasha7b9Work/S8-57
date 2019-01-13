@@ -625,7 +625,7 @@ static void OnPress_SerialNumber_Change()
     ACCESS_EXTRAMEM(StructForSN, s);
     ++s->curDigt;
     s->curDigt %= 2;
-    Painter::ResetFlash();
+    Color::ResetFlash();
 }
 
 static void Draw_SerialNumber_Change(int x, int y)
@@ -702,7 +702,7 @@ static void Draw_EnterSerialNumber()
 
     int y = y0 + 50;
 
-    Painter::SetColor(colorText);
+    Color::SetCurrent(colorText);
     //int x = Painter::DrawTextOnBackground(x0 + deltaX, y, buffer, colorBackground);
     int x = Text(buffer).DrawOnBackground(x0 + deltaX, y, colorBackground);
 
@@ -717,7 +717,7 @@ static void Draw_EnterSerialNumber()
 
     snprintf(buffer, 19, "%04d", s->year);
 
-    Painter::SetColor(colorText);
+    Color::SetCurrent(colorText);
     //Painter::DrawTextOnBackground(x + 5, y, buffer, colorBackground);
     Text(buffer).DrawOnBackground(x + 5, y, colorBackground);
 
