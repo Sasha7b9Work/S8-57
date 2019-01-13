@@ -63,7 +63,8 @@ static void DrawPageDescription()
     //Painter::DrawStringInCenterRect(0, 3, WIDTH, 10, currentPage->titleHint[LANG]);
     Text(currentPage->titleHint[LANG]).DrawInCenterRect(0, 3, WIDTH, 10);
 
-    Painter::DrawTextInRectWithTransfers(2, 15, WIDTH - 5, 240, currentPage->titleHint[2 + LANG]);
+    //Painter::DrawTextInRectWithTransfers(2, 15, WIDTH - 5, 240, currentPage->titleHint[2 + LANG]);
+    Text(currentPage->titleHint[2 + LANG]).DrawInRectWithTransfers(2, 15, WIDTH - 5, 240);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

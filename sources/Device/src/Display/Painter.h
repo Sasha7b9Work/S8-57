@@ -17,19 +17,12 @@ namespace Painter
 
     void Draw4SymbolsInRect(int x, int y, char eChar, Color color = Color::NUMBER);
 
-    /// Пишет текст с переносами
-    int DrawTextInRectWithTransfers(int x, int y, int width, int height, const char *text);
-
     int DrawStringInCenterRectAndBoundItC(int x, int y, int width, int height, const char *text, Color colorBackground, Color colorFill);
-    /// Возвращает нижнюю координату прямоугольника
-    int DrawTextInBoundedRectWithTransfers(int x, int y, int width, const char *text, Color colorBackground, Color colorFill);
     /// Пишет строку текста в центре области(x, y, width, height)цветом ColorText на прямоугольнике с шириной бордюра widthBorder цвета colorBackground
     void DrawStringInCenterRectOnBackgroundC(int x, int y, int width, int height, const char *text, Color colorText, int widthBorder,
                                                     Color colorBackground);
     /// Установить яркость дисплея.
     void SetBrightnessDisplay(int16 brightness);
-
-    static int DrawTextInRectWithTransfersC(int x, int y, int width, int height, const char *text, Color color);
 
     void Draw10SymbolsInRect(int x, int y, char eChar);
     /// Нарисовать массив вертикальных линий. Линии рисуются одна за другой. y0y1 - массив вертикальных координат.

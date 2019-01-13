@@ -37,18 +37,6 @@ using Display::VLine;
 
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-/*
-static void Draw_ResetSettings()
-{
-    Painter::BeginScene(Color::BACK);
-
-    Painter::DrawTextInRectWithTransfersC(30, 110, 300, 200, "Подтвердите сброс настроек нажатием кнопки ПУСК/СТОП.\n"
-                                         "Нажмите любую другую кнопку, если сброс не нужен.", Color::FILL);
-
-    Painter::EndScene();
-}
-*/
-
 static void OnPress_ResetSettings()
 {
     Settings::Load(true);

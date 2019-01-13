@@ -25,6 +25,7 @@
 
 using Display::HLine;
 using Display::VLine;
+using Display::Text;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -754,7 +755,10 @@ static void DrawHintItem(int x, int y, int width)
         y -= 9;
     }
     Painter::DrawStringInCenterRectAndBoundItC(x, y, width, 15, title, Color::BACK, Color::FILL);
-    y = Painter::DrawTextInBoundedRectWithTransfers(x, y + 15, width, item->titleHint[2 + lang], Color::BACK, Color::FILL);
+
+    //y = Painter::DrawTextInBoundedRectWithTransfers(x, y + 15, width, item->titleHint[2 + lang], Color::BACK, Color::FILL);
+    y = Text(item->titleHint[2 + lang]).DrawInBoundedRectWithTransfers(x, y + 15, width, Color::BACK, Color::FILL);
+
     if (item->type == Control::Type::DrawButton)
     {
         ((SButton*)item)->DrawHints(x, y, width);   // -V1027
@@ -828,16 +832,28 @@ void Menu::Draw()
         {
             width = Menu::IsMinimize() ? 289 : 220;
         }
-        Painter::DrawTextInBoundedRectWithTransfers(x, y, width,
-               LANG_RU ? "Включён режим подсказок. В этом режиме при нажатии на кнопку на экран выводится информация о её назначении. "
-               "Чтобы выключить этот режим, нажмите кнопку ПОМОЩЬ и удерживайте её в течение 0.5с." :
-               "Mode is activated hints. In this mode, pressing the button displays the information on its purpose. "
-               "To disable this mode, press the button HELP and hold it for 0.5s.",
-               Color::BACK, Color::FILL);
+
+        //Painter::DrawTextInBoundedRectWithTransfers(x, y, width,
+        //       LANG_RU ? "Включён режим подсказок. В этом режиме при нажатии на кнопку на экран выводится информация о её назначении. "
+        //       "Чтобы выключить этот режим, нажмите кнопку ПОМОЩЬ и удерживайте её в течение 0.5с." :
+        //       "Mode is activated hints. In this mode, pressing the button displays the information on its purpose. "
+        //       "To disable this mode, press the button HELP and hold it for 0.5s.",
+        //       Color::BACK, Color::FILL);
+
+        Text(
+            LANG_RU ? 
+            "Включён режим подсказок. В этом режиме при нажатии на кнопку на экран выводится информация о её назначении. "
+            "Чтобы выключить этот режим, нажмите кнопку ПОМОЩЬ и удерживайте её в течение 0.5с."
+            :
+            "Mode is activated hints. In this mode, pressing the button displays the information on its purpose. "
+            "To disable this mode, press the button HELP and hold it for 0.5s."
+        ).DrawInBoundedRectWithTransfers(x, y, width, Color::BACK, Color::FILL);
+
         y += LANG_RU ? 49 : 40;
         if (Menu::stringForHint)
         {
-            Painter::DrawTextInBoundedRectWithTransfers(x, y, width, Menu::stringForHint, Color::BACK, Color::WHITE);
+            //Painter::DrawTextInBoundedRectWithTransfers(x, y, width, Menu::stringForHint, Color::BACK, Color::WHITE);
+            Text(Menu::stringForHint).DrawInBoundedRectWithTransfers(x, y, width, Color::BACK, Color::WHITE);
         }
         else if (Menu::itemHint)
         {

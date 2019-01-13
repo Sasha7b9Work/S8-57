@@ -104,12 +104,20 @@ namespace Display
     public:
         Text(const char *text, uint8 size = 1);
 		Text(const String &string, uint8 size = 1);
+
         int Draw(int x, int y, Color color = Color::NUMBER);
+
         int DrawInCenterRect(int x, int y, int width, int height, Color color = Color::NUMBER);
+
         int DrawWithLimitation(int x, int y, int limitX, int limitY, int limitWidth, int limitHeight);
         /// Выводит текст на прямоугольнике цвета colorBackgound
         int DrawOnBackground(int x, int y, Color colorBackground);
+
         void DrawRelativelyRight(int xRight, int y, Color color = Color::NUMBER);
+        /// Пишет текст с переносами
+        int DrawInRectWithTransfers(int x, int y, int width, int height, Color color = Color::NUMBER);
+        /// Возвращает нижнюю координату прямоугольника
+        int DrawInBoundedRectWithTransfers(int x, int y, int width, Color colorBackground, Color colorFill);
     private:
         const char *text;
         uint8 size;
