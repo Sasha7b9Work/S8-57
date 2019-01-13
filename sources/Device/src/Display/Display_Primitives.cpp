@@ -707,3 +707,38 @@ void Display::Text::DrawInCenterRectOnBackground(int x, int y, int width, int he
     //DrawStringInCenterRect(x, y, width, height, text, colorText);
     Text(text).DrawInCenterRect(x, y, width, height, colorText);
 }
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Display::DashedVLine::DashedVLine(int _height, int _deltaFill, int _deltaEmpty, int _deltaStart) : height(_height), deltaFill(_deltaFill), deltaEmpty(_deltaEmpty), deltaStart(_deltaStart)
+{
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Display::DashedVLine::Draw(int x, int y0)
+{
+    if (deltaStart < 0 || deltaStart >= (deltaFill + deltaEmpty))
+    {
+        LOG_ERROR("Неправильный аргумент deltaStart = %d", deltaStart);
+        return;
+    }
+    int y = y0;
+    if (deltaStart != 0)                 // Если линию нужно рисовать не с начала штриха
+    {
+        y += (deltaFill + deltaEmpty - deltaStart);
+        if (deltaStart < deltaFill)     // Если начало линии приходится на штрих
+        {
+            //DrawVLine(x, y0, y - 1);
+            VLine(y - y0 - 1).Draw(x, y0);
+        }
+    }
+
+    int y1 = y0 + height;
+
+    while (y < y1)
+    {
+        //DrawVLine(x, y, y + deltaFill - 1);
+        VLine(deltaFill - 1).Draw(x, y);
+
+        y += (deltaFill + deltaEmpty);
+    }
+}

@@ -131,4 +131,17 @@ namespace Display
         bool ByteFontNotEmpty(uint eChar, int byte);
         bool BitInFontIsExist(int eChar, int numByte, int bit);
     };
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    class DashedVLine
+    {
+    public:
+        DashedVLine(int height, int deltaFill, int deltaEmpty, int deltaStart);
+        void Draw(int x, int y);
+    private:
+        int height;
+        int deltaFill;
+        int deltaEmpty;
+        int deltaStart;
+    };
 }

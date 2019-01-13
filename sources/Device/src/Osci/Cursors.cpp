@@ -17,6 +17,7 @@
 
 
 using Display::Rectangle;
+using Display::DashedVLine;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -123,12 +124,15 @@ static void DrawVertical(int x, int yTearing)
     x += Grid::Left();
     if (yTearing == -1)
     {
-        Painter::DrawDashedVLine(x, Grid::Top() + 2, Grid::ChannelBottom() - 1, 1, 1, 0);
+        //Painter::DrawDashedVLine(x, Grid::Top() + 2, Grid::ChannelBottom() - 1, 1, 1, 0);
+        DashedVLine(Grid::ChannelBottom() - Grid::Top() - 3, 1, 1, 0).Draw(x, Grid::Top() + 2);
     }
     else
     {
-        Painter::DrawDashedVLine(x, Grid::Top() + 2, yTearing - 2, 1, 1, 0);
-        Painter::DrawDashedVLine(x, yTearing + 2, Grid::ChannelBottom() - 1, 1, 1, 0);
+        //Painter::DrawDashedVLine(x, Grid::Top() + 2, yTearing - 2, 1, 1, 0);
+        DashedVLine(yTearing - Grid::Top() - 4, 1, 1, 0).Draw(x, Grid::Top() + 2);
+        //Painter::DrawDashedVLine(x, yTearing + 2, Grid::ChannelBottom() - 1, 1, 1, 0);
+        DashedVLine(Grid::ChannelBottom() - yTearing - 3, 1, 1, 0).Draw(x, yTearing + 2);
     }
     Rectangle(2, 2).Draw(x - 1, Grid::Top() - 1);
     Rectangle(2, 2).Draw(x - 1, Grid::ChannelBottom() - 1);

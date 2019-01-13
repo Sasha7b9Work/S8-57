@@ -121,34 +121,6 @@ void Painter::DrawVPointLine(int x, int y0, int y1, float delta)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Painter::DrawDashedVLine(int x, int y0, int y1, int deltaFill, int deltaEmtpy, int deltaStart) //-V2506
-{
-    if (deltaStart < 0 || deltaStart >= (deltaFill + deltaEmtpy))
-    {
-        LOG_ERROR("Неправильный аргумент deltaStart = %d", deltaStart);
-        return;
-    }
-    int y = y0;
-    if (deltaStart != 0)                 // Если линию нужно рисовать не с начала штриха
-    {
-        y += (deltaFill + deltaEmtpy - deltaStart);
-        if (deltaStart < deltaFill)     // Если начало линии приходится на штрих
-        {
-            //DrawVLine(x, y0, y - 1);
-            VLine(y - y0 - 1).Draw(x, y0);
-        }
-    }
-
-    while (y < y1)
-    {
-        //DrawVLine(x, y, y + deltaFill - 1);
-        VLine(deltaFill - 1).Draw(x, y);
-
-        y += (deltaFill + deltaEmtpy);
-    }
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Painter::DrawDashedHLine(int y, int x0, int x1, int deltaFill, int deltaEmpty, int deltaStart) //-V2506
 {
     if (deltaStart < 0 || deltaStart >= (deltaFill + deltaEmpty))
