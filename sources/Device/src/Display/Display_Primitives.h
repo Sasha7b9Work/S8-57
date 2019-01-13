@@ -84,6 +84,7 @@ namespace Display
         Char(char ch);
         int Draw(int x, int y, Color color = Color::NUMBER);
         void Draw4SymbolsInRect(int x, int y, Color color = Color::NUMBER);
+        void Draw10SymbolsInRect(int x, int y);
     private:
 		char ch;
     };

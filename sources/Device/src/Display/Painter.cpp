@@ -25,19 +25,6 @@ using Display::VPointLine;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void Painter::Draw10SymbolsInRect(int x, int y, char eChar)
-{
-    for (char i = 0; i < 5; i++)
-    {
-        //DrawChar(x + 8 * i, y, eChar + i);
-        Char(eChar + i).Draw(x + 8 * i, y);
-
-        //DrawChar(x + 8 * i, y + 8, eChar + i + 16);
-        Char(eChar + i + 16).Draw(x + 8 * i, y + 8);
-    }
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Painter::DrawVLineArray(int x, int numLines, uint8 *y0y1, Color color)
 {
     Color::SetCurrent(color);

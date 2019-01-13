@@ -9,7 +9,7 @@
 #endif
 
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+using Display::Char;
 using Display::Rectangle;
 using Display::Region;
 using Display::Text;
@@ -287,9 +287,8 @@ void Measure::DrawPageChoice()
             Rectangle(dX, dY).Draw(x0, y0, Color::WHITE);
             Region(dX - 2, dY - 2).Draw(x0 + 1, y0 + 1, (active ? Color::FLASH_10 : Color::BACK));
             Color::SetCurrent(active ? Color::FLASH_01 : Color::FILL);
-            Painter::Draw10SymbolsInRect(x0 + 2, y0 + 1, GetChar(meas));
+            Char(GetChar(meas)).Draw10SymbolsInRect(x0 + 2, y0 + 1);
             Painter::SetFont(Font::Type::_5);
-            //Painter::DrawTextRelativelyRight(x0 + dX, y0 + 12, sMeas[meas].name, active ? Color::FLASH_01 : Color::FILL);
             Text(sMeas[meas].name).DrawRelativelyRight(x0 + dX, y0 + 12, active ? Color::FLASH_01 : Color::FILL);
             Painter::SetFont(Font::Type::_UGO);
             meas = (Measure::Type::E)((int)meas + 1);    // meas++;
