@@ -13,6 +13,7 @@
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 using Display::HLine;
+using Display::HPointLine;
 using Display::Rectangle;
 using Display::VLine;
 using Display::VPointLine;
@@ -362,7 +363,9 @@ static void Grid::DrawGridType2(int left, int top, int right, int bottom, int de
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void Grid::DrawGridType3(int left, int top, int right, int bottom, int centerX, int centerY, int deltaX, int deltaY, int stepX)
 {
-    Painter::DrawHPointLine(centerY, left + stepX, right, (float)stepX);
+    //Painter::DrawHPointLine(centerY, left + stepX, right, (float)stepX);
+    HPointLine(right - left - stepX, (float)stepX).Draw(left + stepX, centerY);
+
     uint8 masY[6] = {(uint8)(top + 1), (uint8)(top + 2), (uint8)(centerY - 1), (uint8)(centerY + 1), (uint8)(bottom - 2), (uint8)(bottom - 1)};
     Painter::DrawMultiHPointLine(6, left + deltaX, masY, deltaX, (right - top) / deltaX, Color::GRID);
     Color::SetCurrent(Color::GRID);
@@ -464,9 +467,12 @@ static void Grid::DrawTester()
 
     y += deltaY;
 
+    HPointLine hLine(Display::WIDTH, deltaPoint);
+
     while (y < Display::HEIGHT)
     {
-        Painter::DrawHPointLine(y, 0, Display::WIDTH, deltaPoint);
+        //Painter::DrawHPointLine(y, 0, Display::WIDTH, deltaPoint);
+        hLine.Draw(0, y);
         y += deltaY;
     }
 
@@ -474,7 +480,8 @@ static void Grid::DrawTester()
 
     while (y > 0)
     {
-        Painter::DrawHPointLine(y, 0, Display::WIDTH, deltaPoint);
+        //Painter::DrawHPointLine(y, 0, Display::WIDTH, deltaPoint);
+        hLine.Draw(0, y);
         y -= deltaY;
     }
 }

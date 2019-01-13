@@ -169,4 +169,16 @@ namespace Display
         int height;
         float delta;
     };
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /// Горизонтальная линия от x до x + width точками через каждые delta пикселей
+    class HPointLine
+    {
+    public:
+        HPointLine(int width, float delta);
+        void Draw(int x, int y);
+    private:
+        int width;
+        float delta;
+    };
 }

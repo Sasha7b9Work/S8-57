@@ -28,8 +28,6 @@ namespace Painter
     /// \brief Нарисовать numLines горизонтальных линий, состоящих из count точек каждая с расстоянием между точками delta. Вертикальная координата
     /// первой точки каждой линии соответствует очередному элементу массива y[]
     void DrawMultiHPointLine(int numLines, int x, const uint8 *y, int delta, int count, Color color = Color::NUMBER);
-    /// Нарисовать горизонтальную линию от x0 до x1 точками через каждые delta пикселей
-    void DrawHPointLine(int y, int x0, int x1, float delta);
 
     void DrawTesterData(uint8 mode, Color color, const uint8 *x, const uint8 *y);
 
