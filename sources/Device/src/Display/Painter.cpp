@@ -429,6 +429,7 @@ int Painter::DrawCharWithLimitation(int eX, int eY, char _symbol, int limitX, in
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+/*
 int Painter::DrawTextWithLimitation(int x, int y, const char *text, int limitX, int limitY, int limitWidth, int limitHeight)
 {
     int retValue = x;
@@ -440,6 +441,7 @@ int Painter::DrawTextWithLimitation(int x, int y, const char *text, int limitX, 
     }
     return retValue + 1;
 }
+*/
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 bool Painter::ByteFontNotEmpty(uint eChar, int byte)

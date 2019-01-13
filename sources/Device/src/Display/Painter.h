@@ -21,8 +21,6 @@ namespace Painter
 
     void Draw4SymbolsInRect(int x, int y, char eChar, Color color = Color::NUMBER);
 
-    int DrawTextWithLimitation(int x, int y, const char *text, int limitX, int limitY, int limitWidth, int limitHeight);
-
     void ResetFlash();
     /// Пишет текст с переносами
     int DrawTextInRectWithTransfers(int x, int y, int width, int height, const char *text);
