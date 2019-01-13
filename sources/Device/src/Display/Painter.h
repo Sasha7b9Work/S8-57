@@ -32,8 +32,6 @@ namespace Painter
     static int DrawTextInRectWithTransfersC(int x, int y, int width, int height, const char *text, Color color);
 
     void Draw10SymbolsInRect(int x, int y, char eChar);
-
-    void DrawTextRelativelyRight(int xRight, int y, const char *text, Color color = Color::NUMBER);
     /// Нарисовать массив вертикальных линий. Линии рисуются одна за другой. y0y1 - массив вертикальных координат.
     void DrawVLineArray(int x, int numLines, uint8 *y0y1, Color color);
     /// \brief Нарисовать numLines вертикальных линий, состоящих из count точек каждая с расстоянием между точками delta. Горизонтальная координата
@@ -54,10 +52,4 @@ namespace Painter
     void DrawDashedHLine(int y, int x0, int x1, int deltaFill, int deltaEmpty, int deltaStart);
 
     void SaveScreenToDrive();
-
-    static int DrawCharWithLimitation(int eX, int eY, char symbol, int limitX, int limitY, int limitWidth, int limitHeight);
-
-    static bool ByteFontNotEmpty(uint eChar, int byte);
-
-    static bool BitInFontIsExist(int eChar, int numByte, int bit);
 };

@@ -295,3 +295,11 @@ int Display::Text::DrawOnBackground(int x, int y, Color colorBackground)
     //return DrawText(x, y, text);
     return Text(text).Draw(x, y);
 }
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Display::Text::DrawRelativelyRight(int xRight, int y, Color color)
+{
+    int lenght = Font::GetLengthText(text);
+    //DrawText(xRight - lenght, y, text, color);
+    Text(text).Draw(xRight - lenght, y, color);
+}

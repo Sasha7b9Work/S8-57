@@ -109,6 +109,7 @@ namespace Display
         int DrawWithLimitation(int x, int y, int limitX, int limitY, int limitWidth, int limitHeight);
         /// Выводит текст на прямоугольнике цвета colorBackgound
         int DrawOnBackground(int x, int y, Color colorBackground);
+        void DrawRelativelyRight(int xRight, int y, Color color = Color::NUMBER);
     private:
         const char *text;
         uint8 size;

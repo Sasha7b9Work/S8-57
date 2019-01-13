@@ -334,14 +334,6 @@ int Painter::DrawTextInRectWithTransfers(int eX, int eY, int eWidth, int eHeight
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Painter::DrawTextRelativelyRight(int xRight, int y, const char *text, Color color)
-{
-    int lenght = Font::GetLengthText(text);
-    //DrawText(xRight - lenght, y, text, color);
-    Text(text).Draw(xRight - lenght, y, color);
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Painter::Draw10SymbolsInRect(int x, int y, char eChar)
 {
     for (char i = 0; i < 5; i++)

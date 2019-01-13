@@ -24,6 +24,7 @@ using Display::Char;
 using Display::HLine;
 using Display::Region;
 using Display::VLine;
+using Display::Text;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -277,7 +278,8 @@ void BottomPart::WriteStringAndNumber(const char *text, int16 x, int16 y, int nu
     {
         snprintf(buffer, SIZE, "%d", number);
     }
-    Painter::DrawTextRelativelyRight(x + 41, y, buffer);
+    //Painter::DrawTextRelativelyRight(x + 41, y, buffer);
+    Text(buffer).DrawRelativelyRight(x + 41, y);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
