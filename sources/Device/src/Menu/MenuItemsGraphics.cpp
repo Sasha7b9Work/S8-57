@@ -18,7 +18,6 @@
 #endif
 
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 using Display::Char;
 using Display::HLine;
 using Display::Rectangle;
@@ -209,10 +208,9 @@ void Governor::DrawLowPart(int x, int y, bool shade)
     {
         if (IsCurrentItem())
         {
-            Painter::Draw4SymbolsInRect(x + Width() - 12, y - 1, GetSymbol(), Color::BACK);
+            Char(GetSymbol()).Draw4SymbolsInRect(x + Width() - 12, y - 1, Color::BACK);
         }
     
-        //x = Painter::DrawChar(x + 4, y, SYMBOL_GOVERNOR_LEFT, colorTextDown);
         x = Char(SYMBOL_GOVERNOR_LEFT).Draw(x + 4, y, colorTextDown);
         
         int delta = (int)Step();
@@ -230,23 +228,16 @@ void Governor::DrawLowPart(int x, int y, bool shade)
             Color::SetCurrent(Color::BLACK);
             if (delta > 0)
             {
-                //x = Painter::DrawTextWithLimitation(drawX, y - delta, Integer(*cell).ToString(false, 1).CString(), limX, limY, limWidth, limHeight);
 				x = Text(Integer(*cell).ToString(false, 1)).DrawWithLimitation(drawX, y - delta, limX, limY, limWidth, limHeight);
-
-                //Painter::DrawTextWithLimitation(drawX, y + 10 - delta, Integer(NextValue()).ToString(false, 1).CString(), limX, limY, limWidth, limHeight);
 				Text(Integer(NextValue()).ToString(false, 1)).DrawWithLimitation(drawX, y + 10 - delta, limX, limY, limWidth, limHeight);
             }
             if (delta < 0)
             {
-                //x = Painter::DrawTextWithLimitation(drawX, y - delta, Integer(*cell).ToString(false, 1).CString(), limX, limY, limWidth, limHeight);
 				x = Text(Integer(*cell).ToString(false, 1)).DrawWithLimitation(drawX, y - delta, limX, limY, limWidth, limHeight);
-
-                //Painter::DrawTextWithLimitation(drawX, y - 10 - delta, Integer(PrevValue()).ToString(false, 1).CString(), limX, limY, limWidth, limHeight);
 				Text(Integer(PrevValue()).ToString(false, 1)).DrawWithLimitation(drawX, y - 10 - delta, limX, limY, limWidth, limHeight);
             }
         }
         
-        //Painter::DrawChar(x + 1, y, SYMBOL_GOVERNOR_RIGHT, colorTextDown);
         Char(SYMBOL_GOVERNOR_RIGHT).Draw(x + 1, y, colorTextDown);
     }
     else
@@ -676,7 +667,7 @@ static void DrawCommonHiPart(Control *item, int x, int y, bool pressed, bool sha
             // для остальных контролов не нужно
         }
 
-        Painter::Draw4SymbolsInRect(x + item->Width() - 13, y + (item->IsOpened() ? 0 : 13), symbol, shade ? color : Color::BLACK);
+        Char(symbol).Draw4SymbolsInRect(x + item->Width() - 13, y + (item->IsOpened() ? 0 : 13), shade ? color : Color::BLACK);
     }
 }
 

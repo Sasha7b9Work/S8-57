@@ -20,7 +20,7 @@
 #endif
 
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+using Display::Char;
 using Display::Rectangle;
 using Display::Region;
 using Display::Text;
@@ -69,7 +69,7 @@ static void OnChanged_ADC_Balance_Mode(bool)
     Draw_ADC_Balance_Mode(0, 0);
 }
 
-DEF_CHOICE_3(       cADC_Balance_Mode,                                                                        //--- ОТЛАДКА - АЦП - БАЛАНС - Режим ---
+DEF_CHOICE_3( cADC_Balance_Mode,                                                                                                                     //--- ОТЛАДКА - АЦП - БАЛАНС - Режим ---
     "Режим", "Mode",
     "",
     "",
@@ -139,7 +139,7 @@ void PageDebug::OnChanged_ADC_Stretch_Mode(bool)
     }
 }
 
-DEF_CHOICE_3(       cADC_Stretch_Mode,                                                                      //--- ОТЛАДКА - АЦП - РАСТЯЖКА - Режим ---
+DEF_CHOICE_3( cADC_Stretch_Mode,                                                                                                                   //--- ОТЛАДКА - АЦП - РАСТЯЖКА - Режим ---
     "Режим", "Mode",
     "",
     "",
@@ -160,7 +160,7 @@ static void OnChanged_ADC_Stretch_A()
     NRST_STRETCH_ADC_A(NRST_STRETCH_ADC_TYPE) = stretchA;
 }
 
-DEF_GOVERNOR(       gADC_Stretch_A,                                                                   //--- ОТЛАДКА - АЦП - РАСТЯЖКА - Растяжка 1к ---
+DEF_GOVERNOR( gADC_Stretch_A,                                                                                                                //--- ОТЛАДКА - АЦП - РАСТЯЖКА - Растяжка 1к ---
     "Растяжка 1к", "Stretch 1ch",
     "Задаёт ручную растяжку первого канала.\n1 единица = 0.0001",
     "Sets the manual stretching of the first channel.\n1 = 0.0001",
@@ -173,7 +173,7 @@ static void OnChanged_ADC_Stretch_B()
     NRST_STRETCH_ADC_B(NRST_STRETCH_ADC_TYPE) = stretchB;
 }
 
-DEF_GOVERNOR(       gADC_Stretch_B,                                                                   //--- ОТЛАДКА - АЦП - РАСТЯЖКА - Растяжка 2к ---
+DEF_GOVERNOR( gADC_Stretch_B,                                                                                                                //--- ОТЛАДКА - АЦП - РАСТЯЖКА - Растяжка 2к ---
     "Растяжка 2к", "Stretch 2ch",
     "Задаёт ручную растяжку второго канала.\n1 единица = 0.0001",
     "Sets the manual stretching of the second channel.\n1 = 0.0001",
@@ -390,7 +390,7 @@ static void OnChanged_Channels_BandwidthB(bool)
     FPGA::SetBandwidth(Chan::B);
 }
 
-DEF_CHOICE_7(       cChannels_BandwidthB,                                                                        //--- ОТЛАДКА - КАНЛАЫ - Полоса 2 ---
+DEF_CHOICE_7( cChannels_BandwidthB,                                                                                                                     //--- ОТЛАДКА - КАНЛАЫ - Полоса 2 ---
     "Полоса 2", "Bandwidth 2",
     "Здесь можно выбрать полосу, которая будет действовать в КАНАЛ2-Полоса при выборе значения Полная",
     "Here you can select the bandwidth, which will operate in CHANNEL2-Bandwidth when set to Full",
@@ -415,7 +415,7 @@ DEF_PAGE_2( ppChannels, // -V641                                                
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-DEF_CHOICE_2(       cStats,                                                                                                                                    //--- ОТЛАДКА - Статистика ---
+DEF_CHOICE_2( cStats,                                                                                                                                          //--- ОТЛАДКА - Статистика ---
     "Статистика", "Statistics",
     "Показывать/не показывать время/кадр, кадров в секунду, количество сигналов с последними настройками в памяти/количество сохраняемых в памяти "
     "сигналов",
@@ -431,7 +431,7 @@ void PageDebug::OnChanged_DisplayOrientation(bool)
     Display::SetOrientation(DISPLAY_ORIENTATION);
 }
 
-DEF_CHOICE_2(       cDisplayOrientation,                                                                                                                       //--- ОТЛАДКА - Ориентация ---
+DEF_CHOICE_2( cDisplayOrientation,                                                                                                                             //--- ОТЛАДКА - Ориентация ---
     "Ориентация", "DisplayOrientation",
     "Устанавливает ориентацию дисплея",
     "Sets display orientation",
@@ -448,7 +448,7 @@ static void OnChanged_Pred()
     FPGA::pred = (uint16)(~pred);
 }
 
-DEF_GOVERNOR(       mgPred,                                                                                             //--- ОТЛАДКА - Предзапуск ---
+DEF_GOVERNOR( mgPred,                                                                                                                                          //--- ОТЛАДКА - Предзапуск ---
     "Предзапуск", "",
     "", "",
     pred, 0, 15000, pageDebug, FuncActive, OnChanged_Pred, FuncBeforeDraw
@@ -462,7 +462,7 @@ static void OnChanged_Post()
     FPGA::post = (uint16)~post;
 }
 
-DEF_GOVERNOR(       mgPost,                                                                                            //--- ОТЛАДКА - Послезапуск ---
+DEF_GOVERNOR( mgPost,                                                                                                                                         //--- ОТЛАДКА - Послезапуск ---
     "Послезапуск", "",
     "", "",
     post, 0, 15000, pageDebug, FuncActive, OnChanged_Post, FuncBeforeDraw
@@ -474,7 +474,7 @@ static void OnPress_Settings_Exit()
     Display::SetDrawMode(Display::DrawMode::Auto, 0);
 }
 
-DEF_SMALL_BUTTON_EXIT(  bSettings_Exit,                                                                          //--- ОТЛАДКА - НАСТРОЙКИ - Выход ---
+DEF_SMALL_BUTTON_EXIT( bSettings_Exit,                                                                                                                  //--- ОТЛАДКА - НАСТРОЙКИ - Выход ---
     ppSettings, FuncActive, OnPress_Settings_Exit, DrawSB_Exit
 )
 
@@ -601,7 +601,7 @@ static void OnPress_SaveFirmware()
     Display::ShowWarning(Warning::FirmwareSaved);
 }
 
-DEF_BUTTON(         bSaveFirmware,                                                                                  //--- ОТЛАДКА - Сохр. прошивку ---
+DEF_BUTTON( bSaveFirmware,                                                                                                                                 //--- ОТЛАДКА - Сохр. прошивку ---
     "Сохр. прошивку", "Save firmware",
     "Сохранение прошивки - секторов 5, 6, 7 общим объёмом 3 х 128 кБ, где хранится программа",
     "Saving firmware - sectors 5, 6, 7 with a total size of 3 x 128 kB, where the program is stored",
@@ -615,7 +615,7 @@ static void OnPress_SerialNumber_Exit()
     FREE_EXTRAMEM();
 }
 
-DEF_SMALL_BUTTON_EXIT(  bSerialNumber_Exit,                                                                            //--- ОТЛАДКА - С/Н - Выход ---
+DEF_SMALL_BUTTON_EXIT( bSerialNumber_Exit,                                                                                                                    //--- ОТЛАДКА - С/Н - Выход ---
     ppSerialNumber, FuncActive, OnPress_SerialNumber_Exit, DrawSB_Exit
 )
 
@@ -631,11 +631,14 @@ static void OnPress_SerialNumber_Change()
 static void Draw_SerialNumber_Change(int x, int y)
 {
     Painter::SetFont(Font::Type::_UGO2);
-    Painter::Draw4SymbolsInRect(x + 2, y + 2, SYMBOL_TAB);
+
+    //Painter::Draw4SymbolsInRect(x + 2, y + 2, SYMBOL_TAB);
+    Char(SYMBOL_TAB).Draw4SymbolsInRect(x + 2, y + 2);
+
     Painter::SetFont(Font::Type::_8);
 }
 
-DEF_SMALL_BUTTON(   bSerialNumber_Change,                                                                           //--- ОТЛАДКА - С/Н - Вставить ---
+DEF_SMALL_BUTTON( bSerialNumber_Change,                                                                                                                    //--- ОТЛАДКА - С/Н - Вставить ---
     "Вставить", "Insert",
     "Вставляет выбраный символ",
     "Inserts the chosen symbol",
@@ -660,11 +663,11 @@ static void OnPress_SerialNumber_Save()
 static void Draw_SerialNumber_Save(int x, int y)
 {
     Painter::SetFont(Font::Type::_UGO2);
-    Painter::Draw4SymbolsInRect(x + 2, y + 1, SYMBOL_SAVE_TO_MEM);
+    Char(SYMBOL_SAVE_TO_MEM).Draw4SymbolsInRect(x + 2, y + 1);
     Painter::SetFont(Font::Type::_8);
 }
 
-DEF_SMALL_BUTTON(   bSerialNumber_Save,                                                                            //--- ОТЛАДКА - С/Н - Сохранить ---
+DEF_SMALL_BUTTON( bSerialNumber_Save,                                                                                                                     //--- ОТЛАДКА - С/Н - Сохранить ---
     "Сохранить", "Save",
     "Записывает серийный номер в OTP",
     "Records the serial number in OTP",
@@ -780,7 +783,7 @@ static void OnPress_EraseData()
     Display::FuncOnWaitStop();
 }
 
-DEF_BUTTON(         bEraseData,                                                                                     //--- ОТЛАДКА - Стереть данные ---
+DEF_BUTTON( bEraseData,                                                                                                                                    //--- ОТЛАДКА - Стереть данные ---
     "Стереть данне", "Erase data",
     "Стирает сохранённые данные из ППЗУ",
     "Erase all saved datas from EEPROM",

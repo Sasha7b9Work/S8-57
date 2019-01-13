@@ -24,7 +24,6 @@
 #endif
 
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 using Display::Char;
 using Display::Rectangle;
 using Display::Region;
@@ -111,11 +110,14 @@ DEF_CHOICE_5( cPoints,                                                          
 static void Draw_Drive_Manager_Tab(int x, int y)
 {
     Painter::SetFont(Font::Type::_UGO2);
-    Painter::Draw4SymbolsInRect(x + 2, y + 1, SYMBOL_TAB);
+
+    //Painter::Draw4SymbolsInRect(x + 2, y + 1, SYMBOL_TAB);
+    Char(SYMBOL_TAB).Draw4SymbolsInRect(x + 2, y + 1);
+
     Painter::SetFont(Font::Type::_8);
 }
 
-DEF_SMALL_BUTTON(   bDrive_Manager_Tab,                                                                                                           //--- ПАМЯТЬ - ВНЕШН ЗУ - КАТАЛОГ - Tab ---
+DEF_SMALL_BUTTON( bDrive_Manager_Tab,                                                                                                             //--- ПАМЯТЬ - ВНЕШН ЗУ - КАТАЛОГ - Tab ---
     "Tab", "Tab",
     "Переход между каталогами и файлами",
     "The transition between the directories and files",
@@ -126,11 +128,14 @@ DEF_SMALL_BUTTON(   bDrive_Manager_Tab,                                         
 static void Draw_Drive_Manager_LevelUp(int x, int y)
 {
     Painter::SetFont(Font::Type::_UGO2);
-    Painter::Draw4SymbolsInRect(x + 2, y + 1, '\x48');
+
+    //Painter::Draw4SymbolsInRect(x + 2, y + 1, '\x48');
+    Char('\x48').Draw4SymbolsInRect(x + 2, y + 1);
+
     Painter::SetFont(Font::Type::_8);
 }
 
-DEF_SMALL_BUTTON(   bDrive_Manager_LevelUp,                                                  //--- ПАМЯТЬ - ВНЕШН ЗУ - КАТАЛОГ - Выйти из каталога ---
+DEF_SMALL_BUTTON( bDrive_Manager_LevelUp,                                                                                           //--- ПАМЯТЬ - ВНЕШН ЗУ - КАТАЛОГ - Выйти из каталога ---
     "Выйти из каталого", "Leave from directory",
     "Переход в родительский каталог",
     "Transition to the parental catalog",
@@ -141,11 +146,14 @@ DEF_SMALL_BUTTON(   bDrive_Manager_LevelUp,                                     
 static void Draw_Drive_Manager_LevelDown(int x, int y)
 {
     Painter::SetFont(Font::Type::_UGO2);
-    Painter::Draw4SymbolsInRect(x + 2, y + 2, '\x4a');
+
+    //Painter::Draw4SymbolsInRect(x + 2, y + 2, '\x4a');
+    Char('\x4a').Draw4SymbolsInRect(x + 2, y + 2);
+
     Painter::SetFont(Font::Type::_8);
 }
 
-DEF_SMALL_BUTTON(   bDrive_Manager_LevelDown,                                                  //--- ПАМЯТЬ - ВНЕШН ЗУ - КАТАЛОГ - Войти в каталог ---
+DEF_SMALL_BUTTON( bDrive_Manager_LevelDown,                                                                                           //--- ПАМЯТЬ - ВНЕШН ЗУ - КАТАЛОГ - Войти в каталог ---
     "Войти в каталог", "Enter in directory",
     "Переход в выбранный каталог",
     "Transition to the chosen catalog",
@@ -199,7 +207,7 @@ DEF_PAGE_3( pppDrive_Manager, // -V641                                          
 
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-DEF_CHOICE_2(       cDrive_Name,                                                                                                                      //--- ПАМЯТЬ - ВНЕШН ЗУ - Имя файла ---
+DEF_CHOICE_2( cDrive_Name,                                                                                                                            //--- ПАМЯТЬ - ВНЕШН ЗУ - Имя файла ---
     "Имя файла", "File name"
     ,
     "Задаёт режим наименования файлов при сохранении на внешний накопитель:\n"
@@ -224,7 +232,10 @@ static void OnPress_Drive_Mask_Delete()
 static void Draw_Delete(int x, int y)
 {
     Painter::SetFont(Font::Type::_UGO2);
-    Painter::Draw4SymbolsInRect(x + 2, y + 1, SYMBOL_DELETE);
+
+    //Painter::Draw4SymbolsInRect(x + 2, y + 1, SYMBOL_DELETE);
+    Char(SYMBOL_DELETE).Draw4SymbolsInRect(x + 2, y + 1);
+
     Painter::SetFont(Font::Type::_8);
 }
 
@@ -255,11 +266,14 @@ static void OnPress_Drive_Mask_Backspace()
 static void Draw_Backspace(int x, int y)
 {
     Painter::SetFont(Font::Type::_UGO2);
-    Painter::Draw4SymbolsInRect(x + 2, y + 1, SYMBOL_BACKSPACE);
+
+    //Painter::Draw4SymbolsInRect(x + 2, y + 1, SYMBOL_BACKSPACE);
+    Char(SYMBOL_BACKSPACE).Draw(x + 2, y + 1);
+
     Painter::SetFont(Font::Type::_8);
 }
 
-DEF_SMALL_BUTTON(   bDrive_Mask_Backspace,                                                             //--- ПАМЯТЬ - ВНЕШН ЗУ - МАСКА - Backspace ---
+DEF_SMALL_BUTTON( bDrive_Mask_Backspace,                                                                                                      //--- ПАМЯТЬ - ВНЕШН ЗУ - МАСКА - Backspace ---
     "Backspace", "Backspace",
     "Удаляет последний введённый символ",
     "Deletes the last entered symbol",
@@ -306,7 +320,7 @@ static void OnPress_Drive_Mask_Insert()
 static void Draw_Insert(int x, int y)
 {
     Painter::SetFont(Font::Type::_UGO2);
-    Painter::Draw4SymbolsInRect(x + 2, y + 2, SYMBOL_INSERT);
+    Char(SYMBOL_INSERT).Draw4SymbolsInRect(x + 2, y + 2);
     Painter::SetFont(Font::Type::_8);
 }
 
@@ -683,12 +697,12 @@ static void Draw_SetName_Save(int x, int y)
     if (FDrive::IsConnected())
     {
         Painter::SetFont(Font::Type::_UGO2);
-        Painter::Draw4SymbolsInRect(x + 2, y + 1, SYMBOL_FLASH_DRIVE_BIG);
+        Char(SYMBOL_FLASH_DRIVE_BIG).Draw4SymbolsInRect(x + 2, y + 1);
         Painter::SetFont(Font::Type::_8);
     }
 }
 
-DEF_SMALL_BUTTON(bSetName_Save,                                                                                     //--- ИМЯ ФАЙЛА - Сохранить ---
+DEF_SMALL_BUTTON( bSetName_Save,                                                                                                                              //--- ИМЯ ФАЙЛА - Сохранить ---
     "Сохранить", "Save",
     "Сохранение на флеш под заданным именем",
     "Saving to flashdrive with the specified name",

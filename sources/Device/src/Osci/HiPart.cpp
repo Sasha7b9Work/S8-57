@@ -15,7 +15,7 @@
 #endif
 
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+using Display::Char;
 using Display::Rectangle;
 using Display::Region;
 using Display::VLine;
@@ -171,7 +171,7 @@ void HiPart::DrawRightPart()
 
         if(FPGA::IsRunning())       // Рабочий режим
         {
-            Painter::Draw4SymbolsInRect(x, 1, SYMBOL_PLAY);
+            Char(SYMBOL_PLAY).Draw4SymbolsInRect(x, 1);
         }
         else if(FPGA_IN_STATE_STOP)  // Режим остановки
         {

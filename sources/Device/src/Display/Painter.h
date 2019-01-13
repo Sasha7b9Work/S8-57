@@ -14,8 +14,6 @@ namespace Painter
     void EndScene();
 
     void SetFont(Font::Type::E typeFont);
-
-    void Draw4SymbolsInRect(int x, int y, char eChar, Color color = Color::NUMBER);
     /// ”становить €ркость диспле€.
     void SetBrightnessDisplay(int16 brightness);
 

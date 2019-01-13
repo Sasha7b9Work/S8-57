@@ -3,6 +3,7 @@
 #include "defines.h"
 #include "Menu/MenuItems.h"
 #include "Menu/Pages/Include/Definition.h"
+#include "Display/Display_Primitives.h"
 #include "Display/Painter.h"
 #include "Settings/SettingsTime.h"
 #include "Utils/Measure.h"
@@ -11,6 +12,9 @@
 #include "Utils/Math.h"
 #include "Hardware/Sound.h"
 #endif
+
+
+using Display::Char;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -30,11 +34,14 @@ DEF_SMALL_BUTTON_EXIT(bTune_Exit,                                               
 static void Draw_Tune_Markers(int x, int y)
 {
     Painter::SetFont(Font::Type::_UGO2);
-    Painter::Draw4SymbolsInRect(x + 2, y + 2, '\x60');
+
+    //Painter::Draw4SymbolsInRect(x + 2, y + 2, '\x60');
+    Char('\x60').Draw4SymbolsInRect(x + 2, y + 2);
+
     Painter::SetFont(Font::Type::_8);
 }
 
-DEF_SMALL_BUTTON(bTune_Markers,                                                                            //--- ИЗМЕРЕНИЯ - НАСТРОИТЬ - Маркер ---
+DEF_SMALL_BUTTON( bTune_Markers,                                                                                                                     //--- ИЗМЕРЕНИЯ - НАСТРОИТЬ - Маркер ---
     "Маркер", "Marker",
     "Позволяет установить маркеры для визуального контроля измерений",
     "Allows to establish markers for visual control of measurements",
@@ -54,11 +61,14 @@ static void OnPress_Tune_Settings()
 static void Draw_Tune_Settings(int x, int y)
 {
     Painter::SetFont(Font::Type::_UGO2);
-    Painter::Draw4SymbolsInRect(x + 2, y + 1, '\x62');
+
+    //Painter::Draw4SymbolsInRect(x + 2, y + 1, '\x62');
+    Char('\x62').Draw4SymbolsInRect(x + 2, y + 1);
+
     Painter::SetFont(Font::Type::_8);
 }
 
-DEF_SMALL_BUTTON(bTune_Settings,                                                                        //--- ИЗМЕРЕНИЯ - НАСТРОИТЬ - Настройка ---
+DEF_SMALL_BUTTON( bTune_Settings,                                                                                                                 //--- ИЗМЕРЕНИЯ - НАСТРОИТЬ - Настройка ---
     "Настройка", "Setup",
     "Позволяет выбрать необходимые измерения",
     "Allows to choose necessary measurements",

@@ -21,6 +21,7 @@
 #endif
 
 
+using Display::Char;
 using Display::HLine;
 using Display::VLine;
 
@@ -81,7 +82,10 @@ bool Menu::IsMainPage(const void *item)
 void DrawSB_Exit(int x, int y)
 {
     Painter::SetFont(Font::Type::_UGO2);
-    Painter::Draw4SymbolsInRect(x + 2, y + 1, '\x2e');
+
+    //Painter::Draw4SymbolsInRect(x + 2, y + 1, '\x2e');
+    Char('\x2e').Draw4SymbolsInRect(x + 2, y + 1);
+
     Painter::SetFont(Font::Type::_8);
 }
 

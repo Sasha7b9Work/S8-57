@@ -19,7 +19,6 @@
 #endif
 
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 using Display::Char;
 using Display::HLine;
 using Display::Region;
@@ -178,12 +177,12 @@ void BottomPart::Draw()
     // Флешка
     if (FDrive::IsConnected())
     {
-        Painter::Draw4SymbolsInRect(x + 57, Grid::Bottom() + 2, SYMBOL_FLASH_DRIVE);
+        //Painter::Draw4SymbolsInRect(x + 57, Grid::Bottom() + 2, SYMBOL_FLASH_DRIVE);
     }
 
     if (CONNECTED_TO_USB || CABLE_USB_IS_CONNECTED)
     {
-        Painter::Draw4SymbolsInRect(x + 72, Grid::Bottom() + 2, SYMBOL_USB, CONNECTED_TO_USB ? Color::WHITE : Color::FLASH_01);
+        Char(SYMBOL_USB).Draw4SymbolsInRect(x + 72, Grid::Bottom() + 2, CONNECTED_TO_USB ? Color::WHITE : Color::FLASH_01);
     }
 
     Color::SetCurrent(Color::FILL);
