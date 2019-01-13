@@ -280,3 +280,18 @@ int Display::Text::DrawSmall(int x, int y, Color color)
 
     return result;
 }
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+int Display::Text::DrawOnBackground(int x, int y, Color colorBackground)
+{
+    int width = Font::GetLengthText(text);
+    int height = Font::GetSize();
+
+    Color colorText(Painter::GetColor());
+    Region(width, height).Draw(x - 1, y, colorBackground);
+
+    Painter::SetColor(colorText);
+
+    //return DrawText(x, y, text);
+    return Text(text).Draw(x, y);
+}

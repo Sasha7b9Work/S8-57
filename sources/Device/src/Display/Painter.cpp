@@ -526,21 +526,6 @@ void Painter::DrawStringInCenterRectOnBackgroundC(int x, int y, int width, int h
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-int Painter::DrawTextOnBackground(int x, int y, const char *text, Color colorBackground)
-{
-    int width = Font::GetLengthText(text);
-    int height = Font::GetSize();
-
-    Color colorText(GetColor());
-    Region(width, height).Draw(x - 1, y, colorBackground);
-
-    SetColor(colorText);
-
-    //return DrawText(x, y, text);
-    return Text(text).Draw(x, y);
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Color Painter::GetColor()
 {
     return currentColor;

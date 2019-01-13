@@ -18,6 +18,7 @@
 using Display::HLine;
 using Display::Point;
 using Display::Region;
+using Display::Text;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -173,7 +174,12 @@ static void DrawParametersChannel(Chan::E ch, int x, int y)
     Tester::Shift shift(rShift, ch);
 
     Painter::SetColor(Color::FILL);
-    Painter::DrawTextOnBackground(x, y, scale.ToString(), Color::BACK);
+
+    //Painter::DrawTextOnBackground(x, y, scale.ToString(), Color::BACK);
+    Text(scale.ToString()).DrawOnBackground(x, y, Color::BACK);
+
     Painter::SetColor(Color::FILL);
-    Painter::DrawTextOnBackground(x + ((ch == Chan::A) ? 25 : 35), y, shift.ToString(scale.value).CString(), Color::BACK);
+
+    //Painter::DrawTextOnBackground(x + ((ch == Chan::A) ? 25 : 35), y, shift.ToString(scale.value).CString(), Color::BACK);
+    Text(shift.ToString(scale.value).CString()).DrawOnBackground(x + ((ch == Chan::A) ? 25 : 35), y, Color::BACK);
 }

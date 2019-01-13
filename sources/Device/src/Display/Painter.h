@@ -31,8 +31,6 @@ namespace Painter
     /// Пишет строку текста в центре области(x, y, width, height)цветом ColorText на прямоугольнике с шириной бордюра widthBorder цвета colorBackground
     void DrawStringInCenterRectOnBackgroundC(int x, int y, int width, int height, const char *text, Color colorText, int widthBorder,
                                                     Color colorBackground);
-    /// Выводит текст на прямоугольнике цвета colorBackgound
-    int DrawTextOnBackground(int x, int y, const char *text, Color colorBackground);
     /// Установить яркость дисплея.
     void SetBrightnessDisplay(int16 brightness);
 
@@ -42,7 +40,7 @@ namespace Painter
 
     void DrawTextRelativelyRight(int xRight, int y, const char *text, Color color = Color::NUMBER);
     /// Возвращает текущий цвет рисования
-    static Color GetColor();
+    Color GetColor();
     /// Нарисовать массив вертикальных линий. Линии рисуются одна за другой. y0y1 - массив вертикальных координат.
     void DrawVLineArray(int x, int numLines, uint8 *y0y1, Color color);
     /// \brief Нарисовать numLines вертикальных линий, состоящих из count точек каждая с расстоянием между точками delta. Горизонтальная координата

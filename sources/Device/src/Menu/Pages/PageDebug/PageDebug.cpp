@@ -23,6 +23,7 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 using Display::Rectangle;
 using Display::Region;
+using Display::Text;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -702,7 +703,8 @@ static void Draw_EnterSerialNumber()
     int y = y0 + 50;
 
     Painter::SetColor(colorText);
-    int x = Painter::DrawTextOnBackground(x0 + deltaX, y, buffer, colorBackground);
+    //int x = Painter::DrawTextOnBackground(x0 + deltaX, y, buffer, colorBackground);
+    int x = Text(buffer).DrawOnBackground(x0 + deltaX, y, colorBackground);
 
     colorText = Color::FLASH_01;
     colorBackground = Color::FLASH_10;
@@ -716,7 +718,8 @@ static void Draw_EnterSerialNumber()
     snprintf(buffer, 19, "%04d", s->year);
 
     Painter::SetColor(colorText);
-    Painter::DrawTextOnBackground(x + 5, y, buffer, colorBackground);
+    //Painter::DrawTextOnBackground(x + 5, y, buffer, colorBackground);
+    Text(buffer).DrawOnBackground(x + 5, y, colorBackground);
 
     // Теперь выведем информацию об оставшемся месте в OTP-памяти для записи
 
