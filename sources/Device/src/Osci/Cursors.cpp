@@ -4,6 +4,7 @@
 #include "Cursors.h"
 #include "Settings/Settings.h"
 #include "Display/Colors.h"
+#include "Display/Display_Primitives.h"
 #include "Display/Grid.h"
 #include "Display/Painter.h"
 #include "Menu/Menu.h"

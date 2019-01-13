@@ -3,6 +3,7 @@
 #include <stm32f4xx.h>
 #include "defines.h"
 #include "main.h"
+#include "Display/Display_Primitives.h"
 #include "Display/Symbols.h"
 #include "Display/Painter.h"
 #include "FPGA/FPGA.h"

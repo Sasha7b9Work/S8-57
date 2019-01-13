@@ -2,6 +2,7 @@
 #ifndef WIN32
 #include "defines.h"
 #include "Multimeter.h"
+#include "Display/Display_Primitives.h"
 #include "Display/Painter.h"
 #include "Settings/Settings.h"
 #include "Hardware/Hardware.h"

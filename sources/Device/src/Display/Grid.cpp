@@ -4,6 +4,7 @@
 #include "log.h"
 #include "device.h"
 #include "Grid.h"
+#include "Display/Display_Primitives.h"
 #include "Display/Painter.h"
 #include "Settings/Settings.h"
 #include "Menu/Menu.h"

@@ -3,6 +3,7 @@
 #include "defines.h"
 #include "FPGAMath.h"
 #include "TrigLev.h"
+#include "Display/Display_Primitives.h"
 #include "Display/Grid.h"
 #include "Display/Painter.h"
 #include "Hardware/Timer.h"

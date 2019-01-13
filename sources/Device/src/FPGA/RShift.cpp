@@ -3,6 +3,7 @@
 #include "defines.h"
 #include "Settings/Settings.h"
 #include "Display/Grid.h"
+#include "Display/Display_Primitives.h"
 #include "Display/Painter.h"
 #include "Display/Symbols.h"
 #include "FPGA/FPGA.h"
