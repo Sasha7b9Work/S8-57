@@ -355,7 +355,8 @@ int Painter::DrawTextInRectWithTransfers(int eX, int eY, int eWidth, int eHeight
                 else
                 {
                     curSymbol += length;
-                    x = DrawText(x, y, word);
+                    //x = DrawText(x, y, word);
+                    x = Text(word).Draw(x, y);
                 }
             }
         }
@@ -370,7 +371,8 @@ int Painter::DrawTextInRectWithTransfers(int eX, int eY, int eWidth, int eHeight
 void Painter::DrawTextRelativelyRight(int xRight, int y, const char *text, Color color)
 {
     int lenght = Font::GetLengthText(text);
-    DrawText(xRight - lenght, y, text, color);
+    //DrawText(xRight - lenght, y, text, color);
+    Text(text).Draw(xRight - lenght, y, color);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -534,7 +536,8 @@ int Painter::DrawTextOnBackground(int x, int y, const char *text, Color colorBac
 
     SetColor(colorText);
 
-    return DrawText(x, y, text);
+    //return DrawText(x, y, text);
+    return Text(text).Draw(x, y);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

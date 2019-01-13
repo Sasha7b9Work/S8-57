@@ -64,8 +64,6 @@ namespace Painter
 
     void SaveScreenToDrive();
 
-    int DrawText(int x, int y, const char *text, Color color = Color::NUMBER);
-
     static int DrawCharWithLimitation(int eX, int eY, char symbol, int limitX, int limitY, int limitWidth, int limitHeight);
 
     static bool ByteFontNotEmpty(uint eChar, int byte);

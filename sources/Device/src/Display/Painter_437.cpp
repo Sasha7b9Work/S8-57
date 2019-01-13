@@ -119,39 +119,3 @@ void Painter::SetBrightnessDisplay(int16 brightness)
     SendToDisplay(command, 4);
     */
 }
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-int Painter::DrawText(int x, int y, const char *text, Color color) //-V2506
-{
-    /// \todo Такую проверку нужно сделать и на приёмной стороне и тогда здесь убрать
-
-    if (*text == 0)
-    {
-        return x;
-    }
-
-    int result = x + Font::GetLengthText(text) + 1;
-
-#define MAX_SIZE_BUFFER 100
-
-    if (std::strlen(text) + 1 > MAX_SIZE_BUFFER) //-V2513
-    {
-        return x + 10;
-    }
-
-    SetColor(color);
-    size_t size = (size_t)(1 + 2 + 1 + 1 + std::strlen(text)); //-V2513
-
-    uint8 buffer[MAX_SIZE_BUFFER] = { Command::Paint_DrawText, (uint8)x, (uint8)(x >> 8), (uint8)y, (uint8)(size - 5) };
-
-    uint8 *pointer = &buffer[5];
-
-    while (*text)
-    {
-        *pointer++ = (uint8)*text++;
-    }
-
-    FSMC::WriteToPanel(buffer, size);
-
-    return result;
-}

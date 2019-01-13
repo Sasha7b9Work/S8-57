@@ -2,12 +2,16 @@
 #ifndef WIN32
 #include "defines.h"
 #include "String.h"
+#include "Display/Display_Primitives.h"
 #include "Display/Painter.h"
 #include <cstring>
 #include <cstdio>
 #include <cstdlib>
 #include <stdarg.h>
 #endif
+
+
+using Display::Text;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -94,5 +98,5 @@ bool String::Allocate(uint size)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 int String::Draw(int x, int y, Color color) const
 {
-    return Painter::DrawText(x, y, CString(), color);
+    return Text(CString()).Draw(x, y, color);
 }

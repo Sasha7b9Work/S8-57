@@ -135,7 +135,7 @@ int Display::Text::Draw(int x, int y, Color color)
     }
     else
     {
-        
+        return DrawSmall(x, y, color);
     }
 
     return x;
@@ -244,4 +244,39 @@ int Display::Text::DrawInCenterRect(int eX, int eY, int width, int eHeight, Colo
     int x = eX + (width - lenght) / 2;
     int y = eY + (eHeight - height) / 2 + 1;
     return Draw(x, y, color);
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+int Display::Text::DrawSmall(int x, int y, Color color)
+{
+    /// \todo Такую проверку нужно сделать и на приёмной стороне и тогда здесь убрать
+
+    if (*text == 0)
+    {
+        return x;
+    }
+
+    int result = x + Font::GetLengthText(text) + 1;
+
+#define MAX_SIZE_BUFFER 100
+
+    if (std::strlen(text) + 1 > MAX_SIZE_BUFFER) //-V2513
+    {
+        return x + 10;
+    }
+
+    Painter::SetColor(color);
+
+    uint8 buffer[MAX_SIZE_BUFFER] = { Command::Paint_DrawText, (uint8)x, (uint8)(x >> 8), (uint8)y, (uint8)std::strlen(text) };
+
+    uint8 *pointer = &buffer[5];
+
+    while (*text)
+    {
+        *pointer++ = (uint8)*text++;
+    }
+
+    FSMC::WriteToPanel(buffer, 1 + 2 + 1 + 1 + std::strlen(text));
+
+    return result;
 }
