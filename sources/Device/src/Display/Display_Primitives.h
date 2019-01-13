@@ -181,4 +181,19 @@ namespace Display
         int width;
         float delta;
     };
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /// \brief Нарисовать numLines горизонтальных линий, состоящих из count точек каждая с расстоянием между точками delta. Вертикальная координата
+    /// первой точки каждой линии соответствует очередному элементу массива y[]
+    class MultiHPointLine
+    {
+    public:
+        MultiHPointLine(int numLines, const uint8 *y, int delta, int count);
+        void Draw(int x, Color color = Color::NUMBER);
+    private:
+        int numLines;
+        const uint8 *y;
+        int delta;
+        int count;
+    };
 }

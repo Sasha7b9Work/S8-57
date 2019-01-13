@@ -83,20 +83,3 @@ void Painter::DrawMultiVPointLine(int numLines, int y0, const uint16 *x0, int de
         }
     }
 }
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Painter::DrawMultiHPointLine(int numLines, int x0, const uint8 *y0, int delta, int count, Color color)
-{
-    Color::SetCurrent(color);
-
-    for(int i = 0; i < numLines; i++)
-    {
-        int y = y0[i];
-        for(int numPoint = 0; numPoint < count; numPoint++)
-        {
-            int x = x0 + numPoint * delta;
-            //SetPoint(x, y);
-            Point().Draw(x, y);
-        }
-    }
-}

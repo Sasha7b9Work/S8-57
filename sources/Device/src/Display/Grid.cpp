@@ -14,6 +14,7 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 using Display::HLine;
 using Display::HPointLine;
+using Display::MultiHPointLine;
 using Display::Rectangle;
 using Display::VLine;
 using Display::VPointLine;
@@ -335,7 +336,8 @@ static void Grid::DrawGridType1(int left, int top, int right, int bottom, float 
     }
     mas[12] = (uint8)(bottom - 1);
 
-    Painter::DrawMultiHPointLine(13, left + (int)stepX, mas, (int)stepX, DeltaHforLineGrid(), Color::GRID);
+    //Painter::DrawMultiHPointLine(13, left + (int)stepX, mas, (int)stepX, DeltaHforLineGrid(), Color::GRID);
+    MultiHPointLine(13, mas, (int)stepX, DeltaHforLineGrid()).Draw(left + (int)stepX, Color::GRID);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -357,7 +359,9 @@ static void Grid::DrawGridType2(int left, int top, int right, int bottom, int de
         mas[i] = (uint8)(top + (int)(deltaY * i));
     }
     mas[10] = (uint8)(bottom - 1);
-    Painter::DrawMultiHPointLine(11, left + stepX, mas, stepX, DeltaHforLineGrid(), Color::GRID);
+
+    //Painter::DrawMultiHPointLine(11, left + stepX, mas, stepX, DeltaHforLineGrid(), Color::GRID);
+    MultiHPointLine(11, mas, stepX, DeltaHforLineGrid()).Draw(left + stepX, Color::GRID);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -367,7 +371,10 @@ static void Grid::DrawGridType3(int left, int top, int right, int bottom, int ce
     HPointLine(right - left - stepX, (float)stepX).Draw(left + stepX, centerY);
 
     uint8 masY[6] = {(uint8)(top + 1), (uint8)(top + 2), (uint8)(centerY - 1), (uint8)(centerY + 1), (uint8)(bottom - 2), (uint8)(bottom - 1)};
-    Painter::DrawMultiHPointLine(6, left + deltaX, masY, deltaX, (right - top) / deltaX, Color::GRID);
+
+    //Painter::DrawMultiHPointLine(6, left + deltaX, masY, deltaX, (right - top) / deltaX, Color::GRID);
+    MultiHPointLine(6, masY, deltaX, (right - top) / deltaX).Draw(left + deltaX, Color::GRID);
+
     Color::SetCurrent(Color::GRID);
 
     //Painter::DrawVPointLine(centerX, top + stepX, bottom - stepX, (float)stepX);

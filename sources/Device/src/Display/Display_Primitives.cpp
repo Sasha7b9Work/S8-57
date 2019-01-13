@@ -815,3 +815,22 @@ void Display::HPointLine::Draw(int _x, int _y)
         Point().Draw(x, _y);
     }
 }
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Display::MultiHPointLine::MultiHPointLine(int _numLines, const uint8 *_y, int _delta, int _count) : numLines(_numLines), y(_y), delta(_delta), count(_count)
+{
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Display::MultiHPointLine::Draw(int x, Color color)
+{
+    Color::SetCurrent(color);
+
+    for (int i = 0; i < numLines; i++)
+    {
+        for (int numPoint = 0; numPoint < count; numPoint++)
+        {
+            Point().Draw(x + numPoint * delta, y[i]);
+        }
+    }
+}
