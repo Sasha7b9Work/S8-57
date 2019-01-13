@@ -54,16 +54,6 @@ void Painter::EndScene()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-/*
-void Painter::SetPoint(int x, int y, Color color)
-{
-    SetColor(color);
-    uint8 buffer[4] = { Command::Paint_SetPoint, (uint8)x, (uint8)(x >> 8), (uint8)y };
-    FSMC::WriteToPanel(buffer, 4);
-}
-*/
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Painter::SetColorValue(Color color, uint value)
 {
     uint8 buffer[6] = { Command::Paint_SetPalette, color.value, (uint8)value, (uint8)(value >> 8), (uint8)(value >> 16), (uint8)(value >> 24) };
@@ -132,31 +122,11 @@ void Painter::SetBrightnessDisplay(int16 brightness)
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 /*
-void Region(int x, int y, int width, int height, Color color)
-{
-    SetColor(color);
-    uint8 buffer[7] = { Command::Paint_FillRegion, (uint8)x, (uint8)(x >> 8), (uint8)y, (uint8)width, (uint8)(width >> 8), (uint8)height };
-    FSMC::WriteToPanel(buffer, 7);
-}
-*/
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-/*
 void Painter::DrawLine(int x0, int y0, int x1, int y1, Color color)
 {
     SetColor(color);
     uint8 buffer[7] = { Command::Paint_DrawLine, (uint8)x0, (uint8)(x0 >> 8), (uint8)y0, (uint8)x1, (uint8)(x1 >> 8), (uint8)y1 };
     FSMC::WriteToPanel(buffer, 7);
-}
-*/
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-/*
-void Painter::DrawVLine(int x, int y0, int y1, Color color)
-{
-    SetColor(color);
-    uint8 buffer[5] = { Command::Paint_DrawVLine, (uint8)x, (uint8)(x >> 8), (uint8)y0, (uint8)y1 };
-    FSMC::WriteToPanel(buffer, 5);
 }
 */
 

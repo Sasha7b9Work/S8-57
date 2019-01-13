@@ -58,6 +58,7 @@ namespace Display
 		HLine(int width);
 		void Draw(int x, int y, Color color = Color::NUMBER);
 	private:
+		int width;
 	};
 
 
@@ -66,8 +67,9 @@ namespace Display
     {
     public:
         VLine(int height);
-        void Draw(int x, int y, Color = Color::NUMBER);
+        void Draw(int x, int y, Color color = Color::NUMBER);
     private:
+		int height;
     };
 
 
@@ -75,9 +77,13 @@ namespace Display
     class Line
     {
     public:
-        Line(int x0, int y0, int x1, int y2);
+        Line(int x0, int y0, int x1, int y1);
         void Draw(Color color = Color::NUMBER);
     private:
+		int x0;
+		int y0;
+		int x1;
+		int y1;
     };
 
 
@@ -95,8 +101,8 @@ namespace Display
     class Point
     {
     public:
-        Point();
-        int Draw(int x, int y, Color color = Color::NUMBER);
+		Point() {};
+        void Draw(int x, int y, Color color = Color::NUMBER);
     private:
     };
 
