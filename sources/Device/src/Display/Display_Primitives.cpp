@@ -682,3 +682,15 @@ int Display::Text::DrawInBoundedRectWithTransfers(int x, int y, int width, Color
     DrawInRectWithTransfers(x + 3, y + 3, width - 8, height, colorFill);
     return y + height;
 }
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+int Display::Text::DrawInCenterRectAndBoundIt(int x, int y, int width, int height, Color colorBackground, Color colorFill)
+{
+    //FillBoundedRegion(x, y, width, height, colorBackground, colorFill);
+    Region(width, height).DrawBounded(x, y, colorBackground, colorFill);
+
+    Color::SetCurrent(colorFill);
+    //return DrawStringInCenterRect(x, y, width, height, text);
+
+    return Text(text).DrawInCenterRect(x, y, width, height);
+}

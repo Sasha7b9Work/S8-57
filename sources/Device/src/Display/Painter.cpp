@@ -37,27 +37,6 @@ void Painter::Draw10SymbolsInRect(int x, int y, char eChar)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-int Painter::DrawStringInCenterRectAndBoundItC(int x, int y, int width, int height, const char *text, Color colorBackground, Color colorFill)
-{
-    //FillBoundedRegion(x, y, width, height, colorBackground, colorFill);
-    Region(width, height).DrawBounded(x, y, colorBackground, colorFill);
-
-    Color::SetCurrent(colorFill);
-    //return DrawStringInCenterRect(x, y, width, height, text);
-
-    return Text(text).DrawInCenterRect(x, y, width, height);
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-/*
-void Painter::FillBoundedRegion(int x, int y, int widht, int height, Color colorFill, Color colorBound)
-{
-    Region(widht - 2, height - 2).Draw(x + 1, y + 1, colorFill);
-    Rectangle(widht, height).Draw(x, y, colorBound);
-}
-*/
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Painter::Draw4SymbolsInRect(int x, int y, char eChar, Color color)
 {
     Color::SetCurrent(color);

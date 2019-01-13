@@ -118,6 +118,8 @@ namespace Display
         int DrawInRectWithTransfers(int x, int y, int width, int height, Color color = Color::NUMBER);
         /// Возвращает нижнюю координату прямоугольника
         int DrawInBoundedRectWithTransfers(int x, int y, int width, Color colorBackground, Color colorFill);
+
+        int DrawInCenterRectAndBoundIt(int x, int y, int width, int height, Color colorBackground, Color colorFill);
     private:
         const char *text;
         uint8 size;
