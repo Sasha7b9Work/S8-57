@@ -18,6 +18,7 @@
 using Display::HLine;
 using Display::Rectangle;
 using Display::Region;
+using Display::Text;
 using Display::VLine;
 
 
@@ -69,7 +70,10 @@ static void DrawLongString(int x, int y, const char *string, bool hightlight)
     else
     {
         Painter::SetColor(color);
-        Painter::DrawTextWithLimitation(x, y, string, x, y, WIDTH_COL, 10);
+
+        //Painter::DrawTextWithLimitation(x, y, string, x, y, WIDTH_COL, 10);
+		Text(string).DrawWithLimitation(x, y, x, y, WIDTH_COL, 10);
+
         String("...").Draw(x + WIDTH_COL + 3, y);
     }
 }

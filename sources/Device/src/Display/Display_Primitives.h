@@ -1,4 +1,5 @@
 #pragma once
+#include "Utils/String.h"
 
 
 namespace Display
@@ -105,6 +106,7 @@ namespace Display
     {
     public:
         Text(const char *text, uint8 size = 1);
+		Text(const String &string, uint8 size = 1);
         int Draw(int x, int y, Color color = Color::NUMBER);
         int DrawInCenterRect(int x, int y, int width, int height, Color color = Color::NUMBER);
         int DrawWithLimitation(int x, int y, int limitX, int limitY, int limitWidth, int limitHeight);

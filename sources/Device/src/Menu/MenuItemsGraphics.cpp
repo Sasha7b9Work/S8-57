@@ -230,13 +230,19 @@ void Governor::DrawLowPart(int x, int y, bool shade)
             Painter::SetColor(Color::BLACK);
             if (delta > 0)
             {
-                x = Painter::DrawTextWithLimitation(drawX, y - delta, Integer(*cell).ToString(false, 1).CString(), limX, limY, limWidth, limHeight);
-                Painter::DrawTextWithLimitation(drawX, y + 10 - delta, Integer(NextValue()).ToString(false, 1).CString(), limX, limY, limWidth, limHeight);
+                //x = Painter::DrawTextWithLimitation(drawX, y - delta, Integer(*cell).ToString(false, 1).CString(), limX, limY, limWidth, limHeight);
+				x = Text(Integer(*cell).ToString(false, 1)).DrawWithLimitation(drawX, y - delta, limX, limY, limWidth, limHeight);
+
+                //Painter::DrawTextWithLimitation(drawX, y + 10 - delta, Integer(NextValue()).ToString(false, 1).CString(), limX, limY, limWidth, limHeight);
+				Text(Integer(NextValue()).ToString(false, 1)).DrawWithLimitation(drawX, y + 10 - delta, limX, limY, limWidth, limHeight);
             }
             if (delta < 0)
             {
-                x = Painter::DrawTextWithLimitation(drawX, y - delta, Integer(*cell).ToString(false, 1).CString(), limX, limY, limWidth, limHeight);
-                Painter::DrawTextWithLimitation(drawX, y - 10 - delta, Integer(PrevValue()).ToString(false, 1).CString(), limX, limY, limWidth, limHeight);
+                //x = Painter::DrawTextWithLimitation(drawX, y - delta, Integer(*cell).ToString(false, 1).CString(), limX, limY, limWidth, limHeight);
+				x = Text(Integer(*cell).ToString(false, 1)).DrawWithLimitation(drawX, y - delta, limX, limY, limWidth, limHeight);
+
+                //Painter::DrawTextWithLimitation(drawX, y - 10 - delta, Integer(PrevValue()).ToString(false, 1).CString(), limX, limY, limWidth, limHeight);
+				Text(Integer(PrevValue()).ToString(false, 1)).DrawWithLimitation(drawX, y - 10 - delta, limX, limY, limWidth, limHeight);
             }
         }
         
@@ -302,13 +308,15 @@ void Choice::DrawClosed(int x, int y)
     else
     {
         Painter::SetColor(Color::BACK);
-        Painter::DrawTextWithLimitation(x + 4, y + Menu::Item::Value::HEIGHT - deltaY + 1, NameCurrentSubItem().CString(), x, y + 11, Menu::Item::Value::WIDTH, Menu::Item::Value::HEIGHT - 1);
+        //Painter::DrawTextWithLimitation(x + 4, y + Menu::Item::Value::HEIGHT - deltaY + 1, NameCurrentSubItem().CString(), x, y + 11, Menu::Item::Value::WIDTH, Menu::Item::Value::HEIGHT - 1);
+		Text(NameCurrentSubItem()).DrawWithLimitation(x + 4, y + Menu::Item::Value::HEIGHT - deltaY + 1, x, y + 11, Menu::Item::Value::WIDTH, Menu::Item::Value::HEIGHT - 1);
 
         //Painter::DrawHLine(y + (deltaY > 0 ? 24 : 19) - deltaY, x + 1, x + Menu::Item::Value::WIDTH + 2);
         HLine(Menu::Item::Value::WIDTH + 1).Draw(x + 1, y + (deltaY > 0 ? 24 : 19) - deltaY);
 
-        Painter::DrawTextWithLimitation(x + 4, y + (deltaY > 0 ? (Menu::Item::Value::HEIGHT + 13) : 9) - deltaY, deltaY > 0 ? NameNextSubItem() : NamePrevSubItem(),
-                                        x, y + 11, Menu::Item::Value::WIDTH, Menu::Item::Value::HEIGHT - 1);
+        //Painter::DrawTextWithLimitation(x + 4, y + (deltaY > 0 ? (Menu::Item::Value::HEIGHT + 13) : 9) - deltaY, deltaY > 0 ? NameNextSubItem() : NamePrevSubItem(),
+        //                                x, y + 11, Menu::Item::Value::WIDTH, Menu::Item::Value::HEIGHT - 1);
+		Text(deltaY > 0 ? NameNextSubItem() : NamePrevSubItem()).DrawWithLimitation(x + 4, y + (deltaY > 0 ? (Menu::Item::Value::HEIGHT + 13) : 9) - deltaY, x, y + 11, Menu::Item::Value::WIDTH, Menu::Item::Value::HEIGHT - 1);
     }
   
     if (funcForDraw)
