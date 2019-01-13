@@ -79,7 +79,7 @@ void Display::Point::Draw(int x, int y, Color color)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-Display::Line::Line(int _x0, int _y0, int _x1, int _y1) : x0(_x0), x1(_x1), y0(_y0), y1(_y1)
+Display::Line::Line(int _x0, int _y0, int _x1, int _y1) : x0(_x0), y0(_y0), x1(_x1), y1(_y1)
 {
 }
 
@@ -89,4 +89,17 @@ void Display::Line::Draw(Color color)
 	Painter::SetColor(color);
 	uint8 buffer[7] = { Command::Paint_DrawLine, (uint8)x0, (uint8)(x0 >> 8), (uint8)y0, (uint8)x1, (uint8)(x1 >> 8), (uint8)y1 };
 	FSMC::WriteToPanel(buffer, 7);
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Display::Char::Char(char _ch) : ch(_ch)
+{
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+int Display::Char::Draw(int x, int y, Color color)
+{
+	String("%c", ch).Draw(x, y, color);
+
+	return x + Font::GetLengthSymbol(ch) + 1;
 }

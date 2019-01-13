@@ -80,10 +80,10 @@ namespace Display
         Line(int x0, int y0, int x1, int y1);
         void Draw(Color color = Color::NUMBER);
     private:
-		int x0;
-		int y0;
-		int x1;
-		int y1;
+        int x0;
+        int y0;
+        int x1;
+        int y1;
     };
 
 
@@ -94,6 +94,7 @@ namespace Display
         Char(char ch);
         int Draw(int x, int y, Color color = Color::NUMBER);
     private:
+		char ch;
     };
 
 
