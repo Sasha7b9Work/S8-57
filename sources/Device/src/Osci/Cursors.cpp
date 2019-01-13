@@ -17,6 +17,7 @@
 
 
 using Display::Rectangle;
+using Display::DashedHLine;
 using Display::DashedVLine;
 
 
@@ -144,12 +145,15 @@ static void DrawHorizontal(int y, int xTearing)
     y += Grid::Top();
     if (xTearing == -1)
     {
-        Painter::DrawDashedHLine(y, Grid::Left() + 2, Grid::Right() - 1, 1, 1, 0);
+        //Painter::DrawDashedHLine(y, Grid::Left() + 2, Grid::Right() - 1, 1, 1, 0);
+        DashedHLine(Grid::Right() - Grid::Left() - 3, 1, 1, 0).Draw(Grid::Left() + 2, y);
     }
     else
     {
-        Painter::DrawDashedHLine(y, Grid::Left() + 2, xTearing - 2, 1, 1, 0);
-        Painter::DrawDashedHLine(y, xTearing + 2, Grid::Right() - 1, 1, 1, 0);
+        //Painter::DrawDashedHLine(y, Grid::Left() + 2, xTearing - 2, 1, 1, 0);
+        DashedHLine(xTearing - Grid::Left() - 4, 1, 1, 0).Draw(Grid::Left() + 2, y);
+        //Painter::DrawDashedHLine(y, xTearing + 2, Grid::Right() - 1, 1, 1, 0);
+        DashedHLine(Grid::Right() - xTearing - 3, 1, 1, 0).Draw(xTearing + 2, y);
     }
     Rectangle(2, 2).Draw(Grid::Left() - 1, y - 1);
     Rectangle(2, 2).Draw(Grid::Right() - 1, y - 1);

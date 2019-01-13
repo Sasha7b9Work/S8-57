@@ -144,4 +144,17 @@ namespace Display
         int deltaEmpty;
         int deltaStart;
     };
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    class DashedHLine
+    {
+    public:
+        DashedHLine(int width, int deltaFill, int deltaEmpty, int deltaStart);
+        void Draw(int x, int y);
+    private:
+        int width;
+        int deltaFill;
+        int deltaEmpty;
+        int deltaStart;
+    };
 }

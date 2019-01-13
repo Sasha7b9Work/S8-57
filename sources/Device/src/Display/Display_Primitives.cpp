@@ -742,3 +742,40 @@ void Display::DashedVLine::Draw(int x, int y0)
         y += (deltaFill + deltaEmpty);
     }
 }
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Display::DashedHLine::DashedHLine(int _width, int _deltaFill, int _deltaEmpty, int _deltaStart) : width(_width), deltaFill(_deltaFill), deltaEmpty(_deltaEmpty), deltaStart(_deltaStart)
+{
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Display::DashedHLine::Draw(int x0, int y)
+{
+    if (deltaStart < 0 || deltaStart >= (deltaFill + deltaEmpty))
+    {
+        LOG_ERROR("Неправильный аргумент deltaStart = %d", deltaStart);
+        return;
+    }
+
+    int x = x0;
+
+    if (deltaStart != 0)                // Если линию нужно рисовать не с начала штриха
+    {
+        x += (deltaFill + deltaEmpty - deltaStart);
+        if (deltaStart < deltaFill)     // Если начало линии приходится на штрих
+        {
+            //DrawHLine(y, x0, x - 1);
+            HLine(x - 1 - x0).Draw(x0, y);
+        }
+    }
+
+    int x1 = x0 + width;
+
+    while (x < x1)
+    {
+        //DrawHLine(y, x, x + deltaFill - 1);
+        HLine(deltaFill - 1).Draw(x, y);
+
+        x += (deltaFill + deltaEmpty);
+    }
+}

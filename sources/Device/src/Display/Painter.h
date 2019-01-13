@@ -35,7 +35,5 @@ namespace Painter
 
     void DrawTesterData(uint8 mode, Color color, const uint8 *x, const uint8 *y);
 
-    void DrawDashedHLine(int y, int x0, int x1, int deltaFill, int deltaEmpty, int deltaStart);
-
     void SaveScreenToDrive();
 };
