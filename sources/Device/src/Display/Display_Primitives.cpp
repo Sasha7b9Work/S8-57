@@ -5,6 +5,7 @@
 #include "Display_Primitives.h"
 #include "Painter.h"
 #include "Hardware/FSMC.h"
+#include <cstring>
 #endif
 
 
@@ -25,6 +26,16 @@ void Display::Region::Draw(int x, int y, Color color)
     Painter::SetColor(color);
     uint8 buffer[7] = { Command::Paint_FillRegion, (uint8)x, (uint8)(x >> 8), (uint8)y, (uint8)width, (uint8)(width >> 8), (uint8)height };
     FSMC::WriteToPanel(buffer, 7);
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Display::Region::DrawBounded(int x, int y, Color colorFill, Color colorBound)
+{
+    Color color = Painter::currentColor;
+    Rectangle(width, height).Draw(x, y, colorBound);
+    Region(width - 2, height - 2).Draw(x + 1, y + 1, colorFill);
+    /// \todo Почему-то цвет не восстанавливается
+    Painter::SetColor(color);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -102,4 +113,135 @@ int Display::Char::Draw(int x, int y, Color color)
 	String("%c", ch).Draw(x, y, color);
 
 	return x + Font::GetLengthSymbol(ch) + 1;
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Display::Text::Text(const char *_text, uint8 _size) : text(_text), size(_size)
+{
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Display::Text::Text(const String &string, uint8 _size) : size(_size)
+{
+    text = string.CString();
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+int Display::Text::Draw(int x, int y, Color color)
+{
+    if (size != 1)
+    {
+        DrawBig(x, y, color);
+    }
+    else
+    {
+        
+    }
+
+    return x;
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Display::Text::DrawBig(int x, int y, Color color)
+{
+#define MAX_SIZE_BUFFER 100
+
+    Painter::SetColor(color);
+
+    uint numSymbols = std::strlen(text); //-V2513
+    uint8 buffer[MAX_SIZE_BUFFER] = { Command::Paint_DrawBigText, (uint8)x, (uint8)(x >> 8), (uint8)y, size, (uint8)(numSymbols) };
+
+    uint8 *pointer = &buffer[6];
+
+    while (*text)
+    {
+        *pointer++ = (uint8)*text++;
+    }
+
+    FSMC::WriteToPanel(buffer, 1 + 2 + 1 + 1 + numSymbols + 1);
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+int Display::Text::DrawWithLimitation(int x, int y, int limitX, int limitY, int limitWidth, int limitHeight)
+{
+    int retValue = x;
+
+    while (*text)
+    {
+        x = DrawCharWithLimitation(x, y, *text, limitX, limitY, limitWidth, limitHeight);
+        retValue += Font::GetLengthSymbol(*text);
+        text++;
+    }
+
+    return retValue + 1;
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+int Display::Text::DrawCharWithLimitation(int eX, int eY, char _symbol, int limitX, int limitY, int limitWidth, int limitHeight)
+{
+    uint8 symbol = (uint8)_symbol;
+
+    int8 width = (int8)font->symbol[symbol].width;
+    int8 height = (int8)font->height;
+
+    for (int b = 0; b < height; b++)
+    {
+        if (ByteFontNotEmpty(symbol, b))
+        {
+            int x = eX;
+            int y = eY + b + 9 - height;
+            int endBit = 8 - width;
+            for (int bit = 7; bit >= endBit; bit--)
+            {
+                if (BitInFontIsExist(symbol, b, bit))
+                {
+                    if ((x >= limitX) && (x <= (limitX + limitWidth)) && (y >= limitY) && (y <= limitY + limitHeight))
+                    {
+                        Point().Draw(x, y);
+                    }
+                }
+                x++;
+            }
+        }
+    }
+
+    return eX + width + 1;
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+bool Display::Text::ByteFontNotEmpty(uint eChar, int byte)
+{
+    static const uint8 *bytes = 0;
+    static uint prevChar = 0xffffffffU;
+    if (eChar != prevChar)
+    {
+        prevChar = eChar;
+        bytes = font->symbol[prevChar].bytes;
+    }
+    return bytes[byte];
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+bool Display::Text::BitInFontIsExist(int eChar, int numByte, int bit)
+{
+    static uint8 prevByte = 0;      /// \todo здесь точно статики нужны?
+    static int prevChar = -1;
+    static int prevNumByte = -1;
+    if (prevNumByte != numByte || prevChar != eChar)
+    {
+        prevByte = font->symbol[eChar].bytes[numByte];
+        prevChar = eChar;
+        prevNumByte = numByte;
+    }
+    return prevByte & (1 << bit);
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+int Display::Text::DrawInCenterRect(int eX, int eY, int width, int eHeight, Color color)
+{
+    int lenght = Font::GetLengthText(text);
+    int height = Font::GetHeightSymbol(text[0]);
+    int x = eX + (width - lenght) / 2;
+    int y = eY + (eHeight - height) / 2 + 1;
+    return Draw(x, y, color);
 }

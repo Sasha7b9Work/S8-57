@@ -121,16 +121,6 @@ void Painter::SetBrightnessDisplay(int16 brightness)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-/*
-void Painter::DrawLine(int x0, int y0, int x1, int y1, Color color)
-{
-    SetColor(color);
-    uint8 buffer[7] = { Command::Paint_DrawLine, (uint8)x0, (uint8)(x0 >> 8), (uint8)y0, (uint8)x1, (uint8)(x1 >> 8), (uint8)y1 };
-    FSMC::WriteToPanel(buffer, 7);
-}
-*/
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 int Painter::DrawText(int x, int y, const char *text, Color color) //-V2506
 {
     /// \todo Такую проверку нужно сделать и на приёмной стороне и тогда здесь убрать
@@ -165,54 +155,3 @@ int Painter::DrawText(int x, int y, const char *text, Color color) //-V2506
 
     return result;
 }
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-/*
-void Painter::DrawBigText(int eX, int eY, uint8 sizeSymbol, const char *text, Color color)
-{
-    SetColor(color);
-
-    uint numSymbols = std::strlen(text); //-V2513
-    uint size = 1 + 2 + 1 + 1 + numSymbols + 1;
-    uint8 buffer[MAX_SIZE_BUFFER] = { Command::Paint_DrawBigText, (uint8)eX, (uint8)(eX >> 8), (uint8)eY, sizeSymbol, (uint8)(size - 6) };
-
-    uint8 *pointer = &buffer[6];
-
-    while (*text)
-    {
-        *pointer++ = (uint8)*text++;
-    }
-
-    FSMC::WriteToPanel(buffer, size);
-}
-*/
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-/*
-int Painter::DrawChar(int x, int y, char symbol, Color color)
-{
-    String("%c", symbol).Draw(x, y, color);
-
-    return x + Font::GetLengthSymbol(symbol) + 1;
-}
-*/
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-/*
-void Painter::DrawHLine(int y, int x0, int x1, Color color)
-{
-    SetColor(color);
-    uint8 buffer[6] = { Command::Paint_DrawHLine, (uint8)y, (uint8)x0, (uint8)(x0 >> 8), (uint8)x1, (uint8)(x1 >> 8) };
-    FSMC::WriteToPanel(buffer, 6);
-}
-*/
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-/*
-void Rectangle(int x, int y, int width, int height, Color color)
-{
-    SetColor(color);
-    uint8 buffer[7] = { Command::Paint_DrawRectangle, (uint8)x, (uint8)(x >> 8), (uint8)y, (uint8)width, (uint8)(width >> 8), (uint8)height };
-    FSMC::WriteToPanel(buffer, 7);
-}
-*/

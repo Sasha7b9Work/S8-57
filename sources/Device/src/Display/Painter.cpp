@@ -14,7 +14,6 @@
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-using Display::BoundedRegion;
 using Display::Char;
 using Display::HLine;
 using Display::Point;
@@ -57,34 +56,6 @@ bool Painter::WriteFlashColor() //-V2506
 
     return false;
 }
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-/*
-void Painter::DrawHLine(float y, int x0, int x1, Color color)
-{
-    DrawHLine((int)y, x0, x1, color);
-}
-*/
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-/*
-void Painter::DrawVLine(int x, float y0, float y1, Color color)
-{
-    DrawVLine((int)x, (int)y0, (int)y1, color);
-}
-*/
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-/*
-void Painter::DrawBoundedRegion(int x, int y, int width, int height, Color colorFill, Color colorBound)
-{
-    Color color = currentColor;
-    Rectangle(width, height).Draw(x, y, colorBound);
-    Region(width - 2, height - 2).Draw(x + 1, y + 1, colorFill);
-    /// \todo Почему-то цвет не восстанавливается
-    SetColor(color);
-}
-*/
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 int Painter::DrawTextInRectWithTransfersC(int x, int y, int width, int height, const char *text, Color color)
@@ -396,82 +367,6 @@ int Painter::DrawTextInRectWithTransfers(int eX, int eY, int eWidth, int eHeight
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-int Painter::DrawCharWithLimitation(int eX, int eY, char _symbol, int limitX, int limitY, int limitWidth, int limitHeight)
-{
-    uint8 symbol = (uint8)_symbol;
-
-    int8 width = (int8)font->symbol[symbol].width;
-    int8 height = (int8)font->height;
-
-    for (int b = 0; b < height; b++)
-    {
-        if (ByteFontNotEmpty(symbol, b))
-        {
-            int x = eX;
-            int y = eY + b + 9 - height;
-            int endBit = 8 - width;
-            for (int bit = 7; bit >= endBit; bit--)
-            {
-                if (BitInFontIsExist(symbol, b, bit))
-                {
-                    if ((x >= limitX) && (x <= (limitX + limitWidth)) && (y >= limitY) && (y <= limitY + limitHeight))
-                    {
-                        //Painter::SetPoint(x, y);
-                        Point().Draw(x, y);
-                    }
-                }
-                x++;
-            }
-        }
-    }
-
-    return eX + width + 1;
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-/*
-int Painter::DrawTextWithLimitation(int x, int y, const char *text, int limitX, int limitY, int limitWidth, int limitHeight)
-{
-    int retValue = x;
-    while (*text)
-    {
-        x = DrawCharWithLimitation(x, y, *text, limitX, limitY, limitWidth, limitHeight);
-        retValue += Font::GetLengthSymbol(*text);
-        text++;
-    }
-    return retValue + 1;
-}
-*/
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-bool Painter::ByteFontNotEmpty(uint eChar, int byte)
-{
-    static const uint8 *bytes = 0;
-    static uint prevChar = 0xffffffffU;
-    if (eChar != prevChar)
-    {
-        prevChar = eChar;
-        bytes = font->symbol[prevChar].bytes;
-    }
-    return bytes[byte];
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-bool Painter::BitInFontIsExist(int eChar, int numByte, int bit)
-{
-    static uint8 prevByte = 0;      /// \todo здесь точно статики нужны?
-    static int prevChar = -1;
-    static int prevNumByte = -1;
-    if (prevNumByte != numByte || prevChar != eChar)
-    {
-        prevByte = font->symbol[eChar].bytes[numByte];
-        prevChar = eChar;
-        prevNumByte = numByte;
-    }
-    return prevByte & (1 << bit);
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Painter::DrawTextRelativelyRight(int xRight, int y, const char *text, Color color)
 {
     int lenght = Font::GetLengthText(text);
@@ -492,18 +387,6 @@ void Painter::Draw10SymbolsInRect(int x, int y, char eChar)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-/*
-int Painter::DrawStringInCenterRect(int eX, int eY, int width, int eHeight, const char *text, Color color)
-{
-    int lenght = Font::GetLengthText(text);
-    int height = Font::GetHeightSymbol(text[0]);
-    int x = eX + (width - lenght) / 2;
-    int y = eY + (eHeight - height) / 2 + 1;
-    return DrawText(x, y, text, color);
-}
-*/
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Painter::ResetFlash()
 {
     Timer::SetAndEnable(Timer::Type::FlashDisplay, OnTimerFlashDisplay, 500);
@@ -522,7 +405,7 @@ void Painter::OnTimerFlashDisplay()
 int Painter::DrawStringInCenterRectAndBoundItC(int x, int y, int width, int height, const char *text, Color colorBackground, Color colorFill)
 {
     //FillBoundedRegion(x, y, width, height, colorBackground, colorFill);
-    BoundedRegion(width, height).Draw(x, y, colorBackground, colorFill);
+    Region(width, height).DrawBounded(x, y, colorBackground, colorFill);
 
     SetColor(colorFill);
     //return DrawStringInCenterRect(x, y, width, height, text);

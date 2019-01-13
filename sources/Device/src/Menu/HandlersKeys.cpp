@@ -23,7 +23,7 @@
 #include <stdio.h>
 
 
-using Display::BoundedRegion;
+using Display::Region;
 using Display::Text;
 
 
@@ -234,7 +234,7 @@ static void DrawParametersTime()
     int height = 15;
 
     //Painter::DrawBoundedRegion(x, y, width, height, Color::BACK, Color::FILL);
-    BoundedRegion(width, height).Draw(x, y, Color::BACK, Color::FILL);
+    Region(width, height).DrawBounded(x, y, Color::BACK, Color::FILL);
 
     String("Разв : %s", TBase(SET_TBASE).Name()).Draw(x + 3, y + 3, Color::FILL);
 
@@ -253,7 +253,7 @@ static void DrawParametersChannel()
     Chan::E ch = drawingChan.value;
 
     //Painter::DrawBoundedRegion(x, y, width, height, Color::BACK, Color::Channel(ch));
-    BoundedRegion(width, height).Draw(x, y, Color::BACK, Color::Channel(ch));
+    Region(width, height).DrawBounded(x, y, Color::BACK, Color::Channel(ch));
 
     char buffer[50];
     sprintf(buffer, "%s : %s %s",

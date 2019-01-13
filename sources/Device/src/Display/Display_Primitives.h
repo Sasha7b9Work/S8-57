@@ -23,17 +23,7 @@ namespace Display
     public:
         Region(int width, int height);
         void Draw(int x, int y, Color color = Color::NUMBER);
-    private:
-        int width;
-        int height;
-    };
-
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    class BoundedRegion
-    {
-    public:
-        BoundedRegion(int width, int height);
-        void Draw(int x, int y, Color colorFill, Color colorBound);
+        void DrawBounded(int x, int y, Color colorFill, Color colorBound);
     private:
         int width;
         int height;
@@ -118,5 +108,11 @@ namespace Display
         int DrawInCenterRect(int x, int y, int width, int height, Color color = Color::NUMBER);
         int DrawWithLimitation(int x, int y, int limitX, int limitY, int limitWidth, int limitHeight);
     private:
+        const char *text;
+        uint8 size;
+        int DrawCharWithLimitation(int eX, int eY, char _symbol, int limitX, int limitY, int limitWidth, int limitHeight);
+        void DrawBig(int x, int y, Color color);
+        bool ByteFontNotEmpty(uint eChar, int byte);
+        bool BitInFontIsExist(int eChar, int numByte, int bit);
     };
 }
