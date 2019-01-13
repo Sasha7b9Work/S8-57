@@ -157,4 +157,16 @@ namespace Display
         int deltaEmpty;
         int deltaStart;
     };
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /// Вертикальная линия от y до y + height точками через каждые delta пикселей
+    class VPointLine
+    {
+    public:
+        VPointLine(int height, float delta);
+        void Draw(int x, int y);
+    private:
+        int height;
+        float delta;
+    };
 }

@@ -13,8 +13,9 @@
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 using Display::HLine;
-using Display::VLine;
 using Display::Rectangle;
+using Display::VLine;
+using Display::VPointLine;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -365,7 +366,10 @@ static void Grid::DrawGridType3(int left, int top, int right, int bottom, int ce
     uint8 masY[6] = {(uint8)(top + 1), (uint8)(top + 2), (uint8)(centerY - 1), (uint8)(centerY + 1), (uint8)(bottom - 2), (uint8)(bottom - 1)};
     Painter::DrawMultiHPointLine(6, left + deltaX, masY, deltaX, (right - top) / deltaX, Color::GRID);
     Color::SetCurrent(Color::GRID);
-    Painter::DrawVPointLine(centerX, top + stepX, bottom - stepX, (float)stepX);
+
+    //Painter::DrawVPointLine(centerX, top + stepX, bottom - stepX, (float)stepX);
+    VPointLine(bottom - top - 2 * stepX, (float)stepX).Draw(centerX, top + stepX);
+
     uint16 masX[6] = {(uint16)(left + 1), (uint16)(left + 2), (uint16)(centerX - 1), (uint16)(centerX + 1), (uint16)(right - 2), (uint16)(right - 1)};
     Painter::DrawMultiVPointLine(6, top + deltaY, masX, deltaY, (bottom - top) / deltaY, Color::GRID);
 }
@@ -440,9 +444,12 @@ static void Grid::DrawTester()
 
     float deltaPoint = 5.0F;
 
+    VPointLine vLine(Display::HEIGHT, deltaPoint);
+
     while (x < Display::WIDTH)
     {
-        Painter::DrawVPointLine(x, 0, Display::HEIGHT, deltaPoint);
+        //Painter::DrawVPointLine(x, 0, Display::HEIGHT, deltaPoint);
+        vLine.Draw(x, 0);
         x += deltaX;
     }
 
@@ -450,7 +457,8 @@ static void Grid::DrawTester()
 
     while (x > 0)
     {
-        Painter::DrawVPointLine(x, 0, Display::HEIGHT, deltaPoint);
+        //Painter::DrawVPointLine(x, 0, Display::HEIGHT, deltaPoint);
+        vLine.Draw(x, 0);
         x -= deltaX;
     }
 

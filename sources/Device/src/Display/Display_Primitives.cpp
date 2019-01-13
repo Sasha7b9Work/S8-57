@@ -43,7 +43,7 @@ void Display::Region::DrawBounded(int x, int y, Color colorFill, Color colorBoun
 Display::Rectangle::Rectangle(int _width, int _height) : width(_width), height(_height)
 {
 }
-
+    
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Display::Rectangle::Draw(int x, int y, Color color)
 {
@@ -777,5 +777,23 @@ void Display::DashedHLine::Draw(int x0, int y)
         HLine(deltaFill - 1).Draw(x, y);
 
         x += (deltaFill + deltaEmpty);
+    }
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Display::VPointLine::VPointLine(int _height, float _delta) : height(_height), delta(_delta)
+{
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Display::VPointLine::Draw(int _x, int _y)
+{
+    int y0 = _y;
+    int y1 = y0 + height;
+
+    for (int y = y0; y <= y1; y += (int)delta)
+    {
+        //SetPoint(x, y);
+        Point().Draw(_x, y);
     }
 }

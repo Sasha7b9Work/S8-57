@@ -30,8 +30,6 @@ namespace Painter
     void DrawMultiHPointLine(int numLines, int x, const uint8 *y, int delta, int count, Color color = Color::NUMBER);
     /// Нарисовать горизонтальную линию от x0 до x1 точками через каждые delta пикселей
     void DrawHPointLine(int y, int x0, int x1, float delta);
-    /// Нарисовать вертикальную линию от y0 до y1 точками через каждые delta пикселей
-    void DrawVPointLine(int x, int y0, int y1, float delta);
 
     void DrawTesterData(uint8 mode, Color color, const uint8 *x, const uint8 *y);
 

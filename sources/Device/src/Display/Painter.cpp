@@ -21,6 +21,7 @@ using Display::Rectangle;
 using Display::Region;
 using Display::Text;
 using Display::VLine;
+using Display::VPointLine;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -104,16 +105,6 @@ void Painter::DrawMultiHPointLine(int numLines, int x0, const uint8 *y0, int del
 void Painter::DrawHPointLine(int y, int x0, int x1, float delta)
 {
     for (int x = x0; x <= x1; x += (int)delta)
-    {
-        //SetPoint(x, y);
-        Point().Draw(x, y);
-    }
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Painter::DrawVPointLine(int x, int y0, int y1, float delta)
-{
-    for (int y = y0; y <= y1; y += (int)delta)
     {
         //SetPoint(x, y);
         Point().Draw(x, y);
