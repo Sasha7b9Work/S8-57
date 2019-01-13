@@ -63,6 +63,8 @@ public:
     static void ResetFlash();
     /// Это системная функция. Вызывать самому нельзя
     static void OnTimerFlashDisplay();
+
+    void SetValue(uint value);
     
     uint8 value;
 

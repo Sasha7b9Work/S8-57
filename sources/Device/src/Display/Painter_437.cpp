@@ -54,14 +54,6 @@ void Painter::EndScene()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Painter::SetColorValue(Color color, uint value)
-{
-    uint8 buffer[6] = { Command::Paint_SetPalette, color.value, (uint8)value, (uint8)(value >> 8), (uint8)(value >> 16), (uint8)(value >> 24) };
-
-    FSMC::WriteToPanel(buffer, 6);
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Painter::DrawTesterData(uint8 mode, Color color, const uint8 *x, const uint8 *y)
 {
     Buffer buffer(483);

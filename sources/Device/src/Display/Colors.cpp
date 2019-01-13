@@ -278,7 +278,8 @@ void ColorType::CalcSteps()
 void ColorType::SetColor()
 {
     COLOR(color.value) = MAKE_COLOR((int)red, (int)green, (int)blue);
-    Painter::SetColorValue(color, COLOR(color.value));
+    //Painter::SetColorValue(color, COLOR(color.value));
+    color.SetValue(COLOR(color.value));
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -403,4 +404,12 @@ void Color::WriteToDisplay(Color color)
         lastColor = color;
         FSMC::WriteToPanel2bytes(Command::Paint_SetColor, lastColor.value);
     }
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Color::SetValue(uint rgb)
+{
+    uint8 buffer[6] = { Command::Paint_SetPalette, value, (uint8)rgb, (uint8)(rgb >> 8), (uint8)(rgb >> 16), (uint8)(rgb >> 24) };
+
+    FSMC::WriteToPanel(buffer, 6);
 }
