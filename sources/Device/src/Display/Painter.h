@@ -16,9 +16,6 @@ namespace Painter
     void SetFont(Font::Type::E typeFont);
 
     void Draw4SymbolsInRect(int x, int y, char eChar, Color color = Color::NUMBER);
-    /// ѕишет строку текста в центре области(x, y, width, height)цветом ColorText на пр€моугольнике с шириной бордюра widthBorder цвета colorBackground
-    void DrawStringInCenterRectOnBackgroundC(int x, int y, int width, int height, const char *text, Color colorText, int widthBorder,
-                                                    Color colorBackground);
     /// ”становить €ркость диспле€.
     void SetBrightnessDisplay(int16 brightness);
 

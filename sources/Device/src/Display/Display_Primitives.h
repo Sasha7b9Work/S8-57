@@ -120,6 +120,8 @@ namespace Display
         int DrawInBoundedRectWithTransfers(int x, int y, int width, Color colorBackground, Color colorFill);
 
         int DrawInCenterRectAndBoundIt(int x, int y, int width, int height, Color colorBackground, Color colorFill);
+        /// Пишет строку текста в центре области(x, y, width, height)цветом ColorText на прямоугольнике с шириной бордюра widthBorder цвета colorBackground
+        void DrawInCenterRectOnBackground(int x, int y, int width, int height, Color colorText, int widthBorder, Color colorBackground);
     private:
         const char *text;
         uint8 size;

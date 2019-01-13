@@ -52,19 +52,6 @@ void Painter::Draw4SymbolsInRect(int x, int y, char eChar, Color color)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Painter::DrawStringInCenterRectOnBackgroundC(int x, int y, int width, int height, const char *text, Color colorText, int widthBorder, Color colorBackground)
-{
-    int lenght = Font::GetLengthText(text);
-    //int eX = DrawStringInCenterRect(x, y, width, height, text, colorBackground);
-    int eX = Text(text).DrawInCenterRect(x, y, width, height, colorBackground);
-    int w = lenght + widthBorder * 2 - 2;
-    int h = 7 + widthBorder * 2 - 1;
-    Region(w, h).Draw(eX - lenght - widthBorder, y - widthBorder + 1);
-    //DrawStringInCenterRect(x, y, width, height, text, colorText);
-    Text(text).DrawInCenterRect(x, y, width, height, colorText);
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Painter::DrawVLineArray(int x, int numLines, uint8 *y0y1, Color color)
 {
     Color::SetCurrent(color);
