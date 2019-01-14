@@ -14,6 +14,7 @@
 
 
 using FPGA::SET::TBase;
+using FPGA::SET::Trig;
 
 
 extern const PageBase pTrig;
@@ -71,7 +72,7 @@ DEF_CHOICE_3( cMode, // -V206                                                   
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void OnChanged_Source(bool)
 {
-    FPGA::SET::Trig::Source::Load();
+    Trig::Source::Load();
 }
 
 DEF_CHOICE_3( cSource, // -V206                                                                                                                                    //--- СИНХР - Источник ---
@@ -87,7 +88,7 @@ DEF_CHOICE_3( cSource, // -V206                                                 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void OnChanged_Polarity(bool)
 {
-    FPGA::SET::LoadTrigPolarity();
+    Trig::Polarity::Load();
 }
 
 DEF_CHOICE_2( cPolarity, //-V206                                                                                                                                 //--- СИНХР - Полярность ---

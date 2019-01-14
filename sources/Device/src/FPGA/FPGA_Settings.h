@@ -42,8 +42,6 @@ namespace FPGA
 
         void TrigLevChange(int delta);
 
-        void LoadTrigPolarity();
-
         void SetTShift(int tShift);
 
         void LoadTShift();
@@ -234,6 +232,8 @@ namespace FPGA
                     Rising,
                     Falling
                 } value;
+
+                static void Load();
             };
 
             /// Установленное в true значение означает, что нужно выводить значок синхроимпульса
