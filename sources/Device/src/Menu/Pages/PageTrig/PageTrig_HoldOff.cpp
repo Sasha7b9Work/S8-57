@@ -16,7 +16,7 @@ const PageBase *PageTrig::PageHoldOff::pointer = &pageHoldOff;
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void OnChanged_HoldOff(bool)
 {
-    FPGA::Settings::LoadHoldfOff();
+    FPGA::SET::LoadHoldfOff();
 }
 
 DEF_CHOICE_2( cHoldOff,                                                                                                                               //--- СИНХР - УДЕРЖАНИЕ - Удержание ---
@@ -32,7 +32,7 @@ DEF_CHOICE_2( cHoldOff,                                                         
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void OnChanged_Duration()
 {
-    FPGA::Settings::LoadHoldfOff();
+    FPGA::SET::LoadHoldfOff();
 }
 
 DEF_GOVERNOR( gDuration,                                                                                                                           //--- СИНХР - УДЕРЖАНИЕ - Длительность ---

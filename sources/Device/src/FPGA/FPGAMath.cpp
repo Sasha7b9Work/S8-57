@@ -65,7 +65,7 @@ const float absStepTShift[TBase::Number] =
 
 /// Столько вольт содержится в одной точке сигнала по вертикали
 
-DEF_STRUCT(StructInPoints, float) voltsInPoint[Range::Number] =
+DEF_STRUCT(StructInPoints, float) voltsInPoint[FPGA::SET::Range::Number] =
 {
     2e-3F   / 20 * Grid::Height() / (MAX_VALUE - MIN_VALUE),    // 2mV
     5e-3F   / 20 * Grid::Height() / (MAX_VALUE - MIN_VALUE),    // 5mV
@@ -118,13 +118,13 @@ static const int voltsInPixelInt[] =   // Коэффициент 20000
 };
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-float FPGAMath::VoltageCursor(float shiftCurU, Range::E range, uint16 rShift)
+float FPGAMath::VoltageCursor(float shiftCurU, FPGA::SET::Range::E range, uint16 rShift)
 {
     return MaxVoltageOnScreen(range) - shiftCurU * voltsInPixel[range] - RShift2Abs(rShift, range);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-int FPGAMath::RShift2Rel(float rShiftAbs, Range::E range)
+int FPGAMath::RShift2Rel(float rShiftAbs, FPGA::SET::Range::E range)
 {
     int retValue = RShift::ZERO + (int)(rShiftAbs / absStepRShift[range]);
 
@@ -151,7 +151,7 @@ float FPGAMath::TimeCursor(float shiftCurT, TBase::E tBase)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void FPGAMath::PointsRel2Voltage(const uint8 *points, int numPoints, Range::E range, int16 rShift, float *voltage)
+void FPGAMath::PointsRel2Voltage(const uint8 *points, int numPoints, FPGA::SET::Range::E range, int16 rShift, float *voltage)
 {
     int voltInPixel = voltsInPixelInt[range];
     float maxVoltsOnScreen = MaxVoltageOnScreen(range);
@@ -165,7 +165,7 @@ void FPGAMath::PointsRel2Voltage(const uint8 *points, int numPoints, Range::E ra
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-uint8 FPGAMath::Voltage2Point(float voltage, Range::E range, uint16 rShift)
+uint8 FPGAMath::Voltage2Point(float voltage, FPGA::SET::Range::E range, uint16 rShift)
 {
     int relValue = (int)((voltage + MaxVoltageOnScreen(range) + RShift2Abs(rShift, range)) / voltsInPoint[range].val + MIN_VALUE);
     Math::Limitation<int>(&relValue, 0, 255);
@@ -173,9 +173,9 @@ uint8 FPGAMath::Voltage2Point(float voltage, Range::E range, uint16 rShift)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-float FPGAMath::Point2Voltage(uint8 value, Range::E range, uint16 rShift)
+float FPGAMath::Point2Voltage(uint8 value, FPGA::SET::Range::E range, uint16 rShift)
 {
-    if(range == Range::_1V)
+    if(range == FPGA::SET::Range::_1V)
     {
         range = range;
     }
@@ -190,7 +190,7 @@ float FPGAMath::Point2Voltage(uint8 value, Range::E range, uint16 rShift)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void FPGAMath::PointsVoltage2Rel(const float *voltage, int numPoints, Range::E range, int16 rShift, uint8 *points)
+void FPGAMath::PointsVoltage2Rel(const float *voltage, int numPoints, FPGA::SET::Range::E range, int16 rShift, uint8 *points)
 {
     float maxVoltOnScreen = MaxVoltageOnScreen(range);
     float rShiftAbs = RShift2Abs(rShift, range);
@@ -498,9 +498,9 @@ int FPGAMath::RShift2Pixels(uint16 rShift, int heightGrid)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-float FPGAMath::MaxVoltageOnScreen(Range::E range)
+float FPGAMath::MaxVoltageOnScreen(FPGA::SET::Range::E range)
 {
-    DEF_STRUCT(StructRange, float) table[Range::Number] =
+    DEF_STRUCT(StructRange, float) table[FPGA::SET::Range::Number] =
     {
         2e-3F, 5e-3F, 10e-3F, 20e-3F, 50e-3F, 100e-3F, 200e-3F, 500e-3F, 1.0F, 2.0F, 5.0F, 10.0F, 20.0F
     };
@@ -509,7 +509,7 @@ float FPGAMath::MaxVoltageOnScreen(Range::E range)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-float FPGAMath::RShift2Abs(int rShift, Range::E range)
+float FPGAMath::RShift2Abs(int rShift, FPGA::SET::Range::E range)
 {
     return -(RShift::ZERO - (int)rShift) * absStepRShift[range];
 }

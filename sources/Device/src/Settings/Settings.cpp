@@ -5,6 +5,9 @@
 #include "FPGA/FPGA_Settings.h"
 
 
+using FPGA::SET::Range;
+
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 static const Settings defaultSettings =
@@ -231,7 +234,7 @@ void Settings::Load(bool _default)
     if(_default || !EEPROM::LoadSettings())
     {
         Reset();
-        FPGA::Settings::Load();
+        FPGA::SET::Load();
         uint8 data[1024];
         TransformFromLoad(data);
         Menu::Init();

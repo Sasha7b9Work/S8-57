@@ -218,7 +218,7 @@ int BottomPart::WriteChannel(Chan::E ch, int x, int y)
 
     x += 8;
 
-    String(Range(SET_RANGE(ch)).Name()).Draw(x, y);
+    String(FPGA::SET::Range(SET_RANGE(ch)).Name()).Draw(x, y);
 
     x += 22;
 
@@ -245,7 +245,7 @@ static void WriteTextVoltage(Chan::E ch, int x, int y)
 
     bool inverse = SET_INVERSE(ch);
     Divider::E divider = SET_DIVIDER(ch);
-    Range::E range = SET_RANGE(ch);
+    FPGA::SET::Range::E range = SET_RANGE(ch);
 
     const int widthField = 91;
     const int heightField = 8;
@@ -256,7 +256,7 @@ static void WriteTextVoltage(Chan::E ch, int x, int y)
     }
     const int SIZE = 100;
     char buffer[SIZE];
-    snprintf(buffer, SIZE, "%s\xa5%s\xa5%s", Chan(ch).IsA() ? DICT(D1ch) : DICT(D2ch), ModeCouple(SET_COUPLE(ch)).UGO(), Range(range).ToString(divider));
+    snprintf(buffer, SIZE, "%s\xa5%s\xa5%s", Chan(ch).IsA() ? DICT(D1ch) : DICT(D2ch), ModeCouple(SET_COUPLE(ch)).UGO(), FPGA::SET::Range(range).ToString(divider));
     String(buffer).Draw(x + 1, y, colorDraw);
     char bufferTemp[SIZE];
     snprintf(bufferTemp, SIZE, "\xa5%s", RShift::ToString((uint16)SET_RSHIFT(ch), range, divider).CString());

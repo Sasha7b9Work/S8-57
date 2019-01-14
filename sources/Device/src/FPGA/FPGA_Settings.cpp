@@ -17,7 +17,7 @@ static uint8 ValueForRange(Chan::E ch);
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void FPGA::Settings::Load()
+void FPGA::SET::Load()
 {
     RangesLoad();
     LoadRShift(Chan::A);
@@ -33,13 +33,13 @@ void FPGA::Settings::Load()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void FPGA::Settings::LoadTrigSource()
+void FPGA::SET::LoadTrigSource()
 {
     LoadTrigSourceInput();
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void FPGA::Settings::LoadTrigSourceInput()
+void FPGA::SET::LoadTrigSourceInput()
 {
     static const uint8 datas[3][2] =
     {//       A                 B
@@ -54,7 +54,7 @@ void FPGA::Settings::LoadTrigSourceInput()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void FPGA::Settings::RangesLoad()
+void FPGA::SET::RangesLoad()
 {
     uint16 val = (uint16)(ValueForRange(Chan::B) + (ValueForRange(Chan::A) << 8));
 
@@ -64,7 +64,7 @@ void FPGA::Settings::RangesLoad()
 
     FPGA::WriteRegisters(Pin::SPI3_CS2, 0);    // Записываем ноль, чтобы реле не потребляли энергии
 
-    DEF_STRUCT(StructRange, uint8) vals[::Range::Number] =
+    DEF_STRUCT(StructRange, uint8) vals[FPGA::SET::Range::Number] =
     {
         StructRange(BIN_U8(00000000)),  // 2mV      // -V2501
         StructRange(BIN_U8(00000001)),  // 5mV      // -V2501
@@ -93,7 +93,7 @@ void FPGA::Settings::RangesLoad()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void FPGA::Settings::LoadRShift(Chan::E ch)
+void FPGA::SET::LoadRShift(Chan::E ch)
 {
     LAST_AFFECTED_CH = ch;
 
@@ -110,7 +110,7 @@ void FPGA::Settings::LoadRShift(Chan::E ch)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void FPGA::Settings::LoadTrigLev()
+void FPGA::SET::LoadTrigLev()
 {
     /// \todo Здесь много лишних движений. Нужно что-то сделать с вводом SET_TRIGLEV_SOURCE
     uint16 value = (uint16)((Trig::MAX + Trig::MIN) - SET_TRIGLEV_SOURCE);
@@ -124,7 +124,7 @@ void FPGA::Settings::LoadTrigLev()
 #endif
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void FPGA::Settings::LoadTBase()
+void FPGA::SET::LoadTBase()
 {
     static const uint8 values[TBase::Number] =
     {
@@ -172,7 +172,7 @@ void FPGA::Settings::LoadTBase()
 #endif
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void FPGA::Settings::LoadHoldfOff()
+void FPGA::SET::LoadHoldfOff()
 {
     FSMC::WriteToFPGA8(WR_TRIG_HOLD_ENABLE, TRIG_HOLDOFF_ENABLED ? 1U : 0U);
 
@@ -205,7 +205,7 @@ static uint8 ValueForRange(Chan::E ch) // -V2506
         return datas[ModeCouple::GND];
     }
 
-    DEF_STRUCT(StructRange, uint16) values[Range::Number][2] =
+    DEF_STRUCT(StructRange, uint16) values[FPGA::SET::Range::Number][2] =
     {   //             A                    B
         { BIN_U8(00100100), BIN_U8(00100100) }, // -V2501  // 2mV
         { BIN_U8(00100100), BIN_U8(00100100) }, // -V2501  // 5mV
@@ -230,13 +230,13 @@ static uint8 ValueForRange(Chan::E ch) // -V2506
 #endif
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void FPGA::Settings::LoadCalibratorMode()
+void FPGA::SET::LoadCalibratorMode()
 {
     FPGA::LoadRegUPR();
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void FPGA::Settings::LoadTShift()
+void FPGA::SET::LoadTShift()
 {
     FPGA::post = (uint16)(SET_TSHIFT - TShift::Min());
     int Pred = (int)FPGA::NumPoints() - (int)FPGA::post;
@@ -255,13 +255,13 @@ void FPGA::Settings::LoadTShift()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void FPGA::Settings::TShiftChange(int delta)
+void FPGA::SET::TShiftChange(int delta)
 {
     SetTShift(SET_TSHIFT + delta);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void FPGA::Settings::SetTShift(int tShift)
+void FPGA::SET::SetTShift(int tShift)
 {
     SET_TSHIFT.Set(tShift);
 
@@ -269,11 +269,11 @@ void FPGA::Settings::SetTShift(int tShift)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void FPGA::Settings::RangeChange(Chan::E ch, int delta)
+void FPGA::SET::RangeChange(Chan::E ch, int delta)
 {
     if (delta > 0)
     {
-        Math::LimitationIncrease<uint8>((uint8 *)(&SET_RANGE(ch)), (uint8)(::Range::Number - 1)); // -V206
+        Math::LimitationIncrease<uint8>((uint8 *)(&SET_RANGE(ch)), (uint8)(Range::Number - 1)); // -V206
     }
     else
     {
@@ -283,7 +283,7 @@ void FPGA::Settings::RangeChange(Chan::E ch, int delta)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void FPGA::Settings::TBaseChange(int delta) // -V2506
+void FPGA::SET::TBaseChange(int delta) // -V2506
 {
     if (delta > 0)
     {
@@ -306,7 +306,7 @@ void FPGA::Settings::TBaseChange(int delta) // -V2506
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void FPGA::Settings::RShiftChange(Chan::E ch, int delta)
+void FPGA::SET::RShiftChange(Chan::E ch, int delta)
 {
     Math::AdditionThisLimitation<uint16>(&SET_RSHIFT(ch), STEP_RSHIFT * delta, RShift::MIN, RShift::MAX);
 
@@ -314,7 +314,7 @@ void FPGA::Settings::RShiftChange(Chan::E ch, int delta)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void FPGA::Settings::TrigLevChange(int delta)
+void FPGA::SET::TrigLevChange(int delta)
 {
     Math::AdditionThisLimitation<uint16>(&SET_TRIGLEV_SOURCE, STEP_TRIGLEV * delta, Trig::MIN, Trig::MAX);
 
@@ -324,7 +324,7 @@ void FPGA::Settings::TrigLevChange(int delta)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void FPGA::Settings::SetRShift(Chan::E ch, uint16 rShift)
+void FPGA::SET::SetRShift(Chan::E ch, uint16 rShift)
 {
     Math::Limitation<uint16>(&rShift, RShift::MIN, RShift::MAX);
     SET_RSHIFT(ch) = rShift;
@@ -332,7 +332,7 @@ void FPGA::Settings::SetRShift(Chan::E ch, uint16 rShift)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void FPGA::Settings::LoadTrigPolarity()
+void FPGA::SET::LoadTrigPolarity()
 {
     GiveStart();
 }

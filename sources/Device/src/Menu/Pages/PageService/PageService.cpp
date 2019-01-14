@@ -30,11 +30,14 @@ extern const PageBase ppSound;
 extern const PageBase ppRTC;
 extern const PageBase ppInformation;
 
+
 using Display::Char;
 using Display::HLine;
 using Display::Rectangle;
 using Display::Text;
 using Display::VLine;
+
+using FPGA::SET::Range;
 
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -79,7 +82,7 @@ DEF_BUTTON(         bAutoSearch,                                                
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void OnChanged_Calibrator_Calibrator(bool)
 {
-    FPGA::Settings::LoadCalibratorMode();
+    FPGA::SET::LoadCalibratorMode();
 }
 
 DEF_CHOICE_2( cCalibrator_Calibrator, // -V206                                                                                                     //--- —≈–¬»— -  ¿À»¡–¿“Œ– -  ‡ÎË·‡ÚÓ ---

@@ -71,9 +71,9 @@ Display::ENumSignalsInSec::E Tables::ENumSignalsInSecToENUM(int numSignalsInSec)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-const char *Tables_RangeNameFromValue(Range::E range)
+const char *Tables_RangeNameFromValue(FPGA::SET::Range::E range)
 {
-    static const struct StructName { pString name; } names[Range::Number] =
+    static const struct StructName { pString name; } names[FPGA::SET::Range::Number] =
     {
         "Range_2mV",
         "Range_5mV",

@@ -15,6 +15,9 @@
 #endif
 
 
+using FPGA::SET::Range;
+
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 static DAC_HandleTypeDef hDAC = {DAC};
 
@@ -141,13 +144,13 @@ void Tester::Enable() // -V2506
 
     SET_COUPLE_A = SET_COUPLE_B = ModeCouple::GND;
 
-    SET_RANGE(Chan::A) = Range::_2V;
-    SET_RANGE(Chan::B) = Range::_2V;
+    SET_RANGE(Chan::A) = FPGA::SET::Range::_2V;
+    SET_RANGE(Chan::B) = FPGA::SET::Range::_2V;
 
-    FPGA::Settings::RangesLoad();
+    FPGA::SET::RangesLoad();
 
-    FPGA::Settings::SetRShift(Chan::A, RShift::ZERO);
-    FPGA::Settings::SetRShift(Chan::B, RShift::ZERO);
+    FPGA::SET::SetRShift(Chan::A, RShift::ZERO);
+    FPGA::SET::SetRShift(Chan::B, RShift::ZERO);
 
     HAL_GPIO_WritePin(Port_TEST_ON, Pin_TEST_ON, GPIO_PIN_RESET);  // Включаем тестер-компонент
 
@@ -192,7 +195,7 @@ void Tester::Disable() // -V2506
     set = oldSet;
     //set.Save();
 
-    FPGA::Settings::Load();
+    FPGA::SET::Load();
 
     FPGA::OnPressStart();
 }
@@ -297,7 +300,7 @@ pString Tester::Scale::ToString() const // -V2506
 {
     if (Chan(ch).IsA())
     {
-        return Range((Range::E)value).ToString(Divider::_1);
+        return FPGA::SET::Range((FPGA::SET::Range::E)value).ToString(Divider::_1);
     }
 
     static const pString names[][Language::Number] =

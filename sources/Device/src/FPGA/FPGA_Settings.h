@@ -3,7 +3,7 @@
 
 namespace FPGA
 {
-    namespace Settings
+    namespace SET
     {
         void Load();
 
@@ -42,5 +42,29 @@ namespace FPGA
         void LoadCalibratorMode();
         /// Установить значение удержания синхронизации
         void LoadHoldfOff();
+
+        struct Range
+        {
+            enum E
+            {
+                _2mV,
+                _5mV,
+                _10mV,
+                _20mV,
+                _50mV,
+                _100mV,
+                _200mV,
+                _500mV,
+                _1V,
+                _2V,
+                _5V,
+                _10V,
+                _20V,
+                Number
+            } value;
+            explicit Range(E v) : value(v) {};
+            pString Name() const;
+            pString ToString(Divider::E divider);
+        };
     };
 }

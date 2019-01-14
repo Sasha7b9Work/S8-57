@@ -52,7 +52,7 @@ void Device::Init()
 
     FrequencyCounter::Init();
 
-    FPGA::Settings::Load();
+    FPGA::SET::Load();
 
     Menu::Init();
 

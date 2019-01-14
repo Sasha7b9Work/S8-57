@@ -1,4 +1,5 @@
 #pragma once
+#include "FPGA/FPGA_Settings.h"
 #include "Settings/SettingsChannel.h"
 #include "Utils/String.h"
 
@@ -13,7 +14,7 @@ public:
 
     static void Draw();
 
-    static String ToString(uint16 rShiftRel, Range::E range, Divider::E divider);
+    static String ToString(uint16 rShiftRel, FPGA::SET::Range::E range, Divider::E divider);
 
 private:
 

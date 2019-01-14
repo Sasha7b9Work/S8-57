@@ -270,8 +270,8 @@ static void OnPress_ADC_Shift_Reset()
             RSHIFT_ADD_STABLE(ch, range) = 0;
         }
     }
-    FPGA::Settings::SetRShift(Chan::A, SET_RSHIFT_A);
-    FPGA::Settings::SetRShift(Chan::B, SET_RSHIFT_B);
+    FPGA::SET::SetRShift(Chan::A, SET_RSHIFT_A);
+    FPGA::SET::SetRShift(Chan::B, SET_RSHIFT_B);
 }
 
 DEF_BUTTON( bADC_Shift_Reset,                                                                                                                       //-- ÎÒËÀÄÊÀ - ÀÖÏ - ÄÎÏ ÑÌÅÙ - Ñáðîñ ---
@@ -284,27 +284,27 @@ DEF_BUTTON( bADC_Shift_Reset,                                                   
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void OnChanged_ADC_Shift_A()
 {
-    FPGA::Settings::SetRShift(Chan::A, SET_RSHIFT_A);
+    FPGA::SET::SetRShift(Chan::A, SET_RSHIFT_A);
 }
 
 DEF_GOVERNOR( gADC_Shift_A2mV,                                                                                                            //--- ÎÒËÀÄÊÀ - ÀÖÏ - ÄÎÏ ÑÌÅÙ - Ñì 1ê 2ìÂ ïîñò ---
     "Ñì 1ê 2ìÂ ïîñò", "Shift 1ch 2mV DC",
     "",
     "",
-    RSHIFT_ADD_STABLE_A(Range::_2mV), -100, 100, pppADC_Shift, FuncActive, OnChanged_ADC_Shift_A, FuncBeforeDraw
+    RSHIFT_ADD_STABLE_A(FPGA::SET::Range::_2mV), -100, 100, pppADC_Shift, FuncActive, OnChanged_ADC_Shift_A, FuncBeforeDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void OnChanged_ADC_Shift_B()
 {
-    FPGA::Settings::SetRShift(Chan::B, SET_RSHIFT_B);
+    FPGA::SET::SetRShift(Chan::B, SET_RSHIFT_B);
 }
 
 DEF_GOVERNOR( gADC_Shift_B2mV,                                                                                                            //--- ÎÒËÀÄÊÀ - ÀÖÏ - ÄÎÏ ÑÌÅÙ - Ñì 2ê 2ìÂ ïîñò ---
     "Ñì 2ê 2ìÂ ïîñò", "Shift 2ch 2mV DC",
     "",
     "",
-    RSHIFT_ADD_STABLE_B(Range::_2mV), -100, 100, pppADC_Shift, FuncActive, OnChanged_ADC_Shift_B, FuncBeforeDraw
+    RSHIFT_ADD_STABLE_B(FPGA::SET::Range::_2mV), -100, 100, pppADC_Shift, FuncActive, OnChanged_ADC_Shift_B, FuncBeforeDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -312,7 +312,7 @@ DEF_GOVERNOR( gADC_Shift_A5mV,                                                  
     "Ñì 1ê 5ìÂ ïîñò", "Shift 1ch 5mV DC",
     "",
     "",
-    RSHIFT_ADD_STABLE_A(Range::_5mV), -100, 100, pppADC_Shift, FuncActive, OnChanged_ADC_Shift_A, FuncBeforeDraw
+    RSHIFT_ADD_STABLE_A(FPGA::SET::Range::_5mV), -100, 100, pppADC_Shift, FuncActive, OnChanged_ADC_Shift_A, FuncBeforeDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -320,7 +320,7 @@ DEF_GOVERNOR( gADC_Shift_B5mV,                                                  
     "Ñì 2ê 5ìÂ ïîñò", "Shift 2ch 5mV DC",
     "",
     "",
-    RSHIFT_ADD_STABLE_B(Range::_5mV), -100, 100, pppADC_Shift, FuncActive, OnChanged_ADC_Shift_B, FuncBeforeDraw
+    RSHIFT_ADD_STABLE_B(FPGA::SET::Range::_5mV), -100, 100, pppADC_Shift, FuncActive, OnChanged_ADC_Shift_B, FuncBeforeDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -328,7 +328,7 @@ DEF_GOVERNOR( gADC_Shift_A10mV,                                                 
     "Ñì 1ê 10ìÂ ïîñò", "Shift 1ch 10mV DC",
     "",
     "",
-    RSHIFT_ADD_STABLE_A(Range::_10mV), -100, 100, pppADC_Shift, FuncActive, OnChanged_ADC_Shift_A, FuncBeforeDraw
+    RSHIFT_ADD_STABLE_A(FPGA::SET::Range::_10mV), -100, 100, pppADC_Shift, FuncActive, OnChanged_ADC_Shift_A, FuncBeforeDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -336,7 +336,7 @@ DEF_GOVERNOR( gADC_Shift_B10mV,                                                 
     "Ñì 2ê 10ìÂ ïîñò", "Shift 2ch 10mV DC",
     "",
     "",
-    RSHIFT_ADD_STABLE_B(Range::_10mV), -100, 100, pppADC_Shift, FuncActive, OnChanged_ADC_Shift_B, FuncBeforeDraw
+    RSHIFT_ADD_STABLE_B(FPGA::SET::Range::_10mV), -100, 100, pppADC_Shift, FuncActive, OnChanged_ADC_Shift_B, FuncBeforeDraw
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -507,7 +507,7 @@ static void DebugShowSetInfo_Draw()
     {
         for (int ch = 0; ch < 2; ch++)
         {
-            for (int range = 0; range < Range::Number; ++range)
+            for (int range = 0; range < FPGA::SET::Range::Number; ++range)
             {
                 String("%d", NRST_RSHIFT_ADD(ch, range, type)).Draw(x + range * 20, y + dY * ddY);
             }

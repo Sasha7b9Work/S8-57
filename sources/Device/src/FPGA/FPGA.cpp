@@ -181,7 +181,7 @@ void FPGA::ForTester::Start() // -V2506
 
     SET_TBASE = TBase::_500us;
 
-    Settings::LoadTBase();
+    SET::LoadTBase();
     
     FSMC::WriteToFPGA16(WR_POST_LO, (uint16)(~(400 + 1)));
     FSMC::WriteToFPGA16(WR_PRED_LO, (uint16)(~(0+ 3)));
@@ -518,7 +518,7 @@ void FPGA::ResetPin(Pin::E pin)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void FPGA::LoadTrigInput()
 {
-    Settings::LoadTrigSourceInput();
+    SET::LoadTrigSourceInput();
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -527,10 +527,10 @@ void FPGA::SetTrigLev(Trig::Source::E /*ch*/, uint16 /*trigLev*/)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void FPGA::Settings::SetModeCouple(Chan::E ch, ModeCouple::E modeCoupe)
+void FPGA::SET::SetModeCouple(Chan::E ch, ModeCouple::E modeCoupe)
 {
     SET_COUPLE(ch) = modeCoupe;
-    Settings::RangesLoad();
+    SET::RangesLoad();
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -560,7 +560,7 @@ void FPGA::Reset()
 {
     DataStorage::Init(Device::CurrentMode());
 
-    Settings::LoadTShift();
+    SET::LoadTShift();
 
     LoadRegUPR();
 }

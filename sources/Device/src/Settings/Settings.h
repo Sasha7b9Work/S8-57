@@ -85,7 +85,7 @@ public:
     // Меню КАНАЛ 1, КАНАЛ 2
 
     uint16              chan_shift[Chan::Number];           ///< Сдвиг канала по вертикали
-    Range::E            chan_range[Chan::Number];           ///< Масштаб канала по вертикали
+    FPGA::SET::Range::E chan_range[Chan::Number];           ///< Масштаб канала по вертикали
     ModeCouple::E       chan_couple[Chan::Number];          ///< Связь по входу
     bool                chan_enabled[Chan::Number];         ///< Включен/выключен канал
     int8                chan_balanceShiftADC[2];            ///< Добавочное смещение для балансировки АЦП.
@@ -185,7 +185,7 @@ public:
     FFTmaxDB::E         math_FFTmaxDB;
     Function::E         math_function;
     ModeRegSet::E       math_modeRegSet;                ///< Функция ручки УСТАНОВКА - масштаб по времени или смещение по вертикали.
-    Range::E            math_range;
+    FPGA::SET::Range::E math_range;
     Divider::E          math_divider;
     uint16              math_rShift;
 
@@ -232,25 +232,25 @@ public:
 
     // Настройки меню
 
-    const Page*         menu_currentPage;                               ///< Указатель на открытую страницу меню
-    bool                menu_show;                                      ///< Если true, то нужно показывать текущую страницу
-    int8                menu_posActItem[Page::Name::Number];            ///< \brief Позиция активного пункта. bit7 == 1 - item is opened, 0x7f - нет 
-                                                                        ///< активного пункта.
-    int8                menu_currentSubPage[Page::Name::Number];        ///< Номер текущей подстраницы.
+    const Page*         menu_currentPage;                                           ///< Указатель на открытую страницу меню
+    bool                menu_show;                                                  ///< Если true, то нужно показывать текущую страницу
+    int8                menu_posActItem[Page::Name::Number];                        ///< \brief Позиция активного пункта. bit7 == 1 - item is opened, 0x7f - нет 
+                                                                                    ///< активного пункта.
+    int8                menu_currentSubPage[Page::Name::Number];                    ///< Номер текущей подстраницы.
 
     // Несбрасываемые настройки калибровки
 
-    int16               nrst_balanceADC[Chan::Number];                  ///< Значение дополнительного смещения АЦП для ручной балансировки.
-    BalanceADC          nrst_balanceADCtype;                            ///< Тип балансировки.
-    StretchADC          nrst_stretchADCtype;                            ///< Тип растяжки канала.
-    int16               nrst_StretchADC[Chan::Number][3];               ///< \brief Поправочный коэффициент для ручного, калибровочного и
+    int16               nrst_balanceADC[Chan::Number];                              ///< Значение дополнительного смещения АЦП для ручной балансировки.
+    BalanceADC          nrst_balanceADCtype;                                        ///< Тип балансировки.
+    StretchADC          nrst_stretchADCtype;                                        ///< Тип растяжки канала.
+    int16               nrst_StretchADC[Chan::Number][3];                           ///< \brief Поправочный коэффициент для ручного, калибровочного и
                         ///< отключенного режимов. Здесь хранится в целом виде, чтобы получить реальный коэффициент, нужно разделить на 1000 и
                         ///< прибавить единицу.
-    int16               nrst_rShiftAddStable[Chan::Number][3];          ///< Добавочное смещение для трёх самых чувствительных диапазонов. Задаётся единожды при настройке
-    int16               nrst_numAveForRand;                             ///< По скольким измерениям усреднять сигнал в режиме рандомизатора.
-    int16               nrst_numSmoothForRand;                          ///< Число точек для скользящего фильта в рандомизаторе.
-    int16               nrst_rShiftAdd[Chan::Number][Range::Number][2]; ///< Добавочное смещение, которое пишется сюда при калибровке и балансировке
-    int16               nrst_correctionTime;                            ///< Коэффициент коррекции времени.
+    int16               nrst_rShiftAddStable[Chan::Number][3];                      ///< Добавочное смещение для трёх самых чувствительных диапазонов. Задаётся единожды при настройке
+    int16               nrst_numAveForRand;                                         ///< По скольким измерениям усреднять сигнал в режиме рандомизатора.
+    int16               nrst_numSmoothForRand;                                      ///< Число точек для скользящего фильта в рандомизаторе.
+    int16               nrst_rShiftAdd[Chan::Number][FPGA::SET::Range::Number][2];  ///< Добавочное смещение, которое пишется сюда при калибровке и балансировке
+    int16               nrst_correctionTime;                                        ///< Коэффициент коррекции времени.
 
     // Настройки мультиметра
     Multimeter::AVP                 multi_avp;
