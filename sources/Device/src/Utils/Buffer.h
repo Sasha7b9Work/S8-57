@@ -11,7 +11,7 @@ class Buffer
 public:
     Buffer(uint size);
     ~Buffer();
-    uint8 *Data();
+    inline uint8 *Data() { return buffer; };
     uint   Size() const;
 private:
     uint8 *buffer;

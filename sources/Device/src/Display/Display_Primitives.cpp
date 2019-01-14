@@ -5,6 +5,7 @@
 #include "Display_Primitives.h"
 #include "Painter.h"
 #include "Hardware/FSMC.h"
+#include "Utils/Buffer.h"
 #include "Utils/Math.h"
 #include <cstring>
 #endif
@@ -272,34 +273,22 @@ int Display::Text::DrawInCenterRect(int eX, int eY, int width, int eHeight, Colo
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 int Display::Text::DrawSmall(int x, int y, Color color)
 {
-    /// \todo Такую проверку нужно сделать и на приёмной стороне и тогда здесь убрать
-
-    if (*text == 0)
-    {
-        return x;
-    }
-
-    int result = x + Font::GetLengthText(text) + 1;
-
-#define MAX_SIZE_BUFFER 100
-
-    if (std::strlen(text) + 1 > MAX_SIZE_BUFFER) //-V2513
-    {
-        return x + 10;
-    }
-
     Color::SetCurrent(color);
 
-    uint8 buffer[MAX_SIZE_BUFFER] = { Command::Paint_DrawText, (uint8)x, (uint8)(x >> 8), (uint8)y, (uint8)std::strlen(text) };
+    uint sizeBuffer = 1 + 2 + 1 + 1 + std::strlen(text);
 
-    for (int i = 0; text[i] != 0; i++)
-    {
-        buffer[5 + i] = (uint8)text[i];
-    }
+    Buffer buffer(sizeBuffer);
+    buffer.Data()[0] = Command::Paint_DrawText;
+    buffer.Data()[1] = (uint8)x;
+    buffer.Data()[2] = (uint8)(x >> 8);
+    buffer.Data()[3] = (uint8)y;
+    buffer.Data()[4] = (uint8)std::strlen(text);
 
-    FSMC::WriteToPanel(buffer, 1 + 2 + 1 + 1 + std::strlen(text));
+    std::memcpy(&buffer.Data()[5], text, std::strlen(text));
 
-    return result;
+    FSMC::WriteToPanel(buffer.Data(), sizeBuffer);
+
+    return x + Font::GetLengthText(text) + 1;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -313,16 +302,13 @@ int Display::Text::DrawOnBackground(int x, int y, Color colorBackground)
 
     Color::SetCurrent(colorText);
 
-    //return DrawText(x, y, text);
     return Text(text).Draw(x, y);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Display::Text::DrawRelativelyRight(int xRight, int y, Color color)
 {
-    int lenght = Font::GetLengthText(text);
-    //DrawText(xRight - lenght, y, text, color);
-    Text(text).Draw(xRight - lenght, y, color);
+    Text(text).Draw(xRight - Font::GetLengthText(text), y, color);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
