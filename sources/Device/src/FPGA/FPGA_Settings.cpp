@@ -15,6 +15,9 @@
 #endif
 
 
+using namespace FPGA::HAL::GPIO;
+
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 int FPGA::SET::TShift::value = 0;
 
@@ -55,9 +58,9 @@ void FPGA::SET::Trig::Input::Load()
         {BIN_U8(00000000), BIN_U8(00000110)}  // -V2501      // НЧ
     };
 
-    FPGA::WritePin(Pin::A1S, _GET_BIT(datas[TRIG_INPUT][TRIG_SOURCE], 2));
-    FPGA::WritePin(Pin::A0S, _GET_BIT(datas[TRIG_INPUT][TRIG_SOURCE], 1));
-    FPGA::WritePin(Pin::LFS, _GET_BIT(datas[TRIG_INPUT][TRIG_SOURCE], 0));
+    WritePin(Pin::A1S, _GET_BIT(datas[TRIG_INPUT][TRIG_SOURCE], 2));
+    WritePin(Pin::A0S, _GET_BIT(datas[TRIG_INPUT][TRIG_SOURCE], 1));
+    WritePin(Pin::LFS, _GET_BIT(datas[TRIG_INPUT][TRIG_SOURCE], 0));
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -65,11 +68,11 @@ void FPGA::SET::Range::LoadBoth()
 {
     uint16 val = (uint16)(ValueForRange(Chan::B) + (ValueForRange(Chan::A) << 8));
 
-    FPGA::WriteRegisters(Pin::SPI3_CS2, val);
+    WriteRegisters(Pin::SPI3_CS2, val);
 
     PAUSE_ON_MS(10);                // Задержка нужна, чтобы импульсные реле успели отработать
 
-    FPGA::WriteRegisters(Pin::SPI3_CS2, 0);    // Записываем ноль, чтобы реле не потребляли энергии
+    WriteRegisters(Pin::SPI3_CS2, 0);    // Записываем ноль, чтобы реле не потребляли энергии
 
     DEF_STRUCT(StructRange, uint8) vals[FPGA::SET::Range::Number] =
     {
@@ -90,13 +93,13 @@ void FPGA::SET::Range::LoadBoth()
 
     uint8 valueA = vals[SET_RANGE_A].val;
 
-    FPGA::WritePin(Pin::A1, _GET_BIT(valueA, 1));
-    FPGA::WritePin(Pin::A2, _GET_BIT(valueA, 0));
+    WritePin(Pin::A1, _GET_BIT(valueA, 1));
+    WritePin(Pin::A2, _GET_BIT(valueA, 0));
 
     uint8 valueB = vals[SET_RANGE_B].val;
 
-    FPGA::WritePin(Pin::A3, _GET_BIT(valueB, 1));
-    FPGA::WritePin(Pin::A4, _GET_BIT(valueB, 0));
+    WritePin(Pin::A3, _GET_BIT(valueB, 1));
+    WritePin(Pin::A4, _GET_BIT(valueB, 0));
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -113,7 +116,7 @@ void FPGA::SET::RShift::Load(Chan::E ch)
         shift = (uint16)((int)shift - Tester::DeltaRShiftA());
     }
 
-    FPGA::WriteRegisters(Pin::SPI3_CS1, (uint16)(mask[ch] | (shift << 2)));
+    WriteRegisters(Pin::SPI3_CS1, (uint16)(mask[ch] | (shift << 2)));
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -122,7 +125,7 @@ void FPGA::SET::Trig::Level::Load()
     /// \todo Здесь много лишних движений. Нужно что-то сделать с вводом SET_TRIGLEV_SOURCE
     uint16 value = (uint16)((Trig::MAX + Trig::MIN) - SET_TRIGLEV_SOURCE);
 
-    FPGA::WriteRegisters(Pin::SPI3_CS1, (uint16)(0xa000 | (value << 2)));
+    WriteRegisters(Pin::SPI3_CS1, (uint16)(0xa000 | (value << 2)));
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

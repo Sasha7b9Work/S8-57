@@ -8,28 +8,6 @@
 #define STEP_RSHIFT     (((FPGA::SET::RShift::MAX - FPGA::SET::RShift::MIN) / 24) / 20)
 #define STEP_TRIGLEV    STEP_RSHIFT
 
-struct Pin
-{
-    enum E
-    {
-        SPI3_SCK,
-        SPI3_DAT,
-        SPI3_CS1,
-        SPI3_CS2,
-        A1,
-        A2,
-        A3,
-        A4,
-        LF1,
-        LF2,
-        A1S,
-        A0S,
-        LFS,
-        Number
-    } value;
-    explicit Pin(E v) : value(v) {};
-};
-
 #define FPGA_IN_STATE_STOP (FPGA::fpgaStateWork == StateWorkFPGA_Stop)
 #define FPGA_IN_STATE_WORK (FPGA::fpgaStateWork == StateWorkFPGA_Work)
 #define FPGA_IN_STATE_WAIT (FPGA::fpgaStateWork == StateWorkFPGA_Wait)
@@ -60,20 +38,6 @@ namespace FPGA
     void SetValueADC(uint16 value);
     /// Сделать калибровку
     void DoCalibration();
-
-    void GPIO_Init();
-
-    void WritePin(Pin::E pin, int enable);
-
-    void SetPin(Pin::E pin);
-
-    void ResetPin(Pin::E pin);
-
-    static uint GetPin(Pin::E pin);
-
-    static GPIO_TypeDef *GetPort(Pin::E pin);
-
-    void WriteRegisters(Pin::E cs, uint16 value);
 
     void ReadData();
 
