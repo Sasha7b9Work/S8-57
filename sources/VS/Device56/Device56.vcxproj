@@ -24,7 +24,6 @@
     <ClCompile Include="..\..\Device\src\Display\Display_Primitives.cpp" />
     <ClCompile Include="..\..\Device\src\Display\Font\Font.cpp" />
     <ClCompile Include="..\..\Device\src\Display\Grid.cpp" />
-    <ClCompile Include="..\..\Device\src\Display\Painter.cpp" />
     <ClCompile Include="..\..\Device\src\Display\PainterMem.cpp" />
     <ClCompile Include="..\..\Device\src\Display\Painter_437.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>

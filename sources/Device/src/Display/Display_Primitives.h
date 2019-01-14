@@ -211,4 +211,19 @@ namespace Display
         int numLines;
         uint8 *y0y1;
     };
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /// numLines вертикальных линий, состоящих из count точек каждая с расстоянием между точками delta. Горизонтальная координата
+    /// первой точки каждой линии соответствует очередному элементу массива x[]
+    class MultiVPointLine
+    {
+    public:
+        MultiVPointLine(int numLines, uint16 *x0, int delta, int count);
+        void Draw(int y0, Color color = Color::NUMBER);
+    private:
+        int numLines;
+        uint16 *x0;
+        int delta;
+        int count;
+    };
 }

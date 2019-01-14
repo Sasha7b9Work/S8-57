@@ -284,7 +284,7 @@ int Display::Text::DrawSmall(int x, int y, Color color)
     buffer.Data()[3] = (uint8)y;
     buffer.Data()[4] = (uint8)std::strlen(text);
 
-    std::memcpy(&buffer.Data()[5], text, std::strlen(text));
+    std::memcpy(&buffer.Data()[5], (void *)text, std::strlen(text));
 
     FSMC::WriteToPanel(buffer.Data(), sizeBuffer);
 
@@ -856,5 +856,26 @@ void Display::VLineArray::Draw(int x, Color color)
         uint8 y0 = *y0y1++;
         uint8 y1 = *y0y1++;
         VLine(y1 - y0).Draw(x, y0);
+    }
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Display::MultiVPointLine::MultiVPointLine(int _numLines, uint16 *_x0, int _delta, int _count) : numLines(_numLines), x0(_x0), delta(_delta), count(_count)
+{
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Display::MultiVPointLine::Draw(int y0, Color color)
+{
+    Color::SetCurrent(color);
+
+    for (int i = 0; i < numLines; i++)
+    {
+        int x = x0[i];
+        for (int numPoint = 0; numPoint < count; numPoint++)
+        {
+            int y = y0 + numPoint * delta;
+            Point().Draw(x, y);
+        }
     }
 }
