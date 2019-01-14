@@ -1256,6 +1256,16 @@
               <FilePath>.\src\FPGA\FPGA.h</FilePath>
             </File>
             <File>
+              <FileName>FPGA_Settings.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\FPGA\FPGA_Settings.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>FPGA_Settings.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\FPGA\FPGA_Settings.h</FilePath>
+            </File>
+            <File>
               <FileName>FPGA_437.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\FPGA\FPGA_437.cpp</FilePath>

@@ -3,6 +3,7 @@
 #include "device.h"
 #include <stm32f4xx.h>
 #include "FPGA.h"
+#include "FPGA_Settings.h"
 #include "AD9286.h"
 #include "Data/DataStorage.h"
 #include "Display/Display.h"

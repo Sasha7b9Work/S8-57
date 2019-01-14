@@ -456,6 +456,9 @@
     <ClCompile Include="..\..\Device\src\Display\Display_Primitives.cpp">
       <Filter>Display</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Device\src\FPGA\FPGA_Settings.cpp">
+      <Filter>FPGA</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Device\src\defines.h">
@@ -814,6 +817,9 @@
     </ClInclude>
     <ClInclude Include="..\..\Device\src\Display\Display_Warnings.h">
       <Filter>Display</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Device\src\FPGA\FPGA_Settings.h">
+      <Filter>FPGA</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

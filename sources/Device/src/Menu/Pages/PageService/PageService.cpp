@@ -7,6 +7,7 @@
 #include "Display/Symbols.h"
 #include "Display/Painter.h"
 #include "FPGA/FPGA.h"
+#include "FPGA/FPGA_Settings.h"
 #include "FPGA/FPGAMath.h"
 #include "FPGA/RShift.h"
 #include "Hardware/CPU.h"

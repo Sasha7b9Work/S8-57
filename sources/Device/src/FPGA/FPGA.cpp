@@ -5,6 +5,7 @@
 #include "device.h"
 #include "log.h"
 #include "FPGA.h"
+#include "FPGA_Settings.h"
 #include "Hardware/FSMC.h"
 #include "Hardware/GPIO.h"
 #include "Hardware/Timer.h"

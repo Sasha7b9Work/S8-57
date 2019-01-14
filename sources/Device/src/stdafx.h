@@ -28,6 +28,7 @@
 
 #include "FPGA/AD9286.h"
 #include "FPGA/FPGA.h"
+#include "FPGA/FPGA_Settings.h"
 #include "FPGA/FPGAMath.h"
 
 #include "Keyboard/DecoderDevice.h"

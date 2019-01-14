@@ -5,6 +5,7 @@
 #include "Tester.h"
 #include "Display/Display.h"
 #include "FPGA/FPGA.h"
+#include "FPGA/FPGA_Settings.h"
 #include "FPGA/FPGAMath.h"
 #include "Hardware/FSMC.h"
 #include "Hardware/Hardware.h"

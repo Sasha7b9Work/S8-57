@@ -2,6 +2,7 @@
 #ifndef WIN32
 #include "defines.h"
 #include "FPGA/FPGA.h"
+#include "FPGA/FPGA_Settings.h"
 #include "Menu/MenuItems.h"
 #include "Menu/Pages/Include/PageDebug.h"
 #include "Settings/Settings.h"
