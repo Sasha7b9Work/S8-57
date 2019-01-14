@@ -7,10 +7,6 @@ namespace FPGA
     {
         void Load();
 
-        void RangeChange(Chan::E ch, int delta);
-
-        void RangesLoad();
-
         void RShiftChange(Chan::E ch, int delta);
 
         void SetRShift(Chan::E ch, uint16 rShift);
@@ -45,6 +41,10 @@ namespace FPGA
 
         struct Range
         {
+            static void Change(Chan::E ch, int delta);
+
+            static void LoadBoth();
+
             enum E
             {
                 _2mV,

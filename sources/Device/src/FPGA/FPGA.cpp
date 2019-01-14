@@ -530,7 +530,7 @@ void FPGA::SetTrigLev(Trig::Source::E /*ch*/, uint16 /*trigLev*/)
 void FPGA::SET::SetModeCouple(Chan::E ch, ModeCouple::E modeCoupe)
 {
     SET_COUPLE(ch) = modeCoupe;
-    SET::RangesLoad();
+    SET::Range::LoadBoth();
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

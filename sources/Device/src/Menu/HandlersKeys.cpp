@@ -207,25 +207,25 @@ static void RShiftMoreB()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void RangeLessA()
 {
-    OnChangeParameterChannel(FPGA::SET::RangeChange, Chan::A, -1);
+    OnChangeParameterChannel(FPGA::SET::Range::Change, Chan::A, -1);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void RangeMoreA()
 {
-    OnChangeParameterChannel(FPGA::SET::RangeChange, Chan::A, +1);
+    OnChangeParameterChannel(FPGA::SET::Range::Change, Chan::A, +1);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void RangeLessB()
 {
-    OnChangeParameterChannel(FPGA::SET::RangeChange, Chan::B, -1);
+    OnChangeParameterChannel(FPGA::SET::Range::Change, Chan::B, -1);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void RangeMoreB()
 {
-    OnChangeParameterChannel(FPGA::SET::RangeChange, Chan::B, +1);
+    OnChangeParameterChannel(FPGA::SET::Range::Change, Chan::B, +1);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
