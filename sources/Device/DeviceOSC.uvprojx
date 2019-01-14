@@ -1305,11 +1305,6 @@
               <FileType>8</FileType>
               <FilePath>.\src\FPGA\TrigLev.cpp</FilePath>
             </File>
-            <File>
-              <FileName>TShift.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\FPGA\TShift.cpp</FilePath>
-            </File>
           </Files>
         </Group>
         <Group>
