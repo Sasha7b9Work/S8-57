@@ -22,7 +22,7 @@ void FPGA::SET::Load()
     Range::LoadBoth();
     RShift::Load(Chan::A);
     RShift::Load(Chan::B);
-    LoadTrigSourceInput();
+    Trig::Input::Load();
     Trig::Level::Load();
     TBase::Load();
     LoadTShift();
@@ -35,11 +35,11 @@ void FPGA::SET::Load()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void FPGA::SET::Trig::Source::Load()
 {
-    LoadTrigSourceInput();
+    Input::Load();
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void FPGA::SET::LoadTrigSourceInput()
+void FPGA::SET::Trig::Input::Load()
 {
     static const uint8 datas[3][2] =
     {//       A                 B

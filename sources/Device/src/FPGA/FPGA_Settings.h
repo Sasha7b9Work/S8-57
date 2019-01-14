@@ -39,8 +39,6 @@ namespace FPGA
     namespace SET
     {
         void Load();
-        /// Установить в соотвествующие положения выводы, отвечающие за источник и вход синхронизации
-        void LoadTrigSourceInput();
 
         void TrigLevChange(int delta);
 
@@ -224,6 +222,9 @@ namespace FPGA
                     HF,
                     LF
                 } value;
+
+                /// Установить в соотвествующие положения выводы, отвечающие за источник и вход синхронизации
+                static void Load();
             };
 
             struct Polarity
