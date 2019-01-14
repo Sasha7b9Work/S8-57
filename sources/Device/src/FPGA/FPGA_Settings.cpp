@@ -322,3 +322,18 @@ void FPGA::Settings::TrigLevChange(int delta)
 
     Trig::NeedForDraw(2000);
 }
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void FPGA::Settings::SetRShift(Chan::E ch, uint16 rShift)
+{
+    Math::Limitation<uint16>(&rShift, RShift::MIN, RShift::MAX);
+    SET_RSHIFT(ch) = rShift;
+    LoadRShift(ch);
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void FPGA::Settings::LoadTrigPolarity()
+{
+    GiveStart();
+}
+

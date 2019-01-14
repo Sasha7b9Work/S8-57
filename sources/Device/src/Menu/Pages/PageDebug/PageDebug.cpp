@@ -9,6 +9,7 @@
 #include "Display/Painter.h"
 #include "FlashDrive/FlashDrive.h"
 #include "FPGA/FPGA.h"
+#include "FPGA/FPGA_Settings.h"
 #include "Hardware/EEPROM.h"
 #include "Hardware/Sound.h"
 #include "Menu/Menu.h"
@@ -269,8 +270,8 @@ static void OnPress_ADC_Shift_Reset()
             RSHIFT_ADD_STABLE(ch, range) = 0;
         }
     }
-    FPGA::SetRShift(Chan::A, SET_RSHIFT_A);
-    FPGA::SetRShift(Chan::B, SET_RSHIFT_B);
+    FPGA::Settings::SetRShift(Chan::A, SET_RSHIFT_A);
+    FPGA::Settings::SetRShift(Chan::B, SET_RSHIFT_B);
 }
 
 DEF_BUTTON( bADC_Shift_Reset,                                                                                                                       //-- Œ“À¿ƒ ¿ - ¿÷œ - ƒŒœ —Ã≈Ÿ - —·ÓÒ ---
@@ -283,7 +284,7 @@ DEF_BUTTON( bADC_Shift_Reset,                                                   
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void OnChanged_ADC_Shift_A()
 {
-    FPGA::SetRShift(Chan::A, SET_RSHIFT_A);
+    FPGA::Settings::SetRShift(Chan::A, SET_RSHIFT_A);
 }
 
 DEF_GOVERNOR( gADC_Shift_A2mV,                                                                                                            //--- Œ“À¿ƒ ¿ - ¿÷œ - ƒŒœ —Ã≈Ÿ - —Ï 1Í 2Ï¬ ÔÓÒÚ ---
@@ -296,7 +297,7 @@ DEF_GOVERNOR( gADC_Shift_A2mV,                                                  
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void OnChanged_ADC_Shift_B()
 {
-    FPGA::SetRShift(Chan::B, SET_RSHIFT_B);
+    FPGA::Settings::SetRShift(Chan::B, SET_RSHIFT_B);
 }
 
 DEF_GOVERNOR( gADC_Shift_B2mV,                                                                                                            //--- Œ“À¿ƒ ¿ - ¿÷œ - ƒŒœ —Ã≈Ÿ - —Ï 2Í 2Ï¬ ÔÓÒÚ ---

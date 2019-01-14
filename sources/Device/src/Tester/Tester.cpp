@@ -146,8 +146,8 @@ void Tester::Enable() // -V2506
 
     FPGA::Settings::LoadRanges();
 
-    FPGA::SetRShift(Chan::A, RShift::ZERO);
-    FPGA::SetRShift(Chan::B, RShift::ZERO);
+    FPGA::Settings::SetRShift(Chan::A, RShift::ZERO);
+    FPGA::Settings::SetRShift(Chan::B, RShift::ZERO);
 
     HAL_GPIO_WritePin(Port_TEST_ON, Pin_TEST_ON, GPIO_PIN_RESET);  // Включаем тестер-компонент
 

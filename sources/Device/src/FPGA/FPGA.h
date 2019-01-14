@@ -45,11 +45,7 @@ namespace FPGA
 
     void OnPressStart();
 
-    static void GiveStart();
-
-    void SetRShift(Chan::E ch, uint16 rShift);
-
-    void LoadTrigPolarity();
+    void GiveStart();
 
     void LoadTrigInput();
 
