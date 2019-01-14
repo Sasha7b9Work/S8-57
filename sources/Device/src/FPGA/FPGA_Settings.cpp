@@ -259,7 +259,7 @@ void FPGA::SET::TShift::Load()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void FPGA::SET::TShiftChange(int delta)
+void FPGA::SET::TShift::Change(int delta)
 {
     TShift::Set(SET_TSHIFT + delta);
 }

@@ -40,8 +40,6 @@ namespace FPGA
     {
         void Load();
 
-        void TShiftChange(int delta);
-
         void SetModeCouple(Chan::E ch, ModeCouple::E couple);
         /// ¬ключить/выключить калибратор.
         void LoadCalibratorMode();
@@ -251,6 +249,8 @@ namespace FPGA
             static void Set(int tShift);
 
             static void Load();
+
+            static void Change(int delta);
 
             operator int() const { return value; };
 
