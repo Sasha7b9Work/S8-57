@@ -5,19 +5,16 @@
 /// Здесь хранятся данные 
 class DataBuffer
 {
-    friend class DataStorage;
-
 public:
     static void Init();
 
     static uint Size();
+    /// Возвращает указатель на данные, помещённые в буфер последними
+    static DataSettings *Top();
 
 private:
     /// Помещает данные, описанные в DataSettings, последними в буфер. Если места не хватает, то самые старые помещённые данные удаляются
     static void Push(DataSettings *ds);
-    /// Возвращает указатель на данные, помещённые в буфер последними
-    static DataSettings *Top();
-
     /// Вспомогательный класс для урощения работы с массивом DataSettings
     class Stack
     {

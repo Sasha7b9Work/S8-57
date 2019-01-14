@@ -3,23 +3,19 @@
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-class DataStorage
+namespace DataStorage
 {
-public:
+    void Init();
 
-    static void Init();
+    void Push(DataSettings *ds);
 
-    static void Push(DataSettings *ds);
+    uint NumElementsInStorage();
 
-    static bool GetData(DataSettings *ds);
+    DataSettings *DataSettingsFromEnd(int fromEnd);
 
-    static uint NumElementsInStorage();
+    uint8 *GetAverageData(Chan::E ch);
 
-    static DataSettings *DataSettingsFromEnd(int fromEnd);
+    void GetDataFromEnd(int fromEnd, DataSettings *ds, uint8 *dataA, uint8 *dataB);
 
-    static uint8 *GetAverageData(Chan::E ch);
-
-    static void GetDataFromEnd(int fromEnd, DataSettings *ds, uint8 *dataA, uint8 *dataB);
-
-    static bool GetLimitation(Chan::E ch, uint8 *data, int direction);
+    bool GetLimitation(Chan::E ch, uint8 *data, int direction);
 };
