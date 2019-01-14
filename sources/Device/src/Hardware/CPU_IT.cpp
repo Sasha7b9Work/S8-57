@@ -5,6 +5,7 @@
 #include "Utils/Debug.h"
 #include "FlashDrive/FlashDrive.h"      
 #include "FPGA/FPGA.h"
+#include "FPGA/FPGA_HAL.h"
 #include "Hardware/Timer.h"
 #include "Hardware/VCP.h"
 #endif
@@ -46,7 +47,7 @@ void USART3_IRQHandler(void)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void ADC_IRQHandler(void)
 {
-    HAL_ADC_IRQHandler(FPGA::HandleADC());
+    HAL_ADC_IRQHandler(FPGA::HAL::HandleADC());
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

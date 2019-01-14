@@ -57,8 +57,6 @@ namespace FPGA
 
     void SetBandwidth(Chan::E ch);
 
-    ADC_HandleTypeDef *HandleADC();
-
     void SetValueADC(uint16 value);
     /// Сделать калибровку
     void DoCalibration();

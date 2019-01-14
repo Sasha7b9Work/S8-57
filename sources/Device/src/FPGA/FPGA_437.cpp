@@ -3,6 +3,7 @@
 #include "device.h"
 #include <stm32f4xx.h>
 #include "FPGA.h"
+#include "FPGA_HAL.h"
 #include "FPGA_Settings.h"
 #include "AD9286.h"
 #include "Data/DataStorage.h"
@@ -59,7 +60,7 @@ void FPGA::Init()
     HAL_NVIC_SetPriority(ADC_IRQn, 0, 0);
     HAL_NVIC_EnableIRQ(ADC_IRQn);
 
-    ADC_HandleTypeDef &handleADC = *FPGA::HandleADC();
+    ADC_HandleTypeDef &handleADC = *FPGA::HAL::HandleADC();
 
     handleADC.Instance = ADC3;
     handleADC.Init.ClockPrescaler = ADC_CLOCKPRESCALER_PCLK_DIV2;
