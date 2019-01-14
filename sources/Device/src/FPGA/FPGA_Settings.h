@@ -40,8 +40,6 @@ namespace FPGA
     {
         void Load();
 
-        void LoadTShift();
-
         void TShiftChange(int delta);
 
         void SetModeCouple(Chan::E ch, ModeCouple::E couple);
@@ -251,6 +249,8 @@ namespace FPGA
             int InPoints();
 
             static void Set(int tShift);
+
+            static void Load();
 
             operator int() const { return value; };
 

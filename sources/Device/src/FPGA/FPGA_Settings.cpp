@@ -29,7 +29,7 @@ void FPGA::SET::Load()
     Trig::Input::Load();
     Trig::Level::Load();
     TBase::Load();
-    LoadTShift();
+    TShift::Load();
     LoadCalibratorMode();
     LoadHoldfOff();
 
@@ -168,7 +168,7 @@ void FPGA::SET::TBase::Load()
 
     FSMC::WriteToFPGA8(WR_TBASE, values[SET_TBASE]);
 
-    LoadTShift();
+    TShift::Load();
 }
 
 #ifdef _WIN32
@@ -240,7 +240,7 @@ void FPGA::SET::LoadCalibratorMode()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void FPGA::SET::LoadTShift()
+void FPGA::SET::TShift::Load()
 {
     FPGA::post = (uint16)(SET_TSHIFT - TShift::Min());
     int Pred = (int)FPGA::NumPoints() - (int)FPGA::post;

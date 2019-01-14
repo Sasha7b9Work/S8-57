@@ -564,7 +564,7 @@ void FPGA::Reset()
 {
     DataStorage::Init(Device::CurrentMode());
 
-    SET::LoadTShift();
+    SET::TShift::Load();
 
     LoadRegUPR();
 }
