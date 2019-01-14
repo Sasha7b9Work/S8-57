@@ -47,8 +47,6 @@ namespace FPGA
 
     void GiveStart();
 
-    void LoadTrigInput();
-
     void Stop(bool pause = false);
 
     uint NumPoints();
