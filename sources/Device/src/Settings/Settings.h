@@ -108,7 +108,7 @@ public:
 
     // Μενώ ΠΐΗΒ¨ΠÒΚΐ
 
-    TShift              time_shift;
+    FPGA::SET::TShift   time_shift;
     FPGA::SET::TBase::E time_base;
     PeakDetMode::E      time_peakDet;
     TPos::E             time_TPos;
