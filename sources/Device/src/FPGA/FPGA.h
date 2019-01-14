@@ -55,8 +55,6 @@ namespace FPGA
 
     void TrigLevChange(int delta);
 
-    void TShiftChange(int delta);
-
     void SetRShift(Chan::E ch, uint16 rShift);
 
     void LoadTrigPolarity();
@@ -69,11 +67,9 @@ namespace FPGA
 
     bool IsRunning();
 
-    void SetTShift(int tShift);
-
     void Reset();
 
-    static void LoadRegUPR();
+    void LoadRegUPR();
 
     void SetModeCouple(Chan::E ch, ModeCouple::E couple);
 
@@ -125,6 +121,8 @@ namespace FPGA
     static void ReadDataChanenlRand(Chan::E ch, const uint8 *address, uint8 *data);
 
     static bool CalculateGate(uint16 rand, uint16 *eMin, uint16 *eMax);
+
+    void ClearDataRand();
 
     static int CalculateShift();
     /// True, если дан запуск

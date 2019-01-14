@@ -11,6 +11,7 @@
 #include "Display/Painter.h"
 #include "FlashDrive/FlashDrive.h"
 #include "FPGA/FPGA.h"
+#include "FPGA/FPGA_Settings.h"
 #include "Hardware/EEPROM.h"
 #include "Hardware/Sound.h"
 #include "FlashDrive/FileManager.h"
@@ -86,7 +87,7 @@ void PageMemory::OnChanged_Points(bool active)
     }
 
     FPGA::Reset();
-    FPGA::SetTShift(SET_TSHIFT);
+    FPGA::Settings::SetTShift(SET_TSHIFT);
     FPGA::Reset();
 }
 

@@ -16,6 +16,7 @@
 #include "Pages/Include/PageFunction.h"
 #include "Hardware/Sound.h"
 #include "FPGA/FPGA.h"
+#include "FPGA/FPGA_Settings.h"
 #include "Utils/Math.h"
 #include "Display/Display_Primitives.h"
 #include "Display/Grid.h"
@@ -388,7 +389,7 @@ void Menu::ProcessingLongPressureButton()
 
         if(button == Key::Time)
         {
-            FPGA::SetTShift(0);
+            FPGA::Settings::SetTShift(0);
         }
         else if(button == Key::Trig)
         {

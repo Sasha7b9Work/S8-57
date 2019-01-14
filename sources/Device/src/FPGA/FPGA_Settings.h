@@ -19,12 +19,14 @@ namespace FPGA
 
         void LoadTBase();
 
+        void SetTShift(int tShift);
+
         void LoadTShift();
+
+        void TShiftChange(int delta);
         /// Включить/выключить калибратор.
         void LoadCalibratorMode();
         /// Установить значение удержания синхронизации
         void LoadHoldfOff();
-
-        uint8 ValueForRange(Chan::E ch);
     };
 }

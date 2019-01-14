@@ -80,7 +80,7 @@ DEF_GOVERNOR(gRand_TimeCompensation,                                            
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void OnChanged_Rand_AddTimeShift()
 {
-    FPGA::SetTShift(SET_TSHIFT);
+    FPGA::Settings::SetTShift(SET_TSHIFT);
 }
 
 static int16 addShift = 0;

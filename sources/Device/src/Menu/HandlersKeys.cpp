@@ -7,6 +7,7 @@
 #include "Display/Display_Primitives.h"
 #include "Display/Painter.h"
 #include "FPGA/FPGA.h"
+#include "FPGA/FPGA_Settings.h"
 #include "Hardware/Timer.h"
 #include "Menu/Menu.h"
 #include "Menu/Pages/Include/PageChannels.h"
@@ -296,13 +297,13 @@ static void OnChangeParameterTime(pFuncVI func, int delta)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void TShiftLess()
 {
-    OnChangeParameterTime(FPGA::TShiftChange, -1);
+    OnChangeParameterTime(FPGA::Settings::TShiftChange, -1);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void TShiftMore()
 {
-    OnChangeParameterTime(FPGA::TShiftChange, 1);
+    OnChangeParameterTime(FPGA::Settings::TShiftChange, 1);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
