@@ -31,7 +31,6 @@ namespace Device
     bool InModeTester();
 
     bool InModeMultimeter();
-
     /// Устанавливает режим работы
     void SetMode(Mode::E mode);
 };

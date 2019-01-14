@@ -33,6 +33,8 @@ static bool SetCurrentMode(const PageBase *page, Device::Mode::E mode);
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void Device::Init()
 {
+    SetCurrentMode();
+
     Hardware::Init();
 
     VCP::Init();
@@ -58,8 +60,6 @@ void Device::Init()
     Multimeter::Init();
 
     FDrive::Init();
-
-    SetCurrentMode();
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -123,6 +123,7 @@ Device::Mode::E Device::CurrentMode()
 void Device::SetMode(Mode::E mode)
 {
     currentMode = mode;
+
     if(currentMode == Mode::Tester)
     {
         Tester::Enable();

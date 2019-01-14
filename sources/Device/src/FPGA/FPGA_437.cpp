@@ -95,20 +95,20 @@ void FPGA::Init()
         ERROR_HANDLER();
     }
 
-    DataStorage::Init();
+    DataStorage::Init(Device::CurrentMode());
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void FPGA::LoadSettings()
 {
-    hardware.LoadRanges();
-    hardware.LoadRShift(Chan::A);
-    hardware.LoadRShift(Chan::B);
-    hardware.LoadTrigSourceInput();
-    hardware.LoadTrigLev();
-    hardware.LoadTBase();
-    hardware.LoadTShift();
-    hardware.LoadCalibratorMode();
+    Settings::LoadRanges();
+    Settings::LoadRShift(Chan::A);
+    Settings::LoadRShift(Chan::B);
+    Settings::LoadTrigSourceInput();
+    Settings::LoadTrigLev();
+    Settings::LoadTBase();
+    Settings::LoadTShift();
+    Settings::LoadCalibratorMode();
     LoadHoldfOff();
 
     isRunning = false;
@@ -129,7 +129,7 @@ void FPGA::LoadHoldfOff()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void HardwareFPGA::LoadRShift(Chan::E ch)
+void FPGA::Settings::LoadRShift(Chan::E ch)
 {
     LAST_AFFECTED_CH = ch;
 
@@ -146,7 +146,7 @@ void HardwareFPGA::LoadRShift(Chan::E ch)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void HardwareFPGA::LoadRanges()
+void FPGA::Settings::LoadRanges()
 {
     uint16 value = (uint16)(ValueForRange(Chan::B) + (ValueForRange(Chan::A) << 8));
 

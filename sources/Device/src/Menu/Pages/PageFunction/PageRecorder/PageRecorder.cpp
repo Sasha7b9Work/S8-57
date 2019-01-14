@@ -23,7 +23,7 @@ DEF_CHOICE_2( cShow,                                                            
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-static void OnEnterExit_Recorder(bool enter)
+static void OnOpenClose_Recorder(bool enter)
 {
     Device::SetMode(enter ? Device::Mode::Recorder : Device::Mode::Osci);
 }
@@ -37,7 +37,7 @@ DEF_PAGE_4( pageRecorder, // -V641 // -V1027                                    
     PageFunction::PageRecorder::PageSource::pointer,    ///< ÔÓÍÊÖÈß - ÐÅÃÈÑÒÐÀÒÎÐ - ÈÑÒÎ×ÍÈÊ
     PageFunction::PageRecorder::PageRecord::pointer,    ///< ÔÓÍÊÖÈß - ÐÅÃÈÑÒÐÀÒÎÐ - ÇÀÏÈÑÜ
     PageFunction::PageRecorder::PageShow::pointer,      ///< ÔÓÍÊÖÈß - ÐÅÃÈÑÒÐÀÒÎÐ - ÏÐÎÑÌÎÒÐ
-    Page::Name::Function_Recorder, PageFunction::pointer, FuncActive, OnEnterExit_Recorder, FuncDrawPage, FuncRegSetPage
+    Page::Name::Function_Recorder, PageFunction::pointer, FuncActive, OnOpenClose_Recorder, FuncDrawPage, FuncRegSetPage
 )
 
 const PageBase *PageFunction::PageRecorder::pointer = &pageRecorder;

@@ -23,7 +23,6 @@
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-HardwareFPGA FPGA::hardware;
 static ADC_HandleTypeDef handleADC;
 uint16 FPGA::valueADC = 0;
 
@@ -181,7 +180,7 @@ void FPGA::ForTester::Start() // -V2506
 
     SET_TBASE = TBase::_500us;
 
-    hardware.LoadTBase();
+    Settings::LoadTBase();
     
     FSMC::WriteToFPGA16(WR_POST_LO, (uint16)(~(400 + 1)));
     FSMC::WriteToFPGA16(WR_PRED_LO, (uint16)(~(0+ 3)));
@@ -456,7 +455,7 @@ void FPGA::ChangeRange(Chan::E ch, int delta)
     {
         Math::LimitationDecrease<uint8>((uint8 *)(&SET_RANGE(ch)), 0);  // -V206
     }
-    hardware.LoadRanges();
+    Settings::LoadRanges();
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -478,7 +477,7 @@ void FPGA::TBaseChange(int delta) // -V2506
         Math::LimitationDecrease<uint8>((uint8 *)(&SET_TBASE), 0); // -V206
     }
 
-    hardware.LoadTBase();
+    Settings::LoadTBase();
     Start();
 }
 
@@ -487,7 +486,7 @@ void FPGA::RShiftChange(Chan::E ch, int delta)
 {
     Math::AdditionThisLimitation<uint16>(&SET_RSHIFT(ch), STEP_RSHIFT * delta, RShift::MIN, RShift::MAX);
 
-    HardwareFPGA::LoadRShift(ch);
+    Settings::LoadRShift(ch);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -495,7 +494,7 @@ void FPGA::TrigLevChange(int delta)
 {
     Math::AdditionThisLimitation<uint16>(&SET_TRIGLEV_SOURCE, STEP_TRIGLEV * delta, Trig::MIN, Trig::MAX);
 
-    HardwareFPGA::LoadTrigLev();
+    Settings::LoadTrigLev();
 
     Trig::NeedForDraw(2000);
 }
@@ -524,7 +523,7 @@ GPIO_TypeDef *FPGA::GetPort(Pin::E pin)
 #endif
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-uint8 HardwareFPGA::ValueForRange(Chan::E ch) // -V2506
+uint8 FPGA::Settings::ValueForRange(Chan::E ch) // -V2506
 {
     static const uint8 datas[ModeCouple::Size] =
     {
@@ -596,7 +595,7 @@ void FPGA::WriteRegisters(Pin::E cs, uint16 value)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void HardwareFPGA::LoadTrigLev()
+void FPGA::Settings::LoadTrigLev()
 {
     /// \todo Здесь много лишних движений. Нужно что-то сделать с вводом SET_TRIGLEV_SOURCE
     uint16 value = (uint16)((Trig::MAX + Trig::MIN) - SET_TRIGLEV_SOURCE);
@@ -630,7 +629,7 @@ void FPGA::ResetPin(Pin::E pin)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void HardwareFPGA::LoadTShift()
+void FPGA::Settings::LoadTShift()
 {
     FPGA::post = (uint16)(SET_TSHIFT - TShift::Min());
     int Pred = (int)FPGA::NumPoints() - (int)FPGA::post;
@@ -653,7 +652,7 @@ void FPGA::SetRShift(Chan::E ch, uint16 rShift)
 {
     Math::Limitation<uint16>(&rShift, RShift::MIN, RShift::MAX);
     SET_RSHIFT(ch) = rShift;
-    HardwareFPGA::LoadRShift(ch);
+    Settings::LoadRShift(ch);
 }
 
 #ifdef _WIN32
@@ -662,7 +661,7 @@ void FPGA::SetRShift(Chan::E ch, uint16 rShift)
 #endif
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void HardwareFPGA::LoadTBase()
+void FPGA::Settings::LoadTBase()
 {
     static const uint8 values[TBase::Number] =
     {
@@ -709,23 +708,15 @@ void HardwareFPGA::LoadTBase()
 #pragma warning(pop)
 #endif
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-/*
-void FPGA::LoadTrigMode()
-{
-
-}
-*/
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void FPGA::LoadTrigInput()
 {
-    hardware.LoadTrigSourceInput();
+    Settings::LoadTrigSourceInput();
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void HardwareFPGA::LoadTrigSource()
+void FPGA::Settings::LoadTrigSource()
 {
     LoadTrigSourceInput();
 }
@@ -746,14 +737,14 @@ void FPGA::SetTShift(int tShift)
 {
     SET_TSHIFT.Set(tShift);
 
-    hardware.LoadTShift();
+    Settings::LoadTShift();
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void FPGA::SetModeCouple(Chan::E ch, ModeCouple::E modeCoupe)
 {
     SET_COUPLE(ch) = modeCoupe;
-    hardware.LoadRanges();
+    Settings::LoadRanges();
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -781,9 +772,9 @@ void FPGA::SetENumSignalsInSec(int /*numSigInSec*/)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void FPGA::Reset()
 {
-    DataStorage::Init();
+    DataStorage::Init(Device::CurrentMode());
 
-    hardware.LoadTShift();
+    Settings::LoadTShift();
 
     LoadRegUPR();
 }
@@ -811,7 +802,7 @@ void FPGA::LoadRegUPR()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void HardwareFPGA::LoadCalibratorMode()
+void FPGA::Settings::LoadCalibratorMode()
 {
     FPGA::LoadRegUPR();
 }
@@ -822,24 +813,9 @@ void FPGA::EnableRecorderMode(bool)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-/*
-void FPGA::SetTBase(TBase tBase)
-{
-}
-*/
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void FPGA::FindAndSetTrigLevel()
 {
 }
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-/*
-StateWorkFPGA FPGA::GetStateWork()
-{
-    return fpgaStateWork;
-}
-*/
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 bool FPGA::GetFlag::DATA_READY()
@@ -920,7 +896,7 @@ void FPGA::SetValueADC(uint16 value)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void HardwareFPGA::LoadTrigSourceInput()
+void FPGA::Settings::LoadTrigSourceInput()
 {
     static const uint8 datas[3][2] =
     {//       A                 B

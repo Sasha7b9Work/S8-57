@@ -94,7 +94,7 @@ DEF_GOVERNOR(gRand_AddTimeShift,                                                
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void OnChanged_Rand_Pretriggered()
 {
-    FPGA::hardware.LoadTShift();
+    FPGA::Settings::LoadTShift();
 }
 
 DEF_GOVERNOR(gRand_Pretriggered,                                                                      //--- ОТЛАДКА - РАНД-ТОР - Предзапуск ---

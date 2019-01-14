@@ -35,33 +35,36 @@ struct Pin
 #define FPGA_IN_STATE_WAIT (FPGA::fpgaStateWork == StateWorkFPGA_Wait)
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-struct HardwareFPGA
+namespace FPGA
 {
-public:
-    static void LoadTrigSource();
-    /// Установить в соотвествующие положения выводы, отвечающие за источник и вход синхронизации
-    static void LoadTrigSourceInput();
 
-    static void LoadRanges();
+    struct Settings
+    {
+    public:
+        static void LoadTrigSource();
+        /// Установить в соотвествующие положения выводы, отвечающие за источник и вход синхронизации
+        static void LoadTrigSourceInput();
 
-    static void LoadRShift(Chan::E ch);
+        static void LoadRanges();
 
-    static void LoadTrigLev();
+        static void LoadRShift(Chan::E ch);
 
-    static void LoadTBase();
+        static void LoadTrigLev();
 
-    static void LoadTShift();
-    /// Включить/выключить калибратор.
-    static void LoadCalibratorMode();
+        static void LoadTBase();
 
-private:
-    static uint8 ValueForRange(Chan::E ch);
-};
+        static void LoadTShift();
+        /// Включить/выключить калибратор.
+        static void LoadCalibratorMode();
+
+    private:
+        static uint8 ValueForRange(Chan::E ch);
+    };
+
+}
 
 namespace FPGA
 {
-    extern HardwareFPGA hardware;
-
     void Init();
 
     void Update();
