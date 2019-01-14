@@ -9,7 +9,6 @@
 #include "FPGA/FPGA.h"
 #include "FPGA/FPGA_Settings.h"
 #include "FPGA/FPGAMath.h"
-#include "FPGA/RShift.h"
 #include "Hardware/CPU.h"
 #include "Hardware/Hardware.h"
 #include "Hardware/Sound.h"
@@ -38,6 +37,7 @@ using Display::Text;
 using Display::VLine;
 
 using FPGA::SET::Range;
+using FPGA::SET::RShift;
 
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

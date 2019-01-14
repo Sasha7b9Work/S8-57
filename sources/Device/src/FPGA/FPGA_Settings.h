@@ -66,5 +66,21 @@ namespace FPGA
             pString Name() const;
             pString ToString(Divider::E divider);
         };
+
+        class RShift
+        {
+        public:
+            static const int MIN = 20;
+            static const int MAX = 980;
+            static const int ZERO = 500;
+
+            static void Draw();
+
+            static String ToString(uint16 rShiftRel, FPGA::SET::Range::E range, Divider::E divider);
+
+        private:
+
+            static void Draw(Chan::E ch);
+        };
     };
 }

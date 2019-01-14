@@ -1291,11 +1291,6 @@
               <FilePath>.\src\FPGA\RShift.cpp</FilePath>
             </File>
             <File>
-              <FileName>RShift.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\FPGA\RShift.h</FilePath>
-            </File>
-            <File>
               <FileName>TrigLev.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\FPGA\TrigLev.cpp</FilePath>

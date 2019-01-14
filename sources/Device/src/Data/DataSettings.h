@@ -1,4 +1,5 @@
 #pragma once
+#include "FPGA/FPGA_Settings.h"
 #include "FPGA/FPGATypes.h"
 
 

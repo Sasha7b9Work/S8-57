@@ -5,7 +5,7 @@
 
 
 /// На столько единиц нужно изменить значение смещения, чтобы маркер смещения по напряжению передвинулся на одну точку.
-#define STEP_RSHIFT     (((RShift::MAX - RShift::MIN) / 24) / 20)
+#define STEP_RSHIFT     (((FPGA::SET::RShift::MAX - FPGA::SET::RShift::MIN) / 24) / 20)
 #define STEP_TRIGLEV    STEP_RSHIFT
 
 struct Pin

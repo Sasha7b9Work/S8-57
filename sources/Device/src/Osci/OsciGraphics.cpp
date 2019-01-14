@@ -13,7 +13,6 @@
 #include "Settings/Settings.h"
 #include "FPGA/FPGA.h"
 #include "FPGA/FPGATypes.h"
-#include "FPGA/RShift.h"
 #include "FrequencyCounter.h"
 #endif
 
@@ -24,6 +23,8 @@ using Display::Line;
 using Display::Point;
 using Display::Rectangle;
 using Display::Region;
+
+using FPGA::SET::RShift;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
