@@ -139,12 +139,12 @@ void Display::Char::Draw10SymbolsInRect(int x, int y)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-Display::Text::Text(const char *_text, uint8 _size) : text(_text), size(_size)
+Display::Text::Text(const char *_text, uint8 _size) : text(_text), sizeOfType(_size)
 {
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-Display::Text::Text(const String &string, uint8 _size) : size(_size)
+Display::Text::Text(const String &string, uint8 _size) : sizeOfType(_size)
 {
     text = string.CString();
 }
@@ -152,7 +152,7 @@ Display::Text::Text(const String &string, uint8 _size) : size(_size)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 int Display::Text::Draw(int x, int y, Color color)
 {
-    if (size != 1)
+    if (sizeOfType != 1)
     {
         DrawBig(x, y, color);
     }
@@ -172,7 +172,7 @@ void Display::Text::DrawBig(int x, int y, Color color)
     Color::SetCurrent(color);
 
     uint numSymbols = std::strlen(text); //-V2513
-    uint8 buffer[MAX_SIZE_BUFFER] = { Command::Paint_DrawBigText, (uint8)x, (uint8)(x >> 8), (uint8)y, size, (uint8)(numSymbols) };
+    uint8 buffer[MAX_SIZE_BUFFER] = { Command::Paint_DrawBigText, (uint8)x, (uint8)(x >> 8), (uint8)y, sizeOfType, (uint8)(numSymbols) };
 
     uint8 *pointer = &buffer[6];
 
@@ -292,11 +292,9 @@ int Display::Text::DrawSmall(int x, int y, Color color)
 
     uint8 buffer[MAX_SIZE_BUFFER] = { Command::Paint_DrawText, (uint8)x, (uint8)(x >> 8), (uint8)y, (uint8)std::strlen(text) };
 
-    uint8 *pointer = &buffer[5];
-
-    while (*text)
+    for (int i = 0; text[i] != 0; i++)
     {
-        *pointer++ = (uint8)*text++;
+        buffer[5 + i] = (uint8)text[i];
     }
 
     FSMC::WriteToPanel(buffer, 1 + 2 + 1 + 1 + std::strlen(text));

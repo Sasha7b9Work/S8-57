@@ -126,7 +126,8 @@ namespace Display
         void DrawInCenterRectOnBackground(int x, int y, int width, int height, Color colorText, int widthBorder, Color colorBackground);
     private:
         const char *text;
-        uint8 size;
+        ///  егль. “олько в отличие от насто€щего он показывает, во сколько раз размер пиксел€ на экране больше единичного пиксел€
+        uint8 sizeOfType;
         int DrawCharWithLimitation(int eX, int eY, char _symbol, int limitX, int limitY, int limitWidth, int limitHeight);
         void DrawBig(int x, int y, Color color);
         int DrawSmall(int x, int y, Color color);
