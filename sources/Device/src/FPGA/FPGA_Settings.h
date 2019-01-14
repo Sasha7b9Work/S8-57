@@ -46,8 +46,6 @@ namespace FPGA
 
         void TrigLevChange(int delta);
 
-        void LoadTrigLev();
-
         void LoadTrigPolarity();
 
         void SetTShift(int tShift);
@@ -181,6 +179,11 @@ namespace FPGA
             static void DrawOnGrid();
             /// После вызова этой функции уровень синхронизации будет отрисовываться поверх сигнала в течение timMS миллисекунд
             static void NeedForDraw(uint timeMS);
+
+            struct Level
+            {
+                static void Load();
+            };
 
             /// Источник синхронизации
             struct Source

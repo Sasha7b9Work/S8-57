@@ -23,7 +23,7 @@ void FPGA::SET::Load()
     RShift::Load(Chan::A);
     RShift::Load(Chan::B);
     LoadTrigSourceInput();
-    LoadTrigLev();
+    Trig::Level::Load();
     TBase::Load();
     LoadTShift();
     LoadCalibratorMode();
@@ -110,7 +110,7 @@ void FPGA::SET::RShift::Load(Chan::E ch)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void FPGA::SET::LoadTrigLev()
+void FPGA::SET::Trig::Level::Load()
 {
     /// \todo Здесь много лишних движений. Нужно что-то сделать с вводом SET_TRIGLEV_SOURCE
     uint16 value = (uint16)((Trig::MAX + Trig::MIN) - SET_TRIGLEV_SOURCE);
@@ -318,7 +318,7 @@ void FPGA::SET::TrigLevChange(int delta)
 {
     Math::AdditionThisLimitation<uint16>(&SET_TRIGLEV_SOURCE, STEP_TRIGLEV * delta, Trig::MIN, Trig::MAX);
 
-    LoadTrigLev();
+    Trig::Level::Load();
 
     Trig::NeedForDraw(2000);
 }
