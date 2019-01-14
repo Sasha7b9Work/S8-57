@@ -7,19 +7,21 @@ namespace FPGA
     {
         void Load();
 
-        void LoadTrigSource();
-        /// Установить в соотвествующие положения выводы, отвечающие за источник и вход синхронизации
-        void LoadTrigSourceInput();
-
-        void ChangeRange(Chan::E ch, int delta);
-
-        void LoadRanges();
+        namespace Range
+        {
+            void Change(Chan::E ch, int delta);
+            void Load();
+        }
 
         void RShiftChange(Chan::E ch, int delta);
 
         void SetRShift(Chan::E ch, uint16 rShift);
 
         void LoadRShift(Chan::E ch);
+
+        void LoadTrigSource();
+        /// Установить в соотвествующие положения выводы, отвечающие за источник и вход синхронизации
+        void LoadTrigSourceInput();
 
         void TrigLevChange(int delta);
 
@@ -36,6 +38,8 @@ namespace FPGA
         void LoadTShift();
 
         void TShiftChange(int delta);
+
+        void SetModeCouple(Chan::E ch, ModeCouple::E couple);
         /// Включить/выключить калибратор.
         void LoadCalibratorMode();
         /// Установить значение удержания синхронизации

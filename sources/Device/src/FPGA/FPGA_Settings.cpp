@@ -19,7 +19,7 @@ static uint8 ValueForRange(Chan::E ch);
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void FPGA::Settings::Load()
 {
-    LoadRanges();
+    Range::Load();
     LoadRShift(Chan::A);
     LoadRShift(Chan::B);
     LoadTrigSourceInput();
@@ -54,17 +54,17 @@ void FPGA::Settings::LoadTrigSourceInput()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void FPGA::Settings::LoadRanges()
+void FPGA::Settings::Range::Load()
 {
-    uint16 value = (uint16)(ValueForRange(Chan::B) + (ValueForRange(Chan::A) << 8));
+    uint16 val = (uint16)(ValueForRange(Chan::B) + (ValueForRange(Chan::A) << 8));
 
-    FPGA::WriteRegisters(Pin::SPI3_CS2, value);
+    FPGA::WriteRegisters(Pin::SPI3_CS2, val);
 
     PAUSE_ON_MS(10);                // Задержка нужна, чтобы импульсные реле успели отработать
 
     FPGA::WriteRegisters(Pin::SPI3_CS2, 0);    // Записываем ноль, чтобы реле не потребляли энергии
 
-    DEF_STRUCT(StructRange, uint8) vals[Range::Number] =
+    DEF_STRUCT(StructRange, uint8) vals[::Range::Number] =
     {
         StructRange(BIN_U8(00000000)),  // 2mV      // -V2501
         StructRange(BIN_U8(00000001)),  // 5mV      // -V2501
@@ -269,17 +269,17 @@ void FPGA::Settings::SetTShift(int tShift)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void FPGA::Settings::ChangeRange(Chan::E ch, int delta)
+void FPGA::Settings::Range::Change(Chan::E ch, int delta)
 {
     if (delta > 0)
     {
-        Math::LimitationIncrease<uint8>((uint8 *)(&SET_RANGE(ch)), (uint8)(Range::Number - 1)); // -V206
+        Math::LimitationIncrease<uint8>((uint8 *)(&SET_RANGE(ch)), (uint8)(::Range::Number - 1)); // -V206
     }
     else
     {
         Math::LimitationDecrease<uint8>((uint8 *)(&SET_RANGE(ch)), 0);  // -V206
     }
-    LoadRanges();
+    Range::Load();
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

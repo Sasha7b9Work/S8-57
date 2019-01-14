@@ -58,9 +58,6 @@ namespace FPGA
     void Reset();
 
     void LoadRegUPR();
-
-    void SetModeCouple(Chan::E ch, ModeCouple::E couple);
-
     /// Установить относительный уровень синхронизации
     void SetTrigLev(Trig::Source::E ch, uint16 trigLev);
     /// Установить количество считываемых сигналов в секунду

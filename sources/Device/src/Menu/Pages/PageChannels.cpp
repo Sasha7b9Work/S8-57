@@ -5,6 +5,7 @@
 #include "Menu/Pages/Include/PageChannels.h"
 #include "Display/Display.h"
 #include "FPGA/FPGA.h"
+#include "FPGA/FPGA_Settings.h"
 #include "Menu/MenuItems.h"
 #include "Keyboard/Keyboard.h"
 #include "Settings/Settings.h"
@@ -33,12 +34,6 @@ static const char chanCoupleEn[] =  "Sets a type of communication with a signal 
                                     "2. \"DC\" - closed input.\n"
                                     "3. \"Ground\" - input is connected to the ground.";
 
-//static const char chanInverseRu[] = "При \"Вкл\" сигнал на экране будет симметрично отражён относительно U = 0В.";
-//static const char chanInverseEn[] = "When \"Enable\" signal on the screen will be reflected symmetrically with respect to U = 0V.";
-
-//static const char chanDividerRu[] = "Ослабление сигнала:\n\"Выкл\" - сигнал не ослабляется.\n\"x10\" - сигнал ослабляется в 10 раз";
-//static const char chanDividerEn[] = "Attenuation: \n\"Off\" - the signal is not attenuated.\n\"x10\" - the signal is attenuated by 10 times";
-
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void PageChannelA::OnChanged_Input(bool)
 {
@@ -57,7 +52,7 @@ DEF_CHOICE_2(       cChanA_Input,                                               
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void PageChannelA::OnChanged_Couple(bool)
 {
-    FPGA::SetModeCouple(Chan::A, SET_COUPLE_A);
+    FPGA::Settings::SetModeCouple(Chan::A, SET_COUPLE_A);
 }
 
 DEF_CHOICE_3(       cChanA_Couple,                                                                                           //--- КАНАЛ 1 - Связь ---
@@ -120,7 +115,7 @@ DEF_CHOICE_2( cChanB_Input,                                                     
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void PageChannelB::OnChanged_Couple(bool)
 {
-    FPGA::SetModeCouple(Chan::B, SET_COUPLE_B);
+    FPGA::Settings::SetModeCouple(Chan::B, SET_COUPLE_B);
 }
 
 DEF_CHOICE_3( cChanB_Couple,                                                                                                                                        //--- КАНАЛ 2 - Связь ---
