@@ -39,8 +39,6 @@ namespace FPGA
     namespace SET
     {
         void Load();
-
-        void LoadTrigSource();
         /// Установить в соотвествующие положения выводы, отвечающие за источник и вход синхронизации
         void LoadTrigSourceInput();
 
@@ -194,6 +192,8 @@ namespace FPGA
                     B,    /// Канал 2
                     Ext   /// Внешняя
                 } value;
+
+                static void Load();
             };
 
             /// Режим запуска.
