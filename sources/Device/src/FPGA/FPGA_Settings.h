@@ -19,8 +19,6 @@ namespace FPGA
 
         void TBaseChange(int delta);
 
-        void LoadTBase();
-
         void SetTShift(int tShift);
 
         void LoadTShift();
@@ -58,7 +56,9 @@ namespace FPGA
             } value;
             explicit Range(E v) : value(v) {};
             pString Name() const;
+
             pString ToString(Divider::E divider);
+
         };
 
         struct RShift
@@ -119,8 +119,12 @@ namespace FPGA
                 Number
             } value;
             explicit TBase(E v) : value(v) {};
+
             pString Name() const;
+
             pString ToString() const;
+
+            static void Load();
 
             /// С этого значения должен включаться режим поточечного вывода
             static const E MIN_P2P = _50ms;

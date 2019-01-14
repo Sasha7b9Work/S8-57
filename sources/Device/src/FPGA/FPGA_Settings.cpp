@@ -24,7 +24,7 @@ void FPGA::SET::Load()
     RShift::Load(Chan::B);
     LoadTrigSourceInput();
     LoadTrigLev();
-    LoadTBase();
+    TBase::Load();
     LoadTShift();
     LoadCalibratorMode();
     LoadHoldfOff();
@@ -124,7 +124,7 @@ void FPGA::SET::LoadTrigLev()
 #endif
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void FPGA::SET::LoadTBase()
+void FPGA::SET::TBase::Load()
 {
     static const uint8 values[TBase::Number] =
     {
@@ -301,7 +301,7 @@ void FPGA::SET::TBaseChange(int delta) // -V2506
         Math::LimitationDecrease<uint8>((uint8 *)(&SET_TBASE), 0); // -V206
     }
 
-    LoadTBase();
+    TBase::Load();
     Start();
 }
 
