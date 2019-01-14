@@ -815,6 +815,9 @@
     <ClInclude Include="..\..\Device\src\Display\Display_Primitives.h">
       <Filter>Display</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Device\src\Display\Display_Warnings.h">
+      <Filter>Display</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\Device\src\Display\Font\font5.inc">
