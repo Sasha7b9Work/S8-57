@@ -30,6 +30,7 @@ using Display::Text;
 
 using FPGA::SET::RShift;
 using FPGA::SET::Trig;
+using FPGA::SET::TShift;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -392,7 +393,7 @@ void Menu::ProcessingLongPressureButton()
 
         if(button == Key::Time)
         {
-            FPGA::SET::SetTShift(0);
+            TShift::Set(0);
         }
         else if(button == Key::Trig)
         {
@@ -400,11 +401,11 @@ void Menu::ProcessingLongPressureButton()
         }
         else if(button == Key::ChannelA)
         {
-            FPGA::SET::RShift::Set(Chan::A, RShift::ZERO);
+            RShift::Set(Chan::A, RShift::ZERO);
         }
         else if(button == Key::ChannelB)
         {
-            FPGA::SET::RShift::Set(Chan::B, RShift::ZERO);
+            RShift::Set(Chan::B, RShift::ZERO);
         }
         else if(button == (Key::Enter))
         {

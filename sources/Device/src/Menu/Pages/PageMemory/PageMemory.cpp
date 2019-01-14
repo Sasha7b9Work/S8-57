@@ -29,6 +29,8 @@ using Display::Char;
 using Display::Rectangle;
 using Display::Region;
 
+using FPGA::SET::TShift;
+
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 extern const PageBase pageMemory;
@@ -87,7 +89,7 @@ void PageMemory::OnChanged_Points(bool active)
     }
 
     FPGA::Reset();
-    FPGA::SET::SetTShift(SET_TSHIFT);
+    TShift::Set(SET_TSHIFT);
     FPGA::Reset();
 }
 

@@ -40,8 +40,6 @@ namespace FPGA
     {
         void Load();
 
-        void SetTShift(int tShift);
-
         void LoadTShift();
 
         void TShiftChange(int delta);
@@ -252,7 +250,7 @@ namespace FPGA
 
             int InPoints();
 
-            void Set(int tShift);
+            static void Set(int tShift);
 
             operator int() const { return value; };
 
@@ -260,7 +258,7 @@ namespace FPGA
 
         private:
 
-            int value;
+            static int value;
         };
     };
 }
