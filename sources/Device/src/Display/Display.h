@@ -62,8 +62,8 @@ namespace Display
     void Init();
 
     void Update();
-
-    //static void SetKey(Key::E key);
+    /// brightness == [0...100]
+    void SetBrightness(int16 brightness);
 
     void RemoveAddDrawFunction();
 
@@ -85,13 +85,9 @@ namespace Display
 
     void ChangedRShiftMarkers(bool active);
 
-    //static void Clear();
-
     extern Key::E key;
 
     void SetOrientation(Orientation orientation);
-    /// Возвращает режим усреднения
-    //static ModeAveraging::E GetModeAveraging();
     /// Устанавливает ограничение частоты кадров
     static void SetNumSignalsInS(int maxFPS);
     /// Возвращает число точек сглаживающего фильтра (режим ДИСПЛЕЙ - Сглаживание)
@@ -104,10 +100,4 @@ namespace Display
     int TimeMenuAutoHide();
     /// Если экран разделён на две части и основной сигнал выводится сверху - например, в режиме вывода спектра
     bool IsSeparate();
-    /// brightness = 1..100
-    static void SetBrightness(int16 brightness);
-
-    //static int NumAverage();
-    /// Это смещение экрана по памяти в режиме пикового детектора оно будет в два раза меньше, чем байт, потому что каждая точка представлена двумя байтами
-    //static int ShiftInMemoryInPoints();
 };

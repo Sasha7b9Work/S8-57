@@ -85,19 +85,3 @@ void Painter::SaveScreenToDrive()
 {
     needSaveScreen = true;
 }
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Painter::SetBrightnessDisplay(int16 brightness)
-{
-    volatile float recValue = 1601.0F;
-    if (brightness < 100)
-    {
-        recValue = 64.0F + (600.0F - 63.0F) / 100.0F / 100.0F * brightness * brightness;
-    }
-    /*
-    uint8 command[4] = {SET_BRIGHTNESS};
-    WRITE_SHORT(1, recValue);
-
-    SendToDisplay(command, 4);
-    */
-}

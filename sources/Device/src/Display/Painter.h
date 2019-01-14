@@ -14,8 +14,6 @@ namespace Painter
     void EndScene();
 
     void SetFont(Font::Type::E typeFont);
-    /// ”становить €ркость диспле€.
-    void SetBrightnessDisplay(int16 brightness);
     /// Ќарисовать массив вертикальных линий. Ћинии рисуютс€ одна за другой. y0y1 - массив вертикальных координат.
     void DrawVLineArray(int x, int numLines, uint8 *y0y1, Color color);
     /// \brief Ќарисовать numLines вертикальных линий, состо€щих из count точек кажда€ с рассто€нием между точками delta. √оризонтальна€ координата

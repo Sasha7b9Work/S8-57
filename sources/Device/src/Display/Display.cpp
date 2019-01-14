@@ -314,14 +314,6 @@ void Display::FuncOnWaitStart(const char *text, bool eraseBackground)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-/*
-void Display::Clear()
-{
-    Region(0, 0, Display::WIDTH - 1, Display::HEIGHT - 2, Color::BACK).Draw();
-}
-*/
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Display::RemoveAddDrawFunction()
 {
     funcAdditionDraw = 0;
@@ -331,7 +323,6 @@ void Display::RemoveAddDrawFunction()
 void Display::SetOrientation(Orientation orientation)
 {
     DISPLAY_ORIENTATION = orientation;
-//    NEED_SET_ORIENTATION = 1;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -340,59 +331,6 @@ void Display::SetAddDrawFunction(pFuncVV func, uint time)
     funcAdditionDraw = func;
     Timer::SetAndStartOnce(Timer::Type::RemoveAddFunction, RemoveAddDrawFunction, time);
 }
-
-//---------------------------------------------------------------------------------------------------------------------------------------------------
-/*
-Display::ModeAveraging::E Display::GetModeAveraging() // -V2506
-{
-    if (IN_RANDOM_MODE)
-    {
-        return ModeAveraging::Accurately;
-    }
-    return MODE_AVE;
-}
-*/
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-/*
-void Display::SetNumSignalsInS(int numSignalsInS)
-{
-    ENUM_SIGNALS_IN_SEC = Tables::ENumSignalsInSecToENUM(numSignalsInS);
-}
-*/
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-/*
-int Display::NumPointSmoothing()
-{
-    
-    //if(MODE_EMS && (ENUM_SMOOTHING < ENumSmooth_4points))
-    //{
-    //    return 4;
-    //}
-    
-
-    int retValue = 0;
-    if (SMOOTHING_ENABLED)
-    {
-        retValue = ENUM_SMOOTHING + 1;
-    }
-
-    if (IN_RANDOM_MODE)
-    {
-        int numRand = 0;
-        if (NRST_NUM_SMOOTH_FOR_RAND > 1)
-        {
-            numRand = NRST_NUM_SMOOTH_FOR_RAND;
-        }
-
-        LIMIT_BELOW(retValue, numRand);
-    }
-
-
-    return retValue;
-}
-*/
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 BitSet64 Display::PointsOnDisplay()
@@ -416,6 +354,7 @@ BitSet64 Display::BytesOnDisplay()
     return retValue;
 }
 
+
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 int Display::TimeMenuAutoHide()
 {
@@ -426,56 +365,21 @@ int Display::TimeMenuAutoHide()
     return times[MENU_AUTO_HIDE] * 1000;
 }
 
+
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 bool Display::IsSeparate()
 {
     return FUNC_MODE_DRAW_IS_SEPARATE || FFT_ENABLED;
 }
 
+
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void SetBrightness(int16 brightness)
 {
     BRIGHTNESS_DISPLAY = brightness;
-    Painter::SetBrightnessDisplay(brightness);
+    Display::SetBrightness(brightness);
 }
 
-//---------------------------------------------------------------------------------------------------------------------------------------------------
-/*
-int Display::NumAverage() // -V2506
-{
-    //if (MODE_EMS && (ENUM_AVE < ENumAverage_8))
-    //{
-    //    return 8;
-    //}
-
-    if (!IN_RANDOM_MODE)
-    {
-        return NUM_AVE;
-    }
-    else if (NRST_NUM_AVE_FOR_RAND > NUM_AVE)
-    {
-        return NRST_NUM_AVE_FOR_RAND;
-    }
-    else
-    {
-        // ничего не делаем
-    }
-
-    return NUM_AVE;
-}
-*/
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-/*
-int Display::ShiftInMemoryInPoints()
-{
-    if (SET_PEAKDET_DIS)
-    {
-        return SHIFT_IN_MEMORY;
-    }
-    return SHIFT_IN_MEMORY / 2;
-}
-*/
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 int Display::ENumSignalsInSec::ToFPS() const // -V2506
@@ -483,4 +387,11 @@ int Display::ENumSignalsInSec::ToFPS() const // -V2506
     static const int fps[] = {25, 10, 5, 2, 1};
 
     return fps[value];
+}
+
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Display::SetBrightness(int16 /*brightness*/)
+{
+
 }
