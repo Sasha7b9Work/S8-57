@@ -47,8 +47,6 @@ namespace FPGA
 
     static void GiveStart();
 
-    void ChangeRange(Chan::E ch, int delta);
-
     void TBaseChange(int delta);
 
     void RShiftChange(Chan::E ch, int delta);

@@ -8,6 +8,7 @@
 #include "Hardware/FSMC.h"
 #include "Hardware/Timer.h"
 #include "Settings/Settings.h"
+#include "Utils/Math.h"
 #endif
 
 
@@ -265,4 +266,18 @@ void FPGA::Settings::SetTShift(int tShift)
     SET_TSHIFT.Set(tShift);
 
     LoadTShift();
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void FPGA::Settings::ChangeRange(Chan::E ch, int delta)
+{
+    if (delta > 0)
+    {
+        Math::LimitationIncrease<uint8>((uint8 *)(&SET_RANGE(ch)), (uint8)(Range::Number - 1)); // -V206
+    }
+    else
+    {
+        Math::LimitationDecrease<uint8>((uint8 *)(&SET_RANGE(ch)), 0);  // -V206
+    }
+    Settings::LoadRanges();
 }

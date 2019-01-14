@@ -11,6 +11,8 @@ namespace FPGA
         /// Установить в соотвествующие положения выводы, отвечающие за источник и вход синхронизации
         void LoadTrigSourceInput();
 
+        void ChangeRange(Chan::E ch, int delta);
+
         void LoadRanges();
 
         void LoadRShift(Chan::E ch);
