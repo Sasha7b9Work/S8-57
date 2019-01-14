@@ -314,7 +314,7 @@ void FPGA::SET::RShift::Change(Chan::E ch, int delta)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void FPGA::SET::TrigLevChange(int delta)
+void FPGA::SET::Trig::Level::Change(int delta)
 {
     Math::AdditionThisLimitation<uint16>(&SET_TRIGLEV_SOURCE, STEP_TRIGLEV * delta, Trig::MIN, Trig::MAX);
 

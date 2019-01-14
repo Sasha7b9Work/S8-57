@@ -40,8 +40,6 @@ namespace FPGA
     {
         void Load();
 
-        void TrigLevChange(int delta);
-
         void SetTShift(int tShift);
 
         void LoadTShift();
@@ -177,6 +175,8 @@ namespace FPGA
             struct Level
             {
                 static void Load();
+
+                static void Change(int delta);
             };
 
             /// Источник синхронизации
