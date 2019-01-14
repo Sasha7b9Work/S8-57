@@ -4,6 +4,7 @@
 #include "SettingsDebug.h"
 #include "SettingsNRST.h"
 #include "SettingsService.h"
+#include "SettingsTime.h"
 #include "Tester/Tester.h"
 #include "Osci/Cursors.h"
 #include "Osci/FrequencyCounter.h"

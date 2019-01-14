@@ -1300,11 +1300,6 @@
               <FileType>8</FileType>
               <FilePath>.\src\FPGA\TShift.cpp</FilePath>
             </File>
-            <File>
-              <FileName>TShift.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\FPGA\TShift.h</FilePath>
-            </File>
           </Files>
         </Group>
         <Group>
