@@ -19,7 +19,7 @@ static uint8 ValueForRange(Chan::E ch);
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void FPGA::Settings::Load()
 {
-    Range::Load();
+    RangesLoad();
     LoadRShift(Chan::A);
     LoadRShift(Chan::B);
     LoadTrigSourceInput();
@@ -54,7 +54,7 @@ void FPGA::Settings::LoadTrigSourceInput()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void FPGA::Settings::Range::Load()
+void FPGA::Settings::RangesLoad()
 {
     uint16 val = (uint16)(ValueForRange(Chan::B) + (ValueForRange(Chan::A) << 8));
 
@@ -269,7 +269,7 @@ void FPGA::Settings::SetTShift(int tShift)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void FPGA::Settings::Range::Change(Chan::E ch, int delta)
+void FPGA::Settings::RangeChange(Chan::E ch, int delta)
 {
     if (delta > 0)
     {
@@ -279,7 +279,7 @@ void FPGA::Settings::Range::Change(Chan::E ch, int delta)
     {
         Math::LimitationDecrease<uint8>((uint8 *)(&SET_RANGE(ch)), 0);  // -V206
     }
-    Range::Load();
+    RangesLoad();
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

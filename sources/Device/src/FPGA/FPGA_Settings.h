@@ -7,11 +7,9 @@ namespace FPGA
     {
         void Load();
 
-        namespace Range
-        {
-            void Change(Chan::E ch, int delta);
-            void Load();
-        }
+        void RangeChange(Chan::E ch, int delta);
+
+        void RangesLoad();
 
         void RShiftChange(Chan::E ch, int delta);
 
