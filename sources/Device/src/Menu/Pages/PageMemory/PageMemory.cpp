@@ -109,12 +109,12 @@ DEF_CHOICE_5( cPoints,                                                          
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void Draw_Drive_Manager_Tab(int x, int y)
 {
-    Painter::SetFont(Font::Type::_UGO2);
+    Font::SetCurrent(Font::Type::_UGO2);
 
     //Painter::Draw4SymbolsInRect(x + 2, y + 1, SYMBOL_TAB);
     Char(SYMBOL_TAB).Draw4SymbolsInRect(x + 2, y + 1);
 
-    Painter::SetFont(Font::Type::_8);
+    Font::SetCurrent(Font::Type::_8);
 }
 
 DEF_SMALL_BUTTON( bDrive_Manager_Tab,                                                                                                             //--- œ¿Ãﬂ“‹ - ¬Õ≈ÿÕ «” -  ¿“¿ÀŒ√ - Tab ---
@@ -127,12 +127,12 @@ DEF_SMALL_BUTTON( bDrive_Manager_Tab,                                           
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void Draw_Drive_Manager_LevelUp(int x, int y)
 {
-    Painter::SetFont(Font::Type::_UGO2);
+    Font::SetCurrent(Font::Type::_UGO2);
 
     //Painter::Draw4SymbolsInRect(x + 2, y + 1, '\x48');
     Char('\x48').Draw4SymbolsInRect(x + 2, y + 1);
 
-    Painter::SetFont(Font::Type::_8);
+    Font::SetCurrent(Font::Type::_8);
 }
 
 DEF_SMALL_BUTTON( bDrive_Manager_LevelUp,                                                                                           //--- œ¿Ãﬂ“‹ - ¬Õ≈ÿÕ «” -  ¿“¿ÀŒ√ - ¬˚ÈÚË ËÁ Í‡Ú‡ÎÓ„‡ ---
@@ -145,12 +145,12 @@ DEF_SMALL_BUTTON( bDrive_Manager_LevelUp,                                       
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void Draw_Drive_Manager_LevelDown(int x, int y)
 {
-    Painter::SetFont(Font::Type::_UGO2);
+    Font::SetCurrent(Font::Type::_UGO2);
 
     //Painter::Draw4SymbolsInRect(x + 2, y + 2, '\x4a');
     Char('\x4a').Draw4SymbolsInRect(x + 2, y + 2);
 
-    Painter::SetFont(Font::Type::_8);
+    Font::SetCurrent(Font::Type::_8);
 }
 
 DEF_SMALL_BUTTON( bDrive_Manager_LevelDown,                                                                                           //--- œ¿Ãﬂ“‹ - ¬Õ≈ÿÕ «” -  ¿“¿ÀŒ√ - ¬ÓÈÚË ‚ Í‡Ú‡ÎÓ„ ---
@@ -231,12 +231,12 @@ static void OnPress_Drive_Mask_Delete()
 
 static void Draw_Delete(int x, int y)
 {
-    Painter::SetFont(Font::Type::_UGO2);
+    Font::SetCurrent(Font::Type::_UGO2);
 
     //Painter::Draw4SymbolsInRect(x + 2, y + 1, SYMBOL_DELETE);
     Char(SYMBOL_DELETE).Draw4SymbolsInRect(x + 2, y + 1);
 
-    Painter::SetFont(Font::Type::_8);
+    Font::SetCurrent(Font::Type::_8);
 }
 
 DEF_SMALL_BUTTON( bDrive_Mask_Delete,                                                                                                           //--- œ¿Ãﬂ“‹ - ¬Õ≈ÿÕ «” - Ã¿— ¿ - ”‰‡ÎËÚ¸ ---
@@ -265,12 +265,12 @@ static void OnPress_Drive_Mask_Backspace()
 
 static void Draw_Backspace(int x, int y)
 {
-    Painter::SetFont(Font::Type::_UGO2);
+    Font::SetCurrent(Font::Type::_UGO2);
 
     //Painter::Draw4SymbolsInRect(x + 2, y + 1, SYMBOL_BACKSPACE);
     Char(SYMBOL_BACKSPACE).Draw(x + 2, y + 1);
 
-    Painter::SetFont(Font::Type::_8);
+    Font::SetCurrent(Font::Type::_8);
 }
 
 DEF_SMALL_BUTTON( bDrive_Mask_Backspace,                                                                                                      //--- œ¿Ãﬂ“‹ - ¬Õ≈ÿÕ «” - Ã¿— ¿ - Backspace ---
@@ -319,9 +319,9 @@ static void OnPress_Drive_Mask_Insert()
 
 static void Draw_Insert(int x, int y)
 {
-    Painter::SetFont(Font::Type::_UGO2);
+    Font::SetCurrent(Font::Type::_UGO2);
     Char(SYMBOL_INSERT).Draw4SymbolsInRect(x + 2, y + 2);
-    Painter::SetFont(Font::Type::_8);
+    Font::SetCurrent(Font::Type::_8);
 }
 
 DEF_SMALL_BUTTON( bDrive_Mask_Insert,                                                                                                          //--- œ¿Ãﬂ“‹ - ¬Õ≈ÿÕ «” - Ã¿— ¿ - ¬ÒÚ‡‚ËÚ¸ ---
@@ -696,9 +696,9 @@ static void Draw_SetName_Save(int x, int y)
 {
     if (FDrive::IsConnected())
     {
-        Painter::SetFont(Font::Type::_UGO2);
+        Font::SetCurrent(Font::Type::_UGO2);
         Char(SYMBOL_FLASH_DRIVE_BIG).Draw4SymbolsInRect(x + 2, y + 1);
-        Painter::SetFont(Font::Type::_8);
+        Font::SetCurrent(Font::Type::_8);
     }
 }
 

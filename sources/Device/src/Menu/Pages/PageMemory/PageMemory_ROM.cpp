@@ -42,22 +42,22 @@ static void OnPress_Internal_ShowAlways()
 
 static void Draw_Internal_ShowAlways_Yes(int x, int y)
 {
-    Painter::SetFont(Font::Type::_UGO2);
+    Font::SetCurrent(Font::Type::_UGO2);
 
     //Painter::Draw4SymbolsInRect(x + 2, y + 1, '\x66');
     Char('\x66').Draw4SymbolsInRect(x + 2, y + 1);
 
-    Painter::SetFont(Font::Type::_8);
+    Font::SetCurrent(Font::Type::_8);
 }
 
 static void Draw_Internal_ShowAlways_No(int x, int y)
 {
-    Painter::SetFont(Font::Type::_UGO2);
+    Font::SetCurrent(Font::Type::_UGO2);
 
     //Painter::Draw4SymbolsInRect(x + 2, y + 1, '\x68');
     Char('\x68').Draw4SymbolsInRect(x + 2, y + 1);
 
-    Painter::SetFont(Font::Type::_8);
+    Font::SetCurrent(Font::Type::_8);
 }
 
 static void Draw_Internal_ShowAlways(int x, int y)
@@ -91,23 +91,23 @@ static void OnPress_Internal_ModeShow()
 
 static void Draw_Internal_ModeShow_Direct(int x, int y)
 {
-    Painter::SetFont(Font::Type::_UGO2);
+    Font::SetCurrent(Font::Type::_UGO2);
 
     //Painter::Draw4SymbolsInRect(x + 2, y + 1, '\x6a');
     Char('\x6a').Draw4SymbolsInRect(x + 2, y + 1);
 
-    Painter::SetFont(Font::Type::_8);
+    Font::SetCurrent(Font::Type::_8);
 }
 
 
 static void Draw_Internal_ModeShow_Saved(int x, int y)
 {
-    Painter::SetFont(Font::Type::_UGO2);
+    Font::SetCurrent(Font::Type::_UGO2);
 
     //Painter::Draw4SymbolsInRect(x + 2, y + 1, '\x6c');
     Char('\x6c').Draw4SymbolsInRect(x + 2, y + 1);
 
-    Painter::SetFont(Font::Type::_8);
+    Font::SetCurrent(Font::Type::_8);
 }
 
 static void Draw_Internal_ModeShow_Both(int x, int y)
@@ -155,12 +155,12 @@ static void OnPress_Internal_Delete()
 
 static void Draw_Internal_Delete(int x, int y)
 {
-    Painter::SetFont(Font::Type::_UGO2);
+    Font::SetCurrent(Font::Type::_UGO2);
 
     //Painter::Draw4SymbolsInRect(x + 2, y + 1, SYMBOL_DELETE);
     Char(SYMBOL_DELETE).Draw(x + 2, y + 1);
 
-    Painter::SetFont(Font::Type::_8);
+    Font::SetCurrent(Font::Type::_8);
 }
 
 DEF_SMALL_BUTTON(bInternal_Delete,                                                                            //--- œ¿Ãﬂ“‹ - ¬Õ”“– «” - ”‰‡ÎËÚ¸ ---
@@ -193,9 +193,9 @@ static void OnPress_Internal_SaveToMemory()
 
 static void Draw_Internal_SaveToMemory(int x, int y)
 {
-    Painter::SetFont(Font::Type::_UGO2);
+    Font::SetCurrent(Font::Type::_UGO2);
     Char(SYMBOL_SAVE_TO_MEM).Draw(x + 2, y + 1);
-    Painter::SetFont(Font::Type::_8);
+    Font::SetCurrent(Font::Type::_8);
 }
 
 DEF_SMALL_BUTTON(bInternal_SaveToMemory,                                                           //--- œ¿Ãﬂ“‹ - ¬Õ”“– «” - —Óı‡ÌËÚ¸ ‚ Ô‡ÏˇÚË ---
@@ -216,9 +216,9 @@ static void Draw_Internal_SaveToDrive(int x, int y)
 {
     if (FDrive::IsConnected())
     {
-        Painter::SetFont(Font::Type::_UGO2);
+        Font::SetCurrent(Font::Type::_UGO2);
         Char(SYMBOL_FLASH_DRIVE_BIG).Draw4SymbolsInRect(x + 2, y + 1);
-        Painter::SetFont(Font::Type::_8);
+        Font::SetCurrent(Font::Type::_8);
     }
 }
 

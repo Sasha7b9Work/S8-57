@@ -225,9 +225,9 @@ static void OnPress_Set_100()
 
 static void Draw_Set_100(int x, int y)
 {
-    Painter::SetFont(Font::Type::_5);
+    Font::SetCurrent(Font::Type::_5);
     String("100%").Draw(x + 2, y + 3);
-    Painter::SetFont(Font::Type::_8);
+    Font::SetCurrent(Font::Type::_8);
 }
 
 // Установка 100 процентов в текущие места курсоров.
@@ -246,9 +246,9 @@ static void Draw_Set_Movement_Percents(int x, int y)
 
 static void Draw_Set_Movement_Points(int x, int y)
 {
-    Painter::SetFont(Font::Type::_5);
+    Font::SetCurrent(Font::Type::_5);
     String("тчк").Draw(x + 4, y + 3);
-    Painter::SetFont(Font::Type::_8);
+    Font::SetCurrent(Font::Type::_8);
 }
 
 static void OnPress_Set_Movement()

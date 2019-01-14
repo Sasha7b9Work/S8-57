@@ -29,7 +29,7 @@ struct Font
     static int  GetLengthText(pString text);
     static int  GetHeightSymbol(char symbol);
     static int  GetLengthSymbol(char symbol);
-    static void SetFont(Font::Type::E typeFont);
+    static void SetCurrent(Font::Type::E typeFont);
 };
 
 

@@ -209,16 +209,16 @@ static void Draw_Recorder_SaveTo(int x, int y)
 
 static void Draw_Recorder_SaveTo_RAM(int x, int y)
 {
-    Painter::SetFont(Font::Type::_UGO2);
+    Font::SetCurrent(Font::Type::_UGO2);
     Painter::Draw4SymbolsInRect(x + 2, y + 1, SYMBOL_ROM);
-    Painter::SetFont(Font::Type::_8);
+    Font::SetCurrent(Font::Type::_8);
 }
 
 static void Draw_Recorder_SaveTo_EXT(int x, int y)
 {
-    Painter::SetFont(Font::Type::_UGO2);
+    Font::SetCurrent(Font::Type::_UGO2);
     Painter::Draw4SymbolsInRect(x + 2, y + 1, SYMBOL_FLASH_DRIVE_BIG);
-    Painter::SetFont(Font::Type::_8);
+    Font::SetCurrent(Font::Type::_8);
 }
 
 // —≈–¬»— - –≈√»—“–¿“Œ– - ¬˚·Ó ----------------------------------------------------------------------------------------------------------------------
@@ -241,9 +241,9 @@ static void OnPress_Recorder_Choice()
 
 static void Draw_Recorder_Choice(int x, int y)
 {
-    Painter::SetFont(Font::Type::_UGO2);
+    Font::SetCurrent(Font::Type::_UGO2);
     Painter::Draw4SymbolsInRect(x + 1, y, SYMBOL_FOLDER);
-    Painter::SetFont(Font::Type::_8);
+    Font::SetCurrent(Font::Type::_8);
 }
 
 // —≈–¬»— - –≈√»—“–¿“Œ– -  ÛÒÓ ---------------------------------------------------------------------------------------------------------------------
@@ -359,12 +359,12 @@ static void Draw_Function_Type_Sum(int x, int y)
 
 static void Draw_Function_Type_Mul(int x, int y)
 {
-    Painter::SetFont(Font::Type::_UGO2);
+    Font::SetCurrent(Font::Type::_UGO2);
 
     //Painter::Draw4SymbolsInRect(x + 4, y + 3, SYMBOL_MATH_FUNC_MUL);
     Char(SYMBOL_MATH_FUNC_MUL).Draw4SymbolsInRect(x + 4, y + 3);
 
-    Painter::SetFont(Font::Type::_8);
+    Font::SetCurrent(Font::Type::_8);
 }
 
 static void Draw_Function_Type(int x, int y)

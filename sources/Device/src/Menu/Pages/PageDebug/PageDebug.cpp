@@ -630,12 +630,12 @@ static void OnPress_SerialNumber_Change()
 
 static void Draw_SerialNumber_Change(int x, int y)
 {
-    Painter::SetFont(Font::Type::_UGO2);
+    Font::SetCurrent(Font::Type::_UGO2);
 
     //Painter::Draw4SymbolsInRect(x + 2, y + 2, SYMBOL_TAB);
     Char(SYMBOL_TAB).Draw4SymbolsInRect(x + 2, y + 2);
 
-    Painter::SetFont(Font::Type::_8);
+    Font::SetCurrent(Font::Type::_8);
 }
 
 DEF_SMALL_BUTTON( bSerialNumber_Change,                                                                                                                    //--- ОТЛАДКА - С/Н - Вставить ---
@@ -662,9 +662,9 @@ static void OnPress_SerialNumber_Save()
 
 static void Draw_SerialNumber_Save(int x, int y)
 {
-    Painter::SetFont(Font::Type::_UGO2);
+    Font::SetCurrent(Font::Type::_UGO2);
     Char(SYMBOL_SAVE_TO_MEM).Draw4SymbolsInRect(x + 2, y + 1);
-    Painter::SetFont(Font::Type::_8);
+    Font::SetCurrent(Font::Type::_8);
 }
 
 DEF_SMALL_BUTTON( bSerialNumber_Save,                                                                                                                     //--- ОТЛАДКА - С/Н - Сохранить ---

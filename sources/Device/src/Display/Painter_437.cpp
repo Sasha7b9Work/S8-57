@@ -73,14 +73,6 @@ void Painter::DrawTesterData(uint8 mode, Color color, const uint8 *x, const uint
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Painter::SetFont(Font::Type::E typeFont)
-{
-    Font::SetFont(typeFont);
-    uint8 buffer[2] = { Command::Paint_SetFont, (uint8)typeFont };
-    FSMC::WriteToPanel(buffer, 2);
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Painter::SaveScreenToDrive()
 {
     needSaveScreen = true;

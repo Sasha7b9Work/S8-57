@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #ifndef WIN32
 #include "defines.h"
+#include "Command.h"
+#include "Hardware/FSMC.h"
 #endif
 #include "font8.inc"
 #include "font5.inc"
@@ -52,7 +54,7 @@ int Font::GetLengthSymbol(char symbol)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Font::SetFont(Font::Type::E typeFont)
+void Font::SetCurrent(Font::Type::E typeFont)
 {
     switch (typeFont)
     {
@@ -72,4 +74,7 @@ void Font::SetFont(Font::Type::E typeFont)
         case Type::Number:
             break;
     }
+
+    uint8 buffer[2] = { Command::Paint_SetFont, (uint8)typeFont };
+    FSMC::WriteToPanel(buffer, 2);
 }

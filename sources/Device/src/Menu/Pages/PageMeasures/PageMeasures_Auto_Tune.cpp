@@ -33,12 +33,12 @@ DEF_SMALL_BUTTON_EXIT(bTune_Exit,                                               
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void Draw_Tune_Markers(int x, int y)
 {
-    Painter::SetFont(Font::Type::_UGO2);
+    Font::SetCurrent(Font::Type::_UGO2);
 
     //Painter::Draw4SymbolsInRect(x + 2, y + 2, '\x60');
     Char('\x60').Draw4SymbolsInRect(x + 2, y + 2);
 
-    Painter::SetFont(Font::Type::_8);
+    Font::SetCurrent(Font::Type::_8);
 }
 
 DEF_SMALL_BUTTON( bTune_Markers,                                                                                                                     //--- »«Ã≈–≈Õ»ﬂ - Õ¿—“–Œ»“‹ - Ã‡ÍÂ ---
@@ -60,12 +60,12 @@ static void OnPress_Tune_Settings()
 
 static void Draw_Tune_Settings(int x, int y)
 {
-    Painter::SetFont(Font::Type::_UGO2);
+    Font::SetCurrent(Font::Type::_UGO2);
 
     //Painter::Draw4SymbolsInRect(x + 2, y + 1, '\x62');
     Char('\x62').Draw4SymbolsInRect(x + 2, y + 1);
 
-    Painter::SetFont(Font::Type::_8);
+    Font::SetCurrent(Font::Type::_8);
 }
 
 DEF_SMALL_BUTTON( bTune_Settings,                                                                                                                 //--- »«Ã≈–≈Õ»ﬂ - Õ¿—“–Œ»“‹ - Õ‡ÒÚÓÈÍ‡ ---

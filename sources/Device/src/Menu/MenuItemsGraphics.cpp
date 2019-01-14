@@ -172,7 +172,7 @@ void Governor::DrawValue(int x, int y)
         value = -value;
     }
     
-    Painter::SetFont(Font::Type::_5);
+    Font::SetCurrent(Font::Type::_5);
     bool sign = (minValue < 0);
     
     if(maxValue < 65536)
@@ -181,7 +181,7 @@ void Governor::DrawValue(int x, int y)
         Integer(minValue).ToString(sign, 1).Draw(x + 55, y + 2);
     }
     
-    Painter::SetFont(Font::Type::_8);
+    Font::SetCurrent(Font::Type::_8);
 
     DrawValueWithSelectedPosition(x + 2, y, value, NumDigits(), gCurDigit, true);
 

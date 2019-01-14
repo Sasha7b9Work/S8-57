@@ -272,7 +272,7 @@ void Measure::DrawPageChoice()
     int maxRow = (NUM_MEASURES_IS_6_1 || NUM_MEASURES_IS_6_2) ? 8 : 5;
     int maxCol = (NUM_MEASURES_IS_6_1 || NUM_MEASURES_IS_6_2) ? 3 : 5;
     Measure::Type::E meas = Measure::Type::None;
-    Painter::SetFont(Font::Type::_UGO);
+    Font::SetCurrent(Font::Type::_UGO);
     for(int row = 0; row < maxRow; row++)
     {
         for(int col = 0; col < maxCol; col++)
@@ -288,13 +288,13 @@ void Measure::DrawPageChoice()
             Region(dX - 2, dY - 2).Draw(x0 + 1, y0 + 1, (active ? Color::FLASH_10 : Color::BACK));
             Color::SetCurrent(active ? Color::FLASH_01 : Color::FILL);
             Char(GetChar(meas)).Draw10SymbolsInRect(x0 + 2, y0 + 1);
-            Painter::SetFont(Font::Type::_5);
+            Font::SetCurrent(Font::Type::_5);
             Text(sMeas[meas].name).DrawRelativelyRight(x0 + dX, y0 + 12, active ? Color::FLASH_01 : Color::FILL);
-            Painter::SetFont(Font::Type::_UGO);
+            Font::SetCurrent(Font::Type::_UGO);
             meas = (Measure::Type::E)((int)meas + 1);    // meas++;
         }
     }
-    Painter::SetFont(Font::Type::_8);
+    Font::SetCurrent(Font::Type::_8);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
