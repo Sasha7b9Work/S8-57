@@ -10,6 +10,9 @@
 #endif
 
 
+using FPGA::SET::TBase;
+
+
 #ifdef __cplusplus
 extern "C" {
 #endif

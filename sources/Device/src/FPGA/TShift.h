@@ -1,4 +1,5 @@
 #pragma once
+#include "FPGA/FPGA_Settings.h"
 #include "Settings/SettingsTime.h"
 
 
@@ -18,7 +19,7 @@ public:
 
     operator int() const { return value; };
 
-    String ToString(TBase::E tBase) const;
+    String ToString(FPGA::SET::TBase::E tBase) const;
 
 private:
 

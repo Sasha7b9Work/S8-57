@@ -20,8 +20,8 @@ static uint8 ValueForRange(Chan::E ch);
 void FPGA::SET::Load()
 {
     Range::LoadBoth();
-    LoadRShift(Chan::A);
-    LoadRShift(Chan::B);
+    RShift::Load(Chan::A);
+    RShift::Load(Chan::B);
     LoadTrigSourceInput();
     LoadTrigLev();
     LoadTBase();
@@ -93,7 +93,7 @@ void FPGA::SET::Range::LoadBoth()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void FPGA::SET::LoadRShift(Chan::E ch)
+void FPGA::SET::RShift::Load(Chan::E ch)
 {
     LAST_AFFECTED_CH = ch;
 
@@ -310,7 +310,7 @@ void FPGA::SET::RShift::Change(Chan::E ch, int delta)
 {
     Math::AdditionThisLimitation<uint16>(&SET_RSHIFT(ch), STEP_RSHIFT * delta, RShift::MIN, RShift::MAX);
 
-    LoadRShift(ch);
+    RShift::Load(ch);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -328,7 +328,7 @@ void FPGA::SET::RShift::Set(Chan::E ch, uint16 rShift)
 {
     Math::Limitation<uint16>(&rShift, RShift::MIN, RShift::MAX);
     SET_RSHIFT(ch) = rShift;
-    LoadRShift(ch);
+    RShift::Load(ch);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

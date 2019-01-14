@@ -1,4 +1,5 @@
 #pragma once
+#include "FPGA/FPGA_Settings.h"
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -214,7 +215,7 @@ private:
 
     public:
         /// Аппроксимировать единичное измерение режима рандомизатора функцией sinX/X
-        static void InterpolationSinX_X(uint8 *data, int numPoints, TBase::E tBase);
+        static void InterpolationSinX_X(uint8 *data, int numPoints, FPGA::SET::TBase::E tBase);
         /// Возвращает строку автоматического измерения
         static String GetStringMeasure(Measure::Type::E measure, Chan::E ch, char *buffer, int lenBuf);
         /// Расчитать все автоматические измерения

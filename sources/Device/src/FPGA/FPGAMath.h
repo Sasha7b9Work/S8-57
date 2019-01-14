@@ -17,7 +17,7 @@ public:
 
     static int RShift2Rel(float rShixftAbs, FPGA::SET::Range::E range);
 
-    static float TimeCursor(float shiftCurT, TBase::E tBase);
+    static float TimeCursor(float shiftCurT, FPGA::SET::TBase::E tBase);
 
     static void PointsRel2Voltage(const uint8 *points, int numPoints, FPGA::SET::Range::E range, int16 rShift, float *voltage);
 
@@ -29,7 +29,7 @@ public:
 
     static void CalculateFFT(float *data, int numPoints, float *result, float *freq0, float *density0, float *freq1, float *density1, int *y0, int *y1);
 
-    static float TShift2Abs(int tShift, TBase::E tBase);
+    static float TShift2Abs(int tShift, FPGA::SET::TBase::E tBase);
 private:
     static void MultiplyToWindow(float *data, int numPoints);
 
