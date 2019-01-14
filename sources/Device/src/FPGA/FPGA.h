@@ -59,7 +59,7 @@ namespace FPGA
 
     void LoadRegUPR();
     /// Установить относительный уровень синхронизации
-    void SetTrigLev(Trig::Source::E ch, uint16 trigLev);
+    void SetTrigLev(SET::Trig::Source::E ch, uint16 trigLev);
     /// Установить количество считываемых сигналов в секунду
     void SetENumSignalsInSec(int numSigInSec);
     /// Установить количество измерений, по которым будут рассчитываться ворота в режиме рандомизатора

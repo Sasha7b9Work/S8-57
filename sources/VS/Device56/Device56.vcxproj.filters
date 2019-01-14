@@ -542,9 +542,6 @@
     <ClInclude Include="..\..\Device\src\FPGA\FPGATypes.h">
       <Filter>FPGA</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Device\src\FPGA\TrigLev.h">
-      <Filter>FPGA</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Device\src\FPGA\TShift.h">
       <Filter>FPGA</Filter>
     </ClInclude>

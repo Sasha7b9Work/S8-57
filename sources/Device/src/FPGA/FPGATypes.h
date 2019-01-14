@@ -1,6 +1,5 @@
 #pragma once
 #include "TShift.h"
-#include "TrigLev.h"
 
 
 #define ADDR_ALTERA             ((uint8*)NOR_MEMORY_ADRESS1)
