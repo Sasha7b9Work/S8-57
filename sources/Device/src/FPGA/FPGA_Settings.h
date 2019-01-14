@@ -15,9 +15,15 @@ namespace FPGA
 
         void LoadRanges();
 
+        void RShiftChange(Chan::E ch, int delta);
+
         void LoadRShift(Chan::E ch);
 
+        void TrigLevChange(int delta);
+
         void LoadTrigLev();
+
+        void TBaseChange(int delta);
 
         void LoadTBase();
 

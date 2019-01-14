@@ -279,5 +279,46 @@ void FPGA::Settings::ChangeRange(Chan::E ch, int delta)
     {
         Math::LimitationDecrease<uint8>((uint8 *)(&SET_RANGE(ch)), 0);  // -V206
     }
-    Settings::LoadRanges();
+    LoadRanges();
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void FPGA::Settings::TBaseChange(int delta) // -V2506
+{
+    if (delta > 0)
+    {
+        Math::LimitationIncrease<uint8>((uint8 *)(&SET_TBASE), (uint8)(TBase::Number - 1)); // -V206
+    }
+    else
+    {
+        if (SET_PEAKDET_EN &&                               // Если вклюён режим пикового детектора
+            SET_TBASE == TBase::MIN_PEAK_DET)               // и установлен масштаб по времени, соответствующий минмальному в режиме пикового детектора :
+        {
+            Display::ShowWarning(Warning::EnabledPeakDet);  // выводим сообщение об этом
+            return;                                         // и выходим
+        }
+
+        Math::LimitationDecrease<uint8>((uint8 *)(&SET_TBASE), 0); // -V206
+    }
+
+    LoadTBase();
+    Start();
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void FPGA::Settings::RShiftChange(Chan::E ch, int delta)
+{
+    Math::AdditionThisLimitation<uint16>(&SET_RSHIFT(ch), STEP_RSHIFT * delta, RShift::MIN, RShift::MAX);
+
+    LoadRShift(ch);
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void FPGA::Settings::TrigLevChange(int delta)
+{
+    Math::AdditionThisLimitation<uint16>(&SET_TRIGLEV_SOURCE, STEP_TRIGLEV * delta, Trig::MIN, Trig::MAX);
+
+    LoadTrigLev();
+
+    Trig::NeedForDraw(2000);
 }

@@ -41,17 +41,11 @@ namespace FPGA
 
     void Update();
 
-    static void Start();
+    void Start();
 
     void OnPressStart();
 
     static void GiveStart();
-
-    void TBaseChange(int delta);
-
-    void RShiftChange(Chan::E ch, int delta);
-
-    void TrigLevChange(int delta);
 
     void SetRShift(Chan::E ch, uint16 rShift);
 
