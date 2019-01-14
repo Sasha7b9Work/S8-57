@@ -17,8 +17,6 @@ namespace FPGA
 
         void LoadTrigPolarity();
 
-        void TBaseChange(int delta);
-
         void SetTShift(int tShift);
 
         void LoadTShift();
@@ -125,6 +123,8 @@ namespace FPGA
             pString ToString() const;
 
             static void Load();
+
+            static void Change(int delta);
 
             /// С этого значения должен включаться режим поточечного вывода
             static const E MIN_P2P = _50ms;
