@@ -7,10 +7,6 @@ namespace FPGA
     {
         void Load();
 
-        void RShiftChange(Chan::E ch, int delta);
-
-        void SetRShift(Chan::E ch, uint16 rShift);
-
         void LoadRShift(Chan::E ch);
 
         void LoadTrigSource();
@@ -67,12 +63,15 @@ namespace FPGA
             pString ToString(Divider::E divider);
         };
 
-        class RShift
+        struct RShift
         {
-        public:
             static const int MIN = 20;
             static const int MAX = 980;
             static const int ZERO = 500;
+
+            static void Change(Chan::E ch, int delta);
+
+            static void Set(Chan::E ch, uint16 rShift);
 
             static void Draw();
 

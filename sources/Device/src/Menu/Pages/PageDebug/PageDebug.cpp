@@ -270,8 +270,8 @@ static void OnPress_ADC_Shift_Reset()
             RSHIFT_ADD_STABLE(ch, range) = 0;
         }
     }
-    FPGA::SET::SetRShift(Chan::A, SET_RSHIFT_A);
-    FPGA::SET::SetRShift(Chan::B, SET_RSHIFT_B);
+    FPGA::SET::RShift::Set(Chan::A, SET_RSHIFT_A);
+    FPGA::SET::RShift::Set(Chan::B, SET_RSHIFT_B);
 }
 
 DEF_BUTTON( bADC_Shift_Reset,                                                                                                                       //-- Œ“À¿ƒ ¿ - ¿÷œ - ƒŒœ —Ã≈Ÿ - —·ÓÒ ---
@@ -284,7 +284,7 @@ DEF_BUTTON( bADC_Shift_Reset,                                                   
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void OnChanged_ADC_Shift_A()
 {
-    FPGA::SET::SetRShift(Chan::A, SET_RSHIFT_A);
+    FPGA::SET::RShift::Set(Chan::A, SET_RSHIFT_A);
 }
 
 DEF_GOVERNOR( gADC_Shift_A2mV,                                                                                                            //--- Œ“À¿ƒ ¿ - ¿÷œ - ƒŒœ —Ã≈Ÿ - —Ï 1Í 2Ï¬ ÔÓÒÚ ---
@@ -297,7 +297,7 @@ DEF_GOVERNOR( gADC_Shift_A2mV,                                                  
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void OnChanged_ADC_Shift_B()
 {
-    FPGA::SET::SetRShift(Chan::B, SET_RSHIFT_B);
+    FPGA::SET::RShift::Set(Chan::B, SET_RSHIFT_B);
 }
 
 DEF_GOVERNOR( gADC_Shift_B2mV,                                                                                                            //--- Œ“À¿ƒ ¿ - ¿÷œ - ƒŒœ —Ã≈Ÿ - —Ï 2Í 2Ï¬ ÔÓÒÚ ---

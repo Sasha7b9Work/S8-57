@@ -306,7 +306,7 @@ void FPGA::SET::TBaseChange(int delta) // -V2506
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void FPGA::SET::RShiftChange(Chan::E ch, int delta)
+void FPGA::SET::RShift::Change(Chan::E ch, int delta)
 {
     Math::AdditionThisLimitation<uint16>(&SET_RSHIFT(ch), STEP_RSHIFT * delta, RShift::MIN, RShift::MAX);
 
@@ -324,7 +324,7 @@ void FPGA::SET::TrigLevChange(int delta)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void FPGA::SET::SetRShift(Chan::E ch, uint16 rShift)
+void FPGA::SET::RShift::Set(Chan::E ch, uint16 rShift)
 {
     Math::Limitation<uint16>(&rShift, RShift::MIN, RShift::MAX);
     SET_RSHIFT(ch) = rShift;
