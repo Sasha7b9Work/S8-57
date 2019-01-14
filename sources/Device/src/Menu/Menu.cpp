@@ -397,7 +397,7 @@ void Menu::ProcessingLongPressureButton()
         }
         else if(button == Key::Trig)
         {
-            FPGA::SetTrigLev(TRIG_SOURCE, Trig::ZERO);
+            Trig::Level::Set(TRIG_SOURCE, Trig::ZERO);
         }
         else if(button == Key::ChannelA)
         {

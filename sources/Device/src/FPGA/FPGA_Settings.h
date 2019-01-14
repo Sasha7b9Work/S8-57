@@ -166,13 +166,6 @@ namespace FPGA
             /// После вызова этой функции уровень синхронизации будет отрисовываться поверх сигнала в течение timMS миллисекунд
             static void NeedForDraw(uint timeMS);
 
-            struct Level
-            {
-                static void Load();
-
-                static void Change(int delta);
-            };
-
             /// Источник синхронизации
             struct Source
             {
@@ -184,6 +177,15 @@ namespace FPGA
                 } value;
 
                 static void Load();
+            };
+
+            struct Level
+            {
+                static void Load();
+
+                static void Change(int delta);
+
+                static void Set(Trig::Source::E source, int level);
             };
 
             /// Режим запуска.

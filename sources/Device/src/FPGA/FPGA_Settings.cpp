@@ -122,6 +122,12 @@ void FPGA::SET::Trig::Level::Load()
     FPGA::WriteRegisters(Pin::SPI3_CS1, (uint16)(0xa000 | (value << 2)));
 }
 
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void FPGA::SET::Trig::Level::Set(Trig::Source::E /*source*/, int /*level*/)
+{
+
+}
+
 #ifdef _WIN32
 #pragma warning(push)
 #pragma warning(disable:4310)
