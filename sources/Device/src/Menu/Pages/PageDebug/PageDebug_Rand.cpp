@@ -39,7 +39,6 @@ DEF_GOVERNOR( gRand_NumSmooth,                                                  
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void OnChanged_Rand_NumMeasures()
 {
-    FPGA::SetNumberMeasuresForGates(NUM_MEASURES_FOR_GATES);
 }
 
 DEF_GOVERNOR( gRand_NumMeasures,                                                                                                                  //--- ОТЛАДКА - РАНД-ТОР - Выб-к/ворота ---
@@ -72,7 +71,6 @@ DEF_CHOICE_2( gRand_ShowStat,                                                   
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void OnChanged_Rand_TimeCompensation()
 {
-    FPGA::SetDeltaTShift(TIME_COMPENSATION);
 }
 
 DEF_GOVERNOR( gRand_TimeCompensation,                                                                                                     //--- ОТЛАДКА - РАНД-ТОР - Компенсация задержки ---

@@ -155,7 +155,6 @@ static bool IsActive_Search_Search()
 
 static void OnPress_Search_Search()
 {
-    FPGA::FindAndSetTrigLevel();
 }
 
 DEF_BUTTON( bSearch_Search,                                                                                                                                   //--- —»Õ’– - œŒ»—  - Õ‡ÈÚË ---

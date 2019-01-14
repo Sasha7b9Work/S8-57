@@ -54,16 +54,6 @@ namespace FPGA
     bool IsRunning();
 
     void Reset();
-    /// Установить количество считываемых сигналов в секунду
-    void SetENumSignalsInSec(int numSigInSec);
-    /// Установить количество измерений, по которым будут рассчитываться ворота в режиме рандомизатора
-    void SetNumberMeasuresForGates(int number);
-    /// Найти и установить уровень синхронизации по последнему считанному сигналу
-    void FindAndSetTrigLevel();
-
-    void EnableRecorderMode(bool enable);
-    /// Установить добавочное смещение по времени для режима рандомизатора. В каждой развёртке это смещение должно быть разное
-    void SetDeltaTShift(int16 shift);
 
     void SetBandwidth(Chan::E ch);
 

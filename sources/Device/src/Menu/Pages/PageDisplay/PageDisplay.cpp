@@ -105,7 +105,6 @@ DEF_CHOICE_REG_10(  cSmoothing,                                                 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void PageDisplay::OnChanged_RefreshFPS(bool)
 {
-    FPGA::SetENumSignalsInSec(ENUM_SIGNALS_IN_SEC);
 }
 
 DEF_CHOICE_5( cRefreshFPS,                                                                                                                                 //--- ДИСПЛЕЙ - Частота обновл ---
