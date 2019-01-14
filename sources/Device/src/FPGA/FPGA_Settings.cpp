@@ -2,6 +2,10 @@
 #ifndef WIN32
 #include "defines.h"
 #include "device.h"
+#include "Display/Display_Primitives.h"
+#include "Display/Grid.h"
+#include "Display/Symbols.h"
+#include "Display/Font/Font.h"
 #include "FPGA.h"
 #include "FPGA_HAL.h"
 #include "FPGA_Settings.h"
@@ -16,6 +20,8 @@
 
 
 using namespace FPGA::HAL::GPIO;
+
+using Display::Char;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -415,4 +421,38 @@ String FPGA::SET::TShift::ToString(TBase::E tBase) const
 {
     float time = FPGAMath::TShift2Abs(value, tBase);
     return Time(time).ToString(true);
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void FPGA::SET::RShift::Draw()
+{
+    Draw(Chan::A);
+    Draw(Chan::B);
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void FPGA::SET::RShift::Draw(Chan::E ch)
+{
+    Color::SetCurrent(Color::Channel(ch));
+
+    int delta = (SET_RSHIFT(ch) - RShift::ZERO) / STEP_RSHIFT;
+
+    int y = (Grid::Bottom() - Grid::Top()) / 2 + Grid::Top() - delta;
+
+    //Painter::DrawChar(Grid::Left() - 8, y - 4, (char)SYMBOL_RSHIFT_NORMAL);
+    Char((char)SYMBOL_RSHIFT_NORMAL).Draw(Grid::Left() - 8, y - 4);
+
+    Font::SetCurrent(Font::Type::_5);
+
+    //Painter::DrawChar(Grid::Left() - 7, y - 6, Chan(ch).IsA() ? '1' : '2', Color::BACK);
+    Char(Chan(ch).IsA() ? '1' : '2').Draw(Grid::Left() - 7, y - 6, Color::BACK);
+
+    Font::SetCurrent(Font::Type::_8);
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+String FPGA::SET::RShift::ToString(uint16 rShiftRel, FPGA::SET::Range::E range, Divider::E divider)
+{
+    float rShiftVal = FPGAMath::RShift2Abs(rShiftRel, range) * Divider(divider).ToAbs();
+    return Voltage(rShiftVal).ToString(true);
 }

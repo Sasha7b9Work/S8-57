@@ -165,9 +165,6 @@
     <ClCompile Include="..\..\Device\src\FPGA\FPGAMath.cpp">
       <Filter>FPGA</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Device\src\FPGA\RShift.cpp">
-      <Filter>FPGA</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Device\src\FPGA\TrigLev.cpp">
       <Filter>FPGA</Filter>
     </ClCompile>
