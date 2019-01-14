@@ -14,8 +14,7 @@ namespace Painter
     void EndScene();
 
     void SetFont(Font::Type::E typeFont);
-    /// Нарисовать массив вертикальных линий. Линии рисуются одна за другой. y0y1 - массив вертикальных координат.
-    void DrawVLineArray(int x, int numLines, uint8 *y0y1, Color color);
+    
     /// \brief Нарисовать numLines вертикальных линий, состоящих из count точек каждая с расстоянием между точками delta. Горизонтальная координата
     /// первой точки каждой линии соответствует очередному элементу массива x[]
     void DrawMultiVPointLine(int numLines, int y, const uint16 *x, int delta, int count, Color color = Color::NUMBER);

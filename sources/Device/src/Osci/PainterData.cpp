@@ -24,6 +24,7 @@ using Display::Line;
 using Display::Point;
 using Display::Region;
 using Display::VLine;
+using Display::VLineArray;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -284,5 +285,5 @@ void PainterData::SendToDisplayDataInRect(Chan::E ch, int x, const int *min, con
         points[i * 2 + 1] = (uint8)(min[i] < 0 ? 0 : min[i]);
     }
 
-    Painter::DrawVLineArray(x, (int)width, points, Color::Channel(ch));
+    VLineArray((int)width, points).Draw(x, Color::Channel(ch));
 }
