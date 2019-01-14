@@ -3,6 +3,7 @@
 #include "defines.h"
 #include "device.h"
 #include "FPGA.h"
+#include "FPGA_HAL.h"
 #include "FPGA_Settings.h"
 #include "FPGA/FPGATypes.h"
 #include "Hardware/FSMC.h"
@@ -242,7 +243,7 @@ static uint8 ValueForRange(Chan::E ch) // -V2506
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void FPGA::SET::LoadCalibratorMode()
 {
-    FPGA::LoadRegUPR();
+    HAL::LoadRegUPR();
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

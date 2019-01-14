@@ -54,14 +54,10 @@ namespace FPGA
     bool IsRunning();
 
     void Reset();
-
-    void LoadRegUPR();
     /// Установить количество считываемых сигналов в секунду
     void SetENumSignalsInSec(int numSigInSec);
     /// Установить количество измерений, по которым будут рассчитываться ворота в режиме рандомизатора
     void SetNumberMeasuresForGates(int number);
-    /// Установить масштаб по времени
-    //static void SetTBase(TBase tBase);
     /// Найти и установить уровень синхронизации по последнему считанному сигналу
     void FindAndSetTrigLevel();
 

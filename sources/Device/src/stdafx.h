@@ -28,6 +28,7 @@
 
 #include "FPGA/AD9286.h"
 #include "FPGA/FPGA.h"
+#include "FPGA/FPGA_HAL.h"
 #include "FPGA/FPGA_Settings.h"
 #include "FPGA/FPGAMath.h"
 

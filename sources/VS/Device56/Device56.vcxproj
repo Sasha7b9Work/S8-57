@@ -36,6 +36,7 @@
     <ClCompile Include="..\..\Device\src\FPGA\FPGA_437.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="..\..\Device\src\FPGA\FPGA_HAL.cpp" />
     <ClCompile Include="..\..\Device\src\FPGA\FPGA_Settings.cpp" />
     <ClCompile Include="..\..\Device\src\FPGA\RShift.cpp" />
     <ClCompile Include="..\..\Device\src\FPGA\TrigLev.cpp" />
@@ -217,6 +218,7 @@
     <ClInclude Include="..\..\Device\src\FPGA\FPGA.h" />
     <ClInclude Include="..\..\Device\src\FPGA\FPGAMath.h" />
     <ClInclude Include="..\..\Device\src\FPGA\FPGATypes.h" />
+    <ClInclude Include="..\..\Device\src\FPGA\FPGA_HAL.h" />
     <ClInclude Include="..\..\Device\src\FPGA\FPGA_Settings.h" />
     <ClInclude Include="..\..\Device\src\Hardware\AT25160N.h" />
     <ClInclude Include="..\..\Device\src\Hardware\CPU.h" />
