@@ -3,26 +3,28 @@
 
 namespace FPGA
 {
-    struct Settings
+    namespace Settings
     {
-    public:
-        static void LoadTrigSource();
+        void Load();
+
+        void LoadTrigSource();
         /// Установить в соотвествующие положения выводы, отвечающие за источник и вход синхронизации
-        static void LoadTrigSourceInput();
+        void LoadTrigSourceInput();
 
-        static void LoadRanges();
+        void LoadRanges();
 
-        static void LoadRShift(Chan::E ch);
+        void LoadRShift(Chan::E ch);
 
-        static void LoadTrigLev();
+        void LoadTrigLev();
 
-        static void LoadTBase();
+        void LoadTBase();
 
-        static void LoadTShift();
+        void LoadTShift();
         /// Включить/выключить калибратор.
-        static void LoadCalibratorMode();
+        void LoadCalibratorMode();
+        /// Установить значение удержания синхронизации
+        void LoadHoldfOff();
 
-    private:
-        static uint8 ValueForRange(Chan::E ch);
+        uint8 ValueForRange(Chan::E ch);
     };
 }

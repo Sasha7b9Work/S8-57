@@ -5,6 +5,7 @@
 #include "Display/Display.h"
 #include "FlashDrive/FlashDrive.h"
 #include "FPGA/FPGA.h"
+#include "FPGA/FPGA_Settings.h"
 #include "Menu/Menu.h"
 #include "Menu/Pages/Include/PageFunction.h"
 #include "Hardware/Timer.h"
@@ -51,7 +52,7 @@ void Device::Init()
 
     FrequencyCounter::Init();
 
-    FPGA::LoadSettings();
+    FPGA::Settings::Load();
 
     Menu::Init();
 

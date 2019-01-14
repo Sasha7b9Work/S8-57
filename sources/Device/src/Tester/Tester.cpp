@@ -192,7 +192,7 @@ void Tester::Disable() // -V2506
     set = oldSet;
     //set.Save();
 
-    FPGA::LoadSettings();
+    FPGA::Settings::Load();
 
     FPGA::OnPressStart();
 }

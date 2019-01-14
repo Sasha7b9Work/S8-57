@@ -2,6 +2,7 @@
 #ifndef WIN32
 #include "defines.h"
 #include "FPGA/FPGA.h"
+#include "FPGA/FPGA_Settings.h"
 #include "Menu/Pages/Include/PageTrig.h"
 #include "Menu/MenuItems.h"
 #include "Settings/Settings.h"
@@ -15,7 +16,7 @@ const PageBase *PageTrig::PageHoldOff::pointer = &pageHoldOff;
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void OnChanged_HoldOff(bool)
 {
-    FPGA::LoadHoldfOff();
+    FPGA::Settings::LoadHoldfOff();
 }
 
 DEF_CHOICE_2( cHoldOff,                                                                                                                               //--- —»Õ’– - ”ƒ≈–∆¿Õ»≈ - ”‰ÂÊ‡ÌËÂ ---
@@ -31,7 +32,7 @@ DEF_CHOICE_2( cHoldOff,                                                         
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void OnChanged_Duration()
 {
-    FPGA::LoadHoldfOff();
+    FPGA::Settings::LoadHoldfOff();
 }
 
 DEF_GOVERNOR( gDuration,                                                                                                                           //--- —»Õ’– - ”ƒ≈–∆¿Õ»≈ - ƒÎËÚÂÎ¸ÌÓÒÚ¸ ---

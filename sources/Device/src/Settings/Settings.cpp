@@ -2,6 +2,7 @@
 #include "Settings.h"
 #include "Hardware/EEPROM.h"
 #include "FPGA/FPGA.h"
+#include "FPGA/FPGA_Settings.h"
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -230,7 +231,7 @@ void Settings::Load(bool _default)
     if(_default || !EEPROM::LoadSettings())
     {
         Reset();
-        FPGA::LoadSettings();
+        FPGA::Settings::Load();
         uint8 data[1024];
         TransformFromLoad(data);
         Menu::Init();

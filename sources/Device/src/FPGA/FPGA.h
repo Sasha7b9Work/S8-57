@@ -47,8 +47,6 @@ namespace FPGA
 
     static void GiveStart();
 
-    void LoadSettings();
-
     void ChangeRange(Chan::E ch, int delta);
 
     void TBaseChange(int delta);
@@ -63,8 +61,6 @@ namespace FPGA
 
     void LoadTrigPolarity();
 
-    //static void LoadTrigMode();
-
     void LoadTrigInput();
 
     void Stop(bool pause = false);
@@ -73,15 +69,11 @@ namespace FPGA
 
     bool IsRunning();
 
-    //static StateWorkFPGA GetStateWork();
-
     void SetTShift(int tShift);
 
     void Reset();
 
     static void LoadRegUPR();
-    /// Установить значение удержания синхронизации
-    void LoadHoldfOff();
 
     void SetModeCouple(Chan::E ch, ModeCouple::E couple);
 
