@@ -24,7 +24,6 @@ namespace Multimeter
         void PrepareVariableCurrent();
         void PrepareResistance();
         void PrepareTestDiode();
-        void PrepareRing();
     };
     /// Инициализация
     void Init();
