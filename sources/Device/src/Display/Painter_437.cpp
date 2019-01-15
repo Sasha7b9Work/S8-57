@@ -57,10 +57,10 @@ void Painter::EndScene()
 void Painter::DrawTesterData(uint8 mode, Color color, const uint8 *x, const uint8 *y)
 {
     Buffer buffer(483);
-    buffer.Data()[0] = Command::Paint_TesterLines;
-    buffer.Data()[1] = mode;
-    buffer.Data()[2] = color.value;
-    uint8 *pointer = buffer.Data() + 3;
+    buffer.data[0] = Command::Paint_TesterLines;
+    buffer.data[1] = mode;
+    buffer.data[2] = color.value;
+    uint8 *pointer = buffer.data + 3;
     for (int i = 0; i < TESTER_NUM_POINTS; i++)
     {
         *pointer++ = x[i];
@@ -69,7 +69,7 @@ void Painter::DrawTesterData(uint8 mode, Color color, const uint8 *x, const uint
     {
         *pointer++ = y[i];
     }
-    FSMC::WriteToPanel(buffer.Data(), 483);
+    FSMC::WriteToPanel(buffer.data, 483);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

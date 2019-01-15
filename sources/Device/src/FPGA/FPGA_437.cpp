@@ -110,11 +110,11 @@ void FPGA::ReadData()
     Buffer dataA(FPGA::NumPoints());    // -V656
     Buffer dataB(FPGA::NumPoints());    // -V656
 
-    ReadDataChanenl(Chan::A, dataA.Data());
-    ReadDataChanenl(Chan::B, dataB.Data());
+    ReadDataChanenl(Chan::A, dataA.data);
+    ReadDataChanenl(Chan::B, dataB.data);
 
     DataSettings ds;
-    ds.Fill(dataA.Data(), dataB.Data());
+    ds.Fill(dataA.data, dataB.data);
 
     DataStorage::Push(&ds);
 }

@@ -272,15 +272,15 @@ int Display::Primitives::Text::DrawSmall(int x, int y, Color color)
     uint sizeBuffer = 1 + 2 + 1 + 1 + std::strlen(text);
 
     Buffer buffer(sizeBuffer);
-    buffer.Data()[0] = Command::Paint_DrawText;
-    buffer.Data()[1] = (uint8)x;
-    buffer.Data()[2] = (uint8)(x >> 8);
-    buffer.Data()[3] = (uint8)y;
-    buffer.Data()[4] = (uint8)std::strlen(text);
+    buffer.data[0] = Command::Paint_DrawText;
+    buffer.data[1] = (uint8)x;
+    buffer.data[2] = (uint8)(x >> 8);
+    buffer.data[3] = (uint8)y;
+    buffer.data[4] = (uint8)std::strlen(text);
 
-    std::memcpy(&buffer.Data()[5], (void *)text, std::strlen(text));
+    std::memcpy(&buffer.data[5], (void *)text, std::strlen(text));
 
-    FSMC::WriteToPanel(buffer.Data(), sizeBuffer);
+    FSMC::WriteToPanel(buffer.data, sizeBuffer);
 
     return x + Font::GetLengthText(text) + 1;
 }

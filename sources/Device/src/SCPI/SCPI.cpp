@@ -14,8 +14,8 @@ void SCPI::AddNewData(uint8 *buffer, uint length)
     SU::ToUpper(buffer, length);
     
     Buffer data(length + 1);
-    std::memcpy(data.Data(), buffer, length);
-    data.Data()[length] = 0;
+    std::memcpy(data.data, buffer, length);
+    data.data[length] = 0;
     
     if (SU::EqualsStrings(buffer, "*IDN?", 5))
     {
