@@ -234,18 +234,12 @@ void Settings::Load(bool _default)
     if(_default || !EEPROM::LoadSettings())
     {
         Reset();
-        FPGA::SET::Load();
-        uint8 data[1024];
-        TransformFromLoad(data);
-        Menu::Init();
-        FPGA::SET::Load();
     }
+    FPGA::SET::Load();
 }
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Settings::Save()
 {
-    uint8 data[1024];
-    set.TransformForSave(data);
     EEPROM::SaveSettings();
 }
 

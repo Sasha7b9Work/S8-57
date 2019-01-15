@@ -37,18 +37,6 @@ extern const PageBase ppInformation;
 static void OnPress_ResetSettings()
 {
     Settings::Load(true);
-    /*
-    Keyboard::Disable();
-    Display::SetDrawMode(DrawMode_Hand, Draw_ResetSettings);
-
-    if (Keyboard::WaitPressingButton().Is(Key::Start))
-    {
-        Settings::Load(true);
-    }
-
-    Display::SetDrawMode(DrawMode::Auto, 0);
-    Keyboard::Enable();
-    */
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
