@@ -22,6 +22,7 @@
 
 using namespace FPGA::HAL::GPIO;
 using namespace FPGA::SET;
+using namespace Osci::Settings;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -148,7 +149,7 @@ void FPGA::ForTester::Start() // -V2506
 
     SET_TBASE = TBase::_500us;
 
-    SET::TBase::Load();
+    TBase::Load();
     
     FSMC::WriteToFPGA16(WR_POST_LO, (uint16)(~(400 + 1)));
     FSMC::WriteToFPGA16(WR_PRED_LO, (uint16)(~(0+ 3)));

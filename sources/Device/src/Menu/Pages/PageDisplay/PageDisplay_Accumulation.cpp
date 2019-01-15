@@ -7,7 +7,7 @@
 #endif
 
 
-using FPGA::SET::TBase;
+using namespace Osci::Settings;
 
 
 extern const PageBase pageAccum;

@@ -21,6 +21,8 @@
 
 using namespace Display::Primitives;
 using namespace FPGA::HAL::GPIO;
+using namespace FPGA::SET;
+using namespace Osci::Settings;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -145,7 +147,7 @@ void FPGA::SET::Trig::Level::Set(Trig::Source::E /*source*/, int /*level*/)
 #endif
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void FPGA::SET::TBase::Load()
+void Osci::Settings::TBase::Load()
 {
     static const uint8 values[TBase::Number] =
     {
@@ -296,7 +298,7 @@ void Osci::Settings::Range::Change(Chan::E ch, int delta)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void FPGA::SET::TBase::Change(int delta)
+void Osci::Settings::TBase::Change(int delta)
 {
     if (delta > 0)
     {
@@ -315,7 +317,7 @@ void FPGA::SET::TBase::Change(int delta)
     }
 
     TBase::Load();
-    Start();
+    FPGA::Start();
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -499,7 +501,7 @@ static void FPGA::SET::Trig::DisableDrawing()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-pString FPGA::SET::TBase::Name() const
+pString Osci::Settings::TBase::Name() const
 {
     static pString names[TBase::Number][Language::Number] =
     {

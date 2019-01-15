@@ -105,14 +105,14 @@ public:
 
     // Меню РАЗВЁРТКА
 
-    FPGA::SET::TShift   time_shift;
-    FPGA::SET::TBase::E time_base;
-    PeakDetMode::E      time_peakDet;
-    TPos::E             time_TPos;
-    SampleType::E       time_sampleType;
-    FunctionTime::E     time_timeDivXPos;
-    LinkingTShift::E    time_linkingTShift;                 ///< Тип привязки смещения по горизонтали
-    SampleType::E       time_sampleTypeOld;
+    FPGA::SET::TShift        time_shift;
+    Osci::Settings::TBase::E time_base;
+    PeakDetMode::E           time_peakDet;
+    TPos::E                  time_TPos;
+    SampleType::E            time_sampleType;
+    FunctionTime::E          time_timeDivXPos;
+    LinkingTShift::E         time_linkingTShift;                 ///< Тип привязки смещения по горизонтали
+    SampleType::E            time_sampleTypeOld;
 
     // Меню КУРСОРЫ
 

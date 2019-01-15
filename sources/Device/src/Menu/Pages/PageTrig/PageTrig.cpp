@@ -14,6 +14,7 @@
 
 
 using namespace FPGA::SET;
+using namespace Osci::Settings;
 
 
 extern const PageBase pTrig;

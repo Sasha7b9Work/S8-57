@@ -11,7 +11,7 @@
 #endif
 
 
-using FPGA::SET::TBase;
+using namespace Osci::Settings;
 
 
 #ifdef __cplusplus
