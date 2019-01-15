@@ -22,8 +22,6 @@ namespace Display
     void Init();
 
     void Update();
-    /// brightness == [0...100]
-    void SetBrightness(int16 brightness);
 
     void RemoveAddDrawFunction();
 

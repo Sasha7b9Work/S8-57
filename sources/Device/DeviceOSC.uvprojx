@@ -1865,6 +1865,11 @@
               <FileType>5</FileType>
               <FilePath>.\src\Multimeter\Multimeter.h</FilePath>
             </File>
+            <File>
+              <FileName>Multimeter_Display.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Multimeter\Multimeter_Display.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

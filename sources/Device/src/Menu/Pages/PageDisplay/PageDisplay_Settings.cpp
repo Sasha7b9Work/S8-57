@@ -17,7 +17,6 @@ const PageBase *PageDisplay::PageSettings::pointer = &pageSettings;
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 static void OnChanged_Settings_Brightness()
 {
-    Display::SetBrightness(BRIGHTNESS_DISPLAY);
 }
 
 DEF_GOVERNOR( gBrightness,                                                                                     //--- ÄÈÑÏËÅÉ - ÍÀÑÒĞÎÉÊÈ - ßğêîñòü ---

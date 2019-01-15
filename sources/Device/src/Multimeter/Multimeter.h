@@ -18,13 +18,13 @@ namespace Multimeter
     {
         void Update();
 
-        static void PrepareConstantVoltage();
-        static void PrepareVariableVoltage();
-        static void PrepareConstantCurrent();
-        static void PrepareVariableCurrent();
-        static void PrepareResistance();
-        static void PrepareTestDiode();
-        static void PrepareRing();
+        void PrepareConstantVoltage();
+        void PrepareVariableVoltage();
+        void PrepareConstantCurrent();
+        void PrepareVariableCurrent();
+        void PrepareResistance();
+        void PrepareTestDiode();
+        void PrepareRing();
     };
     /// Инициализация
     void Init();

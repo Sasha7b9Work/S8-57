@@ -15,17 +15,15 @@
 using namespace Display::Primitives;
 
 
+extern char *out;
+
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 char                Multimeter::buffer[11] = {0};
 UART_HandleTypeDef  Multimeter::handlerUART;
 /// В этот буфер записывается информация в обработчике прерывания приёма
 static uint8 bufferUART[10];
-/// В этом буфере готовая к выводу информация
-#define SIZE_OUT 15
-static char out[SIZE_OUT];
 
-//static char recv[11] = {0};
-//static char trans[11] = {0};
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void Multimeter::SetMeasure(const uint8 buf[10])
@@ -112,46 +110,6 @@ void Multimeter::Update()
   //  trans[2] = '\0';
     HAL_UART_Transmit(&handlerUART, send, 4, 100);
     HAL_UART_Receive_IT(&handlerUART, bufferUART, 10);
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Multimeter::Display::Update()
-{
-    struct Func
-    {
-        pFuncVV func;
-        Func(pFuncVV f) : func(f) {};
-    };
-
-    static const Func funcs[Multimeter::Measure::Number] =
-    {
-        PrepareConstantVoltage,
-        PrepareVariableVoltage,
-        PrepareConstantCurrent,
-        PrepareVariableCurrent,
-        PrepareResistance,
-        PrepareTestDiode,
-        PrepareRing
-    };
-
-    Painter::BeginScene(Color::BACK);
-
-    std::memset(out, 0, SIZE_OUT);
-
-    Measure meas = Measure::ForSymbol(buffer[7]);
-    if(meas == Measure::Number)
-    {
-        meas = MULTI_MEASURE;
-    }
-
-    funcs[meas].func();
-
-    //Painter::DrawBigText(30, 30, 5, out, buffer[0] == '8' ? Color::GRAY_50 : Color::FILL);
-
-
-    Color::SetCurrent(Color::FILL);
-
-    Menu::Draw();
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
