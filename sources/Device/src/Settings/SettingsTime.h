@@ -40,20 +40,6 @@ struct SampleType
     explicit SampleType(E v) : value(v) {};
 };
 
-/// Положение точки синхронизация на сигнале.
-struct TPos
-{
-    enum E
-    {
-        Left,          ///< Привязка к левому краю.
-        Center,        ///< Привязка к центру.
-        Right          ///< Привязка к правому краю.
-    } value;
-    explicit TPos(E v) : value(v) {};
-    /// Узнать привязку отсительно уровня синхронизации в байтах
-    int InBytes();
-};
-
 #define SET_TSHIFT          (set.time_shift)
 #define SET_TBASE           (set.time_base)
 #define TIME_DIV_XPOS       (set.time_timeDivXPos)

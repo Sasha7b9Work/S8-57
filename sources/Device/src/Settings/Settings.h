@@ -108,7 +108,7 @@ public:
     Osci::Settings::TShift         time_shift;
     Osci::Settings::TBase::E       time_base;
     Osci::Settings::PeakDetMode::E time_peakDet;
-    TPos::E                        time_TPos;
+    Osci::Settings::TPos::E        time_TPos;
     SampleType::E                  time_sampleType;
     FunctionTime::E                time_timeDivXPos;
     LinkingTShift::E               time_linkingTShift;                 ///< Тип привязки смещения по горизонтали
