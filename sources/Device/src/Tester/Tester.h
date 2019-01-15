@@ -28,6 +28,8 @@ public:
     /// Инициализация аппаратной части
     static void Init();
 
+    static void DeInit();
+
     static void Enable();
 
     static void Disable();

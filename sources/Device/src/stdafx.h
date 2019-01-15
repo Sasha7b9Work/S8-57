@@ -41,7 +41,7 @@
 #include "Hardware/GPIO.h"
 #include "Hardware/Sound.h"
 #include "Hardware/Timer.h"
-#include <Hardware/VCP.h>
+#include "Hardware/VCP.h"
 #include "Hardware/stm32/Timer4XX.h"
 
 #include "Menu/Pages/Include/Definition.h"
@@ -54,6 +54,8 @@
 #include "Menu/Pages/Include/PageService.h"
 #include "Menu/Pages/Include/PageTime.h"
 #include "Menu/Pages/Include/PageTrig.h"
+
+#include "Multimeter/Multimeter.h"
 
 #include "Osci/BottomPart.h"
 #include "Osci/HiPart.h"

@@ -6,14 +6,14 @@
 #include "FlashDrive/FlashDrive.h"
 #include "FPGA/FPGA.h"
 #include "FPGA/FPGA_Settings.h"
+#include "Hardware/FSMC.h"
+#include "Hardware/Sound.h"
+#include "Hardware/Timer.h"
+#include "Hardware/VCP.h"
+#include "Keyboard/DecoderDevice.h"
 #include "Menu/Menu.h"
 #include "Menu/Pages/Include/PageFunction.h"
-#include "Hardware/Timer.h"
-#include "Keyboard/DecoderDevice.h"
-#include "Hardware/FSMC.h"
-#include "Hardware/Timer.h"
-#include "Hardware/Sound.h"
-#include "Hardware/VCP.h"
+#include "Recorder/Recorder.h"
 #include "Settings/Settings.h"
 #include "Utils/Math.h"
 #include <stdlib.h>
@@ -126,28 +126,35 @@ Device::Mode::E Device::CurrentMode()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Device::SetMode(Mode::E mode)
 {
-    currentMode = mode;
+    if (mode != currentMode)
+    {
+        currentMode = mode;
 
-    if (currentMode == Mode::Osci)
-    {
-        Tester::Disable();
-        Osci::Init();
-    }
-    else if (currentMode == Mode::Tester)
-    {
-        Tester::Enable();
-    }
-    else if (currentMode == Mode::Multimeter)
-    {
-        Tester::Disable();
-    }
-    else if (currentMode == Mode::Recorder)
-    {
-        Tester::Disable();
-    }
-    else
-    {
-        // здесь ничего нету - все варианты проверены
+        Osci::DeInit();
+        Tester::DeInit();
+        Multimeter::DeInit();
+        Recorder::DeInit();
+
+        if (currentMode == Mode::Osci)
+        {
+            Osci::Init();
+        }
+        else if (currentMode == Mode::Tester)
+        {
+            Tester::Init();
+        }
+        else if (currentMode == Mode::Multimeter)
+        {
+            Multimeter::Init();
+        }
+        else if (currentMode == Mode::Recorder)
+        {
+            Recorder::Init();
+        }
+        else
+        {
+            // здесь ничего нету - все варианты проверены
+        }
     }
 }
 

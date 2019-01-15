@@ -5,8 +5,14 @@
 namespace Osci
 {
     void Init();
+
+    void DeInit();
+
     void Draw();
+
     void DrawCursorTrigLevel();
+
     void DrawScaleLine(int x, bool forTrigLev);
+
     void DrawMeasures();
 };
