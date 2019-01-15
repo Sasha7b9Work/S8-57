@@ -108,7 +108,7 @@ void Osci::Settings::Range::LoadBoth()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void FPGA::SET::RShift::Load(Chan::E ch)
+void Osci::Settings::RShift::Load(Chan::E ch)
 {
     LAST_AFFECTED_CH = ch;
 
@@ -319,11 +319,11 @@ void FPGA::SET::TBase::Change(int delta)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void FPGA::SET::RShift::Change(Chan::E ch, int delta)
+void Osci::Settings::RShift::Change(Chan::E ch, int delta)
 {
     ::Math::AdditionThisLimitation<uint16>(&SET_RSHIFT(ch), STEP_RSHIFT * delta, RShift::MIN, RShift::MAX);
 
-    RShift::Load(ch);
+    Load(ch);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -337,11 +337,11 @@ void FPGA::SET::Trig::Level::Change(int delta)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void FPGA::SET::RShift::Set(Chan::E ch, uint16 rShift)
+void Osci::Settings::RShift::Set(Chan::E ch, uint16 rShift)
 {
-    ::Math::Limitation<uint16>(&rShift, RShift::MIN, RShift::MAX);
+    ::Math::Limitation<uint16>(&rShift, MIN, MAX);
     SET_RSHIFT(ch) = rShift;
-    RShift::Load(ch);
+    Load(ch);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -423,18 +423,18 @@ String FPGA::SET::TShift::ToString(TBase::E tBase) const
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void FPGA::SET::RShift::Draw()
+void Osci::Settings::RShift::Draw()
 {
     Draw(Chan::A);
     Draw(Chan::B);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void FPGA::SET::RShift::Draw(Chan::E ch)
+void Osci::Settings::RShift::Draw(Chan::E ch)
 {
     Color::SetCurrent(Color::Channel(ch));
 
-    int delta = (SET_RSHIFT(ch) - RShift::ZERO) / STEP_RSHIFT;
+    int delta = (SET_RSHIFT(ch) - ZERO) / STEP_RSHIFT;
 
     int y = (Grid::Bottom() - Grid::Top()) / 2 + Grid::Top() - delta;
 
@@ -450,7 +450,7 @@ void FPGA::SET::RShift::Draw(Chan::E ch)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-String FPGA::SET::RShift::ToString(uint16 rShiftRel, Osci::Settings::Range::E range, Divider::E divider)
+String Osci::Settings::RShift::ToString(uint16 rShiftRel, Osci::Settings::Range::E range, Divider::E divider)
 {
     float rShiftVal = FPGA::Math::RShift2Abs(rShiftRel, range) * Divider(divider).ToAbs();
     return Voltage(rShiftVal).ToString(true);

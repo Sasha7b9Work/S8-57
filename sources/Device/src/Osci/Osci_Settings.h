@@ -38,5 +38,27 @@ namespace Osci
             pString ToString(Divider::E divider);
 
         };
+
+        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        struct RShift
+        {
+            static const int MIN = 20;
+            static const int MAX = 980;
+            static const int ZERO = 500;
+
+            static void Change(Chan::E ch, int delta);
+
+            static void Set(Chan::E ch, uint16 rShift);
+
+            static void Load(Chan::E ch);
+
+            static void Draw();
+
+            static String ToString(uint16 rShiftRel, Osci::Settings::Range::E range, Divider::E divider);
+
+        private:
+
+            static void Draw(Chan::E ch);
+        };
     }
 }

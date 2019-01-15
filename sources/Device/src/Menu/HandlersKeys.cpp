@@ -169,7 +169,7 @@ static void ChangeRShift(Chan::E ch, int delta)
     }
     else
     {
-        FPGA::SET::RShift::Change(ch, delta);
+        RShift::Change(ch, delta);
     }
 
     if (SET_RSHIFT(ch) == RShift::ZERO)

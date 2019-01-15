@@ -15,8 +15,7 @@
 #endif
 
 
-using Osci::Settings::Range;
-using FPGA::SET::RShift;
+using namespace Osci::Settings;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -156,8 +155,8 @@ void Tester::Enable() // -V2506
 
     Osci::Settings::Range::LoadBoth();
 
-    FPGA::SET::RShift::Set(Chan::A, RShift::ZERO);
-    FPGA::SET::RShift::Set(Chan::B, RShift::ZERO);
+    RShift::Set(Chan::A, RShift::ZERO);
+    RShift::Set(Chan::B, RShift::ZERO);
 
     HAL_GPIO_WritePin(Port_TEST_ON, Pin_TEST_ON, GPIO_PIN_RESET);  // Включаем тестер-компонент
 
