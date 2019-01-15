@@ -238,37 +238,8 @@ void Settings::Load(bool _default)
         uint8 data[1024];
         TransformFromLoad(data);
         Menu::Init();
-        FPGA::OnPressStart();
+        FPGA::SET::Load();
     }
-
-    /*
-    uint size = 0;
-    AT25160N::ReadData(0, (uint8 *)&size, 4);
-
-    if(size > 0 && size < 1024)
-    {
-        uint8 *data = (uint8 *)malloc(size);
-
-        AT25160N::ReadData(0, data, size);
-
-        uint crc32 = Hardware::CalculateCRC32((uint)data + 8, size - 8);
-
-        if(crc32 == *((uint *)(data + 4)))
-        {
-            memcpy(&set, data, size);
-        }
-        else
-        {
-            Reset();
-        }
-
-        free(data);
-    }
-    else
-    {
-        Reset();
-    }
-    */
 }
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Settings::Save()
@@ -276,13 +247,6 @@ void Settings::Save()
     uint8 data[1024];
     set.TransformForSave(data);
     EEPROM::SaveSettings();
-
-    /*
-    SET_SIZE = sizeof(Settings);
-    SET_CRC32 = Hardware::CalculateCRC32((uint)((uint8 *)&set + 8), SET_SIZE - 8);
-
-    AT25160N::WriteData(0, (uint8 *)&set, SET_SIZE);
-    */
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
