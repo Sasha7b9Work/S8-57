@@ -40,7 +40,7 @@ static String ValueForStep(int step);
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void Tester::Graphics::Update()
+void Tester::Display::Update()
 {
     Painter::BeginScene(Color::BACK);
 
@@ -103,7 +103,7 @@ static void DrawData(int numStep, int /*x0*/, int /*y0*/)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Tester::Graphics::SetPoints(int numStep, const uint8 dx[TESTER_NUM_POINTS], const uint8 dy[TESTER_NUM_POINTS])
+void Tester::Display::SetPoints(int numStep, const uint8 dx[TESTER_NUM_POINTS], const uint8 dy[TESTER_NUM_POINTS])
 {
     ready[numStep] = true;
 

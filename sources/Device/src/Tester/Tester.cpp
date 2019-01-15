@@ -265,7 +265,7 @@ void Tester::ReadData()
 
     if(FPGA::ForTester::Read(x, y))
     {
-        Graphics::SetPoints(step / 2, x, y);
+        Display::SetPoints(step / 2, x, y);
     }
 }
 

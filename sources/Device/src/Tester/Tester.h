@@ -44,7 +44,7 @@ public:
 
     static int DeltaRShiftA();
 
-    struct Graphics
+    struct Display
     {
     public:
         static void Update();

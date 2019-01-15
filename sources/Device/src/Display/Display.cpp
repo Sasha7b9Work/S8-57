@@ -116,7 +116,7 @@ void Display::Update()
     static const struct StructDraw { pFuncVV func; } draw[Device::Mode::Number] =
     {
         Osci::Display::Update,
-        Tester::Graphics::Update,
+        Tester::Display::Update,
         Multimeter::Graphics::Draw,
         Recorder::Graphics::Update
     };
