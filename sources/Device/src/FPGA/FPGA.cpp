@@ -410,7 +410,7 @@ void FPGA::Reset()
 {
     DataStorage::Init(Device::CurrentMode());
 
-    SET::TShift::Load();
+    TShift::Load();
 
     HAL::LoadRegUPR();
 }

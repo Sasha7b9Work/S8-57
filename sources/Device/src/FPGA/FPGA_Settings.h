@@ -44,32 +44,5 @@ namespace FPGA
         void LoadCalibratorMode();
         /// Установить значение удержания синхронизации
         void LoadHoldfOff();
-
-        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        class TShift
-        {
-        public:
-            static int Min();
-            static int Zero();
-            static int Max();
-
-            TShift(int tshift);
-
-            int InPoints();
-
-            static void Set(int tShift);
-
-            static void Load();
-
-            static void Change(int delta);
-
-            operator int() const { return value; };
-
-            String ToString(Osci::Settings::TBase::E tBase) const;
-
-        private:
-
-            static int value;
-        };
     };
 }

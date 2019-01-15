@@ -26,7 +26,7 @@ using namespace Osci::Settings;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-int FPGA::SET::TShift::value = 0;
+int TShift::value = 0;
 
 namespace Osci
 {
@@ -50,13 +50,13 @@ static uint8 ValueForRange(Chan::E ch);
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void Osci::Settings::Trig::Source::Load()
+void Trig::Source::Load()
 {
     Input::Load();
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Osci::Settings::Trig::Input::Load()
+void Trig::Input::Load()
 {
     static const uint8 datas[3][2] =
     {//       A                 B
@@ -71,7 +71,7 @@ void Osci::Settings::Trig::Input::Load()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Osci::Settings::Range::LoadBoth()
+void Range::LoadBoth()
 {
     uint16 val = (uint16)(ValueForRange(Chan::B) + (ValueForRange(Chan::A) << 8));
 
@@ -110,7 +110,7 @@ void Osci::Settings::Range::LoadBoth()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Osci::Settings::RShift::Load(Chan::E ch)
+void RShift::Load(Chan::E ch)
 {
     LAST_AFFECTED_CH = ch;
 
@@ -127,7 +127,7 @@ void Osci::Settings::RShift::Load(Chan::E ch)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Osci::Settings::Trig::Level::Load()
+void Trig::Level::Load()
 {
     /// \todo Здесь много лишних движений. Нужно что-то сделать с вводом SET_TRIGLEV_SOURCE
     uint16 value = (uint16)((Trig::MAX + Trig::MIN) - SET_TRIGLEV_SOURCE);
@@ -141,7 +141,7 @@ void Osci::Settings::Trig::Level::Load()
 #endif
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Osci::Settings::TBase::Load()
+void TBase::Load()
 {
     static const uint8 values[TBase::Number] =
     {
@@ -253,7 +253,7 @@ void FPGA::SET::LoadCalibratorMode()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void FPGA::SET::TShift::Load()
+void TShift::Load()
 {
     FPGA::post = (uint16)(SET_TSHIFT - TShift::Min());
     int Pred = (int)FPGA::NumPoints() - (int)FPGA::post;
@@ -272,13 +272,13 @@ void FPGA::SET::TShift::Load()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void FPGA::SET::TShift::Change(int delta)
+void TShift::Change(int delta)
 {
     TShift::Set(SET_TSHIFT + delta);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Osci::Settings::Range::Change(Chan::E ch, int delta)
+void Range::Change(Chan::E ch, int delta)
 {
     if (delta > 0)
     {
@@ -292,7 +292,7 @@ void Osci::Settings::Range::Change(Chan::E ch, int delta)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Osci::Settings::TBase::Change(int delta)
+void TBase::Change(int delta)
 {
     if (delta > 0)
     {
@@ -315,7 +315,7 @@ void Osci::Settings::TBase::Change(int delta)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Osci::Settings::RShift::Change(Chan::E ch, int delta)
+void RShift::Change(Chan::E ch, int delta)
 {
     ::Math::AdditionThisLimitation<uint16>(&SET_RSHIFT(ch), STEP_RSHIFT * delta, RShift::MIN, RShift::MAX);
 
@@ -323,17 +323,17 @@ void Osci::Settings::RShift::Change(Chan::E ch, int delta)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Osci::Settings::Trig::Level::Change(int delta)
+void Trig::Level::Change(int delta)
 {
     ::Math::AdditionThisLimitation<uint16>(&SET_TRIGLEV_SOURCE, STEP_TRIGLEV * delta, Trig::MIN, Trig::MAX);
 
-    Trig::Level::Load();
+    Load();
 
-    Trig::NeedForDraw(2000);
+    NeedForDraw(2000);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Osci::Settings::RShift::Set(Chan::E ch, uint16 rShift)
+void RShift::Set(Chan::E ch, uint16 rShift)
 {
     ::Math::Limitation<uint16>(&rShift, MIN, MAX);
     SET_RSHIFT(ch) = rShift;
@@ -341,13 +341,13 @@ void Osci::Settings::RShift::Set(Chan::E ch, uint16 rShift)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Osci::Settings::Trig::Polarity::Load()
+void Trig::Polarity::Load()
 {
     FPGA::GiveStart();
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-int FPGA::SET::TShift::Min()
+int TShift::Min()
 {
 #define k 0
 #define mul 2
@@ -377,31 +377,31 @@ int FPGA::SET::TShift::Min()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-int FPGA::SET::TShift::Zero()
+int TShift::Zero()
 {
     return 0;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-int FPGA::SET::TShift::Max()
+int TShift::Max()
 {
     return 60000;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-int FPGA::SET::TShift::InPoints()
+int TShift::InPoints()
 {
     return SET_PEAKDET_EN ? value : (value * 2);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-FPGA::SET::TShift::TShift(int tshift)
+TShift::TShift(int tshift)
 {
     value = tshift;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void FPGA::SET::TShift::Set(int tShift)
+void TShift::Set(int tShift)
 {
     LIMITATION(tShift, Min(), Max()); //-V2516
 
@@ -412,21 +412,21 @@ void FPGA::SET::TShift::Set(int tShift)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-String FPGA::SET::TShift::ToString(TBase::E tBase) const
+String TShift::ToString(TBase::E tBase) const
 {
     float time = FPGA::Math::TShift2Abs(value, tBase);
     return Time(time).ToString(true);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Osci::Settings::RShift::Draw()
+void RShift::Draw()
 {
     Draw(Chan::A);
     Draw(Chan::B);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Osci::Settings::RShift::Draw(Chan::E ch)
+void RShift::Draw(Chan::E ch)
 {
     Color::SetCurrent(Color::Channel(ch));
 
@@ -446,20 +446,20 @@ void Osci::Settings::RShift::Draw(Chan::E ch)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-String Osci::Settings::RShift::ToString(uint16 rShiftRel, Osci::Settings::Range::E range, Divider::E divider)
+String RShift::ToString(uint16 rShiftRel, Osci::Settings::Range::E range, Divider::E divider)
 {
     float rShiftVal = FPGA::Math::RShift2Abs(rShiftRel, range) * Divider(divider).ToAbs();
     return Voltage(rShiftVal).ToString(true);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-bool Osci::Settings::Trig::SyncPulse()
+bool Trig::SyncPulse()
 {
     return pulse;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Osci::Settings::Trig::DrawOnGrid()
+void Trig::DrawOnGrid()
 {
     if (needDraw)
     {
@@ -481,7 +481,7 @@ void Osci::Settings::Trig::DrawOnGrid()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Osci::Settings::Trig::NeedForDraw(uint timeMS)
+void Trig::NeedForDraw(uint timeMS)
 {
     needDraw = true;
     Timer::SetAndStartOnce(Timer::Type::ShowLevelTrigLev, DisableDrawing, timeMS);
@@ -495,7 +495,7 @@ static void Osci::Settings::Trig::DisableDrawing()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-pString Osci::Settings::TBase::Name() const
+pString TBase::Name() const
 {
     static pString names[TBase::Number][Language::Number] =
     {
@@ -535,7 +535,7 @@ pString Osci::Settings::TBase::Name() const
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-pString Osci::Settings::Range::Name() const
+pString Range::Name() const
 {
     static const struct StructRange
     {

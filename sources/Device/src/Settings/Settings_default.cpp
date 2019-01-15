@@ -66,7 +66,7 @@ const Settings Settings::defaultSettings =
 
     // Μενώ ΠΐΗΒ¨ΠÒΚΐ
 
-    /* time_shift;          */          FPGA::SET::TShift(0),
+    /* time_shift;          */          TShift(0),
     /* time_base;           */          TBase::_500us,
     /* time_peakDet;        */          PeakDetMode::Disabled,
     /* time_TPos;           */          TPos::Center,

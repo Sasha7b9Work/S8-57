@@ -10,8 +10,7 @@
 #endif
 
 
-using FPGA::SET::TShift;
-
+using namespace Osci::Settings;
 
 extern const PageBase pageRand;
 
