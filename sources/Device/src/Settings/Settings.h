@@ -41,8 +41,6 @@ public:
     static void Load(bool _default = false);
     static void Save();
     static void Reset();
-    /// Сбросить цвета на значения по умолчанию
-    static void ResetColors();
     /// Возвращает указатель на настройки по умолчанию
     static Settings &GetDefault();
     /// Преобразовать настройки в массив для сохранения в энергонезависимую память

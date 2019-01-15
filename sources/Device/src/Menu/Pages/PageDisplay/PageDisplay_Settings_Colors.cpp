@@ -16,7 +16,6 @@ const PageBase *PageDisplay::PageSettings::PageColors::pointer = &pageColors;
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 static void OnPress_ResetColors()
 {
-    Settings::ResetColors();
 }
 
 DEF_BUTTON( bReset,                                                                                                                          //--- ÄÈÑÏËÅÉ - ÍÀÑÒĞÎÉÊÈ - ÖÂÅÒÀ - Ñáğîñèòü ---
