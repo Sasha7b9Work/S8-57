@@ -19,16 +19,9 @@
 #endif
 
 
+using namespace Display::Primitives;
 using namespace FPGA::Math;
-
-using Display::Char;
-using Display::HLine;
-using Display::Region;
-using Display::VLine;
-using Display::Text;
-
-using FPGA::SET::RShift;
-using FPGA::SET::TBase;
+using namespace FPGA::SET;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

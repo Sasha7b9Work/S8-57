@@ -22,6 +22,9 @@
 #endif
 
 
+using namespace Display::Primitives;
+using namespace FPGA::SET;
+
 extern const PageBase pService;
 extern const PageBase ppCalibrator;
 extern const PageBase ppFunction;
@@ -30,17 +33,7 @@ extern const PageBase ppRTC;
 extern const PageBase ppInformation;
 
 
-using Display::Char;
-using Display::HLine;
-using Display::Rectangle;
-using Display::Text;
-using Display::VLine;
-
-using FPGA::SET::Range;
-using FPGA::SET::RShift;
-
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 static void OnPress_ResetSettings()
 {
     Settings::Load(true);
@@ -59,7 +52,7 @@ static void OnPress_ResetSettings()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-DEF_BUTTON(         bResetSettings,                                                                                  //--- СЕРВИС - Сброс настроек ---
+DEF_BUTTON( bResetSettings,                                                                                                                                 //--- СЕРВИС - Сброс настроек ---
     "Сброс настр", "Reset set",
     "Сброс настроек на настройки по умолчанию",
     "Reset to default settings",
@@ -72,7 +65,7 @@ static void OnPress_AutoSearch()
     FPGA_NEED_AUTO_FIND = 1;
 }
 
-DEF_BUTTON(         bAutoSearch,                                                                                      //--- СЕРВИС - Поиск сигнала ---
+DEF_BUTTON( bAutoSearch,                                                                                                                                     //--- СЕРВИС - Поиск сигнала ---
     "Поиск сигн", "Find sign",
     "Устанавливает оптимальные установки осциллографа для сигнала в канале 1",
     "Sets optimal settings for the oscilloscope signal on channel 1",
@@ -279,13 +272,6 @@ static void Draw_Recorder_Cursor(int x, int y)
 #endif
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-/*
-DEF_SMALL_BUTTON_EXIT(  bFunction_Exit,                                                                             //--- СЕРВИС - ФУНКЦИЯ - Выход ---
-    ppFunction, FuncActive, FuncPress, DrawSB_Exit
-)
-*/
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void OnPress_Function_Screen()
 {
     if (FFT_ENABLED)
@@ -332,7 +318,7 @@ static void Draw_Function_Screen(int x, int y)
     funcs[FUNC_MODE_DRAW](x, y);
 }
 
-DEF_SMALL_BUTTON_HINTS_3(   bFunction_Screen,                                                                       //--- СЕРВИС - ФУНКЦИЯ - Экран ---
+DEF_SMALL_BUTTON_HINTS_3( bFunction_Screen,                                                                                                                //--- СЕРВИС - ФУНКЦИЯ - Экран ---
     "Экран", "Display",
     "Выбирает режим отображения математического сигнала",
     "Chooses the mode of display of a mathematical signal",
@@ -376,7 +362,7 @@ static void Draw_Function_Type(int x, int y)
     funcs[MATH_FUNC](x, y);
 }
 
-DEF_SMALL_BUTTON_HINTS_2(   bFunction_Type,                                                                           //--- СЕРВИС - ФУНКЦИЯ - Вид ---
+DEF_SMALL_BUTTON_HINTS_2( bFunction_Type,                                                                                                                    //--- СЕРВИС - ФУНКЦИЯ - Вид ---
     "Вид", "Type",
     "Выбор математической функции",
     "Choice of mathematical function",
@@ -408,7 +394,7 @@ static void Draw_Function_ModeRegSet(int x, int y)
     funcs[MATH_MODE_REG_SET](x, y);
 }
 
-DEF_SMALL_BUTTON_HINTS_2(   bFunction_ModeRegSet,                                                   //--- СЕРВИС - ФУНКЦИЯ - Режим ручки УСТАНОВКА ---
+DEF_SMALL_BUTTON_HINTS_2( bFunction_ModeRegSet,                                                                                            //--- СЕРВИС - ФУНКЦИЯ - Режим ручки УСТАНОВКА ---
     "Режим ручки УСТАНОВКА", "Mode regulator SET",
     "Выбор режима ручки УСТАНОВКА - управление масштабом или смещением",
     "Choice mode regulcator УСТАНОВКА - management of scale or shift",
@@ -430,7 +416,7 @@ static void Draw_Function_RangeA(int x, int y)
     Char('1').Draw(x + 8, y + 5);
 }
 
-DEF_SMALL_BUTTON(   bFunction_RangeA,                                                                 //--- СЕРВИС - ФУНКЦИЯ - Масштаб 1-го канала ---
+DEF_SMALL_BUTTON( bFunction_RangeA,                                                                                                          //--- СЕРВИС - ФУНКЦИЯ - Масштаб 1-го канала ---
     "Масштаб 1-го канала", "Scale of the 1st channel",
     "Использует масштаб первого канала для отображения результата",
     "Takes scale for a mathematical signal from the first channel",
@@ -450,7 +436,7 @@ static void Draw_Function_RangeB(int x, int y)
     Char('2').Draw(x + 8, y + 5);
 }
 
-DEF_SMALL_BUTTON(   bFunction_RangeB,                                                                 //--- СЕРВИС - ФУНКЦИЯ - Масштаб 2-го канала ---
+DEF_SMALL_BUTTON( bFunction_RangeB,                                                                                                          //--- СЕРВИС - ФУНКЦИЯ - Масштаб 2-го канала ---
     "Масштаб 2-го канала", "Scale of the 2nd channel",
     "Использует масштаб второго канала для отображения результата",
     "Takes scale for a mathematical signal from the second channel",

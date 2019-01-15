@@ -19,14 +19,13 @@
 #endif
 
 
-using Display::Char;
-using Display::Rectangle;
-using Display::Region;
-using Display::VLine;
+using namespace Display::Primitives;
+
+
+extern const PageBase pageROM;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-extern const PageBase pageROM;
 const PageBase *PageMemory::PageROM::pointer = &pageROM;
 
 
