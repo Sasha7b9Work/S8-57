@@ -44,15 +44,6 @@ struct Chan
     pString Name() const;
 };
 
-struct Bandwidth
-{
-    enum E
-    {
-        Full,     ///< Если это значение выбрано в меню КАНАЛ, то при этом положение устанавливается полоса из ОТЛАДКА-КАНАЛЫ-Полоса.
-        _20MHz,
-    } value;
-};
-
 /// Режим калибровки.
 struct CalibrationMode
 {

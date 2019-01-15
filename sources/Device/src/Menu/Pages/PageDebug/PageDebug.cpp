@@ -366,7 +366,7 @@ DEF_PAGE_3( ppADC, // -V641                                                     
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void OnChanged_Channels_BandwidthA(bool)
 {
-    FPGA::SetBandwidth(Chan::A);
+    FPGA::Settings::Bandwidth::Load(Chan::A);
 }
 
 DEF_CHOICE_7( cChannels_BandwidthA,                                                                                                                     //--- Œ“À¿ƒ ¿ -  ¿ÕÀ¿€ - œÓÎÓÒ‡ 1 ---
@@ -386,7 +386,7 @@ DEF_CHOICE_7( cChannels_BandwidthA,                                             
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void OnChanged_Channels_BandwidthB(bool)
 {
-    FPGA::SetBandwidth(Chan::B);
+    FPGA::Settings::Bandwidth::Load(Chan::B);
 }
 
 DEF_CHOICE_7( cChannels_BandwidthB,                                                                                                                     //--- Œ“À¿ƒ ¿ -  ¿ÕÀ¿€ - œÓÎÓÒ‡ 2 ---

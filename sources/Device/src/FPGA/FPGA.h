@@ -33,8 +33,6 @@ namespace FPGA
 
     void Reset();
 
-    void SetBandwidth(Chan::E ch);
-
     void SetValueADC(uint16 value);
     /// Сделать калибровку
     void DoCalibration();

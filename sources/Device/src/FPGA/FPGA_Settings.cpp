@@ -556,3 +556,10 @@ pString ModeCouple::UGO() const
     static pString couple[] = { "\x92", "\x91", "\x90" };
     return couple[value];
 }
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Bandwidth::Load(Chan::E ch)
+{
+    static const Pin::E pinsLF[2] = { Pin::LF1, Pin::LF2 };
+    WritePin(pinsLF[ch], SET_BANDWIDTH(ch) == Bandwidth::_20MHz);
+}

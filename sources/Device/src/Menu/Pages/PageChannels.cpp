@@ -68,7 +68,7 @@ DEF_CHOICE_3(       cChanA_Couple,                                              
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void OnChanged_ChanA_Bandwidth(bool)
 {
-    FPGA::SetBandwidth(Chan::A);
+    FPGA::Settings::Bandwidth::Load(Chan::A);
 }
 
 DEF_CHOICE_2( cChanA_Bandwidth,                                                                                                                                    //--- КАНАЛ 1 - Полоса ---
@@ -131,7 +131,7 @@ DEF_CHOICE_3( cChanB_Couple,                                                    
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void OnChanged_BandwidthB(bool)
 {
-    FPGA::SetBandwidth(Chan::B);
+    FPGA::Settings::Bandwidth::Load(Chan::B);
 }
 
 DEF_CHOICE_2( cChanB_Bandwidth,                                                                                                                                    //--- КАНАЛ 2 - Полоса ---

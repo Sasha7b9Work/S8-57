@@ -21,6 +21,7 @@
 
 
 using namespace FPGA::HAL::GPIO;
+using namespace FPGA::Settings;
 using namespace Osci::Settings;
 
 
@@ -388,13 +389,6 @@ bool FPGA::CalculateGate(uint16 rand, uint16 *eMin, uint16 *eMax) // -V2506
     }
 
     return retValue;
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void FPGA::SetBandwidth(Chan::E ch)
-{
-    static const Pin::E pinsLF[2] = {Pin::LF1, Pin::LF2};
-    WritePin(pinsLF[ch], SET_BANDWIDTH(ch) == Bandwidth::_20MHz);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
