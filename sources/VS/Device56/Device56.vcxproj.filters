@@ -459,6 +459,9 @@
     <ClCompile Include="..\..\Device\src\Osci\Osci_Settings.cpp">
       <Filter>Osci</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Device\src\Multimeter\Multimeter_Display.cpp">
+      <Filter>Multimeter</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Device\src\defines.h">

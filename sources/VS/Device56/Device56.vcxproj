@@ -123,6 +123,7 @@
     <ClCompile Include="..\..\Device\src\Menu\Pages\PageTrig\PageTrig.cpp" />
     <ClCompile Include="..\..\Device\src\Menu\Pages\PageTrig\PageTrig_HoldOff.cpp" />
     <ClCompile Include="..\..\Device\src\Multimeter\Multimeter.cpp" />
+    <ClCompile Include="..\..\Device\src\Multimeter\Multimeter_Display.cpp" />
     <ClCompile Include="..\..\Device\src\Osci\BottomPart.cpp" />
     <ClCompile Include="..\..\Device\src\Osci\Cursors.cpp" />
     <ClCompile Include="..\..\Device\src\Osci\FrequencyCounter.cpp" />

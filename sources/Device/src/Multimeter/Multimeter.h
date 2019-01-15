@@ -11,10 +11,8 @@
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-class Multimeter
+namespace Multimeter
 {
-public:
-
     /// Используется для отрисовки
     class Display
     {
@@ -30,19 +28,19 @@ public:
         static void PrepareRing();
     };
     /// Инициализация
-    static void Init();
+    void Init();
 
-    static void DeInit();
+    void DeInit();
 
-    static void Update();
+    void Update();
     /// Сообщает мультиметру, что произошло изменение режима и нужно дождаться результата измерения перед выводом
-    static void ChangeMode();
+    void ChangeMode();
 
-    static void ChangeAVP();
+    void ChangeAVP();
     /// Через эту функцию поступает измерение от прибора
     static void SetMeasure(const uint8 buffer[10]);
 
-    static UART_HandleTypeDef handlerUART;
+    extern UART_HandleTypeDef handlerUART;
 
     /// Режим измерений мультиметра
     struct Measure
@@ -143,7 +141,6 @@ public:
         } value;
     };
 
-private:
     /// Если нулевой элемент == 0, то выводить ничего не нужно
-    static char         buffer[11];
+    extern char         buffer[11];
 };
