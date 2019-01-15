@@ -162,9 +162,6 @@
     <ClCompile Include="..\..\Device\src\FPGA\FPGA_437.cpp">
       <Filter>FPGA</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Device\src\FPGA\TrigLev.cpp">
-      <Filter>FPGA</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Device\src\Hardware\AT25160N.cpp">
       <Filter>Hardware</Filter>
     </ClCompile>

@@ -21,9 +21,7 @@
 
 
 using namespace FPGA::HAL::GPIO;
-
-using FPGA::SET::TBase;
-using FPGA::SET::Trig;
+using namespace FPGA::SET;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -90,7 +88,7 @@ void FPGA::Update() // -V2506
             }
             if(!HAL::GetFlag::TRIG_READY())
             {
-                Trig::pulse = false;
+                SET::Trig::pulse = false;
             }
         }
 

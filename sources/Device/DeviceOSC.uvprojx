@@ -1295,11 +1295,6 @@
               <FileType>5</FileType>
               <FilePath>.\src\FPGA\FPGATypes.h</FilePath>
             </File>
-            <File>
-              <FileName>TrigLev.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\FPGA\TrigLev.cpp</FilePath>
-            </File>
           </Files>
         </Group>
         <Group>

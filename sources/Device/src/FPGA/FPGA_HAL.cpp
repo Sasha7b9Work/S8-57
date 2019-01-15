@@ -12,10 +12,8 @@
 
 
 using namespace FPGA::HAL::GPIO;
-//using namespace FPGA::Math;
+using namespace FPGA::SET;
 
-using FPGA::HAL::GPIO::Pin;
-using FPGA::SET::Trig;
 
 extern bool givingStart;
 

@@ -24,14 +24,10 @@
 #include <stdio.h>
 
 
+using namespace FPGA::SET;
+
 using Display::Region;
 using Display::Text;
-
-using FPGA::SET::Range;
-using FPGA::SET::RShift;
-using FPGA::SET::TBase;
-using FPGA::SET::Trig;
-using FPGA::SET::TShift;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -91,7 +87,7 @@ static void Memory();
 static void Service();
 static void Time();
 static void Start();
-static void Trig();
+static void HandlerTrig();
 static void HandlerDisplay();
 
 
@@ -111,7 +107,7 @@ void Handlers::Process(KeyEvent e)
         /* ChannelB    */ {ChannelB,    Empty,       Empty,         Empty},
         /* Time        */ {Time,        Time,        Time,          Time},
         /* Start       */ {Start,       Empty,       Empty,         Empty},
-        /* Trig        */ {Trig,        Trig,        Trig,          Trig},
+        /* Trig        */ {HandlerTrig,    HandlerTrig,    HandlerTrig,    HandlerTrig},
         /* Display     */ {HandlerDisplay, HandlerDisplay, HandlerDisplay, HandlerDisplay},
         /* RangeMoreA  */ {RangeMoreA,  Empty,       Empty,         Empty},
         /* RangeLessA  */ {RangeLessA,  Empty,       Empty,         Empty},
@@ -442,7 +438,7 @@ static void Start()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void Trig()
+static void HandlerTrig()
 {
     OpenPage(PageTrig::pointer);
 }

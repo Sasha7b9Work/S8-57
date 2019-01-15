@@ -38,7 +38,6 @@
     </ClCompile>
     <ClCompile Include="..\..\Device\src\FPGA\FPGA_HAL.cpp" />
     <ClCompile Include="..\..\Device\src\FPGA\FPGA_Settings.cpp" />
-    <ClCompile Include="..\..\Device\src\FPGA\TrigLev.cpp" />
     <ClCompile Include="..\..\Device\src\Hardware\AT25160N.cpp" />
     <ClCompile Include="..\..\Device\src\Hardware\CPU.cpp" />
     <ClCompile Include="..\..\Device\src\Hardware\CPU_IT.cpp" />

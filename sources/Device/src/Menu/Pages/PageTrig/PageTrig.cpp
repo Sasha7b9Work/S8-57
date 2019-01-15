@@ -13,8 +13,7 @@
 #endif
 
 
-using FPGA::SET::TBase;
-using FPGA::SET::Trig;
+using namespace FPGA::SET;
 
 
 extern const PageBase pTrig;
