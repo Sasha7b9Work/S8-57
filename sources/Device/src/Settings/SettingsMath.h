@@ -82,6 +82,12 @@ struct FFTmaxDB
         _80
     } value;
     explicit FFTmaxDB(E v) : value(v) {};
+    static float MaxDBforFFT(FFTmaxDB::E maxDB)
+    {
+        static const float arrayMAX_DB_FOR_FFT[] = { -40.0F, -60.0F, -80.0F };
+
+        return arrayMAX_DB_FOR_FFT[maxDB];
+    }
 };
 
 #define SOURCE_FFT                  (set.math_sourceFFT)
@@ -93,7 +99,7 @@ struct FFTmaxDB
 #define WINDOW_FFT_IS_BLACKMAN      (WINDOW_FFT == WindowFFT::Blackman)
 #define WINDOW_FFT_IS_HANN          (WINDOW_FFT == WindowFFT::Hann)
 #define MAX_DB_FFT                  (set.math_FFTmaxDB)
-#define MAX_DB_FOR_FFT              MaxDBforFFT(MAX_DB_FFT)
+#define MAX_DB_FOR_FFT              FFTmaxDB::MaxDBforFFT(MAX_DB_FFT)
 #define FFT_ENABLED                 (set.math_enableFFT)
 #define MATH_ENABLED                (FUNC_MODE_DRAW_IS_ENABLED || FFT_ENABLED)
 
@@ -122,8 +128,6 @@ struct FFTmaxDB
 #define MATH_MODE_REG_SET           (set.math_modeRegSet)
 #define MATH_MODE_REG_SET_IS_RSHIFT (MATH_MODE_REG_SET == ModeRegSet::RShift)
 #define MATH_MODE_REG_SET_IS_RANGE  (MATH_MODE_REG_SET == ModeRegSet::Range)
-
-float MaxDBforFFT(FFTmaxDB::E maxDB);
 
 /** @}  @}
  */
