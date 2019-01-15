@@ -41,8 +41,6 @@ public:
     static void Load(bool _default = false);
     static void Save();
     static void Reset();
-    /// Возвращает указатель на настройки по умолчанию
-    static Settings &GetDefault();
     /// Преобразовать настройки в массив для сохранения в энергонезависимую память
     void TransformForSave(uint8 data[1024]);
     /// Преобразовать загруженные из энергонезависимой памяти настройки в нормальный вид
@@ -272,6 +270,7 @@ public:
     int16   dbg_enum_gate_max;      ///< Ограничение ворот в рандомизаторе сверху
     int16   dbg_enum_gate_min;      ///< Ограничение ворот в рандомизаторе снизу
 
+    /// Настройки по умолчанию
     static const Settings defaultSettings;
 };
 
