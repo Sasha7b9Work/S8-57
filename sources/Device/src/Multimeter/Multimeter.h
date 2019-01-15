@@ -14,11 +14,10 @@
 namespace Multimeter
 {
     /// Используется для отрисовки
-    class Display
+    namespace Display
     {
-    public:
-        static void Draw();
-    private:
+        void Update();
+
         static void PrepareConstantVoltage();
         static void PrepareVariableVoltage();
         static void PrepareConstantCurrent();
