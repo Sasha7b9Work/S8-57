@@ -453,6 +453,9 @@
     <ClCompile Include="..\..\Device\src\FPGA\FPGA_Math.cpp">
       <Filter>FPGA</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Device\src\Settings\Settings_default.cpp">
+      <Filter>Settings</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Device\src\defines.h">

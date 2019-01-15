@@ -271,6 +271,8 @@ public:
 
     int16   dbg_enum_gate_max;      ///< Ограничение ворот в рандомизаторе сверху
     int16   dbg_enum_gate_min;      ///< Ограничение ворот в рандомизаторе снизу
+
+    static const Settings defaultSettings;
 };
 
 #pragma pack(pop)

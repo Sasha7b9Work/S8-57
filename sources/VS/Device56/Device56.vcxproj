@@ -152,6 +152,7 @@
     <ClCompile Include="..\..\Device\src\Settings\SettingsTransformation.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="..\..\Device\src\Settings\Settings_default.cpp" />
     <ClCompile Include="..\..\Device\src\stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
     </ClCompile>
