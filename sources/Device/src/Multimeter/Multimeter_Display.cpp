@@ -13,12 +13,17 @@
 #define SIZE_OUT 15
 char out[SIZE_OUT];
 
-
 namespace Multimeter
 {
     namespace Display
     {
         static void PrepareRing();
+        static void PrepareConstantVoltage();
+        static void PrepareVariableVoltage();
+        static void PrepareConstantCurrent();
+        static void PrepareVariableCurrent();
+        static void PrepareResistance();
+        static void PrepareTestDiode();
     }
 }
 
@@ -73,4 +78,145 @@ static void Multimeter::Display::PrepareRing()
     out[7] = 'ê';
     out[8] = 'Î';
     out[9] = 'ì';
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+static void Multimeter::Display::PrepareTestDiode()
+{
+    out[0] = (char)buffer[1];
+    out[1] = buffer[2];
+    out[2] = '.';
+    out[3] = buffer[3];
+    out[4] = buffer[4];
+    out[5] = buffer[5];
+    out[6] = buffer[6];
+    out[7] = ' ';
+    out[8] = 'V';
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+static void Multimeter::Display::PrepareConstantVoltage()
+{
+    out[0] = buffer[1];
+    out[1] = buffer[2];
+    out[5] = buffer[5];
+    out[6] = buffer[6];
+    out[7] = ' ';
+    out[8] = 'V';
+    out[9] = '=';
+
+    switch (MULTI_RANGE_DC)
+    {
+    case Multimeter::RangeDC::_2V:
+        out[2] = '.';
+        out[3] = buffer[3];
+        out[4] = buffer[4];
+        break;
+    case Multimeter::RangeDC::_20V:
+        out[2] = buffer[3];
+        out[3] = '.';
+        out[4] = buffer[4];
+        break;
+    case Multimeter::RangeDC::_500V:
+        out[2] = buffer[3];
+        out[3] = buffer[4];
+        out[4] = '.';
+        break;
+    };
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+static void Multimeter::Display::PrepareVariableVoltage()
+{
+    out[0] = buffer[2];
+    out[4] = buffer[5];
+    out[5] = buffer[6];
+    out[6] = ' ';
+    out[7] = 'V';
+    out[8] = '~';
+
+    switch (MULTI_RANGE_AC)
+    {
+    case Multimeter::RangeAC::_2V:
+        out[1] = '.';
+        out[2] = buffer[3];
+        out[3] = buffer[4];
+        break;
+    case Multimeter::RangeAC::_20V:
+        out[1] = buffer[3];
+        out[2] = '.';
+        out[3] = buffer[4];
+        break;
+    case Multimeter::RangeAC::_400V:
+        out[1] = buffer[3];
+        out[2] = buffer[4];
+        out[3] = '.';
+        break;
+    };
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+static void Multimeter::Display::PrepareConstantCurrent()
+{
+    out[0] = (char)buffer[1];
+    out[1] = buffer[2];
+    out[2] = '.';
+    out[3] = buffer[3];
+    out[4] = buffer[4];
+    out[5] = buffer[5];
+    out[6] = buffer[6];
+    out[7] = ' ';
+    out[8] = 'A';
+    out[9] = '=';
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+static void Multimeter::Display::PrepareVariableCurrent()
+{
+    out[0] = buffer[2];
+    out[1] = '.';
+    out[2] = buffer[3];
+    out[3] = buffer[4];
+    out[4] = buffer[5];
+    out[5] = buffer[6];
+    out[6] = ' ';
+    out[7] = 'A';
+    out[8] = '~';
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Multimeter::Display::PrepareResistance()
+{
+    out[0] = buffer[2];
+    out[4] = buffer[5];
+    out[5] = buffer[6];
+    out[6] = ' ';
+    out[7] = 'ê';
+    out[8] = 'Î';
+    out[9] = 'ì';
+
+    switch (MULTI_RANGE_RESISTANCE)
+    {
+    case Multimeter::RangeResistance::_2k:
+        out[1] = '.';
+        out[2] = buffer[3];
+        out[3] = buffer[4];
+        break;
+    case Multimeter::RangeResistance::_20k:
+        out[1] = buffer[3];
+        out[2] = '.';
+        out[3] = buffer[4];
+        break;
+    case Multimeter::RangeResistance::_200k:
+        out[1] = buffer[3];
+        out[2] = buffer[4];
+        out[3] = '.';
+        break;
+    case Multimeter::RangeResistance::_10M:
+        out[1] = buffer[3];
+        out[2] = '.';
+        out[3] = buffer[4];
+        out[7] = 'M';
+        break;
+    }
 }

@@ -17,13 +17,6 @@ namespace Multimeter
     namespace Display
     {
         void Update();
-
-        void PrepareConstantVoltage();
-        void PrepareVariableVoltage();
-        void PrepareConstantCurrent();
-        void PrepareVariableCurrent();
-        void PrepareResistance();
-        void PrepareTestDiode();
     };
     /// Инициализация
     void Init();
