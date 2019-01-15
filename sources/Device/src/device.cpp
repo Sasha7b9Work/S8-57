@@ -128,13 +128,25 @@ void Device::SetMode(Mode::E mode)
 {
     currentMode = mode;
 
-    if(currentMode == Mode::Tester)
+    if (currentMode == Mode::Osci)
+    {
+        Tester::Disable();
+    }
+    else if (currentMode == Mode::Tester)
     {
         Tester::Enable();
     }
-    else
+    else if (currentMode == Mode::Multimeter)
     {
         Tester::Disable();
+    }
+    else if (currentMode == Mode::Recorder)
+    {
+        Tester::Disable();
+    }
+    else
+    {
+        // здесь ничего нету - все варианты проверены
     }
 }
 
