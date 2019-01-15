@@ -48,7 +48,6 @@ const Settings Settings::defaultSettings =
     /* chan_enabled[Chan::Number];  */     {true, true},
     /* chan_balanceShiftADC[2];     */     {0, 0},
     /* chan_bandwidth[2];           */     {Bandwidth::Full, Bandwidth::Full},
-    /* chan_resistance[2];          */     {Resistance::_1Mom, Resistance::_1Mom},
     /* chan_inverse[2];             */     {false, false},
     /* chan_divider[2];             */     {Divider::_1, Divider::_1},
     /* chan_calibrationMode[2];     */     {CalibrationMode::Disable, CalibrationMode::Disable},

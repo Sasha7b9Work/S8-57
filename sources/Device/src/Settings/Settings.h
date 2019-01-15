@@ -87,7 +87,6 @@ public:
     bool                           chan_enabled[Chan::Number];  ///< Включен/выключен канал
     int8                           chan_balanceShiftADC[2];     ///< Добавочное смещение для балансировки АЦП.
     Bandwidth::E                   chan_bandwidth[2];           ///< Ограничение полосы.
-    Resistance::E                  chan_resistance[2];          ///< Сопротивление входа.
     bool                           chan_inverse[2];
     Divider::E                     chan_divider[2];             ///< Множитель.
     CalibrationMode::E             chan_calibrationMode[2];     ///< Режим калибровки.

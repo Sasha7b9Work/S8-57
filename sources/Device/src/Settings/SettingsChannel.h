@@ -64,16 +64,6 @@ struct CalibrationMode
     } value;
 };
 
-struct Resistance
-{
-    enum E
-    {
-        _1Mom,
-        _50Om
-    } value;
-};
-
-
 #define SET_INVERSE(ch)         (set.chan_inverse[ch])
 #define SET_INVERSE_A           (SET_INVERSE(Chan::A))
 #define SET_INVERSE_B           (SET_INVERSE(Chan::B))
