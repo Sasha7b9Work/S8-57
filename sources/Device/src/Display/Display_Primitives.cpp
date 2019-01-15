@@ -148,7 +148,7 @@ Display::Primitives::Text::Text(const String &string, uint8 _size) : sizeOfType(
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 int Display::Primitives::Text::Draw(int x, int y, Color color)
 {
-    if (std::strlen(text) == 0) //-V805
+    if (std::strlen(text) == 0)
     {
         return x;
     }
