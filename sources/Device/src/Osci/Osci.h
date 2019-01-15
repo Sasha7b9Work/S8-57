@@ -10,7 +10,7 @@ namespace Osci
 
     namespace Display
     {
-        void Draw();
+        void Update();
 
         void DrawCursorTrigLevel();
 
