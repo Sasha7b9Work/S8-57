@@ -117,7 +117,7 @@ void Display::Update()
     {
         Osci::Display::Update,
         Tester::Display::Update,
-        Multimeter::Graphics::Draw,
+        Multimeter::Display::Draw,
         Recorder::Graphics::Update
     };
 

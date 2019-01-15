@@ -115,7 +115,7 @@ void Multimeter::Update()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Multimeter::Graphics::Draw()
+void Multimeter::Display::Draw()
 {
     struct Func
     {
@@ -155,7 +155,7 @@ void Multimeter::Graphics::Draw()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Multimeter::Graphics::PrepareConstantVoltage()
+void Multimeter::Display::PrepareConstantVoltage()
 {
     out[0] = buffer[1];
     out[1] = buffer[2];
@@ -186,7 +186,7 @@ void Multimeter::Graphics::PrepareConstantVoltage()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Multimeter::Graphics::PrepareVariableVoltage()
+void Multimeter::Display::PrepareVariableVoltage()
 {
     out[0] = buffer[2];
     out[4] = buffer[5];
@@ -216,7 +216,7 @@ void Multimeter::Graphics::PrepareVariableVoltage()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Multimeter::Graphics::PrepareConstantCurrent()
+void Multimeter::Display::PrepareConstantCurrent()
 {
     out[0] = (char)buffer[1];
     out[1] = buffer[2];
@@ -231,7 +231,7 @@ void Multimeter::Graphics::PrepareConstantCurrent()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Multimeter::Graphics::PrepareVariableCurrent()
+void Multimeter::Display::PrepareVariableCurrent()
 {
     out[0] = buffer[2];
     out[1] = '.';
@@ -245,7 +245,7 @@ void Multimeter::Graphics::PrepareVariableCurrent()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Multimeter::Graphics::PrepareResistance()
+void Multimeter::Display::PrepareResistance()
 {
     out[0] = buffer[2];
     out[4] = buffer[5];
@@ -282,7 +282,7 @@ void Multimeter::Graphics::PrepareResistance()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Multimeter::Graphics::PrepareTestDiode()
+void Multimeter::Display::PrepareTestDiode()
 {
     out[0] = (char)buffer[1];
     out[1] = buffer[2];
@@ -296,7 +296,7 @@ void Multimeter::Graphics::PrepareTestDiode()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Multimeter::Graphics::PrepareRing()
+void Multimeter::Display::PrepareRing()
 {
     out[0] = buffer[2];
     out[1] = '.';

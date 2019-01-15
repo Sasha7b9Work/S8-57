@@ -16,7 +16,7 @@ class Multimeter
 public:
 
     /// Используется для отрисовки
-    class Graphics
+    class Display
     {
     public:
         static void Draw();
