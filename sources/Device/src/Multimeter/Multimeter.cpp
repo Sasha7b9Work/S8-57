@@ -15,7 +15,7 @@
 using namespace Display::Primitives;
 
 
-extern char *out;
+//extern char *out;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -105,9 +105,6 @@ void Multimeter::Update()
     }
 
     uint8 send[4] = {0x02, (uint8)MULTI_MEASURE.Symbol(), (uint8)(range + 0x30), 0x0a};
-  //  trans[0] = (char)send[1];
-  //  trans[1] = (char)send[2];
-  //  trans[2] = '\0';
     HAL_UART_Transmit(&handlerUART, send, 4, 100);
     HAL_UART_Receive_IT(&handlerUART, bufferUART, 10);
 }
@@ -115,9 +112,6 @@ void Multimeter::Update()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *)
 {
-  //  memcpy(recv, bufferUART + 1, 8);
-  //  recv[9] = '\0';
-
     Multimeter::SetMeasure(bufferUART);
 
     HAL_UART_Receive_IT(&Multimeter::handlerUART, bufferUART, 10);
