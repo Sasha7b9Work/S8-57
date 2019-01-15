@@ -29,17 +29,6 @@ struct FunctionTime
     } value;
 };
 
-/// Тип выборки для режима рандомизатора.
-struct SampleType
-{
-    enum E
-    {
-        Real,    ///< реальное время - в построении участвуют только реально считанные точки, ничего не рассчитывается.
-        Equal    ///< эквивалентная - сигнал строится по последним точкам, полученным от рандомизатора.
-    } value;
-    explicit SampleType(E v) : value(v) {};
-};
-
 #define SET_TSHIFT          (set.time_shift)
 #define SET_TBASE           (set.time_base)
 #define TIME_DIV_XPOS       (set.time_timeDivXPos)
