@@ -28,9 +28,9 @@ using namespace Osci::Settings;
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 int FPGA::SET::TShift::value = 0;
 
-namespace FPGA
+namespace Osci
 {
-    namespace SET
+    namespace Settings
     {
         namespace Trig
         {
@@ -50,13 +50,13 @@ static uint8 ValueForRange(Chan::E ch);
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void FPGA::SET::Trig::Source::Load()
+void Osci::Settings::Trig::Source::Load()
 {
     Input::Load();
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void FPGA::SET::Trig::Input::Load()
+void Osci::Settings::Trig::Input::Load()
 {
     static const uint8 datas[3][2] =
     {//       A                 B
@@ -127,18 +127,12 @@ void Osci::Settings::RShift::Load(Chan::E ch)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void FPGA::SET::Trig::Level::Load()
+void Osci::Settings::Trig::Level::Load()
 {
     /// \todo Здесь много лишних движений. Нужно что-то сделать с вводом SET_TRIGLEV_SOURCE
     uint16 value = (uint16)((Trig::MAX + Trig::MIN) - SET_TRIGLEV_SOURCE);
 
     WriteRegisters(Pin::SPI3_CS1, (uint16)(0xa000 | (value << 2)));
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void FPGA::SET::Trig::Level::Set(Trig::Source::E /*source*/, int /*level*/)
-{
-
 }
 
 #ifdef _WIN32
@@ -329,7 +323,7 @@ void Osci::Settings::RShift::Change(Chan::E ch, int delta)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void FPGA::SET::Trig::Level::Change(int delta)
+void Osci::Settings::Trig::Level::Change(int delta)
 {
     ::Math::AdditionThisLimitation<uint16>(&SET_TRIGLEV_SOURCE, STEP_TRIGLEV * delta, Trig::MIN, Trig::MAX);
 
@@ -347,9 +341,9 @@ void Osci::Settings::RShift::Set(Chan::E ch, uint16 rShift)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void FPGA::SET::Trig::Polarity::Load()
+void Osci::Settings::Trig::Polarity::Load()
 {
-    GiveStart();
+    FPGA::GiveStart();
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -459,13 +453,13 @@ String Osci::Settings::RShift::ToString(uint16 rShiftRel, Osci::Settings::Range:
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-bool FPGA::SET::Trig::SyncPulse()
+bool Osci::Settings::Trig::SyncPulse()
 {
     return pulse;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void FPGA::SET::Trig::DrawOnGrid()
+void Osci::Settings::Trig::DrawOnGrid()
 {
     if (needDraw)
     {
@@ -478,7 +472,7 @@ void FPGA::SET::Trig::DrawOnGrid()
         //Painter::FillBoundedRegion(x, y, width, height, Color::BACK, Color::FILL);
         Region(width, height).DrawBounded(x, y, Color::BACK, Color::FILL);
 
-        float trigLevVal = Math::RShift2Abs(SET_TRIGLEV_SOURCE, SET_RANGE(TRIG_SOURCE)) * Divider(SET_DIVIDER(TRIG_SOURCE)).ToAbs();
+        float trigLevVal = FPGA::Math::RShift2Abs(SET_TRIGLEV_SOURCE, SET_RANGE(TRIG_SOURCE)) * Divider(SET_DIVIDER(TRIG_SOURCE)).ToAbs();
 
         Voltage voltage(trigLevVal);
 
@@ -487,7 +481,7 @@ void FPGA::SET::Trig::DrawOnGrid()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void FPGA::SET::Trig::NeedForDraw(uint timeMS)
+void Osci::Settings::Trig::NeedForDraw(uint timeMS)
 {
     needDraw = true;
     Timer::SetAndStartOnce(Timer::Type::ShowLevelTrigLev, DisableDrawing, timeMS);
@@ -495,7 +489,7 @@ void FPGA::SET::Trig::NeedForDraw(uint timeMS)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void FPGA::SET::Trig::DisableDrawing()
+static void Osci::Settings::Trig::DisableDrawing()
 {
     needDraw = false;
 }

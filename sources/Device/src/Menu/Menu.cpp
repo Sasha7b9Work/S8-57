@@ -393,7 +393,6 @@ void Menu::ProcessingLongPressureButton()
         }
         else if(button == Key::Trig)
         {
-            Trig::Level::Set(TRIG_SOURCE, Trig::ZERO);
         }
         else if(button == Key::ChannelA)
         {

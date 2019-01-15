@@ -113,5 +113,85 @@ namespace Osci
             /// Минимальный масштаб по времени, при котором ещё возможно включение режима пикового детектора
             static const E MIN_PEAK_DET = _200ns;
         };
+
+        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        namespace Trig
+        {
+            static const int MIN = 20;
+            static const int MAX = 980;
+            static const int ZERO = 500;
+            /// Возвращает true в случае наличия синхроимпульса
+            bool SyncPulse();
+            /// Вывести уровень синхронизации поверх сетки
+            void DrawOnGrid();
+            /// После вызова этой функции уровень синхронизации будет отрисовываться поверх сигнала в течение timMS миллисекунд
+            static void NeedForDraw(uint timeMS);
+
+            /// Источник синхронизации
+            struct Source
+            {
+                enum E
+                {
+                    A,    /// Канал 1
+                    B,    /// Канал 2
+                    Ext   /// Внешняя
+                } value;
+
+                static void Load();
+            };
+
+            struct Level
+            {
+                static void Load();
+
+                static void Change(int delta);
+            };
+
+            /// Режим запуска.
+            struct StartMode
+            {
+                enum E
+                {
+                    Auto,     ///< Автоматический.
+                    Wait,     ///< Ждущий.
+                    Single    ///< Однократный.
+                } value;
+            };
+
+            struct ModeFind
+            {
+                enum E
+                {
+                    Hand,      ///< Уровень синхронизации устанавливается вручную или автоматически - однократным нажажтием кнопки.
+                    Auto       ///< Подстройки уровня синхронизации производится автоматически после каждого нового считанного сигнала.
+                } value;
+            };
+
+            struct Input
+            {
+                enum E
+                {
+                    Full,
+                    HF,
+                    LF
+                } value;
+
+                /// Установить в соотвествующие положения выводы, отвечающие за источник и вход синхронизации
+                static void Load();
+            };
+
+            struct Polarity
+            {
+                enum E
+                {
+                    Rising,
+                    Falling
+                } value;
+
+                static void Load();
+            };
+
+            extern bool pulse;
+        };
     }
 }

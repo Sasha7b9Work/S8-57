@@ -89,7 +89,7 @@ void FPGA::Update() // -V2506
             }
             if(!HAL::GetFlag::TRIG_READY())
             {
-                SET::Trig::pulse = false;
+                Trig::pulse = false;
             }
         }
 
