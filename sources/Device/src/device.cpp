@@ -131,6 +131,7 @@ void Device::SetMode(Mode::E mode)
     if (currentMode == Mode::Osci)
     {
         Tester::Disable();
+        Osci::Init();
     }
     else if (currentMode == Mode::Tester)
     {

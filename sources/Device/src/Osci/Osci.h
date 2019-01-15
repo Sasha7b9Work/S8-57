@@ -2,11 +2,11 @@
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-class Osci
+namespace Osci
 {
-public:
-     static void Draw();
-     static void DrawCursorTrigLevel();
-     static void DrawScaleLine(int x, bool forTrigLev);
-     static void DrawMeasures();
+    void Init();
+    void Draw();
+    void DrawCursorTrigLevel();
+    void DrawScaleLine(int x, bool forTrigLev);
+    void DrawMeasures();
 };
