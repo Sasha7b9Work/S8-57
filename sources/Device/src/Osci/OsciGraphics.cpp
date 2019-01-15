@@ -18,7 +18,6 @@
 
 
 using namespace Display::Primitives;
-using namespace FPGA::SET;
 using namespace Osci::Settings;
 
 

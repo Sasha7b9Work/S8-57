@@ -8,6 +8,7 @@
 #include "Settings/Settings.h"
 #endif
 
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 extern const PageBase pageHoldOff;
 const PageBase *PageTrig::PageHoldOff::pointer = &pageHoldOff;
@@ -16,7 +17,7 @@ const PageBase *PageTrig::PageHoldOff::pointer = &pageHoldOff;
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void OnChanged_HoldOff(bool)
 {
-    FPGA::SET::LoadHoldfOff();
+    Osci::Settings::LoadHoldfOff();
 }
 
 DEF_CHOICE_2( cHoldOff,                                                                                                                               //--- —»Õ’– - ”ƒ≈–∆¿Õ»≈ - ”‰ÂÊ‡ÌËÂ ---
@@ -32,7 +33,7 @@ DEF_CHOICE_2( cHoldOff,                                                         
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void OnChanged_Duration()
 {
-    FPGA::SET::LoadHoldfOff();
+    Osci::Settings::LoadHoldfOff();
 }
 
 DEF_GOVERNOR( gDuration,                                                                                                                           //--- —»Õ’– - ”ƒ≈–∆¿Õ»≈ - ƒÎËÚÂÎ¸ÌÓÒÚ¸ ---

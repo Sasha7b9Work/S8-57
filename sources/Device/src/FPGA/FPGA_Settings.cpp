@@ -21,7 +21,6 @@
 
 using namespace Display::Primitives;
 using namespace FPGA::HAL::GPIO;
-using namespace FPGA::SET;
 using namespace Osci::Settings;
 
 
@@ -184,29 +183,6 @@ void TBase::Load()
     TShift::Load();
 }
 
-#ifdef _WIN32
-#pragma warning(pop)
-#endif
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void FPGA::SET::LoadHoldfOff()
-{
-    FSMC::WriteToFPGA8(WR_TRIG_HOLD_ENABLE, TRIG_HOLDOFF_ENABLED ? 1U : 0U);
-
-    uint value = (uint)(0 - TRIG_HOLDOFF + 1);
-
-    BitSet32 bs(value);
-
-    FSMC::WriteToFPGA8(WR_TRIG_HOLD_VALUE_LOW, bs.byte0);
-    FSMC::WriteToFPGA8(WR_TRIG_HOLD_VALUE_MID, bs.byte1);
-    FSMC::WriteToFPGA8(WR_TRIG_HOLD_VALUE_HI, bs.byte2);
-}
-
-#ifdef WIN32
-#pragma warning(push)
-#pragma warning(disable:4310)
-#endif
-
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static uint8 ValueForRange(Chan::E ch) // -V2506
 {
@@ -247,7 +223,7 @@ static uint8 ValueForRange(Chan::E ch) // -V2506
 #endif
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void FPGA::SET::LoadCalibratorMode()
+void FPGA::Settings::LoadCalibratorMode()
 {
     HAL::LoadRegUPR();
 }
@@ -565,3 +541,11 @@ pString Range::Name() const
 
     return names[value].names[LANG];
 };
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void FPGA::Settings::SetModeCouple(Chan::E ch, ModeCouple::E modeCoupe)
+{
+    SET_COUPLE(ch) = modeCoupe;
+    Osci::Settings::Range::LoadBoth();
+}
+

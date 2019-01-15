@@ -12,7 +12,6 @@
 
 
 using namespace FPGA::HAL::GPIO;
-using namespace FPGA::SET;
 using namespace Osci::Settings;
 
 

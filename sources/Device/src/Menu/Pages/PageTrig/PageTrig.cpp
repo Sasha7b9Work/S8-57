@@ -13,7 +13,6 @@
 #endif
 
 
-using namespace FPGA::SET;
 using namespace Osci::Settings;
 
 

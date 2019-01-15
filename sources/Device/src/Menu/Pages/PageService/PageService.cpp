@@ -23,7 +23,6 @@
 
 
 using namespace Display::Primitives;
-using namespace FPGA::SET;
 using namespace Osci::Settings;
 
 extern const PageBase pService;
@@ -76,7 +75,7 @@ DEF_BUTTON( bAutoSearch,                                                        
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void OnChanged_Calibrator_Calibrator(bool)
 {
-    FPGA::SET::LoadCalibratorMode();
+    FPGA::Settings::LoadCalibratorMode();
 }
 
 DEF_CHOICE_2( cCalibrator_Calibrator, // -V206                                                                                                     //--- —≈–¬»— -  ¿À»¡–¿“Œ– -  ‡ÎË·‡ÚÓ ---
