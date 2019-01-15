@@ -9,16 +9,6 @@
  *  @{
  */
 
-struct PeakDetMode
-{
-    enum E
-    {
-        Disabled,
-        Enabled,
-        Average
-    } value;
-};
-
 /// Тип привязки к смещению по горизонтали
 struct LinkingTShift
 {
