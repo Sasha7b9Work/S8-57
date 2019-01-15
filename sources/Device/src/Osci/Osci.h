@@ -8,11 +8,14 @@ namespace Osci
 
     void DeInit();
 
-    void Draw();
+    namespace Display
+    {
+        void Draw();
 
-    void DrawCursorTrigLevel();
+        void DrawCursorTrigLevel();
 
-    void DrawScaleLine(int x, bool forTrigLev);
+        void DrawScaleLine(int x, bool forTrigLev);
 
-    void DrawMeasures();
+        void DrawMeasures();
+    }
 };

@@ -26,7 +26,7 @@ using namespace Osci::Settings;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void Osci::Draw()
+void Osci::Display::Draw()
 {
     Painter::BeginScene(Color::BACK);
 
@@ -54,7 +54,7 @@ void Osci::Draw()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Osci::DrawCursorTrigLevel()
+void Osci::Display::DrawCursorTrigLevel()
 {
     Trig::Source::E ch = TRIG_SOURCE;
 
@@ -102,7 +102,7 @@ void Osci::DrawCursorTrigLevel()
 
     Font::SetCurrent(Font::Type::_8);
 
-    DrawScaleLine(Display::WIDTH - 11, true);
+    DrawScaleLine(::Display::WIDTH - 11, true);
     int left = Grid::Right() + 9;
     int height = Grid::Height() - 2 * DELTA;
     int shiftFullMin = RShift::MIN + Trig::MIN;
@@ -120,7 +120,7 @@ void Osci::DrawCursorTrigLevel()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Osci::DrawScaleLine(int x, bool forTrigLev)
+void Osci::Display::DrawScaleLine(int x, bool forTrigLev)
 {
     int width = 6;
     int topY = Grid::Top() + DELTA;
