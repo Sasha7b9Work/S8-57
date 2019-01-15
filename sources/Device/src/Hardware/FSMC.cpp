@@ -3,9 +3,10 @@
 #include <stm32f4xx.h>
 #include "defines.h"
 #include "Message.h"
+#include "Hardware/FSMC.h"
+#include "Hardware/Timer.h"
 #include "Keyboard/DecoderDevice.h"
-#include "FSMC.h"
-#include "Timer.h"
+#include "Utils/Debug.h"
 #endif
 
 
@@ -242,7 +243,6 @@ void FSMC::WriteToPanel(const uint8 *data, uint length)
             }
         }
 
-//        debug.StartIncreaseCounter();
         SetOutData(data[i]);                    // выставляем данные на шину
         NE4_RESET;                              // И даём сигнал, что они готовы к считыванию
 
@@ -258,7 +258,6 @@ void FSMC::WriteToPanel(const uint8 *data, uint length)
         NE4_SET;                                // Убираем признак передачи
         while(PAN_RECIEVE_TRANSMIT_CONFIRM) {};
         ++i;                                    // переходим к следующему байту в буфере
-        //debug.StopIncreaseCounter();
     }
 
     interchangeWithPanel = false;

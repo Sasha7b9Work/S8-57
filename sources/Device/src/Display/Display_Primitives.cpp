@@ -6,6 +6,7 @@
 #include "Painter.h"
 #include "Hardware/FSMC.h"
 #include "Utils/Buffer.h"
+#include "Utils/Debug.h"
 #include "Utils/Math.h"
 #include <cstring>
 #endif
@@ -147,6 +148,11 @@ Display::Primitives::Text::Text(const String &string, uint8 _size) : sizeOfType(
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 int Display::Primitives::Text::Draw(int x, int y, Color color)
 {
+    if (std::strlen(text) == 0)
+    {
+        return x;
+    }
+
     if (sizeOfType != 1)
     {
         DrawBig(x, y, color);
@@ -268,7 +274,7 @@ int Display::Primitives::Text::DrawInCenterRect(int eX, int eY, int width, int e
 int Display::Primitives::Text::DrawSmall(int x, int y, Color color)
 {
     Color::SetCurrent(color);
-
+    
     uint sizeBuffer = 1 + 2 + 1 + 1 + std::strlen(text);
 
     Buffer buffer(sizeBuffer);
@@ -277,7 +283,7 @@ int Display::Primitives::Text::DrawSmall(int x, int y, Color color)
     buffer.data[2] = (uint8)(x >> 8);
     buffer.data[3] = (uint8)y;
     buffer.data[4] = (uint8)std::strlen(text);
-
+    
     std::memcpy(&buffer.data[5], (void *)text, std::strlen(text));
 
     FSMC::WriteToPanel(buffer.data, sizeBuffer);

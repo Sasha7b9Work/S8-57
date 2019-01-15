@@ -144,6 +144,9 @@
     <ClInclude Include="..\..\Panel\src\Utils\Math.h">
       <Filter>Utils</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Panel\src\Utils\Debug.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Panel\src\Log.cpp">
@@ -207,6 +210,9 @@
       <Filter>Utils</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Panel\src\Utils\Math.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Panel\src\Utils\Debug.cpp">
       <Filter>Utils</Filter>
     </ClCompile>
   </ItemGroup>

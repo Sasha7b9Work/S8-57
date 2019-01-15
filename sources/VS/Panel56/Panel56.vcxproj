@@ -56,6 +56,7 @@
     <ClInclude Include="..\..\Panel\src\Log.h" />
     <ClInclude Include="..\..\Panel\src\Settings\Settings.h" />
     <ClInclude Include="..\..\Panel\src\Settings\SettingsTypes.h" />
+    <ClInclude Include="..\..\Panel\src\Utils\Debug.h" />
     <ClInclude Include="..\..\Panel\src\Utils\DecoderPanel.h" />
     <ClInclude Include="..\..\Panel\src\Utils\Math.h" />
   </ItemGroup>
@@ -79,6 +80,7 @@
     <ClCompile Include="..\..\Panel\src\Hardware\stm32\Timer4XX.cpp" />
     <ClCompile Include="..\..\Panel\src\Log.cpp" />
     <ClCompile Include="..\..\Panel\src\main.cpp" />
+    <ClCompile Include="..\..\Panel\src\Utils\Debug.cpp" />
     <ClCompile Include="..\..\Panel\src\Utils\DecoderPanel.cpp" />
     <ClCompile Include="..\..\Panel\src\Utils\Math.cpp" />
   </ItemGroup>
