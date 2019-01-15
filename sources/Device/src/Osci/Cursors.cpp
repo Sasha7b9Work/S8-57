@@ -2,19 +2,21 @@
 #ifndef WIN32
 #include "defines.h"
 #include "Cursors.h"
-#include "Settings/Settings.h"
 #include "Display/Colors.h"
 #include "Display/Display_Primitives.h"
 #include "Display/Grid.h"
 #include "Display/Painter.h"
+#include "FPGA/FPGA_Math.h"
 #include "Menu/Menu.h"
-#include "FPGA/FPGAMath.h"
 #include "Utils/StringUtils.h"
 #include "Utils/Values.h"
+#include "Settings/Settings.h"
 #include <cmath>
 #include <cstring>
 #endif
 
+
+using namespace FPGA::Math;
 
 using Display::Rectangle;
 using Display::DashedHLine;
@@ -45,7 +47,7 @@ bool Cursors::NecessaryDraw()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 String Cursors::Voltage(Chan::E source, int numCur)
 {
-    float voltage = FPGAMath::VoltageCursor(Cursors::PosU(source, numCur), SET_RANGE(source), SET_RSHIFT(source));
+    float voltage = FPGA::Math::VoltageCursor(Cursors::PosU(source, numCur), SET_RANGE(source), SET_RSHIFT(source));
     if (SET_DIVIDER_10(source))
     {
         voltage *= 10.0F;
@@ -57,7 +59,7 @@ String Cursors::Voltage(Chan::E source, int numCur)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 String Cursors::Time(Chan::E source, int numCur)
 {
-    float time = FPGAMath::TimeCursor(CURsT_POS(source, numCur), SET_TBASE);
+    float time = FPGA::Math::TimeCursor(CURsT_POS(source, numCur), SET_TBASE);
 
     return ::Time(time).ToString(true);
 }

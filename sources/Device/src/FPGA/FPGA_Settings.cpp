@@ -9,7 +9,7 @@
 #include "FPGA.h"
 #include "FPGA_HAL.h"
 #include "FPGA_Settings.h"
-#include "FPGAMath.h"
+#include "FPGA_Math.h"
 #include "FPGATypes.h"
 #include "Hardware/FSMC.h"
 #include "Hardware/Timer.h"
@@ -287,11 +287,11 @@ void FPGA::SET::Range::Change(Chan::E ch, int delta)
 {
     if (delta > 0)
     {
-        Math::LimitationIncrease<uint8>((uint8 *)(&SET_RANGE(ch)), (uint8)(Range::Number - 1)); // -V206
+        ::Math::LimitationIncrease<uint8>((uint8 *)(&SET_RANGE(ch)), (uint8)(Range::Number - 1)); // -V206
     }
     else
     {
-        Math::LimitationDecrease<uint8>((uint8 *)(&SET_RANGE(ch)), 0);  // -V206
+        ::Math::LimitationDecrease<uint8>((uint8 *)(&SET_RANGE(ch)), 0);  // -V206
     }
     Range::LoadBoth();
 }
@@ -301,7 +301,7 @@ void FPGA::SET::TBase::Change(int delta)
 {
     if (delta > 0)
     {
-        Math::LimitationIncrease<uint8>((uint8 *)(&SET_TBASE), (uint8)(TBase::Number - 1)); // -V206
+        ::Math::LimitationIncrease<uint8>((uint8 *)(&SET_TBASE), (uint8)(TBase::Number - 1)); // -V206
     }
     else
     {
@@ -312,7 +312,7 @@ void FPGA::SET::TBase::Change(int delta)
             return;                                         // и выходим
         }
 
-        Math::LimitationDecrease<uint8>((uint8 *)(&SET_TBASE), 0); // -V206
+        ::Math::LimitationDecrease<uint8>((uint8 *)(&SET_TBASE), 0); // -V206
     }
 
     TBase::Load();
@@ -322,7 +322,7 @@ void FPGA::SET::TBase::Change(int delta)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void FPGA::SET::RShift::Change(Chan::E ch, int delta)
 {
-    Math::AdditionThisLimitation<uint16>(&SET_RSHIFT(ch), STEP_RSHIFT * delta, RShift::MIN, RShift::MAX);
+    ::Math::AdditionThisLimitation<uint16>(&SET_RSHIFT(ch), STEP_RSHIFT * delta, RShift::MIN, RShift::MAX);
 
     RShift::Load(ch);
 }
@@ -330,7 +330,7 @@ void FPGA::SET::RShift::Change(Chan::E ch, int delta)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void FPGA::SET::Trig::Level::Change(int delta)
 {
-    Math::AdditionThisLimitation<uint16>(&SET_TRIGLEV_SOURCE, STEP_TRIGLEV * delta, Trig::MIN, Trig::MAX);
+    ::Math::AdditionThisLimitation<uint16>(&SET_TRIGLEV_SOURCE, STEP_TRIGLEV * delta, Trig::MIN, Trig::MAX);
 
     Trig::Level::Load();
 
@@ -340,7 +340,7 @@ void FPGA::SET::Trig::Level::Change(int delta)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void FPGA::SET::RShift::Set(Chan::E ch, uint16 rShift)
 {
-    Math::Limitation<uint16>(&rShift, RShift::MIN, RShift::MAX);
+    ::Math::Limitation<uint16>(&rShift, RShift::MIN, RShift::MAX);
     SET_RSHIFT(ch) = rShift;
     RShift::Load(ch);
 }
@@ -419,7 +419,7 @@ void FPGA::SET::TShift::Set(int tShift)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 String FPGA::SET::TShift::ToString(TBase::E tBase) const
 {
-    float time = FPGAMath::TShift2Abs(value, tBase);
+    float time = FPGA::Math::TShift2Abs(value, tBase);
     return Time(time).ToString(true);
 }
 
@@ -453,6 +453,6 @@ void FPGA::SET::RShift::Draw(Chan::E ch)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 String FPGA::SET::RShift::ToString(uint16 rShiftRel, FPGA::SET::Range::E range, Divider::E divider)
 {
-    float rShiftVal = FPGAMath::RShift2Abs(rShiftRel, range) * Divider(divider).ToAbs();
+    float rShiftVal = FPGA::Math::RShift2Abs(rShiftRel, range) * Divider(divider).ToAbs();
     return Voltage(rShiftVal).ToString(true);
 }

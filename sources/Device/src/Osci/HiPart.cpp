@@ -2,15 +2,15 @@
 #ifndef WIN32
 #include "defines.h"
 #include "HiPart.h"
-#include "Settings/Settings.h"
 #include "Display/Display_Primitives.h"
 #include "Display/Painter.h"
 #include "Display/Symbols.h"
 #include "Display/Grid.h"
+#include "FPGA/FPGA.h"
+#include "FPGA/FPGA_Math.h"
+#include "Settings/Settings.h"
 #include "Utils/Dictionary.h"
 #include "Utils/Values.h"
-#include "FPGA/FPGA.h"
-#include "FPGA/FPGAMath.h"
 #include <cmath>
 #endif
 
@@ -60,8 +60,8 @@ void HiPart::WriteCursors()
             Cursors::Voltage(source, 0).Draw(x, y1);
             Cursors::Voltage(source, 1).Draw(x, y2);
             x = startX + 49;
-            float pos0 = FPGAMath::VoltageCursor(Cursors::PosU(source, 0), SET_RANGE(source), SET_RSHIFT(source));
-            float pos1 = FPGAMath::VoltageCursor(Cursors::PosU(source, 1), SET_RANGE(source), SET_RSHIFT(source));
+            float pos0 = FPGA::Math::VoltageCursor(Cursors::PosU(source, 0), SET_RANGE(source), SET_RSHIFT(source));
+            float pos1 = FPGA::Math::VoltageCursor(Cursors::PosU(source, 1), SET_RANGE(source), SET_RSHIFT(source));
             float delta = std::fabsf(pos1 - pos0);
             if(SET_DIVIDER_10(source))
             {
@@ -89,8 +89,8 @@ void HiPart::WriteCursors()
             Cursors::Time(source, 1).Draw(x, y2);
             x = startX + 153;          
 
-            float pos0 = FPGAMath::TimeCursor(CURsT_POS(source, 0), SET_TBASE);
-            float pos1 = FPGAMath::TimeCursor(CURsT_POS(source, 1), SET_TBASE);
+            float pos0 = FPGA::Math::TimeCursor(CURsT_POS(source, 0), SET_TBASE);
+            float pos1 = FPGA::Math::TimeCursor(CURsT_POS(source, 1), SET_TBASE);
             float delta = std::fabsf(pos1 - pos0);
             String(":dT=").Draw(x, y1);
             Time(delta).ToString(false).Draw(x + 17, y1);

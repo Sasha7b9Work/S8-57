@@ -30,25 +30,25 @@
       <WinId>1506</WinId>
       <ViewName>Symbols</ViewName>
       <UserString></UserString>
-      <TableColWidths>106 106 106</TableColWidths>
+      <TableColWidths>70 70 70</TableColWidths>
     </View>
     <View>
       <WinId>1936</WinId>
       <ViewName>Watch 1</ViewName>
       <UserString></UserString>
-      <TableColWidths>106 106 106</TableColWidths>
+      <TableColWidths>70 70 70</TableColWidths>
     </View>
     <View>
       <WinId>1937</WinId>
       <ViewName>Watch 2</ViewName>
       <UserString></UserString>
-      <TableColWidths>106 106 106</TableColWidths>
+      <TableColWidths>70 70 70</TableColWidths>
     </View>
     <View>
       <WinId>1935</WinId>
       <ViewName>Call Stack + Locals</ViewName>
       <UserString></UserString>
-      <TableColWidths>106 106 106</TableColWidths>
+      <TableColWidths>70 70 70</TableColWidths>
     </View>
     <View>
       <WinId>2506</WinId>
@@ -91,10 +91,10 @@
         <yPos>-1</yPos>
       </MaxPosition>
       <NormalPosition>
-        <Top>415</Top>
-        <Left>469</Left>
-        <Right>1189</Right>
-        <Bottom>1042</Bottom>
+        <Top>246</Top>
+        <Left>807</Left>
+        <Right>2060</Right>
+        <Bottom>935</Bottom>
       </NormalPosition>
     </WindowPosition>
     <MDIClientArea>

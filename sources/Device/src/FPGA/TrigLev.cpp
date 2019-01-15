@@ -1,10 +1,10 @@
 #include "stdafx.h"
 #ifndef WIN32
 #include "defines.h"
-#include "FPGAMath.h"
 #include "Display/Display_Primitives.h"
 #include "Display/Grid.h"
 #include "Display/Painter.h"
+#include "FPGA_Math.h"
 #include "Hardware/Timer.h"
 #include "Settings/Settings.h"
 #include "Utils/Values.h"
@@ -48,7 +48,7 @@ void Trig::DrawOnGrid()
         //Painter::FillBoundedRegion(x, y, width, height, Color::BACK, Color::FILL);
         Region(width, height).DrawBounded(x, y, Color::BACK, Color::FILL);
 
-        float trigLevVal = FPGAMath::RShift2Abs(SET_TRIGLEV_SOURCE, SET_RANGE(TRIG_SOURCE)) * Divider(SET_DIVIDER(TRIG_SOURCE)).ToAbs();
+        float trigLevVal = Math::RShift2Abs(SET_TRIGLEV_SOURCE, SET_RANGE(TRIG_SOURCE)) * Divider(SET_DIVIDER(TRIG_SOURCE)).ToAbs();
 
         Voltage voltage(trigLevVal);
 

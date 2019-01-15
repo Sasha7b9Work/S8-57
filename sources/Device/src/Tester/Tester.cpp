@@ -5,8 +5,8 @@
 #include "Tester.h"
 #include "Display/Display.h"
 #include "FPGA/FPGA.h"
+#include "FPGA/FPGA_Math.h"
 #include "FPGA/FPGA_Settings.h"
-#include "FPGA/FPGAMath.h"
 #include "Hardware/FSMC.h"
 #include "Hardware/Hardware.h"
 #include "Hardware/Timer.h"
@@ -343,7 +343,7 @@ String Tester::Shift::ToString(Scale::E scale) // -V2506
         return RShift::ToString(shift, (Range::E)scale, Divider::_1);
     }
 
-    float shiftAbs = FPGAMath::RShift2Abs(shift,  (Range::E)scale) * 1e-3F;
+    float shiftAbs = FPGA::Math::RShift2Abs(shift,  (Range::E)scale) * 1e-3F;
 
     return Current(shiftAbs).ToString();
 }

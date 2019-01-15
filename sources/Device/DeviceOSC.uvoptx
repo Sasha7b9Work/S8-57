@@ -2033,7 +2033,7 @@
 
   <Group>
     <GroupName>FPGA</GroupName>
-    <tvExp>0</tvExp>
+    <tvExp>1</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
@@ -2128,8 +2128,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\src\FPGA\FPGA_Settings.cpp</PathWithFileName>
-      <FilenameWithoutPath>FPGA_Settings.cpp</FilenameWithoutPath>
+      <PathWithFileName>.\src\FPGA\FPGA_Math.cpp</PathWithFileName>
+      <FilenameWithoutPath>FPGA_Math.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -2140,8 +2140,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\src\FPGA\FPGA_Settings.h</PathWithFileName>
-      <FilenameWithoutPath>FPGA_Settings.h</FilenameWithoutPath>
+      <PathWithFileName>.\src\FPGA\FPGA_Math.h</PathWithFileName>
+      <FilenameWithoutPath>FPGA_Math.h</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -2152,8 +2152,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\src\FPGA\FPGAMath.cpp</PathWithFileName>
-      <FilenameWithoutPath>FPGAMath.cpp</FilenameWithoutPath>
+      <PathWithFileName>.\src\FPGA\FPGA_Settings.cpp</PathWithFileName>
+      <FilenameWithoutPath>FPGA_Settings.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -2164,8 +2164,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\src\FPGA\FPGAMath.h</PathWithFileName>
-      <FilenameWithoutPath>FPGAMath.h</FilenameWithoutPath>
+      <PathWithFileName>.\src\FPGA\FPGA_Settings.h</PathWithFileName>
+      <FilenameWithoutPath>FPGA_Settings.h</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>

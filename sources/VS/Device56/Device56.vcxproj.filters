@@ -162,9 +162,6 @@
     <ClCompile Include="..\..\Device\src\FPGA\FPGA_437.cpp">
       <Filter>FPGA</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Device\src\FPGA\FPGAMath.cpp">
-      <Filter>FPGA</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Device\src\FPGA\TrigLev.cpp">
       <Filter>FPGA</Filter>
     </ClCompile>
@@ -456,6 +453,9 @@
     <ClCompile Include="..\..\Device\src\FPGA\FPGA_HAL.cpp">
       <Filter>FPGA</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Device\src\FPGA\FPGA_Math.cpp">
+      <Filter>FPGA</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Device\src\defines.h">
@@ -531,9 +531,6 @@
       <Filter>FPGA</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Device\src\FPGA\FPGA.h">
-      <Filter>FPGA</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Device\src\FPGA\FPGAMath.h">
       <Filter>FPGA</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Device\src\FPGA\FPGATypes.h">
@@ -810,6 +807,9 @@
       <Filter>FPGA</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Device\src\FPGA\FPGA_HAL.h">
+      <Filter>FPGA</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Device\src\FPGA\FPGA_Math.h">
       <Filter>FPGA</Filter>
     </ClInclude>
   </ItemGroup>

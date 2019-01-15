@@ -7,17 +7,19 @@
 #include "Display/Grid.h"
 #include "Display/Painter.h"
 #include "Display/Symbols.h"
-#include "Settings/SettingsTime.h"
-#include "FPGA/FPGAMath.h"
-#include "Tables.h"
-#include "Utils/StringUtils.h"
 #include "FlashDrive/FlashDrive.h"
-#include "Utils/Dictionary.h"
-#include "Utils/Values.h"
+#include "FPGA/FPGA_Math.h"
 #include "Hardware/CPU.h"
 #include "Hardware/VCP.h"
+#include "Settings/SettingsTime.h"
+#include "Tables.h"
+#include "Utils/StringUtils.h"
+#include "Utils/Dictionary.h"
+#include "Utils/Values.h"
 #endif
 
+
+using namespace FPGA::Math;
 
 using Display::Char;
 using Display::HLine;
@@ -225,7 +227,7 @@ int BottomPart::WriteChannel(Chan::E ch, int x, int y)
 
     x += 22;
 
-    Voltage(FPGAMath::RShift2Abs(SET_RSHIFT(ch), SET_RANGE(ch))).ToString(true).Draw(x, y);
+    Voltage(FPGA::Math::RShift2Abs(SET_RSHIFT(ch), SET_RANGE(ch))).ToString(true).Draw(x, y);
 
     return x + 47;
 }

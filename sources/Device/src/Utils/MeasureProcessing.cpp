@@ -3,7 +3,7 @@
 #include "defines.h"
 #include "Data/DataStorage.h"
 #include "Data/Reader.h"
-#include "FPGA/FPGAMath.h"
+#include "FPGA/FPGA_Math.h"
 #include "Settings/Settings.h"
 #include "Utils/Values.h"
 #include "Utils/Math.h"
@@ -201,7 +201,7 @@ float CalculateVoltageMax(Chan::E ch)
 
     uint8 value = ROUND(uint8, max);
 
-    return FPGAMath::Point2Voltage(value, range, rShift);
+    return FPGA::Math::Point2Voltage(value, range, rShift);
 }
 
 
@@ -215,7 +215,7 @@ float CalculateVoltageMin(Chan::E ch)
         Measure::SetMarkerVoltage(ch, 0, min);             // Здесь не округляем, потому что min может быть только целым
     }
     
-    return FPGAMath::Point2Voltage(ROUND(uint8, min), RANGE_DS(ch),RSHIFT_DS(ch));
+    return FPGA::Math::Point2Voltage(ROUND(uint8, min), RANGE_DS(ch),RSHIFT_DS(ch));
 }
 
 
@@ -246,7 +246,7 @@ float CalculateVoltageMinSteady(Chan::E ch)
         Measure::SetMarkerVoltage(ch, 0, ROUND(float, min));
     }
 
-    return FPGAMath::Point2Voltage(ROUND(uint8, min), RANGE_DS(ch), RSHIFT_DS(ch));
+    return FPGA::Math::Point2Voltage(ROUND(uint8, min), RANGE_DS(ch), RSHIFT_DS(ch));
 }
 
 
@@ -262,7 +262,7 @@ float CalculateVoltageMaxSteady(Chan::E ch)
         Measure::SetMarkerVoltage(ch, 0, max);
     }
 
-    return FPGAMath::Point2Voltage(ROUND(uint8, max), RANGE_DS(ch), RSHIFT_DS(ch));
+    return FPGA::Math::Point2Voltage(ROUND(uint8, max), RANGE_DS(ch), RSHIFT_DS(ch));
 }
 
 
@@ -281,7 +281,7 @@ float CalculateVoltageVybrosPlus(Chan::E ch)
     }
 
     uint16 rShift = RSHIFT_DS(ch);
-    return std::fabsf(FPGAMath::Point2Voltage(ROUND(uint8, maxSteady), RANGE_DS(ch), rShift) - FPGAMath::Point2Voltage(ROUND(uint8, max), RANGE_DS(ch), rShift));
+    return std::fabsf(FPGA::Math::Point2Voltage(ROUND(uint8, maxSteady), RANGE_DS(ch), rShift) - FPGA::Math::Point2Voltage(ROUND(uint8, max), RANGE_DS(ch), rShift));
 }
 
 
@@ -299,7 +299,7 @@ float CalculateVoltageVybrosMinus(Chan::E ch)
     }
 
     uint16 rShift = RSHIFT_DS(ch);
-    return std::fabsf(FPGAMath::Point2Voltage(ROUND(uint8, minSteady), RANGE_DS(ch), rShift) - FPGAMath::Point2Voltage(ROUND(uint8, min), RANGE_DS(ch), rShift));
+    return std::fabsf(FPGA::Math::Point2Voltage(ROUND(uint8, minSteady), RANGE_DS(ch), rShift) - FPGA::Math::Point2Voltage(ROUND(uint8, min), RANGE_DS(ch), rShift));
 }
 
 
@@ -348,7 +348,7 @@ float CalculateVoltageAverage(Chan::E ch)
         Measure::SetMarkerVoltage(ch, 0, aveRel);
     }
 
-    return FPGAMath::Point2Voltage(aveRel, RANGE_DS(ch), RSHIFT_DS(ch));
+    return FPGA::Math::Point2Voltage(aveRel, RANGE_DS(ch), RSHIFT_DS(ch));
 }
 
 
@@ -368,7 +368,7 @@ float CalculateVoltageRMS(Chan::E ch)
 
     for(int i = firstByte; i < firstByte + period; i++)
     {
-        float volts = FPGAMath::Point2Voltage(dataIn[i], range, rShift);
+        float volts = FPGA::Math::Point2Voltage(dataIn[i], range, rShift);
         rms +=  volts * volts;
     }
 
@@ -376,7 +376,7 @@ float CalculateVoltageRMS(Chan::E ch)
 
     if(MEAS_MARKED == Measure::Type::VoltageRMS)
     {
-        Measure::SetMarkerVoltage(ch, 0, FPGAMath::Voltage2Point(rms, range, rShift));
+        Measure::SetMarkerVoltage(ch, 0, FPGA::Math::Voltage2Point(rms, range, rShift));
     }
 
     return rms;
@@ -411,7 +411,7 @@ float CalculatePeriod(Chan::E ch)
 
             EXIT_IF_ERRORS_FLOAT(firstIntersection, secondIntersection); //-V2507
 
-            float per = FPGAMath::TShift2Abs(ROUND(uint16, secondIntersection - firstIntersection), SET_TBASE);
+            float per = FPGA::Math::TShift2Abs(ROUND(uint16, secondIntersection - firstIntersection), SET_TBASE);
 
             period[ch] = per;
 
@@ -615,7 +615,7 @@ float CalculateDurationPlus(Chan::E ch)
 
     EXIT_IF_ERROR_FLOAT(secondIntersection); //-V2507
 
-    return FPGAMath::TShift2Abs(ROUND(uint16, (secondIntersection - firstIntersection) / 2.0F), (TBase::E)TBASE_DS);
+    return FPGA::Math::TShift2Abs(ROUND(uint16, (secondIntersection - firstIntersection) / 2.0F), (TBase::E)TBASE_DS);
 }
 
 
@@ -643,7 +643,7 @@ float CalculateDurationMinus(Chan::E ch)
 
     EXIT_IF_ERROR_FLOAT(secondIntersection); //-V2507
 
-    return FPGAMath::TShift2Abs(ROUND(uint16, (secondIntersection - firstIntersection) / 2.0F), TBASE_DS);
+    return FPGA::Math::TShift2Abs(ROUND(uint16, (secondIntersection - firstIntersection) / 2.0F), TBASE_DS);
 }
 
 
@@ -672,7 +672,7 @@ float CalculateTimeNarastaniya(Chan::E ch)   /** \todo Здесь, возможно, нужно ув
 
     EXIT_IF_ERROR_FLOAT(secondIntersection); //-V2507
 
-    float retValue = FPGAMath::TShift2Abs(ROUND(uint16, (secondIntersection - firstIntersection) / 2.0F), TBASE_DS);
+    float retValue = FPGA::Math::TShift2Abs(ROUND(uint16, (secondIntersection - firstIntersection) / 2.0F), TBASE_DS);
 
     if (MEAS_MARKED == Measure::Type::TimeNarastaniya)
     {
@@ -710,7 +710,7 @@ float CalculateTimeSpada(Chan::E ch)        /// \todo Аналогично времени нараста
 
     EXIT_IF_ERROR_FLOAT(secondIntersection); //-V2507
 
-    float retValue = FPGAMath::TShift2Abs(ROUND(uint16, (secondIntersection - firstIntersection) / 2.0F), TBASE_DS);
+    float retValue = FPGA::Math::TShift2Abs(ROUND(uint16, (secondIntersection - firstIntersection) / 2.0F), TBASE_DS);
 
     if (MEAS_MARKED == Measure::Type::TimeSpada)
     {
@@ -1013,7 +1013,7 @@ float CalculateDelayPlus(Chan::E ch)
 
     EXIT_IF_ERROR_FLOAT(secondIntersection); //-V2507
 
-    return FPGAMath::TShift2Abs(ROUND(uint16, (secondIntersection - firstIntersection) / 2.0F), TBASE_DS);
+    return FPGA::Math::TShift2Abs(ROUND(uint16, (secondIntersection - firstIntersection) / 2.0F), TBASE_DS);
 }
 
 
@@ -1060,7 +1060,7 @@ float CalculateDelayMinus(Chan::E ch)
 
     EXIT_IF_ERROR_FLOAT(secondIntersection); //-V2507
 
-    return FPGAMath::TShift2Abs(ROUND(uint16, (secondIntersection - firstIntersection) / 2.0F), TBASE_DS);
+    return FPGA::Math::TShift2Abs(ROUND(uint16, (secondIntersection - firstIntersection) / 2.0F), TBASE_DS);
 }
 
 
@@ -1450,7 +1450,7 @@ static float CalcAve(uint16 *data, Range range, uint16 rShift)
     for (int i = 0; i < num; i++)
     {
         uint8 val = (uint8)data[i];
-        sum += FPGAMath::Point2Voltage(val, range, rShift);
+        sum += FPGA::Math::Point2Voltage(val, range, rShift);
     }
 
     return sum / num;
@@ -1474,10 +1474,10 @@ void Measure::Processing::CountedRange(Chan::E ch)
             if (rel)
             {
                 // Абсолютное значение точки на экране как она считана
-                float abs = FPGAMath::Point2Voltage(rel, rangeIn, rShiftIn);
+                float abs = FPGA::Math::Point2Voltage(rel, rangeIn, rShiftIn);
 
                 // Теперь рассчитываем новое относительное значения - для текущих rShift и range
-                rel = FPGAMath::Voltage2Point(abs, rangeOut, rShiftOut);
+                rel = FPGA::Math::Voltage2Point(abs, rangeOut, rShiftOut);
 
                 LIMITATION(rel, MIN_VALUE, MAX_VALUE); //-V2516
                 OUT(ch)[i] = rel;
@@ -1497,7 +1497,7 @@ void Measure::Processing::CountedTBase()
 {
     if (SET_TBASE != TBASE_DS)
     {
-        float ratio = FPGAMath::TShift2Abs(1, TBASE_DS) / FPGAMath::TShift2Abs(1, SET_TBASE);
+        float ratio = FPGA::Math::TShift2Abs(1, TBASE_DS) / FPGA::Math::TShift2Abs(1, SET_TBASE);
 
         int numBytes = NUM_BYTES_DS;
 

@@ -7,8 +7,8 @@
 #include "Display/Symbols.h"
 #include "Display/Painter.h"
 #include "FPGA/FPGA.h"
+#include "FPGA/FPGA_Math.h"
 #include "FPGA/FPGA_Settings.h"
-#include "FPGA/FPGAMath.h"
 #include "Hardware/CPU.h"
 #include "Hardware/Hardware.h"
 #include "Hardware/Sound.h"
@@ -520,14 +520,14 @@ static bool HandlerKey_Function(KeyEvent event) // -V2506
         static int sum = 0;
         sum -= delta;
 
-        float rShiftAbs = FPGAMath::RShift2Abs(SET_RSHIFT_MATH, SET_RANGE_MATH);
+        float rShiftAbs = FPGA::Math::RShift2Abs(SET_RSHIFT_MATH, SET_RANGE_MATH);
 
         if (sum > 2)
         {
             if (SET_RANGE_MATH < Range::Number - 1)
             {
                 SET_RANGE_MATH = (Range::E)((uint8)(SET_RANGE_MATH + 1));  // SET_RANGE_MATH++;
-                SET_RSHIFT_MATH = (uint16)FPGAMath::RShift2Rel(rShiftAbs, SET_RANGE_MATH);
+                SET_RSHIFT_MATH = (uint16)FPGA::Math::RShift2Rel(rShiftAbs, SET_RANGE_MATH);
                 Sound::RegulatorSwitchRotate();
             }
             sum = 0;
@@ -537,7 +537,7 @@ static bool HandlerKey_Function(KeyEvent event) // -V2506
             if (SET_RANGE_MATH > 0)
             {
                 SET_RANGE_MATH = (Range::E)((uint8)(SET_RANGE_MATH - 1));  // SET_RANGE_MATH--;
-                SET_RSHIFT_MATH = (uint16)FPGAMath::RShift2Rel(rShiftAbs, SET_RANGE_MATH);
+                SET_RSHIFT_MATH = (uint16)FPGA::Math::RShift2Rel(rShiftAbs, SET_RANGE_MATH);
                 Sound::RegulatorSwitchRotate();
             }
             sum = 0;

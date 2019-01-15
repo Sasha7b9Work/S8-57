@@ -12,6 +12,7 @@
 
 
 using namespace FPGA::HAL::GPIO;
+//using namespace FPGA::Math;
 
 using FPGA::HAL::GPIO::Pin;
 using FPGA::SET::Trig;
@@ -94,7 +95,7 @@ void FPGA::HAL::GPIO::Init()
 
     for (int i = 0; i < Pin::Number; i++)
     {
-        gpio.SetOutputPP_PullDown(GetPort((Pin::E)i), (uint)Math::LowSignedBit(GetPin((Pin::E)i)));
+        gpio.SetOutputPP_PullDown(GetPort((Pin::E)i), (uint)::Math::LowSignedBit(GetPin((Pin::E)i)));
     }
 }
 
