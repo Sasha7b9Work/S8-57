@@ -22,10 +22,17 @@
 using namespace FPGA::HAL::GPIO;
 
 using Display::Char;
+using Display::Region;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 int FPGA::SET::TShift::value = 0;
+
+/// Отключает отображение уровня синхронизации поверх сигнала
+static void DisableDrawing();
+///< Нужно ли рисовать горизонтальную линию уровня смещения уровня синхронизации.
+static bool needDraw = false;
+bool FPGA::SET::Trig::pulse = false;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -455,4 +462,46 @@ String FPGA::SET::RShift::ToString(uint16 rShiftRel, FPGA::SET::Range::E range, 
 {
     float rShiftVal = FPGA::Math::RShift2Abs(rShiftRel, range) * Divider(divider).ToAbs();
     return Voltage(rShiftVal).ToString(true);
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+bool FPGA::SET::Trig::SyncPulse()
+{
+    return pulse;
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void FPGA::SET::Trig::DrawOnGrid()
+{
+    if (needDraw)
+    {
+        int width = 85;
+        int height = 18;
+
+        int x = (Grid::Right() - Grid::Left()) / 2 + Grid::Left() - width / 2;
+        int y = Grid::Bottom() - height - 20;
+
+        //Painter::FillBoundedRegion(x, y, width, height, Color::BACK, Color::FILL);
+        Region(width, height).DrawBounded(x, y, Color::BACK, Color::FILL);
+
+        float trigLevVal = Math::RShift2Abs(SET_TRIGLEV_SOURCE, SET_RANGE(TRIG_SOURCE)) * Divider(SET_DIVIDER(TRIG_SOURCE)).ToAbs();
+
+        Voltage voltage(trigLevVal);
+
+        String("Синхр %s", voltage.ToString(true).CString()).Draw(x + 7, y + 5, Color::FILL);
+    }
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void FPGA::SET::Trig::NeedForDraw(uint timeMS)
+{
+    needDraw = true;
+    Timer::SetAndStartOnce(Timer::Type::ShowLevelTrigLev, DisableDrawing, timeMS);
+    NEED_FINISH_DRAW = 1;
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+static void DisableDrawing()
+{
+    needDraw = false;
 }
