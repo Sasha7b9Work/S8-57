@@ -28,26 +28,26 @@ struct PackedTime
 
 struct DataSettings
 {
-    uint        id;                     ///< Сквозной id данных. 1-й номер получают данные, считанные первыми после включения прибора и каждые следующие увиличиваются на 1
-    uint8       *dataA;                 ///< По этому адресу хранятся данные 1-го канала
-    uint8       *dataB;                 ///< По этому адресу хранятся данные 2-го канала. При хранение в Buffer данные 2-го канала идут сразу после 1-го канала
-    uint16      rShift[2];
-    uint16      trigLev[2];
-    int16       tShift;                 ///< Смещение по времени
-    FPGA::SET::Range::E    range[2];               ///< Масштаб по напряжению обоих каналов.
-    uint        tBase           : 5;    ///< Масштаб по времени
-    uint        enableA         : 1;    ///< Включён ли канал A
-    uint        enableB         : 1;    ///< Включен ли канал B
-    uint        coupleA         : 2;    ///< Режим канала по входу
-    uint        coupleB         : 2;
-    uint        peackDet        : 2;    ///< Включен ли пиковый детектор
-    uint        inverseA        : 1;
-    uint        inverseB        : 1;
-    uint        multiplierA     : 1;
-    uint        multiplierB     : 1;
-    uint        enumPoints      : 3;
-    uint        notUsed         : 12;
-    PackedTime  time;
+    uint                     id;                     ///< Сквозной id данных. 1-й номер получают данные, считанные первыми после включения прибора и каждые следующие увиличиваются на 1
+    uint8                    *dataA;                 ///< По этому адресу хранятся данные 1-го канала
+    uint8                    *dataB;                 ///< По этому адресу хранятся данные 2-го канала. При хранение в Buffer данные 2-го канала идут сразу после 1-го канала
+    uint16                   rShift[2];
+    uint16                   trigLev[2];
+    int16                    tShift;                 ///< Смещение по времени
+    Osci::Settings::Range::E range[2];               ///< Масштаб по напряжению обоих каналов.
+    uint                     tBase           : 5;    ///< Масштаб по времени
+    uint                     enableA         : 1;    ///< Включён ли канал A
+    uint                     enableB         : 1;    ///< Включен ли канал B
+    uint                     coupleA         : 2;    ///< Режим канала по входу
+    uint                     coupleB         : 2;
+    uint                     peackDet        : 2;    ///< Включен ли пиковый детектор
+    uint                     inverseA        : 1;
+    uint                     inverseB        : 1;
+    uint                     multiplierA     : 1;
+    uint                     multiplierB     : 1;
+    uint                     enumPoints      : 3;
+    uint                     notUsed         : 12;
+    PackedTime               time;
     DataSettings() : id(++lastID) {};		// -V730
     /// Возвращает размер занимаемый данными одного канала
     int SizeChannel() const;

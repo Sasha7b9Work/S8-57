@@ -26,6 +26,7 @@
 
 using namespace Display::Primitives;
 using namespace FPGA::SET;
+using namespace Osci::Settings;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -205,25 +206,25 @@ static void RShiftMoreB()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void RangeLessA()
 {
-    OnChangeParameterChannel(FPGA::SET::Range::Change, Chan::A, -1);
+    OnChangeParameterChannel(Osci::Settings::Range::Change, Chan::A, -1);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void RangeMoreA()
 {
-    OnChangeParameterChannel(FPGA::SET::Range::Change, Chan::A, +1);
+    OnChangeParameterChannel(Osci::Settings::Range::Change, Chan::A, +1);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void RangeLessB()
 {
-    OnChangeParameterChannel(FPGA::SET::Range::Change, Chan::B, -1);
+    OnChangeParameterChannel(Osci::Settings::Range::Change, Chan::B, -1);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void RangeMoreB()
 {
-    OnChangeParameterChannel(FPGA::SET::Range::Change, Chan::B, +1);
+    OnChangeParameterChannel(Osci::Settings::Range::Change, Chan::B, +1);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

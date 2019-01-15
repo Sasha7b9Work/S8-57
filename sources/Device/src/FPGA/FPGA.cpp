@@ -394,7 +394,7 @@ bool FPGA::CalculateGate(uint16 rand, uint16 *eMin, uint16 *eMax) // -V2506
 void FPGA::SET::SetModeCouple(Chan::E ch, ModeCouple::E modeCoupe)
 {
     SET_COUPLE(ch) = modeCoupe;
-    SET::Range::LoadBoth();
+    Osci::Settings::Range::LoadBoth();
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

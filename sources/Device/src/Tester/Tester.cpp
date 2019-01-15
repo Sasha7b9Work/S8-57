@@ -15,7 +15,7 @@
 #endif
 
 
-using FPGA::SET::Range;
+using Osci::Settings::Range;
 using FPGA::SET::RShift;
 
 
@@ -151,10 +151,10 @@ void Tester::Enable() // -V2506
 
     SET_COUPLE_A = SET_COUPLE_B = ModeCouple::GND;
 
-    SET_RANGE(Chan::A) = FPGA::SET::Range::_2V;
-    SET_RANGE(Chan::B) = FPGA::SET::Range::_2V;
+    SET_RANGE(Chan::A) = Osci::Settings::Range::_2V;
+    SET_RANGE(Chan::B) = Osci::Settings::Range::_2V;
 
-    FPGA::SET::Range::LoadBoth();
+    Osci::Settings::Range::LoadBoth();
 
     FPGA::SET::RShift::Set(Chan::A, RShift::ZERO);
     FPGA::SET::RShift::Set(Chan::B, RShift::ZERO);
@@ -202,7 +202,7 @@ void Tester::Disable() // -V2506
     set = oldSet;
     //set.Save();
 
-    FPGA::SET::Load();
+    Osci::Settings::Load();
 
     FPGA::OnPressStart();
 }
@@ -307,7 +307,7 @@ pString Tester::Scale::ToString() const // -V2506
 {
     if (Chan(ch).IsA())
     {
-        return FPGA::SET::Range((FPGA::SET::Range::E)value).ToString(Divider::_1);
+        return Range((Osci::Settings::Range::E)value).ToString(Divider::_1);
     }
 
     static const pString names[][Language::Number] =

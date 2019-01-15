@@ -18,7 +18,7 @@ void Settings::Load(bool _default)
     if(_default || !EEPROM::LoadSettings())
     {
         Reset();
-        FPGA::SET::Load();
+        Osci::Settings::Load();
         uint8 data[1024];
         TransformFromLoad(data);
         Menu::Init();

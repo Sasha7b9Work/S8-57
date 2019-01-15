@@ -15,7 +15,7 @@
 #endif
 
 
-using FPGA::SET::Range;
+using Osci::Settings::Range;
 using FPGA::SET::TBase;
 
 

@@ -456,6 +456,9 @@
     <ClCompile Include="..\..\Device\src\Settings\Settings_default.cpp">
       <Filter>Settings</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Device\src\Osci\Osci_Settings.cpp">
+      <Filter>Osci</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Device\src\defines.h">
@@ -811,6 +814,9 @@
     </ClInclude>
     <ClInclude Include="..\..\Device\src\FPGA\FPGA_Math.h">
       <Filter>FPGA</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Device\src\Osci\Osci_Settings.h">
+      <Filter>Osci</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

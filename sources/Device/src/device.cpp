@@ -55,7 +55,7 @@ void Device::Init()
 
     FrequencyCounter::Init();
 
-    FPGA::SET::Load();
+    Osci::Settings::Load();
 
     Menu::Init();
 

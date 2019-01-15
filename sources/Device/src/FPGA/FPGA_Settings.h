@@ -1,4 +1,5 @@
 #pragma once
+#include "Osci/Osci_Settings.h"
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -38,45 +39,12 @@ namespace FPGA
 {
     namespace SET
     {
-        void Load();
-
         void SetModeCouple(Chan::E ch, ModeCouple::E couple);
         /// Включить/выключить калибратор.
         void LoadCalibratorMode();
         /// Установить значение удержания синхронизации
         void LoadHoldfOff();
        
-        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        struct Range
-        {
-            static void Change(Chan::E ch, int delta);
-
-            static void LoadBoth();
-
-            enum E
-            {
-                _2mV,
-                _5mV,
-                _10mV,
-                _20mV,
-                _50mV,
-                _100mV,
-                _200mV,
-                _500mV,
-                _1V,
-                _2V,
-                _5V,
-                _10V,
-                _20V,
-                Number
-            } value;
-            explicit Range(E v) : value(v) {};
-            pString Name() const;
-
-            pString ToString(Divider::E divider);
-
-        };
-
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         struct RShift
         {
@@ -92,7 +60,7 @@ namespace FPGA
 
             static void Draw();
 
-            static String ToString(uint16 rShiftRel, FPGA::SET::Range::E range, Divider::E divider);
+            static String ToString(uint16 rShiftRel, Osci::Settings::Range::E range, Divider::E divider);
 
         private:
 

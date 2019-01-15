@@ -48,22 +48,6 @@ static uint8 ValueForRange(Chan::E ch);
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void FPGA::SET::Load()
-{
-    Range::LoadBoth();
-    RShift::Load(Chan::A);
-    RShift::Load(Chan::B);
-    Trig::Input::Load();
-    Trig::Level::Load();
-    TBase::Load();
-    TShift::Load();
-    LoadCalibratorMode();
-    LoadHoldfOff();
-
-    isRunning = false;
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void FPGA::SET::Trig::Source::Load()
 {
     Input::Load();
@@ -85,7 +69,7 @@ void FPGA::SET::Trig::Input::Load()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void FPGA::SET::Range::LoadBoth()
+void Osci::Settings::Range::LoadBoth()
 {
     uint16 val = (uint16)(ValueForRange(Chan::B) + (ValueForRange(Chan::A) << 8));
 
@@ -95,7 +79,7 @@ void FPGA::SET::Range::LoadBoth()
 
     WriteRegisters(Pin::SPI3_CS2, 0);    // Записываем ноль, чтобы реле не потребляли энергии
 
-    DEF_STRUCT(StructRange, uint8) vals[FPGA::SET::Range::Number] =
+    DEF_STRUCT(StructRange, uint8) vals[Osci::Settings::Range::Number] =
     {
         StructRange(BIN_U8(00000000)),  // 2mV      // -V2501
         StructRange(BIN_U8(00000001)),  // 5mV      // -V2501
@@ -242,7 +226,7 @@ static uint8 ValueForRange(Chan::E ch) // -V2506
         return datas[ModeCouple::GND];
     }
 
-    DEF_STRUCT(StructRange, uint16) values[FPGA::SET::Range::Number][2] =
+    DEF_STRUCT(StructRange, uint16) values[Osci::Settings::Range::Number][2] =
     {   //             A                    B
         { BIN_U8(00100100), BIN_U8(00100100) }, // -V2501  // 2mV
         { BIN_U8(00100100), BIN_U8(00100100) }, // -V2501  // 5mV
@@ -298,7 +282,7 @@ void FPGA::SET::TShift::Change(int delta)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void FPGA::SET::Range::Change(Chan::E ch, int delta)
+void Osci::Settings::Range::Change(Chan::E ch, int delta)
 {
     if (delta > 0)
     {
@@ -466,7 +450,7 @@ void FPGA::SET::RShift::Draw(Chan::E ch)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-String FPGA::SET::RShift::ToString(uint16 rShiftRel, FPGA::SET::Range::E range, Divider::E divider)
+String FPGA::SET::RShift::ToString(uint16 rShiftRel, Osci::Settings::Range::E range, Divider::E divider)
 {
     float rShiftVal = FPGA::Math::RShift2Abs(rShiftRel, range) * Divider(divider).ToAbs();
     return Voltage(rShiftVal).ToString(true);
@@ -555,7 +539,7 @@ pString FPGA::SET::TBase::Name() const
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-pString FPGA::SET::Range::Name() const
+pString Osci::Settings::Range::Name() const
 {
     static const struct StructRange
     {
