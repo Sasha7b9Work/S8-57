@@ -1,34 +1,6 @@
 #pragma once
 
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-/** @addtogroup Settings
- *  @{
- *  @defgroup SettingsTime Settings Time
- *  @{
- */
-
-/// Тип привязки к смещению по горизонтали
-struct LinkingTShift
-{
-    enum E
-    {
-        Time,     ///< Смещение привязано к времени
-        Position  ///< Смещение привязано к позиции
-    } value;
-};
-
-/// Функция ВР/ДЕЛ.
-struct FunctionTime
-{
-    enum E
-    {
-        Time,
-        ShiftInMemory
-    } value;
-};
-
 #define SET_TSHIFT          (set.time_shift)
 #define SET_TBASE           (set.time_base)
 #define TIME_DIV_XPOS       (set.time_timeDivXPos)
@@ -50,7 +22,3 @@ struct FunctionTime
 #define SAMPLE_TYPE_OLD     (set.time_sampleTypeOld)
 
 #define LINKING_TSHIFT      (set.time_linkingTShift)
-
-
-/** @}  @}
- */

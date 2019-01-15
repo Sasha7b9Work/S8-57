@@ -21,6 +21,7 @@
 
 using namespace Display::Primitives;
 using namespace FPGA::HAL::GPIO;
+using namespace FPGA::Settings;
 using namespace Osci::Settings;
 
 
@@ -543,9 +544,15 @@ pString Range::Name() const
 };
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void FPGA::Settings::SetModeCouple(Chan::E ch, ModeCouple::E modeCoupe)
+void FPGA::Settings::ModeCouple::Set(Chan::E ch, ModeCouple::E modeCoupe)
 {
     SET_COUPLE(ch) = modeCoupe;
     Osci::Settings::Range::LoadBoth();
 }
 
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+pString ModeCouple::UGO() const
+{
+    static pString couple[] = { "\x92", "\x91", "\x90" };
+    return couple[value];
+}

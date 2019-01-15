@@ -81,16 +81,16 @@ public:
 
     // Меню КАНАЛ 1, КАНАЛ 2
 
-    uint16                   chan_shift[Chan::Number];          ///< Сдвиг канала по вертикали
-    Osci::Settings::Range::E chan_range[Chan::Number];          ///< Масштаб канала по вертикали
-    ModeCouple::E            chan_couple[Chan::Number];         ///< Связь по входу
-    bool                     chan_enabled[Chan::Number];        ///< Включен/выключен канал
-    int8                     chan_balanceShiftADC[2];           ///< Добавочное смещение для балансировки АЦП.
-    Bandwidth::E             chan_bandwidth[2];                 ///< Ограничение полосы.
-    Resistance::E            chan_resistance[2];                ///< Сопротивление входа.
-    bool                     chan_inverse[2];
-    Divider::E               chan_divider[2];                   ///< Множитель.
-    CalibrationMode::E       chan_calibrationMode[2];           ///< Режим калибровки.
+    uint16                         chan_shift[Chan::Number];    ///< Сдвиг канала по вертикали
+    Osci::Settings::Range::E       chan_range[Chan::Number];    ///< Масштаб канала по вертикали
+    FPGA::Settings::ModeCouple::E  chan_couple[Chan::Number];   ///< Связь по входу
+    bool                           chan_enabled[Chan::Number];  ///< Включен/выключен канал
+    int8                           chan_balanceShiftADC[2];     ///< Добавочное смещение для балансировки АЦП.
+    Bandwidth::E                   chan_bandwidth[2];           ///< Ограничение полосы.
+    Resistance::E                  chan_resistance[2];          ///< Сопротивление входа.
+    bool                           chan_inverse[2];
+    Divider::E                     chan_divider[2];             ///< Множитель.
+    CalibrationMode::E             chan_calibrationMode[2];     ///< Режим калибровки.
 
     // Меню СИНХРОНИЗАЦИЯ
 
@@ -105,14 +105,14 @@ public:
 
     // Меню РАЗВЁРТКА
 
-    Osci::Settings::TShift         time_shift;
-    Osci::Settings::TBase::E       time_base;
-    Osci::Settings::PeakDetMode::E time_peakDet;
-    Osci::Settings::TPos::E        time_TPos;
-    Osci::Settings::SampleType::E  time_sampleType;
-    FunctionTime::E                time_timeDivXPos;
-    LinkingTShift::E               time_linkingTShift;                 ///< Тип привязки смещения по горизонтали
-    Osci::Settings::SampleType::E  time_sampleTypeOld;
+    Osci::Settings::TShift           time_shift;
+    Osci::Settings::TBase::E         time_base;
+    Osci::Settings::PeakDetMode::E   time_peakDet;
+    Osci::Settings::TPos::E          time_TPos;
+    Osci::Settings::SampleType::E    time_sampleType;
+    Osci::Settings::FunctionTime::E  time_timeDivXPos;
+    Osci::Settings::LinkingTShift::E time_linkingTShift;                 ///< Тип привязки смещения по горизонтали
+    Osci::Settings::SampleType::E    time_sampleTypeOld;
 
     // Меню КУРСОРЫ
 

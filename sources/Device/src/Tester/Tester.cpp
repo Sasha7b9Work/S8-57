@@ -15,6 +15,7 @@
 #endif
 
 
+using namespace FPGA::Settings;
 using namespace Osci::Settings;
 
 

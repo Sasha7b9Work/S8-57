@@ -39,8 +39,24 @@ namespace FPGA
 {
     namespace Settings
     {
-        void SetModeCouple(Chan::E ch, ModeCouple::E couple);
         /// Включить/выключить калибратор.
         void LoadCalibratorMode();
+
+        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// Режим канала по входу.
+        struct ModeCouple
+        {
+            enum E
+            {
+                DC,      ///< Закрытый вход
+                AC,      ///< Открытый вход
+                GND,     ///< Вход заземлён.
+                Size
+            } value;
+            explicit ModeCouple(E v) : value(v) {};
+            pString UGO() const;
+
+            static void Set(Chan::E ch, ModeCouple::E couple);
+        };
     }
 }

@@ -25,6 +25,7 @@
 
 
 using namespace Display::Primitives;
+using namespace FPGA::Settings;
 using namespace Osci::Settings;
 
 

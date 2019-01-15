@@ -64,20 +64,6 @@ struct CalibrationMode
     } value;
 };
 
-/// Режим канала по входу.
-struct ModeCouple
-{
-    enum E
-    {
-        DC,      ///< Закрытый вход
-        AC,      ///< Открытый вход
-        GND,     ///< Вход заземлён.
-        Size
-    } value;
-    explicit ModeCouple(E v) : value(v) {};
-    pString UGO() const;
-};
-
 struct Resistance
 {
     enum E
