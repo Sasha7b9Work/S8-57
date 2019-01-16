@@ -222,7 +222,7 @@ const Settings Settings::defaultSettings =
     Storage::Flash,                     // rec_storagePlay
     Axis::X,                            // rec_axisMove
     Axis::X,                            // rec_axisZoom
-    ScaleX::_50ms,                      // rec_scaleX
+    ScaleX(ScaleX::_50ms),              // rec_scaleX
     { Range::_1V, Range::_1V },         // rec_range
 
     0,  // dbg_gate_max

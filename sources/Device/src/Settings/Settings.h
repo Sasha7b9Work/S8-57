@@ -264,7 +264,7 @@ public:
     Recorder::Settings::Storage::E    rec_storagePlay;      ///< Откуда брать сохранённые данные
     Recorder::Settings::Axis::E       rec_axisMove;         ///< Текущая ось перемещения
     Recorder::Settings::Axis::E       rec_axisZoom;         ///< Текущая ось масштабирования
-    Recorder::Settings::ScaleX::E     rec_scaleX;           ///< Установленный масштаб по времени
+    Recorder::Settings::ScaleX        rec_scaleX;           ///< Установленный масштаб по времени
     Osci::Settings::Range::E          rec_range[2];         ///< Масштаб по вертикали в режиме регистратора
 
 

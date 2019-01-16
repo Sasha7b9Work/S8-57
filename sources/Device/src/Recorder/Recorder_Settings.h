@@ -71,14 +71,14 @@ namespace Recorder
                 _5s,    //
                 _10s,   //
                 _20s,   //
-                _50s,   //
-                _100s,  //
+                _30s,   //
+                _60s,   //
                 Size
             } value;
             explicit ScaleX(E v) : value(v) {};
             static void Load();
             static void Change(int delta);
-            static ScaleX::E Current();
+            static ScaleX &Current();
             pString ToString() const;
         };
     };
