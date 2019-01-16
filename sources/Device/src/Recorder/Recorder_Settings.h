@@ -73,6 +73,7 @@ namespace Recorder
             } value;
             explicit ScaleX(E v) : value(v) {};
             static void Load();
+            static void Change(int delta);
         };
     };
 }

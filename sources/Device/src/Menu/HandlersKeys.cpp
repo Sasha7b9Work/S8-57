@@ -1,15 +1,12 @@
 #include "defines.h"
 #include "device.h"
-#include <stm32f4xx.h>
 #include "log.h"
-#include "HandlersKeys.h"
 #include "Display/Grid.h"
 #include "Display/Display_Primitives.h"
 #include "Display/Painter.h"
 #include "FPGA/FPGA.h"
-#include "FPGA/FPGA_Settings.h"
 #include "Hardware/Timer.h"
-#include "Menu/Menu.h"
+#include "Menu/HandlersKeys.h"
 #include "Menu/Pages/Include/PageChannels.h"
 #include "Menu/Pages/Include/PageFunction.h"
 #include "Menu/Pages/Include/PageMeasures.h"
@@ -18,15 +15,13 @@
 #include "Menu/Pages/Include/PageTime.h"
 #include "Menu/Pages/Include/PageTrig.h"
 #include "Menu/Pages/Include/PageDisplay.h"
-#include "Osci/BottomPart.h"
 #include "Settings/Settings.h"
-#include "Utils/String.h"
-#include <stdio.h>
 
 
 using namespace Display::Primitives;
 using namespace FPGA::Settings;
 using namespace Osci::Settings;
+using namespace Recorder::Settings;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -96,42 +91,42 @@ void Handlers::Process(KeyEvent e)
     event = e;
 
     static const pFuncVV func[Key::Number][4] =
-    {                   // Press           Repead       Release        Long
-        /* None        */ {Empty,          Empty,       Empty,         Empty},
-        /* Function    */ {Empty,          Empty,       Function,      Empty},
-        /* Measure     */ {Measure,        Measure,     Measure,       Measure},
-        /* Memory      */ {Memory,         Memory,      Memory,        Memory},
-        /* Service     */ {Service,        Service,     Service,       Service},
-        /* ChannelA    */ {ChannelA,       Empty,       Empty,         Empty},
-        /* ChannelB    */ {ChannelB,       Empty,       Empty,         Empty},
-        /* Time        */ {Time,           Time,        Time,          Time},
-        /* Start       */ {Start,          Empty,       Empty,         Empty},
-        /* Trig        */ {HandlerTrig,    HandlerTrig,    HandlerTrig,    HandlerTrig},
-        /* Display     */ {HandlerDisplay, HandlerDisplay, HandlerDisplay, HandlerDisplay},
-        /* RangeMoreA  */ {RangeMoreA,  Empty,       Empty,         Empty},
-        /* RangeLessA  */ {RangeLessA,  Empty,       Empty,         Empty},
-        /* RShiftMoreA */ {RShiftMoreA, RShiftMoreA, Empty,         Empty},
-        /* RShiftLessA */ {RShiftLessA, RShiftLessA, Empty,         Empty},
-        /* RangeMoreB  */ {RangeMoreB,  Empty,       Empty,         Empty},
-        /* RangeLessB  */ {RangeLessB,  Empty,       Empty,         Empty},
-        /* RShiftMoreB */ {RShiftMoreB, RShiftMoreB, Empty,         Empty},
-        /* RShiftLessB */ {RShiftLessB, RShiftLessB, Empty,         Empty},
-        /* TBaseMore   */ {TBaseMore,   Empty,       Empty,         Empty},
-        /* TBaseLess   */ {TBaseLess,   Empty,       Empty,         Empty},
-        /* TShiftMore  */ {TShiftMore,  TShiftMore,  Empty,         Empty},
-        /* TShiftLess  */ {TShiftLess,  TShiftLess,  Empty,         Empty},
-        /* TrigLevMore */ {TrigLevMore, TrigLevMore, Empty,         Empty},
-        /* TrigLevLess */ {TrigLevLess, TrigLevLess, Empty,         Empty},
-        /* Left        */ {Arrow,       Arrow,       Arrow,         Arrow},
-        /* Right       */ {Arrow,       Arrow,       Arrow,         Arrow},
-        /* Up          */ {Arrow,       Arrow,       Arrow,         Arrow},
-        /* Down        */ {Arrow,       Arrow,       Arrow,         Arrow},
-        /* Enter       */ {Empty,       Empty,       EnterRelease,  EnterLong},
-        /* F1          */ {Empty,       Empty,       FuncRelease,   FuncLong},
-        /* F2          */ {Empty,       Empty,       FuncRelease,   FuncLong},
-        /* F3          */ {Empty,       Empty,       FuncRelease,   FuncLong},
-        /* F4          */ {Empty,       Empty,       FuncRelease,   FuncLong},
-        /* F5          */ {Empty,       Empty,       FuncRelease,   FuncLong}
+    { // Press           Repead          Release         Long
+        {Empty,          Empty,          Empty,          Empty},            // None       
+        {Empty,          Empty,          Function,       Empty},            // Function   
+        {Measure,        Measure,        Measure,        Measure},          // Measure    
+        {Memory,         Memory,         Memory,         Memory},           // Memory     
+        {Service,        Service,        Service,        Service},          // Service    
+        {ChannelA,       Empty,          Empty,          Empty},            // ChannelA   
+        {ChannelB,       Empty,          Empty,          Empty},            // ChannelB   
+        {Time,           Time,           Time,           Time},             // Time       
+        {Start,          Empty,          Empty,          Empty},            // Start      
+        {HandlerTrig,    HandlerTrig,    HandlerTrig,    HandlerTrig},      // Trig       
+        {HandlerDisplay, HandlerDisplay, HandlerDisplay, HandlerDisplay},   // Display    
+        {RangeMoreA,     Empty,          Empty,          Empty},            // RangeMoreA 
+        {RangeLessA,     Empty,          Empty,          Empty},            // RangeLessA 
+        {RShiftMoreA,    RShiftMoreA,    Empty,          Empty},            // RShiftMoreA
+        {RShiftLessA,    RShiftLessA,    Empty,          Empty},            // RShiftLessA
+        {RangeMoreB,     Empty,          Empty,          Empty},            // RangeMoreB 
+        {RangeLessB,     Empty,          Empty,          Empty},            // RangeLessB 
+        {RShiftMoreB,    RShiftMoreB,    Empty,          Empty},            // RShiftMoreB
+        {RShiftLessB,    RShiftLessB,    Empty,          Empty},            // RShiftLessB
+        {TBaseMore,      Empty,          Empty,          Empty},            // TBaseMore  
+        {TBaseLess,      Empty,          Empty,          Empty},            // TBaseLess  
+        {TShiftMore,     TShiftMore,     Empty,          Empty},            // TShiftMore 
+        {TShiftLess,     TShiftLess,     Empty,          Empty},            // TShiftLess 
+        {TrigLevMore,    TrigLevMore,    Empty,          Empty},            // TrigLevMore
+        {TrigLevLess,    TrigLevLess,    Empty,          Empty},            // TrigLevLess
+        {Arrow,          Arrow,          Arrow,          Arrow},            // Left       
+        {Arrow,          Arrow,          Arrow,          Arrow},            // Right      
+        {Arrow,          Arrow,          Arrow,          Arrow},            // Up         
+        {Arrow,          Arrow,          Arrow,          Arrow},            // Down       
+        {Empty,          Empty,          EnterRelease,   EnterLong},        // Enter      
+        {Empty,          Empty,          FuncRelease,    FuncLong},         // F1         
+        {Empty,          Empty,          FuncRelease,    FuncLong},         // F2         
+        {Empty,          Empty,          FuncRelease,    FuncLong},         // F3         
+        {Empty,          Empty,          FuncRelease,    FuncLong},         // F4         
+        {Empty,          Empty,          FuncRelease,    FuncLong}          // F5         
     };
 
     Key::E code = event.key;
@@ -310,13 +305,27 @@ static void TShiftMore()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void TBaseLess()
 {
-    OnChangeParameterTime(TBase::Change, -1);
+    if (Device::State::InModeRecorder())
+    {
+        OnChangeParameterTime(ScaleX::Change, -1);
+    }
+    else
+    {
+        OnChangeParameterTime(TBase::Change, -1);
+    }
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void TBaseMore()
 {
-    OnChangeParameterTime(TBase::Change, 1);
+    if (Device::State::InModeRecorder())
+    {
+        OnChangeParameterTime(ScaleX::Change, 1);
+    }
+    else
+    {
+        OnChangeParameterTime(TBase::Change, 1);
+    }
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
