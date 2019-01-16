@@ -116,7 +116,7 @@ void Display::Update()
         Osci::Display::Update,
         Tester::Display::Update,
         Multimeter::Display::Update,
-        Recorder::Graphics::Update
+        Recorder::Display::Update
     };
 
     pFuncVV func = draw[Device::State::CurrentMode()].func;

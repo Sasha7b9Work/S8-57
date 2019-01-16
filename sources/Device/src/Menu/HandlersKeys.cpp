@@ -96,16 +96,16 @@ void Handlers::Process(KeyEvent e)
     event = e;
 
     static const pFuncVV func[Key::Number][4] =
-    {                   // Press        Repead       Release        Long
-        /* None        */ {Empty,       Empty,       Empty,         Empty},
-        /* Function    */ {Empty,       Empty,       Function,      Empty},
-        /* Measure     */ {Measure,     Measure,     Measure,       Measure},
-        /* Memory      */ {Memory,      Memory,      Memory,        Memory},
-        /* Service     */ {Service,     Service,     Service,       Service},
-        /* ChannelA    */ {ChannelA,    Empty,       Empty,         Empty},
-        /* ChannelB    */ {ChannelB,    Empty,       Empty,         Empty},
-        /* Time        */ {Time,        Time,        Time,          Time},
-        /* Start       */ {Start,       Empty,       Empty,         Empty},
+    {                   // Press           Repead       Release        Long
+        /* None        */ {Empty,          Empty,       Empty,         Empty},
+        /* Function    */ {Empty,          Empty,       Function,      Empty},
+        /* Measure     */ {Measure,        Measure,     Measure,       Measure},
+        /* Memory      */ {Memory,         Memory,      Memory,        Memory},
+        /* Service     */ {Service,        Service,     Service,       Service},
+        /* ChannelA    */ {ChannelA,       Empty,       Empty,         Empty},
+        /* ChannelB    */ {ChannelB,       Empty,       Empty,         Empty},
+        /* Time        */ {Time,           Time,        Time,          Time},
+        /* Start       */ {Start,          Empty,       Empty,         Empty},
         /* Trig        */ {HandlerTrig,    HandlerTrig,    HandlerTrig,    HandlerTrig},
         /* Display     */ {HandlerDisplay, HandlerDisplay, HandlerDisplay, HandlerDisplay},
         /* RangeMoreA  */ {RangeMoreA,  Empty,       Empty,         Empty},

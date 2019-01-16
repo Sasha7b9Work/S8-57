@@ -470,7 +470,7 @@ static void Grid::DrawTester()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Grid::DrawRecorder()
 {
-    Color::SetCurrent(Color::GRAY_20);
+    Color::SetCurrent(Color::GRAY_10);
 
     VLine vLine(Display::HEIGHT - 1);
 
@@ -485,6 +485,9 @@ void Grid::DrawRecorder()
     {
         hLine.Draw(0, y);
     }
+
+    HLine(Display::WIDTH - 1).Draw(0, Display::HEIGHT / 2, Color::GRAY_20);
+    VLine(Display::HEIGHT - 1).Draw(Display::WIDTH / 2, 0);
 
     Rectangle(Display::WIDTH - 1, Display::HEIGHT - 1).Draw(0, 0, Color::FILL);
 }

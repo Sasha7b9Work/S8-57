@@ -3,7 +3,7 @@
 
 namespace Recorder
 {
-    namespace Graphics
+    namespace Display
     {
         void Update();
     }
