@@ -83,14 +83,6 @@ inline bool EmptyFuncBtU8(uint8) { return true; }
 #define _SET_BIT(value, bit) ((value) |= (1 << (bit)))
 
 
-#define DEF_STRUCT(name, type)  \
-static const struct name        \
-{                               \
-    type val;                   \
-    name(type v) : val(v) {};   \
-}
-
-
 #define _bitset(bits)                               \
   ((uint8)(                                         \
   (((uint8)((uint)bits / 01)        % 010) << 0) |  \
@@ -297,6 +289,13 @@ enum StateWorkFPGA
     StateWorkFPGA_Pause     ///< Это состояние, когда временно приостановлен прибор, например, для чтения данных или для записи значений регистров.
 };
 
+
+#define DEF_STRUCT(name, type)  \
+static const struct name        \
+{                               \
+    type val;                   \
+    name(type v) : val(v) {};   \
+}
 
 #define SAFE_HANDLER(handler)                       \
     if(handler) { handler(); }                      \

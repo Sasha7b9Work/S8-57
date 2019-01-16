@@ -16,7 +16,7 @@ namespace Device
             Tester,
             Multimeter,
             Recorder,
-            Number
+            Size
         } value;
         explicit Mode(E v) : value(v) {};
     };

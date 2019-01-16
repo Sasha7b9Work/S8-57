@@ -89,19 +89,10 @@ volatile static pFuncVV funcAdditionDraw = 0;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/*
-void Display::SetKey(Key::E key_)
-{
-    key = key_;
-}
-*/
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Display::Init()
 {
     for(uint8 i = 0; i < Color::NUMBER.value; i++)
     {
-        //Painter::SetColorValue(Color(i), COLOR(i));
         Color(i).SetValue(COLOR(i));
     }
 
@@ -111,7 +102,7 @@ void Display::Init()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Display::Update()
 {
-    static const struct StructDraw { pFuncVV func; } draw[Device::Mode::Number] =
+    static const struct StructDraw { pFuncVV func; } draw[Device::Mode::Size] =
     {
         Osci::Display::Update,
         Tester::Display::Update,

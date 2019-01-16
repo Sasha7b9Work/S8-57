@@ -47,7 +47,7 @@ namespace Grid
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 int Grid::Left()
 {
-    static const int left[Device::Mode::Number] = { 20, 0, 0, 0 };
+    static const int left[Device::Mode::Size] = { 20, 0, 0, 0 };
 
     return left[Device::State::CurrentMode()];
 }
@@ -55,7 +55,7 @@ int Grid::Left()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 int Grid::Top()
 {
-    static const int top[Device::Mode::Number] = { 19, 0, 0, 0 };
+    static const int top[Device::Mode::Size] = { 19, 0, 0, 0 };
 
     return top[Device::State::CurrentMode()];
 }
@@ -63,7 +63,7 @@ int Grid::Top()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 int Grid::Width()
 {
-    static const int width[Device::Mode::Number] = { 280, Display::WIDTH - 1, 0, 0 };
+    static const int width[Device::Mode::Size] = { 280, Display::WIDTH - 1, 0, 0 };
 
     return width[Device::State::CurrentMode()];
 }
@@ -71,7 +71,7 @@ int Grid::Width()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 int Grid::Height()
 {
-    static const int height[Device::Mode::Number] = { 200, Display::HEIGHT - 1, 0, 0 };
+    static const int height[Device::Mode::Size] = { 200, Display::HEIGHT - 1, 0, 0 };
 
     return height[Device::State::CurrentMode()];
 }
@@ -127,7 +127,7 @@ int Grid::ChannelCenterHeight()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Grid::Draw()
 {
-    static const struct StructDraw { pFuncVV func; } draw[Device::Mode::Number] =
+    DEF_STRUCT(StructDraw, pFuncVV) draw[Device::Mode::Size] =
     {
         DrawOsci,
         DrawTester,
@@ -136,7 +136,7 @@ void Grid::Draw()
     };
 
 
-    pFuncVV func = draw[Device::State::CurrentMode()].func;
+    pFuncVV func = draw[Device::State::CurrentMode()].val;
 
     if (func)
     {
