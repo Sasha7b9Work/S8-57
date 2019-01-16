@@ -68,6 +68,7 @@ namespace FPGA
                 _20MHz,
             } value;
 
+            explicit Bandwidth(E v) : value(v) {};
             static void Load(Chan::E ch);
         };
     }
