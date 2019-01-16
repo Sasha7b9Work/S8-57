@@ -1,15 +1,10 @@
 #include "stdafx.h"
 #ifndef WIN32
 #include "defines.h"
-#include "Menu/Pages/Include/PageTrig.h"
-#include "Menu/MenuItems.h"
-#include "Settings/Settings.h"
 #include "FPGA/FPGA.h"
-#include "FPGA/FPGA_Settings.h"
-#include "FPGA/FPGATypes.h"
+#include "FPGA/FPGA_Osci.h"
+#include "Menu/Pages/Include/PageTrig.h"
 #include "Settings/Settings.h"
-#include "Menu/Pages/Include/Definition.h"
-#include "Utils/CommonFunctions.h"
 #endif
 
 
@@ -23,7 +18,7 @@ extern const PageBase ppSearch;
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void PageTrig::OnChanged_TrigMode(bool)
 {
-    FPGA::Stop(false);
+    FPGA::Osci::Stop(false);
     if(!START_MODE_IS_SINGLE)
     {
         FPGA::OnPressStart();

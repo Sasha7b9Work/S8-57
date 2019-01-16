@@ -1,15 +1,11 @@
 #include "stdafx.h"
 #ifndef WIN32
 #include "defines.h"
-#include "Device.h"
-#include "Tester.h"
-#include "Display/Display.h"
 #include "FPGA/FPGA.h"
 #include "FPGA/FPGA_Math.h"
-#include "FPGA/FPGA_Settings.h"
+#include "FPGA/FPGA_Osci.h"
 #include "Hardware/FSMC.h"
 #include "Hardware/Hardware.h"
-#include "Hardware/Timer.h"
 #include "Settings/Settings.h"
 #include "Utils/Values.h"
 #endif
@@ -163,7 +159,7 @@ void Tester::Enable() // -V2506
 
     LoadFPGA();
 
-    FPGA::Stop();
+    FPGA::Osci::Stop();
 
     step = 0;                               // Первый пришедший импульс будет означать нулевой шаг
 

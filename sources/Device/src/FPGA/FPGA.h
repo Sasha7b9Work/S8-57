@@ -23,8 +23,6 @@ namespace FPGA
 
     void GiveStart();
 
-    void Stop(bool pause = false);
-
     uint NumPoints();
 
     bool IsRunning();

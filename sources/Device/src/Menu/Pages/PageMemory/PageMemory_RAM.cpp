@@ -8,11 +8,9 @@
 #include "Display/Symbols.h"
 #include "FlashDrive/FlashDrive.h"
 #include "FPGA/FPGA.h"
+#include "FPGA/FPGA_Osci.h"
 #include "Hardware/Sound.h"
-#include "Menu/MenuItems.h"
 #include "Menu/Pages/Include/PageMemory.h"
-#include "Settings/Settings.h"
-#include "Settings/SettingsMemory.h"
 #include "Utils/Math.h"
 #include "Utils/Values.h"
 #endif
@@ -138,7 +136,7 @@ static void OnPress_RAM(bool enter)
     {
         NUM_RAM_SIGNAL = 0;
         RUN_FPGA_BEFORE_SB = FPGA::IsRunning() ? 1U : 0U;
-        FPGA::Stop(false);
+        FPGA::Osci::Stop(false);
         MODE_WORK = ModeWork::RAM;
     }
     else
