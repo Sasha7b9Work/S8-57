@@ -88,7 +88,7 @@ static bool Device::SetCurrentMode(const PageBase *page, Device::Mode::E mode)
 
     if (opened == (Page *)page || opened->ExistKeeper(page))
     {
-        SetMode(mode);
+        State::SetMode(mode);
         return true;
     }
 
@@ -126,7 +126,7 @@ Device::Mode::E Device::State::CurrentMode()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Device::SetMode(Mode::E mode)
+void Device::State::SetMode(Mode::E mode)
 {
     if (mode != currentMode)
     {
@@ -137,19 +137,19 @@ void Device::SetMode(Mode::E mode)
         Multimeter::DeInit();
         Recorder::DeInit();
 
-        if (currentMode == Mode::Osci)
+        if (InModeOsci())
         {
             Osci::Init();
         }
-        else if (currentMode == Mode::Tester)
+        else if (InModeTester())
         {
             Tester::Init();
         }
-        else if (currentMode == Mode::Multimeter)
+        else if (InModeMultimeter())
         {
             Multimeter::Init();
         }
-        else if (currentMode == Mode::Recorder)
+        else if (InModeRecorder())
         {
             Recorder::Init();
         }
@@ -176,4 +176,10 @@ bool Device::State::InModeMultimeter()
 bool Device::State::InModeOsci()
 {
     return (CurrentMode() == Device::Mode::Osci);
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+bool Device::State::InModeRecorder()
+{
+    return (CurrentMode() == Device::Mode::Recorder);
 }

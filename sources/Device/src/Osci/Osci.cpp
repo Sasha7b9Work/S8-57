@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #ifndef WIN32
 #include "defines.h"
+#include "device.h"
 #include "FPGA/FPGA_Osci.h"
 #include "Osci/Osci.h"
 #endif
@@ -21,5 +22,10 @@ void Osci::DeInit()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Osci::Update()
 {
+    if (!Device::State::InModeOsci())
+    {
+        return;
+    }
+
     FPGA::Osci::Update();
 }

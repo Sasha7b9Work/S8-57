@@ -25,12 +25,14 @@ namespace Device
     void Init();
 
     void Update();
-    /// Устанавливает режим работы
-    void SetMode(Mode::E mode);
+
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     namespace State
     {
+        /// Устанавливает режим работы
+        void SetMode(Mode::E mode);
+        /// Возвращает текущий режим работы
         Mode::E CurrentMode();
 
         bool InModeTester();
@@ -40,7 +42,5 @@ namespace Device
         bool InModeRecorder();
 
         bool InModeOsci();
-
-        bool RecorderEnabled();
     }
 };

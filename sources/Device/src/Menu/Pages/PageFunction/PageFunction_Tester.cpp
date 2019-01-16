@@ -96,7 +96,7 @@ void PageFunction::PageTester::Init()
 
 static void OnEnterExit_Tester(bool enter)
 {
-    Device::SetMode(enter ? Device::Mode::Tester : Device::Mode::Osci);
+    Device::State::SetMode(enter ? Device::Mode::Tester : Device::Mode::Osci);
 }
 
 

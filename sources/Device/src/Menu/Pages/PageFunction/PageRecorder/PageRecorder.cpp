@@ -25,7 +25,7 @@ DEF_CHOICE_2( cShow,                                                            
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 static void OnOpenClose_Recorder(bool enter)
 {
-    Device::SetMode(enter ? Device::Mode::Recorder : Device::Mode::Osci);
+    Device::State::SetMode(enter ? Device::Mode::Recorder : Device::Mode::Osci);
 }
 
 
