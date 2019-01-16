@@ -8,6 +8,7 @@
 
 using namespace FPGA::Settings;
 using namespace Osci::Settings;
+using namespace Recorder::Settings;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -212,14 +213,14 @@ const Settings Settings::defaultSettings =
     /* multi_rangeResist */ Multimeter::RangeResistance::_10M,
 
     // Настройки регистратора
-    /* rec_viewAlways */    Recorder::ViewAlways::InMode,
+    /* rec_viewAlways */    ViewAlways::InMode,
     /* rec_sourceChanA */   false,
     /* rec_sourceChanB */   false,
     /* rec_sourceSensor */  false,
-    /* rec_storageRecord */ Recorder::DataStorage::Flash,
-    /* rec_storagePlay */   Recorder::DataStorage::Flash,
-    /* rec_axisMove */      Recorder::Axis::X,
-    /* rec_axisZoom */      Recorder::Axis::X,
+    /* rec_storageRecord */ Storage::Flash,
+    /* rec_storagePlay */   Storage::Flash,
+    /* rec_axisMove */      Axis::X,
+    /* rec_axisZoom */      Axis::X,
 
     /* dbg_gate_max */      0,
     /* dbg_gate_min */      0

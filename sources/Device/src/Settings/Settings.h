@@ -256,14 +256,14 @@ public:
     Multimeter::RangeResistance::E  multi_rangeResist;
 
     // Настройки регистратора
-    Recorder::ViewAlways        rec_viewAlways;         ///< Показывать ли всегда данные регистратора
-    bool                        rec_sourceChanA;        ///< Включение записи канала 1
-    bool                        rec_sourceChanB;        ///< Включение записи канала 2
-    bool                        rec_sourceSensor;       ///< Включение записи показаний датчика
-    Recorder::DataStorage       rec_storageRecord;      ///< Куда сохранять данные
-    Recorder::DataStorage       rec_storagePlay;        ///< Откуда брать сохранённые данные
-    Recorder::Axis              rec_axisMove;           ///< Текущая ось перемещения
-    Recorder::Axis              rec_axisZoom;           ///< Текущая ось масштабирования
+    Recorder::Settings::ViewAlways  rec_viewAlways;         ///< Показывать ли всегда данные регистратора
+    bool                            rec_sourceChanA;        ///< Включение записи канала 1
+    bool                            rec_sourceChanB;        ///< Включение записи канала 2
+    bool                            rec_sourceSensor;       ///< Включение записи показаний датчика
+    Recorder::Settings::Storage     rec_storageRecord;      ///< Куда сохранять данные
+    Recorder::Settings::Storage     rec_storagePlay;        ///< Откуда брать сохранённые данные
+    Recorder::Settings::Axis        rec_axisMove;           ///< Текущая ось перемещения
+    Recorder::Settings::Axis        rec_axisZoom;           ///< Текущая ось масштабирования
 
 
     int16   dbg_enum_gate_max;      ///< Ограничение ворот в рандомизаторе сверху

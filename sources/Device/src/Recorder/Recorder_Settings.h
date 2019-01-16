@@ -15,35 +15,38 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 namespace Recorder
 {
-    /// Показывать ли всегда результаты измерений
-    struct ViewAlways
+    namespace Settings
     {
-        enum E
+        /// Показывать ли всегда результаты измерений
+        struct ViewAlways
         {
-            InMode,
-            InAlways
-        } value;
-    };
+            enum E
+            {
+                InMode,
+                InAlways
+            } value;
+        };
 
-    /// C каким источником работаем
-    struct DataStorage
-    {
-        enum E
+        /// C каким источником работаем
+        struct Storage
         {
-            RAM,
-            Flash,
-            PC
-        } value;
-    };
+            enum E
+            {
+                RAM,
+                Flash,
+                PC
+            } value;
+        };
 
-    /// Используется при выборе оси
-    struct Axis
-    {
-        enum E
+        /// Используется при выборе оси
+        struct Axis
         {
-            X,
-            Y
-        } value;
+            enum E
+            {
+                X,
+                Y
+            } value;
+        };
     };
 }
 
