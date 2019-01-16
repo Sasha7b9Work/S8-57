@@ -405,6 +405,7 @@ void Color::WriteToDisplay(Color color)
     if (color != lastColor)
     {
         lastColor = color;
+
         FSMC::WriteToPanel2bytes(Command::Paint_SetColor, lastColor.value);
     }
 }

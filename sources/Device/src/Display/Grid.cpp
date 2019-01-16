@@ -3,11 +3,9 @@
 #include "defines.h"
 #include "log.h"
 #include "device.h"
-#include "Grid.h"
 #include "Display/Display_Primitives.h"
-#include "Display/Painter.h"
+#include "Display/Grid.h"
 #include "Settings/Settings.h"
-#include "Menu/Menu.h"
 #endif
 
 
@@ -21,6 +19,8 @@ namespace Grid
     static void DrawOsci();
     /// Нарисовать сетку для режима тестер-компонента
     static void DrawTester();
+
+    static void DrawRecorder();
 
     static void DrawGridSignal(int left, int top, int width, int height);
 
@@ -132,7 +132,7 @@ void Grid::Draw()
         DrawOsci,
         DrawTester,
         EmptyFuncVV,
-        EmptyFuncVV
+        DrawRecorder
     };
 
 
@@ -183,20 +183,14 @@ void Grid::DrawGridSignal(int left, int top, int width, int height)
 
     if (top == Top())
     {
-        // Painter::DrawHLine(top, 1, left - 2);
 		HLine(left - 1).Draw(1, top);
-
-        // Painter::DrawHLine(top, right + 2, Display::WIDTH - 2);
 		HLine(Display::WIDTH - right - 4).Draw(right + 2, top);
 
         if (!Menu::IsMinimize() || !Menu::IsShown())
         {
             VLine line(bottom - top - 4);
 
-            //Painter::DrawVLine(1, top + 2, bottom - 2);
             line.Draw(1, top + 2);
-
-            //Painter::DrawVLine(318, top + 2, bottom - 2);
             line.Draw(318, top + 2);
         }
     }
@@ -275,7 +269,6 @@ void Grid::DrawGridSpectrum()
         }
     }
 
-    //Painter::DrawVLine(Left() + 256, MathTop(), MathBottom(), Color::FILL);
     VLine(MathBottom() - MathTop()).Draw(Left() + 256, MathTop(), Color::FILL);
 }
 
@@ -426,10 +419,8 @@ static void Grid::DrawTester()
     int x = (int)(x0 + Display::WIDTH / 2);
     int y = (int)(y0 + Display::HEIGHT / 2);
 
-    //Painter::DrawVLine(x, 0, Display::HEIGHT);
     VLine(Display::HEIGHT).Draw(x, 0);
 
-    //Painter::DrawHLine(y, 0, Display::WIDTH);
 	HLine(Display::WIDTH).Draw(0, y);
 
     Color::SetCurrent(Color::GRID);
@@ -445,7 +436,6 @@ static void Grid::DrawTester()
 
     while (x < Display::WIDTH)
     {
-        //Painter::DrawVPointLine(x, 0, Display::HEIGHT, deltaPoint);
         vLine.Draw(x, 0);
         x += deltaX;
     }
@@ -454,7 +444,6 @@ static void Grid::DrawTester()
 
     while (x > 0)
     {
-        //Painter::DrawVPointLine(x, 0, Display::HEIGHT, deltaPoint);
         vLine.Draw(x, 0);
         x -= deltaX;
     }
@@ -465,7 +454,6 @@ static void Grid::DrawTester()
 
     while (y < Display::HEIGHT)
     {
-        //Painter::DrawHPointLine(y, 0, Display::WIDTH, deltaPoint);
         hLine.Draw(0, y);
         y += deltaY;
     }
@@ -474,8 +462,13 @@ static void Grid::DrawTester()
 
     while (y > 0)
     {
-        //Painter::DrawHPointLine(y, 0, Display::WIDTH, deltaPoint);
         hLine.Draw(0, y);
         y -= deltaY;
     }
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Grid::DrawRecorder()
+{
+    Rectangle(Display::WIDTH - 1, Display::HEIGHT - 1).Draw(0, 0, Color::FILL);
 }
