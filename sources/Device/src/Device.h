@@ -18,7 +18,6 @@ namespace Device
             Recorder,
             Number
         } value;
-
         explicit Mode(E v) : value(v) {};
     };
 

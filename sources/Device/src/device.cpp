@@ -37,8 +37,6 @@ namespace Device
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void Device::Init()
 {
-    SetCurrentMode();
-
     Hardware::Init();
 
     VCP::Init();
@@ -64,6 +62,8 @@ void Device::Init()
     Multimeter::Init();
 
     FDrive::Init();
+
+    SetCurrentMode();
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -75,7 +75,7 @@ static void Device::SetCurrentMode()
         {
             if (!SetCurrentMode(PageFunction::PageRecorder::pointer, Device::Mode::Recorder))
             {
-
+                State::SetMode(Mode::Osci);
             }
         }
     }
