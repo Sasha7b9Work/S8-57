@@ -47,7 +47,7 @@ namespace Multimeter
             Bell,
             Number
         } value;
-        Measure(E v) : value(v) { };
+        explicit Measure(E v) : value(v) { };
         operator uint8() const { return (uint8)value; };
         char Symbol() const
         {
@@ -56,27 +56,27 @@ namespace Multimeter
         }
         static Measure ForSymbol(char symbol)
         {
-			Measure result = Measure::Number;
+			Measure result(Measure::Number);
 
             switch(symbol)
             {
 				case 'V':
-					result = Measure::VoltageAC;
+					result.value = Measure::VoltageAC;
 					break;
 				case 'I':
-					result = Measure::CurrentDC;
+					result.value = Measure::CurrentDC;
 					break;
 				case 'J':
-					result = Measure::CurrentAC;
+					result.value = Measure::CurrentAC;
 					break;
 				case 'R':
-					result = Measure::Resistance;
+					result.value = Measure::Resistance;
 					break;
 				case 'Y':
-					result = Measure::TestDiode;
+					result.value = Measure::TestDiode;
 					break;
 				case 'W':
-					result = Measure::Bell;
+					result.value = Measure::Bell;
 					break;
             }
 

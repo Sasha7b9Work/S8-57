@@ -104,7 +104,9 @@ void Multimeter::Update()
         // больше выборов нету
     }
 
-    uint8 send[4] = {0x02, (uint8)MULTI_MEASURE.Symbol(), (uint8)(range + 0x30), 0x0a};
+    char symbol = Measure(MULTI_MEASURE).Symbol();
+
+    uint8 send[4] = {0x02, (uint8)symbol, (uint8)(range + 0x30), 0x0a};
     HAL_UART_Transmit(&handlerUART, send, 4, 100);
     HAL_UART_Receive_IT(&handlerUART, bufferUART, 10);
 }

@@ -55,7 +55,7 @@ void Multimeter::Display::Update()
     Measure meas = Measure::ForSymbol(buffer[7]);
     if (meas == Measure::Number)
     {
-        meas = MULTI_MEASURE;
+        meas.value = MULTI_MEASURE;
     }
 
     funcs[meas].func();
