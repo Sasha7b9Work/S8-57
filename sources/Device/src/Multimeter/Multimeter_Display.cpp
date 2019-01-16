@@ -52,10 +52,10 @@ void Multimeter::Display::Update()
 
     std::memset(out, 0, SIZE_OUT);
 
-    Measure meas = Measure::ForSymbol(buffer[7]);
+    Measure::E meas = Measure::ForSymbol(buffer[7]);
     if (meas == Measure::Number)
     {
-        meas.value = MULTI_MEASURE;
+        meas = MULTI_MEASURE;
     }
 
     funcs[meas].func();

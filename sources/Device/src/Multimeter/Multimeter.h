@@ -48,35 +48,34 @@ namespace Multimeter
             Number
         } value;
         explicit Measure(E v) : value(v) { };
-        operator uint8() const { return (uint8)value; };
         char Symbol() const
         {
             static const char symbols[Number] = {'U', 'V', 'I', 'J', 'R', 'Y', 'W' };
             return symbols[value]; //-V2006
         }
-        static Measure ForSymbol(char symbol)
+        static Measure::E ForSymbol(char symbol)
         {
-			Measure result(Measure::Number);
+			Measure::E result = Measure::Number;
 
             switch(symbol)
             {
 				case 'V':
-					result.value = Measure::VoltageAC;
+					result = Measure::VoltageAC;
 					break;
 				case 'I':
-					result.value = Measure::CurrentDC;
+					result = Measure::CurrentDC;
 					break;
 				case 'J':
-					result.value = Measure::CurrentAC;
+					result = Measure::CurrentAC;
 					break;
 				case 'R':
-					result.value = Measure::Resistance;
+					result = Measure::Resistance;
 					break;
 				case 'Y':
-					result.value = Measure::TestDiode;
+					result = Measure::TestDiode;
 					break;
 				case 'W':
-					result.value = Measure::Bell;
+					result = Measure::Bell;
 					break;
             }
 
@@ -93,7 +92,6 @@ namespace Multimeter
             On
         } value;
         explicit AVP(E v) : value(v) { };
-        operator uint8() const { return (uint8)value; };
     };
 
     /// Предел имзерения постоянного напряжения
@@ -106,7 +104,6 @@ namespace Multimeter
             _500V
         } value;
         explicit RangeDC(E v) : value(v) { };
-        operator uint8() const { return (uint8)value; };
     };
 
     /// Предел измерения переменного напряжения
@@ -118,6 +115,7 @@ namespace Multimeter
             _20V,
             _400V
         } value;
+        explicit RangeAC(E v) : value(v) {};
     };
 
     /// Предел измерения сопротивленя постоянному току
@@ -130,6 +128,8 @@ namespace Multimeter
             _200k,
             _10M
         } value;
+        explicit RangeResistance(E v) : value(v) {};
+
     };
 
     /// Если нулевой элемент == 0, то выводить ничего не нужно
