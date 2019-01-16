@@ -11,6 +11,7 @@ struct BalanceADC
         Settings,    ///< Используются значения балансировки, которые получены автоматически.
         Hand         ///< Используются значения балансировки, заданные вручную.
     } value;
+    explicit BalanceADC(E v) : value(v) {};
     operator uint8() const { return (uint8)value; };
 };
 
@@ -23,6 +24,7 @@ struct StretchADC
         Real,
         Hand
     } value;
+    explicit StretchADC(E v) : value(v) {};
     operator uint8() const { return (uint8)value; };
 };
 

@@ -237,8 +237,8 @@ public:
     // Несбрасываемые настройки калибровки
 
     int16               nrst_balanceADC[Chan::Number];                                   ///< Значение дополнительного смещения АЦП для ручной балансировки.
-    BalanceADC          nrst_balanceADCtype;                                             ///< Тип балансировки.
-    StretchADC          nrst_stretchADCtype;                                             ///< Тип растяжки канала.
+    BalanceADC::E       nrst_balanceADCtype;                                             ///< Тип балансировки.
+    StretchADC::E       nrst_stretchADCtype;                                             ///< Тип растяжки канала.
     int16               nrst_StretchADC[Chan::Number][3];                                ///< \brief Поправочный коэффициент для ручного, калибровочного и
                         ///< отключенного режимов. Здесь хранится в целом виде, чтобы получить реальный коэффициент, нужно разделить на 1000 и
                         ///< прибавить единицу.
