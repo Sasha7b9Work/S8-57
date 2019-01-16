@@ -649,7 +649,7 @@ Control *Menu::CurrentItem()
     Control::Type type(Control::Type::None);
     void *lastOpened = RetLastOpened((Page *)pageMain, &type);
     int8 pos = ((const Page *)lastOpened)->PosCurrentItem();
-    if (type == Control::Type::Page && pos != 0x7f)
+    if (type.value == Control::Type::Page && pos != 0x7f)
     {
         return ((const Page *)lastOpened)->Item(pos);
     }

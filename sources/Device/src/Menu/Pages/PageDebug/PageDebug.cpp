@@ -520,8 +520,8 @@ static void DebugShowSetInfo_Draw()
     DRAW_FORMAT("numAveForRand : %d", NRST_NUM_AVE_FOR_RAND);
 
     pString s[3] = {"выключено", "настроено автоматически", "задано вручную"};
-    DRAW_FORMAT("balanceADCtype : %s", (NRST_BALANCE_ADC_TYPE < 3 ? s[NRST_BALANCE_ADC_TYPE] : "!!! неправильное значение !!!"));
-    DRAW_FORMAT("stretchADCtype : %s", (NRST_STRETCH_ADC_TYPE < 3 ? s[NRST_STRETCH_ADC_TYPE] : "!!! неправильное значение !!!"));
+    DRAW_FORMAT("balanceADCtype : %s", (NRST_BALANCE_ADC_TYPE < 3 ? s[NRST_BALANCE_ADC_TYPE] : "!!! неправильное значение !!!")); //-V547
+    DRAW_FORMAT("stretchADCtype : %s", (NRST_STRETCH_ADC_TYPE < 3 ? s[NRST_STRETCH_ADC_TYPE] : "!!! неправильное значение !!!")); //-V547
 
     x = String("stretchADC :").Draw(x0, Y_AND_INCREASE) + 5;
 
