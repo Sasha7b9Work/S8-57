@@ -127,7 +127,7 @@ int Grid::ChannelCenterHeight()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Grid::Draw()
 {
-    DEF_STRUCT(StructDraw, pFuncVV) draw[Device::Mode::Size] =
+    DEF_STRUCT(StructDraw, pFuncVV) funcs[Device::Mode::Size] =
     {
         DrawOsci,
         DrawTester,
@@ -135,9 +135,7 @@ void Grid::Draw()
         DrawRecorder
     };
 
-    pFuncVV func = draw[Device::State::CurrentMode()].val;
-
-    SAFE_HANDLER(func);
+    HANDLER_CHOICE_AND_SAFE_RUN(pFuncVV, Device::State::CurrentMode());
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

@@ -102,7 +102,7 @@ void Display::Init()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Display::Update()
 {
-    static const struct StructDraw { pFuncVV func; } draw[Device::Mode::Size] =
+    DEF_STRUCT(StructDraw, pFuncVV) funcs[Device::Mode::Size] =
     {
         Osci::Display::Update,
         Tester::Display::Update,
@@ -110,16 +110,7 @@ void Display::Update()
         Recorder::Display::Update
     };
 
-    pFuncVV func = draw[Device::State::CurrentMode()].func;
-
-    if (func)
-    {
-        func();
-    }
-    else
-    {
-        LOG_ERROR("");
-    }
+    HANDLER_CHOICE_AND_SAFE_RUN(pFuncVV, Device::State::CurrentMode());
 
     Console::Draw();
 
