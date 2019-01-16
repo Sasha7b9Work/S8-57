@@ -9,20 +9,6 @@
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void Osci::Settings::Load()
-{
-    Range::LoadBoth();
-    RShift::Load(Chan::A);
-    RShift::Load(Chan::B);
-    Trig::Input::Load();
-    Trig::Level::Load();
-    TBase::Load();
-    TShift::Load();
-    FPGA::Settings::LoadCalibratorMode();
-    LoadHoldfOff();
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Osci::Settings::LoadHoldfOff()
 {
     FSMC::WriteToFPGA8(WR_TRIG_HOLD_ENABLE, TRIG_HOLDOFF_ENABLED ? 1U : 0U);

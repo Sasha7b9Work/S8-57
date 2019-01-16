@@ -3,6 +3,7 @@
 #include "Hardware/EEPROM.h"
 #include "FPGA/FPGA.h"
 #include "FPGA/FPGA_Settings.h"
+#include "Osci/Osci.h"
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -15,7 +16,7 @@ void Settings::Load(bool _default)
     if(_default || !EEPROM::LoadSettings())
     {
         Reset();
-        Osci::Settings::Load();
+        Osci::Init();
         uint8 data[1024];
         TransformFromLoad(data);
         Menu::Init();

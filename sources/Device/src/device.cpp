@@ -55,7 +55,7 @@ void Device::Init()
 
     FrequencyCounter::Init();
 
-    Osci::Settings::Load();
+    Osci::Init();
 
     Menu::Init();
 

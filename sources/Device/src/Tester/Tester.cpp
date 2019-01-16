@@ -6,6 +6,7 @@
 #include "FPGA/FPGA_Osci.h"
 #include "Hardware/FSMC.h"
 #include "Hardware/Hardware.h"
+#include "Osci/Osci.h"
 #include "Settings/Settings.h"
 #include "Utils/Values.h"
 #endif
@@ -198,7 +199,7 @@ void Tester::Disable() // -V2506
     set = oldSet;
     //set.Save();
 
-    Osci::Settings::Load();
+    Osci::Init();
 
     FPGA::OnPressStart();
 }

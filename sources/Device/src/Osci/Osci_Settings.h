@@ -5,8 +5,6 @@ namespace Osci
 {
     namespace Settings
     {
-        /// Загружает настройки в аппаратную часть
-        void Load();
         /// Установить значение удержания синхронизации
         void LoadHoldfOff();
 

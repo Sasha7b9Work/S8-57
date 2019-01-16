@@ -10,7 +10,15 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void Osci::Init()
 {
-
+    Settings::Range::LoadBoth();
+    Settings::RShift::Load(Chan::A);
+    Settings::RShift::Load(Chan::B);
+    Settings::Trig::Input::Load();
+    Settings::Trig::Level::Load();
+    Settings::TBase::Load();
+    Settings::TShift::Load();
+    FPGA::Settings::LoadCalibratorMode();
+    Settings::LoadHoldfOff();
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
