@@ -4,17 +4,18 @@
 #include "defines.h"
 #include "device.h"
 #include "log.h"
-#include "FPGA.h"
-#include "FPGA_HAL.h"
-#include "FPGA_Settings.h"
+#include "Data/DataBuffer.h"
+#include "Data/DataStorage.h"
+#include "FPGA/FPGA.h"
+#include "FPGA/FPGA_HAL.h"
+#include "FPGA/FPGA_Osci.h"
+#include "FPGA/FPGA_Settings.h"
 #include "Hardware/FSMC.h"
 #include "Hardware/GPIO.h"
 #include "Hardware/Timer.h"
 #include "Menu/Pages/Include/PageChannels.h"
 #include "Utils/Math.h"
 #include "Settings/Settings.h"
-#include "Data/DataBuffer.h"
-#include "Data/DataStorage.h"
 #include <cstring>
 #include <stdlib.h>
 #endif
@@ -67,7 +68,7 @@ void FPGA::Stop(bool)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void FPGA::Update() // -V2506
+void FPGA::Osci::Update() // -V2506
 {
     if (!isRunning)
     {

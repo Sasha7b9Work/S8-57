@@ -6,6 +6,8 @@ namespace Osci
 {
     void Init();
 
+    void Update();
+
     void DeInit();
 
     namespace Display

@@ -102,7 +102,7 @@ void Device::Update()
 
     Display::Update();
 
-    FPGA::Update();
+    Osci::Update();
 
     Menu::SaveSettings();
 

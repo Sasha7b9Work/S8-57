@@ -17,8 +17,6 @@ namespace FPGA
 {
     void Init();
 
-    void Update();
-
     void Start();
 
     void OnPressStart();

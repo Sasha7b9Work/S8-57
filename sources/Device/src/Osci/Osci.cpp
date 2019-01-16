@@ -1,5 +1,7 @@
 #include "stdafx.h"
 #ifndef WIN32
+#include "defines.h"
+#include "FPGA/FPGA_Osci.h"
 #include "Osci/Osci.h"
 #endif
 
@@ -14,4 +16,10 @@ void Osci::Init()
 void Osci::DeInit()
 {
 
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Osci::Update()
+{
+    FPGA::Osci::Update();
 }
