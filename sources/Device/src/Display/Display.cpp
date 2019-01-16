@@ -121,7 +121,7 @@ void Display::Update()
         Recorder::Graphics::Update
     };
 
-    pFuncVV func = draw[Device::CurrentMode()].func;
+    pFuncVV func = draw[Device::State::CurrentMode()].func;
 
     if (func)
     {

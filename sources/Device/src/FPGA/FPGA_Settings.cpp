@@ -118,7 +118,7 @@ void RShift::Load(Chan::E ch)
 
     uint16 shift = SET_RSHIFT(ch);
 
-    if (Chan(ch).IsA() && Device::CurrentMode() == Device::Mode::Tester)
+    if (Chan(ch).IsA() && Device::State::InModeTester())
     {
         shift = (uint16)((int)shift - Tester::DeltaRShiftA());
     }
@@ -194,7 +194,7 @@ static uint8 ValueForRange(Chan::E ch) // -V2506
         BIN_U8(00000010)   // -V2501  // GND
     };
 
-    if (SET_COUPLE(ch) == ModeCouple::GND && Device::CurrentMode() == Device::Mode::Osci)
+    if (SET_COUPLE(ch) == ModeCouple::GND && Device::State::InModeOsci())
     {
         return datas[ModeCouple::GND];
     }

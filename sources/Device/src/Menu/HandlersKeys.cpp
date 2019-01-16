@@ -274,7 +274,7 @@ static void DrawParametersChannel()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void OnChangeParameterChannel(pFuncVChI func, Chan::E ch, int delta)
 {
-    if (Device::CurrentMode() == Device::Mode::Osci)
+    if (Device::State::InModeOsci())
     {
         drawingChan = Chan(ch);
 
@@ -287,7 +287,7 @@ static void OnChangeParameterChannel(pFuncVChI func, Chan::E ch, int delta)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void OnChangeParameterTime(pFuncVI func, int delta)
 {
-    if (Device::CurrentMode() == Device::Mode::Osci)
+    if (Device::State::InModeOsci())
     {
         Display::SetAddDrawFunction(DrawParametersTime, 5000);
     }

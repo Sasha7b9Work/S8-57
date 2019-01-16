@@ -83,7 +83,7 @@ bool Menu::IsProcessed(const KeyEvent *event)
     Key::E key = event->key;
     TypePress::E type = event->type;
 
-    if (Device::InModeTester())
+    if (Device::State::InModeTester())
     {
         if (Key(key).IsControlSignal() || Key(key).IsFunctional() || (key == Key::Enter && !TypePress(type).IsLong()))
         {
@@ -92,7 +92,7 @@ bool Menu::IsProcessed(const KeyEvent *event)
         return false;
     }
     
-    if (Device::InModeMultimeter())
+    if (Device::State::InModeMultimeter())
     {
         if (Key(key).IsFunctional() ||          // мультиметр реагирует на функциональные кнопки
             Key(key).IsArrow() ||               // на стрелки
@@ -915,7 +915,7 @@ void Menu::SaveSettings()
     if((timeLastPressedButton != MAX_UINT) && (TIME_MS - timeLastPressedButton > 5000))
     {
         timeLastPressedButton = MAX_UINT;
-        if(Device::CurrentMode() != Device::Mode::Tester)
+        if(!Device::State::InModeTester())
         {
             Settings::Save();
         }

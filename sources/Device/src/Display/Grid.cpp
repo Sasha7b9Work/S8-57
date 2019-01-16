@@ -49,7 +49,7 @@ int Grid::Left()
 {
     static const int left[Device::Mode::Number] = { 20, 0, 0, 0 };
 
-    return left[Device::CurrentMode()];
+    return left[Device::State::CurrentMode()];
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -57,7 +57,7 @@ int Grid::Top()
 {
     static const int top[Device::Mode::Number] = { 19, 0, 0, 0 };
 
-    return top[Device::CurrentMode()];
+    return top[Device::State::CurrentMode()];
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -65,7 +65,7 @@ int Grid::Width()
 {
     static const int width[Device::Mode::Number] = { 280, Display::WIDTH - 1, 0, 0 };
 
-    return width[Device::CurrentMode()];
+    return width[Device::State::CurrentMode()];
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -73,7 +73,7 @@ int Grid::Height()
 {
     static const int height[Device::Mode::Number] = { 200, Display::HEIGHT - 1, 0, 0 };
 
-    return height[Device::CurrentMode()];
+    return height[Device::State::CurrentMode()];
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -136,7 +136,7 @@ void Grid::Draw()
     };
 
 
-    pFuncVV func = draw[Device::CurrentMode()].func;
+    pFuncVV func = draw[Device::State::CurrentMode()].func;
 
     if (func)
     {

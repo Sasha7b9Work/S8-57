@@ -395,7 +395,7 @@ bool FPGA::CalculateGate(uint16 rand, uint16 *eMin, uint16 *eMax) // -V2506
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void FPGA::Reset()
 {
-    DataStorage::Init(Device::CurrentMode());
+    DataStorage::Init(Device::State::CurrentMode());
 
     TShift::Load();
 

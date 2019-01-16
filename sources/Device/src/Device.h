@@ -25,12 +25,22 @@ namespace Device
     void Init();
 
     void Update();
-
-    Mode::E CurrentMode();
-
-    bool InModeTester();
-
-    bool InModeMultimeter();
     /// Устанавливает режим работы
     void SetMode(Mode::E mode);
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    namespace State
+    {
+        Mode::E CurrentMode();
+
+        bool InModeTester();
+
+        bool InModeMultimeter();
+
+        bool InModeRecorder();
+
+        bool InModeOsci();
+
+        bool RecorderEnabled();
+    }
 };

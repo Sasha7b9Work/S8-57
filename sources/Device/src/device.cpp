@@ -120,7 +120,7 @@ void Device::Update()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-Device::Mode::E Device::CurrentMode()
+Device::Mode::E Device::State::CurrentMode()
 {
     return currentMode;
 }
@@ -161,13 +161,19 @@ void Device::SetMode(Mode::E mode)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-bool Device::InModeTester()
+bool Device::State::InModeTester()
 {
-    return (currentMode == Device::Mode::Tester);
+    return (CurrentMode() == Device::Mode::Tester);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-bool Device::InModeMultimeter()
+bool Device::State::InModeMultimeter()
 {
-    return (currentMode == Device::Mode::Multimeter);
+    return (CurrentMode() == Device::Mode::Multimeter);
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+bool Device::State::InModeOsci()
+{
+    return (CurrentMode() == Device::Mode::Osci);
 }

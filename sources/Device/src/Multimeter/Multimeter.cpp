@@ -90,7 +90,7 @@ void Multimeter::ChangeAVP()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Multimeter::Update()
 {
-    if(Device::CurrentMode() != Device::Mode::Multimeter)
+    if (!Device::State::InModeMultimeter())
     {
         return;
     }
