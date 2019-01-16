@@ -249,22 +249,23 @@ public:
     int16               nrst_correctionTime;                                             ///< Коэффициент коррекции времени.
 
     // Настройки мультиметра
-    Multimeter::AVP                 multi_avp;
+    Multimeter::AVP::E              multi_avp;
     Multimeter::Measure             multi_meas;
-    Multimeter::RangeDC             multi_rangeDC;
+    Multimeter::RangeDC::E          multi_rangeDC;
     Multimeter::RangeAC::E          multi_rangeAC;
     Multimeter::RangeResistance::E  multi_rangeResist;
 
     // Настройки регистратора
-    Recorder::Settings::ViewAlways  rec_viewAlways;         ///< Показывать ли всегда данные регистратора
-    bool                            rec_sourceChanA;        ///< Включение записи канала 1
-    bool                            rec_sourceChanB;        ///< Включение записи канала 2
-    bool                            rec_sourceSensor;       ///< Включение записи показаний датчика
-    Recorder::Settings::Storage     rec_storageRecord;      ///< Куда сохранять данные
-    Recorder::Settings::Storage     rec_storagePlay;        ///< Откуда брать сохранённые данные
-    Recorder::Settings::Axis        rec_axisMove;           ///< Текущая ось перемещения
-    Recorder::Settings::Axis        rec_axisZoom;           ///< Текущая ось масштабирования
-    Recorder::Settings::ScaleX      rec_scaleX;             ///< Установленный масштаб по времени
+    Recorder::Settings::ViewAlways::E rec_viewAlways;       ///< Показывать ли всегда данные регистратора
+    bool                              rec_sourceChanA;      ///< Включение записи канала 1
+    bool                              rec_sourceChanB;      ///< Включение записи канала 2
+    bool                              rec_sourceSensor;     ///< Включение записи показаний датчика
+    Recorder::Settings::Storage::E    rec_storageRecord;    ///< Куда сохранять данные
+    Recorder::Settings::Storage::E    rec_storagePlay;      ///< Откуда брать сохранённые данные
+    Recorder::Settings::Axis::E       rec_axisMove;         ///< Текущая ось перемещения
+    Recorder::Settings::Axis::E       rec_axisZoom;         ///< Текущая ось масштабирования
+    Recorder::Settings::ScaleX::E     rec_scaleX;           ///< Установленный масштаб по времени
+    Osci::Settings::Range::E          rec_range[2];         ///< Масштаб по вертикали в режиме регистратора
 
 
     int16   dbg_enum_gate_max;      ///< Ограничение ворот в рандомизаторе сверху

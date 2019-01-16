@@ -25,6 +25,7 @@ namespace Recorder
                 InMode,
                 InAlways
             } value;
+            explicit ViewAlways(E v) : value(v) {};
         };
 
         /// C каким источником работаем
@@ -36,6 +37,7 @@ namespace Recorder
                 Flash,
                 PC
             } value;
+            explicit Storage(E v) : value(v) {};
         };
 
         /// Используется при выборе оси
@@ -46,6 +48,7 @@ namespace Recorder
                 X,
                 Y
             } value;
+            explicit Axis(E v) : value(v) {};
         };
 
         /// Масшаб по времени
@@ -68,6 +71,7 @@ namespace Recorder
                 _50s,   //
                 _100s   //
             } value;
+            explicit ScaleX(E v) : value(v) {};
         };
     };
 }

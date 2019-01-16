@@ -92,7 +92,7 @@ namespace Multimeter
             Off,
             On
         } value;
-        AVP(E v) : value(v) { };
+        explicit AVP(E v) : value(v) { };
         operator uint8() const { return (uint8)value; };
     };
 
@@ -105,7 +105,7 @@ namespace Multimeter
             _20V,
             _500V
         } value;
-        RangeDC(E v) : value(v) { };
+        explicit RangeDC(E v) : value(v) { };
         operator uint8() const { return (uint8)value; };
     };
 
