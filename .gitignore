@@ -5,6 +5,8 @@
 JLinkLog.txt
 JLinkSettings.ini
 
+sources/generated/*
+
 doc/doxygen/OSC/*
 
 sources/Device/DebugConfig/*
