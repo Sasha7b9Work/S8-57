@@ -37,7 +37,6 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="..\..\Device\src\FPGA\FPGA_HAL.cpp" />
-    <ClCompile Include="..\..\Device\src\FPGA\FPGA_Recorder.cpp" />
     <ClCompile Include="..\..\Device\src\FPGA\FPGA_Settings.cpp" />
     <ClCompile Include="..\..\Device\src\Hardware\AT25160N.cpp" />
     <ClCompile Include="..\..\Device\src\Hardware\CPU.cpp" />
@@ -221,7 +220,6 @@
     <ClInclude Include="..\..\Device\src\FPGA\FPGATypes.h" />
     <ClInclude Include="..\..\Device\src\FPGA\FPGA_HAL.h" />
     <ClInclude Include="..\..\Device\src\FPGA\FPGA_Osci.h" />
-    <ClInclude Include="..\..\Device\src\FPGA\FPGA_Recorder.h" />
     <ClInclude Include="..\..\Device\src\FPGA\FPGA_Settings.h" />
     <ClInclude Include="..\..\Device\src\Hardware\AT25160N.h" />
     <ClInclude Include="..\..\Device\src\Hardware\CPU.h" />
