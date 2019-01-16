@@ -33,3 +33,9 @@ Recorder::Settings::ScaleX::E Recorder::Settings::ScaleX::Current()
 {
     return set.rec_scaleX;
 }
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+pString Recorder::Settings::ScaleX::ToString() const
+{
+    return "";
+}

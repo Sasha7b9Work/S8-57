@@ -351,9 +351,6 @@
     <ClCompile Include="..\..\Device\src\Settings\SettingsMemory.cpp">
       <Filter>Settings</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Device\src\Settings\SettingsTime.cpp">
-      <Filter>Settings</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Device\src\Settings\SettingsTransformation.cpp">
       <Filter>Settings</Filter>
     </ClCompile>

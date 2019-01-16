@@ -2071,11 +2071,6 @@
               <FilePath>.\src\Settings\SettingsService.h</FilePath>
             </File>
             <File>
-              <FileName>SettingsTime.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Settings\SettingsTime.cpp</FilePath>
-            </File>
-            <File>
               <FileName>SettingsTime.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Settings\SettingsTime.h</FilePath>
