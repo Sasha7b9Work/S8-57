@@ -7,4 +7,6 @@ namespace Recorder
     void Init();
 
     void DeInit();
+
+    void Update();
 };

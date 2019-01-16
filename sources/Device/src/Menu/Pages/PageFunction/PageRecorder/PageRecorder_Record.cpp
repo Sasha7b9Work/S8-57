@@ -2,7 +2,6 @@
 #ifndef WIN32
 #include "defines.h"
 #include "Menu/Pages/Include/PageFunction.h"
-#include "Recorder/Recorder.h"
 #include "Settings/Settings.h"
 #endif
 
