@@ -1281,6 +1281,16 @@
               <FilePath>.\src\FPGA\FPGA_Math.h</FilePath>
             </File>
             <File>
+              <FileName>FPGA_Recorder.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\FPGA\FPGA_Recorder.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>FPGA_Recorder.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\FPGA\FPGA_Recorder.h</FilePath>
+            </File>
+            <File>
               <FileName>FPGA_Settings.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\FPGA\FPGA_Settings.cpp</FilePath>
@@ -1294,6 +1304,11 @@
               <FileName>FPGATypes.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\FPGA\FPGATypes.h</FilePath>
+            </File>
+            <File>
+              <FileName>FPGA_Osci.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\FPGA\FPGA_Osci.h</FilePath>
             </File>
           </Files>
         </Group>

@@ -462,6 +462,9 @@
     <ClCompile Include="..\..\Device\src\Multimeter\Multimeter_Display.cpp">
       <Filter>Multimeter</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Device\src\FPGA\FPGA_Recorder.cpp">
+      <Filter>FPGA</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Device\src\defines.h">
@@ -822,6 +825,9 @@
       <Filter>Osci</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Device\src\FPGA\FPGA_Osci.h">
+      <Filter>FPGA</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Device\src\FPGA\FPGA_Recorder.h">
       <Filter>FPGA</Filter>
     </ClInclude>
   </ItemGroup>
