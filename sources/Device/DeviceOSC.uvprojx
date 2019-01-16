@@ -1911,6 +1911,11 @@
               <FilePath>.\src\Osci\Osci.h</FilePath>
             </File>
             <File>
+              <FileName>Osci_Display.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Osci\Osci_Display.cpp</FilePath>
+            </File>
+            <File>
               <FileName>Osci_Settings.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Osci\Osci_Settings.cpp</FilePath>
@@ -1919,11 +1924,6 @@
               <FileName>Osci_Settings.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Osci\Osci_Settings.h</FilePath>
-            </File>
-            <File>
-              <FileName>OsciGraphics.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Osci\OsciGraphics.cpp</FilePath>
             </File>
           </Files>
         </Group>

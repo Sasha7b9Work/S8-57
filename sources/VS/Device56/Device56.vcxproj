@@ -131,7 +131,7 @@
     <ClCompile Include="..\..\Device\src\Osci\Display\PainterData.cpp" />
     <ClCompile Include="..\..\Device\src\Osci\FrequencyCounter.cpp" />
     <ClCompile Include="..\..\Device\src\Osci\Osci.cpp" />
-    <ClCompile Include="..\..\Device\src\Osci\OsciGraphics.cpp" />
+    <ClCompile Include="..\..\Device\src\Osci\Osci_Display.cpp" />
     <ClCompile Include="..\..\Device\src\Osci\Osci_Settings.cpp" />
     <ClCompile Include="..\..\Device\src\Recorder\Recorder_Display.cpp" />
     <ClCompile Include="..\..\Device\src\Recorder\Recorder.cpp" />

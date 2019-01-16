@@ -79,6 +79,7 @@ namespace Recorder
             static void Load();
             static void Change(int delta);
             static ScaleX::E Current();
+            pString ToString() const;
         };
     };
 }
