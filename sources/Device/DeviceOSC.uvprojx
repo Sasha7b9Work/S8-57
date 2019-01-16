@@ -1991,19 +1991,19 @@
               <FilePath>.\src\Recorder\Recorder.h</FilePath>
             </File>
             <File>
-              <FileName>Graphics_Recorder.cpp</FileName>
+              <FileName>Recorder_Display.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\Recorder\Graphics_Recorder.cpp</FilePath>
+              <FilePath>.\src\Recorder\Recorder_Display.cpp</FilePath>
             </File>
             <File>
-              <FileName>Graphics_Recorder.h</FileName>
+              <FileName>Recorder_Display.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\src\Recorder\Graphics_Recorder.h</FilePath>
+              <FilePath>.\src\Recorder\Recorder_Display.h</FilePath>
             </File>
             <File>
-              <FileName>Types_Recorder.h</FileName>
+              <FileName>Recorder_Settings.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\src\Recorder\Types_Recorder.h</FilePath>
+              <FilePath>.\src\Recorder\Recorder_Settings.h</FilePath>
             </File>
           </Files>
         </Group>

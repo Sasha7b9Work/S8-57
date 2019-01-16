@@ -438,9 +438,6 @@
     <ClCompile Include="..\..\Device\src\Menu\Pages\PageFunction\PageRecorder\PageRecorder_Show_View_Cursors.cpp">
       <Filter>Menu\Pages\PageFunction\PageRecorder</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Device\src\Recorder\Graphics_Recorder.cpp">
-      <Filter>Recorder</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Device\src\Display\Display_Primitives.cpp">
       <Filter>Display</Filter>
     </ClCompile>
@@ -464,6 +461,9 @@
     </ClCompile>
     <ClCompile Include="..\..\Device\src\FPGA\FPGA_Recorder.cpp">
       <Filter>FPGA</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Recorder\Recorder_Display.cpp">
+      <Filter>Recorder</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -794,12 +794,6 @@
     <ClInclude Include="..\..\Device\src\SCPI\SCPI.h">
       <Filter>SCPI</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Device\src\Recorder\Types_Recorder.h">
-      <Filter>Recorder</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Device\src\Recorder\Graphics_Recorder.h">
-      <Filter>Recorder</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Device\src\Display\Grid_Types.h">
       <Filter>Display</Filter>
     </ClInclude>
@@ -829,6 +823,12 @@
     </ClInclude>
     <ClInclude Include="..\..\Device\src\FPGA\FPGA_Recorder.h">
       <Filter>FPGA</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Device\src\Recorder\Recorder_Settings.h">
+      <Filter>Recorder</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Device\src\Recorder\Recorder_Display.h">
+      <Filter>Recorder</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

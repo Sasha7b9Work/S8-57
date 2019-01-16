@@ -134,7 +134,7 @@
     <ClCompile Include="..\..\Device\src\Osci\OsciGraphics.cpp" />
     <ClCompile Include="..\..\Device\src\Osci\Osci_Settings.cpp" />
     <ClCompile Include="..\..\Device\src\Osci\PainterData.cpp" />
-    <ClCompile Include="..\..\Device\src\Recorder\Graphics_Recorder.cpp" />
+    <ClCompile Include="..\..\Device\src\Recorder\Recorder_Display.cpp" />
     <ClCompile Include="..\..\Device\src\Recorder\Recorder.cpp" />
     <ClCompile Include="..\..\Device\src\SCPI\SCPI.cpp" />
     <ClCompile Include="..\..\Device\src\Settings\Settings.cpp">
@@ -269,9 +269,9 @@
     <ClInclude Include="..\..\Device\src\Osci\Osci.h" />
     <ClInclude Include="..\..\Device\src\Osci\Osci_Settings.h" />
     <ClInclude Include="..\..\Device\src\Osci\PainterData.h" />
-    <ClInclude Include="..\..\Device\src\Recorder\Graphics_Recorder.h" />
+    <ClInclude Include="..\..\Device\src\Recorder\Recorder_Display.h" />
     <ClInclude Include="..\..\Device\src\Recorder\Recorder.h" />
-    <ClInclude Include="..\..\Device\src\Recorder\Types_Recorder.h" />
+    <ClInclude Include="..\..\Device\src\Recorder\Recorder_Settings.h" />
     <ClInclude Include="..\..\Device\src\SCPI\SCPI.h" />
     <ClInclude Include="..\..\Device\src\Settings\Settings.h" />
     <ClInclude Include="..\..\Device\src\Settings\SettingsChannel.h" />

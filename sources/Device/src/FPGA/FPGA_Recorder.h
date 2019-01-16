@@ -9,5 +9,6 @@ namespace FPGA
     {
         friend struct ::RecorderEntityFPGA;
         static void Init();
+        static void Update();
     };
 }

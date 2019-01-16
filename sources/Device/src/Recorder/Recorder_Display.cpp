@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #ifndef WIN32
 #include "defines.h"
-#include "Graphics_Recorder.h"
+#include "Recorder/Recorder_Display.h"
 #include "Display/Grid.h"
 #include "Display/Painter.h"
 #include "Menu/Menu.h"

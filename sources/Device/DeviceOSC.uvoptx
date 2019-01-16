@@ -2050,7 +2050,7 @@
 
   <Group>
     <GroupName>FPGA</GroupName>
-    <tvExp>1</tvExp>
+    <tvExp>0</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
@@ -3766,7 +3766,7 @@
 
   <Group>
     <GroupName>Recorder</GroupName>
-    <tvExp>0</tvExp>
+    <tvExp>1</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
@@ -3801,8 +3801,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\src\Recorder\Graphics_Recorder.cpp</PathWithFileName>
-      <FilenameWithoutPath>Graphics_Recorder.cpp</FilenameWithoutPath>
+      <PathWithFileName>.\src\Recorder\Recorder_Display.cpp</PathWithFileName>
+      <FilenameWithoutPath>Recorder_Display.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -3813,8 +3813,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\src\Recorder\Graphics_Recorder.h</PathWithFileName>
-      <FilenameWithoutPath>Graphics_Recorder.h</FilenameWithoutPath>
+      <PathWithFileName>.\src\Recorder\Recorder_Display.h</PathWithFileName>
+      <FilenameWithoutPath>Recorder_Display.h</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -3825,8 +3825,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\src\Recorder\Types_Recorder.h</PathWithFileName>
-      <FilenameWithoutPath>Types_Recorder.h</FilenameWithoutPath>
+      <PathWithFileName>.\src\Recorder\Recorder_Settings.h</PathWithFileName>
+      <FilenameWithoutPath>Recorder_Settings.h</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>

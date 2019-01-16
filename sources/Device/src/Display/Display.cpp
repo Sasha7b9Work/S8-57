@@ -2,15 +2,13 @@
 #ifndef WIN32
 #include "defines.h"
 #include "log.h"
-#include "Device.h"
-#include "Painter.h"
-#include "Display_Primitives.h"
+#include "device.h"
+#include "Display/Console.h"
+#include "Display/Painter.h"
+#include "Display/Display_Primitives.h"
 #include "Hardware/Timer.h"
 #include "Hardware/Sound.h"
-#include "Utils/Math.h"
-#include "Console.h"
-#include "Tables.h"
-#include "Recorder/Graphics_Recorder.h"
+#include "Recorder/Recorder_Display.h"
 #include <cstring>
 #endif
 
