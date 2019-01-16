@@ -264,6 +264,7 @@ public:
     Recorder::Settings::Storage     rec_storagePlay;        ///< Откуда брать сохранённые данные
     Recorder::Settings::Axis        rec_axisMove;           ///< Текущая ось перемещения
     Recorder::Settings::Axis        rec_axisZoom;           ///< Текущая ось масштабирования
+    Recorder::Settings::ScaleX      rec_scaleX;             ///< Установленный масштаб по времени
 
 
     int16   dbg_enum_gate_max;      ///< Ограничение ворот в рандомизаторе сверху

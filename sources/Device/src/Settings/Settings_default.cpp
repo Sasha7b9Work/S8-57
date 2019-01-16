@@ -14,214 +14,216 @@ using namespace Recorder::Settings;
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 const Settings Settings::defaultSettings =
 {
-    /* size                       */    0,
-    /* crc32                      */    0,
+    0,  // size
+    0,  // crc32
 
     // Меню ДИСПЛЕЙ
 
-    /* disp_modeDrawSignal;       */    Display::ModeDrawSignal::Lines,
-    /* disp_thickness;            */    Display::ThicknessSignal::_1,
-    /* disp_background;           */    Display::Background::Black,
-    /* disp_showStringNavigation; */    Display::ShowStrNavi::Temp,
-    /* disp_ENumMinMax;           */    Display::ENumMinMax::_1,
-    /* disp_modeAveraging;        */    Display::ModeAveraging::Accurately,
-    /* disp_ENumAverage;          */    Display::ENumAverage::_1,
-    /* disp_ENumAccum;            */    Display::ENumAccum::_1,
-    /* disp_modeAccumulation;     */    Display::ModeAccumulation::NoReset,
-    /* disp_ENumSmoothing;        */    Display::ENumSmoothing::Disable,
-    /* disp_ENumSignalsInSec;     */    Display::ENumSignalsInSec::_25,
-    /* disp_typeGrid;             */    Grid::Type::_1,
-    /* disp_brightnessGrid;       */    50,
-    /* disp_linkingRShift;        */    Display::LinkingRShift::Position,
-    /* disp_brightness;           */    100,
-    /* disp_timeShowLevels;       */    5,
-    /* disp_timeMessages;         */    5,
-    /* disp_altMarkers;           */    Display::AltMarkers::AutoHide,
-    /* disp_menuAutoHide;         */    Menu::AutoHide::None,
-    /* disp_shiftInMemory;        */    370,                       // Это соответствует 
-    /* disp_lastAffectedChannel;  */    Chan::A,
+    Display::ModeDrawSignal::Lines,         // disp_modeDrawSignal;      
+    Display::ThicknessSignal::_1,           // disp_thickness;           
+    Display::Background::Black,             // disp_background;          
+    Display::ShowStrNavi::Temp,             // disp_showStringNavigation;
+    Display::ENumMinMax::_1,                // disp_ENumMinMax;          
+    Display::ModeAveraging::Accurately,     // disp_modeAveraging;       
+    Display::ENumAverage::_1,               // disp_ENumAverage;         
+    Display::ENumAccum::_1,                 // disp_ENumAccum;           
+    Display::ModeAccumulation::NoReset,     // disp_modeAccumulation;    
+    Display::ENumSmoothing::Disable,        // disp_ENumSmoothing;       
+    Display::ENumSignalsInSec::_25,         // disp_ENumSignalsInSec;    
+    Grid::Type::_1,                         // disp_typeGrid;            
+    50,                                     // disp_brightnessGrid;      
+    Display::LinkingRShift::Position,       // disp_linkingRShift;       
+    100,                                    // disp_brightness;          
+    5,                                      // disp_timeShowLevels;      
+    5,                                      // disp_timeMessages;        
+    Display::AltMarkers::AutoHide,          // disp_altMarkers;          
+    Menu::AutoHide::None,                   // disp_menuAutoHide;
+    370,                                    // disp_shiftInMemory;
+    Chan::A,                                // disp_lastAffectedChannel;
 
     // Меню КАНАЛ 1, КАНАЛ 2
 
-    /* chan_shift[Chan::Number];    */     {RShift::ZERO, RShift::ZERO},
-    /* chan_range[Chan::Number];    */     {Range::_500mV, Range::_500mV},
-    /* chan_couple[Chan::Number];   */     {ModeCouple::DC, ModeCouple::DC},
-    /* chan_enabled[Chan::Number];  */     {true, true},
-    /* chan_balanceShiftADC[2];     */     {0, 0},
-    /* chan_bandwidth[2];           */     {Bandwidth::Full, Bandwidth::Full},
-    /* chan_inverse[2];             */     {false, false},
-    /* chan_divider[2];             */     {Divider::_1, Divider::_1},
-    /* chan_calibrationMode[2];     */     {CalibrationMode::Disable, CalibrationMode::Disable},
+    {RShift::ZERO, RShift::ZERO},                           // chan_shift[Chan::Number];  
+    {Range::_500mV, Range::_500mV},                         // chan_range[Chan::Number];  
+    {ModeCouple::DC, ModeCouple::DC},                       // chan_couple[Chan::Number]; 
+    {true, true},                                           // chan_enabled[Chan::Number];
+    {0, 0},                                                 // chan_balanceShiftADC[2];   
+    {Bandwidth::Full, Bandwidth::Full},                     // chan_bandwidth[2];         
+    {false, false},                                         // chan_inverse[2];           
+    {Divider::_1, Divider::_1},                             // chan_divider[2];           
+    {CalibrationMode::Disable, CalibrationMode::Disable},   // chan_calibrationMode[2];   
 
     // Меню СИНХРОНИЗАЦИЯ
 
-    /* trig_source;             */      Trig::Source::A,
-    /* trig_input;              */      Trig::Input::Full,
-    /* trig_polarity;           */      Trig::Polarity::Rising,
-    /* trig_lev[Chan::Number];  */      {Trig::ZERO, Trig::ZERO},
-    /* trig_startMode;          */      Trig::StartMode::Auto,
-    /* trig_modeFind;           */      Trig::ModeFind::Hand,
-    /* trig_holdOff;            */      10,
-    /* trig_holdOffEnable       */      false,
+    Trig::Source::A,            // trig_source;           
+    Trig::Input::Full,          // trig_input;            
+    Trig::Polarity::Rising,     // trig_polarity;         
+    {Trig::ZERO, Trig::ZERO},   // trig_lev[Chan::Number];
+    Trig::StartMode::Auto,      // trig_startMode;        
+    Trig::ModeFind::Hand,       // trig_modeFind;         
+    10,                         // trig_holdOff;          
+    false,                      // trig_holdOffEnable     
 
     // Меню РАЗВЁРТКА
 
-    /* time_shift;          */          TShift(0),
-    /* time_base;           */          TBase::_500us,
-    /* time_peakDet;        */          PeakDetMode::Disabled,
-    /* time_TPos;           */          TPos::Center,
-    /* time_sampleType;     */          SampleType::Real,
-    /* time_timeDivXPos;    */          FunctionTime::Time,
-    /* time_linkingTShift;  */          LinkingTShift::Time,
-    /* time_sampleTypeOld;  */          SampleType::Real,
+    TShift(0),              // time_shift;         
+    TBase::_500us,          // time_base;         
+    PeakDetMode::Disabled,  // time_peakDet;      
+    TPos::Center,           // time_TPos;         
+    SampleType::Real,       // time_sampleType;   
+    FunctionTime::Time,     // time_timeDivXPos;  
+    LinkingTShift::Time,    // time_linkingTShift;
+    SampleType::Real,       // time_sampleTypeOld;
 
     // Меню КУРСОРЫ
 
-    /* curs_showCursors;             */ false,
-    /* curs_lookMode[2];             */ {Cursors::LookMode::None, Cursors::LookMode::None},
-    /* curs_showFreq;                */ true,
-    /* curs_active;                  */ Cursors::Active::None,
-    /* curs_source;                  */ Chan::A,
-    /* curs_cntrlU[Chan::Number];    */ {Cursors::Control::Disable, Cursors::Control::Disable},
-    /* curs_cntrlT[Chan::Number];    */ {Cursors::Control::Disable, Cursors::Control::Disable},
-    /* curs_movement;                */ Cursors::Movement::Pixels,
-    /* curs_deltaU100percents[2];    */ {80,  80},
-    /* curs_deltaT100percents[2];    */ {120, 120},
-    /* curs_posCurU[Chan::Number][2];*/ {
-                                        { 60, 140 },        // Канал 1
-                                        { 60, 140 }},       // Канал 2
-                                        /* curs_posCurT[Chan::Number][2];*/ {
-                                                                            { 80, 200 },        // Канал 1
-                                                                            { 80, 200 }},       // Канал 2
+    false,                                                  // curs_showCursors;             
+    {Cursors::LookMode::None, Cursors::LookMode::None},     // curs_lookMode[2];             
+    true,                                                   // curs_showFreq;                
+    Cursors::Active::None,                                  // curs_active;                  
+    Chan::A,                                                // curs_source;                  
+    {Cursors::Control::Disable, Cursors::Control::Disable}, // curs_cntrlU[Chan::Number];    
+    {Cursors::Control::Disable, Cursors::Control::Disable}, // curs_cntrlT[Chan::Number];    
+    Cursors::Movement::Pixels,                              // curs_movement;                
+    {80,  80},                                              // curs_deltaU100percents[2];    
+    {120, 120},                                             // curs_deltaT100percents[2];    
+    {                                                       // curs_posCurU[Chan::Number][2];
+    { 60, 140 },                                            // Канал 1
+    { 60, 140 }},                                           // Канал 2
+    {                                                       // curs_posCurT[Chan::Number][2];
+    { 80, 200 },                                            // Канал 1
+    { 80, 200 }},                                           // Канал 2
 
-                                                                                // Меню ПАМЯТЬ
+    // Меню ПАМЯТЬ
 
-                                                                                /* mem_enumPoints;                             */   ENumPointsFPGA::_1k,
-                                                                                /* mem_modeBtnMemory;                          */   ModeBtnMemory::Menu,
-                                                                                /* mem_modeWork;                               */   ModeWork::Dir,
-                                                                                /* mem_flashAutoConnect;                       */   false,
-                                                                                /* mem_indexCurSymbolNameMask;                 */   0,
-                                                                                /* mem_modeSaveSignal;                         */   ModeSaveSignal::BMP,
-                                                                                /* mem_fileName[MAX_SYMBOLS_IN_FILE_NAME];     */   {},
-                                                                                /* mem_modeShowIntMem;                         */   ModeShowIntMem::Saved,
-                                                                                /* mem_fileNamingMode;                         */   FileNamingMode::Mask,
-                                                                                /* mem_fileNameMask[MAX_SYMBOLS_IN_FILE_NAME]; */   {},
-
-                                                                                // Меню ИЗМЕРЕНИЯ
-
-                                                                                /* meas_show;            */         false,
-                                                                                /* meas_number;          */         Measure::OnDisplay::_1_5,
-                                                                                /* meas_source;          */         Measure::Source::A_B,
-                                                                                /* meas_modeViewSignals; */         Measure::ModeViewSignals::AsIs,
-                                                                                /* meas_measures[15];    */
-                                                                                {
-                                                                                    Measure::Type::VoltageMax,     Measure::Type::VoltageMin,  Measure::Type::VoltagePic,      Measure::Type::VoltageMaxSteady,  Measure::Type::VoltageMinSteady,
-                                                                                    Measure::Type::VoltageAverage, Measure::Type::VoltageAmpl, Measure::Type::VoltageRMS,      Measure::Type::VoltageVybrosPlus, Measure::Type::VoltageVybrosMinus,
-                                                                                    Measure::Type::Period,         Measure::Type::Freq,        Measure::Type::TimeNarastaniya, Measure::Type::TimeSpada,         Measure::Type::DurationPlus
-                                                                                },
-    /* meas_marked;          */         Measure::Type::Freq,
+    ENumPointsFPGA::_1k,    // mem_enumPoints;                            
+    ModeBtnMemory::Menu,    // mem_modeBtnMemory;                         
+    ModeWork::Dir,          // mem_modeWork;                              
+    false,                  // mem_flashAutoConnect;                      
+    0,                      // mem_indexCurSymbolNameMask;                
+    ModeSaveSignal::BMP,    // mem_modeSaveSignal;                        
+    {},                     // mem_fileName[MAX_SYMBOLS_IN_FILE_NAME];    
+    ModeShowIntMem::Saved,  // mem_modeShowIntMem;                        
+    FileNamingMode::Mask,   // mem_fileNamingMode;                        
+    {},                     // mem_fileNameMask[MAX_SYMBOLS_IN_FILE_NAME];
+    
+    // Меню ИЗМЕРЕНИЯ
+    
+    false,                              // meas_show;  
+    Measure::OnDisplay::_1_5,           // meas_number;
+    Measure::Source::A_B,               // meas_source;
+    Measure::ModeViewSignals::AsIs,     // meas_modeViewSignals; 
+    {                                   // meas_measures[15];
+        Measure::Type::VoltageMax,     Measure::Type::VoltageMin,  Measure::Type::VoltagePic,      Measure::Type::VoltageMaxSteady,  Measure::Type::VoltageMinSteady,
+        Measure::Type::VoltageAverage, Measure::Type::VoltageAmpl, Measure::Type::VoltageRMS,      Measure::Type::VoltageVybrosPlus, Measure::Type::VoltageVybrosMinus,
+        Measure::Type::Period,         Measure::Type::Freq,        Measure::Type::TimeNarastaniya, Measure::Type::TimeSpada,         Measure::Type::DurationPlus
+    },
+    Measure::Type::Freq,                // meas_marked;
 
     // Меню СЕРВИС
 
-    /* serv_lang;           */          Language::RU,
-    /* serv_colorScheme;    */          Color::Scheme::WhiteLetters,
-    /* serv_recorder;       */          false,
-    /* serv_calibratorMode; */          CalibratorMode::Freq,
-    /* serv_soundEnable;    */          true,
-    /* serv_soundVolume;    */          100,
-
+    Language::RU,                       // serv_lang;          
+    Color::Scheme::WhiteLetters,        // serv_colorScheme;   
+    false,                              // serv_recorder;      
+    CalibratorMode::Freq,               // serv_calibratorMode;
+    true,                               // serv_soundEnable;   
+    100,                                // serv_soundVolume;   
+    
     // Настройки математики
-
-    /* math_modeDraw;      */           FuncModeDraw::Disable,
-    /* math_enableFFT;     */           false,
-    /* math_scaleFFT;      */           ScaleFFT::Log,
-    /* math_sourceFFT;     */           SourceFFT::Both,
-    /* math_windowFFT;     */           WindowFFT::Hamming,
-    /* math_currentCursor; */           0,
-    /* math_posCur[2];     */           { 50, 50 },
-    /* math_FFTmaxDB;      */           FFTmaxDB::_60,
-    /* math_function;      */           Function::Sum,
-    /* math_modeRegSet;    */           ModeRegSet::Range,
-    /* math_range;         */           Range::_1V,
-    /* math_divider;       */           Divider::_1,
-    /* math_rShift;        */           RShift::ZERO,
-
+    
+    FuncModeDraw::Disable,      // math_modeDraw;     
+    false,                      // math_enableFFT;    
+    ScaleFFT::Log,              // math_scaleFFT;     
+    SourceFFT::Both,            // math_sourceFFT;    
+    WindowFFT::Hamming,         // math_windowFFT;    
+    0,                          // math_currentCursor;
+    { 50, 50 },                 // math_posCur[2];    
+    FFTmaxDB::_60,              // math_FFTmaxDB;     
+    Function::Sum,              // math_function;     
+    ModeRegSet::Range,          // math_modeRegSet;   
+    Range::_1V,                 // math_range;        
+    Divider::_1,                // math_divider;      
+    RShift::ZERO,               // math_rShift;       
+    
     // Настройки частотомера
-
-    /* freq_enabled;       */           FrequencyCounter::Enabled::Off,
-    /* freq_modeView       */           FrequencyCounter::ModeView::Frequency,
-    /* freq_timeCounting;  */           FrequencyCounter::TimeCounting::_1s,
-    /* freq_freqClc;       */           FrequencyCounter::FreqClc::_1MHz,
-    /* freq_numberPeriods; */           FrequencyCounter::NumberPeriods::_10,
-
+    
+    FrequencyCounter::Enabled::Off,         // freq_enabled;      
+    FrequencyCounter::ModeView::Frequency,  // freq_modeView      
+    FrequencyCounter::TimeCounting::_1s,    // freq_timeCounting; 
+    FrequencyCounter::FreqClc::_1MHz,       // freq_freqClc;      
+    FrequencyCounter::NumberPeriods::_10,   // freq_numberPeriods;
+    
     // Меню ОТЛАДКА
-
-    /* dbg_numStrings;          */      30,
-    /* dbg_sizeFont;            */      8,
-    /* dbg_modePauseConsole;    */      false,
-    /* dbg_showAll;             */      false,
-    /* dbg_showFlag;            */      false,
-    /* dbg_showRShift[2];       */      { false, false },
-    /* dbg_showTrigLev;         */      false,
-    /* dbg_showRange[2];        */      { false, false },
-    /* dbg_showChanParam[2];    */      { false, false },
-    /* dbg_showTrigParam;       */      false,
-    /* dbg_showTShift;          */      false,
-    /* dbg_showTBase;           */      false,
-    /* dbg_numMeasuresForGates; */      10,
-    /* dbg_showRandInfo;        */      false,
-    /* dbg_showRandStat;        */      false,
-    /* dbg_timeCompensation;    */      0,
-    /* dbg_pretriggered;        */      0,
-    /* dbg_bandwidth[2];        */      {Bandwidth::Full, Bandwidth::Full},
-    /* dbg_ShowStats;           */      false,
-    /* dbg_Orientation;         */      Display::Orientation::Direct,
-
+    
+    30,                                     // dbg_numStrings;         
+    8,                                      // dbg_sizeFont;           
+    false,                                  // dbg_modePauseConsole;   
+    false,                                  // dbg_showAll;            
+    false,                                  // dbg_showFlag;           
+    { false, false },                       // dbg_showRShift[2];      
+    false,                                  // dbg_showTrigLev;        
+    { false, false },                       // dbg_showRange[2];       
+    { false, false },                       // dbg_showChanParam[2];   
+    false,                                  // dbg_showTrigParam;      
+    false,                                  // dbg_showTShift;         
+    false,                                  // dbg_showTBase;          
+    10,                                     // dbg_numMeasuresForGates;
+    false,                                  // dbg_showRandInfo;       
+    false,                                  // dbg_showRandStat;       
+    0,                                      // dbg_timeCompensation;   
+    0,                                      // dbg_pretriggered;       
+    { Bandwidth::Full, Bandwidth::Full },   // dbg_bandwidth[2];       
+    false,                                  // dbg_ShowStats;          
+    Display::Orientation::Direct,           // dbg_Orientation;        
+    
     // Настройки тестер-компонента
-
-    /* test_control;  */                Tester::Control::Voltage,
-    /* test_polarity; */                Tester::Polarity::Positive,
-    /* test_stepU;    */                Tester::StepU::_100mV,
-    /* test_stepI;    */                Tester::StepI::_4mA,
-    /* test_smooth;   */                Tester::Smoothing::_1,
-    /* test_viewMode  */                Tester::ViewMode::Lines,
-
+    
+    Tester::Control::Voltage,       // test_control; 
+    Tester::Polarity::Positive,     // test_polarity;
+    Tester::StepU::_100mV,          // test_stepU;   
+    Tester::StepI::_4mA,            // test_stepI;   
+    Tester::Smoothing::_1,          // test_smooth;  
+    Tester::ViewMode::Lines,        // test_viewMode 
+    
     // Настройки меню
-
-    /* menu_currentPage;                   */ 0,
-    /* menu_show;                          */ false,
-    /* menu_posActItem[Page_NumPages];     */ {},
-    /* menu_currentSubPage[Page_NumPages]; */ {},
-
+    
+    0,                              // menu_currentPage;                  
+    false,                          // menu_show;                         
+    {},                             // menu_posActItem[Page_NumPages];    
+    {},                             // menu_currentSubPage[Page_NumPages];
+    
     // Несбрасываемые настройки калибровки
-
-    /* nrst_balanceADC[Chan::Number];                */ {},
-    /* nrst_balanceADCtype;                       */ BalanceADC::Disable,
-    /* nrst_stretchADCtype;                       */ StretchADC::Disable,
-    /* nrst_StretchADC[Chan::Number][3];             */ {},
-    /* nrst_rShiftAddStable[Chan::Number][3];        */ {},
-    /* nrst_numAveForRand;                        */ 0,
-    /* nrst_numSmoothForRand;                     */ 0,
-    /* nrst_rShiftAdd[Chan::Number][Range::Size][2]; */ {},
-    /* nrst_correctionTime;                       */ 0,
-
+    
+    {},                             // nrst_balanceADC[Chan::Number];               
+    BalanceADC::Disable,            // nrst_balanceADCtype;                         
+    StretchADC::Disable,            // nrst_stretchADCtype;                         
+    {},                             // nrst_StretchADC[Chan::Number][3];            
+    {},                             // nrst_rShiftAddStable[Chan::Number][3];       
+    0,                              // nrst_numAveForRand;                          
+    0,                              // nrst_numSmoothForRand;                       
+    {},                             // nrst_rShiftAdd[Chan::Number][Range::Size][2];
+    0,                              // nrst_correctionTime;                         
+    
     // Настройки мультиметра
-    /* multi_avp */         Multimeter::AVP::Off,
-    /* multi_meas */        Multimeter::Measure::VoltageDC,
-    /* multi_rangeCV */     Multimeter::RangeDC::_2V,
-    /* multi_rangeVV */     Multimeter::RangeAC::_2V,
-    /* multi_rangeResist */ Multimeter::RangeResistance::_10M,
 
+    Multimeter::AVP::Off,               // multi_avp
+    Multimeter::Measure::VoltageDC,     // multi_meas
+    Multimeter::RangeDC::_2V,           // multi_rangeCV
+    Multimeter::RangeAC::_2V,           // multi_rangeVV
+    Multimeter::RangeResistance::_10M,  // multi_rangeResist
+    
     // Настройки регистратора
-    /* rec_viewAlways */    ViewAlways::InMode,
-    /* rec_sourceChanA */   false,
-    /* rec_sourceChanB */   false,
-    /* rec_sourceSensor */  false,
-    /* rec_storageRecord */ Storage::Flash,
-    /* rec_storagePlay */   Storage::Flash,
-    /* rec_axisMove */      Axis::X,
-    /* rec_axisZoom */      Axis::X,
 
-    /* dbg_gate_max */      0,
-    /* dbg_gate_min */      0
+    ViewAlways::InMode,                 // rec_viewAlways
+    false,                              // rec_sourceChanA
+    false,                              // rec_sourceChanB
+    false,                              // rec_sourceSensor
+    Storage::Flash,                     // rec_storageRecord
+    Storage::Flash,                     // rec_storagePlay
+    Axis::X,                            // rec_axisMove
+    Axis::X,                            // rec_axisZoom
+    ScaleX::_50ms,                      // rec_scaleX  
+
+    0,  // dbg_gate_max
+    0   // dbg_gate_min
 };

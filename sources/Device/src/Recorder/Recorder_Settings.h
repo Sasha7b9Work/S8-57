@@ -47,6 +47,28 @@ namespace Recorder
                 Y
             } value;
         };
+
+        /// Масшаб по времени
+        struct ScaleX
+        {
+            enum E
+            {
+                _5ms,   // TBase = 100ms
+                _10ms,  // TBase = 200ms
+                _25ms,  // TBase = 500ms
+                _50ms,  // TBase = 1s
+                _100ms, // TBase = 2s
+                _250ms, // TBase = 5s,
+                _500ms, // TBase = 10s,
+                _1s,    // TBase = 20s,
+                _2s,    //
+                _5s,    //
+                _10s,   //
+                _20s,   //
+                _50s,   //
+                _100s   //
+            } value;
+        };
     };
 }
 
