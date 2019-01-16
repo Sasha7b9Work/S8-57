@@ -64,7 +64,10 @@ struct CalibrationMode
 #define SET_RANGE(ch)           (set.chan_range[ch])
 #define SET_RANGE_A             (SET_RANGE(Chan::A))
 #define SET_RANGE_B             (SET_RANGE(Chan::B))
-#define SET_RANGE_2mV(ch)       (SET_RANGE(ch) == Range_2mV)
+
+#define SET_RECORD_RANGE(ch)    (set.rec_range[ch])
+#define SET_RECORD_RANGE_A      (SET_RECORD_RANGE(Chan::A))
+#define SET_RECORD_RANGE_B      (SET_RECORD_RANGE(Chan::B))
 
 #define SET_RSHIFT(ch)          (set.chan_shift[ch])
 #define SET_RSHIFT_A            (SET_RSHIFT(Chan::A))

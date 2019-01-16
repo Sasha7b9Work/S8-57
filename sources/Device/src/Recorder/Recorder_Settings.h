@@ -72,6 +72,7 @@ namespace Recorder
                 _100s   //
             } value;
             explicit ScaleX(E v) : value(v) {};
+            static void Load();
         };
     };
 }

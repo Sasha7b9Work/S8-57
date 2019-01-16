@@ -462,6 +462,9 @@
     <ClCompile Include="..\..\Device\src\Recorder\Recorder_Display.cpp">
       <Filter>Recorder</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Device\src\Recorder\Recorder_Settings.cpp">
+      <Filter>Recorder</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Device\src\defines.h">

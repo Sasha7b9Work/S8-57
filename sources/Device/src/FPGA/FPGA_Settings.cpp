@@ -194,11 +194,6 @@ static uint8 ValueForRange(Chan::E ch) // -V2506
         BIN_U8(00000010)   // -V2501  // GND
     };
 
-    if (SET_COUPLE(ch) == ModeCouple::GND && Device::State::InModeOsci())
-    {
-        return datas[ModeCouple::GND];
-    }
-
     DEF_STRUCT(StructRange, uint16) values[Osci::Settings::Range::Number][2] =
     {   //             A                    B
         { BIN_U8(00100100), BIN_U8(00100100) }, // -V2501  // 2mV
@@ -216,7 +211,15 @@ static uint8 ValueForRange(Chan::E ch) // -V2506
         { BIN_U8(00011000), BIN_U8(00011000) }  // -V2501  // 20V
     };
 
-    return (uint8)(values[SET_RANGE(ch)][ch].val | datas[SET_COUPLE(ch)]);
+    ModeCouple::E couple = (Device::State::InModeRecorder()) ? ModeCouple::DC : SET_COUPLE(ch);
+    Range::E range = (Device::State::InModeRecorder()) ? SET_RECORD_RANGE(ch) : SET_RANGE(ch);
+
+    if (Device::State::InModeOsci() && couple == ModeCouple::GND)
+    {
+        return datas[ModeCouple::GND];
+    }
+
+    return (uint8)(values[range][ch].val | datas[couple]);
 }
 
 #ifdef WIN32

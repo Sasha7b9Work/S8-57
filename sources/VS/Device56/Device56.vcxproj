@@ -135,6 +135,7 @@
     <ClCompile Include="..\..\Device\src\Osci\PainterData.cpp" />
     <ClCompile Include="..\..\Device\src\Recorder\Recorder_Display.cpp" />
     <ClCompile Include="..\..\Device\src\Recorder\Recorder.cpp" />
+    <ClCompile Include="..\..\Device\src\Recorder\Recorder_Settings.cpp" />
     <ClCompile Include="..\..\Device\src\SCPI\SCPI.cpp" />
     <ClCompile Include="..\..\Device\src\Settings\Settings.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>

@@ -1991,6 +1991,11 @@
               <FilePath>.\src\Recorder\Recorder_Display.h</FilePath>
             </File>
             <File>
+              <FileName>Recorder_Settings.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Recorder\Recorder_Settings.cpp</FilePath>
+            </File>
+            <File>
               <FileName>Recorder_Settings.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Recorder\Recorder_Settings.h</FilePath>
