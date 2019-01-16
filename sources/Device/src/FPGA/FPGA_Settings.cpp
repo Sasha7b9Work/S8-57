@@ -272,29 +272,6 @@ void Range::Change(Chan::E ch, int delta)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void TBase::Change(int delta)
-{
-    if (delta > 0)
-    {
-        ::Math::LimitationIncrease<uint8>((uint8 *)(&SET_TBASE), (uint8)(TBase::Number - 1)); // -V206
-    }
-    else
-    {
-        if (SET_PEAKDET_EN &&                               // Если вклюён режим пикового детектора
-            SET_TBASE == TBase::MIN_PEAK_DET)               // и установлен масштаб по времени, соответствующий минмальному в режиме пикового детектора :
-        {
-            ::Display::ShowWarning(Warning::EnabledPeakDet);  // выводим сообщение об этом
-            return;                                         // и выходим
-        }
-
-        ::Math::LimitationDecrease<uint8>((uint8 *)(&SET_TBASE), 0); // -V206
-    }
-
-    TBase::Load();
-    FPGA::Start();
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void RShift::Change(Chan::E ch, int delta)
 {
     ::Math::AdditionThisLimitation<uint16>(&SET_RSHIFT(ch), STEP_RSHIFT * delta, RShift::MIN, RShift::MAX);

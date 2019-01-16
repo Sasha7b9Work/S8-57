@@ -1,19 +1,15 @@
 #include "stdafx.h"
 #ifndef WIN32
 #include "defines.h"
-#include "Osci.h"
 #include "Display/Display_Primitives.h"
 #include "Display/Grid.h"
 #include "Display/Painter.h"
+#include "Osci/Osci.h"
+#include "Osci/Display/BottomPart.h"
+#include "Osci/Display/HiPart.h"
+#include "Osci/Display/PainterData.h"
 #include "Display/Symbols.h"
-#include "BottomPart.h"
-#include "HiPart.h"
-#include "PainterData.h"
-#include "Menu/Menu.h"
 #include "Settings/Settings.h"
-#include "FPGA/FPGA.h"
-#include "FPGA/FPGATypes.h"
-#include "FrequencyCounter.h"
 #endif
 
 

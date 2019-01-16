@@ -91,6 +91,9 @@
     <Filter Include="Menu\Pages\PageFunction\PageRecorder">
       <UniqueIdentifier>{32a80485-3de8-47d1-9c63-bb5628ebe570}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Osci\Display">
+      <UniqueIdentifier>{9d9aed7e-79bc-45ce-8118-9515f18eb812}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Device\src\defines.cpp">
@@ -324,28 +327,16 @@
     <ClCompile Include="..\..\Device\src\Multimeter\Multimeter.cpp">
       <Filter>Multimeter</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Device\src\Osci\BottomPart.cpp">
-      <Filter>Osci</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Device\src\Osci\Cursors.cpp">
       <Filter>Osci</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Device\src\Osci\FrequencyCounter.cpp">
       <Filter>Osci</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Device\src\Osci\HiPart.cpp">
-      <Filter>Osci</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Device\src\Osci\MemoryWindow.cpp">
-      <Filter>Osci</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Device\src\Osci\Osci.cpp">
       <Filter>Osci</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Device\src\Osci\OsciGraphics.cpp">
-      <Filter>Osci</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Device\src\Osci\PainterData.cpp">
       <Filter>Osci</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Device\src\Recorder\Recorder.cpp">
@@ -464,6 +455,18 @@
     </ClCompile>
     <ClCompile Include="..\..\Device\src\Recorder\Recorder_Settings.cpp">
       <Filter>Recorder</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Osci\Display\BottomPart.cpp">
+      <Filter>Osci\Display</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Osci\Display\HiPart.cpp">
+      <Filter>Osci\Display</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Osci\Display\MemoryWindow.cpp">
+      <Filter>Osci\Display</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Osci\Display\PainterData.cpp">
+      <Filter>Osci\Display</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -650,25 +653,13 @@
     <ClInclude Include="..\..\Device\src\Multimeter\Multimeter.h">
       <Filter>Multimeter</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Device\src\Osci\BottomPart.h">
-      <Filter>Osci</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Device\src\Osci\Cursors.h">
       <Filter>Osci</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Device\src\Osci\FrequencyCounter.h">
       <Filter>Osci</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Device\src\Osci\HiPart.h">
-      <Filter>Osci</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Device\src\Osci\MemoryWindow.h">
-      <Filter>Osci</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Device\src\Osci\Osci.h">
-      <Filter>Osci</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Device\src\Osci\PainterData.h">
       <Filter>Osci</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Device\src\Recorder\Recorder.h">
@@ -826,6 +817,18 @@
     </ClInclude>
     <ClInclude Include="..\..\Device\src\Recorder\Recorder_Display.h">
       <Filter>Recorder</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Device\src\Osci\Display\BottomPart.h">
+      <Filter>Osci\Display</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Device\src\Osci\Display\HiPart.h">
+      <Filter>Osci\Display</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Device\src\Osci\Display\MemoryWindow.h">
+      <Filter>Osci\Display</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Device\src\Osci\Display\PainterData.h">
+      <Filter>Osci\Display</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -58,10 +58,10 @@
 
 #include "Multimeter/Multimeter.h"
 
-#include "Osci/BottomPart.h"
-#include "Osci/HiPart.h"
-#include "Osci/MemoryWindow.h"
-#include "Osci/PainterData.h"
+#include "Osci/Display/BottomPart.h"
+#include "Osci/Display/HiPart.h"
+#include "Osci/Display/MemoryWindow.h"
+#include "Osci/Display/PainterData.h"
 
 #include "Recorder/Recorder.h"
 #include "Recorder/Recorder_Display.h"

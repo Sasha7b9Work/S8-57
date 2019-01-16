@@ -39,17 +39,12 @@ void BottomPart::Draw()
 
 	HLine line(Grid::Left() - Measure::GetDeltaGridLeft() - 1);
 
-    //Painter::DrawHLine(Grid::ChannelBottom(), 1, Grid::Left() - Measure::GetDeltaGridLeft() - 2, Color::SEPARATOR);
 	line.Draw(1, Grid::ChannelBottom(), Color::SEPARATOR);
-
-    //Painter::DrawHLine(Grid::FullBottom(), 1, Grid::Left() - Measure::GetDeltaGridLeft() - 2);
 	line.Draw(1, Grid::FullBottom());
-
 
     WriteTextVoltage(Chan::A, x + 2, y0);
     WriteTextVoltage(Chan::B, x + 2, y1);
 
-    //Painter::DrawVLine(x + 95, Grid::Bottom() + 2, Display::HEIGHT - 2, Color::SEPARATOR);
     VLine(Display::HEIGHT - Grid::Bottom() - 4).Draw(x + 95, Grid::Bottom() + 2, Color::SEPARATOR);
 
     x += 98;
@@ -100,9 +95,7 @@ void BottomPart::Draw()
         snprintf(buffer, SIZE, "\xa5\x10%s\x10\xa5\x10%s\x10\xa5\x10", couple[TRIG_INPUT], polar[TRIG_POLARITY]);
         String(buffer).Draw(x + 18, y1);
 
-        //Painter::DrawChar(x + 45, y1, filtr[TRIG_INPUT][0]);
         Char(filtr[TRIG_INPUT][0]).Draw(x + 45, y1);
-        //Painter::DrawChar(x + 53, y1, filtr[TRIG_INPUT][1]);
         Char(filtr[TRIG_INPUT][1]).Draw(x + 53, y1);
     }
 
@@ -119,15 +112,11 @@ void BottomPart::Draw()
         String(buffer).Draw(x + 63, y1);
     }
 
-    //Painter::DrawVLine(x + 79, Grid::Bottom() + 2, Display::HEIGHT - 2, Color::SEPARATOR);
     VLine(Display::HEIGHT - Grid::Bottom() - 4).Draw(x + 79, Grid::Bottom() + 2, Color::SEPARATOR);
 
 	HLine line2(Display::WIDTH - Grid::Right() - 4);
 
-    //Painter::DrawHLine(Grid::Bottom(), Grid::Right() + 2, Display::WIDTH - 2, Color::FILL);
     line2.Draw(Grid::Right() + 2, Grid::Bottom(), Color::FILL);
-
-    //Painter::DrawHLine(Grid::ChannelBottom(), Grid::Right() + 2, Display::WIDTH - 2);
     line2.Draw(Grid::Right() + 2, Grid::ChannelBottom());
 
     x += 82;
@@ -145,7 +134,6 @@ void BottomPart::Draw()
 
     x += 42;
 
-    //Painter::DrawVLine(x, Grid::Bottom() + 2, Display::HEIGHT - 2, Color::SEPARATOR);
     VLine(Display::HEIGHT - Grid::Bottom() - 4).Draw(x, Grid::Bottom(), Color::SEPARATOR);
 
     Font::SetCurrent(Font::Type::_8);
@@ -168,7 +156,6 @@ void BottomPart::Draw()
 
     DrawTime(x + 3, Grid::Bottom() + 11);
 
-    //Painter::DrawVLine(x + 55, Grid::Bottom() + 2, Display::HEIGHT - 2, Color::GRAY_50);
     VLine(Display::HEIGHT - Grid::Bottom() - 4).Draw(x + 55, Grid::Bottom() + 2, Color::GRAY_50);
 
     Font::SetCurrent(Font::Type::_UGO2);
@@ -176,7 +163,6 @@ void BottomPart::Draw()
     // Флешка
     if (FDrive::IsConnected())
     {
-        //Painter::Draw4SymbolsInRect(x + 57, Grid::Bottom() + 2, SYMBOL_FLASH_DRIVE);
     }
 
     if (CONNECTED_TO_USB || CABLE_USB_IS_CONNECTED)
@@ -188,9 +174,7 @@ void BottomPart::Draw()
     // Пиковый детектор
     if (!SET_PEAKDET_DIS)
     {
-        //Painter::DrawChar(x + 38, Grid::Bottom() + 11, '\x12');
         Char('\x12').Draw(x + 38, Grid::Bottom() + 11);
-        //Painter::DrawChar(x + 46, Grid::Bottom() + 11, '\x13');
         Char('\x13').Draw(x + 46, Grid::Bottom() + 11);
     }
 
@@ -254,9 +238,11 @@ static void WriteTextVoltage(Chan::E ch, int x, int y)
         Region(widthField, heightField).Draw(x, y, color);
     }
     const int SIZE = 100;
+
     char buffer[SIZE];
     snprintf(buffer, SIZE, "%s\xa5%s\xa5%s", Chan(ch).IsA() ? DICT(D1ch) : DICT(D2ch), ModeCouple(SET_COUPLE(ch)).UGO(), Range(range).ToString(divider));
     String(buffer).Draw(x + 1, y, colorDraw);
+
     char bufferTemp[SIZE];
     snprintf(bufferTemp, SIZE, "\xa5%s", RShift::ToString((uint16)SET_RSHIFT(ch), range, divider).CString());
     String(bufferTemp).Draw(x + 46, y);
@@ -265,9 +251,11 @@ static void WriteTextVoltage(Chan::E ch, int x, int y)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void BottomPart::WriteStringAndNumber(const char *text, int16 x, int16 y, int number)
 {
+    String(text).Draw(x, y, Color::FILL);
+
     const int SIZE = 100;
     char buffer[SIZE];
-    String(text).Draw(x, y, Color::FILL);
+
     if (number == 0)
     {
         snprintf(buffer, SIZE, "-");
@@ -276,7 +264,6 @@ void BottomPart::WriteStringAndNumber(const char *text, int16 x, int16 y, int nu
     {
         snprintf(buffer, SIZE, "%d", number);
     }
-    //Painter::DrawTextRelativelyRight(x + 41, y, buffer);
     Text(buffer).DrawRelativelyRight(x + 41, y);
 }
 

@@ -12,6 +12,9 @@
 #define RECORDER_AXIS_ZOOM      (set.rec_axisZoom)
 
 
+#define RECORDER_SCALE_X        (Recorder::Settings::ScaleX::Current())
+
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 namespace Recorder
 {
@@ -69,11 +72,13 @@ namespace Recorder
                 _10s,   //
                 _20s,   //
                 _50s,   //
-                _100s   //
+                _100s,  //
+                Size
             } value;
             explicit ScaleX(E v) : value(v) {};
             static void Load();
             static void Change(int delta);
+            static ScaleX::E Current();
         };
     };
 }

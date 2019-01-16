@@ -1881,16 +1881,6 @@
           <GroupName>Osci</GroupName>
           <Files>
             <File>
-              <FileName>BottomPart.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Osci\BottomPart.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>BottomPart.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Osci\BottomPart.h</FilePath>
-            </File>
-            <File>
               <FileName>Cursors.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Osci\Cursors.cpp</FilePath>
@@ -1909,26 +1899,6 @@
               <FileName>FrequencyCounter.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Osci\FrequencyCounter.h</FilePath>
-            </File>
-            <File>
-              <FileName>HiPart.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Osci\HiPart.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>HiPart.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Osci\HiPart.h</FilePath>
-            </File>
-            <File>
-              <FileName>MemoryWindow.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Osci\MemoryWindow.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>MemoryWindow.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Osci\MemoryWindow.h</FilePath>
             </File>
             <File>
               <FileName>Osci.cpp</FileName>
@@ -1955,15 +1925,50 @@
               <FileType>8</FileType>
               <FilePath>.\src\Osci\OsciGraphics.cpp</FilePath>
             </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Osci/Display</GroupName>
+          <Files>
+            <File>
+              <FileName>BottomPart.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Osci\Display\BottomPart.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>BottomPart.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Osci\Display\BottomPart.h</FilePath>
+            </File>
+            <File>
+              <FileName>HiPart.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Osci\Display\HiPart.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>HiPart.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Osci\Display\HiPart.h</FilePath>
+            </File>
+            <File>
+              <FileName>MemoryWindow.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Osci\Display\MemoryWindow.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>MemoryWindow.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Osci\Display\MemoryWindow.h</FilePath>
+            </File>
             <File>
               <FileName>PainterData.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\Osci\PainterData.cpp</FilePath>
+              <FilePath>.\src\Osci\Display\PainterData.cpp</FilePath>
             </File>
             <File>
               <FileName>PainterData.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\src\Osci\PainterData.h</FilePath>
+              <FilePath>.\src\Osci\Display\PainterData.h</FilePath>
             </File>
           </Files>
         </Group>
