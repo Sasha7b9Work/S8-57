@@ -307,7 +307,7 @@ pString Tester::Scale::ToString() const // -V2506
         return Range((Osci::Settings::Range::E)value).ToString(Divider::_1);
     }
 
-    static const pString names[][Language::Number] =
+    static const pString names[][Language::Size] =
     {
         "2ÏÍ¿",     "2uA",
         "5ÏÍ¿",     "5u¿",

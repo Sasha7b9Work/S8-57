@@ -96,7 +96,7 @@ namespace Osci
                 _2s,
                 _5,
                 _10s,
-                Number
+                Size
             } value;
             explicit TBase(E v) : value(v) {};
 

@@ -31,7 +31,7 @@ const float absStepRShift[] =
     20.0F   / 20 / STEP_RSHIFT
 };
 
-const float absStepTShift[TBase::Number] =
+const float absStepTShift[TBase::Size] =
 {
     /* 2 нс    */ 2e-9F   / 20, 
     /* 5 нс    */ 5e-9F   / 20, 

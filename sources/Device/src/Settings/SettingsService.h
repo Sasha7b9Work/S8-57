@@ -15,7 +15,7 @@ struct Language
     {
         RU,
         EN,
-        Number
+        Size
     } value;
     explicit Language(E v) : value(v) {};
 };

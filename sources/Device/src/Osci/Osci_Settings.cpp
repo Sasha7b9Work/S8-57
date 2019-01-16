@@ -29,7 +29,7 @@ void Osci::Settings::TBase::Change(int delta)
 {
     if (delta > 0)
     {
-        ::Math::LimitationIncrease<uint8>((uint8 *)(&SET_TBASE), (uint8)(TBase::Number - 1));
+        ::Math::LimitationIncrease<uint8>((uint8 *)(&SET_TBASE), (uint8)(TBase::Size - 1));
     }
     else
     {
@@ -53,14 +53,14 @@ pString Osci::Settings::TBase::ToString() const
     /// Структура для описания диапазона масштаба по времени.
     static const struct StructTBase
     {
-        const char *name[Language::Number];    // Название диапазона в текстовом виде, пригодном для вывода на экран.
+        const char *name[Language::Size];    // Название диапазона в текстовом виде, пригодном для вывода на экран.
         StructTBase(pString nRU, pString nEN)
         {
             name[Language::RU] = nRU;
             name[Language::EN] = nEN;
         };
     }
-    tBases[TBase::Number] =
+    tBases[TBase::Size] =
     {
         StructTBase("2\x10нс",     "2\x10ns"),
         StructTBase("5\x10нс",     "5\x10ns"),

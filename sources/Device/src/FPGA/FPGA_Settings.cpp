@@ -143,7 +143,7 @@ void Trig::Level::Load()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void TBase::Load()
 {
-    static const uint8 values[TBase::Number] =
+    static const uint8 values[TBase::Size] =
     {
         BIN_U8(00000000),  // -V2501  // 2ns     1       200MHz
         BIN_U8(00000000),  // -V2501  // 5ns     1       200MHz
@@ -454,7 +454,7 @@ static void Osci::Settings::Trig::DisableDrawing()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 pString TBase::Name() const
 {
-    static pString names[TBase::Number][Language::Number] =
+    static pString names[TBase::Size][Language::Size] =
     {
         {"2нс",     "2ns"},
         {"5нс",     "5ns"},
@@ -496,7 +496,7 @@ pString Range::Name() const
 {
     static const struct StructRange
     {
-        const char * names[Language::Number];
+        const char * names[Language::Size];
         StructRange(pString nRU, pString nEN)
         {
             names[Language::RU] = nRU;

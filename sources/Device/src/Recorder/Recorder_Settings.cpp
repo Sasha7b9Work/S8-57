@@ -37,5 +37,21 @@ Recorder::Settings::ScaleX::E Recorder::Settings::ScaleX::Current()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 pString Recorder::Settings::ScaleX::ToString() const
 {
+    /*
+    static const struct StructScaleX
+    {
+        const char *name[Language::Size];
+        StructScaleX(pString nRU, pString nEN)
+        {
+            name[Language::RU] = nRU;
+            name[Language::EN] = nEN;
+        };
+    }
+    scales[ScaleX::Size] =
+    {
+
+    };
+    */
+
     return "";
 }
