@@ -43,7 +43,7 @@ int Font::GetLengthSymbol(char symbol)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Font::SetFont(Font::Type typeFont)
+void Font::SetFont(Font::Type::E typeFont)
 {
     switch (typeFont)
     {

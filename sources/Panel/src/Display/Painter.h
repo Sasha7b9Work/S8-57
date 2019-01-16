@@ -59,7 +59,7 @@ public:
 
     static uint ReduceBrightness(uint colorValue, float newBrightness);
 
-    static void SetFont(Font::Type typeFont);
+    static void SetFont(Font::Type::E typeFont);
 
     static int DrawText(int x, int y, const char *text, Color color = Color::NUMBER);
     /// Выводит текст на прямоугольнике цвета colorBackgound

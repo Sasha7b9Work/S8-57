@@ -12,7 +12,6 @@ struct BalanceADC
         Hand         ///< Используются значения балансировки, заданные вручную.
     } value;
     explicit BalanceADC(E v) : value(v) {};
-    operator uint8() const { return (uint8)value; };
 };
 
 /// Тип растяжки АЦП
@@ -25,7 +24,6 @@ struct StretchADC
         Hand
     } value;
     explicit StretchADC(E v) : value(v) {};
-    operator uint8() const { return (uint8)value; };
 };
 
 

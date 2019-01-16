@@ -24,7 +24,6 @@ struct Font
             None
         } value;
         Type(E v) : value(v) {};
-        operator uint8() const { return (uint8)value; };
     };
 
     int height;
@@ -34,7 +33,7 @@ struct Font
     static int  GetLengthText(const char *text);
     static int  GetHeightSymbol(char symbol);
     static int  GetLengthSymbol(char symbol);
-    static void SetFont(Font::Type typeFont);
+    static void SetFont(Font::Type::E typeFont);
 };
 
 
