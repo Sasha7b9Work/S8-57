@@ -8,7 +8,9 @@
 #include "Display/Painter.h"
 #include "Menu/Menu.h"
 
+#include <stm32f4xx_hal.h>
 #include "Recorder/Recorder_Storage.h"
+#include "Hardware/Timer.h"
 #endif
 
 
@@ -81,4 +83,10 @@ void Recorder::Display::DrawData()
         point = frame.NextPoint();
         x++;
     } while (x < 320);
+
+    static uint prevTime = 0;
+
+    LOG_WRITE("%d", TIME_MS - prevTime);
+
+    prevTime = TIME_MS;
 }
