@@ -20,6 +20,20 @@ source_group(Menu\\Pages\\PageDebug    REGULAR_EXPRESSION "src/Menu/Pages/PageDe
 source_group(Menu\\Pages\\PageDisplay  REGULAR_EXPRESSION "src/Menu/Pages/PageDisplay/*.*")
 source_group(Menu\\Pages\\PageFunction REGULAR_EXPRESSION "src/Menu/Pages/PageFunction/*.*")
 source_group(Menu\\Pages\\PageFunction\\PageRecorder REGULAR_EXPRESSION "src/Menu/Pages/PageFunction/PageRecorder/*.*")
+source_group(Menu\\Pages\\PageHelp     REGULAR_EXPRESSION "src/Menu/Pages/PageHelp/*.*")
+source_group(Menu\\Pages\\PageMeasures REGULAR_EXPRESSION "src/Menu/Pages/PageMeasures/*.*")
+source_group(Menu\\Pages\\PageMemory   REGULAR_EXPRESSION "src/Menu/Pages/PageMemory/*.*")
+source_group(Menu\\Pages\\PageService  REGULAR_EXPRESSION "src/Menu/Pages/PageService/*.*")
+source_group(Menu\\Pages\\PageTrig     REGULAR_EXPRESSION "src/Menu/Pages/PageTrig/*.*")
+source_group(Multimeter                REGULAR_EXPRESSION "src/Multimeter/*.*")
+source_group(Osci                      REGULAR_EXPRESSION "src/Osci/*.*")
+source_group(Osci\\Display             REGULAR_EXPRESSION "scr/Osci/Display/*.*")
+source_group(Recorder                  REGULAR_EXPRESSION "src/Recorder/*.*")
+source_group(SCPI                      REGULAR_EXPRESSION "src/SCPI/*.*")
+source_group(Settings                  REGULAR_EXPRESSION "src/Settings/*.*")
+source_group(Tester                    REGULAR_EXPRESSION "src/Tester/*.*")
+source_group(Utils                     REGULAR_EXPRESSION "src/Utils/*.*")
+
 
 file(GLOB SOURCES   ../common/_VS/*
                     ../common/*.*
@@ -38,6 +52,18 @@ file(GLOB SOURCES   ../common/_VS/*
                     src/Menu/Pages/PageDisplay/*
                     src/Menu/Pages/PageFunction/*
                     src/Menu/Pages/PageFunction/PageRecorder/*
+                    src/Menu/Pages/PageHelp/*
+                    src/Menu/Pages/PageMeasures/*
+                    src/Menu/PageMemory/*
+                    src/Menu/PageService/*
+                    src/Menu/PageTrig/*
+                    src/Multimeter/*
+                    src/Osci/*
+                    src/Osci/Display/*
+                    src/Recorder/*
+                    src/Settings/*
+                    src/Tester/*
+                    src/Utils/*
                     src/*.*)
 
 add_executable(Device56 ${SOURCES})
