@@ -20,7 +20,7 @@ namespace FPGA
     void Start();
 
     void OnPressStart();
-
+    /// Принудительный запуск синхронизации
     void GiveStart();
 
     uint NumPoints();
