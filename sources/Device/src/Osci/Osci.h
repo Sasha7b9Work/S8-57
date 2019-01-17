@@ -10,5 +10,7 @@ namespace Osci
 
     void DeInit();
 
+    void Start();
+
     void Stop(bool pause = false);
 };

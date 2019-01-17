@@ -17,8 +17,6 @@ namespace FPGA
 {
     void Init();
 
-    void Start();
-
     void OnPressStart();
     /// Принудительный запуск синхронизации
     void GiveStart();

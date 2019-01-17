@@ -17,6 +17,8 @@
 #include "Settings/Settings.h"
 #include <cstring>
 #include <stdlib.h>
+
+#include "Recorder/Recorder.h"
 #endif
 
 
@@ -73,24 +75,31 @@ uint16 FPGA::ReadLastRecord()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void FPGA::OnPressStart()
 {
-    isRunning = !isRunning;
-    if (isRunning)
+    if (Device::State::InModeRecorder())
     {
-        Start();
+        Recorder::OnPressStart();
+    }
+    else
+    {
+        isRunning = !isRunning;
+        if (isRunning)
+        {
+            Osci::Start();
+        }
     }
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void FPGA::Start()
+void Osci::Start()
 {
     givingStart = false;
     addrRead = 0xffff;
 
-    FSMC::WriteToFPGA16(WR_PRED_LO, pred);
-    FSMC::WriteToFPGA16(WR_POST_LO, post);
+    FSMC::WriteToFPGA16(WR_PRED_LO, FPGA::pred);
+    FSMC::WriteToFPGA16(WR_POST_LO, FPGA::post);
     FSMC::WriteToFPGA8(WR_START, 0xff);
 
-    timeStart = TIME_MS;
+    FPGA::timeStart = TIME_MS;
 }
 
 

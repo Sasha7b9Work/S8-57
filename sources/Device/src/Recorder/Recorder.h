@@ -10,7 +10,11 @@ namespace Recorder
 
     void Update();
 
+    void OnPressStart();
+
     void Start();
 
     void Stop();
+
+    bool IsRunning();
 };
