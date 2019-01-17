@@ -134,6 +134,7 @@ union BitSet16
         uint8 byte1;
     };
     BitSet16(uint16 v) : halfWord(v) {};
+    BitSet16(uint8 v0, uint8 v1) : byte0(v0), byte1(v1) {};
 };
 
 union BitSet32

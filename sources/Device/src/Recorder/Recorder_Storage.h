@@ -14,7 +14,7 @@ namespace Recorder
         /// Инициализация. Выполняется при включении режима "РЕГИСТРАТОР"
         static void Init();
         /// Добавление считаной точки
-        static void AddPoint(uint16 dataA, uint16 dataB);
+        static void AddPoint(BitSet16 dataA, BitSet16 dataB);
 
         static Data &CurrentFrame();
     };

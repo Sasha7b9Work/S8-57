@@ -19,8 +19,11 @@ extern bool givingStart;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-static ADC_HandleTypeDef handleADC;
 uint16 FPGA::HAL::flag = 0;
+
+static ADC_HandleTypeDef handleADC;
+/// Эта функция будет вызываться по приходу каждой точки
+static pFuncVV funcP2P = EmptyFuncVV;
 
 
 struct PinStruct
@@ -241,8 +244,10 @@ bool FPGA::HAL::GetFlag::PERIOD_IN_PROCESS()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void FPGA::HAL::Interrupt::P2P::Init(pFuncVV /*func*/)
+void FPGA::HAL::Interrupt::P2P::Init(pFuncVV func)
 {
+    funcP2P = func;
+
     static GPIO_InitTypeDef isGPIO =
     {
         GPIO_PIN_1,
@@ -263,4 +268,16 @@ void FPGA::HAL::Interrupt::P2P::Enable()
 void FPGA::HAL::Interrupt::P2P::Disable()
 {
     HAL_NVIC_DisableIRQ(EXTI1_IRQn);
+}
+
+
+extern "C" {
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void EXTI1_IRQHandler()
+{
+    funcP2P();
+
+    __HAL_GPIO_EXTI_CLEAR_IT(GPIO_PIN_1);
+}
 }
