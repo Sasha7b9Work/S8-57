@@ -5,6 +5,7 @@
 #include "Settings/Settings.h"
 #include "Utils/Math.h"
 
+#include "Recorder/Recorder.h"
 #include "Hardware/FSMC.h"
 #include "FPGA/FPGA.h"
 #endif
@@ -40,7 +41,8 @@ void Recorder::Settings::ScaleX::Load()
 
     FSMC::WriteToFPGA8(WR_TBASE, values[SET_TBASE]);
 
-    FPGA::GiveStart();
+    Stop();
+    Start();
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

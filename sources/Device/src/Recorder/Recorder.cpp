@@ -6,6 +6,8 @@
 #include "Recorder/Recorder_Settings.h"
 
 #include "FPGA/FPGA_HAL.h"
+#include "Hardware/FSMC.h"
+#include "FPGA/FPGA_Types.h"
 #endif
 
 
@@ -26,13 +28,13 @@ void Recorder::Init()
     Osci::Settings::LoadHoldfOff();
 
     FPGA::HAL::Interrupt::P2P::Init(ReadPoint);
-    FPGA::HAL::Interrupt::P2P::Enable();
+
+    Stop();
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Recorder::DeInit()
 {
-    FPGA::HAL::Interrupt::P2P::Disable();
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -45,4 +47,20 @@ void Recorder::Update()
 static void ReadPoint()
 {
 
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Recorder::Start()
+{
+    FSMC::WriteToFPGA16(WR_PRED_LO, 0);
+    FSMC::WriteToFPGA16(WR_POST_LO, 0);
+    FSMC::WriteToFPGA8(WR_START, 0xff);
+
+    FPGA::HAL::Interrupt::P2P::Enable();
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Recorder::Stop()
+{
+    FPGA::HAL::Interrupt::P2P::Disable();
 }

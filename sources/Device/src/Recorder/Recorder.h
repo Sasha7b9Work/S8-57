@@ -9,4 +9,8 @@ namespace Recorder
     void DeInit();
 
     void Update();
+
+    void Start();
+
+    void Stop();
 };

@@ -218,7 +218,6 @@
     <ClInclude Include="..\..\Device\src\FPGA\FPGA_Math.h" />
     <ClInclude Include="..\..\Device\src\FPGA\FPGA_Types.h" />
     <ClInclude Include="..\..\Device\src\FPGA\FPGA_HAL.h" />
-    <ClInclude Include="..\..\Device\src\FPGA\FPGA_Osci.h" />
     <ClInclude Include="..\..\Device\src\FPGA\FPGA_Settings.h" />
     <ClInclude Include="..\..\Device\src\Hardware\AT25160N.h" />
     <ClInclude Include="..\..\Device\src\Hardware\CPU.h" />
