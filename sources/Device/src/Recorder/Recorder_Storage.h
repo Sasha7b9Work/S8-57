@@ -1,21 +1,56 @@
 #pragma once
+#include "Data/DataSettings.h"
 
 
 namespace Recorder
 {
-    struct Storage
+    namespace Storage
     {
-        /// Описывает данные регистратора - цельную запись точек
-        struct Data
+        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// Точка на графике
+        struct Point
         {
+            Point(BitSet16 _data) : data(_data) {};
+            static Point CreateEmpty();
+            bool IsEmpty();
+            int Min();
+            int Max();
+        private:
+            BitSet16 data;
+        };
+
+        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// Описывает данные регистратора - цельную запись точек
+        struct Frame
+        {
+            Frame() : start(0), numPoints(0), pointer(0) {}
+
+            void SetDataAddress(uint16 *address);
+            /// Добавление считаной точки
+            void AddPoint(BitSet16 dataA, BitSet16 dataB);
             /// Число точек в регистрограмме
             uint NumPoints();
+            /// Получить точку в позиции position
+            Point GetPoint(uint position);
+            /// Получить следующую точку
+            Point NextPoint();
+            /// Время записи первой точки
+            PackedTime timeStart;
+        private:
+            /// Указатель на буфер данных - фактически адрес первой сохранённой точки
+            BitSet16 *start;
+            /// Количество сохранённых точек
+            uint numPoints;
+            /// Указатель на последние считаннные данные
+            uint pointer;
         };
-        /// Инициализация. Выполняется при включении режима "РЕГИСТРАТОР"
-        static void Init();
-        /// Добавление считаной точки
-        static void AddPoint(BitSet16 dataA, BitSet16 dataB);
 
-        static Data &CurrentFrame();
+
+        /// Инициализация. Выполняется при включении режима "РЕГИСТРАТОР"
+        void Init();
+
+        void CreateNewFrame();
+
+        Frame &CurrentFrame();
     };
 }

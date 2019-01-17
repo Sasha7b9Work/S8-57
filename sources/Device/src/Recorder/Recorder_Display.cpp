@@ -7,6 +7,8 @@
 #include "Display/Grid.h"
 #include "Display/Painter.h"
 #include "Menu/Menu.h"
+
+#include "Recorder/Recorder_Storage.h"
 #endif
 
 
@@ -14,8 +16,16 @@ using namespace Display::Primitives;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/// Изобразить установленные настройки
-static void DrawSettings(int x, int y);
+namespace Recorder
+{
+namespace Display
+{
+    /// Изобразить установленные настройки
+    void DrawSettings(int x, int y);
+    /// Отобразить данные
+    static void DrawData();
+};
+};
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -27,13 +37,44 @@ void Recorder::Display::Update()
 
     DrawSettings(269, 0);
 
+    DrawData();
+
     Menu::Draw();
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void DrawSettings(int x, int y)
+void Recorder::Display::DrawSettings(int x, int y)
 {
     Region(50, 30).DrawBounded(x, y, Color::BACK, Color::FILL);
 
     Text(RECORDER_SCALE_X.ToString()).Draw(x + 2, y + 2);
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Recorder::Display::DrawData()
+{
+    Storage::Frame frame = Storage::CurrentFrame();
+
+    if (frame.NumPoints() == 0)
+    {
+        return;
+    }
+
+    Color::SetCurrent(Color::FILL);
+
+    int x = 0;
+    Storage::Point point = frame.GetPoint(0);
+
+    do
+    {
+        if (!point.IsEmpty())
+        {
+            int min = point.Min();
+            int max = point.Max();
+         
+            VLine(max - min).Draw(x, min);
+        }
+
+        point = frame.NextPoint();
+    } while (x < 300);
 }

@@ -133,8 +133,8 @@ union BitSet16
         uint8 byte0;
         uint8 byte1;
     };
-    BitSet16(uint16 v) : halfWord(v) {};
-    BitSet16(uint8 v0, uint8 v1) : byte0(v0), byte1(v1) {};
+    explicit BitSet16(uint16 v) : halfWord(v) {};
+    explicit BitSet16(uint8 v0, uint8 v1) : byte0(v0), byte1(v1) {};
 };
 
 union BitSet32
@@ -155,9 +155,9 @@ union BitSet32
         uint8 byte3;
     };
 
-    BitSet32(uint w = 0) : word(w) {}
+    explicit BitSet32(uint w = 0) : word(w) {}
 
-    BitSet32(uint8 _byte3, uint8 _byte2, uint8 _byte1, uint8 _byte0) : byte0(_byte0), byte1(_byte1), byte2(_byte2), byte3(_byte3)
+    explicit BitSet32(uint8 _byte3, uint8 _byte2, uint8 _byte1, uint8 _byte0) : byte0(_byte0), byte1(_byte1), byte2(_byte2), byte3(_byte3)
     {
     }
 
