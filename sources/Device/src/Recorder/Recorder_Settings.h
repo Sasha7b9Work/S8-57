@@ -32,7 +32,7 @@ namespace Recorder
         };
 
         /// C каким источником работаем
-        struct Storage
+        struct TypeStorage
         {
             enum E
             {
@@ -40,7 +40,7 @@ namespace Recorder
                 Flash,
                 PC
             } value;
-            explicit Storage(E v) : value(v) {};
+            explicit TypeStorage(E v) : value(v) {};
         };
 
         /// Используется при выборе оси

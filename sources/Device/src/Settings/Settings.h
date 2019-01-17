@@ -256,16 +256,16 @@ public:
     Multimeter::RangeResistance::E  multi_rangeResist;
 
     // Настройки регистратора
-    Recorder::Settings::ViewAlways::E rec_viewAlways;       ///< Показывать ли всегда данные регистратора
-    bool                              rec_sourceChanA;      ///< Включение записи канала 1
-    bool                              rec_sourceChanB;      ///< Включение записи канала 2
-    bool                              rec_sourceSensor;     ///< Включение записи показаний датчика
-    Recorder::Settings::Storage::E    rec_storageRecord;    ///< Куда сохранять данные
-    Recorder::Settings::Storage::E    rec_storagePlay;      ///< Откуда брать сохранённые данные
-    Recorder::Settings::Axis::E       rec_axisMove;         ///< Текущая ось перемещения
-    Recorder::Settings::Axis::E       rec_axisZoom;         ///< Текущая ось масштабирования
-    Recorder::Settings::ScaleX        rec_scaleX;           ///< Установленный масштаб по времени
-    Osci::Settings::Range::E          rec_range[2];         ///< Масштаб по вертикали в режиме регистратора
+    Recorder::Settings::ViewAlways::E  rec_viewAlways;       ///< Показывать ли всегда данные регистратора
+    bool                               rec_sourceChanA;      ///< Включение записи канала 1
+    bool                               rec_sourceChanB;      ///< Включение записи канала 2
+    bool                               rec_sourceSensor;     ///< Включение записи показаний датчика
+    Recorder::Settings::TypeStorage::E rec_storageRecord;    ///< Куда сохранять данные
+    Recorder::Settings::TypeStorage::E rec_storagePlay;      ///< Откуда брать сохранённые данные
+    Recorder::Settings::Axis::E        rec_axisMove;         ///< Текущая ось перемещения
+    Recorder::Settings::Axis::E        rec_axisZoom;         ///< Текущая ось масштабирования
+    Recorder::Settings::ScaleX         rec_scaleX;           ///< Установленный масштаб по времени
+    Osci::Settings::Range::E           rec_range[2];         ///< Масштаб по вертикали в режиме регистратора
 
 
     int16   dbg_enum_gate_max;      ///< Ограничение ворот в рандомизаторе сверху
