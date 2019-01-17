@@ -494,10 +494,10 @@ static void DebugShowSetInfo_Draw()
 #define DRAW_FORMAT2(str, val1, val2)   String(str, val1, val2).Draw(x0, Y_AND_INCREASE)
 
     //Painter_DrawFormatText(x0, Y_AND_INCREASE, "–азмер основной структуры %d", sizeof(set));
-    DRAW_FORMAT("–азмер основной структуры : %d", sizeof(set));
-    String("Ќесбрасываема€ структура:").Draw(x0, Y_AND_INCREASE);
+    DRAW_FORMAT("–азмер основной структуры : %d", sizeof(set)); //-V2528
+    String("Ќесбрасываема€ структура:").Draw(x0, Y_AND_INCREASE); //-V2528
 
-    int x = String("rShiftAdd :").Draw(x0, Y_AND_INCREASE) + 5;
+    int x = String("rShiftAdd :").Draw(x0, Y_AND_INCREASE) + 5; //-V2528
 
     int ddY = 0;
 
@@ -515,15 +515,15 @@ static void DebugShowSetInfo_Draw()
 
     y += dY * 3;
 
-    DRAW_FORMAT("correctionTime : %d", NRST_CORRECTION_TIME);
-    DRAW_FORMAT2("balanceADC : %d %d", NRST_BALANCE_ADC_A, NRST_BALANCE_ADC_B);
-    DRAW_FORMAT("numAveForRand : %d", NRST_NUM_AVE_FOR_RAND);
+    DRAW_FORMAT("correctionTime : %d", NRST_CORRECTION_TIME); //-V2528
+    DRAW_FORMAT2("balanceADC : %d %d", NRST_BALANCE_ADC_A, NRST_BALANCE_ADC_B); //-V2528
+    DRAW_FORMAT("numAveForRand : %d", NRST_NUM_AVE_FOR_RAND); //-V2528
 
     pString s[3] = {"выключено", "настроено автоматически", "задано вручную"};
-    DRAW_FORMAT("balanceADCtype : %s", (NRST_BALANCE_ADC_TYPE < 3 ? s[NRST_BALANCE_ADC_TYPE] : "!!! неправильное значение !!!")); //-V547
-    DRAW_FORMAT("stretchADCtype : %s", (NRST_STRETCH_ADC_TYPE < 3 ? s[NRST_STRETCH_ADC_TYPE] : "!!! неправильное значение !!!")); //-V547
+    DRAW_FORMAT("balanceADCtype : %s", (NRST_BALANCE_ADC_TYPE < 3 ? s[NRST_BALANCE_ADC_TYPE] : "!!! неправильное значение !!!")); //-V547 //-V2528
+    DRAW_FORMAT("stretchADCtype : %s", (NRST_STRETCH_ADC_TYPE < 3 ? s[NRST_STRETCH_ADC_TYPE] : "!!! неправильное значение !!!")); //-V547 //-V2528
 
-    x = String("stretchADC :").Draw(x0, Y_AND_INCREASE) + 5;
+    x = String("stretchADC :").Draw(x0, Y_AND_INCREASE) + 5; //-V2528
 
     for (int ch = 0; ch < 2; ch++)
     {
@@ -544,7 +544,7 @@ static void DebugShowSetInfo_Draw()
     DRAW_STRETCH(AddStretch2V);
     */
 
-    DRAW_FORMAT("numSmoothForRand : %d", NRST_NUM_SMOOTH_FOR_RAND);
+    DRAW_FORMAT("numSmoothForRand : %d", NRST_NUM_SMOOTH_FOR_RAND); //-V2528
 
     Menu::Draw();
     Painter::EndScene();
