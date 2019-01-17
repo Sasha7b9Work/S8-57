@@ -15,7 +15,7 @@ using namespace Display::Primitives;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /// Изобразить установленные настройки
-static void DrawSettings();
+static void DrawSettings(int x, int y);
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -25,15 +25,15 @@ void Recorder::Display::Update()
 
     Grid::Draw();
 
-    DrawSettings();
+    DrawSettings(270, 0);
 
     Menu::Draw();
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void DrawSettings()
+static void DrawSettings(int x, int y)
 {
-    Region(50, 30).DrawBounded(0, 0, Color::BACK, Color::FILL);
+    Region(50, 30).DrawBounded(x, y, Color::BACK, Color::FILL);
 
-    Text(RECORDER_SCALE_X.ToString()).Draw(2, 2);
+    Text(RECORDER_SCALE_X.ToString()).Draw(x + 2, y + 2);
 }

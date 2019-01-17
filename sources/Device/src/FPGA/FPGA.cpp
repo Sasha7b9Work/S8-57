@@ -249,7 +249,6 @@ void FPGA::ReadDataChanenl(Chan::E ch, uint8 data[FPGA_MAX_NUM_POINTS])
             {
                 *p++ = *addr0;
                 *p++ = *addr1;
-
             }
         }
         else

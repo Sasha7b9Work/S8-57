@@ -6,7 +6,5 @@ namespace FPGA
     namespace Osci
     {
         void Update();
-
-        
     }
 }

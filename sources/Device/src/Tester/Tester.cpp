@@ -276,6 +276,8 @@ void HAL_GPIO_EXTI_Callback(uint16_t pin)
     else if(pin == GPIO_PIN_1)  // Прерывание от поточечного вывода
     {
         LOG_WRITE("Пришёл флаг точки");
+        volatile uint8 dataA = *RD_DATA_A;
+        volatile uint8 dataB = *RD_DATA_B;
     }
     else
     {
