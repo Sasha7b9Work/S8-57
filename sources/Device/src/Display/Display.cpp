@@ -10,6 +10,8 @@
 #include "Hardware/Sound.h"
 #include "Recorder/Recorder_Display.h"
 #include <cstring>
+
+#include "Osci/Osci_Display.h"
 #endif
 
 

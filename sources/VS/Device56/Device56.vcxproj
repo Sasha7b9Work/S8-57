@@ -265,6 +265,7 @@
     <ClInclude Include="..\..\Device\src\Osci\Display\PainterData.h" />
     <ClInclude Include="..\..\Device\src\Osci\FrequencyCounter.h" />
     <ClInclude Include="..\..\Device\src\Osci\Osci.h" />
+    <ClInclude Include="..\..\Device\src\Osci\Osci_Display.h" />
     <ClInclude Include="..\..\Device\src\Osci\Osci_Settings.h" />
     <ClInclude Include="..\..\Device\src\Recorder\Recorder_Display.h" />
     <ClInclude Include="..\..\Device\src\Recorder\Recorder.h" />

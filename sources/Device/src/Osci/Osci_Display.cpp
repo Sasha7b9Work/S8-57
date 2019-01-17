@@ -4,11 +4,11 @@
 #include "Display/Display_Primitives.h"
 #include "Display/Grid.h"
 #include "Display/Painter.h"
-#include "Osci/Osci.h"
+#include "Display/Symbols.h"
+#include "Osci/Osci_Display.h"
 #include "Osci/Display/BottomPart.h"
 #include "Osci/Display/HiPart.h"
 #include "Osci/Display/PainterData.h"
-#include "Display/Symbols.h"
 #include "Settings/Settings.h"
 #endif
 

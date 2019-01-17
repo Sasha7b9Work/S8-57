@@ -4,11 +4,14 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 namespace Osci
 {
-    void Init();
+    namespace Display
+    {
+        void Update();
 
-    void Update();
+        void DrawCursorTrigLevel();
 
-    void DeInit();
+        void DrawScaleLine(int x, bool forTrigLev);
 
-    void Stop(bool pause = false);
-};
+        void DrawMeasures();
+    }
+}

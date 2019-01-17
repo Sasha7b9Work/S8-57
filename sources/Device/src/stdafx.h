@@ -58,6 +58,7 @@
 
 #include "Multimeter/Multimeter.h"
 
+#include "Osci/Osci_Display.h"
 #include "Osci/Display/BottomPart.h"
 #include "Osci/Display/HiPart.h"
 #include "Osci/Display/MemoryWindow.h"

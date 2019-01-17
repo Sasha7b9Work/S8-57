@@ -58,10 +58,14 @@ void FPGA::GiveStart()
     uint8 value = (uint8)TRIG_POLARITY;
     value = (uint8)((value + 1) % 2);
 
+    uint8 stop = 0;
+    if (Device::State::InModeRecorder())    // ¬ режиме регистратора
+    {
+        stop = (1 << BIT_TRIG_ENABLED);     // устанавливаем признак того, что процесс чтени€ данных бесконечен
+    }
 
-
-    FSMC::WriteToFPGA8(WR_TRIG, value++);
-    FSMC::WriteToFPGA8(WR_TRIG, (uint8)(value % 2));
+    FSMC::WriteToFPGA8(WR_TRIG, (uint8)(value++ | stop));
+    FSMC::WriteToFPGA8(WR_TRIG, (uint8)((value % 2) | stop));
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

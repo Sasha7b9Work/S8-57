@@ -833,6 +833,9 @@
     <ClInclude Include="..\..\Device\src\FPGA\FPGA_Types.h">
       <Filter>FPGA</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Device\src\Osci\Osci_Display.h">
+      <Filter>Osci</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\Device\src\Display\Font\font5.inc">
