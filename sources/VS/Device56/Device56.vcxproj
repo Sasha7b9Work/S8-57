@@ -15,6 +15,7 @@
     <ClCompile Include="..\..\Device\src\Data\DataBuffer.cpp" />
     <ClCompile Include="..\..\Device\src\Data\DataSettings.cpp" />
     <ClCompile Include="..\..\Device\src\Data\DataStorage.cpp" />
+    <ClCompile Include="..\..\Device\src\Data\Heap.cpp" />
     <ClCompile Include="..\..\Device\src\Data\Reader.cpp" />
     <ClCompile Include="..\..\Device\src\defines.cpp" />
     <ClCompile Include="..\..\Device\src\device.cpp" />
@@ -196,6 +197,7 @@
     <ClInclude Include="..\..\Device\src\Data\DataBuffer.h" />
     <ClInclude Include="..\..\Device\src\Data\DataSettings.h" />
     <ClInclude Include="..\..\Device\src\Data\DataStorage.h" />
+    <ClInclude Include="..\..\Device\src\Data\Heap.h" />
     <ClInclude Include="..\..\Device\src\Data\Reader.h" />
     <ClInclude Include="..\..\Device\src\defines.h" />
     <ClInclude Include="..\..\Device\src\device.h" />

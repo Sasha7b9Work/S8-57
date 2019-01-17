@@ -5,6 +5,8 @@
 #include "DataSettings.h"
 #include <cstring>
 #include <climits>
+
+#include "Data/Heap.h"
 #endif
 
 
@@ -16,12 +18,6 @@
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-#define SIZE_BUFFER (70 * 1024)
-
-/// «десь хран€тс€ данные каналов.
-static uint8 buffer[SIZE_BUFFER];
-
-
 /// ¬спомогательный класс дл€ урощени€ работы с массивом DataSettings
 class Stack
 {
@@ -63,16 +59,12 @@ void DataBuffer::Init()
 {
     Stack::Clear();
 
-    for(int i = 0; i < SIZE_BUFFER; i++)
+    uint8 *buffer = (uint8 *)Heap::Data();
+
+    for(uint i = 0; i < Heap::Size(); i++)
     {
         buffer[i] = (uint8)i;
     }
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-DataSettings *DataBuffer::Top()
-{
-    return Stack::Top();
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -143,6 +135,8 @@ static uint8 *Stack_AddressToPlace(const DataSettings *_ds)
         freeData[i] = true;
     }
 
+    uint8 *buffer = (uint8 *)Heap::Data();
+
     // —ейчас будем их "занимать"
     for(int i = 0; i < MAX_DATAS; i++)
     {
@@ -174,7 +168,7 @@ static uint8 *Stack_AddressToPlace(const DataSettings *_ds)
 
     uint8 *address = &buffer[0] + index * _ds->SizeData();          // Ќаходим адрес первого свободного блока данных
 
-    return (&buffer[SIZE_BUFFER] - address) >= _ds->SizeData() ? address : 0;   // -V104
+    return (&buffer[Heap::Size()] - address) >= _ds->SizeData() ? address : 0;   // -V104
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

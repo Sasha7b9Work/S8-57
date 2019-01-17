@@ -44,6 +44,8 @@
 #include "Hardware/VCP.h"
 #include "Hardware/stm32/Timer4XX.h"
 
+#include "Data/Heap.h"
+
 #include "Menu/Pages/Include/Definition.h"
 #include "Menu/Pages/Include/PageChannels.h"
 #include "Menu/Pages/Include/PageDebug.h"

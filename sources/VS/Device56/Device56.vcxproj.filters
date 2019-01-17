@@ -468,6 +468,9 @@
     <ClCompile Include="..\..\Device\src\Recorder\Recorder_Storage.cpp">
       <Filter>Recorder</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Device\src\Data\Heap.cpp">
+      <Filter>Data</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Device\src\defines.h">
@@ -832,6 +835,9 @@
     </ClInclude>
     <ClInclude Include="..\..\Device\src\Osci\Osci_Display.h">
       <Filter>Osci</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Device\src\Data\Heap.h">
+      <Filter>Data</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

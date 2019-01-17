@@ -3,12 +3,9 @@
 
 
 /// Здесь хранятся данные 
-class DataBuffer
+namespace DataBuffer
 {
-public:
-    static void Init();
+    void Init();
 
-    static uint Size();
-    /// Возвращает указатель на данные, помещённые в буфер последними
-    static DataSettings *Top();
+    uint Size();
 };

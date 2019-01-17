@@ -40,7 +40,7 @@ uint8 dataRand[Chan::Number][FPGA_MAX_NUM_POINTS];    ///< «десь будут данные ра
 /// «десь хранитс€ адрес, начина€ с которого будем читать данные по каналам. ≈сли addrRead == 0xffff, то адрес вначале нужно считать
 static uint16 addrRead = 0xffff;
 
-extern const int *Kr;
+extern const int *Kr; //-V707
 
 bool          FPGA::isRunning = false;
 uint          FPGA::timeStart = 0;
