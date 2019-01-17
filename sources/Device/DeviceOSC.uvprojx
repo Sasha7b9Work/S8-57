@@ -2005,6 +2005,16 @@
               <FileType>5</FileType>
               <FilePath>.\src\Recorder\Recorder_Settings.h</FilePath>
             </File>
+            <File>
+              <FileName>Recorder_Storage.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Recorder\Recorder_Storage.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Recorder_Storage.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Recorder\Recorder_Storage.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

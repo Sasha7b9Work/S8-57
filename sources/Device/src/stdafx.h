@@ -65,6 +65,7 @@
 
 #include "Recorder/Recorder.h"
 #include "Recorder/Recorder_Display.h"
+#include "Recorder/Recorder_Storage.h"
 
 #include "SCPI/SCPI.h"
 #include "Settings/Settings.h"
