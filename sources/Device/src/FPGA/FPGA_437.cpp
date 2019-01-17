@@ -64,7 +64,7 @@ void FPGA::Init()
     HAL_NVIC_SetPriority(ADC_IRQn, 0, 0);
     HAL_NVIC_EnableIRQ(ADC_IRQn);
 
-    ADC_HandleTypeDef &handleADC = *FPGA::HAL::HandleADC();
+    ADC_HandleTypeDef &handleADC = *FPGA::HAL::_ADC::Handle();
 
     handleADC.Instance = ADC3;
     handleADC.Init.ClockPrescaler = ADC_CLOCKPRESCALER_PCLK_DIV2;
