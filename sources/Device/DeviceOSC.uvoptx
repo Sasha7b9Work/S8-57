@@ -118,7 +118,7 @@
         <SetRegEntry>
           <Number>0</Number>
           <Key>DLGUARM</Key>
-          <Name>tф8</Name>
+          <Name>/</Name>
         </SetRegEntry>
         <SetRegEntry>
           <Number>0</Number>
@@ -155,18 +155,34 @@
         <Bp>
           <Number>0</Number>
           <Type>0</Type>
-          <LineNumber>270</LineNumber>
+          <LineNumber>30</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134319526</Address>
+          <Address>134355168</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>&lt;1&gt;.\src\Hardware\FSMC.cpp</Filename>
+          <Filename>&lt;1&gt;.\src\Recorder\Recorder.cpp</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\FPGA\src/Hardware/FSMC.cpp\270</Expression>
+          <Expression>\\FPGA\src/Recorder/Recorder.cpp\30</Expression>
+        </Bp>
+        <Bp>
+          <Number>1</Number>
+          <Type>0</Type>
+          <LineNumber>35</LineNumber>
+          <EnabledFlag>1</EnabledFlag>
+          <Address>134355178</Address>
+          <ByteObject>0</ByteObject>
+          <HtxType>0</HtxType>
+          <ManyObjects>0</ManyObjects>
+          <SizeOfObject>0</SizeOfObject>
+          <BreakByAccess>0</BreakByAccess>
+          <BreakIfRCount>1</BreakIfRCount>
+          <Filename>&lt;1&gt;.\src\Recorder\Recorder.cpp</Filename>
+          <ExecCommand></ExecCommand>
+          <Expression>\\FPGA\src/Recorder/Recorder.cpp\35</Expression>
         </Bp>
       </Breakpoint>
       <WatchWindow1>

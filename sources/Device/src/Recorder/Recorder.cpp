@@ -26,7 +26,7 @@ void Recorder::Init()
     Osci::Settings::LoadHoldfOff();
 
     FPGA::HAL::Interrupt::P2P::Init(ReadPoint);
-    //FPGA::HAL::Interrupt::P2P::Enable();
+    FPGA::HAL::Interrupt::P2P::Enable();
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
