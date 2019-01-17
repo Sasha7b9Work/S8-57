@@ -8,7 +8,6 @@
 #include "Display/Symbols.h"
 #include "FlashDrive/FlashDrive.h"
 #include "FPGA/FPGA.h"
-#include "FPGA/FPGA_Osci.h"
 #include "Hardware/Sound.h"
 #include "Menu/Pages/Include/PageMemory.h"
 #include "Utils/Math.h"

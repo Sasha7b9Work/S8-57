@@ -25,7 +25,7 @@ void Recorder::Display::Update()
 
     Grid::Draw();
 
-    DrawSettings(270, 0);
+    DrawSettings(269, 0);
 
     Menu::Draw();
 }

@@ -30,7 +30,6 @@
 #include "FPGA/FPGA.h"
 #include "FPGA/FPGA_HAL.h"
 #include "FPGA/FPGA_Math.h"
-#include "FPGA/FPGA_Osci.h"
 #include "FPGA/FPGA_Settings.h"
 
 #include "Keyboard/DecoderDevice.h"

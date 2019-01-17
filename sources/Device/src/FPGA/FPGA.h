@@ -38,20 +38,16 @@ namespace FPGA
     static uint16 ReadLastRecord();
 
     void ReadDataChanenl(Chan::E ch, uint8 data[FPGA_MAX_NUM_POINTS]);
-    /// Читать канал в рандомизаторе с адреса address
-    static void ReadDataChanenlRand(Chan::E ch, const uint8 *address, uint8 *data);
-
-    static bool CalculateGate(uint16 rand, uint16 *eMin, uint16 *eMax);
 
     void ClearDataRand();
-
-    static int CalculateShift();
     /// Время подачи старта
     extern uint timeStart;
     /// Значение, считанное из handleADC
     extern uint16 valueADC;
     
     extern StateWorkFPGA fpgaStateWork;
+
+    extern bool isRunning;
 
     extern uint16 post;
     extern uint16 pred;

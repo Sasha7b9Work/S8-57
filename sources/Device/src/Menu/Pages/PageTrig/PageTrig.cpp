@@ -2,7 +2,6 @@
 #ifndef WIN32
 #include "defines.h"
 #include "FPGA/FPGA.h"
-#include "FPGA/FPGA_Osci.h"
 #include "Menu/Pages/Include/PageTrig.h"
 #include "Settings/Settings.h"
 

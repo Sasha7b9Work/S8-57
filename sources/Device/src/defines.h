@@ -121,6 +121,8 @@ inline bool EmptyFuncBtU8(uint8) { return true; }
 
 #define SAFE_FREE(x) if(x) free(x); (x) = 0;
 
+#define NULL_TSHIFT 1000000
+
 
 union BitSet16
 {

@@ -3,7 +3,6 @@
 #include "defines.h"
 #include "FPGA/FPGA.h"
 #include "FPGA/FPGA_Math.h"
-#include "FPGA/FPGA_Osci.h"
 #include "Hardware/FSMC.h"
 #include "Hardware/Hardware.h"
 #include "Osci/Osci.h"
