@@ -62,6 +62,8 @@ void Recorder::Display::DrawData()
 
     Color::SetCurrent(Color::FILL);
 
+    Text(String("%d элементов", frame.NumPoints()), 2).Draw(10, 10);
+
     int x = 0;
     Storage::Point point = frame.GetPoint(0);
 
@@ -69,12 +71,15 @@ void Recorder::Display::DrawData()
     {
         if (!point.IsEmpty())
         {
-            int min = point.Min();
-            int max = point.Max();
-         
-            VLine(max - min).Draw(x, min);
+            ::Display::Primitives::Point().Draw(x, point.Min());
+
+            //int min = point.Min();
+            //int max = point.Max();
+            //
+            //VLine(max - min).Draw(x, min);
         }
 
         point = frame.NextPoint();
-    } while (x < 300);
+        x++;
+    } while (x < 320);
 }
