@@ -56,8 +56,6 @@ namespace FPGA
     extern uint16 post;
     extern uint16 pred;
 
-    extern bool isRunning;
-
     extern struct State
     {
         bool needCalibration;                       ///< Установленное в true значение означает, что необходимо произвести калибровку.

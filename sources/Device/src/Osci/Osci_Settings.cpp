@@ -3,7 +3,7 @@
 #include "defines.h"
 #include "device.h"
 #include "FPGA/FPGA_Settings.h"
-#include "FPGA/FPGATypes.h"
+#include "FPGA/FPGA_Types.h"
 #include "Hardware/FSMC.h"
 #include "Settings/Settings.h"
 #include "Utils/Math.h"

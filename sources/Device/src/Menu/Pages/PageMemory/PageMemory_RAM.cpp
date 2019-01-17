@@ -136,7 +136,7 @@ static void OnPress_RAM(bool enter)
     {
         NUM_RAM_SIGNAL = 0;
         RUN_FPGA_BEFORE_SB = FPGA::IsRunning() ? 1U : 0U;
-        FPGA::Osci::Stop(false);
+        Osci::Stop(false);
         MODE_WORK = ModeWork::RAM;
     }
     else

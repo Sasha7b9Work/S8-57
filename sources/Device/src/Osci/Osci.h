@@ -10,6 +10,8 @@ namespace Osci
 
     void DeInit();
 
+    void Stop(bool pause = false);
+
     namespace Display
     {
         void Update();

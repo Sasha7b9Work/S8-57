@@ -160,7 +160,7 @@ void Tester::Enable() // -V2506
 
     LoadFPGA();
 
-    FPGA::Osci::Stop();
+    Osci::Stop();
 
     step = 0;                               // Первый пришедший импульс будет означать нулевой шаг
 

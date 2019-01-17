@@ -7,6 +7,6 @@ namespace FPGA
     {
         void Update();
 
-        void Stop(bool pause = false);
+        
     }
 }

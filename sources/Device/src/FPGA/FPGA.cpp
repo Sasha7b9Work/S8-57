@@ -44,7 +44,7 @@ const int Kr[] = {50, 20, 10,  5,   2};
 /// Здесь хранится адрес, начиная с которого будем читать данные по каналам. Если addrRead == 0xffff, то адрес вначале нужно считать
 static uint16 addrRead = 0xffff;
 
-bool          FPGA::isRunning = false;
+static bool isRunning = false;
 uint          FPGA::timeStart = 0;
 StateWorkFPGA FPGA::fpgaStateWork = StateWorkFPGA_Stop;
 FPGA::State   FPGA::state = {false, StateWorkFPGA_Stop, StateCalibration_None};
@@ -65,7 +65,7 @@ void FPGA::GiveStart()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void FPGA::Osci::Stop(bool)
+void Osci::Stop(bool)
 {
     isRunning = false;
 }

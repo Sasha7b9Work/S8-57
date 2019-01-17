@@ -5,6 +5,8 @@
 #include "FPGA/FPGA_Osci.h"
 #include "Menu/Pages/Include/PageTrig.h"
 #include "Settings/Settings.h"
+
+#include "Osci/Osci.h"
 #endif
 
 
@@ -18,7 +20,7 @@ extern const PageBase ppSearch;
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void PageTrig::OnChanged_TrigMode(bool)
 {
-    FPGA::Osci::Stop(false);
+    Osci::Stop(false);
     if(!START_MODE_IS_SINGLE)
     {
         FPGA::OnPressStart();
