@@ -10,7 +10,7 @@
 #include "FPGA_HAL.h"
 #include "FPGA_Settings.h"
 #include "FPGA_Math.h"
-#include "FPGATypes.h"
+#include "FPGA_Types.h"
 #include "Hardware/FSMC.h"
 #include "Hardware/Timer.h"
 #include "Settings/Settings.h"

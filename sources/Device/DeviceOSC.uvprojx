@@ -1281,6 +1281,11 @@
               <FilePath>.\src\FPGA\FPGA_Math.h</FilePath>
             </File>
             <File>
+              <FileName>FPGA_Osci.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\FPGA\FPGA_Osci.h</FilePath>
+            </File>
+            <File>
               <FileName>FPGA_Settings.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\FPGA\FPGA_Settings.cpp</FilePath>
@@ -1291,14 +1296,9 @@
               <FilePath>.\src\FPGA\FPGA_Settings.h</FilePath>
             </File>
             <File>
-              <FileName>FPGATypes.h</FileName>
+              <FileName>FPGA_Types.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\src\FPGA\FPGATypes.h</FilePath>
-            </File>
-            <File>
-              <FileName>FPGA_Osci.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\FPGA\FPGA_Osci.h</FilePath>
+              <FilePath>.\src\FPGA\FPGA_Types.h</FilePath>
             </File>
           </Files>
         </Group>

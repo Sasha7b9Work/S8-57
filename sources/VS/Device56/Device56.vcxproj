@@ -216,7 +216,7 @@
     <ClInclude Include="..\..\Device\src\FPGA\AD9286.h" />
     <ClInclude Include="..\..\Device\src\FPGA\FPGA.h" />
     <ClInclude Include="..\..\Device\src\FPGA\FPGA_Math.h" />
-    <ClInclude Include="..\..\Device\src\FPGA\FPGATypes.h" />
+    <ClInclude Include="..\..\Device\src\FPGA\FPGA_Types.h" />
     <ClInclude Include="..\..\Device\src\FPGA\FPGA_HAL.h" />
     <ClInclude Include="..\..\Device\src\FPGA\FPGA_Osci.h" />
     <ClInclude Include="..\..\Device\src\FPGA\FPGA_Settings.h" />

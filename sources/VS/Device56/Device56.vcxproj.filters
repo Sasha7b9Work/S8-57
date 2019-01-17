@@ -545,9 +545,6 @@
     <ClInclude Include="..\..\Device\src\FPGA\FPGA.h">
       <Filter>FPGA</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Device\src\FPGA\FPGATypes.h">
-      <Filter>FPGA</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Device\src\Hardware\AT25160N.h">
       <Filter>Hardware</Filter>
     </ClInclude>
@@ -832,6 +829,9 @@
     </ClInclude>
     <ClInclude Include="..\..\Device\src\Recorder\Recorder_Storage.h">
       <Filter>Recorder</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Device\src\FPGA\FPGA_Types.h">
+      <Filter>FPGA</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

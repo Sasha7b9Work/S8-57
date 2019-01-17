@@ -1,5 +1,5 @@
 #pragma once
-#include "FPGA/FPGATypes.h"
+#include "FPGA/FPGA_Types.h"
 #include "Data/Reader.h"
 
 

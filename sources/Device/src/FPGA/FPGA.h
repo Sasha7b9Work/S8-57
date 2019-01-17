@@ -1,5 +1,5 @@
 #pragma once
-#include "FPGATypes.h"
+#include "FPGA_Types.h"
 #include "Settings/SettingsService.h"
 #include <stm32f4xx_hal.h>
 
