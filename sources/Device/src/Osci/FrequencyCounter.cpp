@@ -79,8 +79,8 @@ static void WriteStackToBuffer(Utils::Stack<uint> *stack, int point, const char 
 void FrequencyCounter::Init()
 {
     LoadSettings();
-    FSMC::WriteToFPGA8(WR_RESET_COUNTER_FREQ, 1);
-    FSMC::WriteToFPGA8(WR_RESET_COUNTER_PERIOD, 1);
+    FSMC::WriteToFPGA8(WR::RESET_COUNTER_FREQ, 1);
+    FSMC::WriteToFPGA8(WR::RESET_COUNTER_PERIOD, 1);
     freqActual.word = periodActual.word = 0;
 }
 
@@ -133,7 +133,7 @@ void FrequencyCounter::LoadSettings()
 void FrequencyCounter::LoadFreqSettings()
 {
     LoadSettings();
-    FSMC::WriteToFPGA8(WR_RESET_COUNTER_FREQ, 1);
+    FSMC::WriteToFPGA8(WR::RESET_COUNTER_FREQ, 1);
     freqActual.word = 0;
     lampFreq = false;
 }
@@ -142,7 +142,7 @@ void FrequencyCounter::LoadFreqSettings()
 void FrequencyCounter::LoadPeriodSettings()
 {
     LoadSettings();
-    FSMC::WriteToFPGA8(WR_RESET_COUNTER_PERIOD, 1);
+    FSMC::WriteToFPGA8(WR::RESET_COUNTER_PERIOD, 1);
     periodActual.word = 0;
     lampPeriod = false;
 }
