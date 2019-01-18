@@ -82,8 +82,11 @@ void FPGA::OnPressStart()
     }
     else
     {
-        isRunning = !isRunning;
-        if (isRunning)
+        if (IsRunning())
+        {
+            Osci::Stop();
+        }
+        else
         {
             Osci::Start();
         }
@@ -101,6 +104,8 @@ void Osci::Start()
     FSMC::WriteToFPGA8(WR::START, 0xff);
 
     FPGA::timeStart = TIME_MS;
+
+    FPGA::isRunning = true;
 }
 
 

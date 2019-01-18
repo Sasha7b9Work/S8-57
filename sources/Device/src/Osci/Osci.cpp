@@ -67,7 +67,7 @@ void Osci::Update()
         return;
     }
 
-    if (!FPGA::isRunning)
+    if (!FPGA::IsRunning())
     {
         return;
     };
