@@ -14,10 +14,10 @@
 #endif
 
 
+using namespace FPGA::ADDR;
+
 using FPGA::HAL::GPIO::Pin;
 using FPGA::Settings::ModeCouple;
-
-
 using Osci::Settings::Range;
 
 
@@ -172,7 +172,7 @@ void Osci::Settings::TBase::Load()
 
     FPGA::ClearDataRand();
 
-    FSMC::WriteToFPGA8(FPGA::ADDR::WR_TBASE, values[SET_TBASE]);
+    FSMC::WriteToFPGA8(WR::TBASE, values[SET_TBASE]);
 
     TShift::Load();
 }

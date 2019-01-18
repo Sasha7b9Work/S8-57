@@ -20,6 +20,7 @@
 
 
 using namespace Display::Primitives;
+using namespace FPGA::ADDR;
 using namespace FPGA::HAL::GPIO;
 using namespace FPGA::Settings;
 using namespace Osci::Settings;
@@ -113,8 +114,8 @@ void TShift::Load()
     FPGA::post = (uint16)(~(FPGA::post + 1));
     FPGA::pred = (uint16)(~(FPGA::pred + 3));
 
-    FSMC::WriteToFPGA16(FPGA::ADDR::WR_PRED_LO, FPGA::post);
-    FSMC::WriteToFPGA16(FPGA::ADDR::WR_POST_LO, FPGA::pred);
+    FSMC::WriteToFPGA16(WR::PRED_LO, FPGA::post);
+    FSMC::WriteToFPGA16(WR::POST_LO, FPGA::pred);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

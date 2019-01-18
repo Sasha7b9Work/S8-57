@@ -10,6 +10,9 @@
 #endif
 
 
+using namespace FPGA::ADDR;
+
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /// Чтение точки по прерыванию от FPGA
 static void ReadPoint();
@@ -70,9 +73,9 @@ void Recorder::Start()
 {
     Storage::CreateNewFrame();
 
-    FSMC::WriteToFPGA16(FPGA::ADDR::WR_PRED_LO, 0); //-V525
-    FSMC::WriteToFPGA16(FPGA::ADDR::WR_POST_LO, 0);
-    FSMC::WriteToFPGA8(FPGA::ADDR::WR_START, 0xff);
+    FSMC::WriteToFPGA16(WR::PRED_LO, 0); //-V525
+    FSMC::WriteToFPGA16(WR::POST_LO, 0);
+    FSMC::WriteToFPGA8(WR::START, 0xff);
 
     FPGA::HAL::Interrupt::P2P::Enable();
 

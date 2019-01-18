@@ -8,12 +8,15 @@ namespace FPGA
 {
     namespace ADDR
     {
-        extern uint8 *WR_START;     ///< Старт
-        extern uint8 *WR_TBASE;     ///< Развёртка
-        extern uint8 *WR_PRED_LO;   ///< Предзапуск
-        extern uint8 *WR_PRED_HI;
-        extern uint8 *WR_POST_LO;   ///< Послезапуск
-        extern uint8 *WR_POST_HI;
+        namespace WR
+        {
+            extern uint8 *START;     ///< Старт
+            extern uint8 *TBASE;     ///< Развёртка
+            extern uint8 *PRED_LO;   ///< Предзапуск
+            extern uint8 *PRED_HI;
+            extern uint8 *POST_LO;   ///< Послезапуск
+            extern uint8 *POST_HI;
+        }
     }
 }
 

@@ -22,6 +22,7 @@
 #endif
 
 
+using namespace FPGA::ADDR;
 using namespace FPGA::HAL::GPIO;
 using namespace FPGA::Settings;
 using namespace Osci::Settings;
@@ -95,9 +96,9 @@ void Osci::Start()
     givingStart = false;
     addrRead = 0xffff;
 
-    FSMC::WriteToFPGA16(FPGA::ADDR::WR_PRED_LO, FPGA::pred);
-    FSMC::WriteToFPGA16(FPGA::ADDR::WR_POST_LO, FPGA::post);
-    FSMC::WriteToFPGA8(FPGA::ADDR::WR_START, 0xff);
+    FSMC::WriteToFPGA16(WR::PRED_LO, FPGA::pred);
+    FSMC::WriteToFPGA16(WR::POST_LO, FPGA::post);
+    FSMC::WriteToFPGA8(WR::START, 0xff);
 
     FPGA::timeStart = TIME_MS;
 }
@@ -113,9 +114,9 @@ void FPGA::ForTester::Start() // -V2506
 
     TBase::Load();
     
-    FSMC::WriteToFPGA16(FPGA::ADDR::WR_POST_LO, (uint16)(~(400 + 1)));
-    FSMC::WriteToFPGA16(FPGA::ADDR::WR_PRED_LO, (uint16)(~(0+ 3)));
-    FSMC::WriteToFPGA8(FPGA::ADDR::WR_START, 0xff);
+    FSMC::WriteToFPGA16(WR::POST_LO, (uint16)(~(400 + 1)));
+    FSMC::WriteToFPGA16(WR::PRED_LO, (uint16)(~(0+ 3)));
+    FSMC::WriteToFPGA8(WR::START, 0xff);
 
     uint start = TIME_US;
     HAL::flag = 0;
@@ -148,7 +149,7 @@ bool FPGA::ForTester::Read(uint8 *dataA, uint8 *dataB) // -V2506
 
     uint16 aRead = (uint16)(ReadLastRecord() - TESTER_NUM_POINTS);
 
-    FSMC::WriteToFPGA16(FPGA::ADDR::WR_PRED_LO, aRead);             // Указываем адрес, с которого будем читать данные
+    FSMC::WriteToFPGA16(WR::PRED_LO, aRead);             // Указываем адрес, с которого будем читать данные
     FSMC::WriteToFPGA8(WR_START_ADDR, 0xff);            // И даём команду ПЛИС, чтобы чтение начиналось с него
 
     uint8 *addrA = RD_DATA_A; // -V566
@@ -158,7 +159,7 @@ bool FPGA::ForTester::Read(uint8 *dataA, uint8 *dataB) // -V2506
         *dataA++ = *addrA;
     }
 
-    FSMC::WriteToFPGA16(FPGA::ADDR::WR_PRED_LO, aRead);             // Указываем адрес, с котонрого будем читать данные
+    FSMC::WriteToFPGA16(WR::PRED_LO, aRead);             // Указываем адрес, с котонрого будем читать данные
     FSMC::WriteToFPGA8(WR_START_ADDR, 0xff);            // И даём команду ПЛИС, чтобы чтение начиналось с него
 
     uint8 *addrB = RD_DATA_B; // -V566
@@ -181,7 +182,7 @@ void FPGA::ReadDataChanenl(Chan::E ch, uint8 data[FPGA::MAX_NUM_POINTS])
         addrRead = (uint16)(ReadLastRecord() - (int)numPoints);
     }
     
-    FSMC::WriteToFPGA16(FPGA::ADDR::WR_PRED_LO, (uint16)(addrRead));
+    FSMC::WriteToFPGA16(WR::PRED_LO, (uint16)(addrRead));
     FSMC::WriteToFPGA8(WR_START_ADDR, 0xff);
 
 
