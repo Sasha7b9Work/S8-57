@@ -172,7 +172,7 @@ void Osci::Settings::TBase::Load()
 
     FPGA::ClearDataRand();
 
-    FSMC::WriteToFPGA8(WR_TBASE, values[SET_TBASE]);
+    FSMC::WriteToFPGA8(FPGA::ADDR::WR_TBASE, values[SET_TBASE]);
 
     TShift::Load();
 }
