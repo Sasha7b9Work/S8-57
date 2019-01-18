@@ -22,6 +22,7 @@
 
 
 using namespace Display::Primitives;
+using namespace FPGA::ADDR;
 
 using FPGA::HAL::GetFlag;
 using Utils::Stack;
@@ -119,7 +120,7 @@ void FrequencyCounter::LoadSettings()
         _SET_BIT(data, 2);
     }
 
-    FSMC::WriteToFPGA8(WR_FREQMETER, data);
+    FSMC::WriteToFPGA8(WR::FREQMETER, data);
 }
 
 

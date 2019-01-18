@@ -63,8 +63,8 @@ void FPGA::GiveStart()
         stop = (1 << BIT_TRIG_ENABLED);     // устанавливаем признак того, что процесс чтения данных бесконечен
     }
 
-    FSMC::WriteToFPGA8(WR_TRIG, (uint8)(value++ | stop));
-    FSMC::WriteToFPGA8(WR_TRIG, (uint8)((value % 2) | stop));
+    FSMC::WriteToFPGA8(WR::TRIG, (uint8)(value++ | stop));
+    FSMC::WriteToFPGA8(WR::TRIG, (uint8)((value % 2) | stop));
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

@@ -11,6 +11,7 @@
 #endif
 
 
+using namespace FPGA::ADDR;
 using namespace FPGA::HAL::GPIO;
 using namespace Osci::Settings;
 
@@ -69,7 +70,7 @@ void FPGA::HAL::LoadRegUPR()
 
     data |= mask[CALIBRATOR_MODE];
 
-    FSMC::WriteToFPGA8(WR_UPR, data);
+    FSMC::WriteToFPGA8(WR::UPR, data);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

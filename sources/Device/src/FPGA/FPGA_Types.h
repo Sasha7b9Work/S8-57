@@ -10,27 +10,27 @@ namespace FPGA
     {
         namespace WR
         {
-            extern uint8 *START;     ///< Старт
-            extern uint8 *TBASE;     ///< Развёртка
-            extern uint8 *PRED_LO;   ///< Предзапуск
+            extern uint8 *START;        ///< Старт
+            extern uint8 *TBASE;        ///< Развёртка
+            extern uint8 *PRED_LO;      ///< Предзапуск
             extern uint8 *PRED_HI;
-            extern uint8 *POST_LO;   ///< Послезапуск
+            extern uint8 *POST_LO;      ///< Послезапуск
             extern uint8 *POST_HI;
+
+            extern uint8 *UPR;          ///< Управление
+#define BIT_UPR_RAND            0       ///< Вкл. рандомизатор
+#define BIT_UPR_PEAK            1       ///< Пиковый детектор
+#define BIT_UPR_CALIBR_AC_DC    2       ///< Калибратор AC/DC
+#define BIT_UPR_CALIBR_ZERO     3       ///< Калибратор 0/4В
+
+            extern uint8 *FREQMETER;    ///< Управление частотомером
+            extern uint8 *TRIG;         ///< Управление синхронизацией/запуском
+#define BIT_TRIG_POLARITY       0       ///< Управление полярностью синхронизации
+#define BIT_TRIG_ENABLED        1       ///< Бит включения сихронизации. 0 - вкл, 1 - выкл
+
         }
     }
 }
-
-
-#define WR_UPR                  (ADDR_ALTERA + 6)           ///< Управление
-#define BIT_UPR_RAND            0                           ///< Вкл. рандомизатор
-#define BIT_UPR_PEAK            1                           ///< Пиковый детектор
-#define BIT_UPR_CALIBR_AC_DC    2                           ///< Калибратор AC/DC
-#define BIT_UPR_CALIBR_ZERO     3                           ///< Калибратор 0/4В
-
-#define WR_FREQMETER            (ADDR_ALTERA + 8)           ///< Управление частотомером
-#define WR_TRIG                 (ADDR_ALTERA + 9)           ///< Управление синхронизацией/запуском
-#define BIT_TRIG_POLARITY       0                           ///< Управление полярностью синхронизации
-#define BIT_TRIG_ENABLED        1                           ///< Бит включения сихронизации. 0 - вкл, 1 - выкл
 
 #define WR_START_ADDR           (ADDR_ALTERA + 11)          ///< \brief Старт адреса. Нужно записываеть по этому адресу, чтобы начать чтение с 
                                                             ///  произвольного адреса (который мы записываем в предзапуск)
