@@ -46,7 +46,6 @@ extern const int *Kr; //-V707
 bool          FPGA::isRunning = false;
 uint          FPGA::timeStart = 0;
 StateWorkFPGA FPGA::fpgaStateWork = StateWorkFPGA_Stop;
-FPGA::State   FPGA::state = {StateWorkFPGA_Stop, StateCalibration_None};
 
 /// True, если дан запуск
 bool givingStart = false;

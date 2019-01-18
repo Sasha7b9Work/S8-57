@@ -50,12 +50,6 @@ namespace FPGA
     extern uint16 post;
     extern uint16 pred;
 
-    extern struct State
-    {
-        StateWorkFPGA stateWorkBeforeCalibration;
-        StateCalibration stateCalibration;          ///< Текущее состояние калибровки. Используется в процессе калибровки.
-    } state;
-
     class FreqMeter
     {
     public:
