@@ -47,7 +47,10 @@ void Osci::Init()
     FPGA::Settings::LoadCalibratorMode();
     Settings::LoadHoldfOff();
 
-    FPGA::OnPressStart();
+    if (!FPGA::IsRunning())
+    {
+        FPGA::OnPressStart();
+    }
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
