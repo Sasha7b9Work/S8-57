@@ -1,9 +1,6 @@
 #pragma once
 
 
-#define ADDR_ALTERA             ((uint8*)NOR_MEMORY_ADRESS1)
-
-
 namespace FPGA
 {
     namespace VALUE
