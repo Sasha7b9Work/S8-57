@@ -213,8 +213,8 @@ typedef enum
   *          This parameter can be any combination of GPIO_PIN_x where x can be (0..15)
   * @retval None
   */
-#define __HAL_GPIO_EXTI_CLEAR_IT(__EXTI_LINE__) (EXTI->PR = (__EXTI_LINE__))
 
+#define __HAL_GPIO_EXTI_CLEAR_IT(__EXTI_LINE__) (EXTI->PR = (__EXTI_LINE__))
 /**
   * @brief  Generates a Software interrupt on selected EXTI line.
   * @param  __EXTI_LINE__ specifies the EXTI line to check.

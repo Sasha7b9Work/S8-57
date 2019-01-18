@@ -7,6 +7,7 @@
 #include <cstring>
 #include <stdio.h>
 #endif
+#include <stdio.h>
 
 
 using namespace Display::Primitives;

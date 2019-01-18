@@ -8,6 +8,7 @@ enum IRQn_Type
 {
     NonMaskableInt_IRQn = -14,
     SysTick_IRQn        = -1,
+    EXTI1_IRQn          = 7,
     DMA1_Stream5_IRQn   = 16,
     ADC_IRQn            = 18, 
     EXTI9_5_IRQn        = 23,

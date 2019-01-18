@@ -87,6 +87,7 @@
 #include "libs/USBH/usbh_diskio.h"
 #include <usbd_def.h>
 #include <usbd_cdc.h>
+#include <usbd_core.h>
 
 #pragma warning(push)
 #pragma warning(disable:4365 4710 4996)
@@ -99,6 +100,7 @@
 #include <cstdarg>
 #include <cctype>
 #include <cstdlib>
+#include <stdio.h>
 
 #pragma warning(pop)
 
