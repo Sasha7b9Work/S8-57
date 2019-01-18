@@ -37,7 +37,7 @@ uint16 FPGA::valueADC = 0;
 uint16 FPGA::post = (uint16)~(512);
 uint16 FPGA::pred = (uint16)~(512);
 
-uint8 dataRand[Chan::Number][FPGA::MAX_NUM_POINTS];    ///< «десь будут данные рандомизатора
+uint8 dataRand[Chan::Size][FPGA::MAX_NUM_POINTS];    ///< «десь будут данные рандомизатора
 /// «десь хранитс€ адрес, начина€ с которого будем читать данные по каналам. ≈сли addrRead == 0xffff, то адрес вначале нужно считать
 static uint16 addrRead = 0xffff;
 

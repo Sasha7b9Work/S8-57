@@ -119,9 +119,9 @@ static const MeasureCalculate sMeas[Measure::Type::Number] =
 };
 
 
-int Measure::Processing::markerTime[Chan::Number][2] = {{ERROR_VALUE_INT}, {ERROR_VALUE_INT}};
+int Measure::Processing::markerTime[Chan::Size][2] = {{ERROR_VALUE_INT}, {ERROR_VALUE_INT}};
 
-int Measure::Processing::markerVoltage[Chan::Number][2] = {{ERROR_VALUE_INT}, {ERROR_VALUE_INT}};
+int Measure::Processing::markerVoltage[Chan::Size][2] = {{ERROR_VALUE_INT}, {ERROR_VALUE_INT}};
 
 typedef struct
 {

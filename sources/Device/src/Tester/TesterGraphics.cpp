@@ -20,7 +20,7 @@ using namespace Osci::Settings;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-typedef uint8 array[Chan::Number][Tester::NUM_STEPS][TESTER_NUM_POINTS];
+typedef uint8 array[Chan::Size][Tester::NUM_STEPS][TESTER_NUM_POINTS];
 
 static bool ready[Tester::NUM_STEPS] = {false, false, false, false, false};
 

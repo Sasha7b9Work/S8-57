@@ -72,7 +72,7 @@ Display::ENumSignalsInSec::E Tables::ENumSignalsInSecToENUM(int numSignalsInSec)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 const char *Tables_RangeNameFromValue(Osci::Settings::Range::E range)
 {
-    static const struct StructName { pString name; } names[Osci::Settings::Range::Number] =
+    static const struct StructName { pString name; } names[Osci::Settings::Range::Size] =
     {
         "Range_2mV",
         "Range_5mV",

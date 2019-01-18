@@ -43,10 +43,10 @@ const Settings Settings::defaultSettings =
 
     // Меню КАНАЛ 1, КАНАЛ 2
 
-    {RShift::ZERO, RShift::ZERO},                           // chan_shift[Chan::Number];  
-    {Range::_500mV, Range::_500mV},                         // chan_range[Chan::Number];  
-    {ModeCouple::DC, ModeCouple::DC},                       // chan_couple[Chan::Number]; 
-    {true, true},                                           // chan_enabled[Chan::Number];
+    {RShift::ZERO, RShift::ZERO},                           // chan_shift[Chan::Size];  
+    {Range::_500mV, Range::_500mV},                         // chan_range[Chan::Size];  
+    {ModeCouple::DC, ModeCouple::DC},                       // chan_couple[Chan::Size]; 
+    {true, true},                                           // chan_enabled[Chan::Size];
     {0, 0},                                                 // chan_balanceShiftADC[2];   
     {Bandwidth::Full, Bandwidth::Full},                     // chan_bandwidth[2];         
     {false, false},                                         // chan_inverse[2];           
@@ -58,7 +58,7 @@ const Settings Settings::defaultSettings =
     Trig::Source::A,            // trig_source;           
     Trig::Input::Full,          // trig_input;            
     Trig::Polarity::Rising,     // trig_polarity;         
-    {Trig::ZERO, Trig::ZERO},   // trig_lev[Chan::Number];
+    {Trig::ZERO, Trig::ZERO},   // trig_lev[Chan::Size];
     Trig::StartMode::Auto,      // trig_startMode;        
     Trig::ModeFind::Hand,       // trig_modeFind;         
     10,                         // trig_holdOff;          
@@ -82,15 +82,15 @@ const Settings Settings::defaultSettings =
     true,                                                   // curs_showFreq;                
     Cursors::Active::None,                                  // curs_active;                  
     Chan::A,                                                // curs_source;                  
-    {Cursors::Control::Disable, Cursors::Control::Disable}, // curs_cntrlU[Chan::Number];    
-    {Cursors::Control::Disable, Cursors::Control::Disable}, // curs_cntrlT[Chan::Number];    
+    {Cursors::Control::Disable, Cursors::Control::Disable}, // curs_cntrlU[Chan::Size];    
+    {Cursors::Control::Disable, Cursors::Control::Disable}, // curs_cntrlT[Chan::Size];    
     Cursors::Movement::Pixels,                              // curs_movement;                
     {80,  80},                                              // curs_deltaU100percents[2];    
     {120, 120},                                             // curs_deltaT100percents[2];    
-    {                                                       // curs_posCurU[Chan::Number][2];
+    {                                                       // curs_posCurU[Chan::Size][2];
     { 60, 140 },                                            // Канал 1
     { 60, 140 }},                                           // Канал 2
-    {                                                       // curs_posCurT[Chan::Number][2];
+    {                                                       // curs_posCurT[Chan::Size][2];
     { 80, 200 },                                            // Канал 1
     { 80, 200 }},                                           // Канал 2
 
@@ -194,14 +194,14 @@ const Settings Settings::defaultSettings =
     
     // Несбрасываемые настройки калибровки
     
-    {},                             // nrst_balanceADC[Chan::Number];               
+    {},                             // nrst_balanceADC[Chan::Size];               
     BalanceADC::Disable,            // nrst_balanceADCtype;                         
     StretchADC::Disable,            // nrst_stretchADCtype;                         
-    {},                             // nrst_StretchADC[Chan::Number][3];            
-    {},                             // nrst_rShiftAddStable[Chan::Number][3];       
+    {},                             // nrst_StretchADC[Chan::Size][3];            
+    {},                             // nrst_rShiftAddStable[Chan::Size][3];       
     0,                              // nrst_numAveForRand;                          
     0,                              // nrst_numSmoothForRand;                       
-    {},                             // nrst_rShiftAdd[Chan::Number][Range::Size][2];
+    {},                             // nrst_rShiftAdd[Chan::Size][Range::Size][2];
     0,                              // nrst_correctionTime;                         
     
     // Настройки мультиметра

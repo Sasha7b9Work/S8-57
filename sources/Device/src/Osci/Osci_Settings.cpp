@@ -14,6 +14,11 @@
 #endif
 
 
+#ifdef WIN32
+#pragma warning(disable:4310)
+#endif
+
+
 using namespace FPGA::ADDR;
 
 using FPGA::HAL::GPIO::Pin;
@@ -23,6 +28,8 @@ using Osci::Settings::Range;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 static uint8 ValueForRange(Chan::E ch);
+/// Здесь временно сохраняется значение смещения
+static uint16 savedRshift[Chan::Size] = { Osci::Settings::RShift::ZERO, Osci::Settings::RShift::ZERO, Osci::Settings::RShift::ZERO};
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -129,11 +136,6 @@ int Osci::Settings::TPos::InBytes()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-#ifdef WIN32
-#pragma warning(push)
-#pragma warning(disable:4310)
-#endif
-
 void Osci::Settings::TBase::Load()
 {
     static const uint8 values[TBase::Size] =
@@ -177,10 +179,6 @@ void Osci::Settings::TBase::Load()
     TShift::Load();
 }
 
-#ifdef WIN32
-#pragma warning(pop)
-#endif
-
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Osci::Settings::Range::LoadBoth()
 {
@@ -192,7 +190,7 @@ void Osci::Settings::Range::LoadBoth()
 
     WriteRegisters(Pin::SPI3_CS2, 0);    // Записываем ноль, чтобы реле не потребляли энергии
 
-    DEF_STRUCT(StructRange, uint8) vals[Range::Number] =
+    DEF_STRUCT(StructRange, uint8) vals[Range::Size] =
     {
         StructRange(BIN_U8(00000000)),  // 2mV      // -V2501
         StructRange(BIN_U8(00000001)),  // 5mV      // -V2501
@@ -220,11 +218,6 @@ void Osci::Settings::Range::LoadBoth()
     WritePin(Pin::A4, _GET_BIT(valueB, 0));
 }
 
-#ifdef _WIN32
-#pragma warning(push)
-#pragma warning(disable:4310)
-#endif
-
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static uint8 ValueForRange(Chan::E ch) // -V2506
 {
@@ -235,7 +228,7 @@ static uint8 ValueForRange(Chan::E ch) // -V2506
         BIN_U8(00000010)   // -V2501  // GND
     };
 
-    DEF_STRUCT(StructRange, uint16) values[Range::Number][2] =
+    DEF_STRUCT(StructRange, uint16) values[Range::Size][2] =
     {   //             A                    B
         { BIN_U8(00100100), BIN_U8(00100100) }, // -V2501  // 2mV
         { BIN_U8(00100100), BIN_U8(00100100) }, // -V2501  // 5mV
@@ -263,6 +256,20 @@ static uint8 ValueForRange(Chan::E ch) // -V2506
     return (uint8)(values[range][ch].val | datas[couple]);
 }
 
-#ifdef WIN32
-#pragma warning(pop)
-#endif
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+uint16 &Osci::Settings::RShift::Value(Chan::E ch)
+{
+    return set.chan_shift[ch];
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Osci::Settings::RShift::Save(Chan::E ch)
+{
+    savedRshift[ch] = SET_RSHIFT(ch);
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Osci::Settings::RShift::Restore(Chan::E ch)
+{
+    SET_RSHIFT(ch) = savedRshift[ch];
+}

@@ -129,7 +129,7 @@ void Range::Change(Chan::E ch, int delta)
 {
     if (delta > 0)
     {
-        ::Math::LimitationIncrease<uint8>((uint8 *)(&SET_RANGE(ch)), (uint8)(Range::Number - 1)); // -V206
+        ::Math::LimitationIncrease<uint8>((uint8 *)(&SET_RANGE(ch)), (uint8)(Range::Size - 1)); // -V206
     }
     else
     {
@@ -243,7 +243,7 @@ String TShift::ToString(TBase::E tBase) const
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void RShift::Draw()
+void RShift::DrawBoth()
 {
     Draw(Chan::A);
     Draw(Chan::B);
@@ -370,7 +370,7 @@ pString Range::Name() const
             names[Language::EN] = nEN;
         }
     }
-    names[Range::Number] =
+    names[Range::Size] =
     {
         StructRange("2ìÂ",  "2mV"),
         StructRange("5ìÂ",  "5mV"),

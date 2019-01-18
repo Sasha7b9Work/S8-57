@@ -15,7 +15,7 @@ static const struct RangeStruct
     pString nameEN;
     RangeStruct(pString nRU, pString nEN) : nameRU(nRU), nameEN(nEN) {};
 }
-ranges[Range::Number][2] =
+ranges[Range::Size][2] =
 {
     {RangeStruct("2\x10м¬",  "20\x10м¬"), RangeStruct("2\x10мV",  "20\x10мV")},
     {RangeStruct("5\x10м¬",  "50\x10м¬"), RangeStruct("5\x10mV",  "50\x10mV")},
@@ -62,7 +62,7 @@ int Chan::RequestBytes(DataSettings *) const
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 pString Chan::Name() const
 {
-    static pString names[Chan::Number][2] =
+    static pString names[Chan::Size][2] =
     {
         " анал 1", "Channel 1",
         " анал 2", "Channel 2"

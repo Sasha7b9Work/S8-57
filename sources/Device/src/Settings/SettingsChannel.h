@@ -31,9 +31,8 @@ struct Chan
     {
         A,
         B,
-        Ext,
         Math,
-        Number
+        Size
     } value;
     explicit Chan(E v) : value(v) { };
     bool IsA() { return value == A; };
@@ -68,10 +67,6 @@ struct CalibrationMode
 #define SET_RECORD_RANGE(ch)    (set.rec_range[ch])
 #define SET_RECORD_RANGE_A      (SET_RECORD_RANGE(Chan::A))
 #define SET_RECORD_RANGE_B      (SET_RECORD_RANGE(Chan::B))
-
-#define SET_RSHIFT(ch)          (set.chan_shift[ch])
-#define SET_RSHIFT_A            (SET_RSHIFT(Chan::A))
-#define SET_RSHIFT_B            (SET_RSHIFT(Chan::B))
 
 #define SET_COUPLE(ch)          (set.chan_couple[ch])
 #define SET_COUPLE_A            (SET_COUPLE(Chan::A))

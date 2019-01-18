@@ -34,7 +34,7 @@ void Osci::Display::Update()
     
     BottomPart::Draw();
     
-    RShift::Draw();
+    RShift::DrawBoth();
     
     DrawCursorTrigLevel();
     
@@ -52,7 +52,7 @@ void Osci::Display::Update()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Osci::Display::DrawCursorTrigLevel()
 {
-    Trig::Source::E ch = TRIG_SOURCE;
+    Chan::E ch = (Chan::E)TRIG_SOURCE;
 
     int trigLev = SET_TRIGLEV_SOURCE - (TRIG_SOURCE_IS_EXT ? 0 : -(SET_RSHIFT(ch) - RShift::ZERO));
     float scale = 1.0F / ((Trig::MAX - Trig::MIN) / 2.4F / Grid::Height());

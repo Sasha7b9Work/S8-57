@@ -69,7 +69,7 @@ const float absStepTShift[TBase::Size] =
 
 /// Столько вольт содержится в одной точке сигнала по вертикали
 
-DEF_STRUCT(StructInPoints, float) voltsInPoint[Range::Number] =
+DEF_STRUCT(StructInPoints, float) voltsInPoint[Range::Size] =
 {
     2e-3F   / 20 * Grid::Height() / (VALUE::MAX - VALUE::MIN),    // 2mV
     5e-3F   / 20 * Grid::Height() / (VALUE::MAX - VALUE::MIN),    // 5mV
@@ -506,7 +506,7 @@ static void Normalize(float *data, int)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static float MaxVoltageOnScreen(Range::E range)
 {
-    DEF_STRUCT(StructRange, float) table[Range::Number] =
+    DEF_STRUCT(StructRange, float) table[Range::Size] =
     {
         2e-3F, 5e-3F, 10e-3F, 20e-3F, 50e-3F, 100e-3F, 200e-3F, 500e-3F, 1.0F, 2.0F, 5.0F, 10.0F, 20.0F
     };

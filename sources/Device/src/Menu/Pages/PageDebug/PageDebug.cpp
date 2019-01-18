@@ -505,7 +505,7 @@ static void DebugShowSetInfo_Draw()
     {
         for (int ch = 0; ch < 2; ch++)
         {
-            for (int range = 0; range < Osci::Settings::Range::Number; ++range)
+            for (int range = 0; range < Osci::Settings::Range::Size; ++range)
             {
                 String("%d", NRST_RSHIFT_ADD(ch, range, type)).Draw(x + range * 20, y + dY * ddY);
             }

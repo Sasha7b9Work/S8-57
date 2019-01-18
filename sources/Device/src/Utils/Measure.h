@@ -221,9 +221,9 @@ private:
         /// Расчитать все автоматические измерения
         static void CalculateMeasures();
 
-        static int markerTime[Chan::Number][2];
+        static int markerTime[Chan::Size][2];
 
-        static int markerVoltage[Chan::Number][2];
+        static int markerVoltage[Chan::Size][2];
 
     private:
         /// Приведение сигнала к установленным в приборе настройкам

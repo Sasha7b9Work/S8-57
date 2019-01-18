@@ -64,7 +64,7 @@ private:
     /// Установленное в true значение означает, что вклюён режим тестера
     static bool enabled;
 
-    static uint8 data[Chan::Number][NUM_STEPS][TESTER_NUM_POINTS];
+    static uint8 data[Chan::Size][NUM_STEPS][TESTER_NUM_POINTS];
 
 public:
     /// Чем будем управлять в тестер-компоненте - напряжением или током

@@ -32,9 +32,9 @@ using namespace Osci::Settings;
 #endif
 static uint8 buffer[4][16 * 1024] __attribute__((section("CCM_DATA")));
 
-uint8 *dataIN[Chan::Number] = {buffer[0], buffer[1]};
+uint8 *dataIN[Chan::Size] = {buffer[0], buffer[1]};
 
-uint8 *dataOUT[Chan::Number] = {buffer[2], buffer[3]};
+uint8 *dataOUT[Chan::Size] = {buffer[2], buffer[3]};
 
 void *extraMEM = 0;
 

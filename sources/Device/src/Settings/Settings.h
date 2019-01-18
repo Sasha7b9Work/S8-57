@@ -81,10 +81,10 @@ public:
 
     // Меню КАНАЛ 1, КАНАЛ 2
 
-    uint16                         chan_shift[Chan::Number];    ///< Сдвиг канала по вертикали
-    Osci::Settings::Range::E       chan_range[Chan::Number];    ///< Масштаб канала по вертикали
-    FPGA::Settings::ModeCouple::E  chan_couple[Chan::Number];   ///< Связь по входу
-    bool                           chan_enabled[Chan::Number];  ///< Включен/выключен канал
+    uint16                         chan_shift[Chan::Size];    ///< Сдвиг канала по вертикали
+    Osci::Settings::Range::E       chan_range[Chan::Size];    ///< Масштаб канала по вертикали
+    FPGA::Settings::ModeCouple::E  chan_couple[Chan::Size];   ///< Связь по входу
+    bool                           chan_enabled[Chan::Size];  ///< Включен/выключен канал
     int8                           chan_balanceShiftADC[2];     ///< Добавочное смещение для балансировки АЦП.
     FPGA::Settings::Bandwidth::E   chan_bandwidth[2];           ///< Ограничение полосы.
     bool                           chan_inverse[2];
@@ -96,7 +96,7 @@ public:
     Osci::Settings::Trig::Source::E    trig_source;
     Osci::Settings::Trig::Input::E     trig_input;
     Osci::Settings::Trig::Polarity::E  trig_polarity;
-    uint16                             trig_lev[Chan::Number];
+    uint16                             trig_lev[Chan::Size];
     Osci::Settings::Trig::StartMode::E trig_startMode;           ///< Режим запуска.
     Osci::Settings::Trig::ModeFind::E  trig_modeFind;            ///< Поиск синхронизации - вручную или автоматически.
     int                                trig_holdOff;             ///< Удержание синхронизации
@@ -120,13 +120,13 @@ public:
     bool                    curs_showFreq;                      ///< Установленное в true значение, что нужно показывать на экране 1/dT между курсорами.
     Cursors::Active::E      curs_active;                        ///< Какие курсоры сейас активны.
     Chan::E                 curs_source;                        ///< Источник - к какому каналу относятся курсоры.
-    Cursors::Control::E     curs_cntrlU[Chan::Number];          ///< Активные курсоры напряжения.
-    Cursors::Control::E     curs_cntrlT[Chan::Number];          ///< Активные курсоры времени.
+    Cursors::Control::E     curs_cntrlU[Chan::Size];            ///< Активные курсоры напряжения.
+    Cursors::Control::E     curs_cntrlT[Chan::Size];            ///< Активные курсоры времени.
     Cursors::Movement::E    curs_movement;                      ///< Как перемещаться курсорам - по точкам или процентам.
     float                   curs_deltaU100percents[2];          ///< Расстояние между курсорами напряжения для 100%, для обоих каналов.
     float                   curs_deltaT100percents[2];          ///< Расстояние между курсорами времени для 100%, для обоих каналов.
-    float                   curs_posCurU[Chan::Number][2];      ///< Текущие позиции курсоров напряжения обоих каналов.
-    float                   curs_posCurT[Chan::Number][2];      ///< Текущие позиции курсоров времени обоих каналов.
+    float                   curs_posCurU[Chan::Size][2];        ///< Текущие позиции курсоров напряжения обоих каналов.
+    float                   curs_posCurT[Chan::Size][2];        ///< Текущие позиции курсоров времени обоих каналов.
 
     // Меню ПАМЯТЬ
 
@@ -236,17 +236,17 @@ public:
 
     // Несбрасываемые настройки калибровки
 
-    int16               nrst_balanceADC[Chan::Number];                                   ///< Значение дополнительного смещения АЦП для ручной балансировки.
-    BalanceADC::E       nrst_balanceADCtype;                                             ///< Тип балансировки.
-    StretchADC::E       nrst_stretchADCtype;                                             ///< Тип растяжки канала.
-    int16               nrst_StretchADC[Chan::Number][3];                                ///< \brief Поправочный коэффициент для ручного, калибровочного и
+    int16               nrst_balanceADC[Chan::Size];                                ///< Значение дополнительного смещения АЦП для ручной балансировки.
+    BalanceADC::E       nrst_balanceADCtype;                                        ///< Тип балансировки.
+    StretchADC::E       nrst_stretchADCtype;                                        ///< Тип растяжки канала.
+    int16               nrst_StretchADC[Chan::Size][3];                             ///< \brief Поправочный коэффициент для ручного, калибровочного и
                         ///< отключенного режимов. Здесь хранится в целом виде, чтобы получить реальный коэффициент, нужно разделить на 1000 и
                         ///< прибавить единицу.
-    int16               nrst_rShiftAddStable[Chan::Number][3];                           ///< Добавочное смещение для трёх самых чувствительных диапазонов. Задаётся единожды при настройке
-    int16               nrst_numAveForRand;                                              ///< По скольким измерениям усреднять сигнал в режиме рандомизатора.
-    int16               nrst_numSmoothForRand;                                           ///< Число точек для скользящего фильта в рандомизаторе.
-    int16               nrst_rShiftAdd[Chan::Number][Osci::Settings::Range::Number][2];  ///< Добавочное смещение, которое пишется сюда при калибровке и балансировке
-    int16               nrst_correctionTime;                                             ///< Коэффициент коррекции времени.
+    int16               nrst_rShiftAddStable[Chan::Size][3];                        ///< Добавочное смещение для трёх самых чувствительных диапазонов. Задаётся единожды при настройке
+    int16               nrst_numAveForRand;                                         ///< По скольким измерениям усреднять сигнал в режиме рандомизатора.
+    int16               nrst_numSmoothForRand;                                      ///< Число точек для скользящего фильта в рандомизаторе.
+    int16               nrst_rShiftAdd[Chan::Size][Osci::Settings::Range::Size][2]; ///< Добавочное смещение, которое пишется сюда при калибровке и балансировке
+    int16               nrst_correctionTime;                                        ///< Коэффициент коррекции времени.
 
     // Настройки мультиметра
     Multimeter::AVP::E              multi_avp;
