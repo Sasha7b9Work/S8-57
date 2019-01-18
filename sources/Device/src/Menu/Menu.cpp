@@ -1,10 +1,12 @@
+#include "stdafx.h"
+#ifndef WIN32
 #include "defines.h"
-#include "Menu.h"
-#include "BufferButtons.h"
+#include "Menu/Menu.h"
+#include "Menu/BufferButtons.h"
 #include "Hardware/Timer.h"
-#include "MenuTriggers.h"
-#include "HandlersKeys.h"
-#include "Device.h"
+#include "Menu/MenuTriggers.h"
+#include "Keyboard/HandlersKeys.h"
+#include "device.h"
 #include "FlashDrive/FlashDrive.h"
 #include "Settings/SettingsMemory.h"
 #include "Settings/Settings.h"
@@ -22,6 +24,7 @@
 #include "Display/Grid.h"
 #include "Display/Painter.h"
 #include <cstdio>
+#endif
 
 
 using namespace Display::Primitives;

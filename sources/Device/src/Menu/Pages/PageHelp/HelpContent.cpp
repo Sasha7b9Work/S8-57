@@ -18,7 +18,7 @@ using namespace Display::Primitives;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 static int currentParagraph = 0;   // ≈сли TypePage(currentPage) == TypePage_Content, то указывает не текущий раздел оглавлени€
-static const PageHelp *currentPage = &helpMain;
+static const PageHelpContent *currentPage = &helpMain;
 
 
 static const int WIDTH = 295;
@@ -102,7 +102,7 @@ void HelpContent_Draw()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static int NumParagraphs(const PageHelp *page)
+static int NumParagraphs(const PageHelpContent *page)
 {
     int retValue = 0;
     while(page->pages[retValue])
@@ -135,7 +135,7 @@ void HelpContent_EnterParagraph()
 {
     if(currentPage->type == TypePage_Content)
     {
-        currentPage = (const PageHelp *)currentPage->pages[currentParagraph];
+        currentPage = (const PageHelpContent *)currentPage->pages[currentParagraph];
     }
     currentParagraph = 0;
 }
@@ -146,7 +146,7 @@ void HelpContent_LeaveParagraph()
     currentParagraph = 0;
     if(currentPage->parent)
     {
-        currentPage = (const PageHelp *)currentPage->parent;
+        currentPage = (const PageHelpContent *)currentPage->parent;
     }
 }
 

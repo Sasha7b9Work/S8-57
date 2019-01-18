@@ -63,17 +63,15 @@
     </ClCompile>
     <ClCompile Include="..\..\Device\src\Hardware\VCP.cpp" />
     <ClCompile Include="..\..\Device\src\Keyboard\DecoderDevice.cpp" />
+    <ClCompile Include="..\..\Device\src\Keyboard\HandlersKeys.cpp" />
     <ClCompile Include="..\..\Device\src\Keyboard\Keyboard.cpp" />
     <ClCompile Include="..\..\Device\src\log.cpp" />
     <ClCompile Include="..\..\Device\src\main.cpp" />
     <ClCompile Include="..\..\Device\src\Menu\BufferButtons.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="..\..\Device\src\Menu\HandlersKeys.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
-    </ClCompile>
     <ClCompile Include="..\..\Device\src\Menu\Menu.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="..\..\Device\src\Menu\MenuItems.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
@@ -235,11 +233,11 @@
     <ClInclude Include="..\..\Device\src\Hardware\Timer.h" />
     <ClInclude Include="..\..\Device\src\Hardware\VCP.h" />
     <ClInclude Include="..\..\Device\src\Keyboard\DecoderDevice.h" />
+    <ClInclude Include="..\..\Device\src\Keyboard\HandlersKeys.h" />
     <ClInclude Include="..\..\Device\src\Keyboard\Keyboard.h" />
     <ClInclude Include="..\..\Device\src\log.h" />
     <ClInclude Include="..\..\Device\src\main.h" />
     <ClInclude Include="..\..\Device\src\Menu\BufferButtons.h" />
-    <ClInclude Include="..\..\Device\src\Menu\HandlersKeys.h" />
     <ClInclude Include="..\..\Device\src\Menu\Menu.h" />
     <ClInclude Include="..\..\Device\src\Menu\MenuItems.h" />
     <ClInclude Include="..\..\Device\src\Menu\MenuItemsAdd.h" />

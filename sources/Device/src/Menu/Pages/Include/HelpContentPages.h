@@ -12,7 +12,7 @@ typedef enum
 #define MAX_PAGES 3
 
 
-typedef struct  
+struct PageHelpContent
 {
     TypePageHelp       type;
     uint8              notUsed[3];
@@ -22,11 +22,11 @@ typedef struct
     const char * const titleHint[4];        ///< \brief Название страницы на русском и английском языке, а затем содержимое на русском и английском 
                                             /// (для случая TypePage_Description)
     void              *pages[MAX_PAGES];    ///< Массив содержит адреса ссылаемых страниц в случае TypePage_Content
-} PageHelp;
+};
 
-extern const PageHelp helpMenu;
+extern const PageHelpContent helpMenu;
 
-static const PageHelp helpMenuCommon =
+static const PageHelpContent helpMenuCommon =
 {
     TypePage_Description, {},
     (void *)&helpMenu, 0,
@@ -54,7 +54,7 @@ static const PageHelp helpMenuCommon =
     {}
 };
 
-static const PageHelp helpMenuControls =
+static const PageHelpContent helpMenuControls =
 {
     TypePage_Description, {},
     (void *)&helpMenu, 0,
@@ -67,9 +67,9 @@ static const PageHelp helpMenuControls =
     {}
 };
 
-extern const PageHelp helpMain;
+extern const PageHelpContent helpMain;
 
-static const PageHelp helpSCPI =
+static const PageHelpContent helpSCPI =
 {
     TypePage_Description, {},
     (void *)&helpMain, 0,
@@ -82,7 +82,7 @@ static const PageHelp helpSCPI =
     {}
 };
 
-const PageHelp helpMenu =
+const PageHelpContent helpMenu =
 {
     TypePage_Content, {},
     (void *)&helpMain, 0,
@@ -96,7 +96,7 @@ const PageHelp helpMenu =
     }
 };
 
-const PageHelp helpMain =
+const PageHelpContent helpMain =
 {
     TypePage_Content, {},
     0, 0,

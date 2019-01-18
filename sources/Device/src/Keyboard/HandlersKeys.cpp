@@ -1,12 +1,13 @@
+#include "stdafx.h"
+#ifndef WIN32
 #include "defines.h"
 #include "device.h"
-#include "log.h"
-#include "Display/Grid.h"
 #include "Display/Display_Primitives.h"
+#include "Display/Grid.h"
 #include "Display/Painter.h"
 #include "FPGA/FPGA.h"
 #include "Hardware/Timer.h"
-#include "Menu/HandlersKeys.h"
+#include "Keyboard/HandlersKeys.h"
 #include "Menu/Pages/Include/PageChannels.h"
 #include "Menu/Pages/Include/PageFunction.h"
 #include "Menu/Pages/Include/PageMeasures.h"
@@ -16,6 +17,7 @@
 #include "Menu/Pages/Include/PageTrig.h"
 #include "Menu/Pages/Include/PageDisplay.h"
 #include "Settings/Settings.h"
+#endif
 
 
 using namespace Display::Primitives;

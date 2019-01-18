@@ -222,9 +222,6 @@
     <ClCompile Include="..\..\Device\src\Menu\BufferButtons.cpp">
       <Filter>Menu</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Device\src\Menu\HandlersKeys.cpp">
-      <Filter>Menu</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Device\src\Menu\Menu.cpp">
       <Filter>Menu</Filter>
     </ClCompile>
@@ -474,6 +471,9 @@
     <ClCompile Include="..\..\Device\src\FPGA\FPGA_Types.cpp">
       <Filter>FPGA</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Device\src\Keyboard\HandlersKeys.cpp">
+      <Filter>Keyboard</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Device\src\defines.h">
@@ -594,9 +594,6 @@
       <Filter>Keyboard</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Device\src\Menu\BufferButtons.h">
-      <Filter>Menu</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Device\src\Menu\HandlersKeys.h">
       <Filter>Menu</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Device\src\Menu\Menu.h">
@@ -841,6 +838,9 @@
     </ClInclude>
     <ClInclude Include="..\..\Device\src\Data\Heap.h">
       <Filter>Data</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Device\src\Keyboard\HandlersKeys.h">
+      <Filter>Keyboard</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

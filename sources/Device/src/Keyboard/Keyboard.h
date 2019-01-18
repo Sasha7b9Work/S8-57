@@ -94,14 +94,7 @@ struct KeyEvent
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-class Keyboard
+namespace Keyboard
 {
-public:
-    /// Отлючить панель управления
-    /// Когда панель отключена, то происходит лишь обновление состояния переменной releasedButton
-    static void Disable();
-    /// Ожидание нажатия клавиши
-    static Key::E WaitPressingButton();
-
-    static void Enable();
+    void ProcessEvent(const KeyEvent event);
 };

@@ -1476,6 +1476,16 @@
               <FilePath>.\src\Keyboard\DecoderDevice.h</FilePath>
             </File>
             <File>
+              <FileName>HandlersKeys.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Keyboard\HandlersKeys.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>HandlersKeys.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Keyboard\HandlersKeys.h</FilePath>
+            </File>
+            <File>
               <FileName>Keyboard.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Keyboard\Keyboard.cpp</FilePath>
@@ -1499,16 +1509,6 @@
               <FileName>BufferButtons.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Menu\BufferButtons.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>HandlersKeys.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Menu\HandlersKeys.h</FilePath>
-            </File>
-            <File>
-              <FileName>HandlersKeys.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Menu\HandlersKeys.cpp</FilePath>
             </File>
             <File>
               <FileName>Menu.h</FileName>
