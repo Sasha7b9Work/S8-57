@@ -1,11 +1,18 @@
 #pragma once
 
 
+namespace FPGA
+{
+    namespace ADDR
+    {
+        extern uint8 *WR_START; ///< Старт
+    }
+}
+
+
 #define ADDR_ALTERA             ((uint8*)NOR_MEMORY_ADRESS1)
 
 
-// Адреса альтеры
-#define WR_START                (ADDR_ALTERA + 0)           ///< Старт
 #define WR_TBASE                (ADDR_ALTERA + 1)           ///< Развёртка
 #define WR_PRED_LO              (ADDR_ALTERA + 2)           ///< Предзапуск
 #define WR_PRED_HI              (ADDR_ALTERA + 3)

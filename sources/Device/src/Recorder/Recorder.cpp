@@ -72,7 +72,7 @@ void Recorder::Start()
 
     FSMC::WriteToFPGA16(WR_PRED_LO, 0); //-V525
     FSMC::WriteToFPGA16(WR_POST_LO, 0);
-    FSMC::WriteToFPGA8(WR_START, 0xff);
+    FSMC::WriteToFPGA8(FPGA::ADDR::WR_START, 0xff);
 
     FPGA::HAL::Interrupt::P2P::Enable();
 

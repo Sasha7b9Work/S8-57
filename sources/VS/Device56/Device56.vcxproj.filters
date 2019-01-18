@@ -471,6 +471,9 @@
     <ClCompile Include="..\..\Device\src\Data\Heap.cpp">
       <Filter>Data</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Device\src\FPGA\FPGA_Types.cpp">
+      <Filter>FPGA</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Device\src\defines.h">
