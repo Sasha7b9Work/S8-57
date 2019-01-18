@@ -43,13 +43,7 @@ namespace Display
 
     void ChangedRShiftMarkers(bool active);
 
-    extern Key::E key;
-
     void SetOrientation(Orientation orientation);
-    /// Устанавливает ограничение частоты кадров
-    static void SetNumSignalsInS(int maxFPS);
-    /// Возвращает число точек сглаживающего фильтра (режим ДИСПЛЕЙ - Сглаживание)
-    //static int NumPointSmoothing();
     /// Возвращает адрес первой и последней точки на экране в координатах экрана
     BitSet64 PointsOnDisplay();
     /// \brief Возращает адрес первой и последней точки в координатах экрана

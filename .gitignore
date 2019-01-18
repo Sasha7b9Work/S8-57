@@ -1,6 +1,7 @@
 *.out
 *.bak
 *~*
+*.uvgui*.*
 
 JLinkLog.txt
 JLinkSettings.ini
