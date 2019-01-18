@@ -39,6 +39,7 @@ void Osci::Init()
 {
     Stop();
 
+    FPGA::HAL::LoadRegUPR();
     Settings::Range::LoadBoth();
     Settings::RShift::Load(Chan::A);
     Settings::RShift::Load(Chan::B);

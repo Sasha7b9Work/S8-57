@@ -8,6 +8,8 @@
 #include "Settings/Settings.h"
 #include "Settings/SettingsTime.h"
 #include "Utils/Math.h"
+
+#include "device.h"
 #endif
 
 
@@ -56,7 +58,7 @@ void FPGA::HAL::LoadRegUPR()
 {
     uint8 data = 0;
 
-    if (SET_PEAKDET_EN)
+    if (SET_PEAKDET_EN || Device::State::InModeRecorder())
     {
         data |= 1 << BIT_UPR_PEAK;
     }
