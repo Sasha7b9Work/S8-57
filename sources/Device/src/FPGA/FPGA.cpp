@@ -46,7 +46,7 @@ extern const int *Kr; //-V707
 bool          FPGA::isRunning = false;
 uint          FPGA::timeStart = 0;
 StateWorkFPGA FPGA::fpgaStateWork = StateWorkFPGA_Stop;
-FPGA::State   FPGA::state = {false, StateWorkFPGA_Stop, StateCalibration_None};
+FPGA::State   FPGA::state = {StateWorkFPGA_Stop, StateCalibration_None};
 
 /// True, если дан запуск
 bool givingStart = false;
@@ -240,12 +240,6 @@ void FPGA::Reset()
 uint FPGA::NumPoints()
 {
     return (uint)(1 << (FPGA_ENUM_POINTS + 9));
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void FPGA::DoCalibration()
-{
-    state.needCalibration = true;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

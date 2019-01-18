@@ -30,8 +30,6 @@ namespace FPGA
     void Reset();
 
     void SetValueADC(uint16 value);
-    /// Сделать калибровку
-    void DoCalibration();
 
     void ReadData();
 
@@ -54,7 +52,6 @@ namespace FPGA
 
     extern struct State
     {
-        bool needCalibration;                       ///< Установленное в true значение означает, что необходимо произвести калибровку.
         StateWorkFPGA stateWorkBeforeCalibration;
         StateCalibration stateCalibration;          ///< Текущее состояние калибровки. Используется в процессе калибровки.
     } state;

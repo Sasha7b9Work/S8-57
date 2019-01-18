@@ -96,7 +96,6 @@ static bool IsActive_Calibrator_Calibrate()
 
 static void OnPress_Calibrator_Calibrate()
 {
-    FPGA::DoCalibration();
 }
 
 DEF_BUTTON( bCalibrator_Calibrate,                                                                                                                //--- СЕРВИС - КАЛИБРАТОР - Калибровать ---
