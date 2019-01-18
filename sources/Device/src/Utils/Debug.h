@@ -20,7 +20,7 @@ public:
     static uint GetTimeCounterUS();
 
     static int line;
-    static char *file;
+    static const char *file;
     static uint size;
 
 private:

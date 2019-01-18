@@ -12,6 +12,7 @@
 #include <cstring>
 
 #include "Osci/Osci_Display.h"
+#include "Utils/Debug.h"
 #endif
 
 
@@ -327,7 +328,7 @@ void Display::FuncOnWaitStart(const char *text, bool eraseBackground)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Display::RemoveAddDrawFunction()
 {
-    funcAdditionDraw = 0;
+    funcAdditionDraw = EmptyFuncVV;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

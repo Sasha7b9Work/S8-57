@@ -8,6 +8,9 @@
 #include "FPGA/FPGA_HAL.h"
 #include "Hardware/Timer.h"
 #include "Hardware/VCP.h"
+
+#include "Utils/Debug.h"
+#include "Display/Painter.h"
 #endif
 
 
@@ -21,8 +24,10 @@ extern "C" {
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void HardFault_Handler()
 {
-    __IO char *file = Debug::file;
+    __IO const char *file = Debug::file;
     __IO int line = Debug::line;
+
+    LOG_WRITE_AND_SHOW("%s %d", file, line);
 
     while (1)           // -V776
     {

@@ -12,7 +12,7 @@
 uint  Debug::timeStart = 0;
 uint  Debug::timeCounter = 0;
 uint  Debug::timeStartCounter = 0;
-char *Debug::file = 0;
+const char *Debug::file = 0;
 int   Debug::line = 0;
 uint  Debug::size = 0;
 
