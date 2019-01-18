@@ -14,18 +14,27 @@ using namespace FPGA::ADDR;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/// Чтение точки по прерыванию от FPGA
-static void ReadPoint();
 /// Если true - идёт чтение точек
 static bool running = false;
+/// true, если регистратор был инициализирован
+static bool initialized = false;
+/// Сюда будут сохраняться значения из осциллографа на время работы регистратра
+static uint16 storedRShift[2];
+
+/// Чтение точки по прерыванию от FPGA
+static void ReadPoint();
+/// Сохранить установленные настройки осциллографа
+static void StoreOsciSettings();
+/// Восстановить ранее сохранённые настройки осциллорафа
+static void RestoreOsciSettings();
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void Recorder::Init()
 {
+    StoreOsciSettings();
+
     Osci::Settings::Range::LoadBoth();
-    Osci::Settings::RShift::Load(Chan::A);
-    Osci::Settings::RShift::Load(Chan::B);
     Osci::Settings::Trig::Input::Load();
     Settings::ScaleX::Load();
     Osci::Settings::TShift::Load();
@@ -38,12 +47,23 @@ void Recorder::Init()
     Stop();
 
     Storage::Init();
+
+    initialized = true;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Recorder::DeInit()
 {
+    if (!initialized)
+    {
+        return;
+    }
+
     Stop();
+
+    RestoreOsciSettings();
+
+    initialized = false;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -71,6 +91,9 @@ static void ReadPoint()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Recorder::Start()
 {
+    Osci::Settings::RShift::Set(Chan::A, Osci::Settings::RShift::ZERO);
+    Osci::Settings::RShift::Set(Chan::B, Osci::Settings::RShift::ZERO);
+
     Storage::CreateNewFrame();
 
     FSMC::WriteToFPGA16(WR::PRED_LO, 0); //-V525
@@ -88,6 +111,20 @@ void Recorder::Stop()
     FPGA::HAL::Interrupt::P2P::Disable();
 
     running = false;
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+static void StoreOsciSettings()
+{
+    storedRShift[Chan::A] = SET_RSHIFT(Chan::A);
+    storedRShift[Chan::B] = SET_RSHIFT(Chan::B);
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+static void RestoreOsciSettings()
+{
+    Osci::Settings::RShift::Set(Chan::A, storedRShift[Chan::A]);
+    Osci::Settings::RShift::Set(Chan::B, storedRShift[Chan::B]);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

@@ -2,6 +2,7 @@
 #ifndef WIN32
 #include <stm32f4xx.h>
 #include "defines.h"
+#include "device.h"
 #include "main.h"
 #include "Display/Display_Primitives.h"
 #include "Display/Symbols.h"
@@ -37,18 +38,10 @@ extern const PageBase ppInformation;
 static void OnPress_ResetSettings()
 {
     Settings::Load(true);
-    /*
-    Keyboard::Disable();
-    Display::SetDrawMode(DrawMode_Hand, Draw_ResetSettings);
-
-    if (Keyboard::WaitPressingButton().Is(Key::Start))
+    if (Device::State::InModeOsci())
     {
-        Settings::Load(true);
+        FPGA::OnPressStart();
     }
-
-    Display::SetDrawMode(DrawMode::Auto, 0);
-    Keyboard::Enable();
-    */
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

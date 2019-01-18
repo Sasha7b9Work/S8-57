@@ -65,10 +65,6 @@ namespace Osci
             static void DrawBoth();
             /// Преобразовать в строку
             static String ToString(uint16 rShiftRel, Osci::Settings::Range::E range, Divider::E divider);
-            /// Сохранить текущее значение
-            static void Save(Chan::E ch);
-            /// Восстановить ранее сохранённое значение
-            static void Restore(Chan::E ch);
             /// Возвращает ссылку на значение
             static uint16 &Value(Chan::E ch);
 
