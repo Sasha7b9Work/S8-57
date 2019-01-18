@@ -18,6 +18,7 @@
 
 
 using namespace Display::Primitives;
+using namespace FPGA;
 using namespace Osci::Settings;
 
 
@@ -90,7 +91,7 @@ void PainterData::DrawChannel(Chan::E ch)
         return;
     }
     
-    float scale = (float)Grid::Height() / (MAX_VALUE - MIN_VALUE);
+    float scale = (float)Grid::Height() / (VALUE::MAX - VALUE::MIN);
 
     if (MODE_DRAW_SIGNAL_IS_LINES)
     {
@@ -102,8 +103,8 @@ void PainterData::DrawChannel(Chan::E ch)
 
             for (int i = 1; i < 281; i++)
             {
-                int value = (int)(center - ((data[i] - AVE_VALUE) * scale) + 0.5F);
-                int valuePrev = (int)(center - ((data[i - 1] - AVE_VALUE) * scale) + 0.5F);
+                int value = (int)(center - ((data[i] - VALUE::AVE) * scale) + 0.5F);
+                int valuePrev = (int)(center - ((data[i - 1] - VALUE::AVE) * scale) + 0.5F);
 
                 if (value == valuePrev)
                 {
@@ -120,7 +121,7 @@ void PainterData::DrawChannel(Chan::E ch)
 
                     if(valuePrev < value)
                     {
-                        Math::Swap(&valuePrev, &value);
+                        ::Math::Swap(&valuePrev, &value);
                     }
 
                     //Painter::DrawVLine(x - 1, value, valuePrev);
@@ -143,8 +144,8 @@ void PainterData::DrawChannel(Chan::E ch)
         {
             for(int i = 0; i < 281 * 2; i += 2)
             {
-                int min = (int)(center - (data[i] - AVE_VALUE) * scale + 0.5F);
-                int max = (int)(center - (data[i + 1] - AVE_VALUE) * scale + 0.5F);
+                int min = (int)(center - (data[i] - VALUE::AVE) * scale + 0.5F);
+                int max = (int)(center - (data[i + 1] - VALUE::AVE) * scale + 0.5F);
 
                 //Painter::DrawVLine(x++, max, min);
                 VLine(min - max).Draw(x++, max);
@@ -154,8 +155,8 @@ void PainterData::DrawChannel(Chan::E ch)
         {
             for (int i = 1; i < 281; i++)
             {
-                int value = (int)(center - (data[i] - AVE_VALUE) * scale + 0.5F);
-                int valuePrev = (int)(center - (data[i - 1] - AVE_VALUE) * scale + 0.5F);
+                int value = (int)(center - (data[i] - VALUE::AVE) * scale + 0.5F);
+                int valuePrev = (int)(center - (data[i - 1] - VALUE::AVE) * scale + 0.5F);
 
                 if(value == valuePrev)
                 {
@@ -180,10 +181,10 @@ void PainterData::DrawChannel(Chan::E ch)
             int x = left;
             for(int i = 0; i < 281 * 2; i += 2)
             {
-                //Painter::SetPoint(x, (int)(center - (data[i] - AVE_VALUE) * scale + 0.5F));
-                Point().Draw(x, (int)(center - (data[i] - AVE_VALUE) * scale + 0.5F));
-                //Painter::SetPoint(x, (int)(center - (data[i + 1] - AVE_VALUE) * scale + 0.5F));
-                Point().Draw(x, (int)(center - (data[i + 1] - AVE_VALUE) * scale + 0.5F));
+                //Painter::SetPoint(x, (int)(center - (data[i] - VALUE::AVE) * scale + 0.5F));
+                Point().Draw(x, (int)(center - (data[i] - VALUE::AVE) * scale + 0.5F));
+                //Painter::SetPoint(x, (int)(center - (data[i + 1] - VALUE::AVE) * scale + 0.5F));
+                Point().Draw(x, (int)(center - (data[i + 1] - VALUE::AVE) * scale + 0.5F));
                 x++;
             }
         }
@@ -191,7 +192,7 @@ void PainterData::DrawChannel(Chan::E ch)
         {
             for (int i = 0; i < 280; i++)
             {
-                float value = center - (data[i] - AVE_VALUE) * scale;
+                float value = center - (data[i] - VALUE::AVE) * scale;
                 //Painter::SetPoint(left + i, ROUND(uint8, value));
                 Point().Draw(left + i, ROUND(uint8, value));
             }
@@ -254,12 +255,12 @@ void PainterData::DrawTShift(int leftX, int rightX, int numBytes)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 int PainterData::Ordinate(uint8 x, float scale)
 {
-    if (x == NONE_VALUE)
+    if (x == VALUE::NONE)
     {
         return -1;
     }
 
-    Math::LimitationRet<uint8>((uint8)(x - MIN_VALUE), 0, (MAX_VALUE - MIN_VALUE));
+    ::Math::LimitationRet<uint8>((uint8)(x - VALUE::MIN), 0, (VALUE::MAX - VALUE::MIN));
 
     return (int)((17.0F - scale * x) + 0.5F);
 }

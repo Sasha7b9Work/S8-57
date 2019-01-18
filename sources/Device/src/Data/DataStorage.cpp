@@ -9,6 +9,9 @@
 #endif
 
 
+using namespace FPGA;
+
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void DataStorage::Init(Device::Mode::E)
 {
@@ -24,8 +27,8 @@ void DataStorage::Push(DataSettings *ds)
 
     for (uint i = 0; i < size; i++)
     {
-        LIMITATION(dataA[i], MIN_VALUE, MAX_VALUE);     // -V2516
-        LIMITATION(dataB[i], MIN_VALUE, MAX_VALUE);     // -V2516
+        LIMITATION(dataA[i], VALUE::MIN, VALUE::MAX);     // -V2516
+        LIMITATION(dataB[i], VALUE::MIN, VALUE::MAX);     // -V2516
     }
 
     std::memcpy(OUT_A, ds->DataA(), (uint)ds->SizeChannel());

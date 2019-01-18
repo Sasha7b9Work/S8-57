@@ -10,6 +10,7 @@
 #endif
 
 
+using namespace FPGA;
 using namespace Osci::Settings;
 
 
@@ -70,19 +71,19 @@ const float absStepTShift[TBase::Size] =
 
 DEF_STRUCT(StructInPoints, float) voltsInPoint[Range::Number] =
 {
-    2e-3F   / 20 * Grid::Height() / (MAX_VALUE - MIN_VALUE),    // 2mV
-    5e-3F   / 20 * Grid::Height() / (MAX_VALUE - MIN_VALUE),    // 5mV
-    10e-3F  / 20 * Grid::Height() / (MAX_VALUE - MIN_VALUE),    // 10mV
-    20e-3F  / 20 * Grid::Height() / (MAX_VALUE - MIN_VALUE),    // 20mV
-    50e-3F  / 20 * Grid::Height() / (MAX_VALUE - MIN_VALUE),    // 50mV
-    100e-3F / 20 * Grid::Height() / (MAX_VALUE - MIN_VALUE),    // 100mV
-    200e-3F / 20 * Grid::Height() / (MAX_VALUE - MIN_VALUE),    // 200mV
-    500e-3F / 20 * Grid::Height() / (MAX_VALUE - MIN_VALUE),    // 500mV
-    1.0F    / 20 * Grid::Height() / (MAX_VALUE - MIN_VALUE),    // 1V
-    2.0F    / 20 * Grid::Height() / (MAX_VALUE - MIN_VALUE),    // 2V
-    5.0F    / 20 * Grid::Height() / (MAX_VALUE - MIN_VALUE),    // 5V
-    10.0F   / 20 * Grid::Height() / (MAX_VALUE - MIN_VALUE),    // 10V
-    20.0F   / 20 * Grid::Height() / (MAX_VALUE - MIN_VALUE)     // 20V
+    2e-3F   / 20 * Grid::Height() / (VALUE::MAX - VALUE::MIN),    // 2mV
+    5e-3F   / 20 * Grid::Height() / (VALUE::MAX - VALUE::MIN),    // 5mV
+    10e-3F  / 20 * Grid::Height() / (VALUE::MAX - VALUE::MIN),    // 10mV
+    20e-3F  / 20 * Grid::Height() / (VALUE::MAX - VALUE::MIN),    // 20mV
+    50e-3F  / 20 * Grid::Height() / (VALUE::MAX - VALUE::MIN),    // 50mV
+    100e-3F / 20 * Grid::Height() / (VALUE::MAX - VALUE::MIN),    // 100mV
+    200e-3F / 20 * Grid::Height() / (VALUE::MAX - VALUE::MIN),    // 200mV
+    500e-3F / 20 * Grid::Height() / (VALUE::MAX - VALUE::MIN),    // 500mV
+    1.0F    / 20 * Grid::Height() / (VALUE::MAX - VALUE::MIN),    // 1V
+    2.0F    / 20 * Grid::Height() / (VALUE::MAX - VALUE::MIN),    // 2V
+    5.0F    / 20 * Grid::Height() / (VALUE::MAX - VALUE::MIN),    // 5V
+    10.0F   / 20 * Grid::Height() / (VALUE::MAX - VALUE::MIN),    // 10V
+    20.0F   / 20 * Grid::Height() / (VALUE::MAX - VALUE::MIN)     // 20V
 };
 
 /// Столько вольт в одной точке экрана
@@ -168,7 +169,7 @@ void FPGA::Math::PointsRel2Voltage(const uint8 *points, int numPoints, Range::E 
     int voltInPixel = voltsInPixelInt[range];
     float maxVoltsOnScreen = MaxVoltageOnScreen(range);
     float rShiftAbs = RShift2Abs(rShift, range);
-    int diff = (int)((MIN_VALUE * voltInPixel) + (maxVoltsOnScreen + rShiftAbs) * 20e3F);
+    int diff = (int)((VALUE::MIN * voltInPixel) + (maxVoltsOnScreen + rShiftAbs) * 20e3F);
     float koeff = 1.0F / 20e3F;
     for (int i = 0; i < numPoints; i++)
     {
@@ -179,7 +180,7 @@ void FPGA::Math::PointsRel2Voltage(const uint8 *points, int numPoints, Range::E 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 uint8 FPGA::Math::Voltage2Point(float voltage, Range::E range, uint16 rShift)
 {
-    int relValue = (int)((voltage + MaxVoltageOnScreen(range) + RShift2Abs(rShift, range)) / voltsInPoint[range].val + MIN_VALUE);
+    int relValue = (int)((voltage + MaxVoltageOnScreen(range) + RShift2Abs(rShift, range)) / voltsInPoint[range].val + VALUE::MIN);
     ::Math::Limitation<int>(&relValue, 0, 255);
     return (uint8)relValue;
 }
@@ -192,7 +193,7 @@ float FPGA::Math::Point2Voltage(uint8 value, Range::E range, uint16 rShift)
         range = range;
     }
     
-    uint8 delta = (uint8)(value - MIN_VALUE);
+    uint8 delta = (uint8)(value - VALUE::MIN);
 
     float rShiftAbs = RShift2Abs(rShift, range);
 
@@ -206,11 +207,11 @@ void FPGA::Math::PointsVoltage2Rel(const float *voltage, int numPoints, Range::E
 {
     float maxVoltOnScreen = MaxVoltageOnScreen(range);
     float rShiftAbs = RShift2Abs(rShift, range);
-    float voltInPixel = 1.0F / (voltsInPoint[range].val / ((MAX_VALUE - MIN_VALUE) / 200.0F));
+    float voltInPixel = 1.0F / (voltsInPoint[range].val / ((VALUE::MAX - VALUE::MIN) / 200.0F));
 
     float add = maxVoltOnScreen + rShiftAbs;
 
-    float delta = add * voltInPixel + MIN_VALUE;
+    float delta = add * voltInPixel + VALUE::MIN;
 
     for (int i = 0; i < numPoints; i++)
     {

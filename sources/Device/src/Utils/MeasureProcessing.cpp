@@ -17,6 +17,11 @@
 
 using namespace Osci::Settings;
 
+using FPGA::VALUE::MIN;
+using FPGA::VALUE::MAX;
+using FPGA::VALUE::AVE;
+using FPGA::VALUE::NONE;
+
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 static float CalculateVoltageMax(Chan::E ch);
@@ -471,7 +476,7 @@ int CalculatePeriodAccurately(Chan::E ch)
         while (data < end)
         {
             uint8 point = *data++;
-            if(point < MIN_VALUE || point >= MAX_VALUE)
+            if(point < MIN || point >= MAX)
             {
                 EXIT_FROM_PERIOD_ACCURACY
             }
@@ -586,7 +591,7 @@ float FindIntersectionWithHorLine(Chan::E ch, int numIntersection, bool downToUp
         return ERROR_VALUE_FLOAT;
     }
     
-    return Math::GetIntersectionWithHorizontalLine(x, data[x], x + step, data[x + step], yLine);
+    return ::Math::GetIntersectionWithHorizontalLine(x, data[x], x + step, data[x + step], yLine);
 }
 
 
@@ -1104,7 +1109,7 @@ void Measure::SetData(bool /*needSmoothing*/)
     {
         for (int i = NUM_BYTES_DS - 1; i >= 0; --i)
         {
-            if (IN_A[i] != NONE_VALUE)      // Если это значение считано
+            if (IN_A[i] != NONE)      // Если это значение считано
             {
                 lastByte = i;
                 firstByte = lastByte - nBytes;
@@ -1145,9 +1150,9 @@ float Measure::CalculateCursorU(Chan::E ch, float posCurT)
     
     BitSet64 points = Display::PointsOnDisplay();
 
-    int rel = (int)(CHOICE_BUFFER)[(int)points.word0 + ROUND(int, posCurT)] - MIN_VALUE;
+    int rel = (int)(CHOICE_BUFFER)[(int)points.word0 + ROUND(int, posCurT)] - MIN;
 
-#define SCALE (200.0F / (MAX_VALUE - MIN_VALUE))
+#define SCALE (200.0F / (MAX - MIN))
 
     float value = 200.0F - rel * SCALE;
     LIMITATION(value, 0.0F, 200.0F); //-V2516
@@ -1170,13 +1175,13 @@ float Measure::CalculateCursorT(Chan::E ch, float posCurU, int numCur)
     
     BitSet64 points = Display::PointsOnDisplay();
 
-    int prevData = 200 - dataIn[FIRST_POINT] + MIN_VALUE;
+    int prevData = 200 - dataIn[FIRST_POINT] + MIN;
 
     int numIntersections = 0;
 
     for(int i = FIRST_POINT + 1; i < LAST_POINT; i++)
     {
-        int curData = 200 - (dataIn)[i] + MIN_VALUE;
+        int curData = 200 - (dataIn)[i] + MIN;
 
         if(curData <= posCurU && prevData > posCurU)
         {
@@ -1405,8 +1410,8 @@ void Measure::Processing::CountedTShift()
         int startIndex = -dTShift;
         for (int i = 0; i <= startIndex; i++)
         {
-            OUT_A[i] = AVE_VALUE;
-            OUT_B[i] = AVE_VALUE;
+            OUT_A[i] = AVE;
+            OUT_B[i] = AVE;
         };
 
         int endIndex = numBytes / 2 - dTShift;
@@ -1414,8 +1419,8 @@ void Measure::Processing::CountedTShift()
         {
             for (int i = endIndex; i < numBytes / 2; i++)
             {
-                OUT_A[i] = AVE_VALUE;
-                OUT_B[i] = AVE_VALUE;
+                OUT_A[i] = AVE;
+                OUT_B[i] = AVE;
             }
         }
 
@@ -1478,7 +1483,7 @@ void Measure::Processing::CountedRange(Chan::E ch)
                 // Теперь рассчитываем новое относительное значения - для текущих rShift и range
                 rel = FPGA::Math::Voltage2Point(abs, rangeOut, rShiftOut);
 
-                LIMITATION(rel, MIN_VALUE, MAX_VALUE); //-V2516
+                LIMITATION(rel, MIN, MAX); //-V2516
                 OUT(ch)[i] = rel;
             }
             else
@@ -1500,8 +1505,8 @@ void Measure::Processing::CountedTBase()
 
         int numBytes = NUM_BYTES_DS;
 
-        std::memset(OUT_A, NONE_VALUE, (uint)numBytes);
-        std::memset(OUT_B, NONE_VALUE, (uint)numBytes);
+        std::memset(OUT_A, NONE, (uint)numBytes);
+        std::memset(OUT_B, NONE, (uint)numBytes);
 
         const int index0 = TPos(TPOS).InBytes() - SET_TSHIFT.InPoints();
 
@@ -1526,7 +1531,7 @@ void Measure::Processing::CountedTBase()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void LinearInterpolation(uint8 *data, int numPoints)
 {
-    int index = Math::FindAnotherElement(data, NONE_VALUE, numPoints);                // Находим индекс первого непустого элемента
+    int index = Math::FindAnotherElement(data, NONE, numPoints);                // Находим индекс первого непустого элемента
 
     if (index == -1)                                                            // Если такового элемента на нашлось - выходим
     {
@@ -1563,7 +1568,7 @@ static bool IndexNextPoint(const uint8 *data, int numPoints, int prevIndex, int 
 {
     for (int i = prevIndex + 1; i < numPoints; ++i)
     {
-        if (data[i] != NONE_VALUE)
+        if (data[i] != NONE)
         {
             *nextIndex = i;
             return true;
@@ -1579,8 +1584,8 @@ void Measure::Processing::CountedEnumPoints()
 {
     int numBytes = NUM_BYTES_SET;
 
-    std::memset(OUT_A, NONE_VALUE, (uint)numBytes);
-    std::memset(OUT_B, NONE_VALUE, (uint)numBytes);
+    std::memset(OUT_A, NONE, (uint)numBytes);
+    std::memset(OUT_B, NONE, (uint)numBytes);
     
     int numBytesOld = NUM_BYTES_DS;                         // Это число байт в сигнале
 

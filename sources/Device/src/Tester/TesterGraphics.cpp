@@ -15,6 +15,7 @@
 
 
 using namespace Display::Primitives;
+using namespace FPGA;
 using namespace Osci::Settings;
 
 
@@ -112,8 +113,8 @@ void Tester::Display::SetPoints(int numStep, const uint8 dx[TESTER_NUM_POINTS], 
 
     for(int i = 0; i < TESTER_NUM_POINTS; i++)
     {
-        int X = TESTER_NUM_POINTS - (dx[i] - MIN_VALUE);
-        int Y = dy[i] - MIN_VALUE;
+        int X = TESTER_NUM_POINTS - (dx[i] - VALUE::MIN);
+        int Y = dy[i] - VALUE::MIN;
 
         LIMITATION(X, 0, TESTER_NUM_POINTS - 1); //-V2516
         LIMITATION(Y, 0, TESTER_NUM_POINTS - 1); //-V2516

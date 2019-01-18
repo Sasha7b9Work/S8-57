@@ -15,7 +15,6 @@
 template void  Math::Swap<int>(int *, int *);
 template int   Math::Sign<int>(int);
 template int   Math::Sign<int8>(int8);
-//template int   Math::Sign<char>(char);
 template void  Math::CircleIncrease<int8>(int8 *, int8, int8);
 template void  Math::CircleIncrease<uint8>(uint8 *, uint8, uint8);
 template void  Math::CircleIncrease<int16>(int16 *, int16, int16);
@@ -196,7 +195,7 @@ uint8 Math::MinFromArray(const uint8 *data, int firstPoint, int lastPoint)
 uint8 Math::MaxFromArrayWithErrorCode(const uint8 *data, int firstPoint, int lastPoint)
 {
     uint8 max = Math::MaxFromArray(data, firstPoint, lastPoint);
-    if (max >= MAX_VALUE)
+    if (max >= FPGA::VALUE::MAX)
     {
         max = ERROR_VALUE_UINT8;
     }
@@ -207,7 +206,7 @@ uint8 Math::MaxFromArrayWithErrorCode(const uint8 *data, int firstPoint, int las
 uint8 Math::MinFromArrayWithErrorCode(const uint8 *data, int firstPoint, int lastPoint)
 {
     uint8 min = Math::MinFromArray(data, firstPoint, lastPoint);
-    if (min < MIN_VALUE || min >= MAX_VALUE)
+    if (min < FPGA::VALUE::MIN || min >= FPGA::VALUE::MAX)
     {
         min = ERROR_VALUE_UINT8;
     }

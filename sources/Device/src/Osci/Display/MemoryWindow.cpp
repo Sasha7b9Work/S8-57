@@ -13,6 +13,7 @@
 
 
 using namespace Display::Primitives;
+using namespace FPGA;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -44,7 +45,7 @@ void MemoryWindow::DrawDataInRect(int x, int y, int width, int height, const uin
     int numIntervals = width + 1;            // Количество интервалов, в которых будем рисовать наш сигнал - фактически, количество вертикальных линий
     float pointsInInterval = (float)length / numIntervals;   // Количество точек, рисуемых в одном интервале.
 
-    float stepY = (float)height / (float)(MAX_VALUE - MIN_VALUE);
+    float stepY = (float)height / (float)(VALUE::MAX - VALUE::MIN);
 
     int y0 = y + height;
 

@@ -23,9 +23,9 @@ private:
     static void DrawTPos(int leftX, int rightX);
 
     static void DrawTShift(int leftX, int rightX, int numPoints);
-    /// Возвращает (-1), если точка не считана (NONE_VALUE)
+    /// Возвращает (-1), если точка не считана (VALUE::NONE)
     static int Ordinate(uint8 x, float scale);
-    /// \brief Возвращает точку в экранной координате. Если точка не считана (NONE_VALUE), возвращает -1.
+    /// \brief Возвращает точку в экранной координате. Если точка не считана (VALUE::NONE), возвращает -1.
     /// Процедура ограничивает width числом 255.
     static void SendToDisplayDataInRect(Chan::E chan, int x, const int *min, const int *max, int width);
 

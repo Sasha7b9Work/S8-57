@@ -179,7 +179,7 @@ public:
         static int top;
     };
 
-#define MARKER_VOLTAGE(ch, num)             (Processing::markerVoltage[ch][num] - MIN_VALUE)
+#define MARKER_VOLTAGE(ch, num)             (Processing::markerVoltage[ch][num] - VALUE::MIN)
 #define MARKER_TIME(ch, num)                (Processing::markerTime[ch][num])
 
 private:
