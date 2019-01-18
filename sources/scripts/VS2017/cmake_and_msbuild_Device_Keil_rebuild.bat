@@ -1,0 +1,2 @@
+call cmake_Device_Keil.bat
+call msbuild_Device_Keil_rebuild.bat
