@@ -17,7 +17,7 @@ namespace Stack
 {
     static Frame frame;
 
-    static void Push(Frame _frame)
+    static void Push(const Frame &_frame)
     {
         frame = _frame;
         frame.SetDataAddress((uint16 *)Heap::Data());

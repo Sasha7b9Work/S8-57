@@ -20,8 +20,12 @@ namespace Display
     static const int WIDTH = 320;
 
     void Init();
-
+    /// «десь происходит вс€ отрисовка
     void Update();
+    /// ¬озвращаемое значение true означает, что дисплей находитс€ в состо€нии отрисовки
+    bool InProcess();
+    /// ”станавливает функцию, котора€ выполитс€ после отрисовки кадра однократно
+    void SetFuncAfterUpadteOnce(pFuncVV func);
 
     void RemoveAddDrawFunction();
 

@@ -9,6 +9,7 @@
 #include "Hardware/FSMC.h"
 #include "FPGA/FPGA_Types.h"
 #include "Recorder/Recorder_Storage.h"
+#include "Display/Display.h"
 #endif
 
 
@@ -54,10 +55,17 @@ void Recorder::Update()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void ReadPoint()
 {
-    BitSet16 dataA(FSMC::ReadFromFPGA(RD_DATA_A), FSMC::ReadFromFPGA(RD_DATA_A + 1));
-    BitSet16 dataB(FSMC::ReadFromFPGA(RD_DATA_B), FSMC::ReadFromFPGA(RD_DATA_B + 1));
+    if (Display::InProcess())
+    {
+        Display::SetFuncAfterUpadteOnce(ReadPoint);
+    }
+    else
+    {
+        BitSet16 dataA(FSMC::ReadFromFPGA(RD_DATA_A), FSMC::ReadFromFPGA(RD_DATA_A + 1));
+        BitSet16 dataB(FSMC::ReadFromFPGA(RD_DATA_B), FSMC::ReadFromFPGA(RD_DATA_B + 1));
 
-    Recorder::Storage::CurrentFrame().AddPoint(dataA, dataB);
+        Recorder::Storage::CurrentFrame().AddPoint(dataA, dataB);
+    }
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

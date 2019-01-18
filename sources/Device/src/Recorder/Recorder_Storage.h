@@ -23,7 +23,7 @@ namespace Recorder
         /// ќписывает данные регистратора - цельную запись точек
         struct Frame
         {
-            Frame() : start(0), numPoints(0), pointer(0) {}
+            Frame() : start(0), numPoints(0), pointer(0) {} //-V730
 
             void SetDataAddress(uint16 *address);
             /// ƒобавление считаной точки
