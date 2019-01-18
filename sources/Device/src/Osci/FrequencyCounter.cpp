@@ -168,7 +168,7 @@ void FrequencyCounter::Update()
 
     if (freqReady)
     {
-        freqActual.Set(*RD_FREQ_BYTE_3, *RD_FREQ_BYTE_2, *RD_FREQ_BYTE_1, *RD_FREQ_BYTE_0);
+        freqActual.Set(*RD::FREQ_BYTE_3, *RD::FREQ_BYTE_2, *RD::FREQ_BYTE_1, *RD::FREQ_BYTE_0);
 
         lastFreq.Set(freqActual.word);
         
@@ -180,7 +180,7 @@ void FrequencyCounter::Update()
 
     if (periodReady)
     {
-        periodActual.Set(*RD_PERIOD_BYTE_3, *RD_PERIOD_BYTE_2, *RD_PERIOD_BYTE_1, *RD_PERIOD_BYTE_0);
+        periodActual.Set(*RD::PERIOD_BYTE_3, *RD::PERIOD_BYTE_2, *RD::PERIOD_BYTE_1, *RD::PERIOD_BYTE_0);
 
         lastPeriod.Set(periodActual.word);
 
@@ -205,7 +205,7 @@ void FrequencyCounter::Update()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void FrequencyCounter::ReadFreq()
 {
-    BitSet32 freqSet(*RD_FREQ_BYTE_3, *RD_FREQ_BYTE_2, *RD_FREQ_BYTE_1, *RD_FREQ_BYTE_0);
+    BitSet32 freqSet(*RD::FREQ_BYTE_3, *RD::FREQ_BYTE_2, *RD::FREQ_BYTE_1, *RD::FREQ_BYTE_0);
 
     lastFreq.Set(freqSet.word);
 
@@ -231,7 +231,7 @@ void FrequencyCounter::ReadFreq()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void FrequencyCounter::ReadPeriod()
 {
-    BitSet32 periodSet(*RD_PERIOD_BYTE_3, *RD_PERIOD_BYTE_2, *RD_PERIOD_BYTE_1, *RD_PERIOD_BYTE_0);
+    BitSet32 periodSet(*RD::PERIOD_BYTE_3, *RD::PERIOD_BYTE_2, *RD::PERIOD_BYTE_1, *RD::PERIOD_BYTE_0);
 
     lastPeriod.Set(periodSet.word);
 

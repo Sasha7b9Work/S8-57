@@ -70,7 +70,7 @@ void FPGA::GiveStart()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 uint16 FPGA::ReadLastRecord()
 {
-    return (uint16)(FSMC::ReadFromFPGA(RD_LAST_RECORD_LO) + ((FSMC::ReadFromFPGA(RD_LAST_RECORD_HI)) << 8));
+    return (uint16)(FSMC::ReadFromFPGA(RD::LAST_RECORD_LO) + ((FSMC::ReadFromFPGA(RD::LAST_RECORD_HI)) << 8));
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -152,7 +152,7 @@ bool FPGA::ForTester::Read(uint8 *dataA, uint8 *dataB) // -V2506
     FSMC::WriteToFPGA16(WR::PRED_LO, aRead);             // Указываем адрес, с которого будем читать данные
     FSMC::WriteToFPGA8(WR::START_ADDR, 0xff);            // И даём команду ПЛИС, чтобы чтение начиналось с него
 
-    uint8 *addrA = RD_DATA_A; // -V566
+    uint8 *addrA = RD::DATA_A; // -V566
     addrA++;
     for (int i = 0; i < TESTER_NUM_POINTS; i++)         // Читаем данные первого канала
     {
@@ -162,7 +162,7 @@ bool FPGA::ForTester::Read(uint8 *dataA, uint8 *dataB) // -V2506
     FSMC::WriteToFPGA16(WR::PRED_LO, aRead);             // Указываем адрес, с котонрого будем читать данные
     FSMC::WriteToFPGA8(WR::START_ADDR, 0xff);            // И даём команду ПЛИС, чтобы чтение начиналось с него
 
-    uint8 *addrB = RD_DATA_B; // -V566
+    uint8 *addrB = RD::DATA_B; // -V566
     addrB++;
     for (int i = 0; i < TESTER_NUM_POINTS; i++)         // Читаем данные второго канала
     {
@@ -186,7 +186,7 @@ void FPGA::ReadDataChanenl(Chan::E ch, uint8 data[FPGA::MAX_NUM_POINTS])
     FSMC::WriteToFPGA8(WR::START_ADDR, 0xff);
 
 
-    uint8 *addr0 = Chan(ch).IsA() ? RD_DATA_A : RD_DATA_B;  // -V566
+    uint8 *addr0 = Chan(ch).IsA() ? RD::DATA_A : RD::DATA_B;  // -V566
     uint8 *addr1 = addr0 + 1;
 
     if (IN_RANDOMIZE_MODE)

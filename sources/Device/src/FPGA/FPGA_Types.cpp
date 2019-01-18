@@ -30,5 +30,26 @@ namespace WR
     uint8 *TRIG_HOLD_VALUE_MID  = ADDR_ALTERA + 18;
     uint8 *TRIG_HOLD_VALUE_HI   = ADDR_ALTERA + 19;
 }
+namespace RD
+{
+    uint8 *DATA_A               = ADDR_ALTERA + 0;
+    uint8 *DATA_A_PEAK_MAX      = DATA_A;
+    uint8 *DATA_A_PEAK_MIN      = DATA_A_PEAK_MAX + 1;
+    uint8 *DATA_B               = ADDR_ALTERA + 2;
+    uint8 *DATA_B_PEAK_MAX      = DATA_B;
+    uint8 *DATA_B_PEAK_MIN      = DATA_B_PEAK_MAX + 1;
+    uint8 *LAST_RECORD_LO       = ADDR_ALTERA + 4;
+    uint8 *LAST_RECORD_HI       = ADDR_ALTERA + 5;
+    uint8 *FREQ_BYTE_0          = ADDR_ALTERA + 8;
+    uint8 *FREQ_BYTE_1          = ADDR_ALTERA + 9;
+    uint8 *FREQ_BYTE_2          = ADDR_ALTERA + 12;
+    uint8 *FREQ_BYTE_3          = ADDR_ALTERA + 13;
+    uint8 *PERIOD_BYTE_0        = ADDR_ALTERA + 16;
+    uint8 *PERIOD_BYTE_1        = ADDR_ALTERA + 17;
+    uint8 *PERIOD_BYTE_2        = ADDR_ALTERA + 20;
+    uint8 *PERIOD_BYTE_3        = ADDR_ALTERA + 21;
+    uint8 *FLAG_LO              = ADDR_ALTERA + 24;
+    uint8 *FLAG_HI              = ADDR_ALTERA + 25;
+}
 }
 }

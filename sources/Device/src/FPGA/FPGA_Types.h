@@ -38,28 +38,30 @@ namespace FPGA
             extern uint8 *TRIG_HOLD_VALUE_MID;      ///<    Значение рассчитывается по формуле N = 0 - (задержка / 100нс). Максимальная задержка - 1.5 сек
             extern uint8 *TRIG_HOLD_VALUE_HI;       ///< Старший байт задержки синхронизации
         }
+
+        namespace RD
+        {
+            extern uint8 *DATA_A;               ///< Данные первого канала
+            extern uint8 *DATA_A_PEAK_MAX;      ///< Данные пикового детектора первого канала
+            extern uint8 *DATA_A_PEAK_MIN;      
+            extern uint8 *DATA_B;               ///< Данные второго канала
+            extern uint8 *DATA_B_PEAK_MAX;      ///< Данные пиквого детектора второго канала
+            extern uint8 *DATA_B_PEAK_MIN;      
+            extern uint8 *LAST_RECORD_LO;       ///< Адрес последней записи
+            extern uint8 *LAST_RECORD_HI;       
+            extern uint8 *FREQ_BYTE_0;          ///< Измеренное значение частоты
+            extern uint8 *FREQ_BYTE_1;          
+            extern uint8 *FREQ_BYTE_2;          
+            extern uint8 *FREQ_BYTE_3;          
+            extern uint8 *PERIOD_BYTE_0;        ///< Измеренное значение периода
+            extern uint8 *PERIOD_BYTE_1;        
+            extern uint8 *PERIOD_BYTE_2;        
+            extern uint8 *PERIOD_BYTE_3;        
+            extern uint8 *FLAG_LO;              ///< Младший байт флага
+            extern uint8 *FLAG_HI;              ///< Старший байт флага
+        }
     }
 }
-
-#define RD_DATA_A               (ADDR_ALTERA + 0)           ///< Данные первого канала
-#define RD_DATA_A_PEAK_MAX      (RD_DATA_A)                 ///< Данные пикового детектора первого канала
-#define RD_DATA_A_PEAK_MIN      (RD_DATA_A_PEAK_MAX + 1)
-#define RD_DATA_B               (ADDR_ALTERA + 2)           ///< Данные второго канала
-#define RD_DATA_B_PEAK_MAX      (RD_DATA_B)                 ///< Данные пиквого детектора второго канала
-#define RD_DATA_B_PEAK_MIN      (RD_DATA_B_PEAK_MAX + 1)
-#define RD_LAST_RECORD_LO       (ADDR_ALTERA + 4)           ///< Адрес последней записи
-#define RD_LAST_RECORD_HI       (ADDR_ALTERA + 5)
-#define RD_FREQ_BYTE_0          (ADDR_ALTERA + 8)           ///< Измеренное значение частоты
-#define RD_FREQ_BYTE_1          (ADDR_ALTERA + 9)
-#define RD_FREQ_BYTE_2          (ADDR_ALTERA + 12)
-#define RD_FREQ_BYTE_3          (ADDR_ALTERA + 13)
-#define RD_PERIOD_BYTE_0        (ADDR_ALTERA + 16)          ///< Измеренное значение периода
-#define RD_PERIOD_BYTE_1        (ADDR_ALTERA + 17)
-#define RD_PERIOD_BYTE_2        (ADDR_ALTERA + 20)
-#define RD_PERIOD_BYTE_3        (ADDR_ALTERA + 21)
-#define RD_FLAG_LO              (ADDR_ALTERA + 24)          ///< Младший байт флага
-#define RD_FLAG_HI              (ADDR_ALTERA + 25)          ///< Старший байт флага
-
 
 #define AVE_VALUE               127
 #define MIN_VALUE               (AVE_VALUE - 125)

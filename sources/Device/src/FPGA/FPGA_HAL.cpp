@@ -174,7 +174,7 @@ void FPGA::HAL::GPIO::ResetPin(Pin::E pin)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void FPGA::HAL::ReadFlag()
 {
-    flag = (uint16)(FSMC::ReadFromFPGA(RD_FLAG_LO) | (FSMC::ReadFromFPGA(RD_FLAG_HI) << 8));
+    flag = (uint16)(FSMC::ReadFromFPGA(RD::FLAG_LO) | (FSMC::ReadFromFPGA(RD::FLAG_HI) << 8));
 
     if (GetFlag::TRIG_READY() && !givingStart)
     {
