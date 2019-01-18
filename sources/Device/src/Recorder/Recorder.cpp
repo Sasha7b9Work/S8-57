@@ -1,15 +1,12 @@
 #include "stdafx.h"
 #ifndef WIN32
 #include "defines.h"
-#include "Osci/Osci_Settings.h"
-#include "Recorder/Recorder.h"
-#include "Recorder/Recorder_Settings.h"
-
+#include "Display/Display.h"
 #include "FPGA/FPGA_HAL.h"
 #include "Hardware/FSMC.h"
-#include "FPGA/FPGA_Types.h"
+#include "Recorder/Recorder.h"
+#include "Recorder/Recorder_Settings.h"
 #include "Recorder/Recorder_Storage.h"
-#include "Display/Display.h"
 #endif
 
 

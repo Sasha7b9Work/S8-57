@@ -477,7 +477,6 @@ void Grid::DrawRecorder()
     }
 
     HLine(Display::WIDTH - 1).Draw(0, Display::HEIGHT / 2, Color::GRAY_20);
-    VLine(Display::HEIGHT - 1).Draw(Display::WIDTH / 2, 0);
 
     Rectangle(Display::WIDTH - 1, Display::HEIGHT - 1).Draw(0, 0, Color::FILL);
 }

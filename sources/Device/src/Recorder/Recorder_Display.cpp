@@ -37,9 +37,9 @@ void Recorder::Display::Update()
 
     Grid::Draw();
 
-    DrawSettings(269, 0);
-
     DrawData();
+
+    DrawSettings(269, 0);
 
     Menu::Draw();
 }
@@ -83,10 +83,4 @@ void Recorder::Display::DrawData()
         point = frame.NextPoint();
         x++;
     } while (x < 320);
-
-    static uint prevTime = 0;
-
-    LOG_WRITE("%d", TIME_MS - prevTime);
-
-    prevTime = TIME_MS;
 }

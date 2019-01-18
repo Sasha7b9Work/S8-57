@@ -15,6 +15,8 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 namespace FPGA
 {
+    const uint MAX_NUM_POINTS = (16 * 1024U);
+
     void Init();
 
     void OnPressStart();
@@ -35,7 +37,7 @@ namespace FPGA
 
     static uint16 ReadLastRecord();
 
-    void ReadDataChanenl(Chan::E ch, uint8 data[FPGA_MAX_NUM_POINTS]);
+    void ReadDataChanenl(Chan::E ch, uint8 data[MAX_NUM_POINTS]);
 
     void ClearDataRand();
     /// Время подачи старта

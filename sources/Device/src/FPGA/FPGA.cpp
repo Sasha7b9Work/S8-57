@@ -36,7 +36,7 @@ uint16 FPGA::valueADC = 0;
 uint16 FPGA::post = (uint16)~(512);
 uint16 FPGA::pred = (uint16)~(512);
 
-uint8 dataRand[Chan::Number][FPGA_MAX_NUM_POINTS];    ///< «десь будут данные рандомизатора
+uint8 dataRand[Chan::Number][FPGA::MAX_NUM_POINTS];    ///< «десь будут данные рандомизатора
 /// «десь хранитс€ адрес, начина€ с которого будем читать данные по каналам. ≈сли addrRead == 0xffff, то адрес вначале нужно считать
 static uint16 addrRead = 0xffff;
 
@@ -172,7 +172,7 @@ bool FPGA::ForTester::Read(uint8 *dataA, uint8 *dataB) // -V2506
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void FPGA::ReadDataChanenl(Chan::E ch, uint8 data[FPGA_MAX_NUM_POINTS])
+void FPGA::ReadDataChanenl(Chan::E ch, uint8 data[FPGA::MAX_NUM_POINTS])
 {
     uint numPoints = NumPoints();
 
@@ -257,5 +257,5 @@ bool FPGA::IsRunning()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void FPGA::ClearDataRand()
 {
-    std::memset(dataRand, 0, FPGA_MAX_NUM_POINTS * 2 * sizeof(uint8));  // -V512
+    std::memset(dataRand, 0, FPGA::MAX_NUM_POINTS * 2 * sizeof(uint8));  // -V512
 }

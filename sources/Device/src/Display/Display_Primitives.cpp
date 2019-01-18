@@ -28,11 +28,8 @@ void Display::Primitives::Region::Draw(int x, int y, Color color)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Display::Primitives::Region::DrawBounded(int x, int y, Color colorFill, Color colorBound)
 {
-    Color color = Color::GetCurent();
-    Rectangle(width, height).Draw(x, y, colorBound);
     Region(width - 2, height - 2).Draw(x + 1, y + 1, colorFill);
-    /// \todo Почему-то цвет не восстанавливается
-    Color::SetCurrent(color);
+    Rectangle(width, height).Draw(x, y, colorBound);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
