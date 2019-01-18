@@ -57,8 +57,6 @@ void Device::Init()
 
     Menu::Init();
 
-    FPGA::OnPressStart();
-
     Multimeter::Init();
 
     FDrive::Init();

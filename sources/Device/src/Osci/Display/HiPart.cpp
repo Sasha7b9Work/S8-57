@@ -160,7 +160,6 @@ void HiPart::DrawRightPart()
     {
         x += 27;
 
-        //Painter::DrawVLine(x, 1, Grid::Top() - 2, Color::FILL);
         VLine(Grid::Top() - 3).Draw(x, 1, Color::FILL);
 
         x += 2;

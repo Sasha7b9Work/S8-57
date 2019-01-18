@@ -37,6 +37,8 @@ static bool CalculateGate(uint16 rand, uint16 *eMin, uint16 *eMax);
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void Osci::Init()
 {
+    Stop();
+
     Settings::Range::LoadBoth();
     Settings::RShift::Load(Chan::A);
     Settings::RShift::Load(Chan::B);
@@ -47,10 +49,7 @@ void Osci::Init()
     FPGA::Settings::LoadCalibratorMode();
     Settings::LoadHoldfOff();
 
-    if (!FPGA::IsRunning())
-    {
-        FPGA::OnPressStart();
-    }
+    FPGA::OnPressStart();
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
