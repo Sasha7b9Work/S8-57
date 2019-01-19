@@ -1,23 +1,33 @@
 import requests
 import re
 import console
-#from lxml import html
 from bs4 import BeautifulSoup
 
+def ExtractName(soup):
+    return soup.find('div', {'id': 'content'}).find('div', {'class': 'col left'}).find('blockquote').find('a').get('href')
+
+
+def GetNameFile(url):
+    # Здесь текст html-файла
+    page = requests.get(url).text
+    
+    #with open('page.html', 'w') as out_file:
+    #    out_file.write(page)
+        
+    soup = BeautifulSoup(page, "lxml")
+    
+    # Извлекаем название zip-файла
+    file_name = ExtractName(soup)
+    
+    return file_name
+
+
+##################################################################################################
 site = 'https://www.libsdl.org/'
 
 url = site + 'download-2.0.php'
 
-# Здесь текст html-файла
-page = requests.get(url).text
-
-#with open('page.html', 'w') as out_file:
-#    out_file.write(page)
-    
-soup = BeautifulSoup(page, "lxml")
-
-# Извлекаем название zip-файла
-file_name = soup.find('div', {'id': 'content'}).find('div', {'class': 'col left'}).find('blockquote').find('a').get('href')
+file_name = GetNameFile(url)
 
 # Полное имя файла для скачивания
 full_name = site + file_name
