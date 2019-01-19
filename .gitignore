@@ -8,6 +8,7 @@ JLinkSettings.ini
 archive.zip
 
 sources/generated/*
+sources/scripts/temp/*
 
 doc/doxygen/OSC/*
 
