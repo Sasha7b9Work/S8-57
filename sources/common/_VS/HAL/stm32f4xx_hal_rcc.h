@@ -5,6 +5,12 @@
 #define __HAL_RCC_PWR_CLK_ENABLE()
 #define __HAL_RCC_GPIOB_CLK_ENABLE()
 #define __HAL_RCC_GPIOC_CLK_ENABLE()
+#define __HAL_RCC_GPIOA_CLK_ENABLE()
+#define __HAL_RCC_GPIOD_CLK_ENABLE()
+#define __HAL_RCC_GPIOE_CLK_ENABLE()
+#define __HAL_RCC_DMA2D_CLK_ENABLE()
+#define __HAL_RCC_LTDC_CLK_ENABLE()
+#define __HAL_RCC_TIM4_CLK_ENABLE()
 
 #define RCC_OSCILLATORTYPE_HSE      0x00000001U
 #define RCC_HSE_ON                  0
@@ -19,6 +25,17 @@
 #define RCC_SYSCLK_DIV1             0
 #define RCC_HCLK_DIV4               0
 #define RCC_HCLK_DIV2               0
+
+#define RCC_OSCILLATORTYPE_NONE            0x00000000U
+#define RCC_OSCILLATORTYPE_HSE             0x00000001U
+#define RCC_OSCILLATORTYPE_HSI             0x00000002U
+#define RCC_OSCILLATORTYPE_LSE             0x00000004U
+#define RCC_OSCILLATORTYPE_LSI             0x00000008U
+
+#define RCC_HSI_OFF                      ((uint8_t)0x00)
+#define RCC_HSI_ON                       ((uint8_t)0x01)
+
+#define RCC_PLLSOURCE_HSI           0
 
 
 typedef struct

@@ -1,4 +1,5 @@
 #pragma once
+#include <stm32f4xx_hal_adc.h>
 
 
 #define DAC_TRIGGER_NONE            0x00000000U

@@ -5,3 +5,5 @@
 
 
 #define __HAL_PWR_VOLTAGESCALING_CONFIG(x)
+
+HAL_StatusTypeDef HAL_PWREx_EnableOverDrive(void);

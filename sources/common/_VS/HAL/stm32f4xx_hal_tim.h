@@ -88,3 +88,4 @@ HAL_StatusTypeDef HAL_TIM_Base_Start(TIM_HandleTypeDef *htim);
 HAL_StatusTypeDef HAL_TIM_Base_Stop(TIM_HandleTypeDef *htim);
 HAL_StatusTypeDef HAL_TIM_Base_Start_IT(TIM_HandleTypeDef *htim);
 HAL_StatusTypeDef HAL_TIM_Base_Stop_IT(TIM_HandleTypeDef *htim);
+void HAL_TIM_IRQHandler(TIM_HandleTypeDef *htim);
