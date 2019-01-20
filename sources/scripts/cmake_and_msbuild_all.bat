@@ -1,1 +1,0 @@
-call cmake_and_msbuild_Keil_Debug.bat
