@@ -1,6 +1,20 @@
 import requests
 import re
 from bs4 import BeautifulSoup
+import os
+import zipfile
+import tempfile
+
+
+#-----------------------------------------------------------------------------------
+def UnZipFile(file):
+	dir = '.'
+	zf = zipfile.ZipFile(file)
+	
+	for fn in zf.namelist():
+		zf.extract(fn, '..\\temp')
+	zf.close()
+
 
 #-----------------------------------------------------------------------------------
 def ExtractName(soup):
@@ -66,9 +80,18 @@ file_name = GetNameFile(url)
 # Полное имя файла для скачивания
 full_name = site + file_name
 
+# Создаём временный каталог для скачиваемых файлов, если ещё не создан
+temp_dir = '..\\temp'
+if not os.path.exists(temp_dir):
+	os.makedirs(temp_dir)
+
 print('Download file ' + full_name)
 
-GetFile(full_name, "..\\temp\\" + re.split('/', file_name)[1])
+file = '..\\temp\\' + re.split('/', file_name)[1]
+
+GetFile(full_name, file)
+
+UnZipFile(file)
 
 
 
