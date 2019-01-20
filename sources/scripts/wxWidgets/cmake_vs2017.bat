@@ -1,0 +1,1 @@
+cmake ..\temp\CMakeLists.txt -B..\temp\generated
