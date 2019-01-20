@@ -7,13 +7,32 @@ import tempfile
 
 
 #-----------------------------------------------------------------------------------
+# Формирует строку отображения для процентов
+def StringForPercents(percents):
+	result = ""
+	num_cells = 40
+	filled = percents / (100 / num_cells);
+	for i in range(1, num_cells):
+		if(i <= percents / (100 / num_cells)):
+			result += '|'
+		else:
+			result += '-'
+			
+	result += ' ' + str(int(percents)) + '%'
+	return result;
+
+
+#-----------------------------------------------------------------------------------
 def UnZipFile(file):
-	dir = '.'
-	zf = zipfile.ZipFile(file)
-	
-	for fn in zf.namelist():
-		zf.extract(fn, '..\\temp')
-	zf.close()
+    print("Unzip file " + file)
+    dir = '.'
+    zf = zipfile.ZipFile(file)
+    unzipped = 0
+    for fn in zf.namelist():
+        zf.extract(fn, '..\\temp')
+        unzipped += 1
+        print("\r" + StringForPercents(unzipped / len(zf.namelist()) * 100) + " unzipped", end = '')
+    zf.close()
 
 
 #-----------------------------------------------------------------------------------
@@ -55,18 +74,14 @@ def GetFile(src, dest):
     # Размер элементарной порции чтения
     size_chunk = int(size_file / 100.0)
       
-    print()
-    
     for chunk in r.iter_content(chunk_size = size_chunk):
         zip_file.write(chunk)
         loaded_size += len(chunk)
-        
-        print("\rDownloaded " + str(int(loaded_size / 1024)) + " kb from " + str(int(size_file / 1024)) + " kb = " + str(int(loaded_size / size_file * 100)) + '%', end='')
-        
-    print()
+        percents = StringForPercents(loaded_size / size_file * 100)
+        print("\r" + percents + " : " + str(int(loaded_size / 1024)) + " kb from " + str(int(size_file / 1024)) + " kb", end='')
     
-    zip_file.close();
-
+    zip_file.close()
+    print()
 
 
 
@@ -85,7 +100,7 @@ temp_dir = '..\\temp'
 if not os.path.exists(temp_dir):
 	os.makedirs(temp_dir)
 
-print('Download file ' + full_name)
+print('\nDownload file ' + full_name)
 
 file = '..\\temp\\' + re.split('/', file_name)[1]
 
