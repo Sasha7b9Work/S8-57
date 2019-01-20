@@ -3,7 +3,7 @@ import re
 from bs4 import BeautifulSoup
 import os
 import zipfile
-import tempfile
+import time
 
 
 #-----------------------------------------------------------------------------------
@@ -73,12 +73,17 @@ def GetFile(src, dest):
     
     # Размер элементарной порции чтения
     size_chunk = int(size_file / 100.0)
+    
+    time_start = time.monotonic()
       
     for chunk in r.iter_content(chunk_size = size_chunk):
         zip_file.write(chunk)
         loaded_size += len(chunk)
         percents = StringForPercents(loaded_size / size_file * 100)
-        print("\r" + percents + " : " + str(int(loaded_size / 1024)) + " kb from " + str(int(size_file / 1024)) + " kb", end='')
+        
+        speed =  float('{:.1f}'.format(loaded_size / (time.monotonic() - time_start) / 1024 / 1024))
+        
+        print("\r" + percents + " : " + str(int(loaded_size / 1024)) + " kb from " + str(int(size_file / 1024)) + " kb " + str(speed) + " MB/s", end='')
     
     zip_file.close()
     print()
