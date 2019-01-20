@@ -23,13 +23,13 @@ def StringForPercents(percents):
 
 
 #-----------------------------------------------------------------------------------
-def UnZipFile(file):
+def UnZipFile(file, path):
     print("Unzip file " + file)
     dir = '.'
     zf = zipfile.ZipFile(file)
     unzipped = 0
     for fn in zf.namelist():
-        zf.extract(fn, '..\\temp')
+        zf.extract(fn, path)
         unzipped += 1
         print("\r" + StringForPercents(unzipped / len(zf.namelist()) * 100) + " unzipped", end = '')
     zf.close()
@@ -97,14 +97,15 @@ url = site + 'downloads/'
 full_name = GetNameFile(url)
 
 # Создаём временный каталог для скачиваемых файлов, если ещё не создан
-temp_dir = '..\\temp'
+temp_dir = '..\\temp\\wxWidgets\\'
+
 if not os.path.exists(temp_dir):
 	os.makedirs(temp_dir)
 
 print('\nDownload file ' + full_name)
 
-file = '..\\temp\\' + re.split('/', full_name)[-1]
+file = temp_dir + re.split('/', full_name)[-1]
 
 GetFile(full_name, file)
 
-UnZipFile(file)
+UnZipFile(file, temp_dir)

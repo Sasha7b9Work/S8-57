@@ -1,1 +1,1 @@
-cmake ..\temp\CMakeLists.txt -B..\temp\generated
+cmake ..\temp\wxWidgets\CMakeLists.txt -B..\temp\wxWidgets\generated

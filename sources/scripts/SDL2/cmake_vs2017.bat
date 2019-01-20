@@ -1,0 +1,1 @@
+cmake ..\temp\SDL2\SDL2-2.0.9 -B..\temp\SDL2\SDL2-2.0.9\generated
