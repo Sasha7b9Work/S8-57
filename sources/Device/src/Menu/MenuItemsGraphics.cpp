@@ -89,7 +89,7 @@ void GovernorColor::DrawClosed(int x, int y)
 {
     ct->Init();
     DrawCommonHiPart(this, x, y, IsPressed(), IsShade() || !IsAcitve(), false);
-    Region(Menu::Item::Value::WIDTH, Menu::Item::Value::HEIGHT - 1).Draw(x + 2, y + 20, ct->color);
+    Region(Menu::Item::Value::WIDTH + 1, Menu::Item::Value::HEIGHT - 3).Draw(x + 1, y + 13, ct->color);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
