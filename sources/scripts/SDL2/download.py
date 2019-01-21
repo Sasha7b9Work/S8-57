@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import requests
 import re
 from bs4 import BeautifulSoup
@@ -5,21 +7,19 @@ import os
 import zipfile
 import time
 
-
 #-----------------------------------------------------------------------------------
 # Формирует строку отображения для процентов
 def StringForPercents(percents):
-	result = ""
-	num_cells = 40
-	filled = percents / (100 / num_cells);
-	for i in range(1, num_cells):
-		if(i <= percents / (100 / num_cells)):
-			result += '|'
-		else:
-			result += '-'
-			
-	result += ' ' + str(int(percents)) + '%'
-	return result;
+    result = ""
+    num_cells = 40
+    filled = percents / (100 / num_cells);
+    for i in range(1, num_cells):
+        if(i <= percents / (100 / num_cells)):
+            result += '|'
+        else:
+            result += '-'
+    result += ' ' + str(int(percents)) + '%'
+    return result;
 
 
 #-----------------------------------------------------------------------------------
@@ -83,7 +83,7 @@ def GetFile(src, dest):
         
         speed =  float('{:.1f}'.format(loaded_size / (time.monotonic() - time_start) / 1024 / 1024))
         
-        print("\r" + percents + " : " + str(int(loaded_size / 1024)) + " kb from " + str(int(size_file / 1024)) + " kb " + str(speed) + " MB/s", end='')
+        print("\r" + percents + " : " + str(int(loaded_size / 1024)) + " kb from " + str(int(size_file / 1024)) + " kb " + str(speed) + " MB/s", end = '')
     
     zip_file.close()
     print()
@@ -109,7 +109,6 @@ print('\nDownload file ' + remote_name)
 
 file = temp_dir + re.split('/', remote_name)[-1]
 
-print("Получаем файл " + remote_name + ", " + file)
 GetFile(remote_name, file)
 
 UnZipFile(file, temp_dir)

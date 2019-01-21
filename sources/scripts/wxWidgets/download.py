@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import requests
 import re
 from bs4 import BeautifulSoup
@@ -32,7 +34,7 @@ def UnZipFile(file, path):
     for fn in zf.namelist():
         zf.extract(fn, path)
         unzipped += 1
-        print("\r" + StringForPercents(unzipped / len(zf.namelist()) * 100) + " unzipped", end = '')
+        print("\r" + StringForPercents(unzipped / len(zf.namelist()) * 100) + " unzipped", end='')
     zf.close()
 
 
