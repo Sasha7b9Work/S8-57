@@ -145,11 +145,11 @@ void Governor::StartChange(int delta)
     Sound::GovernorChangedValue();
     if (delta > 0 && tsGovernor.address == this && tsGovernor.dir == INCREASE)
     {
-        *cell = NextValue();
+        SetValue(NextValue());
     }
     else if (delta < 0 && tsGovernor.address == this && tsGovernor.dir == DECREASE)
     {
-        *cell = PrevValue();
+        SetValue(NextValue());
     }
     else
     {
@@ -162,17 +162,17 @@ void Governor::StartChange(int delta)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 int Governor::NextValue()
 {
-    return ((*cell) < maxValue) ? ((*cell) + 1) : minValue;
+    return (GetValue() < maxValue) ? (GetValue() + 1) : minValue;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 int Governor::PrevValue()
 {
-    return ((*cell) > minValue) ? ((*cell) - 1) : maxValue;
+    return (GetValue() > minValue) ? (GetValue() - 1) : maxValue;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-float Governor::Step() //-V2506
+float Governor::Step()
 {
     static const float speed = 0.05F;
     static const int numLines = 10;
@@ -192,7 +192,7 @@ float Governor::Step() //-V2506
             if (delta < -numLines)
             {
                 tsGovernor.dir = NONE;
-                *cell = PrevValue();
+                SetValue(PrevValue());
                 if (funcOfChanged)
                 {
                     funcOfChanged();
@@ -210,7 +210,7 @@ float Governor::Step() //-V2506
             if (delta > numLines)
             {
                 tsGovernor.dir = NONE;
-                *cell = NextValue();
+                SetValue(NextValue());
                 if (funcOfChanged)
                 {
                     funcOfChanged();
@@ -236,13 +236,15 @@ void Governor::ChangeValue(int delta)
         gCurDigit = 0;
     }
     
-    int oldValue = *cell;
+    int oldValue = GetValue();
 
-    *cell += (int)(Math::Sign(delta) * Math::Pow10(gCurDigit));
+    int newValue = GetValue() + (int)(Math::Sign(delta) * Math::Pow10(gCurDigit));
 
-    LIMITATION(*cell, minValue, maxValue); //-V2516
+    LIMITATION(newValue, minValue, maxValue); //-V2516
 
-    if (*cell != oldValue)
+    SetValue(newValue);
+
+    if (GetValue() != oldValue)
     {
         if (funcOfChanged)
         {
@@ -291,7 +293,7 @@ char Governor::GetSymbol()
         SYMBOL_GOVERNOR_SHIFT_2,
         SYMBOL_GOVERNOR_SHIFT_3
     };
-    int value = *cell;
+    int value = GetValue();
     while (value < 0)
     {
         value += 4;

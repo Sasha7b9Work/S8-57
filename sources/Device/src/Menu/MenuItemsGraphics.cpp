@@ -157,9 +157,9 @@ void Governor::DrawClosed(int x, int y)
 void Governor::DrawValue(int x, int y)
 {
     int startX = x + 40;
-    int signGovernor = (*cell < 0) ? -1 : 1;
+    int signGovernor = (GetValue() < 0) ? -1 : 1;
     
-    int value = *cell;
+    int value = GetValue();
     
     
     if (signGovernor == -1)
@@ -210,7 +210,8 @@ void Governor::DrawLowPart(int x, int y, bool shade)
         int delta = (int)Step();
         if (delta == 0)
         {
-            x = Integer(*cell).ToString(false, 1).Draw(x + 1, y);
+            LOG_WRITE("%d", GetValue());
+            x = Integer(GetValue()).ToString(false, 1).Draw(x + 1, y);
         }
         else
         {
@@ -222,12 +223,12 @@ void Governor::DrawLowPart(int x, int y, bool shade)
             Color::SetCurrent(Color::BLACK);
             if (delta > 0)
             {
-				x = Text(Integer(*cell).ToString(false, 1)).DrawWithLimitation(drawX, y - delta, limX, limY, limWidth, limHeight);
+				x = Text(Integer(GetValue()).ToString(false, 1)).DrawWithLimitation(drawX, y - delta, limX, limY, limWidth, limHeight);
 				Text(Integer(NextValue()).ToString(false, 1)).DrawWithLimitation(drawX, y + 10 - delta, limX, limY, limWidth, limHeight);
             }
             if (delta < 0)
             {
-				x = Text(Integer(*cell).ToString(false, 1)).DrawWithLimitation(drawX, y - delta, limX, limY, limWidth, limHeight);
+				x = Text(Integer(GetValue()).ToString(false, 1)).DrawWithLimitation(drawX, y - delta, limX, limY, limWidth, limHeight);
 				Text(Integer(PrevValue()).ToString(false, 1)).DrawWithLimitation(drawX, y - 10 - delta, limX, limY, limWidth, limHeight);
             }
         }

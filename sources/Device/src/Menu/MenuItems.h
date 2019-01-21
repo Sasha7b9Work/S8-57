@@ -319,7 +319,7 @@ public:
 class Governor : public Control
 {
 public:
-    int    *cell;
+    int     *cell;
     int     minValue;       ///< Минмальное значение, которое может принимать регулятор.
     int     maxValue;       ///< Максимальное значение.
     pFuncVV funcOfChanged;  ///< Функция, которую нужно вызывать после того, как значение регулятора изменилось.
@@ -350,6 +350,10 @@ public:
     void DrawValue(int x, int y);
 
     char GetSymbol();
+
+    int GetValue();
+
+    void SetValue(int v);
 
 private:
 
