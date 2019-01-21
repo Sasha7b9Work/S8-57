@@ -33,7 +33,7 @@ static void OnChanged_Grid_Brightness()
 
 static void BeforeDraw_Grid_Brightness()
 {
-    //PageDisplay::PageSettings::PageColors::colorTypeGrid.Init(false);
+    PageDisplay::PageSettings::PageColors::colorTypeGrid.Init();
     //Grid::SetBrightness((int)(PageDisplay::PageSettings::PageColors::colorTypeGrid.brightness * 100.0F));
 }
 

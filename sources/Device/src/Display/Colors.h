@@ -158,11 +158,12 @@ public:
     float   brightness;
     Color   color;
     int8    currentField;
-    bool    alreadyUsed;
-    bool    notUsed;
+    /// true, если структура уже инициализирована
+    bool    inititalized;
 
-    /// Если forced == false, то инициализация происходит только при первом вызове функции
-    void Init(bool forced);
+    /// Инициализация. При повторном вызове не работает. При повторных вызовах вызывать ReInit()
+    void Init();
+    void ReInit();
     void SetBrightness(float brightness = -1.0F);
     void BrightnessChange(int delta);
     void ComponentChange(int delta);
@@ -172,7 +173,7 @@ private:
 };
 
 #define DEF_COLOR_TYPE(name, r, g, b, sR, sG, sB, bright, col) ColorType name = {r, g, b, sR, sG, sB, bright, col, 0, false, false};
-#define COLOR_TYPE(r, g, b, sR, sG, sB, bright, col) {r, g, b, sR, sG, sB, bright, col, 0, false, false};
+#define COLOR_TYPE(r, g, b, sR, sG, sB, bright, col) {r, g, b, sR, sG, sB, bright, col, 0, false};
 
 
 #define MAKE_COLOR(r, g, b) ((uint)((b) + ((g) << 8) + ((r) << 16)))

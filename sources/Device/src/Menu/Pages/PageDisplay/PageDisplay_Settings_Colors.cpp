@@ -74,9 +74,9 @@ void PageDisplay::PageSettings::PageColors::OnChanged_Settings_Colors_Background
     gcChannelB.ct->color = Color::Channel(Chan::B);
     gcGrid.ct->color = Color::GRID;
 
-    gcChannelA.ct->Init(true);
-    gcChannelB.ct->Init(true);
-    gcGrid.ct->Init(true);
+    gcChannelA.ct->ReInit();
+    gcChannelB.ct->ReInit();
+    gcGrid.ct->ReInit();
 }
 
 DEF_CHOICE_2( cBackground,                                                                                                                        //--- дхяокеи - мюярпнийх - жберю - тНМ ---

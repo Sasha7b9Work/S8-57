@@ -72,7 +72,7 @@ void GovernorColor::DrawOpened(int x, int y)
 {
     static const int delta = 43;
     x -= delta;
-    ct->Init(false);
+    ct->Init();
     Rectangle(Menu::Item::HEIGHT + delta + 2, Menu::Item::HEIGHT + 2).Draw(x - 1, y - 1, Color::BLACK);
     Rectangle(Width() + delta, Menu::Item::HEIGHT).Draw(x, y, Color::MenuTitle(false));
     Region(Menu::Item::Value::WIDTH + 2 + delta, Menu::Item::Value::HEIGHT + 3).Draw(x + 1, y + 1, Color::MenuItem(false));
@@ -87,7 +87,7 @@ void GovernorColor::DrawOpened(int x, int y)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void GovernorColor::DrawClosed(int x, int y)
 {
-    ct->Init(false);
+    ct->Init();
     DrawCommonHiPart(this, x, y, IsPressed(), IsShade() || !IsAcitve(), false);
     Region(Menu::Item::Value::WIDTH, Menu::Item::Value::HEIGHT - 1).Draw(x + 2, y + 20, ct->color);
 }
@@ -102,7 +102,7 @@ void GovernorColor::DrawValue(int x, int y, int delta)
     uint red = R_FROM_COLOR(color);
     uint green = G_FROM_COLOR(color);
     uint blue = B_FROM_COLOR(color);
-    ct->Init(false);
+    ct->Init();
     int16 vals[4] = {(int16)(ct->brightness * 100.0F), (int16)blue, (int16)green, (int16)red};
 
     Region(Width() + delta - 2, Menu::Item::HEIGHT / 2 - 3).Draw(x, y, Color::BLACK);

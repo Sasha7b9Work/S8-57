@@ -172,31 +172,33 @@ bool operator>(const Color &left, const Color &right)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void ColorType::Init(bool forced)
+void ColorType::Init()
 {
-    if (forced)
+    if (!inititalized)
     {
-        alreadyUsed = false;
+        ReInit();
+        inititalized = true;
     }
+}
 
-    if (!alreadyUsed)
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void ColorType::ReInit()
+{
+    uint colorValue = COLOR(color.value);
+
+    red = (float)R_FROM_COLOR(colorValue);
+    green = (float)G_FROM_COLOR(colorValue);
+    blue = (float)B_FROM_COLOR(colorValue);
+
+    SetBrightness();
+
+    if (Math::IsEquals(red, 0.0F) &&
+        Math::IsEquals(green, 0.0F) &&
+        Math::IsEquals(blue, 0.0F))
     {
-        alreadyUsed = true;                  // Признак того, что начальные установки уже произведены
-
-        uint colorValue = COLOR(color.value);
-
-        red = (float)R_FROM_COLOR(colorValue);
-        green = (float)G_FROM_COLOR(colorValue);
-        blue = (float)B_FROM_COLOR(colorValue);
-
-        SetBrightness();
-        
-        if (red == 0.0F && green == 0.0F && blue == 0.0F)   // -V550
-        {
-            stepRed = 0.31F;
-            stepGreen = 0.63F;
-            stepBlue = 0.31F;
-        }
+        stepRed = 0.31F;
+        stepGreen = 0.63F;
+        stepBlue = 0.31F;
     }
 }
 

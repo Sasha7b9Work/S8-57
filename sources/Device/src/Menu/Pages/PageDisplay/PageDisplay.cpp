@@ -22,7 +22,7 @@ const PageBase *PageDisplay::pointer = &pageDisplay;
 
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-DEF_CHOICE_2(cThickness,                                                                                            //--- ДИСПЛЕЙ - Толщина ---
+DEF_CHOICE_2( cThickness,                                                                                                                                         //--- ДИСПЛЕЙ - Толщина ---
     "Толщина", "Thickness",
     "Позволяет изменять толщину выводимых на экран изображений",
     "Allows you to change the thickness of the signals displayed on the screen",
@@ -38,7 +38,7 @@ void PageDisplay::Init()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-DEF_CHOICE_2(       cViewMode,                                                                                         //--- ДИСПЛЕЙ - Отображение ---
+DEF_CHOICE_2( cViewMode,                                                                                                                                      //--- ДИСПЛЕЙ - Отображение ---
     "Отображ.", "View",
     "Задаёт режим отображения сигнала.",
     "Sets the display mode signal.",
@@ -55,18 +55,9 @@ static bool IsActive_MinMax()
 
 static void OnChanged_MinMax(bool)
 {
-    /*
-    int maxMeasures = DS_NumberAvailableEntries();  
-    int numMinMax = sDisplay_NumberMinMax();
-
-    if (maxMeasures < numMinMax)
-    {
-    display.ShowWarningWithNumber(ExcessValues, maxMeasures);
-    }
-    */
 }
 
-DEF_CHOICE_8(       cMinMax,                                                                                              //--- ДИСПЛЕЙ - Мин Макс ---
+DEF_CHOICE_8( cMinMax,                                                                                                                                           //--- ДИСПЛЕЙ - Мин Макс ---
     "Мин Макс", "Min Max",
     "Задаёт количество последних измерений, по которым строятся ограничительные линии, огибающие минимумы и максимумы измерений.",
     "Sets number of the last measurements on which the limiting lines which are bending around minima and maxima of measurements are under "
@@ -84,7 +75,7 @@ DEF_CHOICE_8(       cMinMax,                                                    
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-DEF_CHOICE_REG_10(  cSmoothing,                                                                                        //--- ДИСПЛЕЙ - Сглаживание ---
+DEF_CHOICE_REG_10( cSmoothing,                                                                                                                                //--- ДИСПЛЕЙ - Сглаживание ---
     "Сглаж.", "Smoothing",
     "Устанавливает количество точек для расчёта сглаженного по соседним точкам сигнала.",
     "Establishes quantity of points for calculation of the signal smoothed on the next points."
