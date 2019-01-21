@@ -73,7 +73,7 @@ void GovernorColor::DrawOpened(int x, int y)
     static const int delta = 43;
     x -= delta;
     ct->Init();
-    Rectangle(Menu::Item::HEIGHT + delta + 2, Menu::Item::HEIGHT + 2).Draw(x - 1, y - 1, Color::BLACK);
+    Rectangle(Menu::Item::HEIGHT + delta + 2, Menu::Item::HEIGHT + 2).Draw(x - 1, y - 1, Color::BACK);
     Rectangle(Width() + delta, Menu::Item::HEIGHT).Draw(x, y, Color::MenuTitle(false));
     Region(Menu::Item::Value::WIDTH + 2 + delta, Menu::Item::Value::HEIGHT + 3).Draw(x + 1, y + 1, Color::MenuItem(false));
 
@@ -117,7 +117,6 @@ void GovernorColor::DrawValue(int x, int y, int delta)
         Integer(vals[i]).ToString(false, 1).Draw(x + 14, y + 2);
         x -= 30;
     }
-
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
