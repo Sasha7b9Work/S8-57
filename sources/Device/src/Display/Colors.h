@@ -138,15 +138,23 @@ bool operator==(const Color &left, const Color &right);
 bool operator>(const Color &left, const Color &right);
 
 
+/// —труктура используетс€ дл€ визуальной настройки цвета
 class ColorType
 {
 public:
+    ///  расна€ составл€юща€ цвета [0.0...1.0]
     float   red;
+    /// «елЄна€ составл€юща€ цвета [0.0...1.0]
     float   green;
+    /// —ин€€ составл€юща€ цвета [0.0...1.0]
     float   blue;
+    /// Ўаг изменени€ красной составл€ющей цвета
     float   stepRed;
+    /// Ўаг изменени€ зелЄной составл€ющей цвета
     float   stepGreen;
+    /// Ўаг изменени€ синей составл€ющей цвета
     float   stepBlue;
+    /// яркость [0...1]
     float   brightness;
     Color   color;
     int8    currentField;

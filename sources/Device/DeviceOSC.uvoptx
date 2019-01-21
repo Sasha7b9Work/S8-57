@@ -164,25 +164,41 @@
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>&lt;1&gt;.\src\Keyboard\HandlersKeys.cpp</Filename>
+          <Filename>.\src\Keyboard\HandlersKeys.cpp</Filename>
           <ExecCommand></ExecCommand>
           <Expression>\\FPGA\src/Keyboard/HandlersKeys.cpp\348</Expression>
         </Bp>
         <Bp>
           <Number>1</Number>
           <Type>0</Type>
-          <LineNumber>203</LineNumber>
+          <LineNumber>36</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134353136</Address>
+          <Address>134294826</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>&lt;1&gt;.\src\Menu\MenuItemsGraphics.cpp</Filename>
+          <Filename>.\src\Menu\Pages\PageDisplay\PageDisplay_Grid.cpp</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\FPGA\src/Menu/MenuItemsGraphics.cpp\203</Expression>
+          <Expression>\\FPGA\src/Menu/Pages/PageDisplay/PageDisplay_Grid.cpp\36</Expression>
+        </Bp>
+        <Bp>
+          <Number>2</Number>
+          <Type>0</Type>
+          <LineNumber>184</LineNumber>
+          <EnabledFlag>1</EnabledFlag>
+          <Address>134357828</Address>
+          <ByteObject>0</ByteObject>
+          <HtxType>0</HtxType>
+          <ManyObjects>0</ManyObjects>
+          <SizeOfObject>0</SizeOfObject>
+          <BreakByAccess>0</BreakByAccess>
+          <BreakIfRCount>1</BreakIfRCount>
+          <Filename>.\src\Display\Colors.cpp</Filename>
+          <ExecCommand></ExecCommand>
+          <Expression>\\FPGA\src/Display/Colors.cpp\184</Expression>
         </Bp>
       </Breakpoint>
       <WatchWindow1>
@@ -3058,7 +3074,7 @@
 
   <Group>
     <GroupName>Menu/Pages/PageDisplay</GroupName>
-    <tvExp>0</tvExp>
+    <tvExp>1</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>

@@ -210,7 +210,6 @@ void Governor::DrawLowPart(int x, int y, bool shade)
         int delta = (int)Step();
         if (delta == 0)
         {
-            LOG_WRITE("%d", GetValue());
             x = Integer(GetValue()).ToString(false, 1).Draw(x + 1, y);
         }
         else

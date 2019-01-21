@@ -50,11 +50,11 @@ public:
             static const PageBase *pointer;
 
             static void OnChanged_Settings_Colors_Background(bool);
-
+            /// Для сетки
             static ColorType colorTypeGrid;
-
+            /// Для первого канала
             static ColorType colorTypeA;
-
+            /// Для второго канала
             static ColorType colorTypeB;
         };
     };
