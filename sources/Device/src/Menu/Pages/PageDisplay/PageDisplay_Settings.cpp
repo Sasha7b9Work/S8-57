@@ -19,7 +19,7 @@ static void OnChanged_Settings_Brightness()
 {
 }
 
-DEF_GOVERNOR( gBrightness,                                                                                     //--- ДИСПЛЕЙ - НАСТРОЙКИ - Яркость ---
+DEF_GOVERNOR( gBrightness,                                                                                                                            //--- ДИСПЛЕЙ - НАСТРОЙКИ - Яркость ---
     "Яркость", "Brightness",
     "Установка яркости свечения дисплея",
     "Setting the brightness of the display",
@@ -27,7 +27,7 @@ DEF_GOVERNOR( gBrightness,                                                      
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-DEF_GOVERNOR( gLevels,                                                                                          //--- ДИСПЛЕЙ - НАСТРОЙКИ - Уровни ---
+DEF_GOVERNOR( gLevels,                                                                                                                                 //--- ДИСПЛЕЙ - НАСТРОЙКИ - Уровни ---
     "Уровни", "Levels",
     "Задаёт время, в течение которого после поворота ручки сещения напряжения на экране остаётся вспомогательная метка уровня смещения",
     "Defines the time during which, after turning the handle visits to the voltage on the screen remains auxiliary label offset level",
@@ -35,7 +35,7 @@ DEF_GOVERNOR( gLevels,                                                          
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-DEF_GOVERNOR( gTime,                                                                                             //--- ДИСПЛЕЙ - НАСТРОЙКИ - Время ---
+DEF_GOVERNOR( gTime,                                                                                                                                    //--- ДИСПЛЕЙ - НАСТРОЙКИ - Время ---
     "Время", "Time",
     "Установка времени, в течение которого сообщения будут находиться на экране",
     "Set the time during which the message will be on the screen",
@@ -43,7 +43,7 @@ DEF_GOVERNOR( gTime,                                                            
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-DEF_CHOICE_3( cStringNavigation,                                                                           //--- ДИСПЛЕЙ - НАСТРОЙКИ - Строка меню ---
+DEF_CHOICE_3( cStringNavigation,                                                                                                                  //--- ДИСПЛЕЙ - НАСТРОЙКИ - Строка меню ---
     "Строка меню", "Path menu",
     "При выборе \nПоказывать\n слева вверху экрана выводится полный путь до текущей страницы меню", /// \todo Исправить перевод
     "When choosing \nDisplay\n at the top left of the screen displays the full path to the current page menu",
@@ -59,7 +59,7 @@ static void OnChanged_Settings_AltMarkers(bool active)
     Display::ChangedRShiftMarkers(active);
 }
 
-DEF_CHOICE_3( cAltMarkers,                                                                                //--- ДИСПЛЕЙ - НАСТРОЙКИ - Доп. маркеры ---
+DEF_CHOICE_3( cAltMarkers,                                                                                                                       //--- ДИСПЛЕЙ - НАСТРОЙКИ - Доп. маркеры ---
     "Доп. маркеры", "Alt. markers",
     "Устанавливает режим отображения дополнительных маркеров уровней смещения и синхронизации:\n"
     "\"Скрывать\" - дополнительные маркеры не показываются,\n"
