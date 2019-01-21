@@ -4,10 +4,8 @@
 
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-class PageDisplay
+struct PageDisplay
 {
-public:
-
     static void Init();
 
     static void OnChanged_RefreshFPS(bool);
@@ -15,41 +13,36 @@ public:
     static const PageBase *pointer;
 
     //------------------------------------------------------------------------------------------------------------------------------------------------
-    class PageAccumulation
+    struct PageAccumulation
     {
-    public:
         static const PageBase *pointer;
 
         static void OnPress_Accumulation_Clear();
     };
 
     //------------------------------------------------------------------------------------------------------------------------------------------------
-    class PageAverage
+    struct PageAverage
     {
-    public:
         static const PageBase *pointer;
     };
 
     //------------------------------------------------------------------------------------------------------------------------------------------------
-    class PageGrid
+    struct PageGrid
     {
-    public:
         static const PageBase *pointer;
     };
 
     //------------------------------------------------------------------------------------------------------------------------------------------------
-    class PageSettings
+    struct PageSettings
     {
-    public:
         static const PageBase *pointer;
 
         //--------------------------------------------------------------------------------------------------------------------------------------------
-        class PageColors
+        struct PageColors
         {
-        public:
             static const PageBase *pointer;
 
-            static void OnChanged_Settings_Colors_Background(bool);
+            static void Init();
             /// Для сетки
             static ColorType colorTypeGrid;
             /// Для первого канала

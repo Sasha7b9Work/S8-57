@@ -66,7 +66,7 @@ DEF_GOVERNOR_COLOR( gcGrid,                                                     
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void PageDisplay::PageSettings::PageColors::OnChanged_Settings_Colors_Background(bool)
+static void OnChanged_Settings_Colors_Background(bool active = true)
 {
     Color::InitGlobalColors();
 
@@ -85,10 +85,16 @@ DEF_CHOICE_2( cBackground,                                                      
     "Choice of color of a background",
     "Чёрный", "Black",
     "Белый", "White",
-    BACKGROUND, pageColors, FuncActive, PageDisplay::PageSettings::PageColors::OnChanged_Settings_Colors_Background, FuncDraw
+    BACKGROUND, pageColors, FuncActive, OnChanged_Settings_Colors_Background, FuncDraw
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+void PageDisplay::PageSettings::PageColors::Init()
+{
+    OnChanged_Settings_Colors_Background();
+}
+
+
 /// \todo Добавить дополнительные цвета 1-го и 2-го каналов
 DEF_PAGE_6( pageColors, // -V641 // -V1027                                                                                                              //--- ДИСПЛЕЙ - НАСТРОЙКИ - ЦВЕТА ---
     "ЦВЕТА", "COLORS",
