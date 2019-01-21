@@ -68,7 +68,7 @@ public:
     Display::ENumSmoothing::E       disp_ENumSmoothing;         ///< ѕеречисление количества точек дл€ скольз€щего фильтра.
     Display::ENumSignalsInSec::E    disp_ENumSignalsInSec;      ///< ѕеречисление числа считываний сигнала в секунда.
     Grid::Type::E                   disp_typeGrid;              ///< “ип сетки
-    int16                           disp_brightnessGrid;        ///< яркость сетки от 0 до 100.
+    int                             disp_brightnessGrid;        ///< яркость сетки от 0 до 100.
     Display::LinkingRShift::E       disp_linkingRShift;         ///< “ип прив€зки к смещению по вертикали.
     int16                           disp_brightness;            ///< яркость диспле€.
     int16                           disp_timeShowLevels;        ///< ¬рем€, в течение которого нужно показывать уровин смещени€.
