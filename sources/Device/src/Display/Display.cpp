@@ -295,7 +295,7 @@ static void FuncOnWait()
     int x = 160 - width / 2;
     int y = 120 - height / 2;
 
-    Region(width, height).Draw(x, y, Color::BACK);
+    Region(width, height).Fill(x, y, Color::BACK);
     Rectangle(width, height).Draw(x, y, Color::FILL);
 
     //Painter::DrawStringInCenterRect(x, y, width, height - 20, textWait);

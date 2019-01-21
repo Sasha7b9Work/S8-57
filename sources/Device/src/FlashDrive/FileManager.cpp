@@ -54,7 +54,7 @@ static void DrawLongString(int x, int y, const char *string, bool hightlight)
     Color color = Color::FILL;
     if (hightlight)
     {
-        Region(WIDTH_COL + 9, 8).Draw(x - 1, y, color);
+        Region(WIDTH_COL + 9, 8).Fill(x - 1, y, color);
         color = Color::BACK;
     }
 
@@ -76,7 +76,7 @@ static void DrawLongString(int x, int y, const char *string, bool hightlight)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void DrawHat(int x, int y, const char *string, int num1, int num2)
 {
-    Region(WIDTH_COL + 9, RECS_ON_PAGE * 9 + 11).Draw(x - 1, y, Color::BACK);
+    Region(WIDTH_COL + 9, RECS_ON_PAGE * 9 + 11).Fill(x - 1, y, Color::BACK);
     String(string, num1, num2).Draw(x + 60, y, Color::FILL);
 
 	//Painter::DrawHLine(y + 10, x + 2, x + 140);
@@ -171,7 +171,7 @@ void FileManager::Draw() //-V2506
         Painter::BeginScene(Color::BACK);
         Menu::Draw();
         Rectangle(width, 239).Draw(0, 0, Color::FILL);
-        Region(Grid::Width() - 2, Grid::Height() - 2).Draw(left, top, Color::BACK);
+        Region(Grid::Width() - 2, Grid::Height() - 2).Fill(left, top, Color::BACK);
         FDrive::GetNumDirsAndFiles(currentDir, &numDirs, &numFiles);
         DrawNameCurrentDir(left, top + 2);
 

@@ -283,24 +283,18 @@ float FrequencyCounter::GetFreq()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void DrawFrequency(int x, int y)
 {
-    //Painter::DrawBigText(x + 2, y + 1, SIZE, "F", Color::FILL);
     Text("F", SIZE).Draw(x + 2, y + 1, Color::FILL);
-
-    //Painter::DrawBigText(x + 2, y + 10 * SIZE, SIZE, "T");
     Text("T", SIZE).Draw(x + 2, y + 10 * SIZE);
 
     Rectangle(10, 10).Draw(x - 20, y);
     if (lampFreq)
     {
-        Region(10, 10).Draw(x - 20, y);
+        Region(10, 10).Fill(x - 20, y);
     }
 
     int dX = 7 * SIZE;
 
-    //Painter::DrawBigText(x + dX, y + 1, SIZE, "=");
     Text("=", SIZE).Draw(x + dX, y + 1);
-
-    //Painter::DrawBigText(x + dX, y + 10 * SIZE, SIZE, "=");
     Text("=", SIZE).Draw(x + dX, y + 10 * SIZE);
 
     dX = SIZE * 12;
@@ -308,7 +302,6 @@ static void DrawFrequency(int x, int y)
     char strFreq[50];
     std::strcpy(strFreq, FreqSetToString(&freqActual));
 
-    //Painter::DrawBigText(x + dX, y + 1, SIZE, strFreq);
     Text(strFreq, SIZE).Draw(x + dX, y + 1);
 
     if (std::strcmp(strFreq, EMPTY_STRING) == 0)
@@ -342,31 +335,25 @@ static void DrawFrequency(int x, int y)
 
     Time time(1.0F / freq);
 
-    //Painter::DrawBigText(x + dX, y + 10 * SIZE, SIZE, time.ToStringAccuracy(false, strFreq, 6));
     Text(time.ToStringAccuracy(false, strFreq, 6), SIZE).Draw(x + dX, y + 10 * SIZE);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void DrawPeriod(int x, int y)
 {
-    //Painter::DrawBigText(x + 2, y + 1, SIZE, "T", Color::FILL);
     Text("T", SIZE).Draw(x + 2, y + 1, Color::FILL);
-
-    //Painter::DrawBigText(x + 2, y + 10 * SIZE, SIZE, "F");
     Text("F", SIZE).Draw(x + 2, y + 10 * SIZE);
 
     Rectangle(10, 10).Draw(x - 20, y + 1);
     if (lampPeriod)
     {
-        Region(10, 10).Draw(x - 20, y);
+        Region(10, 10).Fill(x - 20, y);
     }
 
     int dX = 7 * SIZE;
 
-    //Painter::DrawBigText(x + dX, y + 1, SIZE, "=");
     Text("=", SIZE).Draw(x + dX, y + 1);
 
-    //Painter::DrawBigText(x + dX, y + 10 * SIZE, SIZE, "=");
     Text("=", SIZE).Draw(x + dX, y + 10 * SIZE);
 
     dX = SIZE * 12;
@@ -374,7 +361,6 @@ static void DrawPeriod(int x, int y)
     char strPeriod[50];
     std::strcpy(strPeriod, PeriodSetToString(&periodActual));
 
-    //Painter::DrawBigText(x + dX, y + 1, SIZE, strPeriod);
     Text(strPeriod, SIZE).Draw(x + dX, y + 1);
 
     if ((std::strcmp(strPeriod, EMPTY_STRING) == 0) || (std::strcmp(strPeriod, OVERFLOW_STRING) == 0))
@@ -403,7 +389,6 @@ static void DrawPeriod(int x, int y)
 
     Frequency freq(1.0F / period);
 
-    //Painter::DrawBigText(x + dX, y + 10 * SIZE, SIZE, freq.ToStringAccuracy(strPeriod, 6));
     Text(freq.ToStringAccuracy(strPeriod, 6), SIZE).Draw(x + dX, y + 10 * SIZE);
 }
 
@@ -423,7 +408,7 @@ void FrequencyCounter::Draw()
     int y = Grid::Top() + (Grid::Height() / 2 - height) / 2;
 
     
-    Region(width - 2, height - 2).Draw(x + 1, y + 1, Color::BACK);
+    Region(width - 2, height - 2).Fill(x + 1, y + 1, Color::BACK);
     Rectangle(width, height).Draw(x, y, Color::FILL);
 
     x += 2;
@@ -812,7 +797,7 @@ static void DrawDebugInfo()
     int height = 27;
     int x = 50;
     int y = 120;
-    Region(width, height).Draw(x, y, Color::BACK);
+    Region(width, height).Fill(x, y, Color::BACK);
     Rectangle(width + 2, height + 2).Draw(x - 1, y - 1, Color::FILL);
 
     String("%d", freqActual.word).Draw(x + 4, y + 4);
@@ -822,7 +807,7 @@ static void DrawDebugInfo()
     width = 120;
 
 
-    Region(width, height).Draw(x, y, Color::BACK);
+    Region(width, height).Fill(x, y, Color::BACK);
     Rectangle(width + 2, height + 2).Draw(x - 1, y - 1, Color::FILL);
 
     String("%d", lastFreq.word).Draw(x + 4, y + 4);
@@ -838,14 +823,14 @@ static void DrawDebugInfo()
 
     if (TIME_MS - lastFreqRead < TIME)
     {
-        Region(size - 2, size - 2).Draw(x + 1, y + 5, Color::BLUE);
+        Region(size - 2, size - 2).Fill(x + 1, y + 5, Color::BLUE);
     }
 
     Rectangle(size, size).Draw(x, y + 15, Color::FILL);
 
     if (TIME_MS - lastPeriodRead < TIME)
     {
-        Region(size - 2, size - 2).Draw(x + 1, y + 16, Color::BLUE);
+        Region(size - 2, size - 2).Fill(x + 1, y + 16, Color::BLUE);
     }
 
     x += 20;
@@ -854,25 +839,25 @@ static void DrawDebugInfo()
 
     if (TIME_MS - lastFreqOver < TIME)
     {
-        Region(size - 2, size - 2).Draw(x + 1, y + 5, Color::RED);
+        Region(size - 2, size - 2).Fill(x + 1, y + 5, Color::RED);
     }
 
     Rectangle(size, size).Draw(x, y + 15, Color::FILL);
 
     if (TIME_MS - lastPeriodOver < TIME)
     {
-        Region(size - 2, size - 2).Draw(x + 1, y + 16, Color::RED);
+        Region(size - 2, size - 2).Fill(x + 1, y + 16, Color::RED);
     }
 
     x += 20;
 
     if (GetFlag::FREQ_IN_PROCESS())
     {
-        Region(size - 2, size - 2).Draw(x + 1, y + 5, Color::FILL);
+        Region(size - 2, size - 2).Fill(x + 1, y + 5, Color::FILL);
     }
 
     if (GetFlag::PERIOD_IN_PROCESS())
     {
-        Region(size - 2, size - 2).Draw(x + 1, y + 16, Color::FILL);
+        Region(size - 2, size - 2).Fill(x + 1, y + 16, Color::FILL);
     }
 }

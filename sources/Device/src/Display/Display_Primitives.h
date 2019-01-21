@@ -11,7 +11,7 @@ namespace Display
         {
         public:
             Region(int width, int height);
-            void Draw(int x, int y, Color color = Color::NUMBER);
+            void Fill(int x, int y, Color color = Color::NUMBER);
             void DrawBounded(int x, int y, Color colorFill, Color colorBound);
         private:
             int width;

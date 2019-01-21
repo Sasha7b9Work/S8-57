@@ -68,9 +68,9 @@ static void DrawPageDescription()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void HelpContent_Draw()
 {
-    Region(319 - Grid::Right(), 20).Draw(Grid::Right(), 0, Color::BACK);
-    Region(319 - Grid::Right(), 21).Draw(Grid::Right(), 219);
-    Region(WIDTH, 237).Draw(1, 1);
+    Region(319 - Grid::Right(), 20).Fill(Grid::Right(), 0, Color::BACK);
+    Region(319 - Grid::Right(), 21).Fill(Grid::Right(), 219);
+    Region(WIDTH, 237).Fill(1, 1);
     Rectangle(WIDTH + 1, 239).Draw(1, 0, Color::FILL);   /** \todo Здесь непонятно, почему так. Координаты верхнего левого угла должны быть
                                                                 0, 0, но в таком случае левой вертикальной полосы не видно */
 

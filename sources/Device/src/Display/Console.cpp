@@ -32,7 +32,7 @@ void Console::Draw()
     for (int i = 0; i < stringInConsole; i++)
     {
         int length = Font::GetLengthText(buffer[i]);
-        Region(length, 6).Draw(0, y + 3, Color::BACK);
+        Region(length, 6).Fill(0, y + 3, Color::BACK);
         String(buffer[i]).Draw(1, y, Color::FILL);
         y += 6;
     }

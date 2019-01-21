@@ -108,10 +108,7 @@ void PainterData::DrawChannel(Chan::E ch)
 
                 if (value == valuePrev)
                 {
-                    //Painter::DrawHLine(value, x - 1, x + 1);
                     HLine(2).Draw(x - 1, value);
-
-                    //Painter::DrawVLine(x++, value - 1, value + 1);
                     VLine(2).Draw(x++, value - 1);
                 }
                 else
@@ -124,13 +121,8 @@ void PainterData::DrawChannel(Chan::E ch)
                         ::Math::Swap(&valuePrev, &value);
                     }
 
-                    //Painter::DrawVLine(x - 1, value, valuePrev);
                     VLine(valuePrev - value).Draw(x - 1, value);
-
-                    //Painter::DrawVLine(x + 1, value, valuePrev);
                     VLine(valuePrev - value).Draw(x + 1, value);
-
-                    //Painter::DrawVLine(x++, valuePrev + 1, value - 1);
                     VLine(value - valuePrev - 2).Draw(x++, valuePrev + 1);
                 }
             }
@@ -147,7 +139,6 @@ void PainterData::DrawChannel(Chan::E ch)
                 int min = (int)(center - (data[i] - VALUE::AVE) * scale + 0.5F);
                 int max = (int)(center - (data[i + 1] - VALUE::AVE) * scale + 0.5F);
 
-                //Painter::DrawVLine(x++, max, min);
                 VLine(min - max).Draw(x++, max);
             }
         }
@@ -160,13 +151,11 @@ void PainterData::DrawChannel(Chan::E ch)
 
                 if(value == valuePrev)
                 {
-                    //Painter::SetPoint(x++, valuePrev);
                     Point().Draw(x++, valuePrev);
                 }
                 else
                 {
                     int val = valuePrev > value ? (value + 1) : (value - 1);
-                    //Painter::DrawVLine(x++, valuePrev, val);
                     VLine(val - valuePrev).Draw(x++, valuePrev);
                 }
             }
@@ -181,9 +170,7 @@ void PainterData::DrawChannel(Chan::E ch)
             int x = left;
             for(int i = 0; i < 281 * 2; i += 2)
             {
-                //Painter::SetPoint(x, (int)(center - (data[i] - VALUE::AVE) * scale + 0.5F));
                 Point().Draw(x, (int)(center - (data[i] - VALUE::AVE) * scale + 0.5F));
-                //Painter::SetPoint(x, (int)(center - (data[i + 1] - VALUE::AVE) * scale + 0.5F));
                 Point().Draw(x, (int)(center - (data[i + 1] - VALUE::AVE) * scale + 0.5F));
                 x++;
             }
@@ -193,7 +180,6 @@ void PainterData::DrawChannel(Chan::E ch)
             for (int i = 0; i < 280; i++)
             {
                 float value = center - (data[i] - VALUE::AVE) * scale;
-                //Painter::SetPoint(left + i, ROUND(uint8, value));
                 Point().Draw(left + i, ROUND(uint8, value));
             }
         }
@@ -205,8 +191,7 @@ void PainterData::DrawTPos(int leftX, int rightX)
 {
     int x[] = {leftX, (rightX - leftX) / 2 + leftX, rightX};
     int x0 = x[TPOS];
-    Region(6, 6).Draw(x0 - 3, 10, Color::BACK);
-    //Painter::DrawChar(x0 - 3, 10, SYMBOL_TPOS_1, Color::FILL);
+    Region(6, 6).Fill(x0 - 3, 10, Color::BACK);
     Char(SYMBOL_TPOS_1).Draw(x0 - 3, 10, Color::FILL);
 }
 
@@ -245,10 +230,7 @@ void PainterData::DrawTShift(int leftX, int rightX, int numBytes)
     Region(6, 6).Draw((int)xShift - 1, 1, Color::BACK);
     Region(4, 4).Draw((int)xShift, 2, Color::FILL);
 
-    //Painter::DrawLine((int)xShift + dX01, 3, (int)xShift + dX11, dY11 - 2, Color::BACK);
     Line((int)xShift + dX01, 3, (int)xShift + dX11, dY11 - 2).Draw(Color::BACK);
-
-    //Painter::DrawLine((int)xShift + dX02, 4, (int)xShift + 2, dY12 - 2);
     Line((int)xShift + dX02, 4, (int)xShift + 2, dY12 - 2).Draw();
 }
 

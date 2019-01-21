@@ -86,7 +86,7 @@ void MemoryWindow::DrawScreenArea()
     int begin = (int)(relBegin * Width() + 0.5F);   // Реальное начало экранной области относительно начала окна памяти
     int width = (int)(relWidth * Width() + 0.5F);   // Реальная ширина видимой области
 
-    Region(width, Height()).Draw(X() + begin, Y(), Color::GRAY_20);
+    Region(width, Height()).Fill(X() + begin, Y(), Color::GRAY_20);
 
     Rectangle(width, Height()).Draw(X() + begin, Y(), Color::FILL);
 }

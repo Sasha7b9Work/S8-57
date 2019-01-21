@@ -75,7 +75,7 @@ void GovernorColor::DrawOpened(int x, int y)
     ct->Init();
     Rectangle(Menu::Item::HEIGHT + delta + 2, Menu::Item::HEIGHT + 2).Draw(x - 1, y - 1, Color::BACK);
     Rectangle(Width() + delta, Menu::Item::HEIGHT).Draw(x, y, Color::MenuTitle(false));
-    Region(Menu::Item::Value::WIDTH + 2 + delta, Menu::Item::Value::HEIGHT + 3).Draw(x + 1, y + 1, Color::MenuItem(false));
+    Region(Menu::Item::Value::WIDTH + 2 + delta, Menu::Item::Value::HEIGHT + 3).Fill(x + 1, y + 1, Color::MenuItem(false));
 
     HLine(Width() + delta).Draw(x, y + Menu::Item::HEIGHT / 2 + 2, Color::MenuTitle(false));
 
@@ -89,7 +89,7 @@ void GovernorColor::DrawClosed(int x, int y)
 {
     ct->Init();
     DrawCommonHiPart(this, x, y, IsPressed(), IsShade() || !IsAcitve(), false);
-    Region(Menu::Item::Value::WIDTH + 1, Menu::Item::Value::HEIGHT - 3).Draw(x + 1, y + 13, ct->color);
+    Region(Menu::Item::Value::WIDTH + 1, Menu::Item::Value::HEIGHT - 3).Fill(x + 1, y + 13, ct->color);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -105,14 +105,14 @@ void GovernorColor::DrawValue(int x, int y, int delta)
     ct->Init();
     int16 vals[4] = {(int16)(ct->brightness * 100.0F), (int16)blue, (int16)green, (int16)red};
 
-    Region(Width() + delta - 2, Menu::Item::HEIGHT / 2 - 3).Draw(x, y, Color::BLACK);
+    Region(Width() + delta - 2, Menu::Item::HEIGHT / 2 - 3).Fill(x, y, Color::BLACK);
     x += 92;
 
     for (int i = 0; i < 4; i++)
     {
         Color colorBack = (field == i) ? Color::WHITE : Color::BLACK;
         Color colorDraw = (field == i) ? Color::BLACK : Color::WHITE;
-        Region(29, 10).Draw(x - 1, y + 1, colorBack);
+        Region(29, 10).Fill(x - 1, y + 1, colorBack);
         String(texts[i]).Draw(x, y + 2, colorDraw);
         Integer(vals[i]).ToString(false, 1).Draw(x + 14, y + 2);
         x -= 30;
@@ -190,7 +190,7 @@ void Governor::DrawLowPart(int x, int y, bool shade)
 {
     Color colorTextDown = Color::BLACK;
 
-    Region(Menu::Item::Value::WIDTH + 1, Menu::Item::Value::HEIGHT - 3).Draw(x + 1, y - 1, Color::MENU_FIELD);
+    Region(Menu::Item::Value::WIDTH + 1, Menu::Item::Value::HEIGHT - 3).Fill(x + 1, y - 1, Color::MENU_FIELD);
 
     if (shade)
     {
@@ -260,7 +260,7 @@ void Choice::DrawOpened(int x, int y)
     Rectangle(Width(), height).Draw(x, y, Color::FILL);
     DrawCommonHiPart(this, x, y, IsPressed(), false, true);
 
-    Region(Width() - 2, height - MOI_HEIGHT_TITLE + 4).Draw(x + 1, y + MOI_HEIGHT_TITLE - 5, Color::BACK);
+    Region(Width() - 2, height - MOI_HEIGHT_TITLE + 4).Fill(x + 1, y + MOI_HEIGHT_TITLE - 5, Color::BACK);
     int8 index = *cell;
     for (int i = 0; i < NumSubItems(); i++)
     {
@@ -268,7 +268,7 @@ void Choice::DrawOpened(int x, int y)
         bool pressed = i == index;
         if (pressed)
         {
-            Region(Width() - 2, MOSI_HEIGHT - 1).Draw(x + 1, yItem + 2, ColorMenuField(this));
+            Region(Width() - 2, MOSI_HEIGHT - 1).Fill(x + 1, yItem + 2, ColorMenuField(this));
         }
         NameSubItem(i).Draw(x + 4, yItem + 2, pressed ? Color::BLACK : ColorMenuField(this));
     }
@@ -280,7 +280,7 @@ void Choice::DrawClosed(int x, int y)
     bool pressed = IsPressed();
     bool shade = IsShade() || !funcOfActive();
 
-    Region(Menu::Item::Value::WIDTH + 1, Menu::Item::Value::HEIGHT - 3).Draw(x + 1, y + Menu::Item::Value::HEIGHT, ColorMenuField(this));
+    Region(Menu::Item::Value::WIDTH + 1, Menu::Item::Value::HEIGHT - 3).Fill(x + 1, y + Menu::Item::Value::HEIGHT, ColorMenuField(this));
 
     int deltaY = (int)Step();
     Color colorText = shade ? Color::MenuItem(true) : Color::BLACK;
@@ -314,8 +314,8 @@ void Button::Draw(int x, int y)
     bool shade = IsShade() || !funcOfActive();
     Color color = shade ? Color::MenuItem(true) : Color::WHITE;
     
-    Region(Width() - 2, Menu::Item::HEIGHT - 2).Draw(x + 1, y + 2, Color::MenuItem(false));
-    Region(Width() - 6, Menu::Item::HEIGHT - 6).Draw(x + 3, y + 4, Color::MenuItem(false));
+    Region(Width() - 2, Menu::Item::HEIGHT - 2).Fill(x + 1, y + 2, Color::MenuItem(false));
+    Region(Width() - 6, Menu::Item::HEIGHT - 6).Fill(x + 3, y + 4, Color::MenuItem(false));
 
     int delta = (pressed && (!shade)) ? 2 : 1;
 
@@ -334,7 +334,7 @@ void SButton::Draw(int x, int y)
     {
         if (IsPressed())
         {
-            Region(WIDTH_SB, WIDTH_SB).Draw(x, y, Color::FILL);
+            Region(WIDTH_SB, WIDTH_SB).Fill(x, y, Color::FILL);
             Color::SetCurrent(Color::BLACK);
         }
         else
@@ -397,7 +397,7 @@ void Page::Draw(int x, int y, bool opened)
     }
     else
     {
-        Region(Width() - 3, Menu::Item::HEIGHT - 2).Draw(x + 1, y + 2, Color::MenuItem(false));
+        Region(Width() - 3, Menu::Item::HEIGHT - 2).Fill(x + 1, y + 2, Color::MenuItem(false));
         Text(Title().CString()).DrawInCenterRect(x, y + 1, Width(), Menu::Item::HEIGHT, IsAcitve() ? Color::FILL : Color::MENU_TITLE_DARK);
     }
 }
@@ -415,18 +415,18 @@ void Page::DrawTitle(int x, int yTop)
 
     bool shade = CurrentItemIsOpened();
 
-    Region(Menu::Title::WIDTH + 2, Menu::Title::HEIGHT + 2).Draw(x - 1, yTop, Color::BACK);
+    Region(Menu::Title::WIDTH + 2, Menu::Title::HEIGHT + 2).Fill(x - 1, yTop, Color::BACK);
 
     Rectangle(Menu::Title::WIDTH + 1, Menu::Title::HEIGHT + 1).Draw(x, yTop, Color::BorderMenu(shade));
 
     if (shade)
     {
-        Region(Menu::Title::WIDTH - 1, Menu::Title::HEIGHT - 1).Draw(x + 1, yTop + 1, Color::MENU_TITLE_DARK);
-        Region(Menu::Title::WIDTH - 7, Menu::Title::HEIGHT - 7).Draw(x + 4, yTop + 4, Color::MENU_TITLE_DARK);
+        Region(Menu::Title::WIDTH - 1, Menu::Title::HEIGHT - 1).Fill(x + 1, yTop + 1, Color::MENU_TITLE_DARK);
+        Region(Menu::Title::WIDTH - 7, Menu::Title::HEIGHT - 7).Fill(x + 4, yTop + 4, Color::MENU_TITLE_DARK);
     }
     else
     {
-        Region(Menu::Title::WIDTH - 1, Menu::Title::HEIGHT - 1).Draw(x + 1, yTop + 1, Color::MenuTitle(false));
+        Region(Menu::Title::WIDTH - 1, Menu::Title::HEIGHT - 1).Fill(x + 1, yTop + 1, Color::MenuTitle(false));
     }
 
     bool condDrawRSet = NumSubPages() > 1 &&
@@ -453,7 +453,7 @@ void Page::DrawItems(int x, int y)
         /// \todo Ќадо бы не делать это дл€ пунктов меню, которые существуют и всЄ равно отрисовыватьс€ будут - зачем зр€ грузить процессор
 
         Rectangle(Width() - 1, Menu::Item::HEIGHT).Draw(x, y + 1, Color::FILL);
-        Region(Width() - 3, Menu::Item::HEIGHT - 2).Draw(x + 1, y + 2, Color::BACK);
+        Region(Width() - 3, Menu::Item::HEIGHT - 2).Fill(x + 1, y + 2, Color::BACK);
 
         Control *item = Item(PosItemOnLeft() + i);
         if (item)
@@ -524,7 +524,7 @@ void TimeControl::DrawClosed(int x, int y)
     bool shade = IsShade();
     DrawCommonHiPart(this, x, y, pressed, shade, false);
 
-    Region(Menu::Item::Value::WIDTH + 2, Menu::Item::Value::HEIGHT + 3).Draw(x + 1, y + 17, Color::MENU_FIELD);
+    Region(Menu::Item::Value::WIDTH + 2, Menu::Item::Value::HEIGHT + 3).Fill(x + 1, y + 17, Color::MENU_FIELD);
 
     int deltaField = 10;
     int deltaSeparator = 2;
@@ -557,7 +557,7 @@ void TimeControl::DrawOpened(int x, int y)
 
     HLine(Width()).Draw(x, y + MOI_HEIGHT_TITLE - 1);
 
-    Region(Width() - 1, height - MOI_HEIGHT_TITLE).Draw(x, y + MOI_HEIGHT_TITLE, Color::BLACK);
+    Region(Width() - 1, height - MOI_HEIGHT_TITLE).Fill(x, y + MOI_HEIGHT_TITLE, Color::BLACK);
 
     int y0 = 21;
     int y1 = 31;
@@ -603,7 +603,7 @@ void TimeControl::DrawOpened(int x, int y)
     {
         if (*curField == i)
         {
-            Region(strPaint[i].width, 8).Draw(x + strPaint[i].x - 1, y + strPaint[i].y, Color::FLASH_10);
+            Region(strPaint[i].width, 8).Fill(x + strPaint[i].x - 1, y + strPaint[i].y, Color::FLASH_10);
         }
         String(strI[i]).Draw(x + strPaint[i].x, y + strPaint[i].y, *curField == i ? Color::FLASH_01 : Color::WHITE);
     }
@@ -617,7 +617,7 @@ static void DrawCommonHiPart(Control *item, int x, int y, bool pressed, bool sha
 
     Color color = shade ? Color::MENU_TITLE_DARK : Color::WHITE;
 
-    Region(width + (opened ? 2 : 1), Menu::Item::Value::HEIGHT - (opened ? 2 : 3)).Draw(x + 1, y + (opened ? 1 : 2), Color::MenuItem(false));
+    Region(width + (opened ? 2 : 1), Menu::Item::Value::HEIGHT - (opened ? 2 : 3)).Fill(x + 1, y + (opened ? 1 : 2), Color::MenuItem(false));
 
     item->Title().Draw(x + delta + (opened ? 4 : 6), y + delta + (opened ? 2 : 3), color);
 
@@ -672,7 +672,7 @@ static void DrawValueWithSelectedPosition(int x, int y, int value, uint numDigit
     {
         if (selPosFromEnd == ((int)numDigits - (int)i - 1))
         {
-            Region(5, height).Draw(x - 1, y, back);
+            Region(5, height).Fill(x - 1, y, back);
         }
         
         uint8 val = stack.Pop();
@@ -707,7 +707,7 @@ void Page::DrawPagesUGO(int right, int bottom)
         int x = left + p * (size + 2);
         if (p == currentPage)
         {
-            Region(size, size).Draw(x, top);
+            Region(size, size).Fill(x, top);
         }
         else
         {
@@ -752,7 +752,7 @@ void SButton::DrawHints(int x, int y, int width)
     {
         return;
     }
-    Region(width, 239 - y).Draw(x, y, Color::BACK);
+    Region(width, 239 - y).Fill(x, y, Color::BACK);
     Rectangle(width, 239 - y).Draw(x, y, Color::FILL);
     const StructHelpDrawButton *structHelp = &hintUGO[0];
     x += 3;

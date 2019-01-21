@@ -235,7 +235,7 @@ static void WriteTextVoltage(Chan::E ch, int x, int y)
     Color colorDraw = inverse ? Color::WHITE : color;
     if (inverse)
     {
-        Region(widthField, heightField).Draw(x, y, color);
+        Region(widthField, heightField).Fill(x, y, color);
     }
     const int SIZE = 100;
 

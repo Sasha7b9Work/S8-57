@@ -97,7 +97,7 @@ void HiPart::WriteCursors()
                 int width = 65;
                 x = Grid::Right() - width;
                 Rectangle(width, 12).Draw(x, Grid::Top(), Color::FILL);
-                Region(width - 2, 10).Draw(x + 1, Grid::Top() + 1, Color::BACK);
+                Region(width - 2, 10).Fill(x + 1, Grid::Top() + 1, Color::BACK);
                 String("1/dT=").Draw(x + 1, Grid::Top() + 2, colorText);
                 if (delta != 0.0F) //-V550
                 {
@@ -126,7 +126,7 @@ void HiPart::DrawRightPart()
 
         if(Trig::SyncPulse())
         {
-            Region(Grid::Top() - 3, Grid::Top() - 7).Draw(x, 1 + y, Color::FILL);
+            Region(Grid::Top() - 3, Grid::Top() - 7).Fill(x, 1 + y, Color::FILL);
             String(DICT(DTrig)).Draw(x + 3, y + 3, Color::BACK);
         }
     }
@@ -171,7 +171,7 @@ void HiPart::DrawRightPart()
         }
         else if(FPGA_IN_STATE_STOP)  // Режим остановки
         {
-            Region(10, 10).Draw(x + 3, y + 3);
+            Region(10, 10).Fill(x + 3, y + 3);
         }
         else if(FPGA_IN_STATE_WAIT)  // Режим ожидания сигнала
         {
@@ -179,8 +179,8 @@ void HiPart::DrawRightPart()
             int h = 14;
             int delta = 4;
             x = x + 2;
-            Region(w, h).Draw(x, y + 1);
-            Region(w, h).Draw(x + w + delta, y + 1);
+            Region(w, h).Fill(x, y + 1);
+            Region(w, h).Fill(x + w + delta, y + 1);
         }
         else
         {

@@ -18,7 +18,7 @@ Display::Primitives::Region::Region(int _width, int _height) : width(_width), he
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Display::Primitives::Region::Draw(int x, int y, Color color)
+void Display::Primitives::Region::Fill(int x, int y, Color color)
 {
     Color::SetCurrent(color);
     uint8 buffer[7] = { Command::Paint_FillRegion, (uint8)x, (uint8)(x >> 8), (uint8)y, (uint8)width, (uint8)(width >> 8), (uint8)height };
@@ -28,7 +28,7 @@ void Display::Primitives::Region::Draw(int x, int y, Color color)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Display::Primitives::Region::DrawBounded(int x, int y, Color colorFill, Color colorBound)
 {
-    Region(width - 2, height - 2).Draw(x + 1, y + 1, colorFill);
+    Region(width - 2, height - 2).Fill(x + 1, y + 1, colorFill);
     Rectangle(width, height).Draw(x, y, colorBound);
 }
 
@@ -295,7 +295,7 @@ int Display::Primitives::Text::DrawOnBackground(int x, int y, Color colorBackgro
     int height = Font::GetSize();
 
     Color colorText(Color::GetCurent());
-    Region(width, height).Draw(x - 1, y, colorBackground);
+    Region(width, height).Fill(x - 1, y, colorBackground);
 
     Color::SetCurrent(colorText);
 
@@ -681,7 +681,7 @@ int Display::Primitives::Text::DrawInBoundedRectWithTransfers(int x, int y, int 
     GetHeightTextWithTransfers(x + 3, y + 3, x + width - 8, text, &height);
 
     Rectangle(width, height).Draw(x, y, colorFill);
-    Region(width - 2, height - 2).Draw(x + 1, y + 1, colorBackground);
+    Region(width - 2, height - 2).Fill(x + 1, y + 1, colorBackground);
     DrawInRectWithTransfers(x + 3, y + 3, width - 8, height, colorFill);
     return y + height;
 }
@@ -706,7 +706,7 @@ void Display::Primitives::Text::DrawInCenterRectOnBackground(int x, int y, int w
     int eX = Text(text).DrawInCenterRect(x, y, width, height, colorBackground);
     int w = lenght + widthBorder * 2 - 2;
     int h = 7 + widthBorder * 2 - 1;
-    Region(w, h).Draw(eX - lenght - widthBorder, y - widthBorder + 1);
+    Region(w, h).Fill(eX - lenght - widthBorder, y - widthBorder + 1);
     //DrawStringInCenterRect(x, y, width, height, text, colorText);
     Text(text).DrawInCenterRect(x, y, width, height, colorText);
 }
