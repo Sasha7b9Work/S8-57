@@ -489,8 +489,5 @@ typedef void * pVOID;
 typedef pVOID arrayItems[MAX_NUM_ITEMS_IN_PAGE];
 
     
-#include <Menu/MenuItemsAdd.h>
-
-    
 /** @}  @}
  */

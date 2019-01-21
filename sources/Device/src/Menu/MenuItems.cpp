@@ -394,7 +394,6 @@ void Control::ShortPress()
         }
         else if(!IsOpened())
         {
-            choice->SetCurrent(!IsCurrentItem());
             choice->StartChange(1);
         }
         else

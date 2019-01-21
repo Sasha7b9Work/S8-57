@@ -616,8 +616,7 @@ void Menu::RunAfterUpdate(pFuncVV func)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Control *Menu::OpenedItem()
 {
-    Control::Type type(Control::Type::None);
-    return (Control *)RetLastOpened((Page *)pageMain, &type);
+    return LastOpened((Page *)pageMain);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -627,36 +626,37 @@ Page::Name::E Menu::GetNameOpenedPage()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void *Menu::RetLastOpened(Page *page, Control::Type *type)
+Control *Menu::LastOpened(Page *page)
 {
     if (page->CurrentItemIsOpened())
     {
         int8 posActItem = page->PosCurrentItem();
-        void *item = page->Item(posActItem);
-        if (IS_PAGE(page->Item(posActItem)))
+        Control *item = page->Item(posActItem);
+
+        if (page->Item(posActItem)->IsPage())
         {
-            return RetLastOpened((Page *)item, type);
+            return LastOpened((Page *)item);
         }
         else
         {
             return item;
         }
     }
-    *type = Control::Type(Control::Type::Page);
     return page;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Control *Menu::CurrentItem()
 {
-    Control::Type type(Control::Type::None);
-    void *lastOpened = RetLastOpened((Page *)pageMain, &type);
-    int8 pos = ((const Page *)lastOpened)->PosCurrentItem();
-    if (type.value == Control::Type::Page && pos != 0x7f)
+    Control *opened = LastOpened((Page *)pageMain);
+    int8 pos = ((const Page *)opened)->PosCurrentItem();
+
+    if (opened->IsPage() && pos != 0x7f)
     {
-        return ((const Page *)lastOpened)->Item(pos);
+        return ((const Page *)opened)->Item(pos);
     }
-    return (Control *)lastOpened;
+
+    return (Control *)opened;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -908,7 +908,7 @@ void Menu::SetItemForHint(void *item)
 void Menu::ButtonEvent(KeyEvent event)
 {
     /// \todo На звуке иногда виснет при длительном удержании кнопки смещения
-    //Sound::Beep(event.type);
+    Sound::Beep(event.type);
     BufferButtons::Push(event);
 }
 

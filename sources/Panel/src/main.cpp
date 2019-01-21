@@ -17,7 +17,7 @@ int main()
     Keyboard::Init();
     FSMC::Init();
 
-    whi le(1)
+    while(1)
     {
         uint8 data = FSMC::ReadByte();
         Decoder::AddData(data);

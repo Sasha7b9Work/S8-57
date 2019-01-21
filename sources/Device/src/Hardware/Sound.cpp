@@ -297,14 +297,16 @@ void Sound::Beep(TypePress::E type)
 {
     static const pFuncVV func[4] =
     {
-        Sound::ButtonPress,
-        Sound::ButtonPress,
-        Sound::ButtonRelease,
+        //Sound::ButtonPress,
+        //Sound::ButtonPress,
+        //Sound::ButtonRelease,
+        EmptyFuncVV,
+        EmptyFuncVV,
+        EmptyFuncVV,
         EmptyFuncVV
     };
 
     func[type]();
-
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

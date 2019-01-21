@@ -59,7 +59,7 @@ static void OpenPage(const PageBase *page);
 /// Пустой обработчик
 static void Empty();
 /// Обработчик нажатия стрелки
-static void Arrow();
+static void HandlerArrow();
 static void RShiftLessA();
 static void RShiftMoreA();
 static void RShiftLessB();
@@ -119,10 +119,10 @@ void Handlers::Process(KeyEvent e)
         {TShiftLess,     TShiftLess,     Empty,          Empty},            // TShiftLess 
         {TrigLevMore,    TrigLevMore,    Empty,          Empty},            // TrigLevMore
         {TrigLevLess,    TrigLevLess,    Empty,          Empty},            // TrigLevLess
-        {Arrow,          Arrow,          Arrow,          Arrow},            // Left       
-        {Arrow,          Arrow,          Arrow,          Arrow},            // Right      
-        {Arrow,          Arrow,          Arrow,          Arrow},            // Up         
-        {Arrow,          Arrow,          Arrow,          Arrow},            // Down       
+        {HandlerArrow,   HandlerArrow,   HandlerArrow,   HandlerArrow},            // Left       
+        {HandlerArrow,   HandlerArrow,   HandlerArrow,   HandlerArrow},            // Right      
+        {HandlerArrow,   HandlerArrow,   HandlerArrow,   HandlerArrow},            // Up         
+        {HandlerArrow,   HandlerArrow,   HandlerArrow,   HandlerArrow},            // Down       
         {Empty,          Empty,          EnterRelease,   EnterLong},        // Enter      
         {Empty,          Empty,          FuncRelease,    FuncLong},         // F1         
         {Empty,          Empty,          FuncRelease,    FuncLong},         // F2         
@@ -343,7 +343,7 @@ static void FuncLong()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void Arrow()
+static void HandlerArrow()
 { 
     if(Menu::OpenedItem()->IsPage())
     {

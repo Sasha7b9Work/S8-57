@@ -1531,11 +1531,6 @@
               <FilePath>.\src\Menu\MenuItems.cpp</FilePath>
             </File>
             <File>
-              <FileName>MenuItemsAdd.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Menu\MenuItemsAdd.h</FilePath>
-            </File>
-            <File>
               <FileName>MenuItemsDefs.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Menu\MenuItemsDefs.h</FilePath>

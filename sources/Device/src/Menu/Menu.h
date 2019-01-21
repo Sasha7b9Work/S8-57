@@ -94,8 +94,8 @@ public:
     static int Y();
 
 private:
-
-    static void *RetLastOpened(Page *_page, Control::Type *_type);
+    /// Последний открытый контрол на дереве странице page
+    static Control *LastOpened(Page *page);
     /// Обработка короткого нажатия кнопки
     static void ProcessingShortPressureButton();
     /// Обработка длинного нажатия кнопки

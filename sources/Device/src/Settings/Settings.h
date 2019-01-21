@@ -32,6 +32,7 @@
 /// Возвращает позицию активного пункта на странице Page::Name.
 #define MENU_POS_ACT_ITEM(name)     (set.menu_posActItem[name])
 
+
 #pragma pack(push, 1)
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -230,8 +231,7 @@ public:
 
     const Page*         menu_currentPage;                                           ///< Указатель на открытую страницу меню
     bool                menu_show;                                                  ///< Если true, то нужно показывать текущую страницу
-    int8                menu_posActItem[Page::Name::Number];                        ///< \brief Позиция активного пункта. bit7 == 1 - item is opened, 0x7f - нет 
-                                                                                    ///< активного пункта.
+    int8                menu_posActItem[Page::Name::Number];                        ///< \brief Позиция активного пункта. bit7 == 1 - item is opened, 0x7f - нет активного пункта.
     int8                menu_currentSubPage[Page::Name::Number];                    ///< Номер текущей подстраницы.
 
     // Несбрасываемые настройки калибровки
