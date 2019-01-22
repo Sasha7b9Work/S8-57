@@ -66,7 +66,7 @@ DEF_GOVERNOR_COLOR( gcGrid,                                                     
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void OnChanged_Settings_Colors_Background(bool active = true)
+static void OnChanged_Settings_Colors_Background(bool)
 {
     Color::InitGlobalColors();
 
@@ -91,7 +91,7 @@ DEF_CHOICE_2( cBackground,                                                      
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void PageDisplay::PageSettings::PageColors::Init()
 {
-    OnChanged_Settings_Colors_Background();
+    OnChanged_Settings_Colors_Background(true);
 }
 
 

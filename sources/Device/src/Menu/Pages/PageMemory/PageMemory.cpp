@@ -375,7 +375,7 @@ static void DrawSetMask()
     int height = 160;
 
     Rectangle(width, height).Draw(x0, y0, Color::FILL);
-    Region(width - 2, height - 2).Draw(x0 + 1, y0 + 1, Color::BACK);
+    Region(width - 2, height - 2).Fill(x0 + 1, y0 + 1, Color::BACK);
 
     int index = 0;
     int position = 0;
@@ -467,7 +467,7 @@ static void DrawFileMask(int x, int y)
         }
         ch++;
     }
-    Region(5, 8).Draw(x, y, Color::FLASH_10);
+    Region(5, 8).Fill(x, y, Color::FLASH_10);
 }
 
 static bool HandlerKey_Drive_Mask(KeyEvent event)
@@ -572,7 +572,7 @@ static void DrawSetName()
     int height = 80;
 
     Rectangle(width, height).Draw(x0, y0, Color::FILL);
-    Region(width - 2, height - 2).Draw(x0 + 1, y0 + 1, Color::BACK);
+    Region(width - 2, height - 2).Fill(x0 + 1, y0 + 1, Color::BACK);
 
     int index = 0;
     int position = 0;
@@ -608,7 +608,7 @@ static void DrawSetName()
 
     int x = String(FILE_NAME).Draw(x0 + deltaX, y0 + 65, Color::FILL);
 
-    Region(5, 8).Draw(x, y0 + 65, Color::FLASH_10);
+    Region(5, 8).Fill(x, y0 + 65, Color::FLASH_10);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

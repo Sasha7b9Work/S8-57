@@ -69,23 +69,18 @@ void Osci::Display::DrawCursorTrigLevel()
 
     if (y > Grid::Bottom())
     {
-        //Painter::DrawChar(x + 3, Grid::Bottom() - 11, SYMBOL_TRIG_LEV_LOWER);
         Char(SYMBOL_TRIG_LEV_LOWER).Draw(x + 3, Grid::Bottom() - 11);
-        //Painter::SetPoint(x + 5, Grid::Bottom() - 2);
         Point().Draw(x + 5, Grid::Bottom() - 2);
         y = Grid::Bottom() - 7;
         x--;
     }
     else if (y < Grid::Top())
     {
-        //Painter::DrawChar(x + 3, Grid::Top() + 2, SYMBOL_TRIG_LEV_ABOVE);
         Char(SYMBOL_TRIG_LEV_ABOVE).Draw(x + 3, Grid::Top() + 2);
-        //Painter::SetPoint(x + 5, Grid::Top() + 2);
         Point().Draw(x + 5, Grid::Top() + 2);
     }
     else
     {
-        //Painter::DrawChar(x + 1, y - 4, SYMBOL_TRIG_LEV_NORMAL);
         Char(SYMBOL_TRIG_LEV_NORMAL).Draw(x + 1, y - 4);
     }
 
@@ -93,7 +88,6 @@ void Osci::Display::DrawCursorTrigLevel()
 
     static const char symbols[2] = {'1', '2'};
 
-    //Painter::DrawChar(x + 5, y - 6, symbols[(uint8)TRIG_SOURCE], Color::BACK);
     Char(symbols[(uint8)TRIG_SOURCE]).Draw(x + 5, y - 6, Color::BACK);
 
     Font::SetCurrent(Font::Type::_8);
@@ -106,9 +100,8 @@ void Osci::Display::DrawCursorTrigLevel()
     scale = (float)height / (shiftFullMax - shiftFullMin);
     int shiftFull = SET_TRIGLEV_SOURCE + (TRIG_SOURCE_IS_EXT ? 0 : SET_RSHIFT(ch));
     int yFull = Grid::Top() + DELTA + height - (int)(scale * (shiftFull - RShift::MIN - Trig::MIN) + 4);
-    Region(4, 6).Draw(left + 2, yFull + 1, Color::Trig());
+    Region(4, 6).Fill(left + 2, yFull + 1, Color::Trig());
     Font::SetCurrent(Font::Type::_5);
-    //Painter::DrawChar(left + 3, yFull - 2, symbols[(uint8)TRIG_SOURCE], Color::BACK);
     Char(symbols[(uint8)TRIG_SOURCE]).Draw(left + 3, yFull - 2, Color::BACK);
     Font::SetCurrent(Font::Type::_8);
 
@@ -134,7 +127,6 @@ void Osci::Display::DrawScaleLine(int x, bool forTrigLev)
 
     for (int i = 0; i < 5; i++)
     {
-        //Painter::DrawLine(x + 1, levels[i], x2 - 1, levels[i], Color::FILL);
         Line(x + 1, levels[i], x2 - 1, levels[i]).Draw(Color::FILL);
     }
 }

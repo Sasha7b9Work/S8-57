@@ -253,7 +253,7 @@ static void DrawMemoryWave(int num, bool exist)
     int x = Grid::Left() + 2 + num * 12;
     int y = Grid::FullBottom() - 10;
     int width = 12;
-    Region(width, 10).Draw(x, y, num == NUM_ROM_SIGNAL ? Color::FLASH_10 : Color::BACK);
+    Region(width, 10).Fill(x, y, num == NUM_ROM_SIGNAL ? Color::FLASH_10 : Color::BACK);
     Rectangle(width, 10).Draw(x, y, Color::FILL);
     Color::SetCurrent(num == NUM_ROM_SIGNAL ? Color::FLASH_01 : Color::FILL);
     if (exist)

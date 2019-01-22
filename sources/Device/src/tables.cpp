@@ -105,7 +105,7 @@ void Tables::DrawStr(int index, int x, int y)
     const char *str = symbolsAlphaBet[index];
     if (index == INDEX_SYMBOL)
     {
-        Region(Font::GetLengthText(str), 9).Draw(x - 1, y, Color::FLASH_10);
+        Region(Font::GetLengthText(str), 9).Fill(x - 1, y, Color::FLASH_10);
     }
 
     String(symbolsAlphaBet[index]).Draw(x, y, index == INDEX_SYMBOL ? Color::FLASH_01 : Color::FILL);

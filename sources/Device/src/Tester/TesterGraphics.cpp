@@ -127,13 +127,12 @@ void Tester::Display::SetPoints(int numStep, const uint8 dx[TESTER_NUM_POINTS], 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void DrawLegend(int x, int y)
 {
-    Region(43, 40).Draw(x, y, Color::BACK);
+    Region(43, 40).Fill(x, y, Color::BACK);
 
     HLine line(9);
 
     for (int i = 0; i < Tester::NUM_STEPS; i++)
     {
-        //Painter::DrawHLine(y + 4 + i * 8, x + 1, x + 10, ColorForStep(i));
         line.Draw(x + 1, y + 4 + i * 8, ColorForStep(i));
 
         ValueForStep(i).Draw(x + 12, y + i * 8);

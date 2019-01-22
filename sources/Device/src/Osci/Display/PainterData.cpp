@@ -227,8 +227,8 @@ void PainterData::DrawTShift(int leftX, int rightX, int numBytes)
         dY11 = 5; dY12 = 7;
     }
 
-    Region(6, 6).Draw((int)xShift - 1, 1, Color::BACK);
-    Region(4, 4).Draw((int)xShift, 2, Color::FILL);
+    Region(6, 6).Fill((int)xShift - 1, 1, Color::BACK);
+    Region(4, 4).Fill((int)xShift, 2, Color::FILL);
 
     Line((int)xShift + dX01, 3, (int)xShift + dX11, dY11 - 2).Draw(Color::BACK);
     Line((int)xShift + dX02, 4, (int)xShift + 2, dY12 - 2).Draw();

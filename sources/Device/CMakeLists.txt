@@ -15,7 +15,7 @@ include_directories("..\\common\\"
                     "..\\common\\_VS\\USBD\\"
                     "src\\libs\\USBD\\")
                     
-add_definitions(-DSTM32F437xx)
+add_definitions(-DSTM32F437xx -DOLD_RECORDER)
 
 SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -MP -Wall")
 
@@ -79,9 +79,9 @@ file(GLOB SOURCES   ../common/_VS/*
                     src/Menu/Pages/PageFunction/PageRecorder/*
                     src/Menu/Pages/PageHelp/*
                     src/Menu/Pages/PageMeasures/*
-                    src/Menu/PageMemory/*
-                    src/Menu/PageService/*
-                    src/Menu/PageTrig/*
+                    src/Menu/Pages/PageMemory/*
+                    src/Menu/Pages/PageService/*
+                    src/Menu/Pages/PageTrig/*
                     src/Multimeter/*
                     src/Osci/*
                     src/Osci/Display/*
