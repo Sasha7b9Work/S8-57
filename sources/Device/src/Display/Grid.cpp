@@ -195,8 +195,6 @@ void Grid::DrawGridSignal(int left, int top, int width, int height)
 
     Color::SetCurrent(Color::GRID);
 
-    Color::Log(Color::GRID);
-
     if (TYPE_GRID_1)
     {
         DrawGridType1(left, top, right, bottom, centerX, centerY, deltaX, deltaY, stepX, stepY);

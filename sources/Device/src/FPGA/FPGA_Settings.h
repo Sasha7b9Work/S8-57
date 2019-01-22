@@ -6,7 +6,6 @@
 #define TRIG_SOURCE             (set.trig_source)
 #define TRIG_SOURCE_IS_A        (TRIG_SOURCE == Trig::Source::A)
 #define TRIG_SOURCE_IS_B        (TRIG_SOURCE == Trig::Source::B)
-#define TRIG_SOURCE_IS_EXT      (TRIG_SOURCE == Trig::Source::Ext)
 
 #define SET_TRIGLEV(ch)         (set.trig_lev[(uint8)ch])
 #define SET_TRIGLEV_SOURCE      SET_TRIGLEV(TRIG_SOURCE)

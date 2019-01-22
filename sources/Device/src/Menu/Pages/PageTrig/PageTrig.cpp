@@ -70,13 +70,12 @@ static void OnChanged_Source(bool)
     Trig::Source::Load();
 }
 
-DEF_CHOICE_3( cSource, // -V206                                                                                                                                    //--- СИНХР - Источник ---
+DEF_CHOICE_2( cSource, // -V206                                                                                                                                    //--- СИНХР - Источник ---
     "Источник", "Source",
     "Выбор источника сигнала синхронизации.",
     "Synchronization signal source choice.",
     "Канал 1", "Chan 1",
     "Канал 2", "Chan 2",
-    "Внешний", "External",
     TRIG_SOURCE, pTrig, FuncActive, OnChanged_Source, FuncDraw
 )
 

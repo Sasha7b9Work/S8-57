@@ -54,15 +54,12 @@ void Osci::Display::DrawCursorTrigLevel()
 {
     Chan::E ch = (Chan::E)TRIG_SOURCE;
 
-    int trigLev = SET_TRIGLEV_SOURCE - (TRIG_SOURCE_IS_EXT ? 0 : -(SET_RSHIFT(ch) - RShift::ZERO));
+    int trigLev = SET_TRIGLEV_SOURCE + (SET_RSHIFT(ch) - RShift::ZERO);
     float scale = 1.0F / ((Trig::MAX - Trig::MIN) / 2.4F / Grid::Height());
     int y0 = (Grid::Top() + Grid::Bottom()) / 2 + (int)(scale * (Trig::ZERO - Trig::MIN));
     int y = y0 - (int)(scale * (trigLev - Trig::MIN));
 
-    if (!TRIG_SOURCE_IS_EXT)
-    {
-        y = (y - Grid::ChannelCenterHeight()) + Grid::ChannelCenterHeight();
-    }
+    y = (y - Grid::ChannelCenterHeight()) + Grid::ChannelCenterHeight();
 
     int x = Grid::Right();
     Color::SetCurrent(Color::Trig());
@@ -98,7 +95,7 @@ void Osci::Display::DrawCursorTrigLevel()
     int shiftFullMin = RShift::MIN + Trig::MIN;
     int shiftFullMax = RShift::MAX + Trig::MAX;
     scale = (float)height / (shiftFullMax - shiftFullMin);
-    int shiftFull = SET_TRIGLEV_SOURCE + (TRIG_SOURCE_IS_EXT ? 0 : SET_RSHIFT(ch));
+    int shiftFull = SET_TRIGLEV_SOURCE + SET_RSHIFT(ch);
     int yFull = Grid::Top() + DELTA + height - (int)(scale * (shiftFull - RShift::MIN - Trig::MIN) + 4);
     Region(4, 6).Fill(left + 2, yFull + 1, Color::Trig());
     Font::SetCurrent(Font::Type::_5);

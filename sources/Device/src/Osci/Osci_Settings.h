@@ -145,8 +145,7 @@ namespace Osci
                 enum E
                 {
                     A,    /// Канал 1
-                    B,    /// Канал 2
-                    Ext   /// Внешняя
+                    B     /// Канал 2
                 } value;
 
                 static void Load();
