@@ -109,11 +109,11 @@ const Settings Settings::defaultSettings =
     
     // ÃÂÌ˛ »«Ã≈–≈Õ»ﬂ
     
-    false,                              // meas_show;  
-    Measure::OnDisplay::_1_5,           // meas_number;
-    Measure::Source::A_B,               // meas_source;
-    Measure::ModeViewSignals::AsIs,     // meas_modeViewSignals; 
-    {                                   // meas_measures[15];
+    false,                                                  // meas_show;  
+    Processing::Measures::Settings::OnDisplay::_1_5,        // meas_number;
+    Processing::Measures::Settings::Source::A_B,            // meas_source;
+    Processing::Measures::Settings::ModeViewSignals::AsIs,  // meas_modeViewSignals; 
+    {                                                       // meas_measures[15];
         Measure::Type::VoltageMax,     Measure::Type::VoltageMin,  Measure::Type::VoltagePic,      Measure::Type::VoltageMaxSteady,  Measure::Type::VoltageMinSteady,
         Measure::Type::VoltageAverage, Measure::Type::VoltageAmpl, Measure::Type::VoltageRMS,      Measure::Type::VoltageVybrosPlus, Measure::Type::VoltageVybrosMinus,
         Measure::Type::Period,         Measure::Type::Freq,        Measure::Type::TimeNarastaniya, Measure::Type::TimeSpada,         Measure::Type::DurationPlus

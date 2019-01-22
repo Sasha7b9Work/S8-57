@@ -20,11 +20,11 @@
 /// По какому каналу производить автоматические измерения
 #define SOURCE_MEASURES         (set.meas_source)
 /// Автоматические измерения производятся только по каналу A
-#define SOURCE_MEASURES_IS_A    (SOURCE_MEASURES == Measure::Source::A)
+#define SOURCE_MEASURES_IS_A    (SOURCE_MEASURES == Source::A)
 /// Автоматические измерения производятся только по каналу B
-#define SOURCE_MEASURES_IS_B    (SOURCE_MEASURES == Measure::Source::B)
+#define SOURCE_MEASURES_IS_B    (SOURCE_MEASURES == Source::B)
 /// Автоматические измерения производятся по каналам A и B
-#define SOURCE_MEASURES_IS_BOTH (SOURCE_MEASURES == Measure::Source::A_B)
+#define SOURCE_MEASURES_IS_BOTH (SOURCE_MEASURES == Source::A_B)
 /// Выводить автоматические измерения по каналу A
 #define VIEW_MEASURES_A         (SET_ENABLED_A && (SOURCE_MEASURES_IS_A || SOURCE_MEASURES_IS_BOTH))
 /// Выводить автоматические измерения по каналу B
@@ -35,14 +35,14 @@
 
 /// Сжимать ли сетку при выводе измерений
 #define MODE_VIEW_SIGNALS               (set.meas_modeViewSignals) 
-#define MODE_VIEW_SIGNALS_IS_COMPRESS   (MODE_VIEW_SIGNALS == Measure::ModeViewSignals::Compress)
+#define MODE_VIEW_SIGNALS_IS_COMPRESS   (MODE_VIEW_SIGNALS == ModeViewSignals::Compress)
 
 #define NUM_MEASURES                    (set.meas_number)
-#define NUM_MEASURES_IS_1_5             (NUM_MEASURES == Measure::OnDisplay::_1_5)
-#define NUM_MEASURES_IS_2_5             (NUM_MEASURES == Measure::OnDisplay::_2_5)
-#define NUM_MEASURES_IS_3_5             (NUM_MEASURES == Measure::OnDisplay::_3_5)
-#define NUM_MEASURES_IS_6_1             (NUM_MEASURES == Measure::OnDisplay::_6_1)
-#define NUM_MEASURES_IS_6_2             (NUM_MEASURES == Measure::OnDisplay::_6_2)
+#define NUM_MEASURES_IS_1_5             (NUM_MEASURES == OnDisplay::_1_5)
+#define NUM_MEASURES_IS_2_5             (NUM_MEASURES == OnDisplay::_2_5)
+#define NUM_MEASURES_IS_3_5             (NUM_MEASURES == OnDisplay::_3_5)
+#define NUM_MEASURES_IS_6_1             (NUM_MEASURES == OnDisplay::_6_1)
+#define NUM_MEASURES_IS_6_2             (NUM_MEASURES == OnDisplay::_6_2)
 
 #define POS_MEAS_CUR_U(n)               (set.meas_PosCurU[n])
 #define POS_MEAS_CUR_U_0                (POS_MEAS_CUR_U(0))
@@ -124,46 +124,6 @@ public:
     static bool pageChoiceIsActive;
     /// Позиция курсора на странице выбора измерения
     static int8 posOnPageChoice;
-
-    //------------------------------------------------------------------------------------------------------------------------------------------------
-    /// Сжимать ли сигналы при выводе измерений.
-    struct ModeViewSignals
-    {
-        enum E
-        {
-            AsIs,       ///< Показывать сигналы как есть.
-            Compress    ///< Сжимать сетку с сигналами.
-        } value;
-        explicit ModeViewSignals(E v) : value(v) {};
-    };
-
-    //------------------------------------------------------------------------------------------------------------------------------------------------
-    struct Source
-    {
-        enum E
-        {
-            A,
-            B,
-            A_B
-        } value;
-        explicit Source(E v) : value(v) {};
-    };
-
-    //------------------------------------------------------------------------------------------------------------------------------------------------
-    struct OnDisplay
-    {
-        enum E
-        {
-            _1,      ///< 1 измерение слева внизу.
-            _2,      ///< 2 измерения слева внизу.
-            _1_5,    ///< 1 строка с 5 измерениями.
-            _2_5,    ///< 2 строки по 5 измерений.
-            _3_5,    ///< 3 строки по 5 измерений.
-            _6_1,    ///< 6 строк по 1 измерению.
-            _6_2     ///< 6 строк по 2 измерения.
-        } value;
-        explicit OnDisplay(E v) : value(v) {};
-    };
 
     //------------------------------------------------------------------------------------------------------------------------------------------------
     class Graphics
