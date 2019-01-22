@@ -42,7 +42,7 @@ void Osci::Display::PainterData::DrawData()
 {
     if(Reader::ReadData())
     {
-        Measure::SetData(false);
+        Processing::Measure::SetData(false);
 
         static const pFuncVV func[ModeWork::Number] =
         {

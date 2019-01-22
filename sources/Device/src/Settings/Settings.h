@@ -159,8 +159,8 @@ public:
     Processing::Measures::Settings::OnDisplay::E       meas_number;               ///< Сколько измерений выводить.
     Processing::Measures::Settings::Source::E          meas_source;               ///< Для каких каналов выводить измерения.
     Processing::Measures::Settings::ModeViewSignals::E meas_modeViewSignals;      ///< Сжимать ли сигналы при выводе измерений.
-    Measure::Type::E                                   meas_measures[15];         ///< Выбранные для индикации измерения.
-    Measure::Type::E                                   meas_marked;               ///< Измерение, на которое нужно выводить маркеры.
+    Processing::Measure::Type::E                       meas_measures[15];         ///< Выбранные для индикации измерения.
+    Processing::Measure::Type::E                       meas_marked;               ///< Измерение, на которое нужно выводить маркеры.
 
     // Меню СЕРВИС
 

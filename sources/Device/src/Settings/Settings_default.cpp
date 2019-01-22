@@ -114,11 +114,14 @@ const Settings Settings::defaultSettings =
     Processing::Measures::Settings::Source::A_B,            // meas_source;
     Processing::Measures::Settings::ModeViewSignals::AsIs,  // meas_modeViewSignals; 
     {                                                       // meas_measures[15];
-        Measure::Type::VoltageMax,     Measure::Type::VoltageMin,  Measure::Type::VoltagePic,      Measure::Type::VoltageMaxSteady,  Measure::Type::VoltageMinSteady,
-        Measure::Type::VoltageAverage, Measure::Type::VoltageAmpl, Measure::Type::VoltageRMS,      Measure::Type::VoltageVybrosPlus, Measure::Type::VoltageVybrosMinus,
-        Measure::Type::Period,         Measure::Type::Freq,        Measure::Type::TimeNarastaniya, Measure::Type::TimeSpada,         Measure::Type::DurationPlus
+        Processing::Measure::Type::VoltageMax,     Processing::Measure::Type::VoltageMin,  Processing::Measure::Type::VoltagePic,      Processing::Measure::Type::VoltageMaxSteady,
+        Processing::Measure::Type::VoltageMinSteady,
+        Processing::Measure::Type::VoltageAverage, Processing::Measure::Type::VoltageAmpl, Processing::Measure::Type::VoltageRMS,      Processing::Measure::Type::VoltageVybrosPlus,
+        Processing::Measure::Type::VoltageVybrosMinus,
+        Processing::Measure::Type::Period,         Processing::Measure::Type::Freq,        Processing::Measure::Type::TimeNarastaniya, Processing::Measure::Type::TimeSpada,
+        Processing::Measure::Type::DurationPlus
     },
-    Measure::Type::Freq,                // meas_marked;
+    Processing::Measure::Type::Freq,    // meas_marked;
 
     // Ìåíþ ÑÅÐÂÈÑ
 

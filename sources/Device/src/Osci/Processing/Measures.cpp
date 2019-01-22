@@ -12,6 +12,7 @@
 
 
 using namespace Display::Primitives;
+using namespace Processing;
 using namespace Processing::Measures::Settings;
 
 

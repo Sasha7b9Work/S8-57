@@ -25,6 +25,8 @@ using FPGA::VALUE::MAX;
 using FPGA::VALUE::AVE;
 using FPGA::VALUE::NONE;
 
+using Processing::Measure;
+
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 static float CalculateVoltageMax(Chan::E ch);
@@ -90,7 +92,7 @@ static char* Voltage2String(float, bool, char buffer[20]);
 static char* Phase2String(float, bool, char buffer[20]);
 static char* Float2String(float, bool, char buffer[20]);
 
-static const MeasureCalculate sMeas[Measure::Type::Number] =
+static const MeasureCalculate sMeas[Processing::Measure::Type::Number] =
 {
     {"", 0, 0, false, {}},
     {"CalculateVoltageMax",         CalculateVoltageMax,         Voltage2String, true,  {}},
