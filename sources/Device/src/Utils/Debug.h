@@ -8,11 +8,13 @@
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-class Debug
+struct Debug
 {
-public:
     static void StartProfiling();
     static void PointProfiling(char *name);
+
+    static void StartProfilingMS();
+    static void PointProfilingMS(char *name);
 
     static void ClearTimeCounter();
     static void StartIncreaseCounter();
@@ -22,9 +24,4 @@ public:
     static int line;
     static const char *file;
     static uint size;
-
-private:
-    static uint timeStart;
-    static uint timeCounter;
-    static uint timeStartCounter;
 };

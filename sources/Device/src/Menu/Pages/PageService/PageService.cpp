@@ -552,7 +552,7 @@ DEF_CHOICE_2( cSound_Enable,                                                    
     "Inclusion/switching off of a sound",
     DISABLE_RU, DISABLE_EN,
     ENABLE_RU, ENABLE_EN,
-    SOUND_ENABLED, ppSound, FuncActive, FuncChangedChoice, FuncDraw
+    SOUND_ENABLED, ppSound, FuncActive, Choice::EmptyChange, FuncDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -625,7 +625,7 @@ DEF_CHOICE_2( cLanguage,                                                        
     "Allows you to select the menu language",
     "Русский",    "RU",
     "Английский", "EN",
-    LANG, pService, FuncActive, FuncChangedChoice, FuncDraw
+    LANG, pService, FuncActive, Choice::EmptyChange, FuncDraw
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -704,110 +704,19 @@ DEF_PAGE_SB( ppInformation, // -V641                                            
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 const PageBase *PageService::pointer = &pService;
 
-DEF_PAGE_9( pService, // -V641 // -V1027                                                                                                                                     //--- СЕРВИС ---
+DEF_PAGE_10( pService, // -V641 // -V1027                                                                                                                                     //--- СЕРВИС ---
     "СЕРВИС", "SERVICE",
     "Дополнительные настройки, калибровка, поиск сигнала, математические функции",
     "Additional settings, calibration, signal search, mathematical functions",
-    &bResetSettings,        ///< СЕРВИС - Сброс настроек
-    &bAutoSearch,           ///< СЕРВИС - Поиск сигнала
-    &ppCalibrator,          ///< СЕРВИС - КАЛИБРАТОР
-    &cRecorder,             ///< СЕРВИС - Регистратор
-    &ppFunction,            ///< СЕРВИС - ФУНКЦИЯ
-    &ppSound,               ///< СЕРВИС - ЗВУК
-    &ppRTC,                 ///< СЕРВИС - ВРЕМЯ
-    &cLanguage,             ///< СЕРВИС - Язык
-    &ppInformation,         ///< СЕРВИС - ИНФОРМАЦИЯ
+    &bResetSettings,                    ///< СЕРВИС - Сброс настроек
+    &bAutoSearch,                       ///< СЕРВИС - Поиск сигнала
+    &ppCalibrator,                      ///< СЕРВИС - КАЛИБРАТОР
+    &cRecorder,                         ///< СЕРВИС - Регистратор
+    &ppFunction,                        ///< СЕРВИС - ФУНКЦИЯ
+    &ppSound,                           ///< СЕРВИС - ЗВУК
+    &ppRTC,                             ///< СЕРВИС - ВРЕМЯ
+    PageService::PageBattery::pointer,  ///< СЕРВИС - БАТАРЕЯ
+    &cLanguage,                         ///< СЕРВИС - Язык
+    &ppInformation,                     ///< СЕРВИС - ИНФОРМАЦИЯ
     Page::Name::Service, Menu::pageMain, FuncActive, FuncPressPage, FuncDrawPage, FuncRegSetPage
 )
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void OnPressPrevSettings()
-{
-
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void OnChangedColorMenuTitle()
-{
-    uint16 newColor1 = Painter::ReduceBrightness(COLOR(COLOR_MENU_TITLE), 0.50f);
-    uint16 newColor2 = Painter::ReduceBrightness(COLOR(COLOR_MENU_TITLE), 1.50f);
-    COLOR(Color::MENU_TITLE_DARK) = newColor1;
-    COLOR(COLOR_MENU_TITLE_BRIGHT) = newColor2;
-    Color_Log(COLOR_MENU_TITLE);
-    Color_Log(Color::MENU_TITLE_DARK);
-    Color_Log(COLOR_MENU_TITLE_BRIGHT);
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void OnChangedColorMenu2Item()
-{
-    uint16 newColor1 = Painter::ReduceBrightness(COLOR(COLOR_MENU_ITEM), 0.50f);
-    uint16 newColor2 = Painter::ReduceBrightness(COLOR(COLOR_MENU_ITEM), 1.50f);
-    COLOR(COLOR_MENU_ITEM_DARK) = newColor1;
-    COLOR(COLOR_MENU_ITEM_BRIGHT) = newColor2;
-    Color_Log(COLOR_MENU_ITEM);
-    Color_Log(COLOR_MENU_ITEM_DARK);
-    Color_Log(COLOR_MENU_ITEM_BRIGHT);
-}
-
-
-// СЕРВИС ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-extern const PageBase pService;
-
-// СЕРВИС - Откат настроек
-const Button mbServicePreviousSettings =
-{
-    Control::Type::Button, &pService, 0,
-    {
-        "Откат настроек", "Return settings",
-        "Возвращает настройки осциллографа, которые были в момент нажатия \"Поиск сигнала\"",
-        "Returns the oscilloscope settings that were in when you press \"Searching for signal\""
-    },
-    OnPressPrevSettings
-};
-
-static bool ActiveF_MathFormula()
-{
-    return MATH_FUNC_IS_MUL || MATH_FUNC_IS_SUM;
-}
-
-static void ChangeF_MathFormula()
-{
-
-}
-
-static int8 curDigit = 0;
-const Formula mfMathFormula =
-{
-    Control::Type::Formula, &ppFunction, ActiveF_MathFormula,
-    {
-        "Формула", "Formulf",
-        "Здесь задаются коэффициенты и знаки в математической формуле",
-        "Here you can set the coefficients and signs in a mathematical formula"
-    },
-    (int8 *)&MATH_FUNC, (int8 *)&set.math_koeff1add, (int8 *)&set.math_koeff2add, (int8 *)&set.math_koeff1mul, (int8 *)&set.math_koeff2mul, &curDigit, ChangeF_MathFormula
-};
-*/

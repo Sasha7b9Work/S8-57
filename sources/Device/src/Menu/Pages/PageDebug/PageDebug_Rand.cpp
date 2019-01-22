@@ -54,7 +54,7 @@ DEF_CHOICE_2( cRand_ShowInfo,                                                   
     "To show information on randomizer gate",
     "Не показывать", "Hide",
     "Показывать", "Show",
-    SHOW_RAND_INFO, pageRand, FuncActive, FuncChangedChoice, FuncDraw
+    SHOW_RAND_INFO, pageRand, FuncActive, Choice::EmptyChange, FuncDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -64,7 +64,7 @@ DEF_CHOICE_2( gRand_ShowStat,                                                   
     "Statistics show schedule",
     "Не показывать", "Hide",
     "Показывать", "Show",
-    SHOW_RAND_STAT, pageRand, FuncActive, FuncChangedChoice, FuncDraw
+    SHOW_RAND_STAT, pageRand, FuncActive, Choice::EmptyChange, FuncDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -129,7 +129,7 @@ DEF_CHOICE_16( gGateMax,                                                        
     "130", "130",
     "140", "140",
     "150", "150",
-    set.dbg_enum_gate_max, pageRand, FuncActive, FuncChangedChoice, FuncDraw
+    set.dbg_enum_gate_max, pageRand, FuncActive, Choice::EmptyChange, FuncDraw
 )
 
 
@@ -154,7 +154,7 @@ DEF_CHOICE_16( gGateMin,                                                        
     "130", "130",
     "140", "140",
     "150", "150",
-    set.dbg_enum_gate_min, pageRand, FuncActive, FuncChangedChoice, FuncDraw
+    set.dbg_enum_gate_min, pageRand, FuncActive, Choice::EmptyChange, FuncDraw
 )
 
 

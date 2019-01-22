@@ -421,7 +421,7 @@ DEF_CHOICE_2( cStats,                                                           
     "To show/not to show a time/shot, frames per second, quantity of signals with the last settings in memory/quantity of the signals kept in memory",
     "Не показывать", "Hide",
     "Показывать",    "Show",
-    SHOW_STAT, pageDebug, FuncActive, FuncChangedChoice, FuncDraw
+    SHOW_STAT, pageDebug, FuncActive, Choice::EmptyChange, FuncDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

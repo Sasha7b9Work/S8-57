@@ -17,7 +17,7 @@ DEF_CHOICE_2( cChanA,                                                           
     "Select channel 1 for recording and viewing",
     DISABLE_RU, DISABLE_EN,
     ENABLE_RU,  ENABLE_EN,
-    RECORDER_SOURCE_A, pageSource, FuncActive, FuncChangedChoice, FuncDraw
+    RECORDER_SOURCE_A, pageSource, FuncActive, Choice::EmptyChange, FuncDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -27,7 +27,7 @@ DEF_CHOICE_2( cChanB,                                                           
     "Select channel 2 for recording and viewing",
     DISABLE_RU, DISABLE_EN,
     ENABLE_RU,  ENABLE_EN,
-    RECORDER_SOURCE_B, pageSource, FuncActive, FuncChangedChoice, FuncDraw
+    RECORDER_SOURCE_B, pageSource, FuncActive, Choice::EmptyChange, FuncDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -37,7 +37,7 @@ DEF_CHOICE_2( cSensor,                                                          
     "Sensor selection for recording and viewing",
     DISABLE_RU, DISABLE_EN,
     ENABLE_RU,  ENABLE_EN,
-    RECORDER_SOURCE_SENSOR, pageSource, FuncActive, FuncChangedChoice, FuncDraw
+    RECORDER_SOURCE_SENSOR, pageSource, FuncActive, Choice::EmptyChange, FuncDraw
 )
 
 

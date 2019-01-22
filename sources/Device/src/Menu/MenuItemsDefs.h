@@ -6,7 +6,6 @@
 #define FuncPress           EmptyFuncVV
 #define FuncPressPage       EmptyFuncVB
 #define FuncChanged         EmptyFuncVV
-#define FuncChangedChoice   EmptyFuncVB
 #define FuncBeforeDraw      EmptyFuncVV
 
 bool EmptyFuncBKE(KeyEvent);

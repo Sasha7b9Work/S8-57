@@ -22,7 +22,7 @@ DEF_CHOICE_4( cType, // -V206                                                   
     "“ип 2", "Type 2",
     "“ип 3", "Type 3",
     "“ип 4", "Type 4",
-    TYPE_GRID, pageGrid, FuncActive, FuncChangedChoice, FuncDraw
+    TYPE_GRID, pageGrid, FuncActive, Choice::EmptyChange, FuncDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

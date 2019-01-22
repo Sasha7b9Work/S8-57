@@ -1425,6 +1425,16 @@
               <FileType>5</FileType>
               <FilePath>.\src\Hardware\VCP.h</FilePath>
             </File>
+            <File>
+              <FileName>Battery.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\Battery.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Battery.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Hardware\Battery.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1844,6 +1854,11 @@
               <FileName>PageService.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Menu\Pages\PageService\PageService.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>PageService_Battery.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Menu\Pages\PageService\PageService_Battery.cpp</FilePath>
             </File>
           </Files>
         </Group>

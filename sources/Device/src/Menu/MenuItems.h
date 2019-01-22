@@ -230,6 +230,7 @@ public:
             Service_Ethernet,           ///< ÑÅÐÂÈÑ - ETHERNET
             Service_Sound,              ///< ÑÅÐÂÈÑ - ÇÂÓÊ
             Service_RTC,                ///< ÑÅÐÂÈÑ - ÂÐÅÌß
+            Service_Battery,            ///< ÑÅÐÂÈÑ - ÁÀÒÀÐÅß
             SB_Service_FFT_Cursors,     ///< ÑÅÐÂÈÑ - ÑÏÅÊÒÐ - ÊÓÐÑÎÐÛ
             SB_Service_Function,        ///< ÑÅÐÂÈÑ - ÔÓÍÊÖÈß
             SB_Service_Information,     ///< ÑÅÐÂÈÑ - ÈÍÔÎÐÌÀÖÈß
@@ -409,6 +410,8 @@ public:
     static Color ColorMenuField(const Choice *choice);
 
     char GetSymbol();
+    /// Ïóñòàÿ ôóíêöèÿ îáðàáîòêè èçìåíåíèÿ
+    static void EmptyChange(bool) {};
 };
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// GovernorColor ///

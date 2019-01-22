@@ -28,7 +28,7 @@ DEF_CHOICE_REG_10( cAverage_Num,                                                
     "128", "128",
     "256", "256",
     "512", "512",
-    ENUM_AVE, pageAverage, FuncActive, FuncChangedChoice, FuncDraw
+    ENUM_AVE, pageAverage, FuncActive, Choice::EmptyChange, FuncDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -45,7 +45,7 @@ DEF_CHOICE_2( cAverage_Mode,                                                    
     ,
     "Точно", "Accurately",
     "Приблизительно", "Around",
-    MODE_AVE, pageAverage, FuncActive, FuncChangedChoice, FuncDraw
+    MODE_AVE, pageAverage, FuncActive, Choice::EmptyChange, FuncDraw
 )
 
 

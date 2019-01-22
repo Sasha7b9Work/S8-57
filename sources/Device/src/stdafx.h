@@ -36,6 +36,7 @@
 #include "Keyboard/HandlersKeys.h"
 
 #include "Hardware/AT25160N.h"
+#include "Hardware/Battery.h"
 #include "Hardware/CPU.h"
 #include "Hardware/EEPROM.h"
 #include "Hardware/FSMC.h"

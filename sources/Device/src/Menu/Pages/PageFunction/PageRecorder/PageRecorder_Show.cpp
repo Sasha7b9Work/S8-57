@@ -19,7 +19,7 @@ DEF_CHOICE_3( cSource,                                                          
     "ÎÇÓ", "RAM",
     "USB-Flash", "USB-Flash",
     "USB-PC",    "USB-PC",
-    RECORDER_STORAGE_PLAY, pageShow, FuncActive, FuncChangedChoice, FuncDraw
+    RECORDER_STORAGE_PLAY, pageShow, FuncActive, Choice::EmptyChange, FuncDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
