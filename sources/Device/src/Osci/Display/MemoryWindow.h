@@ -1,23 +1,15 @@
 #pragma once
 
 
-class  MemoryWindow
+namespace MemoryWindow
 {
-public:
+    void Draw();
 
-    static void Draw();
+    int X();
 
-    static int X();
+    int Y();
 
-    static int Y();
+    int Width();
 
-    static int Width();
-
-    static int Height();
-
-private:
-
-    static void DrawDataInRect(int x, int y, int width, int height, const uint8 *data, uint length);
-    /// Нарисовать область экрана
-    static void DrawScreenArea();
+    int Height();
 };

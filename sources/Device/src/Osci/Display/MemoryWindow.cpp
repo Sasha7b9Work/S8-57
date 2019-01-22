@@ -15,6 +15,16 @@
 using namespace Display::Primitives;
 using namespace FPGA;
 
+using MemoryWindow::Width;
+using MemoryWindow::Height;
+using MemoryWindow::X;
+using MemoryWindow::Y;
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+static void DrawDataInRect(int x, int y, int width, int height, const uint8 *data, uint length);
+/// Ќарисовать область экрана
+static void DrawScreenArea();
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void MemoryWindow::Draw()
@@ -40,7 +50,7 @@ void MemoryWindow::Draw()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void MemoryWindow::DrawDataInRect(int x, int y, int width, int height, const uint8 *data, uint length)
+static void DrawDataInRect(int x, int y, int width, int height, const uint8 *data, uint length)
 {
     int numIntervals = width + 1;            //  оличество интервалов, в которых будем рисовать наш сигнал - фактически, количество вертикальных линий
     float pointsInInterval = (float)length / numIntervals;   //  оличество точек, рисуемых в одном интервале.
@@ -78,7 +88,7 @@ void MemoryWindow::DrawDataInRect(int x, int y, int width, int height, const uin
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void MemoryWindow::DrawScreenArea()
+static void DrawScreenArea()
 {
     float relBegin = (float)SHIFT_IN_MEMORY / FPGA::NumPoints();          // ќтносительное начало экранной области относительно всей пам€ти
     float relWidth = (float)(Grid::Width() + 1) / FPGA::NumPoints();      // ќтносительное (относительно всей шириный окна) ширина видимой области

@@ -1,13 +1,11 @@
 #pragma once
 
 
-class HiPart
+namespace HiPart
 {
-public:
-    
-    static void Draw();
+    void Draw();
 
-    static void WriteCursors();
+    void WriteCursors();
 
-    static void DrawRightPart();
+    void DrawRightPart();
 };
