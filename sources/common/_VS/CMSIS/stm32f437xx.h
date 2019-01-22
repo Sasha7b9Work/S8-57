@@ -621,6 +621,7 @@ typedef struct
 #define RCC             ((RCC_TypeDef *) RCC_BASE)
 #define RTC             ((RTC_TypeDef *) RTC_BASE)
 #define CRC             ((CRC_TypeDef *) CRC_BASE)
+#define ADC1            ((ADC_TypeDef *) ADC3_BASE)
 #define ADC3            ((ADC_TypeDef *) ADC3_BASE)
 #define DAC             ((DAC_TypeDef *) DAC_BASE)
 #define SPI2            ((SPI_TypeDef *) SPI2_BASE)

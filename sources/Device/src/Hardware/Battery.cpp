@@ -15,7 +15,7 @@ using namespace Display::Primitives;
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 bool Battery::showOnDisplay = false;
 
-static ADC_HandleTypeDef handleADC;
+static ADC_HandleTypeDef handle;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -25,6 +25,7 @@ void Battery::Init()
     // PA2 - ADC3 IN2
     // Режим работы:
 
+    __ADC1_CLK_ENABLE();
     __ADC3_CLK_ENABLE();
 
     static GPIO_InitTypeDef isGPIOadc =
@@ -35,21 +36,21 @@ void Battery::Init()
     };
     HAL_GPIO_Init(GPIOA, &isGPIOadc);
 
-    handleADC.Instance = ADC3;
-    handleADC.Init.ClockPrescaler = ADC_CLOCKPRESCALER_PCLK_DIV2;
-    handleADC.Init.Resolution = ADC_RESOLUTION12b;
-    handleADC.Init.DataAlign = ADC_DATAALIGN_RIGHT;
-    handleADC.Init.ScanConvMode = DISABLE;
-    handleADC.Init.EOCSelection = DISABLE;
-    handleADC.Init.ContinuousConvMode = DISABLE;
-    handleADC.Init.DMAContinuousRequests = DISABLE;
-    handleADC.Init.NbrOfConversion = 1;
-    handleADC.Init.DiscontinuousConvMode = DISABLE;
-    handleADC.Init.NbrOfDiscConversion = 0;
-    handleADC.Init.ExternalTrigConvEdge = ADC_EXTERNALTRIGCONV_T1_CC1;  // Программный запуск преобразования вручную
-    handleADC.Init.ExternalTrigConv = ADC_EXTERNALTRIGCONVEDGE_NONE;
+    handle.Instance = ADC1;
+    handle.Init.ClockPrescaler = ADC_CLOCKPRESCALER_PCLK_DIV4;
+    handle.Init.Resolution = ADC_RESOLUTION_12B;
+    handle.Init.DataAlign = ADC_DATAALIGN_RIGHT;
+    handle.Init.ScanConvMode = DISABLE;
+    handle.Init.EOCSelection = ADC_EOC_SINGLE_CONV;
+    handle.Init.ContinuousConvMode = DISABLE;
+    handle.Init.DMAContinuousRequests = DISABLE;
+    handle.Init.NbrOfConversion = 1;
+    handle.Init.DiscontinuousConvMode = DISABLE;
+    handle.Init.NbrOfDiscConversion = 0;
+    handle.Init.ExternalTrigConvEdge = ADC_EXTERNALTRIGCONVEDGE_NONE;  // Программный запуск преобразования вручную
+    handle.Init.ExternalTrigConv = ADC_SOFTWARE_START;
 
-    if (HAL_ADC_Init(&handleADC) != HAL_OK)
+    if (HAL_ADC_Init(&handle) != HAL_OK)
     {
         ERROR_HANDLER();
     }
@@ -60,7 +61,7 @@ void Battery::Init()
     sConfig.SamplingTime = ADC_SAMPLETIME_28CYCLES;
     sConfig.Offset = 0;
 
-    if (HAL_ADC_ConfigChannel(&handleADC, &sConfig) != HAL_OK)
+    if (HAL_ADC_ConfigChannel(&handle, &sConfig) != HAL_OK)
     {
         ERROR_HANDLER();
     }
@@ -69,24 +70,16 @@ void Battery::Init()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 float Battery::GetVoltage()
 {
-    if (HAL_ADC_Start(&handleADC) != HAL_OK)
+    if (HAL_ADC_Start(&handle) != HAL_OK)
     {
         ERROR_HANDLER();
     }
 
-    if (HAL_ADC_PollForConversion(&handleADC, 10) != HAL_OK)
+    do
     {
-        ERROR_HANDLER();
-    }
-
-    uint value = 0;
-
-    if ((HAL_ADC_GetState(&handleADC) & HAL_ADC_STATE_EOC_REG) == HAL_ADC_STATE_EOC_REG)
-    {
-        value = HAL_ADC_GetValue(&handleADC);
-    }
-
-    return (float)value;
+    } while (HAL_ADC_PollForConversion(&handle, 1) != HAL_OK);
+   
+    return (float)HAL_ADC_GetValue(&handle);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -100,5 +93,5 @@ void Battery::Draw()
 
     Region(width, height).DrawBounded(x, y, Color::BACK, Color::FILL);
 
-    Text(String("%d", GetVoltage())).Draw(x + 1, y + 1);
+    Text(String("%d", GetVoltage())).Draw(x + 2, y + 1);
 }
