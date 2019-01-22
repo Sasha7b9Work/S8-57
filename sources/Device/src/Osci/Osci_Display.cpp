@@ -1,5 +1,3 @@
-#include "stdafx.h"
-#ifndef WIN32
 #include "defines.h"
 #include "Display/Display_Primitives.h"
 #include "Display/Grid.h"
@@ -11,7 +9,6 @@
 #include "Osci/Display/HiPart.h"
 #include "Osci/Display/PainterData.h"
 #include "Settings/Settings.h"
-#endif
 
 
 using namespace Display::Primitives;

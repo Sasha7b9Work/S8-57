@@ -1,9 +1,6 @@
-#include "stdafx.h"
-#ifndef WIN32
 #include "defines.h"
 #include "Command.h"
 #include "Hardware/FSMC.h"
-#endif
 #include "font8.inc"
 #include "font5.inc"
 #include "fontUGO.inc"

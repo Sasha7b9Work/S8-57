@@ -29,17 +29,6 @@
 #include "Keyboard/DecoderDevice.h"
 #include "Keyboard/HandlersKeys.h"
 
-#include "Hardware/AT25160N.h"
-#include "Hardware/Battery.h"
-#include "Hardware/CPU.h"
-#include "Hardware/EEPROM.h"
-#include "Hardware/FSMC.h"
-#include "Hardware/GPIO.h"
-#include "Hardware/Sound.h"
-#include "Hardware/Timer.h"
-#include "Hardware/VCP.h"
-#include "Hardware/stm32/Timer4XX.h"
-
 #include "Data/Heap.h"
 
 #include "Multimeter/Multimeter.h"

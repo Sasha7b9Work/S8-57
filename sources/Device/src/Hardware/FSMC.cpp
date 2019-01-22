@@ -1,13 +1,10 @@
-#include "stdafx.h"
-#ifndef WIN32
-#include <stm32f4xx.h>
+#include <stm32f4xx_hal.h>
 #include "defines.h"
 #include "Message.h"
 #include "Hardware/FSMC.h"
 #include "Hardware/Timer.h"
 #include "Keyboard/DecoderDevice.h"
 #include "Utils/Debug.h"
-#endif
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

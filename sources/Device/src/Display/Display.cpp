@@ -1,5 +1,3 @@
-#include "stdafx.h"
-#ifndef WIN32
 #include "defines.h"
 #include "log.h"
 #include "device.h"
@@ -13,7 +11,6 @@
 
 #include "Osci/Osci_Display.h"
 #include "Utils/Debug.h"
-#endif
 
 
 using namespace Display::Primitives;
