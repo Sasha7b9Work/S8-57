@@ -33,17 +33,6 @@
 
 #include "Multimeter/Multimeter.h"
 
-#include "Osci/Osci_Display.h"
-#include "Osci/Display/BottomPart.h"
-#include "Osci/Display/HiPart.h"
-#include "Osci/Display/MemoryWindow.h"
-#include "Osci/Display/PainterData.h"
-#include "Osci/Processing/Processing.h"
-
-#include "Recorder/Recorder.h"
-#include "Recorder/Recorder_Display.h"
-#include "Recorder/Recorder_Storage.h"
-
 #include "libs/USBH/usbh_diskio.h"
 #include <usbd_def.h>
 #include <usbd_cdc.h>

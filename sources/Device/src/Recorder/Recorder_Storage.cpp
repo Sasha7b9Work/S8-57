@@ -1,12 +1,9 @@
-#include "stdafx.h"
-#ifndef WIN32
 #include "defines.h"
 #include "Recorder/Recorder_Storage.h"
 
 #include <stm32f4xx_hal.h>
 #include "Hardware/Timer.h"
 #include "Data/Heap.h"
-#endif
 
 
 using namespace Recorder::Storage;

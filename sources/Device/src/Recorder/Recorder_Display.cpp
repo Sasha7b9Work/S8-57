@@ -1,5 +1,3 @@
-#include "stdafx.h"
-#ifndef WIN32
 #include "defines.h"
 #include "Recorder/Recorder_Display.h"
 #include "Recorder/Recorder_Settings.h"
@@ -11,7 +9,6 @@
 #include <stm32f4xx_hal.h>
 #include "Recorder/Recorder_Storage.h"
 #include "Hardware/Timer.h"
-#endif
 
 
 using namespace Display::Primitives;
