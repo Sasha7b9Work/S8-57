@@ -4,27 +4,10 @@
 
 #include "defines.h"
 
-#include "Command.h"
-#include "Message.h"
-
 #include "Data/DataBuffer.h"
 #include "Data/DataSettings.h"
 #include "Data/DataStorage.h"
 #include "Data/Reader.h"
-
-#include "Display/Console.h"
-#include "Display/Display_Primitives.h"
-#include "Display/Grid.h"
-#include "Display/Painter.h"
-#include "Display/PainterMem.h"
-#include "Display/Symbols.h"
-#include "Display/font/Font.h"
-
-#include "FlashDrive/FileManager.h"
-#include "FlashDrive/FlashDrive.h"
-
-#include "Keyboard/DecoderDevice.h"
-#include "Keyboard/HandlersKeys.h"
 
 #include "Data/Heap.h"
 

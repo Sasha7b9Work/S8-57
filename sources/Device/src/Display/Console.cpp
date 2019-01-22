@@ -1,12 +1,9 @@
-#include "stdafx.h"
-#ifndef WIN32
 #include "defines.h"
 #include "Console.h"
 #include "Display/Display_Primitives.h"
 #include "Display/Painter.h"
 #include <cstring>
 #include <stdio.h>
-#endif
 #include <stdio.h>
 
 
