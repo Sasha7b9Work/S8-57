@@ -2,26 +2,30 @@ cmake_minimum_required(VERSION 3.0)
 
 project (Device56)
 
-include_directories("..\\common\\"
-                    "..\\common\\_VS\\"
-                    "src"
-                    "..\\common\\_VS\\HAL\\"
-                    "src\\libs\\HAL\\"
-                    "..\\common\\_VS\\CMSIS\\"
-                    "..\\common\\_VS\\FatFS\\"
-                    "src\\libs\\FatFS\\"
-                    "..\\common\\_VS\\USBH\\"
-                    "src\\libs\\USBH\\"
-                    "..\\common\\_VS\\USBD\\"
-                    "src\\libs\\USBD\\")
+include_directories("..\\..\\common\\"
+                    "..\\..\\common\\_VS\\"
+                    "..\\..\\common\\_VS\\CMSIS\\"
+                    "..\\..\\common\\_VS\\FatFS\\"
+                    "..\\..\\common\\_VS\\HAL\\"
+                    "..\\..\\common\\_VS\\USBD\\"
+                    "..\\..\\common\\_VS\\USBH\\"
+                    "..\\..\\Device\\src\\"
+                    "..\\..\\Device\\src\\libs\\HAL\\"
+                    "..\\..\\Device\\src\\libs\\FatFS\\"
+                    "..\\..\\Device\\src\\libs\\USBH\\"
+                    "..\\..\\Device\\src\\libs\\USBD\\")
                     
 add_definitions(-DSTM32F437xx -DOLD_RECORDER)
 
 SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -MP -Wall")
 
+add_compile_options(/wd4820)
+add_compile_options(/wd5039)
+
 source_group(common                    REGULAR_EXPRESSION "../common/*.*")
 source_group(_VS                       REGULAR_EXPRESSION "../common/_VS/*.*")
 source_group(_VS\\CMSIS                REGULAR_EXPRESSION "../common/_VS/CMSIS/*.*")
+source_group(_VS\\FatFS                REGULAR_EXPRESSION "../common/_VS/FatFS/*.*")
 source_group(_VS\\HAL                  REGULAR_EXPRESSION "../common/_VS/HAL/*.*")
 source_group(_VS\\USBD                 REGULAR_EXPRESSION "../common/_VS/USBD/*.*")
 source_group(_VS\\USBH                 REGULAR_EXPRESSION "../common/_VS/USBH/*.*")
@@ -48,7 +52,8 @@ source_group(Menu\\Pages\\PageService  REGULAR_EXPRESSION "src/Menu/Pages/PageSe
 source_group(Menu\\Pages\\PageTrig     REGULAR_EXPRESSION "src/Menu/Pages/PageTrig/*.*")
 source_group(Multimeter                REGULAR_EXPRESSION "src/Multimeter/*.*")
 source_group(Osci                      REGULAR_EXPRESSION "src/Osci/*.*")
-source_group(Osci\\Display             REGULAR_EXPRESSION "scr/Osci/Display/*.*")
+source_group(Osci\\Display             REGULAR_EXPRESSION "src/Osci/Display/*.*")
+source_group(Osci\\Processing\\        REGULAR_EXPRESSION "src/Osci/Processing/*.*")
 source_group(Recorder                  REGULAR_EXPRESSION "src/Recorder/*.*")
 source_group(SCPI                      REGULAR_EXPRESSION "src/SCPI/*.*")
 source_group(Settings                  REGULAR_EXPRESSION "src/Settings/*.*")
@@ -56,40 +61,42 @@ source_group(Tester                    REGULAR_EXPRESSION "src/Tester/*.*")
 source_group(Utils                     REGULAR_EXPRESSION "src/Utils/*.*")
 
 
-file(GLOB SOURCES   ../common/_VS/*
-                    ../common/_VS/CMSIS/*
-                    ../common/_VS/HAL/*
-                    ../common/_VS/USBD/*
-                    ../common/_VS/USBH/*
-                    ../common/*.*
-                    src/Data/*.*
-                    src/Display/*.*
-                    src/Display/Font/*.*
-                    src/FlashDrive/*.*
-                    src/FPGA/*.*
-                    src/Hardware/*.*
-                    src/Hardware/stm32/*.*
-                    src/Keyboard/*
-                    src/Menu/*
-                    src/Menu/Pages/*
-                    src/Menu/Pages/Include/*
-                    src/Menu/Pages/PageDebug/*
-                    src/Menu/Pages/PageDisplay/*
-                    src/Menu/Pages/PageFunction/*
-                    src/Menu/Pages/PageFunction/PageRecorder/*
-                    src/Menu/Pages/PageHelp/*
-                    src/Menu/Pages/PageMeasures/*
-                    src/Menu/Pages/PageMemory/*
-                    src/Menu/Pages/PageService/*
-                    src/Menu/Pages/PageTrig/*
-                    src/Multimeter/*
-                    src/Osci/*
-                    src/Osci/Display/*
-                    src/Recorder/*
-                    src/Settings/*
-                    src/Tester/*
-                    src/Utils/*
-                    src/*.*)
+file(GLOB SOURCES   ../../../common/_VS/*
+                    ../../../common/_VS/CMSIS/*
+                    ../../../common/_VS/FatFS/*
+                    ../../../common/_VS/HAL/*
+                    ../../../common/_VS/USBD/*
+                    ../../../common/_VS/USBH/*
+                    ../../../common/*.*
+                    ../../Device/src/Data/*.*
+                    ../../Device/src/Display/*.*
+                    ../../Device/src/Display/Font/*.*
+                    ../../Device/src/FlashDrive/*.*
+                    ../../Device/src/FPGA/*.*
+                    ../../Device/src/Hardware/*.*
+                    ../../Device/src/Hardware/stm32/*.*
+                    ../../Device/src/Keyboard/*
+                    ../../Device/src/Menu/*
+                    ../../Device/src/Menu/Pages/*
+                    ../../Device/src/Menu/Pages/Include/*
+                    ../../Device/src/Menu/Pages/PageDebug/*
+                    ../../Device/src/Menu/Pages/PageDisplay/*
+                    ../../Device/src/Menu/Pages/PageFunction/*
+                    ../../Device/src/Menu/Pages/PageFunction/PageRecorder/*
+                    ../../Device/src/Menu/Pages/PageHelp/*
+                    ../../Device/src/Menu/Pages/PageMeasures/*
+                    ../../Device/src/Menu/Pages/PageMemory/*
+                    ../../Device/src/Menu/Pages/PageService/*
+                    ../../Device/src/Menu/Pages/PageTrig/*
+                    ../../Device/src/Multimeter/*
+                    ../../Device/src/Osci/*
+                    ../../Device/src/Osci/Display/*
+                    ../../Device/src/Osci/Processing/*
+                    ../../Device/src/Recorder/*
+                    ../../Device/src/Settings/*
+                    ../../Device/src/Tester/*
+                    ../../Device/src/Utils/*
+                    ../../Device/src/*.*)
 
 add_library(Device56 ${SOURCES})
 

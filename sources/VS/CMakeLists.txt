@@ -20,4 +20,3 @@ project (S8-56)
 set (TARGET_NAME S8-56)
 
 add_subdirectory(Device)
-add_subdirectory(Panel)

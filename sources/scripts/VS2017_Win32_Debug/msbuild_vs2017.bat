@@ -2,12 +2,7 @@
 
 MSBuild.exe ..\..\generated\Device\Device56.vcxproj
 set BUILD_STATUS=%ERRORLEVEL%
-if not %BUILD_STATUS%==0 goto Failed
-
-MSBuild.exe ..\..\generated\Panel\Panel56.vcxproj
-set BUILD_STATUS=%ERRORLEVEL%
 if %BUILD_STATUS%==0 goto Success
-
 
 :Failed
 echo .

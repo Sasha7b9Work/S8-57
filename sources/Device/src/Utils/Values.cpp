@@ -5,6 +5,7 @@
 #include <cstring>
 #include <cmath>
 #include <stdlib.h>
+#include <stdio.h>
 #include <limits>
 
 
