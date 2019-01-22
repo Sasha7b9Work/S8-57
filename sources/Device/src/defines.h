@@ -40,8 +40,9 @@ typedef unsigned int   UINT;
 typedef unsigned char  uint8_t;
 typedef unsigned short uint16_t;
 typedef unsigned int   uint32_t;
-//#define TCHAR unsigned char
+#ifndef __IO
 #define __IO
+#endif
 #else
 #define nullptr NULL
 #endif
