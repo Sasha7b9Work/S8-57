@@ -26,12 +26,6 @@
 #include "FlashDrive/FileManager.h"
 #include "FlashDrive/FlashDrive.h"
 
-#include "FPGA/AD9286.h"
-#include "FPGA/FPGA.h"
-#include "FPGA/FPGA_HAL.h"
-#include "FPGA/FPGA_Math.h"
-#include "FPGA/FPGA_Settings.h"
-
 #include "Keyboard/DecoderDevice.h"
 #include "Keyboard/HandlersKeys.h"
 

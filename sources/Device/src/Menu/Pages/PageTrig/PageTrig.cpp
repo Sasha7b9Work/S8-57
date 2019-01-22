@@ -1,12 +1,9 @@
-#include "stdafx.h"
-#ifndef WIN32
 #include "defines.h"
 #include "FPGA/FPGA.h"
 #include "Menu/Pages/Include/PageTrig.h"
 #include "Settings/Settings.h"
 
 #include "Osci/Osci.h"
-#endif
 
 
 using namespace Osci::Settings;

@@ -1,5 +1,3 @@
-#include "stdafx.h"
-#ifndef WIN32
 #include <stm32f4xx.h>
 #include "defines.h"
 #include "device.h"
@@ -19,7 +17,6 @@
 #include <stdlib.h>
 
 #include "Recorder/Recorder.h"
-#endif
 
 
 using namespace FPGA::ADDR;

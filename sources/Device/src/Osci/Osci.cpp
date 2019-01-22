@@ -1,5 +1,3 @@
-#include "stdafx.h"
-#ifndef WIN32
 #include "defines.h"
 #include "device.h"
 #include "Osci/Osci.h"
@@ -8,7 +6,6 @@
 #include "Settings/Settings.h"
 #include "FPGA/FPGA_HAL.h"
 #include <cstring>
-#endif
 
 
 using namespace FPGA;

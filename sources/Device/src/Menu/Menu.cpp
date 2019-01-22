@@ -1,5 +1,3 @@
-#include "stdafx.h"
-#ifndef WIN32
 #include "defines.h"
 #include "Menu/Menu.h"
 #include "Menu/BufferButtons.h"
@@ -24,7 +22,6 @@
 #include "Display/Grid.h"
 #include "Display/Painter.h"
 #include <cstdio>
-#endif
 
 
 using namespace Display::Primitives;

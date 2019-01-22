@@ -1,5 +1,3 @@
-#include "stdafx.h"
-#ifndef WIN32
 #include "defines.h"
 #include "device.h"
 #include "Display/Display_Primitives.h"
@@ -17,7 +15,6 @@
 #include "Menu/Pages/Include/PageTrig.h"
 #include "Menu/Pages/Include/PageDisplay.h"
 #include "Settings/Settings.h"
-#endif
 
 
 using namespace Display::Primitives;

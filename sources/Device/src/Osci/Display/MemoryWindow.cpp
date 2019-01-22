@@ -1,5 +1,3 @@
-#include "stdafx.h"
-#ifndef WIN32
 #include "defines.h"
 #include "MemoryWindow.h"
 #include "Data/DataStorage.h"
@@ -12,7 +10,6 @@
 
 #include "Hardware/Battery.h"
 #include "Osci/Display/BottomPart.h"
-#endif
 
 
 using namespace Display::Primitives;
