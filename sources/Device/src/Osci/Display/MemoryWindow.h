@@ -1,15 +1,21 @@
 #pragma once
 
 
-namespace MemoryWindow
+namespace Osci
 {
-    void Draw();
+    namespace Display
+    {
+        namespace MemoryWindow
+        {
+            void Draw();
 
-    int X();
+            int X();
 
-    int Y();
+            int Y();
 
-    int Width();
+            int Width();
 
-    int Height();
+            int Height();
+        };
+    };
 };

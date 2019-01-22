@@ -35,10 +35,10 @@ static void DrawTime(int x, int y);
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void BottomPart::Draw()
+void Osci::Display::BottomPart::Draw()
 {
-    int y0 = Display::HEIGHT - 19;
-    int y1 = Display::HEIGHT - 10;
+    int y0 = ::Display::HEIGHT - 19;
+    int y1 = ::Display::HEIGHT - 10;
     int x = -1;
 
 	HLine line(Grid::Left() - Measure::GetDeltaGridLeft() - 1);
@@ -48,7 +48,7 @@ void BottomPart::Draw()
 
     x = DrawMainParameters(x, y0);
 
-	HLine line2(Display::WIDTH - Grid::Right() - 4);
+	HLine line2(::Display::WIDTH - Grid::Right() - 4);
 
     line2.Draw(Grid::Right() + 2, Grid::Bottom(), Color::FILL);
     line2.Draw(Grid::Right() + 2, Grid::ChannelBottom());
@@ -68,7 +68,7 @@ void BottomPart::Draw()
 
     x += 42;
 
-    VLine(Display::HEIGHT - Grid::Bottom() - 4).Draw(x, Grid::Bottom(), Color::SEPARATOR);
+    VLine(::Display::HEIGHT - Grid::Bottom() - 4).Draw(x, Grid::Bottom(), Color::SEPARATOR);
 
     Font::SetCurrent(Font::Type::_8);
 
@@ -90,7 +90,7 @@ void BottomPart::Draw()
 
     DrawTime(x + 3, Grid::Bottom() + 11);
 
-    VLine(Display::HEIGHT - Grid::Bottom() - 4).Draw(x + 55, Grid::Bottom() + 2, Color::GRAY_50);
+    VLine(::Display::HEIGHT - Grid::Bottom() - 4).Draw(x + 55, Grid::Bottom() + 2, Color::GRAY_50);
 
     Font::SetCurrent(Font::Type::_UGO2);
 
@@ -121,7 +121,7 @@ void BottomPart::Draw()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-int BottomPart::DrawMainParameters(int _x, int _y)
+int Osci::Display::BottomPart::DrawMainParameters(int _x, int _y)
 {
     int x = _x;
     int y0 = _y;
@@ -130,7 +130,7 @@ int BottomPart::DrawMainParameters(int _x, int _y)
     WriteTextVoltage(Chan::A, x + 2, y0);
     WriteTextVoltage(Chan::B, x + 2, y1);
 
-    VLine(Display::HEIGHT - Grid::Bottom() - 4).Draw(x + 95, _y, Color::SEPARATOR);
+    VLine(::Display::HEIGHT - Grid::Bottom() - 4).Draw(x + 95, _y, Color::SEPARATOR);
 
     x += 98;
     const int SIZE = 100;
@@ -197,7 +197,7 @@ int BottomPart::DrawMainParameters(int _x, int _y)
         String(buffer).Draw(x + 63, y1);
     }
 
-    VLine(Display::HEIGHT - Grid::Bottom() - 4).Draw(x + 74, _y, Color::SEPARATOR);
+    VLine(::Display::HEIGHT - Grid::Bottom() - 4).Draw(x + 74, _y, Color::SEPARATOR);
 
     return _x + 93;
 }

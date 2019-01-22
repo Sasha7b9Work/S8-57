@@ -18,10 +18,10 @@
 using namespace Display::Primitives;
 using namespace FPGA;
 
-using MemoryWindow::Width;
-using MemoryWindow::Height;
-using MemoryWindow::X;
-using MemoryWindow::Y;
+using Osci::Display::MemoryWindow::Width;
+using Osci::Display::MemoryWindow::Height;
+using Osci::Display::MemoryWindow::X;
+using Osci::Display::MemoryWindow::Y;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -30,7 +30,7 @@ static void DrawDataInRect(int x, int y, int width, int height, const uint8 *dat
 static void DrawScreenArea();
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void MemoryWindow::Draw()
+void Osci::Display::MemoryWindow::Draw()
 {
     if (Cursors::NecessaryDraw())
     {
@@ -112,25 +112,25 @@ static void DrawScreenArea()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-int MemoryWindow::Width()
+int Osci::Display::MemoryWindow::Width()
 {
     return 278;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-int MemoryWindow::Height()
+int Osci::Display::MemoryWindow::Height()
 {
     return Grid::Top() - 2;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-int MemoryWindow::X()
+int Osci::Display::MemoryWindow::X()
 {
     return 0;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-int MemoryWindow::Y()
+int Osci::Display::MemoryWindow::Y()
 {
     return 0;
 }
