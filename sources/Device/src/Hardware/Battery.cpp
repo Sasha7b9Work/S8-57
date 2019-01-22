@@ -6,6 +6,8 @@
 #include "Hardware/Battery.h"
 #include "Hardware/Hardware.h"
 #include <stm32f4xx_hal.h>
+
+#include "Settings/Settings.h"
 #endif
 
 
@@ -13,8 +15,6 @@ using namespace Display::Primitives;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-bool Battery::showOnDisplay = false;
-
 static ADC_HandleTypeDef handle;
 
 
@@ -85,6 +85,11 @@ float Battery::GetVoltage()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Battery::Draw()
 {
+    if (!BAT_SHOW_ON_DISPLAY)
+    {
+        return;
+    }
+
     int width = 50;
     int height = 25;
 
@@ -94,4 +99,10 @@ void Battery::Draw()
     Region(width, height).DrawBounded(x, y, Color::BACK, Color::FILL);
 
     Text(String("%d", GetVoltage())).Draw(x + 2, y + 1);
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+bool &Battery::ShowOnDisplay()
+{
+    return set.serv_showInfoVoltage;
 }

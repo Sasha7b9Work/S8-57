@@ -169,6 +169,7 @@ public:
     CalibratorMode::E   serv_calibratorMode;            ///< Режим работы калибратора.
     bool                serv_soundEnable;               ///< Включены ли звуки.
     int16               serv_soundVolume;               ///< Громкость звука [0...100].
+    bool                serv_showInfoVoltage;           ///< Показывать напряжение батареи на экране
 
     // Настройки математики
 

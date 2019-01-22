@@ -122,12 +122,13 @@ const Settings Settings::defaultSettings =
 
     // Меню СЕРВИС
 
-    Language::RU,                       // serv_lang;          
-    Color::Scheme::WhiteLetters,        // serv_colorScheme;   
-    false,                              // serv_recorder;      
-    CalibratorMode::Freq,               // serv_calibratorMode;
-    true,                               // serv_soundEnable;   
-    100,                                // serv_soundVolume;   
+    Language::RU,                       // serv_lang
+    Color::Scheme::WhiteLetters,        // serv_colorScheme
+    false,                              // serv_recorder
+    CalibratorMode::Freq,               // serv_calibratorMode
+    true,                               // serv_soundEnable
+    100,                                // serv_soundVolume
+    false,                              // serv_showInfoVoltage
     
     // Настройки математики
     
