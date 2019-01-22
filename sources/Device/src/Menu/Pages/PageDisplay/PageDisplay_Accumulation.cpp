@@ -1,10 +1,7 @@
-#include "stdafx.h"
-#ifndef WIN32
 #include "defines.h"
 #include "Menu/MenuItems.h"
 #include "Menu/Pages/Include/PageDisplay.h"
 #include "Settings/Settings.h"
-#endif
 
 
 using namespace Osci::Settings;

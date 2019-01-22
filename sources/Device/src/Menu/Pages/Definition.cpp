@@ -1,5 +1,3 @@
-#include "stdafx.h"
-#ifndef WIN32
 #include "defines.h"
 #include "Menu/Menu.h"
 #include "Menu/Pages/Include/Definition.h"
@@ -18,7 +16,6 @@
 #include "Menu/Pages/Include/PageService.h"
 #include "Menu/Pages/Include/PageTrig.h"
 #include "Menu/Pages/Include/PageTime.h"
-#endif
 
 
 using namespace Display::Primitives;

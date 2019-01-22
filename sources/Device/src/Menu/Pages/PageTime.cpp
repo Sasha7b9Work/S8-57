@@ -1,5 +1,3 @@
-#include "stdafx.h"
-#ifndef WIN32
 #include <stm32f4xx.h>
 #include "defines.h"
 #include "Menu/Pages/Include/PageMemory.h"
@@ -10,10 +8,10 @@
 #include "Utils/CommonFunctions.h"
 #include "Utils/Dictionary.h"
 #include "Settings/Settings.h"
-#endif
 
 
 using namespace Osci::Settings;
+
 
 extern const PageBase pTime;
 

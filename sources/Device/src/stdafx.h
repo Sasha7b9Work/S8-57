@@ -42,20 +42,6 @@
 
 #include "Data/Heap.h"
 
-#include "Menu/BufferButtons.h"
-#include "Menu/MenuTriggers.h"
-#include "Menu/Pages/Include/Definition.h"
-#include "Menu/Pages/Include/PageChannels.h"
-#include "Menu/Pages/Include/PageDebug.h"
-#include "Menu/Pages/Include/PageDisplay.h"
-#include "Menu/Pages/Include/PageFunction.h"
-#include "Menu/Pages/Include/PageHelp.h"
-#include "Menu/Pages/Include/PageMeasures.h"
-#include "Menu/Pages/Include/PageMemory.h"
-#include "Menu/Pages/Include/PageService.h"
-#include "Menu/Pages/Include/PageTime.h"
-#include "Menu/Pages/Include/PageTrig.h"
-
 #include "Multimeter/Multimeter.h"
 
 #include "Osci/Osci_Display.h"

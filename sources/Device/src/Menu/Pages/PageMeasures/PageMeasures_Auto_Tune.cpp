@@ -1,5 +1,3 @@
-#include "stdafx.h"
-#ifndef WIN32
 #include "defines.h"
 #include "Menu/MenuItems.h"
 #include "Menu/Pages/Include/Definition.h"
@@ -11,27 +9,20 @@
 #include "Menu/Pages/Include/PageMeasures.h"
 #include "Utils/Math.h"
 #include "Hardware/Sound.h"
-#endif
 
 
 using namespace Display::Primitives;
 using namespace Processing;
 
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 extern const PageBase pageTune;
 
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 const PageBase *PageMeasures::PageAuto::PageTune::pointer = &pageTune;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/*
-DEF_SMALL_BUTTON_EXIT(bTune_Exit,                                                                            //--- »«Ã≈–≈Õ»ﬂ - Õ¿—“–Œ»“‹ - ¬˚ıÓ‰ ---
-    pageTune, FuncActive, OnPressSB_Exit, DrawSB_Exit
-)
-*/
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void Draw_Tune_Markers(int x, int y)
 {
     Font::SetCurrent(Font::Type::_UGO2);

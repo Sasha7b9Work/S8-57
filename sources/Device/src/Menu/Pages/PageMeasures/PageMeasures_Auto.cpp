@@ -1,17 +1,15 @@
-#include "stdafx.h"
-#ifndef WIN32
 #include "defines.h"
 #include "Menu/MenuItems.h"
 #include "Settings/SettingsTime.h"
 #include "Osci/Processing/Measures.h"
 #include "Settings/Settings.h"
 #include "Menu/Pages/Include/PageMeasures.h"
-#endif
+
+
+extern const PageBase pageAuto;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-extern const PageBase pageAuto;
-
 const PageBase *PageMeasures::PageAuto::pointer = &pageAuto;
 
 

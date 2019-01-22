@@ -1,5 +1,3 @@
-#include "stdafx.h"
-#ifndef WIN32
 #include "defines.h"
 #include "FPGA/FPGA.h"
 #include "FPGA/FPGA_Settings.h"
@@ -7,7 +5,6 @@
 #include "Menu/Pages/Include/PageDebug.h"
 #include "Settings/Settings.h"
 #include "Settings/SettingsNRST.h"
-#endif
 
 
 using namespace Osci::Settings;
