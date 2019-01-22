@@ -16,6 +16,7 @@
 #include "Utils/Dictionary.h"
 #include "Utils/Math.h"
 #include "Utils/StringUtils.h"
+#include <stdio.h>
 
 
 using namespace Display::Primitives;

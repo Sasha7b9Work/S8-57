@@ -129,7 +129,7 @@ void VCP::SendFormatStringAsynch(char *format, ...)
         va_start(args, format);
         std::vsprintf(buffer, format, args);
         va_end(args);
-        strcat(buffer, "\r\n");
+        std::strcat(buffer, "\r\n");
         SendDataAsynch((uint8 *)buffer, strlen(buffer));
     }
 }

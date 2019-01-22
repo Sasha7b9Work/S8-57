@@ -2,18 +2,18 @@ cmake_minimum_required(VERSION 3.0)
 
 project (Device56)
 
-include_directories("..\\..\\common\\"
+include_directories("..\\..\\Device\\src\\libs\\HAL\\"
+                    "..\\..\\Device\\src\\libs\\FatFS\\"
+                    "..\\..\\Device\\src\\libs\\USBH\\"
+                    "..\\..\\Device\\src\\libs\\USBD\\"
+                    "..\\..\\common\\"
                     "..\\..\\common\\_VS\\"
                     "..\\..\\common\\_VS\\CMSIS\\"
                     "..\\..\\common\\_VS\\FatFS\\"
                     "..\\..\\common\\_VS\\HAL\\"
                     "..\\..\\common\\_VS\\USBD\\"
                     "..\\..\\common\\_VS\\USBH\\"
-                    "..\\..\\Device\\src\\"
-                    "..\\..\\Device\\src\\libs\\HAL\\"
-                    "..\\..\\Device\\src\\libs\\FatFS\\"
-                    "..\\..\\Device\\src\\libs\\USBH\\"
-                    "..\\..\\Device\\src\\libs\\USBD\\")
+                    "..\\..\\Device\\src\\")
                     
 add_definitions(-DSTM32F437xx -DOLD_RECORDER)
 
@@ -23,7 +23,7 @@ add_compile_options(/wd4820)
 add_compile_options(/wd5039)
 
 source_group(common                    REGULAR_EXPRESSION "../common/*.*")
-source_group(_VS                       REGULAR_EXPRESSION "../common/_VS/*.*")
+source_group(_VS                       REGULAR_EXPRESSION "../../common/_VS/*.*")
 source_group(_VS\\CMSIS                REGULAR_EXPRESSION "../common/_VS/CMSIS/*.*")
 source_group(_VS\\FatFS                REGULAR_EXPRESSION "../common/_VS/FatFS/*.*")
 source_group(_VS\\HAL                  REGULAR_EXPRESSION "../common/_VS/HAL/*.*")
@@ -61,13 +61,13 @@ source_group(Tester                    REGULAR_EXPRESSION "src/Tester/*.*")
 source_group(Utils                     REGULAR_EXPRESSION "src/Utils/*.*")
 
 
-file(GLOB SOURCES   ../../../common/_VS/*
-                    ../../../common/_VS/CMSIS/*
-                    ../../../common/_VS/FatFS/*
-                    ../../../common/_VS/HAL/*
-                    ../../../common/_VS/USBD/*
-                    ../../../common/_VS/USBH/*
-                    ../../../common/*.*
+file(GLOB SOURCES   ../../common/_VS/*
+                    ../../common/_VS/CMSIS/*
+                    ../../common/_VS/FatFS/*
+                    ../../common/_VS/HAL/*
+                    ../../common/_VS/USBD/*
+                    ../../common/_VS/USBH/*
+                    ../../common/*.*
                     ../../Device/src/Data/*.*
                     ../../Device/src/Display/*.*
                     ../../Device/src/Display/Font/*.*
