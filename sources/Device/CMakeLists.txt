@@ -2,17 +2,19 @@ cmake_minimum_required(VERSION 3.0)
 
 project (Device56)
 
-include_directories("..\\common\\"
+include_directories("..\\common\\libs\\STM32Cube_F4\\Drivers\\STM32F4xx_HAL_Driver\\Inc\\"
+                    "..\\common\\libs\\STM32Cube_F4\\Drivers\\CMSIS\\Device\\ST\\STM32F4xx\\Include\\"
+                    "..\\common\\libs\\STM32Cube_F4\\Middlewares\\Third_Party\\FatFs\\src\\"
+                    "..\\common\\libs\\STM32Cube_F4\\Middlewares\\ST\\STM32_USB_Host_Library\\Core\\Inc\\"
+                    "..\\common\\libs\\STM32Cube_F4\\Middlewares\\ST\\STM32_USB_Host_Library\\Class\\MSC\\Inc\\"
+                    "..\\common\\libs\\STM32Cube_F4\\Middlewares\\ST\\STM32_USB_Device_Library\\Core\\Inc\\"
+                    "..\\common\\libs\\STM32Cube_F4\\Middlewares\\ST\\STM32_USB_Device_Library\\Class\\CDC\\Inc\\"
+                    "..\\common\\"
                     "..\\common\\_VS\\"
                     "src"
-                    "..\\common\\_VS\\HAL\\"
                     "src\\libs\\HAL\\"
-                    "..\\common\\_VS\\CMSIS\\"
-                    "..\\common\\_VS\\FatFS\\"
                     "src\\libs\\FatFS\\"
-                    "..\\common\\_VS\\USBH\\"
                     "src\\libs\\USBH\\"
-                    "..\\common\\_VS\\USBD\\"
                     "src\\libs\\USBD\\")
                     
 add_definitions(-DSTM32F437xx -DOLD_RECORDER)
@@ -21,10 +23,6 @@ SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -MP -Wall")
 
 source_group(common                    REGULAR_EXPRESSION "../common/*.*")
 source_group(_VS                       REGULAR_EXPRESSION "../common/_VS/*.*")
-source_group(_VS\\CMSIS                REGULAR_EXPRESSION "../common/_VS/CMSIS/*.*")
-source_group(_VS\\HAL                  REGULAR_EXPRESSION "../common/_VS/HAL/*.*")
-source_group(_VS\\USBD                 REGULAR_EXPRESSION "../common/_VS/USBD/*.*")
-source_group(_VS\\USBH                 REGULAR_EXPRESSION "../common/_VS/USBH/*.*")
 source_group(src                       REGULAR_EXPRESSION "src/*.*")
 source_group(Data                      REGULAR_EXPRESSION "src/Data/*.*")
 source_group(Display                   REGULAR_EXPRESSION "src/Display/*.*")
@@ -57,10 +55,6 @@ source_group(Utils                     REGULAR_EXPRESSION "src/Utils/*.*")
 
 
 file(GLOB SOURCES   ../common/_VS/*
-                    ../common/_VS/CMSIS/*
-                    ../common/_VS/HAL/*
-                    ../common/_VS/USBD/*
-                    ../common/_VS/USBH/*
                     ../common/*.*
                     src/Data/*.*
                     src/Display/*.*
