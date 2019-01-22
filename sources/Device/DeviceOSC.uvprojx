@@ -1998,6 +1998,26 @@
           </Files>
         </Group>
         <Group>
+          <GroupName>Osci/Measures</GroupName>
+          <Files>
+            <File>
+              <FileName>Measures.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Osci\Measures\Measures.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Measures.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Osci\Measures\Measures.h</FilePath>
+            </File>
+            <File>
+              <FileName>Processing.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Osci\Measures\Processing.cpp</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
           <GroupName>Recorder</GroupName>
           <Files>
             <File>
@@ -2189,21 +2209,6 @@
               <FileName>Math.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Utils\Math.h</FilePath>
-            </File>
-            <File>
-              <FileName>Measure.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Utils\Measure.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Measure.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Utils\Measure.h</FilePath>
-            </File>
-            <File>
-              <FileName>MeasureProcessing.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Utils\MeasureProcessing.cpp</FilePath>
             </File>
             <File>
               <FileName>Stack.cpp</FileName>

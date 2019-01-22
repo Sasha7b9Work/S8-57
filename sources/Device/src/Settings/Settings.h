@@ -12,7 +12,7 @@
 #include "Display/Grid_Types.h"
 #include "Display/Colors.h"
 #include "Multimeter/Multimeter.h"
-#include "Utils/Measure.h"
+#include "Osci/Measures/Measures.h"
 #include "Recorder/Recorder_Settings.h"
 
 

@@ -2,7 +2,7 @@
 #ifndef WIN32
 #include "defines.h"
 #include "DataSettings.h"
-#include "Utils/Measure.h"
+#include "Osci/Measures/Measures.h"
 #include "Settings/Settings.h"
 #include <cstring>
 #endif
