@@ -1,9 +1,6 @@
-#include "stdafx.h"
-#ifndef WIN32
 #include "defines.h"
 #include "FPGA/FPGA_Settings.h"
 #include "Settings/Settings.h"
-#endif
 
 
 using namespace FPGA::Settings;

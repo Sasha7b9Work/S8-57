@@ -1,5 +1,3 @@
-#include "stdafx.h"
-#ifndef WIN32
 #include "defines.h"
 #include "log.h"
 #include "Settings/Settings.h"
@@ -7,7 +5,6 @@
 #include "Display/Font/Font.h"
 #include "Display/Painter.h"
 #include "Tables.h"
-#endif
 
 
 using namespace Display::Primitives;

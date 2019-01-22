@@ -1,12 +1,9 @@
-#include "stdafx.h"
-#ifndef WIN32
 #include "defines.h"
 #include "Display/Display_Primitives.h"
 #include "Display/Painter.h"
 #include "Menu/MenuItems.h"
 #include "Utils/CommonFunctions.h"
 #include "Menu/Menu.h"
-#endif
 #include "Menu/Pages/Include/PageHelp.h"
 #include "Menu/Pages/Include/Definition.h"
 #include "Menu/Pages/Include/HelpContent.h"
@@ -14,8 +11,6 @@
 
 using namespace Display::Primitives;
 
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 extern const PageBase pHelp;
 
 

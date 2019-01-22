@@ -1,5 +1,3 @@
-#include "stdafx.h"
-#ifndef WIN32
 #include "defines.h"
 #include "Multimeter.h"
 #include "Display/Display_Primitives.h"
@@ -9,13 +7,9 @@
 #include "Hardware/Timer.h"
 #include "Device.h"
 #include <cstring>
-#endif
 
 
 using namespace Display::Primitives;
-
-
-//extern char *out;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
