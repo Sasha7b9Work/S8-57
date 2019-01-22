@@ -9,6 +9,9 @@
 #include "Display/Painter.h"
 #include "FPGA/FPGA.h"
 #include "Settings/Settings.h"
+
+#include "Hardware/Battery.h"
+#include "Osci/Display/BottomPart.h"
 #endif
 
 
@@ -34,17 +37,24 @@ void MemoryWindow::Draw()
         return;
     }
 
-    DrawScreenArea();
-
-    Chan::E chans[2] = {LAST_AFFECTED_CH_IS_A ? Chan::B : Chan::A, LAST_AFFECTED_CH_IS_A ? Chan::A : Chan::B};
-
-    for (int i = 0; i < 2; i++)
+    if (Menu::IsShown())
     {
-        Chan::E chan = chans[i];
-        if (SET_ENABLED(chan))
+        BottomPart::DrawMainParameters(0, 1);
+    }
+    else
+    {
+        DrawScreenArea();
+
+        Chan::E chans[2] = { LAST_AFFECTED_CH_IS_A ? Chan::B : Chan::A, LAST_AFFECTED_CH_IS_A ? Chan::A : Chan::B };
+
+        for (int i = 0; i < 2; i++)
         {
-            Color::SetCurrent(Color::Channel(chan));
-            DrawDataInRect(X(), Y(), Width(), Height(), OUT(chan), (uint)FPGA::NumPoints());
+            Chan::E chan = chans[i];
+            if (SET_ENABLED(chan))
+            {
+                Color::SetCurrent(Color::Channel(chan));
+                DrawDataInRect(X(), Y(), Width(), Height(), OUT(chan), (uint)FPGA::NumPoints());
+            }
         }
     }
 }

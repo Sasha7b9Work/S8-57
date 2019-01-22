@@ -48,7 +48,7 @@ source_group(Menu\\Pages\\PageService  REGULAR_EXPRESSION "src/Menu/Pages/PageSe
 source_group(Menu\\Pages\\PageTrig     REGULAR_EXPRESSION "src/Menu/Pages/PageTrig/*.*")
 source_group(Multimeter                REGULAR_EXPRESSION "src/Multimeter/*.*")
 source_group(Osci                      REGULAR_EXPRESSION "src/Osci/*.*")
-source_group(Osci\\Display             REGULAR_EXPRESSION "scr/Osci/Display/*.*")
+source_group(Osci\\Display             REGULAR_EXPRESSION "src/Osci/Display/*.*")
 source_group(Recorder                  REGULAR_EXPRESSION "src/Recorder/*.*")
 source_group(SCPI                      REGULAR_EXPRESSION "src/SCPI/*.*")
 source_group(Settings                  REGULAR_EXPRESSION "src/Settings/*.*")

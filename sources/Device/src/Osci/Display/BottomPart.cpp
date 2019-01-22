@@ -32,9 +32,6 @@ static void WriteTextVoltage(Chan::E ch, int x, int y);
 static void WriteStringAndNumber(const char *text, int16 x, int16 y, int number);
 
 static void DrawTime(int x, int y);
-/// Записывает главные параметры в указанную позицию. Возвращает х-координату правого верхнего угла выведенного изображения
-static int WriteMainParameters(int x, int y);
-
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -49,9 +46,7 @@ void BottomPart::Draw()
 	line.Draw(1, Grid::ChannelBottom(), Color::SEPARATOR);
 	line.Draw(1, Grid::FullBottom());
 
-    x = WriteMainParameters(x, y0);
-
-    VLine(Display::HEIGHT - Grid::Bottom() - 4).Draw(x + 79, Grid::Bottom() + 2, Color::SEPARATOR);
+    x = DrawMainParameters(x, y0);
 
 	HLine line2(Display::WIDTH - Grid::Right() - 4);
 
@@ -126,16 +121,16 @@ void BottomPart::Draw()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static int WriteMainParameters(int x0, int y)
+int BottomPart::DrawMainParameters(int _x, int _y)
 {
-    int x = x0;
-    int y0 = y;
-    int y1 = y + 8;
+    int x = _x;
+    int y0 = _y;
+    int y1 = _y + 8;
 
     WriteTextVoltage(Chan::A, x + 2, y0);
     WriteTextVoltage(Chan::B, x + 2, y1);
 
-    VLine(Display::HEIGHT - Grid::Bottom() - 4).Draw(x + 95, Grid::Bottom() + 2, Color::SEPARATOR);
+    VLine(Display::HEIGHT - Grid::Bottom() - 4).Draw(x + 95, _y, Color::SEPARATOR);
 
     x += 98;
     const int SIZE = 100;
@@ -202,7 +197,9 @@ static int WriteMainParameters(int x0, int y)
         String(buffer).Draw(x + 63, y1);
     }
 
-    return x0 + 93;
+    VLine(Display::HEIGHT - Grid::Bottom() - 4).Draw(x + 74, _y, Color::SEPARATOR);
+
+    return _x + 93;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
