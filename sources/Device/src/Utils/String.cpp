@@ -1,5 +1,3 @@
-#include "stdafx.h"
-#ifndef WIN32
 #include "defines.h"
 #include "String.h"
 #include "Display/Display_Primitives.h"
@@ -7,8 +5,7 @@
 #include <cstring>
 #include <cstdio>
 #include <cstdlib>
-#include <stdarg.h>
-#endif
+#include <cstdarg>
 
 
 using namespace Display::Primitives;
