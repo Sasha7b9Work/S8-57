@@ -29,6 +29,13 @@ using namespace Osci::Settings;
 /// Написать параметры вертикального тракта заданного канала
 static void WriteTextVoltage(Chan::E ch, int x, int y);
 
+static void WriteStringAndNumber(const char *text, int16 x, int16 y, int number);
+
+static void DrawTime(int x, int y);
+/// Записывает главные параметры в указанную позицию. Возвращает х-координату правого верхнего угла выведенного изображения
+static int WriteMainParameters(int x, int y);
+
+
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void BottomPart::Draw()
@@ -42,75 +49,7 @@ void BottomPart::Draw()
 	line.Draw(1, Grid::ChannelBottom(), Color::SEPARATOR);
 	line.Draw(1, Grid::FullBottom());
 
-    WriteTextVoltage(Chan::A, x + 2, y0);
-    WriteTextVoltage(Chan::B, x + 2, y1);
-
-    VLine(Display::HEIGHT - Grid::Bottom() - 4).Draw(x + 95, Grid::Bottom() + 2, Color::SEPARATOR);
-
-    x += 98;
-    const int SIZE = 100;
-    char buffer[SIZE] = {0};
-
-    snprintf(buffer, SIZE, "р\xa5%s", TBase(SET_TBASE).ToString());
-
-    String(buffer).Draw(x, y0, Color::FILL);
-
-    buffer[0] = 'a';
-    buffer[1] = 0;
-    snprintf(buffer, SIZE, "\xa5%s", SET_TSHIFT.ToString(SET_TBASE).CString());
-    String(buffer).Draw(x + 35, y0);
-
-    buffer[0] = 0;
-
-    if (MODE_WORK == ModeWork::Dir)
-    {
-        pString source[3] = { "1", "2", "\x82" };
-        snprintf(buffer, 100, "с\xa5\x10%s", source[(uint8)TRIG_SOURCE]);
-    }
-
-    String(buffer).Draw(x, y1, Color::Trig());
-
-    buffer[0] = 0;
-    static pString couple[] =
-    {
-        "\x92",
-        "\x91",
-        "\x92",
-        "\x92"
-    };
-    static pString polar[] =
-    {
-        "\xa7",
-        "\xa6"
-    };
-    static pString filtr[] =
-    {
-        "\xb5\xb6",
-        "\xb5\xb6",
-        "\xb3\xb4",
-        "\xb1\xb2"
-    };
-    if (MODE_WORK == ModeWork::Dir)
-    {
-        snprintf(buffer, SIZE, "\xa5\x10%s\x10\xa5\x10%s\x10\xa5\x10", couple[TRIG_INPUT], polar[TRIG_POLARITY]);
-        String(buffer).Draw(x + 18, y1);
-
-        Char(filtr[TRIG_INPUT][0]).Draw(x + 45, y1);
-        Char(filtr[TRIG_INPUT][1]).Draw(x + 53, y1);
-    }
-
-    buffer[0] = '\0';
-    const char mode[] =
-    {
-        '\xb7',
-        '\xa0',
-        '\xb0'
-    };
-    if (MODE_WORK == ModeWork::Dir)
-    {
-        snprintf(buffer, 100, "\xa5\x10%c", mode[START_MODE]);
-        String(buffer).Draw(x + 63, y1);
-    }
+    x = WriteMainParameters(x, y0);
 
     VLine(Display::HEIGHT - Grid::Bottom() - 4).Draw(x + 79, Grid::Bottom() + 2, Color::SEPARATOR);
 
@@ -187,33 +126,83 @@ void BottomPart::Draw()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-int BottomPart::WriteChannel(Chan::E ch, int x, int y)
+static int WriteMainParameters(int x0, int y)
 {
-    String(Chan(ch).IsA() ? "1:" : "2:").Draw(x, y, Color::Channel(ch));
+    int x = x0;
+    int y0 = y;
+    int y1 = y + 8;
 
-    x += 7;
+    WriteTextVoltage(Chan::A, x + 2, y0);
+    WriteTextVoltage(Chan::B, x + 2, y1);
 
-    static const char symbols[3] = {SYMBOL_COUPLE_AC, SYMBOL_COUPLE_DC, SYMBOL_COUPLE_GND};
+    VLine(Display::HEIGHT - Grid::Bottom() - 4).Draw(x + 95, Grid::Bottom() + 2, Color::SEPARATOR);
 
-    char string[2] = {symbols[SET_COUPLE(ch)], 0};
+    x += 98;
+    const int SIZE = 100;
+    char buffer[SIZE] = { 0 };
 
-    String(string).Draw(x, y);
+    snprintf(buffer, SIZE, "р\xa5%s", TBase(SET_TBASE).ToString());
 
-    x += 8;
+    String(buffer).Draw(x, y0, Color::FILL);
 
-    String(Range(SET_RANGE(ch)).Name()).Draw(x, y);
+    buffer[0] = 'a';
+    buffer[1] = 0;
+    snprintf(buffer, SIZE, "\xa5%s", SET_TSHIFT.ToString(SET_TBASE).CString());
+    String(buffer).Draw(x + 35, y0);
 
-    x += 22;
+    buffer[0] = 0;
 
-    Voltage(FPGA::Math::RShift2Abs(SET_RSHIFT(ch), SET_RANGE(ch))).ToString(true).Draw(x, y);
+    if (MODE_WORK == ModeWork::Dir)
+    {
+        pString source[3] = { "1", "2", "\x82" };
+        snprintf(buffer, 100, "с\xa5\x10%s", source[(uint8)TRIG_SOURCE]);
+    }
 
-    return x + 47;
-}
+    String(buffer).Draw(x, y1, Color::Trig());
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void BottomPart::WriteTBase(int x, int y)
-{
-    String(TBase(SET_TBASE).Name()).Draw(x, y, Color::FILL);
+    buffer[0] = 0;
+    static pString couple[] =
+    {
+        "\x92",
+        "\x91",
+        "\x92",
+        "\x92"
+    };
+    static pString polar[] =
+    {
+        "\xa7",
+        "\xa6"
+    };
+    static pString filtr[] =
+    {
+        "\xb5\xb6",
+        "\xb5\xb6",
+        "\xb3\xb4",
+        "\xb1\xb2"
+    };
+    if (MODE_WORK == ModeWork::Dir)
+    {
+        snprintf(buffer, SIZE, "\xa5\x10%s\x10\xa5\x10%s\x10\xa5\x10", couple[TRIG_INPUT], polar[TRIG_POLARITY]);
+        String(buffer).Draw(x + 18, y1);
+
+        Char(filtr[TRIG_INPUT][0]).Draw(x + 45, y1);
+        Char(filtr[TRIG_INPUT][1]).Draw(x + 53, y1);
+    }
+
+    buffer[0] = '\0';
+    const char mode[] =
+    {
+        '\xb7',
+        '\xa0',
+        '\xb0'
+    };
+    if (MODE_WORK == ModeWork::Dir)
+    {
+        snprintf(buffer, 100, "\xa5\x10%c", mode[START_MODE]);
+        String(buffer).Draw(x + 63, y1);
+    }
+
+    return x0 + 93;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -249,7 +238,7 @@ static void WriteTextVoltage(Chan::E ch, int x, int y)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void BottomPart::WriteStringAndNumber(const char *text, int16 x, int16 y, int number)
+static void WriteStringAndNumber(const char *text, int16 x, int16 y, int number)
 {
     String(text).Draw(x, y, Color::FILL);
 
@@ -268,7 +257,7 @@ void BottomPart::WriteStringAndNumber(const char *text, int16 x, int16 y, int nu
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void BottomPart::DrawTime(int x, int y)
+static void DrawTime(int x, int y)
 {
     int dField = 10;
     int dSeparator = 2;
