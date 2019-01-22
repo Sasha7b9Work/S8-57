@@ -6,6 +6,8 @@
 #include "Display/Painter.h"
 #include "Hardware/Sound.h"
 #include "Utils/Math.h"
+
+#include "Osci/Processing/Processing.h"
 #endif
 
 

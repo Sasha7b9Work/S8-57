@@ -69,6 +69,7 @@
 #include "Osci/Display/HiPart.h"
 #include "Osci/Display/MemoryWindow.h"
 #include "Osci/Display/PainterData.h"
+#include "Osci/Processing/Processing.h"
 
 #include "Recorder/Recorder.h"
 #include "Recorder/Recorder_Display.h"

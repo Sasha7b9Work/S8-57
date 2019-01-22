@@ -49,7 +49,7 @@ source_group(Menu\\Pages\\PageTrig     REGULAR_EXPRESSION "src/Menu/Pages/PageTr
 source_group(Multimeter                REGULAR_EXPRESSION "src/Multimeter/*.*")
 source_group(Osci                      REGULAR_EXPRESSION "src/Osci/*.*")
 source_group(Osci\\Display             REGULAR_EXPRESSION "src/Osci/Display/*.*")
-source_group(Osci\\Measures\\          REGULAR_EXPRESSION "src/Osci/Measures/*.*")
+source_group(Osci\\Processing\\        REGULAR_EXPRESSION "src/Osci/Processing/*.*")
 source_group(Recorder                  REGULAR_EXPRESSION "src/Recorder/*.*")
 source_group(SCPI                      REGULAR_EXPRESSION "src/SCPI/*.*")
 source_group(Settings                  REGULAR_EXPRESSION "src/Settings/*.*")
@@ -82,7 +82,7 @@ file(GLOB SOURCES   ../common/_VS/*
                     src/Multimeter/*
                     src/Osci/*
                     src/Osci/Display/*
-                    src/Osci/Measures/*
+                    src/Osci/Processing/*
                     src/Recorder/*
                     src/Settings/*
                     src/Tester/*
