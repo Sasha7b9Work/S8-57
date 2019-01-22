@@ -1,11 +1,17 @@
 #pragma once
 
 
-namespace HiPart
+namespace Osci
 {
-    void Draw();
+    namespace Display
+    {
+        namespace HiPart
+        {
+            void Draw();
 
-    void WriteCursors();
+            void WriteCursors();
 
-    void DrawRightPart();
+            void DrawRightPart();
+        };
+    };
 };

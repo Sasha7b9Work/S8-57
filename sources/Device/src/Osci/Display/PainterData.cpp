@@ -23,7 +23,18 @@ using namespace Osci::Settings;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-StructDataDrawing *PainterData::dataStruct = 0;
+/// Нарисовать актуальные данные - соответствующие текущим установкам
+static void DrawCurrent();
+/// Нарисовать данные из ОЗУ
+static void DrawRAM();
+/// Нарисовать данные из ППЗУ
+static void DrawROM();
+
+static void DrawChannel(Chan::E ch);
+
+static void DrawTPos(int leftX, int rightX);
+
+static void DrawTShift(int leftX, int rightX, int numPoints);
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -35,17 +46,20 @@ void PainterData::DrawData()
 
         static const pFuncVV func[ModeWork::Number] =
         {
-            PainterData::DrawCurrent,
-            PainterData::DrawRAM,
-            PainterData::DrawROM
+            DrawCurrent,
+            DrawRAM,
+            DrawROM
         };
 
         func[MODE_WORK]();
     }
+
+    DrawTPos(0, 0);
+    DrawTShift(0, 0, 0);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void PainterData::DrawCurrent()
+static void DrawCurrent()
 {
     if(LAST_AFFECTED_CH_IS_A)
     {
@@ -62,19 +76,19 @@ void PainterData::DrawCurrent()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void PainterData::DrawRAM()
+static void DrawRAM()
 {
 
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void PainterData::DrawROM()
+static void DrawROM()
 {
 
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void PainterData::DrawChannel(Chan::E ch)
+static void DrawChannel(Chan::E ch)
 {
     uint8 *data = OUT(ch);
 
@@ -187,7 +201,7 @@ void PainterData::DrawChannel(Chan::E ch)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void PainterData::DrawTPos(int leftX, int rightX)
+static void DrawTPos(int leftX, int rightX)
 {
     int x[] = {leftX, (rightX - leftX) / 2 + leftX, rightX};
     int x0 = x[TPOS];
@@ -196,7 +210,7 @@ void PainterData::DrawTPos(int leftX, int rightX)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void PainterData::DrawTShift(int leftX, int rightX, int numBytes)
+static void DrawTShift(int leftX, int rightX, int numBytes)
 {
     float scale = (float)(rightX - leftX + 1) / ((float)numBytes - (numBytes == 281 ? 1 : 0));
     int xShift = (int)(1.5F + (TPos(TPOS).InBytes() - SET_TSHIFT.InPoints()) * scale) - 1;
@@ -232,35 +246,4 @@ void PainterData::DrawTShift(int leftX, int rightX, int numBytes)
 
     Line((int)xShift + dX01, 3, (int)xShift + dX11, dY11 - 2).Draw(Color::BACK);
     Line((int)xShift + dX02, 4, (int)xShift + 2, dY12 - 2).Draw();
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-int PainterData::Ordinate(uint8 x, float scale)
-{
-    if (x == VALUE::NONE)
-    {
-        return -1;
-    }
-
-    ::Math::LimitationRet<uint8>((uint8)(x - VALUE::MIN), 0, (VALUE::MAX - VALUE::MIN));
-
-    return (int)((17.0F - scale * x) + 0.5F);
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void PainterData::SendToDisplayDataInRect(Chan::E ch, int x, const int *min, const int *max, int width)
-{
-    LIMIT_ABOVE(width, 255);
-
-#undef SIZE_BUFFER
-#define SIZE_BUFFER (255 * 2)
-    uint8 points[SIZE_BUFFER];
-
-    for (int i = 0; i < width; i++)
-    {
-        points[i * 2] = (uint8)max[i];
-        points[i * 2 + 1] = (uint8)(min[i] < 0 ? 0 : min[i]);
-    }
-
-    VLineArray((int)width, points).Draw(x, Color::Channel(ch));
 }
