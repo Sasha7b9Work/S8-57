@@ -1,9 +1,6 @@
-#include "stdafx.h"
-#ifndef WIN32
 #include "defines.h"
 #include "FPGA/FPGA_Types.h"
 #include <stm32f4xx_hal.h>
-#endif
 
 
 static uint8 *addrAltera = ((uint8*)NOR_MEMORY_ADRESS1);    // -V566

@@ -1,8 +1,5 @@
-#include "stdafx.h"
-#ifndef WIN32
 #include "defines.h"
 #include "Data/Heap.h"
-#endif
 
 
 /*
