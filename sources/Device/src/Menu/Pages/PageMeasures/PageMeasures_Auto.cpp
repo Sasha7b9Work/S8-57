@@ -3,7 +3,7 @@
 #include "defines.h"
 #include "Menu/MenuItems.h"
 #include "Settings/SettingsTime.h"
-#include "Osci/Measures/Measures.h"
+#include "Osci/Processing/Measures.h"
 #include "Settings/Settings.h"
 #include "Menu/Pages/Include/PageMeasures.h"
 #endif

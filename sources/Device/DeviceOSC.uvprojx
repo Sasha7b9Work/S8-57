@@ -1998,22 +1998,27 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>Osci/Measures</GroupName>
+          <GroupName>Osci/Processing</GroupName>
           <Files>
             <File>
               <FileName>Measures.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\Osci\Measures\Measures.cpp</FilePath>
+              <FilePath>.\src\Osci\Processing\Measures.cpp</FilePath>
             </File>
             <File>
               <FileName>Measures.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\src\Osci\Measures\Measures.h</FilePath>
+              <FilePath>.\src\Osci\Processing\Measures.h</FilePath>
             </File>
             <File>
               <FileName>Processing.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\Osci\Measures\Processing.cpp</FilePath>
+              <FilePath>.\src\Osci\Processing\Processing.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Processing.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Osci\Processing\Processing.h</FilePath>
             </File>
           </Files>
         </Group>
