@@ -19,3 +19,11 @@
 #define __DMA1_CLK_ENABLE               __noop
 #define __TIM7_CLK_ENABLE               __noop
 #define __DAC_CLK_ENABLE                __noop
+
+#define HAL_ADC_STATE_BUSY_REG          1
+#define HAL_ADC_STATE_BUSY_INJ          1
+#define HAL_ADC_STATE_EOC_REG           1
+#define HAL_ADC_STATE_EOC_INJ           1
+#define HAL_ADC_STATE_ERROR             1
+#define HAL_ADC_STATE_BUSY              1
+#define HAL_ADC_STATE_AWD               1

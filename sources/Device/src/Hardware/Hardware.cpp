@@ -1,10 +1,12 @@
 #include "stdafx.h"
 #ifndef WIN32
 #include "defines.h"
-#include "Hardware.h"
-#include "FSMC.h"
-#include "Timer.h"
-#include "Sound.h"
+#include "Hardware/FSMC.h"
+#include "Hardware/Hardware.h"
+#include "Hardware/Sound.h"
+#include "Hardware/Timer.h"
+
+#include "Hardware/Battery.h"
 #endif
 
 
@@ -39,6 +41,7 @@ void Hardware::Init()
     Timer::Init();
     FSMC::Init();
     Sound::Init();
+    Battery::Init();
 
     //MX_ADC3_Init();
     MX_DAC_Init();

@@ -9,9 +9,12 @@
 #define ADC_EXTERNALTRIGCONV_Ext_IT11   0
 #define ADC_DATAALIGN_RIGHT             0x00000000U
 #define ADC_EOC_SINGLE_CONV             0x00000001U
+#define ADC_CHANNEL_2                   0
 #define ADC_CHANNEL_8                   0
 #define ADC_SAMPLETIME_3CYCLES          0x00000000U
 #define ADC_SAMPLETIME_28CYCLES         0
+#define ADC_EXTERNALTRIGCONV_T1_CC1     0x00000000U
+#define ADC_EXTERNALTRIGCONVEDGE_NONE   0x00000000U
 
 
 typedef struct
@@ -116,3 +119,6 @@ HAL_StatusTypeDef HAL_ADC_ConfigChannel(ADC_HandleTypeDef* hadc, ADC_ChannelConf
 HAL_StatusTypeDef HAL_ADC_Start_IT(ADC_HandleTypeDef* hadc);
 void HAL_ADC_IRQHandler(ADC_HandleTypeDef* hadc);
 uint32_t HAL_ADC_GetValue(ADC_HandleTypeDef* hadc);
+HAL_StatusTypeDef HAL_ADC_Start(ADC_HandleTypeDef* hadc);
+HAL_StatusTypeDef HAL_ADC_PollForConversion(ADC_HandleTypeDef* hadc, uint32_t Timeout);
+uint32_t HAL_ADC_GetState(ADC_HandleTypeDef* hadc);

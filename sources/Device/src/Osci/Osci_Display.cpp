@@ -5,13 +5,12 @@
 #include "Display/Grid.h"
 #include "Display/Painter.h"
 #include "Display/Symbols.h"
+#include "Hardware/Battery.h"
 #include "Osci/Osci_Display.h"
 #include "Osci/Display/BottomPart.h"
 #include "Osci/Display/HiPart.h"
 #include "Osci/Display/PainterData.h"
 #include "Settings/Settings.h"
-
-#include "Utils/Debug.h"
 #endif
 
 
@@ -26,55 +25,31 @@ using namespace Osci::Settings;
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void Osci::Display::Update()
 {
-    Debug::StartProfilingMS();
-
     Painter::BeginScene(Color::BACK);
-
-    Debug::PointProfilingMS("1");
 
     Grid::Draw();
 
-    Debug::PointProfilingMS("2");
-    
     PainterData::DrawData();
 
-    Debug::PointProfilingMS("3");
-    
     Rectangle(Grid::Width(), Grid::Height()).Draw(Grid::Left(), Grid::Top(), Color::FILL);
 
-    Debug::PointProfilingMS("4");
-    
     BottomPart::Draw();
 
-    Debug::PointProfilingMS("5");
-    
     RShift::DrawBoth();
 
-    Debug::PointProfilingMS("6");
-    
     DrawCursorTrigLevel();
 
-    Debug::PointProfilingMS("7");
-    
     Cursors::Draw();
 
-    Debug::PointProfilingMS("8");
-    
     HiPart::Draw();
 
-    Debug::PointProfilingMS("9");
-    
     FrequencyCounter::Draw();
-
-    Debug::PointProfilingMS("10");
 
     Menu::Draw();
 
-    Debug::PointProfilingMS("11");
+    Battery::Draw();
 
     Measure::Graphics::Draw();
-
-    Debug::PointProfilingMS("12");
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
