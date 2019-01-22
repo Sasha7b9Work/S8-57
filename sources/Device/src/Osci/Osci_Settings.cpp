@@ -1,5 +1,3 @@
-#include "stdafx.h"
-#ifndef WIN32
 #include "defines.h"
 #include "device.h"
 #include "FPGA/FPGA_Settings.h"
@@ -11,7 +9,6 @@
 #include "FPGA/FPGA.h"
 #include "FPGA/FPGA_Hal.h"
 #include "Hardware/Timer.h"
-#endif
 
 
 #ifdef WIN32

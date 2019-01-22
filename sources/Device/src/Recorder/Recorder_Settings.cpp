@@ -1,5 +1,3 @@
-#include "stdafx.h"
-#ifndef WIN32
 #include "defines.h"
 #include "Recorder/Recorder_Settings.h"
 #include "Settings/Settings.h"
@@ -8,7 +6,6 @@
 #include "Recorder/Recorder.h"
 #include "Hardware/FSMC.h"
 #include "FPGA/FPGA.h"
-#endif
 
 
 #ifdef WIN32

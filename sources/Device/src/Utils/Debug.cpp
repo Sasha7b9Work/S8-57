@@ -1,11 +1,8 @@
-#include "stdafx.h"
-#ifndef WIN32
 #include <stm32f4xx.h>
 #include "defines.h"
 #include "debug.h"
 #include "log.h"
 #include "Hardware/Timer.h"
-#endif
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -14,9 +11,9 @@ static uint timeCounter;
 static uint timeStartCounter;
 
 /// Время старта профилировщика
-static uint timeStartMS = 0;
+volatile static uint timeStartMS = 0;
 /// Время предыдущей точки профилировщика
-static uint timePrevMS = 0;
+volatile static uint timePrevMS = 0;
 
 const char *Debug::file = 0;
 int   Debug::line = 0;

@@ -1,5 +1,3 @@
-#include "stdafx.h"
-#ifndef WIN32
 #include "defines.h"
 #include "PainterData.h"
 #include "Data/DataStorage.h"
@@ -14,7 +12,6 @@
 #include "Settings/Settings.h"
 #include "Utils/Math.h"
 #include "MemoryWindow.h"
-#endif
 
 
 using namespace Display::Primitives;

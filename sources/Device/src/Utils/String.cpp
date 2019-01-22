@@ -45,7 +45,7 @@ String::String(const char *format, ...)
 #define SIZE 100
     char buf[SIZE + 1];
 
-    va_list args;
+    std::va_list args;
     va_start(args, format);
     int numSymbols = std::vsprintf(buf, format, args);
     va_end(args);

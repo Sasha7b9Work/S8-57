@@ -1,5 +1,3 @@
-#include "stdafx.h"
-#ifndef WIN32
 #include "defines.h"
 #include "Data/DataStorage.h"
 #include "Data/Reader.h"
@@ -14,7 +12,6 @@
 #include <limits>
 
 #include "Osci/Processing/Processing.h"
-#endif
 
 
 using namespace Osci::Settings;

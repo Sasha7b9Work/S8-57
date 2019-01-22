@@ -1,5 +1,3 @@
-#include "stdafx.h"
-#ifndef WIN32
 #include "defines.h"
 #include "Settings/Settings.h"
 #include "Display/Display_Primitives.h"
@@ -8,7 +6,6 @@
 #include "Display/Painter.h"
 #include "Hardware/Timer.h"
 #include "Utils/Math.h"
-#endif
 #include "Menu/Pages/Include/HelpContentPages.h"
 #include "Menu/Pages/Include/HelpContent.h"
 

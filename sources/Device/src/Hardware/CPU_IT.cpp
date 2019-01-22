@@ -1,5 +1,3 @@
-#include "stdafx.h"
-#ifndef WIN32
 #include "defines.h"
 #include "Sound.h"
 #include "Utils/Debug.h"
@@ -11,7 +9,6 @@
 
 #include "Utils/Debug.h"
 #include "Display/Painter.h"
-#endif
 
 
 using namespace Osci::Settings;

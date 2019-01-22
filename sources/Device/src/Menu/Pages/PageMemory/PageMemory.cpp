@@ -1,5 +1,3 @@
-#include "stdafx.h"
-#ifndef WIN32
 #include "defines.h"
 #include "Menu/Pages/Include/PageMemory.h"
 #include "Tables.h"
@@ -22,7 +20,6 @@
 #include "Utils/StringUtils.h"
 #include "Utils/Values.h"
 #include "Utils/CommonFunctions.h"
-#endif
 
 
 using namespace Display::Primitives;

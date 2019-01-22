@@ -1,12 +1,9 @@
-#include "stdafx.h"
-#ifndef WIN32
 #include "defines.h"
 #include "DataBuffer.h"
 #include "DataStorage.h"
 #include "Reader.h"
 #include "Utils/Math.h"
-#include <string.h>
-#endif
+#include <cstring>
 
 
 using namespace FPGA;

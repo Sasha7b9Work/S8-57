@@ -1,5 +1,3 @@
-#include "stdafx.h"
-#ifndef WIN32
 #include "defines.h"
 #include "Cursors.h"
 #include "Display/Colors.h"
@@ -13,7 +11,6 @@
 #include "Settings/Settings.h"
 #include <cmath>
 #include <cstring>
-#endif
 
 
 using namespace Display::Primitives;

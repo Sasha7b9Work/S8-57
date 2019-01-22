@@ -21,6 +21,7 @@ add_definitions(-DSTM32F437xx -DOLD_RECORDER)
 
 SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -MP -Wall")
 
+add_compile_options(/wd4820)
 add_compile_options(/wd5039)
 
 source_group(common                    REGULAR_EXPRESSION "../common/*.*")

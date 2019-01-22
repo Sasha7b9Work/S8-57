@@ -1,5 +1,3 @@
-#include "stdafx.h"
-#ifndef WIN32
 #include <stm32f4xx.h>
 #include "defines.h"
 #include "log.h"
@@ -18,7 +16,6 @@
 #include "Hardware/Timer.h"
 #include <cstring>
 #include <limits>
-#endif
 
 
 using namespace Display::Primitives;

@@ -1,5 +1,3 @@
-#include "stdafx.h"
-#ifndef WIN32
 #include "defines.h"
 #include "HiPart.h"
 #include "Display/Display_Primitives.h"
@@ -12,7 +10,6 @@
 #include "Utils/Dictionary.h"
 #include "Utils/Values.h"
 #include <cmath>
-#endif
 
 
 using namespace Display::Primitives;

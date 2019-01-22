@@ -1,14 +1,12 @@
-#include "stdafx.h"
 #include "usbd_desc.h"
 #include "usbd_cdc_interface.h"
-#ifndef WIN32
 #include "defines.h"
 #include "Hardware/CPU.h"
 #include "Hardware/VCP.h"
 #include "usbd_desc.h"
 #include "Utils/Math.h"
-#include <stdarg.h>
-#endif
+#include <cstring>
+#include <cstdarg>
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -42,7 +40,7 @@ void VCP::SendDataAsynch(const uint8 *buffer, uint size)
 
     size = Math::Min(size, SIZE_BUFFER);
     while (!PrevSendingComplete())  {};
-    std::memcpy(trBuf, buffer, (uint)size);
+    memcpy(trBuf, buffer, (uint)size);
 
     USBD_CDC_SetTxBuffer(&handleUSBD, trBuf, (uint16)size);
     USBD_CDC_TransmitPacket(&handleUSBD);
@@ -78,7 +76,7 @@ void VCP::SendDataSynch(const void *_buffer, uint size)
         char *buffer = (char *)_buffer;
         if (size == 0)
         {
-            size = std::strlen(buffer);
+            size = strlen(buffer);
         }
 
         volatile USBD_CDC_HandleTypeDef *pCDC = (USBD_CDC_HandleTypeDef *)handleUSBD.pClassData;
@@ -92,7 +90,7 @@ void VCP::SendDataSynch(const void *_buffer, uint size)
 
                 while (pCDC->TxState == 1) {}; //-V712
 
-                std::memcpy(buffSend + sizeBuffer, (void *)buffer, (uint)reqBytes);
+                memcpy(buffSend + sizeBuffer, (void *)buffer, (uint)reqBytes);
                 USBD_CDC_SetTxBuffer(&handleUSBD, buffSend, SIZE_BUFFER_VCP);
                 USBD_CDC_TransmitPacket(&handleUSBD);
                 size -= reqBytes;
@@ -101,7 +99,7 @@ void VCP::SendDataSynch(const void *_buffer, uint size)
             }
             else
             {
-                std::memcpy(buffSend + sizeBuffer, (void *)buffer, (uint)size);
+                memcpy(buffSend + sizeBuffer, (void *)buffer, (uint)size);
                 sizeBuffer += size;
                 size = 0;
             }
@@ -112,13 +110,13 @@ void VCP::SendDataSynch(const void *_buffer, uint size)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void VCP::SendStringAsynch(char *data)
 {
-    SendDataAsynch((uint8 *)data, std::strlen(data));
+    SendDataAsynch((uint8 *)data, strlen(data));
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void VCP::SendStringSynch(char *data)
 {
-    SendDataSynch((uint8 *)data, std::strlen(data));
+    SendDataSynch((uint8 *)data, strlen(data));
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -127,12 +125,12 @@ void VCP::SendFormatStringAsynch(char *format, ...)
     if (CONNECTED_TO_USB)
     {
         static char buffer[200];
-        va_list args;
+        std::va_list args;
         va_start(args, format);
         std::vsprintf(buffer, format, args);
         va_end(args);
-        std::strcat(buffer, "\r\n");
-        SendDataAsynch((uint8 *)buffer, std::strlen(buffer));
+        strcat(buffer, "\r\n");
+        SendDataAsynch((uint8 *)buffer, strlen(buffer));
     }
 }
 
@@ -140,12 +138,12 @@ void VCP::SendFormatStringAsynch(char *format, ...)
 void VCP::SendFormatStringSynch(char *format, ...)
 {
     char buffer[200];
-    va_list args;
+    std::va_list args;
     va_start(args, format);
     std::vsprintf(buffer, format, args);
     va_end(args);
-    std::strcat(buffer, "\r\n");
-    SendDataSynch((uint8 *)buffer, std::strlen(buffer));
+    strcat(buffer, "\r\n");
+    SendDataSynch((uint8 *)buffer, strlen(buffer));
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------

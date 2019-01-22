@@ -75,17 +75,6 @@
 #include "Recorder/Recorder_Display.h"
 #include "Recorder/Recorder_Storage.h"
 
-#include "SCPI/SCPI.h"
-#include "Settings/Settings.h"
-
-#include "Utils/Buffer.h"
-#include "Utils/Debug.h"
-#include "Utils/Dictionary.h"
-#include "Utils/Math.h"
-#include "Utils/Values.h"
-#include "Utils/String.h"
-#include "Utils/StringUtils.h"
-
 #include "libs/USBH/usbh_diskio.h"
 #include <usbd_def.h>
 #include <usbd_cdc.h>

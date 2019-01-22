@@ -1,11 +1,8 @@
-#include "stdafx.h"
-#ifndef WIN32
 #include "defines.h"
 #include "Command.h"
 #include "Message.h"
 #include <cstdlib>
 #include <cstring>
-#endif
 #include <cstdlib>
 #include "structs.h"
 

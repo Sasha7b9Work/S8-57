@@ -1,12 +1,9 @@
-#include "stdafx.h"
-#ifndef WIN32
 #include "defines.h"
 #include "Utils/Stack.h"
 #include "Utils/StringUtils.h"
 #include "Values.h"
 #include <cstring>
 #include <ctype.h>
-#endif
 
 #ifndef LANG
 #define LANG 0

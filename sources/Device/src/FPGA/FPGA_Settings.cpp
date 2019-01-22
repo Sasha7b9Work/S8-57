@@ -1,5 +1,3 @@
-#include "stdafx.h"
-#ifndef WIN32
 #include "defines.h"
 #include "device.h"
 #include "Display/Display_Primitives.h"
@@ -16,7 +14,6 @@
 #include "Settings/Settings.h"
 #include "Utils/Math.h"
 #include "Utils/Values.h"
-#endif
 
 
 using namespace Display::Primitives;

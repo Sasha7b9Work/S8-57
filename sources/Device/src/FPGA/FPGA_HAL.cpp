@@ -1,5 +1,3 @@
-#include "stdafx.h"
-#ifndef WIN32
 #include "defines.h"
 #include "FPGA_HAL.h"
 #include "Hardware/FSMC.h"
@@ -10,7 +8,6 @@
 #include "Utils/Math.h"
 
 #include "device.h"
-#endif
 
 
 using namespace FPGA::ADDR;
