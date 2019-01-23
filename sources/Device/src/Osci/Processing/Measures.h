@@ -161,14 +161,6 @@ namespace Osci
             static int DY();
             /// Возвращает ширину поля для вывода автоматического измерения
             static int DX();
-
-        private:
-            /// Верхняя координата y выводимой таблицы автоматических измерений
-            static int top;
-
-            static int GetTopTable();
-            /// Нарисовать страницу выбора измерений
-            static void DrawPageChoice();
         };
     };
 };

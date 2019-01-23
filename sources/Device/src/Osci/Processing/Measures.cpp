@@ -15,6 +15,14 @@ using namespace Osci::Measurements::Settings;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/// Верхняя координата y выводимой таблицы автоматических измерений
+static int top = 0;
+
+static int GetTopTable();
+/// Нарисовать страницу выбора измерений
+static void DrawPageChoice();
+
+
 struct StructMeasure
 {
     const char *name;
@@ -56,7 +64,7 @@ static const StructMeasure sMeas[Measure::Type::Number] =
 int8 Measure::posActive = 0;
 bool Measure::pageChoiceIsActive = false;
 int8 Measure::posOnPageChoice = 0;
-int  Graphics::top = 0;
+
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 bool Measure::IsActive()
@@ -161,14 +169,14 @@ Measure::Type::E Measure::GetType()
 
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-int Osci::Measurements::Graphics::GetTopTable()
+static int GetTopTable()
 {
     if(NUM_MEASURES_IS_6_1 || NUM_MEASURES_IS_6_2)
     {
-        return Grid::Bottom() - DY() * 6;
+        return Grid::Bottom() - Osci::Measurements::Graphics::DY() * 6;
     }
 
-    int y = Grid::Bottom() - Graphics::NumRows() * DY();
+    int y = Grid::Bottom() - Graphics::NumRows() * Osci::Measurements::Graphics::DY();
 
     if(Menu::IsShown())
     {
@@ -258,7 +266,7 @@ void Measure::ShortPressOnSmallButonMarker()
 
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Osci::Measurements::Graphics::DrawPageChoice()
+static void DrawPageChoice()
 {
     if(!Measure::pageChoiceIsActive)
     {
