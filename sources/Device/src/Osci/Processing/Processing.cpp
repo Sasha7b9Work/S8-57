@@ -14,6 +14,7 @@
 #include "Osci/Processing/Processing.h"
 
 
+using namespace Osci;
 using namespace Osci::Settings;
 using namespace Osci::Processing::Measurements::Settings;
 
@@ -22,7 +23,7 @@ using FPGA::VALUE::MAX;
 using FPGA::VALUE::AVE;
 using FPGA::VALUE::NONE;
 
-using Processing::Measure;
+using Osci::Processing::Measure;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -89,7 +90,7 @@ static char* Voltage2String(float, bool, char buffer[20]);
 static char* Phase2String(float, bool, char buffer[20]);
 static char* Float2String(float, bool, char buffer[20]);
 
-static const MeasureCalculate sMeas[Processing::Measure::Type::Number] =
+static const MeasureCalculate sMeas[Osci::Processing::Measure::Type::Number] =
 {
     {"", 0, 0, false, {}},
     {"CalculateVoltageMax",         CalculateVoltageMax,         Voltage2String, true,  {}},
@@ -117,9 +118,9 @@ static const MeasureCalculate sMeas[Processing::Measure::Type::Number] =
 };
 
 
-int Processing::markerTime[Chan::Size][2] = {{ERROR_VALUE_INT}, {ERROR_VALUE_INT}};
+int Osci::Processing::markerTime[Chan::Size][2] = {{ERROR_VALUE_INT}, {ERROR_VALUE_INT}};
 
-int Processing::markerVoltage[Chan::Size][2] = {{ERROR_VALUE_INT}, {ERROR_VALUE_INT}};
+int Osci::Processing::markerVoltage[Chan::Size][2] = {{ERROR_VALUE_INT}, {ERROR_VALUE_INT}};
 
 typedef struct
 {

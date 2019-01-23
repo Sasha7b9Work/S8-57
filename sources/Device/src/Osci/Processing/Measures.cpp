@@ -9,7 +9,7 @@
 
 
 using namespace Display::Primitives;
-using namespace Processing;
+using namespace Osci::Processing;
 using namespace Osci::Processing::Measurements::Settings;
 
 
