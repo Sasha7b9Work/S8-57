@@ -41,7 +41,6 @@ DEF_PAGE_10(page,                                                               
     PageMemory::pointer,    // œ¿Ãﬂ“‹
     PageMeasures::pointer,  // »«Ã≈–≈Õ»ﬂ
     PageService::pointer,   // —≈–¬»—
-    //pHelp,                // œŒÃŒŸ‹
     PageDebug::pointer,     // Œ“À¿ƒ ¿
     Page::Name::Main, 0, FuncActive, FuncPressPage, FuncDrawPage, FuncRegSetPage
 )
@@ -77,10 +76,7 @@ bool Menu::IsMainPage(const void *item)
 void DrawSB_Exit(int x, int y)
 {
     Font::SetCurrent(Font::Type::_UGO2);
-
-    //Painter::Draw4SymbolsInRect(x + 2, y + 1, '\x2e');
     Char('\x2e').Draw4SymbolsInRect(x + 2, y + 1);
-
     Font::SetCurrent(Font::Type::_8);
 }
 
@@ -125,13 +121,11 @@ void DrawMenuCursVoltage(int x, int y, bool top, bool bottom)
 
     for (int i = 0; i < (top ? 3 : 1); i++)
     {
-        //Painter::DrawHLine(yTop + i, x0, x1);
 		line.Draw(x0, yTop + i);
     }
 
     for (int i = 0; i < (bottom ? 3 : 1); i++)
     {
-        //Painter::DrawHLine(yBottom - i, x0, x1);
 		line.Draw(x0, yBottom - i);
     }
 }
@@ -161,13 +155,11 @@ void DrawMenuCursTime(int x, int y, bool left, bool right)
 
     for (int i = 0; i < (left ? 3 : 1); i++)
     {
-        //Painter::DrawVLine(x0 + i, y0, y1);
         line.Draw(x0 + i, y0);
     }
 
     for (int i = 0; i < (right ? 3 : 1); i++)
     {
-        //Painter::DrawVLine(x1 - i, y0, y1);
         line.Draw(x1 - i, y0);
     }
 }
