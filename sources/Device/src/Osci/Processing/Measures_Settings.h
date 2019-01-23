@@ -3,7 +3,7 @@
 
 namespace Processing
 {
-    namespace Measures
+    namespace Measurements
     {
         namespace Settings
         {

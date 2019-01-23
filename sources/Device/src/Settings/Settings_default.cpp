@@ -107,9 +107,9 @@ const Settings Settings::defaultSettings =
     // ÃÂÌ˛ »«Ã≈–≈Õ»ﬂ
     
     false,                                                  // meas_show;  
-    Processing::Measures::Settings::OnDisplay::_1_5,        // meas_number;
-    Processing::Measures::Settings::Source::A_B,            // meas_source;
-    Processing::Measures::Settings::ModeViewSignals::AsIs,  // meas_modeViewSignals; 
+    Processing::Measurements::Settings::OnDisplay::_1_5,        // meas_number;
+    Processing::Measurements::Settings::Source::A_B,            // meas_source;
+    Processing::Measurements::Settings::ModeViewSignals::AsIs,  // meas_modeViewSignals; 
     {                                                       // meas_measures[15];
         Processing::Measure::Type::VoltageMax,     Processing::Measure::Type::VoltageMin,  Processing::Measure::Type::VoltagePic,      Processing::Measure::Type::VoltageMaxSteady,
         Processing::Measure::Type::VoltageMinSteady,
