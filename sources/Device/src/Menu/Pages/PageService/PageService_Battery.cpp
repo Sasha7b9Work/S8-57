@@ -2,6 +2,8 @@
 #include "Hardware/Battery.h"
 #include "Menu/Pages/Include/PageService.h"
 
+#include "Settings/Settings.h"
+
 
 extern const PageBase pageBattery;
 

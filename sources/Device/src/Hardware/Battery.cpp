@@ -12,18 +12,40 @@ using namespace Display::Primitives;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/// Для датчика напряжения аккумулятора
 static ADC_HandleTypeDef handle;
+/// Для конфигурации
+static ADC_ChannelConfTypeDef config =
+{
+    ADC_CHANNEL_2,
+    1,
+    ADC_SAMPLETIME_480CYCLES,
+    0
+};
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/// Читает напряжение с АЦП в соответствии с установками
+static uint ReadVoltage();
+/// Перевод считанного значения ЦАП источника в вольты
+static float PowerADC_ToVoltage(float value);
+/// Перевод считанного значения ЦАП батареи в вольты
+static float BatADC_ToVoltage(float value);
+/// Максимальное значение, которое возможно считать с АЦП
+static const float MAX_ADC_REL = (float)((1 << 12) - 1);
+/// Напряжение, соответствующее MAX_ADC_REL
+static const float MAX_ADC_ABS = 3.0F;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void Battery::Init()
 {
-    // Теперь настроим вход АЦП от батареи - будем считывать значение напряжения
-    // PA2 - ADC3 IN2
+    // Настроим входы АЦП для контроля напряжений
+    // 36 : PA2 - ADC1 IN2 - контроль АКБ
+    // 47 : PB1 - ADC1 IN9 - контроль источника
     // Режим работы:
 
     __ADC1_CLK_ENABLE();
-    __ADC3_CLK_ENABLE();
 
     static GPIO_InitTypeDef isGPIOadc =
     {
@@ -33,8 +55,11 @@ void Battery::Init()
     };
     HAL_GPIO_Init(GPIOA, &isGPIOadc);
 
+    isGPIOadc.Pin = GPIO_PIN_1;
+    HAL_GPIO_Init(GPIOB, &isGPIOadc);
+
     handle.Instance = ADC1;
-    handle.Init.ClockPrescaler = ADC_CLOCKPRESCALER_PCLK_DIV4;
+    handle.Init.ClockPrescaler = ADC_CLOCKPRESCALER_PCLK_DIV2;
     handle.Init.Resolution = ADC_RESOLUTION_12B;
     handle.Init.DataAlign = ADC_DATAALIGN_RIGHT;
     handle.Init.ScanConvMode = DISABLE;
@@ -51,22 +76,40 @@ void Battery::Init()
     {
         ERROR_HANDLER();
     }
-
-    ADC_ChannelConfTypeDef sConfig;
-    sConfig.Channel = ADC_CHANNEL_2;
-    sConfig.Rank = 1;
-    sConfig.SamplingTime = ADC_SAMPLETIME_28CYCLES;
-    sConfig.Offset = 0;
-
-    if (HAL_ADC_ConfigChannel(&handle, &sConfig) != HAL_OK)
-    {
-        ERROR_HANDLER();
-    }
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-float Battery::GetVoltage()
+float Battery::GetVoltageAKK()
 {
+    config.Channel = ADC_CHANNEL_2;
+
+    uint result = 0;
+    int count = 4;
+
+    for (int i = 0; i < count; i++)
+    {
+        result += ReadVoltage();
+    }
+
+    return (float)result / (float)count;
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+float Battery::GetVoltagePOW()
+{
+    config.Channel = ADC_CHANNEL_9;
+
+    return PowerADC_ToVoltage((float)ReadVoltage());
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+static uint ReadVoltage()
+{
+    if (HAL_ADC_ConfigChannel(&handle, &config) != HAL_OK)
+    {
+        ERROR_HANDLER();
+    }
+
     if (HAL_ADC_Start(&handle) != HAL_OK)
     {
         ERROR_HANDLER();
@@ -74,9 +117,9 @@ float Battery::GetVoltage()
 
     do
     {
-    } while (HAL_ADC_PollForConversion(&handle, 1) != HAL_OK);
-   
-    return (float)HAL_ADC_GetValue(&handle);
+    } while (HAL_ADC_PollForConversion(&handle, 10) != HAL_OK);
+
+    return HAL_ADC_GetValue(&handle);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -84,7 +127,7 @@ void Battery::Draw()
 {
     if (!BAT_SHOW_ON_DISPLAY)
     {
-        return;
+        //return;
     }
 
     int width = 50;
@@ -95,11 +138,21 @@ void Battery::Draw()
 
     Region(width, height).DrawBounded(x, y, Color::BACK, Color::FILL);
 
-    Text(String("%d", GetVoltage())).Draw(x + 2, y + 1);
+    Text(String("%f", GetVoltageAKK())).Draw(x + 2, y + 1);
+
+    Text(String("%f", GetVoltagePOW())).Draw(x + 2, y + 10);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-bool &Battery::ShowOnDisplay()
+static float PowerADC_ToVoltage(float value)
 {
-    return set.serv_showInfoVoltage;
+    const float k = 130.0f / 30.0f;
+
+    return (value / MAX_ADC_REL) * MAX_ADC_ABS * k;
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+static float BatADC_ToVoltage(float value)
+{
+
 }
