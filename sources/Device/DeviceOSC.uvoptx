@@ -3536,37 +3536,13 @@
 
   <Group>
     <GroupName>Osci</GroupName>
-    <tvExp>0</tvExp>
+    <tvExp>1</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
     <File>
       <GroupNumber>29</GroupNumber>
       <FileNumber>257</FileNumber>
-      <FileType>8</FileType>
-      <tvExp>0</tvExp>
-      <tvExpOptDlg>0</tvExpOptDlg>
-      <bDave2>0</bDave2>
-      <PathWithFileName>.\src\Osci\Cursors.cpp</PathWithFileName>
-      <FilenameWithoutPath>Cursors.cpp</FilenameWithoutPath>
-      <RteFlg>0</RteFlg>
-      <bShared>0</bShared>
-    </File>
-    <File>
-      <GroupNumber>29</GroupNumber>
-      <FileNumber>258</FileNumber>
-      <FileType>5</FileType>
-      <tvExp>0</tvExp>
-      <tvExpOptDlg>0</tvExpOptDlg>
-      <bDave2>0</bDave2>
-      <PathWithFileName>.\src\Osci\Cursors.h</PathWithFileName>
-      <FilenameWithoutPath>Cursors.h</FilenameWithoutPath>
-      <RteFlg>0</RteFlg>
-      <bShared>0</bShared>
-    </File>
-    <File>
-      <GroupNumber>29</GroupNumber>
-      <FileNumber>259</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -3578,7 +3554,7 @@
     </File>
     <File>
       <GroupNumber>29</GroupNumber>
-      <FileNumber>260</FileNumber>
+      <FileNumber>258</FileNumber>
       <FileType>5</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -3590,7 +3566,7 @@
     </File>
     <File>
       <GroupNumber>29</GroupNumber>
-      <FileNumber>261</FileNumber>
+      <FileNumber>259</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -3602,7 +3578,7 @@
     </File>
     <File>
       <GroupNumber>29</GroupNumber>
-      <FileNumber>262</FileNumber>
+      <FileNumber>260</FileNumber>
       <FileType>5</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -3614,7 +3590,7 @@
     </File>
     <File>
       <GroupNumber>29</GroupNumber>
-      <FileNumber>263</FileNumber>
+      <FileNumber>261</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -3626,7 +3602,7 @@
     </File>
     <File>
       <GroupNumber>29</GroupNumber>
-      <FileNumber>264</FileNumber>
+      <FileNumber>262</FileNumber>
       <FileType>5</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -3638,7 +3614,7 @@
     </File>
     <File>
       <GroupNumber>29</GroupNumber>
-      <FileNumber>265</FileNumber>
+      <FileNumber>263</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -3650,7 +3626,7 @@
     </File>
     <File>
       <GroupNumber>29</GroupNumber>
-      <FileNumber>266</FileNumber>
+      <FileNumber>264</FileNumber>
       <FileType>5</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -3670,7 +3646,7 @@
     <RteFlg>0</RteFlg>
     <File>
       <GroupNumber>30</GroupNumber>
-      <FileNumber>267</FileNumber>
+      <FileNumber>265</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -3682,7 +3658,7 @@
     </File>
     <File>
       <GroupNumber>30</GroupNumber>
-      <FileNumber>268</FileNumber>
+      <FileNumber>266</FileNumber>
       <FileType>5</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -3694,7 +3670,7 @@
     </File>
     <File>
       <GroupNumber>30</GroupNumber>
-      <FileNumber>269</FileNumber>
+      <FileNumber>267</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -3706,7 +3682,7 @@
     </File>
     <File>
       <GroupNumber>30</GroupNumber>
-      <FileNumber>270</FileNumber>
+      <FileNumber>268</FileNumber>
       <FileType>5</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -3718,7 +3694,7 @@
     </File>
     <File>
       <GroupNumber>30</GroupNumber>
-      <FileNumber>271</FileNumber>
+      <FileNumber>269</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -3730,7 +3706,7 @@
     </File>
     <File>
       <GroupNumber>30</GroupNumber>
-      <FileNumber>272</FileNumber>
+      <FileNumber>270</FileNumber>
       <FileType>5</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -3742,7 +3718,7 @@
     </File>
     <File>
       <GroupNumber>30</GroupNumber>
-      <FileNumber>273</FileNumber>
+      <FileNumber>271</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -3754,7 +3730,7 @@
     </File>
     <File>
       <GroupNumber>30</GroupNumber>
-      <FileNumber>274</FileNumber>
+      <FileNumber>272</FileNumber>
       <FileType>5</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -3772,6 +3748,30 @@
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
+    <File>
+      <GroupNumber>31</GroupNumber>
+      <FileNumber>273</FileNumber>
+      <FileType>8</FileType>
+      <tvExp>0</tvExp>
+      <tvExpOptDlg>0</tvExpOptDlg>
+      <bDave2>0</bDave2>
+      <PathWithFileName>.\src\Osci\Processing\Cursors.cpp</PathWithFileName>
+      <FilenameWithoutPath>Cursors.cpp</FilenameWithoutPath>
+      <RteFlg>0</RteFlg>
+      <bShared>0</bShared>
+    </File>
+    <File>
+      <GroupNumber>31</GroupNumber>
+      <FileNumber>274</FileNumber>
+      <FileType>5</FileType>
+      <tvExp>0</tvExp>
+      <tvExpOptDlg>0</tvExpOptDlg>
+      <bDave2>0</bDave2>
+      <PathWithFileName>.\src\Osci\Processing\Cursors.h</PathWithFileName>
+      <FilenameWithoutPath>Cursors.h</FilenameWithoutPath>
+      <RteFlg>0</RteFlg>
+      <bShared>0</bShared>
+    </File>
     <File>
       <GroupNumber>31</GroupNumber>
       <FileNumber>275</FileNumber>
