@@ -14,6 +14,7 @@
 
 using namespace Display::Primitives;
 using namespace Osci::Measurements;
+using namespace Osci::Measurements::Cursors;
 using namespace Osci::Processing;
 using namespace Osci::Settings;
 

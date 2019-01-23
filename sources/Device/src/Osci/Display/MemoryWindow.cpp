@@ -14,7 +14,7 @@
 
 using namespace Display::Primitives;
 using namespace FPGA;
-using namespace Osci::Measurements;
+using namespace Osci::Measurements::Cursors;
 
 using Osci::Display::MemoryWindow::Width;
 using Osci::Display::MemoryWindow::Height;

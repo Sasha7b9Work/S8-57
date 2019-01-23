@@ -9,7 +9,9 @@
 #include <cmath>
 
 
-using Osci::Measurements::Cursor;
+using namespace Osci::Measurements;
+
+using Osci::Measurements::Cursors::Cursor;
 using Osci::Processing::Measure;
 
 
@@ -84,7 +86,7 @@ void PageMeasures::PageCursors::PageSet::OnPress_Set_T()
     {
         IncCursCntrlT(CURS_SOURCE);
     }
-    CURS_ACTIVE = Cursor::Active::T;
+    CURS_ACTIVE = Cursors::Active::T;
 }
 
 static void Draw_Set_T(int x, int y)
@@ -164,7 +166,7 @@ void PageMeasures::PageCursors::PageSet::OnPress_Set_U()
     {
         IncCursCntrlU(CURS_SOURCE);
     }
-    CURS_ACTIVE = Cursor::Active::U;
+    CURS_ACTIVE = Cursors::Active::U;
 }
 
 static void Draw_Set_U(int x, int y)

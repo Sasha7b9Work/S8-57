@@ -118,13 +118,13 @@ public:
     // Меню КУРСОРЫ
 
     bool                                     curs_showCursors;             ///< Показывать ли курсоры.
-    Osci::Measurements::Cursor::LookMode::E  curs_lookMode[2];             ///< Режимы слежения за курсорами для двух пар курсоров.
+    Osci::Measurements::Cursors::LookMode::E curs_lookMode[2];             ///< Режимы слежения за курсорами для двух пар курсоров.
     bool                                     curs_showFreq;                ///< Установленное в true значение, что нужно показывать на экране 1/dT между курсорами.
-    Osci::Measurements::Cursor::Active::E    curs_active;                  ///< Какие курсоры сейас активны.
+    Osci::Measurements::Cursors::Active::E   curs_active;                  ///< Какие курсоры сейас активны.
     Chan::E                                  curs_source;                  ///< Источник - к какому каналу относятся курсоры.
-    Osci::Measurements::Cursor::Control::E   curs_cntrlU[Chan::Size];      ///< Активные курсоры напряжения.
-    Osci::Measurements::Cursor::Control::E   curs_cntrlT[Chan::Size];      ///< Активные курсоры времени.
-    Osci::Measurements::Cursor::Movement::E  curs_movement;                ///< Как перемещаться курсорам - по точкам или процентам.
+    Osci::Measurements::Cursors::Control::E  curs_cntrlU[Chan::Size];      ///< Активные курсоры напряжения.
+    Osci::Measurements::Cursors::Control::E  curs_cntrlT[Chan::Size];      ///< Активные курсоры времени.
+    Osci::Measurements::Cursors::Movement::E curs_movement;                ///< Как перемещаться курсорам - по точкам или процентам.
     float                                    curs_deltaU100percents[2];    ///< Расстояние между курсорами напряжения для 100%, для обоих каналов.
     float                                    curs_deltaT100percents[2];    ///< Расстояние между курсорами времени для 100%, для обоих каналов.
     float                                    curs_posCurU[Chan::Size][2];  ///< Текущие позиции курсоров напряжения обоих каналов.

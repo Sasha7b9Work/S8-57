@@ -37,7 +37,7 @@ void Osci::Display::Update()
 
     DrawCursorTrigLevel();
 
-    Osci::Measurements::Cursor::Draw();
+    Osci::Measurements::Cursors::Cursor::Draw();
 
     HiPart::Draw();
 
