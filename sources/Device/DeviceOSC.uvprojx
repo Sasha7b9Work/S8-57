@@ -2181,6 +2181,16 @@
           <GroupName>Utils</GroupName>
           <Files>
             <File>
+              <FileName>Averager.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Utils\Averager.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Averager.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Utils\Averager.h</FilePath>
+            </File>
+            <File>
               <FileName>Buffer.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Utils\Buffer.cpp</FilePath>

@@ -6,6 +6,7 @@
 #include <stm32f4xx_hal.h>
 
 #include "Settings/Settings.h"
+#include "Utils/Averager.h"
 
 
 using namespace Display::Primitives;
@@ -19,7 +20,7 @@ static ADC_ChannelConfTypeDef config =
 {
     ADC_CHANNEL_2,
     1,
-    ADC_SAMPLETIME_480CYCLES,
+    ADC_SAMPLETIME_3CYCLES,
     0
 };
 
@@ -38,7 +39,7 @@ static uint ReadValuePOW();
 /// Максимальное значение, которое возможно считать с АЦП
 static const float MAX_ADC_REL = (float)((1 << 12) - 1);
 /// Напряжение, соответствующее MAX_ADC_REL
-static const float MAX_ADC_ABS = 3.0F;
+static const float MAX_ADC_ABS = 2.91F;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -85,27 +86,25 @@ void Battery::Init()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 float Battery::GetVoltageAKK(uint *adc)
 {
-    uint sum = 0;
-    int count = 16;
+    static Utils::AroundAverager<float> averager(32);
 
-    for (int i = 0; i < count; i++)
-    {
-        sum += ReadValueAKK();
-    }
+    *adc = ReadValueAKK();
 
-    float value = (float)sum / (float)count;
+    averager.Push((float)*adc);
 
-    *adc = (uint)(value + 0.5F);
-
-    return BatADC_ToVoltage(value);
+    return BatADC_ToVoltage(averager.Value());
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 float Battery::GetVoltagePOW(uint *adc)
 {
+    static Utils::AroundAverager<float> averager(32);
+
     *adc = ReadValuePOW();
 
-    return PowerADC_ToVoltage((float)*adc);
+    averager.Push((float)*adc);
+
+    return PowerADC_ToVoltage(averager.Value());
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -123,7 +122,7 @@ static uint ReadVoltage()
 
     do
     {
-    } while (HAL_ADC_PollForConversion(&handle, 10) != HAL_OK);
+    } while (HAL_ADC_PollForConversion(&handle, 1) != HAL_OK);
 
     return HAL_ADC_GetValue(&handle);
 }
