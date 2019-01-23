@@ -13,7 +13,7 @@ namespace Battery
 
     void Draw();
     /// Получить значение напряжения батареи
-    float GetVoltageAKK();
+    float GetVoltageAKK(uint *adc);
     /// Получить значение напряжения источника зарядного напряжения
-    float GetVoltagePOW();
+    float GetVoltagePOW(uint *adc);
 }

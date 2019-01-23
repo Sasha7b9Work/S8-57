@@ -31,6 +31,10 @@ static uint ReadVoltage();
 static float PowerADC_ToVoltage(float value);
 /// Перевод считанного значения ЦАП батареи в вольты
 static float BatADC_ToVoltage(float value);
+/// Читает АЦП батареи
+static uint ReadValueAKK();
+/// Читает АЦП зарядного устройства
+static uint ReadValuePOW();
 /// Максимальное значение, которое возможно считать с АЦП
 static const float MAX_ADC_REL = (float)((1 << 12) - 1);
 /// Напряжение, соответствующее MAX_ADC_REL
@@ -79,27 +83,29 @@ void Battery::Init()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-float Battery::GetVoltageAKK()
+float Battery::GetVoltageAKK(uint *adc)
 {
-    config.Channel = ADC_CHANNEL_2;
-
-    uint result = 0;
-    int count = 4;
+    uint sum = 0;
+    int count = 16;
 
     for (int i = 0; i < count; i++)
     {
-        result += ReadVoltage();
+        sum += ReadValueAKK();
     }
 
-    return (float)result / (float)count;
+    float value = (float)sum / (float)count;
+
+    *adc = (uint)(value + 0.5F);
+
+    return BatADC_ToVoltage(value);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-float Battery::GetVoltagePOW()
+float Battery::GetVoltagePOW(uint *adc)
 {
-    config.Channel = ADC_CHANNEL_9;
+    *adc = ReadValuePOW();
 
-    return PowerADC_ToVoltage((float)ReadVoltage());
+    return PowerADC_ToVoltage((float)*adc);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -123,6 +129,22 @@ static uint ReadVoltage()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+static uint ReadValueAKK()
+{
+    config.Channel = ADC_CHANNEL_2;
+
+    return ReadVoltage();
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+static uint ReadValuePOW()
+{
+    config.Channel = ADC_CHANNEL_9;
+
+    return ReadVoltage();
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Battery::Draw()
 {
     if (!BAT_SHOW_ON_DISPLAY)
@@ -130,23 +152,29 @@ void Battery::Draw()
         //return;
     }
 
-    int width = 50;
-    int height = 25;
+    int width = 60;
+    int height = 20;
 
     int x = Grid::Right() - width;
     int y = Grid::Top();
 
     Region(width, height).DrawBounded(x, y, Color::BACK, Color::FILL);
 
-    Text(String("%f", GetVoltageAKK())).Draw(x + 2, y + 1);
+    uint akkADC = 0;
+    float akk = GetVoltageAKK(&akkADC);
 
-    Text(String("%f", GetVoltagePOW())).Draw(x + 2, y + 10);
+    uint powADC = 0;
+    float pow = GetVoltagePOW(&powADC);
+
+    Text(String("%d  %.3f В", akkADC, akk)).Draw(x + 2, y + 1);
+
+    Text(String("%d  %.3f В", powADC, pow)).Draw(x + 2, y + 10);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static float PowerADC_ToVoltage(float value)
 {
-    const float k = 130.0f / 30.0f;
+    const float k = 124.0f / 24.0f;
 
     return (value / MAX_ADC_REL) * MAX_ADC_ABS * k;
 }
@@ -154,5 +182,7 @@ static float PowerADC_ToVoltage(float value)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static float BatADC_ToVoltage(float value)
 {
+    const float k = 101.1F / 26.1F;
 
+    return (value / MAX_ADC_REL) * MAX_ADC_ABS * k;
 }
