@@ -106,6 +106,6 @@ file(GLOB SOURCES   ../../common/_VS/*
                     ../../Device/src/Utils/*
                     ../../Device/src/*.*)
 
-add_library(Device56 ${SOURCES})
+add_executable(Device56 ${SOURCES})
 
 
