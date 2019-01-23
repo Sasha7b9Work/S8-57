@@ -66,7 +66,7 @@
 
 namespace Osci
 {
-    namespace Processing
+    namespace Measurements
     {
         class Cursors
         {

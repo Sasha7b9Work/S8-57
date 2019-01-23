@@ -20,7 +20,7 @@
 
 using namespace Display::Primitives;
 
-using Osci::Processing::Cursors;
+using Osci::Measurements::Cursors;
 
 extern const PageBase page;
 

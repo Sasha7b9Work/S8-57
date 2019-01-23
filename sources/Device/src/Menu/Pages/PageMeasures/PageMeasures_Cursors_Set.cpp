@@ -9,7 +9,7 @@
 #include <cmath>
 
 
-using Osci::Processing::Cursors;
+using Osci::Measurements::Cursors;
 using Osci::Processing::Measure;
 
 
