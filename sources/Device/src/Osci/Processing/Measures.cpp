@@ -225,35 +225,6 @@ int Osci::Measurements::Graphics::GetDeltaGridLeft()
     return 0;
 }
 
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-/*
-int Osci::Measurements::Graphics::GetDeltaGridBottom()
-{
-    if(SHOW_MEASURES && MODE_VIEW_SIGNALS_IS_COMPRESS)
-    {
-        if(NUM_MEASURES_IS_1_5)
-        {
-            return DY();
-        }
-        else if(NUM_MEASURES_IS_2_5)
-        {
-            return DY() * 2;
-        }
-        else if(NUM_MEASURES_IS_3_5)
-        {
-            return DY() * 3;
-        }
-        else
-        {
-            // других вариантов нет
-        }
-    }
-    return 0;
-}
-*/
-
-
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Measure::ShortPressOnSmallButonMarker()
 {
@@ -266,7 +237,6 @@ void Measure::ShortPressOnSmallButonMarker()
         MEAS_MARKED = set.meas_measures[posActive];
     }
 }
-
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void DrawPageChoice()
