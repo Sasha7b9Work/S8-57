@@ -13,6 +13,9 @@ add_definitions(-DSTM32F437xx)
 
 SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -MP -Wall")
 
+add_compile_options(/wd4710)
+add_compile_options(/wd4996)
+
 source_group(common                    REGULAR_EXPRESSION "../common/*.*")
 source_group(_VS                       REGULAR_EXPRESSION "../common/_VS/*.*")
 source_group(_VS\\CMSIS                REGULAR_EXPRESSION "../common/_VS/CMSIS/*.*")

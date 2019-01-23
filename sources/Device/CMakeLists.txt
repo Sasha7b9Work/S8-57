@@ -11,6 +11,7 @@ include_directories("..\\common\\libs\\STM32Cube_F4\\Drivers\\STM32F4xx_HAL_Driv
                     "..\\common\\libs\\STM32Cube_F4\\Middlewares\\ST\\STM32_USB_Device_Library\\Class\\CDC\\Inc\\"
                     "..\\common\\"
                     "..\\common\\_VS\\"
+                    "..\\common\\_VS\\std_includes\\"
                     "src"
                     "src\\libs\\HAL\\"
                     "src\\libs\\FatFS\\"
@@ -26,6 +27,7 @@ add_compile_options(/wd5039)
 
 source_group(common                    REGULAR_EXPRESSION "../common/*.*")
 source_group(_VS                       REGULAR_EXPRESSION "../common/_VS/*.*")
+source_group(_VS\\std_includes         REGULAR_EXPRESSION "../common/_VS/std_includes/*.*")
 source_group(src                       REGULAR_EXPRESSION "src/*.*")
 source_group(Data                      REGULAR_EXPRESSION "src/Data/*.*")
 source_group(Display                   REGULAR_EXPRESSION "src/Display/*.*")
