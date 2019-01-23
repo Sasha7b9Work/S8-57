@@ -15,7 +15,7 @@
 
 
 using namespace Osci::Settings;
-using namespace Processing::Measurements::Settings;
+using namespace Osci::Processing::Measurements::Settings;
 
 using FPGA::VALUE::MIN;
 using FPGA::VALUE::MAX;

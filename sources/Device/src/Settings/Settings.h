@@ -155,12 +155,12 @@ public:
 
     // Меню ИЗМЕРЕНИЯ
 
-    bool                                                   meas_show;             ///< Показывать ли измерения.
-    Processing::Measurements::Settings::OnDisplay::E       meas_number;           ///< Сколько измерений выводить.
-    Processing::Measurements::Settings::Source::E          meas_source;           ///< Для каких каналов выводить измерения.
-    Processing::Measurements::Settings::ModeViewSignals::E meas_modeViewSignals;  ///< Сжимать ли сигналы при выводе измерений.
-    Processing::Measure::Type::E                           meas_measures[15];     ///< Выбранные для индикации измерения.
-    Processing::Measure::Type::E                           meas_marked;           ///< Измерение, на которое нужно выводить маркеры.
+    bool                                                         meas_show;             ///< Показывать ли измерения.
+    Osci::Processing::Measurements::Settings::OnDisplay::E       meas_number;           ///< Сколько измерений выводить.
+    Osci::Processing::Measurements::Settings::Source::E          meas_source;           ///< Для каких каналов выводить измерения.
+    Osci::Processing::Measurements::Settings::ModeViewSignals::E meas_modeViewSignals;  ///< Сжимать ли сигналы при выводе измерений.
+    Processing::Measure::Type::E                                 meas_measures[15];     ///< Выбранные для индикации измерения.
+    Processing::Measure::Type::E                                 meas_marked;           ///< Измерение, на которое нужно выводить маркеры.
 
     // Меню СЕРВИС
 
