@@ -173,7 +173,7 @@ void Battery::Draw()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static float PowerADC_ToVoltage(float value)
 {
-    const float k = 124.0f / 24.0f;
+    const float k = 124.0F / 24.0F;
 
     return (value / MAX_ADC_REL) * MAX_ADC_ABS * k;
 }

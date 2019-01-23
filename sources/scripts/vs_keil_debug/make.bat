@@ -1,4 +1,4 @@
 cd ../..
 rmdir generated /s /q
-cd scripts/VS2017_Keil_Debug
+cd scripts/vs_keil_debug
 cmake ../../CMakeLists.txt -B../../generated

@@ -1,4 +1,4 @@
 cd ../..
 rmdir generated /s /q
-cd scripts/VS2017_Win32_Debug
+cd scripts/vs_win_debug
 cmake ../../VS/CMakeLists.txt -B../../generated

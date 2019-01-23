@@ -7,6 +7,7 @@
 #include "Utils/Math.h"
 #include <cstring>
 #include <cstdarg>
+#include <usbd_core.h>
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -40,7 +41,7 @@ void VCP::SendDataAsynch(const uint8 *buffer, uint size)
 
     size = Math::Min(size, SIZE_BUFFER);
     while (!PrevSendingComplete())  {};
-    memcpy(trBuf, buffer, (uint)size);
+    std::memcpy(trBuf, buffer, (uint)size);
 
     USBD_CDC_SetTxBuffer(&handleUSBD, trBuf, (uint16)size);
     USBD_CDC_TransmitPacket(&handleUSBD);
@@ -76,7 +77,7 @@ void VCP::SendDataSynch(const void *_buffer, uint size)
         char *buffer = (char *)_buffer;
         if (size == 0)
         {
-            size = strlen(buffer);
+            size = std::strlen(buffer);
         }
 
         volatile USBD_CDC_HandleTypeDef *pCDC = (USBD_CDC_HandleTypeDef *)handleUSBD.pClassData;
@@ -90,7 +91,7 @@ void VCP::SendDataSynch(const void *_buffer, uint size)
 
                 while (pCDC->TxState == 1) {}; //-V712
 
-                memcpy(buffSend + sizeBuffer, (void *)buffer, (uint)reqBytes);
+                std::memcpy(buffSend + sizeBuffer, (void *)buffer, (uint)reqBytes);
                 USBD_CDC_SetTxBuffer(&handleUSBD, buffSend, SIZE_BUFFER_VCP);
                 USBD_CDC_TransmitPacket(&handleUSBD);
                 size -= reqBytes;
@@ -99,7 +100,7 @@ void VCP::SendDataSynch(const void *_buffer, uint size)
             }
             else
             {
-                memcpy(buffSend + sizeBuffer, (void *)buffer, (uint)size);
+                std::memcpy(buffSend + sizeBuffer, (void *)buffer, (uint)size);
                 sizeBuffer += size;
                 size = 0;
             }
@@ -110,13 +111,13 @@ void VCP::SendDataSynch(const void *_buffer, uint size)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void VCP::SendStringAsynch(char *data)
 {
-    SendDataAsynch((uint8 *)data, strlen(data));
+    SendDataAsynch((uint8 *)data, std::strlen(data));
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void VCP::SendStringSynch(char *data)
 {
-    SendDataSynch((uint8 *)data, strlen(data));
+    SendDataSynch((uint8 *)data, std::strlen(data));
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -130,7 +131,7 @@ void VCP::SendFormatStringAsynch(char *format, ...)
         std::vsprintf(buffer, format, args);
         va_end(args);
         std::strcat(buffer, "\r\n");
-        SendDataAsynch((uint8 *)buffer, strlen(buffer));
+        SendDataAsynch((uint8 *)buffer, std::strlen(buffer));
     }
 }
 
@@ -142,8 +143,8 @@ void VCP::SendFormatStringSynch(char *format, ...)
     va_start(args, format);
     std::vsprintf(buffer, format, args);
     va_end(args);
-    strcat(buffer, "\r\n");
-    SendDataSynch((uint8 *)buffer, strlen(buffer));
+    std::strcat(buffer, "\r\n");
+    SendDataSynch((uint8 *)buffer, std::strlen(buffer));
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------

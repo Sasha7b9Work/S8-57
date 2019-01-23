@@ -244,7 +244,7 @@
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>0</BreakIfRCount>
-          <Filename>&lt;1&gt;.\src\Hardware\Battery.cpp</Filename>
+          <Filename>c:\My\Work\stm32\S8-56\sources\Panel\src\Hardware\Battery.cpp</Filename>
           <ExecCommand></ExecCommand>
           <Expression></Expression>
         </Bp>
@@ -260,7 +260,7 @@
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>0</BreakIfRCount>
-          <Filename>&lt;1&gt;.\src\Hardware\Battery.cpp</Filename>
+          <Filename>c:\My\Work\stm32\S8-56\sources\Panel\src\Hardware\Battery.cpp</Filename>
           <ExecCommand></ExecCommand>
           <Expression></Expression>
         </Bp>

@@ -320,5 +320,6 @@ static const struct name        \
     type func = funcs[index].val;                                           \
     SAFE_HANDLER_3(func, param1, param2, param3)
 
+#include <stm32f4xx_hal.h>
 
 #include "log.h"

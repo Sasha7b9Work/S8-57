@@ -15,6 +15,7 @@
 #include "Menu/Pages/Include/PageTrig.h"
 #include "Menu/Pages/Include/PageDisplay.h"
 #include "Settings/Settings.h"
+#include <stdio.h>
 
 
 using namespace Display::Primitives;

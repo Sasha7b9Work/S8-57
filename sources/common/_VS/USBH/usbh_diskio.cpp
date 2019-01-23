@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "usbh_diskio.h"
+#include "ff_gen_drv.h"
 
 
 DSTATUS USBH_initialize(BYTE);

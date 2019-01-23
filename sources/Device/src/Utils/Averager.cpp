@@ -92,15 +92,9 @@ void Utils::AroundAverager<T>::Push(T elem)
 template <typename T>
 T Utils::AroundAverager<T>::Value()
 {
-    LOG_WRITE("%d", pushed);
-
     if (pushed < parts)
     {
         return value / pushed;
-    }
-    else if (pushed == parts)
-    {
-        return value;
     }
 
     return value;

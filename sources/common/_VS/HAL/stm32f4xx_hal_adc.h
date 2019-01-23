@@ -9,8 +9,9 @@
 #define ADC_EXTERNALTRIGCONV_Ext_IT11   0
 #define ADC_DATAALIGN_RIGHT             0x00000000U
 #define ADC_EOC_SINGLE_CONV             0x00000001U
-#define ADC_CHANNEL_2                   0
-#define ADC_CHANNEL_8                   0
+#define ADC_CHANNEL_2                   2
+#define ADC_CHANNEL_8                   8
+#define ADC_CHANNEL_9                   9
 #define ADC_SAMPLETIME_3CYCLES          0x00000000U
 #define ADC_SAMPLETIME_28CYCLES         0
 #define ADC_EXTERNALTRIGCONV_T1_CC1     0x00000000U
