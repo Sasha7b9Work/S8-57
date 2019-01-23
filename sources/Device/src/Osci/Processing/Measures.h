@@ -115,13 +115,11 @@ namespace Osci
 
             static char GetChar(Type::E measure);
 
-            static int NumRows();
-
-            static int NumCols();
-            /// Ќа сколько сжимать сетку по горизонтали
-            static int GetDeltaGridLeft();
-
             static void ShortPressOnSmallButonMarker();
+            /// ¬озвращает true, если измерение активное - выбрано ручкой
+            bool IsActive();
+
+            String Name();
             /// ѕозици€ активного измерени€ (на котором курсор)
             static int8 posActive;
             /// ≈сли true - раскрыта страница выбора измерени€
@@ -129,48 +127,48 @@ namespace Osci
             /// ѕозици€ курсора на странице выбора измерени€
             static int8 posOnPageChoice;
 
-            //------------------------------------------------------------------------------------------------------------------------------------------------
-            class Graphics
-            {
-            public:
-                /// ќтрисовать результаты автоматических измерений
-                static void Draw();
-                /// ¬озвращает координату x верхнего левого угла таблицы выводимых измерений
-                static int GetTop();
-
-            private:
-                /// ¬ерхн€€ координата y выводимой таблицы автоматических измерений
-                static int top;
-            };
-
 #define MARKER_VOLTAGE(ch, num)             (Processing::markerVoltage[ch][num] - VALUE::MIN)
 #define MARKER_TIME(ch, num)                (Processing::markerTime[ch][num])
 
         private:
-
-            /// ¬озвращает высоту пол€ дл€ вывода автоматического измерени€
-            static int DY();
-            /// ¬озвращает ширину пол€ дл€ вывода автоматического измерени€
-            static int DX();
             /// ¬озвращает активное измерение
             static Measure GetActive();
-            /// ¬озвращает true, если измерение активное - выбрано ручкой
-            bool IsActive();
             /// —делать активным
             static void SetActive(int row, int col);
-
-            static int GetTopTable();
-
-            /// Ќа сколько сжимать сетку по вертикали
-            static int GetDeltaGridBottom();
-
-            String Name();
-            /// Ќарисовать страницу выбора измерений
-            static void DrawPageChoice();
             /// —трока в таблице, в которой находитс€ данное измерение
             int row;
             ///  олонка в таблице, в которой находитс€ данное измерение
             int col;
+        };
+
+        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        class Graphics
+        {
+        public:
+            /// ќтрисовать результаты автоматических измерений
+            static void Draw();
+            /// ¬озвращает координату x верхнего левого угла таблицы выводимых измерений
+            static int GetTop();
+
+            static int NumCols();
+
+            static int NumRows();
+            /// Ќа сколько сжимать сетку по горизонтали
+            static int GetDeltaGridLeft();
+            /// Ќа сколько сжимать сетку по вертикали
+            static int GetDeltaGridBottom();
+            /// ¬озвращает высоту пол€ дл€ вывода автоматического измерени€
+            static int DY();
+            /// ¬озвращает ширину пол€ дл€ вывода автоматического измерени€
+            static int DX();
+
+        private:
+            /// ¬ерхн€€ координата y выводимой таблицы автоматических измерений
+            static int top;
+
+            static int GetTopTable();
+            /// Ќарисовать страницу выбора измерений
+            static void DrawPageChoice();
         };
     };
 };

@@ -157,9 +157,9 @@ void Processing::CalculateMeasures()
     periodAccurateIsCalculating[0] = periodAccurateIsCalculating[1] = false;
     picIsCalculating[0] = picIsCalculating[1] = false;
 
-    for(int str = 0; str < Measure::NumRows(); str++)
+    for(int str = 0; str < Measurements::Graphics::NumRows(); str++)
     {
-        for(int elem = 0; elem < Measure::NumCols(); elem++)
+        for(int elem = 0; elem < Measurements::Graphics::NumCols(); elem++)
         {
             Measure measure = Measure::Get(str, elem);
             Measure::Type::E type = measure.GetType();

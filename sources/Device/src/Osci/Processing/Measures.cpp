@@ -56,24 +56,24 @@ static const StructMeasure sMeas[Measure::Type::Number] =
 int8 Measure::posActive = 0;
 bool Measure::pageChoiceIsActive = false;
 int8 Measure::posOnPageChoice = 0;
-int  Measure::Graphics::top = 0;
+int  Graphics::top = 0;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 bool Measure::IsActive()
 {
-    if(posActive >= NumCols() * NumRows())
+    if(posActive >= Graphics::NumCols() * Graphics::NumRows())
     {
         posActive = 0;
     }
-    return (row * NumCols() + col) == posActive;
+    return (row * Graphics::NumCols() + col) == posActive;
 }
 
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Measure Measure::GetActive()
 {
-    int row = posActive / NumCols();
-    int col = posActive - row * NumCols();
+    int row = posActive / Graphics::NumCols();
+    int col = posActive - row * Graphics::NumCols();
 
     return Measure(row, col);
 }
@@ -82,7 +82,7 @@ Measure Measure::GetActive()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Measure::SetActive(int row, int col)
 {
-    posActive = (int8)(row * NumCols() + col);
+    posActive = (int8)(row * Graphics::NumCols() + col);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -103,18 +103,18 @@ void Measure::ChangeActive(int delta)
 
     if (col < 0)
     {
-        col = NumCols() - 1;
+        col = Graphics::NumCols() - 1;
         row--;
         if (row < 0)
         {
-            row = NumRows() - 1;
+            row = Graphics::NumRows() - 1;
         }
     }
-    else if (col == NumCols())
+    else if (col == Graphics::NumCols())
     {
         col = 0;
         row++;
-        if (row >= NumRows())
+        if (row >= Graphics::NumRows())
         {
             row = 0;
         }
@@ -129,7 +129,7 @@ void Measure::ChangeActive(int delta)
 
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-int Measure::DY()
+int Osci::Measurements::Graphics::DY()
 {
     if(VIEW_MEASURES_BOTH)
     {
@@ -140,7 +140,7 @@ int Measure::DY()
 
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-int Measure::DX()
+int Osci::Measurements::Graphics::DX()
 {
     return Grid::Width() / 5; 
 }
@@ -156,19 +156,19 @@ String Measure::Name()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Measure::Type::E Measure::GetType()
 {
-    return set.meas_measures[row * NumCols() + col];
+    return set.meas_measures[row * Graphics::NumCols() + col];
 }
 
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-int Measure::GetTopTable()
+int Osci::Measurements::Graphics::GetTopTable()
 {
     if(NUM_MEASURES_IS_6_1 || NUM_MEASURES_IS_6_2)
     {
         return Grid::Bottom() - DY() * 6;
     }
 
-    int y = Grid::Bottom() - NumRows() * DY();
+    int y = Grid::Bottom() - Graphics::NumRows() * DY();
 
     if(Menu::IsShown())
     {
@@ -180,7 +180,7 @@ int Measure::GetTopTable()
 
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-int Measure::NumCols()
+int Osci::Measurements::Graphics::NumCols()
 {
     const int cols[] = {1, 2, 5, 5, 5, 1, 2};
     return cols[NUM_MEASURES];
@@ -188,7 +188,7 @@ int Measure::NumCols()
 
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-int Measure::NumRows()
+int Osci::Measurements::Graphics::NumRows()
 {
     int rows[] = {1, 1, 1, 2, 3, 6, 6};
     return rows[NUM_MEASURES];
@@ -196,13 +196,13 @@ int Measure::NumRows()
 
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-int Measure::GetDeltaGridLeft()
+int Osci::Measurements::Graphics::GetDeltaGridLeft()
 {
     if(SHOW_MEASURES && MODE_VIEW_SIGNALS_IS_COMPRESS)
     {
         if(NUM_MEASURES_IS_6_1)
         {
-            return DX();
+            return Graphics::DX();
         }
         else if(NUM_MEASURES_IS_6_2)
         {
@@ -218,7 +218,7 @@ int Measure::GetDeltaGridLeft()
 
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-int Measure::GetDeltaGridBottom()
+int Osci::Measurements::Graphics::GetDeltaGridBottom()
 {
     if(SHOW_MEASURES && MODE_VIEW_SIGNALS_IS_COMPRESS)
     {
@@ -258,9 +258,9 @@ void Measure::ShortPressOnSmallButonMarker()
 
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Measure::DrawPageChoice()
+void Osci::Measurements::Graphics::DrawPageChoice()
 {
-    if(!pageChoiceIsActive)
+    if(!Measure::pageChoiceIsActive)
     {
         return;
     }
@@ -282,11 +282,11 @@ void Measure::DrawPageChoice()
             }
             int x0 = x + col * dX;
             int y0 = y + row * dY;
-            bool active = (meas == posOnPageChoice);
+            bool active = (meas == Measure::posOnPageChoice);
             Rectangle(dX, dY).Draw(x0, y0, Color::WHITE);
             Region(dX - 2, dY - 2).Fill(x0 + 1, y0 + 1, (active ? Color::FLASH_10 : Color::BACK));
             Color::SetCurrent(active ? Color::FLASH_01 : Color::FILL);
-            Char(GetChar(meas)).Draw10SymbolsInRect(x0 + 2, y0 + 1);
+            Char(Measure::GetChar(meas)).Draw10SymbolsInRect(x0 + 2, y0 + 1);
             Font::SetCurrent(Font::Type::_5);
             Text(sMeas[meas].name).DrawRelativelyRight(x0 + dX, y0 + 12, active ? Color::FLASH_01 : Color::FILL);
             Font::SetCurrent(Font::Type::_UGO);
@@ -297,7 +297,7 @@ void Measure::DrawPageChoice()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Measure::Graphics::Draw()
+void Graphics::Draw()
 {
     if (!SHOW_MEASURES)
     {
@@ -308,13 +308,13 @@ void Measure::Graphics::Draw()
 
     Processing::CalculateMeasures();
 
-    int x0 = Grid::Left() - Measure::GetDeltaGridLeft();
-    int dX = Measure::DX();
-    int dY = Measure::DY();
-    int y0 = Measure::GetTopTable();
+    int x0 = Grid::Left() - GetDeltaGridLeft();
+    int dX = DX();
+    int dY = DY();
+    int y0 = GetTopTable();
 
-    int numRows = Measure::NumRows();
-    int numCols = Measure::NumCols();
+    int numRows = NumRows();
+    int numCols = NumCols();
 
     for (int str = 0; str < numRows; str++)
     {
@@ -374,12 +374,12 @@ void Measure::Graphics::Draw()
 
     if (Menu::GetNameOpenedPage() == Page::Name::Measures_Auto_Tune)
     {
-        Measure::DrawPageChoice();
+        DrawPageChoice();
     }
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-int Measure::Graphics::GetTop()
+int Graphics::GetTop()
 {
     return 10;
 }
