@@ -2001,6 +2001,16 @@
               <FilePath>.\src\Osci\Processing\Cursors.h</FilePath>
             </File>
             <File>
+              <FileName>Cursors_Settings.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Osci\Processing\Cursors_Settings.h</FilePath>
+            </File>
+            <File>
+              <FileName>Measurements_Graphics.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Osci\Processing\Measurements_Graphics.h</FilePath>
+            </File>
+            <File>
               <FileName>Measures.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Osci\Processing\Measures.cpp</FilePath>
@@ -2009,6 +2019,11 @@
               <FileName>Measures.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Osci\Processing\Measures.h</FilePath>
+            </File>
+            <File>
+              <FileName>Measures_Settings.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Osci\Processing\Measures_Settings.h</FilePath>
             </File>
             <File>
               <FileName>Processing.cpp</FileName>

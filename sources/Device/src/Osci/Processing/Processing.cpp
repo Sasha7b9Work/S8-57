@@ -12,6 +12,7 @@
 #include <limits>
 
 #include "Osci/Processing/Processing.h"
+#include "Osci/Processing/Measurements_Graphics.h"
 
 
 using namespace Osci;

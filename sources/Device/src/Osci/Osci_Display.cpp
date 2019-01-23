@@ -11,6 +11,8 @@
 #include "Osci/Processing/Measures.h"
 #include "Settings/Settings.h"
 
+#include "Osci/Processing/Measurements_Graphics.h"
+
 
 using namespace Display::Primitives;
 using namespace Osci::Settings;
