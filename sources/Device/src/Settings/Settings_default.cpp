@@ -108,9 +108,9 @@ const Settings Settings::defaultSettings =
     // ÃÂÌ˛ »«Ã≈–≈Õ»ﬂ
     
     false,                                                  // meas_show;  
-    Osci::Processing::Measurements::Settings::OnDisplay::_1_5,        // meas_number;
-    Osci::Processing::Measurements::Settings::Source::A_B,            // meas_source;
-    Osci::Processing::Measurements::Settings::ModeViewSignals::AsIs,  // meas_modeViewSignals; 
+    Osci::Measurements::Settings::OnDisplay::_1_5,          // meas_number;
+    Osci::Measurements::Settings::Source::A_B,              // meas_source;
+    Osci::Measurements::Settings::ModeViewSignals::AsIs,    // meas_modeViewSignals; 
     {                                                       // meas_measures[15];
         Measure::Type::VoltageMax,          Measure::Type::VoltageMin,  Measure::Type::VoltagePic,      Measure::Type::VoltageMaxSteady,
         Measure::Type::VoltageMinSteady,
