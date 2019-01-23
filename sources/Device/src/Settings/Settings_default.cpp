@@ -74,14 +74,14 @@ const Settings Settings::defaultSettings =
 
     // Ìåíþ ÊÓÐÑÎÐÛ
 
-    false,                                                  // curs_showCursors;             
-    {Cursors::LookMode::None, Cursors::LookMode::None},     // curs_lookMode[2];             
-    true,                                                   // curs_showFreq;                
-    Cursors::Active::None,                                  // curs_active;                  
-    Chan::A,                                                // curs_source;                  
-    {Cursors::Control::Disable, Cursors::Control::Disable}, // curs_cntrlU[Chan::Size];    
-    {Cursors::Control::Disable, Cursors::Control::Disable}, // curs_cntrlT[Chan::Size];    
-    Cursors::Movement::Pixels,                              // curs_movement;                
+    false,                                                                                      // curs_showCursors;
+    {Osci::Processing::Cursors::LookMode::None, Osci::Processing::Cursors::LookMode::None},     // curs_lookMode[2];
+    true,                                                                                       // curs_showFreq;
+    Osci::Processing::Cursors::Active::None,                                                    // curs_active;
+    Chan::A,                                                                                    // curs_source;
+    {Osci::Processing::Cursors::Control::Disable, Osci::Processing::Cursors::Control::Disable}, // curs_cntrlU[Chan::Size];
+    {Osci::Processing::Cursors::Control::Disable, Osci::Processing::Cursors::Control::Disable}, // curs_cntrlT[Chan::Size];
+    Osci::Processing::Cursors::Movement::Pixels,                                                // curs_movement;                
     {80,  80},                                              // curs_deltaU100percents[2];    
     {120, 120},                                             // curs_deltaT100percents[2];    
     {                                                       // curs_posCurU[Chan::Size][2];

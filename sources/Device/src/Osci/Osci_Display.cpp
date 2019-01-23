@@ -8,6 +8,7 @@
 #include "Osci/Display/BottomPart.h"
 #include "Osci/Display/HiPart.h"
 #include "Osci/Display/PainterData.h"
+#include "Osci/Processing/Measures.h"
 #include "Settings/Settings.h"
 
 
@@ -36,7 +37,7 @@ void Osci::Display::Update()
 
     DrawCursorTrigLevel();
 
-    Cursors::Draw();
+    Osci::Processing::Cursors::Draw();
 
     HiPart::Draw();
 
@@ -46,7 +47,7 @@ void Osci::Display::Update()
 
     Battery::Draw();
 
-    Processing::Measure::Graphics::Draw();
+    ::Processing::Measure::Graphics::Draw();
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

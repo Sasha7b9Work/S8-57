@@ -64,75 +64,81 @@
 #define CURS_SHOW                   (set.curs_showCursors)
 
 
-class Cursors
+namespace Osci
 {
-public:
-    /// Нарисовать курсоры и результаты курсорных измерений
-    static void Draw();
-    /// Возвращает true,если нужно рисовать курсоры
-    static bool  NecessaryDraw();
-    /// Получить позицию курсора напряжения
-    static float PosU(Chan::E ch, int numCur);
-    /// Возвращает значение курсора времени
-    static float PosT(Chan::E ch, int num);
-    /// Получить строку курсора напряжения
-    static String Voltage(Chan::E source, int numCur);
-    /// Получть строку курсора времени
-    static String Time(Chan::E source, int numCur);
-    /// Возвращает строку процентных измерений по напряжению
-    static String PercentsU(Chan::E source);
-    /// Возвращает строку процентных измерений по времени
-    static String PercentsT(Chan::E source);
-
-    static void SetCursPosT_temp(Chan::E ch, int num, float value);
-
-public:
-    /// Дискретность перемещения курсоров.
-    struct Movement
+    namespace Processing
     {
-        enum E
+        class Cursors
         {
-            Pixels,    ///< По пикселям экрана
-            Percents   ///< По процентам
-        } value;
-        explicit Movement(E v) : value(v) {};
-    };
+        public:
+            /// Нарисовать курсоры и результаты курсорных измерений
+            static void Draw();
+            /// Возвращает true,если нужно рисовать курсоры
+            static bool  NecessaryDraw();
+            /// Получить позицию курсора напряжения
+            static float PosU(Chan::E ch, int numCur);
+            /// Возвращает значение курсора времени
+            static float PosT(Chan::E ch, int num);
+            /// Получить строку курсора напряжения
+            static String Voltage(Chan::E source, int numCur);
+            /// Получть строку курсора времени
+            static String Time(Chan::E source, int numCur);
+            /// Возвращает строку процентных измерений по напряжению
+            static String PercentsU(Chan::E source);
+            /// Возвращает строку процентных измерений по времени
+            static String PercentsT(Chan::E source);
 
-    /// Какие курсоры сейчас активны. Какие активны, те и будут перемещаться по вращению ручки УСТАНОВКА.
-    struct Active
-    {
-        enum E
-        {
-            U,
-            T,
-            None
-        } value;
-        explicit Active(E v) : value(v) {};
-    };
+            static void SetCursPosT_temp(Chan::E ch, int num, float value);
 
-    /// Режим слежения курсоров.
-    struct LookMode
-    {
-        enum E
-        {
-            None,      ///< Курсоры не следят.
-            Voltage,   ///< Курсоры следят за напряжением автоматически.
-            Time,      ///< Курсоры следят за временем автоматически.
-            Both       ///< Курсоры следят за временем и напряжением, в зависимости от того, какой курсоры вращали последним.
-        } value;
-        explicit LookMode(E v) : value(v) {};
-    };
+        public:
+            /// Дискретность перемещения курсоров.
+            struct Movement
+            {
+                enum E
+                {
+                    Pixels,    ///< По пикселям экрана
+                    Percents   ///< По процентам
+                } value;
+                explicit Movement(E v) : value(v) {};
+            };
 
-    /// Каким курсором управлять
-    struct Control
-    {
-        enum E
-        {
-            _1,        ///< первым
-            _2,        ///< вторым
-            _1_2,      ///< обоими
-            Disable    ///< никаким
-        } value;
-        explicit Control(E v) : value(v) {};
+            /// Какие курсоры сейчас активны. Какие активны, те и будут перемещаться по вращению ручки УСТАНОВКА.
+            struct Active
+            {
+                enum E
+                {
+                    U,
+                    T,
+                    None
+                } value;
+                explicit Active(E v) : value(v) {};
+            };
+
+            /// Режим слежения курсоров.
+            struct LookMode
+            {
+                enum E
+                {
+                    None,      ///< Курсоры не следят.
+                    Voltage,   ///< Курсоры следят за напряжением автоматически.
+                    Time,      ///< Курсоры следят за временем автоматически.
+                    Both       ///< Курсоры следят за временем и напряжением, в зависимости от того, какой курсоры вращали последним.
+                } value;
+                explicit LookMode(E v) : value(v) {};
+            };
+
+            /// Каким курсором управлять
+            struct Control
+            {
+                enum E
+                {
+                    _1,        ///< первым
+                    _2,        ///< вторым
+                    _1_2,      ///< обоими
+                    Disable    ///< никаким
+                } value;
+                explicit Control(E v) : value(v) {};
+            };
+        };
     };
 };

@@ -117,18 +117,18 @@ public:
 
     // Меню КУРСОРЫ
 
-    bool                    curs_showCursors;                   ///< Показывать ли курсоры.
-    Cursors::LookMode::E    curs_lookMode[2];                   ///< Режимы слежения за курсорами для двух пар курсоров.
-    bool                    curs_showFreq;                      ///< Установленное в true значение, что нужно показывать на экране 1/dT между курсорами.
-    Cursors::Active::E      curs_active;                        ///< Какие курсоры сейас активны.
-    Chan::E                 curs_source;                        ///< Источник - к какому каналу относятся курсоры.
-    Cursors::Control::E     curs_cntrlU[Chan::Size];            ///< Активные курсоры напряжения.
-    Cursors::Control::E     curs_cntrlT[Chan::Size];            ///< Активные курсоры времени.
-    Cursors::Movement::E    curs_movement;                      ///< Как перемещаться курсорам - по точкам или процентам.
-    float                   curs_deltaU100percents[2];          ///< Расстояние между курсорами напряжения для 100%, для обоих каналов.
-    float                   curs_deltaT100percents[2];          ///< Расстояние между курсорами времени для 100%, для обоих каналов.
-    float                   curs_posCurU[Chan::Size][2];        ///< Текущие позиции курсоров напряжения обоих каналов.
-    float                   curs_posCurT[Chan::Size][2];        ///< Текущие позиции курсоров времени обоих каналов.
+    bool                                    curs_showCursors;               ///< Показывать ли курсоры.
+    Osci::Processing::Cursors::LookMode::E  curs_lookMode[2];               ///< Режимы слежения за курсорами для двух пар курсоров.
+    bool                                    curs_showFreq;                  ///< Установленное в true значение, что нужно показывать на экране 1/dT между курсорами.
+    Osci::Processing::Cursors::Active::E    curs_active;                    ///< Какие курсоры сейас активны.
+    Chan::E                                 curs_source;                    ///< Источник - к какому каналу относятся курсоры.
+    Osci::Processing::Cursors::Control::E   curs_cntrlU[Chan::Size];        ///< Активные курсоры напряжения.
+    Osci::Processing::Cursors::Control::E   curs_cntrlT[Chan::Size];        ///< Активные курсоры времени.
+    Osci::Processing::Cursors::Movement::E  curs_movement;                  ///< Как перемещаться курсорам - по точкам или процентам.
+    float                                   curs_deltaU100percents[2];      ///< Расстояние между курсорами напряжения для 100%, для обоих каналов.
+    float                                   curs_deltaT100percents[2];      ///< Расстояние между курсорами времени для 100%, для обоих каналов.
+    float                                   curs_posCurU[Chan::Size][2];    ///< Текущие позиции курсоров напряжения обоих каналов.
+    float                                   curs_posCurT[Chan::Size][2];    ///< Текущие позиции курсоров времени обоих каналов.
 
     // Меню ПАМЯТЬ
 
