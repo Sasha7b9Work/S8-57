@@ -4,6 +4,7 @@
 #include "Values.h"
 #include <cstring>
 #include <ctype.h>
+#include <locale>
 
 #ifndef LANG
 #define LANG 0
@@ -139,7 +140,7 @@ bool SU::GetWord(const char *string, Word *word, const int numWord)
             int numSymbols = word->numSymbols;
             for (int i = 0; i < numSymbols; i++)
             {
-                *pointer = (char)std::toupper(*pointer);
+                *pointer = (char)toupper(*pointer);
                 pointer++;
             }
             return true;
@@ -305,7 +306,7 @@ char *SU::ToUpper(void *_str, uint size)
 
     for(uint i = 0; i < size; i++)
     {
-        str[i] = std::toupper(str[i]);
+        str[i] = (char)toupper(str[i]);
     }
 
     return str;
