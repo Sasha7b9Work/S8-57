@@ -16,6 +16,7 @@
 
 using namespace Display::Primitives;
 using namespace FPGA;
+using namespace Osci::Measurements;
 using namespace Osci::Settings;
 
 
@@ -39,7 +40,7 @@ void Osci::Display::PainterData::DrawData()
 {
     if(Reader::ReadData())
     {
-        Processing::Measure::SetData(false);
+        Measure::SetData(false);
 
         static const pFuncVV func[ModeWork::Number] =
         {

@@ -12,8 +12,7 @@
 
 
 using namespace Display::Primitives;
-using namespace Osci::Processing;
-
+using namespace Osci::Measurements;
 
 extern const PageBase pageTune;
 

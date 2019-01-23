@@ -23,7 +23,7 @@ using FPGA::VALUE::MAX;
 using FPGA::VALUE::AVE;
 using FPGA::VALUE::NONE;
 
-using Osci::Processing::Measure;
+using Osci::Measurements::Measure;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -90,7 +90,7 @@ static char* Voltage2String(float, bool, char buffer[20]);
 static char* Phase2String(float, bool, char buffer[20]);
 static char* Float2String(float, bool, char buffer[20]);
 
-static const MeasureCalculate sMeas[Osci::Processing::Measure::Type::Number] =
+static const MeasureCalculate sMeas[Osci::Measurements::Measure::Type::Number] =
 {
     {"", 0, 0, false, {}},
     {"CalculateVoltageMax",         CalculateVoltageMax,         Voltage2String, true,  {}},
