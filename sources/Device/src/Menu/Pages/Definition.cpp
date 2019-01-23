@@ -20,7 +20,7 @@
 
 using namespace Display::Primitives;
 
-using Osci::Measurements::Cursors;
+using Osci::Measurements::Cursor;
 
 extern const PageBase page;
 
@@ -132,16 +132,16 @@ void DrawMenuCursVoltage(int x, int y, bool top, bool bottom)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void CalculateConditions(int16 pos0, int16 pos1, Cursors::Control::E cursCntrl, bool *condTopLeft, bool *condBottomRight)
+void CalculateConditions(int16 pos0, int16 pos1, Cursor::Control::E cursCntrl, bool *condTopLeft, bool *condBottomRight)
 {
     bool zeroLessFirst = pos0 < pos1;
-    *condTopLeft     =  (cursCntrl == Cursors::Control::_1_2) ||                    // если управление двумя курсорами одновременно
-                        (cursCntrl == Cursors::Control::_1 && zeroLessFirst) ||     // или управление первым курсором и позиция первого меньше, чем позиция второго
-                        (cursCntrl == Cursors::Control::_2 && !zeroLessFirst);      // или управление вторым курсором и позиция второго курсора меньше
+    *condTopLeft     =  (cursCntrl == Cursor::Control::_1_2) ||                    // если управление двумя курсорами одновременно
+                        (cursCntrl == Cursor::Control::_1 && zeroLessFirst) ||     // или управление первым курсором и позиция первого меньше, чем позиция второго
+                        (cursCntrl == Cursor::Control::_2 && !zeroLessFirst);      // или управление вторым курсором и позиция второго курсора меньше
 
-    *condBottomRight =  (cursCntrl == Cursors::Control::_1_2) || 
-                        (cursCntrl == Cursors::Control::_1 && !zeroLessFirst) || 
-                        (cursCntrl == Cursors::Control::_2 && zeroLessFirst);
+    *condBottomRight =  (cursCntrl == Cursor::Control::_1_2) || 
+                        (cursCntrl == Cursor::Control::_1 && !zeroLessFirst) || 
+                        (cursCntrl == Cursor::Control::_2 && zeroLessFirst);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

@@ -38,7 +38,7 @@ void Osci::Display::HiPart::WriteCursors()
     int x = startX;
     int y1 = 0;
     int y2 = 9;
-    if(Cursors::NecessaryDraw())
+    if(Cursor::NecessaryDraw())
     {
         //Painter::DrawVLine(x, 1, Grid::Top() - 2, Color::FILL);
         VLine(Grid::Top() - 3).Draw(x, 1, Color::FILL);
@@ -51,11 +51,11 @@ void Osci::Display::HiPart::WriteCursors()
             String("1:").Draw(x, y1, colorText);
             String("2:").Draw(x, y2);
             x += 7;
-            Cursors::Voltage(source, 0).Draw(x, y1);
-            Cursors::Voltage(source, 1).Draw(x, y2);
+            Cursor::Voltage(source, 0).Draw(x, y1);
+            Cursor::Voltage(source, 1).Draw(x, y2);
             x = startX + 49;
-            float pos0 = FPGA::Math::VoltageCursor(Cursors::PosU(source, 0), SET_RANGE(source), SET_RSHIFT(source));
-            float pos1 = FPGA::Math::VoltageCursor(Cursors::PosU(source, 1), SET_RANGE(source), SET_RSHIFT(source));
+            float pos0 = FPGA::Math::VoltageCursor(Cursor::PosU(source, 0), SET_RANGE(source), SET_RSHIFT(source));
+            float pos1 = FPGA::Math::VoltageCursor(Cursor::PosU(source, 1), SET_RANGE(source), SET_RSHIFT(source));
             float delta = std::fabsf(pos1 - pos0);
             if(SET_DIVIDER_10(source))
             {
@@ -64,7 +64,7 @@ void Osci::Display::HiPart::WriteCursors()
             String(":dU=").Draw(x, y1);
             Voltage(delta).ToString(false).Draw(x + 17, y1);
             String(':').Draw(x, y2);
-            Cursors::PercentsU(source).Draw(x + 10, y2);
+            Cursor::PercentsU(source).Draw(x + 10, y2);
         }
 
         x = startX + 101;
@@ -79,8 +79,8 @@ void Osci::Display::HiPart::WriteCursors()
             String("1:").Draw(x, y1);
             String("2:").Draw(x, y2);
             x += 7;
-            Cursors::Time(source, 0).Draw(x, y1);
-            Cursors::Time(source, 1).Draw(x, y2);
+            Cursor::Time(source, 0).Draw(x, y1);
+            Cursor::Time(source, 1).Draw(x, y2);
             x = startX + 153;          
 
             float pos0 = FPGA::Math::TimeCursor(CURsT_POS(source, 0), SET_TBASE);
@@ -89,7 +89,7 @@ void Osci::Display::HiPart::WriteCursors()
             String(":dT=").Draw(x, y1);
             Time(delta).ToString(false).Draw(x + 17, y1);
             String(':').Draw(x, y2);
-            Cursors::PercentsT(source).Draw(x + 8, y2);
+            Cursor::PercentsT(source).Draw(x + 8, y2);
 
             if(CURSORS_SHOW_FREQ)
             {

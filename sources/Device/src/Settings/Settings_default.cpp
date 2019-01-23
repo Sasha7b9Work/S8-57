@@ -76,13 +76,13 @@ const Settings Settings::defaultSettings =
     // Ìåíþ ÊÓÐÑÎÐÛ
 
     false,                                                                                          // curs_showCursors;
-    {Osci::Measurements::Cursors::LookMode::None, Osci::Measurements::Cursors::LookMode::None},     // curs_lookMode[2];
+    {Osci::Measurements::Cursor::LookMode::None, Osci::Measurements::Cursor::LookMode::None},     // curs_lookMode[2];
     true,                                                                                           // curs_showFreq;
-    Osci::Measurements::Cursors::Active::None,                                                      // curs_active;
+    Osci::Measurements::Cursor::Active::None,                                                      // curs_active;
     Chan::A,                                                                                        // curs_source;
-    {Osci::Measurements::Cursors::Control::Disable, Osci::Measurements::Cursors::Control::Disable}, // curs_cntrlU[Chan::Size];
-    {Osci::Measurements::Cursors::Control::Disable, Osci::Measurements::Cursors::Control::Disable}, // curs_cntrlT[Chan::Size];
-    Osci::Measurements::Cursors::Movement::Pixels,                                                  // curs_movement;                
+    {Osci::Measurements::Cursor::Control::Disable, Osci::Measurements::Cursor::Control::Disable}, // curs_cntrlU[Chan::Size];
+    {Osci::Measurements::Cursor::Control::Disable, Osci::Measurements::Cursor::Control::Disable}, // curs_cntrlT[Chan::Size];
+    Osci::Measurements::Cursor::Movement::Pixels,                                                  // curs_movement;                
     {80,  80},                                              // curs_deltaU100percents[2];    
     {120, 120},                                             // curs_deltaT100percents[2];    
     {                                                       // curs_posCurU[Chan::Size][2];

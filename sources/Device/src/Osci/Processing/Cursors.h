@@ -6,45 +6,45 @@
 /// Перемемещение курсоров при вращении ручки УСТАНОВКА - по точкам или процентам
 #define CURS_MOVEMENT               (set.curs_movement)
 /// Курсоры перемещаются при вращении ручка УСТАНОВКА с дискретностью 1%
-#define CURS_MOVEMENT_IN_PERCENTS   (CURS_MOVEMENT == Cursors::Movement::Percents)
+#define CURS_MOVEMENT_IN_PERCENTS   (CURS_MOVEMENT == Cursor::Movement::Percents)
 /// Курсоры перемещаются при вращении ручка УСТАНОВКА с дискретностью 1 пиксель
-#define CURS_MOVEMENT_IN_PIXELS     (CURS_MOVEMENT == Cursors::Movement::Pixels)
+#define CURS_MOVEMENT_IN_PIXELS     (CURS_MOVEMENT == Cursor::Movement::Pixels)
 
 /// Какими курсорами управляет ручка УСТАНОВКА
 #define CURS_ACTIVE                 (set.curs_active)
 /// Ручка УСТАНОВКА управляет курсорами напряжения
-#define CURS_ACTIVE_U               (CURS_ACTIVE == Cursors::Active::U)
+#define CURS_ACTIVE_U               (CURS_ACTIVE == Cursor::Active::U)
 /// Ручка УСТАНОВКА управляет курсорами времени
-#define CURS_ACTIVE_T               (CURS_ACTIVE == Cursors::Active::T)
+#define CURS_ACTIVE_T               (CURS_ACTIVE == Cursor::Active::T)
 
 /// Позиция курсора напряжения
 #define CURsU_POS(ch, num)          (set.curs_posCurU[ch][num])
 /// Позиция куросра времени
-#define CURsT_POS(ch, num)          Cursors::PosT(ch, num)
+#define CURsT_POS(ch, num)          Cursor::PosT(ch, num)
 
 /// Режим слежения за курсорами
 #define CURS_LOOK_MODE(ch)          (set.curs_lookMode[ch])
 /// Включено слежение за курсорами напряжения
-#define CURS_LOOK_U(ch)             (CURS_LOOK_MODE(ch) == Cursors::LookMode::Voltage)
+#define CURS_LOOK_U(ch)             (CURS_LOOK_MODE(ch) == Cursor::LookMode::Voltage)
 /// Включено слежение за курсорами времени
-#define CURS_LOOK_T(ch)             (CURS_LOOK_MODE(ch) == Cursors::LookMode::Time)
+#define CURS_LOOK_T(ch)             (CURS_LOOK_MODE(ch) == Cursor::LookMode::Time)
 /// Включено слежение за курсорами времени и напряжения
-#define CURS_LOOK_BOTH(ch)          (CURS_LOOK_MODE(ch) == Cursors::LookMode::Both)
+#define CURS_LOOK_BOTH(ch)          (CURS_LOOK_MODE(ch) == Cursor::LookMode::Both)
 
 #define CURsU_CNTRL_CH(ch)          (set.curs_cntrlU[ch])
 #define CURsU_CNTRL                 (CURsU_CNTRL_CH(CURS_SOURCE))
-#define CURsU_CNTRL_1               (CURsU_CNTRL == Cursors::Control::_1)
-#define CURsU_CNTRL_2               (CURsU_CNTRL == Cursors::Control::_2)
-#define CURsU_CNTRL_1_2             (CURsU_CNTRL == Cursors::Control::_1_2)
-#define CURsU_DISABLED              (CURsU_CNTRL == Cursors::Control::Disable)
+#define CURsU_CNTRL_1               (CURsU_CNTRL == Cursor::Control::_1)
+#define CURsU_CNTRL_2               (CURsU_CNTRL == Cursor::Control::_2)
+#define CURsU_CNTRL_1_2             (CURsU_CNTRL == Cursor::Control::_1_2)
+#define CURsU_DISABLED              (CURsU_CNTRL == Cursor::Control::Disable)
 #define CURsU_ENABLED               (!CURsU_DISABLED)
 
 #define CURsT_CNTRL_CH(ch)          (set.curs_cntrlT[ch])
 #define CURsT_CNTRL                 (CURsT_CNTRL_CH(CURS_SOURCE))
-#define CURsT_CNTRL_1               (CURsT_CNTRL == Cursors::Control::_1)
-#define CURsT_CNTRL_2               (CURsT_CNTRL == Cursors::Control::_2)
-#define CURsT_CNTRL_1_2             (CURsT_CNTRL == Cursors::Control::_1_2)
-#define CURsT_DISABLED              (CURsT_CNTRL == Cursors::Control::Disable)
+#define CURsT_CNTRL_1               (CURsT_CNTRL == Cursor::Control::_1)
+#define CURsT_CNTRL_2               (CURsT_CNTRL == Cursor::Control::_2)
+#define CURsT_CNTRL_1_2             (CURsT_CNTRL == Cursor::Control::_1_2)
+#define CURsT_DISABLED              (CURsT_CNTRL == Cursor::Control::Disable)
 #define CURsT_ENABLED               (!CURsT_DISABLED)
 
 #define CURSORS_SHOW_FREQ           (set.curs_showFreq)
@@ -68,7 +68,7 @@ namespace Osci
 {
     namespace Measurements
     {
-        class Cursors
+        class Cursor
         {
         public:
             /// Нарисовать курсоры и результаты курсорных измерений

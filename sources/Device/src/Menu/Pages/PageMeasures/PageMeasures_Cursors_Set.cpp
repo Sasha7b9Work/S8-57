@@ -9,7 +9,7 @@
 #include <cmath>
 
 
-using Osci::Measurements::Cursors;
+using Osci::Measurements::Cursor;
 using Osci::Processing::Measure;
 
 
@@ -84,7 +84,7 @@ void PageMeasures::PageCursors::PageSet::OnPress_Set_T()
     {
         IncCursCntrlT(CURS_SOURCE);
     }
-    CURS_ACTIVE = Cursors::Active::T;
+    CURS_ACTIVE = Cursor::Active::T;
 }
 
 static void Draw_Set_T(int x, int y)
@@ -164,7 +164,7 @@ void PageMeasures::PageCursors::PageSet::OnPress_Set_U()
     {
         IncCursCntrlU(CURS_SOURCE);
     }
-    CURS_ACTIVE = Cursors::Active::U;
+    CURS_ACTIVE = Cursor::Active::U;
 }
 
 static void Draw_Set_U(int x, int y)
@@ -183,7 +183,7 @@ static void Draw_Set_U(int x, int y)
         else
         {
             bool condTop = false, condDown = false;
-            CalculateConditions((int16)Cursors::PosU(source, 0), (int16)Cursors::PosU(source, 1), CURsU_CNTRL, &condTop, &condDown);
+            CalculateConditions((int16)Cursor::PosU(source, 0), (int16)Cursor::PosU(source, 1), CURsU_CNTRL, &condTop, &condDown);
             if (condTop && condDown)
             {
                 Draw_Set_U_enableBoth(x, y);
@@ -395,7 +395,7 @@ void PageMeasures::PageCursors::PageSet::SetShiftCursPosT(Chan::E ch, int numCur
 {
     /// \todo одинаковые ветки
     // CURsT_POS(ch, numCur) = LimitationFloat(CURsT_POS(ch, numCur) + delta, 0, MAX_POS_T);   
-    Cursors::SetCursPosT_temp(ch, numCur, Math::LimitationRet(CURsT_POS(ch, numCur) + delta, 0.0F, MAX_POS_T));
+    Cursor::SetCursPosT_temp(ch, numCur, Math::LimitationRet(CURsT_POS(ch, numCur) + delta, 0.0F, MAX_POS_T));
 
     if (CURS_MOVEMENT_IN_PIXELS)                        // Если перемещение по пикселям, то нужно привести к пиксельной сетке экрана
     {
@@ -437,7 +437,7 @@ void PageMeasures::PageCursors::PageSet::SetCursorT(Chan::E ch, int numCur, floa
 {
     /// \todo одинаковые ветки
     // CURsT_POS(ch, numCur) = LimitationFloat(pos, 0, MAX_POS_T);      
-    Cursors::SetCursPosT_temp(ch, numCur, Math::LimitationRet(pos, 0.0F, MAX_POS_T));
+    Cursor::SetCursPosT_temp(ch, numCur, Math::LimitationRet(pos, 0.0F, MAX_POS_T));
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

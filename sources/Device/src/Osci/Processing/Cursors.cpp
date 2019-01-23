@@ -29,21 +29,21 @@ static void UpdateCursorsForLook();
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-float Cursors::PosU(Chan::E ch, int numCur)
+float Cursor::PosU(Chan::E ch, int numCur)
 {
     return CURsU_POS(ch, numCur) / (Grid::Bottom() == Grid::FullBottom() ? 1.0F : 2.0F);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-bool Cursors::NecessaryDraw()
+bool Cursor::NecessaryDraw()
 {
     return (CURsU_ENABLED || CURsT_ENABLED) && (CURS_SHOW || Menu::GetNameOpenedPage() == Page::Name::Measures_Cursors_Set);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-String Cursors::Voltage(Chan::E source, int numCur)
+String Cursor::Voltage(Chan::E source, int numCur)
 {
-    float voltage = FPGA::Math::VoltageCursor(Cursors::PosU(source, numCur), SET_RANGE(source), SET_RSHIFT(source));
+    float voltage = FPGA::Math::VoltageCursor(Cursor::PosU(source, numCur), SET_RANGE(source), SET_RSHIFT(source));
     if (SET_DIVIDER_10(source))
     {
         voltage *= 10.0F;
@@ -53,7 +53,7 @@ String Cursors::Voltage(Chan::E source, int numCur)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-String Cursors::Time(Chan::E source, int numCur)
+String Cursor::Time(Chan::E source, int numCur)
 {
     float time = FPGA::Math::TimeCursor(CURsT_POS(source, numCur), SET_TBASE);
 
@@ -61,7 +61,7 @@ String Cursors::Time(Chan::E source, int numCur)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-float Cursors::PosT(Chan::E ch, int num)
+float Cursor::PosT(Chan::E ch, int num)
 {
     float retValue = 0.0F;
     std::memcpy(&retValue, &set.curs_posCurT[ch][num], sizeof(float));
@@ -69,13 +69,13 @@ float Cursors::PosT(Chan::E ch, int num)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Cursors::SetCursPosT_temp(Chan::E ch, int num, float value)
+void Cursor::SetCursPosT_temp(Chan::E ch, int num, float value)
 {
     std::memcpy(&set.curs_posCurT[ch][num], &value, sizeof(float));
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Cursors::Draw()
+void Cursor::Draw()
 {
     Chan::E source = CURS_SOURCE;
 
@@ -181,7 +181,7 @@ static void UpdateCursorsForLook()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-String Cursors::PercentsU(Chan::E source)
+String Cursor::PercentsU(Chan::E source)
 {
     /// \todo Тут дикая дичь. Эта строчка вызывает HardFault. Возможно, из-за включенного выравнивания Settings. Надо подумать
     // float dPerc = dUperc(source);     
@@ -193,7 +193,7 @@ String Cursors::PercentsU(Chan::E source)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-String Cursors::PercentsT(Chan::E source)
+String Cursor::PercentsT(Chan::E source)
 {
     float dPerc = 100.0F;
     std::memcpy(&dPerc, &dTperc(source), sizeof(float));
