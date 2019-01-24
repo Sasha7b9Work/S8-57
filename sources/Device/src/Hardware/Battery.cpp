@@ -37,6 +37,10 @@ static float BatADC_ToVoltage(float value);
 static uint ReadValueAKK();
 /// Читает АЦП зарядного устройства
 static uint ReadValuePOW();
+/// Рассчитать процент отставшегося заряда
+static float CalculatePercents(float volts);
+/// Отобразить заряд батареи в графическом виде
+static void DrawBatteryUGO(int x, int y, float procents);
 /// Максимальное значение, которое возможно считать с АЦП
 static const float MAX_ADC_REL = (float)((1 << 12) - 1);
 /// Напряжение, соответствующее MAX_ADC_REL
@@ -149,6 +153,36 @@ static uint ReadValuePOW()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+static float CalculatePercents(float volts)
+{
+    if (volts >= VOLTAGE_100_PERCENTS)
+    {
+        return 100.0F;
+    }
+    else if (volts > VOLTAGE_0_PERCENTS)
+    {
+        volts -= VOLTAGE_0_PERCENTS;
+
+        return volts / (VOLTAGE_100_PERCENTS - VOLTAGE_0_PERCENTS) * 100.0F;
+    }
+
+    return 0.0F;
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+static void DrawBatteryUGO(int x, int y, float percents)
+{
+    int width = 38;
+
+    Rectangle(width + 2, 8).Draw(x + 5, y, Color::FILL);
+    Rectangle(4, 4).Draw(x + 1, y + 2);
+
+    int filled = width * percents / 100.0f;
+
+    Region(filled, 4).Fill(x + width - filled + 5, y + 2);
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Battery::Draw(int x, int y)
 {
     Font::SetCurrent(Font::Type::_8);
@@ -156,14 +190,20 @@ void Battery::Draw(int x, int y)
     uint akkADC = 0;
     float akk = GetVoltageAKK(&akkADC);
 
-    uint powADC = 0;
-    float pow = GetVoltagePOW(&powADC);
+    //uint powADC = 0;
+    //float pow = GetVoltagePOW(&powADC);
+
+    float percents = CalculatePercents(akk);
 
     Color::SetCurrent(Color::FILL);
 
-    Text(String("%.3f В", akk)).Draw(x + 2, y + 1);
+    Font::SetCurrent(Font::Type::_5);
 
-    Text(String("%.3f В", pow)).Draw(x + 2, y + 10);
+    Text(String("%1.2f В %4.1f%%", akk, percents)).Draw(x + 4, y - 1);
+
+    Font::SetCurrent(Font::Type::_8);
+
+    DrawBatteryUGO(x + 1, y + 10, percents);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

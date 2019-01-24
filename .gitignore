@@ -6,6 +6,7 @@
 JLinkLog.txt
 JLinkSettings.ini
 archive.zip
+out.txt
 
 sources/generated/*
 sources/scripts/temp/*
