@@ -1093,53 +1093,6 @@ float CalculatePhazaMinus(Chan::E ch)
     return delay / period * 360.0F; 
 }
 
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Measure::SetData(bool /*needSmoothing*/)
-{
-    isSet = true;
-
-    BitSet64 points = Display::BytesOnDisplay();
-    firstByte = points.sword0;
-    lastByte = points.sword1;
-
-    nBytes = lastByte - firstByte;
-    
-    if(TBASE_DS >= TBase::MIN_P2P)           // ≈сли находимс€ в поточечном режме, то нужно брать последние считанные точки дл€ проведени€ измерений
-    {
-        for (int i = NUM_BYTES_DS - 1; i >= 0; --i)
-        {
-            if (IN_A[i] != NONE)      // ≈сли это значение считано
-            {
-                lastByte = i;
-                firstByte = lastByte - nBytes;
-                if (firstByte < 0)
-                {
-                    firstByte = 0;
-                    lastByte = nBytes;
-                }
-                break;
-            }
-        }
-    }
-    
-//    int length = NUM_BYTES_DS;
-
-    if (ENABLED_DS_A)
-    {
-//        Math::CalculateFiltrArray(IN_A, OUT_A, length, needSmoothing ? NUM_SMOOTHING : 1);
-//        std::memcpy(IN_A, OUT_A, (uint)length);
-    };
-    if (ENABLED_DS_B)
-    {
-//        Math::CalculateFiltrArray(IN_B, OUT_B, length, needSmoothing ? NUM_SMOOTHING : 1);
-//        std::memcpy(IN_B, OUT_B, (uint)length);
-    };
-  
-    //Processing::CountedToCurrentSettings();
-}
-
-
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 float Measure::CalculateCursorU(Chan::E ch, float posCurT)
 {
@@ -1427,4 +1380,34 @@ static float Divide(float val1, float val2)
     }
 
     return result;
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Osci::Measurements::SetData(bool /*needSmoothing*/)
+{
+    isSet = true;
+
+    BitSet64 points = Display::BytesOnDisplay();
+    firstByte = points.sword0;
+    lastByte = points.sword1;
+
+    nBytes = lastByte - firstByte;
+
+    if (TBASE_DS >= TBase::MIN_P2P)           // ≈сли находимс€ в поточечном режме, то нужно брать последние считанные точки дл€ проведени€ измерений
+    {
+        for (int i = NUM_BYTES_DS - 1; i >= 0; --i)
+        {
+            if (IN_A[i] != NONE)      // ≈сли это значение считано
+            {
+                lastByte = i;
+                firstByte = lastByte - nBytes;
+                if (firstByte < 0)
+                {
+                    firstByte = 0;
+                    lastByte = nBytes;
+                }
+                break;
+            }
+        }
+    }
 }

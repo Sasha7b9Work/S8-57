@@ -14,9 +14,11 @@
 #include "MemoryWindow.h"
 
 
+#include "Osci/Measurements/Measurements.h"
+
+
 using namespace Display::Primitives;
 using namespace FPGA;
-using namespace Osci::Measurements;
 using namespace Osci::Settings;
 
 
@@ -40,7 +42,7 @@ void Osci::Display::PainterData::DrawData()
 {
     if(Reader::ReadData())
     {
-        Measure::SetData(false);
+        Measurements::SetData(false);
 
         static const pFuncVV func[ModeWork::Number] =
         {

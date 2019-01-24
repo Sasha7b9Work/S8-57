@@ -10,6 +10,8 @@
 #include "Utils/Math.h"
 #include <cstring>
 
+#include "Osci/Measurements/Measurements.h"
+
 
 #ifdef WIN32
 DataSettings *pDS; 
@@ -142,7 +144,7 @@ void Reader::ReadFromRAM(int fromEnd, StructDataDrawing *dataStruct, bool forMem
     {
         DS = &dataSettings;
 
-        Osci::Measurements::Measure::SetData(true);
+        Osci::Measurements::SetData(true);
 
         PrepareDataForDraw(dataStruct);
     }
@@ -161,7 +163,7 @@ bool Reader::ReadFromROM(StructDataDrawing *dataStruct) // -V2506
     {
         DS = &dataSettings;
 
-        Osci::Measurements::Measure::SetData(true);
+        Osci::Measurements::SetData(true);
 
         PrepareDataForDraw(dataStruct);
         
@@ -196,7 +198,7 @@ void ReadMinMax(StructDataDrawing *dataStruct, int direction)
     {
         DS = &dataSettings;
 
-        Osci::Measurements::Measure::SetData(false);
+        Osci::Measurements::SetData(false);
 
         PrepareDataForDraw(dataStruct);
     }
