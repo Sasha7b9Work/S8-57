@@ -28,7 +28,7 @@ void Log::Write(TypeTrace type, const char *format, ...)
         ++pointer;
     }
     va_list args;
-    va_start(args, format);
+    va_start(args, format); //-V2528
     vsprintf(pointer, format, args);
     va_end(args);
     DISPLAY_ADD_STRING(buffer);
@@ -40,7 +40,7 @@ void Log::Trace(TypeTrace type, const char *module, const char *func, int numLin
     char buffer[SIZE_BUFFER_LOG];
     char message[SIZE_BUFFER_LOG];
     va_list args;
-    va_start(args, format);
+    va_start(args, format); //-V2528
     vsprintf(buffer, format, args);
     va_end(args);
     const int SIZE = 20;

@@ -1,7 +1,7 @@
 #include "Painter.h"
 #include "Display/Font/Font.h"
 #include "Utils/Math.h"
-#include <stdarg.h>
+#include <cstdarg>
 #include <stdio.h>
 #include <string.h>
 
@@ -9,7 +9,8 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 extern void CalculateCurrentColor();
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 int Painter::DrawTextOnBackground(int x, int y, const char *text, Color colorBackground)
 {
     int width = Font::GetLengthText(text);
@@ -26,8 +27,8 @@ int Painter::DrawTextOnBackground(int x, int y, const char *text, Color colorBac
 int Painter::DrawFormatText(int x, int y, char *format, ...)
 {
     char buffer[200];
-    va_list args;
-    va_start(args, format);
+    std::va_list args;
+    va_start(args, format); //-V2528
     vsprintf(buffer, format, args);
     va_end(args);
     return DrawText(x, y, buffer);
@@ -38,8 +39,8 @@ int Painter::DrawFormText(int x, int y, Color color, pString text, ...)
 {
 #define SIZE_BUFFER_DRAW_FORM_TEXT 200
     char buffer[SIZE_BUFFER_DRAW_FORM_TEXT];
-    va_list args;
-    va_start(args, text);
+    std::va_list args;
+    va_start(args, text); //-V2528
     vsprintf(buffer, (char *)text, args);
     va_end(args);
     return DrawText(x, y, buffer, color);

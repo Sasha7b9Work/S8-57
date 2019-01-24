@@ -165,8 +165,10 @@ static float CalculatePercents(float volts)
 
         return volts / (VOLTAGE_100_PERCENTS - VOLTAGE_0_PERCENTS) * 100.0F;
     }
-
-    return 0.0F;
+    else
+    {
+        return 0.0F;
+    }
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -177,7 +179,7 @@ static void DrawBatteryUGO(int x, int y, float percents)
     Rectangle(width + 2, 8).Draw(x + 5, y, Color::FILL);
     Rectangle(4, 4).Draw(x + 1, y + 2);
 
-    int filled = width * percents / 100.0f;
+    int filled = (int)(width * percents / 100.0F + 0.5F);
 
     Region(filled, 4).Fill(x + width - filled + 5, y + 2);
 }
