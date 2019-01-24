@@ -2,11 +2,11 @@
 #include "Display/Display_Primitives.h"
 #include "Display/Grid.h"
 #include "Osci/Measurements/Measurements_Graphics.h"
-#include "Osci/Measurements/Processing.h"
 #include "Settings/Settings.h"
 
 #include "Utils/Math.h"
 #include "Display/Font/Font.h"
+#include "Osci/Measurements/Measurements.h"
 
 
 using namespace Osci::Measurements;
@@ -167,4 +167,55 @@ static void DrawPageChoice()
         }
     }
     Font::SetCurrent(Font::Type::_8);
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+int Osci::Measurements::Graphics::NumCols()
+{
+    const int cols[] = { 1, 2, 5, 5, 5, 1, 2 };
+    return cols[NUM_MEASURES];
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+int Osci::Measurements::Graphics::NumRows()
+{
+    int rows[] = { 1, 1, 1, 2, 3, 6, 6 };
+    return rows[NUM_MEASURES];
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+int Osci::Measurements::Graphics::GetDeltaGridLeft()
+{
+    if (SHOW_MEASURES && MODE_VIEW_SIGNALS_IS_COMPRESS)
+    {
+        if (NUM_MEASURES_IS_6_1)
+        {
+            return Graphics::DX();
+        }
+        else if (NUM_MEASURES_IS_6_2)
+        {
+            return DX() * 2;
+        }
+        else
+        {
+            // других вариантов нет
+        }
+    }
+    return 0;
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+int Osci::Measurements::Graphics::DY()
+{
+    if (VIEW_MEASURES_BOTH)
+    {
+        return 30;
+    }
+    return 21;
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+int Osci::Measurements::Graphics::DX()
+{
+    return Grid::Width() / 5;
 }

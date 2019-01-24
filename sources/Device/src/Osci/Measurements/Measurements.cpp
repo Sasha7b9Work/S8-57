@@ -11,7 +11,7 @@
 #include <cstring>
 #include <limits>
 
-#include "Osci/Measurements/Processing.h"
+#include "Osci/Measurements/Measurements.h"
 #include "Osci/Measurements/Measurements_Graphics.h"
 
 

@@ -9,12 +9,12 @@ namespace Osci
 {
     namespace Processing
     {
-        /// Аппроксимировать единичное измерение режима рандомизатора функцией sinX/X
-        void InterpolationSinX_X(uint8 *data, int numPoints, Osci::Settings::TBase::E tBase);
         /// Возвращает строку автоматического измерения
         String GetStringMeasure(Measurements::Measure::Type::E measure, Chan::E ch, char *buffer, int lenBuf);
         /// Расчитать все автоматические измерения
         void CalculateMeasures();
+        /// Аппроксимировать единичное измерение режима рандомизатора функцией sinX/X
+        void InterpolationSinX_X(uint8 *data, int numPoints, Osci::Settings::TBase::E tBase);
 
         extern int markerTime[Chan::Size][2];
 
