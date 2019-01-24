@@ -46,7 +46,7 @@ static const float MAX_ADC_REL = (float)((1 << 12) - 1);
 /// Напряжение, соответствующее MAX_ADC_REL
 static const float MAX_ADC_ABS = 2.91F;
 
-static const float VOLTAGE_100_PERCENTS = 8.0F;
+static const float VOLTAGE_100_PERCENTS = 8.2F;
 
 static const float VOLTAGE_0_PERCENTS = 6.0F;
 
@@ -177,7 +177,7 @@ static void DrawBatteryUGO(int x, int y, float percents)
     Rectangle(width + 2, 8).Draw(x + 5, y, Color::FILL);
     Rectangle(4, 4).Draw(x + 1, y + 2);
 
-    int filled = (int)(width * percents / 100.0F + 0.5F);
+    int filled = (int)((width - 2) * percents / 100.0F + 0.5F);
 
     Region(filled, 4).Fill(x + width - filled + 5, y + 2);
 }
