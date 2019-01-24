@@ -2006,6 +2006,11 @@
               <FilePath>.\src\Osci\Measurements\Cursors_Settings.h</FilePath>
             </File>
             <File>
+              <FileName>Measurements_Graphics.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Osci\Measurements\Measurements_Graphics.cpp</FilePath>
+            </File>
+            <File>
               <FileName>Measurements_Graphics.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Osci\Measurements\Measurements_Graphics.h</FilePath>
