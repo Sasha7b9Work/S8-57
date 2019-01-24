@@ -17,6 +17,7 @@
 #include <stdio.h>
 
 #include "Osci/Processing/Measurements_Graphics.h"
+#include "Hardware/Battery.h"
 
 
 using namespace Display::Primitives;
@@ -114,12 +115,7 @@ void Osci::Display::BottomPart::Draw()
         Char('\x13').Draw(x + 46, Grid::Bottom() + 11);
     }
 
-    if (MODE_WORK == ModeWork::Dir)
-    {
-        Font::SetCurrent(Font::Type::_5);
-        WriteStringAndNumber("—√À¿∆.:", (int16)(x + 57), (int16)(Grid::Bottom() + 10), (int)ENUM_SMOOTHING + 1);
-        Font::SetCurrent(Font::Type::_8);
-    }
+    Battery::Draw(x + 55, Grid::Bottom());
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

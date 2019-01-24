@@ -47,8 +47,6 @@ void Osci::Display::Update()
 
     Menu::Draw();
 
-    Battery::Draw();
-
     Measurements::Graphics::Draw();
 }
 

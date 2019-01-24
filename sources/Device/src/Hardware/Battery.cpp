@@ -7,6 +7,7 @@
 
 #include "Settings/Settings.h"
 #include "Utils/Averager.h"
+#include "Display/Font/Font.h"
 
 
 using namespace Display::Primitives;
@@ -40,6 +41,10 @@ static uint ReadValuePOW();
 static const float MAX_ADC_REL = (float)((1 << 12) - 1);
 /// Напряжение, соответствующее MAX_ADC_REL
 static const float MAX_ADC_ABS = 2.91F;
+
+static const float VOLTAGE_100_PERCENTS = 8.0F;
+
+static const float VOLTAGE_0_PERCENTS = 6.0F;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -144,20 +149,9 @@ static uint ReadValuePOW()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Battery::Draw()
+void Battery::Draw(int x, int y)
 {
-    if (!BAT_SHOW_ON_DISPLAY)
-    {
-        //return;
-    }
-
-    int width = 60;
-    int height = 20;
-
-    int x = Grid::Right() - width;
-    int y = Grid::Top();
-
-    Region(width, height).DrawBounded(x, y, Color::BACK, Color::FILL);
+    Font::SetCurrent(Font::Type::_8);
 
     uint akkADC = 0;
     float akk = GetVoltageAKK(&akkADC);
@@ -165,9 +159,11 @@ void Battery::Draw()
     uint powADC = 0;
     float pow = GetVoltagePOW(&powADC);
 
-    Text(String("%d  %.3f В", akkADC, akk)).Draw(x + 2, y + 1);
+    Color::SetCurrent(Color::FILL);
 
-    Text(String("%d  %.3f В", powADC, pow)).Draw(x + 2, y + 10);
+    Text(String("%.3f В", akk)).Draw(x + 2, y + 1);
+
+    Text(String("%.3f В", pow)).Draw(x + 2, y + 10);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
