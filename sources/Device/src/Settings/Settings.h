@@ -7,16 +7,16 @@
 #include "SettingsTime.h"
 #include "Tester/Tester.h"
 #include "Osci/FrequencyCounter.h"
-#include "Osci/Processing/Cursors.h"
+#include "Osci/Measurements/Cursors.h"
 #include "Menu/Menu.h"
 #include "Display/Grid_Types.h"
 #include "Display/Colors.h"
-#include "Osci/Processing/Measures.h"
-#include "Osci/Processing/Measures_Settings.h"
+#include "Osci/Measurements/Measures.h"
+#include "Osci/Measurements/Measures_Settings.h"
 #include "Multimeter/Multimeter.h"
 #include "Recorder/Recorder_Settings.h"
 
-#include "Osci/Processing/Cursors_Settings.h"
+#include "Osci/Measurements/Cursors_Settings.h"
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

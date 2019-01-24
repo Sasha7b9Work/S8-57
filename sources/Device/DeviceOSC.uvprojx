@@ -1988,52 +1988,52 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>Osci/Processing</GroupName>
+          <GroupName>Osci/Measurements</GroupName>
           <Files>
             <File>
               <FileName>Cursors.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\Osci\Processing\Cursors.cpp</FilePath>
+              <FilePath>.\src\Osci\Measurements\Cursors.cpp</FilePath>
             </File>
             <File>
               <FileName>Cursors.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\src\Osci\Processing\Cursors.h</FilePath>
+              <FilePath>.\src\Osci\Measurements\Cursors.h</FilePath>
             </File>
             <File>
               <FileName>Cursors_Settings.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\src\Osci\Processing\Cursors_Settings.h</FilePath>
+              <FilePath>.\src\Osci\Measurements\Cursors_Settings.h</FilePath>
             </File>
             <File>
               <FileName>Measurements_Graphics.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\src\Osci\Processing\Measurements_Graphics.h</FilePath>
+              <FilePath>.\src\Osci\Measurements\Measurements_Graphics.h</FilePath>
             </File>
             <File>
               <FileName>Measures.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\Osci\Processing\Measures.cpp</FilePath>
+              <FilePath>.\src\Osci\Measurements\Measures.cpp</FilePath>
             </File>
             <File>
               <FileName>Measures.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\src\Osci\Processing\Measures.h</FilePath>
+              <FilePath>.\src\Osci\Measurements\Measures.h</FilePath>
             </File>
             <File>
               <FileName>Measures_Settings.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\src\Osci\Processing\Measures_Settings.h</FilePath>
+              <FilePath>.\src\Osci\Measurements\Measures_Settings.h</FilePath>
             </File>
             <File>
               <FileName>Processing.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\Osci\Processing\Processing.cpp</FilePath>
+              <FilePath>.\src\Osci\Measurements\Processing.cpp</FilePath>
             </File>
             <File>
               <FileName>Processing.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\src\Osci\Processing\Processing.h</FilePath>
+              <FilePath>.\src\Osci\Measurements\Processing.h</FilePath>
             </File>
           </Files>
         </Group>

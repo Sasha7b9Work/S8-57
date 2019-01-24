@@ -1,6 +1,6 @@
 #include "defines.h"
 #include "DataSettings.h"
-#include "Osci/Processing/Measures.h"
+#include "Osci/Measurements/Measures.h"
 #include "Settings/Settings.h"
 #include <cstring>
 

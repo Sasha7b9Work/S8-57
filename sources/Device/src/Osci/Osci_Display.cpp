@@ -8,10 +8,10 @@
 #include "Osci/Display/BottomPart.h"
 #include "Osci/Display/HiPart.h"
 #include "Osci/Display/PainterData.h"
-#include "Osci/Processing/Measures.h"
+#include "Osci/Measurements/Measures.h"
 #include "Settings/Settings.h"
 
-#include "Osci/Processing/Measurements_Graphics.h"
+#include "Osci/Measurements/Measurements_Graphics.h"
 
 
 using namespace Display::Primitives;

@@ -16,7 +16,7 @@
 #include "Utils/Values.h"
 #include <stdio.h>
 
-#include "Osci/Processing/Measurements_Graphics.h"
+#include "Osci/Measurements/Measurements_Graphics.h"
 #include "Hardware/Battery.h"
 
 

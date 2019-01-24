@@ -11,8 +11,8 @@
 #include <cstring>
 #include <limits>
 
-#include "Osci/Processing/Processing.h"
-#include "Osci/Processing/Measurements_Graphics.h"
+#include "Osci/Measurements/Processing.h"
+#include "Osci/Measurements/Measurements_Graphics.h"
 
 
 using namespace Osci;

@@ -3765,7 +3765,7 @@
   </Group>
 
   <Group>
-    <GroupName>Osci/Processing</GroupName>
+    <GroupName>Osci/Measurements</GroupName>
     <tvExp>0</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
@@ -3777,7 +3777,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\src\Osci\Processing\Cursors.cpp</PathWithFileName>
+      <PathWithFileName>.\src\Osci\Measurements\Cursors.cpp</PathWithFileName>
       <FilenameWithoutPath>Cursors.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -3789,7 +3789,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\src\Osci\Processing\Cursors.h</PathWithFileName>
+      <PathWithFileName>.\src\Osci\Measurements\Cursors.h</PathWithFileName>
       <FilenameWithoutPath>Cursors.h</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -3801,7 +3801,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\src\Osci\Processing\Cursors_Settings.h</PathWithFileName>
+      <PathWithFileName>.\src\Osci\Measurements\Cursors_Settings.h</PathWithFileName>
       <FilenameWithoutPath>Cursors_Settings.h</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -3813,7 +3813,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\src\Osci\Processing\Measurements_Graphics.h</PathWithFileName>
+      <PathWithFileName>.\src\Osci\Measurements\Measurements_Graphics.h</PathWithFileName>
       <FilenameWithoutPath>Measurements_Graphics.h</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -3825,7 +3825,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\src\Osci\Processing\Measures.cpp</PathWithFileName>
+      <PathWithFileName>.\src\Osci\Measurements\Measures.cpp</PathWithFileName>
       <FilenameWithoutPath>Measures.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -3837,7 +3837,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\src\Osci\Processing\Measures.h</PathWithFileName>
+      <PathWithFileName>.\src\Osci\Measurements\Measures.h</PathWithFileName>
       <FilenameWithoutPath>Measures.h</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -3849,7 +3849,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\src\Osci\Processing\Measures_Settings.h</PathWithFileName>
+      <PathWithFileName>.\src\Osci\Measurements\Measures_Settings.h</PathWithFileName>
       <FilenameWithoutPath>Measures_Settings.h</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -3861,7 +3861,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\src\Osci\Processing\Processing.cpp</PathWithFileName>
+      <PathWithFileName>.\src\Osci\Measurements\Processing.cpp</PathWithFileName>
       <FilenameWithoutPath>Processing.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -3873,7 +3873,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\src\Osci\Processing\Processing.h</PathWithFileName>
+      <PathWithFileName>.\src\Osci\Measurements\Processing.h</PathWithFileName>
       <FilenameWithoutPath>Processing.h</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
