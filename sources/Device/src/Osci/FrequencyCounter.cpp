@@ -215,7 +215,7 @@ void FrequencyCounter::ReadFreq()
         float fr = FreqSetToFreq(&freqSet);
         if (fr < prevFreq * 0.9F || fr > prevFreq * 1.1F)
         {
-            frequency = ERROR_VALUE_FLOAT;
+            frequency = Float::ERROR;
         }
         else
         {
@@ -235,7 +235,7 @@ void FrequencyCounter::ReadPeriod()
     float fr = PeriodSetToFreq(&periodSet);
     if (fr < prevFreq * 0.9F || fr > prevFreq * 1.1F)
     {
-        frequency = ERROR_VALUE_FLOAT;
+        frequency = Float::ERROR;
     }
     else
     {

@@ -139,9 +139,9 @@ static bool periodIsCaclulating[2] = {false, false};
 static bool periodAccurateIsCalculating[2];
 static bool picIsCalculating[2] = {false, false};
 
-#define EXIT_IF_ERROR_FLOAT(x)      if(isnan(x))                return ERROR_VALUE_FLOAT;
-#define EXIT_IF_ERRORS_FLOAT(x, y)  if(isnan(x) || isnan(y))    return ERROR_VALUE_FLOAT;
-#define EXIT_IF_ERROR_INT(x)        if((x) == Integer::ERROR)   return ERROR_VALUE_FLOAT;
+#define EXIT_IF_ERROR_FLOAT(x)      if(isnan(x))                return Float::ERROR;
+#define EXIT_IF_ERRORS_FLOAT(x, y)  if(isnan(x) || isnan(y))    return Float::ERROR;
+#define EXIT_IF_ERROR_INT(x)        if((x) == Integer::ERROR)   return Float::ERROR;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void Osci::Measurements::CalculateMeasures()
@@ -400,7 +400,7 @@ float CalculatePeriod(Chan::E ch)
         float aveValue = CalculateAverageRel(ch);
         if(aveValue == ERROR_VALUE_UINT8) //-V550
         {
-            period[ch] = ERROR_VALUE_FLOAT;
+            period[ch] = Float::ERROR;
         }
         else
         {
@@ -461,7 +461,7 @@ int CalculatePeriodAccurately(Chan::E ch)
         period[ch] = 0;
         float pic = CalculatePicRel(ch);
 
-        if(pic == ERROR_VALUE_FLOAT)
+        if(pic == Float::ERROR)
         {
             EXIT_FROM_PERIOD_ACCURACY
         }
@@ -548,7 +548,7 @@ float CalculateFreq(Chan::E ch)
 {
     float period = CalculatePeriod(ch);
 
-    return (period == ERROR_VALUE_FLOAT) ? ERROR_VALUE_FLOAT : 1.0F / period;
+    return (period == Float::ERROR) ? Float::ERROR : 1.0F / period;
 }
 
 
@@ -588,7 +588,7 @@ float FindIntersectionWithHorLine(Chan::E ch, int numIntersection, bool downToUp
 
     if (num < numIntersection)
     {
-        return ERROR_VALUE_FLOAT;
+        return Float::ERROR;
     }
     
     return ::Math::GetIntersectionWithHorizontalLine(x, data[x], x + step, data[x + step], yLine);
@@ -762,9 +762,9 @@ float CalculateMinSteadyRel(Chan::E ch)
     if(!minSteadyIsCalculating[ch])
     {
         float aveValue = CalculateAverageRel(ch);
-        if(aveValue == ERROR_VALUE_FLOAT)
+        if(aveValue == Float::ERROR)
         {
-            min[ch] = ERROR_VALUE_FLOAT;
+            min[ch] = Float::ERROR;
         }
         else
         {
@@ -788,9 +788,9 @@ float CalculateMinSteadyRel(Chan::E ch)
             int numDeleted = 0;
 
             float pic = CalculatePicRel(ch);
-            if (pic == ERROR_VALUE_FLOAT)
+            if (pic == Float::ERROR)
             {
-                min[ch] = ERROR_VALUE_FLOAT;
+                min[ch] = Float::ERROR;
             }
             else
             {
@@ -846,9 +846,9 @@ float CalculateMaxSteadyRel(Chan::E ch)
 
         float aveValue = CalculateAverageRel(ch);
         
-        if(aveValue == ERROR_VALUE_FLOAT)
+        if(aveValue == Float::ERROR)
         {
-            max[ch] = ERROR_VALUE_FLOAT;
+            max[ch] = Float::ERROR;
         }
         else
         {
@@ -872,9 +872,9 @@ float CalculateMaxSteadyRel(Chan::E ch)
 
             float pic = CalculatePicRel(ch);
 
-            if (pic == ERROR_VALUE_FLOAT)
+            if (pic == Float::ERROR)
             {
-                max[ch] = ERROR_VALUE_FLOAT;
+                max[ch] = Float::ERROR;
             }
             else
             {
@@ -927,7 +927,7 @@ float CalculateMaxRel(Chan::E ch)
     if(!maxIsCalculating[ch])
     {
         uint8 val = Math::MaxFromArrayWithErrorCode(CHOICE_BUFFER, firstByte, lastByte);
-        max[ch] = val == ERROR_VALUE_UINT8 ? ERROR_VALUE_FLOAT : val;
+        max[ch] = val == ERROR_VALUE_UINT8 ? Float::ERROR : val;
         maxIsCalculating[ch] = true;
     }
 
@@ -943,7 +943,7 @@ float CalculateMinRel(Chan::E ch)
     if (!minIsCalculating[ch])
     {
         uint8 val = Math::MinFromArrayWithErrorCode(CHOICE_BUFFER, firstByte, lastByte);
-        min[ch] = val == ERROR_VALUE_UINT8 ? ERROR_VALUE_FLOAT : val;
+        min[ch] = val == ERROR_VALUE_UINT8 ? Float::ERROR : val;
         minIsCalculating[ch] = true;
     }
 
@@ -960,7 +960,7 @@ float CalculateAverageRel(Chan::E ch)
     {
         float min = CalculateMinRel(ch);
         float max = CalculateMaxRel(ch);
-        ave[ch] = (min == ERROR_VALUE_FLOAT || max == ERROR_VALUE_FLOAT) ? ERROR_VALUE_FLOAT : (min + max) / 2.0F;
+        ave[ch] = (min == Float::ERROR || max == Float::ERROR) ? Float::ERROR : (min + max) / 2.0F;
         aveIsCalculating[ch] = true;
     }
     return ave[ch];
@@ -976,7 +976,7 @@ float CalculatePicRel(Chan::E ch)
     {
         float min = CalculateMinRel(ch);
         float max = CalculateMaxRel(ch);
-        pic[ch] = (min == ERROR_VALUE_FLOAT || max == ERROR_VALUE_FLOAT) ? ERROR_VALUE_FLOAT : max - min;
+        pic[ch] = (min == Float::ERROR || max == Float::ERROR) ? Float::ERROR : max - min;
         picIsCalculating[ch] = true;
     }
     return pic[ch];
@@ -992,7 +992,7 @@ float CalculateDelayPlus(Chan::E ch)
     EXIT_IF_ERRORS_FLOAT(periodA, periodB); //-V2507
     if(!Math::FloatsIsEquals(periodA, periodB, 1.05F))
     {
-        return ERROR_VALUE_FLOAT;
+        return Float::ERROR;
     }
 
     float averageA = CalculateAverageRel(Chan::A);
@@ -1031,7 +1031,7 @@ float CalculateDelayMinus(Chan::E ch)
 
     if(!Math::FloatsIsEquals(period0, period1, 1.05F))
     {
-        return ERROR_VALUE_FLOAT;
+        return Float::ERROR;
     }
 
     float average0 = CalculateAverageRel(Chan::A);
@@ -1073,9 +1073,9 @@ float CalculatePhazaPlus(Chan::E ch)
 {
     float delay = CalculateDelayPlus(ch);
     float period = CalculatePeriod(ch);
-    if(delay == ERROR_VALUE_FLOAT || period == ERROR_VALUE_FLOAT)
+    if(delay == Float::ERROR || period == Float::ERROR)
     {
-        return ERROR_VALUE_FLOAT;
+        return Float::ERROR;
     }
     return delay / period * 360.0F;
 }
@@ -1086,9 +1086,9 @@ float CalculatePhazaMinus(Chan::E ch)
 {
     float delay = CalculateDelayMinus(ch);
     float period = CalculatePeriod(ch);
-    if(delay == ERROR_VALUE_FLOAT || period == ERROR_VALUE_FLOAT)
+    if(delay == Float::ERROR || period == Float::ERROR)
     {
-        return ERROR_VALUE_FLOAT;
+        return Float::ERROR;
     }
     return delay / period * 360.0F; 
 }
@@ -1344,7 +1344,7 @@ String Osci::Measurements::GetStringMeasure(Measure::Type::E measure, Chan::E ch
     }
     buffer[0] = '\0';
     std::strcpy(buffer, Chan(ch).IsA() ? "1: " : "2: ");
-    if(!isSet || values[measure].value[ch] == ERROR_VALUE_FLOAT)
+    if(!isSet || values[measure].value[ch] == Float::ERROR)
     {
         std::strcat(buffer, "-.-");
     }
@@ -1418,12 +1418,12 @@ static float Divide(float val1, float val2)
 
     if(result == std::numeric_limits<float>::infinity())
     {
-        return ERROR_VALUE_FLOAT;
+        return Float::ERROR;
     }
 
     if(isnan(result))
     {
-        return ERROR_VALUE_FLOAT;
+        return Float::ERROR;
     }
 
     return result;

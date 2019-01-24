@@ -68,8 +68,6 @@ inline void EmptyFuncVII(int, int) {}
 inline bool EmptyFuncBfI(int) { return false; }
 inline bool EmptyFuncBtU8(uint8) { return true; }
 
-#define ERROR_VALUE_INT16   SHRT_MAX
-    
 
 #ifndef _WIN32
 #if __ARMCLIB_VERSION < 6070001
@@ -102,7 +100,6 @@ inline bool EmptyFuncBtU8(uint8) { return true; }
 
 #define HEX_FROM_2(hex1, hex0) ((uint)(0x##hex1) << 16 | (uint)0x##hex0)
 
-#define ERROR_VALUE_FLOAT   std::numeric_limits<float>::quiet_NaN()
 #define ERROR_STRING_VALUE  "--.--"
 #define ERROR_VALUE_UINT8   255
 

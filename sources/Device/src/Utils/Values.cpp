@@ -10,6 +10,10 @@
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+const float Float::ERROR = std::numeric_limits<float>::quiet_NaN();
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /// Преобразует значение частоты в текстовую строку
 static char *FrequencyToString(float freq, char buffer[20]);
 /// Преобразует время в текстовую строку
@@ -129,7 +133,7 @@ static char *FrequencyToString(float freq, char bufferOut[20]) //-V2506
     bufferOut[0] = 0;
     const char *suffix = 0;
 
-    if (Math::IsEquals(freq, ERROR_VALUE_FLOAT))
+    if (Math::IsEquals(freq, Float::ERROR))
     {
         std::strcat(bufferOut, ERROR_STRING_VALUE); //-V2513
         return bufferOut;
@@ -162,7 +166,7 @@ char *Frequency::ToStringAccuracy(char bufferOut[20], int numDigits) const //-V2
     bufferOut[0] = 0;
     const char *suffix = LANG_RU ? "Гц" : "Hz";
 
-    if (Math::IsEquals(freq, ERROR_VALUE_FLOAT))
+    if (Math::IsEquals(freq, Float::ERROR))
     {
         std::strcat(bufferOut, ERROR_STRING_VALUE); //-V2513
         return bufferOut;
@@ -205,7 +209,7 @@ String Frequency::ToString() const
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 char *TimeToString(float time, bool alwaysSign, char buffer[20]) //-V2506
 {
-    if (Math::IsEquals(time, ERROR_VALUE_FLOAT))
+    if (Math::IsEquals(time, Float::ERROR))
     {
         std::strcpy(buffer, ERROR_STRING_VALUE); //-V2513
         return buffer;
@@ -254,7 +258,7 @@ char* Time::ToStringAccuracy(bool alwaysSign, char buffer[20], int numDigits) co
 
     float fabsTime = std::fabsf(time);
 
-    if (Math::IsEquals(time, ERROR_VALUE_FLOAT))
+    if (Math::IsEquals(time, Float::ERROR))
     {
         std::strcat(buffer, ERROR_STRING_VALUE); //-V2513
         return buffer;
@@ -295,7 +299,7 @@ String Voltage::ToString(bool alwaysSign) const
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static char* VoltageToString(float voltage, bool alwaysSign, char buffer[20]) //-V2506
 {
-    if (Math::IsEquals(voltage, ERROR_VALUE_FLOAT))
+    if (Math::IsEquals(voltage, Float::ERROR))
     {
         std::strcpy(buffer, ERROR_STRING_VALUE); //-V2513
         return buffer;
@@ -346,7 +350,7 @@ char *Current::ToString(char buffer[50]) const //-V2506
 {
     float current = value;
 
-    if (Math::IsEquals(current, ERROR_VALUE_FLOAT))
+    if (Math::IsEquals(current, Float::ERROR))
     {
         std::strcpy(buffer, ERROR_STRING_VALUE); //-V2513
         return buffer;
@@ -410,7 +414,7 @@ String Integer::ToString(bool alwaysSign, int numMinFields) const
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static char *FloatToString(float value, bool alwaysSign, int numDigits, char bufferOut[20]) //-V2506
 {
-    if (Math::IsEquals(value, ERROR_VALUE_FLOAT))
+    if (Math::IsEquals(value, Float::ERROR))
     {
         std::strcpy(bufferOut, ERROR_STRING_VALUE); //-V2513
         return bufferOut;
