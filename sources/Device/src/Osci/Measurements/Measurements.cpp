@@ -119,9 +119,9 @@ static const MeasureCalculate sMeas[Osci::Measurements::Measure::Type::Number] =
 };
 
 
-int Osci::Measurements::markerTime[Chan::Size][2] = {{ERROR_VALUE_INT}, {ERROR_VALUE_INT}};
+int Osci::Measurements::markerTime[Chan::Size][2] = {{Integer::ERROR}, {Integer::ERROR}};
 
-int Osci::Measurements::markerVoltage[Chan::Size][2] = {{ERROR_VALUE_INT}, {ERROR_VALUE_INT}};
+int Osci::Measurements::markerVoltage[Chan::Size][2] = {{Integer::ERROR}, {Integer::ERROR}};
 
 typedef struct
 {
@@ -141,7 +141,7 @@ static bool picIsCalculating[2] = {false, false};
 
 #define EXIT_IF_ERROR_FLOAT(x)      if(isnan(x))                return ERROR_VALUE_FLOAT;
 #define EXIT_IF_ERRORS_FLOAT(x, y)  if(isnan(x) || isnan(y))    return ERROR_VALUE_FLOAT;
-#define EXIT_IF_ERROR_INT(x)        if((x) == ERROR_VALUE_INT)  return ERROR_VALUE_FLOAT;
+#define EXIT_IF_ERROR_INT(x)        if((x) == Integer::ERROR)   return ERROR_VALUE_FLOAT;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void Osci::Measurements::CalculateMeasures()
@@ -170,8 +170,8 @@ void Osci::Measurements::CalculateMeasures()
             {
                 if(type == MEAS_MARKED || MEAS_MARKED == Measure::Type::None)
                 {
-                    markerTime[Chan::A][0] = markerTime[Chan::A][1] = markerTime[Chan::B][0] = markerTime[Chan::B][1] = ERROR_VALUE_INT;
-                    markerVoltage[Chan::A][0] = markerVoltage[Chan::A][1] = markerVoltage[Chan::B][0] = markerVoltage[Chan::B][1] = ERROR_VALUE_INT;
+                    markerTime[Chan::A][0] = markerTime[Chan::A][1] = markerTime[Chan::B][0] = markerTime[Chan::B][1] = Integer::ERROR;
+                    markerVoltage[Chan::A][0] = markerVoltage[Chan::A][1] = markerVoltage[Chan::B][0] = markerVoltage[Chan::B][1] = Integer::ERROR;
                 }
                 
                 if(VIEW_MEASURES_A)
@@ -435,7 +435,7 @@ float CalculatePeriod(Chan::E ch)
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 #define EXIT_FROM_PERIOD_ACCURACY           \
-    period[ch] = ERROR_VALUE_INT;           \
+    period[ch] = Integer::ERROR;            \
     periodAccurateIsCalculating[ch] = true; \
     std::free(sums);                        \
     return period[ch];
@@ -532,7 +532,7 @@ int CalculatePeriodAccurately(Chan::E ch)
 
         if(period[ch] == 0)
         {
-            period[ch] = ERROR_VALUE_INT;
+            period[ch] = Integer::ERROR;
         }
         periodAccurateIsCalculating[ch] = true;
     }

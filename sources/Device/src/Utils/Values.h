@@ -38,6 +38,8 @@ public:
 
     String ToString(bool alwaysSign, int numMinFields) const;
 
+    static const int ERROR = 0x7fffffff;
+
 private:
 
     int value;
