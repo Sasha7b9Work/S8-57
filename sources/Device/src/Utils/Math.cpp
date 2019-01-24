@@ -7,6 +7,8 @@
 #include <cstring>
 #include <limits>
 
+#include "Utils/Values.h"
+
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 template void  Math::Swap<int>(int *, int *);
@@ -194,7 +196,7 @@ uint8 Math::MaxFromArrayWithErrorCode(const uint8 *data, int firstPoint, int las
     uint8 max = Math::MaxFromArray(data, firstPoint, lastPoint);
     if (max >= FPGA::VALUE::MAX)
     {
-        max = ERROR_VALUE_UINT8;
+        max = Uint8::ERROR;
     }
     return max;
 }
@@ -205,7 +207,7 @@ uint8 Math::MinFromArrayWithErrorCode(const uint8 *data, int firstPoint, int las
     uint8 min = Math::MinFromArray(data, firstPoint, lastPoint);
     if (min < FPGA::VALUE::MIN || min >= FPGA::VALUE::MAX)
     {
-        min = ERROR_VALUE_UINT8;
+        min = Uint8::ERROR;
     }
     return min;
 }

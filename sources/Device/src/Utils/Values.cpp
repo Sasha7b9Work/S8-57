@@ -135,7 +135,7 @@ static char *FrequencyToString(float freq, char bufferOut[20]) //-V2506
 
     if (Math::IsEquals(freq, Float::ERROR))
     {
-        std::strcat(bufferOut, ERROR_STRING_VALUE); //-V2513
+        std::strcat(bufferOut, String::ERROR);
         return bufferOut;
     }
 
@@ -168,7 +168,7 @@ char *Frequency::ToStringAccuracy(char bufferOut[20], int numDigits) const //-V2
 
     if (Math::IsEquals(freq, Float::ERROR))
     {
-        std::strcat(bufferOut, ERROR_STRING_VALUE); //-V2513
+        std::strcat(bufferOut, String::ERROR); //-V2513
         return bufferOut;
     }
 
@@ -211,7 +211,7 @@ char *TimeToString(float time, bool alwaysSign, char buffer[20]) //-V2506
 {
     if (Math::IsEquals(time, Float::ERROR))
     {
-        std::strcpy(buffer, ERROR_STRING_VALUE); //-V2513
+        std::strcpy(buffer, String::ERROR); //-V2513
         return buffer;
     }
 
@@ -260,7 +260,7 @@ char* Time::ToStringAccuracy(bool alwaysSign, char buffer[20], int numDigits) co
 
     if (Math::IsEquals(time, Float::ERROR))
     {
-        std::strcat(buffer, ERROR_STRING_VALUE); //-V2513
+        std::strcat(buffer, String::ERROR); //-V2513
         return buffer;
     }
     else if (fabsTime + 0.5e-10F < 1e-6F)
@@ -301,7 +301,7 @@ static char* VoltageToString(float voltage, bool alwaysSign, char buffer[20]) //
 {
     if (Math::IsEquals(voltage, Float::ERROR))
     {
-        std::strcpy(buffer, ERROR_STRING_VALUE); //-V2513
+        std::strcpy(buffer, String::ERROR); //-V2513
         return buffer;
     }
 
@@ -352,7 +352,7 @@ char *Current::ToString(char buffer[50]) const //-V2506
 
     if (Math::IsEquals(current, Float::ERROR))
     {
-        std::strcpy(buffer, ERROR_STRING_VALUE); //-V2513
+        std::strcpy(buffer, String::ERROR); //-V2513
         return buffer;
     }
 
@@ -416,7 +416,7 @@ static char *FloatToString(float value, bool alwaysSign, int numDigits, char buf
 {
     if (Math::IsEquals(value, Float::ERROR))
     {
-        std::strcpy(bufferOut, ERROR_STRING_VALUE); //-V2513
+        std::strcpy(bufferOut, String::ERROR); //-V2513
         return bufferOut;
     }
     

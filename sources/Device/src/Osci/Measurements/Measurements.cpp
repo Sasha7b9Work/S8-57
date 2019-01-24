@@ -398,7 +398,7 @@ float CalculatePeriod(Chan::E ch)
     if(!periodIsCaclulating[ch])
     {
         float aveValue = CalculateAverageRel(ch);
-        if(aveValue == ERROR_VALUE_UINT8) //-V550
+        if(aveValue == Uint8::ERROR) //-V550
         {
             period[ch] = Float::ERROR;
         }
@@ -927,7 +927,7 @@ float CalculateMaxRel(Chan::E ch)
     if(!maxIsCalculating[ch])
     {
         uint8 val = Math::MaxFromArrayWithErrorCode(CHOICE_BUFFER, firstByte, lastByte);
-        max[ch] = val == ERROR_VALUE_UINT8 ? Float::ERROR : val;
+        max[ch] = (val == Uint8::ERROR) ? Float::ERROR : val;
         maxIsCalculating[ch] = true;
     }
 
@@ -943,7 +943,7 @@ float CalculateMinRel(Chan::E ch)
     if (!minIsCalculating[ch])
     {
         uint8 val = Math::MinFromArrayWithErrorCode(CHOICE_BUFFER, firstByte, lastByte);
-        min[ch] = val == ERROR_VALUE_UINT8 ? Float::ERROR : val;
+        min[ch] = (val == Uint8::ERROR) ? Float::ERROR : val;
         minIsCalculating[ch] = true;
     }
 

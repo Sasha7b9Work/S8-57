@@ -100,9 +100,6 @@ inline bool EmptyFuncBtU8(uint8) { return true; }
 
 #define HEX_FROM_2(hex1, hex0) ((uint)(0x##hex1) << 16 | (uint)0x##hex0)
 
-#define ERROR_STRING_VALUE  "--.--"
-#define ERROR_VALUE_UINT8   255
-
 #define MAX_UINT 0xffffffffU
 
 
