@@ -40,7 +40,7 @@ void Graphics::Draw()
 
     top = Grid::Bottom();
 
-    Osci::Processing::CalculateMeasures();
+    CalculateMeasures();
 
     int x0 = Grid::Left() - GetDeltaGridLeft();
     int dX = DX();
@@ -87,16 +87,16 @@ void Graphics::Draw()
                 }
                 if (VIEW_MEASURES_BOTH)
                 {
-                    Processing::GetStringMeasure(type, Chan::A, buffer, SIZE_BUFFER).Draw(x + 2, y + 11, Color::Channel(Chan::A));
-                    Processing::GetStringMeasure(type, Chan::B, buffer, SIZE_BUFFER).Draw(x + 2, y + (SET_ENABLED_A ? 20 : 11), Color::Channel(Chan::B));
+                    GetStringMeasure(type, Chan::A, buffer, SIZE_BUFFER).Draw(x + 2, y + 11, Color::Channel(Chan::A));
+                    GetStringMeasure(type, Chan::B, buffer, SIZE_BUFFER).Draw(x + 2, y + (SET_ENABLED_A ? 20 : 11), Color::Channel(Chan::B));
                 }
                 else if (VIEW_MEASURES_A)
                 {
-                    Processing::GetStringMeasure(type, Chan::A, buffer, SIZE_BUFFER).Draw(x + 2, y + 11, Color::Channel(Chan::A));
+                    GetStringMeasure(type, Chan::A, buffer, SIZE_BUFFER).Draw(x + 2, y + 11, Color::Channel(Chan::A));
                 }
                 else if (VIEW_MEASURES_B)
                 {
-                    Processing::GetStringMeasure(type, Chan::B, buffer, SIZE_BUFFER).Draw(x + 2, y + 11, Color::Channel(Chan::B));
+                    GetStringMeasure(type, Chan::B, buffer, SIZE_BUFFER).Draw(x + 2, y + 11, Color::Channel(Chan::B));
                 }
                 else
                 {

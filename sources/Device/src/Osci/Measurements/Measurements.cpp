@@ -119,9 +119,9 @@ static const MeasureCalculate sMeas[Osci::Measurements::Measure::Type::Number] =
 };
 
 
-int Osci::Processing::markerTime[Chan::Size][2] = {{ERROR_VALUE_INT}, {ERROR_VALUE_INT}};
+int Osci::Measurements::markerTime[Chan::Size][2] = {{ERROR_VALUE_INT}, {ERROR_VALUE_INT}};
 
-int Osci::Processing::markerVoltage[Chan::Size][2] = {{ERROR_VALUE_INT}, {ERROR_VALUE_INT}};
+int Osci::Measurements::markerVoltage[Chan::Size][2] = {{ERROR_VALUE_INT}, {ERROR_VALUE_INT}};
 
 typedef struct
 {
@@ -144,7 +144,7 @@ static bool picIsCalculating[2] = {false, false};
 #define EXIT_IF_ERROR_INT(x)        if((x) == ERROR_VALUE_INT)  return ERROR_VALUE_FLOAT;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void Processing::CalculateMeasures()
+void Osci::Measurements::CalculateMeasures()
 {
     if(!SHOW_MEASURES || !isSet)
     {
@@ -1230,7 +1230,7 @@ float Measure::CalculateCursorT(Chan::E ch, float posCurU, int numCur)
 
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Processing::InterpolationSinX_X(uint8 *data, int numPoints, TBase::E tBase)
+void InterpolationSinX_X(uint8 *data, int numPoints, TBase::E tBase)
 {
 /*
      ѕоследовательности x в sin(x)   // Ёто, наверное, неправильно
@@ -1336,7 +1336,7 @@ void Processing::InterpolationSinX_X(uint8 *data, int numPoints, TBase::E tBase)
 
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-String Processing::GetStringMeasure(Measure::Type::E measure, Chan::E ch, char* buffer, int lenBuf)
+String Osci::Measurements::GetStringMeasure(Measure::Type::E measure, Chan::E ch, char* buffer, int lenBuf)
 {
     if (!SET_ENABLED(ch))
     {
