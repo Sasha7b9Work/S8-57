@@ -331,7 +331,7 @@ Page::Name::E Page::GetName() const
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void TimeControl::SetOpened()
 {
-    PackedTime time = RTC_GET_PACKED_TIME();
+    PackedTime time = Clock::GetTime();
     *(seconds) = (int8)time.seconds;
     *(minutes) = (int8)time.minutes;
     *(hours) = (int8)time.hours;
@@ -365,7 +365,7 @@ void TimeControl::IncCurrentPosition()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void TimeControl::SetNewTime()
 {
-    RTC_SET_TIME_AND_DATA(*day, *month, *year, *hours, *minutes, *seconds);
+    Clock::SetTime(*day, *month, *year, *hours, *minutes, *seconds);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

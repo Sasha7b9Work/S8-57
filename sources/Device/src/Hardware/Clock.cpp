@@ -18,3 +18,9 @@ PackedTime Clock::GetTime()
 {
     return HAL::RTC_::GetPackedTime();
 }
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+bool Clock::SetTime(int8 day, int8 month, int8 year, int8 hours, int8 minutes, int8 seconds)
+{
+    return HAL::RTC_::SetTimeAndData(day, month, year, hours, minutes, seconds);
+}

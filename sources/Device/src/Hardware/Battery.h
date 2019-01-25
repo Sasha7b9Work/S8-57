@@ -6,14 +6,18 @@
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-namespace Battery
+namespace Hardware
 {
-    /// Инициализация
-    void Init();
+    class Battery
+    {
+    public:
+        /// Инициализация
+        static void Init();
 
-    void Draw(int x, int y);
-    /// Получить значение напряжения батареи
-    float GetVoltageAKK(uint *adc);
-    /// Получить значение напряжения источника зарядного напряжения
-    float GetVoltagePOW(uint *adc);
+        static void Draw(int x, int y);
+        /// Получить значение напряжения батареи
+        static float GetVoltageAKK(uint *adc);
+        /// Получить значение напряжения источника зарядного напряжения
+        static float GetVoltagePOW(uint *adc);
+    };
 }

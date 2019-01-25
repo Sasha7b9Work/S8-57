@@ -23,6 +23,7 @@
 using namespace Display::Primitives;
 using namespace FPGA::Math;
 using namespace FPGA::Settings;
+using namespace Hardware;
 using namespace Osci::Settings;
 
 using Osci::Measurements::Measure;
@@ -257,7 +258,7 @@ static void DrawTime(int x, int y)
     int dField = 10;
     int dSeparator = 2;
 
-    PackedTime time = HAL::RTC_::GetPackedTime();
+    PackedTime time = Clock::GetTime();
 
     Color::SetCurrent(Color::FILL);
 

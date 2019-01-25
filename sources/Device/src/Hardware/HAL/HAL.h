@@ -4,9 +4,6 @@
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-#define RTC_SET_TIME_AND_DATA(d, m, y, h, min, s)   HAL::RTC_::SetTimeAndData(d, m, y, h, min, s)
-
-
 #define ERROR_HANDLER()                             ::HAL::ErrorHandler(__FILE__, __LINE__)
 
 
@@ -23,7 +20,7 @@ namespace HAL
     class RTC_
     {
     friend class Hardware::Clock;
-    public:
+    private:
         static void Init();
         static PackedTime GetPackedTime();
         static bool SetTimeAndData(int8 day, int8 month, int8 year, int8 hours, int8 minutes, int8 seconds);

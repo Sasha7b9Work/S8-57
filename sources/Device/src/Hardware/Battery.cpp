@@ -51,9 +51,8 @@ static const float VOLTAGE_100_PERCENTS = 8.2F;
 
 static const float VOLTAGE_0_PERCENTS = 6.0F;
 
-
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void Battery::Init()
+void Hardware::Battery::Init()
 {
     // Настроим входы АЦП для контроля напряжений
     // 36 : PA2 - ADC1 IN2 - контроль АКБ
@@ -99,7 +98,7 @@ void Battery::Init()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-float Battery::GetVoltageAKK(uint *adc)
+float Hardware::Battery::GetVoltageAKK(uint *adc)
 {
     static Utils::AroundAverager<float> averager(32);
 
@@ -111,7 +110,7 @@ float Battery::GetVoltageAKK(uint *adc)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-float Battery::GetVoltagePOW(uint *adc)
+float Hardware::Battery::GetVoltagePOW(uint *adc)
 {
     static Utils::AroundAverager<float> averager(32);
 
@@ -184,7 +183,7 @@ static void DrawBatteryUGO(int x, int y, float percents)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Battery::Draw(int x, int y)
+void Hardware::Battery::Draw(int x, int y)
 {
     Font::SetCurrent(Font::Type::_8);
 

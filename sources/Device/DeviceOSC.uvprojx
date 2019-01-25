@@ -1466,16 +1466,6 @@
           <GroupName>Hardware/stm32</GroupName>
           <Files>
             <File>
-              <FileName>stm437.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Hardware\stm32\stm437.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>stm437.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Hardware\stm32\stm437.h</FilePath>
-            </File>
-            <File>
               <FileName>Timer4XX.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Hardware\stm32\Timer4XX.cpp</FilePath>

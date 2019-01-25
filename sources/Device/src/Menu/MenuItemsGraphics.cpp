@@ -19,6 +19,7 @@
 
 
 using namespace Display::Primitives;
+using namespace Hardware;
 
 using Utils::Stack;
 
@@ -530,7 +531,7 @@ void TimeControl::DrawClosed(int x, int y)
     int deltaSeparator = 2;
     int startX = 3;
     y += 21;
-    PackedTime time = HAL::RTC_::GetPackedTime();
+    PackedTime time = Clock::GetTime();
     Integer((int)time.hours).ToString(false, 2).Draw(x + startX, y, shade ? Color::MenuItem(true) : Color::BLACK);
     String(':').Draw(x + startX + deltaField, y);
     Integer((int)time.minutes).ToString(false, 2).Draw(x + startX + deltaField + deltaSeparator, y);
