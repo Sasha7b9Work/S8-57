@@ -15,6 +15,4 @@ class CPU : public STM437
 public:
 
     static void ErrorHandler(const char *, int);
-
-    static void Init();
 };

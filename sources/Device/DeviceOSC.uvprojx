@@ -1331,6 +1331,26 @@
               <FilePath>.\src\Hardware\AT25160N.h</FilePath>
             </File>
             <File>
+              <FileName>Battery.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\Battery.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Battery.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Hardware\Battery.h</FilePath>
+            </File>
+            <File>
+              <FileName>Clock.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\Clock.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Clock.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Hardware\Clock.h</FilePath>
+            </File>
+            <File>
               <FileName>CPU.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Hardware\CPU.cpp</FilePath>
@@ -1430,15 +1450,25 @@
               <FileType>5</FileType>
               <FilePath>.\src\Hardware\VCP.h</FilePath>
             </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Hardware/HAL</GroupName>
+          <Files>
             <File>
-              <FileName>Battery.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Hardware\Battery.cpp</FilePath>
+              <FileName>HAL.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Hardware\HAL\HAL.h</FilePath>
             </File>
             <File>
-              <FileName>Battery.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Hardware\Battery.h</FilePath>
+              <FileName>HAL.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\HAL\HAL.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>HAL_RTC.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\HAL\HAL_RTC.cpp</FilePath>
             </File>
           </Files>
         </Group>

@@ -6,6 +6,7 @@
 
 #include "Hardware/Battery.h"
 #include "Hardware/CPU.h"
+#include "Hardware/HAL/HAL.h"
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -18,6 +19,12 @@ static SPI_HandleTypeDef hspi4;
 static PCD_HandleTypeDef hpcd_USB_OTG_HS;
 
 static CRC_HandleTypeDef handleCRC = {CRC};
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+static void SystemClock_Config(void);
+static void MX_GPIO_Init(void);
+static void MX_DAC_Init(void);
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -52,12 +59,12 @@ void Hardware::Init()
         ERROR_HANDLER();
     }
 
-    CPU::Init();
+    HAL::Init();
 }
 
 /** System Clock Configuration
 */
-void Hardware::SystemClock_Config(void)
+static void SystemClock_Config(void)
 {
 
     RCC_OscInitTypeDef RCC_OscInitStruct;
@@ -111,45 +118,8 @@ void Hardware::SystemClock_Config(void)
 }
 
 
-/* ADC3 init function */
-void Hardware::MX_ADC3_Init(void)
-{
-
-    ADC_ChannelConfTypeDef sConfig;
-
-    /**Configure the global features of the ADC (Clock, Resolution, Data Alignment and number of conversion) 
-    */
-    hadc3.Instance = ADC3;
-    hadc3.Init.ClockPrescaler = ADC_CLOCK_SYNC_PCLK_DIV2;
-    hadc3.Init.Resolution = ADC_RESOLUTION_12B;
-    hadc3.Init.ScanConvMode = DISABLE;
-    hadc3.Init.ContinuousConvMode = DISABLE;
-    hadc3.Init.DiscontinuousConvMode = DISABLE;
-    hadc3.Init.ExternalTrigConvEdge = ADC_EXTERNALTRIGCONVEDGE_RISING;
-    hadc3.Init.ExternalTrigConv = ADC_EXTERNALTRIGCONV_Ext_IT11;
-    hadc3.Init.DataAlign = ADC_DATAALIGN_RIGHT;
-    hadc3.Init.NbrOfConversion = 1;
-    hadc3.Init.DMAContinuousRequests = DISABLE;
-    hadc3.Init.EOCSelection = ADC_EOC_SINGLE_CONV;
-    if (HAL_ADC_Init(&hadc3) != HAL_OK)
-    {
-        ERROR_HANDLER();
-    }
-
-    /**Configure for the selected ADC regular channel its corresponding rank in the sequencer and its sample time. 
-    */
-    sConfig.Channel = ADC_CHANNEL_8;
-    sConfig.Rank = 1;
-    sConfig.SamplingTime = ADC_SAMPLETIME_3CYCLES;
-    if (HAL_ADC_ConfigChannel(&hadc3, &sConfig) != HAL_OK)
-    {
-        ERROR_HANDLER();
-    }
-
-}
-
 /* DAC init function */
-void Hardware::MX_DAC_Init(void)
+static void MX_DAC_Init(void)
 {
 
     DAC_ChannelConfTypeDef sConfig;
@@ -180,52 +150,7 @@ void Hardware::MX_DAC_Init(void)
 
 }
 
-/* SPI4 init function */
-void Hardware::MX_SPI4_Init(void)
-{
-    hspi4.Instance = SPI4;
-    hspi4.Init.Mode = SPI_MODE_MASTER;
-    hspi4.Init.Direction = SPI_DIRECTION_2LINES;
-    hspi4.Init.DataSize = SPI_DATASIZE_8BIT;
-    hspi4.Init.CLKPolarity = SPI_POLARITY_LOW;
-    hspi4.Init.CLKPhase = SPI_PHASE_1EDGE;
-    hspi4.Init.NSS = SPI_NSS_HARD_INPUT;
-    hspi4.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_2;
-    hspi4.Init.FirstBit = SPI_FIRSTBIT_MSB;
-    hspi4.Init.TIMode = SPI_TIMODE_DISABLE;
-    hspi4.Init.CRCCalculation = SPI_CRCCALCULATION_DISABLE;
-    hspi4.Init.CRCPolynomial = 10;
-    if (HAL_SPI_Init(&hspi4) != HAL_OK)
-    {
-        ERROR_HANDLER();
-    }
-
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Hardware::MX_USB_OTG_HS_PCD_Init(void)
-{
-    hpcd_USB_OTG_HS.Instance = USB_OTG_HS;
-    hpcd_USB_OTG_HS.Init.dev_endpoints = 6;
-    hpcd_USB_OTG_HS.Init.speed = PCD_SPEED_FULL;
-    hpcd_USB_OTG_HS.Init.dma_enable = DISABLE;
-    hpcd_USB_OTG_HS.Init.ep0_mps = DEP0CTL_MPS_64;
-    hpcd_USB_OTG_HS.Init.phy_itface = USB_OTG_EMBEDDED_PHY;
-    hpcd_USB_OTG_HS.Init.Sof_enable = DISABLE;
-    hpcd_USB_OTG_HS.Init.low_power_enable = DISABLE;
-    hpcd_USB_OTG_HS.Init.lpm_enable = DISABLE;
-    hpcd_USB_OTG_HS.Init.vbus_sensing_enable = DISABLE;
-    hpcd_USB_OTG_HS.Init.use_dedicated_ep1 = DISABLE;
-    hpcd_USB_OTG_HS.Init.use_external_vbus = DISABLE;
-    if (HAL_PCD_Init(&hpcd_USB_OTG_HS) != HAL_OK)
-    {
-        ERROR_HANDLER();
-    }
-
-}
-
-
-void Hardware::MX_GPIO_Init(void)
+static void MX_GPIO_Init(void)
 {
 
     GPIO_InitTypeDef GPIO_InitStruct;
