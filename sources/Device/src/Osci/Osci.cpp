@@ -6,6 +6,7 @@
 #include "Settings/Settings.h"
 #include "FPGA/FPGA_HAL.h"
 #include <cstring>
+#include "Utils/Math.h"
 
 
 using namespace FPGA;
@@ -140,6 +141,7 @@ void ReadDataChanenlRand(Chan::E ch, const uint8 *address, uint8 *data) // -V250
     while (dataRead < last)
     {
         *dataRead = *address;
+
         dataRead += step;
     }
 

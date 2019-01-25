@@ -8,6 +8,7 @@
 #include "Settings/Settings.h"
 #include "Utils/Averager.h"
 #include "Display/Font/Font.h"
+#include "Hardware/CPU.h"
 
 
 using namespace Display::Primitives;

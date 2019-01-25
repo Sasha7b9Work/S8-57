@@ -7,6 +7,8 @@
 #include "Settings/Settings.h"
 #include "Utils/Values.h"
 
+#include "Hardware/CPU.h"
+
 
 using namespace FPGA::Settings;
 using namespace Osci::Settings;

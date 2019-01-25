@@ -790,6 +790,11 @@
               <FileType>5</FileType>
               <FilePath>..\common\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_ll_usb.h</FilePath>
             </File>
+            <File>
+              <FileName>stm32f4xx_hal_rcc_ex.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\common\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_rcc_ex.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1440,16 +1445,6 @@
         <Group>
           <GroupName>Hardware/stm32</GroupName>
           <Files>
-            <File>
-              <FileName>stm32.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Hardware\stm32\stm32.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>stm32.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Hardware\stm32\stm32.h</FilePath>
-            </File>
             <File>
               <FileName>stm437.cpp</FileName>
               <FileType>8</FileType>

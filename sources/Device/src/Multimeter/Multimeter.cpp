@@ -8,6 +8,8 @@
 #include "Device.h"
 #include <cstring>
 
+#include "Hardware/CPU.h"
+
 
 using namespace Display::Primitives;
 

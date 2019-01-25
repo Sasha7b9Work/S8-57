@@ -1,5 +1,4 @@
 #pragma once
-#include "Hardware/stm32/stm32.h"
 
 
 /** @defgroup Hardware

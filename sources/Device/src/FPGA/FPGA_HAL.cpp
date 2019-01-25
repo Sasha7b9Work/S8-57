@@ -8,6 +8,7 @@
 #include "Utils/Math.h"
 
 #include "device.h"
+#include "Hardware/CPU.h"
 
 
 using namespace FPGA::ADDR;

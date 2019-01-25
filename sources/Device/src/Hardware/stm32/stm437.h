@@ -1,8 +1,7 @@
 #pragma once
-#include "Hardware/stm32/stm32.h"
 
 
-class STM437 : public STM32
+class STM437
 {
 protected:
 

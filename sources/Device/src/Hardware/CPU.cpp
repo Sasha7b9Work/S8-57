@@ -22,7 +22,7 @@
 #define RTC_SYNCH_PREDIV 0x00ff
 #endif
 
-static RTC_HandleTypeDef rtcHandle =
+static RTC_HandleTypeDef handleRTC =
 {
     RTC,
     {
@@ -39,6 +39,46 @@ static RTC_HandleTypeDef rtcHandle =
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void CPU::Init()
 {
+    RTC_::Init();
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void CPU::RTC_::Init()
+{
+    RCC_OscInitTypeDef        RCC_OscInitStruct;
+    RCC_PeriphCLKInitTypeDef  PeriphClkInitStruct;
+
+    RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_LSI;
+    RCC_OscInitStruct.PLL.PLLState = RCC_PLL_NONE;
+    RCC_OscInitStruct.LSIState = RCC_LSI_ON;
+    if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
+    {
+        ERROR_HANDLER();
+    }
+
+    PeriphClkInitStruct.PeriphClockSelection = RCC_PERIPHCLK_RTC;
+    PeriphClkInitStruct.RTCClockSelection = RCC_RTCCLKSOURCE_LSI;
+    if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInitStruct) != HAL_OK)
+    {
+        ERROR_HANDLER();
+    }
+
+    __HAL_RCC_RTC_ENABLE();
+
+    HAL_StatusTypeDef status = HAL_RTC_Init((RTC_HandleTypeDef*)&handleRTC);
+
+    if (status != HAL_OK)
+    {
+        ERROR_HANDLER();
+    }
+
+    if (HAL_RTCEx_BKUPRead((RTC_HandleTypeDef*)&handleRTC, RTC_BKP_DR0) != VALUE_FOR_RTC)
+    {
+        if (SetTimeAndData(11, 11, 11, 11, 11, 11))
+        {
+            HAL_RTCEx_BKUPWrite((RTC_HandleTypeDef*)&handleRTC, RTC_BKP_DR0, VALUE_FOR_RTC);
+        }
+    }
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -53,14 +93,14 @@ PackedTime CPU::RTC_::GetPackedTime()
 
     RTC_TimeTypeDef isTime;
 
-    HAL_RTC_GetTime((RTC_HandleTypeDef*)&rtcHandle, &isTime, FORMAT_BIN);
+    HAL_RTC_GetTime((RTC_HandleTypeDef*)&handleRTC, &isTime, FORMAT_BIN);
 
     time.hours = isTime.Hours;
     time.minutes = isTime.Minutes;
     time.seconds = isTime.Seconds;
 
     RTC_DateTypeDef isDate;
-    HAL_RTC_GetDate((RTC_HandleTypeDef*)&rtcHandle, &isDate, FORMAT_BIN);
+    HAL_RTC_GetDate((RTC_HandleTypeDef*)&handleRTC, &isDate, FORMAT_BIN);
 
     time.year = isDate.Year;
     time.month = isDate.Month;
@@ -80,7 +120,7 @@ bool CPU::RTC_::SetTimeAndData(int8 day, int8 month, int8 year, int8 hours, int8
     dateStruct.Date = (uint8)day;
     dateStruct.Year = (uint8)year;
 
-    if (HAL_RTC_SetDate((RTC_HandleTypeDef*)&rtcHandle, &dateStruct, FORMAT_BIN) != HAL_OK)
+    if (HAL_RTC_SetDate((RTC_HandleTypeDef*)&handleRTC, &dateStruct, FORMAT_BIN) != HAL_OK)
     {
         return false;
     };
@@ -93,10 +133,16 @@ bool CPU::RTC_::SetTimeAndData(int8 day, int8 month, int8 year, int8 hours, int8
     timeStruct.DayLightSaving = RTC_DAYLIGHTSAVING_NONE;
     timeStruct.StoreOperation = RTC_STOREOPERATION_SET;
 
-    if (HAL_RTC_SetTime((RTC_HandleTypeDef*)&rtcHandle, &timeStruct, FORMAT_BIN) != HAL_OK)
+    if (HAL_RTC_SetTime((RTC_HandleTypeDef*)&handleRTC, &timeStruct, FORMAT_BIN) != HAL_OK)
     {
         return false;
     };
 
     return true;
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void CPU::ErrorHandler(const char *, int)
+{
+    while (true)  { }
 }
