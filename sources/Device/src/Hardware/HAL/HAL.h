@@ -25,4 +25,13 @@ namespace HAL
         static PackedTime GetPackedTime();
         static bool SetTimeAndData(int8 day, int8 month, int8 year, int8 hours, int8 minutes, int8 seconds);
     };
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    class ADC1_
+    {
+    public:
+        static void Init();
+
+        static uint ReadValue();
+    };
 }
