@@ -1,6 +1,7 @@
 #pragma once
 #include "FPGA/FPGA_Settings.h"
 #include "FPGA/FPGA_Types.h"
+#include "Hardware/Clock.h"
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -10,21 +11,6 @@
  *  @defgroup DataSettings Data Settings
  *  @{
  */
-
-
-struct PackedTime
-{
-    uint timeMS     : 32;   /// \brief Время в миллисекундах от старта системы. Т.к. структура заполняется во время сохранения данных в хранилище, то 
-                            /// timeMS == 0 означает, что полный сигнал в режиме поточеного вывода ещё не считан
-    uint hours      : 5;
-    uint minutes    : 6;
-    uint seconds    : 6;
-    uint year       : 7;
-    uint month      : 4;
-    uint notUsed0   : 4;
-    uint day        : 5;
-    uint notUsed1   : 27;
-};
 
 struct DataSettings
 {

@@ -4,7 +4,6 @@
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-#define RTC_GET_PACKED_TIME()                       HAL::RTC_::GetPackedTime()
 #define RTC_SET_TIME_AND_DATA(d, m, y, h, min, s)   HAL::RTC_::SetTimeAndData(d, m, y, h, min, s)
 
 
@@ -12,14 +11,19 @@
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+namespace Hardware
+{
+    class Clock;
+}
+
 namespace HAL
 {
-    void Init();
-
     void ErrorHandler(const char *, int);
 
-    struct RTC_
+    class RTC_
     {
+    friend class Hardware::Clock;
+    public:
         static void Init();
         static PackedTime GetPackedTime();
         static bool SetTimeAndData(int8 day, int8 month, int8 year, int8 hours, int8 minutes, int8 seconds);
