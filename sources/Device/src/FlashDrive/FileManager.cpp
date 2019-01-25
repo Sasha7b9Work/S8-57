@@ -10,6 +10,8 @@
 #include "Utils/StringUtils.h"
 #include "Utils/Values.h"
 
+#include "Hardware/HAL/HAL.h"
+
 
 using namespace Display::Primitives;
 
@@ -361,7 +363,7 @@ bool FileManager::GetNameForNewFile(char name[255]) //-V2506
     }
     else
     {
-        PackedTime time = CPU::RTC_::GetPackedTime();
+        PackedTime time = HAL::RTC_::GetPackedTime();
                            //  1          2           3         4           5             6
         uint values[] = {0U, time.year, time.month, time.day, time.hours, time.minutes, time.seconds};
 

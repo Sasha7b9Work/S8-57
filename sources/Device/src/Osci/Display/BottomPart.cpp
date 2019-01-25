@@ -18,6 +18,7 @@
 
 #include "Osci/Measurements/Measurements_Graphics.h"
 #include "Hardware/Battery.h"
+#include "Hardware/HAL/HAL.h"
 
 
 using namespace Display::Primitives;
@@ -257,7 +258,7 @@ static void DrawTime(int x, int y)
     int dField = 10;
     int dSeparator = 2;
 
-    PackedTime time = CPU::RTC_::GetPackedTime();
+    PackedTime time = HAL::RTC_::GetPackedTime();
 
     Color::SetCurrent(Color::FILL);
 

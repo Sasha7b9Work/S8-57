@@ -20,6 +20,8 @@
 #include "Utils/Math.h"
 #include <stdio.h>
 
+#include "Hardware/HAL/HAL.h"
+
 
 using namespace Display::Primitives;
 using namespace Osci::Settings;
@@ -596,7 +598,7 @@ DEF_TIME(tRTC_Time,                                                             
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void OnChanged_Time_Correction()
 {
-    CPU::RTC_::SetCorrection((int8)NRST_CORRECTION_TIME);
+    HAL::RTC_::SetCorrection((int8)NRST_CORRECTION_TIME);
 }
 
 DEF_GOVERNOR( tRTC_Correction,                                                                                                                           //--- ÑÅÐÂÈÑ - ÂÐÅÌß - Êîððåêöèÿ ---

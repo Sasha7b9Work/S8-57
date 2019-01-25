@@ -10,8 +10,9 @@
 #include "Data/DataSettings.h"
 #include "Hardware/CPU.h"
 #include "Settings/Settings.h"
-
 #include <cstring>
+
+#include "Hardware/HAL/HAL.h"
 
 #ifdef WIN32
 #include <cstdio>
@@ -530,7 +531,7 @@ void TimeControl::DrawClosed(int x, int y)
     int deltaSeparator = 2;
     int startX = 3;
     y += 21;
-    PackedTime time = CPU::RTC_::GetPackedTime();
+    PackedTime time = HAL::RTC_::GetPackedTime();
     Integer((int)time.hours).ToString(false, 2).Draw(x + startX, y, shade ? Color::MenuItem(true) : Color::BLACK);
     String(':').Draw(x + startX + deltaField, y);
     Integer((int)time.minutes).ToString(false, 2).Draw(x + startX + deltaField + deltaSeparator, y);

@@ -3,6 +3,8 @@
 #include "CPU.h"
 #include "Hardware/Timer.h"
 
+#include "Hardware/HAL/HAL.h"
+
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #define VALUE_FOR_RTC 0x644
@@ -39,11 +41,11 @@ static RTC_HandleTypeDef handleRTC =
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void CPU::Init()
 {
-    RTC_::Init();
+    HAL::RTC_::Init();
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void CPU::RTC_::Init()
+void HAL::RTC_::Init()
 {
     RCC_OscInitTypeDef        RCC_OscInitStruct;
     RCC_PeriphCLKInitTypeDef  PeriphClkInitStruct;
@@ -82,12 +84,12 @@ void CPU::RTC_::Init()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void CPU::RTC_::SetCorrection(int8)
+void HAL::RTC_::SetCorrection(int8)
 {
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-PackedTime CPU::RTC_::GetPackedTime()
+PackedTime HAL::RTC_::GetPackedTime()
 {
     PackedTime time;
 
@@ -112,7 +114,7 @@ PackedTime CPU::RTC_::GetPackedTime()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-bool CPU::RTC_::SetTimeAndData(int8 day, int8 month, int8 year, int8 hours, int8 minutes, int8 seconds)
+bool HAL::RTC_::SetTimeAndData(int8 day, int8 month, int8 year, int8 hours, int8 minutes, int8 seconds)
 {
     RTC_DateTypeDef dateStruct;
     dateStruct.WeekDay = RTC_WEEKDAY_MONDAY;
