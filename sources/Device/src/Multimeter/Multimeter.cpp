@@ -8,7 +8,7 @@
 #include "Device.h"
 #include <cstring>
 
-#include "Hardware/CPU.h"
+#include "Hardware/HAL/HAL.h"
 
 
 using namespace Display::Primitives;

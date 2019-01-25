@@ -7,7 +7,6 @@
 #include "Display/Symbols.h"
 #include "FlashDrive/FlashDrive.h"
 #include "FPGA/FPGA_Math.h"
-#include "Hardware/CPU.h"
 #include "Hardware/VCP.h"
 #include "Settings/SettingsTime.h"
 #include "Tables.h"

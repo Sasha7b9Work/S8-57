@@ -2,7 +2,6 @@
 #ifndef WIN32
 #include "usbd_core.h"
 #include "defines.h"
-#include "Hardware/CPU.h"
 #include "Hardware/VCP.h"
 #endif
 

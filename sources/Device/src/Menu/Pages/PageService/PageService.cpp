@@ -8,7 +8,6 @@
 #include "FPGA/FPGA.h"
 #include "FPGA/FPGA_Math.h"
 #include "FPGA/FPGA_Settings.h"
-#include "Hardware/CPU.h"
 #include "Hardware/Hardware.h"
 #include "Hardware/Sound.h"
 #include "Menu/Menu.h"

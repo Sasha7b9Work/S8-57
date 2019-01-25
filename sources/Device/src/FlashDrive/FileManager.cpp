@@ -4,7 +4,6 @@
 #include "Display/Painter.h"
 #include "FileManager.h"
 #include "FlashDrive/FlashDrive.h"
-#include "Hardware/CPU.h"
 #include "Hardware/Sound.h"
 #include "Utils/Math.h"
 #include "Utils/StringUtils.h"

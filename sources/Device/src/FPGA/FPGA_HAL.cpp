@@ -8,7 +8,7 @@
 #include "Utils/Math.h"
 
 #include "device.h"
-#include "Hardware/CPU.h"
+#include "Hardware/HAL/HAL.h"
 
 
 using namespace FPGA::ADDR;

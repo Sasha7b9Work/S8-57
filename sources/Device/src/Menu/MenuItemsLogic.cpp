@@ -5,7 +5,6 @@
 #include "Utils/Math.h"
 #include "Utils/Values.h"
 #include "Display/Symbols.h"
-#include "Hardware/CPU.h"
 #include "Display/Painter.h"
 
 #include "Hardware/HAL/HAL.h"

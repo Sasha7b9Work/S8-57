@@ -1,7 +1,6 @@
 #include "defines.h"
 #include "usbd_desc.h"
 #include "usbd_cdc_interface.h"
-#include "Hardware/CPU.h"
 #include "Hardware/VCP.h"
 #include "usbd_desc.h"
 #include "Utils/Math.h"

@@ -5,8 +5,8 @@
 #include "Hardware/Timer.h"
 
 #include "Hardware/Battery.h"
-#include "Hardware/CPU.h"
 #include "Hardware/HAL/HAL.h"
+#include "Hardware/Clock.h"
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -59,7 +59,7 @@ void Hardware::Init()
         ERROR_HANDLER();
     }
 
-    HAL::Init();
+    Clock::Init();
 }
 
 /** System Clock Configuration

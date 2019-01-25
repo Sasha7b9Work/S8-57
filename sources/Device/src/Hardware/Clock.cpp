@@ -1,13 +1,14 @@
-#include <stm32f4xx_hal.h>
 #include "defines.h"
-#include "CPU.h"
-#include "Hardware/Timer.h"
+#include "Clock.h"
 
 #include "Hardware/HAL/HAL.h"
 
 
+using namespace Hardware;
+
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void CPU::ErrorHandler(const char *, int)
+void Clock::Init()
 {
-    while (true)  { }
+    HAL::RTC_::Init();
 }

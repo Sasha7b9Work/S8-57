@@ -7,7 +7,7 @@
 #include "Settings/Settings.h"
 #include "Utils/Values.h"
 
-#include "Hardware/CPU.h"
+#include "Hardware/HAL/HAL.h"
 
 
 using namespace FPGA::Settings;

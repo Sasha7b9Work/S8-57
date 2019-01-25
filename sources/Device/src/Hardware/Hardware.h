@@ -20,15 +20,11 @@
 #define PRIORITY_RAM_DMA2_STREAM0   8, 0
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-class Hardware
+namespace Hardware
 {
-public:
+    void Init();
 
-    static void Init();
-
-    static uint CalculateCRC32(uint address, uint size);
-
-private:
+    uint CalculateCRC32(uint address, uint size);
 };
 
 
