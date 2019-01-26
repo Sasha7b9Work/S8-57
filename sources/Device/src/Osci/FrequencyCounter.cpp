@@ -22,7 +22,6 @@ using namespace Display::Primitives;
 using namespace FPGA::ADDR;
 
 using FPGA::HAL::GetFlag;
-using Hardware::Timer;
 using Utils::Stack;
 
 

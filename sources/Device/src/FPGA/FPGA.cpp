@@ -22,8 +22,6 @@ using namespace FPGA::HAL::GPIO;
 using namespace FPGA::Settings;
 using namespace Osci::Settings;
 
-using Hardware::Timer;
-
 
 extern void ReadDataChanenlRand(Chan::E ch, const uint8 *address, uint8 *data);
 

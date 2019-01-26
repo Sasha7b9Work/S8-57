@@ -15,8 +15,6 @@ using namespace FPGA::ADDR;
 using namespace FPGA::HAL::GPIO;
 using namespace Osci::Settings;
 
-using Hardware::Timer;
-
 
 extern bool givingStart;
 
