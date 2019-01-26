@@ -4,7 +4,6 @@
 #include "Reader.h"
 #include "Utils/Math.h"
 #include <cstring>
-#include <stm32f4xx_hal.h>
 
 
 using namespace FPGA;
@@ -29,7 +28,11 @@ void DataStorage::Push(DataSettings *ds)
         LIMITATION(dataB[i], VALUE::MIN, VALUE::MAX);     // -V2516
     }
 
-    std::memcpy(OUT_A, ds->DataA(), (uint)ds->SizeChannel());
+    std::memcpy
+    (
+    OUT_A,
+    ds->DataA(),
+    (uint)ds->SizeChannel());
     std::memcpy(OUT_B, ds->DataB(), (uint)ds->SizeChannel());
 }
 
