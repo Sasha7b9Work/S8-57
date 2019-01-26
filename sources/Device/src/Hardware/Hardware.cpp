@@ -14,8 +14,6 @@ using HAL::FSMC;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-static DAC_HandleTypeDef hdac;
-
 static SPI_HandleTypeDef hspi4;
 
 static PCD_HandleTypeDef hpcd_USB_OTG_HS;
@@ -26,7 +24,6 @@ static CRC_HandleTypeDef handleCRC = {CRC};
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 static void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
-static void MX_DAC_Init(void);
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -49,12 +46,6 @@ void Hardware::Init()
     FSMC::Init();
     Beeper::Init();
     Battery::Init();
-
-    //MX_ADC3_Init();
-    MX_DAC_Init();
-    //MX_SPI4_Init();
-    //MX_USB_OTG_FS_PCD_Init();
-    //MX_USB_OTG_HS_PCD_Init();
 
     if(HAL_CRC_Init(&handleCRC) != HAL_OK)
     {
@@ -117,39 +108,6 @@ static void SystemClock_Config(void)
 
     /* SysTick_IRQn interrupt configuration */
     HAL_NVIC_SetPriority(SysTick_IRQn, 0, 0);
-}
-
-
-/* DAC init function */
-static void MX_DAC_Init(void)
-{
-
-    DAC_ChannelConfTypeDef sConfig;
-
-    /**DAC Initialization 
-    */
-    hdac.Instance = DAC;
-    if (HAL_DAC_Init(&hdac) != HAL_OK)
-    {
-        ERROR_HANDLER();
-    }
-
-    /**DAC channel OUT1 config 
-    */
-    sConfig.DAC_Trigger = DAC_TRIGGER_NONE;
-    sConfig.DAC_OutputBuffer = DAC_OUTPUTBUFFER_ENABLE;
-    if (HAL_DAC_ConfigChannel(&hdac, &sConfig, DAC_CHANNEL_1) != HAL_OK)
-    {
-        ERROR_HANDLER();
-    }
-
-    /**DAC channel OUT2 config 
-    */
-    if (HAL_DAC_ConfigChannel(&hdac, &sConfig, DAC_CHANNEL_2) != HAL_OK)
-    {
-        ERROR_HANDLER();
-    }
-
 }
 
 static void MX_GPIO_Init(void)

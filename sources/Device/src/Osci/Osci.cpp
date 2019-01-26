@@ -74,22 +74,22 @@ void Osci::Update()
 
     for (int i = 0; i < number; i++)
     {
-        HAL::ReadFlag();
+        FPGA::HAL::ReadFlag();
 
-        if (HAL::GetFlag::PRED() && !givingStart)
+        if (FPGA::HAL::GetFlag::PRED() && !givingStart)
         {
-            if (START_MODE_IS_AUTO && HAL::GetFlag::HOLD_OFF())
+            if (START_MODE_IS_AUTO && FPGA::HAL::GetFlag::HOLD_OFF())
             {
                 GiveStart();
                 givingStart = true;
             }
-            if (!HAL::GetFlag::TRIG_READY())
+            if (!FPGA::HAL::GetFlag::TRIG_READY())
             {
                 Trig::pulse = false;
             }
         }
 
-        if (HAL::GetFlag::DATA_READY())
+        if (FPGA::HAL::GetFlag::DATA_READY())
         {
             ReadData();
             if (START_MODE_IS_SINGLE)

@@ -1431,14 +1431,29 @@
               <FilePath>.\src\Hardware\HAL\HAL_ADDRESSES.cpp</FilePath>
             </File>
             <File>
-              <FileName>HAL_DAC.cpp</FileName>
+              <FileName>HAL_DAC1.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\Hardware\HAL\HAL_DAC.cpp</FilePath>
+              <FilePath>.\src\Hardware\HAL\HAL_DAC1.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>HAL_DAC2.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\HAL\HAL_DAC2.cpp</FilePath>
             </File>
             <File>
               <FileName>HAL_FSMC.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Hardware\HAL\HAL_FSMC.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>HAL_PORTS.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\HAL\HAL_PORTS.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>HAL_PORTS.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Hardware\HAL\HAL_PORTS.h</FilePath>
             </File>
             <File>
               <FileName>HAL_RTC.cpp</FileName>

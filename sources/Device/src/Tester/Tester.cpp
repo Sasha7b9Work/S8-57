@@ -15,26 +15,11 @@ using namespace FPGA::Settings;
 using namespace Osci::Settings;
 
 using HAL::FSMC;
+using HAL::PORTS::State;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 static DAC_HandleTypeDef hDAC = {DAC};
-
-#define Port_TEST_ON    GPIOF
-#define Pin_TEST_ON     GPIO_PIN_13
-
-#define Port_PNP        GPIOF
-#define Pin_PNP         GPIO_PIN_14
-
-#define Port_U          GPIOF
-#define Pin_U           GPIO_PIN_15
-
-#define Port_I          GPIOG
-#define Pin_I           GPIO_PIN_0
-
-#define Port_TEST_STR   GPIOC
-#define Pin_TEST_STR    GPIO_PIN_9
-
 
 uint8 Tester::data[Chan::Size][NUM_STEPS][TESTER_NUM_POINTS];
 
@@ -44,47 +29,16 @@ int   Tester::step = 0;
 float Tester::stepU = 0.0F;
 bool  Tester::enabled = false;
 
+uint16 Tester::Pin_TEST_ON = HAL::PORTS::Pin::_13;
+uint16 Tester::Pin_PNP = HAL::PORTS::Pin::_14;
+uint16 Tester::Pin_U = HAL::PORTS::Pin::_15;
+uint16 Tester::Pin_I = HAL::PORTS::Pin::_0;
+uint16 Tester::Pin_TEST_STR = HAL::PORTS::Pin::_9;
+
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void Tester::Init()
 {
-    RCC->APB1ENR |= RCC_APB1ENR_DACEN;      // Включаем ЦАП
-
-    GPIO_InitTypeDef isGPIO =
-    {
-        GPIO_PIN_5,
-        GPIO_MODE_ANALOG,
-        GPIO_NOPULL
-    };
-
-    HAL_GPIO_Init(GPIOA, &isGPIO);
-
-    hDAC.Instance = DAC;
-
-    if (HAL_DAC_Init(&hDAC) != HAL_OK)
-    {
-        ERROR_HANDLER();
-    }
-
-    //             TEST_ON       PNP       U
-    isGPIO.Pin = Pin_TEST_ON | Pin_PNP | Pin_U;
-    isGPIO.Mode = GPIO_MODE_OUTPUT_PP;
-    isGPIO.Pull = GPIO_PULLDOWN;
-    HAL_GPIO_Init(Port_TEST_ON, &isGPIO);
-
-    //               I
-    isGPIO.Pin = Pin_I;
-    HAL_GPIO_Init(Port_I, &isGPIO);
-
-    //             TEST_STR - EXTI9
-    isGPIO.Pin = Pin_TEST_STR;
-    isGPIO.Mode = GPIO_MODE_IT_RISING;
-    isGPIO.Pull = GPIO_NOPULL;
-    HAL_GPIO_Init(Port_TEST_STR, &isGPIO);
-
-    HAL_NVIC_SetPriority(EXTI9_5_IRQn, 2, 0);
-
-    HAL_GPIO_WritePin(Port_TEST_ON, Pin_TEST_ON, GPIO_PIN_SET);    // Отключаем тестер-компонет
-
     for (int i = 0; i < Chan::Size; i++)
     {
         for (int j = 0; j < NUM_STEPS; j++)
@@ -96,30 +50,7 @@ void Tester::Init()
         }
     }
 
-    // Инициализируем ЦАП
-    GPIO_InitTypeDef _gpio =
-    {
-        GPIO_PIN_5,
-        GPIO_MODE_ANALOG,
-        GPIO_NOPULL
-    };
-    HAL_GPIO_Init(GPIOA, &_gpio);
-
-    if (HAL_DAC_Init(&hDAC) != HAL_OK)
-    {
-        ERROR_HANDLER();
-    }
-
-    DAC_ChannelConfTypeDef configDAC;
-    configDAC.DAC_Trigger = DAC_TRIGGER_NONE;
-    configDAC.DAC_OutputBuffer = DAC_OUTPUTBUFFER_DISABLE;
-
-    if (HAL_DAC_ConfigChannel(&hDAC, &configDAC, DAC1_CHANNEL_2) != HAL_OK)
-    {
-        ERROR_HANDLER();
-    }
-    HAL_DAC_SetValue(&hDAC, DAC1_CHANNEL_2, DAC_ALIGN_8B_R, 0);
-    HAL_DAC_Start(&hDAC, DAC1_CHANNEL_2);
+    HAL::DAC2_::Init();
 
     Disable();
 }
@@ -157,7 +88,7 @@ void Tester::Enable() // -V2506
     RShift::Set(Chan::A, RShift::ZERO);
     RShift::Set(Chan::B, RShift::ZERO);
 
-    HAL_GPIO_WritePin(Port_TEST_ON, Pin_TEST_ON, GPIO_PIN_RESET);  // Включаем тестер-компонент
+    HAL::PORTS::Reset(Port_TEST_ON, Pin_TEST_ON);       // Включаем тестер-компонент
 
     LoadFPGA();
 
@@ -190,7 +121,7 @@ void Tester::Disable() // -V2506
 
     HAL_NVIC_DisableIRQ(EXTI9_5_IRQn);      // Выключаем прерывания от тактовых импульсов
 
-    HAL_GPIO_WritePin(Port_TEST_ON, Pin_TEST_ON, GPIO_PIN_SET);
+    HAL::PORTS::Set(Port_TEST_ON, Pin_TEST_ON);
 
     oldSet.test_control = TESTER_CONTROL;
     oldSet.test_polarity = TESTER_POLARITY;
@@ -280,15 +211,16 @@ void HAL_GPIO_EXTI_Callback(uint16_t pin)
 void Tester::LoadPolarity()
 {
     // Устанавливаем полярность
-    HAL_GPIO_WritePin(Port_PNP, Pin_PNP, TESTER_POLARITY_IS_POSITITVE ? GPIO_PIN_SET : GPIO_PIN_RESET);
+    HAL::PORTS::Write(Port_PNP, Pin_PNP, TESTER_POLARITY_IS_POSITITVE ? State::Enabled : State::Disabled);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Tester::LoadStep()
 {
     // Устанавливаем управление напряжением или током
-    HAL_GPIO_WritePin(Port_U, Pin_U, TESTER_CONTROL_IS_U ? GPIO_PIN_SET : GPIO_PIN_RESET);
-    HAL_GPIO_WritePin(Port_I, Pin_I, TESTER_CONTROL_IS_U ? GPIO_PIN_RESET : GPIO_PIN_SET);
+    HAL::PORTS::Write(Port_U, Pin_U, TESTER_CONTROL_IS_U ? State::Enabled : State::Disabled);
+
+    HAL::PORTS::Write(Port_I, Pin_I, TESTER_CONTROL_IS_U ? State::Disabled : State::Enabled);
 
     if (TESTER_CONTROL_IS_U)
     {
