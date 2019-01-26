@@ -47,8 +47,6 @@ namespace Beeper
     void Beep(TypePress::E type);
 
     void Test();
-
-    extern DAC_HandleTypeDef handleDAC;
 };
 
 

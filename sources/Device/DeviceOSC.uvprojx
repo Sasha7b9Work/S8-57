@@ -1466,6 +1466,11 @@
               <FilePath>.\src\Hardware\HAL\HAL_ADC3.cpp</FilePath>
             </File>
             <File>
+              <FileName>HAL_DAC.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\HAL\HAL_DAC.cpp</FilePath>
+            </File>
+            <File>
               <FileName>HAL_RTC.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Hardware\HAL\HAL_RTC.cpp</FilePath>

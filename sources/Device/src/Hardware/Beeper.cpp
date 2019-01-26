@@ -6,13 +6,13 @@
 #include "Utils/Math.h"
 #include <cmath>
 
+#include "Hardware/HAL/HAL.h"
+
 
 using Hardware::Timer;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-DAC_HandleTypeDef Beeper::handleDAC = {DAC};
-
 #define POINTS_IN_PERIOD_SOUND 10
 static uint8 points[POINTS_IN_PERIOD_SOUND] = {0};
 static float frequency = 0.0F;
@@ -81,7 +81,7 @@ void Beeper::Init()
 
     HAL_DMA_Init(&hdmaDAC1);
 
-    __HAL_LINKDMA(&handleDAC, DMA_Handle1, hdmaDAC1);
+    __HAL_LINKDMA(&HAL::DAC_::handle, DMA_Handle1, hdmaDAC1);
 
     HAL_NVIC_SetPriority(DMA1_Stream5_IRQn, PRIORITY_SOUND_DMA1_STREAM5);
     HAL_NVIC_EnableIRQ(DMA1_Stream5_IRQn);
@@ -93,17 +93,17 @@ void Beeper::Init()
         DAC_OUTPUTBUFFER_ENABLE
     };
 
-    HAL_DAC_DeInit(&handleDAC);
+    HAL_DAC_DeInit(&HAL::DAC_::handle);
 
-    HAL_DAC_Init(&handleDAC);
+    HAL_DAC_Init(&HAL::DAC_::handle);
 
-    HAL_DAC_ConfigChannel(&handleDAC, &config, DAC_CHANNEL_1);
+    HAL_DAC_ConfigChannel(&HAL::DAC_::handle, &config, DAC_CHANNEL_1);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void Stop()
 {
-    HAL_DAC_Stop_DMA(&Beeper::handleDAC, DAC_CHANNEL_1);
+    HAL_DAC_Stop_DMA(&HAL::DAC_::handle, DAC_CHANNEL_1);
     isBeep = false;
     soundWarnIsBeep = false;
 }
@@ -241,7 +241,7 @@ static void Beep(const TypeWave::E newTypeWave, const float newFreq, const float
     
     isBeep = true;
     
-    HAL_DAC_Start_DMA(&Beeper::handleDAC, DAC_CHANNEL_1, (uint32_t*)points, POINTS_IN_PERIOD_SOUND, DAC_ALIGN_8B_R); //-V1032 //-V641
+    HAL_DAC_Start_DMA(&HAL::DAC_::handle, DAC_CHANNEL_1, (uint32_t*)points, POINTS_IN_PERIOD_SOUND, DAC_ALIGN_8B_R); //-V1032 //-V641
 
     Timer::SetAndStartOnce(Timer::Type::StopSound, Stop, (uint)newDuration);
 }
