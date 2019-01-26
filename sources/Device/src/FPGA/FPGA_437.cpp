@@ -20,6 +20,8 @@
 
 using namespace FPGA::HAL::GPIO;
 
+using Hardware::AD9286;
+
 
 extern bool givingStart;
 
