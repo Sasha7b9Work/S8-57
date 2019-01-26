@@ -6,7 +6,7 @@
 #include "Display/Symbols.h"
 #include "FlashDrive/FlashDrive.h"
 #include "FPGA/FPGA.h"
-#include "Hardware/Sound.h"
+#include "Hardware/Beeper.h"
 #include "Menu/Pages/Include/PageMemory.h"
 #include "Utils/Math.h"
 #include "Utils/Values.h"
@@ -159,7 +159,7 @@ static bool HandlerKey_RAM(KeyEvent event)
 
     if (DataStorage::NumElementsInStorage() > 1)
     {
-        Sound::RegulatorSwitchRotate();
+        Beeper::RegulatorSwitchRotate();
     }
     if (key == Key::Up || key == Key::Right)
     {

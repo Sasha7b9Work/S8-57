@@ -2,7 +2,7 @@
 #include "defines.h"
 #include "EEPROM.h"
 #include "Hardware.h"
-#include "Hardware/Sound.h"
+#include "Hardware/Beeper.h"
 #include <cstring>
 
 #include "Hardware/HAL/HAL.h"
@@ -264,7 +264,7 @@ String OTPmem::GetSerialNumber(int *freeForWrite)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void WriteBufferBytes(uint address, void *buffer, int size)
 {
-    Sound::WaitForCompletion();
+    Beeper::WaitForCompletion();
 
     CLEAR_FLASH_FLAGS
 

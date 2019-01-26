@@ -2,7 +2,7 @@
 #include "defines.h"
 #include "Hardware/FSMC.h"
 #include "Hardware/Hardware.h"
-#include "Hardware/Sound.h"
+#include "Hardware/Beeper.h"
 #include "Hardware/Timer.h"
 
 #include "Hardware/Battery.h"
@@ -46,7 +46,7 @@ void Hardware::Init()
     MX_GPIO_Init();
     Timer::Init();
     FSMC::Init();
-    Sound::Init();
+    Beeper::Init();
     Battery::Init();
 
     //MX_ADC3_Init();

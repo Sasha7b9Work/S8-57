@@ -11,7 +11,7 @@
 #include "FPGA/FPGA.h"
 #include "FPGA/FPGA_Settings.h"
 #include "Hardware/EEPROM.h"
-#include "Hardware/Sound.h"
+#include "Hardware/Beeper.h"
 #include "FlashDrive/FileManager.h"
 #include "Menu/Menu.h"
 #include "Menu/Pages/Include/Definition.h"
@@ -729,7 +729,7 @@ void OnMemExtSetMaskNameRegSet(int angle, int maxIndex)
         INDEX_SYMBOL = (int8)(maxIndex - 1);
     }
     func[Math::Sign(angle) + 1](&INDEX_SYMBOL, 0, (int8)(maxIndex - 1));
-    Sound::RegulatorSwitchRotate();
+    Beeper::RegulatorSwitchRotate();
 
 }
 

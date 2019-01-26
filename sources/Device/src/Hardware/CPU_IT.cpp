@@ -1,6 +1,6 @@
 #include <stm32f4xx_hal.h>
 #include "defines.h"
-#include "Sound.h"
+#include "Hardware/Beeper.h"
 #include "Utils/Debug.h"
 #include "FlashDrive/FlashDrive.h"      
 #include "FPGA/FPGA.h"
@@ -41,7 +41,7 @@ void HardFault_Handler()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void DMA1_Stream5_IRQHandler()
 {
-    HAL_DMA_IRQHandler(Sound::handleDAC.DMA_Handle1);
+    HAL_DMA_IRQHandler(Beeper::handleDAC.DMA_Handle1);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

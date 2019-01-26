@@ -6,7 +6,7 @@
 #include "Display/Painter.h"
 #include "Display/Display_Primitives.h"
 #include "Hardware/Timer.h"
-#include "Hardware/Sound.h"
+#include "Hardware/Beeper.h"
 #include "Recorder/Recorder_Display.h"
 #include <cstring>
 
@@ -234,11 +234,11 @@ void Display::ShowWarning(Warning::E warning)
     }
     if (warns[warning].good)
     {
-        Sound::WarnBeepGood();
+        Beeper::WarnBeepGood();
     }
     else
     {
-        Sound::WarnBeepBad();
+        Beeper::WarnBeepBad();
     }
 }
 

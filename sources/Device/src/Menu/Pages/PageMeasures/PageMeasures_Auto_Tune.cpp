@@ -9,7 +9,7 @@
 #include "Settings/Settings.h"
 #include "Menu/Pages/Include/PageMeasures.h"
 #include "Utils/Math.h"
-#include "Hardware/Sound.h"
+#include "Hardware/Beeper.h"
 
 
 using namespace Display::Primitives;
@@ -87,7 +87,7 @@ static bool HandlerKey_Tune(KeyEvent event)
     if (Measure::pageChoiceIsActive)
     {
         Measure::posOnPageChoice += delta;
-        Sound::RegulatorSwitchRotate();
+        Beeper::RegulatorSwitchRotate();
 
         if (Measure::posOnPageChoice < 0)
         {
@@ -109,7 +109,7 @@ static bool HandlerKey_Tune(KeyEvent event)
     {
         Measure::ChangeActive(delta);
 
-        Sound::RegulatorSwitchRotate();
+        Beeper::RegulatorSwitchRotate();
     }
 
     return true;

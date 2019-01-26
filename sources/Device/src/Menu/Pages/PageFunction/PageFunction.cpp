@@ -3,7 +3,7 @@
 #include "Menu/Pages/Include/PageFunction.h"
 #include "Menu/Menu.h"
 #include "Settings/Settings.h"
-#include "Hardware/Sound.h"
+#include "Hardware/Beeper.h"
 #include "Menu/Pages/Include/Definition.h"
 #include "Display/Painter.h"
 

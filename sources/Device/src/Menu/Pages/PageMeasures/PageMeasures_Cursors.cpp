@@ -5,7 +5,7 @@
 #include "Menu/Pages/Include/PageMeasures.h"
 #include "Settings/Settings.h"
 #include "Keyboard/Keyboard.h"
-#include "Hardware/Sound.h"
+#include "Hardware/Beeper.h"
 #include "Menu/Menu.h"
 #include "Utils/Math.h"
 #include "Utils/CommonFunctions.h"

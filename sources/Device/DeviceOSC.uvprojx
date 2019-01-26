@@ -1341,6 +1341,16 @@
               <FilePath>.\src\Hardware\Battery.h</FilePath>
             </File>
             <File>
+              <FileName>Beeper.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\Beeper.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Beeper.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Hardware\Beeper.h</FilePath>
+            </File>
+            <File>
               <FileName>Clock.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Hardware\Clock.cpp</FilePath>
@@ -1419,16 +1429,6 @@
               <FileName>Timer_437.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Hardware\Timer_437.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Sound.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Hardware\Sound.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Sound.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Hardware\Sound.h</FilePath>
             </File>
             <File>
               <FileName>VCP.cpp</FileName>

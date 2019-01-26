@@ -6,7 +6,7 @@
 #include "Display/Symbols.h"
 #include "FlashDrive/FlashDrive.h"
 #include "Hardware/EEPROM.h"
-#include "Hardware/Sound.h"
+#include "Hardware/Beeper.h"
 #include "Menu/MenuItems.h"
 #include "Menu/Pages/Include/PageMemory.h"
 #include "Settings/Settings.h"
@@ -267,7 +267,7 @@ static bool HandlerKey_Internal(KeyEvent event)
 {
     Key::E key = event.key;
 
-    Sound::RegulatorSwitchRotate();
+    Beeper::RegulatorSwitchRotate();
 
     if (key == Key::Left || key == Key::Down)
     {

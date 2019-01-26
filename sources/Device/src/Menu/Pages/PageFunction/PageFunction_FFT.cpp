@@ -3,7 +3,7 @@
 #include "Settings/Settings.h"
 #include "Menu/Pages/Include/Definition.h"
 #include "Display/Painter.h"
-#include "Hardware/Sound.h"
+#include "Hardware/Beeper.h"
 #include "Menu/Pages/Include/PageFunction.h"
 
 
@@ -102,7 +102,7 @@ static bool HandlerKey_FFT_Cursors(KeyEvent event)
     int delta = (key == Key::Up || key == Key::Right) ? 1 : -1;
 
     FFT_POS_CURSOR(MATH_CURRENT_CUR) += (uint8)delta;
-    Sound::RegulatorShiftRotate();
+    Beeper::RegulatorShiftRotate();
 
     return true;
 }

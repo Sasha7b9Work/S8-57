@@ -6,7 +6,7 @@
 #include "Display/Painter.h"
 #include "Settings/Settings.h"
 #include "Utils/Math.h"
-#include "Hardware/Sound.h"
+#include "Hardware/Beeper.h"
 #include <cmath>
 
 
@@ -335,7 +335,7 @@ bool PageMeasures::PageCursors::PageSet::OnKey(KeyEvent event) //-V2506
         // ничего не делаем
     }
 
-    Sound::RegulatorShiftRotate();
+    Beeper::RegulatorShiftRotate();
 
     return true;
 }

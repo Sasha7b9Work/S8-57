@@ -4,7 +4,7 @@
 #include "Display/Painter.h"
 #include "FileManager.h"
 #include "FlashDrive/FlashDrive.h"
-#include "Hardware/Sound.h"
+#include "Hardware/Beeper.h"
 #include "Utils/Math.h"
 #include "Utils/StringUtils.h"
 #include "Utils/Values.h"
@@ -324,7 +324,7 @@ bool FileManager::HandlerKey(KeyEvent event)
 
     int delta = (key == Key::Up || key == Key::Right) ? 1 : -1;
 
-    Sound::RegulatorSwitchRotate();
+    Beeper::RegulatorSwitchRotate();
     if (FM_CURSOR_IN_DIRS)
     {
         delta > 0 ? DecCurrentDir() : IncCurrentDir();

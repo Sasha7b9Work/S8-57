@@ -9,7 +9,7 @@
 #include "FPGA/FPGA_Math.h"
 #include "FPGA/FPGA_Settings.h"
 #include "Hardware/Hardware.h"
-#include "Hardware/Sound.h"
+#include "Hardware/Beeper.h"
 #include "Menu/Menu.h"
 #include "Menu/Pages/Include/Definition.h"
 #include "Menu/Pages/Include/PageService.h"
@@ -473,7 +473,7 @@ static bool HandlerKey_Function(KeyEvent event) // -V2506
                 {
                     rShift = RShift::ZERO;
                 }
-                Sound::RegulatorShiftRotate();
+                Beeper::RegulatorShiftRotate();
                 SET_RSHIFT_MATH = rShift;
             }
         }
@@ -487,7 +487,7 @@ static bool HandlerKey_Function(KeyEvent event) // -V2506
                 {
                     rShift = RShift::ZERO;
                 }
-                Sound::RegulatorShiftRotate();
+                Beeper::RegulatorShiftRotate();
                 SET_RSHIFT_MATH = rShift;
             }
         }
@@ -505,7 +505,7 @@ static bool HandlerKey_Function(KeyEvent event) // -V2506
             {
                 SET_RANGE_MATH = (Range::E)((uint8)(SET_RANGE_MATH + 1));  // SET_RANGE_MATH++;
                 SET_RSHIFT_MATH = (uint16)FPGA::Math::RShift2Rel(rShiftAbs, SET_RANGE_MATH);
-                Sound::RegulatorSwitchRotate();
+                Beeper::RegulatorSwitchRotate();
             }
             sum = 0;
         }
@@ -515,7 +515,7 @@ static bool HandlerKey_Function(KeyEvent event) // -V2506
             {
                 SET_RANGE_MATH = (Range::E)((uint8)(SET_RANGE_MATH - 1));  // SET_RANGE_MATH--;
                 SET_RSHIFT_MATH = (uint16)FPGA::Math::RShift2Rel(rShiftAbs, SET_RANGE_MATH);
-                Sound::RegulatorSwitchRotate();
+                Beeper::RegulatorSwitchRotate();
             }
             sum = 0;
         }

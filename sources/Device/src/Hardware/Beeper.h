@@ -23,7 +23,7 @@ struct TypeWave
 };
 
 
-class Sound
+class Beeper
 {
 public:
     static void Init();

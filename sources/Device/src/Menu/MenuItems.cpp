@@ -4,7 +4,7 @@
 #include "MenuItems.h"
 #include "Settings/Settings.h"
 #include "Menu/Pages/Include/PageFunction.h"
-#include "Hardware/Sound.h"
+#include "Hardware/Beeper.h"
 #include "Utils/Math.h"
 
 
@@ -173,12 +173,12 @@ void Page::ChangeSubPage(int delta)
 {
     if (delta > 0 && CurrentSubPage() < NumSubPages() - 1)
     {
-        Sound::RegulatorSwitchRotate();
+        Beeper::RegulatorSwitchRotate();
         SetCurrentSubPage(CurrentSubPage() + 1);
     }
     else if (delta < 0 && CurrentSubPage() > 0)
     {
-        Sound::RegulatorSwitchRotate();
+        Beeper::RegulatorSwitchRotate();
         SetCurrentSubPage(CurrentSubPage() - 1);
     }
     else

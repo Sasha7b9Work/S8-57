@@ -14,7 +14,7 @@
 #include "Pages/Include/PageMeasures.h"
 #include "Pages/Include/PageDisplay.h"
 #include "Pages/Include/PageFunction.h"
-#include "Hardware/Sound.h"
+#include "Hardware/Beeper.h"
 #include "FPGA/FPGA.h"
 #include "FPGA/FPGA_Settings.h"
 #include "Utils/Math.h"
@@ -384,7 +384,7 @@ void Menu::ProcessingLongPressureButton()
     {
         Control *item = OpenedItem();
         
-        Sound::ButtonRelease();
+        Beeper::ButtonRelease();
         NEED_FINISH_DRAW = 1;
         SetAutoHide(true);
 
@@ -907,7 +907,7 @@ void Menu::SetItemForHint(void *item)
 void Menu::ButtonEvent(KeyEvent event)
 {
     /// \todo На звуке иногда виснет при длительном удержании кнопки смещения
-    Sound::Beep(event.type);
+    Beeper::Beep(event.type);
     BufferButtons::Push(event);
 }
 
