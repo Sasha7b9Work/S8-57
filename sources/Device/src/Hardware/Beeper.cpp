@@ -25,6 +25,24 @@ static volatile bool isBeep = false;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+static void Beep(const TypeWave::E newTypeWave, const float newFreq, const float newAmpl, const int newDuration);
+
+static void Stop();
+
+static void SetWave();
+
+static void CalculateMeandr();
+
+static uint16 CalculatePeriodForTIM();
+
+static void CalculateSine();
+
+static void CalculateTriangle();
+
+static void ConfigTIM7(uint16 prescaler, uint16 period);
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void Beeper::Init()
 {
     __DMA1_CLK_ENABLE();
@@ -83,15 +101,15 @@ void Beeper::Init()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Beeper::Stop()
+static void Stop()
 {
-    HAL_DAC_Stop_DMA(&handleDAC, DAC_CHANNEL_1);
+    HAL_DAC_Stop_DMA(&Beeper::handleDAC, DAC_CHANNEL_1);
     isBeep = false;
     soundWarnIsBeep = false;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Beeper::ConfigTIM7(uint16 prescaler, uint16 period)
+static void ConfigTIM7(uint16 prescaler, uint16 period)
 {
     static TIM_HandleTypeDef htim =
     {
@@ -117,7 +135,7 @@ void Beeper::ConfigTIM7(uint16 prescaler, uint16 period)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-uint16 Beeper::CalculatePeriodForTIM()
+static uint16 CalculatePeriodForTIM()
 {
 #define MULTIPLIER_CALCPERFORTIM 30e6F
 
@@ -125,7 +143,7 @@ uint16 Beeper::CalculatePeriodForTIM()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Beeper::CalculateSine()
+static void CalculateSine()
 {
     for(int i = 0; i < POINTS_IN_PERIOD_SOUND; i++)
     {
@@ -150,7 +168,7 @@ void Beeper::CalculateSine()
 
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Beeper::CalculateMeandr()
+static void CalculateMeandr()
 {
     for(int i = 0; i < POINTS_IN_PERIOD_SOUND / 2; i++)
     {
@@ -164,7 +182,7 @@ void Beeper::CalculateMeandr()
 
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Beeper::CalculateTriangle()
+static void CalculateTriangle()
 {
     float k = 255.0F / POINTS_IN_PERIOD_SOUND;
     for(int i = 0; i < POINTS_IN_PERIOD_SOUND; i++)
@@ -175,7 +193,7 @@ void Beeper::CalculateTriangle()
 
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Beeper::SetWave()
+static void SetWave()
 {
     ConfigTIM7(0, CalculatePeriodForTIM());
 
@@ -199,7 +217,7 @@ void Beeper::SetWave()
 
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Beeper::Beep(const TypeWave::E newTypeWave, const float newFreq, const float newAmpl, const int newDuration)
+static void Beep(const TypeWave::E newTypeWave, const float newFreq, const float newAmpl, const int newDuration)
 {
     if (soundWarnIsBeep)
     {
@@ -223,7 +241,7 @@ void Beeper::Beep(const TypeWave::E newTypeWave, const float newFreq, const floa
     
     isBeep = true;
     
-    HAL_DAC_Start_DMA(&handleDAC, DAC_CHANNEL_1, (uint32_t*)points, POINTS_IN_PERIOD_SOUND, DAC_ALIGN_8B_R); //-V1032 //-V641
+    HAL_DAC_Start_DMA(&Beeper::handleDAC, DAC_CHANNEL_1, (uint32_t*)points, POINTS_IN_PERIOD_SOUND, DAC_ALIGN_8B_R); //-V1032 //-V641
 
     Timer::SetAndStartOnce(Timer::Type::StopSound, Stop, (uint)newDuration);
 }
@@ -239,7 +257,7 @@ void Beeper::WaitForCompletion()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Beeper::ButtonPress()
 {
-    Beep(TypeWave::Sine, 2000.0F, 0.75F, 50);
+    ::Beep(TypeWave::Sine, 2000.0F, 0.75F, 50);
     buttonIsPressed = true;
 }
 
@@ -248,7 +266,7 @@ void Beeper::ButtonRelease()
 {
     if (buttonIsPressed)
     {
-        Beep(TypeWave::Sine, 1000.0F, 0.5F, 50);
+        ::Beep(TypeWave::Sine, 1000.0F, 0.5F, 50);
         buttonIsPressed = false;
     }
 }
@@ -257,7 +275,7 @@ void Beeper::ButtonRelease()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Beeper::GovernorChangedValue()
 {
-    Beep(TypeWave::Sine, 1000.0F, 0.5F, 50);
+    ::Beep(TypeWave::Sine, 1000.0F, 0.5F, 50);
     buttonIsPressed = false;
 }
 
@@ -265,7 +283,7 @@ void Beeper::GovernorChangedValue()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Beeper::RegulatorShiftRotate()
 {
-    Beep(TypeWave::Sine, 1.0F, 0.2F, 3);
+    ::Beep(TypeWave::Sine, 1.0F, 0.2F, 3);
     buttonIsPressed = false;
 }
 
@@ -273,7 +291,7 @@ void Beeper::RegulatorShiftRotate()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Beeper::RegulatorSwitchRotate()
 {
-    Beep(TypeWave::Sine, 500.0F, 0.5F, 75);
+    ::Beep(TypeWave::Sine, 500.0F, 0.5F, 75);
     buttonIsPressed = false;
 }
 
@@ -281,7 +299,7 @@ void Beeper::RegulatorSwitchRotate()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Beeper::WarnBeepBad()
 {
-    Beep(TypeWave::Meandr, 500.0F, 1.0F, 500);
+    ::Beep(TypeWave::Meandr, 500.0F, 1.0F, 500);
     soundWarnIsBeep = true;
     buttonIsPressed = false;
 }
@@ -289,7 +307,7 @@ void Beeper::WarnBeepBad()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Beeper::WarnBeepGood()
 {
-    Beep(TypeWave::Triangle, 1000.0F, 1.0F, 500);
+    ::Beep(TypeWave::Triangle, 1000.0F, 1.0F, 500);
     buttonIsPressed = false;
 }
 
