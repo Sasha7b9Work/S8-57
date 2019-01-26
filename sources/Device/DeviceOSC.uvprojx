@@ -1476,24 +1476,14 @@
               <FilePath>.\src\Hardware\HAL\HAL_RTC.cpp</FilePath>
             </File>
             <File>
+              <FileName>HAL_TIM.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\HAL\HAL_TIM.cpp</FilePath>
+            </File>
+            <File>
               <FileName>HAL_UART.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Hardware\HAL\HAL_UART.cpp</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>Hardware/stm32</GroupName>
-          <Files>
-            <File>
-              <FileName>Timer4XX.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Hardware\stm32\Timer4XX.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Timer4XX.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Hardware\stm32\Timer4XX.h</FilePath>
             </File>
           </Files>
         </Group>

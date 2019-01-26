@@ -1,35 +1,20 @@
 #include "defines.h"
-#include <stm32f4xx.h>
-#include <stm32f4xx_hal.h>
 #include "log.h"
 #include "Timer.h"
-#include "stm32/Timer4XX.h"
 #include <climits>
+#include "Hardware/HAL/HAL.h"
 
 
 using namespace Hardware;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-#if defined(STM32F437xx) || defined(STM32F407xx) || defined(STM32F429xx)
-
-static Timer4XX tim2;   // Для тиков
-static Timer4XX tim3;   // Для таймеров
-
-#elif defined STM32F207xx
-
-static Timer2XX tim2;   // Для тиков
-static Timer2XX tim3;   // Для таймеров
-
-#endif
-
-
 typedef struct
 {
-    pFuncVV func;       // Функция таймера
-    uint    dTms;          // Период срабатывания, мс
-    uint    timeNextMS;    // Время следующего срабатывания. Если == 0xffffffff, то таймер неактивен
-    bool    repeat;        // Если true, будет срабатывать, пока не будет вызвана функция Timer_Disable()
+    pFuncVV func;           // Функция таймера
+    uint    dTms;           // Период срабатывания, мс
+    uint    timeNextMS;     // Время следующего срабатывания. Если == 0xffffffff, то таймер неактивен
+    bool    repeat;         // Если true, будет срабатывать, пока не будет вызвана функция Timer_Disable()
     uint8   notUsed0;
     uint8   notUsed1;
     uint8   notUsed2;
@@ -72,22 +57,24 @@ void Timer::Init()
         timers[i].timeNextMS = UINT_MAX; //-V2523
     }
    
-    tim3.Init(TIM3, 54000 - 1, TIM_COUNTERMODE_UP, 1, TIM_CLOCKDIVISION_DIV1);
-    tim3.EnabledIRQ(1, 1);
+    
 
-    tim2.Init(TIM2, 0, TIM_COUNTERMODE_UP, (uint)-1, TIM_CLOCKDIVISION_DIV1);
-    tim2.Start();
+    HAL::TIM3_::Init(54000 - 1, 1);
+    HAL::TIM3_::EnableIRQ(1, 1);
+
+    HAL::TIM2_::Init(0, (uint)-1);
+    HAL::TIM2_::Start();
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Timer::DeInit()
 {
-    tim2.Stop();
-    tim2.DeInit();
-    
-    tim3.DisableIRQ();
-    tim3.StopIT();
-    tim3.DeInit();
+    HAL::TIM2_::Stop();
+    HAL::TIM2_::DeInit();
+
+    HAL::TIM3_::DisableIRQ();
+    HAL::TIM3_::StopIT();
+    HAL::TIM3_::DeInit();
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -216,19 +203,19 @@ static void StartTIM(uint timeStopMS)
 
     uint dT = timeStopMS - TIME_MS;
 
-    tim3.StartIT((dT * 2) - 1);             // 10 соответствует 0.1мс. Т.е. если нам нужна 1мс, нужно засылать (100 - 1)
+    HAL::TIM3_::StartIT((dT * 2) - 1);             // 10 соответствует 0.1мс. Т.е. если нам нужна 1мс, нужно засылать (100 - 1)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void StopTIM()
 {
-    tim3.StopIT();
+    HAL::TIM3_::StopIT();
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Timer::PauseOnTime(uint timeMS)
 {
-    HAL_Delay(timeMS);
+    HAL::Delay(timeMS);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
