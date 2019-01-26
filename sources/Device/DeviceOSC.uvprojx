@@ -1306,11 +1306,6 @@
               <FilePath>.\src\FPGA\FPGA_Settings.h</FilePath>
             </File>
             <File>
-              <FileName>FPGA_Types.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\FPGA\FPGA_Types.cpp</FilePath>
-            </File>
-            <File>
               <FileName>FPGA_Types.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\FPGA\FPGA_Types.h</FilePath>
@@ -1434,6 +1429,11 @@
               <FileName>HAL_ADC3.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Hardware\HAL\HAL_ADC3.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>HAL_ADDRESSES.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\HAL\HAL_ADDRESSES.cpp</FilePath>
             </File>
             <File>
               <FileName>HAL_DAC.cpp</FileName>

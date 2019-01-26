@@ -11,8 +11,8 @@
 #include "Hardware/HAL/HAL.h"
 
 
-using namespace FPGA::ADDR;
 using namespace FPGA::HAL::GPIO;
+using namespace HAL::ADDRESSES::FPGA;
 using namespace Osci::Settings;
 
 using HAL::FSMC;

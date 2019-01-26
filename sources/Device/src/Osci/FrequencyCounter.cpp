@@ -18,7 +18,7 @@
 
 
 using namespace Display::Primitives;
-using namespace FPGA::ADDR;
+using namespace HAL::ADDRESSES::FPGA;
 
 using FPGA::HAL::GetFlag;
 using HAL::FSMC;

@@ -7,7 +7,7 @@
 #include "Recorder/Recorder_Storage.h"
 
 
-using namespace FPGA::ADDR;
+using namespace HAL::ADDRESSES::FPGA;
 
 using HAL::FSMC;
 

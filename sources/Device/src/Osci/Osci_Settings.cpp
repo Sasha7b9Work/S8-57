@@ -16,7 +16,7 @@
 #endif
 
 
-using namespace FPGA::ADDR;
+using namespace HAL::ADDRESSES::FPGA;
 
 using FPGA::HAL::GPIO::Pin;
 using FPGA::Settings::ModeCouple;

@@ -13,7 +13,7 @@
 #endif
 
 
-using namespace FPGA::ADDR;
+using namespace HAL::ADDRESSES::FPGA;
 
 using HAL::FSMC;
 

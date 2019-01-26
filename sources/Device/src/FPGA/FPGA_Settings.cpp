@@ -17,9 +17,9 @@
 
 
 using namespace Display::Primitives;
-using namespace FPGA::ADDR;
 using namespace FPGA::HAL::GPIO;
 using namespace FPGA::Settings;
+using namespace HAL::ADDRESSES::FPGA;
 using namespace Osci::Settings;
 
 using HAL::FSMC;

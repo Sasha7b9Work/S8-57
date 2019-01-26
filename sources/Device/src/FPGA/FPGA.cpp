@@ -17,7 +17,7 @@
 #include "Recorder/Recorder.h"
 
 
-using namespace FPGA::ADDR;
+using namespace HAL::ADDRESSES::FPGA;
 using namespace FPGA::HAL::GPIO;
 using namespace FPGA::Settings;
 using namespace Osci::Settings;
