@@ -1,4 +1,3 @@
-#include <stm32f4xx_hal.h>
 #include "defines.h"
 #include "Display/Symbols.h"
 #include "MenuItems.h"
