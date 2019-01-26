@@ -1,5 +1,6 @@
 #pragma once
 #include "Settings/Settings.h"
+#include <stm32f4xx_hal.h>
 
 
 /*

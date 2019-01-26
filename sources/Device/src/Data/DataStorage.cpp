@@ -4,6 +4,7 @@
 #include "Reader.h"
 #include "Utils/Math.h"
 #include <cstring>
+#include <stm32f4xx_hal.h>
 
 
 using namespace FPGA;

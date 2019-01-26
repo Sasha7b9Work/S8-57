@@ -15,10 +15,13 @@ using namespace Display::Primitives;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-char                Multimeter::buffer[11] = {0};
-UART_HandleTypeDef  Multimeter::handlerUART;
+char   Multimeter::buffer[11] = {0};
 /// В этот буфер записывается информация в обработчике прерывания приёма
 static uint8 bufferUART[10];
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+static void ReceiveCallback();
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -41,31 +44,13 @@ void Multimeter::ChangeMode()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Multimeter::Init()
 {
-    handlerUART.Instance = USART3;
-    handlerUART.Init.BaudRate = 9600;
-    handlerUART.Init.WordLength = UART_WORDLENGTH_8B;
-    handlerUART.Init.StopBits = UART_STOPBITS_1;
-    handlerUART.Init.Parity = UART_PARITY_NONE;
-    handlerUART.Init.Mode = UART_MODE_TX_RX;
-    handlerUART.Init.HwFlowCtl = UART_HWCONTROL_NONE;
-    handlerUART.Init.OverSampling = UART_OVERSAMPLING_16;
+    HAL::UART_::Init(ReceiveCallback);
 
-    if (HAL_UART_Init(&handlerUART) != HAL_OK)
-    {
-        ERROR_HANDLER();
-    }
+    uint8 send[4] = { 0x02, 'V', '0', 0x0a };
 
-    uint8 send[4] = {0x02, 'V', '0', 0x0a};
+    HAL::UART_::Transmit(send, 4, 10);
 
-    HAL_NVIC_SetPriority(USART3_IRQn, 0, 1);
-    HAL_NVIC_EnableIRQ(USART3_IRQn);
-
-    HAL_UART_Transmit(&handlerUART, send, 4, 10);
-
-    if (HAL_UART_Receive_IT(&handlerUART, bufferUART, 10) != HAL_OK)
-    {
-        ERROR_HANDLER();
-    }
+    HAL::UART_::StartReceiveIT(bufferUART, 10);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -79,8 +64,10 @@ void Multimeter::ChangeAVP()
 {
     ChangeMode();
     char send[4] = {0x02, 'Z', MULTI_AVP == AVP::On ? '1' : '0', 0x0a};
-    HAL_UART_Transmit(&handlerUART, (uint8*)send, 4, 100);
-    HAL_UART_Receive_IT(&handlerUART, bufferUART, 10);
+
+    HAL::UART_::Transmit(send, 4, 100);
+
+    HAL::UART_::StartReceiveIT(bufferUART, 10);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -103,23 +90,15 @@ void Multimeter::Update()
     char symbol = Measure(MULTI_MEASURE).Symbol();
 
     uint8 send[4] = {0x02, (uint8)symbol, (uint8)(range + 0x30), 0x0a};
-    HAL_UART_Transmit(&handlerUART, send, 4, 100);
-    HAL_UART_Receive_IT(&handlerUART, bufferUART, 10);
+
+    HAL::UART_::Transmit(send, 4, 100);
+
+    HAL::UART_::StartReceiveIT(bufferUART, 10);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void HAL_UART_RxCpltCallback(UART_HandleTypeDef *)
+static void ReceiveCallback()
 {
     Multimeter::SetMeasure(bufferUART);
-
-    HAL_UART_Receive_IT(&Multimeter::handlerUART, bufferUART, 10);
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void HAL_UART_ErrorCallback(UART_HandleTypeDef *huart)
-{
-    if(huart == &Multimeter::handlerUART)
-    {
-        huart = &Multimeter::handlerUART;
-    }
+    HAL::UART_::StartReceiveIT(bufferUART, 10);
 }

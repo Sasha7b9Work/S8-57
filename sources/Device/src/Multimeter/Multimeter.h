@@ -1,5 +1,4 @@
 #pragma once
-#include <stm32f4xx_hal.h>
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -30,9 +29,6 @@ namespace Multimeter
     void ChangeAVP();
     /// Через эту функцию поступает измерение от прибора
     static void SetMeasure(const uint8 buffer[10]);
-
-    extern UART_HandleTypeDef handlerUART;
-
     /// Режим измерений мультиметра
     struct Measure
     {

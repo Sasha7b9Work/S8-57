@@ -10,6 +10,8 @@
 #include "Utils/Math.h"
 #include "Settings/Settings.h"
 
+#include <stm32f4xx_hal.h>
+
 
 using namespace Display::Primitives;
 using namespace FPGA;

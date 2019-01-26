@@ -1465,6 +1465,11 @@
               <FileType>8</FileType>
               <FilePath>.\src\Hardware\HAL\HAL_RTC.cpp</FilePath>
             </File>
+            <File>
+              <FileName>HAL_UART.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\HAL\HAL_UART.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
