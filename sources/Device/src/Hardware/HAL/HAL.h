@@ -30,6 +30,12 @@ namespace Beeper
     class DAC_;
 }
 
+namespace Timer
+{
+    class TIM2_;
+    class TIM3_;
+}
+
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 namespace HAL
@@ -103,6 +109,12 @@ namespace HAL
     class TIM2_
     {
     public:
+        static uint TimeUS();
+
+        static uint TimeTicks();
+
+    friend class Timer::TIM2_;
+    private:
         static void Init(uint prescaler, uint period);
 
         static void DeInit();
@@ -110,16 +122,13 @@ namespace HAL
         static void Start();
 
         static void Stop();
-
-        static uint TimeUS();
-
-        static uint TimeTicks();
     };
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     class TIM3_
     {
-    public:
+    friend class Timer::TIM3_;
+    private:
         static void Init(uint prescaler, uint period);
 
         static void DeInit();

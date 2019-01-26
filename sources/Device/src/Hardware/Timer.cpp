@@ -44,6 +44,71 @@ static uint NearestTime();
 static void TuneTIM(::Timer::Type::E type);
 
 
+namespace Timer
+{
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    class TIM2_
+    {
+    public:
+        static void Init(uint prescaler, uint period)
+        {
+            HAL::TIM2_::Init(prescaler, period);
+        }
+        static void DeInit()
+        {
+            HAL::TIM2_::DeInit();
+        }
+        static void Start()
+        {
+            HAL::TIM2_::Start();
+        }
+        static void Stop()
+        {
+            HAL::TIM2_::Stop();
+        }
+    };
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    class TIM3_
+    {
+    public:
+        static void Init(uint prescaler, uint period)
+        {
+            HAL::TIM3_::Init(prescaler, period);
+        }
+
+        static void DeInit()
+        {
+            HAL::TIM3_::DeInit();
+        }
+        
+        //static void Start();
+        //
+        //static void Stop();
+        //
+        static void EnableIRQ(uint mainPriority, uint subPriority)
+        {
+            HAL::TIM3_::EnableIRQ(mainPriority, subPriority);
+        }
+        
+        static void DisableIRQ()
+        {
+            HAL::TIM3_::DisableIRQ();
+        }
+        
+        static void StartIT(uint period)
+        {
+            HAL::TIM3_::StartIT(period);
+        }
+        
+        static void StopIT()
+        {
+            HAL::TIM3_::StopIT();
+        }
+    };
+}
+
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 bool ::Timer::IsRun(::Timer::Type::E type)
 {
@@ -57,25 +122,23 @@ void Timer::Init()
     {
         timers[i].timeNextMS = UINT_MAX; //-V2523
     }
-   
-    
 
-    HAL::TIM3_::Init(54000 - 1, 1);
-    HAL::TIM3_::EnableIRQ(1, 1);
+    TIM3_::Init(54000 - 1, 1);
+    TIM3_::EnableIRQ(1, 1);
 
-    HAL::TIM2_::Init(0, (uint)-1);
-    HAL::TIM2_::Start();
+    TIM2_::Init(0, (uint)-1);
+    TIM2_::Start();
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Timer::DeInit()
 {
-    HAL::TIM2_::Stop();
-    HAL::TIM2_::DeInit();
+    TIM2_::Stop();
+    TIM2_::DeInit();
 
-    HAL::TIM3_::DisableIRQ();
-    HAL::TIM3_::StopIT();
-    HAL::TIM3_::DeInit();
+    TIM3_::DisableIRQ();
+    TIM3_::StopIT();
+    TIM3_::DeInit();
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -204,13 +267,13 @@ static void StartTIM(uint timeStopMS)
 
     uint dT = timeStopMS - TIME_MS;
 
-    HAL::TIM3_::StartIT((dT * 2) - 1);             // 10 соответствует 0.1мс. Т.е. если нам нужна 1мс, нужно засылать (100 - 1)
+    Timer::TIM3_::StartIT((dT * 2) - 1);             // 10 соответствует 0.1мс. Т.е. если нам нужна 1мс, нужно засылать (100 - 1)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void StopTIM()
 {
-    HAL::TIM3_::StopIT();
+    Timer::TIM3_::StopIT();
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
