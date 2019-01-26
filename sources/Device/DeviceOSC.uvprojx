@@ -1356,11 +1356,6 @@
               <FilePath>.\src\Hardware\Clock.h</FilePath>
             </File>
             <File>
-              <FileName>CPU_IT.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Hardware\CPU_IT.cpp</FilePath>
-            </File>
-            <File>
               <FileName>EEPROM.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Hardware\EEPROM.cpp</FilePath>
@@ -1459,6 +1454,11 @@
               <FileName>HAL_UART.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Hardware\HAL\HAL_UART.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>HAL_IT.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\HAL\HAL_IT.cpp</FilePath>
             </File>
           </Files>
         </Group>

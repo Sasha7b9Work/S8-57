@@ -38,24 +38,24 @@ static void CalculateTriangle();
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 namespace Beeper
 {
-    class DAC_
+    class DAC1_
     {
     public:
         static void Init()
         {
-            HAL::DAC_::Init();
+            HAL::DAC1_::Init();
         }
         static void StartDMA(void *_points, uint numPoints)
         {
-            HAL::DAC_::StartDMA(_points, numPoints);
+            HAL::DAC1_::StartDMA(_points, numPoints);
         }
         static void StopDMA()
         {
-            HAL::DAC_::StopDMA();
+            HAL::DAC1_::StopDMA();
         }
         static void ConfigTIM7(uint16 prescaler, uint16 period)
         {
-            HAL::DAC_::ConfigTIM7(prescaler, period);
+            HAL::DAC1_::ConfigTIM7(prescaler, period);
         }
     };
 }
@@ -64,13 +64,13 @@ namespace Beeper
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void Beeper::Init()
 {
-    DAC_::Init();
+    DAC1_::Init();
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void Stop()
 {
-    Beeper::DAC_::StopDMA();
+    Beeper::DAC1_::StopDMA();
     isBeep = false;
     soundWarnIsBeep = false;
 }
@@ -136,7 +136,7 @@ static void CalculateTriangle()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void SetWave()
 {
-    Beeper::DAC_::ConfigTIM7(0, CalculatePeriodForTIM());
+    Beeper::DAC1_::ConfigTIM7(0, CalculatePeriodForTIM());
 
     if(typeWave == TypeWave::Sine)
     {
@@ -182,7 +182,7 @@ static void Beep(const TypeWave::E newTypeWave, const float newFreq, const float
     
     isBeep = true;
 
-    Beeper::DAC_::StartDMA(points, POINTS_IN_PERIOD_SOUND);
+    Beeper::DAC1_::StartDMA(points, POINTS_IN_PERIOD_SOUND);
 
     Timer::SetAndStartOnce(Timer::Type::StopSound, Stop, (uint)newDuration);
 }

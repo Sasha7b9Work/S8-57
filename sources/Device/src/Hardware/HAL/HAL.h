@@ -29,7 +29,7 @@ namespace FPGA
 
 namespace Beeper
 {
-    class DAC_;
+    class DAC1_;
 }
 
 namespace Timer
@@ -94,9 +94,9 @@ namespace HAL
     };
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    class DAC_
+    class DAC1_
     {
-    friend class Beeper::DAC_;
+    friend class Beeper::DAC1_;
     private:
         static void Init();
 
