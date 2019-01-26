@@ -39,15 +39,41 @@ static void CalculateSine();
 static void CalculateTriangle();
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+namespace Beeper
+{
+    class DAC_
+    {
+    public:
+        static void Init()
+        {
+            HAL::DAC_::Init();
+        }
+        static void StartDMA(void *_points, uint numPoints)
+        {
+            HAL::DAC_::StartDMA(_points, numPoints);
+        }
+        static void StopDMA()
+        {
+            HAL::DAC_::StopDMA();
+        }
+        static void ConfigTIM7(uint16 prescaler, uint16 period)
+        {
+            HAL::DAC_::ConfigTIM7(prescaler, period);
+        }
+    };
+}
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void Beeper::Init()
 {
-    HAL::DAC_::Init();
+    DAC_::Init();
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void Stop()
 {
-    HAL::DAC_::StopDMA();
+    Beeper::DAC_::StopDMA();
     isBeep = false;
     soundWarnIsBeep = false;
 }
@@ -113,7 +139,7 @@ static void CalculateTriangle()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void SetWave()
 {
-    HAL::DAC_::ConfigTIM7(0, CalculatePeriodForTIM());
+    Beeper::DAC_::ConfigTIM7(0, CalculatePeriodForTIM());
 
     if(typeWave == TypeWave::Sine)
     {
@@ -159,7 +185,7 @@ static void Beep(const TypeWave::E newTypeWave, const float newFreq, const float
     
     isBeep = true;
 
-    HAL::DAC_::StartDMA(points, POINTS_IN_PERIOD_SOUND);
+    Beeper::DAC_::StartDMA(points, POINTS_IN_PERIOD_SOUND);
 
     Timer::SetAndStartOnce(Timer::Type::StopSound, Stop, (uint)newDuration);
 }
