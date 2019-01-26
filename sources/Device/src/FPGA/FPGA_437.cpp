@@ -15,8 +15,11 @@
 #include "Utils/Values.h"
 #include <stdlib.h>
 
+#include "Hardware/HAL/HAL.h"
+
 
 using namespace FPGA::HAL::GPIO;
+
 
 extern bool givingStart;
 
@@ -35,7 +38,7 @@ void FPGA::Init()
 
     AD9286::Init();
 
-    HAL::_ADC::Init();
+    ::HAL::ADC3_::Init();
 
     DataStorage::Init(Device::State::CurrentMode());
 }
