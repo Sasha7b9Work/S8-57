@@ -1396,16 +1396,6 @@
               <FilePath>.\src\Hardware\FSMC_437.cpp</FilePath>
             </File>
             <File>
-              <FileName>GPIO.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Hardware\GPIO.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>GPIO.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Hardware\GPIO.h</FilePath>
-            </File>
-            <File>
               <FileName>Hardware.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Hardware\Hardware.cpp</FilePath>

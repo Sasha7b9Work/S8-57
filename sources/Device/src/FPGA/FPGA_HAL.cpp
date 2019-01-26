@@ -2,7 +2,6 @@
 #include "defines.h"
 #include "FPGA_HAL.h"
 #include "Hardware/FSMC.h"
-#include "Hardware/GPIO.h"
 #include "Hardware/Timer.h"
 #include "Settings/Settings.h"
 #include "Settings/SettingsTime.h"
@@ -20,6 +19,27 @@ using Hardware::Timer;
 
 
 extern bool givingStart;
+
+class GPIO
+{
+public:
+    static void SetInputPullDown(GPIO_TypeDef *pio, uint numPin)
+    {
+        pio->MODER &= ~(3U << (numPin * 2));
+
+        pio->PUPDR &= ~(GPIO_PUPDR_PUPDR0 << (numPin * 2U)); //-V684
+        pio->PUPDR |= GPIO_PULLDOWN << (numPin * 2U);
+    }
+    static void SetOutputPP_PullDown(GPIO_TypeDef *pio, uint numPin)
+    {
+        pio->MODER &= ~(GPIO_MODER_MODER0 << (numPin * 2));
+        pio->MODER |= (GPIO_MODE_OUTPUT_PP << (numPin * 2));
+
+        pio->PUPDR &= ~(GPIO_PUPDR_PUPDR0 << (numPin * 2U)); //-V684
+        pio->PUPDR |= GPIO_PULLDOWN << (numPin * 2U);
+    }
+private:
+};
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

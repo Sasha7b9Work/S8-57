@@ -1,4 +1,3 @@
-#include <stm32f4xx.h>
 #include "defines.h"
 #include "device.h"
 #include "log.h"
@@ -8,7 +7,6 @@
 #include "FPGA/FPGA_HAL.h"
 #include "FPGA/FPGA_Settings.h"
 #include "Hardware/FSMC.h"
-#include "Hardware/GPIO.h"
 #include "Hardware/Timer.h"
 #include "Menu/Pages/Include/PageChannels.h"
 #include "Utils/Math.h"
