@@ -12,3 +12,9 @@ void HAL::NVIC_::EnableIRQ(uint irq)
 {
     HAL_NVIC_EnableIRQ((IRQn_Type)irq);
 }
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void HAL::NVIC_::DisableIRQ(uint irq)
+{
+    HAL_NVIC_DisableIRQ((IRQn_Type)irq);
+}

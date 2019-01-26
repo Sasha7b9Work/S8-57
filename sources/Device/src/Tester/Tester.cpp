@@ -1,4 +1,3 @@
-#include <stm32f4xx_hal.h>
 #include "defines.h"
 #include "FPGA/FPGA.h"
 #include "FPGA/FPGA_Math.h"
@@ -119,7 +118,7 @@ void Tester::Disable() // -V2506
 
     enabled = false;
 
-    HAL_NVIC_DisableIRQ(EXTI9_5_IRQn);      // Выключаем прерывания от тактовых импульсов
+    HAL::NVIC_::DisableIRQ(HAL::NVIC_::irqEXTI9_5);      // Выключаем прерывания от тактовых импульсов
 
     HAL::PORTS::Set(Port_TEST_ON, Pin_TEST_ON);
 
@@ -199,15 +198,6 @@ void Tester::ReadData()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void HAL_GPIO_EXTI_Callback(uint16_t pin)
-{
-    if (pin == GPIO_PIN_9)      // Прерывание от тестер-компонента
-    {
-        Tester::ProcessStep();
-    }
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Tester::LoadPolarity()
 {
     // Устанавливаем полярность
@@ -282,4 +272,14 @@ String Tester::Shift::ToString(Scale::E scale) // -V2506
     float shiftAbs = FPGA::Math::RShift2Abs(shift,  (Range::E)scale) * 1e-3F;
 
     return Current(shiftAbs).ToString();
+}
+
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void HAL_GPIO_EXTI_Callback(uint16 pin)
+{
+    if (pin == HAL::PORTS::Pin::_9)      // Прерывание от тестер-компонента
+    {
+        Tester::ProcessStep();
+    }
 }
