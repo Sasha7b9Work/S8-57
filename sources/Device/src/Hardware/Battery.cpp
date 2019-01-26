@@ -14,20 +14,6 @@ using namespace Display::Primitives;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/// Читает напряжение с АЦП в соответствии с установками
-static uint ReadVoltage();
-/// Перевод считанного значения ЦАП источника в вольты
-static float PowerADC_ToVoltage(float value);
-/// Перевод считанного значения ЦАП батареи в вольты
-static float BatADC_ToVoltage(float value);
-/// Читает АЦП батареи
-static uint ReadValueAKK();
-/// Читает АЦП зарядного устройства
-static uint ReadValuePOW();
-/// Рассчитать процент отставшегося заряда
-static float CalculatePercents(float volts);
-/// Отобразить заряд батареи в графическом виде
-static void DrawBatteryUGO(int x, int y, float procents);
 /// Максимальное значение, которое возможно считать с АЦП
 static const float MAX_ADC_REL = (float)((1 << 12) - 1);
 /// Напряжение, соответствующее MAX_ADC_REL
@@ -36,6 +22,33 @@ static const float MAX_ADC_ABS = 2.91F;
 static const float VOLTAGE_100_PERCENTS = 8.2F;
 
 static const float VOLTAGE_0_PERCENTS = 6.0F;
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/// Перевод считанного значения ЦАП источника в вольты
+static float PowerADC_ToVoltage(float value);
+/// Перевод считанного значения ЦАП батареи в вольты
+static float BatADC_ToVoltage(float value);
+/// Рассчитать процент отставшегося заряда
+static float CalculatePercents(float volts);
+/// Отобразить заряд батареи в графическом виде
+static void DrawBatteryUGO(int x, int y, float procents);
+
+
+namespace Hardware
+{
+    class BatteryPrivate
+    {
+    public:
+        /// Читает напряжение с АЦП в соответствии с установками
+        static uint ReadVoltage();
+        /// Читает АЦП батареи
+        static uint ReadValueAKK();
+        /// Читает АЦП зарядного устройства
+        static uint ReadValuePOW();
+    };
+}
+
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void Hardware::Battery::Init()
@@ -48,7 +61,7 @@ float Hardware::Battery::GetVoltageAKK(uint *adc)
 {
     static Utils::AroundAverager<float> averager(32);
 
-    *adc = ReadValueAKK();
+    *adc = BatteryPrivate::ReadValueAKK();
 
     averager.Push((float)*adc);
 
@@ -60,7 +73,7 @@ float Hardware::Battery::GetVoltagePOW(uint *adc)
 {
     static Utils::AroundAverager<float> averager(32);
 
-    *adc = ReadValuePOW();
+    *adc = BatteryPrivate::ReadValuePOW();
 
     averager.Push((float)*adc);
 
@@ -68,13 +81,13 @@ float Hardware::Battery::GetVoltagePOW(uint *adc)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static uint ReadVoltage()
+uint Hardware::BatteryPrivate::ReadVoltage()
 {
     return HAL::ADC1_::ReadValue();
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static uint ReadValueAKK()
+uint Hardware::BatteryPrivate::ReadValueAKK()
 {
     HAL::ADC1_::SetActiveChannel2();
 
@@ -82,7 +95,7 @@ static uint ReadValueAKK()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static uint ReadValuePOW()
+uint Hardware::BatteryPrivate::ReadValuePOW()
 {
     HAL::ADC1_::SetActiveChannel9();
 

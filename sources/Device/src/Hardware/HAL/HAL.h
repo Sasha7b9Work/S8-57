@@ -11,6 +11,8 @@
 namespace Hardware
 {
     class Clock;
+    class Battery;
+    class BatteryPrivate;
 }
 
 namespace HAL
@@ -29,7 +31,9 @@ namespace HAL
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     class ADC1_
     {
-    public:
+    friend class Hardware::Battery;
+    friend class Hardware::BatteryPrivate;
+    private:
         static void Init();
 
         static void SetActiveChannel2();
