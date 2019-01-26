@@ -13,6 +13,7 @@ namespace Hardware
     class Clock;
     class Battery;
     class ADC1_;
+    class Timer;
 }
 
 namespace Multimeter
@@ -102,7 +103,8 @@ namespace HAL
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     class TIM2_
     {
-    public:
+    friend class Hardware::Timer;
+    private:
         static void Init(uint prescaler, uint period);
 
         static void DeInit();
