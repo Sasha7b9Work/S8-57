@@ -5,25 +5,6 @@
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-static SPI_HandleTypeDef hSPI2 =
-{
-    SPI2,
-    {
-        SPI_MODE_MASTER,
-        SPI_DIRECTION_2LINES,
-        SPI_DATASIZE_8BIT,
-        SPI_POLARITY_HIGH,
-        SPI_PHASE_1EDGE,
-        SPI_NSS_SOFT,
-        SPI_BAUDRATEPRESCALER_2,
-        SPI_FIRSTBIT_MSB,
-        SPI_TIMODE_DISABLE,
-        SPI_CRCCALCULATION_DISABLE,
-        10
-    },
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, HAL_UNLOCKED, HAL_SPI_STATE_RESET, 0
-};
-
 #define PIN_OUT     GPIOC, GPIO_PIN_3
 #define PIN_IN      GPIOC, GPIO_PIN_2
 #define PIN_CLK     GPIOB, GPIO_PIN_10
