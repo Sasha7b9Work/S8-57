@@ -86,8 +86,6 @@ namespace FPGA
                 explicit Pin(E v) : value(v) {};
             };
 
-            GPIO_TypeDef *GetPort(Pin::E pin);
-
             uint GetPin(Pin::E pin);
 
             void WritePin(Pin::E pin, int enable);
