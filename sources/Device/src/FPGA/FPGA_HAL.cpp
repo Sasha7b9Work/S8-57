@@ -1,3 +1,4 @@
+#include <stm32f4xx_hal.h>
 #include "defines.h"
 #include "FPGA_HAL.h"
 #include "Hardware/FSMC.h"

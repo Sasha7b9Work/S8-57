@@ -1,3 +1,4 @@
+#include <stm32f4xx_hal.h>
 #include "defines.h"
 #include "device.h"
 #include "FPGA/FPGA_Settings.h"
