@@ -44,13 +44,13 @@ void Multimeter::ChangeMode()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Multimeter::Init()
 {
-    HAL::UART_::Init(ReceiveCallback);
+    HAL::USART3_::Init(ReceiveCallback);
 
     uint8 send[4] = { 0x02, 'V', '0', 0x0a };
 
-    HAL::UART_::Transmit(send, 4, 10);
+    HAL::USART3_::Transmit(send, 4, 10);
 
-    HAL::UART_::StartReceiveIT(bufferUART, 10);
+    HAL::USART3_::StartReceiveIT(bufferUART, 10);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -65,9 +65,9 @@ void Multimeter::ChangeAVP()
     ChangeMode();
     char send[4] = {0x02, 'Z', MULTI_AVP == AVP::On ? '1' : '0', 0x0a};
 
-    HAL::UART_::Transmit(send, 4, 100);
+    HAL::USART3_::Transmit(send, 4, 100);
 
-    HAL::UART_::StartReceiveIT(bufferUART, 10);
+    HAL::USART3_::StartReceiveIT(bufferUART, 10);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -91,14 +91,14 @@ void Multimeter::Update()
 
     uint8 send[4] = {0x02, (uint8)symbol, (uint8)(range + 0x30), 0x0a};
 
-    HAL::UART_::Transmit(send, 4, 100);
+    HAL::USART3_::Transmit(send, 4, 100);
 
-    HAL::UART_::StartReceiveIT(bufferUART, 10);
+    HAL::USART3_::StartReceiveIT(bufferUART, 10);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void ReceiveCallback()
 {
     Multimeter::SetMeasure(bufferUART);
-    HAL::UART_::StartReceiveIT(bufferUART, 10);
+    HAL::USART3_::StartReceiveIT(bufferUART, 10);
 }
