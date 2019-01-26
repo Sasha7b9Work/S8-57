@@ -1,4 +1,3 @@
-#include <stm32f4xx_hal.h>
 #include "defines.h"
 #include "Settings/Settings.h"
 #include "Menu/Pages/Include/Definition.h"

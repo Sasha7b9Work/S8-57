@@ -1,4 +1,3 @@
-#include <stm32f4xx.h>
 #include "defines.h"
 #include "Menu/Pages/Include/PageChannels.h"
 #include "Display/Display.h"

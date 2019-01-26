@@ -1,4 +1,3 @@
-#include <stm32f4xx.h>
 #include "defines.h"
 #include "Display/Painter.h"
 #include "Menu/Pages/Include/PageDisplay.h"
