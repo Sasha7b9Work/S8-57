@@ -30,29 +30,4 @@ public:
     static void RunFunctionAfterInteractionWitchPanel(pFuncTester func);
     /// Читать байт сразу же
     static uint8 ReadByteNow();
-private:
-
-    enum ModeFSMC
-    {
-        ModeNone,
-        ModePanelWrite,
-        ModePanelRead,
-        ModeFPGA
-    };
-
-    static void ReadByte();
-
-    static void ConfigureForFPGA();
-    /// Расставляет биты значенния data по ножкам D0...D7
-    static void SetOutData(uint8 data);
-    /// Возвращает значение с ножек D0...D7
-    static uint8 GetOutData();
-    /// Возвращает состояние PAN_0, PAN_1
-    static uint8 ReadPAN();
-
-    static ModeFSMC mode;
-
-    static bool interchangeWithPanel;
-    /// Если не равно нулю, нужно выполнить эту функцию после завершения обмена с панелью
-    static pFuncTester funcAfterInteractionWithPanel;
 };

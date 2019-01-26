@@ -30,9 +30,18 @@
 #define PAN_READY_RECEIVE               (ReadPAN() == 2)
 #define PAN_RECIEVE_TRANSMIT_CONFIRM    (ReadPAN() == 3)
 
-FSMC::ModeFSMC FSMC::mode = ModeNone;
-bool           FSMC::interchangeWithPanel = false;
-pFuncTester    FSMC::funcAfterInteractionWithPanel = 0;
+enum ModeFSMC
+{
+    ModeNone,
+    ModePanelWrite,
+    ModePanelRead,
+    ModeFPGA
+};
+
+static      ModeFSMC    mode = ModeNone;
+bool        interchangeWithPanel = false;
+/// Если не равно нулю, нужно выполнить эту функцию после завершения обмена с панелью
+pFuncTester funcAfterInteractionWithPanel = 0;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #define CONFIGURE_TO_READ_PANEL                                             \
@@ -52,6 +61,17 @@ pFuncTester    FSMC::funcAfterInteractionWithPanel = 0;
     GPIOE->MODER &= HEX_FROM_2(ffc0, 3fff);                                 \
     GPIOE->MODER |= HEX_FROM_2(0015, 4000);                                 \
     mode = ModePanelWrite;
+
+
+static void ReadByte();
+
+static void ConfigureForFPGA();
+/// Расставляет биты значенния data по ножкам D0...D7
+static void SetOutData(uint8 data);
+/// Возвращает значение с ножек D0...D7
+static uint8 GetOutData();
+/// Возвращает состояние PAN_0, PAN_1
+static uint8 ReadPAN();
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -165,7 +185,7 @@ void FSMC::Init()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void FSMC::ConfigureForFPGA()
+static void ConfigureForFPGA()
 {
     static const GPIO_InitTypeDef isGPIO =
     {   //    NOE          NWE          NE1
@@ -267,7 +287,7 @@ void FSMC::WriteToPanel(const uint8 *data, uint length)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void FSMC::ReadByte()
+static void ReadByte()
 {
     CONFIGURE_TO_READ_PANEL;
 LabelReadByte:
@@ -312,7 +332,7 @@ LabelReadByte:
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-uint8 FSMC::ReadPAN()
+static uint8 ReadPAN()
 {
     uint8 bit0 = (uint8)(HAL_GPIO_ReadPin(PORT_PAN_0, PIN_PAN_0) == GPIO_PIN_SET ? 1 : 0);
     uint8 bit1 = (uint8)(HAL_GPIO_ReadPin(PORT_PAN_1, PIN_PAN_1) == GPIO_PIN_SET ? 1 : 0);
@@ -320,7 +340,7 @@ uint8 FSMC::ReadPAN()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void FSMC::SetOutData(uint8 data)
+static void SetOutData(uint8 data)
 {
     if (mode != ModePanelWrite)
     {
@@ -335,7 +355,7 @@ void FSMC::SetOutData(uint8 data)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-uint8 FSMC::GetOutData()
+static uint8 GetOutData()
 {
     if (mode != ModePanelRead)
     {
@@ -358,3 +378,40 @@ void FSMC::RunFunctionAfterInteractionWitchPanel(pFuncTester func)
 {
     funcAfterInteractionWithPanel = func;
 }
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void FSMC::WriteToFPGA16(uint8 *address, uint16 value)
+{
+    if (mode != ModeFPGA)
+    {
+        ConfigureForFPGA();
+    }
+
+    PAUSE_ON_TICKS(100);    /// \todo Без этой строки замедлен вывод при включённой оптимизации и TBase >= 0.5мс
+
+    *address = (uint8)value;
+    *(address + 1) = (uint8)(value >> 8);
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void FSMC::WriteToFPGA8(uint8 *address, uint8 value)
+{
+    if (mode != ModeFPGA)
+    {
+        ConfigureForFPGA();
+    }
+
+    *address = value;
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+uint8 FSMC::ReadFromFPGA(const uint8 *address)
+{
+    if (mode != ModeFPGA)
+    {
+        ConfigureForFPGA();
+    }
+
+    return *address;
+}
+
