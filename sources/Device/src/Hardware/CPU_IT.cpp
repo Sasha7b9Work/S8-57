@@ -13,6 +13,8 @@
 
 using namespace Osci::Settings;
 
+using Hardware::Timer;
+
 
 #ifdef __cplusplus
 extern "C" {

@@ -20,6 +20,7 @@ using namespace FPGA::ADDR;
 
 using FPGA::HAL::GPIO::Pin;
 using FPGA::Settings::ModeCouple;
+using Hardware::Timer;
 using Osci::Settings::Range;
 
 
