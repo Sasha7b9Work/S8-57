@@ -32,6 +32,10 @@ namespace HAL
     public:
         static void Init();
 
+        static void SetActiveChannel2();
+
+        static void SetActiveChannel9();
+
         static uint ReadValue();
     };
 }

@@ -461,7 +461,7 @@ int CalculatePeriodAccurately(Chan::E ch)
         period[ch] = 0;
         float pic = CalculatePicRel(ch);
 
-        if(pic == Float::ERROR)
+        if(pic == Float::ERROR) //-V550
         {
             EXIT_FROM_PERIOD_ACCURACY
         }
@@ -548,7 +548,7 @@ float CalculateFreq(Chan::E ch)
 {
     float period = CalculatePeriod(ch);
 
-    return (period == Float::ERROR) ? Float::ERROR : 1.0F / period;
+    return (period == Float::ERROR) ? Float::ERROR : 1.0F / period; //-V550
 }
 
 
@@ -762,7 +762,7 @@ float CalculateMinSteadyRel(Chan::E ch)
     if(!minSteadyIsCalculating[ch])
     {
         float aveValue = CalculateAverageRel(ch);
-        if(aveValue == Float::ERROR)
+        if(aveValue == Float::ERROR) //-V550
         {
             min[ch] = Float::ERROR;
         }
@@ -778,8 +778,8 @@ float CalculateMinSteadyRel(Chan::E ch)
                 uint8 d = *data++;
                 if(d < aveValue)
                 {
-                    sum += d;
-                    numSums++;
+                    sum += d; //-V127
+                    numSums++; //-V127
                 }
             }
             min[ch] = (float)sum / numSums;
@@ -788,7 +788,7 @@ float CalculateMinSteadyRel(Chan::E ch)
             int numDeleted = 0;
 
             float pic = CalculatePicRel(ch);
-            if (pic == Float::ERROR)
+            if (pic == Float::ERROR) //-V550
             {
                 min[ch] = Float::ERROR;
             }
@@ -810,14 +810,14 @@ float CalculateMinSteadyRel(Chan::E ch)
                             {
                                 sum -= d;
                                 --numSums;
-                                ++numDeleted;
+                                ++numDeleted; //-V127
                             }
                         }
                         else if (d - _min > value)
                         {
                             sum -= d;
                             --numSums;
-                            ++numDeleted;
+                            ++numDeleted; //-V127
                         }
                         else
                         {
@@ -846,7 +846,7 @@ float CalculateMaxSteadyRel(Chan::E ch)
 
         float aveValue = CalculateAverageRel(ch);
         
-        if(aveValue == Float::ERROR)
+        if(aveValue == Float::ERROR) //-V550
         {
             max[ch] = Float::ERROR;
         }
@@ -861,8 +861,8 @@ float CalculateMaxSteadyRel(Chan::E ch)
                 uint8 d = *data++;
                 if(d > aveValue)
                 {
-                    sum += d;
-                    numSums++;
+                    sum += d; //-V127
+                    numSums++; //-V127
                 }
             }
             max[ch] = (float)sum / numSums;
@@ -872,7 +872,7 @@ float CalculateMaxSteadyRel(Chan::E ch)
 
             float pic = CalculatePicRel(ch);
 
-            if (pic == Float::ERROR)
+            if (pic == Float::ERROR) //-V550
             {
                 max[ch] = Float::ERROR;
             }
@@ -894,14 +894,14 @@ float CalculateMaxSteadyRel(Chan::E ch)
                             {
                                 sum -= d;
                                 numSums--;
-                                numDeleted++;
+                                numDeleted++; //-V127
                             }
                         }
                         else if (_max - d > value)
                         {
                             sum -= d;
                             numSums--;
-                            numDeleted++;
+                            numDeleted++; //-V127
                         }
                         else
                         {
@@ -960,7 +960,7 @@ float CalculateAverageRel(Chan::E ch)
     {
         float min = CalculateMinRel(ch);
         float max = CalculateMaxRel(ch);
-        ave[ch] = (min == Float::ERROR || max == Float::ERROR) ? Float::ERROR : (min + max) / 2.0F;
+        ave[ch] = (min == Float::ERROR || max == Float::ERROR) ? Float::ERROR : (min + max) / 2.0F; //-V550
         aveIsCalculating[ch] = true;
     }
     return ave[ch];
@@ -976,7 +976,7 @@ float CalculatePicRel(Chan::E ch)
     {
         float min = CalculateMinRel(ch);
         float max = CalculateMaxRel(ch);
-        pic[ch] = (min == Float::ERROR || max == Float::ERROR) ? Float::ERROR : max - min;
+        pic[ch] = (min == Float::ERROR || max == Float::ERROR) ? Float::ERROR : max - min; //-V550
         picIsCalculating[ch] = true;
     }
     return pic[ch];
@@ -1073,7 +1073,7 @@ float CalculatePhazaPlus(Chan::E ch)
 {
     float delay = CalculateDelayPlus(ch);
     float period = CalculatePeriod(ch);
-    if(delay == Float::ERROR || period == Float::ERROR)
+    if(delay == Float::ERROR || period == Float::ERROR) //-V550
     {
         return Float::ERROR;
     }
@@ -1086,7 +1086,7 @@ float CalculatePhazaMinus(Chan::E ch)
 {
     float delay = CalculateDelayMinus(ch);
     float period = CalculatePeriod(ch);
-    if(delay == Float::ERROR || period == Float::ERROR)
+    if(delay == Float::ERROR || period == Float::ERROR) //-V550
     {
         return Float::ERROR;
     }
@@ -1297,7 +1297,7 @@ String Osci::Measurements::GetStringMeasure(Measure::Type::E measure, Chan::E ch
     }
     buffer[0] = '\0';
     std::strcpy(buffer, Chan(ch).IsA() ? "1: " : "2: ");
-    if(!isSet || values[measure].value[ch] == Float::ERROR)
+    if(!isSet || values[measure].value[ch] == Float::ERROR) //-V550
     {
         std::strcat(buffer, "-.-");
     }

@@ -57,10 +57,7 @@ void ADC1_::Init()
         ERROR_HANDLER();
     }
 
-    if (HAL_ADC_ConfigChannel(&handle, &config) != HAL_OK)
-    {
-        ERROR_HANDLER();
-    }
+    SetActiveChannel2();
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -76,4 +73,20 @@ uint ADC1_::ReadValue()
     } while (HAL_ADC_PollForConversion(&handle, 1) != HAL_OK);
 
     return HAL_ADC_GetValue(&handle);
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void ADC1_::SetActiveChannel2()
+{
+    config.Channel = ADC_CHANNEL_2;
+
+    HAL_ADC_ConfigChannel(&handle, &config);
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void ADC1_::SetActiveChannel9()
+{
+    config.Channel = ADC_CHANNEL_9;
+
+    HAL_ADC_ConfigChannel(&handle, &config);
 }

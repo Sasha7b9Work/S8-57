@@ -3,7 +3,6 @@
 #include "Display/Grid.h"
 #include "Hardware/Battery.h"
 #include "Hardware/Hardware.h"
-#include <stm32f4xx_hal.h>
 
 #include "Settings/Settings.h"
 #include "Utils/Averager.h"
@@ -77,13 +76,15 @@ static uint ReadVoltage()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static uint ReadValueAKK()
 {
+    HAL::ADC1_::SetActiveChannel2();
+
     return ReadVoltage();
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static uint ReadValuePOW()
 {
-    config.Channel = ADC_CHANNEL_9;
+    HAL::ADC1_::SetActiveChannel9();
 
     return ReadVoltage();
 }

@@ -24,7 +24,7 @@ uint8 *Display::backBuffer = back;
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void Display::Init()
 {   
-    LTDC_::Init((uint)frontBuffer, (uint)backBuffer);
+    LTDC_::Init((uint)frontBuffer, (uint)backBuffer); //-V205
     Painter::LoadPalette();
 }
 
@@ -39,8 +39,8 @@ void Display::Update()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Display::ToggleBuffers(void)
 {
-    uint destination = (uint)frontBuffer;
-    uint source = (uint)backBuffer;
+    uint destination = (uint)frontBuffer; //-V205
+    uint source = (uint)backBuffer; //-V205
 
     DMA2D_HandleTypeDef hDMA2D;
 

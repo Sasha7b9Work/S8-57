@@ -249,7 +249,7 @@ static int GetSerialNumber(char buffer[17]) //-V2506
 
     std::strcpy(buffer, (char *)address); //-V2513
 
-    return allShotsMAX - (address - (uint8 *)FLASH_OTP_BASE) / 16 - 1; //-V566
+    return allShotsMAX - (address - (uint8 *)FLASH_OTP_BASE) / 16 - 1; //-V566 //-V110
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -291,7 +291,7 @@ bool OTPmem::SaveSerialNumber(char *servialNumber) //-V2506
 
     if (address < (uint8 *)FLASH_OTP_END - 16) //-V566
     {
-        WriteBufferBytes((uint)address, (uint8 *)servialNumber, (int)std::strlen(servialNumber) + 1);
+        WriteBufferBytes((uint)address, (uint8 *)servialNumber, (int)std::strlen(servialNumber) + 1); //-V205
         return true;
     }
 
