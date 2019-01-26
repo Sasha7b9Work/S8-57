@@ -2,6 +2,7 @@
 
 #include "Hardware/HAL/HAL.h"
 #include "Hardware/Timer.h"
+#include <stm32f4xx_hal.h>
 
 
 using namespace HAL;
