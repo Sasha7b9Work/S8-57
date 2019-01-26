@@ -3,7 +3,7 @@
 #include "device.h"
 #include "FPGA/FPGA_Settings.h"
 #include "FPGA/FPGA_Types.h"
-#include "Hardware/FSMC.h"
+#include "Hardware/HAL/HAL.h"
 #include "Settings/Settings.h"
 #include "Utils/Math.h"
 
@@ -21,6 +21,7 @@ using namespace FPGA::ADDR;
 
 using FPGA::HAL::GPIO::Pin;
 using FPGA::Settings::ModeCouple;
+using HAL::FSMC;
 using Osci::Settings::Range;
 
 

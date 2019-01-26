@@ -10,7 +10,7 @@
 #include "Settings/Settings.h"
 #include "Utils/StringUtils.h"
 #include "Utils/Values.h"
-#include "Hardware/FSMC.h"
+#include "Hardware/HAL/HAL.h"
 #include "Menu/Pages/Include/PageFunction.h"
 #include "Utils/Math.h"
 #include "Hardware/Timer.h"
@@ -22,6 +22,7 @@ using namespace Display::Primitives;
 using namespace FPGA::ADDR;
 
 using FPGA::HAL::GetFlag;
+using HAL::FSMC;
 using Utils::Stack;
 
 

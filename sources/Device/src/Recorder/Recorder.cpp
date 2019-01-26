@@ -2,13 +2,15 @@
 #include "defines.h"
 #include "Display/Display.h"
 #include "FPGA/FPGA_HAL.h"
-#include "Hardware/FSMC.h"
+#include "Hardware/HAL/HAL.h"
 #include "Recorder/Recorder.h"
 #include "Recorder/Recorder_Settings.h"
 #include "Recorder/Recorder_Storage.h"
 
 
 using namespace FPGA::ADDR;
+
+using HAL::FSMC;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

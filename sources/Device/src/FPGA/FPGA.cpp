@@ -6,7 +6,7 @@
 #include "FPGA/FPGA.h"
 #include "FPGA/FPGA_HAL.h"
 #include "FPGA/FPGA_Settings.h"
-#include "Hardware/FSMC.h"
+#include "Hardware/HAL/HAL.h"
 #include "Hardware/Timer.h"
 #include "Menu/Pages/Include/PageChannels.h"
 #include "Utils/Math.h"
@@ -21,6 +21,8 @@ using namespace FPGA::ADDR;
 using namespace FPGA::HAL::GPIO;
 using namespace FPGA::Settings;
 using namespace Osci::Settings;
+
+using HAL::FSMC;
 
 
 extern void ReadDataChanenlRand(Chan::E ch, const uint8 *address, uint8 *data);

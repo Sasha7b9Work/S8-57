@@ -1,7 +1,7 @@
 #include "defines.h"
 #include "log.h"
 #include "Display/Painter.h"
-#include "Hardware/FSMC.h"
+#include "Hardware/HAL/HAL.h"
 #include "Hardware/Timer.h"
 #include "Settings/Settings.h"
 #include "Utils/Math.h"
@@ -10,6 +10,7 @@
 
 using namespace Osci::Settings;
 
+using HAL::FSMC;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 extern uint GlobalColors[256] =

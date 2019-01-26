@@ -2,7 +2,7 @@
 #include "defines.h"
 #include "FPGA/FPGA.h"
 #include "FPGA/FPGA_Math.h"
-#include "Hardware/FSMC.h"
+#include "Hardware/HAL/HAL.h"
 #include "Hardware/Hardware.h"
 #include "Osci/Osci.h"
 #include "Settings/Settings.h"
@@ -13,6 +13,8 @@
 
 using namespace FPGA::Settings;
 using namespace Osci::Settings;
+
+using HAL::FSMC;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

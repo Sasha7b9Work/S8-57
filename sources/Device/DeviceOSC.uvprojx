@@ -1381,16 +1381,6 @@
               <FilePath>.\src\Hardware\EEPROM_437.cpp</FilePath>
             </File>
             <File>
-              <FileName>FSMC.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Hardware\FSMC.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>FSMC.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Hardware\FSMC.h</FilePath>
-            </File>
-            <File>
               <FileName>Hardware.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Hardware\Hardware.cpp</FilePath>
@@ -1454,6 +1444,11 @@
               <FileName>HAL_DAC.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Hardware\HAL\HAL_DAC.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>HAL_FSMC.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\HAL\HAL_FSMC.cpp</FilePath>
             </File>
             <File>
               <FileName>HAL_RTC.cpp</FileName>

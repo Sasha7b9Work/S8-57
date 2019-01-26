@@ -1,6 +1,6 @@
 #include <stm32f4xx_hal.h>
 #include "defines.h"
-#include "Hardware/FSMC.h"
+#include "Hardware/HAL/HAL.h"
 #include "Hardware/Hardware.h"
 #include "Hardware/Beeper.h"
 #include "Hardware/Timer.h"
@@ -8,6 +8,9 @@
 #include "Hardware/Battery.h"
 #include "Hardware/HAL/HAL.h"
 #include "Hardware/Clock.h"
+
+
+using HAL::FSMC;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

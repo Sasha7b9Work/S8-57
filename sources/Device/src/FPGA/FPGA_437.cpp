@@ -7,7 +7,6 @@
 #include "AD9286.h"
 #include "Data/DataStorage.h"
 #include "Display/Display.h"
-#include "Hardware/FSMC.h"
 #include "Hardware/Timer.h"
 #include "Settings/Settings.h"
 #include "Utils/Buffer.h"

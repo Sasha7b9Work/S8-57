@@ -4,7 +4,6 @@
 #include "FlashDrive/FlashDrive.h"
 #include "FPGA/FPGA.h"
 #include "FPGA/FPGA_Settings.h"
-#include "Hardware/FSMC.h"
 #include "Hardware/Beeper.h"
 #include "Hardware/Timer.h"
 #include "Hardware/VCP.h"

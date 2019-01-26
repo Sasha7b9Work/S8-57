@@ -1,4 +1,3 @@
-//#include <stm32f4xx_hal.h>
 #include "defines.h"
 #include "device.h"
 #include "Display/Display_Primitives.h"
@@ -10,7 +9,7 @@
 #include "FPGA_Settings.h"
 #include "FPGA_Math.h"
 #include "FPGA_Types.h"
-#include "Hardware/FSMC.h"
+#include "Hardware/HAL/HAL.h"
 #include "Hardware/Timer.h"
 #include "Settings/Settings.h"
 #include "Utils/Math.h"
@@ -22,6 +21,8 @@ using namespace FPGA::ADDR;
 using namespace FPGA::HAL::GPIO;
 using namespace FPGA::Settings;
 using namespace Osci::Settings;
+
+using HAL::FSMC;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

@@ -3,12 +3,15 @@
 #include "Command.h"
 #include "Message.h"
 #include "Painter.h"
-#include "Hardware/FSMC.h"
+#include "Hardware/HAL/HAL.h"
 #include "Hardware/Timer.h"
 #include "Tester/Tester.h"
 #include "Utils/Buffer.h"
 #include <stdlib.h>
 #include <cstring>
+
+
+using HAL::FSMC;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -26,7 +29,7 @@ void Painter::BeginScene(Color color)
 {
     Message message(2, Command::Paint_BeginScene, color.value);
 
-    FSMC::WriteToPanel(&message);
+    FSMC::WriteToPanel(message.Data(), message.Size());
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

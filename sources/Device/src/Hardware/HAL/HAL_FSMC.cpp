@@ -1,10 +1,12 @@
 #include <stm32f4xx_hal.h>
 #include "defines.h"
-#include "Message.h"
-#include "Hardware/FSMC.h"
+#include "HAL.h"
 #include "Hardware/Timer.h"
 #include "Keyboard/DecoderDevice.h"
 #include "Utils/Debug.h"
+
+
+using HAL::FSMC;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -114,7 +116,7 @@ void FSMC::Init()
     //               A0           A1           A2           A3           A4           A5
     //isGPIO.Pin = GPIO_PIN_0 | GPIO_PIN_1 | GPIO_PIN_2 | GPIO_PIN_3 | GPIO_PIN_4 | GPIO_PIN_5;
     //HAL_GPIO_Init(GPIOF, &isGPIO);
-    
+
     GPIOF->AFR[0] &= HEX_FROM_2(ff00, 0000);
     GPIOF->AFR[0] |= HEX_FROM_2(00cc, cccc);    // Устанавливаем GPIO_AF12_FMC
 
@@ -235,14 +237,8 @@ static void ConfigureForFPGA()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void FSMC::WriteToPanel2bytes(uint8 byte0, uint8 byte1)
 {
-    uint8 buffer[2] = {byte0, byte1};
+    uint8 buffer[2] = { byte0, byte1 };
     WriteToPanel(buffer, 2);
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void FSMC::WriteToPanel(Message *msg)
-{
-    WriteToPanel(msg->Data(), msg->Size());
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -273,7 +269,7 @@ void FSMC::WriteToPanel(const uint8 *data, uint length)
         }
 
         NE4_SET;                                // Убираем признак передачи
-        while(PAN_RECIEVE_TRANSMIT_CONFIRM) {};
+        while (PAN_RECIEVE_TRANSMIT_CONFIRM) {};
         ++i;                                    // переходим к следующему байту в буфере
     }
 
@@ -292,13 +288,13 @@ static void ReadByte()
     CONFIGURE_TO_READ_PANEL;
 LabelReadByte:
     NE4_RESET;
-    while (PAN_READY_TRANSMIT) { };
+    while (PAN_READY_TRANSMIT) {};
     if (PAN_RECIEVE_TRANSMIT_CONFIRM)
     {
         uint8 data = GetOutData();
         Decoder::AddData(data);
         NE4_SET;
-        while (PAN_RECIEVE_TRANSMIT_CONFIRM) { };
+        while (PAN_RECIEVE_TRANSMIT_CONFIRM) {};
     }
     if (PAN_READY_TRANSMIT)
     {
@@ -349,7 +345,7 @@ static void SetOutData(uint8 data)
 
     //                                                        биты 0,1                           биты 2, 3
     GPIOD->ODR = (GPIOD->ODR & 0x3ffc) + (uint16)(((int16)data & 0x03) << 14) + (((uint16)(data & 0x0c)) >> 2);
-    
+
     //                                                    Биты 4,5,6,7
     GPIOE->ODR = (GPIOE->ODR & 0xf87f) + (uint16)(((int16)data & 0xf0) << 3);
 }
@@ -363,7 +359,7 @@ static uint8 GetOutData()
     }
     uint dataD = GPIOD->IDR;
     uint dataE = GPIOE->IDR;
-    
+
     return (uint8)(((dataD >> 14) & 0x3) | ((dataD & 0x3) << 2) | ((dataE & 0x780) >> 3));
 }
 
@@ -414,4 +410,3 @@ uint8 FSMC::ReadFromFPGA(const uint8 *address)
 
     return *address;
 }
-
