@@ -37,7 +37,7 @@ static void DrawBatteryUGO(int x, int y, float procents);
 
 namespace Hardware
 {
-    class BatteryPrivate
+    class ADC1_
     {
     public:
         /// Читает напряжение с АЦП в соответствии с установками
@@ -61,7 +61,7 @@ float Hardware::Battery::GetVoltageAKK(uint *adc)
 {
     static Utils::AroundAverager<float> averager(32);
 
-    *adc = BatteryPrivate::ReadValueAKK();
+    *adc = ADC1_::ReadValueAKK();
 
     averager.Push((float)*adc);
 
@@ -73,7 +73,7 @@ float Hardware::Battery::GetVoltagePOW(uint *adc)
 {
     static Utils::AroundAverager<float> averager(32);
 
-    *adc = BatteryPrivate::ReadValuePOW();
+    *adc = ADC1_::ReadValuePOW();
 
     averager.Push((float)*adc);
 
@@ -81,13 +81,13 @@ float Hardware::Battery::GetVoltagePOW(uint *adc)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-uint Hardware::BatteryPrivate::ReadVoltage()
+uint Hardware::ADC1_::ReadVoltage()
 {
     return HAL::ADC1_::ReadValue();
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-uint Hardware::BatteryPrivate::ReadValueAKK()
+uint Hardware::ADC1_::ReadValueAKK()
 {
     HAL::ADC1_::SetActiveChannel2();
 
@@ -95,7 +95,7 @@ uint Hardware::BatteryPrivate::ReadValueAKK()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-uint Hardware::BatteryPrivate::ReadValuePOW()
+uint Hardware::ADC1_::ReadValuePOW()
 {
     HAL::ADC1_::SetActiveChannel9();
 

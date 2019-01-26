@@ -13,7 +13,7 @@ namespace Hardware
 {
     class Clock;
     class Battery;
-    class BatteryPrivate;
+    class ADC1_;
 }
 
 namespace Multimeter
@@ -39,7 +39,7 @@ namespace HAL
     class ADC1_
     {
     friend class Hardware::Battery;
-    friend class Hardware::BatteryPrivate;
+    friend class Hardware::ADC1_;
     private:
         static void Init();
 
