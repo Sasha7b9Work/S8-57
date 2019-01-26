@@ -1,4 +1,4 @@
-#include <stm32f4xx_hal.h>
+//#include <stm32f4xx_hal.h>
 #include "defines.h"
 #include "AT25160N.h"
 #include <cstdlib>
@@ -41,17 +41,13 @@ static uint8 ReadByte();
 
 /// Ожидает, пока не закончится внутреннй цикл записи
 static void WaitFinishWrite();
-/// Установить заданный вывод в 1
-static void SetPin(GPIO_TypeDef *gpio, uint16 pin);
-/// Установить заданный вывод в 0
-static void ResetPin(GPIO_TypeDef *gpio, uint16 pin);
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void AT25160N::Init()
 {
-    __HAL_RCC_GPIOB_CLK_ENABLE();
-    __HAL_RCC_GPIOC_CLK_ENABLE();
+    //__HAL_RCC_GPIOB_CLK_ENABLE();
+    //__HAL_RCC_GPIOC_CLK_ENABLE();
 
     /*  Аппаратные ресурсы
     SPI2
@@ -69,6 +65,8 @@ void AT25160N::Init()
         GPIO_PULLDOWN
     };
     HAL_GPIO_Init(GPIOB, &isGPIO);
+
+    HAL::PORTS::Init(HAL::PORTS::P)
 
     //             MOSI
     isGPIO.Pin = GPIO_PIN_3;
