@@ -1,7 +1,6 @@
 #pragma once
 #include "defines.h"
 #include "Data/DataSettings.h"
-#include <stm32f4xx_hal.h>
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -79,6 +78,12 @@ namespace HAL
     class DAC_
     {
     public:
-        static DAC_HandleTypeDef handle;
+        static void Init();
+
+        static void StartDMA(void *points, uint numPoints);
+
+        static void StopDMA();
+
+        static void ConfigTIM7(uint16 prescaler, uint16 period);
     };
 }

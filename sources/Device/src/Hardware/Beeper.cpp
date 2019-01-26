@@ -1,4 +1,3 @@
-#include <stm32f4xx_hal.h>
 #include "defines.h"
 #include "Beeper.h"
 #include "Timer.h"
@@ -39,99 +38,18 @@ static void CalculateSine();
 
 static void CalculateTriangle();
 
-static void ConfigTIM7(uint16 prescaler, uint16 period);
-
-
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void Beeper::Init()
 {
-    __DMA1_CLK_ENABLE();
-    __TIM7_CLK_ENABLE();
-    __DAC_CLK_ENABLE();
-
-    GPIO_InitTypeDef structGPIO =
-    {
-        GPIO_PIN_4,
-        GPIO_MODE_ANALOG,
-        GPIO_NOPULL,
-        0, 0
-    };
-
-     HAL_GPIO_Init(GPIOA, &structGPIO);
-
-    static DMA_HandleTypeDef hdmaDAC1 =
-    {
-        DMA1_Stream5,
-        {
-            DMA_CHANNEL_7,
-            DMA_MEMORY_TO_PERIPH,
-            DMA_PINC_DISABLE,
-            DMA_MINC_ENABLE,
-            DMA_PDATAALIGN_BYTE,
-            DMA_MDATAALIGN_BYTE,
-            DMA_CIRCULAR,
-            DMA_PRIORITY_HIGH,
-            DMA_FIFOMODE_DISABLE,
-            DMA_FIFO_THRESHOLD_HALFFULL,
-            DMA_MBURST_SINGLE,
-            DMA_PBURST_SINGLE
-        },
-        HAL_UNLOCKED, HAL_DMA_STATE_RESET, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-    };
-
-    HAL_DMA_Init(&hdmaDAC1);
-
-    __HAL_LINKDMA(&HAL::DAC_::handle, DMA_Handle1, hdmaDAC1);
-
-    HAL_NVIC_SetPriority(DMA1_Stream5_IRQn, PRIORITY_SOUND_DMA1_STREAM5);
-    HAL_NVIC_EnableIRQ(DMA1_Stream5_IRQn);
-
-
-    DAC_ChannelConfTypeDef config =
-    {
-        DAC_TRIGGER_T7_TRGO,
-        DAC_OUTPUTBUFFER_ENABLE
-    };
-
-    HAL_DAC_DeInit(&HAL::DAC_::handle);
-
-    HAL_DAC_Init(&HAL::DAC_::handle);
-
-    HAL_DAC_ConfigChannel(&HAL::DAC_::handle, &config, DAC_CHANNEL_1);
+    HAL::DAC_::Init();
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void Stop()
 {
-    HAL_DAC_Stop_DMA(&HAL::DAC_::handle, DAC_CHANNEL_1);
+    HAL::DAC_::StopDMA();
     isBeep = false;
     soundWarnIsBeep = false;
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void ConfigTIM7(uint16 prescaler, uint16 period)
-{
-    static TIM_HandleTypeDef htim =
-    {
-        TIM7, {}, HAL_TIM_ACTIVE_CHANNEL_1, {}, HAL_UNLOCKED, HAL_TIM_STATE_RESET
-    };
-
-    htim.Init.Prescaler = prescaler;
-    htim.Init.Period = period;
-    htim.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
-
-    HAL_TIM_Base_Init(&htim);
-
-    TIM_MasterConfigTypeDef masterConfig =
-    {
-        TIM_TRGO_UPDATE,
-        TIM_MASTERSLAVEMODE_DISABLE
-    };
-
-    HAL_TIMEx_MasterConfigSynchronization(&htim, &masterConfig);
-
-    HAL_TIM_Base_Stop(&htim);
-    HAL_TIM_Base_Start(&htim);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -195,7 +113,7 @@ static void CalculateTriangle()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void SetWave()
 {
-    ConfigTIM7(0, CalculatePeriodForTIM());
+    HAL::DAC_::ConfigTIM7(0, CalculatePeriodForTIM());
 
     if(typeWave == TypeWave::Sine)
     {
@@ -240,8 +158,8 @@ static void Beep(const TypeWave::E newTypeWave, const float newFreq, const float
     Stop();
     
     isBeep = true;
-    
-    HAL_DAC_Start_DMA(&HAL::DAC_::handle, DAC_CHANNEL_1, (uint32_t*)points, POINTS_IN_PERIOD_SOUND, DAC_ALIGN_8B_R); //-V1032 //-V641
+
+    HAL::DAC_::StartDMA(points, POINTS_IN_PERIOD_SOUND);
 
     Timer::SetAndStartOnce(Timer::Type::StopSound, Stop, (uint)newDuration);
 }
