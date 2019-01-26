@@ -62,6 +62,7 @@ namespace HAL
         {
             static uint No;
             static uint Down;
+            static uint Up;
         };
 
         void Init(Port::E port, uint pins, uint mode, uint pull);

@@ -31,6 +31,7 @@ namespace HAL
 
         uint Pull::No = GPIO_NOPULL;
         uint Pull::Down = GPIO_PULLDOWN;
+        uint Pull::Up = GPIO_PULLUP;
     }
 }
 

@@ -1,21 +1,25 @@
 #include "defines.h"
 #include "AD9286.h"
 #include "Hardware/Timer.h"
-#include <stm32f4xx_hal.h>
+#include "Hardware/HAL/HAL_PORTS.h"
 
 
 using namespace Hardware;
 
+using HAL::PORTS::Mode;
+using HAL::PORTS::Pull;
+
+
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-#define PIN_SCK     GPIO_PIN_10
-#define PORT_SCK    GPIOB
+#define PIN_SCK     HAL::PORTS::Pin::_10
+#define PORT_SCK    HAL::PORTS::Port::_B
 
-#define PIN_DAT     GPIO_PIN_3
-#define PORT_DAT    GPIOC
+#define PIN_DAT     HAL::PORTS::Pin::_3
+#define PORT_DAT    HAL::PORTS::Port::_C
 
-#define PIN_CS      GPIO_PIN_11
-#define PORT_CS     GPIOE
+#define PIN_CS      HAL::PORTS::Pin::_11
+#define PORT_CS     HAL::PORTS::Port::_E
 
 #define SCK         PORT_SCK, PIN_SCK
 #define DAT         PORT_DAT, PIN_DAT
@@ -23,8 +27,6 @@ using namespace Hardware;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-static void SetPin(GPIO_TypeDef *gpio, uint16 pin);
-static void ResetPin(GPIO_TypeDef *gpio, uint16 pin);
 static void  WriteByte(uint8 address, uint8 byte);
 
 
@@ -40,23 +42,15 @@ void AD9286::Init()
         SCK - 69 - PB10
     */
    
-    GPIO_InitTypeDef isGPI0 =                   // Инициализация CS
-    {
-        PIN_CS,
-        GPIO_MODE_OUTPUT_PP,
-        GPIO_PULLUP
-    };
-    HAL_GPIO_Init(PORT_CS, &isGPI0);
+    HAL::PORTS::Init(PORT_CS, PIN_CS, Mode::Output_PP, Pull::Up);       // Инициализация CS
 
-    isGPI0.Pin = PIN_DAT;                       // Инициализация DAT
-    HAL_GPIO_Init(PORT_DAT, &isGPI0);
+    HAL::PORTS::Init(PORT_DAT, PIN_DAT, Mode::Output_PP, Pull::Up);     // Инициализация DAT
     
-    isGPI0.Pin = PIN_SCK;                       // Инициализация SCK
-    HAL_GPIO_Init(PORT_SCK, &isGPI0);
+    HAL::PORTS::Init(PORT_SCK, PIN_SCK, Mode::Output_PP, Pull::Up);     // Инициализация SCK
 
-    SetPin(CS); //-V525
-    ResetPin(DAT);
-    ResetPin(SCK);
+    HAL::PORTS::Set(CS);
+    HAL::PORTS::Reset(DAT);
+    HAL::PORTS::Reset(SCK);
 
     Tune();
 }
@@ -72,7 +66,7 @@ void AD9286::Tune()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void WriteByte(uint8 address, uint8 byte)
 {
-    ResetPin(CS);
+    HAL::PORTS::Reset(CS);
 
     uint value = (uint)((address << 8) + byte);
 
@@ -80,31 +74,19 @@ static void WriteByte(uint8 address, uint8 byte)
     {
         if (_GET_BIT(value, i))
         {
-            SetPin(DAT);
+            HAL::PORTS::Set(DAT);
         }
         else
         {
-            ResetPin(DAT);
+            HAL::PORTS::Reset(DAT);
         }
         PAUSE_ON_TICKS(100);
 
-        SetPin(SCK);
+        HAL::PORTS::Set(SCK);
         PAUSE_ON_TICKS(100);
 
-        ResetPin(SCK);
+        HAL::PORTS::Reset(SCK);
     }
 
-    SetPin(CS);
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void SetPin(GPIO_TypeDef *_gpio, uint16 pin)
-{
-    HAL_GPIO_WritePin(_gpio, pin, GPIO_PIN_SET);
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void ResetPin(GPIO_TypeDef *_gpio, uint16 pin)
-{
-    HAL_GPIO_WritePin(_gpio, pin, GPIO_PIN_RESET);
+    HAL::PORTS::Set(CS);
 }
