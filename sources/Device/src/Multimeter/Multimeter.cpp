@@ -15,6 +15,28 @@ using namespace Display::Primitives;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+namespace Multimeter
+{
+    class USART3_
+    {
+    public:
+        static void Init(pFuncVV recvCallback)
+        {
+            HAL::USART3_::Init(recvCallback);
+        }
+        static void Transmit(void *_buffer, uint size, uint timeout)
+        {
+            HAL::USART3_::Transmit(_buffer, size, timeout);
+        }
+        static void StartReceiveIT(void *_buffer, uint size)
+        {
+            HAL::USART3_::StartReceiveIT(_buffer, size);
+        }
+    };
+}
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 char   Multimeter::buffer[11] = {0};
 /// В этот буфер записывается информация в обработчике прерывания приёма
 static uint8 bufferUART[10];
@@ -44,13 +66,13 @@ void Multimeter::ChangeMode()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Multimeter::Init()
 {
-    HAL::USART3_::Init(ReceiveCallback);
+    USART3_::Init(ReceiveCallback);
 
     uint8 send[4] = { 0x02, 'V', '0', 0x0a };
 
-    HAL::USART3_::Transmit(send, 4, 10);
+    USART3_::Transmit(send, 4, 10);
 
-    HAL::USART3_::StartReceiveIT(bufferUART, 10);
+    USART3_::StartReceiveIT(bufferUART, 10);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -63,11 +85,12 @@ void Multimeter::DeInit()
 void Multimeter::ChangeAVP()
 {
     ChangeMode();
-    char send[4] = {0x02, 'Z', MULTI_AVP == AVP::On ? '1' : '0', 0x0a};
 
-    HAL::USART3_::Transmit(send, 4, 100);
+    char send[4] = { 0x02, 'Z', MULTI_AVP == AVP::On ? '1' : '0', 0x0a };
 
-    HAL::USART3_::StartReceiveIT(bufferUART, 10);
+    USART3_::Transmit(send, 4, 100);
+
+    USART3_::StartReceiveIT(bufferUART, 10);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -91,14 +114,14 @@ void Multimeter::Update()
 
     uint8 send[4] = {0x02, (uint8)symbol, (uint8)(range + 0x30), 0x0a};
 
-    HAL::USART3_::Transmit(send, 4, 100);
+    USART3_::Transmit(send, 4, 100);
 
-    HAL::USART3_::StartReceiveIT(bufferUART, 10);
+    USART3_::StartReceiveIT(bufferUART, 10);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void ReceiveCallback()
 {
     Multimeter::SetMeasure(bufferUART);
-    HAL::USART3_::StartReceiveIT(bufferUART, 10);
+    Multimeter::USART3_::StartReceiveIT(bufferUART, 10);
 }

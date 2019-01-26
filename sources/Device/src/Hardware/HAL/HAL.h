@@ -16,6 +16,11 @@ namespace Hardware
     class BatteryPrivate;
 }
 
+namespace Multimeter
+{
+    class USART3_;
+}
+
 namespace HAL
 {
     void ErrorHandler(const char *, int);
@@ -48,7 +53,8 @@ namespace HAL
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     class USART3_
     {
-    public:
+    friend class Multimeter::USART3_;
+    private:
         static void Init(pFuncVV recvCallback);
 
         static void Transmit(void *buffer, uint size, uint timeout);
