@@ -19,7 +19,8 @@
  /// В одной секунде 120.000.000 тиков для С8-53 и 90.000.000 тиков для С8-54.
  /// Максимальный отрезок времени, который можно отсчитать с её помощью - 35 сек.
 #define TIME_TICKS (TIM2->CNT)
-#define TIME_US    (TIM2->CNT / 90)
+#define TIME_US    Timer::TimeUS()
+
 
 #ifdef WIN32
 
@@ -81,6 +82,8 @@ public:
     static void PauseOnTicks(uint numTicks);
     /// Запускает счётчик для измерения малых отрезков времени
     static void StartMultiMeasurement();
+    /// Возвращает количество микросекунд, прошедших с момента последнего вызова StartMultiMeasurement()
+    static uint TimeUS();
     /// Устанавливает стартовую точку логгирования. Далее вызовы Timer_LogPoint засекают временные интервалы от это точки
     static void StartLogging();
 
