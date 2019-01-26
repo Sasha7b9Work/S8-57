@@ -10,33 +10,8 @@ class AT25160N
 friend class Settings;
 public:
     static void Init();
+    static void Test();
 private:
     static void Save(Settings &set);
     static void Load(Settings &set);
-    /// Разрешить запись
-    static void SetWriteLatch();
-    /// Запретить запись
-    static void ResetWriteLatch();
-    /// Читать регистр статуса
-    static uint8 ReadStatusRegister();
-    /// Записать регистр статуса
-    static void WriteStatusRegister(uint8 data);
-    /// Записывает size байт, начиная с адреса address
-    static void WriteData(uint address, uint8 *data, uint size);
-    /// Посылает порцию буфера по данному адресу. Порция не может быть больше 32 байт
-    static void Write32BytesOrLess(uint address, const uint8 *data, uint size);
-    /// Читает size байт, начиная с адреса address
-    static void ReadData(uint address, uint8 *data, uint size);
-
-    /// Записывает байт в микросхему
-    static void WriteByte(uint8 byte);
-    /// Читает байт из микросхемы
-    static uint8 ReadByte();
-
-    /// Ожидает, пока не закончится внутреннй цикл записи
-    static void WaitFinishWrite();
-    /// Установить заданный вывод в 1
-    static void SetPin(GPIO_TypeDef *gpio, uint16 pin);
-    /// Установить заданный вывод в 0
-    static void ResetPin(GPIO_TypeDef *gpio, uint16 pin);
 };

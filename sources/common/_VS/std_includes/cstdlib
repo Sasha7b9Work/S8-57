@@ -4,6 +4,7 @@ namespace std
 {
     void *malloc(size_t);
     void free(void *);
+    uint rand();
 
     #include <stdlib.h>
 }

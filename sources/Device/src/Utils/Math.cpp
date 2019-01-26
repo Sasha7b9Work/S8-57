@@ -3,7 +3,7 @@
 #include "Math.h"
 #include "Settings/Settings.h"
 #include <cmath>
-#include <stdlib.h>
+#include <cstdlib>
 #include <cstring>
 #include <limits>
 
@@ -63,8 +63,8 @@ void Math::Smoothing(uint8 *data, int numPoints, int numSmooth)
         return;
     }
 
-    float *buffer = (float *)malloc((size_t)(numPoints * (int)sizeof(float)));
-    int  *num = (int *)malloc((size_t)(numPoints * (int)sizeof(int)));
+    float *buffer = (float *)std::malloc((uint)(numPoints * (int)sizeof(float)));
+    int  *num = (int *)std::malloc((uint)(numPoints * (int)sizeof(int)));
 
     if (num != 0 && buffer != 0)
     {
@@ -90,8 +90,8 @@ void Math::Smoothing(uint8 *data, int numPoints, int numSmooth)
         }
     }
 
-    free(buffer);
-    free(num);
+    std::free(buffer);
+    std::free(num);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -294,7 +294,7 @@ void Math::CalculateFiltrArray(const uint8 *dataIn, uint8 *dataOut, int numPoint
 {
     if (numSmoothing < 2)
     {
-        std::memcpy(dataOut, dataIn, (size_t)numPoints); //-V107
+        std::memcpy(dataOut, dataIn, (uint)numPoints); //-V107
     }
     else
     {

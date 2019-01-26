@@ -1,6 +1,7 @@
 #include <stm32f4xx_hal.h>
 #include "defines.h"
 #include "AT25160N.h"
+#include <cstdlib>
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -34,6 +35,35 @@ static SPI_HandleTypeDef hSPI2 =
 #define READ    BIN_U8(00000011)        ///< Read Data from Memory Array
 #define WRITE   BIN_U8(00000010)        ///< Write Data to Memory Array
 #define WRSR    BIN_U8(00000001)        ///< Write Status Register
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/// Разрешить запись
+static void SetWriteLatch();
+/// Запретить запись
+static void ResetWriteLatch();
+/// Читать регистр статуса
+static uint8 ReadStatusRegister();
+/// Записать регистр статуса
+static void WriteStatusRegister(uint8 data);
+/// Записывает size байт, начиная с адреса address
+static void WriteData(uint address, uint8 *data, uint size);
+/// Посылает порцию буфера по данному адресу. Порция не может быть больше 32 байт
+static void Write32BytesOrLess(uint address, const uint8 *data, uint size);
+/// Читает size байт, начиная с адреса address
+static void ReadData(uint address, uint8 *data, uint size);
+
+/// Записывает байт в микросхему
+static void WriteByte(uint8 byte);
+/// Читает байт из микросхемы
+static uint8 ReadByte();
+
+/// Ожидает, пока не закончится внутреннй цикл записи
+static void WaitFinishWrite();
+/// Установить заданный вывод в 1
+static void SetPin(GPIO_TypeDef *gpio, uint16 pin);
+/// Установить заданный вывод в 0
+static void ResetPin(GPIO_TypeDef *gpio, uint16 pin);
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -74,7 +104,6 @@ void AT25160N::Init()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-/*
 void AT25160N::Test()
 {
     const uint size = 1000;
@@ -82,7 +111,7 @@ void AT25160N::Test()
     uint8 out[size];
     for(uint i = 0; i < size; i++)
     {
-        data[i] = (uint8)rand();
+        data[i] = (uint8)std::rand();
     }
 
 //    uint timeStart = TIME_MS;
@@ -116,6 +145,8 @@ void AT25160N::Test()
         }
     }
 
+    WriteStatusRegister(0);
+
     if(testIsOk)
     {
         LOG_WRITE("Test is OK!!!");
@@ -125,10 +156,9 @@ void AT25160N::Test()
 //        LOG_WRITE("WARNING!!! Test is failed!!!");
     }
 }
-*/
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void AT25160N::WriteData(uint address, uint8 *data, uint size)
+static void WriteData(uint address, uint8 *data, uint size)
 {
     while(1)
     {
@@ -145,7 +175,7 @@ void AT25160N::WriteData(uint address, uint8 *data, uint size)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void AT25160N::Write32BytesOrLess(uint address, const uint8 *data, uint size)
+static void Write32BytesOrLess(uint address, const uint8 *data, uint size)
 {
     WaitFinishWrite();
 
@@ -179,7 +209,7 @@ void AT25160N::Write32BytesOrLess(uint address, const uint8 *data, uint size)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void AT25160N::SetWriteLatch()
+static void SetWriteLatch()
 {
     //WaitFinishWrite();
 
@@ -189,7 +219,7 @@ void AT25160N::SetWriteLatch()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void AT25160N::ResetWriteLatch()
+static void ResetWriteLatch()
 {
     WaitFinishWrite();
 
@@ -199,7 +229,7 @@ void AT25160N::ResetWriteLatch()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-uint8 AT25160N::ReadStatusRegister()
+static uint8 ReadStatusRegister()
 {
     ResetPin(PIN_CS);
     WriteByte(RDSR); //-V2501
@@ -209,7 +239,7 @@ uint8 AT25160N::ReadStatusRegister()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void AT25160N::WriteStatusRegister(uint8 data)
+static void WriteStatusRegister(uint8 data)
 {
     WaitFinishWrite();
 
@@ -220,7 +250,7 @@ void AT25160N::WriteStatusRegister(uint8 data)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void AT25160N::WaitFinishWrite()
+static void WaitFinishWrite()
 {
     while (_GET_BIT(ReadStatusRegister(), 0))
     {
@@ -241,7 +271,7 @@ void AT25160N::Load(Settings &)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void AT25160N::WriteByte(uint8 byte)
+static void WriteByte(uint8 byte)
 {
     for(int bit = 7; bit >= 0; bit--)
     {
@@ -256,7 +286,7 @@ void AT25160N::WriteByte(uint8 byte)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-uint8 AT25160N::ReadByte()
+static uint8 ReadByte()
 {
     uint8 retValue = 0;
 
@@ -275,19 +305,19 @@ uint8 AT25160N::ReadByte()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void AT25160N::SetPin(GPIO_TypeDef *_gpio, uint16 pin)
+static void SetPin(GPIO_TypeDef *_gpio, uint16 pin)
 {
     HAL_GPIO_WritePin(_gpio, pin, GPIO_PIN_SET);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void AT25160N::ResetPin(GPIO_TypeDef *_gpio, uint16 pin)
+static void ResetPin(GPIO_TypeDef *_gpio, uint16 pin)
 {
     HAL_GPIO_WritePin(_gpio, pin, GPIO_PIN_RESET);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void AT25160N::ReadData(uint address, uint8 *data, uint size)
+static void ReadData(uint address, uint8 *data, uint size)
 {
     WaitFinishWrite();
 

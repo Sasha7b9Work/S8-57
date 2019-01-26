@@ -7,5 +7,4 @@ float log10f(float);
 float cosf(float);
 float sinf(float);
 bool isnan(float);
-int rand();
 float powf(float, float);
