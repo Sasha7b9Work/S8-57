@@ -40,12 +40,20 @@ namespace Hardware
     class ADC1_
     {
     public:
-        /// Читает напряжение с АЦП в соответствии с установками
-        static uint ReadVoltage();
         /// Читает АЦП батареи
-        static uint ReadValueAKK();
+        static uint ReadValueAKK()
+        {
+            HAL::ADC1_::SetActiveChannel2();
+
+            return HAL::ADC1_::ReadValue();
+        }
         /// Читает АЦП зарядного устройства
-        static uint ReadValuePOW();
+        static uint ReadValuePOW()
+        {
+            HAL::ADC1_::SetActiveChannel9();
+
+            return HAL::ADC1_::ReadValue();
+        }
     };
 }
 
@@ -78,28 +86,6 @@ float Hardware::Battery::GetVoltagePOW(uint *adc)
     averager.Push((float)*adc);
 
     return PowerADC_ToVoltage(averager.Value());
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-uint Hardware::ADC1_::ReadVoltage()
-{
-    return HAL::ADC1_::ReadValue();
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-uint Hardware::ADC1_::ReadValueAKK()
-{
-    HAL::ADC1_::SetActiveChannel2();
-
-    return ReadVoltage();
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-uint Hardware::ADC1_::ReadValuePOW()
-{
-    HAL::ADC1_::SetActiveChannel9();
-
-    return ReadVoltage();
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
