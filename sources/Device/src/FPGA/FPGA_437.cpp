@@ -1,7 +1,7 @@
+#include <stm32f4xx.h>
 #include "defines.h"
 #include "log.h"
 #include "device.h"
-#include <stm32f4xx.h>
 #include "FPGA.h"
 #include "FPGA_HAL.h"
 #include "FPGA_Settings.h"

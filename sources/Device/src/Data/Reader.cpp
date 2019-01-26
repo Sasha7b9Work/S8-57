@@ -11,6 +11,7 @@
 #include <cstring>
 
 #include "Osci/Measurements/Measurements.h"
+#include <stm32f4xx_hal.h>
 
 
 #ifdef WIN32

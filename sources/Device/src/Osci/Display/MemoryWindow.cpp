@@ -10,6 +10,7 @@
 
 #include "Hardware/Battery.h"
 #include "Osci/Display/BottomPart.h"
+#include <stm32f4xx_hal.h>
 
 
 using namespace Display::Primitives;
