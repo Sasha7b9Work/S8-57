@@ -14,7 +14,6 @@
 #include "MemoryWindow.h"
 
 #include "Osci/Measurements/Measurements.h"
-#include <stm32f4xx_hal.h>
 
 
 using namespace Display::Primitives;

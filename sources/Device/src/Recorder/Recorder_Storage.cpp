@@ -1,7 +1,6 @@
 #include "defines.h"
 #include "Recorder/Recorder_Storage.h"
 
-#include <stm32f4xx_hal.h>
 #include "Hardware/Timer.h"
 #include "Data/Heap.h"
 

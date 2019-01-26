@@ -13,7 +13,6 @@
 
 #include "Osci/Measurements/Measurements.h"
 #include "Osci/Measurements/Measurements_Graphics.h"
-#include <stm32f4xx_hal.h>
 
 
 using namespace Osci;

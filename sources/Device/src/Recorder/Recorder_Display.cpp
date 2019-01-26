@@ -6,7 +6,6 @@
 #include "Display/Painter.h"
 #include "Menu/Menu.h"
 
-#include <stm32f4xx_hal.h>
 #include "Recorder/Recorder_Storage.h"
 #include "Hardware/Timer.h"
 
