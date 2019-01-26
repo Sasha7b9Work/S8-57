@@ -1446,6 +1446,11 @@
               <FilePath>.\src\Hardware\HAL\HAL_FSMC.cpp</FilePath>
             </File>
             <File>
+              <FileName>HAL_NVIC.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\HAL\HAL_NVIC.cpp</FilePath>
+            </File>
+            <File>
               <FileName>HAL_PORTS.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Hardware\HAL\HAL_PORTS.cpp</FilePath>
