@@ -1,3 +1,4 @@
+#include <stm32f4xx_hal.h>
 #include "defines.h"
 #include "FPGA/FPGA.h"
 #include "FPGA/FPGA_Math.h"
