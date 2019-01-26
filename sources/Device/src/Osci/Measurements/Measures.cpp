@@ -1,3 +1,4 @@
+#include <stm32f4xx_hal.h>
 #include "defines.h"
 #include "Display/Display_Primitives.h"
 #include "Display/Grid.h"

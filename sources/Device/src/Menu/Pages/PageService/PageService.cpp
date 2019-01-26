@@ -1,4 +1,4 @@
-#include <stm32f4xx.h>
+#include <stm32f4xx_hal.h>
 #include "defines.h"
 #include "device.h"
 #include "main.h"

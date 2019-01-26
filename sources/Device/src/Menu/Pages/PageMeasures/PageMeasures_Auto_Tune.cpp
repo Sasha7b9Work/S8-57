@@ -1,3 +1,4 @@
+#include <stm32f4xx_hal.h>
 #include "defines.h"
 #include "Menu/MenuItems.h"
 #include "Menu/Pages/Include/Definition.h"

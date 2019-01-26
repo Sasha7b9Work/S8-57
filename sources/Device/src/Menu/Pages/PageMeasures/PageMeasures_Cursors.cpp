@@ -1,3 +1,4 @@
+#include <stm32f4xx_hal.h>
 #include "defines.h"
 #include "Display/Painter.h"
 #include "Menu/Pages/Include/Definition.h"
