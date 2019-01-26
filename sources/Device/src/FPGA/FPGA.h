@@ -1,7 +1,6 @@
 #pragma once
 #include "FPGA_Types.h"
 #include "Settings/SettingsService.h"
-#include <stm32f4xx_hal.h>
 
 
 /// На столько единиц нужно изменить значение смещения, чтобы маркер смещения по напряжению передвинулся на одну точку.
