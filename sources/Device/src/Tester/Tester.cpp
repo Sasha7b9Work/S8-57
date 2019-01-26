@@ -19,7 +19,7 @@ using HAL::PORTS::State;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-static DAC_HandleTypeDef hDAC = {DAC};
+//static DAC_HandleTypeDef hDAC = {DAC};
 
 uint8 Tester::data[Chan::Size][NUM_STEPS][TESTER_NUM_POINTS];
 
@@ -162,7 +162,7 @@ void Tester::ProcessStep()
     {
         if ((step % 2) == 0)        // Если шаг кратен двум, то нужно устанавливать напряжение
         {
-            HAL_DAC_SetValue(&hDAC, DAC1_CHANNEL_2, DAC_ALIGN_8B_R, (uint)(stepU * step / 2));  // -V2004
+            HAL::DAC2_::SetValue((uint)(stepU * step / 2));
             // Запускаем ПЛИС для записи необходимого количества точек. Набор будет производиться в течение 2.5 мс (длительсность одного такта)
             FPGA::ForTester::Start();
         }
