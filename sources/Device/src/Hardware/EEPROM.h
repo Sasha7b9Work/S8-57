@@ -27,25 +27,6 @@ public:
     static void SaveData(int num, DataSettings *ds, uint8 *dataA, uint8 *dataB);
     /// ≈сли даннные есть, соответствующий элемент массива равен true.
     static void GetDataInfo(bool existData[MAX_NUM_SAVED_WAVES]);
-
-private:
-    /// ¬озвращает адрес первого свободного байта в секторе настроек
-    static uint FirstFreeAddressForSettings();
-    /// \brief ¬озвращает адрес сохранЄнных настроек или 0, если настройки не сохран€лись. fromEnd указывает, какие настройки от конца
-    /// нужно загружать - 0 - последние, 1 - предпоследние и так далее
-    static uint AddressSavedSettings(int fromEnd);
-    /// ¬озвращает адрес первого свободного байта дл€ записи
-    static uint AddressFirstEmptyByte();
-
-    static uint GetSector(uint address);
-
-    static void EraseSector(uint address);
-
-    static void WriteBytes(uint address, const uint8 *data, int size);
-
-    static void ReadBytes(uint address, void *data, uint size);
-
-    static uint ReadDoubleWord(uint address);
 };
 
 

@@ -1366,11 +1366,6 @@
               <FilePath>.\src\Hardware\EEPROM.h</FilePath>
             </File>
             <File>
-              <FileName>EEPROM_437.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Hardware\EEPROM_437.cpp</FilePath>
-            </File>
-            <File>
               <FileName>Timer.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Hardware\Timer.cpp</FilePath>

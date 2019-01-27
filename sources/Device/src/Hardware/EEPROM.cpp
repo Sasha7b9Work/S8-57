@@ -11,6 +11,23 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /// ¬озвращает число свободных мест дл€ записи. ≈сли 0, то места в OTP уже не осталось.
 static int GetSerialNumber(char buffer[17]);
+/// ¬озвращает адрес первого свободного байта в секторе настроек
+static uint FirstFreeAddressForSettings();
+/// \brief ¬озвращает адрес сохранЄнных настроек или 0, если настройки не сохран€лись. fromEnd указывает, какие настройки от конца
+/// нужно загружать - 0 - последние, 1 - предпоследние и так далее
+static uint AddressSavedSettings(int fromEnd);
+/// ¬озвращает адрес первого свободного байта дл€ записи
+static uint AddressFirstEmptyByte();
+
+static uint GetSector(uint address);
+
+static void EraseSector(uint address);
+
+static void WriteBytes(uint address, const uint8 *data, int size);
+
+static void ReadBytes(uint address, void *data, uint size);
+
+static uint ReadDoubleWord(uint address);
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -71,7 +88,7 @@ void EEPROM::SaveSettings()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-uint EEPROM::FirstFreeAddressForSettings() //-V2506
+static uint FirstFreeAddressForSettings() //-V2506
 {
     uint address = ADDR_SECTOR_SETTINGS_1;
 
@@ -93,7 +110,7 @@ uint EEPROM::FirstFreeAddressForSettings() //-V2506
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-uint EEPROM::AddressSavedSettings(int)
+static uint AddressSavedSettings(int)
 {
     uint addrPrev = 0;
 
@@ -109,14 +126,14 @@ uint EEPROM::AddressSavedSettings(int)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-uint EEPROM::AddressFirstEmptyByte()
+static uint AddressFirstEmptyByte()
 {
     uint address = AddressSavedSettings(0);
     return address + ReadDoubleWord(address);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-uint EEPROM::GetSector(uint address) //-V2506
+static uint GetSector(uint address) //-V2506
 {
     if (address == ADDR_SECTOR_SETTINGS_1)
     {
@@ -136,7 +153,7 @@ uint EEPROM::GetSector(uint address) //-V2506
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void EEPROM::EraseSector(uint address)
+static void EraseSector(uint address)
 {
     CLEAR_FLASH_FLAGS;
 
@@ -162,7 +179,7 @@ void EEPROM::EraseSector(uint address)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void EEPROM::WriteBytes(uint address, const uint8 *data, int size)
+static void WriteBytes(uint address, const uint8 *data, int size)
 {
     CLEAR_FLASH_FLAGS;
 
@@ -181,7 +198,7 @@ void EEPROM::WriteBytes(uint address, const uint8 *data, int size)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void EEPROM::ReadBytes(uint address, void *data, uint size)
+static void ReadBytes(uint address, void *data, uint size)
 {
     uint8 *buffer = (uint8 *)data;
 
@@ -299,8 +316,21 @@ bool OTPmem::SaveSerialNumber(char *servialNumber) //-V2506
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-uint EEPROM::ReadDoubleWord(uint address)
+static uint ReadDoubleWord(uint address)
 {
     return (*((uint *)address));
 }
 
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+bool EEPROM::LoadSettings()
+{
+    uint address = AddressSavedSettings(0);
+
+    if (address && ReadDoubleWord(address) == sizeof(set))
+    {
+        ReadBytes(address, &set, ReadDoubleWord(address));
+        return true;
+    }
+
+    return false;
+}
