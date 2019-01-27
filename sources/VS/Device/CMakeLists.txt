@@ -6,14 +6,14 @@ include_directories("..\\..\\Device\\src\\libs\\HAL\\"
                     "..\\..\\Device\\src\\libs\\FatFS\\"
                     "..\\..\\Device\\src\\libs\\USBH\\"
                     "..\\..\\Device\\src\\libs\\USBD\\"
+                    "..\\..\\Device\\src\\"
                     "..\\..\\common\\"
                     "..\\..\\common\\_VS\\"
                     "..\\..\\common\\_VS\\CMSIS\\"
                     "..\\..\\common\\_VS\\FatFS\\"
                     "..\\..\\common\\_VS\\HAL\\"
                     "..\\..\\common\\_VS\\USBD\\"
-                    "..\\..\\common\\_VS\\USBH\\"
-                    "..\\..\\Device\\src\\")
+                    "..\\..\\common\\_VS\\USBH\\")
                     
 add_definitions(-DSTM32F437xx -DOLD_RECORDER)
 
@@ -33,7 +33,6 @@ add_compile_options(/wd5039)
 source_group(common                    REGULAR_EXPRESSION "../common/*.*")
 source_group(_VS                       REGULAR_EXPRESSION "../../common/_VS/*.*")
 source_group(_VS\\CMSIS                REGULAR_EXPRESSION "../common/_VS/CMSIS/*.*")
-# source_group(_VS\\FatFS                REGULAR_EXPRESSION "../common/_VS/FatFS/*.*")
 source_group(_VS\\HAL                  REGULAR_EXPRESSION "../common/_VS/HAL/*.*")
 source_group(_VS\\USBD                 REGULAR_EXPRESSION "../common/_VS/USBD/*.*")
 source_group(_VS\\USBH                 REGULAR_EXPRESSION "../common/_VS/USBH/*.*")
@@ -44,7 +43,7 @@ source_group(Display\\Font             REGULAR_EXPRESSION "src/Display/Font/*.*"
 source_group(FlashDrive                REGULAR_EXPRESSION "src/FlashDrive/*.*")
 source_group(FPGA                      REGULAR_EXPRESSION "src/FPGA/*.*")
 source_group(Hardware                  REGULAR_EXPRESSION "src/Hardware/*.*")
-source_group(Hardware\\stm32           REGULAR_EXPRESSION "src/Hardware/stm32/*.*")
+source_group(Hardware\\HAL             REGULAR_EXPRESSION "src/VS/Hardware/HAL/*.*")
 source_group(Keyboard                  REGULAR_EXPRESSION "src/Keyboard/*.*")
 source_group(Menu                      REGULAR_EXPRESSION "src/Menu/*.*")
 source_group(Menu\\Pages               REGULAR_EXPRESSION "src/Menu/Pages/*.*")
@@ -61,7 +60,7 @@ source_group(Menu\\Pages\\PageTrig     REGULAR_EXPRESSION "src/Menu/Pages/PageTr
 source_group(Multimeter                REGULAR_EXPRESSION "src/Multimeter/*.*")
 source_group(Osci                      REGULAR_EXPRESSION "src/Osci/*.*")
 source_group(Osci\\Display             REGULAR_EXPRESSION "src/Osci/Display/*.*")
-source_group(Osci\\Processing\\        REGULAR_EXPRESSION "src/Osci/Processing/*.*")
+source_group(Osci\\Measurements\\      REGULAR_EXPRESSION "src/Osci/Measurements/*.*")
 source_group(Recorder                  REGULAR_EXPRESSION "src/Recorder/*.*")
 source_group(SCPI                      REGULAR_EXPRESSION "src/SCPI/*.*")
 source_group(Settings                  REGULAR_EXPRESSION "src/Settings/*.*")
@@ -71,7 +70,6 @@ source_group(Utils                     REGULAR_EXPRESSION "src/Utils/*.*")
 
 file(GLOB SOURCES   ../../common/_VS/*
                     ../../common/_VS/CMSIS/*
-#                    ../../common/_VS/FatFS/*
                     ../../common/_VS/HAL/*
                     ../../common/_VS/USBD/*
                     ../../common/_VS/USBH/*
@@ -82,7 +80,7 @@ file(GLOB SOURCES   ../../common/_VS/*
                     ../../Device/src/FlashDrive/*.*
                     ../../Device/src/FPGA/*.*
                     ../../Device/src/Hardware/*.*
-                    ../../Device/src/Hardware/stm32/*.*
+                    ../../Device/src/VS/Hardware/HAL/*
                     ../../Device/src/Keyboard/*
                     ../../Device/src/Menu/*
                     ../../Device/src/Menu/Pages/*
@@ -99,7 +97,7 @@ file(GLOB SOURCES   ../../common/_VS/*
                     ../../Device/src/Multimeter/*
                     ../../Device/src/Osci/*
                     ../../Device/src/Osci/Display/*
-                    ../../Device/src/Osci/Processing/*
+                    ../../Device/src/Osci/Measurements/*
                     ../../Device/src/Recorder/*
                     ../../Device/src/Settings/*
                     ../../Device/src/Tester/*
