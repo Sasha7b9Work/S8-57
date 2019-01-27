@@ -1,5 +1,6 @@
 #pragma once
 #include "stm32f4xx_hal_def.h"
+#include "stm32f4xx_hal_dma.h"
 
 
 #define TIM_COUNTERMODE_UP          0x00000000U
