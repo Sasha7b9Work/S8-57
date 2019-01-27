@@ -37,7 +37,7 @@ public:
 
     static void *HandleUSBD();
 
-    static PCD_HandleTypeDef handlePCD;
+    static void *HandlePCD();
 
     static bool connectedToUSB;
 
