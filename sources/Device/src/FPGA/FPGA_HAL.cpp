@@ -66,19 +66,7 @@ static PinStruct pins[Pin::Number] =
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-namespace FPGA
-{
-    namespace HAL
-    {
-        namespace GPIO
-        {
-            GPIO_TypeDef *GetPort(Pin::E pin)
-            {
-                return pins[pin].gpioTD;
-            }
-        }
-    }
-}
+#define PORT(pin)   (pins[pin].gpioTD)
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -116,12 +104,12 @@ void FPGA::HAL::GPIO::Init()
     for (int i = 0; i < Pin::Number; i++)
     {
         isGPIO.Pin = GetPin((Pin::E)i);
-        HAL_GPIO_Init(GetPort((Pin::E)i), &isGPIO);
+        HAL_GPIO_Init(PORT((Pin::E)i), &isGPIO);
     }
 
     for (int i = 0; i < Pin::Number; i++)
     {
-        ::GPIO::SetOutputPP_PullDown(GetPort((Pin::E)i), (uint)::Math::LowSignedBit(GetPin((Pin::E)i)));
+        ::GPIO::SetOutputPP_PullDown(PORT((Pin::E)i), (uint)::Math::LowSignedBit(GetPin((Pin::E)i)));
     }
 }
 
@@ -169,24 +157,24 @@ void FPGA::HAL::GPIO::WritePin(Pin::E pin, int enable)
 {
     if (enable)
     {
-        GetPort(pin)->BSRR = GetPin(pin);
+        PORT(pin)->BSRR = GetPin(pin);
     }
     else
     {
-        GetPort(pin)->BSRR = (uint)GetPin(pin) << 16;
+        PORT(pin)->BSRR = (uint)GetPin(pin) << 16;
     }
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void FPGA::HAL::GPIO::SetPin(Pin::E pin)
 {
-    GetPort(pin)->BSRR = GetPin(pin);
+    PORT(pin)->BSRR = GetPin(pin);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void FPGA::HAL::GPIO::ResetPin(Pin::E pin)
 {
-    GetPort(pin)->BSRR = (uint)GetPin(pin) << 16;
+    PORT(pin)->BSRR = (uint)GetPin(pin) << 16;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
