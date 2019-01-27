@@ -1,5 +1,6 @@
 #include "defines.h"
 #include "HAL.h"
+#include "Hardware/Beeper.h"
 #include <stm32f4xx_hal.h>
 
 
@@ -61,4 +62,42 @@ static uint GetSector(uint startAddress)
 
 
     return FLASH_SECTOR_0;
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void HAL::EEPROM_::WriteBytes(uint address, const uint8 *data, int size)
+{
+    CLEAR_FLASH_FLAGS;
+
+    HAL_FLASH_Unlock();
+
+    for (int i = 0; i < size; i++)
+    {
+        if (HAL_FLASH_Program(TYPEPROGRAM_BYTE, address, data[i]) != HAL_OK)
+        {
+            ERROR_HANDLER();
+        }
+        ++address;
+    }
+
+    HAL_FLASH_Lock();
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void HAL::EEPROM_::WriteBufferBytes(uint address, void *buffer, int size)
+{
+    Beeper::WaitForCompletion();
+
+    CLEAR_FLASH_FLAGS
+
+    HAL_FLASH_Unlock();
+
+    for (int i = 0; i < size; i++)
+    {
+        uint64_t data = ((uint8 *)buffer)[i];
+        HAL_FLASH_Program(TYPEPROGRAM_BYTE, address, data);
+        address++;
+    }
+
+    HAL_FLASH_Lock();
 }

@@ -19,8 +19,6 @@ static uint FirstFreeAddressForSettings();
 /// нужно загружать - 0 - последние, 1 - предпоследние и так далее
 static uint AddressSavedSettings(int fromEnd);
 
-static void WriteBytes(uint address, const uint8 *data, int size);
-
 static void ReadBytes(uint address, void *data, uint size);
 
 static uint ReadDoubleWord(uint address);
@@ -80,7 +78,7 @@ void Memory::SaveSettings()
     }
 
     set.size = sizeof(set);
-    WriteBytes(address, (uint8 *)&set, sizeof(set));
+    EEPROM_::WriteBytes(address, (uint8 *)&set, sizeof(set));
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -119,25 +117,6 @@ static uint AddressSavedSettings(int)
     }
 
     return addrPrev;
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void WriteBytes(uint address, const uint8 *data, int size)
-{
-    CLEAR_FLASH_FLAGS;
-
-    HAL_FLASH_Unlock();
-    
-    for (int i = 0; i < size; i++)
-    {
-        if (HAL_FLASH_Program(TYPEPROGRAM_BYTE, address, data[i]) != HAL_OK)
-        {
-            ERROR_HANDLER();
-        }
-        ++address;
-    }
-
-    HAL_FLASH_Lock();
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -211,23 +190,6 @@ String OTPmem::GetSerialNumber(int *freeForWrite)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void WriteBufferBytes(uint address, void *buffer, int size)
-{
-    Beeper::WaitForCompletion();
-
-    CLEAR_FLASH_FLAGS
-
-        HAL_FLASH_Unlock();
-    for (int i = 0; i < size; i++)
-    {
-        uint64_t data = ((uint8 *)buffer)[i];
-        HAL_FLASH_Program(TYPEPROGRAM_BYTE, address, data);
-        address++;
-    }
-    HAL_FLASH_Lock();
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 bool OTPmem::SaveSerialNumber(char *servialNumber) //-V2506
 {
     // Находим первую пустую строку длиной 16 байт в области OTP, начиная с начала
@@ -241,7 +203,7 @@ bool OTPmem::SaveSerialNumber(char *servialNumber) //-V2506
 
     if (address < (uint8 *)FLASH_OTP_END - 16) //-V566
     {
-        WriteBufferBytes((uint)address, (uint8 *)servialNumber, (int)std::strlen(servialNumber) + 1); //-V205
+        EEPROM_::WriteBufferBytes((uint)address, (uint8 *)servialNumber, (int)std::strlen(servialNumber) + 1); //-V205
         return true;
     }
 
