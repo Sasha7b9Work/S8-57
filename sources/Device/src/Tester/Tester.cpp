@@ -2,7 +2,6 @@
 #include "FPGA/FPGA.h"
 #include "FPGA/FPGA_Math.h"
 #include "Hardware/HAL/HAL.h"
-#include "Hardware/Hardware.h"
 #include "Osci/Osci.h"
 #include "Settings/Settings.h"
 #include "Utils/Values.h"

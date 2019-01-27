@@ -2,7 +2,6 @@
 #include "Display/Display_Primitives.h"
 #include "Display/Grid.h"
 #include "Hardware/Battery.h"
-#include "Hardware/Hardware.h"
 
 #include "Settings/Settings.h"
 #include "Utils/Averager.h"

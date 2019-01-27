@@ -1,7 +1,6 @@
 #include <stm32f4xx_hal.h>
 #include "defines.h"
 #include "EEPROM.h"
-#include "Hardware.h"
 #include "Hardware/Beeper.h"
 #include <cstring>
 

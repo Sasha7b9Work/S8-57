@@ -1,5 +1,4 @@
 #pragma once
-#include "Hardware/Hardware.h"
 #include "Multimeter/Multimeter.h"
 #include "Osci/Osci.h"
 #include "Tester/Tester.h"

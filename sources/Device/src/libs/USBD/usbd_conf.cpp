@@ -6,7 +6,6 @@
 #include "Display/Display.h"
 #include <stm32f4xx_hal.h>
 #include "Hardware/Timer.h"
-#include "Hardware/Hardware.h"
 #include "Hardware/VCP.h"
 #include "Settings/Settings.h"
 #endif

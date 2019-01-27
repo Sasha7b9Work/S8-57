@@ -1,7 +1,6 @@
 #include "defines.h"
 #include "Beeper.h"
 #include "Timer.h"
-#include "Hardware.h"
 #include "Utils/Math.h"
 #include <cmath>
 

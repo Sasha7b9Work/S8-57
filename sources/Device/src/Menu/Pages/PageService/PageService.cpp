@@ -7,7 +7,6 @@
 #include "FPGA/FPGA.h"
 #include "FPGA/FPGA_Math.h"
 #include "FPGA/FPGA_Settings.h"
-#include "Hardware/Hardware.h"
 #include "Hardware/Beeper.h"
 #include "Menu/Menu.h"
 #include "Menu/Pages/Include/Definition.h"
