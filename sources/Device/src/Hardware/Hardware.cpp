@@ -14,14 +14,6 @@ using HAL::FSMC;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-static SPI_HandleTypeDef hspi4;
-
-static PCD_HandleTypeDef hpcd_USB_OTG_HS;
-
-static CRC_HandleTypeDef handleCRC = {CRC};
-
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 static void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
 
@@ -46,12 +38,7 @@ void Hardware::Init()
     FSMC::Init();
     Beeper::Init();
     Battery::Init();
-
-    if(HAL_CRC_Init(&handleCRC) != HAL_OK)
-    {
-        ERROR_HANDLER();
-    }
-
+    HAL::CRC32_::Init();
     Clock::Init();
 }
 
@@ -206,10 +193,3 @@ static void MX_GPIO_Init(void)
     GPIO_InitStruct.Pull = GPIO_NOPULL;
     HAL_GPIO_Init(FL_DISP_GPIO_Port, &GPIO_InitStruct);
 }
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-uint Hardware::CalculateCRC32(uint address, uint size)
-{
-    return HAL_CRC_Calculate(&handleCRC, (uint *)address, size);
-}
-

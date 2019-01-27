@@ -23,8 +23,6 @@
 namespace Hardware
 {
     void Init();
-
-    uint CalculateCRC32(uint address, uint size);
 };
 
 
