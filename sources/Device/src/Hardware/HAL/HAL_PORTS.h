@@ -56,6 +56,7 @@ namespace HAL
             static uint Analog;
             static uint Output_PP;
             static uint RisingIT;
+            static uint Input;
         };
 
         struct Pull
@@ -69,5 +70,6 @@ namespace HAL
         void Set(Port::E port, uint16 pin);
         void Reset(Port::E port, uint16 pin);
         void Write(Port::E port, uint16 pin, State::E state);
+        bool Read(Port::E port, uint16 pin);
     }
 }

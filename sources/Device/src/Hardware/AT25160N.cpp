@@ -1,14 +1,18 @@
-//#include <stm32f4xx_hal.h>
 #include "defines.h"
 #include "AT25160N.h"
 #include <cstdlib>
+#include "Hardware/HAL/HAL_PORTS.h"
+
+
+using HAL::PORTS::Mode;
+using HAL::PORTS::Pull;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-#define PIN_OUT     GPIOC, GPIO_PIN_3
-#define PIN_IN      GPIOC, GPIO_PIN_2
-#define PIN_CLK     GPIOB, GPIO_PIN_10
-#define PIN_CS      GPIOB, GPIO_PIN_12
+#define PIN_OUT     HAL::PORTS::Port::_C, HAL::PORTS::Pin::_3
+#define PIN_IN      HAL::PORTS::Port::_C, HAL::PORTS::Pin::_2
+#define PIN_CLK     HAL::PORTS::Port::_B, HAL::PORTS::Pin::_10
+#define PIN_CS      HAL::PORTS::Port::_B, HAL::PORTS::Pin::_12
 
 #define WREN    BIN_U8(00000110)        ///< Set Write Enable Latch
 #define WRDI    BIN_U8(00000100)        ///< Reset Write Enable Latch
@@ -58,28 +62,19 @@ void AT25160N::Init()
 
     //__HAL_RCC_SPI2_CLK_ENABLE();
 
-    GPIO_InitTypeDef isGPIO =
-    {//     SCK         NSS
-        GPIO_PIN_10 | GPIO_PIN_12,
-        GPIO_MODE_OUTPUT_PP,
-        GPIO_PULLDOWN
-    };
-    HAL_GPIO_Init(GPIOB, &isGPIO);
+    //                                  SCK                    NSS
+    uint pins = (uint)(HAL::PORTS::Pin::_10 | HAL::PORTS::Pin::_12);
+    HAL::PORTS::Init(HAL::PORTS::Port::_B, pins, Mode::Output_PP, Pull::Down);
 
-    HAL::PORTS::Init(HAL::PORTS::P)
+    //                                                      MOSI
+    HAL::PORTS::Init(HAL::PORTS::Port::_C, HAL::PORTS::Pin::_3, Mode::Output_PP, Pull::Down);
 
-    //             MOSI
-    isGPIO.Pin = GPIO_PIN_3;
-    HAL_GPIO_Init(GPIOC, &isGPIO);
+    //                                                      MISO
+    HAL::PORTS::Init(HAL::PORTS::Port::_C, HAL::PORTS::Pin::_2, Mode::Input, Pull::Down);
 
-    //             MISO
-    isGPIO.Pin = GPIO_PIN_2;
-    isGPIO.Mode = GPIO_MODE_INPUT;
-    HAL_GPIO_Init(GPIOC, &isGPIO);
-
-    SetPin(PIN_CS);
-    ResetPin(PIN_OUT);
-    ResetPin(PIN_CLK);
+    HAL::PORTS::Set(PIN_CS);
+    HAL::PORTS::Reset(PIN_OUT);
+    HAL::PORTS::Reset(PIN_CLK);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -154,13 +149,13 @@ static void WriteData(uint address, uint8 *data, uint size)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void Write32BytesOrLess(uint address, const uint8 *data, uint size)
+static void Write32BytesOrLess(uint address, const uint8 * /*data*/, uint size)
 {
     WaitFinishWrite();
 
     SetWriteLatch();
 
-    ResetPin(PIN_CS);
+    HAL::PORTS::Reset(PIN_CS);
 
     WriteByte(WRITE); //-V2501
 
@@ -170,31 +165,29 @@ static void Write32BytesOrLess(uint address, const uint8 *data, uint size)
 
     for (uint i = 0; i < size; i++)
     {
-        uint8 byte = data[i];
+        //uint8 byte = data[i];
 
         for (int bit = 7; bit >= 0; bit--)
         {
-            if (_GET_BIT(byte, bit))
-            {
-                GPIOC->BSRR = GPIO_PIN_3;
-            }
-            GPIOB->BSRR = GPIO_PIN_10;
-            GPIOC->BSRR = GPIO_PIN_3 << 16U;
-            GPIOB->BSRR = GPIO_PIN_10 << 16U;
+            //if (_GET_BIT(byte, bit))
+            //{
+            //    GPIOC->BSRR = GPIO_PIN_3;
+            //}
+            //GPIOB->BSRR = GPIO_PIN_10;
+            //GPIOC->BSRR = GPIO_PIN_3 << 16U;
+            //GPIOB->BSRR = GPIO_PIN_10 << 16U;
         }
     }
 
-    HAL_GPIO_WritePin(PIN_CS, GPIO_PIN_SET);
+    HAL::PORTS::Set(PIN_CS);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void SetWriteLatch()
 {
-    //WaitFinishWrite();
-
-    ResetPin(PIN_CS);
+    HAL::PORTS::Reset(PIN_CS);
     WriteByte(WREN); //-V2501
-    SetPin(PIN_CS);
+    HAL::PORTS::Set(PIN_CS);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -202,18 +195,18 @@ static void ResetWriteLatch()
 {
     WaitFinishWrite();
 
-    ResetPin(PIN_CS);
+    HAL::PORTS::Reset(PIN_CS);
     WriteByte(WRDI); //-V2501
-    SetPin(PIN_CS);
+    HAL::PORTS::Set(PIN_CS);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static uint8 ReadStatusRegister()
 {
-    ResetPin(PIN_CS);
+    HAL::PORTS::Reset(PIN_CS);
     WriteByte(RDSR); //-V2501
     uint8 result = ReadByte();
-    SetPin(PIN_CS);
+    HAL::PORTS::Set(PIN_CS);
     return result;
 }
 
@@ -222,10 +215,10 @@ static void WriteStatusRegister(uint8 data)
 {
     WaitFinishWrite();
 
-    ResetPin(PIN_CS);
+    HAL::PORTS::Reset(PIN_CS);
     WriteByte(WRSR); //-V2501
     WriteByte(data);
-    SetPin(PIN_CS);
+    HAL::PORTS::Set(PIN_CS);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -256,11 +249,11 @@ static void WriteByte(uint8 byte)
     {
         if (_GET_BIT(byte, bit))
         {
-            SetPin(PIN_OUT);
+            HAL::PORTS::Set(PIN_OUT);
         }
-        SetPin(PIN_CLK);
-        ResetPin(PIN_CLK);
-        ResetPin(PIN_OUT);
+        HAL::PORTS::Set(PIN_CLK);
+        HAL::PORTS::Reset(PIN_CLK);
+        HAL::PORTS::Reset(PIN_OUT);
     }
 }
 
@@ -271,28 +264,16 @@ static uint8 ReadByte()
 
     for(int i = 0; i < 8; i++)
     {
-        SetPin(PIN_CLK);
+        HAL::PORTS::Set(PIN_CLK);
         retValue <<= 1;
-        if(HAL_GPIO_ReadPin(PIN_IN) == GPIO_PIN_SET)
+        if(HAL::PORTS::Read(PIN_IN))
         {
             retValue |= 0x01;
         }
-        ResetPin(PIN_CLK);
+        HAL::PORTS::Reset(PIN_CLK);
     }
 
     return retValue;
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void SetPin(GPIO_TypeDef *_gpio, uint16 pin)
-{
-    HAL_GPIO_WritePin(_gpio, pin, GPIO_PIN_SET);
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void ResetPin(GPIO_TypeDef *_gpio, uint16 pin)
-{
-    HAL_GPIO_WritePin(_gpio, pin, GPIO_PIN_RESET);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -300,7 +281,7 @@ static void ReadData(uint address, uint8 *data, uint size)
 {
     WaitFinishWrite();
 
-    ResetPin(PIN_CS);
+    HAL::PORTS::Reset(PIN_CS);
 
     WriteByte(READ); //-V2501
     WriteByte((address >> 8) & 0xff);
@@ -312,17 +293,17 @@ static void ReadData(uint address, uint8 *data, uint size)
 
         for (int j = 0; j < 8; j++)
         {
-            GPIOB->BSRR = GPIO_PIN_10;
-
-            data[i] <<= 1;
-            if (HAL_GPIO_ReadPin(PIN_IN) == GPIO_PIN_SET)
-            {
-                data[i] |= 0x01;
-            }
-
-            GPIOB->BSRR = GPIO_PIN_10 << 16U;
+            //GPIOB->BSRR = GPIO_PIN_10;
+            //
+            //data[i] <<= 1;
+            //if (HAL::PORTS::Read(PIN_IN))
+            //{
+            //    data[i] |= 0x01;
+            //}
+            //
+            //GPIOB->BSRR = GPIO_PIN_10 << 16U;
         }
     }
 
-    SetPin(PIN_CS);
+    HAL::PORTS::Set(PIN_CS);
 }

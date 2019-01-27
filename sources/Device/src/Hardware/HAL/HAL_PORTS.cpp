@@ -28,6 +28,7 @@ namespace HAL
         uint Mode::Analog = GPIO_MODE_ANALOG;
         uint Mode::Output_PP = GPIO_MODE_OUTPUT_PP;
         uint Mode::RisingIT = GPIO_MODE_IT_RISING;
+        uint Mode::Input = GPIO_MODE_INPUT;
 
         uint Pull::No = GPIO_NOPULL;
         uint Pull::Down = GPIO_PULLDOWN;
@@ -36,22 +37,19 @@ namespace HAL
 }
 
 
-static GPIO_TypeDef *GetPort(HAL::PORTS::Port::E port)
+static GPIO_TypeDef * const ports[HAL::PORTS::Port::Size] =
 {
-    static GPIO_TypeDef * const ports[HAL::PORTS::Port::Size] =
-    {
-        GPIOA,
-        GPIOB,
-        GPIOC,
-        GPIOD,
-        GPIOE,
-        GPIOF,
-        GPIOG,
-        GPIOH
-    };
+    GPIOA,
+    GPIOB,
+    GPIOC,
+    GPIOD,
+    GPIOE,
+    GPIOF,
+    GPIOG,
+    GPIOH
+};
 
-    return ports[port];
-}
+#define PORT(p) (ports[p])
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -64,23 +62,29 @@ void HAL::PORTS::Init(Port::E port, uint pins, uint mode, uint pull)
         pull
     };
 
-    HAL_GPIO_Init(GetPort(port), &isGPIO);
+    HAL_GPIO_Init(PORT(port), &isGPIO);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void HAL::PORTS::Set(Port::E port, uint16 pin)
 {
-    HAL_GPIO_WritePin(GetPort(port), pin, GPIO_PIN_SET);
+    HAL_GPIO_WritePin(PORT(port), pin, GPIO_PIN_SET);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void HAL::PORTS::Reset(Port::E port, uint16 pin)
 {
-    HAL_GPIO_WritePin(GetPort(port), pin, GPIO_PIN_RESET);
+    HAL_GPIO_WritePin(PORT(port), pin, GPIO_PIN_RESET);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void HAL::PORTS::Write(Port::E port, uint16 pin, State::E state)
 {
-    HAL_GPIO_WritePin(GetPort(port), pin, (state == State::Enabled) ? GPIO_PIN_SET : GPIO_PIN_RESET);
+    HAL_GPIO_WritePin(PORT(port), pin, (state == State::Enabled) ? GPIO_PIN_SET : GPIO_PIN_RESET);
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+bool HAL::PORTS::Read(Port::E port, uint16 pin)
+{
+    return (HAL_GPIO_ReadPin(PORT(port), pin) == GPIO_PIN_SET);
 }
