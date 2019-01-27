@@ -776,7 +776,7 @@ DEF_PAGE_SB( ppSerialNumber, // -V641 // -V1027                                 
 static void OnPress_EraseData()
 {
     Display::FuncOnWaitStart(DICT(DDeleteFromMemory), false);
-    EEPROM::DeleteAllData();
+    Memory::DeleteAllData();
     Display::FuncOnWaitStop();
 }
 

@@ -159,7 +159,7 @@ bool Reader::ReadFromROM(StructDataDrawing *dataStruct) // -V2506
 
     dataStruct->forMode = ModeWork::ROM;
 
-    if (EEPROM::GetData(NUM_ROM_SIGNAL, &dataSettings, IN_A, IN_B))
+    if (Memory::GetData(NUM_ROM_SIGNAL, &dataSettings, IN_A, IN_B))
     {
         DS = &dataSettings;
 

@@ -13,7 +13,7 @@ Settings set = Settings::defaultSettings;
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void Settings::Load(bool _default)
 {
-    if(_default || !EEPROM::LoadSettings())
+    if(_default || !Memory::LoadSettings())
     {
         Reset();
         Osci::Init();
@@ -28,7 +28,7 @@ void Settings::Save()
 {
     uint8 data[1024];
     set.TransformForSave(data);
-    EEPROM::SaveSettings();
+    Memory::SaveSettings();
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

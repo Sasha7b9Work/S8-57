@@ -10,23 +10,21 @@ struct DataSettings;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-class EEPROM
+namespace Memory
 {
-public:
+    void SaveSettings();
 
-    static void SaveSettings();
+    bool LoadSettings();
 
-    static bool LoadSettings();
+    void DeleteAllData();
 
-    static void DeleteAllData();
+    bool GetData(int num, DataSettings *ds, uint8 *dataA, uint8 *dataB);
 
-    static bool GetData(int num, DataSettings *ds, uint8 *dataA, uint8 *dataB);
+    void DeleteData(int num);
 
-    static void DeleteData(int num);
-
-    static void SaveData(int num, DataSettings *ds, uint8 *dataA, uint8 *dataB);
+    void SaveData(int num, DataSettings *ds, uint8 *dataA, uint8 *dataB);
     /// Если даннные есть, соответствующий элемент массива равен true.
-    static void GetDataInfo(bool existData[MAX_NUM_SAVED_WAVES]);
+    void GetDataInfo(bool existData[MAX_NUM_SAVED_WAVES]);
 };
 
 
