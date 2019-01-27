@@ -1,25 +1,25 @@
 #include "defines.h"
 #include "AD9286.h"
 #include "Hardware/Timer.h"
-#include "Hardware/HAL/HAL_PORTS.h"
+#include "Hardware/HAL/HAL_PIO.h"
 
 
 using namespace Hardware;
 
-using HAL::PORTS::Mode;
-using HAL::PORTS::Pull;
+using HAL::PIO::Mode;
+using HAL::PIO::Pull;
 
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-#define PIN_SCK     HAL::PORTS::Pin::_10
-#define PORT_SCK    HAL::PORTS::Port::_B
+#define PIN_SCK     HAL::PIO::Pin::_10
+#define PORT_SCK    HAL::PIO::Port::_B
 
-#define PIN_DAT     HAL::PORTS::Pin::_3
-#define PORT_DAT    HAL::PORTS::Port::_C
+#define PIN_DAT     HAL::PIO::Pin::_3
+#define PORT_DAT    HAL::PIO::Port::_C
 
-#define PIN_CS      HAL::PORTS::Pin::_11
-#define PORT_CS     HAL::PORTS::Port::_E
+#define PIN_CS      HAL::PIO::Pin::_11
+#define PORT_CS     HAL::PIO::Port::_E
 
 #define SCK         PORT_SCK, PIN_SCK
 #define DAT         PORT_DAT, PIN_DAT
@@ -42,15 +42,15 @@ void AD9286::Init()
         SCK - 69 - PB10
     */
    
-    HAL::PORTS::Init(PORT_CS, PIN_CS, Mode::Output_PP, Pull::Up);       // Инициализация CS
+    HAL::PIO::Init(PORT_CS, PIN_CS, Mode::Output_PP, Pull::Up);       // Инициализация CS
 
-    HAL::PORTS::Init(PORT_DAT, PIN_DAT, Mode::Output_PP, Pull::Up);     // Инициализация DAT
+    HAL::PIO::Init(PORT_DAT, PIN_DAT, Mode::Output_PP, Pull::Up);     // Инициализация DAT
     
-    HAL::PORTS::Init(PORT_SCK, PIN_SCK, Mode::Output_PP, Pull::Up);     // Инициализация SCK
+    HAL::PIO::Init(PORT_SCK, PIN_SCK, Mode::Output_PP, Pull::Up);     // Инициализация SCK
 
-    HAL::PORTS::Set(CS);
-    HAL::PORTS::Reset(DAT);
-    HAL::PORTS::Reset(SCK);
+    HAL::PIO::Set(CS);
+    HAL::PIO::Reset(DAT);
+    HAL::PIO::Reset(SCK);
 
     Tune();
 }
@@ -66,7 +66,7 @@ void AD9286::Tune()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void WriteByte(uint8 address, uint8 byte)
 {
-    HAL::PORTS::Reset(CS);
+    HAL::PIO::Reset(CS);
 
     uint value = (uint)((address << 8) + byte);
 
@@ -74,19 +74,19 @@ static void WriteByte(uint8 address, uint8 byte)
     {
         if (_GET_BIT(value, i))
         {
-            HAL::PORTS::Set(DAT);
+            HAL::PIO::Set(DAT);
         }
         else
         {
-            HAL::PORTS::Reset(DAT);
+            HAL::PIO::Reset(DAT);
         }
         PAUSE_ON_TICKS(100);
 
-        HAL::PORTS::Set(SCK);
+        HAL::PIO::Set(SCK);
         PAUSE_ON_TICKS(100);
 
-        HAL::PORTS::Reset(SCK);
+        HAL::PIO::Reset(SCK);
     }
 
-    HAL::PORTS::Set(CS);
+    HAL::PIO::Set(CS);
 }

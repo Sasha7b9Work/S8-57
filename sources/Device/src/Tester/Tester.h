@@ -4,7 +4,7 @@
 #include "Settings/SettingsChannel.h"
 #include "Utils/String.h"
 #include "Command.h"
-#include "Hardware/HAL/HAL_PORTS.h"
+#include "Hardware/HAL/HAL_PIO.h"
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -25,16 +25,11 @@
 class Tester
 {
 public:
-#define Port_TEST_ON  HAL::PORTS::Port::_F
-//#define Pin_TEST_ON  HAL::PORTS::Pin::_13
-#define Port_PNP      HAL::PORTS::Port::_F
-//#define Pin_PNP      HAL::PORTS::Pin::_14
-#define Port_U        HAL::PORTS::Port::_F
-//#define Pin_U        HAL::PORTS::Pin::_15
-#define Port_I        HAL::PORTS::Port::_G
-//#define Pin_I        HAL::PORTS::Pin::_0
-#define Port_TEST_STR HAL::PORTS::Port::_C
-//#define Pin_TEST_STR    GPIO_PIN_9
+#define Port_TEST_ON  HAL::PIO::Port::_F
+#define Port_PNP      HAL::PIO::Port::_F
+#define Port_U        HAL::PIO::Port::_F
+#define Port_I        HAL::PIO::Port::_G
+#define Port_TEST_STR HAL::PIO::Port::_C
 
     static uint16 Pin_TEST_ON;
     static uint16 Pin_PNP;

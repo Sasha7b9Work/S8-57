@@ -1451,14 +1451,14 @@
               <FilePath>.\src\Hardware\HAL\HAL_NVIC.cpp</FilePath>
             </File>
             <File>
-              <FileName>HAL_PORTS.cpp</FileName>
+              <FileName>HAL_PIO.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\Hardware\HAL\HAL_PORTS.cpp</FilePath>
+              <FilePath>.\src\Hardware\HAL\HAL_PIO.cpp</FilePath>
             </File>
             <File>
-              <FileName>HAL_PORTS.h</FileName>
+              <FileName>HAL_PIO.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\src\Hardware\HAL\HAL_PORTS.h</FilePath>
+              <FilePath>.\src\Hardware\HAL\HAL_PIO.h</FilePath>
             </File>
             <File>
               <FileName>HAL_RTC.cpp</FileName>

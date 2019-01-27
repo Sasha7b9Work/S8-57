@@ -3,7 +3,7 @@
 
 namespace HAL
 {
-    namespace PORTS
+    namespace PIO
     {
         struct Port
         {

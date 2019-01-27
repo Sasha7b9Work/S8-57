@@ -4,7 +4,7 @@
 #include <stm32f4xx_hal.h>
 
 
-using namespace HAL::PORTS;
+using namespace HAL::PIO;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -16,7 +16,7 @@ void HAL::DAC2_::Init()
 {
     RCC->APB1ENR |= RCC_APB1ENR_DACEN;      // Включаем ЦАП
 
-    HAL::PORTS::Init(Port::_A, Pin::_5, Mode::Analog, Pull::No);    // Настраиваем выходной порт
+    HAL::PIO::Init(Port::_A, Pin::_5, Mode::Analog, Pull::No);    // Настраиваем выходной порт
 
     if (HAL_DAC_Init(&handle) != HAL_OK)
     {
@@ -25,17 +25,17 @@ void HAL::DAC2_::Init()
 
     //                         TEST_ON               PNP               U
     uint pins = (uint)(Tester::Pin_TEST_ON | Tester::Pin_PNP | Tester::Pin_U);
-    HAL::PORTS::Init(Port_TEST_ON, pins, Mode::Output_PP, Pull::Down);
+    HAL::PIO::Init(Port_TEST_ON, pins, Mode::Output_PP, Pull::Down);
 
     //                               I
-    HAL::PORTS::Init(Port_I, Tester::Pin_I, Mode::Output_PP, Pull::Down);
+    HAL::PIO::Init(Port_I, Tester::Pin_I, Mode::Output_PP, Pull::Down);
 
     //              TEST_STR - EXTI9
-    HAL::PORTS::Init(Port_TEST_STR, Tester::Pin_TEST_STR, Mode::RisingIT, Pull::No);
+    HAL::PIO::Init(Port_TEST_STR, Tester::Pin_TEST_STR, Mode::RisingIT, Pull::No);
 
     HAL_NVIC_SetPriority(EXTI9_5_IRQn, 2, 0);
 
-    HAL::PORTS::Set(Port_TEST_ON, Tester::Pin_TEST_ON);         // Отключаем тестер-компонет
+    HAL::PIO::Set(Port_TEST_ON, Tester::Pin_TEST_ON);         // Отключаем тестер-компонет
 
     // Инициализируем ЦАП
     GPIO_InitTypeDef _gpio =
