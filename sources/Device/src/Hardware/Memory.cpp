@@ -1,4 +1,4 @@
-#include <stm32f4xx_hal.h>
+//#include <stm32f4xx_hal.h>
 #include "defines.h"
 #include "Memory.h"
 #include "Hardware/Beeper.h"
@@ -8,11 +8,10 @@
 
 
 using HAL::EEPROM_;
+using HAL::OTP_;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/// ¬озвращает число свободных мест дл€ записи. ≈сли 0, то места в OTP уже не осталось.
-static int GetSerialNumber(char buffer[17]);
 /// ¬озвращает адрес первого свободного байта в секторе настроек
 static uint FirstFreeAddressForSettings();
 /// \brief ¬озвращает адрес сохранЄнных настроек или 0, если настройки не сохран€лись. fromEnd указывает, какие настройки от конца
@@ -31,15 +30,6 @@ static uint ReadDoubleWord(uint address);
 #define ADDR_SECTOR_SETTINGS_2  ((uint)0x080E0000)
 
 #define SIZE_SECTOR_128         (128 * 1024)
-
-#define CLEAR_FLASH_FLAGS                                                                   \
-    __HAL_FLASH_CLEAR_FLAG(FLASH_FLAG_EOP     |  /* end of operation flag              */   \
-                            FLASH_FLAG_OPERR  |  /* operation error flag               */   \
-                            FLASH_FLAG_WRPERR |  /* write protected error flag         */   \
-                            FLASH_FLAG_PGAERR |  /* programming alignment error flag   */   \
-                            FLASH_FLAG_PGPERR |  /* programming parallelism error flag */   \
-                            FLASH_FLAG_PGSERR);  /* programming sequence error flag    */
-
 
 #define READ_BYTE(address)          (*((uint8 *)address))
 
@@ -157,57 +147,17 @@ void Memory::DeleteAllData()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static int GetSerialNumber(char buffer[17]) //-V2506
-{
-    /// \todo улучшить - нельз€ разбрасыватьс€ байтами.  ажда€ запись должна занимать столько места, сколько в ней символов, а не 16, как сейчас.
-
-    const int allShotsMAX = 512 / 16;   // ћаксимальное число записей в OTP серийного номера.
-
-    uint8 *address = (uint8 *)FLASH_OTP_END - 15; //-V566
-
-    do
-    {
-        address -= 16;
-    } while (*address == 0xff && address > (uint8 *)FLASH_OTP_BASE); //-V566
-
-    if (*address == 0xff)   // Ќе нашли строки с информацией, дойд€ до начального адреса OTP
-    {
-        buffer[0] = 0;
-        return allShotsMAX;
-    }
-
-    std::strcpy(buffer, (char *)address); //-V2513
-
-    return allShotsMAX - (address - (uint8 *)FLASH_OTP_BASE) / 16 - 1; //-V566 //-V110
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 String OTPmem::GetSerialNumber(int *freeForWrite)
 {
     char buffer[20];
-    *freeForWrite = ::GetSerialNumber(buffer);
+    *freeForWrite = OTP_::GetSerialNumber(buffer);
     return String(buffer);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 bool OTPmem::SaveSerialNumber(char *servialNumber) //-V2506
 {
-    // Ќаходим первую пустую строку длиной 16 байт в области OTP, начина€ с начала
-    uint8 *address = (uint8 *)FLASH_OTP_BASE; //-V566
-
-    while ((*address) != 0xff &&                    // *address != 0xff означает, что запись в эту строку уже производилась
-           address < (uint8 *)FLASH_OTP_END - 16) //-V566
-    {
-        address += 16;
-    }
-
-    if (address < (uint8 *)FLASH_OTP_END - 16) //-V566
-    {
-        EEPROM_::WriteBufferBytes((uint)address, (uint8 *)servialNumber, (int)std::strlen(servialNumber) + 1); //-V205
-        return true;
-    }
-
-    return false;
+    return OTP_::SaveSerialNumber(servialNumber);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
