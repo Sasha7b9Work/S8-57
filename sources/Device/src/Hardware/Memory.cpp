@@ -7,6 +7,8 @@
 #include "Hardware/HAL/HAL.h"
 
 
+using HAL::EEPROM_;
+
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /// ¬озвращает число свободных мест дл€ записи. ≈сли 0, то места в OTP уже не осталось.
@@ -16,10 +18,6 @@ static uint FirstFreeAddressForSettings();
 /// \brief ¬озвращает адрес сохранЄнных настроек или 0, если настройки не сохран€лись. fromEnd указывает, какие настройки от конца
 /// нужно загружать - 0 - последние, 1 - предпоследние и так далее
 static uint AddressSavedSettings(int fromEnd);
-
-static uint GetSector(uint address);
-
-static void EraseSector(uint address);
 
 static void WriteBytes(uint address, const uint8 *data, int size);
 
@@ -77,7 +75,7 @@ void Memory::SaveSettings()
 
     if(address == MAX_UINT || freeMemory <= sizeof(Settings))
     {
-        EraseSector(ADDR_SECTOR_SETTINGS_1);
+        EEPROM_::EraseSector(ADDR_SECTOR_SETTINGS_1);
         address = ADDR_SECTOR_SETTINGS_1;
     }
 
@@ -121,52 +119,6 @@ static uint AddressSavedSettings(int)
     }
 
     return addrPrev;
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static uint GetSector(uint address) //-V2506
-{
-    if (address == ADDR_SECTOR_SETTINGS_1)
-    {
-        return FLASH_SECTOR_10;
-    }
-    else if (address == ADDR_SECTOR_SETTINGS_2)
-    {
-        return FLASH_SECTOR_11;
-    }
-    else
-    {
-        // ничего не делаем
-    }
-
-
-    return FLASH_SECTOR_0;
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void EraseSector(uint address)
-{
-    CLEAR_FLASH_FLAGS;
-
-    HAL_FLASH_Unlock();
-
-    FLASH_EraseInitTypeDef isFLASH =
-    {
-        FLASH_TYPEERASE_SECTORS,
-        0,
-        GetSector(address),
-        1,
-        FLASH_VOLTAGE_RANGE_3
-    };
-
-    uint error = 0;
-
-    if (HAL_FLASHEx_Erase(&isFLASH, &error) != HAL_OK)
-    {
-        ERROR_HANDLER();
-    }
-
-    HAL_FLASH_Lock();
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -223,16 +175,6 @@ void Memory::SaveData(int /*num*/, DataSettings * /*ds*/, uint8 * /*dataA*/, uin
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Memory::DeleteAllData()
 {
-    /*
-    EraseSector(ADDR_DATA_DATA);
-    EraseSector(ADDR_DATA_0);
-    EraseSector(ADDR_DATA_1);
-    EraseSector(ADDR_DATA_2);
-    EraseSector(ADDR_DATA_3);
-    EraseSector(ADDR_DATA_4);
-    EraseSector(ADDR_DATA_5);
-    EraseSector(ADDR_DATA_TEMP);
-    */
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
