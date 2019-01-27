@@ -501,11 +501,6 @@
               <FilePath>.\src\libs\HAL\stm32f4xx_hal_conf.h</FilePath>
             </File>
             <File>
-              <FileName>stm32f4xx_hal_msp.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\libs\HAL\stm32f4xx_hal_msp.cpp</FilePath>
-            </File>
-            <File>
               <FileName>stm32f4xx_hal.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\common\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal.c</FilePath>
@@ -1439,6 +1434,11 @@
               <FileName>HAL_FSMC.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Hardware\HAL\HAL_FSMC.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>HAL_MSP.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\HAL\HAL_MSP.cpp</FilePath>
             </File>
             <File>
               <FileName>HAL_NVIC.cpp</FileName>
