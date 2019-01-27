@@ -8,7 +8,7 @@
 #include "FlashDrive/FlashDrive.h"
 #include "FPGA/FPGA.h"
 #include "FPGA/FPGA_Settings.h"
-#include "Hardware/EEPROM.h"
+#include "Hardware/Memory.h"
 #include "Hardware/Beeper.h"
 #include "Menu/Menu.h"
 #include "Menu/Pages/Include/Definition.h"

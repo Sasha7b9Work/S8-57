@@ -5,7 +5,7 @@
 #include "Display/Painter.h"
 #include "Display/Symbols.h"
 #include "FlashDrive/FlashDrive.h"
-#include "Hardware/EEPROM.h"
+#include "Hardware/Memory.h"
 #include "Hardware/Beeper.h"
 #include "Menu/MenuItems.h"
 #include "Menu/Pages/Include/PageMemory.h"

@@ -6,7 +6,7 @@
 #include "Reader.h"
 #undef _INCLUDE_DATA_
 #include "FPGA/FPGA.h"
-#include "Hardware/EEPROM.h"
+#include "Hardware/Memory.h"
 #include "Utils/Math.h"
 #include <cstring>
 

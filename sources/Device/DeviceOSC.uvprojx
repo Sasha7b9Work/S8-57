@@ -1356,14 +1356,14 @@
               <FilePath>.\src\Hardware\Clock.h</FilePath>
             </File>
             <File>
-              <FileName>EEPROM.cpp</FileName>
+              <FileName>Memory.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\Hardware\EEPROM.cpp</FilePath>
+              <FilePath>.\src\Hardware\Memory.cpp</FilePath>
             </File>
             <File>
-              <FileName>EEPROM.h</FileName>
+              <FileName>Memory.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\src\Hardware\EEPROM.h</FilePath>
+              <FilePath>.\src\Hardware\Memory.h</FilePath>
             </File>
             <File>
               <FileName>Timer.cpp</FileName>
