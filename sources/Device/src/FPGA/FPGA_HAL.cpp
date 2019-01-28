@@ -222,14 +222,7 @@ void FPGA::HAL::Interrupt::P2P::Init(pFuncVV func)
 {
     funcP2P = func;
 
-    static GPIO_InitTypeDef isGPIO =
-    {
-        GPIO_PIN_1,
-        GPIO_MODE_IT_RISING,
-        GPIO_NOPULL
-    };
-
-    HAL_GPIO_Init(GPIOG, &isGPIO);
+    ::HAL::PIO::Init(::HAL::PIO::Port::_G, ::HAL::PIO::Pin::_1, ::HAL::PIO::Mode::RisingIT, ::HAL::PIO::Pull::No);
 
     HAL_NVIC_SetPriority(EXTI1_IRQn, 10, 10);
 }
