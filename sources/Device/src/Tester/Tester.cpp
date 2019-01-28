@@ -17,15 +17,7 @@ using HAL::PIO::State;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//static DAC_HandleTypeDef hDAC = {DAC};
-
-uint8 Tester::data[Chan::Size][NUM_STEPS][TESTER_NUM_POINTS];
-
 static Settings oldSet = Settings::defaultSettings;
-
-int   Tester::step = 0;
-float Tester::stepU = 0.0F;
-bool  Tester::enabled = false;
 
 uint16 Tester::Pin_TEST_ON = HAL::PIO::Pin::_13;
 uint16 Tester::Pin_PNP = HAL::PIO::Pin::_14;
@@ -33,6 +25,18 @@ uint16 Tester::Pin_U = HAL::PIO::Pin::_15;
 uint16 Tester::Pin_I = HAL::PIO::Pin::_0;
 uint16 Tester::Pin_TEST_STR = HAL::PIO::Pin::_9;
 
+/// Загрузить FPGA в соответствии с установленными настройками
+static void LoadFPGA();
+/// Считать данные очередной ступеньки
+static void ReadData();
+/// Текущий шаг
+static int step = 0;
+/// Шаг изменения напряжения
+static float stepU = 0.0F;
+/// Установленное в true значение означает, что вклюён режим тестера
+static bool enabled = false;
+
+static uint8 data[Chan::Size][Tester::NUM_STEPS][TESTER_NUM_POINTS];
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void Tester::Init()
@@ -43,7 +47,7 @@ void Tester::Init()
         {
             for (int k = 0; k < TESTER_NUM_POINTS; k++)
             {
-                Tester::data[i][j][k] = 0;
+                data[i][j][k] = 0;
             }
         }
     }
@@ -135,7 +139,7 @@ void Tester::Disable() // -V2506
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Tester::LoadFPGA()
+static void LoadFPGA()
 {
 
 }
@@ -185,14 +189,14 @@ void Tester::ProcessStep()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Tester::ReadData()
+static void ReadData()
 {
     uint8 *x = &data[Chan::A][step / 2][0];
     uint8 *y = &data[Chan::B][step / 2][0];
 
     if(FPGA::ForTester::Read(x, y))
     {
-        Display::SetPoints(step / 2, x, y);
+        Tester::Display::SetPoints(step / 2, x, y);
     }
 }
 

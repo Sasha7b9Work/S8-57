@@ -66,20 +66,6 @@ public:
         static void SetPoints(int numStep, const uint8 dx[TESTER_NUM_POINTS], const uint8 dy[TESTER_NUM_POINTS]);
     };
 
-private:
-    /// Загрузить FPGA в соответствии с установленными настройками
-    static void LoadFPGA();
-    /// Считать данные очередной ступеньки
-    static void ReadData();
-    /// Текущий шаг
-    static int step;
-    /// Шаг изменения напряжения
-    static float stepU;
-    /// Установленное в true значение означает, что вклюён режим тестера
-    static bool enabled;
-
-    static uint8 data[Chan::Size][NUM_STEPS][TESTER_NUM_POINTS];
-
 public:
     /// Чем будем управлять в тестер-компоненте - напряжением или током
     struct Control
