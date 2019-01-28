@@ -39,6 +39,8 @@ namespace Osci
             static bool IsActive();
             /// Включить/отключить отображение
             static void ChangeState();
+
+            static void Draw();
             /// Позиция курсора
             static int8 posCursor;
         };

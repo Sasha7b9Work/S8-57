@@ -25,9 +25,6 @@ static int top = 0;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/// Ќарисовать страницу выбора измерений
-static void DrawPageChoice();
-
 static int GetTopTable();
 
 
@@ -109,7 +106,7 @@ void Graphics::Draw()
 
     if (Menu::GetNameOpenedPage() == Page::Name::Measures_Auto_Tune)
     {
-        DrawPageChoice();
+        PageChoice::Draw();
     }
 }
 
@@ -129,47 +126,6 @@ static int GetTopTable()
     }
 
     return y;
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void DrawPageChoice()
-{
-    if(!Measurements::PageChoice::IsActive())
-    {
-        return;
-    }
-    int x = (NUM_MEASURES_IS_6_1 || NUM_MEASURES_IS_6_2) ? (Grid::Right() - 3 * Grid::Width() / 5) : Grid::Left();
-    int y = Grid::Top();
-    int dX = Grid::Width() / 5;
-    int dY = 22;
-    int maxRow = (NUM_MEASURES_IS_6_1 || NUM_MEASURES_IS_6_2) ? 8 : 5;
-    int maxCol = (NUM_MEASURES_IS_6_1 || NUM_MEASURES_IS_6_2) ? 3 : 5;
-    Measure::Type::E meas = Measure::Type::None;
-    Font::SetCurrent(Font::Type::_UGO);
-
-    for (int row = 0; row < maxRow; row++)
-    {
-        for (int col = 0; col < maxCol; col++)
-        {
-            if (meas >= Measure::Type::Number)
-            {
-                break;
-            }
-            int x0 = x + col * dX;
-            int y0 = y + row * dY;
-            bool active = (meas == Measurements::PageChoice::posCursor);
-            Rectangle(dX, dY).Draw(x0, y0, Color::WHITE);
-            Region(dX - 2, dY - 2).Fill(x0 + 1, y0 + 1, (active ? Color::FLASH_10 : Color::BACK));
-            Color::SetCurrent(active ? Color::FLASH_01 : Color::FILL);
-            Char(Measure::GetChar(meas)).Draw10SymbolsInRect(x0 + 2, y0 + 1);
-            Font::SetCurrent(Font::Type::_5);
-            //Text(Measure::Get(row, col).Name()).DrawRelativelyRight(x0 + dX, y0 + 12, active ? Color::FLASH_01 : Color::FILL);
-            Text("test").DrawRelativelyRight(x0 + dX, y0 + 12, active ? Color::FLASH_01 : Color::FILL);
-            Font::SetCurrent(Font::Type::_UGO);
-            meas = (Measure::Type::E)((int)meas + 1);    // meas++;
-        }
-    }
-    Font::SetCurrent(Font::Type::_8);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
