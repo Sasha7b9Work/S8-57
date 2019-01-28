@@ -25,7 +25,7 @@ void HAL_MspInit(void)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void HAL_ADC_MspInit(ADC_HandleTypeDef* hadc)
+void HAL_ADC_MspInit(const ADC_HandleTypeDef* hadc)
 {
     GPIO_InitTypeDef GPIO_InitStruct;
     if (hadc->Instance == ADC3)
@@ -41,7 +41,7 @@ void HAL_ADC_MspInit(ADC_HandleTypeDef* hadc)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void HAL_ADC_MspDeInit(ADC_HandleTypeDef* hadc)
+void HAL_ADC_MspDeInit(const ADC_HandleTypeDef* hadc)
 {
     if (hadc->Instance == ADC3)
     {
@@ -54,7 +54,7 @@ void HAL_ADC_MspDeInit(ADC_HandleTypeDef* hadc)
 
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void HAL_DAC_MspInit(DAC_HandleTypeDef* hdac)
+void HAL_DAC_MspInit(const DAC_HandleTypeDef* hdac)
 {
     GPIO_InitTypeDef GPIO_InitStruct;
     if(hdac->Instance==DAC)
@@ -71,7 +71,7 @@ void HAL_DAC_MspInit(DAC_HandleTypeDef* hdac)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void HAL_DAC_MspDeInit(DAC_HandleTypeDef* hdac)
+void HAL_DAC_MspDeInit(const DAC_HandleTypeDef* hdac)
 {
     if(hdac->Instance==DAC)
     {
@@ -82,7 +82,7 @@ void HAL_DAC_MspDeInit(DAC_HandleTypeDef* hdac)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void HAL_SPI_MspInit(SPI_HandleTypeDef* hspi)
+void HAL_SPI_MspInit(const SPI_HandleTypeDef* hspi)
 {
     GPIO_InitTypeDef GPIO_InitStruct;
     if (hspi->Instance == SPI4)
@@ -103,7 +103,7 @@ void HAL_SPI_MspInit(SPI_HandleTypeDef* hspi)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void HAL_SPI_MspDeInit(SPI_HandleTypeDef* hspi)
+void HAL_SPI_MspDeInit(const SPI_HandleTypeDef* hspi)
 {
     if (hspi->Instance == SPI4)
     {
@@ -119,7 +119,7 @@ void HAL_SPI_MspDeInit(SPI_HandleTypeDef* hspi)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void HAL_UART_MspInit(UART_HandleTypeDef* huart)
+void HAL_UART_MspInit(const UART_HandleTypeDef* huart)
 {
     GPIO_InitTypeDef GPIO_InitStruct;
 
@@ -136,7 +136,7 @@ void HAL_UART_MspInit(UART_HandleTypeDef* huart)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void HAL_UART_MspDeInit(UART_HandleTypeDef* huart)
+void HAL_UART_MspDeInit(const UART_HandleTypeDef* huart)
 {
     if(huart->Instance == USART3)
     {
@@ -150,7 +150,7 @@ void HAL_UART_MspDeInit(UART_HandleTypeDef* huart)
 void HAL_PCD_MspInit(PCD_HandleTypeDef *)
 {
     __GPIOA_CLK_ENABLE();
-    __USB_OTG_FS_CLK_ENABLE();
+    __USB_OTG_FS_CLK_ENABLE(); //-V760
     __HAL_RCC_USB_OTG_FS_CLK_ENABLE();
     __SYSCFG_CLK_ENABLE();
 
@@ -181,7 +181,7 @@ void HAL_PCD_MspInit(PCD_HandleTypeDef *)
 void HAL_HCD_MspInit(HCD_HandleTypeDef *)
 {
     __GPIOB_CLK_ENABLE();
-    __USB_OTG_HS_CLK_ENABLE();
+    __USB_OTG_HS_CLK_ENABLE(); //-V760
     __HAL_RCC_USB_OTG_HS_CLK_ENABLE();
     __SYSCFG_CLK_ENABLE();
 

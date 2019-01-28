@@ -11,12 +11,12 @@ int HAL::OTP_::GetSerialNumber(char buffer[17])
 
     const int allShotsMAX = 512 / 16;   // Максимальное число записей в OTP серийного номера.
 
-    uint8 *address = (uint8 *)FLASH_OTP_END - 15;
+    uint8 *address = (uint8 *)(FLASH_OTP_END - 15U); //-V566
 
     do
     {
         address -= 16;
-    } while (*address == 0xff && address > (uint8 *)FLASH_OTP_BASE);
+    } while (*address == 0xff && address > (uint8 *)FLASH_OTP_BASE); //-V566
 
     if (*address == 0xff)   // Не нашли строки с информацией, дойдя до начального адреса OTP
     {
@@ -26,7 +26,7 @@ int HAL::OTP_::GetSerialNumber(char buffer[17])
 
     std::strcpy(buffer, (char *)address);
 
-    return allShotsMAX - (address - (uint8 *)FLASH_OTP_BASE) / 16 - 1;
+    return allShotsMAX - (address - (uint8 *)FLASH_OTP_BASE) / 16 - 1; //-V566
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
