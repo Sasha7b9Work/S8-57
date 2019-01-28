@@ -1,13 +1,8 @@
 #include "defines.h"
 #include "FPGA/FPGA.h"
-#include "FPGA/FPGA_Math.h"
 #include "Hardware/HAL/HAL.h"
 #include "Osci/Osci.h"
 #include "Settings/Settings.h"
-#include "Utils/Values.h"
-
-#include "Hardware/HAL/HAL.h"
-#include "Tester/Tester_Settings.h"
 
 
 using namespace FPGA::Settings;
@@ -246,20 +241,6 @@ void Tester::LoadStep()
         stepU = 255.0F / 3 * ((TESTER_STEP_I == StepI::_20mA) ? 2 : 0.4F) / 5;
     }
 }
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-String Tester::Settings::Shift::ToString(Scale::E scale) // -V2506
-{
-    if (ch == Chan::A)
-    {
-        return RShift::ToString(shift, (Range::E)scale, Divider::_1);
-    }
-
-    float shiftAbs = FPGA::Math::RShift2Abs(shift,  (Range::E)scale) * 1e-3F;
-
-    return Current(shiftAbs).ToString();
-}
-
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void HAL_GPIO_EXTI_Callback(uint16 pin)

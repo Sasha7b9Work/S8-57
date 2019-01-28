@@ -1,8 +1,4 @@
 #pragma once
-#include "Display/Colors.h"
-#include "FPGA/FPGA_Settings.h"
-#include "Settings/SettingsChannel.h"
-#include "Utils/String.h"
 #include "Command.h"
 #include "Hardware/HAL/HAL_PIO.h"
 
