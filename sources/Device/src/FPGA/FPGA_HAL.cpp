@@ -20,20 +20,6 @@ using HAL::FSMC;
 
 extern bool givingStart;
 
-class GPIO
-{
-public:
-    static void SetOutputPP_PullDown(GPIO_TypeDef *pio, uint numPin)
-    {
-        pio->MODER &= ~(GPIO_MODER_MODER0 << (numPin * 2));
-        pio->MODER |= (GPIO_MODE_OUTPUT_PP << (numPin * 2));
-    
-        pio->PUPDR &= ~(GPIO_PUPDR_PUPDR0 << (numPin * 2U)); //-V684
-        pio->PUPDR |= GPIO_PULLDOWN << (numPin * 2U);
-    }
-private:
-};
-
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 uint16 FPGA::HAL::flag = 0;
@@ -105,11 +91,6 @@ void FPGA::HAL::GPIO::Init()
     {
         isGPIO.Pin = GetPin((Pin::E)i);
         HAL_GPIO_Init(PORT((Pin::E)i), &isGPIO);
-    }
-
-    for (int i = 0; i < Pin::Number; i++)
-    {
-        ::GPIO::SetOutputPP_PullDown(PORT((Pin::E)i), (uint)::Math::LowSignedBit(GetPin((Pin::E)i)));
     }
 }
 

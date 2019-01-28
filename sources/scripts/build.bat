@@ -1,6 +1,9 @@
+@echo off
+
 cd keil
-start build.bat
+call build.bat
 cd ..
-cd vs_keil_debug\
-start build.bat
-cd..
+
+cd vs_keil_debug
+call build.bat
+cd ..
