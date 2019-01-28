@@ -72,7 +72,7 @@ float Hardware::Battery::GetVoltageAKK(uint *adc)
 
     averager.Push((float)*adc);
 
-    return BatADC_ToVoltage(averager.Value());
+    return BatADC_ToVoltage((float)*adc);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

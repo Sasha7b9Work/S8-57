@@ -279,7 +279,7 @@ void FPGA::HAL::Interrupt::P2P::Disable()
     HAL_NVIC_DisableIRQ(EXTI1_IRQn);
 }
 
-extern "C" {
+INTERRUPT_BEGIN
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void EXTI1_IRQHandler()
@@ -288,4 +288,5 @@ void EXTI1_IRQHandler()
 
     __HAL_GPIO_EXTI_CLEAR_IT(GPIO_PIN_1);
 }
-}
+
+INTERRUPT_END

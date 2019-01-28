@@ -314,3 +314,7 @@ static const struct name        \
     SAFE_HANDLER_3(func, param1, param2, param3)
 
 #include "log.h"
+
+
+#define INTERRUPT_BEGIN extern "C" {
+#define INTERRUPT_END   }
