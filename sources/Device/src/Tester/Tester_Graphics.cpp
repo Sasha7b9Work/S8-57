@@ -14,6 +14,7 @@
 using namespace Display::Primitives;
 using namespace FPGA;
 using namespace Osci::Settings;
+using namespace Tester::Settings;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -164,8 +165,8 @@ static void DrawParametersChannel(Chan::E ch, int x, int y)
 {
     Range range = Range(SET_RANGE(ch));
     uint16 rShift = SET_RSHIFT(ch);
-    Tester::Scale scale(range.value, ch);
-    Tester::Shift shift(rShift, ch);
+    Scale scale(range.value, ch);
+    Shift shift(rShift, ch);
 
     Color::SetCurrent(Color::FILL);
 

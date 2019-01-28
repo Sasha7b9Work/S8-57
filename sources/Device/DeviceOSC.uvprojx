@@ -1691,9 +1691,19 @@
               <FilePath>.\src\Tester\Tester.h</FilePath>
             </File>
             <File>
-              <FileName>TesterGraphics.cpp</FileName>
+              <FileName>Tester_Graphics.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\Tester\TesterGraphics.cpp</FilePath>
+              <FilePath>.\src\Tester\Tester_Graphics.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Tester_Settings.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Tester\Tester_Settings.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Tester_Settings.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Tester\Tester_Settings.h</FilePath>
             </File>
           </Files>
         </Group>

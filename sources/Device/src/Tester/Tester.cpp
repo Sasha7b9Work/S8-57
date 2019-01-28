@@ -7,10 +7,13 @@
 #include "Utils/Values.h"
 
 #include "Hardware/HAL/HAL.h"
+#include "Tester/Tester_Settings.h"
 
 
 using namespace FPGA::Settings;
 using namespace Osci::Settings;
+using namespace Tester::Settings;
+
 
 using HAL::FSMC;
 using HAL::PIO::State;
@@ -236,55 +239,16 @@ void Tester::LoadStep()
 
     if (TESTER_CONTROL_IS_U)
     {
-        stepU =  255.0F / 3 * ((TESTER_STEP_U == Tester::StepU::_500mV) ? 2 : 0.4F) / 5;
+        stepU =  255.0F / 3 * ((TESTER_STEP_U == StepU::_500mV) ? 2 : 0.4F) / 5;
     }
     else
     {
-        stepU = 255.0F / 3 * ((TESTER_STEP_I == Tester::StepI::_20mA) ? 2 : 0.4F) / 5;
+        stepU = 255.0F / 3 * ((TESTER_STEP_I == StepI::_20mA) ? 2 : 0.4F) / 5;
     }
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-pString Tester::Scale::ToString() const // -V2506
-{
-    if (Chan(ch).IsA())
-    {
-        return Range((Osci::Settings::Range::E)value).ToString(Divider::_1);
-    }
-
-    static const pString names[][Language::Size] =
-    {
-        "2ÏÍ¿",     "2uA",
-        "5ÏÍ¿",     "5u¿",
-        "10ÏÍ¿",    "10u¿",
-        "20ÏÍ¿",    "20u¿",
-        "50ÏÍ¿",    "50u¿",
-        "100ÏÍ¿",   "100u¿",
-        "200ÏÍ¿",   "200u¿",
-        "500ÏÍ¿",   "500u¿",
-        "1Ï¿",      "1m¿",
-        "2Ï¿",      "2m¿",
-        "5Ï¿",      "5m¿",
-        "10Ï¿",     "10m¿",
-        "20Ï¿",     "20m¿"
-    };
-
-    pString name = names[value][LANG];
-
-    if (name)
-    {
-        return names[value][LANG];
-    }
-    else
-    {
-        LOG_ERROR("Ã‡ÒÒË‚ ÌÂ Á‡ÔÓÎÌÂÌ");
-    }
-
-    return 0;
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-String Tester::Shift::ToString(Scale::E scale) // -V2506
+String Tester::Settings::Shift::ToString(Scale::E scale) // -V2506
 {
     if (ch == Chan::A)
     {

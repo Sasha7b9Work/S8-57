@@ -17,6 +17,7 @@
 #include "Recorder/Recorder_Settings.h"
 
 #include "Osci/Measurements/Cursors_Settings.h"
+#include "Tester/Tester_Settings.h"
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -224,12 +225,12 @@ public:
 
     // Настройки тестер-компонента
 
-    Tester::Control::E     test_control;
-    Tester::Polarity::E    test_polarity;
-    Tester::StepU::E       test_stepU;
-    Tester::StepI::E       test_stepI;
-    Tester::Smoothing::E   test_smooth;                    ///< Количество сглаживаний
-    Tester::ViewMode::E    test_viewMode;
+    Tester::Settings::Control::E     test_control;
+    Tester::Settings::Polarity::E    test_polarity;
+    Tester::Settings::StepU::E       test_stepU;
+    Tester::Settings::StepI::E       test_stepI;
+    Tester::Settings::Smoothing::E   test_smooth;                    ///< Количество сглаживаний
+    Tester::Settings::ViewMode::E    test_viewMode;
 
     // Настройки меню
 
