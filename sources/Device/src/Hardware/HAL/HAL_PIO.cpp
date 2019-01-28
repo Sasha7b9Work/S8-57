@@ -88,3 +88,9 @@ bool HAL::PIO::Read(Port::E port, uint16 pin)
 {
     return (HAL_GPIO_ReadPin(PORT(port), pin) == GPIO_PIN_SET);
 }
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void HAL::PIO::EXTI_CLEAR_IT_BIT(uint16 pin)
+{
+    __HAL_GPIO_EXTI_CLEAR_IT(pin);
+}

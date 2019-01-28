@@ -199,9 +199,11 @@ namespace HAL
     class NVIC_
     {
     public:
+        static uint irqEXTI1;
         static uint irqEXTI9_5;
         static void EnableIRQ(uint irq);
         static void DisableIRQ(uint irq);
+        static void SetPriorityIRQ(uint irq, uint main, uint sub);
     };
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

@@ -1,4 +1,4 @@
-#include <stm32f4xx_hal.h>
+//#include <stm32f4xx_hal.h>
 #include "defines.h"
 #include "FPGA_HAL.h"
 #include "Hardware/HAL/HAL.h"
@@ -224,19 +224,19 @@ void FPGA::HAL::Interrupt::P2P::Init(pFuncVV func)
 
     ::HAL::PIO::Init(::HAL::PIO::Port::_G, ::HAL::PIO::Pin::_1, ::HAL::PIO::Mode::RisingIT, ::HAL::PIO::Pull::No);
 
-    HAL_NVIC_SetPriority(EXTI1_IRQn, 10, 10);
+    ::HAL::NVIC_::SetPriorityIRQ(::HAL::NVIC_::irqEXTI1, 10, 10);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void FPGA::HAL::Interrupt::P2P::Enable()
 {
-    HAL_NVIC_EnableIRQ(EXTI1_IRQn);
+    ::HAL::NVIC_::EnableIRQ(::HAL::NVIC_::irqEXTI1);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void FPGA::HAL::Interrupt::P2P::Disable()
 {
-    HAL_NVIC_DisableIRQ(EXTI1_IRQn);
+    ::HAL::NVIC_::DisableIRQ(::HAL::NVIC_::irqEXTI1);
 }
 
 INTERRUPT_BEGIN
@@ -246,7 +246,7 @@ void EXTI1_IRQHandler()
 {
     funcP2P();
 
-    __HAL_GPIO_EXTI_CLEAR_IT(GPIO_PIN_1);
+    ::HAL::PIO::EXTI_CLEAR_IT_BIT(::HAL::PIO::Pin::_1);
 }
 
 INTERRUPT_END

@@ -72,5 +72,7 @@ namespace HAL
         void Reset(Port::E port, uint16 pin);
         void Write(Port::E port, uint16 pin, State::E state);
         bool Read(Port::E port, uint16 pin);
+
+        void EXTI_CLEAR_IT_BIT(uint16 pin);
     }
 }
