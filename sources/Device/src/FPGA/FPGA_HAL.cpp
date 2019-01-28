@@ -12,7 +12,7 @@
 #include "Hardware/HAL/HAL.h"
 
 
-using namespace FPGA::HAL::GPIO;
+using namespace FPGA::HAL;
 using namespace HAL::ADDRESSES::FPGA;
 using namespace Osci::Settings;
 
@@ -30,25 +30,25 @@ static pFuncVV funcP2P = EmptyFuncVV;
 
 struct PinStruct
 {
-    HAL::PIO::Port::E gpioTD;
-    uint16            pin;
+    ::HAL::PIO::Port::E gpioTD;
+    uint16              pin;
 };
 
-static PinStruct pins[Pin::Number] =
+static PinStruct pins[GPIO::Pin::Number] =
 {
-    {HAL::PIO::Port::_C , HAL::PIO::Pin::_10},   // SPI3_SCK
-    {HAL::PIO::Port::_C , HAL::PIO::Pin::_12},   // SPI3_DAT
-    {HAL::PIO::Port::_D , HAL::PIO::Pin::_3},    // SPI3_CS1
-    {HAL::PIO::Port::_G , HAL::PIO::Pin::_13},   // SPI3_CS2
-    {HAL::PIO::Port::_D , HAL::PIO::Pin::_10},   // A1
-    {HAL::PIO::Port::_D , HAL::PIO::Pin::_11},   // A2
-    {HAL::PIO::Port::_D , HAL::PIO::Pin::_12},   // A3
-    {HAL::PIO::Port::_D , HAL::PIO::Pin::_13},   // A4
-    {HAL::PIO::Port::_G , HAL::PIO::Pin::_2},    // LF1
-    {HAL::PIO::Port::_G , HAL::PIO::Pin::_3},    // LF2
-    {HAL::PIO::Port::_G , HAL::PIO::Pin::_4},    // A1S
-    {HAL::PIO::Port::_G , HAL::PIO::Pin::_5},    // A0S
-    {HAL::PIO::Port::_G , HAL::PIO::Pin::_6}     // LFS
+    {::HAL::PIO::Port::_C , ::HAL::PIO::Pin::_10},   // SPI3_SCK
+    {::HAL::PIO::Port::_C , ::HAL::PIO::Pin::_12},   // SPI3_DAT
+    {::HAL::PIO::Port::_D , ::HAL::PIO::Pin::_3},    // SPI3_CS1
+    {::HAL::PIO::Port::_G , ::HAL::PIO::Pin::_13},   // SPI3_CS2
+    {::HAL::PIO::Port::_D , ::HAL::PIO::Pin::_10},   // A1
+    {::HAL::PIO::Port::_D , ::HAL::PIO::Pin::_11},   // A2
+    {::HAL::PIO::Port::_D , ::HAL::PIO::Pin::_12},   // A3
+    {::HAL::PIO::Port::_D , ::HAL::PIO::Pin::_13},   // A4
+    {::HAL::PIO::Port::_G , ::HAL::PIO::Pin::_2},    // LF1
+    {::HAL::PIO::Port::_G , ::HAL::PIO::Pin::_3},    // LF2
+    {::HAL::PIO::Port::_G , ::HAL::PIO::Pin::_4},    // A1S
+    {::HAL::PIO::Port::_G , ::HAL::PIO::Pin::_5},    // A0S
+    {::HAL::PIO::Port::_G , ::HAL::PIO::Pin::_6}     // LFS
 };
 
 

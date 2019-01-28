@@ -18,7 +18,7 @@
 
 
 using namespace HAL::ADDRESSES::FPGA;
-using namespace FPGA::HAL::GPIO;
+using namespace FPGA::HAL;
 using namespace FPGA::Settings;
 using namespace Osci::Settings;
 
