@@ -86,7 +86,7 @@ namespace FPGA
                 explicit Pin(E v) : value(v) {};
             };
 
-            uint GetPin(Pin::E pin);
+            uint16 GetPin(Pin::E pin);
 
             void WritePin(Pin::E pin, int enable);
 

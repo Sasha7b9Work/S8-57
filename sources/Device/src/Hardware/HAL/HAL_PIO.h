@@ -39,6 +39,7 @@ namespace HAL
             static uint16 _13;
             static uint16 _14;
             static uint16 _15;
+
         };
 
         struct State

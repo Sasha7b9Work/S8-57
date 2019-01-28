@@ -2,6 +2,7 @@
 #include "defines.h"
 #include "FPGA_HAL.h"
 #include "Hardware/HAL/HAL.h"
+#include "Hardware/HAL/HAL_PIO.h"
 #include "Hardware/Timer.h"
 #include "Settings/Settings.h"
 #include "Settings/SettingsTime.h"
@@ -29,25 +30,25 @@ static pFuncVV funcP2P = EmptyFuncVV;
 
 struct PinStruct
 {
-    GPIO_TypeDef   *gpioTD;
-    uint            pin;
+    HAL::PIO::Port::E gpioTD;
+    uint16            pin;
 };
 
 static PinStruct pins[Pin::Number] =
 {
-    {GPIOC, GPIO_PIN_10},   // SPI3_SCK
-    {GPIOC, GPIO_PIN_12},   // SPI3_DAT
-    {GPIOD, GPIO_PIN_3},    // SPI3_CS1
-    {GPIOG, GPIO_PIN_13},   // SPI3_CS2
-    {GPIOD, GPIO_PIN_10},   // A1
-    {GPIOD, GPIO_PIN_11},   // A2
-    {GPIOD, GPIO_PIN_12},   // A3
-    {GPIOD, GPIO_PIN_13},   // A4
-    {GPIOG, GPIO_PIN_2},    // LF1
-    {GPIOG, GPIO_PIN_3},    // LF2
-    {GPIOG, GPIO_PIN_4},    // A1S
-    {GPIOG, GPIO_PIN_5},    // A0S
-    {GPIOG, GPIO_PIN_6}     // LFS
+    {HAL::PIO::Port::_C , HAL::PIO::Pin::_10},   // SPI3_SCK
+    {HAL::PIO::Port::_C , HAL::PIO::Pin::_12},   // SPI3_DAT
+    {HAL::PIO::Port::_D , HAL::PIO::Pin::_3},    // SPI3_CS1
+    {HAL::PIO::Port::_G , HAL::PIO::Pin::_13},   // SPI3_CS2
+    {HAL::PIO::Port::_D , HAL::PIO::Pin::_10},   // A1
+    {HAL::PIO::Port::_D , HAL::PIO::Pin::_11},   // A2
+    {HAL::PIO::Port::_D , HAL::PIO::Pin::_12},   // A3
+    {HAL::PIO::Port::_D , HAL::PIO::Pin::_13},   // A4
+    {HAL::PIO::Port::_G , HAL::PIO::Pin::_2},    // LF1
+    {HAL::PIO::Port::_G , HAL::PIO::Pin::_3},    // LF2
+    {HAL::PIO::Port::_G , HAL::PIO::Pin::_4},    // A1S
+    {HAL::PIO::Port::_G , HAL::PIO::Pin::_5},    // A0S
+    {HAL::PIO::Port::_G , HAL::PIO::Pin::_6}     // LFS
 };
 
 
@@ -80,22 +81,14 @@ void FPGA::HAL::LoadRegUPR()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void FPGA::HAL::GPIO::Init()
 {
-    GPIO_InitTypeDef isGPIO =
-    {
-        0,
-        GPIO_MODE_OUTPUT_PP,
-        GPIO_PULLDOWN
-    };
-
     for (int i = 0; i < Pin::Number; i++)
     {
-        isGPIO.Pin = GetPin((Pin::E)i);
-        HAL_GPIO_Init(PORT((Pin::E)i), &isGPIO);
+        ::HAL::PIO::Init(PORT((Pin::E)i), GetPin((Pin::E)i) , ::HAL::PIO::Mode::Output_PP, ::HAL::PIO::Pull::Down);
     }
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-uint FPGA::HAL::GPIO::GetPin(Pin::E pin)
+uint16 FPGA::HAL::GPIO::GetPin(Pin::E pin)
 {
     return pins[pin].pin;
 }
@@ -134,28 +127,21 @@ void FPGA::HAL::GPIO::WriteRegisters(Pin::E cs, uint16 value)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void FPGA::HAL::GPIO::WritePin(Pin::E pin, int enable)
-{
-    if (enable)
-    {
-        PORT(pin)->BSRR = GetPin(pin);
-    }
-    else
-    {
-        PORT(pin)->BSRR = (uint)GetPin(pin) << 16;
-    }
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void FPGA::HAL::GPIO::SetPin(Pin::E pin)
 {
-    PORT(pin)->BSRR = GetPin(pin);
+    ::HAL::PIO::Set(PORT(pin), GetPin(pin));
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void FPGA::HAL::GPIO::ResetPin(Pin::E pin)
 {
-    PORT(pin)->BSRR = (uint)GetPin(pin) << 16;
+    ::HAL::PIO::Reset(PORT(pin), GetPin(pin));
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void FPGA::HAL::GPIO::WritePin(Pin::E pin, int enable)
+{
+    ::HAL::PIO::Write(PORT(pin), GetPin(pin), enable ? ::HAL::PIO::State::Enabled : ::HAL::PIO::State::Disabled);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
