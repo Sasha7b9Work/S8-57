@@ -2,19 +2,13 @@
 #include "log.h"
 #include "Display/Display_Primitives.h"
 #include "Display/Grid.h"
-#include "Display/Painter.h"
-#include "FrequencyCounter.h"
-#include "FPGA/FPGA.h"
 #include "FPGA/FPGA_HAL.h"
+#include "Hardware/Timer.h"
+#include "Hardware/HAL/HAL.h"
 #include "Settings/Settings.h"
 #include "Utils/StringUtils.h"
 #include "Utils/Values.h"
-#include "Hardware/HAL/HAL.h"
-#include "Menu/Pages/Include/PageFunction.h"
-#include "Utils/Math.h"
-#include "Hardware/Timer.h"
 #include <cstring>
-#include <limits>
 
 
 using namespace Display::Primitives;

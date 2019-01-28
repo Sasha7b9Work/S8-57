@@ -1,6 +1,4 @@
 #pragma once
-
-#include "Osci/Osci_Settings.h"
 #include "Osci/Measurements/Measures.h"
 
 

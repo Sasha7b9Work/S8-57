@@ -1,12 +1,9 @@
 #include "defines.h"
 #include "device.h"
-#include "Osci/Osci.h"
-
 #include "FPGA/FPGA.h"
-#include "Settings/Settings.h"
 #include "FPGA/FPGA_HAL.h"
+#include "Settings/Settings.h"
 #include <cstring>
-#include "Utils/Math.h"
 
 
 using namespace FPGA;

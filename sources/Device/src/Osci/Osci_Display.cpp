@@ -3,15 +3,13 @@
 #include "Display/Grid.h"
 #include "Display/Painter.h"
 #include "Display/Symbols.h"
-#include "Hardware/Battery.h"
 #include "Osci/Osci_Display.h"
 #include "Osci/Display/BottomPart.h"
 #include "Osci/Display/HiPart.h"
 #include "Osci/Display/PainterData.h"
 #include "Osci/Measurements/Measures.h"
-#include "Settings/Settings.h"
-
 #include "Osci/Measurements/Measurements_Graphics.h"
+#include "Settings/Settings.h"
 
 
 using namespace Display::Primitives;

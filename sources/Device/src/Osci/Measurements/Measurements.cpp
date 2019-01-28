@@ -1,18 +1,13 @@
 #include "defines.h"
-#include "Data/DataStorage.h"
 #include "Data/Reader.h"
 #include "FPGA/FPGA_Math.h"
-#include "Settings/Settings.h"
-#include "Utils/Values.h"
-#include "Utils/Math.h"
-#include <cmath>
-#include <climits>
-#include <cstdlib>
-#include <cstring>
-#include <limits>
-
 #include "Osci/Measurements/Measurements.h"
 #include "Osci/Measurements/Measurements_Graphics.h"
+#include "Settings/Settings.h"
+#include "Utils/Math.h"
+#include "Utils/Values.h"
+#include <cstdlib>
+#include <cstring>
 
 
 using namespace Osci;

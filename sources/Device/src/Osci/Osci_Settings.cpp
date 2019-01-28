@@ -1,14 +1,11 @@
 #include "defines.h"
 #include "device.h"
-#include "FPGA/FPGA_Settings.h"
-#include "FPGA/FPGA_Types.h"
-#include "Hardware/HAL/HAL.h"
-#include "Settings/Settings.h"
-#include "Utils/Math.h"
-
 #include "FPGA/FPGA.h"
 #include "FPGA/FPGA_Hal.h"
 #include "Hardware/Timer.h"
+#include "Hardware/HAL/HAL.h"
+#include "Settings/Settings.h"
+#include "Utils/Math.h"
 
 
 #ifdef WIN32
