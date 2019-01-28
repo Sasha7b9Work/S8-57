@@ -38,6 +38,25 @@ static bool enabled = false;
 
 static uint8 data[Chan::Size][Tester::NUM_STEPS][TESTER_NUM_POINTS];
 
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+namespace Tester
+{
+    class DAC2_
+    {
+    public:
+        static void Init()
+        {
+            HAL::DAC2_::Init();
+        }
+        static void SetValue(uint value)
+        {
+            HAL::DAC2_::SetValue(value);
+        }
+    };
+}
+
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void Tester::Init()
 {
@@ -52,7 +71,7 @@ void Tester::Init()
         }
     }
 
-    HAL::DAC2_::Init();
+    DAC2_::Init();
 
     Disable();
 }
@@ -164,7 +183,7 @@ void Tester::ProcessStep()
     {
         if ((step % 2) == 0)        // Если шаг кратен двум, то нужно устанавливать напряжение
         {
-            HAL::DAC2_::SetValue((uint)(stepU * step / 2));
+            DAC2_::SetValue((uint)(stepU * step / 2));
             // Запускаем ПЛИС для записи необходимого количества точек. Набор будет производиться в течение 2.5 мс (длительсность одного такта)
             FPGA::ForTester::Start();
         }
