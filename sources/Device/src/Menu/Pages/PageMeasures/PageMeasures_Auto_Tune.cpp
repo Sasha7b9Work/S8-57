@@ -43,21 +43,10 @@ DEF_SMALL_BUTTON( bTune_Markers,                                                
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void OnPress_Tune_Settings()
-{
-    Measurements::PageChoice::ChangeState();
-
-    if (Measurements::PageChoice::IsActive())
-    {
-        Measure::posOnPageChoice = (int8)set.meas_measures[Osci::Measurements::posActive];
-    }
-}
-
 static void Draw_Tune_Settings(int x, int y)
 {
     Font::SetCurrent(Font::Type::_UGO2);
 
-    //Painter::Draw4SymbolsInRect(x + 2, y + 1, '\x62');
     Char('\x62').Draw4SymbolsInRect(x + 2, y + 1);
 
     Font::SetCurrent(Font::Type::_8);
@@ -67,7 +56,7 @@ DEF_SMALL_BUTTON( bTune_Settings,                                               
     "Настройка", "Setup",
     "Позволяет выбрать необходимые измерения",
     "Allows to choose necessary measurements",
-    pageTune, FuncActive, OnPress_Tune_Settings, Draw_Tune_Settings
+    pageTune, FuncActive, Measurements::PageChoice::ChangeState, Draw_Tune_Settings
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -78,42 +67,7 @@ static bool IsActive_Tune()
 
 static bool HandlerKey_Tune(KeyEvent event)
 {
-    if (event.type != TypePress::Press)
-    {
-        return true;
-    }
-
-    Key::E key = event.key;
-
-    int8 delta = (key == Key::Up || key == Key::Right) ? 1 : -1;
-
-    if (Measurements::PageChoice::IsActive())
-    {
-        Measure::posOnPageChoice += delta;
-        Beeper::RegulatorSwitchRotate();
-
-        if (Measure::posOnPageChoice < 0)
-        {
-            Measure::posOnPageChoice = Measure::Type::Number - 1;
-        }
-        else if (Measure::posOnPageChoice == Measure::Type::Number)
-        {
-            Measure::posOnPageChoice = 0;
-        }
-        else
-        {
-            // здесь ничего делать не нужно
-        }
-
-        set.meas_measures[Osci::Measurements::posActive] = (Measure::Type::E)Measure::posOnPageChoice;
-        Color::ResetFlash();
-    }
-    else
-    {
-        Measure::ChangeActive(delta);
-
-        Beeper::RegulatorSwitchRotate();
-    }
+    Osci::Measurements::PageChoice::OnKeyEvent(event);
 
     return true;
 }

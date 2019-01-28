@@ -117,8 +117,6 @@ namespace Osci
             bool IsActive();
 
             String Name();
-            /// ѕозици€ курсора на странице выбора измерени€
-            static int8 posOnPageChoice;
 
 #define MARKER_VOLTAGE(ch, num)             (Processing::markerVoltage[ch][num] - VALUE::MIN)
 #define MARKER_TIME(ch, num)                (Processing::markerTime[ch][num])

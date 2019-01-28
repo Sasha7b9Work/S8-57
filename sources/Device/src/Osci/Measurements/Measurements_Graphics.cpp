@@ -157,7 +157,7 @@ static void DrawPageChoice()
             }
             int x0 = x + col * dX;
             int y0 = y + row * dY;
-            bool active = (meas == Measure::posOnPageChoice);
+            bool active = (meas == Measurements::PageChoice::posCursor);
             Rectangle(dX, dY).Draw(x0, y0, Color::WHITE);
             Region(dX - 2, dY - 2).Fill(x0 + 1, y0 + 1, (active ? Color::FLASH_10 : Color::BACK));
             Color::SetCurrent(active ? Color::FLASH_01 : Color::FILL);

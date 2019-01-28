@@ -1,5 +1,6 @@
 #pragma once
 #include "Osci/Measurements/Measures.h"
+#include "Keyboard/Keyboard.h"
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -30,9 +31,16 @@ namespace Osci
         class PageChoice
         {
         public:
+            /// Обработка нажатий при открытой странице
+            static void OnKeyEvent(KeyEvent event);
+            /// Нужно вызывать для открытия/закрытия страницы выбора
+            static void OnOpenCloseEvent();
+
             static bool IsActive();
             /// Включить/отключить отображение
             static void ChangeState();
+            /// Позиция курсора
+            static int8 posCursor;
         };
     };
 };
