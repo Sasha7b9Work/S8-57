@@ -1541,6 +1541,11 @@
               <FilePath>.\src\Osci\Measurements\Measurements_Graphics.h</FilePath>
             </File>
             <File>
+              <FileName>Measurements_PageChoice.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Osci\Measurements\Measurements_PageChoice.cpp</FilePath>
+            </File>
+            <File>
               <FileName>Measures.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Osci\Measurements\Measures.cpp</FilePath>

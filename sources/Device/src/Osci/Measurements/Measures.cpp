@@ -54,7 +54,6 @@ static const StructMeasure sMeas[Measure::Type::Number] =
 };
 
 
-bool Measure::pageChoiceIsActive = false;
 int8 Measure::posOnPageChoice = 0;
 
 

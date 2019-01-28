@@ -117,8 +117,6 @@ namespace Osci
             bool IsActive();
 
             String Name();
-            /// ≈сли true - раскрыта страница выбора измерени€
-            static bool pageChoiceIsActive;
             /// ѕозици€ курсора на странице выбора измерени€
             static int8 posOnPageChoice;
 

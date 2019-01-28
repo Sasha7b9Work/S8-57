@@ -14,6 +14,7 @@
 
 
 using namespace Display::Primitives;
+using namespace Osci;
 using namespace Osci::Measurements;
 
 extern const PageBase pageTune;
@@ -44,8 +45,9 @@ DEF_SMALL_BUTTON( bTune_Markers,                                                
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void OnPress_Tune_Settings()
 {
-    Measure::pageChoiceIsActive = !Measure::pageChoiceIsActive;
-    if (Measure::pageChoiceIsActive)
+    Measurements::PageChoice::ChangeState();
+
+    if (Measurements::PageChoice::IsActive())
     {
         Measure::posOnPageChoice = (int8)set.meas_measures[Osci::Measurements::posActive];
     }
@@ -85,7 +87,7 @@ static bool HandlerKey_Tune(KeyEvent event)
 
     int8 delta = (key == Key::Up || key == Key::Right) ? 1 : -1;
 
-    if (Measure::pageChoiceIsActive)
+    if (Measurements::PageChoice::IsActive())
     {
         Measure::posOnPageChoice += delta;
         Beeper::RegulatorSwitchRotate();

@@ -112,8 +112,6 @@ void Device::Update()
 {
     START_MULTI_MEASUREMENT();
 
-    //LOG_WRITE("");
-
     Display::Update();
 
     Osci::Update();
