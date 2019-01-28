@@ -1,12 +1,8 @@
-#include "defines.h"
-#include "ff_gen_drv.h"
-
-
-const Diskio_drvTypeDef USBH_Driver{ 0, 0, 0 };
-
+#include "stdafx.h"
+#include <stm32f4xx_hal.h>
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-uint8_t FATFS_LinkDriver(const Diskio_drvTypeDef * /*drv*/, char * /*path*/)
+void HAL_HCD_IRQHandler(HCD_HandleTypeDef * /*hhcd*/)
 {
-    return 0;
+
 }

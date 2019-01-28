@@ -318,3 +318,6 @@ static const struct name        \
 
 #define INTERRUPT_BEGIN extern "C" {
 #define INTERRUPT_END   }
+
+#define CEXPORT_BEGIN 
+#define CEXPORT_END 

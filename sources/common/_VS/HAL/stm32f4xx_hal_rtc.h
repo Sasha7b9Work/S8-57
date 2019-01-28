@@ -31,6 +31,27 @@
 #define RTC_STOREOPERATION_RESET    0x00000000U
 #define RTC_STOREOPERATION_SET      0x00040000U
 
+#define RTC_BKP_DR0                       0x00000000U
+#define RTC_BKP_DR1                       0x00000001U
+#define RTC_BKP_DR2                       0x00000002U
+#define RTC_BKP_DR3                       0x00000003U
+#define RTC_BKP_DR4                       0x00000004U
+#define RTC_BKP_DR5                       0x00000005U
+#define RTC_BKP_DR6                       0x00000006U
+#define RTC_BKP_DR7                       0x00000007U
+#define RTC_BKP_DR8                       0x00000008U
+#define RTC_BKP_DR9                       0x00000009U
+#define RTC_BKP_DR10                      0x0000000AU
+#define RTC_BKP_DR11                      0x0000000BU
+#define RTC_BKP_DR12                      0x0000000CU
+#define RTC_BKP_DR13                      0x0000000DU
+#define RTC_BKP_DR14                      0x0000000EU
+#define RTC_BKP_DR15                      0x0000000FU
+#define RTC_BKP_DR16                      0x00000010U
+#define RTC_BKP_DR17                      0x00000011U
+#define RTC_BKP_DR18                      0x00000012U
+#define RTC_BKP_DR19                      0x00000013U
+
 
 typedef struct
 {
@@ -134,3 +155,6 @@ HAL_StatusTypeDef HAL_RTC_GetTime(RTC_HandleTypeDef *hrtc, RTC_TimeTypeDef *sTim
 HAL_StatusTypeDef HAL_RTC_GetDate(RTC_HandleTypeDef *hrtc, RTC_DateTypeDef *sDate, uint32_t Format);
 HAL_StatusTypeDef HAL_RTC_SetDate(RTC_HandleTypeDef *hrtc, RTC_DateTypeDef *sDate, uint32_t Format);
 HAL_StatusTypeDef HAL_RTC_SetTime(RTC_HandleTypeDef *hrtc, RTC_TimeTypeDef *sTime, uint32_t Format);
+HAL_StatusTypeDef HAL_RTC_Init(RTC_HandleTypeDef *hrtc);
+uint32_t HAL_RTCEx_BKUPRead(RTC_HandleTypeDef *hrtc, uint32_t BackupRegister);
+void HAL_RTCEx_BKUPWrite(RTC_HandleTypeDef *hrtc, uint32_t BackupRegister, uint32_t Data);

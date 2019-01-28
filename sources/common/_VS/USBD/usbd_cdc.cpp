@@ -1,27 +1,27 @@
 #include "stdafx.h"
-#include <stm32f4xx_hal.h>
+#include "usbd_def.h"
+#include "usbd_cdc.h"
+
+
+USBD_ClassTypeDef  USBD_CDC;
+
+USBD_CDC_ItfTypeDef  USBD_CDC_fops;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-uint32_t HAL_RCC_GetHCLKFreq(void)
+uint8_t USBD_CDC_RegisterInterface(USBD_HandleTypeDef * /*pdev*/, USBD_CDC_ItfTypeDef * /*fops*/)
 {
     return 0;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-HAL_StatusTypeDef HAL_RCC_ClockConfig(RCC_ClkInitTypeDef * /*RCC_ClkInitStruct*/, uint32_t /*FLatency*/)
+uint8_t USBD_CDC_SetTxBuffer(USBD_HandleTypeDef * /*pdev*/, uint8_t * /*pbuff*/, uint16_t /*length*/)
 {
-    return HAL_ERROR;
+    return 0;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-HAL_StatusTypeDef HAL_RCC_OscConfig(RCC_OscInitTypeDef * /*RCC_OscInitStruct*/)
+uint8_t USBD_CDC_TransmitPacket(USBD_HandleTypeDef * /*pdev*/)
 {
-    return HAL_ERROR;
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-HAL_StatusTypeDef HAL_RCCEx_PeriphCLKConfig(RCC_PeriphCLKInitTypeDef * /*PeriphClkInit*/)
-{
-    return HAL_ERROR;
+    return 0;
 }

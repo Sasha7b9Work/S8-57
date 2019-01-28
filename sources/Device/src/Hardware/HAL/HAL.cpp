@@ -30,6 +30,11 @@ void HAL::Init()
     FSMC::Init();
 }
 
+//void HAL_NVIC_SetPriority(IRQn_Type /*IRQn*/, uint32_t /*PreemptPriority*/, uint32_t /*SubPriority*/)
+//{
+//
+//}
+
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void SystemClockConfig()
 {
@@ -73,7 +78,7 @@ static void SystemClockConfig()
 
     /**Configure the Systick interrupt time
     */
-    HAL_SYSTICK_Config(HAL_RCC_GetHCLKFreq() / 1000);
+    HAL_SYSTICK_Config((uint32_t)(HAL_RCC_GetHCLKFreq() / 1000));
 
     //HAL_SYSTICK_CLKSourceConfig(SYSTICK_CLKSOURCE_HCLK);
 

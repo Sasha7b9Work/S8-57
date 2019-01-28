@@ -116,11 +116,16 @@ typedef struct
                                 This parameter can be a value of @ref DAC_output_buffer */
 }DAC_ChannelConfTypeDef;
 
-HAL_StatusTypeDef HAL_ADC_Init(ADC_HandleTypeDef* hadc);
-HAL_StatusTypeDef HAL_ADC_ConfigChannel(ADC_HandleTypeDef* hadc, ADC_ChannelConfTypeDef* sConfig);
-HAL_StatusTypeDef HAL_ADC_Start_IT(ADC_HandleTypeDef* hadc);
-void HAL_ADC_IRQHandler(ADC_HandleTypeDef* hadc);
-uint32_t HAL_ADC_GetValue(ADC_HandleTypeDef* hadc);
-HAL_StatusTypeDef HAL_ADC_Start(ADC_HandleTypeDef* hadc);
-HAL_StatusTypeDef HAL_ADC_PollForConversion(ADC_HandleTypeDef* hadc, uint32_t Timeout);
+
+extern "C"
+{
+    HAL_StatusTypeDef HAL_ADC_Init(ADC_HandleTypeDef* hadc);
+    HAL_StatusTypeDef HAL_ADC_ConfigChannel(ADC_HandleTypeDef* hadc, ADC_ChannelConfTypeDef* sConfig);
+    uint32_t HAL_ADC_GetValue(ADC_HandleTypeDef* hadc);
+    HAL_StatusTypeDef HAL_ADC_Start(ADC_HandleTypeDef* hadc);
+    HAL_StatusTypeDef HAL_ADC_PollForConversion(ADC_HandleTypeDef* hadc, uint32_t Timeout);
+    HAL_StatusTypeDef HAL_ADC_Start_IT(ADC_HandleTypeDef* hadc);
+    void HAL_ADC_IRQHandler(ADC_HandleTypeDef* hadc);
+}
+
 uint32_t HAL_ADC_GetState(ADC_HandleTypeDef* hadc);
