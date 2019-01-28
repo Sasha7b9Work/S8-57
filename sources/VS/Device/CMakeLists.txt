@@ -2,11 +2,11 @@ cmake_minimum_required(VERSION 3.0)
 
 project (Device56)
 
-include_directories("..\\..\\Device\\src\\libs\\HAL\\"
-                    "..\\..\\Device\\src\\libs\\FatFS\\"
-                    "..\\..\\Device\\src\\libs\\USBH\\"
-                    "..\\..\\Device\\src\\libs\\USBD\\"
-                    "..\\..\\Device\\src\\"
+include_directories("..\\..\\Device\\src\\"
+                    "..\\..\\Device\\src\\Hardware\\FatFS\\"
+                    "..\\..\\Device\\src\\Hardware\\HAL\\"
+                    "..\\..\\Device\\src\\Hardware\\USBD\\"
+                    "..\\..\\Device\\src\\Hardware\\USBH\\"
                     "..\\..\\common\\"
                     "..\\..\\common\\_VS\\"
                     "..\\..\\common\\_VS\\CMSIS\\"

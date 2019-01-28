@@ -1,3 +1,7 @@
+@echo off
+
+@echo %TIME%   Making ...
+
 cd ../..
 rmdir generated /s /q
 cd scripts/vs_keil_debug

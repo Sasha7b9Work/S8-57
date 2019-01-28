@@ -1,5 +1,7 @@
 @echo off
 
+@echo %TIME%   Building ...
+
 MSBuild.exe ..\..\generated\Device\Device56.vcxproj
 set BUILD_STATUS=%ERRORLEVEL%
 if not %BUILD_STATUS%==0 goto Failed

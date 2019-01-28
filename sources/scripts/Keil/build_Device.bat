@@ -1,5 +1,5 @@
 @echo off
-echo Compile Device    ... %TIME%
+@echo %TIME%   Compile Device ...
 
 c:\Keil_v5\UV4\UV4 -b ..\..\Device\DeviceOSC.uvprojx -j0 -z -o DeviceOSC.out
 set BUILD_STATUS=%ERRORLEVEL%

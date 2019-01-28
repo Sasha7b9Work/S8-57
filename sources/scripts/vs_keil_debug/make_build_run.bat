@@ -1,3 +1,5 @@
-call make.bat
-call build.bat
+@echo off
+
+call make_build.bat
+
 start ..\..\generated\S8-56.sln
