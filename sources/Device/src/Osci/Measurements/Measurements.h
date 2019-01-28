@@ -35,14 +35,10 @@ namespace Osci
             static void OnKeyEvent(KeyEvent event);
             /// Нужно вызывать для открытия/закрытия страницы выбора
             static void OnOpenCloseEvent();
-
-            static bool IsActive();
             /// Включить/отключить отображение
             static void ChangeState();
 
             static void Draw();
-            /// Позиция курсора
-            static int8 posCursor;
         };
     };
 };

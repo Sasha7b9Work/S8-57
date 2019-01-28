@@ -16,16 +16,11 @@ using Display::Primitives::Text;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 static bool isActive = false;
-int8 Osci::Measurements::PageChoice::posCursor = 0;
+/// Позиция курсора
+static int8 posCursor = 0;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-bool Osci::Measurements::PageChoice::IsActive()
-{
-    return isActive;
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Osci::Measurements::PageChoice::ChangeState()
 {
     isActive = !isActive;
@@ -35,7 +30,7 @@ void Osci::Measurements::PageChoice::ChangeState()
 void Osci::Measurements::PageChoice::OnOpenCloseEvent()
 {
     ChangeState();
-    if (IsActive())
+    if (isActive)
     {
         posCursor = (int8)set.meas_measures[Osci::Measurements::posActive];
     }
@@ -53,7 +48,7 @@ void Osci::Measurements::PageChoice::OnKeyEvent(KeyEvent event)
 
     int8 delta = (key == Key::Up || key == Key::Right) ? 1 : -1;
 
-    if (Measurements::PageChoice::IsActive())
+    if (isActive)
     {
         posCursor += delta;
         Beeper::RegulatorSwitchRotate();
@@ -85,7 +80,7 @@ void Osci::Measurements::PageChoice::OnKeyEvent(KeyEvent event)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Osci::Measurements::PageChoice::Draw()
 {
-    if (!Measurements::PageChoice::IsActive())
+    if (!isActive)
     {
         return;
     }
@@ -108,7 +103,7 @@ void Osci::Measurements::PageChoice::Draw()
             }
             int x0 = x + col * dX;
             int y0 = y + row * dY;
-            bool active = (meas == Measurements::PageChoice::posCursor);
+            bool active = (meas == posCursor);
             Rectangle(dX, dY).Draw(x0, y0, Color::WHITE);
             Region(dX - 2, dY - 2).Fill(x0 + 1, y0 + 1, (active ? Color::FLASH_10 : Color::BACK));
             Color::SetCurrent(active ? Color::FLASH_01 : Color::FILL);
