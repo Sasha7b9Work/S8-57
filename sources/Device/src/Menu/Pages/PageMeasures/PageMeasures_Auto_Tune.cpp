@@ -10,6 +10,8 @@
 #include "Utils/Math.h"
 #include "Hardware/Beeper.h"
 
+#include "Osci/Measurements/Measurements.h"
+
 
 using namespace Display::Primitives;
 using namespace Osci::Measurements;
@@ -45,7 +47,7 @@ static void OnPress_Tune_Settings()
     Measure::pageChoiceIsActive = !Measure::pageChoiceIsActive;
     if (Measure::pageChoiceIsActive)
     {
-        Measure::posOnPageChoice = (int8)set.meas_measures[Measure::posActive];
+        Measure::posOnPageChoice = (int8)set.meas_measures[Osci::Measurements::posActive];
     }
 }
 
@@ -101,7 +103,7 @@ static bool HandlerKey_Tune(KeyEvent event)
             // здесь ничего делать не нужно
         }
 
-        set.meas_measures[Measure::posActive] = (Measure::Type::E)Measure::posOnPageChoice;
+        set.meas_measures[Osci::Measurements::posActive] = (Measure::Type::E)Measure::posOnPageChoice;
         Color::ResetFlash();
     }
     else

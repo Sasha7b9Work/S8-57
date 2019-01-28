@@ -16,9 +16,13 @@ namespace Osci
         String GetStringMeasure(Measurements::Measure::Type::E measure, Chan::E ch, char *buffer, int lenBuf);
         /// Аппроксимировать единичное измерение режима рандомизатора функцией sinX/X
         void InterpolationSinX_X(uint8 *data, int numPoints, Osci::Settings::TBase::E tBase);
+        /// Возвращает активное измерение
+        Measure GetActiveMeasure();
 
         extern int markerTime[Chan::Size][2];
 
         extern int markerVoltage[Chan::Size][2];
+        /// Позиция активного измерения (на котором курсор)
+        extern int8 posActive;
     };
 };

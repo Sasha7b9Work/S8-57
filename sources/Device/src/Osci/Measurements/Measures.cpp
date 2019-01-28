@@ -53,7 +53,7 @@ static const StructMeasure sMeas[Measure::Type::Number] =
     DEF_STRUCT_MEASURE("Фаза\xa6",    '\xe5')
 };
 
-int8 Measure::posActive = 0;
+
 bool Measure::pageChoiceIsActive = false;
 int8 Measure::posOnPageChoice = 0;
 
@@ -67,17 +67,6 @@ bool Measure::IsActive()
     }
     return (row * Graphics::NumCols() + col) == posActive;
 }
-
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-Measure Measure::GetActive()
-{
-    int row = posActive / Graphics::NumCols();
-    int col = posActive - row * Graphics::NumCols();
-
-    return Measure(row, col);
-}
-
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Measure::SetActive(int row, int col)
@@ -94,7 +83,7 @@ char Measure::GetChar(Measure::Type::E measure)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Measure::ChangeActive(int delta)
 {
-    Measure measure = GetActive();
+    Measure measure = GetActiveMeasure();
 
     int row = measure.row;
     int col = measure.col;

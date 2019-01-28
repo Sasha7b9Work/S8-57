@@ -6,6 +6,7 @@
 #include "Settings/Settings.h"
 #include "Utils/Math.h"
 #include "Utils/Values.h"
+#include <cmath>
 #include <cstdlib>
 #include <cstring>
 
@@ -18,7 +19,6 @@ using FPGA::VALUE::MIN;
 using FPGA::VALUE::MAX;
 using FPGA::VALUE::AVE;
 using FPGA::VALUE::NONE;
-
 using Osci::Measurements::Measure;
 
 
@@ -115,8 +115,8 @@ static const MeasureCalculate sMeas[Osci::Measurements::Measure::Type::Number] =
 
 
 int Osci::Measurements::markerTime[Chan::Size][2] = {{Integer::ERROR}, {Integer::ERROR}};
-
 int Osci::Measurements::markerVoltage[Chan::Size][2] = {{Integer::ERROR}, {Integer::ERROR}};
+int8 Osci::Measurements::posActive = 0;
 
 typedef struct
 {
@@ -1405,4 +1405,13 @@ void Osci::Measurements::SetData(bool /*needSmoothing*/)
             }
         }
     }
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Measure Osci::Measurements::GetActiveMeasure()
+{
+    int row = posActive / Graphics::NumCols();
+    int col = posActive - row * Graphics::NumCols();
+
+    return Measure(row, col);
 }

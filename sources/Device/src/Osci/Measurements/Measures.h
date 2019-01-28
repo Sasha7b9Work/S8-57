@@ -117,8 +117,6 @@ namespace Osci
             bool IsActive();
 
             String Name();
-            /// ѕозици€ активного измерени€ (на котором курсор)
-            static int8 posActive;
             /// ≈сли true - раскрыта страница выбора измерени€
             static bool pageChoiceIsActive;
             /// ѕозици€ курсора на странице выбора измерени€
@@ -128,8 +126,7 @@ namespace Osci
 #define MARKER_TIME(ch, num)                (Processing::markerTime[ch][num])
 
         private:
-            /// ¬озвращает активное измерение
-            static Measure GetActive();
+            
             /// —делать активным
             static void SetActive(int row, int col);
             /// —трока в таблице, в которой находитс€ данное измерение
