@@ -747,7 +747,7 @@ static void DrawHintItem(int x, int y, int width)
 
     const int SIZE = 100;
     char title[SIZE];
-    snprintf(title, SIZE, "%s \"%s\"", names[Menu::itemHint->type][lang].val, item->titleHint[lang]);
+    std::snprintf(title, SIZE, "%s \"%s\"", names[Menu::itemHint->type][lang].val, item->titleHint[lang]);
 
     if (item->type == Control::Type::DrawButton)
     {

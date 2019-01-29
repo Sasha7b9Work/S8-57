@@ -15,7 +15,7 @@
 #include "Utils/CommonFunctions.h"
 #include "Utils/Dictionary.h"
 #include "Utils/Math.h"
-#include <stdio.h>
+#include <cstdio>
 
 #include "Hardware/HAL/HAL.h"
 
@@ -638,7 +638,7 @@ static void Information_Draw()
 
     char buffer[100];
 
-    sprintf(buffer, "%s : %s", DICT(DModel), LANG_RU ? MODEL_RU : MODEL_EN);
+    std::sprintf(buffer, "%s : %s", DICT(DModel), LANG_RU ? MODEL_RU : MODEL_EN);
     String(buffer).Draw(x, y);
 
     y += 2 * dY;
@@ -646,7 +646,7 @@ static void Information_Draw()
     String(DICT(DSoftware)).Draw(x, y);
     y += dY;
 
-    sprintf(buffer, DICT(DVersion), NUM_VER);
+    std::sprintf(buffer, DICT(DVersion), NUM_VER);
 
     String(buffer).Draw(x, y);
     y += dY;

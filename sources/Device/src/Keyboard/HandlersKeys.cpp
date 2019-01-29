@@ -15,7 +15,7 @@
 #include "Menu/Pages/Include/PageTrig.h"
 #include "Menu/Pages/Include/PageDisplay.h"
 #include "Settings/Settings.h"
-#include <stdio.h>
+#include <cstdio>
 
 
 using namespace Display::Primitives;
@@ -253,7 +253,7 @@ static void DrawParametersChannel()
     Region(width, height).DrawBounded(x, y, Color::BACK, Color::Channel(ch));
 
     char buffer[50];
-    sprintf(buffer, "%s : %s %s",
+    std::sprintf(buffer, "%s : %s %s",
         drawingChan.Name(),
         ModeCouple(SET_COUPLE(ch)).UGO(),
         Range(SET_RANGE(ch)).Name()

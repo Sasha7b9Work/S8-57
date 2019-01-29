@@ -16,7 +16,7 @@
 #include "Utils/Dictionary.h"
 #include "Utils/Math.h"
 #include "Utils/StringUtils.h"
-#include <stdio.h>
+#include <cstdio>
 
 
 using namespace Display::Primitives;
@@ -649,7 +649,7 @@ static void OnPress_SerialNumber_Save()
 
     char stringSN[20];
 
-    snprintf(stringSN, 19, "%02d %04d", s->number, s->year);
+    std::snprintf(stringSN, 19, "%02d %04d", s->number, s->year);
 
     if (!OTPmem::SaveSerialNumber(stringSN))
     {
@@ -689,7 +689,7 @@ static void Draw_EnterSerialNumber()
     bool selNumber = s->curDigt == 0;
 
     char buffer[20];
-    snprintf(buffer, 19, "%02d", s->number);
+    std::snprintf(buffer, 19, "%02d", s->number);
 
     Color colorText = Color::FILL;
     Color colorBackground = Color::BACK;
@@ -715,7 +715,7 @@ static void Draw_EnterSerialNumber()
         colorBackground = Color::BACK;
     }
 
-    snprintf(buffer, 19, "%04d", s->year);
+    std::snprintf(buffer, 19, "%04d", s->year);
 
     Color::SetCurrent(colorText);
     //Painter::DrawTextOnBackground(x + 5, y, buffer, colorBackground);

@@ -3,8 +3,7 @@
 #include "Display/Display_Primitives.h"
 #include "Display/Painter.h"
 #include <cstring>
-#include <stdio.h>
-#include <stdio.h>
+#include <cstdio>
 
 
 using namespace Display::Primitives;
@@ -54,7 +53,7 @@ void Console::AddString(char *string)
             }
             stringInConsole--;
         }
-        sprintf(buffer[stringInConsole], "%d %s", count++, string);
+        std::sprintf(buffer[stringInConsole], "%d %s", count++, string);
         stringInConsole++;
     }
 }

@@ -5,7 +5,7 @@
 #include <cstring>
 #include <cmath>
 #include <stdlib.h>
-#include <stdio.h>
+#include <cstdio>
 #include <limits>
 
 
@@ -81,9 +81,9 @@ char* Hex::ToHex(int depth, char buffer[9]) const
 {
     switch (depth)
     {
-        case 8:     sprintf(buffer, "%02X", value); break;
-        case 16:    sprintf(buffer, "%04X", value); break;
-        case 32:    sprintf(buffer, "%08X", value); break;
+        case 8:     std::sprintf(buffer, "%02X", value); break;
+        case 16:    std::sprintf(buffer, "%04X", value); break;
+        case 32:    std::sprintf(buffer, "%08X", value); break;
         default:
             // тут ничего не делаем
             break;
@@ -111,17 +111,17 @@ static char *IntegerToString(int value, bool alwaysSign, int numMinFields, char 
 {
     const int SIZE = 20;
     char format[SIZE] = "%";
-    snprintf(&(format[1]), SIZE, "0%d", numMinFields);
+    std::snprintf(&(format[1]), SIZE, "0%d", numMinFields);
     std::strcat(format, "d"); //-V2513
 
     if (alwaysSign && value >= 0)
     {
         buffer[0] = '+';
-        snprintf(buffer + 1, SIZE - 1, format, value);
+        std::snprintf(buffer + 1, SIZE - 1, format, value);
     }
     else
     {
-        snprintf(buffer, SIZE, format, value);
+        std::snprintf(buffer, SIZE, format, value);
     }
 
     return buffer;
@@ -154,7 +154,7 @@ static char *FrequencyToString(float freq, char bufferOut[20]) //-V2506
         suffix = LANG_RU ? "√ц" : "Hz";
     }
 
-    sprintf(bufferOut, "%s%s", Float(freq).ToString(false, 4).CString(), suffix);
+    std::sprintf(bufferOut, "%s%s", Float(freq).ToString(false, 4).CString(), suffix);
     return bufferOut;
 }
 
@@ -393,7 +393,7 @@ char *Current::ToString(char buffer[50]) const //-V2506
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 char* Phase::ToString(char bufferOut[20]) const
 {
-    sprintf(bufferOut, "%s\xa8", Float(value).ToString(false, 4).CString());
+    std::sprintf(bufferOut, "%s\xa8", Float(value).ToString(false, 4).CString());
     return bufferOut;
 }
 
@@ -450,7 +450,7 @@ static char *FloatToString(float value, bool alwaysSign, int numDigits, char buf
     }
     
     float absValue = std::fabsf(value);
-    sprintf(pBuffer, (char *)format, (double)absValue);
+    std::sprintf(pBuffer, (char *)format, (double)absValue);
     
     float val = (float)atof(pBuffer); //-V2508
     
@@ -462,7 +462,7 @@ static char *FloatToString(float value, bool alwaysSign, int numDigits, char buf
         {
             format[5] = '.';
         }
-        sprintf(pBuffer, format, (double)value);
+        std::sprintf(pBuffer, format, (double)value);
     }
     
     bool signExist = alwaysSign || value < 0;

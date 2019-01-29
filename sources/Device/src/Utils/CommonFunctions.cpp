@@ -4,7 +4,7 @@
 #include <stdlib.h>
 #include <cstring>
 #include <algorithm>
-#include <stdio.h>
+#include <cstdio>
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -24,7 +24,7 @@ void CF::LogBufferU8(const uint8 *buffer, int num)
 
     for (int i = 0; i < num; ++i)
     {
-        sprintf(value, "%02x ", buffer[i]);
+        std::sprintf(value, "%02x ", buffer[i]);
         std::strcat(message, value);
     }
 

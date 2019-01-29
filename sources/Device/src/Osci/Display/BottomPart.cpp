@@ -13,7 +13,7 @@
 #include "Utils/StringUtils.h"
 #include "Utils/Dictionary.h"
 #include "Utils/Values.h"
-#include <stdio.h>
+#include <cstdio>
 
 #include "Osci/Measurements/Measurements_Graphics.h"
 #include "Hardware/Battery.h"
@@ -135,13 +135,13 @@ int Osci::Display::BottomPart::DrawMainParameters(int _x, int _y)
     const int SIZE = 100;
     char buffer[SIZE] = { 0 };
 
-    snprintf(buffer, SIZE, "ð\xa5%s", TBase(SET_TBASE).ToString());
+    std::snprintf(buffer, SIZE, "ð\xa5%s", TBase(SET_TBASE).ToString());
 
     String(buffer).Draw(x, y0, Color::FILL);
 
     buffer[0] = 'a';
     buffer[1] = 0;
-    snprintf(buffer, SIZE, "\xa5%s", SET_TSHIFT.ToString(SET_TBASE).CString());
+    std::snprintf(buffer, SIZE, "\xa5%s", SET_TSHIFT.ToString(SET_TBASE).CString());
     String(buffer).Draw(x + 35, y0);
 
     buffer[0] = 0;
@@ -149,7 +149,7 @@ int Osci::Display::BottomPart::DrawMainParameters(int _x, int _y)
     if (MODE_WORK == ModeWork::Dir)
     {
         pString source[3] = { "1", "2", "\x82" };
-        snprintf(buffer, 100, "ñ\xa5\x10%s", source[(uint8)TRIG_SOURCE]);
+        std::snprintf(buffer, 100, "ñ\xa5\x10%s", source[(uint8)TRIG_SOURCE]);
     }
 
     String(buffer).Draw(x, y1, Color::Trig());
@@ -176,7 +176,7 @@ int Osci::Display::BottomPart::DrawMainParameters(int _x, int _y)
     };
     if (MODE_WORK == ModeWork::Dir)
     {
-        snprintf(buffer, SIZE, "\xa5\x10%s\x10\xa5\x10%s\x10\xa5\x10", couple[TRIG_INPUT], polar[TRIG_POLARITY]);
+        std::snprintf(buffer, SIZE, "\xa5\x10%s\x10\xa5\x10%s\x10\xa5\x10", couple[TRIG_INPUT], polar[TRIG_POLARITY]);
         String(buffer).Draw(x + 18, y1);
 
         Char(filtr[TRIG_INPUT][0]).Draw(x + 45, y1);
@@ -192,7 +192,7 @@ int Osci::Display::BottomPart::DrawMainParameters(int _x, int _y)
     };
     if (MODE_WORK == ModeWork::Dir)
     {
-        snprintf(buffer, 100, "\xa5\x10%c", mode[START_MODE]);
+        std::snprintf(buffer, 100, "\xa5\x10%c", mode[START_MODE]);
         String(buffer).Draw(x + 63, y1);
     }
 
@@ -225,11 +225,11 @@ static void WriteTextVoltage(Chan::E ch, int x, int y)
     const int SIZE = 100;
 
     char buffer[SIZE];
-    snprintf(buffer, SIZE, "%s\xa5%s\xa5%s", Chan(ch).IsA() ? DICT(D1ch) : DICT(D2ch), ModeCouple(SET_COUPLE(ch)).UGO(), Range(range).ToString(divider));
+    std::snprintf(buffer, SIZE, "%s\xa5%s\xa5%s", Chan(ch).IsA() ? DICT(D1ch) : DICT(D2ch), ModeCouple(SET_COUPLE(ch)).UGO(), Range(range).ToString(divider));
     String(buffer).Draw(x + 1, y, colorDraw);
 
     char bufferTemp[SIZE];
-    snprintf(bufferTemp, SIZE, "\xa5%s", RShift::ToString((uint16)SET_RSHIFT(ch), range, divider).CString());
+    std::snprintf(bufferTemp, SIZE, "\xa5%s", RShift::ToString((uint16)SET_RSHIFT(ch), range, divider).CString());
     String(bufferTemp).Draw(x + 46, y);
 }
 
@@ -243,11 +243,11 @@ static void WriteStringAndNumber(const char *text, int16 x, int16 y, int number)
 
     if (number == 0)
     {
-        snprintf(buffer, SIZE, "-");
+        std::snprintf(buffer, SIZE, "-");
     }
     else
     {
-        snprintf(buffer, SIZE, "%d", number);
+        std::snprintf(buffer, SIZE, "%d", number);
     }
     Text(buffer).DrawRelativelyRight(x + 41, y);
 }

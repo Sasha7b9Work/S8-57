@@ -62,6 +62,7 @@ source_group(Utils                                   REGULAR_EXPRESSION "src/Uti
 
 
 file(GLOB SOURCES   ../common/_VS/*
+                    ../common/_VS/std_includes/*
                     ../common/*.*
                     src/Data/*.*
                     src/Display/*.*
