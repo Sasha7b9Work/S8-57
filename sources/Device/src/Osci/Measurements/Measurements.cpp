@@ -1317,7 +1317,7 @@ String Osci::Measurements::Measure::GetStringMeasure(Chan::E ch, char* buffer, i
         }
         else
         {
-//            LOG_ERROR_TRACE("Буфер слишком мал");
+            LOG_ERROR("Буфер слишком мал");
         }
     }
     else
