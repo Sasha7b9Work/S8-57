@@ -78,4 +78,4 @@ GPIO_PinState HAL_GPIO_ReadPin(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin);
 void HAL_GPIO_EXTI_IRQHandler(uint16_t GPIO_Pin);
 
 
-#define __HAL_GPIO_EXTI_CLEAR_IT(x) (x * x)
+#define __HAL_GPIO_EXTI_CLEAR_IT(x) ((x) * (x))

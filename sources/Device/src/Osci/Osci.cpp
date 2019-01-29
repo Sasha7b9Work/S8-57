@@ -182,9 +182,10 @@ static bool CalculateGate(uint16 rand, uint16 *eMin, uint16 *eMax)
     static float minGate = 0.0F;
     static float maxGate = 0.0F;
 
+    LOG_WRITE("Считано %d", rand);
+
     if (rand < 500 || rand > 4000)
     {
-        ///LOG_WRITE("ОШИБКА!!! считано %d", rand);
         return false;
     }
 
@@ -232,6 +233,8 @@ static bool CalculateGate(uint16 rand, uint16 *eMin, uint16 *eMax)
 
     *eMin = (uint16)(minGate);      // -V519 // -V2004
     *eMax = (uint16)(maxGate - 50); // -V519 // -V2004
+
+    LOG_WRITE("Ворота %d %d", *eMin, *eMax);
 
     if (rand < *eMin || rand > *eMax)
     {
