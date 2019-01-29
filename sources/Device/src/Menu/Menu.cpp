@@ -23,6 +23,8 @@
 #include "Display/Painter.h"
 #include <cstdio>
 
+#include "Utils/Debug.h"
+
 
 using namespace Display::Primitives;
 using namespace Osci::Settings;
@@ -753,10 +755,8 @@ static void DrawHintItem(int x, int y, int width)
         y -= 9;
     }
 
-    //Painter::DrawStringInCenterRectAndBoundItC(x, y, width, 15, title, Color::BACK, Color::FILL);
     Text(title).DrawInCenterRectAndBoundIt(x, y, width, 15, Color::BACK, Color::FILL);
 
-    //y = Painter::DrawTextInBoundedRectWithTransfers(x, y + 15, width, item->titleHint[2 + lang], Color::BACK, Color::FILL);
     y = Text(item->titleHint[2 + lang]).DrawInBoundedRectWithTransfers(x, y + 15, width, Color::BACK, Color::FILL);
 
     if (item->type == Control::Type::DrawButton)
@@ -794,26 +794,16 @@ void Menu::Draw()
             if (IS_CHOICE(item) || IS_CHOICE_REG(item))
             {
                 ((Choice *)item)->Draw(0, Grid::Top(), false);
-                //Painter::DrawVLine(0, Grid::Top() + 1, Grid::Top() + 34, Color::BorderMenu(false));
                 VLine(33).Draw(0, Grid::Top() + 1, Color::BorderMenu(false));
-                //Painter::DrawVLine(0 + 1, Grid::Top() + 1, Grid::Top() + 34);
                 VLine(33).Draw(1, Grid::Top() + 1);
-                //Painter::DrawVLine(Grid::Right(), Grid::Top() + 30, Grid::Top() + 40, Color::FILL);
                 VLine(10).Draw(Grid::Right(), Grid::Top() + 30);
-                //Painter::DrawVLine(0 - 1, Grid::Top() + 1, Grid::Top() + 35, Color::BACK);
                 VLine(34).Draw(-1, Grid::Top() + 1, Color::BACK);
-
-                //Painter::DrawHLine(Grid::Top() + 35, 0 - 1, Grid::Right() - 1);
                 HLine(Grid::Right()).Draw(-1, Grid::Top() + 35);
             }
             else if (IS_GOVERNOR(item))
             {
                 ((Governor *)item)->Draw(0, Grid::Top(), true);
-
-                //Painter::DrawHLine(Grid::Top(), 0 - 2, Grid::Right(), Color::FILL);
                 HLine(Grid::Right() + 2).Draw(-2, Grid::Top(), Color::FILL);
-
-                //Painter::DrawVLine(Grid::Right(), Grid::Top(), Grid::Top() + 40);
                 VLine(40).Draw(Grid::Right(), Grid::Top());
             }
             else
@@ -852,7 +842,6 @@ void Menu::Draw()
         y += LANG_RU ? 49 : 40;
         if (Menu::stringForHint)
         {
-            //Painter::DrawTextInBoundedRectWithTransfers(x, y, width, Menu::stringForHint, Color::BACK, Color::WHITE);
             Text(Menu::stringForHint).DrawInBoundedRectWithTransfers(x, y, width, Color::BACK, Color::WHITE);
         }
         else if (Menu::itemHint)
