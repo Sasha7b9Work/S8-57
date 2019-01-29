@@ -2,13 +2,13 @@
 
 @echo %TIME%   Building Device ...
 
-MSBuild.exe ..\..\generated\Device\Device56.vcxproj
+MSBuild.exe ..\..\generated\Device\Device56.vcxproj -clp:ErrorsOnly
 set BUILD_STATUS=%ERRORLEVEL%
 if not %BUILD_STATUS%==0 goto Failed
 
 @echo %TIME%   Building Panel ...
 
-MSBuild.exe ..\..\generated\Panel\Panel56.vcxproj
+MSBuild.exe ..\..\generated\Panel\Panel56.vcxproj -clp:ErrorsOnly
 set BUILD_STATUS=%ERRORLEVEL%
 if %BUILD_STATUS%==0 goto Success
 

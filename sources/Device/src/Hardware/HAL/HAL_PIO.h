@@ -78,15 +78,25 @@ namespace HAL
 
         struct Speed
         {
-            static uint FreqVeryHigh;
+            enum E
+            {
+                Low,
+                VeryHigh,
+                Size
+            };
         };
 
         struct Alternate
         {
-            static uint AF7_USART3;
+            enum E
+            {
+                AF0_MCO,
+                AF7_USART3,
+                Speed
+            };
         };
 
-        void Init(Port::E port, uint pins, Mode::E mode, Pull::E pull, uint speed = 0, uint alternate = 0);
+        void Init(Port::E port, uint pins, Mode::E mode, Pull::E pull, Speed::E speed = Speed::Low, Alternate::E alternate = Alternate::AF0_MCO);
         void Set(Port::E port, uint16 pin);
         void Reset(Port::E port, uint16 pin);
         void Write(Port::E port, uint16 pin, State::E state);

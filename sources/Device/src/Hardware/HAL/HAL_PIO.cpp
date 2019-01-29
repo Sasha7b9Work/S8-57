@@ -41,9 +41,17 @@ namespace HAL
             GPIO_PULLUP
         };
 
-        uint Speed::FreqVeryHigh = GPIO_SPEED_FREQ_VERY_HIGH;
+        static const uint speedes[Speed::Size] =
+        {
+            GPIO_SPEED_FREQ_LOW,
+            GPIO_SPEED_FREQ_VERY_HIGH
+        };
 
-        uint Alternate::AF7_USART3 = GPIO_AF7_USART3;
+        static const uint alternates[Alternate::Speed] =
+        {
+            GPIO_AF0_MCO,
+            GPIO_AF7_USART3
+        };
     }
 }
 
@@ -60,23 +68,23 @@ static GPIO_TypeDef * const ports[HAL::PIO::Port::Size] =
     GPIOH
 };
 
-#define PORT(p) (ports[p])
-
-#define MODE(m) (modes[m])
-
-#define PULL(p) (pulles[p])
+#define PORT(p)      (ports[p])
+#define MODE(m)      (modes[m])
+#define PULL(p)      (pulles[p])
+#define SPEED(s)     (speedes[s])
+#define ALTERNATE(a) (alternates[a])
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void HAL::PIO::Init(Port::E port, uint pins, Mode::E mode, Pull::E pull, uint speed, uint alternate)
+void HAL::PIO::Init(Port::E port, uint pins, Mode::E mode, Pull::E pull, Speed::E speed, Alternate::E alternate)
 {
     GPIO_InitTypeDef isGPIO =
     {
         pins,
         MODE(mode),
         PULL(pull),
-        speed,
-        alternate
+        SPEED(speed),
+        ALTERNATE(alternate)
     };
 
     HAL_GPIO_Init(PORT(port), &isGPIO);

@@ -1,8 +1,7 @@
 echo off
-@echo Rebuild S8-56
-@echo Cleanup...
+@echo %TIME%   Rebuild S8-56
 
-c:\Keil_v5\UV4\UV4 -c..\..\Panel\PanelOSC.uvprojx -j0
-c:\Keil_v5\UV4\UV4 -c..\..\Device\DeviceOSC.uvprojx -j0
+call rebuild_device.bat
 
-call build.bat
+call rebuild_panel.bat
+

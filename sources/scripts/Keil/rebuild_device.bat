@@ -1,7 +1,6 @@
 echo off
-@echo Rebuild Device
-@echo Cleanup...
+@echo %TIME%   Rebuild Device
 
-c:\Keil_v5\UV4\UV4 -c..\..\Device\DeviceOSC.uvprojx -j0
+call clean_device.bat
 
 call build_device.bat

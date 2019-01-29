@@ -1,6 +1,6 @@
 @echo off
 
-MSBuild.exe ..\..\generated\Device\Device56.vcxproj
+MSBuild.exe ..\..\generated\Device\Device56.vcxproj -clp:ErrorsOnly
 set BUILD_STATUS=%ERRORLEVEL%
 if %BUILD_STATUS%==0 goto Success
 
