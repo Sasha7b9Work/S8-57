@@ -871,6 +871,11 @@
               <FilePath>.\src\Hardware\HAL\HAL_EEPROM.cpp</FilePath>
             </File>
             <File>
+              <FileName>HAL_IT.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\HAL\HAL_IT.cpp</FilePath>
+            </File>
+            <File>
               <FileName>HAL_FSMC.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Hardware\HAL\HAL_FSMC.cpp</FilePath>
@@ -911,14 +916,9 @@
               <FilePath>.\src\Hardware\HAL\HAL_TIM.cpp</FilePath>
             </File>
             <File>
-              <FileName>HAL_UART.cpp</FileName>
+              <FileName>HAL_USART3.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\Hardware\HAL\HAL_UART.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>HAL_IT.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Hardware\HAL\HAL_IT.cpp</FilePath>
+              <FilePath>.\src\Hardware\HAL\HAL_USART3.cpp</FilePath>
             </File>
           </Files>
         </Group>

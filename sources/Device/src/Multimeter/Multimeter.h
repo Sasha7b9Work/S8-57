@@ -8,10 +8,17 @@
 #define MULTI_RANGE_RESISTANCE  (set.multi_rangeResist)
 #define MULTI_AVP               (set.multi_avp)
 
+namespace Display
+{
+    class MultimeterWorker;
+};
+
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 namespace Multimeter
 {
+    class DisplayWorker;
+
     /// Инициализация
     void Init();
 
@@ -48,7 +55,9 @@ namespace Multimeter
     /// Используется для отрисовки
     class Display
     {
-    public:
+    friend class DisplayWorker;
+    friend class ::Display::MultimeterWorker;
+    private:
         static void Update();
         /// Через эту функцию поступает измерение от прибора
         static void SetMeasure(const uint8 buffer[10]);

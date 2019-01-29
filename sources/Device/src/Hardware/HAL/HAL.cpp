@@ -20,6 +20,8 @@ void HAL::Init()
     RCC->AHB1ENR |= RCC_AHB1ENR_GPIOGEN;
     RCC->AHB1ENR |= RCC_AHB1ENR_GPIOHEN;
     RCC->AHB1ENR |= RCC_AHB1ENR_GPIOJEN;
+    
+    
 
     SystemClockConfig();
 
@@ -29,11 +31,6 @@ void HAL::Init()
 
     FSMC::Init();
 }
-
-//void HAL_NVIC_SetPriority(IRQn_Type /*IRQn*/, uint32_t /*PreemptPriority*/, uint32_t /*SubPriority*/)
-//{
-//
-//}
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void SystemClockConfig()
