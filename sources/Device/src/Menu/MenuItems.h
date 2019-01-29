@@ -2,6 +2,7 @@
 #include "Display/Display.h"
 #include "Display/Colors.h"
 #include "MenuItemsDefs.h"
+//#include "Keyboard/Keyboard.h"
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -253,6 +254,14 @@ public:
     };
 
     Page::Name::E GetName() const;     ///< Возвращает имя страницы page
+  
+    static bool FuncActive() { return true; }
+
+    static void FuncPress(bool) {};
+
+    static void FuncDraw() {};
+
+    static bool FuncRegSet(KeyEvent) { return false; };
 };
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// Button ///
@@ -411,7 +420,9 @@ public:
 
     char GetSymbol();
     /// Пустая функция обработки изменения
-    static void EmptyChange(bool) {};
+    static void FuncChange(bool) {};
+    /// Пустой признак ативности
+    static bool FuncActive() { return true; }
 };
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// GovernorColor ///

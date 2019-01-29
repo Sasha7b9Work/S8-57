@@ -24,7 +24,7 @@ DEF_CHOICE_2( cThickness,                                                       
     "Allows you to change the thickness of the signals displayed on the screen",
     "x1", "x1",
     "x3", "x3",
-    THICKNESS_SIGNAL, pageDisplay, FuncActive, Choice::EmptyChange, FuncDraw
+    THICKNESS_SIGNAL, pageDisplay, FuncActive, Choice::FuncChange, FuncDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -40,7 +40,7 @@ DEF_CHOICE_2( cViewMode,                                                        
     "Sets the display mode signal.",
     "Вектор", "Vector",
     "Точки",  "Points",
-    MODE_DRAW_SIGNAL, pageDisplay, FuncActive, Choice::EmptyChange, FuncDraw
+    MODE_DRAW_SIGNAL, pageDisplay, FuncActive, Choice::FuncChange, FuncDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -86,7 +86,7 @@ DEF_CHOICE_REG_10( cSmoothing,                                                  
     "8 точек",  "8 points",
     "9 точек",  "9 points",
     "10 точек", "10 points",
-    ENUM_SMOOTHING, pageDisplay, FuncActive, Choice::EmptyChange, FuncDraw
+    ENUM_SMOOTHING, pageDisplay, FuncActive, Choice::FuncChange, FuncDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -115,7 +115,7 @@ DEF_CHOICE_2( cScaleYtype,                                                      
     "the offset on the screen.",
     "Напряжение", "Voltage",
     "Деления", "Divisions",
-    LINKING_RSHIFT, pageDisplay, FuncActive, Choice::EmptyChange, FuncDraw
+    LINKING_RSHIFT, pageDisplay, FuncActive, Choice::FuncChange, FuncDraw
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

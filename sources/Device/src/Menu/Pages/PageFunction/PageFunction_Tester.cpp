@@ -68,7 +68,7 @@ DEF_CHOICE_2(   cViewMode,
     "", "",
     "Линии", "Lines",
     "Точки", "Points",
-    TESTER_VIEW_MODE, pageTester, FuncActive, Choice::EmptyChange, FuncDraw
+    TESTER_VIEW_MODE, pageTester, FuncActive, Choice::FuncChange, FuncDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -80,7 +80,7 @@ DEF_CHOICE_5(   cSmoothing,
     "3", "3",
     "4", "4",
     "5", "5",
-    TESTER_NUM_SMOOTH, pageTester, FuncActive, Choice::EmptyChange, FuncDraw
+    TESTER_NUM_SMOOTH, pageTester, FuncActive, Choice::FuncChange, FuncDraw
 )
 
 

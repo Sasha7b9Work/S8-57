@@ -67,7 +67,7 @@ DEF_CHOICE_2( cRangesCurrent,
     "Диапазон измерения", "Measurement range",
     "2А", "2А",
     "2А", "2А",
-    rangeCurrent, pageMultimeter, EmptyFuncBfV, Choice::EmptyChange, FuncDraw
+    rangeCurrent, pageMultimeter, EmptyFuncBfV, Choice::FuncChange, FuncDraw
 )
 
 

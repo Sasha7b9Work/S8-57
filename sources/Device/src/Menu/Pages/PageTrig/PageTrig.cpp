@@ -135,7 +135,7 @@ static const ChoiceBase cSearch_Mode =                                          
         "2. \"Auto\" - the search is automatically."
     },
     (int8 *)&TRIG_MODE_FIND, // -V206
-    hintsSearch_Mode, Choice::EmptyChange, FuncDraw
+    hintsSearch_Mode, Choice::FuncChange, FuncDraw
 };
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

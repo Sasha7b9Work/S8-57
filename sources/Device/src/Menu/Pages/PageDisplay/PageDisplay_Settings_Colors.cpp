@@ -29,7 +29,7 @@ DEF_CHOICE_2( cScheme,                                                          
     "Changing the color scheme",
     "Ñץולא 1", "Scheme 1",
     "Ñץולא 2", "Scheme 2",
-    set.serv_colorScheme, pageColors, FuncActive, Choice::EmptyChange, FuncDraw
+    set.serv_colorScheme, pageColors, FuncActive, Choice::FuncChange, FuncDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

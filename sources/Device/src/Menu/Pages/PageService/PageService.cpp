@@ -549,7 +549,7 @@ DEF_CHOICE_2( cSound_Enable,                                                    
     "Inclusion/switching off of a sound",
     DISABLE_RU, DISABLE_EN,
     ENABLE_RU, ENABLE_EN,
-    SOUND_ENABLED, ppSound, FuncActive, Choice::EmptyChange, FuncDraw
+    SOUND_ENABLED, ppSound, FuncActive, Choice::FuncChange, FuncDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -621,7 +621,7 @@ DEF_CHOICE_2( cLanguage,                                                        
     "Allows you to select the menu language",
     "Русский",    "RU",
     "Английский", "EN",
-    LANG, pService, FuncActive, Choice::EmptyChange, FuncDraw
+    LANG, pService, FuncActive, Choice::FuncChange, FuncDraw
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

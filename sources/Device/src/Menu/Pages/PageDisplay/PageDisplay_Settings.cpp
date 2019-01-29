@@ -47,7 +47,7 @@ DEF_CHOICE_3( cStringNavigation,                                                
     "Временно", "Temporary",    /// \todo Исправить перевод
     "Всегда", "All",
     "Никогда", "None",
-    SHOW_STRING_NAVI, pageSettings, FuncActive, Choice::EmptyChange, FuncDraw
+    SHOW_STRING_NAVI, pageSettings, FuncActive, Choice::FuncChange, FuncDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

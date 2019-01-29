@@ -34,7 +34,7 @@ DEF_CHOICE_REG_9( cAccum_Num,                                                   
     "64",       "64",
     "128",      "128",
     "Бесконечность", "Infinity",
-    ENUM_ACCUM, pageAccum, FuncActive, Choice::EmptyChange, FuncDraw
+    ENUM_ACCUM, pageAccum, FuncActive, Choice::FuncChange, FuncDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -53,7 +53,7 @@ DEF_CHOICE_2( cAccum_Mode,                                                      
     ,
     "Не сбрасывать", "Not to dump",
     "Сбрасывать", "Dump",
-    MODE_ACCUM, pageAccum, FuncActive, Choice::EmptyChange, FuncDraw
+    MODE_ACCUM, pageAccum, FuncActive, Choice::FuncChange, FuncDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

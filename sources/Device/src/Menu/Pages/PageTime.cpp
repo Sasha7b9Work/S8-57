@@ -29,7 +29,7 @@ DEF_CHOICE_2( cSample,                                                          
     "\"Equals\" - ",
     "Реальное время", "Real",
     "Эквивалентная",  "Equals",
-    SAMPLE_TYPE, pTime, IsActive_Sample, Choice::EmptyChange, FuncDraw
+    SAMPLE_TYPE, pTime, IsActive_Sample, Choice::FuncChange, FuncDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -90,7 +90,7 @@ DEF_CHOICE_2(cDivRole,                                                          
     ,
     "Время", "Time",
     "Память", "Memory",
-    TIME_DIV_XPOS, pTime, FuncActive, Choice::EmptyChange, FuncDraw
+    TIME_DIV_XPOS, pTime, FuncActive, Choice::FuncChange, FuncDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -105,7 +105,7 @@ DEF_CHOICE_2( cShiftXtype,                                                      
     ,
     "Время", "Time",
     "Деления", "Divisions",
-    LINKING_TSHIFT, pTime, FuncActive, Choice::EmptyChange, FuncDraw
+    LINKING_TSHIFT, pTime, FuncActive, Choice::FuncChange, FuncDraw
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
