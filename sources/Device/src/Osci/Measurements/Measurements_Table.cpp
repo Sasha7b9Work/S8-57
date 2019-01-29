@@ -40,70 +40,91 @@ void Table::Draw()
 
     CalculateMeasures();
 
-    int x0 = Grid::Left() - GetDeltaGridLeft();
-    int dX = DX();
-    int dY = DY();
-    int y0 = GetTopTable();
-
     for (int str = 0; str < NumRows(); str++)
     {
         for (int elem = 0; elem < NumCols(); elem++)
         {
-            int x = x0 + dX * elem;
-            int y = y0 + str * dY;
-            Measure measure(str, elem);
+            int x = Grid::Left() - GetDeltaGridLeft() + DX() * elem;
+            int y = GetTopTable() + str * DY();
 
-            bool active = measure.IsActive() && Menu::GetNameOpenedPage() == Page::Name::Measures_Auto_Tune;
-
-            Measure::Type::E type = measure.GetType();
-            if (type != Measure::Type::None)
-            {
-                Region(dX, dY).Fill(x, y, Color::BACK);
-                Rectangle(dX, dY).Draw(x, y, Color::FILL);
-                top = Math::Min(top, y);
-            }
-            if (active)
-            {
-                Region(dX - 4, dY - 4).Fill(x + 2, y + 2, Color::FILL);
-            }
-            if (type != Measure::Type::None)
-            {
-                Color color = active ? Color::BACK : Color::FILL;
-
-#define SIZE_BUFFER 20
-                char buffer[SIZE_BUFFER];
-
-                measure.Name().Draw(x + 4, y + 2, color);
-
-                if (type == MEAS_MARKED)
-                {
-                    Region(dX - 2, 9).Fill(x + 1, y + 1, active ? Color::BACK : Color::FILL);
-                    measure.Name().Draw(x + 4, y + 2, active ? Color::FILL : Color::BACK);
-                }
-                if (VIEW_MEASURES_BOTH)
-                {
-                    GetStringMeasure(type, Chan::A, buffer, SIZE_BUFFER).Draw(x + 2, y + 11, Color::Channel(Chan::A));
-                    GetStringMeasure(type, Chan::B, buffer, SIZE_BUFFER).Draw(x + 2, y + (SET_ENABLED_A ? 20 : 11), Color::Channel(Chan::B));
-                }
-                else if (VIEW_MEASURES_A)
-                {
-                    GetStringMeasure(type, Chan::A, buffer, SIZE_BUFFER).Draw(x + 2, y + 11, Color::Channel(Chan::A));
-                }
-                else if (VIEW_MEASURES_B)
-                {
-                    GetStringMeasure(type, Chan::B, buffer, SIZE_BUFFER).Draw(x + 2, y + 11, Color::Channel(Chan::B));
-                }
-                else
-                {
-                    // других вариантов нет
-                }
-            }
+            Cell(str, elem).Draw(x, y);
         }
     }
 
     if (Menu::GetNameOpenedPage() == Page::Name::Measures_Auto_Tune)
     {
         PageChoice::Draw();
+    }
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Table::Cell::Draw(int x, int y)
+{
+    Measure measure(row, col);
+
+    bool active = measure.IsActive() && Menu::GetNameOpenedPage() == Page::Name::Measures_Auto_Tune;
+
+    Measure::Type::E type = measure.GetType();
+
+    if (type != Measure::Type::None)
+    {
+        Region(DX(), DY()).Fill(x, y, Color::BACK);
+        Rectangle(DX(), DY()).Draw(x, y, Color::FILL);
+        top = Math::Min(top, y);
+    }
+
+    if (active)
+    {
+        Region(DX() - 4, DY() - 4).Fill(x + 2, y + 2, Color::FILL);
+    }
+
+    if (type != Measure::Type::None)
+    {
+        Color color = active ? Color::BACK : Color::FILL;
+
+        measure.Name().Draw(x + 4, y + 2, color);
+
+        if (type == MEAS_MARKED)
+        {
+            Region(DX() - 2, 9).Fill(x + 1, y + 1, active ? Color::BACK : Color::FILL);
+            measure.Name().Draw(x + 4, y + 2, active ? Color::FILL : Color::BACK);
+        }
+
+        DrawStringMeasure(x, y);   
+    }
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Table::Cell::DrawStringMeasure(int x, int y)
+{
+    Measure measure(row, col);
+
+    static const int SIZE_BUFFER = 20;
+
+    char buffer[SIZE_BUFFER];
+
+    String measureA = measure.GetStringMeasure(Chan::A, buffer, SIZE_BUFFER);
+    String measureB = measure.GetStringMeasure(Chan::B, buffer, SIZE_BUFFER);
+
+    Color colA = Color::Channel(Chan::A);
+    Color colB = Color::Channel(Chan::B);
+
+    if (VIEW_MEASURES_BOTH)
+    {
+        measureA.Draw(x + 2, y + 11, colA);
+        measureB.Draw(x + 2, y + (SET_ENABLED_A ? 20 : 11), colB);
+    }
+    else if (VIEW_MEASURES_A)
+    {
+        measureA.Draw(x + 2, y + 11, colA);
+    }
+    else if (VIEW_MEASURES_B)
+    {
+        measureB.Draw(x + 2, y + 11, colB);
+    }
+    else
+    {
+        // других вариантов нет
     }
 }
 

@@ -97,6 +97,7 @@ namespace Osci
 
             Type::E GetType();
 
+            String GetStringMeasure(Chan::E ch, char *buffer, int lenBuf);
             /// Устанавливает активным следующее или предыдущее измерение
             static void ChangeActive(int delta);
             /// Рассчитать позицию курсора напряжения, соответствующю заданной позиции курсора posCurT

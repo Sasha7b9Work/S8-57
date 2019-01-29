@@ -138,6 +138,9 @@ static bool picIsCalculating[2] = {false, false};
 #define EXIT_IF_ERRORS_FLOAT(x, y)  if(isnan(x) || isnan(y))    return Float::ERROR;
 #define EXIT_IF_ERROR_INT(x)        if((x) == Integer::ERROR)   return Float::ERROR;
 
+/// Входной буфер данных канала ch
+#define CHOICE_BUFFER (OUT(ch))
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void Osci::Measurements::CalculateMeasures()
 {
@@ -320,11 +323,6 @@ float CalculateVoltageAmpl(Chan::E ch)
 
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-/// Входной буфер данных канала ch
-#define CHOICE_BUFFER (OUT(ch))
-
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 float CalculateVoltageAverage(Chan::E ch)
 {
     int period = CalculatePeriodAccurately(ch);
@@ -454,6 +452,7 @@ int CalculatePeriodAccurately(Chan::E ch)
     if(!periodAccurateIsCalculating[ch])
     {
         period[ch] = 0;
+
         float pic = CalculatePicRel(ch);
 
         if(pic == Float::ERROR) //-V550
@@ -974,6 +973,7 @@ float CalculatePicRel(Chan::E ch)
         pic[ch] = (min == Float::ERROR || max == Float::ERROR) ? Float::ERROR : max - min; //-V550
         picIsCalculating[ch] = true;
     }
+
     return pic[ch];
 }
 
@@ -1284,30 +1284,32 @@ void InterpolationSinX_X(uint8 *data, int numPoints, TBase::E tBase)
 
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-String Osci::Measurements::GetStringMeasure(Measure::Type::E measure, Chan::E ch, char* buffer, int lenBuf)
+String Osci::Measurements::Measure::GetStringMeasure(Chan::E ch, char* buffer, int lenBuf)
 {
+    Measure::Type::E type = GetType();
+
     if (!SET_ENABLED(ch))
     {
         return String("");
     }
     buffer[0] = '\0';
     std::strcpy(buffer, Chan(ch).IsA() ? "1: " : "2: ");
-    if(!isSet || values[measure].value[ch] == Float::ERROR) //-V550
+    if(!isSet || values[type].value[ch] == Float::ERROR) //-V550
     {
         std::strcat(buffer, "-.-");
     }
-    else if(sMeas[measure].FuncCalculate)
+    else if(sMeas[type].FuncCalculate)
     {
         char bufferForFunc[20];
-        pFuncPCFBPC func = sMeas[measure].FucnConvertate;
-        float value = values[measure].value[ch];
+        pFuncPCFBPC func = sMeas[type].FucnConvertate;
+        float value = values[type].value[ch];
        
         if (SET_DIVIDER_10(ch) && func == Voltage2String)
         {
             value *= 10.0F;                         // Домножаем, если включён делитель
         }
                
-        char *text = func(value, sMeas[measure].showSign, bufferForFunc);
+        char *text = func(value, sMeas[type].showSign, bufferForFunc);
         int len = (int)std::strlen(text) + (int)std::strlen(buffer) + 1;
         if (len + 1 <= lenBuf)
         {
@@ -1385,7 +1387,6 @@ void Osci::Measurements::SetData(bool /*needSmoothing*/)
     BitSet64 points = Display::BytesOnDisplay();
     firstByte = points.sword0;
     lastByte = points.sword1;
-
     nBytes = lastByte - firstByte;
 
     if (TBASE_DS >= TBase::MIN_P2P)           // Если находимся в поточечном режме, то нужно брать последние считанные точки для проведения измерений
@@ -1405,6 +1406,8 @@ void Osci::Measurements::SetData(bool /*needSmoothing*/)
             }
         }
     }
+
+
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
