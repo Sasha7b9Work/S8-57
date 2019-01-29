@@ -25,7 +25,7 @@ namespace HAL
         uint16 Pin::_14 = GPIO_PIN_14;
         uint16 Pin::_15 = GPIO_PIN_15;
 
-        uint modes[Mode::Size] =
+        static const uint modes[Mode::Size] =
         {
             GPIO_MODE_ANALOG,
             GPIO_MODE_OUTPUT_PP,
@@ -34,9 +34,12 @@ namespace HAL
             GPIO_MODE_AF_PP
         };
 
-        uint Pull::No = GPIO_NOPULL;
-        uint Pull::Down = GPIO_PULLDOWN;
-        uint Pull::Up = GPIO_PULLUP;
+        static const uint pulles[Pull::Size] =
+        {
+            GPIO_NOPULL,
+            GPIO_PULLDOWN,
+            GPIO_PULLUP
+        };
 
         uint Speed::FreqVeryHigh = GPIO_SPEED_FREQ_VERY_HIGH;
 
@@ -61,15 +64,17 @@ static GPIO_TypeDef * const ports[HAL::PIO::Port::Size] =
 
 #define MODE(m) (modes[m])
 
+#define PULL(p) (pulles[p])
+
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void HAL::PIO::Init(Port::E port, uint pins, Mode::E mode, uint pull, uint speed, uint alternate)
+void HAL::PIO::Init(Port::E port, uint pins, Mode::E mode, Pull::E pull, uint speed, uint alternate)
 {
     GPIO_InitTypeDef isGPIO =
     {
         pins,
         MODE(mode),
-        pull,
+        PULL(pull),
         speed,
         alternate
     };

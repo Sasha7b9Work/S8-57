@@ -62,15 +62,18 @@ namespace HAL
                 Input,
                 AF_PP,
                 Size
-            } value;
-            explicit Mode(E v) : value(v) {};
+            };
         };
 
         struct Pull
         {
-            static uint No;
-            static uint Down;
-            static uint Up;
+            enum E
+            {
+                No,
+                Down,
+                Up,
+                Size
+            };
         };
 
         struct Speed
@@ -83,7 +86,7 @@ namespace HAL
             static uint AF7_USART3;
         };
 
-        void Init(Port::E port, uint pins, Mode::E mode, uint pull, uint speed = 0, uint alternate = 0);
+        void Init(Port::E port, uint pins, Mode::E mode, Pull::E pull, uint speed = 0, uint alternate = 0);
         void Set(Port::E port, uint16 pin);
         void Reset(Port::E port, uint16 pin);
         void Write(Port::E port, uint16 pin, State::E state);
