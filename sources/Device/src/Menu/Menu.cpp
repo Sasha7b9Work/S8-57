@@ -676,8 +676,7 @@ void Menu::CloseOpenedItem()
 
         if (keeper)
         {
-            Page::Name::E name = (Page::Name::E)keeper->name;
-            keeper->SetPosActItem(MENU_POS_ACT_ITEM(name) & 0x7f);
+            keeper->SetPosActItem(0x7f);
         }
 
         if (item == (Control *)pageMain)    // -V1027

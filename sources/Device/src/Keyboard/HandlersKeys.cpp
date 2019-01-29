@@ -117,10 +117,10 @@ void Handlers::Process(KeyEvent e)
         {TShiftLess,     TShiftLess,     Empty,          Empty},            // TShiftLess 
         {TrigLevMore,    TrigLevMore,    Empty,          Empty},            // TrigLevMore
         {TrigLevLess,    TrigLevLess,    Empty,          Empty},            // TrigLevLess
-        {HandlerArrow,   HandlerArrow,   HandlerArrow,   HandlerArrow},            // Left       
-        {HandlerArrow,   HandlerArrow,   HandlerArrow,   HandlerArrow},            // Right      
-        {HandlerArrow,   HandlerArrow,   HandlerArrow,   HandlerArrow},            // Up         
-        {HandlerArrow,   HandlerArrow,   HandlerArrow,   HandlerArrow},            // Down       
+        {HandlerArrow,   HandlerArrow,   HandlerArrow,   HandlerArrow},     // Left       
+        {HandlerArrow,   HandlerArrow,   HandlerArrow,   HandlerArrow},     // Right      
+        {HandlerArrow,   HandlerArrow,   HandlerArrow,   HandlerArrow},     // Up         
+        {HandlerArrow,   HandlerArrow,   HandlerArrow,   HandlerArrow},     // Down       
         {Empty,          Empty,          EnterRelease,   EnterLong},        // Enter      
         {Empty,          Empty,          FuncRelease,    FuncLong},         // F1         
         {Empty,          Empty,          FuncRelease,    FuncLong},         // F2         

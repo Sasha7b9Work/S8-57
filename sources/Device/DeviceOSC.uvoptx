@@ -155,18 +155,18 @@
         <Bp>
           <Number>0</Number>
           <Type>0</Type>
-          <LineNumber>34</LineNumber>
+          <LineNumber>346</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134250092</Address>
+          <Address>134276490</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>.\src\Hardware\HAL\HAL_IT.cpp</Filename>
+          <Filename>&lt;1&gt;.\src\Keyboard\HandlersKeys.cpp</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\FPGA\src/Hardware/HAL/HAL_IT.cpp\34</Expression>
+          <Expression>\\FPGA\src/Keyboard/HandlersKeys.cpp\346</Expression>
         </Bp>
       </Breakpoint>
       <WatchWindow1>
@@ -1699,7 +1699,7 @@
 
   <Group>
     <GroupName>Keyboard</GroupName>
-    <tvExp>0</tvExp>
+    <tvExp>1</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
@@ -2871,7 +2871,7 @@
 
   <Group>
     <GroupName>Osci/Measurements</GroupName>
-    <tvExp>1</tvExp>
+    <tvExp>0</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
