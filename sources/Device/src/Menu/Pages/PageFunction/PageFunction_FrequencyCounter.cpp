@@ -31,7 +31,7 @@ DEF_CHOICE_2( cEnable,                                                          
     "",
     DISABLE_RU, DISABLE_EN,
     ENABLE_RU, ENABLE_EN,
-    FREQ_METER_ENABLED, ppFreqMeter, FuncActive, OnChanged_FreqMeter_Enable, FuncDraw
+    FREQ_METER_ENABLED, ppFreqMeter, FuncActive, OnChanged_FreqMeter_Enable, Choice::EmptyDraw
 )
 
 
@@ -46,7 +46,7 @@ DEF_CHOICE_2( cModeView,                                                        
     "", "",
     "„астота", "Frequency",
     "ѕериод",  "Period",
-    FREQ_METER_MODE_VIEW, ppFreqMeter, IsActive_ModeView, Choice::FuncChange, FuncDraw
+    FREQ_METER_MODE_VIEW, ppFreqMeter, IsActive_ModeView, Choice::EmptyChange, Choice::EmptyDraw
 )
 
 
@@ -69,7 +69,7 @@ DEF_CHOICE_3( cTimeF,                                                           
     "100мс", "100ms",
     "1с", "1s",
     "10с", "10ms",
-    FREQ_METER_TIMECOUNTING, ppFreqMeter, IsActive_SettingsPeriod, OnChanged_FreqMeter_Frequency, FuncDraw
+    FREQ_METER_TIMECOUNTING, ppFreqMeter, IsActive_SettingsPeriod, OnChanged_FreqMeter_Frequency, Choice::EmptyDraw
 )
 
 
@@ -81,7 +81,7 @@ DEF_CHOICE_4( cFreqClc,                                                         
     "1ћ√ц", "200MHz",
     "10ћ√ц", "10MHz",
     "100ћ√ц", "100MHz",
-    FREQ_METER_FREQ_CLC, ppFreqMeter, IsActive_SettingsFrequency, OnChanged_FreqMeter_Period, FuncDraw
+    FREQ_METER_FREQ_CLC, ppFreqMeter, IsActive_SettingsFrequency, OnChanged_FreqMeter_Period, Choice::EmptyDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -95,7 +95,7 @@ DEF_CHOICE_6( cNumPeriods,                                                      
     "1000",   "1000",
     "10000",  "10000",
     "100000", "100000",
-    FREQ_METER_NUM_PERIODS, ppFreqMeter, IsActive_SettingsFrequency, OnChanged_FreqMeter_Period, FuncDraw
+    FREQ_METER_NUM_PERIODS, ppFreqMeter, IsActive_SettingsFrequency, OnChanged_FreqMeter_Period, Choice::EmptyDraw
 )
 
 

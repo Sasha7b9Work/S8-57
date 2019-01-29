@@ -31,7 +31,7 @@ DEF_CHOICE_3( cRangesVoltageDC,                                                 
     "2 В",   "2 V",
     "20 В",  "20 V",
     "500 В", "500 V",
-    MULTI_RANGE_DC, pageMultimeter, FuncActive_RangesVoltageDC, OnChange_VoltageDC, FuncDraw
+    MULTI_RANGE_DC, pageMultimeter, FuncActive_RangesVoltageDC, OnChange_VoltageDC, Choice::EmptyDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -54,7 +54,7 @@ DEF_CHOICE_3( cRangesVoltageAC,                                                 
     "2 В", "2 V",
     "20 В", "20 V",
     "400 В", "400 V",
-    MULTI_RANGE_AC, pageMultimeter, FuncActive_RnagesVoltageAC, OnChange_VoltageAC, FuncDraw
+    MULTI_RANGE_AC, pageMultimeter, FuncActive_RnagesVoltageAC, OnChange_VoltageAC, Choice::EmptyDraw
 )
 
 
@@ -67,7 +67,7 @@ DEF_CHOICE_2( cRangesCurrent,
     "Диапазон измерения", "Measurement range",
     "2А", "2А",
     "2А", "2А",
-    rangeCurrent, pageMultimeter, EmptyFuncBfV, Choice::FuncChange, FuncDraw
+    rangeCurrent, pageMultimeter, EmptyFuncBfV, Choice::EmptyChange, Choice::EmptyDraw
 )
 
 
@@ -92,7 +92,7 @@ DEF_CHOICE_4(   cRangesResistance,                                              
     "20 кОм", "20 kOhm",
     "200 кОм", "200 kOhm",
     "10 МОм", "10 MOhm",
-    MULTI_RANGE_RESISTANCE, pageMultimeter, FuncActive_RangesReistance, OnChange_Resistance, FuncDraw
+    MULTI_RANGE_RESISTANCE, pageMultimeter, FuncActive_RangesReistance, OnChange_Resistance, Choice::EmptyDraw
 )
 
 DEF_CHOICE_7(   cMode,
@@ -123,7 +123,7 @@ DEF_CHOICE_7(   cMode,
     "R",    "R",
     "VD",   "VD",
     "BELL", "BELL",
-    MULTI_MEASURE, pageMultimeter, FuncActive, PageFunction::PageMultimeter::OnChanged_Mode, FuncDraw
+    MULTI_MEASURE, pageMultimeter, FuncActive, PageFunction::PageMultimeter::OnChanged_Mode, Choice::EmptyDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -138,7 +138,7 @@ DEF_CHOICE_2 (cAVP,
     "Auto-select limit",
     DISABLE_RU, DISABLE_EN,
     ENABLE_RU, ENABLE_EN,
-    MULTI_AVP, pageMultimeter, FuncActive, OnChanged_AVP, FuncDraw
+    MULTI_AVP, pageMultimeter, FuncActive, OnChanged_AVP, Choice::EmptyDraw
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

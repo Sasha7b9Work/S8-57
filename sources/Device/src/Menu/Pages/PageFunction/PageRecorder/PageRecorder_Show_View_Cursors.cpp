@@ -16,7 +16,7 @@ DEF_BUTTON( bCenter,
     "В центр", "To the center",
     "",
     "",
-    pageRecorderCursors, FuncActive, OnPress_Center, FuncDraw
+    pageRecorderCursors, FuncActive, OnPress_Center, Button::FuncDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -29,7 +29,7 @@ DEF_BUTTON( bLeft,
     "Лево", "Left",
     "",
     "",
-    pageRecorderCursors, FuncActive, OnPress_Left, FuncDraw
+    pageRecorderCursors, FuncActive, OnPress_Left, Button::FuncDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -42,7 +42,7 @@ DEF_BUTTON( bRight,
     "Право", "Right",
     "",
     "",
-    pageRecorderCursors, FuncActive, OnPress_Right, FuncDraw
+    pageRecorderCursors, FuncActive, OnPress_Right, Button::FuncDraw
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

@@ -18,7 +18,7 @@ DEF_CHOICE_2( cFFT_View,                                                        
     "Enables or disables the display of the spectrum",
     DISABLE_RU, DISABLE_EN,
     ENABLE_RU, ENABLE_EN,
-    FFT_ENABLED, ppFFT, FuncActive, Choice::FuncChange, FuncDraw
+    FFT_ENABLED, ppFFT, FuncActive, Choice::EmptyChange, Choice::EmptyDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -28,7 +28,7 @@ DEF_CHOICE_2( cFFT_Scale,                                                       
     "Sets the scale of the output spectrum - linear or logarithmic",
     "Логарифм", "Log",
     "Линейная", "Linear",
-    SCALE_FFT, ppFFT, FuncActive, Choice::FuncChange, FuncDraw
+    SCALE_FFT, ppFFT, FuncActive, Choice::EmptyChange, Choice::EmptyDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -39,7 +39,7 @@ DEF_CHOICE_3( cFFT_Source,                                                      
     "Канал 1", "Chan 1",
     "Канал 2", "Chan 2",
     "Канал 1 + 2", "Chan 1 + 2",
-    SOURCE_FFT, ppFFT, FuncActive, Choice::FuncChange, FuncDraw
+    SOURCE_FFT, ppFFT, FuncActive, Choice::EmptyChange, Choice::EmptyDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -51,7 +51,7 @@ DEF_CHOICE_4( cFFT_Window,                                                      
     "Хэмминга", "Hamming",
     "Блэкмена", "Blackman",
     "Ханна", "Hann",
-    WINDOW_FFT, ppFFT, FuncActive, Choice::FuncChange, FuncDraw
+    WINDOW_FFT, ppFFT, FuncActive, Choice::EmptyChange, Choice::EmptyDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -67,7 +67,7 @@ DEF_CHOICE_3( cFFT_Range,                                                       
     "-40дБ", "-40dB",
     "-60дБ", "-60dB",
     "-80дБ", "-80dB",
-    MAX_DB_FFT, ppFFT, IsActive_FFT_Range, Choice::FuncChange, FuncDraw
+    MAX_DB_FFT, ppFFT, IsActive_FFT_Range, Choice::EmptyChange, Choice::EmptyDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

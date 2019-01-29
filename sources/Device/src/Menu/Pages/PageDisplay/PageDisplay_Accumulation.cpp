@@ -34,7 +34,7 @@ DEF_CHOICE_REG_9( cAccum_Num,                                                   
     "64",       "64",
     "128",      "128",
     "Бесконечность", "Infinity",
-    ENUM_ACCUM, pageAccum, FuncActive, Choice::FuncChange, FuncDraw
+    ENUM_ACCUM, pageAccum, FuncActive, Choice::EmptyChange, Choice::EmptyDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -53,7 +53,7 @@ DEF_CHOICE_2( cAccum_Mode,                                                      
     ,
     "Не сбрасывать", "Not to dump",
     "Сбрасывать", "Dump",
-    MODE_ACCUM, pageAccum, FuncActive, Choice::FuncChange, FuncDraw
+    MODE_ACCUM, pageAccum, FuncActive, Choice::EmptyChange, Choice::EmptyDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -71,7 +71,7 @@ DEF_BUTTON( bAccum_Clear,                                                       
     "Очистить", "Clear",
     "Очищает экран от накопленных сигналов.",
     "Clears the screen of the saved-up signals.",
-    pageAccum, IsActive_Accum_Clear, PageDisplay::PageAccumulation::OnPress_Accumulation_Clear, FuncDraw
+    pageAccum, IsActive_Accum_Clear, PageDisplay::PageAccumulation::OnPress_Accumulation_Clear, Button::FuncDraw
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

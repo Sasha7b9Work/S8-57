@@ -29,7 +29,7 @@ DEF_CHOICE_2( cSample,                                                          
     "\"Equals\" - ",
     "Реальное время", "Real",
     "Эквивалентная",  "Equals",
-    SAMPLE_TYPE, pTime, IsActive_Sample, Choice::FuncChange, FuncDraw
+    SAMPLE_TYPE, pTime, IsActive_Sample, Choice::EmptyChange, Choice::EmptyDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -56,7 +56,7 @@ DEF_CHOICE_2( cPeakDet,                                                         
     "Turns on/off peak detector.",
     DISABLE_RU, DISABLE_EN,
     ENABLE_RU,  ENABLE_EN,
-    SET_PEAKDET, pTime, IsActive_PeakDet, PageTime::OnChanged_PeakDet, FuncDraw
+    SET_PEAKDET, pTime, IsActive_PeakDet, PageTime::OnChanged_PeakDet, Choice::EmptyDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -73,7 +73,7 @@ DEF_CHOICE_3(cTPos,                                                             
     "Лево", "Left",
     "Центр", "Center",
     "Право", "Right",
-    TPOS, pTime, FuncActive, PageTime::OnChanged_TPos, FuncDraw
+    TPOS, pTime, FuncActive, PageTime::OnChanged_TPos, Choice::EmptyDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -90,7 +90,7 @@ DEF_CHOICE_2(cDivRole,                                                          
     ,
     "Время", "Time",
     "Память", "Memory",
-    TIME_DIV_XPOS, pTime, FuncActive, Choice::FuncChange, FuncDraw
+    TIME_DIV_XPOS, pTime, FuncActive, Choice::EmptyChange, Choice::EmptyDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -105,7 +105,7 @@ DEF_CHOICE_2( cShiftXtype,                                                      
     ,
     "Время", "Time",
     "Деления", "Divisions",
-    LINKING_TSHIFT, pTime, FuncActive, Choice::FuncChange, FuncDraw
+    LINKING_TSHIFT, pTime, FuncActive, Choice::EmptyChange, Choice::EmptyDraw
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

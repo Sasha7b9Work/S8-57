@@ -16,7 +16,7 @@ DEF_BUTTON( bRename,                                                            
     "Переименовать", "Rename",
     "",
     "",
-    pageOperations, FuncActive, OnPress_Rename, FuncDraw
+    pageOperations, FuncActive, OnPress_Rename, Button::FuncDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -29,7 +29,7 @@ DEF_BUTTON( bCopy,                                                              
     "Копировать", "Copy",
     "",
     "",
-    pageOperations, FuncActive, OnPress_Copy, FuncDraw
+    pageOperations, FuncActive, OnPress_Copy, Button::FuncDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -42,7 +42,7 @@ DEF_BUTTON( bMove,                                                              
     "Переместить", "Move",
     "",
     "",
-    pageOperations, FuncActive, OnPress_Move, FuncDraw
+    pageOperations, FuncActive, OnPress_Move, Button::FuncDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -55,7 +55,7 @@ DEF_BUTTON( bDelete,                                                            
     "Удалить", "Delete",
     "",
     "",
-    pageOperations, FuncActive, OnPress_Delete, FuncDraw
+    pageOperations, FuncActive, OnPress_Delete, Button::FuncDraw
 )
 
 

@@ -59,7 +59,7 @@ DEF_BUTTON( bAutoSearch,                                                        
     "Поиск сигн", "Find sign",
     "Устанавливает оптимальные установки осциллографа для сигнала в канале 1",
     "Sets optimal settings for the oscilloscope signal on channel 1",
-    pService, FuncActive, OnPress_AutoSearch, FuncDraw
+    pService, FuncActive, OnPress_AutoSearch, Button::FuncDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -75,7 +75,7 @@ DEF_CHOICE_2( cCalibrator_Calibrator, // -V206                                  
     "Перем", "DC",
     "+4V", "+4V",
     //"0V", "0V",
-    CALIBRATOR_MODE, ppCalibrator, FuncActive, OnChanged_Calibrator_Calibrator, FuncDraw
+    CALIBRATOR_MODE, ppCalibrator, FuncActive, OnChanged_Calibrator_Calibrator, Choice::EmptyDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -92,7 +92,7 @@ DEF_BUTTON( bCalibrator_Calibrate,                                              
     "Калибровать", "Calibrate",
     "Запуск процедуры калибровки",
     "Running the calibration procedure",
-    ppCalibrator, IsActive_Calibrator_Calibrate, OnPress_Calibrator_Calibrate, FuncDraw
+    ppCalibrator, IsActive_Calibrator_Calibrate, OnPress_Calibrator_Calibrate, Button::FuncDraw
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -118,7 +118,7 @@ DEF_CHOICE_2( cRecorder,                                                        
     "Turn on/off recorder mode. This mode is available for scanning 20ms/div and slower.",
     DISABLE_RU, DISABLE_EN,
     ENABLE_RU,  ENABLE_EN,
-    RECORDER_MODE, pService, FuncActive, OnChanged_Recorder, FuncDraw
+    RECORDER_MODE, pService, FuncActive, OnChanged_Recorder, Choice::EmptyDraw
 )
 
 #else
@@ -549,7 +549,7 @@ DEF_CHOICE_2( cSound_Enable,                                                    
     "Inclusion/switching off of a sound",
     DISABLE_RU, DISABLE_EN,
     ENABLE_RU, ENABLE_EN,
-    SOUND_ENABLED, ppSound, FuncActive, Choice::FuncChange, FuncDraw
+    SOUND_ENABLED, ppSound, FuncActive, Choice::EmptyChange, Choice::EmptyDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -621,7 +621,7 @@ DEF_CHOICE_2( cLanguage,                                                        
     "Allows you to select the menu language",
     "Русский",    "RU",
     "Английский", "EN",
-    LANG, pService, FuncActive, Choice::FuncChange, FuncDraw
+    LANG, pService, FuncActive, Choice::EmptyChange, Choice::EmptyDraw
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

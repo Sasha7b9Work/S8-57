@@ -58,7 +58,7 @@ DEF_CHOICE_3( cMode, // -V206                                                   
     "Авто ",       "Auto",
     "Ждущий",      "Wait",
     "Однократный", "Single",
-    START_MODE, pTrig, FuncActive, PageTrig::OnChanged_TrigMode, FuncDraw
+    START_MODE, pTrig, FuncActive, PageTrig::OnChanged_TrigMode, Choice::EmptyDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -73,7 +73,7 @@ DEF_CHOICE_2( cSource, // -V206                                                 
     "Synchronization signal source choice.",
     "Канал 1", "Chan 1",
     "Канал 2", "Chan 2",
-    TRIG_SOURCE, pTrig, FuncActive, OnChanged_Source, FuncDraw
+    TRIG_SOURCE, pTrig, FuncActive, OnChanged_Source, Choice::EmptyDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -90,7 +90,7 @@ DEF_CHOICE_2( cPolarity, //-V206                                                
     "2. \"Back\" - start happens on a clock pulse cut.",
     "Фронт", "Front",
     "Срез",  "Back",
-    TRIG_POLARITY, pTrig, FuncActive, OnChanged_Polarity, FuncDraw
+    TRIG_POLARITY, pTrig, FuncActive, OnChanged_Polarity, Choice::EmptyDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -112,7 +112,7 @@ DEF_CHOICE_3( cInput, // -V206                                                  
     "ПС",  "Full",
     "ФНЧ", "LPF",
     "ФВЧ", "HPF",
-    TRIG_INPUT, pTrig, FuncActive, OnChanged_Input, FuncDraw
+    TRIG_INPUT, pTrig, FuncActive, OnChanged_Input, Choice::EmptyDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -135,7 +135,7 @@ static const ChoiceBase cSearch_Mode =                                          
         "2. \"Auto\" - the search is automatically."
     },
     (int8 *)&TRIG_MODE_FIND, // -V206
-    hintsSearch_Mode, Choice::FuncChange, FuncDraw
+    hintsSearch_Mode, Choice::EmptyChange, Choice::EmptyDraw
 };
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -152,7 +152,7 @@ DEF_BUTTON( bSearch_Search,                                                     
     "Найти", "Search",
     "Производит поиск уровня синхронизации.",
     "Runs for search synchronization level.",
-    ppSearch, IsActive_Search_Search, OnPress_Search_Search, FuncDraw
+    ppSearch, IsActive_Search_Search, OnPress_Search_Search, Choice::EmptyDraw
 )
 
 

@@ -19,7 +19,7 @@ DEF_CHOICE_2( cShow,                                                            
     "Enables / disables the display of battery voltage information on the screen",
     DISABLE_RU, DISABLE_EN,
     ENABLE_RU,  ENABLE_EN,
-    BAT_SHOW_ON_DISPLAY, pageBattery, FuncActive, Choice::FuncChange, FuncDraw
+    BAT_SHOW_ON_DISPLAY, pageBattery, FuncActive, Choice::EmptyChange, Choice::EmptyDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

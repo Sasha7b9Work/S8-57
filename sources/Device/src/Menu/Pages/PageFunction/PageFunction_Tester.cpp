@@ -24,7 +24,7 @@ DEF_CHOICE_2(   cPolarity,                                                      
     "Polarity of the test exposure",
     "+", "+",
     "-", "-",
-    TESTER_POLARITY, pageTester, FuncActive, OnChanged_Polarity, FuncDraw
+    TESTER_POLARITY, pageTester, FuncActive, OnChanged_Polarity, Choice::EmptyDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -34,7 +34,7 @@ DEF_CHOICE_2(   cControl,                                                       
     "Type of test exposure",
     "Напряжение", "Voltage",
     "Ток", "Current",
-    TESTER_CONTROL, pageTester, FuncActive, PageFunction::PageTester::OnChanged_Control, FuncDraw
+    TESTER_CONTROL, pageTester, FuncActive, PageFunction::PageTester::OnChanged_Control, Choice::EmptyDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -49,7 +49,7 @@ DEF_CHOICE_2(   cStepU,                                                         
     "Test voltage step",
     "100 мВ", "100 mV",
     "500 мВ", "500 mV",
-    TESTER_STEP_U, pageTester, FuncActive, OnChanged_Step, FuncDraw
+    TESTER_STEP_U, pageTester, FuncActive, OnChanged_Step, Choice::EmptyDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -59,7 +59,7 @@ DEF_CHOICE_2(   cStepI,
     "Step test current",
     "4 мА",  "4 mA",
     "20 мА", "20 mA",
-    TESTER_STEP_I, pageTester, FuncActive, OnChanged_Step, FuncDraw
+    TESTER_STEP_I, pageTester, FuncActive, OnChanged_Step, Choice::EmptyDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -68,7 +68,7 @@ DEF_CHOICE_2(   cViewMode,
     "", "",
     "Линии", "Lines",
     "Точки", "Points",
-    TESTER_VIEW_MODE, pageTester, FuncActive, Choice::FuncChange, FuncDraw
+    TESTER_VIEW_MODE, pageTester, FuncActive, Choice::EmptyChange, Choice::EmptyDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -80,7 +80,7 @@ DEF_CHOICE_5(   cSmoothing,
     "3", "3",
     "4", "4",
     "5", "5",
-    TESTER_NUM_SMOOTH, pageTester, FuncActive, Choice::FuncChange, FuncDraw
+    TESTER_NUM_SMOOTH, pageTester, FuncActive, Choice::EmptyChange, Choice::EmptyDraw
 )
 
 

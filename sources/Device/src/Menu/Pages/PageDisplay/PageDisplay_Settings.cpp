@@ -47,7 +47,7 @@ DEF_CHOICE_3( cStringNavigation,                                                
     "Временно", "Temporary",    /// \todo Исправить перевод
     "Всегда", "All",
     "Никогда", "None",
-    SHOW_STRING_NAVI, pageSettings, FuncActive, Choice::FuncChange, FuncDraw
+    SHOW_STRING_NAVI, pageSettings, FuncActive, Choice::EmptyChange, Choice::EmptyDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -70,7 +70,7 @@ DEF_CHOICE_3( cAltMarkers,                                                      
     "Скрывать", "Hide",
     "Показывать", "Show",
     "Авто", "Auto",
-    ALT_MARKERS, pageSettings, FuncActive, OnChanged_Settings_AltMarkers, FuncDraw
+    ALT_MARKERS, pageSettings, FuncActive, OnChanged_Settings_AltMarkers, Choice::EmptyDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -89,7 +89,7 @@ DEF_CHOICE_6( cAutoHide,                                                        
     "Через 15 сек", "Through 15 s",
     "Через 30 сек", "Through 30 s",
     "Через 60 сек", "Through 60 s",
-    MENU_AUTO_HIDE, pageSettings, FuncActive, OnChanged_Settings_AutoHide, FuncDraw
+    MENU_AUTO_HIDE, pageSettings, FuncActive, OnChanged_Settings_AutoHide, Choice::EmptyDraw
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

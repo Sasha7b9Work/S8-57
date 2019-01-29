@@ -25,7 +25,7 @@ DEF_CHOICE_2( cHoldOff,                                                         
     "Enable / disable sync delay mode",
     DISABLE_RU, DISABLE_EN,
     ENABLE_RU,  ENABLE_EN,
-    TRIG_HOLDOFF_ENABLED, pageHoldOff, FuncActive, OnChanged_HoldOff, FuncDraw
+    TRIG_HOLDOFF_ENABLED, pageHoldOff, FuncActive, OnChanged_HoldOff, Choice::EmptyDraw
 )
 
 

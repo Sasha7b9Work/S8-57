@@ -143,7 +143,7 @@ DEF_CHOICE_3( cADC_Stretch_Mode,                                                
     DISABLE_RU, DISABLE_EN,
     "Реальный", "Real",
     "Ручной",   "Manual",
-    NRST_STRETCH_ADC_TYPE, pppADC_Stretch, FuncActive, PageDebug::OnChanged_ADC_Stretch_Mode, FuncDraw
+    NRST_STRETCH_ADC_TYPE, pppADC_Stretch, FuncActive, PageDebug::OnChanged_ADC_Stretch_Mode, Choice::EmptyDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -274,7 +274,7 @@ DEF_BUTTON( bADC_Shift_Reset,                                                   
     "Сброс", "Reset",
     "",
     "",
-    pppADC_Shift, FuncActive, OnPress_ADC_Shift_Reset, FuncDraw
+    pppADC_Shift, FuncActive, OnPress_ADC_Shift_Reset, Button::FuncDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -378,7 +378,7 @@ DEF_CHOICE_7( cChannels_BandwidthA,                                             
     "350МГц", "350MHz",
     "650МГц", "650MHz",
     "750МГц", "750MHz",
-    BANDWIDTH_DEBUG(Chan::A), ppChannels, FuncActive, OnChanged_Channels_BandwidthA, FuncDraw
+    BANDWIDTH_DEBUG(Chan::A), ppChannels, FuncActive, OnChanged_Channels_BandwidthA, Choice::EmptyDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -398,7 +398,7 @@ DEF_CHOICE_7( cChannels_BandwidthB,                                             
     "350МГц", "350MHz",
     "650МГц", "650MHz",
     "750МГц", "750MHz",
-    BANDWIDTH_DEBUG(Chan::B), ppChannels, FuncActive, OnChanged_Channels_BandwidthB, FuncDraw
+    BANDWIDTH_DEBUG(Chan::B), ppChannels, FuncActive, OnChanged_Channels_BandwidthB, Choice::EmptyDraw
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -419,7 +419,7 @@ DEF_CHOICE_2( cStats,                                                           
     "To show/not to show a time/shot, frames per second, quantity of signals with the last settings in memory/quantity of the signals kept in memory",
     "Не показывать", "Hide",
     "Показывать",    "Show",
-    SHOW_STAT, pageDebug, FuncActive, Choice::FuncChange, FuncDraw
+    SHOW_STAT, pageDebug, FuncActive, Choice::EmptyChange, Choice::EmptyDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -434,7 +434,7 @@ DEF_CHOICE_2( cDisplayOrientation,                                              
     "Sets display orientation",
     "Прямая",   "Direct",
     "Обратная", "Back",
-    DISPLAY_ORIENTATION, pageDebug, FuncActive, PageDebug::OnChanged_DisplayOrientation, FuncDraw
+    DISPLAY_ORIENTATION, pageDebug, FuncActive, PageDebug::OnChanged_DisplayOrientation, Choice::EmptyDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -602,7 +602,7 @@ DEF_BUTTON( bSaveFirmware,                                                      
     "Сохр. прошивку", "Save firmware",
     "Сохранение прошивки - секторов 5, 6, 7 общим объёмом 3 х 128 кБ, где хранится программа",
     "Saving firmware - sectors 5, 6, 7 with a total size of 3 x 128 kB, where the program is stored",
-    pageDebug, IsActive_SaveFirmware, OnPress_SaveFirmware, FuncDraw
+    pageDebug, IsActive_SaveFirmware, OnPress_SaveFirmware, Button::FuncDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -784,7 +784,7 @@ DEF_BUTTON( bEraseData,                                                         
     "Стереть данне", "Erase data",
     "Стирает сохранённые данные из ППЗУ",
     "Erase all saved datas from EEPROM",
-    pageDebug, FuncActive, OnPress_EraseData, FuncDraw
+    pageDebug, FuncActive, OnPress_EraseData, Button::FuncDraw
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

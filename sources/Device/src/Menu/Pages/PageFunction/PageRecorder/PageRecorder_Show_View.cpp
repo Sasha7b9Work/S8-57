@@ -15,7 +15,7 @@ DEF_CHOICE_2( cMove,                                                            
     "",
     "X", "X",
     "Y", "Y",
-    RECORDER_AXIS_MOVE, pageView, FuncActive, Choice::FuncChange, FuncDraw
+    RECORDER_AXIS_MOVE, pageView, FuncActive, Choice::EmptyChange, Choice::EmptyDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -25,7 +25,7 @@ DEF_CHOICE_2( cZoom,                                                            
     "",
     "X", "X",
     "Y", "Y",
-    RECORDER_AXIS_ZOOM, pageView, FuncActive, Choice::FuncChange, FuncDraw
+    RECORDER_AXIS_ZOOM, pageView, FuncActive, Choice::EmptyChange, Choice::EmptyDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -38,7 +38,7 @@ DEF_BUTTON( bLess,                                                              
     "Меньше", "Less",
     "",
     "",
-    pageView, FuncActive, OnPress_Less, FuncDraw
+    pageView, FuncActive, OnPress_Less, Button::FuncDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -51,7 +51,7 @@ DEF_BUTTON( bMore,                                                              
     "Больше", "More",
     "",
     "",
-    pageView, FuncActive, OnPress_More, FuncDraw
+    pageView, FuncActive, OnPress_More, Button::FuncDraw
 )
 
 

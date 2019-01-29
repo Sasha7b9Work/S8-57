@@ -36,13 +36,13 @@ void PageChannelA::OnChanged_Input(bool)
 
 }
 
-DEF_CHOICE_2(       cChanA_Input,                                                                                             //--- КАНАЛ 1 - Вход ---
+DEF_CHOICE_2( cChanA_Input,                                                                                                                                          //--- КАНАЛ 1 - Вход ---
     "Вход", "Input",
     chanInputRu,
     chanInputEn,
     DISABLE_RU, DISABLE_EN,
     ENABLE_RU, ENABLE_EN,
-    SET_ENABLED_A, pChanA, FuncActive, PageChannelA::OnChanged_Input, FuncDraw
+    SET_ENABLED_A, pChanA, FuncActive, PageChannelA::OnChanged_Input, Choice::EmptyDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -51,14 +51,14 @@ void PageChannelA::OnChanged_Couple(bool)
     FPGA::Settings::ModeCouple::Set(Chan::A, SET_COUPLE_A);
 }
 
-DEF_CHOICE_3(       cChanA_Couple,                                                                                           //--- КАНАЛ 1 - Связь ---
+DEF_CHOICE_3( cChanA_Couple,                                                                                                                                        //--- КАНАЛ 1 - Связь ---
     "Связь", "Couple",
     chanCoupleRu,
     chanCoupleEn,
     "Пост",  "AC",
     "Перем", "DC",
     "Земля", "Ground",
-    SET_COUPLE_A, pChanA, FuncActive, PageChannelA::OnChanged_Couple, FuncDraw
+    SET_COUPLE_A, pChanA, FuncActive, PageChannelA::OnChanged_Couple, Choice::EmptyDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -73,7 +73,7 @@ DEF_CHOICE_2( cChanA_Bandwidth,                                                 
     "Sets the channel bandwidth",
     "Полная", "Full",
     "20МГц",  "20MHz",
-    SET_BANDWIDTH_A, pChanA, FuncActive, OnChanged_ChanA_Bandwidth, FuncDraw
+    SET_BANDWIDTH_A, pChanA, FuncActive, OnChanged_ChanA_Bandwidth, Choice::EmptyDraw
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -105,7 +105,7 @@ DEF_CHOICE_2( cChanB_Input,                                                     
     chanInputEn,
     DISABLE_RU, DISABLE_EN,
     ENABLE_RU,  ENABLE_EN,
-    SET_ENABLED_B, pChanB, FuncActive, PageChannelB::OnChanged_Input, FuncDraw
+    SET_ENABLED_B, pChanB, FuncActive, PageChannelB::OnChanged_Input, Choice::EmptyDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -121,7 +121,7 @@ DEF_CHOICE_3( cChanB_Couple,                                                    
     "Пост",  "DC",
     "Перем", "AC",
     "Земля", "Ground",
-    SET_COUPLE_B, pChanB, FuncActive, PageChannelB::OnChanged_Couple, FuncDraw
+    SET_COUPLE_B, pChanB, FuncActive, PageChannelB::OnChanged_Couple, Choice::EmptyDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -136,7 +136,7 @@ DEF_CHOICE_2( cChanB_Bandwidth,                                                 
     "",
     "Полная", "Full",
     "20МГц", "20MHz",
-    SET_BANDWIDTH_B, pChanB, FuncActive, OnChanged_BandwidthB, FuncDraw
+    SET_BANDWIDTH_B, pChanB, FuncActive, OnChanged_BandwidthB, Choice::EmptyDraw
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

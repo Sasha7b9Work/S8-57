@@ -24,7 +24,7 @@ DEF_CHOICE_2( cThickness,                                                       
     "Allows you to change the thickness of the signals displayed on the screen",
     "x1", "x1",
     "x3", "x3",
-    THICKNESS_SIGNAL, pageDisplay, FuncActive, Choice::FuncChange, FuncDraw
+    THICKNESS_SIGNAL, pageDisplay, FuncActive, Choice::EmptyChange, Choice::EmptyDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -40,7 +40,7 @@ DEF_CHOICE_2( cViewMode,                                                        
     "Sets the display mode signal.",
     "Вектор", "Vector",
     "Точки",  "Points",
-    MODE_DRAW_SIGNAL, pageDisplay, FuncActive, Choice::FuncChange, FuncDraw
+    MODE_DRAW_SIGNAL, pageDisplay, FuncActive, Choice::EmptyChange, Choice::EmptyDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -67,7 +67,7 @@ DEF_CHOICE_8( cMinMax,                                                          
     "32",  "32",
     "64",  "64",
     "128", "128",
-    ENUM_MIN_MAX, pageDisplay, IsActive_MinMax, OnChanged_MinMax, FuncDraw
+    ENUM_MIN_MAX, pageDisplay, IsActive_MinMax, OnChanged_MinMax, Choice::EmptyDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -86,7 +86,7 @@ DEF_CHOICE_REG_10( cSmoothing,                                                  
     "8 точек",  "8 points",
     "9 точек",  "9 points",
     "10 точек", "10 points",
-    ENUM_SMOOTHING, pageDisplay, FuncActive, Choice::FuncChange, FuncDraw
+    ENUM_SMOOTHING, pageDisplay, FuncActive, Choice::EmptyChange, Choice::EmptyDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -103,7 +103,7 @@ DEF_CHOICE_5( cRefreshFPS,                                                      
     "5",  "5",
     "2",  "2",
     "1",  "1",
-    ENUM_SIGNALS_IN_SEC, pageDisplay, FuncActive, PageDisplay::OnChanged_RefreshFPS, FuncDraw
+    ENUM_SIGNALS_IN_SEC, pageDisplay, FuncActive, PageDisplay::OnChanged_RefreshFPS, Choice::EmptyDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -115,7 +115,7 @@ DEF_CHOICE_2( cScaleYtype,                                                      
     "the offset on the screen.",
     "Напряжение", "Voltage",
     "Деления", "Divisions",
-    LINKING_RSHIFT, pageDisplay, FuncActive, Choice::FuncChange, FuncDraw
+    LINKING_RSHIFT, pageDisplay, FuncActive, Choice::EmptyChange, Choice::EmptyDraw
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

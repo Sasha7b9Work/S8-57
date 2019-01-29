@@ -280,6 +280,8 @@ public:
     pFuncVV     funcOnPress;        ///< Функция, которая вызывается при нажатии на кнопку.
     pFuncVII    funcForDraw;        ///< Функция будет вызываться во время отрисовки кнопки.
     void Draw(int x, int y);
+
+    static void FuncDraw(int, int) {};
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// SButton ///
@@ -420,9 +422,11 @@ public:
 
     char GetSymbol();
     /// Пустая функция обработки изменения
-    static void FuncChange(bool) {};
+    static void EmptyChange(bool) {};
     /// Пустой признак ативности
-    static bool FuncActive() { return true; }
+    static bool EmptyActive() { return true; }
+
+    static void EmptyDraw(int, int) {};
 };
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// GovernorColor ///

@@ -16,7 +16,7 @@ DEF_CHOICE_2( cShow,                                                            
     "Allows you to display data from the recorder when the recorder menu is off",
     "В режиме", "In mode",
     "Всегда",   "In always",
-    RECORDER_VIEW_ALLWAYS, pageRecorder, FuncActive, Choice::FuncChange, FuncDraw
+    RECORDER_VIEW_ALLWAYS, pageRecorder, FuncActive, Choice::EmptyChange, Choice::EmptyDraw
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

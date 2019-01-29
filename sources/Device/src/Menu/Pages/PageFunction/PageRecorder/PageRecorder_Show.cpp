@@ -15,7 +15,7 @@ DEF_CHOICE_3( cSource,                                                          
     "ОЗУ", "RAM",
     "USB-Flash", "USB-Flash",
     "USB-PC",    "USB-PC",
-    RECORDER_STORAGE_PLAY, pageShow, FuncActive, Choice::FuncChange, FuncDraw
+    RECORDER_STORAGE_PLAY, pageShow, FuncActive, Choice::EmptyChange, Choice::EmptyDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -28,7 +28,7 @@ DEF_BUTTON( bNext,                                                              
     "Следующий", "Next",
     "",
     "",
-    pageShow, FuncActive, OnPress_Next, FuncDraw
+    pageShow, FuncActive, OnPress_Next, Button::FuncDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -41,7 +41,7 @@ DEF_BUTTON( bPrev,                                                              
     "Предыдущий", "Previous",
     "",
     "",
-    pageShow, FuncActive, OnPress_Prev, FuncDraw
+    pageShow, FuncActive, OnPress_Prev, Button::FuncDraw
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
