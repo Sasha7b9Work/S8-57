@@ -17,19 +17,16 @@ using Display::Primitives::Text;
 #define SIZE_OUT 15
 char out[SIZE_OUT];
 
-namespace Multimeter
-{
-    namespace Display
-    {
-        static void PrepareRing();
-        static void PrepareConstantVoltage();
-        static void PrepareVariableVoltage();
-        static void PrepareConstantCurrent();
-        static void PrepareVariableCurrent();
-        static void PrepareResistance();
-        static void PrepareTestDiode();
-    }
-}
+/// Если нулевой элемент == 0, то выводить ничего не нужно
+static char buffer[11] = { 0 };
+
+static void PrepareRing();
+static void PrepareConstantVoltage();
+static void PrepareVariableVoltage();
+static void PrepareConstantCurrent();
+static void PrepareVariableCurrent();
+static void PrepareResistance();
+static void PrepareTestDiode();
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -72,7 +69,24 @@ void Multimeter::Display::Update()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void Multimeter::Display::PrepareRing()
+void Multimeter::Display::ChangedMode()
+{
+    std::memset(buffer, '8', 10);
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Multimeter::Display::SetMeasure(const uint8 buf[10])
+{
+    std::memcpy(buffer, buf, 10);
+    buffer[2] |= 0x30;
+    buffer[3] |= 0x30;
+    buffer[4] |= 0x30;
+    buffer[5] |= 0x30;
+    buffer[6] |= 0x30;
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+static void PrepareRing()
 {
     out[0] = buffer[2];
     out[1] = '.';
@@ -87,7 +101,7 @@ static void Multimeter::Display::PrepareRing()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void Multimeter::Display::PrepareTestDiode()
+static void PrepareTestDiode()
 {
     out[0] = (char)buffer[1];
     out[1] = buffer[2];
@@ -101,7 +115,7 @@ static void Multimeter::Display::PrepareTestDiode()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void Multimeter::Display::PrepareConstantVoltage()
+static void PrepareConstantVoltage()
 {
     out[0] = buffer[1];
     out[1] = buffer[2];
@@ -132,7 +146,7 @@ static void Multimeter::Display::PrepareConstantVoltage()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void Multimeter::Display::PrepareVariableVoltage()
+static void PrepareVariableVoltage()
 {
     out[0] = buffer[2];
     out[4] = buffer[5];
@@ -162,7 +176,7 @@ static void Multimeter::Display::PrepareVariableVoltage()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void Multimeter::Display::PrepareConstantCurrent()
+static void PrepareConstantCurrent()
 {
     out[0] = (char)buffer[1];
     out[1] = buffer[2];
@@ -177,7 +191,7 @@ static void Multimeter::Display::PrepareConstantCurrent()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void Multimeter::Display::PrepareVariableCurrent()
+static void PrepareVariableCurrent()
 {
     out[0] = buffer[2];
     out[1] = '.';
@@ -191,7 +205,7 @@ static void Multimeter::Display::PrepareVariableCurrent()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Multimeter::Display::PrepareResistance()
+void PrepareResistance()
 {
     out[0] = buffer[2];
     out[4] = buffer[5];

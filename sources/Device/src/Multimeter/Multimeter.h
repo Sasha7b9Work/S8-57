@@ -12,11 +12,6 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 namespace Multimeter
 {
-    /// Используется для отрисовки
-    namespace Display
-    {
-        void Update();
-    };
     /// Инициализация
     void Init();
 
@@ -27,8 +22,6 @@ namespace Multimeter
     void ChangeMode();
 
     void ChangeAVP();
-    /// Через эту функцию поступает измерение от прибора
-    static void SetMeasure(const uint8 buffer[10]);
     /// Режим измерений мультиметра
     struct Measure
     {
@@ -52,6 +45,14 @@ namespace Multimeter
         static Measure::E ForSymbol(char symbol);
     };
 
-    /// Если нулевой элемент == 0, то выводить ничего не нужно
-    extern char         buffer[11];
+    /// Используется для отрисовки
+    class Display
+    {
+    public:
+        static void Update();
+        /// Через эту функцию поступает измерение от прибора
+        static void SetMeasure(const uint8 buffer[10]);
+
+        static void ChangedMode();
+    };
 };
