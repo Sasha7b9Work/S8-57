@@ -58,6 +58,7 @@ namespace HAL
             static uint Output_PP;
             static uint RisingIT;
             static uint Input;
+            static uint AF_PP;
         };
 
         struct Pull
@@ -67,7 +68,17 @@ namespace HAL
             static uint Up;
         };
 
-        void Init(Port::E port, uint pins, uint mode, uint pull);
+        struct Speed
+        {
+            static uint FreqVeryHigh;
+        };
+
+        struct Alternate
+        {
+            static uint AF7_USART3;
+        };
+
+        void Init(Port::E port, uint pins, uint mode, uint pull, uint speed = 0, uint alternate = 0);
         void Set(Port::E port, uint16 pin);
         void Reset(Port::E port, uint16 pin);
         void Write(Port::E port, uint16 pin, State::E state);
