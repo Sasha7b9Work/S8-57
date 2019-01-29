@@ -2,7 +2,7 @@
 #include "Data/Reader.h"
 #include "FPGA/FPGA_Math.h"
 #include "Osci/Measurements/Measurements.h"
-#include "Osci/Measurements/Measurements_Graphics.h"
+#include "Osci/Measurements/Measurements_Table.h"
 #include "Settings/Settings.h"
 #include "Utils/Math.h"
 #include "Utils/Values.h"
@@ -153,11 +153,11 @@ void Osci::Measurements::CalculateMeasures()
     periodAccurateIsCalculating[0] = periodAccurateIsCalculating[1] = false;
     picIsCalculating[0] = picIsCalculating[1] = false;
 
-    for(int str = 0; str < Measurements::Graphics::NumRows(); str++)
+    for(int str = 0; str < Measurements::Table::NumRows(); str++)
     {
-        for(int elem = 0; elem < Measurements::Graphics::NumCols(); elem++)
+        for(int elem = 0; elem < Measurements::Table::NumCols(); elem++)
         {
-            Measure measure = Measure::Get(str, elem);
+            Measure measure(str, elem);
             Measure::Type::E type = measure.GetType();
 
             pFuncFCh func = sMeas[type].FuncCalculate;
@@ -1410,8 +1410,8 @@ void Osci::Measurements::SetData(bool /*needSmoothing*/)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Measure Osci::Measurements::GetActiveMeasure()
 {
-    int row = posActive / Graphics::NumCols();
-    int col = posActive - row * Graphics::NumCols();
+    int row = posActive / Table::NumCols();
+    int col = posActive - row * Table::NumCols();
 
     return Measure(row, col);
 }

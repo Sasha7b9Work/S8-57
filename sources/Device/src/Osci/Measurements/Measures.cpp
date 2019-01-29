@@ -6,7 +6,7 @@
 #include "Utils/Math.h"
 
 #include "Osci/Measurements/Measurements.h"
-#include "Osci/Measurements/Measurements_Graphics.h"
+#include "Osci/Measurements/Measurements_Table.h"
 
 
 using namespace Display::Primitives;
@@ -57,17 +57,17 @@ static const StructMeasure sMeas[Measure::Type::Number] =
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 bool Measure::IsActive()
 {
-    if(posActive >= Graphics::NumCols() * Graphics::NumRows())
+    if(posActive >= Table::NumCols() * Table::NumRows())
     {
         posActive = 0;
     }
-    return (row * Graphics::NumCols() + col) == posActive;
+    return (row * Table::NumCols() + col) == posActive;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Measure::SetActive(int row, int col)
 {
-    posActive = (int8)(row * Graphics::NumCols() + col);
+    posActive = (int8)(row * Table::NumCols() + col);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -88,18 +88,18 @@ void Measure::ChangeActive(int delta)
 
     if (col < 0)
     {
-        col = Graphics::NumCols() - 1;
+        col = Table::NumCols() - 1;
         row--;
         if (row < 0)
         {
-            row = Graphics::NumRows() - 1;
+            row = Table::NumRows() - 1;
         }
     }
-    else if (col == Graphics::NumCols())
+    else if (col == Table::NumCols())
     {
         col = 0;
         row++;
-        if (row >= Graphics::NumRows())
+        if (row >= Table::NumRows())
         {
             row = 0;
         }
@@ -121,7 +121,7 @@ String Measure::Name()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Measure::Type::E Measure::GetType()
 {
-    return set.meas_measures[row * Graphics::NumCols() + col];
+    return set.meas_measures[row * Table::NumCols() + col];
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

@@ -15,7 +15,7 @@
 #include "Utils/Values.h"
 #include <cstdio>
 
-#include "Osci/Measurements/Measurements_Graphics.h"
+#include "Osci/Measurements/Measurements_Table.h"
 #include "Hardware/Battery.h"
 #include "Hardware/HAL/HAL.h"
 
@@ -45,7 +45,7 @@ void Osci::Display::BottomPart::Draw()
     int y1 = ::Display::HEIGHT - 10;
     int x = -1;
 
-	HLine line(Grid::Left() - Measurements::Graphics::GetDeltaGridLeft() - 1);
+	HLine line(Grid::Left() - Measurements::Table::GetDeltaGridLeft() - 1);
 
 	line.Draw(1, Grid::ChannelBottom(), Color::SEPARATOR);
 	line.Draw(1, Grid::FullBottom());

@@ -94,8 +94,6 @@ namespace Osci
             };
 
             Measure(int r, int c) : row(r), col(c) {};
-            /// Возвращает сообщение из ячейки (row, col)
-            static Measure Get(int row, int col) { return Measure(row, col); };
 
             Type::E GetType();
 

@@ -11,7 +11,5 @@ namespace Osci
         void DrawCursorTrigLevel();
 
         void DrawScaleLine(int x, bool forTrigLev);
-
-        void DrawMeasures();
     }
 }

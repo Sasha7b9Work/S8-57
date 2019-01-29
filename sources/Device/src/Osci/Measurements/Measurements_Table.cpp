@@ -1,7 +1,7 @@
 #include "defines.h"
 #include "Display/Display_Primitives.h"
 #include "Display/Grid.h"
-#include "Osci/Measurements/Measurements_Graphics.h"
+#include "Osci/Measurements/Measurements_Table.h"
 #include "Settings/Settings.h"
 
 #include "Utils/Math.h"
@@ -29,7 +29,7 @@ static int GetTopTable();
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void Graphics::Draw()
+void Table::Draw()
 {
     if (!SHOW_MEASURES)
     {
@@ -45,16 +45,13 @@ void Graphics::Draw()
     int dY = DY();
     int y0 = GetTopTable();
 
-    int numRows = NumRows();
-    int numCols = NumCols();
-
-    for (int str = 0; str < numRows; str++)
+    for (int str = 0; str < NumRows(); str++)
     {
-        for (int elem = 0; elem < numCols; elem++)
+        for (int elem = 0; elem < NumCols(); elem++)
         {
             int x = x0 + dX * elem;
             int y = y0 + str * dY;
-            Measure measure = Measure::Get(str, elem);
+            Measure measure(str, elem);
 
             bool active = measure.IsActive() && Menu::GetNameOpenedPage() == Page::Name::Measures_Auto_Tune;
 
@@ -115,10 +112,10 @@ static int GetTopTable()
 {
     if (NUM_MEASURES_IS_6_1 || NUM_MEASURES_IS_6_2)
     {
-        return Grid::Bottom() - Osci::Measurements::Graphics::DY() * 6;
+        return Grid::Bottom() - Osci::Measurements::Table::DY() * 6;
     }
 
-    int y = Grid::Bottom() - Graphics::NumRows() * Osci::Measurements::Graphics::DY();
+    int y = Grid::Bottom() - Table::NumRows() * Osci::Measurements::Table::DY();
 
     if (Menu::IsShown())
     {
@@ -129,27 +126,27 @@ static int GetTopTable()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-int Osci::Measurements::Graphics::NumCols()
+int Osci::Measurements::Table::NumCols()
 {
     const int cols[] = { 1, 2, 5, 5, 5, 1, 2 };
     return cols[NUM_MEASURES];
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-int Osci::Measurements::Graphics::NumRows()
+int Osci::Measurements::Table::NumRows()
 {
     int rows[] = { 1, 1, 1, 2, 3, 6, 6 };
     return rows[NUM_MEASURES];
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-int Osci::Measurements::Graphics::GetDeltaGridLeft()
+int Osci::Measurements::Table::GetDeltaGridLeft()
 {
     if (SHOW_MEASURES && MODE_VIEW_SIGNALS_IS_COMPRESS)
     {
         if (NUM_MEASURES_IS_6_1)
         {
-            return Graphics::DX();
+            return DX();
         }
         else if (NUM_MEASURES_IS_6_2)
         {
@@ -164,7 +161,7 @@ int Osci::Measurements::Graphics::GetDeltaGridLeft()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-int Osci::Measurements::Graphics::DY()
+int Osci::Measurements::Table::DY()
 {
     if (VIEW_MEASURES_BOTH)
     {
@@ -174,7 +171,7 @@ int Osci::Measurements::Graphics::DY()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-int Osci::Measurements::Graphics::DX()
+int Osci::Measurements::Table::DX()
 {
     return Grid::Width() / 5;
 }

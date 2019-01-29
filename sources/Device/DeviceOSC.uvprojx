@@ -1531,19 +1531,19 @@
               <FilePath>.\src\Osci\Measurements\Measurements.h</FilePath>
             </File>
             <File>
-              <FileName>Measurements_Graphics.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Osci\Measurements\Measurements_Graphics.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Measurements_Graphics.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Osci\Measurements\Measurements_Graphics.h</FilePath>
-            </File>
-            <File>
               <FileName>Measurements_PageChoice.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Osci\Measurements\Measurements_PageChoice.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Measurements_Table.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Osci\Measurements\Measurements_Table.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Measurements_Table.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Osci\Measurements\Measurements_Table.h</FilePath>
             </File>
             <File>
               <FileName>Measures.cpp</FileName>
