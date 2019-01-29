@@ -4,6 +4,13 @@
 #include "Settings/Settings.h"
 #include <cstring>
 
+#include "Display/Display_Primitives.h"
+
+
+using namespace Multimeter::Settings;
+
+using Display::Primitives::Text;
+
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /// В этом буфере готовая к выводу информация
@@ -57,6 +64,8 @@ void Multimeter::Display::Update()
 
     funcs[meas].func();
 
+    Text(out, 5).Draw(30, 30, (buffer[0] == '8') ? Color::GRAY_50 : Color::FILL);
+
     Color::SetCurrent(Color::FILL);
 
     Menu::Draw();
@@ -104,17 +113,17 @@ static void Multimeter::Display::PrepareConstantVoltage()
 
     switch (MULTI_RANGE_DC)
     {
-    case Multimeter::RangeDC::_2V:
+    case RangeDC::_2V:
         out[2] = '.';
         out[3] = buffer[3];
         out[4] = buffer[4];
         break;
-    case Multimeter::RangeDC::_20V:
+    case RangeDC::_20V:
         out[2] = buffer[3];
         out[3] = '.';
         out[4] = buffer[4];
         break;
-    case Multimeter::RangeDC::_500V:
+    case RangeDC::_500V:
         out[2] = buffer[3];
         out[3] = buffer[4];
         out[4] = '.';
@@ -134,17 +143,17 @@ static void Multimeter::Display::PrepareVariableVoltage()
 
     switch (MULTI_RANGE_AC)
     {
-    case Multimeter::RangeAC::_2V:
+    case RangeAC::_2V:
         out[1] = '.';
         out[2] = buffer[3];
         out[3] = buffer[4];
         break;
-    case Multimeter::RangeAC::_20V:
+    case RangeAC::_20V:
         out[1] = buffer[3];
         out[2] = '.';
         out[3] = buffer[4];
         break;
-    case Multimeter::RangeAC::_400V:
+    case RangeAC::_400V:
         out[1] = buffer[3];
         out[2] = buffer[4];
         out[3] = '.';
@@ -194,22 +203,22 @@ void Multimeter::Display::PrepareResistance()
 
     switch (MULTI_RANGE_RESISTANCE)
     {
-    case Multimeter::RangeResistance::_2k:
+    case RangeResistance::_2k:
         out[1] = '.';
         out[2] = buffer[3];
         out[3] = buffer[4];
         break;
-    case Multimeter::RangeResistance::_20k:
+    case RangeResistance::_20k:
         out[1] = buffer[3];
         out[2] = '.';
         out[3] = buffer[4];
         break;
-    case Multimeter::RangeResistance::_200k:
+    case RangeResistance::_200k:
         out[1] = buffer[3];
         out[2] = buffer[4];
         out[3] = '.';
         break;
-    case Multimeter::RangeResistance::_10M:
+    case RangeResistance::_10M:
         out[1] = buffer[3];
         out[2] = '.';
         out[3] = buffer[4];

@@ -18,6 +18,7 @@
 
 #include "Osci/Measurements/Cursors_Settings.h"
 #include "Tester/Tester_Settings.h"
+#include "Multimeter/Multimeter_Settings.h"
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -254,11 +255,11 @@ public:
     int16               nrst_correctionTime;                                        ///< Коэффициент коррекции времени.
 
     // Настройки мультиметра
-    Multimeter::AVP::E              multi_avp;
-    Multimeter::Measure::E          multi_meas;
-    Multimeter::RangeDC::E          multi_rangeDC;
-    Multimeter::RangeAC::E          multi_rangeAC;
-    Multimeter::RangeResistance::E  multi_rangeResist;
+    Multimeter::Settings::AVP::E              multi_avp;
+    Multimeter::Measure::E                    multi_meas;
+    Multimeter::Settings::RangeDC::E          multi_rangeDC;
+    Multimeter::Settings::RangeAC::E          multi_rangeAC;
+    Multimeter::Settings::RangeResistance::E  multi_rangeResist;
 
     // Настройки регистратора
     Recorder::Settings::ViewAlways::E  rec_viewAlways;       ///< Показывать ли всегда данные регистратора
