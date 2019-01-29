@@ -1,6 +1,8 @@
 @echo off
 
+@echo .
 @echo %TIME%   Building Device ...
+@echo .
 
 MSBuild.exe ..\..\generated\Device\Device56.vcxproj -clp:ErrorsOnly
 set BUILD_STATUS=%ERRORLEVEL%
