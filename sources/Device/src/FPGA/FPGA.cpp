@@ -1,8 +1,6 @@
 #include "defines.h"
 #include "device.h"
 #include "log.h"
-#include "Data/DataBuffer.h"
-#include "Data/DataStorage.h"
 #include "FPGA/FPGA.h"
 #include "FPGA/FPGA_HAL.h"
 #include "FPGA/FPGA_Settings.h"
@@ -225,8 +223,6 @@ void FPGA::ReadDataChanenl(Chan::E ch, uint8 data[FPGA::MAX_NUM_POINTS])
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void FPGA::Reset()
 {
-    DataStorage::Init(Device::State::CurrentMode());
-
     TShift::Load();
 
     HAL::LoadRegUPR();
@@ -236,6 +232,19 @@ void FPGA::Reset()
 uint FPGA::NumPoints()
 {
     return (uint)(1 << (FPGA_ENUM_POINTS + 9));
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+uint FPGA::BytesInChannel()
+{
+    uint result = NumPoints();
+
+    if (SET_PEAKDET_EN)
+    {
+        result *= 2;
+    }
+
+    return result;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

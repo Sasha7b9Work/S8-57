@@ -1,16 +1,8 @@
 #pragma once
 #include "Settings/SettingsMemory.h"
+#include "FPGA/FPGA_Types.h"
+#include "Osci/Osci_Storage.h"
 
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-/** @addtogroup FPGA
- *  @{
- *  @defgroup Data
- *  @{
- *  @defgroup Interface Интерфейс
- *  @{
- */
 
 #ifndef _INCLUDE_DATA_
 #define EXTERN extern
@@ -18,12 +10,15 @@
 #define EXTERN
 #endif
 
-/** @defgroup DataBuffer
- *  @{
- */
 
-extern uint8 *dataIN[Chan::Size];  ///< Считанные данные первого канала
-extern uint8 *dataOUT[Chan::Size]; ///< Считанные данные второго канала
+
+extern Osci::Data*         pData;
+EXTERN const DataSettings *pDS;         ///< Указатель на настройки текущего рисуемого сигнала. Обращаться к нему следует через макрос DS.
+extern uint8 *dataOUT[2];               ///< Считанные данные второго канала
+extern const uint8 *dataIN[2];
+
+#define DATA        pData
+#define DS          pDS                 ///< Указатель на настройки текущего рисуемого сигнала.
 
 #define IN(ch)  (dataIN[ch])
 #define IN_A    IN(Chan::A)
@@ -32,48 +27,13 @@ extern uint8 *dataOUT[Chan::Size]; ///< Считанные данные второго канала
 #define OUT_A   OUT(Chan::A)
 #define OUT_B   OUT(Chan::B)
 
-/// \brief Это специальный указатель. Используется для выделения памяти переменным, которые не нужны всё время выполения программы, 
-/// но нужны болеее чем в одной функции. Перед использованием с помощью вызова malloc() выделяется необходимое количество памяти, 
-/// которая затем освобождается вызвом free()
-extern void *extraMEM;
 
-#define MALLOC_EXTRAMEM(NameStruct, name)   extraMEM = malloc(sizeof(NameStruct));    \
-                                            NameStruct *name = (NameStruct*)extraMEM
-#define ACCESS_EXTRAMEM(NameStruct, name)   NameStruct *name = (NameStruct*)extraMEM // -V1003
-#define FREE_EXTRAMEM()                     free(extraMEM);
-
-/** @}
-*/
-
-#define DS          pDS             ///< Указатель на настройки текущего рисуемого сигнала.
-
-EXTERN DataSettings *pDS;           ///< Указатель на настройки текущего рисуемого сигнала. Обращаться к нему следует через макрос DS.
-
-#undef EXTERN
-/** @defgroup GlobalData Global Data
- *  @brief Настройки, действующие для отображаемого в данный момент сигнала
- *  @{
- */
-
-#define TSHIFT_DS       (TSHIFT(DS))
-#define TBASE_DS        (TBASE(DS))
-#define INVERSE_DS(ch)  (INVERSE(DS, ch))
-#define COUPLE_DS(ch)   (COUPLE(DS, ch))
-#define DIVIDER_DS(ch)  (DIVIDER(DS, ch))
 #define RANGE_DS(ch)    (RANGE(DS, ch))
-#define RANGE_DS_A      (RANGE(DS, Chan::A))
-#define RANGE_DS_B      (RANGE(DS, Chan::B))
-#define ENABLED_DS(ch)  (ENABLED(DS, ch))
-#define ENABLED_DS_A    (ENABLED(DS, Chan(Chan::A)))
-#define ENABLED_DS_B    (ENABLED(DS, Chan(Chan::B)))
 #define RSHIFT_DS(ch)   (RSHIFT(DS, ch))
 #define RSHIFT_DS_A     (RSHIFT(DS, Chan::A))
 #define RSHIFT_DS_B     (RSHIFT(DS, Chan::B))
-#define PEAKDET_DS      (PEAKDET(DS))
-#define TRIGLEV_DS(ch)  (TRIGLEV(DS))
-#define ENUM_POINTS_DS  (ENUM_POINTS(DS))
-#define ENUM_BYTES_DS   (ENUM_BYTES(DS))
-#define NUM_BYTES_DS    (NUM_BYTES(DS))
+#define TBASE_DS        (TBASE(DS))
+
 
 #define TIME_TIME_DS    (TIME_TIME(DS))
 #define TIME_DAY_DS     (TIME_DAY(DS))
@@ -83,14 +43,11 @@ EXTERN DataSettings *pDS;           ///< Указатель на настройки текущего рисуемо
 #define TIME_MONTH_DS   (TIME_MONTH(DS))
 #define TIME_YEAR_DS    (TIME_YEAR(DS))
 
-/** @}
- */
+#define NUM_BYTES_DS    (BYTES_IN_CHANNEL(DS))
 
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 /// В этой структуре будут храниться точки, подготовленные для вывода на экран
-typedef struct
+struct StructDataDrawing
 {
     uint8       data[Chan::Size][281 * 2];    ///< Данные обоих каналов. Точек в два раза больше, чем на экране, для пикового детектора
     bool        needDraw[Chan::Size];         ///< Если true, то канал 1 надо рисовать
@@ -98,24 +55,12 @@ typedef struct
     int         posBreak;                      ///< Позиция в координатах сетки, на которой нужно рисовать линию разрыва поточечного вывода
     ModeWork::E forMode;                       ///< Для какого режима считываются данные
     uint8       notUsed1[3];
-} StructDataDrawing;
+};
+
 
 class Reader
 {
 public:
-    /// Читает данные из хранилища. Возвращает false, если данных там нет
-    static bool ReadData();
-    /// \brief Читает данные из ОЗУ, fromEnd c конца (fromEnd == 0 - последний считанный сигнал) и заполняет данными inA(B), outA(B), DS.
-    /// forMemoryWindow нужен для того, чтобы в ждущем режиме выводить разные сигналы для экрана и окна памяти
-    static void ReadFromRAM(int fromEnd, StructDataDrawing *dataStruct, bool forMemoryWindow);
-    /// Читает данные из EEPROM. Номер сигнала - глобвльнй NUM_ROM_SIGNAL и заполняет данными inA(B), outA(B), DS.
-    static bool ReadFromROM(StructDataDrawing *dataStruct);
-    /// Чтение данных, ограничивающих сигнал снизу
-    static void ReadMin(StructDataDrawing *dataStruct);
-    /// Чтение данных, ограничивающих сигнал сверху
-    static void ReadMax(StructDataDrawing *dataStruct);
+    /// Читает данные из хранилища. Возвращает 0, если данных там нет
+    static Osci::Data *ReadDataFromStorage();
 };
-
-
-/** @}  @}  @}
- */

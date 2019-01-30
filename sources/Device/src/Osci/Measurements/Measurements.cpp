@@ -1391,7 +1391,7 @@ void Osci::Measurements::SetData(bool /*needSmoothing*/)
 
     if (TBASE_DS >= TBase::MIN_P2P)           // ≈сли находимс€ в поточечном режме, то нужно брать последние считанные точки дл€ проведени€ измерений
     {
-        for (int i = NUM_BYTES_DS - 1; i >= 0; --i)
+        for (int i = (int)(NUM_BYTES_DS - 1); i >= 0; --i)
         {
             if (IN_A[i] != NONE)      // ≈сли это значение считано
             {

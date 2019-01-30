@@ -456,16 +456,6 @@
           <GroupName>Data</GroupName>
           <Files>
             <File>
-              <FileName>DataBuffer.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Data\DataBuffer.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>DataBuffer.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Data\DataBuffer.h</FilePath>
-            </File>
-            <File>
               <FileName>DataSettings.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Data\DataSettings.cpp</FilePath>
@@ -474,16 +464,6 @@
               <FileName>DataSettings.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Data\DataSettings.h</FilePath>
-            </File>
-            <File>
-              <FileName>DataStorage.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Data\DataStorage.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>DataStorage.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Data\DataStorage.h</FilePath>
             </File>
             <File>
               <FileName>Heap.cpp</FileName>
@@ -1459,6 +1439,16 @@
               <FileName>Osci_Settings.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Osci\Osci_Settings.h</FilePath>
+            </File>
+            <File>
+              <FileName>Osci_Storage.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Osci\Osci_Storage.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Osci_Storage.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Osci\Osci_Storage.h</FilePath>
             </File>
           </Files>
         </Group>

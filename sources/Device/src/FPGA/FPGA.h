@@ -23,6 +23,8 @@ namespace FPGA
     void GiveStart();
 
     uint NumPoints();
+    /// Возвращает количество байт в канале на текущих настройках
+    uint BytesInChannel();
 
     bool IsRunning();
 

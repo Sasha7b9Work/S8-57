@@ -22,7 +22,7 @@ namespace Memory
 
     void DeleteData(int num);
 
-    void SaveData(int num, DataSettings *ds, uint8 *dataA, uint8 *dataB);
+    void SaveData(int num, const DataSettings *ds, uint8 *dataA, uint8 *dataB);
     /// Если даннные есть, соответствующий элемент массива равен true.
     void GetDataInfo(bool existData[MAX_NUM_SAVED_WAVES]);
 };

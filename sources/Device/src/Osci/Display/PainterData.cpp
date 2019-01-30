@@ -1,6 +1,5 @@
 #include "defines.h"
 #include "PainterData.h"
-#include "Data/DataStorage.h"
 #include "Data/Reader.h"
 #include "Display/Colors.h"
 #include "Display/Display_Primitives.h"
@@ -39,7 +38,7 @@ static void DrawTShift(int leftX, int rightX, int numPoints);
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void Osci::Display::PainterData::DrawData()
 {
-    if(Reader::ReadData())
+    if(Reader::ReadDataFromStorage())
     {
         Measurements::SetData(false);
 

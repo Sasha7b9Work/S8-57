@@ -4,6 +4,8 @@
 
 #ifdef WIN32
 #define __attribute(x)
+#define __attribute__(x)
+
 #pragma warning(disable:4201)   // nonstandard extension used: nameless struct/union
 #pragma warning(disable:4211)   // nonstandard extension used: redefined extern to static
 #pragma warning(disable:4514)   // unreferenced inline function has been removed
@@ -45,7 +47,7 @@ typedef unsigned int   uint32_t;
 #define __IO
 #endif
 #else
-#define nullptr NULL
+#define nullptr 0
 #endif
 
 

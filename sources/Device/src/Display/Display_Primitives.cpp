@@ -279,7 +279,7 @@ int Display::Primitives::Text::DrawSmall(int x, int y, Color color)
     buffer.data[1] = (uint8)x;
     buffer.data[2] = (uint8)(x >> 8);
     buffer.data[3] = (uint8)y;
-    buffer.data[4] = (uint8)std::strlen(text);
+    buffer.data[4] = (uint8)std::strlen(text); //-V1029
     
     std::memcpy(&buffer.data[5], (void *)text, std::strlen(text));
 

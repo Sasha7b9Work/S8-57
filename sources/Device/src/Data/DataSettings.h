@@ -1,16 +1,7 @@
 #pragma once
-#include "FPGA/FPGA_Settings.h"
-#include "FPGA/FPGA_Types.h"
+#include "Osci/Osci_Settings.h"
 #include "Hardware/Clock.h"
 
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-/** @addtogroup Settings
- *  @{
- *  @defgroup DataSettings Data Settings
- *  @{
- */
 
 struct DataSettings
 {
@@ -21,46 +12,36 @@ struct DataSettings
     uint16                   trigLev[2];
     int16                    tShift;                 ///< Смещение по времени
     Osci::Settings::Range::E range[2];               ///< Масштаб по напряжению обоих каналов.
-    uint                     tBase           : 5;    ///< Масштаб по времени
-    uint                     enableA         : 1;    ///< Включён ли канал A
-    uint                     enableB         : 1;    ///< Включен ли канал B
-    uint                     coupleA         : 2;    ///< Режим канала по входу
-    uint                     coupleB         : 2;
-    uint                     peackDet        : 2;    ///< Включен ли пиковый детектор
-    uint                     inverseA        : 1;
-    uint                     inverseB        : 1;
-    uint                     multiplierA     : 1;
-    uint                     multiplierB     : 1;
-    uint                     enumPoints      : 3;
-    uint                     notUsed         : 12;
+    uint                     tBase : 5;    ///< Масштаб по времени
+    uint                     enableA : 1;    ///< Включён ли канал A
+    uint                     enableB : 1;    ///< Включен ли канал B
+    uint                     coupleA : 2;    ///< Режим канала по входу
+    uint                     coupleB : 2;
+    uint                     peackDet : 2;    ///< Включен ли пиковый детектор
+    uint                     inverseA : 1;
+    uint                     inverseB : 1;
+    uint                     multiplierA : 1;
+    uint                     multiplierB : 1;
+    uint                     enumPoints : 3;
+    uint                     notUsed : 12;
     PackedTime               time;
-    DataSettings() : id(++lastID) {};		// -V730
-    /// Возвращает размер занимаемый данными одного канала
-    int SizeChannel() const;
-    /// Возвращает размер данных обоих каналов
-    int SizeData() const;
     /// Заполняет структуру в соответствии с текущими настройками
     void Fill(uint8 *datA = 0, uint8 *datB = 0);
-    /// Возвращает true, если не указывает на данные
-    bool IsEmpty () const { return (dataA == 0 && dataB == 0); }
-    uint8 *DataA() { return dataA; }
-    uint8 *DataB() { return dataB; }
-    uint8 *Data() { return dataA ? dataA : dataB; }
-    void Erase();
-    bool IsExist() const { return id != 0; }
-
-    static uint lastID;
+    /// Возвращает размер занимаемый данными одного канала
+    int SizeChannel() const;
 };
+
+
+#define Lval_ENABLED_A(ds)      ((ds)->enableA)
+#define Lval_ENABLED_B(ds)      ((ds)->enableB)
+#define Lval_ENABLED(ds, ch)    (ch.IsA() ? Lval_ENABLED_A(ds) : Lval_ENABLED_B(ds))
+#define ENABLED_A(ds)           ((bool)Lval_ENABLED_A(ds))
+#define ENABLED_B(ds)           ((bool)Lval_ENABLED_B(ds))
+#define ENABLED(ds, ch)         (ch.IsA() ? ENABLED_A(ds) : ENABLED_B(ds))
 
 #define RSHIFT(ds, ch)          ((ds)->rShift[ch])
 #define RSHIFT_A(ds)            (RSHIFT(ds, Chan::A))
 #define RSHIFT_B(ds)            (RSHIFT(ds, Chan::B))
-
-#define TRIGLEV(ds, ch)         ((ds)->trigLev[ch])
-#define TRIGLEV_A(ds)           (TRIGLEV(ds, Chan::A))
-#define TRIGLEV_B(ds)           (TRIGLEV(ds, Chan::B))
-
-#define TSHIFT(ds)              ((ds)->tShift)
 
 #define Lval_RANGE(ds, ch)      ((ds)->range[ch])
 #define Lval_RANGE_A(ds)        (Lval_RANGE(ds, Chan::A))
@@ -72,32 +53,6 @@ struct DataSettings
 #define Lval_TBASE(ds)          ((ds)->tBase)
 #define TBASE(ds)               ((TBase::E)(Lval_TBASE(ds)))
 
-#define Lval_ENABLED_A(ds)      ((ds)->enableA)
-#define Lval_ENABLED_B(ds)      ((ds)->enableB)
-#define Lval_ENABLED(ds, ch)    (ch.IsA() ? Lval_ENABLED_A(ds) : Lval_ENABLED_B(ds))
-#define ENABLED_A(ds)           ((bool)Lval_ENABLED_A(ds))
-#define ENABLED_B(ds)           ((bool)Lval_ENABLED_B(ds))
-#define ENABLED(ds, ch)         (ch.IsA() ? ENABLED_A(ds) : ENABLED_B(ds))
-
-#define Lval_COUPLE_A(ds)       ((ds)->coupleA)
-#define Lval_COUPLE_B(ds)       ((ds)->coupleB)
-#define COUPLE_A(ds)            ((ModeCouple)Lval_COUPLE_A(ds))
-#define COUPLE_B(ds)            ((ModeCouple)Lval_COUPLE_B(ds))
-#define COUPLE(ds, ch)          (ch.IsA() ? COUPLE_A(ds) : COUPLE_B(ds))
-
-#define Lval_PEAKDET(ds)        ((ds)->peackDet)
-#define PEAKDET(ds)             ((PeakDetMode::E)Lval_PEAKDET(ds))
-
-#define INVERSE_A(ds)           ((ds)->inverseA)
-#define INVERSE_B(ds)           ((ds)->inverseB)
-#define INVERSE(ds, ch)         (ch.IsA() ? INVERSE_A(ds) : INVERSE_B(ds))
-
-#define Lval_DIVIDER_A(ds)      ((ds)->multiplierA)
-#define Lval_DIVIDER_B(ds)      ((ds)->multiplierB)
-
-#define DIVIDER_A(ds)           ((Divider)Lval_DIVIDER_A(ds))
-#define DIVIDER_B(ds)           ((Divider)Lval_DIVIDER_B(ds))
-#define DIVIDER(ds, ch)         (ch.IsA() ? DIVIDER_A(ds) : DIVIDER_B(ds))
 
 #define TIME_TIME(ds)           ((ds)->time)
 #define TIME_DAY(ds)            ((ds)->time.day)
@@ -108,10 +63,5 @@ struct DataSettings
 #define TIME_YEAR(ds)           ((ds)->time.year)
 #define TIME_MS_DS(ds)          ((ds)->time.timeMS)
 
-#define ENUM_POINTS(ds)         ((ds)->enumPoints)
-#define ENUM_BYTES(ds)          (ENUM_POINTS(ds) + ((PEAKDET(ds) ? 1 : 0)))
-#define NUM_BYTES(ds)           ((ds)->SizeChannel())
+#define BYTES_IN_CHANNEL(ds)    ((uint)(ds)->SizeChannel())
 
-
-/** @}  @}
- */

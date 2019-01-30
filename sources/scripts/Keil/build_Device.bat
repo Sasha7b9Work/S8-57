@@ -6,6 +6,7 @@ set BUILD_STATUS=%ERRORLEVEL%
 if %BUILD_STATUS%==0 goto Exit
 
 echo ERROR!!! Device    failed!!!
-"c:\Program Files\Notepad++\notepad++.exe" -multiInst -alwaysOnTop ..\..\Device\DeviceOSC.out -n1000 -x0 -y0
+rem "c:\Program Files\Notepad++\notepad++.exe" -multiInst -alwaysOnTop ..\..\Device\DeviceOSC.out -n1000 -x0 -y0
+type ..\..\Device\DeviceOSC.out
 
 :Exit

@@ -609,7 +609,6 @@ DEF_BUTTON( bSaveFirmware,                                                      
 static void OnPress_SerialNumber_Exit()
 {
     OnPressSB_Exit();
-    FREE_EXTRAMEM();
 }
 
 DEF_SMALL_BUTTON_EXIT( bSerialNumber_Exit,                                                                                                                    //--- ОТЛАДКА - С/Н - Выход ---
@@ -619,9 +618,6 @@ DEF_SMALL_BUTTON_EXIT( bSerialNumber_Exit,                                      
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void OnPress_SerialNumber_Change()
 {
-    ACCESS_EXTRAMEM(StructForSN, s);
-    ++s->curDigt;
-    s->curDigt %= 2;
     Color::ResetFlash();
 }
 
@@ -645,16 +641,6 @@ DEF_SMALL_BUTTON( bSerialNumber_Change,                                         
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void OnPress_SerialNumber_Save()
 {
-    ACCESS_EXTRAMEM(StructForSN, s);
-
-    char stringSN[20];
-
-    std::snprintf(stringSN, 19, "%02d %04d", s->number, s->year);
-
-    if (!OTPmem::SaveSerialNumber(stringSN))
-    {
-        Display::ShowWarning(Warning::FullyCompletedOTP);
-    }
 }
 
 static void Draw_SerialNumber_Save(int x, int y)
@@ -674,88 +660,15 @@ DEF_SMALL_BUTTON( bSerialNumber_Save,                                           
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 static void Draw_EnterSerialNumber()
 {
-    int x0 = Grid::Left() + 40;
-    int y0 = Grid::Top() + 20;
-    int width = Grid::Width() - 80;
-    int height = 160;
-
-    Rectangle(width, height).Draw(x0, y0, Color::FILL);
-    Region(width - 2, height - 2).Fill(x0 + 1, y0 + 1, Color::BACK);
-
-    int deltaX = 10;
-
-    ACCESS_EXTRAMEM(StructForSN, s);
-
-    bool selNumber = s->curDigt == 0;
-
-    char buffer[20];
-    std::snprintf(buffer, 19, "%02d", s->number);
-
-    Color colorText = Color::FILL;
-    Color colorBackground = Color::BACK;
-
-    if (selNumber)
-    {
-        colorText = Color::FLASH_01;
-        colorBackground = Color::FLASH_10;
-    }
-
-    int y = y0 + 50;
-
-    Color::SetCurrent(colorText);
-    //int x = Painter::DrawTextOnBackground(x0 + deltaX, y, buffer, colorBackground);
-    int x = Text(buffer).DrawOnBackground(x0 + deltaX, y, colorBackground);
-
-    colorText = Color::FLASH_01;
-    colorBackground = Color::FLASH_10;
-
-    if (selNumber)
-    {
-        colorText = Color::FILL;
-        colorBackground = Color::BACK;
-    }
-
-    std::snprintf(buffer, 19, "%04d", s->year);
-
-    Color::SetCurrent(colorText);
-    //Painter::DrawTextOnBackground(x + 5, y, buffer, colorBackground);
-    Text(buffer).DrawOnBackground(x + 5, y, colorBackground);
-
-    // Теперь выведем информацию об оставшемся месте в OTP-памяти для записи
-
-    int allShots = 0;
-    String serialNumber = OTPmem::GetSerialNumber(&allShots);
-
-    String("Текущий сохранённый номер %s", serialNumber.CString()[0] == 0 ? "-- ----" : serialNumber.CString()).Draw(x0 + deltaX, y0 + 130, Color::FILL);
-
-    String("Осталось места для %d попыток", allShots).Draw(x0 + deltaX, y0 + 100, Color::FILL);
 }
 
 static void OnPress_SerialNumber(bool)
 {
-    Display::SetAddDrawFunction(Draw_EnterSerialNumber);
-    MALLOC_EXTRAMEM(StructForSN, s);
-    s->number =  1; // -V522
-    s->year = 2017;
-    s->curDigt = 0;
+    Draw_EnterSerialNumber();
 }
 
-static bool HandlerKey_SerialNumber(KeyEvent event)
+static bool HandlerKey_SerialNumber(KeyEvent /*event*/)
 {
-    pFuncVpIII p = event.IsAboveZero() ? (Math::CircleIncrease<int>) : (Math::CircleDecrease<int>);
-
-    ACCESS_EXTRAMEM(StructForSN, s);
-
-    if (s->curDigt == 0)
-    {
-        p(&s->number, 1, 99);
-    }
-    else
-    {
-        p(&s->year, 2016, 2050);
-    }
-    Beeper::GovernorChangedValue();
-
     return true;
 }
 

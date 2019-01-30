@@ -1,5 +1,4 @@
 #include "defines.h"
-#include "Data/DataStorage.h"
 #include "Display/Display_Primitives.h"
 #include "Display/Grid.h"
 #include "Display/Painter.h"
@@ -10,6 +9,8 @@
 #include "Menu/Pages/Include/PageMemory.h"
 #include "Utils/Math.h"
 #include "Utils/Values.h"
+
+#include "Osci/Osci.h"
 
 
 using namespace Display::Primitives;
@@ -25,20 +26,17 @@ const PageBase *PageMemory::PageRAM::pointer = &pageRAM;
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 static void OnPress_Last_Next()
 {
-    Math::CircleIncrease<int16>((int16 *)&NUM_RAM_SIGNAL, 0, (int16)(DataStorage::NumElementsInStorage() - 1));
+    //Math::CircleIncrease<int16>((int16 *)&NUM_RAM_SIGNAL, 0, (int16)(DataStorage::NumElementsInStorage() - 1));
 }
 
 static void Draw_Last_Next(int x, int y)
 {
     Font::SetCurrent(Font::Type::_UGO2);
-
-    //Painter::Draw4SymbolsInRect(x + 2, y + 2, '\x64');
     Char('\x64').Draw4SymbolsInRect(x + 2, y + 2);
-
     Font::SetCurrent(Font::Type::_8);
 }
 
-DEF_SMALL_BUTTON(bLast_Next,                                                                               //--- ПАМЯТЬ - ПОСЛЕДНИЕ - Следующий ---
+DEF_SMALL_BUTTON( bLast_Next,                                                                                                                        //--- ПАМЯТЬ - ПОСЛЕДНИЕ - Следующий ---
     "Следующий", "Next",
     "Перейти к следующему сигналу",
     "Go to the next signal",
@@ -48,7 +46,7 @@ DEF_SMALL_BUTTON(bLast_Next,                                                    
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void OnPress_Last_Prev()
 {
-    Math::CircleDecrease<int16>((int16 *)&NUM_RAM_SIGNAL, 0, (int16)(DataStorage::NumElementsInStorage() - 1));
+    //Math::CircleDecrease<int16>((int16 *)&NUM_RAM_SIGNAL, 0, (int16)(DataStorage::NumElementsInStorage() - 1));
 }
 
 static void Draw_Last_Prev(int x, int y)
@@ -61,7 +59,7 @@ static void Draw_Last_Prev(int x, int y)
     Font::SetCurrent(Font::Type::_8);
 }
 
-DEF_SMALL_BUTTON(bLast_Prev,                                                                              //--- ПАМЯТЬ - ПОСЛЕДНИЕ - Предыдущий ---
+DEF_SMALL_BUTTON( bLast_Prev,                                                                                                                       //--- ПАМЯТЬ - ПОСЛЕДНИЕ - Предыдущий ---
     "Предыдущий", "Previous",
     "Перейти к предыдущему сигналу",
     "Go to the previous signal",
@@ -90,7 +88,7 @@ static void Draw_Last_SaveToROM(int x, int y)
     Font::SetCurrent(Font::Type::_8);
 }
 
-DEF_SMALL_BUTTON(bLast_SaveToROM,                                                                           //--- ПАМЯТЬ - ПОСЛЕДНИЕ - Внутр ЗУ ---
+DEF_SMALL_BUTTON( bLast_SaveToROM,                                                                                                                    //--- ПАМЯТЬ - ПОСЛЕДНИЕ - Внутр ЗУ ---
     "Внутр ЗУ", "Internal storage",
     "Нажмите эту кнопку, чтобы сохранить сигнал во внутреннем запоминающем устройстве",
     "Press this button to keep a signal in an internal memory",
@@ -117,7 +115,7 @@ static void Draw_Last_SaveToDrive(int x, int y)
     }
 }
 
-DEF_SMALL_BUTTON(bLast_SaveToDrive,                                                                        //--- ПАМЯТЬ - ПОСЛЕДНИЕ - Сохранить ---
+DEF_SMALL_BUTTON( bLast_SaveToDrive,                                                                                                                 //--- ПАМЯТЬ - ПОСЛЕДНИЕ - Сохранить ---
     "Сохранить", "Save",
     "Кнопка становится доступна при присоединённом внешнем ЗУ. Позволяет сохранить сигнал на внешем ЗУ",
     "Click this button to save the signal on the external FLASH",
@@ -150,11 +148,12 @@ static void OnDraw_RAM()
     Rectangle(width, height).Draw(Grid::Right() - width, Grid::Top(), Color::FILL);
     Integer(NUM_RAM_SIGNAL + 1).ToString(false, 3).Draw(Grid::Right() - width + 2, Grid::Top() + 1);
     String("/").Draw(Grid::Right() - width + 17, Grid::Top() + 1);
-    Integer((int)DataStorage::NumElementsInStorage()).ToString(false, 3).Draw(Grid::Right() - width + 23, Grid::Top() + 1);
+    //Integer((int)DataStorage::NumElementsInStorage()).ToString(false, 3).Draw(Grid::Right() - width + 23, Grid::Top() + 1);
 }
 
-static bool HandlerKey_RAM(KeyEvent event)
+static bool HandlerKey_RAM(KeyEvent /*event*/)
 {
+    /*
     Key::E key = event.key;
 
     if (DataStorage::NumElementsInStorage() > 1)
@@ -169,6 +168,7 @@ static bool HandlerKey_RAM(KeyEvent event)
     {
         OnPress_Last_Prev();
     }
+    */
 
     return true;
 }

@@ -136,7 +136,7 @@ void Memory::GetDataInfo(bool /*existData*/[MAX_NUM_SAVED_WAVES])
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Memory::SaveData(int /*num*/, DataSettings * /*ds*/, uint8 * /*dataA*/, uint8 * /*dataB*/)
+void Memory::SaveData(int /*num*/, const DataSettings * /*ds*/, uint8 * /*dataA*/, uint8 * /*dataB*/)
 {
 }
 

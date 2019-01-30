@@ -5,7 +5,6 @@
 #include "FPGA_HAL.h"
 #include "FPGA_Settings.h"
 #include "AD9286.h"
-#include "Data/DataStorage.h"
 #include "Display/Display.h"
 #include "Hardware/Timer.h"
 #include "Settings/Settings.h"
@@ -14,6 +13,7 @@
 #include <stdlib.h>
 
 #include "Hardware/HAL/HAL.h"
+#include "Osci/Osci_Storage.h"
 
 
 using namespace FPGA::HAL::GPIO;
@@ -27,12 +27,37 @@ extern bool givingStart;
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 namespace FPGA
 {
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     class ADC3_
     {
     public:
         static void Init()
         {
             ::HAL::ADC3_::Init();
+        }
+    };
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    class DataAccessor
+    {
+    public:
+        static uint8 *DataA(Osci::Data *data)
+        {
+            return data->dataA;
+        }
+        static uint8 *DataB(Osci::Data *data)
+        {
+            return data->dataB;
+        }
+    };
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    class StorageAccessor
+    {
+    public:
+        static Osci::Data *PrepareForNewData()
+        {
+            return Osci::Storage::PrepareForNewData();
         }
     };
 }
@@ -54,21 +79,13 @@ void FPGA::Init()
     AD9286::Init();
 
     ADC3_::Init();
-
-    DataStorage::Init(Device::State::CurrentMode());
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void FPGA::ReadData()
 {
-    Buffer dataA(FPGA::NumPoints());    // -V656
-    Buffer dataB(FPGA::NumPoints());    // -V656
+    Osci::Data *data = StorageAccessor::PrepareForNewData();
 
-    ReadDataChanenl(Chan::A, dataA.data);
-    ReadDataChanenl(Chan::B, dataB.data);
-
-    DataSettings ds;
-    ds.Fill(dataA.data, dataB.data);
-
-    DataStorage::Push(&ds);
+    ReadDataChanenl(Chan::A, DataAccessor::DataA(data));
+    ReadDataChanenl(Chan::B, DataAccessor::DataB(data));
 }

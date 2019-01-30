@@ -82,6 +82,7 @@ struct CalibrationMode
 #define SET_ENABLED_A           (SET_ENABLED(Chan::A))
 #define SET_ENABLED_B           (SET_ENABLED(Chan::B))
 #define SET_ENABLED_BOTH        (SET_ENABLED_A && SET_ENABLED_B)
+#define SET_DISABLED_BOTH       (!SET_ENABLED_A && !SET_ENABLED_B)
 
 #define SET_BALANCE_ADC(ch)     (set.chan_balanceShiftADC[ch])
 #define SET_BALANCE_ADC_A       (SET_BALANCE_ADC(Chan::A))

@@ -143,7 +143,7 @@ void VCP::SendFormatStringAsynch(char *format, ...)
     {
         static char buffer[200];
         std::va_list args;
-        va_start(args, format);
+        va_start(args, format); //-V2528
         std::vsprintf(buffer, format, args);
         va_end(args);
         std::strcat(buffer, "\r\n");
@@ -156,7 +156,7 @@ void VCP::SendFormatStringSynch(char *format, ...)
 {
     char buffer[200];
     std::va_list args;
-    va_start(args, format);
+    va_start(args, format); //-V2528
     std::vsprintf(buffer, format, args);
     va_end(args);
     std::strcat(buffer, "\r\n");

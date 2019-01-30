@@ -47,7 +47,7 @@ String::String(const char *format, ...)
     char buf[SIZE + 1];
 
     std::va_list args;
-    va_start(args, format);
+    va_start(args, format); //-V2528
     int numSymbols = std::vsprintf(buf, format, args);
     va_end(args);
 
