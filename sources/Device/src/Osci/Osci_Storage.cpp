@@ -57,12 +57,12 @@ class HeapWorker
 public:
     static uint8 *GetMemoryForData(uint /*size*/)
     {
-        return (uint8 *)Heap::Data();
+        return (uint8 *)Heap::Begin();
     }
 
     static Data *GetData(int /* fromEnd */)
     {
-        return (Data *)Heap::Data();
+        return (Data *)Heap::Begin();
     }
 
 private:

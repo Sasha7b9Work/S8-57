@@ -26,7 +26,7 @@ struct DataSettings
     uint                     notUsed : 12;
     PackedTime               time;
     /// «аполн€ет структуру в соответствии с текущими настройками
-    void Fill(uint8 *datA = 0, uint8 *datB = 0);
+    void Fill(uint8 *dataA = 0, uint8 *dataB = 0);
     /// ¬озвращает размер занимаемый данными одного канала
     int SizeChannel() const;
 };
@@ -65,3 +65,18 @@ struct DataSettings
 
 #define BYTES_IN_CHANNEL(ds)    ((uint)(ds)->SizeChannel())
 
+#define INVERSE_A(ds)           ((ds)->inverseA)
+#define INVERSE_B(ds)           ((ds)->inverseB)
+#define INVERSE(ds, ch)         (ch.IsA() ? INVERSE_A(ds) : INVERSE_B(ds))
+
+#define TSHIFT(ds)              ((ds)->tShift)
+
+#define Lval_COUPLE_A(ds)       ((ds)->coupleA)
+#define Lval_COUPLE_B(ds)       ((ds)->coupleB)
+#define COUPLE_A(ds)            ((ModeCouple)Lval_COUPLE_A(ds))
+#define COUPLE_B(ds)            ((ModeCouple)Lval_COUPLE_B(ds))
+#define COUPLE(ds, ch)          (ch.IsA() ? COUPLE_A(ds) : COUPLE_B(ds))
+
+#define TRIGLEV(ds, ch)         ((ds)->trigLev[ch])
+#define TRIGLEV_A(ds)           (TRIGLEV(ds, Chan::A))
+#define TRIGLEV_B(ds)           (TRIGLEV(ds, Chan::B))

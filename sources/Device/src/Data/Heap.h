@@ -5,5 +5,9 @@
 class Heap
 {
 public:
-    static void *Data();
+    static void *Begin();
+
+    static void *End();
+
+    static uint Size();
 };

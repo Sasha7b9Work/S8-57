@@ -1,6 +1,7 @@
 #include "defines.h"
 #include "Data/Reader.h"
 #include "Osci/Osci_Storage.h"
+#include "Utils/CommonFunctions.h"
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -36,6 +37,10 @@ Osci::Data *Reader::ReadDataFromStorage()
         dataIN[0] = pData->DataA();
         dataIN[1] = pData->DataB();
     }
+
+    //LOG_WRITE("%x %x %x %x", pData, pDS, dataIN[0], dataIN[1]);
+    //
+    //CF::LogBufferU8_DEC(dataIN[0], 10);
 
     return pData;
 }

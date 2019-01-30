@@ -13,6 +13,7 @@
 #include "MemoryWindow.h"
 
 #include "Osci/Measurements/Measurements.h"
+#include "Utils/CommonFunctions.h"
 
 
 using namespace Display::Primitives;
@@ -40,7 +41,7 @@ void Osci::Display::PainterData::DrawData()
 {
     if(Reader::ReadDataFromStorage())
     {
-        Measurements::SetData(false);
+        Measurements::SetData();
 
         static const pFuncVV func[ModeWork::Number] =
         {

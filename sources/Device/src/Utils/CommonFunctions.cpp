@@ -8,7 +8,7 @@
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void CF::LogBufferU8(const uint8 *buffer, int num)
+void CF::LogBufferU8_HEX(const uint8 *buffer, int num)
 {
     char *message = (char *)malloc((uint)(num * 3));
 
@@ -25,6 +25,34 @@ void CF::LogBufferU8(const uint8 *buffer, int num)
     for (int i = 0; i < num; ++i)
     {
         std::sprintf(value, "%02x ", buffer[i]);
+        std::strcat(message, value);
+    }
+
+    message[num * 3 - 1] = 0;
+
+    LOG_WRITE(message);
+
+    free(message);
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void CF::LogBufferU8_DEC(const uint8 *buffer, int num)
+{
+    char *message = (char *)malloc((uint)(num * 3));
+
+    if (message == nullptr)
+    {
+        LOG_WRITE("Нет памяти");
+        return;
+    }
+
+    message[0] = 0;
+
+    char value[10];
+
+    for (int i = 0; i < num; ++i)
+    {
+        std::sprintf(value, "%03d ", buffer[i]);
         std::strcat(message, value);
     }
 

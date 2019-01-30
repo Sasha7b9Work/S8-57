@@ -141,6 +141,10 @@ static bool picIsCalculating[2] = {false, false};
 /// Входной буфер данных канала ch
 #define CHOICE_BUFFER (OUT(ch))
 
+/// Данные из IN_A, IN_B пересчитать к текущим настройкам и записать в OUT_A, OUT_B
+static void CountedToCurrentSettings();
+
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void Osci::Measurements::CalculateMeasures()
 {
@@ -1380,20 +1384,22 @@ static float Divide(float val1, float val2)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Osci::Measurements::SetData(bool /*needSmoothing*/)
+void Osci::Measurements::SetData()
 {
     isSet = true;
+ 
+    CountedToCurrentSettings();
 
     BitSet64 points = Display::BytesOnDisplay();
     firstByte = points.sword0;
     lastByte = points.sword1;
     nBytes = lastByte - firstByte;
 
-    if (TBASE_DS >= TBase::MIN_P2P)           // Если находимся в поточечном режме, то нужно брать последние считанные точки для проведения измерений
+    if (TBASE_DS >= TBase::MIN_P2P)             // Если находимся в поточечном режме, то нужно брать последние считанные точки для проведения измерений
     {
-        for (int i = (int)(NUM_BYTES_DS - 1); i >= 0; --i)
+        for (int i = (int)(BYTES_IN_CHANNEL_DS - 1); i >= 0; --i)
         {
-            if (IN_A[i] != NONE)      // Если это значение считано
+            if (IN_A[i] != NONE)                // Если это значение считано
             {
                 lastByte = i;
                 firstByte = lastByte - nBytes;
@@ -1417,4 +1423,11 @@ Measure Osci::Measurements::GetActiveMeasure()
     int col = posActive - row * Table::NumCols();
 
     return Measure(row, col);
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void CountedToCurrentSettings()
+{
+    std::memcpy(OUT_A, IN_A, BYTES_IN_CHANNEL_DS);
+    std::memcpy(OUT_B, IN_B, BYTES_IN_CHANNEL_DS);
 }

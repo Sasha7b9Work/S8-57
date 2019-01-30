@@ -43,7 +43,7 @@ extern const uint8 *dataIN[2];
 #define TIME_MONTH_DS   (TIME_MONTH(DS))
 #define TIME_YEAR_DS    (TIME_YEAR(DS))
 
-#define NUM_BYTES_DS    (BYTES_IN_CHANNEL(DS))
+#define BYTES_IN_CHANNEL_DS    (BYTES_IN_CHANNEL(DS))
 
 
 /// В этой структуре будут храниться точки, подготовленные для вывода на экран
@@ -58,6 +58,7 @@ struct StructDataDrawing
 };
 
 
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 class Reader
 {
 public:
