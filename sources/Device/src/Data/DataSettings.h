@@ -80,3 +80,11 @@ struct DataSettings
 #define TRIGLEV(ds, ch)         ((ds)->trigLev[ch])
 #define TRIGLEV_A(ds)           (TRIGLEV(ds, Chan::A))
 #define TRIGLEV_B(ds)           (TRIGLEV(ds, Chan::B))
+
+#define Lval_PEAKDET(ds)        ((ds)->peackDet)
+#define PEAKDET(ds)             ((PeakDetMode::E)Lval_PEAKDET(ds))
+
+#define Lval_DIVIDER_A(ds)      ((ds)->multiplierA)
+#define Lval_DIVIDER_B(ds)      ((ds)->multiplierB)
+
+#define ENUM_POINTS(ds)         ((ds)->enumPoints)

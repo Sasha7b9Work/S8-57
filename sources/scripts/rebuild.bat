@@ -1,3 +1,7 @@
+@echo off
+
+@echo .
+
 cd keil
 call rebuild.bat
 cd ..
