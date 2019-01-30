@@ -1,27 +1,17 @@
 @echo off
 
-MSBuild.exe ..\..\generated\Device\Device56.vcxproj -clp:ErrorsOnly
+@echo %TIME%   Building ...
+
+MSBuild.exe ..\..\generated\Device\Device56.vcxproj -clp:ErrorsOnly;WarningsOnly -nologo
 set BUILD_STATUS=%ERRORLEVEL%
 if %BUILD_STATUS%==0 goto Success
 
 :Failed
-echo .
-echo .
-echo .
-echo       !!!!!!!!!!!!!!! Error !!!!!!!!!!!!!!! Build Failed !!!!!!!!!!!!!!!!!!!!
-echo .
-echo .
-echo .
+@echo %TIME%   !!!!!!!!!!!!!!! Error !!!!!!!!!!!!!!! Build Failed !!!!!!!!!!!!!
 goto Exit
 
 :Success
-echo .
-echo .
-echo .
-echo                          Build success
-echo .
-echo .
-echo .
+@echo %TIME%   Build success
 
 :Exit
 

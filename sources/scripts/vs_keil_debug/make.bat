@@ -1,8 +1,6 @@
 @echo off
 
-@echo .
-@echo %TIME%   Making ...
-@echo .
+@echo %TIME%   Making Visual Studio Keil Debug ...
 
 cd ../..
 rmdir generated /s /q

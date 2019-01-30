@@ -17,3 +17,4 @@
 #define GPIO_AF12_FMC           ((uint8_t)0x0C)  /* FMC Alternate Function mapping                      */
 #define GPIO_AF12_OTG_HS_FS     ((uint8_t)0x0C)  /* OTG HS configured in FS, Alternate Function mapping */
 #define GPIO_AF12_SDIO          ((uint8_t)0x0C)  /* SDIO Alternate Function mapping                     */
+#define GPIO_AF0_MCO           ((uint8_t)0x00)  /* MCO (MCO1 and MCO2) Alternate Function mapping            */

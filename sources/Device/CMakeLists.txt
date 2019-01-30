@@ -1,5 +1,9 @@
 cmake_minimum_required(VERSION 3.0)
 
+#if (COMMAND cmake_policy)
+#    cmake_policy(SET CMP0026 OLD)
+#endif()
+
 project (Device56)
 
 include_directories("..\\common\\libs\\STM32Cube_F4\\Drivers\\STM32F4xx_HAL_Driver\\Inc\\"
