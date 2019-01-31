@@ -103,14 +103,7 @@ struct FileNamingMode
 #define MEM_DATA_SCALE          (set.mem_DataScale)
 #define MEM_DATA_SCALE_RECALC   (MEM_DATA_SCALE == MemDataScale_Recalculated)
 
-#define NUM_BYTES_SET           sMemory_NumBytesInChannel_()
-#define SET_POINTS_IN_CHANNEL   sMemory_NumPointsInChannel_()
-
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-int sMemory_NumPointsInChannel_();
-int sMemory_NumBytesInChannel_();
-
 Osci::Settings::Memory::ENumPointsFPGA::E NumPoints_2_ENumPoints(int numPoints);
 int ENumPoints_2_NumPoints(Osci::Settings::Memory::ENumPointsFPGA::E numPoints);
 

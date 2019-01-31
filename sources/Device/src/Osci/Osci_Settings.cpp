@@ -254,3 +254,15 @@ uint16 &Osci::Settings::RShift::Value(Chan::E ch)
 {
     return set.chan_shift[ch];
 }
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+uint Osci::Settings::Memory::ENumPointsFPGA::BytesInChannel(PeakDetMode::E mode)
+{
+    uint result = ENUM_TO_REL_POINTS(value);
+    if (mode == PeakDetMode::Enabled)
+    {
+        result *= 2;
+    }
+
+    return result;
+}

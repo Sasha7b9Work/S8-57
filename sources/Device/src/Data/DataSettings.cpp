@@ -2,6 +2,10 @@
 #include "Data/DataSettings.h"
 #include "Settings/Settings.h"
 
+
+using namespace Osci::Settings;
+
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void DataSettings::Fill(uint8 *_dataA, uint8 * _dataB)
 {
@@ -30,8 +34,9 @@ void DataSettings::Fill(uint8 *_dataA, uint8 * _dataB)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-int DataSettings::SizeChannel() const
+uint DataSettings::SizeChannel() const
 {
-    return 0;
+    Memory::ENumPointsFPGA points((Memory::ENumPointsFPGA::E)ENUM_POINTS(this));
+    return points.BytesInChannel(PEAKDET(this));
 }
 

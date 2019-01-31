@@ -74,11 +74,11 @@ void PageMemory::OnChanged_Points(bool active)
     }
     else if (TPOS_IS_CENTER)
     {
-        SHIFT_IN_MEMORY = (int16)(NUM_BYTES_SET / 2 - width / 2);
+        SHIFT_IN_MEMORY = (int16)(FPGA_NUM_POINTS / 2 - width / 2);
     }
     else // TPOS_IS_RIGHT
     {
-        SHIFT_IN_MEMORY = (int16)(NUM_BYTES_SET - width - 2);
+        SHIFT_IN_MEMORY = (int16)(FPGA_NUM_POINTS - width - 2);
     }
 
     FPGA::Reset();
@@ -88,7 +88,7 @@ void PageMemory::OnChanged_Points(bool active)
 
 static pString namesLengthMemory[] = {"512", "1k", "2k", "4k", "8k", "16k", "32k"};
 
-DEF_CHOICE_5( cPoints,                                                                                                                                              //--- ПАМЯТЬ - Точки ---
+DEF_CHOICE_5( cPoints,                                                                                                                                               //--- ПАМЯТЬ - Точки ---
     "Длина памяти", "Mem length",
     "Выбор количества отсчётов для сохраняемых сигналов. "
     "При увеличении количества отсчётов уменьшается количество сохранённых в памяти сигналов.",

@@ -28,7 +28,7 @@ struct DataSettings
     /// «аполн€ет структуру в соответствии с текущими настройками
     void Fill(uint8 *dataA = 0, uint8 *dataB = 0);
     /// ¬озвращает размер занимаемый данными одного канала
-    int SizeChannel() const;
+    uint SizeChannel() const;
 };
 
 
