@@ -112,7 +112,7 @@ void Table::Cell::DrawStringMeasure(int x, int y)
     if (VIEW_MEASURES_BOTH)
     {
         measureA.Draw(x + 2, y + 11, colA);
-        measureB.Draw(x + 2, y + (SET_ENABLED_A ? 20 : 11), colB);
+        measureB.Draw(x + 2, y + (SET_ENABLED_A ? 20 : 11), colB); //-V547
     }
     else if (VIEW_MEASURES_A)
     {

@@ -9,6 +9,7 @@
 #include "Hardware/Timer.h"
 #include "Display/Display.h"
 #include "Utils/Debug.h"
+#include "Osci/Osci_Storage.h"
 
 
 using namespace FPGA;
@@ -22,6 +23,24 @@ extern bool givingStart;
 extern uint16 addrRead;
 
 extern uint8 dataRand[Chan::Size][FPGA::MAX_NUM_POINTS];
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+namespace Osci
+{
+    class StorageAccessor
+    {
+    public:
+        static void PrepareNewFrameP2P()
+        {
+            Storage::PrepareNewFrameP2P();
+        }
+        static void AddPoints(BitSet16 dataA, BitSet16 dataB)
+        {
+            Storage::GetFrameP2P()->AddPoints(dataA, dataB);
+        }
+    };
+}
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -84,6 +103,7 @@ void Osci::Start()
     if (InModeP2P())
     {
         FPGA::HAL::Interrupt::P2P::Enable();
+        StorageAccessor::PrepareNewFrameP2P();
     }
 }
 
@@ -291,7 +311,7 @@ static void ReadPointP2P()
         BitSet16 dataA(FSMC::ReadFromFPGA(RD::DATA_A), FSMC::ReadFromFPGA(RD::DATA_A + 1));
         BitSet16 dataB(FSMC::ReadFromFPGA(RD::DATA_B), FSMC::ReadFromFPGA(RD::DATA_B + 1));
 
-        LOG_WRITE("%d %d", dataA.byte1, dataB.byte1);
+        Osci::StorageAccessor::AddPoints(dataA, dataB);
     }
 }
 
