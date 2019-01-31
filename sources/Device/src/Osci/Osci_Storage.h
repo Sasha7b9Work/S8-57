@@ -14,18 +14,20 @@ namespace Osci
 {
     class DataAccessor;
     class StorageAccess;
+    class DataP2P;
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     class Data
     {
     friend class DataAccessor;
     friend class FPGA::DataAccessor;
+    friend class DataP2P;
     public:
         void Create();
         const uint8 *DataA();
         const uint8 *DataB();
         const DataSettings *Settings();
-    private:
+    protected:
         /// Указатель на данные первого канала
         uint8 *dataA;
         /// Указатель на данные второго канала
@@ -42,7 +44,13 @@ namespace Osci
     class DataP2P
     {
     public:
+        void Create();
         void AddPoints(BitSet16 dataA, BitSet16 dataB);
+        /// Количество считанных точек
+        uint readingPoints;
+        /// Указатель на положение точки, которая будет считываться следующей
+        uint pointer;
+        Data data;
     };
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

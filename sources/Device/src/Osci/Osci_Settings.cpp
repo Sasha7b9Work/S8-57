@@ -257,7 +257,7 @@ uint16 &Osci::Settings::RShift::Value(Chan::E ch)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-uint Osci::Settings::Memory::ENumPointsFPGA::BytesInChannel(PeakDetMode::E mode)
+uint Osci::Settings::Memory::ENumPointsFPGA::BytesInChannel(PeakDetMode::E mode) const
 {
     uint result = ENUM_TO_REL_POINTS(value);
     if (mode == PeakDetMode::Enabled)
@@ -266,4 +266,10 @@ uint Osci::Settings::Memory::ENumPointsFPGA::BytesInChannel(PeakDetMode::E mode)
     }
 
     return result;
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+uint Osci::Settings::Memory::ENumPointsFPGA::PointsInChannel() const
+{
+    return ENUM_TO_REL_POINTS(value);
 }

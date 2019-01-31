@@ -30,22 +30,28 @@ public:
     {
         uint bytesInChannel = FPGA::BytesInChannel();
 
-        data->Create();
-
         data->settings.Fill();
+
+        uint8 *addrData = (uint8 *)data + sizeof(Data);     // Адрес начала данных
 
         if (SET_ENABLED_A)
         {
-            data->dataA = (uint8 *)data + bytesInChannel;
+            data->dataA = addrData;
         }
         if (SET_ENABLED_B)
         {
-            data->dataB = (uint8 *)data + bytesInChannel;
+            data->dataB = addrData;
             if (SET_ENABLED_A)
             {
                 data->dataB += bytesInChannel;
             }
         }
+    }
+
+    /// Заполнить Data значениями
+    static void FillNewData(DataP2P *data)
+    {
+        FillNewData(&data->data);
     }
 };
 
@@ -57,12 +63,22 @@ class HeapWorker
 public:
     static uint8 *GetMemoryForData(uint /*size*/)
     {
-        return (uint8 *)Heap::Begin();
+        return (uint8 *)GetData(0);
+    }
+
+    static uint8 *GetMemoryForDataP2P(uint /*size*/)
+    {
+        return (uint8 *)GetDataP2P();
     }
 
     static Data *GetData(int /* fromEnd */)
     {
         return (Data *)Heap::Begin();
+    }
+
+    static DataP2P *GetDataP2P()
+    {
+        return (DataP2P *)(((uint)Heap::End() - (uint)Heap::Begin()) / 2);
     }
 
 private:
@@ -94,6 +110,8 @@ Data *Storage::PrepareForNewData()
 
     Data *data = (Data *)HeapWorker::GetMemoryForData(bytesForSave);
 
+    data->Create();
+
     DataAccessor::FillNewData(data);
 
     return data;
@@ -104,9 +122,11 @@ void Storage::PrepareNewFrameP2P()
 {
     uint bytesForSave = CalculateNeedMemory();
 
-    DataP2P *data = (DataP2P *)HeapWorker::GetMemoryForData(bytesForSave);
+    DataP2P *data = (DataP2P *)HeapWorker::GetMemoryForDataP2P(bytesForSave);
 
-    DataAccessor::FillNewData((Data *)data);
+    data->Create();
+
+    DataAccessor::FillNewData(data);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -138,8 +158,18 @@ Data *Storage::GetData(int fromEnd)
 void Data::Create()
 {
     num = allDatas++;
+    dataA = dataB = nullptr;
+}
 
-    dataA = dataB = 0;
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void DataP2P::Create()
+{
+    data.Create();
+    data.allDatas--;
+    
+    readingPoints = 0;
+
+    pointer = 0;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -161,9 +191,19 @@ const uint8 *Data::DataB()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void DataP2P::AddPoints(BitSet16 dataA, BitSet16 dataB)
+void DataP2P::AddPoints(BitSet16 a, BitSet16 b)
 {
+    /*
+    if (pointer == data.settings.PointsInChannel())
+    {
+        pointer = 0;
+    }
 
+    data.dataA[pointer] = a.byte1;
+    data.dataB[pointer] = b.byte1;
+
+    pointer++;
+    */
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

@@ -14,6 +14,7 @@
 
 #include "Osci/Measurements/Measurements.h"
 #include "Utils/CommonFunctions.h"
+#include "Utils/Debug.h"
 
 
 using namespace Display::Primitives;
@@ -53,7 +54,6 @@ void Osci::Display::PainterData::DrawData()
 
         func[MODE_WORK]();
     }
-
     DrawTPos(0, 0);
     DrawTShift(0, 0, 0);
 }

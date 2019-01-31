@@ -40,3 +40,9 @@ uint DataSettings::SizeChannel() const
     return points.BytesInChannel(PEAKDET(this));
 }
 
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+uint DataSettings::PointsInChannel() const
+{
+    return Memory::ENumPointsFPGA((Memory::ENumPointsFPGA::E)ENUM_POINTS(this)).PointsInChannel();
+}
+

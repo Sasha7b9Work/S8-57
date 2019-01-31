@@ -260,7 +260,8 @@ namespace Osci
                     Size
                 } value;
                 explicit ENumPointsFPGA(E v) : value(v) {};
-                uint BytesInChannel(PeakDetMode::E mode);
+                uint BytesInChannel(PeakDetMode::E mode) const;
+                uint PointsInChannel() const;
             };
         }
 

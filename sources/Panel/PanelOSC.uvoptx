@@ -331,7 +331,7 @@
         <Bp>
           <Number>11</Number>
           <Type>0</Type>
-          <LineNumber>35</LineNumber>
+          <LineNumber>31</LineNumber>
           <EnabledFlag>1</EnabledFlag>
           <Address>0</Address>
           <ByteObject>0</ByteObject>
@@ -340,7 +340,7 @@
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>0</BreakIfRCount>
-          <Filename>d:\Projects\stm32\S8-56\sources\Panel\src\Hardware\HAL\HAL_IT.cpp</Filename>
+          <Filename>d:\Projects\stm32\S8-56\sources\Panel\src\Data\Reader.cpp</Filename>
           <ExecCommand></ExecCommand>
           <Expression></Expression>
         </Bp>

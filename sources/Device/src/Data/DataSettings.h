@@ -29,6 +29,7 @@ struct DataSettings
     void Fill(uint8 *dataA = 0, uint8 *dataB = 0);
     /// Возвращает размер занимаемый данными одного канала
     uint SizeChannel() const;
+    uint PointsInChannel() const;
 };
 
 
