@@ -42,6 +42,7 @@ void Osci::Settings::LoadHoldfOff()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Osci::Settings::TBase::Change(int delta)
 {
+    Stop();
     if (delta > 0)
     {
         ::Math::LimitationIncrease<uint8>((uint8 *)(&SET_TBASE), (uint8)(TBase::Size - 1));

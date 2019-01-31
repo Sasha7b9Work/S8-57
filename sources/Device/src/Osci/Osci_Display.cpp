@@ -11,6 +11,8 @@
 #include "Osci/Measurements/Measurements_Table.h"
 #include "Settings/Settings.h"
 
+#include "Utils/Debug.h"
+
 
 using namespace Display::Primitives;
 using namespace Osci::Settings;

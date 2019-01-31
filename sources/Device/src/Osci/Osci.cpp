@@ -5,12 +5,21 @@
 #include "Settings/Settings.h"
 #include <cstring>
 
+#include "Hardware/HAL/HAL.h"
+#include "Hardware/Timer.h"
+#include "Display/Display.h"
+#include "Utils/Debug.h"
+
 
 using namespace FPGA;
+using namespace ::HAL;
+using namespace ::HAL::ADDRESSES::FPGA;
 using namespace Osci::Settings;
 
 
 extern bool givingStart;
+
+extern uint16 addrRead;
 
 extern uint8 dataRand[Chan::Size][FPGA::MAX_NUM_POINTS];
 
@@ -25,8 +34,12 @@ volatile static int numberMeasuresForGates = 1000;
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /// Читать канал в рандомизаторе с адреса address
 void ReadDataChanenlRand(Chan::E ch, const uint8 *address, uint8 *data);
+
 static int CalculateShift();
+
 static bool CalculateGate(uint16 rand, uint16 *eMin, uint16 *eMax);
+/// Чтение точки в поточечном режиме
+static void ReadPointP2P();
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -44,7 +57,7 @@ void Osci::Init()
     Settings::TShift::Load();
     FPGA::Settings::LoadCalibratorMode();
     Settings::LoadHoldfOff();
-
+    FPGA::HAL::Interrupt::P2P::Init(ReadPointP2P);
     FPGA::OnPressStart();
 }
 
@@ -52,6 +65,34 @@ void Osci::Init()
 void Osci::DeInit()
 {
     Stop();
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Osci::Start()
+{
+    givingStart = false;
+    addrRead = 0xffff;
+
+    FSMC::WriteToFPGA16(WR::PRED_LO, FPGA::pred);
+    FSMC::WriteToFPGA16(WR::POST_LO, FPGA::post);
+    FSMC::WriteToFPGA8(WR::START, 0xff);
+
+    FPGA::timeStart = TIME_MS;
+
+    FPGA::isRunning = true;
+
+    if (InModeP2P())
+    {
+        FPGA::HAL::Interrupt::P2P::Enable();
+    }
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Osci::Stop(bool)
+{
+    FPGA::HAL::Interrupt::P2P::Disable();
+
+    isRunning = false;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -100,12 +141,6 @@ void Osci::Update()
             }
         }
     }
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Osci::Stop(bool)
-{
-    isRunning = false;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -242,4 +277,32 @@ static bool CalculateGate(uint16 rand, uint16 *eMin, uint16 *eMax)
     }
 
     return retValue;
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+static void ReadPointP2P()
+{
+    if (Display::InProcess())
+    {
+        Display::SetFuncAfterUpadteOnce(ReadPointP2P);
+    }
+    else
+    {
+        BitSet16 dataA(FSMC::ReadFromFPGA(RD::DATA_A), FSMC::ReadFromFPGA(RD::DATA_A + 1));
+        BitSet16 dataB(FSMC::ReadFromFPGA(RD::DATA_B), FSMC::ReadFromFPGA(RD::DATA_B + 1));
+
+        LOG_WRITE("%d %d", dataA.byte1, dataB.byte1);
+    }
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+bool Osci::InModeP2P()
+{
+    return (SET_TBASE >= TBase::MIN_P2P);
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+bool Osci::InModeRandomizer()
+{
+    return (SET_TBASE <= TBase::_50ns);
 }

@@ -140,7 +140,7 @@ void Display::Update()
     funcAdditionDraw();
 
     Painter::EndScene();
-
+    
     inStateDraw = false;
 
     ExecuteFuncAfterUpdateOnce();

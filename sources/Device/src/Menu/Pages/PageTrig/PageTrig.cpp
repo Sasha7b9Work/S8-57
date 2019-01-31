@@ -23,7 +23,7 @@ void PageTrig::OnChanged_TrigMode(bool)
     }
     
     // Елси находимся в режиме рандомизатора
-    if(IN_RANDOM_MODE)
+    if(Osci::InModeRandomizer())
     /// \todo Это вместо функции sTime_RandomizeModeEnabled() было сделано потому, что с функцией экран периодически отваливался
     //if (SET_TBASE < TBase_50ns)
     {

@@ -8,6 +8,8 @@
 #include "Utils/Dictionary.h"
 #include "Settings/Settings.h"
 
+#include "Osci/Osci.h"
+
 
 using namespace Osci::Settings;
 
@@ -18,7 +20,7 @@ extern const PageBase pTime;
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 static bool IsActive_Sample()
 {
-    return IN_RANDOM_MODE && !START_MODE_IS_SINGLE;
+    return Osci::InModeRandomizer() && !START_MODE_IS_SINGLE;
 }
 
 DEF_CHOICE_2( cSample,                                                                                                                                          //--- ÐÀÇÂÅÐÒÊÀ - Âûáîðêà ---

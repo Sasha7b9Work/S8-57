@@ -7,6 +7,8 @@
 #include "Utils/Dictionary.h"
 #include "Settings/Settings.h"
 
+#include "Osci/Osci.h"
+
 
 using namespace Osci::Settings;
 
@@ -46,7 +48,7 @@ DEF_CHOICE_2( cViewMode,                                                        
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static bool IsActive_MinMax()
 {
-    return !IN_RANDOM_MODE && !IN_P2P_MODE;
+    return !Osci::InModeRandomizer() && !Osci::InModeP2P();
 }
 
 static void OnChanged_MinMax(bool)

@@ -9,9 +9,6 @@
 #define SET_PEAKDET_EN      (SET_PEAKDET == PeakDetMode::Enabled)
 #define SET_PEAKDET_DIS     (SET_PEAKDET == PeakDetMode::Disabled)
                             
-#define IN_RANDOM_MODE      (SET_TBASE <= TBase::_50ns)
-#define IN_P2P_MODE         (SET_TBASE >= TBase::MIN_P2P)
-                            
 #define TPOS                (set.time_TPos)
 #define TPOS_IS_RIGHT       (TPOS == TPos::Right)
 #define TPOS_IS_LEFT        (TPOS == TPos::Left)

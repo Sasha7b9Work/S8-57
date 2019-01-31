@@ -6,6 +6,8 @@
 #include "Osci/Osci_Settings.h"
 #include "FPGA/FPGA.h"
 
+#include "Osci/Osci.h"
+
 
 using namespace Osci::Settings;
 
@@ -95,7 +97,7 @@ void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc)
 {
     /// \todo временная затычка. Не в рандомизаторе эта функция вообще не должна вызываться
 
-    if (IN_RANDOM_MODE)
+    if (Osci::InModeRandomizer())
     {
         FPGA::SetValueADC((uint16)HAL_ADC_GetValue(hadc));
     }

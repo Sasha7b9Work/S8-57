@@ -34,7 +34,7 @@ uint16 FPGA::pred = (uint16)~(512);
 
 uint8 dataRand[Chan::Size][FPGA::MAX_NUM_POINTS];    ///< «десь будут данные рандомизатора
 /// «десь хранитс€ адрес, начина€ с которого будем читать данные по каналам. ≈сли addrRead == 0xffff, то адрес вначале нужно считать
-static uint16 addrRead = 0xffff;
+uint16 addrRead = 0xffff;
 
 extern const int *Kr; //-V707
 
@@ -86,22 +86,6 @@ void FPGA::OnPressStart()
         }
     }
 }
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Osci::Start()
-{
-    givingStart = false;
-    addrRead = 0xffff;
-
-    FSMC::WriteToFPGA16(WR::PRED_LO, FPGA::pred);
-    FSMC::WriteToFPGA16(WR::POST_LO, FPGA::post);
-    FSMC::WriteToFPGA8(WR::START, 0xff);
-
-    FPGA::timeStart = TIME_MS;
-
-    FPGA::isRunning = true;
-}
-
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void FPGA::ForTester::Start() // -V2506
