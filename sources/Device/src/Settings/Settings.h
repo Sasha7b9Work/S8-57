@@ -137,16 +137,16 @@ public:
     // Меню ПАМЯТЬ
 
 #define MAX_SYMBOLS_IN_FILE_NAME 35
-    ENumPointsFPGA::E   mem_enumPoints;                             ///< Число точек
-    ModeBtnMemory::E    mem_modeBtnMemory;
-    ModeWork::E         mem_modeWork;                               ///< Режим работы.
-    bool                mem_flashAutoConnect;                       ///< Если true, при подключении флешки автоматически выводится Файл-Менеджер.
-    int8                mem_indexCurSymbolNameMask;                 ///< Индекс текущего символа в режиме задания маски или выбора имени.
-    ModeSaveSignal::E   mem_modeSaveSignal;                         ///< В каком виде сохранять сигнал.
-    char                mem_fileName[MAX_SYMBOLS_IN_FILE_NAME];     ///< Имя файла для режима ручного задания.
-    ModeShowIntMem::E   mem_modeShowIntMem;                         ///< Что показывать в режиме ВНУТР ЗУ - считанный или записанный сигнал.
-    FileNamingMode::E   mem_fileNamingMode;                         ///< Режим именования файлов.
-    char                mem_fileNameMask[MAX_SYMBOLS_IN_FILE_NAME]; ///< \brief Здесь маска для автоматического именования файлов.
+    Osci::Settings::Memory::ENumPointsFPGA::E   mem_enumPoints;                             ///< Число точек
+    ModeBtnMemory::E                            mem_modeBtnMemory;
+    ModeWork::E                                 mem_modeWork;                               ///< Режим работы.
+    bool                                        mem_flashAutoConnect;                       ///< Если true, при подключении флешки автоматически выводится Файл-Менеджер.
+    int8                                        mem_indexCurSymbolNameMask;                 ///< Индекс текущего символа в режиме задания маски или выбора имени.
+    ModeSaveSignal::E                           mem_modeSaveSignal;                         ///< В каком виде сохранять сигнал.
+    char                                        mem_fileName[MAX_SYMBOLS_IN_FILE_NAME];     ///< Имя файла для режима ручного задания.
+    ModeShowIntMem::E                           mem_modeShowIntMem;                         ///< Что показывать в режиме ВНУТР ЗУ - считанный или записанный сигнал.
+    FileNamingMode::E                           mem_fileNamingMode;                         ///< Режим именования файлов.
+    char                                        mem_fileNameMask[MAX_SYMBOLS_IN_FILE_NAME]; ///< \brief Здесь маска для автоматического именования файлов.
                         ///< \details Правила именования.\n
                         /// \code
                         /// %y('\x42') - год, %m('\x43') - месяц, %d('\x44') - день, %H('\x45') - часы, %M('\x46') - минуты, %S('\x47') - секунды

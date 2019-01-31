@@ -34,21 +34,6 @@ struct ModeWork
     explicit ModeWork(E v) : value(v) {};
 };
 
-/// Число точек сигнала, с которым идёт работа.
-struct ENumPointsFPGA
-{
-    enum E
-    {
-        _512,
-        _1k,
-        _2k,
-        _4k,
-        _8k,
-        Size
-    } value;
-    explicit ENumPointsFPGA(E v) : value(v) {};
-};
-
 /// Что показывать в режиме Внутр ЗУ - считанный или записанный сигнал.
 struct ModeShowIntMem
 {
@@ -126,8 +111,8 @@ struct FileNamingMode
 int sMemory_NumPointsInChannel_();
 int sMemory_NumBytesInChannel_();
 
-ENumPointsFPGA::E NumPoints_2_ENumPoints(int numPoints);
-int ENumPoints_2_NumPoints(ENumPointsFPGA::E numPoints);
+Osci::Settings::Memory::ENumPointsFPGA::E NumPoints_2_ENumPoints(int numPoints);
+int ENumPoints_2_NumPoints(Osci::Settings::Memory::ENumPointsFPGA::E numPoints);
 
 /// Выделяет память из кучи для канала. Настройки длины памяти берёт из ds или set (если ds == 0)
 void *AllocMemForChannelFromHeap(Chan ch, DataSettings *ds);

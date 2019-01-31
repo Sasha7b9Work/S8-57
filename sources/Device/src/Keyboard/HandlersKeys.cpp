@@ -77,7 +77,7 @@ static void ChannelA();
 static void ChannelB();
 static void Function();
 static void Measure();
-static void Memory();
+static void HandlerMemory();
 static void Service();
 static void Time();
 static void Start();
@@ -95,7 +95,7 @@ void Handlers::Process(KeyEvent e)
         {Empty,          Empty,          Empty,          Empty},            // None       
         {Empty,          Empty,          Function,       Empty},            // Function   
         {Measure,        Measure,        Measure,        Measure},          // Measure    
-        {Memory,         Memory,         Memory,         Memory},           // Memory     
+        {HandlerMemory,  HandlerMemory,  HandlerMemory,  HandlerMemory},    // Memory     
         {Service,        Service,        Service,        Service},          // Service    
         {ChannelA,       Empty,          Empty,          Empty},            // ChannelA   
         {ChannelB,       Empty,          Empty,          Empty},            // ChannelB   
@@ -412,7 +412,7 @@ static void Measure()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void Memory()
+static void HandlerMemory()
 {
     if (MODE_BTN_MEMORY_IS_SAVE)
     {

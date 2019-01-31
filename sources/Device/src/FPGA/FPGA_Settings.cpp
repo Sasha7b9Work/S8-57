@@ -21,6 +21,7 @@ using namespace FPGA::HAL::GPIO;
 using namespace FPGA::Settings;
 using namespace HAL::ADDRESSES::FPGA;
 using namespace Osci::Settings;
+using namespace Osci::Settings::Memory;
 
 using HAL::FSMC;
 
