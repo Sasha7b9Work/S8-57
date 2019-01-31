@@ -50,7 +50,7 @@ void Osci::Display::MemoryWindow::Draw()
             if (SET_ENABLED(chan))
             {
                 Color::SetCurrent(Color::Channel(chan));
-                DrawDataInRect(X(), Y(), Width(), Height(), OUT(chan), (uint)FPGA::NumPoints());
+                DrawDataInRect(X(), Y(), Width(), Height(), OUT(chan), FPGA_NUM_POINTS);
             }
         }
     }
@@ -97,8 +97,8 @@ static void DrawDataInRect(int x, int y, int width, int height, const uint8 *dat
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void DrawScreenArea()
 {
-    float relBegin = (float)SHIFT_IN_MEMORY / FPGA::NumPoints();          // Относительное начало экранной области относительно всей памяти
-    float relWidth = (float)(Grid::Width() + 1) / FPGA::NumPoints();      // Относительное (относительно всей шириный окна) ширина видимой области
+    float relBegin = (float)SHIFT_IN_MEMORY / FPGA_NUM_POINTS;          // Относительное начало экранной области относительно всей памяти
+    float relWidth = (float)(Grid::Width() + 1) / FPGA_NUM_POINTS;      // Относительное (относительно всей шириный окна) ширина видимой области
 
     int begin = (int)(relBegin * Width() + 0.5F);   // Реальное начало экранной области относительно начала окна памяти
     int width = (int)(relWidth * Width() + 0.5F);   // Реальная ширина видимой области

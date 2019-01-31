@@ -133,7 +133,7 @@ void ReadDataChanenlRand(Chan::E ch, const uint8 *address, uint8 *data) // -V250
         dataRead += step;
     }
 
-    uint8 *last = &dataRand[ch][FPGA::NumPoints()];
+    uint8 *last = &dataRand[ch][FPGA_NUM_POINTS];
 
     while (dataRead < last)
     {
@@ -142,7 +142,7 @@ void ReadDataChanenlRand(Chan::E ch, const uint8 *address, uint8 *data) // -V250
         dataRead += step;
     }
 
-    std::memcpy(data, &dataRand[ch][0], (uint)FPGA::NumPoints());
+    std::memcpy(data, &dataRand[ch][0], FPGA_NUM_POINTS);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

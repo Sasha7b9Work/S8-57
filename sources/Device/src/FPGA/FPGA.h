@@ -21,8 +21,6 @@ namespace FPGA
     void OnPressStart();
     /// Принудительный запуск синхронизации
     void GiveStart();
-
-    uint NumPoints();
     /// Возвращает количество байт в канале на текущих настройках
     uint BytesInChannel();
 

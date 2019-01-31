@@ -102,7 +102,7 @@ void FPGA::Settings::LoadCalibratorMode()
 void TShift::Load()
 {
     FPGA::post = (uint16)(SET_TSHIFT - TShift::Min());
-    int Pred = (int)FPGA::NumPoints() - (int)FPGA::post;
+    int Pred = (int)FPGA_NUM_POINTS - (int)FPGA::post;
 
     if (Pred < 0)
     {
