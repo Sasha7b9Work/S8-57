@@ -43,7 +43,7 @@ enum ModeFSMC
 static      ModeFSMC    mode = ModeNone;
 bool        interchangeWithPanel = false;
 /// Если не равно нулю, нужно выполнить эту функцию после завершения обмена с панелью
-pFuncTester funcAfterInteractionWithPanel = 0;
+pFuncTester funcAfterInteractionWithPanel = nullptr;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #define CONFIGURE_TO_READ_PANEL                                             \
@@ -278,7 +278,7 @@ void FSMC::WriteToPanel(const uint8 *data, uint length)
     if (funcAfterInteractionWithPanel)
     {
         funcAfterInteractionWithPanel();
-        funcAfterInteractionWithPanel = 0;
+        funcAfterInteractionWithPanel = nullptr;
     }
 }
 

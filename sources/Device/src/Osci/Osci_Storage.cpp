@@ -52,6 +52,24 @@ public:
     static void FillNewData(DataP2P *data)
     {
         FillNewData(&data->data);
+
+        /// Теперь нужно сдвинуть начало даннных вправо на разницу в размерах Data и DataP2P
+
+        int delta = sizeof(DataP2P) - sizeof(Data);
+
+        ShiftPointerIfNotZero(&data->data.dataA, delta);
+
+        ShiftPointerIfNotZero(&data->data.dataB, delta);
+    }
+
+private:
+    /// Сдвинуть значение указателя  на shift, если он не равен нулю
+    static void ShiftPointerIfNotZero(uint8 **pointer, int shift)
+    {
+        if (*pointer)
+        {
+            *pointer += shift;
+        }
     }
 };
 
@@ -78,7 +96,7 @@ public:
 
     static DataP2P *GetDataP2P()
     {
-        return (DataP2P *)(((uint)Heap::End() - (uint)Heap::Begin()) / 2);
+        return (DataP2P *)(((uint)Heap::End() + (uint)Heap::Begin()) / 2);
     }
 
 private:
@@ -154,6 +172,12 @@ Data *Storage::GetData(int fromEnd)
     return HeapWorker::GetData(fromEnd);
 }
 
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+DataP2P *Storage::GetFrameP2P()
+{
+    return HeapWorker::GetDataP2P();
+}
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void Data::Create()
 {
@@ -193,21 +217,15 @@ const uint8 *Data::DataB()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void DataP2P::AddPoints(BitSet16 a, BitSet16 b)
 {
-    /*
+    data.dataA[pointer] = a.byte1;
+    data.dataB[pointer] = b.byte1;
+    
+    readingPoints++;
+
+    pointer++;
+    
     if (pointer == data.settings.PointsInChannel())
     {
         pointer = 0;
     }
-
-    data.dataA[pointer] = a.byte1;
-    data.dataB[pointer] = b.byte1;
-
-    pointer++;
-    */
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-DataP2P *Storage::GetFrameP2P()
-{
-    return nullptr;
 }

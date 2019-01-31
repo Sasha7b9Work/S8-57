@@ -64,6 +64,7 @@ namespace Osci
         static Data *PrepareForNewData();
         /// Возвращает указатель на данные
         static Data *GetData(int fromEnd = 0);
+    public:
         /// Подготавливает новый фрейм для хранения данных поточечного вывода
         static void PrepareNewFrameP2P();
         /// Возвращает фрейм поточечного вывода

@@ -26,24 +26,6 @@ extern uint8 dataRand[Chan::Size][FPGA::MAX_NUM_POINTS];
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-namespace Osci
-{
-    class StorageAccessor
-    {
-    public:
-        static void PrepareNewFrameP2P()
-        {
-            Storage::PrepareNewFrameP2P();
-        }
-        static void AddPoints(BitSet16 dataA, BitSet16 dataB)
-        {
-            Storage::GetFrameP2P()->AddPoints(dataA, dataB);
-        }
-    };
-}
-
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                       //  2нс 5нс 10нс 20нс 50нс
 const int Kr[] = { 50, 20, 10,  5,   2 };
 
@@ -103,7 +85,7 @@ void Osci::Start()
     if (InModeP2P())
     {
         FPGA::HAL::Interrupt::P2P::Enable();
-        StorageAccessor::PrepareNewFrameP2P();
+        Storage::PrepareNewFrameP2P();
     }
 }
 
@@ -302,16 +284,16 @@ static bool CalculateGate(uint16 rand, uint16 *eMin, uint16 *eMax)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void ReadPointP2P()
 {
-    if (Display::InProcess())
+    if(::HAL::FSMC::InterchangeWithPanel())
     {
-        Display::SetFuncAfterUpadteOnce(ReadPointP2P);
+        ::HAL::FSMC::RunFunctionAfterInteractionWitchPanel(ReadPointP2P);
     }
     else
     {
         BitSet16 dataA(FSMC::ReadFromFPGA(RD::DATA_A), FSMC::ReadFromFPGA(RD::DATA_A + 1));
         BitSet16 dataB(FSMC::ReadFromFPGA(RD::DATA_B), FSMC::ReadFromFPGA(RD::DATA_B + 1));
 
-        Osci::StorageAccessor::AddPoints(dataA, dataB);
+        Osci::Storage::GetFrameP2P()->AddPoints(dataA, dataB);
     }
 }
 

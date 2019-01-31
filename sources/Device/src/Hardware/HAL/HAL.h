@@ -228,7 +228,7 @@ namespace HAL
         /// Возвращает true, если идёт обмен с панелью
         static bool InterchangeWithPanel();
         /// Установить функцию, которую нужно выполнить единоразово после завершения обмена с панелью
-        static void RunFunctionAfterInteractionWitchPanel(pFuncTester func);
+        static void RunFunctionAfterInteractionWitchPanel(pFuncVV func);
         /// Читать байт сразу же
         static uint8 ReadByteNow();
     };
