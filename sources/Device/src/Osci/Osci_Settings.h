@@ -198,6 +198,7 @@ namespace Osci
                     Rising,
                     Falling
                 } value;
+                explicit Polarity(E v) : value(v) {};
 
                 static void Load();
             };

@@ -46,10 +46,15 @@ namespace Osci
     public:
         void Create();
         void AddPoints(BitSet16 dataA, BitSet16 dataB);
+        /// Время между точками
+        uint TimePoint(uint numPoint) const;
         /// Количество считанных точек
         uint readingPoints;
         /// Указатель на положение точки, которая будет считываться следующей
         uint pointer;
+        /// Время начала съёма информации. Первая точка будет поставлена через время, соответствующее TBase
+        uint timeStart;
+
         Data data;
     };
 

@@ -12,7 +12,7 @@ using namespace Osci::Settings;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-const float absStepRShift[] =
+static const float absStepRShift[] =
 {
     2e-3F   / 20 / STEP_RSHIFT,
     5e-3F   / 20 / STEP_RSHIFT,
@@ -29,7 +29,7 @@ const float absStepRShift[] =
     20.0F   / 20 / STEP_RSHIFT
 };
 
-const float absStepTShift[TBase::Size] =
+static const float absStepTShift[TBase::Size] =
 {
     /* 2 нс    */ 2e-9F   / 20, 
     /* 5 нс    */ 5e-9F   / 20, 
