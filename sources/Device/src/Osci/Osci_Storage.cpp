@@ -6,6 +6,9 @@
 #include <cstring>
 
 
+#include "Hardware/Timer.h"
+
+
 /*
     Данные в Heap будут храниться последовательно. Каждые следующие данные хранятся за предыдущими. когда достигается конец памяти, стираются данные в начале и следующие пишутся на их место.
     Данные хранятся так:
@@ -75,7 +78,8 @@ class HeapWorker
 public:
     static uint8 *GetMemoryForData(uint /*size*/)
     {
-        return (uint8 *)GetData(0);
+        last = (Data *)Heap::Begin();
+        return (uint8 *)last;
     }
 
     static uint8 *GetMemoryForDataP2P(uint /*size*/)
@@ -85,7 +89,7 @@ public:
 
     static Data *GetData(int /* fromEnd */)
     {
-        return (Data *)Heap::Begin();
+        return (Data *)last;
     }
 
     static DataP2P *GetDataP2P()
@@ -100,8 +104,8 @@ private:
     static Data *last;
 };
 
-Data *HeapWorker::first = 0;
-Data *HeapWorker::last = 0;
+Data *HeapWorker::first = nullptr;
+Data *HeapWorker::last = nullptr;
 
 };
 
@@ -139,6 +143,8 @@ void Storage::PrepareNewFrameP2P()
     data->Create();
 
     DataAccessor::FillNewData(data);
+
+    data->timeStart = TIME_MS;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -209,7 +215,7 @@ const uint8 *Data::DataB()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-uint DataP2P::TimePoint(uint numPoint) const
+float DataP2P::TimePointMS(uint numPoint) const
 {
     static const float timePoint[TBase::Size] =
     {
@@ -245,21 +251,38 @@ uint DataP2P::TimePoint(uint numPoint) const
         /* 10 с    */ 5.0e+2F
     };
 
-    return (uint)(timePoint[TBASE(&data.settings)] * numPoint);
+    return timeStart + timePoint[TBASE(&data.settings)] * numPoint;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void DataP2P::AddPoints(BitSet16 a, BitSet16 b)
+void DataP2P::AddPoints(uint timeMS, BitSet16 a, BitSet16 b)
 {
     data.dataA[pointer] = a.byte1;
     data.dataB[pointer] = b.byte1;
-    
+
     readingPoints++;
 
     pointer++;
-    
+
     if (pointer == data.settings.PointsInChannel())
     {
         pointer = 0;
     }
+
+    if (NeedAdditionPoints(timeMS))
+    {
+        AddPoints(timeMS, a, b);
+    }
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+bool DataP2P::NeedAdditionPoints(uint timeMS) const
+{
+    return (TimePointMS(readingPoints) < timeMS);
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void DataP2P::Logging() const
+{
+    LOG_WRITE("%d точек считано поточечно %d", readingPoints, pointer);
 }

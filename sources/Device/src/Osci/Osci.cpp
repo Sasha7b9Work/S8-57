@@ -284,16 +284,27 @@ static bool CalculateGate(uint16 rand, uint16 *eMin, uint16 *eMax)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void ReadPointP2P()
 {
+    /// Время чтения точки. Если == 0, то нужно брать актуальное при сохранении точки, иначе - из time
+    static bool time = 0;
+
     if(::HAL::FSMC::InterchangeWithPanel())
     {
+        time = TIME_MS;
         ::HAL::FSMC::RunFunctionAfterInteractionWitchPanel(ReadPointP2P);
     }
     else
     {
+        if (time == 0)
+        {
+            time = TIME_MS;
+        }
+
         BitSet16 dataA(FSMC::ReadFromFPGA(RD::DATA_A), FSMC::ReadFromFPGA(RD::DATA_A + 1));
         BitSet16 dataB(FSMC::ReadFromFPGA(RD::DATA_B), FSMC::ReadFromFPGA(RD::DATA_B + 1));
 
-        Osci::Storage::GetFrameP2P()->AddPoints(dataA, dataB);
+        Osci::Storage::GetFrameP2P()->AddPoints(time, dataA, dataB);
+
+        time = 0;
     }
 }
 

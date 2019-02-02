@@ -38,9 +38,5 @@ Osci::Data *Reader::ReadDataFromStorage()
         dataIN[1] = pData->DataB();
     }
 
-    Osci::DataP2P *data = Osci::Storage::GetFrameP2P();
-
-    LOG_WRITE("%d точек считано поточечно %d", data->readingPoints, data->pointer);
-
     return pData;
 }

@@ -15,6 +15,7 @@ namespace Osci
     class DataAccessor;
     class StorageAccess;
     class DataP2P;
+    class Storage;
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     class Data
@@ -43,11 +44,18 @@ namespace Osci
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     class DataP2P
     {
+    friend class DataAccessor;
+    friend class Storage;
     public:
+        void Logging() const;
+        /// time - врем€, когда были считаны точки
+        void AddPoints(uint timeMS, BitSet16 pointA, BitSet16 pointB);
+    private:
         void Create();
-        void AddPoints(BitSet16 dataA, BitSet16 dataB);
-        /// ¬рем€ между точками
-        uint TimePoint(uint numPoint) const;
+        /// ¬рем€, в которое должна прийити точка numPoint
+        float TimePointMS(uint numPoint) const;
+        /// ¬озвращает true, если считано меньше точек, чем требуетс€ дл€ данного времени
+        bool NeedAdditionPoints(uint timeMS) const;
         ///  оличество считанных точек
         uint readingPoints;
         /// ”казатель на положение точки, котора€ будет считыватьс€ следующей
