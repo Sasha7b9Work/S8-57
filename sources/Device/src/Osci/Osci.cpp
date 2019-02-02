@@ -84,8 +84,8 @@ void Osci::Start()
 
     if (InModeP2P())
     {
-        FPGA::HAL::Interrupt::P2P::Enable();
         Storage::PrepareNewFrameP2P();
+        FPGA::HAL::Interrupt::P2P::Enable();
     }
 }
 

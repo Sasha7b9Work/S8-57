@@ -250,8 +250,10 @@ float DataP2P::TimePointMS(uint numPoint) const
         /* 5 ñ     */ 2.5e+2F,
         /* 10 ñ    */ 5.0e+2F
     };
-
-    return timeStart + timePoint[TBASE(&data.settings)] * numPoint;
+    
+    float k = timePoint[TBASE(&data.settings)] * numPoint;
+    
+    return timeStart + k;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -278,7 +280,9 @@ void DataP2P::AddPoints(uint timeMS, BitSet16 a, BitSet16 b)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 bool DataP2P::NeedAdditionPoints(uint timeMS) const
 {
-    return (TimePointMS(readingPoints) < timeMS);
+    float timePoint = TimePointMS(readingPoints);
+
+    return (timePoint < timeMS);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
