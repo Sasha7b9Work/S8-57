@@ -37,6 +37,10 @@ static void DrawTPos(int leftX, int rightX);
 
 static void DrawTShift(int leftX, int rightX, int numPoints);
 
+static void DrawModeLines(Chan::E ch, int left, int center, uint8 *data, float scale);
+
+static void DrawModePoints(Chan::E ch, int left, int center, uint8 *data, float scale);
+
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void Osci::Display::PainterData::DrawData()
@@ -109,93 +113,72 @@ static void DrawChannel(Chan::E ch)
 
     if (MODE_DRAW_SIGNAL_IS_LINES)
     {
-        if (THICKNESS_SIGNAL_IS_3)
+        DrawModeLines(ch, left, center, data, scale);
+    }
+    else
+    {
+        DrawModePoints(ch, left, center, data, scale);
+    }
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+static void DrawModeLines(Chan::E ch, int left, int center, uint8 *data, float scale)
+{
+    Color::SetCurrent(Color::Channel(ch));
+
+    int x = left;
+
+    if (SET_PEAKDET_EN)
+    {
+        for (int i = 0; i < 281 * 2; i += 2)
         {
-            Color::SetCurrent(Color::ChanHalf(ch));
+            int min = (int)(center - (data[i] - VALUE::AVE) * scale + 0.5F);
+            int max = (int)(center - (data[i + 1] - VALUE::AVE) * scale + 0.5F);
 
-            int x = left;
-
-            for (int i = 1; i < 281; i++)
-            {
-                int value = (int)(center - ((data[i] - VALUE::AVE) * scale) + 0.5F);
-                int valuePrev = (int)(center - ((data[i - 1] - VALUE::AVE) * scale) + 0.5F);
-
-                if (value == valuePrev)
-                {
-                    HLine(2).Draw(x - 1, value);
-                    VLine(2).Draw(x++, value - 1);
-                }
-                else
-                {
-                    if(valuePrev > value)   { ++value;  }
-                    else                    { --value;  }
-
-                    if(valuePrev < value)
-                    {
-                        ::Math::Swap(&valuePrev, &value);
-                    }
-
-                    VLine(valuePrev - value).Draw(x - 1, value);
-                    VLine(valuePrev - value).Draw(x + 1, value);
-                    VLine(value - valuePrev - 2).Draw(x++, valuePrev + 1);
-                }
-            }
-        }
-
-        Color::SetCurrent(Color::Channel(ch));
-
-        int x = left;
-         
-        if(SET_PEAKDET_EN)
-        {
-            for(int i = 0; i < 281 * 2; i += 2)
-            {
-                int min = (int)(center - (data[i] - VALUE::AVE) * scale + 0.5F);
-                int max = (int)(center - (data[i + 1] - VALUE::AVE) * scale + 0.5F);
-
-                VLine(min - max).Draw(x++, max);
-            }
-        }
-        else
-        {
-            for (int i = 1; i < 281; i++)
-            {
-                int value = (int)(center - (data[i] - VALUE::AVE) * scale + 0.5F);
-                int valuePrev = (int)(center - (data[i - 1] - VALUE::AVE) * scale + 0.5F);
-
-                if(value == valuePrev)
-                {
-                    Point().Draw(x++, valuePrev);
-                }
-                else
-                {
-                    int val = valuePrev > value ? (value + 1) : (value - 1);
-                    VLine(val - valuePrev).Draw(x++, valuePrev);
-                }
-            }
+            VLine(min - max).Draw(x++, max);
         }
     }
     else
     {
-        Color::SetCurrent(Color::Channel(ch));
-
-        if(SET_PEAKDET_EN)
+        for (int i = 1; i < 281; i++)
         {
-            int x = left;
-            for(int i = 0; i < 281 * 2; i += 2)
+            int value = (int)(center - (data[i] - VALUE::AVE) * scale + 0.5F);
+            int valuePrev = (int)(center - (data[i - 1] - VALUE::AVE) * scale + 0.5F);
+
+            if (value == valuePrev)
             {
-                Point().Draw(x, (int)(center - (data[i] - VALUE::AVE) * scale + 0.5F));
-                Point().Draw(x, (int)(center - (data[i + 1] - VALUE::AVE) * scale + 0.5F));
-                x++;
+                Point().Draw(x++, valuePrev);
+            }
+            else
+            {
+                int val = valuePrev > value ? (value + 1) : (value - 1);
+                VLine(val - valuePrev).Draw(x++, valuePrev);
             }
         }
-        else
+    }
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+static void DrawModePoints(Chan::E ch, int left, int center, uint8 *data, float scale)
+{
+    Color::SetCurrent(Color::Channel(ch));
+
+    if (SET_PEAKDET_EN)
+    {
+        int x = left;
+        for (int i = 0; i < 281 * 2; i += 2)
         {
-            for (int i = 0; i < 280; i++)
-            {
-                float value = center - (data[i] - VALUE::AVE) * scale;
-                Point().Draw(left + i, ROUND(uint8, value));
-            }
+            Point().Draw(x, (int)(center - (data[i] - VALUE::AVE) * scale + 0.5F));
+            Point().Draw(x, (int)(center - (data[i + 1] - VALUE::AVE) * scale + 0.5F));
+            x++;
+        }
+    }
+    else
+    {
+        for (int i = 0; i < 280; i++)
+        {
+            float value = center - (data[i] - VALUE::AVE) * scale;
+            Point().Draw(left + i, ROUND(uint8, value));
         }
     }
 }

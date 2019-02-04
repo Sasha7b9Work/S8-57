@@ -19,8 +19,8 @@
 #define MODE_DRAW_SIGNAL_IS_LINES   (MODE_DRAW_SIGNAL == Display::ModeDrawSignal::Lines)
 #define MODE_DRAW_SIGNAL_IS_POINTS  (MODE_DRAW_SIGNAL == Display::ModeDrawSignal::Points)
 
-#define THICKNESS_SIGNAL            (set.disp_thickness)
-#define THICKNESS_SIGNAL_IS_3       (THICKNESS_SIGNAL == Display::ThicknessSignal::_3)
+//#define THICKNESS_SIGNAL            (set.disp_thickness)
+//#define THICKNESS_SIGNAL_IS_3       (THICKNESS_SIGNAL == Display::ThicknessSignal::_3)
 
 #define ENUM_MIN_MAX                (set.disp_ENumMinMax)
 #define MIN_MAX_ENABLED             (ENUM_MIN_MAX != Display::ENumMinMax::_1)

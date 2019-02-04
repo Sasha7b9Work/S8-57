@@ -20,6 +20,7 @@ const PageBase *PageDisplay::pointer = &pageDisplay;
 
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+/*
 DEF_CHOICE_2( cThickness,                                                                                                                                         //--- ДИСПЛЕЙ - Толщина ---
     "Толщина", "Thickness",
     "Позволяет изменять толщину выводимых на экран изображений",
@@ -28,6 +29,7 @@ DEF_CHOICE_2( cThickness,                                                       
     "x3", "x3",
     THICKNESS_SIGNAL, pageDisplay, FuncActive, Choice::EmptyChange, Choice::EmptyDraw
 )
+*/
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void PageDisplay::Init()
@@ -121,7 +123,7 @@ DEF_CHOICE_2( cScaleYtype,                                                      
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-DEF_PAGE_10( pageDisplay, // -V641 // -V1027                                                                                                                                //--- ДИСПЛЕЙ ---
+DEF_PAGE_9( pageDisplay, // -V641 // -V1027                                                                                                                                 //--- ДИСПЛЕЙ ---
     "ДИСПЛЕЙ", "DISPLAY",
     "Содержит настройки отображения дисплея.",
     "Contains settings of display of the display.",
@@ -134,6 +136,6 @@ DEF_PAGE_10( pageDisplay, // -V641 // -V1027                                    
     PageDisplay::PageGrid::pointer,         ///< ДИСПЛЕЙ - СЕТКА
     &cScaleYtype,                           ///< ДИСПЛЕЙ - Смещение
     PageDisplay::PageSettings::pointer,     ///< ДИСПЛЕЙ - НАСТРОЙКИ
-    &cThickness,                            ///< ДИСПЛЕЙ - Толщина
+//    &cThickness,                            ///< ДИСПЛЕЙ - Толщина
     Page::Name::Display, Menu::pageMain, FuncActive, FuncPressPage, FuncDrawPage, FuncRegSetPage
 )

@@ -19,7 +19,7 @@ const Settings Settings::defaultSettings =
     // Ìåíş ÄÈÑÏËÅÉ
 
     Display::ModeDrawSignal::Lines,         // disp_modeDrawSignal;      
-    Display::ThicknessSignal::_1,           // disp_thickness;           
+//    Display::ThicknessSignal::_1,           // disp_thickness;           
     Display::Background::Black,             // disp_background;          
     Display::ShowStrNavi::Temp,             // disp_showStringNavigation;
     Display::ENumMinMax::_1,                // disp_ENumMinMax;          

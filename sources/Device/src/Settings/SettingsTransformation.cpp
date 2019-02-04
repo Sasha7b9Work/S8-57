@@ -31,7 +31,7 @@ void Settings::TransformForSave(uint8 d[1024])
     *((uint16 *)data) = (uint16)((DisplayModeDrawSignal | (disp_modeDrawSignal << 8)));
     data += 2;
     
-    SaveEnum16(DisplayThicknessSignal, (uint8)disp_thickness);
+    //SaveEnum16(DisplayThicknessSignal, (uint8)disp_thickness);
     
     //*data++ = DisplayThicknessSignal;
     //*data++ = disp_thickness;
