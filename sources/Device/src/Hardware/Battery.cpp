@@ -58,17 +58,17 @@ namespace Hardware
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void Hardware::Battery::Init()
+void Battery::Init()
 {
     HAL::ADC1_::Init();
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-float Hardware::Battery::GetVoltageAKK(uint *adc)
+float Battery::GetVoltageAKK(uint *adc)
 {
     static Utils::AroundAverager<float> averager(32);
 
-    *adc = ADC1_::ReadValueAKK();
+    *adc = Hardware::ADC1_::ReadValueAKK();
 
     averager.Push((float)*adc);
 
@@ -76,11 +76,11 @@ float Hardware::Battery::GetVoltageAKK(uint *adc)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-float Hardware::Battery::GetVoltagePOW(uint *adc)
+float Battery::GetVoltagePOW(uint *adc)
 {
     static Utils::AroundAverager<float> averager(32);
 
-    *adc = ADC1_::ReadValuePOW();
+    *adc = Hardware::ADC1_::ReadValuePOW();
 
     averager.Push((float)*adc);
 
@@ -120,7 +120,7 @@ static void DrawBatteryUGO(int x, int y, float percents)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Hardware::Battery::Draw(int x, int y)
+void Battery::Draw(int x, int y)
 {
     Font::SetCurrent(Font::Type::_8);
 
@@ -136,7 +136,7 @@ void Hardware::Battery::Draw(int x, int y)
 
     Font::SetCurrent(Font::Type::_5);
 
-    Text(String("%1.2f Â %4.1f%%", akk, percents)).Draw(x + 4, y);
+    Text(String("%1.2f Â %4.1f%%", akk, percents)).Draw(x + 4, y - 1);
 
     Font::SetCurrent(Font::Type::_8);
 

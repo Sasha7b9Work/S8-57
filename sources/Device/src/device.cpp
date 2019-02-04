@@ -21,7 +21,6 @@
 #include "Hardware/HAL/HAL.h"
 
 
-using Hardware::Battery;
 using Hardware::Clock;
 
 
