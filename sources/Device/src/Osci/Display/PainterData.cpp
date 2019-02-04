@@ -39,7 +39,15 @@ static void DrawTShift(int leftX, int rightX, int numPoints);
 
 static void DrawModeLines(Chan::E ch, int left, int center, uint8 *data, float scale);
 
+static void DrawModeLinesPeakDetOn(int center, uint8 *data, float scale, int x);
+
+static void DrawModeLinesPeakDetOff(int center, uint8 *data, float scale, int x);
+
 static void DrawModePoints(Chan::E ch, int left, int center, uint8 *data, float scale);
+
+static void DrawModePointsPeakDetOn();
+
+static void DrawModePointsPeakDetOff();
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -130,30 +138,42 @@ static void DrawModeLines(Chan::E ch, int left, int center, uint8 *data, float s
 
     if (SET_PEAKDET_EN)
     {
-        for (int i = 0; i < 281 * 2; i += 2)
-        {
-            int min = (int)(center - (data[i] - VALUE::AVE) * scale + 0.5F);
-            int max = (int)(center - (data[i + 1] - VALUE::AVE) * scale + 0.5F);
-
-            VLine(min - max).Draw(x++, max);
-        }
+        DrawModeLinesPeakDetOn(center, data, scale, x);
     }
     else
     {
-        for (int i = 1; i < 281; i++)
-        {
-            int value = (int)(center - (data[i] - VALUE::AVE) * scale + 0.5F);
-            int valuePrev = (int)(center - (data[i - 1] - VALUE::AVE) * scale + 0.5F);
+        DrawModeLinesPeakDetOff(center, data, scale, x);
+    }
+}
 
-            if (value == valuePrev)
-            {
-                Point().Draw(x++, valuePrev);
-            }
-            else
-            {
-                int val = valuePrev > value ? (value + 1) : (value - 1);
-                VLine(val - valuePrev).Draw(x++, valuePrev);
-            }
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+static void DrawModeLinesPeakDetOn(int center, uint8 *data, float scale, int x)
+{
+    for (int i = 0; i < 281 * 2; i += 2)
+    {
+        int min = (int)(center - (data[i] - VALUE::AVE) * scale + 0.5F);
+        int max = (int)(center - (data[i + 1] - VALUE::AVE) * scale + 0.5F);
+
+        VLine(min - max).Draw(x++, max);
+    }
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+static void DrawModeLinesPeakDetOff(int center, uint8 *data, float scale, int x)
+{
+    for (int i = 1; i < 281; i++)
+    {
+        int value = (int)(center - (data[i] - VALUE::AVE) * scale + 0.5F);
+        int valuePrev = (int)(center - (data[i - 1] - VALUE::AVE) * scale + 0.5F);
+
+        if (value == valuePrev)
+        {
+            Point().Draw(x++, valuePrev);
+        }
+        else
+        {
+            int val = valuePrev > value ? (value + 1) : (value - 1);
+            VLine(val - valuePrev).Draw(x++, valuePrev);
         }
     }
 }
