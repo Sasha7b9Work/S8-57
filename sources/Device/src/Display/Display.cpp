@@ -341,7 +341,7 @@ void Display::RemoveAddDrawFunction()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Display::SetOrientation(Orientation orientation)
+void Display::SetOrientation(Orientation::E orientation)
 {
     DISPLAY_ORIENTATION = orientation;
 }

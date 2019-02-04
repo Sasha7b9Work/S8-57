@@ -49,6 +49,7 @@ namespace Osci
     {
     friend class DataAccessor;
     friend class Storage;
+    friend class StructDataP2P;
     public:
         void Logging() const;
         /// time - время, когда были считаны точки
@@ -64,6 +65,16 @@ namespace Osci
         float TimePointMS(uint numPoint) const;
         /// Возвращает true, если считано меньше точек, чем требуется для данного времени
         bool NeedAdditionPoints(uint timeMS) const;
+        /// Возвращает fromEnd-й байт с конца данных
+        uint8 ByteFromEnd(Chan::E ch, uint fromEnd);
+        /// Возвращает количество прочитанных байт
+        uint ReadingBytes() const;
+        /// Заполнить буфер для отрисовки при включенном детекторе
+        void FillBufferForPeakDetEnabled(Chan::E ch, Buffer *buffer);
+        /// Заполнить буфер для отрисовки при выключенном детекторе
+        void FillBufferForPeakDetDisabled(Chan::E ch, Buffer *buffer);
+        /// Подготовить буфер к заполнению данными
+        void PrepareBuffer(Buffer *buffer, uint size);
         /// Количество считанных точек
         uint readingPoints;
         /// Указатель на положение точки, которая будет считываться следующей
@@ -72,12 +83,6 @@ namespace Osci
         uint timeStart;
 
         Data data;
-        /// Заполнить буфер для отрисовки при включенном детекторе
-        void FillBufferForPeakDetEnabled(Chan::E ch, Buffer *buffer);
-        /// Заполнить буфер для отрисовки при выключенном детекторе
-        void FillBufferForPeakDetDisabled(Chan::E ch, Buffer *buffer);
-        /// Подготовить буфер к заполнению данными
-        void PrepareBuffer(Buffer *buffer, uint size);
     };
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

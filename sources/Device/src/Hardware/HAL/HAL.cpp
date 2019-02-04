@@ -11,6 +11,8 @@ static void MX_GPIO_Init();
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void HAL::Init()
 {
+    HAL_Init();
+
     RCC->AHB1ENR |= RCC_AHB1ENR_GPIOAEN;
     RCC->AHB1ENR |= RCC_AHB1ENR_GPIOBEN;
     RCC->AHB1ENR |= RCC_AHB1ENR_GPIOCEN;
@@ -20,8 +22,6 @@ void HAL::Init()
     RCC->AHB1ENR |= RCC_AHB1ENR_GPIOGEN;
     RCC->AHB1ENR |= RCC_AHB1ENR_GPIOHEN;
     RCC->AHB1ENR |= RCC_AHB1ENR_GPIOJEN;
-    
-    
 
     SystemClockConfig();
 

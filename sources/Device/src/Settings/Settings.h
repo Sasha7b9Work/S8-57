@@ -220,9 +220,9 @@ public:
     int16                        dbg_timeCompensation;           ///< Дополнительное смещение по времени для данной развёртки режима рандомизатора.
     int16                        dbg_pretriggered;               ///< Регулируемая величина предзапуска для исследования рандомизатора.
     FPGA::Settings::Bandwidth::E dbg_bandwidth[2];               ///< \brief Здесь задаётся полоса, которая будет включаться при выборе в "КАНАЛ-Полоса" 
-                                                        ///< значения "Полная".
-    bool                  dbg_ShowStats;                ///< Показывать статистику на экране (fps, например).
-    Display::Orientation  dbg_Orientation;
+                                                                 ///< значения "Полная".
+    bool                         dbg_ShowStats;                 ///< Показывать статистику на экране (fps, например).
+    Display::Orientation::E      dbg_Orientation;
 
     // Настройки тестер-компонента
 

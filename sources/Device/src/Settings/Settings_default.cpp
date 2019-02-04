@@ -177,7 +177,7 @@ const Settings Settings::defaultSettings =
     0,                                      // dbg_pretriggered;       
     { Bandwidth::Full, Bandwidth::Full },   // dbg_bandwidth[2];       
     false,                                  // dbg_ShowStats;          
-    Display::Orientation::Direct,           // dbg_Orientation;        
+    Display::Orientation::Normal,           // dbg_Orientation;        
     
     // Настройки тестер-компонента
     

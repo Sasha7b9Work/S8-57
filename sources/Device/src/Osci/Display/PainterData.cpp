@@ -9,6 +9,8 @@
 #include "Settings/Settings.h"
 #include "Utils/Math.h"
 
+#include "Utils/Buffer.h"
+
 
 using namespace Display::Primitives;
 using namespace FPGA;
@@ -107,9 +109,20 @@ static void DrawChannel(Chan::E ch)
         data += SHIFT_IN_MEMORY;
     }
 
+    /// Для отрисовки поточечного вывода
+    Buffer buffer;
+
     if (Osci::InModeP2P())
     {
-
+        if (DATA_P2P)
+        {
+            DATA_P2P->FillBufferForDraw(ch, &buffer);
+            data = buffer.data;
+        }
+        else
+        {
+            return;
+        }
     }
 
     int center = (Grid::Bottom() - Grid::Top()) / 2 + Grid::Top();

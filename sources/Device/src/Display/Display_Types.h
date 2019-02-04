@@ -50,6 +50,7 @@
 #define LAST_AFFECTED_CH            (set.disp_lastAffectedChannel)
 #define LAST_AFFECTED_CH_IS_A       (LAST_AFFECTED_CH == Chan::A)
 #define DISPLAY_ORIENTATION         (set.dbg_Orientation)
+#define DISPLAY_ORIENTATION_IS_NORMAL (DISPLAY_ORIENTATION == Display::Orientation::Normal)
 
 #define ALT_MARKERS                 (set.disp_altMarkers)
 #define ALT_MARKERS_SHOW            (ALT_MARKERS == AltMarkers::Show)
@@ -135,6 +136,7 @@ namespace Display
             _64,
             _128
         } value;
+        explicit ENumMinMax(E v) : value(v) {};
     };
 
     /// Тип усреднений по измерениям
@@ -145,15 +147,17 @@ namespace Display
             Accurately,   ///< Усреднять точно.
             Around        ///< Усреднять приблизительно.
         } value;
+        explicit ModeAveraging(E v) : value(v) {};
     };
 
     struct Orientation
     {
         enum E
         {
-            Direct,
-            Back
+            Normal,
+            Reverse
         } value;
+        explicit Orientation(E v) : value(v) {};
     };
     /// Режим отображения дополнительных боковых маркеров смещения по напряжению.
     struct AltMarkers
@@ -164,6 +168,7 @@ namespace Display
             Show,        /// Всегда выводить.
             AutoHide     /// Выводить и прятать через timeShowLevels.
         } value;
+        explicit AltMarkers(E v) : value(v) {};
     };
 
     /// Тип привязки к смещению по вертикали

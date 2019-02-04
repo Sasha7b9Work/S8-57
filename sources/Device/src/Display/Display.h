@@ -47,7 +47,7 @@ namespace Display
 
     void ChangedRShiftMarkers(bool active);
 
-    void SetOrientation(Orientation orientation);
+    void SetOrientation(Orientation::E orientation);
     /// Возвращает адрес первой и последней точки на экране в координатах экрана
     BitSet64 PointsOnDisplay();
     /// \brief Возращает адрес первой и последней точки в координатах экрана

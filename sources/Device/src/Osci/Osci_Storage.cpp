@@ -341,16 +341,22 @@ void DataP2P::FillBufferForPeakDetDisabled(Chan::E ch, Buffer *buffer)
     {
         std::memcpy(buffer->data, data.GetData(ch), readingPoints);
     }
+    else
+    {
+        for (uint i = 0; i < NUM_BYTES; i++)
+        {
+            buffer->data[NUM_BYTES - i] = ByteFromEnd(ch, i);
+        }
+    }
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void DataP2P::FillBufferForPeakDetEnabled(Chan::E ch, Buffer *buffer)
 {
     static const uint NUM_BYTES = 281 * 2;
+    uint readingBytes = (uint)ReadingBytes();
 
     PrepareBuffer(buffer, NUM_BYTES);
-
-    uint readingBytes = readingPoints * 2;
 
     if (readingBytes <= NUM_BYTES)
     {
@@ -363,4 +369,33 @@ void DataP2P::PrepareBuffer(Buffer *buffer, uint size)
 {
     buffer->Realloc(size);
     std::memset(buffer->data, FPGA::VALUE::NONE, size);
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+uint8 DataP2P::ByteFromEnd(Chan::E ch, uint fromEnd)
+{
+    int index = (int)(ReadingBytes() - 1 - fromEnd);
+
+    if (index < 0)
+    {
+        return FPGA::VALUE::NONE;
+    }
+
+    if (index > (int)data.settings.SizeChannel())
+    {
+
+    }
+
+    return data.GetData(ch)[index];
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+uint DataP2P::ReadingBytes() const
+{
+    if (PEAKDET_DISABLED(&data.settings))
+    {
+        return readingPoints;
+    }
+
+    return readingPoints * 2;
 }
