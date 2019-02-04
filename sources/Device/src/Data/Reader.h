@@ -4,19 +4,13 @@
 #include "Osci/Osci_Storage.h"
 
 
-#ifndef _INCLUDE_DATA_
-#define EXTERN extern
-#else
-#define EXTERN
-#endif
-
-
-
+extern Osci::DataP2P*      pDataP2P;
 extern Osci::Data*         pData;
-EXTERN const DataSettings *pDS;         ///< Указатель на настройки текущего рисуемого сигнала. Обращаться к нему следует через макрос DS.
+extern const DataSettings *pDS;         ///< Указатель на настройки текущего рисуемого сигнала. Обращаться к нему следует через макрос DS.
 extern uint8 *dataOUT[2];               ///< Считанные данные второго канала
 extern const uint8 *dataIN[2];
 
+#define DATA_P2P    pDataP2P
 #define DATA        pData
 #define DS          pDS                 ///< Указатель на настройки текущего рисуемого сигнала.
 
@@ -63,5 +57,5 @@ class Reader
 {
 public:
     /// Читает данные из хранилища. Возвращает 0, если данных там нет
-    static Osci::Data *ReadDataFromStorage();
+    static bool ReadDataFromStorage();
 };

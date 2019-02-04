@@ -50,6 +50,9 @@ namespace Osci
         void Logging() const;
         /// time - время, когда были считаны точки
         void AddPoints(uint timeMS, BitSet16 pointA, BitSet16 pointB);
+        const uint8 *DataA();
+        const uint8 *DataB();
+        const DataSettings *Settings();
     private:
         void Create();
         /// Время, в которое должна прийити точка numPoint

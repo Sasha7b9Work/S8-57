@@ -2,6 +2,7 @@
 #include "Data/Reader.h"
 #include "Osci/Osci_Storage.h"
 #include "Utils/CommonFunctions.h"
+#include "Osci/Osci.h"
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -18,25 +19,61 @@ uint8 *dataOUT[2] = { ccm[0], ccm[1] };
 const DataSettings *pDS = nullptr;
 /// ”казатель на считанные даныне
 Osci::Data *pData = nullptr;
+/// ”казатель на фрейм поточечного вывода
+Osci::DataP2P *pDataP2P = nullptr;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-Osci::Data *Reader::ReadDataFromStorage()
+/// „итает фрейм поточечного вывода
+static bool ReadDataP2P();
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+bool Reader::ReadDataFromStorage()
 {
-    pData = nullptr;
-    pDS = nullptr;
+    DATA_P2P = nullptr;
+    DATA = nullptr;
+    DS = nullptr;
 
-    dataIN[0] = dataIN[1] = nullptr;
+    IN_A = IN_B = nullptr;
 
-    pData = Osci::Storage::GetData();
+    DATA = Osci::Storage::GetData();
 
-    if (pData != nullptr)
+    if (DATA != nullptr)
     {
-        pDS = pData->Settings();
+        DS = DATA->Settings();
 
-        dataIN[0] = pData->DataA();
-        dataIN[1] = pData->DataB();
+        IN_A = DATA->DataA();
+        IN_B = DATA->DataB();
     }
 
-    return pData;
+    if (Osci::InModeP2P())
+    {
+        return ReadDataP2P();
+    }
+
+    return (DATA != nullptr);
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+static bool ReadDataP2P()
+{
+    if (Osci::InModeP2P())
+    {
+        DATA_P2P = nullptr;
+        DS = nullptr;
+        IN_A = IN_B = nullptr;
+
+        DATA_P2P = Osci::Storage::GetFrameP2P();
+
+        if (DATA_P2P)
+        {
+            DS = DATA_P2P->Settings();
+
+            IN_A = DATA_P2P->DataA();
+            IN_B = DATA_P2P->DataB();
+        }
+    }
+
+    return (DATA_P2P != nullptr);
 }
