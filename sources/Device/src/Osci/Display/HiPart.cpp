@@ -33,46 +33,43 @@ using Osci::Measurements::Measure;
 /// Написать параметры вертикального тракта заданного канала
 static void WriteTextVoltage(Chan::E ch, int x, int y);
 
-static void WriteStringAndNumber(const char *text, int16 x, int16 y, int number);
+static void WriteStringAndNumber(const char *text, int x, int y, int number);
 
 static void DrawTime(int x, int y);
+/// Нарисовать разделительные линии
+static void DrawSeparators(int x, int y);
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void Osci::Display::HiPart::Draw()
 {
-    int y0 = ::Display::HEIGHT - 19;
-    int y1 = ::Display::HEIGHT - 10;
+    const int y0 = 0;
+    const int x0 = 0;
+
+    int y1 = 9;
     int x = -1;
 
-	HLine line(Grid::Left() - Measurements::Table::GetDeltaGridLeft() - 1);
+    DrawSeparators(x0, y0);
 
-	line.Draw(1, Grid::ChannelBottom(), Color::SEPARATOR);
-	line.Draw(1, Grid::FullBottom());
-
-    x = DrawMainParameters(x, y0);
-
-	HLine line2(::Display::WIDTH - Grid::Right() - 4);
-
-    line2.Draw(Grid::Right() + 2, Grid::Bottom(), Color::FILL);
-    line2.Draw(Grid::Right() + 2, Grid::ChannelBottom());
+    x = DrawMainParameters(x, y0 + 1);
 
     x += 82;
-    y0 = y0 - 3;
     y1 = y1 - 6;
     int y2 = y1 + 6;
     Font::SetCurrent(Font::Type::_5);
 
+    Color::SetCurrent(Color::FILL);
+
     if (MODE_WORK == ModeWork::Dir)
     {
-        WriteStringAndNumber(LANG_RU ? "накопл" : "accum", (int16)x, (int16)y0, NUM_ACCUM);
-        WriteStringAndNumber(LANG_RU ? "усредн" : "ave", (int16)x, (int16)y1, NUM_AVE);
-        WriteStringAndNumber(LANG_RU ? "мн\x93мкс" : "mn\x93max", (int16)x, (int16)y2, NUM_MIN_MAX);
+        WriteStringAndNumber(LANG_RU ? "накопл" : "accum", x, y0 - 3, NUM_ACCUM);
+        WriteStringAndNumber(LANG_RU ? "усредн" : "ave", x, y1, NUM_AVE);
+        WriteStringAndNumber(LANG_RU ? "мн\x93мкс" : "mn\x93max", x, y2, NUM_MIN_MAX);
     }
 
     x += 42;
 
-    VLine(::Display::HEIGHT - Grid::Bottom() - 4).Draw(x, Grid::Bottom(), Color::SEPARATOR);
+    return;
 
     Font::SetCurrent(Font::Type::_8);
 
@@ -89,12 +86,10 @@ void Osci::Display::HiPart::Draw()
             std::strcat(mesFreq, Frequency(freq).ToString().CString());
         }
 
-        String(mesFreq).Draw(x + 3, Grid::Bottom() + 2, Color::FILL);
+        String(mesFreq).Draw(x + 3, y0 + 2, Color::FILL);
     }
 
-    DrawTime(x + 3, Grid::Bottom() + 11);
-
-    VLine(::Display::HEIGHT - Grid::Bottom() - 4).Draw(x + 55, Grid::Bottom() + 2, Color::GRAY_50);
+    DrawTime(x + 3, y0 + 11);
 
     Font::SetCurrent(Font::Type::_UGO2);
 
@@ -105,18 +100,38 @@ void Osci::Display::HiPart::Draw()
 
     if (CONNECTED_TO_USB || CABLE_USB_IS_CONNECTED)
     {
-        Char(SYMBOL_USB).Draw4SymbolsInRect(x + 72, Grid::Bottom() + 2, CONNECTED_TO_USB ? Color::WHITE : Color::FLASH_01);
+        Char(SYMBOL_USB).Draw4SymbolsInRect(x + 72, y0 + 2, CONNECTED_TO_USB ? Color::WHITE : Color::FLASH_01);
     }
 
     Color::SetCurrent(Color::FILL);
     // Пиковый детектор
     if (!SET_PEAKDET_DIS)
     {
-        Char('\x12').Draw(x + 38, Grid::Bottom() + 11);
-        Char('\x13').Draw(x + 46, Grid::Bottom() + 11);
+        Char('\x12').Draw(x + 38, y0 + 11);
+        Char('\x13').Draw(x + 46, y0 + 11);
     }
 
-    Battery::Draw(x + 55, Grid::Bottom() + 1);
+    Battery::Draw(x + 55, y0 + 1);
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+static void DrawSeparators(int x, int y)
+{
+    HLine line(Grid::Left() - Osci::Measurements::Table::GetDeltaGridLeft() - 1);
+
+    line.Draw(1, Grid::ChannelBottom(), Color::SEPARATOR);
+    line.Draw(1, Grid::FullBottom());
+
+    VLine separator(17);
+
+    separator.Draw(x + 95, y, Color::FILL);
+    separator.Draw(x + 172, y);
+    separator.Draw(x + 215, y);
+
+    HLine line2(::Display::WIDTH - Grid::Right() - 4);
+
+    line2.Draw(Grid::Right() + 2, Grid::Bottom(), Color::FILL);
+    line2.Draw(Grid::Right() + 2, Grid::ChannelBottom());
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -128,8 +143,6 @@ int Osci::Display::HiPart::DrawMainParameters(int _x, int _y)
 
     WriteTextVoltage(Chan::A, x + 2, y0);
     WriteTextVoltage(Chan::B, x + 2, y1);
-
-    VLine(::Display::HEIGHT - Grid::Bottom() - 4).Draw(x + 95, _y, Color::SEPARATOR);
 
     x += 98;
     const int SIZE = 100;
@@ -196,8 +209,6 @@ int Osci::Display::HiPart::DrawMainParameters(int _x, int _y)
         String(buffer).Draw(x + 63, y1);
     }
 
-    VLine(::Display::HEIGHT - Grid::Bottom() - 4).Draw(x + 74, _y, Color::SEPARATOR);
-
     return _x + 93;
 }
 
@@ -234,7 +245,7 @@ static void WriteTextVoltage(Chan::E ch, int x, int y)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void WriteStringAndNumber(const char *text, int16 x, int16 y, int number)
+static void WriteStringAndNumber(const char *text, int x, int y, int number)
 {
     String(text).Draw(x, y, Color::FILL);
 

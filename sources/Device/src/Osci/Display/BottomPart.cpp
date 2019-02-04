@@ -21,23 +21,19 @@ using namespace Osci::Settings;
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void Osci::Display::BottomPart::Draw()
 {
-    WriteCursors();
-    DrawRightPart();
+    //WriteCursors();
+    //DrawRightPart();
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Osci::Display::BottomPart::WriteCursors()
 {
-    int startX = 43;
+    const int x0 = 43 + 29;
+    const int y0 = 0;
 
-    if(true)
-    {
-        startX += 29;
-    }
-
-    int x = startX;
-    int y1 = 0;
-    int y2 = 9;
+    int x = x0;
+    int y1 = y0;
+    int y2 = y0 + 9;
     if(Cursor::NecessaryDraw())
     {
         //Painter::DrawVLine(x, 1, Grid::Top() - 2, Color::FILL);
@@ -53,7 +49,7 @@ void Osci::Display::BottomPart::WriteCursors()
             x += 7;
             Cursor::Voltage(source, 0).Draw(x, y1);
             Cursor::Voltage(source, 1).Draw(x, y2);
-            x = startX + 49;
+            x = x0 + 49;
             float pos0 = FPGA::Math::VoltageCursor(Cursor::PosU(source, 0), SET_RANGE(source), SET_RSHIFT(source));
             float pos1 = FPGA::Math::VoltageCursor(Cursor::PosU(source, 1), SET_RANGE(source), SET_RSHIFT(source));
             float delta = std::fabsf(pos1 - pos0);
@@ -67,7 +63,7 @@ void Osci::Display::BottomPart::WriteCursors()
             Cursor::PercentsU(source).Draw(x + 10, y2);
         }
 
-        x = startX + 101;
+        x = x0 + 101;
 
         //Painter::DrawVLine(x, 1, Grid::Top() - 2, Color::FILL);
         VLine(Grid::Top() - 3).Draw(x, 1, Color::FILL);
@@ -81,7 +77,7 @@ void Osci::Display::BottomPart::WriteCursors()
             x += 7;
             Cursor::Time(source, 0).Draw(x, y1);
             Cursor::Time(source, 1).Draw(x, y2);
-            x = startX + 153;          
+            x = x0 + 153;          
 
             float pos0 = FPGA::Math::TimeCursor(CURsT_POS(source, 0), SET_TBASE);
             float pos1 = FPGA::Math::TimeCursor(CURsT_POS(source, 1), SET_TBASE);
