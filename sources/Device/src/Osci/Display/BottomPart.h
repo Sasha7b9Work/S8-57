@@ -10,8 +10,6 @@ namespace Osci
             void Draw();
 
             void WriteCursors();
-
-            void DrawRightPart();
         };
     };
 };

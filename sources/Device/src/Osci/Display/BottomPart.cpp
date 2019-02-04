@@ -22,7 +22,6 @@ using namespace Osci::Settings;
 void Osci::Display::BottomPart::Draw()
 {
     //WriteCursors();
-    //DrawRightPart();
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -99,87 +98,6 @@ void Osci::Display::BottomPart::WriteCursors()
                     Frequency(1.0F / delta).ToString().Draw(x + 25, Grid::Top() + 2);
                 }
             }
-        }
-    }
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Osci::Display::BottomPart::DrawRightPart()
-{
-    // Синхроимпульс
-    int y = 2;
-
-    static const int xses[3] ={280, 271, 251};
-    int x = xses[MODE_WORK];
-
-    if(MODE_WORK != ModeWork::RAM)
-    {
-        //Painter::DrawVLine(x, 1, Grid::Top() - 2, Color::FILL);
-        VLine(Grid::Top() - 3).Draw(x, 1, Color::FILL);
-
-        x += 2;
-
-        if(Trig::SyncPulse())
-        {
-            Region(Grid::Top() - 3, Grid::Top() - 7).Fill(x, 1 + y, Color::FILL);
-            String(DICT(DTrig)).Draw(x + 3, y + 3, Color::BACK);
-        }
-    }
-
-    // Режим работы
-    static pString strs[][2] =
-    {
-        {"ИЗМ", "MEAS"},
-        {"ПОСЛ", "LAST"},
-        {"ВНТР", "INT"}
-    };
-
-    if(MODE_WORK != ModeWork::Dir)
-    {
-        x += 18;
-
-        //Painter::DrawVLine(x, 1, Grid::Top() - 2, Color::FILL);
-        VLine(Grid::Top() - 3).Draw(x, 1, Color::FILL);
-
-        x += 2;
-        String(DICT(DMode)).Draw(LANG_RU ? x : x + 3, -1);
-        //Painter::DrawStringInCenterRect(x + 1, 9, 25, 8, strs[MODE_WORK][LANG]);
-        Text(strs[MODE_WORK][LANG]).DrawInCenterRect(x + 1, 9, 25, 8);
-    }
-    else
-    {
-        x -= 9;
-    }
-
-    if(MODE_WORK != ModeWork::RAM)
-    {
-        x += 27;
-
-        VLine(Grid::Top() - 3).Draw(x, 1, Color::FILL);
-
-        x += 2;
-        y = 1;
-
-        if(FPGA::IsRunning())       // Рабочий режим
-        {
-            Char(SYMBOL_PLAY).Draw4SymbolsInRect(x, 1);
-        }
-        else if(FPGA_IN_STATE_STOP)  // Режим остановки
-        {
-            Region(10, 10).Fill(x + 3, y + 3);
-        }
-        else if(FPGA_IN_STATE_WAIT)  // Режим ожидания сигнала
-        {
-            int w = 4;
-            int h = 14;
-            int delta = 4;
-            x = x + 2;
-            Region(w, h).Fill(x, y + 1);
-            Region(w, h).Fill(x + w + delta, y + 1);
-        }
-        else
-        {
-            // больше ничего не обрабатываем
         }
     }
 }

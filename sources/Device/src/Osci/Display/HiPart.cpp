@@ -18,9 +18,11 @@
 #include "Osci/Measurements/Measurements_Table.h"
 #include "Hardware/Battery.h"
 #include "Hardware/HAL/HAL.h"
+#include "FPGA/FPGA.h"
 
 
 using namespace Display::Primitives;
+using namespace FPGA;
 using namespace FPGA::Math;
 using namespace FPGA::Settings;
 using namespace Hardware;
@@ -40,6 +42,8 @@ static void DrawTime(int x, int y);
 static void DrawSeparators(int x, int y);
 /// Записывает главные параметры в указанную позицию. Возвращает х-координату правого верхнего угла выведенного изображения
 static int DrawMainParameters(int x, int y);
+/// Нарисовать правую часть - синхронизация и режим работы
+static void DrawRightPart(int x, int y);
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -91,6 +95,10 @@ void Osci::Display::HiPart::Draw()
 
     DrawTime(x + 3, y0 + 10);
 
+    DrawRightPart(265, y0);
+
+    return;
+
     Font::SetCurrent(Font::Type::_UGO2);
 
     // Флешка
@@ -127,6 +135,7 @@ static void DrawSeparators(int x, int y)
     separator.Draw(x + 95, y, Color::FILL);
     separator.Draw(x + 172, y);
     separator.Draw(x + 215, y);
+    separator.Draw(x + 264, y);
 
     HLine line2(::Display::WIDTH - Grid::Right() - 4);
 
@@ -303,4 +312,79 @@ static void DrawTime(int x, int y)
     Integer((int)time.minutes).ToString(false, 2).Draw(x + dField + dSeparator, y);
     String(':').Draw(x + 2 * dField + dSeparator, y);
     Integer((int)time.seconds).ToString(false, 2).Draw(x + 2 * dField + 2 * dSeparator, y);
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+static void DrawRightPart(int x0, int y0)
+{
+    // Синхроимпульс
+
+    static const int xses[3] = { 280, 271, 251 };
+    int x = xses[MODE_WORK];
+
+    if (MODE_WORK != ModeWork::RAM)
+    {
+        x += 2;
+
+        if (Trig::SyncPulse())
+        {
+            Region(31, 16).Fill(x0 + 1, y0 + 1, Color::FILL);
+            String(DICT(DTrig)).Draw(x0 + 10, y0 + 5, Color::BACK);
+        }
+    }
+
+    // Режим работы
+    static pString strs[][2] =
+    {
+        {"ИЗМ", "MEAS"},
+        {"ПОСЛ", "LAST"},
+        {"ВНТР", "INT"}
+    };
+
+    if (MODE_WORK != ModeWork::Dir)
+    {
+        x += 18;
+
+        VLine(Grid::Top() - 3).Draw(x, 1, Color::FILL);
+
+        x += 2;
+        String(DICT(DMode)).Draw(LANG_RU ? x : x + 3, -1);
+        Text(strs[MODE_WORK][LANG]).DrawInCenterRect(x + 1, 9, 25, 8);
+    }
+    else
+    {
+        x -= 9;
+    }
+
+    if (MODE_WORK != ModeWork::RAM)
+    {
+        x += 27;
+
+        VLine(Grid::Top() - 3).Draw(x, 1, Color::FILL);
+
+        x += 2;
+        int y = y0 + 1;
+
+        if (FPGA::IsRunning())       // Рабочий режим
+        {
+            Char(SYMBOL_PLAY).Draw4SymbolsInRect(x, 1);
+        }
+        else if (FPGA_IN_STATE_STOP)  // Режим остановки
+        {
+            Region(10, 10).Fill(x + 3, y + 3);
+        }
+        else if (FPGA_IN_STATE_WAIT)  // Режим ожидания сигнала
+        {
+            int w = 4;
+            int h = 14;
+            int delta = 4;
+            x = x + 2;
+            Region(w, h).Fill(x, y + 1);
+            Region(w, h).Fill(x + w + delta, y + 1);
+        }
+        else
+        {
+            // больше ничего не обрабатываем
+        }
+    }
 }
