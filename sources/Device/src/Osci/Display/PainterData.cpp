@@ -45,9 +45,9 @@ static void DrawModeLinesPeakDetOff(int center, uint8 *data, float scale, int x)
 
 static void DrawModePoints(Chan::E ch, int left, int center, uint8 *data, float scale);
 
-static void DrawModePointsPeakDetOn();
+static void DrawModePointsPeakDetOn(int center, uint8 *data, float scale, int x);
 
-static void DrawModePointsPeakDetOff();
+static void DrawModePointsPeakDetOff(int center, uint8 *data, float scale, int x);
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -185,21 +185,32 @@ static void DrawModePoints(Chan::E ch, int left, int center, uint8 *data, float 
 
     if (SET_PEAKDET_EN)
     {
-        int x = left;
-        for (int i = 0; i < 281 * 2; i += 2)
-        {
-            Point().Draw(x, (int)(center - (data[i] - VALUE::AVE) * scale + 0.5F));
-            Point().Draw(x, (int)(center - (data[i + 1] - VALUE::AVE) * scale + 0.5F));
-            x++;
-        }
+        DrawModePointsPeakDetOn(center, data, scale, left);
     }
     else
     {
-        for (int i = 0; i < 280; i++)
-        {
-            float value = center - (data[i] - VALUE::AVE) * scale;
-            Point().Draw(left + i, ROUND(uint8, value));
-        }
+        DrawModePointsPeakDetOff(center, data, scale, left);
+    }
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+static void DrawModePointsPeakDetOn(int center, uint8 *data, float scale, int x)
+{
+    for (int i = 0; i < 281 * 2; i += 2)
+    {
+        Point().Draw(x, (int)(center - (data[i] - VALUE::AVE) * scale + 0.5F));
+        Point().Draw(x, (int)(center - (data[i + 1] - VALUE::AVE) * scale + 0.5F));
+        x++;
+    }
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+static void DrawModePointsPeakDetOff(int center, uint8 *data, float scale, int x)
+{
+    for (int i = 0; i < 280; i++)
+    {
+        float value = center - (data[i] - VALUE::AVE) * scale;
+        Point().Draw(x + i, ROUND(uint8, value));
     }
 }
 
