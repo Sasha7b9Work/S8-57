@@ -10,6 +10,8 @@ namespace FPGA
 
 class Reader;
 
+class Buffer;
+
 namespace Osci
 {
     class DataAccessor;
@@ -53,6 +55,8 @@ namespace Osci
         const uint8 *DataA();
         const uint8 *DataB();
         const DataSettings *Settings();
+        /// Заполнить buffer данными для вывода на экран
+        void FillBufferForDraw(Buffer *buffer);
     private:
         void Create();
         /// Время, в которое должна прийити точка numPoint

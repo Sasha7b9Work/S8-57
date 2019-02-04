@@ -15,6 +15,7 @@
 #include "Osci/Measurements/Measurements.h"
 #include "Utils/CommonFunctions.h"
 #include "Utils/Debug.h"
+#include "Utils/Buffer.h"
 
 
 using namespace Display::Primitives;
@@ -102,6 +103,11 @@ static void DrawROM()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void DrawChannel(Chan::E ch)
 {
+    if (!SET_ENABLED(ch))
+    {
+        return;
+    }
+
     uint8 *data = OUT(ch);
 
     if(SET_PEAKDET_DIS)
@@ -112,11 +118,6 @@ static void DrawChannel(Chan::E ch)
     int center = (Grid::Bottom() - Grid::Top()) / 2 + Grid::Top();
     int left = Grid::Left();
 
-    if (!SET_ENABLED(ch))
-    {
-        return;
-    }
-    
     float scale = (float)Grid::Height() / (VALUE::MAX - VALUE::MIN);
 
     if (MODE_DRAW_SIGNAL_IS_LINES)
