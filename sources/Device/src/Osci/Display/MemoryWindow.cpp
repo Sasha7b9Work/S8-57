@@ -9,6 +9,7 @@
 
 #include "Hardware/Battery.h"
 #include "Osci/Display/HiPart.h"
+#include "Display/Display.h"
 
 
 using namespace Display::Primitives;
@@ -29,32 +30,22 @@ static void DrawScreenArea();
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void Osci::Display::MemoryWindow::Draw()
 {
-
-    return;
-
     if (Cursor::NecessaryDraw())
     {
         return;
     }
 
-    if (Menu::IsShown())
-    {
-        HiPart::DrawMainParameters(0, 1);
-    }
-    else
-    {
-        DrawScreenArea();
+    DrawScreenArea();
 
-        Chan::E chans[2] = { LAST_AFFECTED_CH_IS_A ? Chan::B : Chan::A, LAST_AFFECTED_CH_IS_A ? Chan::A : Chan::B };
+    Chan::E chans[2] = { LAST_AFFECTED_CH_IS_A ? Chan::B : Chan::A, LAST_AFFECTED_CH_IS_A ? Chan::A : Chan::B };
 
-        for (int i = 0; i < 2; i++)
+    for (int i = 0; i < 2; i++)
+    {
+        Chan::E chan = chans[i];
+        if (SET_ENABLED(chan))
         {
-            Chan::E chan = chans[i];
-            if (SET_ENABLED(chan))
-            {
-                Color::SetCurrent(Color::Channel(chan));
-                DrawDataInRect(X(), Y(), Width(), Height(), OUT(chan), FPGA_NUM_POINTS);
-            }
+            Color::SetCurrent(Color::Channel(chan));
+            DrawDataInRect(X(), Y(), Width(), Height(), OUT(chan), FPGA_NUM_POINTS);
         }
     }
 }
@@ -120,7 +111,7 @@ int Osci::Display::MemoryWindow::Width()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 int Osci::Display::MemoryWindow::Height()
 {
-    return Grid::Top() - 2;
+    return 17;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -132,5 +123,5 @@ int Osci::Display::MemoryWindow::X()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 int Osci::Display::MemoryWindow::Y()
 {
-    return 0;
+    return ::Display::HEIGHT - 19;
 }

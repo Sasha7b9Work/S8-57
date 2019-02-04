@@ -11,8 +11,6 @@ namespace Osci
         namespace HiPart
         {
             void Draw();
-            /// Записывает главные параметры в указанную позицию. Возвращает х-координату правого верхнего угла выведенного изображения
-            int DrawMainParameters(int x, int y);
         };
     };
 };

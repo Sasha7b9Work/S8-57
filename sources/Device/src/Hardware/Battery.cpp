@@ -136,7 +136,7 @@ void Hardware::Battery::Draw(int x, int y)
 
     Font::SetCurrent(Font::Type::_5);
 
-    Text(String("%1.2f Â %4.1f%%", akk, percents)).Draw(x + 4, y - 1);
+    Text(String("%1.2f Â %4.1f%%", akk, percents)).Draw(x + 4, y);
 
     Font::SetCurrent(Font::Type::_8);
 

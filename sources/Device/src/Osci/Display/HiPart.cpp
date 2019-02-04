@@ -38,6 +38,8 @@ static void WriteStringAndNumber(const char *text, int x, int y, int number);
 static void DrawTime(int x, int y);
 /// Нарисовать разделительные линии
 static void DrawSeparators(int x, int y);
+/// Записывает главные параметры в указанную позицию. Возвращает х-координату правого верхнего угла выведенного изображения
+static int DrawMainParameters(int x, int y);
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -69,8 +71,6 @@ void Osci::Display::HiPart::Draw()
 
     x += 42;
 
-    return;
-
     Font::SetCurrent(Font::Type::_8);
 
     if (MODE_WORK == ModeWork::Dir)
@@ -86,10 +86,10 @@ void Osci::Display::HiPart::Draw()
             std::strcat(mesFreq, Frequency(freq).ToString().CString());
         }
 
-        String(mesFreq).Draw(x + 3, y0 + 2, Color::FILL);
+        String(mesFreq).Draw(x + 3, y0 + 1, Color::FILL);
     }
 
-    DrawTime(x + 3, y0 + 11);
+    DrawTime(x + 3, y0 + 10);
 
     Font::SetCurrent(Font::Type::_UGO2);
 
@@ -111,7 +111,7 @@ void Osci::Display::HiPart::Draw()
         Char('\x13').Draw(x + 46, y0 + 11);
     }
 
-    Battery::Draw(x + 55, y0 + 1);
+    Battery::Draw(x + 55, y0);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -135,7 +135,7 @@ static void DrawSeparators(int x, int y)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-int Osci::Display::HiPart::DrawMainParameters(int _x, int _y)
+static int DrawMainParameters(int _x, int _y)
 {
     int x = _x;
     int y0 = _y;
