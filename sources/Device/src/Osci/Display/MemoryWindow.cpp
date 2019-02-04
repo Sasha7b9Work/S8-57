@@ -8,7 +8,7 @@
 #include "Settings/Settings.h"
 
 #include "Hardware/Battery.h"
-#include "Osci/Display/BottomPart.h"
+#include "Osci/Display/HiPart.h"
 
 
 using namespace Display::Primitives;
@@ -36,7 +36,7 @@ void Osci::Display::MemoryWindow::Draw()
 
     if (Menu::IsShown())
     {
-        BottomPart::DrawMainParameters(0, 1);
+        HiPart::DrawMainParameters(0, 1);
     }
     else
     {

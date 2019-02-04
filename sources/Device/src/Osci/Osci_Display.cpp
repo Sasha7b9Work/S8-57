@@ -4,8 +4,8 @@
 #include "Display/Painter.h"
 #include "Display/Symbols.h"
 #include "Osci/Osci_Display.h"
-#include "Osci/Display/BottomPart.h"
 #include "Osci/Display/HiPart.h"
+#include "Osci/Display/BottomPart.h"
 #include "Osci/Display/PainterData.h"
 #include "Osci/Measurements/Measures.h"
 #include "Osci/Measurements/Measurements_Table.h"
@@ -33,7 +33,7 @@ void Osci::Display::Update()
 
     Rectangle(Grid::Width(), Grid::Height()).Draw(Grid::Left(), Grid::Top(), Color::FILL);
 
-    BottomPart::Draw();
+    HiPart::Draw();
 
     RShift::DrawBoth();
 
@@ -41,7 +41,7 @@ void Osci::Display::Update()
 
     Osci::Measurements::Cursors::Cursor::Draw();
 
-    HiPart::Draw();
+    BottomPart::Draw();
 
     FrequencyCounter::Draw();
 

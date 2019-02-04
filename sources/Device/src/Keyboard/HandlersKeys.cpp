@@ -44,12 +44,8 @@ static void FuncRelease();
 static void FuncLong();
 /// Общий обработчик изменения параметра канала - масштаба или смещения
 static void OnChangeParameterChannel(pFuncVChI, Chan::E, int);
-/// Функция отрисовки параметров канала
-static void DrawParametersChannel();
 /// Общий обработчик изменения временных параметров
 static void OnChangeParameterTime(pFuncVI, int);
-/// Функция отрисовки временных параметров
-static void DrawParametersTime();
 
 static void OpenPage(const PageBase *page);
 
@@ -223,57 +219,11 @@ static void RangeMoreB()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void DrawParametersTime()
-{
-    int x = Grid::Left() + 5;
-    int y = Grid::Top() + 5;
-    int width = 126;
-    int height = 15;
-
-    //Painter::DrawBoundedRegion(x, y, width, height, Color::BACK, Color::FILL);
-    Region(width, height).DrawBounded(x, y, Color::BACK, Color::FILL);
-
-    String("Разв : %s", TBase(SET_TBASE).Name()).Draw(x + 3, y + 3, Color::FILL);
-
-    TShift shift(SET_TSHIFT);
-
-    shift.ToString(SET_TBASE).Draw(x + 64, y + 3);
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void DrawParametersChannel()
-{
-    int x = Grid::Left() + 5;
-    int y = Grid::Top() + 5;
-    int width = 126;
-    int height = 15;
-    Chan::E ch = drawingChan.value;
-
-    //Painter::DrawBoundedRegion(x, y, width, height, Color::BACK, Color::Channel(ch));
-    Region(width, height).DrawBounded(x, y, Color::BACK, Color::Channel(ch));
-
-    char buffer[50];
-    std::sprintf(buffer, "%s : %s %s",
-        drawingChan.Name(),
-        ModeCouple(SET_COUPLE(ch)).UGO(),
-        Range(SET_RANGE(ch)).Name()
-    );
-
-    //Painter::DrawBigText(x + 3, y + 3, 1, buffer, Color::Channel(ch));
-    Text(buffer).Draw(x + 3, y + 3, Color::Channel(ch));
-
-    //Painter::DrawBigText(x + 80, y + 3, 1, RShift::ToString(SET_RSHIFT(ch), SET_RANGE(ch), SET_DIVIDER(ch)).CString());
-    Text(RShift::ToString(SET_RSHIFT(ch), SET_RANGE(ch), SET_DIVIDER(ch)).CString()).Draw(x + 80, y + 3);
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void OnChangeParameterChannel(pFuncVChI func, Chan::E ch, int delta)
 {
     if (Device::State::InModeOsci())
     {
         drawingChan = Chan(ch);
-
-        Display::SetAddDrawFunction(DrawParametersChannel, 5000);
     }
 
     func(ch, delta);
@@ -282,11 +232,6 @@ static void OnChangeParameterChannel(pFuncVChI func, Chan::E ch, int delta)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void OnChangeParameterTime(pFuncVI func, int delta)
 {
-    if (Device::State::InModeOsci())
-    {
-        Display::SetAddDrawFunction(DrawParametersTime, 5000);
-    }
-
     func(delta);
 }
 
