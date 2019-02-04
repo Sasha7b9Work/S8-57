@@ -14,6 +14,7 @@
 #include "FlashDrive/FlashDrive.h"
 #include "Hardware/VCP.h"
 #include "Hardware/Battery.h"
+#include "Osci/Display/MemoryWindow.h"
 
 
 using namespace Display::Primitives;
@@ -23,11 +24,8 @@ using namespace Osci::Settings;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void Osci::Display::BottomPart::Draw()
+void Osci::Display::BottomPart::Draw(int x0, int y0)
 {
-    int x0 = 273;
-    int y0 = Grid::Bottom() + 1;
-
     Font::SetCurrent(Font::Type::_UGO2);
 
     // Флешка
@@ -49,4 +47,6 @@ void Osci::Display::BottomPart::Draw()
     }
 
     Battery::Draw(x0, y0);
+
+    VLine(14).Draw(Osci::Display::MemoryWindow::X() + Osci::Display::MemoryWindow::Width(), y0 + 1);
 }

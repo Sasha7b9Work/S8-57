@@ -41,7 +41,7 @@ void Osci::Display::Update()
 
     Osci::Measurements::Cursors::Cursor::Draw();
 
-    BottomPart::Draw();
+    BottomPart::Draw(273, Grid::Bottom() + 1);
 
     FrequencyCounter::Draw();
 

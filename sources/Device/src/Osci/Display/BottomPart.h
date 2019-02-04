@@ -7,7 +7,7 @@ namespace Osci
     {
         namespace BottomPart
         {
-            void Draw();
+            void Draw(int x, int y);
 
             void WriteCursors();
         };
