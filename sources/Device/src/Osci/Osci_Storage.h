@@ -29,6 +29,7 @@ namespace Osci
         void Create();
         const uint8 *DataA();
         const uint8 *DataB();
+        const uint8 *GetData(Chan::E ch);
         const DataSettings *Settings();
     protected:
         /// Указатель на данные первого канала
@@ -56,7 +57,7 @@ namespace Osci
         const uint8 *DataB();
         const DataSettings *Settings();
         /// Заполнить buffer данными для вывода на экран
-        void FillBufferForDraw(Buffer *buffer);
+        void FillBufferForDraw(Chan::E ch, Buffer *buffer);
     private:
         void Create();
         /// Время, в которое должна прийити точка numPoint
@@ -71,6 +72,12 @@ namespace Osci
         uint timeStart;
 
         Data data;
+        /// Заполнить буфер для отрисовки при включенном детекторе
+        void FillBufferForPeakDetEnabled(Chan::E ch, Buffer *buffer);
+        /// Заполнить буфер для отрисовки при выключенном детекторе
+        void FillBufferForPeakDetDisabled(Chan::E ch, Buffer *buffer);
+        /// Подготовить буфер к заполнению данными
+        void PrepareBuffer(Buffer *buffer, uint size);
     };
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

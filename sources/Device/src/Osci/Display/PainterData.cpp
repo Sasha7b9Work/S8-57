@@ -1,21 +1,13 @@
 #include "defines.h"
 #include "PainterData.h"
-#include "Data/Reader.h"
-#include "Display/Colors.h"
 #include "Display/Display_Primitives.h"
 #include "Display/Grid.h"
-#include "Display/Painter.h"
-#include "Display/PainterMem.h"
 #include "Display/Symbols.h"
-#include "Hardware/Timer.h"
+#include "Osci/Osci.h"
+#include "Osci/Display/MemoryWindow.h"
+#include "Osci/Measurements/Measurements.h"
 #include "Settings/Settings.h"
 #include "Utils/Math.h"
-#include "MemoryWindow.h"
-
-#include "Osci/Measurements/Measurements.h"
-#include "Utils/CommonFunctions.h"
-#include "Utils/Debug.h"
-#include "Utils/Buffer.h"
 
 
 using namespace Display::Primitives;
@@ -113,6 +105,11 @@ static void DrawChannel(Chan::E ch)
     if(SET_PEAKDET_DIS)
     {
         data += SHIFT_IN_MEMORY;
+    }
+
+    if (Osci::InModeP2P())
+    {
+
     }
 
     int center = (Grid::Bottom() - Grid::Top()) / 2 + Grid::Top();

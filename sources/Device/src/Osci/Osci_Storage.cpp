@@ -7,6 +7,8 @@
 
 
 #include "Hardware/Timer.h"
+#include "Utils/Buffer.h"
+#include "FPGA/FPGA_Types.h"
 
 
 /*
@@ -221,6 +223,12 @@ const uint8 *Data::DataB()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+const uint8 *Data::GetData(Chan::E ch)
+{
+    return (ch == Chan::A) ? dataA : dataB;
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 const uint8 *DataP2P::DataA()
 {
     return data.dataA;
@@ -310,7 +318,49 @@ void DataP2P::Logging() const
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void DataP2P::FillBufferForDraw(Buffer *buffer)
+void DataP2P::FillBufferForDraw(Chan::E ch, Buffer *buffer)
 {
+    if (PEAKDET_DISABLED(&data.settings))
+    {
+        FillBufferForPeakDetDisabled(ch, buffer);
+    }
+    else
+    {
+        FillBufferForPeakDetEnabled(ch, buffer);
+    }
+}
 
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void DataP2P::FillBufferForPeakDetDisabled(Chan::E ch, Buffer *buffer)
+{
+    static const uint NUM_BYTES = 281;
+
+    PrepareBuffer(buffer, NUM_BYTES);
+
+    if (readingPoints <= NUM_BYTES)
+    {
+        std::memcpy(buffer->data, data.GetData(ch), readingPoints);
+    }
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void DataP2P::FillBufferForPeakDetEnabled(Chan::E ch, Buffer *buffer)
+{
+    static const uint NUM_BYTES = 281 * 2;
+
+    PrepareBuffer(buffer, NUM_BYTES);
+
+    uint readingBytes = readingPoints * 2;
+
+    if (readingBytes <= NUM_BYTES)
+    {
+        std::memcpy(buffer->data, data.GetData(ch), readingBytes);
+    }
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void DataP2P::PrepareBuffer(Buffer *buffer, uint size)
+{
+    buffer->Realloc(size);
+    std::memset(buffer->data, FPGA::VALUE::NONE, size);
 }

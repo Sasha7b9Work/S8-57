@@ -36,6 +36,11 @@ void Buffer::Malloc(uint s)
     {
         data = (uint8 *)std::malloc(s);
         size = (data) ? s : 0U;
+
+        if (data == nullptr)
+        {
+            LOG_ERROR("Нет памяти");
+        }
     }
     else
     {
