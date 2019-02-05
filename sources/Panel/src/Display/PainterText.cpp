@@ -48,14 +48,3 @@ int Painter::DrawFormText(int x, int y, Color color, pString text, ...)
     va_end(args);
     return DrawText(x, y, buffer);
 }
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-int Painter::DrawStringInCenterRect(int eX, int eY, int width, int eHeight, const char *text, Color color)
-{
-    SetColor(color);
-    int lenght = Font::GetLengthText(text);
-    int height = Font::GetHeightSymbol(text[0]);
-    int x = eX + (width - lenght) / 2;
-    int y = eY + (eHeight - height) / 2;
-    return DrawText(x + 1, y, text);
-}

@@ -66,8 +66,6 @@ public:
     static int DrawFormatText(int x, int y, char *format, ...);
     /// Пишет строку в позиции x, y
     static int DrawFormText(int x, int y, Color color, pString text, ...);
-
-    static int DrawStringInCenterRect(int x, int y, int width, int height, const char *text, Color color = Color::NUMBER);
     /// Посылает строку изображения numString в устройство
     static void SendScreenToDevice();
 
