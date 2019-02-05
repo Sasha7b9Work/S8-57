@@ -36,7 +36,7 @@ void PageChannelA::OnChanged_Input(bool)
 
 }
 
-DEF_CHOICE_2( cChanA_Input,                                                                                                                                          //--- КАНАЛ 1 - Вход ---
+DEF_CHOICE_2( cInputA,                                                                                                                                               //--- КАНАЛ 1 - Вход ---
     "Вход", "Input",
     chanInputRu,
     chanInputEn,
@@ -51,7 +51,7 @@ void PageChannelA::OnChanged_Couple(bool)
     FPGA::Settings::ModeCouple::Set(Chan::A, SET_COUPLE_A);
 }
 
-DEF_CHOICE_3( cChanA_Couple,                                                                                                                                        //--- КАНАЛ 1 - Связь ---
+DEF_CHOICE_3( cCoupleA,                                                                                                                                             //--- КАНАЛ 1 - Связь ---
     "Связь", "Couple",
     chanCoupleRu,
     chanCoupleEn,
@@ -67,7 +67,7 @@ static void OnChanged_ChanA_Bandwidth(bool)
     FPGA::Settings::Bandwidth::Load(Chan::A);
 }
 
-DEF_CHOICE_2( cChanA_Bandwidth,                                                                                                                                    //--- КАНАЛ 1 - Полоса ---
+DEF_CHOICE_2( cBandwidthA,                                                                                                                                         //--- КАНАЛ 1 - Полоса ---
     "Полоса", "Bandwidth",
     "Задаёт полосу пропускания канала",
     "Sets the channel bandwidth",
@@ -83,9 +83,9 @@ DEF_PAGE_3( pChanA, // -V641                                                    
     "КАНАЛ 1", "CHANNEL 1",
     "Содержит настройки канала 1.",
     "Contains settings of the channel 1.",
-    &cChanA_Input,              ///< КАНАЛ 1 - Вход
-    &cChanA_Couple,             ///< КАНАЛ 1 - Связь
-    &cChanA_Bandwidth,          ///< КАНАЛ 1 - Полоса
+    &cInputA,              ///< КАНАЛ 1 - Вход
+    &cCoupleA,             ///< КАНАЛ 1 - Связь
+    &cBandwidthA,          ///< КАНАЛ 1 - Полоса
     Page::Name::ChannelA, Menu::pageMain, FuncActive, FuncPressPage, FuncDrawPage, FuncRegSetPage
 )
 
@@ -99,7 +99,7 @@ void PageChannelB::OnChanged_Input(bool active)
     }
 }
 
-DEF_CHOICE_2( cChanB_Input,                                                                                                                                          //--- КАНАЛ 2 - Вход ---
+DEF_CHOICE_2( cInputB,                                                                                                                                               //--- КАНАЛ 2 - Вход ---
     "Вход", "Input",
     chanInputRu,
     chanInputEn,
@@ -114,7 +114,7 @@ void PageChannelB::OnChanged_Couple(bool)
     FPGA::Settings::ModeCouple::Set(Chan::B, SET_COUPLE_B);
 }
 
-DEF_CHOICE_3( cChanB_Couple,                                                                                                                                        //--- КАНАЛ 2 - Связь ---
+DEF_CHOICE_3( cCoupleB,                                                                                                                                             //--- КАНАЛ 2 - Связь ---
     "Связь", "Couple",
     chanCoupleRu,
     chanCoupleEn,
@@ -130,7 +130,7 @@ static void OnChanged_BandwidthB(bool)
     FPGA::Settings::Bandwidth::Load(Chan::B);
 }
 
-DEF_CHOICE_2( cChanB_Bandwidth,                                                                                                                                    //--- КАНАЛ 2 - Полоса ---
+DEF_CHOICE_2( cBandwidthB,                                                                                                                                         //--- КАНАЛ 2 - Полоса ---
     "Полоса", "Bandwidth",
     "",
     "",
@@ -146,8 +146,8 @@ DEF_PAGE_3( pChanB, // -V641                                                    
     "КАНАЛ 2", "CHANNEL 2",
     "Содержит настройки канала 2.",
     "Contains settings of the channel 2.",
-    &cChanB_Input,       // КАНАЛ 2 - Вход
-    &cChanB_Couple,      // КАНАЛ 2 - Связь
-    &cChanB_Bandwidth,   // КАНАЛ 2 - Полоса
+    &cInputB,       // КАНАЛ 2 - Вход
+    &cCoupleB,      // КАНАЛ 2 - Связь
+    &cBandwidthB,   // КАНАЛ 2 - Полоса
     Page::Name::ChannelB, Menu::pageMain, FuncActive, FuncPressPage, FuncDrawPage, FuncRegSetPage
 )
