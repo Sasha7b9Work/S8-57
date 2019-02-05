@@ -56,7 +56,7 @@ pString Key::Name()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 pString TypePress::ToString()
 {
-    static const pString names[TypePress::Number] =
+    static const pString names[TypePress::Size] =
     {
         "Вниз",
         "Повтор",

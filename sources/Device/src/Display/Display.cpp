@@ -9,7 +9,7 @@
 #include "Recorder/Recorder_Display.h"
 #include <cstring>
 
-#include "Osci/Osci_Display.h"
+#include "Osci/Display/Osci_Display.h"
 #include "Utils/Debug.h"
 
 

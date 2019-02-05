@@ -3,6 +3,8 @@
 #include "DecoderDevice.h"
 #include "Menu/Menu.h"
 
+#include "Utils/Debug.h"
+
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 Decoder decoder;
@@ -49,7 +51,6 @@ void Decoder::Update()
         {
             RunStep(buffer[i]);
         }
-
         pointer = 0;
     }
 }
@@ -80,7 +81,6 @@ static void RunStep(uint8 data)
 
     if (step == 0)
     {
-
         if (data < Command::Number)
         {
             curFunc = commands[data].func;
