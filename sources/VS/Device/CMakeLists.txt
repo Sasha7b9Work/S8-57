@@ -13,7 +13,9 @@ include_directories("..\\..\\Device\\src\\"
                     "..\\..\\common\\_VS\\FatFS\\"
                     "..\\..\\common\\_VS\\HAL\\"
                     "..\\..\\common\\_VS\\USBD\\"
-                    "..\\..\\common\\_VS\\USBH\\")
+                    "..\\..\\common\\_VS\\USBH\\"
+                    "..\\..\\ThirdParty\\wxWidgets\\include\\"
+                    "..\\..\\ThirdParty\\wxWidgets\\generated\\lib\\vc_dll\\mswud\\")
                     
 add_definitions(-DSTM32F437xx -DOLD_RECORDER)
 
