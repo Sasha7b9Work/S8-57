@@ -65,7 +65,6 @@ static void DrawLongString(int x, int y, const char *string, bool hightlight)
     {
         Color::SetCurrent(color);
 
-        //Painter::DrawTextWithLimitation(x, y, string, x, y, WIDTH_COL, 10);
 		Text(string).DrawWithLimitation(x, y, x, y, WIDTH_COL, 10);
 
         String("...").Draw(x + WIDTH_COL + 3, y);
@@ -78,7 +77,6 @@ static void DrawHat(int x, int y, const char *string, int num1, int num2)
     Region(WIDTH_COL + 9, RECS_ON_PAGE * 9 + 11).Fill(x - 1, y, Color::BACK);
     String(string, num1, num2).Draw(x + 60, y, Color::FILL);
 
-	//Painter::DrawHLine(y + 10, x + 2, x + 140);
 	HLine(138).Draw(x + 2, y + 10);
 }
 
@@ -174,10 +172,7 @@ void FileManager::Draw() //-V2506
         FDrive::GetNumDirsAndFiles(currentDir, &numDirs, &numFiles);
         DrawNameCurrentDir(left, top + 2);
 
-        //Painter::DrawVLine(left2col, top + 16, 239, Color::FILL);
         VLine(223 - top).Draw(left2col, top + 16, Color::FILL);
-
-        //Painter::DrawHLine(top + 15, 0, width);
 		HLine(width).Draw(0, top + 15);
     }
 

@@ -106,10 +106,7 @@ DEF_CHOICE_5( cPoints,                                                          
 static void Draw_Drive_Manager_Tab(int x, int y)
 {
     Font::SetCurrent(Font::Type::_UGO2);
-
-    //Painter::Draw4SymbolsInRect(x + 2, y + 1, SYMBOL_TAB);
     Char(SYMBOL_TAB).Draw4SymbolsInRect(x + 2, y + 1);
-
     Font::SetCurrent(Font::Type::_8);
 }
 
@@ -124,10 +121,7 @@ DEF_SMALL_BUTTON( bDrive_Manager_Tab,                                           
 static void Draw_Drive_Manager_LevelUp(int x, int y)
 {
     Font::SetCurrent(Font::Type::_UGO2);
-
-    //Painter::Draw4SymbolsInRect(x + 2, y + 1, '\x48');
     Char('\x48').Draw4SymbolsInRect(x + 2, y + 1);
-
     Font::SetCurrent(Font::Type::_8);
 }
 
@@ -142,10 +136,7 @@ DEF_SMALL_BUTTON( bDrive_Manager_LevelUp,                                       
 static void Draw_Drive_Manager_LevelDown(int x, int y)
 {
     Font::SetCurrent(Font::Type::_UGO2);
-
-    //Painter::Draw4SymbolsInRect(x + 2, y + 2, '\x4a');
     Char('\x4a').Draw4SymbolsInRect(x + 2, y + 2);
-
     Font::SetCurrent(Font::Type::_8);
 }
 
@@ -228,10 +219,7 @@ static void OnPress_Drive_Mask_Delete()
 static void Draw_Delete(int x, int y)
 {
     Font::SetCurrent(Font::Type::_UGO2);
-
-    //Painter::Draw4SymbolsInRect(x + 2, y + 1, SYMBOL_DELETE);
     Char(SYMBOL_DELETE).Draw4SymbolsInRect(x + 2, y + 1);
-
     Font::SetCurrent(Font::Type::_8);
 }
 
@@ -262,10 +250,7 @@ static void OnPress_Drive_Mask_Backspace()
 static void Draw_Backspace(int x, int y)
 {
     Font::SetCurrent(Font::Type::_UGO2);
-
-    //Painter::Draw4SymbolsInRect(x + 2, y + 1, SYMBOL_BACKSPACE);
     Char(SYMBOL_BACKSPACE).Draw(x + 2, y + 1);
-
     Font::SetCurrent(Font::Type::_8);
 }
 
@@ -441,18 +426,14 @@ static void DrawFileMask(int x, int y)
     {
         if (*ch >= 32)
         {
-            //x = Painter::DrawChar(x, y, *ch);
             Char(*ch).Draw(x, y);
         }
         else
         {
             if (*ch == 0x07)
             {
-                //x = Painter::DrawChar(x, y, '%');
                 x = Char('%').Draw(x, y);
-                //x = Painter::DrawChar(x, y, (char)(0x30 | *(ch + 1)));
                 x = Char((char)(0x30 | *(ch + 1))).Draw(x, y);
-                //x = Painter::DrawChar(x, y, 'N');
                 x = Char('N').Draw(x, y);
                 ch++;
             }

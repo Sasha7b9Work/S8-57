@@ -306,7 +306,6 @@ static void FuncOnWait()
     Region(width, height).Fill(x, y, Color::BACK);
     Rectangle(width, height).Draw(x, y, Color::FILL);
 
-    //Painter::DrawStringInCenterRect(x, y, width, height - 20, textWait);
     Text(textWait).DrawInCenterRect(x, y, width, height - 20);
 
     char buf[100];
@@ -317,7 +316,6 @@ static void FuncOnWait()
         std::strcat(buf, "."); //-V2513
     }
 
-    //Painter::DrawStringInCenterRect(x, y + 20, width, height - 20, buf);
     Text(buf).DrawInCenterRect(x, y + 20, width, height - 20);
 
     Painter::EndScene();

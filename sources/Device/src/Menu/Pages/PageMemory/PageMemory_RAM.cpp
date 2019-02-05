@@ -52,10 +52,7 @@ static void OnPress_Last_Prev()
 static void Draw_Last_Prev(int x, int y)
 {
     Font::SetCurrent(Font::Type::_UGO2);
-
-    //Painter::Draw4SymbolsInRect(x + 2, y + 2, SYMBOL_BACKSPACE);
     Char(SYMBOL_BACKSPACE).Draw(x + 2, y + 2);
-
     Font::SetCurrent(Font::Type::_8);
 }
 
@@ -81,10 +78,7 @@ static void OnPress_Last_SaveToROM()
 static void Draw_Last_SaveToROM(int x, int y)
 {
     Font::SetCurrent(Font::Type::_UGO2);
-
-    //Painter::Draw4SymbolsInRect(x + 2, y + 1, SYMBOL_ROM);
     Char(SYMBOL_ROM).Draw4SymbolsInRect(x + 2, y + 1);
-
     Font::SetCurrent(Font::Type::_8);
 }
 
@@ -107,10 +101,7 @@ static void Draw_Last_SaveToDrive(int x, int y)
     if (FDrive::IsConnected())
     {
         Font::SetCurrent(Font::Type::_UGO2);
-
-        //Painter::Draw4SymbolsInRect(x + 2, y + 1, SYMBOL_FLASH_DRIVE_BIG);
         Char(SYMBOL_FLASH_DRIVE_BIG).Draw4SymbolsInRect(x + 2, y + 1);
-
         Font::SetCurrent(Font::Type::_8);
     }
 }

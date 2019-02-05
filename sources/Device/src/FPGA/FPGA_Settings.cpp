@@ -258,12 +258,10 @@ void RShift::Draw(Chan::E ch)
 
     int y = (Grid::Bottom() - Grid::Top()) / 2 + Grid::Top() - delta;
 
-    //Painter::DrawChar(Grid::Left() - 8, y - 4, (char)SYMBOL_RSHIFT_NORMAL);
     Char((char)SYMBOL_RSHIFT_NORMAL).Draw(Grid::Left() - 8, y - 4);
 
     Font::SetCurrent(Font::Type::_5);
 
-    //Painter::DrawChar(Grid::Left() - 7, y - 6, Chan(ch).IsA() ? '1' : '2', Color::BACK);
     Char(Chan(ch).IsA() ? '1' : '2').Draw(Grid::Left() - 7, y - 6, Color::BACK);
 
     Font::SetCurrent(Font::Type::_8);
@@ -293,7 +291,6 @@ void Trig::DrawOnGrid()
         int x = (Grid::Right() - Grid::Left()) / 2 + Grid::Left() - width / 2;
         int y = Grid::Bottom() - height - 20;
 
-        //Painter::FillBoundedRegion(x, y, width, height, Color::BACK, Color::FILL);
         Region(width, height).DrawBounded(x, y, Color::BACK, Color::FILL);
 
         float trigLevVal = FPGA::Math::RShift2Abs(SET_TRIGLEV_SOURCE, SET_RANGE(TRIG_SOURCE)) * Divider(SET_DIVIDER(TRIG_SOURCE)).ToAbs();

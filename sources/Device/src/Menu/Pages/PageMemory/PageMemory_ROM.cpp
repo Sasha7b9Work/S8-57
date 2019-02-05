@@ -39,20 +39,14 @@ static void OnPress_Internal_ShowAlways()
 static void Draw_Internal_ShowAlways_Yes(int x, int y)
 {
     Font::SetCurrent(Font::Type::_UGO2);
-
-    //Painter::Draw4SymbolsInRect(x + 2, y + 1, '\x66');
     Char('\x66').Draw4SymbolsInRect(x + 2, y + 1);
-
     Font::SetCurrent(Font::Type::_8);
 }
 
 static void Draw_Internal_ShowAlways_No(int x, int y)
 {
     Font::SetCurrent(Font::Type::_UGO2);
-
-    //Painter::Draw4SymbolsInRect(x + 2, y + 1, '\x68');
     Char('\x68').Draw4SymbolsInRect(x + 2, y + 1);
-
     Font::SetCurrent(Font::Type::_8);
 }
 
@@ -88,10 +82,7 @@ static void OnPress_Internal_ModeShow()
 static void Draw_Internal_ModeShow_Direct(int x, int y)
 {
     Font::SetCurrent(Font::Type::_UGO2);
-
-    //Painter::Draw4SymbolsInRect(x + 2, y + 1, '\x6a');
     Char('\x6a').Draw4SymbolsInRect(x + 2, y + 1);
-
     Font::SetCurrent(Font::Type::_8);
 }
 
@@ -99,19 +90,14 @@ static void Draw_Internal_ModeShow_Direct(int x, int y)
 static void Draw_Internal_ModeShow_Saved(int x, int y)
 {
     Font::SetCurrent(Font::Type::_UGO2);
-
-    //Painter::Draw4SymbolsInRect(x + 2, y + 1, '\x6c');
     Char('\x6c').Draw4SymbolsInRect(x + 2, y + 1);
-
     Font::SetCurrent(Font::Type::_8);
 }
 
 static void Draw_Internal_ModeShow_Both(int x, int y)
 {
     String("наю").Draw(x + 1, y + 5);
-    //Painter::DrawVLine(x + 1, y + 2, y + 14, Color::BACK);
     VLine(12).Draw(x + 1, y + 2, Color::BACK);
-    //Painter::DrawVLine(x + 2, y + 6, y + 11, Color::FILL);
     VLine(5).Draw(x + 2, y + 6, Color::FILL);
 }
 
@@ -152,10 +138,7 @@ static void OnPress_Internal_Delete()
 static void Draw_Internal_Delete(int x, int y)
 {
     Font::SetCurrent(Font::Type::_UGO2);
-
-    //Painter::Draw4SymbolsInRect(x + 2, y + 1, SYMBOL_DELETE);
     Char(SYMBOL_DELETE).Draw(x + 2, y + 1);
-
     Font::SetCurrent(Font::Type::_8);
 }
 

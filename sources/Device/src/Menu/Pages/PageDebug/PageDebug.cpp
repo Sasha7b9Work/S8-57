@@ -625,7 +625,6 @@ static void Draw_SerialNumber_Change(int x, int y)
 {
     Font::SetCurrent(Font::Type::_UGO2);
 
-    //Painter::Draw4SymbolsInRect(x + 2, y + 2, SYMBOL_TAB);
     Char(SYMBOL_TAB).Draw4SymbolsInRect(x + 2, y + 2);
 
     Font::SetCurrent(Font::Type::_8);

@@ -221,7 +221,6 @@ void Grid::DrawGridSpectrum()
         {
             int y = MathTop() + (int)(i * scale);
 
-            //Painter::DrawHLine(y, Left(), Left() + 256, Color::GRID);
 			HLine(256).Draw(Left(), y, Color::GRID);
 
             if (!Menu::IsMinimize())
@@ -244,7 +243,6 @@ void Grid::DrawGridSpectrum()
         {
             int y = MathTop() + (int)(i * scale);
 
-            //Painter::DrawHLine(y, Left(), Left() + 256, Color::GRID);
 			HLine(256).Draw(Left(), y, Color::GRID);
 
             if (!Menu::IsMinimize())
@@ -331,7 +329,6 @@ static void Grid::DrawGridType2(int left, int top, int right, int bottom, int de
     }
     mas[10] = (uint8)(bottom - 1);
 
-    //Painter::DrawMultiHPointLine(11, left + stepX, mas, stepX, DeltaHforLineGrid(), Color::GRID);
     MultiHPointLine(11, mas, stepX, DeltaHforLineGrid()).Draw(left + stepX, Color::GRID);
 }
 

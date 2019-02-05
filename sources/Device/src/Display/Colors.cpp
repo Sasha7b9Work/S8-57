@@ -283,7 +283,6 @@ void ColorType::CalcSteps()
 void ColorType::SetColor()
 {
     COLOR(color.value) = MAKE_COLOR((int)red, (int)green, (int)blue);
-    //Painter::SetColorValue(color, COLOR(color.value));
     color.SetValue(COLOR(color.value));
 }
 

@@ -123,14 +123,11 @@ static void DrawVertical(int x, int yTearing)
     x += Grid::Left();
     if (yTearing == -1)
     {
-        //Painter::DrawDashedVLine(x, Grid::Top() + 2, Grid::ChannelBottom() - 1, 1, 1, 0);
         DashedVLine(Grid::ChannelBottom() - Grid::Top() - 3, 1, 1, 0).Draw(x, Grid::Top() + 2);
     }
     else
     {
-        //Painter::DrawDashedVLine(x, Grid::Top() + 2, yTearing - 2, 1, 1, 0);
         DashedVLine(yTearing - Grid::Top() - 4, 1, 1, 0).Draw(x, Grid::Top() + 2);
-        //Painter::DrawDashedVLine(x, yTearing + 2, Grid::ChannelBottom() - 1, 1, 1, 0);
         DashedVLine(Grid::ChannelBottom() - yTearing - 3, 1, 1, 0).Draw(x, yTearing + 2);
     }
     Rectangle(2, 2).Draw(x - 1, Grid::Top() - 1);
@@ -143,14 +140,11 @@ static void DrawHorizontal(int y, int xTearing)
     y += Grid::Top();
     if (xTearing == -1)
     {
-        //Painter::DrawDashedHLine(y, Grid::Left() + 2, Grid::Right() - 1, 1, 1, 0);
         DashedHLine(Grid::Right() - Grid::Left() - 3, 1, 1, 0).Draw(Grid::Left() + 2, y);
     }
     else
     {
-        //Painter::DrawDashedHLine(y, Grid::Left() + 2, xTearing - 2, 1, 1, 0);
         DashedHLine(xTearing - Grid::Left() - 4, 1, 1, 0).Draw(Grid::Left() + 2, y);
-        //Painter::DrawDashedHLine(y, xTearing + 2, Grid::Right() - 1, 1, 1, 0);
         DashedHLine(Grid::Right() - xTearing - 3, 1, 1, 0).Draw(xTearing + 2, y);
     }
     Rectangle(2, 2).Draw(Grid::Left() - 1, y - 1);

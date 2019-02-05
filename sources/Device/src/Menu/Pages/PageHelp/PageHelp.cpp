@@ -18,10 +18,7 @@ extern const PageBase pHelp;
 static void DrawSB_Help_ParagraphEnter(int x, int y)
 {
     Font::SetCurrent(Font::Type::_UGO2);
-
-    //Painter::Draw4SymbolsInRect(x + 2, y + 2, '\x4a');
     Char('\x4a').Draw4SymbolsInRect(x + 2, y + 2);
-
     Font::SetCurrent(Font::Type::_8);
 }
 
@@ -29,10 +26,7 @@ static void DrawSB_Help_ParagraphEnter(int x, int y)
 static void DrawSB_Help_ParagraphLeave(int x, int y)
 {
     Font::SetCurrent(Font::Type::_UGO2);
-
-    //Painter::Draw4SymbolsInRect(x + 2, y + 1, '\x48');
     Char('\x48').Draw4SymbolsInRect(x + 2, y + 1);
-
     Font::SetCurrent(Font::Type::_8);
 }
 
@@ -40,10 +34,7 @@ static void DrawSB_Help_ParagraphLeave(int x, int y)
 static void DrawSB_Help_ParagraphPrev(int x, int y)
 {
     Font::SetCurrent(Font::Type::_UGO2);
-
-    //Painter::Draw4SymbolsInRect(x + 2, y + 5, '\x4c');
     Char('\x4c').Draw4SymbolsInRect(x + 2, y + 5);
-
     Font::SetCurrent(Font::Type::_8);
 }
 

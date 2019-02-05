@@ -281,13 +281,8 @@ static void Draw_Function_Screen_Disable(int x, int y)
 static void Draw_Function_Screen_Separate(int x, int y)
 {
     Rectangle(13, 9).Draw(x + 3, y + 5);
-
 	HLine line(13);
-
-    //Painter::DrawHLine(y + 9, x + 3, x + 16);
 	line.Draw(x + 3, y + 9);
-
-    //Painter::DrawHLine(y + 10, x + 3, x + 16);
 	line.Draw(x + 3, y + 10);
 }
 
@@ -328,20 +323,14 @@ static void OnPress_Function_Type()
 
 static void Draw_Function_Type_Sum(int x, int y)
 {
-    //Painter::DrawHLine(y + 9, x + 4, x + 14);   // -V112
     HLine(10).Draw(x + 4, y + 9);
-
-    //Painter::DrawVLine(x + 9, y + 4, y + 14);   // -V112
     VLine(10).Draw(x + 9, y + 4);
 }
 
 static void Draw_Function_Type_Mul(int x, int y)
 {
     Font::SetCurrent(Font::Type::_UGO2);
-
-    //Painter::Draw4SymbolsInRect(x + 4, y + 3, SYMBOL_MATH_FUNC_MUL);
     Char(SYMBOL_MATH_FUNC_MUL).Draw4SymbolsInRect(x + 4, y + 3);
-
     Font::SetCurrent(Font::Type::_8);
 }
 
@@ -368,7 +357,6 @@ static void OnPress_Function_ModeRegSet()
 
 static void Draw_Function_ModeRegSet_Range(int x, int y)
 {
-    //Painter::DrawChar(x + 7, y + 5, LANG_RU ? 'M' : 'S');
     Char(LANG_RU ? 'M' : 'S').Draw(x + 7, y + 5);
 }
 
@@ -401,7 +389,6 @@ static void OnPress_Function_RangeA()
 
 static void Draw_Function_RangeA(int x, int y)
 {
-    //Painter::DrawChar(x + 8, y + 5, '1');
     Char('1').Draw(x + 8, y + 5);
 }
 
@@ -421,7 +408,6 @@ static void OnPress_Function_RangeB()
 
 static void Draw_Function_RangeB(int x, int y)
 {
-    //Painter::DrawChar(x + 8, y + 5, '2');
     Char('2').Draw(x + 8, y + 5);
 }
 
@@ -655,13 +641,8 @@ static void Information_Draw()
 
     dY = -10;
 
-    //Painter::DrawStringInCenterRect(0, 190 + dY, 320, 20, "Для получения помощи нажмите и удерживайте кнопку ПОМОЩЬ");
     Text("Для получения помощи нажмите и удерживайте кнопку ПОМОЩЬ").DrawInCenterRect(0, 190 + dY, 320, 20);
-
-    //Painter::DrawStringInCenterRect(0, 205 + dY, 320, 20, "Отдел маркетинга: тел./факс. 8-017-262-57-50");
     Text("Отдел маркетинга: тел./факс. 8-017-262-57-50").DrawInCenterRect(0, 205 + dY, 320, 20);
-
-    //Painter::DrawStringInCenterRect(0, 220 + dY, 320, 20, "Разработчики: e-mail: mnipi-24(@)tut.by, тел. 8-017-262-57-51");
     Text("Разработчики: e-mail: mnipi-24(@)tut.by, тел. 8-017-262-57-51").DrawInCenterRect(0, 220 + dY, 320, 20);
 
     Menu::Draw();

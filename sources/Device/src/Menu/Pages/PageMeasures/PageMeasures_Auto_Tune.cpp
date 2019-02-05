@@ -28,10 +28,7 @@ const PageBase *PageMeasures::PageAuto::PageTune::pointer = &pageTune;
 static void Draw_Tune_Markers(int x, int y)
 {
     Font::SetCurrent(Font::Type::_UGO2);
-
-    //Painter::Draw4SymbolsInRect(x + 2, y + 2, '\x60');
     Char('\x60').Draw4SymbolsInRect(x + 2, y + 2);
-
     Font::SetCurrent(Font::Type::_8);
 }
 
