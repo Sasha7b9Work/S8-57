@@ -38,7 +38,17 @@ source_group(_VS\\HAL                  REGULAR_EXPRESSION "../common/_VS/HAL/*.*
 source_group(_VS\\HAL\\Legacy          REGULAR_EXPRESSION "../common/_VS/HAL/Legacy/*.*")
 source_group(_VS\\USBD                 REGULAR_EXPRESSION "../common/_VS/USBD/*.*")
 source_group(_VS\\USBH                 REGULAR_EXPRESSION "../common/_VS/USBH/*.*")
-source_group(src                       REGULAR_EXPRESSION "src/*.*")
+source_group(src                       FILES src/Application.cpp
+                                             src/Application.h
+                                             src/main_win.cpp
+                                             ../../Device/src/defines.cpp
+                                             ../../Device/src/defines.h
+                                             ../../Device/src/device.cpp
+                                             ../../Device/src/device.h
+                                             ../../Device/src/log.cpp
+                                             ../../Device/src/log.h
+                                             ../../Device/src/tables.cpp
+                                             ../../Device/src/tables.h)
 source_group(Data                      REGULAR_EXPRESSION "src/Data/*.*")
 source_group(Display                   REGULAR_EXPRESSION "src/Display/*.*")
 source_group(Display\\Font             REGULAR_EXPRESSION "src/Display/Font/*.*")
@@ -106,7 +116,18 @@ file(GLOB SOURCES   ../../common/_VS/*
                     ../../Device/src/Settings/*
                     ../../Device/src/Tester/*
                     ../../Device/src/Utils/*
-                    ../../Device/src/*.*)
+                    
+                    src/Application.cpp
+                    src/Application.h
+                    src/main_win.cpp
+                    ../../Device/src/defines.cpp
+                    ../../Device/src/defines.h
+                    ../../Device/src/device.cpp
+                    ../../Device/src/device.h
+                    ../../Device/src/log.cpp
+                    ../../Device/src/log.h
+                    ../../Device/src/tables.cpp
+                    ../../Device/src/tables.h)
 
 add_executable(Device56 ${SOURCES})
 

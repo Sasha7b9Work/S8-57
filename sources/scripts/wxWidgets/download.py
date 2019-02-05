@@ -105,7 +105,7 @@ url = site + 'downloads/'
 full_name = GetNameFile(url)
 
 # Создаём временный каталог для скачиваемых файлов, если ещё не создан
-temp_dir = '..\\temp\\wxWidgets\\'
+temp_dir = '..\\..\\ThirdParty\\wxWidgets\\'
 
 if not os.path.exists(temp_dir):
 	os.makedirs(temp_dir)

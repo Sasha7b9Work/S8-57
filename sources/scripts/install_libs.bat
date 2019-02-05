@@ -1,4 +1,4 @@
-rmdir temp /s /q
+rmdir ../ThirdParty/ /s /q
 
 @echo Installation SDL2
 

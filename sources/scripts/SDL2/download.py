@@ -101,7 +101,7 @@ file_name = GetNameFile(url)
 remote_name = site + file_name
 
 # Создаём временный каталог для скачиваемых файлов, если ещё не создан
-temp_dir = '..\\temp\\SDL2\\'
+temp_dir = '..\\..\\ThirdParty\\SDL2\\'
 if not os.path.exists(temp_dir):
 	os.makedirs(temp_dir)
 

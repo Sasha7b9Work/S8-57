@@ -9,6 +9,7 @@ JLinkSettings.ini
 archive.zip
 out.txt
 
+sources/ThirdParty/*
 sources/generated/*
 sources/scripts/temp/*
 

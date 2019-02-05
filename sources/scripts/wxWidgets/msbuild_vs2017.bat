@@ -1,5 +1,5 @@
 @echo off
-MSBuild.exe ..\temp\wxWidgets\generated\wxWidgets.sln -t:rebuild
+MSBuild.exe ..\..\ThirdParty\wxWidgets\generated\wxWidgets.sln -t:rebuild
 set BUILD_STATUS=%ERRORLEVEL%
 if %BUILD_STATUS%==0 goto Success
 

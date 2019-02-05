@@ -1458,10 +1458,17 @@ static void CountedToCurrentSettings()
 static void CountedToCurrentSettings(Chan::E ch, uint numBytes)
 {
     LimitationData(ch, numBytes);
+    CountedToCurrentRShift(ch, numBytes);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void LimitationData(Chan::E /*ch*/, uint /*numBytes*/)
+{
+
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+static void CountedToCurrentRShift(Chan::E /*ch*/, uint /*numBytes*/)
 {
 
 }
