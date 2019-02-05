@@ -176,13 +176,10 @@ void Grid::DrawGridSignal(int left, int top, int width, int height)
 		HLine(left - 1).Draw(1, top);
 		HLine(Display::WIDTH - right - 4).Draw(right + 2, top);
 
-        if (!Menu::IsMinimize() || !Menu::IsShown())
-        {
-            VLine line(bottom - top - 4);
+        VLine line(bottom - top - 4);
 
-            line.Draw(1, top + 2);
-            line.Draw(318, top + 2);
-        }
+        line.Draw(1, top + 2);
+        line.Draw(318, top + 2);
     }
 
     float deltaX = DeltaX() * (float)width / width;

@@ -90,18 +90,18 @@ void Osci::Display::DrawCursorTrigLevel()
 
     Font::SetCurrent(Font::Type::_8);
 
-    DrawScaleLine(::Display::WIDTH - 11, true);
-    int left = Grid::Right() + 9;
-    int height = Grid::Height() - 2 * DELTA;
-    int shiftFullMin = RShift::MIN + Trig::MIN;
-    int shiftFullMax = RShift::MAX + Trig::MAX;
-    scale = (float)height / (shiftFullMax - shiftFullMin);
-    int shiftFull = SET_TRIGLEV_SOURCE + SET_RSHIFT(ch);
-    int yFull = Grid::Top() + DELTA + height - (int)(scale * (shiftFull - RShift::MIN - Trig::MIN) + 4);
-    Region(4, 6).Fill(left + 2, yFull + 1, Color::Trig());
-    Font::SetCurrent(Font::Type::_5);
-    Char(symbols[(uint8)TRIG_SOURCE]).Draw(left + 3, yFull - 2, Color::BACK);
-    Font::SetCurrent(Font::Type::_8);
+    //DrawScaleLine(::Display::WIDTH - 11, true);
+    //int left = Grid::Right() + 9;
+    //int height = Grid::Height() - 2 * DELTA;
+    //int shiftFullMin = RShift::MIN + Trig::MIN;
+    //int shiftFullMax = RShift::MAX + Trig::MAX;
+    //scale = (float)height / (shiftFullMax - shiftFullMin);
+    //int shiftFull = SET_TRIGLEV_SOURCE + SET_RSHIFT(ch);
+    //int yFull = Grid::Top() + DELTA + height - (int)(scale * (shiftFull - RShift::MIN - Trig::MIN) + 4);
+    //Region(4, 6).Fill(left + 2, yFull + 1, Color::Trig());
+    //Font::SetCurrent(Font::Type::_5);
+    //Char(symbols[(uint8)TRIG_SOURCE]).Draw(left + 3, yFull - 2, Color::BACK);
+    //Font::SetCurrent(Font::Type::_8);
 
     Trig::DrawOnGrid();
 }
