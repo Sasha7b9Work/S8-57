@@ -53,8 +53,8 @@ void Osci::Display::MemoryWindow::Draw()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void DrawDataInRect(int x, int y, int width, int height, const uint8 *data, uint length)
 {
-    int numIntervals = width + 1;            // Количество интервалов, в которых будем рисовать наш сигнал - фактически, количество вертикальных линий
-    float pointsInInterval = (float)length / numIntervals;   // Количество точек, рисуемых в одном интервале.
+    int numIntervals = width + 1;                               // Количество интервалов, в которых будем рисовать наш сигнал - фактически, количество вертикальных линий
+    float pointsInInterval = (float)length / numIntervals;      // Количество точек, рисуемых в одном интервале.
 
     float stepY = (float)height / (float)(VALUE::MAX - VALUE::MIN);
 
@@ -83,7 +83,6 @@ static void DrawDataInRect(int x, int y, int width, int height, const uint8 *dat
         int deltaMIN = (int)(min * stepY + 0.5F);
         int deltaMAX = (int)(max * stepY + 0.5F);
 
-        //Painter::DrawVLine(x + i, y0 - deltaMIN, y0 - deltaMAX);
         VLine(deltaMIN - deltaMAX).Draw(x + i, y0 - deltaMIN);
     }
 }

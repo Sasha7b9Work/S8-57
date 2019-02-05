@@ -18,17 +18,20 @@ const char *Debug::file = 0;
 int   Debug::line = 0;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void Debug::StartProfilingMS()
+void Debug::_StartProfilingMS()
 {
     timeStartMS = TIME_MS;
     timePrevMS = TIME_MS; //-V656
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Debug::PointProfilingMS(char *_file, int _line)
+uint Debug::_PointProfilingMS(const char *_file, int _line)
 {
-    LOG_WRITE("%s %d %d", _file, _line, TIME_MS - timePrevMS);
+    uint delta = TIME_MS - timePrevMS;
+    LOG_WRITE("%s %d %d", _file, _line, delta);
     timePrevMS = TIME_MS;
+
+    return delta;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

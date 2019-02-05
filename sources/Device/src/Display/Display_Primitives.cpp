@@ -8,6 +8,8 @@
 #include "Utils/Math.h"
 #include <cstring>
 
+#include "Hardware/Timer.h"
+
 
 using HAL::FSMC;
 
@@ -86,14 +88,30 @@ void Display::Primitives::Point::Draw(int x, int y, Color color)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Display::Primitives::Line::Line(int _x0, int _y0, int _x1, int _y1) : x0(_x0), y0(_y0), x1(_x1), y1(_y1)
 {
+    if (x0 < 0)
+    {
+        x0 = 0;
+    }
+    if (y0 < 0)
+    {
+        y0 = 0;
+    }
+    if (x1 < 0)
+    {
+        x1 = 0;
+    }
+    if (y1 < 0)
+    {
+        y1 = 0;
+    }
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Display::Primitives::Line::Draw(Color color)
 {
-	Color::SetCurrent(color);
-	uint8 buffer[7] = { Command::Paint_DrawLine, (uint8)x0, (uint8)(x0 >> 8), (uint8)y0, (uint8)x1, (uint8)(x1 >> 8), (uint8)y1 };
-	FSMC::WriteToPanel(buffer, 7);
+    Color::SetCurrent(color);
+    uint8 buffer[7] = { Command::Paint_DrawLine, (uint8)x0, (uint8)(x0 >> 8), (uint8)y0, (uint8)x1, (uint8)(x1 >> 8), (uint8)y1 };
+    FSMC::WriteToPanel(buffer, 7);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

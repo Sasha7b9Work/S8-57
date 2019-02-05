@@ -15,6 +15,8 @@
 #include <cstdio>
 #include <cstring>
 
+#include "Utils/Debug.h"
+
 
 using namespace Display::Primitives;
 using namespace FPGA;

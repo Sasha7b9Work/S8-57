@@ -10,7 +10,6 @@
 #include <cstring>
 
 #include "Osci/Display/Osci_Display.h"
-#include "Utils/Debug.h"
 
 
 using namespace Display::Primitives;

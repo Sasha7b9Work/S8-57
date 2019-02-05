@@ -10,6 +10,7 @@
 #include "Utils/Math.h"
 
 #include "Utils/Buffer.h"
+#include "Utils/Debug.h"
 
 
 using namespace Display::Primitives;
@@ -59,7 +60,9 @@ void Osci::Display::PainterData::DrawData()
 
         func[MODE_WORK]();
     }
+
     DrawTPos(0, 0);
+
     DrawTShift(0, 0, 0);
 }
 
@@ -76,7 +79,6 @@ static void DrawCurrent()
         DrawChannel(Chan::A);
         DrawChannel(Chan::B);
     }
-
     Osci::Display::MemoryWindow::Draw();
 }
 
