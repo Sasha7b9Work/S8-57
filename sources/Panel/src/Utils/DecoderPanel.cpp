@@ -468,7 +468,13 @@ static bool DrawText(uint8 data)
         case 0:                             break;
         case 1:     x = data;               break;
         case 2:     x += (int)data << 8;    break;
-        case 3:     y = data;               break;
+        case 3:
+            y = data;
+            if (y > 239)
+            {
+                y -= 256;
+            }
+            break;
         case 4:
             numSymbols = data;
             readingSymbols = 0;

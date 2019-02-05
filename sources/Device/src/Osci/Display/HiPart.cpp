@@ -63,8 +63,6 @@ void Osci::Display::HiPart::Draw()
     int y2 = y1 + 6;
     Font::SetCurrent(Font::Type::_5);
 
-    Color::SetCurrent(Color::FILL);
-
     if (MODE_WORK == ModeWork::Dir)
     {
         WriteStringAndNumber(LANG_RU ? "накопл" : "accum", x, y0 - 3, NUM_ACCUM);
