@@ -5,8 +5,6 @@
 #include "Display/Grid.h"
 #include "Settings/Settings.h"
 
-#include "Utils/Debug.h"
-
 
 using namespace Display::Primitives;
 using namespace Osci::Measurements::Settings;
@@ -276,8 +274,6 @@ static float Grid::DeltaX()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void Grid::DrawGridType1(int left, int top, int right, int bottom, float centerX, float centerY, float deltaX, float deltaY, float stepX, float stepY)
 {
-    POINT_PROFILING();
-
     uint16 masX[17];
     masX[0] = (uint16)(left + 1);
     for (int i = 1; i < 7; i++)
@@ -312,11 +308,7 @@ static void Grid::DrawGridType1(int left, int top, int right, int bottom, float 
     }
     mas[12] = (uint8)(bottom - 1);
 
-    POINT_PROFILING();
-
     MultiHPointLine(13, mas, (int)stepX, DeltaHforLineGrid()).Draw(left + (int)stepX, Color::GRID);
-
-    POINT_PROFILING();
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

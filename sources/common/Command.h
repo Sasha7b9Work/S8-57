@@ -24,7 +24,8 @@ struct Command
 /* 15 */    Paint_DrawBigText,      // 15 |   x[0:7] |  x[8:15]   |      y      | num symbols  |              |        |
 /* 16 */    Screen,                 // 16
 /* 17 */    Paint_VPointLine,       // 17 |   x[0:7] |  x[8:15]   |      y      |   delta      | count        |
-/* 18 */    Size
+/* 18 */    Paint_HPointLine,       // 18 |   x[0:7] |  x[8:15]   |      y      |   delta      | count        |
+/* 19 */    Size
     } value;
 };
 

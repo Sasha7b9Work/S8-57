@@ -52,6 +52,8 @@ static bool DrawHLine(uint8);
 static bool DrawTesterPoints(uint8);
 
 static bool DrawVPointLine(uint8);
+
+static bool DrawHPointLine(uint8);
 /// Эту функцию надо вызывать после выполнения последнего шага
 static void FinishCommand();
 
@@ -83,7 +85,8 @@ void Decoder::AddData(uint8 data)
         DrawTesterPoints,
         DrawBigText,
         FuncScreen,
-        DrawVPointLine
+        DrawVPointLine,
+        DrawHPointLine
     };
 
     if (step == 0)
@@ -361,6 +364,35 @@ static bool DrawVPointLine(uint8 data)
     case 4: delta = data;           break;
     case 5: count = data;
         Painter::DrawVPointLine(x, y, delta, count);
+        result = true;
+        break;
+    default:
+        result = true;
+        break;
+    }
+
+    return result;
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+static bool DrawHPointLine(uint8 data)
+{
+    static int y;
+    static int x;
+    static int delta;
+    static int count;
+
+    bool result = false;
+
+    switch (step)
+    {
+    case 0:                         break;
+    case 1: x = data;               break;
+    case 2: x += ((int)data) << 8;  break;
+    case 3: y = data;               break;
+    case 4: delta = data;           break;
+    case 5: count = data;
+        Painter::DrawHPointLine(x, y, delta, count);
         result = true;
         break;
     default:

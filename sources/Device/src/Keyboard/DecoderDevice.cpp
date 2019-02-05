@@ -82,7 +82,8 @@ static void RunStep(uint8 data)
         EmptyFuncBtU8,      // Paint_TesterLines,
         EmptyFuncBtU8,      // Paint_DrawBigText,
         FuncScreen,         // Screen
-        EmptyFuncBtU8       // Paint_VLine
+        EmptyFuncBtU8,      // Paint_VPointLine
+        EmptyFuncBtU8       // Paint_HPointLine
     };
 
     if (step == 0)

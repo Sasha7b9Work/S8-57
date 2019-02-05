@@ -35,10 +35,10 @@ public:
     /// Установить цвет рисования
     /// Нарисовать точку текущим цветом
     static void SetPoint(int x, int y);
-    /// Нарисовать горизонтальную линию от x0 до x1 точками через каждые delta пикселей
-    static void DrawHPointLine(int y, int x0, int x1, float delta);
 
     static void DrawVPointLine(int x, int y, int delta, int count);
+
+    static void DrawHPointLine(int x, int y, int delta, int count);
     /// Нарисовать горизонтальную линию
     static void DrawHLine(int y, int x0, int x1, Color color = Color::NUMBER);
     /// Нарисовать вертикальную линию
