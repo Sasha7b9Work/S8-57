@@ -17,7 +17,8 @@ int Painter::DrawTextOnBackground(int x, int y, const char *text, Color colorBac
     int height = Font::GetSize();
 
     Color colorText(GetColor());
-    FillRegion(x - 1, y, width, height, colorBackground);
+    SetColor(colorBackground);
+    FillRegion(x - 1, y, width, height);
     SetColor(colorText);
 
     return DrawText(x, y, text);

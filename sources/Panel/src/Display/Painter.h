@@ -44,16 +44,16 @@ public:
     /// Нарисовать вертикальную линию
     static void DrawVLine(int x, int y0, int y1);
     /// Нарисовать произвольную линию
-    static void DrawLine(int x0, int y0, int x1, int y1, Color color = Color::NUMBER);
+    static void DrawLine(int x0, int y0, int x1, int y1);
     /// \brief Рисует прерывистую горизонтальную линию. dFill - длина штриха, dEmpty - расст. между штрихами. Линия всегда начинается со штриха. 
     /// dStart указывает смещение первой рисуемой точки относительно начала штриха.
     static void DrawDashedHLine(int y, int x0, int x1, int dFill, int dEmpty, int dStart);
     /// Рисует прерывистую вертикальную линию.
     static void DrawDashedVLine(int x, int y0, int y1, int dFill, int dEmpty, int dStart);
 
-    static void DrawRectangle(int x, int y, int width, int height, Color color = Color::NUMBER);
+    static void DrawRectangle(int x, int y, int width, int height);
 
-    static void FillRegion(int x, int y, int width, int height, Color color = Color::NUMBER);
+    static void FillRegion(int x, int y, int width, int height);
 
     static uint ReduceBrightness(uint colorValue, float newBrightness);
 

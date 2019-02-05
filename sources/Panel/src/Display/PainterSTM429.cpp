@@ -89,10 +89,8 @@ void Painter::DrawHLine(int y, int x0, int x1)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Painter::DrawLine(int x1, int y1, int x2, int y2, Color col)
+void Painter::DrawLine(int x1, int y1, int x2, int y2)
 {
-    SetColor(col);
-
     if ((x2 - x1) == 0 && (y2 - y1) == 0)
     {
         ++x1;
@@ -142,10 +140,8 @@ void Painter::DrawLine(int x1, int y1, int x2, int y2, Color col)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Painter::DrawRectangle(int x, int y, int width, int height, Color col)
+void Painter::DrawRectangle(int x, int y, int width, int height)
 {
-    SetColor(col);
-
     DrawHLine(y, x, x + width);
     DrawHLine(y + height, x, x + width);
     DrawVLine(x, y, y + height);
@@ -178,10 +174,8 @@ void Painter::DrawVLine(int x, int y0, int y1)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Painter::FillRegion(int x, int y, int width, int height, Color col)
+void Painter::FillRegion(int x, int y, int width, int height)
 {
-    SetColor(col);
-
     for (int i = y; i <= y + height; ++i)
     {
         DrawHLine(i, x, x + width);
