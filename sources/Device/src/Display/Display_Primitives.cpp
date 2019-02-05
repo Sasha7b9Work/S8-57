@@ -145,6 +145,8 @@ Display::Primitives::Text::Text(const String &string, uint8 _size) : sizeOfType(
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 int Display::Primitives::Text::Draw(int x, int y, Color color)
 {
+    Color::SetCurrent(color);
+
     if (std::strlen(text) == 0) //-V805
     {
         return x;
@@ -152,11 +154,11 @@ int Display::Primitives::Text::Draw(int x, int y, Color color)
 
     if (sizeOfType != 1)
     {
-        DrawBig(x, y, color);
+        DrawBig(x, y);
     }
     else
     {
-        return DrawSmall(x, y, color);
+        return DrawSmall(x, y);
     }
 
     return x;

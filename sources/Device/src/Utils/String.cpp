@@ -99,5 +99,6 @@ bool String::Allocate(uint size)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 int String::Draw(int x, int y, Color color) const
 {
-    return Text(CString()).Draw(x, y, color);
+    Color::SetCurrent(color);
+    return Text(CString()).Draw(x, y);
 }

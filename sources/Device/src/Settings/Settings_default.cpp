@@ -157,7 +157,8 @@ const Settings Settings::defaultSettings =
     FrequencyCounter::NumberPeriods::_10,   // freq_numberPeriods;
     
     // Μενώ ΞÒΛΐΔΚΐ
-    
+
+    0,                                      // dbg_showConsole
     30,                                     // dbg_numStrings;         
     8,                                      // dbg_sizeFont;           
     false,                                  // dbg_modePauseConsole;   

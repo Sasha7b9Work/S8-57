@@ -202,9 +202,10 @@ public:
 
     // Меню ОТЛАДКА
 
-    int16                        dbg_numStrings;                 ///< Число строк в консоли.
-    int8                         dbg_sizeFont;                   ///< Размер шрифта консоли - 0 - 5, 1 - 8.
-    bool                         dbg_modePauseConsole;           ///< Если true, то вывод в консоль останавливается нажатием кнопки ПУСК/СТОП.
+    int8                         dbg_showConsole;               ///< Показывать ли консоль
+    int16                        dbg_numStrings;                ///< Число строк в консоли.
+    int8                         dbg_sizeFont;                  ///< Размер шрифта консоли - 0 - 5, 1 - 8.
+    bool                         dbg_modePauseConsole;          ///< Если true, то вывод в консоль останавливается нажатием кнопки ПУСК/СТОП.
     bool                         dbg_showAll;
     bool                         dbg_showFlag;
     bool                         dbg_showRShift[2];
@@ -214,13 +215,13 @@ public:
     bool                         dbg_showTrigParam;
     bool                         dbg_showTShift;
     bool                         dbg_showTBase;
-    int16                        dbg_numMeasuresForGates;        ///< Число измерений для ворот.
-    bool                         dbg_showRandInfo;               ///< Выводить информацию по рандомизатору - ворота и считанное значение.
-    bool                         dbg_showRandStat;               ///< Выводить график статистики.
-    int16                        dbg_timeCompensation;           ///< Дополнительное смещение по времени для данной развёртки режима рандомизатора.
-    int16                        dbg_pretriggered;               ///< Регулируемая величина предзапуска для исследования рандомизатора.
-    FPGA::Settings::Bandwidth::E dbg_bandwidth[2];               ///< \brief Здесь задаётся полоса, которая будет включаться при выборе в "КАНАЛ-Полоса" 
-                                                                 ///< значения "Полная".
+    int16                        dbg_numMeasuresForGates;       ///< Число измерений для ворот.
+    bool                         dbg_showRandInfo;              ///< Выводить информацию по рандомизатору - ворота и считанное значение.
+    bool                         dbg_showRandStat;              ///< Выводить график статистики.
+    int16                        dbg_timeCompensation;          ///< Дополнительное смещение по времени для данной развёртки режима рандомизатора.
+    int16                        dbg_pretriggered;              ///< Регулируемая величина предзапуска для исследования рандомизатора.
+    FPGA::Settings::Bandwidth::E dbg_bandwidth[2];              ///< \brief Здесь задаётся полоса, которая будет включаться при выборе в "КАНАЛ-Полоса" 
+                                                                ///< значения "Полная".
     bool                         dbg_ShowStats;                 ///< Показывать статистику на экране (fps, например).
     Display::Orientation::E      dbg_Orientation;
 

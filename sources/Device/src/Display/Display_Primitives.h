@@ -118,8 +118,8 @@ namespace Display
             ///  егль. “олько в отличие от насто€щего он показывает, во сколько раз размер пиксел€ на экране больше единичного пиксел€
             uint8 sizeOfType;
             int DrawCharWithLimitation(int eX, int eY, char _symbol, int limitX, int limitY, int limitWidth, int limitHeight);
-            void DrawBig(int x, int y, Color color);
-            int DrawSmall(int x, int y, Color color);
+            void DrawBig(int x, int y, Color color = Color::NUMBER);
+            int DrawSmall(int x, int y, Color color = Color::NUMBER);
             bool ByteFontNotEmpty(uint eChar, int byte);
             bool BitInFontIsExist(int eChar, int numByte, int bit);
         };
