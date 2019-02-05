@@ -66,16 +66,8 @@ void Painter::EndScene(void)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Painter::DrawHLine(int y, int x0, int x1, Color col)
+void Painter::DrawHLine(int y, int x0, int x1)
 {
-#ifdef OPEN
-    y *= 2;
-    x0 *= 2;
-    x1 = x1 * 2 + 1;
-#endif
-
-    SetColor(col);
-
     if(x0 > x1)
     {
         Math::Swap(&x0, &x1);
@@ -94,15 +86,6 @@ void Painter::DrawHLine(int y, int x0, int x1, Color col)
         }
         *address++ = value;
     }
-
-#ifdef OPEN
-    address = Display::GetBuffer() + x0 + y * BUFFER_WIDTH + BUFFER_WIDTH;
-
-    for (int x = x0; x <= x1; ++x)
-    {
-        *address++ = value;
-    }
-#endif
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

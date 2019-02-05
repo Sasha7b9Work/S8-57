@@ -40,7 +40,7 @@ public:
 
     static void DrawHPointLine(int x, int y, int delta, int count);
     /// Нарисовать горизонтальную линию
-    static void DrawHLine(int y, int x0, int x1, Color color = Color::NUMBER);
+    static void DrawHLine(int y, int x0, int x1);
     /// Нарисовать вертикальную линию
     static void DrawVLine(int x, int y0, int y1, Color color = Color::NUMBER);
     /// Нарисовать произвольную линию
@@ -54,8 +54,6 @@ public:
     static void DrawRectangle(int x, int y, int width, int height, Color color = Color::NUMBER);
 
     static void FillRegion(int x, int y, int width, int height, Color color = Color::NUMBER);
-
-    static void DrawVolumeButton(int x, int y, int width, int height, int thickness, Color normal, Color bright, Color dark, bool isPressed, bool isShade);
 
     static uint ReduceBrightness(uint colorValue, float newBrightness);
 

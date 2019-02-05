@@ -6,6 +6,6 @@ set BUILD_STATUS=%ERRORLEVEL%
 if %BUILD_STATUS%==0 goto Exit
 
 echo ERROR!!! Panel    failed!!!
-"c:\Program Files\Notepad++\notepad++.exe" -multiInst -alwaysOnTop ..\..\Panel\PanelOSC.out -n1000 -x0 -y0
+type ..\..\Panel\PanelOSC.out
 
 :Exit

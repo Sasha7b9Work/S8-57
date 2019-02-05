@@ -90,32 +90,6 @@ void Painter::DrawDashedVLine(int x, int y0, int y1, int deltaFill, int deltaEmt
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Painter::DrawVolumeButton(int x, int y, int width, int height, int thickness, Color normal, Color bright, Color dark, bool isPressed, bool isShade)
-{
-    FillRegion(x + thickness, y + thickness, width - thickness * 2, height - thickness * 2, normal);
-    if (isPressed && !isShade)
-    {
-        for (int i = 0; i < thickness; i++)
-        {
-            DrawHLine(y + i, x + i, x + width - i, dark);
-            DrawVLine(x + i, y + 1 + i, y + height - i);
-            DrawVLine(x + width - i, y + 1 + i, y + height - i, bright);
-            DrawHLine(y + height - i, x + 1 + i, x + width - i);
-        }
-    }
-    else
-    {
-        for (int i = 0; i < thickness; i++)
-        {
-            DrawHLine(y + i, x + i, x + width - i, bright);
-            DrawVLine(x + i, y + 1 + i, y + height - i);
-            DrawVLine(x + width - i, y + 1 + i, y + height - i, dark);
-            DrawHLine(y + height - i, x + 1 + i, x + width - i);
-        }
-    }
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Color Painter::GetColor()
 {
     return currentColor;
