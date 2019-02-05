@@ -153,16 +153,8 @@ void Painter::DrawRectangle(int x, int y, int width, int height, Color col)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Painter::DrawVLine(int x, int y0, int y1, Color col)
+void Painter::DrawVLine(int x, int y0, int y1)
 {
-    SetColor(col);
-
-#ifdef OPEN
-    x *= 2;
-    y0 *= 2;
-    y1 *= 2;
-#endif
-
     if(y0 > y1)
     {
         Math::Swap(&y0, &y1);
@@ -181,9 +173,6 @@ void Painter::DrawVLine(int x, int y0, int y1, Color col)
         }
 
         *address = value;
-#ifdef OPEN
-        *(address + 1) = value;
-#endif
         address += BUFFER_WIDTH;
     }
 }

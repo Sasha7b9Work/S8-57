@@ -42,7 +42,7 @@ public:
     /// Нарисовать горизонтальную линию
     static void DrawHLine(int y, int x0, int x1);
     /// Нарисовать вертикальную линию
-    static void DrawVLine(int x, int y0, int y1, Color color = Color::NUMBER);
+    static void DrawVLine(int x, int y0, int y1);
     /// Нарисовать произвольную линию
     static void DrawLine(int x0, int y0, int x1, int y1, Color color = Color::NUMBER);
     /// \brief Рисует прерывистую горизонтальную линию. dFill - длина штриха, dEmpty - расст. между штрихами. Линия всегда начинается со штриха. 
@@ -59,7 +59,7 @@ public:
 
     static void SetFont(Font::Type::E typeFont);
 
-    static int DrawText(int x, int y, const char *text, Color color = Color::NUMBER);
+    static int DrawText(int x, int y, const char *text);
     /// Выводит текст на прямоугольнике цвета colorBackgound
     static int DrawTextOnBackground(int x, int y, const char *text, Color colorBackground);
 
