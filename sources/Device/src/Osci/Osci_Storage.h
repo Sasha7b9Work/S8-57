@@ -50,6 +50,7 @@ namespace Osci
     friend class DataAccessor;
     friend class Storage;
     friend class StructDataP2P;
+    friend class ::Reader;
     public:
         void Logging() const;
         /// time - время, когда были считаны точки

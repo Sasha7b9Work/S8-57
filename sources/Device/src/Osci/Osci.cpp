@@ -10,6 +10,8 @@
 #include "Display/Display.h"
 #include "Utils/Debug.h"
 #include "Osci/Osci_Storage.h"
+#include "Data/Reader.h"
+#include "Osci/Measurements/Measurements.h"
 
 
 using namespace FPGA;
@@ -41,6 +43,11 @@ static int CalculateShift();
 static bool CalculateGate(uint16 rand, uint16 *eMin, uint16 *eMax);
 /// Чтение точки в поточечном режиме
 static void ReadPointP2P();
+
+namespace Osci
+{
+    static void UpdateFPGA();
+}
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -105,11 +112,19 @@ void Osci::Update()
         return;
     }
 
-    if (!FPGA::IsRunning())
+    if (FPGA::IsRunning())
     {
-        return;
+        UpdateFPGA();
     };
 
+    Reader::ReadDataFromStorage();
+
+    Measurements::SetData();
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+static void Osci::UpdateFPGA()
+{
     int number = (IN_RANDOMIZE_MODE) ? Kr[SET_TBASE] : 1;
 
     for (int i = 0; i < number; i++)

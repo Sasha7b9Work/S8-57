@@ -48,10 +48,8 @@ static void DrawModePointsPeakDetOff(int center, const uint8 *data, float scale,
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void Osci::Display::PainterData::DrawData()
 {
-    if (Reader::ReadDataFromStorage())
+    if (Measurements::DataIsSetting())
     {
-        Measurements::SetData();
-
         static const pFuncVV func[ModeWork::Number] =
         {
             DrawCurrent,
