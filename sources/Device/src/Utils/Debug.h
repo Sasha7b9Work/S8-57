@@ -5,7 +5,8 @@
 // Хорошо использовать для трассировке, если потом в HardFault_Handler() отслеживать эти переменные
 // #define DEBUG_POINT Debug::line = __LINE__; Debug::file = __FILE__;
 
-#define POINT_PROFILING() Debug::PointProfilingMS(__FILE__, __LINE__)
+//#define START_PROFILING() Debug::StartProfilingMS();
+//#define POINT_PROFILING() Debug::PointProfilingMS(__FILE__, __LINE__)
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 struct Debug

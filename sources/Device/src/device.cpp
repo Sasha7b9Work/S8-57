@@ -18,6 +18,7 @@
 
 #include "Hardware/Battery.h"
 #include "Hardware/HAL/HAL.h"
+#include "Utils/Debug.h"
 
 
 using Hardware::Clock;
@@ -108,6 +109,8 @@ static bool Device::SetCurrentMode(const PageBase *page, Device::Mode::E mode)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Device::Update()
 {
+    LOG_WRITE("");
+
     START_MULTI_MEASUREMENT();
 
     Display::Update();
