@@ -10,6 +10,8 @@
 #include <cstdlib>
 #include <cstring>
 
+#include "Data/DataSettings.h"
+
 
 using namespace Osci;
 using namespace Osci::Settings;
@@ -143,6 +145,11 @@ static bool picIsCalculating[2] = {false, false};
 
 /// Данные из IN_A, IN_B пересчитать к текущим настройкам и записать в OUT_A, OUT_B
 static void CountedToCurrentSettings();
+static void CountedToCurrentSettings(Chan::E ch, uint numBytes);
+/// Привести смещение канала ch по вертикали к текущему
+static void CountedToCurrentRShift(Chan::E ch, uint numBytes);
+/// Вписать значения данных в разрещённый диапазон
+static void LimitationData(Chan::E ch, uint numBytes);
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1430,8 +1437,31 @@ Measure Osci::Measurements::GetActiveMeasure()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void CountedToCurrentSettings()
+static void CountedToCurrentSettings()
 {
-    std::memcpy(OUT_A, IN_A, BYTES_IN_CHANNEL_DS);
-    std::memcpy(OUT_B, IN_B, BYTES_IN_CHANNEL_DS);
+    const uint NUM_BYTES = BYTES_IN_CHANNEL_DS;
+
+    if (ENABLED_DS(Chan::A))
+    {
+        std::memcpy(OUT_A, IN_A, NUM_BYTES);
+        CountedToCurrentSettings(Chan::A, NUM_BYTES);
+    }
+
+    if (ENABLED_DS(Chan::B))
+    {
+        std::memcpy(OUT_B, IN_B, NUM_BYTES);
+        CountedToCurrentSettings(Chan::B, NUM_BYTES);
+    }
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+static void CountedToCurrentSettings(Chan::E ch, uint numBytes)
+{
+    LimitationData(ch, numBytes);
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+static void LimitationData(Chan::E /*ch*/, uint /*numBytes*/)
+{
+
 }

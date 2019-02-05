@@ -38,7 +38,11 @@ struct DataSettings
 #define Lval_ENABLED(ds, ch)    (ch.IsA() ? Lval_ENABLED_A(ds) : Lval_ENABLED_B(ds))
 #define ENABLED_A(ds)           ((bool)Lval_ENABLED_A(ds))
 #define ENABLED_B(ds)           ((bool)Lval_ENABLED_B(ds))
-#define ENABLED(ds, ch)         (ch.IsA() ? ENABLED_A(ds) : ENABLED_B(ds))
+#define ENABLED(ds, ch)         ((ch == Chan::A) ? ENABLED_A(ds) : ENABLED_B(ds))
+
+#define ENABLED_DS(ch)          (ENABLED(DS, ch))
+#define ENABLED_DS_A            (ENABLED(DS, Chan(Chan::A)))
+#define ENABLED_DS_B            (ENABLED(DS, Chan(Chan::B)))
 
 #define RSHIFT(ds, ch)          ((ds)->rShift[ch])
 #define RSHIFT_A(ds)            (RSHIFT(ds, Chan::A))

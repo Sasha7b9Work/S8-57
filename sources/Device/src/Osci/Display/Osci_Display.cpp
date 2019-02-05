@@ -25,27 +25,47 @@ using namespace Osci::Settings;
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void Osci::Display::Update()
 {
+    Debug::StartProfilingMS();
+
     Painter::BeginScene(Color::BACK);
 
     Grid::Draw();
 
+    POINT_PROFILING();
+
     PainterData::DrawData();
+
+    POINT_PROFILING();
 
     Rectangle(Grid::Width(), Grid::Height()).Draw(Grid::Left(), Grid::Top(), Color::FILL);
 
+    POINT_PROFILING();
+
     HiPart::Draw();
 
+    POINT_PROFILING();
+
     RShift::DrawBoth();
+
+    POINT_PROFILING();
 
     DrawCursorTrigLevel();
 
     Osci::Measurements::Cursors::Cursor::Draw();
 
+    POINT_PROFILING();
+
     BottomPart::Draw(273, Grid::Bottom() + 1);
+
+    POINT_PROFILING();
 
     FrequencyCounter::Draw();
 
+    POINT_PROFILING();
+
     Menu::Draw();
+
+    POINT_PROFILING();
 
     Measurements::Table::Draw();
 }

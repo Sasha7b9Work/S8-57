@@ -1,17 +1,13 @@
 #include "defines.h"
 #include "device.h"
+#include "Data/Reader.h"
 #include "FPGA/FPGA.h"
 #include "FPGA/FPGA_HAL.h"
+#include "Hardware/Timer.h"
+#include "Hardware/HAL/HAL.h"
+#include "Osci/Measurements/Measurements.h"
 #include "Settings/Settings.h"
 #include <cstring>
-
-#include "Hardware/HAL/HAL.h"
-#include "Hardware/Timer.h"
-#include "Display/Display.h"
-#include "Utils/Debug.h"
-#include "Osci/Osci_Storage.h"
-#include "Data/Reader.h"
-#include "Osci/Measurements/Measurements.h"
 
 
 using namespace FPGA;

@@ -57,8 +57,8 @@ void LTDC_::Init(uint front, uint back)
     //                R/L         U/D
     initStr.Pin = GPIO_PIN_11 | GPIO_PIN_12;
     HAL_GPIO_Init(GPIOC, &initStr);
-    HAL_GPIO_WritePin(GPIOC, GPIO_PIN_11, GPIO_PIN_RESET);      // Выбор горизонтальной ориентации
-    HAL_GPIO_WritePin(GPIOC, GPIO_PIN_12, GPIO_PIN_SET);        // Выбор вертикальной ориентации
+    HAL_GPIO_WritePin(GPIOC, GPIO_PIN_11, GPIO_PIN_SET);      // Выбор горизонтальной ориентации
+    HAL_GPIO_WritePin(GPIOC, GPIO_PIN_12, GPIO_PIN_RESET);        // Выбор вертикальной ориентации
 
 
     handleLTDC.Instance = LTDC;

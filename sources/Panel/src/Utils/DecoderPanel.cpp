@@ -11,18 +11,60 @@
 typedef bool(*pFuncBU8)(uint8);
 /// Выполняемая функция
 static pFuncBU8 curFunc;
-int      Decoder::step = 0;
+/// Текущий байт выполняемой функции
+static int step = 0;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /// Обработка запроса на изображение экрана
 static bool FuncScreen(uint8);
 
+static bool EmptyFunc(uint8) { return true; }
+
+static bool InButtonPress(uint8);
+
+static bool BeginScene(uint8);
+
+static bool EndScene(uint8);
+
+static bool SetColor(uint8);
+
+static bool FillRegion(uint8);
+
+static bool DrawText(uint8);
+
+static bool DrawBigText(uint8);
+
+static bool SetPalette(uint8);
+
+static bool DrawRectangle(uint8);
+
+static bool DrawVLine(uint8);
+
+static bool SetFont(uint8);
+
+static bool SetPoint(uint8);
+
+static bool DrawLine(uint8);
+
+static bool DrawHLine(uint8);
+
+static bool DrawTesterPoints(uint8);
+
+static bool DrawVPointLine(uint8);
+/// Эту функцию надо вызывать после выполнения последнего шага
+static void FinishCommand();
+
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void Decoder::AddData(uint8 data)
 {
-    static const struct StructFunc { pFuncBU8 func; } command[Command::Number] =
+    static const struct StructFunc
+    {
+        pFuncBU8 func;
+        StructFunc(pFuncBU8 f) : func(f) {};
+    }
+    command[Command::Size] =
     {
         EmptyFunc,
         InButtonPress,
@@ -40,12 +82,13 @@ void Decoder::AddData(uint8 data)
         DrawLine,
         DrawTesterPoints,
         DrawBigText,
-        FuncScreen
+        FuncScreen,
+        DrawVPointLine
     };
 
     if (step == 0)
     {
-        if (data < Command::Number)
+        if (data < Command::Size)
         {
             curFunc = command[data].func;
             if (curFunc == 0)
@@ -71,7 +114,7 @@ void Decoder::AddData(uint8 data)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-bool Decoder::InButtonPress(uint8)
+static bool InButtonPress(uint8)
 {
     if (step == 0)
     {
@@ -88,7 +131,7 @@ bool Decoder::InButtonPress(uint8)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-bool Decoder::BeginScene(uint8 data)
+static bool BeginScene(uint8 data)
 {
     if (step == 0)
     {
@@ -102,7 +145,7 @@ bool Decoder::BeginScene(uint8 data)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-bool Decoder::DrawTesterPoints(uint8 data)
+static bool DrawTesterPoints(uint8 data)
 {
     // Здесь хранится текущий принимаемый байт. Всего их будет 2400
     static int numPoint = 0;
@@ -146,14 +189,14 @@ bool Decoder::DrawTesterPoints(uint8 data)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-bool Decoder::EndScene(uint8)
+static bool EndScene(uint8)
 {
     Painter::EndScene();
     return true;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-bool Decoder::SetColor(uint8 data)
+static bool SetColor(uint8 data)
 {
     if (step == 0)
     {
@@ -185,7 +228,7 @@ static bool FuncScreen(uint8)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-bool Decoder::FillRegion(uint8 data)
+static bool FillRegion(uint8 data)
 {
     static int x;
     static int y;
@@ -215,7 +258,7 @@ bool Decoder::FillRegion(uint8 data)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-bool Decoder::DrawRectangle(uint8 data)
+static bool DrawRectangle(uint8 data)
 {
     static int x;
     static int y;
@@ -245,7 +288,7 @@ bool Decoder::DrawRectangle(uint8 data)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-bool Decoder::DrawVLine(uint8 data)
+static bool DrawVLine(uint8 data)
 {
     static int x;
     static int y0;
@@ -272,7 +315,7 @@ bool Decoder::DrawVLine(uint8 data)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-bool Decoder::DrawHLine(uint8 data)
+static bool DrawHLine(uint8 data)
 {
     __IO static int y;  /// \todo эти штуки __IO вставлены потому, что без них c оптимизацией экран ничего не хочет выводить. Надо потом разобраться
     __IO static int x0;
@@ -300,7 +343,36 @@ bool Decoder::DrawHLine(uint8 data)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-bool Decoder::DrawLine(uint8 data)
+static bool DrawVPointLine(uint8 data)
+{
+    static int y;
+    static int x;
+    static int delta;
+    static int count;
+
+    bool result = false;
+
+    switch (step)
+    {
+    case 0:                         break;
+    case 1: x = data;               break;
+    case 2: x += ((int)data) << 8;  break;
+    case 3: y = data;               break;
+    case 4: delta = data;           break;
+    case 5: count = data;
+        Painter::DrawVPointLine(x, y, delta, count);
+        result = true;
+        break;
+    default:
+        result = true;
+        break;
+    }
+
+    return result;
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+static bool DrawLine(uint8 data)
 {
     __IO static int x0;
     __IO static int y0;
@@ -328,7 +400,7 @@ bool Decoder::DrawLine(uint8 data)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-bool Decoder::SetPoint(uint8 data)
+static bool SetPoint(uint8 data)
 {
     static int x = 0;
     
@@ -351,7 +423,7 @@ bool Decoder::SetPoint(uint8 data)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-bool Decoder::DrawText(uint8 data)
+static bool DrawText(uint8 data)
 {
     static int x;
     static int y;
@@ -385,7 +457,7 @@ bool Decoder::DrawText(uint8 data)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-bool Decoder::DrawBigText(uint8 data)
+static bool DrawBigText(uint8 data)
 {
     static int x;
     static int y;
@@ -421,7 +493,7 @@ bool Decoder::DrawBigText(uint8 data)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-bool Decoder::SetPalette(uint8 data)
+static bool SetPalette(uint8 data)
 {
     static uint8 numColor;
     static uint valueColor;
@@ -448,7 +520,7 @@ bool Decoder::SetPalette(uint8 data)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-bool Decoder::SetFont(uint8 data)
+static bool SetFont(uint8 data)
 {
     if (step == 0)
     {
@@ -460,7 +532,7 @@ bool Decoder::SetFont(uint8 data)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Decoder::FinishCommand()
+static void FinishCommand()
 {
     step = 0;
     curFunc = 0;

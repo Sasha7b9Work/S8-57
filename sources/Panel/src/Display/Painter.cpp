@@ -29,11 +29,12 @@ void Painter::DrawHPointLine(int y, int x0, int x1, float delta)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Painter::DrawVPointLine(int x, int y0, int y1, float delta)
+void Painter::DrawVPointLine(int x, int y, int delta, int count)
 {
-    for (int y = y0; y <= y1; y += (int)delta)
+    for (int i = 0; i < count; i++)
     {
         SetPoint(x, y);
+        y += delta;
     }
 }
 

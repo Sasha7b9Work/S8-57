@@ -58,7 +58,12 @@ void Decoder::Update()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void RunStep(uint8 data)
 {
-    static const struct StructFunc { pFuncBU8 func; } commands[Command::Number] =
+    static const struct StructFunc
+    {
+        pFuncBU8 func;
+        StructFunc(pFuncBU8 f) : func(f) {};
+    }
+    commands[Command::Size] =
     {
         EmptyFuncBtU8,      // None,
         ButtonPress,        // ButtonPress,
@@ -76,12 +81,13 @@ static void RunStep(uint8 data)
         EmptyFuncBtU8,      // Paint_DrawLine,
         EmptyFuncBtU8,      // Paint_TesterLines,
         EmptyFuncBtU8,      // Paint_DrawBigText,
-        FuncScreen          // Screen
+        FuncScreen,         // Screen
+        EmptyFuncBtU8       // Paint_VLine
     };
 
     if (step == 0)
     {
-        if (data < Command::Number)
+        if (data < Command::Size)
         {
             curFunc = commands[data].func;
             if (curFunc == 0)

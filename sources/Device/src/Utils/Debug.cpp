@@ -25,9 +25,9 @@ void Debug::StartProfilingMS()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Debug::PointProfilingMS(char * /*name*/)
+void Debug::PointProfilingMS(char *_file, int _line)
 {
-    //LOG_WRITE("%s %d", TIME_MS - timePrevMS);
+    LOG_WRITE("%s %d %d", _file, _line, TIME_MS - timePrevMS);
     timePrevMS = TIME_MS;
 }
 
