@@ -48,5 +48,5 @@ void Osci::Display::BottomPart::Draw(int x0, int y0)
 
     Battery::Draw(x0, y0);
 
-    VLine(14).Draw(Osci::Display::MemoryWindow::X() + Osci::Display::MemoryWindow::Width(), y0 + 1);
+    VLine(18).Draw(x0, y0 + 1);
 }
