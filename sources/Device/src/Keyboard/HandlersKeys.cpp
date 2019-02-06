@@ -90,6 +90,16 @@ static void TrigLevLess_Press();
 static void TrigLevMore_Press();
 
 
+class StructHandlers
+{
+public:
+    static void SetMainPage(const PageBase *page)
+    {
+        Menu::SetMainPage((PageBase *)page);
+    }
+};
+
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void Handlers::Process(KeyEvent e)
 {
@@ -444,8 +454,8 @@ static void ShowHidePage(const PageBase *page)
     }
     else
     {
-        ((Page *)page)->SetAsCurrent();
-        ((Page *)page)->Open(true);
+        StructHandlers::SetMainPage(page);
+
         if (!Menu::IsShown())
         {
             Menu::Show(true);

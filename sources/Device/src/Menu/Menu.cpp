@@ -30,17 +30,30 @@ using namespace Display::Primitives;
 using namespace Osci::Settings;
 
 
-PageBase *pageMain;
-
-
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-       uint    Menu::timeLastPressedButton = MAX_UINT;
    Control    *Menu::itemUnderKey = 0;
 const char    *Menu::stringForHint = 0;
    Control    *Menu::itemHint = 0;
 
 /// Элементы управления, назначенные в данный момент соответствующим кнопкам
 static Control *underButton[Key::Number];
+
+/// Последний открытый контрол на дереве странице page
+static Control *LastOpened(Page *page);
+/// Обработка события таймера автоматического сокрытия меню
+static void OnTimerAutoHide();
+/// Функция, которая отключит вывод строки навигации меню
+static void OnTimerStrNaviAutoHide();
+
+static void ProcessButtonForHint(Key::E button);
+
+static void ResetItemsUnderButton();
+/// Возвращает true, если данная кнопка обрабатыватся в данном режиме
+static bool IsProcessed(const KeyEvent *event);
+/// Время последнего нажатия кнопки. Нужно для того, чтобы периодически сохранять настройки
+static uint timeLastPressedButton = MAX_UINT;
+/// Текущая главная страница
+static PageBase *mainPage = nullptr;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void Menu::Update()
@@ -72,7 +85,7 @@ void Menu::Update()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-bool Menu::IsProcessed(const KeyEvent *event)
+static bool IsProcessed(const KeyEvent *event)
 {
     Key::E key = event->key;
     TypePress::E type = event->type;
@@ -101,7 +114,7 @@ bool Menu::IsProcessed(const KeyEvent *event)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Menu::ProcessButtonForHint(Key::E button)
+static void ProcessButtonForHint(Key::E button)
 {
     if (button == Key::Enter)
     {
@@ -224,7 +237,7 @@ void Menu::SetAutoHide(bool)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Menu::OnTimerAutoHide()
+static void OnTimerAutoHide()
 {
     Menu::Show(false);
 }
@@ -240,7 +253,7 @@ void Menu::TemporaryEnableStrNavi()
 }
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------
-void Menu::OnTimerStrNaviAutoHide()
+static void OnTimerStrNaviAutoHide()
 {
     SHOW_STRING_NAVIGATION = 0;
 }
@@ -280,7 +293,7 @@ void Menu::Show(bool show)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 bool Menu::IsShown()
 {
-    return set.menu_show;
+    return set.menu_show && MainPage() != nullptr;
 }
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------
@@ -293,7 +306,7 @@ void Menu::Init()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Control *Menu::OpenedItem()
 {
-    return LastOpened((Page *)pageMain);
+    return LastOpened((Page *)MainPage());
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -309,8 +322,13 @@ PageBase *Menu::OpenedPage()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-Control *Menu::LastOpened(Page *page)
+static Control *LastOpened(Page *page)
 {
+    if (page == nullptr)
+    {
+        return nullptr;
+    }
+
     if (page->CurrentItemIsOpened())
     {
         int8 posActItem = page->PosCurrentItem();
@@ -331,7 +349,8 @@ Control *Menu::LastOpened(Page *page)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Control *Menu::CurrentItem()
 {
-    Control *opened = LastOpened((Page *)pageMain);
+    Control *opened = OpenedItem();
+
     int8 pos = ((const Page *)opened)->PosCurrentItem();
 
     if (opened->IsPage() && pos != 0x7f)
@@ -365,7 +384,7 @@ void Menu::CloseOpenedItem()
             keeper->SetPosActItem(0x7f);
         }
 
-        if (item == (Control *)pageMain)    // -V1027
+        if (item == (Control *)MainPage())    // -V1027
         {
             Menu::Show(false);
         }
@@ -429,7 +448,7 @@ int Menu::Y()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Menu::Draw()
 {
-    if (Menu::IsShown() || NOT_PAGE(OpenedItem()))
+    if (Menu::IsShown())
     {
         ResetItemsUnderButton();
         Control *item = OpenedItem();
@@ -442,28 +461,6 @@ void Menu::Draw()
             else
             {
                 ((Page *)KEEPER(item))->Draw(0, Y(), true);
-            }
-        }
-        else
-        {
-            if (IS_CHOICE(item) || IS_CHOICE_REG(item))
-            {
-                ((Choice *)item)->Draw(0, Grid::Top(), false);
-                VLine(33).Draw(0, Grid::Top() + 1, Color::BorderMenu(false));
-                VLine(33).Draw(1, Grid::Top() + 1);
-                VLine(10).Draw(Grid::Right(), Grid::Top() + 30);
-                VLine(34).Draw(-1, Grid::Top() + 1, Color::BACK);
-                HLine(Grid::Right()).Draw(-1, Grid::Top() + 35);
-            }
-            else if (IS_GOVERNOR(item))
-            {
-                ((Governor *)item)->Draw(0, Grid::Top(), true);
-                HLine(Grid::Right() + 2).Draw(-2, Grid::Top(), Color::FILL);
-                VLine(40).Draw(Grid::Right(), Grid::Top());
-            }
-            else
-            {
-                // остальные контролы не обрабатываются
             }
         }
     }
@@ -511,11 +508,11 @@ void Menu::Draw()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Menu::ResetItemsUnderButton()
+static void ResetItemsUnderButton()
 {
     for (int i = 0; i < Key::Number; i++)
     {
-        SetItemUnderButton((Key::E)i, 0);
+        Menu::SetItemUnderButton((Key::E)i, 0);
     }
 }
 
@@ -589,4 +586,16 @@ Control *Menu::ItemUnderButton(Key::E button)
 void Menu::SetItemUnderButton(Key::E button, Control *control)
 {
     underButton[button] = control;
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+PageBase *Menu::MainPage()
+{
+    return mainPage;
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Menu::SetMainPage(PageBase *page)
+{
+    mainPage = page;
 }

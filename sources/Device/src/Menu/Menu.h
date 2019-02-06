@@ -4,24 +4,17 @@
 #include "Object.h"
 
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-/** @defgroup Menu
- *  @{
- *  @defgroup Pages
- *  @{
- *  @}
- */
-
 #define PAGE_IS_MAIN                   (name == Page::Name::Main)
 #define MENU_TEMP_ENABLE_STRING_NAVI() Menu::TemporaryEnableStrNavi()
+
+
+class StructHandlers;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 class Menu
 {
-friend class Page;
-
+friend class StructHandlers;
 public:
     /// Инициализация
     static void Init();
@@ -41,6 +34,8 @@ public:
     static void TemporaryEnableStrNavi();
     /// Возвращает адрес открытого элемента меню
     static Control *OpenedItem();
+    /// Возвращает указатель на текущую главную страницу меню
+    static PageBase *MainPage();
     /// Если true - меню находится в дополнительном режиме.
     static bool IsMinimize();
 
@@ -76,24 +71,6 @@ public:
     /// С какоей позиции Y рисовать меню. Позиция берётся без учёта заголовка
     static int Y();
 
-private:
-    /// Последний открытый контрол на дереве странице page
-    static Control *LastOpened(Page *page);
-    /// Обработка события таймера автоматического сокрытия меню
-    static void OnTimerAutoHide();
-    /// Функция, которая отключит вывод строки навигации меню
-    static void OnTimerStrNaviAutoHide();
-    
-    static void ProcessButtonForHint(Key::E button);
-    
-    static void ResetItemsUnderButton();
-    /// Возвращает true, если данная кнопка обрабатыватся в данном режиме
-    static bool IsProcessed(const KeyEvent *event);
-    /// Время последнего нажатия кнопки. Нужно для того, чтобы периодически сохранять настройки
-    static uint timeLastPressedButton;
-
-public:
-
     class Title
     {
     public:
@@ -127,8 +104,7 @@ public:
             _60 = 60   ///< Через 60 секунд.
         } value;
     };
+
+private:
+    static void SetMainPage(PageBase *page);
 };
-
-
-/** @}
- */
