@@ -131,9 +131,6 @@ namespace Osci
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         namespace Trig
         {
-            static const int MIN = 20;
-            static const int MAX = 980;
-            static const int ZERO = 500;
             /// Возвращает true в случае наличия синхроимпульса
             bool SyncPulse();
             /// Вывести уровень синхронизации поверх сетки
@@ -155,6 +152,10 @@ namespace Osci
 
             struct Level
             {
+                static const int MIN = 20;
+                static const int MAX = 980;
+                static const int ZERO = 500;
+
                 static void Load();
 
                 static void Change(int delta);

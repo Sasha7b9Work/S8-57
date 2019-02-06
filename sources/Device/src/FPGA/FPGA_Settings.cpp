@@ -88,7 +88,7 @@ void RShift::Load(Chan::E ch)
 void Trig::Level::Load()
 {
     /// \todo Здесь много лишних движений. Нужно что-то сделать с вводом SET_TRIGLEV_SOURCE
-    uint16 value = (uint16)((Trig::MAX + Trig::MIN) - SET_TRIGLEV_SOURCE);
+    uint16 value = (uint16)((Trig::Level::MAX + Trig::Level::MIN) - SET_TRIGLEV_SOURCE);
 
     WriteRegisters(Pin::SPI3_CS1, (uint16)(0xa000 | (value << 2)));
 }
@@ -156,7 +156,7 @@ void RShift::Change(Chan::E ch, int delta)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Trig::Level::Change(int delta)
 {
-    ::Math::AdditionThisLimitation<uint16>(&SET_TRIGLEV_SOURCE, STEP_TRIGLEV * delta, Trig::MIN, Trig::MAX);
+    ::Math::AdditionThisLimitation<uint16>(&SET_TRIGLEV_SOURCE, STEP_TRIGLEV * delta, Trig::Level::MIN, Trig::Level::MAX);
 
     Load();
 
