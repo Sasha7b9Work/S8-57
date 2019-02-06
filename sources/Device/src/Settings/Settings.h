@@ -28,7 +28,6 @@
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #define IN_RANDOMIZE_MODE           (SET_TBASE < TBase::_100ns)
-#define CURRENT_PAGE                (set.menu_currentPage)
 
 #define TRIG_MODE                   (set.trig_mode)
 #define TRIG_HOLDOFF                (set.trig_holdOff)
@@ -236,7 +235,6 @@ public:
 
     // Настройки меню
 
-    const Page*         menu_currentPage;                                           ///< Указатель на открытую страницу меню
     bool                menu_show;                                                  ///< Если true, то нужно показывать текущую страницу
     int8                menu_posActItem[Page::Name::Number];                        ///< \brief Позиция активного пункта. bit7 == 1 - item is opened, 0x7f - нет активного пункта.
     int8                menu_currentSubPage[Page::Name::Number];                    ///< Номер текущей подстраницы.

@@ -191,7 +191,6 @@ const Settings Settings::defaultSettings =
     
     // Настройки меню
     
-    0,                              // menu_currentPage;                  
     false,                          // menu_show;                         
     {                               // menu_posActItem[Page_NumPages];    
         0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 
