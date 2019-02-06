@@ -165,7 +165,7 @@ static void Beep(const TypeWave::E newTypeWave, const float newFreq, const float
     }
     if (!SOUND_ENABLED)
     {
-        //return;
+        return;
     }
     if (frequency != newFreq || amplitude != newAmpl || typeWave != newTypeWave) //-V550
     {

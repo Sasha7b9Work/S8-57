@@ -551,8 +551,8 @@ DEF_PAGE_2( ppSound, // -V641 // -V1027                                         
     "ЗВУК", "SOUND",
     "В этом меню можно настроить громкость звука",
     "In this menu, you can adjust the volume",
-    &cSound_Enable,  // СЕРВИС - ЗВУК - Звук
-    &gSound_Volume,  // СЕРВИС - ЗВУК - Громкость
+    &cSound_Enable,             ///< СЕРВИС - ЗВУК - Звук
+    &gSound_Volume,             ///< СЕРВИС - ЗВУК - Громкость
     Page::Name::Service_Sound, &pService, FuncActive, FuncPressPage, FuncDrawPage, FuncRegSetPage
 )
 
@@ -681,7 +681,7 @@ DEF_PAGE_SB( ppInformation, // -V641                                            
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 const PageBase *PageService::pointer = &pService;
 
-DEF_PAGE_11( pService, // -V641 // -V1027                                                                                                                                     //--- СЕРВИС ---
+DEF_PAGE_11( pService, // -V641 // -V1027                                                                                                                                    //--- СЕРВИС ---
     "СЕРВИС", "SERVICE",
     "Дополнительные настройки, калибровка, поиск сигнала, математические функции",
     "Additional settings, calibration, signal search, mathematical functions",
