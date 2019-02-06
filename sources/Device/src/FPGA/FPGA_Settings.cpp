@@ -406,11 +406,24 @@ void Bandwidth::Load()
 {
     Chan::E ch = GetChannel();
     static const Pin::E pinsLF[2] = { Pin::LF1, Pin::LF2 };
-    WritePin(pinsLF[ch], SET_BANDWIDTH(ch).value == Bandwidth::_20MHz);
+
+    WritePin(pinsLF[ch], 
+        IsFixed() ? 
+                    true : 
+                    (SET_BANDWIDTH(ch).value == Bandwidth::_20MHz)
+    );
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Chan::E Bandwidth::GetChannel() const
 {
     return (&SET_BANDWIDTH_A.value == &this->value) ? Chan::A : Chan::B;
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+bool Bandwidth::IsFixed() const
+{
+    Chan::E ch = GetChannel();
+
+    return (SET_RANGE(ch) <= Range::_10mV) && (SET_TBASE <= TBase::_500us);
 }

@@ -171,6 +171,9 @@ void Osci::Settings::TBase::Load()
     FSMC::WriteToFPGA8(WR::TBASE, values[SET_TBASE]);
 
     TShift::Load();
+
+    SET_BANDWIDTH_A.Load();
+    SET_BANDWIDTH_B.Load();
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -210,6 +213,9 @@ void Osci::Settings::Range::LoadBoth()
 
     WritePin(Pin::A3, _GET_BIT(valueB, 1));
     WritePin(Pin::A4, _GET_BIT(valueB, 0));
+
+    SET_BANDWIDTH_A.Load();
+    SET_BANDWIDTH_B.Load();
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

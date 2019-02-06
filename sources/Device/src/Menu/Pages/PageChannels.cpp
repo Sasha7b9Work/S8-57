@@ -67,13 +67,18 @@ static void OnChanged_ChanA_Bandwidth(bool)
     SET_BANDWIDTH_A.Load();
 }
 
+static bool IsActive_BandwidthA()
+{
+    return !SET_BANDWIDTH_A.IsFixed();
+}
+
 DEF_CHOICE_2( cBandwidthA,                                                                                                                                         //--- КАНАЛ 1 - Полоса ---
     "Полоса", "Bandwidth",
     "Задаёт полосу пропускания канала",
     "Sets the channel bandwidth",
     "Полная", "Full",
     "20МГц",  "20MHz",
-    SET_BANDWIDTH_A, pChanA, FuncActive, OnChanged_ChanA_Bandwidth, Choice::EmptyDraw
+    SET_BANDWIDTH_A, pChanA, IsActive_BandwidthA, OnChanged_ChanA_Bandwidth, Choice::EmptyDraw
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -130,13 +135,19 @@ static void OnChanged_BandwidthB(bool)
     SET_BANDWIDTH_B.Load();
 }
 
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+static bool IsActive_BandwidthB()
+{
+    return !SET_BANDWIDTH_B.IsFixed();
+}
+
 DEF_CHOICE_2( cBandwidthB,                                                                                                                                         //--- КАНАЛ 2 - Полоса ---
     "Полоса", "Bandwidth",
     "",
     "",
     "Полная", "Full",
     "20МГц", "20MHz",
-    SET_BANDWIDTH_B, pChanB, FuncActive, OnChanged_BandwidthB, Choice::EmptyDraw
+    SET_BANDWIDTH_B, pChanB, IsActive_BandwidthB, OnChanged_BandwidthB, Choice::EmptyDraw
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -146,8 +157,8 @@ DEF_PAGE_3( pChanB, // -V641                                                    
     "КАНАЛ 2", "CHANNEL 2",
     "Содержит настройки канала 2.",
     "Contains settings of the channel 2.",
-    &cInputB,       // КАНАЛ 2 - Вход
-    &cCoupleB,      // КАНАЛ 2 - Связь
-    &cBandwidthB,   // КАНАЛ 2 - Полоса
+    &cInputB,         ///< КАНАЛ 2 - Вход
+    &cCoupleB,        ///< КАНАЛ 2 - Связь
+    &cBandwidthB,     ///< КАНАЛ 2 - Полоса
     Page::Name::ChannelB, Menu::pageMain, FuncActive, FuncPressPage, FuncDrawPage, FuncRegSetPage
 )

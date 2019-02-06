@@ -43,8 +43,8 @@ static PinStruct pins[GPIO::Pin::Number] =
     {::HAL::PIO::Port::_D , ::HAL::PIO::Pin::_11},   // A2
     {::HAL::PIO::Port::_D , ::HAL::PIO::Pin::_12},   // A3
     {::HAL::PIO::Port::_D , ::HAL::PIO::Pin::_13},   // A4
-    {::HAL::PIO::Port::_G , ::HAL::PIO::Pin::_2},    // LF1
-    {::HAL::PIO::Port::_G , ::HAL::PIO::Pin::_3},    // LF2
+    {::HAL::PIO::Port::_G , ::HAL::PIO::Pin::_2},    // LF1 Ограничение полосы
+    {::HAL::PIO::Port::_G , ::HAL::PIO::Pin::_3},    // LF2 Ограничение полосы
     {::HAL::PIO::Port::_G , ::HAL::PIO::Pin::_4},    // A1S
     {::HAL::PIO::Port::_G , ::HAL::PIO::Pin::_5},    // A0S
     {::HAL::PIO::Port::_G , ::HAL::PIO::Pin::_6}     // LFS
