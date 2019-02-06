@@ -114,14 +114,14 @@ DEF_CHOICE_2( cShiftXtype,                                                      
 const PageBase *PageTime::pointer = &pTime;
 
 
-DEF_PAGE_5( pTime, // -V641                                                                                                                                               //--- РАЗВЕРТКА ---
+DEF_PAGE_3( pTime, // -V641                                                                                                                                               //--- РАЗВЕРТКА ---
     "РАЗВ.", "SCAN",
     "Содержит настройки развёртки.",
     "Contains scan settings.",
     &cSample,           ///< РАЗВЕРТКА - Выборка
     &cPeakDet,          ///< РАЗВЕРТКА - Пик дет
     &cTPos,             ///< РАЗВЕРТКА - То
-    &cDivRole,          ///< РАЗВЕРТКА - Ф-ция ВР/ДЕЛ
-    &cShiftXtype,       ///< РАЗВЕРТКА - Смещение
+    //&cDivRole,          ///< РАЗВЕРТКА - Ф-ция ВР/ДЕЛ
+    //&cShiftXtype,       ///< РАЗВЕРТКА - Смещение
     Page::Name::Time, nullptr, FuncActive, FuncPressPage, FuncDrawPage, FuncRegSetPage
 )
