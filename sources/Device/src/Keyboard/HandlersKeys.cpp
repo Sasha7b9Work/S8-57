@@ -41,9 +41,9 @@ static Chan drawingChan = Chan(Chan::A);
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /// Обработчик отпускания функциональной кнопки
-static void FuncRelease();
+static void FX_Release();
 /// Обработчик длительного нажатия функциональной кнопки
-static void FuncLong();
+//static void FuncLong();
 /// Общий обработчик изменения параметра канала - масштаба или смещения
 static void OnChangeParameterChannel(pFuncVChI, Chan::E, int);
 /// Общий обработчик изменения временных параметров
@@ -151,11 +151,11 @@ void Handlers::Process(KeyEvent e)
         {HandlerArrow,      HandlerArrow,      HandlerArrow,     HandlerArrow},     // Up         
         {HandlerArrow,      HandlerArrow,      HandlerArrow,     HandlerArrow},     // Down       
         {Empty,             Empty,             EnterRelease,     EnterLong},        // Enter      
-        {Empty,             Empty,             FuncRelease,      FuncLong},         // F1         
-        {Empty,             Empty,             FuncRelease,      FuncLong},         // F2         
-        {Empty,             Empty,             FuncRelease,      FuncLong},         // F3         
-        {Empty,             Empty,             FuncRelease,      FuncLong},         // F4         
-        {Empty,             Empty,             FuncRelease,      FuncLong}          // F5         
+        {Empty,             Empty,             FX_Release,       Empty},            // F1         
+        {Empty,             Empty,             FX_Release,       Empty},            // F2         
+        {Empty,             Empty,             FX_Release,       Empty},            // F3         
+        {Empty,             Empty,             FX_Release,       Empty},            // F4         
+        {Empty,             Empty,             FX_Release,       Empty}             // F5         
     };
 
     Key::E code = event.key;
@@ -309,16 +309,18 @@ static void TBaseMore()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void FuncRelease()
+static void FX_Release()
 {
     Menu::ReleaseFunctionalButton(event.key);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+/*
 static void FuncLong()
 {
     Menu::LongFunctionalButton(event.key);
 }
+*/
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void HandlerArrow()

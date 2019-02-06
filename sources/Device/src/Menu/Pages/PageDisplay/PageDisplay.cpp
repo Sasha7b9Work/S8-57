@@ -118,6 +118,18 @@ DEF_CHOICE_2( cScaleYtype,                                                      
     LINKING_RSHIFT, pageDisplay, FuncActive, Choice::EmptyChange, Choice::EmptyDraw
 )
 
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+DEF_CHOICE_4( cType, // -V206                                                                                                                                       //--- ДИСПЛЕЙ - Сетка ---
+    "Сетка", "Grid",
+    "Выбор типа сетки",
+    "Choice like Grid",
+    "Тип 1", "Type 1",
+    "Тип 2", "Type 2",
+    "Тип 3", "Type 3",
+    "Тип 4", "Type 4",
+    TYPE_GRID, pageDisplay, FuncActive, Choice::EmptyChange, Choice::EmptyDraw
+)
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 DEF_PAGE_9( pageDisplay, // -V641 // -V1027                                                                                                                                 //--- ДИСПЛЕЙ ---
     "ДИСПЛЕЙ", "DISPLAY",
@@ -129,7 +141,8 @@ DEF_PAGE_9( pageDisplay, // -V641 // -V1027                                     
     &cMinMax,                               ///< ДИСПЛЕЙ - Мин Макс
     &cSmoothing,                            ///< ДИСПЛЕЙ - Сглаживание
     &cRefreshFPS,                           ///< ДИСПЛЕЙ - Частота обновл
-    PageDisplay::PageGrid::pointer,         ///< ДИСПЛЕЙ - СЕТКА
+    &cType,                                 ///< ДИСПЛЕЙ - Сетка
+    //PageDisplay::PageGrid::pointer,         ///< ДИСПЛЕЙ - СЕТКА
     &cScaleYtype,                           ///< ДИСПЛЕЙ - Смещение
     PageDisplay::PageSettings::pointer,     ///< ДИСПЛЕЙ - НАСТРОЙКИ
 //    &cThickness,                            ///< ДИСПЛЕЙ - Толщина
