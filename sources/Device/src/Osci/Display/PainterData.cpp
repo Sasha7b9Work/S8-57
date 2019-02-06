@@ -11,6 +11,7 @@
 
 #include "Utils/Buffer.h"
 #include "Utils/Debug.h"
+#include "Osci/Display/Accumulator.h"
 
 
 using namespace Display::Primitives;
@@ -64,6 +65,8 @@ void Osci::Display::PainterData::DrawData()
     DrawTPos(0, 0);
 
     DrawTShift(0, 0, 0);
+
+    Accumulator::NextDraw();
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

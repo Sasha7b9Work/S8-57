@@ -2,6 +2,7 @@
 #include "Menu/MenuItems.h"
 #include "Menu/Pages/Include/PageDisplay.h"
 #include "Osci/Osci.h"
+#include "Osci/Display/Osci_Display.h"
 #include "Settings/Settings.h"
 
 
@@ -58,7 +59,7 @@ static bool IsActive_Accum_Clear()
 
 void PageDisplay::PageAccumulation::OnPress_Accumulation_Clear()
 {
-    NEED_FINISH_DRAW = 1;
+    Osci::Display::SetFlagRedraw();
 }
 
 DEF_BUTTON( bClear,                                                                                                                                 //--- ÄÈÑÏËÅÉ - ÍÀÊÎÏËÅÍÈÅ - Î÷èñòèòü ---

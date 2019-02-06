@@ -15,6 +15,8 @@
 #include "Utils/Math.h"
 #include "Utils/Values.h"
 
+#include "Osci/Display/Osci_Display.h"
+
 
 using namespace Display::Primitives;
 using namespace FPGA::HAL::GPIO;
@@ -325,7 +327,7 @@ void Trig::NeedForDraw(uint timeMS)
 {
     needDraw = true;
     Timer::SetAndStartOnce(Timer::Type::ShowLevelTrigLev, DisableDrawing, timeMS);
-    NEED_FINISH_DRAW = 1;
+    Osci::Display::SetFlagRedraw();
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

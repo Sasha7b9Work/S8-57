@@ -1446,6 +1446,16 @@
           <GroupName>Osci/Display</GroupName>
           <Files>
             <File>
+              <FileName>Accumulator.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Osci\Display\Accumulator.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Accumulator.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Osci\Display\Accumulator.h</FilePath>
+            </File>
+            <File>
               <FileName>BottomPart.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Osci\Display\BottomPart.cpp</FilePath>

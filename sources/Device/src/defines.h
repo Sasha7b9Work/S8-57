@@ -219,7 +219,6 @@ union BitSet64
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /// В этом при нажатии на кнопки вместо выполнения её функции выводится информация о её назначении
 #define HINT_MODE_ENABLED       (gBF.showHelpHints)
-#define NEED_FINISH_DRAW        (gBF.needFinishDraw)
 #define SHOW_DEBUG_MENU         (gBF.showDebugMenu)
 #define NEED_SAVE_TO_FLASHDRIVE (gBF.needForSaveToFlashDrive)
 #define EXIT_FROM_SETNAME_TO    (gBF.exitFromModeSetNameTo)
@@ -247,7 +246,6 @@ struct BitField
     int16 currentNumRAMSignal;              ///< Текущий номер последнего сигнала в режиме ПАМЯТЬ - Последние.
     int8 currentNumROMSignal;               ///< Текущий номер сигнала, сохранённого в ППЗУ.
     uint showHelpHints : 1;                 ///< Если 1, то при нажатии кнопки вместо выполнения её фунции выводится подсказка о её назначении.
-    uint needFinishDraw : 1;                ///< Если 1, то нужно немедленно завершить отрисовку и вывести на экран то, что уже нарисовано.
     uint showDebugMenu : 1;
     uint needForSaveToFlashDrive : 1;       ///< Если 1, то нужно сохранить после отрисовки на флешку.
     uint exitFromModeSetNameTo : 2;         ///< \brief Куда возвращаться из окна установки имени при сохранении : 0 - в основное меню, 1 - 

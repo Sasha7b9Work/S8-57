@@ -8,6 +8,7 @@
 #include "Display/Painter.h"
 
 #include "Hardware/HAL/HAL.h"
+#include "Osci/Display/Osci_Display.h"
 
 
 using namespace Hardware;
@@ -103,7 +104,7 @@ float Choice::Step() //-V2506
         *cell = index;
         tsChoice.address = 0;
         CHOICE_RUN_FUNC_CHANGED(this, IsAcitve());
-        NEED_FINISH_DRAW = 1;
+        Osci::Display::SetFlagRedraw();
         tsChoice.dir = NONE;
         return 0.0F;
     }
@@ -134,7 +135,7 @@ void Choice::ChangeIndex(int delta)
     *cell = (int8)index;
     CHOICE_RUN_FUNC_CHANGED(this, IsAcitve());
     Beeper::GovernorChangedValue();
-    NEED_FINISH_DRAW = 1;
+    Osci::Display::SetFlagRedraw();
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

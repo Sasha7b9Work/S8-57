@@ -35,7 +35,7 @@
 //#define MODE_ACCUM_NO_RESET         (MODE_ACCUM == Display::ModeAccumulation::NoReset)
 
 #define ACCUMULATION                (set.disp_ENumSmoothing)
-#define ACCUMULATION_IS_ENABLED     (ACCUMULATION == Display::ModeAccumulation::Reset)
+#define ACCUMULATION_IS_ENABLED     (ACCUMULATION == ::Display::ModeAccumulation::Reset)
 
 
 #define ENUM_ACCUM                  (set.disp_ENumAccum)

@@ -12,6 +12,7 @@
 #include "Settings/Settings.h"
 
 #include "Utils/Debug.h"
+#include "Osci/Display/Accumulator.h"
 
 
 using namespace Display::Primitives;
@@ -19,15 +20,24 @@ using namespace Osci::Settings;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-#define DELTA 5
+static const int DELTA = 5;
+/// Признак того, что дисплей нуждается в полной перерисовке
+static bool needRedraw = false;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void Osci::Display::Update()
 {
-    Painter::BeginScene(Color::BACK);
+    if (needRedraw)
+    {
+        Painter::BeginScene(Color::BACK);
 
-    Grid::Draw();
+        Grid::Draw();
+
+        needRedraw = false;
+
+        Accumulator::Reset();
+    }
 
     PainterData::DrawData();
 
@@ -127,4 +137,10 @@ void Osci::Display::DrawScaleLine(int x, bool forTrigLev)
     {
         Line(x + 1, levels[i], x2 - 1, levels[i]).Draw(Color::FILL);
     }
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Osci::Display::SetFlagRedraw()
+{
+    needRedraw = true;
 }

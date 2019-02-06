@@ -11,5 +11,7 @@ namespace Osci
         void DrawCursorTrigLevel();
 
         void DrawScaleLine(int x, bool forTrigLev);
+        /// Установить признак того, что дисплей нуждается в перерисовке
+        void SetFlagRedraw();
     }
 }
