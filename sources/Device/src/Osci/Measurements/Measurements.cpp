@@ -1446,19 +1446,20 @@ static void CountedToCurrentSettings()
     {
         std::memcpy(OUT_A, IN_A, NUM_BYTES);
         CountedToCurrentSettings(Chan::A, NUM_BYTES);
+        LimitationData(Chan::A, NUM_BYTES);
     }
 
     if (ENABLED_DS(Chan::B))
     {
         std::memcpy(OUT_B, IN_B, NUM_BYTES);
         CountedToCurrentSettings(Chan::B, NUM_BYTES);
+        LimitationData(Chan::A, NUM_BYTES);
     }
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void CountedToCurrentSettings(Chan::E ch, uint numBytes)
 {
-    LimitationData(ch, numBytes);
     CountedToCurrentRShift(ch, numBytes);
 }
 
@@ -1469,11 +1470,7 @@ static void LimitationData(Chan::E ch, uint numBytes)
 
     for (uint i = 0; i < numBytes; i++)
     {
-        if (*data != FPGA::VALUE::NONE)
-        {
-            Math::Limitation<uint8>(data, FPGA::VALUE::MIN, FPGA::VALUE::MAX);
-        }
-
+        Math::Limitation<uint8>(data, FPGA::VALUE::MIN, FPGA::VALUE::MAX);
         data++;
     }
 }
