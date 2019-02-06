@@ -30,7 +30,6 @@ extern const PageBase ppADC;
 extern const PageBase pppADC_Balance;
 extern const PageBase pppADC_Stretch;
 extern const PageBase pppADC_Shift;
-extern const PageBase ppChannels;
 extern const PageBase ppSettings;
 extern const PageBase ppSerialNumber;
 
@@ -362,56 +361,6 @@ DEF_PAGE_3( ppADC, // -V641                                                     
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void OnChanged_Channels_BandwidthA(bool)
-{
-    FPGA::Settings::Bandwidth::Load(Chan::A);
-}
-
-DEF_CHOICE_7( cChannels_BandwidthA,                                                                                                                     //--- ОТЛАДКА - КАНЛАЫ - Полоса 1 ---
-    "Полоса 1", "Bandwidth 1",
-    "Здесь можно выбрать полосу, которая будет действовать в КАНАЛ1-Полоса при выборе значения Полная",
-    "Here you can select the bandwidth, which will operate in CHANNEL1-Bandwidth when set to Full",
-    "Полная", "Full",
-    "20МГц", "20MHz",
-    "100МГц", "100MHz",
-    "200МГц", "200MHz",
-    "350МГц", "350MHz",
-    "650МГц", "650MHz",
-    "750МГц", "750MHz",
-    BANDWIDTH_DEBUG(Chan::A), ppChannels, FuncActive, OnChanged_Channels_BandwidthA, Choice::EmptyDraw
-)
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void OnChanged_Channels_BandwidthB(bool)
-{
-    FPGA::Settings::Bandwidth::Load(Chan::B);
-}
-
-DEF_CHOICE_7( cChannels_BandwidthB,                                                                                                                     //--- ОТЛАДКА - КАНЛАЫ - Полоса 2 ---
-    "Полоса 2", "Bandwidth 2",
-    "Здесь можно выбрать полосу, которая будет действовать в КАНАЛ2-Полоса при выборе значения Полная",
-    "Here you can select the bandwidth, which will operate in CHANNEL2-Bandwidth when set to Full",
-    "Полная", "Full",
-    "20МГц",  "20MHz",
-    "100МГц", "100MHz",
-    "200МГц", "200MHz",
-    "350МГц", "350MHz",
-    "650МГц", "650MHz",
-    "750МГц", "750MHz",
-    BANDWIDTH_DEBUG(Chan::B), ppChannels, FuncActive, OnChanged_Channels_BandwidthB, Choice::EmptyDraw
-)
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-DEF_PAGE_2( ppChannels, // -V641                                                                                                                                   //--- ОТЛАДКА - КАНАЛЫ ---
-    "КАНАЛЫ", "CHANNELS",
-    "",
-    "",
-    &cChannels_BandwidthA,   // ОТЛАДКА - КАНАЛЫ - Полоса 1
-    &cChannels_BandwidthB,   // ОТЛАДКА - КАНАЛЫ - Полоса 2
-    Page::Name::Debug_Channels, &pageDebug, FuncActive, FuncPressPage, FuncDrawPage, FuncRegSetPage
-)
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 DEF_CHOICE_2( cStats,                                                                                                                                          //--- ОТЛАДКА - Статистика ---
     "Статистика", "Statistics",
     "Показывать/не показывать время/кадр, кадров в секунду, количество сигналов с последними настройками в памяти/количество сохраняемых в памяти "
@@ -700,14 +649,13 @@ DEF_BUTTON( bEraseData,                                                         
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-DEF_PAGE_6( pageDebug, // -V641                                                                                                                                             //--- ОТЛАДКА ---
+DEF_PAGE_5( pageDebug, // -V641                                                                                                                                             //--- ОТЛАДКА ---
     "ОТЛАДКА", "DEBUG",
     "",
     "",
     PageDebug::PageConsole::pointer,    ///< ОТЛАДКА - КОНСОЛЬ
     &ppADC,                             ///< ОТЛАДКА - АЦП
     PageDebug::PageRand::pointer,       ///< ОТЛАДКА - РАНД-ТОР
-    &ppChannels,		                ///< ОТЛАДКА - КАНАЛЫ
     &cStats,			                ///< ОТЛАДКА - Статистика
     &cDisplayOrientation,               ///< ОТЛАДКА - Ориентация
 //    &mgPred,			          ///< ОТЛАДКА - Предзапуск

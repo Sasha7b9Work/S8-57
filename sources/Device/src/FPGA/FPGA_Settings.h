@@ -68,7 +68,7 @@ namespace FPGA
             } value;
 
             explicit Bandwidth(E v) : value(v) {};
-            static void Load(Chan::E ch);
+            void Load(Chan::E ch);
         };
     }
 }
