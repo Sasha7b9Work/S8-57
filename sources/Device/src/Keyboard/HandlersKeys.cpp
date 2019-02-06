@@ -72,12 +72,15 @@ static void ChannelB_Release();
 static void ChannelA_Long();
 static void ChannelB_Long();
 static void Function_Release();
-static void Measure();
-static void Service();
 static void Time_Release();
 static void Time_Long();
 static void Start();
-static void HandlerDisplay();
+
+static void Service_Release();
+
+static void Measures_Release();
+
+static void Display_Release();
 
 static void Memory_Release();
 
@@ -96,15 +99,15 @@ void Handlers::Process(KeyEvent e)
     { // Press              Repead             Release           Long
         {Empty,             Empty,             Empty,            Empty},            // None       
         {Empty,             Empty,             Function_Release, Empty},            // Function   
-        {Measure,           Measure,           Measure,          Measure},          // Measure    
-        {Empty,             Empty,             Memory_Release,   Empty},    // Memory     
-        {Service,           Service,           Service,          Service},          // Service    
+        {Empty,             Empty,             Measures_Release, Empty},            // Measure    
+        {Empty,             Empty,             Memory_Release,   Empty},            // Memory     
+        {Empty,             Empty,             Service_Release,  Empty},            // Service    
         {Empty,             Empty,             ChannelA_Release, ChannelA_Long},    // ChannelA   
         {Empty,             Empty,             ChannelB_Release, ChannelB_Long},    // ChannelB   
         {Empty,             Empty,             Time_Release,     Time_Long},        // Time       
         {Start,             Empty,             Empty,            Empty},            // Start      
         {Empty,             Empty,             Trig_Release,     Trig_Long},        // Trig       
-        {HandlerDisplay,    HandlerDisplay,    HandlerDisplay,   HandlerDisplay},   // Display    
+        {Empty,             Empty,             Display_Release,  Empty},            // Display    
         {RangeMoreA,        Empty,             Empty,            Empty},            // RangeMoreA 
         {RangeLessA,        Empty,             Empty,            Empty},            // RangeLessA 
         {RShiftMoreA,       RShiftMoreA,       Empty,            Empty},            // RShiftMoreA
@@ -369,7 +372,7 @@ static void Function_Release()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void Measure()
+static void Measures_Release()
 {
     ShowHidePage(PageMeasures::pointer);
 }
@@ -391,7 +394,7 @@ static void Memory_Release()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void Service()
+static void Service_Release()
 {
     ShowHidePage(PageService::pointer);
 }
@@ -427,7 +430,7 @@ static void Trig_Long()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void HandlerDisplay()
+static void Display_Release()
 {
     ShowHidePage(PageDisplay::pointer);
 }
