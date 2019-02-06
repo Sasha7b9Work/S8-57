@@ -402,8 +402,15 @@ pString ModeCouple::UGO() const
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Bandwidth::Load(Chan::E ch)
+void Bandwidth::Load()
 {
+    Chan::E ch = GetChannel();
     static const Pin::E pinsLF[2] = { Pin::LF1, Pin::LF2 };
     WritePin(pinsLF[ch], SET_BANDWIDTH(ch).value == Bandwidth::_20MHz);
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Chan::E Bandwidth::GetChannel() const
+{
+    return (&SET_BANDWIDTH_A.value == &this->value) ? Chan::A : Chan::B;
 }

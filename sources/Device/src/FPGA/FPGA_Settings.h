@@ -68,7 +68,11 @@ namespace FPGA
             } value;
 
             explicit Bandwidth(E v) : value(v) {};
-            void Load(Chan::E ch);
+            void Load();
+
+        private:
+            /// Возвращает канал, для которого является действующей эта настройка
+            Chan::E GetChannel() const;
         };
     }
 }
