@@ -39,6 +39,8 @@ static int CalculateShift();
 static bool CalculateGate(uint16 rand, uint16 *eMin, uint16 *eMax);
 /// „тение точки в поточечном режиме
 static void ReadPointP2P();
+/// ¬озвращает true, если уже можно читать данные
+static bool CanReadData();
 
 namespace Osci
 {
@@ -142,15 +144,18 @@ static void Osci::UpdateFPGA()
 
         if (FPGA::HAL::GetFlag::DATA_READY())
         {
-            ReadData();
-            if (START_MODE_IS_SINGLE)
+            if (CanReadData())
             {
-                OnPressStart();
-                Trig::pulse = false;
-            }
-            else
-            {
-                Start();
+                ReadData();
+                if (START_MODE_IS_SINGLE)
+                {
+                    OnPressStart();
+                    Trig::pulse = false;
+                }
+                else
+                {
+                    Start();
+                }
             }
         }
     }
@@ -329,4 +334,19 @@ bool Osci::InModeP2P()
 bool Osci::InModeRandomizer()
 {
     return (SET_TBASE <= TBase::_50ns);
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+static bool CanReadData()
+{
+    static uint timePrevRead = 0;
+
+    if (TIME_MS > timePrevRead + ENUM_SIGNALS_IN_SEC.TimeBetweenFramesMS())
+    {
+        timePrevRead = TIME_MS;
+
+        return true;
+    }
+
+    return false;
 }
