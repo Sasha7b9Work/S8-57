@@ -65,8 +65,6 @@ static void TShiftLess();
 static void TShiftMore();
 static void TBaseLess();
 static void TBaseMore();
-static void TrigLevLess();
-static void TrigLevMore();
 static void EnterRelease();
 static void EnterLong();
 static void ChannelA_Release();
@@ -80,8 +78,12 @@ static void Service();
 static void Time_Release();
 static void Time_Long();
 static void Start();
-static void HandlerTrig();
 static void HandlerDisplay();
+
+static void Trig_Release();
+static void Trig_Long();
+static void TrigLevLess_Press();
+static void TrigLevMore_Press();
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -90,42 +92,42 @@ void Handlers::Process(KeyEvent e)
     event = e;
 
     static const pFuncVV func[Key::Number][4] =
-    { // Press           Repead          Release           Long
-        {Empty,          Empty,          Empty,            Empty},            // None       
-        {Empty,          Empty,          Function,         Empty},            // Function   
-        {Measure,        Measure,        Measure,          Measure},          // Measure    
-        {HandlerMemory,  HandlerMemory,  HandlerMemory,    HandlerMemory},    // Memory     
-        {Service,        Service,        Service,          Service},          // Service    
-        {Empty,          Empty,          ChannelA_Release, ChannelA_Long},    // ChannelA   
-        {Empty,          Empty,          ChannelB_Release, ChannelB_Long},    // ChannelB   
-        {Empty,          Empty,          Time_Release,     Time_Long},        // Time       
-        {Start,          Empty,          Empty,            Empty},            // Start      
-        {HandlerTrig,    HandlerTrig,    HandlerTrig,      HandlerTrig},      // Trig       
-        {HandlerDisplay, HandlerDisplay, HandlerDisplay,   HandlerDisplay},   // Display    
-        {RangeMoreA,     Empty,          Empty,            Empty},            // RangeMoreA 
-        {RangeLessA,     Empty,          Empty,            Empty},            // RangeLessA 
-        {RShiftMoreA,    RShiftMoreA,    Empty,            Empty},            // RShiftMoreA
-        {RShiftLessA,    RShiftLessA,    Empty,            Empty},            // RShiftLessA
-        {RangeMoreB,     Empty,          Empty,            Empty},            // RangeMoreB 
-        {RangeLessB,     Empty,          Empty,            Empty},            // RangeLessB 
-        {RShiftMoreB,    RShiftMoreB,    Empty,            Empty},            // RShiftMoreB
-        {RShiftLessB,    RShiftLessB,    Empty,            Empty},            // RShiftLessB
-        {TBaseMore,      Empty,          Empty,            Empty},            // TBaseMore  
-        {TBaseLess,      Empty,          Empty,            Empty},            // TBaseLess  
-        {TShiftMore,     TShiftMore,     Empty,            Empty},            // TShiftMore 
-        {TShiftLess,     TShiftLess,     Empty,            Empty},            // TShiftLess 
-        {TrigLevMore,    TrigLevMore,    Empty,            Empty},            // TrigLevMore
-        {TrigLevLess,    TrigLevLess,    Empty,            Empty},            // TrigLevLess
-        {HandlerArrow,   HandlerArrow,   HandlerArrow,     HandlerArrow},     // Left       
-        {HandlerArrow,   HandlerArrow,   HandlerArrow,     HandlerArrow},     // Right      
-        {HandlerArrow,   HandlerArrow,   HandlerArrow,     HandlerArrow},     // Up         
-        {HandlerArrow,   HandlerArrow,   HandlerArrow,     HandlerArrow},     // Down       
-        {Empty,          Empty,          EnterRelease,     EnterLong},        // Enter      
-        {Empty,          Empty,          FuncRelease,      FuncLong},         // F1         
-        {Empty,          Empty,          FuncRelease,      FuncLong},         // F2         
-        {Empty,          Empty,          FuncRelease,      FuncLong},         // F3         
-        {Empty,          Empty,          FuncRelease,      FuncLong},         // F4         
-        {Empty,          Empty,          FuncRelease,      FuncLong}          // F5         
+    { // Press              Repead             Release           Long
+        {Empty,             Empty,             Empty,            Empty},            // None       
+        {Empty,             Empty,             Function,         Empty},            // Function   
+        {Measure,           Measure,           Measure,          Measure},          // Measure    
+        {HandlerMemory,     HandlerMemory,     HandlerMemory,    HandlerMemory},    // Memory     
+        {Service,           Service,           Service,          Service},          // Service    
+        {Empty,             Empty,             ChannelA_Release, ChannelA_Long},    // ChannelA   
+        {Empty,             Empty,             ChannelB_Release, ChannelB_Long},    // ChannelB   
+        {Empty,             Empty,             Time_Release,     Time_Long},        // Time       
+        {Start,             Empty,             Empty,            Empty},            // Start      
+        {Empty,             Empty,             Trig_Release,     Trig_Long},        // Trig       
+        {HandlerDisplay,    HandlerDisplay,    HandlerDisplay,   HandlerDisplay},   // Display    
+        {RangeMoreA,        Empty,             Empty,            Empty},            // RangeMoreA 
+        {RangeLessA,        Empty,             Empty,            Empty},            // RangeLessA 
+        {RShiftMoreA,       RShiftMoreA,       Empty,            Empty},            // RShiftMoreA
+        {RShiftLessA,       RShiftLessA,       Empty,            Empty},            // RShiftLessA
+        {RangeMoreB,        Empty,             Empty,            Empty},            // RangeMoreB 
+        {RangeLessB,        Empty,             Empty,            Empty},            // RangeLessB 
+        {RShiftMoreB,       RShiftMoreB,       Empty,            Empty},            // RShiftMoreB
+        {RShiftLessB,       RShiftLessB,       Empty,            Empty},            // RShiftLessB
+        {TBaseMore,         Empty,             Empty,            Empty},            // TBaseMore  
+        {TBaseLess,         Empty,             Empty,            Empty},            // TBaseLess  
+        {TShiftMore,        TShiftMore,        Empty,            Empty},            // TShiftMore 
+        {TShiftLess,        TShiftLess,        Empty,            Empty},            // TShiftLess 
+        {TrigLevMore_Press, TrigLevMore_Press, Empty,            Empty},            // TrigLevMore
+        {TrigLevLess_Press, TrigLevLess_Press, Empty,            Empty},            // TrigLevLess
+        {HandlerArrow,      HandlerArrow,      HandlerArrow,     HandlerArrow},     // Left       
+        {HandlerArrow,      HandlerArrow,      HandlerArrow,     HandlerArrow},     // Right      
+        {HandlerArrow,      HandlerArrow,      HandlerArrow,     HandlerArrow},     // Up         
+        {HandlerArrow,      HandlerArrow,      HandlerArrow,     HandlerArrow},     // Down       
+        {Empty,             Empty,             EnterRelease,     EnterLong},        // Enter      
+        {Empty,             Empty,             FuncRelease,      FuncLong},         // F1         
+        {Empty,             Empty,             FuncRelease,      FuncLong},         // F2         
+        {Empty,             Empty,             FuncRelease,      FuncLong},         // F3         
+        {Empty,             Empty,             FuncRelease,      FuncLong},         // F4         
+        {Empty,             Empty,             FuncRelease,      FuncLong}          // F5         
     };
 
     Key::E code = event.key;
@@ -324,13 +326,13 @@ static void EnterLong()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void TrigLevMore()
+static void TrigLevMore_Press()
 {
     Trig::Level::Change(1);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void TrigLevLess()
+static void TrigLevLess_Press()
 {
     Trig::Level::Change(-1);
 }
@@ -412,9 +414,15 @@ static void Start()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void HandlerTrig()
+static void Trig_Release()
 {
     OpenPage(PageTrig::pointer);
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+static void Trig_Long()
+{
+
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
