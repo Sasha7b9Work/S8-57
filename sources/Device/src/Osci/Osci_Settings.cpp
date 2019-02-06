@@ -7,6 +7,8 @@
 #include "Settings/Settings.h"
 #include "Utils/Math.h"
 
+#include "Osci/Display/Osci_Display.h"
+
 
 #ifdef WIN32
 #pragma warning(disable:4310)
@@ -14,6 +16,7 @@
 
 
 using namespace HAL::ADDRESSES::FPGA;
+using namespace Osci::Display;
 
 using FPGA::HAL::GPIO::Pin;
 using FPGA::Settings::ModeCouple;
@@ -61,6 +64,8 @@ void Osci::Settings::TBase::Change(int delta)
 
     Load();
     Start();
+
+    Osci::Display::SetFlagRedraw();
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

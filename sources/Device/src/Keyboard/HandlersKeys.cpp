@@ -17,9 +17,12 @@
 #include "Settings/Settings.h"
 #include <cstdio>
 
+#include "Osci/Display/Osci_Display.h"
+
 
 using namespace Display::Primitives;
 using namespace FPGA::Settings;
+using namespace Osci::Display;
 using namespace Osci::Settings;
 using namespace Recorder::Settings;
 
@@ -37,7 +40,6 @@ static Chan drawingChan = Chan(Chan::A);
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-static void RangeMoreB();
 /// Обработчик отпускания функциональной кнопки
 static void FuncRelease();
 /// Обработчик длительного нажатия функциональной кнопки
@@ -53,28 +55,18 @@ static void ShowHidePage(const PageBase *page);
 /// Пустой обработчик
 static void Empty();
 /// Обработчик нажатия стрелки
+
 static void HandlerArrow();
-static void RShiftLessA();
-static void RShiftMoreA();
-static void RShiftLessB();
-static void RShiftMoreB();
-static void RangeLessA();
-static void RangeMoreA();
-static void RangeLessB();
-static void TShiftLess();
-static void TShiftMore();
-static void TBaseLess();
-static void TBaseMore();
+
 static void EnterRelease();
 static void EnterLong();
-static void ChannelA_Release();
-static void ChannelB_Release();
-static void ChannelA_Long();
-static void ChannelB_Long();
-static void Function_Release();
-static void Time_Release();
+
 static void Time_Long();
+static void Time_Release();
+
 static void Start();
+
+static void Function_Release();
 
 static void Service_Release();
 
@@ -84,10 +76,32 @@ static void Display_Release();
 
 static void Memory_Release();
 
+static void ChannelA_Release();
+static void ChannelB_Release();
+static void ChannelA_Long();
+static void ChannelB_Long();
+
+
 static void Trig_Release();
 static void Trig_Long();
 static void TrigLevLess_Press();
 static void TrigLevMore_Press();
+
+static void RangeLessA();
+static void RangeMoreA();
+static void RangeLessB();
+static void RangeMoreB();
+
+static void RShiftLessA();
+static void RShiftMoreA();
+static void RShiftLessB();
+static void RShiftMoreB();
+
+static void TBaseLess();
+static void TBaseMore();
+static void TShiftLess();
+static void TShiftMore();
+
 
 
 class StructHandlers
@@ -187,6 +201,8 @@ static void ChangeRShift(Chan::E ch, int delta)
         stop[ch] = true;
         timeStop[ch] = TIME_MS;
     }
+
+    Osci::Display::SetFlagRedraw();
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

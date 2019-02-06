@@ -31,6 +31,7 @@ namespace Osci
         const uint8 *DataB();
         const uint8 *GetData(Chan::E ch);
         const DataSettings *Settings();
+        uint Number() const { return num; };
     protected:
         /// ”казатель на данные первого канала
         uint8 *dataA;
