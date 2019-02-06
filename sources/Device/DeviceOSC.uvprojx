@@ -1161,11 +1161,6 @@
               <FilePath>.\src\Menu\Pages\PageDisplay\PageDisplay.cpp</FilePath>
             </File>
             <File>
-              <FileName>PageDisplay_Accumulation.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Menu\Pages\PageDisplay\PageDisplay_Accumulation.cpp</FilePath>
-            </File>
-            <File>
               <FileName>PageDisplay_Average.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Menu\Pages\PageDisplay\PageDisplay_Average.cpp</FilePath>
@@ -1184,6 +1179,11 @@
               <FileName>PageDisplay_Settings_Colors.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Menu\Pages\PageDisplay\PageDisplay_Settings_Colors.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>PageAccumulation.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Menu\Pages\PageDisplay\PageAccumulation.cpp</FilePath>
             </File>
           </Files>
         </Group>
