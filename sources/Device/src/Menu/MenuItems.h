@@ -88,6 +88,8 @@ public:
     const PageBase *Keeper() { return keeper; }
     /// ¬озвращает true, если в древе предков стоит keeper
     bool ExistKeeper(const PageBase *keeper);
+    /// »меет родител€ - не €вл€етс€ главной страницей меню
+    bool HaveParent() { return Keeper() != nullptr; };
 
     /// –азные виды пунктов меню
     struct Type

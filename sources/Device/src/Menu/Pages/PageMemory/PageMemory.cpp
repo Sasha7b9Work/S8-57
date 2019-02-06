@@ -519,7 +519,7 @@ DEF_PAGE_4( pageMemory, // -V641                                                
     PageMemory::PageRAM::pointer,      ///< ÏÀÌßÒÜ - ÏÎÑËÅÄÍÈÅ
     PageMemory::PageROM::pointer,      ///< ÏÀÌßÒÜ - ÂÍÓÒÐ ÇÓ
     &ppDrive,                           ///< ÏÀÌßÒÜ - ÂÍÅØÍ ÇÓ
-    Page::Name::Memory, Menu::pageMain, FuncActive, FuncPressPage, FuncDrawPage, FuncRegSetPage
+    Page::Name::Memory, nullptr, FuncActive, FuncPressPage, FuncDrawPage, FuncRegSetPage
 )
 
 void PageMemory::SaveSignalToFlashDrive()

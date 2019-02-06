@@ -91,7 +91,7 @@ DEF_PAGE_3( pChanA, // -V641                                                    
     &cInputA,              ///< ÊÀÍÀË 1 - Âõîä
     &cCoupleA,             ///< ÊÀÍÀË 1 - Ñâÿçü
     &cBandwidthA,          ///< ÊÀÍÀË 1 - Ïîëîñà
-    Page::Name::ChannelA, Menu::pageMain, FuncActive, FuncPressPage, FuncDrawPage, FuncRegSetPage
+    Page::Name::ChannelA, nullptr, FuncActive, FuncPressPage, FuncDrawPage, FuncRegSetPage
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -160,5 +160,5 @@ DEF_PAGE_3( pChanB, // -V641                                                    
     &cInputB,         ///< ÊÀÍÀË 2 - Âõîä
     &cCoupleB,        ///< ÊÀÍÀË 2 - Ñâÿçü
     &cBandwidthB,     ///< ÊÀÍÀË 2 - Ïîëîñà
-    Page::Name::ChannelB, Menu::pageMain, FuncActive, FuncPressPage, FuncDrawPage, FuncRegSetPage
+    Page::Name::ChannelB, nullptr, FuncActive, FuncPressPage, FuncDrawPage, FuncRegSetPage
 )

@@ -695,5 +695,5 @@ DEF_PAGE_10( pService, // -V641 // -V1027                                       
     PageService::PageBattery::pointer,  ///< ÑÅÐÂÈÑ - ÁÀÒÀÐÅß
     &cLanguage,                         ///< ÑÅÐÂÈÑ - ßçûê
     &ppInformation,                     ///< ÑÅÐÂÈÑ - ÈÍÔÎÐÌÀÖÈß
-    Page::Name::Service, Menu::pageMain, FuncActive, FuncPressPage, FuncDrawPage, FuncRegSetPage
+    Page::Name::Service, nullptr, FuncActive, FuncPressPage, FuncDrawPage, FuncRegSetPage
 )

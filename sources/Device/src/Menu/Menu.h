@@ -23,37 +23,22 @@ class Menu
 friend class Page;
 
 public:
-    
-    static PageBase *pageMain;
-
     /// Инициализация
     static void Init();
-    /// Возвращает true, если item - адрес главной страницы меню.
-    static bool IsMainPage(const void *item);
 
     static void ChangeStateFlashDrive();
     /// Функция должна вызываться в главном цикле.
     static void Update();
-    /// Функция обработки короткого нажатия кнопки (менее 0.5 сек.).
-    static void ShortPressureButton(Key::E button);
-    /// Функция обработки длинного нажатия кнопки (более 0.5 сек.).
-    static void LongPressureButton(Key::E button);
     /// Функция вызывается при нажатии, повторе и отпускании кнопки
     static void ButtonEvent(KeyEvent event);
     /// Установить время автоматического сокрытия меню в соответствии с установками.
     static void SetAutoHide(bool active);
-    /// Возвращает путь к текущему пункту меню в текстовом виде, готовом к выводу на экран.
-    static char *StringNavigation(char buffer[100]);
     /// Показать/скрыть меню.
     static void Show(bool show);
     /// Возвращает true, если меню отображается на экране
     static bool IsShown();
-
-    static void OpenItemTime();
     /// Функция временно включает отображение строки навигации меню, если задано настройками.
     static void TemporaryEnableStrNavi();
-    /// Ввыполнить эту функцию после Menu_UpdateInput().
-    static void RunAfterUpdate(pFuncVV func);
     /// Возвращает адрес открытого элемента меню
     static Control *OpenedItem();
     /// Если true - меню находится в дополнительном режиме.
@@ -70,10 +55,6 @@ public:
     static Control *CurrentItem();
     /// Закрыть открытый элемент меню
     static void CloseOpenedItem();
-    /// Уменьшает или увеличивает значение Governor, GovernorColor или Choice по адресу item в зависимости от знака delta
-    static void ChangeItem(Control *item, int delta);
-    /// Вернуть указатель на малую кнопку, соответствующую данной кнопки панели.
-    static const SButton* GetDrawButton(Key::E button);
 
     static void SetItemForHint(void *item);
 
@@ -98,34 +79,16 @@ public:
 private:
     /// Последний открытый контрол на дереве странице page
     static Control *LastOpened(Page *page);
-    /// Обработка короткого нажатия кнопки
-    static void ProcessingShortPressureButton();
-    /// Обработка длинного нажатия кнопки
-    static void ProcessingLongPressureButton();
-    /// Обработка опускания кнопки вниз
-    static void ProcessingPressButton();
-    /// Обработка поднятия кнопки вверх
-    static void ProcessingReleaseButton();
     /// Обработка события таймера автоматического сокрытия меню
     static void OnTimerAutoHide();
     /// Функция, которая отключит вывод строки навигации меню
     static void OnTimerStrNaviAutoHide();
-    /// Возвращает true, если лампочка УСТАНОВКА должна гореть
-    static bool NeedForFireSetLED();
     
     static void ProcessButtonForHint(Key::E button);
-    
-    static void ShortPress_ChoiceReg(void *choice);
     
     static void ResetItemsUnderButton();
     /// Возвращает true, если данная кнопка обрабатыватся в данном режиме
     static bool IsProcessed(const KeyEvent *event);
-    /// Возвращает страницу меню, которая должна открываться по нажатию кнопки button.
-    static const void *PageForButton(Key::E button);
-    /// Если произошло короткое нажатие кнопки, то здесь хранится имя этой кнопки до обработки  этого нажатия.
-    static Key::E shortPressureButton;
-    /// Если произошло длинное нажатие кнопки, то здесь хранится имя этой кнопки до обработки этого нажатия.
-    static Key::E longPressureButton;
     /// При нажатии кнопки её имя записывается в эту переменную и хранится там до обратоки события нажатия кнопки.
     static Key::E pressButton;
     /// При отпускании кнопки её имя записывается в эту переменную и хранится там до обработки события отпускания кнопки.

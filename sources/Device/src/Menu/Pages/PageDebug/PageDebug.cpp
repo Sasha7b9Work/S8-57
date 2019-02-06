@@ -664,5 +664,5 @@ DEF_PAGE_5( pageDebug, // -V641                                                 
 //    &bSaveFirmware,             ///< ÎÒËÀÄÊÀ - Ñîõð. ïðîøèâêó
 //    &ppSerialNumber,            ///< ÎÒËÀÄÊÀ - Ñ/Í
 //    &bEraseData,                ///< ÎÒËÀÄÊÀ - Ñòåðåòü äàííûå
-    Page::Name::Debug, Menu::pageMain, FuncActive, FuncPressPage, FuncDrawPage, FuncRegSetPage
+    Page::Name::Debug, nullptr, FuncActive, FuncPressPage, FuncDrawPage, FuncRegSetPage
 )

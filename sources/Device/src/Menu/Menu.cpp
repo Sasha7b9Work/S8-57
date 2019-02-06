@@ -30,10 +30,11 @@ using namespace Display::Primitives;
 using namespace Osci::Settings;
 
 
+PageBase *pageMain;
+
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
        uint    Menu::timeLastPressedButton = MAX_UINT;
-        Key::E Menu::shortPressureButton = Key::None;
-        Key::E Menu::longPressureButton = Key::None;
         Key::E Menu::pressButton = Key::None;
         Key::E Menu::releaseButton = Key::None;
    Control    *Menu::itemUnderKey = 0;
@@ -106,30 +107,6 @@ bool Menu::IsProcessed(const KeyEvent *event)
     }
 
     return true;
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Menu::ShortPressureButton(Key::E button)
-{
-    if (!HINT_MODE_ENABLED)
-    {
-        if (button == Key::Memory && FDrive::IsConnected() && MODE_BTN_MEMORY_IS_SAVE)
-        {
-            NEED_SAVE_TO_FLASHDRIVE = 1;
-        }
-
-        shortPressureButton = button;
-    }
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Menu::LongPressureButton(Key::E button)
-{
-    if (!HINT_MODE_ENABLED)
-    {
-        longPressureButton = button;
-        NEED_FINISH_DRAW = 1;
-    }
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -236,10 +213,6 @@ void Menu::ProcessButtonForHint(Key::E button)
             "3. Pressing and holding the button СИНХР for 0.5s when setting \"SERVICE\x99Mode long TRIG\x99SReset trig level\" sets the trigger "
             "level 0V.";
     }
-    else
-    {
-        shortPressureButton = button;
-    }
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -260,209 +233,9 @@ void Menu::SetAutoHide(bool)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-char *Menu::StringNavigation(char buffer[100])
-{
-    buffer[0] = 0;
-    const char * titles[10] = {0};
-    int numTitle = 0;
-    Control *item = OpenedItem();
-    if(IsMainPage(item))
-    {
-        return 0;
-    }
-    while(!IsMainPage(item))
-    {
-        titles[numTitle++] = item->Title().CString();
-        item = (Control *)item->keeper;                     // -V1027
-    }
-    for(int i = 9; i >= 0; i--)
-    {
-        if(titles[i])
-        {
-            std::strcat(buffer, titles[i]);
-            if(i != 0)
-            {
-                std::strcat(buffer, " - ");
-            }
-        }
-    }
-    return buffer;
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Menu::OnTimerAutoHide()
 {
     Menu::Show(false);
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Menu::ProcessingShortPressureButton()
-{
-    if(shortPressureButton != Key::None)
-    {
-        if (shortPressureButton == Key::Memory && MODE_BTN_MEMORY_IS_SAVE && FDrive::IsConnected())
-        {
-            EXIT_FROM_SETNAME_TO = (uint)(Menu::IsShown() ? RETURN_TO_MAIN_MENU : RETURN_TO_DISABLE_MENU);
-            PageMemory::SaveSignalToFlashDrive();
-            shortPressureButton = Key::None;
-            return;
-        }
-        NEED_FINISH_DRAW = 1;
-        Menu::SetAutoHide(true);
-
-        Key::E button = shortPressureButton;
-
-        do
-        {
-            if(button == Key::Enter)                                   // Если нажата кнопка МЕНЮ и мы не находимся в режме настройки измерений.
-            {
-                if(!Menu::IsShown())
-                {
-                    Menu::Show(true);
-                }
-                else
-                {
-                    if (IS_PAGE(OpenedItem()))
-                    {
-                        Menu::TemporaryEnableStrNavi();
-                    }
-                    Menu::CloseOpenedItem();
-                }
-            }
-            else if (Menu::IsShown() && Key(button).IsFunctional())       // Если меню показано и нажата функциональная клавиша
-            {
-                Control *item = Menu::ItemUnderButton(button);
-                if (HINT_MODE_ENABLED)
-                {
-                    SetItemForHint(item);
-                }
-                else
-                {
-                    if(item)
-                    {
-                        ((Control *)item)->ShortPress();
-                    }
-                }
-            }
-            else                                                        // Если меню не показано.
-            {
-                Page::Name::E name = ((const Page *)OpenedItem())->GetName();
-                if(button == Key::ChannelA && name == Page::Name::ChannelA && Menu::IsShown())
-                {
-                    SET_ENABLED_A = !SET_ENABLED_A;
-                    PageChannelA::OnChanged_Input(true);
-                    break;
-                }
-                if(button == Key::ChannelB && name == Page::Name::ChannelB && Menu::IsShown())
-                {
-                    SET_ENABLED_B = !SET_ENABLED_B;
-                    PageChannelB::OnChanged_Input(true);
-                    break;
-                }
-
-                Page *page = (Page *)PageForButton(button);
-                if(page && page != (Page *)PageHelp::pointer)
-                {
-                    page->SetCurrent(true);
-                    page->Open(true);
-                    Menu::TemporaryEnableStrNavi();
-                    Menu::Show(true);
-                }
-            }
-        } while(false);
-
-        shortPressureButton = Key::None;
-    }
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Menu::ProcessingLongPressureButton()
-{
-    Key::E button = longPressureButton;
-
-    if(button != Key::None)
-    {
-        Control *item = OpenedItem();
-        
-        Beeper::ButtonRelease();
-        NEED_FINISH_DRAW = 1;
-        SetAutoHide(true);
-
-        if(button == Key::Time)
-        {
-            TShift::Set(0);
-        }
-        else if(button == Key::Trig)
-        {
-        }
-        else if(button == Key::ChannelA)
-        {
-            RShift::Set(Chan::A, RShift::ZERO);
-        }
-        else if(button == Key::ChannelB)
-        {
-            RShift::Set(Chan::B, RShift::ZERO);
-        }
-        else if(button == (Key::Enter))
-        {
-            if (IS_PAGE_SB(OpenedItem()))
-            {
-                CloseOpenedItem();
-            }
-            else
-            {
-                Show(!Menu::IsShown());
-                if (NOT_PAGE(item))
-                {
-                    TemporaryEnableStrNavi();
-                }
-            }
-        }
-        else if(Menu::IsShown() && Key(button).IsFunctional())
-        {
-            Control *control = Menu::ItemUnderButton(button);
-            if(control)
-            {
-                control->LongPress();
-                if (NOT_PAGE(control))
-                {
-                    TemporaryEnableStrNavi();
-                }
-            }
-        }
-        else
-        {
-            // остальные кнопки не обрабатываются
-        }
-        longPressureButton = Key::None;
-    }
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Menu::ProcessingPressButton()
-{
-    if ((pressButton >= Key::F1 && pressButton <= Key::F5) || pressButton == Key::Enter)
-    {
-        if (pressButton != Key::Enter)
-        {
-            itemUnderKey = Menu::ItemUnderButton(pressButton);
-        }
-    }
-    if ((pressButton == Key::Start) && (MODE_WORK != ModeWork::RAM))
-    {
-        FPGA::OnPressStart();
-    }
-    pressButton = Key::None;
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Menu::ProcessingReleaseButton()
-{
-    if((releaseButton >= Key::F1 && releaseButton <= Key::F5) || pressButton == Key::Enter)
-    {
-        itemUnderKey = 0;
-        releaseButton = Key::None;
-    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------
@@ -479,25 +252,6 @@ void Menu::TemporaryEnableStrNavi()
 void Menu::OnTimerStrNaviAutoHide()
 {
     SHOW_STRING_NAVIGATION = 0;
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Menu::ShortPress_ChoiceReg(void *choice_)
-{
-    Choice *choice = (Choice*)choice_;
-
-    if(!choice->IsAcitve()) 
-    {
-        CHOICE_RUN_FUNC_CHANGED(choice, false);
-    } 
-    else if(OpenedItem() != choice) 
-    {
-        choice->SetCurrent(!choice->IsCurrentItem());
-    }
-    else
-    {
-        // остальные ситуации не обрабатываются
-    }
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -518,68 +272,6 @@ void Menu::ChangeStateFlashDrive()
     {
         // остальные ситуации не обрабатываются
     }
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Menu::OpenItemTime()
-{
-    Display::ShowWarning(Warning::TimeNotSet);
-    ShortPressureButton(Key::Service);
-    Update();
-    Display::Update();
-    for (int i = 0; i < 2; i++)
-    {
-        Update();
-        Display::Update();
-    }
-    ShortPressureButton(Key::F4);
-    Update();
-    Display::Update();
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-bool Menu::NeedForFireSetLED()
-{
-    Control *item = OpenedItem();
-    
-    if (!Menu::IsShown())
-    {
-        return IS_CHOICE_REG(item) || IS_CHOICE(item) || IS_GOVERNOR(item);
-    }
-
-    Page::Name::E name = GetNameOpenedPage();
-    if (
-            name == Page::Name::SB_Debug_SerialNumber   ||
-            name == Page::Name::SB_Service_FFT_Cursors  || 
-            name == Page::Name::Measures_Auto_Tune      || 
-            name == Page::Name::SB_Memory_Last          || 
-            name == Page::Name::SB_Memory_Internal      ||
-            PageMeasures::PageCursors::PageSet::IsRegSetActiveOnCursors() ||
-            (name == Page::Name::SB_Service_Function && FUNC_MODE_DRAW_IS_ENABLED)
-        )
-    {
-        return true;
-    }
-    
-    item = CurrentItem();
-    
-    if (IS_GOVERNOR(item)       ||
-        IS_CHOICE_REG(item)     ||
-        IS_GOVERNOR_COLOR(item))
-    {
-        return true;
-    }
-    
-    item = OpenedItem();
-
-    if (IS_CHOICE(item)  ||
-        (IS_PAGE(item) && ((const Page *)OpenedItem())->NumSubPages() > 1)
-        )
-    {
-        return true;
-    }
-
-    return false;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -605,12 +297,6 @@ void Menu::Init()
 {
     PageDisplay::Init();
     PageFunction::PageMultimeter::Init();
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Menu::RunAfterUpdate(pFuncVV func)
-{
-    funcAterUpdate = func;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -696,35 +382,6 @@ void Menu::CloseOpenedItem()
     else
     {
         item->Open(false);
-    }
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Menu::ChangeItem(Control *item, int delta)
-{
-    if (IS_CHOICE(item) || IS_CHOICE_REG(item))
-    {
-        ((Choice *)item)->StartChange(delta);
-    }
-    else if (IS_GOVERNOR(item))
-    {
-        Governor *governor = (Governor*)item;
-        if (OpenedItem() != governor)
-        {
-            governor->StartChange(delta);
-        }
-        else
-        {
-            governor->ChangeValue(delta);
-        }
-    }
-    else if (IS_GOVERNOR_COLOR(item))
-    {
-        ((GovernorColor *)item)->ChangeValue(delta);
-    }
-    else
-    {
-        // остальные контролы не обрабатываются
     }
 }
 
@@ -875,18 +532,6 @@ void Menu::ResetItemsUnderButton()
 bool Menu::IsMinimize()
 {
     return IS_PAGE_SB(Menu::OpenedItem());
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-const SButton *Menu::GetDrawButton(Key::E button)
-{
-    if (Menu::IsMinimize() && button >= Key::Enter && button <= Key::F5)
-    {
-        Page *page = (Page *)OpenedItem();
-        SButton *sb = (SButton *)page->items[button - Key::Enter];
-        return sb;
-    }
-    return NULL;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

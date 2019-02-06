@@ -720,29 +720,31 @@ void Page::DrawPagesUGO(int right, int bottom)
 //---------------------------------------------------------------------------------------------------------------------------------------------------
 void Page::DrawNestingPage(int left, int bottom)
 {
-    if (this != (Page *)Menu::pageMain)
+    int nesting = 0;
+
+    Page *page = this;
+
+    PageBase *parent = KEEPER(page);
+
+    if (parent == nullptr)
     {
-        int nesting = 0;
+        return;
+    }
 
-        Page *page = this;
+    while (parent != nullptr)
+    {
+        page = (Page *)parent;
+        parent = KEEPER(page);
+        nesting++;                                  // -V127
+    }
 
-        PageBase *parent = KEEPER(page);
+    int size = 4;
+    int delta = 2;
 
-        while (parent != Menu::pageMain)
-        {
-            page = (Page *)parent;
-            parent = KEEPER(page);
-            nesting++;                                  // -V127
-        }
-
-        int size = 4;
-        int delta = 2;
-
-        for (int i = 0; i <= nesting; i++)
-        {
-            int x = left + i * (size + delta);
-            Rectangle(size, size).Draw(x, bottom);
-        }
+    for (int i = 0; i <= nesting; i++)
+    {
+        int x = left + i * (size + delta);
+        Rectangle(size, size).Draw(x, bottom);
     }
 }
 

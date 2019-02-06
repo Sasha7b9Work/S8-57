@@ -179,5 +179,5 @@ DEF_PAGE_6( pTrig, // -V641 // -V1027                                           
     &cInput,                        ///< ÑÈÍÕÐ - Âõîä
     PageTrig::PageHoldOff::pointer, ///< ÑÈÍÕÐ - ÓÄÅÐÆÀÍÈÅ
     &ppSearch,                      ///< ÑÈÍÕÐ - ÏÎÈÑÊ
-    Page::Name::Trig, Menu::pageMain, FuncActive, FuncPressPage, FuncDrawPage, FuncRegSetPage
+    Page::Name::Trig, nullptr, FuncActive, FuncPressPage, FuncDrawPage, FuncRegSetPage
 )

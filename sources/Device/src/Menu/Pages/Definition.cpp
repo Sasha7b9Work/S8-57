@@ -21,58 +21,8 @@
 using namespace Display::Primitives;
 using namespace Osci::Measurements;
 
-extern const PageBase page;
-
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-PageBase *Menu::pageMain = (PageBase *)&page;
-
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-DEF_PAGE_10(page,                                                                                                                       //--- Ã≈Õﬁ ---
-    "Ã≈Õﬁ", "MENU",
-    "", "",
-    PageDisplay::pointer,   // ƒ»—œÀ≈…
-    PageChannelA::pointer,  //  ¿Õ¿À 1
-    PageChannelB::pointer,  //  ¿Õ¿À 2
-    PageTrig::pointer,      // —»Õ’–
-    PageTime::pointer,      // –¿«¬≈–“ ¿
-    PageFunction::pointer,  // ‘”Õ ÷»ﬂ
-    PageMemory::pointer,    // œ¿Ãﬂ“‹
-    PageMeasures::pointer,  // »«Ã≈–≈Õ»ﬂ
-    PageService::pointer,   // —≈–¬»—
-    PageDebug::pointer,     // Œ“À¿ƒ ¿
-    Page::Name::Main, 0, FuncActive, FuncPressPage, FuncDrawPage, FuncRegSetPage
-)
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-const void *Menu::PageForButton(Key::E button)
-{
-    static const void *pages[Key::Number] =
-    {  
-        0,                              // None
-        (void *)PageFunction::pointer,  // Function  1
-        (void *)PageMeasures::pointer,  // Measures  2
-        (void *)PageMemory::pointer,    // Memory    3
-        (void *)PageService::pointer,   // Service   4
-        (void *)PageChannelA::pointer,  // ChannelA  5
-        (void *)PageChannelB::pointer,  // ChannelB  6
-        (void *)PageTime::pointer,      // Time      7
-        0,                              // Start     
-        (void *)PageTrig::pointer,      // Trig      9
-        (void *)PageDisplay::pointer    // Display  10
-    };
-
-    return pages[button];
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-bool Menu::IsMainPage(const void *item)
-{
-    return item == pageMain;
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void DrawSB_Exit(int x, int y)
 {
     Font::SetCurrent(Font::Type::_UGO2);

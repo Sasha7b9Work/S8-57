@@ -18,5 +18,5 @@ DEF_PAGE_2( pageMeasures, // -V1027                                             
     "Access to measurement settings - cursor and automatic",
     PageMeasures::PageCursors::pointer,     ///< ÈÇÌÅÐÅÍÈß - ÊÓÐÑÎÐÛ
     PageMeasures::PageAuto::pointer,        ///< ÈÇÌÅÐÅÍÈß - ÀÂÒÎÌÀÒ
-    Page::Name::Measures, Menu::pageMain, FuncActive, FuncPressPage, FuncDrawPage, FuncRegSetPage
+    Page::Name::Measures, nullptr, FuncActive, FuncPressPage, FuncDrawPage, FuncRegSetPage
 )
