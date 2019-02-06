@@ -19,7 +19,7 @@ namespace Osci
         struct Range
         {
             static void Change(Chan::E ch, int delta);
-
+            /// «агружатьс€ эта настройка может только дл€ обоих каналов одновременно
             static void LoadBoth();
 
             enum E
@@ -41,6 +41,8 @@ namespace Osci
             } value;
             explicit Range(E v) : value(v) {};
             pString Name() const;
+
+            static void Set(Chan::E ch, E range);
 
             pString ToString(Divider::E divider);
 
