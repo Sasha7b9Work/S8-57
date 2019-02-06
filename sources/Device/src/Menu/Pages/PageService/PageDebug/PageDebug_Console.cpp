@@ -2,7 +2,7 @@
 #include "Display/Colors.h"
 #include "Display/Painter.h"
 #include "Menu/MenuItems.h"
-#include "Menu/Pages/Include/PageDebug.h"
+#include "Menu/Pages/Include/PageService.h"
 #include "Settings/Settings.h"
 
 
@@ -10,7 +10,7 @@
 extern const PageBase pageConsole;
 extern const PageBase pageRegisters;
 
-const PageBase *PageDebug::PageConsole::pointer = &pageConsole;
+const PageBase *PageService::PageDebug::PageConsole::pointer = &pageConsole;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -219,6 +219,6 @@ DEF_PAGE_6( pageConsole, // -V641 // -V1027                                     
     &cModeStop,         ///< ÎÒËÀÄÊÀ - ÊÎÍÑÎËÜ - Ðåæ. îñòàíîâà
     &pageRegisters,     ///< ÎÒËÀÄÊÀ - ÊÎÍÑÎËÜ - ÐÅÃÈÑÒÐÛ
     &bSizeSettings,     ///< ÎÒËÀÄÊÀ - ÊÎÍÑÎËÜ - Ðàçìåð íàñòðîåê
-    Page::Name::Debug_Console, PageDebug::pointer, FuncActive, FuncPressPage, FuncDrawPage, FuncRegSetPage
+    Page::Name::Debug_Console, PageService::PageDebug::pointer, FuncActive, FuncPressPage, FuncDrawPage, FuncRegSetPage
 )
 

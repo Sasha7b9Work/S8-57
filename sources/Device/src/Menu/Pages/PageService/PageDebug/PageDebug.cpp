@@ -1,5 +1,4 @@
 #include "defines.h"
-#include "Menu/Pages/Include/PageDebug.h"
 #include "Data/Reader.h"
 #include "Display/Display_Primitives.h"
 #include "Display/Grid.h"
@@ -12,6 +11,7 @@
 #include "Hardware/Beeper.h"
 #include "Menu/Menu.h"
 #include "Menu/Pages/Include/Definition.h"
+#include "Menu/Pages/Include/PageService.h"
 #include "Utils/CommonFunctions.h"
 #include "Utils/Dictionary.h"
 #include "Utils/Math.h"
@@ -33,7 +33,7 @@ extern const PageBase pppADC_Shift;
 extern const PageBase ppSettings;
 extern const PageBase ppSerialNumber;
 
-const PageBase *PageDebug::pointer = &pageDebug;
+const PageBase *PageService::PageDebug::pointer = &pageDebug;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /// В этой структуре будут храниться данные серийного номера при открытой странице ppSerialNumer
@@ -121,7 +121,7 @@ DEF_PAGE_3( pppADC_Balance, // -V641                                            
 static int16 stretchA;
 static int16 stretchB;
 
-void PageDebug::OnChanged_ADC_Stretch_Mode(bool)
+void PageService::PageDebug::OnChanged_ADC_Stretch_Mode(bool)
 {
     if (NRST_STRETCH_ADC_TYPE_IS_DISABLE)
     {
@@ -142,7 +142,7 @@ DEF_CHOICE_3( cADC_Stretch_Mode,                                                
     DISABLE_RU, DISABLE_EN,
     "Реальный", "Real",
     "Ручной",   "Manual",
-    NRST_STRETCH_ADC_TYPE, pppADC_Stretch, FuncActive, PageDebug::OnChanged_ADC_Stretch_Mode, Choice::EmptyDraw
+    NRST_STRETCH_ADC_TYPE, pppADC_Stretch, FuncActive, PageService::PageDebug::OnChanged_ADC_Stretch_Mode, Choice::EmptyDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -372,7 +372,7 @@ DEF_CHOICE_2( cStats,                                                           
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void PageDebug::OnChanged_DisplayOrientation(bool)
+void PageService::PageDebug::OnChanged_DisplayOrientation(bool)
 {
     Display::SetOrientation(DISPLAY_ORIENTATION);
 }
@@ -383,7 +383,7 @@ DEF_CHOICE_2( cDisplayOrientation,                                              
     "Sets display orientation",
     "Прямая",   "Direct",
     "Обратная", "Back",
-    DISPLAY_ORIENTATION, pageDebug, FuncActive, PageDebug::OnChanged_DisplayOrientation, Choice::EmptyDraw
+    DISPLAY_ORIENTATION, pageDebug, FuncActive, PageService::PageDebug::OnChanged_DisplayOrientation, Choice::EmptyDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -653,16 +653,16 @@ DEF_PAGE_5( pageDebug, // -V641                                                 
     "ОТЛАДКА", "DEBUG",
     "",
     "",
-    PageDebug::PageConsole::pointer,    ///< ОТЛАДКА - КОНСОЛЬ
-    &ppADC,                             ///< ОТЛАДКА - АЦП
-    PageDebug::PageRand::pointer,       ///< ОТЛАДКА - РАНД-ТОР
-    &cStats,			                ///< ОТЛАДКА - Статистика
-    &cDisplayOrientation,               ///< ОТЛАДКА - Ориентация
-//    &mgPred,			          ///< ОТЛАДКА - Предзапуск
-//    &mgPost,			          ///< ОТЛАДКА - Послезапуск
-//    &ppSettings,		          ///< ОТЛАДКА - НАСТРОЙКИ
-//    &bSaveFirmware,             ///< ОТЛАДКА - Сохр. прошивку
-//    &ppSerialNumber,            ///< ОТЛАДКА - С/Н
-//    &bEraseData,                ///< ОТЛАДКА - Стереть данные
-    Page::Name::Debug, nullptr, FuncActive, FuncPressPage, FuncDrawPage, FuncRegSetPage
+    PageService::PageDebug::PageConsole::pointer,   ///< ОТЛАДКА - КОНСОЛЬ
+    &ppADC,                                         ///< ОТЛАДКА - АЦП
+    PageService::PageDebug::PageRand::pointer,      ///< ОТЛАДКА - РАНД-ТОР
+    &cStats,			                            ///< ОТЛАДКА - Статистика
+    &cDisplayOrientation,                           ///< ОТЛАДКА - Ориентация
+//    &mgPred,			                            ///< ОТЛАДКА - Предзапуск
+//    &mgPost,			                            ///< ОТЛАДКА - Послезапуск
+//    &ppSettings,		                            ///< ОТЛАДКА - НАСТРОЙКИ
+//    &bSaveFirmware,                               ///< ОТЛАДКА - Сохр. прошивку
+//    &ppSerialNumber,                              ///< ОТЛАДКА - С/Н
+//    &bEraseData,                                  ///< ОТЛАДКА - Стереть данные
+    Page::Name::Debug, PageService::pointer, FuncActive, FuncPressPage, FuncDrawPage, FuncRegSetPage
 )

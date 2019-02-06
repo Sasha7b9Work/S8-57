@@ -681,7 +681,7 @@ DEF_PAGE_SB( ppInformation, // -V641                                            
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 const PageBase *PageService::pointer = &pService;
 
-DEF_PAGE_10( pService, // -V641 // -V1027                                                                                                                                     //--- СЕРВИС ---
+DEF_PAGE_11( pService, // -V641 // -V1027                                                                                                                                     //--- СЕРВИС ---
     "СЕРВИС", "SERVICE",
     "Дополнительные настройки, калибровка, поиск сигнала, математические функции",
     "Additional settings, calibration, signal search, mathematical functions",
@@ -695,5 +695,6 @@ DEF_PAGE_10( pService, // -V641 // -V1027                                       
     PageService::PageBattery::pointer,  ///< СЕРВИС - БАТАРЕЯ
     &cLanguage,                         ///< СЕРВИС - Язык
     &ppInformation,                     ///< СЕРВИС - ИНФОРМАЦИЯ
+    PageService::PageDebug::pointer,    ///< СЕРВИС - ОТЛАДКА
     Page::Name::Service, nullptr, FuncActive, FuncPressPage, FuncDrawPage, FuncRegSetPage
 )

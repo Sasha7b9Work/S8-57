@@ -1153,26 +1153,6 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>Menu/Pages/PageDebug</GroupName>
-          <Files>
-            <File>
-              <FileName>PageDebug.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Menu\Pages\PageDebug\PageDebug.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>PageDebug_Console.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Menu\Pages\PageDebug\PageDebug_Console.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>PageDebug_Rand.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Menu\Pages\PageDebug\PageDebug_Rand.cpp</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
           <GroupName>Menu/Pages/PageDisplay</GroupName>
           <Files>
             <File>
@@ -1354,6 +1334,26 @@
               <FileName>PageService_Battery.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Menu\Pages\PageService\PageService_Battery.cpp</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Menu/Pages/PageService/PageDebug</GroupName>
+          <Files>
+            <File>
+              <FileName>PageDebug.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Menu\Pages\PageService\PageDebug\PageDebug.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>PageDebug_Console.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Menu\Pages\PageService\PageDebug\PageDebug_Console.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>PageDebug_Rand.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Menu\Pages\PageService\PageDebug\PageDebug_Rand.cpp</FilePath>
             </File>
           </Files>
         </Group>

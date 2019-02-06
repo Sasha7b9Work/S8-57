@@ -8,7 +8,6 @@
 #include "Utils/CommonFunctions.h"
 #include "Device.h"
 #include "Menu/Pages/Include/PageChannels.h"
-#include "Menu/Pages/Include/PageDebug.h"
 #include "Menu/Pages/Include/PageDisplay.h"
 #include "Menu/Pages/Include/PageFunction.h"
 #include "Menu/Pages/Include/PageMeasures.h"

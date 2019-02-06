@@ -2,7 +2,7 @@
 #include "FPGA/FPGA.h"
 #include "FPGA/FPGA_Settings.h"
 #include "Menu/MenuItems.h"
-#include "Menu/Pages/Include/PageDebug.h"
+#include "Menu/Pages/Include/PageService.h"
 #include "Settings/Settings.h"
 #include "Settings/SettingsNRST.h"
 
@@ -13,7 +13,7 @@ extern const PageBase pageRand;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-const PageBase *PageDebug::PageRand::pointer = &pageRand;
+const PageBase *PageService::PageDebug::PageRand::pointer = &pageRand;
 
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -171,5 +171,5 @@ DEF_PAGE_2( pageRand, // -V641 // -V1027                                        
     //&gRand_TimeCompensation,    ///< ÎÒËÀÄÊÀ - ÐÀÍÄ-ÒÎÐ - Êîìïåíñàöèÿ çàäåðæêè
     //&gRand_AddTimeShift,        ///< ÎÒËÀÄÊÀ - ÐÀÍÄ-ÒÎÐ - Ñìåùåíèå
     //&gRand_Pretriggered,        ///< ÎÒËÀÄÊÀ - ÐAÍÄ-ÒÎÐ - Ïðåäçàïóñê
-    Page::Name::Debug_Rand, PageDebug::pointer, Page::FuncActive, Page::FuncPress, Page::FuncDraw, Page::FuncRegSet
+    Page::Name::Debug_Rand, PageService::PageDebug::pointer, Page::FuncActive, Page::FuncPress, Page::FuncDraw, Page::FuncRegSet
 )
