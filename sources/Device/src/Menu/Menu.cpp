@@ -586,6 +586,7 @@ bool Menu::NeedForFireSetLED()
 void Menu::Show(bool show)
 {
     set.menu_show = show;
+
     if (show)
     {
         Menu::TemporaryEnableStrNavi();
@@ -622,6 +623,12 @@ Control *Menu::OpenedItem()
 Page::Name::E Menu::GetNameOpenedPage()
 {
     return ((const Page *)OpenedItem())->GetName();
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+PageBase *Menu::OpenedPage()
+{
+    return (PageBase *)OpenedItem();
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

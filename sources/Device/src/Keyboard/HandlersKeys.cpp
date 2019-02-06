@@ -46,8 +46,8 @@ static void FuncLong();
 static void OnChangeParameterChannel(pFuncVChI, Chan::E, int);
 /// Общий обработчик изменения временных параметров
 static void OnChangeParameterTime(pFuncVI, int);
-
-static void OpenPage(const PageBase *page);
+/// Открывает страницу или закрывает меню в зависимости от того, какая страница сейчас раскрыта
+static void ShowHidePage(const PageBase *page);
 
 
 /// Пустой обработчик
@@ -73,12 +73,13 @@ static void ChannelA_Long();
 static void ChannelB_Long();
 static void Function_Release();
 static void Measure();
-static void HandlerMemory();
 static void Service();
 static void Time_Release();
 static void Time_Long();
 static void Start();
 static void HandlerDisplay();
+
+static void Memory_Release();
 
 static void Trig_Release();
 static void Trig_Long();
@@ -96,7 +97,7 @@ void Handlers::Process(KeyEvent e)
         {Empty,             Empty,             Empty,            Empty},            // None       
         {Empty,             Empty,             Function_Release, Empty},            // Function   
         {Measure,           Measure,           Measure,          Measure},          // Measure    
-        {HandlerMemory,     HandlerMemory,     HandlerMemory,    HandlerMemory},    // Memory     
+        {Empty,             Empty,             Memory_Release,   Empty},    // Memory     
         {Service,           Service,           Service,          Service},          // Service    
         {Empty,             Empty,             ChannelA_Release, ChannelA_Long},    // ChannelA   
         {Empty,             Empty,             ChannelB_Release, ChannelB_Long},    // ChannelB   
@@ -340,13 +341,13 @@ static void TrigLevLess_Press()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void ChannelA_Release()
 {
-    OpenPage(PageChannelA::pointer);
+    ShowHidePage(PageChannelA::pointer);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void ChannelB_Release()
 {
-    OpenPage(PageChannelB::pointer);
+    ShowHidePage(PageChannelB::pointer);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -364,17 +365,17 @@ static void ChannelB_Long()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void Function_Release()
 {
-    OpenPage(PageFunction::pointer);
+    ShowHidePage(PageFunction::pointer);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void Measure()
 {
-    OpenPage(PageMeasures::pointer);
+    ShowHidePage(PageMeasures::pointer);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void HandlerMemory()
+static void Memory_Release()
 {
     if (MODE_BTN_MEMORY_IS_SAVE)
     {
@@ -385,20 +386,20 @@ static void HandlerMemory()
     }
     else
     {
-        OpenPage(PageMemory::pointer);
+        ShowHidePage(PageMemory::pointer);
     }
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void Service()
 {
-    OpenPage(PageService::pointer);
+    ShowHidePage(PageService::pointer);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void Time_Release()
 {
-    OpenPage(PageTime::pointer);
+    ShowHidePage(PageTime::pointer);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -416,7 +417,7 @@ static void Start()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void Trig_Release()
 {
-    OpenPage(PageTrig::pointer);
+    ShowHidePage(PageTrig::pointer);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -428,13 +429,23 @@ static void Trig_Long()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void HandlerDisplay()
 {
-    OpenPage(PageDisplay::pointer);
+    ShowHidePage(PageDisplay::pointer);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void OpenPage(const PageBase *page)
+static void ShowHidePage(const PageBase *page)
 {
-    ((Page *)page)->SetAsCurrent();
-    ((Page *)page)->Open(true);
-    Menu::Show(true);
+    if (Menu::OpenedPage() == page)
+    {
+        Menu::Show(!Menu::IsShown());
+    }
+    else
+    {
+        ((Page *)page)->SetAsCurrent();
+        ((Page *)page)->Open(true);
+        if (!Menu::IsShown())
+        {
+            Menu::Show(true);
+        }
+    }
 }

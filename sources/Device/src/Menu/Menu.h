@@ -64,6 +64,8 @@ public:
     static void SetItemUnderButton(Key::E button, Control *control);
 
     static Page::Name::E GetNameOpenedPage();
+
+    static PageBase *OpenedPage();
     /// Возвращает адрес текущего элемента меню (текущим, как правило, является элемент, кнопка которого была нажата последней
     static Control *CurrentItem();
     /// Закрыть открытый элемент меню
