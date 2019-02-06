@@ -75,7 +75,7 @@ DEF_CHOICE_8( cMinMax,                                                          
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-DEF_CHOICE_REG_10( cSmoothing,                                                                                                                                //--- ДИСПЛЕЙ - Сглаживание ---
+DEF_CHOICE_10( cSmoothing,                                                                                                                                    //--- ДИСПЛЕЙ - Сглаживание ---
     "Сглаж.", "Smoothing",
     "Устанавливает количество точек для расчёта сглаженного по соседним точкам сигнала.",
     "Establishes quantity of points for calculation of the signal smoothed on the next points."
@@ -90,7 +90,7 @@ DEF_CHOICE_REG_10( cSmoothing,                                                  
     "8 точек",  "8 points",
     "9 точек",  "9 points",
     "10 точек", "10 points",
-    ENUM_SMOOTHING, pageDisplay, FuncActive, Choice::EmptyChange, Choice::EmptyDraw
+    ENUM_SMOOTHING.value, pageDisplay, FuncActive, Choice::EmptyChange, Choice::EmptyDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

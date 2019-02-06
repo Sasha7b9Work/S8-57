@@ -27,21 +27,14 @@
 #define NUM_MIN_MAX                 (1 << (int)ENUM_MIN_MAX)        /* Возвращает количество измерений сигналов для расчёта минимумов и максимумов. */
 
 #define ENUM_SMOOTHING              (set.disp_ENumSmoothing)
-#define NUM_SMOOTHING               (Display::NumPointSmoothing())
 #define SMOOTHING_ENABLED           (ENUM_SMOOTHING != Display::ENumSmoothing::Disable)
 
-//#define MODE_ACCUM                  (set.disp_modeAccumulation)
-//#define MODE_ACCUM_RESET            (MODE_ACCUM == Display::ModeAccumulation::Reset)
-//#define MODE_ACCUM_NO_RESET         (MODE_ACCUM == Display::ModeAccumulation::NoReset)
-
-#define ACCUMULATION                (set.disp_ENumSmoothing)
+#define ACCUMULATION                (set.disp_modeAccumulation)
 #define ACCUMULATION_IS_ENABLED     (ACCUMULATION == ::Display::ModeAccumulation::Reset)
 
 
 #define ENUM_ACCUM                  (set.disp_ENumAccum)
-#define ENUM_ACCUM_INF              (ENUM_ACCUM == ENumAccum_Infinity)
 #define NUM_ACCUM                   (1 << (int)ENUM_ACCUM)                   /* Возвращает число накоплений */
-#define IN_ACCUM_MODE               (ENUM_ACCUM > ENumAccum_1)
 
 #define MODE_AVE                    (set.disp_modeAveraging)
 #define ENUM_AVE                    (set.disp_ENumAverage)
@@ -219,6 +212,8 @@ namespace Display
             _9points,
             _10points
         } value;
+        explicit ENumSmoothing(E v) : value(v) { };
+        uint ToNumber() const;
     };
 
     struct ModeAccumulation

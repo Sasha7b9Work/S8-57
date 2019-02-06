@@ -27,7 +27,7 @@ const Settings Settings::defaultSettings =
     Display::ENumAverage::_1,                                   // disp_ENumAverage;         
     Display::ENumAccum::_1,                                     // disp_ENumAccum;           
     Display::ModeAccumulation::NoReset,                         // disp_modeAccumulation;    
-    Display::ENumSmoothing::Disable,                            // disp_ENumSmoothing;       
+    Display::ENumSmoothing(Display::ENumSmoothing::Disable),    // disp_ENumSmoothing;       
     Display::ENumSignalsInSec(Display::ENumSignalsInSec::_25),  // disp_ENumSignalsInSec;    
     Grid::Type::_1,                                             // disp_typeGrid;            
     50,                                                         // disp_brightnessGrid;      

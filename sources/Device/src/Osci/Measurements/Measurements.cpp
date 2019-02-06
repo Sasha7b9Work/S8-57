@@ -154,6 +154,56 @@ static void LimitationData(Chan::E ch, uint numBytes);
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/// Специальный класс для сглаживающего фильтра
+class Smoother
+{
+public:
+    /// Сгладить данные in и положить их в out
+    static void Run(const uint8 *in, uint8 *out, uint numBytes)
+    {
+        size = (int)numBytes;
+        data = in;
+
+        if (ENUM_SMOOTHING.ToNumber() < 2)
+        {
+            std::memcpy(out, in, numBytes);
+            return;
+        }
+
+        for (uint i = 0; i < numBytes; i++)
+        {
+            out[i] = CalculatePoint((int)i);
+        }
+    }
+private:
+    /// Рассчитывает одну сглаженную точку
+    static uint8 CalculatePoint(int index)
+    {
+        uint sum = 0U;          // Здесь будет храниться сумма
+
+        uint parts = 0U;        // Здесь количество уже просуммированных точек
+
+        index -= ENUM_SMOOTHING.ToNumber() / 2;
+
+        do
+        {
+            if (index >= 0 && index < size)
+            {
+                sum += data[index++];
+            }
+        } while (++parts < ENUM_SMOOTHING.ToNumber());
+
+        return (uint8)(sum / parts);
+    }
+
+    static int size;
+    const static uint8 *data;
+};
+int Smoother::size = 0;
+const uint8 *Smoother::data = nullptr;
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void Osci::Measurements::CalculateMeasures()
 {
     if(!SHOW_MEASURES || !isSet)
@@ -1444,16 +1494,16 @@ static void CountedToCurrentSettings()
 
     if (ENABLED_DS(Chan::A))
     {
-        std::memcpy(OUT_A, IN_A, NUM_BYTES);
+        Smoother::Run(IN_A, OUT_A, NUM_BYTES);
         CountedToCurrentSettings(Chan::A, NUM_BYTES);
         LimitationData(Chan::A, NUM_BYTES);
     }
 
     if (ENABLED_DS(Chan::B))
     {
-        std::memcpy(OUT_B, IN_B, NUM_BYTES);
+        Smoother::Run(IN_B, OUT_B, NUM_BYTES);
         CountedToCurrentSettings(Chan::B, NUM_BYTES);
-        LimitationData(Chan::A, NUM_BYTES);
+        LimitationData(Chan::B, NUM_BYTES);
     }
 }
 
