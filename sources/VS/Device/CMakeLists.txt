@@ -138,3 +138,4 @@ file(GLOB SOURCES   ../../common/_VS/*
 add_executable(Device56 ${SOURCES})
 
 target_link_libraries(Device56 "..\\..\\ThirdParty\\SDL2\\SDL2-2.0.9\\generated\\Debug\\SDL2-staticd.lib")
+target_link_libraries(Device56 WinMM.lib)
