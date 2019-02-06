@@ -69,8 +69,8 @@ static void TrigLevLess();
 static void TrigLevMore();
 static void EnterRelease();
 static void EnterLong();
-static void ChannelA();
-static void ChannelB();
+static void ChannelA_Press();
+static void ChannelB_Press();
 static void Function();
 static void Measure();
 static void HandlerMemory();
@@ -93,8 +93,8 @@ void Handlers::Process(KeyEvent e)
         {Measure,        Measure,        Measure,        Measure},          // Measure    
         {HandlerMemory,  HandlerMemory,  HandlerMemory,  HandlerMemory},    // Memory     
         {Service,        Service,        Service,        Service},          // Service    
-        {ChannelA,       Empty,          Empty,          Empty},            // ChannelA   
-        {ChannelB,       Empty,          Empty,          Empty},            // ChannelB   
+        {ChannelA_Press, Empty,          Empty,          Empty},            // ChannelA   
+        {ChannelB_Press, Empty,          Empty,          Empty},            // ChannelB   
         {Time,           Time,           Time,           Time},             // Time       
         {Start,          Empty,          Empty,          Empty},            // Start      
         {HandlerTrig,    HandlerTrig,    HandlerTrig,    HandlerTrig},      // Trig       
@@ -333,13 +333,13 @@ static void TrigLevLess()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void ChannelA()
+static void ChannelA_Press()
 {
     OpenPage(PageChannelA::pointer);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void ChannelB()
+static void ChannelB_Press()
 {
     OpenPage(PageChannelB::pointer);
 }
