@@ -1,6 +1,5 @@
 #pragma once
 #include "Settings/SettingsMemory.h"
-#include "FPGA/FPGA_Types.h"
 #include "Osci/Osci_Storage.h"
 
 

@@ -8,7 +8,6 @@
 
 #include "Hardware/Timer.h"
 #include "Utils/Buffer.h"
-#include "FPGA/FPGA_Types.h"
 
 
 /*

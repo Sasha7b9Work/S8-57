@@ -695,11 +695,6 @@
               <FileType>5</FileType>
               <FilePath>.\src\FPGA\FPGA_Settings.h</FilePath>
             </File>
-            <File>
-              <FileName>FPGA_Types.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\FPGA\FPGA_Types.h</FilePath>
-            </File>
           </Files>
         </Group>
         <Group>

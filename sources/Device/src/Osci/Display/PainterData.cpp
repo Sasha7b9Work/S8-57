@@ -13,6 +13,7 @@
 #include "Utils/Debug.h"
 #include "Osci/Display/Accumulator.h"
 #include "Hardware/Timer.h"
+#include "FPGA/FPGA.h"
 
 
 using namespace Display::Primitives;

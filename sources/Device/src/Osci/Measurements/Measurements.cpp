@@ -1,5 +1,6 @@
 #include "defines.h"
 #include "Data/Reader.h"
+#include "FPGA/FPGA.h"
 #include "FPGA/FPGA_Math.h"
 #include "Osci/Measurements/Measurements.h"
 #include "Osci/Measurements/Measurements_Table.h"
@@ -1462,9 +1463,19 @@ static void CountedToCurrentSettings(Chan::E ch, uint numBytes)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void LimitationData(Chan::E /*ch*/, uint /*numBytes*/)
+static void LimitationData(Chan::E ch, uint numBytes)
 {
+    uint8 *data = OUT(ch);
 
+    for (uint i = 0; i < numBytes; i++)
+    {
+        if (*data != FPGA::VALUE::NONE)
+        {
+            Math::Limitation<uint8>(data, FPGA::VALUE::MIN, FPGA::VALUE::MAX);
+        }
+
+        data++;
+    }
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

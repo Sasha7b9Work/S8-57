@@ -8,7 +8,7 @@
 #include <limits>
 
 #include "Utils/Values.h"
-#include "FPGA/FPGA_Types.h"
+#include "FPGA/FPGA.h"
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -30,6 +30,7 @@ template void  Math::LimitationDecrease<uint8>(uint8 *, uint8);
 template void  Math::Limitation<float>(float *, float, float);
 template void  Math::Limitation<uint16>(uint16 *, uint16, uint16);
 template void  Math::Limitation<int>(int *, int, int);
+template void  Math::Limitation<uint8>(uint8 *, uint8, uint8);
 template float Math::LimitationRet<float>(float, float, float);
 template uint8 Math::LimitationRet<uint8>(uint8, uint8, uint8);
 template void  Math::AdditionThisLimitation<uint16>(uint16 *, int, uint16, uint16);

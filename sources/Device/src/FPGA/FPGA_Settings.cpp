@@ -8,7 +8,6 @@
 #include "FPGA_HAL.h"
 #include "FPGA_Settings.h"
 #include "FPGA_Math.h"
-#include "FPGA_Types.h"
 #include "Hardware/HAL/HAL.h"
 #include "Hardware/Timer.h"
 #include "Settings/Settings.h"
