@@ -92,7 +92,7 @@ public:
     FPGA::Settings::ModeCouple::E  chan_couple[Chan::Size];   ///< Связь по входу
     bool                           chan_enabled[Chan::Size];  ///< Включен/выключен канал
     int8                           chan_balanceShiftADC[2];     ///< Добавочное смещение для балансировки АЦП.
-    FPGA::Settings::Bandwidth::E   chan_bandwidth[2];           ///< Ограничение полосы.
+    FPGA::Settings::Bandwidth      chan_bandwidth[2];           ///< Ограничение полосы.
     bool                           chan_inverse[2];
     Divider::E                     chan_divider[2];             ///< Множитель.
     CalibrationMode::E             chan_calibrationMode[2];     ///< Режим калибровки.

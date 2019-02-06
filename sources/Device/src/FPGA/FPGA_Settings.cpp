@@ -405,5 +405,5 @@ pString ModeCouple::UGO() const
 void Bandwidth::Load(Chan::E ch)
 {
     static const Pin::E pinsLF[2] = { Pin::LF1, Pin::LF2 };
-    WritePin(pinsLF[ch], SET_BANDWIDTH(ch) == Bandwidth::_20MHz);
+    WritePin(pinsLF[ch], SET_BANDWIDTH(ch).value == Bandwidth::_20MHz);
 }

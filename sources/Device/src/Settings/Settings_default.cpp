@@ -42,15 +42,15 @@ const Settings Settings::defaultSettings =
 
     // ÃÂÌ˛  ¿Õ¿À 1,  ¿Õ¿À 2
 
-    {RShift::ZERO, RShift::ZERO},                           // chan_shift[Chan::Size];  
-    {Range::_500mV, Range::_500mV},                         // chan_range[Chan::Size];  
-    {ModeCouple::DC, ModeCouple::DC},                       // chan_couple[Chan::Size]; 
-    {true, true},                                           // chan_enabled[Chan::Size];
-    {0, 0},                                                 // chan_balanceShiftADC[2];   
-    {Bandwidth::Full, Bandwidth::Full},                     // chan_bandwidth[2];         
-    {false, false},                                         // chan_inverse[2];           
-    {Divider::_1, Divider::_1},                             // chan_divider[2];           
-    {CalibrationMode::Disable, CalibrationMode::Disable},   // chan_calibrationMode[2];   
+    {RShift::ZERO, RShift::ZERO},                               // chan_shift[Chan::Size];  
+    {Range::_500mV, Range::_500mV},                             // chan_range[Chan::Size];  
+    {ModeCouple::DC, ModeCouple::DC},                           // chan_couple[Chan::Size]; 
+    {true, true},                                               // chan_enabled[Chan::Size];
+    {0, 0},                                                     // chan_balanceShiftADC[2];   
+    {Bandwidth(Bandwidth::Full), Bandwidth(Bandwidth::Full)},   // chan_bandwidth[2];         
+    {false, false},                                             // chan_inverse[2];           
+    {Divider::_1, Divider::_1},                                 // chan_divider[2];           
+    {CalibrationMode::Disable, CalibrationMode::Disable},       // chan_calibrationMode[2];   
 
     // ÃÂÌ˛ —»Õ’–ŒÕ»«¿÷»ﬂ
 
