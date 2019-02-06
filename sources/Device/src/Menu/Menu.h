@@ -89,16 +89,8 @@ private:
     static void ResetItemsUnderButton();
     /// Возвращает true, если данная кнопка обрабатыватся в данном режиме
     static bool IsProcessed(const KeyEvent *event);
-    /// При нажатии кнопки её имя записывается в эту переменную и хранится там до обратоки события нажатия кнопки.
-    static Key::E pressButton;
-    /// При отпускании кнопки её имя записывается в эту переменную и хранится там до обработки события отпускания кнопки.
-    static Key::E releaseButton;
-    /// Эта функция будет вызывана один раз после Menu::Update().
-    static pFuncVV funcAterUpdate;
     /// Время последнего нажатия кнопки. Нужно для того, чтобы периодически сохранять настройки
     static uint timeLastPressedButton;
-    /// Эта функция будет вызываться каждый кадр
-    static pFuncVV funcUpdate;
 
 public:
 

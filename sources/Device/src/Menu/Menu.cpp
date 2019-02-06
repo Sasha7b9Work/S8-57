@@ -35,10 +35,7 @@ PageBase *pageMain;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
        uint    Menu::timeLastPressedButton = MAX_UINT;
-        Key::E Menu::pressButton = Key::None;
-        Key::E Menu::releaseButton = Key::None;
    Control    *Menu::itemUnderKey = 0;
-    pFuncVV    Menu::funcAterUpdate = 0;
 const char    *Menu::stringForHint = 0;
    Control    *Menu::itemHint = 0;
 
@@ -71,12 +68,6 @@ void Menu::Update()
         {
             Handlers::Process(event);
         }
-    }
-
-    if (funcAterUpdate)
-    {
-        funcAterUpdate();
-        funcAterUpdate = 0;
     }
 }
 
