@@ -159,6 +159,8 @@ namespace Osci
                 static void Load();
 
                 static void Change(int delta);
+
+                static void Set(int level);
             };
 
             /// Режим запуска.

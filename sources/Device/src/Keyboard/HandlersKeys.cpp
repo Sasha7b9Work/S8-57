@@ -71,7 +71,7 @@ static void ChannelA_Release();
 static void ChannelB_Release();
 static void ChannelA_Long();
 static void ChannelB_Long();
-static void Function();
+static void Function_Release();
 static void Measure();
 static void HandlerMemory();
 static void Service();
@@ -94,7 +94,7 @@ void Handlers::Process(KeyEvent e)
     static const pFuncVV func[Key::Number][4] =
     { // Press              Repead             Release           Long
         {Empty,             Empty,             Empty,            Empty},            // None       
-        {Empty,             Empty,             Function,         Empty},            // Function   
+        {Empty,             Empty,             Function_Release, Empty},            // Function   
         {Measure,           Measure,           Measure,          Measure},          // Measure    
         {HandlerMemory,     HandlerMemory,     HandlerMemory,    HandlerMemory},    // Memory     
         {Service,           Service,           Service,          Service},          // Service    
@@ -362,7 +362,7 @@ static void ChannelB_Long()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void Function()
+static void Function_Release()
 {
     OpenPage(PageFunction::pointer);
 }
@@ -422,7 +422,7 @@ static void Trig_Release()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void Trig_Long()
 {
-
+    Trig::Level::Set(Trig::Level::ZERO);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
