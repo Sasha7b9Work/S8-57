@@ -3,19 +3,6 @@
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-#define TRIG_SOURCE             (set.trig_source)
-#define TRIG_SOURCE_IS_A        (TRIG_SOURCE == Trig::Source::A)
-#define TRIG_SOURCE_IS_B        (TRIG_SOURCE == Trig::Source::B)
-
-#define SET_TRIGLEV(ch)         (set.trig_lev[(uint8)ch])
-#define SET_TRIGLEV_SOURCE      SET_TRIGLEV(TRIG_SOURCE)
-#define SET_TRIGLEV_A           (SET_TRIGLEV(Chan::A))
-#define SET_TRIGLEV_B           (SET_TRIGLEV(Chan::B))
-
-#define TRIG_MODE_FIND          (set.trig_modeFind)
-#define TRIG_MODE_FIND_HAND     (TRIG_MODE_FIND == Trig::ModeFind::Hand)
-#define TRIG_MODE_FIND_AUTO     (TRIG_MODE_FIND == Trig::ModeFind::Auto)
-
 #define START_MODE              (set.trig_startMode)
 #define START_MODE_IS_AUTO      (START_MODE == Trig::StartMode::Auto)
 #define START_MODE_IS_WAIT      (START_MODE == Trig::StartMode::Wait)

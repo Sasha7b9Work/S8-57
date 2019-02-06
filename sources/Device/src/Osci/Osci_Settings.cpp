@@ -284,3 +284,9 @@ uint Osci::Settings::Memory::ENumPointsFPGA::PointsInChannel() const
 {
     return ENUM_TO_REL_POINTS(value);
 }
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Osci::Settings::Trig::Level::Find()
+{
+
+}

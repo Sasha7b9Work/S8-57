@@ -6,6 +6,19 @@
 #define SET_RSHIFT_A            (SET_RSHIFT(Chan::A))
 #define SET_RSHIFT_B            (SET_RSHIFT(Chan::B))
 
+#define TRIG_SOURCE             (set.trig_source)
+#define TRIG_SOURCE_IS_A        (TRIG_SOURCE == Trig::Source::A)
+#define TRIG_SOURCE_IS_B        (TRIG_SOURCE == Trig::Source::B)
+
+#define SET_TRIGLEV(ch)         (set.trig_lev[(uint8)ch])
+#define SET_TRIGLEV_SOURCE      SET_TRIGLEV(TRIG_SOURCE)
+#define SET_TRIGLEV_A           (SET_TRIGLEV(Chan::A))
+#define SET_TRIGLEV_B           (SET_TRIGLEV(Chan::B))
+
+#define TRIG_MODE_FIND          (set.trig_modeFind)
+#define TRIG_MODE_FIND_HAND     (TRIG_MODE_FIND == Trig::ModeFind::Hand)
+#define TRIG_MODE_FIND_AUTO     (TRIG_MODE_FIND == Trig::ModeFind::Auto)
+
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 namespace Osci
@@ -155,12 +168,14 @@ namespace Osci
                 static const int MIN = 20;
                 static const int MAX = 980;
                 static const int ZERO = 500;
-
+                /// Загрузить уровень синхронизации в аппаратную часть
                 static void Load();
-
+                /// Изменить уровень синхронизации на delta единиц
                 static void Change(int delta);
-
+                /// Установить заданный уровень синхронизации
                 static void Set(int level);
+                /// Однократно найти уровень синхронизации
+                static void Find();
             };
 
             /// Режим запуска.

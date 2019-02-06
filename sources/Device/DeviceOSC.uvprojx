@@ -1356,6 +1356,11 @@
               <FilePath>.\src\Menu\Pages\PageTrig\PageTrig.cpp</FilePath>
             </File>
             <File>
+              <FileName>PageTrig_Find.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Menu\Pages\PageTrig\PageTrig_Find.cpp</FilePath>
+            </File>
+            <File>
               <FileName>PageTrig_HoldOff.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Menu\Pages\PageTrig\PageTrig_HoldOff.cpp</FilePath>
