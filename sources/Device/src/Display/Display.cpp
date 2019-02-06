@@ -390,11 +390,10 @@ bool Display::IsSeparate()
     return FUNC_MODE_DRAW_IS_SEPARATE || FFT_ENABLED;
 }
 
-
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-int Display::ENumSignalsInSec::ToFPS() const // -V2506
+uint Display::ENumSignalsInSec::TimeBetweenFramesMS() const
 {
-    static const int fps[] = {25, 10, 5, 2, 1};
+    static const uint time[] = { 40, 100, 200, 500, 1000 };
 
-    return fps[value];
+    return time[value];
 }

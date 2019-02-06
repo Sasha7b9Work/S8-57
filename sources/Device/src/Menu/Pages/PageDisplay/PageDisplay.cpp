@@ -94,10 +94,6 @@ DEF_CHOICE_REG_10( cSmoothing,                                                  
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void PageDisplay::OnChanged_RefreshFPS(bool)
-{
-}
-
 DEF_CHOICE_5( cRefreshFPS,                                                                                                                                 //--- ДИСПЛЕЙ - Частота обновл ---
     "Частота обновл", "Refresh rate",
     "Задаёт максимальное число выводимых в секунду кадров.",
@@ -107,7 +103,7 @@ DEF_CHOICE_5( cRefreshFPS,                                                      
     "5",  "5",
     "2",  "2",
     "1",  "1",
-    ENUM_SIGNALS_IN_SEC, pageDisplay, FuncActive, PageDisplay::OnChanged_RefreshFPS, Choice::EmptyDraw
+    ENUM_SIGNALS_IN_SEC.value, pageDisplay, FuncActive, Choice::EmptyChange, Choice::EmptyDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

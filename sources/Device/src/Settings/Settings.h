@@ -70,7 +70,7 @@ public:
     Display::ENumAccum::E           disp_ENumAccum;             ///< Число накоплений сигнала на экране.
     Display::ModeAccumulation::E    disp_modeAccumulation;      ///< Режим накопления сигналов.
     Display::ENumSmoothing::E       disp_ENumSmoothing;         ///< Перечисление количества точек для скользящего фильтра.
-    Display::ENumSignalsInSec::E    disp_ENumSignalsInSec;      ///< Перечисление числа считываний сигнала в секунда.
+    Display::ENumSignalsInSec       disp_ENumSignalsInSec;      ///< Перечисление числа считываний сигнала в секунда.
     Grid::Type::E                   disp_typeGrid;              ///< Тип сетки
     int                             disp_brightnessGrid;        ///< Яркость сетки от 0 до 100.
     Display::LinkingRShift::E       disp_linkingRShift;         ///< Тип привязки к смещению по вертикали.
