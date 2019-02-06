@@ -90,13 +90,13 @@ DEF_CHOICE_2( cShowFreq,                                                        
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-DEF_PAGE_5( pageCursors, // -V641 // -V1027                                                                                                                               //--- ÈÇÌÅÐÅÍÈß ---
+DEF_PAGE_3( pageCursors, // -V641 // -V1027                                                                                                                               //--- ÈÇÌÅÐÅÍÈß ---
     "ÊÓÐÑÎÐÛ", "CURSORS",
     "Êóðñîðíûå èçìåðåíèÿ",
     "Cursor measurements",
     &cShow,                                         ///< ÈÇÌÅÐÅÍÈß - ÊÓÐÑÎÐÛ - Ïîêàçûâàòü
-    &cLookModeChanA,                                ///< ÈÇÌÅÐÅÍÈß - ÊÓÐÑÎÐÛ - Ñëåæåíèå êàíàë 1
-    &cLookModeChanB,                                ///< ÈÇÌÅÐÅÍÈß - ÊÓÐÑÎÐÛ - Ñëåæåíèå êàíàë 2
+//    &cLookModeChanA,                                ///< ÈÇÌÅÐÅÍÈß - ÊÓÐÑÎÐÛ - Ñëåæåíèå êàíàë 1
+//    &cLookModeChanB,                                ///< ÈÇÌÅÐÅÍÈß - ÊÓÐÑÎÐÛ - Ñëåæåíèå êàíàë 2
     &cShowFreq,                                     ///< ÈÇÌÅÐÅÍÈß - ÊÓÐÎÑÐÛ - 1/dT
     PageMeasures::PageCursors::PageSet::pointer,    ///< ÈÇÌÅÐÅÍÈß - ÊÓÐÑÎÐÛ - ÓÑÒÀÍÎÂÈÒÜ
     Page::Name::Measures_Cursors, PageMeasures::pointer, FuncActive, FuncPressPage, FuncDrawPage, FuncRegSetPage

@@ -30,9 +30,13 @@
 #define NUM_SMOOTHING               (Display::NumPointSmoothing())
 #define SMOOTHING_ENABLED           (ENUM_SMOOTHING != Display::ENumSmoothing::Disable)
 
-#define MODE_ACCUM                  (set.disp_modeAccumulation)
-#define MODE_ACCUM_RESET            (MODE_ACCUM == Display::ModeAccumulation::Reset)
-#define MODE_ACCUM_NO_RESET         (MODE_ACCUM == Display::ModeAccumulation::NoReset)
+//#define MODE_ACCUM                  (set.disp_modeAccumulation)
+//#define MODE_ACCUM_RESET            (MODE_ACCUM == Display::ModeAccumulation::Reset)
+//#define MODE_ACCUM_NO_RESET         (MODE_ACCUM == Display::ModeAccumulation::NoReset)
+
+#define ACCUMULATION                (set.disp_ENumSmoothing)
+#define ACCUMULATION_IS_ENABLED     (ACCUMULATION == Display::ModeAccumulation::Reset)
+
 
 #define ENUM_ACCUM                  (set.disp_ENumAccum)
 #define ENUM_ACCUM_INF              (ENUM_ACCUM == ENumAccum_Infinity)

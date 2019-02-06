@@ -22,12 +22,12 @@ DEF_CHOICE_2( cEnable,                                                          
     "",
     DISABLE_RU, DISABLE_EN,
     ENABLE_RU,  ENABLE_EN,
-    MODE_ACCUM, pageAccum, FuncActive, Choice::EmptyChange, Choice::EmptyDraw
+    ACCUMULATION, pageAccum, FuncActive, Choice::EmptyChange, Choice::EmptyDraw
 )
 
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-DEF_CHOICE_REG_9( cNumber,                                                                                                                        //--- ДИСПЛЕЙ - НАКОПЛЕНИЕ - Количество ---
+DEF_CHOICE_9( cNumber,                                                                                                                            //--- ДИСПЛЕЙ - НАКОПЛЕНИЕ - Количество ---
     "Количество", "Number"
     ,
     "Задаёт максимальное количество последних сигналов на экране. Если в настройке \"Режим\" выбрано \"Бесконечность\", экран очищается только "

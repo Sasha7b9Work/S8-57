@@ -223,13 +223,24 @@ static pString hints##name[] = {nameRu1, nameEn1, nameRu2, nameEn2, nameRu3, nam
 static const ChoiceBase name = {Control::Type::Choice, 7, false, Page::Name::NoPage, &keeper, funcActive, {titleRU, titleEN, hintRU, hintEN}, (int8 *)&cell,    \
     hints##name, funcChanged, funcDraw};
 
-#define DEF_CHOICE_8(name, titleRU, titleEN, hintRU, hintEN,                                                                                        \
-    nameRu1, nameEn1, nameRu2, nameEn2, nameRu3, nameEn3, nameRu4, nameEn4, nameRu5, nameEn5,                                                       \
-    nameRu6, nameEn6, nameRu7, nameEn7, nameRu8, nameEn8, cell, keeper, funcActive, funcChanged, funcDraw)                                          \
-static pString hints##name[] = {nameRu1, nameEn1, nameRu2, nameEn2, nameRu3, nameEn3, nameRu4, nameEn4,                                             \
-    nameRu5, nameEn5, nameRu6, nameEn6, nameRu7, nameEn7, nameRu8, nameEn8};                                                                        \
+#define DEF_CHOICE_8(name, titleRU, titleEN, hintRU, hintEN,                                                                                                    \
+    nameRu1, nameEn1, nameRu2, nameEn2, nameRu3, nameEn3, nameRu4, nameEn4, nameRu5, nameEn5,                                                                   \
+    nameRu6, nameEn6, nameRu7, nameEn7, nameRu8, nameEn8, cell, keeper, funcActive, funcChanged, funcDraw)                                                      \
+static pString hints##name[] = {nameRu1, nameEn1, nameRu2, nameEn2, nameRu3, nameEn3, nameRu4, nameEn4,                                                         \
+    nameRu5, nameEn5, nameRu6, nameEn6, nameRu7, nameEn7, nameRu8, nameEn8};                                                                                    \
 static const ChoiceBase name = {Control::Type::Choice, 8, false, Page::Name::NoPage, &keeper, funcActive, {titleRU, titleEN, hintRU, hintEN}, (int8 *)&cell,    \
     hints##name, funcChanged, funcDraw};
+
+#define DEF_CHOICE_9(name, titleRU, titleEN, hintRU, hintEN,                                                                                                    \
+    nameRu1, nameEn1, nameRu2, nameEn2, nameRu3, nameEn3, nameRu4, nameEn4, nameRu5, nameEn5,                                                                   \
+    nameRu6, nameEn6, nameRu7, nameEn7, nameRu8, nameEn8, nameRu9, nameEn9, cell, keeper, funcActive, funcChanged, funcDraw)                                    \
+static pString hints##name[] = {nameRu1, nameEn1, nameRu2, nameEn2, nameRu3, nameEn3, nameRu4, nameEn4,                                                         \
+    nameRu5, nameEn5, nameRu6, nameEn6, nameRu7, nameEn7, nameRu8, nameEn8, nameRu9, nameEn9};                                                                  \
+static const ChoiceBase name = {Control::Type::Choice, 8, false, Page::Name::NoPage, &keeper, funcActive, {titleRU, titleEN, hintRU, hintEN}, (int8 *)&cell,    \
+    hints##name, funcChanged, funcDraw};
+
+
+
 
 #define DEF_CHOICE_16(name, titleRU, titleEN, hintRU, hintEN,                                                                                                                               \
     nameRu1, nameEn1, nameRu2, nameEn2, nameRu3, nameEn3, nameRu4, nameEn4, nameRu5, nameEn5, nameRu6, nameEn6, nameRu7, nameEn7, nameRu8, nameEn8, nameRu9, nameEn9, nameRu10, nameEn10,   \
