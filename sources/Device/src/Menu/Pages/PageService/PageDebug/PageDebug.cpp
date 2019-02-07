@@ -527,10 +527,10 @@ static void OnPress_SaveFirmware()
 
     StructForWrite structForWrite;
 
-    FDrive::OpenNewFileForWrite("S8-54.bin", &structForWrite);
+    FDrive::OpenNewFileForWrite(NAME_FILE_FIRMWARE, &structForWrite);
 
     uint8 *address = (uint8 *)0x08020000;   // -V566
-    uint8 *endAddress = address + 128 * 1024 * 3;
+    uint8 *endAddress = address + SIZE_FILE_FIRMWARE;
 
     int sizeBlock = 512;
 

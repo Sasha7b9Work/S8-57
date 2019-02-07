@@ -321,3 +321,7 @@ static const struct name        \
 
 #define CEXPORT_BEGIN 
 #define CEXPORT_END 
+
+
+#define NAME_FILE_FIRMWARE "S8-57.bin"
+#define SIZE_FILE_FIRMWARE (128 * 1024 * 4)
