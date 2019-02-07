@@ -64,9 +64,9 @@ void Osci::Display::PainterData::DrawData()
         func[MODE_WORK]();
     }
 
-    //DrawTPos(0, 0);
+    DrawTPos(0, 0);
 
-    //DrawTShift(0, 0, 0);
+    DrawTShift(0, 0, 0);
 
     Accumulator::NextFrame();
 }
