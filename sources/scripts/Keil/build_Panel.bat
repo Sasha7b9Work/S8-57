@@ -9,3 +9,5 @@ echo ERROR!!! Panel    failed!!!
 type ..\..\Panel\PanelOSC.out
 
 :Exit
+
+@echo %TIME%   Complete

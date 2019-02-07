@@ -10,3 +10,5 @@ rem "c:\Program Files\Notepad++\notepad++.exe" -multiInst -alwaysOnTop ..\..\Dev
 type ..\..\Device\DeviceOSC.out
 
 :Exit
+
+@echo %TIME%   Complete
