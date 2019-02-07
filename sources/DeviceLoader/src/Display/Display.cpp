@@ -1,3 +1,4 @@
+#include "defines.h"
 #include <ff.h>
 #include "Display.h"
 #include "Display/Painter.h"
@@ -6,7 +7,8 @@
 #include "Hardware/Timer.h"
 #include "Utils/Math.h"
 #include "Settings/Settings.h"
-#include <math.h>
+#include <cmath>
+#include <cstdlib>
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -233,7 +235,7 @@ static void DrawBigMNIPI()
 
     for (int i = 0; i < 240; i++)
     {
-        shift[i] = WAVE_OR_ALL ? amplitude * sinf(frequency * time + i / 5.0f) : 0;
+        shift[i] = WAVE_OR_ALL ? amplitude * std::sinf(frequency * time + i / 5.0f) : 0;
     }
 
     for (int i = 0; i < numPoints; i++)
@@ -250,7 +252,7 @@ static void DrawBigMNIPI()
 //----------------------------------------------------------------------------------------------------------------------------------------------------]
 static int RandValue(int min, int max)
 {
-    int value = rand() % (max - min + 1);
+    int value = (int)(std::rand() % (max - min + 1));
 
     return value + min;
 }

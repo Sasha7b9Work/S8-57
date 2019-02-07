@@ -17,17 +17,20 @@ include_directories("..\\common\\libs\\STM32Cube_F4\\Drivers\\STM32F4xx_HAL_Driv
                     "..\\common\\_VS\\"
                     "..\\common\\_VS\\std_includes\\"
                     "src"
-                    "src\\Hardware\\HAL\\"
-                    "src\\Hardware\\FatFS\\"
-                    "src\\Hardware\\USBH\\"
-                    "src\\Hardware\\USBD\\")
+                    "src\\libs\\HAL\\"
+                    "src\\libs\\FatFS\\"
+                    "src\\libs\\USBH\\")
                     
 add_definitions(-DSTM32F437xx)
 
 SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -MP -Wall")
 
+add_compile_options(/wd4100)
+add_compile_options(/wd4505)
+add_compile_options(/wd4514)
 add_compile_options(/wd4820)
 add_compile_options(/wd5039)
+add_compile_options(/wd5045)
 
 source_group(src                    REGULAR_EXPRESSION "src/*.*")
 source_group(libs\\CMSIS            REGULAR_EXPRESSION "src/libs/CMSIS/*.*")

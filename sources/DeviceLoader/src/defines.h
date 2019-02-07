@@ -9,6 +9,12 @@
 #define MATH_FUNC_IS_SUM false
 #define MATH_FUNC_IS_MUL false
 
+#ifdef WIN32
+#define __attribute(x)
+#define __attribute__(x)
+#define WCHAR unsigned short
+#endif
+
 
 typedef signed   char        int8;
 typedef unsigned char        uint8;

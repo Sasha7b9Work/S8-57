@@ -1,3 +1,4 @@
+#include "defines.h"
 #include <ctype.h>
 #include <usbh_def.h>
 #include <ff_gen_drv.h>
