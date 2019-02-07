@@ -339,6 +339,8 @@ void Osci::Settings::RShift::Draw(Chan::E ch)
 
     int y = (Grid::Bottom() - Grid::Top()) / 2 + Grid::Top() - delta;
 
+    Math::Limitation(&y, Grid::Top(), Grid::Bottom());
+
     Char((char)SYMBOL_RSHIFT_NORMAL).Draw(Grid::Left() - 8, y - 4);
 
     Font::SetCurrent(Font::Type::_5);
