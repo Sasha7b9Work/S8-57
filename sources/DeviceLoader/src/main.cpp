@@ -24,7 +24,7 @@
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-#define FILE_NAME "S8-54.bin"
+#define FILE_NAME "S8-57.bin"
 
 typedef void(*pFunction)();
 
@@ -80,23 +80,24 @@ int main()
     {
         if (CPU::FDrive::FileExist(FILE_NAME))                    // Если на диске обнаружена прошивка
         {
-            ms->state = State_RequestAction;
-            
-            while (1)
-            {
-                PanelButton button = CPU::Panel::PressedButton();
-                if (button == B_F1)
-                {
-                    ms->state = State_Upgrade;
-                    Upgrade();
-                    break;
-                }
-                else if (button == B_F5)
-                {
-                    ms->state = State_Ok;
-                    break;
-                }
-            }
+            //ms->state = State_RequestAction;
+            //
+            //while (1)
+            //{
+            //    PanelButton button = CPU::Panel::PressedButton();
+            //    if (button == B_F1)
+            //    {
+            //        ms->state = State_Upgrade;
+            //        Upgrade();
+            //        break;
+            //    }
+            //    else if (button == B_F5)
+            //    {
+            //        ms->state = State_Ok;
+            //        break;
+            //    }
+            //}
+            Upgrade();
         }
         else
         {
