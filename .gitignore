@@ -17,6 +17,9 @@ doc/doxygen/OSC/*
 sources/Device/DebugConfig/*
 sources/Device/Listings/*
 sources/Device/Objects/*
+sources/DeviceLoader/DebugConfig/*
+sources/DeviceLoader/Listings/*
+sources/DeviceLoader/Objects/*
 
 sources/Panel/DebugConfig/*
 sources/Panel/Listings/*
