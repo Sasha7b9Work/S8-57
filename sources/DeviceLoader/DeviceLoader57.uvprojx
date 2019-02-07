@@ -663,7 +663,7 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>Display/Fonts</GroupName>
+          <GroupName>Display/Font</GroupName>
           <Files>
             <File>
               <FileName>Font.cpp</FileName>

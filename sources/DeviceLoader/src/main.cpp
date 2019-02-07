@@ -37,21 +37,8 @@ MainStruct *ms;
 void Upgrade();
 
 
-int main()
-{
-    __disable_irq();
-    // “еперь переходим на основную программу
-    pFunction JumpToApplication;
-
-    JumpToApplication = (pFunction)(*(__IO uint *)(MAIN_PROGRAM_START_ADDRESS + 4));
-    __set_MSP(*(__IO uint *)MAIN_PROGRAM_START_ADDRESS);
-    __enable_irq();
-    JumpToApplication();
-}
-
-
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-int _main()
+int main()
 {
     ms = (MainStruct *)malloc(sizeof(MainStruct));
     ms->percentUpdate = 0.0f;
@@ -86,9 +73,7 @@ int _main()
         (ms->drive.active && ms->state != State_Mount))     // или перешла в активное состо€ние, по почему-то не запустилс€ процесс монтировани€
     {
         free(ms);
-#ifndef MSVC
         NVIC_SystemReset();
-#endif
     }
 
     if (ms->state == State_Mount)                           // Ёто означает, что диск удачно примонтирован
@@ -137,8 +122,6 @@ int _main()
 
     free(ms);
 
-#ifndef _WIN32
-    
     __disable_irq();
     // “еперь переходим на основную программу
     pFunction JumpToApplication;
@@ -147,10 +130,6 @@ int _main()
     __set_MSP(*(__IO uint *)MAIN_PROGRAM_START_ADDRESS);
     __enable_irq();
     JumpToApplication();
-
-#endif
-    
-    return 0;
 }
 
 

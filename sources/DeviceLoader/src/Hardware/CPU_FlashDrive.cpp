@@ -1,13 +1,9 @@
-#pragma clang diagnostic ignored "-Wpadded"
-#pragma clang diagnostic ignored "-Wc++98-compat-pedantic"
 #include <ctype.h>
 #include <usbh_def.h>
 #include <ff_gen_drv.h>
 #include <usbh_diskio.h>
 #include <usbh_core.h>
 #include <usbh_msc.h>
-#pragma clang diagnostic warning "-Wpadded"
-#pragma clang diagnostic warning "-Wc++98-compat-pedantic"
 #include "defines.h"
 #include "CPU.h"
 #include "ffconf.h"
