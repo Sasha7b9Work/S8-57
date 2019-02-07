@@ -298,7 +298,7 @@ void Osci::Settings::Trig::Level::Find()
             return;
         }
 
-        uint8 *data = OUT(ch);
+        const uint8 *data = IN(ch);
 
         uint numBytes = DS->SizeChannel();
 
