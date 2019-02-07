@@ -180,7 +180,7 @@ uint8 Math::MinFromArray(const uint8 *data, int firstPoint, int lastPoint)
     {
         uint8 d = *pointer++;
         MIN_IF_LESS
-            d = *pointer++;
+        d = *pointer++;
         MIN_IF_LESS
     }
     if ((lastPoint - firstPoint + 1) & 1)
@@ -190,6 +190,34 @@ uint8 Math::MinFromArray(const uint8 *data, int firstPoint, int lastPoint)
     }
 
     return min;
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Math::MinMaxFromArray(const uint8 *data, int firstPoint, int lastPoint, uint8 *outMin, uint8 *outMax)
+{
+    uint8 min = 255;
+    uint8 max = 0;
+
+    const uint8 *pointer = &data[firstPoint];
+
+    for (int i = firstPoint; i < lastPoint; i += 2)
+    {
+        uint8 d = *pointer++;
+        MIN_IF_LESS
+        MAX_IF_ABOVE
+        d = *pointer++;
+        MIN_IF_LESS
+        MAX_IF_ABOVE
+    }
+    if ((lastPoint - firstPoint + 1) & 1)
+    {
+        uint8 d = *pointer;
+        MIN_IF_LESS
+        MAX_IF_ABOVE
+    }
+
+    *outMin = min;
+    *outMax = max;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -332,63 +360,6 @@ void Math::CalculateFiltrArray(const uint8 *dataIn, uint8 *dataOut, int numPoint
             dataOut[i] = (uint8)(sum / (float)count);
         }
     }
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-uint8 Math::MaxFromArray_RAM(const uint16 *data, int firstPoint, int lastPoint)
-{
-    uint8 max = 0;
-
-    const uint16 *pointer = &data[firstPoint];
-
-    const int endPoint = lastPoint / 2;
-
-    for (int i = firstPoint; i < endPoint; i++)
-    {
-        uint16 d16 = *pointer++;
-
-        uint8 d8 = (uint8)d16;
-        if (d8 > max)
-        {
-            max = d8;
-        }
-
-        d8 = (uint8)(d16 >> 8);
-        if (d8 > max)
-        {
-            max = d8;
-        }
-    }
-
-    return max;
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-uint8 Math::MinFromArray_RAM(const uint16 *data, int firstPoint, int lastPoint)
-{
-    uint8 min = 255;
-
-    const uint16 *pointer = &data[firstPoint];
-
-    const int endPoint = lastPoint / 2;
-
-    for (int i = firstPoint; i < endPoint; i++)
-    {
-        uint16 d16 = *pointer++;
-
-        uint8 d8 = (uint8)d16;
-        if (d8 < min)
-        {
-            min = d8;
-        }
-        d8 = (uint8)(d16 >> 8);
-        if (d8 < min)
-        {
-            min = d8;
-        }
-    }
-
-    return min;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

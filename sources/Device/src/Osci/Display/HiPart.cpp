@@ -50,15 +50,15 @@ static void WriteCursors();
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void Osci::Display::HiPart::Draw()
 {
-    const int y0 = 0;
-    const int x0 = 0;
+    int y0 = 0;
+    int x0 = 0;
 
     int y1 = 9;
     int x = -1;
 
     DrawSeparators(x0, y0);
 
-    x = DrawMainParameters(x, y0 + 1);
+    x = DrawMainParameters(x, y0 + 1); //-V2007
 
     x += 82;
     y1 = y1 - 6;
@@ -89,10 +89,10 @@ void Osci::Display::HiPart::Draw()
             std::strcat(mesFreq, Frequency(freq).ToString().CString());
         }
 
-        String(mesFreq).Draw(x + 3, y0 + 1, Color::FILL);
+        String(mesFreq).Draw(x + 3, y0 + 1, Color::FILL); //-V2007
     }
 
-    DrawTime(x + 3, y0 + 10);
+    DrawTime(x + 3, y0 + 10); //-V2007
 
     DrawRightPart(265, y0);
 
@@ -374,7 +374,8 @@ static void WriteCursors()
 
     int x = x0;
     int y1 = y0;
-    int y2 = y0 + 9;
+    int y2 = y0 + 9; //-V2007
+
     if (Cursor::NecessaryDraw())
     {
         VLine(Grid::Top() - 3).Draw(x, 1, Color::FILL);

@@ -107,13 +107,13 @@ DEF_GOVERNOR( gADC_Balance_ShiftB,                                              
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-DEF_PAGE_3( pppADC_Balance, // -V641                                                                                                                         //--- ОТЛАДКА - АЦП - БАЛАНС ---
+DEF_PAGE_3( pppADC_Balance, // -V641 // -V1027                                                                                                               //--- ОТЛАДКА - АЦП - БАЛАНС ---
     "БАЛАНС", "BALANCE",
     "",
     "",
-    &cADC_Balance_Mode,      // ОТЛАДКА - АЦП - БАЛАНС - Режим
-    &gADC_Balance_ShiftA,    // ОТЛАДКА - АЦП - БАЛАНС - Смещение 1
-    &gADC_Balance_ShiftB,    // ОТЛАДКА - АЦП - БАЛАНС - Смещение 2
+    &cADC_Balance_Mode,      ///< ОТЛАДКА - АЦП - БАЛАНС - Режим
+    &gADC_Balance_ShiftA,    ///< ОТЛАДКА - АЦП - БАЛАНС - Смещение 1
+    &gADC_Balance_ShiftB,    ///< ОТЛАДКА - АЦП - БАЛАНС - Смещение 2
     Page::Name::Debug_ADC_Balance, &ppADC, FuncActive, FuncPressPage, FuncDrawPage, FuncRegSetPage
 )
 
@@ -245,12 +245,12 @@ DEF_GOVERNOR(       gADC_Stretch_Bk2V,                                          
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //static const ChoiceBase emptyChoice = {Control::Type::Choice, 0, false, Page::Name::NoPage, 0, FuncActive, {}, 0, 0, 0, 0};
 
-DEF_PAGE_3( pppADC_Stretch, // -V641                                                                                                                       //--- ОТЛАДКА - АЦП - РАСТЯЖКА ---
+DEF_PAGE_3( pppADC_Stretch, // -V641 // -V1027                                                                                                             //--- ОТЛАДКА - АЦП - РАСТЯЖКА ---
     "РАСТЯЖКА", "STRETCH",
     "Устанавливает режим и величину растяжки (для ручного режима)",
     "Sets mode and the value of stretching (manual mode)",
-    &cADC_Stretch_Mode,      // ОТЛАДКА - АЦП - РАСТЯЖКА - Режим
-    &gADC_Stretch_A,         // ОТЛАДКА - АЦП - РАСТЯЖКА - Растяжка 1к
+    &cADC_Stretch_Mode,      ///< ОТЛАДКА - АЦП - РАСТЯЖКА - Режим
+    &gADC_Stretch_A,         ///< ОТЛАДКА - АЦП - РАСТЯЖКА - Растяжка 1к
     &gADC_Stretch_B,
     Page::Name::Debug_ADC_Stretch, &ppADC, FuncActive, FuncPressPage, FuncDrawPage, FuncRegSetPage
 )
@@ -649,7 +649,7 @@ DEF_BUTTON( bEraseData,                                                         
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-DEF_PAGE_5( pageDebug, // -V641                                                                                                                                             //--- ОТЛАДКА ---
+DEF_PAGE_5( pageDebug, // -V641 // -V1027                                                                                                                                   //--- ОТЛАДКА ---
     "ОТЛАДКА", "DEBUG",
     "",
     "",

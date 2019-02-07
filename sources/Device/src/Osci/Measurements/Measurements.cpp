@@ -1492,14 +1492,14 @@ static void CountedToCurrentSettings()
 {
     const uint NUM_BYTES = BYTES_IN_CHANNEL_DS;
 
-    if (ENABLED_DS(Chan::A))
+    if (ENABLED_DS_A)
     {
         Smoother::Run(IN_A, OUT_A, NUM_BYTES);
         CountedToCurrentSettings(Chan::A, NUM_BYTES);
         LimitationData(Chan::A, NUM_BYTES);
     }
 
-    if (ENABLED_DS(Chan::B))
+    if (ENABLED_DS_B)
     {
         Smoother::Run(IN_B, OUT_B, NUM_BYTES);
         CountedToCurrentSettings(Chan::B, NUM_BYTES);

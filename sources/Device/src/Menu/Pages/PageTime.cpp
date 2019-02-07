@@ -114,7 +114,7 @@ DEF_CHOICE_2( cShiftXtype,                                                      
 const PageBase *PageTime::pointer = &pTime;
 
 
-DEF_PAGE_3( pTime, // -V641                                                                                                                                               //--- РАЗВЕРТКА ---
+DEF_PAGE_3( pTime, // -V641 // -V1027                                                                                                                                     //--- РАЗВЕРТКА ---
     "РАЗВ.", "SCAN",
     "Содержит настройки развёртки.",
     "Contains scan settings.",

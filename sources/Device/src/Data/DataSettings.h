@@ -38,11 +38,11 @@ struct DataSettings
 #define Lval_ENABLED(ds, ch)    (ch.IsA() ? Lval_ENABLED_A(ds) : Lval_ENABLED_B(ds))
 #define ENABLED_A(ds)           ((bool)Lval_ENABLED_A(ds))
 #define ENABLED_B(ds)           ((bool)Lval_ENABLED_B(ds))
-#define ENABLED(ds, ch)         ((ch == Chan::A) ? ENABLED_A(ds) : ENABLED_B(ds))
+#define ENABLED(ds, ch)         (((ch) == Chan::A) ? ENABLED_A(ds) : ENABLED_B(ds))
 
 #define ENABLED_DS(ch)          (ENABLED(DS, ch))
-#define ENABLED_DS_A            (ENABLED(DS, Chan(Chan::A)))
-#define ENABLED_DS_B            (ENABLED(DS, Chan(Chan::B)))
+#define ENABLED_DS_A            ENABLED_A(DS)
+#define ENABLED_DS_B            ENABLED_B(DS)
 
 #define RSHIFT(ds, ch)          ((ds)->rShift[ch])
 #define RSHIFT_A(ds)            (RSHIFT(ds, Chan::A))
@@ -68,8 +68,6 @@ struct DataSettings
 #define TIME_YEAR(ds)           ((ds)->time.year)
 #define TIME_MS_DS(ds)          ((ds)->time.timeMS)
 
-#define BYTES_IN_CHANNEL(ds)    ((uint)(ds)->SizeChannel())
-
 #define INVERSE_A(ds)           ((ds)->inverseA)
 #define INVERSE_B(ds)           ((ds)->inverseB)
 #define INVERSE(ds, ch)         (ch.IsA() ? INVERSE_A(ds) : INVERSE_B(ds))
@@ -94,3 +92,4 @@ struct DataSettings
 #define Lval_DIVIDER_B(ds)      ((ds)->multiplierB)
 
 #define ENUM_POINTS(ds)         ((ds)->enumPoints)
+#define BYTES_IN_CHANNEL(ds)    ((uint)(ds)->SizeChannel())

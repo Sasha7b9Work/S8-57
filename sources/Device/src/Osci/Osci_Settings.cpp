@@ -8,6 +8,7 @@
 #include "Utils/Math.h"
 
 #include "Osci/Display/Osci_Display.h"
+#include "Data/Reader.h"
 
 
 #ifdef WIN32
@@ -288,5 +289,22 @@ uint Osci::Settings::Memory::ENumPointsFPGA::PointsInChannel() const
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Osci::Settings::Trig::Level::Find()
 {
+    if (DATA)
+    {
+        Chan::E ch = (Chan::E)TRIG_SOURCE;
 
+        if (!ENABLED_DS(ch))
+        {
+            return;
+        }
+
+        uint8 *data = OUT(ch);
+
+        uint numBytes = DS->SizeChannel();
+
+        uint8 max = Math::MaxFromArray(data, 0, numBytes - 1);
+        uint8 min = Math::MinFromArray(data, 0, numBytes - 1);
+
+        LOG_WRITE("%d %d", min, max);
+    }
 }

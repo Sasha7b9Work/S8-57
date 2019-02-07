@@ -40,13 +40,11 @@ namespace Math
     
     int MinFrom2Int(int val0, int val1);
 
-    uint8 MaxFromArray_RAM(const uint16 *data, int firstPoint, int lastPoint);
-
-    uint8 MinFromArray_RAM(const uint16 *data, int firstPoint, int lastPoint);
-
     uint8 MaxFromArray(const uint8 *data, int firstPoint, int lastPoint);
 
     uint8 MinFromArray(const uint8 *data, int firstPoint, int lastPoint);
+
+    void MinMaxFromArray(const uint8 *data, int firstPoint, int lastPoint, uint8 *outMin, uint8 *outMax);
 
     uint8 MaxFromArrayWithErrorCode(const uint8 *data, int firstPoint, int lastPoint);
 

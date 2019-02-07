@@ -97,7 +97,7 @@ void Painter::DrawLine(int x1, int y1, int x2, int y2)
 {
     if (x1 == x2 && y1 == y2)
     {
-        ++x1;
+        SetPoint(x1, y1);
     }
     else if (x1 == x2)
     {
@@ -108,6 +108,10 @@ void Painter::DrawLine(int x1, int y1, int x2, int y2)
     {
         DrawHLine(y1, x1, x2);
         return;
+    }
+    else
+    {
+        // остальные варианты не рассматриваем - нет надобности
     }
 
     int x = x1;

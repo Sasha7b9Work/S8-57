@@ -36,13 +36,13 @@ static void DrawTPos(int leftX, int rightX);
 
 static void DrawTShift(int leftX, int rightX, int numPoints);
 
-static void DrawModeLines(Chan::E ch, int left, int center, uint8 *data, float scale);
+static void DrawModeLines(Chan::E ch, int left, int center, const uint8 *data, float scale);
 
 static void DrawModeLinesPeakDetOn(int center, const uint8 *data, float scale, int x);
 
 static void DrawModeLinesPeakDetOff(int center, const uint8 *data, float scale, int x);
 
-static void DrawModePoints(Chan::E ch, int left, int center, uint8 *data, float scale);
+static void DrawModePoints(Chan::E ch, int left, int center, const uint8 *data, float scale);
 
 static void DrawModePointsPeakDetOn(int center, const uint8 *data, float scale, int x);
 
@@ -146,7 +146,7 @@ static void DrawChannel(Chan::E ch)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void DrawModeLines(Chan::E ch, int left, int center, uint8 *data, float scale)
+static void DrawModeLines(Chan::E ch, int left, int center, const uint8 *data, float scale)
 {
     Color::SetCurrent(Color::Channel(ch));
 
@@ -195,7 +195,7 @@ static void DrawModeLinesPeakDetOff(int center, const uint8 *data, float scale, 
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void DrawModePoints(Chan::E ch, int left, int center, uint8 *data, float scale)
+static void DrawModePoints(Chan::E ch, int left, int center, const uint8 *data, float scale)
 {
     Color::SetCurrent(Color::Channel(ch));
 
