@@ -9,6 +9,10 @@
 
 #include "Osci/Display/Osci_Display.h"
 #include "Data/Reader.h"
+#include "Display/Grid.h"
+#include "Display/Symbols.h"
+#include "Display/Display_Primitives.h"
+#include "Display/Font/Font.h"
 
 
 #ifdef WIN32
@@ -18,6 +22,7 @@
 
 using namespace HAL::ADDRESSES::FPGA;
 using namespace Osci::Display;
+using namespace Display::Primitives;
 
 using FPGA::HAL::GPIO::Pin;
 using FPGA::Settings::ModeCouple;
@@ -316,4 +321,29 @@ void Osci::Settings::Trig::Level::Find()
 
         Set((int)(ZERO - (additionShift * k + 0.5F)));
     }
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Osci::Settings::RShift::DrawBoth()
+{
+    Draw(Chan::A);
+    Draw(Chan::B);
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Osci::Settings::RShift::Draw(Chan::E ch)
+{
+    Color::SetCurrent(Color::Channel(ch));
+
+    int delta = (SET_RSHIFT(ch) - ZERO) / STEP_RSHIFT;
+
+    int y = (Grid::Bottom() - Grid::Top()) / 2 + Grid::Top() - delta;
+
+    Char((char)SYMBOL_RSHIFT_NORMAL).Draw(Grid::Left() - 8, y - 4);
+
+    Font::SetCurrent(Font::Type::_5);
+
+    Char(Chan(ch).IsA() ? '1' : '2').Draw(Grid::Left() - 7, y - 6, Color::BACK);
+
+    Font::SetCurrent(Font::Type::_8);
 }

@@ -270,31 +270,6 @@ String TShift::ToString(TBase::E tBase) const
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void RShift::DrawBoth()
-{
-    Draw(Chan::A);
-    Draw(Chan::B);
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void RShift::Draw(Chan::E ch)
-{
-    Color::SetCurrent(Color::Channel(ch));
-
-    int delta = (SET_RSHIFT(ch) - ZERO) / STEP_RSHIFT;
-
-    int y = (Grid::Bottom() - Grid::Top()) / 2 + Grid::Top() - delta;
-
-    Char((char)SYMBOL_RSHIFT_NORMAL).Draw(Grid::Left() - 8, y - 4);
-
-    Font::SetCurrent(Font::Type::_5);
-
-    Char(Chan(ch).IsA() ? '1' : '2').Draw(Grid::Left() - 7, y - 6, Color::BACK);
-
-    Font::SetCurrent(Font::Type::_8);
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 String RShift::ToString(uint16 rShiftRel, Osci::Settings::Range::E range, Divider::E divider)
 {
     float rShiftVal = FPGA::Math::RShift2Abs(rShiftRel, range) * Divider(divider).ToAbs();

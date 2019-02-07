@@ -82,9 +82,8 @@ namespace Osci
             static String ToString(uint16 rShiftRel, Osci::Settings::Range::E range, Divider::E divider);
             /// ¬озвращает ссылку на значение
             static uint16 &Value(Chan::E ch);
-
         private:
-
+            /// ќтрисовать маркер вертикального смещени€ на сетке
             static void Draw(Chan::E ch);
         };
 
