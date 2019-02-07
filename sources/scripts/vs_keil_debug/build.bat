@@ -12,11 +12,13 @@ MSBuild.exe ..\..\generated\Panel\Panel56.vcxproj -clp:ErrorsOnly;WarningsOnly -
 set BUILD_STATUS=%ERRORLEVEL%
 if not %BUILD_STATUS%==0 goto Failed
 
-@echo %TIME%   Building DeviceLoader ...
+goto Exit
 
-MSBuild.exe ..\..\generated\DeviceLoader\DeviceLoader.vcxproj -clp:ErrorsOnly;WarningsOnly -nologo
-set BUILD_STATUS=%ERRORLEVEL%
-if %BUILD_STATUS%==0 goto Success
+rem @echo %TIME%   Building DeviceLoader ...
+rem 
+rem MSBuild.exe ..\..\generated\DeviceLoader\DeviceLoader.vcxproj -clp:ErrorsOnly;WarningsOnly -nologo
+rem set BUILD_STATUS=%ERRORLEVEL%
+rem if %BUILD_STATUS%==0 goto Success
 
 
 :Failed
