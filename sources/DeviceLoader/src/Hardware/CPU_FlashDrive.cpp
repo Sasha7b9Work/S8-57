@@ -32,32 +32,25 @@ static void USBH_UserProcess(USBH_HandleTypeDef *phost, uint8 id);
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void CPU::FDrive::Init()
 {
+    __GPIOB_CLK_ENABLE();
+    __USB_OTG_HS_CLK_ENABLE(); //-V760
+    __HAL_RCC_USB_OTG_HS_CLK_ENABLE();
+    __SYSCFG_CLK_ENABLE();
+
     GPIO_InitTypeDef isGPIO =
     {
-        0,
+        GPIO_PIN_14 | GPIO_PIN_15,
         GPIO_MODE_AF_PP,
         GPIO_NOPULL,
         GPIO_SPEED_FAST,
-        0
+        GPIO_AF12_OTG_HS_FS
     };
 
-    /*
-    104 - PA12 - D+
-    103 - PA11 - D-
-    101 - PA9  - VBUS
-    */
+    HAL_GPIO_Init(GPIOB, &isGPIO);
 
-    __SYSCFG_CLK_ENABLE();
+    HAL_NVIC_SetPriority(OTG_HS_IRQn, 5, 1);
 
-    isGPIO.Speed = GPIO_SPEED_HIGH;
-    isGPIO.Pin = GPIO_PIN_9 | GPIO_PIN_11 | GPIO_PIN_12;
-    isGPIO.Alternate = GPIO_AF10_OTG_FS;
-
-    HAL_GPIO_Init(GPIOA, &isGPIO);
-
-    HAL_NVIC_SetPriority(OTG_FS_IRQn, PRIORITY_FLASHDRIVE_OTG);
-
-    HAL_NVIC_EnableIRQ(OTG_FS_IRQn);
+    HAL_NVIC_EnableIRQ(OTG_HS_IRQn);
 
     ms->drive.state = StateDisk_Idle;
     ms->drive.connection = 0;
@@ -274,9 +267,9 @@ void CPU::FDrive::CloseOpenedFile()
 void CPU::FDrive::LL_::InitHCD(USBH_HandleTypeDef *phost)
 {
     /* Set the LL driver parameters */
-    FDrive::handleHCD.Instance = USB_OTG_FS;
-    FDrive::handleHCD.Init.speed = HCD_SPEED_FULL;
-    FDrive::handleHCD.Init.Host_channels = 11;
+    FDrive::handleHCD.Instance = USB_OTG_HS;
+    FDrive::handleHCD.Init.speed = HCD_SPEED_HIGH;
+    FDrive::handleHCD.Init.Host_channels = 12;
     FDrive::handleHCD.Init.dma_enable = 0;
     FDrive::handleHCD.Init.low_power_enable = 0;
     FDrive::handleHCD.Init.phy_itface = HCD_PHY_EMBEDDED;
