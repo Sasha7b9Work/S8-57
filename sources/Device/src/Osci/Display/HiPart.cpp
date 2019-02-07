@@ -94,7 +94,7 @@ void Osci::Display::HiPart::Draw()
 
     DrawTime(x + 3, y0 + 10); //-V2007
 
-    DrawRightPart(265, y0);
+    DrawRightPart(270, y0);
 
     WriteCursors();
 }
@@ -112,7 +112,7 @@ static void DrawSeparators(int x, int y)
     separator.Draw(x + 95, y, Color::FILL);
     separator.Draw(x + 172, y);
     separator.Draw(x + 215, y);
-    separator.Draw(x + 264, y);
+    separator.Draw(x + 269, y);
 
     HLine line2(::Display::WIDTH - Grid::Right() - 4);
 
@@ -305,7 +305,7 @@ static void DrawRightPart(int x0, int y0)
 
         if (Trig::SyncPulse())
         {
-            Region(31, 16).Fill(x0 + 1, y0 + 1, Color::FILL);
+            Region(27, 16).Fill(x0 + 1, y0 + 1, Color::FILL);
             String(DICT(DTrig)).Draw(x0 + 10, y0 + 5, Color::BACK);
         }
     }
