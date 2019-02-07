@@ -302,9 +302,18 @@ void Osci::Settings::Trig::Level::Find()
 
         uint numBytes = DS->SizeChannel();
 
-        uint8 max = Math::MaxFromArray(data, 0, numBytes - 1);
-        uint8 min = Math::MinFromArray(data, 0, numBytes - 1);
+        uint8 max = Math::MaxFromArray(data, 0, (int)numBytes - 1);
+        uint8 min = Math::MinFromArray(data, 0, (int)numBytes - 1);
 
-        LOG_WRITE("%d %d", min, max);
+        int deltaValue = (int)FPGA::VALUE::AVE - (max + min) / 2;
+
+        int deltaRShift = SET_RSHIFT(ch) - RShift::ZERO;
+
+        float k = 200 / 125.0f;     // Этот коэффициент получается так, что на верхей границе экрана лежит 125-я точка сигнала от центра экрана (нулевого значение),
+                                    // а маркер в этой точке смещён на 200 единиц относительно цента экрана
+
+        float additionShift = deltaValue + deltaRShift / k;     // Итоговое смщение, которое нужно добавить к TrigLev::Zero
+
+        Set((int)(ZERO - (additionShift * k + 0.5F)));
     }
 }

@@ -187,6 +187,7 @@ namespace Osci
                     Wait,     ///< Ждущий.
                     Single    ///< Однократный.
                 } value;
+                explicit StartMode(E v) : value(v) {};
             };
 
             struct ModeFind
@@ -196,6 +197,7 @@ namespace Osci
                     Hand,      ///< Уровень синхронизации устанавливается вручную или автоматически - однократным нажажтием кнопки.
                     Auto       ///< Подстройки уровня синхронизации производится автоматически после каждого нового считанного сигнала.
                 } value;
+                explicit ModeFind(E v) : value(v) {};
             };
 
             struct Input
