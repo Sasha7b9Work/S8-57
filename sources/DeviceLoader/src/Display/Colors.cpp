@@ -1,10 +1,10 @@
 #include "defines.h"
-#include "Log.h"
 #include "Display/Colors.h"
 #include "Display/Painter.h"
 #include "Settings/Settings.h"
 #include "Settings/SettingsDisplay.h"
 #include "Utils/Math.h"
+
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 const uint8 Color::COLOR_BLACK              = 0;
@@ -67,8 +67,6 @@ void Color::InitGlobalColors()
 void Color::Log(Color color)
 {
 #define colorVal (COLOR(color.value))
-
-    LOG_WRITE("Color %d R=%d, G=%d, B=%d", color.value, R_FROM_COLOR(colorVal), G_FROM_COLOR(colorVal), B_FROM_COLOR(colorVal));
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------

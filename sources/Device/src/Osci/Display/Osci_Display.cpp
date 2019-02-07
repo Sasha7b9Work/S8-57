@@ -42,21 +42,21 @@ void Osci::Display::Update()
     PainterData::DrawData();
 
     Rectangle(Grid::Width(), Grid::Height()).Draw(Grid::Left(), Grid::Top(), Color::FILL);
-
+    
     HiPart::Draw();
-
+    
     RShift::DrawBoth();
-
+    
     DrawCursorTrigLevel();
-
+    
     Osci::Measurements::Cursors::Cursor::Draw();
-
+    
     BottomPart::Draw(273, Grid::Bottom() + 1);
-
+    
     FrequencyCounter::Draw();
-
+    
     Menu::Draw();
-
+    
     Measurements::Table::Draw();
 }
 

@@ -1,0 +1,3 @@
+@echo %TIME%   Cleanup Loader ...
+
+c:\Keil_v5\UV4\UV4 -c..\..\DeviceLoader\DeviceLoader57.uvprojx -j0

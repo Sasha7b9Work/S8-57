@@ -1,12 +1,7 @@
 #include "defines.h"
 #include "Timer.h"
-#include "Log.h"
-#if defined(STM32F437xx) || defined(STM32F407xx) || defined(STM32F429xx)
 #include <stm32f4xx.h>
 #include "stm32/4XX/Timer4XX.h"
-#elif defined STM32F207xx
-#include "stm32/2XX/Timer2XX.h"
-#endif
 #include <limits.h>
 #include "Hardware/CPU.h"
 
@@ -259,7 +254,6 @@ uint Timer::LogPointUS(char * name)
 {
     uint interval = TIME_TICKS - timePrevPoint;
     timePrevPoint = TIME_TICKS;
-    LOG_WRITE("%s %.2f us", name, interval / 120.0);
     return interval;
 }
 
@@ -268,7 +262,6 @@ uint Timer::LogPointMS(char * name)
 {
     uint interval = TIME_TICKS - timePrevPoint;
     timePrevPoint = TIME_TICKS;
-    LOG_WRITE("%s %.2f ms", name, interval / 120e3);
     return interval;
 }
 
