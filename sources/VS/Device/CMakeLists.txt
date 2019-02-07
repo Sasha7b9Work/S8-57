@@ -18,7 +18,7 @@ include_directories("..\\..\\Device\\src\\"
                     "..\\..\\ThirdParty\\wxWidgets\\generated\\lib\\vc_dll\\mswud\\"
                     "..\\..\\ThirdParty\\SDL2\\SDL2-2.0.9\\include\\")
                     
-add_definitions(-DSTM32F437xx -DOLD_RECORDER)
+add_definitions(-DSTM32F437xx -DOLD_RECORDER -DWXUSINGDLL)
 
 SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -MP -Wall")
 
@@ -137,8 +137,9 @@ file(GLOB SOURCES   ../../common/_VS/*
                     
 add_executable(Device56 ${SOURCES})
 
-target_link_libraries(Device56 "..\\..\\ThirdParty\\wxWidgets\\generated\\lib\\vc_dll\\wxmsw31ud_core.lib")
 target_link_libraries(Device56 "..\\..\\ThirdParty\\wxWidgets\\generated\\lib\\vc_dll\\wxbase31ud.lib")
+target_link_libraries(Device56 "..\\..\\ThirdParty\\wxWidgets\\generated\\lib\\vc_dll\\wxmsw31ud_core.lib")
+#target_link_libraries(Device56 "..\\..\\ThirdParty\\wxWidgets\\generated\\lib\\vc_dll\\wxmsw31ud_aui.lib")
 
 target_link_libraries(Device56 "..\\..\\ThirdParty\\SDL2\\SDL2-2.0.9\\generated\\Debug\\SDL2-staticd.lib")
 
