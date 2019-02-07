@@ -12,6 +12,7 @@
 #include <cstring>
 
 #include "Data/DataSettings.h"
+#include "Hardware/Timer.h"
 
 
 using namespace Osci;
@@ -167,12 +168,13 @@ public:
         if (ENUM_SMOOTHING.ToNumber() < 2)
         {
             std::memcpy(out, in, numBytes);
-            return;
         }
-
-        for (uint i = 0; i < numBytes; i++)
+        else
         {
-            out[i] = CalculatePoint((int)i);
+            for (uint i = 0; i < numBytes; i++)
+            {
+                out[i] = CalculatePoint((int)i);
+            }
         }
     }
 private:

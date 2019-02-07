@@ -16,8 +16,8 @@
 #define SET_TRIGLEV_B           (SET_TRIGLEV(Chan::B))
 
 #define TRIG_MODE_FIND          (set.trig_modeFind)
-#define TRIG_MODE_FIND_HAND     (TRIG_MODE_FIND == Trig::ModeFind::Hand)
-#define TRIG_MODE_FIND_AUTO     (TRIG_MODE_FIND == Trig::ModeFind::Auto)
+#define TRIG_MODE_FIND_IS_HAND  (TRIG_MODE_FIND == Osci::Settings::Trig::ModeFind::Hand)
+#define TRIG_MODE_FIND_IS_AUTO  (TRIG_MODE_FIND == Osci::Settings::Trig::ModeFind::Auto)
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

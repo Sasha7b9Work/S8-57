@@ -38,11 +38,6 @@ static const ChoiceBase cMode =                                                 
 };
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static bool IsActive_Search()
-{
-    return TRIG_MODE_FIND_HAND;
-}
-
 static void OnPress_Search()
 {
     Osci::Settings::Trig::Level::Find();
@@ -52,7 +47,7 @@ DEF_BUTTON( bSearch,                                                            
     "Найти", "Search",
     "Производит поиск уровня синхронизации.",
     "Runs for search synchronization level.",
-    pageFind, IsActive_Search, OnPress_Search, Choice::EmptyDraw
+    pageFind, FuncActive, OnPress_Search, Choice::EmptyDraw
 )
 
 
