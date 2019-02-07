@@ -657,11 +657,11 @@ DEF_PAGE_5( pageDebug, // -V641 // -V1027                                       
     &ppADC,                                         ///< ÎÒËÀÄÊÀ - ÀÖÏ
     PageService::PageDebug::PageRand::pointer,      ///< ÎÒËÀÄÊÀ - ÐÀÍÄ-ÒÎÐ
     &cStats,			                            ///< ÎÒËÀÄÊÀ - Ñòàòèñòèêà
-    &cDisplayOrientation,                           ///< ÎÒËÀÄÊÀ - Îðèåíòàöèÿ
+    &bSaveFirmware,                                 ///< ÎÒËÀÄÊÀ - Ñîõð. ïðîøèâêó
+//    &cDisplayOrientation,                           ///< ÎÒËÀÄÊÀ - Îðèåíòàöèÿ
 //    &mgPred,			                            ///< ÎÒËÀÄÊÀ - Ïðåäçàïóñê
 //    &mgPost,			                            ///< ÎÒËÀÄÊÀ - Ïîñëåçàïóñê
 //    &ppSettings,		                            ///< ÎÒËÀÄÊÀ - ÍÀÑÒÐÎÉÊÈ
-//    &bSaveFirmware,                               ///< ÎÒËÀÄÊÀ - Ñîõð. ïðîøèâêó
 //    &ppSerialNumber,                              ///< ÎÒËÀÄÊÀ - Ñ/Í
 //    &bEraseData,                                  ///< ÎÒËÀÄÊÀ - Ñòåðåòü äàííûå
     Page::Name::Debug, PageService::pointer, FuncActive, FuncPressPage, FuncDrawPage, FuncRegSetPage
