@@ -56,6 +56,8 @@
 #define SYMBOL_USB              '\x84'  ///< Символ USB внизу экрана
 #define SYMBOL_TAB              '\x6e'
 #define SYMBOL_MATH_FUNC_MUL    '\x8a'  ///< МАТЕМАТИКА-ФУНКЦИЯ-УМНОЖЕНИЕ
+#define SYMBOL_PEAK_DET_LEFT    '\x12'  ///< Левая часть значка пикового детектора
+#define SYMBOL_PEAK_DET_RIGHT   '\x13'  ///< Правая часть значка пикового детектора
 
 /** @}  @}
  */

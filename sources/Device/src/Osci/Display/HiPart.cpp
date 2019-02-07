@@ -16,6 +16,8 @@
 #include <cstring>
 
 #include "Utils/Debug.h"
+#include "Display/Font/Font.h"
+#include "Hardware/Timer.h"
 
 
 using namespace Display::Primitives;
@@ -45,13 +47,15 @@ static int DrawMainParameters(int x, int y);
 static void DrawRightPart(int x, int y);
 
 static void WriteCursors();
+/// Нарисовать значок пикового детектора
+static void DrawPeakDet(int x, int y);
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void Osci::Display::HiPart::Draw()
 {
-    int y0 = 0;
-    int x0 = 0;
+    const int y0 = 0;
+    const int x0 = 0;
 
     int y1 = 9;
     int x = -1;
@@ -94,9 +98,11 @@ void Osci::Display::HiPart::Draw()
 
     DrawTime(x + 3, y0 + 10); //-V2007
 
-    DrawRightPart(270, y0);
+    DrawRightPart(271, y0);
 
     WriteCursors();
+
+    DrawPeakDet(x + 37, y0 + 10);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -112,7 +118,7 @@ static void DrawSeparators(int x, int y)
     separator.Draw(x + 95, y, Color::FILL);
     separator.Draw(x + 172, y);
     separator.Draw(x + 215, y);
-    separator.Draw(x + 269, y);
+    separator.Draw(x + 270, y);
 
     HLine line2(::Display::WIDTH - Grid::Right() - 4);
 
@@ -305,8 +311,8 @@ static void DrawRightPart(int x0, int y0)
 
         if (Trig::SyncPulse())
         {
-            Region(27, 16).Fill(x0 + 1, y0 + 1, Color::FILL);
-            String(DICT(DTrig)).Draw(x0 + 10, y0 + 5, Color::BACK);
+            Region(26, 16).Fill(x0 + 1, y0 + 1, Color::FILL);
+            String(DICT(DTrig)).Draw(x0 + 9, y0 + 5, Color::BACK);
         }
     }
 
@@ -440,5 +446,17 @@ static void WriteCursors()
                 }
             }
         }
+    }
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+static void DrawPeakDet(int x, int y)
+{
+    if (SET_PEAKDET_EN)
+    {
+        Font::SetCurrent(Font::Type::_UGO2);
+        Char(SYMBOL_PEAK_DET_LEFT).Draw(x, y, Color::FILL);
+        Char(SYMBOL_PEAK_DET_RIGHT).Draw(x + 8, y);
+        Font::SetCurrent(Font::Type::_8);
     }
 }
