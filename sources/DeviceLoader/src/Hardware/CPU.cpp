@@ -56,6 +56,4 @@ void CPU::InitHardware()
     Panel::Init();
     
     Timer::Init();
-    
-    //FDrive::Init();
 }

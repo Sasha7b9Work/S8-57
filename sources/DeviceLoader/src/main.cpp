@@ -37,8 +37,21 @@ MainStruct *ms;
 void Upgrade();
 
 
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 int main()
+{
+    __disable_irq();
+    // Теперь переходим на основную программу
+    pFunction JumpToApplication;
+
+    JumpToApplication = (pFunction)(*(__IO uint *)(MAIN_PROGRAM_START_ADDRESS + 4));
+    __set_MSP(*(__IO uint *)MAIN_PROGRAM_START_ADDRESS);
+    __enable_irq();
+    JumpToApplication();
+}
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+int _main()
 {
     ms = (MainStruct *)malloc(sizeof(MainStruct));
     ms->percentUpdate = 0.0f;
@@ -136,6 +149,8 @@ int main()
     JumpToApplication();
 
 #endif
+    
+    return 0;
 }
 
 
