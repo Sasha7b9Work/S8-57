@@ -140,7 +140,7 @@ void Multimeter::ChangeAVP()
 {
     ChangeMode();
 
-    char send[] = { 0x02, 'Z', MULTI_AVP == AVP::On ? '1' : '0', 0x0a, 0 };
+    char send[] = { 0x02, 'Z', (MULTI_AVP == AVP::On) ? '1' : '0', 0x0a, 0 };
 
     SendCommand(send);
 }
@@ -207,7 +207,7 @@ void Multimeter::Update()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Multimeter::Measure::E Multimeter::Measure::ForSymbol(char symbol)
 {
-    Measure::E result = Measure::Number;
+    Measure::E result = Measure::Size;
 
     switch (symbol)
     {
@@ -242,4 +242,10 @@ static void ReceiveCallback()
 
     // И даём запрос на чтение следующего
     Multimeter::USART3_::StartReceiveOneByte();
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Multimeter::Beep(bool /*on*/)
+{
+
 }

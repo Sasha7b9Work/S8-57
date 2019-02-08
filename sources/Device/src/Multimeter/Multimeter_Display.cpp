@@ -27,18 +27,18 @@ static void PrepareConstantCurrent();
 static void PrepareVariableCurrent();
 static void PrepareResistance();
 static void PrepareTestDiode();
+static void PrepareZero();
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void Multimeter::Display::Update()
 {
-    struct Func
+    static struct Func
     {
         pFuncVV func;
         Func(pFuncVV f) : func(f) {};
-    };
-
-    static const Func funcs[Multimeter::Measure::Number] =
+    }
+    const funcs[Multimeter::Measure::Size] =
     {
         PrepareConstantVoltage,
         PrepareVariableVoltage,
@@ -54,12 +54,19 @@ void Multimeter::Display::Update()
     std::memset(out, 0, SIZE_OUT);
 
     Measure::E meas = Measure::ForSymbol(buffer[7]);
-    if (meas == Measure::Number)
+    if (meas == Measure::Size)
     {
         meas = MULTI_MEASURE;
     }
 
-    funcs[meas].func();
+    if (Multimeter::zero == 1)
+    {
+        PrepareZero();
+    }
+    else
+    {
+        funcs[meas].func();
+    }
 
     Text(out, 5).Draw(30, 30, (buffer[0] == '8') ? Color::GRAY_50 : Color::FILL);
 
@@ -202,6 +209,12 @@ static void PrepareVariableCurrent()
     out[6] = ' ';
     out[7] = 'A';
     out[8] = '~';
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+static void PrepareZero()
+{
+    std::strcpy(out, "   Нуль");
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

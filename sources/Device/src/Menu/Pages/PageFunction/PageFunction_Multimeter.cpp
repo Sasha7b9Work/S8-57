@@ -122,7 +122,7 @@ DEF_CHOICE_7(   cMode,
     "I~",   "I~",
     "R",    "R",
     "VD",   "VD",
-    "BELL", "BELL",
+    "Прозвонка", "Bell",
     MULTI_MEASURE, pageMultimeter, FuncActive, PageFunction::PageMultimeter::OnChanged_Mode, Choice::EmptyDraw
 )
 
