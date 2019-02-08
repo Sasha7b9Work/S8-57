@@ -97,18 +97,6 @@ static pFuncVV funcAfterUpdateOnce = EmptyFuncVV;
 static void ExecuteFuncAfterUpdateOnce();
 
 
-namespace Display
-{
-    class MultimeterWorker
-    {
-    public:
-        static void MultimeterDisplayUpdate()
-        {
-            Multimeter::Display::Update();
-        }
-    };
-}
-
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void Display::Init()
 {
@@ -129,7 +117,7 @@ void Display::Update()
     {
         Osci::Display::Update,
         Tester::Display::Update,
-        MultimeterWorker::MultimeterDisplayUpdate,
+        Multimeter::Display::Update,
         Recorder::Display::Update
     };
 
