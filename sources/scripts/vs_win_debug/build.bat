@@ -16,3 +16,5 @@ goto Exit
 
 :Exit
 
+call copy_wxWidgets_dlls.bat
+
