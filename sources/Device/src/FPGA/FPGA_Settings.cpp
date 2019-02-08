@@ -117,9 +117,6 @@ void TShift::Load()
 
     FSMC::WriteToFPGA16(WR::PRED_LO, FPGA::post);
     FSMC::WriteToFPGA16(WR::POST_LO, FPGA::pred);
-
-    LOG_WRITE("");
-    LOG_WRITE("post = %d, pred = %d", FPGA::post, FPGA::pred);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
