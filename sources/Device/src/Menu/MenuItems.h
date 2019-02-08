@@ -248,6 +248,7 @@ public:
             Debug_ADC_AltShift,         ///< ÎÒËÀÄÊÀ - ÀÖÏ - ÄÎÏ ÑÌÅÙ ÏÀÌ
             Debug_Rand,                 ///< ÎÒËÀÄÊÀ - ÐÀÍÄ-ÒÎÐ
             Debug_Channels,             ///< ÎÒËÀÄÊÀ - ÊÀÍÀËÛ
+            Debug_Multimeter,           ///< ÎÒËÀÄÊÀ - ÌÓËÜÒÈÌÅÒÐ
             SB_Debug_Settings,          ///< ÎÒËÀÄÊÀ - ÍÀÑÒÐÎÉÊÈ
             SB_Debug_SerialNumber,      ///< ÎÒËÀÄÊÀ - Ñ/Í
             Number,
