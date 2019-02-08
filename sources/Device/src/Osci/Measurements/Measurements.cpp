@@ -13,6 +13,7 @@
 
 #include "Data/DataSettings.h"
 #include "Hardware/Timer.h"
+#include "Osci/Display/PainterData.h"
 
 
 using namespace Osci;
@@ -1160,7 +1161,7 @@ float Measure::CalculateCursorU(Chan::E ch, float posCurT)
         return 0;
     }
     
-    BitSet64 points = Display::PointsOnDisplay();
+    BitSet64 points = Osci::Display::PainterData::PointsOnDisplay();
 
     int rel = (int)(CHOICE_BUFFER)[(int)points.word0 + ROUND(int, posCurT)] - MIN;
 
@@ -1185,7 +1186,7 @@ float Measure::CalculateCursorT(Chan::E ch, float posCurU, int numCur)
 #define FIRST_POINT (points.sword0)
 #define LAST_POINT  (points.sword1)
     
-    BitSet64 points = Display::PointsOnDisplay();
+    BitSet64 points = Osci::Display::PainterData::PointsOnDisplay();
 
     int prevData = 200 - dataIn[FIRST_POINT] + MIN;
 
@@ -1456,7 +1457,7 @@ void Osci::Measurements::SetData()
  
     CountedToCurrentSettings();
 
-    BitSet64 points = Display::BytesOnDisplay();
+    BitSet64 points = Osci::Display::PainterData::BytesOnDisplay();
     firstByte = points.sword0;
     lastByte = points.sword1;
     nBytes = lastByte - firstByte;

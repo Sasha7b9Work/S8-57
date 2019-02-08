@@ -48,10 +48,6 @@ namespace Display
     void ChangedRShiftMarkers(bool active);
 
     void SetOrientation(Orientation::E orientation);
-    /// Возвращает адрес первой и последней точки на экране в координатах экрана
-    BitSet64 PointsOnDisplay();
-    /// \brief Возращает адрес первой и последней точки в координатах экрана
-    BitSet64 BytesOnDisplay();
     /// Возвращает время, через которое меню автоматически скрывается, если не было больше нажатий
     int TimeMenuAutoHide();
     /// Если экран разделён на две части и основной сигнал выводится сверху - например, в режиме вывода спектра

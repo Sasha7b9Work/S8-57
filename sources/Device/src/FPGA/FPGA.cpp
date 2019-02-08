@@ -185,7 +185,7 @@ void FPGA::ReadDataChanenl(Chan::E ch, uint8 data[FPGA::MAX_NUM_POINTS])
 
         if(SET_PEAKDET_EN)
         {
-            for(uint i = 0; i < numPoints / 2U; i++)
+            for(uint i = 0; i < numPoints; i++)
             {
                 *p++ = *addr0;
                 *p++ = *addr1;

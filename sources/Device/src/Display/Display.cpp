@@ -10,6 +10,7 @@
 #include <cstring>
 
 #include "Osci/Display/Osci_Display.h"
+#include "Osci/Display/PainterData.h"
 
 
 using namespace Display::Primitives;
@@ -349,29 +350,6 @@ void Display::SetAddDrawFunction(pFuncVV func, uint time)
     funcAdditionDraw = func;
     Timer::SetAndStartOnce(Timer::Type::RemoveAddFunction, RemoveAddDrawFunction, time);
 }
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-BitSet64 Display::PointsOnDisplay()
-{
-    BitSet64 retValue;
-
-    retValue.sword0 = (SET_PEAKDET_EN ? (SHIFT_IN_MEMORY / 2) : SHIFT_IN_MEMORY);
-    retValue.sword1 = retValue.sword0 + 281;
-
-    return retValue;
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-BitSet64 Display::BytesOnDisplay()
-{
-    BitSet64 retValue;
-
-    retValue.sword0 = SHIFT_IN_MEMORY;
-    retValue.sword1 = retValue.sword0 + (SET_PEAKDET_EN ? 281 * 2 : 281);
-
-    return retValue;
-}
-
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 int Display::TimeMenuAutoHide()

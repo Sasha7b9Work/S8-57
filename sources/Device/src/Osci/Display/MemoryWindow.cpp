@@ -10,6 +10,7 @@
 #include "Hardware/Battery.h"
 #include "Osci/Display/HiPart.h"
 #include "Display/Display.h"
+#include "Osci/Display/PainterData.h"
 
 
 using namespace Display::Primitives;

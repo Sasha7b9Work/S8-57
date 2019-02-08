@@ -41,7 +41,6 @@
 #define NUM_AVE                     (1 << (int)ENUM_AVE)
 #define IN_AVERAGING_MODE           (ENUM_AVE > Display::ENumAverage::_1 && (!IN_P2P_MODE))
 
-#define SHIFT_IN_MEMORY             (set.disp_shiftInMemory)
 #define TIME_MESSAGES               (set.disp_timeMessages)
 
 #define ENUM_SIGNALS_IN_SEC         (set.disp_ENumSignalsInSec)

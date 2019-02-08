@@ -20,6 +20,8 @@
 #include "Utils/Values.h"
 #include "Utils/CommonFunctions.h"
 
+#include "Osci/Display/PainterData.h"
+
 
 using namespace Display::Primitives;
 using namespace Osci::Settings;
@@ -59,27 +61,9 @@ void PageMemory::OnChanged_Points(bool active)
         return;
     }
 
-    int width = Grid::Width();
-
     FPGA::Reset();
 
-    if (SET_PEAKDET_EN)
-    {
-        width *= 2;
-    }
-
-    if (TPOS_IS_LEFT)
-    {
-        SHIFT_IN_MEMORY = 0;
-    }
-    else if (TPOS_IS_CENTER)
-    {
-        SHIFT_IN_MEMORY = (int16)(FPGA_NUM_POINTS / 2 - width / 2);
-    }
-    else // TPOS_IS_RIGHT
-    {
-        SHIFT_IN_MEMORY = (int16)(FPGA_NUM_POINTS - width - 2);
-    }
+    Osci::Display::PainterData::ChangeTPos();
 
     FPGA::Reset();
     TShift::Set(SET_TSHIFT);

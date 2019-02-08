@@ -109,8 +109,12 @@ static void DrawChannel(Chan::E ch)
 
     uint8 *data = OUT(ch);
 
-    if(SET_PEAKDET_DIS)
+
+    data += SHIFT_IN_MEMORY;
+
+    if (SET_PEAKDET_EN)
     {
+        LOG_WRITE("Даём ещё смещение");
         data += SHIFT_IN_MEMORY;
     }
 
@@ -276,4 +280,56 @@ static void DrawTShift(int leftX, int rightX, int numBytes)
 
     Line((int)xShift + dX01, 3, (int)xShift + dX11, dY11 - 2).Draw(Color::BACK);
     Line((int)xShift + dX02, 4, (int)xShift + 2, dY12 - 2).Draw();
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+int Osci::Display::PainterData::FirstPointOnScreen()
+{
+    return set.disp_shiftInMemory;
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+BitSet64 Osci::Display::PainterData::PointsOnDisplay()
+{
+    BitSet64 retValue;
+
+    retValue.sword0 = SHIFT_IN_MEMORY;
+    retValue.sword1 = retValue.sword0 + 281;
+
+    return retValue;
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+BitSet64 Osci::Display::PainterData::BytesOnDisplay()
+{
+    BitSet64 retValue;
+
+    retValue.sword0 = SHIFT_IN_MEMORY;
+    retValue.sword1 = retValue.sword0 + 281;
+
+    if (SET_PEAKDET_EN)
+    {
+        retValue.sword1 += 281;
+    }
+
+    return retValue;
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Osci::Display::PainterData::ChangeTPos()
+{
+    int width = Grid::Width();
+
+    if (TPOS_IS_LEFT)
+    {
+        set.disp_shiftInMemory = 0;
+    }
+    else if (TPOS_IS_CENTER)
+    {
+        set.disp_shiftInMemory = (int16)(FPGA_NUM_POINTS / 2 - width / 2);
+    }
+    else // TPOS_IS_RIGHT
+    {
+        set.disp_shiftInMemory = (int16)(FPGA_NUM_POINTS - width - 2);
+    }
 }
