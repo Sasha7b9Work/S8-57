@@ -29,6 +29,12 @@ namespace Multimeter
     void ChangeMode();
 
     void ChangeAVP();
+
+    void LoadZero();
+    /// Функции калибровки
+    void Calibrate0();
+    void Calibrate1();
+
     /// Режим измерений мультиметра
     struct Measure
     {
@@ -64,4 +70,6 @@ namespace Multimeter
 
         static void ChangedMode();
     };
+    /// Настройка мультиметра "Нуль"
+    extern uint8 zero;
 };

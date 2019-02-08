@@ -141,6 +141,22 @@ DEF_CHOICE_2 (cAVP,
     MULTI_AVP, pageMultimeter, FuncActive, OnChanged_AVP, Choice::EmptyDraw
 )
 
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+static void OnChanged_Zero(bool)
+{
+    Multimeter::LoadZero();
+}
+
+DEF_CHOICE_2( cZero,
+    "Ќуль", "Zero",
+    "",
+    "",
+    DISABLE_RU, DISABLE_EN,
+    ENABLE_RU, ENABLE_EN,
+    Multimeter::zero, pageMultimeter, FuncActive, OnChanged_Zero, Choice::EmptyDraw
+)
+
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void PageFunction::PageMultimeter::Init()
 {
@@ -152,13 +168,14 @@ static void OnPress_Page(bool enter)
     Device::State::SetMode(enter ? Device::Mode::Multimeter : Device::Mode::Osci);
 }
 
-DEF_PAGE_3( pageMultimeter, // -V641
+DEF_PAGE_4( pageMultimeter, // -V641
     "ћ”Ћ№“»ћ≈“–", "MULTIMETER",
     "”правление прибором в режиме мультиметра",
     "Instrument control in multimeter mode",
     &cMode,
     &cRangesVoltageDC,
     &cAVP,
+    &cZero,
     Page::Name::Function_Multimeter, PageFunction::pointer, FuncActive, OnPress_Page, FuncDrawPage, FuncRegSetPage
 )
 

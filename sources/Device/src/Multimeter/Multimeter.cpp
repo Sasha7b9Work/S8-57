@@ -15,6 +15,21 @@ using namespace Multimeter::Settings;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+uint8 Multimeter::zero = 0;
+
+/// Послать команду в прибор
+
+namespace Multimeter
+{
+    static void SendCommand(char *data);
+}
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/// В этот буфер записывается информация в обработчике прерывания приёма
+static uint8 bufferUART[10];
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 namespace Multimeter
 {
     class USART3_
@@ -24,13 +39,14 @@ namespace Multimeter
         {
             HAL::USART3_::Init(recvCallback);
         }
-        static void Transmit(void *_buffer, uint size, uint timeout)
+        static void _Transmit(void *_buffer, uint size, uint timeout)
         {
             HAL::USART3_::Transmit(_buffer, size, timeout);
         }
-        static void StartReceiveIT(void *_buffer, uint size)
+        /// Запускает приём одного байта
+        static void StartReceiveOneByte()
         {
-            HAL::USART3_::StartReceiveIT(_buffer, size);
+            HAL::USART3_::StartReceiveIT(bufferUART, 1);
         }
     };
 
@@ -48,10 +64,49 @@ namespace Multimeter
     };
 }
 
-
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/// В этот буфер записывается информация в обработчике прерывания приёма
-static uint8 bufferUART[10];
+class Buffer
+{
+public:
+    static void Push(uint8 byte)
+    {
+        if (pointer == 0 && byte != 0x02)
+        {
+            return;
+        }
+
+        data[pointer++] = byte;
+
+        if (ExistData())
+        {
+            Multimeter::DisplayWorker::SetMeasure(data);
+            pointer = 0;
+        }
+    };
+
+private:
+    static int pointer;
+
+    static uint8 data[20];
+
+    static bool ExistData()
+    {
+        if (pointer == 0)
+        {
+            return false;
+        }
+
+        if (data[pointer - 1] == 0x0a)
+        {
+            return true;
+        }
+
+        return false;
+    }
+};
+
+int Buffer::pointer = 0;
+uint8 Buffer::data[20];
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -69,11 +124,9 @@ void Multimeter::Init()
 {
     USART3_::Init(ReceiveCallback);
 
-    uint8 send[4] = { 0x02, 'V', '0', 0x0a };
+    char send[] = { 0x02, 'V', '0', 0x0a, 0 };
 
-    USART3_::Transmit(send, 4, 10);
-
-    USART3_::StartReceiveIT(bufferUART, 10);
+    SendCommand(send);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -87,11 +140,52 @@ void Multimeter::ChangeAVP()
 {
     ChangeMode();
 
-    char send[4] = { 0x02, 'Z', MULTI_AVP == AVP::On ? '1' : '0', 0x0a };
+    char send[] = { 0x02, 'Z', MULTI_AVP == AVP::On ? '1' : '0', 0x0a, 0 };
 
-    USART3_::Transmit(send, 4, 100);
+    SendCommand(send);
+}
 
-    USART3_::StartReceiveIT(bufferUART, 10);
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Multimeter::Calibrate0()
+{
+    char send[] = { 0x02, 'K', 'A', 'L', 'I', 'B', '0', 0x0a, 0 };
+
+    SendCommand(send);
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Multimeter::Calibrate1()
+{
+    char send[] = { 0x02, 'K', 'A', 'L', 'I', 'B', '1', 0x0a, 0 };
+
+    SendCommand(send);
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Multimeter::SendCommand(char *data)
+{
+    ChangeMode();
+
+    uint size = std::strlen(data);
+
+    if (data[size - 1] != 0x0a)
+    {
+        LOG_ERROR("Неправильные данные");
+    }
+
+    USART3_::_Transmit(data, size, 100);
+
+    USART3_::StartReceiveOneByte();
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Multimeter::LoadZero()
+{
+    ChangeMode();
+
+    char send[] = { 0x02, 'N', zero == 0 ? '0' : '1', 0x0a, 0};
+
+    SendCommand(send);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -113,11 +207,9 @@ void Multimeter::Update()
 
     char symbol = Measure(MULTI_MEASURE).Symbol();
 
-    uint8 send[4] = {0x02, (uint8)symbol, (uint8)(range + 0x30), 0x0a};
+    char send[] = {0x02, symbol, (char)(range + 0x30), 0x0a, 0};
 
-    USART3_::Transmit(send, 4, 100);
-
-    USART3_::StartReceiveIT(bufferUART, 10);
+    SendCommand(send);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -153,6 +245,9 @@ Multimeter::Measure::E Multimeter::Measure::ForSymbol(char symbol)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void ReceiveCallback()
 {
-    Multimeter::DisplayWorker::SetMeasure(bufferUART);
-    Multimeter::USART3_::StartReceiveIT(bufferUART, 10);
+    // Сохраняем очередной принятый байт
+    Buffer::Push(bufferUART[0]);
+
+    // И даём запрос на чтение следующего
+    Multimeter::USART3_::StartReceiveOneByte();
 }
