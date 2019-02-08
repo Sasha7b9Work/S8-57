@@ -6,8 +6,8 @@
 #define TIME_DIV_XPOS       (set.time_timeDivXPos)
 
 #define SET_PEAKDET         (set.time_peakDet)
-#define SET_PEAKDET_EN      (SET_PEAKDET == PeakDetMode::Enabled)
-#define SET_PEAKDET_DIS     (SET_PEAKDET == PeakDetMode::Disabled)
+#define SET_PEAKDET_EN      (SET_PEAKDET == Osci::Settings::PeakDetMode::Enabled)
+#define SET_PEAKDET_DIS     (SET_PEAKDET == Osci::Settings::PeakDetMode::Disabled)
                             
 #define TPOS                (set.time_TPos)
 #define TPOS_IS_RIGHT       (TPOS == TPos::Right)

@@ -11,6 +11,7 @@
 #include "Osci/Display/HiPart.h"
 #include "Display/Display.h"
 #include "Osci/Display/PainterData.h"
+#include "Osci/Osci_Settings.h"
 
 
 using namespace Display::Primitives;
@@ -54,6 +55,11 @@ void Osci::Display::MemoryWindow::Draw()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void DrawDataInRect(int x, int y, int width, int height, const uint8 *data, uint length)
 {
+    if (SET_PEAKDET_EN)
+    {
+        length *= 2;
+    }
+
     int numIntervals = width + 1;                               // Количество интервалов, в которых будем рисовать наш сигнал - фактически, количество вертикальных линий
     float pointsInInterval = (float)length / numIntervals;      // Количество точек, рисуемых в одном интервале.
 
