@@ -7,8 +7,6 @@
 #include "Display/Symbols.h"
 #include "Display/Painter.h"
 #include "FlashDrive/FlashDrive.h"
-#include "FPGA/FPGA.h"
-#include "FPGA/FPGA_Settings.h"
 #include "Hardware/Memory.h"
 #include "Hardware/Beeper.h"
 #include "FlashDrive/FileManager.h"
@@ -21,6 +19,7 @@
 #include "Utils/CommonFunctions.h"
 
 #include "Osci/Display/PainterData.h"
+#include "Osci/Osci.h"
 
 
 using namespace Display::Primitives;
@@ -61,13 +60,7 @@ void PageMemory::OnChanged_Points(bool active)
         return;
     }
 
-    FPGA::Reset();
-
-    Osci::Display::PainterData::ChangeTPos();
-
-    FPGA::Reset();
-    TShift::Set(SET_TSHIFT);
-    FPGA::Reset();
+    Osci::OnChangedPoints();
 }
 
 static pString namesLengthMemory[] = {"512", "1k", "2k", "4k", "8k", "16k", "32k"};

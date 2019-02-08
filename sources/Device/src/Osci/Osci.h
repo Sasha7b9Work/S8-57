@@ -17,4 +17,6 @@ namespace Osci
     bool InModeP2P();
     /// Возвращает true, если работает в режиме рандомизатора
     bool InModeRandomizer();
+    /// Эту функцию надо вызывать при изменении длины памяти. Ну или режима пикового детектора
+    void OnChangedPoints();
 };

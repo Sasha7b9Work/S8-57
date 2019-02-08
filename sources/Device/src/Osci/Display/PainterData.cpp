@@ -114,7 +114,6 @@ static void DrawChannel(Chan::E ch)
 
     if (SET_PEAKDET_EN)
     {
-        LOG_WRITE("Даём ещё смещение");
         data += SHIFT_IN_MEMORY;
     }
 

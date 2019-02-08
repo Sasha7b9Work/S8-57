@@ -9,6 +9,8 @@
 #include "Settings/Settings.h"
 #include <cstring>
 
+#include "Osci/Display/PainterData.h"
+
 
 using namespace FPGA;
 using namespace ::HAL;
@@ -349,4 +351,15 @@ static bool CanReadData()
     }
 
     return false;
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Osci::OnChangedPoints()
+{
+    FPGA::HAL::LoadRegUPR();
+    FPGA::Reset();
+    Osci::Display::PainterData::ChangeTPos();
+    FPGA::Reset();
+    TShift::Set(SET_TSHIFT);
+    FPGA::Reset();
 }

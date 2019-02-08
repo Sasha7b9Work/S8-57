@@ -44,7 +44,7 @@ void PageTime::OnChanged_PeakDet(bool active)
 {
     if (active)
     {
-        PageMemory::OnChanged_Points(true);
+        Osci::OnChangedPoints();
     }
     else
     {
@@ -68,7 +68,7 @@ void PageTime::OnChanged_TPos(bool active)
     TShift::Set(SET_TSHIFT);
 }
 
-DEF_CHOICE_3(cTPos,                                                                                                    //--- РАЗВЕРТКА - То ---
+DEF_CHOICE_3( cTPos,                                                                                                                                                 //--- РАЗВЕРТКА - То ---
     "\x7b", "\x7b",
     "Задаёт точку привязки нулевого смещения по времени к экрану - левый край, центр, правый край.",
     "Sets the anchor point nuleovgo time offset to the screen - the left edge, center, right edge.",
