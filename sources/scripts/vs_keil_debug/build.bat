@@ -1,6 +1,9 @@
 @echo off
 
 @echo .
+
+@echo %TIME%   Building Win32 version
+
 @echo %TIME%   Building Device ...
 
 MSBuild.exe ..\..\generated\Keil\Device\Device56.vcxproj -clp:ErrorsOnly;WarningsOnly -nologo
