@@ -89,7 +89,7 @@ typedef enum
 } ENumMinMax;
 
 // Количество точек для расчёта сглаживания.
-typedef enum
+enum NumSmoothing
 {
     ENumSmooth_Disable,
     ENumSmooth_2points = 1,
@@ -101,7 +101,7 @@ typedef enum
     ENumSmooth_8points = 7,
     ENumSmooth_9points = 8,
     ENumSmooth_10points = 9
-} NumSmoothing;
+};
 
 // Ограничение FPS.
 typedef enum

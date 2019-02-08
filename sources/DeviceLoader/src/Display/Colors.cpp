@@ -159,15 +159,15 @@ void ColorType::Init(bool forced)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void ColorType::SetBrightness(float bright)
 {
-    if (IsEquals(bright, -1.0f))
+    if (IsEquals(bright, -1.0F))
     {
-        brightness = MaxFloat(red / 31.0f, green / 63.0f, blue / 31.0f);
+        brightness = MaxFloat(red / 31.0F, green / 63.0F, blue / 31.0F);
 
         CalcSteps();
     }
     else
     {
-        int delta = (int)((bright + 0.0005f) * 100.0f) - (int)(brightness * 100.0f);
+        int delta = (int)((bright + 0.0005F) * 100.0F) - (int)(brightness * 100.0F);
 
         if (delta > 0)
         {
