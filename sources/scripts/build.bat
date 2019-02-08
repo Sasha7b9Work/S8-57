@@ -7,3 +7,7 @@ cd ..
 cd vs_keil_debug
 call build.bat
 cd ..
+
+cd vs_win_debug
+call build.bat
+cd ..

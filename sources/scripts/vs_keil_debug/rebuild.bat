@@ -1,10 +1,21 @@
 @echo off
 
-MSBuild.exe ..\..\generated\Device\Device56.vcxproj -t:rebuild
+@echo .
+@echo %TIME%   Rebuild Win Device
+
+MSBuild.exe ..\..\generated\Keil\Device\Device56.vcxproj -t:rebuild -clp:ErrorsOnly;WarningsOnly -nologo
 set BUILD_STATUS=%ERRORLEVEL%
 if not %BUILD_STATUS%==0 goto Failed
 
-MSBuild.exe ..\..\generated\Panel\Panel56.vcxproj -t:rebuild
+@echo %TIME%   Rebuild Win Panel
+
+MSBuild.exe ..\..\generated\Keil\Panel\Panel56.vcxproj -t:rebuild -clp:ErrorsOnly;WarningsOnly -nologo
+set BUILD_STATUS=%ERRORLEVEL%
+if not %BUILD_STATUS%==0 goto Filed
+
+@echo %TIME%   Rebuild Win DeviceLoader
+
+MSBuild.exe ..\..\generated\Keil\DeviceLoader\DeviceLoader.vcxproj -t:rebuild -clp:ErrorsOnly;WarningsOnly -nologo
 set BUILD_STATUS=%ERRORLEVEL%
 if %BUILD_STATUS%==0 goto Success
 
@@ -20,13 +31,7 @@ echo .
 goto Exit
 
 :Success
-echo .
-echo .
-echo .
-echo                          Build success
-echo .
-echo .
-echo .
+echo %TIME%   Complete
 
 :Exit
 

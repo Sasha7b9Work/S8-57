@@ -2,4 +2,4 @@
 
 call make_build.bat
 
-start ..\..\generated\S8-56.sln
+call run.bat

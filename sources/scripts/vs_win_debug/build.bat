@@ -1,17 +1,18 @@
 @echo off
 
-@echo %TIME%   Building ...
+@echo .
+@echo %TIME%   Building GUI version ...
 
-MSBuild.exe ..\..\generated\Device\Device56.vcxproj -clp:ErrorsOnly;WarningsOnly -nologo
+MSBuild.exe ..\..\generated\Win32\Device\Device56.vcxproj -clp:ErrorsOnly;WarningsOnly -nologo
 set BUILD_STATUS=%ERRORLEVEL%
-if %BUILD_STATUS%==0 goto Success
+if %BUILD_STATUS%==0 goto Succsess
 
 :Failed
 @echo %TIME%   !!!!!!!!!!!!!!! Error !!!!!!!!!!!!!!! Build Failed !!!!!!!!!!!!!
 goto Exit
 
-:Success
-@echo %TIME%   Build success
+:Succsess
+@echo %TIME%   Complete
 
 :Exit
 

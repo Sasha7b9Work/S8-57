@@ -1,5 +1,6 @@
 @echo off
 
+@echo .
 @echo %TIME%   Build S8-57
 
 call build_device.bat
