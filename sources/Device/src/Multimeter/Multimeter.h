@@ -32,8 +32,7 @@ namespace Multimeter
 
     void LoadZero();
     /// Функции калибровки
-    void Calibrate0();
-    void Calibrate1();
+    void Calibrate(int i);
 
     /// Режим измерений мультиметра
     struct Measure
