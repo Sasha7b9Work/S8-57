@@ -1,27 +1,27 @@
-#include "stdafx.h"
+#include "defines.h"
+#include "HAL.h"
 #include <stm32f4xx_hal.h>
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-uint32_t HAL_RCC_GetHCLKFreq(void)
+uint HAL::NVIC_::irqEXTI1 = EXTI1_IRQn;
+uint HAL::NVIC_::irqEXTI9_5 = EXTI9_5_IRQn;
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+void HAL::NVIC_::EnableIRQ(uint irq)
 {
-    return 0;
+    HAL_NVIC_EnableIRQ((IRQn_Type)irq);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-HAL_StatusTypeDef HAL_RCC_ClockConfig(RCC_ClkInitTypeDef * /*RCC_ClkInitStruct*/, uint32_t /*FLatency*/)
+void HAL::NVIC_::DisableIRQ(uint irq)
 {
-    return HAL_OK;
+    HAL_NVIC_DisableIRQ((IRQn_Type)irq);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-HAL_StatusTypeDef HAL_RCC_OscConfig(RCC_OscInitTypeDef * /*RCC_OscInitStruct*/)
+void HAL::NVIC_::SetPriorityIRQ(uint irq, uint main, uint sub)
 {
-    return HAL_OK;
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-HAL_StatusTypeDef HAL_RCCEx_PeriphCLKConfig(RCC_PeriphCLKInitTypeDef * /*PeriphClkInit*/)
-{
-    return HAL_OK;
+    HAL_NVIC_SetPriority((IRQn_Type)irq, main, sub);
 }

@@ -99,7 +99,7 @@ file(GLOB SOURCES   ../../common/_VS/*
                     ../../Device/src/FlashDrive/*.*
                     ../../Device/src/FPGA/*.*
                     ../../Device/src/Hardware/*.*
-                    ../../Device/src/Hardware/HAL/*
+                    src/Hardware/HAL/*
                     ../../Device/src/Keyboard/*
                     ../../Device/src/Menu/*
                     ../../Device/src/Menu/Pages/*

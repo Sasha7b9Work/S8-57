@@ -75,7 +75,6 @@ static void DrawPeakDet(int x, int y);
 void Osci::Display::HiPart::Draw()
 {
     const int y0 = 0;
-    const int x0 = 0;
 
     int x = -1;
 
