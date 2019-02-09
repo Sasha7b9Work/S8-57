@@ -39,7 +39,7 @@ void Multimeter::Display::Update()
         pFuncVV func;
         Func(pFuncVV f) : func(f) {};
     }
-    const funcs[Multimeter::Measure::Size] =
+    const funcs[Multimeter::Measure::Size] = //-V808
     {
         PrepareConstantVoltage,
         PrepareVariableVoltage,
