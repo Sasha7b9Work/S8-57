@@ -92,7 +92,12 @@ source_group(Osci\\Display                              REGULAR_EXPRESSION "src/
 source_group(Osci\\Measurements\\                       REGULAR_EXPRESSION "src/Osci/Measurements/*.*")
 source_group(Recorder                                   REGULAR_EXPRESSION "src/Recorder/*.*")
 source_group(SCPI                                       REGULAR_EXPRESSION "src/SCPI/*.*")
-source_group(Settings                                   REGULAR_EXPRESSION "src/Settings/*.*")
+source_group(Settings           FILES   ../../Device/src/Settings/Settings.h
+                                                     src/Settings/Settings_win.cpp
+                                        ../../Device/src/Settings/Settings_default.cpp
+                                        ../../Device/src/Settings/SettingsChannel.h
+                                        ../../Device/src/Settings/SettingsChannel.cpp
+                                        ../../Device/src/Settings/SettingsTransformation.cpp)
 source_group(Tester                                     REGULAR_EXPRESSION "src/Tester/*.*")
 source_group(Utils                                      REGULAR_EXPRESSION "src/Utils/*.*")
 
@@ -144,7 +149,14 @@ file(GLOB SOURCES   ../../common/_VS/*
                     ../../Device/src/Osci/Display/*
                     ../../Device/src/Osci/Measurements/*
                     ../../Device/src/Recorder/*
-                    ../../Device/src/Settings/*
+                    
+                    ../../Device/src/Settings/Settings.h
+                                 src/Settings/Settings_win.cpp
+                    ../../Device/src/Settings/Settings_default.cpp
+                    ../../Device/src/Settings/SettingsChannel.h
+                    ../../Device/src/Settings/SettingsChannel.cpp
+                    ../../Device/src/Settings/SettingsTransformation.cpp
+                    
                     ../../Device/src/Tester/*
                     ../../Device/src/Utils/*
                     
