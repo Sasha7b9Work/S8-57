@@ -24,6 +24,7 @@ SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -MP -Wall")
 
 add_compile_options(/wd4355)
 add_compile_options(/wd4459)
+add_compile_options(/wd4505)
 add_compile_options(/wd4548)
 add_compile_options(/wd4571)
 add_compile_options(/wd4625)
