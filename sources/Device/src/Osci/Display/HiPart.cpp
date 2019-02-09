@@ -60,7 +60,7 @@ static void WriteStringAndNumber(const char *text, int x, int y, int number);
 
 static void DrawTime(int x, int y);
 /// Ќарисовать разделительные линии
-static void DrawSeparators(int x, int y);
+static void DrawSeparators();
 /// «аписывает главные параметры в указанную позицию. ¬озвращает х-координату правого верхнего угла выведенного изображени€
 static int DrawMainParameters(int x, int y);
 /// Ќарисовать правую часть - синхронизаци€ и режим работы
@@ -79,7 +79,7 @@ void Osci::Display::HiPart::Draw()
 
     int x = -1;
 
-    DrawSeparators(x0, y0);
+    DrawSeparators();
 
     x = DrawMainParameters(x, y0 + 1); //-V2007
 
@@ -88,6 +88,8 @@ void Osci::Display::HiPart::Draw()
     x += 42;
 
     Font::SetCurrent(Font::Type::_8);
+
+    Separator().Draw(x + 1, y0);
 
     if (MODE_WORK == ModeWork::Dir)
     {
@@ -115,7 +117,7 @@ void Osci::Display::HiPart::Draw()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void DrawSeparators(int x, int y)
+static void DrawSeparators()
 {
     HLine line(Grid::Left() - Osci::Measurements::Table::GetDeltaGridLeft() - 1);
 
@@ -415,9 +417,13 @@ static void WriteCursors()
     int y1 = y0;
     int y2 = y0 + 9; //-V2007
 
+    VLine separator(Grid::Top() - 3);
+
     if (Cursor::NecessaryDraw())
     {
-        VLine(Grid::Top() - 3).Draw(x, 1, Color::FILL);
+        separator.Draw(x, 1, Color::FILL);
+        separator.Draw(x + 102, 1);
+        separator.Draw(x + 203, 1);
 
         x += 3;
         Chan::E source = CURS_SOURCE;
@@ -444,9 +450,6 @@ static void WriteCursors()
         }
 
         x = x0 + 101;
-
-        VLine(Grid::Top() - 3).Draw(x, 1, Color::FILL);
-
         x += 3;
         if (CURsT_ENABLED)
         {
