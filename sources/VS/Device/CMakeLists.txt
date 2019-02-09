@@ -35,31 +35,42 @@ add_compile_options(/wd4996)
 add_compile_options(/wd5026)
 add_compile_options(/wd5039)
 
-source_group(common                    REGULAR_EXPRESSION "../common/*.*")
-source_group(_VS                       REGULAR_EXPRESSION "../../common/_VS/*.*")
-source_group(_VS\\CMSIS                REGULAR_EXPRESSION "../common/_VS/CMSIS/*.*")
-source_group(_VS\\FatFS                REGULAR_EXPRESSION "../common/_VS/FatFS/*.*")
-source_group(_VS\\HAL                  REGULAR_EXPRESSION "../common/_VS/HAL/*.*")
-source_group(_VS\\HAL\\Legacy          REGULAR_EXPRESSION "../common/_VS/HAL/Legacy/*.*")
-source_group(_VS\\USBD                 REGULAR_EXPRESSION "../common/_VS/USBD/*.*")
-source_group(_VS\\USBH                 REGULAR_EXPRESSION "../common/_VS/USBH/*.*")
-source_group(src                       FILES src/Application.cpp
-                                             src/Application.h
-                                             src/main_win.cpp
-                                             ../../Device/src/defines.cpp
-                                             ../../Device/src/defines.h
-                                             ../../Device/src/device.cpp
-                                             ../../Device/src/device.h
-                                             ../../Device/src/log.cpp
-                                             ../../Device/src/log.h
-                                             ../../Device/src/tables.cpp
-                                             ../../Device/src/tables.h)
-source_group(Data                                       REGULAR_EXPRESSION "src/Data/*.*")
-source_group(Display                                    REGULAR_EXPRESSION "src/Display/*.*")
-source_group(Display\\Font                              REGULAR_EXPRESSION "src/Display/Font/*.*")
-source_group(FlashDrive                                 REGULAR_EXPRESSION "src/FlashDrive/*.*")
-source_group(FPGA                                       REGULAR_EXPRESSION "src/FPGA/*.*")
-source_group(Hardware                                   REGULAR_EXPRESSION "src/Hardware/*.*")
+source_group(common             REGULAR_EXPRESSION "../common/*.*")
+source_group(_VS                REGULAR_EXPRESSION "../../common/_VS/*.*")
+source_group(_VS\\CMSIS         REGULAR_EXPRESSION "../common/_VS/CMSIS/*.*")
+source_group(_VS\\FatFS         REGULAR_EXPRESSION "../common/_VS/FatFS/*.*")
+source_group(_VS\\HAL           REGULAR_EXPRESSION "../common/_VS/HAL/*.*")
+source_group(_VS\\HAL\\Legacy   REGULAR_EXPRESSION "../common/_VS/HAL/Legacy/*.*")
+source_group(_VS\\USBD          REGULAR_EXPRESSION "../common/_VS/USBD/*.*")
+source_group(_VS\\USBH          REGULAR_EXPRESSION "../common/_VS/USBH/*.*")
+source_group(src                FILES   src/Application.cpp
+                                        src/Application.h
+                                        src/main_win.cpp
+                                        ../../Device/src/defines.cpp
+                                        ../../Device/src/defines.h
+                                        ../../Device/src/device.cpp
+                                        ../../Device/src/device.h
+                                        ../../Device/src/log.cpp
+                                        ../../Device/src/log.h
+                                        ../../Device/src/tables.cpp
+                                        ../../Device/src/tables.h)
+source_group(Data               REGULAR_EXPRESSION "src/Data/*.*")
+source_group(Display            REGULAR_EXPRESSION "src/Display/*.*")
+source_group(Display\\Font      REGULAR_EXPRESSION "src/Display/Font/*.*")
+source_group(FlashDrive         REGULAR_EXPRESSION "src/FlashDrive/*.*")
+source_group(FPGA               REGULAR_EXPRESSION "src/FPGA/*.*")
+source_group(Hardware           FILES   ../../Device/src/Hardware/Battery.h
+                                        ../../Device/src/Hardware/Battery.cpp
+                                        ../../Device/src/Hardware/Beeper.h
+                                        ../../Device/src/Hardware/Beeper.cpp
+                                        ../../Device/src/Hardware/Clock.h
+                                        ../../Device/src/Hardware/Clock.cpp
+                                        ../../Device/src/Hardware/Memory.h
+                                        ../../Device/src/Hardware/Memory.cpp
+                                        ../../Device/src/Hardware/Timer.h
+                                                    src/Hardware/Timer_win.cpp
+                                        ../../Device/src/Hardware/VCP.h
+                                        ../../Device/src/Hardware/VCP.cpp)
 source_group(Hardware\\HAL                              REGULAR_EXPRESSION "src/Hardware/HAL/*.*")
 source_group(Keyboard                                   REGULAR_EXPRESSION "src/Keyboard/*.*")
 source_group(Menu                                       REGULAR_EXPRESSION "src/Menu/*.*")
@@ -99,8 +110,21 @@ file(GLOB SOURCES   ../../common/_VS/*
                     ../../Device/src/Display/Font/*.*
                     ../../Device/src/FlashDrive/*.*
                     ../../Device/src/FPGA/*.*
-                    ../../Device/src/Hardware/*.*
-                    src/Hardware/HAL/*
+                    
+                    ../../Device/src/Hardware/Battery.h
+                    ../../Device/src/Hardware/Battery.cpp
+                    ../../Device/src/Hardware/Beeper.h
+                    ../../Device/src/Hardware/Beeper.cpp
+                    ../../Device/src/Hardware/Clock.h
+                    ../../Device/src/Hardware/Clock.cpp
+                    ../../Device/src/Hardware/Memory.h
+                    ../../Device/src/Hardware/Memory.cpp
+                    ../../Device/src/Hardware/Timer.h
+                                 src/Hardware/Timer_win.cpp
+                    ../../Device/src/Hardware/VCP.h
+                    ../../Device/src/Hardware/VCP.cpp
+                    
+                                 src/Hardware/HAL/*
                     ../../Device/src/Keyboard/*
                     ../../Device/src/Menu/*
                     ../../Device/src/Menu/Pages/*
@@ -124,9 +148,9 @@ file(GLOB SOURCES   ../../common/_VS/*
                     ../../Device/src/Tester/*
                     ../../Device/src/Utils/*
                     
-                    src/Application.cpp
-                    src/Application.h
-                    src/main_win.cpp
+                                 src/Application.cpp
+                                 src/Application.h
+                                 src/main_win.cpp
                     ../../Device/src/defines.cpp
                     ../../Device/src/defines.h
                     ../../Device/src/device.cpp
