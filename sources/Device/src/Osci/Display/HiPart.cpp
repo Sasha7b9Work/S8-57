@@ -32,6 +32,26 @@ using namespace Osci::Settings;
 using Osci::Measurements::Measure;
 
 
+class Separator
+{
+private:
+    VLine *line;
+public:
+    Separator()
+    {
+        line = new VLine(17);
+    }
+    ~Separator()
+    {
+        delete line;
+    }
+    void Draw(int x, int y)
+    {
+        line->Draw(x, y, Color::FILL);
+    }
+};
+
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /// Написать параметры вертикального тракта заданного канала
 static void WriteTextVoltage(Chan::E ch, int x, int y);
@@ -57,7 +77,6 @@ void Osci::Display::HiPart::Draw()
     const int y0 = 0;
     const int x0 = 0;
 
-    int y1 = 9;
     int x = -1;
 
     DrawSeparators(x0, y0);
@@ -65,16 +84,6 @@ void Osci::Display::HiPart::Draw()
     x = DrawMainParameters(x, y0 + 1); //-V2007
 
     x += 82;
-    y1 = y1 - 6;
-    int y2 = y1 + 6;
-    Font::SetCurrent(Font::Type::_5);
-
-    if (MODE_WORK == ModeWork::Dir)
-    {
-        WriteStringAndNumber(LANG_RU ? "накопл" : "accum", x, y0 - 3, NUM_ACCUM);
-        WriteStringAndNumber(LANG_RU ? "усредн" : "ave", x, y1, NUM_AVE);
-        WriteStringAndNumber(LANG_RU ? "мн\x93мкс" : "mn\x93max", x, y2, NUM_MIN_MAX);
-    }
 
     x += 42;
 
@@ -113,13 +122,6 @@ static void DrawSeparators(int x, int y)
     line.Draw(1, Grid::ChannelBottom(), Color::SEPARATOR);
     line.Draw(1, Grid::FullBottom());
 
-    VLine separator(17);
-
-    separator.Draw(x + 95, y, Color::FILL);
-    separator.Draw(x + 172, y);
-    separator.Draw(x + 215, y);
-    separator.Draw(x + 270, y);
-
     HLine line2(::Display::WIDTH - Grid::Right() - 4);
 
     line2.Draw(Grid::Right() + 2, Grid::Bottom(), Color::FILL);
@@ -139,13 +141,16 @@ static int DrawMainParameters(int _x, int _y)
     }
 
     int x = _x;
-    int y0 = _y;
+    const int y0 = _y;
     int y1 = _y + 8;
 
     WriteTextVoltage(Chan::A, x + 2, y0);
     WriteTextVoltage(Chan::B, x + 2, y1);
 
     x += 98;
+
+    Separator().Draw(x - 3, _y - 1);
+
     const int SIZE = 100;
     char buffer[SIZE] = { 0 };
 
@@ -209,6 +214,23 @@ static int DrawMainParameters(int _x, int _y)
         std::snprintf(buffer, 100, "\xa5\x10%c", mode[START_MODE]);
         String(buffer).Draw(x + 63, y1);
     }
+
+    y1 = y1 - 6;
+    int y2 = y1 + 6;
+    Font::SetCurrent(Font::Type::_5);
+
+    x += 77;
+
+    Separator().Draw(x - 2, y0 - 1);
+
+    if (MODE_WORK == ModeWork::Dir)
+    {
+        WriteStringAndNumber(LANG_RU ? "накопл" : "accum", x, y0 - 4, NUM_ACCUM);
+        WriteStringAndNumber(LANG_RU ? "усредн" : "ave", x, y1, NUM_AVE);
+        WriteStringAndNumber(LANG_RU ? "мн\x93мкс" : "mn\x93max", x, y2, NUM_MIN_MAX);
+    }
+
+    Separator().Draw(x + 43, y0 - 1);
 
     return _x + 93;
 }
@@ -310,6 +332,8 @@ static void DrawTime(int x, int y)
 static void DrawRightPart(int x0, int y0)
 {
     // Синхроимпульс
+
+    Separator().Draw(x0 - 1, y0);
 
     static const int xses[3] = { 280, 271, 251 };
     int x = xses[MODE_WORK];
