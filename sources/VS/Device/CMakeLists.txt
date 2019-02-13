@@ -59,7 +59,18 @@ source_group(Data               REGULAR_EXPRESSION "src/Data/*.*")
 source_group(Display            REGULAR_EXPRESSION "src/Display/*.*")
 source_group(Display\\Font      REGULAR_EXPRESSION "src/Display/Font/*.*")
 source_group(FlashDrive         REGULAR_EXPRESSION "src/FlashDrive/*.*")
-source_group(FPGA               REGULAR_EXPRESSION "src/FPGA/*.*")
+source_group(FPGA               FILES   ../../Device/src/FPGA/AD9286.h
+                                        ../../Device/src/FPGA/AD9286.cpp
+                                        ../../Device/src/FPGA/FPGA.h
+                                        ../../Device/src/FPGA/FPGA.cpp
+                                                     src/FPGA/FPGA_win.cpp
+                                        ../../Device/src/FPGA/FPGA_HAL.h
+                                        ../../Device/src/FPGA/FPGA_HAL.cpp
+                                                     src/FPGA/FPGA_HAL_win.cpp
+                                        ../../Device/src/FPGA/FPGA_Math.h
+                                        ../../Device/src/FPGA/FPGA_Math.cpp
+                                        ../../Device/src/FPGA/FPGA_Settings.h
+                                        ../../Device/src/FPGA/FPGA_Settings.cpp)
 source_group(Hardware           FILES   ../../Device/src/Hardware/Battery.h
                                         ../../Device/src/Hardware/Battery.cpp
                                         ../../Device/src/Hardware/Beeper.h
@@ -116,7 +127,19 @@ file(GLOB SOURCES   ../../common/_VS/*
                     ../../Device/src/Display/*.*
                     ../../Device/src/Display/Font/*.*
                     ../../Device/src/FlashDrive/*.*
-                    ../../Device/src/FPGA/*.*
+                    
+                    ../../Device/src/FPGA/AD9286.h
+                    ../../Device/src/FPGA/AD9286.cpp
+                    ../../Device/src/FPGA/FPGA.h
+                    ../../Device/src/FPGA/FPGA.cpp
+                                 src/FPGA/FPGA_win.cpp
+                    ../../Device/src/FPGA/FPGA_HAL.h
+                    ../../Device/src/FPGA/FPGA_HAL.cpp
+                                 src/FPGA/FPGA_HAL_win.cpp
+                    ../../Device/src/FPGA/FPGA_Math.h
+                    ../../Device/src/FPGA/FPGA_Math.cpp
+                    ../../Device/src/FPGA/FPGA_Settings.h
+                    ../../Device/src/FPGA/FPGA_Settings.cpp
                     
                     ../../Device/src/Hardware/Battery.h
                     ../../Device/src/Hardware/Battery.cpp
