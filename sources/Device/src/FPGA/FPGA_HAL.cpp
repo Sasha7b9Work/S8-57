@@ -18,9 +18,6 @@ using namespace Osci::Settings;
 using HAL::FSMC;
 
 
-extern bool givingStart;
-
-
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 uint16 FPGA::HAL::flag = 0;
 /// Эта функция будет вызываться по приходу каждой точки
@@ -141,19 +138,6 @@ void FPGA::HAL::GPIO::ResetPin(Pin::E pin)
 void FPGA::HAL::GPIO::WritePin(Pin::E pin, int enable)
 {
     ::HAL::PIO::Write(PORT(pin), GetPin(pin), enable ? ::HAL::PIO::State::Enabled : ::HAL::PIO::State::Disabled);
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void FPGA::HAL::ReadFlag()
-{
-    flag = (uint16)(FSMC::ReadFromFPGA(RD::FLAG_LO) | (FSMC::ReadFromFPGA(RD::FLAG_HI) << 8));
-
-    if (GetFlag::TRIG_READY() && !givingStart)
-    {
-        Trig::pulse = true;
-    }
-
-    FrequencyCounter::Update();
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

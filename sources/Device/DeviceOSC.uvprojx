@@ -671,6 +671,11 @@
               <FilePath>.\src\FPGA\FPGA_HAL.cpp</FilePath>
             </File>
             <File>
+              <FileName>FPGA_HAL_stm.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\FPGA\FPGA_HAL_stm.cpp</FilePath>
+            </File>
+            <File>
               <FileName>FPGA_HAL.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\FPGA\FPGA_HAL.h</FilePath>
