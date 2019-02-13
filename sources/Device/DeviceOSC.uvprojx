@@ -541,9 +541,19 @@
               <FilePath>.\src\Display\Display_Warnings.h</FilePath>
             </File>
             <File>
-              <FileName>Painter_437.cpp</FileName>
+              <FileName>Grid.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\Display\Painter_437.cpp</FilePath>
+              <FilePath>.\src\Display\Grid.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Grid.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Display\Grid.h</FilePath>
+            </File>
+            <File>
+              <FileName>Painter.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Display\Painter.cpp</FilePath>
             </File>
             <File>
               <FileName>Painter.h</FileName>
@@ -564,16 +574,6 @@
               <FileName>Symbols.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Display\Symbols.h</FilePath>
-            </File>
-            <File>
-              <FileName>Grid.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Display\Grid.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Grid.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Display\Grid.h</FilePath>
             </File>
           </Files>
         </Group>
