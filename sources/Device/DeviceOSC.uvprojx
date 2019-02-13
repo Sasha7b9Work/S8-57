@@ -1621,6 +1621,11 @@
               <FilePath>.\src\Settings\Settings.cpp</FilePath>
             </File>
             <File>
+              <FileName>Settings_stm.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Settings\Settings_stm.cpp</FilePath>
+            </File>
+            <File>
               <FileName>Settings.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Settings\Settings.h</FilePath>

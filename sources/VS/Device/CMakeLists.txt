@@ -68,7 +68,7 @@ source_group(Hardware           FILES   ../../Device/src/Hardware/Battery.h
                                         ../../Device/src/Hardware/Memory.h
                                         ../../Device/src/Hardware/Memory.cpp
                                         ../../Device/src/Hardware/Timer.h
-                                                    src/Hardware/Timer_win.cpp
+                                                     src/Hardware/Timer_win.cpp
                                         ../../Device/src/Hardware/VCP.h
                                         ../../Device/src/Hardware/VCP.cpp)
 source_group(Hardware\\HAL                              REGULAR_EXPRESSION "src/Hardware/HAL/*.*")
@@ -93,6 +93,7 @@ source_group(Osci\\Measurements\\                       REGULAR_EXPRESSION "src/
 source_group(Recorder                                   REGULAR_EXPRESSION "src/Recorder/*.*")
 source_group(SCPI                                       REGULAR_EXPRESSION "src/SCPI/*.*")
 source_group(Settings           FILES   ../../Device/src/Settings/Settings.h
+                                        ../../Device/src/Settings/Settings.cpp
                                                      src/Settings/Settings_win.cpp
                                         ../../Device/src/Settings/Settings_default.cpp
                                         ../../Device/src/Settings/SettingsChannel.h
@@ -151,6 +152,7 @@ file(GLOB SOURCES   ../../common/_VS/*
                     ../../Device/src/Recorder/*
                     
                     ../../Device/src/Settings/Settings.h
+                    ../../Device/src/Settings/Settings.cpp
                                  src/Settings/Settings_win.cpp
                     ../../Device/src/Settings/Settings_default.cpp
                     ../../Device/src/Settings/SettingsChannel.h
