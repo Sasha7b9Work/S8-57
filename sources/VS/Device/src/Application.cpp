@@ -161,8 +161,3 @@ void Frame::OnAbout(wxCommandEvent& WXUNUSED(event))
         wxOK | wxICON_INFORMATION,
         this);
 }
-
-Uint32 GetTicks()
-{
-    return SDL_GetTicks();
-}
