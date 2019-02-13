@@ -656,14 +656,14 @@
               <FilePath>.\src\FPGA\FPGA.cpp</FilePath>
             </File>
             <File>
+              <FileName>FPGA_stm.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\FPGA\FPGA_stm.cpp</FilePath>
+            </File>
+            <File>
               <FileName>FPGA.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\FPGA\FPGA.h</FilePath>
-            </File>
-            <File>
-              <FileName>FPGA_437.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\FPGA\FPGA_437.cpp</FilePath>
             </File>
             <File>
               <FileName>FPGA_HAL.cpp</FileName>
