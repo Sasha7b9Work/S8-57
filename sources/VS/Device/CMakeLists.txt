@@ -29,6 +29,7 @@ add_compile_options(/wd4548)
 add_compile_options(/wd4571)
 add_compile_options(/wd4625)
 add_compile_options(/wd4626)
+add_compile_options(/wd4668)
 add_compile_options(/wd4710)
 add_compile_options(/wd4820)
 add_compile_options(/wd4996)
@@ -43,9 +44,9 @@ source_group(_VS\\HAL           REGULAR_EXPRESSION "../common/_VS/HAL/*.*")
 source_group(_VS\\HAL\\Legacy   REGULAR_EXPRESSION "../common/_VS/HAL/Legacy/*.*")
 source_group(_VS\\USBD          REGULAR_EXPRESSION "../common/_VS/USBD/*.*")
 source_group(_VS\\USBH          REGULAR_EXPRESSION "../common/_VS/USBH/*.*")
-source_group(src                FILES   src/Application.cpp
-                                        src/Application.h
-                                        src/main_win.cpp
+source_group(src                FILES                src/Application.cpp
+                                                     src/Application.h
+                                                     src/main_win.cpp
                                         ../../Device/src/defines.cpp
                                         ../../Device/src/defines.h
                                         ../../Device/src/device.cpp
@@ -68,7 +69,7 @@ source_group(Hardware           FILES   ../../Device/src/Hardware/Battery.h
                                         ../../Device/src/Hardware/Memory.h
                                         ../../Device/src/Hardware/Memory.cpp
                                         ../../Device/src/Hardware/Timer.h
-                                                     src/Hardware/Timer_win.cpp
+                                        ../../Device/src/Hardware/Timer.cpp
                                         ../../Device/src/Hardware/VCP.h
                                         ../../Device/src/Hardware/VCP.cpp)
 source_group(Hardware\\HAL                              REGULAR_EXPRESSION "src/Hardware/HAL/*.*")
@@ -126,7 +127,7 @@ file(GLOB SOURCES   ../../common/_VS/*
                     ../../Device/src/Hardware/Memory.h
                     ../../Device/src/Hardware/Memory.cpp
                     ../../Device/src/Hardware/Timer.h
-                                 src/Hardware/Timer_win.cpp
+                    ../../Device/src/Hardware/Timer.cpp
                     ../../Device/src/Hardware/VCP.h
                     ../../Device/src/Hardware/VCP.cpp
                     
