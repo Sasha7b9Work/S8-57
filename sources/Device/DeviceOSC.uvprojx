@@ -531,6 +531,11 @@
               <FilePath>.\src\Display\Display_Primitives.cpp</FilePath>
             </File>
             <File>
+              <FileName>Display_Primitives_stm.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Display\Display_Primitives_stm.cpp</FilePath>
+            </File>
+            <File>
               <FileName>Display_Primitives.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Display\Display_Primitives.h</FilePath>

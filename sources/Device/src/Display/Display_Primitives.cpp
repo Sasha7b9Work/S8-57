@@ -20,14 +20,6 @@ Display::Primitives::Region::Region(int _width, int _height) : width(_width), he
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Display::Primitives::Region::Fill(int x, int y, Color color)
-{
-    Color::SetCurrent(color);
-    uint8 buffer[7] = { Command::Paint_FillRegion, (uint8)x, (uint8)(x >> 8), (uint8)y, (uint8)width, (uint8)(width >> 8), (uint8)height };
-    FSMC::WriteToPanel(buffer, 7);
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Display::Primitives::Region::DrawBounded(int x, int y, Color colorFill, Color colorBound)
 {
     Region(width - 2, height - 2).Fill(x + 1, y + 1, colorFill);

@@ -65,6 +65,7 @@ source_group(Display            FILES   ../../Device/src/Display/Colors.h
                                         ../../Device/src/Display/Display.cpp
                                         ../../Device/src/Display/Display_Primitives.h
                                         ../../Device/src/Display/Display_Primitives.cpp
+                                                     src/Display/Display_Primitives_win.cpp
                                         ../../Device/src/Display/Display_Types.h
                                         ../../Device/src/Display/Display_Warnings.h
                                         ../../Device/src/Display/Grid.h
@@ -151,6 +152,7 @@ file(GLOB SOURCES   ../../common/_VS/*
                     ../../Device/src/Display/Display.cpp
                     ../../Device/src/Display/Display_Primitives.h
                     ../../Device/src/Display/Display_Primitives.cpp
+                                 src/Display/Display_Primitives_win.cpp
                     ../../Device/src/Display/Display_Types.h
                     ../../Device/src/Display/Display_Warnings.h
                     ../../Device/src/Display/Grid.h
