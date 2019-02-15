@@ -1454,6 +1454,11 @@ bool Osci::Measurements::DataIsSetting()
 void Osci::Measurements::SetData()
 {
     isSet = (DATA != nullptr);
+
+    if (!isSet)
+    {
+        return;
+    }
  
     CountedToCurrentSettings();
 

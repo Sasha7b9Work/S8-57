@@ -56,7 +56,24 @@ source_group(src                FILES                src/Application.cpp
                                         ../../Device/src/tables.cpp
                                         ../../Device/src/tables.h)
 source_group(Data               REGULAR_EXPRESSION "src/Data/*.*")
-source_group(Display            REGULAR_EXPRESSION "src/Display/*.*")
+source_group(Display            FILES   ../../Device/src/Display/Colors.h
+                                        ../../Device/src/Display/Colors.cpp
+                                        ../../Device/src/Display/Console.h
+                                        ../../Device/src/Display/Console.cpp
+                                        ../../Device/src/Display/Display.h
+                                        ../../Device/src/Display/Display.cpp
+                                        ../../Device/src/Display/Display_Primitives.h
+                                        ../../Device/src/Display/Display_Primitives.cpp
+                                        ../../Device/src/Display/Display_Types.h
+                                        ../../Device/src/Display/Display_Warnings.h
+                                        ../../Device/src/Display/Grid.h
+                                        ../../Device/src/Display/Grid.cpp
+                                        ../../Device/src/Display/Grid_Types.h
+                                        ../../Device/src/Display/Painter.h
+                                        ../../Device/src/Display/Painter.cpp
+                                        ../../Device/src/Display/PainterMem.h
+                                        ../../Device/src/Display/PainterMem.cpp
+                                        ../../Device/src/Display/Symbols.h)
 source_group(Display\\Font      REGULAR_EXPRESSION "src/Display/Font/*.*")
 source_group(FlashDrive         REGULAR_EXPRESSION "src/FlashDrive/*.*")
 source_group(FPGA               FILES   ../../Device/src/FPGA/AD9286.h
@@ -124,7 +141,26 @@ file(GLOB SOURCES   ../../common/_VS/*
                     ../../common/_VS/USBH/*
                     ../../common/*.*
                     ../../Device/src/Data/*.*
-                    ../../Device/src/Display/*.*
+                    
+                    ../../Device/src/Display/Colors.h
+                    ../../Device/src/Display/Colors.cpp
+                    ../../Device/src/Display/Console.h
+                    ../../Device/src/Display/Console.cpp
+                    ../../Device/src/Display/Display.h
+                    ../../Device/src/Display/Display.cpp
+                    ../../Device/src/Display/Display_Primitives.h
+                    ../../Device/src/Display/Display_Primitives.cpp
+                    ../../Device/src/Display/Display_Types.h
+                    ../../Device/src/Display/Display_Warnings.h
+                    ../../Device/src/Display/Grid.h
+                    ../../Device/src/Display/Grid.cpp
+                    ../../Device/src/Display/Grid_Types.h
+                    ../../Device/src/Display/Painter.h
+                    ../../Device/src/Display/Painter.cpp
+                    ../../Device/src/Display/PainterMem.h
+                    ../../Device/src/Display/PainterMem.cpp
+                    ../../Device/src/Display/Symbols.h
+                    
                     ../../Device/src/Display/Font/*.*
                     ../../Device/src/FlashDrive/*.*
                     
