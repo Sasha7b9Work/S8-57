@@ -198,14 +198,13 @@ file(GLOB SOURCES   ../../common/_VS/*
                     ../../Device/src/tables.cpp
                     ../../Device/src/tables.h)
                     
-add_executable(Device56 ${SOURCES})
+add_executable(Device57 ${SOURCES})
 
-target_link_libraries(Device56 "..\\..\\..\\ThirdParty\\wxWidgets\\generated\\lib\\vc_dll\\wxbase31ud.lib")
-target_link_libraries(Device56 "..\\..\\..\\ThirdParty\\wxWidgets\\generated\\lib\\vc_dll\\wxmsw31ud_core.lib")
+target_link_libraries(Device57 "..\\..\\..\\ThirdParty\\wxWidgets\\generated\\lib\\vc_dll\\wxbase31ud.lib")
+target_link_libraries(Device57 "..\\..\\..\\ThirdParty\\wxWidgets\\generated\\lib\\vc_dll\\wxmsw31ud_core.lib")
 
-target_link_libraries(Device56 "..\\..\\..\\ThirdParty\\SDL2\\SDL2-2.0.9\\generated\\Debug\\SDL2-staticd.lib")
+target_link_libraries(Device57 "..\\..\\..\\ThirdParty\\SDL2\\SDL2-2.0.9\\generated\\Debug\\SDL2-staticd.lib")
 
-target_link_libraries(Device56 WinMM.lib)
-target_link_libraries(Device56 version.lib)
-target_link_libraries(Device56 Imm32.Lib)
-
+target_link_libraries(Device57 WinMM.lib)
+target_link_libraries(Device57 version.lib)
+target_link_libraries(Device57 Imm32.Lib)

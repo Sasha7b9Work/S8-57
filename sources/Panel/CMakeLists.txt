@@ -46,6 +46,4 @@ file(GLOB SOURCES   ../common/_VS/*
                     src/*.*
                     src/libs/HAL/*.h*)
 
-add_library(Panel56 ${SOURCES})
-
-
+add_library(Panel57 ${SOURCES})

@@ -59,5 +59,3 @@ file(GLOB SOURCES   src/*.*
                     src/Utils/*.*)
 
 add_library(DeviceLoader ${SOURCES})
-
-

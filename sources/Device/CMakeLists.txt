@@ -99,6 +99,4 @@ file(GLOB SOURCES   ../common/_VS/*
                     src/Utils/*
                     src/*.*)
 
-add_library(Device56 ${SOURCES})
-
-
+add_library(Device57 ${SOURCES})

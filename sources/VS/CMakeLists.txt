@@ -17,6 +17,6 @@ endif ()
 # Set project name
 project (S8-56)
 
-set (TARGET_NAME S8-56)
+set (TARGET_NAME S8-57)
 
 add_subdirectory(Device)
