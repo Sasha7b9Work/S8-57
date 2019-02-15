@@ -57,9 +57,6 @@ bool Application::OnInit()
 
     init();
 
-    Frame *frame = new Frame("S8-57");
-    frame->Show(true);
-
     return true;
 }
 

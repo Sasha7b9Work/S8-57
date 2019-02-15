@@ -1,8 +1,9 @@
 cmake_minimum_required(VERSION 3.0)
 
-project (Device56)
+project (Device57)
 
-include_directories("..\\..\\Device\\src\\"
+include_directories("..\\..\\VS\\Device\\src\\"
+                    "..\\..\\Device\\src\\"
                     "..\\..\\Device\\src\\Hardware\\FatFS\\"
                     "..\\..\\Device\\src\\Hardware\\HAL\\"
                     "..\\..\\Device\\src\\Hardware\\USBD\\"
@@ -18,7 +19,7 @@ include_directories("..\\..\\Device\\src\\"
                     "..\\..\\ThirdParty\\wxWidgets\\generated\\lib\\vc_dll\\mswud\\"
                     "..\\..\\ThirdParty\\SDL2\\SDL2-2.0.9\\include\\")
                     
-add_definitions(-DSTM32F437xx -DOLD_RECORDER -DWXUSINGDLL -DUSE_SDL2)
+add_definitions(-DSTM32F437xx -DOLD_RECORDER -DWXUSINGDLL -DUSE_SDL2 -DGUI)
 
 SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -MP -Wall")
 
@@ -70,7 +71,7 @@ source_group(Display            FILES   ../../Device/src/Display/Colors.h
                                         ../../Device/src/Display/Grid.cpp
                                         ../../Device/src/Display/Grid_Types.h
                                         ../../Device/src/Display/Painter.h
-                                        ../../Device/src/Display/Painter.cpp
+                                                     src/Display/Painter_win.cpp
                                         ../../Device/src/Display/PainterMem.h
                                         ../../Device/src/Display/PainterMem.cpp
                                         ../../Device/src/Display/Symbols.h)
@@ -156,7 +157,7 @@ file(GLOB SOURCES   ../../common/_VS/*
                     ../../Device/src/Display/Grid.cpp
                     ../../Device/src/Display/Grid_Types.h
                     ../../Device/src/Display/Painter.h
-                    ../../Device/src/Display/Painter.cpp
+                                 src/Display/Painter_win.cpp
                     ../../Device/src/Display/PainterMem.h
                     ../../Device/src/Display/PainterMem.cpp
                     ../../Device/src/Display/Symbols.h

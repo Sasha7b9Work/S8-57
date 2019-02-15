@@ -1,6 +1,7 @@
+#include "defines.h"
 #pragma warning(push)
-#pragma warning(disable:4018 4189 4365 4459 4571 4625 4668 5026)
-#include "../Application.h"
+#pragma warning(disable:4018 4076 4091 4189 4365 4459 4571 4625 4668 5026 5027)
+#include "Application.h"
 
 
 #define uint    unsigned int
@@ -12,7 +13,7 @@
 #define uchar   unsigned char
 #define pString const char * const
 
-#include "../../Display/Painter.h"
+#include "Display/Painter.h"
 
 #include <SDL.h>
 
@@ -89,7 +90,7 @@ void Painter::BeginScene(Color color)
     texture = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_RGBA8888, SDL_RENDERER_ACCELERATED, 320, 240);
 
     SDL_SetRenderTarget(renderer, texture);
-    SetColor(color);
+    Color::SetCurrent(color);
     SDL_RenderClear(renderer);
 }
 
@@ -105,149 +106,153 @@ void Painter::EndScene()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Painter::SetPoint(int x, int y, Color color /* = Color::NUMBER */)
+/*
+void Painter::SetPoint(int x, int y, Color color)
 {
     SetColor(color);
     SDL_Rect rect = { x, y, 1, 1 };
     SDL_RenderFillRect(renderer, &rect);
 }
+*/
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+/*
 void Painter::SetColorValue(Color color, uint value)
 {
     colors[color.value] = value;
 }
+*/
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Painter::DrawTesterData(uint8 /*mode*/, Color /*color*/, uint8 /*x*/[240], uint8 /*y*/[240])
-{
-
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Painter::DrawLine(int /*x0*/, int /*y0*/, int /*x1*/, int /*y1*/, Color /*color*/)
-{
-
-}
+//void Painter::DrawTesterData(uint8 /*mode*/, Color /*color*/, uint8 /*x*/[240], uint8 /*y*/[240])
+//{
+//
+//}
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-int Painter::DrawChar(int eX, int eY, char _symbol, Color color)
-{
-    SetColor(color);
-
-    uint8 symbol = (uint8)_symbol;
-
-    int8 width = (int8)font->symbol[(uint8)symbol].width;
-    int8 height = (int8)font->height;
-
-    int size = 1;
-
-    for (int b = 0; b < height; b++)
-    {
-        if (ByteFontNotEmpty((uint)symbol, b))
-        {
-            int x = eX;
-            int y = eY + b * size + 9 - height;
-            int endBit = 8 - width;
-            for (int bit = 7; bit >= endBit; bit--)
-            {
-                if (BitInFontIsExist(symbol, b, bit))
-                {
-                    for (int i = 0; i < size; i++)
-                    {
-                        for (int j = 0; j < size; j++)
-                        {
-                            SetPoint(x + i, y + j);
-                        }
-                    }
-                }
-                x += size;
-            }
-        }
-    }
-
-    return eX + width * size;
-}
+//void Painter::DrawLine(int /*x0*/, int /*y0*/, int /*x1*/, int /*y1*/, Color /*color*/)
+//{
+//
+//}
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Painter::DrawVLine(int x, int y0, int y1, Color color)
-{
-    SetColor(color);
-
-    SDL_Rect rect = {x, y0, 1, y1 - y0 + 1};
-
-    SDL_RenderFillRect(renderer, &rect);
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Painter::DrawHLine(int y, int x0, int x1, Color color)
-{
-    SetColor(color);
-
-    SDL_Rect rect = {x0, y, x1 - x0 + 1, 1};
-
-    SDL_RenderFillRect(renderer, &rect);
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Painter::SetColor(Color color)
-{
-    if (color != Color::NUMBER)
-    {
-        uint value = colors[color.value];
-        uint8 blue = (uint8)value;
-        uint8 green = (uint8)(value >> 8);
-        uint8 red = (uint8)(value >> 16);
-        SDL_SetRenderDrawColor(renderer, red, green, blue, 0x00);
-    }
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Painter::SetBrightnessDisplay(int16 /*brightness*/)
-{
-
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Painter::DrawRectangle(int x, int y, int width, int height, Color color)
-{
-    SetColor(color);
-    DrawVLine(x, y, y + height);
-    DrawVLine(x + width, y, y + height);
-    DrawHLine(y, x, x + width);
-    DrawHLine(y + height, x, x + width);
-}
+//int Painter::DrawChar(int eX, int eY, char _symbol, Color color)
+//{
+//    SetColor(color);
+//
+//    uint8 symbol = (uint8)_symbol;
+//
+//    int8 width = (int8)font->symbol[(uint8)symbol].width;
+//    int8 height = (int8)font->height;
+//
+//    int size = 1;
+//
+//    for (int b = 0; b < height; b++)
+//    {
+//        if (ByteFontNotEmpty((uint)symbol, b))
+//        {
+//            int x = eX;
+//            int y = eY + b * size + 9 - height;
+//            int endBit = 8 - width;
+//            for (int bit = 7; bit >= endBit; bit--)
+//            {
+//                if (BitInFontIsExist(symbol, b, bit))
+//                {
+//                    for (int i = 0; i < size; i++)
+//                    {
+//                        for (int j = 0; j < size; j++)
+//                        {
+//                            SetPoint(x + i, y + j);
+//                        }
+//                    }
+//                }
+//                x += size;
+//            }
+//        }
+//    }
+//
+//    return eX + width * size;
+//}
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Painter::SetFont(Font::Type::E /*typeFont*/)
-{
-
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-int Painter::DrawText(int x, int y, const char *text, Color color)
-{
-    SetColor(color);
-
-    uint numSymbols = strlen(text);
-    for (uint i = 0; i < numSymbols; ++i)
-    {
-        x = DrawChar(x, y, text[i]);
-        ++x;
-    }
-
-    return x;
-}
+//void Painter::DrawVLine(int x, int y0, int y1, Color color)
+//{
+//    Color::SetCurrent(color);
+//
+//    SDL_Rect rect = {x, y0, 1, y1 - y0 + 1};
+//
+//    SDL_RenderFillRect(renderer, &rect);
+//}
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Painter::FillRegion(int x, int y, int width, int height, Color color)
-{
-    SetColor(color);
+//void Painter::DrawHLine(int y, int x0, int x1, Color color)
+//{
+//    SetColor(color);
+//
+//    SDL_Rect rect = {x0, y, x1 - x0 + 1, 1};
+//
+//    SDL_RenderFillRect(renderer, &rect);
+//}
 
-    SDL_Rect rect = { x, y, width + 1, height + 1 };
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//void Painter::SetColor(Color color)
+//{
+//    if (color != Color::NUMBER)
+//    {
+//        uint value = colors[color.value];
+//        uint8 blue = (uint8)value;
+//        uint8 green = (uint8)(value >> 8);
+//        uint8 red = (uint8)(value >> 16);
+//        SDL_SetRenderDrawColor(renderer, red, green, blue, 0x00);
+//    }
+//}
 
-    SDL_RenderFillRect(renderer, &rect);
-}
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//void Painter::SetBrightnessDisplay(int16 /*brightness*/)
+//{
+//
+//}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//void Painter::DrawRectangle(int x, int y, int width, int height, Color color)
+//{
+//    SetColor(color);
+//    DrawVLine(x, y, y + height);
+//    DrawVLine(x + width, y, y + height);
+//    DrawHLine(y, x, x + width);
+//    DrawHLine(y + height, x, x + width);
+//}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//void Painter::SetFont(Font::Type::E /*typeFont*/)
+//{
+//
+//}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//int Painter::DrawText(int x, int y, const char *text, Color color)
+//{
+//    SetColor(color);
+//
+//    uint numSymbols = strlen(text);
+//    for (uint i = 0; i < numSymbols; ++i)
+//    {
+//        x = DrawChar(x, y, text[i]);
+//        ++x;
+//    }
+//
+//    return x;
+//}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//void Painter::FillRegion(int x, int y, int width, int height, Color color)
+//{
+//    SetColor(color);
+//
+//    SDL_Rect rect = { x, y, width + 1, height + 1 };
+//
+//    SDL_RenderFillRect(renderer, &rect);
+//}
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void SetPosition(Frame *frame)
@@ -441,7 +446,13 @@ void Frame::OnUp(wxCommandEvent &event)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Painter::DrawBigText(int /*eX*/, int /*eY*/, uint8 /*sizeSymbol*/, const char * /*text*/, Color /*color*/)
+void Painter::SaveScreenToDrive()
+{
+
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Painter::DrawTesterData(uint8, Color, const uint8 *, const uint8 *)
 {
 
 }

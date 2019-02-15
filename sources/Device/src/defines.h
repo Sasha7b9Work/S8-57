@@ -35,7 +35,10 @@ typedef unsigned long long  uint64;
 #ifdef WIN32
 typedef unsigned char  BYTE;
 typedef unsigned short WORD;
-#define WCHAR unsigned short
+//#define WCHAR unsigned short
+#ifndef GUI
+typedef unsigned short WCHAR;
+#endif
 typedef unsigned long  DWORD;
 typedef unsigned long  FSIZE_t;
 typedef unsigned int   UINT;
