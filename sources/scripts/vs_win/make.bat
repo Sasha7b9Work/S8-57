@@ -7,7 +7,7 @@ cd ../..
 
 rmdir "generated/Win32" /s /q
 
-cd scripts/vs_win_debug
+cd scripts/vs_win
 
 cmake ../../VS/CMakeLists.txt -B../../generated/Win32 > cmake_out.txt
 

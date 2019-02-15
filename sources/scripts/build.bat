@@ -4,10 +4,10 @@ cd keil
 call build.bat
 cd ..
 
-cd vs_keil_debug
+cd vs_keil
 call build.bat
 cd ..
 
-cd vs_win_debug
+cd vs_win
 call build.bat
 cd ..
