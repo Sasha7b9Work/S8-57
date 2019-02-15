@@ -120,6 +120,8 @@ private:
     /// Записывает цвет в дисплей
     static void WriteToDisplay(Color color);
 
+    static Color currentColor;
+
 public:
 
     struct Scheme

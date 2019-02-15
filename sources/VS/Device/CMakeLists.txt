@@ -59,6 +59,7 @@ source_group(src                FILES                src/Application.cpp
 source_group(Data               REGULAR_EXPRESSION "src/Data/*.*")
 source_group(Display            FILES   ../../Device/src/Display/Colors.h
                                         ../../Device/src/Display/Colors.cpp
+                                                     src/Display/Colors_win.cpp
                                         ../../Device/src/Display/Console.h
                                         ../../Device/src/Display/Console.cpp
                                         ../../Device/src/Display/Display.h
@@ -146,6 +147,7 @@ file(GLOB SOURCES   ../../common/_VS/*
                     
                     ../../Device/src/Display/Colors.h
                     ../../Device/src/Display/Colors.cpp
+                                 src/Display/Colors_win.cpp
                     ../../Device/src/Display/Console.h
                     ../../Device/src/Display/Console.cpp
                     ../../Device/src/Display/Display.h

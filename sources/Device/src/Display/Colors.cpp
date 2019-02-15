@@ -81,7 +81,7 @@ Color Color::BACK(COLOR_BLACK);
 Color Color::GRID(COLOR_GRID);
 
 
-static Color currentColor = Color::NUMBER;
+Color Color::currentColor = Color::NUMBER;
 static bool  inverseColor = false;
 
 
@@ -348,18 +348,6 @@ Color Color::Trig()
 Color Color::ChanAccum(Chan ch)
 {
     return ch.IsA() ? Color(COLOR_DATA_WHITE_ACCUM_A) : Color(COLOR_DATA_WHITE_ACCUM_B);
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Color::SetCurrent(Color color)
-{
-    
-
-    currentColor = color;
-    if (!WriteFlashColor())
-    {
-        WriteToDisplay(currentColor);
-    }
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
