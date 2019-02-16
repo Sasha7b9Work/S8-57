@@ -118,3 +118,22 @@ void Display::Primitives::MultiHPointLine::Draw(int x, Color color)
         FSMC::WriteToPanel(buffer, 6);
     }
 }
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Display::Primitives::MultiVPointLine::Draw(int y0, Color color)
+{
+    Color::SetCurrent(color);
+
+    uint8 buffer[6] = { Command::Paint_VPointLine, 0, 0, 0, (uint8)delta, (uint8)count };
+
+    for (int i = 0; i < numLines; i++)
+    {
+        int x = x0[i];
+
+        buffer[1] = (uint8)x;
+        buffer[2] = (uint8)(x >> 8);
+        buffer[3] = (uint8)y0;
+
+        FSMC::WriteToPanel(buffer, 6);
+    }
+}

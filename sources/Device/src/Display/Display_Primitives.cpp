@@ -2,16 +2,10 @@
 #include "Command.h"
 #include "Display_Primitives.h"
 #include "Painter.h"
-#include "Hardware/HAL/HAL.h"
 #include "Utils/Buffer.h"
 #include "Utils/Debug.h"
 #include "Utils/Math.h"
 #include <cstring>
-
-#include "Hardware/Timer.h"
-
-
-using HAL::FSMC;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -775,23 +769,4 @@ void Display::Primitives::VLineArray::Draw(int x, Color color)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Display::Primitives::MultiVPointLine::MultiVPointLine(int _numLines, uint16 *_x0, int _delta, int _count) : numLines(_numLines), x0(_x0), delta(_delta), count(_count)
 {
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Display::Primitives::MultiVPointLine::Draw(int y0, Color color)
-{
-    Color::SetCurrent(color);
-
-    uint8 buffer[6] = { Command::Paint_VPointLine, 0, 0, 0, (uint8)delta, (uint8)count};
-
-    for (int i = 0; i < numLines; i++)
-    {
-        int x = x0[i];
-
-        buffer[1] = (uint8)x;
-        buffer[2] = (uint8)(x >> 8);
-        buffer[3] = (uint8)y0;
-
-        FSMC::WriteToPanel(buffer, 6);
-    }
 }

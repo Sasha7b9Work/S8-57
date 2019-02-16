@@ -18,6 +18,8 @@ static bool ByteFontNotEmpty(uint eChar, int byte);
 static bool BitInFontIsExist(int eChar, int numByte, int bit);
 /// Нарисовать одну горизонтальную лиинию из count точек c расстоянием delta между соседнимит точками
 static void DrawHPointLine(int x, int y, int count, int delta);
+/// Нарисовать одну вертикальную лиинию из count точек c расстоянием delta между соседнимит точками
+static void DrawVPointLine(int x, int y, int count, int delta);
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -200,11 +202,32 @@ void Display::Primitives::MultiHPointLine::Draw(int x, Color color)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void DrawHPointLine(int _x, int _y, int count, int delta)
+static void DrawHPointLine(int x, int y, int count, int delta)
 {
     for (int i = 0; i < count; i++)
     {
-        SDL_RenderDrawPoint(renderer, _x, _y);
-        _x += delta;
+        SDL_RenderDrawPoint(renderer, x, y);
+        x += delta;
+    }
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Display::Primitives::MultiVPointLine::Draw(int y, Color color)
+{
+    Color::SetCurrent(color);
+
+    for (int i = 0; i < numLines; i++)
+    {
+        DrawVPointLine(x0[i], y, count, delta);
+    }
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+static void DrawVPointLine(int x, int y, int count, int delta)
+{
+    for (int i = 0; i < count; i++)
+    {
+        SDL_RenderDrawPoint(renderer, x, y);
+        y += delta;
     }
 }
