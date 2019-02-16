@@ -49,8 +49,7 @@ void Display::Primitives::HLine::Draw(int x, int y, Color color)
 void Display::Primitives::VLine::Draw(int x, int y, Color color)
 {
     Color::SetCurrent(color);
-    SDL_Rect rect = {x, y, 1, height};
-    SDL_RenderFillRect(renderer, &rect);
+    SDL_RenderDrawLine(renderer, x, y, x, y + height);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
