@@ -42,8 +42,7 @@ void Display::Primitives::Rectangle::Draw(int x, int y, Color color)
 void Display::Primitives::HLine::Draw(int x, int y, Color color)
 {
     Color::SetCurrent(color);
-    SDL_Rect rect = {x, y, width, 1};
-    SDL_RenderFillRect(renderer, &rect);
+    SDL_RenderDrawLine(renderer, x, y, x + width, y);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

@@ -40,7 +40,7 @@ void Osci::Display::Update()
     }
 
     PainterData::DrawData();
-
+    
     Rectangle(Grid::Width(), Grid::Height()).Draw(Grid::Left(), Grid::Top(), Color::FILL);
     
     HiPart::Draw();

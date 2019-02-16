@@ -65,7 +65,7 @@ void Osci::Display::PainterData::DrawData()
     }
 
     DrawTPos(0, 0);
-
+    
     DrawTShift(0, 0, 0);
 
     Accumulator::NextFrame();
