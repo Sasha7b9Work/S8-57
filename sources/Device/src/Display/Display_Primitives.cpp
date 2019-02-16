@@ -42,16 +42,6 @@ Display::Primitives::VLine::VLine(int _height) : height(_height)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Display::Primitives::VLine::Draw(int x, int y, Color color)
-{
-	Color::SetCurrent(color);
-	int y0 = y;
-	int y1 = y0 + height;
-	uint8 buffer[5] = { Command::Paint_DrawVLine, (uint8)x, (uint8)(x >> 8), (uint8)y0, (uint8)y1 };
-	FSMC::WriteToPanel(buffer, 5);
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Display::Primitives::Point::Draw(int x, int y, Color color)
 {
 	Color::SetCurrent(color);

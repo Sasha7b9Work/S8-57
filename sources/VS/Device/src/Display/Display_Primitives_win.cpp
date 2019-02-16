@@ -23,10 +23,9 @@ void Display::Primitives::Rectangle::Draw(int x, int y, Color color)
 {
     Color::SetCurrent(color);
 
-    VLine(height).Draw(x, y);
-    VLine(height).Draw(x + width, y);
-    HLine(width).Draw(x, y);
-    HLine(width).Draw(x, y + height);
+    SDL_Rect rect = { x, y, width + 1, height + 1 };
+
+    SDL_RenderDrawRect(renderer, &rect);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -34,7 +33,17 @@ void Display::Primitives::HLine::Draw(int x, int y, Color color)
 {
     Color::SetCurrent(color);
     
-    SDL_Rect rect = {x, y, x + width, y};
+    SDL_Rect rect = {x, y, width, 1};
+    
+    SDL_RenderFillRect(renderer, &rect);
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Display::Primitives::VLine::Draw(int x, int y, Color color)
+{
+    Color::SetCurrent(color);
+    
+    SDL_Rect rect = {x, y, 1, height};
     
     SDL_RenderFillRect(renderer, &rect);
 }
