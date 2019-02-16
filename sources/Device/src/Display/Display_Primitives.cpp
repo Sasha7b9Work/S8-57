@@ -755,23 +755,6 @@ Display::Primitives::MultiHPointLine::MultiHPointLine(int _numLines, const uint8
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Display::Primitives::MultiHPointLine::Draw(int x, Color color)
-{
-    Color::SetCurrent(color);
-
-    uint8 buffer[6] = { Command::Paint_HPointLine, 0, 0, 0, (uint8)delta, (uint8)count };
-
-    for (int i = 0; i < numLines; i++)
-    {
-        buffer[1] = (uint8)x;
-        buffer[2] = (uint8)(x >> 8);
-        buffer[3] = y[i];
-
-        FSMC::WriteToPanel(buffer, 6);
-    }
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Display::Primitives::VLineArray::VLineArray(int _numLines, uint8 *_y0y1) : numLines(_numLines), y0y1(_y0y1)
 {
 }

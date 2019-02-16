@@ -101,3 +101,20 @@ void Display::Primitives::Text::DrawBig(int x, int y, Color color)
 
     FSMC::WriteToPanel(buffer, 1 + 2 + 1 + 1 + numSymbols + 1);
 }
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Display::Primitives::MultiHPointLine::Draw(int x, Color color)
+{
+    Color::SetCurrent(color);
+
+    uint8 buffer[6] = { Command::Paint_HPointLine, 0, 0, 0, (uint8)delta, (uint8)count };
+
+    for (int i = 0; i < numLines; i++)
+    {
+        buffer[1] = (uint8)x;
+        buffer[2] = (uint8)(x >> 8);
+        buffer[3] = y[i];
+
+        FSMC::WriteToPanel(buffer, 6);
+    }
+}

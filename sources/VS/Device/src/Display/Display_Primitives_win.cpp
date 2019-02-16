@@ -16,6 +16,8 @@ static int DrawBigChar(int eX, int eY, int size, char _symbol);
 static bool ByteFontNotEmpty(uint eChar, int byte);
 
 static bool BitInFontIsExist(int eChar, int numByte, int bit);
+/// Нарисовать одну горизонтальную лиинию из count точек c расстоянием delta между соседнимит точками
+static void DrawHPointLine(int x, int y, int count, int delta);
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -184,4 +186,25 @@ static int DrawBigChar(int eX, int eY, int size, char _symbol)
     }
 
     return eX + width * size;
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Display::Primitives::MultiHPointLine::Draw(int x, Color color)
+{
+    Color::SetCurrent(color);
+
+    for (int i = 0; i < numLines; i++)
+    {
+        DrawHPointLine(x, y[i], count, delta);
+    }
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+static void DrawHPointLine(int _x, int _y, int count, int delta)
+{
+    for (int i = 0; i < count; i++)
+    {
+        SDL_RenderDrawPoint(renderer, _x, _y);
+        _x += delta;
+    }
 }
