@@ -236,27 +236,6 @@ int Display::Primitives::Text::DrawInCenterRect(int eX, int eY, int width, int e
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-int Display::Primitives::Text::DrawSmall(int x, int y, Color color)
-{
-    Color::SetCurrent(color);
-    
-    uint sizeBuffer = 1 + 2 + 1 + 1 + std::strlen(text);
-
-    Buffer buffer(sizeBuffer);
-    buffer.data[0] = Command::Paint_DrawText;
-    buffer.data[1] = (uint8)x;
-    buffer.data[2] = (uint8)(x >> 8);
-    buffer.data[3] = (uint8)y;
-    buffer.data[4] = (uint8)std::strlen(text); //-V1029
-    
-    std::memcpy(&buffer.data[5], (void *)text, std::strlen(text));
-
-    FSMC::WriteToPanel(buffer.data, sizeBuffer);
-
-    return x + Font::GetLengthText(text) + 1;
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 int Display::Primitives::Text::DrawOnBackground(int x, int y, Color colorBackground)
 {
     int width = Font::GetLengthText(text);

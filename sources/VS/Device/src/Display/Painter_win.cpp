@@ -114,45 +114,6 @@ void Painter::SetColorValue(Color color, uint value)
 */
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-//int Painter::DrawChar(int eX, int eY, char _symbol, Color color)
-//{
-//    SetColor(color);
-//
-//    uint8 symbol = (uint8)_symbol;
-//
-//    int8 width = (int8)font->symbol[(uint8)symbol].width;
-//    int8 height = (int8)font->height;
-//
-//    int size = 1;
-//
-//    for (int b = 0; b < height; b++)
-//    {
-//        if (ByteFontNotEmpty((uint)symbol, b))
-//        {
-//            int x = eX;
-//            int y = eY + b * size + 9 - height;
-//            int endBit = 8 - width;
-//            for (int bit = 7; bit >= endBit; bit--)
-//            {
-//                if (BitInFontIsExist(symbol, b, bit))
-//                {
-//                    for (int i = 0; i < size; i++)
-//                    {
-//                        for (int j = 0; j < size; j++)
-//                        {
-//                            SetPoint(x + i, y + j);
-//                        }
-//                    }
-//                }
-//                x += size;
-//            }
-//        }
-//    }
-//
-//    return eX + width * size;
-//}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 //void Painter::SetColor(Color color)
 //{
 //    if (color != Color::NUMBER)
@@ -163,21 +124,6 @@ void Painter::SetColorValue(Color color, uint value)
 //        uint8 red = (uint8)(value >> 16);
 //        SDL_SetRenderDrawColor(renderer, red, green, blue, 0x00);
 //    }
-//}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-//int Painter::DrawText(int x, int y, const char *text, Color color)
-//{
-//    SetColor(color);
-//
-//    uint numSymbols = strlen(text);
-//    for (uint i = 0; i < numSymbols; ++i)
-//    {
-//        x = DrawChar(x, y, text[i]);
-//        ++x;
-//    }
-//
-//    return x;
 //}
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

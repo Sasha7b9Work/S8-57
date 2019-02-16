@@ -15,8 +15,8 @@ if (COMMAND cmake_policy)
 endif ()
 
 # Set project name
-project (S8-57)
+project (S8-57_GUI)
 
-set (TARGET_NAME S8-57)
+set (TARGET_NAME S8-57_GUI)
 
 add_subdirectory(Device)

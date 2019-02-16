@@ -2,7 +2,9 @@
 #include "Command.h"
 #include "Display/Display_Primitives.h"
 #include "Hardware/HAL/HAL.h"
-
+#include <cstring>
+#include "Utils/Buffer.h"
+#include "Display/Font/Font.h"
 
 using HAL::FSMC;
 
@@ -57,4 +59,25 @@ void Display::Primitives::Line::Draw(Color color)
     Color::SetCurrent(color);
     uint8 buffer[7] = { Command::Paint_DrawLine, (uint8)x0, (uint8)(x0 >> 8), (uint8)y0, (uint8)x1, (uint8)(x1 >> 8), (uint8)y1 };
     FSMC::WriteToPanel(buffer, 7);
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+int Display::Primitives::Text::DrawSmall(int x, int y, Color color)
+{
+    Color::SetCurrent(color);
+
+    uint sizeBuffer = 1 + 2 + 1 + 1 + std::strlen(text);
+
+    Buffer buffer(sizeBuffer);
+    buffer.data[0] = Command::Paint_DrawText;
+    buffer.data[1] = (uint8)x;
+    buffer.data[2] = (uint8)(x >> 8);
+    buffer.data[3] = (uint8)y;
+    buffer.data[4] = (uint8)std::strlen(text); //-V1029
+
+    std::memcpy(&buffer.data[5], (void *)text, std::strlen(text));
+
+    FSMC::WriteToPanel(buffer.data, sizeBuffer);
+
+    return x + Font::GetLengthText(text) + 1;
 }
