@@ -185,16 +185,6 @@ void Painter::SetColorValue(Color color, uint value)
 //}
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-//void Painter::DrawHLine(int y, int x0, int x1, Color color)
-//{
-//    SetColor(color);
-//
-//    SDL_Rect rect = {x0, y, x1 - x0 + 1, 1};
-//
-//    SDL_RenderFillRect(renderer, &rect);
-//}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 //void Painter::SetColor(Color color)
 //{
 //    if (color != Color::NUMBER)
@@ -211,16 +201,6 @@ void Painter::SetColorValue(Color color, uint value)
 //void Painter::SetBrightnessDisplay(int16 /*brightness*/)
 //{
 //
-//}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-//void Painter::DrawRectangle(int x, int y, int width, int height, Color color)
-//{
-//    SetColor(color);
-//    DrawVLine(x, y, y + height);
-//    DrawVLine(x + width, y, y + height);
-//    DrawHLine(y, x, x + width);
-//    DrawHLine(y + height, x, x + width);
 //}
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

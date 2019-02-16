@@ -28,3 +28,13 @@ void Display::Primitives::Rectangle::Draw(int x, int y, Color color)
     HLine(width).Draw(x, y);
     HLine(width).Draw(x, y + height);
 }
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Display::Primitives::HLine::Draw(int x, int y, Color color)
+{
+    Color::SetCurrent(color);
+    
+    SDL_Rect rect = {x, y, x + width, y};
+    
+    SDL_RenderFillRect(renderer, &rect);
+}

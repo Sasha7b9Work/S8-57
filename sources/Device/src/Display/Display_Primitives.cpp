@@ -37,16 +37,6 @@ Display::Primitives::HLine::HLine(int _width) : width(_width)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Display::Primitives::HLine::Draw(int x, int y, Color color)
-{
-	Color::SetCurrent(color);
-	int x0 = x;
-	int x1 = x0 + width;
-	uint8 buffer[6] = { Command::Paint_DrawHLine, (uint8)y, (uint8)x0, (uint8)(x0 >> 8), (uint8)x1, (uint8)(x1 >> 8) };
-	FSMC::WriteToPanel(buffer, 6);
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Display::Primitives::VLine::VLine(int _height) : height(_height)
 {
 }
