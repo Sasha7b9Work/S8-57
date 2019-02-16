@@ -47,3 +47,11 @@ void Display::Primitives::VLine::Draw(int x, int y, Color color)
     
     SDL_RenderFillRect(renderer, &rect);
 }
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Display::Primitives::Point::Draw(int x, int y, Color color)
+{
+    Color::SetCurrent(color);
+    SDL_Rect rect = { x, y, 1, 1 };
+    SDL_RenderFillRect(renderer, &rect);
+}

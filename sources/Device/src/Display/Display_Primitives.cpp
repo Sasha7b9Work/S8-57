@@ -42,14 +42,6 @@ Display::Primitives::VLine::VLine(int _height) : height(_height)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Display::Primitives::Point::Draw(int x, int y, Color color)
-{
-	Color::SetCurrent(color);
-	uint8 buffer[4] = { Command::Paint_SetPoint, (uint8)x, (uint8)(x >> 8), (uint8)y };
-	FSMC::WriteToPanel(buffer, 4);
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Display::Primitives::Line::Line(int _x0, int _y0, int _x1, int _y1) : x0(_x0), y0(_y0), x1(_x1), y1(_y1)
 {
     if (x0 < 0)
