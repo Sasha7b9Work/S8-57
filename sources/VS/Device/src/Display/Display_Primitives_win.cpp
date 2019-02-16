@@ -17,3 +17,14 @@ void Display::Primitives::Region::Fill(int x, int y, Color color)
 
     SDL_RenderFillRect(renderer, &rect);
 }
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Display::Primitives::Rectangle::Draw(int x, int y, Color color)
+{
+    Color::SetCurrent(color);
+
+    VLine(height).Draw(x, y);
+    VLine(height).Draw(x + width, y);
+    HLine(width).Draw(x, y);
+    HLine(width).Draw(x, y + height);
+}

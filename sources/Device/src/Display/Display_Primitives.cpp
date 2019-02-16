@@ -32,14 +32,6 @@ Display::Primitives::Rectangle::Rectangle(int _width, int _height) : width(_widt
 }
     
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Display::Primitives::Rectangle::Draw(int x, int y, Color color)
-{
-    Color::SetCurrent(color);
-    uint8 buffer[7] = { Command::Paint_DrawRectangle, (uint8)x, (uint8)(x >> 8), (uint8)y, (uint8)width, (uint8)(width >> 8), (uint8)height };
-    FSMC::WriteToPanel(buffer, 7);
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Display::Primitives::HLine::HLine(int _width) : width(_width)
 {
 }
