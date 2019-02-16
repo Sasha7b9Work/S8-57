@@ -11,6 +11,8 @@ extern SDL_Renderer *renderer;
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 static int DrawChar(int x, int y, char symbol);
 
+static int DrawBigChar(int eX, int eY, int size, char _symbol);
+
 static bool ByteFontNotEmpty(uint eChar, int byte);
 
 static bool BitInFontIsExist(int eChar, int numByte, int bit);
@@ -79,6 +81,20 @@ int Display::Primitives::Text::DrawSmall(int x, int y, Color color)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Display::Primitives::Text::DrawBig(int x, int y, Color color)
+{
+    Color::SetCurrent(color);
+
+    uint numSymbols = std::strlen(text);
+
+    for (uint i = 0; i < numSymbols; i++)
+    {
+        x = DrawBigChar(x, y, sizeOfType, text[i]);
+        x += sizeOfType;
+    }
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static int DrawChar(int eX, int eY, char _symbol)
 {
     uint8 symbol = (uint8)_symbol;
@@ -86,33 +102,25 @@ static int DrawChar(int eX, int eY, char _symbol)
     int8 width = (int8)font->symbol[(uint8)symbol].width;
     int8 height = (int8)font->height;
 
-    int size = 1;
-
     for (int b = 0; b < height; b++)
     {
         if (ByteFontNotEmpty((uint)symbol, b))
         {
             int x = eX;
-            int y = eY + b * size + 9 - height;
+            int y = eY + b + 9 - height;
             int endBit = 8 - width;
             for (int bit = 7; bit >= endBit; bit--)
             {
                 if (BitInFontIsExist(symbol, b, bit))
                 {
-                    for (int i = 0; i < size; i++)
-                    {
-                        for (int j = 0; j < size; j++)
-                        {
-                            SDL_RenderDrawPoint(renderer, x + i, y + j);
-                        }
-                    }
+                    SDL_RenderDrawPoint(renderer, x, y);
                 }
-                x += size;
+                x++;
             }
         }
     }
 
-    return eX + width * size;
+    return eX + width;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -141,4 +149,39 @@ static bool BitInFontIsExist(int eChar, int numByte, int bit)
         prevNumByte = numByte;
     }
     return prevByte & (1 << bit);
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+static int DrawBigChar(int eX, int eY, int size, char _symbol)
+{
+    uint8 symbol = (uint8)_symbol;
+
+    int8 width = (int8)font->symbol[symbol].width;
+    int8 height = (int8)font->height;
+
+    for (int b = 0; b < height; b++)
+    {
+        if (ByteFontNotEmpty(symbol, b))
+        {
+            int x = eX;
+            int y = eY + b * size + 9 - height;
+            int endBit = 8 - width;
+            for (int bit = 7; bit >= endBit; bit--)
+            {
+                if (BitInFontIsExist(symbol, b, bit))
+                {
+                    for (int i = 0; i < size; i++)
+                    {
+                        for (int j = 0; j < size; j++)
+                        {
+                            SDL_RenderDrawPoint(renderer, x + i, y + j);
+                        }
+                    }
+                }
+                x += size;
+            }
+        }
+    }
+
+    return eX + width * size;
 }

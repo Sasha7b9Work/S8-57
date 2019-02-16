@@ -131,26 +131,6 @@ int Display::Primitives::Text::Draw(int x, int y, Color color)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Display::Primitives::Text::DrawBig(int x, int y, Color color)
-{
-#define MAX_SIZE_BUFFER 100
-
-    Color::SetCurrent(color);
-
-    uint numSymbols = std::strlen(text); //-V2513
-    uint8 buffer[MAX_SIZE_BUFFER] = { Command::Paint_DrawBigText, (uint8)x, (uint8)(x >> 8), (uint8)y, sizeOfType, (uint8)(numSymbols) };
-
-    uint8 *pointer = &buffer[6];
-
-    while (*text)
-    {
-        *pointer++ = (uint8)*text++;
-    }
-
-    FSMC::WriteToPanel(buffer, 1 + 2 + 1 + 1 + numSymbols + 1);
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 int Display::Primitives::Text::DrawWithLimitation(int x, int y, int limitX, int limitY, int limitWidth, int limitHeight)
 {
     int retValue = x;
