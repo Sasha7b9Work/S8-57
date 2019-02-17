@@ -116,7 +116,7 @@ source_group(Menu\\Pages\\PageHelp                      REGULAR_EXPRESSION "src/
 source_group(Menu\\Pages\\PageMeasures                  REGULAR_EXPRESSION "src/Menu/Pages/PageMeasures/*.*")
 source_group(Menu\\Pages\\PageMemory                    REGULAR_EXPRESSION "src/Menu/Pages/PageMemory/*.*")
 source_group(Menu\\Pages\\PageService                   REGULAR_EXPRESSION "src/Menu/Pages/PageService/*.*")
-source_group(Menu\\Pages\\PageSerice\\PageDebug         REGULAR_EXPRESSION "src/Menu/Pages/PageService/PageDebug/*.*")
+source_group(Menu\\Pages\\PageService\\PageDebug        REGULAR_EXPRESSION "src/Menu/Pages/PageService/PageDebug/*.*")
 source_group(Menu\\Pages\\PageTrig                      REGULAR_EXPRESSION "src/Menu/Pages/PageTrig/*.*")
 source_group(Multimeter                                 REGULAR_EXPRESSION "src/Multimeter/*.*")
 source_group(Osci                                       REGULAR_EXPRESSION "src/Osci/*.*")

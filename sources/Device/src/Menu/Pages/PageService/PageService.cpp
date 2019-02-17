@@ -105,161 +105,6 @@ DEF_PAGE_2( ppCalibrator, // -V641 // -V1027                                    
     Page::Name::Service_Calibrator, &pService, FuncActive, FuncPressPage, FuncDrawPage, FuncRegSetPage
 )
 
-#ifdef OLD_RECORDER
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void OnChanged_Recorder(bool)
-{
-}
-
-DEF_CHOICE_2( cRecorder,                                                                                                                                       //--- СЕРВИС - Регистратор ---
-    "Регистратор", "Recorder",
-    "Включает/выключает режим регистратора. Этот режим доступен на развёртках 50 мс/дел и более медленных.",
-    "Turn on/off recorder mode. This mode is available for scanning 20ms/div and slower.",
-    DISABLE_RU, DISABLE_EN,
-    ENABLE_RU,  ENABLE_EN,
-    RECORDER_MODE, pService, FuncActive, OnChanged_Recorder, Choice::EmptyDraw
-)
-
-#else
-
-// CЕРВИС - РЕГИСТРАТОР //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-static const Page ppRecorder =
-{
-    Control::Type::Page, &pService, 0,
-    {
-        "РЕГИСТРАТОР", "RECORDER",
-        "Запись и воспроизведение входных сигналов",
-        "Recording and playback of input signals"
-    },
-    PageSB_Service_Recorder,
-    {
-        (void *)&bRecorder_Exit,
-        (void *)&bRecorder_SaveTo,
-        (void *)&bRecorder_Choice,
-        (void *)&bRecorder_Cursor
-    },
-    true
-};
-
-// СЕРВИС - РЕГИСТРАТОР - Выход ----------------------------------------------------------------------------------------------------------------------
-static const SButton bRecorder_Exit =
-{
-    Control::Type::DrawButton, &ppRecorder, 0,
-    {
-        "Выход", "Exit",
-        "Выход из режима регистратора",
-        "Exit registrator mode"
-    },
-    OnPressSB_Exit,
-    DrawSB_Exit
-};
-
-// СЕРВИС - РЕГИСТРАТОР - Сохранять в ... ------------------------------------------------------------------------------------------------------------
-static const SButton bRecorder_SaveTo =
-{
-    Control::Type::DrawButton, &ppRecorder, IsActive_Recorder_SaveTo,
-    {
-        "Сохранять в ...", "Save in ...",
-        "Выбор места хранения данных",
-        "Selecting a storage location"
-    },
-    OnPress_Recorder_SaveTo,
-    Draw_Recorder_SaveTo,
-    {
-        {Draw_Recorder_SaveTo_RAM, "данные сохраняются во внутреннюю память", "data is stored in the internal memory"},
-        {Draw_Recorder_SaveTo_EXT, "данные сохраняются на внешнем ЗУ", "data is stored in the data storage"}
-    }
-};
-
-static bool IsActive_Recorder_SaveTo()
-{
-    return FDRIVE_IS_CONNECTED;
-}
-
-static void OnPress_Recorder_SaveTo()
-{
-    CircleIncreaseInt8((int8*)(&REC_PLACE_OF_SAVING), 0, PlaceOfSaving_Number - 1);
-}
-
-static void Draw_Recorder_SaveTo(int x, int y)
-{
-    static const pFuncVII funcs[PlaceOfSaving_Number] =
-    {
-        Draw_Recorder_SaveTo_RAM, Draw_Recorder_SaveTo_EXT
-    };
-
-    funcs[REC_PLACE_OF_SAVING](x, y);
-}
-
-static void Draw_Recorder_SaveTo_RAM(int x, int y)
-{
-    Font::SetCurrent(Font::Type::_UGO2);
-    Painter::Draw4SymbolsInRect(x + 2, y + 1, SYMBOL_ROM);
-    Font::SetCurrent(Font::Type::_8);
-}
-
-static void Draw_Recorder_SaveTo_EXT(int x, int y)
-{
-    Font::SetCurrent(Font::Type::_UGO2);
-    Painter::Draw4SymbolsInRect(x + 2, y + 1, SYMBOL_FLASH_DRIVE_BIG);
-    Font::SetCurrent(Font::Type::_8);
-}
-
-// СЕРВИС - РЕГИСТРАТОР - Выбор ----------------------------------------------------------------------------------------------------------------------
-static const SButton bRecorder_Choice =
-{
-    Control::Type::DrawButton, &ppRecorder, 0,
-    {
-        "Выбор", "Choice",
-        "Выбор сигнала для просмотра",
-        "Select signal to view"
-    },
-    OnPress_Recorder_Choice,
-    Draw_Recorder_Choice
-};
-
-static void OnPress_Recorder_Choice()
-{
-
-}
-
-static void Draw_Recorder_Choice(int x, int y)
-{
-    Font::SetCurrent(Font::Type::_UGO2);
-    Painter::Draw4SymbolsInRect(x + 1, y, SYMBOL_FOLDER);
-    Font::SetCurrent(Font::Type::_8);
-}
-
-// СЕРВИС - РЕГИСТРАТОР - Курсор ---------------------------------------------------------------------------------------------------------------------
-static const SButton bRecorder_Cursor =
-{
-    Control::Type::DrawButton, &ppRecorder, 0,
-    {
-        "Курсор", "Cursors",
-        "Выбор курсора",
-        "Cursor selection"
-    },
-    OnPress_Recorder_Cursor,
-    Draw_Recorder_Cursor
-};
-
-static void OnPress_Recorder_Cursor()
-{
-    CircleIncreaseInt8(&REC_NUM_CURSOR, 0, 1);
-}
-
-static void Draw_Recorder_Cursor(int x, int y)
-{
-    Painter::DrawText(x + 8, y + 5, REC_NUM_CURSOR ? "2" : "1");
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-
-
-#endif
-
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void OnPress_Function_Screen()
 {
@@ -681,14 +526,13 @@ DEF_PAGE_SB( ppInformation, // -V641                                            
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 const PageBase *PageService::pointer = &pService;
 
-DEF_PAGE_11( pService, // -V641 // -V1027                                                                                                                                    //--- СЕРВИС ---
+DEF_PAGE_10( pService, // -V641 // -V1027                                                                                                                                    //--- СЕРВИС ---
     "СЕРВИС", "SERVICE",
     "Дополнительные настройки, калибровка, поиск сигнала, математические функции",
     "Additional settings, calibration, signal search, mathematical functions",
     &bResetSettings,                    ///< СЕРВИС - Сброс настроек
     &bAutoSearch,                       ///< СЕРВИС - Поиск сигнала
     &ppCalibrator,                      ///< СЕРВИС - КАЛИБРАТОР
-    &cRecorder,                         ///< СЕРВИС - Регистратор
     &ppFunction,                        ///< СЕРВИС - ФУНКЦИЯ
     &ppSound,                           ///< СЕРВИС - ЗВУК
     &ppRTC,                             ///< СЕРВИС - ВРЕМЯ

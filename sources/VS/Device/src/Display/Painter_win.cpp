@@ -63,6 +63,8 @@ static void CreateButtons(Frame *frame);
 static void CreateButton(Key::E key, Frame *frame, const wxPoint &pos, const wxSize &size, pString title);
 /// Создаёт кнопки для меню канала
 static void CreateButtonsChannel(Frame *frame, char *title, int x, int y, Key::E keyChannel, Key::E keyRangeLess, Key::E keyRangeMore, Key::E keyRShiftLess, Key::E keyRShiftMore);
+/// Создаёт кнопки группы синхронизации
+static void CreateButtonsTrig(Frame *frame, int x, int y);
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -257,6 +259,8 @@ static void CreateButtons(Frame *frame)
     // Кнопки канала B
 
     CreateButtonsChannel(frame, "Канал 1", 120, y, Key::ChannelB, Key::RangeLessB, Key::RangeMoreB, Key::RShiftLessB, Key::RShiftMoreB);
+
+    CreateButtonsTrig(frame, 235, y - 30);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -293,6 +297,18 @@ static void CreateButtonsChannel(Frame *frame, char *title, int x, int y, Key::E
     wxPoint pos = {x, y - dY - size.GetHeight()};
 
     CreateButton(keyChannel, frame, pos, size, title);
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+static void CreateButtonsTrig(Frame *frame, int x, int y)
+{
+    int width = 45;
+    int height = 20;
+
+    wxSize size = { width, height };
+
+    CreateButton(Key::Trig, frame, { x, y }, size, "СИНХР");
+//    CreateButton(Key::TrigLevMore, frame, {})
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

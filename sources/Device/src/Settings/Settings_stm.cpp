@@ -17,3 +17,11 @@ void Settings::Load(bool _default)
         FPGA::OnPressStart();
     }
 }
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Settings::Save()
+{
+    uint8 data[1024];
+    set.TransformForSave(data);
+    Memory::SaveSettings();
+}
