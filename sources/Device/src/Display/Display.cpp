@@ -11,6 +11,7 @@
 
 #include "Osci/Display/Osci_Display.h"
 #include "Osci/Display/PainterData.h"
+#include "Multimeter/Multimeter.h"
 
 
 using namespace Display::Primitives;

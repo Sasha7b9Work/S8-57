@@ -8,6 +8,11 @@
 #define MULTI_RANGE_RESISTANCE  (set.multi_rangeResist)
 #define MULTI_AVP               (set.multi_avp)
 
+namespace Display
+{
+    class MultimeterWorker;
+};
+
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 namespace Multimeter
@@ -24,13 +29,6 @@ namespace Multimeter
     void ChangeMode();
 
     void ChangeAVP();
-
-    void LoadZero();
-    /// Функции калибровки
-    void Calibrate(int i);
-    /// Подать / отключить звук
-    void Beep(bool on);
-
     /// Режим измерений мультиметра
     struct Measure
     {
@@ -43,12 +41,12 @@ namespace Multimeter
             Resistance,
             TestDiode,
             Bell,
-            Size
+            Number
         } value;
         explicit Measure(E v) : value(v) { };
         char Symbol() const
         {
-            static const char symbols[Size] = {'U', 'V', 'I', 'J', 'R', 'Y', 'W' };
+            static const char symbols[Number] = {'U', 'V', 'I', 'J', 'R', 'Y', 'W' };
             return symbols[value]; //-V2006
         }
         static Measure::E ForSymbol(char symbol);
@@ -57,13 +55,13 @@ namespace Multimeter
     /// Используется для отрисовки
     class Display
     {
+    friend class DisplayWorker;
+    friend class ::Display::MultimeterWorker;
     public:
         static void Update();
         /// Через эту функцию поступает измерение от прибора
-        static void SetMeasure(const char *buffer);
+        static void SetMeasure(const uint8 buffer[10]);
 
         static void ChangedMode();
     };
-    /// Настройка мультиметра "Нуль"
-    extern uint8 zero;
 };

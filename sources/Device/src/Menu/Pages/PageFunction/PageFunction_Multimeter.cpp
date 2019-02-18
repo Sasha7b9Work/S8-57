@@ -144,8 +144,10 @@ DEF_CHOICE_2 (cAVP,
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void OnChanged_Zero(bool)
 {
-    Multimeter::LoadZero();
+    //Multimeter::LoadZero();
 }
+
+static int8 zero = 0;
 
 DEF_CHOICE_2( cZero,
     "Нуль", "Zero",
@@ -153,7 +155,7 @@ DEF_CHOICE_2( cZero,
     "",
     DISABLE_RU, DISABLE_EN,
     ENABLE_RU, ENABLE_EN,
-    Multimeter::zero, pageMultimeter, FuncActive, OnChanged_Zero, Choice::EmptyDraw
+    zero, pageMultimeter, FuncActive, OnChanged_Zero, Choice::EmptyDraw
 )
 
 

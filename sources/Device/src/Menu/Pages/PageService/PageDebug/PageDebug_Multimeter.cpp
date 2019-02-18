@@ -13,7 +13,7 @@ const PageBase *PageService::PageDebug::PageMultimeter::pointer = &pMultimeter;
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 static void OnPress_Calibrate0()
 {
-    Multimeter::Calibrate(0);
+    //Multimeter::Calibrate(0);
 }
 
 DEF_BUTTON( bCalibrate0,
@@ -26,7 +26,7 @@ DEF_BUTTON( bCalibrate0,
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void OnPress_Calibrate1()
 {
-    Multimeter::Calibrate(1);
+    //Multimeter::Calibrate(1);
 }
 
 DEF_BUTTON(bCalibrate1,
