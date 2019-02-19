@@ -17,8 +17,9 @@ using Display::Primitives::Text;
 #define SIZE_OUT 15
 char out[SIZE_OUT];
 
+/// Сюда копируем принятые измерения
 /// Если нулевой элемент == 0, то выводить ничего не нужно
-static char buffer[11] = { 0 };
+static char buffer[13] = { 0 };
 
 static void PrepareRing();
 static void PrepareConstantVoltage();
@@ -32,13 +33,12 @@ static void PrepareTestDiode();
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void Multimeter::Display::Update()
 {
-    struct Func
+    static const struct Func
     {
         pFuncVV func;
         Func(pFuncVV f) : func(f) {};
-    };
-
-    static const Func funcs[Multimeter::Measure::Number] =
+    }
+    funcs[Multimeter::Measure::Number] =
     {
         PrepareConstantVoltage,
         PrepareVariableVoltage,
@@ -53,7 +53,7 @@ void Multimeter::Display::Update()
 
     std::memset(out, 0, SIZE_OUT);
 
-    Measure::E meas = Measure::ForSymbol(buffer[7]);
+    Measure::E meas = Measure::GetCode(buffer);
     if (meas == Measure::Number)
     {
         meas = MULTI_MEASURE;
@@ -75,14 +75,10 @@ void Multimeter::Display::ChangedMode()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Multimeter::Display::SetMeasure(const uint8 buf[10])
+void Multimeter::Display::SetMeasure(const uint8 buf[13])
 {
-    std::memcpy(buffer, buf, 10);
-    buffer[2] |= 0x30;
-    buffer[3] |= 0x30;
-    buffer[4] |= 0x30;
-    buffer[5] |= 0x30;
-    buffer[6] |= 0x30;
+    std::memcpy(buffer, buf, 13);
+    
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -117,32 +113,8 @@ static void PrepareTestDiode()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void PrepareConstantVoltage()
 {
-    out[0] = buffer[1];
-    out[1] = buffer[2];
-    out[5] = buffer[5];
-    out[6] = buffer[6];
-    out[7] = ' ';
-    out[8] = 'V';
-    out[9] = '=';
-
-    switch (MULTI_RANGE_DC)
-    {
-    case RangeDC::_2V:
-        out[2] = '.';
-        out[3] = buffer[3];
-        out[4] = buffer[4];
-        break;
-    case RangeDC::_20V:
-        out[2] = buffer[3];
-        out[3] = '.';
-        out[4] = buffer[4];
-        break;
-    case RangeDC::_500V:
-        out[2] = buffer[3];
-        out[3] = buffer[4];
-        out[4] = '.';
-        break;
-    };
+    std::memcpy(out, buffer + 1, 7);
+    std::strcpy(out + 7, " V=");
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

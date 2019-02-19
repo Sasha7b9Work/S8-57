@@ -49,7 +49,8 @@ namespace Multimeter
             static const char symbols[Number] = {'U', 'V', 'I', 'J', 'R', 'Y', 'W' };
             return symbols[value]; //-V2006
         }
-        static Measure::E ForSymbol(char symbol);
+        /// Получить код измерения из принятого буфера
+        static Measure::E GetCode(char buffer[13]);
     };
 
     /// Используется для отрисовки
@@ -60,7 +61,7 @@ namespace Multimeter
     public:
         static void Update();
         /// Через эту функцию поступает измерение от прибора
-        static void SetMeasure(const uint8 buffer[10]);
+        static void SetMeasure(const uint8 buffer[13]);
 
         static void ChangedMode();
     };

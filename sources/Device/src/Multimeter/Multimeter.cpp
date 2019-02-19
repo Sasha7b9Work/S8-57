@@ -28,9 +28,9 @@ namespace Multimeter
         {
             HAL::USART3_::Transmit(_buffer, size, timeout);
         }
-        static void StartReceiveIT(void *_buffer, uint size)
+        static void StartReceiveIT(void *_buffer)
         {
-            HAL::USART3_::StartReceiveIT(_buffer, size);
+            HAL::USART3_::StartReceiveIT(_buffer, 13);
         }
     };
 
@@ -51,7 +51,7 @@ namespace Multimeter
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /// В этот буфер записывается информация в обработчике прерывания приёма
-static uint8 bufferUART[10];
+static uint8 bufferUART[20];
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -73,7 +73,7 @@ void Multimeter::Init()
 
     USART3_::Transmit(send, 4, 10);
 
-    USART3_::StartReceiveIT(bufferUART, 10);
+    USART3_::StartReceiveIT(bufferUART);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -91,7 +91,7 @@ void Multimeter::ChangeAVP()
 
     USART3_::Transmit(send, 4, 100);
 
-    USART3_::StartReceiveIT(bufferUART, 10);
+    USART3_::StartReceiveIT(bufferUART);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -117,15 +117,27 @@ void Multimeter::Update()
 
     USART3_::Transmit(send, 4, 100);
 
-    USART3_::StartReceiveIT(bufferUART, 10);
+    USART3_::StartReceiveIT(bufferUART);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-Multimeter::Measure::E Multimeter::Measure::ForSymbol(char symbol)
+Multimeter::Measure::E Multimeter::Measure::GetCode(char buffer[13])
 {
     Measure::E result = Measure::Number;
 
-    switch (symbol)
+    int pos = 0;
+
+    while (pos < 13 && buffer[pos] != 0x0a)
+    {
+        ++pos;
+    }
+
+    if (pos == 13)
+    {
+        return Measure::Number;
+    }
+
+    switch (buffer[pos - 1])
     {
     case 'V':
         result = Measure::VoltageAC;
@@ -153,6 +165,7 @@ Multimeter::Measure::E Multimeter::Measure::ForSymbol(char symbol)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void ReceiveCallback()
 {
+    LOG_WRITE((char *)bufferUART);
     Multimeter::DisplayWorker::SetMeasure(bufferUART);
-    Multimeter::USART3_::StartReceiveIT(bufferUART, 10);
+    Multimeter::USART3_::StartReceiveIT(bufferUART);
 }

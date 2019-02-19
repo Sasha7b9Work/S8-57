@@ -303,7 +303,7 @@ static bool CalculateGate(uint16 rand, uint16 *eMin, uint16 *eMax)
 static void ReadPointP2P()
 {
     /// Время чтения точки. Если == 0, то нужно брать актуальное при сохранении точки, иначе - из time
-    static bool time = 0;
+    static uint time = 0;
 
     if(::HAL::FSMC::InterchangeWithPanel())
     {
