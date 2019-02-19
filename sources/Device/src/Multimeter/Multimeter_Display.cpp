@@ -113,70 +113,35 @@ static void PrepareTestDiode()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void PrepareConstantVoltage()
 {
-    std::memcpy(out, buffer + 1, 7);
+    std::memcpy(out, buffer + 1, 7); //-V512
     std::strcpy(out + 7, " V=");
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void PrepareVariableVoltage()
 {
-    std::memcpy(out, buffer + 1, 7);
+    std::memcpy(out, buffer + 1, 7); //-V512
     std::strcpy(out + 7, " V~");
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void PrepareConstantCurrent()
 {
-    
+    std::memcpy(out, buffer + 1, 7);
+    std::strcpy(out + 7, (buffer[10] == '1') ? " A~" : " mA~");
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void PrepareVariableCurrent()
 {
-    out[0] = buffer[2];
-    out[1] = '.';
-    out[2] = buffer[3];
-    out[3] = buffer[4];
-    out[4] = buffer[5];
-    out[5] = buffer[6];
-    out[6] = ' ';
-    out[7] = 'A';
-    out[8] = '~';
+    std::memcpy(out, buffer + 1, 7);
+    std::strcpy(out + 7, (buffer[10] == '1') ? " A=" : " mA=");
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void PrepareResistance()
 {
-    out[0] = buffer[2];
-    out[4] = buffer[5];
-    out[5] = buffer[6];
-    out[6] = ' ';
-    out[7] = 'ê';
-    out[8] = 'Î';
-    out[9] = 'ì';
-
-    switch (MULTI_RANGE_RESISTANCE)
-    {
-    case RangeResistance::_2k:
-        out[1] = '.';
-        out[2] = buffer[3];
-        out[3] = buffer[4];
-        break;
-    case RangeResistance::_20k:
-        out[1] = buffer[3];
-        out[2] = '.';
-        out[3] = buffer[4];
-        break;
-    case RangeResistance::_200k:
-        out[1] = buffer[3];
-        out[2] = buffer[4];
-        out[3] = '.';
-        break;
-    case RangeResistance::_10M:
-        out[1] = buffer[3];
-        out[2] = '.';
-        out[3] = buffer[4];
-        out[7] = 'M';
-        break;
-    }
+    std::memcpy(out, buffer + 1, 7);
+    std::strcpy(out + 7, " kQ");
+    out[9] = 0x1b;
 }

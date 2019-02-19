@@ -52,7 +52,7 @@ namespace Multimeter
             return symbols[value]; //-V2006
         }
         /// Получить код измерения из принятого буфера
-        static Measure::E GetCode(char buffer[13]);
+        static Measure::E GetCode(const char buffer[13]);
     };
 
     /// Используется для отрисовки

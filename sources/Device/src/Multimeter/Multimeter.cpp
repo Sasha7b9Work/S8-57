@@ -123,7 +123,7 @@ void Multimeter::Update()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-Multimeter::Measure::E Multimeter::Measure::GetCode(char buffer[13])
+Multimeter::Measure::E Multimeter::Measure::GetCode(const char buffer[13])
 {
     Measure::E result = Measure::Number;
 

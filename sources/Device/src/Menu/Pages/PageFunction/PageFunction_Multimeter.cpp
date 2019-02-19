@@ -207,7 +207,7 @@ void PageFunction::PageMultimeter::OnChanged_Mode(bool)
     }
     else if (MULTI_MEASURE == Multimeter::Measure::CurrentAC)
     {
-        items[1] = (Control *)&cRangesCurrentAC;
+        items[1] = (Control *)&cRangesCurrentAC;    // -V641
     }
     else if (MULTI_MEASURE == Multimeter::Measure::Resistance)
     {
