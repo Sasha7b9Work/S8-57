@@ -56,8 +56,6 @@ namespace FPGA
 
             explicit Bandwidth(E v) : value(v) {};
             void Load();
-            /// Возвращает true, если настройка зафиксирована - не может управляться вручную
-            bool IsFixed() const;
 
         private:
             /// Возвращает канал, для которого является действующей эта настройка
