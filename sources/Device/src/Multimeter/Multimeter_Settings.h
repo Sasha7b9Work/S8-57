@@ -40,6 +40,17 @@ namespace Multimeter
             explicit RangeAC(E v) : value(v) {};
         };
 
+        /// Предел измерения тока
+        struct RangeCurrent
+        {
+            enum E
+            {
+                _20mA,
+                _2A
+            } value;
+            explicit RangeCurrent(E v) : value(v) {};
+        };
+
         /// Предел измерения сопротивленя постоянному току
         struct RangeResistance
         {

@@ -103,8 +103,10 @@ void Multimeter::Update()
     }
     
     uint8 range = 0;
-    if(MULTI_MEASURE == Measure::VoltageDC)        { range = (uint8)MULTI_RANGE_DC; }
-    else if(MULTI_MEASURE == Measure::VoltageAC)   { range = (uint8)MULTI_RANGE_AC; }
+    if(MULTI_MEASURE == Measure::VoltageDC)        { range = (uint8)MULTI_RANGE_VOLTAGE_DC; }
+    else if(MULTI_MEASURE == Measure::VoltageAC)   { range = (uint8)MULTI_RANGE_VOLTAGE_AC; }
+    else if(MULTI_MEASURE == Measure::CurrentDC)   { range = (uint8)MULTI_RANGE_CURRENT_DC; }
+    else if(MULTI_MEASURE == Measure::CurrentAC)   { range = (uint8)MULTI_RANGE_CURRENT_AC; }
     else if(MULTI_MEASURE == Measure::Resistance)  { range = (uint8)MULTI_RANGE_RESISTANCE; }
     else
     {
@@ -165,7 +167,6 @@ Multimeter::Measure::E Multimeter::Measure::GetCode(char buffer[13])
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void ReceiveCallback()
 {
-    LOG_WRITE((char *)bufferUART);
     Multimeter::DisplayWorker::SetMeasure(bufferUART);
     Multimeter::USART3_::StartReceiveIT(bufferUART);
 }

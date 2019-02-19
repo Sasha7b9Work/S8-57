@@ -258,6 +258,8 @@ public:
     Multimeter::Measure::E                    multi_meas;
     Multimeter::Settings::RangeDC::E          multi_rangeDC;
     Multimeter::Settings::RangeAC::E          multi_rangeAC;
+    Multimeter::Settings::RangeCurrent::E     multi_rangeCurrentAC;     ///< Предел измерения переменного тока
+    Multimeter::Settings::RangeCurrent::E     multi_rangeCurrentDC;     ///< Предел измерения постоянного тока
     Multimeter::Settings::RangeResistance::E  multi_rangeResist;
 
     // Настройки регистратора

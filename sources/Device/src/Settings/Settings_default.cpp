@@ -213,11 +213,13 @@ const Settings Settings::defaultSettings =
     
     // Настройки мультиметра
 
-    Multimeter::Settings::AVP::Off,               // multi_avp
-    Multimeter::Measure::VoltageDC,               // multi_meas
-    Multimeter::Settings::RangeDC::_2V,           // multi_rangeCV
-    Multimeter::Settings::RangeAC::_2V,           // multi_rangeVV
-    Multimeter::Settings::RangeResistance::_10M,  // multi_rangeResist
+    Multimeter::Settings::AVP::Off,                 // multi_avp
+    Multimeter::Measure::VoltageDC,                 // multi_meas
+    Multimeter::Settings::RangeDC::_2V,             // multi_rangeCV
+    Multimeter::Settings::RangeAC::_2V,             // multi_rangeVV
+    Multimeter::Settings::RangeCurrent::_2A,        // multi_rangeCurrentAC
+    Multimeter::Settings::RangeCurrent::_2A,        // multi_rangeCurrentDC
+    Multimeter::Settings::RangeResistance::_10M,    // multi_rangeResist
     
     // Настройки регистратора
 

@@ -3,8 +3,10 @@
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #define MULTI_MEASURE           (set.multi_meas)
-#define MULTI_RANGE_AC          (set.multi_rangeAC)
-#define MULTI_RANGE_DC          (set.multi_rangeDC)
+#define MULTI_RANGE_VOLTAGE_AC  (set.multi_rangeAC)
+#define MULTI_RANGE_VOLTAGE_DC  (set.multi_rangeDC)
+#define MULTI_RANGE_CURRENT_AC  (set.multi_rangeCurrentAC)
+#define MULTI_RANGE_CURRENT_DC  (set.multi_rangeCurrentDC)
 #define MULTI_RANGE_RESISTANCE  (set.multi_rangeResist)
 #define MULTI_AVP               (set.multi_avp)
 

@@ -3,6 +3,7 @@
 *.bak
 *~*
 *.uvgui*.*
+*.bin
 
 JLinkLog.txt
 JLinkSettings.ini
