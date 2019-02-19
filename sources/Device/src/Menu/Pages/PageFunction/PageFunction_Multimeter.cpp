@@ -154,13 +154,30 @@ static void OnChanged_Zero(bool)
 
 static int8 zero = 0;
 
-DEF_CHOICE_2( cZero,
+DEF_CHOICE_2(cZero,
     "Нуль", "Zero",
     "",
     "",
     DISABLE_RU, DISABLE_EN,
     ENABLE_RU, ENABLE_EN,
     zero, pageMultimeter, FuncActive, OnChanged_Zero, Choice::EmptyDraw
+)
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+static void OnChanged_Calibration(bool)
+{
+
+}
+
+static int8 calibration = 0;
+
+DEF_CHOICE_2( cCalibration,
+    "Калибровка", "Calibration",
+    "",
+    "",
+    DISABLE_RU, DISABLE_EN,
+    ENABLE_RU, ENABLE_EN,
+    calibration, pageMultimeter, FuncActive, OnChanged_Calibration, Choice::EmptyDraw
 )
 
 
@@ -183,6 +200,7 @@ DEF_PAGE_4( pageMultimeter, // -V641
     &cRangesVoltageDC,
     &cAVP,
     &cZero,
+    //&cCalibration,
     Page::Name::Function_Multimeter, PageFunction::pointer, FuncActive, OnPress_Page, FuncDrawPage, FuncRegSetPage
 )
 
