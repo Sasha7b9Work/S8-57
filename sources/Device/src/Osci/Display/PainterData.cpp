@@ -180,6 +180,8 @@ static void DrawModeLinesPeakDetOn(int center, const uint8 *data, float scale, i
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void DrawModeLinesPeakDetOff(int center, const uint8 *data, float scale, int x)
 {
+    int coordVert = -1;  // На этой координате нужно нарисовать вертикальную линию, чтобы скрыть дефект поточечного вывода, когда считана только часть точек
+
     for (int i = 1; i < 281; i++)
     {
         int value = (int)(center - (data[i] - VALUE::AVE) * scale + 0.5F);
@@ -193,6 +195,12 @@ static void DrawModeLinesPeakDetOff(int center, const uint8 *data, float scale, 
         {
             int val = valuePrev > value ? (value + 1) : (value - 1);
             VLine(val - valuePrev).Draw(x++, valuePrev);
+        }
+
+        if (coordVert == -1 && data[i] == VALUE::NONE)
+        {
+            coordVert = i;
+            VLine(Grid::Height()).Draw(x - 1, Grid::Top(), Color::GRID);
         }
     }
 }
