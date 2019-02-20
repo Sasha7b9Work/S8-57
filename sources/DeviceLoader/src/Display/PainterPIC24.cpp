@@ -63,7 +63,7 @@ void Painter::EndScene()
         framesElapsed = true;
         return;
     }
-    uint8 command[4] = {INVALIDATE};
+    uint8 command[4] = {INVALIDATE}; //-V1009
     SendToDisplay(command, 4);
     SendToInterfaces(command, 1);
     if (TRANSMIT_IN_PROCESS)
@@ -111,9 +111,9 @@ void Painter::DrawHLine(int y, int x0, int x1, Color color)
 
     CalculateCurrentColor();
 
-    uint8 command[8] = {DRAW_HLINE};
+    uint8 command[8] = {DRAW_HLINE}; //-V1009
     WRITE_BYTE(1, y);
-    WRITE_SHORT(2, x0);
+    WRITE_SHORT(2, x0); //-V1032
     WRITE_SHORT(4, x1);
 
     SendToDisplay(command, 8);
@@ -135,8 +135,8 @@ void Painter::DrawLine(int x1, int y1, int x2, int y2, Color color)
     }
     else
     {
-        uint8 command[8] = {DRAW_LINE};
-        WRITE_SHORT(1, x1);
+        uint8 command[8] = {DRAW_LINE}; //-V1009
+        WRITE_SHORT(1, x1); //-V1032
         WRITE_BYTE(3, y1);
         WRITE_SHORT(4, x2);
         WRITE_BYTE(6, y2);
@@ -168,8 +168,8 @@ void Painter::DrawVLine(int x, int y0, int y1, Color color)
     }
     CalculateCurrentColor();
 
-    uint8 command[8] = {DRAW_VLINE};
-    WRITE_SHORT(1, x);
+    uint8 command[8] = {DRAW_VLINE}; //-V1009
+    WRITE_SHORT(1, x); //-V1032
     WRITE_BYTE(3, y0);
     WRITE_BYTE(4, y1);
 
@@ -187,8 +187,8 @@ void Painter::FillRegion(int x, int y, int width, int height, Color color)
 
     CalculateCurrentColor();
 
-    uint8 command[8] = {FILL_REGION};
-    WRITE_SHORT(1, x);
+    uint8 command[8] = {FILL_REGION}; //-V1009
+    WRITE_SHORT(1, x); //-V1032
     WRITE_BYTE(3, y);
     WRITE_SHORT(4, width);
     WRITE_BYTE(6, height);
@@ -200,7 +200,7 @@ void Painter::FillRegion(int x, int y, int width, int height, Color color)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Painter::RunDisplay()
 {
-    uint8 command[4] = {RUN_BUFFER};
+    uint8 command[4] = {RUN_BUFFER}; //-V1009
 
     SendToDisplay(command, 4);
 }
@@ -233,6 +233,10 @@ void Painter::CalculateColor(uint8 *color)
     {
         *color = inverseColors ? Color::FILL.value : Color::BACK.value;
     }
+    else
+    {
+        // здесь ничего
+    }
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -252,13 +256,17 @@ void Painter::CalculateCurrentColor()
     {
         SetColor(inverseColors ? Color::FILL : Color::BACK);
     }
+    else
+    {
+        // здесь ничего
+    }
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Painter::SetPoint(int x, int y)
 {
-    uint8 command[4] = {DRAW_PIXEL};
-    WRITE_SHORT(1, x);
+    uint8 command[4] = {DRAW_PIXEL}; //-V1009
+    WRITE_SHORT(1, x); //-V1032
     WRITE_BYTE(3, y);
 
     SendToDisplay(command, 4);
@@ -268,15 +276,15 @@ void Painter::SetPoint(int x, int y)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Painter::SetPalette(Color color)
 {
-    uint8 command[4] = {SET_PALETTE_COLOR};
+    uint8 command[4] = {SET_PALETTE_COLOR}; //-V1009
     WRITE_BYTE(1, color.value);
-    WRITE_SHORT(2, COLOR(color.value));
+    WRITE_SHORT(2, COLOR(color.value)); //-V1032
     SendToDisplay(command, 4);
     SendToInterfaces(command, 4);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Painter::DrawMultiVPointLine(int numLines, int y, uint16 x[], int delta, int count, Color color)
+void Painter::DrawMultiVPointLine(int numLines, int y, const uint16 *x, int delta, int count, Color color)
 {
     SetColor(color);
 
@@ -298,7 +306,7 @@ void Painter::DrawMultiVPointLine(int numLines, int y, uint16 x[], int delta, in
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Painter::DrawMultiHPointLine(int numLines, int x, uint8 y[], int delta, int count, Color color)
+void Painter::DrawMultiHPointLine(int numLines, int x, const uint8 *y, int delta, int count, Color color)
 {
     if (numLines > 20)
     {
@@ -306,9 +314,9 @@ void Painter::DrawMultiHPointLine(int numLines, int x, uint8 y[], int delta, int
     }
     SetColor(color);
 
-    uint8 command[30] = {DRAW_MULTI_HPOINT_LINE};
+    uint8 command[30] = {DRAW_MULTI_HPOINT_LINE}; //-V1009
     WRITE_BYTE(1, numLines);
-    WRITE_SHORT(2, x);
+    WRITE_SHORT(2, x); //-V1032
     WRITE_BYTE(4, count);
     WRITE_BYTE(5, delta);
 
@@ -335,24 +343,24 @@ void Painter::DrawMultiHPointLine(int numLines, int x, uint8 y[], int delta, int
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Painter::SetBrightnessDisplay(int16 brightness)
 {
-    float recValue = 1601.0f;
+    float recValue = 1601.0F;
     if (brightness < 100)
     {
-        recValue = 64.0f + (600.0f - 63.0f) / 100.0f / 100.0f * brightness * brightness;
+        recValue = 64.0F + (600.0F - 63.0F) / 100.0F / 100.0F * brightness * brightness;
     }
-    uint8 command[4] = {SET_BRIGHTNESS};
-    WRITE_SHORT(1, recValue);
+    uint8 command[4] = {SET_BRIGHTNESS}; //-V1009
+    WRITE_SHORT(1, recValue); //-V1032
 
     SendToDisplay(command, 4);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Painter::DrawVLineArray(int x, int numLines, uint8 *y0y1, Color color)
+void Painter::DrawVLineArray(int x, int numLines, const uint8 *y0y1, Color color)
 {
     SetColor(color);
 
-    uint8 command[255 * 2 + 4 + 4] = {DRAW_VLINES_ARRAY};
-    WRITE_SHORT(1, x);
+    uint8 command[255 * 2 + 4 + 4] = {DRAW_VLINES_ARRAY}; //-V1009
+    WRITE_SHORT(1, x); //-V1032
 
     if (numLines > 255)
     {
@@ -376,10 +384,10 @@ void Painter::DrawVLineArray(int x, int numLines, uint8 *y0y1, Color color)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Painter::DrawSignal(int x, uint8 data[281], bool modeLines)
+void Painter::DrawSignal(int x, const uint8 data[281], bool modeLines)
 {
-    uint8 command[284] = {(uint8)(modeLines ? DRAW_SIGNAL_LINES : DRAW_SIGNAL_POINTS)};
-    WRITE_SHORT(1, x);
+    uint8 command[284] = {(uint8)(modeLines ? DRAW_SIGNAL_LINES : DRAW_SIGNAL_POINTS)}; //-V1009
+    WRITE_SHORT(1, x); //-V1032
     for (int i = 0; i < 281; i++)
     {
         WRITE_BYTE(3 + i, data[i]);
@@ -392,8 +400,8 @@ void Painter::DrawSignal(int x, uint8 data[281], bool modeLines)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Painter::DrawPicture(int x, int y, int width, int height, uint8 *address)
 {
-    uint8 command[4] = {LOAD_IMAGE};
-    WRITE_SHORT(1, x);
+    uint8 command[4] = {LOAD_IMAGE}; //-V1009
+    WRITE_SHORT(1, x); //-V1032
     WRITE_BYTE(3, y);
 
     SendToDisplay(command, 4);
@@ -428,11 +436,11 @@ void Painter::LoadPalette()
 col_val Painter::ReduceBrightness(col_val colorValue, float newBrightness)
 {
     int red = (int)(R_FROM_COLOR(colorValue) * newBrightness);
-    LIMITATION(red, 0, 31);
+    LIMITATION(red, 0, 31); //-V2516
     int green = (int)(G_FROM_COLOR(colorValue) * newBrightness);
-    LIMITATION(green, 0, 63);
+    LIMITATION(green, 0, 63); //-V2516
     int blue = (int)(B_FROM_COLOR(colorValue) * newBrightness);
-    LIMITATION(blue, 0, 31);
+    LIMITATION(blue, 0, 31); //-V2516
     return MAKE_COLOR(red, green, blue);
 }
 

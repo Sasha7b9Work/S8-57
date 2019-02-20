@@ -27,7 +27,7 @@ const PageBase *PageMemory::PageRAM::pointer = &pageRAM;
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 static void OnPress_Last_Next()
 {
-    //Math::CircleIncrease<int16>((int16 *)&NUM_RAM_SIGNAL, 0, (int16)(DataStorage::NumElementsInStorage() - 1));
+    Memory::RAM::SelectNextSignal();
 }
 
 static void Draw_Last_Next(int x, int y)
@@ -47,7 +47,7 @@ DEF_SMALL_BUTTON( bLast_Next,                                                   
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void OnPress_Last_Prev()
 {
-    //Math::CircleDecrease<int16>((int16 *)&NUM_RAM_SIGNAL, 0, (int16)(DataStorage::NumElementsInStorage() - 1));
+    Memory::RAM::SelectPrevSignal();
 }
 
 static void Draw_Last_Prev(int x, int y)
@@ -120,7 +120,6 @@ static void OnPress_RAM(bool enter)
 {
     if (enter)
     {
-        RAM_NUM_SIGNAL = 0;
         RUN_FPGA_BEFORE_SB = FPGA::IsRunning() ? 1U : 0U;
         Osci::Stop(false);
         MODE_WORK = ModeWork::RAM;
@@ -138,7 +137,7 @@ static void OnDraw_RAM()
     int height = 10;
     Region(width, height).Fill(Grid::Right() - width, Grid::Top(), Color::BACK);
     Rectangle(width, height).Draw(Grid::Right() - width, Grid::Top(), Color::FILL);
-    Integer(RAM_NUM_SIGNAL + 1).ToString(false, 3).Draw(Grid::Right() - width + 2, Grid::Top() + 1);
+    Integer(Memory::RAM::CurrentSignal() + 1).ToString(false, 3).Draw(Grid::Right() - width + 2, Grid::Top() + 1);
     String("/").Draw(Grid::Right() - width + 17, Grid::Top() + 1);
     //Integer((int)DataStorage::NumElementsInStorage()).ToString(false, 3).Draw(Grid::Right() - width + 23, Grid::Top() + 1);
 }

@@ -3,7 +3,7 @@
 
 // Идентификаторы кнопок.
 
-typedef enum
+typedef enum //-V2521
 {
     B_Empty     = 0x00,     // кнопка не нажата
     B_ChannelA  = 0x01,     // КАНАЛ 1

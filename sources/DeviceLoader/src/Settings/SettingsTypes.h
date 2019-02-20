@@ -89,7 +89,7 @@ typedef enum
 } ENumMinMax;
 
 // Количество точек для расчёта сглаживания.
-enum NumSmoothing
+enum NumSmoothing //-V2521
 {
     ENumSmooth_Disable,
     ENumSmooth_2points = 1,

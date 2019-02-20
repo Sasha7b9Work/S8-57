@@ -103,5 +103,7 @@ namespace Osci
         static void PrepareNewFrameP2P();
         /// Возвращает фрейм поточечного вывода
         static DataP2P *GetFrameP2P();
+
+        static int NumElementsInStorage();
     };
 }

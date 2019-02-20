@@ -1,13 +1,16 @@
 #pragma once
 
-#define RAM_NUM_SIGNAL Memory::RAM::currentSignal
 
-
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 namespace Memory
 {
     namespace RAM
     {
+        /// Установить текущим следующий сигнал
+        void SelectNextSignal();
+        /// Установить текущим предыдущий сигнал
+        void SelectPrevSignal();
         /// Текущий номер сигнала в режиме ПОСЛЕДНИЕ
-        extern int currentSignal;
+        int16 CurrentSignal();
     }
 }

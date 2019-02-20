@@ -44,7 +44,7 @@ typedef struct
 
 // ВременнЫе настройки
 typedef struct
-{
+{ //-V802
     TBase           tBase;                  // Масштаб по времени.
     uint8           notUsed0;
     int16           tShiftRel;              // Смещение по времени
@@ -121,7 +121,7 @@ typedef struct
 
 // Эти настройки меняются через МЕНЮ -> СЕРВИС
 typedef struct
-{
+{ //-V802
     bool                screenWelcomeEnable;    // Будет ли показываться экран приглашения при включении прибора.
     bool                soundEnable;            // Включены ли звуки.
     int16               soundVolume;            // Громкость звука [0...100]
@@ -177,7 +177,7 @@ typedef struct
 
 // Настройки отладчика
 typedef  struct
-{
+{ //-V802
     // некоторые настройки хранятся в SettingsNonReset
 
     int16   numStrings;                 // Число строк в консоли.

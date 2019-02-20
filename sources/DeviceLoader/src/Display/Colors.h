@@ -93,7 +93,7 @@ public:
 
     /// Если forced == false, то инициализация происходит только при первом вызове функции
     void Init(bool forced);
-    void SetBrightness(float brightness = -1.0f);
+    void SetBrightness(float brightness = -1.0F);
     void BrightnessChange(int delta);
     void ComponentChange(int delta);
 private:
@@ -110,7 +110,7 @@ private:
 
 #ifdef STM32F429xx
 
-#define MAKE_COLOR(r, g, b) ((col_val)(b + (g << 8) + (r << 16)))
+#define MAKE_COLOR(r, g, b) ((col_val)((b) + ((g) << 8) + ((r) << 16)))
 #define R_FROM_COLOR(color) (((col_val)(color) >> 16) & 0xff)
 #define G_FROM_COLOR(color) (((col_val)(color) >> 8)  & 0xff)
 #define B_FROM_COLOR(color) (((col_val)(color))       & 0xff)

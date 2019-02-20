@@ -47,10 +47,10 @@ public:
     static void DrawVPointLine(int x, int y0, int y1, float delta);
     /// \brief Нарисовать numLines вертикальных линий, состоящих из count точек каждая с расстоянием между точками delta. Горизонтальная координата
     /// первой точки каждой линии соответствует очередному элементу массива x[]
-    static void DrawMultiVPointLine(int numLines, int y, uint16 x[], int delta, int count, Color color = Color::NUMBER);
+    static void DrawMultiVPointLine(int numLines, int y, const uint16 *x, int delta, int count, Color color = Color::NUMBER);
     /// \brief Нарисовать numLines горизонтальных линий, состоящих из count точек каждая с расстоянием между точками delta. Вертикальная координата
     /// первой точки каждой линии соответствует очередному элементу массива y[]
-    static void DrawMultiHPointLine(int numLines, int x, uint8 y[], int delta, int count, Color color = Color::NUMBER);
+    static void DrawMultiHPointLine(int numLines, int x, const uint8 *y, int delta, int count, Color color = Color::NUMBER);
     /// Нарисовать горизонтальную линию
     static void DrawHLine(int y, int x0, int x1, Color color = Color::NUMBER);
     /// Нарисовать вертикальную линию
@@ -73,9 +73,9 @@ public:
 
     static col_val ReduceBrightness(col_val colorValue, float newBrightness);
     /// Нарисовать массив вертикальных линий. Линии рисуются одна за другой. y0y1 - массив вертикальных координат.
-    static void DrawVLineArray(int x, int numLines, uint8 *y0y1, Color color);
+    static void DrawVLineArray(int x, int numLines, const uint8 *y0y1, Color color);
     /// modeLines - true - точками, false - точками.
-    static void DrawSignal(int x, uint8 data[281], bool modeLines);
+    static void DrawSignal(int x, const uint8 data[281], bool modeLines);
 
     static void DrawPicture(int x, int y, int width, int height, uint8 *address);
 
@@ -158,8 +158,8 @@ private:
 };
 
 
-#define WRITE_BYTE(offset, value)   *(command + offset) = (uint8)value
-#define WRITE_SHORT(offset, value)  *((uint16 *)(command + offset)) = (uint16)value
+#define WRITE_BYTE(offset, value)   *(command + (offset)) = (uint8)value
+#define WRITE_SHORT(offset, value)  *((uint16 *)(command + (offset))) = (uint16)value
 
 /** @} @}
  */

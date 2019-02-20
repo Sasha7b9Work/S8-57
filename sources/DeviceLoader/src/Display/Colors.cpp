@@ -147,11 +147,11 @@ void ColorType::Init(bool forced)
 
         SetBrightness();
         
-        if (red == 0.0f && green == 0.0f && blue == 0.0f)
+        if (red == 0.0F && green == 0.0F && blue == 0.0F) //-V550
         {
-            stepRed = 0.31f;
-            stepGreen = 0.63f;
-            stepBlue = 0.31f;
+            stepRed = 0.31F;
+            stepGreen = 0.63F;
+            stepBlue = 0.31F;
         }
     }
 }
@@ -201,15 +201,15 @@ void ColorType::SetBrightness(float bright)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void ColorType::BrightnessChange(int delta)
 {
-    if ((delta > 0 && brightness == 1.0f) || (delta < 0 && brightness == 0.0f))
+    if ((delta > 0 && brightness == 1.0F) || (delta < 0 && brightness == 0.0F)) //-V550
     {
         return;
     }
 
     int sign = Sign(delta);
 
-    brightness += sign * 0.01f;
-    LIMITATION(brightness, 0.0f, 1.0f);
+    brightness += sign * 0.01F;
+    LIMITATION(brightness, 0.0F, 1.0F); //-V2516
 
     red += sign * stepRed;
     green += sign * stepGreen;
@@ -217,20 +217,20 @@ void ColorType::BrightnessChange(int delta)
 
     SetColor();
 
-    if (stepRed < 0.01f && stepGreen < 0.01f && stepBlue < 0.01f)
+    if (stepRed < 0.01F && stepGreen < 0.01F && stepBlue < 0.01F)
     {
-        stepRed = 0.31f;
-        stepGreen = 0.63f;
-        stepBlue = 0.31f;
+        stepRed = 0.31F;
+        stepGreen = 0.63F;
+        stepBlue = 0.31F;
     }
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void ColorType::CalcSteps()
 {
-    stepRed = red / (brightness * 100.0f);
-    stepGreen = green / (brightness * 100.0f);
-    stepBlue = blue / (brightness * 100.0f);
+    stepRed = red / (brightness * 100.0F);
+    stepGreen = green / (brightness * 100.0F);
+    stepBlue = blue / (brightness * 100.0F);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -243,14 +243,14 @@ void ColorType::SetColor()
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void ColorType::ComponentChange(int delta)
 {
-    static const float maxs[4] = {0.0f, 31.0f, 63.0f, 31.0f};
+    static const float maxs[4] = {0.0F, 31.0F, 63.0F, 31.0F};
     float * const pointers[4] = {0, &blue, &green, &red};
     int8 index = currentField;
 
     if (index >= 1 && index <= 3)
     {
         *(pointers[index]) += (float)Sign(delta);
-        Limitation<float>(pointers[index], 0.0f, maxs[index]);
+        Limitation<float>(pointers[index], 0.0F, maxs[index]);
     }
 
     SetColor();
