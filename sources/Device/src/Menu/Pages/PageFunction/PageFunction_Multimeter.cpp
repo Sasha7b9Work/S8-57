@@ -164,12 +164,51 @@ DEF_CHOICE_2(cZero,
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void OnChanged_Calibration(bool)
+static void OnPress_Calibrate0()
 {
-
+    Multimeter::Calibrate(0);
 }
 
+DEF_BUTTON( bCalibrate0,
+    "Калибр 0", "Calibrate 0",
+    "",
+    "",
+    pageMultimeter, FuncActive, OnPress_Calibrate0, Button::FuncDraw
+)
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+static void OnPress_Calibrate1()
+{
+    Multimeter::Calibrate(1);
+}
+
+DEF_BUTTON( bCalibrate1,
+    "Калибр 1", "Calibrate 1",
+    "",
+    "",
+    pageMultimeter, FuncActive, OnPress_Calibrate1, Button::FuncDraw
+)
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static int8 calibration = 0;
+
+static void OnChanged_Calibration(bool)
+{
+    PageBase *page = (PageBase *)&pageMultimeter;
+
+    Control **items = (Control **)page->items;
+
+    if (calibration == 0)
+    {
+        items[2] = (Control *)&cAVP;
+        items[3] = (Control *)&cZero;
+    }
+    else
+    {
+        items[2] = (Control *)&bCalibrate0;
+        items[3] = (Control *)&bCalibrate1;
+    }
+}
 
 DEF_CHOICE_2( cCalibration,
     "Калибровка", "Calibration",
@@ -192,7 +231,7 @@ static void OnPress_Page(bool enter)
     Device::State::SetMode(enter ? Device::Mode::Multimeter : Device::Mode::Osci);
 }
 
-DEF_PAGE_4( pageMultimeter, // -V641
+DEF_PAGE_7( pageMultimeter, // -V641
     "МУЛЬТИМЕТР", "MULTIMETER",
     "Управление прибором в режиме мультиметра",
     "Instrument control in multimeter mode",
@@ -200,7 +239,9 @@ DEF_PAGE_4( pageMultimeter, // -V641
     &cRangesVoltageDC,
     &cAVP,
     &cZero,
-    //&cCalibration,
+    0,
+    &bCalibrate0,
+    &bCalibrate1,
     Page::Name::Function_Multimeter, PageFunction::pointer, FuncActive, OnPress_Page, FuncDrawPage, FuncRegSetPage
 )
 

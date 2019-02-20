@@ -30,6 +30,8 @@ namespace Multimeter
     /// Сообщает мультиметру, что произошло изменение режима и нужно дождаться результата измерения перед выводом
     void ChangeMode();
 
+    void Calibrate(int calibr);
+
     void ChangeAVP();
     /// Режим измерений мультиметра
     struct Measure

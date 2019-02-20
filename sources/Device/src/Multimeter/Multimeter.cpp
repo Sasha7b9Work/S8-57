@@ -24,9 +24,18 @@ namespace Multimeter
         {
             HAL::USART3_::Init(recvCallback);
         }
-        static void Transmit(void *_buffer, uint size, uint timeout)
+        static void Transmit(void *_buffer, uint timeout)
         {
-            HAL::USART3_::Transmit(_buffer, size, timeout);
+            uint8 *pointer = (uint8 *)_buffer;
+
+            uint size = 0;
+            while (*pointer != 0x0a)
+            {
+                size++;
+                pointer++;
+            }
+
+            HAL::USART3_::Transmit(_buffer, size + 1, timeout);
         }
         static void StartReceiveIT(void *_buffer)
         {
@@ -69,9 +78,9 @@ void Multimeter::Init()
 {
     USART3_::Init(ReceiveCallback);
 
-    uint8 send[4] = { 0x02, 'V', '0', 0x0a };
+    uint8 send[] = { 0x02, 'V', '0', 0x0a };
 
-    USART3_::Transmit(send, 4, 10);
+    USART3_::Transmit(send, 10);
 
     USART3_::StartReceiveIT(bufferUART);
 }
@@ -87,11 +96,19 @@ void Multimeter::ChangeAVP()
 {
     ChangeMode();
 
-    char send[4] = { 0x02, 'Z', MULTI_AVP == AVP::On ? '1' : '0', 0x0a };
+    char send[] = { 0x02, 'Z', MULTI_AVP == AVP::On ? '1' : '0', 0x0a };
 
-    USART3_::Transmit(send, 4, 100);
+    USART3_::Transmit(send, 100);
 
     USART3_::StartReceiveIT(bufferUART);
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Multimeter::Calibrate(int calibr)
+{
+    //char send[] = { 0x02, 'K', 'A', 'L', 'I', 'B', (calibr == 0) ? '0' : '1', 0x0a };
+    //
+    //USART3_::Transmit(send, )
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -115,9 +132,9 @@ void Multimeter::Update()
 
     char symbol = Measure(MULTI_MEASURE).Symbol();
 
-    uint8 send[4] = {0x02, (uint8)symbol, (uint8)(range + 0x30), 0x0a};
+    uint8 send[] = {0x02, (uint8)symbol, (uint8)(range + 0x30), 0x0a};
 
-    USART3_::Transmit(send, 4, 100);
+    USART3_::Transmit(send, 100);
 
     USART3_::StartReceiveIT(bufferUART);
 }
