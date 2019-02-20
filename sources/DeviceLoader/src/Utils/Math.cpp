@@ -38,9 +38,9 @@ void Math::Smoothing(uint8 *data, int numPoints, int numSmooth)
 
     for (int i = 1; i < numPoints; i++)
     {
-        buffer[i] = 0.0f;
+        buffer[i] = 0.0F; //-V522
 
-        num[i] = 0;
+        num[i] = 0; //-V522
         for (int j = -numSmooth / 2; j < numSmooth / 2; j++)
         {
             int index = i + j;
@@ -54,7 +54,7 @@ void Math::Smoothing(uint8 *data, int numPoints, int numSmooth)
     
     for (int i = 1; i < numPoints; i++)
     {
-        data[i] = (uint8)(buffer[i] / num[i] + 0.5f);
+        data[i] = (uint8)(buffer[i] / num[i] + 0.5F);
     }
 
     std::free(buffer);
@@ -171,31 +171,6 @@ float Math::GetIntersectionWithHorizontalLine(int x0, int y0, int x1, int y1, in
     }
 
     return (yHorLine - y0) / ((float)(y1 - y0) / (float)(x1 - x0)) + x0;
-}
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------
-void Math::CalculateMathFunction(float *dataAandResult, float *dataB, int numPoints)
-{
-    if (MATH_FUNC_IS_SUM)
-    {
-        int delta = dataB - dataAandResult;
-        float *end = &dataAandResult[numPoints];
-        while (dataAandResult < end)
-        {
-            *dataAandResult += *(dataAandResult + delta);
-            dataAandResult++;
-        }
-    }
-    else if (MATH_FUNC_IS_MUL)
-    {
-        int delta = dataB - dataAandResult;
-        float *end = &dataAandResult[numPoints];
-        while (dataAandResult < end)
-        {
-            *dataAandResult *= *(dataAandResult + delta);
-            dataAandResult++;
-        }
-    }
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -336,7 +311,7 @@ uint8 Math::MinFromArray_RAM(const uint16 *data, int firstPoint, int lastPoint)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-int Math::FindAnotherElement(uint8 *data, uint8 value, int numElements)
+int Math::FindAnotherElement(const uint8 *data, uint8 value, int numElements)
 {
     for (int i = 0; i < numElements; i++)
     {
@@ -359,8 +334,8 @@ int Math::DigitsInIntPart(float value)
     do
     {
         ++num;
-        absValue /= 10.0f;
-    } while (absValue >= 1.0f);
+        absValue /= 10.0F;
+    } while (absValue >= 1.0F);
 
     return num;
 }
@@ -375,10 +350,10 @@ float Math::RoundFloat(float value, int numDigits)
     if (digsInInt < numDigits)  // Подстрахуемся
     {
         int pow = Pow10(numDigits - digsInInt);
-        absValue = ((int)(absValue * pow + 0.5f)) / (float)pow;
+        absValue = ((int)(absValue * pow + 0.5F)) / (float)pow;
     }
 
-    return value > 0.0f ? absValue : -absValue;
+    return value > 0.0F ? absValue : -absValue;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------

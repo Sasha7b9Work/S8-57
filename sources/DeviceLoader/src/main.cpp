@@ -31,7 +31,7 @@ typedef void(*pFunction)();
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-MainStruct *ms;
+MainStruct *ms; //-V707
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -42,7 +42,7 @@ void Upgrade();
 int main()
 {
     ms = (MainStruct *)malloc(sizeof(MainStruct));
-    ms->percentUpdate = 0.0f;
+    ms->percentUpdate = 0.0F; //-V522
     
     CPU::Init();
 
@@ -77,7 +77,7 @@ int main()
         NVIC_SystemReset();
     }
 
-    if (ms->state == State_Mount)                           // Это означает, что диск удачно примонтирован
+    if (ms->state == State_Mount)                           // Это означает, что диск удачно примонтирован //-V774
     {
         if (CPU::FDrive::FileExist(FILE_NAME))                    // Если на диске обнаружена прошивка
         {
@@ -105,12 +105,16 @@ int main()
             ms->state = State_NotFile;
         }
     }
-    else if (ms->state == State_WrongFlash) // Диск не удалось примонтировать
+    else if (ms->state == State_WrongFlash) // Диск не удалось примонтировать //-V774
     {
         Timer::PauseOnTime(5000);
     }
+    else
+    {
+        // здесь ничего
+    }
 
-    ms->state = State_Ok;
+    ms->state = State_Ok; //-V774 //-V519
 
     Timer::Disable(kTemp);
 
@@ -132,6 +136,8 @@ int main()
     __set_MSP(*(__IO uint *)MAIN_PROGRAM_START_ADDRESS);
     __enable_irq();
     JumpToApplication();
+
+    return 0;
 }
 
 
@@ -155,7 +161,7 @@ void Upgrade()
         size -= readedBytes;
         address += (uint)readedBytes;
 
-        ms->percentUpdate = 1.0f - (float)size / fullSize;
+        ms->percentUpdate = 1.0F - (float)size / fullSize;
     }
     
     CPU::FDrive::CloseOpenedFile();

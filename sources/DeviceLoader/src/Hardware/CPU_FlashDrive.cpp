@@ -57,7 +57,7 @@ void CPU::FDrive::Init()
     ms->drive.connection = 0;
     ms->drive.active = 0;
 
-    if (FATFS_LinkDriver(&USBH_Driver, ms->drive.USBDISKPath) == FR_OK)
+    if (FATFS_LinkDriver(&USBH_Driver, ms->drive.USBDISKPath) == FR_OK) //-V2001
     {
         USBH_StatusTypeDef res = USBH_Init(&handleUSBH, USBH_UserProcess, 0);
         res = USBH_RegisterClass(&handleUSBH, USBH_MSC_CLASS);
@@ -92,6 +92,7 @@ void USBH_UserProcess(USBH_HandleTypeDef *, uint8 id)
             break;
 
         default:
+            // ничего не делаем
             break;
     }
 }
@@ -129,7 +130,7 @@ static void ToLower(char *str)
 
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-bool CPU::FDrive::FileExist(char *fileName)
+bool CPU::FDrive::FileExist(const char *fileName)
 {
     char nameFile[255];
     char file[255];
@@ -238,7 +239,7 @@ static bool GetNextNameFile(char *nameFileOut, StructForReadDir *s)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-int CPU::FDrive::OpenFileForRead(char *fileName)
+int CPU::FDrive::OpenFileForRead(const char *fileName)
 {
     if (f_open(&ms->drive.file, fileName, FA_READ) == FR_OK)
     {

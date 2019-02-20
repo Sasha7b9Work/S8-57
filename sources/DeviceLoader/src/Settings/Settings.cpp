@@ -88,10 +88,10 @@ static const Settings defaultSettings =
         { CursCntrl_Disable, CursCntrl_Disable },   // CursCntrl T
         A,                                          // source
         {0},
-        {{60.0f,  140.0f}, {60.0f, 140.0f}},        // posCur U
-        {{80.0f,  200.0f}, {80.0f, 200.0f}},        // posCur T
-        { 80.0f,  80.0f },                          // расстояние между курсорами напряжения для 100%
-        { 120.0f, 120.0f },                         // расстояние между курсорами времени для 100%
+        {{60.0F,  140.0F}, {60.0F, 140.0F}},        // posCur U
+        {{80.0F,  200.0F}, {80.0F, 200.0F}},        // posCur T
+        { 80.0F,  80.0F },                          // расстояние между курсорами напряжения для 100%
+        { 120.0F, 120.0F },                         // расстояние между курсорами времени для 100%
         CursMovement_Pixels,                        // CursMovement
         CursActive_None,                            // CursActive
         { CursLookMode_None, CursLookMode_None },   // Режим слежения курсоров.

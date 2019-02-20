@@ -99,9 +99,9 @@ public:
     public:
         static bool Update();
 
-        static bool FileExist(char *fileName);
+        static bool FileExist(const char *fileName);
         /// Открывает файл для чтения. Возвращает размер файла
-        static int OpenFileForRead(char *fileName);
+        static int OpenFileForRead(const char *fileName);
         /// Считывает из открытого файла numBytes байт. Возвращает число реально считанных байт
         static int ReadFromFile(int numBytes, uint8 *buffer);
 
