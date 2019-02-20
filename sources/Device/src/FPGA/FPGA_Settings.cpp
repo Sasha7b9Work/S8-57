@@ -144,8 +144,6 @@ static void LoadRandomize()
     }
     FPGA::pred = (uint16)Pred;
 
-    LOG_WRITE("post = %d", FPGA::post);
-
     FPGA::post = (uint16)(~(FPGA::post + 1));
     FPGA::pred = (uint16)(~(FPGA::pred));
 

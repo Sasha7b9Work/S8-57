@@ -54,6 +54,7 @@
 #define SYMBOL_FLASH_DRIVE      '\x80'  ///< Символ флешки внизу экрана
 #define SYMBOL_ETHERNET         '\x82'  ///< Символ Ethernet внизу экрана
 #define SYMBOL_USB              '\x84'  ///< Символ USB внизу экрана
+#define SYMBOL_ARROW_RIGHT      '\x64'
 #define SYMBOL_TAB              '\x6e'
 #define SYMBOL_MATH_FUNC_MUL    '\x8a'  ///< МАТЕМАТИКА-ФУНКЦИЯ-УМНОЖЕНИЕ
 #define SYMBOL_PEAK_DET_LEFT    '\x12'  ///< Левая часть значка пикового детектора

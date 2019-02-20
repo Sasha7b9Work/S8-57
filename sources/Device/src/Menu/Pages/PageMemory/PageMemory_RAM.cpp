@@ -32,7 +32,7 @@ static void OnPress_Last_Next()
 static void Draw_Last_Next(int x, int y)
 {
     Font::SetCurrent(Font::Type::_UGO2);
-    Char('\x64').Draw4SymbolsInRect(x + 2, y + 2);
+    Char(SYMBOL_ARROW_RIGHT).Draw4SymbolsInRect(x + 2, y + 2);
     Font::SetCurrent(Font::Type::_8);
 }
 
@@ -52,7 +52,7 @@ static void OnPress_Last_Prev()
 static void Draw_Last_Prev(int x, int y)
 {
     Font::SetCurrent(Font::Type::_UGO2);
-    Char(SYMBOL_BACKSPACE).Draw(x + 2, y + 2);
+    Char(SYMBOL_BACKSPACE).Draw4SymbolsInRect(x + 2, y + 2);
     Font::SetCurrent(Font::Type::_8);
 }
 
@@ -164,13 +164,13 @@ static bool HandlerKey_RAM(KeyEvent /*event*/)
     return true;
 }
 
-DEF_PAGE_4( pageRAM, // -V641 // -V1027                                                                                                                          //--- ПАМЯТЬ - ПОСЛЕДНИЕ ---
+DEF_PAGE_2( pageRAM, // -V641 // -V1027                                                                                                                          //--- ПАМЯТЬ - ПОСЛЕДНИЕ ---
     "ПОСЛЕДНИЕ", "LATEST",
     "Переход в режим работы с последними полученными сигналами",
     "Transition to an operating mode with the last received signals",
     &bLast_Next,                        ///< ПАМЯТЬ - ПОСЛЕДНИЕ - Следующий
     &bLast_Prev,                        ///< ПАМЯТЬ - ПОСЛЕДНИЕ - Предыдущий
-    &bLast_SaveToROM,                   ///< ПАМЯТЬ - ПОСЛЕДНИЕ - Внутр ЗУ
-    &bLast_SaveToDrive,                 ///< ПАМЯТЬ - ПОСЛЕДНИЕ - Сохранить
+    //&bLast_SaveToROM,                   ///< ПАМЯТЬ - ПОСЛЕДНИЕ - Внутр ЗУ
+    //&bLast_SaveToDrive,                 ///< ПАМЯТЬ - ПОСЛЕДНИЕ - Сохранить
     Page::Name::SB_Memory_Last, PageMemory::pointer, FuncActive, OnPress_RAM, OnDraw_RAM, HandlerKey_RAM
 )
