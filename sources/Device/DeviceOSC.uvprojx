@@ -766,6 +766,16 @@
               <FilePath>.\src\Hardware\Memory.h</FilePath>
             </File>
             <File>
+              <FileName>RAM.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\RAM.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>RAM.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Hardware\RAM.h</FilePath>
+            </File>
+            <File>
               <FileName>Timer.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Hardware\Timer.cpp</FilePath>

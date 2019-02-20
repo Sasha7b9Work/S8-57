@@ -228,7 +228,6 @@ union BitSet64
 #define SHOW_STRING_NAVIGATION  (gBF.temporaryShowStrNavi)
 #define NUM_ROM_SIGNAL          (gBF.currentNumROMSignal)
 #define RUN_FPGA_BEFORE_SB      (gBF.runningFPGAbeforeDrawButtons)
-#define NUM_RAM_SIGNAL          (gBF.currentNumRAMSignal)
 #define EXIT_FROM_ROM_TO_RAM    (gBF.exitFromROMtoRAM)
 #define FPGA_NEED_AUTO_FIND     (gBF.FPGAneedAutoFind)
 #define ALWAYS_SHOW_ROM_SIGNAL  (gBF.alwaysShowROMSignal)
@@ -246,7 +245,6 @@ union BitSet64
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 struct BitField
 {
-    int16 currentNumRAMSignal;              ///< Текущий номер последнего сигнала в режиме ПАМЯТЬ - Последние.
     int8 currentNumROMSignal;               ///< Текущий номер сигнала, сохранённого в ППЗУ.
     uint showHelpHints : 1;                 ///< Если 1, то при нажатии кнопки вместо выполнения её фунции выводится подсказка о её назначении.
     uint showDebugMenu : 1;

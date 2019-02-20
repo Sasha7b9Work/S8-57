@@ -200,13 +200,13 @@ static void OnChanged_Calibration(bool)
 
     if (calibration == 0)
     {
-        items[2] = (Control *)&cAVP;
-        items[3] = (Control *)&cZero;
+        items[2] = (Control *)&cAVP; //-V641
+        items[3] = (Control *)&cZero; //-V641
     }
     else
     {
-        items[2] = (Control *)&bCalibrate0;
-        items[3] = (Control *)&bCalibrate1;
+        items[2] = (Control *)&bCalibrate0; //-V641 //-V1027
+        items[3] = (Control *)&bCalibrate1; //-V641 //-V1027
     }
 }
 
@@ -273,6 +273,10 @@ void PageFunction::PageMultimeter::OnChanged_Mode(bool)
     else if (MULTI_MEASURE == Multimeter::Measure::TestDiode)
     {
         items[1] = nullptr;
+    }
+    else
+    {
+        // здесь ничего
     }
 
     Multimeter::ChangeMode();

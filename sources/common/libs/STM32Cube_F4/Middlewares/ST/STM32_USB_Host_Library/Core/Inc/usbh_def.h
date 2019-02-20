@@ -402,7 +402,7 @@ USBH_OSEventTypeDef;
 
 /* Control request structure */
 typedef struct 
-{
+{ //-V802
   uint8_t               pipe_in; 
   uint8_t               pipe_out; 
   uint8_t               pipe_size;  

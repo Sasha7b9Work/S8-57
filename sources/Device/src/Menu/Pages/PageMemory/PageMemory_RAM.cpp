@@ -11,6 +11,7 @@
 #include "Utils/Values.h"
 
 #include "Osci/Osci.h"
+#include "Hardware/RAM.h"
 
 
 using namespace Display::Primitives;
@@ -119,7 +120,7 @@ static void OnPress_RAM(bool enter)
 {
     if (enter)
     {
-        NUM_RAM_SIGNAL = 0;
+        RAM_NUM_SIGNAL = 0;
         RUN_FPGA_BEFORE_SB = FPGA::IsRunning() ? 1U : 0U;
         Osci::Stop(false);
         MODE_WORK = ModeWork::RAM;
@@ -137,7 +138,7 @@ static void OnDraw_RAM()
     int height = 10;
     Region(width, height).Fill(Grid::Right() - width, Grid::Top(), Color::BACK);
     Rectangle(width, height).Draw(Grid::Right() - width, Grid::Top(), Color::FILL);
-    Integer(NUM_RAM_SIGNAL + 1).ToString(false, 3).Draw(Grid::Right() - width + 2, Grid::Top() + 1);
+    Integer(RAM_NUM_SIGNAL + 1).ToString(false, 3).Draw(Grid::Right() - width + 2, Grid::Top() + 1);
     String("/").Draw(Grid::Right() - width + 17, Grid::Top() + 1);
     //Integer((int)DataStorage::NumElementsInStorage()).ToString(false, 3).Draw(Grid::Right() - width + 23, Grid::Top() + 1);
 }
