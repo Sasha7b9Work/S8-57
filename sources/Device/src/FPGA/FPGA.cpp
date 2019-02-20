@@ -36,8 +36,6 @@ uint8 dataRand[Chan::Size][FPGA::MAX_NUM_POINTS];    ///< «десь будут данные ран
 /// «десь хранитс€ адрес, начина€ с которого будем читать данные по каналам. ≈сли addrRead == 0xffff, то адрес вначале нужно считать
 uint16 addrRead = 0xffff;
 
-extern const int *Kr; //-V707
-
 bool          FPGA::isRunning = false;
 uint          FPGA::timeStart = 0;
 StateWorkFPGA FPGA::fpgaStateWork = StateWorkFPGA_Stop;
@@ -162,7 +160,14 @@ void FPGA::ReadDataChanenl(Chan::E ch, uint8 data[FPGA::MAX_NUM_POINTS])
 
     if (addrRead == 0xffff)
     {
-        addrRead = (uint16)(ReadLastRecord() - (int)numPoints);
+        int k = 1;
+
+        if (Osci::InModeRandomizer())
+        {
+            k = Osci::Kr[SET_TBASE];
+        }
+
+        addrRead = (uint16)(ReadLastRecord() - (int)numPoints / k);
     }
     
     FSMC::WriteToFPGA16(WR::PRED_LO, (uint16)(addrRead));
@@ -172,7 +177,7 @@ void FPGA::ReadDataChanenl(Chan::E ch, uint8 data[FPGA::MAX_NUM_POINTS])
     uint8 *addr0 = Chan(ch).IsA() ? RD::DATA_A : RD::DATA_B;  // -V566
     uint8 *addr1 = addr0 + 1;
 
-    if (IN_RANDOMIZE_MODE)
+    if (Osci::InModeRandomizer())
     {
         ReadDataChanenlRand(ch, addr1, data);
     }

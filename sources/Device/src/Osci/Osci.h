@@ -21,4 +21,8 @@ namespace Osci
     bool InModeRandomizer();
     /// Эту функцию надо вызывать при изменении длины памяти. Ну или режима пикового детектора
     void OnChangedPoints();
+
+    extern int addShift;
+
+    extern const int Kr[];
 };

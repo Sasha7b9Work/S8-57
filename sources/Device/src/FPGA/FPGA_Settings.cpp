@@ -105,7 +105,7 @@ void FPGA::Settings::LoadCalibratorMode()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void TShift::Load()
+static void LoadReal()
 {
     FPGA::post = (uint16)(SET_TSHIFT - TShift::Min());
     int Pred = (int)FPGA_NUM_POINTS - (int)FPGA::post;
@@ -121,6 +121,41 @@ void TShift::Load()
 
     FSMC::WriteToFPGA16(WR::PRED_LO, FPGA::post);
     FSMC::WriteToFPGA16(WR::POST_LO, FPGA::pred);
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+static void LoadRandomize()
+{
+    FPGA::post = (uint16)((SET_TSHIFT - TShift::Min()) / Osci::Kr[SET_TBASE]);
+
+    int Pred = (int)FPGA_NUM_POINTS / Osci::Kr[SET_TBASE] - (int)FPGA::post;
+
+    if (Pred < 0)
+    {
+        Pred = 0;
+    }
+    FPGA::pred = (uint16)Pred;
+
+    //LOG_WRITE("pred = %d, post = %d", FPGA::pred, FPGA::post);
+
+    FPGA::post = (uint16)(~(FPGA::post + 1));
+    FPGA::pred = (uint16)(~(FPGA::pred));
+
+    FSMC::WriteToFPGA16(WR::PRED_LO, FPGA::pred);
+    FSMC::WriteToFPGA16(WR::POST_LO, FPGA::post);
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void TShift::Load()
+{
+    if (Osci::InModeRandomizer())
+    {
+        LoadRandomize();
+    }
+    else
+    {
+        LoadReal();
+    }
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

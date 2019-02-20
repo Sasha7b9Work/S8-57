@@ -26,9 +26,6 @@ extern uint8 dataRand[Chan::Size][FPGA::MAX_NUM_POINTS];
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                      //  2нс 5нс 10нс 20нс 50нс
-const int Kr[] = { 50, 20, 10,  5,   2 };
-
 volatile static int numberMeasuresForGates = 1000;
 
 
@@ -47,6 +44,10 @@ static bool CanReadData();
 namespace Osci
 {
     static void UpdateFPGA();
+
+    int addShift = 0;
+                   //  2нс 5нс 10нс 20нс 50нс
+    const int Kr[] = { 50, 20, 10,  5,   2 };
 }
 
 
@@ -135,7 +136,7 @@ void Osci::Update()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void Osci::UpdateFPGA()
 {
-    int number = (IN_RANDOMIZE_MODE) ? Kr[SET_TBASE] : 1;
+    int number = (Osci::InModeRandomizer()) ? Kr[SET_TBASE] : 1;
 
     for (int i = 0; i < number; i++)
     {
@@ -183,7 +184,7 @@ void ReadDataChanenlRand(Chan::E ch, const uint8 *address, uint8 *data) // -V250
         return;
     }
 
-    int step = Kr[SET_TBASE];
+    int step = Osci::Kr[SET_TBASE];
 
     int index = Tsm - step;
 
@@ -229,11 +230,11 @@ static int CalculateShift()
         return NULL_TSHIFT;
     }
 
-    if (IN_RANDOMIZE_MODE)
+    if (Osci::InModeRandomizer())
     {
 
         float tin = (float)(valueADC - min + deltaMIN) / (max - deltaMAX - (min + deltaMIN));
-        int retValue = (int)(tin * Kr[SET_TBASE]);
+        int retValue = (int)(tin * Osci::Kr[SET_TBASE]);
 
         return retValue;
     }
@@ -246,8 +247,6 @@ static bool CalculateGate(uint16 rand, uint16 *eMin, uint16 *eMax)
 {
     static float minGate = 0.0F;
     static float maxGate = 0.0F;
-
-    LOG_WRITE("Считано %d", rand);
 
     if (rand < 500 || rand > 4000)
     {
@@ -298,8 +297,6 @@ static bool CalculateGate(uint16 rand, uint16 *eMin, uint16 *eMax)
 
     *eMin = (uint16)(minGate);      // -V519 // -V2004
     *eMax = (uint16)(maxGate - 50); // -V519 // -V2004
-
-    LOG_WRITE("Ворота %d %d", *eMin, *eMax);
 
     if (rand < *eMin || rand > *eMax)
     {
