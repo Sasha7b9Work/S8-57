@@ -68,7 +68,7 @@ namespace Osci
         /// Возвращает true, если считано меньше точек, чем требуется для данного времени
         bool NeedAdditionPoints(uint timeMS) const;
         /// Возвращает fromEnd-й байт с конца данных
-        uint8 ByteFromEnd(Chan::E ch, uint fromEnd);
+        uint8 ByteFromEnd(Chan::E ch, int fromEnd);
         /// Возвращает количество прочитанных байт
         uint ReadingBytes() const;
         /// Заполнить буфер для отрисовки при включенном детекторе
@@ -80,7 +80,7 @@ namespace Osci
         /// Количество считанных точек
         uint readingPoints;
         /// Указатель на положение точки, которая будет считываться следующей
-        uint pointer;
+        int pointer;
         /// Время начала съёма информации. Первая точка будет поставлена через время, соответствующее TBase
         uint timeStart;
 

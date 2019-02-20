@@ -342,7 +342,7 @@ void DataP2P::FillBufferForPeakDetDisabled(Chan::E ch, Buffer *buffer)
     }
     else
     {
-        for (uint i = 0; i < NUM_BYTES; i++)
+        for (int i = 0; i < NUM_BYTES; i++)
         {
             buffer->data[NUM_BYTES - i] = ByteFromEnd(ch, i);
         }
@@ -371,18 +371,23 @@ void DataP2P::PrepareBuffer(Buffer *buffer, uint size)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-uint8 DataP2P::ByteFromEnd(Chan::E ch, uint fromEnd)
+uint8 DataP2P::ByteFromEnd(Chan::E ch, int fromEnd)
 {
-    int index = (int)(ReadingBytes() - 1 - fromEnd);
-
-    if (index < 0)
+    if (fromEnd > data.settings.SizeChannel())      // Если требуется значение, большее чем возможно сохранить
     {
         return FPGA::VALUE::NONE;
     }
 
-    if (index > (int)data.settings.SizeChannel())
-    {
+    int index = pointer;        // index будет указывать на позицию возвращаемого значения
 
+    while (fromEnd != 0)
+    {
+        fromEnd--;
+        index--;
+        if (index < 0)
+        {
+            index = data.settings.SizeChannel() - 1;
+        }
     }
 
     return data.GetData(ch)[index];

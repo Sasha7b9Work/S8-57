@@ -34,15 +34,15 @@ void DataSettings::Fill(uint8 *_dataA, uint8 * _dataB)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-uint DataSettings::SizeChannel() const
+int DataSettings::SizeChannel() const
 {
     Memory::ENumPointsFPGA points((Memory::ENumPointsFPGA::E)ENUM_POINTS(this));
-    return points.BytesInChannel(PEAKDET(this));
+    return (int)points.BytesInChannel(PEAKDET(this));
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-uint DataSettings::PointsInChannel() const
+int DataSettings::PointsInChannel() const
 {
-    return Memory::ENumPointsFPGA((Memory::ENumPointsFPGA::E)ENUM_POINTS(this)).PointsInChannel();
+    return (int)Memory::ENumPointsFPGA((Memory::ENumPointsFPGA::E)ENUM_POINTS(this)).PointsInChannel();
 }
 
