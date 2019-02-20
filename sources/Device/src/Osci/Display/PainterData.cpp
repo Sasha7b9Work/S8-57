@@ -243,42 +243,42 @@ static void DrawTPos(int leftX, int rightX)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void DrawTShift(int leftX, int rightX, int numBytes)
+static void DrawTShift(int /*leftX*/, int /*rightX*/, int /*numBytes*/)
 {
-    float scale = (float)(rightX - leftX + 1) / ((float)numBytes - (numBytes == 281 ? 1 : 0));
-    int xShift = (int)(1.5F + (TPos(TPOS).InBytes() - SET_TSHIFT.InPoints()) * scale) - 1;
-    if (SET_PEAKDET_EN && TPOS_IS_RIGHT)
-    {
-        --xShift;
-    }
-    if (FPGA_POINTS_512)
-    {
-        ++xShift;                           /// \todo Костыль
-    }
-    LIMIT_ABOVE(xShift, rightX - 2);
-
-    int dX01 = 1, dX02 = 2, dX11 = 3, dY11 = 7, dY12 = 6;
-
-    if (xShift < leftX - 2)
-    {
-        xShift = leftX - 2;
-        dX01 = 3; dX02 = 1; dY12 = 6;
-    }
-    else if (xShift > rightX - 1)
-    {
-        xShift = rightX - 2;
-        dX11 = 1;
-    }
-    else
-    {
-        dY11 = 5; dY12 = 7;
-    }
-
-    Region(6, 6).Fill((int)xShift - 1, 1, Color::BACK);
-    Region(4, 4).Fill((int)xShift, 2, Color::FILL);
-
-    Line((int)xShift + dX01, 3, (int)xShift + dX11, dY11 - 2).Draw(Color::BACK);
-    Line((int)xShift + dX02, 4, (int)xShift + 2, dY12 - 2).Draw();
+    //float scale = (float)(rightX - leftX + 1) / ((float)numBytes - (numBytes == 281 ? 1 : 0));
+    //int xShift = (int)(1.5F + (TPos(TPOS).InBytes() - SET_TSHIFT.InPoints()) * scale) - 1;
+    //if (SET_PEAKDET_EN && TPOS_IS_RIGHT)
+    //{
+    //    --xShift;
+    //}
+    //if (FPGA_POINTS_512)
+    //{
+    //    ++xShift;                           /// \todo Костыль
+    //}
+    //LIMIT_ABOVE(xShift, rightX - 2);
+    //
+    //int dX01 = 1, dX02 = 2, dX11 = 3, dY11 = 7, dY12 = 6;
+    //
+    //if (xShift < leftX - 2)
+    //{
+    //    xShift = leftX - 2;
+    //    dX01 = 3; dX02 = 1; dY12 = 6;
+    //}
+    //else if (xShift > rightX - 1)
+    //{
+    //    xShift = rightX - 2;
+    //    dX11 = 1;
+    //}
+    //else
+    //{
+    //    dY11 = 5; dY12 = 7;
+    //}
+    //
+    //Region(6, 6).Fill((int)xShift - 1, 1, Color::BACK);
+    //Region(4, 4).Fill((int)xShift, 2, Color::FILL);
+    //
+    //Line((int)xShift + dX01, 3, (int)xShift + dX11, dY11 - 2).Draw(Color::BACK);
+    //Line((int)xShift + dX02, 4, (int)xShift + 2, dY12 - 2).Draw();
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
