@@ -270,9 +270,9 @@ void PageFunction::PageMultimeter::OnChanged_Mode(bool)
     {
         items[1] = (Control *)&cRangesResistance; //-V641
     }
-    else
+    else if (MULTI_MEASURE == Multimeter::Measure::TestDiode)
     {
-        LOG_ERROR("");
+        items[1] = nullptr;
     }
 
     Multimeter::ChangeMode();
