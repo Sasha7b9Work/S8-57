@@ -124,11 +124,19 @@ static void LoadReal()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+static int GetK()
+{
+    return (-TShift::Min()) % Osci::Kr[SET_TBASE];
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void LoadRandomize()
 {
-    FPGA::post = (uint16)((SET_TSHIFT - TShift::Min()) / Osci::Kr[SET_TBASE]);
+    int k = Osci::Kr[SET_TBASE];
 
-    int Pred = (int)FPGA_NUM_POINTS / Osci::Kr[SET_TBASE] - (int)FPGA::post;
+    FPGA::post = (uint16)((SET_TSHIFT - TShift::Min() - GetK()) / k);
+
+    int Pred = (int)FPGA_NUM_POINTS / k - (int)FPGA::post;
 
     if (Pred < 0)
     {
@@ -136,13 +144,20 @@ static void LoadRandomize()
     }
     FPGA::pred = (uint16)Pred;
 
-    //LOG_WRITE("pred = %d, post = %d", FPGA::pred, FPGA::post);
+    LOG_WRITE("post = %d", FPGA::post);
 
     FPGA::post = (uint16)(~(FPGA::post + 1));
     FPGA::pred = (uint16)(~(FPGA::pred));
 
     FSMC::WriteToFPGA16(WR::PRED_LO, FPGA::pred);
     FSMC::WriteToFPGA16(WR::POST_LO, FPGA::post);
+
+    Osci::addShift = (SET_TSHIFT) % k;
+
+    if (Osci::addShift < 0)
+    {
+        Osci::addShift = k + Osci::addShift;
+    }
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

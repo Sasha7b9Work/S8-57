@@ -47,7 +47,7 @@ namespace Osci
 
     int addShift = 0;
                    //  2нс 5нс 10нс 20нс 50нс
-    const int Kr[] = { 50, 20, 10,  5,   2 };
+    const int Kr[TBase::Size] = { 50, 20, 10,  5,   2 };
 }
 
 
@@ -186,10 +186,11 @@ void ReadDataChanenlRand(Chan::E ch, const uint8 *address, uint8 *data) // -V250
 
     int step = Osci::Kr[SET_TBASE];
 
-    int index = Tsm - step;
+    int index = Tsm - Osci::addShift;
 
-    uint8 *dataRead = &dataRand[ch][0];
-    dataRead = &dataRand[ch][index];    // -V519
+    //LOG_WRITE("%d = %d - %d", index, Tsm, Osci::addShift);
+
+    uint8 *dataRead = &dataRand[ch][index];
 
     while (index < 0)
     {
