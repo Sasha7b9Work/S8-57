@@ -13,6 +13,8 @@ namespace Osci
     void Start();
 
     void Stop(bool pause = false);
+    /// Это вызываем в случае изменения настройки
+    void Restart();
     /// Возвращает true, если находится в поточечном режиме
     bool InModeP2P();
     /// Возвращает true, если работает в режиме рандомизатора

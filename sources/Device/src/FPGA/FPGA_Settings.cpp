@@ -83,6 +83,8 @@ void RShift::Load(Chan::E ch)
     }
 
     WriteRegisters(Pin::SPI3_CS1, (uint16)(mask[ch] | (shift << 2)));
+
+    Osci::Restart();
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -92,6 +94,8 @@ void Trig::Level::Load()
     uint16 value = (uint16)((Trig::Level::MAX + Trig::Level::MIN) - SET_TRIGLEV_SOURCE);
 
     WriteRegisters(Pin::SPI3_CS1, (uint16)(0xa000 | (value << 2)));
+
+    Osci::Restart();
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -251,6 +255,8 @@ void TShift::Set(int tShift)
     SET_TSHIFT.value = tShift;
 
     TShift::Load();
+
+    Osci::Restart();
 
     Osci::Display::SetFlagRedraw();
 }

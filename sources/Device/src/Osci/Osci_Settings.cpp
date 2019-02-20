@@ -51,7 +51,6 @@ void Osci::Settings::LoadHoldfOff()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Osci::Settings::TBase::Change(int delta)
 {
-    Stop();
     if (delta > 0)
     {
         ::Math::LimitationIncrease<uint8>((uint8 *)(&SET_TBASE), (uint8)(TBase::Size - 1));
@@ -69,7 +68,8 @@ void Osci::Settings::TBase::Change(int delta)
     }
 
     Load();
-    Start();
+
+    Osci::Restart();
 
     Osci::Display::SetFlagRedraw();
 }
@@ -227,6 +227,8 @@ void Osci::Settings::Range::LoadBoth()
 
     SET_BANDWIDTH_A.Load();
     SET_BANDWIDTH_B.Load();
+
+    Osci::Restart();
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -305,7 +307,7 @@ void Osci::Settings::Trig::Level::Find()
 
         const uint8 *data = IN(ch);
 
-        uint numBytes = DS->SizeChannel();
+        int numBytes = DS->SizeChannel();
 
         uint8 max = Math::MaxFromArray(data, 0, (int)numBytes - 1);
         uint8 min = Math::MinFromArray(data, 0, (int)numBytes - 1);
