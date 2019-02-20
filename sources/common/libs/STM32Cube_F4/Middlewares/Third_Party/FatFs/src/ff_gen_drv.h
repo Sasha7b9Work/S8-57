@@ -82,7 +82,7 @@ typedef struct
   * @brief  Global Disk IO Drivers structure definition
   */
 typedef struct
-{
+{ //-V802
   uint8_t                 is_initialized[_VOLUMES];
   const Diskio_drvTypeDef *drv[_VOLUMES];
   uint8_t                 lun[_VOLUMES];

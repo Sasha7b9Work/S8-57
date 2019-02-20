@@ -69,18 +69,18 @@ static void InitHardware()
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Display::Init()
 {
-    ms->display.value = 0.0f;
+    ms->display.value = 0.0F;
     ms->display.isRun = false;
     ms->display.timePrev = 0;
-    ms->display.direction = 10.0f;
+    ms->display.direction = 10.0F;
 
     Color::InitGlobalColors();
 
     for (int i = 0; i < 14; i++)
     {
-        float red = i / 14.0f * 31.0f + 0.5f;
-        float green = i / 14.0f * 63.0f + 0.5f;
-        float blue = i / 14.0f * 31.0f + 0.5f;
+        float red = i / 14.0F * 31.0F + 0.5F;
+        float green = i / 14.0F * 63.0F + 0.5F;
+        float blue = i / 14.0F * 31.0F + 0.5F;
         set.display.colors[i + 2] = (uint16)MAKE_COLOR((int)red, (int)green, (int)blue);
     }
 
@@ -98,7 +98,7 @@ void Display::Init()
 
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-static void DrawButton(int x, int y, char *text)
+static void DrawButton(int x, int y, const char *text)
 {
     int width = 25;
     int height = 20;
@@ -157,6 +157,10 @@ void Display::Update()
         Painter::FillRegion(20, 130, width, height);
         Painter::DrawRectangle(20, 130, fullWidth, height);
     }
+    else
+    {
+        // ничего нет
+    }
 
     Painter::EndScene();
     ms->display.isRun = false;
@@ -175,15 +179,19 @@ void DrawProgressBar(uint dT)
 
     ms->display.value += step;
 
-    if (ms->display.direction > 0.0f && ms->display.value > WIDTH)
+    if (ms->display.direction > 0.0F && ms->display.value > WIDTH)
     {
         ms->display.direction = -ms->display.direction;
         ms->display.value -= step;
     }
-    else if (ms->display.direction < 0.0f && ms->display.value < 0)
+    else if (ms->display.direction < 0.0F && ms->display.value < 0)
     {
         ms->display.direction = -ms->display.direction;
         ms->display.value -= step;
+    }
+    else
+    {
+        // ничего нет
     }
 
     int dH = 15;
@@ -219,28 +227,28 @@ static void DrawBigMNIPI()
 
     uint time = TIME_MS - startTime;
 
-    int numColor = (int)(time / (float)TIME_WAIT * 14.0f);
+    int numColor = (int)(time / (float)TIME_WAIT * 14.0F);
     Limitation(&numColor, 0, 13);
 
     Painter::SetColor((Color)((uint8)(numColor + 2)));
 
-    float amplitude = 3.0f - (time / (TIME_WAIT / 2.0f)) * 3;
-    LIMIT_BELOW(amplitude, 0.0f);
-    float frequency = 0.05f;
+    float amplitude = 3.0F - (time / (TIME_WAIT / 2.0F)) * 3;
+    LIMIT_BELOW(amplitude, 0.0F);
+    float frequency = 0.05F;
 
-    float radius = 5000.0f * (TIME_WAIT) / 3000.0f / time;
+    float radius = 5000.0F * (TIME_WAIT) / 3000.0F / time;
     LIMIT_BELOW(radius, 0);
 
     float shift[240];
 
     for (int i = 0; i < 240; i++)
     {
-        shift[i] = WAVE_OR_ALL ? amplitude * std::sinf(frequency * time + i / 5.0f) : 0;
+        shift[i] = WAVE_OR_ALL ? amplitude * std::sinf(frequency * time + i / 5.0F) : 0;
     }
 
     for (int i = 0; i < numPoints; i++)
     {
-        int x = array[i].x + (VAGUE_OR_ALL ? RandValue((int)-radius, (int)radius) : 0) + (int)shift[array[i].y];
+        int x = array[i].x + (VAGUE_OR_ALL ? RandValue((int)-radius, (int)radius) : 0) + (int)shift[array[i].y]; //-V537
         int y = array[i].y + (VAGUE_OR_ALL ? RandValue((int)-radius, (int)radius) : 0);
         if (x > 0 && x < 319 && y > 0 && y < 239)
         {
