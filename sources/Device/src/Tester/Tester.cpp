@@ -3,6 +3,7 @@
 #include "Hardware/HAL/HAL.h"
 #include "Osci/Osci.h"
 #include "Settings/Settings.h"
+#include <stm32f4xx_hal.h>
 
 
 using namespace FPGA::Settings;

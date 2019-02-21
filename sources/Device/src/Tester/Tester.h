@@ -26,7 +26,7 @@ namespace Tester
 
     void Enable();
 
-    static void Disable();
+    void Disable();
 
     void Update();
 

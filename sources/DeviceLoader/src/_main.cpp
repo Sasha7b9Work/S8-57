@@ -14,6 +14,7 @@
     Далее выполняется переход по адресу, указанному в 0x0802004 (второе 32х-битное слово в таблице векторов, расположенной по адресу 0x0802000)
 */
 
+#include "defines.h"
 #include <ff.h>
 #include "main.h"
 #include "Hardware/CPU.h"
@@ -24,37 +25,24 @@
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-#define FILE_NAME "S8-54.bin"
+#define FILE_NAME "S8-57.bin"
 
 typedef void(*pFunction)();
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-MainStruct *ms;
+MainStruct *ms; //-V707
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void Upgrade();
 
 
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 int main()
 {
-    __disable_irq();
-    // Теперь переходим на основную программу
-    pFunction JumpToApplication;
-
-    JumpToApplication = (pFunction)(*(__IO uint *)(MAIN_PROGRAM_START_ADDRESS + 4));
-    __set_MSP(*(__IO uint *)MAIN_PROGRAM_START_ADDRESS);
-    __enable_irq();
-    JumpToApplication();
-}
-
-
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-int _main()
-{
     ms = (MainStruct *)malloc(sizeof(MainStruct));
-    ms->percentUpdate = 0.0f;
+    ms->percentUpdate = 0.0F; //-V522
     
     CPU::Init();
 
@@ -86,44 +74,47 @@ int _main()
         (ms->drive.active && ms->state != State_Mount))     // или перешла в активное состояние, по почему-то не запустился процесс монтирования
     {
         free(ms);
-#ifndef MSVC
         NVIC_SystemReset();
-#endif
     }
 
-    if (ms->state == State_Mount)                           // Это означает, что диск удачно примонтирован
+    if (ms->state == State_Mount)                           // Это означает, что диск удачно примонтирован //-V774
     {
         if (CPU::FDrive::FileExist(FILE_NAME))                    // Если на диске обнаружена прошивка
         {
-            ms->state = State_RequestAction;
-            
-            while (1)
-            {
-                PanelButton button = CPU::Panel::PressedButton();
-                if (button == B_F1)
-                {
-                    ms->state = State_Upgrade;
-                    Upgrade();
-                    break;
-                }
-                else if (button == B_F5)
-                {
-                    ms->state = State_Ok;
-                    break;
-                }
-            }
+            //ms->state = State_RequestAction;
+            //
+            //while (1)
+            //{
+            //    PanelButton button = CPU::Panel::PressedButton();
+            //    if (button == B_F1)
+            //    {
+            //        ms->state = State_Upgrade;
+            //        Upgrade();
+            //        break;
+            //    }
+            //    else if (button == B_F5)
+            //    {
+            //        ms->state = State_Ok;
+            //        break;
+            //    }
+            //}
+            Upgrade();
         }
         else
         {
             ms->state = State_NotFile;
         }
     }
-    else if (ms->state == State_WrongFlash) // Диск не удалось примонтировать
+    else if (ms->state == State_WrongFlash) // Диск не удалось примонтировать //-V774
     {
         Timer::PauseOnTime(5000);
     }
+    else
+    {
+        // здесь ничего
+    }
 
-    ms->state = State_Ok;
+    ms->state = State_Ok; //-V774 //-V519
 
     Timer::Disable(kTemp);
 
@@ -137,8 +128,6 @@ int _main()
 
     free(ms);
 
-#ifndef _WIN32
-    
     __disable_irq();
     // Теперь переходим на основную программу
     pFunction JumpToApplication;
@@ -148,8 +137,6 @@ int _main()
     __enable_irq();
     JumpToApplication();
 
-#endif
-    
     return 0;
 }
 
@@ -174,7 +161,7 @@ void Upgrade()
         size -= readedBytes;
         address += (uint)readedBytes;
 
-        ms->percentUpdate = 1.0f - (float)size / fullSize;
+        ms->percentUpdate = 1.0F - (float)size / fullSize;
     }
     
     CPU::FDrive::CloseOpenedFile();

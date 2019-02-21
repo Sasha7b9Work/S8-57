@@ -142,7 +142,7 @@ void Device::State::SetMode(Mode::E mode)
         currentMode = mode;
 
         Osci::DeInit();
-        Tester::DeInit();
+        Tester::Disable();
         Multimeter::DeInit();
         Recorder::DeInit();
 
@@ -153,6 +153,7 @@ void Device::State::SetMode(Mode::E mode)
         else if (InModeTester())
         {
             Tester::Init();
+            Tester::Enable();
         }
         else if (InModeMultimeter())
         {
