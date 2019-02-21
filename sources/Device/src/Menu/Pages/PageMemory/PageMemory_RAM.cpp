@@ -12,6 +12,7 @@
 
 #include "Osci/Osci.h"
 #include "Hardware/RAM.h"
+#include "Osci/Osci_Storage.h"
 
 
 using namespace Display::Primitives;
@@ -139,7 +140,7 @@ static void OnDraw_RAM()
     Rectangle(width, height).Draw(Grid::Right() - width, Grid::Top(), Color::FILL);
     Integer(Memory::RAM::CurrentSignal() + 1).ToString(false, 3).Draw(Grid::Right() - width + 2, Grid::Top() + 1);
     String("/").Draw(Grid::Right() - width + 17, Grid::Top() + 1);
-    //Integer((int)DataStorage::NumElementsInStorage()).ToString(false, 3).Draw(Grid::Right() - width + 23, Grid::Top() + 1);
+    Integer(Osci::Storage::NumElementsInStorage()).ToString(false, 3).Draw(Grid::Right() - width + 23, Grid::Top() + 1);
 }
 
 static bool HandlerKey_RAM(KeyEvent /*event*/)

@@ -164,7 +164,7 @@
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>&lt;1&gt;.\src\FPGA\FPGA_Settings.cpp</Filename>
+          <Filename>.\src\FPGA\FPGA_Settings.cpp</Filename>
           <ExecCommand></ExecCommand>
           <Expression>\\S8_57\src/FPGA/FPGA_Settings.cpp\138</Expression>
         </Bp>
