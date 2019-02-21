@@ -32,7 +32,9 @@ add_compile_options(/wd4820)
 add_compile_options(/wd5039)
 add_compile_options(/wd5045)
 
-source_group(src                    REGULAR_EXPRESSION "src/*.*")
+source_group(src                    FILES src/main.h
+                                          src/main.cpp
+                                          src/defines.h)
 source_group(libs\\CMSIS            REGULAR_EXPRESSION "src/libs/CMSIS/*.*")
 source_group(libs\\FatFS            REGULAR_EXPRESSION "src/libs/FatFS/*.*")
 source_group(libs\\HAL              REGULAR_EXPRESSION "src/libs/HAL/*.*")
@@ -45,7 +47,9 @@ source_group(Hardware\\stm32\\4XX   REGULAR_EXPRESSION "src/Hardware/stm32/4XX/*
 source_group(Settings               REGULAR_EXPRESSION "src/Settings/*.*")
 source_group(Utils                  REGULAR_EXPRESSION "src/Utils/*.*")
 
-file(GLOB SOURCES   src/*.*
+file(GLOB SOURCES   src/main.h
+                    src/main.cpp
+                    src/defines.h
                     src/libs/CMSIS/*.*
                     src/libs/FatFS/*.*
                     src/libs/HAL/*.*
