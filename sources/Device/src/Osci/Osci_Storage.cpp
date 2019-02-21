@@ -151,20 +151,20 @@ void Storage::PrepareNewFrameP2P()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static uint CalculateNeedMemory()
 {
-    uint bytesForSave = sizeof(Data);
+    uint result = sizeof(Data);
 
     uint bytesInChannel = FPGA::BytesInChannel();
 
     if (SET_ENABLED_A)
     {
-        bytesForSave += bytesInChannel;
+        result += bytesInChannel;
     }
     if (SET_ENABLED_B)
     {
-        bytesForSave += bytesInChannel;
+        result += bytesInChannel;
     }
 
-    return bytesForSave;
+    return result;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
