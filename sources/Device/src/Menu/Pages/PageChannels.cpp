@@ -9,6 +9,7 @@
 #include "Menu/Pages/Include/Definition.h"
 #include "Utils/CommonFunctions.h"
 #include "Utils/Dictionary.h"
+#include "Hardware/Timer.h"
 
 
 extern const PageBase pChanA;
@@ -79,7 +80,11 @@ DEF_CHOICE_2( cBandwidthA,                                                      
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void OnPress_BalanceA()
 {
+    Display::FuncOnWaitStart(DICT(DBalanceChA), false);
 
+    Timer::PauseOnTime(5000);
+
+    Display::FuncOnWaitStop();
 }
 
 DEF_BUTTON( bBalanceA,                                                                                                                                      //--- КАНАЛ 1 - Балансировать ---
@@ -157,7 +162,11 @@ DEF_CHOICE_2( cBandwidthB,                                                      
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void OnPress_BalanceB()
 {
+    Display::FuncOnWaitStart(DICT(DBalanceChB), false);
 
+    Timer::PauseOnTime(5000);
+
+    Display::FuncOnWaitStop();
 }
 
 DEF_BUTTON( bBalanceB,                                                                                                                                       //--- КАНАЛ 2 - Балансировка ---
