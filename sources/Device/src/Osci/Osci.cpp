@@ -190,8 +190,6 @@ void ReadDataChanenlRand(Chan::E ch, const uint8 *address, uint8 *data) // -V250
 
     int index = Tsm - Osci::addShift;
 
-    //LOG_WRITE("%d = %d - %d", index, Tsm, Osci::addShift);
-
     uint8 *dataRead = &dataRand[ch][index];
 
     while (index < 0)
@@ -300,6 +298,8 @@ static bool CalculateGate(uint16 rand, uint16 *eMin, uint16 *eMax)
 
     *eMin = (uint16)(minGate);      // -V519 // -V2004
     *eMax = (uint16)(maxGate - 50); // -V519 // -V2004
+
+    LOG_WRITE("ворота %d %d", *eMin, *eMax);
 
     if (rand < *eMin || rand > *eMax)
     {
