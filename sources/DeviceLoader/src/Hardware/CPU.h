@@ -40,12 +40,6 @@ public:
     {
     friend class CPU;
         
-    private:
-
-        static void Init();
-    
-        static void DeInit();
-    
     public:
 
         static void Update();

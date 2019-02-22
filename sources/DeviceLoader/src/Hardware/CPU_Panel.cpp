@@ -131,58 +131,6 @@ void CPU::Panel::Enable()
     135 - PB5 - MOSI
 */
 
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------
-void CPU::Panel::Init()
-{
-    GPIO_InitTypeDef isGPIOA_B =
-    {
-        GPIO_PIN_5 | GPIO_PIN_6,    // GPIO_Pin
-        GPIO_MODE_AF_PP,            // GPIO_Mode
-        GPIO_PULLDOWN,
-        GPIO_SPEED_FAST,            // GPIO_Speed
-        GPIO_AF5_SPI1
-    };
-    HAL_GPIO_Init(GPIOA, &isGPIOA_B);
-    
-    isGPIOA_B.Pin = GPIO_PIN_5;
-    HAL_GPIO_Init(GPIOB, &isGPIOA_B);
-    
-    HAL_SPI_Init(&handleSPI);
-
-    HAL_NVIC_SetPriority(SPI1_IRQn, PRIORITY_PANEL_SPI1);
-    HAL_NVIC_EnableIRQ(SPI1_IRQn);
-
-    // Теперь настроим программный NSS (PB6).
-
-    GPIO_InitTypeDef isGPIOG =
-    {
-        GPIO_PIN_6,                 // GPIO_Pin
-        GPIO_MODE_IT_RISING,        // GPIO_Mode
-        GPIO_NOPULL,
-        0, 0
-    };      
-    HAL_GPIO_Init(GPIOB, &isGPIOG);
-
-    HAL_NVIC_SetPriority(EXTI9_5_IRQn, PRIORITY_PANEL_EXTI9_5);
-    HAL_NVIC_EnableIRQ(EXTI9_5_IRQn);
-
-    // Лампочка установка
-    isGPIOG.Pin = GPIO_PIN_12;
-    isGPIOG.Mode = GPIO_MODE_OUTPUT_PP;
-    isGPIOG.Speed = GPIO_SPEED_HIGH;
-    isGPIOG.Alternate = GPIO_AF0_MCO;
-    HAL_GPIO_Init(GPIOG, &isGPIOG);
-}
-
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------
-void CPU::Panel::DeInit()
-{
-    HAL_NVIC_DisableIRQ(SPI1_IRQn);
-    HAL_NVIC_DisableIRQ(EXTI9_5_IRQn);
-}
-
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 static uint8 dataSPIfromPanel;
 

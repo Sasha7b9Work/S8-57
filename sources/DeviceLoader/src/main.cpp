@@ -104,6 +104,8 @@ int main()
     while (Display::IsRun())
     {
     }
+    
+    CPU::DeInit();
 
     free(ms);
 
