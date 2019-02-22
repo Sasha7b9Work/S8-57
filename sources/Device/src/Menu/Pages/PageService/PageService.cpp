@@ -97,7 +97,7 @@ DEF_BUTTON( bCalibrator_Calibrate,                                              
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 DEF_PAGE_2( ppCalibrator, // -V641 // -V1027                                                                                                                    //--- СЕРВИС - КАЛИБРАТОР ---
-    "КАЛИБРАТОР", "CALIBRATOR",
+    "КАЛИБРОВКА", "CALIBRATE",
     "Управлением калибратором и калибровка осциллографа",
     "Control of the calibrator and calibration of an oscillograph",
     &cCalibrator_Calibrator,     // СЕРВИС - КАЛИБРАТОР - Калибратор
@@ -530,15 +530,16 @@ DEF_PAGE_8( pService, // -V641 // -V1027                                        
     "СЕРВИС", "SERVICE",
     "Дополнительные настройки, калибровка, поиск сигнала, математические функции",
     "Additional settings, calibration, signal search, mathematical functions",
-    &bResetSettings,                    ///< СЕРВИС - Сброс настроек
-    //&bAutoSearch,                       ///< СЕРВИС - Поиск сигнала
-    &ppCalibrator,                      ///< СЕРВИС - КАЛИБРАТОР
-    &ppFunction,                        ///< СЕРВИС - ФУНКЦИЯ
-    &ppSound,                           ///< СЕРВИС - ЗВУК
-    &ppRTC,                             ///< СЕРВИС - ВРЕМЯ
-    //PageService::PageBattery::pointer,  ///< СЕРВИС - БАТАРЕЯ
-    &cLanguage,                         ///< СЕРВИС - Язык
-    &ppInformation,                     ///< СЕРВИС - ИНФОРМАЦИЯ
-    PageService::PageDebug::pointer,    ///< СЕРВИС - ОТЛАДКА
+    &bResetSettings,                        ///< СЕРВИС - Сброс настроек
+    //&bAutoSearch,                         ///< СЕРВИС - Поиск сигнала
+    &ppCalibrator,
+    //PageService::PageCalibrate::pointer,    ///< СЕРВИС - КАЛИБРОВКА
+    &ppFunction,                            ///< СЕРВИС - ФУНКЦИЯ
+    &ppSound,                               ///< СЕРВИС - ЗВУК
+    &ppRTC,                                 ///< СЕРВИС - ВРЕМЯ
+    //PageService::PageBattery::pointer,    ///< СЕРВИС - БАТАРЕЯ
+    &cLanguage,                             ///< СЕРВИС - Язык
+    &ppInformation,                         ///< СЕРВИС - ИНФОРМАЦИЯ
+    PageService::PageDebug::pointer,        ///< СЕРВИС - ОТЛАДКА
     Page::Name::Service, nullptr, FuncActive, FuncPressPage, FuncDrawPage, FuncRegSetPage
 )
