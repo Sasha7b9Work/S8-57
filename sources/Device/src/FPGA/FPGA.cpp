@@ -46,8 +46,7 @@ bool givingStart = false;
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void FPGA::GiveStart()
 {
-    uint8 value = (uint8)TRIG_POLARITY;
-    value = (uint8)((value + 1) % 2);
+    uint8 value = (uint8)(((uint8)TRIG_POLARITY) % 2);
 
     uint8 stop = 0;
     if (Device::State::InModeRecorder())    // В режиме регистратора
