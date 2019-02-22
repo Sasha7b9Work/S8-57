@@ -38,7 +38,7 @@ DEF_BUTTON( bLess,                                                              
     "Меньше", "Less",
     "",
     "",
-    pageView, FuncActive, OnPress_Less, Button::FuncDraw
+    pageView, FuncActive, OnPress_Less, Button::EmptyDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -51,7 +51,7 @@ DEF_BUTTON( bMore,                                                              
     "Больше", "More",
     "",
     "",
-    pageView, FuncActive, OnPress_More, Button::FuncDraw
+    pageView, FuncActive, OnPress_More, Button::EmptyDraw
 )
 
 

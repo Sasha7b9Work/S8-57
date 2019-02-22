@@ -273,7 +273,7 @@ DEF_BUTTON( bADC_Shift_Reset,                                                   
     "Сброс", "Reset",
     "",
     "",
-    pppADC_Shift, FuncActive, OnPress_ADC_Shift_Reset, Button::FuncDraw
+    pppADC_Shift, FuncActive, OnPress_ADC_Shift_Reset, Button::EmptyDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -551,7 +551,7 @@ DEF_BUTTON( bSaveFirmware,                                                      
     "Сохр. прошивку", "Save firmware",
     "Сохранение прошивки - секторов 5, 6, 7 общим объёмом 3 х 128 кБ, где хранится программа",
     "Saving firmware - sectors 5, 6, 7 with a total size of 3 x 128 kB, where the program is stored",
-    pageDebug, IsActive_SaveFirmware, OnPress_SaveFirmware, Button::FuncDraw
+    pageDebug, IsActive_SaveFirmware, OnPress_SaveFirmware, Button::EmptyDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -645,7 +645,7 @@ DEF_BUTTON( bEraseData,                                                         
     "Стереть данне", "Erase data",
     "Стирает сохранённые данные из ППЗУ",
     "Erase all saved datas from EEPROM",
-    pageDebug, FuncActive, OnPress_EraseData, Button::FuncDraw
+    pageDebug, FuncActive, OnPress_EraseData, Button::EmptyDraw
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

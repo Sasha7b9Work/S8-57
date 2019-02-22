@@ -66,7 +66,7 @@ DEF_BUTTON( bClear,                                                             
     "Очистить", "Clear",
     "Очищает экран от накопленных сигналов.",
     "Clears the screen of the saved-up signals.",
-    pageAccum, IsActive_Accum_Clear, PageDisplay::PageAccumulation::OnPress_Accumulation_Clear, Button::FuncDraw
+    pageAccum, IsActive_Accum_Clear, PageDisplay::PageAccumulation::OnPress_Accumulation_Clear, Button::EmptyDraw
 )
 
 

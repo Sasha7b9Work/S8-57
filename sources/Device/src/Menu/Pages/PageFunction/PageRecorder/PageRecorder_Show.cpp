@@ -28,7 +28,7 @@ DEF_BUTTON( bNext,                                                              
     "Следующий", "Next",
     "",
     "",
-    pageShow, FuncActive, OnPress_Next, Button::FuncDraw
+    pageShow, FuncActive, OnPress_Next, Button::EmptyDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -41,7 +41,7 @@ DEF_BUTTON( bPrev,                                                              
     "Предыдущий", "Previous",
     "",
     "",
-    pageShow, FuncActive, OnPress_Prev, Button::FuncDraw
+    pageShow, FuncActive, OnPress_Prev, Button::EmptyDraw
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

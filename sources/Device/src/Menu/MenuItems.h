@@ -284,7 +284,8 @@ public:
     pFuncVII    funcForDraw;        ///< Функция будет вызываться во время отрисовки кнопки.
     void Draw(int x, int y);
 
-    static void FuncDraw(int, int) {};
+    static void EmptyDraw(int, int) {};
+    static bool EmptyActive() { return true; }
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// SButton ///

@@ -76,16 +76,31 @@ DEF_CHOICE_2( cBandwidthA,                                                      
     SET_BANDWIDTH_A, pChanA, Choice::EmptyActive, OnChanged_ChanA_Bandwidth, Choice::EmptyDraw
 )
 
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+static void OnPress_BalanceA()
+{
+
+}
+
+DEF_BUTTON( bBalanceA,                                                                                                                                      //--- КАНАЛ 1 - Балансировать ---
+    "Балансировка", "Balance",
+    "",
+    "",
+    pChanA, Button::EmptyActive, OnPress_BalanceA, Button::EmptyDraw
+)
+
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 const PageBase *PageChannelA::pointer = &pChanA;
 
-DEF_PAGE_3( pChanA, // -V641                                                                                                                                                //--- КАНАЛ 1 ---
+DEF_PAGE_4( pChanA, // -V641                                                                                                                                                //--- КАНАЛ 1 ---
     "КАНАЛ 1", "CHANNEL 1",
     "Содержит настройки канала 1.",
     "Contains settings of the channel 1.",
-    &cInputA,              ///< КАНАЛ 1 - Вход
-    &cCoupleA,             ///< КАНАЛ 1 - Связь
-    &cBandwidthA,          ///< КАНАЛ 1 - Полоса
+    &cInputA,           ///< КАНАЛ 1 - Вход
+    &cCoupleA,          ///< КАНАЛ 1 - Связь
+    &cBandwidthA,       ///< КАНАЛ 1 - Полоса
+    &bBalanceA,         ///< КАНАЛ 1 - Балансировка
     Page::Name::ChannelA, nullptr, FuncActive, FuncPressPage, FuncDrawPage, FuncRegSetPage
 )
 
@@ -139,15 +154,29 @@ DEF_CHOICE_2( cBandwidthB,                                                      
     SET_BANDWIDTH_B, pChanB, Choice::EmptyActive, OnChanged_BandwidthB, Choice::EmptyDraw
 )
 
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+static void OnPress_BalanceB()
+{
+
+}
+
+DEF_BUTTON( bBalanceB,                                                                                                                                       //--- КАНАЛ 2 - Балансировка ---
+    "Балансировка", "Balance",
+    "",
+    "",
+    pChanB, Button::EmptyActive, OnPress_BalanceB, Button::EmptyDraw
+)
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 const PageBase *PageChannelB::pointer = &pChanB;
 
-DEF_PAGE_3( pChanB, // -V641                                                                                                                                                //--- КАНАЛ 2 ---
+DEF_PAGE_4( pChanB, // -V641                                                                                                                                                //--- КАНАЛ 2 ---
     "КАНАЛ 2", "CHANNEL 2",
     "Содержит настройки канала 2.",
     "Contains settings of the channel 2.",
-    &cInputB,         ///< КАНАЛ 2 - Вход
-    &cCoupleB,        ///< КАНАЛ 2 - Связь
-    &cBandwidthB,     ///< КАНАЛ 2 - Полоса
+    &cInputB,           ///< КАНАЛ 2 - Вход
+    &cCoupleB,          ///< КАНАЛ 2 - Связь
+    &cBandwidthB,       ///< КАНАЛ 2 - Полоса
+    &bBalanceB,         ///< КАНАЛ 2 - Балансировка
     Page::Name::ChannelB, nullptr, FuncActive, FuncPressPage, FuncDrawPage, FuncRegSetPage
 )

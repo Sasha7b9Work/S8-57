@@ -59,7 +59,7 @@ DEF_BUTTON( bAutoSearch,                                                        
     "Поиск сигн", "Find sign",
     "Устанавливает оптимальные установки осциллографа для сигнала в канале 1",
     "Sets optimal settings for the oscilloscope signal on channel 1",
-    pService, FuncActive, OnPress_AutoSearch, Button::FuncDraw
+    pService, FuncActive, OnPress_AutoSearch, Button::EmptyDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -92,7 +92,7 @@ DEF_BUTTON( bCalibrator_Calibrate,                                              
     "Калибровать", "Calibrate",
     "Запуск процедуры калибровки",
     "Running the calibration procedure",
-    ppCalibrator, IsActive_Calibrator_Calibrate, OnPress_Calibrator_Calibrate, Button::FuncDraw
+    ppCalibrator, IsActive_Calibrator_Calibrate, OnPress_Calibrator_Calibrate, Button::EmptyDraw
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

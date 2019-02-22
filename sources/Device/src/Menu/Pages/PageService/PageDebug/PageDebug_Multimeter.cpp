@@ -20,7 +20,7 @@ DEF_BUTTON( bCalibrate0,
     "Калибр 0", "Calibrate 0",
     "",
     "",
-    pMultimeter, FuncActive, OnPress_Calibrate0, Button::FuncDraw
+    pMultimeter, FuncActive, OnPress_Calibrate0, Button::EmptyDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -33,7 +33,7 @@ DEF_BUTTON(bCalibrate1,
     "Калибр 1", "Calibrate 1",
     "",
     "",
-    pMultimeter, FuncActive, OnPress_Calibrate1, Button::FuncDraw
+    pMultimeter, FuncActive, OnPress_Calibrate1, Button::EmptyDraw
 )
 
 
