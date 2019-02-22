@@ -72,8 +72,6 @@ public:
     static void StartLogging();
 
     static uint LogPointUS(char *name);
-
-    static uint LogPointMS(char *name);
 };
 
 

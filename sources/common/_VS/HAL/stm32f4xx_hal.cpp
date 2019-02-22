@@ -18,9 +18,9 @@ uint32_t HAL_GetTick()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void HAL_Delay(uint32_t time)
 {
-    uint timeStart = HAL_GetTick();
+    volatile uint timeStart = HAL_GetTick();
 
-    while (HAL_GetTick() - timeStart < time)
+    while (HAL_GetTick() - timeStart < time) //-V776
     {
 
     }

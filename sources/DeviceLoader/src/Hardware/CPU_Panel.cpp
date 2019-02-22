@@ -68,15 +68,7 @@ bool CPU::Panel::ProcessingCommandFromPIC(uint16 command)
 {
     if (command != 0)
     {
-        PanelButton prButton = ButtonIsPress(command);
-        if (prButton)
-        {
-            pressedButton = prButton;
-        }
-        else
-        {
-            pressedButton = B_Empty;
-        }
+        pressedButton = ButtonIsPress(command);
     }
 
     return true;

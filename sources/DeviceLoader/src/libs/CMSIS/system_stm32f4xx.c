@@ -129,13 +129,13 @@ void SystemInit(void)
   RCC->CFGR = 0x00000000;
 
   /* Reset HSEON, CSSON and PLLON bits */
-  RCC->CR &= (uint32_t)0xFEF6FFFF;
+  RCC->CR &= (uint32_t)0xFEF6FFFFU;
 
   /* Reset PLLCFGR register */
   RCC->PLLCFGR = 0x24003010;
 
   /* Reset HSEBYP bit */
-  RCC->CR &= (uint32_t)0xFFFBFFFF;
+  RCC->CR &= (uint32_t)0xFFFBFFFFU;
 
   /* Disable all interrupts */
   RCC->CIR = 0x00000000;

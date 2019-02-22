@@ -144,7 +144,7 @@ static void Osci::UpdateFPGA()
 
         if (FPGA::HAL::GetFlag::PRED() && !givingStart)
         {
-            if (START_MODE_IS_AUTO && FPGA::HAL::GetFlag::HOLD_OFF())
+            if (!Osci::InModeRandomizer() && START_MODE_IS_AUTO && FPGA::HAL::GetFlag::HOLD_OFF())
             {
                 GiveStart();
                 givingStart = true;

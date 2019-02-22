@@ -257,14 +257,6 @@ uint Timer::LogPointUS(char * name)
     return interval;
 }
 
-//----------------------------------------------------------------------------------------------------------------------------------------------------
-uint Timer::LogPointMS(char * name)
-{
-    uint interval = TIME_TICKS - timePrevPoint;
-    timePrevPoint = TIME_TICKS;
-    return interval;
-}
-
 #ifdef __cplusplus
 extern "C" {
 #endif

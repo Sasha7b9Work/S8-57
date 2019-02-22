@@ -314,7 +314,7 @@ static int8 *BreakWord(char *word)
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 // Возвращает часть слова до слога numSyllable(включительн) вместе со знаком переноса
-static char *PartWordForTransfer(char *word, int8 *lengthSyllables, int numSyllable, char buffer[30])
+static char *PartWordForTransfer(char *word, const int8 *lengthSyllables, int numSyllable, char buffer[30])
 {
     size_t length = 0;
     for (int i = 0; i <= numSyllable; i++)
@@ -476,7 +476,7 @@ static bool GetHeightTextWithTransfers(int left, int top, int right, const char 
     }
 
     *height = y - top + 4;
-    LIMITATION(*height, 0, 239);
+    LIMITATION(*height, 0, 239); //-V2516
 
     return curSymbol == numSymbols;
 }

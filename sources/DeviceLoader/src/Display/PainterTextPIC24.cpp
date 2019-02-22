@@ -18,7 +18,7 @@ void Painter::LoadFont(TypeFont typeFont)
     {
         bytes = fontUGOdisplay;
     }
-    else if (typeFont == TypeFont_UGO2)
+    else if (typeFont == TypeFont_UGO2) //-V2516
     {
         bytes = fontUGO2display;
     }
@@ -26,7 +26,7 @@ void Painter::LoadFont(TypeFont typeFont)
     uint8 command[3084] = {LOAD_FONT, (uint8)typeFont};
     for (int i = 0; i < 3080; i++)
     {
-        WRITE_BYTE(2 + i, bytes[i]);
+        WRITE_BYTE(2 + i, bytes[i]); //-V522
     }
     /// \todo шрифты теперь зашиты в дисплей
     //Painter_SendToDisplay(command, 3084);
@@ -47,8 +47,8 @@ int Painter::DrawText(int x, int y, const char *text, Color color)
     int retValue = x;
     y += (8 - Font::GetSize());
 #define SIZE_BUFFER 100
-    uint8 command[SIZE_BUFFER] = {DRAW_TEXT};
-    WRITE_SHORT(1, x);
+    uint8 command[SIZE_BUFFER] = {DRAW_TEXT}; //-V1009
+    WRITE_SHORT(1, x); //-V1032
     WRITE_BYTE(3, (uint8)(y + 1));
 
     uint8 *pointer = command + 5;
