@@ -25,7 +25,7 @@
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-#define FILE_NAME "S8-54.bin"
+#define FILE_NAME "S8-57.bin"
 
 typedef void(*pFunction)();
 
@@ -38,27 +38,12 @@ MainStruct *ms; //-V707
 void Upgrade();
 
 
-int main()
-{
-    __disable_irq();
-    // “еперь переходим на основную программу
-    pFunction JumpToApplication;
-
-    JumpToApplication = (pFunction)(*(__IO uint *)(MAIN_PROGRAM_START_ADDRESS + 4));
-    __set_MSP(*(__IO uint *)MAIN_PROGRAM_START_ADDRESS);
-    __enable_irq();
-    JumpToApplication();
-
-    return 0;
-}
-
-
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-int _main()
+int main()
 {
     ms = (MainStruct *)malloc(sizeof(MainStruct));
     ms->percentUpdate = 0.0F; //-V522
-    
+   
     CPU::Init();
 
     Settings::Load();
@@ -89,36 +74,14 @@ int _main()
         (ms->drive.active && ms->state != State_Mount))     // или перешла в активное состо€ние, по почему-то не запустилс€ процесс монтировани€
     {
         free(ms);
-#ifndef MSVC
         NVIC_SystemReset();
-#endif
     }
 
     if (ms->state == State_Mount)                           // Ёто означает, что диск удачно примонтирован //-V774
     {
         if (CPU::FDrive::FileExist(FILE_NAME))                    // ≈сли на диске обнаружена прошивка
         {
-            ms->state = State_RequestAction;
-            
-            while (1)
-            {
-                PanelButton button = CPU::Panel::PressedButton();
-                if (button == B_F1)
-                {
-                    ms->state = State_Upgrade;
-                    Upgrade();
-                    break;
-                }
-                else if (button == B_F5)
-                {
-                    ms->state = State_Ok;
-                    break;
-                }
-                else
-                {
-                    // здесь ничего нет
-                }
-            }
+            Upgrade();
         }
         else
         {
@@ -134,33 +97,24 @@ int _main()
         // здесь ничего
     }
 
-    ms->state = State_Ok; //-V774
-
+    ms->state = State_Ok; //-V774 //-V519
+    
     Timer::Disable(kTemp);
 
     while (Display::IsRun())
     {
     }
 
-    Display::Update();
-    
-    CPU::DeInit();
-
     free(ms);
 
-#ifndef _WIN32
-    
     __disable_irq();
     // “еперь переходим на основную программу
     pFunction JumpToApplication;
-
     JumpToApplication = (pFunction)(*(__IO uint *)(MAIN_PROGRAM_START_ADDRESS + 4));
     __set_MSP(*(__IO uint *)MAIN_PROGRAM_START_ADDRESS);
     __enable_irq();
     JumpToApplication();
 
-#endif
-    
     return 0;
 }
 
