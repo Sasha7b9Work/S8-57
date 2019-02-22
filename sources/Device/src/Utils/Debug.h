@@ -3,7 +3,7 @@
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Хорошо использовать для трассировке, если потом в HardFault_Handler() отслеживать эти переменные
-// #define DEBUG_POINT Debug::line = __LINE__; Debug::file = __FILE__;
+//#define DEBUG_POINT Debug::line = __LINE__; Debug::file = __FILE__;
 
 // #define START_PROFILING() Debug::_StartProfilingMS();
 // #define POINT_PROFILING() Debug::_PointProfilingMS(__FILE__, __LINE__)

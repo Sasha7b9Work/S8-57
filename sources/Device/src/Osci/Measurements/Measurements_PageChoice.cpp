@@ -101,6 +101,7 @@ void Osci::Measurements::PageChoice::Draw()
             {
                 break;
             }
+
             int x0 = x + col * dX;
             int y0 = y + row * dY;
             bool active = (meas == posCursor);
@@ -109,11 +110,11 @@ void Osci::Measurements::PageChoice::Draw()
             Color::SetCurrent(active ? Color::FLASH_01 : Color::FILL);
             Char(Measure::GetChar(meas)).Draw10SymbolsInRect(x0 + 2, y0 + 1);
             Font::SetCurrent(Font::Type::_5);
-            //Text(Measure::Get(row, col).Name()).DrawRelativelyRight(x0 + dX, y0 + 12, active ? Color::FLASH_01 : Color::FILL);
-            Text("test").DrawRelativelyRight(x0 + dX, y0 + 12, active ? Color::FLASH_01 : Color::FILL);
+            Text(Measure::GetName(meas)).DrawRelativelyRight(x0 + dX, y0 + 12, active ? Color::FLASH_01 : Color::FILL);
             Font::SetCurrent(Font::Type::_UGO);
             meas = (Measure::Type::E)((int)meas + 1);    // meas++;
         }
     }
+
     Font::SetCurrent(Font::Type::_8);
 }

@@ -117,6 +117,8 @@ namespace Osci
 
             String Name();
 
+            static String GetName(Type::E type);
+
 #define MARKER_VOLTAGE(ch, num)             (Processing::markerVoltage[ch][num] - VALUE::MIN)
 #define MARKER_TIME(ch, num)                (Processing::markerTime[ch][num])
 

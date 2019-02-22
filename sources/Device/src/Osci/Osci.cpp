@@ -159,6 +159,8 @@ static void Osci::UpdateFPGA()
         {
             if (CanReadData())
             {
+                Timer::PauseOnTicks(5 * 90 * 20);
+
                 ReadData();
                 if (START_MODE_IS_SINGLE)
                 {
@@ -349,6 +351,11 @@ bool Osci::InModeRandomizer()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static bool CanReadData()
 {
+    if (ENUM_SIGNALS_IN_SEC.value == Display::ENumSignalsInSec::_25)
+    {
+        return true;
+    }
+    
     static uint timePrevRead = 0;
 
     if (TIME_MS > timePrevRead + ENUM_SIGNALS_IN_SEC.TimeBetweenFramesMS())
