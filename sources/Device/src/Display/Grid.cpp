@@ -142,17 +142,17 @@ static void Grid::DrawOsci()
     if (Display::IsSeparate())
     {
         DrawGridSignal(Left(), Top(), Width(), Height() / 2);
-
-        if (FFT_ENABLED)
-        {
-            DrawGridSpectrum();
-        }
-
-        if (FUNC_MODE_DRAW_IS_ENABLED)
-        {
-            DrawGridSignal(Left(), Top() + Height() / 2, Width(), Height() / 2);
-        }
-
+        
+        //if (FFT_ENABLED)
+        //{
+        //    DrawGridSpectrum();
+        //}
+        //
+        //if (FUNC_MODE_DRAW_IS_ENABLED)
+        //{
+        //    DrawGridSignal(Left(), Top() + Height() / 2, Width(), Height() / 2);
+        //}
+        //
 		HLine(Width()).Draw(Left(), Top() + Height() / 2, Color::FILL);
     }
     else

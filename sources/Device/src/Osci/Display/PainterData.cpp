@@ -134,6 +134,12 @@ static void DrawChannel(Chan::E ch)
     }
 
     int center = (Grid::Bottom() - Grid::Top()) / 2 + Grid::Top();
+
+    if (FFT_ENABLED)
+    {
+        center -= (Grid::Bottom() - Grid::Top()) / 4;
+    }
+
     int left = Grid::Left();
 
     float scale = (float)Grid::Height() / (VALUE::MAX - VALUE::MIN);
