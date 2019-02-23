@@ -14,6 +14,10 @@
 #include "Osci/Display/Accumulator.h"
 #include "Hardware/Timer.h"
 #include "FPGA/FPGA.h"
+#include <cstdlib>
+#include <cstring>
+#include "FPGA/FPGA_Math.h"
+#include "Utils/StringUtils.h"
 
 
 using namespace Display::Primitives;
@@ -47,6 +51,8 @@ static void DrawModePoints(Chan::E ch, int left, int center, const uint8 *data, 
 static void DrawModePointsPeakDetOn(int center, const uint8 *data, float scale, int x);
 
 static void DrawModePointsPeakDetOff(int center, const uint8 *data, float scale, int x);
+/// Нарисовать спектр
+static void DrawSpectrum();
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -67,6 +73,8 @@ void Osci::Display::PainterData::DrawData()
     DrawTPos(0, 0);
     
     DrawTShift(0, 0, 0);
+
+    DrawSpectrum();
 
     Accumulator::NextFrame();
 }
@@ -91,6 +99,154 @@ static void DrawCurrent()
 static void DrawRAM()
 {
 
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+static void DrawSpectrumChannel(const float *spectrum, Color color)
+{
+    Color::SetCurrent(color);
+    int gridLeft = Grid::Left();
+    int gridBottom = Grid::MathBottom();
+    int gridHeight = Grid::MathHeight();
+    for (int i = 0; i < 256; i++)
+    {
+        VLine((int)(gridHeight * spectrum[i])).Draw(gridLeft + 1, gridBottom);
+    }
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+static void WriteParametersFFT(Chan::E ch, float freq0, float density0, float freq1, float density1)
+{
+    int x = Grid::Left() + 259;
+    int y = Grid::ChannelBottom() + 5;
+    int dY = 10;
+
+    char buffer[20];
+    Color::SetCurrent(Color::FILL);
+
+    Text(Osci::Measurements::Freq2String(freq0, false, buffer)).Draw(x, y);
+
+    y += dY;
+
+    Text(Osci::Measurements::Freq2String(freq1, false, buffer)).Draw(x, y);
+
+    if (Chan(ch).IsA())
+    {
+        y += dY + 2;
+    }
+    else
+    {
+        y += dY * 3 + 4;
+    }
+
+    Color::SetCurrent(Color::Channel(ch));
+
+    Text(SCALE_FFT_IS_LOG ? SU::Db2String(density0, 4, buffer) : Osci::Measurements::Float2String(density0, false, buffer)).Draw(x, y);
+
+
+    y += dY;
+
+    Text(SCALE_FFT_IS_LOG ? SU::Db2String(density1, 4, buffer) : Osci::Measurements::Float2String(density1, false, buffer)).Draw(x, y);
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+static void DRAW_SPECTRUM(const uint8 *dataIn, int numPoints, Chan::E ch)
+{
+    if (!SET_ENABLED(ch))
+    {
+        return;
+    }
+
+#undef SIZE_BUFFER
+#define SIZE_BUFFER (1024 * 8)
+
+    if (numPoints > SIZE_BUFFER)
+    {
+        numPoints = SIZE_BUFFER;
+    }
+
+    float dataR[SIZE_BUFFER];
+    float spectrum[SIZE_BUFFER];
+
+    float freq0 = 0.0f;
+    float freq1 = 0.0f;
+    float density0 = 0.0f;
+    float density1 = 0.0f;
+    int y0 = 0;
+    int y1 = 0;
+    int s = 2;
+
+    uint8 *data = (uint8 *)std::malloc((uint)numPoints);
+
+    std::memcpy(data, dataIn, (uint)numPoints);
+
+    FPGA::Math::PointsRel2Voltage(data, numPoints, RANGE_DS(ch), (int16)RSHIFT_DS(ch), dataR);
+
+    FPGA::Math::CalculateFFT(dataR, numPoints, spectrum, &freq0, &density0, &freq1, &density1, &y0, &y1);
+
+    DrawSpectrumChannel(spectrum, Color::Channel(ch));
+
+    if (!Menu::IsShown() || Menu::IsMinimize())
+    {
+        Color color = Color::FILL;
+
+        WriteParametersFFT(ch, freq0, density0, freq1, density1);
+
+        Rectangle(s * 2, s * 2).Draw(FFT_POS_CURSOR_0 + Grid::Left() - s, y0 - s, color);
+        Rectangle(s * 2, s * 2).Draw(FFT_POS_CURSOR_1 + Grid::Left() - s, y1 - s);
+        VLine(y0 + s - Grid::MathBottom()).Draw(Grid::Left() + FFT_POS_CURSOR_0, Grid::MathBottom());
+        VLine(y1 + s - Grid::MathBottom()).Draw(Grid::Left() + FFT_POS_CURSOR_1, Grid::MathBottom());
+    }
+
+    std::free(data);
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+static void DrawSpectrum()
+{
+    if (!FFT_ENABLED)
+    {
+        return;
+    }
+
+    VLine(Grid::MathBottom() - Grid::ChannelBottom()).Draw(Grid::Right(), Grid::ChannelBottom(), Color::BACK);
+
+
+    if (MODE_WORK_IS_DIR)
+    {
+        int numPoints = DS->SizeChannel();
+
+        if (numPoints > 4096)       /// \todo Пока 8к и более не хочет считать
+        {
+            numPoints = 4096;
+        }
+
+        if (SOURCE_FFT_IS_A)
+        {
+            DRAW_SPECTRUM(OUT_A, numPoints, Chan::A);
+        }
+        else if (SOURCE_FFT_IS_B)
+        {
+            DRAW_SPECTRUM(OUT_B, numPoints, Chan::B);
+        }
+        else
+        {
+            if (LAST_AFFECTED_CH_IS_A)
+            {
+                DRAW_SPECTRUM(OUT_B, numPoints, Chan::B);
+                DRAW_SPECTRUM(OUT_A, numPoints, Chan::A);
+            }
+            else
+            {
+                DRAW_SPECTRUM(OUT_A, numPoints, Chan::A);
+                DRAW_SPECTRUM(OUT_B, numPoints, Chan::B);
+            }
+        }
+
+    }
+
+    HLine(Grid::Right() - Grid::Left()).Draw(Grid::ChannelBottom(), Grid::Left(), Color::FILL);
+    HLine(Grid::Right() - Grid::Left()).Draw(Grid::MathBottom(), Grid::Left());
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

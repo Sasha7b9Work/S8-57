@@ -91,8 +91,8 @@ struct FFTmaxDB
 };
 
 #define SOURCE_FFT                  (set.math_sourceFFT)
-#define SOURCE_FFT_A                (SOURCE_FFT == SourceFFT_ChannelA)
-#define SOURCE_FFT_B                (SOURCE_FFT == SourceFFT_ChannelB)
+#define SOURCE_FFT_IS_A             (SOURCE_FFT == SourceFFT::A)
+#define SOURCE_FFT_IS_B             (SOURCE_FFT == SourceFFT::B)
 
 #define WINDOW_FFT                  (set.math_windowFFT)
 #define WINDOW_FFT_IS_HAMMING       (WINDOW_FFT == WindowFFT::Hamming)

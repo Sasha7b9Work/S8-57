@@ -76,6 +76,7 @@ struct FileNamingMode
 #define FILE_NAMING_MODE_MANUAL (FILE_NAMING_MODE == FileNamingMode::Manually)
 
 #define MODE_WORK               (set.mem_modeWork)
+#define MODE_WORK_IS_DIR        (MODE_WORK == ModeWork::Dir)
 
 #define SHOW_IN_INT             (set.mem_modeShowIntMem)
 #define SHOW_IN_INT_SAVED       (SHOW_IN_INT == ModeShowIntMem::Saved)

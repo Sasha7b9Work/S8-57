@@ -20,6 +20,10 @@ namespace Osci
         /// Возвращает активное измерение
         Measure GetActiveMeasure();
 
+        char* Freq2String(float, bool, char buffer[20]);
+
+        char* Float2String(float, bool, char buffer[20]);
+
         extern int markerTime[Chan::Size][2];
 
         extern int markerVoltage[Chan::Size][2];
