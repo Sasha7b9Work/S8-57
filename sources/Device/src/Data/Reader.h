@@ -56,9 +56,9 @@ class Reader
 {
 public:
     /// Читает данные из хранилища. Возвращает 0, если данных там нет
-    static bool ReadDataFromStorage();
+    static void ReadDataFromStorage();
 private:
     /// Читает фрейм поточечного вывода
-    static bool ReadDataP2P();
+    static void ReadDataP2P();
 
 };

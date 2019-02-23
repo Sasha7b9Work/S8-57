@@ -29,7 +29,7 @@ static void FindTrigLevelIfNeed();
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-bool Reader::ReadDataFromStorage()
+void Reader::ReadDataFromStorage()
 {
     DATA_P2P = nullptr;
     DATA = nullptr;
@@ -51,34 +51,32 @@ bool Reader::ReadDataFromStorage()
 
     if (Osci::InModeP2P())
     {
-        return ReadDataP2P();
+        ReadDataP2P();
     }
-
-    return (DATA != nullptr);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-bool Reader::ReadDataP2P()
+void Reader::ReadDataP2P()
 {
     if (Osci::InModeP2P())
     {
-        DATA_P2P = nullptr;
-        DS = nullptr;
-        IN_A = IN_B = nullptr;
-
         DATA_P2P = Osci::Storage::GetFrameP2P();
 
         if (DATA_P2P)
         {
-            DS = DATA_P2P->Settings();
-            DATA = &DATA_P2P->data;
-
-            IN_A = DATA_P2P->DataA();
-            IN_B = DATA_P2P->DataB();
+            if (DS)
+            {
+                if (START_MODE_IS_WAIT && DS->Equals(*DATA_P2P->Settings()))
+                {
+                    DATA_P2P = nullptr;
+                }
+                else
+                {
+                    DS = DATA_P2P->Settings();
+                }
+            }
         }
     }
-
-    return (DATA_P2P != nullptr);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

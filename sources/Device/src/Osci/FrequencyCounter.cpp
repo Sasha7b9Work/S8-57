@@ -601,7 +601,7 @@ static pString FreqSetToString(const BitSet32 *fr)
     }
     else
     {
-        LOG_ERROR("Ошибка");
+        // здесь ничего не делаем
     }
 
     Hex value(fr->word);

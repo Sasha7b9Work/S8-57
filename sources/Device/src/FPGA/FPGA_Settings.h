@@ -4,9 +4,9 @@
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #define START_MODE              (set.trig_startMode)
-#define START_MODE_IS_AUTO      (START_MODE == Trig::StartMode::Auto)
-#define START_MODE_IS_WAIT      (START_MODE == Trig::StartMode::Wait)
-#define START_MODE_IS_SINGLE    (START_MODE == Trig::StartMode::Single)
+#define START_MODE_IS_AUTO      (START_MODE == Osci::Settings::Trig::StartMode::Auto)
+#define START_MODE_IS_WAIT      (START_MODE == Osci::Settings::Trig::StartMode::Wait)
+#define START_MODE_IS_SINGLE    (START_MODE == Osci::Settings::Trig::StartMode::Single)
 
 #define TRIG_POLARITY           (set.trig_polarity)
 #define TRIG_POLARITY_FALLING   (TRIG_POLARITY == TrigPolarity::Falling)

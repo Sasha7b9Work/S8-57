@@ -30,6 +30,7 @@ struct DataSettings
     /// Возвращает размер занимаемый данными одного канала
     int SizeChannel() const;
     int PointsInChannel() const;
+    bool Equals(const DataSettings &ds) const;
 };
 
 

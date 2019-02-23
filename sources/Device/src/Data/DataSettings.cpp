@@ -34,6 +34,20 @@ void DataSettings::Fill(uint8 *_dataA, uint8 * _dataB)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+bool DataSettings::Equals(const DataSettings &ds) const
+{
+    return
+        RANGE_A(this) == Lval_RANGE_A(&ds) &&
+        RANGE_B(this) == Lval_RANGE_B(&ds) &&
+        RSHIFT_A(this) == RSHIFT_A(&ds) &&
+        RSHIFT_B(this) == RSHIFT_B(&ds) &&
+        TBASE(this) == TBASE(&ds) &&
+        TSHIFT(this) == TSHIFT(&ds) &&
+        TRIGLEV_A(this) == TRIGLEV_A(&ds) &&
+        TRIGLEV_B(this) == TRIGLEV_B(&ds);
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 int DataSettings::SizeChannel() const
 {
     Memory::ENumPointsFPGA points((Memory::ENumPointsFPGA::E)ENUM_POINTS(this));

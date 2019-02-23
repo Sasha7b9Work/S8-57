@@ -127,7 +127,7 @@ static void DrawChannel(Chan::E ch)
             DATA_P2P->FillBufferForDraw(ch, &buffer);
             data = buffer.data;
         }
-        else
+        else if(DATA == nullptr)
         {
             return;
         }
