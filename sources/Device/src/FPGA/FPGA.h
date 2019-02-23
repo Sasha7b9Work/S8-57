@@ -31,7 +31,7 @@ namespace FPGA
 
     void ReadData();
 
-    static uint16 ReadLastRecord();
+    static uint16 ReadLastRecord(Chan::E ch);
 
     void ReadDataChanenl(Chan::E ch, uint8 data[MAX_NUM_POINTS]);
 

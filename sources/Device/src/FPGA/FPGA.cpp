@@ -59,9 +59,16 @@ void FPGA::GiveStart()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-uint16 FPGA::ReadLastRecord()
+uint16 FPGA::ReadLastRecord(Chan::E ch)
 {
-    return (uint16)(FSMC::ReadFromFPGA(RD::LAST_RECORD_LO) + ((FSMC::ReadFromFPGA(RD::LAST_RECORD_HI)) << 8));
+    static uint16 address = 0;
+
+    if (Chan(ch).IsA())
+    {
+        address = (uint16)(FSMC::ReadFromFPGA(RD::LAST_RECORD_LO) + ((FSMC::ReadFromFPGA(RD::LAST_RECORD_HI)) << 8));
+    }
+
+    return address;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -127,7 +134,7 @@ bool FPGA::ForTester::Read(uint8 *dataA, uint8 *dataB) // -V2506
         }
     }
 
-    uint16 aRead = (uint16)(ReadLastRecord() - TESTER_NUM_POINTS);
+    uint16 aRead = (uint16)(ReadLastRecord(Chan::A) - TESTER_NUM_POINTS);
 
     FSMC::WriteToFPGA16(WR::PRED_LO, aRead);             // Указываем адрес, с которого будем читать данные
     FSMC::WriteToFPGA8(WR::START_ADDR, 0xff);            // И даём команду ПЛИС, чтобы чтение начиналось с него
@@ -166,7 +173,7 @@ void FPGA::ReadDataChanenl(Chan::E ch, uint8 data[FPGA::MAX_NUM_POINTS])
             k = Osci::Kr[SET_TBASE];
         }
 
-        addrRead = (uint16)(ReadLastRecord() - (int)numPoints / k);
+        addrRead = (uint16)(ReadLastRecord(ch) - (int)numPoints / k);
     }
     
     FSMC::WriteToFPGA16(WR::PRED_LO, (uint16)(addrRead));
