@@ -109,8 +109,7 @@ void Tester::Display::SetPoints(int numStep, const uint8 dx[TESTER_NUM_POINTS], 
     {
         int X = TESTER_NUM_POINTS - (dx[i] - VALUE::MIN);
 
-
-        int delta = dy[i] - VALUE::AVE;
+        int delta = (int)dy[i] - (int)VALUE::AVE;
 
         delta = (int)(delta * 1.2F);
 
