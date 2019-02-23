@@ -108,7 +108,13 @@ void Tester::Display::SetPoints(int numStep, const uint8 dx[TESTER_NUM_POINTS], 
     for(int i = 0; i < TESTER_NUM_POINTS; i++)
     {
         int X = TESTER_NUM_POINTS - (dx[i] - VALUE::MIN);
-        int Y = dy[i] - VALUE::MIN;
+
+        uint8 _y = dy[i];
+        _y -= VALUE::AVE;
+        _y = (uint8)(_y / 1.2F);
+        _y += VALUE::AVE;
+
+        int Y = _y - VALUE::MIN;
 
         LIMITATION(X, 0, TESTER_NUM_POINTS - 1); //-V2516
         LIMITATION(Y, 0, TESTER_NUM_POINTS - 1); //-V2516
