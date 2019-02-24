@@ -67,7 +67,7 @@ void Osci::Display::DrawCursorTrigLevel()
 
     int trigLev = SET_TRIGLEV_SOURCE + (SET_RSHIFT(ch) - RShift::ZERO);
     float scale = 1.0F / ((Trig::Level::MAX - Trig::Level::MIN) / 2.4F / Grid::Height());
-    int y0 = (Grid::Top() + Grid::Bottom()) / 2 + (int)(scale * (Trig::Level::ZERO - Trig::Level::MIN));
+    int y0 = (Grid::Top() + Grid::ChannelBottom()) / 2 + (int)(scale * (Trig::Level::ZERO - Trig::Level::MIN));
     int y = y0 - (int)(scale * (trigLev - Trig::Level::MIN));
 
     y = (y - Grid::ChannelCenterHeight()) + Grid::ChannelCenterHeight();
@@ -75,11 +75,11 @@ void Osci::Display::DrawCursorTrigLevel()
     int x = Grid::Right();
     Color::SetCurrent(Color::Trig());
 
-    if (y > Grid::Bottom())
+    if (y > Grid::ChannelBottom())
     {
-        Char(SYMBOL_TRIG_LEV_LOWER).Draw(x + 3, Grid::Bottom() - 11);
-        Point().Draw(x + 5, Grid::Bottom() - 2);
-        y = Grid::Bottom() - 7;
+        Char(SYMBOL_TRIG_LEV_LOWER).Draw(x + 3, Grid::ChannelBottom() - 11);
+        Point().Draw(x + 5, Grid::ChannelBottom() - 2);
+        y = Grid::ChannelBottom() - 7;
         x--;
     }
     else if (y < Grid::Top())
@@ -99,19 +99,6 @@ void Osci::Display::DrawCursorTrigLevel()
     Char(symbols[(uint8)TRIG_SOURCE]).Draw(x + 5, y - 6, Color::BACK);
 
     Font::SetCurrent(Font::Type::_8);
-
-    //DrawScaleLine(::Display::WIDTH - 11, true);
-    //int left = Grid::Right() + 9;
-    //int height = Grid::Height() - 2 * DELTA;
-    //int shiftFullMin = RShift::MIN + Trig::MIN;
-    //int shiftFullMax = RShift::MAX + Trig::MAX;
-    //scale = (float)height / (shiftFullMax - shiftFullMin);
-    //int shiftFull = SET_TRIGLEV_SOURCE + SET_RSHIFT(ch);
-    //int yFull = Grid::Top() + DELTA + height - (int)(scale * (shiftFull - RShift::MIN - Trig::MIN) + 4);
-    //Region(4, 6).Fill(left + 2, yFull + 1, Color::Trig());
-    //Font::SetCurrent(Font::Type::_5);
-    //Char(symbols[(uint8)TRIG_SOURCE]).Draw(left + 3, yFull - 2, Color::BACK);
-    //Font::SetCurrent(Font::Type::_8);
 
     Trig::DrawOnGrid();
 }

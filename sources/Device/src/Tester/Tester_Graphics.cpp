@@ -115,7 +115,7 @@ uint8 ConvertY(uint8 y)
 
     int delta = 120 - Y;
 
-    delta *= 1.2F;
+    delta = (int)(delta * 1.2F);
 
     Y = 120 - delta;
 

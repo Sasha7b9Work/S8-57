@@ -339,9 +339,14 @@ void Osci::Settings::RShift::Draw(Chan::E ch)
 
     int delta = (SET_RSHIFT(ch) - ZERO) / STEP_RSHIFT;
 
-    int y = (Grid::Bottom() - Grid::Top()) / 2 + Grid::Top() - delta;
+    if (FFT_ENABLED)
+    {
+        delta /= 2;
+    }
 
-    Math::Limitation(&y, Grid::Top(), Grid::Bottom());
+    int y = (Grid::ChannelBottom() - Grid::Top()) / 2 + Grid::Top() - delta;
+
+    Math::Limitation(&y, Grid::Top(), Grid::ChannelBottom());
 
     Char((char)SYMBOL_RSHIFT_NORMAL).Draw(Grid::Left() - 8, y - 4);
 

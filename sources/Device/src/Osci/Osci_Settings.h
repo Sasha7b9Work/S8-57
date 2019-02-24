@@ -148,7 +148,7 @@ namespace Osci
             /// Вывести уровень синхронизации поверх сетки
             void DrawOnGrid();
             /// После вызова этой функции уровень синхронизации будет отрисовываться поверх сигнала в течение timMS миллисекунд
-            static void NeedForDraw(uint timeMS);
+            static void NeedForDraw();
 
             /// Источник синхронизации
             struct Source

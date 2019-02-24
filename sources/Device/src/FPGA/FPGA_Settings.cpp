@@ -215,7 +215,7 @@ void Trig::Level::Change(int delta)
 
     Load();
 
-    NeedForDraw(2000);
+    NeedForDraw();
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -227,10 +227,7 @@ void Trig::Level::Set(int level)
 
     Load();
 
-    if (TRIG_MODE_FIND_IS_HAND)
-    {
-        NeedForDraw(2000);
-    }
+    NeedForDraw();
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -338,7 +335,7 @@ void Trig::DrawOnGrid()
         int height = 18;
 
         int x = (Grid::Right() - Grid::Left()) / 2 + Grid::Left() - width / 2;
-        int y = Grid::Bottom() - height - 20;
+        int y = Grid::ChannelBottom() - height - 20;
 
         Region(width, height).DrawBounded(x, y, Color::BACK, Color::FILL);
 
@@ -351,11 +348,14 @@ void Trig::DrawOnGrid()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Trig::NeedForDraw(uint timeMS)
+void Trig::NeedForDraw()
 {
-    needDraw = true;
-    Timer::SetAndStartOnce(Timer::Type::ShowLevelTrigLev, DisableDrawing, timeMS);
-    Osci::Display::SetFlagRedraw();
+    if (!FFT_ENABLED && TRIG_MODE_FIND_IS_HAND)
+    {
+        needDraw = true;
+        Timer::SetAndStartOnce(Timer::Type::ShowLevelTrigLev, DisableDrawing, 2000);
+        Osci::Display::SetFlagRedraw();
+    }
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
