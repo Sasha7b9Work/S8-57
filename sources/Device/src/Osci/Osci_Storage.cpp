@@ -4,8 +4,6 @@
 #include "Data/Heap.h"
 #include "Settings/Settings.h"
 #include <cstring>
-
-
 #include "Hardware/Timer.h"
 #include "Utils/Buffer.h"
 
@@ -88,42 +86,41 @@ public:
 
         uint freeMemory = 0;
         
-        int choice = 0;
-
         if (newest >= oldest)           // Данные расположены нормально - новейшие по бОльшим адресам
         {
             if ((uint8 *)oldest == BeginMemory())
             {
                 freeMemory = EndMemory() - (uint8 *)newest - newest->FullSize();
-                choice = 1;
+                if (freeMemory >= size)
+                {
+                    return (uint8 *)newest + newest->FullSize();
+                }
             }
             else
             {
                 freeMemory = (uint)((uint8 *)oldest - (uint8 *)BeginMemory());
-                choice = 2;
+                if (freeMemory >= size)
+                {
+                    return (uint8 *)BeginMemory();
+                }
             }
         }
         else
         {
             freeMemory = (uint8 *)oldest - (uint8 *)newest - newest->FullSize();
-            choice = 3;
+            if (freeMemory >= size)
+            {
+                return (uint8 *)newest + newest->FullSize();
+            }
         }
 
-        uint8 *result = (freeMemory >= size) ? ((uint8 *)newest + newest->FullSize()) : nullptr;
-
-        if (result == nullptr)
-        {
-            LOG_WRITE("Нет памяти %d", choice);
-        }
-
-        return result;
+        return nullptr;
     }
     /// Удаление наистарейших данных
     static void FreeOldest()
     {
         oldest = oldest->next;
         oldest->prev = nullptr;
-        LOG_WRITE("Освобождаю память");
     }
 
     /// Возвращает адрес, следующий за последним доступным для сохранения данных
@@ -141,7 +138,6 @@ public:
     /// Выделить место для нового фрейма, чтобы хватило памяти для хранения данных с настройками DataSettings
     static Data *GetMemoryForData(const DataSettings *ds)
     {
-        LOG_WRITE(" ");
         if (oldest == nullptr)
         {
             newest = oldest = (Data *)BeginMemory();
