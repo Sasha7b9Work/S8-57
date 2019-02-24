@@ -78,7 +78,6 @@ void Multimeter::Display::ChangedMode()
 void Multimeter::Display::SetMeasure(const uint8 buf[13])
 {
     std::memcpy(buffer, buf, 13);
-    
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -106,21 +105,22 @@ static void PrepareVariableVoltage()
 static void PrepareConstantCurrent()
 {
     std::memcpy(out, buffer + 1, 7); //-V512
-    std::strcpy(out + 7, (buffer[10] == '1') ? " A~" : " mA~");
+    std::strcpy(out + 7, (buffer[10] == '1') ? " A=" : " mA=");
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void PrepareVariableCurrent()
 {
     std::memcpy(out, buffer + 1, 7); //-V512
-    std::strcpy(out + 7, (buffer[10] == '1') ? " A=" : " mA=");
+    std::strcpy(out + 7, (buffer[10] == '1') ? " A~" : " mA~");
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void PrepareResistance()
 {
     std::memcpy(out, buffer + 1, 7); //-V512
-    std::strcpy(out + 7, " kQ");
+    out[7] = ' ';
+    out[8] = buffer[8];
     out[9] = 0x1b;
 }
 

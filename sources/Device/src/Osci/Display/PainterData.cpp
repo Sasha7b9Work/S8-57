@@ -168,37 +168,40 @@ static void DRAW_SPECTRUM(const uint8 *dataIn, int numPoints, Chan::E ch)
     float dataR[SIZE_BUFFER];
     float spectrum[SIZE_BUFFER];
 
-    float freq0 = 0.0f;
-    float freq1 = 0.0f;
-    float density0 = 0.0f;
-    float density1 = 0.0f;
+    float freq0 = 0.0F;
+    float freq1 = 0.0F;
+    float density0 = 0.0F;
+    float density1 = 0.0F;
     int y0 = 0;
     int y1 = 0;
     int s = 2;
 
     uint8 *data = (uint8 *)std::malloc((uint)numPoints);
 
-    std::memcpy(data, dataIn, (uint)numPoints);
-
-    FPGA::Math::PointsRel2Voltage(data, numPoints, RANGE_DS(ch), (int16)RSHIFT_DS(ch), dataR);
-
-    FPGA::Math::CalculateFFT(dataR, numPoints, spectrum, &freq0, &density0, &freq1, &density1, &y0, &y1);
-
-    DrawSpectrumChannel(spectrum, Color::Channel(ch));
-
-    if (!Menu::IsShown() || Menu::IsMinimize())
+    if (data)
     {
-        Color color = Color::FILL;
+        std::memcpy(data, dataIn, (uint)numPoints);
 
-        WriteParametersFFT(ch, freq0, density0, freq1, density1);
+        FPGA::Math::PointsRel2Voltage(data, numPoints, RANGE_DS(ch), (int16)RSHIFT_DS(ch), dataR);
 
-        Rectangle(s * 2, s * 2).Draw(FFT_POS_CURSOR_0 + Grid::Left() - s, y0 - s, color);
-        Rectangle(s * 2, s * 2).Draw(FFT_POS_CURSOR_1 + Grid::Left() - s, y1 - s);
-        VLine(y0 + s - Grid::MathBottom()).Draw(Grid::Left() + FFT_POS_CURSOR_0, Grid::MathBottom());
-        VLine(y1 + s - Grid::MathBottom()).Draw(Grid::Left() + FFT_POS_CURSOR_1, Grid::MathBottom());
+        FPGA::Math::CalculateFFT(dataR, numPoints, spectrum, &freq0, &density0, &freq1, &density1, &y0, &y1);
+
+        DrawSpectrumChannel(spectrum, Color::Channel(ch));
+
+        if (!Menu::IsShown() || Menu::IsMinimize())
+        {
+            Color color = Color::FILL;
+
+            WriteParametersFFT(ch, freq0, density0, freq1, density1);
+
+            Rectangle(s * 2, s * 2).Draw(FFT_POS_CURSOR_0 + Grid::Left() - s, y0 - s, color);
+            Rectangle(s * 2, s * 2).Draw(FFT_POS_CURSOR_1 + Grid::Left() - s, y1 - s);
+            VLine(y0 + s - Grid::MathBottom()).Draw(Grid::Left() + FFT_POS_CURSOR_0, Grid::MathBottom());
+            VLine(y1 + s - Grid::MathBottom()).Draw(Grid::Left() + FFT_POS_CURSOR_1, Grid::MathBottom());
+        }
+
+        std::free(data);
     }
-
-    std::free(data);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -286,6 +289,10 @@ static void DrawChannel(Chan::E ch)
         else if(DATA == nullptr)
         {
             return;
+        }
+        else
+        {
+            // Будем выводит целый фрейм, несмотря на то, что поточечный вывод
         }
     }
 

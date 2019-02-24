@@ -62,7 +62,7 @@ DEF_CHOICE_3( cRangesVoltageAC,                                                 
 DEF_CHOICE_2( cRangesCurrentDC,
     "Предел", "Range",
     "Диапазон измерения", "Measurement range",
-    "2мА", "2mА",
+    "20мА", "20mА",
     "2А", "2А",
     MULTI_RANGE_CURRENT_DC, pageMultimeter, Choice::EmptyActive, Choice::EmptyChange, Choice::EmptyDraw
 )
@@ -71,7 +71,7 @@ DEF_CHOICE_2( cRangesCurrentDC,
 DEF_CHOICE_2( cRangesCurrentAC,
     "Предел", "Range",
     "Диапазон измерения", "Measurement range",
-    "2мА", "2mA",
+    "20мА", "20mA",
     "2А", "2A",
     MULTI_RANGE_CURRENT_AC, pageMultimeter, Choice::EmptyActive, Choice::EmptyChange, Choice::EmptyDraw
 )
