@@ -79,8 +79,8 @@ class HeapWorker
 public:
     static uint8 *GetMemoryForData(uint /*size*/)
     {
-        last = (Data *)Heap::Begin();
-        return (uint8 *)last;
+        newest = (Data *)Heap::Begin();
+        return (uint8 *)newest;
     }
 
     static uint8 *GetMemoryForDataP2P(uint /*size*/)
@@ -90,7 +90,7 @@ public:
 
     static Data *GetData(int /* fromEnd */)
     {
-        return (Data *)last;
+        return (Data *)newest;
     }
 
     static DataP2P *GetDataP2P()
@@ -100,13 +100,13 @@ public:
 
 private:
     /// Указатель на первые хранящиеся данные (самые старые)
-    static Data *first;
+    static Data *oldest;
     /// Указатель на последние хранящиеся данные (самые свежие)
-    static Data *last;
+    static Data *newest;
 };
 
-Data *HeapWorker::first = nullptr;
-Data *HeapWorker::last = nullptr;
+Data *HeapWorker::oldest = nullptr;
+Data *HeapWorker::newest = nullptr;
 
 };
 

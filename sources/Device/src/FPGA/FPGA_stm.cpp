@@ -50,16 +50,6 @@ namespace FPGA
             return data->dataB;
         }
     };
-
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    class StorageAccessor
-    {
-    public:
-        static Osci::Data *PrepareForNewData()
-        {
-            return Osci::Storage::PrepareForNewData();
-        }
-    };
 }
 
 
@@ -84,7 +74,7 @@ void FPGA::Init()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void FPGA::ReadData()
 {
-    Osci::Data *data = StorageAccessor::PrepareForNewData();
+    Osci::Data *data = Osci::Storage::PrepareForNewData();
 
     ReadDataChanenl(Chan::A, DataAccessor::DataA(data));
     ReadDataChanenl(Chan::B, DataAccessor::DataB(data));

@@ -5,7 +5,6 @@
 namespace FPGA
 {
     class DataAccessor;
-    class StorageAccessor;
 }
 
 class Reader;
@@ -15,7 +14,6 @@ class Buffer;
 namespace Osci
 {
     class DataAccessor;
-    class StorageAccess;
     class DataP2P;
     class Storage;
 
@@ -89,15 +87,13 @@ namespace Osci
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     class Storage
     {
-    friend class FPGA::StorageAccessor;
     friend class ::Reader;
-    friend class StorageAccessor;
     private:
-        /// Подготавливает место в хранилище для новых данных. Возвращает указатель на структуру, которую можно заполнять данными
-        static Data *PrepareForNewData();
         /// Возвращает указатель на данные
         static Data *GetData(int fromEnd = 0);
     public:
+        /// Подготавливает место в хранилище для новых данных. Возвращает указатель на структуру, которую можно заполнять данными
+        static Data *PrepareForNewData();
         /// Подготавливает новый фрейм для хранения данных поточечного вывода
         static void PrepareNewFrameP2P();
         /// Возвращает фрейм поточечного вывода
