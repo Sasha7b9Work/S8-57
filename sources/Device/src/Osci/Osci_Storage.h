@@ -23,6 +23,7 @@ namespace Osci
     friend class DataAccessor;
     friend class FPGA::DataAccessor;
     friend class DataP2P;
+    friend class HeapWorker;
     public:
         void Create();
         const uint8 *DataA();
@@ -30,11 +31,17 @@ namespace Osci
         const uint8 *GetData(Chan::E ch);
         const DataSettings *Settings();
         uint Number() const { return num; };
+        /// Возвращает место, занимаемое структурой вместе с данными
+        uint FullSize() const;
     protected:
         /// Указатель на данные первого канала
         uint8 *dataA;
         /// Указатель на данные второго канала
         uint8 *dataB;
+        /// Указатель на предыдущие сохранённые данные
+        Data *prev;
+        /// Указатель на следующие сохранённые данные
+        Data *next;
         /// Порядковый номер данных
         uint num;
         /// Сколько всего данных уже есть
@@ -92,6 +99,8 @@ namespace Osci
         /// Возвращает указатель на данные
         static Data *GetData(int fromEnd = 0);
     public:
+        /// Очистка. Выполняется после переключения длины памяти
+        static void Clear();
         /// Подготавливает место в хранилище для новых данных. Возвращает указатель на структуру, которую можно заполнять данными
         static Data *PrepareForNewData();
         /// Подготавливает новый фрейм для хранения данных поточечного вывода

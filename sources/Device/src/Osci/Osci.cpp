@@ -377,4 +377,5 @@ void Osci::OnChangedPoints()
     FPGA::Reset();
     TShift::Set(SET_TSHIFT);
     FPGA::Reset();
+    Osci::Storage::Clear();
 }

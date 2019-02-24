@@ -77,25 +77,105 @@ private:
 class HeapWorker
 {
 public:
-    static uint8 *GetMemoryForData(uint /*size*/)
+
+    /// Возвращает указатель на память количеством size, если таковая имеется в наличии
+    static uint8 *Allocate(uint size)
     {
-        newest = (Data *)Heap::Begin();
-        return (uint8 *)newest;
+        if (oldest == nullptr)
+        {
+            return BeginMemory();
+        }
+
+        uint freeMemory = 0;
+
+        if (newest >= oldest)           // Данные расположены нормально - новейшие по бОльшим адресам
+        {
+            freeMemory = EndMemory() - (uint8 *)newest - newest->FullSize();
+        }
+        else
+        {
+            freeMemory = (uint8 *)oldest - (uint8 *)newest - newest->FullSize();
+        }
+
+        return (freeMemory >= size) ? ((uint8 *)newest + newest->FullSize()) : nullptr;
+    }
+    /// Удаление наистарейших данных
+    static void FreeOldest()
+    {
+        oldest = oldest->next;
+        oldest->prev = nullptr;
     }
 
-    static uint8 *GetMemoryForDataP2P(uint /*size*/)
+    /// Возвращает адрес, следующий за последним доступным для сохранения данных
+    static uint8 *EndMemory()
     {
-        return (uint8 *)GetDataP2P();
+        return (uint8 *)GetMemoryForDataP2P();
     }
 
-    static Data *GetData(int /* fromEnd */)
+    /// Возвращает первый доступный адрес для хранения данных
+    static uint8 *BeginMemory()
     {
-        return (Data *)newest;
+        return (uint8 *)Heap::Begin();
+    }
+
+    /// Выделить место для нового фрейма, чтобы хватило памяти для хранения данных с настройками DataSettings
+    static Data *GetMemoryForData(const DataSettings *ds)
+    {
+        if (oldest == nullptr)
+        {
+            newest = oldest = (Data *)BeginMemory();
+            newest->prev = newest->next = oldest->next = oldest->prev = nullptr;
+            return oldest;
+        }
+
+        uint needMemory = sizeof(Data) + ds->NeedMemoryForData();       // Вычисляем требуемое количество памяти
+
+        uint8 *address = Allocate(needMemory);
+
+        while (address == nullptr)
+        {
+            FreeOldest();                           // Удаляем старые данные до тех пор, 
+            address = Allocate(needMemory);         // пока не освободится достаточно место для хранения новых
+        }
+
+        Data *data = (Data *)address;
+
+        newest->next = data;
+        newest = data;
+
+        return newest;
+    }
+
+    static Data *GetData(int fromEnd)
+    {
+        Data *data = newest;
+
+        while (fromEnd > 0 && data != nullptr)
+        {
+            data = newest->prev;
+            fromEnd--;
+        }
+
+        return data;
+    }
+
+    static DataP2P *GetMemoryForDataP2P()
+    {
+        return GetDataP2P();
     }
 
     static DataP2P *GetDataP2P()
     {
-        return (DataP2P *)(((uint)Heap::End() + (uint)Heap::Begin()) / 2);
+        DataSettings ds;
+        ds.Fill();
+        uint size = sizeof(DataP2P) + ds.SizeChannel() * 2;
+
+        return (DataP2P *)(((uint)Heap::End() - size));
+    }
+
+    static void Reset()
+    {
+        oldest = newest = nullptr;
     }
 
 private:
@@ -111,10 +191,6 @@ Data *HeapWorker::newest = nullptr;
 };
 
 
-/// Рассчитать необходимое для запроса из Heap место
-static uint CalculateNeedMemory();
-
-
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 Data *Storage::PrepareForNewData()
 {
@@ -123,9 +199,10 @@ Data *Storage::PrepareForNewData()
         return nullptr;
     }
 
-    uint bytesForSave = CalculateNeedMemory();
+    DataSettings ds;
+    ds.Fill();
 
-    Data *data = (Data *)HeapWorker::GetMemoryForData(bytesForSave);
+    Data *data = (Data *)HeapWorker::GetMemoryForData(&ds);
 
     data->Create();
 
@@ -137,34 +214,13 @@ Data *Storage::PrepareForNewData()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Storage::PrepareNewFrameP2P()
 {
-    uint bytesForSave = CalculateNeedMemory();
-
-    DataP2P *data = (DataP2P *)HeapWorker::GetMemoryForDataP2P(bytesForSave);
+    DataP2P *data = HeapWorker::GetMemoryForDataP2P();
 
     data->Create();
 
     DataAccessor::FillNewData(data);
 
     data->timeStart = TIME_MS;
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static uint CalculateNeedMemory()
-{
-    uint result = sizeof(Data);
-
-    uint bytesInChannel = FPGA::BytesInChannel();
-
-    if (SET_ENABLED_A)
-    {
-        result += bytesInChannel;
-    }
-    if (SET_ENABLED_B)
-    {
-        result += bytesInChannel;
-    }
-
-    return result;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -219,6 +275,23 @@ const uint8 *Data::DataA()
 const uint8 *Data::DataB()
 {
     return dataB;
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+uint Data::FullSize() const
+{
+    uint result = sizeof(Data);
+
+    if (ENABLED_A(&settings))
+    {
+        result += settings.SizeChannel();
+    }
+    if (ENABLED_B(&settings))
+    {
+        result += settings.SizeChannel();
+    }
+
+    return result;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -416,4 +489,10 @@ uint DataP2P::ReadingBytes() const
 int Osci::Storage::NumElementsInStorage()
 {
     return 1;
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Osci::Storage::Clear()
+{
+    HeapWorker::Reset();
 }

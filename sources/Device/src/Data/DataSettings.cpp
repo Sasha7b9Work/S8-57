@@ -60,3 +60,21 @@ int DataSettings::PointsInChannel() const
     return (int)Memory::ENumPointsFPGA((Memory::ENumPointsFPGA::E)ENUM_POINTS(this)).PointsInChannel();
 }
 
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+int DataSettings::NeedMemoryForData() const
+{
+    int result = 0;
+
+    if (ENABLED_A(this))
+    {
+        result += SizeChannel();
+    }
+
+    if (ENABLED_B(this))
+    {
+        result += SizeChannel();
+    }
+
+    return result;
+}
+
