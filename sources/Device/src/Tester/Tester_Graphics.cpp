@@ -96,6 +96,25 @@ static void DrawData(int numStep, int /*x0*/, int /*y0*/)
         }
     }
 }
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+uint8 ConvertX(uint8 x)
+{
+    int X = TESTER_NUM_POINTS - (x - VALUE::MIN);
+
+    LIMITATION(X, 0, TESTER_NUM_POINTS - 1); //-V2516
+
+    return (uint8)X;
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+uint8 ConvertY(uint8 y)
+{
+    int Y = y - VALUE::MIN;
+
+    LIMITATION(Y, 0, TESTER_NUM_POINTS - 1);
+
+    return (uint8)Y;
+}
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Tester::Display::SetPoints(int numStep, const uint8 dx[TESTER_NUM_POINTS], const uint8 dy[TESTER_NUM_POINTS])
@@ -107,21 +126,8 @@ void Tester::Display::SetPoints(int numStep, const uint8 dx[TESTER_NUM_POINTS], 
 
     for(int i = 0; i < TESTER_NUM_POINTS; i++)
     {
-        int X = TESTER_NUM_POINTS - (dx[i] - VALUE::MIN);
-
-        int delta = (int)dy[i] - (int)VALUE::AVE;
-
-        delta = (int)(delta * 1.2F);
-
-        uint8 _dy = (uint8)(delta + VALUE::AVE);
-
-        int Y = _dy - VALUE::MIN;
-
-        LIMITATION(X, 0, TESTER_NUM_POINTS - 1); //-V2516
-        LIMITATION(Y, 0, TESTER_NUM_POINTS - 1); //-V2516
-
-        x[i] = (uint8)X;
-        y[i] = (uint8)Y;
+        x[i] = ConvertX(dx[i]);
+        y[i] = ConvertY(dy[i]);
     }
 }
 
