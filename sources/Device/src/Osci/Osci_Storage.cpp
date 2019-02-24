@@ -157,8 +157,20 @@ public:
 
         Data *data = (Data *)address;
 
-        newest->next = data;
-        newest = data;
+        if (newest == oldest)
+        {
+            oldest->next = data;
+            newest = data;
+            newest->prev = oldest;
+            newest->next = nullptr;
+        }
+        else
+        {
+            newest->next = data;
+            data->prev = newest;
+            data->next = nullptr;
+            newest = data;
+        }
 
         return newest;
     }
