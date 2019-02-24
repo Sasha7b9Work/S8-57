@@ -111,7 +111,7 @@ uint8 ConvertY(uint8 y)
 {
     int Y = y - VALUE::MIN;
 
-    LIMITATION(Y, 0, TESTER_NUM_POINTS - 1);
+    LIMITATION(Y, 0, TESTER_NUM_POINTS - 1); //-V2516
 
     int delta = 120 - Y;
 
@@ -119,7 +119,7 @@ uint8 ConvertY(uint8 y)
 
     Y = 120 - delta;
 
-    LIMITATION(Y, 0, TESTER_NUM_POINTS - 1);
+    LIMITATION(Y, 0, TESTER_NUM_POINTS - 1); //-V2516
 
     return (uint8)Y;
 }

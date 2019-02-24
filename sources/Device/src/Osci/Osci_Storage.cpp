@@ -284,6 +284,13 @@ float DataP2P::TimePointMS(uint numPoint) const
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void DataP2P::AddPoints(uint timeMS, BitSet16 a, BitSet16 b)
 {
+    if (SET_PEAKDET_EN)
+    {
+        data.dataA[pointer] = a.byte0;
+        data.dataB[pointer] = b.byte0;
+
+        pointer++;
+    }
     data.dataA[pointer] = a.byte1;
     data.dataB[pointer] = b.byte1;
 
