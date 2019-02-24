@@ -113,6 +113,14 @@ uint8 ConvertY(uint8 y)
 
     LIMITATION(Y, 0, TESTER_NUM_POINTS - 1);
 
+    int delta = 120 - Y;
+
+    delta *= 1.2F;
+
+    Y = 120 - delta;
+
+    LIMITATION(Y, 0, TESTER_NUM_POINTS - 1);
+
     return (uint8)Y;
 }
 
