@@ -194,7 +194,7 @@ void DataP2P::Create()
     
     readingPoints = 0;
 
-    pointer = 0;
+    pointerToByte = 0;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -286,21 +286,21 @@ void DataP2P::AddPoints(uint timeMS, BitSet16 a, BitSet16 b)
 {
     if (SET_PEAKDET_EN)
     {
-        data.dataA[pointer] = a.byte0;
-        data.dataB[pointer] = b.byte0;
+        data.dataA[pointerToByte] = a.byte0;
+        data.dataB[pointerToByte] = b.byte0;
 
-        pointer++;
+        pointerToByte++;
     }
-    data.dataA[pointer] = a.byte1;
-    data.dataB[pointer] = b.byte1;
+    data.dataA[pointerToByte] = a.byte1;
+    data.dataB[pointerToByte] = b.byte1;
 
     readingPoints++;
 
-    pointer++;
+    pointerToByte++;
 
-    if (pointer == data.settings.PointsInChannel())
+    if (pointerToByte == data.settings.SizeChannel())
     {
-        pointer = 0;
+        pointerToByte = 0;
     }
 
     if (NeedAdditionPoints(timeMS))
@@ -315,12 +315,6 @@ bool DataP2P::NeedAdditionPoints(uint timeMS) const
     float timePoint = TimePointMS(readingPoints);
 
     return (timePoint < timeMS);
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void DataP2P::Logging() const
-{
-    LOG_WRITE("%d точек считано поточечно %d", readingPoints, pointer);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -368,6 +362,13 @@ void DataP2P::FillBufferForPeakDetEnabled(Chan::E ch, Buffer *buffer)
     {
         std::memcpy(buffer->data, data.GetData(ch), readingBytes);
     }
+    else
+    {
+        for (int i = 0; i < NUM_BYTES; i++)
+        {
+            buffer->data[NUM_BYTES - i] = ByteFromEnd(ch, i);
+        }
+    }
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -385,7 +386,7 @@ uint8 DataP2P::ByteFromEnd(Chan::E ch, int fromEnd)
         return FPGA::VALUE::NONE;
     }
 
-    int index = pointer;        // index будет указывать на позицию возвращаемого значения
+    int index = pointerToByte;        // index будет указывать на позицию возвращаемого значения
 
     while (fromEnd != 0)
     {

@@ -53,7 +53,6 @@ namespace Osci
     friend class StructDataP2P;
     friend class ::Reader;
     public:
-        void Logging() const;
         /// time - время, когда были считаны точки
         void AddPoints(uint timeMS, BitSet16 pointA, BitSet16 pointB);
         const uint8 *DataA();
@@ -79,8 +78,8 @@ namespace Osci
         void PrepareBuffer(Buffer *buffer, uint size);
         /// Количество считанных точек
         uint readingPoints;
-        /// Указатель на положение точки, которая будет считываться следующей
-        int pointer;
+        /// Указатель на положение байта, который будет записан следующим
+        int pointerToByte;
         /// Время начала съёма информации. Первая точка будет поставлена через время, соответствующее TBase
         uint timeStart;
 
