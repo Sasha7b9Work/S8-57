@@ -87,23 +87,43 @@ public:
         }
 
         uint freeMemory = 0;
+        
+        int choice = 0;
 
         if (newest >= oldest)           // Данные расположены нормально - новейшие по бОльшим адресам
         {
-            freeMemory = EndMemory() - (uint8 *)newest - newest->FullSize();
+            if ((uint8 *)oldest == BeginMemory())
+            {
+                freeMemory = EndMemory() - (uint8 *)newest - newest->FullSize();
+                choice = 1;
+            }
+            else
+            {
+                freeMemory = (uint)((uint8 *)oldest - (uint8 *)BeginMemory());
+                choice = 2;
+            }
         }
         else
         {
             freeMemory = (uint8 *)oldest - (uint8 *)newest - newest->FullSize();
+            choice = 3;
         }
 
-        return (freeMemory >= size) ? ((uint8 *)newest + newest->FullSize()) : nullptr;
+        uint8 *result = (freeMemory >= size) ? ((uint8 *)newest + newest->FullSize()) : nullptr;
+
+        if (result == nullptr)
+        {
+            LOG_WRITE("Нет памяти %d", choice);
+        }
+
+        return result;
     }
     /// Удаление наистарейших данных
     static void FreeOldest()
     {
         oldest = oldest->next;
         oldest->prev = nullptr;
+        LOG_WRITE("Освобождаю память");
     }
 
     /// Возвращает адрес, следующий за последним доступным для сохранения данных
@@ -121,6 +141,7 @@ public:
     /// Выделить место для нового фрейма, чтобы хватило памяти для хранения данных с настройками DataSettings
     static Data *GetMemoryForData(const DataSettings *ds)
     {
+        LOG_WRITE(" ");
         if (oldest == nullptr)
         {
             newest = oldest = (Data *)BeginMemory();
