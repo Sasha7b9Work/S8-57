@@ -130,6 +130,25 @@ DEF_CHOICE_4( cType, // -V206                                                   
     TYPE_GRID, pageDisplay, FuncActive, Choice::EmptyChange, Choice::EmptyDraw
 )
 
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+DEF_CHOICE_10(cAverage_Num,                                                                                                                       //--- ДИСПЛЕЙ - УСРЕДНЕНИЕ - Количество ---
+    "Усреднение", "Average",
+    "Задаёт количество последних измерений, по которым производится усреднение.",
+    "Sets number of the last measurements on which averaging is made.",
+    DISABLE_RU, DISABLE_EN,
+    "2", "2",
+    "4", "4",
+    "8", "8",
+    "16", "16",
+    "32", "32",
+    "64", "64",
+    "128", "128",
+    "256", "256",
+    "512", "512",
+    ENUM_AVE, pageDisplay, FuncActive, Choice::EmptyChange, Choice::EmptyDraw
+)
+
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 DEF_PAGE_9( pageDisplay, // -V641 // -V1027                                                                                                                                 //--- ДИСПЛЕЙ ---
     "ДИСПЛЕЙ", "DISPLAY",
@@ -137,7 +156,8 @@ DEF_PAGE_9( pageDisplay, // -V641 // -V1027                                     
     "Contains settings of display of the display.",
     &cViewMode,                             ///< ДИСПЛЕЙ - Отображение
     PageDisplay::PageAccumulation::pointer, ///< ДИСПЛЕЙ - НАКОПЛЕНИЕ
-    PageDisplay::PageAverage::pointer,      ///< ДИСПЛЕЙ - УСРЕДНЕНИЕ
+    &cAverage_Num,                          ///< ДИСПЛЕЙ - Усреднение
+    //PageDisplay::PageAverage::pointer,      ///< ДИСПЛЕЙ - УСРЕДНЕНИЕ
     &cMinMax,                               ///< ДИСПЛЕЙ - Мин Макс
     &cSmoothing,                            ///< ДИСПЛЕЙ - Сглаживание
     &cRefreshFPS,                           ///< ДИСПЛЕЙ - Частота обновл
