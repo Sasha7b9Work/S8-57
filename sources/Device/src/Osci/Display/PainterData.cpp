@@ -110,7 +110,9 @@ static void DrawSpectrumChannel(const float *spectrum, Color color)
     int gridHeight = Grid::MathHeight();
     for (int i = 0; i < 256; i++)
     {
-        VLine((int)(gridHeight * spectrum[i])).Draw(gridLeft + 1, gridBottom);
+        int height = (int)(gridHeight * spectrum[i]);
+
+        VLine(height).Draw(gridLeft + i, gridBottom - height);
     }
 }
 
