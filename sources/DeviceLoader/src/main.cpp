@@ -18,6 +18,7 @@
 #include <ff.h>
 #include "main.h"
 #include "Hardware/CPU.h"
+#include "Hardware/HAL/HAL.h"
 #include "Settings/Settings.h"
 #include "Display/Painter.h"
 #include "Display/Display.h"
@@ -26,6 +27,7 @@
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #define FILE_FIRMWARE "S8-57.bin"
+#define FILE_CLEAR "clear.txt"
 
 
 typedef void(*pFunction)();
@@ -36,6 +38,9 @@ MainStruct *ms; //-V707
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/// Стереть настройки
+void EraseSettings();
+/// Записать в EEPROM файл с прошивкой с флешки
 void Upgrade();
 
 
@@ -80,6 +85,11 @@ int main()
 
     if (ms->state == State_Mount)                           // Это означает, что диск удачно примонтирован //-V774
     {
+        if (CPU::FDrive::FileExist(FILE_CLEAR))
+        {
+            EraseSettings();
+        }
+
         if (CPU::FDrive::FileExist(FILE_FIRMWARE))                    // Если на диске обнаружена прошивка
         {
             Upgrade();
@@ -146,4 +156,10 @@ void Upgrade()
     }
     
     CPU::FDrive::CloseOpenedFile();
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void EraseSettings()
+{
+    HAL::EEPROM_::EraseSector(0x080C0000);
 }

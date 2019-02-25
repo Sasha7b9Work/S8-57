@@ -803,21 +803,6 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>Hardware/stm32</GroupName>
-          <Files>
-            <File>
-              <FileName>stm32.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Hardware\stm32\stm32.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>stm32.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Hardware\stm32\stm32.h</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
           <GroupName>Hardware/stm32/4XX</GroupName>
           <Files>
             <File>
