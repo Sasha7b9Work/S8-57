@@ -38,7 +38,7 @@ int main(int argc, char **argv)
 {
     setlocale(LC_ALL, "Russian");
 
-    if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
+    if (SDL_Init(SDL_INIT_EVERYTHING) != 0U)
     {
         std::cout << "SDL_Init Error:" << SDL_GetError() << std::endl;
     }
@@ -127,7 +127,7 @@ void Frame::DrawFPS()
 
     if (SDL_GetTicks() - prevTime > 1000)
     {
-        float fps = (float)count / (SDL_GetTicks() - prevTime) * 1000.0f;
+        float fps = (float)count / (SDL_GetTicks() - prevTime) * 1000.0F;
 
         char buffer[100];
         sprintf(buffer, "fps %f", fps);

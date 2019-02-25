@@ -22,7 +22,7 @@ public:
 
 private:
     wxTimer timer;
-    wxDECLARE_EVENT_TABLE();
+    wxDECLARE_EVENT_TABLE(); //-V2504
 
     void DrawFPS();
     void HandlerEvents();

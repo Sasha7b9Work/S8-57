@@ -62,7 +62,7 @@ static void CreateButtons(Frame *frame);
 /// Создаёт одну кнопку
 static void CreateButton(Key::E key, Frame *frame, const wxPoint &pos, const wxSize &size, pString title);
 /// Создаёт кнопки для меню канала
-static void CreateButtonsChannel(Frame *frame, char *title, int x, int y, Key::E keyChannel, Key::E keyRangeLess, Key::E keyRangeMore, Key::E keyRShiftLess, Key::E keyRShiftMore);
+static void CreateButtonsChannel(Frame *frame, const char *title, int x, int y, Key::E keyChannel, Key::E keyRangeLess, Key::E keyRangeMore, Key::E keyRShiftLess, Key::E keyRShiftMore);
 /// Создаёт кнопки группы синхронизации
 static void CreateButtonsTrig(Frame *frame, int x, int y);
 
@@ -103,7 +103,7 @@ void Painter::EndScene()
 
     SDL_Rect rect = {0, 0, 320, 240};
 
-    SDL_RenderCopy(renderer, texture, NULL, &rect);
+    SDL_RenderCopy(renderer, texture, NULL, &rect); //-V2001
     SDL_RenderPresent(renderer);
 }
 
@@ -275,7 +275,7 @@ static void CreateButton(Key::E key, Frame *frame, const wxPoint &pos, const wxS
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void CreateButtonsChannel(Frame *frame, char *title, int x, int y, Key::E keyChannel, Key::E keyRangeLess, Key::E keyRangeMore, Key::E keyRShiftLess, Key::E keyRShiftMore)
+static void CreateButtonsChannel(Frame *frame, const char *title, int x, int y, Key::E keyChannel, Key::E keyRangeLess, Key::E keyRangeMore, Key::E keyRShiftLess, Key::E keyRShiftMore)
 {
     int width = 45;
     int height = 20;
