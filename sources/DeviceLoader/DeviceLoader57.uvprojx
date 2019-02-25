@@ -386,6 +386,16 @@
               <FilePath>.\src\defines.h</FilePath>
             </File>
             <File>
+              <FileName>log.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\log.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>log.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\log.h</FilePath>
+            </File>
+            <File>
               <FileName>main.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\main.cpp</FilePath>
@@ -769,6 +779,26 @@
               <FileName>Timer.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Hardware\Timer.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Hardware/HAL</GroupName>
+          <Files>
+            <File>
+              <FileName>HAL.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Hardware\HAL\HAL.h</FilePath>
+            </File>
+            <File>
+              <FileName>HAL.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\HAL\HAL.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>HAL_EEPROM.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\HAL\HAL_EEPROM.cpp</FilePath>
             </File>
           </Files>
         </Group>

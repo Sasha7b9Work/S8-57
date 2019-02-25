@@ -25,7 +25,8 @@
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-#define FILE_NAME "S8-57.bin"
+#define FILE_FIRMWARE "S8-57.bin"
+
 
 typedef void(*pFunction)();
 
@@ -79,7 +80,7 @@ int main()
 
     if (ms->state == State_Mount)                           // Это означает, что диск удачно примонтирован //-V774
     {
-        if (CPU::FDrive::FileExist(FILE_NAME))                    // Если на диске обнаружена прошивка
+        if (CPU::FDrive::FileExist(FILE_FIRMWARE))                    // Если на диске обнаружена прошивка
         {
             Upgrade();
         }
@@ -130,7 +131,7 @@ void Upgrade()
     
     CPU::FLASH_::Prepare();
     
-    int size = CPU::FDrive::OpenFileForRead(FILE_NAME);
+    int size = CPU::FDrive::OpenFileForRead(FILE_FIRMWARE);
     int fullSize = size;
     uint address = CPU::FLASH_::ADDR_SECTOR_PROGRAM_0;
 
