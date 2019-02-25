@@ -51,9 +51,11 @@ void Recorder::Display::DrawSettings(int x, int y)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Recorder::Display::DrawData()
 {
-    Storage::Frame frame = Storage::CurrentFrame();
+    Storage::Frame *frame = Storage::CurrentFrame();
 
-    if (frame.NumPoints() == 0)
+    uint numPoints = frame->NumPoints();
+
+    if (numPoints == 0)
     {
         return;
     }
@@ -64,7 +66,7 @@ void Recorder::Display::DrawData()
 
     int x = 0;
 
-    Storage::Point point = frame.GetPoint((frame.NumPoints() < 320) ? (0) : (frame.NumPoints() - 320));
+    Storage::Point point = frame->GetPoint((numPoints < 320) ? (0) : (numPoints - 320), numPoints);
 
     do
     {
@@ -76,7 +78,7 @@ void Recorder::Display::DrawData()
             VLine(max - min).Draw(x, min);
         }
 
-        point = frame.NextPoint();
+        point = frame->NextPoint(numPoints);
         x++;
     } while (x < 320);
 }

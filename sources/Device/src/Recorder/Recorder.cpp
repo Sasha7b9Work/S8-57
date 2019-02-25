@@ -93,7 +93,7 @@ static void ReadPoint()
         BitSet16 dataA(FSMC::ReadFromFPGA(RD::DATA_A), FSMC::ReadFromFPGA(RD::DATA_A + 1));
         BitSet16 dataB(FSMC::ReadFromFPGA(RD::DATA_B), FSMC::ReadFromFPGA(RD::DATA_B + 1));
 
-        Recorder::Storage::CurrentFrame().AddPoint(dataA, dataB);
+        Recorder::Storage::CurrentFrame()->AddPoint(dataA, dataB);
     }
 }
 

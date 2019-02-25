@@ -19,9 +19,9 @@ namespace Stack
         frame.SetDataAddress((uint16 *)Heap::Begin());
     }
 
-    static Frame &Top()
+    static Frame *Top()
     {
-        return frame;
+        return &frame;
     }
 }
 
@@ -46,7 +46,7 @@ void Recorder::Storage::Frame::AddPoint(BitSet16 dataA, BitSet16 /*dataB*/)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-Recorder::Storage::Frame &Recorder::Storage::CurrentFrame()
+Recorder::Storage::Frame *Recorder::Storage::CurrentFrame()
 {
     return Stack::Top();
 }
@@ -67,19 +67,19 @@ void Recorder::Storage::Frame::SetDataAddress(uint16 *address)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-Point Frame::GetPoint(uint position)
+Point Frame::GetPoint(uint position, uint maxPoints)
 {
     pointer = position - 1;
 
-    return NextPoint();
+    return NextPoint(maxPoints);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-Point Frame::NextPoint()
+Point Frame::NextPoint(uint maxPoints)
 {
     pointer++;
 
-    if (pointer >= NumPoints())
+    if (pointer >= maxPoints)
     {
         return Point::CreateEmpty();
     }

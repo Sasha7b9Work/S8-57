@@ -31,9 +31,9 @@ namespace Recorder
             /// Число точек в регистрограмме
             uint NumPoints();
             /// Получить точку в позиции position
-            Point GetPoint(uint position);
+            Point GetPoint(uint position, uint maxPoints);
             /// Получить следующую точку
-            Point NextPoint();
+            Point NextPoint(uint maxPoints);
             /// Время записи первой точки
             PackedTime timeStart;
         private:
@@ -51,6 +51,6 @@ namespace Recorder
 
         void CreateNewFrame();
 
-        Frame &CurrentFrame();
+        Frame *CurrentFrame();
     };
 }
