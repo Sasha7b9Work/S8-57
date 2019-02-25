@@ -59,20 +59,13 @@ namespace Recorder
         {
             enum E
             {
-                _5ms,   // TBase = 100ms
-                _10ms,  // TBase = 200ms
-                _25ms,  // TBase = 500ms
-                _50ms,  // TBase = 1s
-                _100ms, // TBase = 2s
-                _250ms, // TBase = 5s,
-                _500ms, // TBase = 10s,
-                _1s,    // TBase = 20s,
-                _2s,    //
-                _5s,    //
-                _10s,   //
-                _20s,   //
-                _30s,   //
-                _60s,   //
+                _100ms, // TBase = 0.1c
+                _200ms, // TBase = 0.2c
+                _500ms, // TBase = 0.5c
+                _1s,    // TBase = 1c
+                _2s,    // TBase = 2c
+                _5s,    // TBase = 5c
+                _10s,   // TBase = 10c
                 Size
             } value;
             explicit ScaleX(E v) : value(v) {};

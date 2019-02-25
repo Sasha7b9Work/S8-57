@@ -128,7 +128,7 @@ const Settings Settings::defaultSettings =
     Color::Scheme::WhiteLetters,        // serv_colorScheme
     false,                              // serv_recorder
     CalibratorMode::Freq,               // serv_calibratorMode
-    true,                               // serv_soundEnable
+    false,                              // serv_soundEnable
     100,                                // serv_soundVolume
     false,                              // serv_showInfoVoltage
     
@@ -224,14 +224,14 @@ const Settings Settings::defaultSettings =
     // Настройки регистратора
 
     ViewAlways::InMode,                 // rec_viewAlways
-    false,                              // rec_sourceChanA
-    false,                              // rec_sourceChanB
+    true,                               // rec_sourceChanA
+    true,                               // rec_sourceChanB
     false,                              // rec_sourceSensor
     TypeStorage::Flash,                 // rec_storageRecord
     TypeStorage::Flash,                 // rec_storagePlay
     Axis::X,                            // rec_axisMove
     Axis::X,                            // rec_axisZoom
-    ScaleX(ScaleX::_50ms),              // rec_scaleX
+    ScaleX(ScaleX::_100ms),             // rec_scaleX
     { Range::_1V, Range::_1V },         // rec_range
 
     0,  // dbg_gate_max
