@@ -60,7 +60,7 @@ void Recorder::Display::DrawData()
 
     Color::SetCurrent(Color::FILL);
 
-    Text(String("%d элементов", frame.NumPoints()), 2).Draw(10, 10);
+    //Text(String("%d элементов", frame.NumPoints()), 2).Draw(10, 10);
 
     int x = 0;
 

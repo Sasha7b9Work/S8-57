@@ -1,11 +1,9 @@
-#include "stdafx.h"
-#ifndef WIN32
 #include "defines.h"
 #include "SCPI.h"
 #include "Hardware/VCP.h"
 #include "Utils/Buffer.h"
 #include "Utils/StringUtils.h"
-#endif
+#include <cstring>
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -19,7 +17,7 @@ void SCPI::AddNewData(uint8 *buffer, uint length)
     
     if (SU::EqualsStrings(buffer, "*IDN?", 5))
     {
-        const char *answer = "S8-56, MNIPI";
+        const char *answer = "MNIPI, S8-57, v.1.2";
         VCP::SendDataAsynch((uint8 *)answer, std::strlen(answer) + 1);
     }
 }

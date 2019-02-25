@@ -84,9 +84,9 @@ void Recorder::Update()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void ReadPoint()
 {
-    if (Display::InProcess())
+    if (::HAL::FSMC::InterchangeWithPanel())
     {
-        Display::SetFuncAfterUpadteOnce(ReadPoint);
+        ::HAL::FSMC::RunFunctionAfterInteractionWitchPanel(ReadPoint);
     }
     else
     {

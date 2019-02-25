@@ -94,6 +94,7 @@ file(GLOB SOURCES   ../common/_VS/*
                     src/Osci/Display/*
                     src/Osci/Measurements/*
                     src/Recorder/*
+                    src/SCPI/*
                     src/Settings/*
                     src/Tester/*
                     src/Utils/*

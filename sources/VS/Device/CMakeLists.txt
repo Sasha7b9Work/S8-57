@@ -219,6 +219,7 @@ file(GLOB SOURCES   ../../common/_VS/*
                     ../../Device/src/Osci/Display/*
                     ../../Device/src/Osci/Measurements/*
                     ../../Device/src/Recorder/*
+                    ../../Device/src/SCPI/*
                     
                     ../../Device/src/Settings/Settings.h
                     ../../Device/src/Settings/Settings.cpp
