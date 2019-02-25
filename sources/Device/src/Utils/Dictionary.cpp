@@ -13,6 +13,8 @@ pString dictWords[DNumWords][2] =
     {"мс",                                  "ms"},
     {"Балансировка канала 1",               "Balance channel 1"},
     {"Балансировка канала 2",               "Balance channel 2"},
+    {"Калибровка канала 1",                 "Calibrate channel 1"},
+    {"Калибровка канала 2",                 "Calibrate channel 2"},
     {"Ур синхр = ",                         "Trig lvl = "},
     {"СИ",                                  "Tr"},
     {"Обнаружено запоминающее устройство",  "Detected flash drive"},

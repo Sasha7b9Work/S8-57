@@ -8,6 +8,7 @@
 #include "FPGA/FPGA_Math.h"
 #include "FPGA/FPGA_Settings.h"
 #include "Hardware/Beeper.h"
+#include "Hardware/Timer.h"
 #include "Menu/Menu.h"
 #include "Menu/Pages/Include/Definition.h"
 #include "Menu/Pages/Include/PageService.h"
@@ -81,11 +82,23 @@ DEF_CHOICE_2( cCalibrator_Calibrator, // -V206                                  
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static bool IsActive_Calibrator_Calibrate()
 {
-    return !(SET_CALIBR_MODE_A == CalibrationMode::Disable && CALIBR_MODE_B == CalibrationMode::Disable);
+    //return !(SET_CALIBR_MODE_A == CalibrationMode::Disable && CALIBR_MODE_B == CalibrationMode::Disable);
+    return true;
 }
 
 static void OnPress_Calibrator_Calibrate()
 {
+    Display::FuncOnWaitStart(DICT(DCalibrateChA), false);
+
+    Timer::PauseOnTime(5000);
+
+    Display::FuncOnWaitStop();
+
+    Display::FuncOnWaitStart(DICT(DCalibrateChB), false);
+
+    Timer::PauseOnTime(5000);
+
+    Display::FuncOnWaitStop();
 }
 
 DEF_BUTTON( bCalibrator_Calibrate,                                                                                                                //--- СЕРВИС - КАЛИБРАТОР - Калибровать ---
@@ -100,8 +113,8 @@ DEF_PAGE_2( ppCalibrator, // -V641 // -V1027                                    
     "КАЛИБРОВКА", "CALIBRATE",
     "Управлением калибратором и калибровка осциллографа",
     "Control of the calibrator and calibration of an oscillograph",
-    &cCalibrator_Calibrator,     // СЕРВИС - КАЛИБРАТОР - Калибратор
-    &bCalibrator_Calibrate,      // СЕРВИС - КАЛИБРАТОР - Калибровать
+    &cCalibrator_Calibrator,     ///< СЕРВИС - КАЛИБРАТОР - Калибратор
+    &bCalibrator_Calibrate,      ///< СЕРВИС - КАЛИБРАТОР - Калибровать
     Page::Name::Service_Calibrator, &pService, FuncActive, FuncPressPage, FuncDrawPage, FuncRegSetPage
 )
 
