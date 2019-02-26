@@ -95,6 +95,7 @@ source_group(Hardware           FILES   ../../Device/src/Hardware/Battery.h
                                         ../../Device/src/Hardware/Battery.cpp
                                         ../../Device/src/Hardware/Beeper.h
                                         ../../Device/src/Hardware/Beeper.cpp
+                                        ../../Device/src/Hardware/Beeper_Bell.cpp
                                         ../../Device/src/Hardware/Clock.h
                                         ../../Device/src/Hardware/Clock.cpp
                                         ../../Device/src/Hardware/Memory.h
@@ -188,6 +189,7 @@ file(GLOB SOURCES   ../../common/_VS/*
                     ../../Device/src/Hardware/Battery.cpp
                     ../../Device/src/Hardware/Beeper.h
                     ../../Device/src/Hardware/Beeper.cpp
+                    ../../Device/src/Hardware/Beeper_Bell.cpp
                     ../../Device/src/Hardware/Clock.h
                     ../../Device/src/Hardware/Clock.cpp
                     ../../Device/src/Hardware/Memory.h

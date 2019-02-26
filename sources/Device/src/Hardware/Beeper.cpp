@@ -18,8 +18,6 @@ static bool buttonIsPressed = false;    ///< \brief Когда запускается звук нажат
                                         ///< отпускания
 static volatile bool isBeep = false;
 
-static bool bellIsEnabled = false;
-
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 static void Beep(const TypeWave::E newTypeWave, const float newFreq, const float newAmpl, const int newDuration);
@@ -186,25 +184,6 @@ static void Beep(const TypeWave::E newTypeWave, const float newFreq, const float
     Beeper::DAC1_::StartDMA(points, POINTS_IN_PERIOD_SOUND);
 
     Timer::SetAndStartOnce(Timer::Type::StopSound, Stop, (uint)newDuration);
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Beeper::Bell::On()
-{
-    if (bellIsEnabled)
-    {
-        return;
-    }
-
-    Beeper::WaitForCompletion();
-
-    bellIsEnabled = true;
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Beeper::Bell::Off()
-{
-    bellIsEnabled = false;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
