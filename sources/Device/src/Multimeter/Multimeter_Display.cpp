@@ -5,6 +5,7 @@
 #include <cstring>
 
 #include "Display/Display_Primitives.h"
+#include "Hardware/Beeper.h"
 
 
 using namespace Multimeter::Settings;
@@ -21,7 +22,7 @@ char out[SIZE_OUT];
 /// Если нулевой элемент == 0, то выводить ничего не нужно
 static char buffer[13] = { 0 };
 
-static void PrepareRing();
+static void PrepareBell();
 static void PrepareConstantVoltage();
 static void PrepareVariableVoltage();
 static void PrepareConstantCurrent();
@@ -46,7 +47,7 @@ void Multimeter::Display::Update()
         PrepareVariableCurrent,
         PrepareResistance,
         PrepareTestDiode,
-        PrepareRing
+        PrepareBell
     };
 
     Painter::BeginScene(Color::BACK);
@@ -125,9 +126,24 @@ void PrepareResistance()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void PrepareRing()
+static bool ResistanceLess100()
+{
+    return ((out[1] == '0') && (out[3] == '0'));
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+static void PrepareBell()
 {
     std::memcpy(out, buffer + 1, 7); //-V512
     std::strcpy(out + 7, " kQ");
     out[9] = 0x1b;
+
+    if (ResistanceLess100())
+    {
+        Beeper::Bell::On();
+    }
+    else
+    {
+        Beeper::Bell::Off();
+    }
 }
