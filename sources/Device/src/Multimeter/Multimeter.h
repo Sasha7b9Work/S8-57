@@ -45,12 +45,12 @@ namespace Multimeter
             Resistance,
             TestDiode,
             Bell,
-            Number
+            Size
         } value;
         explicit Measure(E v) : value(v) { };
         char Symbol() const
         {
-            static const char symbols[Number] = {'U', 'V', 'I', 'J', 'R', 'Y', 'W' };
+            static const char symbols[Size] = {'U', 'V', 'I', 'J', 'R', 'Y', 'W' };
             return symbols[value]; //-V2006
         }
         /// Получить код измерения из принятого буфера

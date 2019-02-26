@@ -47,6 +47,13 @@ namespace Beeper
     void Beep(TypePress::E type);
 
     void Test();
+
+    namespace Bell
+    {
+        void On();
+
+        void Off();
+    }
 };
 
 

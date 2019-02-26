@@ -38,7 +38,7 @@ void Multimeter::Display::Update()
         pFuncVV func;
         Func(pFuncVV f) : func(f) {};
     }
-    funcs[Multimeter::Measure::Number] =
+    funcs[Multimeter::Measure::Size] =
     {
         PrepareConstantVoltage,
         PrepareVariableVoltage,
@@ -54,7 +54,7 @@ void Multimeter::Display::Update()
     std::memset(out, 0, SIZE_OUT);
 
     Measure::E meas = Measure::GetCode(buffer);
-    if (meas == Measure::Number)
+    if (meas == Measure::Size)
     {
         meas = MULTI_MEASURE;
     }
