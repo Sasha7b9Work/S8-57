@@ -8,6 +8,7 @@
 
 #include "Recorder/Recorder_Storage.h"
 #include "Hardware/Timer.h"
+#include "FPGA/FPGA.h"
 
 
 using namespace Display::Primitives;
@@ -49,6 +50,27 @@ void Recorder::Display::DrawSettings(int x, int y)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+static int Y(int y)
+{
+    int delta = y - FPGA::VALUE::AVE;
+
+    delta = (int)(delta * (240.0F / 250.0F));
+
+    y = delta + FPGA::VALUE::AVE;
+
+    if (y < 0)
+    {
+        y = 0;
+    }
+    if (y > 239)
+    {
+        y = 239;
+    }
+
+    return y;
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Recorder::Display::DrawData()
 {
     Storage::Frame *frame = Storage::CurrentFrame();
@@ -72,8 +94,8 @@ void Recorder::Display::DrawData()
     {
         if (!point.IsEmpty())
         {
-            int min = point.Min();
-            int max = point.Max();
+            int min = Y(point.Min());
+            int max = Y(point.Max());
             
             VLine(max - min).Draw(x, min);
         }
