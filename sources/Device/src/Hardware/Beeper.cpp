@@ -159,11 +159,7 @@ static void SetWave()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void Beep(const TypeWave::E newTypeWave, const float newFreq, const float newAmpl, const int newDuration)
 {
-    if (soundWarnIsBeep)
-    {
-        return;
-    }
-    if (!SOUND_ENABLED)
+    if (soundWarnIsBeep || !SOUND_ENABLED || Beeper::Bell::IsAcitve())
     {
         return;
     }

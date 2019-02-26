@@ -1,5 +1,7 @@
 #include "defines.h"
 #include "Beeper.h"
+#include "Hardware/HAL/HAL.h"
+
 
 static bool bellIsEnabled = false;
 
@@ -7,12 +9,14 @@ static bool bellIsEnabled = false;
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void Beeper::Bell::On()
 {
-    if (bellIsEnabled)
+    if (IsAcitve())
     {
         return;
     }
 
     Beeper::WaitForCompletion();
+
+    HAL::DAC1_::BellOn();
 
     bellIsEnabled = true;
 }
@@ -20,5 +24,13 @@ void Beeper::Bell::On()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Beeper::Bell::Off()
 {
+    HAL::DAC1_::BellOff();
+
     bellIsEnabled = false;
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+bool Beeper::Bell::IsAcitve()
+{
+    return bellIsEnabled;
 }
