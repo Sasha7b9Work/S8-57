@@ -52,7 +52,7 @@ void Recorder::Display::DrawSettings(int x, int y)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static int Y(int y)
 {
-    int delta = y - FPGA::VALUE::AVE;
+    int delta = FPGA::VALUE::AVE - y;
 
     delta = (int)(delta * (240.0F / 250.0F));
 
