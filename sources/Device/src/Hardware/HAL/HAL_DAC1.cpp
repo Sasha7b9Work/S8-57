@@ -102,9 +102,47 @@ void HAL::DAC1_::ConfigTIM7(uint16 prescaler, uint16 period)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+static void ConfigTIM7forBell()
+{
+    static TIM_HandleTypeDef htim;
+    TIM_MasterConfigTypeDef master;
+
+    htim.Instance = TIM7;
+
+    htim.Init.Period = 0x7FF;
+    htim.Init.Prescaler = 0;
+    htim.Init.ClockDivision = 0;
+    htim.Init.CounterMode = TIM_COUNTERMODE_UP;
+
+    HAL_TIM_Base_Init(&htim);
+
+    master.MasterOutputTrigger = TIM_TRGO_UPDATE;
+    master.MasterSlaveMode = TIM_MASTERSLAVEMODE_DISABLE;
+
+    HAL_TIMEx_MasterConfigSynchronization(&htim, &master);
+
+    HAL_TIM_Base_Start(&htim);
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void HAL::DAC1_::BellOn()
 {
+    ConfigTIM7forBell();
 
+    if (HAL_DACEx_TriangleWaveGenerate(&handle, DAC_CHANNEL_1, DAC_TRIANGLEAMPLITUDE_255) != HAL_OK)
+    {
+        ERROR_HANDLER();
+    }
+
+    if (HAL_DAC_Start(&handle, DAC_CHANNEL_1) != HAL_OK)
+    {
+        ERROR_HANDLER();
+    }
+
+    if (HAL_DAC_SetValue(&handle, DAC_CHANNEL_1, DAC_ALIGN_8B_R, 0x100) != HAL_OK)
+    {
+        ERROR_HANDLER();
+    }
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
