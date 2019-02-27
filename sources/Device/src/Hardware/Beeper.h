@@ -50,12 +50,9 @@ namespace Beeper
 
     namespace Bell
     {
-        /// Включить звук прозвонки
         void On();
-        /// Отключить звук прозвонки
+
         void Off();
-        /// Возвращает true, если звук звучит
-        bool IsAcitve();
     }
 };
 

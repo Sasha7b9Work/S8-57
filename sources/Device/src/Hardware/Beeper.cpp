@@ -18,6 +18,8 @@ static bool buttonIsPressed = false;    ///< \brief Когда запускается звук нажат
                                         ///< отпускания
 static volatile bool isBeep = false;
 
+static bool bellIsEnabled = false;
+
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 static void Beep(const TypeWave::E newTypeWave, const float newFreq, const float newAmpl, const int newDuration);
@@ -63,15 +65,15 @@ namespace Beeper
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void Beeper::Init()
 {
-    //DAC1_::Init();
+    DAC1_::Init();
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void Stop()
 {
-    //Beeper::DAC1_::StopDMA();
-    //isBeep = false;
-    //soundWarnIsBeep = false;
+    Beeper::DAC1_::StopDMA();
+    isBeep = false;
+    soundWarnIsBeep = false;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -159,9 +161,11 @@ static void SetWave()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void Beep(const TypeWave::E newTypeWave, const float newFreq, const float newAmpl, const int newDuration)
 {
-    return;
-
-    if (soundWarnIsBeep || !SOUND_ENABLED || Beeper::Bell::IsAcitve())
+    if (soundWarnIsBeep)
+    {
+        return;
+    }
+    if (!SOUND_ENABLED)
     {
         return;
     }
@@ -182,6 +186,25 @@ static void Beep(const TypeWave::E newTypeWave, const float newFreq, const float
     Beeper::DAC1_::StartDMA(points, POINTS_IN_PERIOD_SOUND);
 
     Timer::SetAndStartOnce(Timer::Type::StopSound, Stop, (uint)newDuration);
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Beeper::Bell::On()
+{
+    if (bellIsEnabled)
+    {
+        return;
+    }
+
+    Beeper::WaitForCompletion();
+
+    bellIsEnabled = true;
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Beeper::Bell::Off()
+{
+    bellIsEnabled = false;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
