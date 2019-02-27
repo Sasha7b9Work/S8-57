@@ -73,17 +73,6 @@ void FPGA::Init()
     ADC3_::Init();
 }
 
-static int numAverages = 0;
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void ClearAverageData()
-{
-    std::memset(AVE_1, 0, 16 * 1024);
-    std::memset(AVE_2, 0, 16 * 1024);
-
-    numAverages = 0;
-}
-
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void AverageData(Chan::E ch, const uint8 *dataNew, const uint8 * /*dataOld*/, int size)
 {
@@ -95,37 +84,16 @@ static void AverageData(Chan::E ch, const uint8 *dataNew, const uint8 * /*dataOl
 
     uint16 numAve = (uint16)ENUM_AVE;
 
-    if (numAverages < NUM_AVE)
+    for (int i = 0; i < size; i++)
     {
-        for (int i = 0; i < size; i++)
-        {
-            av[i] += *_new++;
-        }
+        av[i] = (uint16)(av[i] - (av[i] >> numAve));
+
+        av[i] += *_new;
+
+        *_new = (uint8)(av[i] >> numAve);
+
+        _new++;
     }
-    else
-    {
-        for (int i = 0; i < size; i++)
-        {
-            av[i] = (uint16)(av[i] - (av[i] >> numAve));
-
-            av[i] += *_new;
-
-            *_new = (uint8)(av[i] >> numAve);
-
-            _new++;
-        }
-    }
-
-    numAverages++;
-
-
-    //for (int i = 0; i < size; i++)
-    //{
-    //    *_new = (uint8)((*_new * k) + (*_old * (1.0F - k)) + 0.5F);
-    //
-    //    _new++;
-    //    _old++;
-    //}
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -156,10 +124,6 @@ void FPGA::ReadData()
                 {
                     AverageData(Chan::B, last->DataB(), prev->DataB(), setLast->SizeChannel());
                 }
-            }
-            else
-            {
-                ClearAverageData();
             }
         }
     }
