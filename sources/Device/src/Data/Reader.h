@@ -9,6 +9,8 @@ extern const DataSettings *pDS;         ///< ”казатель на настройки текущего рис
 extern uint8 *dataOUT[2];               ///< —читанные данные второго канала
 extern const uint8 *dataIN[2];
 
+extern const uint8 *ave[2];
+
 #define DATA_P2P    pDataP2P
 #define DATA        pData
 #define DS          pDS                 ///< ”казатель на настройки текущего рисуемого сигнала.
@@ -19,6 +21,10 @@ extern const uint8 *dataIN[2];
 #define OUT(ch) (dataOUT[ch])
 #define OUT_A   OUT(Chan::A)
 #define OUT_B   OUT(Chan::B)
+
+#define AVE_DATA(ch) ave[ch]
+#define AVE_1        AVE_DATA(Chan::A)
+#define AVE_2        AVE_DATA(Chan::B)
 
 
 #define RANGE_DS(ch)    (RANGE(DS, ch))

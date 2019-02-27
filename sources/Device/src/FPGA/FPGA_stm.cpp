@@ -82,7 +82,7 @@ static void AverageData(const uint8 *dataNew, const uint8 *dataOld, int size, fl
 
     for (int i = 0; i < size; i++)
     {
-        *_new = (uint8)((*_new * k) + (*_old * (1.0F - k)));
+        *_new = (uint8)((*_new * k) + (*_old * (1.0F - k)) + 0.5F);
 
         _new++;
         _old++;
@@ -109,6 +109,14 @@ void FPGA::ReadData()
 
             float k = 1.0F / NUM_AVE;
 
+            int numStep = 0;                // Это номер шага. По нему будем определять, какое усреднение сейчас использовать
+
+            if (numStep == NUM_AVE)
+            {
+                k = 0.25F;
+                numStep = 0;
+            }
+
             if (setLast->Equals(*setPrev))
             {
                 if (ENABLED_A(setLast))
@@ -120,6 +128,8 @@ void FPGA::ReadData()
                     AverageData(last->DataB(), prev->DataB(), setLast->SizeChannel(), k);
                 }
             }
+
+            numStep++;
         }
     }
 }

@@ -15,6 +15,8 @@ static uint8 ccm[4][16 * 1024] __attribute__((section("CCM_DATA")));
 const uint8 *dataIN[2] = { nullptr, nullptr };
 /// Ёто указатели на данные, пересчитанные и готовые к выводу
 uint8 *dataOUT[2] = { ccm[0], ccm[1] };
+/// 
+uint8 *ave[2] = { ccm[2], ccm[3] };
 /// ”казатель на настройки считанных данных
 const DataSettings *pDS = nullptr;
 /// ”казатель на считанные даныне

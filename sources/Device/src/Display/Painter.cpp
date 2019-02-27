@@ -10,6 +10,9 @@
 #include <stdlib.h>
 #include <cstring>
 
+#include "FlashDrive/FlashDrive.h"
+#include "Keyboard/DecoderDevice.h"
+
 
 using HAL::FSMC;
 
@@ -33,6 +36,21 @@ void Painter::BeginScene(Color color)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+static void SaveScreenToFlash()
+{
+    if (!FDrive::IsConnected())
+    {
+        return;
+    }
+
+    uint8 buffer[] = { Command::Screen, 0 };
+
+    FSMC::WriteToPanel(buffer, 2);                  // Посылаем запрос на чтение строки
+
+    Decoder::Update();
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Painter::EndScene()
 {
     uint8 buffer[1] = { Command::Paint_EndScene };
@@ -40,19 +58,9 @@ void Painter::EndScene()
 
     if (needSaveScreen)
     {
+        SaveScreenToFlash();
+
         needSaveScreen = 0;
-
-        buffer[0] = Command::Screen;
-        FSMC::WriteToPanel(buffer, 1);
-
-        uint8 d[10];
-
-        for (int i = 0; i < 10; i++)
-        {
-            d[i] = FSMC::ReadByteNow();
-        }
-
-        LOG_WRITE("%d %d %d %d %d %d %d %d %d %d", d[0], d[1], d[2], d[3], d[4], d[5], d[6], d[7], d[8], d[9]);
     }
 }
 

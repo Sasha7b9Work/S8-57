@@ -410,10 +410,7 @@ static void Memory_Release()
 {
     if (MODE_BTN_MEMORY_IS_SAVE)
     {
-        if (event.type == TypePress::Press)
-        {
-            Painter::SaveScreenToDrive();
-        }
+        Painter::SaveScreenToDrive();
     }
     else
     {
