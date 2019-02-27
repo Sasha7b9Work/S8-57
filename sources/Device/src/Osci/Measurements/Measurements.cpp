@@ -1012,16 +1012,16 @@ float CalculateMinRel(Chan::E ch)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 float CalculateAverageRel(Chan::E ch)
 {
-    static float ave[2] = {0.0F, 0.0F};
+    static float _ave[2] = {0.0F, 0.0F};
 
     if(!aveIsCalculating[ch])
     {
         float min = CalculateMinRel(ch);
         float max = CalculateMaxRel(ch);
-        ave[ch] = (min == Float::ERROR || max == Float::ERROR) ? Float::ERROR : (min + max) / 2.0F; //-V550
+        _ave[ch] = (min == Float::ERROR || max == Float::ERROR) ? Float::ERROR : (min + max) / 2.0F; //-V550
         aveIsCalculating[ch] = true;
     }
-    return ave[ch];
+    return _ave[ch];
 }
 
 

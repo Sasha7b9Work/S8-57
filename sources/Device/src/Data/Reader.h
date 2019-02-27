@@ -9,7 +9,7 @@ extern const DataSettings *pDS;         ///< ”казатель на настройки текущего рис
 extern uint8 *dataOUT[2];               ///< —читанные данные второго канала
 extern const uint8 *dataIN[2];
 
-extern const uint8 *ave[2];
+extern uint16 *ave[2];
 
 #define DATA_P2P    pDataP2P
 #define DATA        pData

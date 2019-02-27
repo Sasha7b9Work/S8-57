@@ -16,7 +16,7 @@ const uint8 *dataIN[2] = { nullptr, nullptr };
 /// Ёто указатели на данные, пересчитанные и готовые к выводу
 uint8 *dataOUT[2] = { ccm[0], ccm[1] };
 /// 
-uint8 *ave[2] = { ccm[2], ccm[3] };
+uint16 *ave[2] = { (uint16 *)ccm[2], (uint16 *)ccm[3] };
 /// ”казатель на настройки считанных данных
 const DataSettings *pDS = nullptr;
 /// ”казатель на считанные даныне

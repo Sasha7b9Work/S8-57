@@ -11,9 +11,11 @@
 #include "Utils/Buffer.h"
 #include "Utils/Values.h"
 #include <stdlib.h>
+#include <cstring>
 
 #include "Hardware/HAL/HAL.h"
 #include "Osci/Osci_Storage.h"
+#include "Data/Reader.h"
 
 
 using namespace FPGA::HAL::GPIO;
@@ -71,22 +73,59 @@ void FPGA::Init()
     ADC3_::Init();
 }
 
+static int numAverages = 0;
+
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void AverageData(const uint8 *dataNew, const uint8 *dataOld, int size, float k)
+static void ClearAverageData()
+{
+    std::memset(AVE_1, 0, 16 * 1024);
+    std::memset(AVE_2, 0, 16 * 1024);
+
+    numAverages = 0;
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+static void AverageData(Chan::E ch, const uint8 *dataNew, const uint8 * /*dataOld*/, int size)
 {
     // Формула усреднения такова:
     // new = new * k + old * (1 - k)
 
     uint8 *_new = (uint8 *)dataNew;
-    const uint8 *_old = dataOld;
+    uint16 *av = AVE_DATA(ch);
 
-    for (int i = 0; i < size; i++)
+    uint16 numAve = (uint16)ENUM_AVE;
+
+    if (numAverages < NUM_AVE)
     {
-        *_new = (uint8)((*_new * k) + (*_old * (1.0F - k)) + 0.5F);
-
-        _new++;
-        _old++;
+        for (int i = 0; i < size; i++)
+        {
+            av[i] += *_new++;
+        }
     }
+    else
+    {
+        for (int i = 0; i < size; i++)
+        {
+            av[i] = (uint16)(av[i] - (av[i] >> numAve));
+
+            av[i] += *_new;
+
+            *_new = (uint8)(av[i] >> numAve);
+
+            _new++;
+        }
+    }
+
+    numAverages++;
+
+
+    //for (int i = 0; i < size; i++)
+    //{
+    //    *_new = (uint8)((*_new * k) + (*_old * (1.0F - k)) + 0.5F);
+    //
+    //    _new++;
+    //    _old++;
+    //}
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -107,29 +146,21 @@ void FPGA::ReadData()
             const DataSettings *setLast = last->Settings();
             const DataSettings *setPrev = prev->Settings();
 
-            float k = 1.0F / NUM_AVE;
-
-            int numStep = 0;                // Это номер шага. По нему будем определять, какое усреднение сейчас использовать
-
-            if (numStep == NUM_AVE)
-            {
-                k = 0.25F;
-                numStep = 0;
-            }
-
             if (setLast->Equals(*setPrev))
             {
                 if (ENABLED_A(setLast))
                 {
-                    AverageData(last->DataA(), prev->DataA(), setLast->SizeChannel(), k);
+                    AverageData(Chan::A, last->DataA(), prev->DataA(), setLast->SizeChannel());
                 }
                 if (ENABLED_B(setPrev))
                 {
-                    AverageData(last->DataB(), prev->DataB(), setLast->SizeChannel(), k);
+                    AverageData(Chan::B, last->DataB(), prev->DataB(), setLast->SizeChannel());
                 }
             }
-
-            numStep++;
+            else
+            {
+                ClearAverageData();
+            }
         }
     }
 }
