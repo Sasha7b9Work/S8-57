@@ -161,14 +161,11 @@ static void SetWave()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void Beep(const TypeWave::E newTypeWave, const float newFreq, const float newAmpl, const int newDuration)
 {
-    if (soundWarnIsBeep)
+    if (bellIsEnabled || soundWarnIsBeep || !SOUND_ENABLED)
     {
         return;
     }
-    if (!SOUND_ENABLED)
-    {
-        return;
-    }
+
     if (frequency != newFreq || amplitude != newAmpl || typeWave != newTypeWave) //-V550
     {
         frequency = newFreq;
@@ -198,12 +195,27 @@ void Beeper::Bell::On()
 
     Beeper::WaitForCompletion();
 
+
+    frequency = 1000.0F;
+    amplitude = 1.0F;
+    typeWave = TypeWave::Sine;
+
+    Stop();
+
+    SetWave();
+
+    Beeper::DAC1_::StartDMA(points, POINTS_IN_PERIOD_SOUND);
+
+    Timer::SetAndStartOnce(Timer::Type::StopSound, Stop, 1000000U);
+
     bellIsEnabled = true;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Beeper::Bell::Off()
 {
+    Stop();
+
     bellIsEnabled = false;
 }
 
