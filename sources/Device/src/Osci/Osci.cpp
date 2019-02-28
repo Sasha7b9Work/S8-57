@@ -170,6 +170,8 @@ static void Osci::UpdateFPGA()
                 }
                 else
                 {
+                    Timer::PauseOnTicks(5 * 90 * 20);
+
                     Start();
                 }
             }
