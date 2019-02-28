@@ -1,4 +1,5 @@
 #pragma once
+#include "Settings/Settings.h"
 
 
 enum DictWord
@@ -29,6 +30,7 @@ enum DictWord
     DSoftware,          // "Программное обеспечение :"
     DVersion,           // "версия %s"
     DInformation,       // "ИНФОРМАЦИЯ"
+    DFileSaved,         // "Файл сохранён"
     DNumWords
 };
 
