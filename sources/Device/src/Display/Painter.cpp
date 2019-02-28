@@ -38,11 +38,9 @@ void Painter::BeginScene(Color color)
 static int numRow = -1;
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Painter::SaveRow(int row, uint8 *pixels)
+void Painter::SaveRow(int row)
 {
     numRow = row;
-
-    LOG_WRITE("%d - %d %d %d %d %d %d %d %d %d %d %d %d", row, pixels[0], pixels[1], pixels[2], pixels[3], pixels[4], pixels[5], pixels[6], pixels[7], pixels[8], pixels[9], pixels[10], pixels[11]);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -70,9 +68,15 @@ static void SaveScreenToFlash()
         return;
     }
 
+    uint8 pixels[320];
+
+    Decoder::SetBufferForScreenRow(pixels);
+
     for (int row = 239; row >= 0; row--)
     {
         ReadRow((uint8)row);
+
+        LOG_WRITE("%d - %d %d %d %d %d %d %d %d %d %d %d %d", row, pixels[0], pixels[1], pixels[2], pixels[3], pixels[4], pixels[5], pixels[6], pixels[7], pixels[8], pixels[9], pixels[10], pixels[11]);
     }
 }
 

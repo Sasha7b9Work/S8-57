@@ -19,6 +19,8 @@ static pFuncBU8 curFunc;
 /// Текущий байт выполняемой функции
 static int step;
 
+static uint8 *pixels = nullptr;
+
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 static void RunStep(uint8 data);
@@ -143,11 +145,15 @@ static bool ButtonPress(uint8 data)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Decoder::SetBufferForScreenRow(uint8 *_pixels)
+{
+    pixels = _pixels;
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static bool FuncScreen(uint8 data)
 {
     static int numString = 0;
-
-    static uint8 pixels[320];
 
     if (step == 0)
     {
@@ -168,7 +174,7 @@ static bool FuncScreen(uint8 data)
 
     if (step == 321)
     {
-        Painter::SaveRow(numString, pixels);
+        Painter::SaveRow(numString);
     }
 
 
