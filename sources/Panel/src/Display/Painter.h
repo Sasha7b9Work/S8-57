@@ -22,6 +22,8 @@ public:
     static void BeginScene(Color color);
     /// Вызывается в конце отрисовки каждого кадра. Переносит содержимое буфера на экран
     static void EndScene();
+    /// Пересылает строку в панель
+    static void SendRow(int row);
 
     static void SetColor(Color color);
     /// Возвращает текущий цвет рисования

@@ -69,6 +69,8 @@ void FPGA::HAL::LoadRegUPR()
         (0)
     };
 
+    data |= 1;
+
     data |= mask[CALIBRATOR_MODE];
 
     FSMC::WriteToFPGA8(WR::UPR, data);

@@ -213,19 +213,17 @@ static bool SetColor(uint8 data)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static bool FuncScreen(uint8)
+static bool FuncScreen(uint8 data)
 {
-    FSMC::SetNowMode(true);
-
-    uint8 data = 0;
-
-    for (int i = 0; i < 10; i++)
+    if (step == 0)
     {
-        FSMC::WriteBuffer(&data, 1);
-        data++;
+        return false;
     }
 
-    FSMC::SetNowMode(false);
+    if (step == 1)
+    {
+        Painter::SendRow(data);
+    }
 
     return true;
 }

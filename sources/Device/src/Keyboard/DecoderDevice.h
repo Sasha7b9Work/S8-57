@@ -15,4 +15,8 @@ public:
     static void Update();
     /// Возвращает количество принятых, но не обработаннах байт
     static int BytesInBuffer();
+
+    static uint8 *Data();
+
+    static void ClearBuffer();
 };

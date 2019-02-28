@@ -12,5 +12,6 @@ type ..\..\Device\DeviceOSC.out
 :Exit
 
 copy ..\..\Device\S8-57.bin h:\
+copy ..\..\Device\S8-57.bin i:\
 
 @echo %TIME%   Complete

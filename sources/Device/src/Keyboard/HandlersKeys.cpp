@@ -18,6 +18,7 @@
 #include <cstdio>
 
 #include "Osci/Display/Osci_Display.h"
+#include "FlashDrive/FlashDrive.h"
 
 
 using namespace Display::Primitives;
@@ -408,13 +409,9 @@ static void Measures_Release()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void Memory_Release()
 {
-    if (MODE_BTN_MEMORY_IS_SAVE)
+    if (FDrive::IsConnected())
     {
         Painter::SaveScreenToDrive();
-    }
-    else
-    {
-        ShowHidePage(PageMemory::pointer);
     }
 }
 

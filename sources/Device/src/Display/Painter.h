@@ -16,4 +16,6 @@ namespace Painter
     void DrawTesterData(uint8 mode, Color color, const uint8 *x, const uint8 *y);
 
     void SaveScreenToDrive();
+
+    void SaveRow(int row);
 };

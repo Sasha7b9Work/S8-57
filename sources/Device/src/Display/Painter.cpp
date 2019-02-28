@@ -7,7 +7,7 @@
 #include "Hardware/Timer.h"
 #include "Tester/Tester.h"
 #include "Utils/Buffer.h"
-#include <stdlib.h>
+#include <cstdlib>
 #include <cstring>
 
 #include "FlashDrive/FlashDrive.h"
@@ -35,6 +35,31 @@ void Painter::BeginScene(Color color)
     FSMC::WriteToPanel(message.Data(), message.Size());
 }
 
+static int numRow = -1;
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Painter::SaveRow(int row)
+{
+    numRow = row;
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+static void ReadRow(uint8 row)
+{
+    numRow = -1;
+
+    uint8 buffer[] = { Command::Screen, row };
+
+    FSMC::WriteToPanel(buffer, 2);
+
+    while (numRow == -1)
+    {
+        Decoder::Update();
+    }
+
+    LOG_WRITE("Строка %d", numRow);
+}
+
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void SaveScreenToFlash()
 {
@@ -43,11 +68,7 @@ static void SaveScreenToFlash()
         return;
     }
 
-    uint8 buffer[] = { Command::Screen, 0 };
-
-    FSMC::WriteToPanel(buffer, 2);                  // Посылаем запрос на чтение строки
-
-    Decoder::Update();
+    ReadRow(1);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
