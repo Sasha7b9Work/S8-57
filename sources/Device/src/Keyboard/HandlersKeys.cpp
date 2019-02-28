@@ -411,7 +411,7 @@ static void Memory_Release()
 {
     if (FDrive::IsConnected())
     {
-        Painter::SaveScreenToDrive();
+        Menu::SaveScreenToDrive();
     }
 }
 

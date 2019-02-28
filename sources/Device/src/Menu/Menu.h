@@ -45,6 +45,10 @@ public:
 
     static Page::Name::E GetNameOpenedPage();
 
+    static void SaveScreenToDrive();
+
+    static void SaveRow(int row);
+
     static PageBase *OpenedPage();
     /// Возвращает адрес текущего элемента меню (текущим, как правило, является элемент, кнопка которого была нажата последней
     static Control *CurrentItem();

@@ -174,7 +174,7 @@ static bool FuncScreen(uint8 data)
 
     if (step == 321)
     {
-        Painter::SaveRow(numString);
+        Menu::SaveRow(numString);
     }
 
 
