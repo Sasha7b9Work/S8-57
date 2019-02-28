@@ -54,6 +54,8 @@ static void ReadRow(uint8 row)
 
     while (numRow == -1)
     {
+        uint8 data = 0;
+        FSMC::WriteToPanel(&data, 1);
         Decoder::Update();
     }
 
@@ -68,7 +70,10 @@ static void SaveScreenToFlash()
         return;
     }
 
-    ReadRow(1);
+    for (uint8 row = 0; row < 240; row++)
+    {
+        ReadRow(row);
+    }
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
