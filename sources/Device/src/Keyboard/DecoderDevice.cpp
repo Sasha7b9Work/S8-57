@@ -165,8 +165,7 @@ static bool FuncScreen(uint8 data)
 {
     static int numString = 0;
 
-    /// \todo volatile потому, что компилятор предупреждение на неиспользование выдаёт почему-то
-    volatile static uint8 pixels[320];
+    static uint8 pixels[320];
 
     if (step == 0)
     {
@@ -187,7 +186,7 @@ static bool FuncScreen(uint8 data)
 
     if (step == 321)
     {
-        Painter::SaveRow(numString);
+        Painter::SaveRow(numString, pixels);
     }
 
 

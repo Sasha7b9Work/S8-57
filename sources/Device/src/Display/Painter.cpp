@@ -38,9 +38,11 @@ void Painter::BeginScene(Color color)
 static int numRow = -1;
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Painter::SaveRow(int row)
+void Painter::SaveRow(int row, uint8 *pixels)
 {
     numRow = row;
+
+    LOG_WRITE("%d - %d %d %d %d %d %d %d %d %d %d %d %d", row, pixels[0], pixels[1], pixels[2], pixels[3], pixels[4], pixels[5], pixels[6], pixels[7], pixels[8], pixels[9], pixels[10], pixels[11]);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -58,8 +60,6 @@ static void ReadRow(uint8 row)
         FSMC::WriteToPanel(&data, 1);
         Decoder::Update();
     }
-
-    LOG_WRITE("Строка %d", numRow);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -70,24 +70,24 @@ static void SaveScreenToFlash()
         return;
     }
 
-    for (uint8 row = 0; row < 240; row++)
+    for (int row = 239; row >= 0; row--)
     {
-        ReadRow(row);
+        ReadRow((uint8)row);
     }
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Painter::EndScene()
 {
-    uint8 buffer[1] = { Command::Paint_EndScene };
-    FSMC::WriteToPanel(buffer, 1);
-
     if (needSaveScreen)
     {
         SaveScreenToFlash();
 
         needSaveScreen = 0;
     }
+
+    uint8 buffer[1] = { Command::Paint_EndScene };
+    FSMC::WriteToPanel(buffer, 1);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

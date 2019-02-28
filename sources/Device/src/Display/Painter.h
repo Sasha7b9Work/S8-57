@@ -17,5 +17,5 @@ namespace Painter
 
     void SaveScreenToDrive();
 
-    void SaveRow(int row);
+    void SaveRow(int row, uint8 *pixels);
 };
