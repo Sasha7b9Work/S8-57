@@ -64,6 +64,12 @@ void Memory::SaveSettings()
         address = ADDR_SECTOR_SETTINGS_1;
     }
 
+    if (address < ADDR_SECTOR_SETTINGS_1)
+    {
+        EEPROM_::EraseSector(ADDR_SECTOR_SETTINGS_1);
+        address = ADDR_SECTOR_SETTINGS_1;
+    }
+
     set.size = sizeof(set);
     EEPROM_::WriteBytes(address, (uint8 *)&set, sizeof(set));
 }
