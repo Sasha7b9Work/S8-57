@@ -175,10 +175,7 @@ void Tester::ProcessStep()
        |<--------->|<--------->|<--------->|<--------->|<--------->|<--------->|<--------->|<--------->|<--------->|<--------->|                  */
 
 
-    static int success = 0;
-    static int fail = 0;
-
-    if (!FSMC::InterchangeWithPanel())   // Если идёт процесс обмена с панелью, отложим на следующий так во избежание артефактов и зависаний.
+    if (!FSMC::InterchangeWithPanel())   // Если идёт процесс обмена с панелью, отложим на следующий такт во избежание артефактов и зависаний.
     {
         if ((step % 2) == 0)        // Если шаг кратен двум, то нужно устанавливать напряжение
         {
@@ -197,11 +194,9 @@ void Tester::ProcessStep()
         {
             step = 0;
         }
-        ++success;
     }
     else
     {
-        ++fail;
         FSMC::RunFunctionAfterInteractionWitchPanel(&Tester::ProcessStep);
     }
 }
