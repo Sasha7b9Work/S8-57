@@ -59,7 +59,7 @@ namespace Osci
     friend class ::Reader;
     public:
         /// time - время, когда были считаны точки
-        void AddPoints(uint timeMS, BitSet16 pointA, BitSet16 pointB);
+        void AddPoints(BitSet16 pointA, BitSet16 pointB);
         const uint8 *DataA();
         const uint8 *DataB();
         const DataSettings *Settings();

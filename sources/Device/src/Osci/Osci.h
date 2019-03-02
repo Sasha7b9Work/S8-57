@@ -23,6 +23,8 @@ namespace Osci
     /// Эту функцию надо вызывать при изменении длины памяти. Ну или режима пикового детектора
     void OnChangedPoints();
 
+    void ReadPointP2P();
+
     extern int addShift;
 
     extern const int Kr[Settings::TBase::Size];

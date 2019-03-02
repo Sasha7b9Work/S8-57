@@ -4,6 +4,7 @@
 #include "Hardware/Timer.h"
 #include "Keyboard/DecoderDevice.h"
 #include "Utils/Debug.h"
+#include "Osci/Osci.h"
 
 
 using HAL::FSMC;
@@ -272,6 +273,8 @@ void FSMC::WriteToPanel(const uint8 *data, uint length)
         while (PAN_RECIEVE_TRANSMIT_CONFIRM) {};
         ++i;                                    // переходим к следующему байту в буфере
     }
+
+    Osci::ReadPointP2P();
 
     interchangeWithPanel = false;
 

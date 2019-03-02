@@ -384,7 +384,7 @@ float DataP2P::TimePointMS(uint numPoint) const
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void DataP2P::AddPoints(uint timeMS, BitSet16 a, BitSet16 b)
+void DataP2P::AddPoints(BitSet16 a, BitSet16 b)
 {
     if (SET_PEAKDET_EN)
     {
@@ -403,11 +403,6 @@ void DataP2P::AddPoints(uint timeMS, BitSet16 a, BitSet16 b)
     if (pointerToByte == data.settings.SizeChannel())
     {
         pointerToByte = 0;
-    }
-
-    if (NeedAdditionPoints(timeMS))
-    {
-        AddPoints(timeMS, a, b);
     }
 }
 

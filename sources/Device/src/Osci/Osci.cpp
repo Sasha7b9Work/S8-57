@@ -37,7 +37,7 @@ static int CalculateShift();
 
 static bool CalculateGate(uint16 rand, uint16 *eMin, uint16 *eMax);
 /// Чтение точки в поточечном режиме
-static void ReadPointP2P();
+//static void ReadPointP2P();
 /// Возвращает true, если уже можно читать данные
 static bool CanReadData();
 
@@ -67,7 +67,7 @@ void Osci::Init()
     Settings::TShift::Load();
     FPGA::Settings::LoadCalibratorMode();
     Settings::LoadHoldfOff();
-    FPGA::HAL::Interrupt::P2P::Init(ReadPointP2P);
+    ::HAL::PIO::Init(::HAL::PIO::Port::_G, ::HAL::PIO::Pin::_1, ::HAL::PIO::Mode::Input, ::HAL::PIO::Pull::Up);
     FPGA::OnPressStart();
 }
 
@@ -89,21 +89,18 @@ void Osci::Start()
 
     FPGA::timeStart = TIME_MS;
 
-    FPGA::isRunning = true;
-
     if (InModeP2P())
     {
         Storage::PrepareNewFrameP2P();
-        FPGA::HAL::Interrupt::P2P::Enable();
     }
+
+    FPGA::isRunning = true;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Osci::Stop(bool)
 {
-    FPGA::HAL::Interrupt::P2P::Disable();
-
-    isRunning = false;
+    FPGA::isRunning = false;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -313,29 +310,18 @@ static bool CalculateGate(uint16 rand, uint16 *eMin, uint16 *eMax)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void ReadPointP2P()
+void Osci::ReadPointP2P()
 {
-    /// Время чтения точки. Если == 0, то нужно брать актуальное при сохранении точки, иначе - из time
-    static uint time = 0;
-
-    if(::HAL::FSMC::InterchangeWithPanel())
+    if (!InModeP2P() || !FPGA::IsRunning())
     {
-        time = TIME_MS;
-        ::HAL::FSMC::RunFunctionAfterInteractionWitchPanel(ReadPointP2P);
+        return;
     }
-    else
-    {
-        if (time == 0)
-        {
-            time = TIME_MS;
-        }
 
+    if (::HAL::PIO::Read(::HAL::PIO::Port::_G, ::HAL::PIO::Pin::_1))
+    {
         BitSet16 dataA(FSMC::ReadFromFPGA(RD::DATA_A), FSMC::ReadFromFPGA(RD::DATA_A + 1));
         BitSet16 dataB(FSMC::ReadFromFPGA(RD::DATA_B), FSMC::ReadFromFPGA(RD::DATA_B + 1));
-
-        Osci::Storage::GetFrameP2P()->AddPoints(time, dataA, dataB);
-
-        time = 0;
+        Osci::Storage::GetFrameP2P()->AddPoints(dataA, dataB);
     }
 }
 
