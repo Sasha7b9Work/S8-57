@@ -13,6 +13,7 @@
 #include "Osci/Osci_Settings.h"
 #include "Utils/Values.h"
 #include "Data/Heap.h"
+#include "Menu/Pages/Include/PageFunction.h"
 
 
 using namespace Display::Primitives;
@@ -29,6 +30,8 @@ namespace Display
     static void DrawData();
     /// ќтобразить размер пам€ти, занимаемой данными
     void DrawSizeMemory(int x, int y);
+
+    void DrawMemoryWindow();
 };
 };
 
@@ -46,12 +49,19 @@ void Recorder::Display::Update()
 
     DrawSizeMemory(0, 0);
 
+    DrawMemoryWindow();
+
     Menu::Draw();
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Recorder::Display::DrawSettings(int x, int y)
 {
+    if (Menu::OpenedPage() != PageFunction::PageRecorder::pointer)
+    {
+        return;
+    }
+
     Region(30, 30).DrawBounded(x, y, Color::BACK, Color::FILL);
 
     Text(RECORDER_SCALE_X.ToString()).Draw(x + 2, y + 2);
@@ -64,6 +74,11 @@ void Recorder::Display::DrawSettings(int x, int y)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Recorder::Display::DrawSizeMemory(int x, int y)
 {
+    if (Menu::OpenedPage() != PageFunction::PageRecorder::pointer)
+    {
+        return;
+    }
+
     Region(100, 10).DrawBounded(x, y, Color::BACK, Color::FILL);
 
     //Text(Integer(Storage::CurrentFrame()->Size()).ToString(false)).Draw(x + 2, y + 2);
@@ -135,4 +150,26 @@ void Recorder::Display::DrawData()
         point = frame->NextPoint(numPoints);
         x++;
     } while (x < 320);
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Recorder::Display::DrawMemoryWindow()
+{
+    if (Menu::OpenedPage() != PageFunction::PageRecorder::PageShow::pointer || Storage::CurrentFrame()->NumPoints() == 0)
+    {
+        return;
+    }
+
+    Region(319, 5).DrawBounded(0, 3, Color::BACK, Color::FILL);
+
+    int numPoints = (int)Storage::CurrentFrame()->NumPoints();
+
+    int width = (int)(320.0f / numPoints * 320.0F + 0.5F);
+
+    if (width > 319)
+    {
+        width = 319;
+    }
+
+    Region(width, 10).DrawBounded(319 - width, 0, Color::BACK, Color::FILL);
 }
