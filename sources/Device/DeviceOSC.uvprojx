@@ -1811,6 +1811,16 @@
               <FilePath>.\src\Utils\Math.h</FilePath>
             </File>
             <File>
+              <FileName>Smoother.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Utils\Smoother.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Smoother.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Utils\Smoother.h</FilePath>
+            </File>
+            <File>
               <FileName>Stack.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Utils\Stack.cpp</FilePath>
