@@ -64,13 +64,15 @@ void Recorder::Display::DrawSettings(int x, int y)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Recorder::Display::DrawSizeMemory(int x, int y)
 {
-    Region(50, 20).DrawBounded(x, y, Color::BACK, Color::FILL);
+    Region(100, 10).DrawBounded(x, y, Color::BACK, Color::FILL);
 
-    Text(Integer(Storage::CurrentFrame()->Size()).ToString(false)).Draw(x + 2, y + 2);
+    //Text(Integer(Storage::CurrentFrame()->Size()).ToString(false)).Draw(x + 2, y + 2);
 
     uint freeMemory = Heap::Size() - Storage::CurrentFrame()->Size();
 
-    Text(Integer((int)(freeMemory / RECORDER_SCALE_X.BytesToSec())).ToString(false)).Draw(x + 2, y + 11);
+    String text("Осталось %d сек", (int)(freeMemory / RECORDER_SCALE_X.BytesToSec()));
+
+    Text(text).Draw(x + 2, y + 1);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
