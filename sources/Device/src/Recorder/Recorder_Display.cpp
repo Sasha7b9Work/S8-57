@@ -11,6 +11,7 @@
 #include "FPGA/FPGA.h"
 #include "Settings/Settings.h"
 #include "Osci/Osci_Settings.h"
+#include "Utils/Values.h"
 
 
 using namespace Display::Primitives;
@@ -25,6 +26,8 @@ namespace Display
     void DrawSettings(int x, int y);
     /// Отобразить данные
     static void DrawData();
+    /// Отобразить размер памяти, занимаемой данными
+    void DrawSizeMemory(int x, int y);
 };
 };
 
@@ -40,6 +43,8 @@ void Recorder::Display::Update()
 
     DrawSettings(269, 0);
 
+    DrawSizeMemory(0, 0);
+
     Menu::Draw();
 }
 
@@ -53,6 +58,14 @@ void Recorder::Display::DrawSettings(int x, int y)
     Text(Osci::Settings::Range(SET_RANGE_A).ToString()).Draw(x + 2, y + 11);
 
     Text(Osci::Settings::Range(SET_RANGE_B).ToString()).Draw(x + 2, y + 20);
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Recorder::Display::DrawSizeMemory(int x, int y)
+{
+    Region(50, 12).DrawBounded(x, y, Color::BACK, Color::FILL);
+
+    Text(Integer(Storage::CurrentFrame()->Size()).ToString(false)).Draw(x + 2, y + 2);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

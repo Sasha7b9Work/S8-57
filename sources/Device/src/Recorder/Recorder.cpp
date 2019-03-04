@@ -7,6 +7,7 @@
 #include "Recorder/Recorder_Storage.h"
 
 #include "Hardware/HAL/HAL_PIO.h"
+#include "Data/Heap.h"
 
 
 using namespace HAL::ADDRESSES::FPGA;
@@ -92,7 +93,14 @@ void Recorder::ReadPoint()
         BitSet16 dataA(FSMC::ReadFromFPGA(RD::DATA_A), FSMC::ReadFromFPGA(RD::DATA_A + 1));
         BitSet16 dataB(FSMC::ReadFromFPGA(RD::DATA_B), FSMC::ReadFromFPGA(RD::DATA_B + 1));
 
-        Recorder::Storage::CurrentFrame()->AddPoint(dataA, dataB);
+        if (Recorder::Storage::CurrentFrame()->Size() + sizeof(Storage::Point) < Heap::Size())
+        {
+            Recorder::Storage::CurrentFrame()->AddPoint(dataA, dataB);
+        }
+        else
+        {
+            Stop();
+        }
     }
 }
 
@@ -108,16 +116,12 @@ void Recorder::Start()
     FSMC::WriteToFPGA16(WR::POST_LO, 0);
     FSMC::WriteToFPGA8(WR::START, 0xff);
 
-    //FPGA::HAL::Interrupt::P2P::Enable();
-
     running = true;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Recorder::Stop()
 {
-    //FPGA::HAL::Interrupt::P2P::Disable();
-
     running = false;
 }
 

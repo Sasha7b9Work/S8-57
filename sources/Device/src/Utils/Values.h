@@ -37,7 +37,7 @@ public:
 
     int NumDigits() const;
 
-    String ToString(bool alwaysSign, int numMinFields) const;
+    String ToString(bool alwaysSign, int numMinFields = 1) const;
 
     static const int ERROR = 0x7fffffff;
 
