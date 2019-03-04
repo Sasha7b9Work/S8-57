@@ -17,4 +17,6 @@ namespace Recorder
     void Stop();
 
     bool IsRunning();
+
+    void ReadPoint();
 };

@@ -73,7 +73,7 @@
         <LExpSel>0</LExpSel>
       </OPTXL>
       <OPTFL>
-        <tvExp>1</tvExp>
+        <tvExp>0</tvExp>
         <tvExpOptDlg>0</tvExpOptDlg>
         <IsCurrentTarget>1</IsCurrentTarget>
       </OPTFL>
@@ -164,7 +164,7 @@
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>&lt;1&gt;.\src\Hardware\HAL\HAL_IT.cpp</Filename>
+          <Filename>D:\Projects\stm32\S8-57\sources\DeviceLoader\src\Hardware\HAL\HAL_IT.cpp</Filename>
           <ExecCommand></ExecCommand>
           <Expression>\\S8_57\src/Hardware/HAL/HAL_IT.cpp\33</Expression>
         </Bp>
@@ -180,7 +180,7 @@
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>&lt;1&gt;.\src\Osci\Osci.cpp</Filename>
+          <Filename>D:\Projects\stm32\S8-57\sources\DeviceLoader\src\Osci\Osci.cpp</Filename>
           <ExecCommand></ExecCommand>
           <Expression>\\S8_57\src/Osci/Osci.cpp\325</Expression>
         </Bp>
@@ -196,7 +196,7 @@
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>&lt;1&gt;.\src\Hardware\HAL\HAL.cpp</Filename>
+          <Filename>&lt;3&gt;.\src\Hardware\HAL\HAL.cpp</Filename>
           <ExecCommand></ExecCommand>
           <Expression>\\S8_57\src/Hardware/HAL/HAL.cpp\98</Expression>
         </Bp>
@@ -3189,7 +3189,7 @@
 
   <Group>
     <GroupName>Settings</GroupName>
-    <tvExp>1</tvExp>
+    <tvExp>0</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>

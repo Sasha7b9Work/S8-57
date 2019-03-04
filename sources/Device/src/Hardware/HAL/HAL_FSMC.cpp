@@ -6,6 +6,8 @@
 #include "Utils/Debug.h"
 #include "Osci/Osci.h"
 
+#include "Recorder/Recorder.h"
+
 
 using HAL::FSMC;
 
@@ -43,8 +45,6 @@ enum ModeFSMC
 
 static      ModeFSMC    mode = ModeNone;
 bool        interchangeWithPanel = false;
-/// Если не равно нулю, нужно выполнить эту функцию после завершения обмена с панелью
-pFuncTester funcAfterInteractionWithPanel = nullptr;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #define CONFIGURE_TO_READ_PANEL                                             \
@@ -276,13 +276,9 @@ void FSMC::WriteToPanel(const uint8 *data, uint length)
 
     Osci::ReadPointP2P();
 
-    interchangeWithPanel = false;
+    Recorder::ReadPoint();
 
-    if (funcAfterInteractionWithPanel)
-    {
-        funcAfterInteractionWithPanel();
-        funcAfterInteractionWithPanel = nullptr;
-    }
+    interchangeWithPanel = false;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -370,12 +366,6 @@ static uint8 GetOutData()
 bool FSMC::InterchangeWithPanel()
 {
     return interchangeWithPanel;
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void FSMC::RunFunctionAfterInteractionWitchPanel(pFuncTester func)
-{
-    funcAfterInteractionWithPanel = func;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

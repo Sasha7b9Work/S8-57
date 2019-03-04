@@ -6,6 +6,8 @@
 #include "Recorder/Recorder_Settings.h"
 #include "Recorder/Recorder_Storage.h"
 
+#include "Hardware/HAL/HAL_PIO.h"
+
 
 using namespace HAL::ADDRESSES::FPGA;
 
@@ -49,7 +51,7 @@ void Recorder::Init()
     Osci::Settings::TShift::Load();
     Osci::Settings::LoadHoldfOff();
 
-    FPGA::HAL::Interrupt::P2P::Init(ReadPoint);
+    //FPGA::HAL::Interrupt::P2P::Init(ReadPoint);
 
     running = false;
 
@@ -82,13 +84,14 @@ void Recorder::Update()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void ReadPoint()
+void Recorder::ReadPoint()
 {
-    if (::HAL::FSMC::InterchangeWithPanel())
+    if (!IsRunning())
     {
-        ::HAL::FSMC::RunFunctionAfterInteractionWitchPanel(ReadPoint);
+        return;
     }
-    else
+
+    if(::HAL::PIO::Read(::HAL::PIO::Port::_G, ::HAL::PIO::Pin::_1))
     {
         BitSet16 dataA(FSMC::ReadFromFPGA(RD::DATA_A), FSMC::ReadFromFPGA(RD::DATA_A + 1));
         BitSet16 dataB(FSMC::ReadFromFPGA(RD::DATA_B), FSMC::ReadFromFPGA(RD::DATA_B + 1));
@@ -109,7 +112,7 @@ void Recorder::Start()
     FSMC::WriteToFPGA16(WR::POST_LO, 0);
     FSMC::WriteToFPGA8(WR::START, 0xff);
 
-    FPGA::HAL::Interrupt::P2P::Enable();
+    //FPGA::HAL::Interrupt::P2P::Enable();
 
     running = true;
 }
@@ -117,7 +120,7 @@ void Recorder::Start()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Recorder::Stop()
 {
-    FPGA::HAL::Interrupt::P2P::Disable();
+    //FPGA::HAL::Interrupt::P2P::Disable();
 
     running = false;
 }
