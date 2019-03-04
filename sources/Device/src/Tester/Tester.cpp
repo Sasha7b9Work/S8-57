@@ -4,6 +4,7 @@
 #include "Osci/Osci.h"
 #include "Settings/Settings.h"
 #include <stm32f4xx_hal.h>
+#include "Hardware/Timer.h"
 
 
 using namespace FPGA::Settings;
@@ -174,7 +175,7 @@ void Tester::ProcessStep()
        |     0V    |  чтение   |   1 * dU  |  чтение   |   2 * dU  |  чтение   |   3 * dU  |  чтение   |  4 * dU   |  чтение   |
        |<--------->|<--------->|<--------->|<--------->|<--------->|<--------->|<--------->|<--------->|<--------->|<--------->|                  */
 
-    if (FSMC::InterchangeWithPanel())
+    if (FSMC::InterchangeWithPanel() || Timer::IsBusy())
     {
         return;
     }
