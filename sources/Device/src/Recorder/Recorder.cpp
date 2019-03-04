@@ -51,8 +51,6 @@ void Recorder::Init()
     Osci::Settings::TShift::Load();
     Osci::Settings::LoadHoldfOff();
 
-    //FPGA::HAL::Interrupt::P2P::Init(ReadPoint);
-
     running = false;
 
     Stop();

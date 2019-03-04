@@ -50,13 +50,13 @@ void Recorder::Display::DrawSettings(int x, int y)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static int Y(int y)
+static int Y(int value)
 {
-    int delta = FPGA::VALUE::AVE - y;
+    int delta = FPGA::VALUE::AVE - value;
 
-    delta = (int)(delta * (240.0F / 250.0F));
+    float scale = 120.0F / 125.0F;
 
-    y = delta + FPGA::VALUE::AVE;
+    int y = 120 + (int)(delta * scale);
 
     if (y < 0)
     {
@@ -83,8 +83,6 @@ void Recorder::Display::DrawData()
     }
 
     Color::SetCurrent(Color::FILL);
-
-    //Text(String("%d элементов", frame.NumPoints()), 2).Draw(10, 10);
 
     int x = 0;
 
