@@ -259,7 +259,7 @@ static uint8 ValueForRange(Chan::E ch) // -V2506
     };
 
     ModeCouple::E couple = (Device::State::InModeRecorder()) ? ModeCouple::DC : SET_COUPLE(ch);
-    Range::E range = (Device::State::InModeRecorder()) ? SET_RECORD_RANGE(ch) : SET_RANGE(ch);
+    Range::E range = SET_RANGE(ch);
 
     if (Device::State::InModeOsci() && couple == ModeCouple::GND)
     {

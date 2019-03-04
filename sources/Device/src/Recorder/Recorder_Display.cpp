@@ -9,6 +9,8 @@
 #include "Recorder/Recorder_Storage.h"
 #include "Hardware/Timer.h"
 #include "FPGA/FPGA.h"
+#include "Settings/Settings.h"
+#include "Osci/Osci_Settings.h"
 
 
 using namespace Display::Primitives;
@@ -47,6 +49,10 @@ void Recorder::Display::DrawSettings(int x, int y)
     Region(50, 30).DrawBounded(x, y, Color::BACK, Color::FILL);
 
     Text(RECORDER_SCALE_X.ToString()).Draw(x + 2, y + 2);
+
+    Text(Osci::Settings::Range(SET_RANGE_A).ToString()).Draw(x + 2, y + 11);
+
+    Text(Osci::Settings::Range(SET_RANGE_B).ToString()).Draw(x + 2, y + 20);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

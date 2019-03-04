@@ -270,7 +270,7 @@ public:
     Recorder::Settings::Axis::E        rec_axisMove;         ///< Текущая ось перемещения
     Recorder::Settings::Axis::E        rec_axisZoom;         ///< Текущая ось масштабирования
     Recorder::Settings::ScaleX         rec_scaleX;           ///< Установленный масштаб по времени
-    Osci::Settings::Range::E           rec_range[2];         ///< Масштаб по вертикали в режиме регистратора
+    Osci::Settings::Range::E           unused[2];            ///< Масштаб по вертикали в режиме регистратора
 
 
     int16   dbg_enum_gate_max;      ///< Ограничение ворот в рандомизаторе сверху

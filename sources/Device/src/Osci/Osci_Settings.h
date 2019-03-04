@@ -57,7 +57,7 @@ namespace Osci
 
             static void Set(Chan::E ch, E range);
 
-            pString ToString(Divider::E divider);
+            pString ToString(Divider::E divider = Divider::_1);
 
         };
 

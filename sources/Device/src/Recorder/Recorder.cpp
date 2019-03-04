@@ -31,8 +31,6 @@ static bool initialized = false;
 /// Сюда сохраним состояние осциллографа в момент перехода в режим регистратора
 static StateOsci osci;
 
-/// Чтение точки по прерыванию от FPGA
-static void ReadPoint();
 /// Сохранить установленные настройки осциллографа
 static void StoreOsciSettings();
 /// Восстановить ранее сохранённые настройки осциллорафа
