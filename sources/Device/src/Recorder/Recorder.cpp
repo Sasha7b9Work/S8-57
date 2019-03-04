@@ -8,6 +8,8 @@
 
 #include "Hardware/HAL/HAL_PIO.h"
 #include "Data/Heap.h"
+#include "Menu/Menu.h"
+#include "Menu/Pages/Include/PageFunction.h"
 
 
 using namespace HAL::ADDRESSES::FPGA;
@@ -53,8 +55,6 @@ void Recorder::Init()
     running = false;
 
     Stop();
-
-    Storage::Init();
 
     initialized = true;
 }
@@ -142,6 +142,11 @@ static void RestoreOsciSettings()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Recorder::OnPressStart()
 {
+    if (Menu::OpenedItem() != (Control *)PageFunction::PageRecorder::pointer)
+    {
+        return;
+    }
+
     return running ? Stop() : Start();
 }
 

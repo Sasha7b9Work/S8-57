@@ -228,11 +228,11 @@ static void ReadData()
     uint8 *x = &data[Chan::A][halfStep][0];
     uint8 *y = &data[Chan::B][halfStep][0];
 
-    uint16 *av[2][5] =
-    {
-        {AVE_1, AVE_1 + 240, AVE_1 + 240 * 2, AVE_1 + 240 * 3, AVE_1 + 240 * 4},
-        {AVE_2, AVE_2 + 240, AVE_2 + 240 * 2, AVE_2 + 240 * 3, AVE_2 + 240 * 4}
-    };
+//    uint16 *av[2][5] =
+//    {
+//        {AVE_1, AVE_1 + 240, AVE_1 + 240 * 2, AVE_1 + 240 * 3, AVE_1 + 240 * 4},
+//        {AVE_2, AVE_2 + 240, AVE_2 + 240 * 2, AVE_2 + 240 * 3, AVE_2 + 240 * 4}
+//    };
 
     if(FPGA::ForTester::Read(x, y))
     {

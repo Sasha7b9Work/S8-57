@@ -51,10 +51,6 @@ namespace Recorder
             uint pointer;
         };
 
-
-        /// Инициализация. Выполняется при включении режима "РЕГИСТРАТОР"
-        void Init();
-
         void CreateNewFrame();
 
         Frame *CurrentFrame();

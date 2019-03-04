@@ -2,6 +2,7 @@
 #include "Menu/Pages/Include/PageFunction.h"
 #include "Recorder/Recorder.h"
 #include "Settings/Settings.h"
+#include "Recorder/Recorder_Storage.h"
 
 
 extern const PageBase pageShow;
@@ -45,6 +46,11 @@ DEF_BUTTON( bPrev,                                                              
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+static bool IsActive_PageShow()
+{
+    return (Recorder::Storage::CurrentFrame()->Size() != 0) && (!Recorder::IsRunning());
+}
+
 DEF_PAGE_2( pageShow, // -V641 // -V1027                                                                                                           //--- тсмйжхъ - пецхярпюрнп - опнялнрп ---
     "опнялнрп", "VIEW",
     "оПНЯЛНРП ГЮОХЯЮММШУ ДЮММШУ",
@@ -54,7 +60,7 @@ DEF_PAGE_2( pageShow, // -V641 // -V1027                                        
     &bPrev,                                                         ///< тсмйжхъ - пецхярпюрнп - опнялнрп - оПЕДШДСЫХИ
     //PageFunction::PageRecorder::PageShow::PageOperations::pointer,  ///< тсмйжхъ - пецхярпюрнп - опнялнрп - ноепюжхх
     //PageFunction::PageRecorder::PageShow::PageView::pointer,        ///< тсмйжхъ - пецхярпюрнп - опнялрнп - опнялнрп
-    Page::Name::Function_Recorder_Show, PageFunction::PageRecorder::pointer, FuncActive, FuncPressPage, FuncDrawPage, FuncRegSetPage
+    Page::Name::Function_Recorder_Show, PageFunction::PageRecorder::pointer, IsActive_PageShow, FuncPressPage, FuncDrawPage, FuncRegSetPage
 )
 
 const PageBase *PageFunction::PageRecorder::PageShow::pointer = &pageShow;
