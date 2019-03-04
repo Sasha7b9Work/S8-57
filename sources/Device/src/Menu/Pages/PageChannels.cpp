@@ -13,6 +13,7 @@
 
 #include "Osci/Osci.h"
 #include "Settings/SettingsChannel.h"
+#include <cstring>
 
 
 extern const PageBase pChanA;
@@ -88,6 +89,8 @@ static void Balance(Chan::E ch)
     Settings old = set;
 
     Osci::Balance(ch);
+
+    std::memcpy(&old.addRShift[0][0], &set.addRShift[0][0], sizeof(int8) * 2 * Osci::Settings::Range::Size);
 
     set = old;
 

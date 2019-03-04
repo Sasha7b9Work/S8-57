@@ -361,14 +361,21 @@ static void BalanceChannel(Chan::E ch, Range::E range)
         }
     }
 
-    LOG_WRITE("%f", std::fabsf(sum / numPoints - 127.0F));
+    float delta = std::fabsf(sum / numPoints - 127.0F);
+
+    if (delta > 0)
+    {
+        set.addRShift[ch][range] = (int8)(delta * 200.0F / 125.0F + 0.5F);
+    }
+    else
+    {
+        set.addRShift[ch][range] = (int8)(delta * 200.0F / 125.0F - 0.5F);
+    }
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Osci::Balance(Chan::E ch)
 {
-    LOG_WRITE("");
-
     FPGA::Settings::ModeCouple::Set(ch, FPGA::Settings::ModeCouple::GND);
 
     SET_TBASE = Osci::Settings::TBase::_100ms;
@@ -377,7 +384,7 @@ void Osci::Balance(Chan::E ch)
 
     for (int range = 0; range < Range::Size; range++)
     {
-        BalanceChannel(ch, Range::_1V);
+        BalanceChannel(ch, (Range::E)range);
     }
 }
 

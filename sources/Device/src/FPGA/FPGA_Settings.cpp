@@ -78,6 +78,10 @@ void RShift::Load(Chan::E ch)
 
     uint16 shift = SET_RSHIFT(ch);
 
+    int8 add = set.addRShift[ch][SET_RANGE(ch)];
+
+    shift += add;
+
     if (Chan(ch).IsA() && Device::State::InModeTester())
     {
         shift = (uint16)((int)shift - Tester::DeltaRShiftA());

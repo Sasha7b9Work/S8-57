@@ -228,6 +228,10 @@ void Osci::Settings::Range::LoadBoth()
     SET_BANDWIDTH_A.Load();
     SET_BANDWIDTH_B.Load();
 
+    Osci::Settings::RShift::Load(Chan::A);
+
+    Osci::Settings::RShift::Load(Chan::B);
+
     Osci::Restart();
 }
 
