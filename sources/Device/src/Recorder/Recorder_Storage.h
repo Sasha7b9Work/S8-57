@@ -40,8 +40,8 @@ namespace Recorder
             Point NextPoint(uint maxPoints);
             /// Время записи первой точки
             PackedTime timeStart;
-            /// Возвращает размер памяти, занимаемоей фреймом
-            int Size();
+            /// Возвращает размер свободной памяти
+            int FreeMemory();
         private:
             /// Указатель на буфер данных - фактически адрес первой сохранённой точки
             Point *start;

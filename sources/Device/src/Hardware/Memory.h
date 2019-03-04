@@ -23,8 +23,10 @@ namespace Memory
     bool LoadSettings();
 
     void DeleteAllData();
-    /// Стирает 
+    /// Стирает сектор с начальным адресом address
     void EraseSector(uint address);
+
+    void WriteData(uint address, const void *data, int size);
 
     bool GetData(int num, DataSettings *ds, uint8 *dataA, uint8 *dataB);
 

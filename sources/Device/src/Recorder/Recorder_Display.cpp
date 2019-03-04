@@ -68,9 +68,7 @@ void Recorder::Display::DrawSizeMemory(int x, int y)
 
     //Text(Integer(Storage::CurrentFrame()->Size()).ToString(false)).Draw(x + 2, y + 2);
 
-    uint freeMemory = Heap::Size() - Storage::CurrentFrame()->Size();
-
-    String text("Осталось %d сек", (int)(freeMemory / RECORDER_SCALE_X.BytesToSec()));
+    String text("Осталось %d сек", (int)(Storage::CurrentFrame()->FreeMemory() / RECORDER_SCALE_X.BytesToSec()));
 
     Text(text).Draw(x + 2, y + 1);
 }

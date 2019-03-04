@@ -3,6 +3,7 @@
 
 #include "Hardware/Timer.h"
 #include "Data/Heap.h"
+#include "Hardware/Memory.h"
 
 
 using namespace Recorder::Storage;
@@ -16,7 +17,7 @@ namespace Stack
     static void Push(const Frame &_frame)
     {
         frame = _frame;
-        frame.SetDataAddress((uint16 *)Heap::Begin());
+        frame.SetDataAddress((uint16 *)ADDR_SECTOR_RECORDER_1);
     }
 
     static Frame *Top()
@@ -33,15 +34,18 @@ uint Recorder::Storage::Frame::NumPoints()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-int Recorder::Storage::Frame::Size()
+int Recorder::Storage::Frame::FreeMemory()
 {
-    return (int)(sizeof(Point) * numPoints);
+    return 1024 * 128 - (int)(sizeof(Point) * numPoints);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Recorder::Storage::Frame::AddPoint(BitSet16 dataA, BitSet16 dataB)
 {
-    start[numPoints] = Point(dataA, dataB);
+    BitSet32 bs(dataA.halfWord, dataB.halfWord);
+
+    Memory::WriteData(ADDR_SECTOR_RECORDER_1 + numPoints * sizeof(Point), &bs, sizeof(BitSet32));
+
     numPoints++;
 }
 

@@ -10,6 +10,7 @@
 #include "Data/Heap.h"
 #include "Menu/Menu.h"
 #include "Menu/Pages/Include/PageFunction.h"
+#include "Hardware/Memory.h"
 
 
 using namespace HAL::ADDRESSES::FPGA;
@@ -93,7 +94,7 @@ void Recorder::ReadPoint()
         BitSet16 dataA(FSMC::ReadFromFPGA(RD::DATA_A), FSMC::ReadFromFPGA(RD::DATA_A + 1));
         BitSet16 dataB(FSMC::ReadFromFPGA(RD::DATA_B), FSMC::ReadFromFPGA(RD::DATA_B + 1));
 
-        if (Recorder::Storage::CurrentFrame()->Size() + sizeof(Storage::Point) < Heap::Size())
+        if (Recorder::Storage::CurrentFrame()->FreeMemory() > 4)
         {
             Recorder::Storage::CurrentFrame()->AddPoint(dataA, dataB);
         }
@@ -109,6 +110,8 @@ void Recorder::Start()
 {
     Osci::Settings::RShift::Set(Chan::A, Osci::Settings::RShift::ZERO);
     Osci::Settings::RShift::Set(Chan::B, Osci::Settings::RShift::ZERO);
+
+    Memory::EraseSector(ADDR_SECTOR_RECORDER_1);
 
     Storage::CreateNewFrame();
 

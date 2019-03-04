@@ -55,26 +55,27 @@ void Memory::SaveSettings()
 
     uint freeMemory = ADDR_SECTOR_SETTINGS_1 + SIZE_SECTOR_128 - address;
 
-    if(address == MAX_UINT || freeMemory <= sizeof(Settings))
-    {
-        EraseSector(ADDR_SECTOR_SETTINGS_1);
-        address = ADDR_SECTOR_SETTINGS_1;
-    }
-
-    if (address < ADDR_SECTOR_SETTINGS_1)
+    if((address == MAX_UINT) || (freeMemory <= sizeof(Settings)) || (address < ADDR_SECTOR_SETTINGS_1))
     {
         EraseSector(ADDR_SECTOR_SETTINGS_1);
         address = ADDR_SECTOR_SETTINGS_1;
     }
 
     set.size = sizeof(set);
-    EEPROM_::WriteBytes(address, (uint8 *)&set, sizeof(set));
+
+    WriteData(address, &set, sizeof(set));
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Memory::EraseSector(uint address)
 {
     EEPROM_::EraseSector(address);
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Memory::WriteData(uint address, const void *data, int size)
+{
+    EEPROM_::WriteBytes(address, (const uint8 *)data, size);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

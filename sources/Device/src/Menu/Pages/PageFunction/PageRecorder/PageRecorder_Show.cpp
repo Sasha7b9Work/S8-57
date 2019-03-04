@@ -48,7 +48,7 @@ DEF_BUTTON( bPrev,                                                              
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 static bool IsActive_PageShow()
 {
-    return (Recorder::Storage::CurrentFrame()->Size() != 0) && (!Recorder::IsRunning());
+    return (Recorder::Storage::CurrentFrame()->NumPoints() != 0) && (!Recorder::IsRunning());
 }
 
 DEF_PAGE_2( pageShow, // -V641 // -V1027                                                                                                           //--- ‘”Õ ÷»ﬂ - –≈√»—“–¿“Œ– - œ–Œ—ÃŒ“– ---
