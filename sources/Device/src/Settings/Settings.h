@@ -84,10 +84,10 @@ public:
 
     // Меню КАНАЛ 1, КАНАЛ 2
 
-    uint16                         chan_shift[Chan::Size];    ///< Сдвиг канала по вертикали
-    Osci::Settings::Range::E       chan_range[Chan::Size];    ///< Масштаб канала по вертикали
-    FPGA::Settings::ModeCouple::E  chan_couple[Chan::Size];   ///< Связь по входу
-    bool                           chan_enabled[Chan::Size];  ///< Включен/выключен канал
+    uint16                         chan_shift[Chan::Size];      ///< Сдвиг канала по вертикали
+    Osci::Settings::Range::E       chan_range[Chan::Size];      ///< Масштаб канала по вертикали
+    FPGA::Settings::ModeCouple::E  chan_couple[Chan::Size];     ///< Связь по входу
+    bool                           chan_enabled[Chan::Size];    ///< Включен/выключен канал
     int8                           chan_balanceShiftADC[2];     ///< Добавочное смещение для балансировки АЦП.
     FPGA::Settings::Bandwidth      chan_bandwidth[2];           ///< Ограничение полосы.
     bool                           chan_inverse[2];
@@ -273,8 +273,15 @@ public:
     Osci::Settings::Range::E           unused[2];            ///< Масштаб по вертикали в режиме регистратора
 
 
-    int16   dbg_enum_gate_max;      ///< Ограничение ворот в рандомизаторе сверху
-    int16   dbg_enum_gate_min;      ///< Ограничение ворот в рандомизаторе снизу
+    /*  !!!!!!!!!!!!!!!!!!!!!!                                    !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        !!!!!!!!!!!!!!!!!!!!!! Эти настройки задаются при наладке !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        !!!!!!!!!!!!!!!!!!!!!!                                    !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    */
+
+    int16   dbg_enum_gate_max;                              ///< Ограничение ворот в рандомизаторе сверху
+    int16   dbg_enum_gate_min;                              ///< Ограничение ворот в рандомизаторе снизу
+
+    int8    addRShift[2][Osci::Settings::Range::Size];      ///< Добавочные смещения для 
 
     /// Настройки по умолчанию
     static const Settings defaultSettings;

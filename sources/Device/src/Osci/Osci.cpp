@@ -8,6 +8,7 @@
 #include "Osci/Measurements/Measurements.h"
 #include "Settings/Settings.h"
 #include <cstring>
+#include <cmath>
 
 #include "Osci/Display/PainterData.h"
 #include "Utils/Debug.h"
@@ -325,6 +326,58 @@ void Osci::ReadPointP2P()
         BitSet16 dataA(FSMC::ReadFromFPGA(RD::DATA_A), FSMC::ReadFromFPGA(RD::DATA_A + 1));
         BitSet16 dataB(FSMC::ReadFromFPGA(RD::DATA_B), FSMC::ReadFromFPGA(RD::DATA_B + 1));
         Osci::Storage::GetFrameP2P()->AddPoints(dataA, dataB);
+    }
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+static void BalanceChannel(Chan::E ch, Range::E range)
+{
+    Osci::Stop();
+
+    Osci::Settings::Range::Set(ch, range);
+
+    set.addRShift[ch][range] = 0;
+
+    Osci::Settings::RShift::Set(ch, Osci::Settings::RShift::ZERO);
+
+    Osci::Start();
+
+    float sum = 0;
+
+    int numPoints = 0;
+
+    uint8 *address = (ch == Chan::A) ? RD::DATA_A : RD::DATA_B;
+    address++;
+
+    while (numPoints < 100)
+    {
+        if (!FSMC::InterchangeWithPanel())
+        {
+            if (::HAL::PIO::Read(::HAL::PIO::Port::_G, ::HAL::PIO::Pin::_1))
+            {
+                sum += FSMC::ReadFromFPGA(address);
+                numPoints++;
+            }
+        }
+    }
+
+    LOG_WRITE("%f", std::fabsf(sum / numPoints - 127.0F));
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Osci::Balance(Chan::E ch)
+{
+    LOG_WRITE("");
+
+    FPGA::Settings::ModeCouple::Set(ch, FPGA::Settings::ModeCouple::GND);
+
+    SET_TBASE = Osci::Settings::TBase::_100ms;
+
+    Osci::Settings::TBase::Load();
+
+    for (int range = 0; range < Range::Size; range++)
+    {
+        BalanceChannel(ch, Range::_1V);
     }
 }
 

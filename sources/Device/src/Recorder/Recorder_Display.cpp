@@ -98,10 +98,20 @@ void Recorder::Display::DrawData()
     {
         if (!point.IsEmpty())
         {
-            int min = Y(point.Min());
-            int max = Y(point.Max());
-            
-            VLine(max - min).Draw(x, min);
+            if (RECORDER_SOURCE_A_IS_ENABLED)
+            {
+                int min = Y(point.Min(Chan::A));
+                int max = Y(point.Max(Chan::A));
+
+                VLine(max - min).Draw(x, min, Color::Channel(Chan::A));
+            }
+            if (RECORDER_SOURCE_B_IS_ENABLED)
+            {
+                int min = Y(point.Min(Chan::B));
+                int max = Y(point.Max(Chan::B));
+
+                VLine(max - min).Draw(x, min, Color::Channel(Chan::B));
+            }
         }
 
         point = frame->NextPoint(numPoints);

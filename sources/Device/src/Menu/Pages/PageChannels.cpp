@@ -11,6 +11,9 @@
 #include "Utils/Dictionary.h"
 #include "Hardware/Timer.h"
 
+#include "Osci/Osci.h"
+#include "Settings/SettingsChannel.h"
+
 
 extern const PageBase pChanA;
 extern const PageBase pChanB;
@@ -78,13 +81,25 @@ DEF_CHOICE_2( cBandwidthA,                                                      
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void OnPress_BalanceA()
+static void Balance(Chan::E ch)
 {
-    Display::FuncOnWaitStart(DICT(DBalanceChA), false);
+    Display::FuncOnWaitStart(ch == Chan::A ? DICT(DBalanceChA) : DICT(DBalanceChB), false);
 
-    Timer::PauseOnTime(5000);
+    Settings old = set;
+
+    Osci::Balance(ch);
+
+    set = old;
+
+    Osci::Init();
 
     Display::FuncOnWaitStop();
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+static void OnPress_BalanceA()
+{
+    Balance(Chan::A);
 }
 
 DEF_BUTTON( bBalanceA,                                                                                                                                      //--- КАНАЛ 1 - Балансировать ---
@@ -162,11 +177,7 @@ DEF_CHOICE_2( cBandwidthB,                                                      
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void OnPress_BalanceB()
 {
-    Display::FuncOnWaitStart(DICT(DBalanceChB), false);
-
-    Timer::PauseOnTime(5000);
-
-    Display::FuncOnWaitStop();
+    Balance(Chan::B);
 }
 
 DEF_BUTTON( bBalanceB,                                                                                                                                       //--- КАНАЛ 2 - Балансировка ---

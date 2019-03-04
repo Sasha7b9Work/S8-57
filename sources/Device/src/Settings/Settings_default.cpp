@@ -235,5 +235,9 @@ const Settings Settings::defaultSettings =
     { Range::_1V, Range::_1V },         // rec_range
 
     0,  // dbg_gate_max
-    0   // dbg_gate_min
+    0,  // dbg_gate_min
+
+    {
+        {0}, {0}
+    }
 };

@@ -24,6 +24,8 @@ namespace Osci
     void OnChangedPoints();
 
     void ReadPointP2P();
+    /// Балансировать канал
+    void Balance(Chan::E ch);
 
     extern int addShift;
 

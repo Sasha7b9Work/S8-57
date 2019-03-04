@@ -460,7 +460,7 @@ void Grid::DrawRecorder()
 
     for (float x = 0; x < Display::WIDTH; x += step)
     {
-        vLine.Draw((int)(x + 0.5f), 0);
+        vLine.Draw((int)(x + 0.5F), 0);
     }
 
     HLine hLine(Display::WIDTH - 1);

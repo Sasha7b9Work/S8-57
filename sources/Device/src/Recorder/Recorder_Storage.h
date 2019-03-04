@@ -10,13 +10,17 @@ namespace Recorder
         /// Точка на графике
         struct Point
         {
-            Point(BitSet16 _data) : data(_data) {};
+            Point(BitSet16 dataA, BitSet16 dataB)
+            {
+                data[Chan::A] = dataA;
+                data[Chan::B] = dataB;
+            }
             static Point CreateEmpty();
             bool IsEmpty();
-            int Min();
-            int Max();
+            int Min(Chan::E ch);
+            int Max(Chan::E ch);
         private:
-            BitSet16 data;
+            BitSet16 data[2];
         };
 
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -38,7 +42,7 @@ namespace Recorder
             PackedTime timeStart;
         private:
             /// Указатель на буфер данных - фактически адрес первой сохранённой точки
-            BitSet16 *start;
+            Point *start;
             /// Количество сохранённых точек
             uint numPoints;
             /// Указатель на последние считаннные данные

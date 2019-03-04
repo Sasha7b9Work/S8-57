@@ -39,9 +39,9 @@ uint Recorder::Storage::Frame::NumPoints()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Recorder::Storage::Frame::AddPoint(BitSet16 dataA, BitSet16 /*dataB*/)
+void Recorder::Storage::Frame::AddPoint(BitSet16 dataA, BitSet16 dataB)
 {
-    start[numPoints] = dataA;
+    start[numPoints] = Point(dataA, dataB);
     numPoints++;
 }
 
@@ -61,7 +61,7 @@ void Recorder::Storage::CreateNewFrame()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Recorder::Storage::Frame::SetDataAddress(uint16 *address)
 {
-    start = (BitSet16 *)address;
+    start = (Point *)address;
     numPoints = 0;
     pointer = MAX_UINT;
 }
@@ -88,25 +88,25 @@ Point Frame::NextPoint(uint maxPoints)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-int Point::Max()
+int Point::Max(Chan::E ch)
 {
-    return data.byte0;
+    return data[ch].byte0;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-int Point::Min()
+int Point::Min(Chan::E ch)
 {
-    return data.byte1;
+    return data[ch].byte1;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 bool Point::IsEmpty()
 {
-    return (data.halfWord == 0);
+    return (data[Chan::A].halfWord == 0 && data[Chan::B].halfWord == 0);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Point Point::CreateEmpty()
 {
-    return Point(BitSet16(0));
+    return Point(BitSet16(0), BitSet16(0));
 }

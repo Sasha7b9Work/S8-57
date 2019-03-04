@@ -135,7 +135,7 @@ namespace Osci
             static void Change(int delta);
 
             /// С этого значения должен включаться режим поточечного вывода
-            static const E MIN_P2P = _5ms;
+            static const E MIN_P2P = _50ms;
             /// Минимальный масштаб по времени, при котором ещё возможно включение режима пикового детектора
             static const E MIN_PEAK_DET = _200ns;
         };
