@@ -25,7 +25,7 @@ static void OnPress_Next()
 }
 
 DEF_BUTTON( bNext,                                                                                                                     //--- тсмйжхъ - пецхярпюрнп - опнялнрп - яКЕДСЧЫХИ ---
-    "яКЕДСЧЫХИ", "Next",
+    "бКЕБН", "Left",
     "",
     "",
     pageShow, FuncActive, OnPress_Next, Button::EmptyDraw
@@ -38,22 +38,22 @@ static void OnPress_Prev()
 }
 
 DEF_BUTTON( bPrev,                                                                                                                    //--- тсмйжхъ - пецхярпюрнп - опнялнрп - оПЕДШДСЫХИ ---
-    "оПЕДШДСЫХИ", "Previous",
+    "бОПЮБН", "Right",
     "",
     "",
     pageShow, FuncActive, OnPress_Prev, Button::EmptyDraw
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-DEF_PAGE_5( pageShow, // -V641 // -V1027                                                                                                           //--- тсмйжхъ - пецхярпюрнп - опнялнрп ---
+DEF_PAGE_2( pageShow, // -V641 // -V1027                                                                                                           //--- тсмйжхъ - пецхярпюрнп - опнялнрп ---
     "опнялнрп", "VIEW",
     "оПНЯЛНРП ГЮОХЯЮММШУ ДЮММШУ",
     "View recorded data",
-    &cSource,                                                       ///< тсмйжхъ - пецхярпюрнп - опнялнрп - хЯРНВМХЙ
+    //&cSource,                                                       ///< тсмйжхъ - пецхярпюрнп - опнялнрп - хЯРНВМХЙ
     &bNext,                                                         ///< тсмйжхъ - пецхярпюрнп - опнялнрп - яКЕДСЧЫХИ
     &bPrev,                                                         ///< тсмйжхъ - пецхярпюрнп - опнялнрп - оПЕДШДСЫХИ
-    PageFunction::PageRecorder::PageShow::PageOperations::pointer,  ///< тсмйжхъ - пецхярпюрнп - опнялнрп - ноепюжхх
-    PageFunction::PageRecorder::PageShow::PageView::pointer,        ///< тсмйжхъ - пецхярпюрнп - опнялрнп - опнялнрп
+    //PageFunction::PageRecorder::PageShow::PageOperations::pointer,  ///< тсмйжхъ - пецхярпюрнп - опнялнрп - ноепюжхх
+    //PageFunction::PageRecorder::PageShow::PageView::pointer,        ///< тсмйжхъ - пецхярпюрнп - опнялрнп - опнялнрп
     Page::Name::Function_Recorder_Show, PageFunction::PageRecorder::pointer, FuncActive, FuncPressPage, FuncDrawPage, FuncRegSetPage
 )
 

@@ -26,14 +26,14 @@ static void OnOpenClose_Recorder(bool enter)
 }
 
 
-DEF_PAGE_1( pageRecorder, // -V641 // -V1027                                                                                                                  //--- ФУНКЦИЯ - РЕГИСТРАТОР ---
+DEF_PAGE_2( pageRecorder, // -V641 // -V1027                                                                                                                  //--- ФУНКЦИЯ - РЕГИСТРАТОР ---
     "РЕГИСТРАТОР", "RECORDER",
     "Запись и воспроизведение сигналов входов и датчиков",
     "Recording and playback of input signals and sensors",
     //&cShow,                                             ///< ФУНКЦИЯ - РЕГИСТРАТОР - Показывать
     PageFunction::PageRecorder::PageSource::pointer,    ///< ФУНКЦИЯ - РЕГИСТРАТОР - ИСТОЧНИК
     //PageFunction::PageRecorder::PageRecord::pointer,    ///< ФУНКЦИЯ - РЕГИСТРАТОР - ЗАПИСЬ
-    //PageFunction::PageRecorder::PageShow::pointer,      ///< ФУНКЦИЯ - РЕГИСТРАТОР - ПРОСМОТР
+    PageFunction::PageRecorder::PageShow::pointer,      ///< ФУНКЦИЯ - РЕГИСТРАТОР - ПРОСМОТР
     Page::Name::Function_Recorder, PageFunction::pointer, FuncActive, OnOpenClose_Recorder, FuncDrawPage, FuncRegSetPage
 )
 

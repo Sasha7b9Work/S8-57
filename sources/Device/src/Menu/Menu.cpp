@@ -476,11 +476,84 @@ bool Menu::IsShown()
     return set.menu_show && MainPage() != nullptr;
 }
 
-//---------------------------------------------------------------------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+static void ClosePage(PageBase *page)
+{
+    if (IS_PAGE_SB(page))
+    {
+        SMALL_BUTTON_FROM_PAGE(page, 0)->funcOnPress();
+    }
+    else
+    {
+        ((Page *)page)->funcOnEnterExit(false);
+    }
+
+    Page *keeper = (Page *)KEEPER(page);
+
+    if (keeper)
+    {
+        keeper->SetPosActItem(0x7f);
+    }
+
+    if (page == (PageBase *)Menu::MainPage())    // -V1027
+    {
+        Menu::Show(false);
+    }
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+// Закрыть parent, если он является хранителем page
+static void CloseIfSubPage(PageBase *parent, PageBase *page)
+{
+    if (page == parent)
+    {
+        ClosePage(parent);
+    }
+
+    while (KEEPER(page))
+    {
+        if (KEEPER(page) == parent)
+        {
+            ClosePage(parent);
+        }
+
+        page = KEEPER(page);
+    }
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Menu::Init()
 {
     PageDisplay::Init();
     PageFunction::PageMultimeter::Init();
+
+    if ((PageBase *)LastOpened((Page *)PageFunction::pointer) == PageFunction::PageMultimeter::pointer)
+    {
+        ClosePage((PageBase *)PageFunction::PageMultimeter::pointer);
+    }
+
+    PageBase *opened = (PageBase *)LastOpened((Page *)PageFunction::pointer);
+
+    CloseIfSubPage((PageBase *)PageFunction::PageMultimeter::pointer, opened);
+    CloseIfSubPage((PageBase *)PageFunction::PageRecorder::pointer, opened);
+    CloseIfSubPage((PageBase *)PageFunction::PageTester::pointer, opened);
+    CloseIfSubPage((PageBase *)PageFunction::PageFrequencyCounter::pointer, opened);
+    CloseIfSubPage((PageBase *)PageFunction::PageFFT::pointer, opened);
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Menu::CloseOpenedItem()
+{
+    Control *item = OpenedItem();
+
+    if (IS_PAGE(item))
+    {
+        ClosePage((PageBase *)item);
+    }
+    else
+    {
+        item->Open(false);
+    }
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -546,40 +619,6 @@ Control *Menu::CurrentItem()
     }
 
     return (Control *)opened;
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Menu::CloseOpenedItem()
-{
-    Control *item = OpenedItem();
-
-    if (IS_PAGE(item))
-    {
-        if (IS_PAGE_SB(item))
-        {
-            SMALL_BUTTON_FROM_PAGE(item, 0)->funcOnPress();
-        }
-        else
-        {
-            ((Page *)item)->funcOnEnterExit(false);
-        }
-
-        Page *keeper = (Page *)KEEPER(item);
-
-        if (keeper)
-        {
-            keeper->SetPosActItem(0x7f);
-        }
-
-        if (item == (Control *)MainPage())    // -V1027
-        {
-            Menu::Show(false);
-        }
-    }
-    else
-    {
-        item->Open(false);
-    }
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
