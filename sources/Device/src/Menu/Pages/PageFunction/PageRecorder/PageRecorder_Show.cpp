@@ -3,6 +3,7 @@
 #include "Recorder/Recorder.h"
 #include "Settings/Settings.h"
 #include "Recorder/Recorder_Storage.h"
+#include "Recorder/Recorder_Display.h"
 
 
 extern const PageBase pageShow;
@@ -22,7 +23,7 @@ DEF_CHOICE_3( cSource,                                                          
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void OnPress_Next()
 {
-
+    Recorder::Display::MoveLeft();
 }
 
 DEF_BUTTON( bNext,                                                                                                                     //--- ‘”Õ ÷»ﬂ - –≈√»—“–¿“Œ– - œ–Œ—ÃŒ“– - —ÎÂ‰Û˛˘ËÈ ---
@@ -35,7 +36,7 @@ DEF_BUTTON( bNext,                                                              
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void OnPress_Prev()
 {
-
+    Recorder::Display::MoveRight();
 }
 
 DEF_BUTTON( bPrev,                                                                                                                    //--- ‘”Õ ÷»ﬂ - –≈√»—“–¿“Œ– - œ–Œ—ÃŒ“– - œÂ‰˚‰Û˘ËÈ ---

@@ -14,9 +14,15 @@
 #include "Utils/Values.h"
 #include "Data/Heap.h"
 #include "Menu/Pages/Include/PageFunction.h"
+#include "Recorder/Recorder.h"
 
 
 using namespace Display::Primitives;
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/// С этой точки начинается вывод
+static int startPoint = -1;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -125,7 +131,10 @@ void Recorder::Display::DrawData()
 
     int x = 0;
 
-    Storage::Point point = frame->GetPoint((numPoints < 320) ? (0) : (numPoints - 320), numPoints);
+    Storage::Point point = frame->GetPoint(Recorder::IsRunning() ? 
+                                                           ((numPoints < 320) ? (0) : (numPoints - 320))
+                                                            : startPoint,
+                                                            numPoints);
 
     do
     {
@@ -155,14 +164,26 @@ void Recorder::Display::DrawData()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Recorder::Display::DrawMemoryWindow()
 {
+    static int prevNumPoints = 0;
+
     if (Menu::OpenedPage() != PageFunction::PageRecorder::PageShow::pointer || Storage::CurrentFrame()->NumPoints() == 0)
     {
         return;
     }
 
-    Region(319, 5).DrawBounded(0, 3, Color::BACK, Color::FILL);
-
     int numPoints = (int)Storage::CurrentFrame()->NumPoints();
+
+    if (prevNumPoints != numPoints)
+    {
+        prevNumPoints = numPoints;
+        startPoint = numPoints - 319;
+        if (startPoint < 0)
+        {
+            startPoint = 0;
+        }
+    }
+
+    Region(319, 5).DrawBounded(0, 3, Color::BACK, Color::FILL);
 
     int width = (int)(320.0f / numPoints * 320.0F + 0.5F);
 
@@ -171,5 +192,42 @@ void Recorder::Display::DrawMemoryWindow()
         width = 319;
     }
 
-    Region(width, 10).DrawBounded(319 - width, 0, Color::BACK, Color::FILL);
+    int x = 0;
+
+    if (numPoints > 320)
+    {
+        x = (int)((float)startPoint / numPoints * 320.0F + 0.5F);
+    }
+
+    Region(width, 10).DrawBounded(x, 0, Color::BACK, Color::FILL);
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Recorder::Display::MoveLeft()
+{
+    if (Storage::CurrentFrame()->NumPoints() < 321)
+    {
+        return;
+    }
+
+    startPoint -= 320;
+    if (startPoint < 0)
+    {
+        startPoint = 0;
+    }
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Recorder::Display::MoveRight()
+{
+    if (Storage::CurrentFrame()->NumPoints() < 321)
+    {
+        return;
+    }
+
+    startPoint += 320;
+    if (startPoint > (int)(Storage::CurrentFrame()->NumPoints() - 320))
+    {
+        startPoint = (int)(Storage::CurrentFrame()->NumPoints() - 320);
+    }
 }
