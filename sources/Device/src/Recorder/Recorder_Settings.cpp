@@ -93,3 +93,25 @@ pString Recorder::Settings::ScaleX::ToString() const
 
     return scales[value].name[LANG];
 }
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+uint Recorder::Settings::ScaleX::BytesToSec() const
+{
+    static const struct StructBytes
+    {
+        uint value;
+        StructBytes(uint v) : value(v) {};
+    }
+    bytes[ScaleX::Size] =
+    {
+        800,
+        400,
+        160,
+        80,
+        40,
+        16,
+        8
+    };
+
+    return bytes[value].value;
+}

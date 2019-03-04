@@ -12,6 +12,7 @@
 #include "Settings/Settings.h"
 #include "Osci/Osci_Settings.h"
 #include "Utils/Values.h"
+#include "Data/Heap.h"
 
 
 using namespace Display::Primitives;
@@ -41,7 +42,7 @@ void Recorder::Display::Update()
 
     DrawData();
 
-    DrawSettings(269, 0);
+    DrawSettings(289, 0);
 
     DrawSizeMemory(0, 0);
 
@@ -51,21 +52,25 @@ void Recorder::Display::Update()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Recorder::Display::DrawSettings(int x, int y)
 {
-    Region(50, 30).DrawBounded(x, y, Color::BACK, Color::FILL);
+    Region(30, 30).DrawBounded(x, y, Color::BACK, Color::FILL);
 
     Text(RECORDER_SCALE_X.ToString()).Draw(x + 2, y + 2);
 
-    Text(Osci::Settings::Range(SET_RANGE_A).ToString()).Draw(x + 2, y + 11);
+    Text(Osci::Settings::Range(SET_RANGE_A).ToString()).Draw(x + 2, y + 11, Color::Channel(Chan::A));
 
-    Text(Osci::Settings::Range(SET_RANGE_B).ToString()).Draw(x + 2, y + 20);
+    Text(Osci::Settings::Range(SET_RANGE_B).ToString()).Draw(x + 2, y + 20, Color::Channel(Chan::B));
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Recorder::Display::DrawSizeMemory(int x, int y)
 {
-    Region(50, 12).DrawBounded(x, y, Color::BACK, Color::FILL);
+    Region(50, 20).DrawBounded(x, y, Color::BACK, Color::FILL);
 
     Text(Integer(Storage::CurrentFrame()->Size()).ToString(false)).Draw(x + 2, y + 2);
+
+    uint freeMemory = Heap::Size() - Storage::CurrentFrame()->Size();
+
+    Text(Integer((int)(freeMemory / RECORDER_SCALE_X.BytesToSec())).ToString(false)).Draw(x + 2, y + 11);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

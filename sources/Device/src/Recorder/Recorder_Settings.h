@@ -75,6 +75,8 @@ namespace Recorder
             static void Change(int delta);
             static ScaleX &Current();
             pString ToString() const;
+            /// Возвращает скорость потребления памяти в байтах/сек
+            uint BytesToSec() const;
         };
     };
 }
