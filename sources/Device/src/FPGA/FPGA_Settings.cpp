@@ -15,6 +15,7 @@
 #include "Utils/Values.h"
 
 #include "Osci/Display/Osci_Display.h"
+#include "Recorder/Recorder.h"
 
 
 using namespace Display::Primitives;
@@ -174,12 +175,22 @@ void TShift::Load()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void TShift::Change(int delta)
 {
+    if (Device::State::InModeRecorder())
+    {
+        return;
+    }
+
     TShift::Set(SET_TSHIFT + delta);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Range::Change(Chan::E ch, int delta)
 {
+    if (Recorder::IsRunning())
+    {
+        return;
+    }
+
     if (delta > 0)
     {
         ::Math::LimitationIncrease<uint8>((uint8 *)(&SET_RANGE(ch)), (uint8)(Range::Size - 1)); // -V206

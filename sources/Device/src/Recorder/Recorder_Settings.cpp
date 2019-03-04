@@ -45,6 +45,11 @@ void Recorder::Settings::ScaleX::Load()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Recorder::Settings::ScaleX::Change(int delta)
 {
+    if (Recorder::IsRunning())
+    {
+        return;
+    }
+
     if (delta > 0)
     {
         ::Math::LimitationIncrease<uint8>((uint8 *)(&set.rec_scaleX), (uint8)(ScaleX::Size - 1));
