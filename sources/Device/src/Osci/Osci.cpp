@@ -160,7 +160,6 @@ static void Osci::UpdateFPGA()
         {
             if (CanReadData())
             {
-
                 Timer::PauseOnTicks(5 * 90 * 20);
 
                 ReadData();

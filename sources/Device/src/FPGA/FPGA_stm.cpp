@@ -76,9 +76,6 @@ void FPGA::Init()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void AverageData(Chan::E ch, const uint8 *dataNew, const uint8 * /*dataOld*/, int size)
 {
-    // Формула усреднения такова:
-    // new = new * k + old * (1 - k)
-
     uint8 *_new = (uint8 *)dataNew;
     uint16 *av = AVE_DATA(ch);
 

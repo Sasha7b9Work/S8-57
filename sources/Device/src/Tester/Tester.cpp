@@ -5,6 +5,7 @@
 #include "Settings/Settings.h"
 #include <stm32f4xx_hal.h>
 #include "Hardware/Timer.h"
+#include "Data/Reader.h"
 
 
 using namespace FPGA::Settings;
@@ -200,14 +201,45 @@ void Tester::ProcessStep()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//static void AverageData(const uint8 *dataNew, uint16 *dataAve)
+//{
+//    uint8 *_new = (uint8 *)dataNew;
+//    uint16 *av = dataAve;
+//
+//    uint16 numAve = 1;
+//
+//    for (int i = 0; i < TESTER_NUM_POINTS; i++)
+//    {
+//        av[i] = (uint16)(av[i] - (av[i] >> numAve));
+//
+//        av[i] += *_new;
+//
+//        *_new = (uint8)(av[i] >> numAve);
+//
+//        _new++;
+//    }
+//}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void ReadData()
 {
-    uint8 *x = &data[Chan::A][step / 2][0];
-    uint8 *y = &data[Chan::B][step / 2][0];
+    int halfStep = step / 2;
+
+    uint8 *x = &data[Chan::A][halfStep][0];
+    uint8 *y = &data[Chan::B][halfStep][0];
+
+    uint16 *av[2][5] =
+    {
+        {AVE_1, AVE_1 + 240, AVE_1 + 240 * 2, AVE_1 + 240 * 3, AVE_1 + 240 * 4},
+        {AVE_2, AVE_2 + 240, AVE_2 + 240 * 2, AVE_2 + 240 * 3, AVE_2 + 240 * 4}
+    };
 
     if(FPGA::ForTester::Read(x, y))
     {
-        Tester::Display::SetPoints(step / 2, x, y);
+        //AverageData(x, av[0][halfStep]);
+        //AverageData(y, av[1][halfStep]);
+
+        Tester::Display::SetPoints(halfStep, x, y);
     }
 }
 
