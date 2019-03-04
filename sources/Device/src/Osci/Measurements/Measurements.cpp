@@ -1451,14 +1451,14 @@ static void CountedToCurrentSettings()
 
     if (ENABLED_DS_A)
     {
-        Smoother::Run(IN_A, OUT_A, NUM_BYTES);
+        Smoother::Run(IN_A, OUT_A, NUM_BYTES, ENUM_SMOOTHING.ToNumber());
         CountedToCurrentSettings(Chan::A, NUM_BYTES);
         LimitationData(Chan::A, NUM_BYTES);
     }
 
     if (ENABLED_DS_B)
     {
-        Smoother::Run(IN_B, OUT_B, NUM_BYTES);
+        Smoother::Run(IN_B, OUT_B, NUM_BYTES, ENUM_SMOOTHING.ToNumber());
         CountedToCurrentSettings(Chan::B, NUM_BYTES);
         LimitationData(Chan::B, NUM_BYTES);
     }

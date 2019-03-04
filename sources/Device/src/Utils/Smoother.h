@@ -9,12 +9,13 @@ class Smoother
 {
 public:
     /// —гладить данные in и положить их в out
-    static void Run(const uint8 *in, uint8 *out, uint numBytes)
+    static void Run(const uint8 *in, uint8 *out, uint numBytes, uint _numSmooth)
     {
+        numSmooth = _numSmooth;
         size = (int)numBytes;
         data = in;
 
-        if (ENUM_SMOOTHING.ToNumber() < 2)
+        if (numSmooth < 2)
         {
             std::memcpy(out, in, numBytes);
         }
@@ -34,7 +35,7 @@ private:
 
         uint parts = 0U;        // «десь количество уже просуммированных точек
 
-        index -= ENUM_SMOOTHING.ToNumber() / 2;
+        index -= numSmooth / 2;
 
         do
         {
@@ -42,11 +43,12 @@ private:
             {
                 sum += data[index++];
             }
-        } while (++parts < ENUM_SMOOTHING.ToNumber());
+        } while (++parts < numSmooth);
 
         return (uint8)(sum / parts);
     }
 
     static int size;
     const static uint8 *data;
+    static uint numSmooth;
 };
