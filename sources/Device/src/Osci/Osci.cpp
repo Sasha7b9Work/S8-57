@@ -10,6 +10,7 @@
 #include <cstring>
 
 #include "Osci/Display/PainterData.h"
+#include "Utils/Debug.h"
 
 
 using namespace FPGA;
@@ -68,6 +69,7 @@ void Osci::Init()
     FPGA::Settings::LoadCalibratorMode();
     Settings::LoadHoldfOff();
     ::HAL::PIO::Init(::HAL::PIO::Port::_G, ::HAL::PIO::Pin::_1, ::HAL::PIO::Mode::Input, ::HAL::PIO::Pull::Up);
+    Osci::Storage::Clear();
     FPGA::OnPressStart();
 }
 
@@ -157,9 +159,11 @@ static void Osci::UpdateFPGA()
         {
             if (CanReadData())
             {
+
                 Timer::PauseOnTicks(5 * 90 * 20);
 
                 ReadData();
+
                 if (START_MODE_IS_SINGLE)
                 {
                     OnPressStart();
@@ -168,7 +172,6 @@ static void Osci::UpdateFPGA()
                 else
                 {
                     Timer::PauseOnTicks(5 * 90 * 20);
-
                     Start();
                 }
             }
