@@ -47,21 +47,46 @@ void HAL::EEPROM_::EraseSector(uint startAddress)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static uint GetSector(uint startAddress)
 {
-    if (startAddress == 0x080C0000U)
+    static const uint addresses[24] =
     {
-        return FLASH_SECTOR_10;
-    }
-    else if (startAddress == 0x080E0000U)
+        0x08000000,     // FLASH_SECTOR_0
+        0x08004000,     // FLASH_SECTOR_1
+        0x08008000,     // FLASH_SECTOR_2
+        0x0800C000,     // FLASH_SECTOR_3
+        0x08010000,     // FLASH_SECTOR_4
+        0x08020000,     // FLASH_SECTOR_5
+        0x08040000,     // FLASH_SECTOR_6
+        0x08060000,     // FLASH_SECTOR_7
+        0x08080000,     // FLASH_SECTOR_8
+        0x080A0000,     // FLASH_SECTOR_9
+        0x080C0000,     // FLASH_SECTOR_10
+        0x080E0000,     // FALSH_SECTOR_11
+
+        0x08100000,     // FLASH_SECTOR_12
+        0x08104000,     // FLASH_SECTOR_13
+        0x08108000,     // FLASH_SECTOR_14
+        0x0810C000,     // FLASH_SECTOR_15
+        0x08110000,     // FLASH_SECTOR_16
+        0x08120000,     // FLASH_SECTOR_17
+        0x08140000,     // FLASH_SECTOR_18
+        0x08160000,     // FLASH_SECTOR_19
+        0x08180000,     // FLASH_SECTOR_20
+        0x081A0000,     // FLASH_SECTOR_21
+        0x081C0000,     // FLASH_SECTOR_22
+        0x081E0000      // FLASH_SECTOR_23
+    };
+
+    for (uint i = 0; i < 24; i++)
     {
-        return FLASH_SECTOR_11;
-    }
-    else
-    {
-        // ничего не делаем
+        if (addresses[i] == startAddress)
+        {
+            return i;
+        }
     }
 
+    LOG_ERROR("Ќеправильный адрес");
 
-    return FLASH_SECTOR_0;
+    return 24;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

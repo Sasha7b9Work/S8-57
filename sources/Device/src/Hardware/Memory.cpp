@@ -23,9 +23,6 @@ static uint ReadDoubleWord(uint address);
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/// ѕервый сектор дл€ сохранени€ настроек. ѕри его заполнении начинает использоватьс€ сектор 2.
-#define ADDR_SECTOR_SETTINGS_1  ((uint)0x080C0000)
-
 #define SIZE_SECTOR_128         (128 * 1024)
 
 #define READ_BYTE(address)      (*((uint8 *)address))
@@ -60,18 +57,24 @@ void Memory::SaveSettings()
 
     if(address == MAX_UINT || freeMemory <= sizeof(Settings))
     {
-        EEPROM_::EraseSector(ADDR_SECTOR_SETTINGS_1);
+        EraseSector(ADDR_SECTOR_SETTINGS_1);
         address = ADDR_SECTOR_SETTINGS_1;
     }
 
     if (address < ADDR_SECTOR_SETTINGS_1)
     {
-        EEPROM_::EraseSector(ADDR_SECTOR_SETTINGS_1);
+        EraseSector(ADDR_SECTOR_SETTINGS_1);
         address = ADDR_SECTOR_SETTINGS_1;
     }
 
     set.size = sizeof(set);
     EEPROM_::WriteBytes(address, (uint8 *)&set, sizeof(set));
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Memory::EraseSector(uint address)
+{
+    EEPROM_::EraseSector(address);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

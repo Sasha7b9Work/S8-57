@@ -3,6 +3,13 @@
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/// Первый сектор для сохранения настроек. При его заполнении начинает использоваться сектор 2.
+#define ADDR_SECTOR_SETTINGS_1  ((uint)0x080C0000)
+#define ADDR_SECTOR_RECORDER_1  ((uint)0x08120000)
+#define ADDR_SECTOR_RECORDER_2  ((uint)0x08140000)
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 struct DataSettings;
 
 #define MAX_NUM_SAVED_WAVES 23  ///< \brief Число сохраняемых во внутреннем ППЗУ измерений. Пока ограничено количеством квадратиков, которые можно 
@@ -16,6 +23,8 @@ namespace Memory
     bool LoadSettings();
 
     void DeleteAllData();
+    /// Стирает 
+    void EraseSector(uint address);
 
     bool GetData(int num, DataSettings *ds, uint8 *dataA, uint8 *dataB);
 
@@ -24,6 +33,8 @@ namespace Memory
     void SaveData(int num, const DataSettings *ds, uint8 *dataA, uint8 *dataB);
     /// Если даннные есть, соответствующий элемент массива равен true.
     void GetDataInfo(bool existData[MAX_NUM_SAVED_WAVES]);
+
+
 };
 
 
