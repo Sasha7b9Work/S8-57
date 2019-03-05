@@ -38,8 +38,6 @@ static float NextNoise()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void FPGA::ReadDataChanenl(Chan::E ch, uint8 data[MAX_NUM_POINTS])
 {
-    std::memset(data, (ch == Chan::A) ? (FPGA::VALUE::AVE) : (FPGA::VALUE::AVE + 10), FPGA_NUM_POINTS);
-
     float amplitude = 100.0F;
 
     for (uint i = 0; i < FPGA_NUM_POINTS; i++)
