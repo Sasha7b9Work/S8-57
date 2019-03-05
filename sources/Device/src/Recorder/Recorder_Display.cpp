@@ -15,6 +15,7 @@
 #include "Data/Heap.h"
 #include "Menu/Pages/Include/PageFunction.h"
 #include "Recorder/Recorder.h"
+#include <cstring>
 
 
 using namespace Display::Primitives;
@@ -118,6 +119,54 @@ static int Y(int value)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+static char *TimeCursor(int numCur, char buffer[20])
+{
+    std::strcpy(buffer, "10.00 c");
+    return buffer;
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+static char *VoltageCursor(Chan::E ch, int numCur, char buffer[20])
+{
+    std::strcpy(buffer, "10.00 Â");
+    return buffer;
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+static void DrawParametersCursors()
+{
+    int width = 40;
+
+    int x = 319 - width;
+    int y = 10;
+
+    int x1 = x + 9;
+
+    int y1 = y + 1;
+    int y2 = y1 + 8;
+    int y3 = y2 + 8;
+    int y4 = y3 + 8;
+    int y5 = y4 + 8;
+    int y6 = y5 + 8;
+
+    char buffer[20];
+
+    Region(width, 50).DrawBounded(x, y, Color::BACK, Color::FILL);
+
+    Text(String("1:%s", TimeCursor(0, buffer))).Draw(x + 2, y1, Color::FILL);
+
+    Text(VoltageCursor(Chan::A, 0, buffer)).Draw(x1, y2, Color::Channel(Chan::A));
+
+    Text(VoltageCursor(Chan::B, 0, buffer)).Draw(x1, y3, Color::Channel(Chan::B));
+
+    Text(String("2:%s", TimeCursor(1, buffer))).Draw(x + 2, y4, Color::FILL);
+
+    Text(VoltageCursor(Chan::A, 1, buffer)).Draw(x1, y5, Color::Channel(Chan::A));
+
+    Text(VoltageCursor(Chan::B, 1, buffer)).Draw(x1, y6, Color::Channel(Chan::B));
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void DrawCursors()
 {
     if (Menu::OpenedPage() != PageFunction::PageRecorder::PageShow::pointer)
@@ -133,6 +182,7 @@ static void DrawCursors()
     
     cursor.Draw(posCursor[1], 0);
 
+    DrawParametersCursors();
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
