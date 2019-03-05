@@ -18,6 +18,7 @@
 #include <cstring>
 #include <cstdlib>
 #include <cstdio>
+#include <cmath>
 
 
 using namespace Display::Primitives;
@@ -121,19 +122,29 @@ static int Y(int value)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static char *TimeCursor(int numCur, char buffer[20])
+static char *DeltaTime(char buffer[20])
 {
-    int numPoint = startPoint + posCursor[numCur];
+    float delta = std::fabsf((float)(posCursor[0] - posCursor[1])) * RECORDER_SCALE_X.TimeForPointMS() / 1000.0F;
 
-    float timeMS = (numPoint * RECORDER_SCALE_X.TimeForPointMS()) / 1000.0F;
-
-    std::strcpy(buffer, Time(timeMS).ToString(false).CString());
+    std::strcpy(buffer, Time(delta).ToString(false).CString());
 
     return buffer;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static char *VoltageCursor(Chan::E ch, int numCur, char buffer[20])
+static char *TimeCursor(int numCur, char buffer[20])
+{
+    int numPoint = startPoint + posCursor[numCur];
+
+    float time = (numPoint * RECORDER_SCALE_X.TimeForPointMS()) / 1000.0F;
+
+    std::strcpy(buffer, Time(time).ToString(false).CString());
+
+    return buffer;
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+static char *VoltageCursor(Chan::E /*ch*/, int /*numCur*/, char buffer[20])
 {
     std::strcpy(buffer, "10.00 Â");
     return buffer;
@@ -142,7 +153,7 @@ static char *VoltageCursor(Chan::E ch, int numCur, char buffer[20])
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void DrawParametersCursors()
 {
-    int width = 40;
+    int width = 49;
 
     int x = 319 - width;
     int y = 10;
@@ -155,10 +166,11 @@ static void DrawParametersCursors()
     int y4 = y3 + 8;
     int y5 = y4 + 8;
     int y6 = y5 + 8;
+    int y7 = y6 + 8;
 
     char buffer[20];
 
-    Region(width, 50).DrawBounded(x, y, Color::BACK, Color::FILL);
+    Region(width, 58).DrawBounded(x, y, Color::BACK, Color::FILL);
 
     Text(String("1:%s", TimeCursor(0, buffer))).Draw(x + 2, y1, Color::FILL);
 
@@ -171,6 +183,8 @@ static void DrawParametersCursors()
     Text(VoltageCursor(Chan::A, 1, buffer)).Draw(x1, y5, Color::Channel(Chan::A));
 
     Text(VoltageCursor(Chan::B, 1, buffer)).Draw(x1, y6, Color::Channel(Chan::B));
+
+    Text(String("dT %s", DeltaTime(buffer))).Draw(x + 2, y7, Color::FILL);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
