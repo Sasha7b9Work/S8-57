@@ -31,6 +31,7 @@ enum DictWord
     DVersion,           // "версия %s"
     DInformation,       // "ИНФОРМАЦИЯ"
     DFileSaved,         // "Файл сохранён"
+    DGotoPageRecorder,  // "Перейдите на страницу РЕГИСТРАТОР"
     DNumWords
 };
 

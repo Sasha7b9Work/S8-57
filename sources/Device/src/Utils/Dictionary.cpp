@@ -30,5 +30,6 @@ pString dictWords[DNumWords][2] =
     {"Программное обеспечение :",          "Software :"},
     {"версия %s",                          "version %s"},
     {"ИНФОРМАЦИЯ",                         "INFORMATION"},
-    {"Файл сохранён",                      "File saved"}
+    {"Файл сохранён",                      "File saved"},
+    {"Перейдите на страницу РЕГИСТРАТОР",  "Go to the RECORDER page"}
 };

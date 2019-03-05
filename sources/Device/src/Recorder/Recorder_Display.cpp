@@ -60,7 +60,7 @@ void Recorder::Display::Update()
 
     DrawSettings(289, 0);
 
-    DrawSizeMemory(0, 0);
+    //DrawSizeMemory(0, 0);
 
     DrawMemoryWindow();
 
