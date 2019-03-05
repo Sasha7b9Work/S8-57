@@ -109,9 +109,9 @@ DEF_CHOICE_3( cInput, // -V206                                                  
     "1. \"SS\" - a full signal.\n"
     "2. \"LPF\" - low-pass filter.\n"
     "3. \"HPF\" - high-pass filter frequency.",
-    "ÏÑ",  "Full",
-    "ÔÍ×", "LPF",
-    "ÔÂ×", "HPF",
+    "ÏÑ", "Full",
+    "Í×", "LP",
+    "Â×", "HP",
     TRIG_INPUT, pTrig, FuncActive, OnChanged_Input, Choice::EmptyDraw
 )
 
