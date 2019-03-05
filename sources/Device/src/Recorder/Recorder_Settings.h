@@ -78,6 +78,8 @@ namespace Recorder
             /// Возвращает скорость потребления памяти в байтах/сек
             uint BytesToSec() const;
         };
+
+        extern int8 currentCursor;
     };
 }
 
