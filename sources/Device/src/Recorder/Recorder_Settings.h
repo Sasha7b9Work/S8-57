@@ -77,6 +77,8 @@ namespace Recorder
             pString ToString() const;
             /// ¬озвращает скорость потреблени€ пам€ти в байтах/сек
             uint BytesToSec() const;
+            /// ¬озвращает врем€ считывани€ одной точки
+            uint TimeForPointMS() const;
         };
 
         extern int8 currentCursor;

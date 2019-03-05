@@ -164,7 +164,7 @@
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>&lt;1&gt;.\src\Hardware\HAL\HAL_EEPROM.cpp</Filename>
+          <Filename>.\src\Hardware\HAL\HAL_EEPROM.cpp</Filename>
           <ExecCommand></ExecCommand>
           <Expression>\\S8_57\src/Hardware/HAL/HAL_EEPROM.cpp\76</Expression>
         </Bp>
@@ -180,7 +180,7 @@
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>0</BreakIfRCount>
-          <Filename>&lt;1&gt;.\src\Menu\Menu.cpp</Filename>
+          <Filename>.\src\Menu\Menu.cpp</Filename>
           <ExecCommand></ExecCommand>
           <Expression></Expression>
         </Bp>

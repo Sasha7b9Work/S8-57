@@ -119,3 +119,25 @@ uint Recorder::Settings::ScaleX::BytesToSec() const
 
     return bytes[value].value;
 }
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+uint Recorder::Settings::ScaleX::TimeForPointMS() const
+{
+    static const struct StructTime
+    {
+        uint value;
+        StructTime(uint v) : value(v) {};
+    }
+    bytes[ScaleX::Size] =
+    {
+        5,
+        10,
+        25,
+        50,
+        100,
+        250,
+        500
+    };
+
+    return bytes[value].value;
+}

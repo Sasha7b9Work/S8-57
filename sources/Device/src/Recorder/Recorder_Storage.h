@@ -42,6 +42,8 @@ namespace Recorder
             PackedTime timeStart;
             /// Возвращает размер свободной памяти
             int FreeMemory();
+            /// Возвращает время считывания первой точки
+            uint StartTime() const;
         private:
             /// Указатель на буфер данных - фактически адрес первой сохранённой точки
             Point *start;
@@ -49,6 +51,8 @@ namespace Recorder
             uint numPoints;
             /// Указатель на последние считаннные данные
             uint pointer;
+            /// Время считывания первой точки
+            uint startTime;
         };
 
         void CreateNewFrame();

@@ -42,11 +42,22 @@ int Recorder::Storage::Frame::FreeMemory()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Recorder::Storage::Frame::AddPoint(BitSet16 dataA, BitSet16 dataB)
 {
+    if (NumPoints() == 0)
+    {
+        startTime = TIME_MS;
+    }
+
     BitSet32 bs(dataA.halfWord, dataB.halfWord);
 
     Memory::WriteData(ADDR_SECTOR_RECORDER_1 + numPoints * sizeof(Point), &bs, sizeof(BitSet32));
 
     numPoints++;
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+uint Recorder::Storage::Frame::StartTime() const
+{
+    return startTime;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -114,3 +125,5 @@ Point Point::CreateEmpty()
 {
     return Point(BitSet16(0), BitSet16(0));
 }
+
+

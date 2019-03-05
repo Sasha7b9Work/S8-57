@@ -16,6 +16,8 @@
 #include "Menu/Pages/Include/PageFunction.h"
 #include "Recorder/Recorder.h"
 #include <cstring>
+#include <cstdlib>
+#include <cstdio>
 
 
 using namespace Display::Primitives;
@@ -121,7 +123,12 @@ static int Y(int value)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static char *TimeCursor(int numCur, char buffer[20])
 {
-    std::strcpy(buffer, "10.00 c");
+    int numPoint = startPoint + posCursor[numCur];
+
+    float timeMS = (numPoint * RECORDER_SCALE_X.TimeForPointMS()) / 1000.0F;
+
+    std::strcpy(buffer, Time(timeMS).ToString(false).CString());
+
     return buffer;
 }
 
