@@ -25,16 +25,10 @@ static float NextNoise()
     const float step = 7.0F;
 
     float min = prev - step;
-    if (min < -ampl)
-    {
-        min = -ampl;
-    }
+    LIMIT_BELOW(min, -ampl);
 
     float max = prev + step;
-    if (max > ampl)
-    {
-        max = ampl;
-    }
+    LIMIT_ABOVE(max, ampl);
 
     prev = Math::RandFloat(min, max);
 
@@ -50,8 +44,6 @@ void FPGA::ReadDataChanenl(Chan::E ch, uint8 data[MAX_NUM_POINTS])
 
     for (uint i = 0; i < FPGA_NUM_POINTS; i++)
     {
-        float noise = 5.0F * std::rand() / RAND_MAX ;
-
         data[i] = (uint8)(FPGA::VALUE::AVE + amplitude * (sinf(i * 0.1F)) + NextNoise());
     }
 }
