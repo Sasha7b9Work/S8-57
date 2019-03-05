@@ -580,3 +580,21 @@ void Governor::SetValue(int v)
 {
     *cell = v;
 }
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+bool Page::IsSubPage(PageBase *parent)
+{
+    PageBase *keep = KEEPER(this);
+
+    while (keep)
+    {
+        if (keep == parent)
+        {
+            return true;
+        }
+
+        keep = KEEPER(keep);
+    }
+
+    return false;
+}

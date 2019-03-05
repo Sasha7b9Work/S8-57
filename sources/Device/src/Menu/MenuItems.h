@@ -181,6 +181,8 @@ public:
     void DrawPagesUGO(int right, int bottom);
 
     void DrawNestingPage(int left, int bottom);
+    /// true, если является вложенной подстраницей страницы parent
+    bool IsSubPage(PageBase *parent);
 
     struct Name
     {

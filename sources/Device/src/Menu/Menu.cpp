@@ -510,14 +510,13 @@ static void CloseIfSubPage(PageBase *parent, PageBase *page)
         ClosePage(parent);
     }
 
-    while (KEEPER(page))
+    if (((Page *)page)->IsSubPage(parent))
     {
-        if (KEEPER(page) == parent)
+        while (page)
         {
-            ClosePage(parent);
+            ClosePage(page);
+            page = KEEPER(page);
         }
-
-        page = KEEPER(page);
     }
 }
 
