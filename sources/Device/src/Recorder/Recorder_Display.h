@@ -10,5 +10,9 @@ namespace Recorder
         void MoveLeft();
         /// Сместить окно просмотра вправо
         void MoveRight();
+        /// Переместить текущий курсор влево
+        void MoveCursorLeft();
+        /// Переместить текущий курсор вправо
+        void MoveCursorRight();
     }
 }

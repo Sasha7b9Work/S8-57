@@ -24,7 +24,7 @@ using namespace Display::Primitives;
 /// С этой точки начинается вывод
 static int startPoint = -1;
 
-static int posCursor[2] = { 100, 220 };
+static uint16 posCursor[2] = { 100, 220 };
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -251,5 +251,27 @@ void Recorder::Display::MoveRight()
     if (startPoint > (int)(Storage::CurrentFrame()->NumPoints() - 320))
     {
         startPoint = (int)(Storage::CurrentFrame()->NumPoints() - 320);
+    }
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Recorder::Display::MoveCursorLeft()
+{
+    uint16 &position = posCursor[Recorder::Settings::currentCursor];
+
+    if (position > 0)
+    {
+        position--;
+    }
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Recorder::Display::MoveCursorRight()
+{
+    uint16 &position = posCursor[Recorder::Settings::currentCursor];
+
+    if (position < 319)
+    {
+        position++;
     }
 }

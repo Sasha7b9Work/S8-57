@@ -62,6 +62,25 @@ static bool IsActive_PageShow()
     return (Recorder::Storage::CurrentFrame()->NumPoints() != 0) && (!Recorder::IsRunning());
 }
 
+static bool FuncOnKey_PageShow(KeyEvent event)
+{
+    if (event.type == TypePress::Press || event.type == TypePress::Repeat)
+    {
+        if (event.key == Key::Left)
+        {
+            Recorder::Display::MoveCursorLeft();
+            return true;
+        }
+        else if (event.key == Key::Right)
+        {
+            Recorder::Display::MoveCursorRight();
+            return true;
+        }
+    }
+
+    return false;
+}
+
 DEF_PAGE_3( pageShow, // -V641 // -V1027                                                                                                           //--- ÔÓÍÊÖÈß - ĞÅÃÈÑÒĞÀÒÎĞ - ÏĞÎÑÌÎÒĞ ---
     "ÏĞÎÑÌÎÒĞ", "VIEW",
     "Ïğîñìîòğ çàïèñàííûõ äàííûõ",
@@ -72,7 +91,7 @@ DEF_PAGE_3( pageShow, // -V641 // -V1027                                        
     &cCursor,
     //PageFunction::PageRecorder::PageShow::PageOperations::pointer,  ///< ÔÓÍÊÖÈß - ĞÅÃÈÑÒĞÀÒÎĞ - ÏĞÎÑÌÎÒĞ - ÎÏÅĞÀÖÈÈ
     //PageFunction::PageRecorder::PageShow::PageView::pointer,        ///< ÔÓÍÊÖÈß - ĞÅÃÈÑÒĞÀÒÎĞ - ÏĞÎÑÌÒÎĞ - ÏĞÎÑÌÎÒĞ
-    Page::Name::Function_Recorder_Show, PageFunction::PageRecorder::pointer, IsActive_PageShow, FuncPressPage, FuncDrawPage, FuncRegSetPage
+    Page::Name::Function_Recorder_Show, PageFunction::PageRecorder::pointer, IsActive_PageShow, FuncPressPage, FuncDrawPage, FuncOnKey_PageShow
 )
 
 const PageBase *PageFunction::PageRecorder::PageShow::pointer = &pageShow;
