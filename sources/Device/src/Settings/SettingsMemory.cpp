@@ -35,14 +35,3 @@ int ENumPoints_2_NumPoints(ENumPointsFPGA::E numPoints)
     };
     return n[(uint)numPoints];
 }
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void *AllocMemForChannelFromHeap(Chan ch, DataSettings *ds)
-{
-    int numBytes = ch.RequestBytes(ds);
-    if (numBytes)
-    {
-        return malloc((uint)numBytes);
-    }
-    return 0;
-}

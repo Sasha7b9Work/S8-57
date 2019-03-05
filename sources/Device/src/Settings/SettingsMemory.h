@@ -108,9 +108,6 @@ struct FileNamingMode
 Osci::Settings::Memory::ENumPointsFPGA::E NumPoints_2_ENumPoints(int numPoints);
 int ENumPoints_2_NumPoints(Osci::Settings::Memory::ENumPointsFPGA::E numPoints);
 
-/// Выделяет память из кучи для канала. Настройки длины памяти берёт из ds или set (если ds == 0)
-void *AllocMemForChannelFromHeap(Chan ch, DataSettings *ds);
-
 
 /** @}  @}
  */

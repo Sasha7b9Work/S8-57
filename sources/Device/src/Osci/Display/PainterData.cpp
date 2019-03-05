@@ -159,7 +159,7 @@ static void DRAW_SPECTRUM(const uint8 *dataIn, int numPoints, Chan::E ch)
     }
 
 #undef SIZE_BUFFER
-#define SIZE_BUFFER (1024 * 8)
+#define SIZE_BUFFER (1024 * 4)
 
     if (numPoints > SIZE_BUFFER)
     {
@@ -167,7 +167,6 @@ static void DRAW_SPECTRUM(const uint8 *dataIn, int numPoints, Chan::E ch)
     }
 
     float dataR[SIZE_BUFFER];
-    float spectrum[SIZE_BUFFER];
 
     float freq0 = 0.0F;
     float freq1 = 0.0F;
@@ -177,13 +176,11 @@ static void DRAW_SPECTRUM(const uint8 *dataIn, int numPoints, Chan::E ch)
     int y1 = 0;
     int s = 2;
 
-    uint8 *data = (uint8 *)std::malloc((uint)numPoints);
+    float *spectrum = (float *)std::malloc(numPoints * sizeof(float));
 
-    if (data)
+    if (spectrum)
     {
-        std::memcpy(data, dataIn, (uint)numPoints);
-
-        FPGA::Math::PointsRel2Voltage(data, numPoints, RANGE_DS(ch), (int16)RSHIFT_DS(ch), dataR);
+        FPGA::Math::PointsRel2Voltage(dataIn, numPoints, RANGE_DS(ch), (int16)RSHIFT_DS(ch), dataR);
 
         FPGA::Math::CalculateFFT(dataR, numPoints, spectrum, &freq0, &density0, &freq1, &density1, &y0, &y1);
 
@@ -201,7 +198,7 @@ static void DRAW_SPECTRUM(const uint8 *dataIn, int numPoints, Chan::E ch)
             VLine(y1 + s - Grid::MathBottom()).Draw(Grid::Left() + FFT_POS_CURSOR_1, Grid::MathBottom());
         }
 
-        std::free(data);
+        std::free(spectrum);
     }
 }
 
@@ -214,17 +211,17 @@ static void DrawSpectrum()
     }
 
     VLine(Grid::MathBottom() - Grid::ChannelBottom()).Draw(Grid::Right(), Grid::ChannelBottom(), Color::BACK);
-
-
+    
+    
     if (MODE_WORK_IS_DIR)
     {
         int numPoints = DS->SizeChannel();
-
-        if (numPoints > 4096)       /// \todo Пока 8к и более не хочет считать
+    
+        if (numPoints > 2048)       /// \todo Пока 8к и более не хочет считать
         {
-            numPoints = 4096;
+            numPoints = 2048;
         }
-
+    
         if (SOURCE_FFT_IS_A)
         {
             DRAW_SPECTRUM(OUT_A, numPoints, Chan::A);
@@ -246,9 +243,9 @@ static void DrawSpectrum()
                 DRAW_SPECTRUM(OUT_B, numPoints, Chan::B);
             }
         }
-
+    
     }
-
+    
     HLine(Grid::Right() - Grid::Left()).Draw(Grid::ChannelBottom(), Grid::Left(), Color::FILL);
     HLine(Grid::Right() - Grid::Left()).Draw(Grid::MathBottom(), Grid::Left());
 }
