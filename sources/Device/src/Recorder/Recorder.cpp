@@ -11,8 +11,11 @@
 #include "Menu/Menu.h"
 #include "Menu/Pages/Include/PageFunction.h"
 #include "Hardware/Memory.h"
+#include "Display/Display_Primitives.h"
+#include "Display/Painter.h"
 
 
+using namespace Display::Primitives;
 using namespace HAL::ADDRESSES::FPGA;
 
 using HAL::FSMC;
@@ -108,6 +111,10 @@ void Recorder::ReadPoint()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Recorder::Start()
 {
+    Region(150, 50).DrawBounded(85, 100, Color::BACK, Color::FILL);
+    Text("Подготовка к записи").DrawInCenterRect(85, 100, 150, 50, Color::FILL);
+    Painter::EndScene();
+
     Osci::Settings::RShift::Set(Chan::A, Osci::Settings::RShift::ZERO);
     Osci::Settings::RShift::Set(Chan::B, Osci::Settings::RShift::ZERO);
 
