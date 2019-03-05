@@ -119,8 +119,11 @@ public:
     /// Удаление наистарейших данных
     static void FreeOldest()
     {
-        oldest = oldest->next;
-        oldest->prev = nullptr;
+        if (oldest && (oldest->next != nullptr))
+        {
+            oldest = oldest->next;
+            oldest->prev = nullptr;
+        }
     }
 
     /// Возвращает адрес, следующий за последним доступным для сохранения данных
@@ -157,7 +160,7 @@ public:
 
         Data *data = (Data *)address;
 
-        if (newest == oldest)
+        if (newest == oldest)                       // Сохранены только одни данные
         {
             oldest->next = data;
             newest = data;
