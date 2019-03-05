@@ -20,15 +20,17 @@ static float NextNoise()
 {
     static float prev = 0.0F;   // Предыдущее значение шума
 
-    const float ampl = 25.0F;    // Амплитуда шума
+    const float ampl = 20.0F;    // Амплитуда шума
 
-    float min = prev - ampl;
+    const float step = 7.0F;
+
+    float min = prev - step;
     if (min < -ampl)
     {
         min = -ampl;
     }
 
-    float max = prev + ampl;
+    float max = prev + step;
     if (max > ampl)
     {
         max = ampl;
