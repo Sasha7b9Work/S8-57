@@ -19,6 +19,7 @@
 #include <cstdlib>
 #include <cstdio>
 #include <cmath>
+#include "FPGA/FPGA_Math.h"
 
 
 using namespace Display::Primitives;
@@ -144,9 +145,20 @@ static char *TimeCursor(int numCur, char buffer[20])
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static char *VoltageCursor(Chan::E /*ch*/, int /*numCur*/, char buffer[20])
+static char *VoltageCursor(Chan::E ch, int numCur, char buffer[20])
 {
-    std::strcpy(buffer, "10.00 Â");
+    uint numPoint = (uint)(startPoint + posCursor[numCur]);
+
+    Recorder::Storage::Frame *frame = Recorder::Storage::CurrentFrame();
+
+    Recorder::Storage::Point point = frame->GetPoint(numPoint, frame->NumPoints());
+
+    uint8 value = (uint8)((point.Min(ch) + point.Max(ch)) / 2);
+
+    float voltage = FPGA::Math::Point2Voltage(value, SET_RANGE(ch), Osci::Settings::RShift::ZERO);
+
+    std::strcpy(buffer, Voltage(voltage).ToString(false).CString());
+
     return buffer;
 }
 
