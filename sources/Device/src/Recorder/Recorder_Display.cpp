@@ -131,7 +131,7 @@ void Recorder::Display::DrawData()
 
     int x = 0;
 
-    Storage::Point point = frame->GetPoint(Recorder::IsRunning() ? 
+    Storage::Point point = frame->GetPoint((Recorder::IsRunning() || startPoint < 0) ? 
                                                            ((numPoints < 320) ? (0) : (numPoints - 320))
                                                             : startPoint,
                                                             numPoints);
