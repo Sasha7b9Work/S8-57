@@ -6,6 +6,7 @@
 
 #include "Osci/Osci_Settings.h"
 #include "Settings/Settings.h"
+#include "Hardware/RAM.h"
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -39,7 +40,7 @@ void Reader::ReadDataFromStorage()
 
     IN_A = IN_B = nullptr;
 
-    DATA = Osci::Storage::GetData();
+    DATA = Osci::Storage::GetData(MODE_WORK_IS_RAM ? Memory::RAM::CurrentSignal() : 0);
 
     if (DATA != nullptr)
     {
@@ -51,7 +52,7 @@ void Reader::ReadDataFromStorage()
         FindTrigLevelIfNeed();
     }
 
-    if (Osci::InModeP2P())
+    if (MODE_WORK_IS_DIR && Osci::InModeP2P())
     {
         ReadDataP2P();
     }

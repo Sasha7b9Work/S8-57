@@ -200,7 +200,7 @@ public:
 
         while (fromEnd > 0 && data != nullptr)
         {
-            data = newest->prev;
+            data = data->prev;
             fromEnd--;
         }
 
