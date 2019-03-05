@@ -96,6 +96,11 @@ static bool IsActive_FFT_Cursors()
 
 static bool HandlerKey_FFT_Cursors(KeyEvent event)
 {
+    if (event.type != TypePress::Press && event.type != TypePress::Repeat)
+    {
+        return true;
+    }
+
     Key::E key = event.key;
 
     int delta = (key == Key::Up || key == Key::Right) ? 1 : -1;
