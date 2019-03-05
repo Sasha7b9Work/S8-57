@@ -13,6 +13,8 @@
 #include <stdlib.h>
 
 #include "Recorder/Recorder.h"
+#include "Osci/Osci_Storage.h"
+#include "Data/Reader.h"
 
 
 using namespace HAL::ADDRESSES::FPGA;
@@ -42,6 +44,25 @@ StateWorkFPGA FPGA::fpgaStateWork = StateWorkFPGA_Stop;
 
 /// True, если дан запуск
 bool givingStart = false;
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+namespace FPGA
+{
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    class DataAccessor
+    {
+    public:
+        static uint8 *DataA(Osci::Data *data)
+        {
+            return data->dataA;
+        }
+        static uint8 *DataB(Osci::Data *data)
+        {
+            return data->dataB;
+        }
+    };
+}
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void FPGA::GiveStart()
@@ -246,4 +267,57 @@ bool FPGA::IsRunning()
 void FPGA::ClearDataRand()
 {
     std::memset(dataRand, 0, FPGA::MAX_NUM_POINTS * 2 * sizeof(uint8));  // -V512
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+static void AverageData(Chan::E ch, const uint8 *dataNew, const uint8 * /*dataOld*/, int size)
+{
+    uint8 *_new = (uint8 *)dataNew;
+    uint16 *av = AVE_DATA(ch);
+
+    uint16 numAve = (uint16)ENUM_AVE;
+
+    for (int i = 0; i < size; i++)
+    {
+        av[i] = (uint16)(av[i] - (av[i] >> numAve));
+
+        av[i] += *_new;
+
+        *_new = (uint8)(av[i] >> numAve);
+
+        _new++;
+    }
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void FPGA::ReadData()
+{
+    Osci::Data *data = Osci::Storage::PrepareForNewData();
+
+    ReadDataChanenl(Chan::A, DataAccessor::DataA(data));
+    ReadDataChanenl(Chan::B, DataAccessor::DataB(data));
+
+    if (ENUM_AVE != Display::ENumAverage::_1)               // Если включено усреднение
+    {
+        Osci::Data *last = Osci::Storage::GetData(0);
+        Osci::Data *prev = Osci::Storage::GetData(1);
+
+        if (prev && last)
+        {
+            const DataSettings *setLast = last->Settings();
+            const DataSettings *setPrev = prev->Settings();
+
+            if (setLast->Equals(*setPrev))
+            {
+                if (ENABLED_A(setLast))
+                {
+                    AverageData(Chan::A, last->DataA(), prev->DataA(), setLast->SizeChannel());
+                }
+                if (ENABLED_B(setPrev))
+                {
+                    AverageData(Chan::B, last->DataB(), prev->DataB(), setLast->SizeChannel());
+                }
+            }
+        }
+    }
 }
