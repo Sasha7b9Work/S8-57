@@ -260,7 +260,9 @@ static void CreateButtons(Frame *frame)
 
     CreateButtonsChannel(frame, "Канал 1", 120, y, Key::ChannelB, Key::RangeLessB, Key::RangeMoreB, Key::RShiftLessB, Key::RShiftMoreB);
 
-    CreateButtonsTrig(frame, 235, y - 30);
+    CreateButtonsTrig(frame, 235, y - 130);
+
+    CreateButton(Key::Start, frame, { 230, 438 }, { 80, 25 }, "ПУСК/СТОП");
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -308,7 +310,8 @@ static void CreateButtonsTrig(Frame *frame, int x, int y)
     wxSize size = { width, height };
 
     CreateButton(Key::Trig, frame, { x, y }, size, "СИНХР");
-//    CreateButton(Key::TrigLevMore, frame, {})
+    CreateButton(Key::TrigLevMore, frame, { x, y + 30 }, size, "больше");
+    CreateButton(Key::TrigLevLess, frame, { x, y + 60 }, size, "меньше");
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
