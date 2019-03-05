@@ -125,11 +125,14 @@ static void DrawCursors()
         return;
     }
 
-    VLine cursor(239);
+    DashedVLine cursor(239, 3, 1, 0);
 
-    cursor.Draw(posCursor[0], 0, Color::FILL);
+    Color::SetCurrent(Color::FILL);
 
-    cursor.Draw(posCursor[1], 0, Color::FILL);
+    cursor.Draw(posCursor[0], 0);
+    
+    cursor.Draw(posCursor[1], 0);
+
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
