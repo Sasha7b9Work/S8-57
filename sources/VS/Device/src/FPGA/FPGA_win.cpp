@@ -21,7 +21,6 @@ static float NextNoise()
     static float prev = 0.0F;   // Предыдущее значение шума
 
     const float ampl = 20.0F;    // Амплитуда шума
-
     const float step = 7.0F;
 
     float min = prev - step;
@@ -38,6 +37,11 @@ static float NextNoise()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void FPGA::ReadDataChanenl(Chan::E ch, uint8 data[MAX_NUM_POINTS])
 {
+    if (!SET_ENABLED(ch))
+    {
+        return;
+    }
+
     float amplitude = 100.0F;
 
     for (uint i = 0; i < FPGA_NUM_POINTS; i++)

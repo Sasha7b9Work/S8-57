@@ -138,6 +138,22 @@ public:
         return (uint8 *)Heap::Begin();
     }
 
+    /// Возвращает количество сохранённых данных
+    static int NumElementsInStorage()
+    {
+        int result = 0;
+
+        Data *data = oldest;
+
+        while (data)
+        {
+            result++;
+            data = data->next;
+        }
+
+        return result;
+    }
+
     /// Выделить место для нового фрейма, чтобы хватило памяти для хранения данных с настройками DataSettings
     static Data *GetMemoryForData(const DataSettings *ds)
     {
@@ -515,7 +531,7 @@ uint DataP2P::ReadingBytes() const
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 int Osci::Storage::NumElementsInStorage()
 {
-    return 1;
+    return HeapWorker::NumElementsInStorage();
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
