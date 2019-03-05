@@ -25,9 +25,6 @@ using namespace Osci::Settings;
 using HAL::FSMC;
 
 
-extern void ReadDataChanenlRand(Chan::E ch, const uint8 *address, uint8 *data);
-
-
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 uint16 FPGA::valueADC = 0;
 
@@ -35,8 +32,6 @@ uint16 FPGA::post = (uint16)~(512);
 uint16 FPGA::pred = (uint16)~(512);
 
 uint8 dataRand[Chan::Size][FPGA::MAX_NUM_POINTS];    ///< Здесь будут данные рандомизатора
-/// Здесь хранится адрес, начиная с которого будем читать данные по каналам. Если addrRead == 0xffff, то адрес вначале нужно считать
-uint16 addrRead = 0xffff;
 
 bool          FPGA::isRunning = false;
 uint          FPGA::timeStart = 0;
@@ -178,62 +173,6 @@ bool FPGA::ForTester::Read(uint8 *dataA, uint8 *dataB) // -V2506
     }
 
     return true;
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void FPGA::ReadDataChanenl(Chan::E ch, uint8 data[FPGA::MAX_NUM_POINTS])
-{
-    uint numPoints = FPGA_NUM_POINTS;
-
-    if (addrRead == 0xffff)
-    {
-        int k = 1;
-
-        if (Osci::InModeRandomizer())
-        {
-            k = Osci::Kr[SET_TBASE];
-        }
-
-        addrRead = (uint16)(ReadLastRecord(ch) - (int)numPoints / k);
-    }
-    
-    FSMC::WriteToFPGA16(WR::PRED_LO, (uint16)(addrRead));
-    FSMC::WriteToFPGA8(WR::START_ADDR, 0xff);
-
-
-    uint8 *addr0 = Chan(ch).IsA() ? RD::DATA_A : RD::DATA_B;  // -V566
-    uint8 *addr1 = addr0 + 1;
-
-    if (Osci::InModeRandomizer())
-    {
-        ReadDataChanenlRand(ch, addr1, data);
-    }
-    else
-    {
-        uint8 *p = data;
-
-        *p = *addr0;    // Первая точка почему-то неправильная читается. Просто откидываем её.
-        *p = *addr1;    // -V519
-
-        if(SET_PEAKDET_EN)
-        {
-            for(uint i = 0; i < numPoints; i++)
-            {
-                *p++ = *addr0;
-                *p++ = *addr1;
-            }
-        }
-        else
-        {
-            for (uint i = 0; i < numPoints / 4U; ++i)   // -V112
-            {
-                *p++ = *addr1;
-                *p++ = *addr1;
-                *p++ = *addr1;
-                *p++ = *addr1;
-            }
-        }
-    }
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
