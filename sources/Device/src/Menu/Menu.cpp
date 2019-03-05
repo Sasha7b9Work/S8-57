@@ -526,12 +526,12 @@ void Menu::Init()
     PageDisplay::Init();
     PageFunction::PageMultimeter::Init();
 
-    if ((PageBase *)LastOpened((Page *)PageFunction::pointer) == PageFunction::PageMultimeter::pointer)
+    if ((PageBase *)LastOpened((Page *)PageFunction::pointer) == PageFunction::PageMultimeter::pointer) //-V1027
     {
         ClosePage((PageBase *)PageFunction::PageMultimeter::pointer);
     }
 
-    PageBase *opened = (PageBase *)LastOpened((Page *)PageFunction::pointer);
+    PageBase *opened = (PageBase *)LastOpened((Page *)PageFunction::pointer); //-V1027
 
     CloseIfSubPage((PageBase *)PageFunction::PageMultimeter::pointer, opened);
     CloseIfSubPage((PageBase *)PageFunction::PageRecorder::pointer, opened);
@@ -547,7 +547,7 @@ void Menu::CloseOpenedItem()
 
     if (IS_PAGE(item))
     {
-        ClosePage((PageBase *)item);
+        ClosePage((PageBase *)item); //-V1027
     }
     else
     {

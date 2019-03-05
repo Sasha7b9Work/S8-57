@@ -17,7 +17,7 @@ namespace Stack
     static void Push(const Frame &_frame)
     {
         frame = _frame;
-        frame.SetDataAddress((uint16 *)ADDR_SECTOR_RECORDER_1);
+        frame.SetDataAddress((uint16 *)ADDR_SECTOR_RECORDER_1); //-V566
     }
 
     static Frame *Top()

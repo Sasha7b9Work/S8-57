@@ -582,7 +582,7 @@ void Governor::SetValue(int v)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-bool Page::IsSubPage(PageBase *parent)
+bool Page::IsSubPage(const PageBase *parent)
 {
     PageBase *keep = KEEPER(this);
 

@@ -458,7 +458,7 @@ void Grid::DrawRecorder()
 
     float step = 320.0F / 14.0F;
 
-    for (float x = 0; x < Display::WIDTH; x += step)
+    for (float x = 0; x < Display::WIDTH; x += step) //-V1034
     {
         vLine.Draw((int)(x + 0.5F), 0);
     }

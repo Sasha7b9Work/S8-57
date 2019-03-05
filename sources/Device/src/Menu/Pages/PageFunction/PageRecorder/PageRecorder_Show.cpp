@@ -76,6 +76,10 @@ static bool FuncOnKey_PageShow(KeyEvent event)
             Recorder::Display::MoveCursorRight();
             return true;
         }
+        else
+        {
+            // здесь ничего не надо
+        }
     }
 
     return false;

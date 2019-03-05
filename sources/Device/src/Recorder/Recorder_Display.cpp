@@ -290,7 +290,7 @@ void Recorder::Display::DrawMemoryWindow()
 
     Region(319, 5).DrawBounded(0, 3, Color::BACK, Color::FILL);
 
-    int width = (int)(320.0f / numPoints * 320.0F + 0.5F);
+    int width = (int)(320.0F / numPoints * 320.0F + 0.5F);
 
     if (width > 319)
     {
