@@ -456,7 +456,7 @@ void Grid::DrawRecorder()
 
     VLine vLine(Display::HEIGHT - 1);
 
-    float step = 320.0F / 14.0F;
+    float step = 20.0F;
 
     for (float x = 0; x < Display::WIDTH; x += step) //-V1034
     {
