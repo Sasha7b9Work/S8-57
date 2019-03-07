@@ -290,3 +290,5 @@ public:
 #pragma pack(pop)
 
 extern Settings set;
+
+extern int8 divider[2]; // Делитель канала

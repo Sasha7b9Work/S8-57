@@ -112,17 +112,28 @@ DEF_BUTTON( bBalanceA,                                                          
     pChanA, Button::EmptyActive, OnPress_BalanceA, Button::EmptyDraw
 )
 
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+DEF_CHOICE_2(cDividerA,
+    "Делитель", "Divider",
+    "",
+    "",
+    "1X", "1X",
+    "10X", "10X",
+    divider[1], pChanA, Choice::EmptyActive, Choice::EmptyChange, Choice::EmptyDraw
+)
+
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 const PageBase *PageChannelA::pointer = &pChanA;
 
-DEF_PAGE_4( pChanA, // -V641 // -V1027                                                                                                                                      //--- КАНАЛ 1 ---
+DEF_PAGE_5( pChanA, // -V641 // -V1027                                                                                                                                      //--- КАНАЛ 1 ---
     "КАНАЛ 1", "CHANNEL 1",
     "Содержит настройки канала 1.",
     "Contains settings of the channel 1.",
     &cInputA,           ///< КАНАЛ 1 - Вход
     &cCoupleA,          ///< КАНАЛ 1 - Связь
     &cBandwidthA,       ///< КАНАЛ 1 - Полоса
+    &cDividerA,
     &bBalanceA,         ///< КАНАЛ 1 - Балансировка
     Page::Name::ChannelA, nullptr, FuncActive, FuncPressPage, FuncDrawPage, FuncRegSetPage
 )
@@ -190,16 +201,27 @@ DEF_BUTTON( bBalanceB,                                                          
     pChanB, Button::EmptyActive, OnPress_BalanceB, Button::EmptyDraw
 )
 
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+DEF_CHOICE_2( cDividerB,
+    "Делитель", "Divider",
+    "",
+    "",
+    "1X",  "1X",
+    "10X", "10X",
+    divider[0], pChanB, Choice::EmptyActive, Choice::EmptyChange, Choice::EmptyDraw
+)
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 const PageBase *PageChannelB::pointer = &pChanB;
 
-DEF_PAGE_4( pChanB, // -V641 // -V1027                                                                                                                                      //--- КАНАЛ 2 ---
+DEF_PAGE_5( pChanB, // -V641 // -V1027                                                                                                                                      //--- КАНАЛ 2 ---
     "КАНАЛ 2", "CHANNEL 2",
     "Содержит настройки канала 2.",
     "Contains settings of the channel 2.",
     &cInputB,           ///< КАНАЛ 2 - Вход
     &cCoupleB,          ///< КАНАЛ 2 - Связь
     &cBandwidthB,       ///< КАНАЛ 2 - Полоса
+    &cDividerB,
     &bBalanceB,         ///< КАНАЛ 2 - Балансировка
     Page::Name::ChannelB, nullptr, FuncActive, FuncPressPage, FuncDrawPage, FuncRegSetPage
 )
