@@ -119,7 +119,7 @@ DEF_CHOICE_2(cDividerA,
     "",
     "1X", "1X",
     "10X", "10X",
-    divider[1], pChanA, Choice::EmptyActive, Choice::EmptyChange, Choice::EmptyDraw
+    divider[0], pChanA, Choice::EmptyActive, Choice::EmptyChange, Choice::EmptyDraw
 )
 
 
@@ -208,7 +208,7 @@ DEF_CHOICE_2( cDividerB,
     "",
     "1X",  "1X",
     "10X", "10X",
-    divider[0], pChanB, Choice::EmptyActive, Choice::EmptyChange, Choice::EmptyDraw
+    divider[1], pChanB, Choice::EmptyActive, Choice::EmptyChange, Choice::EmptyDraw
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

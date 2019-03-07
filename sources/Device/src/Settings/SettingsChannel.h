@@ -68,11 +68,11 @@ struct CalibrationMode
 #define SET_COUPLE_A            (SET_COUPLE(Chan::A))
 #define SET_COUPLE_B            (SET_COUPLE(Chan::B))
 
-#define SET_DIVIDER(ch)         (set.chan_divider[ch])
-#define SET_DIVIDER_A           (SET_DIVIDER(Chan::A))
-#define SET_DIVIDER_B           (SET_DIVIDER(Chan::B))
-#define SET_DIVIDER_10(ch)      (SET_DIVIDER(ch) == Divider::_10)
-#define SET_DIVIDER_1(ch)       (SET_DIVIDER(ch) == Divider::_1)
+//#define SET_DIVIDER(ch)         (set.chan_divider[ch])
+//#define SET_DIVIDER_A           (SET_DIVIDER(Chan::A))
+//#define SET_DIVIDER_B           (SET_DIVIDER(Chan::B))
+//#define SET_DIVIDER_10(ch)      (SET_DIVIDER(ch) == Divider::_10)
+//#define SET_DIVIDER_1(ch)       (SET_DIVIDER(ch) == Divider::_1)
 
 #define SET_ENABLED(ch)         (set.chan_enabled[ch])
 #define SET_ENABLED_A           (SET_ENABLED(Chan::A))

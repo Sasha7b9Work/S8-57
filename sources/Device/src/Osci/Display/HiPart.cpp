@@ -18,6 +18,7 @@
 #include "Utils/Debug.h"
 #include "Display/Font/Font.h"
 #include "Hardware/Timer.h"
+#include "Settings/Settings.h"
 
 
 using namespace Display::Primitives;
@@ -247,7 +248,7 @@ static void WriteTextVoltage(Chan::E ch, int x, int y)
     Color color = Color::Channel(ch);
 
     bool inverse = SET_INVERSE(ch);
-    Divider::E divider = SET_DIVIDER(ch);
+    //int8 divider = (int8)SET_DIVIDER(ch);
     Osci::Settings::Range::E range = SET_RANGE(ch);
 
     const int widthField = 91;
@@ -260,11 +261,11 @@ static void WriteTextVoltage(Chan::E ch, int x, int y)
     const int SIZE = 100;
 
     char buffer[SIZE];
-    std::snprintf(buffer, SIZE, "%s\xa5%s\xa5%s", Chan(ch).IsA() ? DICT(D1ch) : DICT(D2ch), ModeCouple(SET_COUPLE(ch)).UGO(), Range(range).ToString(divider));
+    std::snprintf(buffer, SIZE, "%s\xa5%s\xa5%s", Chan(ch).IsA() ? DICT(D1ch) : DICT(D2ch), ModeCouple(SET_COUPLE(ch)).UGO(), Range(range).ToString(SET_DIVIDER(ch)));
     String(buffer).Draw(x + 1, y, colorDraw);
 
     char bufferTemp[SIZE];
-    std::snprintf(bufferTemp, SIZE, "\xa5%s", RShift::ToString((uint16)SET_RSHIFT(ch), range, divider).CString());
+    std::snprintf(bufferTemp, SIZE, "\xa5%s", RShift::ToString((uint16)SET_RSHIFT(ch), range, SET_DIVIDER(ch)).CString());
     String(bufferTemp).Draw(x + 46, y);
 }
 
@@ -438,7 +439,7 @@ static void WriteCursors()
             float pos0 = FPGA::Math::VoltageCursor(Cursor::PosU(source, 0), SET_RANGE(source), SET_RSHIFT(source));
             float pos1 = FPGA::Math::VoltageCursor(Cursor::PosU(source, 1), SET_RANGE(source), SET_RSHIFT(source));
             float delta = std::fabsf(pos1 - pos0);
-            if (SET_DIVIDER_10(source))
+            if (SET_DIVIDER_IS_10(source))
             {
                 delta *= 10;
             }

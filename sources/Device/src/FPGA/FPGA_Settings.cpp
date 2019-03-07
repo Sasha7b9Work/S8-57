@@ -329,7 +329,7 @@ String TShift::ToString(TBase::E tBase) const
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-String RShift::ToString(uint16 rShiftRel, Osci::Settings::Range::E range, Divider::E divider)
+String RShift::ToString(uint16 rShiftRel, Osci::Settings::Range::E range, uint8 divider)
 {
     float rShiftVal = FPGA::Math::RShift2Abs(rShiftRel, range) * Divider(divider).ToAbs();
     return Voltage(rShiftVal).ToString(true);
@@ -354,7 +354,7 @@ void Trig::DrawOnGrid()
 
         Region(width, height).DrawBounded(x, y, Color::BACK, Color::FILL);
 
-        float trigLevVal = FPGA::Math::RShift2Abs(SET_TRIGLEV_SOURCE, SET_RANGE(TRIG_SOURCE)) * Divider(SET_DIVIDER(TRIG_SOURCE)).ToAbs();
+        float trigLevVal = FPGA::Math::RShift2Abs(SET_TRIGLEV_SOURCE, SET_RANGE(TRIG_SOURCE)) * Divider((uint8)SET_DIVIDER(TRIG_SOURCE)).ToAbs();
 
         Voltage voltage(trigLevVal);
 
