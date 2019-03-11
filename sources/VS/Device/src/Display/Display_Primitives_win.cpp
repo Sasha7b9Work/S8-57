@@ -101,8 +101,8 @@ static int DrawChar(int eX, int eY, char _symbol)
 {
     uint8 symbol = (uint8)_symbol;
 
-    int8 width = (int8)font->symbol[(uint8)symbol].width;
-    int8 height = (int8)font->height;
+    int8 width = (int8)Font::Current()->symbol[(uint8)symbol].width;
+    int8 height = (int8)Font::Current()->height;
 
     for (int b = 0; b < height; b++)
     {
@@ -133,7 +133,7 @@ static bool ByteFontNotEmpty(uint eChar, int byte)
     if (eChar != prevChar)
     {
         prevChar = eChar;
-        bytes = font->symbol[prevChar].bytes;
+        bytes = Font::Current()->symbol[prevChar].bytes;
     }
     return bytes[byte];
 }
@@ -146,7 +146,7 @@ static bool BitInFontIsExist(int eChar, int numByte, int bit)
     static int prevNumByte = -1;
     if (prevNumByte != numByte || prevChar != eChar)
     {
-        prevByte = font->symbol[eChar].bytes[numByte];
+        prevByte = Font::Current()->symbol[eChar].bytes[numByte];
         prevChar = eChar;
         prevNumByte = numByte;
     }
@@ -158,8 +158,8 @@ static int DrawBigChar(int eX, int eY, int size, char _symbol)
 {
     uint8 symbol = (uint8)_symbol;
 
-    int8 width = (int8)font->symbol[symbol].width;
-    int8 height = (int8)font->height;
+    int8 width = (int8)Font::Current()->symbol[symbol].width;
+    int8 height = (int8)Font::Current()->height;
 
     for (int b = 0; b < height; b++)
     {

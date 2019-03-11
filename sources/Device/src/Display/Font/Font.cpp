@@ -11,7 +11,7 @@ using HAL::FSMC;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-const Font *fonts[Font::Type::Number] = {&font5, &font8, &fontUGO, &fontUGO2};
+const Font *fonts[Font::Type::Size] = {&font5, &font8, &fontUGO, &fontUGO2, nullptr};
 const Font *font = &font8;
 
 
@@ -19,6 +19,12 @@ const Font *font = &font8;
 int Font::GetSize(void)
 {
     return font->height;
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+const Font *Font::Current()
+{
+    return font;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -70,8 +76,11 @@ void Font::SetCurrent(Font::Type::E typeFont)
         case Type::_UGO2:
             font = &fontUGO2;
             break;
+        case Type::_ArialN:
+            font = nullptr;
+            break;
         case Type::None:
-        case Type::Number:
+        case Type::Size:
             break;
     }
 

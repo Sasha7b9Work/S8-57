@@ -17,7 +17,8 @@ struct Font
             _8,
             _UGO,
             _UGO2,
-            Number,
+            _ArialN,
+            Size,
             None
         } value;
     };
@@ -30,11 +31,9 @@ struct Font
     static int  GetHeightSymbol(char symbol);
     static int  GetLengthSymbol(char symbol);
     static void SetCurrent(Font::Type::E typeFont);
+    static const Font *Current();
 };
 
-
-extern const Font *font;
-extern const Font *fonts[Font::Type::Number];
 
 extern const uchar font5display[3080];
 extern const uchar font8display[3080];

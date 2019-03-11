@@ -144,8 +144,8 @@ int Display::Primitives::Text::DrawCharWithLimitation(int eX, int eY, char _symb
 {
     uint8 symbol = (uint8)_symbol;
 
-    int8 width = (int8)font->symbol[symbol].width;
-    int8 height = (int8)font->height;
+    int8 width = (int8)Font::Current()->symbol[symbol].width;
+    int8 height = (int8)Font::Current()->height;
 
     for (int b = 0; b < height; b++)
     {
@@ -179,7 +179,7 @@ bool Display::Primitives::Text::ByteFontNotEmpty(uint eChar, int byte)
     if (eChar != prevChar)
     {
         prevChar = eChar;
-        bytes = font->symbol[prevChar].bytes;
+        bytes = Font::Current()->symbol[prevChar].bytes;
     }
     return bytes[byte];
 }
@@ -192,7 +192,7 @@ bool Display::Primitives::Text::BitInFontIsExist(int eChar, int numByte, int bit
     static int prevNumByte = -1;
     if (prevNumByte != numByte || prevChar != eChar)
     {
-        prevByte = font->symbol[eChar].bytes[numByte];
+        prevByte = Font::Current()->symbol[eChar].bytes[numByte];
         prevChar = eChar;
         prevNumByte = numByte;
     }
