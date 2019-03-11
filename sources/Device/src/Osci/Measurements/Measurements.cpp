@@ -1318,7 +1318,7 @@ String Osci::Measurements::Measure::GetStringMeasure(Chan::E ch, char* buffer, i
         pFuncPCFBPC func = sMeas[type].FucnConvertate;
         float value = values[type].value[ch];
        
-        if (SET_DIVIDER_10(ch) && func == Voltage2String)
+        if (SET_DIVIDER_IS_10(ch) && func == Voltage2String)
         {
             value *= 10.0F;                         // Домножаем, если включён делитель
         }

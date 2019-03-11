@@ -34,6 +34,12 @@
 /// Возвращает позицию активного пункта на странице Page::Name.
 #define MENU_POS_ACT_ITEM(name)     (set.menu_posActItem[name])
 
+#define SET_DIVIDER(ch)             (divider[ch])
+#define SET_DIVIDER_IS_1(ch)        (SET_DIVIDER(ch) == 0)
+#define SET_DIVIDER_IS_10(ch)       (SET_DIVIDER(ch) == 1)
+
+#define SET_DIVIDER_ABS(ch)         ((divider[ch] == 0) ? 1 : 10)
+
 
 #pragma pack(push, 1)
 
@@ -186,7 +192,7 @@ public:
     Function::E              math_function;
     ModeRegSet::E            math_modeRegSet;           ///< Функция ручки УСТАНОВКА - масштаб по времени или смещение по вертикали.
     Osci::Settings::Range::E math_range;
-    Divider::E               math_divider;
+    int8                     math_divider;
     uint16                   math_rShift;
 
     // Настройки частотомера
@@ -290,3 +296,5 @@ public:
 #pragma pack(pop)
 
 extern Settings set;
+
+extern uint8 divider[2]; // Делитель канала

@@ -242,7 +242,7 @@ DEF_SMALL_BUTTON_HINTS_2( bFunction_ModeRegSet,                                 
 static void OnPress_Function_RangeA()
 {
     SET_RANGE_MATH = SET_RANGE_A;
-    MATH_DIVIDER = SET_DIVIDER_A;
+    MATH_DIVIDER = SET_DIVIDER(Chan::A);
 }
 
 static void Draw_Function_RangeA(int x, int y)
@@ -261,7 +261,7 @@ DEF_SMALL_BUTTON( bFunction_RangeA,                                             
 static void OnPress_Function_RangeB()
 {
     SET_RANGE_MATH = SET_RANGE_B;
-    MATH_DIVIDER = SET_DIVIDER_B;
+    MATH_DIVIDER = SET_DIVIDER(Chan::B);
 }
 
 static void Draw_Function_RangeB(int x, int y)

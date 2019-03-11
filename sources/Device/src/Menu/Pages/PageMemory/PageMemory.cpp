@@ -488,12 +488,12 @@ DEF_PAGE_6( ppDrive,  //-V641 //-1027                                           
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-DEF_PAGE_1( pageMemory, // -V641                                                                                                                                             //--- ѕяћя“№ ---
+DEF_PAGE_2( pageMemory, // -V641                                                                                                                                             //--- ѕяћя“№ ---
     "ѕјћя“№", "MEMORY",
     "–абота с внешней и внутренней пам€тью.",
     "Working with external and internal memory.",
     &cPoints,                           ///< ѕјћя“№ - “очки
-    //PageMemory::PageRAM::pointer,      ///< ѕјћя“№ - ѕќ—Ћ≈ƒЌ»≈
+    PageMemory::PageRAM::pointer,      ///< ѕјћя“№ - ѕќ—Ћ≈ƒЌ»≈
     //PageMemory::PageROM::pointer,      ///< ѕјћя“№ - ¬Ќ”“– «”
     //&ppDrive,                           ///< ѕјћя“№ - ¬Ќ≈ЎЌ «”
     Page::Name::Memory, nullptr, FuncActive, FuncPressPage, FuncDrawPage, FuncRegSetPage

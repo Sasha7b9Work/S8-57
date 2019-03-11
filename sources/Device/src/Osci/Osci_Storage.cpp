@@ -119,8 +119,11 @@ public:
     /// Удаление наистарейших данных
     static void FreeOldest()
     {
-        oldest = oldest->next;
-        oldest->prev = nullptr;
+        if (oldest && (oldest->next != nullptr))
+        {
+            oldest = oldest->next;
+            oldest->prev = nullptr;
+        }
     }
 
     /// Возвращает адрес, следующий за последним доступным для сохранения данных
@@ -133,6 +136,22 @@ public:
     static uint8 *BeginMemory()
     {
         return (uint8 *)Heap::Begin();
+    }
+
+    /// Возвращает количество сохранённых данных
+    static int NumElementsInStorage()
+    {
+        int result = 0;
+
+        Data *data = oldest;
+
+        while (data)
+        {
+            result++;
+            data = data->next;
+        }
+
+        return result;
     }
 
     /// Выделить место для нового фрейма, чтобы хватило памяти для хранения данных с настройками DataSettings
@@ -157,7 +176,7 @@ public:
 
         Data *data = (Data *)address;
 
-        if (newest == oldest)
+        if (newest == oldest)                       // Сохранены только одни данные
         {
             oldest->next = data;
             newest = data;
@@ -181,7 +200,7 @@ public:
 
         while (fromEnd > 0 && data != nullptr)
         {
-            data = newest->prev;
+            data = data->prev;
             fromEnd--;
         }
 
@@ -512,7 +531,7 @@ uint DataP2P::ReadingBytes() const
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 int Osci::Storage::NumElementsInStorage()
 {
-    return 1;
+    return HeapWorker::NumElementsInStorage();
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

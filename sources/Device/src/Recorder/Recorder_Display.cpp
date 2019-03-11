@@ -79,9 +79,9 @@ void Recorder::Display::DrawSettings(int x, int y)
 
     Text(RECORDER_SCALE_X.ToString()).Draw(x + 2, y + 2);
 
-    Text(Osci::Settings::Range(SET_RANGE_A).ToString()).Draw(x + 2, y + 11, Color::Channel(Chan::A));
+    Text(Osci::Settings::Range(SET_RANGE_A).ToString(SET_DIVIDER(0))).Draw(x + 2, y + 11, Color::Channel(Chan::A));
 
-    Text(Osci::Settings::Range(SET_RANGE_B).ToString()).Draw(x + 2, y + 20, Color::Channel(Chan::B));
+    Text(Osci::Settings::Range(SET_RANGE_B).ToString(SET_DIVIDER(1))).Draw(x + 2, y + 20, Color::Channel(Chan::B));
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

@@ -18,23 +18,23 @@ static const struct RangeStruct
 }
 ranges[Range::Size][2] =
 {
-    {RangeStruct("2\x10ìÂ",  "20\x10ìÂ"), RangeStruct("2\x10ìV",  "20\x10ìV")},
-    {RangeStruct("5\x10ìÂ",  "50\x10ìÂ"), RangeStruct("5\x10mV",  "50\x10mV")},
-    {RangeStruct("10\x10ìÂ", "0.1\x10Â"), RangeStruct("10\x10mV", "0.1\x10V")},
-    {RangeStruct("20\x10ìÂ", "0.2\x10Â"), RangeStruct("20\x10mV", "0.2\x10V")},
-    {RangeStruct("50\x10ìÂ", "0.5\x10Â"), RangeStruct("50\x10mV", "0.5\x10V")},
-    {RangeStruct("0.1\x10Â", "1\x10Â"),   RangeStruct("0.1\x10V", "1\x10V")},
-    {RangeStruct("0.2\x10Â", "2\x10Â"),   RangeStruct("0.2\x10V", "2\x10V")},
-    {RangeStruct("0.5\x10Â", "5\x10Â"),   RangeStruct("0.5\x10V", "5\x10V")},
-    {RangeStruct("1\x10Â",   "10\x10Â"),  RangeStruct("1\x10V",   "10\x10V")},
-    {RangeStruct("2\x10Â",   "20\x10Â"),  RangeStruct("2\x10V",   "20\x10V")},
-    {RangeStruct("5\x10Â",   "50\x10Â"),  RangeStruct("5\x10V",   "50\x10V")},
-    {RangeStruct("10\x10Â",  "100\x10Â"), RangeStruct("10\x10V",  "100\x10V")},
-    {RangeStruct("20\x10Â",  "200\x10Â"), RangeStruct("20\x10V",  "200\x10V")}
+    {RangeStruct("2\x10ìÂ",  "2\x10ìV"),  RangeStruct("20\x10ìÂ", "20\x10ìV")},
+    {RangeStruct("5\x10ìÂ",  "5\x10mV"),  RangeStruct("50\x10ìÂ", "50\x10mV")},
+    {RangeStruct("10\x10ìÂ", "10\x10mV"), RangeStruct("0.1\x10Â", "0.1\x10V")},
+    {RangeStruct("20\x10ìÂ", "20\x10mV"), RangeStruct("0.2\x10Â", "0.2\x10V")},
+    {RangeStruct("50\x10ìÂ", "50\x10mV"), RangeStruct("0.5\x10Â", "0.5\x10V")},
+    {RangeStruct("0.1\x10Â", "0.1\x10V"), RangeStruct("1\x10Â",   "1\x10V")},
+    {RangeStruct("0.2\x10Â", "0.2\x10V"), RangeStruct("2\x10Â",   "2\x10V")},
+    {RangeStruct("0.5\x10Â", "0.5\x10V"), RangeStruct("5\x10Â",   "5\x10V")},
+    {RangeStruct("1\x10Â",   "1\x10V"),   RangeStruct("10\x10Â",  "10\x10V")},
+    {RangeStruct("2\x10Â",   "2\x10V"),   RangeStruct("20\x10Â",  "20\x10V")},
+    {RangeStruct("5\x10Â",   "5\x10V"),   RangeStruct("50\x10Â",  "50\x10V")},
+    {RangeStruct("10\x10Â",  "10\x10V"),  RangeStruct("100\x10Â", "100\x10V")},
+    {RangeStruct("20\x10Â",  "20\x10V"),  RangeStruct("200\x10Â", "200\x10V")}
 };
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-pString Range::ToString(Divider::E divider)
+pString Range::ToString(int8 divider)
 {
     return (LANG == Language::RU) ? ranges[value][divider].nameRU : ranges[value][divider].nameEN;
 }

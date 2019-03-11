@@ -19,11 +19,19 @@
 
 
 using namespace FPGA::HAL::GPIO;
+using namespace ::HAL;
+using namespace ::HAL::ADDRESSES::FPGA;
 
 using Hardware::AD9286;
 
 
 extern bool givingStart;
+extern uint8 dataRand[Chan::Size][FPGA::MAX_NUM_POINTS];
+
+/// Здесь хранится адрес, начиная с которого будем читать данные по каналам. Если addrRead == 0xffff, то адрес вначале нужно считать
+uint16 addrRead = 0xffff;
+
+volatile static int numberMeasuresForGates = 1000;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -36,20 +44,6 @@ namespace FPGA
         static void Init()
         {
             ::HAL::ADC3_::Init();
-        }
-    };
-
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    class DataAccessor
-    {
-    public:
-        static uint8 *DataA(Osci::Data *data)
-        {
-            return data->dataA;
-        }
-        static uint8 *DataB(Osci::Data *data)
-        {
-            return data->dataB;
         }
     };
 }
@@ -74,53 +68,189 @@ void FPGA::Init()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void AverageData(Chan::E ch, const uint8 *dataNew, const uint8 * /*dataOld*/, int size)
+static bool CalculateGate(uint16 rand, uint16 *eMin, uint16 *eMax)
 {
-    uint8 *_new = (uint8 *)dataNew;
-    uint16 *av = AVE_DATA(ch);
+    static float minGate = 0.0F;
+    static float maxGate = 0.0F;
 
-    uint16 numAve = (uint16)ENUM_AVE;
-
-    for (int i = 0; i < size; i++)
+    if (rand < 500 || rand > 4000)
     {
-        av[i] = (uint16)(av[i] - (av[i] >> numAve));
-
-        av[i] += *_new;
-
-        *_new = (uint8)(av[i] >> numAve);
-
-        _new++;
+        return false;
     }
+
+    static int numElements = 0;
+    static uint16 min = 0xffff;
+    static uint16 max = 0;
+
+    numElements++;
+
+    bool retValue = true;
+
+    if (rand < min)
+    {
+        min = rand;
+    }
+    if (rand > max)
+    {
+        max = rand;
+    }
+
+    if (minGate == 0.0F)    // -V550
+    {
+        *eMin = min;
+        *eMax = max;
+        if (numElements < numberMeasuresForGates)
+        {
+            return true;
+        }
+        minGate = min;
+        maxGate = max;
+        numElements = 0;
+        min = 0xffff;
+        max = 0;
+    }
+
+    if (numElements >= numberMeasuresForGates)
+    {
+        minGate = 0.8F * minGate + min * 0.2F;
+        maxGate = 0.8F * maxGate + max * 0.2F;
+
+        numElements = 0;
+        min = 0xffff;
+        max = 0;
+    }
+
+    *eMin = (uint16)(minGate);      // -V519 // -V2004
+    *eMax = (uint16)(maxGate - 50); // -V519 // -V2004
+
+    LOG_WRITE("ворота %d %d", *eMin, *eMax);
+
+    if (rand < *eMin || rand > *eMax)
+    {
+        return false;
+    }
+
+    return retValue;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void FPGA::ReadData()
+static int CalculateShift()
 {
-    Osci::Data *data = Osci::Storage::PrepareForNewData();
+    uint16 min = 0;
+    uint16 max = 0;
 
-    ReadDataChanenl(Chan::A, DataAccessor::DataA(data));
-    ReadDataChanenl(Chan::B, DataAccessor::DataB(data));
-
-    if (ENUM_AVE != Display::ENumAverage::_1)               // Если включено усреднение
+    if (!CalculateGate(FPGA::valueADC, &min, &max))
     {
-        Osci::Data *last = Osci::Storage::GetData(0);
-        Osci::Data *prev = Osci::Storage::GetData(1);
+        return NULL_TSHIFT;
+    }
 
-        if (prev && last)
+    int deltaMAX = set.dbg_enum_gate_max * 10;
+    int deltaMIN = set.dbg_enum_gate_min * 10;
+
+    if (FPGA::valueADC > max - deltaMAX || FPGA::valueADC < min + deltaMIN)
+    {
+        return NULL_TSHIFT;
+    }
+
+    if (Osci::InModeRandomizer())
+    {
+
+        float tin = (float)(FPGA::valueADC - min + deltaMIN) / (max - deltaMAX - (min + deltaMIN));
+        int retValue = (int)(tin * Osci::Kr[SET_TBASE]);
+
+        return retValue;
+    }
+
+    return NULL_TSHIFT;
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+static void ReadDataChanenlRand(Chan::E ch, const uint8 *address, uint8 *data) // -V2506
+{
+    int Tsm = CalculateShift();
+
+    if (Tsm == NULL_TSHIFT)
+    {
+        return;
+    }
+
+    int step = Osci::Kr[SET_TBASE];
+
+    int index = Tsm - Osci::addShift;
+
+    uint8 *dataRead = &dataRand[ch][index];
+
+    while (index < 0)
+    {
+        volatile uint8 d = *address;
+        d = d;
+        index += step;
+        dataRead += step;
+    }
+
+    uint8 *last = &dataRand[ch][FPGA_NUM_POINTS];
+
+    while (dataRead < last)
+    {
+        *dataRead = *address;
+
+        dataRead += step;
+    }
+
+    std::memcpy(data, &dataRand[ch][0], FPGA_NUM_POINTS);
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void FPGA::ReadDataChanenl(Chan::E ch, uint8 data[FPGA::MAX_NUM_POINTS])
+{
+    uint numPoints = FPGA_NUM_POINTS;
+
+    if (addrRead == 0xffff)
+    {
+        int k = 1;
+
+        if (Osci::InModeRandomizer())
         {
-            const DataSettings *setLast = last->Settings();
-            const DataSettings *setPrev = prev->Settings();
+            k = Osci::Kr[SET_TBASE];
+        }
 
-            if (setLast->Equals(*setPrev))
+        addrRead = (uint16)(ReadLastRecord(ch) - (int)numPoints / k);
+    }
+
+    FSMC::WriteToFPGA16(WR::PRED_LO, (uint16)(addrRead));
+    FSMC::WriteToFPGA8(WR::START_ADDR, 0xff);
+
+
+    uint8 *addr0 = Chan(ch).IsA() ? RD::DATA_A : RD::DATA_B;  // -V566
+    uint8 *addr1 = addr0 + 1;
+
+    if (Osci::InModeRandomizer())
+    {
+        ReadDataChanenlRand(ch, addr1, data);
+    }
+    else
+    {
+        uint8 *p = data;
+
+        *p = *addr0;    // Первая точка почему-то неправильная читается. Просто откидываем её.
+        *p = *addr1;    // -V519
+
+        if (SET_PEAKDET_EN)
+        {
+            for (uint i = 0; i < numPoints; i++)
             {
-                if (ENABLED_A(setLast))
-                {
-                    AverageData(Chan::A, last->DataA(), prev->DataA(), setLast->SizeChannel());
-                }
-                if (ENABLED_B(setPrev))
-                {
-                    AverageData(Chan::B, last->DataB(), prev->DataB(), setLast->SizeChannel());
-                }
+                *p++ = *addr0;
+                *p++ = *addr1;
+            }
+        }
+        else
+        {
+            for (uint i = 0; i < numPoints / 4U; ++i)   // -V112
+            {
+                *p++ = *addr1;
+                *p++ = *addr1;
+                *p++ = *addr1;
+                *p++ = *addr1;
             }
         }
     }
