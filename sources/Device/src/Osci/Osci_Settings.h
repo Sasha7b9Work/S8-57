@@ -79,7 +79,7 @@ namespace Osci
             /// Отрисовать оба на экране
             static void DrawBoth();
             /// Преобразовать в строку
-            static String ToString(uint16 rShiftRel, Osci::Settings::Range::E range, uint8 divider);
+            static String ToString(uint16 rShiftRel, Osci::Settings::Range::E range, int8 divider);
             /// Возвращает ссылку на значение
             static uint16 &Value(Chan::E ch);
         private:

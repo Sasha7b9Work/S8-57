@@ -34,9 +34,9 @@ ranges[Range::Size][2] =
 };
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-pString Range::ToString(int8 divider)
+pString Range::ToString(int8 _divider)
 {
-    return (LANG == Language::RU) ? ranges[value][divider].nameRU : ranges[value][divider].nameEN;
+    return (LANG_RU) ? ranges[value][_divider].nameRU : ranges[value][_divider].nameEN;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

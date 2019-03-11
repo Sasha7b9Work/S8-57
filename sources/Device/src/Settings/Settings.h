@@ -297,4 +297,4 @@ public:
 
 extern Settings set;
 
-extern uint8 divider[2]; // Делитель канала
+extern int8 divider[2]; // Делитель канала
