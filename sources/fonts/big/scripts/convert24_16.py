@@ -1,7 +1,9 @@
 import os
 from struct import *
 
-# import extract as extractor
+#######################################################################
+_heightFont = 16     # Высота шрифта
+_deltaHeightFont = 0 # Расстояние от верха глифа до верхней точки символа. Одинаковое для всех глифов
 
 #######################################################################
 _symbols = []       # Здесь содержимое файла
@@ -177,12 +179,14 @@ def WidthSymbolInBytes(absX, absY):
     width = WidthSymbol(absX, absY)
     while (width % 8) != 0:
         width += 1
+
     return int(width / 8)
 
 ##########################################################################################
 # Возвращает размер памяти в байтах, занимаемой символом с относительным координатами x, y
 def SizeSymbol(absX, absY):
-    return WidthSymbolInBytes(absX, absY) / 8
+
+    return WidthSymbolInBytes(absX, absY) * _heightFont
     
 ##########################################################################################
 # Подсчёт размера памяти, занимаемой глефами с относительными координатами x[], y[]
@@ -191,7 +195,7 @@ def CalculateSizeDataFont(x, y):
     
     for i in range(len(x)):
         result += SizeSymbol(AbsX(x[i]), AbsY(y[i]))
-        
+
     return result
 
 ##########################################################################################
@@ -201,22 +205,44 @@ def WriteDataSymbol(code, file, data):
     file.write(str(hex(code)))
     file.write(" */  ")
     for i in range(len(data)):
-        
-        #file.write(str(data[i]))
         file.write("{0:#0{1}x}".format(data[i], 4))
-        
         if i != len(data) - 1:
             file.write(", ")
 
 ##########################################################################################
 # Возвращает данные символа по абсолютным координатам x, y
 def GetDataSymbol(absX, absY):
-    rows = []                   # Набор строк
-    chars = []                  # Набор байт, входящих в одну строку
-    
-    for i in range(16):
-        rows.append(i)
-    return rows
+
+    rows = []
+
+    for y in range(absY, absY + _heightFont):
+        bits = []                            # Здесь будем хранить биты для каждой строки
+        for x in range(absX, absX + WidthSymbol(absX, absY)):
+            if ColorIsFill(x, y):
+                bits.append(1)
+            else:
+                bits.append(0)
+        rows.append(bits)
+
+    # Сейчас в rows хранятся строки бит
+
+    chars = []
+
+    while len(rows) != 0:
+        row = rows.pop(0)
+        byte = 0                # Здесь текущий рассчитываемый байт
+        leftBits = 8            # Осталось обработать бит в текущем байте
+        while len(row) != 0:
+            bit = row.pop(0)                # Извлекаем очередной бит
+            value = bit << (8 - leftBits)   # Преобразуем его в маску
+            byte |= value                   # И прибавляем к уже существующему значению байта
+            leftBits -= 1                   # Уменьшаем количество оставшихся байт в данном байте
+            if leftBits == 0:
+                chars.append(byte)
+                byte = 0
+                leftBits = 8
+            
+    return chars
 
 
 ##########################################################################################
@@ -230,7 +256,7 @@ def GetDataSymbol(absX, absY):
 def WriteToFile(nameFile, nameFont, codes, x, y):
     output = open(nameFile, "w")
 
-    # Пишем данные
+# Пишем данные **************************************************************************
     
     output.write("static const unsigned char data" + nameFont + "[")
     output.write(str(CalculateSizeDataFont(x, y)))
@@ -248,7 +274,7 @@ def WriteToFile(nameFile, nameFont, codes, x, y):
 
     output.write("\n};\n\n");
 
-    # Пишем символы
+# Пишем символы **************************************************************************
 
     output.write("static const BigSymbol symbols" + nameFont + "[" + str(len(codes)) + "] = \n{\n")
 
@@ -262,7 +288,7 @@ def WriteToFile(nameFile, nameFont, codes, x, y):
 
     output.write("\n};\n")
 
-    # Пишем описание шрифта
+# Пишем описание шрифта *****************************************************************
 
     output.write("\nstatic const BigFont " + nameFont + " =\n")
     output.write("{\n")
