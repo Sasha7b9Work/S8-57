@@ -3,7 +3,7 @@ from struct import *
 
 #######################################################################
 _heightFont = 16     # Высота шрифта
-_deltaHeightFont = 0 # Расстояние от верха глифа до верхней точки символа. Одинаковое для всех глифов
+_deltaHeightFont = 4 # Расстояние от верха глифа до верхней точки символа. Одинаковое для всех глифов
 
 #######################################################################
 _symbols = []       # Здесь содержимое файла
@@ -215,7 +215,7 @@ def GetDataSymbol(absX, absY):
 
     rows = []
 
-    for y in range(absY, absY + _heightFont):
+    for y in range(absY + _deltaHeightFont, absY + _deltaHeightFont + _heightFont):
         bits = []                            # Здесь будем хранить биты для каждой строки
         for x in range(absX, absX + WidthSymbol(absX, absY)):
             if ColorIsFill(x, y):
@@ -223,15 +223,21 @@ def GetDataSymbol(absX, absY):
             else:
                 bits.append(0)
         rows.append(bits)
+        print(bits)
+
+    print("in symbol ", absX, ", ", absY, " ", len(rows), " rows")
 
     # Сейчас в rows хранятся строки бит
 
     chars = []
 
+    byte = 0                # Здесь текущий рассчитываемый байт
+    leftBits = 8            # Осталось обработать бит в текущем байте
+    
     while len(rows) != 0:
         row = rows.pop(0)
-        byte = 0                # Здесь текущий рассчитываемый байт
-        leftBits = 8            # Осталось обработать бит в текущем байте
+        byte = 0
+        leftBits = 8
         while len(row) != 0:
             bit = row.pop(0)                # Извлекаем очередной бит
             value = bit << (8 - leftBits)   # Преобразуем его в маску
@@ -241,6 +247,11 @@ def GetDataSymbol(absX, absY):
                 chars.append(byte)
                 byte = 0
                 leftBits = 8
+        if leftBits != 8:
+            chars.append(byte)
+    
+
+    print("number bytes = ", len(chars))
             
     return chars
 
