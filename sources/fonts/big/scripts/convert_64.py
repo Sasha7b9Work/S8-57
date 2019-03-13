@@ -205,10 +205,8 @@ def CalculateSizeDataFont(x, y):
 
 ##########################################################################################
 # Записывает данные символа в файл
-def WriteDataSymbol(code, file, data):
-    file.write("  /* ")
-    file.write(str(hex(code)))
-    file.write(" */  ")
+def WriteDataSymbol(code, file, data, offset):
+    file.write("\n                         //  code " + str(hex(code)) + ", offset = " + str(hex(offset)) + "\n    ")
     
     count = 0
     
@@ -219,7 +217,7 @@ def WriteDataSymbol(code, file, data):
             file.write(", ")
         if count == 24 and i != len(data) - 1:
             count = 0
-            file.write("\n              ")
+            file.write("\n    ")
 
 ##########################################################################################
 # Возвращает данные символа по абсолютным координатам x, y
@@ -286,12 +284,14 @@ def WriteToFile(nameFile, nameFont, codes, x, y):
     output.write("] =\n")
     output.write("{\n")
 
-    offsets = [0]                                                   # Здесь будут храниться смещения символов
+    offset = 0
+    offsets = [offset]                                              # Здесь будут храниться смещения символов
 
     for i in range(len(x)):                                         # Теперь для всех глефов
         data = GetDataSymbol(AbsX(x[i]), AbsY(y[i]))                # Получаем данные глефа
-        offsets.append(offsets[len(offsets) - 1] + len(data))
-        WriteDataSymbol(codes[i], output, data)                     # И записываем их в файл
+        WriteDataSymbol(codes[i], output, data, offset)             # И записываем их в файл
+        offset = offsets[len(offsets) - 1] + len(data)
+        offsets.append(offset)
         if i != len(x) - 1:
             output.write(",\n")
 
