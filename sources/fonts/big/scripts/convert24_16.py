@@ -1,6 +1,8 @@
 import os
 from struct import *
 
+import extract as extractor
+
 #######################################################################
 _symbols = []       # Здесь содержимое файла
 _offset = 0         # Смщещение картинки относительно начала файла
@@ -10,8 +12,6 @@ _height = 0         # Высота картинки в пикселях
 _colors = []        # Цвета изображения. Они идут в таком порядке : цвет промежутков между глифами, цвет пустоты в глифах, цвет символа
 _dX = 0             # Смещение между левыми верхними углами глефов по горизонтали
 _dY = 0             # Смещение между левыми верхними углами глефов по вертикали
-
-
 ########################################################################
 
 
@@ -26,7 +26,7 @@ def ReadWord(index):
 
 # Чтение изображения из файла
 def ReadFile():
-    fileName = "../font/digitals24_16.bmp"
+    fileName = "../bmp/digitals24_16.bmp"
     input = open(fileName, "rb")
     statinfo = os.stat(fileName)
     data = input.read()
@@ -62,38 +62,50 @@ def GetHeightPicture():
 def GetPoint(x, y):
     return _symbols[_offset + x + (_height - y - 1) * _width]
 
+# Возвращает True, если цвет в данной точке - пустой
+def ColorIsEmpty(x, y):
+    return GetPoint(x, y) == _colors[0]
+
+# Возвращает координату X верхнего левого угла первого слева глифа
+def CalculateX0():
+    for y in range(_height):
+        for x in range(ReadWord(0x12)):
+            if not ColorIsEmpty(x, y):
+                return x
+                break
+
+# Возвращает координату Y верхенго левого угла первого слева глифа
+def CalculateY0():
+    for x in range(ReadWord(0x12)):
+        for y in range(_height):
+            if not ColorIsEmpty(x, y):
+                return y
+                break
+
 # Расчёт смещения X между глефами
 def CalculateOffsetX():
-    x1 = 0;
+    x1 = CalculateX0()
     x2 = 0;
-    for x in range(_width):
-        if GetPoint(x, 1) == _colors[1] or GetPoint(x, 1) == _colors[2]:    # Первое вхождение в глиф
-            x1 = x
-            break
     for x in range(x1, _width):
-        if GetPoint(x, 1) == _colors[0]:    # Вышли за глиф
+        if ColorIsEmpty(x, 1):          # Вышли за глиф
             x2 = x
             break
     for x in range(x2, _width):
-        if GetPoint(x, 1) == _colors[1] or GetPoint(x, 1) == _colors[2]:    # Вошли в следующий глиф
+        if not ColorIsEmpty(x, 1):      # Вошли в следующий глиф
             x2 = x
             break
     return x2 - x1
 
 # Расчёт смещения Y между глефами
 def CalculateOffsetY():
-    y1 = 0;
+    y1 = CalculateY0()
     y2 = 0;
-    for y in range(_height):
-        if GetPoint(1, y) == _colors[1] or GetPoint(1, y) == _colors[2]:    # Первое вхождение в глиф
-            y1 = y
-            break
     for y in range(y1, _height):
-        if GetPoint(1, y) == _colors[0]:    # Вышли за глиф
+        if ColorIsEmpty(1, y):          # Вышли за глиф
             y2 = y
             break
     for y in range(y2, _height):
-        if GetPoint(1, y) == _colors[1] or GetPoint(1, y) == _colors[2]:    # Вошли в следующий глиф
+        if not ColorIsEmpty(1, y):      # Вошли в следующий глиф
             y2 = y
             break
     return y2 - y1
@@ -141,6 +153,6 @@ print("colors - ", _colors[0], " ", _colors[1], " ", _colors[2])
 
 print("dX = ", _dX, ", dY = ", _dY)
 
-# Dump(70, 151)
+Dump(70, 151)
 
-
+extractor.WriteFile("../out/fontDigits16.cpp")
