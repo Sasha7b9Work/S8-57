@@ -160,6 +160,13 @@ def LengthRow(x, y):
     return endBack - start
 
 ##########################################################################################
+# Возвращает ширину символа в битах
+def WidthSymbol(x, y):
+    absX = AbsoluteX(x)
+    absY = AbsoluteY(y)
+    return 8
+
+##########################################################################################
 # Возвращает размер памяти в байтах, занимаемой символом с относительным координатами x, y
 def CalculateSizeSymbol(x, y):
     absX = AbsoluteX(x)     # Рассчитываем абсолютные координаты глефа
@@ -220,6 +227,9 @@ def GetDataSymbol(absX, absY):
 ##########################################################################################
 def WriteToFile(nameFile, nameFont, codes, x, y):
     output = open(nameFile, "w")
+
+    # Пишем данные
+    
     output.write("static const unsigned char data" + nameFont + "[")
     output.write(str(CalculateSizeDataFont(x, y)))
     output.write("] =\n")
@@ -236,22 +246,39 @@ def WriteToFile(nameFile, nameFont, codes, x, y):
 
     output.write("\n};\n\n");
 
-    output.write("static const BigFont " + nameFont + " =\n{\n")
-    output.write("    16,\n")
-    output.write("    data" + nameFont + ",\n    {\n")
+    # Пишем символы
 
-    for i in range(256):
-        if i in codes:
-            output.write("        /* ")
-            output.write("{0:#0{1}x}".format(i, 4))
-            output.write(" */  ")
-            output.write("{0:#0{1}x}".format(offsets.pop(0), 6))
+    output.write("static const BigSymbol simbols" + nameFont + "[" + str(len(codes)) + "] = \n{\n")
+
+    for i in range(len(codes)):
+        output.write("    { " + "{0:#0{1}x}".format(codes[i], 4) + ", " + str(WidthSymbol(x[i], y[i])) + ", " + "{0:#0{1}x}".format(offsets.pop(0), 6) + " }")
+        if i != len(codes) - 1:
+            output.write(",")
         else:
-            output.write("                    0xFFFF")
-        if i != 255:
-            output.write(",\n")
+            output.write(" ")
+        output.write("    //  \'" + chr(codes[i]) + "\'\n")
 
-    output.write("\n    },\n    {\n")
+    output.write("\n};\n")
+
+#    output.write("static const BigFont " + nameFont + " =\n{\n")
+#    output.write("    16,\n")
+#    output.write("    data" + nameFont + ",\n    {\n")
+#
+#    for i in range(256):
+#        if i in codes:
+#            output.write("        /* ")
+#            output.write("{0:#0{1}x}".format(i, 4))
+#            output.write(" */  ")
+#            output.write("{0:#0{1}x}".format(offsets.pop(0), 6))
+#        else:
+#            output.write("                    0xFFFF")
+#        if i != 255:
+#            output.write(",\n")
+#
+#    output.write("\n    },\n    {\n")
+#
+#    for i in range(256):
+        
     
     output.close()
 
