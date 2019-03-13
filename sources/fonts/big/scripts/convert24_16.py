@@ -135,12 +135,12 @@ def Dump(sizeX, sizeY):
 ##########################################################################################
 ##########################################################################################
 # Возвращает абсолютную координату х левого верхнего угла глефа с относительной координатой x
-def AbsoluteX(x):
+def AbsX(x):
     return CalculateX0() + x * _dX
 
 ##########################################################################################
 # Возвращает абсолютную координату y левого верхнего угла глефа с относительной координатой y
-def AbsoluteY(y):
+def AbsY(y):
     return CalculateY0() + y * _dY
 
 ##########################################################################################
@@ -161,36 +161,36 @@ def LengthRow(x, y):
 
 ##########################################################################################
 # Возвращает ширину символа в битах
-def WidthSymbol(x, y):
-    absX = AbsoluteX(x)
-    absY = AbsoluteY(y)
-    return 8
-
-##########################################################################################
-# Возвращает размер памяти в байтах, занимаемой символом с относительным координатами x, y
-def CalculateSizeSymbol(x, y):
-    absX = AbsoluteX(x)     # Рассчитываем абсолютные координаты глефа
-    absY = AbsoluteY(y)
-
+def WidthSymbol(absX, absY):   
     maxSize = 0             # Размер самой длинной строки символа в битах
 
     for y in range (absY, absY + _dY):
         size = LengthRow(absX, y)
         if size > maxSize:
             maxSize = size
-
-    while (maxSize % 8) != 0:
-        maxSize += 1
     
-    return int(maxSize * 16 / 8); # Такая формула потому, что сначала мы количестов бит мы должны разделить на 8, чтобы получить количество байт, а потом умножить на 16 (количество строк)
+    return maxSize
 
+##########################################################################################
+# Возвращает шириру символа в байтах
+def WidthSymbolInBytes(absX, absY):
+    width = WidthSymbol(absX, absY)
+    while (width % 8) != 0:
+        width += 1
+    return int(width / 8)
+
+##########################################################################################
+# Возвращает размер памяти в байтах, занимаемой символом с относительным координатами x, y
+def SizeSymbol(absX, absY):
+    return WidthSymbolInBytes(absX, absY) / 8
+    
 ##########################################################################################
 # Подсчёт размера памяти, занимаемой глефами с относительными координатами x[], y[]
 def CalculateSizeDataFont(x, y):
     result = 0
     
     for i in range(len(x)):
-        result += CalculateSizeSymbol(x[i], y[i])
+        result += SizeSymbol(AbsX(x[i]), AbsY(y[i]))
         
     return result
 
@@ -211,7 +211,9 @@ def WriteDataSymbol(code, file, data):
 ##########################################################################################
 # Возвращает данные символа по абсолютным координатам x, y
 def GetDataSymbol(absX, absY):
-    rows = []
+    rows = []                   # Набор строк
+    chars = []                  # Набор байт, входящих в одну строку
+    
     for i in range(16):
         rows.append(i)
     return rows
@@ -238,7 +240,7 @@ def WriteToFile(nameFile, nameFont, codes, x, y):
     offsets = [0]                                                   # Здесь будут храниться смещения символов
 
     for i in range(len(x)):                                         # Теперь для всех глефов
-        data = GetDataSymbol(AbsoluteX(x[i]), AbsoluteY(y[i]))      # Получаем данные глефа
+        data = GetDataSymbol(AbsX(x[i]), AbsY(y[i]))                # Получаем данные глефа
         offsets.append(offsets[len(offsets) - 1] + len(data))
         WriteDataSymbol(codes[i], output, data)                     # И записываем их в файл
         if i != len(x) - 1:
@@ -248,10 +250,10 @@ def WriteToFile(nameFile, nameFont, codes, x, y):
 
     # Пишем символы
 
-    output.write("static const BigSymbol simbols" + nameFont + "[" + str(len(codes)) + "] = \n{\n")
+    output.write("static const BigSymbol symbols" + nameFont + "[" + str(len(codes)) + "] = \n{\n")
 
     for i in range(len(codes)):
-        output.write("    { " + "{0:#0{1}x}".format(codes[i], 4) + ", " + str(WidthSymbol(x[i], y[i])) + ", " + "{0:#0{1}x}".format(offsets.pop(0), 6) + " }")
+        output.write("    { " + "{0:#0{1}x}".format(codes[i], 4) + ", " + str(WidthSymbol(AbsX(x[i]), AbsY(y[i]))) + ", " + "{0:#0{1}x}".format(offsets.pop(0), 6) + " }")
         if i != len(codes) - 1:
             output.write(",")
         else:
@@ -260,25 +262,15 @@ def WriteToFile(nameFile, nameFont, codes, x, y):
 
     output.write("\n};\n")
 
-#    output.write("static const BigFont " + nameFont + " =\n{\n")
-#    output.write("    16,\n")
-#    output.write("    data" + nameFont + ",\n    {\n")
-#
-#    for i in range(256):
-#        if i in codes:
-#            output.write("        /* ")
-#            output.write("{0:#0{1}x}".format(i, 4))
-#            output.write(" */  ")
-#            output.write("{0:#0{1}x}".format(offsets.pop(0), 6))
-#        else:
-#            output.write("                    0xFFFF")
-#        if i != 255:
-#            output.write(",\n")
-#
-#    output.write("\n    },\n    {\n")
-#
-#    for i in range(256):
-        
+    # Пишем описание шрифта
+
+    output.write("\nstatic const BigFont " + nameFont + " =\n")
+    output.write("{\n")
+    output.write("    16,\n")
+    output.write("    " + str(len(codes)) + ",\n")
+    output.write("    data" + nameFont + ",\n")
+    output.write("    symbols" + nameFont + ",\n")
+    output.write("};")      
     
     output.close()
 

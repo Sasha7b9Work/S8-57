@@ -13,6 +13,7 @@ struct BigSymbol
 struct BigFont
 {
     int8       height;      // Высота глифа
+    uint8      numSymbols;  // Количество символов в таблице
     uint8     *data;        // Адрес данных
     BigSymbol *symbols;     // Это первый символ. Остальные расположены за ним
 };
@@ -33,6 +34,7 @@ BigSymbol symbolsFont24[N] =
 BigFont font24 =
 {
     24,
+    10,
     dataFont24,
     symbolsFont24
 };
