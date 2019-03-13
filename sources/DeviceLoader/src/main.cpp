@@ -47,78 +47,78 @@ void Upgrade();
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 int main()
 {
-    ms = (MainStruct *)malloc(sizeof(MainStruct));
-    ms->percentUpdate = 0.0F; //-V522
-   
-    CPU::Init();
-
-    Settings::Load();
-
-    Timer::PauseOnTime(250);
-    
-    Display::Init();
-    
-    ms->state = State_Start;
-
-    Timer::SetAndEnable(kTemp, Display::Update, 10);
-
-    uint timeStart = TIME_MS;
-
-    CPU::FDrive::Init();
-    
-    bool update = CPU::FDrive::Update();
-    
-    uint time = TIME_MS - timeStart;
-
-    while (TIME_MS - timeStart < TIME_WAIT && !CPU::FDrive::Update())
-    {
-        update = CPU::FDrive::Update();
-        time = TIME_MS - timeStart;
-    }
-
-    if ((ms->drive.connection && ms->drive.active == 0) ||  // ≈сли флеша подключена, но в активное состо€ние почему-то не перешла
-        (ms->drive.active && ms->state != State_Mount))     // или перешла в активное состо€ние, по почему-то не запустилс€ процесс монтировани€
-    {
-        free(ms);
-        NVIC_SystemReset();
-    }
-
-    if (ms->state == State_Mount)                           // Ёто означает, что диск удачно примонтирован //-V774
-    {
-        if (CPU::FDrive::FileExist(FILE_CLEAR))
-        {
-            EraseSettings();
-        }
-
-        if (CPU::FDrive::FileExist(FILE_FIRMWARE))                    // ≈сли на диске обнаружена прошивка
-        {
-            Upgrade();
-        }
-        else
-        {
-            ms->state = State_NotFile;
-        }
-    }
-    else if (ms->state == State_WrongFlash) // ƒиск не удалось примонтировать //-V774
-    {
-        Timer::PauseOnTime(5000);
-    }
-    else
-    {
-        // здесь ничего
-    }
-
-    ms->state = State_Ok; //-V774 //-V519
-    
-    Timer::Disable(kTemp);
-
-    while (Display::IsRun())
-    {
-    }
-    
-    CPU::DeInit();
-
-    free(ms);
+//    ms = (MainStruct *)malloc(sizeof(MainStruct));
+//    ms->percentUpdate = 0.0F; //-V522
+//   
+//    CPU::Init();
+//
+//    Settings::Load();
+//
+//    Timer::PauseOnTime(250);
+//    
+//    Display::Init();
+//    
+//    ms->state = State_Start;
+//
+//    Timer::SetAndEnable(kTemp, Display::Update, 10);
+//
+//    uint timeStart = TIME_MS;
+//
+//    CPU::FDrive::Init();
+//    
+//    bool update = CPU::FDrive::Update();
+//    
+//    uint time = TIME_MS - timeStart;
+//
+//    while (TIME_MS - timeStart < TIME_WAIT && !CPU::FDrive::Update())
+//    {
+//        update = CPU::FDrive::Update();
+//        time = TIME_MS - timeStart;
+//    }
+//
+//    if ((ms->drive.connection && ms->drive.active == 0) ||  // ≈сли флеша подключена, но в активное состо€ние почему-то не перешла
+//        (ms->drive.active && ms->state != State_Mount))     // или перешла в активное состо€ние, по почему-то не запустилс€ процесс монтировани€
+//    {
+//        free(ms);
+//        NVIC_SystemReset();
+//    }
+//
+//    if (ms->state == State_Mount)                           // Ёто означает, что диск удачно примонтирован //-V774
+//    {
+//        if (CPU::FDrive::FileExist(FILE_CLEAR))
+//        {
+//            EraseSettings();
+//        }
+//
+//        if (CPU::FDrive::FileExist(FILE_FIRMWARE))                    // ≈сли на диске обнаружена прошивка
+//        {
+//            Upgrade();
+//        }
+//        else
+//        {
+//            ms->state = State_NotFile;
+//        }
+//    }
+//    else if (ms->state == State_WrongFlash) // ƒиск не удалось примонтировать //-V774
+//    {
+//        Timer::PauseOnTime(5000);
+//    }
+//    else
+//    {
+//        // здесь ничего
+//    }
+//
+//    ms->state = State_Ok; //-V774 //-V519
+//    
+//    Timer::Disable(kTemp);
+//
+//    while (Display::IsRun())
+//    {
+//    }
+//    
+//    CPU::DeInit();
+//
+//    free(ms);
 
     __disable_irq();
     // “еперь переходим на основную программу
