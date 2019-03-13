@@ -1,2 +1,9 @@
 call convert_16.bat
+call convert_20.bat
+call convert_25.bat
+call convert_29.bat
+call convert_36.bat
+call convert_40.bat
+call convert_45.bat
+call convert_51.bat
 call convert_64.bat

@@ -333,8 +333,9 @@ def WriteToFile(nameFile, nameFont, codes, x, y):
 _heightFont = int(sys.argv[1])
 _deltaHeightFont = int(sys.argv[2])
 _inFile = sys.argv[3]
-_outFile = sys.argv[4]
-_nameFont = sys.argv[5]
+
+_outFile = "../out/fontDigits" + str(_heightFont) + ".cpp"
+_nameFont = "fontDigits" + str(_heightFont)
 
 _symbols = ReadFile()
 
