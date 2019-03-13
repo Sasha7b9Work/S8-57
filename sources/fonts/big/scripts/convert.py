@@ -1,12 +1,13 @@
 import os
+import sys
 from struct import *
 
 #######################################################################
-_heightFont = 64                        # Высота шрифта
-_deltaHeightFont = 19                   # Расстояние от верха глифа до верхней точки символа. Одинаковое для всех глифов
-_inFile = "../bmp/digitals100_64.bmp"   # Имя файла с изображением
-_outFile = "../out/fontDigits64.cpp"    # Имя выходного файла
-_nameFont = "fontDigits64"              # Имя шрифта
+_heightFont = 0         # Высота шрифта
+_deltaHeightFont = 0    # Расстояние от верха глифа до верхней точки символа. Одинаковое для всех глифов
+_inFile = ""            # Имя файла с изображением
+_outFile = ""           # Имя выходного файла
+_nameFont = ""          # Имя шрифта
 
 #######################################################################
 _symbols = []       # Здесь содержимое файла
@@ -282,7 +283,7 @@ def WriteToFile(nameFile, nameFont, codes, x, y):
     output.write("static const unsigned char data" + nameFont + "[")
     output.write(str(CalculateSizeDataFont(x, y)))
     output.write("] =\n")
-    output.write("{\n")
+    output.write("{")
 
     offset = 0
     offsets = [offset]                                              # Здесь будут храниться смещения символов
@@ -328,6 +329,12 @@ def WriteToFile(nameFile, nameFont, codes, x, y):
 #                                    Start here                                          #
 ##########################################################################################
 
+
+_heightFont = int(sys.argv[1])
+_deltaHeightFont = int(sys.argv[2])
+_inFile = sys.argv[3]
+_outFile = sys.argv[4]
+_nameFont = sys.argv[5]
 
 _symbols = ReadFile()
 
