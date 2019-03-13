@@ -1,7 +1,13 @@
 import os
 
+####################################################################################
 # Записать символы в файл
-def WriteFile(fileName):
+# fileName - файл, куда будут записаны данные
+# nameFont - имя шрифта
+# bmpData - данные файла .bmp
+# offset - смещение начала картинки от 
+####################################################################################
+def WriteFile(fileName, nameFont, bmpData):
     output = open(fileName, "w")
-    output.write("test")
+    output.write("unsigned char data" + nameFont)
     output.close()

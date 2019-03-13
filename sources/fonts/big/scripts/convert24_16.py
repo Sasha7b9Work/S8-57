@@ -1,7 +1,7 @@
 import os
 from struct import *
 
-import extract as extractor
+# import extract as extractor
 
 #######################################################################
 _symbols = []       # Здесь содержимое файла
@@ -66,6 +66,14 @@ def GetPoint(x, y):
 def ColorIsEmpty(x, y):
     return GetPoint(x, y) == _colors[0]
 
+# Возвращает True, если цвет в данной точке - фон
+def ColorIsBack(x, y):
+    return GetPoint(x, y) == _colors[1]
+
+# Возвращает True, елси цвет в данной точке - закрашен
+def ColorIsFill(x, y):
+    return GetPoint(x, y) == _colors[2]
+
 # Возвращает координату X верхнего левого угла первого слева глифа
 def CalculateX0():
     for y in range(_height):
@@ -124,9 +132,133 @@ def Dump(sizeX, sizeY):
                 print(' ', end = '')
         print()
 
+##########################################################################################
+##########################################################################################
+# Возвращает абсолютную координату х левого верхнего угла глефа с относительной координатой x
+def AbsoluteX(x):
+    return CalculateX0() + x * _dX
 
-###### Start here ######
+##########################################################################################
+# Возвращает абсолютную координату y левого верхнего угла глефа с относительной координатой y
+def AbsoluteY(y):
+    return CalculateY0() + y * _dY
 
+##########################################################################################
+# Возвращает длину строки символа в битах
+def LengthRow(x, y):
+    start = x                           # Начальная координата строки
+    endFill = 0                         # Координата последней закрашенной точки
+    endBack = 0                         # Координата последней глефа цвета фона
+    
+    while not ColorIsEmpty(x, y):
+        if ColorIsFill(x, y):
+            endFill = x
+        if ColorIsBack(x, y):
+            endBack = x
+        x += 1
+        
+    return endBack - start
+
+##########################################################################################
+# Возвращает размер памяти в байтах, занимаемой символом с относительным координатами x, y
+def CalculateSizeSymbol(x, y):
+    absX = AbsoluteX(x)     # Рассчитываем абсолютные координаты глефа
+    absY = AbsoluteY(y)
+
+    maxSize = 0             # Размер самой длинной строки символа в битах
+
+    for y in range (absY, absY + _dY):
+        size = LengthRow(absX, y)
+        if size > maxSize:
+            maxSize = size
+
+    while (maxSize % 8) != 0:
+        maxSize += 1
+    
+    return int(maxSize * 16 / 8); # Такая формула потому, что сначала мы количестов бит мы должны разделить на 8, чтобы получить количество байт, а потом умножить на 16 (количество строк)
+
+##########################################################################################
+# Подсчёт размера памяти, занимаемой глефами с относительными координатами x[], y[]
+def CalculateSizeDataFont(x, y):
+    result = 0
+    
+    for i in range(len(x)):
+        result += CalculateSizeSymbol(x[i], y[i])
+        
+    return result
+
+##########################################################################################
+# Записывает данные символа в файл
+def WriteDataSymbol(code, file, data):
+    file.write("  /* ")
+    file.write(str(hex(code)))
+    file.write(" */  ")
+    for i in range(len(data)):
+        
+        #file.write(str(data[i]))
+        file.write("{0:#0{1}x}".format(data[i], 4))
+        
+        if i != len(data) - 1:
+            file.write(", ")
+
+##########################################################################################
+# Возвращает данные символа по абсолютным координатам x, y
+def GetDataSymbol(absX, absY):
+    rows = []
+    for i in range(16):
+        rows.append(i)
+    return rows
+
+
+##########################################################################################
+# Записывает выходные данные в файл
+# nameFile - имя файла
+# nameFont - имя шрифта
+# codes[] - коды символов, которые требуется сохранить
+# x[] - координаты по горизонтали в файле изображения глефов, соотвествующих символам
+# y[] - координаты по вертикали в файле изображения глефов, соответствующих символам
+##########################################################################################
+def WriteToFile(nameFile, nameFont, codes, x, y):
+    output = open(nameFile, "w")
+    output.write("static const unsigned char data" + nameFont + "[")
+    output.write(str(CalculateSizeDataFont(x, y)))
+    output.write("] =\n")
+    output.write("{\n")
+
+    offsets = [0]                                                   # Здесь будут храниться смещения символов
+
+    for i in range(len(x)):                                         # Теперь для всех глефов
+        data = GetDataSymbol(AbsoluteX(x[i]), AbsoluteY(y[i]))      # Получаем данные глефа
+        offsets.append(offsets[len(offsets) - 1] + len(data))
+        WriteDataSymbol(codes[i], output, data)                     # И записываем их в файл
+        if i != len(x) - 1:
+            output.write(",\n")
+
+    output.write("\n};\n\n");
+
+    output.write("static const BigFont " + nameFont + " =\n{\n")
+    output.write("    16,\n")
+    output.write("    data" + nameFont + ",\n    {\n")
+
+    for i in range(256):
+        if i in codes:
+            output.write("        /* ")
+            output.write("{0:#0{1}x}".format(i, 4))
+            output.write(" */  ")
+            output.write("{0:#0{1}x}".format(offsets.pop(0), 6))
+        else:
+            output.write("                    0xFFFF")
+        if i != 255:
+            output.write(",\n")
+
+    output.write("\n    },\n    {\n")
+    
+    output.close()
+
+
+##########################################################################################
+#                                    Start here                                          #
+##########################################################################################
 
 
 _symbols = ReadFile()
@@ -143,16 +275,18 @@ _dX = CalculateOffsetX()
 
 _dY = CalculateOffsetY()
 
-print("offset ", _offset)
+#print("offset ", _offset)
+#print("number colors ", _numColors)
+#print("size picture ", _width, " x ", _height)
+#print("colors - ", _colors[0], " ", _colors[1], " ", _colors[2])
+#print("dX = ", _dX, ", dY = ", _dY)
+# Dump(70, 151)
 
-print("number colors ", _numColors)
+#         '0'   '1'   '2'   '3'   '4'   '5'   '6'   '7'   '8'   '9'
+codes = [0x30, 0x31, 0x32, 0x33, 0x34, 0x35, 0x36, 0x37, 0x38, 0x39]
 
-print("size picture ", _width, " x ", _height)
+x =     [  0,     1,    2,    3,    4,    5,    6,    7,    8,    9]
 
-print("colors - ", _colors[0], " ", _colors[1], " ", _colors[2])
+y =     [  1,     1,    1,    1,    1,    1,    1,    1,    1,    1]
 
-print("dX = ", _dX, ", dY = ", _dY)
-
-Dump(70, 151)
-
-extractor.WriteFile("../out/fontDigits16.cpp")
+WriteToFile("../out/fontDigits16.cpp", "fontDigits16", codes, x, y)
