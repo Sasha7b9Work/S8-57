@@ -314,7 +314,7 @@ def WriteToFile(nameFile, nameFont, codes, x, y):
 
 # Пишем описание шрифта *****************************************************************
 
-    output.write("\nstatic const BigFont " + nameFont + " =\n")
+    output.write("\nconst BigFont " + nameFont + " =\n")
     output.write("{\n")
     output.write("    " + str(_heightFont) + ",\n")
     output.write("    " + str(len(codes)) + ",\n")

@@ -12,10 +12,6 @@ extern SDL_Renderer *renderer;
 static int DrawChar(int x, int y, char symbol);
 
 static int DrawBigChar(int eX, int eY, int size, char _symbol);
-
-static bool ByteFontNotEmpty(uint eChar, int byte);
-
-static bool BitInFontIsExist(int eChar, int numByte, int bit);
 /// Нарисовать одну горизонтальную лиинию из count точек c расстоянием delta между соседнимит точками
 static void DrawHPointLine(int x, int y, int count, int delta);
 /// Нарисовать одну вертикальную лиинию из count точек c расстоянием delta между соседнимит точками
@@ -101,19 +97,19 @@ static int DrawChar(int eX, int eY, char _symbol)
 {
     uint8 symbol = (uint8)_symbol;
 
-    int8 width = (int8)Font::Current()->symbol[(uint8)symbol].width;
-    int8 height = (int8)Font::Current()->height;
+    int8 width = (int8)Font::Current()->GetWidth(symbol);
+    int8 height = (int8)Font::Current()->GetHeight();
 
     for (int b = 0; b < height; b++)
     {
-        if (ByteFontNotEmpty((uint)symbol, b))
+        if (Font::Current()->RowNotEmpty(symbol, b))
         {
             int x = eX;
             int y = eY + b + 9 - height;
             int endBit = 8 - width;
             for (int bit = 7; bit >= endBit; bit--)
             {
-                if (BitInFontIsExist(symbol, b, bit))
+                if (Font::Current()->BitIsExist(symbol, b, bit))
                 {
                     SDL_RenderDrawPoint(renderer, x, y);
                 }
@@ -126,51 +122,23 @@ static int DrawChar(int eX, int eY, char _symbol)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static bool ByteFontNotEmpty(uint eChar, int byte)
-{
-    static const uint8 *bytes = 0;
-    static uint prevChar = (uint)-1;
-    if (eChar != prevChar)
-    {
-        prevChar = eChar;
-        bytes = Font::Current()->symbol[prevChar].bytes;
-    }
-    return bytes[byte];
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static bool BitInFontIsExist(int eChar, int numByte, int bit)
-{
-    static uint8 prevByte = 0;      /// \todo здесь точно статики нужны?
-    static int prevChar = -1;
-    static int prevNumByte = -1;
-    if (prevNumByte != numByte || prevChar != eChar)
-    {
-        prevByte = Font::Current()->symbol[eChar].bytes[numByte];
-        prevChar = eChar;
-        prevNumByte = numByte;
-    }
-    return prevByte & (1 << bit);
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static int DrawBigChar(int eX, int eY, int size, char _symbol)
 {
     uint8 symbol = (uint8)_symbol;
 
-    int8 width = (int8)Font::Current()->symbol[symbol].width;
-    int8 height = (int8)Font::Current()->height;
+    int8 width = (int8)Font::Current()->GetWidth(symbol);
+    int8 height = (int8)Font::Current()->GetHeight();
 
     for (int b = 0; b < height; b++)
     {
-        if (ByteFontNotEmpty(symbol, b))
+        if (Font::Current()->RowNotEmpty(symbol, b))
         {
             int x = eX;
             int y = eY + b * size + 9 - height;
             int endBit = 8 - width;
             for (int bit = 7; bit >= endBit; bit--)
             {
-                if (BitInFontIsExist(symbol, b, bit))
+                if (Font::Current()->BitIsExist(symbol, b, bit))
                 {
                     for (int i = 0; i < size; i++)
                     {

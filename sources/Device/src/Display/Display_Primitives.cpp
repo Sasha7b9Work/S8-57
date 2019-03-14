@@ -144,19 +144,19 @@ int Display::Primitives::Text::DrawCharWithLimitation(int eX, int eY, char _symb
 {
     uint8 symbol = (uint8)_symbol;
 
-    int8 width = (int8)Font::Current()->symbol[symbol].width;
-    int8 height = (int8)Font::Current()->height;
+    int8 width = (int8)Font::Current()->GetWidth(symbol);
+    int8 height = (int8)Font::Current()->GetHeight();
 
     for (int b = 0; b < height; b++)
     {
-        if (ByteFontNotEmpty(symbol, b))
+        if(Font::Current()->RowNotEmpty(symbol, b))
         {
             int x = eX;
             int y = eY + b + 9 - height;
             int endBit = 8 - width;
             for (int bit = 7; bit >= endBit; bit--)
             {
-                if (BitInFontIsExist(symbol, b, bit))
+                if (Font::Current()->BitIsExist(symbol, b, bit))
                 {
                     if ((x >= limitX) && (x <= (limitX + limitWidth)) && (y >= limitY) && (y <= limitY + limitHeight))
                     {
@@ -169,34 +169,6 @@ int Display::Primitives::Text::DrawCharWithLimitation(int eX, int eY, char _symb
     }
 
     return eX + width + 1;
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-bool Display::Primitives::Text::ByteFontNotEmpty(uint eChar, int byte)
-{
-    static const uint8 *bytes = 0;
-    static uint prevChar = 0xffffffffU;
-    if (eChar != prevChar)
-    {
-        prevChar = eChar;
-        bytes = Font::Current()->symbol[prevChar].bytes;
-    }
-    return bytes[byte];
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-bool Display::Primitives::Text::BitInFontIsExist(int eChar, int numByte, int bit)
-{
-    static uint8 prevByte = 0;      /// \todo здесь точно статики нужны?
-    static int prevChar = -1;
-    static int prevNumByte = -1;
-    if (prevNumByte != numByte || prevChar != eChar)
-    {
-        prevByte = Font::Current()->symbol[eChar].bytes[numByte];
-        prevChar = eChar;
-        prevNumByte = numByte;
-    }
-    return prevByte & (1 << bit);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -213,7 +185,7 @@ int Display::Primitives::Text::DrawInCenterRect(int eX, int eY, int width, int e
 int Display::Primitives::Text::DrawOnBackground(int x, int y, Color colorBackground)
 {
     int width = Font::GetLengthText(text);
-    int height = Font::GetSize();
+    int height = Font::GetHeight();
 
     Color colorText(Color::GetCurent());
     Region(width, height).Fill(x - 1, y, colorBackground);

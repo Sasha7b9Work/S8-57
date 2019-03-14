@@ -120,8 +120,6 @@ namespace Display
             int DrawCharWithLimitation(int eX, int eY, char _symbol, int limitX, int limitY, int limitWidth, int limitHeight);
             void DrawBig(int x, int y, Color color = Color::NUMBER);
             int DrawSmall(int x, int y, Color color = Color::NUMBER);
-            bool ByteFontNotEmpty(uint eChar, int byte);
-            bool BitInFontIsExist(int eChar, int numByte, int bit);
         };
 
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
