@@ -100,16 +100,17 @@ static int DrawChar(int eX, int eY, char _symbol)
     int8 width = (int8)Font::Current()->GetWidth(symbol);
     int8 height = (int8)Font::Current()->GetHeight();
 
-    for (int b = 0; b < height; b++)
+    int delta = Font::Current()->IsBig() ? 0 : (9 - height);
+
+    for (int row = 0; row < height; row++)
     {
-        if (Font::Current()->RowNotEmpty(symbol, b))
+        if (Font::Current()->RowNotEmpty(symbol, row))
         {
             int x = eX;
-            int y = eY + b + 9 - height;
-            int endBit = 8 - width;
-            for (int bit = 7; bit >= endBit; bit--)
+            int y = eY + row + delta;
+            for (int bit = 0; bit < width; bit++)
             {
-                if (Font::Current()->BitIsExist(symbol, b, bit))
+                if (Font::Current()->BitIsExist(symbol, row, bit))
                 {
                     SDL_RenderDrawPoint(renderer, x, y);
                 }

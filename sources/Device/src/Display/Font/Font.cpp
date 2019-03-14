@@ -76,7 +76,7 @@ void Font::SetCurrent(Font::Type::E typeFont)
             font = &fontUGO2;
             break;
         case Type::_Big64:
-            font = nullptr;
+            bigFont = &fontDigits64;
             break;
         case Type::None:
         case Type::Size:
@@ -118,7 +118,7 @@ uint8 Font::GetHeight()
 {
     if (FontIsSmall())
     {
-        return font->_height;
+        return (uint8)font->_height;
     }
 
     return bigFont->height;
@@ -132,7 +132,63 @@ bool Font::RowNotEmpty(uint8 symbol, int row)
         return font->symbols[symbol].bytes[row] != 0;
     }
 
+    FullSymbol fullSymbol;
+
+    if (bigFont->GetFullSymbol(fullSymbol, symbol))
+    {
+        return fullSymbol.RowNotEmpty(row);
+    }
+
     return false;
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+bool FullSymbol::RowNotEmpty(int numRow) const
+{
+    uint8 *row = GetRow(numRow);
+
+    for (int i = 0; i < BytesInRow(); i++)
+    {
+        if (row[i] != 0)
+        {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+bool FullSymbol::BitIsExist(int numRow, int bit) const
+{
+    uint8 *row = GetRow(numRow);
+
+    while (bit > 7)
+    {
+        bit -= 8;
+        row++;
+    }
+
+    return ((*row) >> bit) & 0x01;
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+uint8 *FullSymbol::GetRow(int row) const
+{
+    return offset + BytesInRow() * row;
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+uint8 FullSymbol::BytesInRow() const
+{
+    uint8 width = (uint8)(symbol.width >> 3);
+
+    if (symbol.width % 8 != 0)
+    {
+        width++;
+    }
+
+    return width;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -140,36 +196,50 @@ bool Font::BitIsExist(uint8 symbol, int row, int bit)
 {
     if (FontIsSmall())
     {
-        return font->symbols[symbol].bytes[row] & (1 << bit);
+        return font->symbols[symbol].bytes[row] & (1 << (7 - bit));
+    }
+
+    FullSymbol fullSymbol;
+
+    if (bigFont->GetFullSymbol(fullSymbol, symbol))
+    {
+        return fullSymbol.BitIsExist(row, bit);
     }
 
     return false;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-uint8 BigFont::GetWidth(uint8 symbol) const
+uint8 BigFont::GetWidth(uint8 code) const
 {
-    for (uint i = 0; i < numSymbols; i++)
+    FullSymbol symbol;
+
+    if (GetFullSymbol(symbol, code))
     {
-        if (symbols[i].code == symbol)
-        {
-            return symbols[i].width;
-        }
+        return symbol.symbol.width;
     }
 
     return 0;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-bool BigFont::ExistSymbol(uint8 symbol) const
+bool BigFont::GetFullSymbol(FullSymbol &symbol, uint8 code) const
 {
     for (uint i = 0; i < numSymbols; i++)
     {
-        if (symbols[i].code == symbol)
+        if (symbols[i].code == code)
         {
+            symbol.symbol = symbols[i];
+            symbol.offset = (uint8 *)data + symbols[i].offset;
             return true;
         }
     }
 
     return false;
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+bool Font::IsBig()
+{
+    return !FontIsSmall();
 }

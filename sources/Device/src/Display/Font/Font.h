@@ -8,6 +8,18 @@ struct BigSymbol
     uint16 offset;  ///< Смещение первого байта символа относительно начала массива данных
 };
 
+struct FullSymbol
+{
+    BigSymbol symbol;
+    uint8     *offset;  /// Указать на первый байт глифа
+    bool RowNotEmpty(int row) const;
+    bool BitIsExist(int row, int bit) const;
+private:
+    /// Возвращает указатель на первый байт строки
+    uint8 *GetRow(int row) const;
+    uint8 BytesInRow() const;
+};
+
 struct BigFont
 {
     uint8           height;       ///< Высота ссимволов
@@ -16,7 +28,7 @@ struct BigFont
     const BigSymbol *symbols;     ///< Ссылка на начало массива символов
 
     uint8 GetWidth(uint8 symbol) const;
-    bool ExistSymbol(uint8 symbol) const;
+    bool GetFullSymbol(FullSymbol &symbol, uint8 code) const;
 };
 
 
@@ -54,6 +66,7 @@ public:
     /// Восстанавливает шрифт, бывший текущим перед последним вызовом SetCurrent()
     static void Pop();
     static const Font *Current();
+    static bool IsBig();
     static uint8 GetWidth(uint8 symbol);
     static uint8 GetHeight();
     static bool RowNotEmpty(uint8 symbol, int row);
