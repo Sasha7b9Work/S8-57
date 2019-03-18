@@ -37,14 +37,40 @@ add_compile_options(/wd4996)
 add_compile_options(/wd5026)
 add_compile_options(/wd5039)
 
-source_group(common             REGULAR_EXPRESSION "../common/*.*")
-source_group(_VS                REGULAR_EXPRESSION "../../common/_VS/*.*")
-source_group(_VS\\CMSIS         REGULAR_EXPRESSION "../common/_VS/CMSIS/*.*")
-source_group(_VS\\FatFS         REGULAR_EXPRESSION "../common/_VS/FatFS/*.*")
-source_group(_VS\\HAL           REGULAR_EXPRESSION "../common/_VS/HAL/*.*")
-source_group(_VS\\HAL\\Legacy   REGULAR_EXPRESSION "../common/_VS/HAL/Legacy/*.*")
-source_group(_VS\\USBD          REGULAR_EXPRESSION "../common/_VS/USBD/*.*")
-source_group(_VS\\USBH          REGULAR_EXPRESSION "../common/_VS/USBH/*.*")
+source_group(common                                     REGULAR_EXPRESSION "../common/*.*")
+source_group(_VS                                        REGULAR_EXPRESSION "../../common/_VS/*.*")
+source_group(_VS\\CMSIS                                 REGULAR_EXPRESSION "../common/_VS/CMSIS/*.*")
+source_group(_VS\\FatFS                                 REGULAR_EXPRESSION "../common/_VS/FatFS/*.*")
+source_group(_VS\\HAL                                   REGULAR_EXPRESSION "../common/_VS/HAL/*.*")
+source_group(_VS\\HAL\\Legacy                           REGULAR_EXPRESSION "../common/_VS/HAL/Legacy/*.*")
+source_group(_VS\\USBD                                  REGULAR_EXPRESSION "../common/_VS/USBD/*.*")
+source_group(_VS\\USBH                                  REGULAR_EXPRESSION "../common/_VS/USBH/*.*")
+source_group(Data                                       REGULAR_EXPRESSION "src/Data/*.*")
+source_group(Display\\Font                              REGULAR_EXPRESSION "src/Display/Font/*.*")
+source_group(FlashDrive                                 REGULAR_EXPRESSION "src/FlashDrive/*.*")
+source_group(Hardware\\HAL                              REGULAR_EXPRESSION "src/Hardware/HAL/*.*")
+source_group(Keyboard                                   REGULAR_EXPRESSION "src/Keyboard/*.*")
+source_group(Menu                                       REGULAR_EXPRESSION "src/Menu/*.*")
+source_group(Menu\\Pages                                REGULAR_EXPRESSION "src/Menu/Pages/*.*")
+source_group(Menu\\Pages\\Include                       REGULAR_EXPRESSION "src/Menu/Pages/Include/*.*")
+source_group(Menu\\Pages\\PageDebug                     REGULAR_EXPRESSION "src/Menu/Pages/PageDebug/*.*")
+source_group(Menu\\Pages\\PageDisplay                   REGULAR_EXPRESSION "src/Menu/Pages/PageDisplay/*.*")
+source_group(Menu\\Pages\\PageFunction                  REGULAR_EXPRESSION "src/Menu/Pages/PageFunction/*.*")
+source_group(Menu\\Pages\\PageFunction\\PageRecorder    REGULAR_EXPRESSION "src/Menu/Pages/PageFunction/PageRecorder/*.*")
+source_group(Menu\\Pages\\PageHelp                      REGULAR_EXPRESSION "src/Menu/Pages/PageHelp/*.*")
+source_group(Menu\\Pages\\PageMeasures                  REGULAR_EXPRESSION "src/Menu/Pages/PageMeasures/*.*")
+source_group(Menu\\Pages\\PageMemory                    REGULAR_EXPRESSION "src/Menu/Pages/PageMemory/*.*")
+source_group(Menu\\Pages\\PageService                   REGULAR_EXPRESSION "src/Menu/Pages/PageService/*.*")
+source_group(Menu\\Pages\\PageService\\PageDebug        REGULAR_EXPRESSION "src/Menu/Pages/PageService/PageDebug/*.*")
+source_group(Menu\\Pages\\PageTrig                      REGULAR_EXPRESSION "src/Menu/Pages/PageTrig/*.*")
+source_group(Multimeter                                 REGULAR_EXPRESSION "src/Multimeter/*.*")
+source_group(Osci                                       REGULAR_EXPRESSION "src/Osci/*.*")
+source_group(Osci\\Display                              REGULAR_EXPRESSION "src/Osci/Display/*.*")
+source_group(Osci\\Measurements\\                       REGULAR_EXPRESSION "src/Osci/Measurements/*.*")
+source_group(Recorder                                   REGULAR_EXPRESSION "src/Recorder/*.*")
+source_group(SCPI                                       REGULAR_EXPRESSION "src/SCPI/*.*")
+source_group(Tester                                     REGULAR_EXPRESSION "src/Tester/*.*")
+source_group(Utils                                      REGULAR_EXPRESSION "src/Utils/*.*")
 source_group(src                FILES                src/Application.cpp
                                                      src/Application.h
                                                      src/main_win.cpp
@@ -56,7 +82,6 @@ source_group(src                FILES                src/Application.cpp
                                         ../../Device/src/log.h
                                         ../../Device/src/tables.cpp
                                         ../../Device/src/tables.h)
-source_group(Data               REGULAR_EXPRESSION "src/Data/*.*")
 source_group(Display            FILES   ../../Device/src/Display/Colors.h
                                         ../../Device/src/Display/Colors.cpp
                                                      src/Display/Colors_win.cpp
@@ -77,8 +102,6 @@ source_group(Display            FILES   ../../Device/src/Display/Colors.h
                                         ../../Device/src/Display/PainterMem.h
                                         ../../Device/src/Display/PainterMem.cpp
                                         ../../Device/src/Display/Symbols.h)
-source_group(Display\\Font      REGULAR_EXPRESSION "src/Display/Font/*.*")
-source_group(FlashDrive         REGULAR_EXPRESSION "src/FlashDrive/*.*")
 source_group(FPGA               FILES   ../../Device/src/FPGA/AD9286.h
                                         ../../Device/src/FPGA/AD9286.cpp
                                         ../../Device/src/FPGA/FPGA.h
@@ -105,27 +128,6 @@ source_group(Hardware           FILES   ../../Device/src/Hardware/Battery.h
                                         ../../Device/src/Hardware/Timer.cpp
                                         ../../Device/src/Hardware/VCP.h
                                         ../../Device/src/Hardware/VCP.cpp)
-source_group(Hardware\\HAL                              REGULAR_EXPRESSION "src/Hardware/HAL/*.*")
-source_group(Keyboard                                   REGULAR_EXPRESSION "src/Keyboard/*.*")
-source_group(Menu                                       REGULAR_EXPRESSION "src/Menu/*.*")
-source_group(Menu\\Pages                                REGULAR_EXPRESSION "src/Menu/Pages/*.*")
-source_group(Menu\\Pages\\Include                       REGULAR_EXPRESSION "src/Menu/Pages/Include/*.*")
-source_group(Menu\\Pages\\PageDebug                     REGULAR_EXPRESSION "src/Menu/Pages/PageDebug/*.*")
-source_group(Menu\\Pages\\PageDisplay                   REGULAR_EXPRESSION "src/Menu/Pages/PageDisplay/*.*")
-source_group(Menu\\Pages\\PageFunction                  REGULAR_EXPRESSION "src/Menu/Pages/PageFunction/*.*")
-source_group(Menu\\Pages\\PageFunction\\PageRecorder    REGULAR_EXPRESSION "src/Menu/Pages/PageFunction/PageRecorder/*.*")
-source_group(Menu\\Pages\\PageHelp                      REGULAR_EXPRESSION "src/Menu/Pages/PageHelp/*.*")
-source_group(Menu\\Pages\\PageMeasures                  REGULAR_EXPRESSION "src/Menu/Pages/PageMeasures/*.*")
-source_group(Menu\\Pages\\PageMemory                    REGULAR_EXPRESSION "src/Menu/Pages/PageMemory/*.*")
-source_group(Menu\\Pages\\PageService                   REGULAR_EXPRESSION "src/Menu/Pages/PageService/*.*")
-source_group(Menu\\Pages\\PageService\\PageDebug        REGULAR_EXPRESSION "src/Menu/Pages/PageService/PageDebug/*.*")
-source_group(Menu\\Pages\\PageTrig                      REGULAR_EXPRESSION "src/Menu/Pages/PageTrig/*.*")
-source_group(Multimeter                                 REGULAR_EXPRESSION "src/Multimeter/*.*")
-source_group(Osci                                       REGULAR_EXPRESSION "src/Osci/*.*")
-source_group(Osci\\Display                              REGULAR_EXPRESSION "src/Osci/Display/*.*")
-source_group(Osci\\Measurements\\                       REGULAR_EXPRESSION "src/Osci/Measurements/*.*")
-source_group(Recorder                                   REGULAR_EXPRESSION "src/Recorder/*.*")
-source_group(SCPI                                       REGULAR_EXPRESSION "src/SCPI/*.*")
 source_group(Settings           FILES   ../../Device/src/Settings/Settings.h
                                         ../../Device/src/Settings/Settings.cpp
                                                      src/Settings/Settings_win.cpp
@@ -133,9 +135,6 @@ source_group(Settings           FILES   ../../Device/src/Settings/Settings.h
                                         ../../Device/src/Settings/SettingsChannel.h
                                         ../../Device/src/Settings/SettingsChannel.cpp
                                         ../../Device/src/Settings/SettingsTransformation.cpp)
-source_group(Tester                                     REGULAR_EXPRESSION "src/Tester/*.*")
-source_group(Utils                                      REGULAR_EXPRESSION "src/Utils/*.*")
-
 
 file(GLOB SOURCES   ../../common/_VS/*
                     ../../common/_VS/CMSIS/*
