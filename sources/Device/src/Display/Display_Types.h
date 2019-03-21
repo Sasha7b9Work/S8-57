@@ -137,17 +137,6 @@ namespace Display
         explicit ENumMinMax(E v) : value(v) {};
     };
 
-    /// Тип усреднений по измерениям
-    struct ModeAveraging
-    {
-        enum E
-        {
-            Accurately,   ///< Усреднять точно.
-            Around        ///< Усреднять приблизительно.
-        } value;
-        explicit ModeAveraging(E v) : value(v) {};
-    };
-
     struct Orientation
     {
         enum E
@@ -254,8 +243,7 @@ namespace Display
             _32,
             _64,
             _128,
-            _256,
-            _512
+            _256
         } value;
     };
 }

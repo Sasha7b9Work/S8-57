@@ -42,6 +42,8 @@ void Device::Init()
     HAL::Init();
 
     Timer::Init();
+    
+    PAUSE_ON_MS(500);
 
     Beeper::Init();
 
@@ -54,8 +56,6 @@ void Device::Init()
     Tester::Init();
 
     Display::Init();
-
-    PAUSE_ON_MS(500);
 
     FPGA::Init();
 

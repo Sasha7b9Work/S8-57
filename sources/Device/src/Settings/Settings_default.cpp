@@ -23,7 +23,7 @@ const Settings Settings::defaultSettings =
     Display::Background::Black,                                 // disp_background;          
     Display::ShowStrNavi::Temp,                                 // disp_showStringNavigation;
     Display::ENumMinMax::_1,                                    // disp_ENumMinMax;          
-    Display::ModeAveraging::Accurately,                         // disp_modeAveraging;       
+    0,                                                          // not used
     Display::ENumAverage::_1,                                   // disp_ENumAverage;         
     Display::ENumAccum::_1,                                     // disp_ENumAccum;           
     Display::ModeAccumulation::NoReset,                         // disp_modeAccumulation;    

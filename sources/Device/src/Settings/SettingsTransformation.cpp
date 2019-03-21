@@ -43,7 +43,6 @@ void Settings::TransformForSave(uint8 d[1024])
     
     SaveEnum16(DisplayShowStringNavigation, (uint8)set.disp_showStringNavigation);
     SaveEnum16(DisplayENumMinMax, (uint8)set.disp_ENumMinMax);
-    SaveEnum16(DisplayModeAveraging, (uint8)set.disp_modeAveraging);
     SaveEnum16(DisplayENumAverage, (uint8)set.disp_ENumAverage);
     SaveEnum16(DisplayENumAccum, (uint8)set.disp_ENumAccum);
 }
