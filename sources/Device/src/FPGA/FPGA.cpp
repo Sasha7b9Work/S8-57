@@ -209,7 +209,7 @@ void FPGA::ClearDataRand()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void AverageData(Chan::E ch, const uint8 *dataNew, const uint8 * /*dataOld*/, int size)
+static void AverageData(Chan::E ch, const uint8 *dataNew, int size)
 {
     uint8 *_new = (uint8 *)dataNew;
     uint16 *av = AVE_DATA(ch);
@@ -250,11 +250,11 @@ void FPGA::ReadData()
             {
                 if (ENABLED_A(setLast))
                 {
-                    AverageData(Chan::A, last->DataA(), prev->DataA(), setLast->SizeChannel());
+                    AverageData(Chan::A, last->DataA(), setLast->SizeChannel());
                 }
                 if (ENABLED_B(setPrev))
                 {
-                    AverageData(Chan::B, last->DataB(), prev->DataB(), setLast->SizeChannel());
+                    AverageData(Chan::B, last->DataB(), setLast->SizeChannel());
                 }
             }
         }
