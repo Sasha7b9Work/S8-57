@@ -15,6 +15,8 @@
 #define WCHAR unsigned short
 #endif
 
+#define nullptr 0
+
 
 typedef signed   char        int8;
 typedef unsigned char        uint8;

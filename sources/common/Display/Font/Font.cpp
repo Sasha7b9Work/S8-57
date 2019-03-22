@@ -83,8 +83,12 @@ void Font::SetCurrent(Font::Type::E typeFont)
             break;
     }
 
+#ifndef PANEL
+
     uint8 buffer[2] = { Command::Paint_SetFont, (uint8)typeFont };
     FSMC::WriteToPanel(buffer, 2);
+
+#endif
 
     pushedFont = currentFont;
     currentFont = typeFont;

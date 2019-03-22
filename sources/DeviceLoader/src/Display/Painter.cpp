@@ -7,13 +7,6 @@
 #include "Utils/Math.h"
 
 
-/** @addtogroup Display
-*   @{
-*   @addtogroup Painter
-*   @{
-*/
-
-
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 Color    Painter::currentColor = Color::NUMBER;
 TypeFont Painter::currentTypeFont = TypeFont_None;
@@ -117,196 +110,85 @@ Color Painter::GetColor()
     return currentColor;
 }
 
-#ifdef OSCI
-//----------------------------------------------------------------------------------------------------------------------------------------------------
-static uint8 Read2points(int x, int y)
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Painter::SetPalette(Color)
 {
-    while (HAL_GPIO_ReadPin(GPIOG, GPIO_PIN_11) == GPIO_PIN_RESET)
-    {
-    };
-    Timer::PauseOnTicks(12);               /// \todo временно увеличено время ожидания - не читает флешку
 
-    *ADDR_CDISPLAY = GET_PIXEL;
-    *ADDR_CDISPLAY = (uint8)x;
-    *ADDR_CDISPLAY = (uint8)(x >> 8);
-    *ADDR_CDISPLAY = (uint8)y;
-
-    while (HAL_GPIO_ReadPin(GPIOG, GPIO_PIN_11) == GPIO_PIN_RESET)
-    {
-    };
-    /// \todo временно увеличено время ожидания - не читает флешку
-    //Timer_PauseOnTicks(6);
-
-    return *ADDR_CDISPLAY;
-}
-#endif
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------
-bool Painter::SaveScreenToFlashDrive()
-{
-#ifdef OSCI
-#pragma pack(1)
-    typedef struct
-    {
-        char    type0;      // 0
-        char    type1;      // 1
-        uint    size;       // 2
-        uint16  res1;       // 6
-        uint16  res2;       // 8
-        uint    offBits;    // 10
-    } BITMAPFILEHEADER;
-    // 14
-
-    typedef struct
-    {
-        uint    size;           // 14
-        int     width;          // 18
-        int     height;         // 22
-        uint16  planes;         // 26
-        uint16  bitCount;       // 28
-        uint    compression;    // 30
-        uint    sizeImage;      // 34
-        int     xPelsPerMeter;  // 38
-        int     yPelsPerMeter;  // 42
-        uint    clrUsed;        // 46
-        uint    clrImportant;   // 50
-        //uint    notUsed[15];
-    } BITMAPINFOHEADER;
-    // 54
-#pragma pack(4)
-
-    BITMAPFILEHEADER bmFH =
-    {
-        0x42,
-        0x4d,
-        14 + 40 + 1024 + 320 * 240 / 2,
-        0,
-        0,
-        14 + 40 + 1024
-    };
-
-    StructForWrite structForWrite;
-    char fileName[255];
-
-    if (!FileManager::GetNameForNewFile(fileName))
-    {
-        return false;
-    }
-
-    FDrive::OpenNewFileForWrite(fileName, &structForWrite);
-
-    FDrive::WriteToFile((uint8 *)(&bmFH), 14, &structForWrite);
-
-    BITMAPINFOHEADER bmIH =
-    {
-        40, // size;
-        320,// width;
-        240,// height;
-        1,  // planes;
-        4,  // bitCount;
-        0,  // compression;
-        0,  // sizeImage;
-        0,  // xPelsPerMeter;
-        0,  // yPelsPerMeter;
-        0,  // clrUsed;
-        0   // clrImportant;
-    };
-
-    FDrive::WriteToFile((uint8 *)(&bmIH), 40, &structForWrite);
-
-    uint8 buffer[320 * 3] = {0};
-
-    typedef struct tagRGBQUAD
-    {
-        uint8    blue;
-        uint8    green;
-        uint8    red;
-        uint8    rgbReserved;
-    } RGBQUAD;
-
-    RGBQUAD colorStruct;
-
-    for (int i = 0; i < 16; i++)
-    {
-        uint16 color = COLOR(i);
-        colorStruct.blue = (uint8)((float)B_FROM_COLOR(color) / 31.0f * 255.0f);
-        colorStruct.green = (uint8)((float)G_FROM_COLOR(color) / 63.0f * 255.0f);
-        colorStruct.red = (uint8)((float)R_FROM_COLOR(color) / 31.0f * 255.0f);
-        colorStruct.rgbReserved = 0;
-        ((RGBQUAD*)(buffer))[i] = colorStruct;
-    }
-
-    for (int i = 0; i < 4; i++)
-    {
-        FDrive::WriteToFile(buffer, 256, &structForWrite);
-    }
-
-    FSMC_SET_MODE(ModeFSMC_Display);
-
-    for (int y = 239; y >= 0; y--)
-    {
-        for (int x = 1; x < 320; x += 2)
-        {
-            uint8 color = Read2points(x, y);
-
-            while (color != Read2points(x, y))      // Этот цикл нужен потому, что иногда цвета считываются неправильно - 
-            {                                       // проверка, что повторное чтение читает тот же цвет.
-                color = Read2points(x, y);
-            }
-
-            buffer[x / 2] = (uint8)(((color & 0x0f) << 4) + (color >> 4));
-        }
-
-        FDrive::WriteToFile(buffer, 160, &structForWrite);
-    }
-
-    FSMC_RESTORE_MODE();
-
-    FDrive::CloseFile(&structForWrite);
-#endif
-    return true;
 }
 
-//----------------------------------------------------------------------------------------------------------------------------------------------------
-/*
-static void Get4Bytes(uint8 bytes[4])
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Painter::BeginScene(Color color)
 {
-    while (HAL_GPIO_ReadPin(GPIOG, GPIO_PIN_11) == GPIO_PIN_RESET) {};
-    bytes[0] = *ADDR_CDISPLAY;
-    bytes[1] = *ADDR_CDISPLAY;
-    bytes[2] = *ADDR_CDISPLAY;
-    bytes[3] = *ADDR_CDISPLAY;
+
 }
-*/
 
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------
-/*
-static Color GetColor(int x, int y)
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Painter::EndScene()
 {
-    uint8 command[4];
-    command[0] = GET_PIXEL;
-    *((int16 *)(command + 1)) = (int16)x;
-    *(command + 3) = (int8)y;
-    SendToDisplay(command, 4);
-    Get4Bytes(command);
-    return (Color)(command[0] & 0x0f);
+
 }
-*/
 
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------
-/*
-static void Get8Points(int x, int y, uint8 buffer[4])
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Painter::FillRegion(int, int, int, int, Color)
 {
-    uint8 command[4];
-    command[0] = GET_PIXEL;
-    *((int16 *)(command + 1)) = (int16)x;
-    *(command + 3) = (int8)y;
-    SendToDisplay(command, 4);
-    Get4Bytes(buffer);
-}
-*/
 
-/** @} @}
-*/
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Painter::ResetFlash()
+{
+
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Painter::LoadPalette()
+{
+
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Painter::DrawRectangle(int, int , int , int , Color )
+{
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Painter::LoadFont(TypeFont typeFont)
+{
+
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Painter::SetColor(Color color)
+{
+
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Painter::SetPoint(int x, int y)
+{
+
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Painter::DrawHLine(int y, int x0, int x1, Color color /* = Color::NUMBER */)
+{
+
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Painter::DrawVLine(int x, int y0, int y1, Color color /* = Color::NUMBER */)
+{
+
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+int Painter::DrawChar(int x, int y, char symbol, Color color /* = Color::NUMBER */)
+{
+    return x;
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+int Painter::DrawText(int x, int y, const char *text, Color color /* = Color::NUMBER */)
+{
+    return x;
+}

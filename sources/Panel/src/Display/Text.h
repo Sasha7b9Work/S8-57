@@ -5,14 +5,9 @@
 class Text
 {
 public:
-    static int DrawChar(int x, int y, char symbol, Color color = Color::NUMBER);
+    static int DrawChar(int x, int y, uint8 symbol, Color color = Color::NUMBER);
 
-    static int DrawBigChar(int eX, int eY, int size, char symbol);
+    static int DrawBigChar(int eX, int eY, int size, uint8 symbol);
 
     static void DrawBigText(int x, int y, uint8 size, pString text);
-
-private:
-    static bool ByteFontNotEmpty(int eChar, int byte);
-
-    static bool BitInFontIsExist(int eChar, int numByte, int bit);
 };

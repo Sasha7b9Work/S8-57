@@ -46,7 +46,7 @@ source_group(_VS\\HAL\\Legacy                           REGULAR_EXPRESSION "../c
 source_group(_VS\\USBD                                  REGULAR_EXPRESSION "../common/_VS/USBD/*.*")
 source_group(_VS\\USBH                                  REGULAR_EXPRESSION "../common/_VS/USBH/*.*")
 source_group(Data                                       REGULAR_EXPRESSION "src/Data/*.*")
-source_group(Display\\Font                              REGULAR_EXPRESSION "src/Display/Font/*.*")
+source_group(Display\\Font                              REGULAR_EXPRESSION "../common/Display/Font/*.*")
 source_group(FlashDrive                                 REGULAR_EXPRESSION "src/FlashDrive/*.*")
 source_group(Hardware\\HAL                              REGULAR_EXPRESSION "src/Hardware/HAL/*.*")
 source_group(Keyboard                                   REGULAR_EXPRESSION "src/Keyboard/*.*")
@@ -167,7 +167,7 @@ file(GLOB SOURCES   ../../common/_VS/*
                     ../../Device/src/Display/PainterMem.cpp
                     ../../Device/src/Display/Symbols.h
                     
-                    ../../Device/src/Display/Font/*.*
+                    ../../common/Display/Font/*.*
                     ../../Device/src/FlashDrive/*.*
                     
                     ../../Device/src/FPGA/AD9286.h

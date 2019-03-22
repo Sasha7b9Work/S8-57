@@ -126,7 +126,7 @@ public:
 
     static void DrawBigText(int x, int y, int size, const char *text, Color color = Color::NUMBER);
     
-    static int DrawBigChar(int eX, int eY, int size, char symbol);
+    static int DrawBigChar(int eX, int eY, int size, uint8 symbol);
 
 private:
 
@@ -148,13 +148,7 @@ private:
 
     static void DrawCharHardCol(int x, int y, char symbol);
 
-    static bool ByteFontNotEmpty(int eChar, int byte);
-
-    static void DrawCharInColorDisplay(int eX, int eY, char symbol);
-
-    static int DrawCharWithLimitation(int eX, int eY, char symbol, int limitX, int limitY, int limitWidth, int limitHeight);
-
-    static bool BitInFontIsExist(int eChar, int numByte, int bit);
+    static int DrawCharWithLimitation(int eX, int eY, uint8 symbol, int limitX, int limitY, int limitWidth, int limitHeight);
 };
 
 

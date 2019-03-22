@@ -18,5 +18,12 @@ namespace HAL
         static void EraseSector(uint startAddress);
         static void WriteBytes(uint address, const uint8 *data, int size);
     };
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    class FSMC
+    {
+    public:
+        static void WriteToPanel(uint8 *buffer, int size);
+    };
 }
 

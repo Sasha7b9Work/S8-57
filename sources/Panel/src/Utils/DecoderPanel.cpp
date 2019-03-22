@@ -562,7 +562,8 @@ static bool SetFont(uint8 data)
     {
         return false;
     }
-    Painter::SetFont((Font::Type::E)data);
+
+    Font::SetCurrent((Font::Type::E)data);
 
     return true;
 }

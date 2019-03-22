@@ -5,16 +5,8 @@
 #include "Display/DisplayTypes.h"
 #include "Display/Font/Font.h"
 
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-/** @addtogroup Display
- *  @{
- *  @defgroup Painter
- *  @brief Функции рисования
- *  @{
- */
-
 class Painter
 {
 public:
@@ -59,8 +51,6 @@ public:
 
     static uint ReduceBrightness(uint colorValue, float newBrightness);
 
-    static void SetFont(Font::Type::E typeFont);
-
     static int DrawText(int x, int y, const char *text);
     /// Выводит текст на прямоугольнике цвета colorBackgound
     static int DrawTextOnBackground(int x, int y, const char *text, Color colorBackground);
@@ -77,7 +67,3 @@ private:
 
     static Font::Type::E currentTypeFont;
 };
-
-
-/** @} @}
- */

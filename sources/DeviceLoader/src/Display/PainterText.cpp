@@ -8,66 +8,13 @@
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-bool Painter::ByteFontNotEmpty(int eChar, int byte)
-{
-    static const uint8 *bytes = 0;
-    static int prevChar = -1;
-    if (eChar != prevChar)
-    {
-        prevChar = eChar;
-        bytes = font->symbol[prevChar].bytes;
-    }
-    return bytes[byte];
-}
-    
-//----------------------------------------------------------------------------------------------------------------------------------------------------
-bool Painter::BitInFontIsExist(int eChar, int numByte, int bit)
-{
-    static uint8 prevByte = 0;      /// \todo здесь точно статики нужны?
-    static int prevChar = -1;
-    static int prevNumByte = -1;
-    if (prevNumByte != numByte || prevChar != eChar)
-    {
-        prevByte = font->symbol[eChar].bytes[numByte];
-        prevChar = eChar;
-        prevNumByte = numByte;
-    }
-    return prevByte & (1 << bit);
-}
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------
-void Painter::DrawCharInColorDisplay(int eX, int eY, char symbol)
-{
-    int8 width = (int8)font->symbol[symbol].width;
-    int8 height = (int8)font->height;
-
-    for (int b = 0; b < height; b++)
-    {
-        if (ByteFontNotEmpty(symbol, b))
-        {
-            int x = eX;
-            int y = eY + b + 9 - height;
-            int endBit = 8 - width;
-            for (int bit = 7; bit >= endBit; bit--)
-            {
-                if (BitInFontIsExist(symbol, b, bit))
-                {
-                    Painter::SetPoint(x, y);
-                }
-                x++;
-            }
-        }
-    }
-}
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------
 extern void CalculateCurrentColor();
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 int Painter::DrawTextOnBackground(int x, int y, const char *text, Color colorBackground)
 {
     int width = Font::GetLengthText(text);
-    int height = Font::GetSize();
+    int height = Font::GetHeight();
 
     Color colorText(GetColor());
     FillRegion(x - 1, y, width, height, colorBackground);
@@ -88,21 +35,21 @@ int Painter::DrawFormatText(int x, int y, char *format, ...)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-int Painter::DrawCharWithLimitation(int eX, int eY, char symbol, int limitX, int limitY, int limitWidth, int limitHeight)
+int Painter::DrawCharWithLimitation(int eX, int eY, uint8 symbol, int limitX, int limitY, int limitWidth, int limitHeight)
 {
-    int8 width = (int8)font->symbol[symbol].width;
-    int8 height = (int8)font->height;
+    int8 width = (int8)Font::GetWidth(symbol);
+    int8 height = (int8)Font::GetHeight();
 
     for (int b = 0; b < height; b++)
     {
-        if (ByteFontNotEmpty(symbol, b))
+        if (Font::RowNotEmpty(symbol, b))
         {
             int x = eX;
             int y = eY + b + 9 - height;
             int endBit = 8 - width;
             for (int bit = 7; bit >= endBit; bit--)
             {
-                if (BitInFontIsExist(symbol, b, bit))
+                if (Font::BitIsExist(symbol, b, bit))
                 {
                     if ((x >= limitX) && (x <= (limitX + limitWidth)) && (y >= limitY) && (y <= limitY + limitHeight))
                     {
@@ -124,7 +71,7 @@ int Painter::DrawTextWithLimitationC(int x, int y, const char *text, Color color
     int retValue = x;
     while (*text)
     {
-        x = DrawCharWithLimitation(x, y, *text, limitX, limitY, limitWidth, limitHeight);
+        x = DrawCharWithLimitation(x, y, (uint8)*text, limitX, limitY, limitWidth, limitHeight);
         retValue += Font::GetLengthSymbol(*text);
         text++;
     }
@@ -654,27 +601,27 @@ void Painter::DrawBigText(int eX, int eY, int size, const char *text, Color colo
 
     for (uint i = 0; i < numSymbols; i++)
     {
-        x = DrawBigChar(x, eY, size, text[i]);
+        x = DrawBigChar(x, eY, size, (uint8)text[i]);
         x += size;
     }
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-int Painter::DrawBigChar(int eX, int eY, int size, char symbol)
+int Painter::DrawBigChar(int eX, int eY, int size, uint8 symbol)
 {
-    int8 width = (int8)font->symbol[symbol].width;
-    int8 height = (int8)font->height;
+    uint8 width = Font::GetWidth(symbol);
+    uint8 height = Font::GetHeight();
 
     for (int b = 0; b < height; b++)
     {
-        if (ByteFontNotEmpty(symbol, b))
+        if (Font::RowNotEmpty(symbol, b))
         {
             int x = eX;
             int y = eY + b * size + 9 - height;
             int endBit = 8 - width;
             for (int bit = 7; bit >= endBit; bit--)
             {
-                if (BitInFontIsExist(symbol, b, bit))
+                if (Font::BitIsExist(symbol, b, bit))
                 {
                     for (int i = 0; i < size; i++)
                     {

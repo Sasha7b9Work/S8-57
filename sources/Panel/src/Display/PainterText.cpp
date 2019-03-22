@@ -14,7 +14,7 @@ extern void CalculateCurrentColor();
 int Painter::DrawTextOnBackground(int x, int y, const char *text, Color colorBackground)
 {
     int width = Font::GetLengthText(text);
-    int height = Font::GetSize();
+    int height = Font::GetHeight();
 
     Color colorText(GetColor());
     SetColor(colorBackground);

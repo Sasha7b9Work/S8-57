@@ -91,7 +91,8 @@ void Display::Init()
     Painter::LoadPalette();
 
     Painter::LoadFont(TypeFont_8);
-    Painter::SetFont(TypeFont_8);
+
+    Font::SetCurrent(Font::Type::_8);
 
     InitPoints();
 }
@@ -266,49 +267,21 @@ static int RandValue(int min, int max)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-static bool ByteFontNotEmpty(int eChar, int byte)
+static int DrawBigCharInBuffer(int eX, int eY, int size, uint8 symbol, uint8 buffer[320][240])
 {
-    static const uint8 *bytes = 0;
-    static int prevChar = -1;
-    if (eChar != prevChar)
-    {
-        prevChar = eChar;
-        bytes = font->symbol[prevChar].bytes;
-    }
-    return bytes[byte];
-}
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------
-static bool BitInFontIsExist(int eChar, int numByte, int bit)
-{
-    static uint8 prevByte = 0;      // WARN здесь точно статики нужны?
-    static int prevChar = -1;
-    static int prevNumByte = -1;
-    if (prevNumByte != numByte || prevChar != eChar)
-    {
-        prevByte = font->symbol[eChar].bytes[numByte];
-        prevChar = eChar;
-        prevNumByte = numByte;
-    }
-    return prevByte & (1 << bit);
-}
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------
-static int DrawBigCharInBuffer(int eX, int eY, int size, char symbol, uint8 buffer[320][240])
-{
-    int8 width = (int8)font->symbol[symbol].width;
-    int8 height = (int8)font->height;
+    uint8 width = Font::GetWidth (symbol);
+    uint8 height = Font::GetHeight();
 
     for (int b = 0; b < height; b++)
     {
-        if (ByteFontNotEmpty(symbol, b))
+        if (Font::RowNotEmpty(symbol, b))
         {
             int x = eX;
             int y = eY + b * size + 9 - height;
             int endBit = 8 - width;
             for (int bit = 7; bit >= endBit; bit--)
             {
-                if (BitInFontIsExist(symbol, b, bit))
+                if (Font::BitIsExist(symbol, b, bit))
                 {
                     for (int i = 0; i < size; i++)
                     {
@@ -349,7 +322,7 @@ static void DrawBigTextInBuffer(int eX, int eY, int size, const char* text, uint
 
     for (int i = 0; i < numSymbols; i++)
     {
-        x = DrawBigCharInBuffer(x, eY, size, text[i], buffer);
+        x = DrawBigCharInBuffer(x, eY, size, (uint8)text[i], buffer);
         x += size;
     }
 }

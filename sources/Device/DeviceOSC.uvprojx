@@ -593,37 +593,37 @@
             <File>
               <FileName>Font.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\Display\Font\Font.cpp</FilePath>
+              <FilePath>..\common\Display\Font\Font.cpp</FilePath>
             </File>
             <File>
               <FileName>Font.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\src\Display\Font\Font.h</FilePath>
+              <FilePath>..\common\Display\Font\Font.h</FilePath>
             </File>
             <File>
               <FileName>font5.inc</FileName>
               <FileType>5</FileType>
-              <FilePath>.\src\Display\Font\font5.inc</FilePath>
+              <FilePath>..\common\Display\Font\font5.inc</FilePath>
             </File>
             <File>
               <FileName>font8.inc</FileName>
               <FileType>5</FileType>
-              <FilePath>.\src\Display\Font\font8.inc</FilePath>
-            </File>
-            <File>
-              <FileName>fontUGO.inc</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Display\Font\fontUGO.inc</FilePath>
-            </File>
-            <File>
-              <FileName>fontUGO2.inc</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Display\Font\fontUGO2.inc</FilePath>
+              <FilePath>..\common\Display\Font\font8.inc</FilePath>
             </File>
             <File>
               <FileName>fontDigits64.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\Display\Font\fontDigits64.cpp</FilePath>
+              <FilePath>..\common\Display\Font\fontDigits64.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>fontUGO.inc</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\common\Display\Font\fontUGO.inc</FilePath>
+            </File>
+            <File>
+              <FileName>fontUGO2.inc</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\common\Display\Font\fontUGO2.inc</FilePath>
             </File>
           </Files>
         </Group>

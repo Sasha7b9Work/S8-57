@@ -10,15 +10,9 @@ int Painter::DrawText(int x, int y, const char *text)
     uint numSymbols = std::strlen(text);
     for (uint i = 0; i < numSymbols; ++i)
     {
-        x = Text::DrawChar(x, y, text[i]);
+        x = Text::DrawChar(x, y, (uint8)text[i]);
         ++x;
     }
 
     return x;
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Painter::SetFont(Font::Type::E typeFont)
-{
-    font = fonts[typeFont];
 }

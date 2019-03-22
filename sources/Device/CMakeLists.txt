@@ -35,7 +35,7 @@ source_group(_VS\\std_includes                       REGULAR_EXPRESSION "../comm
 source_group(src                                     REGULAR_EXPRESSION "src/*.*")
 source_group(Data                                    REGULAR_EXPRESSION "src/Data/*.*")
 source_group(Display                                 REGULAR_EXPRESSION "src/Display/*.*")
-source_group(Display\\Font                           REGULAR_EXPRESSION "src/Display/Font/*.*")
+source_group(Display\\Font                           REGULAR_EXPRESSION "../common/Display/Font/*.*")
 source_group(FlashDrive                              REGULAR_EXPRESSION "src/FlashDrive/*.*")
 source_group(FPGA                                    REGULAR_EXPRESSION "src/FPGA/*.*")
 source_group(Hardware                                REGULAR_EXPRESSION "src/Hardware/*.*")
@@ -70,7 +70,7 @@ file(GLOB SOURCES   ../common/_VS/*
                     ../common/*.*
                     src/Data/*.*
                     src/Display/*.*
-                    src/Display/Font/*.*
+                    ../common/Display/Font/*.*
                     src/FlashDrive/*.*
                     src/FPGA/*.*
                     src/Hardware/*.*

@@ -23,6 +23,10 @@ typedef signed char         int8;
 
 typedef void(*pFuncVV)(void);
 
+#ifndef WIN32
+#define nullptr 0
+#endif
+
 #define ERROR_VALUE_UINT8 255
 
 #define TIME_UPDATE_KEYBOARD 2   ///< Время между опросами клавиатуры

@@ -42,7 +42,7 @@ source_group(libs\\FatFS            REGULAR_EXPRESSION "src/libs/FatFS/*.*")
 source_group(libs\\HAL              REGULAR_EXPRESSION "src/libs/HAL/*.*")
 source_group(libs\\USBH             REGULAR_EXPRESSION "src/libs/USBH/*.*")
 source_group(Display                REGULAR_EXPRESSION "src/Display/*.*")
-source_group(Display\\Font          REGULAR_EXPRESSION "src/Display/Font/*.*")
+source_group(Display\\Font          REGULAR_EXPRESSION "../common/Display/Font/*.*")
 source_group(Hardware               REGULAR_EXPRESSION "src/Hardware/*.*")
 source_group(Hardware\\HAL          REGULAR_EXPRESSION "src/Hardware/HAL/*.*")
 source_group(Hardware\\stm32        REGULAR_EXPRESSION "src/Hardware/stm32/*.*")
@@ -60,7 +60,7 @@ file(GLOB SOURCES   src/main.h
                     src/libs/HAL/*.*
                     src/libs/USBH/*.*
                     src/Display/*.*
-                    src/Display/Font/*.*
+                    ../common/Display/Font/*.*
                     src/Hardware/*.*
                     src/Hardware/HAL/*.*
                     src/Hardware/stm32/*.*
