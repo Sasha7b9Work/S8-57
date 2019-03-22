@@ -97,20 +97,20 @@ static int DrawChar(int eX, int eY, char _symbol)
 {
     uint8 symbol = (uint8)_symbol;
 
-    int8 width = (int8)Font::Current()->GetWidth(symbol);
-    int8 height = (int8)Font::Current()->GetHeight();
+    int8 width = (int8)Font::GetWidth(symbol);
+    int8 height = (int8)Font::GetHeight();
 
-    int delta = Font::Current()->IsBig() ? 0 : (9 - height);
+    int delta = Font::IsBig() ? 0 : (9 - height);
 
     for (int row = 0; row < height; row++)
     {
-        if (Font::Current()->RowNotEmpty(symbol, row))
+        if (Font::RowNotEmpty(symbol, row))
         {
             int x = eX;
             int y = eY + row + delta;
             for (int bit = 0; bit < width; bit++)
             {
-                if (Font::Current()->BitIsExist(symbol, row, bit))
+                if (Font::BitIsExist(symbol, row, bit))
                 {
                     SDL_RenderDrawPoint(renderer, x, y);
                 }
@@ -127,19 +127,19 @@ static int DrawBigChar(int eX, int eY, int size, char _symbol)
 {
     uint8 symbol = (uint8)_symbol;
 
-    int8 width = (int8)Font::Current()->GetWidth(symbol);
-    int8 height = (int8)Font::Current()->GetHeight();
+    int8 width = (int8)Font::GetWidth(symbol);
+    int8 height = (int8)Font::GetHeight();
 
     for (int b = 0; b < height; b++)
     {
-        if (Font::Current()->RowNotEmpty(symbol, b))
+        if (Font::RowNotEmpty(symbol, b))
         {
             int x = eX;
             int y = eY + b * size + 9 - height;
             int endBit = 8 - width;
             for (int bit = 7; bit >= endBit; bit--)
             {
-                if (Font::Current()->BitIsExist(symbol, b, bit))
+                if (Font::BitIsExist(symbol, b, bit))
                 {
                     for (int i = 0; i < size; i++)
                     {

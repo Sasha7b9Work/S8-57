@@ -65,7 +65,6 @@ public:
     static void SetCurrent(Font::Type::E typeFont);
     /// Восстанавливает шрифт, бывший текущим перед последним вызовом SetCurrent()
     static void Pop();
-    static const Font *Current();
     static bool IsBig();
     static uint8 GetWidth(uint8 symbol);
     static uint8 GetHeight();

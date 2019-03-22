@@ -144,19 +144,19 @@ int Display::Primitives::Text::DrawCharWithLimitation(int eX, int eY, char _symb
 {
     uint8 symbol = (uint8)_symbol;
 
-    int8 width = (int8)Font::Current()->GetWidth(symbol);
-    int8 height = (int8)Font::Current()->GetHeight();
+    int8 width = (int8)Font::GetWidth(symbol);
+    int8 height = (int8)Font::GetHeight();
 
     for (int b = 0; b < height; b++)
     {
-        if(Font::Current()->RowNotEmpty(symbol, b))
+        if(Font::RowNotEmpty(symbol, b))
         {
             int x = eX;
             int y = eY + b + 9 - height;
             int endBit = 8 - width;
             for (int bit = 7; bit >= endBit; bit--)
             {
-                if (Font::Current()->BitIsExist(symbol, b, bit))
+                if (Font::BitIsExist(symbol, b, bit))
                 {
                     if ((x >= limitX) && (x <= (limitX + limitWidth)) && (y >= limitY) && (y <= limitY + limitHeight))
                     {

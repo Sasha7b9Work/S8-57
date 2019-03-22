@@ -12,16 +12,17 @@ int Text::DrawChar(int eX, int eY, uint8 symbol, Color color)
     uint8 width = Font::GetWidth(symbol);
     uint8 height = Font::GetHeight();
 
-    for (int b = 0; b < height; b++)
+    int delta = Font::IsBig() ? 0 : (9 - height);
+
+    for (int row = 0; row < height; row++)
     {
-        if (Font::RowNotEmpty(symbol, b))
+        if (Font::RowNotEmpty(symbol, row))
         {
             int x = eX;
-            int y = eY + b + 9 - height;
-            int endBit = 8 - width;
-            for (int bit = 7; bit >= endBit; bit--)
+            int y = eY + row + delta;
+            for (int bit = 0; bit >= width; bit++)
             {
-                if (Font::BitIsExist(symbol, b, bit))
+                if (Font::BitIsExist(symbol, row, bit))
                 {
                     Painter::SetPoint(x, y);
                 }
