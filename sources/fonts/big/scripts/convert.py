@@ -66,7 +66,8 @@ def GetHeightPicture():
 
 # Возвращает значение пикселя в точке x, y
 def GetPoint(x, y):
-    return _symbols[_offset + x + (_height - y - 1) * _width]
+    offset = _offset + x + (_height - y - 1) * _width
+    return _symbols[offset]
 
 # Возвращает True, если цвет в данной точке - пустой
 def ColorIsEmpty(x, y):
@@ -175,8 +176,9 @@ def WidthSymbol(absX, absY):
         if size > maxSize:
             maxSize = size
             
-#    print("width symbol ", absX, absY, " = ", maxSize)
-    
+#    if maxSize == 0:
+#        print("absX = ", absX, ", absY = ", absY)
+            
     return maxSize
 
 ##########################################################################################
@@ -228,15 +230,15 @@ def GetDataSymbol(absX, absY):
 
     for y in range(absY + _deltaHeightFont, absY + _deltaHeightFont + _heightFont):
         bits = []                            # Здесь будем хранить биты для каждой строки
-        for x in range(absX, absX + WidthSymbol(absX, absY)):
+        width = WidthSymbol(absX, absY)
+#        if width == 0:
+#            print("width = 0, x = ", absX, ", y = ", absY)
+        for x in range(absX, absX + width):
             if ColorIsFill(x, y):
                 bits.append(1)
             else:
                 bits.append(0)
         rows.append(bits)
-#        print(bits)
-
-#       print("in symbol ", absX, ", ", absY, " ", len(rows), " rows")
 
 # Сейчас в rows хранятся строки бит
 
@@ -260,10 +262,7 @@ def GetDataSymbol(absX, absY):
                 leftBits = 8
         if leftBits != 8:
             chars.append(byte)
-    
 
-#    print("number bytes = ", len(chars))
-            
     return chars
 
 
@@ -289,7 +288,10 @@ def WriteToFile(nameFile, nameFont, codes, x, y):
     offsets = [offset]                                              # Здесь будут храниться смещения символов
 
     for i in range(len(x)):                                         # Теперь для всех глефов
-        data = GetDataSymbol(AbsX(x[i]), AbsY(y[i]))                # Получаем данные глефа
+        absX = AbsX(x[i])
+        absY = AbsY(y[i])
+        data = GetDataSymbol(absX, absY)                # Получаем данные глефа
+       
         WriteDataSymbol(codes[i], output, data, offset)             # И записываем их в файл
         offset = offsets[len(offsets) - 1] + len(data)
         offsets.append(offset)
@@ -308,7 +310,8 @@ def WriteToFile(nameFile, nameFont, codes, x, y):
             output.write(",")
         else:
             output.write(" ")
-        output.write("    //  \'" + chr(codes[i]) + "\'\n")
+        output.write("    //  \'" + chr(codes[i]) + "\'")
+        output.write("   x = " + str(AbsX(x[i])) + ", y = " + str(AbsY(y[i])) + "\n")
 
     output.write("\n};\n")
 
@@ -351,12 +354,10 @@ _dX = CalculateOffsetX()
 
 _dY = CalculateOffsetY()
 
-#print("offset ", _offset)
-#print("number colors ", _numColors)
-#print("size picture ", _width, " x ", _height)
-#print("colors - ", _colors[0], " ", _colors[1], " ", _colors[2])
-#print("dX = ", _dX, ", dY = ", _dY)
-# Dump(70, 151)
+print("x0 = ", CalculateX0())
+print("y0 = ", CalculateY0())
+
+print("dX = ", _dX, ", dY = ", _dY)
 
 codes = []
 x = []
