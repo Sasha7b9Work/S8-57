@@ -20,7 +20,7 @@ int Text::DrawChar(int eX, int eY, uint8 symbol, Color color)
         {
             int x = eX;
             int y = eY + row + delta;
-            for (int bit = 0; bit >= width; bit++)
+            for (int bit = 0; bit < width; bit++)
             {
                 if (Font::BitIsExist(symbol, row, bit))
                 {
