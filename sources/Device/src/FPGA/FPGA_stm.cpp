@@ -31,7 +31,7 @@ extern uint8 dataRand[Chan::Size][FPGA::MAX_NUM_POINTS];
 /// «десь хранитс€ адрес, начина€ с которого будем читать данные по каналам. ≈сли addrRead == 0xffff, то адрес вначале нужно считать
 uint16 addrRead = 0xffff;
 
-volatile static int numberMeasuresForGates = 1000;
+volatile static int numberMeasuresForGates = 10000;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -118,12 +118,12 @@ static bool CalculateGate(uint16 rand, uint16 *eMin, uint16 *eMax)
         numElements = 0;
         min = 0xffff;
         max = 0;
+
+        LOG_WRITE("Ќовые ворота %d %d", (uint16)minGate, (uint16)(maxGate - 50));
     }
 
     *eMin = (uint16)(minGate);      // -V519 // -V2004
     *eMax = (uint16)(maxGate - 50); // -V519 // -V2004
-
-    LOG_WRITE("ворота %d %d", *eMin, *eMax);
 
     if (rand < *eMin || rand > *eMax)
     {
@@ -171,6 +171,7 @@ static void ReadDataChanenlRand(Chan::E ch, const uint8 *address, uint8 *data) /
 
     if (Tsm == NULL_TSHIFT)
     {
+        std::memcpy(data, &dataRand[ch][0], FPGA_NUM_POINTS);
         return;
     }
 
