@@ -358,11 +358,20 @@ _dY = CalculateOffsetY()
 #print("dX = ", _dX, ", dY = ", _dY)
 # Dump(70, 151)
 
-#         '0'   '1'   '2'   '3'   '4'   '5'   '6'   '7'   '8'   '9'
-codes = [0x30, 0x31, 0x32, 0x33, 0x34, 0x35, 0x36, 0x37, 0x38, 0x39]
+codes = []
+x = []
+y = []
 
-x =     [  0,     1,    2,    3,    4,    5,    6,    7,    8,    9]
+curX = 0
+curY = 2
 
-y =     [  1,     1,    1,    1,    1,    1,    1,    1,    1,    1]
+for code in range(128 - 0x20):
+    codes.append(code + 0x20)
+    x.append(curX)
+    y.append(curY)
+    curX += 1
+    if curX == 16:
+        curX = 0
+        curY += 1
 
 WriteToFile(_outFile, _nameFont, codes, x, y)
