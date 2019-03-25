@@ -86,7 +86,9 @@ static void RunStep(uint8 data)
         EmptyFuncBtU8,      // Paint_DrawBigText,
         FuncScreen,         // Screen
         EmptyFuncBtU8,      // Paint_VPointLine
-        EmptyFuncBtU8       // Paint_HPointLine
+        EmptyFuncBtU8,      // Paint_HPointLine
+        EmptyFuncBtU8,      // Paint_SetMonoSpaceFont
+        EmptyFuncBtU8       // Paint_SetTextSpacing
     };
 
     if (step == 0)

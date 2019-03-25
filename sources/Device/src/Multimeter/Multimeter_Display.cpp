@@ -32,6 +32,12 @@ static void PrepareTestDiode();
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+static void DrawMeasure()
+{
+    Text(out).Draw(10, 50, (buffer[0] == '8') ? Color::GRAY_50 : Color::FILL);
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Multimeter::Display::Update()
 {
     static const struct Func
@@ -63,11 +69,13 @@ void Multimeter::Display::Update()
     funcs[meas].func();
 
     Font::SetCurrent(Font::Type::_Big51);
+    Font::SetMinWidth(25);
+    Font::SetSpacing(5);
 
-    // Отрисовка измерения
+    DrawMeasure();
 
-    Text(out).Draw(10, 50, (buffer[0] == '8') ? Color::GRAY_50 : Color::FILL);
-
+    Font::SetSpacing(1);
+    Font::SetMinWidth(0);
     Font::Pop();
 
     Color::SetCurrent(Color::FILL);
@@ -91,35 +99,35 @@ void Multimeter::Display::SetMeasure(const uint8 buf[13])
 static void PrepareTestDiode()
 {
     std::memcpy(out, buffer + 1, 7); //-V512
-    std::strcpy(out + 7, " V=");
+    std::strcpy(out + 7, "V=");
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void PrepareConstantVoltage() //-V524
 {
     std::memcpy(out, buffer + 1, 7); //-V512
-    std::strcpy(out + 7, " V=");
+    std::strcpy(out + 7, "V=");
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void PrepareVariableVoltage()
 {
     std::memcpy(out, buffer + 1, 7); //-V512
-    std::strcpy(out + 7, " V~");
+    std::strcpy(out + 7, "V~");
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void PrepareConstantCurrent()
 {
     std::memcpy(out, buffer + 1, 7); //-V512
-    std::strcpy(out + 7, (buffer[10] == '1') ? " A=" : " mA=");
+    std::strcpy(out + 7, (buffer[10] == '1') ? "A=" : "mA=");
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void PrepareVariableCurrent()
 {
     std::memcpy(out, buffer + 1, 7); //-V512
-    std::strcpy(out + 7, (buffer[10] == '1') ? " A~" : " mA~");
+    std::strcpy(out + 7, (buffer[10] == '1') ? "A~" : "mA~");
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -141,7 +149,7 @@ static bool ResistanceLess100()
 static void PrepareBell()
 {
     std::memcpy(out, buffer + 1, 7); //-V512
-    std::strcpy(out + 7, " kQ");
+    std::strcpy(out + 7, "kQ");
     out[9] = 0x1b;
 
     if (ResistanceLess100())

@@ -89,6 +89,28 @@ void Font::SetCurrent(Font::Type::E typeFont)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+#ifdef PANEL
+void Font::SetSpacing(int) {}
+#else
+void Font::SetSpacing(int spacing)
+{
+    uint8 buffer[2] = { Command::Paint_SetTextSpacing, (uint8)spacing };
+    FSMC::WriteToPanel(buffer, 2);
+}
+#endif
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+#ifdef PANEL
+void Font::SetMinWidth(uint8) {}
+#else
+void Font::SetMinWidth(uint8 width)
+{
+    uint8 buffer[2] = { Command::Paint_SetMinWidthFont, width };
+    FSMC::WriteToPanel(buffer, 2);
+}
+#endif
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Font::Pop()
 {
     SetCurrent(pushedFont);

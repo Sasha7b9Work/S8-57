@@ -54,6 +54,10 @@ static bool DrawTesterPoints(uint8);
 static bool DrawVPointLine(uint8);
 
 static bool DrawHPointLine(uint8);
+/// Установка моноширинного вывода шрифта
+static bool SetMinWidthFont(uint8);
+/// Устанавливает расстояние между символами при выводе текста
+static bool SetTextSpacing(uint8);
 /// Эту функцию надо вызывать после выполнения последнего шага
 static void FinishCommand();
 
@@ -86,7 +90,9 @@ void Decoder::AddData(uint8 data)
         DrawBigText,
         FuncScreen,
         DrawVPointLine,
-        DrawHPointLine
+        DrawHPointLine,
+        SetMinWidthFont,
+        SetTextSpacing
     };
 
     if (step == 0)
@@ -402,6 +408,36 @@ static bool DrawHPointLine(uint8 data)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+static bool SetMinWidthFont(uint8 data)
+{
+    if (step == 0)
+    {
+        return false;
+    }
+    if (step == 1)
+    {
+        Text::SetMinWidthFont(data);
+    }
+
+    return true;
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+static bool SetTextSpacing(uint8 data)
+{
+    if (step == 0)
+    {
+        return false;
+    }
+    if (step == 1)
+    {
+        Text::SetSpacing(data);
+    }
+
+    return true;
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static bool DrawLine(uint8 data)
 {
     __IO static int x0;
@@ -483,7 +519,7 @@ static bool DrawText(uint8 data)
             if (readingSymbols == numSymbols)
             {
                 buffer[readingSymbols] = 0;
-                Painter::DrawText(x, y, buffer);
+                Text::Draw(x, y, buffer);
                 delete [] buffer;
                 return true;
             }

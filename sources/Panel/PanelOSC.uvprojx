@@ -1267,11 +1267,6 @@
               <FilePath>.\src\Display\Colors.h</FilePath>
             </File>
             <File>
-              <FileName>PainterTextSTM429.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Display\PainterTextSTM429.cpp</FilePath>
-            </File>
-            <File>
               <FileName>Text.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Display\Text.cpp</FilePath>

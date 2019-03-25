@@ -50,8 +50,6 @@ public:
     static void FillRegion(int x, int y, int width, int height);
 
     static uint ReduceBrightness(uint colorValue, float newBrightness);
-
-    static int DrawText(int x, int y, const char *text);
     /// Выводит текст на прямоугольнике цвета colorBackgound
     static int DrawTextOnBackground(int x, int y, const char *text, Color colorBackground);
 
