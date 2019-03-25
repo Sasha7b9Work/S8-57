@@ -32,9 +32,25 @@ static void PrepareTestDiode();
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+static bool MeasureNotReceive()
+{
+    return buffer[0] == '-';
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void DrawMeasure()
 {
-    Text(out).Draw(10, 50, (buffer[0] == '8') ? Color::GRAY_50 : Color::FILL);
+    Color color = MeasureNotReceive() ? Color::GRAY_50 : Color::FILL;
+
+    Font::SetCurrent(Font::Type::_Big51);
+    Font::SetMinWidth(25);
+    Font::SetSpacing(5);
+
+    Text(out).Draw(10, 50, color);
+
+    Font::SetSpacing(1);
+    Font::SetMinWidth(0);
+    Font::Pop();
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -68,15 +84,7 @@ void Multimeter::Display::Update()
 
     funcs[meas].func();
 
-    Font::SetCurrent(Font::Type::_Big51);
-    Font::SetMinWidth(25);
-    Font::SetSpacing(5);
-
     DrawMeasure();
-
-    Font::SetSpacing(1);
-    Font::SetMinWidth(0);
-    Font::Pop();
 
     Color::SetCurrent(Color::FILL);
 
@@ -84,9 +92,49 @@ void Multimeter::Display::Update()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+static int GetRange()
+{
+    if (MULTI_MEASURE == Multimeter::Measure::VoltageDC)
+    {
+        return MULTI_RANGE_VOLTAGE_DC;
+    }
+    else if (MULTI_MEASURE == Multimeter::Measure::VoltageAC)
+    {
+        return MULTI_RANGE_VOLTAGE_AC;
+    }
+    else if (MULTI_MEASURE == Multimeter::Measure::CurrentDC)
+    {
+        return MULTI_RANGE_CURRENT_DC;
+    }
+    else if (MULTI_MEASURE == Multimeter::Measure::CurrentAC)
+    {
+        return MULTI_RANGE_CURRENT_AC;
+    }
+    else if (MULTI_MEASURE == Multimeter::Measure::Resistance)
+    {
+        return MULTI_RANGE_RESISTANCE;
+    }
+
+    return 0;
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Multimeter::Display::ChangedMode()
 {
-    std::memset(buffer, '8', 10); //-V512
+    std::memset(buffer, '-', 10); //-V512
+
+    static const int position[Measure::Size][4] =
+    {
+        {2, 3, 4},      // VoltageDC
+        {2, 3, 4},      // VoltageAC
+        {3, 2},         // CurrentDC
+        {3, 2},         // CurrentAC
+        {2, 3, 4, 3},   // Resistance
+        {2},            // TestDiode
+        (2),            // Bell
+    };
+
+    buffer[position[MULTI_MEASURE][GetRange()]] = '.';
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

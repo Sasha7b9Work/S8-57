@@ -59,21 +59,37 @@ DEF_CHOICE_3( cRangesVoltageAC,                                                 
 
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+static void OnChange_CurrentDC(bool active)
+{
+    if (active)
+    {
+        Multimeter::ChangeMode();
+    }
+}
+
 DEF_CHOICE_2( cRangesCurrentDC,
     "Предел", "Range",
     "Диапазон измерения", "Measurement range",
     "20мА", "20mА",
     "2А", "2А",
-    MULTI_RANGE_CURRENT_DC, pageMultimeter, Choice::EmptyActive, Choice::EmptyChange, Choice::EmptyDraw
+    MULTI_RANGE_CURRENT_DC, pageMultimeter, Choice::EmptyActive, OnChange_CurrentDC, Choice::EmptyDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+static void OnChange_CurrentAC(bool active)
+{
+    if (active)
+    {
+        Multimeter::ChangeMode();
+    }
+}
+
 DEF_CHOICE_2( cRangesCurrentAC,
     "Предел", "Range",
     "Диапазон измерения", "Measurement range",
     "20мА", "20mA",
     "2А", "2A",
-    MULTI_RANGE_CURRENT_AC, pageMultimeter, Choice::EmptyActive, Choice::EmptyChange, Choice::EmptyDraw
+    MULTI_RANGE_CURRENT_AC, pageMultimeter, Choice::EmptyActive, OnChange_CurrentAC, Choice::EmptyDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

@@ -42,19 +42,6 @@ namespace Multimeter
             HAL::USART3_::StartReceiveIT(_buffer, 13);
         }
     };
-
-    class DisplayWorker
-    {
-    public:
-        static void ChangedMode()
-        {
-            Display::ChangedMode();
-        }
-        static void SetMeasure(const uint8 *buffer)
-        {
-            Display::SetMeasure(buffer);
-        }
-    };
 }
 
 
@@ -70,7 +57,7 @@ static void ReceiveCallback();
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void Multimeter::ChangeMode()
 {
-    DisplayWorker::ChangedMode();
+    Display::ChangedMode();
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -184,6 +171,6 @@ Multimeter::Measure::E Multimeter::Measure::GetCode(const char buffer[13])
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void ReceiveCallback()
 {
-    Multimeter::DisplayWorker::SetMeasure(bufferUART);
+    Multimeter::Display::SetMeasure(bufferUART);
     Multimeter::USART3_::StartReceiveIT(bufferUART);
 }
