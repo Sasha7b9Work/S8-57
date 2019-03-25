@@ -6,6 +6,6 @@
 cd ../..
 rmdir "generated/Keil" /s /q
 cd scripts/vs_keil
-cmake ../../CMakeLists.txt -B../../generated/Keil > cmake_out.txt
+cmake ../../CMakeLists.txt -B../../generated/Keil
 
 @echo %TIME%   Complete

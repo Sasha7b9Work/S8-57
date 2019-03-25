@@ -62,11 +62,11 @@ void Multimeter::Display::Update()
 
     funcs[meas].func();
 
-    Font::SetCurrent(Font::Type::_Big64);
+    Font::SetCurrent(Font::Type::_Big51);
 
     // Отрисовка измерения
 
-    Text(out).Draw(30, 30, (buffer[0] == '8') ? Color::GRAY_50 : Color::FILL);
+    Text(out).Draw(10, 50, (buffer[0] == '8') ? Color::GRAY_50 : Color::FILL);
 
     Font::Pop();
 

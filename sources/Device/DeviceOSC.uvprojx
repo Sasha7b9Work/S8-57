@@ -611,11 +611,6 @@
               <FilePath>..\common\Display\Font\font8.inc</FilePath>
             </File>
             <File>
-              <FileName>fontDigits64.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\common\Display\Font\fontDigits64.cpp</FilePath>
-            </File>
-            <File>
               <FileName>fontUGO.inc</FileName>
               <FileType>5</FileType>
               <FilePath>..\common\Display\Font\fontUGO.inc</FilePath>
@@ -624,6 +619,11 @@
               <FileName>fontUGO2.inc</FileName>
               <FileType>5</FileType>
               <FilePath>..\common\Display\Font\fontUGO2.inc</FilePath>
+            </File>
+            <File>
+              <FileName>fontDigits51.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\common\Display\Font\fontDigits51.cpp</FilePath>
             </File>
           </Files>
         </Group>

@@ -208,8 +208,8 @@ def CalculateSizeDataFont(x, y):
 
 ##########################################################################################
 # Записывает данные символа в файл
-def WriteDataSymbol(code, file, data, offset):
-    file.write("\n                         //  code " + str(hex(code)) + ", offset = " + str(hex(offset)) + "\n    ")
+def WriteDataSymbol(code, file, data, offset, x, y):
+    file.write("\n                         //  code " + str(hex(code)) + ", offset = " + str(hex(offset)) + "x = " + str(x) + ", y = " + str(y) + "\n    ")
     
     count = 0
     
@@ -276,6 +276,8 @@ def GetDataSymbol(absX, absY):
 ##########################################################################################
 def WriteToFile(nameFile, nameFont, codes, x, y):
     output = open(nameFile, "w")
+    
+    output.write("#include \"Display/Font/Font.h\"\n\n")
 
 # Пишем данные **************************************************************************
     
@@ -292,7 +294,7 @@ def WriteToFile(nameFile, nameFont, codes, x, y):
         absY = AbsY(y[i])
         data = GetDataSymbol(absX, absY)                # Получаем данные глефа
        
-        WriteDataSymbol(codes[i], output, data, offset)             # И записываем их в файл
+        WriteDataSymbol(codes[i], output, data, offset, absX, absY)             # И записываем их в файл
         offset = offsets[len(offsets) - 1] + len(data)
         offsets.append(offset)
         if i != len(x) - 1:
@@ -323,7 +325,7 @@ def WriteToFile(nameFile, nameFont, codes, x, y):
     output.write("    " + str(len(codes)) + ",\n")
     output.write("    data" + nameFont + ",\n")
     output.write("    symbols" + nameFont + ",\n")
-    output.write("};")      
+    output.write("};\n")      
     
     output.close()
 
@@ -354,17 +356,12 @@ _dX = CalculateOffsetX()
 
 _dY = CalculateOffsetY()
 
-print("x0 = ", CalculateX0())
-print("y0 = ", CalculateY0())
-
-print("dX = ", _dX, ", dY = ", _dY)
-
 codes = []
 x = []
 y = []
 
 curX = 0
-curY = 2
+curY = 0
 
 for code in range(128 - 0x20):
     codes.append(code + 0x20)
