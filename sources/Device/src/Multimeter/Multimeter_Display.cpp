@@ -38,18 +38,62 @@ static bool MeasureNotReceive()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+static void DrawChar(uint i)
+{
+    static const int y = 50;
+    
+    static int x = 0;
+    
+    static const int dX = 30;
+
+    /// true, если точка уже выведена
+    static bool point = false;
+    
+    char symbols[2] = {out[i], 0};
+    
+    if(i == 0)
+    {
+        Text(symbols).Draw(10, y);
+    }
+    else
+    {
+        Text(symbols).Draw(point ? (x - 18) : x, y);
+    }
+    
+    x += dX;
+
+    if (i == 0)
+    {
+        x = 35;
+        point = false;
+    }
+
+    if (out[i] == '.')
+    {
+        point = true;
+    }
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void DrawMeasure()
 {
     Color color = MeasureNotReceive() ? Color::GRAY_50 : Color::FILL;
 
     Font::SetCurrent(Font::Type::_Big51);
-    Font::SetMinWidth(25);
+
+    Color::SetCurrent(color);
+    
+    for(uint i = 0; i < 7; i++)
+    {
+        DrawChar(i);
+    }
+
     Font::SetSpacing(5);
 
-    Text(out).Draw(10, 50, color);
+    Text(&out[7]).Draw(205, 50);
 
     Font::SetSpacing(1);
-    Font::SetMinWidth(0);
+
     Font::Pop();
 }
 
@@ -133,8 +177,21 @@ void Multimeter::Display::ChangedMode()
         {2},            // TestDiode
         (2),            // Bell
     };
+    
+    static const pString suffix[Measure::Size][4] =
+    {
+        {"V=", "V=", "V="},
+        {"V~", "V~", "V~"},
+        {"mA=", "A="},
+        {"mA=", "A="},
+        {"kQ", "kQ", "kQ", "MQ"},
+        {"V="},
+        {"kQ="}
+    };
 
     buffer[position[MULTI_MEASURE][GetRange()]] = '.';
+    
+    std::strcpy(&buffer[10], suffix[MULTI_MEASURE][GetRange()]);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
