@@ -6,6 +6,7 @@
 
 #include "Display/Display_Primitives.h"
 #include "Hardware/Beeper.h"
+#include "Utils/Debug.h"
 
 
 using namespace Multimeter::Settings;
@@ -14,27 +15,22 @@ using Display::Primitives::Text;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/// В этом буфере готовая к выводу информация
-#define SIZE_OUT 15
-char out[SIZE_OUT];
+/// Данные для вывода.
+static char outBuffer[10];
 
-/// Сюда копируем принятые измерения
-/// Если нулевой элемент == 0, то выводить ничего не нужно
-static char buffer[13] = { 0 };
-
-static void PrepareBell();
-static void PrepareConstantVoltage();
-static void PrepareVariableVoltage();
-static void PrepareConstantCurrent();
-static void PrepareVariableCurrent();
-static void PrepareResistance();
-static void PrepareTestDiode();
+static void PrepareBell(const char *);
+static void PrepareConstantVoltage(const char *);
+static void PrepareVariableVoltage(const char *);
+static void PrepareConstantCurrent(const char *);
+static void PrepareVariableCurrent(const char *);
+static void PrepareResistance(const char *);
+static void PrepareTestDiode(const char *);
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 static bool MeasureNotReceive()
 {
-    return buffer[0] == '-';
+    return outBuffer[0] == '-';
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -49,7 +45,7 @@ static void DrawChar(uint i)
     /// true, если точка уже выведена
     static bool point = false;
     
-    char symbols[2] = {out[i], 0};
+    char symbols[2] = {outBuffer[i], 0};
     
     if(i == 0)
     {
@@ -68,7 +64,7 @@ static void DrawChar(uint i)
         point = false;
     }
 
-    if (out[i] == '.')
+    if (outBuffer[i] == '.')
     {
         point = true;
     }
@@ -90,7 +86,7 @@ static void DrawMeasure()
 
     Font::SetSpacing(5);
 
-    Text(&out[7]).Draw(205, 50);
+    Text(&outBuffer[7]).Draw(205, 50);
 
     Font::SetSpacing(1);
 
@@ -100,33 +96,7 @@ static void DrawMeasure()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Multimeter::Display::Update()
 {
-    static const struct Func
-    {
-        pFuncVV func;
-        Func(pFuncVV f) : func(f) {};
-    }
-    funcs[Multimeter::Measure::Size] =
-    {
-        PrepareConstantVoltage,
-        PrepareVariableVoltage,
-        PrepareConstantCurrent,
-        PrepareVariableCurrent,
-        PrepareResistance,
-        PrepareTestDiode,
-        PrepareBell
-    };
-
     Painter::BeginScene(Color::BACK);
-
-    std::memset(out, 0, SIZE_OUT);
-
-    Measure::E meas = Measure::GetCode(buffer);
-    if (meas == Measure::Size)
-    {
-        meas = MULTI_MEASURE;
-    }
-
-    funcs[meas].func();
 
     DrawMeasure();
 
@@ -165,7 +135,7 @@ static int GetRange()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Multimeter::Display::ChangedMode()
 {
-    std::memset(buffer, '-', 10); //-V512
+    std::memset(outBuffer, '-', 7); //-V512
 
     static const int position[Measure::Size][4] =
     {
@@ -189,73 +159,91 @@ void Multimeter::Display::ChangedMode()
         {"kQ="}
     };
 
-    buffer[position[MULTI_MEASURE][GetRange()]] = '.';
+    outBuffer[position[MULTI_MEASURE][GetRange()]] = '.';
     
-    std::strcpy(&buffer[10], suffix[MULTI_MEASURE][GetRange()]);
+    std::strcpy(&outBuffer[7], suffix[MULTI_MEASURE][GetRange()]);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Multimeter::Display::SetMeasure(const uint8 buf[13])
 {
-    std::memcpy(buffer, buf, 13);
+    typedef void(*pFuncVCC)(const char *);
+
+    static const struct Func
+    {
+        pFuncVCC func;
+        Func(pFuncVCC f) : func(f) {};
+    }
+    funcs[Multimeter::Measure::Size] =
+    {
+        PrepareConstantVoltage,
+        PrepareVariableVoltage,
+        PrepareConstantCurrent,
+        PrepareVariableCurrent,
+        PrepareResistance,
+        PrepareTestDiode,
+        PrepareBell
+    };
+
+    Measure::E meas = Measure::GetCode((const char *)buf);
+
+    if (meas >= Measure::Size)
+    {
+        return;
+    }
+
+    std::memcpy(outBuffer, buf + 1, 7);
+
+    funcs[meas].func((const char *)buf);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void PrepareTestDiode()
+static void PrepareTestDiode(const char *)
 {
-    std::memcpy(out, buffer + 1, 7); //-V512
-    std::strcpy(out + 7, "V=");
+    std::strcpy(outBuffer + 7, "V=");
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void PrepareConstantVoltage() //-V524
+static void PrepareConstantVoltage(const char *) //-V524
 {
-    std::memcpy(out, buffer + 1, 7); //-V512
-    std::strcpy(out + 7, "V=");
+    std::strcpy(outBuffer + 7, "V=");
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void PrepareVariableVoltage()
+static void PrepareVariableVoltage(const char *)
 {
-    std::memcpy(out, buffer + 1, 7); //-V512
-    std::strcpy(out + 7, "V~");
+    std::strcpy(outBuffer + 7, "V~");
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void PrepareConstantCurrent()
+static void PrepareConstantCurrent(const char *buf)
 {
-    std::memcpy(out, buffer + 1, 7); //-V512
-    std::strcpy(out + 7, (buffer[10] == '1') ? "A=" : "mA=");
+    std::strcpy(outBuffer + 7, (buf[10] == '1') ? "A=" : "mA=");
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void PrepareVariableCurrent()
+static void PrepareVariableCurrent(const char *buf)
 {
-    std::memcpy(out, buffer + 1, 7); //-V512
-    std::strcpy(out + 7, (buffer[10] == '1') ? "A~" : "mA~");
+    std::strcpy(outBuffer + 7, (buf[10] == '1') ? "A~" : "mA~");
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void PrepareResistance()
+void PrepareResistance(const char *buf)
 {
-    std::memcpy(out, buffer + 1, 7); //-V512
-    out[7] = ' ';
-    out[8] = buffer[8];
-    out[9] = 0x1b;
+    outBuffer[7] = buf[8];
+    outBuffer[8] = buf[9];
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static bool ResistanceLess100()
 {
-    return ((out[1] == '0') && (out[3] == '0'));
+    return ((outBuffer[1] == '0') && (outBuffer[3] == '0'));
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void PrepareBell()
+static void PrepareBell(const char *)
 {
-    std::memcpy(out, buffer + 1, 7); //-V512
-    std::strcpy(out + 7, "kQ");
-    out[9] = 0x1b;
+    std::strcpy(outBuffer + 7, "kQ");
 
     if (ResistanceLess100())
     {

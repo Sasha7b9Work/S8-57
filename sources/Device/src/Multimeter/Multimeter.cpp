@@ -145,6 +145,9 @@ Multimeter::Measure::E Multimeter::Measure::GetCode(const char buffer[13])
 
     switch (buffer[pos - 1])
     {
+    case 'U':
+        result = Measure::VoltageDC;
+        break;
     case 'V':
         result = Measure::VoltageAC;
         break;

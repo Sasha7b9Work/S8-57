@@ -73,7 +73,7 @@
         <LExpSel>0</LExpSel>
       </OPTXL>
       <OPTFL>
-        <tvExp>1</tvExp>
+        <tvExp>0</tvExp>
         <tvExpOptDlg>0</tvExpOptDlg>
         <IsCurrentTarget>1</IsCurrentTarget>
       </OPTFL>
@@ -155,98 +155,34 @@
         <Bp>
           <Number>0</Number>
           <Type>0</Type>
-          <LineNumber>33</LineNumber>
+          <LineNumber>195</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134381146</Address>
+          <Address>134445166</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>D:\Projects\stm32\S8-57\sources\Panel\src\Hardware\HAL\HAL_IT.cpp</Filename>
+          <Filename>&lt;1&gt;.\src\Multimeter\Multimeter_Display.cpp</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\S8_57\src/Hardware/HAL/HAL_IT.cpp\33</Expression>
+          <Expression>\\S8_57\src/Multimeter/Multimeter_Display.cpp\195</Expression>
         </Bp>
         <Bp>
           <Number>1</Number>
           <Type>0</Type>
-          <LineNumber>187</LineNumber>
+          <LineNumber>146</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134410242</Address>
+          <Address>134445404</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>D:\Projects\stm32\S8-57\sources\Panel\src\Osci\Display\PainterData.cpp</Filename>
+          <Filename>&lt;1&gt;.\src\Multimeter\Multimeter.cpp</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\S8_57\src/Osci/Display/PainterData.cpp\187</Expression>
-        </Bp>
-        <Bp>
-          <Number>2</Number>
-          <Type>0</Type>
-          <LineNumber>185</LineNumber>
-          <EnabledFlag>1</EnabledFlag>
-          <Address>134410210</Address>
-          <ByteObject>0</ByteObject>
-          <HtxType>0</HtxType>
-          <ManyObjects>0</ManyObjects>
-          <SizeOfObject>0</SizeOfObject>
-          <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>1</BreakIfRCount>
-          <Filename>D:\Projects\stm32\S8-57\sources\Panel\src\Osci\Display\PainterData.cpp</Filename>
-          <ExecCommand></ExecCommand>
-          <Expression>\\S8_57\src/Osci/Display/PainterData.cpp\185</Expression>
-        </Bp>
-        <Bp>
-          <Number>3</Number>
-          <Type>0</Type>
-          <LineNumber>11</LineNumber>
-          <EnabledFlag>1</EnabledFlag>
-          <Address>134515406</Address>
-          <ByteObject>0</ByteObject>
-          <HtxType>0</HtxType>
-          <ManyObjects>0</ManyObjects>
-          <SizeOfObject>0</SizeOfObject>
-          <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>1</BreakIfRCount>
-          <Filename>&lt;2&gt;.\src\main.cpp</Filename>
-          <ExecCommand></ExecCommand>
-          <Expression>\\S8_57\src/main.cpp\11</Expression>
-        </Bp>
-        <Bp>
-          <Number>4</Number>
-          <Type>0</Type>
-          <LineNumber>25</LineNumber>
-          <EnabledFlag>1</EnabledFlag>
-          <Address>0</Address>
-          <ByteObject>0</ByteObject>
-          <HtxType>0</HtxType>
-          <ManyObjects>0</ManyObjects>
-          <SizeOfObject>0</SizeOfObject>
-          <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>0</BreakIfRCount>
-          <Filename>d:\Projects\stm32\S8-57\sources\Device\src\Display\Text.cpp</Filename>
-          <ExecCommand></ExecCommand>
-          <Expression></Expression>
-        </Bp>
-        <Bp>
-          <Number>5</Number>
-          <Type>0</Type>
-          <LineNumber>27</LineNumber>
-          <EnabledFlag>1</EnabledFlag>
-          <Address>0</Address>
-          <ByteObject>0</ByteObject>
-          <HtxType>0</HtxType>
-          <ManyObjects>0</ManyObjects>
-          <SizeOfObject>0</SizeOfObject>
-          <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>0</BreakIfRCount>
-          <Filename>d:\Projects\stm32\S8-57\sources\Device\src\Display\Text.cpp</Filename>
-          <ExecCommand></ExecCommand>
-          <Expression></Expression>
+          <Expression>\\S8_57\src/Multimeter/Multimeter.cpp\146</Expression>
         </Bp>
       </Breakpoint>
       <WatchWindow1>
@@ -830,7 +766,7 @@
 
   <Group>
     <GroupName>Display/Font</GroupName>
-    <tvExp>1</tvExp>
+    <tvExp>0</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
