@@ -143,7 +143,7 @@ Multimeter::Measure::E Multimeter::Measure::GetCode(const char buffer[13])
         return Measure::Size;
     }
 
-    switch (buffer[pos - 1])
+    switch (buffer[pos - 2])
     {
     case 'U':
         result = Measure::VoltageDC;
