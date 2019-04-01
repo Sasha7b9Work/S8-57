@@ -16,7 +16,7 @@ using Display::Primitives::Text;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /// Данные для вывода.
-static char outBuffer[10];
+static char outBuffer[15];
 
 static void PrepareBell(const char *);
 static void PrepareConstantVoltage(const char *);
@@ -128,6 +128,10 @@ static int GetRange()
     {
         return MULTI_RANGE_RESISTANCE;
     }
+    else
+    {
+        // здесь ничего
+    }
 
     return 0;
 }
@@ -192,7 +196,7 @@ void Multimeter::Display::SetMeasure(const uint8 buf[13])
         return;
     }
 
-    std::memcpy(outBuffer, buf + 1, 7);
+    std::memcpy(outBuffer, buf + 1, 7); //-V512
 
     funcs[meas].func((const char *)buf);
 }
