@@ -26,69 +26,70 @@ static void PrepareVariableCurrent(const char *);
 static void PrepareResistance(const char *);
 static void PrepareTestDiode(const char *);
 
+static bool received = false;
+
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-static bool MeasureNotReceive()
+static char Symbol(uint i)
 {
-    return outBuffer[0] == '-';
+    return outBuffer[i];
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void DrawChar(uint i)
+static void DrawChar(uint numSymbol, int x)
 {
-    static const int y = 50;
+    static const int y = 35;
     
-    static int x = 0;
+    char symbols[2] = {Symbol(numSymbol), 0};
     
-    static const int dX = 30;
+    Text(symbols).Draw(x, y);
+}
 
-    /// true, если точка уже выведена
-    static bool point = false;
-    
-    char symbols[2] = {outBuffer[i], 0};
-    
-    if(i == 0)
-    {
-        Text(symbols).Draw(10, y);
-    }
-    else
-    {
-        Text(symbols).Draw(point ? (x - 18) : x, y);
-    }
-    
-    x += dX;
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+static void DrawSymbols()
+{
+    int x0 = 20;
 
-    if (i == 0)
+    DrawChar(0, x0 + ((Symbol(0) == '-') ? 15 : 10));
+
+    int x = 48;
+
+    for (uint i = 1; i < 7; i++)
     {
-        x = 35;
-        point = false;
+        char symbol = Symbol(i);
+
+        if (symbol == '1')
+        {
+            x += 10;
+        }
+
+        DrawChar(i, x0 + x);
+
+        if (symbol == '1')
+        {
+            x -= 10;
+        }
+
+        x += (Symbol(i) == '.') ? 16 : 38;
     }
 
-    if (outBuffer[i] == '.')
-    {
-        point = true;
-    }
+    Font::SetSpacing(5);
+
+    Text(&outBuffer[7]).Draw(120, 125);
+
+    Font::SetSpacing(1);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void DrawMeasure()
 {
-    Color color = MeasureNotReceive() ? Color::GRAY_50 : Color::FILL;
+    Color color = received ? Color::FILL : Color::GRAY_50;
 
-    Font::SetCurrent(Font::Type::_Big51);
+    Font::SetCurrent(Font::Type::_Big64);
 
     Color::SetCurrent(color);
     
-    for(uint i = 0; i < 7; i++)
-    {
-        DrawChar(i);
-    }
-
-    Font::SetSpacing(5);
-
-    Text(&outBuffer[7]).Draw(205, 50);
-
-    Font::SetSpacing(1);
+    DrawSymbols();
 
     Font::Pop();
 }
@@ -139,6 +140,8 @@ static int GetRange()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Multimeter::Display::ChangedMode()
 {
+    received = false;
+
     std::memset(outBuffer, '-', 7); //-V512
 
     static const int position[Measure::Size][4] =
@@ -199,6 +202,8 @@ void Multimeter::Display::SetMeasure(const uint8 buf[13])
     std::memcpy(outBuffer, buf + 1, 7); //-V512
 
     funcs[meas].func((const char *)buf);
+
+    received = true;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

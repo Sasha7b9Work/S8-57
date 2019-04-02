@@ -49,7 +49,7 @@ struct Font
             _8,
             _UGO,
             _UGO2,
-            _Big51,
+            _Big64,
             Size,
             None
         } value;
@@ -80,4 +80,4 @@ extern const uchar font5display[3080];
 extern const uchar font8display[3080];
 extern const uchar fontUGOdisplay[3080];
 extern const uchar fontUGO2display[3080];
-extern const BigFont fontDigits51;
+extern const BigFont fontDigits64;

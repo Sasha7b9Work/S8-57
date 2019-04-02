@@ -14,7 +14,7 @@ using HAL::FSMC;
 const Font *fonts[Font::Type::Size] = {&font5, &font8, &fontUGO, &fontUGO2, nullptr};
 const Font *font = &font8;
 
-const BigFont *bigFont = &fontDigits51;
+const BigFont *bigFont = &fontDigits64;
 
 Font::Type::E pushedFont = Font::Type::_8;
 Font::Type::E currentFont = Font::Type::_8;
@@ -69,8 +69,8 @@ void Font::SetCurrent(Font::Type::E typeFont)
         case Type::_UGO2:
             font = &fontUGO2;
             break;
-        case Type::_Big51:
-            bigFont = &fontDigits51;
+        case Type::_Big64:
+            bigFont = &fontDigits64;
             break;
         case Type::None:
         case Type::Size:

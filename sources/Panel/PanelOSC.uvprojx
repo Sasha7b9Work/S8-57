@@ -1317,9 +1317,9 @@
               <FilePath>..\common\Display\Font\fontUGO2.inc</FilePath>
             </File>
             <File>
-              <FileName>fontDigits51.cpp</FileName>
+              <FileName>fontDigits64.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\common\Display\Font\fontDigits51.cpp</FilePath>
+              <FilePath>..\common\Display\Font\fontDigits64.cpp</FilePath>
             </File>
           </Files>
         </Group>
