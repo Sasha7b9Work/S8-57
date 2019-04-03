@@ -161,9 +161,9 @@ void Multimeter::Display::ChangedMode()
         {"V~", "V~", "V~"},
         {"mA=", "A="},
         {"mA=", "A="},
-        {"kQ", "kQ", "kQ", "MQ"},
+        {"k\x5e", "k\x5e", "k\x5e", "M\x5e"},
         {"V="},
-        {"kQ="}
+        {"k\x5e="}
     };
 
     outBuffer[position[MULTI_MEASURE][GetRange()]] = '.';
@@ -240,7 +240,7 @@ static void PrepareVariableCurrent(const char *buf)
 void PrepareResistance(const char *buf)
 {
     outBuffer[7] = buf[8];
-    outBuffer[8] = buf[9];
+    outBuffer[8] = '\x5e';
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -252,7 +252,7 @@ static bool ResistanceLess100()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void PrepareBell(const char *)
 {
-    std::strcpy(outBuffer + 7, "kQ");
+    std::strcpy(outBuffer + 7, "k\x5e");
 
     if (ResistanceLess100())
     {

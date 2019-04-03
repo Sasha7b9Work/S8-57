@@ -332,12 +332,12 @@ _dX = CalculateOffsetX()
 
 _dY = CalculateOffsetY()
 
-print("offset = ", _offset)
-print("numColors = ", _numColors)
-print("width = ", _width)
-print("height = ", _height)
-print("dX = ", _dX)
-print("dY = ", _dY)
+#print("offset = ", _offset)
+#print("numColors = ", _numColors)
+#print("width = ", _width)
+#print("height = ", _height)
+#print("dX = ", _dX)
+#print("dY = ", _dY)
 
 codes = []
 x = []
