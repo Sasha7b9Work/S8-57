@@ -50,7 +50,7 @@ static void DrawSymbols()
 {
     int x0 = 20;
 
-    DrawChar(0, x0 + ((Symbol(0) == '-') ? 15 : 10));
+    DrawChar(0, x0 + 10);
 
     int x = 48;
 

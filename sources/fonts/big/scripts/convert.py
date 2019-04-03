@@ -75,11 +75,11 @@ def ColorIsEmpty(x, y):
 
 # Возвращает True, если цвет в данной точке - фон
 def ColorIsBack(x, y):
-    return GetPoint(x, y) == _colors[1]
+    return GetPoint(x, y) == _colors[2]
 
 # Возвращает True, елси цвет в данной точке - закрашен
 def ColorIsFill(x, y):
-    return GetPoint(x, y) == _colors[2]
+    return GetPoint(x, y) == _colors[1]
 
 # Возвращает координату X верхнего левого угла первого слева глифа
 def CalculateX0():
@@ -151,35 +151,14 @@ def AbsY(y):
     return CalculateY0() + y * _dY
 
 ##########################################################################################
-# Возвращает длину строки символа в битах
-def LengthRow(x, y):
-    start = x                           # Начальная координата строки
-    endFill = 0                         # Координата последней закрашенной точки
-    endBack = 0                         # Координата последней глефа цвета фона
-    
-    while not ColorIsEmpty(x, y):
-        if ColorIsFill(x, y):
-            endFill = x
-        if ColorIsBack(x, y):
-            endBack = x
-        x += 1
-        
-    return endBack - start
-
-##########################################################################################
 # Возвращает ширину символа в битах
-def WidthSymbol(absX, absY):   
-    maxSize = 0             # Размер самой длинной строки символа в битах
-
-    for y in range (absY, absY + _dY):
-        size = LengthRow(absX, y)
-        if size > maxSize:
-            maxSize = size
-            
-#    if maxSize == 0:
-#        print("absX = ", absX, ", absY = ", absY)
-            
-    return maxSize
+def WidthSymbol(absX, absY):
+    x = absX
+    
+    while not ColorIsEmpty(x, absY):
+        x += 1
+    
+    return x - absX - 1
 
 ##########################################################################################
 # Возвращает шириру символа в байтах
@@ -193,7 +172,6 @@ def WidthSymbolInBytes(absX, absY):
 ##########################################################################################
 # Возвращает размер памяти в байтах, занимаемой символом с относительным координатами x, y
 def SizeSymbol(absX, absY):
-
     return WidthSymbolInBytes(absX, absY) * _heightFont
     
 ##########################################################################################
@@ -209,7 +187,7 @@ def CalculateSizeDataFont(x, y):
 ##########################################################################################
 # Записывает данные символа в файл
 def WriteDataSymbol(code, file, data, offset, x, y):
-    file.write("\n                         //  code " + str(hex(code)) + ", offset = " + str(hex(offset)) + "x = " + str(x) + ", y = " + str(y) + "\n    ")
+    file.write("\n                         //  code " + str(hex(code)) + ", offset = " + str(hex(offset)) + ", x = " + str(x) + ", y = " + str(y) + "\n    ")
     
     count = 0
     
@@ -231,8 +209,6 @@ def GetDataSymbol(absX, absY):
     for y in range(absY + _deltaHeightFont, absY + _deltaHeightFont + _heightFont):
         bits = []                            # Здесь будем хранить биты для каждой строки
         width = WidthSymbol(absX, absY)
-#        if width == 0:
-#            print("width = 0, x = ", absX, ", y = ", absY)
         for x in range(absX, absX + width):
             if ColorIsFill(x, y):
                 bits.append(1)
@@ -355,6 +331,13 @@ _height = GetHeightPicture()
 _dX = CalculateOffsetX()
 
 _dY = CalculateOffsetY()
+
+print("offset = ", _offset)
+print("numColors = ", _numColors)
+print("width = ", _width)
+print("height = ", _height)
+print("dX = ", _dX)
+print("dY = ", _dY)
 
 codes = []
 x = []
