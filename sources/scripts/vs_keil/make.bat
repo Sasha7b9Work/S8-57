@@ -6,6 +6,6 @@
 cd ../..
 rmdir "generated/Keil" /s /q
 cd scripts/vs_keil
-cmake ../../CMakeLists.txt -B../../generated/Keil
+cmake ../../CMakeLists.txt -B../../generated/Keil -DCMAKE_GENERATOR="Visual Studio 15 2017"
 
 @echo %TIME%   Complete
