@@ -19,9 +19,17 @@ struct PageHelpContent
     void              *parent;              ///< Адрес родительской страницы
     /// \todo избавиться от этого рудимента
     pFuncBV            funcNotUsed;         ///< Оставлено для соместимости с типом Page - нужно для отрисовки.
-    const char * const titleHint[4];        ///< \brief Название страницы на русском и английском языке, а затем содержимое на русском и английском 
+    const char * const titleHint[2];        ///< \brief Название страницы на русском и английском языке, а затем содержимое на русском и английском 
                                             /// (для случая TypePage_Description)
     void              *pages[MAX_PAGES];    ///< Массив содержит адреса ссылаемых страниц в случае TypePage_Content
+    pString Title() const
+    {
+        return titleHint[0];
+    }
+    pString Hint() const
+    {
+        return titleHint[1];
+    }
 };
 
 extern const PageHelpContent helpMenu;
@@ -32,7 +40,6 @@ static const PageHelpContent helpMenuCommon =
     (void *)&helpMenu, 0,
     {
         "Общее описание принципов меню",
-        "General description of the principles of the menu",
         "Кнопки на панели управления имеют два типа нажатия - короткое, длительностью менее 0.5 сек и длинное, длительностьи более 0.5 сек. "
         "Меню представляет собой древовидную структуру элементов. "
         "Главная страница меню открывается коротким либо длинным нажатием кнопки МЕНЮ. "
@@ -48,8 +55,6 @@ static const PageHelpContent helpMenuCommon =
         "\"СЕРВИС\" - СЕРВИС\n"
         "\"ПОМОЩЬ\" - ПОМОЩЬ\n"
         "В каждом элементе главной страницы собраны настройки соответствующей категории"
-        ,
-        ""
     },
     {}
 };
@@ -60,8 +65,6 @@ static const PageHelpContent helpMenuControls =
     (void *)&helpMenu, 0,
     {
         "Описание органов управлениея",
-        "Description of the controls",
-        "",
         ""
     },
     {}
@@ -75,8 +78,6 @@ static const PageHelpContent helpSCPI =
     (void *)&helpMain, 0,
     {
         "Работа с SCPI",
-        "Working with SCPI",
-        "",
         ""
     },
     {}

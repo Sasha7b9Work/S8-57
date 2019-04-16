@@ -128,7 +128,7 @@ static void OnPress_Function_Screen()
 
 static void Draw_Function_Screen_Disable(int x, int y)
 {
-    String(DICT(DDis)).Draw(x + 2 + (LANG_EN ? 2 : 0), y + 5);
+    String(DICT(DDis)).Draw(x + 2, y + 5);
 }
 
 static void Draw_Function_Screen_Separate(int x, int y)
@@ -205,12 +205,12 @@ static void OnPress_Function_ModeRegSet()
 
 static void Draw_Function_ModeRegSet_Range(int x, int y)
 {
-    Char(LANG_RU ? 'M' : 'S').Draw(x + 7, y + 5);
+    Char('M').Draw(x + 7, y + 5);
 }
 
 static void Draw_Function_ModeRegSet_RShift(int x, int y)
 {
-    String(DICT(DShift)).Draw(x + 5 - (LANG_EN ? 3 : 0), y + 5);
+    String(DICT(DShift)).Draw(x + 5, y + 5);
 }
 
 static void Draw_Function_ModeRegSet(int x, int y)
@@ -433,15 +433,6 @@ DEF_PAGE_2( ppRTC, // -V641 // -V1027                                           
     Page::Name::Service_RTC, &pService, FuncActive, FuncPressPage, FuncDrawPage, FuncRegSetPage
 )
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-DEF_CHOICE_2( cLanguage,                                                                                                                                              //--- СЕРВИС - Язык ---
-    "Language",
-    "Позволяет выбрать язык меню",
-    "Русский",
-    "Английский",
-    LANG, pService, FuncActive, Choice::EmptyChange, Choice::EmptyDraw
-)
-
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 static void Information_Draw()
 {
@@ -456,7 +447,7 @@ static void Information_Draw()
 
     char buffer[100];
 
-    std::sprintf(buffer, "%s : %s", DICT(DModel), LANG_RU ? MODEL_RU : MODEL_EN);
+    std::sprintf(buffer, "%s : %s", DICT(DModel), MODEL_RU);
     String(buffer).Draw(x, y);
 
     y += 2 * dY;
@@ -512,7 +503,7 @@ DEF_PAGE_SB( ppInformation, // -V641                                            
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 const PageBase *PageService::pointer = &pService;
 
-DEF_PAGE_8( pService, // -V641 // -V1027                                                                                                                                    //--- СЕРВИС ---
+DEF_PAGE_7( pService, // -V641 // -V1027                                                                                                                                    //--- СЕРВИС ---
     "СЕРВИС",
     "Дополнительные настройки, калибровка, поиск сигнала, математические функции",
     &bResetSettings,                        ///< СЕРВИС - Сброс настроек
@@ -523,7 +514,6 @@ DEF_PAGE_8( pService, // -V641 // -V1027                                        
     &ppSound,                               ///< СЕРВИС - ЗВУК
     &ppRTC,                                 ///< СЕРВИС - ВРЕМЯ
     //PageService::PageBattery::pointer,    ///< СЕРВИС - БАТАРЕЯ
-    &cLanguage,                             ///< СЕРВИС - Язык
     &ppInformation,                         ///< СЕРВИС - ИНФОРМАЦИЯ
     PageService::PageDebug::pointer,        ///< СЕРВИС - ОТЛАДКА
     Page::Name::Service, nullptr, FuncActive, FuncPressPage, FuncDrawPage, FuncRegSetPage

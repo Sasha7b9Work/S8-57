@@ -171,7 +171,7 @@ public:
 
     // Меню СЕРВИС
 
-    Language::E         serv_lang;
+    uint8               notUsing;
     Color::Scheme::E    serv_colorScheme;
     bool                serv_notUsing;
     CalibratorMode::E   serv_calibratorMode;            ///< Режим работы калибратора.

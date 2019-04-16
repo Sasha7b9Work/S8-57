@@ -382,41 +382,41 @@ static void Osci::Settings::Trig::DisableDrawing()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 pString TBase::Name() const
 {
-    static pString names[TBase::Size][Language::Size] =
+    static pString names[TBase::Size] =
     {
-        {"2нс",     "2ns"},
-        {"5нс",     "5ns"},
-        {"10нс",    "10ns"},
-        {"20нс",    "20ns"},
-        {"50нс",    "50ns"},
-        {"0.1мкс",  "0.1us"},
-        {"0.2мкс",  "0.2us"},
-        {"0.5мкс",  "0.5us"},
-        {"1мкс",    "1us"},
-        {"2мкс",    "2us"},
-        {"5мкс",    "5us"},
-        {"10мкс",   "10us"},
-        {"20мкс",   "20us"},
-        {"50мкс",   "50us"},
-        {"0.1мс",   "0.1ms"},
-        {"0.2мс",   "0.2ms"},
-        {"0.5мс",   "0.5ms"},
-        {"1мс",     "1ms"},
-        {"2мс",     "2ms"},
-        {"5мс",     "5ms"},
-        {"10мс",    "10ms"},
-        {"20мс",    "20ms"},
-        {"50мс",    "50ms"},
-        {"0.1с",    "0.1s"},
-        {"0.2с",    "0.2s"},
-        {"0.5с",    "0.5s"},
-        {"1с",      "1s"},
-        {"2с",      "2s"},
-        {"5с",      "5s"},
-        {"10с",     "10s"}
+        "2нс",
+        "5нс",
+        "10нс",
+        "20нс",
+        "50нс",
+        "0.1мкс",
+        "0.2мкс",
+        "0.5мкс",
+        "1мкс",
+        "2мкс",
+        "5мкс",
+        "10мкс",
+        "20мкс",
+        "50мкс",
+        "0.1мс",
+        "0.2мс",
+        "0.5мс",
+        "1мс",
+        "2мс",
+        "5мс",
+        "10мс",
+        "20мс",
+        "50мс",
+        "0.1с",
+        "0.2с",
+        "0.5с",
+        "1с",
+        "2с",
+        "5с",
+        "10с"
     };
 
-    return names[value][LANG];
+    return names[value];
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -424,31 +424,30 @@ pString Range::Name() const
 {
     static const struct StructRange
     {
-        const char * names[Language::Size];
-        StructRange(pString nRU, pString nEN)
+        const char * name;
+        StructRange(pString nRU)
         {
-            names[Language::RU] = nRU;
-            names[Language::EN] = nEN;
+            name = nRU;
         }
     }
     names[Range::Size] =
     {
-        StructRange("2мВ",  "2mV"),
-        StructRange("5мВ",  "5mV"),
-        StructRange("10мВ", "10mV"),
-        StructRange("20мВ", "20mV"),
-        StructRange("50мВ", "50mV"),
-        StructRange("0.1В", "0.1V"),
-        StructRange("0.2В", "0.2V"),
-        StructRange("0.5В", "0.5V"),
-        StructRange("1В",   "1V"),
-        StructRange("2В",   "2V"),
-        StructRange("5В",   "5V"),
-        StructRange("10В",  "10V"),
-        StructRange("20В",  "20V")
+        StructRange("2мВ"),
+        StructRange("5мВ"),
+        StructRange("10мВ"),
+        StructRange("20мВ"),
+        StructRange("50мВ"),
+        StructRange("0.1В"),
+        StructRange("0.2В"),
+        StructRange("0.5В"),
+        StructRange("1В"),
+        StructRange("2В"),
+        StructRange("5В"),
+        StructRange("10В"),
+        StructRange("20В")
     };
 
-    return names[value].names[LANG];
+    return names[value].name;
 };
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

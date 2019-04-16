@@ -77,25 +77,24 @@ pString Recorder::Settings::ScaleX::ToString() const
 {
     static const struct StructScaleX
     {
-        const char *name[Language::Size];
-        StructScaleX(pString nRU, pString nEN)
+        const char *name;
+        StructScaleX(pString nRU)
         {
-            name[Language::RU] = nRU;
-            name[Language::EN] = nEN;
+            name = nRU;
         };
     }
     scales[ScaleX::Size] =
     {
-        StructScaleX("0.1\x10ñ",  "0.1\x10s"),
-        StructScaleX("0.2\x10ñ",  "0.2\x10s"),
-        StructScaleX("0.5\x10ñ",  "0.5\x10s"),
-        StructScaleX("1\x10ñ",    "1\x10s"),
-        StructScaleX("2\x10ñ",    "2\x10s"),
-        StructScaleX("5\x10ñ",    "5\x10s"),
-        StructScaleX("10\x10ñ",   "10\x10s")
+        StructScaleX("0.1\x10ñ"),
+        StructScaleX("0.2\x10ñ"),
+        StructScaleX("0.5\x10ñ"),
+        StructScaleX("1\x10ñ"),
+        StructScaleX("2\x10ñ"),
+        StructScaleX("5\x10ñ"),
+        StructScaleX("10\x10ñ")
     };
 
-    return scales[value].name[LANG];
+    return scales[value].name;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

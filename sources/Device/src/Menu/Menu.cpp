@@ -294,7 +294,7 @@ static void ProcessButtonForHint(Key::E button)
 {
     if (button == Key::Enter)
     {
-        Menu::stringForHint = LANG_RU ?
+        Menu::stringForHint =
             "Кнопка МЕНЮ выполняет следующие функции:\n"
             "1. При закрытом меню нажатие либо нажатие с удержанием в течение 0.5с открывает меню.\n"
             "2. При открытом меню удержание кнопки в течение 0.5с закрывает меню.\n"
@@ -302,96 +302,56 @@ static void ProcessButtonForHint(Key::E button)
             "корневая страница, меню закрывается.\n"
             "4. При настройке \"СЕРВИС\x99Режим кн МЕНЮ\x99Переключать\" текущей становится страница текущего уровня меню. Если текущая страница "
             "последняя в текущем уровне, происходит переход на предыдущий уровень меню.\n"
-            "5. Если меню находится в режиме малых кнопок, то нажатие закрывает страницу."
-            :
-        "МЕНЮ button performs the following functions:\n"
-            "1. At the closed menu pressing or pressing with deduction during 0.5s opens the Menu::\n"
-            "2. At the open menu deduction of the button during 0.5s closes the Menu::\n"
-            "3. At control \"SERVICE\x99Mode btn MENU\x99\x43lose\" current becomes the page of the previous level of the Menu:: If the root page is "
-            "current, the menu is closed.\n"
-            "4. At control \"SERVICE\x99Mode btn MENU\x99Toggle\" current becomes the page of the current level of the Menu:: If the current page the "
-            "last in the current level, happens transition to the previous level of the Menu::\n"
-            "5. If the menu is in the mode of small buttons, pressing closes the page.";
-
+            "5. Если меню находится в режиме малых кнопок, то нажатие закрывает страницу.";
     } 
     else if (button == Key::Display)
     {
-        Menu::stringForHint = LANG_RU ?
-            "Кнопка ДИСПЛЕЙ открывает меню настроек дисплея."
-            :
-            "ДИСПЛЕЙ button opens the display settings Menu::";
+        Menu::stringForHint = "Кнопка ДИСПЛЕЙ открывает меню настроек дисплея.";
     }
     else if (button == Key::Memory)
     {
-        Menu::stringForHint = LANG_RU ?
+        Menu::stringForHint =
             "1. При настройке \"ПАМЯТЬ\x99ВНЕШН ЗУ\x99Реж кн ПАМЯТЬ\x99Меню\" открывает меню работы с памятью.\n"
-            "2. При настройке \"ПАМЯТь\x99ВНЕШН ЗУ\x99Реж кн ПАМЯТЬ\x99Сохранение\" сохраняет сигнал на флеш-диск."
-            :
-            "1. When setting \"ПАМЯТЬ-EXT\x99STORAGE\x99Mode btn MEMORY\x99Menu\" opens a menu of memory\n"
-            "2. When setting \"ПАМЯТЬ-EXT\x99STORAGE\x99Mode btn MEMORY\x99Save\" saves the signal to the flash drive";
+            "2. При настройке \"ПАМЯТь\x99ВНЕШН ЗУ\x99Реж кн ПАМЯТЬ\x99Сохранение\" сохраняет сигнал на флеш-диск.";
     }
     else if (button == Key::Measure)
     {
-        Menu::stringForHint = LANG_RU ?
-            "Кнопка ИЗМЕР открывает меню автоматических измерений."
-            :
-            "ИЗМЕР button opens a menu of automatic measurements.";
+        Menu::stringForHint = "Кнопка ИЗМЕР открывает меню автоматических измерений.";
     }
     else if (button == Key::Service)
     {
-        Menu::stringForHint = LANG_RU ?
-            "Кнопка СЕРВИС открывает меню сервисных возможностей."
-            :
-            "СЕРВИС button opens a menu of service options.";
+        Menu::stringForHint = "Кнопка СЕРВИС открывает меню сервисных возможностей.";
     }
     else if (button == Key::Start)
     {
-        Menu::stringForHint = LANG_RU ?
-            "Кнопка ПУСК/СTOП запускает и останавливает процесс сбора информации."
-            :
-            "ПУСК/СTOП button starts and stops the process of gathering information.";
+        Menu::stringForHint = "Кнопка ПУСК/СTOП запускает и останавливает процесс сбора информации.";
     }
     else if (button == Key::ChannelA)
     {
-        Menu::stringForHint = LANG_RU ?
+        Menu::stringForHint =
             "1. Кнопка КАНАЛ1 открывает меню настроек канала 1.\n"
-            "2. Нажатие и удержание кнопки КАНАЛ1 в течение 0.5с устанавливает смещение канала 1 по вертикали 0В."
-            :
-            "1. КАНАЛ1 button opens the settings menu of the channel 1.\n"
-            "2. Pressing and holding the button КАНАЛ1 for 0.5c for the offset of the vertical channel 1 0V.";
+            "2. Нажатие и удержание кнопки КАНАЛ1 в течение 0.5с устанавливает смещение канала 1 по вертикали 0В.";
     }
     else if (button == Key::ChannelB)
     {
-        Menu::stringForHint = LANG_RU ?
+        Menu::stringForHint =
             "1. Кнопка КАНАЛ2 открывает меню настроек канала 2.\n"
-            "2. Нажатие и удержание кнопки КАНАЛ2 в течение 0.5с устанавливает смещение канала 2 по вертикали 0В."
-            :
-            "1. КАНАЛ2 button opens the settings menu of the channel 2.\n"
-            "2. Pressing and holding the button КАНАЛ2 for 0.5c for the offset of the vertical channel 2 0V.";
+            "2. Нажатие и удержание кнопки КАНАЛ2 в течение 0.5с устанавливает смещение канала 2 по вертикали 0В.";
     }
     else if (button == Key::Time)
     {
-        Menu::stringForHint = LANG_RU ?
+        Menu::stringForHint =
             "1. Кнопка РАЗВ открывает меню настроек развертки.\n"
-            "2. Нажатие и удержание кнопки РАЗВ в течение 0.5с устанавливает смещение по горизонтали 0с."
-            :
-            "1. РАЗВ button open the settings menu sweep.\n"
-            "2. Pressing and holding the button РАЗВ for 0.5s Is the offset horizontal 0s.";
+            "2. Нажатие и удержание кнопки РАЗВ в течение 0.5с устанавливает смещение по горизонтали 0с.";
     }
     else if (button == Key::Trig)
     {
-        Menu::stringForHint = LANG_RU ?
+        Menu::stringForHint =
             "1. Кнопка СИНХР открывает меню настроек синхронизации.\n"
             "2. Нажатие и удержание в течение 0.5с кнопки СИНХР при настройке \"СЕРВИС\x99Реж длит СИНХР\x99Автоуровень\" производит автоматическую "
             "настройку уровня синхронизации.\n"
             "3. Нажатие и удержание в течение 0.5с кнопки СИНХР при настройке \"СЕРВИС\x99Реж длит СИНХР\x99Сброс уровня\" устанавливает уровень "
-            "синхронизации 0В."
-            :
-            "1. СИНХР button opens a menu settings synchronization.\n"
-            "2. Pressing and holding the button СИНХР for 0.5s when setting \"SERVICE\x99Mode long TRIG\x99\x41utolevel\" automatically adjust the "
-            "trigger level.\n"
-            "3. Pressing and holding the button СИНХР for 0.5s when setting \"SERVICE\x99Mode long TRIG\x99SReset trig level\" sets the trigger "
-            "level 0V.";
+            "синхронизации 0В.";
     }
     else
     {
@@ -628,26 +588,25 @@ static void DrawHintItem(int x, int y, int width)
         return;
     }
 
-    DEF_STRUCT(StructName, pString) names[Control::Type::Number][2] =
+    DEF_STRUCT(StructName, pString) names[Control::Type::Number] =
     {
-        {"",                ""},                    // Item_None
-        {"",                ""},                    // Control::Type::Choice
-        {"Кнопка",          "Button"},              // Control::Type::Button
-        {"Страница",        "Page"},                // Control::Type::Page
-        {"Регулятор",       "Governor"},            // Control::Type::Governor
-        {"",                ""},                    // Control::Type::Time
-        {"",                ""},                    // Control::Type::GovernorColor
-        {"",                ""},                    // Control::Type::ChoiceReg
-        {"Кнопка",          "Button"},              // Control::Type::DrawButton
-        {"Выбор параметра", "Choice parameter"},    // Control::Type::ChoiceParameter
+        "",                   // Item_None
+        "",                   // Control::Type::Choice
+        "Кнопка",             // Control::Type::Button
+        "Страница",           // Control::Type::Page
+        "Регулятор",          // Control::Type::Governor
+        "",                   // Control::Type::Time
+        "",                   // Control::Type::GovernorColor
+        "",                   // Control::Type::ChoiceReg
+        "Кнопка",             // Control::Type::DrawButton
+        "Выбор параметра"     // Control::Type::ChoiceParameter
     };
 
-    Language::E lang = LANG;
     Page *item = (Page *)Menu::itemHint;
 
     const int SIZE = 100;
     char title[SIZE];
-    std::snprintf(title, SIZE, "%s \"%s\"", names[Menu::itemHint->type][lang].val, item->titleHint[lang]);
+    std::snprintf(title, SIZE, "%s \"%s\"", names[Menu::itemHint->type].val, item->titleHint[0]);
 
     if (item->type == Control::Type::DrawButton)
     {
@@ -656,7 +615,7 @@ static void DrawHintItem(int x, int y, int width)
 
     Text(title).DrawInCenterRectAndBoundIt(x, y, width, 15, Color::BACK, Color::FILL);
 
-    y = Text(item->titleHint[2 + lang]).DrawInBoundedRectWithTransfers(x, y + 15, width, Color::BACK, Color::FILL);
+    y = Text(item->titleHint[1]).DrawInBoundedRectWithTransfers(x, y + 15, width, Color::BACK, Color::FILL);
 
     if (item->type == Control::Type::DrawButton)
     {
@@ -707,16 +666,11 @@ void Menu::Draw()
         //       "To disable this mode, press the button HELP and hold it for 0.5s.",
         //       Color::BACK, Color::FILL);
 
-        Text(
-            LANG_RU ? 
-            "Включён режим подсказок. В этом режиме при нажатии на кнопку на экран выводится информация о её назначении. "
-            "Чтобы выключить этот режим, нажмите кнопку ПОМОЩЬ и удерживайте её в течение 0.5с."
-            :
-            "Mode is activated hints. In this mode, pressing the button displays the information on its purpose. "
-            "To disable this mode, press the button HELP and hold it for 0.5s."
+        Text(   "Включён режим подсказок. В этом режиме при нажатии на кнопку на экран выводится информация о её назначении. "
+                "Чтобы выключить этот режим, нажмите кнопку ПОМОЩЬ и удерживайте её в течение 0.5с."
         ).DrawInBoundedRectWithTransfers(x, y, width, Color::BACK, Color::FILL);
 
-        y += LANG_RU ? 49 : 40;
+        y += 49;
         if (Menu::stringForHint)
         {
             Text(Menu::stringForHint).DrawInBoundedRectWithTransfers(x, y, width, Color::BACK, Color::WHITE);

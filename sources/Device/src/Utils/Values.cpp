@@ -141,17 +141,17 @@ static char *FrequencyToString(float freq, char bufferOut[20]) //-V2506
 
     if (freq >= 1e6F)
     {
-        suffix = LANG_RU ? "ÌÃö" : "MHz";
+        suffix = "ÌÃö";
         freq /= 1e6F;
     }
     else if (freq >= 1e3F)
     {
-        suffix = LANG_RU ? "êÃö" : "kHz";
+        suffix = "êÃö";
         freq /= 1e3F;
     }
     else
     {
-        suffix = LANG_RU ? "Ãö" : "Hz";
+        suffix = "Ãö";
     }
 
     std::sprintf(bufferOut, "%s%s", Float(freq).ToString(false, 4).CString(), suffix);
@@ -164,7 +164,7 @@ char *Frequency::ToStringAccuracy(char bufferOut[20], int numDigits) const //-V2
     float freq = value;
 
     bufferOut[0] = 0;
-    const char *suffix = LANG_RU ? "Ãö" : "Hz";
+    const char *suffix = "Ãö";
 
     if (Math::IsEquals(freq, Float::ERROR))
     {
@@ -174,12 +174,12 @@ char *Frequency::ToStringAccuracy(char bufferOut[20], int numDigits) const //-V2
 
     if (freq >= 1e6F)
     {
-        suffix = LANG_RU ? "ÌÃö" : "MHz";
+        suffix = "ÌÃö";
         freq /= 1e6F;
     }
     else if (freq >= 1e3F)
     {
-        suffix = LANG_RU ? "êÃö" : "kHz";
+        suffix = "êÃö";
         freq /= 1e3F;
     }
     else
@@ -215,10 +215,9 @@ char *TimeToString(float time, bool alwaysSign, char buffer[20]) //-V2506
         return buffer;
     }
 
-    pString suffix[2][4] =
+    pString suffix[4] =
     {
-        {"íñ", "ìêñ", "ìñ", "ñ"},
-        {"ns", "us",  "ms", "s"}
+        "íñ", "ìêñ", "ìñ", "ñ"
     };
 
     static const float factor[4] = { 1e9F, 1e6F, 1e3F, 1.0F };
@@ -244,7 +243,7 @@ char *TimeToString(float time, bool alwaysSign, char buffer[20]) //-V2506
     }
 
     std::strcpy(buffer, Float(time * factor[num]).ToString(alwaysSign, 4).CString()); //-V2513
-    std::strcat(buffer, suffix[LANG][num]); //-V2513
+    std::strcat(buffer, suffix[num]); //-V2513
     return buffer;
 }
 
@@ -254,7 +253,7 @@ char* Time::ToStringAccuracy(bool alwaysSign, char buffer[20], int numDigits) co
     float time = value;
 
     buffer[0] = 0;
-    const char *suffix = LANG_RU ? "ñ" : "s";
+    const char *suffix = "ñ";
 
     float fabsTime = std::fabsf(time);
 
@@ -265,17 +264,17 @@ char* Time::ToStringAccuracy(bool alwaysSign, char buffer[20], int numDigits) co
     }
     else if (fabsTime + 0.5e-10F < 1e-6F)
     {
-        suffix = LANG_RU ? "íñ" : "ns";
+        suffix = "íñ";
         time *= 1e9F;
     }
     else if (fabsTime + 0.5e-7F < 1e-3F)
     {
-        suffix = LANG_RU ? "ìêñ" : "us";
+        suffix = "ìêñ";
         time *= 1e6F;
     }
     else if (fabsTime + 0.5e-3F < 1.0F)
     {
-        suffix = LANG_RU ? "ìñ" : "ms";
+        suffix = "ìñ";
         time *= 1e3F;
     }
     else
@@ -305,10 +304,9 @@ static char* VoltageToString(float voltage, bool alwaysSign, char buffer[20]) //
         return buffer;
     }
 
-    pString suf[2][4] =
+    pString suf[4] =
     {
-        {"\x10ìêÂ", "\x10ìÂ", "\x10Â", "\x10êÂ"},
-        {"\x10uV",  "\x10mV", "\x10V", "\x10kV"}
+        "\x10ìêÂ", "\x10ìÂ", "\x10Â", "\x10êÂ"
     };
 
     static const float factor[4] = { 1e6F, 1e3F, 1.0F, 1e-3F };
@@ -334,7 +332,7 @@ static char* VoltageToString(float voltage, bool alwaysSign, char buffer[20]) //
     }
 
     std::strcpy(buffer, Float(voltage * factor[num]).ToString(alwaysSign, 4).CString()); //-V2513
-    std::strcat(buffer, suf[LANG][num]); //-V2513
+    std::strcat(buffer, suf[num]); //-V2513
     return buffer;
 }
 
@@ -356,10 +354,9 @@ char *Current::ToString(char buffer[50]) const //-V2506
         return buffer;
     }
 
-    pString suf[2][4] =
+    pString suf[4] =
     {
-            { "\x10ìêÀ", "\x10ìÀ", "\x10À", "\x10êÀ" },
-        { "\x10uÀ",  "\x10mÀ", "\x10À", "\x10kÀ"}
+        "\x10ìêÀ", "\x10ìÀ", "\x10À", "\x10êÀ"
     };
 
     static const float factor[4] = { 1e6F, 1e3F, 1.0F, 1e-3F };
@@ -386,7 +383,7 @@ char *Current::ToString(char buffer[50]) const //-V2506
     }
 
     std::strcpy(buffer, Float(current * factor[num]).ToString(true, 4).CString()); //-V2513
-    std::strcat(buffer, suf[LANG][num]); //-V2513
+    std::strcat(buffer, suf[num]); //-V2513
     return buffer;
 }
 

@@ -36,9 +36,7 @@ enum DictWord
 };
 
 
-#define DICT(word)      (dictWords[word][LANG])
-#define DICT_RU(word)   (dictWords[word][0])
-#define DICT_EN(word)   (dictWords[word][1])
+#define DICT(word)      (dictWords[word])
 
 
-extern pString dictWords[DNumWords][2];
+extern pString dictWords[DNumWords];

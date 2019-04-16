@@ -227,9 +227,9 @@ static int DrawMainParameters(int _x, int _y)
 
     if (MODE_WORK == ModeWork::Dir)
     {
-        WriteStringAndNumber(LANG_RU ? "накопл" : "accum", x, y0 - 4, NUM_ACCUM);
-        WriteStringAndNumber(LANG_RU ? "усредн" : "ave", x, y1, NUM_AVE);
-        WriteStringAndNumber(LANG_RU ? "мн\x93мкс" : "mn\x93max", x, y2, NUM_MIN_MAX);
+        WriteStringAndNumber("накопл", x, y0 - 4, NUM_ACCUM);
+        WriteStringAndNumber("усредн", x, y1, NUM_AVE);
+        WriteStringAndNumber("мн\x93мкс", x, y2, NUM_MIN_MAX);
     }
 
     Separator().Draw(x + 43, y0 - 1);
@@ -352,11 +352,11 @@ static void DrawRightPart(int x0, int y0)
     }
 
     // Режим работы
-    static pString strs[][2] =
+    static pString strs[] =
     {
-        {"ИЗМ", "MEAS"},
-        {"ПОСЛ", "LAST"},
-        {"ВНТР", "INT"}
+        "ИЗМ",
+        "ПОСЛ",
+        "ВНТР"
     };
 
     if (MODE_WORK != ModeWork::Dir)
@@ -366,8 +366,8 @@ static void DrawRightPart(int x0, int y0)
         VLine(Grid::Top() - 3).Draw(x, 1, Color::FILL);
 
         x += 2;
-        String(DICT(DMode)).Draw(LANG_RU ? x : x + 3, -1);
-        Text(strs[MODE_WORK][LANG]).DrawInCenterRect(x + 1, 9, 25, 8);
+        String(DICT(DMode)).Draw(x, -1);
+        Text(strs[MODE_WORK]).DrawInCenterRect(x + 1, 9, 25, 8);
     }
     else
     {

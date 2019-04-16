@@ -28,50 +28,45 @@ static struct StructWarning
     Warning             warning;
     bool                good;
     uint8               notUsed[2];
-    const char * const  message[2][3];
+    const char * const  message[3];
 }
 warns[Warning::Number] =
 {
-    {Warning::LimitChan1_Volts, false, NU,           {{"ÏÐÅÄÅË ÊÀÍÀË 1 - ÂÎËÜÒ/ÄÅË"},                                            {"LIMIT CHANNEL 1 - VOLTS/DIV"}}},
-    {Warning::LimitChan2_Volts, false, NU,           {{"ÏÐÅÄÅË ÊÀÍÀË 2 - ÂÎËÜÒ/ÄÅË"},                                            {"LIMIT CHANNEL 2 - VOLTS/DIV"}}},
-    {Warning::LimitSweep_Time, false, NU,            {{"ÏÐÅÄÅË ÐÀÇÂÅÐÒÊÀ - ÂÐÅÌß/ÄÅË"},                                               {"LIMIT SWEEP - TIME/DIV"}}},
-    {Warning::EnabledPeakDet, false, NU,             {{"ÂÊËÞ×ÅÍ ÏÈÊÎÂÛÉ ÄÅÒÅÊÒÎÐ"},                                                       {"ENABLED PEAK. DET."}}},
-    {Warning::LimitChan1_RShift, false, NU,          {{"ÏÐÅÄÅË ÊÀÍÀË 1 - \x0d"},                                                      {"LIMIT CHANNEL 1 - \x0d"}}},
-    {Warning::LimitChan2_RShift, false, NU,          {{"ÏÐÅÄÅË ÊÀÍÀË 2 - \x0d"},                                                      {"LIMIT CHANNEL 2 - \x0d"}}},
-    {Warning::LimitSweep_Level, false, NU,           {{"ÏÐÅÄÅË ÐÀÇÂÅÐÒÊÀ - ÓÐÎÂÅÍÜ"},                                                    {"LIMIT SWEEP - LEVEL"}}},
-    {Warning::LimitSweep_TShift, false, NU,          {{"ÏÐÅÄÅË ÐÀÇÂÅÐÒÊÀ - \x97"},                                                        {"LIMIT SWEEP - \x97"}}},
-    {Warning::TooSmallSweepForPeakDet, false, NU,    {{"ÏÈÊ. ÄÅÒ. ÍÅ ÐÀÁÎÒÀÅÒ ÍÀ ÐÀÇÂÅÐÒÊÀÕ ÌÅÍÅÅ 0.5ìêñ/äåë"},
-                                                                                              {"PEAK. DET. NOT WORK ON SWEETS LESS THAN 0.5us/div"}}},
-    {Warning::TooFastScanForRecorder, false, NU,     {{"ÑÀÌÎÏÈÑÅÖ ÍÅ ÌÎÆÅÒ ÐÀÁÎÒÀÒÜ ÍÀ ÁÛÑÒÐÛÕ ÐÀÇÂ¨ÐÒÊÀÕ"},          {"SELF-RECORDER DOES NOT WORK FAST SCANS"}}},
-    {Warning::FileIsSaved, true, NU,                 {{"ÔÀÉË ÑÎÕÐÀÍÅÍ"},                                                                       {"FILE IS SAVED"}}},
-    {Warning::SignalIsSaved, true, NU,               {{"ÑÈÃÍÀË ÑÎÕÐÀÍÅÍ"},                                                                   {"SIGNAL IS SAVED"}}},
-    {Warning::SignalIsDeleted, true, NU,             {{"ÑÈÃÍÀË ÓÄÀËÅÍ"},                                                                   {"SIGNAL IS DELETED"}}},
-    {Warning::MenuDebugEnabled, true, NU,            {{"ÌÅÍÞ ÎÒËÀÄÊÀ ÂÊËÞ×ÅÍÎ"},                                                       {"MENU DEBUG IS ENABLED"}}},
-    {Warning::TimeNotSet, true, NU,                  {{"ÂÐÅÌß ÍÅ ÓÑÒÀÍÎÂËÅÍÎ. ÌÎÆÅÒÅ ÓÑÒÀÍÎÂÈÒÜ ÅÃÎ ÑÅÉ×ÀÑ"},        {"TIME IS NOT SET. YOU CAN INSTALL IT NOW"}}},
-    {Warning::SignalNotFound, true, NU,              {{"ÑÈÃÍÀË ÍÅ ÍÀÉÄÅÍ"},                                                              {"SIGNAL IS NOT FOUND"}}},
-    {Warning::SetTPosToLeft, true, NU,               {{"ÍÀ ÐÀÇÂÅÐÒÊÀÕ ÌÅÄËÅÍÍÅÅ 10ìñ/äåë ÆÅËÀÒÅËÜÍÎ ÓÑÒÀÍÀÂ-",
-                                          "ËÈÂÀÒÜ \"ÐÀÇÂÅÐÒÊÀ - \x7b\" Â ÏÎËÎÆÅÍÈÅ \"Ëåâî\" ÄËß ÓÑÊÎÐÅ-", "ÍÈß ÂÛÂÎÄÀ ÑÈÃÍÀËÀ"},
-                             {"AT SCANNER SLOWLY 10ms/div DESIRABLY SET \"SCAN - \x7b\" IN", "SWITCH \"Left\" FOR TO ACCELERATE THE OUTPUT SIGNAL"}}},
-    {Warning::NeedRebootDevice, true, NU,            {{"Äëÿ âñòóïëåíèÿ èçìåíåíèé â ñèëó", "âûêëþ÷èòå ïðèáîð"},
-                                                                              {"FOR THE INTRODUCTION OF CHANGES", "IN FORCE SWITCH OFF THE DEVICE"}}},
-    {Warning::ImpossibleEnableMathFunction, true, NU, {{"Îòêëþ÷èòå âû÷èñëåíèå ÁÏÔ"},                                           {"DISCONNECT CALCULATION OF FFT"}}},
-    {Warning::ImpossibleEnableFFT, true, NU,         {{"Îòêëþ÷èòå ìàòåìàòè÷åñêóþ ôóíêöèþ"},                                 {"DISCONNECT MATHEMATICAL FUNCTION"}}},
-    {Warning::WrongFileSystem, false, NU,            {{"Íå ìîãó ïðî÷èòàòü ôëåøêó. Óáåäèòåñü, ÷òî íà íåé FAT32"},
-                                                                                      {"I can not mount a usb flash FDrive:: Make sure to her FAT32"}}},
-    {Warning::WrongModePeackDet, true, NU,           {{"×òîáû èçìåíèòü äëèíó ïàìÿòè, îòêëþ÷èòå ïèêîâûé äåòåêòîð"},
-                                                                                 {"To change the length of the memory, turn off the peak detector"}}},
-    {Warning::DisableChannelB, true, NU,             {{"Ñíà÷àëà âûêëþ÷èòå êàíàë 2"},                                           {"First, turn off the channel 2"}}},
-    {Warning::TooLongMemory, true, NU,               {{"Âòîðîé êàíàë ðàáîàòàåò ïðè äëèíå ïàìÿòè 16ê è ìåíåå"},
-                                                                                     {"The second channel runs at a length of memory 16k and less"}}},
-    {Warning::NoPeakDet32k, true, NU,                {{"Ïèêîâûé äåòåêòîð íå ðàáîòàåò ïðè äëèíå ïàìÿòè 32ê"},
-                                                                                  {"The peak detector does not work when the memory length of 32k"}}},
-    {Warning::NoPeakDet16k, true, NU,                {{"Äëÿ ðàáîòû ïèêîâîãî äåòåêòîðà ïðè äëèíå ïàìÿòè 16ê", "îòêëþ÷èòå êàíàë 2"},
-                                                                         {"For the peak detector with a length of 16k memory", "disable channel 2"}}},
-    {Warning::Warn50Ohms, false, NU,                 {{"Ïðè âåëè÷èíå âõîäíîãî ñîïðîòèâëåíèÿ 50 Îì", "çàïðåùàåòñÿ ïîäàâàòü íà âõîä áîëåå 5 Â"},
-                                                              {"When the input impedance value of 50 ohms", "is prohibited to input more than 5 V"}}},
-    {Warning::WarnNeedForFlashDrive, true, NU,       {{"Ñíà÷àëà ïîäêëþ÷èòå ôëåø-äèñê"},                                        {"First connect the flash drive"}}},
-    {Warning::FirmwareSaved, true, NU,               {{"Ïðîøèâêà ñîõðàíåíà"},                                                                 {"Firmware saved"}}},
-    {Warning::FullyCompletedOTP, false, NU,          {{"Ïàìÿòü OTP ïîëíîñòüþ çàïîëíåíà"},                                         {"OTP memory fully completed"}}}
+    {Warning::LimitChan1_Volts, false, NU,           {"ÏÐÅÄÅË ÊÀÍÀË 1 - ÂÎËÜÒ/ÄÅË"}},
+    {Warning::LimitChan2_Volts, false, NU,           {"ÏÐÅÄÅË ÊÀÍÀË 2 - ÂÎËÜÒ/ÄÅË"}},
+    {Warning::LimitSweep_Time, false, NU,            {"ÏÐÅÄÅË ÐÀÇÂÅÐÒÊÀ - ÂÐÅÌß/ÄÅË"}},
+    {Warning::EnabledPeakDet, false, NU,             {"ÂÊËÞ×ÅÍ ÏÈÊÎÂÛÉ ÄÅÒÅÊÒÎÐ"}},
+    {Warning::LimitChan1_RShift, false, NU,          {"ÏÐÅÄÅË ÊÀÍÀË 1 - \x0d"}},
+    {Warning::LimitChan2_RShift, false, NU,          {"ÏÐÅÄÅË ÊÀÍÀË 2 - \x0d"}},
+    {Warning::LimitSweep_Level, false, NU,           {"ÏÐÅÄÅË ÐÀÇÂÅÐÒÊÀ - ÓÐÎÂÅÍÜ"}},
+    {Warning::LimitSweep_TShift, false, NU,          {"ÏÐÅÄÅË ÐÀÇÂÅÐÒÊÀ - \x97"}},
+    {Warning::TooSmallSweepForPeakDet, false, NU,    {"ÏÈÊ. ÄÅÒ. ÍÅ ÐÀÁÎÒÀÅÒ ÍÀ ÐÀÇÂÅÐÒÊÀÕ ÌÅÍÅÅ 0.5ìêñ/äåë"}},
+    {Warning::TooFastScanForRecorder, false, NU,     {"ÑÀÌÎÏÈÑÅÖ ÍÅ ÌÎÆÅÒ ÐÀÁÎÒÀÒÜ ÍÀ ÁÛÑÒÐÛÕ ÐÀÇÂ¨ÐÒÊÀÕ"}},
+    {Warning::FileIsSaved, true, NU,                 {"ÔÀÉË ÑÎÕÐÀÍÅÍ"}},
+    {Warning::SignalIsSaved, true, NU,               {"ÑÈÃÍÀË ÑÎÕÐÀÍÅÍ"}},
+    {Warning::SignalIsDeleted, true, NU,             {"ÑÈÃÍÀË ÓÄÀËÅÍ"}},
+    {Warning::MenuDebugEnabled, true, NU,            {"ÌÅÍÞ ÎÒËÀÄÊÀ ÂÊËÞ×ÅÍÎ"}},
+    {Warning::TimeNotSet, true, NU,                  {"ÂÐÅÌß ÍÅ ÓÑÒÀÍÎÂËÅÍÎ. ÌÎÆÅÒÅ ÓÑÒÀÍÎÂÈÒÜ ÅÃÎ ÑÅÉ×ÀÑ"}},
+    {Warning::SignalNotFound, true, NU,              {"ÑÈÃÍÀË ÍÅ ÍÀÉÄÅÍ"}},
+    {Warning::SetTPosToLeft, true, NU,               {  "ÍÀ ÐÀÇÂÅÐÒÊÀÕ ÌÅÄËÅÍÍÅÅ 10ìñ/äåë ÆÅËÀÒÅËÜÍÎ ÓÑÒÀÍÀÂ-",
+                                                        "ËÈÂÀÒÜ \"ÐÀÇÂÅÐÒÊÀ - \x7b\" Â ÏÎËÎÆÅÍÈÅ \"Ëåâî\" ÄËß ÓÑÊÎÐÅ-", 
+                                                        "ÍÈß ÂÛÂÎÄÀ ÑÈÃÍÀËÀ"}},
+    {Warning::NeedRebootDevice, true, NU,               {"Äëÿ âñòóïëåíèÿ èçìåíåíèé â ñèëó", 
+                                                         "âûêëþ÷èòå ïðèáîð"}},
+    {Warning::ImpossibleEnableMathFunction, true, NU,   {"Îòêëþ÷èòå âû÷èñëåíèå ÁÏÔ"}},
+    {Warning::ImpossibleEnableFFT, true, NU,            {"Îòêëþ÷èòå ìàòåìàòè÷åñêóþ ôóíêöèþ"}},
+    {Warning::WrongFileSystem, false, NU,               {"Íå ìîãó ïðî÷èòàòü ôëåøêó. Óáåäèòåñü, ÷òî íà íåé FAT32"}},
+    {Warning::WrongModePeackDet, true, NU,              {"×òîáû èçìåíèòü äëèíó ïàìÿòè, îòêëþ÷èòå ïèêîâûé äåòåêòîð"}},
+    {Warning::DisableChannelB, true, NU,                {"Ñíà÷àëà âûêëþ÷èòå êàíàë 2"}},
+    {Warning::TooLongMemory, true, NU,                  {"Âòîðîé êàíàë ðàáîàòàåò ïðè äëèíå ïàìÿòè 16ê è ìåíåå"}},
+    {Warning::NoPeakDet32k, true, NU,                   {"Ïèêîâûé äåòåêòîð íå ðàáîòàåò ïðè äëèíå ïàìÿòè 32ê"}},
+    {Warning::NoPeakDet16k, true, NU,                   {"Äëÿ ðàáîòû ïèêîâîãî äåòåêòîðà ïðè äëèíå ïàìÿòè 16ê", 
+                                                         "îòêëþ÷èòå êàíàë 2"}},
+    {Warning::Warn50Ohms, false, NU,                    {"Ïðè âåëè÷èíå âõîäíîãî ñîïðîòèâëåíèÿ 50 Îì", 
+                                                         "çàïðåùàåòñÿ ïîäàâàòü íà âõîä áîëåå 5 Â"}},
+    {Warning::WarnNeedForFlashDrive, true, NU,          {"Ñíà÷àëà ïîäêëþ÷èòå ôëåø-äèñê"}},
+    {Warning::FirmwareSaved, true, NU,                  {"Ïðîøèâêà ñîõðàíåíà"}},
+    {Warning::FullyCompletedOTP, false, NU,             {"Ïàìÿòü OTP ïîëíîñòüþ çàïîëíåíà"}}
 };
 
 #define NUM_WARNINGS    10
@@ -224,7 +219,7 @@ void Display::ShowWarning(Warning::E warning)
     Color::ResetFlash();
     for (int i = 2; i >= 0; i--)
     {
-        const char *message = warns[warning].message[LANG][i];
+        const char *message = warns[warning].message[i];
         if (message)
         {
             ShowWarn(message);

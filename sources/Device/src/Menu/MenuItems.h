@@ -294,7 +294,7 @@ public:
 struct StructHelpDrawButton
 {
     pFuncVII    funcDrawUGO;    ///< Указатель на функцию отрисовки изображения варианта кнопки
-    pString     helpUGO[2];     ///< Подпись к данному изображению.
+    pString     helpUGO;        ///< Подпись к данному изображению.
 };
 
 

@@ -765,7 +765,7 @@ void SButton::DrawHints(int x, int y, int width)
         Rectangle(WIDTH_SB, WIDTH_SB).Draw(x, y);
         structHelp->funcDrawUGO(x, y);
 
-        int yNew = Text(structHelp->helpUGO[LANG]).DrawInRectWithTransfers(x + 23, y + 1, width - 30, 20);
+        int yNew = Text(structHelp->helpUGO).DrawInRectWithTransfers(x + 23, y + 1, width - 30, 20);
 
         y = ((yNew - y) < 22) ? (y + 22) : yNew;
         structHelp++;

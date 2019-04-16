@@ -9,17 +9,6 @@
  *  @{
  */
 
-struct Language
-{
-    enum E
-    {
-        RU,
-        EN,
-        Size
-    } value;
-    explicit Language(E v) : value(v) {};
-};
-
 struct CalibratorMode
 {
     enum E
@@ -32,10 +21,6 @@ struct CalibratorMode
 };
 
  
-#define LANG                            (set.serv_lang)
-#define LANG_RU                         (LANG == Language::RU)
-#define LANG_EN                         (LANG == Language::EN)
-
 #define RECORDER_MODE                   (set.serv_recorder)
 
 #define TIME_SHOW_LEVELS                (set.disp_timeShowLevels)

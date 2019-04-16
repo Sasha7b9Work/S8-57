@@ -80,48 +80,47 @@ pString Osci::Settings::TBase::ToString() const
     /// Структура для описания диапазона масштаба по времени.
     static const struct StructTBase
     {
-        const char *name[Language::Size];    // Название диапазона в текстовом виде, пригодном для вывода на экран.
-        StructTBase(pString nRU, pString nEN)
+        const char *name;    // Название диапазона в текстовом виде, пригодном для вывода на экран.
+        StructTBase(pString nRU)
         {
-            name[Language::RU] = nRU;
-            name[Language::EN] = nEN;
+            name = nRU;
         };
     }
     tBases[TBase::Size] =
     {
-        StructTBase("2\x10нс",     "2\x10ns"),
-        StructTBase("5\x10нс",     "5\x10ns"),
-        StructTBase("10\x10нс",    "10\x10ns"),
-        StructTBase("20\x10нс",    "20\x10ns"),
-        StructTBase("50\x10нс",    "50\x10ns"),
-        StructTBase("0.1\x10мкс",  "0.1\x10us"),
-        StructTBase("0.2\x10мкс",  "0.2\x10us"),
-        StructTBase("0.5\x10мкс",  "0.5\x10us"),
-        StructTBase("1\x10мкс",    "1\x10us"),
-        StructTBase("2\x10мкс",    "2\x10us"),
-        StructTBase("5\x10мкс",    "5\x10us"),
-        StructTBase("10\x10мкс",   "10\x10us"),
-        StructTBase("20\x10мкс",   "20\x10us"),
-        StructTBase("50\x10мкс",   "50\x10us"),
-        StructTBase("0.1\x10мс",   "0.1\x10ms"),
-        StructTBase("0.2\x10мс",   "0.2\x10ms"),
-        StructTBase("0.5\x10мс",   "0.5\x10ms"),
-        StructTBase("1\x10мс",     "1\x10ms"),
-        StructTBase("2\x10мс",     "2\x10ms"),
-        StructTBase("5\x10мс",     "5\x10ms"),
-        StructTBase("10\x10мс",    "10\x10ms"),
-        StructTBase("20\x10мс",    "20\x10ms"),
-        StructTBase("50\x10мс",    "50\x10ms"),
-        StructTBase("0.1\x10с",    "0.1\x10s"),
-        StructTBase("0.2\x10с",    "0.2\x10s"),
-        StructTBase("0.5\x10с",    "0.5\x10s"),
-        StructTBase("1\x10с",      "1\x10s"),
-        StructTBase("2\x10с",      "2\x10s"),
-        StructTBase("5\x10с",      "5\x10s"),
-        StructTBase("10\x10с",     "10\x10s")
+        StructTBase("2\x10нс"),
+        StructTBase("5\x10нс"),
+        StructTBase("10\x10нс"),
+        StructTBase("20\x10нс"),
+        StructTBase("50\x10нс"),
+        StructTBase("0.1\x10мкс"),
+        StructTBase("0.2\x10мкс"),
+        StructTBase("0.5\x10мкс"),
+        StructTBase("1\x10мкс"),
+        StructTBase("2\x10мкс"),
+        StructTBase("5\x10мкс"),
+        StructTBase("10\x10мкс"),
+        StructTBase("20\x10мкс"),
+        StructTBase("50\x10мкс"),
+        StructTBase("0.1\x10мс"),
+        StructTBase("0.2\x10мс"),
+        StructTBase("0.5\x10мс"),
+        StructTBase("1\x10мс"),
+        StructTBase("2\x10мс"),
+        StructTBase("5\x10мс"),
+        StructTBase("10\x10мс"),
+        StructTBase("20\x10мс"),
+        StructTBase("50\x10мс"),
+        StructTBase("0.1\x10с"),
+        StructTBase("0.2\x10с"),
+        StructTBase("0.5\x10с"),
+        StructTBase("1\x10с"),
+        StructTBase("2\x10с"),
+        StructTBase("5\x10с"),
+        StructTBase("10\x10с")
     };
 
-    return tBases[value].name[LANG];
+    return tBases[value].name;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

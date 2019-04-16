@@ -18,7 +18,6 @@
 #endif
 
 #define MODEL_RU "Осциллограф-мультиметр"
-#define MODEL_EN "Oscilloscope-multimeter"
 #define NUM_VER "0.0.1"
 
 

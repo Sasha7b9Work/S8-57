@@ -12,28 +12,28 @@ pString Tester::Settings::Scale::ToString() const // -V2506
         return Osci::Settings::Range((Osci::Settings::Range::E)value).ToString(Divider::_1);
     }
 
-    static const pString names[][Language::Size] =
+    static const pString names[] =
     {
-        "2לךְ",     "2uA",
-        "5לךְ",     "5uְ",
-        "10לךְ",    "10uְ",
-        "20לךְ",    "20uְ",
-        "50לךְ",    "50uְ",
-        "100לךְ",   "100uְ",
-        "200לךְ",   "200uְ",
-        "500לךְ",   "500uְ",
-        "1לְ",      "1mְ",
-        "2לְ",      "2mְ",
-        "5לְ",      "5mְ",
-        "10לְ",     "10mְ",
-        "20לְ",     "20mְ"
+        "2לךְ",
+        "5לךְ",
+        "10לךְ",
+        "20לךְ",
+        "50לךְ",
+        "100לךְ",
+        "200לךְ",
+        "500לךְ",
+        "1לְ",
+        "2לְ",
+        "5לְ",
+        "10לְ",
+        "20לְ"
     };
 
-    pString name = names[value][LANG];
+    pString name = names[value];
 
     if (name)
     {
-        return names[value][LANG];
+        return names[value];
     }
     else
     {

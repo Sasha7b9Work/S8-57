@@ -164,7 +164,7 @@
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>&lt;1&gt;.\src\Multimeter\Multimeter_Display.cpp</Filename>
+          <Filename>.\src\Multimeter\Multimeter_Display.cpp</Filename>
           <ExecCommand></ExecCommand>
           <Expression>\\S8_57\src/Multimeter/Multimeter_Display.cpp\76</Expression>
         </Bp>
@@ -750,7 +750,7 @@
 
   <Group>
     <GroupName>Display/Font</GroupName>
-    <tvExp>1</tvExp>
+    <tvExp>0</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>

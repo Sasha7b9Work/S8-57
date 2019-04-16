@@ -26,7 +26,7 @@ static void DrawPageContent()
 {
     int y = 50;
 
-    Text(currentPage->titleHint[LANG]).DrawInCenterRect(0, y, WIDTH, 10);
+    Text(currentPage->Title()).DrawInCenterRect(0, y, WIDTH, 10);
 
     int numPage = 0;
 
@@ -35,7 +35,7 @@ static void DrawPageContent()
     while(currentPage->pages[numPage])
     {
         Page *page = (Page *)currentPage->pages[numPage];
-        const char *title = page->titleHint[LANG];
+        const char *title = page->Title().CString();
         if(currentParagraph == numPage)
         {
             Text(title).DrawInCenterRectOnBackground(0, y, WIDTH, 10, Color::BACK, 2, Color::FILL);
@@ -52,8 +52,8 @@ static void DrawPageContent()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void DrawPageDescription()
 {
-    Text(currentPage->titleHint[LANG]).DrawInCenterRect(0, 3, WIDTH, 10);
-    Text(currentPage->titleHint[2 + LANG]).DrawInRectWithTransfers(2, 15, WIDTH - 5, 240);
+    Text(currentPage->Title()).DrawInCenterRect(0, 3, WIDTH, 10);
+    Text(currentPage->Hint()).DrawInRectWithTransfers(2, 15, WIDTH - 5, 240);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

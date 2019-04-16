@@ -12,31 +12,30 @@ using namespace Osci::Settings::Memory;
 // Массив структур описаний масштабов по напряжению.
 static const struct RangeStruct
 {
-    pString nameRU;     // Название диапазона в текстовом виде, пригодном для вывода на экран.
-    pString nameEN;
-    RangeStruct(pString nRU, pString nEN) : nameRU(nRU), nameEN(nEN) {};
+    pString name;     // Название диапазона в текстовом виде, пригодном для вывода на экран.
+    RangeStruct(pString nRU) : name(nRU) {};
 }
 ranges[Range::Size][2] =
 {
-    {RangeStruct("2\x10мВ",  "2\x10мV"),  RangeStruct("20\x10мВ", "20\x10мV")},
-    {RangeStruct("5\x10мВ",  "5\x10mV"),  RangeStruct("50\x10мВ", "50\x10mV")},
-    {RangeStruct("10\x10мВ", "10\x10mV"), RangeStruct("0.1\x10В", "0.1\x10V")},
-    {RangeStruct("20\x10мВ", "20\x10mV"), RangeStruct("0.2\x10В", "0.2\x10V")},
-    {RangeStruct("50\x10мВ", "50\x10mV"), RangeStruct("0.5\x10В", "0.5\x10V")},
-    {RangeStruct("0.1\x10В", "0.1\x10V"), RangeStruct("1\x10В",   "1\x10V")},
-    {RangeStruct("0.2\x10В", "0.2\x10V"), RangeStruct("2\x10В",   "2\x10V")},
-    {RangeStruct("0.5\x10В", "0.5\x10V"), RangeStruct("5\x10В",   "5\x10V")},
-    {RangeStruct("1\x10В",   "1\x10V"),   RangeStruct("10\x10В",  "10\x10V")},
-    {RangeStruct("2\x10В",   "2\x10V"),   RangeStruct("20\x10В",  "20\x10V")},
-    {RangeStruct("5\x10В",   "5\x10V"),   RangeStruct("50\x10В",  "50\x10V")},
-    {RangeStruct("10\x10В",  "10\x10V"),  RangeStruct("100\x10В", "100\x10V")},
-    {RangeStruct("20\x10В",  "20\x10V"),  RangeStruct("200\x10В", "200\x10V")}
+    {RangeStruct("2\x10мВ"),  RangeStruct("20\x10мВ")},
+    {RangeStruct("5\x10мВ"),  RangeStruct("50\x10мВ")},
+    {RangeStruct("10\x10мВ"), RangeStruct("0.1\x10В")},
+    {RangeStruct("20\x10мВ"), RangeStruct("0.2\x10В")},
+    {RangeStruct("50\x10мВ"), RangeStruct("0.5\x10В")},
+    {RangeStruct("0.1\x10В"), RangeStruct("1\x10В")},
+    {RangeStruct("0.2\x10В"), RangeStruct("2\x10В")},
+    {RangeStruct("0.5\x10В"), RangeStruct("5\x10В")},
+    {RangeStruct("1\x10В"),   RangeStruct("10\x10В")},
+    {RangeStruct("2\x10В"),   RangeStruct("20\x10В")},
+    {RangeStruct("5\x10В"),   RangeStruct("50\x10В")},
+    {RangeStruct("10\x10В"),  RangeStruct("100\x10В")},
+    {RangeStruct("20\x10В"),  RangeStruct("200\x10В")}
 };
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 pString Range::ToString(int8 _divider)
 {
-    return (LANG_RU) ? ranges[value][_divider].nameRU : ranges[value][_divider].nameEN;
+    return ranges[value][_divider].name;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -63,11 +62,11 @@ int Chan::RequestBytes(DataSettings *) const
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 pString Chan::Name() const
 {
-    static pString names[Chan::Size][2] =
+    static pString names[Chan::Size] =
     {
-        "Канал 1", "Channel 1",
-        "Канал 2", "Channel 2"
+        "Канал 1",
+        "Канал 2"
     };
 
-    return names[value][LANG];
+    return names[value];
 }

@@ -124,7 +124,7 @@ const Settings Settings::defaultSettings =
 
     // Ìåíþ ÑÅÐÂÈÑ
 
-    Language::RU,                       // serv_lang
+    0,                                  // notUsed
     Color::Scheme::WhiteLetters,        // serv_colorScheme
     false,                              // serv_recorder
     CalibratorMode::Freq,               // serv_calibratorMode
