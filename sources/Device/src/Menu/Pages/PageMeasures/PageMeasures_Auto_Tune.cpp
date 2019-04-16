@@ -33,9 +33,8 @@ static void Draw_Tune_Markers(int x, int y)
 }
 
 DEF_SMALL_BUTTON( bTune_Markers,                                                                                                                     //--- ИЗМЕРЕНИЯ - НАСТРОИТЬ - Маркер ---
-    "Маркер", "Marker",
+    "Маркер",
     "Позволяет установить маркеры для визуального контроля измерений",
-    "Allows to establish markers for visual control of measurements",
     pageTune, FuncActive, Measure::ShortPressOnSmallButonMarker, Draw_Tune_Markers
 )
 
@@ -50,9 +49,8 @@ static void Draw_Tune_Settings(int x, int y)
 }
 
 DEF_SMALL_BUTTON( bTune_Settings,                                                                                                                 //--- ИЗМЕРЕНИЯ - НАСТРОИТЬ - Настройка ---
-    "Настройка", "Setup",
+    "Настройка",
     "Позволяет выбрать необходимые измерения",
-    "Allows to choose necessary measurements",
     pageTune, FuncActive, Measurements::PageChoice::ChangeState, Draw_Tune_Settings
 )
 
@@ -70,9 +68,8 @@ static bool HandlerKey_Tune(KeyEvent event)
 }
 
 DEF_PAGE_2( pageTune, // -V641 // -V1027
-    "НАСТРОИТЬ", "CONFIGURE",
+    "НАСТРОИТЬ",
     "Переход в режим точной настройки количества и видов измерений",
-    "Transition to the fine tuning mode of the number and types of measurements",
     &bTune_Markers,
     &bTune_Settings,
     Page::Name::Measures_Auto_Tune, PageMeasures::PageAuto::pointer, IsActive_Tune, FuncPressPage, FuncDrawPage, HandlerKey_Tune

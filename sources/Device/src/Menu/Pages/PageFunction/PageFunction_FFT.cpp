@@ -13,44 +13,40 @@ extern const PageBase pppFFT_Cursors;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 DEF_CHOICE_2( cFFT_View,                                                                                                                             //--- ФУНКЦИЯ - СПЕКТР - Отображение ---
-    "Отображение", "Display",
+    "Отображение",
     "Включает и выключает отображение спектра",
-    "Enables or disables the display of the spectrum",
-    DISABLE_RU, DISABLE_EN,
-    ENABLE_RU, ENABLE_EN,
+    DISABLE_RU,
+    ENABLE_RU,
     FFT_ENABLED, ppFFT, FuncActive, Choice::EmptyChange, Choice::EmptyDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 DEF_CHOICE_2( cFFT_Scale,                                                                                                                                  //--- ФУНКЦИЯ - СПЕКТР - Шкала ---
-    "Шкала", "Scale",
+    "Шкала",
     "Задаёт масштаб вывода спектра - линейный или логарифмический",
-    "Sets the scale of the output spectrum - linear or logarithmic",
-    "Логарифм", "Log",
-    "Линейная", "Linear",
+    "Логарифм",
+    "Линейная",
     SCALE_FFT, ppFFT, FuncActive, Choice::EmptyChange, Choice::EmptyDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 DEF_CHOICE_3( cFFT_Source,                                                                                                                              //--- ФУНКЦИЯ - СПЕКТР - Источник ---
-    "Источник", "Source",
+    "Источник",
     "Выбор источника для расчёта спектра",
-    "Selecting the source for the calculation of the spectrum",
-    "Канал 1", "Chan 1",
-    "Канал 2", "Chan 2",
-    "Канал 1 + 2", "Chan 1 + 2",
+    "Канал 1",
+    "Канал 2",
+    "Канал 1 + 2",
     SOURCE_FFT, ppFFT, FuncActive, Choice::EmptyChange, Choice::EmptyDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 DEF_CHOICE_4( cFFT_Window,                                                                                                                                  //--- ФУНКЦИЯ - СПЕКТР - Окно ---
-    "Окно", "Window",
+    "Окно",
     "Задаёт окно для расчёта спектра",
-    "Sets the window to calculate the spectrum",
-    "Прямоугольн", "Rectangle",
-    "Хэмминга", "Hamming",
-    "Блэкмена", "Blackman",
-    "Ханна", "Hann",
+    "Прямоугольн",
+    "Хэмминга",
+    "Блэкмена",
+    "Ханна",
     WINDOW_FFT, ppFFT, FuncActive, Choice::EmptyChange, Choice::EmptyDraw
 )
 
@@ -61,12 +57,11 @@ static bool IsActive_FFT_Range()
 }
 
 DEF_CHOICE_3( cFFT_Range,                                                                                                                               //--- ФУНКЦИЯ - СПЕКТР - Диапазон ---
-    "Диапазон", "Range",
+    "Диапазон",
     "Здесь можно задать предел наблюдения за мощностью спектра",
-    "Here you can set the limit of monitoring the power spectrum",
-    "-40дБ", "-40dB",
-    "-60дБ", "-60dB",
-    "-80дБ", "-80dB",
+    "-40дБ",
+    "-60дБ",
+    "-80дБ",
     MAX_DB_FFT, ppFFT, IsActive_FFT_Range, Choice::EmptyChange, Choice::EmptyDraw
 )
 
@@ -82,9 +77,8 @@ static void Draw_FFT_Cursors_Source(int x, int y)
 }
 
 DEF_SMALL_BUTTON( bFFT_Cursors_Source,                                                                                                        //--- ФУНКЦИЯ - СПЕКТР - КУРСОРЫ - Источник ---
-    "Источник", "Source",
+    "Источник",
     "Выбор источника для расчёта спектра",
-    "Source choice for calculation of a range",
     pppFFT_Cursors, FuncActive, OnPress_FFT_Cursors_Source, Draw_FFT_Cursors_Source
 )
 
@@ -112,9 +106,8 @@ static bool HandlerKey_FFT_Cursors(KeyEvent event)
 }
 
 DEF_PAGE_1( pppFFT_Cursors, // -V641 // -V1027                                                                                                           //--- ФУНКЦИЯ - СПЕКТР - КУРСОРЫ ---
-    "КУРСОРЫ", "CURSORS",
+    "КУРСОРЫ",
     "Включает курсоры для измерения параметров спектра",
-    "Includes cursors to measure the parameters of the spectrum",
     &bFFT_Cursors_Source,   ///< СЕРВИС - СПЕКТР - КУРСОРЫ - Источник
     Page::Name::SB_Service_FFT_Cursors, &ppFFT, IsActive_FFT_Cursors, FuncPressPage, FuncDrawPage, HandlerKey_FFT_Cursors
 )
@@ -138,9 +131,8 @@ const PageBase *PageFunction::PageFFT::pointer = &ppFFT;
 
 
 DEF_PAGE_6( ppFFT, // -V641 // -V1027                                                                                                                               //--- СЕРВИС - СПЕКТР ---
-    "СПЕКТР", "SPECTRUM",
+    "СПЕКТР",
     "Отображение спектра входного сигнала",
-    "Mapping the input signal spectrum",
     &cFFT_View,         ///< СЕРВИС - СПЕКТР - Отображение
     &cFFT_Scale,        ///< СЕРВИС - СПЕКТР - Шкала
     &cFFT_Source,       ///< СЕРВИС - СПЕКТР - Источник

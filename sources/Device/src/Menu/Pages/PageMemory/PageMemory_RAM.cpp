@@ -39,9 +39,8 @@ static void Draw_Last_Next(int x, int y)
 }
 
 DEF_SMALL_BUTTON( bLast_Next,                                                                                                                        //--- ПАМЯТЬ - ПОСЛЕДНИЕ - Следующий ---
-    "Следующий", "Next",
+    "Следующий",
     "Перейти к следующему сигналу",
-    "Go to the next signal",
     pageRAM, FuncActive, OnPress_Last_Next, Draw_Last_Next
 )
 
@@ -59,9 +58,8 @@ static void Draw_Last_Prev(int x, int y)
 }
 
 DEF_SMALL_BUTTON( bLast_Prev,                                                                                                                       //--- ПАМЯТЬ - ПОСЛЕДНИЕ - Предыдущий ---
-    "Предыдущий", "Previous",
+    "Предыдущий",
     "Перейти к предыдущему сигналу",
-    "Go to the previous signal",
     pageRAM, FuncActive, OnPress_Last_Prev, Draw_Last_Prev
 )
 
@@ -85,9 +83,8 @@ static void Draw_Last_SaveToROM(int x, int y)
 }
 
 DEF_SMALL_BUTTON( bLast_SaveToROM,                                                                                                                    //--- ПАМЯТЬ - ПОСЛЕДНИЕ - Внутр ЗУ ---
-    "Внутр ЗУ", "Internal storage",
+    "Внутр ЗУ",
     "Нажмите эту кнопку, чтобы сохранить сигнал во внутреннем запоминающем устройстве",
-    "Press this button to keep a signal in an internal memory",
     pageRAM, FuncActive, OnPress_Last_SaveToROM, Draw_Last_SaveToROM
 )
 
@@ -109,9 +106,8 @@ static void Draw_Last_SaveToDrive(int x, int y)
 }
 
 DEF_SMALL_BUTTON( bLast_SaveToDrive,                                                                                                                 //--- ПАМЯТЬ - ПОСЛЕДНИЕ - Сохранить ---
-    "Сохранить", "Save",
+    "Сохранить",
     "Кнопка становится доступна при присоединённом внешнем ЗУ. Позволяет сохранить сигнал на внешем ЗУ",
-    "Click this button to save the signal on the external FLASH",
     pageRAM, FuncActive, OnPress_Last_SaveToDrive, Draw_Last_SaveToDrive
 )
 
@@ -166,9 +162,8 @@ static bool HandlerKey_RAM(KeyEvent /*event*/)
 }
 
 DEF_PAGE_2( pageRAM, // -V641 // -V1027                                                                                                                          //--- ПАМЯТЬ - ПОСЛЕДНИЕ ---
-    "ПОСЛЕДНИЕ", "LATEST",
+    "ПОСЛЕДНИЕ",
     "Переход в режим работы с последними полученными сигналами",
-    "Transition to an operating mode with the last received signals",
     &bLast_Next,                        ///< ПАМЯТЬ - ПОСЛЕДНИЕ - Следующий
     &bLast_Prev,                        ///< ПАМЯТЬ - ПОСЛЕДНИЕ - Предыдущий
     //&bLast_SaveToROM,                   ///< ПАМЯТЬ - ПОСЛЕДНИЕ - Внутр ЗУ

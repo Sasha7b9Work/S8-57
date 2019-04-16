@@ -21,19 +21,13 @@ extern const PageBase pChanB;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-static const char chanInputRu[] =   "1. \"Вкл\" - выводить сигнал на экран.\n"
-                                    "2. \"Откл\" - не выводить сигнал на экран.";
-static const char chanInputEn[] =   "1. \"Enable\" - signal output to the screen.\n"
-                                    "2. \"Disable\" - no output to the screen.";
+static const char chanInput[] =   "1. \"Вкл\" - выводить сигнал на экран.\n"
+                                  "2. \"Откл\" - не выводить сигнал на экран.";
 
-static const char chanCoupleRu[] =  "Задаёт вид связи с источником сигнала.\n"
-                                    "1. \"Пост\" - открытый вход.\n"
-                                    "2. \"Перем\" - закрытый вход.\n"
-                                    "3. \"Земля\" - вход соединён с землёй.";
-static const char chanCoupleEn[] =  "Sets a type of communication with a signal source.\n"
-                                    "1. \"AC\" - open input.\n"
-                                    "2. \"DC\" - closed input.\n"
-                                    "3. \"Ground\" - input is connected to the ground.";
+static const char chanCouple[] =  "Задаёт вид связи с источником сигнала.\n"
+                                  "1. \"Пост\" - открытый вход.\n"
+                                  "2. \"Перем\" - закрытый вход.\n"
+                                  "3. \"Земля\" - вход соединён с землёй.";
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void PageChannelA::OnChanged_Input(bool)
@@ -42,11 +36,10 @@ void PageChannelA::OnChanged_Input(bool)
 }
 
 DEF_CHOICE_2( cInputA,                                                                                                                                               //--- КАНАЛ 1 - Вход ---
-    "Вход", "Input",
-    chanInputRu,
-    chanInputEn,
-    DISABLE_RU, DISABLE_EN,
-    ENABLE_RU, ENABLE_EN,
+    "Вход",
+    chanInput,
+    DISABLE_RU,
+    ENABLE_RU,
     SET_ENABLED_A, pChanA, FuncActive, PageChannelA::OnChanged_Input, Choice::EmptyDraw
 )
 
@@ -57,12 +50,11 @@ void PageChannelA::OnChanged_Couple(bool)
 }
 
 DEF_CHOICE_3( cCoupleA,                                                                                                                                             //--- КАНАЛ 1 - Связь ---
-    "Связь", "Couple",
-    chanCoupleRu,
-    chanCoupleEn,
-    "Пост",  "AC",
-    "Перем", "DC",
-    "Земля", "Ground",
+    "Связь",
+    chanCouple,
+    "Пост",
+    "Перем",
+    "Земля",
     SET_COUPLE_A, pChanA, FuncActive, PageChannelA::OnChanged_Couple, Choice::EmptyDraw
 )
 
@@ -73,11 +65,10 @@ static void OnChanged_ChanA_Bandwidth(bool)
 }
 
 DEF_CHOICE_2( cBandwidthA,                                                                                                                                         //--- КАНАЛ 1 - Полоса ---
-    "Полоса", "Bandwidth",
+    "Полоса",
     "Задаёт полосу пропускания канала",
-    "Sets the channel bandwidth",
-    "Полная", "Full",
-    "20МГц",  "20MHz",
+    "Полная",
+    "20МГц",
     SET_BANDWIDTH_A, pChanA, Choice::EmptyActive, OnChanged_ChanA_Bandwidth, Choice::EmptyDraw
 )
 
@@ -106,19 +97,17 @@ static void OnPress_BalanceA()
 }
 
 DEF_BUTTON( bBalanceA,                                                                                                                                      //--- КАНАЛ 1 - Балансировать ---
-    "Балансировка", "Balance",
-    "",
+    "Балансировка",
     "",
     pChanA, Button::EmptyActive, OnPress_BalanceA, Button::EmptyDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 DEF_CHOICE_2(cDividerA,
-    "Делитель", "Divider",
+    "Делитель",
     "",
-    "",
-    "1X", "1X",
-    "10X", "10X",
+    "1X",
+    "10X",
     divider[0], pChanA, Choice::EmptyActive, Choice::EmptyChange, Choice::EmptyDraw
 )
 
@@ -127,9 +116,8 @@ DEF_CHOICE_2(cDividerA,
 const PageBase *PageChannelA::pointer = &pChanA;
 
 DEF_PAGE_5( pChanA, // -V641 // -V1027                                                                                                                                      //--- КАНАЛ 1 ---
-    "КАНАЛ 1", "CHANNEL 1",
+    "КАНАЛ 1",
     "Содержит настройки канала 1.",
-    "Contains settings of the channel 1.",
     &cInputA,           ///< КАНАЛ 1 - Вход
     &cCoupleA,          ///< КАНАЛ 1 - Связь
     &cBandwidthA,       ///< КАНАЛ 1 - Полоса
@@ -149,11 +137,10 @@ void PageChannelB::OnChanged_Input(bool active)
 }
 
 DEF_CHOICE_2( cInputB,                                                                                                                                               //--- КАНАЛ 2 - Вход ---
-    "Вход", "Input",
-    chanInputRu,
-    chanInputEn,
-    DISABLE_RU, DISABLE_EN,
-    ENABLE_RU,  ENABLE_EN,
+    "Вход",
+    chanInput,
+    DISABLE_RU,
+    ENABLE_RU,
     SET_ENABLED_B, pChanB, FuncActive, PageChannelB::OnChanged_Input, Choice::EmptyDraw
 )
 
@@ -164,12 +151,11 @@ void PageChannelB::OnChanged_Couple(bool)
 }
 
 DEF_CHOICE_3( cCoupleB,                                                                                                                                             //--- КАНАЛ 2 - Связь ---
-    "Связь", "Couple",
-    chanCoupleRu,
-    chanCoupleEn,
-    "Пост",  "DC",
-    "Перем", "AC",
-    "Земля", "Ground",
+    "Связь",
+    chanCouple,
+    "Пост",
+    "Перем",
+    "Земля",
     SET_COUPLE_B, pChanB, FuncActive, PageChannelB::OnChanged_Couple, Choice::EmptyDraw
 )
 
@@ -180,11 +166,10 @@ static void OnChanged_BandwidthB(bool)
 }
 
 DEF_CHOICE_2( cBandwidthB,                                                                                                                                         //--- КАНАЛ 2 - Полоса ---
-    "Полоса", "Bandwidth",
+    "Полоса",
     "",
-    "",
-    "Полная", "Full",
-    "20МГц", "20MHz",
+    "Полная",
+    "20МГц",
     SET_BANDWIDTH_B, pChanB, Choice::EmptyActive, OnChanged_BandwidthB, Choice::EmptyDraw
 )
 
@@ -195,19 +180,17 @@ static void OnPress_BalanceB()
 }
 
 DEF_BUTTON( bBalanceB,                                                                                                                                       //--- КАНАЛ 2 - Балансировка ---
-    "Балансировка", "Balance",
-    "",
+    "Балансировка",
     "",
     pChanB, Button::EmptyActive, OnPress_BalanceB, Button::EmptyDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 DEF_CHOICE_2( cDividerB,
-    "Делитель", "Divider",
+    "Делитель",
     "",
-    "",
-    "1X",  "1X",
-    "10X", "10X",
+    "1X",
+    "10X",
     divider[1], pChanB, Choice::EmptyActive, Choice::EmptyChange, Choice::EmptyDraw
 )
 
@@ -215,9 +198,8 @@ DEF_CHOICE_2( cDividerB,
 const PageBase *PageChannelB::pointer = &pChanB;
 
 DEF_PAGE_5( pChanB, // -V641 // -V1027                                                                                                                                      //--- КАНАЛ 2 ---
-    "КАНАЛ 2", "CHANNEL 2",
+    "КАНАЛ 2",
     "Содержит настройки канала 2.",
-    "Contains settings of the channel 2.",
     &cInputB,           ///< КАНАЛ 2 - Вход
     &cCoupleB,          ///< КАНАЛ 2 - Связь
     &cBandwidthB,       ///< КАНАЛ 2 - Полоса

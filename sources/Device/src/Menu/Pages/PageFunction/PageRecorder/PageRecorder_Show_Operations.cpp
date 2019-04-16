@@ -13,8 +13,7 @@ static void OnPress_Rename()
 }
 
 DEF_BUTTON( bRename,                                                                                                    //--- ФУНКЦИЯ - РЕГИСТРАТОР - ПРОСМОТР - ОПЕРАЦИИ - Переименовать ---
-    "Переименовать", "Rename",
-    "",
+    "Переименовать",
     "",
     pageOperations, FuncActive, OnPress_Rename, Button::EmptyDraw
 )
@@ -26,8 +25,7 @@ static void OnPress_Copy()
 }
 
 DEF_BUTTON( bCopy,                                                                                                         //--- ФУНКЦИЯ - РЕГИСТРАТОР - ПРОСМОТР - ОПЕРАЦИИ - Копировать ---
-    "Копировать", "Copy",
-    "",
+    "Копировать",
     "",
     pageOperations, FuncActive, OnPress_Copy, Button::EmptyDraw
 )
@@ -39,8 +37,7 @@ static void OnPress_Move()
 }
 
 DEF_BUTTON( bMove,                                                                                                        //--- ФУНКЦИЯ - РЕГИСТРАТОР - ПРОСМОТР - ОПЕРАЦИИ - Переместить ---
-    "Переместить", "Move",
-    "",
+    "Переместить",
     "",
     pageOperations, FuncActive, OnPress_Move, Button::EmptyDraw
 )
@@ -52,8 +49,7 @@ static void OnPress_Delete()
 }
 
 DEF_BUTTON( bDelete,                                                                                                          //--- ФУНКЦИЯ - РЕГИСТРАТОР - ПРОСМОТР - ОПЕРАЦИИ - Удалить ---
-    "Удалить", "Delete",
-    "",
+    "Удалить",
     "",
     pageOperations, FuncActive, OnPress_Delete, Button::EmptyDraw
 )
@@ -61,8 +57,7 @@ DEF_BUTTON( bDelete,                                                            
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 DEF_PAGE_4( pageOperations, // -V641 // -V1027                                                                                          //--- ФУНКЦИЯ - РЕГИСТРАТОР - ПРОСМОТР - ОПЕРАЦИИ ---
-    "ОПЕРАЦИИ", "OPERATIONS",
-    "",
+    "ОПЕРАЦИИ",
     "",
     &bRename,   ///< ФУНКЦИЯ - РЕГИСТРАТОР - ПРОСМОТР - ОПЕРАЦИИ - Переименовать
     &bCopy,     ///< ФУНКЦИЯ - РЕГИСТРАТОР - ПРОСМОТР - ОПЕРАЦИИ - Копировать

@@ -45,13 +45,12 @@ void PageMeasures::PageCursors::PageSet::Draw_Set_Channel(int x, int y)
     func[CURS_SOURCE](x, y);
 }
 
-DEF_SMALL_BUTTON_HINTS_2(bSet_Channel,                                                                                                     //--- ИЗМЕРЕНИЯ - КУРСОРЫ - УСТАНОВИТЬ - Канал ---
-    "Канал", "Chan",
+DEF_SMALL_BUTTON_HINTS_2( bSet_Channel,                                                                                                    //--- ИЗМЕРЕНИЯ - КУРСОРЫ - УСТАНОВИТЬ - Канал ---
+    "Канал",
     "Выбор канала для курсорных измерений",
-    "Chan choice for measurements",
     pageSet, FuncActive, PageMeasures::PageCursors::PageSet::OnPress_Set_Channel, PageMeasures::PageCursors::PageSet::Draw_Set_Channel,
-    Draw_Set_ChannelA, {"канал 1", "channel 1"},
-    Draw_Set_ChannelB, {"канал 2", "channel 2"}
+    Draw_Set_ChannelA, "канал 1",
+    Draw_Set_ChannelB, "канал 2"
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -122,16 +121,15 @@ static void Draw_Set_T(int x, int y)
     }
 }
 
-DEF_SMALL_BUTTON_HINTS_5(bSet_T,                                                                                                       //--- ИЗМЕРЕНИЯ - КУРСОРЫ - УСТАНОВИТЬ - Курсоры Т ---
-    "Курсоры T", "Cursors T",
+DEF_SMALL_BUTTON_HINTS_5( bSet_T,                                                                                                      //--- ИЗМЕРЕНИЯ - КУРСОРЫ - УСТАНОВИТЬ - Курсоры Т ---
+    "Курсоры T",
     "Выбор курсоров времени для индикации и управления",
-    "Choice of cursors of time for indication and management",
     pageSet, FuncActive, PageMeasures::PageCursors::PageSet::OnPress_Set_T, Draw_Set_T,
-    Draw_Set_T_disable,     {"курсоры времени выключены",                             "cursors of time are switched off"},
-    Draw_Set_T_disableBoth, {"курсоры времени включены",                              "cursors of time are switched on"},
-    Draw_Set_T_enableLeft,  {"курсоры времени включены, управление левым курсором",   "cursors of time are switched on, control of the left cursor"},
-    Draw_Set_T_enableRight, {"курсоры времени включены, управление правым курсором",  "cursors of time are switched on, control of the right cursor"},
-    Draw_Set_T_enableBoth,  {"курсоры времени включены, управление обоими курсорами", "cursors of time are switched on, control of both cursors"}
+    Draw_Set_T_disable,     "курсоры времени выключены",
+    Draw_Set_T_disableBoth, "курсоры времени включены",
+    Draw_Set_T_enableLeft,  "курсоры времени включены, управление левым курсором",
+    Draw_Set_T_enableRight, "курсоры времени включены, управление правым курсором",
+    Draw_Set_T_enableBoth,  "курсоры времени включены, управление обоими курсорами"
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -203,21 +201,15 @@ static void Draw_Set_U(int x, int y)
 }
 
 // Выбор курсора напряжения - курсор 1, курсор 2, оба курсора или отключены.
-DEF_SMALL_BUTTON_HINTS_5(bSet_U,                                                                                                       //--- ИЗМЕРЕНИЯ - КУРСОРЫ - УСТАНОВИТЬ - Курсоры U ---
-    "Курсоры U", "Cursors U",
+DEF_SMALL_BUTTON_HINTS_5( bSet_U,                                                                                                      //--- ИЗМЕРЕНИЯ - КУРСОРЫ - УСТАНОВИТЬ - Курсоры U ---
+    "Курсоры U",
     "Выбор курсоров напряжения для индикации и управления",
-    "Choice of cursors of voltage for indication and management",
     pageSet, FuncActive, PageMeasures::PageCursors::PageSet::OnPress_Set_U, Draw_Set_U,
-    Draw_Set_U_disable, {"курсоры напряжения выключены",
-                            "cursors of tension are switched off"},
-    Draw_Set_U_disableBoth, {"курсоры напряжения включены",
-                            "cursors of tension are switched on"},
-    Draw_Set_U_enableUpper, {"курсоры напряжения включены, управление верхним курсором",
-                            "cursors of tension are switched on, control of the top cursor"},
-    Draw_Set_U_enableLower, {"курсоры напряжения включены, управление нижним курсором",
-                            "cursors of tension are switched on, control of the lower cursor"},
-    Draw_Set_U_enableBoth, {"курсоры напряжения включены, управление обоими курсорами",
-                            "cursors of tension are switched on, control of both cursors"}
+    Draw_Set_U_disable,     "курсоры напряжения выключены",
+    Draw_Set_U_disableBoth, "курсоры напряжения включены",
+    Draw_Set_U_enableUpper, "курсоры напряжения включены, управление верхним курсором",
+    Draw_Set_U_enableLower, "курсоры напряжения включены, управление нижним курсором",
+    Draw_Set_U_enableBoth,  "курсоры напряжения включены, управление обоими курсорами"
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -234,10 +226,9 @@ static void Draw_Set_100(int x, int y)
 }
 
 // Установка 100 процентов в текущие места курсоров.
-DEF_SMALL_BUTTON(bSet_100,                                                                                                                  //--- ИЗМЕРЕНИЯ - КУРСОРЫ - УСТАНОВИТЬ - 100% ---
-    "100%", "100%",
+DEF_SMALL_BUTTON( bSet_100,                                                                                                                 //--- ИЗМЕРЕНИЯ - КУРСОРЫ - УСТАНОВИТЬ - 100% ---
+    "100%",
     "Используется для процентных измерений. Нажатие помечает расстояние между активными курсорами как 100%",
-    "It is used for percentage measurements. Pressing marks distance between active cursors as 100%",
     pageSet, FuncActive, OnPress_Set_100, Draw_Set_100
 )
 
@@ -271,13 +262,12 @@ static void Draw_Set_Movement(int x, int y)
     }
 }
 
-DEF_SMALL_BUTTON_HINTS_2(bSet_Movement,                                                                                              //--- ИЗМЕРЕНИЯ - КУРСОРЫ - УСТАНОВИТЬ - Перемещение ---
-    "Перемещение", "Movement",
+DEF_SMALL_BUTTON_HINTS_2( bSet_Movement,                                                                                             //--- ИЗМЕРЕНИЯ - КУРСОРЫ - УСТАНОВИТЬ - Перемещение ---
+    "Перемещение",
     "Выбор шага перемещения курсоров - проценты или точки",
-    "Choice of a step of movement of cursors - percent or points",
     pageSet, FuncActive, OnPress_Set_Movement, Draw_Set_Movement,
-    Draw_Set_Movement_Percents, {"шаг перемещения курсоров кратен одному проценту", "the step of movement of cursors is multiple to one percent"},
-    Draw_Set_Movement_Points, {"шаг перемещения курсора кратен одному пикселю",   "the step of movement of the cursor is multiple to one pixel"}
+    Draw_Set_Movement_Percents, "шаг перемещения курсоров кратен одному проценту",
+    Draw_Set_Movement_Points,   "шаг перемещения курсора кратен одному пикселю"
 )
 
 
@@ -340,9 +330,8 @@ bool PageMeasures::PageCursors::PageSet::OnKey(KeyEvent event) //-V2506
 }
 
 DEF_PAGE_4( pageSet, // -V641 // -V1027                                                                                                            //--- ИЗМЕРЕНИЯ - КУРСОРЫ - УСТАНОВИТЬ ---
-    "УСТАНОВИТЬ", "SET",
+    "УСТАНОВИТЬ",
     "Переход в режим курсорных измерений",
-    "Switch to cursor measures",
     &bSet_Channel,          ///< ИЗМЕРЕНИЯ - КУРСОРЫ - УСТАНОВИТЬ - Канал
     &bSet_U,                ///< ИЗМЕРЕНИЯ - КУРСОРЫ - УСТАНОВИТЬ - Курсоры U
     &bSet_T,                ///< ИЗМЕРЕНИЯ - КУРСОРЫ - УСТАНОВИТЬ - Курсоры Т

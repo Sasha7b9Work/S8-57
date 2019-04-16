@@ -66,12 +66,11 @@ static void OnChanged_ADC_Balance_Mode(bool)
 }
 
 DEF_CHOICE_3( cADC_Balance_Mode,                                                                                                                     //--- ОТЛАДКА - АЦП - БАЛАНС - Режим ---
-    "Режим", "Mode",
+    "Режим",
     "",
-    "",
-    DISABLE_RU, DISABLE_EN,
-    "Реальный", "Real",
-    "Ручной",   "Manual",
+    DISABLE_RU,
+    "Реальный",
+    "Ручной",
     NRST_BALANCE_ADC_TYPE, pppADC_Balance, FuncActive, OnChanged_ADC_Balance_Mode, Draw_ADC_Balance_Mode
 )
 
@@ -87,8 +86,7 @@ static void OnChanged_ADC_Balance_ShiftA()
 }
 
 DEF_GOVERNOR( gADC_Balance_ShiftA,                                                                                                              //--- ОТЛАДКА - АЦП - БАЛАНС - Смещение 1 ---
-    "Смещение 1", "Offset 1",
-    "",
+    "Смещение 1",
     "",
     shiftADCA, -125, 125, pppADC_Balance, IsActive_ADC_Balance_ShiftAB, OnChanged_ADC_Balance_ShiftA, FuncBeforeDraw
 )
@@ -100,16 +98,14 @@ static void OnChanged_ADC_Balance_ShiftB()
 }
 
 DEF_GOVERNOR( gADC_Balance_ShiftB,                                                                                                              //--- ОТЛАДКА - АЦП - БАЛАНС - Смещение 2 ---
-    "Смещение 2", "Offset 2",
-    "",
+    "Смещение 2",
     "",
     shiftADCB, -125, 125, pppADC_Balance, IsActive_ADC_Balance_ShiftAB, OnChanged_ADC_Balance_ShiftB, FuncBeforeDraw
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 DEF_PAGE_3( pppADC_Balance, // -V641 // -V1027                                                                                                               //--- ОТЛАДКА - АЦП - БАЛАНС ---
-    "БАЛАНС", "BALANCE",
-    "",
+    "БАЛАНС",
     "",
     &cADC_Balance_Mode,      ///< ОТЛАДКА - АЦП - БАЛАНС - Режим
     &gADC_Balance_ShiftA,    ///< ОТЛАДКА - АЦП - БАЛАНС - Смещение 1
@@ -136,12 +132,11 @@ void PageService::PageDebug::OnChanged_ADC_Stretch_Mode(bool)
 }
 
 DEF_CHOICE_3( cADC_Stretch_Mode,                                                                                                                   //--- ОТЛАДКА - АЦП - РАСТЯЖКА - Режим ---
-    "Режим", "Mode",
+    "Режим",
     "",
-    "",
-    DISABLE_RU, DISABLE_EN,
-    "Реальный", "Real",
-    "Ручной",   "Manual",
+    DISABLE_RU,
+    "Реальный",
+    "Ручной",
     NRST_STRETCH_ADC_TYPE, pppADC_Stretch, FuncActive, PageService::PageDebug::OnChanged_ADC_Stretch_Mode, Choice::EmptyDraw
 )
 
@@ -157,9 +152,8 @@ static void OnChanged_ADC_Stretch_A()
 }
 
 DEF_GOVERNOR( gADC_Stretch_A,                                                                                                                //--- ОТЛАДКА - АЦП - РАСТЯЖКА - Растяжка 1к ---
-    "Растяжка 1к", "Stretch 1ch",
+    "Растяжка 1к",
     "Задаёт ручную растяжку первого канала.\n1 единица = 0.0001",
-    "Sets the manual stretching of the first channel.\n1 = 0.0001",
     stretchA, -10000, 10000, pppADC_Stretch, IsActive_ADC_StretchAB, OnChanged_ADC_Stretch_A, FuncBeforeDraw
 )
 
@@ -170,9 +164,8 @@ static void OnChanged_ADC_Stretch_B()
 }
 
 DEF_GOVERNOR( gADC_Stretch_B,                                                                                                                //--- ОТЛАДКА - АЦП - РАСТЯЖКА - Растяжка 2к ---
-    "Растяжка 2к", "Stretch 2ch",
+    "Растяжка 2к",
     "Задаёт ручную растяжку второго канала.\n1 единица = 0.0001",
-    "Sets the manual stretching of the second channel.\n1 = 0.0001",
     stretchB, -10000, 10000, pppADC_Stretch, IsActive_ADC_StretchAB, OnChanged_ADC_Stretch_B, FuncBeforeDraw
 )
 
@@ -246,9 +239,8 @@ DEF_GOVERNOR(       gADC_Stretch_Bk2V,                                          
 //static const ChoiceBase emptyChoice = {Control::Type::Choice, 0, false, Page::Name::NoPage, 0, FuncActive, {}, 0, 0, 0, 0};
 
 DEF_PAGE_3( pppADC_Stretch, // -V641 // -V1027                                                                                                             //--- ОТЛАДКА - АЦП - РАСТЯЖКА ---
-    "РАСТЯЖКА", "STRETCH",
+    "РАСТЯЖКА",
     "Устанавливает режим и величину растяжки (для ручного режима)",
-    "Sets mode and the value of stretching (manual mode)",
     &cADC_Stretch_Mode,      ///< ОТЛАДКА - АЦП - РАСТЯЖКА - Режим
     &gADC_Stretch_A,         ///< ОТЛАДКА - АЦП - РАСТЯЖКА - Растяжка 1к
     &gADC_Stretch_B,
@@ -270,8 +262,7 @@ static void OnPress_ADC_Shift_Reset()
 }
 
 DEF_BUTTON( bADC_Shift_Reset,                                                                                                                       //-- ОТЛАДКА - АЦП - ДОП СМЕЩ - Сброс ---
-    "Сброс", "Reset",
-    "",
+    "Сброс",
     "",
     pppADC_Shift, FuncActive, OnPress_ADC_Shift_Reset, Button::EmptyDraw
 )
@@ -283,8 +274,7 @@ static void OnChanged_ADC_Shift_A()
 }
 
 DEF_GOVERNOR( gADC_Shift_A2mV, //-V641                                                                                                    //--- ОТЛАДКА - АЦП - ДОП СМЕЩ - См 1к 2мВ пост ---
-    "См 1к 2мВ пост", "Shift 1ch 2mV DC",
-    "",
+    "См 1к 2мВ пост",
     "",
     RSHIFT_ADD_STABLE_A(Range::_2mV), -100, 100, pppADC_Shift, FuncActive, OnChanged_ADC_Shift_A, FuncBeforeDraw
 )
@@ -296,48 +286,42 @@ static void OnChanged_ADC_Shift_B()
 }
 
 DEF_GOVERNOR( gADC_Shift_B2mV,                                                                                                            //--- ОТЛАДКА - АЦП - ДОП СМЕЩ - См 2к 2мВ пост ---
-    "См 2к 2мВ пост", "Shift 2ch 2mV DC",
-    "",
+    "См 2к 2мВ пост",
     "",
     RSHIFT_ADD_STABLE_B(Range::_2mV), -100, 100, pppADC_Shift, FuncActive, OnChanged_ADC_Shift_B, FuncBeforeDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 DEF_GOVERNOR( gADC_Shift_A5mV,                                                                                                            //--- ОТЛАДКА - АЦП - ДОП СМЕЩ - См 1к 5мВ пост ---
-    "См 1к 5мВ пост", "Shift 1ch 5mV DC",
-    "",
+    "См 1к 5мВ пост",
     "",
     RSHIFT_ADD_STABLE_A(Range::_5mV), -100, 100, pppADC_Shift, FuncActive, OnChanged_ADC_Shift_A, FuncBeforeDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 DEF_GOVERNOR( gADC_Shift_B5mV,                                                                                                            //--- ОТЛАДКА - АЦП - ДОП СМЕЩ - См 2к 5мВ пост ---
-    "См 2к 5мВ пост", "Shift 2ch 5mV DC",
-    "",
+    "См 2к 5мВ пост",
     "",
     RSHIFT_ADD_STABLE_B(Range::_5mV), -100, 100, pppADC_Shift, FuncActive, OnChanged_ADC_Shift_B, FuncBeforeDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 DEF_GOVERNOR( gADC_Shift_A10mV,                                                                                                          //--- ОТЛАДКА - АЦП - ДОП СМЕЩ - См 1к 10мВ пост ---
-    "См 1к 10мВ пост", "Shift 1ch 10mV DC",
-    "",
+    "См 1к 10мВ пост",
     "",
     RSHIFT_ADD_STABLE_A(Range::_10mV), -100, 100, pppADC_Shift, FuncActive, OnChanged_ADC_Shift_A, FuncBeforeDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 DEF_GOVERNOR( gADC_Shift_B10mV,                                                                                                          //--- ОТЛАДКА - АЦП - ДОП СМЕЩ - См 2к 10мВ пост ---
-    "См 2к 10мВ пост", "Shift 2ch 10mV DC",
-    "",
+    "См 2к 10мВ пост",
     "",
     RSHIFT_ADD_STABLE_B(Range::_10mV), -100, 100, pppADC_Shift, FuncActive, OnChanged_ADC_Shift_B, FuncBeforeDraw
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 DEF_PAGE_7( pppADC_Shift, // -V641  // -V1027                                                                                                              //--- ОТЛАДКА - АЦП - ДОП СМЕЩ ---
-    "ДОП СМЕЩ", "ADD RSHFIT",
-    "",
+    "ДОП СМЕЩ",
     "",
     &bADC_Shift_Reset,   // ОТЛАДКА - АЦП - ДОП СМЕЩ - Сброс
     &gADC_Shift_A2mV,    // ОТЛАДКА - АЦП - ДОП СМЕЩ - См 1к 2мВ пост
@@ -351,8 +335,7 @@ DEF_PAGE_7( pppADC_Shift, // -V641  // -V1027                                   
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 DEF_PAGE_3( ppADC, // -V641                                                                                                                                           //--- ОТЛАДКА - АЦП ---
-    "АЦП", "ADC",
-    "",
+    "АЦП",
     "",
     &pppADC_Balance, // ОТЛАДКА - АЦП - БАЛАНС
     &pppADC_Stretch, // ОТЛАДКА - АЦП - РАСТЯЖКА
@@ -362,12 +345,11 @@ DEF_PAGE_3( ppADC, // -V641                                                     
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 DEF_CHOICE_2( cStats,                                                                                                                                          //--- ОТЛАДКА - Статистика ---
-    "Статистика", "Statistics",
-    "Показывать/не показывать время/кадр, кадров в секунду, количество сигналов с последними настройками в памяти/количество сохраняемых в памяти "
-    "сигналов",
-    "To show/not to show a time/shot, frames per second, quantity of signals with the last settings in memory/quantity of the signals kept in memory",
-    "Не показывать", "Hide",
-    "Показывать",    "Show",
+    "Статистика",
+    "Показывать/не показывать время/кадр, кадров в секунду, количество сигналов с последними настройками в памяти/количество сохраняемых в памяти сигналов"
+    ,
+    "Не показывать",
+    "Показывать",
     SHOW_STAT, pageDebug, FuncActive, Choice::EmptyChange, Choice::EmptyDraw
 )
 
@@ -378,11 +360,11 @@ void PageService::PageDebug::OnChanged_DisplayOrientation(bool)
 }
 
 DEF_CHOICE_2( cDisplayOrientation,                                                                                                                             //--- ОТЛАДКА - Ориентация ---
-    "Ориентация", "DisplayOrientation",
-    "Устанавливает ориентацию дисплея",
-    "Sets display orientation",
-    "Прямая",   "Direct",
-    "Обратная", "Back",
+    "Ориентация",
+    "Устанавливает ориентацию дисплея"
+    ,
+    "Прямая",
+    "Обратная",
     DISPLAY_ORIENTATION, pageDebug, FuncActive, PageService::PageDebug::OnChanged_DisplayOrientation, Choice::EmptyDraw
 )
 
@@ -395,8 +377,8 @@ static void OnChanged_Pred()
 }
 
 DEF_GOVERNOR( mgPred,                                                                                                                                          //--- ОТЛАДКА - Предзапуск ---
-    "Предзапуск", "",
-    "", "",
+    "Предзапуск",
+    "",
     pred, 0, 15000, pageDebug, FuncActive, OnChanged_Pred, FuncBeforeDraw
 )
 
@@ -409,8 +391,8 @@ static void OnChanged_Post()
 }
 
 DEF_GOVERNOR( mgPost,                                                                                                                                         //--- ОТЛАДКА - Послезапуск ---
-    "Послезапуск", "",
-    "", "",
+    "Послезапуск",
+    "",
     post, 0, 15000, pageDebug, FuncActive, OnChanged_Post, FuncBeforeDraw
 )
 
@@ -503,9 +485,8 @@ static void OnPress_Settings(bool)
 }
 
 DEF_PAGE_SB( ppSettings, // -V641 // -V1027                                                                                                                     //--- ОТЛАДКА - НАСТРОЙКИ ---
-    "НАСТРОЙКИ", "SETTINGS",
+    "НАСТРОЙКИ",
     "Показать информацию о настройках",
-    "Show settings information",
     &bSettings_Exit,            // ОТЛАДКА - НАСТРОЙКИ - Выход
     0,
     0,
@@ -548,9 +529,8 @@ static void OnPress_SaveFirmware()
 }
 
 DEF_BUTTON( bSaveFirmware,                                                                                                                                 //--- ОТЛАДКА - Сохр. прошивку ---
-    "Сохр. прошивку", "Save firmware",
+    "Сохр. прошивку",
     "Сохранение прошивки - секторов 5, 6, 7 общим объёмом 3 х 128 кБ, где хранится программа",
-    "Saving firmware - sectors 5, 6, 7 with a total size of 3 x 128 kB, where the program is stored",
     pageDebug, IsActive_SaveFirmware, OnPress_SaveFirmware, Button::EmptyDraw
 )
 
@@ -580,9 +560,8 @@ static void Draw_SerialNumber_Change(int x, int y)
 }
 
 DEF_SMALL_BUTTON( bSerialNumber_Change,                                                                                                                    //--- ОТЛАДКА - С/Н - Вставить ---
-    "Вставить", "Insert",
+    "Вставить",
     "Вставляет выбраный символ",
-    "Inserts the chosen symbol",
     ppSerialNumber, FuncActive, OnPress_SerialNumber_Change, Draw_SerialNumber_Change
 )
 
@@ -599,9 +578,8 @@ static void Draw_SerialNumber_Save(int x, int y)
 }
 
 DEF_SMALL_BUTTON( bSerialNumber_Save,                                                                                                                     //--- ОТЛАДКА - С/Н - Сохранить ---
-    "Сохранить", "Save",
+    "Сохранить",
     "Записывает серийный номер в OTP",
-    "Records the serial number in OTP",
     ppSerialNumber, FuncActive, OnPress_SerialNumber_Save, Draw_SerialNumber_Save
 )
 
@@ -621,9 +599,8 @@ static bool HandlerKey_SerialNumber(KeyEvent /*event*/)
 }
 
 DEF_PAGE_SB( ppSerialNumber, // -V641 // -V1027                                                                                                                       //--- ОТЛАДКА - С/Н ---
-    "С/Н", "S/N",
+    "С/Н",
     "Запись серийного номера в OTP-память. ВНИМАНИЕ!!! ОТP-память - память с однократной записью.",
-    "Serial number recording in OTP-memory. ATTENTION!!! OTP memory is a one-time programming memory.",
     &bSerialNumber_Exit,            // ОТЛАДКА - С/Н - Выход
     &bSerialNumber_Change,          // ОТЛАДКА - С/Н - Перейти
     0,
@@ -642,16 +619,14 @@ static void OnPress_EraseData()
 }
 
 DEF_BUTTON( bEraseData,                                                                                                                                    //--- ОТЛАДКА - Стереть данные ---
-    "Стереть данне", "Erase data",
+    "Стереть данне",
     "Стирает сохранённые данные из ППЗУ",
-    "Erase all saved datas from EEPROM",
     pageDebug, FuncActive, OnPress_EraseData, Button::EmptyDraw
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 DEF_PAGE_6( pageDebug, // -V641 // -V1027                                                                                                                                   //--- ОТЛАДКА ---
-    "ОТЛАДКА", "DEBUG",
-    "",
+    "ОТЛАДКА",
     "",
     PageService::PageDebug::PageConsole::pointer,   ///< ОТЛАДКА - КОНСОЛЬ
     &ppADC,                                         ///< ОТЛАДКА - АЦП

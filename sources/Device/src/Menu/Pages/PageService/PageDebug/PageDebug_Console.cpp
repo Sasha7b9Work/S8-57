@@ -15,48 +15,44 @@ const PageBase *PageService::PageDebug::PageConsole::pointer = &pageConsole;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 DEF_CHOICE_2( cShow,                                                                                                                                 //--- ОТЛАДКА - КОНСОЛЬ - Показывать ---
-    "Показывать", "Show",
-    "", "",
-    "Нет", "Now",
-    "Да",  "Yes",
+    "Показывать",
+    "",
+    "Нет",
+    "Да",
     set.dbg_showConsole, pageConsole, FuncActive, Choice::EmptyChange, Choice::EmptyDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 DEF_GOVERNOR( gNumStrings,                                                                                                                          //--- ОТЛАДКА - КОНСОЛЬ - Число строк ---
-    "Число строк", "Number strings",
-    "",
+    "Число строк",
     "",
     CONSOLE_NUM_STRINGS, 0, 33, pageConsole, FuncActive, FuncChanged, FuncBeforeDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 DEF_CHOICE_2( cSizeFont,                                                                                                                          //--- ОТЛАДКА - КОНСОЛЬ - Размер шрифта ---
-    "Размер шрифта", "Size font",
+    "Размер шрифта",
     "",
-    "",
-    "5", "5",
-    "8", "8",
+    "5",
+    "8",
     set.dbg_sizeFont, pageConsole, FuncActive, Choice::EmptyChange, Choice::EmptyDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 DEF_CHOICE_2( cModeStop,                                                                                                                          //--- ОТЛАДКА - КОНСОЛЬ - Реж. останова ---
-    "Реж. останова", "Mode stop",
+    "Реж. останова",
     "Предоставляет возможность приостановки вывода в консоль путём нажатия на кнопку ПУСК/СТОП",
-    "It provides the ability to pause the output to the console by pressing the ПУСК/СТОП button",
-    DISABLE_RU, DISABLE_EN,
-    ENABLE_RU, ENABLE_EN,
+    DISABLE_RU,
+    ENABLE_RU,
     MODE_PAUSE_CONSOLE, pageConsole, FuncActive, Choice::EmptyChange, Choice::EmptyDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 DEF_CHOICE_2( cRegisters_ShowAll,                                                                                                     //--- ОТЛАДКА - КОНСОЛЬ - РЕГИСТРЫ - Показывать все ---
-    "Показывать все", "Show all",
+    "Показывать все",
     "Показывать все значения, засылаемые в регистры",
-    "To show all values transferred in registers",
-    "Нет", "No",
-    "Да", "Yes",
+    "Нет",
+    "Да",
     DBG_SHOW_ALL, pageRegisters, FuncActive, Choice::EmptyChange, Choice::EmptyDraw
 )
 
@@ -67,118 +63,106 @@ static bool IsActive_Console_Registers()
 }
 
 DEF_CHOICE_2( cRegisters_RD_FL,                                                                                                                //--- ОТЛАДКА - КОНСОЛЬ - РЕГИСТРЫ - RD_FL ---
-    "RD_FL", "RD_FL",
+    "RD_FL",
     "",
-    "",
-    DISABLE_RU, DISABLE_EN,
-    ENABLE_RU, ENABLE_EN,
+    DISABLE_RU,
+    ENABLE_RU,
     DBG_SHOW_FLAG, pageRegisters, IsActive_Console_Registers, Choice::EmptyChange, Choice::EmptyDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 DEF_CHOICE_2( cRegisters_RShiftA,                                                                                                           //--- ОТЛАДКА - КОНСОЛЬ - РЕГИСТРЫ - U см. 1к ---
-    "U см. 1к", "U shift 1ch",
+    "U см. 1к",
     "",
-    "",
-    DISABLE_RU, DISABLE_EN,
-    ENABLE_RU, ENABLE_EN,
+    DISABLE_RU,
+    ENABLE_RU,
     set.dbg_showRShift[Chan::A], pageRegisters, IsActive_Console_Registers, Choice::EmptyChange, Choice::EmptyDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 DEF_CHOICE_2( cRegisters_RShiftB,                                                                                                           //--- ОТЛАДКА - КОНСОЛЬ - РЕГИСТРЫ - U см. 2к ---
-    "U см. 2к", "U shift 2ch",
+    "U см. 2к",
     "",
-    "",
-    DISABLE_RU, DISABLE_EN,
-    ENABLE_RU, ENABLE_EN,
+    DISABLE_RU,
+    ENABLE_RU,
     set.dbg_showRShift[Chan::B], pageRegisters, IsActive_Console_Registers, Choice::EmptyChange, Choice::EmptyDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 DEF_CHOICE_2( cRegisters_TrigLev,                                                                                                           //--- ОТЛАДКА - КОНСОЛЬ - РЕГИСТРЫ - U синхр. ---
-    "U синхр.", "U trig.",
+    "U синхр.",
     "",
-    "",
-    DISABLE_RU, DISABLE_EN,
-    ENABLE_RU, ENABLE_EN,
+    DISABLE_RU,
+    ENABLE_RU,
     set.dbg_showTrigLev, pageRegisters, IsActive_Console_Registers, Choice::EmptyChange, Choice::EmptyDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 DEF_CHOICE_2( cRegisters_RangeA,                                                                                                         //--- ОТЛАДКА - КОНСОЛЬ - РЕГИСТРЫ - ВОЛЬТ/ДЕЛ 1 ---
-    "ВОЛЬТ/ДЕЛ 1", "Range 1",
+    "ВОЛЬТ/ДЕЛ 1",
     "",
-    "",
-    DISABLE_RU, DISABLE_EN,
-    ENABLE_RU, ENABLE_EN,
+    DISABLE_RU,
+    ENABLE_RU,
     set.dbg_showRange[Chan::A], pageRegisters, IsActive_Console_Registers, Choice::EmptyChange, Choice::EmptyDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 DEF_CHOICE_2( cRegisters_RangeB,                                                                                                         //--- ОТЛАДКА - КОНСОЛЬ - РЕГИСТРЫ - ВОЛЬТ/ДЕЛ 2 ---
-    "ВОЛЬТ/ДЕЛ 2", "Range 2",
+    "ВОЛЬТ/ДЕЛ 2",
     "",
-    "",
-    DISABLE_RU, DISABLE_EN,
-    ENABLE_RU, ENABLE_EN,
+    DISABLE_RU,
+    ENABLE_RU,
     set.dbg_showRange[Chan::B], pageRegisters, IsActive_Console_Registers, Choice::EmptyChange, Choice::EmptyDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 DEF_CHOICE_2( cRegisters_TrigParam,                                                                                                    //--- ОТЛАДКА - КОНСОЛЬ - РЕГИСТРЫ - Парам. синхр. ---
-    "Парам. синхр.", "Trig param",
+    "Парам. синхр.",
     "",
-    "",
-    DISABLE_RU, DISABLE_EN,
-    ENABLE_RU, ENABLE_EN,
+    DISABLE_RU,
+    ENABLE_RU,
     set.dbg_showTrigParam, pageRegisters, IsActive_Console_Registers, Choice::EmptyChange, Choice::EmptyDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 DEF_CHOICE_2( cRegisters_ChanParamA,                                                                                                   //--- ОТЛАДКА - КОНСОЛЬ - РЕГИСТРЫ - Парам. кан. 2 ---
-    "Парам. кан. 1", "Chan 1 param",
+    "Парам. кан. 1",
     "",
-    "",
-    DISABLE_RU, DISABLE_EN,
-    ENABLE_RU, ENABLE_EN,
+    DISABLE_RU,
+    ENABLE_RU,
     set.dbg_showChanParam[Chan::A], pageRegisters, IsActive_Console_Registers, Choice::EmptyChange, Choice::EmptyDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 DEF_CHOICE_2( cRegisters_ChanParamB,                                                                                                   //--- ОТЛАДКА - КОНСОЛЬ - РЕГИСТРЫ - Парам. кан. 2 ---
-    "Парам. кан. 2", "Chan 2 param",
+    "Парам. кан. 2",
     "",
-    "",
-    DISABLE_RU, DISABLE_EN,
-    ENABLE_RU, ENABLE_EN,
+    DISABLE_RU,
+    ENABLE_RU,
     set.dbg_showChanParam[Chan::B], pageRegisters, IsActive_Console_Registers, Choice::EmptyChange, Choice::EmptyDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 DEF_CHOICE_2( cRegisters_TBase,                                                                                                            //--- ОТЛАДКА - КОНСОЛЬ - РЕГИСТРЫ - ВРЕМЯ/ДЕЛ ---
-    "ВРЕМЯ/ДЕЛ", "TBase",
+    "ВРЕМЯ/ДЕЛ",
     "",
-    "",
-    DISABLE_RU, DISABLE_EN,
-    ENABLE_RU, ENABLE_EN,
+    DISABLE_RU,
+    ENABLE_RU,
     set.dbg_showTBase, pageRegisters, IsActive_Console_Registers, Choice::EmptyChange, Choice::EmptyDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 DEF_CHOICE_2( cRegisters_TShift,                                                                                                               //--- ОТЛАДКА - КОНСОЛЬ - РЕГИСТРЫ - Т см. ---
-    "Т см.", "tShift",
+    "Т см.",
     "",
-    "",
-    DISABLE_RU, DISABLE_EN,
-    ENABLE_RU, ENABLE_EN,
+    DISABLE_RU,
+    ENABLE_RU,
     set.dbg_showTShift, pageRegisters, IsActive_Console_Registers, Choice::EmptyChange, Choice::EmptyDraw
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 DEF_PAGE_12( pageRegisters, // -V641                                                                                                                   //--- ОТЛАДКА - КОНСОЛЬ - РЕГИСТРЫ ---
-    "РЕГИСТРЫ", "REGISTERS",
-    "",
+    "РЕГИСТРЫ",
     "",
     &cRegisters_ShowAll,        ///< ОТЛАДКА - КОНСОЛЬ - РЕГИСТРЫ - Показывать все
     &cRegisters_RD_FL,          ///< ОТЛАДКА - КОНСОЛЬ - РЕГИСТРЫ - RD_FL
@@ -202,16 +186,14 @@ static void Draw_Console_SizeSettings(int x, int y)
 }
 
 DEF_BUTTON( bSizeSettings,                                                                                                                      //--- ОТЛАДКА - КОНСОЛЬ - Размер настроек ---
-    "", "",
+    "",
     "Показывает текущий размер структуры для сохранения настроек",
-    "Displays the current size of the structure to save settings",
     pageConsole, FuncActive, FuncPress, Draw_Console_SizeSettings
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 DEF_PAGE_6( pageConsole, // -V641 // -V1027                                                                                                                       //--- ОТЛАДКА - КОНСОЛЬ ---
-    "КОНСОЛЬ", "CONSOLE",
-    "",
+    "КОНСОЛЬ",
     "",
     &cShow,             ///< ОТЛАДКА - КОНСОЛЬ - Показывать
     &gNumStrings,       ///< ОТЛАДКА - КОНСОЛЬ - Число строк

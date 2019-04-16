@@ -54,33 +54,29 @@ static bool HandlerKey_Help(KeyEvent)
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 DEF_SMALL_BUTTON( sbHelpParagraphEnter,                                                                                                                            //--- ПОМОЩЬ - Открыть ---
-    "Открыть",  "Open",
+    "Открыть",
     "Открывает раздел справки",
-    "Opens the section of the reference",
     pHelp, HelpContent_EnterParagraphIsActive, HelpContent_EnterParagraph, DrawSB_Help_ParagraphEnter
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 DEF_SMALL_BUTTON( sbHelpParagraphLeave,                                                                                                                            //--- ПОМОЩЬ - Закрыть ---
-     "Закрыть", "Close",
+     "Закрыть",
      "Закрывает раздел справки",
-     "Closes the section of the reference",
     pHelp, HelpContent_LeaveParagraphIsActive, HelpContent_LeaveParagraph, DrawSB_Help_ParagraphLeave
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 DEF_SMALL_BUTTON( sbHelpParagraphPrev,                                                                                                                   //--- ПОМОЩЬ - Предыдущий раздел ---
-    "Предыдущий раздел", "Previous section",
+    "Предыдущий раздел",
     "Выбрать предыдущий раздел справки",
-    "To choose the previous section of the reference",
     pHelp, FuncActive, HelpContent_PrevParagraph, DrawSB_Help_ParagraphPrev
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 DEF_SMALL_BUTTON( sbHelpParagraphNext,                                                                                                                    //--- ПОМОЩЬ - Следующий раздел ---
-    "Следующий раздел", "Next section",
+    "Следующий раздел",
     "Выбрать следующий раздел справки",
-    "To choose the next section of the reference",
     pHelp, FuncActive, HelpContent_NextParagraph, DrawSB_Help_ParagraphNext
 )
 
@@ -116,9 +112,8 @@ DEF_PAGE_SB(        pHelp,                                                      
 */
 
 DEF_PAGE_4( pHelp, // -V641 // -V1027                                                                                                                                        //--- ПОМОЩЬ ---
-    "ПОМОЩЬ", "HELP",
+    "ПОМОЩЬ",
     "Открыть разделы помощи",
-    "To open sections of the help",
     &sbHelpParagraphEnter,
     &sbHelpParagraphLeave,
     &sbHelpParagraphPrev,

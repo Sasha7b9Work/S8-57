@@ -39,11 +39,10 @@ void PageDisplay::Init()
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 DEF_CHOICE_2( cViewMode,                                                                                                                                      //--- ДИСПЛЕЙ - Отображение ---
-    "Отображ.", "View",
+    "Отображ.",
     "Задаёт режим отображения сигнала.",
-    "Sets the display mode signal.",
-    "Вектор", "Vector",
-    "Точки",  "Points",
+    "Вектор",
+    "Точки",
     MODE_DRAW_SIGNAL, pageDisplay, FuncActive, Choice::EmptyChange, Choice::EmptyDraw
 )
 
@@ -58,101 +57,90 @@ static void OnChanged_MinMax(bool)
 }
 
 DEF_CHOICE_8( cMinMax,                                                                                                                                           //--- ДИСПЛЕЙ - Мин Макс ---
-    "Мин Макс", "Min Max",
+    "Мин Макс",
     "Задаёт количество последних измерений, по которым строятся ограничительные линии, огибающие минимумы и максимумы измерений.",
-    "Sets number of the last measurements on which the limiting lines which are bending around minima and maxima of measurements are under "
-    "construction."
-    ,
-    DISABLE_RU,DISABLE_EN,
-    "2",   "2",
-    "4",   "4",
-    "8",   "8",
-    "16",  "16",
-    "32",  "32",
-    "64",  "64",
-    "128", "128",
+    DISABLE_RU,
+    "2",
+    "4",
+    "8",
+    "16",
+    "32",
+    "64",
+    "128",
     ENUM_MIN_MAX, pageDisplay, IsActive_MinMax, OnChanged_MinMax, Choice::EmptyDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 DEF_CHOICE_10( cSmoothing,                                                                                                                                    //--- ДИСПЛЕЙ - Сглаживание ---
-    "Сглаж.", "Smoothing",
+    "Сглаж.",
     "Устанавливает количество точек для расчёта сглаженного по соседним точкам сигнала.",
-    "Establishes quantity of points for calculation of the signal smoothed on the next points."
-    ,
-    DISABLE_RU, DISABLE_EN,
-    "2 точки",  "2 points",
-    "3 точки",  "3 points",
-    "4 точки",  "4 points",
-    "5 точек",  "5 points",
-    "6 точек",  "6 points",
-    "7 точек",  "7 points",
-    "8 точек",  "8 points",
-    "9 точек",  "9 points",
-    "10 точек", "10 points",
+    DISABLE_RU,
+    "2 точки",
+    "3 точки",
+    "4 точки",
+    "5 точек",
+    "6 точек",
+    "7 точек",
+    "8 точек",
+    "9 точек",
+    "10 точек",
     ENUM_SMOOTHING.value, pageDisplay, FuncActive, Choice::EmptyChange, Choice::EmptyDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 DEF_CHOICE_5( cRefreshFPS,                                                                                                                                 //--- ДИСПЛЕЙ - Частота обновл ---
-    "Частота обновл", "Refresh rate",
+    "Частота обновл",
     "Задаёт максимальное число выводимых в секунду кадров.",
-    "Sets the maximum number of the shots removed in a second.",
-    "25", "25",
-    "10", "10",
-    "5",  "5",
-    "2",  "2",
-    "1",  "1",
+    "25",
+    "10",
+    "5",
+    "2",
+    "1",
     ENUM_SIGNALS_IN_SEC.value, pageDisplay, FuncActive, Choice::EmptyChange, Choice::EmptyDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 DEF_CHOICE_2( cScaleYtype,                                                                                                                                       //--- ДИСПЛЕЙ - Смещение ---
-    "Смещение", "Оffset",
+    "Смещение",
     "Задаёт режим удержания смещения по вертикали\n1. \"Напряжение\" - сохраняется наряжение смещения.\n2. \"Деления\" - сохраняется положение "
     "смещения на экране.",
-    "Sets the mode of retaining the vertical displacement\n1. \"Voltage\" - saved dressing bias.\n2. \"Divisions\" - retained the position of "
-    "the offset on the screen.",
-    "Напряжение", "Voltage",
-    "Деления", "Divisions",
+    "Напряжение",
+    "Деления",
     LINKING_RSHIFT, pageDisplay, FuncActive, Choice::EmptyChange, Choice::EmptyDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 DEF_CHOICE_4( cType, // -V206                                                                                                                                       //--- ДИСПЛЕЙ - Сетка ---
-    "Сетка", "Grid",
+    "Сетка",
     "Выбор типа сетки",
-    "Choice like Grid",
-    "Тип 1", "Type 1",
-    "Тип 2", "Type 2",
-    "Тип 3", "Type 3",
-    "Тип 4", "Type 4",
+    "Тип 1",
+    "Тип 2",
+    "Тип 3",
+    "Тип 4",
     TYPE_GRID, pageDisplay, FuncActive, Choice::EmptyChange, Choice::EmptyDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 DEF_CHOICE_9(cAverage_Num,                                                                                                                        //--- ДИСПЛЕЙ - УСРЕДНЕНИЕ - Количество ---
-    "Усреднение", "Average",
+    "Усреднение",
     "Задаёт количество последних измерений, по которым производится усреднение.",
-    "Sets number of the last measurements on which averaging is made.",
-    DISABLE_RU, DISABLE_EN,
-    "2", "2",
-    "4", "4",
-    "8", "8",
-    "16", "16",
-    "32", "32",
-    "64", "64",
-    "128", "128",
-    "256", "256",
+    DISABLE_RU,
+    "2",
+    "4",
+    "8",
+    "16",
+    "32",
+    "64",
+    "128",
+    "256",
     ENUM_AVE, pageDisplay, FuncActive, Choice::EmptyChange, Choice::EmptyDraw
 )
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 DEF_PAGE_9( pageDisplay, // -V641 // -V1027                                                                                                                                 //--- ДИСПЛЕЙ ---
-    "ДИСПЛЕЙ", "DISPLAY",
+    "ДИСПЛЕЙ",
     "Содержит настройки отображения дисплея.",
-    "Contains settings of display of the display.",
     &cViewMode,                             ///< ДИСПЛЕЙ - Отображение
     PageDisplay::PageAccumulation::pointer, ///< ДИСПЛЕЙ - НАКОПЛЕНИЕ
     &cAverage_Num,                          ///< ДИСПЛЕЙ - Усреднение

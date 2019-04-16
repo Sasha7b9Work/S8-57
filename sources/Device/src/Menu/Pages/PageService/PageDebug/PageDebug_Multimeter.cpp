@@ -17,8 +17,7 @@ static void OnPress_Calibrate0()
 }
 
 DEF_BUTTON( bCalibrate0,
-    "Калибр 0", "Calibrate 0",
-    "",
+    "Калибр 0",
     "",
     pMultimeter, FuncActive, OnPress_Calibrate0, Button::EmptyDraw
 )
@@ -30,8 +29,7 @@ static void OnPress_Calibrate1()
 }
 
 DEF_BUTTON(bCalibrate1,
-    "Калибр 1", "Calibrate 1",
-    "",
+    "Калибр 1",
     "",
     pMultimeter, FuncActive, OnPress_Calibrate1, Button::EmptyDraw
 )
@@ -39,8 +37,7 @@ DEF_BUTTON(bCalibrate1,
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 DEF_PAGE_2(pMultimeter, // -V641 //-V1027 //-V641
-    "МУЛЬТИМЕТР", "MULTIMETER",
-    "",
+    "МУЛЬТИМЕТР",
     "",
     &bCalibrate0,
     &bCalibrate1,

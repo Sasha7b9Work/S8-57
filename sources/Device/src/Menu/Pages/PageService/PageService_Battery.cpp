@@ -14,19 +14,17 @@ const PageBase *PageService::PageBattery::pointer = &pageBattery;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 DEF_CHOICE_2( cShow,                                                                                                                                  //--- СЕРВИС - БАТАРЕЯ - Показывать ---  
-    "Показывать", "Show",
+    "Показывать",
     "Включает/отключает вывод иноформации о напряжении батарии на экран",
-    "Enables / disables the display of battery voltage information on the screen",
-    DISABLE_RU, DISABLE_EN,
-    ENABLE_RU,  ENABLE_EN,
+    DISABLE_RU,
+    ENABLE_RU,
     BAT_SHOW_ON_DISPLAY, pageBattery, FuncActive, Choice::EmptyChange, Choice::EmptyDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 DEF_PAGE_1( pageBattery, // -V641 // -V1027                                                                                                                        //--- СЕРВИС - БАТАРЕЯ ---
-    "БАТАРЕЯ", "BATTERY",
+    "БАТАРЕЯ",
     "Функции работы с аккумуляторами",
-    "Battery functions",
     &cShow,                     ///< СЕРВИС - БАТАРЕЯ - Показывать
     Page::Name::Service_Battery, PageService::pointer, FuncActive, FuncPressPage, FuncDrawPage, FuncRegSetPage
 )

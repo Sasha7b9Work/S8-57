@@ -27,7 +27,7 @@ extern int8 gCurDigit;
     uint8           name;           /* Имя из перечисления Page::Name */                                  \
     const PageBase  *keeper;        /* Адрес страницы, которой принадлежит. Для Page_Main = 0 */        \
     pFuncBV         funcOfActive;   /* Активен ли данный элемент */                                     \
-    const char      *titleHint[4]   /* Название страницы на русском и английском языках. Также подсказка для режима помощи */
+    const char      *titleHint[2]   /* Название страницы на русском и английском языках. Также подсказка для режима помощи */
 
 class PageBase;
 

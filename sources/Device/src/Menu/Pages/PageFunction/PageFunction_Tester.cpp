@@ -18,22 +18,20 @@ static void OnChanged_Polarity(bool)
 }
 
 
-DEF_CHOICE_2(   cPolarity,                                                                                                                            //--- ТЕСТЕР-КОМПОНЕНТ - Полярность ---
-    "Полярность", "Polarity",
+DEF_CHOICE_2( cPolarity,                                                                                                                              //--- ТЕСТЕР-КОМПОНЕНТ - Полярность ---
+    "Полярность",
     "Полярность испытательного воздействия",
-    "Polarity of the test exposure",
-    "+", "+",
-    "-", "-",
+    "+",
+    "-",
     TESTER_POLARITY, pageTester, FuncActive, OnChanged_Polarity, Choice::EmptyDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 DEF_CHOICE_2(   cControl,                                                                                                                             //--- ТЕСТЕР-КОМПОНЕНТ - Управление ---
-    "Управление", "Control",
+    "Управление",
     "Тип испытательного воздействия",
-    "Type of test exposure",
-    "Напряжение", "Voltage",
-    "Ток", "Current",
+    "Напряжение",
+    "Ток",
     TESTER_CONTROL, pageTester, FuncActive, PageFunction::PageTester::OnChanged_Control, Choice::EmptyDraw
 )
 
@@ -44,42 +42,40 @@ static void OnChanged_Step(bool)
 }
 
 DEF_CHOICE_2(   cStepU,                                                                                                                                      //--- ТЕСТЕР-КОМПОНЕНТ - Шаг ---
-    "Шаг", "Step",
+    "Шаг",
     "Шаг испытательного напряжения",
-    "Test voltage step",
-    "100 мВ", "100 mV",
-    "500 мВ", "500 mV",
+    "100 мВ",
+    "500 мВ",
     TESTER_STEP_U, pageTester, FuncActive, OnChanged_Step, Choice::EmptyDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-DEF_CHOICE_2(   cStepI,
-    "Шаг", "Step",
+DEF_CHOICE_2( cStepI,
+    "Шаг",
     "Шаг исптытательного тока",
-    "Step test current",
-    "4 мА",  "4 mA",
-    "20 мА", "20 mA",
+    "4 мА",
+    "20 мА",
     TESTER_STEP_I, pageTester, FuncActive, OnChanged_Step, Choice::EmptyDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-DEF_CHOICE_2(   cViewMode,
-    "Рисование", "Paint",
-    "", "",
-    "Линии", "Lines",
-    "Точки", "Points",
+DEF_CHOICE_2( cViewMode,
+    "Рисование",
+    "",
+    "Линии",
+    "Точки",
     TESTER_VIEW_MODE, pageTester, FuncActive, Choice::EmptyChange, Choice::EmptyDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-DEF_CHOICE_5(   cSmoothing,
-    "Сглаживание", "Smoothing",
-    "", "",
-    "1", "1",
-    "2", "2",
-    "3", "3",
-    "4", "4",
-    "5", "5",
+DEF_CHOICE_5( cSmoothing,
+    "Сглаживание",
+    "",
+    "1",
+    "2",
+    "3",
+    "4",
+    "5",
     TESTER_NUM_SMOOTH, pageTester, FuncActive, Choice::EmptyChange, Choice::EmptyDraw
 )
 
@@ -99,8 +95,8 @@ static void OnEnterExit_Tester(bool enter)
 
 
 DEF_PAGE_4( pageTester, // -V641
-    "ТЕСТЕР", "TESTER",
-    "", "",
+    "ТЕСТЕР",
+    "",
     &cControl,
     &cStepU,
     &cPolarity,

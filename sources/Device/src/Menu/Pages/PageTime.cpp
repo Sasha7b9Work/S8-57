@@ -24,13 +24,13 @@ static bool IsActive_Sample()
 }
 
 DEF_CHOICE_2( cSample,                                                                                                                                          //--- РАЗВЕРТКА - Выборка ---
-    "Выборка", "Sampling",
+    "Выборка"
+    ,
     "\"Реальная\" - \n"
-    "\"Эквивалентная\" -",
-    "\"Real\" - \n"
-    "\"Equals\" - ",
-    "Реальное время", "Real",
-    "Эквивалентная",  "Equals",
+    "\"Эквивалентная\" -"
+    ,
+    "Реальное время",
+    "Эквивалентная",
     SAMPLE_TYPE, pTime, IsActive_Sample, Choice::EmptyChange, Choice::EmptyDraw
 )
 
@@ -53,11 +53,11 @@ void PageTime::OnChanged_PeakDet(bool active)
 }
 
 DEF_CHOICE_2( cPeakDet,                                                                                                                                         //--- РАЗВЕРТКА - Пик дет ---
-    "Пик дет", "Pic deat",
-    "Включает/выключает пиковый детектор.",
-    "Turns on/off peak detector.",
-    DISABLE_RU, DISABLE_EN,
-    ENABLE_RU,  ENABLE_EN,
+    "Пик дет",
+    "Включает/выключает пиковый детектор."
+    ,
+    DISABLE_RU,
+    ENABLE_RU,
     SET_PEAKDET, pTime, IsActive_PeakDet, PageTime::OnChanged_PeakDet, Choice::EmptyDraw
 )
 
@@ -69,44 +69,35 @@ void PageTime::OnChanged_TPos(bool active)
 }
 
 DEF_CHOICE_3( cTPos,                                                                                                                                                 //--- РАЗВЕРТКА - То ---
-    "\x7b", "\x7b",
-    "Задаёт точку привязки нулевого смещения по времени к экрану - левый край, центр, правый край.",
-    "Sets the anchor point nuleovgo time offset to the screen - the left edge, center, right edge.",
-    "Лево", "Left",
-    "Центр", "Center",
-    "Право", "Right",
+    "\x7b",
+    "Задаёт точку привязки нулевого смещения по времени к экрану - левый край, центр, правый край."
+    ,
+    "Лево",
+    "Центр",
+    "Право",
     TPOS, pTime, FuncActive, PageTime::OnChanged_TPos, Choice::EmptyDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 DEF_CHOICE_2(cDivRole,                                                                                       //--- РАЗВЕРТКА - Ф-ция ВР/ДЕЛ ---
-    "Ф-ция ВР/ДЕЛ", "Funct Time/DIV"
+    "Ф-ция ВР/ДЕЛ"
     ,
     "Задаёт функцию для ручки ВРЕМЯ/ДЕЛ: в режиме сбора информации (ПУСК/СТОП в положении ПУСК):\n"
     "1. \"Время\" - изменение смещения по времени.\n"
     "2. \"Память\" - перемещение по памяти."
     ,
-    "Sets the function to handle TIME/DIV: mode of collecting information (START/STOP to start position):\n"
-    "1. \"Time\" - change the time shift.\n"
-    "2. \"Memory\" - moving from memory."
-    ,
-    "Время", "Time",
-    "Память", "Memory",
+    "Время",
+    "Память",
     TIME_DIV_XPOS, pTime, FuncActive, Choice::EmptyChange, Choice::EmptyDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 DEF_CHOICE_2( cShiftXtype,                                                                                                                                     //--- РАЗВЕРТКА - Смещение ---
-    "Смещение", "Offset"
+    "Смещение",
+    "Задаёт режим удержания смещения по горизонтали\n1. \"Время\" - сохраняется абсолютное смещение в секундах.\n2. \"Деления\" - сохраняется положение мещения на экране."
     ,
-    "Задаёт режим удержания смещения по горизонтали\n1. \"Время\" - сохраняется абсолютное смещение в секундах.\n2. \"Деления\" - сохраняется "
-    "положение мещения на экране."
-    ,
-    "Sets the mode of retaining the horizontal displacement\n1. \"Time\" - saved the asbolutic offset in seconds.\n2. \"Divisions\" - retained "
-    "the position of the offset on the screen."
-    ,
-    "Время", "Time",
-    "Деления", "Divisions",
+    "Время",
+    "Деления",
     LINKING_TSHIFT, pTime, FuncActive, Choice::EmptyChange, Choice::EmptyDraw
 )
 
@@ -115,9 +106,8 @@ const PageBase *PageTime::pointer = &pTime;
 
 
 DEF_PAGE_3( pTime, // -V641 // -V1027                                                                                                                                     //--- РАЗВЕРТКА ---
-    "РАЗВ.", "SCAN",
-    "Содержит настройки развёртки.",
-    "Contains scan settings.",
+    "РАЗВ",
+    "Содержит настройки развёртки",
     &cSample,           ///< РАЗВЕРТКА - Выборка
     &cPeakDet,          ///< РАЗВЕРТКА - Пик дет
     &cTPos,             ///< РАЗВЕРТКА - То

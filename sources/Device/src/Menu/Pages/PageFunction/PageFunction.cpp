@@ -14,9 +14,8 @@ const PageBase *PageFunction::pointer = &pageFunction;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 DEF_PAGE_5( pageFunction,                                                                                                                                                   //--- ‘”Õ ÷»ﬂ ---
-    "‘”Õ ÷»ﬂ", "FUNCTION",
+    "‘”Õ ÷»ﬂ",
     "¬˚·Ó ÙÛÌÍˆËË",
-    "Function selection",
     PageFunction::PageFrequencyCounter::pointer,   ///< ‘”Õ ÷»ﬂ - ◊¿—“Œ“ŒÃ≈–
     PageFunction::PageFFT::pointer,                ///< ‘”Õ ÷»ﬂ - —œ≈ “–
     PageFunction::PageMultimeter::pointer,         ///< ‘”Õ ÷»ﬂ - Ã”À‹“»Ã≈“–

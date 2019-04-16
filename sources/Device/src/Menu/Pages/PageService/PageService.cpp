@@ -44,9 +44,8 @@ static void OnPress_ResetSettings()
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 DEF_BUTTON( bResetSettings,                                                                                                                                 //--- СЕРВИС - Сброс настроек ---
-    "Сброс настр", "Reset set",
+    "Сброс настр",
     "Сброс настроек на настройки по умолчанию",
-    "Reset to default settings",
     pService, EmptyFuncBtV, OnPress_ResetSettings, EmptyFuncVII
 )
 
@@ -57,9 +56,8 @@ static void OnPress_AutoSearch()
 }
 
 DEF_BUTTON( bAutoSearch,                                                                                                                                     //--- СЕРВИС - Поиск сигнала ---
-    "Поиск сигн", "Find sign",
+    "Поиск сигн",
     "Устанавливает оптимальные установки осциллографа для сигнала в канале 1",
-    "Sets optimal settings for the oscilloscope signal on channel 1",
     pService, FuncActive, OnPress_AutoSearch, Button::EmptyDraw
 )
 
@@ -70,12 +68,11 @@ static void OnChanged_Calibrator_Calibrator(bool)
 }
 
 DEF_CHOICE_2( cCalibrator_Calibrator, // -V206                                                                                                     //--- СЕРВИС - КАЛИБРАТОР - Калибратор ---
-    "Калибратор", "Calibrator",
-    "Режим работы калибратора",
-    "Mode of operation of the calibrator",
-    "Перем", "DC",
-    "+4V", "+4V",
-    //"0V", "0V",
+    "Калибратор",
+    "Режим работы калибратора"
+    ,
+    "Перем",
+    "+4V",
     CALIBRATOR_MODE, ppCalibrator, FuncActive, OnChanged_Calibrator_Calibrator, Choice::EmptyDraw
 )
 
@@ -102,17 +99,15 @@ static void OnPress_Calibrator_Calibrate()
 }
 
 DEF_BUTTON( bCalibrator_Calibrate,                                                                                                                //--- СЕРВИС - КАЛИБРАТОР - Калибровать ---
-    "Калибровать", "Calibrate",
+    "Калибровать",
     "Запуск процедуры калибровки",
-    "Running the calibration procedure",
     ppCalibrator, IsActive_Calibrator_Calibrate, OnPress_Calibrator_Calibrate, Button::EmptyDraw
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 DEF_PAGE_2( ppCalibrator, // -V641 // -V1027                                                                                                                    //--- СЕРВИС - КАЛИБРАТОР ---
-    "КАЛИБРОВКА", "CALIBRATE",
+    "КАЛИБРОВКА",
     "Управлением калибратором и калибровка осциллографа",
-    "Control of the calibrator and calibration of an oscillograph",
     &cCalibrator_Calibrator,     ///< СЕРВИС - КАЛИБРАТОР - Калибратор
     &bCalibrator_Calibrate,      ///< СЕРВИС - КАЛИБРАТОР - Калибровать
     Page::Name::Service_Calibrator, &pService, FuncActive, FuncPressPage, FuncDrawPage, FuncRegSetPage
@@ -161,16 +156,12 @@ static void Draw_Function_Screen(int x, int y)
 }
 
 DEF_SMALL_BUTTON_HINTS_3( bFunction_Screen,                                                                                                                //--- СЕРВИС - ФУНКЦИЯ - Экран ---
-    "Экран", "Display",
+    "Экран",
     "Выбирает режим отображения математического сигнала",
-    "Chooses the mode of display of a mathematical signal",
     ppFunction, FuncActive, OnPress_Function_Screen, Draw_Function_Screen,
-    Draw_Function_Screen_Disable,   {"Вывод математической функции отключён",
-                                    "The conclusion of mathematical function is disconnected"},
-    Draw_Function_Screen_Separate,  {"Сигналы и математическая функция выводятся в разных окнах",
-                                    "Signals and mathematical function are removed in different windows"},
-    Draw_Function_Screen_Together,  {"Сигналы и математическая функция выводятся в одном окне",
-                                    "Signals and mathematical function are removed in one window"}
+    Draw_Function_Screen_Disable,   "Вывод математической функции отключён",
+    Draw_Function_Screen_Separate,  "Сигналы и математическая функция выводятся в разных окнах",
+    Draw_Function_Screen_Together,  "Сигналы и математическая функция выводятся в одном окне"
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -199,12 +190,11 @@ static void Draw_Function_Type(int x, int y)
 }
 
 DEF_SMALL_BUTTON_HINTS_2( bFunction_Type,                                                                                                                    //--- СЕРВИС - ФУНКЦИЯ - Вид ---
-    "Вид", "Type",
+    "Вид",
     "Выбор математической функции",
-    "Choice of mathematical function",
     ppFunction, FuncActive, OnPress_Function_Type, Draw_Function_Type,
-    Draw_Function_Type_Sum, {"Сложение", "Addition"},
-    Draw_Function_Type_Mul, {"Умножение", "Multiplication"}
+    Draw_Function_Type_Sum, "Сложение",
+    Draw_Function_Type_Mul, "Умножение"
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -230,12 +220,11 @@ static void Draw_Function_ModeRegSet(int x, int y)
 }
 
 DEF_SMALL_BUTTON_HINTS_2( bFunction_ModeRegSet,                                                                                            //--- СЕРВИС - ФУНКЦИЯ - Режим ручки УСТАНОВКА ---
-    "Режим ручки УСТАНОВКА", "Mode regulator SET",
+    "Режим ручки УСТАНОВКА",
     "Выбор режима ручки УСТАНОВКА - управление масштабом или смещением",
-    "Choice mode regulcator УСТАНОВКА - management of scale or shift",
     ppFunction, FuncActive, OnPress_Function_ModeRegSet, Draw_Function_ModeRegSet,
-    Draw_Function_ModeRegSet_Range,  {"Управление масштабом", "Management of scale"},
-    Draw_Function_ModeRegSet_RShift, {"Управление смещением", "Management of shift"}
+    Draw_Function_ModeRegSet_Range,  "Управление масштабом",
+    Draw_Function_ModeRegSet_RShift, "Управление смещением"
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -251,9 +240,8 @@ static void Draw_Function_RangeA(int x, int y)
 }
 
 DEF_SMALL_BUTTON( bFunction_RangeA,                                                                                                          //--- СЕРВИС - ФУНКЦИЯ - Масштаб 1-го канала ---
-    "Масштаб 1-го канала", "Scale of the 1st channel",
+    "Масштаб 1-го канала",
     "Использует масштаб первого канала для отображения результата",
-    "Takes scale for a mathematical signal from the first channel",
     ppFunction, FuncActive, OnPress_Function_RangeA, Draw_Function_RangeA
 )
 
@@ -270,9 +258,8 @@ static void Draw_Function_RangeB(int x, int y)
 }
 
 DEF_SMALL_BUTTON( bFunction_RangeB,                                                                                                          //--- СЕРВИС - ФУНКЦИЯ - Масштаб 2-го канала ---
-    "Масштаб 2-го канала", "Scale of the 2nd channel",
+    "Масштаб 2-го канала",
     "Использует масштаб второго канала для отображения результата",
-    "Takes scale for a mathematical signal from the second channel",
     ppFunction, FuncActive, OnPress_Function_RangeB, Draw_Function_RangeB
 )
 
@@ -372,9 +359,8 @@ static bool HandlerKey_Function(KeyEvent event) // -V2506
 
 
 DEF_PAGE_5( ppFunction, // -V641                                                                                                                                   //--- СЕРВИС - ФУНКЦИЯ ---
-    "ФУНКЦИЯ", "FUNCTION",
+    "ФУНКЦИЯ",
     "Установка и выбор математической функции - сложения или умножения",
-    "Installation and selection of mathematical functions - addition or multiplication",
     &bFunction_Screen,      // СЕРВИС - ФУНКЦИЯ - Экран
     &bFunction_Type,        // СЕРВИС - ФУНКЦИЯ - Вид
     &bFunction_ModeRegSet,  // СЕРВИС - ФУНКЦИЯ - Режим ручки УСТАНОВКА
@@ -388,27 +374,24 @@ DEF_PAGE_5( ppFunction, // -V641                                                
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 DEF_CHOICE_2( cSound_Enable,                                                                                                                                   //--- СЕРВИС - ЗВУК - Звук ---
-    "Звук", "Sound",
+    "Звук",
     "Включение/выключение звука",
-    "Inclusion/switching off of a sound",
-    DISABLE_RU, DISABLE_EN,
-    ENABLE_RU, ENABLE_EN,
+    DISABLE_RU,
+    ENABLE_RU,
     SOUND_ENABLED, ppSound, FuncActive, Choice::EmptyChange, Choice::EmptyDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 DEF_GOVERNOR( gSound_Volume,                                                                                                                              //--- СЕРВИС - ЗВУК - Громкость ---
-    "Громкость", "Volume",
+    "Громкость",
     "Установка громкости звука",
-    "Set the volume",
     SOUND_VOLUME, 0, 100, ppSound, FuncActive, FuncChanged, FuncBeforeDraw
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 DEF_PAGE_2( ppSound, // -V641 // -V1027                                                                                                                               //--- СЕРВИС - ЗВУК ---
-    "ЗВУК", "SOUND",
+    "ЗВУК",
     "В этом меню можно настроить громкость звука",
-    "In this menu, you can adjust the volume",
     &cSound_Enable,             ///< СЕРВИС - ЗВУК - Звук
     &gSound_Volume,             ///< СЕРВИС - ЗВУК - Громкость
     Page::Name::Service_Sound, &pService, FuncActive, FuncPressPage, FuncDrawPage, FuncRegSetPage
@@ -417,21 +400,15 @@ DEF_PAGE_2( ppSound, // -V641 // -V1027                                         
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static int8 dServicetime = 0;
 static int8 hours = 0, minutes = 0, secondes = 0, year = 0, month = 0, day = 0;
-DEF_TIME(tRTC_Time,                                                                                                                                          //--- СЕРВИС - ВРЕМЯ - Время ---
-    "Время", "Time",
+DEF_TIME( tRTC_Time,                                                                                                                                         //--- СЕРВИС - ВРЕМЯ - Время ---
+    "Время"
+    ,
     "Установка текущего времени.\nПорядок работы:\n"
     "Нажать на элемент меню \"Время\". Откроется меню установки текущего времени. Короткими нажатиями кнопки на цифровой клавиатуре, соответсвующей "
     "элементу управления \"Время\", выделить часы, минуты, секунды, год, месяц, или число. Выделенный элемент обозначается мигающей областью. "
     "Вращением ручки УСТАНОВКА установить необходимое значение. Затем выделить пункт \"Сохранить\", нажать и удреживать более 0.5 сек кнопку на "
     "панели управления. Меню установки текущего временя закроется с сохранением нового текущего времени. Нажатие длительное удержание кнопки на "
     "любом другом элементе приведёт к закрытию меню установки текущего вре    мени без сохранения нового текущего времени"
-    ,
-    "Setting the current time. \nPoryadok work:\n"
-    "Click on the menu item \"Time\".The menu set the current time.By briefly pressing the button on the numeric keypad of conformity "
-    "Control \"Time\", highlight the hours, minutes, seconds, year, month, or a number.The selected item is indicated by a flashing area. "
-    "Turn the setting knob to set the desired value. Then highlight \"Save\", press and udrezhivat more than 0.5 seconds, the button on the panel "
-    "Control. Menu Setting the current time will be closed to the conservation of the new current time. Pressing a button on the prolonged retention "
-    "of any other element will lead to the closure of the current time setting menu without saving the new current time"
     ,
     ppRTC, FuncActive, dServicetime, hours, minutes, secondes, month, day, year
 )
@@ -442,17 +419,15 @@ static void OnChanged_Time_Correction()
 }
 
 DEF_GOVERNOR( tRTC_Correction,                                                                                                                           //--- СЕРВИС - ВРЕМЯ - Коррекция ---
-    "Коррекция", "Correction",
+    "Коррекция",
     "Установка корректирующего коэффициента для компенсации хода времени",
-    "Setting correction factor to compensate for time travel",
     NRST_CORRECTION_TIME, -63, 63, ppRTC, FuncActive, OnChanged_Time_Correction, FuncBeforeDraw
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 DEF_PAGE_2( ppRTC, // -V641 // -V1027                                                                                                                                //--- СЕРВИС - ВРЕМЯ ---
-    "ВРЕМЯ", "TIME",
+    "ВРЕМЯ",
     "Установка и настройка времени",
-    "Set and setup time",
     &tRTC_Time,          // СЕРВИС - ВРЕМЯ - Время
     &tRTC_Correction,    // CЕРВИС - ВРЕМЯ - Коррекция
     Page::Name::Service_RTC, &pService, FuncActive, FuncPressPage, FuncDrawPage, FuncRegSetPage
@@ -460,11 +435,10 @@ DEF_PAGE_2( ppRTC, // -V641 // -V1027                                           
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 DEF_CHOICE_2( cLanguage,                                                                                                                                              //--- СЕРВИС - Язык ---
-    "Language", "Язык",
+    "Language",
     "Позволяет выбрать язык меню",
-    "Allows you to select the menu language",
-    "Русский",    "RU",
-    "Английский", "EN",
+    "Русский",
+    "Английский",
     LANG, pService, FuncActive, Choice::EmptyChange, Choice::EmptyDraw
 )
 
@@ -523,9 +497,8 @@ DEF_SMALL_BUTTON_EXIT( bInformation_Exit,                                       
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 DEF_PAGE_SB( ppInformation, // -V641                                                                                                                            //--- СЕРВИС - ИНФОРМАЦИЯ ---
-    "ИНФОРМАЦИЯ", "INFORMATION",
+    "ИНФОРМАЦИЯ",
     "Показывает информацию о приборе",
-    "Displays information about the device",
     &bInformation_Exit, // СЕРВИС - ИНФОРМАЦИЯ - Выход
     0,
     0,
@@ -540,9 +513,8 @@ DEF_PAGE_SB( ppInformation, // -V641                                            
 const PageBase *PageService::pointer = &pService;
 
 DEF_PAGE_8( pService, // -V641 // -V1027                                                                                                                                    //--- СЕРВИС ---
-    "СЕРВИС", "SERVICE",
+    "СЕРВИС",
     "Дополнительные настройки, калибровка, поиск сигнала, математические функции",
-    "Additional settings, calibration, signal search, mathematical functions",
     &bResetSettings,                        ///< СЕРВИС - Сброс настроек
     //&bAutoSearch,                         ///< СЕРВИС - Поиск сигнала
     &ppCalibrator,

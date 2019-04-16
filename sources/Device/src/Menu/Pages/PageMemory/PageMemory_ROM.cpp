@@ -62,15 +62,12 @@ static void Draw_Internal_ShowAlways(int x, int y)
     }
 }
 
-DEF_SMALL_BUTTON_HINTS_2(bInternal_ShowAlways,                                                      //--- ПАМЯТЬ - ВНУТР ЗУ - Показывать всегда ---
-    "Показывать всегда", "To show always",
+DEF_SMALL_BUTTON_HINTS_2( bInternal_ShowAlways,                                                                                               //--- ПАМЯТЬ - ВНУТР ЗУ - Показывать всегда ---
+    "Показывать всегда",
     "Позволяет всегда показывать выбранный сохранённый сигнал поверх текущего",
-    "Allows to show always the chosen kept signal over the current",
     pageROM, FuncActive, OnPress_Internal_ShowAlways, Draw_Internal_ShowAlways,
-    Draw_Internal_ShowAlways_Yes, { "показывать выбранный сигнал из внутренней памяти поверх текущего",
-                                    "to show the chosen signal from internal memory over the current" },
-    Draw_Internal_ShowAlways_No, { "сигнал из внутренней памяти виден только в режиме работы с внутренним запоминающим устройством",
-                                    "the signal from internal memory is visible only in an operating mode with an internal memory" }
+    Draw_Internal_ShowAlways_Yes, "показывать выбранный сигнал из внутренней памяти поверх текущего",
+    Draw_Internal_ShowAlways_No,  "сигнал из внутренней памяти виден только в режиме работы с внутренним запоминающим устройством"
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -117,14 +114,13 @@ static void Draw_Internal_ModeShow(int x, int y)
     }
 }
 
-DEF_SMALL_BUTTON_HINTS_3(bInternal_ModeShow,                                                              //--- ПАМЯТЬ - ВНУТР ЗУ - Вид сигнала ---
-    "Вид сигнала", "Type of a signal",
+DEF_SMALL_BUTTON_HINTS_3( bInternal_ModeShow,                                                                                                       //--- ПАМЯТЬ - ВНУТР ЗУ - Вид сигнала ---
+    "Вид сигнала",
     "Показывать записанный или текущий сигнал в режиме ВНУТР ЗУ",
-    "Show recorded or current signal in mode Internal Memory",
     pageROM, FuncActive, OnPress_Internal_ModeShow, Draw_Internal_ModeShow,
-    Draw_Internal_ModeShow_Direct, { "на дисплее текущий сигнал", "on the display current signal" },
-    Draw_Internal_ModeShow_Saved, { "на дисплее сохранённый сигнал", "on the display the kept signal" },
-    Draw_Internal_ModeShow_Both, { "на дисплее оба сигнала", "on the display both signals" }
+    Draw_Internal_ModeShow_Direct, "на дисплее текущий сигнал",
+    Draw_Internal_ModeShow_Saved,  "на дисплее сохранённый сигнал",
+    Draw_Internal_ModeShow_Both,   "на дисплее оба сигнала"
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -142,10 +138,9 @@ static void Draw_Internal_Delete(int x, int y)
     Font::SetCurrent(Font::Type::_8);
 }
 
-DEF_SMALL_BUTTON(bInternal_Delete,                                                                            //--- ПАМЯТЬ - ВНУТР ЗУ - Удалить ---
-    "Удалить", "Delete",
+DEF_SMALL_BUTTON( bInternal_Delete,                                                                                                                     //--- ПАМЯТЬ - ВНУТР ЗУ - Удалить ---
+    "Удалить",
     "Удаляет выбранный сигнал из внутреннего запоминающего устройства",
-    "Removes the selected signal from the internal storage device",
     pageROM, FuncActive, OnPress_Internal_Delete, Draw_Internal_Delete
 )
 
@@ -177,10 +172,9 @@ static void Draw_Internal_SaveToMemory(int x, int y)
     Font::SetCurrent(Font::Type::_8);
 }
 
-DEF_SMALL_BUTTON(bInternal_SaveToMemory,                                                           //--- ПАМЯТЬ - ВНУТР ЗУ - Сохранить в памяти ---
-    "Сохранить в памяти", "Save to memory",
+DEF_SMALL_BUTTON( bInternal_SaveToMemory,                                                                                                    //--- ПАМЯТЬ - ВНУТР ЗУ - Сохранить в памяти ---
+    "Сохранить в памяти",
     "Сохранить сигнал во внутреннем запоминующем устройстве",
-    "To keep a signal in an internal memory",
     pageROM, FuncActive, OnPress_Internal_SaveToMemory, Draw_Internal_SaveToMemory
 )
 
@@ -201,10 +195,9 @@ static void Draw_Internal_SaveToDrive(int x, int y)
     }
 }
 
-DEF_SMALL_BUTTON(bInternal_SaveToDrive,                                                                                                     //--- ПАМЯТЬ - ВНУТР ЗУ - Сохранить на флешку ---
-    "Сохранить на флешку", "Save to disk",
+DEF_SMALL_BUTTON( bInternal_SaveToDrive,                                                                                                    //--- ПАМЯТЬ - ВНУТР ЗУ - Сохранить на флешку ---
+    "Сохранить на флешку",
     "Сохраняет сигнал на флешку",
-    "Save signal to flash drive",
     pageROM, FuncActive, OnPress_Internal_SaveToDrive, Draw_Internal_SaveToDrive
 )
 
@@ -272,9 +265,8 @@ static bool HandlerKey_Internal(KeyEvent event)
 
 
 DEF_PAGE_5( pageROM, // -V641                                                                                                                                     //--- ПАМЯТЬ - ВНУТР ЗУ ---
-    "ВНУТР ЗУ", "INT STORAGE",
+    "ВНУТР ЗУ",
     "Переход в режим работы с внутренней памятью",
-    "Transition to an operating mode with internal memory",
     &bInternal_ShowAlways,      ///< ПАМЯТЬ - ВНУТР ЗУ - Показывать всегда
     &bInternal_ModeShow,        ///< ПАМЯТЬ - ВНУТР ЗУ - Вид сигнала
     &bInternal_Delete,          ///< ПАМЯТЬ - ВНУТР ЗУ - Удалить

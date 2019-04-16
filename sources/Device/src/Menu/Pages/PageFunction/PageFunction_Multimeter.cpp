@@ -26,11 +26,11 @@ static void OnChange_VoltageDC(bool active)
 }
 
 DEF_CHOICE_3( cRangesVoltageDC,                                                                                                                                 //--- МУЛЬТИМЕТР - Предел ---
-    "Предел", "Range",
-    "Диапазон измерения", "Мeasurement range",
-    "2 В",   "2 V",
-    "20 В",  "20 V",
-    "500 В", "500 V",
+    "Предел",
+    "Диапазон измерения",
+    "2 В",
+    "20 В",
+    "500 В",
     MULTI_RANGE_VOLTAGE_DC, pageMultimeter, FuncActive_RangesVoltageDC, OnChange_VoltageDC, Choice::EmptyDraw
 )
 
@@ -49,11 +49,11 @@ static void OnChange_VoltageAC(bool active)
 }
 
 DEF_CHOICE_3( cRangesVoltageAC,                                                                                                                                 //--- МУЛЬТИМЕТР - Предел ---
-    "Предел", "Range",
-    "Диапазон измерения", "Measurement range",
-    "2 В", "2 V",
-    "20 В", "20 V",
-    "400 В", "400 V",
+    "Предел",
+    "Диапазон измерения",
+    "2 В",
+    "20 В",
+    "400 В",
     MULTI_RANGE_VOLTAGE_AC, pageMultimeter, FuncActive_RnagesVoltageAC, OnChange_VoltageAC, Choice::EmptyDraw
 )
 
@@ -68,10 +68,10 @@ static void OnChange_CurrentDC(bool active)
 }
 
 DEF_CHOICE_2( cRangesCurrentDC,
-    "Предел", "Range",
-    "Диапазон измерения", "Measurement range",
-    "20мА", "20mА",
-    "2А", "2А",
+    "Предел",
+    "Диапазон измерения",
+    "20мА",
+    "2А",
     MULTI_RANGE_CURRENT_DC, pageMultimeter, Choice::EmptyActive, OnChange_CurrentDC, Choice::EmptyDraw
 )
 
@@ -85,10 +85,10 @@ static void OnChange_CurrentAC(bool active)
 }
 
 DEF_CHOICE_2( cRangesCurrentAC,
-    "Предел", "Range",
-    "Диапазон измерения", "Measurement range",
-    "20мА", "20mA",
-    "2А", "2A",
+    "Предел",
+    "Диапазон измерения",
+    "20мА",
+    "2А",
     MULTI_RANGE_CURRENT_AC, pageMultimeter, Choice::EmptyActive, OnChange_CurrentAC, Choice::EmptyDraw
 )
 
@@ -107,17 +107,17 @@ static void OnChange_Resistance(bool active)
 }
 
 DEF_CHOICE_4(   cRangesResistance,                                                                                                                              //--- Мультиметр - Предел ---
-    "Предел", "Range",
-    "Диапазон измерения", "Measurement range",
-    "2 кОм", "2 kOhm",
-    "20 кОм", "20 kOhm",
-    "200 кОм", "200 kOhm",
-    "10 МОм", "10 MOhm",
+    "Предел",
+    "Диапазон измерения",
+    "2 кОм",
+    "20 кОм",
+    "200 кОм",
+    "10 МОм",
     MULTI_RANGE_RESISTANCE, pageMultimeter, FuncActive_RangesReistance, OnChange_Resistance, Choice::EmptyDraw
 )
 
 DEF_CHOICE_7(   cMode,
-    "Режим", "Mode"
+    "Режим"
     ,
     "Выбор типа измерениия\n"
     "U= - постоянное напряжение\n"
@@ -128,22 +128,13 @@ DEF_CHOICE_7(   cMode,
     "VD - тест диодов\n"
     "BELL - прозвонка"
     ,
-    "Selecting the type of measurement\n"
-    "U= - DC voltage\n"
-    "U~ - AC voltage\n"
-    "I= - DC current\n"
-    "I~ - AC current\n"
-    "R - DC resistance\n"
-    "VD - diodes test\n"
-    "BELL - bell"
-    ,
-    "U=",   "U=",
-    "U~",   "U~",
-    "I=",   "I=",
-    "I~",   "I~",
-    "R",    "R",
-    "VD",   "VD",
-    "Прозвонка", "Bell",
+    "U=",
+    "U~",
+    "I=",
+    "I~",
+    "R",
+    "VD",
+    "Прозвонка",
     MULTI_MEASURE, pageMultimeter, FuncActive, PageFunction::PageMultimeter::OnChanged_Mode, Choice::EmptyDraw
 )
 
@@ -154,11 +145,10 @@ static void OnChanged_AVP(bool)
 }
 
 DEF_CHOICE_2 (cAVP,
-    "АВП", "ASL",
+    "АВП",
     "Автовыбор предела",
-    "Auto-select limit",
-    DISABLE_RU, DISABLE_EN,
-    ENABLE_RU, ENABLE_EN,
+    DISABLE_RU,
+    ENABLE_RU,
     MULTI_AVP, pageMultimeter, FuncActive, OnChanged_AVP, Choice::EmptyDraw
 )
 
@@ -171,11 +161,10 @@ static void OnChanged_Zero(bool)
 static int8 zero = 0;
 
 DEF_CHOICE_2(cZero,
-    "Нуль", "Zero",
+    "Нуль",
     "",
-    "",
-    DISABLE_RU, DISABLE_EN,
-    ENABLE_RU, ENABLE_EN,
+    DISABLE_RU,
+    ENABLE_RU,
     zero, pageMultimeter, FuncActive, OnChanged_Zero, Choice::EmptyDraw
 )
 
@@ -186,8 +175,7 @@ static void OnPress_Calibrate0()
 }
 
 DEF_BUTTON( bCalibrate0,
-    "Калибр 0", "Calibrate 0",
-    "",
+    "Калибр 0",
     "",
     pageMultimeter, FuncActive, OnPress_Calibrate0, Button::EmptyDraw
 )
@@ -199,8 +187,7 @@ static void OnPress_Calibrate1()
 }
 
 DEF_BUTTON( bCalibrate1,
-    "Калибр 1", "Calibrate 1",
-    "",
+    "Калибр 1",
     "",
     pageMultimeter, FuncActive, OnPress_Calibrate1, Button::EmptyDraw
 )
@@ -227,11 +214,10 @@ static void OnChanged_Calibration(bool)
 }
 
 DEF_CHOICE_2( cCalibration,
-    "Калибровка", "Calibration",
+    "Калибровка",
     "",
-    "",
-    DISABLE_RU, DISABLE_EN,
-    ENABLE_RU, ENABLE_EN,
+    DISABLE_RU,
+    ENABLE_RU,
     calibration, pageMultimeter, FuncActive, OnChanged_Calibration, Choice::EmptyDraw
 )
 
@@ -248,9 +234,8 @@ static void OnPress_Page(bool enter)
 }
 
 DEF_PAGE_4( pageMultimeter, // -V641
-    "МУЛЬТИМЕТР", "MULTIMETER",
+    "МУЛЬТИМЕТР",
     "Управление прибором в режиме мультиметра",
-    "Instrument control in multimeter mode",
     &cMode,
     &cRangesVoltageDC,
     &cAVP,

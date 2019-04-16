@@ -15,11 +15,10 @@ const PageBase *PageMeasures::PageAuto::pointer = &pageAuto;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 DEF_CHOICE_2( cIsShow,                                                                                                                             //--- ИЗМЕРЕНИЯ - АВТОМАТ - Показывать ---
-    "Показывать", "Show",
+    "Показывать",
     "Выводить или не выводить измерения на экран",
-    "Output or output measurements on screen",
-    "Нет", "No",
-    "Да",  "Yes",
+    "Нет",
+    "Да",
     SHOW_MEASURES, pageAuto, FuncActive, Choice::EmptyChange, Choice::EmptyDraw
 )
 
@@ -30,7 +29,7 @@ static bool IsActive_NumberChannels()
 }
 
 DEF_CHOICE_7( cNumber,                                                                                                                             //--- ИЗМЕРЕНИЯ - АВТОМАТ - Количество ---
-    "Количество", "Number"
+    "Количество"
     ,
     "Устанавливает максимальное количество выводимых измерений:\n"
     "\"1\" - одно измерение\n"
@@ -41,32 +40,23 @@ DEF_CHOICE_7( cNumber,                                                          
     "\"6x1\" - 6 строк по одному измерению в каждой\n"
     "\"6х2\" - 6 строк по два измерения в каждой"
     ,
-    "Sets the maximum number of output measurements:\n"
-    "\"1\" - one measurement\n"
-    "\"2\" - two measurements\n"
-    "\"1x5\" - 1 line with the five dimensions\n"
-    "\"2x5\" - two rows with five measurements in each\n"
-    "\"3x5\" - 3 lines with five measurements in each"
-    "\"6x1\" - 6 lines, one in each dimension\n"
-    "\"6x2\" - 6 lines of two dimensions in each\n",
-    "1", "1",
-    "2", "2",
-    "1x5", "1x5",
-    "2x5", "2x5",
-    "3x5", "3x5",
-    "6x1", "6x1",
-    "6x2", "6x2",
+    "1",
+    "2",
+    "1x5",
+    "2x5",
+    "3x5",
+    "6x1",
+    "6x2",
     NUM_MEASURES, pageAuto, IsActive_NumberChannels, Choice::EmptyChange, Choice::EmptyDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 DEF_CHOICE_3(       cChannels,                                                                                  //--- ИЗМЕРЕНИЯ - АВТОМАТ - Каналы ---
-    "Каналы", "Channels",
+    "Каналы",
     "По каким каналам выводить измерения",
-    "Which channels to output measurement",
-    "1",     "1",
-    "2",     "2",
-    "1 и 2", "1 and 2",
+    "1",
+    "2",
+    "1 и 2",
     SOURCE_MEASURES, pageAuto, IsActive_NumberChannels, Choice::EmptyChange, Choice::EmptyDraw
 )
 
@@ -90,9 +80,8 @@ DEF_CHOICE_2( cMode,                                                            
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 DEF_PAGE_4( pageAuto, // -V641 // -V1027                                                                                                                           //--- ИЗМЕРЕНИЯ - АВТО ---
-    "АВТОМАТ", "AUTO",
+    "АВТОМАТ",
     "Доступ к настройкам автоматических измерений",
-    "Access to automatic measurement settings",
     &cIsShow,                           ///< ИЗМЕРЕНИЯ - АВТОМАТ - Показывать
     &cNumber,                           ///< ИЗМЕРЕНИЯ - АВТОМАТ - Количество
     &cChannels,                         ///< ИЗМЕРЕНИЯ - АВТОМАТ - Каналы

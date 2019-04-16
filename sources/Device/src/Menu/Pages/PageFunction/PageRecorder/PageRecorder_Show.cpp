@@ -10,23 +10,21 @@ extern const PageBase pageShow;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-DEF_CHOICE_3(cSource,                                                                                                                  //--- ФУНКЦИЯ - РЕГИСТРАТОР - ПРОСМОТР - Источник ---
-    "Источник", "Source",
+DEF_CHOICE_3( cSource,                                                                                                                  //--- ФУНКЦИЯ - РЕГИСТРАТОР - ПРОСМОТР - Источник ---
+    "Источник",
     "Место расположения данных",
-    "Location of data",
-    "ОЗУ", "RAM",
-    "USB-Flash", "USB-Flash",
-    "USB-PC", "USB-PC",
+    "ОЗУ",
+    "USB-Flash",
+    "USB-PC",
     RECORDER_STORAGE_PLAY, pageShow, Choice::EmptyActive, Choice::EmptyChange, Choice::EmptyDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-DEF_CHOICE_2(cCursor,
-    "Курсор", "Cursor",
+DEF_CHOICE_2( cCursor,
+    "Курсор",
     "",
-    "",
-    "1", "1",
-    "2", "2",
+    "1",
+    "2",
     Recorder::Settings::currentCursor, pageShow, Choice::EmptyActive, Choice::EmptyChange, Choice::EmptyDraw
 )
 
@@ -37,8 +35,7 @@ static void OnPress_Next()
 }
 
 DEF_BUTTON( bNext,                                                                                                                     //--- ФУНКЦИЯ - РЕГИСТРАТОР - ПРОСМОТР - Следующий ---
-    "Влево", "Left",
-    "",
+    "Влево",
     "",
     pageShow, FuncActive, OnPress_Next, Button::EmptyDraw
 )
@@ -50,8 +47,7 @@ static void OnPress_Prev()
 }
 
 DEF_BUTTON( bPrev,                                                                                                                    //--- ФУНКЦИЯ - РЕГИСТРАТОР - ПРОСМОТР - Предыдущий ---
-    "Вправо", "Right",
-    "",
+    "Вправо",
     "",
     pageShow, FuncActive, OnPress_Prev, Button::EmptyDraw
 )
@@ -86,9 +82,8 @@ static bool FuncOnKey_PageShow(KeyEvent event)
 }
 
 DEF_PAGE_3( pageShow, // -V641 // -V1027                                                                                                           //--- ФУНКЦИЯ - РЕГИСТРАТОР - ПРОСМОТР ---
-    "ПРОСМОТР", "VIEW",
+    "ПРОСМОТР",
     "Просмотр записанных данных",
-    "View recorded data",
     //&cSource,                                                       ///< ФУНКЦИЯ - РЕГИСТРАТОР - ПРОСМОТР - Источник
     &bNext,                                                         ///< ФУНКЦИЯ - РЕГИСТРАТОР - ПРОСМОТР - Следующий
     &bPrev,                                                         ///< ФУНКЦИЯ - РЕГИСТРАТОР - ПРОСМОТР - Предыдущий

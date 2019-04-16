@@ -13,9 +13,8 @@ const PageBase *PageMeasures::pointer = &pageMeasures;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 DEF_PAGE_2( pageMeasures, // -V1027                                                                                                                                       //--- ИЗМЕРЕНИЯ ---
-    "ИЗМЕРЕНИЯ", "MEASURES",
+    "ИЗМЕРЕНИЯ",
     "Доступ к настройкам измерений - курсорных и автоматических",
-    "Access to measurement settings - cursor and automatic",
     PageMeasures::PageCursors::pointer,     ///< ИЗМЕРЕНИЯ - КУРСОРЫ
     PageMeasures::PageAuto::pointer,        ///< ИЗМЕРЕНИЯ - АВТОМАТ
     Page::Name::Measures, nullptr, FuncActive, FuncPressPage, FuncDrawPage, FuncRegSetPage

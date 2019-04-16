@@ -114,10 +114,8 @@ inline bool EmptyFuncBtU8(uint8) { return true; }
 
 
 #define ENABLE_RU "Вкл"
-#define ENABLE_EN "On"
 
 #define DISABLE_RU "Откл"
-#define DISABLE_EN "Off"
 
 #define SAFE_FREE(x) if(x) free(x); (x) = 0;
 

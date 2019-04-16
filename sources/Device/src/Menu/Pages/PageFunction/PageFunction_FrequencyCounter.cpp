@@ -26,11 +26,10 @@ static void OnChanged_FreqMeter_Period(bool)
 
 
 DEF_CHOICE_2( cEnable,                                                                                                                            //--- ФУНКЦИЯ - ЧАСТОТОМЕР - Частотомер ---
-    "Частотомер", "Freq meter",
+    "Частотомер",
     "",
-    "",
-    DISABLE_RU, DISABLE_EN,
-    ENABLE_RU, ENABLE_EN,
+    DISABLE_RU,
+    ENABLE_RU,
     FREQ_METER_ENABLED, ppFreqMeter, FuncActive, OnChanged_FreqMeter_Enable, Choice::EmptyDraw
 )
 
@@ -42,10 +41,10 @@ static bool IsActive_ModeView()
 }
 
 DEF_CHOICE_2( cModeView,                                                                                                                               //--- ФУНКЦИЯ - ЧАСТОТОМЕР - Режим ---
-    "Режим", "Mode",
-    "", "",
-    "Частота", "Frequency",
-    "Период",  "Period",
+    "Режим",
+    "",
+    "Частота",
+    "Период",
     FREQ_METER_MODE_VIEW, ppFreqMeter, IsActive_ModeView, Choice::EmptyChange, Choice::EmptyDraw
 )
 
@@ -63,38 +62,35 @@ static bool IsActive_SettingsPeriod()
 }
 
 DEF_CHOICE_3( cTimeF,                                                                                                                          //--- ФУНКЦИЯ - ЧАСТОТОМЕР - Время счёта F ---
-    "Время счёта F", "Time calc F",
+    "Время счёта F",
     "Позволяет выбрать точность измерения частоты - чем больше время, тем больше точность и больше время измерения",
-    "Allows to choose the accuracy of measurement of frequency - the more time, the accuracy more time of measurement is more",
-    "100мс", "100ms",
-    "1с", "1s",
-    "10с", "10ms",
+    "100мс",
+    "1с",
+    "10с",
     FREQ_METER_TIMECOUNTING, ppFreqMeter, IsActive_SettingsPeriod, OnChanged_FreqMeter_Frequency, Choice::EmptyDraw
 )
 
 
 DEF_CHOICE_4( cFreqClc,                                                                                                                        //--- ФУНКЦИЯ - ЧАСТОТОМЕР - Метки времени ---
-    "Метки времени", "Timestamps",
+    "Метки времени",
     "Выбор частоты следования счётных импульсов",
-    "Choice of frequency of following of calculating impulses",
-    "100кГц", "10MHz",
-    "1МГц", "200MHz",
-    "10МГц", "10MHz",
-    "100МГц", "100MHz",
+    "100кГц",
+    "1МГц",
+    "10МГц",
+    "100МГц",
     FREQ_METER_FREQ_CLC, ppFreqMeter, IsActive_SettingsFrequency, OnChanged_FreqMeter_Period, Choice::EmptyDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 DEF_CHOICE_6( cNumPeriods,                                                                                                                   //--- ФУНКЦИЯ - ЧАСТОТОМЕР - Кол-во периодов ---
-    "Кол периодов", "Num periods",
+    "Кол периодов",
     "Позволяет выбрать точность измерения периода - чем больше время, тем больше точность и больше время измерения",
-    "Allows to choose the accuracy of measurement of period - the more time, the accuracy more time of measurement is more",
-    "1",      "1",
-    "10",     "10",
-    "100",    "100",
-    "1000",   "1000",
-    "10000",  "10000",
-    "100000", "100000",
+    "1",
+    "10",
+    "100",
+    "1000",
+    "10000",
+    "100000",
     FREQ_METER_NUM_PERIODS, ppFreqMeter, IsActive_SettingsFrequency, OnChanged_FreqMeter_Period, Choice::EmptyDraw
 )
 
@@ -118,8 +114,7 @@ const Choice *PageFunction::PageFrequencyCounter::GetChoiceNumPeriods()
 }
 
 DEF_PAGE_5( ppFreqMeter, // -V641                                                                                                                              //--- ФУНКЦИЯ - ЧАСТОТОМЕР ---
-    "ЧАСТОТОМЕР", "FREQ METER",
-    "",
+    "ЧАСТОТОМЕР",
     "",
     &cEnable,           ///< ИЗМЕРЕНИЯ - ЧАСТОТОМЕР - Частотомер
     &cModeView,         ///< ИЗМЕРЕНИЯ - ЧАСТОТОМЕР - Режим
