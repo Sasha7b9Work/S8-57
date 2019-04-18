@@ -296,7 +296,7 @@ static void DrawTime(int x, int y)
 
     PackedTime time = Clock::GetTime();
 
-    Color::SetCurrent(Color::FILL);
+    Color::FILL.SetAsCurrent();
 
     if ((MODE_WORK == ModeWork::ROM) || (MODE_WORK == ModeWork::RAM))
     {
@@ -453,7 +453,7 @@ static void WriteCursors()
         x += 3;
         if (CURsT_ENABLED)
         {
-            Color::SetCurrent(colorText);
+            colorText.SetAsCurrent();
             String("1:").Draw(x, y1);
             String("2:").Draw(x, y2);
             x += 7;

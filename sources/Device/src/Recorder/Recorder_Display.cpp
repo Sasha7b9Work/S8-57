@@ -209,7 +209,7 @@ static void DrawCursors()
 
     DashedVLine cursor(239, 3, 1, 0);
 
-    Color::SetCurrent(Color::FILL);
+    Color::FILL.SetAsCurrent();
 
     cursor.Draw(posCursor[0], 0);
     
@@ -230,7 +230,7 @@ void Recorder::Display::DrawData()
         return;
     }
 
-    Color::SetCurrent(Color::FILL);
+    Color::FILL.SetAsCurrent();
 
     int x = 0;
 

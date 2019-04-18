@@ -38,7 +38,7 @@ void Osci::Display::BottomPart::Draw(int x0, int y0)
         Char(SYMBOL_USB).Draw4SymbolsInRect(x0 + 72, y0 + 2, CONNECTED_TO_USB ? Color::WHITE : Color::FLASH_01);
     }
 
-    Color::SetCurrent(Color::FILL);
+    Color::FILL.SetAsCurrent();
     // Пиковый детектор
     if (!SET_PEAKDET_DIS)
     {

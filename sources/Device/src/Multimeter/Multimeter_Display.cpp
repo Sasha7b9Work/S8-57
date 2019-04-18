@@ -87,7 +87,7 @@ static void DrawMeasure()
 
     Font::SetCurrent(Font::Type::_Big64);
 
-    Color::SetCurrent(color);
+    color.SetAsCurrent();
     
     DrawSymbols();
 
@@ -101,7 +101,7 @@ void Multimeter::Display::Update()
 
     DrawMeasure();
 
-    Color::SetCurrent(Color::FILL);
+    Color::FILL.SetAsCurrent();
 
     Menu::Draw();
 }

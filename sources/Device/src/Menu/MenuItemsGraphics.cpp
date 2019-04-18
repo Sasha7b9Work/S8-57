@@ -219,7 +219,7 @@ void Governor::DrawLowPart(int x, int y, bool shade)
             int limY = y - 2;
             int limWidth = Menu::Item::Value::WIDTH;
             int limHeight = Menu::Item::Value::HEIGHT - 1;
-            Color::SetCurrent(Color::BLACK);
+            Color::BLACK.SetAsCurrent();
             if (delta > 0)
             {
 				x = Text(Integer(GetValue()).ToString(false, 1)).DrawWithLimitation(drawX, y - delta, limX, limY, limWidth, limHeight);
@@ -285,14 +285,14 @@ void Choice::DrawClosed(int x, int y)
 
     int deltaY = (int)Step();
     Color colorText = shade ? Color::MenuItem(true) : Color::BLACK;
-    Color::SetCurrent(colorText);
+    colorText.SetAsCurrent();
     if (deltaY == 0)
     {
         NameCurrentSubItem().Draw(x + 4, y + Menu::Item::Value::HEIGHT + 1);
     }
     else
     {
-        Color::SetCurrent(Color::BACK);
+        Color::BACK.SetAsCurrent();
 		Text(NameCurrentSubItem()).DrawWithLimitation(x + 4, y + Menu::Item::Value::HEIGHT - deltaY + 1, x, y + 11, Menu::Item::Value::WIDTH, Menu::Item::Value::HEIGHT - 1);
 
         HLine(Menu::Item::Value::WIDTH + 1).Draw(x + 1, y + (deltaY > 0 ? 24 : 19) - deltaY);
@@ -336,17 +336,17 @@ void SButton::Draw(int x, int y)
         if (IsPressed())
         {
             Region(WIDTH_SB, WIDTH_SB).Fill(x, y, Color::FILL);
-            Color::SetCurrent(Color::BLACK);
+            Color::BLACK.SetAsCurrent();
         }
         else
         {
-            Color::SetCurrent(Color::FILL);
+            Color::FILL.SetAsCurrent();
         }
         funcForDraw(x, y);
     }
     else
     {
-        Color::SetCurrent(Color::FILL);
+        Color::FILL.SetAsCurrent();
     }
 }
 
@@ -442,7 +442,7 @@ void Page::DrawTitle(int x, int yTop)
 
     Menu::SetItemUnderButton(GetFuncButtonFromX(yTop), this);
 
-    Color::SetCurrent(Color::GRAY_75);
+    Color::GRAY_75.SetAsCurrent();
     DrawPagesUGO(eX + Menu::Title::WIDTH - 3, yTop + Menu::Title::HEIGHT);
     DrawNestingPage(eX + 5, yTop + Menu::Title::HEIGHT - 6);
 }

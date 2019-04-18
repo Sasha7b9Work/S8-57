@@ -106,7 +106,7 @@ static void DrawRAM()
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 static void DrawSpectrumChannel(const float *spectrum, Color color)
 {
-    Color::SetCurrent(color);
+    color.SetAsCurrent();
     int gridLeft = Grid::Left();
     int gridBottom = Grid::MathBottom();
     int gridHeight = Grid::MathHeight();
@@ -126,7 +126,7 @@ static void WriteParametersFFT(Chan::E ch, float freq0, float density0, float fr
     int dY = 10;
 
     char buffer[20];
-    Color::SetCurrent(Color::FILL);
+    Color::FILL.SetAsCurrent();
 
     Text(Osci::Measurements::Freq2String(freq0, false, buffer)).Draw(x, y);
 
@@ -143,7 +143,7 @@ static void WriteParametersFFT(Chan::E ch, float freq0, float density0, float fr
         y += dY * 3 + 4;
     }
 
-    Color::SetCurrent(Color::Channel(ch));
+    Color::Channel(ch).SetAsCurrent();
 
     Text(SCALE_FFT_IS_LOG ? SU::Db2String(density0, 4, buffer) : Osci::Measurements::Float2String(density0, false, buffer)).Draw(x, y);
 
@@ -319,7 +319,7 @@ static void DrawChannel(Chan::E ch)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void DrawModeLines(Chan::E ch, int left, int center, const uint8 *data, float scale)
 {
-    Color::SetCurrent(Color::Channel(ch));
+    Color::Channel(ch).SetAsCurrent();
 
     int x = left;
 
@@ -376,7 +376,7 @@ static void DrawModeLinesPeakDetOff(int center, const uint8 *data, float scale, 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void DrawModePoints(Chan::E ch, int left, int center, const uint8 *data, float scale)
 {
-    Color::SetCurrent(Color::Channel(ch));
+    Color::Channel(ch).SetAsCurrent();
 
     if (SET_PEAKDET_EN)
     {

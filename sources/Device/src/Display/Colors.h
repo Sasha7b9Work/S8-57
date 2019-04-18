@@ -56,7 +56,8 @@ public:
     static Color Contrast(Color color);     ///< Возвращает цвет, контрастный к color. Может быть белым или чёрным.
     static Color ChanHalf(Chan::E ch);
     /// Устанавливает текущий цвет отрисовки
-    static void SetCurrent(Color color = Color::NUMBER);
+    void SetAsCurrent();
+    static void SetCurrent(Color color);
     /// Возвращает текущий цвет отрисовки
     static Color GetCurent();
 

@@ -229,6 +229,7 @@ static void DrawMemoryWave(int num, bool exist)
     Region(width, 10).Fill(x, y, num == NUM_ROM_SIGNAL ? Color::FLASH_10 : Color::BACK);
     Rectangle(width, 10).Draw(x, y, Color::FILL);
     Color::SetCurrent(num == NUM_ROM_SIGNAL ? Color::FLASH_01 : Color::FILL);
+
     if (exist)
     {
         Integer(num + 1).ToString(false, 2).Draw(x + 2, y + 1);

@@ -369,7 +369,7 @@ static void DrawSetMask()
     };
 
     deltaY--;
-    Color::SetCurrent(Color::FILL);
+    Color::FILL.SetAsCurrent();
     for (int i = 0; i < (int)sizeof(strings) / 4; i++)
     {
         String(strings[i]).Draw(x0 + deltaX, y0 + 100 + deltaY * i);
@@ -380,7 +380,7 @@ static void DrawFileMask(int x, int y)
 {
     char *ch = FILE_NAME_MASK;
 
-    Color::SetCurrent(Color::FILL);
+    Color::FILL.SetAsCurrent();
     while (*ch != '\0')
     {
         if (*ch >= 32)

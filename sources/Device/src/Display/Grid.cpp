@@ -167,7 +167,7 @@ void Grid::DrawGridSignal(int left, int top, int width, int height)
     int right = left + width;
     int bottom = top + height;
 
-    Color::SetCurrent(Color::FILL);
+    Color::FILL.SetAsCurrent();
 
     if (top == Top())
     {
@@ -188,7 +188,7 @@ void Grid::DrawGridSignal(int left, int top, int width, int height)
     float centerX = (float)(left + width / 2);
     float centerY = (float)(top + height / 2);
 
-    Color::SetCurrent(Color::GRID);
+    Color::GRID.SetAsCurrent();
 
     if (TYPE_GRID_1)
     {
@@ -225,13 +225,13 @@ void Grid::DrawGridSpectrum()
 
             if (!Menu::IsMinimize())
             {
-                Color::SetCurrent(Color::FILL);
+                Color::FILL.SetAsCurrent();
                 String((char *)strs[i]).Draw(3, y - 4);
             }
         }
         if (!Menu::IsMinimize())
         {
-            Color::SetCurrent(Color::FILL);
+            Color::FILL.SetAsCurrent();
             String("Да").Draw(5, MathTop() + 1);
         }
     }
@@ -388,7 +388,7 @@ static int Grid::DeltaHforLineGrid()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void Grid::DrawTester()
 {
-    Color::SetCurrent(Color::FILL);
+    Color::FILL.SetAsCurrent();
 
     Rectangle(Display::WIDTH - 1, Display::HEIGHT - 1).Draw(0, 0);
 
@@ -396,7 +396,7 @@ static void Grid::DrawTester()
 
     float y0 = 0;
 
-    Color::SetCurrent(Color::GRID);
+    Color::GRID.SetAsCurrent();
 
     int x = (int)(x0 + Display::WIDTH / 2);
     int y = (int)(y0 + Display::HEIGHT / 2);
@@ -405,7 +405,7 @@ static void Grid::DrawTester()
 
 	HLine(Display::WIDTH).Draw(0, y);
 
-    Color::SetCurrent(Color::GRID);
+    Color::GRID.SetAsCurrent();
 
     int deltaX = 32;
     int deltaY = 24;
@@ -452,7 +452,7 @@ static void Grid::DrawTester()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Grid::DrawRecorder()
 {
-    Color::SetCurrent(Color::GRAY_10);
+    Color::GRAY_10.SetAsCurrent();
 
     VLine vLine(Display::HEIGHT - 1);
 

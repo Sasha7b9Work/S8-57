@@ -79,7 +79,7 @@ void Cursor::Draw()
 {
     Chan::E source = CURS_SOURCE;
 
-    Color::SetCurrent(Color::Cursors(source));
+    Color::Cursors(source).SetAsCurrent();
 
     if (NecessaryDraw())
     {

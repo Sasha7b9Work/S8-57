@@ -73,7 +73,7 @@ void Osci::Display::DrawCursorTrigLevel()
     y = (y - Grid::ChannelCenterHeight()) + Grid::ChannelCenterHeight();
 
     int x = Grid::Right();
-    Color::SetCurrent(Color::Trig());
+    Color::Trig().SetAsCurrent();
 
     if (y > Grid::ChannelBottom())
     {

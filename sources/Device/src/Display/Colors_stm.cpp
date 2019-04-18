@@ -3,11 +3,20 @@
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void Color::SetCurrent(Color color)
+void Color::SetAsCurrent()
 {
-    currentColor = color;
+    if (value != Color::NUMBER.value)
+    {
+        currentColor = *this;
+    }
     if (!WriteFlashColor())
     {
         WriteToDisplay(currentColor);
     }
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Color::SetCurrent(Color color)
+{
+    color.SetAsCurrent();
 }

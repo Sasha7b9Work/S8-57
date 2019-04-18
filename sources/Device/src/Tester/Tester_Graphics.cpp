@@ -89,7 +89,8 @@ static void DrawData(int numStep, int /*x0*/, int /*y0*/)
     }
     else
     {
-        Color::SetCurrent(ColorForStep(numStep));
+        ColorForStep(numStep).SetAsCurrent();
+
         for(int i = 1; i < 240; i++)
         {
             Point().Draw(x[i], y[i]);
@@ -185,9 +186,9 @@ static void DrawParametersChannel(Chan::E ch, int x, int y)
     Scale scale(range.value, ch);
     Shift shift(rShift, ch);
 
-    Color::SetCurrent(Color::FILL);
+    Color::FILL.SetAsCurrent();
     Text(scale.ToString()).DrawOnBackground(x, y, Color::BACK);
-    Color::SetCurrent(Color::FILL);
+    Color::FILL.SetAsCurrent();
 
     Text(shift.ToString(scale.value).CString()).DrawOnBackground(x + ((ch == Chan::A) ? 25 : 35), y, Color::BACK);
 }

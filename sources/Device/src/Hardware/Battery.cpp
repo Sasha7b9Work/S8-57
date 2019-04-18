@@ -132,7 +132,7 @@ void Battery::Draw(int x, int y)
 
     float percents = CalculatePercents(akk);
 
-    Color::SetCurrent(Color::FILL);
+    Color::FILL.SetAsCurrent();
 
     Font::SetCurrent(Font::Type::_5);
 

@@ -72,7 +72,7 @@ int Display::Primitives::Char::Draw(int x, int y, Color color)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Display::Primitives::Char::Draw4SymbolsInRect(int x, int y, Color color)
 {
-    Color::SetCurrent(color);
+    color.SetAsCurrent();
 
     for (char i = 0; i < 2; i++)
     {
@@ -105,7 +105,7 @@ Display::Primitives::Text::Text(const String &string, uint8 _size) : sizeOfType(
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 int Display::Primitives::Text::Draw(int x, int y, Color color)
 {
-    Color::SetCurrent(color);
+    color.SetAsCurrent();
 
     if (std::strlen(text) == 0) //-V805
     {
@@ -190,7 +190,7 @@ int Display::Primitives::Text::DrawOnBackground(int x, int y, Color colorBackgro
     Color colorText(Color::GetCurent());
     Region(width, height).Fill(x - 1, y, colorBackground);
 
-    Color::SetCurrent(colorText);
+    colorText.SetAsCurrent();
 
     return Text(text).Draw(x, y);
 }
@@ -444,7 +444,7 @@ static int DrawPartWord(char *word, int x, int y, int xRight, bool draw) //-V250
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 int Display::Primitives::Text::DrawInRectWithTransfers(int eX, int eY, int eWidth, int eHeight, Color color)
 {
-    Color::SetCurrent(color);
+    color.SetAsCurrent();
 
     int top = eY;
     int left = eX;
@@ -582,11 +582,9 @@ int Display::Primitives::Text::DrawInBoundedRectWithTransfers(int x, int y, int 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 int Display::Primitives::Text::DrawInCenterRectAndBoundIt(int x, int y, int width, int height, Color colorBackground, Color colorFill)
 {
-    //FillBoundedRegion(x, y, width, height, colorBackground, colorFill);
     Region(width, height).DrawBounded(x, y, colorBackground, colorFill);
 
-    Color::SetCurrent(colorFill);
-    //return DrawStringInCenterRect(x, y, width, height, text);
+    colorFill.SetAsCurrent();
 
     return Text(text).DrawInCenterRect(x, y, width, height);
 }
@@ -685,7 +683,7 @@ Display::Primitives::VPointLine::VPointLine(int _height, float _delta) : height(
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Display::Primitives::VPointLine::Draw(int _x, int _y, Color color)
 {
-    Color::SetCurrent(color);
+    color.SetAsCurrent();
 
     int y0 = _y;
     int y1 = y0 + height;
@@ -728,7 +726,7 @@ Display::Primitives::VLineArray::VLineArray(int _numLines, uint8 *_y0y1) : numLi
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Display::Primitives::VLineArray::Draw(int x, Color color)
 {
-    Color::SetCurrent(color);
+    color.SetAsCurrent();
 
     for (int i = 0; i < numLines; i++)
     {

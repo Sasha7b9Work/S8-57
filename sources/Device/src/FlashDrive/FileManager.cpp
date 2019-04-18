@@ -63,7 +63,7 @@ static void DrawLongString(int x, int y, const char *string, bool hightlight)
     }
     else
     {
-        Color::SetCurrent(color);
+        color.SetAsCurrent();
 
 		Text(string).DrawWithLimitation(x, y, x, y, WIDTH_COL, 10);
 
@@ -122,7 +122,7 @@ static void DrawFiles(int x, int y)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void DrawNameCurrentDir(int left, int top) //-V2506
 {
-    Color::SetCurrent(Color::FILL);
+    Color::FILL.SetAsCurrent();
     int length = Font::GetLengthText(currentDir);
     if (length < 277)
     {
