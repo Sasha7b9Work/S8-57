@@ -156,7 +156,7 @@ void Recorder::OnPressStart()
 {
     if (Menu::OpenedItem() != (Control *)PageFunction::PageRecorder::pointer) //-V1027
     {
-        Display::FuncOnWaitStart(DICT(DGotoPageRecorder), false);
+        Display::FuncOnWaitStart("Перейдите на страницу РЕГИСТРАТОР", false);
 
         Timer::PauseOnTime(2000);
 
