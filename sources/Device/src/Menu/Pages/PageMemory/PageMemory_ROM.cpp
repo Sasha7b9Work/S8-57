@@ -160,7 +160,7 @@ static void SaveSignalToIntMemory()
 
 static void OnPress_Internal_SaveToMemory()
 {
-    Display::FuncOnWaitStart(DICT(DStoredInMemory), false);
+    Display::FuncOnWaitStart("Записываю в память", false);
     SaveSignalToIntMemory();
     Display::FuncOnWaitStop();
 }

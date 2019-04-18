@@ -261,7 +261,7 @@ static void WriteTextVoltage(Chan::E ch, int x, int y)
     const int SIZE = 100;
 
     char buffer[SIZE];
-    std::snprintf(buffer, SIZE, "%s\xa5%s\xa5%s", Chan(ch).IsA() ? DICT(D1ch) : DICT(D2ch), ModeCouple(SET_COUPLE(ch)).UGO(), Range(range).ToString(SET_DIVIDER(ch)));
+    std::snprintf(buffer, SIZE, "%s\xa5%s\xa5%s", Chan(ch).IsA() ? "1к" : "2к", ModeCouple(SET_COUPLE(ch)).UGO(), Range(range).ToString(SET_DIVIDER(ch)));
     String(buffer).Draw(x + 1, y, colorDraw);
 
     char bufferTemp[SIZE];
@@ -366,7 +366,7 @@ static void DrawRightPart(int x0, int y0)
         VLine(Grid::Top() - 3).Draw(x, 1, Color::FILL);
 
         x += 2;
-        String(DICT(DMode)).Draw(x, -1);
+        String("режим").Draw(x, -1);
         Text(strs[MODE_WORK]).DrawInCenterRect(x + 1, 9, 25, 8);
     }
     else

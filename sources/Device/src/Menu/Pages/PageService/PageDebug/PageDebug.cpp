@@ -504,7 +504,7 @@ static bool IsActive_SaveFirmware()
 
 static void OnPress_SaveFirmware()
 {
-    Display::FuncOnWaitStart(DICT(DSaveFirmware), false);
+    Display::FuncOnWaitStart("Сохраняю прошивку", false);
 
     StructForWrite structForWrite;
 

@@ -17,12 +17,6 @@ enum DictWord
     DCalibrateChB,      // "Калибровка канала 2"
     DTrigLev,           // "Ур синхр = "
     DTrig,              // "СИ"
-    DDetectFlashDrive,  // "Обнаружено запоминающее устройство"
-    DMode,              // "режим"
-    D1ch,               // "1к"
-    D2ch,               // "2к"
-    DSaveFirmware,      // "Сохраняю прошивку"
-    DStoredInMemory,    // "Записываю в память"
     DNumWords
 };
 
