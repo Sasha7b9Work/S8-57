@@ -5,7 +5,6 @@
 #include "FPGA/FPGA_Settings.h"
 #include "Menu/MenuItems.h"
 #include "Utils/CommonFunctions.h"
-#include "Utils/Dictionary.h"
 #include "Settings/Settings.h"
 
 #include "Osci/Osci.h"

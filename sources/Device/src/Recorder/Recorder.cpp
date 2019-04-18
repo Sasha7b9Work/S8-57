@@ -14,7 +14,6 @@
 #include "Display/Display_Primitives.h"
 #include "Display/Painter.h"
 #include "Hardware/Timer.h"
-#include "Utils/Dictionary.h"
 
 
 using namespace Display::Primitives;

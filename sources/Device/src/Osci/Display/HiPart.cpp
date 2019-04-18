@@ -9,7 +9,6 @@
 #include "FPGA/FPGA_Math.h"
 #include "Osci/Measurements/Measurements_Table.h"
 #include "Tables.h"
-#include "Utils/Dictionary.h"
 #include "Utils/Values.h"
 #include <cmath>
 #include <cstdio>

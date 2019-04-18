@@ -8,7 +8,6 @@
 #include "Settings/Settings.h"
 #include "Menu/Pages/Include/Definition.h"
 #include "Utils/CommonFunctions.h"
-#include "Utils/Dictionary.h"
 #include "Hardware/Timer.h"
 
 #include "Osci/Osci.h"

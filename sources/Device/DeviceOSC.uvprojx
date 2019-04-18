@@ -1791,16 +1791,6 @@
               <FilePath>.\src\Utils\Debug.h</FilePath>
             </File>
             <File>
-              <FileName>Dictionary.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Utils\Dictionary.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Dictionary.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Utils\Dictionary.h</FilePath>
-            </File>
-            <File>
               <FileName>Math.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Utils\Math.cpp</FilePath>

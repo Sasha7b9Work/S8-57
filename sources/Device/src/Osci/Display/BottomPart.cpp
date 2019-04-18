@@ -7,7 +7,6 @@
 #include "FPGA/FPGA.h"
 #include "FPGA/FPGA_Math.h"
 #include "Settings/Settings.h"
-#include "Utils/Dictionary.h"
 #include "Utils/Values.h"
 #include <cmath>
 

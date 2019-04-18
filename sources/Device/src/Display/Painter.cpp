@@ -13,7 +13,6 @@
 #include "FlashDrive/FlashDrive.h"
 #include "Keyboard/DecoderDevice.h"
 #include "Display/Display.h"
-#include "Utils/Dictionary.h"
 
 
 using HAL::FSMC;

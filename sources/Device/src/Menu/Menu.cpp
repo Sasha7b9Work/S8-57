@@ -26,7 +26,6 @@
 #include "Utils/Debug.h"
 #include "Hardware/HAL/HAL.h"
 #include "Keyboard/DecoderDevice.h"
-#include "Utils/Dictionary.h"
 
 
 using namespace Display::Primitives;
