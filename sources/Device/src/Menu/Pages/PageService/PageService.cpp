@@ -85,13 +85,13 @@ static bool IsActive_Calibrator_Calibrate()
 
 static void OnPress_Calibrator_Calibrate()
 {
-    Display::FuncOnWaitStart(DICT(DCalibrateChA), false);
+    Display::FuncOnWaitStart("Калибровка канала 1", false);
 
     Timer::PauseOnTime(5000);
 
     Display::FuncOnWaitStop();
 
-    Display::FuncOnWaitStart(DICT(DCalibrateChB), false);
+    Display::FuncOnWaitStart("Калибровка канала 2", false);
 
     Timer::PauseOnTime(5000);
 

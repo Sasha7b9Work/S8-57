@@ -9,7 +9,6 @@ enum DictWord
     Ds,             // "с"
     Dns,            // "нс"
     Dus,            // "мкс"
-    Dms,            // "мс"
     DNumWords
 };
 

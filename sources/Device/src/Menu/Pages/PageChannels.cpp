@@ -75,7 +75,7 @@ DEF_CHOICE_2( cBandwidthA,                                                      
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void Balance(Chan::E ch)
 {
-    Display::FuncOnWaitStart(ch == Chan::A ? DICT(DBalanceChA) : DICT(DBalanceChB), false);
+    Display::FuncOnWaitStart(ch == Chan::A ? "Балансировка канала 1" : "Балансировка канала 2", false);
 
     Settings old = set;
 

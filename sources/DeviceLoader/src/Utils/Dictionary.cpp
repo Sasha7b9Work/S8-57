@@ -9,6 +9,5 @@ pString dictWords[DNumWords][2] =
     {"ћ√ц", "MHz"},
     {"с", "s"},
     {"нс", "ns"},
-    {"мкс", "us"},
-    {"мс", "ms"}
+    {"мкс", "us"}
 };

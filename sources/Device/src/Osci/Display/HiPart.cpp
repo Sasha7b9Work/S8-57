@@ -347,7 +347,7 @@ static void DrawRightPart(int x0, int y0)
         if (Trig::SyncPulse())
         {
             Region(26, 16).Fill(x0 + 1, y0 + 1, Color::FILL);
-            String(DICT(DTrig)).Draw(x0 + 9, y0 + 5, Color::BACK);
+            String("ях").Draw(x0 + 9, y0 + 5, Color::BACK);
         }
     }
 
