@@ -407,7 +407,6 @@ void FrequencyCounter::Draw()
 
     if (FREQ_METER_MODE_VIEW_IS_FREQUENCY)
     {
-
         DrawFrequency(x, y);
     }
     else
