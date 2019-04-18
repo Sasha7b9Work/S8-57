@@ -206,7 +206,7 @@ static void SaveScreenToFlash()
 
     FDrive::CloseFile(&structForWrite);
 
-    Display::FuncOnWaitStart(DICT(DFileSaved), false);
+    Display::FuncOnWaitStart("Файл сохранён", false);
 
     uint timeStart = TIME_MS;
 

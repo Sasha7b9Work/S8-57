@@ -442,7 +442,7 @@ static void Information_Draw()
     int y = 20;
     Rectangle(319, 239).Draw(0, 0, Color::FILL);
     y += dY;
-    String(DICT(DInformation)).Draw(x, y);
+    String("»Õ‘Œ–Ã¿÷»ﬂ").Draw(x, y);
     y += dY;
 
     char buffer[100];

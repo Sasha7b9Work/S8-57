@@ -29,8 +29,6 @@ enum DictWord
     DModel,             // "Модель"
     DSoftware,          // "Программное обеспечение :"
     DVersion,           // "версия %s"
-    DInformation,       // "ИНФОРМАЦИЯ"
-    DFileSaved,         // "Файл сохранён"
     DNumWords
 };
 
