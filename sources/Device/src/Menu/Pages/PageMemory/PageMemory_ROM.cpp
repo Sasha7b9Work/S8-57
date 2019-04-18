@@ -126,7 +126,7 @@ DEF_SMALL_BUTTON_HINTS_3( bInternal_ModeShow,                                   
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void OnPress_Internal_Delete()
 {
-    Display::FuncOnWaitStart(DICT(DDeleteFromMemory), false);
+    Display::FuncOnWaitStart("”дал€ю сохранЄнные данные", false);
     Memory::DeleteData(NUM_ROM_SIGNAL);
     Display::FuncOnWaitStop();
 }

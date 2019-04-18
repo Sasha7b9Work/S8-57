@@ -23,12 +23,6 @@ enum DictWord
     D2ch,               // "2к"
     DSaveFirmware,      // "Сохраняю прошивку"
     DStoredInMemory,    // "Записываю в память"
-    DDeleteFromMemory,  // "Удаляю сохранённые данные"
-    DDis,               // "Вых"
-    DShift,             // "См"
-    DModel,             // "Модель"
-    DSoftware,          // "Программное обеспечение :"
-    DVersion,           // "версия %s"
     DNumWords
 };
 

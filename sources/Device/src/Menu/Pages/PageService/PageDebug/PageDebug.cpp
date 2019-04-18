@@ -613,7 +613,7 @@ DEF_PAGE_SB( ppSerialNumber, // -V641 // -V1027                                 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void OnPress_EraseData()
 {
-    Display::FuncOnWaitStart(DICT(DDeleteFromMemory), false);
+    Display::FuncOnWaitStart("”дал€ю сохранЄнные данные", false);
     ::Memory::DeleteAllData();
     Display::FuncOnWaitStop();
 }

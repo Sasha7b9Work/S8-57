@@ -128,7 +128,7 @@ static void OnPress_Function_Screen()
 
 static void Draw_Function_Screen_Disable(int x, int y)
 {
-    String(DICT(DDis)).Draw(x + 2, y + 5);
+    String("Выx").Draw(x + 2, y + 5);
 }
 
 static void Draw_Function_Screen_Separate(int x, int y)
@@ -210,7 +210,7 @@ static void Draw_Function_ModeRegSet_Range(int x, int y)
 
 static void Draw_Function_ModeRegSet_RShift(int x, int y)
 {
-    String(DICT(DShift)).Draw(x + 5, y + 5);
+    String("См").Draw(x + 5, y + 5);
 }
 
 static void Draw_Function_ModeRegSet(int x, int y)
@@ -447,15 +447,15 @@ static void Information_Draw()
 
     char buffer[100];
 
-    std::sprintf(buffer, "%s : %s", DICT(DModel), MODEL_RU);
+    std::sprintf(buffer, "%s : %s", "Модель", MODEL_RU);
     String(buffer).Draw(x, y);
 
     y += 2 * dY;
 
-    String(DICT(DSoftware)).Draw(x, y);
+    String("Программное обеспечение :").Draw(x, y);
     y += dY;
 
-    std::sprintf(buffer, DICT(DVersion), NUM_VER);
+    std::sprintf(buffer, "версия %s", NUM_VER);
 
     String(buffer).Draw(x, y);
     y += dY;
