@@ -11,7 +11,10 @@ namespace Transceiver
     /// Инициализация пина-индикатора передачи. Реализуется приложением.
     void InitSendPin();
     /// Установка функции инициализации остальных пинов. Эта функция будет вызваться при каждой перече данных.
-    void SetCallbackInitPins(void (*func)());
+    void SetCallbackInitPins(void(*func)());
+    void SetCallbackSetREQ_SEND(void(*func)());
+    void SetCallbackResetREQ_SEND(void(*func)());
+    void SetCallbackReadALLOW_SEND(bool(*func)());
     /// Передача size байт, начиная с адреса data
     void Send(uint8 *data, uint size);
 };
