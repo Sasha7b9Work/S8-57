@@ -75,10 +75,6 @@ namespace Keyboard
     void SendCommand(Control control, Control::Action::E action);
 
     uint TimeBetweenRepeats(uint time);
-
-    Control commands[10];
-
-    int pointer;
     /// ѕри обнаружении нажати€ кнопки сюда записываетс€ врем€ нажати€
     uint timePress[NUM_RL][NUM_SL];
     /// ”становленное в true значение означает, что сохран€ть куда-либо информацию о еЄ состо€нии нельз€ до отпускани€ (чтобы не было ложных
@@ -160,7 +156,6 @@ void Keyboard::Update()
     {
         return;
     }
-    pointer = 0;
 
     uint time = HAL_GetTick();
 
@@ -238,8 +233,6 @@ void Keyboard::Update()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Keyboard::SendCommand(Control control, Control::Action::E action)
 {
-    commands[pointer] = control;
-    commands[pointer++].action = action;
     uint8 data[3] = {Command::ButtonPress, (uint8)control, (uint8)action};
     FSMC::WriteBuffer(data, 3);  // ѕрерывание от клавиатуры имеет более низкий приоритет, чем чтени€ по шине, поэтому запись не запуститс€ до тех
                                  // пор, пока не закончитс€ чтение
