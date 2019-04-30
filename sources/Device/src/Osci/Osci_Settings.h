@@ -235,8 +235,6 @@ namespace Osci
             static int Zero();
             static int Max();
 
-            int InPoints();
-
             static void Set(int tShift);
 
             static void Load();
