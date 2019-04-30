@@ -11,8 +11,6 @@ void Settings::Load(bool _default)
     {
         Reset();
         Osci::Init();
-        uint8 data[1024];
-        TransformFromLoad(data);
         Menu::Init();
         FPGA::OnPressStart();
     }
@@ -21,7 +19,9 @@ void Settings::Load(bool _default)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Settings::Save()
 {
-    uint8 data[1024];
-    set.TransformForSave(data);
+    volatile int tShift = SET_TSHIFT;
+
     Memory::SaveSettings();
+
+    tShift = SET_TSHIFT;
 }

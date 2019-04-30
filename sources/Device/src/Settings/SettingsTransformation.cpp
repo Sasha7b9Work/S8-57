@@ -19,40 +19,6 @@ enum Parameter
 static uint8 *data;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void Settings::TransformForSave(uint8 d[1024])
-{
-    SetData(d);
-
-    //SaveEnum16(DisplayModeDrawSignal, disp_modeDrawSignal);
-    
-    //*data++ = DisplayModeDrawSignal;
-    //*data++ = disp_modeDrawSignal;
-
-    *((uint16 *)data) = (uint16)((DisplayModeDrawSignal | (disp_modeDrawSignal << 8)));
-    data += 2;
-    
-    //SaveEnum16(DisplayThicknessSignal, (uint8)disp_thickness);
-    
-    //*data++ = DisplayThicknessSignal;
-    //*data++ = disp_thickness;
-    
-    SaveEnum16(DisplayBackground, (uint8)disp_background);
-    
-    //*data++ = DisplayBackground;
-    //*data++ = disp_background;
-    
-    SaveEnum16(DisplayShowStringNavigation, (uint8)set.disp_showStringNavigation);
-    SaveEnum16(DisplayENumMinMax, (uint8)set.disp_ENumMinMax);
-    SaveEnum16(DisplayENumAverage, (uint8)set.disp_ENumAverage);
-    SaveEnum16(DisplayENumAccum, (uint8)set.disp_ENumAccum);
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Settings::TransformFromLoad(uint8 /*d*/ [1024])
-{
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Settings::SetData(uint8 d[1024])
 {
     data = d;

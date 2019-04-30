@@ -50,10 +50,6 @@ public:
     static void Load(bool _default = false);
     static void Save();
     static void Reset();
-    /// Преобразовать настройки в массив для сохранения в энергонезависимую память
-    void TransformForSave(uint8 data[1024]);
-    /// Преобразовать загруженные из энергонезависимой памяти настройки в нормальный вид
-    static void TransformFromLoad(uint8 data[1024]);
 
     void SetData(uint8 data[1024]);
     /// Сохраняет значение перечислимого типа. Возвращает адрес первой свободной ячейки (туда надо записывать следующее значение)
