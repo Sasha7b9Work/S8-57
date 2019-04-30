@@ -65,7 +65,7 @@ const Settings Settings::defaultSettings =
 
     // Μενώ ΠΐΗΒ¨ΠÒΚΐ
 
-    TShift(0),              // time_shift;         
+    0,                      // time_shift;         
     TBase::_5ms,            // time_base;         
     PeakDetMode::Disabled,  // time_peakDet;      
     TPos::Center,           // time_TPos;         

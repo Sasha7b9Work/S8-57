@@ -109,7 +109,7 @@ public:
 
     // Меню РАЗВЁРТКА
 
-    Osci::Settings::TShift           time_shift;
+    int                              time_shift;
     Osci::Settings::TBase::E         time_base;
     Osci::Settings::PeakDetMode::E   time_peakDet;
     Osci::Settings::TPos::E          time_TPos;
@@ -294,3 +294,5 @@ public:
 extern Settings set;
 
 extern int8 divider[2]; // Делитель канала
+
+extern Osci::Settings::TShift TimeShift;
