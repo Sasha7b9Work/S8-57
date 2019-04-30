@@ -3,6 +3,7 @@
 #include "Display/Painter.h"
 #include "Hardware/CPU.h"
 #include "Utils/DecoderPanel.h"
+#include "Hardware/Communicator.h"
 #include "Hardware/FSMC.h"
 #include "Hardware/Timer.h"
 #include "Hardware/Keyboard.h"
@@ -15,6 +16,7 @@ int main()
     CPU::Init();
     Display::Init();
     Keyboard::Init();
+    Communicator::Init();
     FSMC::Init();
 
     while(1)

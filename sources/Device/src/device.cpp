@@ -5,6 +5,7 @@
 #include "FPGA/FPGA.h"
 #include "FPGA/FPGA_Settings.h"
 #include "Hardware/Beeper.h"
+#include "Hardware/Communicator.h"
 #include "Hardware/Timer.h"
 #include "Hardware/VCP.h"
 #include "Keyboard/DecoderDevice.h"
@@ -44,6 +45,8 @@ void Device::Init()
     Timer::Init();
     
     PAUSE_ON_MS(500);
+
+    Communicator::Init();
 
     Beeper::Init();
 
