@@ -235,8 +235,6 @@ namespace Osci
             static int Zero();
             static int Max();
 
-            TShift(int tshift);
-
             int InPoints();
 
             static void Set(int tShift);
@@ -245,13 +243,7 @@ namespace Osci
 
             static void Change(int delta);
 
-            operator int() const { return value; };
-
-            String ToString(Osci::Settings::TBase::E tBase) const;
-
-        private:
-
-            static int value;
+            static String ToString(Osci::Settings::TBase::E tBase);
         };
 
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

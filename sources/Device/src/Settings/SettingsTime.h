@@ -1,7 +1,7 @@
 #pragma once
 
 
-#define SET_TSHIFT          (TimeShift)
+#define SET_TSHIFT          (set.time_shift)
 #define SET_TBASE           (set.time_base)
 #define TIME_DIV_XPOS       (set.time_timeDivXPos)
 

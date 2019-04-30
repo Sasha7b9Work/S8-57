@@ -14,14 +14,10 @@ void Settings::Load(bool _default)
         Menu::Init();
         FPGA::OnPressStart();
     }
-
-    SET_TSHIFT.Set(set.time_shift);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Settings::Save()
 {
-    set.time_shift = SET_TSHIFT;
-    
     Memory::SaveSettings();
 }

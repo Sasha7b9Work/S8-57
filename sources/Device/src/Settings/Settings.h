@@ -294,5 +294,3 @@ public:
 extern Settings set;
 
 extern int8 divider[2]; // Делитель канала
-
-extern Osci::Settings::TShift TimeShift;
