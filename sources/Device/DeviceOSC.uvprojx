@@ -395,6 +395,16 @@
               <FileType>5</FileType>
               <FilePath>..\common\Message.h</FilePath>
             </File>
+            <File>
+              <FileName>Communication.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\common\Communication.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Communication.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\common\Communication.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
