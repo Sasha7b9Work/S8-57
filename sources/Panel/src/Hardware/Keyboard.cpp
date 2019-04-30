@@ -69,11 +69,25 @@ static GPIO_TypeDef* rlsPorts[Keyboard::NUM_RL] = {GPIOD, GPIOA, GPIOA, GPIOD, G
 static uint prevRepeat = 0;
 static uint prevPause = 0;
 
-int     Keyboard::pointer = 0;
-bool    Keyboard::init = false;
-Control Keyboard::commands[10];
-uint    Keyboard::timePress[NUM_RL][NUM_SL];
-bool    Keyboard::alreadyLong[NUM_RL][NUM_SL];
+
+namespace Keyboard
+{
+    void SendCommand(Control control, Control::Action::E action);
+
+    uint TimeBetweenRepeats(uint time);
+
+    Control commands[10];
+
+    int pointer;
+    /// При обнаружении нажатия кнопки сюда записывается время нажатия
+    uint timePress[NUM_RL][NUM_SL];
+    /// Установленное в true значение означает, что сохранять куда-либо информацию о её состоянии нельзя до отпускания (чтобы не было ложных
+    /// срабатываний типа Long
+    bool alreadyLong[NUM_RL][NUM_SL];
+
+    bool init;
+}
+
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void Keyboard::Init()
@@ -171,7 +185,7 @@ void Keyboard::Update()
                             timePress[rl][sl] = 0;
                             if (!alreadyLong[rl][sl])
                             {
-                                FillCommand(controls[rl][sl], Control::Action::Release);
+                                SendCommand(controls[rl][sl], Control::Action::Release);
                             }
                             alreadyLong[rl][sl] = false;
                             prevRepeat = 0;
@@ -188,12 +202,12 @@ void Keyboard::Update()
                             {
                                 prevPause = TimeBetweenRepeats(prevPause);
                                 prevRepeat = time;
-                                FillCommand(controls[rl][sl], Control::Action::Repeat);
+                                SendCommand(controls[rl][sl], Control::Action::Repeat);
                             }
                         }
                         else if(time - timePress[rl][sl] > 500 && !alreadyLong[rl][sl])
                         {
-                            FillCommand(controls[rl][sl], Control::Action::Long);
+                            SendCommand(controls[rl][sl], Control::Action::Long);
                             alreadyLong[rl][sl] = true;
                         }
                         else
@@ -205,7 +219,7 @@ void Keyboard::Update()
                 else if (BUTTON_IS_PRESS(state) && !alreadyLong[rl][sl])
                 {
                     timePress[rl][sl] = time;
-                    FillCommand(controls[rl][sl], Control::Action::Press);
+                    SendCommand(controls[rl][sl], Control::Action::Press);
                     prevRepeat = 0;
                 }
                 else
@@ -222,7 +236,7 @@ void Keyboard::Update()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Keyboard::FillCommand(Control control, Control::Action::E action)
+void Keyboard::SendCommand(Control control, Control::Action::E action)
 {
     commands[pointer] = control;
     commands[pointer++].action = action;
