@@ -8,13 +8,16 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 namespace Transceiver
 {
-    /// Инициализация пина-индикатора передачи. Реализуется приложением.
-    void InitSendPin();
-    /// Установка функции инициализации остальных пинов. Эта функция будет вызваться при каждой перече данных.
-    void SetCallbackInitPins(void(*func)());
-    void SetCallbackSetREQ_SEND(void(*func)());
-    void SetCallbackResetREQ_SEND(void(*func)());
-    void SetCallbackReadALLOW_SEND(bool(*func)());
+    void SetCallbacks(
+        void(*InitSendPin)(),
+        void(*InitPins)(),
+        void(*SetREQ_SEND)(),
+        void(*ResetREQ_SEND)(),
+        int(*ReadALLOW_SEND)(),
+        int(*ReadCONF_DATA)(),
+        void(*SetCLK)(),
+        void(*ResetCLK)()
+    );
     /// Передача size байт, начиная с адреса data
     void Send(uint8 *data, uint size);
 };
@@ -22,12 +25,16 @@ namespace Transceiver
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 namespace Receiver
 {
-    /// Инициалзиация пина-индикатора передчи. Реализуется приложением.
-    void InitSendPin();
-    /// Установка функции инициализации остальных пинов. Эта функция будет вызываться каждый раз, когда нужно принимать данные
-    void SetCallbackInitPins(void(*func)());
-    /// Установка функции приёма принимаемых байт. Будет вызываться на каждый очередной принятый байт.
-    void SetCallbackReceive(void(*func)(uint8));
+    void SetCallbacks(
+        void(*InitPins)(),
+        int(*ReadREQ_SEND)(),
+        void(*SetALLOW_SEND)(),
+        void(*ResetALLOW_SEND)(),
+        void(*SetCONF_DATA)(),
+        void(*ResetCONF_DATA)(),
+        int(*ReadCLK)(),
+        void(*FuncRead)(uint8)
+    );
     /// Функция циклического опроса. Принимает данные, если таковые имеются, и передаёт их через функцию, установленную в SetCallbackReceive.
     void Update();
 };
