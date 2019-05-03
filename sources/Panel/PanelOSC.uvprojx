@@ -1327,16 +1327,6 @@
           <GroupName>Hardware</GroupName>
           <Files>
             <File>
-              <FileName>FSMC.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Hardware\FSMC.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>FSMC.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Hardware\FSMC.h</FilePath>
-            </File>
-            <File>
               <FileName>CPU.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Hardware\CPU.cpp</FilePath>

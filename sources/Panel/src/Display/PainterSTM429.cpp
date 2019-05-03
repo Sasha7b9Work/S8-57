@@ -1,6 +1,6 @@
 #include "Painter.h"
+#include "Communication.h"
 #include "Hardware/CPU.h"
-#include "Hardware/FSMC.h"
 #include "Hardware/LTDC.h"
 #include "Utils/Math.h"
 #include "Colors.h"
@@ -54,7 +54,7 @@ void Painter::EndScene(void)
         uint8 buffer[SIZE] = { Command::Screen, (uint8)sendingString };
         memcpy(buffer + 2, Display::GetBuffer() + sendingString * SIZE_STRING, SIZE_STRING);
 
-        FSMC::WriteBuffer(buffer, SIZE_STRING);
+        Transceiver::Send(buffer, SIZE_STRING);
 
         sendingString++;
         if (sendingString == 120)
@@ -253,11 +253,7 @@ void Painter::SetPoint(int x, int y)
 {
     if (x >= 0 && x < BUFFER_WIDTH && y >= 0 && y < BUFFER_HEIGHT)
     {
-#ifdef OPEN
-        FillRegion(x, y, 0, 0);
-#else
         *(Display::GetBuffer() + y * BUFFER_WIDTH + x) = currentColor.value;
-#endif
     }
 }
 
@@ -270,7 +266,7 @@ void Painter::SendRow(int row)
 
     memcpy(&data[2], points, 320);
 
-    FSMC::WriteBuffer(data, 322);
+    Transceiver::Send(data, 322);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

@@ -1,8 +1,8 @@
 #include "Keyboard.h"
+#include "Communication.h"
 #include "Display/Display.h"
 #include "Hardware/CPU.h"
 #include "Utils/DecoderPanel.h"
-#include "Hardware/FSMC.h"
 #include "Hardware/Timer.h"
 #include "Utils/Math.h"
 #include "stm32f4xx_it.h"
@@ -147,11 +147,6 @@ void Keyboard::Init()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Keyboard::Update()
 {
-    if (FSMC::InNowMode())
-    {
-        return;
-    }
-
     if (!init)
     {
         return;
@@ -234,8 +229,7 @@ void Keyboard::Update()
 void Keyboard::SendCommand(Control control, Control::Action::E action)
 {
     uint8 data[3] = {Command::ButtonPress, (uint8)control, (uint8)action};
-    FSMC::WriteBuffer(data, 3);  // Прерывание от клавиатуры имеет более низкий приоритет, чем чтения по шине, поэтому запись не запустится до тех
-                                 // пор, пока не закончится чтение
+    Transceiver::Send(data, 3);
 }   
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

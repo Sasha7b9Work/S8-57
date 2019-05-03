@@ -1,6 +1,5 @@
 #include "log.h"
 #include "DecoderPanel.h"
-#include "Hardware/FSMC.h"
 #include "Display/Display.h"
 #include "Display/Painter.h"
 #include "Display/Text.h"
