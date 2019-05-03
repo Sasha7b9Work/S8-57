@@ -13,10 +13,12 @@ namespace Transceiver
         void(*InitPins)(),
         void(*SetREQ_SEND)(),
         void(*ResetREQ_SEND)(),
-        int(*ReadALLOW_SEND)(),
-        int(*ReadCONF_DATA)(),
+        bool(*ReadALLOW_SEND)(),
+        bool(*ReadCONF_DATA)(),
         void(*SetCLK)(),
-        void(*ResetCLK)()
+        void(*ResetCLK)(),
+        void(*SetDATA)(),
+        void(*ResetDATA)()
     );
     /// Передача size байт, начиная с адреса data
     void Send(uint8 *data, uint size);
@@ -29,12 +31,12 @@ namespace Receiver
 {
     void SetCallbacks(
         void(*InitPins)(),
-        int(*ReadREQ_SEND)(),
+        bool(*ReadREQ_SEND)(),
         void(*SetALLOW_SEND)(),
         void(*ResetALLOW_SEND)(),
         void(*SetCONF_DATA)(),
         void(*ResetCONF_DATA)(),
-        int(*ReadCLK)(),
+        bool(*ReadCLK)(),
         void(*FuncRead)(uint8)
     );
     /// Функция циклического опроса. Принимает данные, если таковые имеются, и передаёт их через функцию, установленную в SetCallbackReceive.

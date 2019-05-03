@@ -1,6 +1,59 @@
 #include "defines.h"
 #include "Communication.h"
 #include "Communicator.h"
+#include "Hardware/HAL/HAL_PIO.h"
+
+
+using namespace HAL;
+
+
+#define PORT_D                  PIO::Port::_D
+#define PORT_E                  PIO::Port::_E
+
+// Transceiver
+
+#define PORT_WRITE_REQ_SEND     PIO::Port::_A
+#define PIN_WRITE_REQ_SEND      PIO::Pin::_7
+#define WRITE_REQ_SEND          PORT_WRITE_REQ_SEND, PIN_WRITE_REQ_SEND
+
+#define PORT_READ_ALLOW_SEND    PORT_D
+#define PIN_READ_ALLOW_SEND     PIO::Pin::_14
+#define READ_ALLOW_SEND         PORT_READ_ALLOW_SEND, PIN_READ_ALLOW_SEND
+
+#define PORT_READ_CONF_DATA     PORT_D
+#define PIN_READ_CONF_DATA      PIO::Pin::_1
+#define READ_CONF_DATA          PORT_READ_CONF_DATA, PIN_READ_CONF_DATA
+
+#define PORT_WRITE_DATA         PORT_D
+#define PIN_WRITE_DATA          PIO::Pin::_15
+#define WRITE_DATA              PORT_WRITE_DATA, PIN_WRITE_DATA
+
+#define PORT_WRITE_CLK          PORT_D
+#define PIN_WRITE_CLK           PIO::Pin::_0
+#define WRITE_CLK               PORT_WRITE_CLK, PIN_WRITE_CLK
+
+// Receiver
+
+#define PORT_READ_REQ_SEND      PIO::Port::_C
+#define PIN_READ_REQ_SEND       PIO::Pin::_4
+#define READ_REQ_SEND           PORT_READ_REQ_SEND, PIN_READ_REQ_SEND
+
+#define PORT_WRITE_ALLOW_SEND   PORT_E
+#define PIN_WRITE_ALLOW_SEND    PIO::Pin::_7
+#define WRITE_ALLOW_SEND        PORT_WRITE_ALLOW_SEND, PIN_WRITE_ALLOW_SEND
+
+#define PORT_READ_DATA          PORT_E
+#define PIN_READ_DATA           PIO::Pin::_8
+#define READ_DATA               PORT_READ_DATA, PIN_READ_DATA
+
+#define PORT_READ_CLK           PORT_E
+#define PIN_READ_CLK            PIO::Pin::_9
+#define READ_CLK                PORT_READ_CLK, PIN_READ_CLK
+
+#define PORT_WRITE_CONF_DATA    PORT_E
+#define PIN_WRITE_CONF_DATA     PIO::Pin::_10
+#define WRITE_CONF_DATA         PORT_WRITE_CONF_DATA, PIN_WRITE_CONF_DATA
+
 
 
 namespace Communicator
@@ -10,18 +63,20 @@ namespace Communicator
     void InitPins_Transceiver();
     void Set_REQ_SEND();
     void Reset_REQ_SEND();
-    int Read_ALLOW_SEND();
-    int Read_CONF_DATA();
+    bool Read_ALLOW_SEND();
+    bool Read_CONF_DATA();
     void Set_CLK();
     void Reset_CLK();
+    void Set_DATA();
+    void Reset_DATA();
     /// Функциии приёмника
     void InitPins_Receiver();
-    int Read_REQ_SEND();
+    bool Read_REQ_SEND();
     void Set_ALLOW_SEND();
     void Reset_ALLOW_SEND();
     void Set_CONF_DATA();
     void Reset_CONF_DATA();
-    int Read_CLK();
+    bool Read_CLK();
     void FuncRead(uint8);
 }
 
@@ -37,7 +92,9 @@ void Communicator::Init()
         Read_ALLOW_SEND,
         Read_CONF_DATA,
         Set_CLK,
-        Reset_CLK
+        Reset_CLK,
+        Set_DATA,
+        Reset_DATA
     );
 
     Receiver::SetCallbacks(
@@ -55,85 +112,109 @@ void Communicator::Init()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Communicator::InitSendPin_Transceiver()
 {
-
+    PIO::Init(WRITE_REQ_SEND, PIO::Mode::Output_PP, PIO::Pull::Down);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Communicator::InitPins_Transceiver()
 {
+    PIO::Init(PORT_D,
+        (uint)(PIN_READ_ALLOW_SEND |                    // PD14 - ALLOW_SEND
+        PIN_READ_CONF_DATA),                            // PD1 - CONF_DATA
+        PIO::Mode::Input, PIO::Pull::Down);
 
+    PIO::Init(PORT_D,
+        (uint)(PIN_WRITE_DATA |                         // PD15 - DATA
+        PIN_WRITE_CLK),                                 // PD0 - CLK
+        PIO::Mode::Output_PP, PIO::Pull::Down);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Communicator::Set_REQ_SEND()
 {
-
+    PIO::Set(WRITE_REQ_SEND);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Communicator::Reset_REQ_SEND()
 {
-
+    PIO::Reset(WRITE_REQ_SEND);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-int Communicator::Read_ALLOW_SEND()
+bool Communicator::Read_ALLOW_SEND()
 {
-    return 0;
+    return PIO::Read(READ_ALLOW_SEND);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-int Communicator::Read_CONF_DATA()
+bool Communicator::Read_CONF_DATA()
 {
-    return 0;
+    return PIO::Read(READ_CONF_DATA);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Communicator::Set_CLK()
 {
-
+    PIO::Set(WRITE_CLK);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Communicator::Reset_CLK()
 {
+    PIO::Reset(WRITE_CLK);
+}
 
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Communicator::Set_DATA()
+{
+    PIO::Set(WRITE_DATA);
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Communicator::Reset_DATA()
+{
+    PIO::Reset(WRITE_DATA);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Communicator::InitPins_Receiver()
 {
+    PIO::Init(READ_REQ_SEND, PIO::Mode::Input, PIO::Pull::Down);
 
+    PIO::Init(PORT_E, (uint)(PIN_READ_DATA |PIN_READ_CLK), PIO::Mode::Input, PIO::Pull::Down);
+
+    PIO::Init(PORT_E, (uint)(PIN_WRITE_ALLOW_SEND | PIN_WRITE_CONF_DATA), PIO::Mode::Output_PP, PIO::Pull::Down);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-int Communicator::Read_REQ_SEND()
+bool Communicator::Read_REQ_SEND()
 {
-    return 0;
+    return PIO::Read(READ_REQ_SEND);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Communicator::Set_ALLOW_SEND()
 {
-
+    PIO::Set(WRITE_ALLOW_SEND);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Communicator::Reset_ALLOW_SEND()
 {
-
+    PIO::Reset(WRITE_ALLOW_SEND);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Communicator::Set_CONF_DATA()
 {
-
+    PIO::Set(WRITE_CONF_DATA);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Communicator::Reset_CONF_DATA()
 {
-
+    PIO::Reset(WRITE_CONF_DATA);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -143,9 +224,9 @@ void Communicator::FuncRead(uint8 /*data*/)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-int Communicator::Read_CLK()
+bool Communicator::Read_CLK()
 {
-    return 0;
+    return PIO::Read(READ_CLK);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

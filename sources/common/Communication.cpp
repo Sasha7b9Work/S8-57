@@ -11,13 +11,13 @@
     | ALLOW_SEND | 85    PD14  | I | 97    PE0   | O |
     | DATA       | 86    PD15  | O | 98    PE1   | I |
     | CLK        | 114   PD0   | O | 1     PE2   | I |
-    | CONF_DATA  | 115   PD1   | O | 2     PE3   | I |
+    | CONF_DATA  | 115   PD1   | I | 2     PE3   | 0 |
     |            |  ПРИЁМНИК   |   |  ПЕРЕДАТЧИК |   |
     | REQ_SEND   | 44    PC4   | I | 9     PC15  | O |
     | ALLOW_SEND | 58    PE7   | O | 3     PE4   | I |
     | DATA       | 59    PE8   | I | 4     PE5   | O |
     | CLK        | 60    PE9   | I | 5     PE6   | O |
-    | CONF_DATA  | 63    PE10  | I | 38    PE7   | O |
+    | CONF_DATA  | 63    PE10  | O | 38    PE7   | I |
     +------------+-------------+---+-------------+---+
 */
 
@@ -31,15 +31,19 @@ namespace Transceiver
     /// Функция установки в 0 REQ_SEND
     void(*Reset_REQ_SEND)() = nullptr;
     /// Чтение пина разрешения передачи
-    int (*Read_ALLOW_SEND)() = nullptr;
+    bool (*Read_ALLOW_SEND)() = nullptr;
     /// Чтение подтверждения данных
-    int(*Read_CONF_DATA)() = nullptr;
+    bool(*Read_CONF_DATA)() = nullptr;
     /// Установить пин данных в соответствии с битом bit байта byte
-    void(*WritePinBit)(uint8 byte, int bit) = nullptr;
+    void WritePinBit(uint8 byte, int bit);
     /// Установить тактовый пин в единицу
     void(*Set_CLK)() = nullptr;
     /// Установить тактовый пин в ноль
     void(*Reset_CLK)() = nullptr;
+    /// Установить пин данных
+    void(*Set_DATA)() = nullptr;
+    /// Сбросить пин данных
+    void(*Reset_DATA)() = nullptr;
     /// Пересылка байта
     void SendByte(uint8 data);
     /// Дождаться разрешения на передачу
@@ -55,10 +59,13 @@ void Transceiver::SetCallbacks(
     void(*initPins)(),
     void(*setREQ_SEND)(),
     void(*resetREQ_SEND)(),
-    int(*readALLOW_SEND)(),
-    int(*readCONF_DATA)(),
+    bool(*readALLOW_SEND)(),
+    bool(*readCONF_DATA)(),
     void(*setCLK)(),
-    void(*resetCLK)())
+    void(*resetCLK)(),
+    void(*setDATA)(),
+    void(*resetDATA)()
+)
 {
     initSendPin();
 
@@ -69,6 +76,8 @@ void Transceiver::SetCallbacks(
     Read_CONF_DATA = readCONF_DATA;
     Set_CLK = setCLK;
     Reset_CLK = resetCLK;
+    Set_DATA = setDATA;
+    Reset_DATA = resetDATA;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -129,27 +138,40 @@ void Transceiver::Send(uint8 byte0, uint8 byte1)
     Send(data, 2);
 }
 
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Transceiver::WritePinBit(uint8 byte, int bit)
+{
+    if ((byte >> bit) & 0x01)
+    {
+        Set_DATA();
+    }
+    else
+    {
+        Reset_DATA();
+    }
+}
+
 namespace Receiver
 {
     void(*InitPins)() = nullptr;
-    int(*ReadREQ_SEND)() = nullptr;
+    bool(*ReadREQ_SEND)() = nullptr;
     void(*SetALLOW_SEND)() = nullptr;
     void(*ResetALLOW_SEND)() = nullptr;
     void(*SetCONF_DATA)() = nullptr;
     void(*ResetCONF_DATA)() = nullptr;
-    int(*ReadCLK)() = nullptr;
+    bool(*ReadCLK)() = nullptr;
     void(*FuncRead)(uint8) = nullptr;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Receiver::SetCallbacks(
     void(*initPins)(),
-    int(*readREQ_SEND)(),
+    bool(*readREQ_SEND)(),
     void(*setALLOW_SEND)(),
     void(*resetALLOW_SEND)(),
     void(*setCONF_DATA)(),
     void(*resetCONF_DATA)(),
-    int(*readCLK)(),
+    bool(*readCLK)(),
     void(*funcRead)(uint8))
 {
     InitPins = initPins;

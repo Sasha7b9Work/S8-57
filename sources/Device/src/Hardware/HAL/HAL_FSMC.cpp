@@ -66,15 +66,7 @@ static      ModeFSMC    mode = ModeNone;
     mode = ModePanelWrite;
 
 
-static void ReadByte();
-
 static void ConfigureForFPGA();
-/// Расставляет биты значенния data по ножкам D0...D7
-static void SetOutData(uint8 data);
-/// Возвращает значение с ножек D0...D7
-static uint8 GetOutData();
-/// Возвращает состояние PAN_0, PAN_1
-static uint8 ReadPAN();
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

@@ -182,7 +182,7 @@ void FDrive::GetNumDirsAndFiles(const char *fullPath, int *numDirs, int *numFile
     {
         int numReadingElements = 0;
         bool alreadyNull = false;
-        while (true)
+        while (true) //-V2530
         {
             if (f_readdir(&dir, &fno) != FR_OK)
             {

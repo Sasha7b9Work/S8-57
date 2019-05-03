@@ -342,9 +342,6 @@ bool Control::ProcessKey(KeyEvent event)
     switch (type)
     {
     case Control::Type::Choice:
-        result = ((Choice *)this)->ProcessKey(event);
-        break;
-    
     case Control::Type::ChoiceReg:
         result = ((Choice *)this)->ProcessKey(event);
         break;

@@ -19,7 +19,7 @@ struct Divider
         _10
     } value;
     explicit Divider(E v) : value(v) { };
-    explicit Divider(uint v) : value((E)v) { };
+    explicit Divider(uint v) : value(static_cast<E>(v)) { };
     int ToAbs() const { return (value == _1) ? 1 : 10; };
 };
 

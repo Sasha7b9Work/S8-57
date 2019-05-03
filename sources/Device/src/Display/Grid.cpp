@@ -456,11 +456,11 @@ void Grid::DrawRecorder()
 
     VLine vLine(Display::HEIGHT - 1);
 
-    float step = 20.0F;
+    int step = 20;
 
-    for (float x = 0; x < Display::WIDTH; x += step) //-V1034
+    for (int x = 0; x < Display::WIDTH; x += step)
     {
-        vLine.Draw((int)(x + 0.5F), 0);
+        vLine.Draw(x, 0);
     }
 
     HLine hLine(Display::WIDTH - 1);

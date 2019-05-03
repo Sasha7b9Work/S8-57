@@ -3,16 +3,77 @@
 #include "Communicator.h"
 
 
+#define PORT_C  GPIOC
+#define PORT_E  GPIOE
+
+/// Receiver
+
+#define PORT_READ_REQ_SEND      PORT_C
+#define PIN_READ_REQ_SEND       GPIO_PIN_14
+#define READ_REQ_SEND           PORT_READ_REQ_SEND, PIN_READ_REQ_SEND
+
+#define PORT_WRITE_ALLOW_SEND   PORT_E
+#define PIN_WRITE_ALLOW_SEND    GPIO_PIN_0
+#define WRITE_ALLOW_SEND        PORT_WRITE_ALLOW_SEND, PIN_WRITE_ALLOW_SEND
+
+#define PORT_READ_DATA          PORT_E
+#define PIN_READ_DATA           GPIO_PIN_1
+
+#define PORT_READ_CLK           PORT_E
+#define PIN_READ_CLK            GPIO_PIN_2
+#define READ_CLK                PORT_READ_CLK, PIN_READ_CLK
+
+#define PORT_WRITE_CONF_DATA    PORT_E
+#define PIN_WRITE_CONF_DATA     GPIO_PIN_3
+#define WRITE_CONF_DATA         PORT_WRITE_CONF_DATA, PIN_WRITE_CONF_DATA
+
+/// Transceiver
+
+#define PORT_WRITE_REQ_SEND     PORT_C
+#define PIN_WRITE_REQ_SEND      GPIO_PIN_15
+#define WRITE_REQ_SEND          PORT_WRITE_REQ_SEND, PIN_WRITE_REQ_SEND
+
+#define PORT_READ_ALLOW_SEND    PORT_E
+#define PIN_READ_ALLOW_SEND     GPIO_PIN_4
+#define READ_ALLOW_SEND         PORT_READ_ALLOW_SEND, PIN_READ_ALLOW_SEND
+
+#define PORT_WRITE_DATA         PORT_E
+#define PIN_WRITE_DATA          GPIO_PIN_5
+#define WRITE_DATA              PORT_WRITE_DATA, PIN_WRITE_DATA
+
+#define PORT_WRITE_CLK          PORT_E
+#define PIN_WRITE_CLK           GPIO_PIN_6
+#define WRITE_CLK               PORT_WRITE_CLK, PIN_WRITE_CLK
+
+#define PORT_READ_CONF_DATA     PORT_E
+#define PIN_READ_CONF_DATA      GPIO_PIN_7
+#define READ_CONF_DATA          PORT_READ_CONF_DATA, PIN_READ_CONF_DATA
+
+
+
 namespace Communicator
 {
-    void InitSendPin();
-    void InitPins();
+    /// Функции передатчика
+    void InitSendPin_Transceiver();
+    void InitPins_Transceiver();
     void Set_REQ_SEND();
     void Reset_REQ_SEND();
-    int Read_ALLOW_SEND();
-    int Read_CONF_DATA();
+    bool Read_ALLOW_SEND();
+    bool Read_CONF_DATA();
     void Set_CLK();
     void Reset_CLK();
+    void Set_DATA();
+    void Reset_DATA();
+
+    /// Функции приёмника
+    void InitPins_Receiver();
+    bool Read_REQ_SEND();
+    void Set_ALLOW_SEND();
+    void Reset_ALLOW_SEND();
+    void Set_CONF_DATA();
+    void Reset_CONF_DATA();
+    bool Read_CLK();
+    void FuncRead(uint8);
 }
 
 
@@ -20,61 +81,166 @@ namespace Communicator
 void Communicator::Init()
 {
     Transceiver::SetCallbacks(
-        InitSendPin,
-        InitPins,
+        InitSendPin_Transceiver,
+        InitPins_Transceiver,
         Set_REQ_SEND,
         Reset_REQ_SEND,
         Read_ALLOW_SEND,
         Read_CONF_DATA,
         Set_CLK,
-        Reset_CLK
-        );
+        Reset_CLK,
+        Set_DATA,
+        Reset_DATA
+    );
+
+    Receiver::SetCallbacks(
+        InitPins_Receiver,
+        Read_REQ_SEND,
+        Set_ALLOW_SEND,
+        Reset_ALLOW_SEND,
+        Set_CONF_DATA,
+        Reset_CONF_DATA,
+        Read_CLK,
+        FuncRead
+    );
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Communicator::InitSendPin()
+void Communicator::InitSendPin_Transceiver()
 {
+    GPIO_InitTypeDef gpio =
+    {
+        PIN_WRITE_REQ_SEND,
+        GPIO_MODE_OUTPUT_PP,
+        GPIO_PULLDOWN
+    };
 
+    HAL_GPIO_Init(PORT_WRITE_REQ_SEND, &gpio);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Communicator::InitPins()
+void Communicator::InitPins_Transceiver()
 {
+    GPIO_InitTypeDef gpioOut =
+    {
+        PIN_WRITE_DATA | PIN_WRITE_CLK,
+        GPIO_MODE_OUTPUT_PP,
+        GPIO_PULLDOWN
+    };
 
+    HAL_GPIO_Init(PORT_E, &gpioOut);
+
+    GPIO_InitTypeDef gpioIn =
+    {
+        PIN_READ_ALLOW_SEND | PIN_READ_CONF_DATA,
+        GPIO_MODE_INPUT
+    };
+
+    HAL_GPIO_Init(PORT_E, &gpioIn);
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Communicator::InitPins_Receiver()
+{
+    GPIO_InitTypeDef gpioReqSend = { PIN_READ_REQ_SEND, GPIO_MODE_INPUT,  GPIO_PULLDOWN };
+
+    HAL_GPIO_Init(PORT_C, &gpioReqSend);
+
+    GPIO_InitTypeDef gpioIn = { PIN_READ_DATA | PIN_READ_CLK, GPIO_MODE_INPUT, GPIO_PULLDOWN };
+
+    HAL_GPIO_Init(PORT_E, &gpioIn);
+
+    GPIO_InitTypeDef gpioOut = { PIN_WRITE_ALLOW_SEND | PIN_WRITE_CONF_DATA, GPIO_MODE_OUTPUT_PP, GPIO_PULLDOWN };
+
+    HAL_GPIO_Init(PORT_E, &gpioOut);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Communicator::Set_REQ_SEND()
 {
-
+    HAL_GPIO_WritePin(WRITE_REQ_SEND, GPIO_PIN_SET);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Communicator::Reset_REQ_SEND()
 {
-
+    HAL_GPIO_WritePin(WRITE_REQ_SEND, GPIO_PIN_RESET);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-int Communicator::Read_ALLOW_SEND()
+bool Communicator::Read_ALLOW_SEND()
 {
-    return 0;
+    return HAL_GPIO_ReadPin(READ_ALLOW_SEND) != 0;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-int Communicator::Read_CONF_DATA()
+bool Communicator::Read_CONF_DATA()
 {
-    return 0;
+    return HAL_GPIO_ReadPin(READ_CONF_DATA) != 0;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Communicator::Set_CLK()
 {
-
+    HAL_GPIO_WritePin(WRITE_CLK, GPIO_PIN_SET);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Communicator::Reset_CLK()
 {
+    HAL_GPIO_WritePin(WRITE_CLK, GPIO_PIN_RESET);
+}
 
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Communicator::Set_DATA()
+{
+    HAL_GPIO_WritePin(WRITE_DATA, GPIO_PIN_SET);
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Communicator::Reset_DATA()
+{
+    HAL_GPIO_WritePin(WRITE_DATA, GPIO_PIN_RESET);
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+bool Communicator::Read_REQ_SEND()
+{
+    return HAL_GPIO_ReadPin(READ_REQ_SEND) != 0;
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Communicator::Set_CONF_DATA()
+{
+    HAL_GPIO_WritePin(WRITE_CONF_DATA, GPIO_PIN_SET);
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Communicator::Reset_CONF_DATA()
+{
+    HAL_GPIO_WritePin(WRITE_CONF_DATA, GPIO_PIN_RESET);
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Communicator::Set_ALLOW_SEND()
+{
+    HAL_GPIO_WritePin(WRITE_ALLOW_SEND, GPIO_PIN_SET);
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Communicator::Reset_ALLOW_SEND()
+{
+    HAL_GPIO_WritePin(WRITE_ALLOW_SEND, GPIO_PIN_RESET);
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Communicator::FuncRead(uint8)
+{
+
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+bool Communicator::Read_CLK()
+{
+    return HAL_GPIO_ReadPin(READ_CLK) != 0;
 }
