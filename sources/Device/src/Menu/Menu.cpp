@@ -1,6 +1,8 @@
 #include "defines.h"
+#include "Communication.h"
 #include "Menu/Menu.h"
 #include "Menu/BufferButtons.h"
+#include "Hardware/Communicator.h"
 #include "Hardware/Timer.h"
 #include "Menu/MenuTriggers.h"
 #include "Keyboard/HandlersKeys.h"
@@ -78,14 +80,12 @@ static void ReadRow(uint8 row)
 {
     numRow = -1;
 
-    uint8 buffer[] = { Command::Screen, row };
-
-    HAL::FSMC::WriteToPanel(buffer, 2);
+    Transceiver::Send(Command::Screen, row);
 
     while (numRow == -1)
     {
         uint8 data = 0;
-        HAL::FSMC::WriteToPanel(&data, 1);
+        Transceiver::Send(data);
         Decoder::Update();
     }
 }

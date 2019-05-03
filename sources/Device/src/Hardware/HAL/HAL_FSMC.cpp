@@ -44,7 +44,7 @@ enum ModeFSMC
 };
 
 static      ModeFSMC    mode = ModeNone;
-bool        interchangeWithPanel = false;
+
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #define CONFIGURE_TO_READ_PANEL                                             \
@@ -233,139 +233,6 @@ static void ConfigureForFPGA()
 
 
     mode = ModeFPGA;
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void FSMC::WriteToPanel2bytes(uint8 byte0, uint8 byte1)
-{
-    uint8 buffer[2] = { byte0, byte1 };
-    WriteToPanel(buffer, 2);
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void FSMC::WriteToPanel(const uint8 *data, uint length)
-{
-    interchangeWithPanel = true;
-
-    for (uint i = 0; i < length;)                // !!!!! ВНИМАНИЕ !!!! Здесь счётчиком цикла управляем вручную
-    {
-        while (!PAN_READY_RECEIVE)              // Ждём пока, панель не готова к приёму данных
-        {
-            if (PAN_READY_TRANSMIT)             // И, если готова к передаче данных
-            {
-                ReadByte();                     // читаем эти данные
-            }
-        }
-
-        SetOutData(data[i]);                    // выставляем данные на шину
-        NE4_RESET;                              // И даём сигнал, что они готовы к считыванию
-
-        while (!PAN_RECIEVE_TRANSMIT_CONFIRM)   // И ждём, пока данные не будут считаны
-        {
-            if (PAN_READY_TRANSMIT)             // И, если панель захотела передать нам данные
-            {
-                ReadByte();                     // Читаем их
-                continue;                       // И возвращаемся в начало передачи байта
-            }
-        }
-
-        NE4_SET;                                // Убираем признак передачи
-        while (PAN_RECIEVE_TRANSMIT_CONFIRM) {};
-        ++i;                                    // переходим к следующему байту в буфере
-    }
-
-    Osci::ReadPointP2P();
-
-    Recorder::ReadPoint();
-
-    interchangeWithPanel = false;
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void ReadByte()
-{
-    CONFIGURE_TO_READ_PANEL;
-LabelReadByte:
-    NE4_RESET;
-    while (PAN_READY_TRANSMIT) {};
-    if (PAN_RECIEVE_TRANSMIT_CONFIRM)
-    {
-        uint8 data = GetOutData();
-        Decoder::AddData(data);
-        NE4_SET;
-        while (PAN_RECIEVE_TRANSMIT_CONFIRM) {};
-    }
-    if (PAN_READY_TRANSMIT)
-    {
-        goto LabelReadByte; //-V2505
-    }
-    CONFIGURE_TO_WRITE_PANEL;
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-uint8 FSMC::ReadByteNow()
-{
-    uint8 result = 0;
-
-    CONFIGURE_TO_READ_PANEL;
-LabelReadByte:
-    NE4_RESET;
-    while (PAN_READY_TRANSMIT) {};
-    if (PAN_RECIEVE_TRANSMIT_CONFIRM)
-    {
-        result = GetOutData();
-        NE4_SET;
-        while (PAN_RECIEVE_TRANSMIT_CONFIRM) {};
-    }
-    if (PAN_READY_TRANSMIT)
-    {
-        goto LabelReadByte; //-V2505
-    }
-    CONFIGURE_TO_WRITE_PANEL;
-
-    return result;
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static uint8 ReadPAN()
-{
-    uint8 bit0 = (uint8)(HAL_GPIO_ReadPin(PORT_PAN_0, PIN_PAN_0) == GPIO_PIN_SET ? 1 : 0);
-    uint8 bit1 = (uint8)(HAL_GPIO_ReadPin(PORT_PAN_1, PIN_PAN_1) == GPIO_PIN_SET ? 1 : 0);
-    return (uint8)(bit0 + bit1 * 2);
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void SetOutData(uint8 data)
-{
-    if (mode != ModePanelWrite)
-    {
-        CONFIGURE_TO_WRITE_PANEL;
-    }
-
-    //                                                        биты 0,1                           биты 2, 3
-    GPIOD->ODR = (GPIOD->ODR & 0x3ffc) + (uint16)(((int16)data & 0x03) << 14) + (((uint16)(data & 0x0c)) >> 2);
-
-    //                                                    Биты 4,5,6,7
-    GPIOE->ODR = (GPIOE->ODR & 0xf87f) + (uint16)(((int16)data & 0xf0) << 3);
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static uint8 GetOutData()
-{
-    if (mode != ModePanelRead)
-    {
-        CONFIGURE_TO_READ_PANEL;
-    }
-    uint dataD = GPIOD->IDR;
-    uint dataE = GPIOE->IDR;
-
-    return (uint8)(((dataD >> 14) & 0x3) | ((dataD & 0x3) << 2) | ((dataE & 0x780) >> 3));
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-bool FSMC::InterchangeWithPanel()
-{
-    return interchangeWithPanel;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

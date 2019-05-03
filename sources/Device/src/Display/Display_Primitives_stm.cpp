@@ -1,5 +1,6 @@
 #include "defines.h"
 #include "Command.h"
+#include "Communication.h"
 #include "Display/Display_Primitives.h"
 #include "Hardware/HAL/HAL.h"
 #include <cstring>
@@ -14,7 +15,7 @@ void Display::Primitives::Region::Fill(int x, int y, Color color)
 {
     color.SetAsCurrent();
     uint8 buffer[7] = { Command::Paint_FillRegion, (uint8)x, (uint8)(x >> 8), (uint8)y, (uint8)width, (uint8)(width >> 8), (uint8)height };
-    FSMC::WriteToPanel(buffer, 7);
+    Transceiver::Send(buffer, 7);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -22,7 +23,7 @@ void Display::Primitives::Rectangle::Draw(int x, int y, Color color)
 {
     color.SetAsCurrent();
     uint8 buffer[7] = { Command::Paint_DrawRectangle, (uint8)x, (uint8)(x >> 8), (uint8)y, (uint8)width, (uint8)(width >> 8), (uint8)height };
-    FSMC::WriteToPanel(buffer, 7);
+    Transceiver::Send(buffer, 7);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -32,7 +33,7 @@ void Display::Primitives::HLine::Draw(int x, int y, Color color)
     int x0 = x;
     int x1 = x0 + width;
     uint8 buffer[6] = { Command::Paint_DrawHLine, (uint8)y, (uint8)x0, (uint8)(x0 >> 8), (uint8)x1, (uint8)(x1 >> 8) };
-    FSMC::WriteToPanel(buffer, 6);
+    Transceiver::Send(buffer, 6);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -42,7 +43,7 @@ void Display::Primitives::VLine::Draw(int x, int y, Color color)
     int y0 = y;
     int y1 = y0 + height;
     uint8 buffer[5] = { Command::Paint_DrawVLine, (uint8)x, (uint8)(x >> 8), (uint8)y0, (uint8)y1 };
-    FSMC::WriteToPanel(buffer, 5);
+    Transceiver::Send(buffer, 5);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -50,7 +51,7 @@ void Display::Primitives::Point::Draw(int x, int y, Color color)
 {
     color.SetAsCurrent();
     uint8 buffer[4] = { Command::Paint_SetPoint, (uint8)x, (uint8)(x >> 8), (uint8)y };
-    FSMC::WriteToPanel(buffer, 4);
+    Transceiver::Send(buffer, 4);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -58,7 +59,7 @@ void Display::Primitives::Line::Draw(Color color)
 {
     color.SetAsCurrent();
     uint8 buffer[7] = { Command::Paint_DrawLine, (uint8)x0, (uint8)(x0 >> 8), (uint8)y0, (uint8)x1, (uint8)(x1 >> 8), (uint8)y1 };
-    FSMC::WriteToPanel(buffer, 7);
+    Transceiver::Send(buffer, 7);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -77,7 +78,7 @@ int Display::Primitives::Text::DrawSmall(int x, int y, Color color)
 
     std::memcpy(&buffer.data[5], (void *)text, std::strlen(text));
 
-    FSMC::WriteToPanel(buffer.data, sizeBuffer);
+    Transceiver::Send(buffer.data, sizeBuffer);
 
     return x + Font::GetLengthText(text) + 1;
 }
@@ -99,7 +100,7 @@ void Display::Primitives::Text::DrawBig(int x, int y, Color color)
         *pointer++ = (uint8)*text++;
     }
 
-    FSMC::WriteToPanel(buffer, 1 + 2 + 1 + 1 + numSymbols + 1);
+    Transceiver::Send(buffer, 1 + 2 + 1 + 1 + numSymbols + 1);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -115,7 +116,7 @@ void Display::Primitives::MultiHPointLine::Draw(int x, Color color)
         buffer[2] = (uint8)(x >> 8);
         buffer[3] = y[i];
 
-        FSMC::WriteToPanel(buffer, 6);
+        Transceiver::Send(buffer, 6);
     }
 }
 
@@ -134,6 +135,6 @@ void Display::Primitives::MultiVPointLine::Draw(int y0, Color color)
         buffer[2] = (uint8)(x >> 8);
         buffer[3] = (uint8)y0;
 
-        FSMC::WriteToPanel(buffer, 6);
+        Transceiver::Send(buffer, 6);
     }
 }

@@ -1,6 +1,7 @@
 #include "defines.h"
 #include "log.h"
 #include "Command.h"
+#include "Communication.h"
 #include "Message.h"
 #include "Painter.h"
 #include "Hardware/HAL/HAL.h"
@@ -27,16 +28,13 @@ void Painter::Init()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Painter::BeginScene(Color color)
 {
-    Message message(2, Command::Paint_BeginScene, color.value);
-
-    FSMC::WriteToPanel(message.Data(), message.Size());
+    Transceiver::Send(Command::Paint_BeginScene, color.value);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Painter::EndScene()
 {
-    uint8 buffer[1] = { Command::Paint_EndScene };
-    FSMC::WriteToPanel(buffer, 1);
+    Transceiver::Send(Command::Paint_EndScene);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -55,6 +53,7 @@ void Painter::DrawTesterData(uint8 mode, Color color, const uint8 *x, const uint
     {
         *pointer++ = y[i];
     }
-    FSMC::WriteToPanel(buffer.data, 483);
+
+    Transceiver::Send(buffer.data, 483);
 }
 

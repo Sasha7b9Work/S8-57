@@ -1,5 +1,6 @@
 #include "defines.h"
 #include "FPGA/FPGA.h"
+#include "Hardware/Communicator.h"
 #include "Hardware/HAL/HAL.h"
 #include "Osci/Osci.h"
 #include "Settings/Settings.h"
@@ -176,7 +177,7 @@ void Tester::ProcessStep()
        |     0V    |  чтение   |   1 * dU  |  чтение   |   2 * dU  |  чтение   |   3 * dU  |  чтение   |  4 * dU   |  чтение   |
        |<--------->|<--------->|<--------->|<--------->|<--------->|<--------->|<--------->|<--------->|<--------->|<--------->|                  */
 
-    if (FSMC::InterchangeWithPanel() || Timer::IsBusy())
+    if (Communicator::InInteraction() || Timer::IsBusy())
     {
         return;
     }

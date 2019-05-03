@@ -1,5 +1,6 @@
 #include "defines.h"
 #include "log.h"
+#include "Communication.h"
 #include "Display/Painter.h"
 #include "Hardware/HAL/HAL.h"
 #include "Hardware/Timer.h"
@@ -397,7 +398,7 @@ void Color::WriteToDisplay(Color color)
     {
         lastColor = color;
 
-        FSMC::WriteToPanel2bytes(Command::Paint_SetColor, lastColor.value);
+        Transceiver::Send(Command::Paint_SetColor, lastColor.value);
     }
 }
 
@@ -406,5 +407,5 @@ void Color::SetValue(uint rgb)
 {
     uint8 buffer[6] = { Command::Paint_SetPalette, value, (uint8)rgb, (uint8)(rgb >> 8), (uint8)(rgb >> 16), (uint8)(rgb >> 24) };
 
-    FSMC::WriteToPanel(buffer, 6);
+    Transceiver::Send(buffer, 6);
 }

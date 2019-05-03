@@ -48,8 +48,6 @@ source_group(_VS\\USBH                                  REGULAR_EXPRESSION "../c
 source_group(Data                                       REGULAR_EXPRESSION "src/Data/*.*")
 source_group(Display\\Font                              REGULAR_EXPRESSION "../common/Display/Font/*.*")
 source_group(FlashDrive                                 REGULAR_EXPRESSION "src/FlashDrive/*.*")
-source_group(Hardware                                   FILES src/Hardware/Communicator.h
-                                                              src/Hardware/Communicator.cpp)
 source_group(Hardware\\HAL                              REGULAR_EXPRESSION "src/Hardware/HAL/*.*")
 source_group(Keyboard                                   REGULAR_EXPRESSION "src/Keyboard/*.*")
 source_group(Menu                                       REGULAR_EXPRESSION "src/Menu/*.*")
@@ -129,6 +127,7 @@ source_group(Hardware           FILES   ../../Device/src/Hardware/Battery.h
                                         ../../Device/src/Hardware/Timer.h
                                         ../../Device/src/Hardware/Timer.cpp
                                         ../../Device/src/Hardware/VCP.h
+                                                     src/Hardware/Communicator_win.cpp
                                         ../../Device/src/Hardware/VCP.cpp)
 source_group(Settings           FILES   ../../Device/src/Settings/Settings.h
                                         ../../Device/src/Settings/Settings.cpp
@@ -191,8 +190,6 @@ file(GLOB SOURCES   ../../common/_VS/*
                     ../../Device/src/Hardware/Beeper.cpp
                     ../../Device/src/Hardware/Clock.h
                     ../../Device/src/Hardware/Clock.cpp
-                    ../../Device/src/Hardware/Communicator.h
-                    ../../Device/src/Hardware/Communicator.cpp
                     ../../Device/src/Hardware/Memory.h
                     ../../Device/src/Hardware/Memory.cpp
                     ../../Device/src/Hardware/RAM.h
@@ -201,6 +198,7 @@ file(GLOB SOURCES   ../../common/_VS/*
                     ../../Device/src/Hardware/Timer.cpp
                     ../../Device/src/Hardware/VCP.h
                     ../../Device/src/Hardware/VCP.cpp
+                                 src/Hardware/Communicator_win.cpp
                     
                                  src/Hardware/HAL/*
                     ../../Device/src/Keyboard/*

@@ -46,7 +46,11 @@ void Device::Init()
     
     PAUSE_ON_MS(500);
 
+#ifndef WIN32
+
     Communicator::Init();
+
+#endif
 
     Beeper::Init();
 

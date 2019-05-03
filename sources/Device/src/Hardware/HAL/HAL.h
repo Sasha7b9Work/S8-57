@@ -217,19 +217,11 @@ namespace HAL
     public:
         static void Init();
 
-        static void WriteToPanel(const uint8 *data, uint length);         /// \todo Эта функция должна быть приватной
-        /// Записать в панель команду, состоящую из двух байт
-        static void WriteToPanel2bytes(uint8 byte0, uint8 byte1);
-
         static void WriteToFPGA8(uint8 *address, uint8 value);
 
         static void WriteToFPGA16(uint8 *address, uint16 value);
 
         static uint8 ReadFromFPGA(const uint8 *address);
-        /// Возвращает true, если идёт обмен с панелью
-        static bool InterchangeWithPanel();
-        /// Читать байт сразу же
-        static uint8 ReadByteNow();
     };
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

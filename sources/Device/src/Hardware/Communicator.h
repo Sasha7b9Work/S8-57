@@ -4,4 +4,6 @@
 namespace Communicator
 {
     void Init();
+
+    bool InInteraction();
 }
