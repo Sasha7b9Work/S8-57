@@ -29,8 +29,7 @@ namespace Receiver
     void SetCallbacks(
         void(*InitPins)(),
         bool(*ReadREQ_SEND)(),
-        void(*SetALLOW_SEND)(),
-        void(*ResetALLOW_SEND)(),
+        void(*WriteALLOW_SEND)(int),
         void(*SetCONF_DATA)(),
         void(*ResetCONF_DATA)(),
         bool(*ReadCLK)(),

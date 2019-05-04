@@ -69,8 +69,7 @@ namespace Communicator
     /// Функциии приёмника
     void InitPins_Receiver();
     bool Read_REQ_SEND();
-    void Set_ALLOW_SEND();
-    void Reset_ALLOW_SEND();
+    void Write_ALLOW_SEND(int);
     void Set_CONF_DATA();
     void Reset_CONF_DATA();
     bool Read_CLK();
@@ -94,8 +93,7 @@ void Communicator::Init()
     Receiver::SetCallbacks(
         InitPins_Receiver,
         Read_REQ_SEND,
-        Set_ALLOW_SEND,
-        Reset_ALLOW_SEND,
+        Write_ALLOW_SEND,
         Set_CONF_DATA,
         Reset_CONF_DATA,
         Read_CLK,
@@ -170,15 +168,9 @@ bool Communicator::Read_REQ_SEND()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Communicator::Set_ALLOW_SEND()
+void Communicator::Write_ALLOW_SEND(int state)
 {
-    PIO::Set(WRITE_ALLOW_SEND);
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Communicator::Reset_ALLOW_SEND()
-{
-    PIO::Reset(WRITE_ALLOW_SEND);
+    PIO::Write(WRITE_ALLOW_SEND, (PIO::State::E)state);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
