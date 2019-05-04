@@ -786,11 +786,6 @@
               <FilePath>.\src\Hardware\CPU_FlashDrive.cpp</FilePath>
             </File>
             <File>
-              <FileName>CPU_FSMC.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Hardware\CPU_FSMC.cpp</FilePath>
-            </File>
-            <File>
               <FileName>CPU_It.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Hardware\CPU_It.cpp</FilePath>
@@ -809,6 +804,11 @@
               <FileName>Timer.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Hardware\Timer.h</FilePath>
+            </File>
+            <File>
+              <FileName>Communicator_loader.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\Communicator_loader.cpp</FilePath>
             </File>
           </Files>
         </Group>

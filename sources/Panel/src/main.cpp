@@ -19,7 +19,6 @@ int main()
     CPU::Init();
     Display::Init();
     Keyboard::Init();
-    Communicator::Init();
 
     while(1)
     {

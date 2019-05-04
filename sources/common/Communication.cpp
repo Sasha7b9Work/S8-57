@@ -23,11 +23,10 @@
 
 namespace Communicator
 {
-
     namespace Transmitter
     {
         /// Функция инициализации пинов для режима передачи
-        void(*InitPins)() = nullptr;
+        void InitPins();
         /// Устновка/сброс REQ_SEND
         void(*Write_REQ_SEND)(int) = nullptr;
         /// Чтение пина разрешения передачи
@@ -48,31 +47,19 @@ namespace Communicator
         void WaitPermitData();
     }
 
+    namespace Receiver
+    {
+        void(*InitPins)() = nullptr;
+        bool(*ReadREQ_SEND)() = nullptr;
+        void(*WriteALLOW_SEND)(int) = nullptr;
+        void(*WriteCONF_DATA)(int) = nullptr;
+        bool(*ReadCLK)() = nullptr;
+        void(*FuncRead)(uint8) = nullptr;
+    }
 }
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void Communicator::Transmitter::SetCallbacks(
-    void(*initSendPin)(),
-    void(*initPins)(),
-    bool(*readALLOW_SEND)(),
-    bool(*readCONF_DATA)(),
-    void(*writeREQ_SEND)(int),
-    void(*writeCLK)(int),
-    void(*writeDATA)(int)
-)
-{
-    initSendPin();
-
-    InitPins = initPins;
-    Write_REQ_SEND = writeREQ_SEND;
-    Read_ALLOW_SEND = readALLOW_SEND;
-    Read_CONF_DATA = readCONF_DATA;
-    Write_CLK = writeCLK;
-    Write_DATA = writeDATA;
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Communicator::Transmitter::Send(uint8 *data, uint size)
 {
     InitPins();
@@ -134,38 +121,6 @@ void Communicator::Transmitter::Send(uint8 byte0, uint8 byte1)
 void Communicator::Transmitter::WritePinBit(uint8 byte, int bit)
 {
     Write_DATA((byte >> bit) & 0x01);
-}
-
-namespace Communicator
-{
-
-    namespace Receiver
-    {
-        void(*InitPins)() = nullptr;
-        bool(*ReadREQ_SEND)() = nullptr;
-        void(*WriteALLOW_SEND)(int) = nullptr;
-        void(*WriteCONF_DATA)(int) = nullptr;
-        bool(*ReadCLK)() = nullptr;
-        void(*FuncRead)(uint8) = nullptr;
-    }
-
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Communicator::Receiver::SetCallbacks(
-    void(*initPins)(),
-    bool(*readREQ_SEND)(),
-    bool(*readCLK)(),
-    void(*writeALLOW_SEND)(int),
-    void(*writeCONF_DATA)(int),
-    void(*funcRead)(uint8))
-{
-    InitPins = initPins;
-    ReadREQ_SEND = readREQ_SEND;
-    WriteALLOW_SEND = writeALLOW_SEND;
-    WriteCONF_DATA = writeCONF_DATA;
-    ReadCLK = readCLK;
-    FuncRead = funcRead;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

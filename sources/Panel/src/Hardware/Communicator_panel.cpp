@@ -53,9 +53,12 @@
 
 namespace Communicator
 {
-    /// Функции передатчика
-    void InitSendPin_Transceiver();
-    void InitPins_Transceiver();
+    namespace Transmitter
+    {
+        /// Функции передатчика
+        void InitSendPin();
+        void InitPins();
+    };
     void Write_REQ_SEND(int);
     bool Read_ALLOW_SEND();
     bool Read_CONF_DATA();
@@ -73,30 +76,7 @@ namespace Communicator
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void Communicator::Init()
-{
-    Transmitter::SetCallbacks(
-        InitSendPin_Transceiver,
-        InitPins_Transceiver,
-        Read_ALLOW_SEND,
-        Read_CONF_DATA,
-        Write_REQ_SEND,
-        Write_CLK,
-        Write_DATA
-    );
-
-    Receiver::SetCallbacks(
-        InitPins_Receiver,
-        Read_REQ_SEND,
-        Read_CLK,
-        Write_ALLOW_SEND,
-        Write_CONF_DATA,
-        FuncRead
-    );
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Communicator::InitSendPin_Transceiver()
+void Communicator::Transmitter::InitSendPin()
 {
     GPIO_InitTypeDef gpio =
     {
@@ -109,7 +89,7 @@ void Communicator::InitSendPin_Transceiver()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Communicator::InitPins_Transceiver()
+void Communicator::Transmitter::InitPins()
 {
     GPIO_InitTypeDef gpioOut =
     {

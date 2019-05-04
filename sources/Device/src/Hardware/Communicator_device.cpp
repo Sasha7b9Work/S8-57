@@ -58,9 +58,13 @@ using namespace HAL;
 
 namespace Communicator
 {
-    /// Функции передатчика
-    void InitSendPin_Transceiver();
-    void InitPins_Transceiver();
+    namespace Transmitter
+    {
+        /// Функции передатчика
+        void InitSendPin();
+        void InitPins();
+    };
+
     void Write_REQ_SEND(int);
     bool Read_ALLOW_SEND();
     bool Read_CONF_DATA();
@@ -77,36 +81,13 @@ namespace Communicator
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void Communicator::Init()
-{
-    Transmitter::SetCallbacks(
-        InitSendPin_Transceiver,
-        InitPins_Transceiver,
-        Read_ALLOW_SEND,
-        Read_CONF_DATA,
-        Write_REQ_SEND,
-        Write_CLK,
-        Write_DATA
-    );
-
-    Receiver::SetCallbacks(
-        InitPins_Receiver,
-        Read_REQ_SEND,
-        Read_CLK,
-        Write_ALLOW_SEND,
-        Write_CONF_DATA,
-        FuncRead
-    );
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Communicator::InitSendPin_Transceiver()
+void Communicator::Transmitter::InitSendPin()
 {
     PIO::Init(WRITE_REQ_SEND, PIO::Mode::Output_PP, PIO::Pull::Down);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Communicator::InitPins_Transceiver()
+void Communicator::Transmitter::InitPins()
 {
     PIO::Init(PORT_D,
         (uint)(PIN_READ_ALLOW_SEND |                    // PD14 - ALLOW_SEND

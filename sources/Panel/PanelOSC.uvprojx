@@ -1367,14 +1367,14 @@
               <FilePath>.\src\Hardware\LTDC.h</FilePath>
             </File>
             <File>
-              <FileName>Communicator.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Hardware\Communicator.cpp</FilePath>
-            </File>
-            <File>
               <FileName>Communicator.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Hardware\Communicator.h</FilePath>
+            </File>
+            <File>
+              <FileName>Communicator_panel.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\Communicator_panel.cpp</FilePath>
             </File>
           </Files>
         </Group>

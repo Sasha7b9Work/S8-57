@@ -3,5 +3,5 @@
 
 namespace Communicator
 {
-    void Init();
+    //void Init();
 }

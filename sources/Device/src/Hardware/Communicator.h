@@ -3,7 +3,7 @@
 
 namespace Communicator
 {
-    void Init();
+    //void Init();
 
     bool InInteraction();
 }
