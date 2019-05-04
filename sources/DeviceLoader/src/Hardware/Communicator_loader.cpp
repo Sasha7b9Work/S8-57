@@ -14,6 +14,11 @@ namespace Transceiver
         void Write_CLK(int);
         void Write_DATA(int);
     }
+
+    namespace Receiver
+    {
+        void InitPins();
+    }
 }
 
 

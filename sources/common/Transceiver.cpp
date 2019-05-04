@@ -49,7 +49,7 @@ namespace Transceiver
 
     namespace Receiver
     {
-        void(*InitPins)() = nullptr;
+        void InitPins();
         bool(*ReadREQ_SEND)() = nullptr;
         void(*WriteALLOW_SEND)(int) = nullptr;
         void(*WriteCONF_DATA)(int) = nullptr;

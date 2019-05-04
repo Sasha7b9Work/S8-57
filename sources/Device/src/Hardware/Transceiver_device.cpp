@@ -70,8 +70,11 @@ namespace Transceiver
         void Write_DATA(int);
     };
 
-    /// Функциии приёмника
-    void InitPins_Receiver();
+    namespace Receiver
+    {
+        void InitPins();
+    };
+
     bool Read_REQ_SEND();
     void Write_ALLOW_SEND(int);
     void Write_CONF_DATA(int);
@@ -131,7 +134,7 @@ void Transceiver::Transmitter::Write_DATA(int state)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Transceiver::InitPins_Receiver()
+void Transceiver::Receiver::InitPins()
 {
     PIO::Init(READ_REQ_SEND, PIO::Mode::Input, PIO::Pull::Down);
 

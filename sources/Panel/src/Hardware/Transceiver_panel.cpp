@@ -64,9 +64,12 @@ namespace Transceiver
         void Write_CLK(int);
         void Write_DATA(int);
     };
+
+    namespace Receiver
+    {
+        void InitPins();
+    };
  
-    /// Функции приёмника
-    void InitPins_Receiver();
     bool Read_REQ_SEND();
     void Write_ALLOW_SEND(int);
     void Write_CONF_DATA(int);
@@ -110,7 +113,7 @@ void Transceiver::Transmitter::InitPins()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Transceiver::InitPins_Receiver()
+void Transceiver::Receiver::InitPins()
 {
     GPIO_InitTypeDef gpioReqSend = { PIN_READ_REQ_SEND, GPIO_MODE_INPUT,  GPIO_PULLDOWN };
 
