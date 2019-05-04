@@ -14,8 +14,7 @@ namespace Transceiver
         void(*WriteREQ_SEND)(int),
         bool(*ReadALLOW_SEND)(),
         bool(*ReadCONF_DATA)(),
-        void(*SetCLK)(),
-        void(*ResetCLK)(),
+        void(*WriteCLK)(int),
         void(*SetDATA)(),
         void(*ResetDATA)()
     );

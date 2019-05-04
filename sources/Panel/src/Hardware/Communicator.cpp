@@ -59,8 +59,7 @@ namespace Communicator
     void Write_REQ_SEND(int);
     bool Read_ALLOW_SEND();
     bool Read_CONF_DATA();
-    void Set_CLK();
-    void Reset_CLK();
+    void Write_CLK(int);
     void Set_DATA();
     void Reset_DATA();
 
@@ -85,8 +84,7 @@ void Communicator::Init()
         Write_REQ_SEND,
         Read_ALLOW_SEND,
         Read_CONF_DATA,
-        Set_CLK,
-        Reset_CLK,
+        Write_CLK,
         Set_DATA,
         Reset_DATA
     );
@@ -172,15 +170,9 @@ bool Communicator::Read_CONF_DATA()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Communicator::Set_CLK()
+void Communicator::Write_CLK(int state)
 {
-    HAL_GPIO_WritePin(WRITE_CLK, GPIO_PIN_SET);
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Communicator::Reset_CLK()
-{
-    HAL_GPIO_WritePin(WRITE_CLK, GPIO_PIN_RESET);
+    HAL_GPIO_WritePin(WRITE_CLK, (GPIO_PinState)state);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
