@@ -61,8 +61,7 @@ namespace Communicator
     /// Функции передатчика
     void InitSendPin_Transceiver();
     void InitPins_Transceiver();
-    void Set_REQ_SEND();
-    void Reset_REQ_SEND();
+    void Write_REQ_SEND(int);
     bool Read_ALLOW_SEND();
     bool Read_CONF_DATA();
     void Set_CLK();
@@ -87,8 +86,7 @@ void Communicator::Init()
     Transceiver::SetCallbacks(
         InitSendPin_Transceiver,
         InitPins_Transceiver,
-        Set_REQ_SEND,
-        Reset_REQ_SEND,
+        Write_REQ_SEND,
         Read_ALLOW_SEND,
         Read_CONF_DATA,
         Set_CLK,
@@ -130,15 +128,9 @@ void Communicator::InitPins_Transceiver()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Communicator::Set_REQ_SEND()
+void Communicator::Write_REQ_SEND(int state)
 {
-    PIO::Set(WRITE_REQ_SEND);
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Communicator::Reset_REQ_SEND()
-{
-    PIO::Reset(WRITE_REQ_SEND);
+    PIO::Write(WRITE_REQ_SEND, (PIO::State::E)state);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

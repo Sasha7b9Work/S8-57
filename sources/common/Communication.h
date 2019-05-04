@@ -11,8 +11,7 @@ namespace Transceiver
     void SetCallbacks(
         void(*InitSendPin)(),
         void(*InitPins)(),
-        void(*SetREQ_SEND)(),
-        void(*ResetREQ_SEND)(),
+        void(*WriteREQ_SEND)(int),
         bool(*ReadALLOW_SEND)(),
         bool(*ReadCONF_DATA)(),
         void(*SetCLK)(),

@@ -26,10 +26,8 @@ namespace Transceiver
 {
     /// Функция инициализации пинов для режима передачи
     void(*InitPins)() = nullptr;
-    /// Функция устновки в 1 REQ_SEND
-    void(*Set_REQ_SEND)() = nullptr;
-    /// Функция установки в 0 REQ_SEND
-    void(*Reset_REQ_SEND)() = nullptr;
+    /// Устновка/сброс REQ_SEND
+    void(*Write_REQ_SEND)(int) = nullptr;
     /// Чтение пина разрешения передачи
     bool (*Read_ALLOW_SEND)() = nullptr;
     /// Чтение подтверждения данных
@@ -57,8 +55,7 @@ namespace Transceiver
 void Transceiver::SetCallbacks(
     void(*initSendPin)(),
     void(*initPins)(),
-    void(*setREQ_SEND)(),
-    void(*resetREQ_SEND)(),
+    void(*writeREQ_SEND)(int),
     bool(*readALLOW_SEND)(),
     bool(*readCONF_DATA)(),
     void(*setCLK)(),
@@ -70,8 +67,7 @@ void Transceiver::SetCallbacks(
     initSendPin();
 
     InitPins = initPins;
-    Set_REQ_SEND = setREQ_SEND;
-    Reset_REQ_SEND = resetREQ_SEND;
+    Write_REQ_SEND = writeREQ_SEND;
     Read_ALLOW_SEND = readALLOW_SEND;
     Read_CONF_DATA = readCONF_DATA;
     Set_CLK = setCLK;
@@ -85,7 +81,7 @@ void Transceiver::Send(uint8 *data, uint size)
 {
     InitPins();
 
-    Reset_REQ_SEND();
+    Write_REQ_SEND(0);
 
     WaitPermitSend();
 
@@ -94,7 +90,7 @@ void Transceiver::Send(uint8 *data, uint size)
         SendByte(data[i]);
     }
 
-    Set_REQ_SEND();
+    Write_REQ_SEND(1);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
