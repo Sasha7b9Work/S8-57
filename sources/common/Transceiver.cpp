@@ -61,6 +61,7 @@ namespace Transceiver
         void Write_ALLOW_SEND(int);
         void Write_CONF_DATA(int);
         bool Read_CLK();
+        bool Read_DATA();
 
         void FuncRead(uint8);
     }
@@ -141,5 +142,8 @@ void Transceiver::Transmitter::WritePinBit(uint8 byte, int bit)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Transceiver::Receiver::Update()
 {
-
+    if (!Read_REQ_SEND())           // Если REQ_SEND устновлен в низкое значение - существует запрос на передачу данных
+    {
+        Write_ALLOW_SEND(0);
+    }
 }

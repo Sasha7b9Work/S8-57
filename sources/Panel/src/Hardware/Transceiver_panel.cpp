@@ -1,6 +1,7 @@
 #include "defines.h"
 #include "Transceiver.h"
 #include "Transceiver.h"
+#include "Utils/DecoderPanel.h"
 
 
 #define PORT_C  GPIOC
@@ -87,18 +88,51 @@ void Transceiver::Transmitter::DeInitPins()
 {
     GPIO_InitTypeDef gpio =
     {
-        PIN_WRITE_REQ_SEND,
+        PIN_WRITE_REQ_SEND,         // out REQ_SEND
         GPIO_MODE_OUTPUT_PP,
-        GPIO_PULLDOWN
+        GPIO_PULLUP
     };
-
+    
     HAL_GPIO_Init(PORT_WRITE_REQ_SEND, &gpio);
+    
+    Write_REQ_SEND(1);              // Закрываем запрос на передачу данных
+    
+    GPIO_InitTypeDef pins =
+    {
+        PIN_READ_ALLOW_SEND |       // in  ALLOW_SEND    
+        PIN_WRITE_DATA |            // out DATA
+        PIN_WRITE_CLK |             // out CLK
+        PIN_READ_CONF_DATA,         // int CONF_DATA
+        GPIO_MODE_INPUT,
+        GPIO_PULLUP
+    };
+    
+    HAL_GPIO_Init(PORT_E, &pins);   // Ставим все остальные пины на прослушивание - чтобы не мешать работе шины
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Transceiver::Receiver::DeInitPins()
 {
+    GPIO_InitTypeDef gpio = 
+    {
+        PIN_READ_REQ_SEND,          // in REQ_SEND
+        GPIO_MODE_INPUT,
+        GPIO_PULLUP
+    };
 
+    HAL_GPIO_Init(PORT_READ_REQ_SEND, &gpio);
+
+    GPIO_InitTypeDef pins =
+    {
+        PIN_WRITE_ALLOW_SEND |      // out ALLOW_SEND
+        PIN_READ_DATA |             // in  DATA
+        PIN_READ_CLK |              // in  CLK
+        PIN_WRITE_CONF_DATA,        // out CONF_DATA
+        GPIO_MODE_INPUT,
+        GPIO_PULLUP
+    };
+
+    HAL_GPIO_Init(PORT_E, &pins);   // Остальные пины ставим на прослушивание - чтобы не мешать работе шины устройства
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -106,7 +140,8 @@ void Transceiver::Transmitter::InitPins()
 {
     GPIO_InitTypeDef gpioOut =
     {
-        PIN_WRITE_DATA | PIN_WRITE_CLK,
+        PIN_WRITE_DATA |            // out DATA
+        PIN_WRITE_CLK,              // out CLK
         GPIO_MODE_OUTPUT_PP,
         GPIO_PULLDOWN
     };
@@ -115,7 +150,8 @@ void Transceiver::Transmitter::InitPins()
 
     GPIO_InitTypeDef gpioIn =
     {
-        PIN_READ_ALLOW_SEND | PIN_READ_CONF_DATA,
+        PIN_READ_ALLOW_SEND |       // in ALLOW_SEND
+        PIN_READ_CONF_DATA,         // in CONF_DATA
         GPIO_MODE_INPUT
     };
 
@@ -125,15 +161,23 @@ void Transceiver::Transmitter::InitPins()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Transceiver::Receiver::InitPins()
 {
-    GPIO_InitTypeDef gpioReqSend = { PIN_READ_REQ_SEND, GPIO_MODE_INPUT,  GPIO_PULLDOWN };
-
-    HAL_GPIO_Init(PORT_C, &gpioReqSend);
-
-    GPIO_InitTypeDef gpioIn = { PIN_READ_DATA | PIN_READ_CLK, GPIO_MODE_INPUT, GPIO_PULLDOWN };
+    GPIO_InitTypeDef gpioIn =
+    {
+        PIN_READ_DATA |             // in DATA
+        PIN_READ_CLK,               // in CLK
+        GPIO_MODE_INPUT,
+        GPIO_PULLDOWN
+    };
 
     HAL_GPIO_Init(PORT_E, &gpioIn);
 
-    GPIO_InitTypeDef gpioOut = { PIN_WRITE_ALLOW_SEND | PIN_WRITE_CONF_DATA, GPIO_MODE_OUTPUT_PP, GPIO_PULLDOWN };
+    GPIO_InitTypeDef gpioOut =
+    {
+        PIN_WRITE_ALLOW_SEND |      // out ALLOW_SEND
+        PIN_WRITE_CONF_DATA,        // out CONF_DATA
+        GPIO_MODE_OUTPUT_PP,
+        GPIO_PULLDOWN
+    };
 
     HAL_GPIO_Init(PORT_E, &gpioOut);
 }
@@ -187,9 +231,9 @@ void Transceiver::Receiver::Write_ALLOW_SEND(int state)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Transceiver::Receiver::FuncRead(uint8)
+void Transceiver::Receiver::FuncRead(uint8 data)
 {
-
+    Decoder::AddData(data);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
