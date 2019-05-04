@@ -50,11 +50,11 @@ namespace Transceiver
     namespace Receiver
     {
         void InitPins();
-        bool(*ReadREQ_SEND)() = nullptr;
-        void(*WriteALLOW_SEND)(int) = nullptr;
-        void(*WriteCONF_DATA)(int) = nullptr;
-        bool(*ReadCLK)() = nullptr;
-        void(*FuncRead)(uint8) = nullptr;
+        bool Read_REQ_SEND();
+        void Write_ALLOW_SEND(int);
+        void Write_CONF_DATA(int);
+        bool Read_CLK();
+        void FuncRead(uint8);
     }
 }
 
