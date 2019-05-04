@@ -6,8 +6,9 @@ namespace Transceiver
 {
     namespace Transmitter
     {
-        void InitSendPin();
         void InitPins();
+        void DeInitPins();
+
         void Write_REQ_SEND(int);
         bool Read_ALLOW_SEND();
         bool Read_CONF_DATA();
@@ -18,12 +19,19 @@ namespace Transceiver
     namespace Receiver
     {
         void InitPins();
+        void DeInitPins();
     }
 }
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void Transceiver::Transmitter::InitSendPin()
+void Transceiver::Transmitter::DeInitPins()
+{
+
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Transceiver::Receiver::DeInitPins()
 {
 
 }

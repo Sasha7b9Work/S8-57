@@ -60,8 +60,6 @@ namespace Transceiver
 {
     namespace Transmitter
     {
-        /// Функции передатчика
-        void InitSendPin();
         void InitPins();
         void DeInitPins();
 
@@ -75,6 +73,7 @@ namespace Transceiver
     namespace Receiver
     {
         void InitPins();
+        void DeInitPins();
 
         bool Read_REQ_SEND();
         void Write_ALLOW_SEND(int);
@@ -87,9 +86,15 @@ namespace Transceiver
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void Transceiver::Transmitter::InitSendPin()
+void Transceiver::Transmitter::DeInitPins()
 {
     PIO::Init(WRITE_REQ_SEND, PIO::Mode::Output_PP, PIO::Pull::Down);
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Transceiver::Receiver::DeInitPins()
+{
+
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
