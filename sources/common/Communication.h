@@ -30,8 +30,7 @@ namespace Receiver
         void(*InitPins)(),
         bool(*ReadREQ_SEND)(),
         void(*WriteALLOW_SEND)(int),
-        void(*SetCONF_DATA)(),
-        void(*ResetCONF_DATA)(),
+        void(*WriteCONF_DATA)(int),
         bool(*ReadCLK)(),
         void(*FuncRead)(uint8)
     );

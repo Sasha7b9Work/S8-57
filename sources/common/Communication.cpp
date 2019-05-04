@@ -137,8 +137,7 @@ namespace Receiver
     void(*InitPins)() = nullptr;
     bool(*ReadREQ_SEND)() = nullptr;
     void(*WriteALLOW_SEND)(int) = nullptr;
-    void(*SetCONF_DATA)() = nullptr;
-    void(*ResetCONF_DATA)() = nullptr;
+    void(*WriteCONF_DATA)(int) = nullptr;
     bool(*ReadCLK)() = nullptr;
     void(*FuncRead)(uint8) = nullptr;
 }
@@ -148,16 +147,14 @@ void Receiver::SetCallbacks(
     void(*initPins)(),
     bool(*readREQ_SEND)(),
     void(*writeALLOW_SEND)(int),
-    void(*setCONF_DATA)(),
-    void(*resetCONF_DATA)(),
+    void(*writeCONF_DATA)(int),
     bool(*readCLK)(),
     void(*funcRead)(uint8))
 {
     InitPins = initPins;
     ReadREQ_SEND = readREQ_SEND;
     WriteALLOW_SEND = writeALLOW_SEND;
-    SetCONF_DATA = setCONF_DATA;
-    ResetCONF_DATA = resetCONF_DATA;
+    WriteCONF_DATA = writeCONF_DATA;
     ReadCLK = readCLK;
     FuncRead = funcRead;
 }

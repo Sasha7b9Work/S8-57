@@ -70,8 +70,7 @@ namespace Communicator
     void InitPins_Receiver();
     bool Read_REQ_SEND();
     void Write_ALLOW_SEND(int);
-    void Set_CONF_DATA();
-    void Reset_CONF_DATA();
+    void Write_CONF_DATA(int);
     bool Read_CLK();
     void FuncRead(uint8);
 }
@@ -94,8 +93,7 @@ void Communicator::Init()
         InitPins_Receiver,
         Read_REQ_SEND,
         Write_ALLOW_SEND,
-        Set_CONF_DATA,
-        Reset_CONF_DATA,
+        Write_CONF_DATA,
         Read_CLK,
         FuncRead
     );
@@ -174,15 +172,9 @@ void Communicator::Write_ALLOW_SEND(int state)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Communicator::Set_CONF_DATA()
+void Communicator::Write_CONF_DATA(int state)
 {
-    PIO::Set(WRITE_CONF_DATA);
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Communicator::Reset_CONF_DATA()
-{
-    PIO::Reset(WRITE_CONF_DATA);
+    PIO::Write(WRITE_CONF_DATA, (PIO::State::E)state);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
