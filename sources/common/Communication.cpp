@@ -36,10 +36,8 @@ namespace Transceiver
     void WritePinBit(uint8 byte, int bit);
     /// Установить/сбросить тактовый пин
     void(*Write_CLK)(int) = nullptr;
-    /// Установить пин данных
-    void(*Set_DATA)() = nullptr;
-    /// Сбросить пин данных
-    void(*Reset_DATA)() = nullptr;
+    /// Установить состояния пина данных
+    void(*Write_DATA)(int) = nullptr;
     /// Пересылка байта
     void SendByte(uint8 data);
     /// Дождаться разрешения на передачу
@@ -57,8 +55,7 @@ void Transceiver::SetCallbacks(
     bool(*readALLOW_SEND)(),
     bool(*readCONF_DATA)(),
     void(*writeCLK)(int),
-    void(*setDATA)(),
-    void(*resetDATA)()
+    void(*writeDATA)(int)
 )
 {
     initSendPin();
@@ -68,8 +65,7 @@ void Transceiver::SetCallbacks(
     Read_ALLOW_SEND = readALLOW_SEND;
     Read_CONF_DATA = readCONF_DATA;
     Write_CLK = writeCLK;
-    Set_DATA = setDATA;
-    Reset_DATA = resetDATA;
+    Write_DATA = writeDATA;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -133,14 +129,7 @@ void Transceiver::Send(uint8 byte0, uint8 byte1)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Transceiver::WritePinBit(uint8 byte, int bit)
 {
-    if ((byte >> bit) & 0x01)
-    {
-        Set_DATA();
-    }
-    else
-    {
-        Reset_DATA();
-    }
+    Write_DATA((byte >> bit) & 0x01);
 }
 
 namespace Receiver

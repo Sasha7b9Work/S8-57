@@ -15,8 +15,7 @@ namespace Transceiver
         bool(*ReadALLOW_SEND)(),
         bool(*ReadCONF_DATA)(),
         void(*WriteCLK)(int),
-        void(*SetDATA)(),
-        void(*ResetDATA)()
+        void(*WriteDATA)(int)
     );
     /// Передача size байт, начиная с адреса data
     void Send(uint8 *data, uint size);

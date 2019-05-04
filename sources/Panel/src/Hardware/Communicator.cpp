@@ -60,9 +60,8 @@ namespace Communicator
     bool Read_ALLOW_SEND();
     bool Read_CONF_DATA();
     void Write_CLK(int);
-    void Set_DATA();
-    void Reset_DATA();
-
+    void Write_DATA(int);
+ 
     /// Функции приёмника
     void InitPins_Receiver();
     bool Read_REQ_SEND();
@@ -85,8 +84,7 @@ void Communicator::Init()
         Read_ALLOW_SEND,
         Read_CONF_DATA,
         Write_CLK,
-        Set_DATA,
-        Reset_DATA
+        Write_DATA
     );
 
     Receiver::SetCallbacks(
@@ -176,15 +174,9 @@ void Communicator::Write_CLK(int state)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Communicator::Set_DATA()
+void Communicator::Write_DATA(int state)
 {
-    HAL_GPIO_WritePin(WRITE_DATA, GPIO_PIN_SET);
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Communicator::Reset_DATA()
-{
-    HAL_GPIO_WritePin(WRITE_DATA, GPIO_PIN_RESET);
+    HAL_GPIO_WritePin(WRITE_CLK, (GPIO_PinState)state);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
