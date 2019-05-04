@@ -10,7 +10,7 @@ using namespace HAL;
 #define PORT_D                  PIO::Port::_D
 #define PORT_E                  PIO::Port::_E
 
-// Transceiver
+// Transmitter
 
 #define PORT_WRITE_REQ_SEND     PIO::Port::_A
 #define PIN_WRITE_REQ_SEND      PIO::Pin::_7
@@ -79,7 +79,7 @@ namespace Communicator
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void Communicator::Init()
 {
-    Transceiver::SetCallbacks(
+    Transmitter::SetCallbacks(
         InitSendPin_Transceiver,
         InitPins_Transceiver,
         Read_ALLOW_SEND,
@@ -92,9 +92,9 @@ void Communicator::Init()
     Receiver::SetCallbacks(
         InitPins_Receiver,
         Read_REQ_SEND,
+        Read_CLK,
         Write_ALLOW_SEND,
         Write_CONF_DATA,
-        Read_CLK,
         FuncRead
     );
 }

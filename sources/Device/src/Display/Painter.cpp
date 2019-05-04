@@ -17,6 +17,7 @@
 
 
 using HAL::FSMC;
+using namespace Communicator;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -28,13 +29,13 @@ void Painter::Init()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Painter::BeginScene(Color color)
 {
-    Transceiver::Send(Command::Paint_BeginScene, color.value);
+    Transmitter::Send(Command::Paint_BeginScene, color.value);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Painter::EndScene()
 {
-    Transceiver::Send(Command::Paint_EndScene);
+    Transmitter::Send(Command::Paint_EndScene);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -54,6 +55,6 @@ void Painter::DrawTesterData(uint8 mode, Color color, const uint8 *x, const uint
         *pointer++ = y[i];
     }
 
-    Transceiver::Send(buffer.data, 483);
+    Transmitter::Send(buffer.data, 483);
 }
 

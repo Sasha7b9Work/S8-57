@@ -9,6 +9,7 @@
 
 
 using HAL::FSMC;
+using namespace Communicator;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -80,7 +81,7 @@ void Font::SetCurrent(Font::Type::E typeFont)
 
 #ifndef PANEL
 
-    Transceiver::Send(Command::Paint_SetFont, (uint8)typeFont);
+    Transmitter::Send(Command::Paint_SetFont, (uint8)typeFont);
 
 #endif
 
@@ -94,7 +95,7 @@ void Font::SetSpacing(int) {}
 #else
 void Font::SetSpacing(int spacing)
 {
-    Transceiver::Send(Command::Paint_SetTextSpacing, (uint8)spacing);
+    Transmitter::Send(Command::Paint_SetTextSpacing, (uint8)spacing);
 }
 #endif
 
@@ -104,7 +105,7 @@ void Font::SetMinWidth(uint8) {}
 #else
 void Font::SetMinWidth(uint8 width)
 {
-    Transceiver::Send(Command::Paint_SetMinWidthFont, width);
+    Transmitter::Send(Command::Paint_SetMinWidthFont, width);
 }
 #endif
 

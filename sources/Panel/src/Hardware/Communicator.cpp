@@ -27,7 +27,7 @@
 #define PIN_WRITE_CONF_DATA     GPIO_PIN_3
 #define WRITE_CONF_DATA         PORT_WRITE_CONF_DATA, PIN_WRITE_CONF_DATA
 
-/// Transceiver
+/// Transmitter
 
 #define PORT_WRITE_REQ_SEND     PORT_C
 #define PIN_WRITE_REQ_SEND      GPIO_PIN_15
@@ -75,7 +75,7 @@ namespace Communicator
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void Communicator::Init()
 {
-    Transceiver::SetCallbacks(
+    Transmitter::SetCallbacks(
         InitSendPin_Transceiver,
         InitPins_Transceiver,
         Read_ALLOW_SEND,
@@ -88,9 +88,9 @@ void Communicator::Init()
     Receiver::SetCallbacks(
         InitPins_Receiver,
         Read_REQ_SEND,
+        Read_CLK,
         Write_ALLOW_SEND,
         Write_CONF_DATA,
-        Read_CLK,
         FuncRead
     );
 }

@@ -21,34 +21,38 @@
     +------------+-------------+---+-------------+---+
 */
 
-
-namespace Transceiver
+namespace Communicator
 {
-    /// Функция инициализации пинов для режима передачи
-    void(*InitPins)() = nullptr;
-    /// Устновка/сброс REQ_SEND
-    void(*Write_REQ_SEND)(int) = nullptr;
-    /// Чтение пина разрешения передачи
-    bool (*Read_ALLOW_SEND)() = nullptr;
-    /// Чтение подтверждения данных
-    bool(*Read_CONF_DATA)() = nullptr;
-    /// Установить пин данных в соответствии с битом bit байта byte
-    void WritePinBit(uint8 byte, int bit);
-    /// Установить/сбросить тактовый пин
-    void(*Write_CLK)(int) = nullptr;
-    /// Установить состояния пина данных
-    void(*Write_DATA)(int) = nullptr;
-    /// Пересылка байта
-    void SendByte(uint8 data);
-    /// Дождаться разрешения на передачу
-    void WaitPermitSend();
-    /// Ожидание подтверждения передачи бита
-    void WaitPermitData();
+
+    namespace Transmitter
+    {
+        /// Функция инициализации пинов для режима передачи
+        void(*InitPins)() = nullptr;
+        /// Устновка/сброс REQ_SEND
+        void(*Write_REQ_SEND)(int) = nullptr;
+        /// Чтение пина разрешения передачи
+        bool(*Read_ALLOW_SEND)() = nullptr;
+        /// Чтение подтверждения данных
+        bool(*Read_CONF_DATA)() = nullptr;
+        /// Установить пин данных в соответствии с битом bit байта byte
+        void WritePinBit(uint8 byte, int bit);
+        /// Установить/сбросить тактовый пин
+        void(*Write_CLK)(int) = nullptr;
+        /// Установить состояния пина данных
+        void(*Write_DATA)(int) = nullptr;
+        /// Пересылка байта
+        void SendByte(uint8 data);
+        /// Дождаться разрешения на передачу
+        void WaitPermitSend();
+        /// Ожидание подтверждения передачи бита
+        void WaitPermitData();
+    }
+
 }
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void Transceiver::SetCallbacks(
+void Communicator::Transmitter::SetCallbacks(
     void(*initSendPin)(),
     void(*initPins)(),
     bool(*readALLOW_SEND)(),
@@ -69,7 +73,7 @@ void Transceiver::SetCallbacks(
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Transceiver::Send(uint8 *data, uint size)
+void Communicator::Transmitter::Send(uint8 *data, uint size)
 {
     InitPins();
 
@@ -86,7 +90,7 @@ void Transceiver::Send(uint8 *data, uint size)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Transceiver::SendByte(uint8 data)
+void Communicator::Transmitter::SendByte(uint8 data)
 {
     for (int i = 0; i < 8; i++)
     {
@@ -98,7 +102,7 @@ void Transceiver::SendByte(uint8 data)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Transceiver::WaitPermitSend()
+void Communicator::Transmitter::WaitPermitSend()
 {
     while (Read_ALLOW_SEND() == 1)
     {
@@ -106,7 +110,7 @@ void Transceiver::WaitPermitSend()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Transceiver::WaitPermitData()
+void Communicator::Transmitter::WaitPermitData()
 {
     while (Read_CONF_DATA() == 1)
     {
@@ -114,41 +118,46 @@ void Transceiver::WaitPermitData()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Transceiver::Send(uint8 byte)
+void Communicator::Transmitter::Send(uint8 byte)
 {
     Send(&byte, 1);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Transceiver::Send(uint8 byte0, uint8 byte1)
+void Communicator::Transmitter::Send(uint8 byte0, uint8 byte1)
 {
     uint8 data[2] = { byte0, byte1 };
     Send(data, 2);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Transceiver::WritePinBit(uint8 byte, int bit)
+void Communicator::Transmitter::WritePinBit(uint8 byte, int bit)
 {
     Write_DATA((byte >> bit) & 0x01);
 }
 
-namespace Receiver
+namespace Communicator
 {
-    void(*InitPins)() = nullptr;
-    bool(*ReadREQ_SEND)() = nullptr;
-    void(*WriteALLOW_SEND)(int) = nullptr;
-    void(*WriteCONF_DATA)(int) = nullptr;
-    bool(*ReadCLK)() = nullptr;
-    void(*FuncRead)(uint8) = nullptr;
+
+    namespace Receiver
+    {
+        void(*InitPins)() = nullptr;
+        bool(*ReadREQ_SEND)() = nullptr;
+        void(*WriteALLOW_SEND)(int) = nullptr;
+        void(*WriteCONF_DATA)(int) = nullptr;
+        bool(*ReadCLK)() = nullptr;
+        void(*FuncRead)(uint8) = nullptr;
+    }
+
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Receiver::SetCallbacks(
+void Communicator::Receiver::SetCallbacks(
     void(*initPins)(),
     bool(*readREQ_SEND)(),
+    bool(*readCLK)(),
     void(*writeALLOW_SEND)(int),
     void(*writeCONF_DATA)(int),
-    bool(*readCLK)(),
     void(*funcRead)(uint8))
 {
     InitPins = initPins;
@@ -160,7 +169,7 @@ void Receiver::SetCallbacks(
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Receiver::Update()
+void Communicator::Receiver::Update()
 {
 
 }

@@ -8,6 +8,9 @@
 #include "stm32f4xx_it.h"
 
 
+using namespace Communicator;
+
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 static TIM_HandleTypeDef handleTIM4;
 
@@ -229,7 +232,7 @@ void Keyboard::Update()
 void Keyboard::SendCommand(Control control, Control::Action::E action)
 {
     uint8 data[3] = {Command::ButtonPress, (uint8)control, (uint8)action};
-    Transceiver::Send(data, 3);
+    Transmitter::Send(data, 3);
 }   
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

@@ -32,6 +32,7 @@
 
 using namespace Display::Primitives;
 using namespace Osci::Settings;
+using namespace Communicator;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -80,12 +81,12 @@ static void ReadRow(uint8 row)
 {
     numRow = -1;
 
-    Transceiver::Send(Command::Screen, row);
+    Transmitter::Send(Command::Screen, row);
 
     while (numRow == -1)
     {
         uint8 data = 0;
-        Transceiver::Send(data);
+        Transmitter::Send(data);
         Decoder::Update();
     }
 }
