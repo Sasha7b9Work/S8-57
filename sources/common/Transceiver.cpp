@@ -32,7 +32,7 @@ namespace Transceiver
         /// Чтение пина разрешения передачи
         bool Read_ALLOW_SEND();
         /// Чтение подтверждения данных
-        bool(*Read_CONF_DATA)() = nullptr;
+        bool Read_CONF_DATA();
         /// Установить пин данных в соответствии с битом bit байта byte
         void WritePinBit(uint8 byte, int bit);
         /// Установить/сбросить тактовый пин
