@@ -10,6 +10,7 @@ namespace Transceiver
         void Write_REQ_SEND(int);
         bool Read_ALLOW_SEND();
         bool Read_CONF_DATA();
+        void Write_CLK(int);
     }
 }
 
@@ -42,4 +43,10 @@ bool Transceiver::Transmitter::Read_ALLOW_SEND()
 bool Transceiver::Transmitter::Read_CONF_DATA()
 {
     return false;
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Transceiver::Transmitter::Write_CLK(int)
+{
+
 }

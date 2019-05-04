@@ -36,7 +36,7 @@ namespace Transceiver
         /// Установить пин данных в соответствии с битом bit байта byte
         void WritePinBit(uint8 byte, int bit);
         /// Установить/сбросить тактовый пин
-        void(*Write_CLK)(int) = nullptr;
+        void Write_CLK(int);
         /// Установить состояния пина данных
         void(*Write_DATA)(int) = nullptr;
         /// Пересылка байта
