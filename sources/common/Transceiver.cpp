@@ -28,7 +28,7 @@ namespace Transceiver
         /// Функция инициализации пинов для режима передачи
         void InitPins();
         /// Устновка/сброс REQ_SEND
-        void(*Write_REQ_SEND)(int) = nullptr;
+        void Write_REQ_SEND(int);
         /// Чтение пина разрешения передачи
         bool(*Read_ALLOW_SEND)() = nullptr;
         /// Чтение подтверждения данных

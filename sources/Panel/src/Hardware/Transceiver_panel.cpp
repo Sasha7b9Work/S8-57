@@ -58,8 +58,9 @@ namespace Transceiver
         /// Функции передатчика
         void InitSendPin();
         void InitPins();
+        void Write_REQ_SEND(int);
     };
-    void Write_REQ_SEND(int);
+    
     bool Read_ALLOW_SEND();
     bool Read_CONF_DATA();
     void Write_CLK(int);
@@ -126,7 +127,7 @@ void Transceiver::InitPins_Receiver()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Transceiver::Write_REQ_SEND(int state)
+void Transceiver::Transmitter::Write_REQ_SEND(int state)
 {
     HAL_GPIO_WritePin(WRITE_REQ_SEND, (GPIO_PinState)state);
 }

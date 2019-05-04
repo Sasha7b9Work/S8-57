@@ -63,9 +63,10 @@ namespace Transceiver
         /// Функции передатчика
         void InitSendPin();
         void InitPins();
+        void Write_REQ_SEND(int);
     };
 
-    void Write_REQ_SEND(int);
+    
     bool Read_ALLOW_SEND();
     bool Read_CONF_DATA();
     void Write_CLK(int);
@@ -101,7 +102,7 @@ void Transceiver::Transmitter::InitPins()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Transceiver::Write_REQ_SEND(int state)
+void Transceiver::Transmitter::Write_REQ_SEND(int state)
 {
     PIO::Write(WRITE_REQ_SEND, (PIO::State::E)state);
 }
