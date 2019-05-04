@@ -64,10 +64,9 @@ namespace Transceiver
         void InitSendPin();
         void InitPins();
         void Write_REQ_SEND(int);
+        bool Read_ALLOW_SEND();
     };
 
-    
-    bool Read_ALLOW_SEND();
     bool Read_CONF_DATA();
     void Write_CLK(int);
     void Write_DATA(int);
@@ -108,7 +107,7 @@ void Transceiver::Transmitter::Write_REQ_SEND(int state)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-bool Transceiver::Read_ALLOW_SEND()
+bool Transceiver::Transmitter::Read_ALLOW_SEND()
 {
     return PIO::Read(READ_ALLOW_SEND);
 }

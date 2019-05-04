@@ -9,6 +9,7 @@ namespace Transceiver
         void InitSendPin();
         void InitPins();
         void Write_REQ_SEND(int);
+        bool Read_ALLOW_SEND();
     }
 }
 
@@ -29,4 +30,10 @@ void Transceiver::Transmitter::InitPins()
 void Transceiver::Transmitter::Write_REQ_SEND(int)
 {
 
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+bool Transceiver::Transmitter::Read_ALLOW_SEND()
+{
+    return false;
 }

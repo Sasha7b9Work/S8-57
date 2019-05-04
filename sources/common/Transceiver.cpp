@@ -30,7 +30,7 @@ namespace Transceiver
         /// Устновка/сброс REQ_SEND
         void Write_REQ_SEND(int);
         /// Чтение пина разрешения передачи
-        bool(*Read_ALLOW_SEND)() = nullptr;
+        bool Read_ALLOW_SEND();
         /// Чтение подтверждения данных
         bool(*Read_CONF_DATA)() = nullptr;
         /// Установить пин данных в соответствии с битом bit байта byte
