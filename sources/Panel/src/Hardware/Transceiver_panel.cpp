@@ -62,11 +62,8 @@ namespace Transceiver
         bool Read_ALLOW_SEND();
         bool Read_CONF_DATA();
         void Write_CLK(int);
+        void Write_DATA(int);
     };
-    
-    
-    
-    void Write_DATA(int);
  
     /// Функции приёмника
     void InitPins_Receiver();
@@ -153,7 +150,7 @@ void Transceiver::Transmitter::Write_CLK(int state)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Transceiver::Write_DATA(int state)
+void Transceiver::Transmitter::Write_DATA(int state)
 {
     HAL_GPIO_WritePin(WRITE_CLK, (GPIO_PinState)state);
 }
