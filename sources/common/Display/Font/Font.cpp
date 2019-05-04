@@ -1,6 +1,6 @@
 #include "defines.h"
 #include "Command.h"
-#include "Communication.h"
+#include "Transceiver.h"
 #include "Hardware/HAL/HAL.h"
 #include "font8.inc"
 #include "font5.inc"
@@ -9,7 +9,7 @@
 
 
 using HAL::FSMC;
-using namespace Communicator;
+using namespace Transceiver;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

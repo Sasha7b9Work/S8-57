@@ -1,9 +1,9 @@
 #include "defines.h"
 #include "device.h"
+#include "Transceiver.h"
 #include "Data/Reader.h"
 #include "FPGA/FPGA.h"
 #include "FPGA/FPGA_HAL.h"
-#include "Hardware/Communicator.h"
 #include "Hardware/Timer.h"
 #include "Hardware/HAL/HAL.h"
 #include "Osci/Measurements/Measurements.h"
@@ -203,7 +203,7 @@ static void BalanceChannel(Chan::E ch, Range::E range)
 
     while (numPoints < 100)
     {
-        if(!Communicator::InInteraction())
+        if(!Transceiver::InInteraction())
         {
             if (::HAL::PIO::Read(::HAL::PIO::Port::_G, ::HAL::PIO::Pin::_1))
             {

@@ -41,8 +41,8 @@ source_group(libs\\CMSIS            REGULAR_EXPRESSION "src/libs/CMSIS/*.*")
 source_group(libs\\FatFS            REGULAR_EXPRESSION "src/libs/FatFS/*.*")
 source_group(libs\\HAL              REGULAR_EXPRESSION "src/libs/HAL/*.*")
 source_group(libs\\USBH             REGULAR_EXPRESSION "src/libs/USBH/*.*")
-source_group(common                 FILES ../common/Communication.h
-                                          ../common/Communication.cpp)
+source_group(common                 FILES ../common/Transceiver.h
+                                          ../common/Transceiver.cpp)
 source_group(Display                REGULAR_EXPRESSION "src/Display/*.*")
 source_group(Display\\Font          REGULAR_EXPRESSION "../common/Display/Font/*.*")
 source_group(Hardware               REGULAR_EXPRESSION "src/Hardware/*.*")
@@ -52,8 +52,8 @@ source_group(Hardware\\stm32\\4XX   REGULAR_EXPRESSION "src/Hardware/stm32/4XX/*
 source_group(Settings               REGULAR_EXPRESSION "src/Settings/*.*")
 source_group(Utils                  REGULAR_EXPRESSION "src/Utils/*.*")
 
-file(GLOB SOURCES   ../common/Communication.h
-                    ../common/Communication.cpp
+file(GLOB SOURCES   ../common/Transceiver.h
+                    ../common/Transceiver.cpp
                     src/main.h
                     src/main.cpp
                     src/defines.h

@@ -396,14 +396,14 @@
               <FilePath>..\common\Message.h</FilePath>
             </File>
             <File>
-              <FileName>Communication.cpp</FileName>
+              <FileName>Transceiver.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\common\Communication.cpp</FilePath>
+              <FilePath>..\common\Transceiver.cpp</FilePath>
             </File>
             <File>
-              <FileName>Communication.h</FileName>
+              <FileName>Transceiver.h</FileName>
               <FileType>5</FileType>
-              <FilePath>..\common\Communication.h</FilePath>
+              <FilePath>..\common\Transceiver.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -801,6 +801,16 @@
               <FilePath>.\src\Hardware\Timer.h</FilePath>
             </File>
             <File>
+              <FileName>Transceiver.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Hardware\Transceiver.h</FilePath>
+            </File>
+            <File>
+              <FileName>Transceiver_device.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\Transceiver_device.cpp</FilePath>
+            </File>
+            <File>
               <FileName>VCP.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Hardware\VCP.cpp</FilePath>
@@ -809,16 +819,6 @@
               <FileName>VCP.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Hardware\VCP.h</FilePath>
-            </File>
-            <File>
-              <FileName>Communicator.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Hardware\Communicator.h</FilePath>
-            </File>
-            <File>
-              <FileName>Communicator_device.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Hardware\Communicator_device.cpp</FilePath>
             </File>
           </Files>
         </Group>

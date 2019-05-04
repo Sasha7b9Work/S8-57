@@ -1,16 +1,15 @@
 #include "defines.h"
-#include "Communication.h"
+#include "Transceiver.h"
 #include "Display/Display.h"
 #include "Display/Painter.h"
 #include "Hardware/CPU.h"
 #include "Utils/DecoderPanel.h"
-#include "Hardware/Communicator.h"
 #include "Hardware/Timer.h"
 #include "Hardware/Keyboard.h"
 #include <stdlib.h>
 
 
-using namespace Communicator;
+using namespace Transceiver;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

@@ -1,5 +1,5 @@
 #include "Keyboard.h"
-#include "Communication.h"
+#include "Transceiver.h"
 #include "Display/Display.h"
 #include "Hardware/CPU.h"
 #include "Utils/DecoderPanel.h"
@@ -8,7 +8,9 @@
 #include "stm32f4xx_it.h"
 
 
-using namespace Communicator;
+using namespace Transceiver;
+
+using namespace Transceiver;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

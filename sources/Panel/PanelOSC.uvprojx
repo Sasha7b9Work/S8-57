@@ -1367,14 +1367,14 @@
               <FilePath>.\src\Hardware\LTDC.h</FilePath>
             </File>
             <File>
-              <FileName>Communicator.h</FileName>
+              <FileName>Timer.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\src\Hardware\Communicator.h</FilePath>
+              <FilePath>.\src\Hardware\Timer.h</FilePath>
             </File>
             <File>
-              <FileName>Communicator_panel.cpp</FileName>
+              <FileName>Transceiver_panel.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\Hardware\Communicator_panel.cpp</FilePath>
+              <FilePath>.\src\Hardware\Transceiver_panel.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1457,14 +1457,14 @@
           <GroupName>common</GroupName>
           <Files>
             <File>
-              <FileName>Communication.cpp</FileName>
+              <FileName>Transceiver.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\common\Communication.cpp</FilePath>
+              <FilePath>..\common\Transceiver.cpp</FilePath>
             </File>
             <File>
-              <FileName>Communication.h</FileName>
+              <FileName>Transceiver.h</FileName>
               <FileType>5</FileType>
-              <FilePath>..\common\Communication.h</FilePath>
+              <FilePath>..\common\Transceiver.h</FilePath>
             </File>
           </Files>
         </Group>

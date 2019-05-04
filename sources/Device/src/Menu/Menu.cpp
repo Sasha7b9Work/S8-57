@@ -1,8 +1,7 @@
 #include "defines.h"
-#include "Communication.h"
+#include "Transceiver.h"
 #include "Menu/Menu.h"
 #include "Menu/BufferButtons.h"
-#include "Hardware/Communicator.h"
 #include "Hardware/Timer.h"
 #include "Menu/MenuTriggers.h"
 #include "Keyboard/HandlersKeys.h"
@@ -32,7 +31,7 @@
 
 using namespace Display::Primitives;
 using namespace Osci::Settings;
-using namespace Communicator;
+using namespace Transceiver;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

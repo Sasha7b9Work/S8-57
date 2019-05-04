@@ -1,5 +1,5 @@
 #include "Painter.h"
-#include "Communication.h"
+#include "Transceiver.h"
 #include "Hardware/CPU.h"
 #include "Hardware/LTDC.h"
 #include "Utils/Math.h"
@@ -10,7 +10,7 @@
 #include <cstdlib>
 
 
-using namespace Communicator;
+using namespace Transceiver;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

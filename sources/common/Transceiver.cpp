@@ -1,5 +1,5 @@
 #include "defines.h"
-#include "Communication.h"
+#include "Transceiver.h"
 
 /*
     +------------+-------------+---+-------------+---+
@@ -21,7 +21,7 @@
     +------------+-------------+---+-------------+---+
 */
 
-namespace Communicator
+namespace Transceiver
 {
     namespace Transmitter
     {
@@ -60,7 +60,7 @@ namespace Communicator
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void Communicator::Transmitter::Send(uint8 *data, uint size)
+void Transceiver::Transmitter::Send(uint8 *data, uint size)
 {
     InitPins();
 
@@ -77,7 +77,7 @@ void Communicator::Transmitter::Send(uint8 *data, uint size)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Communicator::Transmitter::SendByte(uint8 data)
+void Transceiver::Transmitter::SendByte(uint8 data)
 {
     for (int i = 0; i < 8; i++)
     {
@@ -89,7 +89,7 @@ void Communicator::Transmitter::SendByte(uint8 data)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Communicator::Transmitter::WaitPermitSend()
+void Transceiver::Transmitter::WaitPermitSend()
 {
     while (Read_ALLOW_SEND() == 1)
     {
@@ -97,7 +97,7 @@ void Communicator::Transmitter::WaitPermitSend()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Communicator::Transmitter::WaitPermitData()
+void Transceiver::Transmitter::WaitPermitData()
 {
     while (Read_CONF_DATA() == 1)
     {
@@ -105,26 +105,26 @@ void Communicator::Transmitter::WaitPermitData()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Communicator::Transmitter::Send(uint8 byte)
+void Transceiver::Transmitter::Send(uint8 byte)
 {
     Send(&byte, 1);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Communicator::Transmitter::Send(uint8 byte0, uint8 byte1)
+void Transceiver::Transmitter::Send(uint8 byte0, uint8 byte1)
 {
     uint8 data[2] = { byte0, byte1 };
     Send(data, 2);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Communicator::Transmitter::WritePinBit(uint8 byte, int bit)
+void Transceiver::Transmitter::WritePinBit(uint8 byte, int bit)
 {
     Write_DATA((byte >> bit) & 0x01);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Communicator::Receiver::Update()
+void Transceiver::Receiver::Update()
 {
 
 }

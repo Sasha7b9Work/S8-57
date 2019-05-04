@@ -1,7 +1,7 @@
 #include "defines.h"
 #include "log.h"
 #include "Command.h"
-#include "Communication.h"
+#include "Transceiver.h"
 #include "Message.h"
 #include "Painter.h"
 #include "Hardware/HAL/HAL.h"
@@ -17,7 +17,7 @@
 
 
 using HAL::FSMC;
-using namespace Communicator;
+using namespace Transceiver;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

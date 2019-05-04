@@ -127,7 +127,7 @@ source_group(Hardware           FILES   ../../Device/src/Hardware/Battery.h
                                         ../../Device/src/Hardware/Timer.h
                                         ../../Device/src/Hardware/Timer.cpp
                                         ../../Device/src/Hardware/VCP.h
-                                                     src/Hardware/Communicator_win.cpp
+                                                     src/Hardware/Transceiver_win.cpp
                                         ../../Device/src/Hardware/VCP.cpp)
 source_group(Settings           FILES   ../../Device/src/Settings/Settings.h
                                         ../../Device/src/Settings/Settings.cpp
@@ -198,7 +198,7 @@ file(GLOB SOURCES   ../../common/_VS/*
                     ../../Device/src/Hardware/Timer.cpp
                     ../../Device/src/Hardware/VCP.h
                     ../../Device/src/Hardware/VCP.cpp
-                                 src/Hardware/Communicator_win.cpp
+                                 src/Hardware/Transceiver_win.cpp
                     
                                  src/Hardware/HAL/*
                     ../../Device/src/Keyboard/*

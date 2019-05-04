@@ -601,7 +601,7 @@
 
   <Group>
     <GroupName>src</GroupName>
-    <tvExp>1</tvExp>
+    <tvExp>0</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
@@ -901,7 +901,7 @@
 
   <Group>
     <GroupName>Hardware</GroupName>
-    <tvExp>1</tvExp>
+    <tvExp>0</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
@@ -1008,8 +1008,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\src\Hardware\Communicator.h</PathWithFileName>
-      <FilenameWithoutPath>Communicator.h</FilenameWithoutPath>
+      <PathWithFileName>.\src\Hardware\Timer.h</PathWithFileName>
+      <FilenameWithoutPath>Timer.h</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1020,8 +1020,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\src\Hardware\Communicator_panel.cpp</PathWithFileName>
-      <FilenameWithoutPath>Communicator_panel.cpp</FilenameWithoutPath>
+      <PathWithFileName>.\src\Hardware\Transceiver_panel.cpp</PathWithFileName>
+      <FilenameWithoutPath>Transceiver_panel.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1197,7 +1197,7 @@
 
   <Group>
     <GroupName>common</GroupName>
-    <tvExp>0</tvExp>
+    <tvExp>1</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
@@ -1208,8 +1208,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\common\Communication.cpp</PathWithFileName>
-      <FilenameWithoutPath>Communication.cpp</FilenameWithoutPath>
+      <PathWithFileName>..\common\Transceiver.cpp</PathWithFileName>
+      <FilenameWithoutPath>Transceiver.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1220,8 +1220,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\common\Communication.h</PathWithFileName>
-      <FilenameWithoutPath>Communication.h</FilenameWithoutPath>
+      <PathWithFileName>..\common\Transceiver.h</PathWithFileName>
+      <FilenameWithoutPath>Transceiver.h</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>

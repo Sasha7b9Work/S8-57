@@ -1,6 +1,6 @@
 #include "defines.h"
 #include "log.h"
-#include "Communication.h"
+#include "Transceiver.h"
 #include "Display/Painter.h"
 #include "Hardware/HAL/HAL.h"
 #include "Hardware/Timer.h"
@@ -10,7 +10,7 @@
 
 
 using namespace Osci::Settings;
-using namespace Communicator;
+using namespace Transceiver;
 
 using HAL::FSMC;
 
