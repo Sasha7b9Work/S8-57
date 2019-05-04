@@ -51,9 +51,9 @@ namespace Transceiver
 void Transceiver::SetCallbacks(
     void(*initSendPin)(),
     void(*initPins)(),
-    void(*writeREQ_SEND)(int),
     bool(*readALLOW_SEND)(),
     bool(*readCONF_DATA)(),
+    void(*writeREQ_SEND)(int),
     void(*writeCLK)(int),
     void(*writeDATA)(int)
 )

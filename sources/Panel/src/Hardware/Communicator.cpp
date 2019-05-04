@@ -80,9 +80,9 @@ void Communicator::Init()
     Transceiver::SetCallbacks(
         InitSendPin_Transceiver,
         InitPins_Transceiver,
-        Write_REQ_SEND,
         Read_ALLOW_SEND,
         Read_CONF_DATA,
+        Write_REQ_SEND,
         Write_CLK,
         Write_DATA
     );
