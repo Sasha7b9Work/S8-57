@@ -27,18 +27,22 @@ namespace Transceiver
     {
         /// Функция инициализации пинов для режима передачи
         void InitPins();
+
+        void DeInitPins();
+
         /// Устновка/сброс REQ_SEND
         void Write_REQ_SEND(int);
         /// Чтение пина разрешения передачи
         bool Read_ALLOW_SEND();
         /// Чтение подтверждения данных
         bool Read_CONF_DATA();
-        /// Установить пин данных в соответствии с битом bit байта byte
-        void WritePinBit(uint8 byte, int bit);
         /// Установить/сбросить тактовый пин
         void Write_CLK(int);
         /// Установить состояния пина данных
         void Write_DATA(int);
+
+        /// Установить пин данных в соответствии с битом bit байта byte
+        void WritePinBit(uint8 byte, int bit);
         /// Пересылка байта
         void SendByte(uint8 data);
         /// Дождаться разрешения на передачу
@@ -50,10 +54,14 @@ namespace Transceiver
     namespace Receiver
     {
         void InitPins();
+
+        void DeInitPins();
+
         bool Read_REQ_SEND();
         void Write_ALLOW_SEND(int);
         void Write_CONF_DATA(int);
         bool Read_CLK();
+
         void FuncRead(uint8);
     }
 }

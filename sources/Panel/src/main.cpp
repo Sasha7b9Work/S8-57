@@ -18,6 +18,7 @@ int main()
     CPU::Init();
     Display::Init();
     Keyboard::Init();
+    Transceiver::Init();
 
     while(1)
     {

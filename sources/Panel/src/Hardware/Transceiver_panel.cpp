@@ -58,6 +58,8 @@ namespace Transceiver
         /// Функции передатчика
         void InitSendPin();
         void InitPins();
+        void DeInitPins();
+
         void Write_REQ_SEND(int);
         bool Read_ALLOW_SEND();
         bool Read_CONF_DATA();
@@ -68,17 +70,27 @@ namespace Transceiver
     namespace Receiver
     {
         void InitPins();
+        void DeInitPins();
+
+        bool Read_REQ_SEND();
+        void Write_ALLOW_SEND(int);
+        void Write_CONF_DATA(int);
+        bool Read_CLK();
+
+        void FuncRead(uint8);
     };
  
-    bool Read_REQ_SEND();
-    void Write_ALLOW_SEND(int);
-    void Write_CONF_DATA(int);
-    bool Read_CLK();
-    void FuncRead(uint8);
+    
 }
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+void Transceiver::Init()
+{
+
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Transceiver::Transmitter::InitSendPin()
 {
     GPIO_InitTypeDef gpio =
@@ -159,31 +171,31 @@ void Transceiver::Transmitter::Write_DATA(int state)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-bool Transceiver::Read_REQ_SEND()
+bool Transceiver::Receiver::Read_REQ_SEND()
 {
     return HAL_GPIO_ReadPin(READ_REQ_SEND) != 0;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Transceiver::Write_CONF_DATA(int state)
+void Transceiver::Receiver::Write_CONF_DATA(int state)
 {
     HAL_GPIO_WritePin(WRITE_CONF_DATA, (GPIO_PinState)state);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Transceiver::Write_ALLOW_SEND(int state)
+void Transceiver::Receiver::Write_ALLOW_SEND(int state)
 {
     HAL_GPIO_WritePin(WRITE_ALLOW_SEND, (GPIO_PinState)state);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Transceiver::FuncRead(uint8)
+void Transceiver::Receiver::FuncRead(uint8)
 {
 
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-bool Transceiver::Read_CLK()
+bool Transceiver::Receiver::Read_CLK()
 {
     return HAL_GPIO_ReadPin(READ_CLK) != 0;
 }

@@ -63,6 +63,8 @@ namespace Transceiver
         /// Функции передатчика
         void InitSendPin();
         void InitPins();
+        void DeInitPins();
+
         void Write_REQ_SEND(int);
         bool Read_ALLOW_SEND();
         bool Read_CONF_DATA();
@@ -73,13 +75,14 @@ namespace Transceiver
     namespace Receiver
     {
         void InitPins();
-    };
 
-    bool Read_REQ_SEND();
-    void Write_ALLOW_SEND(int);
-    void Write_CONF_DATA(int);
-    bool Read_CLK();
-    void FuncRead(uint8);
+        bool Read_REQ_SEND();
+        void Write_ALLOW_SEND(int);
+        void Write_CONF_DATA(int);
+        bool Read_CLK();
+
+        void FuncRead(uint8);
+    };
 }
 
 
@@ -144,31 +147,31 @@ void Transceiver::Receiver::InitPins()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-bool Transceiver::Read_REQ_SEND()
+bool Transceiver::Receiver::Read_REQ_SEND()
 {
     return PIO::Read(READ_REQ_SEND);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Transceiver::Write_ALLOW_SEND(int state)
+void Transceiver::Receiver::Write_ALLOW_SEND(int state)
 {
     PIO::Write(WRITE_ALLOW_SEND, (PIO::State::E)state);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Transceiver::Write_CONF_DATA(int state)
+void Transceiver::Receiver::Write_CONF_DATA(int state)
 {
     PIO::Write(WRITE_CONF_DATA, (PIO::State::E)state);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Transceiver::FuncRead(uint8 /*data*/)
+void Transceiver::Receiver::FuncRead(uint8 /*data*/)
 {
 
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-bool Transceiver::Read_CLK()
+bool Transceiver::Receiver::Read_CLK()
 {
     return PIO::Read(READ_CLK);
 }
