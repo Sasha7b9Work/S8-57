@@ -805,11 +805,6 @@
               <FileType>5</FileType>
               <FilePath>.\src\Hardware\Timer.h</FilePath>
             </File>
-            <File>
-              <FileName>Communicator_loader.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Hardware\Communicator_loader.cpp</FilePath>
-            </File>
           </Files>
         </Group>
         <Group>

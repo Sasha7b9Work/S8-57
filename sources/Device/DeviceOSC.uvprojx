@@ -801,16 +801,6 @@
               <FilePath>.\src\Hardware\Timer.h</FilePath>
             </File>
             <File>
-              <FileName>Transceiver.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Hardware\Transceiver.h</FilePath>
-            </File>
-            <File>
-              <FileName>Transceiver_device.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Hardware\Transceiver_device.cpp</FilePath>
-            </File>
-            <File>
               <FileName>VCP.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Hardware\VCP.cpp</FilePath>
