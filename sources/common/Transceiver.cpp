@@ -6,28 +6,71 @@ namespace Transceiver
 {
     namespace Transmitter
     {
+        void Init(Mode mode);
+        /// Инициализация пинов для режима передачи.
+        void(*InitPinsSend)();
+
+        namespace Device
+        {
+            void InitPinsSend();
+        }
+
+        namespace Panel
+        {
+            void InitPinsSend();
+        }
     }
 
     namespace Receiver
     {
-        void InitPins();
+        void Init(Mode mode);
+        /// Инициализация пинов для режима приёма.
+        void(*InitPinsRecieve)();
 
-        void DeInitPins();
+        namespace Device
+        {
+            void InitPinsReceive();
+        }
 
-        bool Read_REQ_SEND();
-        void Write_ALLOW_SEND(int);
-        void Write_CONF_DATA(int);
-        bool Read_CLK();
-        bool Read_DATA();
-
-        void FuncRead(uint8);
+        namespace Panel
+        {
+            void InitPinsReceive();
+        }
     }
 }
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void Transceiver::Init()
+void Transceiver::Init(Mode mode)
 {
+    Transmitter::Init(mode);
+    Receiver::Init(mode);
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Transceiver::Transmitter::Init(Transceiver::Mode mode)
+{
+    if (mode == Transceiver::Device)
+    {
+        InitPinsSend = Device::InitPinsSend;
+    }
+    else
+    {
+        InitPinsSend = Panel::InitPinsSend;
+    }
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Transceiver::Receiver::Init(Mode mode)
+{
+    if (mode == Transceiver::Device)
+    {
+        InitPinsRecieve = Device::InitPinsReceive;
+    }
+    else
+    {
+        InitPinsRecieve = Panel::InitPinsReceive;
+    }
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -58,4 +101,28 @@ void Transceiver::Receiver::Update()
 bool Transceiver::InInteraction()
 {
     return true;
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Transceiver::Transmitter::Device::InitPinsSend()
+{
+
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Transceiver::Transmitter::Panel::InitPinsSend()
+{
+
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Transceiver::Receiver::Panel::InitPinsReceive()
+{
+
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Transceiver::Receiver::Device::InitPinsReceive()
+{
+
 }
