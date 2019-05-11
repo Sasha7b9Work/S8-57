@@ -37,16 +37,21 @@ add_compile_options(/wd4996)
 add_compile_options(/wd5026)
 add_compile_options(/wd5039)
 
-source_group(common                                     REGULAR_EXPRESSION "../common/*.*")
+source_group(common                 FILES ../../common/Command.h
+                                          ../../common/Message.cpp
+                                          ../../common/Message.h
+                                          ../../common/Transceiver.cpp
+                                          ../../common/Transceiver.h
+                                          ../common/Transceiver_win.cpp)
 source_group(_VS                                        REGULAR_EXPRESSION "../../common/_VS/*.*")
-source_group(_VS\\CMSIS                                 REGULAR_EXPRESSION "../common/_VS/CMSIS/*.*")
-source_group(_VS\\FatFS                                 REGULAR_EXPRESSION "../common/_VS/FatFS/*.*")
-source_group(_VS\\HAL                                   REGULAR_EXPRESSION "../common/_VS/HAL/*.*")
-source_group(_VS\\HAL\\Legacy                           REGULAR_EXPRESSION "../common/_VS/HAL/Legacy/*.*")
-source_group(_VS\\USBD                                  REGULAR_EXPRESSION "../common/_VS/USBD/*.*")
-source_group(_VS\\USBH                                  REGULAR_EXPRESSION "../common/_VS/USBH/*.*")
+source_group(_VS\\CMSIS                                 REGULAR_EXPRESSION "../../common/_VS/CMSIS/*.*")
+source_group(_VS\\FatFS                                 REGULAR_EXPRESSION "../../common/_VS/FatFS/*.*")
+source_group(_VS\\HAL                                   REGULAR_EXPRESSION "../../common/_VS/HAL/*.*")
+source_group(_VS\\HAL\\Legacy                           REGULAR_EXPRESSION "../../common/_VS/HAL/Legacy/*.*")
+source_group(_VS\\USBD                                  REGULAR_EXPRESSION "../../common/_VS/USBD/*.*")
+source_group(_VS\\USBH                                  REGULAR_EXPRESSION "../../common/_VS/USBH/*.*")
 source_group(Data                                       REGULAR_EXPRESSION "src/Data/*.*")
-source_group(Display\\Font                              REGULAR_EXPRESSION "../common/Display/Font/*.*")
+source_group(Display\\Font                              REGULAR_EXPRESSION "../../common/Display/Font/*.*")
 source_group(FlashDrive                                 REGULAR_EXPRESSION "src/FlashDrive/*.*")
 source_group(Hardware\\HAL                              REGULAR_EXPRESSION "src/Hardware/HAL/*.*")
 source_group(Keyboard                                   REGULAR_EXPRESSION "src/Keyboard/*.*")
@@ -144,7 +149,14 @@ file(GLOB SOURCES   ../../common/_VS/*
                     ../../common/_VS/HAL/Legacy/*
                     ../../common/_VS/USBD/*
                     ../../common/_VS/USBH/*
-                    ../../common/*.*
+                    
+                    ../../common/Command.h
+                    ../../common/Message.cpp
+                    ../../common/Message.h
+                    ../../common/Transceiver.cpp
+                    ../../common/Transceiver.h
+                    ../common/Transceiver_win.cpp
+                    
                     ../../Device/src/Data/*.*
                     
                     ../../Device/src/Display/Colors.h

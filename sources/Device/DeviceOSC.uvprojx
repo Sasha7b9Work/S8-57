@@ -405,6 +405,11 @@
               <FileType>5</FileType>
               <FilePath>..\common\Transceiver.h</FilePath>
             </File>
+            <File>
+              <FileName>Transceiver_Device.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\common\Transceiver_Device.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

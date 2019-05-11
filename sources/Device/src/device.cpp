@@ -1,5 +1,6 @@
 #include "defines.h"
 #include "Device.h"
+#include "Transceiver.h"
 #include "Display/Display.h"
 #include "FlashDrive/FlashDrive.h"
 #include "FPGA/FPGA.h"
@@ -44,6 +45,8 @@ void Device::Init()
     Timer::Init();
     
     PAUSE_ON_MS(500);
+    
+    Transceiver::Init();
 
     Beeper::Init();
 

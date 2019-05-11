@@ -1194,6 +1194,26 @@
           </Files>
         </Group>
         <Group>
+          <GroupName>common</GroupName>
+          <Files>
+            <File>
+              <FileName>Transceiver.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\common\Transceiver.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Transceiver.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\common\Transceiver.h</FilePath>
+            </File>
+            <File>
+              <FileName>Transceiver_Device.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\common\Transceiver_Device.cpp</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
           <GroupName>src</GroupName>
           <Files>
             <File>
@@ -1445,21 +1465,6 @@
               <FileName>Settings.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Settings\Settings.h</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>common</GroupName>
-          <Files>
-            <File>
-              <FileName>Transceiver.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\common\Transceiver.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Transceiver.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\common\Transceiver.h</FilePath>
             </File>
           </Files>
         </Group>

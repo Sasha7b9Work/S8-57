@@ -29,7 +29,12 @@ SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -MP -Wall")
 add_compile_options(/wd4820)
 add_compile_options(/wd5039)
 
-source_group(common                                  REGULAR_EXPRESSION "../common/*.*")
+source_group(common                                  FILES ../common/Command.h
+                                                           ../common/Message.cpp
+                                                           ../common/Message.h
+                                                           ../common/Transceiver.cpp
+                                                           ../common/Transceiver.h
+                                                           ../common/Transceiver_Device.cpp)
 source_group(_VS                                     REGULAR_EXPRESSION "../common/_VS/*.*")
 source_group(_VS\\std_includes                       REGULAR_EXPRESSION "../common/_VS/std_includes/*.*")
 source_group(src                                     REGULAR_EXPRESSION "src/*.*")
@@ -67,7 +72,12 @@ source_group(Utils                                   REGULAR_EXPRESSION "src/Uti
 
 file(GLOB SOURCES   ../common/_VS/*
                     ../common/_VS/std_includes/*
-                    ../common/*.*
+                    ../common/Command.h
+                    ../common/Message.cpp
+                    ../common/Message.h
+                    ../common/Transceiver.cpp
+                    ../common/Transceiver.h
+                    ../common/Transceiver_Device.cpp
                     src/Data/*.*
                     src/Display/*.*
                     ../common/Display/Font/*.*
