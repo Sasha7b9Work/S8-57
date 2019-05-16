@@ -421,9 +421,9 @@
               <FilePath>..\common\Transceiver.h</FilePath>
             </File>
             <File>
-              <FileName>Transceiver_Panel.cpp</FileName>
+              <FileName>Transceiver_Device.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\common\Transceiver_Panel.cpp</FilePath>
+              <FilePath>..\common\Transceiver_Device.cpp</FilePath>
             </File>
           </Files>
         </Group>
