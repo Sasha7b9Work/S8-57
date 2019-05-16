@@ -37,7 +37,7 @@ void Transceiver::Init(void (*callbackInitPins)())
     GPIO_InitTypeDef gpio;
     gpio.Pin = GPIO_PIN_14;                                 // MODE_PANEL
     gpio.Mode = GPIO_MODE_OUTPUT_PP;
-    gpio.Pull = GPIO_PULLUP;
+    gpio.Pull = GPIO_PULLDOWN;
     HAL_GPIO_Init(GPIOC, &gpio);
 
     HAL_GPIO_WritePin(GPIOC, GPIO_PIN_14, GPIO_PIN_SET);    // Устанавливаем признак того, что готовы к приёмму
@@ -61,12 +61,14 @@ void Transceiver::Receiver::Init()
     GPIO_InitTypeDef gpio;
     gpio.Pin = GPIO_PIN_13;             // Настраиваем BYTE_SET на приём
     gpio.Mode = GPIO_MODE_INPUT;
-    gpio.Pull = GPIO_PULLUP;
+    gpio.Pull = GPIO_PULLDOWN;
     HAL_GPIO_Init(GPIOC, &gpio);
 
     gpio.Pin = GPIO_PIN_5;              // Настраиваем BYTE_CONFIRM на вывод
     gpio.Mode = GPIO_MODE_OUTPUT_PP;
     HAL_GPIO_Init(GPIOD, &gpio);
+
+    Write_MODE_PANEL(1);
 
     Write_BYTE_CONFIRM(0);
 }
@@ -77,7 +79,7 @@ void Transceiver::Receiver::InitPinsReceive()
     GPIO_InitTypeDef gpio;
     gpio.Pin = GPIO_PIN_0 | GPIO_PIN_1 | GPIO_PIN_2 | GPIO_PIN_3 | GPIO_PIN_4 | GPIO_PIN_5 | GPIO_PIN_6 | GPIO_PIN_7;   // D0...D7
     gpio.Mode = GPIO_MODE_INPUT;
-    gpio.Pull = GPIO_PULLUP;
+    gpio.Pull = GPIO_PULLDOWN;
     HAL_GPIO_Init(GPIOE, &gpio);
 
     gpio.Pin = GPIO_PIN_5;
@@ -97,7 +99,7 @@ void Transceiver::Receiver::DeInitPins()
     GPIO_InitTypeDef gpio;
     gpio.Pin = GPIO_PIN_0 | GPIO_PIN_1 | GPIO_PIN_2 | GPIO_PIN_3 | GPIO_PIN_4 | GPIO_PIN_5 | GPIO_PIN_6 | GPIO_PIN_7;   // D0...D7 на чтение
     gpio.Mode = GPIO_MODE_INPUT;
-    gpio.Pull = GPIO_PULLUP;
+    gpio.Pull = GPIO_PULLDOWN;
     HAL_GPIO_Init(GPIOE, &gpio);
 
     gpio.Pin = GPIO_PIN_5;              // BYTE_CONFIRM на чтение
@@ -175,4 +177,10 @@ uint8 Transceiver::Receiver::ReadData()
     }
 
     return result;
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Transceiver::Receiver::Write_MODE_PANEL(int mode)
+{
+    HAL_GPIO_WritePin(GPIOC, GPIO_PIN_14, (GPIO_PinState)mode);
 }

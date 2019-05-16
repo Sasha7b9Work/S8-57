@@ -1,5 +1,6 @@
 #include "defines.h"
 #include "Transceiver.h"
+#include <stm32f4xx_hal.h>
 
 
 namespace Transceiver
@@ -12,10 +13,8 @@ namespace Transceiver
         void Init();
         void InitPinsSend();
         int Read_MODE_PANEL();
-        void Set_MODE_CONFIRM();
-        void Reset_MODE_CONFIRM();
-        void Set_BYTE_SET();
-        void Reset_BYTE_SET();
+        void Write_MODE_CONFIRM(int);
+        void Write_BYTE_SET(int);
         void WriteData(uint8 data);
     }
 
@@ -31,6 +30,16 @@ namespace Transceiver
 void Transceiver::Init(void (*callbackInitPins)())
 {
     CallbackOnInitPins = callbackInitPins;
+
+    GPIO_InitTypeDef gpio;
+    gpio.Pin = GPIO_PIN_7;              // MODE_PANEL на чтение
+    gpio.Mode = GPIO_MODE_INPUT;
+    gpio.Pull = GPIO_PULLDOWN;
+    HAL_GPIO_Init(GPIOA, &gpio);
+
+    gpio.Pin = GPIO_PIN_4;              // MODE_CONFIRM устанавливаем в "0" в предположении, что панель настроена на приём и MODE_PANEL == "1"
+    gpio.Mode = GPIO_MODE_OUTPUT_PP;
+    HAL_GPIO_Init(GPIOC, &gpio);
 
     Transmitter::Init();
     Receiver::Init();
@@ -70,15 +79,15 @@ void Transceiver::Transmitter::Send(uint8 *data, uint size)
 
     InitPinsSend();
 
-    Set_BYTE_SET();
+    Write_BYTE_SET(1);
 
-    Set_BYTE_SET();
+    Write_BYTE_SET(0);
 
     for (uint i = 0; i < size; i++)
     {
         WriteData(data[i]);
 
-        Reset_BYTE_SET();
+        Write_BYTE_SET(0);
     }
 }
 
@@ -89,27 +98,15 @@ int Transceiver::Transmitter::Read_MODE_PANEL()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Transceiver::Transmitter::Set_MODE_CONFIRM()
+void Transceiver::Transmitter::Write_MODE_CONFIRM(int data)
 {
-
+    HAL_GPIO_WritePin(GPIOC, GPIO_PIN_4, (GPIO_PinState)data);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Transceiver::Transmitter::Reset_MODE_CONFIRM()
+void Transceiver::Transmitter::Write_BYTE_SET(int data)
 {
-
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Transceiver::Transmitter::Set_BYTE_SET()
-{
-
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Transceiver::Transmitter::Reset_BYTE_SET()
-{
-
+    HAL_GPIO_WritePin(GPIOG, GPIO_PIN_12, (GPIO_PinState)data);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
