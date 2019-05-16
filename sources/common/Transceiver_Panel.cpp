@@ -84,6 +84,8 @@ void Transceiver::Receiver::InitPinsReceive()
     gpio.Mode = GPIO_MODE_OUTPUT_PP;    // BYTE_CONFIRM на запись
     HAL_GPIO_Init(GPIOD, &gpio);
 
+    Write_BYTE_CONFIRM(0);
+
     gpio.Pin = GPIO_PIN_13;             // BYTE_SET на чтение
     gpio.Mode = GPIO_MODE_INPUT;
     HAL_GPIO_Init(GPIOC, &gpio);
