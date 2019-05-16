@@ -35,3 +35,5 @@ typedef void(*pFuncVV)(void);
 #ifdef WIN32
 #pragma warning(disable:4201)
 #endif
+
+void EmptyFuncVV(void);

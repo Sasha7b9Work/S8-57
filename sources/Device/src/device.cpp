@@ -46,7 +46,7 @@ void Device::Init()
     
     PAUSE_ON_MS(500);
     
-    Transceiver::Init();
+    Transceiver::Init(HAL::FSMC::CallbackDeinitPins);
 
     Beeper::Init();
 

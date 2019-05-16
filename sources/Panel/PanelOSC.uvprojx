@@ -1236,6 +1236,21 @@
               <FileType>5</FileType>
               <FilePath>.\src\Log.h</FilePath>
             </File>
+            <File>
+              <FileName>defines.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\defines.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>stdafx.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\stdafx.h</FilePath>
+            </File>
+            <File>
+              <FileName>structs.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\structs.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

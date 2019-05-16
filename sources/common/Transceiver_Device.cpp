@@ -4,6 +4,9 @@
 
 namespace Transceiver
 {
+    /// Эту функцию нужно вызывать всякий раз при инициализации пинов на приём или передачу.
+    void(*CallbackOnInitPins)();
+
     namespace Transmitter
     {
         void Init();
@@ -25,8 +28,10 @@ namespace Transceiver
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void Transceiver::Init()
+void Transceiver::Init(void (*callbackInitPins)())
 {
+    CallbackOnInitPins = callbackInitPins;
+
     Transmitter::Init();
     Receiver::Init();
 }
