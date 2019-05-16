@@ -119,13 +119,16 @@ void Transceiver::Receiver::Update()
 
     InitPinsReceive();
 
-    while (Read_BYTE_SET() == 1) { }
+    while (Read_MODE_CONFIRM() == 1)
+    {
+        while (Read_BYTE_SET() == 1) {}
 
-    uint8 data = ReadData();
+        uint8 data = ReadData();
 
-    Decoder::AddData(data);
+        Decoder::AddData(data);
 
-    Write_BYTE_CONFIRM(1);
+        Write_BYTE_CONFIRM(1);
+    }
 
     DeInitPins();
 }
