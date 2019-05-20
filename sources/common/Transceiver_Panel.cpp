@@ -7,11 +7,12 @@ namespace Transceiver
 {
     /// /// Эту функцию нужно вызывать всякий раз при инициализации пинов на приём или передачу.
     void(*CallbackOnInitPins)();
+    /// В этой функции все пины должны быть инициализированы на вход, чтобы не блокировать шины.
+    void DeInitPins();
 
     namespace Transmitter
     {
         void Init();
-        void InitPinsSend();
     }
 
     namespace Receiver
@@ -35,18 +36,27 @@ void Transceiver::Init(void (*callbackInitPins)())
     CallbackOnInitPins = callbackInitPins;
 
     GPIO_InitTypeDef gpio;
-    gpio.Pin = GPIO_PIN_14;                                 // MODE_PANEL
-    gpio.Mode = GPIO_MODE_OUTPUT_PP;
+    gpio.Pin =  GPIO_PIN_13 |   // SELECT - "0" на этом выходе означает, что устройство инициирует обмен с панелью
+                GPIO_PIN_14;    // MODE - режим работы. "0" - приём от устройства, "1" - запись в устройство
+    gpio.Mode = GPIO_MODE_INPUT;
     gpio.Pull = GPIO_PULLDOWN;
     HAL_GPIO_Init(GPIOC, &gpio);
 
-    HAL_GPIO_WritePin(GPIOC, GPIO_PIN_14, GPIO_PIN_SET);    // Устанавливаем признак того, что готовы к приёмму
+    DeInitPins();
+}
 
-    gpio.Pin = GPIO_PIN_15;                                 // MODE_CONFIRM
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Transceiver::DeInitPins()
+{
+    GPIO_InitTypeDef gpio;
+    gpio.Pin =  GPIO_PIN_5 |        // WRITE_READY
+                GPIO_PIN_4;         // READ_REDY
     gpio.Mode = GPIO_MODE_INPUT;
-    HAL_GPIO_Init(GPIOC, &gpio);
+    gpio.Pull = GPIO_PULLDOWN;
+    HAL_GPIO_Init(GPIOD, &gpio);
 
-    Receiver::Init();
+    gpio.Pin = GPIO_PIN_5;          // CONFIRM_READ
+    HAL_GPIO_Init(GPIOC, &gpio);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
