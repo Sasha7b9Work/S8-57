@@ -3,6 +3,27 @@
 #include "Utils/DecoderPanel.h"
 
 
+#define PORT_SELECT         GPIOC
+#define PIN_SELECT          GPIO_PIN_13
+#define SELECT              PORT_SELECT, PIN_SELECT
+
+#define PORT_MODE           GPIOC
+#define PIN_MODE            GPIO_PIN_14
+#define MODE                PORT_MODE, PIN_MODE
+
+#define PORT_WRITE_READY    GPIOD
+#define PIN_WRITE_READY     GPIO_PIN_5
+#define WRITE_READY         PORT_WRITE_READY, PIN_WRITE_READY
+
+#define PORT_READ_READY     GPIOC
+#define PIN_READ_READY      GPIO_PIN_15
+#define READ_READY          PORT_READ_READY, PIN_READ_READY
+
+#define PORT_CONFIRM        GPIOD
+#define PIN_CONFIRM         GPIO_PIN_4
+#define CONFIRM             PORT_CONFIRM, PIN_CONFIRM
+
+
 namespace Transceiver
 {
     /// /// Ёту функцию нужно вызывать вс€кий раз при инициализации пинов на приЄм или передачу.
@@ -13,19 +34,17 @@ namespace Transceiver
     namespace Transmitter
     {
         void Init();
+        void InitDataPins();
     }
 
     namespace Receiver
     {
-        void Init();
-        void InitPinsReceive();
-        void DeInitPins();
+        void Update();
+
+        void InitPins();
+        void InitDataPins();
 
         uint8 ReadData();
-        int Read_MODE_CONFIRM();
-        int Read_BYTE_SET();
-        void Write_BYTE_CONFIRM(int);
-        void Write_MODE_PANEL(int);
     }
 }
 
@@ -36,11 +55,17 @@ void Transceiver::Init(void (*callbackInitPins)())
     CallbackOnInitPins = callbackInitPins;
 
     GPIO_InitTypeDef gpio;
-    gpio.Pin =  GPIO_PIN_13 |   // SELECT - "0" на этом выходе означает, что устройство инициирует обмен с панелью
-                GPIO_PIN_14;    // MODE - режим работы. "0" - приЄм от устройства, "1" - запись в устройство
+    gpio.Pin = PIN_SELECT;              // SELECT - "0" на этом выходе означает, что устройство инициирует обмен с панелью
     gpio.Mode = GPIO_MODE_INPUT;
     gpio.Pull = GPIO_PULLDOWN;
-    HAL_GPIO_Init(GPIOC, &gpio);
+    HAL_GPIO_Init(PORT_SELECT, &gpio);
+
+    gpio.Pin = PIN_MODE;                // MODE - режим работы. "0" - приЄм от устройства, "1" - запись в устройство
+    HAL_GPIO_Init(PORT_MODE, &gpio);
+
+    gpio.Pin = PIN_READ_READY;          // READ_READ - сюда будем записывать признак того, что данные уже считаны
+    gpio.Mode = GPIO_MODE_OUTPUT_PP;
+    HAL_GPIO_Init(PORT_READ_READY, &gpio);
 
     DeInitPins();
 }
@@ -49,14 +74,15 @@ void Transceiver::Init(void (*callbackInitPins)())
 void Transceiver::DeInitPins()
 {
     GPIO_InitTypeDef gpio;
-    gpio.Pin =  GPIO_PIN_5 |        // WRITE_READY
-                GPIO_PIN_4;         // READ_REDY
+    gpio.Pin = PIN_WRITE_READY;         // WRITE_READY инициализируем на прослушивание - чтобы не мешать работе шины
     gpio.Mode = GPIO_MODE_INPUT;
     gpio.Pull = GPIO_PULLDOWN;
-    HAL_GPIO_Init(GPIOD, &gpio);
+    HAL_GPIO_Init(PORT_WRITE_READY, &gpio);
 
-    gpio.Pin = GPIO_PIN_5;          // CONFIRM_READ
-    HAL_GPIO_Init(GPIOC, &gpio);
+    gpio.Pin = PIN_CONFIRM;
+    HAL_GPIO_Init(PORT_CONFIRM, &gpio);
+
+    Receiver::InitDataPins();
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -66,55 +92,27 @@ void Transceiver::Transmitter::Init()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Transceiver::Receiver::Init()
+void Transceiver::Receiver::InitPins()
 {
-    GPIO_InitTypeDef gpio;
-    gpio.Pin = GPIO_PIN_13;             // Ќастраиваем BYTE_SET на приЄм
-    gpio.Mode = GPIO_MODE_INPUT;
-    gpio.Pull = GPIO_PULLDOWN;
-    HAL_GPIO_Init(GPIOC, &gpio);
-
-    gpio.Pin = GPIO_PIN_5;              // Ќастраиваем BYTE_CONFIRM на вывод
-    gpio.Mode = GPIO_MODE_OUTPUT_PP;
-    HAL_GPIO_Init(GPIOD, &gpio);
-
-    Write_MODE_PANEL(1);
-
-    Write_BYTE_CONFIRM(0);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Transceiver::Receiver::InitPinsReceive()
+void Transceiver::Receiver::InitDataPins()
 {
     GPIO_InitTypeDef gpio;
     gpio.Pin = GPIO_PIN_0 | GPIO_PIN_1 | GPIO_PIN_2 | GPIO_PIN_3 | GPIO_PIN_4 | GPIO_PIN_5 | GPIO_PIN_6 | GPIO_PIN_7;   // D0...D7
     gpio.Mode = GPIO_MODE_INPUT;
     gpio.Pull = GPIO_PULLDOWN;
     HAL_GPIO_Init(GPIOE, &gpio);
-
-    gpio.Pin = GPIO_PIN_5;
-    gpio.Mode = GPIO_MODE_OUTPUT_PP;    // BYTE_CONFIRM на запись
-    HAL_GPIO_Init(GPIOD, &gpio);
-
-    Write_BYTE_CONFIRM(0);
-
-    gpio.Pin = GPIO_PIN_13;             // BYTE_SET на чтение
-    gpio.Mode = GPIO_MODE_INPUT;
-    HAL_GPIO_Init(GPIOC, &gpio);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Transceiver::Receiver::DeInitPins()
+void Transceiver::Transmitter::InitDataPins()
 {
     GPIO_InitTypeDef gpio;
-    gpio.Pin = GPIO_PIN_0 | GPIO_PIN_1 | GPIO_PIN_2 | GPIO_PIN_3 | GPIO_PIN_4 | GPIO_PIN_5 | GPIO_PIN_6 | GPIO_PIN_7;   // D0...D7 на чтение
-    gpio.Mode = GPIO_MODE_INPUT;
-    gpio.Pull = GPIO_PULLDOWN;
+    gpio.Pin = GPIO_PIN_0 | GPIO_PIN_1 | GPIO_PIN_2 | GPIO_PIN_3 | GPIO_PIN_4 | GPIO_PIN_5 | GPIO_PIN_6 | GPIO_PIN_7;   // D0...D7
+    gpio.Mode = GPIO_MODE_OUTPUT_PP;
     HAL_GPIO_Init(GPIOE, &gpio);
-
-    gpio.Pin = GPIO_PIN_5;              // BYTE_CONFIRM на чтение
-    gpio.Mode = GPIO_MODE_INPUT;
-    HAL_GPIO_Init(GPIOD, &gpio);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -126,43 +124,7 @@ void Transceiver::Transmitter::Send(uint8 * /*data*/, uint /*size*/)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Transceiver::Receiver::Update()
 {
-    if (Read_MODE_CONFIRM() == 0)
-    {
-        return;
-    }
 
-    InitPinsReceive();
-
-    while (Read_MODE_CONFIRM() == 1)
-    {
-        while (Read_BYTE_SET() == 1) {}
-
-        uint8 data = ReadData();
-
-        Decoder::AddData(data);
-
-        Write_BYTE_CONFIRM(1);
-    }
-
-    DeInitPins();
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-int Transceiver::Receiver::Read_BYTE_SET()
-{
-    return HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_13);
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-int Transceiver::Receiver::Read_MODE_CONFIRM()
-{
-    return HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_15);
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Transceiver::Receiver::Write_BYTE_CONFIRM(int data)
-{
-    HAL_GPIO_WritePin(GPIOD, GPIO_PIN_5, (GPIO_PinState)data);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -187,10 +149,4 @@ uint8 Transceiver::Receiver::ReadData()
     }
 
     return result;
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Transceiver::Receiver::Write_MODE_PANEL(int mode)
-{
-    HAL_GPIO_WritePin(GPIOC, GPIO_PIN_14, (GPIO_PinState)mode);
 }
