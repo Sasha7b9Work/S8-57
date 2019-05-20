@@ -3,48 +3,49 @@
 #include <stm32f4xx_hal.h>
 
 
-#define PORT_SELECT         GPIOG
-#define PIN_SELECT          GPIO_PIN_12
-#define SELECT              PORT_SELECT, PIN_SELECT
+#define PORT_MODE0  GPIOA
+#define PIN_MODE0   GPIO_PIN_7
+#define MODE0       PORT_MODE0, PIN_MODE0
 
-#define PORT_MODE           GPIOA
-#define PIN_MODE            GPIO_PIN_7
-#define MODE                PORT_MODE, PIN_MODE
+#define PORT_MODE1  GPIOC
+#define PIN_MODE1   GPIO_PIN_4
+#define MODE1       PORT_MODE1, PIN_MODE1
 
-#define PORT_WRITE_READY    GPIOD
-#define PIN_WRITE_READY     GPIO_PIN_5
-#define WRITE_READY         PORT_WRITE_READY, PIN_WRITE_READY
+#define PORT_READY  GPIOG
+#define PIN_READY   GPIO_PIN_12
+#define READY       PORT_READY, PIN_READY
 
-#define PORT_READ_READY     GPIOC
-#define PIN_READ_READY      GPIO_PIN_4
-#define READ_READY          PORT_READ_READY, PIN_READ_READY
-
-#define PORT_CONFIRM        GPIOD
-#define PIN_CONFIRM         GPIO_PIN_4
-#define CONFIRM             PORT_CONFIRM, PIN_CONFIRM
+#define PORT_FL0    GPIOD
+#define PIN_FL0     GPIO_PIN_5
+#define FL0         PORT_FL0, PIN_FL0
 
 
 namespace Transceiver
 {
+
+    struct Mode
+    {
+        enum E
+        {
+            None,
+            Send,
+            Receive
+        };
+    };
+
+
     /// Эту функцию нужно вызывать всякий раз при инициализации пинов на приём или передачу.
     void(*CallbackOnInitPins)();
+    /// Установка режима работы
+    void Set_MODE(Mode::E mode);
 
     namespace Transmitter
     {
         /// Инициализировать выходы в режим передачи.
         void InitPins();
-        /// Установка режима работы - приём или передача; "0" - запись в панель, "1" - чтение из панели.
-        void Write_MODE(int);
-        /// Выбор панели для обмена. Активный уровень - "0".
-        void Write_SELECT(int);
-        /// Установка признака того, что данные выставлены на ШД.
-        void Write_READY_WR(int);
-        /// Считать подтверждение того, чо панель прочитала данные.
-        int Read_READY_RD();
-        /// Записываем в панель признак того, что подтверждение принято.
-        void Write_CONFIRM(int);
-        /// Установить состояние линий ШД в соответствии с битами data 
         void SetData(uint8 data);
+        void Write_FL0(int);
+        int Read_READY();
     }
 
     namespace Receiver
@@ -60,15 +61,19 @@ void Transceiver::Init(void (*callbackInitPins)())
     CallbackOnInitPins = callbackInitPins;
 
     GPIO_InitTypeDef gpio;
-    gpio.Pin = PIN_SELECT;              // SELECT - выбор панели для работы
+    gpio.Pin = PIN_MODE0;
     gpio.Mode = GPIO_MODE_OUTPUT_PP;
+    HAL_GPIO_Init(PORT_MODE0, &gpio);   // MODE0 - используется для выбора режима
+
+    gpio.Pin = PIN_MODE1;
+    HAL_GPIO_Init(PORT_MODE1, &gpio);   // MODE1 - используется для выбора режима
+
+    gpio.Pin = PIN_READY;                 
+    gpio.Mode = GPIO_MODE_INPUT;
     gpio.Pull = GPIO_PULLDOWN;
-    HAL_GPIO_Init(PORT_SELECT, &gpio);
+    HAL_GPIO_Init(PORT_READY, &gpio);     // READY - используется для чтения подтверждения из панели
 
-    Transmitter::Write_SELECT(1);       // Отключаем обмен с панелью
-
-    gpio.Pin = PIN_MODE;                // MODE - режим работы с панелью
-    HAL_GPIO_Init(PORT_MODE, &gpio);
+    Set_MODE(Mode::None);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -76,26 +81,11 @@ void Transceiver::Transmitter::InitPins()
 {
     CallbackOnInitPins();
 
-    Write_MODE(0);                      // Будем записывать в панель
-
     GPIO_InitTypeDef gpio;
-    gpio.Pin = PIN_WRITE_READY;         // WRITE_READY - сюда будем выставлять признак того, что данные выставлены и готовы для чтения
+    gpio.Pin = PIN_FL0;                 // Сюда будем записывать подтверждение приёма панели
     gpio.Mode = GPIO_MODE_OUTPUT_PP;
-    gpio.Pull = GPIO_PULLDOWN;
-    HAL_GPIO_Init(PORT_WRITE_READY, &gpio);
+    HAL_GPIO_Init(PORT_FL0, &gpio);
 
-    Write_READY_WR(1);                  // Устанавливаем признак того, что данные на шину не выставлены
-
-    gpio.Pin = PIN_CONFIRM;             // CONFIRM_READ - сюда выставляем признак того, что подтверждение от панели получено
-    HAL_GPIO_Init(PORT_CONFIRM, &gpio);
-
-    Write_CONFIRM(1);                   // Устанавливаем признак того, что чтение не подтверждено
-
-    gpio.Pin = PIN_READ_READY;          // READ_REDY - отсюда считываем подтверждение чтения от панели
-    gpio.Mode = GPIO_MODE_INPUT;
-    HAL_GPIO_Init(PORT_READ_READY, &gpio);
-
-    gpio.Mode = GPIO_MODE_OUTPUT_PP;
     gpio.Pin =  GPIO_PIN_0  |           // D2
                 GPIO_PIN_1  |           // D3
                 GPIO_PIN_14 |           // D0
@@ -120,28 +110,33 @@ void Transceiver::Transmitter::Send(uint8 *data, uint size)
 {
     InitPins();
 
-    Write_READY_WR(1);
-
-    Write_SELECT(0);                     // Выбираем панель устройством, с которым будет производиться обмен
+#define ALL_DATAS_SEND (i == size - 1)
 
     for (uint i = 0; i < size; i++)
     {
-        Write_CONFIRM(1);                // Устанавливаем запрет флага подтверждеия прёма данных панелью
+        Write_FL0(1);                   // Убираем предварительно признак того, что получено подтверждение приёма
 
-        SetData(data[i]);                // Устанавливаем линии ШД в соответствии с очередным передаваемым байтом
+        SetData(data[i]);               // Устанавливаем данные на ШД
 
-        Write_READY_WR(0);               // Даём знак панели, что данные выставлены и можно их считывать. 
+        Set_MODE(Mode::Send);           // Даём разрешение панели на чтение данных
 
-        while (Read_READY_RD() == 1) {}; // Ждём подтверждение чтения от панели. Панель выставляет "0" на этом выводе, когда прочитала данные
+        while (Read_READY() == 1) {};   // Ожидаем от панели сигнала о приёме данных
 
-        Write_CONFIRM(0);                // Выставляем признак того, что получили подтверждения чтения.
+        if (ALL_DATAS_SEND)             // Если пересланы все данные
+        {
+            Set_MODE(Mode::None);       // То отключаем взаимодействие по шине.
+        }
 
-        while (Read_READY_RD() == 0) {}; // И ждём до тех, пор, пока панель его не воспримет. После того, как панель восприняла CONFIRM == 0, она выставляет READY_RD в единицу и идёт на
-                                         // на обработку принятой информации
-        Write_READY_WR(1);
+        Write_FL0(0);                   // Даём панели подтверждение, что мы приняли её подтверждение
     }
 
-    Write_SELECT(1);
+    Set_MODE(Mode::None);
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+int Transceiver::Transmitter::Read_READY()
+{
+    return HAL_GPIO_ReadPin(READY);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -151,27 +146,29 @@ void Transceiver::Receiver::Update()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Transceiver::Transmitter::Write_MODE(int mode)
+void Transceiver::Set_MODE(Mode::E mode)
 {
-    HAL_GPIO_WritePin(MODE, (GPIO_PinState)mode);
+    if (mode == Mode::None)
+    {
+        HAL_GPIO_WritePin(MODE0, GPIO_PIN_SET);
+        HAL_GPIO_WritePin(MODE1, GPIO_PIN_SET);
+    }
+    else if (mode == Mode::Send)
+    {
+        HAL_GPIO_WritePin(MODE0, GPIO_PIN_RESET);
+        HAL_GPIO_WritePin(MODE1, GPIO_PIN_SET);
+    }
+    else if (mode == Mode::Receive)
+    {
+        HAL_GPIO_WritePin(MODE0, GPIO_PIN_SET);
+        HAL_GPIO_WritePin(MODE1, GPIO_PIN_RESET);
+    }
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Transceiver::Transmitter::Write_SELECT(int select)
+void Transceiver::Transmitter::Write_FL0(int fl0)
 {
-    HAL_GPIO_WritePin(SELECT, (GPIO_PinState)select);
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Transceiver::Transmitter::Write_CONFIRM(int confirm)
-{
-    HAL_GPIO_WritePin(CONFIRM, (GPIO_PinState)confirm);
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Transceiver::Transmitter::Write_READY_WR(int ready)
-{
-    HAL_GPIO_WritePin(WRITE_READY, (GPIO_PinState)ready);
+    HAL_GPIO_WritePin(FL0, (GPIO_PinState)fl0);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -185,10 +182,4 @@ void Transceiver::Transmitter::SetData(uint8 data)
     {
         HAL_GPIO_WritePin(ports[i], pins[i], (GPIO_PinState)((data >> i) & 0x01));
     }
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-int Transceiver::Transmitter::Read_READY_RD()
-{
-    return HAL_GPIO_ReadPin(READ_READY);
 }
