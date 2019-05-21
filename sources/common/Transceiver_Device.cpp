@@ -27,9 +27,10 @@ namespace Transceiver
     {
         enum E
         {
-            Blocked,
-            Send,
-            Receive
+            Forbidden,  ///< Недопустимый режим
+            Send,       ///< Передача данных в панель
+            Receive,    ///< Приём данных от панели
+            Disabled    ///< Обмен между устройствами не идёт
         };
     };
 
@@ -72,7 +73,7 @@ void Transceiver::Init(void (*callbackInitPins)())
     gpio.Pull = GPIO_PULLDOWN;
     HAL_GPIO_Init(PORT_READY, &gpio);     // READY - используется для чтения подтверждения из панели
 
-    Set_MODE(Mode::Blocked);
+    Set_MODE(Mode::Disabled);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -117,13 +118,13 @@ void Transceiver::Transmitter::Send(uint8 *data, uint size)
 
         if (ALL_DATAS_SEND)             // Если пересланы все данные
         {
-            Set_MODE(Mode::Blocked);    // То отключаем взаимодействие по шине.
+            Set_MODE(Mode::Disabled);   // То отключаем взаимодействие по шине.
         }
 
         Write_FL0(0);                   // Даём панели подтверждение, что мы приняли её подтверждение
     }
 
-    Set_MODE(Mode::Blocked);
+    Set_MODE(Mode::Disabled);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -141,12 +142,7 @@ void Transceiver::Receiver::Update()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Transceiver::Set_MODE(Mode::E mode)
 {
-    if (mode == Mode::Blocked)
-    {
-        HAL_GPIO_WritePin(MODE0, GPIO_PIN_SET);
-        HAL_GPIO_WritePin(MODE1, GPIO_PIN_SET);
-    }
-    else if (mode == Mode::Send)
+    if (mode == Mode::Send)
     {
         HAL_GPIO_WritePin(MODE0, GPIO_PIN_RESET);
         HAL_GPIO_WritePin(MODE1, GPIO_PIN_SET);
@@ -155,6 +151,11 @@ void Transceiver::Set_MODE(Mode::E mode)
     {
         HAL_GPIO_WritePin(MODE0, GPIO_PIN_SET);
         HAL_GPIO_WritePin(MODE1, GPIO_PIN_RESET);
+    }
+    else if (mode == Mode::Disabled)
+    {
+        HAL_GPIO_WritePin(MODE0, GPIO_PIN_SET);
+        HAL_GPIO_WritePin(MODE1, GPIO_PIN_SET);
     }
     else
     {

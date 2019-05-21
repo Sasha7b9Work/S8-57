@@ -31,9 +31,10 @@ namespace Transceiver
     {
         enum E
         {
-            Blocked,
-            Send,
-            Receive
+            Forbidden,  ///< Недопустимый режим
+            Send,       ///< Передача данных в панель
+            Receive,    ///< Приём данных от панели
+            Disabled    ///< Обмен между устройствами не идёт
         };
     };
 
@@ -41,18 +42,24 @@ namespace Transceiver
 
     namespace Transmitter
     {
-        void Init();
         void InitDataPins();
+        /// Засылает данные в устройство, если таковые имеются
+        void TransmitData();
     }
 
     namespace Receiver
     {
+        /// Эта процедура постоянно вызывается для производства обмена
         void Update();
-
-        void InitPins();
+        /// Инициализирует 8 выводов данных на приём
         void InitDataPins();
+        /// Считывает байт с выводов данных
+        uint8 ReadDataPins();
+        /// Принимает один байт от устройства
+        void ReceiveByte();
 
-        uint8 ReadData();
+        void Write_READY(int);
+        int Read_FL0();
     }
 }
 
@@ -94,17 +101,6 @@ void Transceiver::DeInitPins()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Transceiver::Transmitter::Init()
-{
-
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Transceiver::Receiver::InitPins()
-{
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Transceiver::Receiver::InitDataPins()
 {
     GPIO_InitTypeDef gpio;
@@ -132,11 +128,66 @@ void Transceiver::Transmitter::Send(uint8 * /*data*/, uint /*size*/)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Transceiver::Receiver::Update()
 {
+    Mode::E mode = Get_MODE();
+
+    if (mode == Mode::Disabled)
+    {
+        return;
+    }
+
+    if (mode == Mode::Receive)
+    {
+        Transmitter::TransmitData();
+    }
+
+    if (mode == Mode::Send)
+    {
+        ReceiveByte();
+    }
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Transceiver::Transmitter::TransmitData()
+{
 
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-uint8 Transceiver::Receiver::ReadData()
+void Transceiver::Receiver::ReceiveByte()
+{
+    if (Get_MODE() != Mode::Send)
+    {
+        return;
+    }
+
+    do
+    {
+        uint8 data = ReadDataPins();
+
+        Decoder::AddData(data);
+
+        Write_READY(0);
+
+        while (Read_FL0() == 1) {};
+
+        Write_READY(1);
+    } while (Get_MODE() == Mode::Send);
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Transceiver::Receiver::Write_READY(int ready)
+{
+    HAL_GPIO_WritePin(READY, (GPIO_PinState)ready);
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+int Transceiver::Receiver::Read_FL0()
+{
+    return HAL_GPIO_ReadPin(FL0);
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+uint8 Transceiver::Receiver::ReadDataPins()
 {
     int bit[8];
 
@@ -157,4 +208,20 @@ uint8 Transceiver::Receiver::ReadData()
     }
 
     return result;
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Transceiver::Mode::E Transceiver::Get_MODE()
+{
+    //                  MODE    0  1
+    static const Mode::E modes [2][2] =
+    {
+        {Mode::Forbidden, Mode::Send},
+        {Mode::Receive,   Mode::Disabled}
+    };
+
+    int m0 = HAL_GPIO_ReadPin(MODE0);
+    int m1 = HAL_GPIO_ReadPin(MODE1);
+
+    return modes[m0][m1];
 }
