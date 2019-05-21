@@ -27,7 +27,7 @@ namespace Transceiver
     {
         enum E
         {
-            None,
+            Blocked,
             Send,
             Receive
         };
@@ -50,7 +50,6 @@ namespace Transceiver
 
     namespace Receiver
     {
-        void InitPinsReceive();
     }
 }
 
@@ -73,7 +72,7 @@ void Transceiver::Init(void (*callbackInitPins)())
     gpio.Pull = GPIO_PULLDOWN;
     HAL_GPIO_Init(PORT_READY, &gpio);     // READY - используется для чтения подтверждения из панели
 
-    Set_MODE(Mode::None);
+    Set_MODE(Mode::Blocked);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -82,9 +81,9 @@ void Transceiver::Transmitter::InitPins()
     CallbackOnInitPins();
 
     GPIO_InitTypeDef gpio;
-    gpio.Pin = PIN_FL0;                 // Сюда будем записывать подтверждение приёма панели
+    gpio.Pin = PIN_FL0;
     gpio.Mode = GPIO_MODE_OUTPUT_PP;
-    HAL_GPIO_Init(PORT_FL0, &gpio);
+    HAL_GPIO_Init(PORT_FL0, &gpio);     // FL0 - сюда будем записывать подтверждение приёма панели
 
     gpio.Pin =  GPIO_PIN_0  |           // D2
                 GPIO_PIN_1  |           // D3
@@ -97,12 +96,6 @@ void Transceiver::Transmitter::InitPins()
                 GPIO_PIN_9 |            // D6
                 GPIO_PIN_10;            // D7
     HAL_GPIO_Init(GPIOE, &gpio);
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Transceiver::Receiver::InitPinsReceive()
-{
-
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -124,13 +117,13 @@ void Transceiver::Transmitter::Send(uint8 *data, uint size)
 
         if (ALL_DATAS_SEND)             // Если пересланы все данные
         {
-            Set_MODE(Mode::None);       // То отключаем взаимодействие по шине.
+            Set_MODE(Mode::Blocked);    // То отключаем взаимодействие по шине.
         }
 
         Write_FL0(0);                   // Даём панели подтверждение, что мы приняли её подтверждение
     }
 
-    Set_MODE(Mode::None);
+    Set_MODE(Mode::Blocked);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -148,7 +141,7 @@ void Transceiver::Receiver::Update()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Transceiver::Set_MODE(Mode::E mode)
 {
-    if (mode == Mode::None)
+    if (mode == Mode::Blocked)
     {
         HAL_GPIO_WritePin(MODE0, GPIO_PIN_SET);
         HAL_GPIO_WritePin(MODE1, GPIO_PIN_SET);
@@ -162,6 +155,10 @@ void Transceiver::Set_MODE(Mode::E mode)
     {
         HAL_GPIO_WritePin(MODE0, GPIO_PIN_SET);
         HAL_GPIO_WritePin(MODE1, GPIO_PIN_RESET);
+    }
+    else
+    {
+        // здесь ничего не надо
     }
 }
 

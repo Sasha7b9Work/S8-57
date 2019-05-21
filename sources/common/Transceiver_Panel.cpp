@@ -3,25 +3,21 @@
 #include "Utils/DecoderPanel.h"
 
 
-#define PORT_SELECT         GPIOC
-#define PIN_SELECT          GPIO_PIN_13
-#define SELECT              PORT_SELECT, PIN_SELECT
+#define PORT_MODE0  GPIOC
+#define PIN_MODE0   GPIO_PIN_14
+#define MODE0       PORT_MODE0, PIN_MODE0
 
-#define PORT_MODE           GPIOC
-#define PIN_MODE            GPIO_PIN_14
-#define MODE                PORT_MODE, PIN_MODE
+#define PORT_MODE1  GPIOC
+#define PIN_MODE1   GPIO_PIN_15
+#define MODE1       PORT_MODE1, PIN_MODE1
 
-#define PORT_WRITE_READY    GPIOD
-#define PIN_WRITE_READY     GPIO_PIN_5
-#define WRITE_READY         PORT_WRITE_READY, PIN_WRITE_READY
+#define PORT_READY  GPIOC
+#define PIN_READY   GPIO_PIN_13
+#define READY       PORT_READY, PIN_READY
 
-#define PORT_READ_READY     GPIOC
-#define PIN_READ_READY      GPIO_PIN_15
-#define READ_READY          PORT_READ_READY, PIN_READ_READY
-
-#define PORT_CONFIRM        GPIOD
-#define PIN_CONFIRM         GPIO_PIN_4
-#define CONFIRM             PORT_CONFIRM, PIN_CONFIRM
+#define PORT_FL0    GPIOD
+#define PIN_FL0     GPIO_PIN_4
+#define FL0         PORT_FL0, PIN_FL0
 
 
 namespace Transceiver
@@ -30,6 +26,18 @@ namespace Transceiver
     void(*CallbackOnInitPins)();
     /// В этой функции все пины должны быть инициализированы на вход, чтобы не блокировать шины.
     void DeInitPins();
+
+    struct Mode
+    {
+        enum E
+        {
+            Blocked,
+            Send,
+            Receive
+        };
+    };
+
+    Mode::E Get_MODE();
 
     namespace Transmitter
     {
@@ -55,17 +63,20 @@ void Transceiver::Init(void (*callbackInitPins)())
     CallbackOnInitPins = callbackInitPins;
 
     GPIO_InitTypeDef gpio;
-    gpio.Pin = PIN_SELECT;              // SELECT - "0" на этом выходе означает, что устройство инициирует обмен с панелью
+    gpio.Pin = PIN_MODE0;
     gpio.Mode = GPIO_MODE_INPUT;
     gpio.Pull = GPIO_PULLDOWN;
-    HAL_GPIO_Init(PORT_SELECT, &gpio);
+    HAL_GPIO_Init(PORT_MODE0, &gpio);   // MODE0 - используется для чтения режима устройства //-V525
 
-    gpio.Pin = PIN_MODE;                // MODE - режим работы. "0" - приём от устройства, "1" - запись в устройство
-    HAL_GPIO_Init(PORT_MODE, &gpio);
+    gpio.Pin = PIN_MODE1;
+    HAL_GPIO_Init(PORT_MODE1, &gpio);   // MODE1 - используется для чтения режима устройства
 
-    gpio.Pin = PIN_READ_READY;          // READ_READ - сюда будем записывать признак того, что данные уже считаны
+    gpio.Pin = PIN_FL0;
+    HAL_GPIO_Init(PORT_FL0, &gpio);     // FL0 - исиользуется для чтения подтверждения от устройства
+
+    gpio.Pin = PIN_READY;               
     gpio.Mode = GPIO_MODE_OUTPUT_PP;
-    HAL_GPIO_Init(PORT_READ_READY, &gpio);
+    HAL_GPIO_Init(PORT_READY, &gpio);   // READY - используется для подтверждения чтения данных
 
     DeInitPins();
 }
@@ -74,13 +85,10 @@ void Transceiver::Init(void (*callbackInitPins)())
 void Transceiver::DeInitPins()
 {
     GPIO_InitTypeDef gpio;
-    gpio.Pin = PIN_WRITE_READY;         // WRITE_READY инициализируем на прослушивание - чтобы не мешать работе шины
+    gpio.Pin = PIN_FL0;
     gpio.Mode = GPIO_MODE_INPUT;
     gpio.Pull = GPIO_PULLDOWN;
-    HAL_GPIO_Init(PORT_WRITE_READY, &gpio);
-
-    gpio.Pin = PIN_CONFIRM;
-    HAL_GPIO_Init(PORT_CONFIRM, &gpio);
+    HAL_GPIO_Init(PORT_FL0, &gpio); // FL0 инициализируем на прослушивание - чтобы не мешать работе шины
 
     Receiver::InitDataPins();
 }
