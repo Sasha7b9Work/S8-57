@@ -71,7 +71,7 @@ void Transceiver::Init(void (*callbackInitPins)())
     gpio.Pin = PIN_READY;                 
     gpio.Mode = GPIO_MODE_INPUT;
     gpio.Pull = GPIO_PULLDOWN;
-    HAL_GPIO_Init(PORT_READY, &gpio);     // READY - используется для чтения подтверждения из панели
+    HAL_GPIO_Init(PORT_READY, &gpio);   // READY - используется для чтения подтверждения из панели
 
     Set_MODE(Mode::Disabled);
 }

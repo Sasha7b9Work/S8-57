@@ -1,6 +1,7 @@
 #include "defines.h"
 #include "Transceiver.h"
 #include "Utils/DecoderPanel.h"
+#include "Hardware/Timer.h"
 
 
 #define PORT_MODE0  GPIOC
@@ -55,8 +56,8 @@ namespace Transceiver
         void InitDataPins();
         /// Считывает байт с выводов данных
         uint8 ReadDataPins();
-        /// Принимает один байт от устройства
-        void ReceiveByte();
+        /// Принимает все передаваемые устройством данные
+        void ReceiveData();
 
         void Write_READY(int);
         int Read_FL0();
@@ -84,6 +85,8 @@ void Transceiver::Init(void (*callbackInitPins)())
     gpio.Pin = PIN_READY;               
     gpio.Mode = GPIO_MODE_OUTPUT_PP;
     HAL_GPIO_Init(PORT_READY, &gpio);   // READY - используется для подтверждения чтения данных
+    
+    Receiver::Write_READY(1);
 
     DeInitPins();
 }
@@ -142,7 +145,7 @@ void Transceiver::Receiver::Update()
 
     if (mode == Mode::Send)
     {
-        ReceiveByte();
+        ReceiveData();
     }
 }
 
@@ -153,8 +156,10 @@ void Transceiver::Transmitter::TransmitData()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Transceiver::Receiver::ReceiveByte()
+void Transceiver::Receiver::ReceiveData()
 {
+    uint startTime = TIME_MS;
+    
     if (Get_MODE() != Mode::Send)
     {
         return;
@@ -163,12 +168,24 @@ void Transceiver::Receiver::ReceiveByte()
     do
     {
         uint8 data = ReadDataPins();
+        
+        if(data != 0)
+        {
+            data = data;
+        }
 
         Decoder::AddData(data);
 
         Write_READY(0);
 
-        while (Read_FL0() == 1) {};
+        while (Read_FL0() == 1)
+        {
+            if(TIME_MS - startTime > 500)
+            {
+                Write_READY(1);
+                return;
+            }
+        };
 
         Write_READY(1);
     } while (Get_MODE() == Mode::Send);
