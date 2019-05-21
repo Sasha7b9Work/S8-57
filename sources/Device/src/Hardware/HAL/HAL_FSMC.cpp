@@ -35,39 +35,10 @@ using HAL::FSMC;
 #define PAN_READY_RECEIVE               (ReadPAN() == 2)
 #define PAN_RECIEVE_TRANSMIT_CONFIRM    (ReadPAN() == 3)
 
-enum ModeFSMC
-{
-    ModeNone,
-    ModePanelWrite,
-    ModePanelRead,
-    ModeFPGA
-};
+/// Установленное в true значение означает, что шина нуждается в конфигурировании перед обменом (видимо, она сконфигурирована для обмена с панелью)
+static bool needConfigure = true;
 
-static      ModeFSMC    mode = ModeNone;
-
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-#define CONFIGURE_TO_READ_PANEL                                             \
-    /* Обнуляем пины 15, 14, 1, 0. Сразу и установятся в режим ввода */     \
-    GPIOD->MODER &= HEX_FROM_2(0fff, fff0);                                 \
-    /* Обнуляем пины 7, 8, 9, 10. Сразу и установятся в режим ввода */      \
-    GPIOE->MODER &= HEX_FROM_2(ffc0, 3fff);                                 \
-    mode = ModePanelRead;
-
-#define CONFIGURE_TO_WRITE_PANEL                                            \
-    /* Настроим пины 14, 15, 0, 1 на запись D0, D1, D2, D3 */               \
-    /* Устанавливаем для этих пинов GPIO_MODE_OUTPUT_PP. */                 \
-    GPIOD->MODER &= HEX_FROM_2(0fff, fff0);                                 \
-    GPIOD->MODER |= HEX_FROM_2(5000, 0005);                                 \
-    /* Настроим пины 7, 8, 9, 10 на запись D4, D5, D6, D7 */                \
-    /* Устанавливаем для этих пинов GPIO_MODE_OUTPUT_PP. */                 \
-    GPIOE->MODER &= HEX_FROM_2(ffc0, 3fff);                                 \
-    GPIOE->MODER |= HEX_FROM_2(0015, 4000);                                 \
-    mode = ModePanelWrite;
-
-
-static void ConfigureForFPGA();
-
+static void Configure();
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void FSMC::Init()
@@ -101,8 +72,6 @@ void FSMC::Init()
 
     GPIOE->PUPDR &= 0xffc03fffU;     // Обнуляем пины 7, 8, 9, 10
     GPIOE->PUPDR |= 0x00268000U;     // Устанавливаем для этих пинов GPIO_PULLDOWN
-
-    CONFIGURE_TO_WRITE_PANEL;
 
     // Настроим адресные выводы для ПЛИС
 
@@ -180,7 +149,7 @@ void FSMC::Init()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void ConfigureForFPGA()
+static void Configure()
 {
     static const GPIO_InitTypeDef isGPIO =
     {   //    NOE          NWE          NE1
@@ -222,17 +191,15 @@ static void ConfigureForFPGA()
     GPIOE->MODER &= HEX_FROM_2(ffc0, 3fff);
     GPIOE->MODER |= HEX_FROM_2(002a, 8fff);     // Alternate function mode
 
-
-
-    mode = ModeFPGA;
+    needConfigure = false;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void FSMC::WriteToFPGA16(uint8 *address, uint16 value)
 {
-    if (mode != ModeFPGA)
+    if (needConfigure)
     {
-        ConfigureForFPGA();
+        Configure();
     }
 
     PAUSE_ON_TICKS(100);    /// \todo Без этой строки замедлен вывод при включённой оптимизации и TBase >= 0.5мс
@@ -244,9 +211,9 @@ void FSMC::WriteToFPGA16(uint8 *address, uint16 value)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void FSMC::WriteToFPGA8(uint8 *address, uint8 value)
 {
-    if (mode != ModeFPGA)
+    if (needConfigure)
     {
-        ConfigureForFPGA();
+        Configure();
     }
 
     *address = value;
@@ -255,9 +222,9 @@ void FSMC::WriteToFPGA8(uint8 *address, uint8 value)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 uint8 FSMC::ReadFromFPGA(const uint8 *address)
 {
-    if (mode != ModeFPGA)
+    if (needConfigure)
     {
-        ConfigureForFPGA();
+        Configure();
     }
 
     return *address;
@@ -266,5 +233,5 @@ uint8 FSMC::ReadFromFPGA(const uint8 *address)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void FSMC::CallbackDeinitPins()
 {
-
+    needConfigure = true;
 }

@@ -102,9 +102,9 @@ void Transceiver::Transmitter::InitPins()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Transceiver::Transmitter::Send(uint8 *data, uint size)
 {
-    InitPins();
-
 #define ALL_DATAS_SEND (i == size - 1)
+
+    InitPins();
 
     for (uint i = 0; i < size; i++)
     {

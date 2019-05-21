@@ -158,12 +158,12 @@ void Transceiver::Transmitter::TransmitData()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Transceiver::Receiver::ReceiveData()
 {
-    uint startTime = TIME_MS;
-    
     if (Get_MODE() != Mode::Send)
     {
         return;
     }
+
+    uint startTime = TIME_MS;
 
     do
     {
@@ -176,7 +176,7 @@ void Transceiver::Receiver::ReceiveData()
 
         Decoder::AddData(data);
 
-        Write_READY(0);
+|        Write_READY(0);
 
         while (Read_FL0() == 1)
         {
