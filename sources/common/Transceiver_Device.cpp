@@ -27,11 +27,22 @@ namespace Transceiver
     {
         enum E
         {
-            Forbidden,  ///< Недопустимый режим
+            Disabled,   ///< Обмен между устройствами не идёт
             Send,       ///< Передача данных в панель
             Receive,    ///< Приём данных от панели
-            Disabled    ///< Обмен между устройствами не идёт
+            Forbidden   ///< Недопустимый режим
         };
+    };
+
+    struct State
+    {
+        enum E
+        {
+            Passive,
+            Active
+        } state;
+        explicit State(E s) : state(s) {};
+        bool IsPassive() const { return state == Passive; };
     };
 
 
@@ -45,8 +56,8 @@ namespace Transceiver
         /// Инициализировать выходы в режим передачи.
         void InitPins();
         void SetData(uint8 data);
-        void Write_FL0(int);
-        int Read_READY();
+        void Set_FL0(State::E state);
+        State State_READY();
     }
 
     namespace Receiver
@@ -108,29 +119,34 @@ void Transceiver::Transmitter::Send(uint8 *data, uint size)
 
     for (uint i = 0; i < size; i++)
     {
-        Write_FL0(1);                   // Убираем предварительно признак того, что получено подтверждение приёма
+        Set_FL0(State::Passive);                // Убираем предварительно признак того, что получено подтверждение приёма
 
-        SetData(data[i]);               // Устанавливаем данные на ШД
+        SetData(data[i]);                       // Устанавливаем данные на ШД
 
-        Set_MODE(Mode::Send);           // Даём разрешение панели на чтение данных
+        Set_MODE(Mode::Send);                   // Даём разрешение панели на чтение данных
 
-        while (Read_READY() == 1) {};   // Ожидаем от панели сигнала о приёме данных
+        while (State_READY().IsPassive()) {};   // Ожидаем от панели сигнала о приёме данных
 
-        if (ALL_DATAS_SEND)             // Если пересланы все данные
+        if (ALL_DATAS_SEND)                     // Если пересланы все данные
         {
-            Set_MODE(Mode::Disabled);   // То отключаем взаимодействие по шине.
+            Set_MODE(Mode::Disabled);           // То отключаем взаимодействие по шине.
         }
 
-        Write_FL0(0);                   // Даём панели подтверждение, что мы приняли её подтверждение
+        Set_FL0(State::Active);                 // Даём панели подтверждение, что мы приняли её подтверждение
     }
 
     Set_MODE(Mode::Disabled);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-int Transceiver::Transmitter::Read_READY()
+Transceiver::State Transceiver::Transmitter::State_READY()
 {
-    return HAL_GPIO_ReadPin(READY);
+    if (HAL_GPIO_ReadPin(READY) == GPIO_PIN_SET)
+    {
+        return State(State::Active);
+    }
+
+    return State(State::Passive);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -149,13 +165,13 @@ void Transceiver::Set_MODE(Mode::E mode)
     }
     else if (mode == Mode::Receive)
     {
-        HAL_GPIO_WritePin(MODE0, GPIO_PIN_SET);
         HAL_GPIO_WritePin(MODE1, GPIO_PIN_RESET);
+        HAL_GPIO_WritePin(MODE0, GPIO_PIN_SET);
     }
     else if (mode == Mode::Disabled)
     {
-        HAL_GPIO_WritePin(MODE0, GPIO_PIN_SET);
-        HAL_GPIO_WritePin(MODE1, GPIO_PIN_SET);
+        HAL_GPIO_WritePin(MODE0, GPIO_PIN_RESET);
+        HAL_GPIO_WritePin(MODE1, GPIO_PIN_RESET);
     }
     else
     {
@@ -164,9 +180,9 @@ void Transceiver::Set_MODE(Mode::E mode)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Transceiver::Transmitter::Write_FL0(int fl0)
+void Transceiver::Transmitter::Set_FL0(State::E state)
 {
-    HAL_GPIO_WritePin(FL0, (GPIO_PinState)fl0);
+    HAL_GPIO_WritePin(FL0, (state == State::Passive) ? GPIO_PIN_RESET : GPIO_PIN_SET);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
