@@ -95,7 +95,7 @@ void Transceiver::Init(void (*callbackInitPins)())
     HAL_GPIO_Init(PORT_MODE1, &gpio);   // MODE1 - используется для чтения режима устройства
 
     gpio.Pin = PIN_FL0;
-    gpio.Pull = GPIO_PULLUP;
+    gpio.Pull = GPIO_PULLDOWN;
     HAL_GPIO_Init(PORT_FL0, &gpio);     // FL0 - исиользуется для чтения подтверждения от устройства
 
     gpio.Pin = PIN_READY;               
@@ -174,24 +174,15 @@ void Transceiver::Transmitter::TransmitData()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Transceiver::Receiver::ReceiveData()
 {
-    if (!Mode_Device().IsSend())
-    {
-        return;
-    }
+    uint8 data = ReadDataPins();            // Читаем байт данных
 
-    do
-    {
-        uint8 data = ReadDataPins();
-        
-        Decoder::AddData(data);
+    Decoder::AddData(data);                 // Обрабатываем
 
-        Set_READY(State::Active);
+    Set_READY(State::Active);               // Устанавливаем признак, что данные приняты
 
-        while (State_FL0().IsPassive()) { };
+    while (Mode_Device().IsSend()) {};      // Ждём сигнал подтверждения
 
-        Set_READY(State::Passive);
-
-    } while (Mode_Device().IsSend());
+    Set_READY(State::Passive);              // И убираем сигнал готовности
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
