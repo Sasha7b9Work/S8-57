@@ -230,7 +230,7 @@ uint8 Transceiver::Receiver::ReadDataPins()
 
     for (int i = 0; i < 8; i++)
     {
-        result += (bit[i] << i) & 0x01;
+        result += (bit[i] << i);
     }
 
     return result;
