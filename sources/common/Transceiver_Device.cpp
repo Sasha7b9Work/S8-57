@@ -134,7 +134,6 @@ void Transceiver::Transmitter::Send(uint8 *data, uint size)
 
     for (uint i = 0; i < size; i++)
     {
-    
         SetData(data[i]);                          // Устанавливаем пины данных
     
         Set_MODE(Mode::Send);                   // Даём сигнал панели, что можно считывать данные
@@ -142,8 +141,12 @@ void Transceiver::Transmitter::Send(uint8 *data, uint size)
         while (State_READY().IsPassive()) {};   // Ожидаем сигнал подтверждения
     
         Set_MODE(Mode::Disabled);               // Даём признак, что подтверждение получено. Теперь панель должна убрать сигнал READY
-    
-        Timer::PauseOnTime(1);
+
+        volatile int z = 0;
+        while (z < 250)
+        {
+            z++;
+        }
     }
 }
 
