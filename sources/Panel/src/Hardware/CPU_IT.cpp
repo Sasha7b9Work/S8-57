@@ -1,5 +1,6 @@
 #include "defines.h"
 #include "Hardware/CPU.h"
+#include "Utils/Debug.h"
 
 
 #ifdef __cplusplus
@@ -16,24 +17,39 @@ extern "C" {
     //------------------------------------------------------------------------------------------------------------------------------------------------
     __attribute((noreturn)) void MemManage_Handler()
     {
+        volatile int line = Debug::line;
+        volatile char *file = Debug::file;
+        
         while (1)
         {
+            line = line;
+            file = file;
         }
     }
 
     //------------------------------------------------------------------------------------------------------------------------------------------------
     __attribute((noreturn)) void UsageFault_Handler()
     {
+        volatile int line = Debug::line;
+        volatile char *file = Debug::file;
+        
         while (1)
         {
+            line = line;
+            file = file;
         }
     }
 
     //------------------------------------------------------------------------------------------------------------------------------------------------
     __attribute((noreturn)) void HardFault_Handler()
     {
+        volatile int line = Debug::line;
+        volatile char *file = Debug::file;
+        
         while (1)
         {
+            line = line;
+            file = file;
         }
     }
 

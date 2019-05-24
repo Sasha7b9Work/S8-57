@@ -17,7 +17,7 @@
 #define READY       PORT_READY, PIN_READY
 
 #define PORT_FL0    GPIOD
-#define PIN_FL0     GPIO_PIN_4
+#define PIN_FL0     GPIO_PIN_5
 #define FL0         PORT_FL0, PIN_FL0
 
 
@@ -95,6 +95,7 @@ void Transceiver::Init(void (*callbackInitPins)())
     HAL_GPIO_Init(PORT_MODE1, &gpio);   // MODE1 - используется для чтения режима устройства
 
     gpio.Pin = PIN_FL0;
+    gpio.Pull = GPIO_PULLUP;
     HAL_GPIO_Init(PORT_FL0, &gpio);     // FL0 - исиользуется для чтения подтверждения от устройства
 
     gpio.Pin = PIN_READY;               
@@ -186,9 +187,7 @@ void Transceiver::Receiver::ReceiveData()
 
         Set_READY(State::Active);
 
-        while (State_FL0().IsPassive())
-        {
-        };
+        while (State_FL0().IsPassive()) { };
 
         Set_READY(State::Passive);
 
@@ -230,7 +229,7 @@ uint8 Transceiver::Receiver::ReadDataPins()
 
     for (int i = 0; i < 8; i++)
     {
-        result += (bit[i] << i);
+        result |= (bit[i] << i);
     }
 
     return result;

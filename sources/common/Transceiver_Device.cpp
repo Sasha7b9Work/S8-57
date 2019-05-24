@@ -96,6 +96,8 @@ void Transceiver::Transmitter::InitPins()
     gpio.Pin = PIN_FL0;
     gpio.Mode = GPIO_MODE_OUTPUT_PP;
     HAL_GPIO_Init(PORT_FL0, &gpio);     // FL0 - сюда будем записывать подтверждение приёма панели
+    
+    Set_FL0(State::Passive);
 
     gpio.Pin =  GPIO_PIN_0  |           // D2
                 GPIO_PIN_1  |           // D3
@@ -116,6 +118,8 @@ void Transceiver::Transmitter::Send(uint8 *data, uint size)
 #define ALL_DATAS_SEND (i == size - 1)
 
     InitPins();
+
+    Set_MODE(Mode::Disabled);
 
     for (uint i = 0; i < size; i++)
     {
