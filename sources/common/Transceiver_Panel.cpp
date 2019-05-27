@@ -2,6 +2,7 @@
 #include "Transceiver.h"
 #include "Utils/DecoderPanel.h"
 #include "Hardware/Timer.h"
+#include <cstring>
 
 
 #define PORT_MODE0  GPIOC
@@ -56,11 +57,22 @@ namespace Transceiver
 
     Mode Mode_Device();
 
+    void Set_READY(State::E state);
+
+    ///  ƒеинициализировать D
+    void DeInit_FL0();
+
     namespace Transmitter
     {
         void InitDataPins();
         /// «асылает данные в устройство, если таковые имеютс€
         void TransmitData();
+        /// ”становить данные на шину
+        void SetData(uint8 data);
+        /// »нициализировать FL0 на вывод - будем через него ссобщать о наличии/отутсвии данных дл€ передачи
+        void Init_FLO_OUT();
+
+        void Set_FL0(State::E state);
     }
 
     namespace Receiver
@@ -73,10 +85,11 @@ namespace Transceiver
         uint8 ReadDataPins();
         /// ѕринимает все передаваемые устройством данные
         void ReceiveData();
-
-        void Set_READY(State::E state);
-        State State_FL0();
     }
+
+    static uint8 buffer[1024];
+
+    static uint bytesInBuffer = 0;
 }
 
 
@@ -102,7 +115,7 @@ void Transceiver::Init(void (*callbackInitPins)())
     gpio.Mode = GPIO_MODE_OUTPUT_PP;
     HAL_GPIO_Init(PORT_READY, &gpio);   // READY - используетс€ дл€ подтверждени€ чтени€ данных
     
-    Receiver::Set_READY(State::Passive);
+    Set_READY(State::Passive);
 
     DeInitPins();
 }
@@ -110,11 +123,7 @@ void Transceiver::Init(void (*callbackInitPins)())
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Transceiver::DeInitPins()
 {
-    GPIO_InitTypeDef gpio;
-    gpio.Pin = PIN_FL0;
-    gpio.Mode = GPIO_MODE_INPUT;
-    gpio.Pull = GPIO_PULLDOWN;
-    HAL_GPIO_Init(PORT_FL0, &gpio); // FL0 инициализируем на прослушивание - чтобы не мешать работе шины
+    DeInit_FL0();
 
     Receiver::InitDataPins();
 }
@@ -168,7 +177,32 @@ void Transceiver::Receiver::Update()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Transceiver::Transmitter::TransmitData()
 {
+    Init_FLO_OUT();                             // »нициализируем FL0 дл€ того, чтобы выставить на нЄм признак наличи€ или отсутстви€ данных
 
+    if (bytesInBuffer == 0)
+    {
+        Set_FL0(State::Passive);                // ¬ыставл€ем признак того, что данных дл€ передачи нет
+    }
+    else
+    {
+        Set_FL0(State::Active);                 // ¬ыставл€ем признак того, что есть данные дл€ передачи
+
+        InitDataPins();                         // »нициализируем пины даннх дл€ передачи
+    }
+
+    SetData(buffer[0]);                         // ”станавливаем пины на Ўƒ в соответствии с передаваемыми данными
+
+    Set_READY(State::Active);                   // ”станавливаем признак того, что данные выставлены
+
+    while (Mode_Device().IsReceive()) {};       // ∆дЄм от прибора подтверждени€ того, что данные прин€ты
+
+    Set_READY(State::Passive);                  // ¬ыходим из режима передачи
+
+    DeInitPins();                               // ƒеинициализируем выводы
+
+    bytesInBuffer--;                                        // ”дал€ем переданные данные из буфера
+
+    std::memmove(&buffer[0], &buffer[1], bytesInBuffer);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -186,20 +220,34 @@ void Transceiver::Receiver::ReceiveData()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Transceiver::Receiver::Set_READY(State::E state)
+void Transceiver::Set_READY(State::E state)
 {
     HAL_GPIO_WritePin(READY, (state == State::Active) ? GPIO_PIN_SET : GPIO_PIN_RESET);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-Transceiver::State Transceiver::Receiver::State_FL0()
+void Transceiver::Transmitter::Set_FL0(State::E state)
 {
-    if (HAL_GPIO_ReadPin(FL0) == GPIO_PIN_SET)
-    {
-        return State(State::Active);
-    }
+    HAL_GPIO_WritePin(FL0, (state == State::Active) ? GPIO_PIN_SET : GPIO_PIN_RESET);
+}
 
-    return State(State::Passive);
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Transceiver::Transmitter::Init_FLO_OUT()
+{
+    GPIO_InitTypeDef gpio;
+    gpio.Pin = PIN_FL0;
+    gpio.Mode = GPIO_MODE_OUTPUT_PP;
+    HAL_GPIO_Init(PORT_FL0, &gpio);
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Transceiver::DeInit_FL0()
+{
+    GPIO_InitTypeDef gpio;
+    gpio.Pin = PIN_FL0;
+    gpio.Mode = GPIO_MODE_INPUT;
+    gpio.Pull = GPIO_PULLDOWN;
+    HAL_GPIO_Init(PORT_FL0, &gpio);     // FL0 инициализируем на прослушивание - чтобы не мешать работе шины
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

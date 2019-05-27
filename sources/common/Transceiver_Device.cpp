@@ -52,17 +52,24 @@ namespace Transceiver
     /// Установка режима работы
     void Set_MODE(Mode::E mode);
 
+    State State_READY();
+
     namespace Transmitter
     {
         /// Инициализировать выходы в режим передачи.
-        void InitPins();
+        void InitPinsTransmit();
         void SetData(uint8 data);
         void Set_FL0(State::E state);
-        State State_READY();
     }
 
     namespace Receiver
     {
+        /// Инициализация FL0 на чтение
+        void Init_FL0_IN();
+        /// Возвращает состояние FL0
+        State State_FL0();
+        /// Считывает байт данных с ШД
+        uint8 ReadData();
     }
 }
 
@@ -89,7 +96,7 @@ void Transceiver::Init(void (*callbackInitPins)())
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Transceiver::Transmitter::InitPins()
+void Transceiver::Transmitter::InitPinsTransmit()
 {
     CallbackOnInitPins();
 
@@ -116,7 +123,7 @@ void Transceiver::Transmitter::InitPins()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Transceiver::Transmitter::Send(uint8 data)
 {
-    InitPins();                             // Инициализируем пины для передачи
+    InitPinsTransmit();                     // Инициализируем пины для передачи
 
     SetData(data);                          // Устанавливаем пины данных
 
@@ -130,17 +137,19 @@ void Transceiver::Transmitter::Send(uint8 data)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Transceiver::Transmitter::Send(uint8 *data, uint size)
 {
-    InitPins();                             // Инициализируем пины для передачи
+    InitPinsTransmit();                         // Инициализируем пины для передачи
 
     for (uint i = 0; i < size; i++)
     {
-        SetData(data[i]);                          // Устанавливаем пины данных
+        SetData(data[i]);                       // Устанавливаем пины данных
     
         Set_MODE(Mode::Send);                   // Даём сигнал панели, что можно считывать данные
     
         while (State_READY().IsPassive()) {};   // Ожидаем сигнал подтверждения
     
         Set_MODE(Mode::Disabled);               // Даём признак, что подтверждение получено. Теперь панель должна убрать сигнал READY
+
+        /// \todo С этим надо что-то делать. Непонятно, почему без задержки не работает
 
         volatile int z = 0;
         while (z < 250)
@@ -151,7 +160,28 @@ void Transceiver::Transmitter::Send(uint8 *data, uint size)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-Transceiver::State Transceiver::Transmitter::State_READY()
+void Transceiver::Receiver::Update()
+{
+    Set_MODE(Mode::Receive);                    // Сообщаем панели, что готовы принять данные
+
+    while (State_READY().IsPassive()) {};       // Ожидаем сигнал готовности от панели
+
+    if (State_FL0().IsPassive())                // Если панель сообщает о том, что данных нет
+    {
+        Set_MODE(Mode::Disabled);               // То отключаем взаимодействие с панелью
+
+        return;                                 // и выходим
+    }
+
+
+
+    ReadData();
+
+
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Transceiver::State Transceiver::State_READY()
 {
     if (HAL_GPIO_ReadPin(READY) == GPIO_PIN_SET)
     {
@@ -159,12 +189,6 @@ Transceiver::State Transceiver::Transmitter::State_READY()
     }
 
     return State(State::Passive);
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Transceiver::Receiver::Update()
-{
-
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
