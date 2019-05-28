@@ -195,26 +195,26 @@ void Transceiver::Transmitter::Send(uint8 *data, uint size)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Transceiver::Receiver::Update()
+void Transceiver::Update()
 {
     CallbackOnInitPins();                       // Сообщаем программе, что пины были переинициализированы
 
-    Init_FL0_IN();                              // Инициализируем FL0 на чтение
+    Receiver::Init_FL0_IN();                    // Инициализируем FL0 на чтение
 
     Set_MODE(Mode::Receive);                    // Сообщаем панели, что готовы принять данные
 
     while (State_READY().IsPassive()) {};       // Ожидаем сигнал готовности от панели
 
-    if (State_FL0().IsPassive())                // Если панель сообщает о том, что данных нет
+    if (Receiver::State_FL0().IsPassive())      // Если панель сообщает о том, что данных нет
     {
         Set_MODE(Mode::Disabled);               // То отключаем взаимодействие с панелью
 
         return;                                 // и выходим
     }
 
-    InitPinsReceive();                          // Инициалазируем пины данных на приём
+    Receiver::InitPinsReceive();                // Инициалазируем пины данных на приём
 
-    uint8 data = ReadData();                    // Читаем байт
+    uint8 data = Receiver::ReadData();          // Читаем байт
 
     Decoder::AddData(data);                     // И отправляем его на выполнение
 }

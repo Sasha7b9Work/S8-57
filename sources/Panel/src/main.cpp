@@ -19,6 +19,6 @@ int main()
 
     while(1)
     {
-        Transceiver::Receiver::Update();
+        Transceiver::Update();
     }
 }
