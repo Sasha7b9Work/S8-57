@@ -50,6 +50,7 @@ source_group(Hardware               REGULAR_EXPRESSION "src/Hardware/*.*")
 source_group(Hardware\\HAL          REGULAR_EXPRESSION "src/Hardware/HAL/*.*")
 source_group(Hardware\\stm32        REGULAR_EXPRESSION "src/Hardware/stm32/*.*")
 source_group(Hardware\\stm32\\4XX   REGULAR_EXPRESSION "src/Hardware/stm32/4XX/*.*")
+source_group(Keyboard               REGULAR_EXPRESSION "src/Keyboard/*")
 source_group(Settings               REGULAR_EXPRESSION "src/Settings/*.*")
 source_group(Utils                  REGULAR_EXPRESSION "src/Utils/*.*")
 
@@ -71,6 +72,7 @@ file(GLOB SOURCES   ../common/Transceiver.h
                     src/Hardware/HAL/*.*
                     src/Hardware/stm32/*.*
                     src/Hardware/stm32/4XX/*.*
+                    src/Keyboard/*
                     src/Settings/*.*
                     src/Utils/*.*)
 

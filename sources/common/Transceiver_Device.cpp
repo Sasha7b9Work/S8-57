@@ -2,6 +2,7 @@
 #include "Transceiver.h"
 #include "Hardware/Timer.h"
 #include <stm32f4xx_hal.h>
+#include "Keyboard/DecoderDevice.h"
 
 
 #define PORT_MODE0  GPIOA
@@ -59,7 +60,6 @@ namespace Transceiver
         /// Инициализировать выходы в режим передачи.
         void InitPinsTransmit();
         void SetData(uint8 data);
-        void Set_FL0(State::E state);
     }
 
     namespace Receiver
@@ -101,16 +101,23 @@ void Transceiver::Init(void (*callbackInitPins)())
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Transceiver::Receiver::Init_FL0_IN()
+{
+    GPIO_InitTypeDef gpio;
+    gpio.Pin = PIN_FL0;
+    gpio.Mode = GPIO_MODE_INPUT;
+    gpio.Pull = GPIO_PULLDOWN;
+    HAL_GPIO_Init(PORT_FL0, &gpio);     // Будем на этом выводе узнавать, есть ли у панели данные для передачи
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Transceiver::Transmitter::InitPinsTransmit()
 {
     CallbackOnInitPins();
 
     GPIO_InitTypeDef gpio;
-    gpio.Pin = PIN_FL0;
+
     gpio.Mode = GPIO_MODE_OUTPUT_PP;
-    HAL_GPIO_Init(PORT_FL0, &gpio);     // FL0 - сюда будем записывать подтверждение приёма панели
-    
-    Set_FL0(State::Passive);
 
     gpio.Pin =  GPIO_PIN_0  |           // D2
                 GPIO_PIN_1  |           // D3
@@ -167,6 +174,8 @@ void Transceiver::Transmitter::Send(uint8 *data, uint size)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Transceiver::Receiver::Update()
 {
+    Init_FL0_IN();                              // Инициализируем FL0 на чтение
+
     Set_MODE(Mode::Receive);                    // Сообщаем панели, что готовы принять данные
 
     while (State_READY().IsPassive()) {};       // Ожидаем сигнал готовности от панели
@@ -178,11 +187,9 @@ void Transceiver::Receiver::Update()
         return;                                 // и выходим
     }
 
+    uint8 data = ReadData();
 
-
-    ReadData();
-
-
+    Decoder::AddData(data);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -218,12 +225,6 @@ void Transceiver::Set_MODE(Mode::E mode)
     {
         // здесь ничего не надо
     }
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Transceiver::Transmitter::Set_FL0(State::E state)
-{
-    HAL_GPIO_WritePin(FL0, (state == State::Passive) ? GPIO_PIN_RESET : GPIO_PIN_SET);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

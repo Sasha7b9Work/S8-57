@@ -164,7 +164,7 @@
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>..\common\Transceiver_Panel.cpp</Filename>
+          <Filename>&lt;2&gt;..\common\Transceiver_Panel.cpp</Filename>
           <ExecCommand></ExecCommand>
           <Expression>\\PanelOSC\../common/Transceiver_Panel.cpp\177</Expression>
         </Bp>
@@ -180,7 +180,7 @@
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>..\common\Transceiver_Panel.cpp</Filename>
+          <Filename>&lt;2&gt;..\common\Transceiver_Panel.cpp</Filename>
           <ExecCommand></ExecCommand>
           <Expression>\\PanelOSC\../common/Transceiver_Panel.cpp\185</Expression>
         </Bp>
