@@ -20,10 +20,10 @@ extern "C" {
         volatile int line = Debug::line;
         volatile char *file = Debug::file;
         
-        while (1)
+        while (1) //-V776
         {
             line = line;
-            file = file;
+            file = file; //-V570
         }
     }
 
@@ -33,10 +33,10 @@ extern "C" {
         volatile int line = Debug::line;
         volatile char *file = Debug::file;
         
-        while (1)
+        while (1) //-V776
         {
             line = line;
-            file = file;
+            file = file; //-V570
         }
     }
 
@@ -46,10 +46,10 @@ extern "C" {
         volatile int line = Debug::line;
         volatile char *file = Debug::file;
         
-        while (1)
+        while (1) //-V776
         {
             line = line;
-            file = file;
+            file = file; //-V570
         }
     }
 

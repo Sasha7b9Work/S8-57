@@ -74,6 +74,11 @@ namespace Transceiver
 }
 
 
+//                                      D0           D1           D2          D3          D4          D5          D6          D7
+static const GPIO_TypeDef *ports[] = { GPIOD,       GPIOD,       GPIOD,      GPIOD,      GPIOE,      GPIOE,      GPIOE,      GPIOE };
+static const uint16 pins[]         = { GPIO_PIN_14, GPIO_PIN_15, GPIO_PIN_0, GPIO_PIN_1, GPIO_PIN_7, GPIO_PIN_8, GPIO_PIN_9, GPIO_PIN_10 };
+
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void Transceiver::Init(void (*callbackInitPins)())
 {
@@ -222,14 +227,30 @@ void Transceiver::Transmitter::Set_FL0(State::E state)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Transceiver::State Transceiver::Receiver::State_FL0()
+{
+    return (HAL_GPIO_ReadPin(FL0) == GPIO_PIN_SET) ? State(State::Active) : State(State::Passive);
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Transceiver::Transmitter::SetData(uint8 data)
 {
-                                    // D0          D1           D2          D3          D4          D5          D6          D7
-    static GPIO_TypeDef *ports[] = { GPIOD,       GPIOD,       GPIOD,      GPIOD,      GPIOE,      GPIOE,      GPIOE,      GPIOE };
-    static uint16 pins[] =         { GPIO_PIN_14, GPIO_PIN_15, GPIO_PIN_0, GPIO_PIN_1, GPIO_PIN_7, GPIO_PIN_8, GPIO_PIN_9, GPIO_PIN_10 };
+    for (int i = 0; i < 8; i++)
+    {
+        HAL_GPIO_WritePin((GPIO_TypeDef *)ports[i], pins[i], (GPIO_PinState)((data >> i) & 0x01));
+    }
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+uint8 Transceiver::Receiver::ReadData()
+{
+    uint8 result = 0;
 
     for (int i = 0; i < 8; i++)
     {
-        HAL_GPIO_WritePin(ports[i], pins[i], (GPIO_PinState)((data >> i) & 0x01));
+        result |= HAL_GPIO_ReadPin((GPIO_TypeDef *)ports[i], pins[i]);
+        result <<= 1;
     }
+
+    return result;
 }

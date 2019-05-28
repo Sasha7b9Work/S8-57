@@ -232,6 +232,18 @@ void Transceiver::Transmitter::Set_FL0(State::E state)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Transceiver::Transmitter::SetData(uint8 data)
+{
+    static const uint16 pins[8] = {GPIO_PIN_0, GPIO_PIN_1, GPIO_PIN_2, GPIO_PIN_3, GPIO_PIN_4, GPIO_PIN_5, GPIO_PIN_6, GPIO_PIN_7};
+
+    for (int i = 0; i < 8; i++)
+    {
+        HAL_GPIO_WritePin(GPIOE, pins[i], (GPIO_PinState)(data & 0x01));
+        data >>= 1;
+    }
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Transceiver::Transmitter::Init_FLO_OUT()
 {
     GPIO_InitTypeDef gpio;
