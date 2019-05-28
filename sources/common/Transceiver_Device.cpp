@@ -66,6 +66,8 @@ namespace Transceiver
     {
         /// Инициализация FL0 на чтение
         void Init_FL0_IN();
+        /// Инициализировать пины для приёма из панели
+        void InitPinsReceive();
         /// Возвращает состояние FL0
         State State_FL0();
         /// Считывает байт данных с ШД
@@ -133,6 +135,27 @@ void Transceiver::Transmitter::InitPinsTransmit()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Transceiver::Receiver::InitPinsReceive()
+{
+    GPIO_InitTypeDef gpio;
+
+    gpio.Mode = GPIO_MODE_INPUT;
+    gpio.Pull = GPIO_PULLDOWN;
+
+    gpio.Pin = GPIO_PIN_0  |           // D2
+               GPIO_PIN_1  |           // D3
+               GPIO_PIN_14 |           // D0
+               GPIO_PIN_15;            // D1
+    HAL_GPIO_Init(GPIOD, &gpio);
+
+    gpio.Pin = GPIO_PIN_7 |            // D4
+               GPIO_PIN_8 |            // D5
+               GPIO_PIN_9 |            // D6
+               GPIO_PIN_10;            // D7
+    HAL_GPIO_Init(GPIOE, &gpio);
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Transceiver::Transmitter::Send(uint8 data)
 {
     InitPinsTransmit();                     // Инициализируем пины для передачи
@@ -174,6 +197,8 @@ void Transceiver::Transmitter::Send(uint8 *data, uint size)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Transceiver::Receiver::Update()
 {
+    CallbackOnInitPins();                       // Сообщаем программе, что пины были переинициализированы
+
     Init_FL0_IN();                              // Инициализируем FL0 на чтение
 
     Set_MODE(Mode::Receive);                    // Сообщаем панели, что готовы принять данные
@@ -187,20 +212,17 @@ void Transceiver::Receiver::Update()
         return;                                 // и выходим
     }
 
-    uint8 data = ReadData();
+    InitPinsReceive();                          // Инициалазируем пины данных на приём
 
-    Decoder::AddData(data);
+    uint8 data = ReadData();                    // Читаем байт
+
+    Decoder::AddData(data);                     // И отправляем его на выполнение
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Transceiver::State Transceiver::State_READY()
 {
-    if (HAL_GPIO_ReadPin(READY) == GPIO_PIN_SET)
-    {
-        return State(State::Active);
-    }
-
-    return State(State::Passive);
+    return (HAL_GPIO_ReadPin(READY) == GPIO_PIN_SET) ? State(State::Active) : State(State::Passive);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
