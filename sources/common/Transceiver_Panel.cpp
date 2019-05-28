@@ -201,7 +201,7 @@ void Transceiver::Transmitter::TransmitData()
 
     DeInitPins();                               // Деинициализируем выводы
 
-    bytesInBuffer--;                                        // Удаляем переданные данные из буфера
+    bytesInBuffer--;                            // Удаляем переданные данные из буфера
 
     std::memmove(&buffer[0], &buffer[1], bytesInBuffer);
 }

@@ -143,7 +143,7 @@ void Transceiver::Receiver::InitPinsReceive()
     gpio.Pull = GPIO_PULLDOWN;
 
     gpio.Pin = GPIO_PIN_0  |           // D2
-               GPIO_PIN_1  |           // D3
+               GPIO_PN_1  |           // D3
                GPIO_PIN_14 |           // D0
                GPIO_PIN_15;            // D1
     HAL_GPIO_Init(GPIOD, &gpio);
@@ -192,6 +192,8 @@ void Transceiver::Transmitter::Send(uint8 *data, uint size)
             z++;
         }
     }
+
+    Update();
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
