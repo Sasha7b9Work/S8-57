@@ -1,7 +1,6 @@
 #include "defines.h"
 #include "Transceiver.h"
 #include "Utils/DecoderPanel.h"
-#include "Hardware/Timer.h"
 #include <cstring>
 
 
@@ -97,14 +96,14 @@ void Transceiver::Init()
     GPIO_InitTypeDef gpio;
     gpio.Pin = PIN_MODE0;
     gpio.Mode = GPIO_MODE_INPUT;
-    gpio.Pull = GPIO_PULLDOWN;
+    gpio.Pull = GPIO_PULLUP;
     HAL_GPIO_Init(PORT_MODE0, &gpio);   // MODE0 - используется для чтения режима устройства //-V525
 
     gpio.Pin = PIN_MODE1;
     HAL_GPIO_Init(PORT_MODE1, &gpio);   // MODE1 - используется для чтения режима устройства
 
     gpio.Pin = PIN_FL0;
-    gpio.Pull = GPIO_PULLDOWN;
+    gpio.Pull = GPIO_PULLUP;
     HAL_GPIO_Init(PORT_FL0, &gpio);     // FL0 - исиользуется для чтения подтверждения от устройства
 
     gpio.Pin = PIN_READY;               
@@ -130,7 +129,7 @@ void Transceiver::Receiver::InitDataPins()
     GPIO_InitTypeDef gpio;
     gpio.Pin = GPIO_PIN_0 | GPIO_PIN_1 | GPIO_PIN_2 | GPIO_PIN_3 | GPIO_PIN_4 | GPIO_PIN_5 | GPIO_PIN_6 | GPIO_PIN_7;   // D0...D7
     gpio.Mode = GPIO_MODE_INPUT;
-    gpio.Pull = GPIO_PULLDOWN;
+    gpio.Pull = GPIO_PULLUP;
     HAL_GPIO_Init(GPIOE, &gpio);
 }
 
@@ -268,7 +267,7 @@ void Transceiver::DeInit_FL0()
     GPIO_InitTypeDef gpio;
     gpio.Pin = PIN_FL0;
     gpio.Mode = GPIO_MODE_INPUT;
-    gpio.Pull = GPIO_PULLDOWN;
+    gpio.Pull = GPIO_PULLUP;
     HAL_GPIO_Init(PORT_FL0, &gpio);     // FL0 инициализируем на прослушивание - чтобы не мешать работе шины
 }
 

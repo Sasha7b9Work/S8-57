@@ -74,6 +74,8 @@ public:
     static uint LogPointUS(char *name);
 
     static uint LogPointMS(char *name);
+
+    static void PauseOnOPS(uint ops);
 };
 
 

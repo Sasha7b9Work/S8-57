@@ -1,4 +1,5 @@
 #include "defines.h"
+#include "log.h"
 #include "DataBus.h"
 #include "Transceiver.h"
 #include "Hardware/Timer.h"
@@ -112,11 +113,6 @@ void Transceiver::Receiver::Init_FL0_IN()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Transceiver::Transmitter::InitPinsTransmit()
 {
-    if (DataBus::GetMode().IsDeviceTransmit())
-    {
-        return;
-    }
-
     DataBus::SetModeTransmit();
 
     /* Настроим пины 14, 15, 0, 1 на запись D0, D1, D2, D3 */
@@ -153,15 +149,7 @@ void Transceiver::Receiver::InitPinsReceive()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Transceiver::Transmitter::Send(uint8 data)
 {
-    InitPinsTransmit();                     // Инициализируем пины для передачи
-
-    SetData(data);                          // Устанавливаем пины данных
-
-    Set_MODE(Mode::Send);                   // Даём сигнал панели, что можно считывать данные
-
-    while (State_READY().IsPassive()) {};   // Ожидаем сигнал подтверждения
-
-    Set_MODE(Mode::Disabled);               // Даём признак, что подтверждение получено. Теперь панель должна убрать сигнал READY
+    Send(&data, 1);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -171,12 +159,14 @@ void Transceiver::Transmitter::Send(uint8 *data, uint size)
 
     for (uint i = 0; i < size; i++)
     {
+        Timer::PauseOnOPS(200);
+
         SetData(data[i]);                       // Устанавливаем пины данных
-    
+
         Set_MODE(Mode::Send);                   // Даём сигнал панели, что можно считывать данные
 
         while (State_READY().IsPassive()) {};   // Ожидаем сигнал подтверждения
-    
+
         Set_MODE(Mode::Disabled);               // Даём признак, что подтверждение получено. Теперь панель должна убрать сигнал READY
     }
 }
@@ -234,7 +224,7 @@ void Transceiver::Set_MODE(Mode::E mode)
         HAL_GPIO_WritePin(MODE0, GPIO_PIN_RESET);
         HAL_GPIO_WritePin(MODE1, GPIO_PIN_RESET);
         /// \todo С этим надо что-то делать. Непонятно, почему без задержки не работает
-        Timer::PauseOnOPS(200);
+        //Timer::PauseOnOPS(200);
     }
     else
     {
