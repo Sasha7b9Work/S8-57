@@ -183,9 +183,6 @@ void Transceiver::Transmitter::Send(uint8 *data, uint size)
         while (State_READY().IsPassive()) {};   // Ожидаем сигнал подтверждения
     
         Set_MODE(Mode::Disabled);               // Даём признак, что подтверждение получено. Теперь панель должна убрать сигнал READY
-
-        /// \todo С этим надо что-то делать. Непонятно, почему без задержки не работает
-        Timer::PauseOnOPS(250);
     }
 
     Update();
@@ -206,8 +203,6 @@ void Transceiver::Update()
     {
         Set_MODE(Mode::Disabled);               // То отключаем взаимодействие с панелью
 
-        Timer::PauseOnOPS(250);
-
         return;                                 // и выходим
     }
 
@@ -216,6 +211,8 @@ void Transceiver::Update()
     uint8 data = Receiver::ReadData();          // Читаем байт
 
     Decoder::AddData(data);                     // И отправляем его на выполнение
+
+    Set_MODE(Mode::Disabled);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -245,6 +242,12 @@ void Transceiver::Set_MODE(Mode::E mode)
     else
     {
         // здесь ничего не надо
+    }
+
+    if (mode == Mode::Disabled)
+    {
+        /// \todo С этим надо что-то делать. Непонятно, почему без задержки не работает
+        Timer::PauseOnOPS(250);
     }
 }
 
