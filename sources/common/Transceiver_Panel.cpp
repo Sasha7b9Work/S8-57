@@ -189,7 +189,7 @@ void Transceiver::Transmitter::TransmitData()
     else
     {
         Set_FL0(State::Active);                 // Выставляем признак того, что есть данные для передачи
-
+        
         InitDataPins();                         // Инициализируем пины даннх для передачи
     }
 

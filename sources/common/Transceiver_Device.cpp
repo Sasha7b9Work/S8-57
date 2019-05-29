@@ -185,12 +185,7 @@ void Transceiver::Transmitter::Send(uint8 *data, uint size)
         Set_MODE(Mode::Disabled);               // Даём признак, что подтверждение получено. Теперь панель должна убрать сигнал READY
 
         /// \todo С этим надо что-то делать. Непонятно, почему без задержки не работает
-
-        volatile int z = 0;
-        while (z < 250)
-        {
-            z++;
-        }
+        Timer::PauseOnOPS(250);
     }
 
     Update();
@@ -210,6 +205,8 @@ void Transceiver::Update()
     if (Receiver::State_FL0().IsPassive())      // Если панель сообщает о том, что данных нет
     {
         Set_MODE(Mode::Disabled);               // То отключаем взаимодействие с панелью
+
+        Timer::PauseOnOPS(250);
 
         return;                                 // и выходим
     }

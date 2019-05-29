@@ -68,6 +68,8 @@ namespace Timer
     void PauseOnTicks(uint numTicks);
     /// Запускает счётчик для измерения малых отрезков времени
     void StartMultiMeasurement();
+    /// Ожидать определённое число элементарных операция в цилке for
+    void PauseOnOPS(uint ops);
 
     bool IsBusy();
     /// Возвращает количество микросекунд, прошедших с момента последнего вызова StartMultiMeasurement()

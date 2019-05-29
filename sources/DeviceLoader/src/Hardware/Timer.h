@@ -65,6 +65,8 @@ public:
 
     static void PauseOnTime(uint timeMS);
 
+    static void PauseOnOPS(uint ops);
+
     static void PauseOnTicks(uint numTicks);
     /// Запускает счётчик для измерения малых отрезков времени
     static void StartMultiMeasurement();
