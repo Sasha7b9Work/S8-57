@@ -81,8 +81,6 @@ namespace Transceiver
     {
         /// Инициализирует 8 выводов данных на приём
         void InitDataPins();
-        /// Считывает байт с выводов данных
-        uint8 ReadDataPins();
         /// Принимает все передаваемые устройством данные
         void ReceiveData();
     }
@@ -222,9 +220,7 @@ void Transceiver::DiscardTransmittedData()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Transceiver::Receiver::ReceiveData()
 {
-    uint8 data = ReadDataPins();            // Читаем байт данных
-
-    Decoder::AddData(data);                 // Обрабатываем
+    Decoder::AddData((uint8)GPIOE->IDR);   // Читаем и обрабатываем байт данных
 
     Set_READY(State::Active);               // Устанавливаем признак, что данные приняты
 
@@ -274,30 +270,6 @@ void Transceiver::DeInit_FL0()
     gpio.Mode = GPIO_MODE_INPUT;
     gpio.Pull = GPIO_PULLDOWN;
     HAL_GPIO_Init(PORT_FL0, &gpio);     // FL0 инициализируем на прослушивание - чтобы не мешать работе шины
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-uint8 Transceiver::Receiver::ReadDataPins()
-{
-    int bit[8];
-
-    bit[0] = HAL_GPIO_ReadPin(GPIOE, GPIO_PIN_0);
-    bit[1] = HAL_GPIO_ReadPin(GPIOE, GPIO_PIN_1);
-    bit[2] = HAL_GPIO_ReadPin(GPIOE, GPIO_PIN_2);
-    bit[3] = HAL_GPIO_ReadPin(GPIOE, GPIO_PIN_3);
-    bit[4] = HAL_GPIO_ReadPin(GPIOE, GPIO_PIN_4);
-    bit[5] = HAL_GPIO_ReadPin(GPIOE, GPIO_PIN_5);
-    bit[6] = HAL_GPIO_ReadPin(GPIOE, GPIO_PIN_6);
-    bit[7] = HAL_GPIO_ReadPin(GPIOE, GPIO_PIN_7);
-
-    uint8 result = 0;
-
-    for (int i = 0; i < 8; i++)
-    {
-        result |= (bit[i] << i);
-    }
-
-    return result;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
