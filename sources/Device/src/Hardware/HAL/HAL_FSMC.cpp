@@ -149,6 +149,8 @@ void FSMC::Init()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void Configure()
 {
+    DataBus::SetModeFPGA();
+
     static const GPIO_InitTypeDef isGPIO =
     {   //    NOE          NWE          NE1
         GPIO_PIN_4 | GPIO_PIN_5 | GPIO_PIN_7,
