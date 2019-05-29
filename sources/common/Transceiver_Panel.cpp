@@ -24,11 +24,6 @@
 
 namespace Transceiver
 {
-    /// /// Эту функцию нужно вызывать всякий раз при инициализации пинов на приём или передачу.
-    void(*CallbackOnInitPins)();
-    /// В этой функции все пины должны быть инициализированы на вход, чтобы не блокировать шины.
-    void DeInitPins();
-
     struct Mode
     {
         enum E
@@ -55,13 +50,20 @@ namespace Transceiver
         bool IsPassive() const { return state == Passive; }
     };
 
+
+    /// /// Эту функцию нужно вызывать всякий раз при инициализации пинов на приём или передачу.
+    void(*CallbackOnInitPins)();
+    /// В этой функции все пины должны быть инициализированы на вход, чтобы не блокировать шины.
+    void DeInitPins();
+    /// Удалить из буфера переданные данные
+    void DiscardTransmittedData();
+
     Mode Mode_Device();
 
     void Set_READY(State::E state);
-
     ///  Деинициализировать D
     void DeInit_FL0();
-
+   
     namespace Transmitter
     {
         void InitDataPins();
@@ -201,9 +203,18 @@ void Transceiver::Transmitter::TransmitData()
 
     DeInitPins();                               // Деинициализируем выводы
 
-    bytesInBuffer--;                            // Удаляем переданные данные из буфера
+    DiscardTransmittedData();
+}
 
-    std::memmove(&buffer[0], &buffer[1], bytesInBuffer);
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Transceiver::DiscardTransmittedData()
+{
+    if (bytesInBuffer > 0)
+    {
+        bytesInBuffer--;                        // Удаляем переданные данные из буфера
+
+        std::memmove(&buffer[0], &buffer[1], bytesInBuffer);
+    }
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
