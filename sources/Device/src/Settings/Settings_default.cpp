@@ -158,7 +158,7 @@ const Settings Settings::defaultSettings =
     
     // Μενώ ΞÒΛΐΔΚΐ
 
-    false,                                  // dbg_showConsole
+    true,                                   // dbg_showConsole
     30,                                     // dbg_numStrings;         
     8,                                      // dbg_sizeFont;           
     false,                                  // dbg_modePauseConsole;   

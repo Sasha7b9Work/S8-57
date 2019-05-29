@@ -247,7 +247,7 @@ void Transceiver::Set_MODE(Mode::E mode)
     if (mode == Mode::Disabled)
     {
         /// \todo С этим надо что-то делать. Непонятно, почему без задержки не работает
-        Timer::PauseOnOPS(250);
+        Timer::PauseOnOPS(200);
     }
 }
 
