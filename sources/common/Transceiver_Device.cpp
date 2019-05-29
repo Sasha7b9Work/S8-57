@@ -112,10 +112,10 @@ void Transceiver::Receiver::Init_FL0_IN()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Transceiver::Transmitter::InitPinsTransmit()
 {
-    if (DataBus::GetMode().IsDeviceTransmit())
-    {
-        return;
-    }
+//    if (DataBus::GetMode().IsDeviceTransmit())
+//    {
+//        return;
+//    }
 
     DataBus::SetModeTransmit();
 
