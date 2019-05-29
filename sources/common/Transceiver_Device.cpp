@@ -209,7 +209,7 @@ void Transceiver::Update()
     Receiver::InitPinsReceive();                // Инициалазируем пины данных на приём
 
     uint8 data = Receiver::ReadData();          // Читаем байт
-
+    
     Decoder::AddData(data);                     // И отправляем его на выполнение
 
     Set_MODE(Mode::Disabled);
@@ -271,10 +271,14 @@ uint8 Transceiver::Receiver::ReadData()
 {
     uint8 result = 0;
 
-    for (int i = 0; i < 8; i++)
+    for (int i = 7; i >= 0; i--)
     {
         result |= HAL_GPIO_ReadPin((GPIO_TypeDef *)ports[i], pins[i]);
-        result <<= 1;
+
+        if (i != 0)
+        {
+            result <<= 1;
+        }
     }
 
     return result;
