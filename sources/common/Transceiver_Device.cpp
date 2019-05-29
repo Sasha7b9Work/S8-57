@@ -174,17 +174,15 @@ void Transceiver::Transmitter::Send(uint8 *data, uint size)
         SetData(data[i]);                       // Устанавливаем пины данных
     
         Set_MODE(Mode::Send);                   // Даём сигнал панели, что можно считывать данные
-    
+
         while (State_READY().IsPassive()) {};   // Ожидаем сигнал подтверждения
     
         Set_MODE(Mode::Disabled);               // Даём признак, что подтверждение получено. Теперь панель должна убрать сигнал READY
     }
-
-    Update();
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Transceiver::Update()
+bool Transceiver::Update()
 {
     DataBus::SetModeReceive();
 
@@ -198,7 +196,7 @@ void Transceiver::Update()
     {
         Set_MODE(Mode::Disabled);               // То отключаем взаимодействие с панелью
 
-        return;                                 // и выходим
+        return false;                            // и выходим
     }
 
     Receiver::InitPinsReceive();                // Инициалазируем пины данных на приём
@@ -208,6 +206,8 @@ void Transceiver::Update()
     Decoder::AddData(data);                     // И отправляем его на выполнение
 
     Set_MODE(Mode::Disabled);
+
+    return true;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -233,16 +233,12 @@ void Transceiver::Set_MODE(Mode::E mode)
     {
         HAL_GPIO_WritePin(MODE0, GPIO_PIN_RESET);
         HAL_GPIO_WritePin(MODE1, GPIO_PIN_RESET);
+        /// \todo С этим надо что-то делать. Непонятно, почему без задержки не работает
+        Timer::PauseOnOPS(200);
     }
     else
     {
         // здесь ничего не надо
-    }
-
-    if (mode == Mode::Disabled)
-    {
-        /// \todo С этим надо что-то делать. Непонятно, почему без задержки не работает
-        Timer::PauseOnOPS(200);
     }
 }
 

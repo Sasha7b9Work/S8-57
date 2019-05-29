@@ -153,24 +153,30 @@ void Transceiver::Transmitter::Send(uint8 *data, uint size)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Transceiver::Update()
+bool Transceiver::Update()
 {
     Mode mode = Mode_Device();
 
     if (mode.IsDisabled())
     {
-        return;
+        return false;
     }
 
     if (mode.IsReceive())
     {
         Transmitter::TransmitData();
+
+        return true;
     }
 
     if (mode.IsSend())
     {
         Receiver::ReceiveData();
+
+        return true;
     }
+
+    return false;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
