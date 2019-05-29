@@ -112,23 +112,21 @@ void Transceiver::Receiver::Init_FL0_IN()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Transceiver::Transmitter::InitPinsTransmit()
 {
+    if (DataBus::GetMode().IsDeviceTransmit())
+    {
+        return;
+    }
+
     DataBus::SetModeTransmit();
 
-    GPIO_InitTypeDef gpio;
-
-    gpio.Mode = GPIO_MODE_OUTPUT_PP;
-
-    gpio.Pin =  GPIO_PIN_0  |           // D2
-                GPIO_PIN_1  |           // D3
-                GPIO_PIN_14 |           // D0
-                GPIO_PIN_15;            // D1
-    HAL_GPIO_Init(GPIOD, &gpio);
-
-    gpio.Pin =  GPIO_PIN_7 |            // D4
-                GPIO_PIN_8 |            // D5
-                GPIO_PIN_9 |            // D6
-                GPIO_PIN_10;            // D7
-    HAL_GPIO_Init(GPIOE, &gpio);
+    /* Настроим пины 14, 15, 0, 1 на запись D0, D1, D2, D3 */
+    /* Устанавливаем для этих пинов GPIO_MODE_OUTPUT_PP. */
+    GPIOD->MODER &= 0x0ffffff0;
+    GPIOD->MODER |= 0x50000005;
+    /* Настроим пины 7, 8, 9, 10 на запись D4, D5, D6, D7 */
+    /* Устанавливаем для этих пинов GPIO_MODE_OUTPUT_PP. */
+    GPIOE->MODER &= 0xffc03fff;
+    GPIOE->MODER |= 0x00154000;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

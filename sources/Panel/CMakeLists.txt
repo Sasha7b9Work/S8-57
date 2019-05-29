@@ -17,6 +17,8 @@ add_compile_options(/wd4710)
 add_compile_options(/wd4996)
 
 source_group(common                    FILES ../common/Command.h
+                                             ../common/DataBus.cpp
+                                             ../common/DataBus.h
                                              ../common/Message.cpp
                                              ../common/Message.h
                                              ../common/Transceiver.cpp
@@ -41,6 +43,8 @@ file(GLOB SOURCES   ../common/_VS/*
                     ../common/_VS/CMSIS/*
                     ../common/_VS/HAL/*
                     ../common/Command.h
+                    ../common/DataBus.cpp
+                    ../common/DataBus.h
                     ../common/Message.cpp
                     ../common/Message.h
                     ../common/Transceiver.cpp

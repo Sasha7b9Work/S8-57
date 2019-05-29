@@ -41,7 +41,9 @@ source_group(libs\\CMSIS            REGULAR_EXPRESSION "src/libs/CMSIS/*.*")
 source_group(libs\\FatFS            REGULAR_EXPRESSION "src/libs/FatFS/*.*")
 source_group(libs\\HAL              REGULAR_EXPRESSION "src/libs/HAL/*.*")
 source_group(libs\\USBH             REGULAR_EXPRESSION "src/libs/USBH/*.*")
-source_group(common                 FILES ../common/Transceiver.h
+source_group(common                 FILES ../common/DataBus.cpp
+                                          ../common/DataBus.h
+                                          ../common/Transceiver.h
                                           ../common/Transceiver.cpp
                                           ../common/Transceiver_Device.cpp)
 source_group(Display                REGULAR_EXPRESSION "src/Display/*.*")
@@ -54,7 +56,9 @@ source_group(Keyboard               REGULAR_EXPRESSION "src/Keyboard/*")
 source_group(Settings               REGULAR_EXPRESSION "src/Settings/*.*")
 source_group(Utils                  REGULAR_EXPRESSION "src/Utils/*.*")
 
-file(GLOB SOURCES   ../common/Transceiver.h
+file(GLOB SOURCES   ../common/DataBus.cpp
+                    ../common/DataBus.h
+                    ../common/Transceiver.h
                     ../common/Transceiver.cpp
                     ../common/Transceiver_Device.cpp
                     src/main.h

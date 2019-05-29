@@ -30,6 +30,8 @@ add_compile_options(/wd4820)
 add_compile_options(/wd5039)
 
 source_group(common                                  FILES ../common/Command.h
+                                                           ../common/DataBus.cpp
+                                                           ../common/DataBus.h
                                                            ../common/Message.cpp
                                                            ../common/Message.h
                                                            ../common/Transceiver.cpp
@@ -73,6 +75,8 @@ source_group(Utils                                   REGULAR_EXPRESSION "src/Uti
 file(GLOB SOURCES   ../common/_VS/*
                     ../common/_VS/std_includes/*
                     ../common/Command.h
+                    ../common/DataBus.cpp
+                    ../common/DataBus.h
                     ../common/Message.cpp
                     ../common/Message.h
                     ../common/Transceiver.cpp
