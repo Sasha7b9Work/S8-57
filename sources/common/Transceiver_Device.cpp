@@ -1,4 +1,5 @@
 #include "defines.h"
+#include "DataBus.h"
 #include "Transceiver.h"
 #include "Hardware/Timer.h"
 #include <stm32f4xx_hal.h>
@@ -48,8 +49,6 @@ namespace Transceiver
     };
 
 
-    /// Эту функцию нужно вызывать всякий раз при инициализации пинов на приём или передачу.
-    void(*CallbackOnInitPins)();
     /// Установка режима работы
     void Set_MODE(Mode::E mode);
 
@@ -82,10 +81,8 @@ static const uint16 pins[]         = { GPIO_PIN_14, GPIO_PIN_15, GPIO_PIN_0, GPI
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void Transceiver::Init(void (*callbackInitPins)())
+void Transceiver::Init()
 {
-    CallbackOnInitPins = callbackInitPins;
-
     GPIO_InitTypeDef gpio;
     gpio.Pin = PIN_MODE0;
     gpio.Mode = GPIO_MODE_OUTPUT_PP;
@@ -115,7 +112,7 @@ void Transceiver::Receiver::Init_FL0_IN()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Transceiver::Transmitter::InitPinsTransmit()
 {
-    CallbackOnInitPins();
+    DataBus::SetModeTransmit();
 
     GPIO_InitTypeDef gpio;
 
@@ -191,7 +188,7 @@ void Transceiver::Transmitter::Send(uint8 *data, uint size)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Transceiver::Update()
 {
-    CallbackOnInitPins();                       // Сообщаем программе, что пины были переинициализированы
+    DataBus::SetModeReceive();
 
     Receiver::Init_FL0_IN();                    // Инициализируем FL0 на чтение
 

@@ -15,7 +15,7 @@ int main()
     CPU::Init();
     Display::Init();
     Keyboard::Init();
-    Transceiver::Init(EmptyFuncVV);
+    Transceiver::Init();
 
     while(1)
     {

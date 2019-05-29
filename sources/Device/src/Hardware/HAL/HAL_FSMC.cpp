@@ -1,5 +1,6 @@
 #include <stm32f4xx_hal.h>
 #include "defines.h"
+#include "DataBus.h"
 #include "HAL.h"
 #include "Hardware/Timer.h"
 #include "Keyboard/DecoderDevice.h"
@@ -34,9 +35,6 @@ using HAL::FSMC;
 #define PAN_READY_TRANSMIT              (ReadPAN() == 1)
 #define PAN_READY_RECEIVE               (ReadPAN() == 2)
 #define PAN_RECIEVE_TRANSMIT_CONFIRM    (ReadPAN() == 3)
-
-/// Установленное в true значение означает, что шина нуждается в конфигурировании перед обменом (видимо, она сконфигурирована для обмена с панелью)
-static bool needConfigure = true;
 
 static void Configure();
 
@@ -190,14 +188,12 @@ static void Configure()
 
     GPIOE->MODER &= HEX_FROM_2(ffc0, 3fff);
     GPIOE->MODER |= HEX_FROM_2(002a, 8fff);     // Alternate function mode
-
-    needConfigure = false;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void FSMC::WriteToFPGA16(uint8 *address, uint16 value)
 {
-    if (needConfigure)
+    if (!DataBus::GetMode().IsFPGA())
     {
         Configure();
     }
@@ -211,7 +207,7 @@ void FSMC::WriteToFPGA16(uint8 *address, uint16 value)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void FSMC::WriteToFPGA8(uint8 *address, uint8 value)
 {
-    if (needConfigure)
+    if (!DataBus::GetMode().IsFPGA())
     {
         Configure();
     }
@@ -222,16 +218,10 @@ void FSMC::WriteToFPGA8(uint8 *address, uint8 value)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 uint8 FSMC::ReadFromFPGA(const uint8 *address)
 {
-    if (needConfigure)
+    if (!DataBus::GetMode().IsFPGA())
     {
         Configure();
     }
 
     return *address;
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void FSMC::CallbackDeinitPins()
-{
-    needConfigure = true;
 }
