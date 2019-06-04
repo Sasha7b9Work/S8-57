@@ -32,11 +32,7 @@ namespace Transceiver
             Send,       ///< Передача данных в панель
             Receive,    ///< Приём данных от панели
             Forbidden   ///< Недопустимый режим
-        } mode;
-        explicit Mode(E m) : mode(m) {};
-        bool IsDisabled() const { return mode == Disabled; };
-        bool IsSend() const { return mode == Send; };
-        bool IsReceive() const { return mode == Receive; };
+        };
     };
 
     struct State
@@ -45,9 +41,7 @@ namespace Transceiver
         {
             Passive,
             Active
-        } state;
-        explicit State(State::E s) : state(s) {};
-        bool IsPassive() const { return state == Passive; }
+        };
     };
 
 
@@ -58,7 +52,7 @@ namespace Transceiver
     /// Удалить из буфера переданные данные
     void DiscardTransmittedData();
 
-    Mode Mode_Device();
+    Mode::E Mode_Device();
 
     void Set_READY(State::E state);
     ///  Деинициализировать D
@@ -153,21 +147,16 @@ void Transceiver::Transmitter::Send(uint8 *data, uint size)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 bool Transceiver::Update()
 {
-    Mode mode = Mode_Device();
+    Mode::E mode = Mode_Device();
 
-    if (mode.IsDisabled())
-    {
-        return false;
-    }
-
-    if (mode.IsReceive())
+    if (mode == Mode::Receive)
     {
         Transmitter::TransmitData();
 
         return true;
     }
 
-    if (mode.IsSend())
+    if (mode == Mode::Send)
     {
         Receiver::ReceiveData();
 
@@ -199,7 +188,7 @@ void Transceiver::Transmitter::TransmitData()
 
     Set_READY(State::Active);                   // Устанавливаем признак того, что данные выставлены
 
-    while (Mode_Device().IsReceive()) {};       // Ждём от прибора подтверждения того, что данные приняты
+    while (Mode_Device() == Mode::Receive) {};  // Ждём от прибора подтверждения того, что данные приняты
 
     Set_READY(State::Passive);                  // Выходим из режима передачи
 
@@ -224,7 +213,7 @@ void Transceiver::Receiver::ReceiveData()
 
     Set_READY(State::Active);               // Устанавливаем признак, что данные приняты
 
-    while (Mode_Device().IsSend()) {};      // Ждём сигнал подтверждения
+    while (Mode_Device() == Mode::Send) {}; // Ждём сигнал подтверждения
 
     Set_READY(State::Passive);              // И убираем сигнал готовности
 }
@@ -273,7 +262,7 @@ void Transceiver::DeInit_FL0()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-Transceiver::Mode Transceiver::Mode_Device()
+Transceiver::Mode::E Transceiver::Mode_Device()
 {
     //                  MODE    0  1
     static const Mode::E modes [2][2] =
@@ -285,5 +274,5 @@ Transceiver::Mode Transceiver::Mode_Device()
     int m0 = HAL_GPIO_ReadPin(MODE0);
     int m1 = HAL_GPIO_ReadPin(MODE1);
 
-    return Mode(modes[m0][m1]);
+    return modes[m0][m1];
 }
