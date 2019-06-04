@@ -156,13 +156,15 @@ void Transceiver::Transmitter::Send(uint8 *data, uint size)
 
                                                         // Даём сигнал панели, что можно считывать данные
                                                         // Set_MODE(Mode::Send);
-        PORT_MODE0->BSRR = (uint)PIN_MODE0 << 16U;      //HAL_GPIO_WritePin(MODE0, GPIO_PIN_RESET);
-        PORT_MODE1->BSRR = PIN_MODE1;                   //HAL_GPIO_WritePin(MODE1, GPIO_PIN_SET);
+        //PORT_MODE0->BSRR = (uint)PIN_MODE0 << 16U;    // HAL_GPIO_WritePin(MODE0, GPIO_PIN_RESET);
+        PORT_MODE1->BSRR = PIN_MODE1;                   // Установить MODE1 в "1" HAL_GPIO_WritePin(MODE1, GPIO_PIN_SET);
 
         while (!(PORT_READY->IDR & PIN_READY)) {};      // Ожидаем сигнал подтверждения
-                                                        //while (State_READY() == State::Passive) {};
+                                                        // while (State_READY() == State::Passive) {};
 
-        Set_MODE(Mode::Disabled);                       // Даём признак, что подтверждение получено. Теперь панель должна убрать сигнал READY
+                                                        // Даём признак, что подтверждение получено. Теперь панель должна убрать сигнал READY
+                                                        // Set_MODE(Mode::Disabled);
+        PORT_MODE1->BSRR = (uint)PIN_MODE1 << 16U;      // Установить MODE1 в 0
 
         while (PORT_READY->IDR & PIN_READY) {};         // while (State_READY() == State::Active) {};
     }
