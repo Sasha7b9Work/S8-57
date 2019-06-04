@@ -155,25 +155,9 @@
         <Bp>
           <Number>0</Number>
           <Type>0</Type>
-          <LineNumber>51</LineNumber>
+          <LineNumber>270</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134231778</Address>
-          <ByteObject>0</ByteObject>
-          <HtxType>0</HtxType>
-          <ManyObjects>0</ManyObjects>
-          <SizeOfObject>0</SizeOfObject>
-          <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>1</BreakIfRCount>
-          <Filename>.\src\Hardware\CPU_IT.cpp</Filename>
-          <ExecCommand></ExecCommand>
-          <Expression>\\PanelOSC\src/Hardware/CPU_IT.cpp\51</Expression>
-        </Bp>
-        <Bp>
-          <Number>1</Number>
-          <Type>0</Type>
-          <LineNumber>162</LineNumber>
-          <EnabledFlag>1</EnabledFlag>
-          <Address>134235294</Address>
+          <Address>134234830</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
@@ -182,7 +166,7 @@
           <BreakIfRCount>1</BreakIfRCount>
           <Filename>..\common\Transceiver_Panel.cpp</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\PanelOSC\../common/Transceiver_Panel.cpp\162</Expression>
+          <Expression>\\PanelOSC\../common/Transceiver_Panel.cpp\270</Expression>
         </Bp>
       </Breakpoint>
       <WatchWindow1>

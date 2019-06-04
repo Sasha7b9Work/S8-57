@@ -159,14 +159,15 @@ bool Transceiver::Update()
         Decoder::AddData((uint8)GPIOE->IDR);        // Читаем и обрабатываем байт данных
         
         PORT_READY->BSRR = PIN_READY;               // Устанавливаем признак, что данные приняты
-                                                    //Set_READY(State::Active);
-                                                    //HAL_GPIO_WritePin(READY, GPIO_PIN_SET);
+                                                    // Set_READY(State::Active);
+                                                    // HAL_GPIO_WritePin(READY, GPIO_PIN_SET);
         
-        while (Mode_Device() == Mode::Send) {};     // Ждём сигнал подтверждения
+        while (PORT_MODE1->IDR & PIN_MODE1) {};     // Ждём сигнал подтверждения
+                                                    // while (Mode_Device() == Mode::Send) {};
 
         PORT_READY->BSRR = (uint)PIN_READY << 16U;  // И убираем сигнал готовности
-                                                    //HAL_GPIO_WritePin(READY, GPIO_PIN_RESET);
-                                                    //Set_READY(State::Passive);
+                                                    // HAL_GPIO_WritePin(READY, GPIO_PIN_RESET);
+                                                    // Set_READY(State::Passive);
 
         return true;
     }
@@ -267,8 +268,11 @@ Transceiver::Mode::E Transceiver::Mode_Device()
         {Mode::Receive,  Mode::Forbidden}
     };
 
-    int m0 = HAL_GPIO_ReadPin(MODE0);
-    int m1 = HAL_GPIO_ReadPin(MODE1);
+    //int m0 = HAL_GPIO_ReadPin(MODE0);
+    int m0 = (PORT_MODE0->IDR & PIN_MODE0) ? 1 : 0;
+    
+    //int m1 = HAL_GPIO_ReadPin(MODE1);
+    int m1 = (PORT_MODE1->IDR & PIN_MODE1) ? 1 : 0;
 
     return modes[m0][m1];
 }
