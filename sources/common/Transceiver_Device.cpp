@@ -137,12 +137,12 @@ void Transceiver::Transmitter::Send(uint8 *data, uint size)
     
         /* Настроим пины 14, 15, 0, 1 на запись D0, D1, D2, D3 */
         /* Устанавливаем для этих пинов GPIO_MODE_OUTPUT_PP. */
-        GPIOD->MODER &= 0x0ffffff0;
-        GPIOD->MODER |= 0x50000005;
+        GPIOD->MODER &= 0x0ffffff0U;
+        GPIOD->MODER |= 0x50000005U;
         /* Настроим пины 7, 8, 9, 10 на запись D4, D5, D6, D7 */
         /* Устанавливаем для этих пинов GPIO_MODE_OUTPUT_PP. */
-        GPIOE->MODER &= 0xffc03fff;
-        GPIOE->MODER |= 0x00154000;
+        GPIOE->MODER &= 0xffc03fffU;
+        GPIOE->MODER |= 0x00154000U;
     }
 
     for (uint i = 0; i < size; i++)
@@ -156,11 +156,11 @@ void Transceiver::Transmitter::Send(uint8 *data, uint size)
 
         PORT_MODE1->BSRR = PIN_MODE1;                   // Установить MODE1 в "1" - это означает, что M0M1 == 01 и устройство ждёт подверждения от панели о принятых данных
 
-        while (!(PORT_READY->IDR & PIN_READY)) {};      // Ожидаем сигнал подтверждения - "1" на READY будет означать, что панель приняла данные
+        while (!(PORT_READY->IDR & PIN_READY)) {};      // Ожидаем сигнал подтверждения - "1" на READY будет означать, что панель приняла данные //-V712
 
         PORT_MODE1->BSRR = (uint)PIN_MODE1 << 16U;      // Установить MODE1 в "0" - это означает, что устройство в состоянии Disable
 
-        while (PORT_READY->IDR & PIN_READY) {};         // Ожидаем, когда уровень на READY станет раным "0".
+        while (PORT_READY->IDR & PIN_READY) {};         // Ожидаем, когда уровень на READY станет раным "0". //-V712
     }
 }
 
