@@ -195,7 +195,7 @@ static void Configure()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void FSMC::WriteToFPGA16(uint8 *address, uint16 value)
 {
-    if (!DataBus::GetMode().IsFPGA())
+    if (DataBus::GetMode() != DataBus::Mode::FPGA)
     {
         Configure();
     }
@@ -209,7 +209,7 @@ void FSMC::WriteToFPGA16(uint8 *address, uint16 value)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void FSMC::WriteToFPGA8(uint8 *address, uint8 value)
 {
-    if (!DataBus::GetMode().IsFPGA())
+    if (DataBus::GetMode() != DataBus::Mode::FPGA)
     {
         Configure();
     }
@@ -220,7 +220,7 @@ void FSMC::WriteToFPGA8(uint8 *address, uint8 value)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 uint8 FSMC::ReadFromFPGA(const uint8 *address)
 {
-    if (!DataBus::GetMode().IsFPGA())
+    if (DataBus::GetMode() != DataBus::Mode::FPGA)
     {
         Configure();
     }

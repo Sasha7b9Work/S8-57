@@ -11,12 +11,7 @@ namespace DataBus
             DeviceTransmit, ///< Передача в панель
             DeviceReceive,  ///< Чтение из панели
             FPGA            ///< Обмен с FPGA
-        } value;
-        Mode(E v) : value(v) {};
-
-        bool IsFPGA() const { return value == Mode::FPGA; }
-
-        bool IsDeviceTransmit() const { return value == Mode::DeviceTransmit; }
+        };
     };
 
     void SetModeTransmit();
@@ -25,5 +20,5 @@ namespace DataBus
 
     void SetModeFPGA();
 
-    Mode GetMode();
+    Mode::E GetMode();
 }
