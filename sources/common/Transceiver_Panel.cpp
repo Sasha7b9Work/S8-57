@@ -75,8 +75,6 @@ namespace Transceiver
     {
         /// Инициализирует 8 выводов данных на приём
         void InitDataPins();
-        /// Принимает все передаваемые устройством данные
-        void ReceiveData();
     }
 
     static uint8 buffer[1024];
@@ -158,7 +156,17 @@ bool Transceiver::Update()
 
     if (mode == Mode::Send)
     {
-        Receiver::ReceiveData();
+        Decoder::AddData((uint8)GPIOE->IDR);        // Читаем и обрабатываем байт данных
+        
+        PORT_READY->BSRR = PIN_READY;               // Устанавливаем признак, что данные приняты
+                                                    //Set_READY(State::Active);
+                                                    //HAL_GPIO_WritePin(READY, GPIO_PIN_SET);
+        
+        while (Mode_Device() == Mode::Send) {};     // Ждём сигнал подтверждения
+
+        PORT_READY->BSRR = (uint)PIN_READY << 16U;  // И убираем сигнал готовности
+                                                    //HAL_GPIO_WritePin(READY, GPIO_PIN_RESET);
+                                                    //Set_READY(State::Passive);
 
         return true;
     }
@@ -204,18 +212,6 @@ void Transceiver::DiscardTransmittedData()
 
         std::memmove(&buffer[0], &buffer[1], bytesInBuffer);
     }
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Transceiver::Receiver::ReceiveData()
-{
-    Decoder::AddData((uint8)GPIOE->IDR);    // Читаем и обрабатываем байт данных
-
-    Set_READY(State::Active);               // Устанавливаем признак, что данные приняты
-
-    while (Mode_Device() == Mode::Send) {}; // Ждём сигнал подтверждения
-
-    Set_READY(State::Passive);              // И убираем сигнал готовности
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
