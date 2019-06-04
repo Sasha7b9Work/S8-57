@@ -169,24 +169,24 @@ bool Transceiver::Update()
 {
     DataBus::mode = DataBus::Mode::DeviceReceive;
 
-    Receiver::Init_FL0_IN();                    // Инициализируем FL0 на чтение
+    Receiver::Init_FL0_IN();                        // Инициализируем FL0 на чтение
 
-    Set_MODE(Mode::Receive);                    // Сообщаем панели, что готовы принять данные
+    Set_MODE(Mode::Receive);                        // Сообщаем панели, что готовы принять данные
 
-    while (State_READY() == State::Passive) {}; // Ожидаем сигнал готовности от панели
+    while (State_READY() == State::Passive) {};     // Ожидаем сигнал готовности от панели
 
-    if (Receiver::State_FL0() == State::Passive)      // Если панель сообщает о том, что данных нет
+    if (Receiver::State_FL0() == State::Passive)    // Если панель сообщает о том, что данных нет
     {
-        Set_MODE(Mode::Disabled);               // То отключаем взаимодействие с панелью
+        Set_MODE(Mode::Disabled);                   // То отключаем взаимодействие с панелью
 
-        return false;                            // и выходим
+        return false;                               // и выходим
     }
 
-    Receiver::InitPinsReceive();                // Инициалазируем пины данных на приём
+    Receiver::InitPinsReceive();                    // Инициалазируем пины данных на приём
 
-    uint8 data = Receiver::ReadData();          // Читаем байт
+    uint8 data = Receiver::ReadData();              // Читаем байт
     
-    Decoder::AddData(data);                     // И отправляем его на выполнение
+    Decoder::AddData(data);                         // И отправляем его на выполнение
 
     Set_MODE(Mode::Disabled);
 
