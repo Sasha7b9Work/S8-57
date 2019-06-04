@@ -154,8 +154,11 @@ void Transceiver::Transmitter::Send(uint8 *data, uint size)
         //                                                    Биты 4,5,6,7
         GPIOE->ODR = (GPIOE->ODR & 0xf87f) + (uint16)(((int16)d & 0xf0) << 3);
 
-        HAL_GPIO_WritePin(MODE0, GPIO_PIN_RESET);       // Даём сигнал панели, что можно считывать данные
-        HAL_GPIO_WritePin(MODE1, GPIO_PIN_SET);         // Set_MODE(Mode::Send);
+                                                        // Даём сигнал панели, что можно считывать данные
+                                                        // Set_MODE(Mode::Send);
+        PORT_MODE0->BSRR = (uint)PIN_MODE0 << 16U;      //HAL_GPIO_WritePin(MODE0, GPIO_PIN_RESET);
+
+        PORT_MODE1->BSRR = PIN_MODE1;                   //HAL_GPIO_WritePin(MODE1, GPIO_PIN_SET);
 
         while (State_READY() == State::Passive) {};     // Ожидаем сигнал подтверждения
 
