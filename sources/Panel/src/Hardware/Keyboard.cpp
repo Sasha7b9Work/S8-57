@@ -333,6 +333,6 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) //-V2009
 {
     if (htim == &handleTIM4)
     {
-        Keyboard::Update();
+        //Keyboard::Update();
     }
 }

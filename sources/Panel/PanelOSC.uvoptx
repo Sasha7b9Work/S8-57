@@ -155,18 +155,18 @@
         <Bp>
           <Number>0</Number>
           <Type>0</Type>
-          <LineNumber>270</LineNumber>
+          <LineNumber>162</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134234830</Address>
+          <Address>134239804</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>..\common\Transceiver_Panel.cpp</Filename>
+          <Filename>.\src\Hardware\Keyboard.cpp</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\PanelOSC\../common/Transceiver_Panel.cpp\270</Expression>
+          <Expression>\\\src/Hardware/Keyboard.cpp\162</Expression>
         </Bp>
       </Breakpoint>
       <WatchWindow1>
@@ -694,7 +694,7 @@
 
   <Group>
     <GroupName>src</GroupName>
-    <tvExp>0</tvExp>
+    <tvExp>1</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>

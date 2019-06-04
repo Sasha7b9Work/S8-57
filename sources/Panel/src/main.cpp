@@ -19,6 +19,14 @@ int main()
 
     while(1)
     {
+        static uint prevTime = 0;
+        
         Transceiver::Update();
+
+        if(TIME_MS - prevTime > 2)
+        {
+            Keyboard::Update();
+            prevTime = TIME_MS;
+        }
     }
 }
