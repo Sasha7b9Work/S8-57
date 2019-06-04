@@ -53,13 +53,6 @@ namespace Transceiver
 
     State::E State_READY();
 
-    namespace Transmitter
-    {
-        /// Инициализировать выходы в режим передачи.
-        void InitPinsTransmit();
-        void SetData(uint8 data);
-    }
-
     namespace Receiver
     {
         /// Инициализация FL0 на чтение
@@ -109,12 +102,6 @@ void Transceiver::Receiver::Init_FL0_IN()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Transceiver::Transmitter::InitPinsTransmit()
-{
-
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Transceiver::Receiver::InitPinsReceive()
 {
     GPIO_InitTypeDef gpio;
@@ -160,9 +147,15 @@ void Transceiver::Transmitter::Send(uint8 *data, uint size)
 
     for (uint i = 0; i < size; i++)
     {
-        SetData(data[i]);                               // Устанавливаем пины данных
+        uint8 d = data[i];
 
-        Set_MODE(Mode::Send);                           // Даём сигнал панели, что можно считывать данные
+        //                                                      биты 0,1                      биты 2, 3
+        GPIOD->ODR = (GPIOD->ODR & 0x3ffc) + (uint16)(((int16)d & 0x03) << 14) + (((uint16)(d & 0x0c)) >> 2);           // Записываем данные в выходные пины
+        //                                                    Биты 4,5,6,7
+        GPIOE->ODR = (GPIOE->ODR & 0xf87f) + (uint16)(((int16)d & 0xf0) << 3);
+
+        HAL_GPIO_WritePin(MODE0, GPIO_PIN_RESET);       // Даём сигнал панели, что можно считывать данные
+        HAL_GPIO_WritePin(MODE1, GPIO_PIN_SET);         // Set_MODE(Mode::Send);
 
         while (State_READY() == State::Passive) {};     // Ожидаем сигнал подтверждения
 
@@ -237,16 +230,6 @@ void Transceiver::Set_MODE(Mode::E mode)
 Transceiver::State::E Transceiver::Receiver::State_FL0()
 {
     return (HAL_GPIO_ReadPin(FL0) == GPIO_PIN_SET) ? State::Active : State::Passive;
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Transceiver::Transmitter::SetData(uint8 data)
-{
-    //                                                        биты 0,1                           биты 2, 3
-    GPIOD->ODR = (GPIOD->ODR & 0x3ffc) + (uint16)(((int16)data & 0x03) << 14) + (((uint16)(data & 0x0c)) >> 2);
-
-    //                                                    Биты 4,5,6,7
-    GPIOE->ODR = (GPIOE->ODR & 0xf87f) + (uint16)(((int16)data & 0xf0) << 3);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
