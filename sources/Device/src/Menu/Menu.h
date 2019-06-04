@@ -8,72 +8,67 @@
 #define MENU_TEMP_ENABLE_STRING_NAVI() Menu::TemporaryEnableStrNavi()
 
 
-class StructHandlers;
-
-
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-class Menu
+namespace Menu
 {
-friend class StructHandlers;
-public:
     /// Инициализация
-    static void Init();
+    void Init();
 
-    static void ChangeStateFlashDrive();
+    void ChangeStateFlashDrive();
     /// Функция должна вызываться в главном цикле.
-    static void Update();
+    void Update();
     /// Функция вызывается при нажатии, повторе и отпускании кнопки
-    static void ButtonEvent(KeyEvent event);
+    void ButtonEvent(KeyEvent event);
     /// Установить время автоматического сокрытия меню в соответствии с установками.
-    static void SetAutoHide(bool active);
+    void SetAutoHide(bool active);
     /// Показать/скрыть меню.
-    static void Show(bool show);
+    void Show(bool show);
     /// Возвращает true, если меню отображается на экране
-    static bool IsShown();
+    bool IsShown();
     /// Функция временно включает отображение строки навигации меню, если задано настройками.
-    static void TemporaryEnableStrNavi();
+    void TemporaryEnableStrNavi();
     /// Возвращает адрес открытого элемента меню
-    static Control *OpenedItem();
+    Control *OpenedItem();
     /// Возвращает указатель на текущую главную страницу меню
-    static PageBase *MainPage();
+    PageBase *MainPage();
     /// Если true - меню находится в дополнительном режиме.
-    static bool IsMinimize();
+    bool IsMinimize();
 
-    static Control *ItemUnderButton(Key::E button);
+    Control *ItemUnderButton(Key::E button);
 
-    static void SetItemUnderButton(Key::E button, Control *control);
+    void SetItemUnderButton(Key::E button, Control *control);
 
-    static Page::Name::E GetNameOpenedPage();
+    Page::Name::E GetNameOpenedPage();
 
-    static void SaveScreenToDrive();
+    void SaveScreenToDrive();
 
-    static void SaveRow(int row);
+    void SaveRow(int row);
 
-    static PageBase *OpenedPage();
+    PageBase *OpenedPage();
     /// Возвращает адрес текущего элемента меню (текущим, как правило, является элемент, кнопка которого была нажата последней
-    static Control *CurrentItem();
+    Control *CurrentItem();
     /// Закрыть открытый элемент меню
-    static void CloseOpenedItem();
+    void CloseOpenedItem();
 
-    static void SetItemForHint(void *item);
+    void SetItemForHint(void *item);
 
-    static void SaveSettings();
+    void SaveSettings();
     /// Нужно вызывать при отпускании функциональной кнпоки
-    static void ReleaseFunctionalButton(Key::E key);
+    void ReleaseFunctionalButton(Key::E key);
     /// Нажно вызывать при "длинном" нажатии функциональной кнопки
-    static void LongFunctionalButton(Key::E key);
+    void LongFunctionalButton(Key::E key);
     ///\brief  Здесь хранится адрес элемента меню, соответствующего функциональной клавише [1..5], если она находится в нижнем положении, и 0, 
     /// если ни одна кнопка не нажата.
-    static Control *itemUnderKey;
+    extern Control *itemUnderKey;
     /// Строка подсказки, которую надо выводить в случае включённого режима подсказок.
-    static const char *stringForHint;
+    extern const char *stringForHint;
     /// Item, подсказку для которого нужно выводить в случае включённого режима подсказок.
-    static Control *itemHint;
+    extern Control *itemHint;
 
     /// Нарисовать меню
-    static void Draw();
+    void Draw();
     /// С какоей позиции Y рисовать меню. Позиция берётся без учёта заголовка
-    static int Y();
+    int Y();
 
     class Title
     {
@@ -109,6 +104,5 @@ public:
         } value;
     };
 
-private:
-    static void SetMainPage(PageBase *page);
+    void SetMainPage(PageBase *page);
 };

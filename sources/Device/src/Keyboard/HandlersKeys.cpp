@@ -105,16 +105,6 @@ static void TShiftMore();
 
 
 
-class StructHandlers
-{
-public:
-    static void SetMainPage(const PageBase *page)
-    {
-        Menu::SetMainPage((PageBase *)page);
-    }
-};
-
-
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void Handlers::Process(KeyEvent e)
 {
@@ -475,7 +465,7 @@ static void ShowHidePage(const PageBase *page)
     }
     else
     {
-        StructHandlers::SetMainPage(page);
+        Menu::SetMainPage((PageBase *)page);
 
         if (!Menu::IsShown())
         {
