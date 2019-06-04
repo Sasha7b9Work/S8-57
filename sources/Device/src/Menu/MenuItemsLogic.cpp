@@ -165,13 +165,13 @@ void Governor::StartChange(int delta)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-int Governor::NextValue()
+int16 Governor::NextValue()
 {
     return (GetValue() < maxValue) ? (GetValue() + 1) : minValue;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-int Governor::PrevValue()
+int16 Governor::PrevValue()
 {
     return (GetValue() > minValue) ? (GetValue() - 1) : maxValue;
 }
@@ -234,16 +234,16 @@ float Governor::Step()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Governor::ChangeValue(int delta)
+void Governor::ChangeValue(int16 delta)
 {
     if(!IsOpened())
     {
         gCurDigit = 0;
     }
     
-    int oldValue = GetValue();
+    int16 oldValue = GetValue();
 
-    int newValue = GetValue() + (int)(Math::Sign(delta) * Math::Pow10(gCurDigit));
+    int16 newValue = GetValue() + (int16)(Math::Sign(delta) * Math::Pow10(gCurDigit));
 
     LIMITATION(newValue, minValue, maxValue); //-V2516
 

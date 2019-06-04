@@ -104,7 +104,8 @@ public:
     uint16                             trig_lev[Chan::Size];
     Osci::Settings::Trig::StartMode::E trig_startMode;           ///< Режим запуска.
     Osci::Settings::Trig::ModeFind::E  trig_modeFind;            ///< Поиск синхронизации - вручную или автоматически.
-    int                                trig_holdOff;             ///< Удержание синхронизации
+    /// \todo разрядности trig_holdOff недостаточно
+    int16                              trig_holdOff;             ///< Удержание синхронизации
     bool                               trig_holdOffEnabled;      ///< Включение удержания синхронизации
 
     // Меню РАЗВЁРТКА

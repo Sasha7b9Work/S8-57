@@ -327,9 +327,9 @@ class GovernorBase
 {
 public:
     COMMON_PART_MENU_ITEM;
-    int    *cell;
-    int     minValue;       ///< Минмальное значение, которое может принимать регулятор.
-    int     maxValue;       ///< Максимальное значение.
+    int16  *cell;
+    int16   minValue;       ///< Минмальное значение, которое может принимать регулятор.
+    int16   maxValue;       ///< Максимальное значение.
     pFuncVV funcOfChanged;  ///< Функция, которую нужно вызывать после того, как значение регулятора изменилось.
     pFuncVV funcBeforeDraw; ///< Функция, которая вызывается перед отрисовкой
 };
@@ -337,9 +337,9 @@ public:
 class Governor : public Control
 {
 public:
-    int     *cell;
-    int     minValue;       ///< Минмальное значение, которое может принимать регулятор.
-    int     maxValue;       ///< Максимальное значение.
+    int16  *cell;
+    int16   minValue;       ///< Минмальное значение, которое может принимать регулятор.
+    int16   maxValue;       ///< Максимальное значение.
     pFuncVV funcOfChanged;  ///< Функция, которую нужно вызывать после того, как значение регулятора изменилось.
     pFuncVV funcBeforeDraw; ///< Функция, которая вызывается перед отрисовкой
     /// Обработка события кнопки
@@ -347,13 +347,13 @@ public:
     /// Запускает процессс анимации инкремента или декремента элемента меню типа Governor (в зависимости от знака delta).
     void StartChange(int detla);
     /// Возвращает следующее большее значение, которое может принять governor.
-    int NextValue();
+    int16 NextValue();
     /// Возвращает следующее меньшее значение, которое может принять governor.
-    int PrevValue();
+    int16 PrevValue();
     /// Рассчитывате следующий кадр анимации.
     float Step();
     /// Изменяет значение в текущей позиции при раскрытом элементе.
-    void ChangeValue(int delta);
+    void ChangeValue(int16 delta);
     /// При открытом элементе переставляет курсор на следующую позицию.
     void NextPosition();
     /// При открытом элементе переставляет курсор не предыдущую позицию
@@ -369,9 +369,9 @@ public:
 
     char GetSymbol();
 
-    int GetValue();
+    int16 GetValue();
 
-    void SetValue(int v);
+    void SetValue(int16 v);
 
 private:
 

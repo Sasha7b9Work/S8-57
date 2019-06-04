@@ -38,8 +38,10 @@ static void OnChanged_Duration()
 DEF_GOVERNOR( gDuration,                                                                                                                           //--- СИНХР - УДЕРЖАНИЕ - Длительность ---
     "Длительность",
     "Задаёт длительность промежутка между импульсами синхронизации",
-    TRIG_HOLDOFF, 10, 15000000, pageHoldOff, FuncActive, OnChanged_Duration, FuncBeforeDraw
+    TRIG_HOLDOFF, 10, 32000, pageHoldOff, FuncActive, OnChanged_Duration, FuncBeforeDraw
 )
+
+/// \todo gDuration должен обеспечивать возможность хранения большего значения, чем 32000
 
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

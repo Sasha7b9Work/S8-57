@@ -15,6 +15,7 @@
 template void  Math::Swap<int>(int *, int *);
 template int   Math::Sign<int>(int);
 template int   Math::Sign<int8>(int8);
+template int   Math::Sign<int16>(int16);
 template void  Math::CircleIncrease<int8>(int8 *, int8, int8);
 template void  Math::CircleIncrease<uint8>(uint8 *, uint8, uint8);
 template void  Math::CircleIncrease<int16>(int16 *, int16, int16);
