@@ -146,7 +146,7 @@ void Transceiver::Transmitter::Send(uint8 *data, uint size)
 {
     if (DataBus::mode != DataBus::Mode::DeviceTransmit)        // Если пины ещё не инициализированы для передачи -
     {
-        DataBus::SetModeTransmit();                                 // инициализируем
+        DataBus::mode = DataBus::Mode::DeviceTransmit;          // инициализируем
     
         /* Настроим пины 14, 15, 0, 1 на запись D0, D1, D2, D3 */
         /* Устанавливаем для этих пинов GPIO_MODE_OUTPUT_PP. */
@@ -160,13 +160,13 @@ void Transceiver::Transmitter::Send(uint8 *data, uint size)
 
     for (uint i = 0; i < size; i++)
     {
-        SetData(data[i]);                       // Устанавливаем пины данных
+        SetData(data[i]);                               // Устанавливаем пины данных
 
-        Set_MODE(Mode::Send);                   // Даём сигнал панели, что можно считывать данные
+        Set_MODE(Mode::Send);                           // Даём сигнал панели, что можно считывать данные
 
-        while (State_READY() == State::Passive) {};   // Ожидаем сигнал подтверждения
+        while (State_READY() == State::Passive) {};     // Ожидаем сигнал подтверждения
 
-        Set_MODE(Mode::Disabled);               // Даём признак, что подтверждение получено. Теперь панель должна убрать сигнал READY
+        Set_MODE(Mode::Disabled);                       // Даём признак, что подтверждение получено. Теперь панель должна убрать сигнал READY
 
         while (State_READY() == State::Active) {};
     }
@@ -175,7 +175,7 @@ void Transceiver::Transmitter::Send(uint8 *data, uint size)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 bool Transceiver::Update()
 {
-    DataBus::SetModeReceive();
+    DataBus::mode = DataBus::Mode::DeviceReceive;
 
     Receiver::Init_FL0_IN();                    // Инициализируем FL0 на чтение
 
