@@ -14,8 +14,6 @@ using namespace Transceiver;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-static TIM_HandleTypeDef handleTIM4;
-
 #define SL0 GPIO_PIN_14
 #define SL1 GPIO_PIN_13
 #define SL2 GPIO_PIN_15
@@ -122,27 +120,6 @@ void Keyboard::Init()
 
     isGPIO.Pin = SL4 | SL6;
     HAL_GPIO_Init(GPIOD, &isGPIO);
-
-    // Инициализируем таймер, по прерываниям которого будем опрашивать клавиатуру
-    HAL_NVIC_SetPriority(TIM4_IRQn, 0, 1);
-
-    HAL_NVIC_EnableIRQ(TIM4_IRQn);
-
-    handleTIM4.Instance = TIM4;
-    handleTIM4.Init.Period = TIME_UPDATE_KEYBOARD * 10 - 1;
-    handleTIM4.Init.Prescaler = (uint)((SystemCoreClock / 2) / 10000) - 1;
-    handleTIM4.Init.ClockDivision = 0;
-    handleTIM4.Init.CounterMode = TIM_COUNTERMODE_UP;
-
-    if (HAL_TIM_Base_Init(&handleTIM4) != HAL_OK)
-    {
-        ERROR_HANDLER();
-    }
-
-    if (HAL_TIM_Base_Start_IT(&handleTIM4) != HAL_OK)
-    {
-        ERROR_HANDLER();
-    }
 
     SET_ALL_SL;
 
@@ -310,29 +287,4 @@ uint Keyboard::TimeBetweenRepeats(uint prev)
     }
 
     return retValue;
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-    void TIM4_IRQHandler();
-        
-    void TIM4_IRQHandler()
-    {
-        HAL_TIM_IRQHandler(&handleTIM4);
-    }
-
-#ifdef __cplusplus
-}
-#endif
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) //-V2009
-{
-    if (htim == &handleTIM4)
-    {
-        //Keyboard::Update();
-    }
 }
