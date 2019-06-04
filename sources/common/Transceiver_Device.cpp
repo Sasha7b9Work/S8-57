@@ -44,16 +44,14 @@ namespace Transceiver
         {
             Passive,
             Active
-        } state;
-        explicit State(E s) : state(s) {};
-        bool IsPassive() const { return state == Passive; };
+        };
     };
 
 
     /// Установка режима работы
     void Set_MODE(Mode::E mode);
 
-    State State_READY();
+    State::E State_READY();
 
     namespace Transmitter
     {
@@ -69,7 +67,7 @@ namespace Transceiver
         /// Инициализировать пины для приёма из панели
         void InitPinsReceive();
         /// Возвращает состояние FL0
-        State State_FL0();
+        State::E State_FL0();
         /// Считывает байт данных с ШД
         uint8 ReadData();
     }
@@ -113,6 +111,11 @@ void Transceiver::Receiver::Init_FL0_IN()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Transceiver::Transmitter::InitPinsTransmit()
 {
+    if (DataBus::GetMode().IsDeviceTransmit())
+    {
+        return;
+    }
+
     DataBus::SetModeTransmit();
 
     /* Настроим пины 14, 15, 0, 1 на запись D0, D1, D2, D3 */
@@ -161,13 +164,13 @@ void Transceiver::Transmitter::Send(uint8 *data, uint size)
     {
         SetData(data[i]);                       // Устанавливаем пины данных
 
-        Timer::PauseOnOPS(200);
-    
         Set_MODE(Mode::Send);                   // Даём сигнал панели, что можно считывать данные
 
-        while (State_READY().IsPassive()) {};   // Ожидаем сигнал подтверждения
+        while (State_READY() == State::Passive) {};   // Ожидаем сигнал подтверждения
 
         Set_MODE(Mode::Disabled);               // Даём признак, что подтверждение получено. Теперь панель должна убрать сигнал READY
+
+        while (State_READY() == State::Active) {};
     }
 }
 
@@ -180,9 +183,9 @@ bool Transceiver::Update()
 
     Set_MODE(Mode::Receive);                    // Сообщаем панели, что готовы принять данные
 
-    while (State_READY().IsPassive()) {};       // Ожидаем сигнал готовности от панели
+    while (State_READY() == State::Passive) {}; // Ожидаем сигнал готовности от панели
 
-    if (Receiver::State_FL0().IsPassive())      // Если панель сообщает о том, что данных нет
+    if (Receiver::State_FL0() == State::Passive)      // Если панель сообщает о том, что данных нет
     {
         Set_MODE(Mode::Disabled);               // То отключаем взаимодействие с панелью
 
@@ -201,9 +204,9 @@ bool Transceiver::Update()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-Transceiver::State Transceiver::State_READY()
+Transceiver::State::E Transceiver::State_READY()
 {
-    return (HAL_GPIO_ReadPin(READY) == GPIO_PIN_SET) ? State(State::Active) : State(State::Passive);
+    return (HAL_GPIO_ReadPin(READY) == GPIO_PIN_SET) ? State::Active : State::Passive;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -233,9 +236,9 @@ void Transceiver::Set_MODE(Mode::E mode)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-Transceiver::State Transceiver::Receiver::State_FL0()
+Transceiver::State::E Transceiver::Receiver::State_FL0()
 {
-    return (HAL_GPIO_ReadPin(FL0) == GPIO_PIN_SET) ? State(State::Active) : State(State::Passive);
+    return (HAL_GPIO_ReadPin(FL0) == GPIO_PIN_SET) ? State::Active : State::Passive;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
