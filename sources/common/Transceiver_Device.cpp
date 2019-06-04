@@ -159,10 +159,10 @@ void Transceiver::Transmitter::Send(uint8 *data, uint size)
 
     for (uint i = 0; i < size; i++)
     {
-        Timer::PauseOnOPS(200);
-
         SetData(data[i]);                       // Устанавливаем пины данных
 
+        Timer::PauseOnOPS(200);
+    
         Set_MODE(Mode::Send);                   // Даём сигнал панели, что можно считывать данные
 
         while (State_READY().IsPassive()) {};   // Ожидаем сигнал подтверждения

@@ -1,6 +1,7 @@
 #include "defines.h"
 #include "Transceiver.h"
 #include "Utils/DecoderPanel.h"
+#include "Hardware/Timer.h"
 #include <cstring>
 
 
@@ -71,7 +72,7 @@ namespace Transceiver
         /// ”становить данные на шину
         void SetData(uint8 data);
         /// »нициализировать FL0 на вывод - будем через него ссобщать о наличии/отутсвии данных дл€ передачи
-        void Init_FLO_OUT();
+        void Init_FL0_OUT();
 
         void Set_FL0(State::E state);
     }
@@ -179,7 +180,7 @@ bool Transceiver::Update()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Transceiver::Transmitter::TransmitData()
 {
-    Init_FLO_OUT();                             // »нициализируем FL0 дл€ того, чтобы выставить на нЄм признак наличи€ или отсутстви€ данных
+    Init_FL0_OUT();                             // »нициализируем FL0 дл€ того, чтобы выставить на нЄм признак наличи€ или отсутстви€ данных
 
     if (bytesInBuffer == 0)
     {
@@ -253,7 +254,7 @@ void Transceiver::Transmitter::SetData(uint8 data)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Transceiver::Transmitter::Init_FLO_OUT()
+void Transceiver::Transmitter::Init_FL0_OUT()
 {
     GPIO_InitTypeDef gpio;
     gpio.Pin = PIN_FL0;
