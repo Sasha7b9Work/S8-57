@@ -158,16 +158,11 @@ bool Transceiver::Update()
     {
         Decoder::AddData((uint8)GPIOE->IDR);        // Читаем и обрабатываем байт данных
         
-        PORT_READY->BSRR = PIN_READY;               // Устанавливаем признак, что данные приняты
-                                                    // Set_READY(State::Active);
-                                                    // HAL_GPIO_WritePin(READY, GPIO_PIN_SET);
+        PORT_READY->BSRR = PIN_READY;               // Устанавливаем признак, что данные приняты - "1" на READY
         
-        while (PORT_MODE1->IDR & PIN_MODE1) {};     // Ждём сигнал подтверждения
-                                                    // while (Mode_Device() == Mode::Send) {};
+        while (PORT_MODE1->IDR & PIN_MODE1) {};     // Ждём сигнал подтверждения. Пока MODE1 находтися в "1" - устройство не дождалось подтверждения
 
-        PORT_READY->BSRR = (uint)PIN_READY << 16U;  // И убираем сигнал готовности
-                                                    // HAL_GPIO_WritePin(READY, GPIO_PIN_RESET);
-                                                    // Set_READY(State::Passive);
+        PORT_READY->BSRR = (uint)PIN_READY << 16U;  // И убираем сигнал готовности, устанавливая READY в "0"
 
         return true;
     }

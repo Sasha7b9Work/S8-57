@@ -147,26 +147,20 @@ void Transceiver::Transmitter::Send(uint8 *data, uint size)
 
     for (uint i = 0; i < size; i++)
     {
-        uint8 d = data[i];
+        uint8 d = *data++;
 
         //                                                      биты 0,1                      биты 2, 3
         GPIOD->ODR = (GPIOD->ODR & 0x3ffc) + (uint16)(((int16)d & 0x03) << 14) + (((uint16)(d & 0x0c)) >> 2);           // Записываем данные в выходные пины
         //                                                    Биты 4,5,6,7
         GPIOE->ODR = (GPIOE->ODR & 0xf87f) + (uint16)(((int16)d & 0xf0) << 3);
 
-                                                        // Даём сигнал панели, что можно считывать данные
-                                                        // Set_MODE(Mode::Send);
-        //PORT_MODE0->BSRR = (uint)PIN_MODE0 << 16U;    // HAL_GPIO_WritePin(MODE0, GPIO_PIN_RESET);
-        PORT_MODE1->BSRR = PIN_MODE1;                   // Установить MODE1 в "1" HAL_GPIO_WritePin(MODE1, GPIO_PIN_SET);
+        PORT_MODE1->BSRR = PIN_MODE1;                   // Установить MODE1 в "1" - это означает, что M0M1 == 01 и устройство ждёт подверждения от панели о принятых данных
 
-        while (!(PORT_READY->IDR & PIN_READY)) {};      // Ожидаем сигнал подтверждения
-                                                        // while (State_READY() == State::Passive) {};
+        while (!(PORT_READY->IDR & PIN_READY)) {};      // Ожидаем сигнал подтверждения - "1" на READY будет означать, что панель приняла данные
 
-                                                        // Даём признак, что подтверждение получено. Теперь панель должна убрать сигнал READY
-                                                        // Set_MODE(Mode::Disabled);
-        PORT_MODE1->BSRR = (uint)PIN_MODE1 << 16U;      // Установить MODE1 в 0
+        PORT_MODE1->BSRR = (uint)PIN_MODE1 << 16U;      // Установить MODE1 в "0" - это означает, что устройство в состоянии Disable
 
-        while (PORT_READY->IDR & PIN_READY) {};         // while (State_READY() == State::Active) {};
+        while (PORT_READY->IDR & PIN_READY) {};         // Ожидаем, когда уровень на READY станет раным "0".
     }
 }
 
