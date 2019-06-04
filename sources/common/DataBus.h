@@ -14,11 +14,11 @@ namespace DataBus
         };
     };
 
+    extern Mode::E mode;
+
     void SetModeTransmit();
 
     void SetModeReceive();
 
     void SetModeFPGA();
-
-    Mode::E GetMode();
 }

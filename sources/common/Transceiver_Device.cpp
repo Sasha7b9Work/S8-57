@@ -144,7 +144,7 @@ void Transceiver::Transmitter::Send(uint8 data)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Transceiver::Transmitter::Send(uint8 *data, uint size)
 {
-    if (DataBus::GetMode() != DataBus::Mode::DeviceTransmit)        // Если пины ещё не инициализированы для передачи -
+    if (DataBus::mode != DataBus::Mode::DeviceTransmit)        // Если пины ещё не инициализированы для передачи -
     {
         DataBus::SetModeTransmit();                                 // инициализируем
     
