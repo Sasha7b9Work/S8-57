@@ -114,7 +114,15 @@ void Display::Update()
 
     inStateDraw = true;
 
-    DEF_STRUCT(StructDraw, pFuncVV) funcs[Device::Mode::Size] =
+    //DEF_STRUCT(StructDraw, pFuncVV) funcs[Device::Mode::Size] =
+    //{
+    //    Osci::Display::Update,
+    //    Tester::Display::Update,
+    //    Multimeter::Display::Update,
+    //    Recorder::Display::Update
+    //};
+
+    static const pFuncVV funcs[Device::Mode::Size] =
     {
         Osci::Display::Update,
         Tester::Display::Update,
@@ -122,9 +130,13 @@ void Display::Update()
         Recorder::Display::Update
     };
 
+    funcs[Device::State::CurrentMode()]();
+
     DEBUG_POINT;
 
-    HANDLER_CHOICE_AND_SAFE_RUN(pFuncVV, Device::State::CurrentMode());
+    // HANDLER_CHOICE_AND_SAFE_RUN(pFuncVV, Device::State::CurrentMode());
+
+
 
     DEBUG_POINT;
 
