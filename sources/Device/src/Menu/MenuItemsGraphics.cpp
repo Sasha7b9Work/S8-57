@@ -191,11 +191,11 @@ void Governor::DrawLowPart(int x, int y, bool shade)
 {
     Color colorTextDown = Color::BLACK;
 
-    Region(Menu::Item::Value::WIDTH + 1, Menu::Item::Value::HEIGHT - 3).Fill(x + 1, y - 1, Color::MENU_FIELD);
+    Region(Menu::Item::Value::WIDTH + 1, Menu::Item::Value::HEIGHT - 3).Fill(x + 1, y - 1, shade ? Color::MenuItem(false) : Color::MENU_FIELD);
 
     if (shade)
     {
-        colorTextDown = Color::MenuItem(false);
+        colorTextDown = Color::MENU_TITLE_DARK;
     }
 
     if (Menu::OpenedItem() != this)
