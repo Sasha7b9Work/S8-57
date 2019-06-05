@@ -48,8 +48,8 @@ public:
     static Color Channel(Chan::E ch);
     static Color Cursors(Chan::E ch);
     static Color Trig();
-    static Color MenuItem(bool shade);      ///< ÷вет элемента меню.
-    static Color MenuTitle(bool shade);     ///< ÷вет заголовка страницы или элемента меню
+    static Color MenuItem(bool shade);          ///< ÷вет элемента меню.
+    static Color MenuTitleText(bool shade);     ///< ÷вет заголовка страницы или элемента меню
     /// ”станавливает текущий цвет отрисовки
     void SetAsCurrent();
     static void SetCurrent(Color color);

@@ -75,10 +75,10 @@ void GovernorColor::DrawOpened(int x, int y)
     x -= delta;
     ct->Init();
     Rectangle(Menu::Item::HEIGHT + delta + 2, Menu::Item::HEIGHT + 2).Draw(x - 1, y - 1, Color::BACK);
-    Rectangle(Width() + delta, Menu::Item::HEIGHT).Draw(x, y, Color::MenuTitle(false));
+    Rectangle(Width() + delta, Menu::Item::HEIGHT).Draw(x, y, Color::MenuTitleText(false));
     Region(Menu::Item::Value::WIDTH + 2 + delta, Menu::Item::Value::HEIGHT + 3).Fill(x + 1, y + 1, Color::MenuItem(false));
 
-    HLine(Width() + delta).Draw(x, y + Menu::Item::HEIGHT / 2 + 2, Color::MenuTitle(false));
+    HLine(Width() + delta).Draw(x, y + Menu::Item::HEIGHT / 2 + 2, Color::MenuTitleText(false));
 
     Text(Title().CString()).DrawInCenterRect(x + (IsPressed() ? 2 : 1), y + (IsPressed() ? 2 : 1), Width() + delta, Menu::Item::HEIGHT / 2 + 2, Color::WHITE);
 
@@ -427,7 +427,7 @@ void Page::DrawTitle(int x, int yTop)
     }
     else
     {
-        Region(Menu::Title::WIDTH - 1, Menu::Title::HEIGHT - 1).Fill(x + 1, yTop + 1, Color::MenuTitle(false));
+        Region(Menu::Title::WIDTH - 1, Menu::Title::HEIGHT - 1).Fill(x + 1, yTop + 1, Color::MenuTitleText(false));
     }
 
     bool condDrawRSet = NumSubPages() > 1 &&
@@ -554,7 +554,7 @@ void TimeControl::DrawOpened(int x, int y)
     Rectangle(width + 2, height + 3).Draw(x - 1, y - 1, Color::BACK);
     DrawCommonHiPart(this, x - 1, y - 1, IsPressed(), false, false);
 
-    Rectangle(width + 1, height + 1).Draw(x - 1, y, Color::MenuTitle(false));
+    Rectangle(width + 1, height + 1).Draw(x - 1, y, Color::MenuTitleText(false));
 
     HLine(Width()).Draw(x, y + MOI_HEIGHT_TITLE - 1);
 
