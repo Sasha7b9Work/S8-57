@@ -34,6 +34,17 @@
 #define HAL_PCD_MODULE_ENABLED
 #define HAL_HCD_MODULE_ENABLED
 
+#define USE_HAL_SRAM_REGISTER_CALLBACKS 0
+#define USE_HAL_NOR_REGISTER_CALLBACKS  0
+#define USE_HAL_RTC_REGISTER_CALLBACKS  0
+#define USE_HAL_SPI_REGISTER_CALLBACKS  0
+#define USE_HAL_TIM_REGISTER_CALLBACKS  0
+#define USE_HAL_UART_REGISTER_CALLBACKS 0
+#define USE_HAL_HCD_REGISTER_CALLBACKS  0
+#define USE_HAL_PCD_REGISTER_CALLBACKS  0
+#define USE_HAL_ADC_REGISTER_CALLBACKS  0
+#define USE_HAL_DAC_REGISTER_CALLBACKS  0
+
 /* ########################## HSE/HSI Values adaptation ##################### */
 /**
   * @brief Adjust the value of External High Speed oscillator (HSE) used in your application.

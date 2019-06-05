@@ -4,6 +4,7 @@ project (Panel56)
 
 include_directories("..\\common\\"
                     "..\\common\\_VS\\"
+                    "..\\common\\_VS\\std_includes\\"
                     "src"
                     "..\\common\\_VS\\HAL\\"
                     "src\\libs\\HAL\\"
@@ -13,6 +14,7 @@ add_definitions(-DSTM32F437xx -DPANEL)
 
 SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -MP -Wall")
 
+add_compile_options(/wd4159)    # #pragma pack(pop,...): has popped previously pushed identifier xxx
 add_compile_options(/wd4710)
 add_compile_options(/wd4996)
 
@@ -26,6 +28,7 @@ source_group(common                    FILES ../common/Command.h
                                              ../common/Transceiver.cpp
                                              ../common/Transceiver_Panel.cpp)
 source_group(_VS                       REGULAR_EXPRESSION "../common/_VS/*.*")
+source_group(_VS\\std_includes         REGULAR_EXPRESSION "../common/_VS/std_includes/*.*")
 source_group(_VS\\CMSIS                REGULAR_EXPRESSION "../common/_VS/CMSIS/*.*")
 source_group(_VS\\HAL                  REGULAR_EXPRESSION "../common/_VS/HAL/*.*")
 source_group(src                       REGULAR_EXPRESSION "src/*.*")
@@ -40,6 +43,7 @@ source_group(Utils                     REGULAR_EXPRESSION "src/Utils/*.*")
 
 
 file(GLOB SOURCES   ../common/_VS/*
+                    ../common/_VS/std_includes/*
                     ../common/_VS/CMSIS/*
                     ../common/_VS/HAL/*
                     ../common/Command.h

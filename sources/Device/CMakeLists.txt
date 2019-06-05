@@ -26,6 +26,7 @@ add_definitions(-DSTM32F437xx -DOLD_RECORDER)
 
 SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -MP -Wall")
 
+add_compile_options(/wd4159)    # #pragma pack(pop,...): has popped previously pushed identifier xxx
 add_compile_options(/wd4820)
 add_compile_options(/wd5039)
 
