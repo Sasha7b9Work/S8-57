@@ -48,9 +48,8 @@ public:
     static Color Channel(Chan::E ch);
     static Color Cursors(Chan::E ch);
     static Color Trig();
-    static Color ChanAccum(Chan ch);        ///< ÷вет канала в режиме накоплени€
     static Color MenuItem(bool shade);      ///< ÷вет элемента меню.
-    static Color MenuTitle(bool shade);     ///< ÷вет заголовка страницы. inShade == true, если страница затенена
+    static Color MenuTitle(bool shade);     ///< ÷вет заголовка страницы или элемента меню
     /// ”станавливает текущий цвет отрисовки
     void SetAsCurrent();
     static void SetCurrent(Color color);
