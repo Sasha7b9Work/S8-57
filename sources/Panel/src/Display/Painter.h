@@ -11,7 +11,7 @@ class Painter
 {
 public:
     /// Вызывается в начале отрисовки каждого кадра. Заполняет буфер цветом color
-    static void BeginScene(Color color);
+    static void BeginScene();
     /// Вызывается в конце отрисовки каждого кадра. Переносит содержимое буфера на экран
     static void EndScene();
     /// Пересылает строку в панель

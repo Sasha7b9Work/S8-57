@@ -139,16 +139,9 @@ static bool InButtonPress(uint8)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static bool BeginScene(uint8 data)
+static bool BeginScene(uint8)
 {
-    if (step == 0)
-    {
-        return false;
-    }
-    if (step == 1)
-    {
-        Painter::BeginScene((Color)data);
-    }
+    Painter::BeginScene();
     return true;
 }
 
