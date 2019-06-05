@@ -126,7 +126,7 @@ int Grid::ChannelCenterHeight()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Grid::Draw()
 {
-    DEF_STRUCT(StructDraw, pFuncVV) funcs[Device::Mode::Size] =
+    static const pFuncVV funcs[4] =
     {
         DrawOsci,
         DrawTester,
@@ -134,24 +134,7 @@ void Grid::Draw()
         DrawRecorder
     };
 
-    DEBUG_POINT;
-
-    Debug::index = Device::State::CurrentMode();
-
-    DEBUG_POINT;
-
-    DrawOsci();
-    
-    DEBUG_POINT;
-
-    Debug::prev = Debug::last;
-    Debug::last = (void *)&funcs[0];
-
-    funcs[0].val();
-    
-    HANDLER_CHOICE_AND_SAFE_RUN(pFuncVV, Device::State::CurrentMode());
-
-    DEBUG_POINT;
+    funcs[Device::State::CurrentMode()]();
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
