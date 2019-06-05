@@ -6,7 +6,9 @@ cmake_minimum_required(VERSION 3.0)
 
 project (Device56)
 
-include_directories("..\\common\\libs\\STM32Cube_F4\\Drivers\\STM32F4xx_HAL_Driver\\Inc\\"
+include_directories("..\\common\\_VS\\"
+                    "..\\common\\_VS\\std_includes\\"
+                    "..\\common\\libs\\STM32Cube_F4\\Drivers\\STM32F4xx_HAL_Driver\\Inc\\"
                     "..\\common\\libs\\STM32Cube_F4\\Drivers\\CMSIS\\Device\\ST\\STM32F4xx\\Include\\"
                     "..\\common\\libs\\STM32Cube_F4\\Middlewares\\Third_Party\\FatFs\\src\\"
                     "..\\common\\libs\\STM32Cube_F4\\Middlewares\\ST\\STM32_USB_Host_Library\\Core\\Inc\\"
@@ -14,8 +16,6 @@ include_directories("..\\common\\libs\\STM32Cube_F4\\Drivers\\STM32F4xx_HAL_Driv
                     "..\\common\\libs\\STM32Cube_F4\\Middlewares\\ST\\STM32_USB_Device_Library\\Core\\Inc\\"
                     "..\\common\\libs\\STM32Cube_F4\\Middlewares\\ST\\STM32_USB_Device_Library\\Class\\CDC\\Inc\\"
                     "..\\common\\"
-                    "..\\common\\_VS\\"
-                    "..\\common\\_VS\\std_includes\\"
                     "src"
                     "src\\Hardware\\HAL\\"
                     "src\\Hardware\\FatFS\\"
