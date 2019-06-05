@@ -55,7 +55,7 @@ static void ProcessButtonForHint(Key::E button);
 
 static void ResetItemsUnderButton();
 /// Возвращает true, если данная кнопка обрабатыватся в данном режиме
-static bool IsProcessed(const KeyEvent *event);
+static bool EventIsProcessedInCurrentMode(const KeyEvent *event);
 /// Время последнего нажатия кнопки. Нужно для того, чтобы периодически сохранять настройки
 static uint timeLastPressedButton = MAX_UINT;
 /// Текущая главная страница
@@ -220,28 +220,26 @@ static void SaveScreenToFlash()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Menu::Update()
 {
-    while(!BufferButtons::IsEmpty())
+    while(!BufferButtons::IsEmpty())                            // Если есть события клавиатуры
     {
-        timeLastPressedButton = TIME_MS;
+        timeLastPressedButton = TIME_MS;                        // то сохраняем время последнего нажатия, чтобы знать, когда сохранить настройки
 
-        KeyEvent event = BufferButtons::Extract();
+        KeyEvent event = BufferButtons::Extract();              // Извлекаем очередное событие
 
-        if (HINT_MODE_ENABLED)
+        if (HINT_MODE_ENABLED)                                  // Если всклюён режим подсказок
         {
-            ProcessButtonForHint(event.key);
-            continue;
+            ProcessButtonForHint(event.key);                    // то выводим подсказку для соответствующей кнопки
+            continue;                                           // и переходим к следующей кнопке
         }
 
-        if (!Menu::IsShown())
+        if (TriggerDebugMenu::Triggered(event))                 // Если включелось меню отладки
         {
-            if(event.type == TypePress::Release && TriggerDebugConsole::Update(event.key))
-            {
-                continue;
-            }
+            continue;                                           // то выходим
         }
-        if(IsProcessed(&event))
+
+        if(EventIsProcessedInCurrentMode(&event))               // Если событие обрабатывается в данном режиме
         {
-            Handlers::Process(event);
+            Handlers::Process(event);                           // То обрабатываем его
         }
     }
 
@@ -260,7 +258,7 @@ void Menu::SaveScreenToDrive()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static bool IsProcessed(const KeyEvent *event)
+static bool EventIsProcessedInCurrentMode(const KeyEvent *event)
 {
     Key::E key = event->key;
     TypePress::E type = event->type;

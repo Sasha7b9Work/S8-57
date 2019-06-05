@@ -9,11 +9,11 @@
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /// Триггер - открыватель отладочной консоли
-class TriggerDebugConsole
+class TriggerDebugMenu
 {
 public:
     /// Возвращает true, если триггер сработал - консоль открылась
-    static bool Update(Key::E key);
+    static bool Triggered(KeyEvent &event);
 
 private:
     static const int SIZE_BUFFER_FOR_BUTTONS = 10;
