@@ -197,29 +197,30 @@ void Osci::Settings::Range::LoadBoth()
 
     WriteRegisters(Pin::SPI3_CS2, 0);    // Записываем ноль, чтобы реле не потребляли энергии
 
-    DEF_STRUCT(StructRange, uint8) vals[Range::Size] =
+    //DEF__STRUCT(StructRange, uint8) vals[Range::Size] =
+    static const uint8 vals[Range::Size] =
     {
-        StructRange(BIN_U8(00000000)),  // 2mV      // -V2501
-        StructRange(BIN_U8(00000001)),  // 5mV      // -V2501
-        StructRange(BIN_U8(00000010)),  // 10mV     // -V2501
-        StructRange(BIN_U8(00000011)),  // 20mV     // -V2501
-        StructRange(BIN_U8(00000001)),  // 50mV     // -V2501
-        StructRange(BIN_U8(00000010)),  // 100mV    // -V2501
-        StructRange(BIN_U8(00000011)),  // 200mV    // -V2501
-        StructRange(BIN_U8(00000001)),  // 500mV    // -V2501
-        StructRange(BIN_U8(00000010)),  // 1V       // -V2501
-        StructRange(BIN_U8(00000011)),  // 2V       // -V2501
-        StructRange(BIN_U8(00000001)),  // 5V       // -V2501
-        StructRange(BIN_U8(00000010)),  // 10V      // -V2501
-        StructRange(BIN_U8(00000011))   // 20V      // -V2501
+        BIN_U8(00000000),  // 2mV      // -V2501
+        BIN_U8(00000001),  // 5mV      // -V2501
+        BIN_U8(00000010),  // 10mV     // -V2501
+        BIN_U8(00000011),  // 20mV     // -V2501
+        BIN_U8(00000001),  // 50mV     // -V2501
+        BIN_U8(00000010),  // 100mV    // -V2501
+        BIN_U8(00000011),  // 200mV    // -V2501
+        BIN_U8(00000001),  // 500mV    // -V2501
+        BIN_U8(00000010),  // 1V       // -V2501
+        BIN_U8(00000011),  // 2V       // -V2501
+        BIN_U8(00000001),  // 5V       // -V2501
+        BIN_U8(00000010),  // 10V      // -V2501
+        BIN_U8(00000011)   // 20V      // -V2501
     };
 
-    uint8 valueA = vals[SET_RANGE_A].val;
+    uint8 valueA = vals[SET_RANGE_A];
 
     WritePin(Pin::A1, _GET_BIT(valueA, 1));
     WritePin(Pin::A2, _GET_BIT(valueA, 0));
 
-    uint8 valueB = vals[SET_RANGE_B].val;
+    uint8 valueB = vals[SET_RANGE_B];
 
     WritePin(Pin::A3, _GET_BIT(valueB, 1));
     WritePin(Pin::A4, _GET_BIT(valueB, 0));
