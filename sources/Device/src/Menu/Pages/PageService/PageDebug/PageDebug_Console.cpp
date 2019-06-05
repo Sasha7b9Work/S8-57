@@ -1,5 +1,6 @@
 #include "defines.h"
 #include "Display/Colors.h"
+#include "Display/Console.h"
 #include "Display/Painter.h"
 #include "Menu/MenuItems.h"
 #include "Menu/Pages/Include/PageService.h"
@@ -26,7 +27,7 @@ DEF_CHOICE_2( cShow,                                                            
 DEF_GOVERNOR( gNumStrings,                                                                                                                          //--- ОТЛАДКА - КОНСОЛЬ - Число строк ---
     "Число строк",
     "",
-    CONSOLE_NUM_STRINGS, 0, 33, pageConsole, FuncActive, FuncChanged, FuncBeforeDraw
+    CONSOLE_NUM_STRINGS, 0, 33, pageConsole, FuncActive, Console::OnChangedMaxStringsInConsole, FuncBeforeDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

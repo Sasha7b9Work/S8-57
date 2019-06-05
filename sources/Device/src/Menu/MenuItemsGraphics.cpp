@@ -170,7 +170,7 @@ void Governor::DrawValue(int x, int y)
     Font::SetCurrent(Font::Type::_5);
     bool sign = (minValue < 0);
     
-    if(maxValue < 65536)
+    //if(maxValue < 65536)
     {
         Integer(maxValue).ToString(sign, 1).Draw(x + 55, y - 5, Color::WHITE);
         Integer(minValue).ToString(sign, 1).Draw(x + 55, y + 2);

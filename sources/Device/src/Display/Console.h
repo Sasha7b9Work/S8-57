@@ -2,15 +2,16 @@
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-class Console
+namespace Console
 {
-public:
-    static void Draw();
+    void Draw();
 
-    static void AddString(char *string);
+    void AddString(char *string);
 
-    static int NumberOfLines();
+    int NumberOfLines();
     /// Возвращает true, если консоль должна отображаться на экране
-    static bool IsShown();
+    bool IsShown();
+    /// Эту фнукцию надо вызвыть, когда пользователь изменяет максимальное количество строк в консоли
+    void OnChangedMaxStringsInConsole();
 };
 

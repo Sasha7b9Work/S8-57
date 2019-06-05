@@ -25,9 +25,9 @@
 #define DBG_SHOW_FLAG           (set.dbg_showFlag)
 
 
-float   GetStretchADC(Chan ch);
+float   GetStretchADC(Chan::E ch);
 
-void    SetStretchADC(Chan ch, float kStretch);
+void    SetStretchADC(Chan::E ch, float kStretch);
 
 /** @}  @}
  */
