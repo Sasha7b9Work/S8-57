@@ -48,13 +48,9 @@ public:
     static Color Channel(Chan::E ch);
     static Color Cursors(Chan::E ch);
     static Color Trig();
-    static Color ChanAccum(Chan ch);     ///< Цвет канала в режиме накопления
+    static Color ChanAccum(Chan ch);        ///< Цвет канала в режиме накопления
     static Color MenuItem(bool shade);      ///< Цвет элемента меню.
     static Color MenuTitle(bool shade);     ///< Цвет заголовка страницы. inShade == true, если страница затенена
-    static Color BorderMenu(bool shade);    ///< Цвет окантовки меню
-    static Color LightShadingText();        ///< Светлый цвет в тени.
-    static Color Contrast(Color color);     ///< Возвращает цвет, контрастный к color. Может быть белым или чёрным.
-    static Color ChanHalf(Chan::E ch);
     /// Устанавливает текущий цвет отрисовки
     void SetAsCurrent();
     static void SetCurrent(Color color);
