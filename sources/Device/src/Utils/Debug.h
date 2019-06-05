@@ -24,4 +24,8 @@ struct Debug
 
     static int line;
     static const char *file;
+    static int index;
+
+    static void *prev;
+    static void *last;
 };

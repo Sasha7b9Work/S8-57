@@ -12,6 +12,7 @@
 #include "Osci/Display/Osci_Display.h"
 #include "Osci/Display/PainterData.h"
 #include "Multimeter/Multimeter.h"
+#include "Utils/Debug.h"
 
 
 using namespace Display::Primitives;
@@ -107,6 +108,8 @@ void Display::Init()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Display::Update()
 {
+    DEBUG_POINT;
+
     uint startTime = TIME_MS;
 
     inStateDraw = true;
@@ -119,17 +122,31 @@ void Display::Update()
         Recorder::Display::Update
     };
 
+    DEBUG_POINT;
+
     HANDLER_CHOICE_AND_SAFE_RUN(pFuncVV, Device::State::CurrentMode());
+
+    DEBUG_POINT;
 
     Console::Draw();
 
+    DEBUG_POINT;
+
     funcAdditionDraw();
+
+    DEBUG_POINT;
 
     Painter::EndScene();
 
+    DEBUG_POINT;
+
     inStateDraw = false;
 
+    DEBUG_POINT;
+
     ExecuteFuncAfterUpdateOnce();
+
+    DEBUG_POINT;
 
     LOG_WRITE("%d ms", TIME_MS - startTime);
 }
