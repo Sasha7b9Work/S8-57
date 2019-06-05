@@ -245,7 +245,8 @@ static uint8 ValueForRange(Chan::E ch) // -V2506
         BIN_U8(00000010)   // -V2501  // GND
     };
 
-    DEF_STRUCT(StructRange, uint16) values[Range::Size][2] =
+    //DEF__STRUCT(StructRange, uint16) values[Range::Size][2] =
+    static const uint16 values[Range::Size][2] =
     {   //             A                    B
         { BIN_U8(00100100), BIN_U8(00100100) }, // -V2501  // 2mV
         { BIN_U8(00100100), BIN_U8(00100100) }, // -V2501  // 5mV
@@ -270,7 +271,7 @@ static uint8 ValueForRange(Chan::E ch) // -V2506
         return datas[ModeCouple::GND];
     }
 
-    return (uint8)(values[range][ch].val | datas[couple]);
+    return (uint8)(values[range][ch] | datas[couple]);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
