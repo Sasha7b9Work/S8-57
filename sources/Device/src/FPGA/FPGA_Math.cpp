@@ -504,12 +504,13 @@ static void Normalize(float *data, int)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static float MaxVoltageOnScreen(Range::E range)
 {
-    DEF_STRUCT(StructRange, float) table[Range::Size] =
+    //DEF__STRUCT(StructRange, float) table[Range::Size] =
+    static const float table[Range::Size] =
     {
         2e-3F, 5e-3F, 10e-3F, 20e-3F, 50e-3F, 100e-3F, 200e-3F, 500e-3F, 1.0F, 2.0F, 5.0F, 10.0F, 20.0F
     };
 
-    return table[range].val * 5.0F;
+    return table[range] * 5.0F;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
