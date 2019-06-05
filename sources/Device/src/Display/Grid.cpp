@@ -176,8 +176,8 @@ void Grid::DrawGridSignal(int left, int top, int width, int height)
 
         VLine line(bottom - top - 4);
 
-        line.Draw(1, top + 2);
-        line.Draw(318, top + 2);
+        line.Draw(0, top + 2);
+        line.Draw(319, top + 2);
     }
 
     float deltaX = DeltaX() * (float)width / width;
