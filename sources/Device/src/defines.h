@@ -288,13 +288,6 @@ enum StateWorkFPGA
 };
 
 
-#define DEF_STRUCT(name, type)  \
-static const struct name        \
-{                               \
-    type val;                   \
-    name(type v) : val(v) {};   \
-}
-
 #define SAFE_HANDLER(handler)                       \
     if(handler) { handler(); }                      \
     else { LOG_ERROR("Отсутствует обработчик"); }
