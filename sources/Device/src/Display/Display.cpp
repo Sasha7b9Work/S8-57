@@ -114,7 +114,7 @@ void Display::Update()
 
     inStateDraw = true;
 
-    //DEF_STRUCT(StructDraw, pFuncVV) funcs[Device::Mode::Size] =
+    //DEF__STRUCT(StructDraw, pFuncVV) funcs[Device::Mode::Size] =
     //{
     //    Osci::Display::Update,
     //    Tester::Display::Update,

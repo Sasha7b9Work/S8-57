@@ -66,7 +66,8 @@ static const float absStepTShift[TBase::Size] =
 
 /// Столько вольт содержится в одной точке сигнала по вертикали
 
-DEF_STRUCT(StructInPoints, float) voltsInPoint[Range::Size] =
+//DEF__STRUCT(StructInPoints, float) voltsInPoint[Range::Size] =
+static const float voltsInPoint[Range::Size] =
 {
     2e-3F   / 20 * Grid::Height() / (VALUE::MAX - VALUE::MIN),    // 2mV
     5e-3F   / 20 * Grid::Height() / (VALUE::MAX - VALUE::MIN),    // 5mV
@@ -177,7 +178,7 @@ void FPGA::Math::PointsRel2Voltage(const uint8 *points, int numPoints, Range::E 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 uint8 FPGA::Math::Voltage2Point(float voltage, Range::E range, uint16 rShift)
 {
-    int relValue = (int)((voltage + MaxVoltageOnScreen(range) + RShift2Abs(rShift, range)) / voltsInPoint[range].val + VALUE::MIN);
+    int relValue = (int)((voltage + MaxVoltageOnScreen(range) + RShift2Abs(rShift, range)) / voltsInPoint[range] + VALUE::MIN);
     ::Math::Limitation<int>(&relValue, 0, 255);
     return (uint8)relValue;
 }
@@ -196,7 +197,7 @@ float FPGA::Math::Point2Voltage(uint8 value, Range::E range, uint16 rShift)
 
     float maxVoltage = MaxVoltageOnScreen(range);
 
-    return delta * voltsInPoint[range].val - maxVoltage - rShiftAbs;
+    return delta * voltsInPoint[range] - maxVoltage - rShiftAbs;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -204,7 +205,7 @@ void FPGA::Math::PointsVoltage2Rel(const float *voltage, int numPoints, Range::E
 {
     float maxVoltOnScreen = MaxVoltageOnScreen(range);
     float rShiftAbs = RShift2Abs(rShift, range);
-    float voltInPixel = 1.0F / (voltsInPoint[range].val / ((VALUE::MAX - VALUE::MIN) / 200.0F));
+    float voltInPixel = 1.0F / (voltsInPoint[range] / ((VALUE::MAX - VALUE::MIN) / 200.0F));
 
     float add = maxVoltOnScreen + rShiftAbs;
 
