@@ -92,7 +92,8 @@ void FrequencyCounter::LoadSettings()
         const uint16 maskTime[3] = {0, 1, 2};
         const uint16 maskFreqClc[4] = {0, (1 << 2), (1 << 3), ((1 << 3) + (1 << 2))};
 
-        DEF_STRUCT(StructPeriod, uint16) maskPeriod[NumberPeriods::Number] =
+        //DEF__STRUCT(StructPeriod, uint16) maskPeriod[NumberPeriods::Number] =
+        static const uint16 maskPeriod[NumberPeriods::Number] =
         { //        654 - задействованные биты
             BIN_U8(00000000), //-V2501
             BIN_U8(00010000), //-V2501
@@ -104,7 +105,7 @@ void FrequencyCounter::LoadSettings()
 
         data |= maskTime[FREQ_METER_TIMECOUNTING];
         data |= maskFreqClc[FREQ_METER_FREQ_CLC];
-        data |= maskPeriod[FREQ_METER_NUM_PERIODS].val;
+        data |= maskPeriod[FREQ_METER_NUM_PERIODS];
     }
     else
     {
