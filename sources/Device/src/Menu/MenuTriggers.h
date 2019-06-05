@@ -13,7 +13,7 @@ class TriggerDebugMenu
 {
 public:
     /// Возвращает true, если триггер сработал - консоль открылась
-    static bool Triggered(KeyEvent &event);
+    static bool Triggered(const KeyEvent &event);
 
 private:
     static const int SIZE_BUFFER_FOR_BUTTONS = 10;

@@ -11,7 +11,7 @@ const Key::E TriggerDebugMenu::sampleBufferForButtons[SIZE_BUFFER_FOR_BUTTONS] =
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-bool TriggerDebugMenu::Triggered(KeyEvent &event) // -V2506
+bool TriggerDebugMenu::Triggered(const KeyEvent &event) // -V2506
 {
     if (Menu::IsShown() || (event.type != TypePress::Release))
     {
