@@ -191,7 +191,7 @@ void Governor::DrawLowPart(int x, int y, bool shade)
 {
     Color colorTextDown = Color::BLACK;
 
-    Region(Menu::Item::Value::WIDTH + 1, Menu::Item::Value::HEIGHT - 3).Fill(x + 1, y - 1, shade ? Color::MenuItem(false) : Color::MENU_FIELD);
+    Region(Menu::Item::Value::WIDTH + 1, Menu::Item::Value::HEIGHT - 3).Fill(x + 1, y - 1, Color::MenuItemField(shade));
 
     if (shade)
     {
@@ -305,6 +305,7 @@ void Choice::DrawClosed(int x, int y)
     {
         funcForDraw(x, y);
     }
+    
     DrawCommonHiPart(this, x, y, pressed, shade, false);
 }
 
@@ -525,7 +526,7 @@ void TimeControl::DrawClosed(int x, int y)
     bool shade = IsShade();
     DrawCommonHiPart(this, x, y, pressed, shade, false);
 
-    Region(Menu::Item::Value::WIDTH + 2, Menu::Item::Value::HEIGHT + 3).Fill(x + 1, y + 17, Color::MENU_FIELD);
+    Region(Menu::Item::Value::WIDTH + 2, Menu::Item::Value::HEIGHT + 3).Fill(x + 1, y + 17, Color::MenuItemField(shade));
 
     int deltaField = 10;
     int deltaSeparator = 2;

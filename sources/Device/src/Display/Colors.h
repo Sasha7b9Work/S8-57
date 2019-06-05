@@ -5,17 +5,16 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 class Color
 {
+private:
+    static Color MENU_FIELD;
+
 public:
     static Color BLACK;
     static Color WHITE;
     static Color GRID;
-    static Color DATA_A;
-    static Color DATA_B;
-    static Color MENU_FIELD;
     static Color MENU_TITLE;
     static Color MENU_TITLE_DARK;
     static Color MENU_TITLE_BRIGHT;
-    static Color MENU_ITEM;
     static Color MENU_ITEM_DARK;
     static Color MENU_ITEM_BRIGHT;
     static Color DATA_WHITE_ACCUM_A;
@@ -49,7 +48,8 @@ public:
     static Color Cursors(Chan::E ch);
     static Color Trig();
     static Color MenuItem(bool shade);          ///< ÷вет элемента меню.
-    static Color MenuTitleText(bool shade);     ///< ÷вет заголовка страницы или элемента меню
+    static Color MenuItemField(bool shade);     ///< ÷вет пункта меню с выбранным значением.
+    static Color MenuTitleText(bool shade);     ///< ÷вет заголовка страницы или элемента меню.
     /// ”станавливает текущий цвет отрисовки
     void SetAsCurrent();
     static void SetCurrent(Color color);
@@ -84,7 +84,7 @@ private:
         COLOR_MENU_TITLE = 6,
         COLOR_MENU_TITLE_DARK = 7,
         COLOR_MENU_TITLE_BRIGHT = 8,
-        COLOR_MENU_ITEM = 9,
+        _NONE = 9,
         COLOR_MENU_ITEM_DARK = 10,
         COLOR_MENU_ITEM_BRIGHT = 11,
         COLOR_DATA_WHITE_ACCUM_A = 12,   ///< »спользуетс€ как дл€ отрисовки канала на белом фоне, так и дл€ отрисовки накопленных сигналов

@@ -26,7 +26,7 @@ extern uint GlobalColors[256] =
     /* 6  */    MAKE_COLOR(31 * 8, 44 * 4, 0  * 8), // MENU_TITLE
     /* 7  */    MAKE_COLOR(0x00, 0x00, 0x40),       // MENU_TITLE_DARK
     /* 8  */    MAKE_COLOR(31 * 8, 63 * 4, 0  * 8), // MENU_TITLE_BRIGHT
-    /* 9  */    MAKE_COLOR(26 * 8, 34 * 4, 0  * 8), // MENU_ITEM
+    /* 9  */    MAKE_COLOR(26 * 8, 34 * 4, 0  * 8), // 
     /* 10 */    MAKE_COLOR(13 * 8, 17 * 4, 0  * 8), // MENU_ITEM_DARK
     /* 11 */    MAKE_COLOR(31 * 8, 51 * 4, 0  * 8), // MENU_ITEM_BRIGHT
     /* 12 */    MAKE_COLOR(0x00, 13,   0x00),       // DATA_WHITE_ACCUM_A
@@ -121,6 +121,12 @@ Color Color::MenuTitleText(bool shade)
 Color Color::MenuItem(bool shade)
 {
     return MenuTitleText(shade);
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Color Color::MenuItemField(bool shade)
+{
+    return shade ? Color::BLACK : Color::GRAY_50;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
