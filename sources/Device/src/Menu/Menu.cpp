@@ -585,7 +585,8 @@ static void DrawHintItem(int x, int y, int width)
         return;
     }
 
-    DEF_STRUCT(StructName, pString) names[Control::Type::Number] =
+    //DEF__STRUCT(StructName, pString) names[Control::Type::Number] =
+    static pString names[Control::Type::Number] =
     {
         "",                   // Item_None
         "",                   // Control::Type::Choice
@@ -603,7 +604,7 @@ static void DrawHintItem(int x, int y, int width)
 
     const int SIZE = 100;
     char title[SIZE];
-    std::snprintf(title, SIZE, "%s \"%s\"", names[Menu::itemHint->type].val, item->titleHint[0]);
+    std::snprintf(title, SIZE, "%s \"%s\"", names[Menu::itemHint->type], item->titleHint[0]);
 
     if (item->type == Control::Type::DrawButton)
     {
