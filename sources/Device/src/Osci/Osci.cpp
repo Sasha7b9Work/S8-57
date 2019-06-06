@@ -287,9 +287,23 @@ void Osci::OnChangedPoints()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-Osci::StructReadRand Osci::GetInfoForReadRand(int)
+Osci::StructReadRand Osci::GetInfoForReadRand(int Tsm)
 {
-    StructReadRand result = { 0, 0 };
+    static StructReadRand result = { 0, 0 };
+
+    if (Tsm != NULL_TSHIFT)
+    {
+        result.step = Kr[SET_TBASE];
+
+        int index = Tsm - addShift;
+
+        while (index < 0)
+        {
+            index += result.step;
+        }
+
+        result.posFirst = index;
+    }
 
     return result;
 }

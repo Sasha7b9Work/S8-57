@@ -175,16 +175,11 @@ static bool ReadDataChanenlRand(Chan::E ch, const uint8 *address, uint8 *data) /
         return false;
     }
 
-    int step = Osci::Kr[SET_TBASE];
+    Osci::StructReadRand infoRead = Osci::GetInfoForReadRand(Tsm);
 
-    int index = Tsm - Osci::addShift;
+    int step = infoRead.step;
 
-    while (index < 0)
-    {
-        index += step;
-    }
-
-    uint8 *dataRead = &dataRand[ch][index];
+    uint8 *dataRead = &dataRand[ch][infoRead.posFirst];
 
     uint8 *last = &dataRand[ch][FPGA_NUM_POINTS];
 
