@@ -120,7 +120,7 @@ DEF_PAGE_5( pChanA, // -V641 // -V1027                                          
     &cInputA,           ///< ÊÀÍÀË 1 - Âõîä
     &cCoupleA,          ///< ÊÀÍÀË 1 - Ñâÿçü
     &cBandwidthA,       ///< ÊÀÍÀË 1 - Ïîëîñà
-    &cDividerA,
+    &cDividerA,         ///< ÊÀÍÀË 1 - Äåëèòåëü
     &bBalanceA,         ///< ÊÀÍÀË 1 - Áàëàíñèðîâêà
     Page::Name::ChannelA, nullptr, FuncActive, FuncPressPage, FuncDrawPage, FuncRegSetPage
 )

@@ -108,8 +108,10 @@ static bool HandlerKey_FFT_Cursors(KeyEvent event)
 DEF_PAGE_1( pppFFT_Cursors, // -V641 // -V1027                                                                                                           //--- ФУНКЦИЯ - СПЕКТР - КУРСОРЫ ---
     "КУРСОРЫ",
     "Включает курсоры для измерения параметров спектра",
-    &bFFT_Cursors_Source,   ///< СЕРВИС - СПЕКТР - КУРСОРЫ - Источник
-    Page::Name::SB_Service_FFT_Cursors, &ppFFT, IsActive_FFT_Cursors, FuncPressPage, FuncDrawPage, HandlerKey_FFT_Cursors
+    &bFFT_Cursors_Source,                       ///< СЕРВИС - СПЕКТР - КУРСОРЫ - Источник
+    Page::Name::SB_Service_FFT_Cursors, 
+    &ppFFT,                                     ///< СЕРВИС - СПЕКТР
+    IsActive_FFT_Cursors, FuncPressPage, FuncDrawPage, HandlerKey_FFT_Cursors
 )
 
 

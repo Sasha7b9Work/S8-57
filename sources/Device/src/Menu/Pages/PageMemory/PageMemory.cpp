@@ -456,13 +456,15 @@ DEF_CHOICE_2( cDrive_Autoconnect,                                               
 DEF_PAGE_6( ppDrive,  //-V641 //-V1027                                                                                                                            //--- ПАМЯТЬ - ВНЕШН ЗУ ---
     "ВНЕШН ЗУ",
     "Работа с внешним запоминающим устройством.",
-    &pppDrive_Manager,       ///< ПАМЯТЬ - ВНЕШН ЗУ - КАТАЛОГ
-    &cDrive_Name,            ///< ПАМЯТЬ - ВНЕШН ЗУ - Имя файла
-    &pppDrive_Mask,          ///< Память - ВНЕШН ЗУ - МАСКА
-    &cDrive_SaveAs,          ///< ПАМЯТЬ - ВНЕШН ЗУ - Сохранять как
-    &cDrive_ModeBtnMemory,   ///< ПАМЯТЬ - ВНЕШН ЗУ - Реж кн ПАМЯТЬ
-    &cDrive_Autoconnect,     ///< ПАМЯТЬ - ВНЕШН ЗУ - Автоподключение
-    Page::Name::Memory_Drive, &pageMemory, FuncActive, FuncPressPage, FuncDrawPage, FuncRegSetPage
+    &pppDrive_Manager,      ///< ПАМЯТЬ - ВНЕШН ЗУ - КАТАЛОГ
+    &cDrive_Name,           ///< ПАМЯТЬ - ВНЕШН ЗУ - Имя файла
+    &pppDrive_Mask,         ///< Память - ВНЕШН ЗУ - МАСКА
+    &cDrive_SaveAs,         ///< ПАМЯТЬ - ВНЕШН ЗУ - Сохранять как
+    &cDrive_ModeBtnMemory,  ///< ПАМЯТЬ - ВНЕШН ЗУ - Реж кн ПАМЯТЬ
+    &cDrive_Autoconnect,    ///< ПАМЯТЬ - ВНЕШН ЗУ - Автоподключение
+    Page::Name::Memory_Drive,
+    &pageMemory,            ///< ПАМЯТЬ
+    FuncActive, FuncPressPage, FuncDrawPage, FuncRegSetPage
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

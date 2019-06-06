@@ -841,7 +841,14 @@ EXCLUDE                = ../../sources/Panel/src/libs \
                          ../../sources/Device/src/libs \
                          ../../sources/Panel/src/libs \
                          ../../sources/common \
-                         ../../sources/OSC-Open/src/libs
+                         ../../sources/OSC-Open/src/libs \
+                         ../../sources/fonts \
+                         ../../sources/scripts \
+                         ../../sources/scripts \
+                         ../../sources/Device/src/Hardware/USBH \
+                         ../../sources/DeviceLoader/src/libs/USBH \
+                         ../../sources/Device/src/Hardware/CMSIS \
+                         ../../sources/DeviceLoader/src/libs/CMSIS
 
 # The EXCLUDE_SYMLINKS tag can be used to select whether or not files or
 # directories that are symbolic links (a Unix file system feature) are excluded
