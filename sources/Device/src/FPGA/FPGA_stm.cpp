@@ -179,15 +179,14 @@ static void ReadDataChanenlRand(Chan::E ch, const uint8 *address, uint8 *data) /
 
     int index = Tsm - Osci::addShift;
 
-    uint8 *dataRead = &dataRand[ch][index];
-
     while (index < 0)
     {
         volatile uint8 d = *address;
         d = d;
         index += step;
-        dataRead += step;
     }
+
+    uint8 *dataRead = &dataRand[ch][index];
 
     uint8 *last = &dataRand[ch][FPGA_NUM_POINTS];
 

@@ -34,7 +34,7 @@ namespace Osci
     static void UpdateFPGA();
 
     int addShift = 0;
-                   //  2нс 5нс 10нс 20нс 50нс
+                              //  2нс 5нс 10нс 20нс 50нс
     const int Kr[TBase::Size] = { 50, 20, 10,  5,   2 };
 }
 
