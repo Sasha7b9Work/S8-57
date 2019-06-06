@@ -33,7 +33,7 @@ namespace FPGA
 
     uint16 ReadLastRecord(Chan::E ch);
 
-    void ReadDataChanenl(Chan::E ch, uint8 data[MAX_NUM_POINTS]);
+    bool ReadDataChanenl(Chan::E ch, uint8 data[MAX_NUM_POINTS]);
 
     void ClearDataRand();
     /// Время подачи старта

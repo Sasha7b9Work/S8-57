@@ -248,8 +248,17 @@ void FPGA::ReadData()
 {
     Osci::Data *data = Osci::Storage::PrepareForNewData();
 
-    ReadDataChanenl(Chan::A, DataAccessor::DataA(data));
-    ReadDataChanenl(Chan::B, DataAccessor::DataB(data));
+    if (ReadDataChanenl(Chan::A, DataAccessor::DataA(data)))
+    {
+        if (ReadDataChanenl(Chan::B, DataAccessor::DataB(data)))
+        {
+        }
+        else
+        {
+            return;
+        }
+    }
+    
 
     if (ENUM_AVE != Display::ENumAverage::_1)               // Если включено усреднение
     {

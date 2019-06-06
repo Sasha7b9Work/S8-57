@@ -165,14 +165,14 @@ static int CalculateShift()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void ReadDataChanenlRand(Chan::E ch, const uint8 *address, uint8 *data) // -V2506
+static bool ReadDataChanenlRand(Chan::E ch, const uint8 *address, uint8 *data) // -V2506
 {
     int Tsm = CalculateShift();
 
     if (Tsm == NULL_TSHIFT)
     {
         std::memcpy(data, &dataRand[ch][0], FPGA_NUM_POINTS);
-        return;
+        return false;
     }
 
     int step = Osci::Kr[SET_TBASE];
@@ -196,10 +196,12 @@ static void ReadDataChanenlRand(Chan::E ch, const uint8 *address, uint8 *data) /
     }
 
     std::memcpy(data, &dataRand[ch][0], FPGA_NUM_POINTS);
+
+    return true;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void FPGA::ReadDataChanenl(Chan::E ch, uint8 data[FPGA::MAX_NUM_POINTS])
+bool FPGA::ReadDataChanenl(Chan::E ch, uint8 data[FPGA::MAX_NUM_POINTS])
 {
     uint numPoints = FPGA_NUM_POINTS;
 
@@ -224,7 +226,7 @@ void FPGA::ReadDataChanenl(Chan::E ch, uint8 data[FPGA::MAX_NUM_POINTS])
 
     if (Osci::InModeRandomizer())
     {
-        ReadDataChanenlRand(ch, addr1, data);
+        return ReadDataChanenlRand(ch, addr1, data);
     }
     else
     {
@@ -252,4 +254,6 @@ void FPGA::ReadDataChanenl(Chan::E ch, uint8 data[FPGA::MAX_NUM_POINTS])
             }
         }
     }
+
+    return true;
 }
