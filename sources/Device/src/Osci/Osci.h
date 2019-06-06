@@ -40,5 +40,5 @@ namespace Osci
     /// Возвращает данные, необходимые для чтения даннхы в режмиме рандомизатора.
     /// Если Tsm == 0, то структура будет использоваться не для чтения данных, а для правильного усредения.
     /// В этом случае
-    StructReadRand GetInfoForReadRand(int Tsm = NULL_TSHIFT);
+    StructReadRand GetInfoForReadRand(int Tsm = NULL_TSHIFT, const uint8 *address = nullptr);
 };

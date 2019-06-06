@@ -125,8 +125,6 @@ static void Osci::UpdateFPGA()
 {
     int number = (Osci::InModeRandomizer()) ? Kr[SET_TBASE] : 1;
 
-    number = 1;
-
     for (int i = 0; i < number; i++)
     {
         FPGA::HAL::ReadFlag();
@@ -287,7 +285,7 @@ void Osci::OnChangedPoints()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-Osci::StructReadRand Osci::GetInfoForReadRand(int Tsm)
+Osci::StructReadRand Osci::GetInfoForReadRand(int Tsm, const uint8 *address)
 {
     static StructReadRand result = { 0, 0 };
 
@@ -300,6 +298,8 @@ Osci::StructReadRand Osci::GetInfoForReadRand(int Tsm)
         while (index < 0)
         {
             index += result.step;
+            volatile uint8 d = *address;
+            d = d;
         }
 
         result.posFirst = index;

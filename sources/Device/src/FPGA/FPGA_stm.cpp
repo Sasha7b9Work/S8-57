@@ -175,7 +175,7 @@ static bool ReadDataChanenlRand(Chan::E ch, const uint8 *address, uint8 *data) /
         return false;
     }
 
-    Osci::StructReadRand infoRead = Osci::GetInfoForReadRand(Tsm);
+    Osci::StructReadRand infoRead = Osci::GetInfoForReadRand(Tsm, address);
 
     int step = infoRead.step;
 

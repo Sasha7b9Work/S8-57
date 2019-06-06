@@ -221,7 +221,18 @@ static void AverageData(Chan::E ch, const uint8 *dataNew, int size)
 
     uint16 numAve = (uint16)ENUM_AVE;
 
-    for (int i = 0; i < size; i++)
+    int index = 0;
+    int step = 1;
+
+    if (Osci::InModeRandomizer())
+    {
+        Osci::StructReadRand str = Osci::GetInfoForReadRand();
+
+        index = str.posFirst;
+        step = str.step;
+    }
+
+    for (int i = index; i < size; i += step)
     {
         av[i] = (uint16)(av[i] - (av[i] >> numAve));
 
@@ -229,7 +240,7 @@ static void AverageData(Chan::E ch, const uint8 *dataNew, int size)
 
         *_new = (uint8)(av[i] >> numAve);
 
-        _new++;
+        _new += step;
     }
 }
 
