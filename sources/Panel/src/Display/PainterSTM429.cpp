@@ -9,6 +9,8 @@
 #include <string.h>
 #include <cstdlib>
 
+#include "Painter_common.h"
+
 
 using namespace Transceiver;
 

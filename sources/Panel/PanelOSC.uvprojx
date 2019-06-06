@@ -1316,6 +1316,11 @@
               <FileType>8</FileType>
               <FilePath>.\src\Display\Text_429.cpp</FilePath>
             </File>
+            <File>
+              <FileName>Painter_common.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Display\Painter_common.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
