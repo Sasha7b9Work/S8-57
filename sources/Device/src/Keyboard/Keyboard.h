@@ -90,6 +90,7 @@ struct KeyEvent
     
     bool IsPress() const { return type == TypePress::Press; };
     bool IsRepeat() const { return type == TypePress::Repeat; };
+    bool IsLong() const { return type == TypePress::Long; }
 };
 
 
