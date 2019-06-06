@@ -95,10 +95,16 @@ bool Console::IsShown()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Console::OnChangedMaxStringsInConsole()
 {
-    if(CONSOLE_NUM_STRINGS < prevMaxStrinsInConsole)
+    /// \todo Здесь, видимо, не совсем корректное поведение в случае, когда реальных строк меньше, чем максимально допустимое их количество
+
+    int delta = prevMaxStrinsInConsole - CONSOLE_NUM_STRINGS;
+
+    for (int i = 0; i < delta; i++)
     {
         DeleteFirstString();
     }
 
     prevMaxStrinsInConsole = CONSOLE_NUM_STRINGS;
+
+
 }
