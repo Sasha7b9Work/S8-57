@@ -28,66 +28,34 @@ static bool needRedraw = false;
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void Osci::Display::Update()
 {
-    DEBUG_POINT;
-
     if (needRedraw)
     {
-        DEBUG_POINT;
-
         Painter::BeginScene(Color::BACK);
-
-        DEBUG_POINT;
 
         Grid::Draw();
 
-        DEBUG_POINT;
-
         needRedraw = false;
 
-        DEBUG_POINT;
-
         Accumulator::Reset();
-
-        DEBUG_POINT;
     }
 
-    DEBUG_POINT;
-
     PainterData::DrawData();
-
-    DEBUG_POINT;
     
     Rectangle(Grid::Width(), Grid::Height()).Draw(Grid::Left(), Grid::Top(), Color::FILL);
-
-    DEBUG_POINT;
     
     HiPart::Draw();
-
-    DEBUG_POINT;
     
     RShift::DrawBoth();
 
-    DEBUG_POINT;
-    
     DrawCursorTrigLevel();
-
-    DEBUG_POINT;
     
     Osci::Measurements::Cursors::Cursor::Draw();
 
-    DEBUG_POINT;
-    
     BottomPart::Draw(273, Grid::Bottom() + 1);
-
-    DEBUG_POINT;
     
     FrequencyCounter::Draw();
 
-    DEBUG_POINT;
-    
     Menu::Draw();
-
-    DEBUG_POINT;
     
     Measurements::Table::Draw();
 }

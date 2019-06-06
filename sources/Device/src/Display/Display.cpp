@@ -108,19 +108,7 @@ void Display::Init()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Display::Update()
 {
-    DEBUG_POINT;
-
-    uint startTime = TIME_MS;
-
     inStateDraw = true;
-
-    //DEF__STRUCT(StructDraw, pFuncVV) funcs[Device::Mode::Size] =
-    //{
-    //    Osci::Display::Update,
-    //    Tester::Display::Update,
-    //    Multimeter::Display::Update,
-    //    Recorder::Display::Update
-    //};
 
     static const pFuncVV funcs[Device::Mode::Size] =
     {
@@ -132,35 +120,15 @@ void Display::Update()
 
     funcs[Device::State::CurrentMode()]();
 
-    DEBUG_POINT;
-
-    // HANDLER_CHOICE_AND_SAFE_RUN(pFuncVV, Device::State::CurrentMode());
-
-
-
-    DEBUG_POINT;
-
     Console::Draw();
-
-    DEBUG_POINT;
 
     funcAdditionDraw();
 
-    DEBUG_POINT;
-
     Painter::EndScene();
-
-    DEBUG_POINT;
 
     inStateDraw = false;
 
-    DEBUG_POINT;
-
     ExecuteFuncAfterUpdateOnce();
-
-    DEBUG_POINT;
-
-    LOG_WRITE("%d ms", TIME_MS - startTime);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

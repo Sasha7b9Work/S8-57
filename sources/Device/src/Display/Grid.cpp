@@ -140,23 +140,15 @@ void Grid::Draw()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void Grid::DrawOsci()
 {
-    DEBUG_POINT;
-
     if (Display::IsSeparate())
     {
-        DEBUG_POINT;
-
         DrawGridSignal(Left(), Top(), Width(), Height() / 2);
 
-        DEBUG_POINT;
-        
         if (FFT_ENABLED)
         {
             DrawGridSpectrum();
         }
 
-        DEBUG_POINT;
-        
         //if (FUNC_MODE_DRAW_IS_ENABLED)
         //{
         //    DrawGridSignal(Left(), Top() + Height() / 2, Width(), Height() / 2);
@@ -166,11 +158,7 @@ static void Grid::DrawOsci()
     }
     else
     {
-        DEBUG_POINT;
-
         DrawGridSignal(Left(), Top(), Width(), Height());
-
-        DEBUG_POINT;
     }
 }
 
@@ -179,8 +167,6 @@ void Grid::DrawGridSignal(int left, int top, int width, int height)
 {
     int right = left + width;
     int bottom = top + height;
-
-    DEBUG_POINT;
 
     Color::FILL.SetAsCurrent();
 
@@ -203,11 +189,7 @@ void Grid::DrawGridSignal(int left, int top, int width, int height)
     float centerX = (float)(left + width / 2);
     float centerY = (float)(top + height / 2);
 
-    DEBUG_POINT;
-
     Color::GRID.SetAsCurrent();
-
-    DEBUG_POINT;
 
     if (TYPE_GRID_1)
     {
@@ -225,8 +207,6 @@ void Grid::DrawGridSignal(int left, int top, int width, int height)
     {
         // для других типов сетки ничего делать не нужно
     }
-
-    DEBUG_POINT;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -409,8 +389,6 @@ static int Grid::DeltaHforLineGrid()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void Grid::DrawTester()
 {
-    DEBUG_POINT;
-
     Color::FILL.SetAsCurrent();
 
     Rectangle(Display::WIDTH - 1, Display::HEIGHT - 1).Draw(0, 0);
@@ -475,8 +453,6 @@ static void Grid::DrawTester()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Grid::DrawRecorder()
 {
-    DEBUG_POINT;
-
     Color::GRAY_10.SetAsCurrent();
 
     VLine vLine(Display::HEIGHT - 1);

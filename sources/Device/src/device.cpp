@@ -112,43 +112,23 @@ void Device::Update()
 {
     START_MULTI_MEASUREMENT();
 
-    DEBUG_POINT;
-
     Display::Update();
-
-    DEBUG_POINT;
 
     Osci::Update();
 
-    DEBUG_POINT;
-
     Menu::SaveSettings();
-
-    DEBUG_POINT;
 
     Recorder::Update();
 
-    DEBUG_POINT;
-
     Tester::Update();
-
-    DEBUG_POINT;
 
     Multimeter::Update();
 
-    DEBUG_POINT;
-
     Menu::Update();
-
-    DEBUG_POINT;
 
     FDrive::Update();
 
-    DEBUG_POINT;
-
     while (Transceiver::Update()) {};
-
-    DEBUG_POINT;
     
     Decoder::Update();
 }
