@@ -255,6 +255,10 @@ void Control::Open(bool open)
 {
     Page *parent = (Page *)keeper;
     parent->SetPosActItem(open ? (parent->PosCurrentItem() | 0x80) : (parent->PosCurrentItem() & 0x7f));
+    if(!open)
+    {
+        SetCurrent(false);
+    }
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

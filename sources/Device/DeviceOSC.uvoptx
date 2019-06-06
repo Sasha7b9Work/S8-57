@@ -182,7 +182,7 @@
           <BreakIfRCount>1</BreakIfRCount>
           <Filename>.\src\Menu\Menu.cpp</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\\src/Menu/Menu.cpp\231</Expression>
+          <Expression>\\S8_57\src/Menu/Menu.cpp\231</Expression>
         </Bp>
       </Breakpoint>
       <WatchWindow1>
