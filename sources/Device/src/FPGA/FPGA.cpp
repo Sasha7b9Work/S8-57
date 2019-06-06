@@ -211,6 +211,21 @@ void FPGA::ClearDataRand()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void AverageData(Chan::E ch, const uint8 *dataNew, int size)
 {
+    /*
+        ¬ режиме рандомизатора в усреднении надо использовать только те данные, которы считаны. Ќельз€ брать данные дл€ усреднени€ из предыдущего сохранЄнного сигнала.
+        ƒл€ этого нужно завести битовый массив, в котором отмечать те точки, которые считаны в данной итерации.
+    */
+
+
+    static const int SIZE = 7.5 * 1024;
+
+    static uint8 buffer[SIZE] = {};
+
+    for (int i = 0; i < SIZE; i++)
+    {
+        buffer[i] = (uint8)i;
+    }
+
     uint8 *_new = (uint8 *)dataNew;
     uint16 *av = AVE_DATA(ch);
 
@@ -252,7 +267,7 @@ void FPGA::ReadData()
                 {
                     AverageData(Chan::A, last->DataA(), setLast->SizeChannel());
                 }
-                if (ENABLED_B(setPrev))
+                if (ENABLED_B(setLast))
                 {
                     AverageData(Chan::B, last->DataB(), setLast->SizeChannel());
                 }

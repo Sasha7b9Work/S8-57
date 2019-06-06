@@ -285,3 +285,11 @@ void Osci::OnChangedPoints()
     FPGA::Reset();
     Osci::Storage::Clear();
 }
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Osci::StructReadRand Osci::GetInfoForReadRand(int)
+{
+    StructReadRand result = { 0, 0 };
+
+    return result;
+}

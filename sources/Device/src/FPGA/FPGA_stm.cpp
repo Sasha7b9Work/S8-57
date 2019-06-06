@@ -181,8 +181,6 @@ static void ReadDataChanenlRand(Chan::E ch, const uint8 *address, uint8 *data) /
 
     while (index < 0)
     {
-        volatile uint8 d = *address;
-        d = d;
         index += step;
     }
 
