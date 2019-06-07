@@ -356,9 +356,6 @@ void Page::Draw(int x, int y, bool opened)
 {
     if(opened)
     {
-        DrawTitle(x, y - Menu::Title::HEIGHT);
-
-        DrawItems(x, y);
         if (CurrentItemIsOpened())
         {
             int8 posCurItem = PosCurrentItem();
@@ -393,6 +390,12 @@ void Page::Draw(int x, int y, bool opened)
             {
                 // остальные контролы не обрабатываем
             }
+        }
+        else
+        {
+            DrawTitle(x, y - Menu::Title::HEIGHT);
+
+            DrawItems(x, y);
         }
 
         funcOnDraw();
