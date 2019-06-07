@@ -15,6 +15,7 @@
 #include "Recorder/Recorder.h"
 #include "Osci/Osci_Storage.h"
 #include "Data/Reader.h"
+#include "Osci/Osci_Averager.h"
 
 
 using namespace HAL::ADDRESSES::FPGA;
@@ -209,42 +210,6 @@ void FPGA::ClearDataRand()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void AverageData(Chan::E ch, const uint8 *dataNew, int size)
-{
-    /*
-        ¬ режиме рандомизатора в усреднении надо использовать только те данные, которы считаны. Ќельз€ брать данные дл€ усреднени€ из предыдущего сохранЄнного сигнала.
-        ƒл€ этого нужно завести битовый массив, в котором отмечать те точки, которые считаны в данной итерации.
-    */
-
-    uint16 numAve = (uint16)ENUM_AVE;
-
-    int index = 0;
-    int step = 1;
-
-    if (Osci::InModeRandomizer())
-    {
-        Osci::StructReadRand str = Osci::GetInfoForReadRand();
-
-        index = str.posFirst;
-        step = str.step;
-    }
-
-    uint8 *_new = (uint8 *)dataNew + index;
-    uint16 *av = AVE_DATA(ch);
-
-    for (int i = index; i < size; i += step)
-    {
-        av[i] = (uint16)(av[i] - (av[i] >> numAve));
-
-        av[i] += *_new;
-
-        *_new = (uint8)(av[i] >> numAve);
-
-        _new += step;
-    }
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void FPGA::ReadData()
 {
     Osci::Data *data = Osci::Storage::PrepareForNewData();
@@ -259,7 +224,6 @@ void FPGA::ReadData()
             return;
         }
     }
-    
 
     if (ENUM_AVE != Display::ENumAverage::_1)               // ≈сли включено усреднение
     {
@@ -275,11 +239,11 @@ void FPGA::ReadData()
             {
                 if (ENABLED_A(setLast))
                 {
-                    AverageData(Chan::A, last->DataA(), setLast->SizeChannel());
+                    Osci::Averager::Process(Chan::A, last->DataA(), setLast->SizeChannel());
                 }
                 if (ENABLED_B(setLast))
                 {
-                    AverageData(Chan::B, last->DataB(), setLast->SizeChannel());
+                    Osci::Averager::Process(Chan::B, last->DataB(), setLast->SizeChannel());
                 }
             }
         }

@@ -7,6 +7,7 @@
 #include "Settings/Settings.h"
 
 #include "Osci/Osci.h"
+#include "Osci/Osci_Averager.h"
 
 
 using namespace Osci::Settings;
@@ -120,6 +121,11 @@ DEF_CHOICE_4( cType, // -V206                                                   
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+static void OnChange_AverageNum(bool)
+{
+    Osci::Averager::Prepare();
+}
+
 DEF_CHOICE_9(cAverage_Num,                                                                                                                        //--- ДИСПЛЕЙ - УСРЕДНЕНИЕ - Количество ---
     "Усреднение",
     "Задаёт количество последних измерений, по которым производится усреднение.",
@@ -132,7 +138,7 @@ DEF_CHOICE_9(cAverage_Num,                                                      
     "64",
     "128",
     "256",
-    ENUM_AVE, pageDisplay, FuncActive, Choice::EmptyChange, Choice::EmptyDraw
+    ENUM_AVE, pageDisplay, FuncActive, OnChange_AverageNum, Choice::EmptyDraw
 )
 
 

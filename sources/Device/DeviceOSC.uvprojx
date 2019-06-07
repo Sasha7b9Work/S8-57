@@ -1490,6 +1490,16 @@
               <FileType>5</FileType>
               <FilePath>.\src\Osci\Osci_Storage.h</FilePath>
             </File>
+            <File>
+              <FileName>Osci_Averager.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Osci\Osci_Averager.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Osci_Averager.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Osci\Osci_Averager.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
