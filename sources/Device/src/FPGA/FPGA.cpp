@@ -216,9 +216,6 @@ static void AverageData(Chan::E ch, const uint8 *dataNew, int size)
         Для этого нужно завести битовый массив, в котором отмечать те точки, которые считаны в данной итерации.
     */
 
-    uint8 *_new = (uint8 *)dataNew;
-    uint16 *av = AVE_DATA(ch);
-
     uint16 numAve = (uint16)ENUM_AVE;
 
     int index = 0;
@@ -231,6 +228,9 @@ static void AverageData(Chan::E ch, const uint8 *dataNew, int size)
         index = str.posFirst;
         step = str.step;
     }
+
+    uint8 *_new = (uint8 *)dataNew + index;
+    uint16 *av = AVE_DATA(ch);
 
     for (int i = index; i < size; i += step)
     {
