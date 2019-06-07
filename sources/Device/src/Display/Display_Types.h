@@ -39,6 +39,7 @@
 #define MODE_AVE                    (set.disp_modeAveraging)
 #define ENUM_AVE                    (set.disp_ENumAverage)
 #define NUM_AVE                     (1 << (int)ENUM_AVE)
+#define NUM_AVE_MAX                 256
 #define IN_AVERAGING_MODE           (ENUM_AVE > Display::ENumAverage::_1 && (!IN_P2P_MODE))
 
 #define TIME_MESSAGES               (set.disp_timeMessages)

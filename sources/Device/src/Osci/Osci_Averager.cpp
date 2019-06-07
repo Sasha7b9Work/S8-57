@@ -9,9 +9,8 @@
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/// Если 1, нет предварительных данных для усреднения - ими должны стать следующие данные
-/// бит 0 - канал 1, бит 1 - канал 2
-static uint8 isEmpty = 0xff;
+/// Здесь хранится количество сигналов для каждого из каналов, уже поучавствовавших в усреднении
+static uint16 numSignals[2] = { 0, 0 };
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -21,29 +20,6 @@ void Osci::Averager::Process(Chan::E ch, const uint8 *dataNew, int size)
         В режиме рандомизатора в усреднении надо использовать только те данные, которы считаны. Нельзя брать данные для усреднения из предыдущего сохранённого сигнала.
         Для этого нужно завести битовый массив, в котором отмечать те точки, которые считаны в данной итерации.
     */
-
-    if ((ch == Chan::A) && (isEmpty & 0x01))
-    {
-        isEmpty &= ~0x01;            // Обнуляем бит 0 - канал 1
-
-        std::memcpy(AVE_DATA(ch), dataNew, (uint)size);
-
-        LOG_WRITE("Обнуляю 1");
-
-        return;
-    }
-
-    if ((ch == Chan::A) && (isEmpty & 0x02))
-    {
-        isEmpty &= ~0x02;           // Обнуляем бит 1 - канал 2
-
-        std::memcpy(AVE_DATA(ch), dataNew, (uint)size);
-
-        LOG_WRITE("Обнуляю 2");
-
-        return;
-    }
-
 
     uint16 numAve = (uint16)ENUM_AVE;
 
@@ -61,20 +37,44 @@ void Osci::Averager::Process(Chan::E ch, const uint8 *dataNew, int size)
     uint8 *_new = (uint8 *)dataNew + index;
     uint16 *av = AVE_DATA(ch);
 
-    for (int i = index; i < size; i += step)
+    if (numSignals[ch] <= NUM_AVE)
     {
-        av[i] = (uint16)(av[i] - (av[i] >> numAve));
+        if (numSignals[ch] == 0)
+        {
+            std::memcpy(AVE_DATA(ch), _new, (uint)size);
+        }
 
-        av[i] += *_new;
+        for (int i = index; i < size; i += step)
+        {
+            av[i] = (uint16)(av[i] - (av[i] >> numAve));
 
-        *_new = (uint8)(av[i] >> numAve);
+            av[i] += *_new;
 
-        _new += step;
+            _new += step;
+        }
+    }
+    else
+    {
+        for (int i = index; i < size; i += step)
+        {
+            av[i] = (uint16)(av[i] - (av[i] >> numAve));
+
+            av[i] += *_new;
+
+            *_new = (uint8)(av[i] >> numAve);
+
+            _new += step;
+        }
+    }
+
+    if (numSignals[ch] < NUM_AVE_MAX + 10)
+    {
+        numSignals[ch]++;
     }
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Osci::Averager::Prepare()
 {
-    isEmpty = 0xff;
+    numSignals[0] = numSignals[1] = 0;
 }
