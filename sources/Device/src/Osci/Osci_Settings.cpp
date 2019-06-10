@@ -52,20 +52,27 @@ void Osci::Settings::LoadHoldfOff()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Osci::Settings::TBase::Change(int delta)
 {
+    TBase::E old = SET_TBASE;
+
     if (delta > 0)
     {
         ::Math::LimitationIncrease<uint8>((uint8 *)(&SET_TBASE), (uint8)(TBase::Size - 1));
     }
     else
     {
-        if (SET_PEAKDET_EN &&                               // Если вклюён режим пикового детектора
-            SET_TBASE == TBase::MIN_PEAK_DET)               // и установлен масштаб по времени, соответствующий минмальному в режиме пикового детектора :
+        if (SET_PEAKDET_EN &&                                   // Если вклюён режим пикового детектора
+            SET_TBASE == TBase::MIN_PEAK_DET)                   // и установлен масштаб по времени, соответствующий минмальному в режиме пикового детектора :
         {
-            ::Display::ShowWarning(Warning::EnabledPeakDet);  // выводим сообщение об этом
-            return;                                         // и выходим
+            ::Display::ShowWarning(Warning::EnabledPeakDet);    // выводим сообщение об этом
+            return;                                             // и выходим
         }
 
         ::Math::LimitationDecrease<uint8>((uint8 *)(&SET_TBASE), 0);
+    }
+
+    if (old == SET_TBASE)
+    {
+        return;
     }
 
     Load();

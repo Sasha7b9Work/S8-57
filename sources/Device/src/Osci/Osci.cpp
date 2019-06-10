@@ -124,11 +124,11 @@ void Osci::Update()
 static void Osci::UpdateFPGA()
 {
     int number = (Osci::InModeRandomizer()) ? Kr[SET_TBASE] : 1;
-    
+
     for (int i = 0; i < number; i++)
     {
         FPGA::HAL::ReadFlag();
-
+    
         if (FPGA::HAL::GetFlag::PRED() && !givingStart)
         {
             if (!Osci::InModeRandomizer() && START_MODE_IS_AUTO && FPGA::HAL::GetFlag::HOLD_OFF())
@@ -141,19 +141,20 @@ static void Osci::UpdateFPGA()
                 Trig::pulse = false;
             }
         }
-
+    
         if (FPGA::HAL::GetFlag::DATA_READY())
         {
             if (CanReadData())
             {
                 Timer::PauseOnTicks(5 * 90 * 20);
-
+    
                 ReadData();
-
+    
                 if (START_MODE_IS_SINGLE)
                 {
                     OnPressStart();
                     Trig::pulse = false;
+                    break;
                 }
                 else
                 {
