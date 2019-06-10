@@ -24,7 +24,6 @@ using namespace Display::Primitives;
 using namespace Osci::Settings;
 
 extern const PageBase pService;
-extern const PageBase ppCalibrator;
 extern const PageBase ppFunction;
 extern const PageBase ppSound;
 extern const PageBase ppRTC;
@@ -58,58 +57,6 @@ DEF_BUTTON( bAutoSearch,                                                        
     "Поиск сигн",
     "Устанавливает оптимальные установки осциллографа для сигнала в канале 1",
     pService, FuncActive, OnPress_AutoSearch, Button::EmptyDraw
-)
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void OnChanged_Calibrator_Calibrator(bool)
-{
-    FPGA::Settings::LoadCalibratorMode();
-}
-
-DEF_CHOICE_2( cCalibrator_Calibrator, // -V206                                                                                                     //--- СЕРВИС - КАЛИБРАТОР - Калибратор ---
-    "Калибратор",
-    "Режим работы калибратора"
-    ,
-    "Перем",
-    "+4V",
-    CALIBRATOR_MODE, ppCalibrator, FuncActive, OnChanged_Calibrator_Calibrator, Choice::EmptyDraw
-)
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static bool IsActive_Calibrator_Calibrate()
-{
-    //return !(SET_CALIBR_MODE_A == CalibrationMode::Disable && CALIBR_MODE_B == CalibrationMode::Disable);
-    return true;
-}
-
-static void OnPress_Calibrator_Calibrate()
-{
-    Display::FuncOnWaitStart("Калибровка канала 1", false);
-
-    Timer::PauseOnTime(5000);
-
-    Display::FuncOnWaitStop();
-
-    Display::FuncOnWaitStart("Калибровка канала 2", false);
-
-    Timer::PauseOnTime(5000);
-
-    Display::FuncOnWaitStop();
-}
-
-DEF_BUTTON( bCalibrator_Calibrate,                                                                                                                //--- СЕРВИС - КАЛИБРАТОР - Калибровать ---
-    "Калибровать",
-    "Запуск процедуры калибровки",
-    ppCalibrator, IsActive_Calibrator_Calibrate, OnPress_Calibrator_Calibrate, Button::EmptyDraw
-)
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-DEF_PAGE_2( ppCalibrator, // -V641 // -V1027                                                                                                                    //--- СЕРВИС - КАЛИБРАТОР ---
-    "КАЛИБРОВКА",
-    "Управлением калибратором и калибровка осциллографа",
-    &cCalibrator_Calibrator,     ///< СЕРВИС - КАЛИБРАТОР - Калибратор
-    &bCalibrator_Calibrate,      ///< СЕРВИС - КАЛИБРАТОР - Калибровать
-    Page::Name::Service_Calibrator, &pService, FuncActive, FuncPressPage, FuncDrawPage, FuncRegSetPage
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -507,8 +454,8 @@ DEF_PAGE_7( pService, // -V641 // -V1027                                        
     "Дополнительные настройки, калибровка, поиск сигнала, математические функции",
     &bResetSettings,                        ///< СЕРВИС - Сброс настроек
     //&bAutoSearch,                         ///< СЕРВИС - Поиск сигнала
-    &ppCalibrator,
-    //PageService::PageCalibrate::pointer,    ///< СЕРВИС - КАЛИБРОВКА
+    //&ppCalibrator,
+    PageService::PageCalibrate::pointer,    ///< СЕРВИС - КАЛИБРОВКА
     &ppFunction,                            ///< СЕРВИС - ФУНКЦИЯ
     &ppSound,                               ///< СЕРВИС - ЗВУК
     &ppRTC,                                 ///< СЕРВИС - ВРЕМЯ

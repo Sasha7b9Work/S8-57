@@ -2,6 +2,8 @@
 #include "Menu/Pages/Include/PageService.h"
 #include "Settings/Settings.h"
 
+#include "Hardware/Timer.h"
+
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 extern const PageBase pageCalibrate;
@@ -18,18 +20,30 @@ DEF_CHOICE_2( cCalibrator_Calibrator, // -V206                                  
     "Калибратор",
     "Режим работы калибратора",
     "Перем",
-    "+4V",
+    "Пост",
     CALIBRATOR_MODE, pageCalibrate, FuncActive, OnChanged_Calibrator_Calibrator, Choice::EmptyDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static bool IsActive_Calibrator_Calibrate()
 {
-    return !(SET_CALIBR_MODE_A == CalibrationMode::Disable && CALIBR_MODE_B == CalibrationMode::Disable);
+    //return !(SET_CALIBR_MODE_A == CalibrationMode::Disable && CALIBR_MODE_B == CalibrationMode::Disable);
+    return true;
 }
 
 static void OnPress_Calibrator_Calibrate()
 {
+    Display::FuncOnWaitStart("Калибровка канала 1", false);
+
+    Timer::PauseOnTime(5000);
+
+    Display::FuncOnWaitStop();
+
+    Display::FuncOnWaitStart("Калибровка канала 2", false);
+
+    Timer::PauseOnTime(5000);
+
+    Display::FuncOnWaitStop();
 }
 
 DEF_BUTTON( bCalibrator_Calibrate,                                                                                                                //--- СЕРВИС - КАЛИБРАТОР - Калибровать ---
