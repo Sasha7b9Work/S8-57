@@ -7,5 +7,6 @@ namespace Osci
     {
         void Process(Chan::E ch, const uint8 *dataNew, int size);
         void Prepare();
+        void Draw();
     }
 }

@@ -1,11 +1,16 @@
 #include "defines.h"
 #include "Osci_Averager.h"
+#include "Display/Display_Primitives.h"
 #include "Display/Display_Types.h"
 #include "Settings/Settings.h"
 #include "Osci.h"
 #include "Data/Reader.h"
 #include "FPGA/FPGA.h"
 #include <cstring>
+
+#include "Display/Grid.h"
+
+using namespace Display::Primitives;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -84,4 +89,17 @@ void Osci::Averager::Process(Chan::E ch, const uint8 *dataNew, int size)
 void Osci::Averager::Prepare()
 {
     numSignals[0] = numSignals[1] = 0;
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Osci::Averager::Draw()
+{
+    if (numSignals[0] < NUM_AVE)
+    {
+        int height = 10;
+
+        Rectangle(Grid::Width(), height).Draw(Grid::Left(), Grid::Top(), Color::GRID);
+
+        Region((int)(Grid::Width() * (float)numSignals[0] / NUM_AVE), height).Fill(Grid::Left(), Grid::Top());
+    }
 }

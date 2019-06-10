@@ -13,6 +13,7 @@
 
 #include "Utils/Debug.h"
 #include "Osci/Display/Accumulator.h"
+#include "Osci/Osci_Averager.h"
 
 
 using namespace Display::Primitives;
@@ -44,6 +45,8 @@ void Osci::Display::Update()
     Rectangle(Grid::Width(), Grid::Height()).Draw(Grid::Left(), Grid::Top(), Color::FILL);
     
     HiPart::Draw();
+
+    Averager::Draw();
     
     RShift::DrawBoth();
 
