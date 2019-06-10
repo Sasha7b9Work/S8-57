@@ -37,20 +37,27 @@ void Osci::Averager::Process(Chan::E ch, const uint8 *dataNew, int size)
     uint8 *_new = (uint8 *)dataNew + index;
     uint16 *av = AVE_DATA(ch);
 
-    if (numSignals[ch] <= NUM_AVE)
+    if (numSignals[ch] < NUM_AVE)
     {
         if (numSignals[ch] == 0)
         {
-            std::memcpy(AVE_DATA(ch), _new, (uint)size);
+            std::memset(AVE_DATA(ch), 0, (uint)size * 2);
+
+            for (int i = 0; i < size; i++)
+            {
+                av[i] = _new[i];
+            }
         }
-
-        for (int i = index; i < size; i += step)
+        else
         {
-            av[i] = (uint16)(av[i] - (av[i] >> numAve));
+            for (int i = index; i < size; i += step)
+            {
+                //av[i] = (uint16)(av[i] - (av[i] >> numAve));
 
-            av[i] += *_new;
+                av[i] += *_new;
 
-            _new += step;
+                _new += step;
+            }
         }
     }
     else
