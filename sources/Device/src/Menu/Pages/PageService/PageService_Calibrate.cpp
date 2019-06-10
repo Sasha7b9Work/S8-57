@@ -62,5 +62,5 @@ DEF_PAGE_2( pageCalibrate, // -V641 // -V1027                                   
 )
 
 
-const PageBase *PageService::PageCalibrate::pointer = &pageCalibrate;
+const PageBase * const PageService::PageCalibrate::pointer = &pageCalibrate;
 
