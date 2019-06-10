@@ -123,8 +123,10 @@ void Osci::Update()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void Osci::UpdateFPGA()
 {
+    bool needStop = false;
+    
     int number = (Osci::InModeRandomizer()) ? Kr[SET_TBASE] : 1;
-
+    
     for (int i = 0; i < number; i++)
     {
         FPGA::HAL::ReadFlag();
@@ -152,9 +154,8 @@ static void Osci::UpdateFPGA()
     
                 if (START_MODE_IS_SINGLE)
                 {
-                    OnPressStart();
+                    needStop = true;
                     Trig::pulse = false;
-                    break;
                 }
                 else
                 {
@@ -163,6 +164,11 @@ static void Osci::UpdateFPGA()
                 }
             }
         }
+    }
+    
+    if(needStop)
+    {
+        OnPressStart();
     }
 }
 
