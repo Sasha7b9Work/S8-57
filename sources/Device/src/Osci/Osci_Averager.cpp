@@ -86,7 +86,7 @@ void Osci::Averager::Process(Chan::E ch, const uint8 *dataNew, int size)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Osci::Averager::Prepare()
+void Osci::Averager::SettingChanged()
 {
     numSignals[0] = numSignals[1] = 0;
 }
@@ -94,7 +94,7 @@ void Osci::Averager::Prepare()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Osci::Averager::Draw()
 {
-    if (numSignals[0] < NUM_AVE)
+    if (NUM_AVE > 1 && numSignals[0] < NUM_AVE)
     {
         int height = 10;
 

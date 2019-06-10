@@ -13,6 +13,7 @@
 #include "Display/Symbols.h"
 #include "Display/Display_Primitives.h"
 #include "Display/Font/Font.h"
+#include "MessageMgr.h"
 
 
 #ifdef WIN32
@@ -184,6 +185,8 @@ void Osci::Settings::TBase::Load()
 
     SET_BANDWIDTH_A.Load();
     SET_BANDWIDTH_B.Load();
+
+    MessageMgr::OsciSettingsEffectOnAverageChanged();
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -233,6 +236,8 @@ void Osci::Settings::Range::LoadBoth()
     Osci::Settings::RShift::Load(Chan::B);
 
     Osci::Restart();
+
+    MessageMgr::OsciSettingsEffectOnAverageChanged();
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

@@ -475,6 +475,16 @@
               <FileType>5</FileType>
               <FilePath>.\src\tables.h</FilePath>
             </File>
+            <File>
+              <FileName>MessageMgr.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\MessageMgr.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>MessageMgr.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\MessageMgr.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
