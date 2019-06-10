@@ -34,7 +34,7 @@ static const StructMeasure sMeas[Measure::Type::Number] =
     DEF_STRUCT_MEASURE("U пик",       '\x2a'),
     DEF_STRUCT_MEASURE("U макс уст",  '\x40'),
     DEF_STRUCT_MEASURE("U мин уст",   '\x45'),
-    DEF_STRUCT_MEASURE("U ампл",      '\x4a'),
+    DEF_STRUCT_MEASURE("U амп",       '\x4a'),
     DEF_STRUCT_MEASURE("U ср",        '\x60'),
     DEF_STRUCT_MEASURE("U скз",       '\x65'),
     DEF_STRUCT_MEASURE("Выброс+",     '\x6a'),
