@@ -319,6 +319,11 @@ static void FX_Long()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void HandlerArrow()
 { 
+    if(!Menu::IsShown())
+    {
+        return;
+    }
+    
     if(Menu::OpenedItem()->IsPage())
     {
         if(!Menu::CurrentItem()->ProcessKey(event))
