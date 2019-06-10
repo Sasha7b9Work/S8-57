@@ -24,3 +24,9 @@ void Memory::RAM::SelectPrevSignal()
 {
     Math::CircleDecrease<int16>(&currentSignal, 0, (int16)Osci::Storage::NumElementsInStorage() - 1);
 }
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Memory::RAM::ResetSignal()
+{
+    currentSignal = 0;
+}

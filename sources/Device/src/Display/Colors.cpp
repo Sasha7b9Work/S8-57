@@ -24,7 +24,7 @@ extern uint GlobalColors[256] =
     /* 4  */    MAKE_COLOR(0x00, 0xff, 0x00),       // DATA_B
     /* 5  */    MAKE_COLOR(0x90, 0x90, 0xa0),       // MENU_FIELD
     /* 6  */    MAKE_COLOR(31 * 8, 44 * 4, 0  * 8), // MENU_TITLE
-    /* 7  */    MAKE_COLOR(0x00, 0x00, 0x40),       // MENU_TITLE_DARK
+    /* 7  */    MAKE_COLOR(0x00, 0x00, 0x80),       // MENU_TITLE_DARK
     /* 8  */    MAKE_COLOR(31 * 8, 63 * 4, 0  * 8), // MENU_TITLE_BRIGHT
     /* 9  */    MAKE_COLOR(26 * 8, 34 * 4, 0  * 8), // 
     /* 10 */    MAKE_COLOR(13 * 8, 17 * 4, 0  * 8), // MENU_ITEM_DARK

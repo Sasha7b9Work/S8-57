@@ -6,6 +6,8 @@ namespace Memory
 {
     namespace RAM
     {
+        /// Установить текущим сигнал по умолчанию
+        void ResetSignal();
         /// Установить текущим следующий сигнал
         void SelectNextSignal();
         /// Установить текущим предыдущий сигнал

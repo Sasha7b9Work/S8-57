@@ -16,6 +16,7 @@
 #include "Hardware/HAL/HAL.h"
 #include "Osci/Osci_Storage.h"
 #include "Data/Reader.h"
+#include "Display/Display_Types.h"
 
 
 using namespace FPGA::HAL::GPIO;
@@ -183,14 +184,29 @@ static bool ReadDataChanenlRand(Chan::E ch, const uint8 *address, uint8 *data) /
 
     uint8 *last = &dataRand[ch][FPGA_NUM_POINTS];
 
-    while (dataRead < last)
+    if (NUM_AVE > 1)
     {
-        *dataRead = *address;
+        uint8 *dataPointer = &data[infoRead.posFirst];              // ”казатель в переданном массиве
 
-        dataRead += step;
+        while (dataRead < last)
+        {
+            *dataRead = *address;
+            *dataPointer = *dataRead;
+
+            dataRead += step;
+            dataPointer += step;
+        }
     }
+    else
+    {
+        while (dataRead < last)
+        {
+            *dataRead = *address;
+            dataRead += step;
+        }
 
-    std::memcpy(data, &dataRand[ch][0], FPGA_NUM_POINTS);
+        std::memcpy(data, &dataRand[ch][0], FPGA_NUM_POINTS);
+    }
 
     return true;
 }

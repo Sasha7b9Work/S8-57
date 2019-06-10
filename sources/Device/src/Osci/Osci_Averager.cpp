@@ -9,6 +9,7 @@
 #include <cstring>
 
 #include "Display/Grid.h"
+#include <cmath>
 
 using namespace Display::Primitives;
 
@@ -42,6 +43,8 @@ void Osci::Averager::Process(Chan::E ch, const uint8 *dataNew, int size)
     uint8 *_new = (uint8 *)dataNew + index;
     uint16 *av = AVE_DATA(ch);
 
+    /// \todo Здесь неправильно - места в AVE_DATA слишком мало для 8к * 16биты
+
     if (numSignals[ch] < NUM_AVE)
     {
         if (numSignals[ch] == 0)
@@ -50,15 +53,13 @@ void Osci::Averager::Process(Chan::E ch, const uint8 *dataNew, int size)
 
             for (int i = 0; i < size; i++)
             {
-                av[i] = _new[i];
+                av[i] = dataNew[i];
             }
         }
         else
         {
             for (int i = index; i < size; i += step)
             {
-                //av[i] = (uint16)(av[i] - (av[i] >> numAve));
-
                 av[i] += *_new;
 
                 _new += step;
@@ -69,9 +70,7 @@ void Osci::Averager::Process(Chan::E ch, const uint8 *dataNew, int size)
     {
         for (int i = index; i < size; i += step)
         {
-            av[i] = (uint16)(av[i] - (av[i] >> numAve));
-
-            av[i] += *_new;
+            av[i] = (uint16)(av[i] - (av[i] >> numAve) + *_new);
 
             *_new = (uint8)(av[i] >> numAve);
 

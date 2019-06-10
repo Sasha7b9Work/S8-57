@@ -120,11 +120,15 @@ static void OnPress_RAM(bool enter)
         RUN_FPGA_BEFORE_SB = FPGA::IsRunning() ? 1U : 0U;
         Osci::Stop(false);
         MODE_WORK = ModeWork::RAM;
+        Memory::RAM::ResetSignal();
     }
     else
     {
         MODE_WORK = ModeWork::Dir;
-        FPGA::OnPressStart();
+        if (RUN_FPGA_BEFORE_SB)
+        {
+            FPGA::OnPressStart();
+        }
     }
 }
 
