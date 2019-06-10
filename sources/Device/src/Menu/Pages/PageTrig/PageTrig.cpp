@@ -97,10 +97,10 @@ static void OnChanged_Input(bool)
     Trig::Input::Load();
 }
 
-DEF_CHOICE_3( cInput, // -V206                                                                                                                                         //--- СИНХР - Вход ---
-    "Вход"
+DEF_CHOICE_3( cFiltr, // -V206                                                                                                                                         //--- СИНХР - Вход ---
+    "Фильтр"
     ,
-    "Выбор связи с источником синхронизации:\n"
+    "Выбор фильтра на источнике синхронизации:\n"
     "1. \"ПС\" - полный сигнал.\n"
     "2. \"ФНЧ\" - фильтр низких частот.\n"
     "3. \"ФВЧ\" - фильтр высоких частот."
@@ -120,7 +120,7 @@ DEF_PAGE_6( pTrig, // -V641 // -V1027                                           
     &cMode,                         ///< СИНХР - Режим
     &cSource,                       ///< СИНХР - Источник
     &cPolarity,                     ///< СИНХР - Полярность
-    &cInput,                        ///< СИНХР - Вход
+    &cFiltr,                        ///< СИНХР - Вход
     PageTrig::PageHoldOff::pointer, ///< СИНХР - УДЕРЖАНИЕ
     PageTrig::PageFind::pointer,    ///< СИНХР - ПОИСК
     Page::Name::Trig, nullptr, FuncActive, FuncPressPage, FuncDrawPage, FuncRegSetPage
