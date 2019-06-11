@@ -23,7 +23,8 @@ namespace Painter
     void SetColorValue(Color color, uint value);
     /// Загружает в дисплей все цвета
     void LoadPalette();
-
+    /// Нарисовать данные тестер-компонента. В младшем бите - линиями или точками рисовать.
+    /// В старшей тетраде - количество усреднений
     void DrawTesterData(uint8 mode, Color color, uint16 x[TESTER_NUM_POINTS], uint8 y[TESTER_NUM_POINTS]);
     /// Установить цвет рисования
     /// Нарисовать точку текущим цветом
