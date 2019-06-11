@@ -88,7 +88,7 @@ static void DrawData(int numStep)
     uint16 *x = &(*datX)[numStep][0];
     uint8 *y = &(*datY)[numStep][0];
     
-    Painter::DrawTesterData((uint8)TESTER_VIEW_MODE, ColorForStep(numStep), x, y);
+    Painter::DrawTesterData((uint8)((TESTER_ENUM_AVERAGE << 4) + TESTER_VIEW_MODE), ColorForStep(numStep), x, y);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

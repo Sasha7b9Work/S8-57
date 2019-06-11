@@ -8,7 +8,7 @@
 #define TESTER_POLARITY_IS_POSITITVE    (TESTER_POLARITY == Tester::Settings::Polarity::Positive)
 #define TESTER_STEP_U                   (set.test_stepU)
 #define TESTER_STEP_I                   (set.test_stepI)
-#define TESTER_NUM_SMOOTH               (set.test_smooth)
+#define TESTER_ENUM_AVERAGE             (set.test_ave)
 #define TESTER_VIEW_MODE                (set.test_viewMode)
 
 

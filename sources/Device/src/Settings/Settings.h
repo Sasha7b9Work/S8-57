@@ -227,12 +227,12 @@ public:
 
     // Настройки тестер-компонента
 
-    Tester::Settings::Control::E     test_control;
-    Tester::Settings::Polarity::E    test_polarity;
-    Tester::Settings::StepU::E       test_stepU;
-    Tester::Settings::StepI::E       test_stepI;
-    Tester::Settings::Smoothing::E   test_smooth;                    ///< Количество сглаживаний
-    Tester::Settings::ViewMode::E    test_viewMode;
+    Tester::Settings::Control::E    test_control;
+    Tester::Settings::Polarity::E   test_polarity;
+    Tester::Settings::StepU::E      test_stepU;
+    Tester::Settings::StepI::E      test_stepI;
+    Display::ENumAverage::E         test_ave;                   ///< Количество усреднений
+    Tester::Settings::ViewMode::E   test_viewMode;
 
     // Настройки меню
 

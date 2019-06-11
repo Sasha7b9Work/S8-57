@@ -68,15 +68,19 @@ DEF_CHOICE_2( cViewMode,
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-DEF_CHOICE_5( cSmoothing,
-    "Сглаживание",
-    "",
+DEF_CHOICE_9( cAveraging,
+    "Усреднение",
+    "Задаёт количество усредняемых измерений, по которым будет выводиться итоговый результат. Чем выше это значение, тем более стабильным получается результат, но дольше ждать",
     "1",
     "2",
-    "3",
     "4",
-    "5",
-    TESTER_NUM_SMOOTH, pageTester, FuncActive, Choice::EmptyChange, Choice::EmptyDraw
+    "8",
+    "16",
+    "32",
+    "64",
+    "128",
+    "256",
+    TESTER_ENUM_AVERAGE, pageTester, FuncActive, Choice::EmptyChange, Choice::EmptyDraw
 )
 
 
@@ -94,14 +98,14 @@ static void OnEnterExit_Tester(bool enter)
 }
 
 
-DEF_PAGE_4( pageTester, // -V641
+DEF_PAGE_5( pageTester, // -V641
     "ТЕСТЕР",
     "",
     &cControl,
     &cStepU,
     &cPolarity,
     &cViewMode,
-    //&cSmoothing,
+    &cAveraging,
     Page::Name::Function_Tester, PageFunction::pointer, FuncActive, OnEnterExit_Tester, FuncDrawPage, FuncRegSetPage
 )
 
