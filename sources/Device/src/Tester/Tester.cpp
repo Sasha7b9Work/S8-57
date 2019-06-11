@@ -254,8 +254,19 @@ static void ShiftData(uint8* x, uint8* y)
 {
     for (int i = 0; i < TESTER_NUM_POINTS; i++)
     {
-        x[i] += 7;
-        y[i] += 6;
+        int X = x[i] + 7;
+        if (X > 255)
+        {
+            X = 255;
+        }
+        x[i] = (uint8)X;
+
+        int Y = y[i] + 6;
+        if (Y > 255)
+        {
+            Y = 255;
+        }
+        y[i] = (uint8)Y;
     }
 }
 
