@@ -17,6 +17,9 @@ namespace Transceiver
         /// Инициализация пинов для режима приёма.
         void InitPinsRecieve();
     }
+
+    /// Установленое в true значение означает, что идёт обмен с панелью
+    bool inInteraction = false;
 }
 
 
@@ -30,5 +33,5 @@ void Transceiver::Transmitter::Send(uint8 byte0, uint8 byte1)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 bool Transceiver::InInteraction()
 {
-    return true;
+    return inInteraction;
 }

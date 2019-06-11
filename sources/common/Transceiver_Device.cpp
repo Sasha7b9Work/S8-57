@@ -64,6 +64,8 @@ namespace Transceiver
         /// Считывает байт данных с ШД
         uint8 ReadData();
     }
+
+    extern bool inInteraction;
 }
 
 
@@ -131,6 +133,8 @@ void Transceiver::Transmitter::Send(uint8 data)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Transceiver::Transmitter::Send(const uint8 *data, uint size)
 {
+    inInteraction = true;
+
     if (DataBus::mode != DataBus::Mode::DeviceTransmit)        // Если пины ещё не инициализированы для передачи -
     {
         DataBus::mode = DataBus::Mode::DeviceTransmit;          // инициализируем
@@ -162,11 +166,15 @@ void Transceiver::Transmitter::Send(const uint8 *data, uint size)
 
         while (PORT_READY->IDR & PIN_READY) {};         // Ожидаем, когда уровень на READY станет раным "0". //-V712
     }
+
+    inInteraction = false;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 bool Transceiver::Update()
 {
+    inInteraction = true;
+
     DataBus::mode = DataBus::Mode::DeviceReceive;
 
     Receiver::Init_FL0_IN();                        // Инициализируем FL0 на чтение
@@ -189,6 +197,8 @@ bool Transceiver::Update()
     Decoder::AddData(data);                         // И отправляем его на выполнение
 
     Set_MODE(Mode::Disabled);
+
+    inInteraction = false;
 
     return true;
 }

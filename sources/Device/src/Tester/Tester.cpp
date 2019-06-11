@@ -177,7 +177,8 @@ void Tester::ProcessStep()
        |     0V    |  чтение   |   1 * dU  |  чтение   |   2 * dU  |  чтение   |   3 * dU  |  чтение   |  4 * dU   |  чтение   |
        |<--------->|<--------->|<--------->|<--------->|<--------->|<--------->|<--------->|<--------->|<--------->|<--------->|                  */
 
-    if (Transceiver::InInteraction() || Timer::IsBusy())
+    if (Transceiver::InInteraction() || 
+        Timer::IsBusy())
     {
         return;
     }
