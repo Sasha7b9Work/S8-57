@@ -31,6 +31,8 @@ uint16 Tester::Pin_TEST_STR = HAL::PIO::Pin::_9;
 static void LoadFPGA();
 /// Считать данные очередной ступеньки
 static void ReadData();
+/// Произвести смещение данных для отрисовки строго по центру
+static void ShiftData(uint8* x, uint8 *y);
 /// Текущий шаг
 static int step = 0;
 /// Шаг изменения напряжения
@@ -38,7 +40,7 @@ static float stepU = 0.0F;
 /// Установленное в true значение означает, что вклюён режим тестера
 static bool enabled = false;
 
-static uint8 data[Chan::Size][Tester::NUM_STEPS][TESTER_NUM_POINTS];
+static uint8 data[Chan::Size][Tester::NUM_STEPS][TESTER_NUM_POINTS];        /// \todo Сделать так, чтобы при включении тестер-компонента необходимая память бралась из Heap.cpp
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -241,7 +243,19 @@ static void ReadData()
         //AverageData(x, av[0][halfStep]);
         //AverageData(y, av[1][halfStep]);
 
+        ShiftData(x, y);
+
         Tester::Display::SetPoints(halfStep, x, y);
+    }
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+static void ShiftData(uint8* x, uint8* y)
+{
+    for (int i = 0; i < TESTER_NUM_POINTS; i++)
+    {
+        x[i] += 7;
+        y[i] += 6;
     }
 }
 
