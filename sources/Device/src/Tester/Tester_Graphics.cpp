@@ -54,6 +54,8 @@ void Tester::Display::Update()
 
     DrawParametersChannel(Chan::A, 250, 206);
     DrawParametersChannel(Chan::B, 3, 3);
+
+    Rectangle(::Display::WIDTH - 1, ::Display::HEIGHT - 1).Draw(0, 0, Color::FILL);
     
     Menu::Draw();
 }

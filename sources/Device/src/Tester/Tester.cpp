@@ -8,6 +8,8 @@
 #include "Hardware/Timer.h"
 #include "Data/Reader.h"
 
+#include "Utils/Math.h"
+
 
 using namespace FPGA::Settings;
 using namespace Osci::Settings;
@@ -33,8 +35,6 @@ static void LoadFPGA();
 static void ReadData();
 /// Пересчитать точки для засылки отрисовки
 static void RecountPoints(uint16 *x, uint8 *y);
-/// Произвести смещение данных для отрисовки строго по центру
-static void ShiftData(uint16 *x, uint8 *y);
 /// Текущий шаг
 static int step = 0;
 /// Шаг изменения напряжения
@@ -256,32 +256,26 @@ static void ReadData()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void RecountPoints(uint16 *x, uint8 *y)
 {
-    ShiftData(x, y);
+    static const float scaleX = 320.0F / 240.0F;
+    static const float scaleY = 240.0F / 255.0F;
+
+    static const int dX = 20;
+    static const int dY = -2;
+
+    static const int x0 = 160;
+    static const int y0 = 120;
 
     for (int i = 0; i < TESTER_NUM_POINTS; i++)
     {
-        x[i] = (uint16)(x[i] * 320.0F / 240.0F);
-        y[i] = (uint8)(y[i] * 240.0F / 255.0F);
-    }
-}
+        x[i] = (uint16)(255 - x[i]);
+        int X = x[i] + dX;
+        X = (int)(x0 + (X - x0) * scaleX);
+        LIMITATION(X, 0, 319);
+        x[i] = (uint16)X;
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void ShiftData(uint16* x, uint8* y)
-{
-    for (int i = 0; i < TESTER_NUM_POINTS; i++)
-    {
-        int X = x[i] + 7;
-        if (X > 255)
-        {
-            X = 255;
-        }
-        x[i] = (uint8)X;
-
-        int Y = y[i] + 6;
-        if (Y > 255)
-        {
-            Y = 255;
-        }
+        int Y = y[i] + dY;
+        Y = (uint8)(y0 + (Y - y0) * scaleY);
+        LIMITATION(Y, 0, 239);
         y[i] = (uint8)Y;
     }
 }
