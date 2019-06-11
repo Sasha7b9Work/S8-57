@@ -137,7 +137,7 @@ void FPGA::ForTester::Start() // -V2506
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-bool FPGA::ForTester::Read(uint8 *dataA, uint8 *dataB) // -V2506
+bool FPGA::ForTester::Read(uint16 *dataA, uint8 *dataB) // -V2506
 {
     uint start = TIME_MS;
     HAL::flag = 0;

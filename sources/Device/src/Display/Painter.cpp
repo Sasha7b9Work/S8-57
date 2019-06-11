@@ -41,22 +41,25 @@ void Painter::EndScene()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Painter::DrawTesterData(uint8 mode, Color color, const uint8 *x, const uint8 *y)
+void Painter::DrawTesterData(uint8 mode, Color color, const uint16 *x, const uint8 *y)
 {
-    Buffer buffer(483);
+    Buffer buffer(3 + 240 * 2 + 240);
     buffer.data[0] = Command::Paint_TesterLines;
     buffer.data[1] = mode;
     buffer.data[2] = color.value;
-    uint8 *pointer = buffer.data + 3;
+
+    uint16 *pointer16 = (uint16 *)(buffer.data + 3);
     for (int i = 0; i < TESTER_NUM_POINTS; i++)
     {
-        *pointer++ = x[i];
-    }
-    for (int i = 0; i < TESTER_NUM_POINTS; i++)
-    {
-        *pointer++ = y[i];
+        *pointer16++ = x[i];
     }
 
-    Transmitter::Send(buffer.data, 483);
+    uint8 *pointer8 = (uint8 *)(pointer16);
+    for (int i = 0; i < TESTER_NUM_POINTS; i++)
+    {
+        *pointer8++ = y[i];
+    }
+
+    Transmitter::Send(buffer.data, buffer.size);
 }
 

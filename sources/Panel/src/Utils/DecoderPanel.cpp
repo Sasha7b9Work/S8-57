@@ -1,4 +1,5 @@
 #include "log.h"
+#include "structs.h"
 #include "DecoderPanel.h"
 #include "Display/Display.h"
 #include "Display/Painter.h"
@@ -148,8 +149,10 @@ static bool BeginScene(uint8)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static bool DrawTesterPoints(uint8 data)
 {
-    // Здесь хранится текущий принимаемый байт. Всего их будет 2400
-    static int numPoint = 0;
+    /// Количество полных принятых иксов
+    static int numX = 0;
+    /// Количество принятых игреков
+    static int numY = 0;
     static Color color = Color::FILL;
     static uint8 mode = 0;
 
@@ -157,7 +160,7 @@ static bool DrawTesterPoints(uint8 data)
 
     if(step == 0)
     {
-        numPoint = 0;
+        numX = numY = 0;
     }
     else if(step == 1)
     {
@@ -169,18 +172,27 @@ static bool DrawTesterPoints(uint8 data)
     }
     else
     {
-        if (numPoint < TESTER_NUM_POINTS)   // Если первые точки, то это иксы - ложим их в младшие байты полуслов
+        if (numX < TESTER_NUM_POINTS)   // Если первые точки, то это иксы - ложим их в младшие байты полуслов
         {
-            uint16 *pointer = (uint16 *)buffer; //-V1032
-            pointer[numPoint++] = data;
+            static uint8 xLo;
+
+            if (step % 2)               // Если чётный шаг - старший байт икса
+            {
+                xLo = data;
+            }
+            else
+            {
+                buffer[numX * 2] = xLo;
+                buffer[numX * 2 + 1] = data;
+                numX++;
+            }
         }
         else
         {
-            buffer[numPoint + TESTER_NUM_POINTS] = data;
-            numPoint++;
+            buffer[240 * 2 + numY++] = data;
         }
 
-        if(numPoint == TESTER_NUM_POINTS * 2)
+        if(numY == TESTER_NUM_POINTS)
         {
             Painter::DrawTesterData(mode, color, (uint16 *)buffer, buffer + TESTER_NUM_POINTS * 2);
             return true;

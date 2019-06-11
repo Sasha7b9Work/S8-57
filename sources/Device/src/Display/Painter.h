@@ -13,5 +13,5 @@ namespace Painter
 
     void EndScene();
 
-    void DrawTesterData(uint8 mode, Color color, const uint8 *x, const uint8 *y);
+    void DrawTesterData(uint8 mode, Color color, const uint16 *x, const uint8 *y);
 };

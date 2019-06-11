@@ -59,7 +59,7 @@ namespace FPGA
     class ForTester
     {
     public:
-        static bool Read(uint8 *dataA, uint8 *dataB);
+        static bool Read(uint16 *dataA, uint8 *dataB);
         /// Запустить цикл чтения для тестер-компонента. В течение time секунд должно быть считано numPoints точек
         static void Start();
     };

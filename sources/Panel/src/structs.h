@@ -1,6 +1,12 @@
 #pragma once
 #include "defines.h"
 
+
+#ifndef WIN32
+#pragma anon_unions
+#endif
+
+
 union BitSet16
 {
     uint16 halfWord;

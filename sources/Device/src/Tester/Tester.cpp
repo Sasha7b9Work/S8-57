@@ -31,8 +31,10 @@ uint16 Tester::Pin_TEST_STR = HAL::PIO::Pin::_9;
 static void LoadFPGA();
 /// Считать данные очередной ступеньки
 static void ReadData();
+/// Пересчитать точки для засылки отрисовки
+static void RecountPoints(uint16 *x, uint8 *y);
 /// Произвести смещение данных для отрисовки строго по центру
-static void ShiftData(uint8* x, uint8 *y);
+static void ShiftData(uint16 *x, uint8 *y);
 /// Текущий шаг
 static int step = 0;
 /// Шаг изменения напряжения
@@ -40,7 +42,8 @@ static float stepU = 0.0F;
 /// Установленное в true значение означает, что вклюён режим тестера
 static bool enabled = false;
 
-static uint8 data[Chan::Size][Tester::NUM_STEPS][TESTER_NUM_POINTS];        /// \todo Сделать так, чтобы при включении тестер-компонента необходимая память бралась из Heap.cpp
+static uint16 dataX[Tester::NUM_STEPS][TESTER_NUM_POINTS];  /// \todo Сделать так, чтобы при включении тестер-компонента необходимая память бралась из Heap.cpp
+static uint8  dataY[Tester::NUM_STEPS][TESTER_NUM_POINTS];
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -70,7 +73,8 @@ void Tester::Init()
         {
             for (int k = 0; k < TESTER_NUM_POINTS; k++)
             {
-                data[i][j][k] = 0;
+                dataX[j][k] = 0;
+                dataY[j][k] = 0;
             }
         }
     }
@@ -229,8 +233,8 @@ static void ReadData()
 {
     int halfStep = step / 2;
 
-    uint8 *x = &data[Chan::A][halfStep][0];
-    uint8 *y = &data[Chan::B][halfStep][0];
+    uint16 *x = &dataX[halfStep][0];
+    uint8 *y = &dataY[halfStep][0];
 
 //    uint16 *av[2][5] =
 //    {
@@ -243,14 +247,26 @@ static void ReadData()
         //AverageData(x, av[0][halfStep]);
         //AverageData(y, av[1][halfStep]);
 
-        ShiftData(x, y);
+        RecountPoints(x, y);
 
         Tester::Display::SetPoints(halfStep, x, y);
     }
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void ShiftData(uint8* x, uint8* y)
+static void RecountPoints(uint16 *x, uint8 *y)
+{
+    ShiftData(x, y);
+
+    for (int i = 0; i < TESTER_NUM_POINTS; i++)
+    {
+        x[i] = (uint16)(x[i] * 320.0F / 240.0F);
+        y[i] = (uint8)(y[i] * 240.0F / 255.0F);
+    }
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+static void ShiftData(uint16* x, uint8* y)
 {
     for (int i = 0; i < TESTER_NUM_POINTS; i++)
     {

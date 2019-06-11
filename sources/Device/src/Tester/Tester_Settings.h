@@ -10,7 +10,6 @@
 #define TESTER_STEP_I                   (set.test_stepI)
 #define TESTER_NUM_SMOOTH               (set.test_smooth)
 #define TESTER_VIEW_MODE                (set.test_viewMode)
-#define TESTER_VIEW_MODE_IS_LINES       (TESTER_VIEW_MODE == Tester::Settings::ViewMode::Lines)
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

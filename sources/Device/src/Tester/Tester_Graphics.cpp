@@ -16,11 +16,13 @@ using namespace Tester::Settings;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /// В таком массиве хранятся считанные точки тестер-компонента
-typedef uint8 array[Chan::Size][Tester::NUM_STEPS][TESTER_NUM_POINTS];
+typedef uint8 array8[Tester::NUM_STEPS][TESTER_NUM_POINTS];
+typedef uint16 array16[Tester::NUM_STEPS][TESTER_NUM_POINTS];
 
 static bool ready[Tester::NUM_STEPS] = {false, false, false, false, false};
 
-static array *dat = (array *)OUT_A;
+static array8 *datY = (array8 *)OUT_A;
+static array16 *datX = (array16 *)OUT_B;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -81,31 +83,20 @@ static void DrawData(int numStep, int /*x0*/, int /*y0*/)
         return;
     }
 
-    uint8 *x = &(*dat)[Chan::A][numStep][0];
-    uint8 *y = &(*dat)[Chan::B][numStep][0];
+    uint16 *x = &(*datX)[numStep][0];
+    uint8 *y = &(*datY)[numStep][0];
     
-    if(TESTER_VIEW_MODE_IS_LINES)
-    {
-        Painter::DrawTesterData((uint8)TESTER_VIEW_MODE, ColorForStep(numStep), x, y);
-    }
-    else
-    {
-        ColorForStep(numStep).SetAsCurrent();
-
-        for(int i = 1; i < 240; i++)
-        {
-            Point().Draw(x[i], y[i]);
-        }
-    }
+    Painter::DrawTesterData((uint8)TESTER_VIEW_MODE, ColorForStep(numStep), x, y);
 }
+
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-uint8 ConvertX(uint8 x)
+uint16 ConvertX(uint16 x)
 {
     int X = TESTER_NUM_POINTS - (x - VALUE::MIN);
 
     LIMITATION(X, 0, TESTER_NUM_POINTS - 1); //-V2516
 
-    return (uint8)X;
+    return (uint16)X;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -127,12 +118,12 @@ uint8 ConvertY(uint8 y)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Tester::Display::SetPoints(int numStep, const uint8 dx[TESTER_NUM_POINTS], const uint8 dy[TESTER_NUM_POINTS])
+void Tester::Display::SetPoints(int numStep, const uint16 dx[TESTER_NUM_POINTS], const uint8 dy[TESTER_NUM_POINTS])
 {
     ready[numStep] = true;
 
-    uint8 *x = &(*dat)[Chan::A][numStep][0];
-    uint8 *y = &(*dat)[Chan::B][numStep][0];
+    uint16 *x = &(*datX)[numStep][0];
+    uint8 *y = &(*datY)[numStep][0];
 
     for(int i = 0; i < TESTER_NUM_POINTS; i++)
     {
