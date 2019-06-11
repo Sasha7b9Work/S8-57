@@ -209,26 +209,6 @@ void Tester::ProcessStep()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-//static void AverageData(const uint8 *dataNew, uint16 *dataAve)
-//{
-//    uint8 *_new = (uint8 *)dataNew;
-//    uint16 *av = dataAve;
-//
-//    uint16 numAve = 1;
-//
-//    for (int i = 0; i < TESTER_NUM_POINTS; i++)
-//    {
-//        av[i] = (uint16)(av[i] - (av[i] >> numAve));
-//
-//        av[i] += *_new;
-//
-//        *_new = (uint8)(av[i] >> numAve);
-//
-//        _new++;
-//    }
-//}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void ReadData()
 {
     int halfStep = step / 2;
@@ -236,17 +216,8 @@ static void ReadData()
     uint16 *x = &dataX[halfStep][0];
     uint8 *y = &dataY[halfStep][0];
 
-//    uint16 *av[2][5] =
-//    {
-//        {AVE_1, AVE_1 + 240, AVE_1 + 240 * 2, AVE_1 + 240 * 3, AVE_1 + 240 * 4},
-//        {AVE_2, AVE_2 + 240, AVE_2 + 240 * 2, AVE_2 + 240 * 3, AVE_2 + 240 * 4}
-//    };
-
     if(FPGA::ForTester::Read(x, y))
     {
-        //AverageData(x, av[0][halfStep]);
-        //AverageData(y, av[1][halfStep]);
-
         RecountPoints(x, y);
 
         Tester::Display::SetPoints(halfStep, x, y);
@@ -267,8 +238,7 @@ static void RecountPoints(uint16 *x, uint8 *y)
 
     for (int i = 0; i < TESTER_NUM_POINTS; i++)
     {
-        x[i] = (uint16)(255 - x[i]);
-        int X = x[i] + dX;
+        int X = 255 - x[i] + dX;
         X = (int)(x0 + (X - x0) * scaleX);
         LIMITATION(X, 0, 319);
         x[i] = (uint16)X;
