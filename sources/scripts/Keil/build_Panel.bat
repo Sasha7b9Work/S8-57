@@ -1,12 +1,12 @@
 @echo off
 @echo %TIME%   Compile Panel ...
 
-c:\Keil_v5\UV4\UV4 -b ..\..\Panel\PanelOSC.uvprojx -j0 -z -o PanelOSC.out
+c:\Keil_v5\UV4\UV4 -b ..\..\Panel\Panel57.uvprojx -j0 -z -o Panel57.out
 set BUILD_STATUS=%ERRORLEVEL%
 if %BUILD_STATUS%==0 goto Exit
 
 echo ERROR!!! Panel    failed!!!
-type ..\..\Panel\PanelOSC.out
+type ..\..\Panel\Panel57.out
 
 :Exit
 

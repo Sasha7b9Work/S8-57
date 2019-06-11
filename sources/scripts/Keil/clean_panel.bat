@@ -1,3 +1,3 @@
 @echo %TIME%   Cleanup Panel ...
 
-c:\Keil_v5\UV4\UV4 -c..\..\Panel\PanelOSC.uvprojx -j0
+c:\Keil_v5\UV4\UV4 -c..\..\Panel\Panel57.uvprojx -j0

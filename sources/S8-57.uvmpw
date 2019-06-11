@@ -8,17 +8,16 @@
   <WorkspaceName>WorkSpace</WorkspaceName>
 
   <project>
-    <PathAndName>.\Device\DeviceOSC.uvprojx</PathAndName>
-    <NodeIsActive>1</NodeIsActive>
-    <NodeIsExpanded>1</NodeIsExpanded>
-  </project>
-
-  <project>
-    <PathAndName>.\Panel\PanelOSC.uvprojx</PathAndName>
-  </project>
-
-  <project>
     <PathAndName>.\DeviceLoader\DeviceLoader57.uvprojx</PathAndName>
+    <NodeIsActive>1</NodeIsActive>
+  </project>
+
+  <project>
+    <PathAndName>.\Device\Device57.uvprojx</PathAndName>
+  </project>
+
+  <project>
+    <PathAndName>.\Panel\Panel57.uvprojx</PathAndName>
   </project>
 
 </ProjectWorkspace>
