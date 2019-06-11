@@ -33,7 +33,7 @@ static void DrawParametersChannel(Chan::E ch, int x, int y);
 /// Возвращает цвет, которым нужно рисовать соответствующую "ступеньку"
 static Color ColorForStep(int step);
 /// Рисовать данные ступеньки numStep
-static void DrawData(int step, int x0, int y0);
+static void DrawData(int step);
 /// Возвращает числовое значение величины соответствующей "ступеньки"
 static String ValueForStep(int step);
 
@@ -47,7 +47,7 @@ void Tester::Display::Update()
 
     for (int i = 0; i < NUM_STEPS; i++)
     {
-        DrawData(i, 0, 0);
+        DrawData(i);
     }
 
     DrawLegend(274, 2);
@@ -76,7 +76,7 @@ static Color ColorForStep(int _step)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void DrawData(int numStep, int /*x0*/, int /*y0*/)
+static void DrawData(int numStep)
 {
     if(!ready[numStep])
     {
@@ -90,34 +90,6 @@ static void DrawData(int numStep, int /*x0*/, int /*y0*/)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-uint16 ConvertX(uint16 x)
-{
-    int X = TESTER_NUM_POINTS - (x - VALUE::MIN);
-
-    LIMITATION(X, 0, TESTER_NUM_POINTS - 1); //-V2516
-
-    return (uint16)X;
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-uint8 ConvertY(uint8 y)
-{
-    int Y = y - VALUE::MIN;
-
-    LIMITATION(Y, 0, TESTER_NUM_POINTS - 1); //-V2516
-
-    int delta = 120 - Y;
-
-    delta = (int)(delta * 1.2F);
-
-    Y = 120 - delta;
-
-    LIMITATION(Y, 0, TESTER_NUM_POINTS - 1); //-V2516
-
-    return (uint8)Y;
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Tester::Display::SetPoints(int numStep, const uint16 dx[TESTER_NUM_POINTS], const uint8 dy[TESTER_NUM_POINTS])
 {
     ready[numStep] = true;
@@ -127,8 +99,8 @@ void Tester::Display::SetPoints(int numStep, const uint16 dx[TESTER_NUM_POINTS],
 
     for(int i = 0; i < TESTER_NUM_POINTS; i++)
     {
-        x[i] = ConvertX(dx[i]);
-        y[i] = ConvertY(dy[i]);
+        x[i] = dx[i];
+        y[i] = dy[i];
     }
 }
 

@@ -38,11 +38,10 @@ namespace Tester
 
     int DeltaRShiftA();
 
-    struct Display
+    namespace Display
     {
-    public:
-        static void Update();
+        void Update();
         /// Устанавливает точки для рисования, соответствующие шагу numStep
-        static void SetPoints(int numStep, const uint16 dx[TESTER_NUM_POINTS], const uint8 dy[TESTER_NUM_POINTS]);
+        void SetPoints(int numStep, const uint16 dx[TESTER_NUM_POINTS], const uint8 dy[TESTER_NUM_POINTS]);
     };
 };
