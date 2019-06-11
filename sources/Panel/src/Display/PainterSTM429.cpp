@@ -10,6 +10,7 @@
 #include <cstdlib>
 
 #include "Painter_common.h"
+#include "Averager.h"
 
 
 using namespace Transceiver;
@@ -218,11 +219,22 @@ void Painter::SetColor(Color color)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Painter::DrawTesterData(uint8 mode, Color color, uint16 x[TESTER_NUM_POINTS], uint8 y[TESTER_NUM_POINTS])
+void Painter::DrawTesterData(uint8 mode, Color color, uint16 _x[TESTER_NUM_POINTS], uint8 _y[TESTER_NUM_POINTS])
 {
     SetColor(color);
 
-    if(mode == 1)
+    int step = (mode >> 1) & 0x07;
+
+    int numAverage = (1 << (mode >> 4));
+
+    Averager::Tester::SetCount(numAverage);
+    Averager::Tester::SetDataX(_x, step);
+    Averager::Tester::SetDataY(_y, step);
+
+    uint16 *x = Averager::Tester::GetDataX(step);
+    uint8 *y = Averager::Tester::GetDataY(step);
+
+    if((mode & 0x01) == 1)
     {
         for(int i = 1; i < TESTER_NUM_POINTS - 1; i++)
         {

@@ -164,7 +164,7 @@ static bool DrawTesterPoints(uint8 data)
     }
     else if(step == 1)
     {
-        mode = (uint8)(data & 0x0f);
+        mode = data;
     }
     else if(step == 2)
     {
