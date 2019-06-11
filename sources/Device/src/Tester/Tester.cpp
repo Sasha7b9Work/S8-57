@@ -256,8 +256,8 @@ static void ReadData()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void RecountPoints(uint16 *x, uint8 *y)
 {
-    static const float scaleX = 320.0F / 240.0F;
-    static const float scaleY = 240.0F / 255.0F;
+    static const float scaleX = 332.0F / 240.0F;
+    static const float scaleY = 249.0F / 255.0F;
 
     static const int dX = 20;
     static const int dY = -2;
