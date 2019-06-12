@@ -88,7 +88,21 @@ static void DrawData(int numStep)
     uint16 *x = &(*datX)[numStep][0];
     uint8 *y = &(*datY)[numStep][0];
     
-    Painter::DrawTesterData((uint8)((TESTER_ENUM_AVERAGE << 4) + (numStep << 1) + TESTER_VIEW_MODE), ColorForStep(numStep), x, y);
+    uint8 mode = BUILD_MODE(TESTER_VIEW_MODE, numStep, TESTER_ENUM_AVERAGE);
+    
+    Painter::DrawTesterData(mode, ColorForStep(numStep), x, y);
+    
+    
+    volatile int viewMode = EXTRACT_MODE_DRAW(mode);
+    volatile int step = EXTRACT_STEP(mode);
+    volatile int enumAve = EXTRACT_ENUM_AVERAGE(mode);
+    
+    viewMode = viewMode;
+    step = step;
+    enumAve = enumAve;
+    
+    
+    enumAve = enumAve;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
