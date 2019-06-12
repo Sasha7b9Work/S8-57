@@ -150,9 +150,9 @@
         <Bp>
           <Number>0</Number>
           <Type>0</Type>
-          <LineNumber>105</LineNumber>
+          <LineNumber>127</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134442082</Address>
+          <Address>134442162</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
@@ -161,12 +161,12 @@
           <BreakIfRCount>1</BreakIfRCount>
           <Filename>&lt;2&gt;.\src\Tester\Tester_Graphics.cpp</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\S8_57\src/Tester/Tester_Graphics.cpp\105</Expression>
+          <Expression>\\S8_57\src/Tester/Tester_Graphics.cpp\127</Expression>
         </Bp>
         <Bp>
           <Number>1</Number>
           <Type>0</Type>
-          <LineNumber>230</LineNumber>
+          <LineNumber>129</LineNumber>
           <EnabledFlag>1</EnabledFlag>
           <Address>0</Address>
           <ByteObject>0</ByteObject>
@@ -175,7 +175,7 @@
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>0</BreakIfRCount>
-          <Filename>&lt;3&gt;.\src\Display\PainterSTM429.cpp</Filename>
+          <Filename>&lt;3&gt;.\src\Display\Averager.cpp</Filename>
           <ExecCommand></ExecCommand>
           <Expression></Expression>
         </Bp>

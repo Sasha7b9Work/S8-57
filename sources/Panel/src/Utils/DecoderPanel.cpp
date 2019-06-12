@@ -92,7 +92,8 @@ void Decoder::AddData(uint8 data)
         DrawVPointLine,
         DrawHPointLine,
         SetMinWidthFont,
-        SetTextSpacing
+        SetTextSpacing,
+        EmptyFunc
     };
 
     if (step == 0)

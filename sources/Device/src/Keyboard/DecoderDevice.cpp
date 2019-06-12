@@ -30,6 +30,8 @@ static bool ButtonPress(uint8);
 static bool FuncScreen(uint8);
 /// Эту функцию надо вызывать после выполнения последнего шага
 static void FinishCommand();
+/// Добавляет текстовую строку в консоль
+static bool AddToConsole(uint8);
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -88,7 +90,8 @@ static void RunStep(uint8 data)
         EmptyFuncBtU8,      // Paint_VPointLine
         EmptyFuncBtU8,      // Paint_HPointLine
         EmptyFuncBtU8,      // Paint_SetMonoSpaceFont
-        EmptyFuncBtU8       // Paint_SetTextSpacing
+        EmptyFuncBtU8,      // Paint_SetTextSpacing
+        AddToConsole        // AddToConsole
     };
 
     if (step == 0)
@@ -184,8 +187,15 @@ static bool FuncScreen(uint8 data)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+static bool AddToConsole(uint8)
+{
+    return true;
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void FinishCommand()
 {
     step = 0;
     curFunc = 0;
 }
+

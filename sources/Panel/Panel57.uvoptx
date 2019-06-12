@@ -150,23 +150,23 @@
         <Bp>
           <Number>0</Number>
           <Type>0</Type>
-          <LineNumber>230</LineNumber>
+          <LineNumber>126</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134235972</Address>
+          <Address>134238542</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>&lt;3&gt;.\src\Display\PainterSTM429.cpp</Filename>
+          <Filename>&lt;3&gt;.\src\Display\Averager.cpp</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\PanelOSC\src/Display/PainterSTM429.cpp\230</Expression>
+          <Expression>\\PanelOSC\src/Display/Averager.cpp\126</Expression>
         </Bp>
         <Bp>
           <Number>1</Number>
           <Type>0</Type>
-          <LineNumber>105</LineNumber>
+          <LineNumber>129</LineNumber>
           <EnabledFlag>1</EnabledFlag>
           <Address>0</Address>
           <ByteObject>0</ByteObject>
@@ -175,11 +175,26 @@
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>0</BreakIfRCount>
-          <Filename>&lt;2&gt;.\src\Tester\Tester_Graphics.cpp</Filename>
+          <Filename>&lt;3&gt;.\src\Display\Averager.cpp</Filename>
           <ExecCommand></ExecCommand>
           <Expression></Expression>
         </Bp>
       </Breakpoint>
+      <WatchWindow1>
+        <Ww>
+          <count>0</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>minAfter,0x0A</ItemText>
+        </Ww>
+      </WatchWindow1>
+      <MemoryWindow1>
+        <Mm>
+          <WinNumber>1</WinNumber>
+          <SubType>10</SubType>
+          <ItemText>oldAve</ItemText>
+          <AccSizeX>0</AccSizeX>
+        </Mm>
+      </MemoryWindow1>
       <Tracepoint>
         <THDelay>0</THDelay>
       </Tracepoint>

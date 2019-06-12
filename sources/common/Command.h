@@ -30,7 +30,8 @@ struct Command
 /* 18 */    Paint_HPointLine,       // 18 |   x[0:7] |  x[8:15]   |      y      |   delta      | count        |
 /* 19 */    Paint_SetMinWidthFont,  // 19 |   width  |
 /* 20 */    Paint_SetTextSpacing,   // 20 |   0 | 1  |
-/* 21 */    Size
+/* 21 */    AddToConsole,           // 21 | num symb |  ..... symbols ....
+/* 22 */    Size
     } value;
 };
 
