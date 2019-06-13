@@ -24,11 +24,39 @@ struct StructY
     int cout;
 };
 
+/// Это отрисовываемые данные
+static uint16 x[TESTER_NUM_POINTS] __attribute__((section("CCM_DATA")));
+static uint8 y[TESTER_NUM_POINTS] __attribute__((section("CCM_DATA")));
+
 static StructX dataX[5] __attribute__((section("CCM_DATA")));
 static StructY dataY[5] __attribute__((section("CCM_DATA")));
 
+static StructX oldX[5] __attribute__((section("CCM_DATA")));
+static StructY oldY[5] __attribute__((section("CCM_DATA")));
+
+static StructX currentX[5] __attribute__((section("CCM_DATA")));
+static StructY currentY[5] __attribute__((section("CCM_DATA")));
+
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+static void Copy16to32(const uint16 *data, uint *buffer)
+{
+    for (int i = 0; i < TESTER_NUM_POINTS; i++)
+    {
+        buffer[i] = data[i];
+    }
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+static void Copy8to16(const uint8 *data, uint16 *buffer)
+{
+    for (int i = 0; i < TESTER_NUM_POINTS; i++)
+    {
+        buffer[i] = data[i];
+    }
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Averager::Tester::SetCount(int count)
 {
     if (enumAve != count)
@@ -47,8 +75,41 @@ void Averager::Tester::SetCount(int count)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Averager::Tester::ProcessX(uint16 *data, int step)
+static int Difference(int step)
 {
+    int max = 0;
+
+    for (int i = 0; i < TESTER_NUM_POINTS; i++)
+    {
+        int diffX = (int)oldX[step].data[i] - (int)currentX[step].data[i];
+        if (diffX < 0)
+        {
+            diffX = -diffX;
+        }
+        if (diffX > max)
+        {
+            max = diffX;
+        }
+
+        int diffY = oldY[step].data[i] - currentY[step].data[i];
+        if (diffY < 0)
+        {
+            diffY = -diffY;
+        }
+        if (diffY > max)
+        {
+            max = diffY;
+        }
+    }
+
+    return max;
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Averager::Tester::ProcessX(const uint16 *data, int step)
+{
+    Copy16to32(data, currentX[step].data);
+
     if (enumAve == 0)
     {
         return;
@@ -58,20 +119,23 @@ void Averager::Tester::ProcessX(uint16 *data, int step)
 
     for (int i = 0; i < TESTER_NUM_POINTS; i++)
     {
-        ave[i] = (uint)(ave[i] - (ave[i] >> enumAve) + *data);
-        *data = (uint16)(ave[i] >> enumAve);
-        data++;
+        ave[i] = (uint)(ave[i] - (ave[i] >> enumAve) + data[i]);
+        x[i] = (uint16)(ave[i] >> enumAve);
     }
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Averager::Tester::ProcessY(uint8 *y, int step)
+void Averager::Tester::ProcessY(const uint8 *data, int step)
 {
-    if(step != 0)
-    {
-        step = 0;
-    }
-    
+    Copy8to16(data, currentY[step].data);
+
+    static int count = 0;
+
+    LOG_WRITE("%d разность = %d", count++, Difference(step));
+
+    std::memcpy(oldX[step].data, currentX[step].data, TESTER_NUM_POINTS * 4);
+    std::memcpy(oldY[step].data, currentY[step].data, TESTER_NUM_POINTS * 2);
+
     if (enumAve == 0)
     {
         return;
@@ -79,11 +143,21 @@ void Averager::Tester::ProcessY(uint8 *y, int step)
     
     uint16 *ave = &dataY[step].data[0];
 
-    LOG_WRITE("Перед %d %d %d %d %d", y[0], y[1], y[2], y[3], y[4]);
-    
     for (int i = 0; i < TESTER_NUM_POINTS; i++)
     {
-        ave[i] = (uint16)(ave[i] - (ave[i] >> enumAve) + y[i]);
+        ave[i] = (uint16)(ave[i] - (ave[i] >> enumAve) + data[i]);
         y[i] = (uint8)(ave[i] >> enumAve);
     }
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+uint16 *Averager::Tester::X()
+{
+    return x;
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+uint8 *Averager::Tester::Y()
+{
+    return y;
 }

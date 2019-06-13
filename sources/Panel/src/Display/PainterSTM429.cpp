@@ -219,17 +219,25 @@ void Painter::SetColor(Color color)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Painter::DrawTesterData(uint8 mode, Color color, uint16 x[TESTER_NUM_POINTS], uint8 y[TESTER_NUM_POINTS])
+void Painter::DrawTesterData(uint8 mode, Color color, uint16 _x[TESTER_NUM_POINTS], uint8 _y[TESTER_NUM_POINTS])
 {
     SetColor(color);
 
     int step = EXTRACT_STEP(mode);
 
+    if (step != 0)
+    {
+        return;
+    }
+
     int numAverage = EXTRACT_ENUM_AVERAGE(mode);
    
     Averager::Tester::SetCount(numAverage);
-    Averager::Tester::ProcessX(x, step);
-    Averager::Tester::ProcessY(y, step);
+    Averager::Tester::ProcessX(_x, step);
+    Averager::Tester::ProcessY(_y, step);
+
+    uint16 *x = Averager::Tester::X();
+    uint8 *y = Averager::Tester::Y();
     
     if(EXTRACT_MODE_DRAW(mode))
     {

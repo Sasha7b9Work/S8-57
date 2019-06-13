@@ -24,6 +24,8 @@ static bool ready[Tester::NUM_STEPS] = {false, false, false, false, false};
 static array8 *datY = (array8 *)OUT_A;
 static array16 *datX = (array16 *)OUT_B;
 
+static bool alreadyDrawing[5] = { false, false, false, false, false };
+
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /// Написать легенду изображения
@@ -80,6 +82,12 @@ static Color ColorForStep(int _step)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void DrawData(int numStep)
 {
+    if (alreadyDrawing[numStep])
+
+    {
+        return;
+    }
+
     if(numStep != 0)
     {
         return;
@@ -94,6 +102,12 @@ static void DrawData(int numStep)
     uint8 *y = &(*datY)[numStep][0];
     
     uint8 mode = BUILD_MODE(TESTER_VIEW_MODE, numStep, TESTER_ENUM_AVERAGE);
+
+    //for (int i = 0; i < TESTER_NUM_POINTS; i++)
+    //{
+    //    x[i] = i;
+    //    y[i] = 255 - x[i];
+    //}
     
     Painter::DrawTesterData(mode, ColorForStep(numStep), x, y);
     
@@ -108,11 +122,15 @@ static void DrawData(int numStep)
     
     
     enumAve = enumAve;
+
+    alreadyDrawing[numStep] = true;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Tester::Display::SetPoints(int numStep, const uint16 dx[TESTER_NUM_POINTS], const uint8 dy[TESTER_NUM_POINTS])
 {
+    alreadyDrawing[numStep] = false;
+
     ready[numStep] = true;
 
     uint16 *x = &(*datX)[numStep][0];

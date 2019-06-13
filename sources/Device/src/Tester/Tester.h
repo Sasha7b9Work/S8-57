@@ -28,6 +28,8 @@ namespace Tester
 
     void Disable();
 
+    void StartStop();
+
     void Update();
 
     static void ProcessStep();

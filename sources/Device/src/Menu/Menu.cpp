@@ -265,7 +265,10 @@ static bool EventIsProcessedInCurrentMode(const KeyEvent *event)
 
     if (Device::State::InModeTester())
     {
-        if (Key(key).IsControlSignal() || Key(key).IsFunctional() || (key == Key::Enter && !TypePress(type).IsLong()))
+        if (Key(key).IsControlSignal() || 
+            Key(key).IsFunctional() || 
+            key == Key::Start ||
+            (key == Key::Enter && !TypePress(type).IsLong()))
         {
             return true;
         }

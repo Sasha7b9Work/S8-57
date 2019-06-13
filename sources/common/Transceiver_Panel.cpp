@@ -79,7 +79,7 @@ namespace Transceiver
 
     static uint8 buffer[1024];
 
-    static uint bytesInBuffer = 0;
+    static uint _bytesInBuffer = 0;
 }
 
 
@@ -138,8 +138,8 @@ void Transceiver::Transmitter::InitDataPins()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Transceiver::Transmitter::Send(const uint8 *data, uint size)
 {
-    std::memcpy(&buffer[bytesInBuffer], data, size);
-    bytesInBuffer += size;
+    std::memcpy(&buffer[_bytesInBuffer], data, size);
+    _bytesInBuffer += size;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -175,7 +175,7 @@ void Transceiver::Transmitter::TransmitData()
 {
     Init_FL0_OUT();                             // Инициализируем FL0 для того, чтобы выставить на нём признак наличия или отсутствия данных
 
-    if (bytesInBuffer == 0)
+    if (_bytesInBuffer == 0)
     {
         Set_FL0(State::Passive);                // Выставляем признак того, что данных для передачи нет
     }
@@ -202,11 +202,11 @@ void Transceiver::Transmitter::TransmitData()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Transceiver::DiscardTransmittedData()
 {
-    if (bytesInBuffer > 0)
+    if (_bytesInBuffer > 0)
     {
-        bytesInBuffer--;                        // Удаляем переданные данные из буфера
+        _bytesInBuffer--;                        // Удаляем переданные данные из буфера
 
-        std::memmove(&buffer[0], &buffer[1], bytesInBuffer);
+        std::memmove(&buffer[0], &buffer[1], _bytesInBuffer);
     }
 }
 
