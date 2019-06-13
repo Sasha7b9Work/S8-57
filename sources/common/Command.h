@@ -43,8 +43,8 @@ struct Command
 
 
 /// »звлекает режим рисовани€ - лини€ми (1) или точками (0)
-#define BUILD_MODE(modeDraw, step, enumAverage) ((uint8)((enumAverage << 4) + (step << 1) + modeDraw))
+#define BUILD_MODE(modeDraw, step, enumAverage) ((uint8)(((enumAverage) << 4) + ((step) << 1) + (modeDraw)))
 
-#define EXTRACT_MODE_DRAW(x)    (x & 0x01)
+#define EXTRACT_MODE_DRAW(x)    ((x) & 0x01)
 #define EXTRACT_STEP(x)         (((x) >> 1) & 0x07)
-#define EXTRACT_ENUM_AVERAGE(x)  (((x) >> 4) & 0x0f)
+#define EXTRACT_ENUM_AVERAGE(x) (((x) >> 4) & 0x0f)

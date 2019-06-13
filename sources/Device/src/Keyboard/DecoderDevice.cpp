@@ -5,6 +5,7 @@
 
 #include "Utils/Debug.h"
 #include "Display/Painter.h"
+#include <cstdlib>
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -187,9 +188,35 @@ static bool FuncScreen(uint8 data)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static bool AddToConsole(uint8)
+static bool AddToConsole(uint8 data)
 {
-    return true;
+    static char *text = nullptr;        // Здесь будет храниться принятая строка
+
+    static uint8 allSymbols = 0;        // Количество символов в строке без учёта завершающего нуля
+
+    static uint8 recvSymbols = 0;       // Столько символов уже принято
+
+    if (step == 0)
+    {
+        return false;
+    }
+
+    if (step == 1)
+    {
+        allSymbols = data;
+        text = (char *)std::malloc(allSymbols + 1U);
+        recvSymbols = 0;
+        return false;
+    }
+
+    text[recvSymbols++] = (char)data;
+
+    if (recvSymbols == allSymbols)
+    {
+        LOG_WRITE(text);
+    }
+
+    return (recvSymbols == allSymbols);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

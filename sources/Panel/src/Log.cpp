@@ -1,18 +1,19 @@
 #include "defines.h"
+#include "Command.h"
+#include "Transceiver.h"
 #include "Log.h"
 #include <Display/Display.h>
 #include <Hardware/CPU.h>
 #include <stdarg.h>
-#include <string.h>
+#include <cstring>
 #include <stdio.h>
-//#include "stub.h"
+#include <cstdlib>
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//static bool loggerUSB = false;
-
-
 #define SIZE_BUFFER_LOG 200
+
+static void AddToConsole(char *text);
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void Log::Write(TypeTrace type, const char *format, ...)
@@ -23,7 +24,7 @@ void Log::Write(TypeTrace type, const char *format, ...)
     if (type == TypeTrace_Error)
     {
         buffer[0] = 0;
-        strcat(buffer, "!!! ERROR !!! ");
+        std::strcat(buffer, "!!! ERROR !!! ");
         while (*pointer++) {};
         ++pointer;
     }
@@ -31,7 +32,7 @@ void Log::Write(TypeTrace type, const char *format, ...)
     va_start(args, format); //-V2528
     vsprintf(pointer, format, args);
     va_end(args);
-    DISPLAY_ADD_STRING(buffer);
+    AddToConsole(buffer);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -50,36 +51,36 @@ void Log::Trace(TypeTrace type, const char *module, const char *func, int numLin
 
     if (type == TypeTrace_Error)
     {
-        strcat(message, "!!!ERROR!!! ");
+        std::strcat(message, "!!!ERROR!!! ");
     }
     else if (type == TypeTrace_Info) //-V547
     {
-        strcat(message, "            ");
+        std::strcat(message, "            ");
     }
     else
     {
         // больше типов нет
     }
 
-    strcat(message, module);
-    strcat(message, " ");
-    strcat(message, func);
-    strcat(message, numBuffer);
-    DISPLAY_ADD_STRING(message);
-    DISPLAY_ADD_STRING(buffer);
+    std::strcat(message, module);
+    std::strcat(message, " ");
+    std::strcat(message, func);
+    std::strcat(message, numBuffer);
+    AddToConsole(message);
+    AddToConsole(buffer);
 }
 
-//----------------------------------------------------------------------------------------------------------------------------------------------------
-void Log::DisconnectLoggerUSB()
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+static void AddToConsole(char *text)
 {
-    //static uint8 data = 20;
-    //Log_Write("посылаю %d", data);
-    //VCP_SendData(&data, 1);
-}
+    uint8 *buffer = (uint8 *)std::malloc(std::strlen(text) + 3U);
 
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------
-void Log::EnableLoggerUSB(bool)
-{
-//    loggerUSB = enable;
+    if (buffer)
+    {
+        buffer[0] = Command::AddToConsole;
+        buffer[1] = (uint8)std::strlen(text);
+        std::strcpy((char *)(buffer + 1), text);
+        std::free(buffer);
+        Transceiver::Transmitter::Send(buffer, std::strlen(text) + 2);
+    }
 }

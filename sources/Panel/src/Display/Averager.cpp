@@ -76,68 +76,11 @@ void Averager::Tester::SetDataY(uint8 *y, int step)
         return;
     }
     
-    uint8 min = 0xff;
-    uint8 max = 0x00;
-    
-    for(int i = 0; i < TESTER_NUM_POINTS; i++)
-    {
-        if(y[i] < min)
-        {
-            min = y[i];
-        }
-        if(y[i] > max)
-        {
-            max = y[i];
-        }
-    }
-
     uint16 *ave = &dataY[step].data[0];
-
-    volatile uint16 oldAve[TESTER_NUM_POINTS];
-    volatile uint8  oldY[TESTER_NUM_POINTS];
     
-    volatile uint16 *pointerOldAve = &oldAve[0];
-    volatile uint8 *pointerOldY = &oldY[0];
-
-    for (int i = 0; i < TESTER_NUM_POINTS; i++)
-    {
-        oldAve[i] = ave[i];
-        oldY[i] = y[i];
-    }
-
     for (int i = 0; i < TESTER_NUM_POINTS; i++)
     {
         ave[i] = (uint16)(ave[i] - (ave[i] >> enumAve) + y[i]);
         y[i] = (uint8)(ave[i] >> enumAve);
-    }
-    
-    uint8 minAfter = 0xff;
-    uint8 maxAfter = 0x00;
-    
-    for(int i = 0; i < TESTER_NUM_POINTS; i++)
-    {
-        if(y[i] < minAfter)
-        {
-            minAfter = y[i];
-        }
-        if(y[i] > maxAfter)
-        {
-            maxAfter = y[i];
-        }
-    }
-    
-    if(minAfter > 100)
-    {
-        minAfter = minAfter;
-    }
-    
-    if(minAfter != 0)
-    {
-        minAfter = minAfter;
-    }
-    
-    if(minAfter == 0)
-    {
-        minAfter = minAfter;
     }
 }
