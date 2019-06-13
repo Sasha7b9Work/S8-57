@@ -214,6 +214,7 @@ static bool AddToConsole(uint8 data)
     if (recvSymbols == allSymbols)
     {
         LOG_WRITE(text);
+        std::free(text);
     }
 
     return (recvSymbols == allSymbols);

@@ -1,4 +1,5 @@
 #include "defines.h"
+#include "Log.h"
 #include "Command.h"
 #include "Averager.h"
 #include <cstring>
@@ -46,7 +47,7 @@ void Averager::Tester::SetCount(int count)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Averager::Tester::SetDataX(uint16 *data, int step)
+void Averager::Tester::ProcessX(uint16 *data, int step)
 {
     if (enumAve == 0)
     {
@@ -64,7 +65,7 @@ void Averager::Tester::SetDataX(uint16 *data, int step)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Averager::Tester::SetDataY(uint8 *y, int step)
+void Averager::Tester::ProcessY(uint8 *y, int step)
 {
     if(step != 0)
     {
@@ -77,6 +78,8 @@ void Averager::Tester::SetDataY(uint8 *y, int step)
     }
     
     uint16 *ave = &dataY[step].data[0];
+
+    LOG_WRITE("Перед %d %d %d %d %d", y[0], y[1], y[2], y[3], y[4]);
     
     for (int i = 0; i < TESTER_NUM_POINTS; i++)
     {
