@@ -1,6 +1,5 @@
 #pragma once
 
-#define SEL_DISP_Pin GPIO_PIN_4
 #define SEL_DISP_GPIO_Port GPIOC
 #define LED1_GPIO_Port GPIOC
 #define FLAG0_Pin GPIO_PIN_1
