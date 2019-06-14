@@ -118,32 +118,22 @@ bool FPGA::ForTester::Start() // -V2506
 
     TBase::Load();
     
-    FSMC::WriteToFPGA16(WR::POST_LO, (uint16)(~(400 + 1)));
-    FSMC::WriteToFPGA16(WR::PRED_LO, (uint16)(~(0+ 3)));
+    FSMC::WriteToFPGA16(WR::POST_LO, (uint16)(~(400)));
+    FSMC::WriteToFPGA16(WR::PRED_LO, (uint16)(~(1)));
     FSMC::WriteToFPGA8(WR::START, 0xff);
 
     GiveStart();
 
     return true;
 
-    HAL::ReadFlag();
-
-    if (HAL::GetFlag::PRED())
-    {
-        GiveStart();
-        return true;
-    }
-    
-    return false;
-
 //    uint start = TIME_US;
-//    HAL::flag = 0;
+//    HAL::ReadFlag();
 //
 //    while (!HAL::GetFlag::PRED())
 //    {
 //        HAL::ReadFlag();
-//        if(TIME_US - start > 1000) /// \todo Временная затычка. Надо сделать так, чтобы такие ситуации были исключены. Сбои происходят, во время
-//        {                               /// нажатия кнопок
+//        if(TIME_US - start > 250)     /// \todo Временная затычка. Надо сделать так, чтобы такие ситуации были исключены. Сбои происходят, во время нажатия кнопок
+//        {
 //            return false;
 //        }
 //    }
