@@ -1,6 +1,5 @@
 #include "defines.h"
 #include "device.h"
-#include "main.h"
 #include "Display/Display_Primitives.h"
 #include "Display/Symbols.h"
 #include "Display/Painter.h"
