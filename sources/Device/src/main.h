@@ -3,7 +3,6 @@
 #define CS_DISP_GPIO_Port GPIOA
 #define SEL_DISP_Pin GPIO_PIN_4
 #define SEL_DISP_GPIO_Port GPIOC
-#define LED1_Pin GPIO_PIN_5
 #define LED1_GPIO_Port GPIOC
 #define FLAG0_Pin GPIO_PIN_1
 #define FLAG0_GPIO_Port GPIOG

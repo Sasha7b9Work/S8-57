@@ -109,9 +109,6 @@ static void MX_GPIO_Init()
     GPIO_InitTypeDef GPIO_InitStruct;
 
     /*Configure GPIO pin Output Level */
-    HAL_GPIO_WritePin(GPIOC, SEL_DISP_Pin | LED1_Pin, GPIO_PIN_RESET);
-
-    /*Configure GPIO pin Output Level */
     HAL_GPIO_WritePin(GPIOG, A_LF1_Pin | A_LF2_Pin | A_A1S_Pin
         | A_A0S_Pin | A_LFS_Pin | A_temp_Pin | SPI3_CS2_Pin
         | SPI3_CS3_Pin | KTG15_Pin, GPIO_PIN_RESET);
@@ -124,7 +121,7 @@ static void MX_GPIO_Init()
         | SPI3_CS1_Pin, GPIO_PIN_RESET);
 
     /*Configure GPIO pins : SEL_DISP_Pin LED1_Pin */
-    GPIO_InitStruct.Pin = SEL_DISP_Pin | LED1_Pin;
+    GPIO_InitStruct.Pin = SEL_DISP_Pin;
     GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
     GPIO_InitStruct.Pull = GPIO_NOPULL;
     GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
