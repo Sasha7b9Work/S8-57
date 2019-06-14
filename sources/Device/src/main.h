@@ -1,7 +1,5 @@
 #pragma once
 
-#define SEL_DISP_GPIO_Port GPIOC
-#define LED1_GPIO_Port GPIOC
 #define FLAG0_Pin GPIO_PIN_1
 #define FLAG0_GPIO_Port GPIOG
 #define KT_Pin GPIO_PIN_15
@@ -35,5 +33,3 @@
 #define SPI3_CS3_GPIO_Port GPIOG
 #define KTG15_Pin GPIO_PIN_15
 #define KTG15_GPIO_Port GPIOG
-#define FL_DISP_Pin GPIO_PIN_6
-#define FL_DISP_GPIO_Port GPIOB

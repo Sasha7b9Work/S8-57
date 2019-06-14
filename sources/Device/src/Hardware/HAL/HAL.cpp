@@ -166,10 +166,4 @@ static void MX_GPIO_Init()
     GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
     GPIO_InitStruct.Alternate = GPIO_AF6_SPI3;
     HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
-
-    /*Configure GPIO pin : FL_DISP_Pin */
-    GPIO_InitStruct.Pin = FL_DISP_Pin;
-    GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
-    GPIO_InitStruct.Pull = GPIO_NOPULL;
-    HAL_GPIO_Init(FL_DISP_GPIO_Port, &GPIO_InitStruct);
 }
