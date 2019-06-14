@@ -110,8 +110,7 @@ AЦП
     PNP     54
     U       55
     I       56
-    
-TEST_STR    99
+    STR     99
 
 CS_DISP     43
 SEL_DIS     44

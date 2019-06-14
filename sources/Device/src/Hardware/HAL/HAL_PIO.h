@@ -97,7 +97,9 @@ namespace HAL
         };
 
         void Init(Port::E port, uint pins, Mode::E mode, Pull::E pull, Speed::E speed = Speed::Low, Alternate::E alternate = Alternate::AF0_MCO);
+        /// Установка в "1"
         void Set(Port::E port, uint16 pin);
+        /// Установка в "0"
         void Reset(Port::E port, uint16 pin);
         void Write(Port::E port, uint16 pin, State::E state);
         bool Read(Port::E port, uint16 pin);

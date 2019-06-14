@@ -39,8 +39,7 @@
 #define A_LFS_GPIO_Port GPIOG
 #define A_temp_Pin GPIO_PIN_7
 #define A_temp_GPIO_Port GPIOG
-#define TESTER_STR_Pin GPIO_PIN_9
-#define TESTER_STR_GPIO_Port GPIOC
+//#define TESTER_STR_GPIO_Port GPIOC
 #define SPI3_CS1_Pin GPIO_PIN_3
 #define SPI3_CS1_GPIO_Port GPIOD
 #define FMC_NE4_______________GPIO_Port GPIOG

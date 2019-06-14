@@ -79,6 +79,20 @@ void Tester::Init()
         }
     }
 
+    HAL::PIO::Init(HAL::PIO::Port::_A, HAL::PIO::Pin::_5, HAL::PIO::Mode::Analog, HAL::PIO::Pull::No);    // Настраиваем выходной порт
+
+    //                         TEST_ON               PNP               U
+    uint pins = (uint)(Tester::Pin_TEST_ON | Tester::Pin_PNP | Tester::Pin_U);
+    HAL::PIO::Init(Port_TEST_ON, pins, HAL::PIO::Mode::Output_PP, HAL::PIO::Pull::Down);
+
+    //                               I
+    HAL::PIO::Init(Port_I, Tester::Pin_I, HAL::PIO::Mode::Output_PP, HAL::PIO::Pull::Down);
+
+    //              TEST_STR - EXTI9
+    HAL::PIO::Init(Port_TEST_STR, Tester::Pin_TEST_STR, HAL::PIO::Mode::RisingIT, HAL::PIO::Pull::No);
+
+    HAL::PIO::Set(Port_TEST_ON, Tester::Pin_TEST_ON);         // Отключаем тестер-компонет
+
     DAC2_::Init();
 
     Disable();
