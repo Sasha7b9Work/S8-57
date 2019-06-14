@@ -36,32 +36,26 @@ struct StructDATA
     uint8 y[TESTER_NUM_POINTS];
 };
 
-/// Ёто отрисовываемые данные
+/// Ёто отрисовываемые данные - после усреднени€
 static StructDATA data      __attribute__((section("CCM_DATA")));
-
+/// ћассив накопленных усреднений
 static StructAVE ave[5]     __attribute__((section("CCM_DATA")));
-
-static StructAVE old[5]     __attribute__((section("CCM_DATA")));
-
-static StructAVE current[5] __attribute__((section("CCM_DATA")));
+/// ѕредыдущие поданные данные
+static StructDATA old[5]     __attribute__((section("CCM_DATA")));
+/// “екущие поданные данные
+static StructDATA current[5] __attribute__((section("CCM_DATA")));
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-static void Copy16to32(const uint16 *_data, uint *buffer)
+static void Copy16(uint16 *dest, const uint16 *src)
 {
-    for (int i = 0; i < TESTER_NUM_POINTS; i++)
-    {
-        buffer[i] = _data[i];
-    }
+    std::memcpy(dest, src, TESTER_NUM_POINTS * 2);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void Copy8to16(const uint8 *_data, uint16 *buffer)
+static void Copy8(uint8 *dest, const uint8 *src)
 {
-    for (int i = 0; i < TESTER_NUM_POINTS; i++)
-    {
-        buffer[i] = _data[i];
-    }
+    std::memcpy(dest, src, TESTER_NUM_POINTS);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -83,43 +77,16 @@ void Averager::Tester::SetCount(int count)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static int Difference(int step)
-{
-    int max = 0;
-
-    for (int i = 0; i < TESTER_NUM_POINTS; i++)
-    {
-        int diffX = (int)old[step].x.data[i] - (int)current[step].x.data[i];
-        if (diffX < 0)
-        {
-            diffX = -diffX;
-        }
-        if (diffX > max)
-        {
-            max = diffX;
-        }
-
-        int diffY = old[step].y.data[i] - current[step].y.data[i];
-        if (diffY < 0)
-        {
-            diffY = -diffY;
-        }
-        if (diffY > max)
-        {
-            max = diffY;
-        }
-    }
-
-    return max;
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Averager::Tester::Process(const uint16 *dataX, const uint8 *dataY, int step)
 {
-    Copy16to32(dataX, current[step].x.data);
+    Copy16(current[step].x, dataX);
+    Copy8(current[step].y, dataY);
 
     if (enumAve == 0)
     {
+        Copy16(data.x, dataX);
+        Copy8(data.y, dataY);
+
         return;
     }
 
@@ -131,19 +98,8 @@ void Averager::Tester::Process(const uint16 *dataX, const uint8 *dataY, int step
         data.x[i] = (uint16)(ave32[i] >> enumAve);
     }
 
-    Copy8to16(dataY, current[step].y.data);
-
-    static int count = 0;
-
-    LOG_WRITE("%d разность = %d", count++, Difference(step));
-
-    std::memcpy(old[step].x.data, current[step].x.data, TESTER_NUM_POINTS * 4);
-    std::memcpy(old[step].y.data, current[step].y.data, TESTER_NUM_POINTS * 2);
-
-    if (enumAve == 0)
-    {
-        return;
-    }
+    Copy16(old[step].x, current[step].x);
+    Copy8(old[step].y, current[step].y);
     
     uint16 *ave16 = &ave[step].y.data[0];
 

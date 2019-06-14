@@ -24,9 +24,6 @@ static bool ready[Tester::NUM_STEPS] = {false, false, false, false, false};
 static array8 *datY = (array8 *)OUT_A;
 static array16 *datX = (array16 *)OUT_B;
 
-static bool alreadyDrawing[5] = { false, false, false, false, false };
-
-
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /// Написать легенду изображения
 static void DrawLegend(int x, int y);
@@ -82,17 +79,6 @@ static Color ColorForStep(int _step)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void DrawData(int numStep)
 {
-    if (alreadyDrawing[numStep])
-
-    {
-        return;
-    }
-
-    if(numStep != 0)
-    {
-        return;
-    }
-    
     if(!ready[numStep])
     {
         return;
@@ -103,34 +89,12 @@ static void DrawData(int numStep)
     
     uint8 mode = BUILD_MODE(TESTER_VIEW_MODE, numStep, TESTER_ENUM_AVERAGE);
 
-    //for (int i = 0; i < TESTER_NUM_POINTS; i++)
-    //{
-    //    x[i] = i;
-    //    y[i] = 255 - x[i];
-    //}
-    
     Painter::DrawTesterData(mode, ColorForStep(numStep), x, y);
-    
-    
-    volatile int viewMode = EXTRACT_MODE_DRAW(mode);
-    volatile int step = EXTRACT_STEP(mode);
-    volatile int enumAve = EXTRACT_ENUM_AVERAGE(mode);
-    
-    viewMode = viewMode;
-    step = step;
-    enumAve = enumAve;
-    
-    
-    enumAve = enumAve;
-
-    alreadyDrawing[numStep] = true;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Tester::Display::SetPoints(int numStep, const uint16 dx[TESTER_NUM_POINTS], const uint8 dy[TESTER_NUM_POINTS])
 {
-    alreadyDrawing[numStep] = false;
-
     ready[numStep] = true;
 
     uint16 *x = &(*datX)[numStep][0];
