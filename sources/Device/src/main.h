@@ -7,14 +7,6 @@
 #define SEL_DISP_GPIO_Port GPIOC
 #define LED1_Pin GPIO_PIN_5
 #define LED1_GPIO_Port GPIOC
-#define TESTER_ON_Pin GPIO_PIN_13
-#define TESTER_ON_GPIO_Port GPIOF
-#define TESTER_PNP_Pin GPIO_PIN_14
-#define TESTER_PNP_GPIO_Port GPIOF
-#define TESTER_U_Pin GPIO_PIN_15
-#define TESTER_U_GPIO_Port GPIOF
-#define TESTER_I_Pin GPIO_PIN_0
-#define TESTER_I_GPIO_Port GPIOG
 #define FLAG0_Pin GPIO_PIN_1
 #define FLAG0_GPIO_Port GPIOG
 #define KT_Pin GPIO_PIN_15
@@ -39,7 +31,6 @@
 #define A_LFS_GPIO_Port GPIOG
 #define A_temp_Pin GPIO_PIN_7
 #define A_temp_GPIO_Port GPIOG
-//#define TESTER_STR_GPIO_Port GPIOC
 #define SPI3_CS1_Pin GPIO_PIN_3
 #define SPI3_CS1_GPIO_Port GPIOD
 #define FMC_NE4_______________GPIO_Port GPIOG

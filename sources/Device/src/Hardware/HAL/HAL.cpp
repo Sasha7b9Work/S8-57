@@ -112,10 +112,7 @@ static void MX_GPIO_Init()
     HAL_GPIO_WritePin(GPIOC, SEL_DISP_Pin | LED1_Pin, GPIO_PIN_RESET);
 
     /*Configure GPIO pin Output Level */
-    HAL_GPIO_WritePin(GPIOF, TESTER_ON_Pin | TESTER_PNP_Pin | TESTER_U_Pin, GPIO_PIN_RESET);
-
-    /*Configure GPIO pin Output Level */
-    HAL_GPIO_WritePin(GPIOG, TESTER_I_Pin | A_LF1_Pin | A_LF2_Pin | A_A1S_Pin
+    HAL_GPIO_WritePin(GPIOG, A_LF1_Pin | A_LF2_Pin | A_A1S_Pin
         | A_A0S_Pin | A_LFS_Pin | A_temp_Pin | SPI3_CS2_Pin
         | SPI3_CS3_Pin | KTG15_Pin, GPIO_PIN_RESET);
 
@@ -133,17 +130,10 @@ static void MX_GPIO_Init()
     GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
     HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
 
-    /*Configure GPIO pins : TESTER_ON_Pin TESTER_PNP_Pin TESTER_U_Pin */
-    GPIO_InitStruct.Pin = TESTER_ON_Pin | TESTER_PNP_Pin | TESTER_U_Pin;
-    GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
-    GPIO_InitStruct.Pull = GPIO_NOPULL;
-    GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-    HAL_GPIO_Init(GPIOF, &GPIO_InitStruct);
-
     /*Configure GPIO pins : TESTER_I_Pin A_LF1_Pin A_LF2_Pin A_A1S_Pin
     A_A0S_Pin A_LFS_Pin A_temp_Pin SPI3_CS2_Pin
     SPI3_CS3_Pin KTG15_Pin */
-    GPIO_InitStruct.Pin = TESTER_I_Pin | A_LF1_Pin | A_LF2_Pin | A_A1S_Pin
+    GPIO_InitStruct.Pin = A_LF1_Pin | A_LF2_Pin | A_A1S_Pin
         | A_A0S_Pin | A_LFS_Pin | A_temp_Pin | SPI3_CS2_Pin
         | SPI3_CS3_Pin | KTG15_Pin;
     GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
