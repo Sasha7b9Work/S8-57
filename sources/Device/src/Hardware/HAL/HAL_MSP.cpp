@@ -52,35 +52,6 @@ void HAL_ADC_MspDeInit(const ADC_HandleTypeDef* hadc)
     }
 }
 
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void HAL_DAC_MspInit(const DAC_HandleTypeDef* hdac)
-{
-    GPIO_InitTypeDef GPIO_InitStruct;
-    if(hdac->Instance==DAC)
-    {
-        __HAL_RCC_DAC_CLK_ENABLE();
-    
-        GPIO_InitStruct.Pin = TESTER_DAC_Pin;
-        GPIO_InitStruct.Mode = GPIO_MODE_ANALOG;
-        GPIO_InitStruct.Pull = GPIO_NOPULL;
-        HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
-    }
-
-    HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void HAL_DAC_MspDeInit(const DAC_HandleTypeDef* hdac)
-{
-    if(hdac->Instance==DAC)
-    {
-        __HAL_RCC_DAC_CLK_DISABLE();
-  
-        HAL_GPIO_DeInit(GPIOA, TESTER_DAC_Pin);
-    }
-}
-
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void HAL_SPI_MspInit(const SPI_HandleTypeDef* hspi)
 {

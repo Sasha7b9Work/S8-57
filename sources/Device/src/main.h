@@ -1,7 +1,5 @@
 #pragma once
 
-#define TESTER_DAC_Pin GPIO_PIN_5
-#define TESTER_DAC_GPIO_Port GPIOA
 #define CS_DISP_GPIO_Port GPIOA
 #define SEL_DISP_Pin GPIO_PIN_4
 #define SEL_DISP_GPIO_Port GPIOC
