@@ -43,7 +43,7 @@ void Painter::EndScene()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Painter::DrawTesterData(uint8 mode, Color color, const uint16 *x, const uint8 *y)
 {
-    Buffer buffer(3 + 240 * 2 + 240);
+    Buffer buffer(3 + TESTER_NUM_POINTS * 2 + TESTER_NUM_POINTS);
     buffer.data[0] = Command::Paint_TesterLines;
     buffer.data[1] = mode;
     buffer.data[2] = color.value;

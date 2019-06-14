@@ -225,11 +225,6 @@ void Painter::DrawTesterData(uint8 mode, Color color, uint16 _x[TESTER_NUM_POINT
 
     int step = EXTRACT_STEP(mode);
 
-    if (step != 0)
-    {
-        return;
-    }
-
     int numAverage = EXTRACT_ENUM_AVERAGE(mode);
    
     Averager::Tester::SetCount(numAverage);
@@ -247,8 +242,7 @@ void Painter::DrawTesterData(uint8 mode, Color color, uint16 _x[TESTER_NUM_POINT
     }
     else
     {
-//        for(int i = 1; i < TESTER_NUM_POINTS - 1; i++)
-        for(int i = 60; i < 120; i++)
+        for(int i = 1; i < (TESTER_NUM_POINTS - 1) / 2; i++)
         {
             DrawLine(x[i], y[i], x[i + 1], y[i + 1]);
         }

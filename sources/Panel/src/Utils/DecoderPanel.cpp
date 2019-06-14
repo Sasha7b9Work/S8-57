@@ -190,7 +190,7 @@ static bool DrawTesterPoints(uint8 data)
         }
         else
         {
-            buffer[240 * 2 + numY++] = data;
+            buffer[TESTER_NUM_POINTS * 2 + numY++] = data;
         }
 
         if(numY == TESTER_NUM_POINTS)
