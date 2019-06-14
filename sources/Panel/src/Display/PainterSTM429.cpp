@@ -233,8 +233,7 @@ void Painter::DrawTesterData(uint8 mode, Color color, uint16 _x[TESTER_NUM_POINT
     int numAverage = EXTRACT_ENUM_AVERAGE(mode);
    
     Averager::Tester::SetCount(numAverage);
-    Averager::Tester::ProcessX(_x, step);
-    Averager::Tester::ProcessY(_y, step);
+    Averager::Tester::Process(_x, _y, step);
 
     uint16 *x = Averager::Tester::X();
     uint8 *y = Averager::Tester::Y();
