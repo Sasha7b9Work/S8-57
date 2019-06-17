@@ -44,8 +44,8 @@ static void OnChanged_Step(bool)
 DEF_CHOICE_2(   cStepU,                                                                                                                                      //--- ТЕСТЕР-КОМПОНЕНТ - Шаг ---
     "Шаг",
     "Шаг испытательного напряжения",
-    "100 мВ",
-    "500 мВ",
+    "600 мВ",
+    "3 В",
     TESTER_STEP_U, pageTester, FuncActive, OnChanged_Step, Choice::EmptyDraw
 )
 
@@ -53,8 +53,8 @@ DEF_CHOICE_2(   cStepU,                                                         
 DEF_CHOICE_2( cStepI,
     "Шаг",
     "Шаг исптытательного тока",
-    "4 мА",
-    "20 мА",
+    "4 мкА",
+    "20 мкА",
     TESTER_STEP_I, pageTester, FuncActive, OnChanged_Step, Choice::EmptyDraw
 )
 

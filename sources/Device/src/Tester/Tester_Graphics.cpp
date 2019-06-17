@@ -51,8 +51,8 @@ void Tester::Display::Update()
 
     DrawLegend(274, 2);
 
-    DrawParametersChannel(Chan::A, 250, 206);
-    DrawParametersChannel(Chan::B, 3, 3);
+    DrawParametersChannel(Chan::A, 3, 3);
+    DrawParametersChannel(Chan::B, 240, 206);
 
     Rectangle(::Display::WIDTH - 1, ::Display::HEIGHT - 1).Draw(0, 0, Color::FILL);
     
@@ -127,8 +127,8 @@ static String ValueForStep(int step)
 {
     static pString valuesU[2][5] =
     {
-        {"0לֲ", "100לֲ", "200לֲ", "300לֲ", "400לֲ"},
-        {"0לֲ", "500לֲ", "1ֲ",    "1.5ֲ",  "2.0ֲ"}
+        {"0 ֲ", "0.6 ֲ", "1.2 ֲ", "1.8 ֲ", "2.4 ֲ"},
+        {"0 ֲ", "3 ֲ",   "6 ֲ",   "9 ֲ",   "12 ֲ"}
     };
 
     if (TESTER_CONTROL_IS_U)
@@ -138,8 +138,8 @@ static String ValueForStep(int step)
 
     static pString valuesI[2][5] =
     {
-        {"0לְ", "4לְ",  "8לְ",  "12לְ", "16לְ"},
-        {"0לְ", "20לְ", "40לְ", "60לְ", "80לְ"}
+        {"0 לךְ", "4 לךְ",  "8 לךְ",  "12 לךְ", "16 לךְ"},
+        {"0 לךְ", "20 לךְ", "40 לךְ", "60 לךְ", "80 לךְ"}
     };
 
     return String(valuesI[TESTER_STEP_I][step]);
