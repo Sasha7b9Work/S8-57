@@ -373,8 +373,6 @@ public:
     int16 GetValue();
 
     void SetValue(int16 v);
-    /// Обработчик нажатия по умолчанию
-    static void FuncChange() {}
 
 private:
 
