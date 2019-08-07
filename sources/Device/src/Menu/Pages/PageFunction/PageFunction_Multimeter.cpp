@@ -31,7 +31,7 @@ DEF_CHOICE_3( cRangesVoltageDC,                                                 
     "2 В",
     "20 В",
     "500 В",
-    MULTI_RANGE_VOLTAGE_DC, pageMultimeter, FuncActive_RangesVoltageDC, OnChange_VoltageDC, Choice::FuncDraw
+    MULTI_RANGE_VOLTAGE_DC, pageMultimeter, FuncActive_RangesVoltageDC, OnChange_VoltageDC, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -54,7 +54,7 @@ DEF_CHOICE_3( cRangesVoltageAC,                                                 
     "2 В",
     "20 В",
     "400 В",
-    MULTI_RANGE_VOLTAGE_AC, pageMultimeter, FuncActive_RnagesVoltageAC, OnChange_VoltageAC, Choice::FuncDraw
+    MULTI_RANGE_VOLTAGE_AC, pageMultimeter, FuncActive_RnagesVoltageAC, OnChange_VoltageAC, 0
 )
 
 
@@ -72,7 +72,7 @@ DEF_CHOICE_2( cRangesCurrentDC,
     "Диапазон измерения",
     "20мА",
     "2А",
-    MULTI_RANGE_CURRENT_DC, pageMultimeter, 0, OnChange_CurrentDC, Choice::FuncDraw
+    MULTI_RANGE_CURRENT_DC, pageMultimeter, 0, OnChange_CurrentDC, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -89,7 +89,7 @@ DEF_CHOICE_2( cRangesCurrentAC,
     "Диапазон измерения",
     "20мА",
     "2А",
-    MULTI_RANGE_CURRENT_AC, pageMultimeter, 0, OnChange_CurrentAC, Choice::FuncDraw
+    MULTI_RANGE_CURRENT_AC, pageMultimeter, 0, OnChange_CurrentAC, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -113,7 +113,7 @@ DEF_CHOICE_4(   cRangesResistance,                                              
     "20 кОм",
     "200 кОм",
     "10 МОм",
-    MULTI_RANGE_RESISTANCE, pageMultimeter, FuncActive_RangesReistance, OnChange_Resistance, Choice::FuncDraw
+    MULTI_RANGE_RESISTANCE, pageMultimeter, FuncActive_RangesReistance, OnChange_Resistance, 0
 )
 
 DEF_CHOICE_7(   cMode,
@@ -135,7 +135,7 @@ DEF_CHOICE_7(   cMode,
     "R",
     "VD",
     "Прозвонка",
-    MULTI_MEASURE, pageMultimeter, 0, PageFunction::PageMultimeter::OnChanged_Mode, Choice::FuncDraw
+    MULTI_MEASURE, pageMultimeter, 0, PageFunction::PageMultimeter::OnChanged_Mode, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -149,7 +149,7 @@ DEF_CHOICE_2 (cAVP,
     "Автовыбор предела",
     DISABLE_RU,
     ENABLE_RU,
-    MULTI_AVP, pageMultimeter, 0, OnChanged_AVP, Choice::FuncDraw
+    MULTI_AVP, pageMultimeter, 0, OnChanged_AVP, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -165,7 +165,7 @@ DEF_CHOICE_2(cZero,
     "",
     DISABLE_RU,
     ENABLE_RU,
-    zero, pageMultimeter, 0, OnChanged_Zero, Choice::FuncDraw
+    zero, pageMultimeter, 0, OnChanged_Zero, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -218,7 +218,7 @@ DEF_CHOICE_2( cCalibration,
     "",
     DISABLE_RU,
     ENABLE_RU,
-    calibration, pageMultimeter, 0, OnChanged_Calibration, Choice::FuncDraw
+    calibration, pageMultimeter, 0, OnChanged_Calibration, 0
 )
 
 

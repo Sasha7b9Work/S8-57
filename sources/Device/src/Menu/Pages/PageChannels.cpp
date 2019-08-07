@@ -39,7 +39,7 @@ DEF_CHOICE_2( cInputA,                                                          
     chanInput,
     DISABLE_RU,
     ENABLE_RU,
-    SET_ENABLED_A, pChanA, 0, PageChannelA::OnChanged_Input, Choice::FuncDraw
+    SET_ENABLED_A, pChanA, 0, PageChannelA::OnChanged_Input, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -54,7 +54,7 @@ DEF_CHOICE_3( cCoupleA,                                                         
     "Пост",
     "Перем",
     "Земля",
-    SET_COUPLE_A, pChanA, 0, PageChannelA::OnChanged_Couple, Choice::FuncDraw
+    SET_COUPLE_A, pChanA, 0, PageChannelA::OnChanged_Couple, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -68,7 +68,7 @@ DEF_CHOICE_2( cBandwidthA,                                                      
     "Задаёт полосу пропускания канала",
     "Полная",
     "20МГц",
-    SET_BANDWIDTH_A, pChanA, 0, OnChanged_ChanA_Bandwidth, Choice::FuncDraw
+    SET_BANDWIDTH_A, pChanA, 0, OnChanged_ChanA_Bandwidth, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -107,7 +107,7 @@ DEF_CHOICE_2(cDividerA,
     "",
     "1X",
     "10X",
-    divider[0], pChanA, 0, 0, Choice::FuncDraw
+    divider[0], pChanA, 0, 0, 0
 )
 
 
@@ -140,7 +140,7 @@ DEF_CHOICE_2( cInputB,                                                          
     chanInput,
     DISABLE_RU,
     ENABLE_RU,
-    SET_ENABLED_B, pChanB, 0, PageChannelB::OnChanged_Input, Choice::FuncDraw
+    SET_ENABLED_B, pChanB, 0, PageChannelB::OnChanged_Input, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -155,7 +155,7 @@ DEF_CHOICE_3( cCoupleB,                                                         
     "Пост",
     "Перем",
     "Земля",
-    SET_COUPLE_B, pChanB, 0, PageChannelB::OnChanged_Couple, Choice::FuncDraw
+    SET_COUPLE_B, pChanB, 0, PageChannelB::OnChanged_Couple, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -169,7 +169,7 @@ DEF_CHOICE_2( cBandwidthB,                                                      
     "",
     "Полная",
     "20МГц",
-    SET_BANDWIDTH_B, pChanB, 0, OnChanged_BandwidthB, Choice::FuncDraw
+    SET_BANDWIDTH_B, pChanB, 0, OnChanged_BandwidthB, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -190,7 +190,7 @@ DEF_CHOICE_2( cDividerB,
     "",
     "1X",
     "10X",
-    divider[1], pChanB, 0, 0, Choice::FuncDraw
+    divider[1], pChanB, 0, 0, 0
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

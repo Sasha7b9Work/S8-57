@@ -22,7 +22,7 @@ DEF_CHOICE_2( cEnable,                                                          
     "",
     DISABLE_RU,
     ENABLE_RU,
-    ACCUMULATION, pageAccum, 0, 0, Choice::FuncDraw
+    ACCUMULATION, pageAccum, 0, 0, 0
 )
 
 
@@ -41,7 +41,7 @@ DEF_CHOICE_9( cNumber,                                                          
     "64",
     "128",
     "Бесконечность",
-    ENUM_ACCUM, pageAccum, 0, 0, Choice::FuncDraw
+    ENUM_ACCUM, pageAccum, 0, 0, 0
 )
 
 

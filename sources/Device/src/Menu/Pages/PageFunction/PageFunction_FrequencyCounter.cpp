@@ -30,7 +30,7 @@ DEF_CHOICE_2( cEnable,                                                          
     "",
     DISABLE_RU,
     ENABLE_RU,
-    FREQ_METER_ENABLED, ppFreqMeter, 0, OnChanged_FreqMeter_Enable, Choice::FuncDraw
+    FREQ_METER_ENABLED, ppFreqMeter, 0, OnChanged_FreqMeter_Enable, 0
 )
 
 
@@ -45,7 +45,7 @@ DEF_CHOICE_2( cModeView,                                                        
     "",
     "„астота",
     "ѕериод",
-    FREQ_METER_MODE_VIEW, ppFreqMeter, IsActive_ModeView, 0, Choice::FuncDraw
+    FREQ_METER_MODE_VIEW, ppFreqMeter, IsActive_ModeView, 0, 0
 )
 
 
@@ -67,7 +67,7 @@ DEF_CHOICE_3( cTimeF,                                                           
     "100мс",
     "1с",
     "10с",
-    FREQ_METER_TIMECOUNTING, ppFreqMeter, IsActive_SettingsPeriod, OnChanged_FreqMeter_Frequency, Choice::FuncDraw
+    FREQ_METER_TIMECOUNTING, ppFreqMeter, IsActive_SettingsPeriod, OnChanged_FreqMeter_Frequency, 0
 )
 
 
@@ -78,7 +78,7 @@ DEF_CHOICE_4( cFreqClc,                                                         
     "1ћ√ц",
     "10ћ√ц",
     "100ћ√ц",
-    FREQ_METER_FREQ_CLC, ppFreqMeter, IsActive_SettingsFrequency, OnChanged_FreqMeter_Period, Choice::FuncDraw
+    FREQ_METER_FREQ_CLC, ppFreqMeter, IsActive_SettingsFrequency, OnChanged_FreqMeter_Period, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -91,7 +91,7 @@ DEF_CHOICE_6( cNumPeriods,                                                      
     "1000",
     "10000",
     "100000",
-    FREQ_METER_NUM_PERIODS, ppFreqMeter, IsActive_SettingsFrequency, OnChanged_FreqMeter_Period, Choice::FuncDraw
+    FREQ_METER_NUM_PERIODS, ppFreqMeter, IsActive_SettingsFrequency, OnChanged_FreqMeter_Period, 0
 )
 
 

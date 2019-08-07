@@ -428,8 +428,6 @@ public:
     static Color ColorMenuField(const Choice *choice);
 
     char GetSymbol();
-    /// Функция отрисовки по умолчанию
-    static void FuncDraw(int, int) {};
     /// Вызывает функцию funcOnChanged, если таковая имеется
     void Change(bool active) { if (funcOnChanged) { funcOnChanged(active); } }
 };

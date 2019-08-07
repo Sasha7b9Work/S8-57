@@ -20,7 +20,7 @@ DEF_CHOICE_2( cShow,                                                            
     "",
     "Нет",
     "Да",
-    set.dbg_showConsole, pageConsole, 0, 0, Choice::FuncDraw
+    set.dbg_showConsole, pageConsole, 0, 0, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -36,7 +36,7 @@ DEF_CHOICE_2( cSizeFont,                                                        
     "",
     "5",
     "8",
-    set.dbg_sizeFont, pageConsole, 0, 0, Choice::FuncDraw
+    set.dbg_sizeFont, pageConsole, 0, 0, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -45,7 +45,7 @@ DEF_CHOICE_2( cModeStop,                                                        
     "Предоставляет возможность приостановки вывода в консоль путём нажатия на кнопку ПУСК/СТОП",
     DISABLE_RU,
     ENABLE_RU,
-    MODE_PAUSE_CONSOLE, pageConsole, 0, 0, Choice::FuncDraw
+    MODE_PAUSE_CONSOLE, pageConsole, 0, 0, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -54,7 +54,7 @@ DEF_CHOICE_2( cRegisters_ShowAll,                                               
     "Показывать все значения, засылаемые в регистры",
     "Нет",
     "Да",
-    DBG_SHOW_ALL, pageRegisters, 0, 0, Choice::FuncDraw
+    DBG_SHOW_ALL, pageRegisters, 0, 0, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -68,7 +68,7 @@ DEF_CHOICE_2( cRegisters_RD_FL,                                                 
     "",
     DISABLE_RU,
     ENABLE_RU,
-    DBG_SHOW_FLAG, pageRegisters, IsActive_Console_Registers, 0, Choice::FuncDraw
+    DBG_SHOW_FLAG, pageRegisters, IsActive_Console_Registers, 0, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -77,7 +77,7 @@ DEF_CHOICE_2( cRegisters_RShiftA,                                               
     "",
     DISABLE_RU,
     ENABLE_RU,
-    set.dbg_showRShift[Chan::A], pageRegisters, IsActive_Console_Registers, 0, Choice::FuncDraw
+    set.dbg_showRShift[Chan::A], pageRegisters, IsActive_Console_Registers, 0, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -86,7 +86,7 @@ DEF_CHOICE_2( cRegisters_RShiftB,                                               
     "",
     DISABLE_RU,
     ENABLE_RU,
-    set.dbg_showRShift[Chan::B], pageRegisters, IsActive_Console_Registers, 0, Choice::FuncDraw
+    set.dbg_showRShift[Chan::B], pageRegisters, IsActive_Console_Registers, 0, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -95,7 +95,7 @@ DEF_CHOICE_2( cRegisters_TrigLev,                                               
     "",
     DISABLE_RU,
     ENABLE_RU,
-    set.dbg_showTrigLev, pageRegisters, IsActive_Console_Registers, 0, Choice::FuncDraw
+    set.dbg_showTrigLev, pageRegisters, IsActive_Console_Registers, 0, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -104,7 +104,7 @@ DEF_CHOICE_2( cRegisters_RangeA,                                                
     "",
     DISABLE_RU,
     ENABLE_RU,
-    set.dbg_showRange[Chan::A], pageRegisters, IsActive_Console_Registers, 0, Choice::FuncDraw
+    set.dbg_showRange[Chan::A], pageRegisters, IsActive_Console_Registers, 0, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -113,7 +113,7 @@ DEF_CHOICE_2( cRegisters_RangeB,                                                
     "",
     DISABLE_RU,
     ENABLE_RU,
-    set.dbg_showRange[Chan::B], pageRegisters, IsActive_Console_Registers, 0, Choice::FuncDraw
+    set.dbg_showRange[Chan::B], pageRegisters, IsActive_Console_Registers, 0, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -122,7 +122,7 @@ DEF_CHOICE_2( cRegisters_TrigParam,                                             
     "",
     DISABLE_RU,
     ENABLE_RU,
-    set.dbg_showTrigParam, pageRegisters, IsActive_Console_Registers, 0, Choice::FuncDraw
+    set.dbg_showTrigParam, pageRegisters, IsActive_Console_Registers, 0, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -131,7 +131,7 @@ DEF_CHOICE_2( cRegisters_ChanParamA,                                            
     "",
     DISABLE_RU,
     ENABLE_RU,
-    set.dbg_showChanParam[Chan::A], pageRegisters, IsActive_Console_Registers, 0, Choice::FuncDraw
+    set.dbg_showChanParam[Chan::A], pageRegisters, IsActive_Console_Registers, 0, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -140,7 +140,7 @@ DEF_CHOICE_2( cRegisters_ChanParamB,                                            
     "",
     DISABLE_RU,
     ENABLE_RU,
-    set.dbg_showChanParam[Chan::B], pageRegisters, IsActive_Console_Registers, 0, Choice::FuncDraw
+    set.dbg_showChanParam[Chan::B], pageRegisters, IsActive_Console_Registers, 0, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -149,7 +149,7 @@ DEF_CHOICE_2( cRegisters_TBase,                                                 
     "",
     DISABLE_RU,
     ENABLE_RU,
-    set.dbg_showTBase, pageRegisters, IsActive_Console_Registers, 0, Choice::FuncDraw
+    set.dbg_showTBase, pageRegisters, IsActive_Console_Registers, 0, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -158,7 +158,7 @@ DEF_CHOICE_2( cRegisters_TShift,                                                
     "",
     DISABLE_RU,
     ENABLE_RU,
-    set.dbg_showTShift, pageRegisters, IsActive_Console_Registers, 0, Choice::FuncDraw
+    set.dbg_showTShift, pageRegisters, IsActive_Console_Registers, 0, 0
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
