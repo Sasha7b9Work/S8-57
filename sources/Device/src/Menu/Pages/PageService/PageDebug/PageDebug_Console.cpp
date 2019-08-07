@@ -189,7 +189,7 @@ static void Draw_Console_SizeSettings(int x, int y)
 DEF_BUTTON( bSizeSettings,                                                                                                                      //--- ОТЛАДКА - КОНСОЛЬ - Размер настроек ---
     "",
     "Показывает текущий размер структуры для сохранения настроек",
-    pageConsole, Button::FuncActive, FuncPress, Draw_Console_SizeSettings
+    pageConsole, Button::FuncActive, Button::FuncPress, Draw_Console_SizeSettings
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

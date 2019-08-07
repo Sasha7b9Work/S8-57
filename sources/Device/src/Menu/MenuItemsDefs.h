@@ -1,6 +1,5 @@
 #pragma once
 #include "Utils/CommonFunctions.h"
-#define FuncPress           EmptyFuncVV
 #define FuncPressPage       EmptyFuncVB
 #define FuncBeforeDraw      EmptyFuncVV
 
