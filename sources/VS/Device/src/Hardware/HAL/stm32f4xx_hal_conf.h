@@ -43,7 +43,7 @@
 #define __weak __attribute((weak))
 #define __packed __attribute((packed))
 
-#include "main.h"
+    #include "main.h"
 /* Exported types ------------------------------------------------------------*/
 /* Exported constants --------------------------------------------------------*/
 

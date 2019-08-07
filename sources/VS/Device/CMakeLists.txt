@@ -2,14 +2,15 @@ cmake_minimum_required(VERSION 3.0)
 
 project (Device57)
 
-include_directories("..\\..\\VS\\Device\\src\\"
+include_directories(
+                    "..\\..\\VS\\Device\\src\\"
                     "..\\..\\Device\\src\\"
                     "..\\..\\Device\\src\\Hardware\\FatFS\\"
                     "..\\..\\Device\\src\\Hardware\\HAL\\"
                     "..\\..\\Device\\src\\Hardware\\USBD\\"
                     "..\\..\\Device\\src\\Hardware\\USBH\\"
                     "..\\..\\common\\"
-                    "..\\..\\common\\_VS\\"
+#                    "..\\..\\common\\_VS\\"
                     "..\\..\\common\\_VS\\CMSIS\\"
                     "..\\..\\common\\_VS\\FatFS\\"
                     "..\\..\\common\\_VS\\HAL\\"
@@ -17,7 +18,8 @@ include_directories("..\\..\\VS\\Device\\src\\"
                     "..\\..\\common\\_VS\\USBH\\"
                     "..\\..\\ThirdParty\\wxWidgets\\include\\"
                     "..\\..\\ThirdParty\\wxWidgets\\generated\\lib\\vc_dll\\mswud\\"
-                    "..\\..\\ThirdParty\\SDL2\\SDL2-2.0.9\\include\\")
+                    "..\\..\\ThirdParty\\SDL2\\SDL2-2.0.10\\include\\"
+                    )
                     
 add_definitions(-DSTM32F437xx -DOLD_RECORDER -DWXUSINGDLL -DUSE_SDL2 -DGUI)
 
@@ -25,6 +27,7 @@ SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -MP -Wall")
 
 add_compile_options(/wd4355)
 add_compile_options(/wd4459)
+add_compile_options(/wd4464) # relative include path contains '..'
 add_compile_options(/wd4505)
 add_compile_options(/wd4548)
 add_compile_options(/wd4571)
@@ -262,7 +265,7 @@ add_executable(Device57 ${SOURCES})
 target_link_libraries(Device57 "..\\..\\..\\ThirdParty\\wxWidgets\\generated\\lib\\vc_dll\\wxbase31ud.lib")
 target_link_libraries(Device57 "..\\..\\..\\ThirdParty\\wxWidgets\\generated\\lib\\vc_dll\\wxmsw31ud_core.lib")
 
-target_link_libraries(Device57 "..\\..\\..\\ThirdParty\\SDL2\\SDL2-2.0.9\\generated\\Debug\\SDL2-staticd.lib")
+target_link_libraries(Device57 "..\\..\\..\\ThirdParty\\SDL2\\SDL2-2.0.10\\generated\\Debug\\SDL2-staticd.lib")
 
 target_link_libraries(Device57 WinMM.lib)
 target_link_libraries(Device57 version.lib)

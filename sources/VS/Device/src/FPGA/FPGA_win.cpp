@@ -35,11 +35,11 @@ static float NextNoise()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void FPGA::ReadDataChanenl(Chan::E ch, uint8 data[MAX_NUM_POINTS])
+bool FPGA::ReadDataChanenl(Chan::E ch, uint8 data[MAX_NUM_POINTS])
 {
     if (!SET_ENABLED(ch))
     {
-        return;
+        return false;
     }
 
     float amplitude = 100.0F;
@@ -48,4 +48,6 @@ void FPGA::ReadDataChanenl(Chan::E ch, uint8 data[MAX_NUM_POINTS])
     {
         data[i] = (uint8)(FPGA::VALUE::AVE + amplitude * (sinf(i * 0.1F)) + NextNoise());
     }
+
+    return true;
 }

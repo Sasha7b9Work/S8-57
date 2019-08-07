@@ -337,7 +337,7 @@ void Frame::OnUp(wxCommandEvent &event)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Painter::DrawTesterData(uint8, Color, const uint8 *, const uint8 *)
+void Painter::DrawTesterData(uint8, Color, const uint16 *, const uint8 *)
 {
 
 }
