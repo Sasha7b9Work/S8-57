@@ -506,8 +506,6 @@ public:
     void DrawClosed(int x, int y);
     void DrawOpened(int x, int y);
     char GetSymbol();
-    /// Признак активности по умолчанию
-    static bool FuncActive() { return true; }
 };
 
 #define CHOICE_RUN_FUNC_CHANGED(c, val)     \
