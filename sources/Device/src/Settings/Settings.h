@@ -186,7 +186,7 @@ public:
     uint8                    math_currentCursor;        ///< Определяет, каким курсором спектра управляет ручка УСТАНОВКА.
     uint8                    math_posCur[2];            ///< Позиция курсора спектра. Изменяется 0...256.
     FFTmaxDB::E              math_FFTmaxDB;
-    Function::E              math_function;
+    MathFunction::E          math_function;
     ModeRegSet::E            math_modeRegSet;           ///< Функция ручки УСТАНОВКА - масштаб по времени или смещение по вертикали.
     Osci::Settings::Range::E math_range;
     int8                     math_divider;

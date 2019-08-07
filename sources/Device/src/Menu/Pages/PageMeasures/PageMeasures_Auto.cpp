@@ -82,10 +82,10 @@ DEF_CHOICE_2( cMode,                                                            
 DEF_PAGE_4( pageAuto, // -V641 // -V1027                                                                                                                           //--- ИЗМЕРЕНИЯ - АВТО ---
     "АВТОМАТ",
     "Доступ к настройкам автоматических измерений",
-    &cIsShow,                           ///< ИЗМЕРЕНИЯ - АВТОМАТ - Показывать
-    &cNumber,                           ///< ИЗМЕРЕНИЯ - АВТОМАТ - Количество
-    &cChannels,                         ///< ИЗМЕРЕНИЯ - АВТОМАТ - Каналы
-    PageMeasures::PageAuto::PageTune::pointer,    ///< ИЗМЕРЕНИЯ - АВТОМАТ - НАСТРОИТЬ
+    &cIsShow,                                   ///< ИЗМЕРЕНИЯ - АВТОМАТ - Показывать
+    &cNumber,                                   ///< ИЗМЕРЕНИЯ - АВТОМАТ - Количество
+    &cChannels,                                 ///< ИЗМЕРЕНИЯ - АВТОМАТ - Каналы
+    PageMeasures::PageAuto::PageTune::pointer,  ///< ИЗМЕРЕНИЯ - АВТОМАТ - НАСТРОИТЬ
     //&cMode,                           ///< ИЗМЕРЕНИЯ - АВТОМАТ - Вид
     Page::Name::Measures_Auto, PageMeasures::pointer, FuncActive, FuncPressPage, FuncDrawPage, FuncRegSetPage
 )

@@ -142,7 +142,7 @@ const Settings Settings::defaultSettings =
     0,                          // math_currentCursor;
     { 50, 50 },                 // math_posCur[2];    
     FFTmaxDB::_60,              // math_FFTmaxDB;     
-    Function::Sum,              // math_function;     
+    MathFunction::Sum,          // math_function;     
     ModeRegSet::Range,          // math_modeRegSet;   
     Range::_1V,                 // math_range;        
     Divider::_1,                // math_divider;      

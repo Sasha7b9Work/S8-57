@@ -1350,6 +1350,11 @@
               <FileType>8</FileType>
               <FilePath>.\src\Menu\Pages\PageMeasures\PageMeasures_Cursors_Set.cpp</FilePath>
             </File>
+            <File>
+              <FileName>PageMeasures_Math.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Menu\Pages\PageMeasures\PageMeasures_Math.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

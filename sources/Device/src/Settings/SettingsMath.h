@@ -30,14 +30,14 @@ struct ModeRegSet
     explicit ModeRegSet(E v) : value(v) {};
 };
 
-struct Function
+struct MathFunction
 {
     enum E
     {
         Sum,
         Mul
     } value;
-    explicit Function(E v) : value(v) {};
+    explicit MathFunction(E v) : value(v) {};
 };
 
 struct WindowFFT
@@ -108,8 +108,6 @@ struct FFTmaxDB
 #define SCALE_FFT_IS_LINEAR         (SCALE_FFT == ScaleFFT::Linear)
 
 #define MATH_FUNC                   (set.math_function)
-#define MATH_FUNC_IS_MUL            (MATH_FUNC == Function::Mul)
-#define MATH_FUNC_IS_SUM            (MATH_FUNC == Function::Sum)
 
 #define FUNC_MODE_DRAW              (set.math_modeDraw)
 #define FUNC_MODE_DRAW_IS_ENABLED   (FUNC_MODE_DRAW != FuncModeDraw::Disable)

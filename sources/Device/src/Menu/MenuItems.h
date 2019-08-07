@@ -253,6 +253,7 @@ public:
             Debug_Multimeter,           ///< ÎÒËÀÄÊÀ - ÌÓËÜÒÈÌÅÒĞ
             SB_Debug_Settings,          ///< ÎÒËÀÄÊÀ - ÍÀÑÒĞÎÉÊÈ
             SB_Debug_SerialNumber,      ///< ÎÒËÀÄÊÀ - Ñ/Í
+            Measures_Math,              ///< ÈÇÌÅĞÅÍÈß - ÌÀÒÅÌÀÒÈÊÀ
             Number,
             NoPage
         } value;
@@ -260,6 +261,7 @@ public:
 
     Page::Name::E GetName() const;     ///< Âîçâğàùàåò èìÿ ñòğàíèöû page
   
+    /// Ôóíêöèÿ àêòèâíîñòè ïî óìîë÷àíèş
     static bool FuncActive() { return true; }
 
     static void FuncPress(bool) {};
