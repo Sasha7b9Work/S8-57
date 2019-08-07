@@ -17,7 +17,7 @@ DEF_CHOICE_2( cFunction,
     "Выбор математической функции",
     "Сумма",
     "Произведение",
-    MATH_FUNC, pageMath, Choice::EmptyActive, Choice::EmptyChange, Choice::EmptyDraw
+    MATH_FUNC, pageMath, Choice::FuncActive, Choice::FuncChange, Choice::FuncDraw
 )
 
 

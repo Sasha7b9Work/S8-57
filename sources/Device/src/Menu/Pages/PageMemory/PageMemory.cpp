@@ -72,7 +72,7 @@ DEF_CHOICE_5( cPoints,                                                          
     namesLengthMemory[2],
     namesLengthMemory[3],
     namesLengthMemory[4],
-    FPGA_ENUM_POINTS, pageMemory, IsActive_Points, PageMemory::OnChanged_Points, Choice::EmptyDraw
+    FPGA_ENUM_POINTS, pageMemory, IsActive_Points, PageMemory::OnChanged_Points, Choice::FuncDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -172,7 +172,7 @@ DEF_CHOICE_2( cDrive_Name,                                                      
     ,
     "По маске",
     "Вручную",
-    FILE_NAMING_MODE, ppDrive, FuncActive, Choice::EmptyChange, Choice::EmptyDraw
+    FILE_NAMING_MODE, ppDrive, FuncActive, Choice::FuncChange, Choice::FuncDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -283,7 +283,7 @@ DEF_CHOICE_2( cDrive_SaveAs,                                                    
     ,
     "Изображение",
     "Текст",
-    MODE_SAVE, ppDrive, FuncActive, Choice::EmptyChange, Choice::EmptyDraw
+    MODE_SAVE, ppDrive, FuncActive, Choice::FuncChange, Choice::FuncDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -292,7 +292,7 @@ DEF_CHOICE_2( cDrive_ModeBtnMemory,                                             
     "",
     "Меню",
     "Сохранение",
-    MODE_BTN_MEMORY, ppDrive, FuncActive, Choice::EmptyChange, Choice::EmptyDraw
+    MODE_BTN_MEMORY, ppDrive, FuncActive, Choice::FuncChange, Choice::FuncDraw
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -449,7 +449,7 @@ DEF_CHOICE_2( cDrive_Autoconnect,                                               
     "Eсли \"Вкл\", при подключении внешнего накопителя происходит автоматический переход на страницу ПАМЯТЬ - Внешн ЗУ",
     DISABLE_RU,
     ENABLE_RU,
-    FLASH_AUTOCONNECT, ppDrive, FuncActive, Choice::EmptyChange, Choice::EmptyDraw
+    FLASH_AUTOCONNECT, ppDrive, FuncActive, Choice::FuncChange, Choice::FuncDraw
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

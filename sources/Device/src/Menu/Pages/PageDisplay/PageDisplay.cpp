@@ -27,7 +27,7 @@ DEF_CHOICE_2( cThickness,                                                       
     "Allows you to change the thickness of the signals displayed on the screen",
     "x1", "x1",
     "x3", "x3",
-    THICKNESS_SIGNAL, pageDisplay, FuncActive, Choice::EmptyChange, Choice::EmptyDraw
+    THICKNESS_SIGNAL, pageDisplay, FuncActive, Choice::FuncChange, Choice::FuncDraw
 )
 */
 
@@ -43,7 +43,7 @@ DEF_CHOICE_2( cViewMode,                                                        
     "Задаёт режим отображения сигнала.",
     "Вектор",
     "Точки",
-    MODE_DRAW_SIGNAL, pageDisplay, FuncActive, Choice::EmptyChange, Choice::EmptyDraw
+    MODE_DRAW_SIGNAL, pageDisplay, FuncActive, Choice::FuncChange, Choice::FuncDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -67,7 +67,7 @@ DEF_CHOICE_8( cMinMax,                                                          
     "32",
     "64",
     "128",
-    ENUM_MIN_MAX, pageDisplay, IsActive_MinMax, OnChanged_MinMax, Choice::EmptyDraw
+    ENUM_MIN_MAX, pageDisplay, IsActive_MinMax, OnChanged_MinMax, Choice::FuncDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -84,7 +84,7 @@ DEF_CHOICE_10( cSmoothing,                                                      
     "8 точек",
     "9 точек",
     "10 точек",
-    ENUM_SMOOTHING.value, pageDisplay, FuncActive, Choice::EmptyChange, Choice::EmptyDraw
+    ENUM_SMOOTHING.value, pageDisplay, FuncActive, Choice::FuncChange, Choice::FuncDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -96,7 +96,7 @@ DEF_CHOICE_5( cRefreshFPS,                                                      
     "5",
     "2",
     "1",
-    ENUM_SIGNALS_IN_SEC.value, pageDisplay, FuncActive, Choice::EmptyChange, Choice::EmptyDraw
+    ENUM_SIGNALS_IN_SEC.value, pageDisplay, FuncActive, Choice::FuncChange, Choice::FuncDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -106,7 +106,7 @@ DEF_CHOICE_2( cScaleYtype,                                                      
     "смещения на экране.",
     "Напряжение",
     "Деления",
-    LINKING_RSHIFT, pageDisplay, FuncActive, Choice::EmptyChange, Choice::EmptyDraw
+    LINKING_RSHIFT, pageDisplay, FuncActive, Choice::FuncChange, Choice::FuncDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -117,7 +117,7 @@ DEF_CHOICE_4( cType, // -V206                                                   
     "Тип 2",
     "Тип 3",
     "Тип 4",
-    TYPE_GRID, pageDisplay, FuncActive, Choice::EmptyChange, Choice::EmptyDraw
+    TYPE_GRID, pageDisplay, FuncActive, Choice::FuncChange, Choice::FuncDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -138,7 +138,7 @@ DEF_CHOICE_9(cAverage_Num,                                                      
     "64",
     "128",
     "256",
-    ENUM_AVE, pageDisplay, FuncActive, OnChange_AverageNum, Choice::EmptyDraw
+    ENUM_AVE, pageDisplay, FuncActive, OnChange_AverageNum, Choice::FuncDraw
 )
 
 

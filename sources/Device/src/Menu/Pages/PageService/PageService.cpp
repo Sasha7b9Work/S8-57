@@ -323,7 +323,7 @@ DEF_CHOICE_2( cSound_Enable,                                                    
     "¬ключение/выключение звука",
     DISABLE_RU,
     ENABLE_RU,
-    SOUND_ENABLED, ppSound, FuncActive, Choice::EmptyChange, Choice::EmptyDraw
+    SOUND_ENABLED, ppSound, FuncActive, Choice::FuncChange, Choice::FuncDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

@@ -13,7 +13,7 @@ DEF_CHOICE_2( cChanA,                                                           
     "Выбор канала 1 для записи и просмотра",
     DISABLE_RU,
     ENABLE_RU,
-    RECORDER_SOURCE_A, pageSource, FuncActive, Choice::EmptyChange, Choice::EmptyDraw
+    RECORDER_SOURCE_A, pageSource, FuncActive, Choice::FuncChange, Choice::FuncDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -22,7 +22,7 @@ DEF_CHOICE_2( cChanB,                                                           
     "Выбор канала 2 для записи и просмотра",
     DISABLE_RU,
     ENABLE_RU,
-    RECORDER_SOURCE_B, pageSource, FuncActive, Choice::EmptyChange, Choice::EmptyDraw
+    RECORDER_SOURCE_B, pageSource, FuncActive, Choice::FuncChange, Choice::FuncDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -31,7 +31,7 @@ DEF_CHOICE_2( cSensor,                                                          
     "Выбор датчика для записи и просмотра",
     DISABLE_RU,
     ENABLE_RU,
-    RECORDER_SOURCE_SENSOR, pageSource, FuncActive, Choice::EmptyChange, Choice::EmptyDraw
+    RECORDER_SOURCE_SENSOR, pageSource, FuncActive, Choice::FuncChange, Choice::FuncDraw
 )
 
 

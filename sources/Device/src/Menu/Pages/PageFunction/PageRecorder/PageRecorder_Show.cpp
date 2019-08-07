@@ -16,7 +16,7 @@ DEF_CHOICE_3( cSource,                                                          
     "ÎÇÓ",
     "USB-Flash",
     "USB-PC",
-    RECORDER_STORAGE_PLAY, pageShow, Choice::EmptyActive, Choice::EmptyChange, Choice::EmptyDraw
+    RECORDER_STORAGE_PLAY, pageShow, Choice::FuncActive, Choice::FuncChange, Choice::FuncDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -25,7 +25,7 @@ DEF_CHOICE_2( cCursor,
     "",
     "1",
     "2",
-    Recorder::Settings::currentCursor, pageShow, Choice::EmptyActive, Choice::EmptyChange, Choice::EmptyDraw
+    Recorder::Settings::currentCursor, pageShow, Choice::FuncActive, Choice::FuncChange, Choice::FuncDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

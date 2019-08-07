@@ -429,12 +429,12 @@ public:
     static Color ColorMenuField(const Choice *choice);
 
     char GetSymbol();
-    /// Пустая функция обработки изменения
-    static void EmptyChange(bool) {};
-    /// Пустой признак ативности
-    static bool EmptyActive() { return true; }
-
-    static void EmptyDraw(int, int) {};
+    /// Обработчик нажатия по умолчанию
+    static void FuncChange(bool) {};
+    /// Признак активности по умолчанию
+    static bool FuncActive() { return true; }
+    /// Функция отрисовки по умолчанию
+    static void FuncDraw(int, int) {};
 };
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// GovernorColor ///

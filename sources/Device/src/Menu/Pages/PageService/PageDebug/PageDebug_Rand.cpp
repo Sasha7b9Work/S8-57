@@ -48,7 +48,7 @@ DEF_CHOICE_2( cRand_ShowInfo,                                                   
     ,
     "Не показывать",
     "Показывать",
-    SHOW_RAND_INFO, pageRand, Choice::EmptyActive, Choice::EmptyChange, Choice::EmptyDraw
+    SHOW_RAND_INFO, pageRand, Choice::FuncActive, Choice::FuncChange, Choice::FuncDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -58,7 +58,7 @@ DEF_CHOICE_2( gRand_ShowStat,                                                   
     ,
     "Не показывать",
     "Показывать",
-    SHOW_RAND_STAT, pageRand, Choice::EmptyActive, Choice::EmptyChange, Choice::EmptyDraw
+    SHOW_RAND_STAT, pageRand, Choice::FuncActive, Choice::FuncChange, Choice::FuncDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -119,7 +119,7 @@ DEF_CHOICE_16( gGateMax,                                                        
     "130",
     "140",
     "150",
-    set.dbg_enum_gate_max, pageRand, Choice::EmptyActive, Choice::EmptyChange, Choice::EmptyDraw
+    set.dbg_enum_gate_max, pageRand, Choice::FuncActive, Choice::FuncChange, Choice::FuncDraw
 )
 
 
@@ -143,7 +143,7 @@ DEF_CHOICE_16( gGateMin,                                                        
     "130",
     "140",
     "150",
-    set.dbg_enum_gate_min, pageRand, Choice::EmptyActive, Choice::EmptyChange, Choice::EmptyDraw
+    set.dbg_enum_gate_min, pageRand, Choice::FuncActive, Choice::FuncChange, Choice::FuncDraw
 )
 
 

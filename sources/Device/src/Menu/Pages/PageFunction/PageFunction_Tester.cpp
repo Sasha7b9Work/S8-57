@@ -23,7 +23,7 @@ DEF_CHOICE_2( cPolarity,                                                        
     "Полярность испытательного воздействия",
     "+",
     "-",
-    TESTER_POLARITY, pageTester, FuncActive, OnChanged_Polarity, Choice::EmptyDraw
+    TESTER_POLARITY, pageTester, FuncActive, OnChanged_Polarity, Choice::FuncDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -32,7 +32,7 @@ DEF_CHOICE_2(   cControl,                                                       
     "Тип испытательного воздействия",
     "Напряжение",
     "Ток",
-    TESTER_CONTROL, pageTester, FuncActive, PageFunction::PageTester::OnChanged_Control, Choice::EmptyDraw
+    TESTER_CONTROL, pageTester, FuncActive, PageFunction::PageTester::OnChanged_Control, Choice::FuncDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -46,7 +46,7 @@ DEF_CHOICE_2(   cStepU,                                                         
     "Шаг испытательного напряжения",
     "600 мВ",
     "3 В",
-    TESTER_STEP_U, pageTester, FuncActive, OnChanged_Step, Choice::EmptyDraw
+    TESTER_STEP_U, pageTester, FuncActive, OnChanged_Step, Choice::FuncDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -55,7 +55,7 @@ DEF_CHOICE_2( cStepI,
     "Шаг исптытательного тока",
     "4 мкА",
     "20 мкА",
-    TESTER_STEP_I, pageTester, FuncActive, OnChanged_Step, Choice::EmptyDraw
+    TESTER_STEP_I, pageTester, FuncActive, OnChanged_Step, Choice::FuncDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -64,7 +64,7 @@ DEF_CHOICE_2( cViewMode,
     "",
     "Линии",
     "Точки",
-    TESTER_VIEW_MODE, pageTester, FuncActive, Choice::EmptyChange, Choice::EmptyDraw
+    TESTER_VIEW_MODE, pageTester, FuncActive, Choice::FuncChange, Choice::FuncDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -80,7 +80,7 @@ DEF_CHOICE_9( cAveraging,
     "64",
     "128",
     "256",
-    TESTER_ENUM_AVERAGE, pageTester, FuncActive, Choice::EmptyChange, Choice::EmptyDraw
+    TESTER_ENUM_AVERAGE, pageTester, FuncActive, Choice::FuncChange, Choice::FuncDraw
 )
 
 

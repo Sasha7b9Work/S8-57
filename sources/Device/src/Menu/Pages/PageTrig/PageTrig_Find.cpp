@@ -29,7 +29,7 @@ static const ChoiceBase cMode =                                                 
         "2. \"Автоматический\" - поиск производится автоматически."
     },
     (int8 *)&TRIG_MODE_FIND, // -V206
-    hintsSearch_Mode, Choice::EmptyChange, Choice::EmptyDraw
+    hintsSearch_Mode, Choice::FuncChange, Choice::FuncDraw
 };
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -41,7 +41,7 @@ static void OnPress_Search()
 DEF_BUTTON( bSearch,                                                                                                                                          //--- СИНХР - ПОИСК - Найти ---
     "Найти",
     "Производит поиск уровня синхронизации.",
-    pageFind, FuncActive, OnPress_Search, Choice::EmptyDraw
+    pageFind, FuncActive, OnPress_Search, Choice::FuncDraw
 )
 
 

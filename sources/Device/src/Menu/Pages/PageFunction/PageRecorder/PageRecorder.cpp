@@ -15,7 +15,7 @@ DEF_CHOICE_2( cShow,                                                            
     "Позволяет выводить данные регистратора при выключенном меню РЕГИСТРАТОР",
     "В режиме",
     "Всегда",
-    RECORDER_VIEW_ALLWAYS, pageRecorder, FuncActive, Choice::EmptyChange, Choice::EmptyDraw
+    RECORDER_VIEW_ALLWAYS, pageRecorder, FuncActive, Choice::FuncChange, Choice::FuncDraw
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

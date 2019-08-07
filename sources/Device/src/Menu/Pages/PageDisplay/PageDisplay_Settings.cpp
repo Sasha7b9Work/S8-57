@@ -43,7 +43,7 @@ DEF_CHOICE_3( cStringNavigation,                                                
     "Временно",
     "Всегда",
     "Никогда",
-    SHOW_STRING_NAVI, pageSettings, FuncActive, Choice::EmptyChange, Choice::EmptyDraw
+    SHOW_STRING_NAVI, pageSettings, FuncActive, Choice::FuncChange, Choice::FuncDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -62,7 +62,7 @@ DEF_CHOICE_3( cAltMarkers,                                                      
     "Скрывать",
     "Показывать",
     "Авто",
-    ALT_MARKERS, pageSettings, FuncActive, OnChanged_Settings_AltMarkers, Choice::EmptyDraw
+    ALT_MARKERS, pageSettings, FuncActive, OnChanged_Settings_AltMarkers, Choice::FuncDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -80,7 +80,7 @@ DEF_CHOICE_6( cAutoHide,                                                        
     "Через 15 сек",
     "Через 30 сек",
     "Через 60 сек",
-    MENU_AUTO_HIDE, pageSettings, FuncActive, OnChanged_Settings_AutoHide, Choice::EmptyDraw
+    MENU_AUTO_HIDE, pageSettings, FuncActive, OnChanged_Settings_AutoHide, Choice::FuncDraw
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

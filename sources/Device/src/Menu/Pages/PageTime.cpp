@@ -30,7 +30,7 @@ DEF_CHOICE_2( cSample,                                                          
     ,
     "Реальное время",
     "Эквивалентная",
-    SAMPLE_TYPE, pTime, IsActive_Sample, Choice::EmptyChange, Choice::EmptyDraw
+    SAMPLE_TYPE, pTime, IsActive_Sample, Choice::FuncChange, Choice::FuncDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -57,7 +57,7 @@ DEF_CHOICE_2( cPeakDet,                                                         
     ,
     DISABLE_RU,
     ENABLE_RU,
-    SET_PEAKDET, pTime, IsActive_PeakDet, PageTime::OnChanged_PeakDet, Choice::EmptyDraw
+    SET_PEAKDET, pTime, IsActive_PeakDet, PageTime::OnChanged_PeakDet, Choice::FuncDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -74,7 +74,7 @@ DEF_CHOICE_3( cTPos,                                                            
     "Лево",
     "Центр",
     "Право",
-    TPOS, pTime, FuncActive, PageTime::OnChanged_TPos, Choice::EmptyDraw
+    TPOS, pTime, FuncActive, PageTime::OnChanged_TPos, Choice::FuncDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -87,7 +87,7 @@ DEF_CHOICE_2(cDivRole,                                                          
     ,
     "Время",
     "Память",
-    TIME_DIV_XPOS, pTime, FuncActive, Choice::EmptyChange, Choice::EmptyDraw
+    TIME_DIV_XPOS, pTime, FuncActive, Choice::FuncChange, Choice::FuncDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -97,7 +97,7 @@ DEF_CHOICE_2( cShiftXtype,                                                      
     ,
     "Время",
     "Деления",
-    LINKING_TSHIFT, pTime, FuncActive, Choice::EmptyChange, Choice::EmptyDraw
+    LINKING_TSHIFT, pTime, FuncActive, Choice::FuncChange, Choice::FuncDraw
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

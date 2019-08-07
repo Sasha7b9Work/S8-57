@@ -136,7 +136,7 @@ DEF_CHOICE_3( cADC_Stretch_Mode,                                                
     DISABLE_RU,
     "Реальный",
     "Ручной",
-    NRST_STRETCH_ADC_TYPE, pppADC_Stretch, FuncActive, PageService::PageDebug::OnChanged_ADC_Stretch_Mode, Choice::EmptyDraw
+    NRST_STRETCH_ADC_TYPE, pppADC_Stretch, FuncActive, PageService::PageDebug::OnChanged_ADC_Stretch_Mode, Choice::FuncDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -349,7 +349,7 @@ DEF_CHOICE_2( cStats,                                                           
     ,
     "Не показывать",
     "Показывать",
-    SHOW_STAT, pageDebug, FuncActive, Choice::EmptyChange, Choice::EmptyDraw
+    SHOW_STAT, pageDebug, FuncActive, Choice::FuncChange, Choice::FuncDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -364,7 +364,7 @@ DEF_CHOICE_2( cDisplayOrientation,                                              
     ,
     "Прямая",
     "Обратная",
-    DISPLAY_ORIENTATION, pageDebug, FuncActive, PageService::PageDebug::OnChanged_DisplayOrientation, Choice::EmptyDraw
+    DISPLAY_ORIENTATION, pageDebug, FuncActive, PageService::PageDebug::OnChanged_DisplayOrientation, Choice::FuncDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
