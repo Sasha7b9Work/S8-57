@@ -464,7 +464,7 @@ DEF_PAGE_6( ppDrive,  //-V641 //-V1027                                          
     &cDrive_Autoconnect,    ///< ÏÀÌßÒÜ - ÂÍÅØÍ ÇÓ - Àâòîïîäêëþ÷åíèå
     Page::Name::Memory_Drive,
     &pageMemory,            ///< ÏÀÌßÒÜ
-    0, 0, 0, FuncRegSetPage
+    0, 0, 0, 0
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -475,7 +475,7 @@ DEF_PAGE_2( pageMemory, // -V641 // -V1027                                      
     PageMemory::PageRAM::pointer,      ///< ÏÀÌßÒÜ - ÏÎÑËÅÄÍÈÅ
     //PageMemory::PageROM::pointer,      ///< ÏÀÌßÒÜ - ÂÍÓÒÐ ÇÓ
     //&ppDrive,                           ///< ÏÀÌßÒÜ - ÂÍÅØÍ ÇÓ
-    Page::Name::Memory, nullptr, 0, 0, 0, FuncRegSetPage
+    Page::Name::Memory, nullptr, 0, 0, 0, 0
 )
 
 void PageMemory::SaveSignalToFlashDrive()

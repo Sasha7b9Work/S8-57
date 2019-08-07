@@ -112,5 +112,5 @@ DEF_PAGE_3( pTime, // -V641 // -V1027                                           
     &cTPos,             ///< ÐÀÇÂÅÐÒÊÀ - Òî
     //&cDivRole,          ///< ÐÀÇÂÅÐÒÊÀ - Ô-öèÿ ÂÐ/ÄÅË
     //&cShiftXtype,       ///< ÐÀÇÂÅÐÒÊÀ - Ñìåùåíèå
-    Page::Name::Time, nullptr, 0, 0, 0, FuncRegSetPage
+    Page::Name::Time, nullptr, 0, 0, 0, 0
 )

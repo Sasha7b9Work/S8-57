@@ -1,9 +1,6 @@
 #pragma once
 #include "Utils/CommonFunctions.h"
 
-bool EmptyFuncBKE(KeyEvent);
-#define FuncRegSetPage      EmptyFuncBKE
-
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #define DEF_BUTTON(name, title, hint, keeper, funcActive, funcPress, funcDraw)                                                                          \
@@ -121,7 +118,7 @@ static const Control * const  items##name[] = {                                 
     (Control *)item1, (Control *)item2, (Control *)item3, (Control *)item4, (Control *)item5, (Control *)item6, (Control *)item7,                       \
     (Control *)item8, (Control *)item9, (Control *)item10, (Control *)item11, (Control *)item12, (Control *)item13};                                    \
 static const PageBase name = {Control::Type::Page, 13, false, namePage, keeper, funcActive, {titleRU, titleEN, hintRU, hintEN},                         \
-    items##name, funcPress, FuncDrawPage, FuncRegSetPage};
+    items##name, funcPress, FuncDrawPage, 0};
 
 #define DEF_PAGE_15(name, namePage, keeper, funcActive, funcPress, titleRU, titleEN, hintRU, hintEN,                                                    \
     item1, item2, item3, item4, item5, item6, item7, item8, item9, item10,                                                                              \
@@ -130,7 +127,7 @@ static const Control * const  items##name[] = {(Control *)item1, (Control *)item
     (Control *)item6, (Control *)item7, (Control *)item8, (Control *)item9, (Control *)item10, (Control *)item11, (Control *)item12,                    \
     (Control *)item13, (Control *)item14, (Control *)item15};                                                                                           \
 static const PageBase name = {Control::Type::Page, 15, false, namePage, keeper, funcActive, {titleRU, titleEN, hintRU, hintEN},                         \
-    items##name, funcPress, FuncDrawPage, FuncRegSetPage};
+    items##name, funcPress, FuncDrawPage, 0};
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
