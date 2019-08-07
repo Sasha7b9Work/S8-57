@@ -30,7 +30,7 @@ DEF_CHOICE_2( cEnable,                                                          
     "",
     DISABLE_RU,
     ENABLE_RU,
-    FREQ_METER_ENABLED, ppFreqMeter, Choice::FuncActive, OnChanged_FreqMeter_Enable, Choice::FuncDraw
+    FREQ_METER_ENABLED, ppFreqMeter, 0, OnChanged_FreqMeter_Enable, Choice::FuncDraw
 )
 
 

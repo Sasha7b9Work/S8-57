@@ -27,7 +27,7 @@ DEF_CHOICE_2( cScheme,                                                          
     "Изменение цветовой схемы",
     "Схема 1",
     "Схема 2",
-    set.serv_colorScheme, pageColors, Choice::FuncActive, Choice::FuncChange, Choice::FuncDraw
+    set.serv_colorScheme, pageColors, 0, Choice::FuncChange, Choice::FuncDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -76,7 +76,7 @@ DEF_CHOICE_2( cBackground,                                                      
     "Выбор цвета фона",
     "Чёрный",
     "Белый",
-    BACKGROUND, pageColors, Choice::FuncActive, OnChanged_Settings_Colors_Background, Choice::FuncDraw
+    BACKGROUND, pageColors, 0, OnChanged_Settings_Colors_Background, Choice::FuncDraw
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

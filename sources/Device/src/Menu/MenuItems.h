@@ -437,8 +437,6 @@ public:
     char GetSymbol();
     /// Обработчик нажатия по умолчанию
     static void FuncChange(bool) {};
-    /// Признак активности по умолчанию
-    static bool FuncActive() { return true; }
     /// Функция отрисовки по умолчанию
     static void FuncDraw(int, int) {};
 };

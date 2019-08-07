@@ -25,7 +25,7 @@ DEF_CHOICE_2( cShow,                                                            
     "Включает/отключает курсоры.",
     "Нет",
     "Да",
-    CURS_SHOW, pageCursors, Choice::FuncActive, Choice::FuncChange, Choice::FuncDraw
+    CURS_SHOW, pageCursors, 0, Choice::FuncChange, Choice::FuncDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -42,7 +42,7 @@ DEF_CHOICE_4( cLookModeChanA,                                                   
     "Напряжение",
     "Время",
     "Напряж и время",
-    CURS_LOOK_MODE(Chan::A), pageCursors, Choice::FuncActive, Choice::FuncChange, Choice::FuncDraw
+    CURS_LOOK_MODE(Chan::A), pageCursors, 0, Choice::FuncChange, Choice::FuncDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -59,7 +59,7 @@ DEF_CHOICE_4( cLookModeChanB,                                                   
     "Напряжение",
     "Время",
     "Напряж. и время",
-    CURS_LOOK_MODE(Chan::B), pageCursors, Choice::FuncActive, Choice::FuncChange, Choice::FuncDraw
+    CURS_LOOK_MODE(Chan::B), pageCursors, 0, Choice::FuncChange, Choice::FuncDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -71,7 +71,7 @@ DEF_CHOICE_2( cShowFreq,                                                        
     ,
     DISABLE_RU,
     ENABLE_RU,
-    CURSORS_SHOW_FREQ, pageCursors, Choice::FuncActive, Choice::FuncChange, Choice::FuncDraw
+    CURSORS_SHOW_FREQ, pageCursors, 0, Choice::FuncChange, Choice::FuncDraw
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

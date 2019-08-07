@@ -19,7 +19,7 @@ static const char *hintsSearch_Mode[] = { "Ручной", "Hand", "Автоматический",  "
 
 static const ChoiceBase cMode =                                                                                                                               //--- СИНХР - ПОИСК - Режим ---
 {
-    Control::Type::Choice, 2, false, Page::Name::NoPage, &pageFind, Choice::FuncActive,
+    Control::Type::Choice, 2, false, Page::Name::NoPage, &pageFind, 0,
     {
         "Режим"
         ,

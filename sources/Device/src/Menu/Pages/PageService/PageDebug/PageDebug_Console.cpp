@@ -20,7 +20,7 @@ DEF_CHOICE_2( cShow,                                                            
     "",
     "Нет",
     "Да",
-    set.dbg_showConsole, pageConsole, Choice::FuncActive, Choice::FuncChange, Choice::FuncDraw
+    set.dbg_showConsole, pageConsole, 0, Choice::FuncChange, Choice::FuncDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -36,7 +36,7 @@ DEF_CHOICE_2( cSizeFont,                                                        
     "",
     "5",
     "8",
-    set.dbg_sizeFont, pageConsole, Choice::FuncActive, Choice::FuncChange, Choice::FuncDraw
+    set.dbg_sizeFont, pageConsole, 0, Choice::FuncChange, Choice::FuncDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -45,7 +45,7 @@ DEF_CHOICE_2( cModeStop,                                                        
     "Предоставляет возможность приостановки вывода в консоль путём нажатия на кнопку ПУСК/СТОП",
     DISABLE_RU,
     ENABLE_RU,
-    MODE_PAUSE_CONSOLE, pageConsole, Choice::FuncActive, Choice::FuncChange, Choice::FuncDraw
+    MODE_PAUSE_CONSOLE, pageConsole, 0, Choice::FuncChange, Choice::FuncDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -54,7 +54,7 @@ DEF_CHOICE_2( cRegisters_ShowAll,                                               
     "Показывать все значения, засылаемые в регистры",
     "Нет",
     "Да",
-    DBG_SHOW_ALL, pageRegisters, Choice::FuncActive, Choice::FuncChange, Choice::FuncDraw
+    DBG_SHOW_ALL, pageRegisters, 0, Choice::FuncChange, Choice::FuncDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

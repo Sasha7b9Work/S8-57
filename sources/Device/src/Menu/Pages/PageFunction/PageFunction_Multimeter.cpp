@@ -72,7 +72,7 @@ DEF_CHOICE_2( cRangesCurrentDC,
     "Диапазон измерения",
     "20мА",
     "2А",
-    MULTI_RANGE_CURRENT_DC, pageMultimeter, Choice::FuncActive, OnChange_CurrentDC, Choice::FuncDraw
+    MULTI_RANGE_CURRENT_DC, pageMultimeter, 0, OnChange_CurrentDC, Choice::FuncDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -89,7 +89,7 @@ DEF_CHOICE_2( cRangesCurrentAC,
     "Диапазон измерения",
     "20мА",
     "2А",
-    MULTI_RANGE_CURRENT_AC, pageMultimeter, Choice::FuncActive, OnChange_CurrentAC, Choice::FuncDraw
+    MULTI_RANGE_CURRENT_AC, pageMultimeter, 0, OnChange_CurrentAC, Choice::FuncDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -135,7 +135,7 @@ DEF_CHOICE_7(   cMode,
     "R",
     "VD",
     "Прозвонка",
-    MULTI_MEASURE, pageMultimeter, Choice::FuncActive, PageFunction::PageMultimeter::OnChanged_Mode, Choice::FuncDraw
+    MULTI_MEASURE, pageMultimeter, 0, PageFunction::PageMultimeter::OnChanged_Mode, Choice::FuncDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -149,7 +149,7 @@ DEF_CHOICE_2 (cAVP,
     "Автовыбор предела",
     DISABLE_RU,
     ENABLE_RU,
-    MULTI_AVP, pageMultimeter, Choice::FuncActive, OnChanged_AVP, Choice::FuncDraw
+    MULTI_AVP, pageMultimeter, 0, OnChanged_AVP, Choice::FuncDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -165,7 +165,7 @@ DEF_CHOICE_2(cZero,
     "",
     DISABLE_RU,
     ENABLE_RU,
-    zero, pageMultimeter, Choice::FuncActive, OnChanged_Zero, Choice::FuncDraw
+    zero, pageMultimeter, 0, OnChanged_Zero, Choice::FuncDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -218,7 +218,7 @@ DEF_CHOICE_2( cCalibration,
     "",
     DISABLE_RU,
     ENABLE_RU,
-    calibration, pageMultimeter, Choice::FuncActive, OnChanged_Calibration, Choice::FuncDraw
+    calibration, pageMultimeter, 0, OnChanged_Calibration, Choice::FuncDraw
 )
 
 

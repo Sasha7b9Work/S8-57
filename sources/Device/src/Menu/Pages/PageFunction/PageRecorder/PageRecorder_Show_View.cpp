@@ -14,7 +14,7 @@ DEF_CHOICE_2( cMove,                                                            
     "",
     "X",
     "Y",
-    RECORDER_AXIS_MOVE, pageView, Choice::FuncActive, Choice::FuncChange, Choice::FuncDraw
+    RECORDER_AXIS_MOVE, pageView, 0, Choice::FuncChange, Choice::FuncDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -23,7 +23,7 @@ DEF_CHOICE_2( cZoom,                                                            
     "",
     "X",
     "Y",
-    RECORDER_AXIS_ZOOM, pageView, Choice::FuncActive, Choice::FuncChange, Choice::FuncDraw
+    RECORDER_AXIS_ZOOM, pageView, 0, Choice::FuncChange, Choice::FuncDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

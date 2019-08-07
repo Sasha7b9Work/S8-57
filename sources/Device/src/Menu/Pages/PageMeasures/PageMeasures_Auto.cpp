@@ -19,7 +19,7 @@ DEF_CHOICE_2( cIsShow,                                                          
     "Выводить или не выводить измерения на экран",
     "Нет",
     "Да",
-    SHOW_MEASURES, pageAuto, Choice::FuncActive, Choice::FuncChange, Choice::FuncDraw
+    SHOW_MEASURES, pageAuto, 0, Choice::FuncChange, Choice::FuncDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

@@ -14,7 +14,7 @@ DEF_CHOICE_3( cDestination,                                                     
     "ÎÇÓ",
     "USB-Flash",
     "USB-PC",
-    RECORDER_STORAGE_RECORD, pageRecord, Choice::FuncActive, Choice::FuncChange, Button::EmptyDraw
+    RECORDER_STORAGE_RECORD, pageRecord, 0, Choice::FuncChange, Button::EmptyDraw
 )
 
 

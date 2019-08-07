@@ -172,7 +172,7 @@ DEF_CHOICE_2( cDrive_Name,                                                      
     ,
     "По маске",
     "Вручную",
-    FILE_NAMING_MODE, ppDrive, Choice::FuncActive, Choice::FuncChange, Choice::FuncDraw
+    FILE_NAMING_MODE, ppDrive, 0, Choice::FuncChange, Choice::FuncDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -283,7 +283,7 @@ DEF_CHOICE_2( cDrive_SaveAs,                                                    
     ,
     "Изображение",
     "Текст",
-    MODE_SAVE, ppDrive, Choice::FuncActive, Choice::FuncChange, Choice::FuncDraw
+    MODE_SAVE, ppDrive, 0, Choice::FuncChange, Choice::FuncDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -292,7 +292,7 @@ DEF_CHOICE_2( cDrive_ModeBtnMemory,                                             
     "",
     "Меню",
     "Сохранение",
-    MODE_BTN_MEMORY, ppDrive, Choice::FuncActive, Choice::FuncChange, Choice::FuncDraw
+    MODE_BTN_MEMORY, ppDrive, 0, Choice::FuncChange, Choice::FuncDraw
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -449,7 +449,7 @@ DEF_CHOICE_2( cDrive_Autoconnect,                                               
     "Eсли \"Вкл\", при подключении внешнего накопителя происходит автоматический переход на страницу ПАМЯТЬ - Внешн ЗУ",
     DISABLE_RU,
     ENABLE_RU,
-    FLASH_AUTOCONNECT, ppDrive, Choice::FuncActive, Choice::FuncChange, Choice::FuncDraw
+    FLASH_AUTOCONNECT, ppDrive, 0, Choice::FuncChange, Choice::FuncDraw
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

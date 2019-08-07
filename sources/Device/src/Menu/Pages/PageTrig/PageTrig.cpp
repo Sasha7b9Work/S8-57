@@ -56,7 +56,7 @@ DEF_CHOICE_3( cMode, // -V206                                                   
     "Авто ",
     "Ждущий",
     "Однократный",
-    START_MODE, pTrig, Choice::FuncActive, PageTrig::OnChanged_TrigMode, Choice::FuncDraw
+    START_MODE, pTrig, 0, PageTrig::OnChanged_TrigMode, Choice::FuncDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -71,7 +71,7 @@ DEF_CHOICE_2( cSource, // -V206                                                 
     ,
     "Канал 1",
     "Канал 2",
-    TRIG_SOURCE, pTrig, Choice::FuncActive, OnChanged_Source, Choice::FuncDraw
+    TRIG_SOURCE, pTrig, 0, OnChanged_Source, Choice::FuncDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -88,7 +88,7 @@ DEF_CHOICE_2( cPolarity, //-V206                                                
     ,
     "Фронт",
     "Срез",
-    TRIG_POLARITY, pTrig, Choice::FuncActive, OnChanged_Polarity, Choice::FuncDraw
+    TRIG_POLARITY, pTrig, 0, OnChanged_Polarity, Choice::FuncDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -108,7 +108,7 @@ DEF_CHOICE_3( cFiltr, // -V206                                                  
     "ПС",
     "НЧ",
     "ВЧ",
-    TRIG_INPUT, pTrig, Choice::FuncActive, OnChanged_Input, Choice::FuncDraw
+    TRIG_INPUT, pTrig, 0, OnChanged_Input, Choice::FuncDraw
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

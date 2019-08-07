@@ -25,7 +25,7 @@ DEF_CHOICE_2( cHoldOff,                                                         
     ,
     DISABLE_RU,
     ENABLE_RU,
-    TRIG_HOLDOFF_ENABLED, pageHoldOff, Choice::FuncActive, OnChanged_HoldOff, Choice::FuncDraw
+    TRIG_HOLDOFF_ENABLED, pageHoldOff, 0, OnChanged_HoldOff, Choice::FuncDraw
 )
 
 

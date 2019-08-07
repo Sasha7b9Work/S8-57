@@ -74,7 +74,7 @@ DEF_CHOICE_3( cTPos,                                                            
     "Лево",
     "Центр",
     "Право",
-    TPOS, pTime, Choice::FuncActive, PageTime::OnChanged_TPos, Choice::FuncDraw
+    TPOS, pTime, 0, PageTime::OnChanged_TPos, Choice::FuncDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -87,7 +87,7 @@ DEF_CHOICE_2(cDivRole,                                                          
     ,
     "Время",
     "Память",
-    TIME_DIV_XPOS, pTime, Choice::FuncActive, Choice::FuncChange, Choice::FuncDraw
+    TIME_DIV_XPOS, pTime, 0, Choice::FuncChange, Choice::FuncDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -97,7 +97,7 @@ DEF_CHOICE_2( cShiftXtype,                                                      
     ,
     "Время",
     "Деления",
-    LINKING_TSHIFT, pTime, Choice::FuncActive, Choice::FuncChange, Choice::FuncDraw
+    LINKING_TSHIFT, pTime, 0, Choice::FuncChange, Choice::FuncDraw
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
