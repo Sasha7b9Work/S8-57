@@ -103,7 +103,11 @@ void Painter::EndScene()
 
     SDL_Rect rect = {0, 0, 320, 240};
 
-    SDL_RenderCopy(renderer, texture, NULL, &rect); //-V2001
+    if (texture)
+    {
+        SDL_RenderCopy(renderer, texture, NULL, &rect); //-V2001
+    }
+
     SDL_RenderPresent(renderer);
 }
 
