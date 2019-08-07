@@ -27,7 +27,7 @@ DEF_CHOICE_2( cShow,                                                            
 DEF_GOVERNOR( gNumStrings,                                                                                                                          //--- ОТЛАДКА - КОНСОЛЬ - Число строк ---
     "Число строк",
     "",
-    CONSOLE_NUM_STRINGS, 0, 33, pageConsole, Governor::FuncActive, Console::OnChangedMaxStringsInConsole, 0
+    CONSOLE_NUM_STRINGS, 0, 33, pageConsole, 0, Console::OnChangedMaxStringsInConsole, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

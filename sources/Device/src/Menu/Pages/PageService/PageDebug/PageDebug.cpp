@@ -275,7 +275,7 @@ static void OnChanged_ADC_Shift_A()
 DEF_GOVERNOR( gADC_Shift_A2mV, //-V641                                                                                                    //--- ОТЛАДКА - АЦП - ДОП СМЕЩ - См 1к 2мВ пост ---
     "См 1к 2мВ пост",
     "",
-    RSHIFT_ADD_STABLE_A(Range::_2mV), -100, 100, pppADC_Shift, Governor::FuncActive, OnChanged_ADC_Shift_A, 0
+    RSHIFT_ADD_STABLE_A(Range::_2mV), -100, 100, pppADC_Shift, 0, OnChanged_ADC_Shift_A, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -287,35 +287,35 @@ static void OnChanged_ADC_Shift_B()
 DEF_GOVERNOR( gADC_Shift_B2mV,                                                                                                            //--- ОТЛАДКА - АЦП - ДОП СМЕЩ - См 2к 2мВ пост ---
     "См 2к 2мВ пост",
     "",
-    RSHIFT_ADD_STABLE_B(Range::_2mV), -100, 100, pppADC_Shift, Governor::FuncActive, OnChanged_ADC_Shift_B, 0
+    RSHIFT_ADD_STABLE_B(Range::_2mV), -100, 100, pppADC_Shift, 0, OnChanged_ADC_Shift_B, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 DEF_GOVERNOR( gADC_Shift_A5mV,                                                                                                            //--- ОТЛАДКА - АЦП - ДОП СМЕЩ - См 1к 5мВ пост ---
     "См 1к 5мВ пост",
     "",
-    RSHIFT_ADD_STABLE_A(Range::_5mV), -100, 100, pppADC_Shift, Governor::FuncActive, OnChanged_ADC_Shift_A, 0
+    RSHIFT_ADD_STABLE_A(Range::_5mV), -100, 100, pppADC_Shift, 0, OnChanged_ADC_Shift_A, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 DEF_GOVERNOR( gADC_Shift_B5mV,                                                                                                            //--- ОТЛАДКА - АЦП - ДОП СМЕЩ - См 2к 5мВ пост ---
     "См 2к 5мВ пост",
     "",
-    RSHIFT_ADD_STABLE_B(Range::_5mV), -100, 100, pppADC_Shift, Governor::FuncActive, OnChanged_ADC_Shift_B, 0
+    RSHIFT_ADD_STABLE_B(Range::_5mV), -100, 100, pppADC_Shift, 0, OnChanged_ADC_Shift_B, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 DEF_GOVERNOR( gADC_Shift_A10mV,                                                                                                          //--- ОТЛАДКА - АЦП - ДОП СМЕЩ - См 1к 10мВ пост ---
     "См 1к 10мВ пост",
     "",
-    RSHIFT_ADD_STABLE_A(Range::_10mV), -100, 100, pppADC_Shift, Governor::FuncActive, OnChanged_ADC_Shift_A, 0
+    RSHIFT_ADD_STABLE_A(Range::_10mV), -100, 100, pppADC_Shift, 0, OnChanged_ADC_Shift_A, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 DEF_GOVERNOR( gADC_Shift_B10mV,                                                                                                          //--- ОТЛАДКА - АЦП - ДОП СМЕЩ - См 2к 10мВ пост ---
     "См 2к 10мВ пост",
     "",
-    RSHIFT_ADD_STABLE_B(Range::_10mV), -100, 100, pppADC_Shift, Governor::FuncActive, OnChanged_ADC_Shift_B, 0
+    RSHIFT_ADD_STABLE_B(Range::_10mV), -100, 100, pppADC_Shift, 0, OnChanged_ADC_Shift_B, 0
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -378,7 +378,7 @@ static void OnChanged_Pred()
 DEF_GOVERNOR( mgPred,                                                                                                                                          //--- ОТЛАДКА - Предзапуск ---
     "Предзапуск",
     "",
-    pred, 0, 15000, pageDebug, Governor::FuncActive, OnChanged_Pred, 0
+    pred, 0, 15000, pageDebug, 0, OnChanged_Pred, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -392,7 +392,7 @@ static void OnChanged_Post()
 DEF_GOVERNOR( mgPost,                                                                                                                                         //--- ОТЛАДКА - Послезапуск ---
     "Послезапуск",
     "",
-    post, 0, 15000, pageDebug, Governor::FuncActive, OnChanged_Post, 0
+    post, 0, 15000, pageDebug, 0, OnChanged_Post, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

@@ -20,14 +20,14 @@ const PageBase *PageService::PageDebug::PageRand::pointer = &pageRand;
 DEF_GOVERNOR( gRand_NumAverage,                                                                                                                        //--- ОТЛАДКА - РАНД-ТОР - Усредн. ---
     "Усредн.",
     "",
-    NRST_NUM_AVE_FOR_RAND, 1, 32, pageRand, Governor::FuncActive, Governor::FuncChange, 0
+    NRST_NUM_AVE_FOR_RAND, 1, 32, pageRand, 0, Governor::FuncChange, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 DEF_GOVERNOR( gRand_NumSmooth,                                                                                                                     //--- ОТЛАДКА - РАНД-ТОР - Сглаживание ---
     "Сглаживание",
     "",
-    NRST_NUM_SMOOTH_FOR_RAND, 1, 10, pageRand, Governor::FuncActive, Governor::FuncChange, 0
+    NRST_NUM_SMOOTH_FOR_RAND, 1, 10, pageRand, 0, Governor::FuncChange, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -38,7 +38,7 @@ static void OnChanged_Rand_NumMeasures()
 DEF_GOVERNOR( gRand_NumMeasures,                                                                                                                  //--- ОТЛАДКА - РАНД-ТОР - Выб-к/ворота ---
     "Выб-к/ворота",
     "",
-    NUM_MEASURES_FOR_GATES, 1, 2500, pageRand, Governor::FuncActive, OnChanged_Rand_NumMeasures, 0
+    NUM_MEASURES_FOR_GATES, 1, 2500, pageRand, 0, OnChanged_Rand_NumMeasures, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -69,7 +69,7 @@ static void OnChanged_Rand_TimeCompensation()
 DEF_GOVERNOR( gRand_TimeCompensation,                                                                                                     //--- ОТЛАДКА - РАНД-ТОР - Компенсация задержки ---
     "Компенсация задержки",
     "Подстройка компенсации задержки АЦП 40 нс",
-    TIME_COMPENSATION, 0, 510, pageRand, Governor::FuncActive, OnChanged_Rand_TimeCompensation, 0
+    TIME_COMPENSATION, 0, 510, pageRand, 0, OnChanged_Rand_TimeCompensation, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -83,7 +83,7 @@ static int16 addShift = 0;
 DEF_GOVERNOR( gRand_AddTimeShift,                                                                                                                     //--- ОТЛАДКА - РАНД-ТОР - Смещение ---
     "Доп смещение",
     "Добавочное смщение при вращении tShift",
-    addShift, -100, 100, pageRand, Governor::FuncActive, OnChanged_Rand_AddTimeShift, 0
+    addShift, -100, 100, pageRand, 0, OnChanged_Rand_AddTimeShift, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -95,7 +95,7 @@ static void OnChanged_Rand_Pretriggered()
 DEF_GOVERNOR( gRand_Pretriggered,                                                                                                                   //--- ОТЛАДКА - РАНД-ТОР - Предзапуск ---
     "Предзапуск",
     "Величина предзапуска, которая пишется в рандомизатор",
-    PRETRIGGERED, 0, 30000, pageRand, Governor::FuncActive, OnChanged_Rand_Pretriggered, 0
+    PRETRIGGERED, 0, 30000, pageRand, 0, OnChanged_Rand_Pretriggered, 0
 )
 
 
