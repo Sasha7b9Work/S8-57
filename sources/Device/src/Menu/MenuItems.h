@@ -270,22 +270,20 @@ class ButtonBase
 {
 public:
     COMMON_PART_MENU_ITEM;
-    pFuncVV     _funcOnPress;        ///< Функция, которая вызывается при нажатии на кнопку.
+    pFuncVV     funcOnPress;        ///< Функция, которая вызывается при нажатии на кнопку.
     pFuncVII    funcForDraw;        ///< Функция будет вызываться во время отрисовки кнопки.
 };
 
 class Button : public Control
 {
 public:
-    pFuncVV     _funcOnPress;        ///< Функция, которая вызывается при нажатии на кнопку.
+    pFuncVV     funcOnPress;        ///< Функция, которая вызывается при нажатии на кнопку.
     pFuncVII    funcForDraw;        ///< Функция будет вызываться во время отрисовки кнопки.
     void Draw(int x, int y);
 
     static void EmptyDraw(int, int) {};
-    /// Обработчик нажатия по умолчанию
-    static void FuncPress() {}
     /// Обработчик funcOnPress
-    void HandlePress() { if (_funcOnPress) _funcOnPress(); }
+    void HandlePress() { if (funcOnPress) funcOnPress(); }
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// SButton ///
