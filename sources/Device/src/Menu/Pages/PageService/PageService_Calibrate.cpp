@@ -49,7 +49,7 @@ static void OnPress_Calibrator_Calibrate()
 DEF_BUTTON( bCalibrator_Calibrate,                                                                                                                //--- СЕРВИС - КАЛИБРАТОР - Калибровать ---
     "Калибровать",
     "Запуск процедуры калибровки",
-    pageCalibrate, IsActive_Calibrator_Calibrate, OnPress_Calibrator_Calibrate, Button::EmptyDraw
+    pageCalibrate, IsActive_Calibrator_Calibrate, OnPress_Calibrator_Calibrate, 0
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

@@ -280,8 +280,6 @@ public:
     pFuncVV     funcOnPress;        ///< Функция, которая вызывается при нажатии на кнопку.
     pFuncVII    funcForDraw;        ///< Функция будет вызываться во время отрисовки кнопки.
     void Draw(int x, int y);
-
-    static void EmptyDraw(int, int) {};
     /// Обработчик funcOnPress
     void HandlePress() { if (funcOnPress) funcOnPress(); }
 };

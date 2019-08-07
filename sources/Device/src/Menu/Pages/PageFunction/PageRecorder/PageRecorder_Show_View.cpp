@@ -35,7 +35,7 @@ static void OnPress_Less()
 DEF_BUTTON( bLess,                                                                                                             //--- тсмйжхъ - пецхярпюрнп - опнялнрп - опнялнрп - лЕМЭЬЕ ---
     "лЕМЭЬЕ",
     "",
-    pageView, 0, OnPress_Less, Button::EmptyDraw
+    pageView, 0, OnPress_Less, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -47,7 +47,7 @@ static void OnPress_More()
 DEF_BUTTON( bMore,                                                                                                             //--- тсмйжхъ - пецхярпюрнп - опнялнрп - опнялнрп - аНКЭЬЕ ---
     "аНКЭЬЕ",
     "",
-    pageView, 0, OnPress_More, Button::EmptyDraw
+    pageView, 0, OnPress_More, 0
 )
 
 

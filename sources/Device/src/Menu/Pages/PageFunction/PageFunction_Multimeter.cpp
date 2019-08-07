@@ -177,7 +177,7 @@ static void OnPress_Calibrate0()
 DEF_BUTTON( bCalibrate0,
     "Калибр 0",
     "",
-    pageMultimeter, 0, OnPress_Calibrate0, Button::EmptyDraw
+    pageMultimeter, 0, OnPress_Calibrate0, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -189,7 +189,7 @@ static void OnPress_Calibrate1()
 DEF_BUTTON( bCalibrate1,
     "Калибр 1",
     "",
-    pageMultimeter, 0, OnPress_Calibrate1, Button::EmptyDraw
+    pageMultimeter, 0, OnPress_Calibrate1, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

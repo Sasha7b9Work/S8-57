@@ -263,7 +263,7 @@ static void OnPress_ADC_Shift_Reset()
 DEF_BUTTON( bADC_Shift_Reset,                                                                                                                       //-- ОТЛАДКА - АЦП - ДОП СМЕЩ - Сброс ---
     "Сброс",
     "",
-    pppADC_Shift, 0, OnPress_ADC_Shift_Reset, Button::EmptyDraw
+    pppADC_Shift, 0, OnPress_ADC_Shift_Reset, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -530,7 +530,7 @@ static void OnPress_SaveFirmware()
 DEF_BUTTON( bSaveFirmware,                                                                                                                                 //--- ОТЛАДКА - Сохр. прошивку ---
     "Сохр. прошивку",
     "Сохранение прошивки - секторов 5, 6, 7 общим объёмом 3 х 128 кБ, где хранится программа",
-    pageDebug, IsActive_SaveFirmware, OnPress_SaveFirmware, Button::EmptyDraw
+    pageDebug, IsActive_SaveFirmware, OnPress_SaveFirmware, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -620,7 +620,7 @@ static void OnPress_EraseData()
 DEF_BUTTON( bEraseData,                                                                                                                                    //--- ОТЛАДКА - Стереть данные ---
     "Стереть данне",
     "Стирает сохранённые данные из ППЗУ",
-    pageDebug, 0, OnPress_EraseData, Button::EmptyDraw
+    pageDebug, 0, OnPress_EraseData, 0
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
