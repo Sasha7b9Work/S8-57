@@ -25,7 +25,7 @@ DEF_CHOICE_2( cShow,                                                            
     "Включает/отключает курсоры.",
     "Нет",
     "Да",
-    CURS_SHOW, pageCursors, FuncActive, Choice::FuncChange, Choice::FuncDraw
+    CURS_SHOW, pageCursors, Choice::FuncActive, Choice::FuncChange, Choice::FuncDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -42,7 +42,7 @@ DEF_CHOICE_4( cLookModeChanA,                                                   
     "Напряжение",
     "Время",
     "Напряж и время",
-    CURS_LOOK_MODE(Chan::A), pageCursors, FuncActive, Choice::FuncChange, Choice::FuncDraw
+    CURS_LOOK_MODE(Chan::A), pageCursors, Choice::FuncActive, Choice::FuncChange, Choice::FuncDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -59,7 +59,7 @@ DEF_CHOICE_4( cLookModeChanB,                                                   
     "Напряжение",
     "Время",
     "Напряж. и время",
-    CURS_LOOK_MODE(Chan::B), pageCursors, FuncActive, Choice::FuncChange, Choice::FuncDraw
+    CURS_LOOK_MODE(Chan::B), pageCursors, Choice::FuncActive, Choice::FuncChange, Choice::FuncDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -71,7 +71,7 @@ DEF_CHOICE_2( cShowFreq,                                                        
     ,
     DISABLE_RU,
     ENABLE_RU,
-    CURSORS_SHOW_FREQ, pageCursors, FuncActive, Choice::FuncChange, Choice::FuncDraw
+    CURSORS_SHOW_FREQ, pageCursors, Choice::FuncActive, Choice::FuncChange, Choice::FuncDraw
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -83,5 +83,5 @@ DEF_PAGE_3( pageCursors, // -V641 // -V1027                                     
 //    &cLookModeChanB,                                ///< ИЗМЕРЕНИЯ - КУРСОРЫ - Слежение канал 2
     &cShowFreq,                                     ///< ИЗМЕРЕНИЯ - КУРОСРЫ - 1/dT
     PageMeasures::PageCursors::PageSet::pointer,    ///< ИЗМЕРЕНИЯ - КУРСОРЫ - УСТАНОВИТЬ
-    Page::Name::Measures_Cursors, PageMeasures::pointer, FuncActive, FuncPressPage, Page::FuncDraw, FuncRegSetPage
+    Page::Name::Measures_Cursors, PageMeasures::pointer, Page::FuncActive, FuncPressPage, Page::FuncDraw, FuncRegSetPage
 )

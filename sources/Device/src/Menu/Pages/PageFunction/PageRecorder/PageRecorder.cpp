@@ -15,7 +15,7 @@ DEF_CHOICE_2( cShow,                                                            
     "Позволяет выводить данные регистратора при выключенном меню РЕГИСТРАТОР",
     "В режиме",
     "Всегда",
-    RECORDER_VIEW_ALLWAYS, pageRecorder, FuncActive, Choice::FuncChange, Choice::FuncDraw
+    RECORDER_VIEW_ALLWAYS, pageRecorder, Choice::FuncActive, Choice::FuncChange, Choice::FuncDraw
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -32,7 +32,7 @@ DEF_PAGE_2( pageRecorder, // -V641 // -V1027                                    
     PageFunction::PageRecorder::PageSource::pointer,    ///< ФУНКЦИЯ - РЕГИСТРАТОР - ИСТОЧНИК
     //PageFunction::PageRecorder::PageRecord::pointer,    ///< ФУНКЦИЯ - РЕГИСТРАТОР - ЗАПИСЬ
     PageFunction::PageRecorder::PageShow::pointer,      ///< ФУНКЦИЯ - РЕГИСТРАТОР - ПРОСМОТР
-    Page::Name::Function_Recorder, PageFunction::pointer, FuncActive, OnOpenClose_Recorder, Page::FuncDraw, FuncRegSetPage
+    Page::Name::Function_Recorder, PageFunction::pointer, Page::FuncActive, OnOpenClose_Recorder, Page::FuncDraw, FuncRegSetPage
 )
 
 const PageBase *PageFunction::PageRecorder::pointer = &pageRecorder;

@@ -41,7 +41,7 @@ static void Draw_Last_Next(int x, int y)
 DEF_SMALL_BUTTON( bLast_Next,                                                                                                                        //--- ПАМЯТЬ - ПОСЛЕДНИЕ - Следующий ---
     "Следующий",
     "Перейти к следующему сигналу",
-    pageRAM, FuncActive, OnPress_Last_Next, Draw_Last_Next
+    pageRAM, Button::FuncActive, OnPress_Last_Next, Draw_Last_Next
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -60,7 +60,7 @@ static void Draw_Last_Prev(int x, int y)
 DEF_SMALL_BUTTON( bLast_Prev,                                                                                                                       //--- ПАМЯТЬ - ПОСЛЕДНИЕ - Предыдущий ---
     "Предыдущий",
     "Перейти к предыдущему сигналу",
-    pageRAM, FuncActive, OnPress_Last_Prev, Draw_Last_Prev
+    pageRAM, Button::FuncActive, OnPress_Last_Prev, Draw_Last_Prev
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -85,7 +85,7 @@ static void Draw_Last_SaveToROM(int x, int y)
 DEF_SMALL_BUTTON( bLast_SaveToROM,                                                                                                                    //--- ПАМЯТЬ - ПОСЛЕДНИЕ - Внутр ЗУ ---
     "Внутр ЗУ",
     "Нажмите эту кнопку, чтобы сохранить сигнал во внутреннем запоминающем устройстве",
-    pageRAM, FuncActive, OnPress_Last_SaveToROM, Draw_Last_SaveToROM
+    pageRAM, Button::FuncActive, OnPress_Last_SaveToROM, Draw_Last_SaveToROM
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -108,7 +108,7 @@ static void Draw_Last_SaveToDrive(int x, int y)
 DEF_SMALL_BUTTON( bLast_SaveToDrive,                                                                                                                 //--- ПАМЯТЬ - ПОСЛЕДНИЕ - Сохранить ---
     "Сохранить",
     "Кнопка становится доступна при присоединённом внешнем ЗУ. Позволяет сохранить сигнал на внешем ЗУ",
-    pageRAM, FuncActive, OnPress_Last_SaveToDrive, Draw_Last_SaveToDrive
+    pageRAM, Button::FuncActive, OnPress_Last_SaveToDrive, Draw_Last_SaveToDrive
 )
 
 
@@ -172,5 +172,5 @@ DEF_PAGE_2( pageRAM, // -V641 // -V1027                                         
     &bLast_Prev,                        ///< ПАМЯТЬ - ПОСЛЕДНИЕ - Предыдущий
     //&bLast_SaveToROM,                   ///< ПАМЯТЬ - ПОСЛЕДНИЕ - Внутр ЗУ
     //&bLast_SaveToDrive,                 ///< ПАМЯТЬ - ПОСЛЕДНИЕ - Сохранить
-    Page::Name::SB_Memory_Last, PageMemory::pointer, FuncActive, OnPress_RAM, OnDraw_RAM, HandlerKey_RAM
+    Page::Name::SB_Memory_Last, PageMemory::pointer, Page::FuncActive, OnPress_RAM, OnDraw_RAM, HandlerKey_RAM
 )

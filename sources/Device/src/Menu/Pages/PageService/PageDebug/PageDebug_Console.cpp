@@ -20,14 +20,14 @@ DEF_CHOICE_2( cShow,                                                            
     "",
     "Нет",
     "Да",
-    set.dbg_showConsole, pageConsole, FuncActive, Choice::FuncChange, Choice::FuncDraw
+    set.dbg_showConsole, pageConsole, Choice::FuncActive, Choice::FuncChange, Choice::FuncDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 DEF_GOVERNOR( gNumStrings,                                                                                                                          //--- ОТЛАДКА - КОНСОЛЬ - Число строк ---
     "Число строк",
     "",
-    CONSOLE_NUM_STRINGS, 0, 33, pageConsole, FuncActive, Console::OnChangedMaxStringsInConsole, FuncBeforeDraw
+    CONSOLE_NUM_STRINGS, 0, 33, pageConsole, Governor::FuncActive, Console::OnChangedMaxStringsInConsole, FuncBeforeDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -36,7 +36,7 @@ DEF_CHOICE_2( cSizeFont,                                                        
     "",
     "5",
     "8",
-    set.dbg_sizeFont, pageConsole, FuncActive, Choice::FuncChange, Choice::FuncDraw
+    set.dbg_sizeFont, pageConsole, Choice::FuncActive, Choice::FuncChange, Choice::FuncDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -45,7 +45,7 @@ DEF_CHOICE_2( cModeStop,                                                        
     "Предоставляет возможность приостановки вывода в консоль путём нажатия на кнопку ПУСК/СТОП",
     DISABLE_RU,
     ENABLE_RU,
-    MODE_PAUSE_CONSOLE, pageConsole, FuncActive, Choice::FuncChange, Choice::FuncDraw
+    MODE_PAUSE_CONSOLE, pageConsole, Choice::FuncActive, Choice::FuncChange, Choice::FuncDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -54,7 +54,7 @@ DEF_CHOICE_2( cRegisters_ShowAll,                                               
     "Показывать все значения, засылаемые в регистры",
     "Нет",
     "Да",
-    DBG_SHOW_ALL, pageRegisters, FuncActive, Choice::FuncChange, Choice::FuncDraw
+    DBG_SHOW_ALL, pageRegisters, Choice::FuncActive, Choice::FuncChange, Choice::FuncDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -177,7 +177,7 @@ DEF_PAGE_12( pageRegisters, // -V641                                            
     &cRegisters_ChanParamB,     ///< ОТЛАДКА - КОНСОЛЬ - РЕГИСТРЫ - Парам. кан. 2
     &cRegisters_TBase,          ///< ОТЛАДКА - КОНСОЛЬ - РЕГИСТРЫ - ВРЕМЯ/ДЕЛ
     &cRegisters_TShift,         ///< ОТЛАДКА - КОНСОЛЬ - РЕГИСТРЫ - Т см.
-    Page::Name::Debug_Console_Registers, &pageConsole, FuncActive, FuncPressPage, Page::FuncDraw, FuncRegSetPage
+    Page::Name::Debug_Console_Registers, &pageConsole, Page::FuncActive, FuncPressPage, Page::FuncDraw, FuncRegSetPage
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -189,7 +189,7 @@ static void Draw_Console_SizeSettings(int x, int y)
 DEF_BUTTON( bSizeSettings,                                                                                                                      //--- ОТЛАДКА - КОНСОЛЬ - Размер настроек ---
     "",
     "Показывает текущий размер структуры для сохранения настроек",
-    pageConsole, FuncActive, FuncPress, Draw_Console_SizeSettings
+    pageConsole, Button::FuncActive, FuncPress, Draw_Console_SizeSettings
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -202,6 +202,6 @@ DEF_PAGE_2( pageConsole, // -V641 // -V1027                                     
 //    &cModeStop,         ///< ОТЛАДКА - КОНСОЛЬ - Реж. останова
 //    &pageRegisters,     ///< ОТЛАДКА - КОНСОЛЬ - РЕГИСТРЫ
 //    &bSizeSettings,     ///< ОТЛАДКА - КОНСОЛЬ - Размер настроек
-    Page::Name::Debug_Console, PageService::PageDebug::pointer, FuncActive, FuncPressPage, Page::FuncDraw, FuncRegSetPage
+    Page::Name::Debug_Console, PageService::PageDebug::pointer, Page::FuncActive, FuncPressPage, Page::FuncDraw, FuncRegSetPage
 )
 

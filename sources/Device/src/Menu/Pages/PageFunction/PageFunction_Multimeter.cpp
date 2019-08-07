@@ -135,7 +135,7 @@ DEF_CHOICE_7(   cMode,
     "R",
     "VD",
     "Прозвонка",
-    MULTI_MEASURE, pageMultimeter, FuncActive, PageFunction::PageMultimeter::OnChanged_Mode, Choice::FuncDraw
+    MULTI_MEASURE, pageMultimeter, Choice::FuncActive, PageFunction::PageMultimeter::OnChanged_Mode, Choice::FuncDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -149,7 +149,7 @@ DEF_CHOICE_2 (cAVP,
     "Автовыбор предела",
     DISABLE_RU,
     ENABLE_RU,
-    MULTI_AVP, pageMultimeter, FuncActive, OnChanged_AVP, Choice::FuncDraw
+    MULTI_AVP, pageMultimeter, Choice::FuncActive, OnChanged_AVP, Choice::FuncDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -165,7 +165,7 @@ DEF_CHOICE_2(cZero,
     "",
     DISABLE_RU,
     ENABLE_RU,
-    zero, pageMultimeter, FuncActive, OnChanged_Zero, Choice::FuncDraw
+    zero, pageMultimeter, Choice::FuncActive, OnChanged_Zero, Choice::FuncDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -177,7 +177,7 @@ static void OnPress_Calibrate0()
 DEF_BUTTON( bCalibrate0,
     "Калибр 0",
     "",
-    pageMultimeter, FuncActive, OnPress_Calibrate0, Button::EmptyDraw
+    pageMultimeter, Button::FuncActive, OnPress_Calibrate0, Button::EmptyDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -189,7 +189,7 @@ static void OnPress_Calibrate1()
 DEF_BUTTON( bCalibrate1,
     "Калибр 1",
     "",
-    pageMultimeter, FuncActive, OnPress_Calibrate1, Button::EmptyDraw
+    pageMultimeter, Button::FuncActive, OnPress_Calibrate1, Button::EmptyDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -218,7 +218,7 @@ DEF_CHOICE_2( cCalibration,
     "",
     DISABLE_RU,
     ENABLE_RU,
-    calibration, pageMultimeter, FuncActive, OnChanged_Calibration, Choice::FuncDraw
+    calibration, pageMultimeter, Choice::FuncActive, OnChanged_Calibration, Choice::FuncDraw
 )
 
 
@@ -241,7 +241,7 @@ DEF_PAGE_5( pageMultimeter, // -V641
     &cAVP,
     &cZero,
     &cCalibration,
-    Page::Name::Function_Multimeter, PageFunction::pointer, FuncActive, OnPress_Page, Page::FuncDraw, FuncRegSetPage
+    Page::Name::Function_Multimeter, PageFunction::pointer, Page::FuncActive, OnPress_Page, Page::FuncDraw, FuncRegSetPage
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

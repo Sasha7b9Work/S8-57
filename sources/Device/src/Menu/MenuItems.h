@@ -290,6 +290,8 @@ public:
 
     static void EmptyDraw(int, int) {};
     static bool EmptyActive() { return true; }
+    /// Признак активности по умолчанию
+    static bool FuncActive() { return true; }
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// SButton ///
@@ -374,6 +376,8 @@ public:
     int16 GetValue();
 
     void SetValue(int16 v);
+    /// Признак активности по умолчанию
+    static bool FuncActive() { return true; }
 
 private:
 
@@ -455,6 +459,8 @@ public:
     pFuncVV     funcOnChanged;      ///< Эту функцию нужно вызывать после изменения значения элемента.
     void ChangeValue(int delta);    ///< Изменить яркость цвета в governor.
     void Draw(int x, int y, bool opened);
+    /// Признак активности по умолчанию
+    static bool FuncActive() { return true; }
 private:
     void DrawOpened(int x, int y);
     void DrawClosed(int x, int y);
@@ -505,6 +511,8 @@ public:
     void DrawClosed(int x, int y);
     void DrawOpened(int x, int y);
     char GetSymbol();
+    /// Признак активности по умолчанию
+    static bool FuncActive() { return true; }
 };
 
 #define CHOICE_RUN_FUNC_CHANGED(c, val)     \

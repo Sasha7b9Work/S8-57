@@ -74,7 +74,7 @@ DEF_CHOICE_3( cTPos,                                                            
     "Лево",
     "Центр",
     "Право",
-    TPOS, pTime, FuncActive, PageTime::OnChanged_TPos, Choice::FuncDraw
+    TPOS, pTime, Choice::FuncActive, PageTime::OnChanged_TPos, Choice::FuncDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -87,7 +87,7 @@ DEF_CHOICE_2(cDivRole,                                                          
     ,
     "Время",
     "Память",
-    TIME_DIV_XPOS, pTime, FuncActive, Choice::FuncChange, Choice::FuncDraw
+    TIME_DIV_XPOS, pTime, Choice::FuncActive, Choice::FuncChange, Choice::FuncDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -97,7 +97,7 @@ DEF_CHOICE_2( cShiftXtype,                                                      
     ,
     "Время",
     "Деления",
-    LINKING_TSHIFT, pTime, FuncActive, Choice::FuncChange, Choice::FuncDraw
+    LINKING_TSHIFT, pTime, Choice::FuncActive, Choice::FuncChange, Choice::FuncDraw
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -112,5 +112,5 @@ DEF_PAGE_3( pTime, // -V641 // -V1027                                           
     &cTPos,             ///< РАЗВЕРТКА - То
     //&cDivRole,          ///< РАЗВЕРТКА - Ф-ция ВР/ДЕЛ
     //&cShiftXtype,       ///< РАЗВЕРТКА - Смещение
-    Page::Name::Time, nullptr, FuncActive, FuncPressPage, Page::FuncDraw, FuncRegSetPage
+    Page::Name::Time, nullptr, Page::FuncActive, FuncPressPage, Page::FuncDraw, FuncRegSetPage
 )

@@ -37,7 +37,7 @@ static void OnPress_Next()
 DEF_BUTTON( bNext,                                                                                                                     //--- ‘”Õ ÷»ﬂ - –≈√»—“–¿“Œ– - œ–Œ—ÃŒ“– - —ÎÂ‰Û˛˘ËÈ ---
     "¬ÎÂ‚Ó",
     "",
-    pageShow, FuncActive, OnPress_Next, Button::EmptyDraw
+    pageShow, Button::FuncActive, OnPress_Next, Button::EmptyDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -49,7 +49,7 @@ static void OnPress_Prev()
 DEF_BUTTON( bPrev,                                                                                                                    //--- ‘”Õ ÷»ﬂ - –≈√»—“–¿“Œ– - œ–Œ—ÃŒ“– - œÂ‰˚‰Û˘ËÈ ---
     "¬Ô‡‚Ó",
     "",
-    pageShow, FuncActive, OnPress_Prev, Button::EmptyDraw
+    pageShow, Button::FuncActive, OnPress_Prev, Button::EmptyDraw
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

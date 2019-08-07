@@ -19,21 +19,21 @@ static void OnChanged_Settings_Brightness()
 DEF_GOVERNOR( gBrightness,                                                                                                                            //--- ДИСПЛЕЙ - НАСТРОЙКИ - Яркость ---
     "Яркость",
     "Установка яркости свечения дисплея",
-    BRIGHTNESS_DISPLAY, 0, 100, pageSettings, FuncActive, OnChanged_Settings_Brightness, FuncBeforeDraw
+    BRIGHTNESS_DISPLAY, 0, 100, pageSettings, Governor::FuncActive, OnChanged_Settings_Brightness, FuncBeforeDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 DEF_GOVERNOR( gLevels,                                                                                                                                 //--- ДИСПЛЕЙ - НАСТРОЙКИ - Уровни ---
     "Уровни",
     "Задаёт время, в течение которого после поворота ручки сещения напряжения на экране остаётся вспомогательная метка уровня смещения",
-    TIME_SHOW_LEVELS, 0, 125, pageSettings, FuncActive, FuncChanged, FuncBeforeDraw
+    TIME_SHOW_LEVELS, 0, 125, pageSettings, Governor::FuncActive, FuncChanged, FuncBeforeDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 DEF_GOVERNOR( gTime,                                                                                                                                    //--- ДИСПЛЕЙ - НАСТРОЙКИ - Время ---
     "Время",
     "Установка времени, в течение которого сообщения будут находиться на экране",
-    TIME_MESSAGES, 1, 99, pageSettings, FuncActive, FuncChanged, FuncBeforeDraw
+    TIME_MESSAGES, 1, 99, pageSettings, Governor::FuncActive, FuncChanged, FuncBeforeDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -43,7 +43,7 @@ DEF_CHOICE_3( cStringNavigation,                                                
     "Временно",
     "Всегда",
     "Никогда",
-    SHOW_STRING_NAVI, pageSettings, FuncActive, Choice::FuncChange, Choice::FuncDraw
+    SHOW_STRING_NAVI, pageSettings, Choice::FuncActive, Choice::FuncChange, Choice::FuncDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -62,7 +62,7 @@ DEF_CHOICE_3( cAltMarkers,                                                      
     "Скрывать",
     "Показывать",
     "Авто",
-    ALT_MARKERS, pageSettings, FuncActive, OnChanged_Settings_AltMarkers, Choice::FuncDraw
+    ALT_MARKERS, pageSettings, Choice::FuncActive, OnChanged_Settings_AltMarkers, Choice::FuncDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -80,7 +80,7 @@ DEF_CHOICE_6( cAutoHide,                                                        
     "Через 15 сек",
     "Через 30 сек",
     "Через 60 сек",
-    MENU_AUTO_HIDE, pageSettings, FuncActive, OnChanged_Settings_AutoHide, Choice::FuncDraw
+    MENU_AUTO_HIDE, pageSettings, Choice::FuncActive, OnChanged_Settings_AutoHide, Choice::FuncDraw
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -94,5 +94,5 @@ DEF_PAGE_7( pageSettings, // -V641 // -V1027                                    
     &cStringNavigation,                                 ///< ДИСПЛЕЙ - НАСТРОЙКИ - Строка меню
     &cAltMarkers,                                       ///< ДИСПЛЕЙ - НАСТРОЙКИ - Доп. маркеры
     &cAutoHide,                                         ///< ДИСПЛЕЙ - НАСТРОЙКИ - Скрывать
-    Page::Name::Display_Settings, PageDisplay::pointer, FuncActive, FuncPressPage, Page::FuncDraw, FuncRegSetPage
+    Page::Name::Display_Settings, PageDisplay::pointer, Page::FuncActive, FuncPressPage, Page::FuncDraw, FuncRegSetPage
 )

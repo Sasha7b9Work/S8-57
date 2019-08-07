@@ -1,6 +1,6 @@
 #pragma once
 #include "Utils/CommonFunctions.h"
-#define FuncActive          EmptyFuncBtV
+//#define FuncActive          EmptyFuncBtV
 #define FuncPress           EmptyFuncVV
 #define FuncPressPage       EmptyFuncVB
 #define FuncChanged         EmptyFuncVV
@@ -37,7 +37,7 @@ static const MACaddressBase name = {Item_MAC, 0, false, Page::Name::NoPage, &kee
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #define DEF_GOVERNOR_COLOR(name, title, hint, colorType, keeper)                                                                                        \
-static const GovernorColorBase name = {Control::Type::GovernorColor, 0, false, Page::Name::NoPage, &keeper, FuncActive,                                 \
+static const GovernorColorBase name = {Control::Type::GovernorColor, 0, false, Page::Name::NoPage, &keeper, GovernorColor::FuncActive,                  \
     {title, hint}, &colorType, 0};
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

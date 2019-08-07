@@ -30,7 +30,7 @@ DEF_CHOICE_2( cEnable,                                                          
     "",
     DISABLE_RU,
     ENABLE_RU,
-    FREQ_METER_ENABLED, ppFreqMeter, FuncActive, OnChanged_FreqMeter_Enable, Choice::FuncDraw
+    FREQ_METER_ENABLED, ppFreqMeter, Choice::FuncActive, OnChanged_FreqMeter_Enable, Choice::FuncDraw
 )
 
 
@@ -121,5 +121,5 @@ DEF_PAGE_5( ppFreqMeter, // -V641                                               
     &cTimeF,            ///< ÈÇÌÅÐÅÍÈß - ×ÀÑÒÎÒÎÌÅÐ - Âðåìÿ ñ÷¸òà F
     &cFreqClc,          ///< ÈÇÌÅÐÅÍÈß - ×ÀÑÒÎÒÎÌÅÐ - Ìåòêè âðåìåíè
     &cNumPeriods,       ///< ÈÇÌÅÐÅÍÈß - ×ÀÑÒÎÒÎÌÅÐ - Êîë-âî ïåðèîäîâ
-    Page::Name::Function_FrequencyCounter, PageFunction::pointer, FuncActive, FuncPressPage, Page::FuncDraw, FuncRegSetPage
+    Page::Name::Function_FrequencyCounter, PageFunction::pointer, Page::FuncActive, FuncPressPage, Page::FuncDraw, FuncRegSetPage
 )

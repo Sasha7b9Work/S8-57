@@ -19,7 +19,7 @@ DEF_CHOICE_2( cIsShow,                                                          
     "Выводить или не выводить измерения на экран",
     "Нет",
     "Да",
-    SHOW_MEASURES, pageAuto, FuncActive, Choice::FuncChange, Choice::FuncDraw
+    SHOW_MEASURES, pageAuto, Choice::FuncActive, Choice::FuncChange, Choice::FuncDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -87,5 +87,5 @@ DEF_PAGE_4( pageAuto, // -V641 // -V1027                                        
     &cChannels,                                 ///< ИЗМЕРЕНИЯ - АВТОМАТ - Каналы
     PageMeasures::PageAuto::PageTune::pointer,  ///< ИЗМЕРЕНИЯ - АВТОМАТ - НАСТРОИТЬ
     //&cMode,                           ///< ИЗМЕРЕНИЯ - АВТОМАТ - Вид
-    Page::Name::Measures_Auto, PageMeasures::pointer, FuncActive, FuncPressPage, Page::FuncDraw, FuncRegSetPage
+    Page::Name::Measures_Auto, PageMeasures::pointer, Page::FuncActive, FuncPressPage, Page::FuncDraw, FuncRegSetPage
 )

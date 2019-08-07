@@ -70,7 +70,7 @@ DEF_CHOICE_3( cADC_Balance_Mode,                                                
     DISABLE_RU,
     "Ðåàëüíûé",
     "Ðó÷íîé",
-    NRST_BALANCE_ADC_TYPE, pppADC_Balance, FuncActive, OnChanged_ADC_Balance_Mode, Draw_ADC_Balance_Mode
+    NRST_BALANCE_ADC_TYPE, pppADC_Balance, Choice::FuncActive, OnChanged_ADC_Balance_Mode, Draw_ADC_Balance_Mode
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -109,7 +109,7 @@ DEF_PAGE_3( pppADC_Balance, // -V641 // -V1027                                  
     &cADC_Balance_Mode,      ///< ÎÒËÀÄÊÀ - ÀÖÏ - ÁÀËÀÍÑ - Ðåæèì
     &gADC_Balance_ShiftA,    ///< ÎÒËÀÄÊÀ - ÀÖÏ - ÁÀËÀÍÑ - Ñìåùåíèå 1
     &gADC_Balance_ShiftB,    ///< ÎÒËÀÄÊÀ - ÀÖÏ - ÁÀËÀÍÑ - Ñìåùåíèå 2
-    Page::Name::Debug_ADC_Balance, &ppADC, FuncActive, FuncPressPage, Page::FuncDraw, FuncRegSetPage
+    Page::Name::Debug_ADC_Balance, &ppADC, Page::FuncActive, FuncPressPage, Page::FuncDraw, FuncRegSetPage
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -136,7 +136,7 @@ DEF_CHOICE_3( cADC_Stretch_Mode,                                                
     DISABLE_RU,
     "Ðåàëüíûé",
     "Ðó÷íîé",
-    NRST_STRETCH_ADC_TYPE, pppADC_Stretch, FuncActive, PageService::PageDebug::OnChanged_ADC_Stretch_Mode, Choice::FuncDraw
+    NRST_STRETCH_ADC_TYPE, pppADC_Stretch, Choice::FuncActive, PageService::PageDebug::OnChanged_ADC_Stretch_Mode, Choice::FuncDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -243,7 +243,7 @@ DEF_PAGE_3( pppADC_Stretch, // -V641 // -V1027                                  
     &cADC_Stretch_Mode,      ///< ÎÒËÀÄÊÀ - ÀÖÏ - ÐÀÑÒßÆÊÀ - Ðåæèì
     &gADC_Stretch_A,         ///< ÎÒËÀÄÊÀ - ÀÖÏ - ÐÀÑÒßÆÊÀ - Ðàñòÿæêà 1ê
     &gADC_Stretch_B,
-    Page::Name::Debug_ADC_Stretch, &ppADC, FuncActive, FuncPressPage, Page::FuncDraw, FuncRegSetPage
+    Page::Name::Debug_ADC_Stretch, &ppADC, Page::FuncActive, FuncPressPage, Page::FuncDraw, FuncRegSetPage
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -263,7 +263,7 @@ static void OnPress_ADC_Shift_Reset()
 DEF_BUTTON( bADC_Shift_Reset,                                                                                                                       //-- ÎÒËÀÄÊÀ - ÀÖÏ - ÄÎÏ ÑÌÅÙ - Ñáðîñ ---
     "Ñáðîñ",
     "",
-    pppADC_Shift, FuncActive, OnPress_ADC_Shift_Reset, Button::EmptyDraw
+    pppADC_Shift, Button::FuncActive, OnPress_ADC_Shift_Reset, Button::EmptyDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -275,7 +275,7 @@ static void OnChanged_ADC_Shift_A()
 DEF_GOVERNOR( gADC_Shift_A2mV, //-V641                                                                                                    //--- ÎÒËÀÄÊÀ - ÀÖÏ - ÄÎÏ ÑÌÅÙ - Ñì 1ê 2ìÂ ïîñò ---
     "Ñì 1ê 2ìÂ ïîñò",
     "",
-    RSHIFT_ADD_STABLE_A(Range::_2mV), -100, 100, pppADC_Shift, FuncActive, OnChanged_ADC_Shift_A, FuncBeforeDraw
+    RSHIFT_ADD_STABLE_A(Range::_2mV), -100, 100, pppADC_Shift, Governor::FuncActive, OnChanged_ADC_Shift_A, FuncBeforeDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -287,35 +287,35 @@ static void OnChanged_ADC_Shift_B()
 DEF_GOVERNOR( gADC_Shift_B2mV,                                                                                                            //--- ÎÒËÀÄÊÀ - ÀÖÏ - ÄÎÏ ÑÌÅÙ - Ñì 2ê 2ìÂ ïîñò ---
     "Ñì 2ê 2ìÂ ïîñò",
     "",
-    RSHIFT_ADD_STABLE_B(Range::_2mV), -100, 100, pppADC_Shift, FuncActive, OnChanged_ADC_Shift_B, FuncBeforeDraw
+    RSHIFT_ADD_STABLE_B(Range::_2mV), -100, 100, pppADC_Shift, Governor::FuncActive, OnChanged_ADC_Shift_B, FuncBeforeDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 DEF_GOVERNOR( gADC_Shift_A5mV,                                                                                                            //--- ÎÒËÀÄÊÀ - ÀÖÏ - ÄÎÏ ÑÌÅÙ - Ñì 1ê 5ìÂ ïîñò ---
     "Ñì 1ê 5ìÂ ïîñò",
     "",
-    RSHIFT_ADD_STABLE_A(Range::_5mV), -100, 100, pppADC_Shift, FuncActive, OnChanged_ADC_Shift_A, FuncBeforeDraw
+    RSHIFT_ADD_STABLE_A(Range::_5mV), -100, 100, pppADC_Shift, Governor::FuncActive, OnChanged_ADC_Shift_A, FuncBeforeDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 DEF_GOVERNOR( gADC_Shift_B5mV,                                                                                                            //--- ÎÒËÀÄÊÀ - ÀÖÏ - ÄÎÏ ÑÌÅÙ - Ñì 2ê 5ìÂ ïîñò ---
     "Ñì 2ê 5ìÂ ïîñò",
     "",
-    RSHIFT_ADD_STABLE_B(Range::_5mV), -100, 100, pppADC_Shift, FuncActive, OnChanged_ADC_Shift_B, FuncBeforeDraw
+    RSHIFT_ADD_STABLE_B(Range::_5mV), -100, 100, pppADC_Shift, Governor::FuncActive, OnChanged_ADC_Shift_B, FuncBeforeDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 DEF_GOVERNOR( gADC_Shift_A10mV,                                                                                                          //--- ÎÒËÀÄÊÀ - ÀÖÏ - ÄÎÏ ÑÌÅÙ - Ñì 1ê 10ìÂ ïîñò ---
     "Ñì 1ê 10ìÂ ïîñò",
     "",
-    RSHIFT_ADD_STABLE_A(Range::_10mV), -100, 100, pppADC_Shift, FuncActive, OnChanged_ADC_Shift_A, FuncBeforeDraw
+    RSHIFT_ADD_STABLE_A(Range::_10mV), -100, 100, pppADC_Shift, Governor::FuncActive, OnChanged_ADC_Shift_A, FuncBeforeDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 DEF_GOVERNOR( gADC_Shift_B10mV,                                                                                                          //--- ÎÒËÀÄÊÀ - ÀÖÏ - ÄÎÏ ÑÌÅÙ - Ñì 2ê 10ìÂ ïîñò ---
     "Ñì 2ê 10ìÂ ïîñò",
     "",
-    RSHIFT_ADD_STABLE_B(Range::_10mV), -100, 100, pppADC_Shift, FuncActive, OnChanged_ADC_Shift_B, FuncBeforeDraw
+    RSHIFT_ADD_STABLE_B(Range::_10mV), -100, 100, pppADC_Shift, Governor::FuncActive, OnChanged_ADC_Shift_B, FuncBeforeDraw
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -329,7 +329,7 @@ DEF_PAGE_7( pppADC_Shift, // -V641  // -V1027                                   
     &gADC_Shift_B5mV,    // ÎÒËÀÄÊÀ - ÀÖÏ - ÄÎÏ ÑÌÅÙ - Ñì 2ê 5ìÂ ïîñò
     &gADC_Shift_A10mV,   // ÎÒËÀÄÊÀ - ÀÖÏ - ÄÎÏ ÑÌÅÙ - Ñì 1ê 10ìÂ ïîñò
     &gADC_Shift_B10mV,   // ÎÒËÀÄÊÀ - ÀÖÏ - ÄÎÏ ÑÌÅÙ - Ñì 2ê 10ìÂ ïîñò
-    Page::Name::Debug_ADC_Shift, &ppADC, FuncActive, FuncPressPage, Page::FuncDraw, FuncRegSetPage
+    Page::Name::Debug_ADC_Shift, &ppADC, Page::FuncActive, FuncPressPage, Page::FuncDraw, FuncRegSetPage
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -339,7 +339,7 @@ DEF_PAGE_3( ppADC, // -V641                                                     
     &pppADC_Balance, // ÎÒËÀÄÊÀ - ÀÖÏ - ÁÀËÀÍÑ
     &pppADC_Stretch, // ÎÒËÀÄÊÀ - ÀÖÏ - ÐÀÑÒßÆÊÀ
     &pppADC_Shift,   // ÎÒËÀÄÊÀ - ÀÖÏ - ÄÎÏ ÑÌÅÙ
-    Page::Name::Debug_ADC, &pageDebug, FuncActive, FuncPressPage, Page::FuncDraw, FuncRegSetPage
+    Page::Name::Debug_ADC, &pageDebug, Page::FuncActive, FuncPressPage, Page::FuncDraw, FuncRegSetPage
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -349,7 +349,7 @@ DEF_CHOICE_2( cStats,                                                           
     ,
     "Íå ïîêàçûâàòü",
     "Ïîêàçûâàòü",
-    SHOW_STAT, pageDebug, FuncActive, Choice::FuncChange, Choice::FuncDraw
+    SHOW_STAT, pageDebug, Choice::FuncActive, Choice::FuncChange, Choice::FuncDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -364,7 +364,7 @@ DEF_CHOICE_2( cDisplayOrientation,                                              
     ,
     "Ïðÿìàÿ",
     "Îáðàòíàÿ",
-    DISPLAY_ORIENTATION, pageDebug, FuncActive, PageService::PageDebug::OnChanged_DisplayOrientation, Choice::FuncDraw
+    DISPLAY_ORIENTATION, pageDebug, Choice::FuncActive, PageService::PageDebug::OnChanged_DisplayOrientation, Choice::FuncDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -378,7 +378,7 @@ static void OnChanged_Pred()
 DEF_GOVERNOR( mgPred,                                                                                                                                          //--- ÎÒËÀÄÊÀ - Ïðåäçàïóñê ---
     "Ïðåäçàïóñê",
     "",
-    pred, 0, 15000, pageDebug, FuncActive, OnChanged_Pred, FuncBeforeDraw
+    pred, 0, 15000, pageDebug, Governor::FuncActive, OnChanged_Pred, FuncBeforeDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -392,7 +392,7 @@ static void OnChanged_Post()
 DEF_GOVERNOR( mgPost,                                                                                                                                         //--- ÎÒËÀÄÊÀ - Ïîñëåçàïóñê ---
     "Ïîñëåçàïóñê",
     "",
-    post, 0, 15000, pageDebug, FuncActive, OnChanged_Post, FuncBeforeDraw
+    post, 0, 15000, pageDebug, Governor::FuncActive, OnChanged_Post, FuncBeforeDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -402,7 +402,7 @@ static void OnPress_Settings_Exit()
 }
 
 DEF_SMALL_BUTTON_EXIT( bSettings_Exit,                                                                                                                  //--- ÎÒËÀÄÊÀ - ÍÀÑÒÐÎÉÊÈ - Âûõîä ---
-    ppSettings, FuncActive, OnPress_Settings_Exit, DrawSB_Exit
+    ppSettings, Button::FuncActive, OnPress_Settings_Exit, DrawSB_Exit
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -492,7 +492,7 @@ DEF_PAGE_SB( ppSettings, // -V641 // -V1027                                     
     0,
     0,
     0,
-    Page::Name::SB_Debug_Settings, &pageDebug, FuncActive, OnPress_Settings, Page::FuncDraw, FuncRegSetPage
+    Page::Name::SB_Debug_Settings, &pageDebug, Page::FuncActive, OnPress_Settings, Page::FuncDraw, FuncRegSetPage
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -540,7 +540,7 @@ static void OnPress_SerialNumber_Exit()
 }
 
 DEF_SMALL_BUTTON_EXIT( bSerialNumber_Exit,                                                                                                                    //--- ÎÒËÀÄÊÀ - Ñ/Í - Âûõîä ---
-    ppSerialNumber, FuncActive, OnPress_SerialNumber_Exit, DrawSB_Exit
+    ppSerialNumber, Button::FuncActive, OnPress_SerialNumber_Exit, DrawSB_Exit
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -561,7 +561,7 @@ static void Draw_SerialNumber_Change(int x, int y)
 DEF_SMALL_BUTTON( bSerialNumber_Change,                                                                                                                    //--- ÎÒËÀÄÊÀ - Ñ/Í - Âñòàâèòü ---
     "Âñòàâèòü",
     "Âñòàâëÿåò âûáðàíûé ñèìâîë",
-    ppSerialNumber, FuncActive, OnPress_SerialNumber_Change, Draw_SerialNumber_Change
+    ppSerialNumber, Button::FuncActive, OnPress_SerialNumber_Change, Draw_SerialNumber_Change
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -579,7 +579,7 @@ static void Draw_SerialNumber_Save(int x, int y)
 DEF_SMALL_BUTTON( bSerialNumber_Save,                                                                                                                     //--- ÎÒËÀÄÊÀ - Ñ/Í - Ñîõðàíèòü ---
     "Ñîõðàíèòü",
     "Çàïèñûâàåò ñåðèéíûé íîìåð â OTP",
-    ppSerialNumber, FuncActive, OnPress_SerialNumber_Save, Draw_SerialNumber_Save
+    ppSerialNumber, Button::FuncActive, OnPress_SerialNumber_Save, Draw_SerialNumber_Save
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -606,7 +606,7 @@ DEF_PAGE_SB( ppSerialNumber, // -V641 // -V1027                                 
     0,
     0,
     &bSerialNumber_Save,            // ÎÒËÀÄÊÀ - Ñ/Í - Ñîõðàíèòü
-    Page::Name::SB_Debug_SerialNumber, &pageDebug, FuncActive, OnPress_SerialNumber, Page::FuncDraw, HandlerKey_SerialNumber
+    Page::Name::SB_Debug_SerialNumber, &pageDebug, Page::FuncActive, OnPress_SerialNumber, Page::FuncDraw, HandlerKey_SerialNumber
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -620,7 +620,7 @@ static void OnPress_EraseData()
 DEF_BUTTON( bEraseData,                                                                                                                                    //--- ÎÒËÀÄÊÀ - Ñòåðåòü äàííûå ---
     "Ñòåðåòü äàííå",
     "Ñòèðàåò ñîõðàí¸ííûå äàííûå èç ÏÏÇÓ",
-    pageDebug, FuncActive, OnPress_EraseData, Button::EmptyDraw
+    pageDebug, Button::FuncActive, OnPress_EraseData, Button::EmptyDraw
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -639,5 +639,5 @@ DEF_PAGE_6( pageDebug, // -V641 // -V1027                                       
 //    &ppSettings,		                            ///< ÎÒËÀÄÊÀ - ÍÀÑÒÐÎÉÊÈ
 //    &ppSerialNumber,                              ///< ÎÒËÀÄÊÀ - Ñ/Í
 //    &bEraseData,                                  ///< ÎÒËÀÄÊÀ - Ñòåðåòü äàííûå
-    Page::Name::Debug, PageService::pointer, FuncActive, FuncPressPage, Page::FuncDraw, FuncRegSetPage
+    Page::Name::Debug, PageService::pointer, Page::FuncActive, FuncPressPage, Page::FuncDraw, FuncRegSetPage
 )

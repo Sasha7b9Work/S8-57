@@ -17,7 +17,7 @@ DEF_CHOICE_2( cFFT_View,                                                        
     "Включает и выключает отображение спектра",
     DISABLE_RU,
     ENABLE_RU,
-    FFT_ENABLED, ppFFT, FuncActive, Choice::FuncChange, Choice::FuncDraw
+    FFT_ENABLED, ppFFT, Choice::FuncActive, Choice::FuncChange, Choice::FuncDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -26,7 +26,7 @@ DEF_CHOICE_2( cFFT_Scale,                                                       
     "Задаёт масштаб вывода спектра - линейный или логарифмический",
     "Логарифм",
     "Линейная",
-    SCALE_FFT, ppFFT, FuncActive, Choice::FuncChange, Choice::FuncDraw
+    SCALE_FFT, ppFFT, Choice::FuncActive, Choice::FuncChange, Choice::FuncDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -36,7 +36,7 @@ DEF_CHOICE_3( cFFT_Source,                                                      
     "Канал 1",
     "Канал 2",
     "Канал 1 + 2",
-    SOURCE_FFT, ppFFT, FuncActive, Choice::FuncChange, Choice::FuncDraw
+    SOURCE_FFT, ppFFT, Choice::FuncActive, Choice::FuncChange, Choice::FuncDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -47,7 +47,7 @@ DEF_CHOICE_4( cFFT_Window,                                                      
     "Хэмминга",
     "Блэкмена",
     "Ханна",
-    WINDOW_FFT, ppFFT, FuncActive, Choice::FuncChange, Choice::FuncDraw
+    WINDOW_FFT, ppFFT, Choice::FuncActive, Choice::FuncChange, Choice::FuncDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -79,7 +79,7 @@ static void Draw_FFT_Cursors_Source(int x, int y)
 DEF_SMALL_BUTTON( bFFT_Cursors_Source,                                                                                                        //--- ФУНКЦИЯ - СПЕКТР - КУРСОРЫ - Источник ---
     "Источник",
     "Выбор источника для расчёта спектра",
-    pppFFT_Cursors, FuncActive, OnPress_FFT_Cursors_Source, Draw_FFT_Cursors_Source
+    pppFFT_Cursors, Button::FuncActive, OnPress_FFT_Cursors_Source, Draw_FFT_Cursors_Source
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

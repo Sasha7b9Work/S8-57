@@ -21,7 +21,7 @@ DEF_CHOICE_2( cCalibrator_Calibrator, // -V206                                  
     "Режим работы калибратора",
     "Перем",
     "Пост",
-    CALIBRATOR_MODE, pageCalibrate, FuncActive, OnChanged_Calibrator_Calibrator, Choice::FuncDraw
+    CALIBRATOR_MODE, pageCalibrate, Choice::FuncActive, OnChanged_Calibrator_Calibrator, Choice::FuncDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -56,9 +56,9 @@ DEF_BUTTON( bCalibrator_Calibrate,                                              
 DEF_PAGE_2( pageCalibrate, // -V641 // -V1027                                                                                                                   //--- СЕРВИС - КАЛИБРАТОР ---
     "КАЛИБРОВКА",
     "Управлением калибратором и калибровка осциллографа",
-    &cCalibrator_Calibrator,     // СЕРВИС - КАЛИБРАТОР - Калибратор
-    &bCalibrator_Calibrate,      // СЕРВИС - КАЛИБРАТОР - Калибровать
-    Page::Name::Service_Calibrator, PageService::pointer, FuncActive, FuncPressPage, Page::FuncDraw, FuncRegSetPage
+    &cCalibrator_Calibrator,     /// СЕРВИС - КАЛИБРАТОР - Калибратор
+    &bCalibrator_Calibrate,      /// СЕРВИС - КАЛИБРАТОР - Калибровать
+    Page::Name::Service_Calibrator, PageService::pointer, Page::FuncActive, FuncPressPage, Page::FuncDraw, FuncRegSetPage
 )
 
 

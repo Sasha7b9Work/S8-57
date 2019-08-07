@@ -43,7 +43,7 @@ DEF_CHOICE_2( cViewMode,                                                        
     "Задаёт режим отображения сигнала.",
     "Вектор",
     "Точки",
-    MODE_DRAW_SIGNAL, pageDisplay, FuncActive, Choice::FuncChange, Choice::FuncDraw
+    MODE_DRAW_SIGNAL, pageDisplay, Choice::FuncActive, Choice::FuncChange, Choice::FuncDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -84,7 +84,7 @@ DEF_CHOICE_10( cSmoothing,                                                      
     "8 точек",
     "9 точек",
     "10 точек",
-    ENUM_SMOOTHING.value, pageDisplay, FuncActive, Choice::FuncChange, Choice::FuncDraw
+    ENUM_SMOOTHING.value, pageDisplay, Choice::FuncActive, Choice::FuncChange, Choice::FuncDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -96,7 +96,7 @@ DEF_CHOICE_5( cRefreshFPS,                                                      
     "5",
     "2",
     "1",
-    ENUM_SIGNALS_IN_SEC.value, pageDisplay, FuncActive, Choice::FuncChange, Choice::FuncDraw
+    ENUM_SIGNALS_IN_SEC.value, pageDisplay, Choice::FuncActive, Choice::FuncChange, Choice::FuncDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -106,7 +106,7 @@ DEF_CHOICE_2( cScaleYtype,                                                      
     "смещения на экране.",
     "Напряжение",
     "Деления",
-    LINKING_RSHIFT, pageDisplay, FuncActive, Choice::FuncChange, Choice::FuncDraw
+    LINKING_RSHIFT, pageDisplay, Choice::FuncActive, Choice::FuncChange, Choice::FuncDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -117,7 +117,7 @@ DEF_CHOICE_4( cType, // -V206                                                   
     "Тип 2",
     "Тип 3",
     "Тип 4",
-    TYPE_GRID, pageDisplay, FuncActive, Choice::FuncChange, Choice::FuncDraw
+    TYPE_GRID, pageDisplay, Choice::FuncActive, Choice::FuncChange, Choice::FuncDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -138,7 +138,7 @@ DEF_CHOICE_9(cAverage_Num,                                                      
     "64",
     "128",
     "256",
-    ENUM_AVE, pageDisplay, FuncActive, OnChange_AverageNum, Choice::FuncDraw
+    ENUM_AVE, pageDisplay, Choice::FuncActive, OnChange_AverageNum, Choice::FuncDraw
 )
 
 
@@ -158,5 +158,5 @@ DEF_PAGE_9( pageDisplay, // -V641 // -V1027                                     
     &cScaleYtype,                           ///< ДИСПЛЕЙ - Смещение
     PageDisplay::PageSettings::pointer,     ///< ДИСПЛЕЙ - НАСТРОЙКИ
 //    &cThickness,                            ///< ДИСПЛЕЙ - Толщина
-    Page::Name::Display, nullptr, FuncActive, FuncPressPage, Page::FuncDraw, FuncRegSetPage
+    Page::Name::Display, nullptr, Page::FuncActive, FuncPressPage, Page::FuncDraw, FuncRegSetPage
 )

@@ -56,7 +56,7 @@ DEF_CHOICE_3( cMode, // -V206                                                   
     "¿‚ÚÓ ",
     "∆‰Û˘ËÈ",
     "Œ‰ÌÓÍ‡ÚÌ˚È",
-    START_MODE, pTrig, FuncActive, PageTrig::OnChanged_TrigMode, Choice::FuncDraw
+    START_MODE, pTrig, Choice::FuncActive, PageTrig::OnChanged_TrigMode, Choice::FuncDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -71,7 +71,7 @@ DEF_CHOICE_2( cSource, // -V206                                                 
     ,
     " ‡Ì‡Î 1",
     " ‡Ì‡Î 2",
-    TRIG_SOURCE, pTrig, FuncActive, OnChanged_Source, Choice::FuncDraw
+    TRIG_SOURCE, pTrig, Choice::FuncActive, OnChanged_Source, Choice::FuncDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -88,7 +88,7 @@ DEF_CHOICE_2( cPolarity, //-V206                                                
     ,
     "‘ÓÌÚ",
     "—ÂÁ",
-    TRIG_POLARITY, pTrig, FuncActive, OnChanged_Polarity, Choice::FuncDraw
+    TRIG_POLARITY, pTrig, Choice::FuncActive, OnChanged_Polarity, Choice::FuncDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -108,7 +108,7 @@ DEF_CHOICE_3( cFiltr, // -V206                                                  
     "œ—",
     "Õ◊",
     "¬◊",
-    TRIG_INPUT, pTrig, FuncActive, OnChanged_Input, Choice::FuncDraw
+    TRIG_INPUT, pTrig, Choice::FuncActive, OnChanged_Input, Choice::FuncDraw
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -123,5 +123,5 @@ DEF_PAGE_6( pTrig, // -V641 // -V1027                                           
     &cFiltr,                        ///< —»Õ’– - ¬ıÓ‰
     PageTrig::PageHoldOff::pointer, ///< —»Õ’– - ”ƒ≈–∆¿Õ»≈
     PageTrig::PageFind::pointer,    ///< —»Õ’– - œŒ»— 
-    Page::Name::Trig, nullptr, FuncActive, FuncPressPage, Page::FuncDraw, FuncRegSetPage
+    Page::Name::Trig, nullptr, Page::FuncActive, FuncPressPage, Page::FuncDraw, FuncRegSetPage
 )

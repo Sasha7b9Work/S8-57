@@ -19,7 +19,7 @@ static const char *hintsSearch_Mode[] = { "Ручной", "Hand", "Автоматический",  "
 
 static const ChoiceBase cMode =                                                                                                                               //--- СИНХР - ПОИСК - Режим ---
 {
-    Control::Type::Choice, 2, false, Page::Name::NoPage, &pageFind, FuncActive,
+    Control::Type::Choice, 2, false, Page::Name::NoPage, &pageFind, Choice::FuncActive,
     {
         "Режим"
         ,
@@ -41,7 +41,7 @@ static void OnPress_Search()
 DEF_BUTTON( bSearch,                                                                                                                                          //--- СИНХР - ПОИСК - Найти ---
     "Найти",
     "Производит поиск уровня синхронизации.",
-    pageFind, FuncActive, OnPress_Search, Choice::FuncDraw
+    pageFind, Button::FuncActive, OnPress_Search, Choice::FuncDraw
 )
 
 
@@ -51,5 +51,5 @@ DEF_PAGE_2( pageFind, // -V641 // -V1027                                        
     "Управление автоматическим поиском уровня синхронизации.",
     &cMode,                         ///< СИНХР - ПОИСК - Режим
     &bSearch,                       ///< СИНХР - ПОИСК - Найти
-    Page::Name::Trig_Search, PageTrig::pointer, FuncActive, FuncPressPage, Page::FuncDraw, FuncRegSetPage
+    Page::Name::Trig_Search, PageTrig::pointer, Page::FuncActive, FuncPressPage, Page::FuncDraw, FuncRegSetPage
 )

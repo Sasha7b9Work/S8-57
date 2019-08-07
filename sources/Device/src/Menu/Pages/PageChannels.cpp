@@ -39,7 +39,7 @@ DEF_CHOICE_2( cInputA,                                                          
     chanInput,
     DISABLE_RU,
     ENABLE_RU,
-    SET_ENABLED_A, pChanA, FuncActive, PageChannelA::OnChanged_Input, Choice::FuncDraw
+    SET_ENABLED_A, pChanA, Choice::FuncActive, PageChannelA::OnChanged_Input, Choice::FuncDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -54,7 +54,7 @@ DEF_CHOICE_3( cCoupleA,                                                         
     "Пост",
     "Перем",
     "Земля",
-    SET_COUPLE_A, pChanA, FuncActive, PageChannelA::OnChanged_Couple, Choice::FuncDraw
+    SET_COUPLE_A, pChanA, Choice::FuncActive, PageChannelA::OnChanged_Couple, Choice::FuncDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -122,7 +122,7 @@ DEF_PAGE_5( pChanA, // -V641 // -V1027                                          
     &cBandwidthA,       ///< КАНАЛ 1 - Полоса
     &cDividerA,         ///< КАНАЛ 1 - Делитель
     &bBalanceA,         ///< КАНАЛ 1 - Балансировка
-    Page::Name::ChannelA, nullptr, FuncActive, FuncPressPage, Page::FuncDraw, FuncRegSetPage
+    Page::Name::ChannelA, nullptr, Page::FuncActive, FuncPressPage, Page::FuncDraw, FuncRegSetPage
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -140,7 +140,7 @@ DEF_CHOICE_2( cInputB,                                                          
     chanInput,
     DISABLE_RU,
     ENABLE_RU,
-    SET_ENABLED_B, pChanB, FuncActive, PageChannelB::OnChanged_Input, Choice::FuncDraw
+    SET_ENABLED_B, pChanB, Choice::FuncActive, PageChannelB::OnChanged_Input, Choice::FuncDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -155,7 +155,7 @@ DEF_CHOICE_3( cCoupleB,                                                         
     "Пост",
     "Перем",
     "Земля",
-    SET_COUPLE_B, pChanB, FuncActive, PageChannelB::OnChanged_Couple, Choice::FuncDraw
+    SET_COUPLE_B, pChanB, Choice::FuncActive, PageChannelB::OnChanged_Couple, Choice::FuncDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -204,5 +204,5 @@ DEF_PAGE_5( pChanB, // -V641 // -V1027                                          
     &cBandwidthB,       ///< КАНАЛ 2 - Полоса
     &cDividerB,
     &bBalanceB,         ///< КАНАЛ 2 - Балансировка
-    Page::Name::ChannelB, nullptr, FuncActive, FuncPressPage, Page::FuncDraw, FuncRegSetPage
+    Page::Name::ChannelB, nullptr, Page::FuncActive, FuncPressPage, Page::FuncDraw, FuncRegSetPage
 )

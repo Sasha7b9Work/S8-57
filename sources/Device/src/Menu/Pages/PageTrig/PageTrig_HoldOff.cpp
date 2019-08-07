@@ -25,7 +25,7 @@ DEF_CHOICE_2( cHoldOff,                                                         
     ,
     DISABLE_RU,
     ENABLE_RU,
-    TRIG_HOLDOFF_ENABLED, pageHoldOff, FuncActive, OnChanged_HoldOff, Choice::FuncDraw
+    TRIG_HOLDOFF_ENABLED, pageHoldOff, Choice::FuncActive, OnChanged_HoldOff, Choice::FuncDraw
 )
 
 
@@ -38,7 +38,7 @@ static void OnChanged_Duration()
 DEF_GOVERNOR( gDuration,                                                                                                                           //--- СИНХР - УДЕРЖАНИЕ - Длительность ---
     "Длительность",
     "Задаёт длительность промежутка между импульсами синхронизации",
-    TRIG_HOLDOFF, 10, 32000, pageHoldOff, FuncActive, OnChanged_Duration, FuncBeforeDraw
+    TRIG_HOLDOFF, 10, 32000, pageHoldOff, Governor::FuncActive, OnChanged_Duration, FuncBeforeDraw
 )
 
 /// \todo gDuration должен обеспечивать возможность хранения большего значения, чем 32000
@@ -50,5 +50,5 @@ DEF_PAGE_2( pageHoldOff, // -V641 // -V1027                                     
     "",
     &cHoldOff,          ///< СИНХР - УДЕРЖАНИЕ - Удержание
     &gDuration,         ///< СИНХР - УДЕРЖАНИЕ - Длительность
-    Page::Name::Trig_HoldOff, PageTrig::pointer, FuncActive, FuncPressPage, Page::FuncDraw, FuncRegSetPage
+    Page::Name::Trig_HoldOff, PageTrig::pointer, Page::FuncActive, FuncPressPage, Page::FuncDraw, FuncRegSetPage
 )

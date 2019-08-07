@@ -55,7 +55,7 @@ static void OnPress_AutoSearch()
 DEF_BUTTON( bAutoSearch,                                                                                                                                     //--- СЕРВИС - Поиск сигнала ---
     "Поиск сигн",
     "Устанавливает оптимальные установки осциллографа для сигнала в канале 1",
-    pService, FuncActive, OnPress_AutoSearch, Button::EmptyDraw
+    pService, Button::FuncActive, OnPress_AutoSearch, Button::EmptyDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -103,7 +103,7 @@ static void Draw_Function_Screen(int x, int y)
 DEF_SMALL_BUTTON_HINTS_3( bFunction_Screen,                                                                                                                //--- СЕРВИС - ФУНКЦИЯ - Экран ---
     "Экран",
     "Выбирает режим отображения математического сигнала",
-    ppFunction, FuncActive, OnPress_Function_Screen, Draw_Function_Screen,
+    ppFunction, Button::FuncActive, OnPress_Function_Screen, Draw_Function_Screen,
     Draw_Function_Screen_Disable,   "Вывод математической функции отключён",
     Draw_Function_Screen_Separate,  "Сигналы и математическая функция выводятся в разных окнах",
     Draw_Function_Screen_Together,  "Сигналы и математическая функция выводятся в одном окне"
@@ -137,7 +137,7 @@ static void Draw_Function_Type(int x, int y)
 DEF_SMALL_BUTTON_HINTS_2( bFunction_Type,                                                                                                                    //--- СЕРВИС - ФУНКЦИЯ - Вид ---
     "Вид",
     "Выбор математической функции",
-    ppFunction, FuncActive, OnPress_Function_Type, Draw_Function_Type,
+    ppFunction, Button::FuncActive, OnPress_Function_Type, Draw_Function_Type,
     Draw_Function_Type_Sum, "Сложение",
     Draw_Function_Type_Mul, "Умножение"
 )
@@ -167,7 +167,7 @@ static void Draw_Function_ModeRegSet(int x, int y)
 DEF_SMALL_BUTTON_HINTS_2( bFunction_ModeRegSet,                                                                                            //--- СЕРВИС - ФУНКЦИЯ - Режим ручки УСТАНОВКА ---
     "Режим ручки УСТАНОВКА",
     "Выбор режима ручки УСТАНОВКА - управление масштабом или смещением",
-    ppFunction, FuncActive, OnPress_Function_ModeRegSet, Draw_Function_ModeRegSet,
+    ppFunction, Button::FuncActive, OnPress_Function_ModeRegSet, Draw_Function_ModeRegSet,
     Draw_Function_ModeRegSet_Range,  "Управление масштабом",
     Draw_Function_ModeRegSet_RShift, "Управление смещением"
 )
@@ -187,7 +187,7 @@ static void Draw_Function_RangeA(int x, int y)
 DEF_SMALL_BUTTON( bFunction_RangeA,                                                                                                          //--- СЕРВИС - ФУНКЦИЯ - Масштаб 1-го канала ---
     "Масштаб 1-го канала",
     "Использует масштаб первого канала для отображения результата",
-    ppFunction, FuncActive, OnPress_Function_RangeA, Draw_Function_RangeA
+    ppFunction, Button::FuncActive, OnPress_Function_RangeA, Draw_Function_RangeA
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -205,7 +205,7 @@ static void Draw_Function_RangeB(int x, int y)
 DEF_SMALL_BUTTON( bFunction_RangeB,                                                                                                          //--- СЕРВИС - ФУНКЦИЯ - Масштаб 2-го канала ---
     "Масштаб 2-го канала",
     "Использует масштаб второго канала для отображения результата",
-    ppFunction, FuncActive, OnPress_Function_RangeB, Draw_Function_RangeB
+    ppFunction, Button::FuncActive, OnPress_Function_RangeB, Draw_Function_RangeB
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -323,14 +323,14 @@ DEF_CHOICE_2( cSound_Enable,                                                    
     "Включение/выключение звука",
     DISABLE_RU,
     ENABLE_RU,
-    SOUND_ENABLED, ppSound, FuncActive, Choice::FuncChange, Choice::FuncDraw
+    SOUND_ENABLED, ppSound, Choice::FuncActive, Choice::FuncChange, Choice::FuncDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 DEF_GOVERNOR( gSound_Volume,                                                                                                                              //--- СЕРВИС - ЗВУК - Громкость ---
     "Громкость",
     "Установка громкости звука",
-    SOUND_VOLUME, 0, 100, ppSound, FuncActive, FuncChanged, FuncBeforeDraw
+    SOUND_VOLUME, 0, 100, ppSound, Governor::FuncActive, FuncChanged, FuncBeforeDraw
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -339,7 +339,7 @@ DEF_PAGE_2( ppSound, // -V641 // -V1027                                         
     "В этом меню можно настроить громкость звука",
     &cSound_Enable,             ///< СЕРВИС - ЗВУК - Звук
     &gSound_Volume,             ///< СЕРВИС - ЗВУК - Громкость
-    Page::Name::Service_Sound, &pService, FuncActive, FuncPressPage, Page::FuncDraw, FuncRegSetPage
+    Page::Name::Service_Sound, &pService, Page::FuncActive, FuncPressPage, Page::FuncDraw, FuncRegSetPage
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -355,7 +355,7 @@ DEF_TIME( tRTC_Time,                                                            
     "панели управления. Меню установки текущего временя закроется с сохранением нового текущего времени. Нажатие длительное удержание кнопки на "
     "любом другом элементе приведёт к закрытию меню установки текущего вре    мени без сохранения нового текущего времени"
     ,
-    ppRTC, FuncActive, dServicetime, hours, minutes, secondes, month, day, year
+    ppRTC, TimeControl::FuncActive, dServicetime, hours, minutes, secondes, month, day, year
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -366,16 +366,16 @@ static void OnChanged_Time_Correction()
 DEF_GOVERNOR( tRTC_Correction,                                                                                                                           //--- СЕРВИС - ВРЕМЯ - Коррекция ---
     "Коррекция",
     "Установка корректирующего коэффициента для компенсации хода времени",
-    NRST_CORRECTION_TIME, -63, 63, ppRTC, FuncActive, OnChanged_Time_Correction, FuncBeforeDraw
+    NRST_CORRECTION_TIME, -63, 63, ppRTC, Governor::FuncActive, OnChanged_Time_Correction, FuncBeforeDraw
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 DEF_PAGE_2( ppRTC, // -V641 // -V1027                                                                                                                                //--- СЕРВИС - ВРЕМЯ ---
     "ВРЕМЯ",
     "Установка и настройка времени",
-    &tRTC_Time,          // СЕРВИС - ВРЕМЯ - Время
-    &tRTC_Correction,    // CЕРВИС - ВРЕМЯ - Коррекция
-    Page::Name::Service_RTC, &pService, FuncActive, FuncPressPage, Page::FuncDraw, FuncRegSetPage
+    &tRTC_Time,          ///< СЕРВИС - ВРЕМЯ - Время
+    &tRTC_Correction,    ///< CЕРВИС - ВРЕМЯ - Коррекция
+    Page::Name::Service_RTC, &pService, Page::FuncActive, FuncPressPage, Page::FuncDraw, FuncRegSetPage
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -428,7 +428,7 @@ static void OnPress_Information_Exit()
 }
 
 DEF_SMALL_BUTTON_EXIT( bInformation_Exit,                                                                                                               //--- СЕРВИС - ИНФОРМАЦИЯ - Выход ---
-    ppInformation, FuncActive, OnPress_Information_Exit, DrawSB_Exit
+    ppInformation, Button::FuncActive, OnPress_Information_Exit, DrawSB_Exit
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -441,7 +441,7 @@ DEF_PAGE_SB( ppInformation, // -V641                                            
     0,
     0,
     0,
-    Page::Name::SB_Service_Information, &pService, FuncActive, OnPress_Information, Page::FuncDraw, FuncRegSetPage
+    Page::Name::SB_Service_Information, &pService, Page::FuncActive, OnPress_Information, Page::FuncDraw, FuncRegSetPage
 )
 
 
@@ -461,5 +461,5 @@ DEF_PAGE_7( pService, // -V641 // -V1027                                        
     //PageService::PageBattery::pointer,    ///< СЕРВИС - БАТАРЕЯ
     &ppInformation,                         ///< СЕРВИС - ИНФОРМАЦИЯ
     PageService::PageDebug::pointer,        ///< СЕРВИС - ОТЛАДКА
-    Page::Name::Service, nullptr, FuncActive, FuncPressPage, Page::FuncDraw, FuncRegSetPage
+    Page::Name::Service, nullptr, Page::FuncActive, FuncPressPage, Page::FuncDraw, FuncRegSetPage
 )

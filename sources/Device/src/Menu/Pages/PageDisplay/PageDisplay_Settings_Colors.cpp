@@ -27,7 +27,7 @@ DEF_CHOICE_2( cScheme,                                                          
     "Изменение цветовой схемы",
     "Схема 1",
     "Схема 2",
-    set.serv_colorScheme, pageColors, FuncActive, Choice::FuncChange, Choice::FuncDraw
+    set.serv_colorScheme, pageColors, Choice::FuncActive, Choice::FuncChange, Choice::FuncDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -76,7 +76,7 @@ DEF_CHOICE_2( cBackground,                                                      
     "Выбор цвета фона",
     "Чёрный",
     "Белый",
-    BACKGROUND, pageColors, FuncActive, OnChanged_Settings_Colors_Background, Choice::FuncDraw
+    BACKGROUND, pageColors, Choice::FuncActive, OnChanged_Settings_Colors_Background, Choice::FuncDraw
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -96,5 +96,5 @@ DEF_PAGE_6( pageColors, // -V641 // -V1027                                      
     &gcChannelB,          ///< ДИСПЛЕЙ - НАСТРОЙКИ - ЦВЕТА - Канал 2
     &gcGrid,              ///< ДИСПЛЕЙ - НАСТРОЙКИ - ЦВЕТА - Сетка
     &cBackground,         ///< ДИСПЛЕЙ - НАСТРОЙКИ - ЦВЕТА - Фон
-    Page::Name::Display_Settings_Colors, PageDisplay::PageSettings::pointer, FuncActive, FuncPressPage, Page::FuncDraw, FuncRegSetPage
+    Page::Name::Display_Settings_Colors, PageDisplay::PageSettings::pointer, Page::FuncActive, FuncPressPage, Page::FuncDraw, FuncRegSetPage
 )

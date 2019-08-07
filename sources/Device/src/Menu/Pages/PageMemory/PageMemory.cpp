@@ -86,7 +86,7 @@ static void Draw_Drive_Manager_Tab(int x, int y)
 DEF_SMALL_BUTTON( bDrive_Manager_Tab,                                                                                                             //--- ПАМЯТЬ - ВНЕШН ЗУ - КАТАЛОГ - Tab ---
     "Tab",
     "Переход между каталогами и файлами",
-    pppDrive_Manager, FuncActive, FileManager::PressSB_Tab, Draw_Drive_Manager_Tab
+    pppDrive_Manager, Button::FuncActive, FileManager::PressSB_Tab, Draw_Drive_Manager_Tab
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -100,7 +100,7 @@ static void Draw_Drive_Manager_LevelUp(int x, int y)
 DEF_SMALL_BUTTON( bDrive_Manager_LevelUp,                                                                                           //--- ПАМЯТЬ - ВНЕШН ЗУ - КАТАЛОГ - Выйти из каталога ---
     "Выйти из каталого",
     "Переход в родительский каталог",
-    pppDrive_Manager, FuncActive, FileManager::PressSB_LevelUp, Draw_Drive_Manager_LevelUp
+    pppDrive_Manager, Button::FuncActive, FileManager::PressSB_LevelUp, Draw_Drive_Manager_LevelUp
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -114,7 +114,7 @@ static void Draw_Drive_Manager_LevelDown(int x, int y)
 DEF_SMALL_BUTTON( bDrive_Manager_LevelDown,                                                                                           //--- ПАМЯТЬ - ВНЕШН ЗУ - КАТАЛОГ - Войти в каталог ---
     "Войти в каталог",
     "Переход в выбранный каталог",
-    pppDrive_Manager, FuncActive, FileManager::PressSB_LevelDown, Draw_Drive_Manager_LevelDown
+    pppDrive_Manager, Button::FuncActive, FileManager::PressSB_LevelDown, Draw_Drive_Manager_LevelDown
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -172,7 +172,7 @@ DEF_CHOICE_2( cDrive_Name,                                                      
     ,
     "По маске",
     "Вручную",
-    FILE_NAMING_MODE, ppDrive, FuncActive, Choice::FuncChange, Choice::FuncDraw
+    FILE_NAMING_MODE, ppDrive, Choice::FuncActive, Choice::FuncChange, Choice::FuncDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -191,7 +191,7 @@ static void Draw_Delete(int x, int y)
 DEF_SMALL_BUTTON( bDrive_Mask_Delete,                                                                                                           //--- ПАМЯТЬ - ВНЕШН ЗУ - МАСКА - Удалить ---
     "Удалить",
     "Удаляет все введённые символы",
-    pppDrive_Mask, FuncActive, OnPress_Drive_Mask_Delete, Draw_Delete
+    pppDrive_Mask, Button::FuncActive, OnPress_Drive_Mask_Delete, Draw_Delete
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -221,7 +221,7 @@ static void Draw_Backspace(int x, int y)
 DEF_SMALL_BUTTON( bDrive_Mask_Backspace,                                                                                                      //--- ПАМЯТЬ - ВНЕШН ЗУ - МАСКА - Backspace ---
     "Backspace",
     "Удаляет последний введённый символ",
-    pppDrive_Mask, FuncActive, OnPress_Drive_Mask_Backspace, Draw_Backspace
+    pppDrive_Mask, Button::FuncActive, OnPress_Drive_Mask_Backspace, Draw_Backspace
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -271,7 +271,7 @@ static void Draw_Insert(int x, int y)
 DEF_SMALL_BUTTON( bDrive_Mask_Insert,                                                                                                          //--- ПАМЯТЬ - ВНЕШН ЗУ - МАСКА - Вставить ---
     "Вставить",
     "Вставляет выбранный символ",
-    pppDrive_Mask, FuncActive, OnPress_Drive_Mask_Insert, Draw_Insert
+    pppDrive_Mask, Button::FuncActive, OnPress_Drive_Mask_Insert, Draw_Insert
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -283,7 +283,7 @@ DEF_CHOICE_2( cDrive_SaveAs,                                                    
     ,
     "Изображение",
     "Текст",
-    MODE_SAVE, ppDrive, FuncActive, Choice::FuncChange, Choice::FuncDraw
+    MODE_SAVE, ppDrive, Choice::FuncActive, Choice::FuncChange, Choice::FuncDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -292,7 +292,7 @@ DEF_CHOICE_2( cDrive_ModeBtnMemory,                                             
     "",
     "Меню",
     "Сохранение",
-    MODE_BTN_MEMORY, ppDrive, FuncActive, Choice::FuncChange, Choice::FuncDraw
+    MODE_BTN_MEMORY, ppDrive, Choice::FuncActive, Choice::FuncChange, Choice::FuncDraw
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -449,7 +449,7 @@ DEF_CHOICE_2( cDrive_Autoconnect,                                               
     "Eсли \"Вкл\", при подключении внешнего накопителя происходит автоматический переход на страницу ПАМЯТЬ - Внешн ЗУ",
     DISABLE_RU,
     ENABLE_RU,
-    FLASH_AUTOCONNECT, ppDrive, FuncActive, Choice::FuncChange, Choice::FuncDraw
+    FLASH_AUTOCONNECT, ppDrive, Choice::FuncActive, Choice::FuncChange, Choice::FuncDraw
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -464,7 +464,7 @@ DEF_PAGE_6( ppDrive,  //-V641 //-V1027                                          
     &cDrive_Autoconnect,    ///< ПАМЯТЬ - ВНЕШН ЗУ - Автоподключение
     Page::Name::Memory_Drive,
     &pageMemory,            ///< ПАМЯТЬ
-    FuncActive, FuncPressPage, Page::FuncDraw, FuncRegSetPage
+    Page::FuncActive, FuncPressPage, Page::FuncDraw, FuncRegSetPage
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -475,7 +475,7 @@ DEF_PAGE_2( pageMemory, // -V641 // -V1027                                      
     PageMemory::PageRAM::pointer,      ///< ПАМЯТЬ - ПОСЛЕДНИЕ
     //PageMemory::PageROM::pointer,      ///< ПАМЯТЬ - ВНУТР ЗУ
     //&ppDrive,                           ///< ПАМЯТЬ - ВНЕШН ЗУ
-    Page::Name::Memory, nullptr, FuncActive, FuncPressPage, Page::FuncDraw, FuncRegSetPage
+    Page::Name::Memory, nullptr, Page::FuncActive, FuncPressPage, Page::FuncDraw, FuncRegSetPage
 )
 
 void PageMemory::SaveSignalToFlashDrive()
@@ -576,7 +576,7 @@ static void OnPress_SetName_Delete()
 DEF_SMALL_BUTTON( bSetName_Delete,                                                                                                                              //--- ИМЯ ФАЙЛА - Удалить ---
     "Удалить",
     "Удаляет все введённые символы",
-    pSetName, FuncActive, OnPress_SetName_Delete, Draw_Delete
+    pSetName, Button::FuncActive, OnPress_SetName_Delete, Draw_Delete
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -592,7 +592,7 @@ static void OnPress_SetName_Backspace()
 DEF_SMALL_BUTTON( bSetName_Backspace,                                                                                                                         //--- ИМЯ ФАЙЛА - Backspace ---
     "Backspace",
     "Удаляет последний символ",
-    pSetName, FuncActive, OnPress_SetName_Backspace, Draw_Backspace
+    pSetName, Button::FuncActive, OnPress_SetName_Backspace, Draw_Backspace
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -609,7 +609,7 @@ static void OnPress_SetName_Insert()
 DEF_SMALL_BUTTON( bSetName_Insert,                                                                                                                             //--- ИМЯ ФАЙЛА - Вставить ---
     "Вставить",
     "Вводит очередной символ",
-    pSetName, FuncActive, OnPress_SetName_Insert, Draw_Insert
+    pSetName, Button::FuncActive, OnPress_SetName_Insert, Draw_Insert
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -635,7 +635,7 @@ static void Draw_SetName_Save(int x, int y)
 DEF_SMALL_BUTTON( bSetName_Save,                                                                                                                              //--- ИМЯ ФАЙЛА - Сохранить ---
     "Сохранить",
     "Сохранение на флеш под заданным именем",
-    pSetName, FuncActive, OnPress_SetName_Save, Draw_SetName_Save
+    pSetName, Button::FuncActive, OnPress_SetName_Save, Draw_SetName_Save
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -668,9 +668,9 @@ void OnMemExtSetMaskNameRegSet(int angle, int maxIndex)
 DEF_PAGE_4(pSetName, // -V641                                                                                                                // Страница вызывается для ввода имени файла ///
     "",
     "",
-    &bSetName_Delete,       // ВВОД ИМЕНИ ФАЙЛА - Удалить
-    &bSetName_Backspace,    // ВВОД ИМЕНИ ФАЙЛА - Backspace
-    &bSetName_Insert,       // ВВОД ИМЕНИ ФАЙЛА - Вставить
-    &bSetName_Save,         // ВВОД ИМЕНИ ФАЙЛА - Сохранить
-    Page::Name::SB_Memory_SetName, 0, FuncActive, FuncPressPage, Page::FuncDraw, HandlerKey_SetName
+    &bSetName_Delete,       /// ВВОД ИМЕНИ ФАЙЛА - Удалить
+    &bSetName_Backspace,    /// ВВОД ИМЕНИ ФАЙЛА - Backspace
+    &bSetName_Insert,       /// ВВОД ИМЕНИ ФАЙЛА - Вставить
+    &bSetName_Save,         /// ВВОД ИМЕНИ ФАЙЛА - Сохранить
+    Page::Name::SB_Memory_SetName, 0, Page::FuncActive, FuncPressPage, Page::FuncDraw, HandlerKey_SetName
 )

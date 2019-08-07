@@ -18,7 +18,7 @@ DEF_CHOICE_2( cShow,                                                            
     "Включает/отключает вывод иноформации о напряжении батарии на экран",
     DISABLE_RU,
     ENABLE_RU,
-    BAT_SHOW_ON_DISPLAY, pageBattery, FuncActive, Choice::FuncChange, Choice::FuncDraw
+    BAT_SHOW_ON_DISPLAY, pageBattery, Choice::FuncActive, Choice::FuncChange, Choice::FuncDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -26,5 +26,5 @@ DEF_PAGE_1( pageBattery, // -V641 // -V1027                                     
     "БАТАРЕЯ",
     "Функции работы с аккумуляторами",
     &cShow,                     ///< СЕРВИС - БАТАРЕЯ - Показывать
-    Page::Name::Service_Battery, PageService::pointer, FuncActive, FuncPressPage, Page::FuncDraw, FuncRegSetPage
+    Page::Name::Service_Battery, PageService::pointer, Page::FuncActive, FuncPressPage, Page::FuncDraw, FuncRegSetPage
 )
