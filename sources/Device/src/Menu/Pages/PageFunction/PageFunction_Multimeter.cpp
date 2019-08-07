@@ -282,3 +282,5 @@ void PageFunction::PageMultimeter::OnChanged_Mode(bool)
 
     Multimeter::ChangeMode();
 }
+
+//DEF_PAGE_1

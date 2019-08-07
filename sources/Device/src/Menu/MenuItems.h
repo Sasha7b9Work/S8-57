@@ -378,6 +378,8 @@ public:
     void SetValue(int16 v);
     /// Признак активности по умолчанию
     static bool FuncActive() { return true; }
+    /// Обработчик нажатия по умолчанию
+    static void FuncChange() {}
 
 private:
 

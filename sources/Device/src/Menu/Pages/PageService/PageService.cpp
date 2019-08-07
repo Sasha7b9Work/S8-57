@@ -330,7 +330,7 @@ DEF_CHOICE_2( cSound_Enable,                                                    
 DEF_GOVERNOR( gSound_Volume,                                                                                                                              //--- СЕРВИС - ЗВУК - Громкость ---
     "Громкость",
     "Установка громкости звука",
-    SOUND_VOLUME, 0, 100, ppSound, Governor::FuncActive, FuncChanged, FuncBeforeDraw
+    SOUND_VOLUME, 0, 100, ppSound, Governor::FuncActive, Governor::FuncChange, FuncBeforeDraw
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

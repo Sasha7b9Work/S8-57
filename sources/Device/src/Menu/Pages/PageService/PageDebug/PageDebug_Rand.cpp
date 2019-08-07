@@ -20,14 +20,14 @@ const PageBase *PageService::PageDebug::PageRand::pointer = &pageRand;
 DEF_GOVERNOR( gRand_NumAverage,                                                                                                                        //--- ОТЛАДКА - РАНД-ТОР - Усредн. ---
     "Усредн.",
     "",
-    NRST_NUM_AVE_FOR_RAND, 1, 32, pageRand, Governor::FuncActive, FuncChanged, FuncBeforeDraw
+    NRST_NUM_AVE_FOR_RAND, 1, 32, pageRand, Governor::FuncActive, Governor::FuncChange, FuncBeforeDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 DEF_GOVERNOR( gRand_NumSmooth,                                                                                                                     //--- ОТЛАДКА - РАНД-ТОР - Сглаживание ---
     "Сглаживание",
     "",
-    NRST_NUM_SMOOTH_FOR_RAND, 1, 10, pageRand, Governor::FuncActive, FuncChanged, FuncBeforeDraw
+    NRST_NUM_SMOOTH_FOR_RAND, 1, 10, pageRand, Governor::FuncActive, Governor::FuncChange, FuncBeforeDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

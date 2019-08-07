@@ -26,14 +26,14 @@ DEF_GOVERNOR( gBrightness,                                                      
 DEF_GOVERNOR( gLevels,                                                                                                                                 //--- ДИСПЛЕЙ - НАСТРОЙКИ - Уровни ---
     "Уровни",
     "Задаёт время, в течение которого после поворота ручки сещения напряжения на экране остаётся вспомогательная метка уровня смещения",
-    TIME_SHOW_LEVELS, 0, 125, pageSettings, Governor::FuncActive, FuncChanged, FuncBeforeDraw
+    TIME_SHOW_LEVELS, 0, 125, pageSettings, Governor::FuncActive, Governor::FuncChange, FuncBeforeDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 DEF_GOVERNOR( gTime,                                                                                                                                    //--- ДИСПЛЕЙ - НАСТРОЙКИ - Время ---
     "Время",
     "Установка времени, в течение которого сообщения будут находиться на экране",
-    TIME_MESSAGES, 1, 99, pageSettings, Governor::FuncActive, FuncChanged, FuncBeforeDraw
+    TIME_MESSAGES, 1, 99, pageSettings, Governor::FuncActive, Governor::FuncChange, FuncBeforeDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
