@@ -60,7 +60,7 @@ DEF_PAGE_5( pageView, // -V641 // -V1027                                        
     &bLess,                                                                 ///< ÔÓÍÊÖÈß - ÐÅÃÈÑÒÐÀÒÎÐ - ÏÐÎÑÌÎÒÐ - ÏÐÎÑÌÎÒÐ - Ìåíüøå
     &bMore,                                                                 ///< ÔÓÍÊÖÈß - ÐÅÃÈÑÒÐÀÒÎÐ - ÏÐÎÑÌÎÒÐ - ÏÐÎÑÌÎÒÐ - Áîëüøå
     PageFunction::PageRecorder::PageShow::PageView::PageCursors::pointer,   ///< ÔÓÍÊÖÈß - ÐÅÃÈÑÒÐÀÒÎÐ - ÏÐÎÑÌÎÒÐ - ÏÐÎÑÌÎÒÐ - ÊÓÐÑÎÐÛ
-    Page::Name::Function_Recorder_Show_View, PageFunction::PageRecorder::PageShow::pointer, 0, Page::FuncPress, Page::FuncDraw, FuncRegSetPage
+    Page::Name::Function_Recorder_Show_View, PageFunction::PageRecorder::PageShow::pointer, 0, Page::FuncPress, 0, FuncRegSetPage
 )
 
 

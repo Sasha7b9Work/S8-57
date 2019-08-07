@@ -162,5 +162,5 @@ DEF_PAGE_2( pageRand, // -V641 // -V1027                                        
     //&gRand_TimeCompensation,    ///< ÎÒËÀÄÊÀ - ÐÀÍÄ-ÒÎÐ - Êîìïåíñàöèÿ çàäåðæêè
     //&gRand_AddTimeShift,        ///< ÎÒËÀÄÊÀ - ÐÀÍÄ-ÒÎÐ - Ñìåùåíèå
     //&gRand_Pretriggered,        ///< ÎÒËÀÄÊÀ - ÐAÍÄ-ÒÎÐ - Ïðåäçàïóñê
-    Page::Name::Debug_Rand, PageService::PageDebug::pointer, 0, Page::FuncPress, Page::FuncDraw, Page::FuncRegSet
+    Page::Name::Debug_Rand, PageService::PageDebug::pointer, 0, Page::FuncPress, 0, Page::FuncRegSet
 )

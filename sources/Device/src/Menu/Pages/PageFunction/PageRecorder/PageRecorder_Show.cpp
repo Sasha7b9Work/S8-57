@@ -90,7 +90,7 @@ DEF_PAGE_3( pageShow, // -V641 // -V1027                                        
     &cCursor,
     //PageFunction::PageRecorder::PageShow::PageOperations::pointer,  ///< ÔÓÍÊÖÈß - ÐÅÃÈÑÒÐÀÒÎÐ - ÏÐÎÑÌÎÒÐ - ÎÏÅÐÀÖÈÈ
     //PageFunction::PageRecorder::PageShow::PageView::pointer,        ///< ÔÓÍÊÖÈß - ÐÅÃÈÑÒÐÀÒÎÐ - ÏÐÎÑÌÒÎÐ - ÏÐÎÑÌÎÒÐ
-    Page::Name::Function_Recorder_Show, PageFunction::PageRecorder::pointer, IsActive_PageShow, Page::FuncPress, Page::FuncDraw, FuncOnKey_PageShow
+    Page::Name::Function_Recorder_Show, PageFunction::PageRecorder::pointer, IsActive_PageShow, Page::FuncPress, 0, FuncOnKey_PageShow
 )
 
 const PageBase *PageFunction::PageRecorder::PageShow::pointer = &pageShow;

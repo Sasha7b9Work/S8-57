@@ -51,5 +51,5 @@ DEF_PAGE_2( pageFind, // -V641 // -V1027                                        
     "Управление автоматическим поиском уровня синхронизации.",
     &cMode,                         ///< СИНХР - ПОИСК - Режим
     &bSearch,                       ///< СИНХР - ПОИСК - Найти
-    Page::Name::Trig_Search, PageTrig::pointer, 0, Page::FuncPress, Page::FuncDraw, FuncRegSetPage
+    Page::Name::Trig_Search, PageTrig::pointer, 0, Page::FuncPress, 0, FuncRegSetPage
 )

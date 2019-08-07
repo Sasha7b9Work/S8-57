@@ -26,5 +26,5 @@ DEF_PAGE_1( pageBattery, // -V641 // -V1027                                     
     "БАТАРЕЯ",
     "Функции работы с аккумуляторами",
     &cShow,                     ///< СЕРВИС - БАТАРЕЯ - Показывать
-    Page::Name::Service_Battery, PageService::pointer, 0, Page::FuncPress, Page::FuncDraw, FuncRegSetPage
+    Page::Name::Service_Battery, PageService::pointer, 0, Page::FuncPress, 0, FuncRegSetPage
 )

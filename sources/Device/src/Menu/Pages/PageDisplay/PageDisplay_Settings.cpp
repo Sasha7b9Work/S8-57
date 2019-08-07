@@ -94,5 +94,5 @@ DEF_PAGE_7( pageSettings, // -V641 // -V1027                                    
     &cStringNavigation,                                 ///< ÄÈÑÏËÅÉ - ÍÀÑÒÐÎÉÊÈ - Ñòðîêà ìåíþ
     &cAltMarkers,                                       ///< ÄÈÑÏËÅÉ - ÍÀÑÒÐÎÉÊÈ - Äîï. ìàðêåðû
     &cAutoHide,                                         ///< ÄÈÑÏËÅÉ - ÍÀÑÒÐÎÉÊÈ - Ñêðûâàòü
-    Page::Name::Display_Settings, PageDisplay::pointer, 0, Page::FuncPress, Page::FuncDraw, FuncRegSetPage
+    Page::Name::Display_Settings, PageDisplay::pointer, 0, Page::FuncPress, 0, FuncRegSetPage
 )

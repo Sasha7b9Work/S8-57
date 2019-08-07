@@ -96,5 +96,5 @@ DEF_PAGE_6( pageColors, // -V641 // -V1027                                      
     &gcChannelB,          ///< ÄÈÑÏËÅÉ - ÍÀÑÒÐÎÉÊÈ - ÖÂÅÒÀ - Êàíàë 2
     &gcGrid,              ///< ÄÈÑÏËÅÉ - ÍÀÑÒÐÎÉÊÈ - ÖÂÅÒÀ - Ñåòêà
     &cBackground,         ///< ÄÈÑÏËÅÉ - ÍÀÑÒÐÎÉÊÈ - ÖÂÅÒÀ - Ôîí
-    Page::Name::Display_Settings_Colors, PageDisplay::PageSettings::pointer, 0, Page::FuncPress, Page::FuncDraw, FuncRegSetPage
+    Page::Name::Display_Settings_Colors, PageDisplay::PageSettings::pointer, 0, Page::FuncPress, 0, FuncRegSetPage
 )

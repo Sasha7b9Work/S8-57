@@ -264,8 +264,6 @@ public:
     /// Обработчик нажатия по умолчанию
     static void FuncPress(bool) {};
 
-    static void FuncDraw() {};
-
     static bool FuncRegSet(KeyEvent) { return false; };
 };
 
