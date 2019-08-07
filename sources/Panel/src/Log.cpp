@@ -13,7 +13,7 @@
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #define SIZE_BUFFER_LOG 200
 
-static void AddToConsole(char *text);
+static void AddToConsole(const char *text);
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void Log::Write(TypeTrace type, const char *format, ...)
@@ -71,7 +71,7 @@ void Log::Trace(TypeTrace type, const char *module, const char *func, int numLin
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void AddToConsole(char *text)
+static void AddToConsole(const char *text)
 {
     uint8 *buffer = (uint8 *)std::malloc(std::strlen(text) + 3U);
 

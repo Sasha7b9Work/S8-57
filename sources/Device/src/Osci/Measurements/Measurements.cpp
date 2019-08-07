@@ -405,7 +405,7 @@ float CalculatePeriod(Chan::E ch)
     if(!periodIsCaclulating[ch])
     {
         float aveValue = CalculateAverageRel(ch);
-        if(aveValue == Uint8::ERROR) //-V550
+        if(aveValue == Uint8::ERROR) //-V550 //-V2550
         {
             period[ch] = Float::ERROR;
         }
@@ -469,7 +469,7 @@ int CalculatePeriodAccurately(Chan::E ch)
 
         float pic = CalculatePicRel(ch);
 
-        if(pic == Float::ERROR) //-V550
+        if(pic == Float::ERROR) //-V550 //-V2550
         {
             EXIT_FROM_PERIOD_ACCURACY
         }
@@ -556,7 +556,7 @@ float CalculateFreq(Chan::E ch)
 {
     float period = CalculatePeriod(ch);
 
-    return (period == Float::ERROR) ? Float::ERROR : 1.0F / period; //-V550
+    return (period == Float::ERROR) ? Float::ERROR : 1.0F / period; //-V550 //-V2550
 }
 
 
@@ -770,7 +770,7 @@ float CalculateMinSteadyRel(Chan::E ch)
     if(!minSteadyIsCalculating[ch])
     {
         float aveValue = CalculateAverageRel(ch);
-        if(aveValue == Float::ERROR) //-V550
+        if(aveValue == Float::ERROR) //-V550 //-V2550
         {
             min[ch] = Float::ERROR;
         }
@@ -796,7 +796,7 @@ float CalculateMinSteadyRel(Chan::E ch)
             int numDeleted = 0;
 
             float pic = CalculatePicRel(ch);
-            if (pic == Float::ERROR) //-V550
+            if (pic == Float::ERROR) //-V550 //-V2550
             {
                 min[ch] = Float::ERROR;
             }
@@ -854,7 +854,7 @@ float CalculateMaxSteadyRel(Chan::E ch)
 
         float aveValue = CalculateAverageRel(ch);
         
-        if(aveValue == Float::ERROR) //-V550
+        if(aveValue == Float::ERROR) //-V550 //-V2550
         {
             max[ch] = Float::ERROR;
         }
@@ -880,7 +880,7 @@ float CalculateMaxSteadyRel(Chan::E ch)
 
             float pic = CalculatePicRel(ch);
 
-            if (pic == Float::ERROR) //-V550
+            if (pic == Float::ERROR) //-V550 //-V2550
             {
                 max[ch] = Float::ERROR;
             }
@@ -968,7 +968,7 @@ float CalculateAverageRel(Chan::E ch)
     {
         float min = CalculateMinRel(ch);
         float max = CalculateMaxRel(ch);
-        _ave[ch] = (min == Float::ERROR || max == Float::ERROR) ? Float::ERROR : (min + max) / 2.0F; //-V550
+        _ave[ch] = (min == Float::ERROR || max == Float::ERROR) ? Float::ERROR : (min + max) / 2.0F; //-V550 //-V2550
         aveIsCalculating[ch] = true;
     }
     return _ave[ch];
@@ -984,7 +984,7 @@ float CalculatePicRel(Chan::E ch)
     {
         float min = CalculateMinRel(ch);
         float max = CalculateMaxRel(ch);
-        pic[ch] = (min == Float::ERROR || max == Float::ERROR) ? Float::ERROR : max - min; //-V550
+        pic[ch] = (min == Float::ERROR || max == Float::ERROR) ? Float::ERROR : max - min; //-V550 //-V2550
         picIsCalculating[ch] = true;
     }
 
@@ -1082,7 +1082,7 @@ float CalculatePhazaPlus(Chan::E ch)
 {
     float delay = CalculateDelayPlus(ch);
     float period = CalculatePeriod(ch);
-    if(delay == Float::ERROR || period == Float::ERROR) //-V550
+    if(delay == Float::ERROR || period == Float::ERROR) //-V550 //-V2550
     {
         return Float::ERROR;
     }
@@ -1095,7 +1095,7 @@ float CalculatePhazaMinus(Chan::E ch)
 {
     float delay = CalculateDelayMinus(ch);
     float period = CalculatePeriod(ch);
-    if(delay == Float::ERROR || period == Float::ERROR) //-V550
+    if(delay == Float::ERROR || period == Float::ERROR) //-V550 //-V2550
     {
         return Float::ERROR;
     }
@@ -1308,7 +1308,7 @@ String Osci::Measurements::Measure::GetStringMeasure(Chan::E ch, char* buffer, i
     }
     buffer[0] = '\0';
     std::strcpy(buffer, Chan(ch).IsA() ? "1: " : "2: ");
-    if(!isSet || values[type].value[ch] == Float::ERROR) //-V550
+    if(!isSet || values[type].value[ch] == Float::ERROR) //-V550 //-V2550
     {
         std::strcat(buffer, "-.-");
     }

@@ -147,7 +147,7 @@ void ColorType::Init(bool forced)
 
         SetBrightness();
         
-        if (red == 0.0F && green == 0.0F && blue == 0.0F) //-V550
+        if (red == 0.0F && green == 0.0F && blue == 0.0F) //-V550 //-V2550
         {
             stepRed = 0.31F;
             stepGreen = 0.63F;
@@ -201,7 +201,7 @@ void ColorType::SetBrightness(float bright)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void ColorType::BrightnessChange(int delta)
 {
-    if ((delta > 0 && brightness == 1.0F) || (delta < 0 && brightness == 0.0F)) //-V550
+    if ((delta > 0 && brightness == 1.0F) || (delta < 0 && brightness == 0.0F)) //-V550 //-V2550
     {
         return;
     }

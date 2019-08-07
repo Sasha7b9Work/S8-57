@@ -279,7 +279,7 @@ public:
     pFuncVII    funcForDraw;        ///< Функция будет вызываться во время отрисовки кнопки.
     void Draw(int x, int y);
     /// Обработчик funcOnPress
-    void HandlePress() { if (funcOnPress) funcOnPress(); }
+    void HandlePress() { if (funcOnPress) { funcOnPress(); } }
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// SButton ///

@@ -219,7 +219,7 @@ void Painter::SetColor(Color color)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Painter::DrawTesterData(uint8 mode, Color color, uint16 _x[TESTER_NUM_POINTS], uint8 _y[TESTER_NUM_POINTS])
+void Painter::DrawTesterData(uint8 mode, Color color, uint16 _x[TESTER_NUM_POINTS], uint8 _y[TESTER_NUM_POINTS]) //-V2009
 {
     SetColor(color);
 

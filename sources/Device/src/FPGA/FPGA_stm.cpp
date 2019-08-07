@@ -96,7 +96,7 @@ static bool CalculateGate(uint16 rand, uint16 *eMin, uint16 *eMax)
         max = rand;
     }
 
-    if (minGate == 0.0F)    // -V550
+    if (minGate == 0.0F)    // -V550 //-V2550 //-V550
     {
         *eMin = min;
         *eMax = max;
