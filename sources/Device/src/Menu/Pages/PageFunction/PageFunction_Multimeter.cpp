@@ -241,7 +241,7 @@ DEF_PAGE_5( pageMultimeter, // -V641
     &cAVP,
     &cZero,
     &cCalibration,
-    Page::Name::Function_Multimeter, PageFunction::pointer, Page::FuncActive, OnPress_Page, Page::FuncDraw, FuncRegSetPage
+    Page::Name::Function_Multimeter, PageFunction::pointer, 0, OnPress_Page, Page::FuncDraw, FuncRegSetPage
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

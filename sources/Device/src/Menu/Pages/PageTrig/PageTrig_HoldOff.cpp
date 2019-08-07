@@ -50,5 +50,5 @@ DEF_PAGE_2( pageHoldOff, // -V641 // -V1027                                     
     "",
     &cHoldOff,          ///< ÑÈÍÕÐ - ÓÄÅÐÆÀÍÈÅ - Óäåðæàíèå
     &gDuration,         ///< ÑÈÍÕÐ - ÓÄÅÐÆÀÍÈÅ - Äëèòåëüíîñòü
-    Page::Name::Trig_HoldOff, PageTrig::pointer, Page::FuncActive, Page::FuncPress, Page::FuncDraw, FuncRegSetPage
+    Page::Name::Trig_HoldOff, PageTrig::pointer, 0, Page::FuncPress, Page::FuncDraw, FuncRegSetPage
 )

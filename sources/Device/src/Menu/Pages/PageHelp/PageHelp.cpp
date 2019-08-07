@@ -118,5 +118,5 @@ DEF_PAGE_4( pHelp, // -V641 // -V1027                                           
     &sbHelpParagraphLeave,
     &sbHelpParagraphPrev,
     &sbHelpParagraphNext,
-    Page::Name::SB_Help, nullptr, Page::FuncActive, Page::FuncPress, HelpContent_Draw, HandlerKey_Help
+    Page::Name::SB_Help, nullptr, 0, Page::FuncPress, HelpContent_Draw, HandlerKey_Help
 )

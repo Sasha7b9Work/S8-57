@@ -21,5 +21,5 @@ DEF_PAGE_5( pageFunction,                                                       
     PageFunction::PageMultimeter::pointer,         ///< ÔÓÍÊÖÈß - ÌÓËÜÒÈÌÅÒÐ
     PageFunction::PageTester::pointer,             ///< ÔÓÍÊÖÈß - ÒÅÑÒÅÐ
     PageFunction::PageRecorder::pointer,           ///< ÔÓÍÊÖÈß - ÐÅÃÈÑÒÐÀÒÎÐ
-    Page::Name::Function, nullptr, Page::FuncActive, Page::FuncPress, Page::FuncDraw, Page::FuncRegSet
+    Page::Name::Function, nullptr, 0, Page::FuncPress, Page::FuncDraw, Page::FuncRegSet
 )

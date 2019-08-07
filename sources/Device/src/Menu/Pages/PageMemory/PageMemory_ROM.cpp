@@ -272,5 +272,5 @@ DEF_PAGE_5( pageROM, // -V641                                                   
     &bInternal_Delete,          ///< ÏÀÌßÒÜ - ÂÍÓÒÐ ÇÓ - Óäàëèòü
     &bInternal_SaveToMemory,    ///< ÏÀÌßÒÜ - ÂÍÓÒÐ ÇÓ - Ñîõðàíèòü
     &bInternal_SaveToDrive,     ///< ÏÀÌßÒÜ - ÂÍÓÒÐ ÇÓ - Ñîõðàíèòü íà ôëåøêó
-    Page::Name::SB_Memory_Internal, PageMemory::pointer, Page::FuncActive, OnPress_Internal, OnDraw_Internal, HandlerKey_Internal
+    Page::Name::SB_Memory_Internal, PageMemory::pointer, 0, OnPress_Internal, OnDraw_Internal, HandlerKey_Internal
 )

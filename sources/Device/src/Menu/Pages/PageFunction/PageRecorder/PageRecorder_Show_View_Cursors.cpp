@@ -49,7 +49,7 @@ DEF_PAGE_3( pageRecorderCursors, // -V641 // -V1027
     &bCenter,
     &bLeft,
     &bRight,
-    Page::Name::Function_Recorder_Show_View_Cursors, PageFunction::PageRecorder::PageShow::PageView::pointer, Page::FuncActive, Page::FuncPress, Page::FuncDraw, FuncRegSetPage
+    Page::Name::Function_Recorder_Show_View_Cursors, PageFunction::PageRecorder::PageShow::PageView::pointer, 0, Page::FuncPress, Page::FuncDraw, FuncRegSetPage
 )
 
 const PageBase *PageFunction::PageRecorder::PageShow::PageView::PageCursors::pointer = &pageRecorderCursors;

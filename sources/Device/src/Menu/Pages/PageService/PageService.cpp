@@ -339,7 +339,7 @@ DEF_PAGE_2( ppSound, // -V641 // -V1027                                         
     "В этом меню можно настроить громкость звука",
     &cSound_Enable,             ///< СЕРВИС - ЗВУК - Звук
     &gSound_Volume,             ///< СЕРВИС - ЗВУК - Громкость
-    Page::Name::Service_Sound, &pService, Page::FuncActive, Page::FuncPress, Page::FuncDraw, FuncRegSetPage
+    Page::Name::Service_Sound, &pService, 0, Page::FuncPress, Page::FuncDraw, FuncRegSetPage
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -375,7 +375,7 @@ DEF_PAGE_2( ppRTC, // -V641 // -V1027                                           
     "Установка и настройка времени",
     &tRTC_Time,          ///< СЕРВИС - ВРЕМЯ - Время
     &tRTC_Correction,    ///< CЕРВИС - ВРЕМЯ - Коррекция
-    Page::Name::Service_RTC, &pService, Page::FuncActive, Page::FuncPress, Page::FuncDraw, FuncRegSetPage
+    Page::Name::Service_RTC, &pService, 0, Page::FuncPress, Page::FuncDraw, FuncRegSetPage
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -441,7 +441,7 @@ DEF_PAGE_SB( ppInformation, // -V641                                            
     0,
     0,
     0,
-    Page::Name::SB_Service_Information, &pService, Page::FuncActive, OnPress_Information, Page::FuncDraw, FuncRegSetPage
+    Page::Name::SB_Service_Information, &pService, 0, OnPress_Information, Page::FuncDraw, FuncRegSetPage
 )
 
 
@@ -461,5 +461,5 @@ DEF_PAGE_7( pService, // -V641 // -V1027                                        
     //PageService::PageBattery::pointer,    ///< СЕРВИС - БАТАРЕЯ
     &ppInformation,                         ///< СЕРВИС - ИНФОРМАЦИЯ
     PageService::PageDebug::pointer,        ///< СЕРВИС - ОТЛАДКА
-    Page::Name::Service, nullptr, Page::FuncActive, Page::FuncPress, Page::FuncDraw, FuncRegSetPage
+    Page::Name::Service, nullptr, 0, Page::FuncPress, Page::FuncDraw, FuncRegSetPage
 )

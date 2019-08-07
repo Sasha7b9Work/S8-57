@@ -261,8 +261,6 @@ public:
 
     Page::Name::E GetName() const;     ///< Возвращает имя страницы page
   
-    /// Функция активности по умолчанию
-    static bool FuncActive() { return true; }
     /// Обработчик нажатия по умолчанию
     static void FuncPress(bool) {};
 

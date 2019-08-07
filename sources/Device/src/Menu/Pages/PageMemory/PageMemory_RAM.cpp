@@ -172,5 +172,5 @@ DEF_PAGE_2( pageRAM, // -V641 // -V1027                                         
     &bLast_Prev,                        ///< ÏÀÌßÒÜ - ÏÎÑËÅÄÍÈÅ - Ïðåäûäóùèé
     //&bLast_SaveToROM,                   ///< ÏÀÌßÒÜ - ÏÎÑËÅÄÍÈÅ - Âíóòð ÇÓ
     //&bLast_SaveToDrive,                 ///< ÏÀÌßÒÜ - ÏÎÑËÅÄÍÈÅ - Ñîõðàíèòü
-    Page::Name::SB_Memory_Last, PageMemory::pointer, Page::FuncActive, OnPress_RAM, OnDraw_RAM, HandlerKey_RAM
+    Page::Name::SB_Memory_Last, PageMemory::pointer, 0, OnPress_RAM, OnDraw_RAM, HandlerKey_RAM
 )
