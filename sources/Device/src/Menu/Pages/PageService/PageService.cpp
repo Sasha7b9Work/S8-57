@@ -330,7 +330,7 @@ DEF_CHOICE_2( cSound_Enable,                                                    
 DEF_GOVERNOR( gSound_Volume,                                                                                                                              //--- СЕРВИС - ЗВУК - Громкость ---
     "Громкость",
     "Установка громкости звука",
-    SOUND_VOLUME, 0, 100, ppSound, Governor::FuncActive, Governor::FuncChange, FuncBeforeDraw
+    SOUND_VOLUME, 0, 100, ppSound, Governor::FuncActive, Governor::FuncChange, 0
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -366,7 +366,7 @@ static void OnChanged_Time_Correction()
 DEF_GOVERNOR( tRTC_Correction,                                                                                                                           //--- СЕРВИС - ВРЕМЯ - Коррекция ---
     "Коррекция",
     "Установка корректирующего коэффициента для компенсации хода времени",
-    NRST_CORRECTION_TIME, -63, 63, ppRTC, Governor::FuncActive, OnChanged_Time_Correction, FuncBeforeDraw
+    NRST_CORRECTION_TIME, -63, 63, ppRTC, Governor::FuncActive, OnChanged_Time_Correction, 0
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

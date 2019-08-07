@@ -87,7 +87,7 @@ static void OnChanged_ADC_Balance_ShiftA()
 DEF_GOVERNOR( gADC_Balance_ShiftA,                                                                                                              //--- ОТЛАДКА - АЦП - БАЛАНС - Смещение 1 ---
     "Смещение 1",
     "",
-    shiftADCA, -125, 125, pppADC_Balance, IsActive_ADC_Balance_ShiftAB, OnChanged_ADC_Balance_ShiftA, FuncBeforeDraw
+    shiftADCA, -125, 125, pppADC_Balance, IsActive_ADC_Balance_ShiftAB, OnChanged_ADC_Balance_ShiftA, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -99,7 +99,7 @@ static void OnChanged_ADC_Balance_ShiftB()
 DEF_GOVERNOR( gADC_Balance_ShiftB,                                                                                                              //--- ОТЛАДКА - АЦП - БАЛАНС - Смещение 2 ---
     "Смещение 2",
     "",
-    shiftADCB, -125, 125, pppADC_Balance, IsActive_ADC_Balance_ShiftAB, OnChanged_ADC_Balance_ShiftB, FuncBeforeDraw
+    shiftADCB, -125, 125, pppADC_Balance, IsActive_ADC_Balance_ShiftAB, OnChanged_ADC_Balance_ShiftB, 0
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -153,7 +153,7 @@ static void OnChanged_ADC_Stretch_A()
 DEF_GOVERNOR( gADC_Stretch_A,                                                                                                                //--- ОТЛАДКА - АЦП - РАСТЯЖКА - Растяжка 1к ---
     "Растяжка 1к",
     "Задаёт ручную растяжку первого канала.\n1 единица = 0.0001",
-    stretchA, -10000, 10000, pppADC_Stretch, IsActive_ADC_StretchAB, OnChanged_ADC_Stretch_A, FuncBeforeDraw
+    stretchA, -10000, 10000, pppADC_Stretch, IsActive_ADC_StretchAB, OnChanged_ADC_Stretch_A, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -165,7 +165,7 @@ static void OnChanged_ADC_Stretch_B()
 DEF_GOVERNOR( gADC_Stretch_B,                                                                                                                //--- ОТЛАДКА - АЦП - РАСТЯЖКА - Растяжка 2к ---
     "Растяжка 2к",
     "Задаёт ручную растяжку второго канала.\n1 единица = 0.0001",
-    stretchB, -10000, 10000, pppADC_Stretch, IsActive_ADC_StretchAB, OnChanged_ADC_Stretch_B, FuncBeforeDraw
+    stretchB, -10000, 10000, pppADC_Stretch, IsActive_ADC_StretchAB, OnChanged_ADC_Stretch_B, 0
 )
 
 /*
@@ -275,7 +275,7 @@ static void OnChanged_ADC_Shift_A()
 DEF_GOVERNOR( gADC_Shift_A2mV, //-V641                                                                                                    //--- ОТЛАДКА - АЦП - ДОП СМЕЩ - См 1к 2мВ пост ---
     "См 1к 2мВ пост",
     "",
-    RSHIFT_ADD_STABLE_A(Range::_2mV), -100, 100, pppADC_Shift, Governor::FuncActive, OnChanged_ADC_Shift_A, FuncBeforeDraw
+    RSHIFT_ADD_STABLE_A(Range::_2mV), -100, 100, pppADC_Shift, Governor::FuncActive, OnChanged_ADC_Shift_A, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -287,35 +287,35 @@ static void OnChanged_ADC_Shift_B()
 DEF_GOVERNOR( gADC_Shift_B2mV,                                                                                                            //--- ОТЛАДКА - АЦП - ДОП СМЕЩ - См 2к 2мВ пост ---
     "См 2к 2мВ пост",
     "",
-    RSHIFT_ADD_STABLE_B(Range::_2mV), -100, 100, pppADC_Shift, Governor::FuncActive, OnChanged_ADC_Shift_B, FuncBeforeDraw
+    RSHIFT_ADD_STABLE_B(Range::_2mV), -100, 100, pppADC_Shift, Governor::FuncActive, OnChanged_ADC_Shift_B, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 DEF_GOVERNOR( gADC_Shift_A5mV,                                                                                                            //--- ОТЛАДКА - АЦП - ДОП СМЕЩ - См 1к 5мВ пост ---
     "См 1к 5мВ пост",
     "",
-    RSHIFT_ADD_STABLE_A(Range::_5mV), -100, 100, pppADC_Shift, Governor::FuncActive, OnChanged_ADC_Shift_A, FuncBeforeDraw
+    RSHIFT_ADD_STABLE_A(Range::_5mV), -100, 100, pppADC_Shift, Governor::FuncActive, OnChanged_ADC_Shift_A, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 DEF_GOVERNOR( gADC_Shift_B5mV,                                                                                                            //--- ОТЛАДКА - АЦП - ДОП СМЕЩ - См 2к 5мВ пост ---
     "См 2к 5мВ пост",
     "",
-    RSHIFT_ADD_STABLE_B(Range::_5mV), -100, 100, pppADC_Shift, Governor::FuncActive, OnChanged_ADC_Shift_B, FuncBeforeDraw
+    RSHIFT_ADD_STABLE_B(Range::_5mV), -100, 100, pppADC_Shift, Governor::FuncActive, OnChanged_ADC_Shift_B, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 DEF_GOVERNOR( gADC_Shift_A10mV,                                                                                                          //--- ОТЛАДКА - АЦП - ДОП СМЕЩ - См 1к 10мВ пост ---
     "См 1к 10мВ пост",
     "",
-    RSHIFT_ADD_STABLE_A(Range::_10mV), -100, 100, pppADC_Shift, Governor::FuncActive, OnChanged_ADC_Shift_A, FuncBeforeDraw
+    RSHIFT_ADD_STABLE_A(Range::_10mV), -100, 100, pppADC_Shift, Governor::FuncActive, OnChanged_ADC_Shift_A, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 DEF_GOVERNOR( gADC_Shift_B10mV,                                                                                                          //--- ОТЛАДКА - АЦП - ДОП СМЕЩ - См 2к 10мВ пост ---
     "См 2к 10мВ пост",
     "",
-    RSHIFT_ADD_STABLE_B(Range::_10mV), -100, 100, pppADC_Shift, Governor::FuncActive, OnChanged_ADC_Shift_B, FuncBeforeDraw
+    RSHIFT_ADD_STABLE_B(Range::_10mV), -100, 100, pppADC_Shift, Governor::FuncActive, OnChanged_ADC_Shift_B, 0
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -378,7 +378,7 @@ static void OnChanged_Pred()
 DEF_GOVERNOR( mgPred,                                                                                                                                          //--- ОТЛАДКА - Предзапуск ---
     "Предзапуск",
     "",
-    pred, 0, 15000, pageDebug, Governor::FuncActive, OnChanged_Pred, FuncBeforeDraw
+    pred, 0, 15000, pageDebug, Governor::FuncActive, OnChanged_Pred, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -392,7 +392,7 @@ static void OnChanged_Post()
 DEF_GOVERNOR( mgPost,                                                                                                                                         //--- ОТЛАДКА - Послезапуск ---
     "Послезапуск",
     "",
-    post, 0, 15000, pageDebug, Governor::FuncActive, OnChanged_Post, FuncBeforeDraw
+    post, 0, 15000, pageDebug, Governor::FuncActive, OnChanged_Post, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
