@@ -89,7 +89,9 @@ source_group(src                FILES                src/Application.cpp
                                         ../../Device/src/log.cpp
                                         ../../Device/src/log.h
                                         ../../Device/src/tables.cpp
-                                        ../../Device/src/tables.h)
+                                        ../../Device/src/tables.h
+                                        ../../Device/src/MessageMgr.cpp
+                                        ../../Device/src/MessageMgr.h)
 source_group(Display            FILES   ../../Device/src/Display/Colors.h
                                         ../../Device/src/Display/Colors.cpp
                                                      src/Display/Colors_win.cpp
@@ -258,7 +260,10 @@ file(GLOB SOURCES   ../../common/_VS/*
                     ../../Device/src/log.cpp
                     ../../Device/src/log.h
                     ../../Device/src/tables.cpp
-                    ../../Device/src/tables.h)
+                    ../../Device/src/tables.h
+                    ../../Device/src/MessageMgr.cpp
+                    ../../Device/src/MessageMgr.h
+                    )
                     
 add_executable(Device57 ${SOURCES})
 
