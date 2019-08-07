@@ -401,7 +401,10 @@ void Page::Draw(int x, int y, bool opened)
             DrawItems(x, y);
         }
 
-        funcOnDraw();
+        if (funcOnDraw)
+        {
+            funcOnDraw();
+        }
     }
     else
     {
