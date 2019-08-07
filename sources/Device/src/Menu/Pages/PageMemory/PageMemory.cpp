@@ -86,7 +86,7 @@ static void Draw_Drive_Manager_Tab(int x, int y)
 DEF_SMALL_BUTTON( bDrive_Manager_Tab,                                                                                                             //--- ПАМЯТЬ - ВНЕШН ЗУ - КАТАЛОГ - Tab ---
     "Tab",
     "Переход между каталогами и файлами",
-    pppDrive_Manager, Button::FuncActive, FileManager::PressSB_Tab, Draw_Drive_Manager_Tab
+    pppDrive_Manager, 0, FileManager::PressSB_Tab, Draw_Drive_Manager_Tab
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -100,7 +100,7 @@ static void Draw_Drive_Manager_LevelUp(int x, int y)
 DEF_SMALL_BUTTON( bDrive_Manager_LevelUp,                                                                                           //--- ПАМЯТЬ - ВНЕШН ЗУ - КАТАЛОГ - Выйти из каталога ---
     "Выйти из каталого",
     "Переход в родительский каталог",
-    pppDrive_Manager, Button::FuncActive, FileManager::PressSB_LevelUp, Draw_Drive_Manager_LevelUp
+    pppDrive_Manager, 0, FileManager::PressSB_LevelUp, Draw_Drive_Manager_LevelUp
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -114,7 +114,7 @@ static void Draw_Drive_Manager_LevelDown(int x, int y)
 DEF_SMALL_BUTTON( bDrive_Manager_LevelDown,                                                                                           //--- ПАМЯТЬ - ВНЕШН ЗУ - КАТАЛОГ - Войти в каталог ---
     "Войти в каталог",
     "Переход в выбранный каталог",
-    pppDrive_Manager, Button::FuncActive, FileManager::PressSB_LevelDown, Draw_Drive_Manager_LevelDown
+    pppDrive_Manager, 0, FileManager::PressSB_LevelDown, Draw_Drive_Manager_LevelDown
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -191,7 +191,7 @@ static void Draw_Delete(int x, int y)
 DEF_SMALL_BUTTON( bDrive_Mask_Delete,                                                                                                           //--- ПАМЯТЬ - ВНЕШН ЗУ - МАСКА - Удалить ---
     "Удалить",
     "Удаляет все введённые символы",
-    pppDrive_Mask, Button::FuncActive, OnPress_Drive_Mask_Delete, Draw_Delete
+    pppDrive_Mask, 0, OnPress_Drive_Mask_Delete, Draw_Delete
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -221,7 +221,7 @@ static void Draw_Backspace(int x, int y)
 DEF_SMALL_BUTTON( bDrive_Mask_Backspace,                                                                                                      //--- ПАМЯТЬ - ВНЕШН ЗУ - МАСКА - Backspace ---
     "Backspace",
     "Удаляет последний введённый символ",
-    pppDrive_Mask, Button::FuncActive, OnPress_Drive_Mask_Backspace, Draw_Backspace
+    pppDrive_Mask, 0, OnPress_Drive_Mask_Backspace, Draw_Backspace
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -271,7 +271,7 @@ static void Draw_Insert(int x, int y)
 DEF_SMALL_BUTTON( bDrive_Mask_Insert,                                                                                                          //--- ПАМЯТЬ - ВНЕШН ЗУ - МАСКА - Вставить ---
     "Вставить",
     "Вставляет выбранный символ",
-    pppDrive_Mask, Button::FuncActive, OnPress_Drive_Mask_Insert, Draw_Insert
+    pppDrive_Mask, 0, OnPress_Drive_Mask_Insert, Draw_Insert
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -576,7 +576,7 @@ static void OnPress_SetName_Delete()
 DEF_SMALL_BUTTON( bSetName_Delete,                                                                                                                              //--- ИМЯ ФАЙЛА - Удалить ---
     "Удалить",
     "Удаляет все введённые символы",
-    pSetName, Button::FuncActive, OnPress_SetName_Delete, Draw_Delete
+    pSetName, 0, OnPress_SetName_Delete, Draw_Delete
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -592,7 +592,7 @@ static void OnPress_SetName_Backspace()
 DEF_SMALL_BUTTON( bSetName_Backspace,                                                                                                                         //--- ИМЯ ФАЙЛА - Backspace ---
     "Backspace",
     "Удаляет последний символ",
-    pSetName, Button::FuncActive, OnPress_SetName_Backspace, Draw_Backspace
+    pSetName, 0, OnPress_SetName_Backspace, Draw_Backspace
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -609,7 +609,7 @@ static void OnPress_SetName_Insert()
 DEF_SMALL_BUTTON( bSetName_Insert,                                                                                                                             //--- ИМЯ ФАЙЛА - Вставить ---
     "Вставить",
     "Вводит очередной символ",
-    pSetName, Button::FuncActive, OnPress_SetName_Insert, Draw_Insert
+    pSetName, 0, OnPress_SetName_Insert, Draw_Insert
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -635,7 +635,7 @@ static void Draw_SetName_Save(int x, int y)
 DEF_SMALL_BUTTON( bSetName_Save,                                                                                                                              //--- ИМЯ ФАЙЛА - Сохранить ---
     "Сохранить",
     "Сохранение на флеш под заданным именем",
-    pSetName, Button::FuncActive, OnPress_SetName_Save, Draw_SetName_Save
+    pSetName, 0, OnPress_SetName_Save, Draw_SetName_Save
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

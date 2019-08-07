@@ -79,7 +79,7 @@ static void Draw_FFT_Cursors_Source(int x, int y)
 DEF_SMALL_BUTTON( bFFT_Cursors_Source,                                                                                                        //--- ФУНКЦИЯ - СПЕКТР - КУРСОРЫ - Источник ---
     "Источник",
     "Выбор источника для расчёта спектра",
-    pppFFT_Cursors, Button::FuncActive, OnPress_FFT_Cursors_Source, Draw_FFT_Cursors_Source
+    pppFFT_Cursors, 0, OnPress_FFT_Cursors_Source, Draw_FFT_Cursors_Source
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

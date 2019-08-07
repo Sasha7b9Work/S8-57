@@ -70,14 +70,14 @@ DEF_SMALL_BUTTON( sbHelpParagraphLeave,                                         
 DEF_SMALL_BUTTON( sbHelpParagraphPrev,                                                                                                                   //--- ПОМОЩЬ - Предыдущий раздел ---
     "Предыдущий раздел",
     "Выбрать предыдущий раздел справки",
-    pHelp, Button::FuncActive, HelpContent_PrevParagraph, DrawSB_Help_ParagraphPrev
+    pHelp, 0, HelpContent_PrevParagraph, DrawSB_Help_ParagraphPrev
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 DEF_SMALL_BUTTON( sbHelpParagraphNext,                                                                                                                    //--- ПОМОЩЬ - Следующий раздел ---
     "Следующий раздел",
     "Выбрать следующий раздел справки",
-    pHelp, Button::FuncActive, HelpContent_NextParagraph, DrawSB_Help_ParagraphNext
+    pHelp, 0, HelpContent_NextParagraph, DrawSB_Help_ParagraphNext
 )
 
 /*

@@ -263,7 +263,7 @@ static void OnPress_ADC_Shift_Reset()
 DEF_BUTTON( bADC_Shift_Reset,                                                                                                                       //-- ОТЛАДКА - АЦП - ДОП СМЕЩ - Сброс ---
     "Сброс",
     "",
-    pppADC_Shift, Button::FuncActive, OnPress_ADC_Shift_Reset, Button::EmptyDraw
+    pppADC_Shift, 0, OnPress_ADC_Shift_Reset, Button::EmptyDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -402,7 +402,7 @@ static void OnPress_Settings_Exit()
 }
 
 DEF_SMALL_BUTTON_EXIT( bSettings_Exit,                                                                                                                  //--- ОТЛАДКА - НАСТРОЙКИ - Выход ---
-    ppSettings, Button::FuncActive, OnPress_Settings_Exit, DrawSB_Exit
+    ppSettings, 0, OnPress_Settings_Exit, DrawSB_Exit
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -540,7 +540,7 @@ static void OnPress_SerialNumber_Exit()
 }
 
 DEF_SMALL_BUTTON_EXIT( bSerialNumber_Exit,                                                                                                                    //--- ОТЛАДКА - С/Н - Выход ---
-    ppSerialNumber, Button::FuncActive, OnPress_SerialNumber_Exit, DrawSB_Exit
+    ppSerialNumber, 0, OnPress_SerialNumber_Exit, DrawSB_Exit
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -561,7 +561,7 @@ static void Draw_SerialNumber_Change(int x, int y)
 DEF_SMALL_BUTTON( bSerialNumber_Change,                                                                                                                    //--- ОТЛАДКА - С/Н - Вставить ---
     "Вставить",
     "Вставляет выбраный символ",
-    ppSerialNumber, Button::FuncActive, OnPress_SerialNumber_Change, Draw_SerialNumber_Change
+    ppSerialNumber, 0, OnPress_SerialNumber_Change, Draw_SerialNumber_Change
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -579,7 +579,7 @@ static void Draw_SerialNumber_Save(int x, int y)
 DEF_SMALL_BUTTON( bSerialNumber_Save,                                                                                                                     //--- ОТЛАДКА - С/Н - Сохранить ---
     "Сохранить",
     "Записывает серийный номер в OTP",
-    ppSerialNumber, Button::FuncActive, OnPress_SerialNumber_Save, Draw_SerialNumber_Save
+    ppSerialNumber, 0, OnPress_SerialNumber_Save, Draw_SerialNumber_Save
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -620,7 +620,7 @@ static void OnPress_EraseData()
 DEF_BUTTON( bEraseData,                                                                                                                                    //--- ОТЛАДКА - Стереть данные ---
     "Стереть данне",
     "Стирает сохранённые данные из ППЗУ",
-    pageDebug, Button::FuncActive, OnPress_EraseData, Button::EmptyDraw
+    pageDebug, 0, OnPress_EraseData, Button::EmptyDraw
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

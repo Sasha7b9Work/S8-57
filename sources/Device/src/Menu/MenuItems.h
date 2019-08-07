@@ -287,9 +287,6 @@ public:
     void Draw(int x, int y);
 
     static void EmptyDraw(int, int) {};
-    static bool EmptyActive() { return true; }
-    /// Признак активности по умолчанию
-    static bool FuncActive() { return true; }
     /// Обработчик нажатия по умолчанию
     static void FuncPress() {}
 };

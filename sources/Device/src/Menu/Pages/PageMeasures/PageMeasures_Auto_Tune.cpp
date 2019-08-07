@@ -35,7 +35,7 @@ static void Draw_Tune_Markers(int x, int y)
 DEF_SMALL_BUTTON( bTune_Markers,                                                                                                                     //--- ИЗМЕРЕНИЯ - НАСТРОИТЬ - Маркер ---
     "Маркер",
     "Позволяет установить маркеры для визуального контроля измерений",
-    pageTune, Button::FuncActive, Measure::ShortPressOnSmallButonMarker, Draw_Tune_Markers
+    pageTune, 0, Measure::ShortPressOnSmallButonMarker, Draw_Tune_Markers
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -51,7 +51,7 @@ static void Draw_Tune_Settings(int x, int y)
 DEF_SMALL_BUTTON( bTune_Settings,                                                                                                                 //--- ИЗМЕРЕНИЯ - НАСТРОИТЬ - Настройка ---
     "Настройка",
     "Позволяет выбрать необходимые измерения",
-    pageTune, Button::FuncActive, Measurements::PageChoice::ChangeState, Draw_Tune_Settings
+    pageTune, 0, Measurements::PageChoice::ChangeState, Draw_Tune_Settings
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

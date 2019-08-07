@@ -15,7 +15,7 @@ static void OnPress_Center()
 DEF_BUTTON( bCenter,
     "В центр",
     "",
-    pageRecorderCursors, Button::FuncActive, OnPress_Center, Button::EmptyDraw
+    pageRecorderCursors, 0, OnPress_Center, Button::EmptyDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -27,7 +27,7 @@ static void OnPress_Left()
 DEF_BUTTON( bLeft,
     "Лево",
     "",
-    pageRecorderCursors, Button::FuncActive, OnPress_Left, Button::EmptyDraw
+    pageRecorderCursors, 0, OnPress_Left, Button::EmptyDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -39,7 +39,7 @@ static void OnPress_Right()
 DEF_BUTTON( bRight,
     "Право",
     "",
-    pageRecorderCursors, Button::FuncActive, OnPress_Right, Button::EmptyDraw
+    pageRecorderCursors, 0, OnPress_Right, Button::EmptyDraw
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

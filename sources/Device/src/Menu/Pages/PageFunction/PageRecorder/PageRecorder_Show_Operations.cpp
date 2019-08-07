@@ -15,7 +15,7 @@ static void OnPress_Rename()
 DEF_BUTTON( bRename,                                                                                                    //--- ФУНКЦИЯ - РЕГИСТРАТОР - ПРОСМОТР - ОПЕРАЦИИ - Переименовать ---
     "Переименовать",
     "",
-    pageOperations, Button::FuncActive, OnPress_Rename, Button::EmptyDraw
+    pageOperations, 0, OnPress_Rename, Button::EmptyDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -27,7 +27,7 @@ static void OnPress_Copy()
 DEF_BUTTON( bCopy,                                                                                                         //--- ФУНКЦИЯ - РЕГИСТРАТОР - ПРОСМОТР - ОПЕРАЦИИ - Копировать ---
     "Копировать",
     "",
-    pageOperations, Button::FuncActive, OnPress_Copy, Button::EmptyDraw
+    pageOperations, 0, OnPress_Copy, Button::EmptyDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -39,7 +39,7 @@ static void OnPress_Move()
 DEF_BUTTON( bMove,                                                                                                        //--- ФУНКЦИЯ - РЕГИСТРАТОР - ПРОСМОТР - ОПЕРАЦИИ - Переместить ---
     "Переместить",
     "",
-    pageOperations, Button::FuncActive, OnPress_Move, Button::EmptyDraw
+    pageOperations, 0, OnPress_Move, Button::EmptyDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -51,7 +51,7 @@ static void OnPress_Delete()
 DEF_BUTTON( bDelete,                                                                                                          //--- ФУНКЦИЯ - РЕГИСТРАТОР - ПРОСМОТР - ОПЕРАЦИИ - Удалить ---
     "Удалить",
     "",
-    pageOperations, Button::FuncActive, OnPress_Delete, Button::EmptyDraw
+    pageOperations, 0, OnPress_Delete, Button::EmptyDraw
 )
 
 

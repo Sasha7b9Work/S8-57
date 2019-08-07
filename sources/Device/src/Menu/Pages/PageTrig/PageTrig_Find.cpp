@@ -41,7 +41,7 @@ static void OnPress_Search()
 DEF_BUTTON( bSearch,                                                                                                                                          //--- СИНХР - ПОИСК - Найти ---
     "Найти",
     "Производит поиск уровня синхронизации.",
-    pageFind, Button::FuncActive, OnPress_Search, Choice::FuncDraw
+    pageFind, 0, OnPress_Search, Choice::FuncDraw
 )
 
 
