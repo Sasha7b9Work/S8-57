@@ -275,3 +275,4 @@ target_link_libraries(Device57 "..\\..\\..\\ThirdParty\\SDL2\\SDL2-2.0.10\\gener
 target_link_libraries(Device57 WinMM.lib)
 target_link_libraries(Device57 version.lib)
 target_link_libraries(Device57 Imm32.Lib)
+target_link_libraries(Device57 Setupapi.lib)
