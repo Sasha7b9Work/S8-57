@@ -109,7 +109,7 @@ DEF_PAGE_3( pppADC_Balance, // -V641 // -V1027                                  
     &cADC_Balance_Mode,      ///< ÎÒËÀÄÊÀ - ÀÖÏ - ÁÀËÀÍÑ - Ðåæèì
     &gADC_Balance_ShiftA,    ///< ÎÒËÀÄÊÀ - ÀÖÏ - ÁÀËÀÍÑ - Ñìåùåíèå 1
     &gADC_Balance_ShiftB,    ///< ÎÒËÀÄÊÀ - ÀÖÏ - ÁÀËÀÍÑ - Ñìåùåíèå 2
-    Page::Name::Debug_ADC_Balance, &ppADC, Page::FuncActive, FuncPressPage, Page::FuncDraw, FuncRegSetPage
+    Page::Name::Debug_ADC_Balance, &ppADC, Page::FuncActive, Page::FuncPress, Page::FuncDraw, FuncRegSetPage
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -243,7 +243,7 @@ DEF_PAGE_3( pppADC_Stretch, // -V641 // -V1027                                  
     &cADC_Stretch_Mode,      ///< ÎÒËÀÄÊÀ - ÀÖÏ - ÐÀÑÒßÆÊÀ - Ðåæèì
     &gADC_Stretch_A,         ///< ÎÒËÀÄÊÀ - ÀÖÏ - ÐÀÑÒßÆÊÀ - Ðàñòÿæêà 1ê
     &gADC_Stretch_B,
-    Page::Name::Debug_ADC_Stretch, &ppADC, Page::FuncActive, FuncPressPage, Page::FuncDraw, FuncRegSetPage
+    Page::Name::Debug_ADC_Stretch, &ppADC, Page::FuncActive, Page::FuncPress, Page::FuncDraw, FuncRegSetPage
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -329,7 +329,7 @@ DEF_PAGE_7( pppADC_Shift, // -V641  // -V1027                                   
     &gADC_Shift_B5mV,    // ÎÒËÀÄÊÀ - ÀÖÏ - ÄÎÏ ÑÌÅÙ - Ñì 2ê 5ìÂ ïîñò
     &gADC_Shift_A10mV,   // ÎÒËÀÄÊÀ - ÀÖÏ - ÄÎÏ ÑÌÅÙ - Ñì 1ê 10ìÂ ïîñò
     &gADC_Shift_B10mV,   // ÎÒËÀÄÊÀ - ÀÖÏ - ÄÎÏ ÑÌÅÙ - Ñì 2ê 10ìÂ ïîñò
-    Page::Name::Debug_ADC_Shift, &ppADC, Page::FuncActive, FuncPressPage, Page::FuncDraw, FuncRegSetPage
+    Page::Name::Debug_ADC_Shift, &ppADC, Page::FuncActive, Page::FuncPress, Page::FuncDraw, FuncRegSetPage
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -339,7 +339,7 @@ DEF_PAGE_3( ppADC, // -V641                                                     
     &pppADC_Balance, // ÎÒËÀÄÊÀ - ÀÖÏ - ÁÀËÀÍÑ
     &pppADC_Stretch, // ÎÒËÀÄÊÀ - ÀÖÏ - ÐÀÑÒßÆÊÀ
     &pppADC_Shift,   // ÎÒËÀÄÊÀ - ÀÖÏ - ÄÎÏ ÑÌÅÙ
-    Page::Name::Debug_ADC, &pageDebug, Page::FuncActive, FuncPressPage, Page::FuncDraw, FuncRegSetPage
+    Page::Name::Debug_ADC, &pageDebug, Page::FuncActive, Page::FuncPress, Page::FuncDraw, FuncRegSetPage
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -639,5 +639,5 @@ DEF_PAGE_6( pageDebug, // -V641 // -V1027                                       
 //    &ppSettings,		                            ///< ÎÒËÀÄÊÀ - ÍÀÑÒÐÎÉÊÈ
 //    &ppSerialNumber,                              ///< ÎÒËÀÄÊÀ - Ñ/Í
 //    &bEraseData,                                  ///< ÎÒËÀÄÊÀ - Ñòåðåòü äàííûå
-    Page::Name::Debug, PageService::pointer, Page::FuncActive, FuncPressPage, Page::FuncDraw, FuncRegSetPage
+    Page::Name::Debug, PageService::pointer, Page::FuncActive, Page::FuncPress, Page::FuncDraw, FuncRegSetPage
 )

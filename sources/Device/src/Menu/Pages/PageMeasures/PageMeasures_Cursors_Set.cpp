@@ -337,7 +337,7 @@ DEF_PAGE_4( pageSet, // -V641 // -V1027                                         
     &bSet_T,                ///< ÈÇÌÅÐÅÍÈß - ÊÓÐÑÎÐÛ - ÓÑÒÀÍÎÂÈÒÜ - Êóðñîðû Ò
     &bSet_100,              ///< ÈÇÌÅÐÅÍÈß - ÊÓÐÑÎÐÛ - ÓÑÒÀÍÎÂÈÒÜ - 100%
     //&bSet_Movement,         ///< ÈÇÌÅÐÅÍÈß - ÊÓÐÑÎÐÛ - ÓÑÒÀÍÎÂÈÒÜ - Ïåðåìåùåíèå
-    Page::Name::Measures_Cursors_Set, PageMeasures::PageCursors::pointer, Button::FuncActive, FuncPressPage, Page::FuncDraw,
+    Page::Name::Measures_Cursors_Set, PageMeasures::PageCursors::pointer, Button::FuncActive, Page::FuncPress, Page::FuncDraw,
     PageMeasures::PageCursors::PageSet::OnKey
 )
 

@@ -122,7 +122,7 @@ DEF_PAGE_5( pChanA, // -V641 // -V1027                                          
     &cBandwidthA,       ///< КАНАЛ 1 - Полоса
     &cDividerA,         ///< КАНАЛ 1 - Делитель
     &bBalanceA,         ///< КАНАЛ 1 - Балансировка
-    Page::Name::ChannelA, nullptr, Page::FuncActive, FuncPressPage, Page::FuncDraw, FuncRegSetPage
+    Page::Name::ChannelA, nullptr, Page::FuncActive, Page::FuncPress, Page::FuncDraw, FuncRegSetPage
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -204,5 +204,5 @@ DEF_PAGE_5( pChanB, // -V641 // -V1027                                          
     &cBandwidthB,       ///< КАНАЛ 2 - Полоса
     &cDividerB,
     &bBalanceB,         ///< КАНАЛ 2 - Балансировка
-    Page::Name::ChannelB, nullptr, Page::FuncActive, FuncPressPage, Page::FuncDraw, FuncRegSetPage
+    Page::Name::ChannelB, nullptr, Page::FuncActive, Page::FuncPress, Page::FuncDraw, FuncRegSetPage
 )

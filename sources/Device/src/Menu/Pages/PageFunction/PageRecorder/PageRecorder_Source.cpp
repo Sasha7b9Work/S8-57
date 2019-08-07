@@ -42,7 +42,7 @@ DEF_PAGE_2( pageSource, // -V641 // -V1027                                      
     &cChanA,        ///< ÔÓÍÊÖÈß - ÐÅÃÈÑÒÐÀÒÎÐ - ÈÑÒÎ×ÍÈÊ - Êàíàë 1
     &cChanB,        ///< ÔÓÍÊÖÈß - ÐÅÃÈÑÒÐÀÒÎÐ - ÈÑÒÎ×ÈÍÊ - Êàíàë 2
     //&cSensor,       ///< ÔÓÍÊÖÈß - ÐÅÃÈÑÒÐÀÒÎÐ - ÈÑÒÎ×ÍÈÊ - Äàò÷èê
-    Page::Name::Function_Recorder_Source, PageFunction::PageRecorder::pointer, Page::FuncActive, FuncPressPage, Page::FuncDraw, FuncRegSetPage
+    Page::Name::Function_Recorder_Source, PageFunction::PageRecorder::pointer, Page::FuncActive, Page::FuncPress, Page::FuncDraw, FuncRegSetPage
 )
 
 const PageBase *PageFunction::PageRecorder::PageSource::pointer = &pageSource;

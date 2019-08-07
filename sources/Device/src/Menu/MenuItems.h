@@ -263,7 +263,7 @@ public:
   
     /// Функция активности по умолчанию
     static bool FuncActive() { return true; }
-
+    /// Обработчик нажатия по умолчанию
     static void FuncPress(bool) {};
 
     static void FuncDraw() {};

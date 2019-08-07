@@ -1,6 +1,5 @@
 #pragma once
 #include "Utils/CommonFunctions.h"
-#define FuncPressPage       EmptyFuncVB
 #define FuncBeforeDraw      EmptyFuncVV
 
 bool EmptyFuncBKE(KeyEvent);
