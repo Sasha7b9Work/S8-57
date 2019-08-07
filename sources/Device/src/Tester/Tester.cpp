@@ -273,12 +273,12 @@ static void RecountPoints(uint16 *x, uint8 *y)
     {
         int X = 255 - x[i] + dX;
         X = (int)(x0 + (X - x0) * scaleX);
-        LIMITATION(X, 0, 319);
+        LIMITATION(X, 0, 319); //-V2516
         x[i] = (uint16)X;
 
         int Y = y[i] + dY;
         Y = (uint8)(y0 + (Y - y0) * scaleY);
-        LIMITATION(Y, 0, 239);
+        LIMITATION(Y, 0, 239); //-V2516
         y[i] = (uint8)Y;
     }
 }

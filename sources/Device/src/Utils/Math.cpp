@@ -267,7 +267,7 @@ void Math::CalculateMathFunction(float *dataAandResult, const float *dataB, int 
             dataAandResult++;
         }
     }
-    else if (MATH_FUNC == MathFunction::Mul)
+    else if (MATH_FUNC == MathFunction::Mul) //-V547
     {
         int delta = dataB - dataAandResult;
         float *end = &dataAandResult[numPoints];
