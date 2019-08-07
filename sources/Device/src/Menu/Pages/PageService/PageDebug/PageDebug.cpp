@@ -174,7 +174,7 @@ DEF_GOVERNOR(       gADC_Stretch_Ak20mV,                                        
     "20ìÂ/1Â 1ê", "20mV/1V 1k",
     "",
     "",
-    NRST_ADD_STRETCH_20mV_A, -10000, 10000, pppADC_Stretch, 0, FuncChanged, FuncBeforeDraw
+    NRST_ADD_STRETCH_20mV_A, -10000, 10000, pppADC_Stretch, 0, 0, FuncBeforeDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -182,7 +182,7 @@ DEF_GOVERNOR(       gADC_Stretch_Ak50mV,                                        
     "50ìÂ 1ê", "50mV 1k",
     "",
     "",
-    NRST_ADD_STRETCH_50mV_A, -10000, 10000, pppADC_Stretch, 0, FuncChanged, FuncBeforeDraw
+    NRST_ADD_STRETCH_50mV_A, -10000, 10000, pppADC_Stretch, 0, 0, FuncBeforeDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -190,7 +190,7 @@ DEF_GOVERNOR(       gADC_Stretch_Ak100mV,                                       
     "100ìÂ/5Â 1ê", "100mV/5V 1ch",
     "",
     "",
-    NRST_ADD_STRETCH_100mV_A, -10000, 10000, pppADC_Stretch, 0, FuncChanged, FuncBeforeDraw
+    NRST_ADD_STRETCH_100mV_A, -10000, 10000, pppADC_Stretch, 0, 0, FuncBeforeDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -198,7 +198,7 @@ DEF_GOVERNOR(       gADC_Stretch_Ak2V,                                          
     "2Â 1ê", "2V 1ch",
     "",
     "",
-    NRST_ADD_STRETCH_2V_A, -10000, 10000, pppADC_Stretch, 0, FuncChanged, FuncBeforeDraw
+    NRST_ADD_STRETCH_2V_A, -10000, 10000, pppADC_Stretch, 0, 0, FuncBeforeDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -206,7 +206,7 @@ DEF_GOVERNOR(       gADC_Stretch_Bk20mV,                                        
     "20ìÂ/1Â 2ê", "20mV/1V 2k",
     "",
     "",
-    NRST_ADD_STRETCH_20mV_B, -10000, 10000, pppADC_Stretch, 0, FuncChanged, FuncBeforeDraw
+    NRST_ADD_STRETCH_20mV_B, -10000, 10000, pppADC_Stretch, 0, 0, FuncBeforeDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -214,7 +214,7 @@ DEF_GOVERNOR(       gADC_Stretch_Bk50mV,                                        
     "50ìÂ 2ê", "50mV 2k",
     "",
     "",
-    NRST_ADD_STRETCH_50mV_B, -10000, 10000, pppADC_Stretch, 0, FuncChanged, FuncBeforeDraw
+    NRST_ADD_STRETCH_50mV_B, -10000, 10000, pppADC_Stretch, 0, 0, FuncBeforeDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -222,7 +222,7 @@ DEF_GOVERNOR(       gADC_Stretch_Bk100mV,                                       
     "100ìÂ/5Â 2ê", "100mV/5V 2k",
     "",
     "",
-    NRST_ADD_STRETCH_100mV_B, -10000, 10000, pppADC_Stretch, 0, FuncChanged, FuncBeforeDraw
+    NRST_ADD_STRETCH_100mV_B, -10000, 10000, pppADC_Stretch, 0, 0, FuncBeforeDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -230,7 +230,7 @@ DEF_GOVERNOR(       gADC_Stretch_Bk2V,                                          
     "2Â 2ê", "2V 2ch",
     "",
     "",
-    NRST_ADD_STRETCH_2V_B, -10000, 10000, pppADC_Stretch, 0, FuncChanged, FuncBeforeDraw
+    NRST_ADD_STRETCH_2V_B, -10000, 10000, pppADC_Stretch, 0, 0, FuncBeforeDraw
 )
 */
 
