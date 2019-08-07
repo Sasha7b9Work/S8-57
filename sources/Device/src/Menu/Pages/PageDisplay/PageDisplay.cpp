@@ -27,7 +27,7 @@ DEF_CHOICE_2( cThickness,                                                       
     "Allows you to change the thickness of the signals displayed on the screen",
     "x1", "x1",
     "x3", "x3",
-    THICKNESS_SIGNAL, pageDisplay, FuncActive, Choice::FuncChange, Choice::FuncDraw
+    THICKNESS_SIGNAL, pageDisplay, 0, Choice::FuncChange, Choice::FuncDraw
 )
 */
 

@@ -90,7 +90,7 @@ static void PressSB_Help_Exit()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 /*
 DEF_SMALL_BUTTON_EXIT(  sbExitHelp,                                                                                                                                  //--- œŒÃŒŸ‹ - ¬˚ıÓ‰ ---
-    pHelp, FuncActive, PressSB_Help_Exit, DrawSB_Help_ParagraphNext
+    pHelp, 0, PressSB_Help_Exit, DrawSB_Help_ParagraphNext
 )
 */
 
@@ -107,7 +107,7 @@ DEF_PAGE_SB(        pHelp,                                                      
     0,
     &sbHelpParagraphPrev,
     &sbHelpParagraphNext,
-    Page::Name::SB_Help, Menu::pageMain, FuncActive, Page::FuncPress, HelpContent_Draw, HandlerKey_Help
+    Page::Name::SB_Help, Menu::pageMain, 0, Page::FuncPress, HelpContent_Draw, HandlerKey_Help
 )
 */
 
