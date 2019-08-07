@@ -323,7 +323,10 @@ void Button::Draw(int x, int y)
 
     Text(Title().CString()).DrawInCenterRect(x + delta, y + delta, Width(), Menu::Item::HEIGHT, color);
 
-    funcForDraw(x, y);
+    if (funcForDraw)
+    {
+        funcForDraw(x, y);
+    }
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
