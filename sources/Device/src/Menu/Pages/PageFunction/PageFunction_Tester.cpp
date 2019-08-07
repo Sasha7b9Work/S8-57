@@ -106,7 +106,7 @@ DEF_PAGE_5( pageTester, // -V641
     &cPolarity,
     &cViewMode,
     &cAveraging,
-    Page::Name::Function_Tester, PageFunction::pointer, FuncActive, OnEnterExit_Tester, FuncDrawPage, FuncRegSetPage
+    Page::Name::Function_Tester, PageFunction::pointer, FuncActive, OnEnterExit_Tester, Page::FuncDraw, FuncRegSetPage
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

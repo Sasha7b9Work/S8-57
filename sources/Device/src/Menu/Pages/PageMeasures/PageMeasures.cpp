@@ -18,5 +18,5 @@ DEF_PAGE_3( pageMeasures, // -V1027                                             
     PageMeasures::PageCursors::pointer,     ///< ÈÇÌÅĞÅÍÈß - ÊÓĞÑÎĞÛ
     PageMeasures::PageAuto::pointer,        ///< ÈÇÌÅĞÅÍÈß - ÀÂÒÎÌÀÒ
     PageMeasures::PageMath::pointer,        ///< ÈÇÌÅĞÅÍÈß - ÌÀÒÅÌÀÒÈÊÀ
-    Page::Name::Measures, nullptr, FuncActive, FuncPressPage, FuncDrawPage, FuncRegSetPage
+    Page::Name::Measures, nullptr, FuncActive, FuncPressPage, Page::FuncDraw, FuncRegSetPage
 )

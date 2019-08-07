@@ -41,5 +41,5 @@ DEF_PAGE_2(pMultimeter, // -V641 //-V1027 //-V641
     "",
     &bCalibrate0,
     &bCalibrate1,
-    Page::Name::Debug_Multimeter, PageService::PageDebug::pointer, FuncActive, FuncPressPage, FuncDrawPage, FuncRegSetPage
+    Page::Name::Debug_Multimeter, PageService::PageDebug::pointer, FuncActive, FuncPressPage, Page::FuncDraw, FuncRegSetPage
 )

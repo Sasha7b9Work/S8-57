@@ -233,15 +233,15 @@ static void OnPress_Page(bool enter)
     Device::State::SetMode(enter ? Device::Mode::Multimeter : Device::Mode::Osci);
 }
 
-DEF_PAGE_4( pageMultimeter, // -V641
+DEF_PAGE_5( pageMultimeter, // -V641
     "МУЛЬТИМЕТР",
     "Управление прибором в режиме мультиметра",
     &cMode,
     &cRangesVoltageDC,
     &cAVP,
     &cZero,
-    //&cCalibration,
-    Page::Name::Function_Multimeter, PageFunction::pointer, FuncActive, OnPress_Page, FuncDrawPage, FuncRegSetPage
+    &cCalibration,
+    Page::Name::Function_Multimeter, PageFunction::pointer, FuncActive, OnPress_Page, Page::FuncDraw, FuncRegSetPage
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

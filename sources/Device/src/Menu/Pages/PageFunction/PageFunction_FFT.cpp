@@ -111,7 +111,7 @@ DEF_PAGE_1( pppFFT_Cursors, // -V641 // -V1027                                  
     &bFFT_Cursors_Source,                       ///< ÑÅÐÂÈÑ - ÑÏÅÊÒÐ - ÊÓÐÑÎÐÛ - Èñòî÷íèê
     Page::Name::SB_Service_FFT_Cursors, 
     &ppFFT,                                     ///< ÑÅÐÂÈÑ - ÑÏÅÊÒÐ
-    IsActive_FFT_Cursors, FuncPressPage, FuncDrawPage, HandlerKey_FFT_Cursors
+    IsActive_FFT_Cursors, FuncPressPage, Page::FuncDraw, HandlerKey_FFT_Cursors
 )
 
 
@@ -141,5 +141,5 @@ DEF_PAGE_6( ppFFT, // -V641 // -V1027                                           
     &cFFT_Window,       ///< ÑÅÐÂÈÑ - ÑÏÅÊÒÐ - Îêíî 
     &pppFFT_Cursors,    ///< ÑÅÐÂÈÑ - ÑÏÅÊÒÐ - ÊÓÐÑÎÐÛ
     &cFFT_Range,        ///< ÑÅÐÂÈÑ - ÑÏÅÊÒÐ - Äèàïàçîí
-    Page::Name::Function_FFT, PageFunction::pointer, IsActive_FFT, OnPress_FFT, FuncDrawPage, FuncRegSetPage
+    Page::Name::Function_FFT, PageFunction::pointer, IsActive_FFT, OnPress_FFT, Page::FuncDraw, FuncRegSetPage
 )

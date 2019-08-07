@@ -32,7 +32,7 @@ DEF_PAGE_2( pageRecorder, // -V641 // -V1027                                    
     PageFunction::PageRecorder::PageSource::pointer,    ///< ÔÓÍÊÖÈß - ÐÅÃÈÑÒÐÀÒÎÐ - ÈÑÒÎ×ÍÈÊ
     //PageFunction::PageRecorder::PageRecord::pointer,    ///< ÔÓÍÊÖÈß - ÐÅÃÈÑÒÐÀÒÎÐ - ÇÀÏÈÑÜ
     PageFunction::PageRecorder::PageShow::pointer,      ///< ÔÓÍÊÖÈß - ÐÅÃÈÑÒÐÀÒÎÐ - ÏÐÎÑÌÎÒÐ
-    Page::Name::Function_Recorder, PageFunction::pointer, FuncActive, OnOpenClose_Recorder, FuncDrawPage, FuncRegSetPage
+    Page::Name::Function_Recorder, PageFunction::pointer, FuncActive, OnOpenClose_Recorder, Page::FuncDraw, FuncRegSetPage
 )
 
 const PageBase *PageFunction::PageRecorder::pointer = &pageRecorder;

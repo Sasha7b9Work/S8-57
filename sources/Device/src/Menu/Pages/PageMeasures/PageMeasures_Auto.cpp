@@ -87,5 +87,5 @@ DEF_PAGE_4( pageAuto, // -V641 // -V1027                                        
     &cChannels,                                 ///< ÈÇÌÅÐÅÍÈß - ÀÂÒÎÌÀÒ - Êàíàëû
     PageMeasures::PageAuto::PageTune::pointer,  ///< ÈÇÌÅÐÅÍÈß - ÀÂÒÎÌÀÒ - ÍÀÑÒÐÎÈÒÜ
     //&cMode,                           ///< ÈÇÌÅÐÅÍÈß - ÀÂÒÎÌÀÒ - Âèä
-    Page::Name::Measures_Auto, PageMeasures::pointer, FuncActive, FuncPressPage, FuncDrawPage, FuncRegSetPage
+    Page::Name::Measures_Auto, PageMeasures::pointer, FuncActive, FuncPressPage, Page::FuncDraw, FuncRegSetPage
 )
