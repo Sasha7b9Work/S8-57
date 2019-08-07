@@ -24,7 +24,7 @@ extern int8 gCurDigit;
     uint8           type;           /* Тип итема */                                                     \
     int8            num;            /* Число вариантов для Choice или число контролов для Page*/        \
     bool            isPageSB;       /* Если true, то это страница малых кнопок */                       \
-    uint8           name;           /* Имя из перечисления Page::Name */                                  \
+    uint8           name;           /* Имя из перечисления Page::Name */                                \
     const PageBase  *keeper;        /* Адрес страницы, которой принадлежит. Для Page_Main = 0 */        \
     pFuncBV         funcOfActive;   /* Активен ли данный элемент */                                     \
     const char      *titleHint[2]   /* Название страницы на русском и английском языках. Также подсказка для режима помощи */
@@ -71,7 +71,7 @@ public:
     /// Вызывается при "длинном" нажатии
     void LongPress();
     /// Возвращает true, если контрол находится в активном состоянии (реагирует на органы управления)
-    bool IsAcitve() { return funcOfActive(); };
+    bool IsAcitve() { if (funcOfActive) { return funcOfActive(); } return true; };
 
     void Draw(int x, int y, bool opened);
 

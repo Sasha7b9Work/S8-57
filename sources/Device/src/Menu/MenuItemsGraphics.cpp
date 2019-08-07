@@ -279,7 +279,7 @@ void Choice::DrawOpened(int x, int y)
 void Choice::DrawClosed(int x, int y)
 {
     bool pressed = IsPressed();
-    bool shade = IsShade() || !funcOfActive();
+    bool shade = IsShade() || !IsAcitve();
 
     Region(Menu::Item::Value::WIDTH + 1, Menu::Item::Value::HEIGHT - 3).Fill(x + 1, y + Menu::Item::Value::HEIGHT, ColorMenuField(this));
 
@@ -313,7 +313,7 @@ void Choice::DrawClosed(int x, int y)
 void Button::Draw(int x, int y)
 {
     bool pressed = IsPressed();
-    bool shade = IsShade() || !funcOfActive();
+    bool shade = IsShade() || !IsAcitve();
     Color color = shade ? Color::MenuItem(true) : Color::WHITE;
     
     Region(Width() - 2, Menu::Item::HEIGHT - 2).Fill(x + 1, y + 2, Color::MenuItem(false));
@@ -332,7 +332,7 @@ void SButton::Draw(int x, int y)
     x += 22;
     y += 3;
     
-    if (funcOfActive())
+    if (IsAcitve())
     {
         if (IsPressed())
         {
