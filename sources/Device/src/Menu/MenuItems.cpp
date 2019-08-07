@@ -391,7 +391,7 @@ void Control::ShortPress()
         Choice *choice = (Choice *)this;
         if(!IsAcitve())
         {
-            choice->funcOnChanged(false);
+            choice->Change(false);
         }
         else if(!IsOpened())
         {
@@ -473,7 +473,7 @@ void Control::ShortPress()
         }
         else
         {
-            choice->funcOnChanged(false);
+            choice->Change(false);
         }
     }
     else if(type == Control::Type::DrawButton)

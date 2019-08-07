@@ -434,6 +434,8 @@ public:
     static void FuncChange(bool) {};
     /// Функция отрисовки по умолчанию
     static void FuncDraw(int, int) {};
+    /// Вызывает функцию funcOnChanged, если таковая имеется
+    void Change(bool active) { if (funcOnChanged) { funcOnChanged(active); } }
 };
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// GovernorColor ///
@@ -505,13 +507,6 @@ public:
     void DrawOpened(int x, int y);
     char GetSymbol();
 };
-
-#define CHOICE_RUN_FUNC_CHANGED(c, val)     \
-    if(c->funcOnChanged)                    \
-    {                                       \
-        c->funcOnChanged(val);              \
-    }
-
 
 typedef void * pVOID;
 #define MAX_NUM_ITEMS_IN_PAGE 15

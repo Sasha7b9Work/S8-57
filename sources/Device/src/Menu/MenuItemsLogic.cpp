@@ -52,7 +52,7 @@ void Choice::StartChange(int delta)
         }
         else if (!IsAcitve())
         {
-            CHOICE_RUN_FUNC_CHANGED(this, false);
+            Change(false);
         }
         else
         {
@@ -103,7 +103,7 @@ float Choice::Step() //-V2506
 
         *cell = index;
         tsChoice.address = 0;
-        CHOICE_RUN_FUNC_CHANGED(this, IsAcitve());
+        Change(IsAcitve());
         Osci::Display::SetFlagRedraw();
         tsChoice.dir = NONE;
         return 0.0F;
@@ -133,7 +133,7 @@ void Choice::ChangeIndex(int delta)
         }
     }
     *cell = (int8)index;
-    CHOICE_RUN_FUNC_CHANGED(this, IsAcitve());
+    Change(IsAcitve());
     Beeper::GovernorChangedValue();
     Osci::Display::SetFlagRedraw();
 }
