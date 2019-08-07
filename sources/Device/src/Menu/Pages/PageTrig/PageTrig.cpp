@@ -123,5 +123,5 @@ DEF_PAGE_6( pTrig, // -V641 // -V1027                                           
     &cFiltr,                        ///< ÑÈÍÕÐ - Âõîä
     PageTrig::PageHoldOff::pointer, ///< ÑÈÍÕÐ - ÓÄÅÐÆÀÍÈÅ
     PageTrig::PageFind::pointer,    ///< ÑÈÍÕÐ - ÏÎÈÑÊ
-    Page::Name::Trig, nullptr, 0, Page::FuncPress, 0, FuncRegSetPage
+    Page::Name::Trig, nullptr, 0, 0, 0, FuncRegSetPage
 )

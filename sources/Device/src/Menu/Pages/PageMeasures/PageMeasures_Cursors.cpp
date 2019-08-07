@@ -83,5 +83,5 @@ DEF_PAGE_3( pageCursors, // -V641 // -V1027                                     
 //    &cLookModeChanB,                                ///< ÈÇÌÅÐÅÍÈß - ÊÓÐÑÎÐÛ - Ñëåæåíèå êàíàë 2
     &cShowFreq,                                     ///< ÈÇÌÅÐÅÍÈß - ÊÓÐÎÑÐÛ - 1/dT
     PageMeasures::PageCursors::PageSet::pointer,    ///< ÈÇÌÅÐÅÍÈß - ÊÓÐÑÎÐÛ - ÓÑÒÀÍÎÂÈÒÜ
-    Page::Name::Measures_Cursors, PageMeasures::pointer, 0, Page::FuncPress, 0, FuncRegSetPage
+    Page::Name::Measures_Cursors, PageMeasures::pointer, 0, 0, 0, FuncRegSetPage
 )

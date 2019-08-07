@@ -63,7 +63,7 @@ DEF_PAGE_4( pageOperations, // -V641 // -V1027                                  
     &bCopy,     ///< ÔÓÍÊÖÈß - ÐÅÃÈÑÒÐÀÒÎÐ - ÏÐÎÑÌÎÒÐ - ÎÏÅÐÀÖÈÈ - Êîïèðîâàòü
     &bMove,     ///< ÔÓÍÊÖÈß - ÐÅÃÈÑÒÐÀÒÎÐ - ÏÐÎÑÌÎÒÐ - ÎÏÅÐÀÖÈÈ - Ïåðåìåñòèòü
     &bDelete,   ///< ÔÓÍÊÖÈß - ÐÅÃÈÑÒÐÀÒÎÐ - ÏÐÎÑÌÎÒÐ - ÎÏÅÐÀÖÈÈ - Óäàëèòü
-    Page::Name::Function_Recorder_Show_Operations, PageFunction::PageRecorder::PageShow::pointer, 0, Page::FuncPress, 0, FuncRegSetPage
+    Page::Name::Function_Recorder_Show_Operations, PageFunction::PageRecorder::PageShow::pointer, 0, 0, 0, FuncRegSetPage
 )
 
 const PageBase *PageFunction::PageRecorder::PageShow::PageOperations::pointer = &pageOperations;

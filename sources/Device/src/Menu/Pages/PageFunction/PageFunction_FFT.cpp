@@ -111,7 +111,7 @@ DEF_PAGE_1( pppFFT_Cursors, // -V641 // -V1027                                  
     &bFFT_Cursors_Source,                       ///< ÑÅÐÂÈÑ - ÑÏÅÊÒÐ - ÊÓÐÑÎÐÛ - Èñòî÷íèê
     Page::Name::SB_Service_FFT_Cursors, 
     &ppFFT,                                     ///< ÑÅÐÂÈÑ - ÑÏÅÊÒÐ
-    IsActive_FFT_Cursors, Page::FuncPress, 0, HandlerKey_FFT_Cursors
+    IsActive_FFT_Cursors, 0, 0, HandlerKey_FFT_Cursors
 )
 
 

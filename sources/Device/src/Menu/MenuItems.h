@@ -261,9 +261,6 @@ public:
 
     Page::Name::E GetName() const;     ///< Возвращает имя страницы page
   
-    /// Обработчик нажатия по умолчанию
-    static void FuncPress(bool) {};
-
     static bool FuncRegSet(KeyEvent) { return false; };
 };
 
