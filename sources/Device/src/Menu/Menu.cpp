@@ -445,7 +445,10 @@ static void ClosePage(PageBase *page)
     }
     else
     {
-        ((Page *)page)->funcOnEnterExit(false);
+        if(((Page *)page)->funcOnEnterExit)
+        {
+            ((Page *)page)->funcOnEnterExit(false);
+        }
     }
 
     Page *keeper = (Page *)KEEPER(page);
