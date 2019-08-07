@@ -64,7 +64,7 @@ DEF_CHOICE_2( cViewMode,
     "",
     "Линии",
     "Точки",
-    TESTER_VIEW_MODE, pageTester, 0, Choice::FuncChange, Choice::FuncDraw
+    TESTER_VIEW_MODE, pageTester, 0, 0, Choice::FuncDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -80,7 +80,7 @@ DEF_CHOICE_9( cAveraging,
     "64",
     "128",
     "256",
-    TESTER_ENUM_AVERAGE, pageTester, 0, Choice::FuncChange, Choice::FuncDraw
+    TESTER_ENUM_AVERAGE, pageTester, 0, 0, Choice::FuncDraw
 )
 
 

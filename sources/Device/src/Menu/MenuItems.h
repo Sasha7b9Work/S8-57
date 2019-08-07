@@ -430,8 +430,6 @@ public:
     static Color ColorMenuField(const Choice *choice);
 
     char GetSymbol();
-    /// Обработчик нажатия по умолчанию
-    static void FuncChange(bool) {};
     /// Функция отрисовки по умолчанию
     static void FuncDraw(int, int) {};
     /// Вызывает функцию funcOnChanged, если таковая имеется

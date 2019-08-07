@@ -43,7 +43,7 @@ DEF_CHOICE_3( cStringNavigation,                                                
     "Временно",
     "Всегда",
     "Никогда",
-    SHOW_STRING_NAVI, pageSettings, 0, Choice::FuncChange, Choice::FuncDraw
+    SHOW_STRING_NAVI, pageSettings, 0, 0, Choice::FuncDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

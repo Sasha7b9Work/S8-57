@@ -45,7 +45,7 @@ DEF_CHOICE_2( cModeView,                                                        
     "",
     "Частота",
     "Период",
-    FREQ_METER_MODE_VIEW, ppFreqMeter, IsActive_ModeView, Choice::FuncChange, Choice::FuncDraw
+    FREQ_METER_MODE_VIEW, ppFreqMeter, IsActive_ModeView, 0, Choice::FuncDraw
 )
 
 

@@ -19,7 +19,7 @@ DEF_CHOICE_2( cIsShow,                                                          
     "Выводить или не выводить измерения на экран",
     "Нет",
     "Да",
-    SHOW_MEASURES, pageAuto, 0, Choice::FuncChange, Choice::FuncDraw
+    SHOW_MEASURES, pageAuto, 0, 0, Choice::FuncDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -47,7 +47,7 @@ DEF_CHOICE_7( cNumber,                                                          
     "3x5",
     "6x1",
     "6x2",
-    NUM_MEASURES, pageAuto, IsActive_NumberChannels, Choice::FuncChange, Choice::FuncDraw
+    NUM_MEASURES, pageAuto, IsActive_NumberChannels, 0, Choice::FuncDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -57,7 +57,7 @@ DEF_CHOICE_3(       cChannels,                                                  
     "1",
     "2",
     "1 и 2",
-    SOURCE_MEASURES, pageAuto, IsActive_NumberChannels, Choice::FuncChange, Choice::FuncDraw
+    SOURCE_MEASURES, pageAuto, IsActive_NumberChannels, 0, Choice::FuncDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -73,7 +73,7 @@ DEF_CHOICE_2( cMode,                                                            
     "Decrease or no zone output signal to avoid overlapping of its measurement results",
     "Как есть",  "As is",
     "Уменьшать", "Reduce",
-    MODE_VIEW_SIGNALS, pageAuto, IsActive_Mode, Choice::FuncChange, FuncDraw
+    MODE_VIEW_SIGNALS, pageAuto, IsActive_Mode, 0, FuncDraw
 )
 */
 

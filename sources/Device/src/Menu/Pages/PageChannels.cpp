@@ -107,7 +107,7 @@ DEF_CHOICE_2(cDividerA,
     "",
     "1X",
     "10X",
-    divider[0], pChanA, 0, Choice::FuncChange, Choice::FuncDraw
+    divider[0], pChanA, 0, 0, Choice::FuncDraw
 )
 
 
@@ -190,7 +190,7 @@ DEF_CHOICE_2( cDividerB,
     "",
     "1X",
     "10X",
-    divider[1], pChanB, 0, Choice::FuncChange, Choice::FuncDraw
+    divider[1], pChanB, 0, 0, Choice::FuncDraw
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
