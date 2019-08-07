@@ -270,7 +270,7 @@ String Control::Title() const
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 bool Page::ProcessKey(KeyEvent event)
 {
-    if (funcKey(event))
+    if (funcKey && funcKey(event))
     {
         return true;
     }

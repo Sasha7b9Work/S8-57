@@ -26,5 +26,5 @@ DEF_PAGE_1( pageMath, //-V641 //-V1027
     "МАТЕМАТИКА",
     "Математические функции",
     &cFunction,
-    Page::Name::Measures_Math, PageMeasures::pointer, 0, 0, 0, Page::FuncRegSet
+    Page::Name::Measures_Math, PageMeasures::pointer, 0, 0, 0, 0
 )
