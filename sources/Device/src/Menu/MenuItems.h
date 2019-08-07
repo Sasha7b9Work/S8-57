@@ -454,8 +454,6 @@ public:
     pFuncVV     funcOnChanged;      ///< Эту функцию нужно вызывать после изменения значения элемента.
     void ChangeValue(int delta);    ///< Изменить яркость цвета в governor.
     void Draw(int x, int y, bool opened);
-    /// Признак активности по умолчанию
-    static bool FuncActive() { return true; }
 private:
     void DrawOpened(int x, int y);
     void DrawClosed(int x, int y);

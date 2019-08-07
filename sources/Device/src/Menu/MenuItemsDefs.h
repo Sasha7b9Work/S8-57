@@ -32,7 +32,7 @@ static const MACaddressBase name = {Item_MAC, 0, false, Page::Name::NoPage, &kee
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #define DEF_GOVERNOR_COLOR(name, title, hint, colorType, keeper)                                                                                        \
-static const GovernorColorBase name = {Control::Type::GovernorColor, 0, false, Page::Name::NoPage, &keeper, GovernorColor::FuncActive,                  \
+static const GovernorColorBase name = {Control::Type::GovernorColor, 0, false, Page::Name::NoPage, &keeper, 0,                                          \
     {title, hint}, &colorType, 0};
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
