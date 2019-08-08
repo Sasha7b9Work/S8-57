@@ -15,7 +15,9 @@ using namespace Osci::Settings;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 extern const PageBase pageDisplay;
+extern const PageBase pageViewSignal;
 
+const PageBase *PageDisplay::PageView::pointer = &pageViewSignal;
 const PageBase *PageDisplay::pointer = &pageDisplay;
 
 
@@ -132,12 +134,29 @@ DEF_CHOICE_9(cAverage_Num,                                                      
     ENUM_AVE, pageDisplay, 0, OnChange_AverageNum, 0
 )
 
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+DEF_CHOICE_2( cViewMode,                                                                                                                                      //--- ДИСПЛЕЙ - Отображение ---
+    "Отображ",
+    "Задаёт режим отображения сигнала",
+    "Вектор",
+    "Точки",
+    MODE_DRAW_SIGNAL, pageDisplay, 0, 0, 0
+)
+
+
+DEF_PAGE_1( pageViewSignal,
+    "ОТОБРАЖ",
+    "Настройки отображения сигналов",
+    &cViewMode,
+    Page::Name::Display_View, PageDisplay::pointer, 0, 0, 0, 0
+)
+
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 DEF_PAGE_9( pageDisplay, // -V641 // -V1027                                                                                                                                 //--- ДИСПЛЕЙ ---
     "ДИСПЛЕЙ",
     "Содержит настройки отображения дисплея.",
-    PageDisplay::PageView::pointer,         ///< ДИСПЛЕЙ - Отображение
+    &cViewMode,                             ///< ДИСПЛЕЙ - Отображение
     PageDisplay::PageAccumulation::pointer, ///< ДИСПЛЕЙ - НАКОПЛЕНИЕ
     &cAverage_Num,                          ///< ДИСПЛЕЙ - Усреднение
     //PageDisplay::PageAverage::pointer,      ///< ДИСПЛЕЙ - УСРЕДНЕНИЕ
