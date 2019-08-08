@@ -5,6 +5,7 @@
 *.uvgui*.*
 *.bin
 *.pyc
+*.uvoptx
 
 JLinkLog.txt
 JLinkSettings.ini
