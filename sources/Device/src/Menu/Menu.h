@@ -20,7 +20,7 @@ struct Menu
     /// Функция вызывается при нажатии, повторе и отпускании кнопки
     static void ButtonEvent(KeyEvent event);
     /// Заблокировать клавиатуру. Будут разрешены только кнопки из массива keys, заканчивающегося нулём
-    static void LockKeyboard(Key *keys);
+    static void LockKeyboard(Key::E *keys);
     /// Разблокировать клавиатуру
     static void UnlockKeyboard();
     /// Установить время автоматического сокрытия меню в соответствии с установками.
