@@ -50,7 +50,7 @@ void Choice::StartChange(int delta)
         {
             Menu::SetItemForHint(this);
         }
-        else if (!IsAcitve())
+        else if (!IsActive())
         {
             Change(false);
         }
@@ -103,7 +103,7 @@ float Choice::Step() //-V2506
 
         *cell = index;
         tsChoice.address = 0;
-        Change(IsAcitve());
+        Change(IsActive());
         Osci::Display::SetFlagRedraw();
         tsChoice.dir = NONE;
         return 0.0F;
@@ -133,7 +133,7 @@ void Choice::ChangeIndex(int delta)
         }
     }
     *cell = (int8)index;
-    Change(IsAcitve());
+    Change(IsActive());
     Beeper::GovernorChangedValue();
     Osci::Display::SetFlagRedraw();
 }
@@ -397,7 +397,7 @@ void TimeControl::DecCurrentPosition()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Page::SetAsCurrent()
 {
-    if (IsAcitve())
+    if (IsActive())
     {
         if (SHOW_STRING_NAVI_TEMP)
         {

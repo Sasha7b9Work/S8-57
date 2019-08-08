@@ -89,7 +89,7 @@ void GovernorColor::DrawOpened(int x, int y)
 void GovernorColor::DrawClosed(int x, int y)
 {
     ct->Init();
-    DrawCommonHiPart(this, x, y, IsPressed(), IsShade() || !IsAcitve(), false);
+    DrawCommonHiPart(this, x, y, IsPressed(), IsShade() || !IsActive(), false);
     Region(Menu::Item::Value::WIDTH + 1, Menu::Item::Value::HEIGHT - 3).Fill(x + 1, y + 13, ct->color);
 }
 
@@ -140,7 +140,7 @@ void Governor::Draw(int x, int y, bool opened)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Governor::DrawOpened(int x, int y)
 {
-    bool shade = IsShade() || !IsAcitve();
+    bool shade = IsShade() || !IsActive();
     DrawCommonHiPart(this, x, y, IsPressed(), shade, true);
     DrawLowPart(x, y + 13, shade);
 }
@@ -148,7 +148,7 @@ void Governor::DrawOpened(int x, int y)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Governor::DrawClosed(int x, int y)
 {
-    bool shade = IsShade() || !IsAcitve();
+    bool shade = IsShade() || !IsActive();
     DrawLowPart(x, y + 14, shade);
     DrawCommonHiPart(this, x, y, IsPressed(), shade, false);
 }
@@ -279,7 +279,7 @@ void Choice::DrawOpened(int x, int y)
 void Choice::DrawClosed(int x, int y)
 {
     bool pressed = IsPressed();
-    bool shade = IsShade() || !IsAcitve();
+    bool shade = IsShade() || !IsActive();
 
     Region(Menu::Item::Value::WIDTH + 1, Menu::Item::Value::HEIGHT - 3).Fill(x + 1, y + Menu::Item::Value::HEIGHT, ColorMenuField(this));
 
@@ -313,7 +313,8 @@ void Choice::DrawClosed(int x, int y)
 void Button::Draw(int x, int y)
 {
     bool pressed = IsPressed();
-    bool shade = IsShade() || !IsAcitve();
+    bool shade = IsShade() || !IsActive();
+
     Color color = shade ? Color::MenuItem(true) : Color::WHITE;
     
     Region(Width() - 2, Menu::Item::HEIGHT - 2).Fill(x + 1, y + 2, Color::MenuItem(false));
@@ -335,7 +336,7 @@ void SButton::Draw(int x, int y)
     x += 22;
     y += 3;
     
-    if (IsAcitve())
+    if (IsActive())
     {
         if (IsPressed())
         {
@@ -409,7 +410,7 @@ void Page::Draw(int x, int y, bool opened)
     else
     {
         Region(Width() - 3, Menu::Item::HEIGHT - 2).Fill(x + 1, y + 2, Color::MenuItem(false));
-        Text(Title().CString()).DrawInCenterRect(x, y + 1, Width(), Menu::Item::HEIGHT, IsAcitve() ? Color::FILL : Color::MENU_TITLE_DARK);
+        Text(Title().CString()).DrawInCenterRect(x, y + 1, Width(), Menu::Item::HEIGHT, IsActive() ? Color::FILL : Color::MENU_TITLE_DARK);
     }
 }
 
@@ -466,7 +467,7 @@ void Page::DrawItems(int x, int y)
         Rectangle(Width() - 1, Menu::Item::HEIGHT).Draw(x, y + 1, Color::FILL);
         Region(Width() - 3, Menu::Item::HEIGHT - 2).Fill(x + 1, y + 2, Color::BACK);
         
-        if(i == 4)
+        if(i == 0)
         {
             i = i;
         }

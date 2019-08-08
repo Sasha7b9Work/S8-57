@@ -150,9 +150,9 @@
         <Bp>
           <Number>0</Number>
           <Type>0</Type>
-          <LineNumber>471</LineNumber>
+          <LineNumber>319</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134478220</Address>
+          <Address>134480940</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
@@ -161,7 +161,23 @@
           <BreakIfRCount>1</BreakIfRCount>
           <Filename>&lt;2&gt;.\src\Menu\MenuItemsGraphics.cpp</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\\src/Menu/MenuItemsGraphics.cpp\471</Expression>
+          <Expression>\\S8_57\src/Menu/MenuItemsGraphics.cpp\319</Expression>
+        </Bp>
+        <Bp>
+          <Number>1</Number>
+          <Type>0</Type>
+          <LineNumber>316</LineNumber>
+          <EnabledFlag>1</EnabledFlag>
+          <Address>134480924</Address>
+          <ByteObject>0</ByteObject>
+          <HtxType>0</HtxType>
+          <ManyObjects>0</ManyObjects>
+          <SizeOfObject>0</SizeOfObject>
+          <BreakByAccess>0</BreakByAccess>
+          <BreakIfRCount>1</BreakIfRCount>
+          <Filename>&lt;2&gt;.\src\Menu\MenuItemsGraphics.cpp</Filename>
+          <ExecCommand></ExecCommand>
+          <Expression>\\S8_57\src/Menu/MenuItemsGraphics.cpp\316</Expression>
         </Bp>
       </Breakpoint>
       <WatchWindow1>

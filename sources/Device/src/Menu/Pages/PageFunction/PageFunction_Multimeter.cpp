@@ -237,10 +237,10 @@ static void OnPress_Calibrate0()
     Multimeter::Calibrate(0);
 }
 
-DEF_BUTTON(bCalibrate0,
+DEF_BUTTON( bCalibrate0,
     "Калибр 0",
     "",
-    pageMultimeter, 0, OnPress_Calibrate0, 0
+    pageCalibration, 0, OnPress_Calibrate0, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -249,10 +249,10 @@ static void OnPress_Calibrate1()
     Multimeter::Calibrate(1);
 }
 
-DEF_BUTTON(bCalibrate1,
+DEF_BUTTON( bCalibrate1,
     "Калибр 1",
     "",
-    pageMultimeter, 0, OnPress_Calibrate1, 0
+    pageCalibration, 0, OnPress_Calibrate1, 0
 )
 
 
