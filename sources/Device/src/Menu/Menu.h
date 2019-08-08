@@ -9,70 +9,70 @@
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-namespace Menu
+struct Menu
 {
     /// Инициализация
-    void Init();
+    static void Init();
 
-    void ChangeStateFlashDrive();
+    static void ChangeStateFlashDrive();
     /// Функция должна вызываться в главном цикле.
-    void Update();
+    static void Update();
     /// Функция вызывается при нажатии, повторе и отпускании кнопки
-    void ButtonEvent(KeyEvent event);
+    static void ButtonEvent(KeyEvent event);
     /// Заблокировать клавиатуру. Будут разрешены только кнопки из массива keys, заканчивающегося нулём
-    void LockKeyboard(Key *keys);
+    static void LockKeyboard(Key *keys);
     /// Разблокировать клавиатуру
-    void UnlockKeyboard();
+    static void UnlockKeyboard();
     /// Установить время автоматического сокрытия меню в соответствии с установками.
-    void SetAutoHide(bool active);
+    static void SetAutoHide(bool active);
     /// Показать/скрыть меню.
-    void Show(bool show);
+    static void Show(bool show);
     /// Возвращает true, если меню отображается на экране
-    bool IsShown();
+    static bool IsShown();
     /// Функция временно включает отображение строки навигации меню, если задано настройками.
-    void TemporaryEnableStrNavi();
+    static void TemporaryEnableStrNavi();
     /// Возвращает адрес открытого элемента меню
-    Control *OpenedItem();
+    static Control *OpenedItem();
     /// Возвращает указатель на текущую главную страницу меню
-    PageBase *MainPage();
+    static PageBase *MainPage();
     /// Если true - меню находится в дополнительном режиме.
-    bool IsMinimize();
+    static bool IsMinimize();
 
-    Control *ItemUnderButton(Key::E button);
+    static Control *ItemUnderButton(Key::E button);
 
-    void SetItemUnderButton(Key::E button, Control *control);
+    static void SetItemUnderButton(Key::E button, Control *control);
 
-    Page::Name::E GetNameOpenedPage();
+    static Page::Name::E GetNameOpenedPage();
 
-    void SaveScreenToDrive();
+    static void SaveScreenToDrive();
 
-    void SaveRow(int row);
+    static void SaveRow(int row);
 
-    PageBase *OpenedPage();
+    static PageBase *OpenedPage();
     /// Возвращает адрес текущего элемента меню (текущим, как правило, является элемент, кнопка которого была нажата последней
-    Control *CurrentItem();
+    static Control *CurrentItem();
     /// Закрыть открытый элемент меню
-    void CloseOpenedItem();
+    static void CloseOpenedItem();
 
-    void SetItemForHint(void *item);
+    static void SetItemForHint(void *item);
 
-    void SaveSettings();
+    static void SaveSettings();
     /// Нужно вызывать при отпускании функциональной кнпоки
-    void ReleaseFunctionalButton(Key::E key);
+    static void ReleaseFunctionalButton(Key::E key);
     /// Нажно вызывать при "длинном" нажатии функциональной кнопки
-    void LongFunctionalButton(Key::E key);
+    static void LongFunctionalButton(Key::E key);
+    /// Нарисовать меню
+    static void Draw();
+    /// С какоей позиции Y рисовать меню. Позиция берётся без учёта заголовка
+    static int Y();
+
     ///\brief  Здесь хранится адрес элемента меню, соответствующего функциональной клавише [1..5], если она находится в нижнем положении, и 0, 
     /// если ни одна кнопка не нажата.
-    extern Control *itemUnderKey;
+    static Control *itemUnderKey;
     /// Строка подсказки, которую надо выводить в случае включённого режима подсказок.
-    extern const char *stringForHint;
+    static const char *stringForHint;
     /// Item, подсказку для которого нужно выводить в случае включённого режима подсказок.
-    extern Control *itemHint;
-
-    /// Нарисовать меню
-    void Draw();
-    /// С какоей позиции Y рисовать меню. Позиция берётся без учёта заголовка
-    int Y();
+    static Control *itemHint;
 
     class Title
     {
@@ -100,13 +100,13 @@ namespace Menu
         enum E
         {
             None = 0,   ///< Никогда.
-            _5 = 5,   ///< Через 5 секунд.
-            _10 = 10,  ///< Через 10 секунд.
-            _15 = 15,  ///< Через 15 секунд.
-            _30 = 30,  ///< Через 30 секунд.
-            _60 = 60   ///< Через 60 секунд.
+              _5 = 5,   ///< Через 5 секунд.
+             _10 = 10,  ///< Через 10 секунд.
+             _15 = 15,  ///< Через 15 секунд.
+             _30 = 30,  ///< Через 30 секунд.
+             _60 = 60   ///< Через 60 секунд.
         } value;
     };
 
-    void SetMainPage(PageBase *page);
+    static void SetMainPage(PageBase *page);
 };
