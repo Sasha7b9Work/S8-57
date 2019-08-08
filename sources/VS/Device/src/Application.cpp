@@ -15,8 +15,9 @@ extern void init();
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 enum
 {
-    Minimal_Quit = wxID_EXIT,
-    Minimal_About = wxID_ABOUT
+    File_Size = wxID_HIGHEST + 1,
+    File_Quit = wxID_EXIT,
+    Help_About = wxID_ABOUT
 };
 
 enum
@@ -25,8 +26,9 @@ enum
 };
 
 wxBEGIN_EVENT_TABLE(Frame, wxFrame)
-    EVT_MENU(Minimal_Quit, Frame::OnQuit)
-    EVT_MENU(Minimal_About, Frame::OnAbout)
+    EVT_MENU(File_Size, Frame::OnSize)
+    EVT_MENU(File_Quit, Frame::OnQuit)
+    EVT_MENU(Help_About, Frame::OnAbout)
     EVT_TIMER(TIMER_ID, Frame::OnTimer)
 wxEND_EVENT_TABLE()
 
@@ -71,9 +73,11 @@ Frame::Frame(const wxString& title)
     wxMenu *fileMenu = new wxMenu;
 
     wxMenu *helpMenu = new wxMenu;
-    helpMenu->Append(Minimal_About, "&About\tF1", "Show about dialog");
+    helpMenu->Append(Help_About, "&About\tF1", "Show about dialog");
 
-    fileMenu->Append(Minimal_Quit, "E&xit\tAlt-X", "Quit this program");
+    fileMenu->Append(File_Size, "&Size", "Resize screen");
+
+    fileMenu->Append(File_Quit, "E&xit\tAlt-X", "Quit this program");
 
     wxMenuBar *menuBar = new wxMenuBar();
     menuBar->Append(fileMenu, "&File");
@@ -137,6 +141,12 @@ void Frame::DrawFPS()
         prevTime = SDL_GetTicks();
         count = 0;
     }
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Frame::OnSize(wxCommandEvent& event)
+{
+
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

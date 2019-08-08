@@ -16,6 +16,7 @@ class Frame : public wxFrame
 public:
     Frame(const wxString& title);
 
+    void OnSize(wxCommandEvent& event);
     void OnQuit(wxCommandEvent& event);
     void OnAbout(wxCommandEvent& event);
     void OnTimer(wxTimerEvent& event);
