@@ -240,7 +240,7 @@ static void CreateButtons(Frame *frame)
     width = 51;
     x0 = 5;
 
-    y0 = 240 + 100;
+    y0 = FRAME_HEIGHT + 100;
 
     size.SetWidth(width);
 
@@ -256,7 +256,7 @@ static void CreateButtons(Frame *frame)
 
     // Кнопки канала A
 
-    int y = 240 + 200;
+    int y = FRAME_HEIGHT + 200;
 
     CreateButtonsChannel(frame, "Канал 1", 5, y, Key::ChannelA, Key::RangeLessA, Key::RangeMoreA, Key::RShiftLessA, Key::RShiftMoreA);
 
