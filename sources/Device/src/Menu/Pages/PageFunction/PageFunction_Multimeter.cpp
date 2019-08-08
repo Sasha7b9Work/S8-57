@@ -7,8 +7,10 @@
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 extern const PageBase pageMultimeter;
+extern const PageBase pageCalibration;
 
 const PageBase *PageFunction::PageMultimeter::pointer = &pageMultimeter;
+const PageBase *PageFunction::PageMultimeter::PageCalibration::pointer = &pageCalibration;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -168,60 +170,6 @@ DEF_CHOICE_2(cZero,
     zero, pageMultimeter, 0, OnChanged_Zero, 0
 )
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void OnPress_Calibrate0()
-{
-    Multimeter::Calibrate(0);
-}
-
-DEF_BUTTON( bCalibrate0,
-    "Калибр 0",
-    "",
-    pageMultimeter, 0, OnPress_Calibrate0, 0
-)
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void OnPress_Calibrate1()
-{
-    Multimeter::Calibrate(1);
-}
-
-DEF_BUTTON( bCalibrate1,
-    "Калибр 1",
-    "",
-    pageMultimeter, 0, OnPress_Calibrate1, 0
-)
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static int8 calibration = 0;
-
-static void OnChanged_Calibration(bool)
-{
-    PageBase *page = (PageBase *)&pageMultimeter;
-
-    Control **items = (Control **)page->items;
-
-    if (calibration == 0)
-    {
-        items[2] = (Control *)&cAVP; //-V641
-        items[3] = (Control *)&cZero; //-V641
-    }
-    else
-    {
-        items[2] = (Control *)&bCalibrate0; //-V641 //-V1027
-        items[3] = (Control *)&bCalibrate1; //-V641 //-V1027
-    }
-}
-
-DEF_CHOICE_2( cCalibration,
-    "Калибровка",
-    "",
-    DISABLE_RU,
-    ENABLE_RU,
-    calibration, pageMultimeter, 0, OnChanged_Calibration, 0
-)
-
-
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void PageFunction::PageMultimeter::Init()
 {
@@ -240,7 +188,7 @@ DEF_PAGE_5( pageMultimeter, // -V641
     &cRangesVoltageDC,
     &cAVP,
     &cZero,
-    &cCalibration,
+    &PageFunction::PageMultimeter::PageCalibration::pointer,
     Page::Name::Function_Multimeter, PageFunction::pointer, 0, OnPress_Page, 0, 0
 )
 
@@ -283,4 +231,35 @@ void PageFunction::PageMultimeter::OnChanged_Mode(bool)
     Multimeter::ChangeMode();
 }
 
-//DEF_PAGE_1
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+static void OnPress_Calibrate0()
+{
+    Multimeter::Calibrate(0);
+}
+
+DEF_BUTTON(bCalibrate0,
+    "Калибр 0",
+    "",
+    pageMultimeter, 0, OnPress_Calibrate0, 0
+)
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+static void OnPress_Calibrate1()
+{
+    Multimeter::Calibrate(1);
+}
+
+DEF_BUTTON(bCalibrate1,
+    "Калибр 1",
+    "",
+    pageMultimeter, 0, OnPress_Calibrate1, 0
+)
+
+
+DEF_PAGE_2( pageCalibration,
+    "КАЛИБРОВКА",
+    "Калибровка мультиметра",
+    &bCalibrate0,
+    &bCalibrate1,
+    Page::Name::Function_Multimeter_Cal, PageFunction::PageMultimeter::pointer, 0, 0, 0, 0
+)

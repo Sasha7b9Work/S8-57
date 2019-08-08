@@ -212,7 +212,7 @@
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>0</BreakIfRCount>
-          <Filename>&lt;3&gt;.\src\Display\PainterSTM429.cpp</Filename>
+          <Filename>d:\Projects\stm32\S8-57\sources\DeviceLoader\src\Display\PainterSTM429.cpp</Filename>
           <ExecCommand></ExecCommand>
           <Expression></Expression>
         </Bp>
@@ -228,7 +228,7 @@
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>0</BreakIfRCount>
-          <Filename>&lt;2&gt;.\src\Tester\Tester_Graphics.cpp</Filename>
+          <Filename>d:\Projects\stm32\S8-57\sources\DeviceLoader\src\Tester\Tester_Graphics.cpp</Filename>
           <ExecCommand></ExecCommand>
           <Expression></Expression>
         </Bp>
@@ -244,7 +244,7 @@
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>0</BreakIfRCount>
-          <Filename>&lt;3&gt;.\src\Display\Averager.cpp</Filename>
+          <Filename>d:\Projects\stm32\S8-57\sources\DeviceLoader\src\Display\Averager.cpp</Filename>
           <ExecCommand></ExecCommand>
           <Expression></Expression>
         </Bp>
