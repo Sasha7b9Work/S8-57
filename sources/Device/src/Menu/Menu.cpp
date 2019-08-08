@@ -40,10 +40,8 @@ const char    *Menu::stringForHint = 0;
    Control    *Menu::itemHint = 0;
 /// true, если нужно сохранять копию экрана на флешку
 static bool needSaveScreen = false;
-
 /// Элементы управления, назначенные в данный момент соответствующим кнопкам
 static Control *underButton[Key::Number];
-
 /// Последний открытый контрол на дереве странице page
 static Control *LastOpened(Page *page);
 /// Обработка события таймера автоматического сокрытия меню
@@ -60,6 +58,9 @@ static bool EventIsProcessedInCurrentMode(const KeyEvent *event);
 static uint timeLastPressedButton = MAX_UINT;
 /// Текущая главная страница
 static PageBase *mainPage = nullptr;
+/// Указатель на массив кнопок, которые разрешены для обработки. Если == 0, то разрешены все кнопки
+static Key *allowedKeys = 0;
+
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 static void CreateFileName(char name[256])
@@ -218,6 +219,28 @@ static void SaveScreenToFlash()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+static bool ButtonIsAllowed(Key::E key)
+{
+    if (allowedKeys == 0)
+    {
+        return true;
+    }
+
+    Key *nextKey = allowedKeys;
+
+    while (nextKey)
+    {
+        if (nextKey->value == key)
+        {
+            return true;
+        }
+        nextKey++;
+    }
+
+    return false;
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Menu::Update()
 {
     while(!BufferButtons::IsEmpty())                            // Если есть события клавиатуры
@@ -225,6 +248,11 @@ void Menu::Update()
         timeLastPressedButton = TIME_MS;                        // то сохраняем время последнего нажатия, чтобы знать, когда сохранить настройки
 
         KeyEvent event = BufferButtons::Extract();              // Извлекаем очередное событие
+
+        if (!ButtonIsAllowed(event.key))                        // Если кнопка не разрешена для обработки сейчас:
+        {
+            continue;                                           // Перехдим к следующей
+        }
 
         if (HINT_MODE_ENABLED)                                  // Если всклюён режим подсказок
         {
@@ -781,4 +809,16 @@ PageBase *Menu::MainPage()
 void Menu::SetMainPage(PageBase *page)
 {
     mainPage = page;
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Menu::LockKeyboard(Key *keys)
+{
+    allowedKeys = keys;
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Menu::UnlockKeyboard()
+{
+    allowedKeys = 0;
 }
