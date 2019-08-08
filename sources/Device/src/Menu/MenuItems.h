@@ -256,6 +256,7 @@ public:
             Measures_Math,              ///< ÈÇÌÅĞÅÍÈß - ÌÀÒÅÌÀÒÈÊÀ
             Function_Multimeter_Cal,    ///< ÔÓÍÊÖÈß - ÌÓËÜÒÈÌÅÒĞ - ÊÀËÈÁĞÎÂÊÀ
             Display_View,               ///< ÄÈÑÏËÅÉ - ÎÒÎÁĞÀÆÅÍÈÅ
+            Service_Info,               ///< ÑÅĞÂÈÑ - ÈÍÔÎĞÌÀÖÈß
             Number,
             NoPage
         } value;

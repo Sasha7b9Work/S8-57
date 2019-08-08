@@ -379,73 +379,6 @@ DEF_PAGE_2( ppRTC, // -V641 // -V1027                                           
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-static void Information_Draw()
-{
-    Painter::BeginScene(Color::BACK);
-    int x = 100;
-    int dY = 20;
-    int y = 20;
-    Rectangle(319, 239).Draw(0, 0, Color::FILL);
-    y += dY;
-    String("ИНФОРМАЦИЯ").Draw(x, y);
-    y += dY;
-
-    char buffer[100];
-
-    std::sprintf(buffer, "%s : %s", "Модель", MODEL_RU);
-    String(buffer).Draw(x, y);
-
-    y += 2 * dY;
-
-    String("Программное обеспечение :").Draw(x, y);
-    y += dY;
-
-    std::sprintf(buffer, "версия %s", NUM_VER);
-
-    String(buffer).Draw(x, y);
-    y += dY;
-
-    //Painter::DrawFormText(x, y, Color::FILL, "CRC32 : %X", Hardware::CalculateCRC32());
-
-    dY = -10;
-
-    Text("Для получения помощи нажмите и удерживайте кнопку ПОМОЩЬ").DrawInCenterRect(0, 190 + dY, 320, 20);
-    Text("Отдел маркетинга: тел./факс. 8-017-262-57-50").DrawInCenterRect(0, 205 + dY, 320, 20);
-    Text("Разработчики: e-mail: mnipi-24(@)tut.by, тел. 8-017-262-57-51").DrawInCenterRect(0, 220 + dY, 320, 20);
-
-    Menu::Draw();
-    Painter::EndScene();
-}
-
-static void OnPress_Information(bool)
-{
-    Display::SetDrawMode(Display::DrawMode::Auto, Information_Draw);
-}
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void OnPress_Information_Exit()
-{
-    Display::SetDrawMode(Display::DrawMode::Auto, 0);
-}
-
-DEF_SMALL_BUTTON_EXIT( bInformation_Exit,                                                                                                               //--- СЕРВИС - ИНФОРМАЦИЯ - Выход ---
-    ppInformation, 0, OnPress_Information_Exit, DrawSB_Exit
-)
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-DEF_PAGE_SB( ppInformation, // -V641                                                                                                                            //--- СЕРВИС - ИНФОРМАЦИЯ ---
-    "ИНФОРМАЦИЯ",
-    "Показывает информацию о приборе",
-    &bInformation_Exit, // СЕРВИС - ИНФОРМАЦИЯ - Выход
-    0,
-    0,
-    0,
-    0,
-    0,
-    Page::Name::SB_Service_Information, &pService, 0, OnPress_Information, 0, 0
-)
-
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 const PageBase *PageService::pointer = &pService;
 
 DEF_PAGE_7( pService, // -V641 // -V1027                                                                                                                                    //--- СЕРВИС ---
@@ -459,7 +392,7 @@ DEF_PAGE_7( pService, // -V641 // -V1027                                        
     &ppSound,                               ///< СЕРВИС - ЗВУК
     &ppRTC,                                 ///< СЕРВИС - ВРЕМЯ
     //PageService::PageBattery::pointer,    ///< СЕРВИС - БАТАРЕЯ
-    &ppInformation,                         ///< СЕРВИС - ИНФОРМАЦИЯ
+    PageService::PageInformation::pointer,  ///< СЕРВИС - ИНФОРМАЦИЯ
     PageService::PageDebug::pointer,        ///< СЕРВИС - ОТЛАДКА
     Page::Name::Service, nullptr, 0, 0, 0, 0
 )

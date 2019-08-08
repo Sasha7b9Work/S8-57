@@ -1400,6 +1400,11 @@
               <FileType>8</FileType>
               <FilePath>.\src\Menu\Pages\PageService\PageService_Calibrate.cpp</FilePath>
             </File>
+            <File>
+              <FileName>PageService_Info.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Menu\Pages\PageService\PageService_Info.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
