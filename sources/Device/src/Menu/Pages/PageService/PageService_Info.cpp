@@ -55,6 +55,7 @@ static void Information_Draw()
 static void OnPress_Close()
 {
     Display::SetDrawMode(Display::DrawMode::Auto, 0);
+    Menu::CloseOpenedItem();
 }
 
 DEF_BUTTON( bClose,
