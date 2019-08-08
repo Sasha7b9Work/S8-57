@@ -89,7 +89,7 @@ void Painter::Init()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Painter::BeginScene(Color color)
 {
-    texture = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_RGBA8888, SDL_RENDERER_ACCELERATED, 320, 240);
+    texture = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_RGBA8888, SDL_RENDERER_ACCELERATED, FRAME_WIDTH, FRAME_HEIGHT);
 
     SDL_SetRenderTarget(renderer, texture);
     Color::SetCurrent(color);
@@ -101,7 +101,7 @@ void Painter::EndScene()
 {
     SDL_SetRenderTarget(renderer, NULL);
 
-    SDL_Rect rect = {0, 0, 320, 240};
+    SDL_Rect rect = {0, 0, FRAME_WIDTH, FRAME_HEIGHT};
 
     if (texture)
     {
@@ -175,8 +175,8 @@ static HANDLE CreateFrame()
 
     wxBoxSizer *sizer = new wxBoxSizer(wxHORIZONTAL);
 
-    wxButton *button = new wxButton(frame, wxID_ANY, "", {10, 10}, {320, 240});
-    button->SetMaxSize({320, 240});
+    wxButton *button = new wxButton(frame, wxID_ANY, "", {10, 10}, {FRAME_WIDTH, FRAME_HEIGHT});
+    button->SetMaxSize({FRAME_WIDTH, FRAME_HEIGHT});
 
     sizer->Add(button);
 
@@ -223,8 +223,8 @@ static void CreateButtons(Frame *frame)
     // Рисуем кнопки управления
 
     width = height = 25;
-    x0 = 320 / 2 - width / 2;
-    y0 = 240 + 100;
+    x0 = FRAME_WIDTH / 2 - width / 2;
+    y0 = FRAME_HEIGHT + 100;
 
     size.SetWidth(width);
     size.SetHeight(height);
