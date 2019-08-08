@@ -255,6 +255,7 @@ public:
             SB_Debug_SerialNumber,      ///< ÎÒËÀÄÊÀ - Ñ/Í
             Measures_Math,              ///< ÈÇÌÅÐÅÍÈß - ÌÀÒÅÌÀÒÈÊÀ
             Function_Multimeter_Cal,    ///< ÔÓÍÊÖÈß - ÌÓËÜÒÈÌÅÒÐ - ÊÀËÈÁÐÎÂÊÀ
+            Display_View,               ///< ÄÈÑÏËÅÉ - ÎÒÎÁÐÀÆÅÍÈÅ
             Number,
             NoPage
         } value;

@@ -1235,6 +1235,11 @@
               <FileType>8</FileType>
               <FilePath>.\src\Menu\Pages\PageDisplay\PageAccumulation.cpp</FilePath>
             </File>
+            <File>
+              <FileName>PageDisplay_View.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Menu\Pages\PageDisplay\PageDisplay_View.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
