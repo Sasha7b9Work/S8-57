@@ -150,18 +150,34 @@
         <Bp>
           <Number>0</Number>
           <Type>0</Type>
-          <LineNumber>68</LineNumber>
+          <LineNumber>323</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134408860</Address>
+          <Address>134491848</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>&lt;2&gt;.\src\Menu\Pages\PageService\PageService_Info.cpp</Filename>
+          <Filename>&lt;2&gt;.\src\Display\Display.cpp</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\S8_57\src/Menu/Pages/PageService/PageService_Info.cpp\68</Expression>
+          <Expression>\\S8_57\src/Display/Display.cpp\323</Expression>
+        </Bp>
+        <Bp>
+          <Number>1</Number>
+          <Type>0</Type>
+          <LineNumber>336</LineNumber>
+          <EnabledFlag>1</EnabledFlag>
+          <Address>134491778</Address>
+          <ByteObject>0</ByteObject>
+          <HtxType>0</HtxType>
+          <ManyObjects>0</ManyObjects>
+          <SizeOfObject>0</SizeOfObject>
+          <BreakByAccess>0</BreakByAccess>
+          <BreakIfRCount>1</BreakIfRCount>
+          <Filename>&lt;2&gt;.\src\Display\Display.cpp</Filename>
+          <ExecCommand></ExecCommand>
+          <Expression>\\S8_57\src/Display/Display.cpp\336</Expression>
         </Bp>
       </Breakpoint>
       <WatchWindow1>

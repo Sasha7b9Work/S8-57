@@ -144,7 +144,7 @@ DEF_CHOICE_2( cViewMode,                                                        
 )
 
 
-DEF_PAGE_1( pageViewSignal,
+DEF_PAGE_1( pageViewSignal, //-V641
     "ОТОБРАЖ",
     "Настройки отображения сигналов",
     &cViewMode,

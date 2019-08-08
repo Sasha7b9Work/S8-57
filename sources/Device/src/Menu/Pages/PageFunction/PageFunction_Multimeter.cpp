@@ -181,7 +181,7 @@ static void OnPress_Page(bool enter)
     Device::State::SetMode(enter ? Device::Mode::Multimeter : Device::Mode::Osci);
 }
 
-DEF_PAGE_5( pageMultimeter, // -V641
+DEF_PAGE_5( pageMultimeter, // -V641 //-V1027 //-V641
     "МУЛЬТИМЕТР",
     "Управление прибором в режиме мультиметра",
     &cMode,
@@ -256,7 +256,7 @@ DEF_BUTTON( bCalibrate1,
 )
 
 
-DEF_PAGE_2( pageCalibration,
+DEF_PAGE_2( pageCalibration, //-V641 //-V1027
     "КАЛИБРОВКА",
     "Калибровка мультиметра",
     &bCalibrate0,

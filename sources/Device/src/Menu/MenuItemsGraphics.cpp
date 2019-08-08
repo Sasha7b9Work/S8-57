@@ -467,11 +467,6 @@ void Page::DrawItems(int x, int y)
         Rectangle(Width() - 1, Menu::Item::HEIGHT).Draw(x, y + 1, Color::FILL);
         Region(Width() - 3, Menu::Item::HEIGHT - 2).Fill(x + 1, y + 2, Color::BACK);
         
-        if(i == 0)
-        {
-            i = i;
-        }
-
         Control *item = Item(PosItemOnLeft() + i);
         
         if (item)

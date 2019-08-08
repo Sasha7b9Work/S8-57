@@ -41,7 +41,8 @@ namespace Display
 
     void FuncOnWaitStop();
     /// Устанавливает дополнительную функцию, которая будет отрисовываться каждый раз после обновления экрана
-    void SetAddDrawFunction(pFuncVV func, uint time = MAX_UINT);
+    /// timeRemove - время, по истечении которого дополнительная функция отрисовки будет удалена. Если его не указывать, фукнция удаляться самостоятельно не будет
+    void SetAddDrawFunction(pFuncVV func, uint timeRemove = 0);
     /// Удаляет дополнительую функцию отрисовки, установленную вызовом функции SetAddDrawFunction()
     void RemoveAddDrawFunction();
 

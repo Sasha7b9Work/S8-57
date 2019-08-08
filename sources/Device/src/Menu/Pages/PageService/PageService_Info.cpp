@@ -75,7 +75,7 @@ static void OnPress_Page(bool enter)
     }
 }
 
-DEF_PAGE_1 (pageServiceInfo,
+DEF_PAGE_1 (pageServiceInfo, //-V641 //-V1027
     "ИНФОРМАЦИЯ",
     "Информация об изделии",
     &bClose,

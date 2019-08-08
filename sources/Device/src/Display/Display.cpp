@@ -332,8 +332,17 @@ void Display::SetOrientation(Orientation::E orientation)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Display::SetAddDrawFunction(pFuncVV func, uint time)
 {
+    if (func == 0)
+    {
+        func = EmptyFuncVV;
+    }
+
     funcAdditionDraw = func;
-    Timer::SetAndStartOnce(Timer::Type::RemoveAddFunction, RemoveAddDrawFunction, time);
+
+    if (time)
+    {
+        Timer::SetAndStartOnce(Timer::Type::RemoveAddFunction, RemoveAddDrawFunction, time);
+    }
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
