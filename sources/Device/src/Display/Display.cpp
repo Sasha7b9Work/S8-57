@@ -77,7 +77,7 @@ static uint             timeWarnings[NUM_WARNINGS] = {0};   ///< Здесь время, ко
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 volatile static bool drawRShiftMarkers = false;
-static pFuncVV funcOnHand       = 0;
+static pFuncVV funcOnHand = 0;
 static uint timeStart = 0;
 static const char *textWait = 0;
 static bool clearBackground = false;

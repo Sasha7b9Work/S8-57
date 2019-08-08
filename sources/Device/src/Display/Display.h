@@ -27,8 +27,6 @@ namespace Display
     /// Устанавливает функцию, которая выполится после отрисовки кадра однократно
     void SetFuncAfterUpadteOnce(pFuncVV func);
 
-    void RemoveAddDrawFunction();
-
     void ShowWarning(Warning::E warning);
     /// @brief Установить функцию и режим отрисовки экрана.
     /// @details Возможны три варианта.
@@ -42,8 +40,10 @@ namespace Display
     void FuncOnWaitStart(const char *text, bool eraseBackground);
 
     void FuncOnWaitStop();
-
+    /// Устанавливает дополнительную функцию, которая будет отрисовываться каждый раз после обновления экрана
     void SetAddDrawFunction(pFuncVV func, uint time = MAX_UINT);
+    /// Удаляет дополнительую функцию отрисовки, установленную вызовом функции SetAddDrawFunction()
+    void RemoveAddDrawFunction();
 
     void ChangedRShiftMarkers(bool active);
 

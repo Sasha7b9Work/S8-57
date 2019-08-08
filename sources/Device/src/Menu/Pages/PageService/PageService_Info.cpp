@@ -54,7 +54,6 @@ static void Information_Draw()
 
 static void OnPress_Close()
 {
-    Display::SetDrawMode(Display::DrawMode::Auto, 0);
     Menu::CloseOpenedItem();
 }
 
@@ -64,9 +63,16 @@ DEF_BUTTON( bClose,
     pageServiceInfo, 0, OnPress_Close, 0
 )
 
-static void OnPress_Page(bool)
+static void OnPress_Page(bool enter)
 {
-    Display::SetDrawMode(Display::DrawMode::Auto, Information_Draw);
+    if (enter)
+    {
+        Display::SetAddDrawFunction(Information_Draw);
+    }
+    else
+    {
+        Display::RemoveAddDrawFunction();
+    }
 }
 
 DEF_PAGE_1 (pageServiceInfo,
