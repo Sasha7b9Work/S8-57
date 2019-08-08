@@ -59,7 +59,7 @@ static uint timeLastPressedButton = MAX_UINT;
 /// Текущая главная страница
 static PageBase *mainPage = nullptr;
 /// Указатель на массив кнопок, которые разрешены для обработки. Если == 0, то разрешены все кнопки
-static Key::E *allowedKeys = 0;
+static const Key::E *allowedKeys = 0;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -226,10 +226,15 @@ static bool ButtonIsAllowed(Key::E key)
         return true;
     }
 
-    Key::E *nextKey = allowedKeys;
+    const Key::E *nextKey = allowedKeys;
 
     while (nextKey)
     {
+        if (*nextKey == 0)
+        {
+            break;
+        }
+
         if (*nextKey == key)
         {
             return true;
@@ -812,7 +817,7 @@ void Menu::SetMainPage(PageBase *page)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Menu::LockKeyboard(Key::E *keys)
+void Menu::LockKeyboard(const Key::E *const keys)
 {
     allowedKeys = keys;
 }
