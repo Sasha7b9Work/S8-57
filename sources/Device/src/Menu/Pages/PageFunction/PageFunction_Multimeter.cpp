@@ -188,7 +188,7 @@ DEF_PAGE_5( pageMultimeter, // -V641
     &cRangesVoltageDC,
     &cAVP,
     &cZero,
-    &PageFunction::PageMultimeter::PageCalibration::pointer,
+    PageFunction::PageMultimeter::PageCalibration::pointer,
     Page::Name::Function_Multimeter, PageFunction::pointer, 0, OnPress_Page, 0, 0
 )
 
