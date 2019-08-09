@@ -257,6 +257,8 @@ public:
             Function_Multimeter_Cal,    ///< ÔÓÍÊÖÈß - ÌÓËÜÒÈÌÅÒÐ - ÊÀËÈÁÐÎÂÊÀ
             Display_View,               ///< ÄÈÑÏËÅÉ - ÎÒÎÁÐÀÆÅÍÈÅ
             Service_Info,               ///< ÑÅÐÂÈÑ - ÈÍÔÎÐÌÀÖÈß
+            Service_RTC_Set,            ///< ÑÅÐÂÈÑ - ÂÐÅÌß - ÓÑÒÀÍÎÂÈÒÜ
+            Service_RTC_Correct,        ///< ÑÅÐÂÈÑ - ÂÐÅÌß - ÊÎÐÐÅÊÖÈß
             Number,
             NoPage
         } value;

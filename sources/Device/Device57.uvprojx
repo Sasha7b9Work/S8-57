@@ -1405,6 +1405,11 @@
               <FileType>8</FileType>
               <FilePath>.\src\Menu\Pages\PageService\PageService_Info.cpp</FilePath>
             </File>
+            <File>
+              <FileName>PageService_RTC.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Menu\Pages\PageService\PageService_RTC.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
