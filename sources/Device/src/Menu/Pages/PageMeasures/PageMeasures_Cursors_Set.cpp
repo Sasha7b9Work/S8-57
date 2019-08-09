@@ -14,9 +14,9 @@ using namespace Osci::Measurements;
 using Osci::Measurements::Cursors::Cursor;
 using Osci::Measurements::Measure;
 
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 extern const PageBase pageSet;
+
+const PageBase *PageMeasures::PageCursors::PageSet::pointer = &pageSet;
 
 const float PageMeasures::PageCursors::PageSet::MAX_POS_U = 200.0F;
 const float PageMeasures::PageCursors::PageSet::MAX_POS_T = 280.0F;
@@ -270,8 +270,7 @@ DEF_SMALL_BUTTON_HINTS_2( bSet_Movement,                                        
     Draw_Set_Movement_Points,   "øàã ïåğåìåùåíèÿ êóğñîğà êğàòåí îäíîìó ïèêñåëş"
 )
 
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 bool PageMeasures::PageCursors::PageSet::OnKey(KeyEvent event) //-V2506
 {
     TypePress::E type = event.type;
@@ -337,13 +336,9 @@ DEF_PAGE_4( pageSet, // -V641 // -V1027                                         
     &bSet_T,                ///< ÈÇÌÅĞÅÍÈß - ÊÓĞÑÎĞÛ - ÓÑÒÀÍÎÂÈÒÜ - Êóğñîğû Ò
     &bSet_100,              ///< ÈÇÌÅĞÅÍÈß - ÊÓĞÑÎĞÛ - ÓÑÒÀÍÎÂÈÒÜ - 100%
     //&bSet_Movement,         ///< ÈÇÌÅĞÅÍÈß - ÊÓĞÑÎĞÛ - ÓÑÒÀÍÎÂÈÒÜ - Ïåğåìåùåíèå
-    Page::Name::Measures_Cursors_Set, PageMeasures::PageCursors::pointer, 0, 0, 0,
-    PageMeasures::PageCursors::PageSet::OnKey
+    Page::Name::Measures_Cursors_Set, PageMeasures::PageCursors::pointer, 0, 0, 0, PageMeasures::PageCursors::PageSet::OnKey
 )
 
-
-
-const PageBase *PageMeasures::PageCursors::PageSet::pointer = &pageSet;
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void PageMeasures::PageCursors::PageSet::SetCursSource(Chan::E ch)

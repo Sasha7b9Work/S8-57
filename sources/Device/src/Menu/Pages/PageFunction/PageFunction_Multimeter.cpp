@@ -176,23 +176,6 @@ void PageFunction::PageMultimeter::Init()
     OnChanged_Mode(true);
 }
 
-static void OnPress_Page(bool enter)
-{
-    Device::State::SetMode(enter ? Device::Mode::Multimeter : Device::Mode::Osci);
-}
-
-DEF_PAGE_5( pageMultimeter, // -V641 //-V1027 //-V641
-    "МУЛЬТИМЕТР",
-    "Управление прибором в режиме мультиметра",
-    &cMode,
-    &cRangesVoltageDC,
-    &cAVP,
-    &cZero,
-    PageFunction::PageMultimeter::PageCalibration::pointer,
-    Page::Name::Function_Multimeter, PageFunction::pointer, 0, OnPress_Page, 0, 0
-)
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void PageFunction::PageMultimeter::OnChanged_Mode(bool)
 {
     PageBase *page = (PageBase *)&pageMultimeter;
@@ -231,7 +214,23 @@ void PageFunction::PageMultimeter::OnChanged_Mode(bool)
     Multimeter::ChangeMode();
 }
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+static void OnPress_Page(bool enter)
+{
+    Device::State::SetMode(enter ? Device::Mode::Multimeter : Device::Mode::Osci);
+}
+
+DEF_PAGE_5( pageMultimeter, // -V641 //-V1027 //-V641
+    "МУЛЬТИМЕТР",
+    "Управление прибором в режиме мультиметра",
+    &cMode,
+    &cRangesVoltageDC,
+    &cAVP,
+    &cZero,
+    PageFunction::PageMultimeter::PageCalibration::pointer,
+    Page::Name::Function_Multimeter, PageFunction::pointer, 0, OnPress_Page, 0, 0
+)
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void OnPress_Calibrate0()
 {
     Multimeter::Calibrate(0);
