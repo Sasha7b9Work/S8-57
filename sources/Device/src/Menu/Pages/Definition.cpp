@@ -14,6 +14,7 @@
 #include "Menu/Pages/Include/PageMemory.h"
 #include "Menu/Pages/Include/PageService.h"
 #include "Menu/Pages/Include/PageTrig.h"
+#include "Menu/Pages/Include/PageTime.h"
 
 
 using namespace Display::Primitives;
