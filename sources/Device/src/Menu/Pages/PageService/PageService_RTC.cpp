@@ -40,7 +40,7 @@ DEF_TIME(tRTC_Time,                                                             
     pageRTC_Set, 0, dServicetime, hours, minutes, secondes, month, day, year
 )
 
-DEF_PAGE_1( pageRTC_Set,
+DEF_PAGE_1( pageRTC_Set, //-V641 //-V1027
     "УСТАНОВКА",
     "Установка текущего времени",
     &tRTC_Time,
@@ -58,7 +58,7 @@ DEF_GOVERNOR(tRTC_Correction,                                                   
     NRST_CORRECTION_TIME, -63, 63, pageRTC_Correction, 0, OnChanged_Time_Correction, 0
 )
 
-DEF_PAGE_1( pageRTC_Correction,
+DEF_PAGE_1( pageRTC_Correction, //-V641 //-V1027
     "КОРРЕКЦИЯ",
     "Коррекция скорости хода часов",
     &tRTC_Correction,
