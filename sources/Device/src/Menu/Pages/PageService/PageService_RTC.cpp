@@ -82,19 +82,53 @@ DEF_PAGE_5( pageRTC_Set, //-V641 //-V1027
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-static void OnChanged_Time_Correction()
-{
-}
+//static void OnChanged_Time_Correction()
+//{
+//}
+//
+//DEF_GOVERNOR(tRTC_Correction,                                                                                                                           //--- СЕРВИС - ВРЕМЯ - Коррекция ---
+//    "Коррекция",
+//    "Установка корректирующего коэффициента для компенсации хода времени",
+//    NRST_CORRECTION_TIME, -63, 63, pageRTC_Correction, 0, OnChanged_Time_Correction, 0
+//)
 
-DEF_GOVERNOR(tRTC_Correction,                                                                                                                           //--- СЕРВИС - ВРЕМЯ - Коррекция ---
-    "Коррекция",
-    "Установка корректирующего коэффициента для компенсации хода времени",
-    NRST_CORRECTION_TIME, -63, 63, pageRTC_Correction, 0, OnChanged_Time_Correction, 0
+DEF_BUTTON( bCorrLeft,
+    "Влево",
+    "Предыдущий элемент",
+    pageRTC_Correction, 0, 0, 0
 )
 
-DEF_PAGE_1( pageRTC_Correction, //-V641 //-V1027
+DEF_BUTTON( bCorrRight,
+    "Вправо",
+    "Следующий элемент",
+    pageRTC_Correction, 0, 0, 0
+)
+
+DEF_BUTTON( bCorrUp,
+    "Больше",
+    "Увеличить",
+    pageRTC_Correction, 0, 0, 0
+)
+
+DEF_BUTTON( bCorrDown,
+    "Меньше",
+    "Уменьшить",
+    pageRTC_Correction, 0, 0, 0
+)
+
+DEF_BUTTON( bCorrPick,
+    "Выбор",
+    "Активировать подсвеченный элемент",
+    pageRTC_Correction, 0, 0, 0
+)
+
+DEF_PAGE_5( pageRTC_Correction, //-V641 //-V1027
     "КОРРЕКЦИЯ",
     "Коррекция скорости хода часов",
-    &tRTC_Correction,
+    &bCorrLeft,
+    &bCorrRight,
+    &bCorrUp,
+    &bCorrDown,
+    &bCorrPick,
     Page::Name::Service_RTC_Correct, PageService::PageRTC::pointer, 0, 0, 0, 0
 )
