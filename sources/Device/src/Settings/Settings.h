@@ -172,8 +172,7 @@ public:
     Color::Scheme::E    serv_colorScheme;
     bool                serv_notUsing;
     CalibratorMode::E   serv_calibratorMode;            ///< Режим работы калибратора.
-    bool                serv_soundEnable;               ///< Включены ли звуки.
-    int16               serv_soundVolume;               ///< Громкость звука [0...100].
+    uint8               serv_soundVolume;               ///< Громкость звука
     bool                serv_showInfoVoltage;           ///< Показывать напряжение батареи на экране
 
     // Настройки математики

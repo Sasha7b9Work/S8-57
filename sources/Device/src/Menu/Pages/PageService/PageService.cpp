@@ -22,9 +22,9 @@
 using namespace Display::Primitives;
 using namespace Osci::Settings;
 
-extern const PageBase pService;
+extern const PageBase pageService;
 
-const PageBase *PageService::pointer = &pService;
+const PageBase *PageService::pointer = &pageService;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -40,7 +40,7 @@ static void OnPress_ResetSettings()
 DEF_BUTTON( bResetSettings,                                                                                                                                 //--- СЕРВИС - Сброс настроек ---
     "Сброс настр",
     "Сброс настроек на настройки по умолчанию",
-    pService, EmptyFuncBtV, OnPress_ResetSettings, EmptyFuncVII
+    pageService, EmptyFuncBtV, OnPress_ResetSettings, EmptyFuncVII
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -52,17 +52,28 @@ static void OnPress_AutoSearch()
 DEF_BUTTON( bAutoSearch,                                                                                                                                     //--- СЕРВИС - Поиск сигнала ---
     "Поиск сигн",
     "Устанавливает оптимальные установки осциллографа для сигнала в канале 1",
-    pService, 0, OnPress_AutoSearch, 0
+    pageService, 0, OnPress_AutoSearch, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-DEF_PAGE_7( pService, // -V641 // -V1027                                                                                                                                    //--- СЕРВИС ---
+DEF_CHOICE_4( cSoundVolume,
+    "Громкость",
+    "Установка уровня громкости",
+    "Откл",
+    "Мин",
+    "Средн",
+    "Макс",
+    SOUND_VOLUME, pageService, 0, 0, 0
+)
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+DEF_PAGE_7( pageService, // -V641 // -V1027                                                                                                                                    //--- СЕРВИС ---
     "СЕРВИС",
     "Дополнительные настройки, калибровка, поиск сигнала, математические функции",
     &bResetSettings,                        ///< СЕРВИС - Сброс настроек
     &bAutoSearch,                           ///< СЕРВИС - Поиск сигнала
     PageService::PageCalibrate::pointer,    ///< СЕРВИС - КАЛИБРОВКА
-    PageService::PageSound::pointer,        ///< СЕРВИС - ЗВУК
+    &cSoundVolume,                          ///< СЕРВИС - ЗВУК
     PageService::PageRTC::pointer,          ///< СЕРВИС - ВРЕМЯ
     PageService::PageInformation::pointer,  ///< СЕРВИС - ИНФОРМАЦИЯ
     PageService::PageDebug::pointer,        ///< СЕРВИС - ОТЛАДКА

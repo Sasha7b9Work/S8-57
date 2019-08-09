@@ -233,7 +233,6 @@ public:
             Service,                    ///< ÑÅÐÂÈÑ
             Service_Calibrator,         ///< ÑÅÐÂÈÑ - ÊÀËÈÁÐÀÒÎÐ
             Service_Ethernet,           ///< ÑÅÐÂÈÑ - ETHERNET
-            Service_Sound,              ///< ÑÅÐÂÈÑ - ÇÂÓÊ
             Service_RTC,                ///< ÑÅÐÂÈÑ - ÂÐÅÌß
             Service_Battery,            ///< ÑÅÐÂÈÑ - ÁÀÒÀÐÅß
             SB_Service_FFT_Cursors,     ///< ÑÅÐÂÈÑ - ÑÏÅÊÒÐ - ÊÓÐÑÎÐÛ

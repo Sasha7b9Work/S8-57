@@ -128,8 +128,7 @@ const Settings Settings::defaultSettings =
     Color::Scheme::WhiteLetters,        // serv_colorScheme
     false,                              // serv_recorder
     CalibratorMode::Freq,               // serv_calibratorMode
-    false,                              // serv_soundEnable
-    100,                                // serv_soundVolume
+    0,                                  // serv_soundVolume
     false,                              // serv_showInfoVoltage
     
     // Настройки математики

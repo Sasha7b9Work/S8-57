@@ -28,8 +28,8 @@ struct CalibratorMode
 
 #define CALIBRATOR_MODE                 (set.serv_calibratorMode)
 
-#define SOUND_ENABLED                   (set.serv_soundEnable)
 #define SOUND_VOLUME                    (set.serv_soundVolume)
+#define SOUND_ENABLED                   (SOUND_VOLUME == 0)
 
 #define COLOR_SCHEME                    (set.serv_colorScheme)
 #define COLOR_SCHEME_IS_WHITE_LETTERS   (COLOR_SCHEME == ColorScheme::WhiteLetters)
