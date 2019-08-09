@@ -1,6 +1,6 @@
 #include "defines.h"
 #include "Menu/Pages/Include/PageMemory.h"
-#include "Menu/Pages/Include/PageTime.h"
+#include "Menu/Pages/Include/PageService.h"
 #include "FPGA/FPGA.h"
 #include "FPGA/FPGA_Settings.h"
 #include "Menu/MenuItems.h"
@@ -39,7 +39,7 @@ static bool IsActive_PeakDet()
     return (SET_TBASE >= TBase::MIN_PEAK_DET);
 }
 
-void PageTime::OnChanged_PeakDet(bool active)
+void PageService::PageTime::OnChanged_PeakDet(bool active)
 {
     if (active)
     {
@@ -57,11 +57,11 @@ DEF_CHOICE_2( cPeakDet,                                                         
     ,
     DISABLE_RU,
     ENABLE_RU,
-    SET_PEAKDET, pTime, IsActive_PeakDet, PageTime::OnChanged_PeakDet, 0
+    SET_PEAKDET, pTime, IsActive_PeakDet, PageService::PageTime::OnChanged_PeakDet, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void PageTime::OnChanged_TPos(bool active)
+void PageService::PageTime::OnChanged_TPos(bool active)
 {
     PageMemory::OnChanged_Points(active);
     TShift::Set(SET_TSHIFT);
@@ -74,7 +74,7 @@ DEF_CHOICE_3( cTPos,                                                            
     "ÀÂ‚Ó",
     "÷ÂÌÚ",
     "œ‡‚Ó",
-    TPOS, pTime, 0, PageTime::OnChanged_TPos, 0
+    TPOS, pTime, 0, PageService::PageTime::OnChanged_TPos, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -101,7 +101,7 @@ DEF_CHOICE_2( cShiftXtype,                                                      
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-const PageBase *PageTime::pointer = &pTime;
+const PageBase * const PageService::PageTime::pointer = &pTime;
 
 
 DEF_PAGE_3( pTime, // -V641 // -V1027                                                                                                                                     //--- –¿«¬≈–“ ¿ ---

@@ -1,5 +1,7 @@
 @echo off
 
+echo "keil version"
+
 cd keil
 call build.bat
 cd ..

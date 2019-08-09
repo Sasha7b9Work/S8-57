@@ -11,7 +11,6 @@
 #include "Menu/Pages/Include/PageMeasures.h"
 #include "Menu/Pages/Include/PageMemory.h"
 #include "Menu/Pages/Include/PageService.h"
-#include "Menu/Pages/Include/PageTime.h"
 #include "Menu/Pages/Include/PageTrig.h"
 #include "Menu/Pages/Include/PageDisplay.h"
 #include "Settings/Settings.h"
@@ -426,7 +425,7 @@ static void Service_Release()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void Time_Release()
 {
-    ShowHidePage(PageTime::pointer);
+    ShowHidePage(PageService::PageTime::pointer);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

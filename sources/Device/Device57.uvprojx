@@ -1135,11 +1135,6 @@
               <FileType>8</FileType>
               <FilePath>.\src\Menu\Pages\PageChannels.cpp</FilePath>
             </File>
-            <File>
-              <FileName>PageTime.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Menu\Pages\PageTime.cpp</FilePath>
-            </File>
           </Files>
         </Group>
         <Group>
@@ -1404,6 +1399,11 @@
               <FileName>PageService_Info.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Menu\Pages\PageService\PageService_Info.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>PageService_Time.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Menu\Pages\PageService\PageService_Time.cpp</FilePath>
             </File>
           </Files>
         </Group>
