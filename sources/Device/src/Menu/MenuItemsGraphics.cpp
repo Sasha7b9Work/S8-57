@@ -451,8 +451,6 @@ void Page::DrawTitle(int x, int yTop) const
 
     x = Text(Title().CString()).DrawInCenterRect(x, yTop, Menu::Title::WIDTH + 2 + delta, Menu::Title::HEIGHT, colorText);
 
-    Menu::itemForButton[GetFuncButtonFromX(yTop)] = this;
-
     Color::GRAY_75.SetAsCurrent();
     DrawPagesUGO(eX + Menu::Title::WIDTH - 3, yTop + Menu::Title::HEIGHT);
     DrawNestingPage(eX + 5, yTop + Menu::Title::HEIGHT - 6);
