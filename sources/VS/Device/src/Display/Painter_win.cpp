@@ -89,7 +89,7 @@ void Painter::Init()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Painter::BeginScene(Color color)
 {
-    texture = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_RGBA8888, SDL_RENDERER_ACCELERATED, FRAME_WIDTH, FRAME_HEIGHT);
+    texture = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_RGBA8888, SDL_RENDERER_ACCELERATED, Display::WIDTH, Display::HEIGHT);
 
     SDL_SetRenderTarget(renderer, texture);
     Color::SetCurrent(color);
@@ -175,8 +175,8 @@ static HANDLE CreateFrame()
 
     wxBoxSizer *sizer = new wxBoxSizer(wxHORIZONTAL);
 
-    wxButton *button = new wxButton(frame, wxID_ANY, "", {10, 10}, {FRAME_WIDTH, FRAME_HEIGHT});
-    button->SetMaxSize({FRAME_WIDTH, FRAME_HEIGHT});
+    wxButton *button = new wxButton(frame, wxID_ANY, "", {10, 10}, {Display::WIDTH, Display::HEIGHT});
+    button->SetMaxSize({Display::WIDTH, Display::HEIGHT});
 
     sizer->Add(button);
 
