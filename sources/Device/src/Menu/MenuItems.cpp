@@ -112,7 +112,7 @@ char TimeControl::GetSymbol()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-char Control::GetSymbol()
+char Control::GetSymbol() const
 {
     if (type == Control::Type::Governor)
     {
@@ -566,7 +566,7 @@ bool Control::IsPage() const
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-bool Control::ExistKeeper(const Page *_keeper)
+bool Control::ExistKeeper(const Page *_keeper) const
 {
     const Page *item = Keeper();
     while (item)

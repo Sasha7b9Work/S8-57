@@ -481,7 +481,7 @@ void Page::DrawItems(int x, int y)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Control::Draw(int x, int y, bool opened)
+void Control::Draw(int x, int y, bool opened) const
 {
     if (type == Control::Type::Choice || type == Control::Type::ChoiceReg)
     {

@@ -64,23 +64,23 @@ public:
     /// Возвращает true, если контрол находится в активном состоянии (реагирует на органы управления)
     bool IsActive() const { if (funcOfActive) { return funcOfActive(); } return true; };
 
-    void Draw(int x, int y, bool opened);
+    void Draw(int x, int y, bool opened) const;
 
     bool IsCurrentItem() const;
     /// Вывести информацию в лог
     void LogInfo() const;
     /// Возвращает изображение регулятора, соответствующее его текущему положению
-    char GetSymbol();
+    char GetSymbol() const;
     /// Возвращает ширину контрола
-    int Width() { return 320 / 5; };
+    int Width() const { return 320 / 5; };
     /// Возвращает true, если тип контрола - Page
     bool IsPage() const;
     /// Возвращает адрес родителя
     const Page *Keeper() const { if (keeper) { return *keeper; }; return nullptr; }
     /// Возвращает true, если в древе предков стоит keeper
-    bool ExistKeeper(const Page *keeper);
+    bool ExistKeeper(const Page *keeper) const;
     /// Имеет родителя - не является главной страницей меню
-    bool HaveParent() { return Keeper() != nullptr; };
+    bool HaveParent() const { return Keeper() != nullptr; };
 
     /// Разные виды пунктов меню
     struct Type
@@ -119,7 +119,6 @@ public:
     pFuncVB     funcOnEnterExit;    ///< Будет вызываться при нажатии на свёрнутую страницу и при выходе из этой страницы на предыдущую
     pFuncVV     funcOnDraw;         ///< Будет вызываться после отрисовки кнопок
     pFuncBKE    funcRegSet;         ///< Вызывается при нажатии кнопок ВЛЕВО/ВПРАВО. Если отработала, возвращает true
-    bool CurrentItemIsOpened() const;
 };
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
