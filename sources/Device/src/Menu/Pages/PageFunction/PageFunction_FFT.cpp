@@ -9,8 +9,8 @@
 extern const PageBase ppFFT;
 extern const PageBase pppFFT_Cursors;
 
-const Page * const PageFunction::PageFFT::self = (const Page *)&ppFFT;
-const Page * const PageFunction::PageFFT::PageCursors::self = (const Page *)&pppFFT_Cursors;
+const Page * const PageFFT::self = (const Page *)&ppFFT;
+const Page * const PageFFT::PageCursors::self = (const Page *)&pppFFT_Cursors;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -19,7 +19,7 @@ DEF_CHOICE_2( cFFT_View,                                                        
     "Включает и выключает отображение спектра",
     DISABLE_RU,
     ENABLE_RU,
-    FFT_ENABLED, &PageFunction::PageFFT::self, 0, 0, 0
+    FFT_ENABLED, &PageFFT::self, 0, 0, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -28,7 +28,7 @@ DEF_CHOICE_2( cFFT_Scale,                                                       
     "Задаёт масштаб вывода спектра - линейный или логарифмический",
     "Логарифм",
     "Линейная",
-    SCALE_FFT, &PageFunction::PageFFT::self, 0, 0, 0
+    SCALE_FFT, &PageFFT::self, 0, 0, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -38,7 +38,7 @@ DEF_CHOICE_3( cFFT_Source,                                                      
     "Канал 1",
     "Канал 2",
     "Канал 1 + 2",
-    SOURCE_FFT, &PageFunction::PageFFT::self, 0, 0, 0
+    SOURCE_FFT, &PageFFT::self, 0, 0, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -49,7 +49,7 @@ DEF_CHOICE_4( cFFT_Window,                                                      
     "Хэмминга",
     "Блэкмена",
     "Ханна",
-    WINDOW_FFT, &PageFunction::PageFFT::self, 0, 0, 0
+    WINDOW_FFT, &PageFFT::self, 0, 0, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -64,7 +64,7 @@ DEF_CHOICE_3( cFFT_Range,                                                       
     "-40дБ",
     "-60дБ",
     "-80дБ",
-    MAX_DB_FFT, &PageFunction::PageFFT::self, IsActive_FFT_Range, 0, 0
+    MAX_DB_FFT, &PageFFT::self, IsActive_FFT_Range, 0, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -81,7 +81,7 @@ static void Draw_FFT_Cursors_Source(int x, int y)
 DEF_SMALL_BUTTON( bFFT_Cursors_Source,                                                                                                        //--- ФУНКЦИЯ - СПЕКТР - КУРСОРЫ - Источник ---
     "Источник",
     "Выбор источника для расчёта спектра",
-    &PageFunction::PageFFT::PageCursors::self, 0, OnPress_FFT_Cursors_Source, Draw_FFT_Cursors_Source
+    &PageFFT::PageCursors::self, 0, OnPress_FFT_Cursors_Source, Draw_FFT_Cursors_Source
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -111,7 +111,7 @@ DEF_PAGE_1( pppFFT_Cursors, // -V641 // -V1027                                  
     "КУРСОРЫ",
     "Включает курсоры для измерения параметров спектра",
     &bFFT_Cursors_Source,                       ///< СЕРВИС - СПЕКТР - КУРСОРЫ - Источник
-    Page::Name::SB_Service_FFT_Cursors, &PageFunction::PageFFT::self, IsActive_FFT_Cursors, 0, 0, HandlerKey_FFT_Cursors
+    Page::Name::SB_Service_FFT_Cursors, &PageFFT::self, IsActive_FFT_Cursors, 0, 0, HandlerKey_FFT_Cursors
 )
 
 

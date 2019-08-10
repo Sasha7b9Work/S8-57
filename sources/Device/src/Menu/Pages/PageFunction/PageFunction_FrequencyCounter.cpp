@@ -6,7 +6,7 @@
 
 extern const PageBase ppFreqMeter;
 
-const Page * const PageFunction::PageFrequencyCounter::self = (const Page *)&ppFreqMeter;
+const Page * const PageFrequencyCounter::self = (const Page *)&ppFreqMeter;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -31,7 +31,7 @@ DEF_CHOICE_2( cEnable,                                                          
     "",
     DISABLE_RU,
     ENABLE_RU,
-    FREQ_METER_ENABLED, &PageFunction::PageFrequencyCounter::self, 0, OnChanged_FreqMeter_Enable, 0
+    FREQ_METER_ENABLED, &PageFrequencyCounter::self, 0, OnChanged_FreqMeter_Enable, 0
 )
 
 
@@ -46,7 +46,7 @@ DEF_CHOICE_2( cModeView,                                                        
     "",
     "„астота",
     "ѕериод",
-    FREQ_METER_MODE_VIEW, &PageFunction::PageFrequencyCounter::self, IsActive_ModeView, 0, 0
+    FREQ_METER_MODE_VIEW, &PageFrequencyCounter::self, IsActive_ModeView, 0, 0
 )
 
 
@@ -68,7 +68,7 @@ DEF_CHOICE_3( cTimeF,                                                           
     "100мс",
     "1с",
     "10с",
-    FREQ_METER_TIMECOUNTING, &PageFunction::PageFrequencyCounter::self, IsActive_SettingsPeriod, OnChanged_FreqMeter_Frequency, 0
+    FREQ_METER_TIMECOUNTING, &PageFrequencyCounter::self, IsActive_SettingsPeriod, OnChanged_FreqMeter_Frequency, 0
 )
 
 
@@ -79,7 +79,7 @@ DEF_CHOICE_4( cFreqClc,                                                         
     "1ћ√ц",
     "10ћ√ц",
     "100ћ√ц",
-    FREQ_METER_FREQ_CLC, &PageFunction::PageFrequencyCounter::self, IsActive_SettingsFrequency, OnChanged_FreqMeter_Period, 0
+    FREQ_METER_FREQ_CLC, &PageFrequencyCounter::self, IsActive_SettingsFrequency, OnChanged_FreqMeter_Period, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -92,22 +92,22 @@ DEF_CHOICE_6( cNumPeriods,                                                      
     "1000",
     "10000",
     "100000",
-    FREQ_METER_NUM_PERIODS, &PageFunction::PageFrequencyCounter::self, IsActive_SettingsFrequency, OnChanged_FreqMeter_Period, 0
+    FREQ_METER_NUM_PERIODS, &PageFrequencyCounter::self, IsActive_SettingsFrequency, OnChanged_FreqMeter_Period, 0
 )
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-const Choice *PageFunction::PageFrequencyCounter::GetChoiceTimeF()
+const Choice *PageFrequencyCounter::GetChoiceTimeF()
 {
     return (const Choice *)&cTimeF;
 }
 
-const Choice *PageFunction::PageFrequencyCounter::GetChoiceFreqClc()
+const Choice *PageFrequencyCounter::GetChoiceFreqClc()
 {
     return (const Choice *)&cFreqClc;
 }
 
-const Choice *PageFunction::PageFrequencyCounter::GetChoiceNumPeriods()
+const Choice *PageFrequencyCounter::GetChoiceNumPeriods()
 {
     return (const Choice *)&cNumPeriods;
 }

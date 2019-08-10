@@ -8,7 +8,7 @@
 
 extern const PageBase pageShow;
 
-const Page * const PageFunction::PageRecorder::PageShow::self = (const Page *)&pageShow;
+const Page * const PageRecorder::PageShow::self = (const Page *)&pageShow;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -18,7 +18,7 @@ const Page * const PageFunction::PageRecorder::PageShow::self = (const Page *)&p
 //    "Œ«”",
 //    "USB-Flash",
 //    "USB-PC",
-//    RECORDER_STORAGE_PLAY, &PageFunction::PageRecorder::PageShow::self, 0, 0, 0
+//    RECORDER_STORAGE_PLAY, &PageRecorder::PageShow::self, 0, 0, 0
 //)
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -27,7 +27,7 @@ DEF_CHOICE_2( cCursor,
     "",
     "1",
     "2",
-    Recorder::Settings::currentCursor, &PageFunction::PageRecorder::PageShow::self, 0, 0, 0
+    Recorder::Settings::currentCursor, &PageRecorder::PageShow::self, 0, 0, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -39,7 +39,7 @@ static void OnPress_Next()
 DEF_BUTTON( bNext,                                                                                                                     //--- ‘”Õ ÷»ﬂ - –≈√»—“–¿“Œ– - œ–Œ—ÃŒ“– - —ÎÂ‰Û˛˘ËÈ ---
     "¬ÎÂ‚Ó",
     "",
-    &PageFunction::PageRecorder::PageShow::self, 0, OnPress_Next, 0
+    &PageRecorder::PageShow::self, 0, OnPress_Next, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -51,7 +51,7 @@ static void OnPress_Prev()
 DEF_BUTTON( bPrev,                                                                                                                    //--- ‘”Õ ÷»ﬂ - –≈√»—“–¿“Œ– - œ–Œ—ÃŒ“– - œÂ‰˚‰Û˘ËÈ ---
     "¬Ô‡‚Ó",
     "",
-    &PageFunction::PageRecorder::PageShow::self, 0, OnPress_Prev, 0
+    &PageRecorder::PageShow::self, 0, OnPress_Prev, 0
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -90,7 +90,7 @@ DEF_PAGE_3( pageShow, // -V641 // -V1027                                        
     &bNext,                                                         ///< ‘”Õ ÷»ﬂ - –≈√»—“–¿“Œ– - œ–Œ—ÃŒ“– - —ÎÂ‰Û˛˘ËÈ
     &bPrev,                                                         ///< ‘”Õ ÷»ﬂ - –≈√»—“–¿“Œ– - œ–Œ—ÃŒ“– - œÂ‰˚‰Û˘ËÈ
     &cCursor,
-    //PageFunction::PageRecorder::PageShow::PageOperations::self,  ///< ‘”Õ ÷»ﬂ - –≈√»—“–¿“Œ– - œ–Œ—ÃŒ“– - Œœ≈–¿÷»»
-    //PageFunction::PageRecorder::PageShow::PageView::self,        ///< ‘”Õ ÷»ﬂ - –≈√»—“–¿“Œ– - œ–Œ—Ã“Œ– - œ–Œ—ÃŒ“–
-    Page::Name::Function_Recorder_Show, &PageFunction::PageRecorder::self, IsActive_PageShow, 0, 0, FuncOnKey_PageShow
+    //PageRecorder::PageShow::PageOperations::self,  ///< ‘”Õ ÷»ﬂ - –≈√»—“–¿“Œ– - œ–Œ—ÃŒ“– - Œœ≈–¿÷»»
+    //PageRecorder::PageShow::PageView::self,        ///< ‘”Õ ÷»ﬂ - –≈√»—“–¿“Œ– - œ–Œ—Ã“Œ– - œ–Œ—ÃŒ“–
+    Page::Name::Function_Recorder_Show, &PageRecorder::self, IsActive_PageShow, 0, 0, FuncOnKey_PageShow
 )

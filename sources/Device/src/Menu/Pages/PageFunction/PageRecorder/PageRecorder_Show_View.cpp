@@ -7,7 +7,7 @@
 
 extern const PageBase pageView;
 
-const Page * const PageFunction::PageRecorder::PageShow::PageView::self = (const Page *)&pageView;
+const Page * const PageRecorder::PageShow::PageView::self = (const Page *)&pageView;
 
 
 
@@ -17,7 +17,7 @@ DEF_CHOICE_2( cMove,                                                            
     "",
     "X",
     "Y",
-    RECORDER_AXIS_MOVE, &PageFunction::PageRecorder::PageShow::PageView::self, 0, 0, 0
+    RECORDER_AXIS_MOVE, &PageRecorder::PageShow::PageView::self, 0, 0, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -26,7 +26,7 @@ DEF_CHOICE_2( cZoom,                                                            
     "",
     "X",
     "Y",
-    RECORDER_AXIS_ZOOM, &PageFunction::PageRecorder::PageShow::PageView::self, 0, 0, 0
+    RECORDER_AXIS_ZOOM, &PageRecorder::PageShow::PageView::self, 0, 0, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -38,7 +38,7 @@ static void OnPress_Less()
 DEF_BUTTON( bLess,                                                                                                             //--- ‘”Õ ÷»ﬂ - –≈√»—“–¿“Œ– - œ–Œ—ÃŒ“– - œ–Œ—ÃŒ“– - ÃÂÌ¸¯Â ---
     "ÃÂÌ¸¯Â",
     "",
-    &PageFunction::PageRecorder::PageShow::PageView::self, 0, OnPress_Less, 0
+    &PageRecorder::PageShow::PageView::self, 0, OnPress_Less, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -50,7 +50,7 @@ static void OnPress_More()
 DEF_BUTTON( bMore,                                                                                                             //--- ‘”Õ ÷»ﬂ - –≈√»—“–¿“Œ– - œ–Œ—ÃŒ“– - œ–Œ—ÃŒ“– - ¡ÓÎ¸¯Â ---
     "¡ÓÎ¸¯Â",
     "",
-    &PageFunction::PageRecorder::PageShow::PageView::self, 0, OnPress_More, 0
+    &PageRecorder::PageShow::PageView::self, 0, OnPress_More, 0
 )
 
 
@@ -62,6 +62,6 @@ DEF_PAGE_5( pageView, // -V641 // -V1027                                        
     &cZoom,                                                                 ///< ‘”Õ ÷»ﬂ - –≈√»—“–¿“Œ– - œ–Œ—ÃŒ“– - œ–Œ—ÃŒ“– - Ã‡Ò¯Ú‡·
     &bLess,                                                                 ///< ‘”Õ ÷»ﬂ - –≈√»—“–¿“Œ– - œ–Œ—ÃŒ“– - œ–Œ—ÃŒ“– - ÃÂÌ¸¯Â
     &bMore,                                                                 ///< ‘”Õ ÷»ﬂ - –≈√»—“–¿“Œ– - œ–Œ—ÃŒ“– - œ–Œ—ÃŒ“– - ¡ÓÎ¸¯Â
-    PageFunction::PageRecorder::PageShow::PageView::PageCursors::self,      ///< ‘”Õ ÷»ﬂ - –≈√»—“–¿“Œ– - œ–Œ—ÃŒ“– - œ–Œ—ÃŒ“– -  ”–—Œ–€
-    Page::Name::Function_Recorder_Show_View, &PageFunction::PageRecorder::PageShow::self, 0, 0, 0, 0
+    PageRecorder::PageShow::PageView::PageCursors::self,      ///< ‘”Õ ÷»ﬂ - –≈√»—“–¿“Œ– - œ–Œ—ÃŒ“– - œ–Œ—ÃŒ“– -  ”–—Œ–€
+    Page::Name::Function_Recorder_Show_View, &PageRecorder::PageShow::self, 0, 0, 0, 0
 )

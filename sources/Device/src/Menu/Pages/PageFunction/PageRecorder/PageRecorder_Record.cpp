@@ -5,7 +5,7 @@
 
 extern const PageBase pageRecord;
 
-const Page * const PageFunction::PageRecorder::PageRecord::self = (const Page *)&pageRecord;
+const Page * const PageRecorder::PageRecord::self = (const Page *)&pageRecord;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -15,7 +15,7 @@ DEF_CHOICE_3( cDestination,                                                     
     "ОЗУ",
     "USB-Flash",
     "USB-PC",
-    RECORDER_STORAGE_RECORD, &PageFunction::PageRecorder::PageRecord::self, 0, 0, 0
+    RECORDER_STORAGE_RECORD, &PageRecorder::PageRecord::self, 0, 0, 0
 )
 
 
@@ -24,5 +24,5 @@ DEF_PAGE_1( pageRecord, // -V641 // -V1027                                      
     "ЗАПИСЬ",
     "Выбор места хранения данных",
     &cDestination,        ///< ФУНКЦИЯ - РЕГИСТРАТОР - ЗАПИСЬ - Сохранять в
-    Page::Name::Function_Recorder_Record, &PageFunction::PageRecorder::self, 0, 0, 0, 0
+    Page::Name::Function_Recorder_Record, &PageRecorder::self, 0, 0, 0, 0
 )

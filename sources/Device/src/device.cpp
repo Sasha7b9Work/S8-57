@@ -80,11 +80,11 @@ void Device::Init()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void Device::SetCurrentMode()
 {
-    if (!SetCurrentMode(PageFunction::PageMultimeter::self, Device::Mode::Multimeter))
+    if (!SetCurrentMode(PageMultimeter::self, Device::Mode::Multimeter))
     {
-        if (!SetCurrentMode(PageFunction::PageTester::self, Device::Mode::Tester))
+        if (!SetCurrentMode(PageTester::self, Device::Mode::Tester))
         {
-            if (!SetCurrentMode(PageFunction::PageRecorder::self, Device::Mode::Recorder))
+            if (!SetCurrentMode(PageRecorder::self, Device::Mode::Recorder))
             {
                 State::SetMode(Mode::Osci);
             }

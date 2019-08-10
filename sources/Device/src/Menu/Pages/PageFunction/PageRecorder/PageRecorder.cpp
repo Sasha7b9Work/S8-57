@@ -7,7 +7,7 @@
 
 extern const PageBase pageRecorder;
 
-const Page * const PageFunction::PageRecorder::self = (const Page *)&pageRecorder;
+const Page * const PageRecorder::self = (const Page *)&pageRecorder;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -16,7 +16,7 @@ const Page * const PageFunction::PageRecorder::self = (const Page *)&pageRecorde
 //    "Позволяет выводить данные регистратора при выключенном меню РЕГИСТРАТОР",
 //    "В режиме",
 //    "Всегда",
-//    RECORDER_VIEW_ALLWAYS, &PageFunction::PageRecorder::self, 0, 0, 0
+//    RECORDER_VIEW_ALLWAYS, &PageRecorder::self, 0, 0, 0
 //)
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -30,8 +30,8 @@ DEF_PAGE_2( pageRecorder, // -V641 // -V1027                                    
     "РЕГИСТРАТОР",
     "Запись и воспроизведение сигналов входов и датчиков",
     //&cShow,                                             ///< ФУНКЦИЯ - РЕГИСТРАТОР - Показывать
-    PageFunction::PageRecorder::PageSource::self,    ///< ФУНКЦИЯ - РЕГИСТРАТОР - ИСТОЧНИК
-    //PageFunction::PageRecorder::PageRecord::self,    ///< ФУНКЦИЯ - РЕГИСТРАТОР - ЗАПИСЬ
-    PageFunction::PageRecorder::PageShow::self,      ///< ФУНКЦИЯ - РЕГИСТРАТОР - ПРОСМОТР
+    PageRecorder::PageSource::self,    ///< ФУНКЦИЯ - РЕГИСТРАТОР - ИСТОЧНИК
+    //PageRecorder::PageRecord::self,    ///< ФУНКЦИЯ - РЕГИСТРАТОР - ЗАПИСЬ
+    PageRecorder::PageShow::self,      ///< ФУНКЦИЯ - РЕГИСТРАТОР - ПРОСМОТР
     Page::Name::Function_Recorder, &PageFunction::self, 0, OnOpenClose_Recorder, 0, 0
 )

@@ -70,7 +70,7 @@ void Recorder::Display::Update()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Recorder::Display::DrawSettings(int x, int y)
 {
-    if (Menu::OpenedPage() != PageFunction::PageRecorder::self)
+    if (Menu::OpenedPage() != PageRecorder::self)
     {
         return;
     }
@@ -87,7 +87,7 @@ void Recorder::Display::DrawSettings(int x, int y)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Recorder::Display::DrawSizeMemory(int x, int y)
 {
-    if (Menu::OpenedPage() != PageFunction::PageRecorder::self)
+    if (Menu::OpenedPage() != PageRecorder::self)
     {
         return;
     }
@@ -202,7 +202,7 @@ static void DrawParametersCursors()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void DrawCursors()
 {
-    if (Menu::OpenedPage() != PageFunction::PageRecorder::PageShow::self)
+    if (Menu::OpenedPage() != PageRecorder::PageShow::self)
     {
         return;
     }
@@ -271,7 +271,7 @@ void Recorder::Display::DrawMemoryWindow()
 {
     static int prevNumPoints = 0;
 
-    if (Menu::OpenedPage() != PageFunction::PageRecorder::PageShow::self || Storage::CurrentFrame()->NumPoints() == 0)
+    if (Menu::OpenedPage() != PageRecorder::PageShow::self || Storage::CurrentFrame()->NumPoints() == 0)
     {
         return;
     }

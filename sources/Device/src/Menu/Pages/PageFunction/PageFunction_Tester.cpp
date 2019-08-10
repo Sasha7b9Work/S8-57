@@ -8,7 +8,7 @@
 
 extern const PageBase pageTester;
 
-const Page * const PageFunction::PageTester::self = (const Page *)&pageTester;
+const Page * const PageTester::self = (const Page *)&pageTester;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -23,7 +23,7 @@ DEF_CHOICE_2( cPolarity,                                                        
     "Полярность испытательного воздействия",
     "+",
     "-",
-    TESTER_POLARITY, &PageFunction::PageTester::self, 0, OnChanged_Polarity, 0
+    TESTER_POLARITY, &PageTester::self, 0, OnChanged_Polarity, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -32,7 +32,7 @@ DEF_CHOICE_2(   cControl,                                                       
     "Тип испытательного воздействия",
     "Напряжение",
     "Ток",
-    TESTER_CONTROL, &PageFunction::PageTester::self, 0, PageFunction::PageTester::OnChanged_Control, 0
+    TESTER_CONTROL, &PageTester::self, 0, PageTester::OnChanged_Control, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -46,7 +46,7 @@ DEF_CHOICE_2(   cStepU,                                                         
     "Шаг испытательного напряжения",
     "600 мВ",
     "3 В",
-    TESTER_STEP_U, &PageFunction::PageTester::self, 0, OnChanged_Step, 0
+    TESTER_STEP_U, &PageTester::self, 0, OnChanged_Step, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -55,7 +55,7 @@ DEF_CHOICE_2( cStepI,
     "Шаг исптытательного тока",
     "4 мкА",
     "20 мкА",
-    TESTER_STEP_I, &PageFunction::PageTester::self, 0, OnChanged_Step, 0
+    TESTER_STEP_I, &PageTester::self, 0, OnChanged_Step, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -64,7 +64,7 @@ DEF_CHOICE_2( cViewMode,
     "",
     "Линии",
     "Точки",
-    TESTER_VIEW_MODE, &PageFunction::PageTester::self, 0, 0, 0
+    TESTER_VIEW_MODE, &PageTester::self, 0, 0, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -80,12 +80,12 @@ DEF_CHOICE_9( cAveraging,
     "64",
     "128",
     "256",
-    TESTER_ENUM_AVERAGE, &PageFunction::PageTester::self, 0, 0, 0
+    TESTER_ENUM_AVERAGE, &PageTester::self, 0, 0, 0
 )
 
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void PageFunction::PageTester::Init()
+void PageTester::Init()
 {
     OnChanged_Control(true);
 }
@@ -108,7 +108,7 @@ DEF_PAGE_5( pageTester, // -V641
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void PageFunction::PageTester::OnChanged_Control(bool)
+void PageTester::OnChanged_Control(bool)
 {
     PageBase *page = (PageBase *)&pageTester;
 

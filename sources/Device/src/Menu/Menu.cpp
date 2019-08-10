@@ -520,20 +520,20 @@ static void CloseIfSubPage(Page *parent, Page *page)
 void Menu::Init()
 {
     PageDisplay::Init();
-    PageFunction::PageMultimeter::Init();
+    PageMultimeter::Init();
 
-    if ((Page *)LastOpened((Page *)PageFunction::self) == PageFunction::PageMultimeter::self) //-V1027
+    if ((Page *)LastOpened((Page *)PageFunction::self) == PageMultimeter::self) //-V1027
     {
-        ClosePage((Page *)PageFunction::PageMultimeter::self);
+        ClosePage((Page *)PageMultimeter::self);
     }
 
     Page *opened = (Page *)LastOpened((Page *)PageFunction::self); //-V1027
 
-    CloseIfSubPage((Page *)PageFunction::PageMultimeter::self, opened);
-    CloseIfSubPage((Page *)PageFunction::PageRecorder::self, opened);
-    CloseIfSubPage((Page *)PageFunction::PageTester::self, opened);
-    CloseIfSubPage((Page *)PageFunction::PageFrequencyCounter::self, opened);
-    CloseIfSubPage((Page *)PageFunction::PageFFT::self, opened);
+    CloseIfSubPage((Page *)PageMultimeter::self, opened);
+    CloseIfSubPage((Page *)PageRecorder::self, opened);
+    CloseIfSubPage((Page *)PageTester::self, opened);
+    CloseIfSubPage((Page *)PageFrequencyCounter::self, opened);
+    CloseIfSubPage((Page *)PageFFT::self, opened);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

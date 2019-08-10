@@ -138,12 +138,12 @@ char Control::GetSymbol()
 Color Choice::ColorMenuField(const Choice *choice)
 {
     // Измерения по частоте
-    if(choice == PageFunction::PageFrequencyCounter::GetChoiceTimeF())
+    if(choice == PageFrequencyCounter::GetChoiceTimeF())
     {
         return Color(Color::WHITE);
     }
     // Измерения по периоду
-    else if(choice == PageFunction::PageFrequencyCounter::GetChoiceFreqClc() || choice == PageFunction::PageFrequencyCounter::GetChoiceNumPeriods())
+    else if(choice == PageFrequencyCounter::GetChoiceFreqClc() || choice == PageFrequencyCounter::GetChoiceNumPeriods())
     {
         return Color(Color::YELLOW);
     }
