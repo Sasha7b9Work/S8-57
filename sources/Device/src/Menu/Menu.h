@@ -17,6 +17,8 @@ struct Menu
     static void ChangeStateFlashDrive();
     /// Функция должна вызываться в главном цикле.
     static void Update();
+    /// Нарисовать меню
+    static void Draw();
     /// Функция вызывается при нажатии, повторе и отпускании кнопки
     static void ButtonEvent(KeyEvent event);
     /// Заблокировать клавиатуру. Будут разрешены только кнопки из массива keys, заканчивающегося нулём
@@ -61,8 +63,6 @@ struct Menu
     static void ReleaseFunctionalButton(Key::E key);
     /// Нажно вызывать при "длинном" нажатии функциональной кнопки
     static void LongFunctionalButton(Key::E key);
-    /// Нарисовать меню
-    static void Draw();
     /// С какоей позиции Y рисовать меню. Позиция берётся без учёта заголовка
     static int Y();
 
