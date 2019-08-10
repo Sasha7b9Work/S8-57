@@ -210,7 +210,7 @@ int Control::HeightOpened() const
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 bool Control::IsShade() const
 {
-    return (*keeper)->CurrentItemIsOpened() && (this != Menu::OpenedItem());
+    return Keeper()->CurrentItemIsOpened() && (this != Menu::OpenedItem());
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -222,7 +222,8 @@ bool Control::IsPressed() const
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Control::SetCurrent(bool active)
 {
-    Page *page = (Page *)*keeper;
+    Page *page = (Page *)Keeper();
+
     if (!active)
     {
         page->SetPosActItem(0x7f);
@@ -245,15 +246,17 @@ bool Control::IsOpened() const
 {
     if (type == Control::Type::Page)
     {
-        return (*keeper)->CurrentItemIsOpened();
+        const Page *page = Keeper();
+
+        return page->CurrentItemIsOpened();
     }
-    return (MENU_POS_ACT_ITEM((*keeper)->name) & 0x80) != 0;
+    return (MENU_POS_ACT_ITEM(Keeper()->name) & 0x80) != 0;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Control::Open(bool open)
 {
-    Page *parent = (Page *)keeper;
+    Page *parent = (Page *)Keeper();
     parent->SetPosActItem(open ? (parent->PosCurrentItem() | 0x80) : (parent->PosCurrentItem() & 0x7f));
     if(!open)
     {
@@ -565,14 +568,14 @@ bool Control::IsPage() const
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 bool Control::ExistKeeper(const Page *_keeper)
 {
-    const Page *item = *keeper;
+    const Page *item = Keeper();
     while (item)
     {
         if (item == _keeper)
         {
             return true;
         }
-        item = *item->keeper;
+        item = item->Keeper();
     }
 
     return false;
