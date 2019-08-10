@@ -368,7 +368,7 @@ void Page::Draw(int x, int y, bool opened) const
             {
                 if (Menu::itemForButton[(Key::E)(Key::F1 + i)] != item)
                 {
-                    Menu::itemForButton[(Key::E)(Key::F1 + i)] = nullptr;
+                    Menu::itemForButton[(Key::E)(Key::F1 + i)] = &emptyControl;
                 }
             }
 
