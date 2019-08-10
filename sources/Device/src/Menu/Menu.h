@@ -51,8 +51,6 @@ struct Menu
     static void SetItemForHint(void *item);
 
     static void SaveSettings();
-    /// Нажно вызывать при "длинном" нажатии функциональной кнопки
-    static void LongFunctionalButton(Key::E key);
     /// С какоей позиции Y рисовать меню. Позиция берётся без учёта заголовка
     static int Y();
 

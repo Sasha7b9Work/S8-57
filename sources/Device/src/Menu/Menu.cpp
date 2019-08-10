@@ -720,19 +720,6 @@ void Menu::SaveSettings()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Menu::LongFunctionalButton(Key::E key)
-{
-    if(Menu::IsShown())
-    {
-        const Control *control = Menu::ItemUnderButton(key);
-        if(control)
-        {
-            control->LongPress();
-        }
-    }
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 const Control *Menu::ItemUnderButton(Key::E button)
 {
     return underButton[button];
