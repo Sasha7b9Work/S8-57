@@ -62,7 +62,7 @@ public:
     /// Вызывается при "длинном" нажатии
     void LongPress();
     /// Возвращает true, если контрол находится в активном состоянии (реагирует на органы управления)
-    bool IsActive() { if (funcOfActive) { return funcOfActive(); } return true; };
+    bool IsActive() const { if (funcOfActive) { return funcOfActive(); } return true; };
 
     void Draw(int x, int y, bool opened);
 
