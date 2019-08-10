@@ -435,3 +435,17 @@ void Choice::ShortPress() const
         ChangeIndex(1);
     }
 }
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Button::ShortPress() const
+{
+    if (IsActive())
+    {
+        SetCurrent(true);
+
+        if (funcOnPress)
+        {
+            funcOnPress();
+        }
+    }
+}

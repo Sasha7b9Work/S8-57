@@ -156,12 +156,6 @@ Color Choice::ColorMenuField(const Choice *choice)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Page::ShortPressOnItem(uint numItem)
-{
-    ((Button *)items[numItem])->HandlePress();
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 int8 Page::PosCurrentItem() const
 {
     return MENU_POS_ACT_ITEM(name) & 0x7f;
@@ -395,11 +389,7 @@ void Control::ShortPress() const
     }
     else if(type == Control::Type::Button)
     {
-        if(IsActive())
-        {
-            SetCurrent(true);
-            ((Button *)this)->HandlePress();
-        }
+        ((Button *)this)->ShortPress();
     }
     else if(type == Control::Type::Page)
     {
