@@ -7,7 +7,7 @@
 
 extern const PageBase pageSettings;
 
-const Page * const PageDisplay::PageSettings::self = (const Page * const)&pageSettings;
+const Page * const PageDisplay::PageSettings::self = (const Page *)&pageSettings;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -18,21 +18,21 @@ static void OnChanged_Settings_Brightness()
 DEF_GOVERNOR( gBrightness,                                                                                                                            //--- ДИСПЛЕЙ - НАСТРОЙКИ - Яркость ---
     "Яркость",
     "Установка яркости свечения дисплея",
-    BRIGHTNESS_DISPLAY, 0, 100, PageDisplay::PageSettings::self, 0, OnChanged_Settings_Brightness, 0
+    BRIGHTNESS_DISPLAY, 0, 100, &PageDisplay::PageSettings::self, 0, OnChanged_Settings_Brightness, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 DEF_GOVERNOR( gLevels,                                                                                                                                 //--- ДИСПЛЕЙ - НАСТРОЙКИ - Уровни ---
     "Уровни",
     "Задаёт время, в течение которого после поворота ручки сещения напряжения на экране остаётся вспомогательная метка уровня смещения",
-    TIME_SHOW_LEVELS, 0, 125, PageDisplay::PageSettings::self, 0, 0, 0
+    TIME_SHOW_LEVELS, 0, 125, &PageDisplay::PageSettings::self, 0, 0, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 DEF_GOVERNOR( gTime,                                                                                                                                    //--- ДИСПЛЕЙ - НАСТРОЙКИ - Время ---
     "Время",
     "Установка времени, в течение которого сообщения будут находиться на экране",
-    TIME_MESSAGES, 1, 99, PageDisplay::PageSettings::self, 0, 0, 0
+    TIME_MESSAGES, 1, 99, &PageDisplay::PageSettings::self, 0, 0, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -42,7 +42,7 @@ DEF_CHOICE_3( cStringNavigation,                                                
     "Временно",
     "Всегда",
     "Никогда",
-    SHOW_STRING_NAVI, PageDisplay::PageSettings::self, 0, 0, 0
+    SHOW_STRING_NAVI, &PageDisplay::PageSettings::self, 0, 0, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -61,7 +61,7 @@ DEF_CHOICE_3( cAltMarkers,                                                      
     "Скрывать",
     "Показывать",
     "Авто",
-    ALT_MARKERS, PageDisplay::PageSettings::self, 0, OnChanged_Settings_AltMarkers, 0
+    ALT_MARKERS, &PageDisplay::PageSettings::self, 0, OnChanged_Settings_AltMarkers, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -79,7 +79,7 @@ DEF_CHOICE_6( cAutoHide,                                                        
     "Через 15 сек",
     "Через 30 сек",
     "Через 60 сек",
-    MENU_AUTO_HIDE, PageDisplay::PageSettings::self, 0, OnChanged_Settings_AutoHide, 0
+    MENU_AUTO_HIDE, &PageDisplay::PageSettings::self, 0, OnChanged_Settings_AutoHide, 0
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -93,5 +93,5 @@ DEF_PAGE_7( pageSettings, // -V641 // -V1027                                    
     &cStringNavigation,                                 ///< ДИСПЛЕЙ - НАСТРОЙКИ - Строка меню
     &cAltMarkers,                                       ///< ДИСПЛЕЙ - НАСТРОЙКИ - Доп. маркеры
     &cAutoHide,                                         ///< ДИСПЛЕЙ - НАСТРОЙКИ - Скрывать
-    Page::Name::Display_Settings, PageDisplay::self, 0, 0, 0, 0
+    Page::Name::Display_Settings, &PageDisplay::self, 0, 0, 0, 0
 )

@@ -18,7 +18,7 @@ using namespace Osci::Settings;
 
 extern const PageBase pageMath;
 
-const Page * const PageMeasures::PageMath::self = (const Page * const)&pageMath;
+const Page * const PageMeasures::PageMath::self = (const Page *)&pageMath;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -66,7 +66,7 @@ static void Draw_Function_Screen(int x, int y)
 DEF_SMALL_BUTTON_HINTS_3(bFunction_Screen,                                                                                                                //--- СЕРВИС - ФУНКЦИЯ - Экран ---
     "Экран",
     "Выбирает режим отображения математического сигнала",
-    PageMeasures::PageMath::self, 0, OnPress_Function_Screen, Draw_Function_Screen,
+    &PageMeasures::PageMath::self, 0, OnPress_Function_Screen, Draw_Function_Screen,
     Draw_Function_Screen_Disable, "Вывод математической функции отключён",
     Draw_Function_Screen_Separate, "Сигналы и математическая функция выводятся в разных окнах",
     Draw_Function_Screen_Together, "Сигналы и математическая функция выводятся в одном окне"
@@ -100,7 +100,7 @@ static void Draw_Function_Type(int x, int y)
 DEF_SMALL_BUTTON_HINTS_2(bFunction_Type,                                                                                                                    //--- СЕРВИС - ФУНКЦИЯ - Вид ---
     "Вид",
     "Выбор математической функции",
-    PageMeasures::PageMath::self, 0, OnPress_Function_Type, Draw_Function_Type,
+    &PageMeasures::PageMath::self, 0, OnPress_Function_Type, Draw_Function_Type,
     Draw_Function_Type_Sum, "Сложение",
     Draw_Function_Type_Mul, "Умножение"
 )
@@ -130,7 +130,7 @@ static void Draw_Function_ModeRegSet(int x, int y)
 DEF_SMALL_BUTTON_HINTS_2(bFunction_ModeRegSet,                                                                                            //--- СЕРВИС - ФУНКЦИЯ - Режим ручки УСТАНОВКА ---
     "Режим ручки УСТАНОВКА",
     "Выбор режима ручки УСТАНОВКА - управление масштабом или смещением",
-    PageMeasures::PageMath::self, 0, OnPress_Function_ModeRegSet, Draw_Function_ModeRegSet,
+    &PageMeasures::PageMath::self, 0, OnPress_Function_ModeRegSet, Draw_Function_ModeRegSet,
     Draw_Function_ModeRegSet_Range, "Управление масштабом",
     Draw_Function_ModeRegSet_RShift, "Управление смещением"
 )
@@ -150,7 +150,7 @@ static void Draw_Function_RangeA(int x, int y)
 DEF_SMALL_BUTTON(bFunction_RangeA,                                                                                                          //--- СЕРВИС - ФУНКЦИЯ - Масштаб 1-го канала ---
     "Масштаб 1-го канала",
     "Использует масштаб первого канала для отображения результата",
-    PageMeasures::PageMath::self, 0, OnPress_Function_RangeA, Draw_Function_RangeA
+    &PageMeasures::PageMath::self, 0, OnPress_Function_RangeA, Draw_Function_RangeA
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -168,7 +168,7 @@ static void Draw_Function_RangeB(int x, int y)
 DEF_SMALL_BUTTON(bFunction_RangeB,                                                                                                          //--- СЕРВИС - ФУНКЦИЯ - Масштаб 2-го канала ---
     "Масштаб 2-го канала",
     "Использует масштаб второго канала для отображения результата",
-    PageMeasures::PageMath::self, 0, OnPress_Function_RangeB, Draw_Function_RangeB
+    &PageMeasures::PageMath::self, 0, OnPress_Function_RangeB, Draw_Function_RangeB
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -273,5 +273,5 @@ DEF_PAGE_5( pageMath, // -V641                                                  
     &bFunction_ModeRegSet,
     &bFunction_RangeA,
     &bFunction_RangeB,
-    Page::Name::SB_Service_Function, PageMeasures::self, IsActive_Function, OnPress_Function, 0, HandlerKey_Function
+    Page::Name::SB_Service_Function, &PageMeasures::self, IsActive_Function, OnPress_Function, 0, HandlerKey_Function
 )

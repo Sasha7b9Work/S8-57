@@ -10,7 +10,7 @@ using namespace Osci::Settings;
 extern const PageBase pTrig;
 extern const PageBase ppSearch;
 
-const Page * const PageTrig::self = (const Page * const)&pTrig;
+const Page * const PageTrig::self = (const Page *)&pTrig;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -56,7 +56,8 @@ DEF_CHOICE_3( cMode, // -V206                                                   
     "Авто ",
     "Ждущий",
     "Однократный",
-    START_MODE, PageTrig::self, 0, PageTrig::OnChanged_TrigMode, 0
+    START_MODE,
+    &PageTrig::self, 0, PageTrig::OnChanged_TrigMode, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -71,7 +72,8 @@ DEF_CHOICE_2( cSource, // -V206                                                 
     ,
     "Канал 1",
     "Канал 2",
-    TRIG_SOURCE, PageTrig::self, 0, OnChanged_Source, 0
+    TRIG_SOURCE,
+    &PageTrig::self, 0, OnChanged_Source, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -88,7 +90,8 @@ DEF_CHOICE_2( cPolarity, //-V206                                                
     ,
     "Фронт",
     "Срез",
-    TRIG_POLARITY, PageTrig::self, 0, OnChanged_Polarity, 0
+    TRIG_POLARITY,
+    &PageTrig::self, 0, OnChanged_Polarity, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -108,7 +111,8 @@ DEF_CHOICE_3( cFiltr, // -V206                                                  
     "ПС",
     "НЧ",
     "ВЧ",
-    TRIG_INPUT, PageTrig::self, 0, OnChanged_Input, 0
+    TRIG_INPUT,
+    &PageTrig::self, 0, OnChanged_Input, 0
 )
 
 DEF_PAGE_6( pTrig, // -V641 // -V1027                                                                                                                                         //--- СИНХР ---

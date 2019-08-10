@@ -9,7 +9,7 @@
 
 extern const PageBase pageServiceInfo;
 
-const Page * const PageService::PageInformation::self = (const Page * const)&pageServiceInfo;
+const Page * const PageService::PageInformation::self = (const Page *)&pageServiceInfo;
 
 using namespace Display::Primitives;
 
@@ -60,7 +60,7 @@ static void OnPress_Close()
 DEF_BUTTON( bClose,
     "Закрыть",
     "Закрыть страницу информации",
-    PageService::PageInformation::self, 0, OnPress_Close, 0
+    &PageService::PageInformation::self, 0, OnPress_Close, 0
 )
 
 static void OnPress_Page(bool enter)
@@ -82,5 +82,5 @@ DEF_PAGE_1 (pageServiceInfo, //-V641 //-V1027
     "ИНФОРМАЦИЯ",
     "Информация об изделии",
     &bClose,
-    Page::Name::Service_Info, PageService::self, 0, OnPress_Page, 0, 0
+    Page::Name::Service_Info, &PageService::self, 0, OnPress_Page, 0, 0
 )

@@ -5,7 +5,7 @@
 
 extern const PageBase pageOperations;
 
-const Page * const PageFunction::PageRecorder::PageShow::PageOperations::self = (const Page * const)&pageOperations;
+const Page * const PageFunction::PageRecorder::PageShow::PageOperations::self = (const Page *)&pageOperations;
 
 
 
@@ -18,7 +18,7 @@ static void OnPress_Rename()
 DEF_BUTTON( bRename,                                                                                                    //--- ÔÓÍÊÖÈß - ĞÅÃÈÑÒĞÀÒÎĞ - ÏĞÎÑÌÎÒĞ - ÎÏÅĞÀÖÈÈ - Ïåğåèìåíîâàòü ---
     "Ïåğåèìåíîâàòü",
     "",
-    PageFunction::PageRecorder::PageShow::PageOperations::self, 0, OnPress_Rename, 0
+    &PageFunction::PageRecorder::PageShow::PageOperations::self, 0, OnPress_Rename, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -30,7 +30,7 @@ static void OnPress_Copy()
 DEF_BUTTON( bCopy,                                                                                                         //--- ÔÓÍÊÖÈß - ĞÅÃÈÑÒĞÀÒÎĞ - ÏĞÎÑÌÎÒĞ - ÎÏÅĞÀÖÈÈ - Êîïèğîâàòü ---
     "Êîïèğîâàòü",
     "",
-    PageFunction::PageRecorder::PageShow::PageOperations::self, 0, OnPress_Copy, 0
+    &PageFunction::PageRecorder::PageShow::PageOperations::self, 0, OnPress_Copy, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -42,7 +42,7 @@ static void OnPress_Move()
 DEF_BUTTON( bMove,                                                                                                        //--- ÔÓÍÊÖÈß - ĞÅÃÈÑÒĞÀÒÎĞ - ÏĞÎÑÌÎÒĞ - ÎÏÅĞÀÖÈÈ - Ïåğåìåñòèòü ---
     "Ïåğåìåñòèòü",
     "",
-    PageFunction::PageRecorder::PageShow::PageOperations::self, 0, OnPress_Move, 0
+    &PageFunction::PageRecorder::PageShow::PageOperations::self, 0, OnPress_Move, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -54,7 +54,7 @@ static void OnPress_Delete()
 DEF_BUTTON( bDelete,                                                                                                          //--- ÔÓÍÊÖÈß - ĞÅÃÈÑÒĞÀÒÎĞ - ÏĞÎÑÌÎÒĞ - ÎÏÅĞÀÖÈÈ - Óäàëèòü ---
     "Óäàëèòü",
     "",
-    PageFunction::PageRecorder::PageShow::PageOperations::self, 0, OnPress_Delete, 0
+    &PageFunction::PageRecorder::PageShow::PageOperations::self, 0, OnPress_Delete, 0
 )
 
 
@@ -66,5 +66,5 @@ DEF_PAGE_4( pageOperations, // -V641 // -V1027                                  
     &bCopy,     ///< ÔÓÍÊÖÈß - ĞÅÃÈÑÒĞÀÒÎĞ - ÏĞÎÑÌÎÒĞ - ÎÏÅĞÀÖÈÈ - Êîïèğîâàòü
     &bMove,     ///< ÔÓÍÊÖÈß - ĞÅÃÈÑÒĞÀÒÎĞ - ÏĞÎÑÌÎÒĞ - ÎÏÅĞÀÖÈÈ - Ïåğåìåñòèòü
     &bDelete,   ///< ÔÓÍÊÖÈß - ĞÅÃÈÑÒĞÀÒÎĞ - ÏĞÎÑÌÎÒĞ - ÎÏÅĞÀÖÈÈ - Óäàëèòü
-    Page::Name::Function_Recorder_Show_Operations, PageFunction::PageRecorder::PageShow::self, 0, 0, 0, 0
+    Page::Name::Function_Recorder_Show_Operations, &PageFunction::PageRecorder::PageShow::self, 0, 0, 0, 0
 )

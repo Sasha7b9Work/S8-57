@@ -8,8 +8,8 @@
 extern const PageBase pageMultimeter;
 extern const PageBase pageCalibration;
 
-const Page * const PageFunction::PageMultimeter::self = (const Page * const)&pageMultimeter;
-const Page * const PageFunction::PageMultimeter::PageCalibration::self = (const Page * const)&pageCalibration;
+const Page * const PageFunction::PageMultimeter::self = (const Page *)&pageMultimeter;
+const Page * const PageFunction::PageMultimeter::PageCalibration::self = (const Page *)&pageCalibration;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -32,7 +32,7 @@ DEF_CHOICE_3( cRangesVoltageDC,                                                 
     "2 В",
     "20 В",
     "500 В",
-    MULTI_RANGE_VOLTAGE_DC, PageFunction::PageMultimeter::self, FuncActive_RangesVoltageDC, OnChange_VoltageDC, 0
+    MULTI_RANGE_VOLTAGE_DC, &PageFunction::PageMultimeter::self, FuncActive_RangesVoltageDC, OnChange_VoltageDC, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -55,7 +55,7 @@ DEF_CHOICE_3( cRangesVoltageAC,                                                 
     "2 В",
     "20 В",
     "400 В",
-    MULTI_RANGE_VOLTAGE_AC, PageFunction::PageMultimeter::self, FuncActive_RnagesVoltageAC, OnChange_VoltageAC, 0
+    MULTI_RANGE_VOLTAGE_AC, &PageFunction::PageMultimeter::self, FuncActive_RnagesVoltageAC, OnChange_VoltageAC, 0
 )
 
 
@@ -73,7 +73,7 @@ DEF_CHOICE_2( cRangesCurrentDC,
     "Диапазон измерения",
     "20мА",
     "2А",
-    MULTI_RANGE_CURRENT_DC, PageFunction::PageMultimeter::self, 0, OnChange_CurrentDC, 0
+    MULTI_RANGE_CURRENT_DC, &PageFunction::PageMultimeter::self, 0, OnChange_CurrentDC, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -90,7 +90,7 @@ DEF_CHOICE_2( cRangesCurrentAC,
     "Диапазон измерения",
     "20мА",
     "2А",
-    MULTI_RANGE_CURRENT_AC, PageFunction::PageMultimeter::self, 0, OnChange_CurrentAC, 0
+    MULTI_RANGE_CURRENT_AC, &PageFunction::PageMultimeter::self, 0, OnChange_CurrentAC, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -114,7 +114,7 @@ DEF_CHOICE_4(   cRangesResistance,                                              
     "20 кОм",
     "200 кОм",
     "10 МОм",
-    MULTI_RANGE_RESISTANCE, PageFunction::PageMultimeter::self, FuncActive_RangesReistance, OnChange_Resistance, 0
+    MULTI_RANGE_RESISTANCE, &PageFunction::PageMultimeter::self, FuncActive_RangesReistance, OnChange_Resistance, 0
 )
 
 DEF_CHOICE_7(   cMode,
@@ -136,7 +136,7 @@ DEF_CHOICE_7(   cMode,
     "R",
     "VD",
     "Прозвонка",
-    MULTI_MEASURE, PageFunction::PageMultimeter::self, 0, PageFunction::PageMultimeter::OnChanged_Mode, 0
+    MULTI_MEASURE, &PageFunction::PageMultimeter::self, 0, PageFunction::PageMultimeter::OnChanged_Mode, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -150,7 +150,7 @@ DEF_CHOICE_2 (cAVP,
     "Автовыбор предела",
     DISABLE_RU,
     ENABLE_RU,
-    MULTI_AVP, PageFunction::PageMultimeter::self, 0, OnChanged_AVP, 0
+    MULTI_AVP, &PageFunction::PageMultimeter::self, 0, OnChanged_AVP, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -166,7 +166,7 @@ DEF_CHOICE_2(cZero,
     "",
     DISABLE_RU,
     ENABLE_RU,
-    zero, PageFunction::PageMultimeter::self, 0, OnChanged_Zero, 0
+    zero, &PageFunction::PageMultimeter::self, 0, OnChanged_Zero, 0
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -226,7 +226,7 @@ DEF_PAGE_5( pageMultimeter, // -V641 //-V1027 //-V641
     &cAVP,
     &cZero,
     PageFunction::PageMultimeter::PageCalibration::self,
-    Page::Name::Function_Multimeter, PageFunction::self, 0, OnPress_Page, 0, 0
+    Page::Name::Function_Multimeter, &PageFunction::self, 0, OnPress_Page, 0, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -238,7 +238,7 @@ static void OnPress_Calibrate0()
 DEF_BUTTON( bCalibrate0,
     "Калибр 0",
     "",
-    PageFunction::PageMultimeter::PageCalibration::self, 0, OnPress_Calibrate0, 0
+    &PageFunction::PageMultimeter::PageCalibration::self, 0, OnPress_Calibrate0, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -250,7 +250,7 @@ static void OnPress_Calibrate1()
 DEF_BUTTON( bCalibrate1,
     "Калибр 1",
     "",
-    PageFunction::PageMultimeter::PageCalibration::self, 0, OnPress_Calibrate1, 0
+    &PageFunction::PageMultimeter::PageCalibration::self, 0, OnPress_Calibrate1, 0
 )
 
 
@@ -259,5 +259,5 @@ DEF_PAGE_2( pageCalibration, //-V641 //-V1027
     "Калибровка мультиметра",
     &bCalibrate0,
     &bCalibrate1,
-    Page::Name::Function_Multimeter_Cal, PageFunction::PageMultimeter::self, 0, 0, 0, 0
+    Page::Name::Function_Multimeter_Cal, &PageFunction::PageMultimeter::self, 0, 0, 0, 0
 )

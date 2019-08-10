@@ -8,7 +8,7 @@ using namespace Osci::Settings;
 
 extern const PageBase pageFind;
 
-const Page * const PageTrig::PageFind::self = (const Page * const)&pageFind;
+const Page * const PageTrig::PageFind::self = (const Page *)&pageFind;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -16,7 +16,7 @@ static const char *hintsSearch_Mode[] = { "Ручной", "Hand", "Автоматический",  "
 
 static const ChoiceBase cMode =                                                                                                                               //--- СИНХР - ПОИСК - Режим ---
 {
-    Control::Type::Choice, 2, false, Page::Name::NoPage, PageTrig::PageFind::self, 0,
+    Control::Type::Choice, 2, false, Page::Name::NoPage, &PageTrig::PageFind::self, 0,
     {
         "Режим"
         ,
@@ -38,7 +38,7 @@ static void OnPress_Search()
 DEF_BUTTON( bSearch,                                                                                                                                          //--- СИНХР - ПОИСК - Найти ---
     "Найти",
     "Производит поиск уровня синхронизации.",
-    PageTrig::PageFind::self, 0, OnPress_Search, 0
+    &PageTrig::PageFind::self, 0, OnPress_Search, 0
 )
 
 
@@ -48,5 +48,6 @@ DEF_PAGE_2( pageFind, // -V641 // -V1027                                        
     "Управление автоматическим поиском уровня синхронизации.",
     &cMode,                         ///< СИНХР - ПОИСК - Режим
     &bSearch,                       ///< СИНХР - ПОИСК - Найти
-    Page::Name::Trig_Search, PageTrig::self, 0, 0, 0, 0
+    Page::Name::Trig_Search,
+    &PageTrig::self, 0, 0, 0, 0
 )

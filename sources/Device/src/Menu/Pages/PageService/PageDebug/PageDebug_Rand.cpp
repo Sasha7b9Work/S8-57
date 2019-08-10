@@ -11,21 +11,21 @@ using namespace Osci::Settings;
 
 extern const PageBase pageRand;
 
-const Page * const PageDebug::PageRand::self = (const Page * const)&pageRand;
+const Page * const PageDebug::PageRand::self = (const Page *)&pageRand;
 
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 DEF_GOVERNOR( gRand_NumAverage,                                                                                                                        //--- ОТЛАДКА - РАНД-ТОР - Усредн. ---
     "Усредн.",
     "",
-    NRST_NUM_AVE_FOR_RAND, 1, 32, PageDebug::PageRand::self, 0, 0, 0
+    NRST_NUM_AVE_FOR_RAND, 1, 32, &PageDebug::PageRand::self, 0, 0, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 DEF_GOVERNOR( gRand_NumSmooth,                                                                                                                     //--- ОТЛАДКА - РАНД-ТОР - Сглаживание ---
     "Сглаживание",
     "",
-    NRST_NUM_SMOOTH_FOR_RAND, 1, 10, PageDebug::PageRand::self, 0, 0, 0
+    NRST_NUM_SMOOTH_FOR_RAND, 1, 10, &PageDebug::PageRand::self, 0, 0, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -36,28 +36,28 @@ static void OnChanged_Rand_NumMeasures()
 DEF_GOVERNOR( gRand_NumMeasures,                                                                                                                  //--- ОТЛАДКА - РАНД-ТОР - Выб-к/ворота ---
     "Выб-к/ворота",
     "",
-    NUM_MEASURES_FOR_GATES, 1, 2500, PageDebug::PageRand::self, 0, OnChanged_Rand_NumMeasures, 0
+    NUM_MEASURES_FOR_GATES, 1, 2500, &PageDebug::PageRand::self, 0, OnChanged_Rand_NumMeasures, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-DEF_CHOICE_2( cRand_ShowInfo,                                                                                                                       //--- ОТЛАДКА - РАНД-ТОР - Информация ---
-    "Информация",
-    "Показывать информацию о воротах рандомизатора"
-    ,
-    "Не показывать",
-    "Показывать",
-    SHOW_RAND_INFO, PageDebug::PageRand::self, 0, 0, 0
-)
+//DEF_CHOICE_2( cRand_ShowInfo,                                                                                                                       //--- ОТЛАДКА - РАНД-ТОР - Информация ---
+//    "Информация",
+//    "Показывать информацию о воротах рандомизатора"
+//    ,
+//    "Не показывать",
+//    "Показывать",
+//    SHOW_RAND_INFO, &PageDebug::PageRand::self, 0, 0, 0
+//)
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-DEF_CHOICE_2( gRand_ShowStat,                                                                                                                       //--- ОТЛАДКА - РАНД-ТОР - Статистика ---
-    "Статистика",
-    "Показывать график статистики"
-    ,
-    "Не показывать",
-    "Показывать",
-    SHOW_RAND_STAT, PageDebug::PageRand::self, 0, 0, 0
-)
+//DEF_CHOICE_2( gRand_ShowStat,                                                                                                                       //--- ОТЛАДКА - РАНД-ТОР - Статистика ---
+//    "Статистика",
+//    "Показывать график статистики"
+//    ,
+//    "Не показывать",
+//    "Показывать",
+//    SHOW_RAND_STAT, &PageDebug::PageRand::self, 0, 0, 0
+//)
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void OnChanged_Rand_TimeCompensation()
@@ -67,7 +67,7 @@ static void OnChanged_Rand_TimeCompensation()
 DEF_GOVERNOR( gRand_TimeCompensation,                                                                                                     //--- ОТЛАДКА - РАНД-ТОР - Компенсация задержки ---
     "Компенсация задержки",
     "Подстройка компенсации задержки АЦП 40 нс",
-    TIME_COMPENSATION, 0, 510, PageDebug::PageRand::self, 0, OnChanged_Rand_TimeCompensation, 0
+    TIME_COMPENSATION, 0, 510, &PageDebug::PageRand::self, 0, OnChanged_Rand_TimeCompensation, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -81,7 +81,7 @@ static int16 addShift = 0;
 DEF_GOVERNOR( gRand_AddTimeShift,                                                                                                                     //--- ОТЛАДКА - РАНД-ТОР - Смещение ---
     "Доп смещение",
     "Добавочное смщение при вращении tShift",
-    addShift, -100, 100, PageDebug::PageRand::self, 0, OnChanged_Rand_AddTimeShift, 0
+    addShift, -100, 100, &PageDebug::PageRand::self, 0, OnChanged_Rand_AddTimeShift, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -93,7 +93,7 @@ static void OnChanged_Rand_Pretriggered()
 DEF_GOVERNOR( gRand_Pretriggered,                                                                                                                   //--- ОТЛАДКА - РАНД-ТОР - Предзапуск ---
     "Предзапуск",
     "Величина предзапуска, которая пишется в рандомизатор",
-    PRETRIGGERED, 0, 30000, PageDebug::PageRand::self, 0, OnChanged_Rand_Pretriggered, 0
+    PRETRIGGERED, 0, 30000, &PageDebug::PageRand::self, 0, OnChanged_Rand_Pretriggered, 0
 )
 
 
@@ -117,7 +117,7 @@ DEF_CHOICE_16( gGateMax,                                                        
     "130",
     "140",
     "150",
-    set.dbg_enum_gate_max, PageDebug::PageRand::self, 0, 0, 0
+    set.dbg_enum_gate_max, &PageDebug::PageRand::self, 0, 0, 0
 )
 
 
@@ -141,7 +141,7 @@ DEF_CHOICE_16( gGateMin,                                                        
     "130",
     "140",
     "150",
-    set.dbg_enum_gate_min, PageDebug::PageRand::self, 0, 0, 0
+    set.dbg_enum_gate_min, &PageDebug::PageRand::self, 0, 0, 0
 )
 
 
@@ -160,5 +160,5 @@ DEF_PAGE_2( pageRand, // -V641 // -V1027                                        
     //&gRand_TimeCompensation,    ///< ОТЛАДКА - РАНД-ТОР - Компенсация задержки
     //&gRand_AddTimeShift,        ///< ОТЛАДКА - РАНД-ТОР - Смещение
     //&gRand_Pretriggered,        ///< ОТЛАДКА - РAНД-ТОР - Предзапуск
-    Page::Name::Debug_Rand, PageDebug::self, 0, 0, 0, 0
+    Page::Name::Debug_Rand, &PageDebug::self, 0, 0, 0, 0
 )

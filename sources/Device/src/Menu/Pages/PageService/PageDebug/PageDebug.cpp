@@ -30,8 +30,13 @@ extern const PageBase pppADC_Shift;
 extern const PageBase ppSettings;
 extern const PageBase ppSerialNumber;
 
-const Page * const PageDebug::self = (const Page * const)&pageDebug;
-const Page * const PageDebug::PageADC::PageStretch::self = (const Page * const)&pppADC_Stretch;
+const Page * const PageDebug::self = (const Page *)&pageDebug;
+const Page * const PageDebug::PageADC::self = (const Page *)&ppADC;
+const Page * const PageDebug::PageADC::PageBalance::self = (const Page *)&pppADC_Balance;
+const Page * const PageDebug::PageADC::PageStretch::self = (const Page *)&pppADC_Stretch;
+const Page * const PageDebug::PageADC::PageShift::self = (const Page *)&pppADC_Shift;
+const Page * const PageDebug::PageSettings::self = (const Page *)&ppSettings;
+const Page * const PageDebug::PageSerialNumber::self = (const Page *)&ppSerialNumber;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -70,7 +75,8 @@ DEF_CHOICE_3( cADC_Balance_Mode,                                                
     DISABLE_RU,
     "Реальный",
     "Ручной",
-    NRST_BALANCE_ADC_TYPE, PageDebug::PageADC::PageBalance::self, 0, OnChanged_ADC_Balance_Mode, Draw_ADC_Balance_Mode
+    NRST_BALANCE_ADC_TYPE,
+    &PageDebug::PageADC::PageBalance::self, 0, OnChanged_ADC_Balance_Mode, Draw_ADC_Balance_Mode
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -87,7 +93,8 @@ static void OnChanged_ADC_Balance_ShiftA()
 DEF_GOVERNOR( gADC_Balance_ShiftA,                                                                                                              //--- ОТЛАДКА - АЦП - БАЛАНС - Смещение 1 ---
     "Смещение 1",
     "",
-    shiftADCA, -125, 125, PageDebug::PageADC::PageBalance::self, IsActive_ADC_Balance_ShiftAB, OnChanged_ADC_Balance_ShiftA, 0
+    shiftADCA, -125, 125,
+    &PageDebug::PageADC::PageBalance::self, IsActive_ADC_Balance_ShiftAB, OnChanged_ADC_Balance_ShiftA, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -99,7 +106,8 @@ static void OnChanged_ADC_Balance_ShiftB()
 DEF_GOVERNOR( gADC_Balance_ShiftB,                                                                                                              //--- ОТЛАДКА - АЦП - БАЛАНС - Смещение 2 ---
     "Смещение 2",
     "",
-    shiftADCB, -125, 125, PageDebug::PageADC::PageBalance::self, IsActive_ADC_Balance_ShiftAB, OnChanged_ADC_Balance_ShiftB, 0
+    shiftADCB, -125, 125,
+    &PageDebug::PageADC::PageBalance::self, IsActive_ADC_Balance_ShiftAB, OnChanged_ADC_Balance_ShiftB, 0
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -109,7 +117,8 @@ DEF_PAGE_3( pppADC_Balance, // -V641 // -V1027                                  
     &cADC_Balance_Mode,      ///< ОТЛАДКА - АЦП - БАЛАНС - Режим
     &gADC_Balance_ShiftA,    ///< ОТЛАДКА - АЦП - БАЛАНС - Смещение 1
     &gADC_Balance_ShiftB,    ///< ОТЛАДКА - АЦП - БАЛАНС - Смещение 2
-    Page::Name::Debug_ADC_Balance, PageDebug::PageADC::self, 0, 0, 0, 0
+    Page::Name::Debug_ADC_Balance,
+    &PageDebug::PageADC::self, 0, 0, 0, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -136,7 +145,8 @@ DEF_CHOICE_3( cADC_Stretch_Mode,                                                
     DISABLE_RU,
     "Реальный",
     "Ручной",
-    NRST_STRETCH_ADC_TYPE, PageDebug::PageADC::PageStretch::self, 0, PageDebug::OnChanged_ADC_Stretch_Mode, 0
+    NRST_STRETCH_ADC_TYPE,
+    &PageDebug::PageADC::PageStretch::self, 0, PageDebug::OnChanged_ADC_Stretch_Mode, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -153,7 +163,8 @@ static void OnChanged_ADC_Stretch_A()
 DEF_GOVERNOR( gADC_Stretch_A,                                                                                                                //--- ОТЛАДКА - АЦП - РАСТЯЖКА - Растяжка 1к ---
     "Растяжка 1к",
     "Задаёт ручную растяжку первого канала.\n1 единица = 0.0001",
-    stretchA, -10000, 10000, PageDebug::PageADC::PageStretch::self, IsActive_ADC_StretchAB, OnChanged_ADC_Stretch_A, 0
+    stretchA, -10000, 10000,
+    &PageDebug::PageADC::PageStretch::self, IsActive_ADC_StretchAB, OnChanged_ADC_Stretch_A, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -165,7 +176,8 @@ static void OnChanged_ADC_Stretch_B()
 DEF_GOVERNOR( gADC_Stretch_B,                                                                                                                //--- ОТЛАДКА - АЦП - РАСТЯЖКА - Растяжка 2к ---
     "Растяжка 2к",
     "Задаёт ручную растяжку второго канала.\n1 единица = 0.0001",
-    stretchB, -10000, 10000, PageDebug::PageADC::PageStretch::self, IsActive_ADC_StretchAB, OnChanged_ADC_Stretch_B, 0
+    stretchB, -10000, 10000,
+    &PageDebug::PageADC::PageStretch::self, IsActive_ADC_StretchAB, OnChanged_ADC_Stretch_B, 0
 )
 
 /*
@@ -243,7 +255,8 @@ DEF_PAGE_3( pppADC_Stretch, // -V641 // -V1027                                  
     &cADC_Stretch_Mode,      ///< ОТЛАДКА - АЦП - РАСТЯЖКА - Режим
     &gADC_Stretch_A,         ///< ОТЛАДКА - АЦП - РАСТЯЖКА - Растяжка 1к
     &gADC_Stretch_B,
-    Page::Name::Debug_ADC_Stretch, PageDebug::PageADC::self, 0, 0, 0, 0
+    Page::Name::Debug_ADC_Stretch,
+    &PageDebug::PageADC::self, 0, 0, 0, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -263,7 +276,7 @@ static void OnPress_ADC_Shift_Reset()
 DEF_BUTTON( bADC_Shift_Reset,                                                                                                                       //-- ОТЛАДКА - АЦП - ДОП СМЕЩ - Сброс ---
     "Сброс",
     "",
-    PageDebug::PageADC::PageShift::self, 0, OnPress_ADC_Shift_Reset, 0
+    &PageDebug::PageADC::PageShift::self, 0, OnPress_ADC_Shift_Reset, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -275,7 +288,8 @@ static void OnChanged_ADC_Shift_A()
 DEF_GOVERNOR( gADC_Shift_A2mV, //-V641                                                                                                    //--- ОТЛАДКА - АЦП - ДОП СМЕЩ - См 1к 2мВ пост ---
     "См 1к 2мВ пост",
     "",
-    RSHIFT_ADD_STABLE_A(Range::_2mV), -100, 100, PageDebug::PageADC::PageShift::self, 0, OnChanged_ADC_Shift_A, 0
+    RSHIFT_ADD_STABLE_A(Range::_2mV), -100, 100,
+    &PageDebug::PageADC::PageShift::self, 0, OnChanged_ADC_Shift_A, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -287,35 +301,40 @@ static void OnChanged_ADC_Shift_B()
 DEF_GOVERNOR( gADC_Shift_B2mV,                                                                                                            //--- ОТЛАДКА - АЦП - ДОП СМЕЩ - См 2к 2мВ пост ---
     "См 2к 2мВ пост",
     "",
-    RSHIFT_ADD_STABLE_B(Range::_2mV), -100, 100, PageDebug::PageADC::PageShift::self, 0, OnChanged_ADC_Shift_B, 0
+    RSHIFT_ADD_STABLE_B(Range::_2mV), -100, 100,
+    &PageDebug::PageADC::PageShift::self, 0, OnChanged_ADC_Shift_B, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 DEF_GOVERNOR( gADC_Shift_A5mV,                                                                                                            //--- ОТЛАДКА - АЦП - ДОП СМЕЩ - См 1к 5мВ пост ---
     "См 1к 5мВ пост",
     "",
-    RSHIFT_ADD_STABLE_A(Range::_5mV), -100, 100, PageDebug::PageADC::PageShift::self, 0, OnChanged_ADC_Shift_A, 0
+    RSHIFT_ADD_STABLE_A(Range::_5mV), -100, 100,
+    &PageDebug::PageADC::PageShift::self, 0, OnChanged_ADC_Shift_A, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 DEF_GOVERNOR( gADC_Shift_B5mV,                                                                                                            //--- ОТЛАДКА - АЦП - ДОП СМЕЩ - См 2к 5мВ пост ---
     "См 2к 5мВ пост",
     "",
-    RSHIFT_ADD_STABLE_B(Range::_5mV), -100, 100, PageDebug::PageADC::PageShift::self, 0, OnChanged_ADC_Shift_B, 0
+    RSHIFT_ADD_STABLE_B(Range::_5mV), -100, 100,
+    &PageDebug::PageADC::PageShift::self, 0, OnChanged_ADC_Shift_B, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 DEF_GOVERNOR( gADC_Shift_A10mV,                                                                                                          //--- ОТЛАДКА - АЦП - ДОП СМЕЩ - См 1к 10мВ пост ---
     "См 1к 10мВ пост",
     "",
-    RSHIFT_ADD_STABLE_A(Range::_10mV), -100, 100, PageDebug::PageADC::PageShift::self, 0, OnChanged_ADC_Shift_A, 0
+    RSHIFT_ADD_STABLE_A(Range::_10mV), -100, 100,
+    &PageDebug::PageADC::PageShift::self, 0, OnChanged_ADC_Shift_A, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 DEF_GOVERNOR( gADC_Shift_B10mV,                                                                                                          //--- ОТЛАДКА - АЦП - ДОП СМЕЩ - См 2к 10мВ пост ---
     "См 2к 10мВ пост",
     "",
-    RSHIFT_ADD_STABLE_B(Range::_10mV), -100, 100, PageDebug::PageADC::PageShift::self, 0, OnChanged_ADC_Shift_B, 0
+    RSHIFT_ADD_STABLE_B(Range::_10mV), -100, 100,
+    &PageDebug::PageADC::PageShift::self, 0, OnChanged_ADC_Shift_B, 0
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -329,7 +348,8 @@ DEF_PAGE_7( pppADC_Shift, // -V641  // -V1027                                   
     &gADC_Shift_B5mV,    // ОТЛАДКА - АЦП - ДОП СМЕЩ - См 2к 5мВ пост
     &gADC_Shift_A10mV,   // ОТЛАДКА - АЦП - ДОП СМЕЩ - См 1к 10мВ пост
     &gADC_Shift_B10mV,   // ОТЛАДКА - АЦП - ДОП СМЕЩ - См 2к 10мВ пост
-    Page::Name::Debug_ADC_Shift, PageDebug::PageADC::self, 0, 0, 0, 0
+    Page::Name::Debug_ADC_Shift,
+    &PageDebug::PageADC::self, 0, 0, 0, 0
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -339,7 +359,8 @@ DEF_PAGE_3( ppADC, // -V641                                                     
     &pppADC_Balance, // ОТЛАДКА - АЦП - БАЛАНС
     &pppADC_Stretch, // ОТЛАДКА - АЦП - РАСТЯЖКА
     &pppADC_Shift,   // ОТЛАДКА - АЦП - ДОП СМЕЩ
-    Page::Name::Debug_ADC, PageDebug::self, 0, 0, 0, 0
+    Page::Name::Debug_ADC,
+    &PageDebug::self, 0, 0, 0, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -349,23 +370,25 @@ DEF_CHOICE_2( cStats,                                                           
     ,
     "Не показывать",
     "Показывать",
-    SHOW_STAT, PageDebug::self, 0, 0, 0
+    SHOW_STAT,
+    &PageDebug::self, 0, 0, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void PageDebug::OnChanged_DisplayOrientation(bool)
-{
-    Display::SetOrientation(DISPLAY_ORIENTATION);
-}
-
-DEF_CHOICE_2( cDisplayOrientation,                                                                                                                             //--- ОТЛАДКА - Ориентация ---
-    "Ориентация",
-    "Устанавливает ориентацию дисплея"
-    ,
-    "Прямая",
-    "Обратная",
-    DISPLAY_ORIENTATION, PageDebug::self, 0, PageDebug::OnChanged_DisplayOrientation, 0
-)
+//void PageDebug::OnChanged_DisplayOrientation(bool)
+//{
+//    Display::SetOrientation(DISPLAY_ORIENTATION);
+//}
+//
+//DEF_CHOICE_2( cDisplayOrientation,                                                                                                                             //--- ОТЛАДКА - Ориентация ---
+//    "Ориентация",
+//    "Устанавливает ориентацию дисплея"
+//    ,
+//    "Прямая",
+//    "Обратная",
+//    DISPLAY_ORIENTATION,
+//    &PageDebug::self, 0, PageDebug::OnChanged_DisplayOrientation, 0
+//)
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static int16 pred;
@@ -378,7 +401,8 @@ static void OnChanged_Pred()
 DEF_GOVERNOR( mgPred,                                                                                                                                          //--- ОТЛАДКА - Предзапуск ---
     "Предзапуск",
     "",
-    pred, 0, 15000, PageDebug::self, 0, OnChanged_Pred, 0
+    pred, 0, 15000,
+    &PageDebug::self, 0, OnChanged_Pred, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -392,7 +416,8 @@ static void OnChanged_Post()
 DEF_GOVERNOR( mgPost,                                                                                                                                         //--- ОТЛАДКА - Послезапуск ---
     "Послезапуск",
     "",
-    post, 0, 15000, PageDebug::self, 0, OnChanged_Post, 0
+    post, 0, 15000,
+    &PageDebug::self, 0, OnChanged_Post, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -402,7 +427,7 @@ static void OnPress_Settings_Exit()
 }
 
 DEF_SMALL_BUTTON_EXIT( bSettings_Exit,                                                                                                                  //--- ОТЛАДКА - НАСТРОЙКИ - Выход ---
-    PageDebug::PageSettings::self, 0, OnPress_Settings_Exit, DrawSB_Exit
+    &PageDebug::PageSettings::self, 0, OnPress_Settings_Exit, DrawSB_Exit
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -492,7 +517,8 @@ DEF_PAGE_SB( ppSettings, // -V641 // -V1027                                     
     0,
     0,
     0,
-    Page::Name::SB_Debug_Settings, PageDebug::self, 0, OnPress_Settings, 0, 0
+    Page::Name::SB_Debug_Settings,
+    &PageDebug::self, 0, OnPress_Settings, 0, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -530,7 +556,7 @@ static void OnPress_SaveFirmware()
 DEF_BUTTON( bSaveFirmware,                                                                                                                                 //--- ОТЛАДКА - Сохр. прошивку ---
     "Сохр. прошивку",
     "Сохранение прошивки - секторов 5, 6, 7 общим объёмом 3 х 128 кБ, где хранится программа",
-    PageDebug::self, IsActive_SaveFirmware, OnPress_SaveFirmware, 0
+    &PageDebug::self, IsActive_SaveFirmware, OnPress_SaveFirmware, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -540,7 +566,7 @@ static void OnPress_SerialNumber_Exit()
 }
 
 DEF_SMALL_BUTTON_EXIT( bSerialNumber_Exit,                                                                                                                    //--- ОТЛАДКА - С/Н - Выход ---
-    PageDebug::PageSerialNumber::self, 0, OnPress_SerialNumber_Exit, DrawSB_Exit
+    &PageDebug::PageSerialNumber::self, 0, OnPress_SerialNumber_Exit, DrawSB_Exit
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -561,7 +587,7 @@ static void Draw_SerialNumber_Change(int x, int y)
 DEF_SMALL_BUTTON( bSerialNumber_Change,                                                                                                                    //--- ОТЛАДКА - С/Н - Вставить ---
     "Вставить",
     "Вставляет выбраный символ",
-    PageDebug::PageSerialNumber::self, 0, OnPress_SerialNumber_Change, Draw_SerialNumber_Change
+    &PageDebug::PageSerialNumber::self, 0, OnPress_SerialNumber_Change, Draw_SerialNumber_Change
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -579,7 +605,7 @@ static void Draw_SerialNumber_Save(int x, int y)
 DEF_SMALL_BUTTON( bSerialNumber_Save,                                                                                                                     //--- ОТЛАДКА - С/Н - Сохранить ---
     "Сохранить",
     "Записывает серийный номер в OTP",
-    PageDebug::PageSerialNumber::self, 0, OnPress_SerialNumber_Save, Draw_SerialNumber_Save
+    &PageDebug::PageSerialNumber::self, 0, OnPress_SerialNumber_Save, Draw_SerialNumber_Save
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -606,22 +632,23 @@ DEF_PAGE_SB( ppSerialNumber, // -V641 // -V1027                                 
     0,
     0,
     &bSerialNumber_Save,            // ОТЛАДКА - С/Н - Сохранить
-    Page::Name::SB_Debug_SerialNumber, PageDebug::self, 0, OnPress_SerialNumber, 0, HandlerKey_SerialNumber
+    Page::Name::SB_Debug_SerialNumber,
+    &PageDebug::self, 0, OnPress_SerialNumber, 0, HandlerKey_SerialNumber
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void OnPress_EraseData()
-{
-    Display::FuncOnWaitStart("Удаляю сохранённые данные", false);
-    ::Memory::DeleteAllData();
-    Display::FuncOnWaitStop();
-}
+//static void OnPress_EraseData()
+//{
+//    Display::FuncOnWaitStart("Удаляю сохранённые данные", false);
+//    ::Memory::DeleteAllData();
+//    Display::FuncOnWaitStop();
+//}
 
-DEF_BUTTON( bEraseData,                                                                                                                                    //--- ОТЛАДКА - Стереть данные ---
-    "Стереть данне",
-    "Стирает сохранённые данные из ППЗУ",
-    PageDebug::self, 0, OnPress_EraseData, 0
-)
+//DEF_BUTTON( bEraseData,                                                                                                                                    //--- ОТЛАДКА - Стереть данные ---
+//    "Стереть данне",
+//    "Стирает сохранённые данные из ППЗУ",
+//    &PageDebug::self, 0, OnPress_EraseData, 0
+//)
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 DEF_PAGE_6( pageDebug, // -V641 // -V1027                                                                                                                                   //--- ОТЛАДКА ---
@@ -639,5 +666,6 @@ DEF_PAGE_6( pageDebug, // -V641 // -V1027                                       
 //    &ppSettings,		                            ///< ОТЛАДКА - НАСТРОЙКИ
 //    &ppSerialNumber,                              ///< ОТЛАДКА - С/Н
 //    &bEraseData,                                  ///< ОТЛАДКА - Стереть данные
-    Page::Name::Debug, PageService::self, 0, 0, 0, 0
+    Page::Name::Debug,
+    &PageService::self, 0, 0, 0, 0
 )

@@ -24,7 +24,7 @@ using namespace Osci::Settings;
 
 extern const PageBase pageService;
 
-const Page * const PageService::self = (const Page * const)&pageService;
+const Page * const PageService::self = (const Page *)&pageService;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -40,7 +40,7 @@ static void OnPress_ResetSettings()
 DEF_BUTTON( bResetSettings,                                                                                                                                 //--- СЕРВИС - Сброс настроек ---
     "Сброс настр",
     "Сброс настроек на настройки по умолчанию",
-    PageService::self, EmptyFuncBtV, OnPress_ResetSettings, EmptyFuncVII
+    &PageService::self, EmptyFuncBtV, OnPress_ResetSettings, EmptyFuncVII
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -52,7 +52,7 @@ static void OnPress_AutoSearch()
 DEF_BUTTON( bAutoSearch,                                                                                                                                     //--- СЕРВИС - Поиск сигнала ---
     "Поиск сигн",
     "Устанавливает оптимальные установки осциллографа для сигнала в канале 1",
-    PageService::self, 0, OnPress_AutoSearch, 0
+    &PageService::self, 0, OnPress_AutoSearch, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -63,7 +63,8 @@ DEF_CHOICE_4( cSoundVolume,
     "Мин",
     "Средн",
     "Макс",
-    SOUND_VOLUME, PageService::self, 0, 0, 0
+    SOUND_VOLUME,
+    &PageService::self, 0, 0, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

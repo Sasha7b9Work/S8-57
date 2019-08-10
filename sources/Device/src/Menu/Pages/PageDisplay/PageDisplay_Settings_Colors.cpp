@@ -7,7 +7,7 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 extern const PageBase pageColors;
 
-const Page * const PageDisplay::PageSettings::PageColors::self = (const Page * const)&pageColors;
+const Page * const PageDisplay::PageSettings::PageColors::self = (const Page *)&pageColors;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -18,7 +18,7 @@ static void OnPress_ResetColors()
 DEF_BUTTON( bReset,                                                                                                                          //--- ДИСПЛЕЙ - НАСТРОЙКИ - ЦВЕТА - Сбросить ---
     "Сбросить",
     "Сброс всех цветов на значения по умолчанию",
-    PageDisplay::PageSettings::PageColors::self, EmptyFuncBtV, OnPress_ResetColors, EmptyFuncVII
+    &PageDisplay::PageSettings::PageColors::self, EmptyFuncBtV, OnPress_ResetColors, EmptyFuncVII
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -27,7 +27,7 @@ DEF_CHOICE_2( cScheme,                                                          
     "Изменение цветовой схемы",
     "Схема 1",
     "Схема 2",
-    set.serv_colorScheme, PageDisplay::PageSettings::PageColors::self, 0, 0, 0
+    set.serv_colorScheme, &PageDisplay::PageSettings::PageColors::self, 0, 0, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -36,7 +36,7 @@ ColorType PageDisplay::PageSettings::PageColors::colorTypeA = COLOR_TYPE(0.0F, 0
 DEF_GOVERNOR_COLOR( gcChannelA,                                                                                                               //--- ДИСПЛЕЙ - НАСТРОЙКИ - ЦВЕТА - Канал 1 ---
     "Канал 1",
     "Выбор цвета канала 1",
-    PageDisplay::PageSettings::PageColors::colorTypeA, PageDisplay::PageSettings::PageColors::self
+    PageDisplay::PageSettings::PageColors::colorTypeA, &PageDisplay::PageSettings::PageColors::self
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -45,7 +45,7 @@ ColorType PageDisplay::PageSettings::PageColors::colorTypeB = COLOR_TYPE(0.0F, 0
 DEF_GOVERNOR_COLOR( gcChannelB,                                                                                                               //--- ДИСПЛЕЙ - НАСТРОЙКИ - ЦВЕТА - Канал 2 ---
     "Канал 2",
     "Выбор цвета канала 1",
-    PageDisplay::PageSettings::PageColors::colorTypeB, PageDisplay::PageSettings::PageColors::self
+    PageDisplay::PageSettings::PageColors::colorTypeB, &PageDisplay::PageSettings::PageColors::self
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -54,7 +54,7 @@ ColorType PageDisplay::PageSettings::PageColors::colorTypeGrid = COLOR_TYPE(0.0F
 DEF_GOVERNOR_COLOR( gcGrid,                                                                                                                     //--- ДИСПЛЕЙ - НАСТРОЙКИ - ЦВЕТА - Сетка ---
     "Сетка",
     "Устанавливает цвет сетки",
-    PageDisplay::PageSettings::PageColors::colorTypeGrid, PageDisplay::PageSettings::PageColors::self
+    PageDisplay::PageSettings::PageColors::colorTypeGrid, &PageDisplay::PageSettings::PageColors::self
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -76,7 +76,7 @@ DEF_CHOICE_2( cBackground,                                                      
     "Выбор цвета фона",
     "Чёрный",
     "Белый",
-    BACKGROUND, PageDisplay::PageSettings::PageColors::self, 0, OnChanged_Settings_Colors_Background, 0
+    BACKGROUND, &PageDisplay::PageSettings::PageColors::self, 0, OnChanged_Settings_Colors_Background, 0
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -96,5 +96,5 @@ DEF_PAGE_6( pageColors, // -V641 // -V1027                                      
     &gcChannelB,          ///< ДИСПЛЕЙ - НАСТРОЙКИ - ЦВЕТА - Канал 2
     &gcGrid,              ///< ДИСПЛЕЙ - НАСТРОЙКИ - ЦВЕТА - Сетка
     &cBackground,         ///< ДИСПЛЕЙ - НАСТРОЙКИ - ЦВЕТА - Фон
-    Page::Name::Display_Settings_Colors, PageDisplay::PageSettings::self, 0, 0, 0, 0
+    Page::Name::Display_Settings_Colors, &PageDisplay::PageSettings::self, 0, 0, 0, 0
 )

@@ -7,7 +7,7 @@ extern const PageBase pMultimeter;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-const Page * const PageDebug::PageMultimeter::self = (const Page * const)&pMultimeter;
+const Page * const PageDebug::PageMultimeter::self = (const Page *)&pMultimeter;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -19,7 +19,7 @@ static void OnPress_Calibrate0()
 DEF_BUTTON( bCalibrate0,
     "Калибр 0",
     "",
-    PageDebug::PageMultimeter::self, 0, OnPress_Calibrate0, 0
+    &PageDebug::PageMultimeter::self, 0, OnPress_Calibrate0, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -31,7 +31,7 @@ static void OnPress_Calibrate1()
 DEF_BUTTON(bCalibrate1,
     "Калибр 1",
     "",
-    PageDebug::PageMultimeter::self, 0, OnPress_Calibrate1, 0
+    &PageDebug::PageMultimeter::self, 0, OnPress_Calibrate1, 0
 )
 
 
@@ -41,5 +41,5 @@ DEF_PAGE_2( pMultimeter, // -V641 //-V1027 //-V641
     "",
     &bCalibrate0,
     &bCalibrate1,
-    Page::Name::Debug_Multimeter, PageDebug::self, 0, 0, 0, 0
+    Page::Name::Debug_Multimeter, &PageDebug::self, 0, 0, 0, 0
 )

@@ -8,18 +8,18 @@
 
 extern const PageBase pageShow;
 
-const Page * const PageFunction::PageRecorder::PageShow::self = (const Page * const)&pageShow;
+const Page * const PageFunction::PageRecorder::PageShow::self = (const Page *)&pageShow;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-DEF_CHOICE_3( cSource,                                                                                                                  //--- ФУНКЦИЯ - РЕГИСТРАТОР - ПРОСМОТР - Источник ---
-    "Источник",
-    "Место расположения данных",
-    "ОЗУ",
-    "USB-Flash",
-    "USB-PC",
-    RECORDER_STORAGE_PLAY, PageFunction::PageRecorder::PageShow::self, 0, 0, 0
-)
+//DEF_CHOICE_3( cSource,                                                                                                                  //--- ФУНКЦИЯ - РЕГИСТРАТОР - ПРОСМОТР - Источник ---
+//    "Источник",
+//    "Место расположения данных",
+//    "ОЗУ",
+//    "USB-Flash",
+//    "USB-PC",
+//    RECORDER_STORAGE_PLAY, &PageFunction::PageRecorder::PageShow::self, 0, 0, 0
+//)
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 DEF_CHOICE_2( cCursor,
@@ -27,7 +27,7 @@ DEF_CHOICE_2( cCursor,
     "",
     "1",
     "2",
-    Recorder::Settings::currentCursor, PageFunction::PageRecorder::PageShow::self, 0, 0, 0
+    Recorder::Settings::currentCursor, &PageFunction::PageRecorder::PageShow::self, 0, 0, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -39,7 +39,7 @@ static void OnPress_Next()
 DEF_BUTTON( bNext,                                                                                                                     //--- ФУНКЦИЯ - РЕГИСТРАТОР - ПРОСМОТР - Следующий ---
     "Влево",
     "",
-    PageFunction::PageRecorder::PageShow::self, 0, OnPress_Next, 0
+    &PageFunction::PageRecorder::PageShow::self, 0, OnPress_Next, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -51,7 +51,7 @@ static void OnPress_Prev()
 DEF_BUTTON( bPrev,                                                                                                                    //--- ФУНКЦИЯ - РЕГИСТРАТОР - ПРОСМОТР - Предыдущий ---
     "Вправо",
     "",
-    PageFunction::PageRecorder::PageShow::self, 0, OnPress_Prev, 0
+    &PageFunction::PageRecorder::PageShow::self, 0, OnPress_Prev, 0
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -92,5 +92,5 @@ DEF_PAGE_3( pageShow, // -V641 // -V1027                                        
     &cCursor,
     //PageFunction::PageRecorder::PageShow::PageOperations::self,  ///< ФУНКЦИЯ - РЕГИСТРАТОР - ПРОСМОТР - ОПЕРАЦИИ
     //PageFunction::PageRecorder::PageShow::PageView::self,        ///< ФУНКЦИЯ - РЕГИСТРАТОР - ПРОСМТОР - ПРОСМОТР
-    Page::Name::Function_Recorder_Show, PageFunction::PageRecorder::self, IsActive_PageShow, 0, 0, FuncOnKey_PageShow
+    Page::Name::Function_Recorder_Show, &PageFunction::PageRecorder::self, IsActive_PageShow, 0, 0, FuncOnKey_PageShow
 )

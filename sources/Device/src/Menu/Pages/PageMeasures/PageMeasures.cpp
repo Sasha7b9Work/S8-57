@@ -7,7 +7,7 @@
 
 extern const PageBase pageMeasures;
 
-const Page * const PageMeasures::self = (const Page * const)&pageMeasures;
+const Page * const PageMeasures::self = (const Page *)&pageMeasures;
 
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

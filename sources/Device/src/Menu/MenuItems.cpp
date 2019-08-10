@@ -210,7 +210,7 @@ int Control::HeightOpened() const
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 bool Control::IsShade() const
 {
-    return keeper->CurrentItemIsOpened() && (this != Menu::OpenedItem());
+    return (*keeper)->CurrentItemIsOpened() && (this != Menu::OpenedItem());
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -222,7 +222,7 @@ bool Control::IsPressed() const
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Control::SetCurrent(bool active)
 {
-    Page *page = (Page *)keeper;
+    Page *page = (Page *)*keeper;
     if (!active)
     {
         page->SetPosActItem(0x7f);
@@ -245,9 +245,9 @@ bool Control::IsOpened() const
 {
     if (type == Control::Type::Page)
     {
-        return keeper->CurrentItemIsOpened();
+        return (*keeper)->CurrentItemIsOpened();
     }
-    return (MENU_POS_ACT_ITEM(keeper->name) & 0x80) != 0;
+    return (MENU_POS_ACT_ITEM((*keeper)->name) & 0x80) != 0;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -565,14 +565,14 @@ bool Control::IsPage() const
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 bool Control::ExistKeeper(const Page *_keeper)
 {
-    const Page *item = keeper;
+    const Page *item = *keeper;
     while (item)
     {
         if (item == _keeper)
         {
             return true;
         }
-        item = item->keeper;
+        item = *item->keeper;
     }
 
     return false;

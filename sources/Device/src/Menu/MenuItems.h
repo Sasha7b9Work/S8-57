@@ -15,12 +15,12 @@ extern int8 gCurDigit;
 
 /// Общая часть для всех типов элементов меню
 #define COMMON_PART_MENU_ITEM                                                                           \
-    uint8        type;           /* Тип итема */                                                     \
-    int8         num;            /* Число вариантов для Choice или число контролов для Page*/        \
-    bool         isPageSB;       /* Если true, то это страница малых кнопок */                       \
-    uint8        name;           /* Имя из перечисления Page::Name */                                \
-    const Page  *keeper;        /* Адрес страницы, которой принадлежит. Для Page_Main = 0 */        \
-    pFuncBV      funcOfActive;   /* Активен ли данный элемент */                                     \
+    uint8       type;           /* Тип итема */                                                     \
+    int8        num;            /* Число вариантов для Choice или число контролов для Page*/        \
+    bool        isPageSB;       /* Если true, то это страница малых кнопок */                       \
+    uint8       name;           /* Имя из перечисления Page::Name */                                \
+    const Page  *const*keeper;        /* Адрес страницы, которой принадлежит. Для Page_Main = 0 */        \
+    pFuncBV     funcOfActive;   /* Активен ли данный элемент */                                     \
     const char  *titleHint[2]   /* Название страницы на русском и английском языках. Также подсказка для режима помощи */
 
 class Page;
@@ -79,7 +79,7 @@ public:
     /// Возвращает true, если тип контрола - Page
     bool IsPage() const;
     /// Возвращает адрес родителя
-    const Page *Keeper() { return keeper; }
+    const Page *Keeper() { return *keeper; }
     /// Возвращает true, если в древе предков стоит keeper
     bool ExistKeeper(const Page *keeper);
     /// Имеет родителя - не является главной страницей меню
