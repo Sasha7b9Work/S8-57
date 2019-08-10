@@ -220,7 +220,7 @@ bool Control::IsPressed() const
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Control::SetCurrent(bool active)
+void Control::SetCurrent(bool active) const
 {
     Page *page = (Page *)Keeper();
 
@@ -254,7 +254,7 @@ bool Control::IsOpened() const
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Control::Open(bool open)
+void Control::Open(bool open) const
 {
     Page *parent = (Page *)Keeper();
     parent->SetPosActItem(open ? (parent->PosCurrentItem() | 0x80) : (parent->PosCurrentItem() & 0x7f));

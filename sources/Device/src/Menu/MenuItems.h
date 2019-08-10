@@ -48,11 +48,11 @@ public:
     /// Возвращает true, если кнопка, соответствующая элементу меню item, находится в нажатом положении
     bool IsPressed() const;
     /// Сделать/разделать текущим
-    void SetCurrent(bool active);
+    void SetCurrent(bool active) const;
     /// Возвращает true, если элемент меню по адрему item открыт
     bool IsOpened() const;
 
-    void Open(bool open);
+    void Open(bool open) const;
     /// Возвращает название элемента, как оно выглядит на дисплее прибора
     String Title() const;
     /// Обработка события кнопки
@@ -139,7 +139,7 @@ public:
     /// Возвращает количество элементов в странице по адресу page
     int NumItems() const;
     /// Установить текущей данную страницу.
-    void SetAsCurrent();
+    void SetAsCurrent() const;
     /// Возвращает номер текущей подстраницы (той, которая индицируется в данный момент)
     int8 CurrentSubPage() const;
     /// Установить текущей данную подстраницу
