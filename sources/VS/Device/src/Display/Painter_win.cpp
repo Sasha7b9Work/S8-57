@@ -101,7 +101,7 @@ void Painter::EndScene()
 {
     SDL_SetRenderTarget(renderer, NULL);
 
-    SDL_Rect rect = {0, 0, FRAME_WIDTH, FRAME_HEIGHT};
+    SDL_Rect rect = {0, 0, Frame::WIDTH, Frame::HEIGHT};
 
     if (texture)
     {
@@ -135,7 +135,7 @@ void Painter::SetColorValue(Color color, uint value)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void SetPositionAndSize(Frame *frame)
 {
-    wxSize size = {FRAME_WIDTH + 9, FRAME_HEIGHT + 320 };
+    wxSize size = {Frame::WIDTH + 9, Frame::HEIGHT + 320 };
     
     frame->SetSize(size);
     frame->SetMinSize(size);
@@ -175,8 +175,8 @@ static HANDLE CreateFrame()
 
     wxBoxSizer *sizer = new wxBoxSizer(wxHORIZONTAL);
 
-    wxButton *button = new wxButton(frame, wxID_ANY, "", {10, 10}, {Display::WIDTH, Display::HEIGHT});
-    button->SetMaxSize({Display::WIDTH, Display::HEIGHT});
+    wxButton *button = new wxButton(frame, wxID_ANY, "", {10, 10}, {Frame::WIDTH, Frame::HEIGHT});
+    button->SetMaxSize({Frame::WIDTH, Frame::HEIGHT});
 
     sizer->Add(button);
 
@@ -201,7 +201,7 @@ static void CreateButtons(Frame *frame)
     };
 
     int x0 = 5;
-    int y0 = FRAME_HEIGHT + 10;
+    int y0 = Frame::HEIGHT + 10;
 
     int dX = 5;
     int dY = 5;
@@ -224,7 +224,7 @@ static void CreateButtons(Frame *frame)
 
     width = height = 25;
     x0 = 160;
-    y0 = FRAME_HEIGHT + 100;
+    y0 = Frame::HEIGHT + 100;
 
     size.SetWidth(width);
     size.SetHeight(height);
@@ -240,7 +240,7 @@ static void CreateButtons(Frame *frame)
     width = 51;
     x0 = 5;
 
-    y0 = FRAME_HEIGHT + 100;
+    y0 = Frame::HEIGHT + 100;
 
     size.SetWidth(width);
 
@@ -256,7 +256,7 @@ static void CreateButtons(Frame *frame)
 
     //  ÌÓÔÍË Í‡Ì‡Î‡ A
 
-    int y = FRAME_HEIGHT + 200;
+    int y = Frame::HEIGHT + 200;
 
     CreateButtonsChannel(frame, " ‡Ì‡Î 1", 5, y, Key::ChannelA, Key::RangeLessA, Key::RangeMoreA, Key::RShiftLessA, Key::RShiftMoreA);
 
@@ -266,7 +266,7 @@ static void CreateButtons(Frame *frame)
 
     CreateButtonsTrig(frame, 235, y - 130);
 
-    CreateButton(Key::Start, frame, { 230, FRAME_HEIGHT + 198 }, { 80, 25 }, "œ”— /—“Œœ");
+    CreateButton(Key::Start, frame, { 230, Frame::HEIGHT + 198 }, { 80, 25 }, "œ”— /—“Œœ");
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

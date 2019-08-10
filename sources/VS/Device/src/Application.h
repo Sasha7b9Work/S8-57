@@ -2,10 +2,6 @@
 #include <wx/wx.h>
 
 
-extern int FRAME_WIDTH;
-extern int FRAME_HEIGHT;
-
-
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 class Application : public wxApp
 {
@@ -18,6 +14,10 @@ public:
 class Frame : public wxFrame
 {
 public:
+
+    static const int WIDTH = 640;
+    static const int HEIGHT = 480;
+
     Frame(const wxString& title);
 
     void OnSize(wxCommandEvent& event);
