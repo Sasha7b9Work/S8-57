@@ -74,21 +74,18 @@ struct Menu
     /// Item, подсказку для которого нужно выводить в случае включённого режима подсказок.
     static Control *itemHint;
 
-    class Title
+    struct Title
     {
-    public:
         static const int HEIGHT = 9;
         static const int WIDTH = 320 / 5 * 2 - 2;
     };
 
-    class Item
+    struct Item
     {
-    public:
         static const int HEIGHT = 23;
 
-        class Value
+        struct Value
         {
-        public:
             static const int HEIGHT = 13;
             static const int WIDTH = 320 / 5 - 4; // -V112
         };
