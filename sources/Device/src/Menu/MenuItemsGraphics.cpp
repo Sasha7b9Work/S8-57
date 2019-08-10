@@ -356,7 +356,7 @@ void SButton::Draw(int x, int y)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Page::Draw(int x, int y, bool opened)
+void Page::Draw(int x, int y, bool opened) const
 {
     if(opened)
     {
@@ -415,7 +415,7 @@ void Page::Draw(int x, int y, bool opened)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Page::DrawTitle(int x, int yTop)
+void Page::DrawTitle(int x, int yTop) const
 {
     int eX = x;
 
@@ -458,7 +458,7 @@ void Page::DrawTitle(int x, int yTop)
     DrawNestingPage(eX + 5, yTop + Menu::Title::HEIGHT - 6);
 }
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Page::DrawItems(int x, int y)
+void Page::DrawItems(int x, int y) const
 {
     for (int i = 0; i < 5; i++)
     {
@@ -704,7 +704,7 @@ int Page::ItemOpenedPosX(const Control *item)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Page::DrawPagesUGO(int right, int bottom)
+void Page::DrawPagesUGO(int right, int bottom) const
 {
     int size = 4;
     int delta = 2;
@@ -730,11 +730,11 @@ void Page::DrawPagesUGO(int right, int bottom)
 }
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------
-void Page::DrawNestingPage(int left, int bottom)
+void Page::DrawNestingPage(int left, int bottom) const
 {
     int nesting = 0;
 
-    Page *page = this;
+    const Page *page = this;
 
     Page *parent = (Page *)Keeper();
 

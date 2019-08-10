@@ -35,13 +35,13 @@ using namespace Transceiver;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-   Control    *Menu::itemUnderKey = 0;
+const Control *Menu::itemUnderKey = 0;
 const char    *Menu::stringForHint = 0;
    Control    *Menu::itemHint = 0;
 /// true, если нужно сохранять копию экрана на флешку
 static bool needSaveScreen = false;
 /// Элементы управления, назначенные в данный момент соответствующим кнопкам
-static Control *underButton[Key::Number];
+static const Control *underButton[Key::Number];
 /// Последний открытый контрол на дереве странице page
 static Control *LastOpened(Page *page);
 /// Обработка события таймера автоматического сокрытия меню
@@ -771,7 +771,7 @@ void Menu::ReleaseFunctionalButton(Key::E key)
 {
     if(Menu::IsShown())
     {
-        Control *control = Menu::ItemUnderButton(key);
+        const Control *control = Menu::ItemUnderButton(key);
         if(control)
         {
             control->ShortPress();
@@ -784,7 +784,7 @@ void Menu::LongFunctionalButton(Key::E key)
 {
     if(Menu::IsShown())
     {
-        Control *control = Menu::ItemUnderButton(key);
+        const Control *control = Menu::ItemUnderButton(key);
         if(control)
         {
             control->LongPress();
@@ -793,13 +793,13 @@ void Menu::LongFunctionalButton(Key::E key)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-Control *Menu::ItemUnderButton(Key::E button)
+const Control *Menu::ItemUnderButton(Key::E button)
 {
     return underButton[button];
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Menu::SetItemUnderButton(Key::E button, Control *control)
+void Menu::SetItemUnderButton(Key::E button, const Control *control)
 {
     underButton[button] = control;
 }

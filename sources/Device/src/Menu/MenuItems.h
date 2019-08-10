@@ -58,9 +58,9 @@ public:
     /// Обработка события кнопки
     bool ProcessKey(KeyEvent event);
     /// Вызывается при "коротком" нажатии
-    void ShortPress();
+    void ShortPress() const;
     /// Вызывается при "длинном" нажатии
-    void LongPress();
+    void LongPress() const;
     /// Возвращает true, если контрол находится в активном состоянии (реагирует на органы управления)
     bool IsActive() const { if (funcOfActive) { return funcOfActive(); } return true; };
 
@@ -150,7 +150,7 @@ public:
     Control *Item(int numElement) const;
     /// \todo Возвращает позицию первого элемента страницы по адресу page на экране. Если текущая подстраница 0, это будет 0, если текущая 
     /// подстраница 1, это будет 5 и т.д.
-    int PosItemOnLeft();
+    int PosItemOnLeft() const;
     /// Вызывает функцию короткого нажатия кнопки над итемом numItem страницы page
     void ShortPressOnItem(uint numItem);
     /// Возвращает позицию текущего элемента странцы page
@@ -158,19 +158,19 @@ public:
     /// Изменить номер текущей подстраницы на значение delta
     void ChangeSubPage(int delta);
     /// Нарисовать в заданных координатах
-    void Draw(int x, int y, bool opened);
+    void Draw(int x, int y, bool opened) const;
     /// Обработка события кнопки
     bool ProcessKey(KeyEvent event);
 
-    void DrawTitle(int x, int y);
+    void DrawTitle(int x, int y) const;
 
-    void DrawItems(int x, int y);
+    void DrawItems(int x, int y) const;
 
     static int ItemOpenedPosX(const Control *item);
 
-    void DrawPagesUGO(int right, int bottom);
+    void DrawPagesUGO(int right, int bottom) const;
 
-    void DrawNestingPage(int left, int bottom);
+    void DrawNestingPage(int left, int bottom) const;
     /// true, если является вложенной подстраницей страницы parent
     bool IsSubPage(const Page *parent);
 

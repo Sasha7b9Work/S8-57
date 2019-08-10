@@ -40,9 +40,9 @@ struct Menu
     /// Если true - меню находится в дополнительном режиме.
     static bool IsMinimize();
 
-    static Control *ItemUnderButton(Key::E button);
+    static const Control *ItemUnderButton(Key::E button);
 
-    static void SetItemUnderButton(Key::E button, Control *control);
+    static void SetItemUnderButton(Key::E button, const Control *control);
 
     static Page::Name::E GetNameOpenedPage();
 
@@ -68,7 +68,7 @@ struct Menu
 
     ///\brief  Здесь хранится адрес элемента меню, соответствующего функциональной клавише [1..5], если она находится в нижнем положении, и 0, 
     /// если ни одна кнопка не нажата.
-    static Control *itemUnderKey;
+    static const Control *itemUnderKey;
     /// Строка подсказки, которую надо выводить в случае включённого режима подсказок.
     static const char *stringForHint;
     /// Item, подсказку для которого нужно выводить в случае включённого режима подсказок.
