@@ -75,7 +75,7 @@ DEF_PAGE_7( pageService, // -V641 // -V1027                                     
     &bAutoSearch,                           ///< ÑÅÐÂÈÑ - Ïîèñê ñèãíàëà
     PageService::PageCalibrate::self,    ///< ÑÅÐÂÈÑ - ÊÀËÈÁÐÎÂÊÀ
     &cSoundVolume,                          ///< ÑÅÐÂÈÑ - ÇÂÓÊ
-    PageService::PageRTC::self,          ///< ÑÅÐÂÈÑ - ÂÐÅÌß
+    PageRTC::self,          ///< ÑÅÐÂÈÑ - ÂÐÅÌß
     PageService::PageInformation::self,  ///< ÑÅÐÂÈÑ - ÈÍÔÎÐÌÀÖÈß
     PageDebug::self,        ///< ÑÅÐÂÈÑ - ÎÒËÀÄÊÀ
     Page::Name::Service, nullptr, 0, 0, 0, 0

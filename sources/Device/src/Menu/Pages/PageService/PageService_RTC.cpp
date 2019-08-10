@@ -9,17 +9,17 @@ extern const PageBase pageRTC;
 extern const PageBase pageRTC_Set;
 extern const PageBase pageRTC_Correction;
 
-const Page * const PageService::PageRTC::self = (const Page *)&pageRTC;
-const Page * const PageService::PageRTC::PageCorrect::self = (const Page *)&pageRTC_Correction;
-const Page * const PageService::PageRTC::PageSet::self = (const Page *)&pageRTC_Set;
+const Page * const PageRTC::self = (const Page *)&pageRTC;
+const Page * const PageRTC::PageCorrect::self = (const Page *)&pageRTC_Correction;
+const Page * const PageRTC::PageSet::self = (const Page *)&pageRTC_Set;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 DEF_PAGE_2( pageRTC, // -V641 // -V1027                                                                                                                              //--- СЕРВИС - ВРЕМЯ ---
     "ВРЕМЯ",
     "Установка и настройка времени",
-    PageService::PageRTC::PageSet::self,         ///< СЕРВИС - ВРЕМЯ - Время
-    PageService::PageRTC::PageCorrect::self,     ///< CЕРВИС - ВРЕМЯ - Коррекция
+    PageRTC::PageSet::self,         ///< СЕРВИС - ВРЕМЯ - Время
+    PageRTC::PageCorrect::self,     ///< CЕРВИС - ВРЕМЯ - Коррекция
     Page::Name::Service_RTC,
     &PageService::self, 0, 0, 0, 0
 )
@@ -44,31 +44,31 @@ DEF_PAGE_2( pageRTC, // -V641 // -V1027                                         
 DEF_BUTTON( bSetLeft,
     "Влево",
     "Предыдущий элемент",
-    &PageService::PageRTC::PageSet::self, 0, 0, 0
+    &PageRTC::PageSet::self, 0, 0, 0
 )
 
 DEF_BUTTON( bSetRight,
     "Вправо",
     "Следующий элемент",
-    &PageService::PageRTC::PageSet::self, 0, 0, 0
+    &PageRTC::PageSet::self, 0, 0, 0
 )
 
 DEF_BUTTON( bSetUp,
     "Больше",
     "Увеличить",
-    &PageService::PageRTC::PageSet::self, 0, 0, 0
+    &PageRTC::PageSet::self, 0, 0, 0
 )
 
 DEF_BUTTON( bSetDown,
     "Меньше",
     "Уменьшить",
-    &PageService::PageRTC::PageSet::self, 0, 0, 0
+    &PageRTC::PageSet::self, 0, 0, 0
 )
 
 DEF_BUTTON( bSetPick,
     "Выбрать",
     "Выбор подсвеченного элемента",
-    &PageService::PageRTC::PageSet::self, 0, 0, 0
+    &PageRTC::PageSet::self, 0, 0, 0
 )
 
 DEF_PAGE_5( pageRTC_Set, //-V641 //-V1027
@@ -80,7 +80,7 @@ DEF_PAGE_5( pageRTC_Set, //-V641 //-V1027
     &bSetDown,
     &bSetPick,
     Page::Name::Service_RTC_Set,
-    &PageService::PageRTC::self, 0, 0, 0, 0
+    &PageRTC::self, 0, 0, 0, 0
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -97,31 +97,31 @@ DEF_PAGE_5( pageRTC_Set, //-V641 //-V1027
 DEF_BUTTON( bCorrLeft,
     "Влево",
     "Предыдущий элемент",
-    &PageService::PageRTC::PageCorrect::self, 0, 0, 0
+    &PageRTC::PageCorrect::self, 0, 0, 0
 )
 
 DEF_BUTTON( bCorrRight,
     "Вправо",
     "Следующий элемент",
-    &PageService::PageRTC::PageCorrect::self, 0, 0, 0
+    &PageRTC::PageCorrect::self, 0, 0, 0
 )
 
 DEF_BUTTON( bCorrUp,
     "Больше",
     "Увеличить",
-    &PageService::PageRTC::PageCorrect::self, 0, 0, 0
+    &PageRTC::PageCorrect::self, 0, 0, 0
 )
 
 DEF_BUTTON( bCorrDown,
     "Меньше",
     "Уменьшить",
-    &PageService::PageRTC::PageCorrect::self, 0, 0, 0
+    &PageRTC::PageCorrect::self, 0, 0, 0
 )
 
 DEF_BUTTON( bCorrPick,
     "Выбор",
     "Активировать подсвеченный элемент",
-    &PageService::PageRTC::PageCorrect::self, 0, 0, 0
+    &PageRTC::PageCorrect::self, 0, 0, 0
 )
 
 DEF_PAGE_5( pageRTC_Correction, //-V641 //-V1027
@@ -133,5 +133,5 @@ DEF_PAGE_5( pageRTC_Correction, //-V641 //-V1027
     &bCorrDown,
     &bCorrPick,
     Page::Name::Service_RTC_Correct,
-    &PageService::PageRTC::self, 0, 0, 0, 0
+    &PageRTC::self, 0, 0, 0, 0
 )
