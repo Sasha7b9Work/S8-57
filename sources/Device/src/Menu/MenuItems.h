@@ -172,6 +172,8 @@ public:
     /// true, если €вл€етс€ вложенной подстраницей страницы parent
     bool IsSubPage(const Page *parent);
 
+    void ShortPress() const;
+
     struct Name
     {
         enum E
@@ -251,7 +253,9 @@ public:
         } value;
     };
 
-    Page::Name::E GetName() const;     ///< ¬озвращает им€ страницы page
+    /// ¬озвращает им€ страницы page
+    Page::Name::E GetName() const;
+
 };
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// Button ///
