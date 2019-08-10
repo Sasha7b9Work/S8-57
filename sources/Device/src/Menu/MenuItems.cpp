@@ -405,22 +405,7 @@ void Control::ShortPress() const
     }
     else if(type == Control::Type::GovernorColor)
     {
-        if(IsActive())
-        {
-            GovernorColor *governor = (GovernorColor *)this;
-            if(Menu::OpenedItem() == this)
-            {
-                Math::CircleIncrease<int8>(&governor->ct->currentField, 0, 3);
-            }
-            else
-            {
-                if(!IsCurrentItem())
-                {
-                    SetCurrent(true);
-                }
-                Open(!IsOpened());
-            }
-        }
+        ((GovernorColor *)this)->ShortPress();
     }
     else if(type == Control::Type::ChoiceReg)
     {
@@ -616,5 +601,25 @@ void TimeControl::ShortPress() const
     else
     {
         SelectNextPosition();
+    }
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void GovernorColor::ShortPress() const
+{
+    if (IsActive())
+    {
+        if (Menu::OpenedItem() == this)
+        {
+            Math::CircleIncrease<int8>(&ct->currentField, 0, 3);
+        }
+        else
+        {
+            if (!IsCurrentItem())
+            {
+                SetCurrent(true);
+            }
+            Open(!IsOpened());
+        }
     }
 }

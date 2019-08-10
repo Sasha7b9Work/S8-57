@@ -441,6 +441,7 @@ public:
     pFuncVV     funcOnChanged;      ///< Ёту функцию нужно вызывать после изменени€ значени€ элемента.
     void ChangeValue(int delta);    ///< »зменить €ркость цвета в governor.
     void Draw(int x, int y, bool opened);
+    void ShortPress() const;
 private:
     void DrawOpened(int x, int y);
     void DrawClosed(int x, int y);
