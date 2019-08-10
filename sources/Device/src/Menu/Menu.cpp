@@ -39,11 +39,10 @@ const Control *Menu::pressedItem = nullptr;
 const char    *Menu::stringForHint = nullptr;
    Control    *Menu::itemHint = nullptr;
 const Page    *Menu::mainPage = nullptr;
+const Control *Menu::itemForButton[Key::Number];
 
 /// true, если нужно сохранять копию экрана на флешку
 static bool needSaveScreen = false;
-/// Элементы управления, назначенные в данный момент соответствующим кнопкам
-static const Control *underButton[Key::Number];
 /// Последний открытый контрол на дереве странице page
 static Control *LastOpened(Page *page);
 /// Обработка события таймера автоматического сокрытия меню
@@ -714,13 +713,7 @@ void Menu::SaveSettings()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-const Control *Menu::ItemUnderButton(Key::E button)
-{
-    return underButton[button];
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Menu::SetItemUnderButton(Key::E button, const Control *control)
 {
-    underButton[button] = control;
+    itemForButton[button] = control;
 }

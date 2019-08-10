@@ -366,7 +366,7 @@ void Page::Draw(int x, int y, bool opened) const
             Control *item = Item(posCurItem);
             for (int i = 0; i < 5; i++)
             {
-                if (Menu::ItemUnderButton((Key::E)(Key::F1 + i)) != item)
+                if (Menu::itemForButton[(Key::E)(Key::F1 + i)] != item)
                 {
                     Menu::SetItemUnderButton((Key::E)(Key::F1 + i), 0);
                 }

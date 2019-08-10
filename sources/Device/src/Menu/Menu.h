@@ -30,8 +30,6 @@ struct Menu
     /// ¬озвращает адрес открытого элемента меню
     static Control *OpenedItem();
 
-    static const Control *ItemUnderButton(Key::E button);
-
     static void SetItemUnderButton(Key::E button, const Control *control);
 
     static Page::Name::E GetNameOpenedPage();
@@ -60,6 +58,8 @@ struct Menu
     static Control *itemHint;
     /// “екуща€ главна€ страница
     static const Page *mainPage;
+    /// Ёлементы управлени€, назначенные в данный момент соответствующим кнопкам
+    static const Control *itemForButton[Key::Number];
 
     struct Title
     {

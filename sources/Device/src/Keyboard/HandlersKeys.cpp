@@ -309,7 +309,7 @@ static void FX_Release()
 {
     if (Menu::IsShown())
     {
-        const Control *control = Menu::ItemUnderButton(event.key);
+        const Control *control = Menu::itemForButton[event.key];
         if (control)
         {
             control->ShortPress();
@@ -322,7 +322,7 @@ static void FX_Long()
 {
     if (Menu::IsShown())
     {
-        const Control *control = Menu::ItemUnderButton(event.key);
+        const Control *control = Menu::itemForButton[event.key];
         if (control)
         {
             control->LongPress();
