@@ -387,6 +387,10 @@ void Control::ShortPress() const
     {
         ((Choice *)this)->ShortPress();
     }
+    else if (type == Control::Type::ChoiceReg)
+    {
+        ((Choice *)this)->ShortPress();
+    }
     else if(type == Control::Type::Button)
     {
         ((Button *)this)->ShortPress();
@@ -407,14 +411,9 @@ void Control::ShortPress() const
     {
         ((GovernorColor *)this)->ShortPress();
     }
-    else if(type == Control::Type::ChoiceReg)
-    {
-        ((Choice *)this)->ShortPress();
-    }
     else if(type == Control::Type::DrawButton)
     {
-        SButton *button = (SButton *)this;
-        button->funcOnPress();
+        ((SButton *)this)->ShortPress();
     }
     else
     {
@@ -634,8 +633,7 @@ void Choice::ShortPress() const
             ChangeIndex(1);
         }
     }
-
-    if (IS_CHOICE_REG(this))
+    else if (IS_CHOICE_REG(this))
     {
         if (IsActive())
         {
@@ -646,4 +644,10 @@ void Choice::ShortPress() const
             Change(false);
         }
     }
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void SButton::ShortPress() const
+{
+    funcOnPress();
 }
