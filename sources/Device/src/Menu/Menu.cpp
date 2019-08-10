@@ -51,8 +51,6 @@ static void OnTimerAutoHide();
 static void OnTimerStrNaviAutoHide();
 
 static void ProcessButtonForHint(Key::E button);
-
-static void ResetItemsUnderButton();
 /// Возвращает true, если данная кнопка обрабатыватся в данном режиме
 static bool EventIsProcessedInCurrentMode(const KeyEvent *event);
 /// Время последнего нажатия кнопки. Нужно для того, чтобы периодически сохранять настройки
@@ -635,7 +633,11 @@ void Menu::Draw()
 {
     if (Menu::IsShown())
     {
-        ResetItemsUnderButton();
+        for (int i = 0; i < Key::Number; i++)
+        {
+            Menu::itemForButton[(Key::E)i] = 0;
+        }
+
         Control *item = OpenedItem();
         if (Menu::IsShown())
         {
@@ -680,15 +682,6 @@ void Menu::Draw()
         {
             // ничего не делаем
         }
-    }
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void ResetItemsUnderButton()
-{
-    for (int i = 0; i < Key::Number; i++)
-    {
-        Menu::itemForButton[(Key::E)i] = 0;
     }
 }
 
