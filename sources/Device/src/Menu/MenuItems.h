@@ -343,7 +343,7 @@ public:
     /// Изменяет значение в текущей позиции при раскрытом элементе.
     void ChangeValue(int16 delta);
     /// При открытом элементе переставляет курсор на следующую позицию.
-    void NextPosition();
+    void NextPosition() const;
     /// При открытом элементе переставляет курсор не предыдущую позицию
     void PrevPosition();
 
@@ -361,11 +361,13 @@ public:
 
     void SetValue(int16 v);
 
+    void ShortPress() const;
+
 private:
 
     void DrawLowPart(int x, int y, bool shade);
     /// Возвращает число знакомест в поле для ввода элемента governor. Зависит от максимального значения, которое может принимать governor.
-    uint  NumDigits();
+    uint  NumDigits() const;
 };
 
 

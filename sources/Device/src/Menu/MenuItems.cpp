@@ -397,18 +397,7 @@ void Control::ShortPress() const
     }
     else if(type == Control::Type::Governor)
     {
-        if(IsActive())
-        {
-            Governor *governor = (Governor *)this;
-            if(Menu::OpenedItem() == this)
-            {
-                governor->NextPosition();
-            }
-            else
-            {
-                governor->SetCurrent(!IsCurrentItem());
-            }
-        }
+        ((Governor *)this)->ShortPress();
     }
     else if(type == Control::Type::Time)
     {

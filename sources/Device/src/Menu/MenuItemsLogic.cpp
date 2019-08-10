@@ -254,7 +254,7 @@ void Governor::ChangeValue(int16 delta)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Governor::NextPosition()
+void Governor::NextPosition() const
 {
     if (Menu::OpenedItem() == this)
     {
@@ -272,7 +272,7 @@ void Governor::PrevPosition()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-uint Governor::NumDigits()
+uint Governor::NumDigits() const
 {
     int min = Integer(Math::Abs(minValue)).NumDigits();
     int max = Integer(Math::Abs(maxValue)).NumDigits();
@@ -459,4 +459,20 @@ void Page::ShortPress() const
     }
 
     SetAsCurrent();
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Governor::ShortPress() const
+{
+    if (IsActive())
+    {
+        if (Menu::OpenedItem() == this)
+        {
+            NextPosition();
+        }
+        else
+        {
+            SetCurrent(!IsCurrentItem());
+        }
+    }
 }
