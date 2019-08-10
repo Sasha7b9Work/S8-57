@@ -153,19 +153,29 @@ void Device::State::SetMode(Mode::E mode)
 
         if (InModeOsci())
         {
+            Keyboard::Unlock();
             Osci::Init();
         }
         else if (InModeTester())
         {
+            static const Key::E keys[] = {
+                Key::RangeMoreA, Key::RangeLessA, Key::RShiftMoreA, Key::RShiftLessA,
+                Key::RangeMoreB, Key::RangeLessB, Key::RShiftMoreB, Key::RShiftLessB,
+                Key::F1, Key::F2, Key::F3, Key::F4, Key::F5,
+                Key::Start, Key::Enter, Key::None };
+
+            Keyboard::Lock(keys);
             Tester::Init();
             Tester::Enable();
         }
         else if (InModeMultimeter())
         {
+
             Multimeter::Init();
         }
         else if (InModeRecorder())
         {
+            Keyboard::Unlock();
             Recorder::Init();
         }
         else

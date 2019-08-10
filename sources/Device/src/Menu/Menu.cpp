@@ -264,18 +264,6 @@ static bool EventIsProcessedInCurrentMode(const KeyEvent *event)
     Key::E key = event->key;
     TypePress::E type = event->type;
 
-    if (Device::State::InModeTester())
-    {
-        if (Key(key).IsControlSignal() || 
-            Key(key).IsFunctional() || 
-            key == Key::Start ||
-            (key == Key::Enter && !TypePress(type).IsLong()))
-        {
-            return true;
-        }
-        return false;
-    }
-    
     if (Device::State::InModeMultimeter())
     {
         if (Key(key).IsFunctional() ||          // мультиметр реагирует на функциональные кнопки
