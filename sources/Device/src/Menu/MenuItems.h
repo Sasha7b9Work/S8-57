@@ -2,23 +2,17 @@
 #include "Display/Display.h"
 #include "Display/Colors.h"
 #include "MenuItemsDefs.h"
-//#include "Keyboard/Keyboard.h"
 
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/*
+    Структуры вида XxxBase испльзутся ТОЛЬКО для инициализации структур
+*/
 
-/** @addtogroup Menu
- *  @{
- *  @defgroup MenuItems Menu Items
- *  @{
- */
 
 extern int8 gCurDigit;
 
 #define MENU_ITEMS_ON_DISPLAY       5   ///< Сколько пунктов меню помещается на экране по вертикали.
 
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /// Общая часть для всех типов элементов меню
 #define COMMON_PART_MENU_ITEM                                                                           \
     uint8           type;           /* Тип итема */                                                     \
@@ -500,7 +494,3 @@ public:
 typedef void * pVOID;
 #define MAX_NUM_ITEMS_IN_PAGE 15
 typedef pVOID arrayItems[MAX_NUM_ITEMS_IN_PAGE];
-
-    
-/** @}  @}
- */
