@@ -143,9 +143,9 @@ public:
     /// Возвращает номер текущей подстраницы (той, которая индицируется в данный момент)
     int8 CurrentSubPage() const;
     /// Установить текущей данную подстраницу
-    void SetCurrentSubPage(int8 pos);
+    void SetCurrentSubPage(int8 pos) const;
     ///< Устанавливает позицию активного пункта меню
-    void SetPosActItem(int8 pos);
+    void SetPosActItem(int8 pos) const;
     ///< Возвращает указатель на заданный элемент страницы
     Control *Item(int numElement) const;
     /// \todo Возвращает позицию первого элемента страницы по адресу page на экране. Если текущая подстраница 0, это будет 0, если текущая 
@@ -271,7 +271,7 @@ class Button : public Control
 public:
     pFuncVV     funcOnPress;        ///< Функция, которая вызывается при нажатии на кнопку.
     pFuncVII    funcForDraw;        ///< Функция будет вызываться во время отрисовки кнопки.
-    void Draw(int x, int y);
+    void Draw(int x, int y) const;
     /// Обработчик funcOnPress
     void HandlePress() { if (funcOnPress) { funcOnPress(); } }
 };
@@ -303,8 +303,8 @@ public:
     pFuncVII                    funcForDraw;    ///< Эта функция вызывается для отрисовки кнопки в месте с координатами x, y.
     const StructHelpDrawButton *hintUGO; 
     int                         numHints;
-    void Draw(int x, int y);
-    void DrawHints(int x, int y, int width);
+    void Draw(int x, int y) const;
+    void DrawHints(int x, int y, int width) const;
 };
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// Governor ///

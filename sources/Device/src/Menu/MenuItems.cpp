@@ -542,13 +542,13 @@ int8 Page::CurrentSubPage() const
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Page::SetPosActItem(int8 pos)
+void Page::SetPosActItem(int8 pos) const
 {
     MENU_POS_ACT_ITEM(name) = pos;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Page::SetCurrentSubPage(int8 pos)
+void Page::SetCurrentSubPage(int8 pos) const
 {
     set.menu_currentSubPage[name] = pos;
 }

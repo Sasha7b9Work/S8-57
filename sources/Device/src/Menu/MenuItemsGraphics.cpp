@@ -310,7 +310,7 @@ void Choice::DrawClosed(int x, int y)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Button::Draw(int x, int y)
+void Button::Draw(int x, int y) const
 {
     bool pressed = IsPressed();
     bool shade = IsShade() || !IsActive();
@@ -331,7 +331,7 @@ void Button::Draw(int x, int y)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void SButton::Draw(int x, int y)
+void SButton::Draw(int x, int y) const
 {
     x += 22;
     y += 3;
@@ -761,7 +761,7 @@ void Page::DrawNestingPage(int left, int bottom) const
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void SButton::DrawHints(int x, int y, int width)
+void SButton::DrawHints(int x, int y, int width) const
 {
     if (numHints == 0)
     {
