@@ -9,7 +9,6 @@
 #include "Menu/Pages/Include/PageMemory.h"
 #include "Utils/Math.h"
 #include "Utils/Values.h"
-
 #include "Osci/Osci.h"
 #include "Hardware/RAM.h"
 #include "Osci/Osci_Storage.h"
@@ -17,7 +16,7 @@
 
 using namespace Display::Primitives;
 
-extern const PageBase pageRAM;
+extern const PageDef pageRAM;
 
 const Page * const PageRAM::self = (const Page *)&pageRAM;
 

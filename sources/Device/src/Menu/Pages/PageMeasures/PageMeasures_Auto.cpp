@@ -6,7 +6,7 @@
 #include "Menu/Pages/Include/PageMeasures.h"
 
 
-extern const PageBase pageAuto;
+extern const PageDef pageAuto;
 
 const Page * const PageMeasuresAuto::self = (const Page *)&pageAuto;
 

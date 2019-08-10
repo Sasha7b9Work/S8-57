@@ -1,14 +1,11 @@
 #include "defines.h"
 #include "Hardware/Battery.h"
 #include "Menu/Pages/Include/PageService.h"
-
 #include "Settings/Settings.h"
 
 
-extern const PageBase pageBattery;
+extern const PageDef pageBattery;
 
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 const Page * const PageService::PageBattery::self = (const Page *)&pageBattery;
 
 

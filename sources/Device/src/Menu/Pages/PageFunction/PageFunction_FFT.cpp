@@ -6,8 +6,8 @@
 #include "Menu/Pages/Include/PageFunction.h"
 
 
-extern const PageBase ppFFT;
-extern const PageBase pppFFT_Cursors;
+extern const PageDef ppFFT;
+extern const PageDef pppFFT_Cursors;
 
 const Page * const PageFFT::self = (const Page *)&ppFFT;
 const Page * const PageFFT::PageCursors::self = (const Page *)&pppFFT_Cursors;

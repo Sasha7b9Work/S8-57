@@ -7,9 +7,8 @@
 #include "Settings/Settings.h"
 
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-extern const PageBase pageConsole;
-extern const PageBase pageRegisters;
+extern const PageDef pageConsole;
+extern const PageDef pageRegisters;
 
 const Page * const PageDebug::PageConsole::self = (const Page *)&pageConsole;
 const Page * const PageDebug::PageRegisters::self = (const Page *)&pageRegisters;

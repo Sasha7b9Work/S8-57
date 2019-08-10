@@ -6,7 +6,7 @@ struct PageMeasures
 {
     static const Page * const self;
 
-    static const PageBase *GetPageFrequencyCounter();
+    static const Page *GetPageFrequencyCounter();
 };
 
 

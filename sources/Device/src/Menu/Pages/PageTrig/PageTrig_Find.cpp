@@ -6,7 +6,7 @@
 
 using namespace Osci::Settings;
 
-extern const PageBase pageFind;
+extern const PageDef pageFind;
 
 const Page * const PageTrig::PageFind::self = (const Page *)&pageFind;
 

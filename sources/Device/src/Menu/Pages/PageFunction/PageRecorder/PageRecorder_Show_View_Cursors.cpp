@@ -3,7 +3,7 @@
 #include "Menu/Pages/Include/PageFunction.h"
 
 
-extern const PageBase pageRecorderCursors;
+extern const PageDef pageRecorderCursors;
 
 const Page * const PageRecorder::PageShow::PageView::PageCursors::self = (const Page *)&pageRecorderCursors;
 

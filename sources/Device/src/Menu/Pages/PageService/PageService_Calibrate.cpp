@@ -4,7 +4,7 @@
 #include "Hardware/Timer.h"
 
 
-extern const PageBase pageCalibrate;
+extern const PageDef pageCalibrate;
 
 const Page * const PageService::PageCalibrate::self = (const Page *)&pageCalibrate;
 

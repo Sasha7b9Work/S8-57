@@ -5,7 +5,7 @@
 #include "Settings/Settings.h"
 
 
-extern const PageBase pageView;
+extern const PageDef pageView;
 
 const Page * const PageRecorder::PageShow::PageView::self = (const Page *)&pageView;
 

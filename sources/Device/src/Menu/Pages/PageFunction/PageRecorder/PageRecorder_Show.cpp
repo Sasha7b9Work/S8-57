@@ -6,7 +6,7 @@
 #include "Recorder/Recorder_Display.h"
 
 
-extern const PageBase pageShow;
+extern const PageDef pageShow;
 
 const Page * const PageRecorder::PageShow::self = (const Page *)&pageShow;
 

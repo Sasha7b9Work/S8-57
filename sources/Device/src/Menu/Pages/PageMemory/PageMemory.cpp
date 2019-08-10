@@ -24,11 +24,11 @@
 using namespace Display::Primitives;
 using namespace Osci::Settings;
 
-extern const PageBase pageMemory;
-extern const PageBase ppDrive;
-extern const PageBase pppDrive_Manager;
-extern const PageBase pppDrive_Mask;
-extern const PageBase pSetName;
+extern const PageDef pageMemory;
+extern const PageDef ppDrive;
+extern const PageDef pppDrive_Manager;
+extern const PageDef pppDrive_Mask;
+extern const PageDef pSetName;
 
 const Page * const PageMemory::self = (const Page *)&pageMemory;
 const Page * const PageSetName::self = (const Page *)&pSetName;

@@ -15,8 +15,8 @@
 #include <cstring>
 
 
-extern const PageBase pChanA;
-extern const PageBase pChanB;
+extern const PageDef pChanA;
+extern const PageDef pChanB;
 
 const Page * const PageChannelA::self = (const Page *)&pChanA;
 const Page * const PageChannelB::self = (const Page *)&pChanB;

@@ -5,8 +5,8 @@
 #include "Device.h"
 
 
-extern const PageBase pageMultimeter;
-extern const PageBase pageCalibration;
+extern const PageDef pageMultimeter;
+extern const PageDef pageCalibration;
 
 const Page * const PageMultimeter::self = (const Page *)&pageMultimeter;
 const Page * const PageMultimeter::PageCalibration::self = (const Page *)&pageCalibration;
@@ -177,7 +177,7 @@ void PageMultimeter::Init()
 
 void PageMultimeter::OnChanged_Mode(bool)
 {
-    PageBase *page = (PageBase *)&pageMultimeter;
+    Page *page = (Page *)&pageMultimeter;
 
     Control **items = (Control **)page->items;
 

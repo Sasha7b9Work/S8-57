@@ -16,7 +16,7 @@
 using namespace Display::Primitives;
 using namespace Osci::Settings;
 
-extern const PageBase pageMath;
+extern const PageDef pageMath;
 
 const Page * const PageMeasuresMath::self = (const Page *)&pageMath;
 

@@ -4,7 +4,7 @@
 #include "Settings/Settings.h"
 
 
-extern const PageBase ppFreqMeter;
+extern const PageDef ppFreqMeter;
 
 const Page * const PageFrequencyCounter::self = (const Page *)&ppFreqMeter;
 

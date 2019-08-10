@@ -22,7 +22,7 @@
 using namespace Display::Primitives;
 using namespace Osci::Settings;
 
-extern const PageBase pageService;
+extern const PageDef pageService;
 
 const Page * const PageService::self = (const Page *)&pageService;
 

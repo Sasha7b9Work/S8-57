@@ -11,7 +11,7 @@
 
 using namespace Display::Primitives;
 
-extern const PageBase pHelp;
+extern const PageDef pHelp;
 
 const Page * const PageHelp::self = (const Page *)&pHelp;
 

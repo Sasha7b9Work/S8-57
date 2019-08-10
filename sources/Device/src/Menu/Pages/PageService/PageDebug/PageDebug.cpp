@@ -22,13 +22,13 @@ using namespace Display::Primitives;
 using namespace Osci::Settings;
 
 extern const Page mainPage;
-extern const PageBase pageDebug;
-extern const PageBase ppADC;
-extern const PageBase pppADC_Balance;
-extern const PageBase pppADC_Stretch;
-extern const PageBase pppADC_Shift;
-extern const PageBase ppSettings;
-extern const PageBase ppSerialNumber;
+extern const PageDef pageDebug;
+extern const PageDef ppADC;
+extern const PageDef pppADC_Balance;
+extern const PageDef pppADC_Stretch;
+extern const PageDef pppADC_Shift;
+extern const PageDef ppSettings;
+extern const PageDef ppSerialNumber;
 
 const Page * const PageDebug::self = (const Page *)&pageDebug;
 const Page * const PageDebug::PageADC::self = (const Page *)&ppADC;

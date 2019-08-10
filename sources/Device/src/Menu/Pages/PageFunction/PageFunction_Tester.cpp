@@ -6,7 +6,7 @@
 #include "Tester/Tester_Settings.h"
 
 
-extern const PageBase pageTester;
+extern const PageDef pageTester;
 
 const Page * const PageTester::self = (const Page *)&pageTester;
 
@@ -110,7 +110,7 @@ DEF_PAGE_5( pageTester, // -V641
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void PageTester::OnChanged_Control(bool)
 {
-    PageBase *page = (PageBase *)&pageTester;
+    Page *page = (Page *)&pageTester;
 
     Control **items = (Control **)page->items;
 

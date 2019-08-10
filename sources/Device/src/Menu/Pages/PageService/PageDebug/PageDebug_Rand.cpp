@@ -9,7 +9,7 @@
 
 using namespace Osci::Settings;
 
-extern const PageBase pageRand;
+extern const PageDef pageRand;
 
 const Page * const PageDebug::PageRand::self = (const Page *)&pageRand;
 

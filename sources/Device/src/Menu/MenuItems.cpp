@@ -369,10 +369,10 @@ bool Control::ProcessKey(KeyEvent event)
 #define CURRENT_ITEM_IS_OPENED return _GET_BIT(MENU_POS_ACT_ITEM(name), 7) == 1
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-bool PageBase::CurrentItemIsOpened() const
-{
-    return ((Page *)this)->CurrentItemIsOpened();
-}
+//bool Page::CurrentItemIsOpened() const
+//{
+//    return ((Page *)this)->CurrentItemIsOpened();
+//}
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 bool Page::CurrentItemIsOpened() const

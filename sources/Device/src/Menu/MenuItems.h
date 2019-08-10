@@ -5,7 +5,7 @@
 
 
 /*
-    Структуры вида XxxBase испльзутся ТОЛЬКО для инициализации структур
+    Структуры вида XxxDef испльзутся ТОЛЬКО для инициализации структур
 */
 
 
@@ -110,7 +110,7 @@ public:
 typedef bool(*pFuncBKE)(KeyEvent);
 
 /// Описывает страницу меню.
-class PageBase
+class PageDef
 {
 public:
     COMMON_PART_MENU_ITEM;
