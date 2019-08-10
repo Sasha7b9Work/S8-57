@@ -40,7 +40,7 @@ int8 gCurDigit = 0;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void Choice::StartChange(int delta)
+void Choice::StartChange(int delta) const
 {
     if (tsChoice.address == 0)
     {
@@ -56,7 +56,7 @@ void Choice::StartChange(int delta)
         }
         else
         {
-            tsChoice.address = this;
+            tsChoice.address = (void *)this;
             tsChoice.timeStart = TIME_MS;
             tsChoice.dir = delta > 0 ? INCREASE : DECREASE;
         }
@@ -113,7 +113,7 @@ float Choice::Step() //-V2506
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Choice::ChangeIndex(int delta)
+void Choice::ChangeIndex(int delta) const
 {
     int index = *cell;
     if (delta > 0)
@@ -136,12 +136,6 @@ void Choice::ChangeIndex(int delta)
     Change(IsActive());
     Beeper::GovernorChangedValue();
     Osci::Display::SetFlagRedraw();
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-int Choice::NumSubItems()
-{
-    return num;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -423,4 +417,21 @@ void GovernorColor::ChangeValue(int delta)
     }
 
     Color::InitGlobalColors();
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Choice::ShortPress() const
+{
+    if (!IsActive())
+    {
+        Change(false);
+    }
+    else if (!IsOpened())
+    {
+        StartChange(1);
+    }
+    else
+    {
+        ChangeIndex(1);
+    }
 }

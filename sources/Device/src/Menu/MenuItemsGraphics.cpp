@@ -362,8 +362,8 @@ void Page::Draw(int x, int y, bool opened) const
     {
         if (CurrentItemIsOpened())
         {
-            int8 posCurItem = PosCurrentItem();
-            Control *item = Item(posCurItem);
+            Control *item = Item(PosCurrentItem());
+
             for (int i = 0; i < 5; i++)
             {
                 if (Menu::itemForButton[(Key::E)(Key::F1 + i)] != item)
@@ -371,6 +371,7 @@ void Page::Draw(int x, int y, bool opened) const
                     Menu::itemForButton[(Key::E)(Key::F1 + i)] = nullptr;
                 }
             }
+
             x = ItemOpenedPosX(item);
             y = Menu::Y0() - item->HeightOpened() + Menu::Item::HEIGHT + 1;
 

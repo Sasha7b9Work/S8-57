@@ -41,7 +41,7 @@ struct Menu
     /// Закрыть открытый элемент меню
     static void CloseOpenedItem();
 
-    static void SetItemForHint(void *item);
+    static void SetItemForHint(const Control *item);
 
     static void SaveSettings();
     /// С какоей позиции Y рисовать меню. Позиция берётся без учёта заголовка

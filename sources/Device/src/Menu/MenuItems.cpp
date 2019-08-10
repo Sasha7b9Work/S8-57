@@ -391,19 +391,7 @@ void Control::ShortPress() const
 {
     if(type == Control::Type::Choice)
     {
-        Choice *choice = (Choice *)this;
-        if(!IsActive())
-        {
-            choice->Change(false);
-        }
-        else if(!IsOpened())
-        {
-            choice->StartChange(1);
-        }
-        else
-        {
-            choice->ChangeIndex(1);
-        }
+        ((Choice *)this)->ShortPress();
     }
     else if(type == Control::Type::Button)
     {

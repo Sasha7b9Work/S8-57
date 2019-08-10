@@ -386,13 +386,13 @@ public:
     pFuncVB     funcOnChanged;  ///< Функция должна вызываться после изменения значения элемента.
     pFuncVII    funcForDraw;    ///< Функция вызывается после отрисовки элемента. 
     /// Запускает процесс изменения значения на delta
-    void  StartChange(int delta);
+    void  StartChange(int delta) const;
     /// Рассчитывает следующий кадр анимации.
     float Step();
     /// Изменяет значение choice в зависимости от величины и знака delta.
-    void  ChangeIndex(int delta);
+    void  ChangeIndex(int delta) const;
     /// Возвращает количество вариантов выбора в элементе по адресу choice
-    int   NumSubItems();
+    int   NumSubItems() const { return num; };
 
     bool ProcessKey(KeyEvent event);
 
@@ -414,7 +414,9 @@ public:
 
     char GetSymbol();
     /// Вызывает функцию funcOnChanged, если таковая имеется
-    void Change(bool active) { if (funcOnChanged) { funcOnChanged(active); } }
+    void Change(bool active) const { if (funcOnChanged) { funcOnChanged(active); } }
+
+    void ShortPress() const;
 };
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// GovernorColor ///

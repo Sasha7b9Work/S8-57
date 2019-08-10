@@ -649,7 +649,7 @@ void Menu::Draw()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Menu::SetItemForHint(void *item)
+void Menu::SetItemForHint(const Control *item)
 {
     Menu::stringForHint = 0;
     Menu::itemHint = (Control *)item;
