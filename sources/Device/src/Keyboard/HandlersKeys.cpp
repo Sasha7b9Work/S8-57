@@ -483,7 +483,7 @@ static void Display_Release()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void ShowHidePage(const Page *page)
 {
-    if (Menu::OpenedPage() == page)
+    if (Menu::OpenedItem() == page)
     {
         Menu::Show(!Menu::IsShown());
     }

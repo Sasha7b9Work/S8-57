@@ -40,7 +40,6 @@ struct Menu
 
     static void SaveRow(int row);
 
-    static Page *OpenedPage();
     /// Возвращает адрес текущего элемента меню (текущим, как правило, является элемент, кнопка которого была нажата последней
     static Control *CurrentItem();
     /// Закрыть открытый элемент меню
