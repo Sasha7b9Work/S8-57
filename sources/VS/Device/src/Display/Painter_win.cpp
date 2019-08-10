@@ -200,10 +200,10 @@ static void CreateButtons(Frame *frame)
         { Key::Function, Key::Display, Key::Memory, Key::Measure, Key::Service }
     };
 
-    int x0 = 5;
+    int x0 = 37;
     int y0 = Frame::HEIGHT + 10;
 
-    int dX = 5;
+    int dX = 68;
     int dY = 5;
 
     int width = 58;
@@ -221,6 +221,8 @@ static void CreateButtons(Frame *frame)
     }
 
     // Рисуем кнопки управления
+
+    dX = 5;
 
     width = height = 25;
     x0 = 160;
