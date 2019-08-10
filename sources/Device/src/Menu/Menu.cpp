@@ -51,8 +51,6 @@ static void OnTimerAutoHide();
 static void OnTimerStrNaviAutoHide();
 
 static void ProcessButtonForHint(Key::E button);
-/// Возвращает true, если данная кнопка обрабатыватся в данном режиме
-static bool EventIsProcessedInCurrentMode(const KeyEvent *event);
 /// Время последнего нажатия кнопки. Нужно для того, чтобы периодически сохранять настройки
 static uint timeLastPressedButton = MAX_UINT;
 
@@ -238,10 +236,7 @@ void Menu::Update()
             continue;                                           // то выходим
         }
 
-        if(EventIsProcessedInCurrentMode(&event))               // Если событие обрабатывается в данном режиме
-        {
-            Handlers::Process(event);                           // То обрабатываем его
-        }
+        Handlers::Process(event);                           // То обрабатываем его
     }
 
     if (needSaveScreen)
@@ -256,26 +251,6 @@ void Menu::Update()
 void Menu::SaveScreenToDrive()
 {
     needSaveScreen = true;
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static bool EventIsProcessedInCurrentMode(const KeyEvent *event)
-{
-    Key::E key = event->key;
-    TypePress::E type = event->type;
-
-    if (Device::State::InModeMultimeter())
-    {
-        if (Key(key).IsFunctional() ||          // мультиметр реагирует на функциональные кнопки
-            Key(key).IsArrow() ||               // на стрелки
-            (key == Key::Enter && !TypePress(type).IsLong()))
-        {
-            return true;
-        }
-        return false;
-    }
-
-    return true;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

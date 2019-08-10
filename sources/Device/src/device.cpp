@@ -158,11 +158,14 @@ void Device::State::SetMode(Mode::E mode)
         }
         else if (InModeTester())
         {
-            static const Key::E keys[] = {
+            static const Key::E keys[] =
+            {
                 Key::RangeMoreA, Key::RangeLessA, Key::RShiftMoreA, Key::RShiftLessA,
                 Key::RangeMoreB, Key::RangeLessB, Key::RShiftMoreB, Key::RShiftLessB,
                 Key::F1, Key::F2, Key::F3, Key::F4, Key::F5,
-                Key::Start, Key::Enter, Key::None };
+                Key::Left, Key::Right, Key::Up, Key::Down,
+                Key::Start, Key::Enter, Key::None
+            };
 
             Keyboard::Lock(keys);
             Tester::Init();
@@ -170,7 +173,14 @@ void Device::State::SetMode(Mode::E mode)
         }
         else if (InModeMultimeter())
         {
+            static const Key::E keys[] =
+            {
+                Key::F1, Key::F2, Key::F3, Key::F4, Key::F5,
+                Key::Left, Key::Right, Key::Up, Key::Down,
+                Key::Enter, Key::None
+            };
 
+            Keyboard::Lock(keys);
             Multimeter::Init();
         }
         else if (InModeRecorder())
