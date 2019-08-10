@@ -504,7 +504,7 @@ static Control *LastOpened(Page *page)
 {
     if (page == nullptr)
     {
-        return nullptr;
+        return &emptyControl;
     }
 
     if (page->CurrentItemIsOpened())

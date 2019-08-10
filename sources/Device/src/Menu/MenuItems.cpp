@@ -11,7 +11,7 @@ extern int8 gCurDigit;
 
 #define NAME_FROM_INDEX(index) (names[index])
 
-const Control emptyControl{ Control::Type::None };
+Control emptyControl{ Control::Type::None };
 
 
 String Choice::NameCurrentSubItem() const
@@ -58,7 +58,7 @@ Control *Page::Item(int numElement) const
 {
     if (numElement >= num)
     {
-        return 0;
+        return nullptr;
     }
 
     return (Control *)items[numElement + (isPageSB ? 1 : 0)];
@@ -650,4 +650,10 @@ void Choice::ShortPress() const
 void SButton::ShortPress() const
 {
     funcOnPress();
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+const Control *Page::ItemForFuncKey(Key::E key)
+{
+    return Item(PosItemOnLeft() + key - Key::F1);
 }

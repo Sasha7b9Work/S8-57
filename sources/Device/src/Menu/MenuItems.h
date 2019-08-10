@@ -173,6 +173,8 @@ public:
     bool IsSubPage(const Page *parent);
 
     void ShortPress() const;
+    /// Возвращает адрес элемента, соответствующего функциональной кнопкке
+    const Control *ItemForFuncKey(Key::E key);
 
     struct Name
     {
@@ -500,4 +502,4 @@ typedef void * pVOID;
 #define MAX_NUM_ITEMS_IN_PAGE 15
 typedef pVOID arrayItems[MAX_NUM_ITEMS_IN_PAGE];
 
-extern const Control emptyControl;
+extern Control emptyControl;
