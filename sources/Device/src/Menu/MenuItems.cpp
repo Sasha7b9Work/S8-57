@@ -11,7 +11,7 @@ extern int8 gCurDigit;
 
 #define NAME_FROM_INDEX(index) (names[index])
 
-Control emptyControl{ Control::Type::None };
+Control emptyControl = { Control::Type::None };
 
 
 String Choice::NameCurrentSubItem() const

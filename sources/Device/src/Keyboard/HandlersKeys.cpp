@@ -309,7 +309,6 @@ static void FX_Release()
 {
     if (Menu::IsShown())
     {
-        //Menu::itemForButton[event.key]->ShortPress();
         Menu::ItemForFuncKey(event.key)->ShortPress();
     }
 }
@@ -319,7 +318,6 @@ static void FX_Long()
 {
     if (Menu::IsShown())
     {
-        //Menu::itemForButton[event.key]->LongPress();
         Menu::ItemForFuncKey(event.key)->LongPress();
     }
 }

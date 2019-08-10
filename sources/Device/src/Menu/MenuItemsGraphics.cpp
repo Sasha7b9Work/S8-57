@@ -32,30 +32,6 @@ static void DrawValueWithSelectedPosition(int x, int y, int value, uint numDigit
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////q
-///Возвращает функциональную кнопку, находящуюся на данном X.
-/// Расстояние между левой и правой границами выведенного меню делится на пять раввных промежутков и возвращается название той кнопки, которая
-/// попадает в даннуй промежуток.
-static Key::E GetFuncButtonFromX(int _x)
-{
-    int x = Display::WIDTH / 10;
-
-    int step = Display::WIDTH / 5;
-
-    Key::E button = Key::F1;
-
-    for (int i = 0; i < 5; i++)
-    {
-        if (_x < x)
-        {
-            return button;
-        }
-        button = (Key::E)((int)button + 1);    // button++;
-        x += step;
-    }
-    return  Key::F5;
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void GovernorColor::Draw(int x, int y, bool opened)
 {
     if (opened)
@@ -364,14 +340,6 @@ void Page::Draw(int x, int y, bool opened) const
         {
             Control *item = Item(PosCurrentItem());
 
-            for (int i = 0; i < 5; i++)
-            {
-                if (Menu::itemForButton[(Key::E)(Key::F1 + i)] != item)
-                {
-                    Menu::itemForButton[(Key::E)(Key::F1 + i)] = &emptyControl;
-                }
-            }
-
             x = ItemOpenedPosX(item);
             y = Menu::Y0() - item->HeightOpened() + Menu::Item::HEIGHT + 1;
 
@@ -471,7 +439,6 @@ void Page::DrawItems(int x, int y) const
         if (item)
         {
             item->Draw(x, y, false);
-            Menu::itemForButton[GetFuncButtonFromX(x)] = item;
         }
 
         x += Width();

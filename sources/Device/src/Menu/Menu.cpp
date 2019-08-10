@@ -37,7 +37,6 @@ const Control *Menu::pressedItem = nullptr;
 const char    *Menu::stringForHint = nullptr;
    Control    *Menu::itemHint = nullptr;
 const Page    *Menu::mainPage = nullptr;
-const Control *Menu::itemForButton[Key::Number] = { &emptyControl, &emptyControl, &emptyControl, &emptyControl, &emptyControl };
 
 /// true, если нужно сохранять копию экрана на флешку
 static bool needSaveScreen = false;
@@ -594,11 +593,6 @@ void Menu::Draw()
 {
     if (Menu::IsShown())
     {
-        for (int i = 0; i < Key::Number; i++)
-        {
-            Menu::itemForButton[(Key::E)i] = &emptyControl;
-        }
-
         Control *item = OpenedItem();
         if (Menu::IsShown())
         {

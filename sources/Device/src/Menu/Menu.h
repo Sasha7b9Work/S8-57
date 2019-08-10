@@ -57,8 +57,6 @@ struct Menu
     static Control *itemHint;
     /// Текущая главная страница
     static const Page *mainPage;
-    /// Элементы управления, назначенные в данный момент соответствующим кнопкам
-    static const Control *itemForButton[Key::Number];
 
     struct Title
     {
