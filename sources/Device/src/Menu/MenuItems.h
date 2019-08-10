@@ -79,7 +79,7 @@ public:
     /// Возвращает true, если тип контрола - Page
     bool IsPage() const;
     /// Возвращает адрес родителя
-    const Page *Keeper() { return *keeper; }
+    const Page *Keeper() { if (keeper) { return *keeper; }; return nullptr; }
     /// Возвращает true, если в древе предков стоит keeper
     bool ExistKeeper(const Page *keeper);
     /// Имеет родителя - не является главной страницей меню

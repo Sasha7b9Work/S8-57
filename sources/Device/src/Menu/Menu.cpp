@@ -484,7 +484,7 @@ static void ClosePage(Page *page)
         }
     }
 
-    Page *keeper = (Page *)KEEPER(page);
+    Page *keeper = (Page *)page->Keeper();
 
     if (keeper)
     {
@@ -511,7 +511,7 @@ static void CloseIfSubPage(Page *parent, Page *page)
         while (page)
         {
             ClosePage(page);
-            page = KEEPER(page);
+            page = (Page *)page->Keeper();
         }
     }
 }
@@ -681,7 +681,7 @@ void Menu::Draw()
             }
             else
             {
-                ((Page *)KEEPER(item))->Draw(0, Y(), true);
+                ((Page *)item->Keeper())->Draw(0, Y(), true);
             }
         }
     }

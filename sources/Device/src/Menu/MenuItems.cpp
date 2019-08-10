@@ -593,7 +593,7 @@ void Governor::SetValue(int16 v)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 bool Page::IsSubPage(const Page *parent)
 {
-    Page *keep = KEEPER(this);
+    const Page *keep = Keeper();
 
     while (keep)
     {
@@ -602,7 +602,7 @@ bool Page::IsSubPage(const Page *parent)
             return true;
         }
 
-        keep = KEEPER(keep);
+        keep = ((Control *)keep)->Keeper();
     }
 
     return false;

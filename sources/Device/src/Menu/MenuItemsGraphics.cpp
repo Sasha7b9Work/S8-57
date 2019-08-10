@@ -736,7 +736,7 @@ void Page::DrawNestingPage(int left, int bottom)
 
     Page *page = this;
 
-    Page *parent = KEEPER(page);
+    Page *parent = (Page *)Keeper();
 
     if (parent == nullptr)
     {
@@ -746,7 +746,7 @@ void Page::DrawNestingPage(int left, int bottom)
     while (parent != nullptr)
     {
         page = (Page *)parent;
-        parent = KEEPER(page);
+        parent = (Page *)page->Keeper();
         nesting++;                                  // -V127
     }
 
