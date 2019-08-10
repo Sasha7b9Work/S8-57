@@ -53,8 +53,8 @@ static uint colors[256];
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /// Создаёт окно приложения. Возвращает хэндл виджета для отрисовки
 static HANDLE CreateFrame();
-/// Установить оптимальную позицию для окна приложения
-static void SetPosition(Frame *frame);
+/// Установить размер и оптимальную позицию для окна приложения
+static void SetPositionAndSize(Frame *frame);
 /// Получить разрешение максимального имеющегося в системе монитора
 static wxRect GetMaxDisplay();
 /// Создаёт все кнопки
@@ -133,9 +133,9 @@ void Painter::SetColorValue(Color color, uint value)
 //}
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void SetPosition(Frame *frame)
+static void SetPositionAndSize(Frame *frame)
 {
-    wxSize size = { 329, 560 };
+    wxSize size = {FRAME_WIDTH + 9, FRAME_HEIGHT + 320 };
     
     frame->SetSize(size);
     frame->SetMinSize(size);
@@ -171,7 +171,7 @@ static HANDLE CreateFrame()
 {
     Frame *frame = new Frame("");
 
-    SetPosition(frame);
+    SetPositionAndSize(frame);
 
     wxBoxSizer *sizer = new wxBoxSizer(wxHORIZONTAL);
 
@@ -201,7 +201,7 @@ static void CreateButtons(Frame *frame)
     };
 
     int x0 = 5;
-    int y0 = 250;
+    int y0 = FRAME_HEIGHT + 10;
 
     int dX = 5;
     int dY = 5;
@@ -223,7 +223,7 @@ static void CreateButtons(Frame *frame)
     // Рисуем кнопки управления
 
     width = height = 25;
-    x0 = FRAME_WIDTH / 2 - width / 2;
+    x0 = 160;
     y0 = FRAME_HEIGHT + 100;
 
     size.SetWidth(width);
@@ -266,7 +266,7 @@ static void CreateButtons(Frame *frame)
 
     CreateButtonsTrig(frame, 235, y - 130);
 
-    CreateButton(Key::Start, frame, { 230, 438 }, { 80, 25 }, "ПУСК/СТОП");
+    CreateButton(Key::Start, frame, { 230, FRAME_HEIGHT + 198 }, { 80, 25 }, "ПУСК/СТОП");
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

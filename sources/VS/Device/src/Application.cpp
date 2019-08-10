@@ -79,7 +79,7 @@ Frame::Frame(const wxString& title)
     wxMenu *helpMenu = new wxMenu;
     helpMenu->Append(Help_About, "&About\tF1", "Show about dialog");
 
-    fileMenu->Append(File_Size, "&Size", "Resize screen");
+    //fileMenu->Append(File_Size, "&Size", "Resize screen");
 
     fileMenu->Append(File_Quit, "E&xit\tAlt-X", "Quit this program");
 
