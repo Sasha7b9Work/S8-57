@@ -21,10 +21,6 @@ struct Menu
     static void Draw();
     /// Функция вызывается при нажатии, повторе и отпускании кнопки
     static void ButtonEvent(KeyEvent event);
-    /// Заблокировать клавиатуру. Будут разрешены только кнопки из массива keys, заканчивающегося нулём
-    static void LockKeyboard(const Key::E * const keys);
-    /// Разблокировать клавиатуру
-    static void UnlockKeyboard();
     /// Установить время автоматического сокрытия меню в соответствии с установками.
     static void SetAutoHide(bool active);
     /// Показать/скрыть меню.

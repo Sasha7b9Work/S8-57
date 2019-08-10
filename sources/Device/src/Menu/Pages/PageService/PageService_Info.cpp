@@ -69,12 +69,12 @@ static void OnPress_Page(bool enter)
     {
         Display::SetAddDrawFunction(Information_Draw);
         static const Key::E keys[2] = { Key::Enter, Key::None };
-        Menu::LockKeyboard(keys);
+        Keyboard::Lock(keys);
     }
     else
     {
         Display::RemoveAddDrawFunction();
-        Menu::UnlockKeyboard();
+        Keyboard::Unlock();
     }
 }
 

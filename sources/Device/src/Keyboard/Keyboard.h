@@ -93,3 +93,15 @@ struct KeyEvent
     bool IsLong() const { return type == TypePress::Long; }
     bool IsRelease() const { return type == TypePress::Release; }
 };
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+struct Keyboard
+{
+    /// Заблокировать клавиатуру. Будут разрешены только кнопки из массива keys, заканчивающегося нулём
+    static void Lock(const Key::E * const keys);
+    /// Разблокировать клавиатуру
+    static void Unlock();
+    /// Возвращает true, если кнопка не заблокирована
+    static bool KeyIsActive(Key::E key);
+};
