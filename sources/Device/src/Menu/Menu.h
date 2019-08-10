@@ -37,8 +37,6 @@ struct Menu
     static Control *OpenedItem();
     /// Возвращает указатель на текущую главную страницу меню
     static Page *MainPage();
-    /// Если true - меню находится в дополнительном режиме.
-    static bool IsMinimize();
 
     static const Control *ItemUnderButton(Key::E button);
 

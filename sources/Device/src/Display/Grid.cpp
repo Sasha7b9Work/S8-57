@@ -224,17 +224,12 @@ void Grid::DrawGridSpectrum()
 
 			HLine(256).Draw(Left(), y, Color::GRID);
 
-            if (!Menu::IsMinimize())
-            {
-                Color::FILL.SetAsCurrent();
-                String((char *)strs[i]).Draw(3, y - 4);
-            }
-        }
-        if (!Menu::IsMinimize())
-        {
             Color::FILL.SetAsCurrent();
-            String("Да").Draw(5, MathTop() + 1);
+            String((char *)strs[i]).Draw(3, y - 4);
         }
+
+        Color::FILL.SetAsCurrent();
+        String("Да").Draw(5, MathTop() + 1);
     }
     else // SCALE_FFT_IS_LINEAR
     {
@@ -246,10 +241,7 @@ void Grid::DrawGridSpectrum()
 
 			HLine(256).Draw(Left(), y, Color::GRID);
 
-            if (!Menu::IsMinimize())
-            {
-                String((char *)strs[i]).Draw(5, y - 4, Color::FILL);
-            }
+            String((char *)strs[i]).Draw(5, y - 4, Color::FILL);
         }
     }
 
