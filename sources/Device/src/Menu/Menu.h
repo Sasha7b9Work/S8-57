@@ -36,7 +36,7 @@ struct Menu
     /// Возвращает адрес открытого элемента меню
     static Control *OpenedItem();
     /// Возвращает указатель на текущую главную страницу меню
-    static PageBase *MainPage();
+    static Page *MainPage();
     /// Если true - меню находится в дополнительном режиме.
     static bool IsMinimize();
 
@@ -50,7 +50,7 @@ struct Menu
 
     static void SaveRow(int row);
 
-    static PageBase *OpenedPage();
+    static Page *OpenedPage();
     /// Возвращает адрес текущего элемента меню (текущим, как правило, является элемент, кнопка которого была нажата последней
     static Control *CurrentItem();
     /// Закрыть открытый элемент меню
@@ -108,5 +108,5 @@ struct Menu
         } value;
     };
 
-    static void SetMainPage(PageBase *page);
+    static void SetMainPage(Page *page);
 };

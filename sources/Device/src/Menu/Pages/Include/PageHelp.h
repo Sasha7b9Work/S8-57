@@ -5,5 +5,5 @@
 class PageHelp
 {
 public:
-    static const PageBase *pointer;
+    static const Page * const self;
 };

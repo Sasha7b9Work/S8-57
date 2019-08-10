@@ -11,9 +11,7 @@ using namespace Osci::Settings;
 
 extern const PageBase pageAccum;
 
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-const PageBase *PageDisplay::PageAccumulation::pointer = &pageAccum;
+const Page * const PageDisplay::PageAccumulation::self = (const Page * const)&pageAccum;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -22,7 +20,7 @@ DEF_CHOICE_2( cEnable,                                                          
     "",
     DISABLE_RU,
     ENABLE_RU,
-    ACCUMULATION, pageAccum, 0, 0, 0
+    ACCUMULATION, PageDisplay::PageAccumulation::self, 0, 0, 0
 )
 
 
@@ -41,7 +39,7 @@ DEF_CHOICE_9( cNumber,                                                          
     "64",
     "128",
     "Бесконечность",
-    ENUM_ACCUM, pageAccum, 0, 0, 0
+    ENUM_ACCUM, PageDisplay::PageAccumulation::self, 0, 0, 0
 )
 
 
@@ -59,7 +57,7 @@ void PageDisplay::PageAccumulation::OnPress_Accumulation_Clear()
 DEF_BUTTON( bClear,                                                                                                                                 //--- ДИСПЛЕЙ - НАКОПЛЕНИЕ - Очистить ---
     "Очистить",
     "Очищает экран от накопленных сигналов.",
-    pageAccum, IsActive_Accum_Clear, PageDisplay::PageAccumulation::OnPress_Accumulation_Clear, 0
+    PageDisplay::PageAccumulation::self, IsActive_Accum_Clear, PageDisplay::PageAccumulation::OnPress_Accumulation_Clear, 0
 )
 
 
@@ -75,5 +73,5 @@ DEF_PAGE_3(pageAccum, // -V641 // -V1027                                        
     &cEnable,    ///< ДИСПЛЕЙ - НАКОПЛЕНИЕ - Количество
     &cNumber,    ///< ДИСПЛЕЙ - НАКОПЛЕНИЕ - Режим
     &bClear,     ///< ДИСПЛЕЙ - НАКОПЛЕНИЕ - Очистить
-    Page::Name::Display_Accumulation, PageDisplay::pointer, IsActive_Accum, 0, 0, 0
+    Page::Name::Display_Accumulation, PageDisplay::self, IsActive_Accum, 0, 0, 0
 )

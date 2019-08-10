@@ -4,32 +4,32 @@
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #define DEF_BUTTON(name, title, hint, keeper, funcActive, funcPress, funcDraw)                                                                          \
-volatile static const ButtonBase name = { Control::Type::Button, 0, false, Page::Name::NoPage, &keeper, funcActive, {title, hint},                      \
+volatile static const ButtonBase name = { Control::Type::Button, 0, false, Page::Name::NoPage, keeper, funcActive, {title, hint},                      \
     funcPress, funcDraw };
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #define DEF_TIME(name, title, hint, keeper, funcActive, cur, h, mi, s, mo, d, y)                                                                        \
-static const TimeBase name = { Control::Type::Time, 0, false, Page::Name::NoPage, &keeper, funcActive, {title, hint},                                   \
+static const TimeBase name = { Control::Type::Time, 0, false, Page::Name::NoPage, keeper, funcActive, {title, hint},                                   \
     &cur, &h, &mi, &s, &mo, &d, &y };
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #define DEF_GOVERNOR(name, title, hint, cell, min, max, keeper, funcActive, funcChanged, funcBeforeDraw)                                                \
-volatile static const GovernorBase name = {Control::Type::Governor, 0, false, Page::Name::NoPage, &keeper, funcActive, {title, hint},                   \
+volatile static const GovernorBase name = {Control::Type::Governor, 0, false, Page::Name::NoPage, keeper, funcActive, {title, hint},                   \
     &(cell), min, max, funcChanged, funcBeforeDraw};
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #define DEF_IP_ADDRESS(name, titleRU, titleEN, hintRU, hintEN, ip0, ip1, ip2, ip3, port, keeper, funcActive, funcOfChanged)                             \
-static const IPaddressBase name = {Item_IP, 0, false, Page::Name::NoPage, &keeper, funcActive, {titleRU, titleEN, hintRU, hintEN},                      \
+static const IPaddressBase name = {Item_IP, 0, false, Page::Name::NoPage, keeper, funcActive, {titleRU, titleEN, hintRU, hintEN},                      \
     &ip0, &ip1, &ip2, &ip3, funcOfChanged, port};
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #define DEF_MAC_ADDRESS(name, titleRU, titleEN, hintRU, hintEN, mac0, mac1, mac2, mac3, mac4, mac5, keeper, funcActive, funcOfChanged)                  \
-static const MACaddressBase name = {Item_MAC, 0, false, Page::Name::NoPage, &keeper, funcActive, {titleRU, titleEN, hintRU, hintEN},                    \
+static const MACaddressBase name = {Item_MAC, 0, false, Page::Name::NoPage, keeper, funcActive, {titleRU, titleEN, hintRU, hintEN},                    \
     &mac0, &mac1, &mac2, &mac3, &mac4, &mac5, funcOfChanged};
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #define DEF_GOVERNOR_COLOR(name, title, hint, colorType, keeper)                                                                                        \
-static const GovernorColorBase name = {Control::Type::GovernorColor, 0, false, Page::Name::NoPage, &keeper, 0,                                          \
+static const GovernorColorBase name = {Control::Type::GovernorColor, 0, false, Page::Name::NoPage, keeper, 0,                                          \
     {title, hint}, &colorType, 0};
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -69,7 +69,7 @@ static const Control * const  items##name[] = {(Control *)item1, (Control *)item
 static const PageBase name = {Control::Type::Page, 6, false, namePage, keeper, funcActive, {title, hint},                                                   \
     items##name, funcPress, funcDraw, funcRegSet};
 
-#define DEF_PAGE_7(name, title, hint,                                                                                               \
+#define DEF_PAGE_7(name, title, hint,                                                                                                                   \
     item1, item2, item3, item4, item5, item6, item7, namePage, keeper, funcActive, funcPress, funcDraw, funcRegSet)                                     \
 static const Control * const  items##name[] = {                                                                                                         \
     (Control *)item1, (Control *)item2, (Control *)item3, (Control *)item4, (Control *)item5, (Control *)item6, (Control *)item7};                      \
@@ -77,9 +77,9 @@ static const PageBase name = {Control::Type::Page, 7, false, namePage, keeper, f
     items##name, funcPress, funcDraw, funcRegSet};
 
 #define DEF_PAGE_8(name, title, hint, item1, item2, item3, item4, item5, item6, item7, item8, namePage, keeper, funcActive, funcPress, funcDraw, funcRegSet)    \
-static const Control * const  items##name[] = {(Control *)item1, (Control *)item2, (Control *)item3, (Control *)item4, (Control *)item5,                \
-    (Control *)item6, (Control *)item7, (Control *)item8};                                                                                              \
-static const PageBase name = {Control::Type::Page, 8, false, namePage, keeper, funcActive, {title, hint},                                               \
+static const Control * const  items##name[] = {(Control *)item1, (Control *)item2, (Control *)item3, (Control *)item4, (Control *)item5,                        \
+    (Control *)item6, (Control *)item7, (Control *)item8};                                                                                                      \
+static const PageBase name = {Control::Type::Page, 8, false, namePage, keeper, funcActive, {title, hint},                                                       \
     items##name, funcPress, funcDraw, funcRegSet};
 
 #define DEF_PAGE_9(name, title, hint,                                                                                                                   \
@@ -139,84 +139,84 @@ ChoiceParameterBase name = {Item_ChoiceParameter, 0, false, Page::Name::NoPage, 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #define DEF_SMALL_BUTTON(name, title, hint, keeper, funcActive, funcPress, funcDraw)                                                                    \
-volatile static const SButtonBase name = { Control::Type::DrawButton, 0, false, Page::Name::NoPage, &keeper, funcActive,                                \
+volatile static const SButtonBase name = { Control::Type::DrawButton, 0, false, Page::Name::NoPage, keeper, funcActive,                                \
      {title, hint}, funcPress, funcDraw, 0, 0};
 
 #define DEF_SMALL_BUTTON_EXIT(name, keeper, funcActive, funcPress, funcDraw)                                                                            \
-static const SButtonBase name = { Control::Type::DrawButton, 0, false, Page::Name::NoPage, &keeper, funcActive, {"Выход",                               \
+static const SButtonBase name = { Control::Type::DrawButton, 0, false, Page::Name::NoPage, keeper, funcActive, {"Выход",                               \
     "Кнопка для выхода в предыдущее меню"}, funcPress, funcDraw, 0, 0};
 
 #define DEF_SMALL_BUTTON_HINTS_2(name, title, hint, keeper, funcActive, funcPress, funcDraw, FuncDrawHint1, hint1, FuncDrawHint2, hint2)                \
 static const StructHelpDrawButton hints##name[] = {{ FuncDrawHint1, hint1 }, { FuncDrawHint2, hint2 }};                                                 \
-volatile static const SButtonBase name = { Control::Type::DrawButton, 0, false, Page::Name::NoPage, &keeper, funcActive,                                \
+volatile static const SButtonBase name = { Control::Type::DrawButton, 0, false, Page::Name::NoPage, keeper, funcActive,                                \
      {title, hint}, funcPress, funcDraw, hints##name, 2};
 
 #define DEF_SMALL_BUTTON_HINTS_3(name, title, hint, keeper, funcActive, funcPress, funcDraw,                                                            \
     FuncDrawHint1, hint1, FuncDrawHint2, hint2, FuncDrawHint3, hint3)                                                                                   \
 static const StructHelpDrawButton hints##name[] = {{ FuncDrawHint1, hint1 }, { FuncDrawHint2, hint2 }, { FuncDrawHint3, hint3 } };                      \
-static const SButtonBase name = { Control::Type::DrawButton, 0, false, Page::Name::NoPage, &keeper, funcActive, {title, hint},                          \
+static const SButtonBase name = { Control::Type::DrawButton, 0, false, Page::Name::NoPage, keeper, funcActive, {title, hint},                          \
     funcPress, funcDraw, hints##name, 3};
 
 #define DEF_SMALL_BUTTON_HINTS_5(name, title, hint, keeper, funcActive, funcPress, funcDraw,                                                            \
     FuncDrawHint1, hint1, FuncDrawHint2, hint2, FuncDrawHint3, hint3, FuncDrawHint4, hint4, FuncDrawHint5, hint5)                                       \
 static const StructHelpDrawButton hints##name[] = {{ FuncDrawHint1, hint1 }, { FuncDrawHint2, hint2 },                                                  \
     { FuncDrawHint3, hint3 }, { FuncDrawHint4, hint4 }, { FuncDrawHint5, hint5 } };                                                                     \
-static const SButtonBase name = { Control::Type::DrawButton, 0, false, Page::Name::NoPage, &keeper, funcActive, {title, hint},                          \
+static const SButtonBase name = { Control::Type::DrawButton, 0, false, Page::Name::NoPage, keeper, funcActive, {title, hint},                          \
     funcPress, funcDraw, hints##name, 5};
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #define DEF_CHOICE_2(name, title, hint, name1, name2, cell, keeper, funcActive, funcChanged, funcDraw)                                                  \
 static const pString hints##name[] = {name1, name2};                                                                                                    \
-volatile static const ChoiceBase name = {Control::Type::Choice, 2, false, Page::Name::NoPage, &keeper, funcActive, {title, hint},                       \
+volatile static const ChoiceBase name = {Control::Type::Choice, 2, false, Page::Name::NoPage, keeper, funcActive, {title, hint},                       \
     (int8 *)&cell, hints##name, funcChanged, funcDraw};
 
 #define DEF_CHOICE_3(name, title, hint, name1, name2, name3, cell, keeper, funcActive, funcChanged, funcDraw)                                           \
 static const pString hints##name[] = {name1, name2, name3};                                                                                             \
-volatile static const ChoiceBase name = {Control::Type::Choice, 3, false, Page::Name::NoPage, &keeper, funcActive, {title, hint},                       \
+volatile static const ChoiceBase name = {Control::Type::Choice, 3, false, Page::Name::NoPage, keeper, funcActive, {title, hint},                       \
     (int8 *)&cell, hints##name, funcChanged, funcDraw};
 
 #define DEF_CHOICE_4(name, title, hint, name1, name2, name3, name4, cell, keeper, funcActive, funcChanged, funcDraw)                                    \
 static const pString hints##name[] = {name1, name2, name3, name4};                                                                                      \
-volatile static const ChoiceBase name = {Control::Type::Choice, 4, false, Page::Name::NoPage, &keeper, funcActive, {title, hint},                       \
+volatile static const ChoiceBase name = {Control::Type::Choice, 4, false, Page::Name::NoPage, keeper, funcActive, {title, hint},                       \
     (int8 *)&cell, hints##name, funcChanged, funcDraw};
 
 #define DEF_CHOICE_5(name, title, hint, name1, name2, name3, name4, name5, cell, keeper, funcActive, funcChanged, funcDraw)                             \
 static pString hints##name[] = {name1, name2, name3, name4, name5};                                                                                     \
-volatile static const ChoiceBase name = {Control::Type::Choice, 5, false, Page::Name::NoPage, &keeper, funcActive, {title, hint},                       \
+volatile static const ChoiceBase name = {Control::Type::Choice, 5, false, Page::Name::NoPage, keeper, funcActive, {title, hint},                       \
     (int8 *)&cell, hints##name, funcChanged, funcDraw};
 
 #define DEF_CHOICE_6(name, title, hint, name1, name2, name3, name4, name5, name6, cell, keeper, funcActive, funcChanged, funcDraw)                      \
 static pString hints##name[] = {name1, name2, name3, name4, name5, name6};                                                                              \
-static const ChoiceBase name = {Control::Type::Choice, 6, false, Page::Name::NoPage, &keeper, funcActive, {title, hint},                                \
+static const ChoiceBase name = {Control::Type::Choice, 6, false, Page::Name::NoPage, keeper, funcActive, {title, hint},                                \
     (int8 *)&cell, hints##name, funcChanged, funcDraw};
 
 #define DEF_CHOICE_7(name, title, hint, name1, name2, name3, name4, name5, name6, name7, cell, keeper, funcActive, funcChanged, funcDraw)               \
 static pString hints##name[] = {name1, name2, name3, name4, name5, name6, name7};                                                                       \
-static const ChoiceBase name = {Control::Type::Choice, 7, false, Page::Name::NoPage, &keeper, funcActive, {title, hint},                                \
+static const ChoiceBase name = {Control::Type::Choice, 7, false, Page::Name::NoPage, keeper, funcActive, {title, hint},                                \
     (int8 *)&cell, hints##name, funcChanged, funcDraw};
 
 #define DEF_CHOICE_8(name, title, hint, name1, name2, name3, name4, name5,  name6, name7, name8, cell, keeper, funcActive, funcChanged, funcDraw)       \
 static pString hints##name[] = {name1, name2, name3, name4, name5, name6, name7, name8};                                                                \
-static const ChoiceBase name = {Control::Type::Choice, 8, false, Page::Name::NoPage, &keeper, funcActive, {title, hint},                                \
+static const ChoiceBase name = {Control::Type::Choice, 8, false, Page::Name::NoPage, keeper, funcActive, {title, hint},                                \
     (int8 *)&cell, hints##name, funcChanged, funcDraw};
 
 #define DEF_CHOICE_9(name, title, hint, name1, name2, name3, name4, name5, name6, name7, name8, name9, cell, keeper, funcActive, funcChanged, funcDraw) \
 static pString hints##name[] = {name1, name2, name3, name4, name5, name6, name7, name8, name9};                                                         \
-static const ChoiceBase name = {Control::Type::Choice, 9, false, Page::Name::NoPage, &keeper, funcActive, {title, hint},                                \
+static const ChoiceBase name = {Control::Type::Choice, 9, false, Page::Name::NoPage, keeper, funcActive, {title, hint},                                \
     (int8 *)&cell, hints##name, funcChanged, funcDraw};
 
 #define DEF_CHOICE_10(name, title, hint, name1, name2, name3, name4, name5, name6, name7, name8, name9, name10,                                         \
     cell, keeper, funcActive, funcChanged, funcDraw)                                                                                                    \
 static pString hints##name[] = {name1, name2, name3, name4, name5, name6, name7, name8, name9, name10};                                                 \
-static const ChoiceBase name = {Control::Type::Choice, 10, false, Page::Name::NoPage, &keeper, funcActive, {title, hint},                               \
+static const ChoiceBase name = {Control::Type::Choice, 10, false, Page::Name::NoPage, keeper, funcActive, {title, hint},                               \
     (int8 *)&cell, hints##name, funcChanged, funcDraw};
 
 
 #define DEF_CHOICE_16(name, title, hint, name1, name2,  name3,  name4,  name5,  name6,  name7,  name8, name9, name10,                                           \
     name11, name12, name13, name14, name15, name16, cell, keeper, funcActive, funcChanged, funcDraw)                                                            \
 static pString hints##name[] = {name1,  name2, name3,  name4,  name5,  name6, name7, name8, name9, name10, name11, name12, name13, name14, name15, name16 };    \
-volatile static const ChoiceBase name = {Control::Type::Choice, 16, false, Page::Name::NoPage, &keeper, funcActive, {title, hint},                              \
+volatile static const ChoiceBase name = {Control::Type::Choice, 16, false, Page::Name::NoPage, keeper, funcActive, {title, hint},                              \
     (int8 *)&cell, hints##name, funcChanged, funcDraw};
 
 #define DEF_CHOICE_REG_9(name, titleRU, titleEN, hintRU, hintEN,                                                                                        \

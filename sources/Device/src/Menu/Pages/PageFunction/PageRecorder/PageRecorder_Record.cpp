@@ -3,8 +3,9 @@
 #include "Settings/Settings.h"
 
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 extern const PageBase pageRecord;
+
+const Page * const PageFunction::PageRecorder::PageRecord::self = (const Page * const)&pageRecord;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -14,7 +15,7 @@ DEF_CHOICE_3( cDestination,                                                     
     "ОЗУ",
     "USB-Flash",
     "USB-PC",
-    RECORDER_STORAGE_RECORD, pageRecord, 0, 0, 0
+    RECORDER_STORAGE_RECORD, PageFunction::PageRecorder::PageRecord::self, 0, 0, 0
 )
 
 
@@ -23,7 +24,5 @@ DEF_PAGE_1( pageRecord, // -V641 // -V1027                                      
     "ЗАПИСЬ",
     "Выбор места хранения данных",
     &cDestination,        ///< ФУНКЦИЯ - РЕГИСТРАТОР - ЗАПИСЬ - Сохранять в
-    Page::Name::Function_Recorder_Record, PageFunction::PageRecorder::pointer, 0, 0, 0, 0
+    Page::Name::Function_Recorder_Record, PageFunction::PageRecorder::self, 0, 0, 0, 0
 )
-
-const PageBase *PageFunction::PageRecorder::PageRecord::pointer = &pageRecord;

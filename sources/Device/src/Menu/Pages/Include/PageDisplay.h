@@ -10,19 +10,19 @@ struct PageDisplay
 
     static void OnChanged_RefreshFPS(bool);
 
-    static const PageBase *pointer;
+    static const Page * const self;
 
     //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     class PageView
     {
     public:
-        static const PageBase *pointer;
+        static const Page * const self;
     };
 
     //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     struct PageAccumulation
     {
-        static const PageBase *pointer;
+        static const Page * const self;
 
         static void OnPress_Accumulation_Clear();
     };
@@ -42,12 +42,12 @@ struct PageDisplay
     //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     struct PageSettings
     {
-        static const PageBase *pointer;
+        static const Page * const self;
 
         //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
         struct PageColors
         {
-            static const PageBase *pointer;
+            static const Page * const self;
 
             static void Init();
             /// Для сетки

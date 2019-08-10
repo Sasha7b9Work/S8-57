@@ -5,8 +5,9 @@
 #include "Device.h"
 
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 extern const PageBase pageRecorder;
+
+const Page * const PageFunction::PageRecorder::self = (const Page * const)&pageRecorder;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -15,7 +16,7 @@ DEF_CHOICE_2( cShow,                                                            
     "Позволяет выводить данные регистратора при выключенном меню РЕГИСТРАТОР",
     "В режиме",
     "Всегда",
-    RECORDER_VIEW_ALLWAYS, pageRecorder, 0, 0, 0
+    RECORDER_VIEW_ALLWAYS, PageFunction::PageRecorder::self, 0, 0, 0
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -29,10 +30,8 @@ DEF_PAGE_2( pageRecorder, // -V641 // -V1027                                    
     "РЕГИСТРАТОР",
     "Запись и воспроизведение сигналов входов и датчиков",
     //&cShow,                                             ///< ФУНКЦИЯ - РЕГИСТРАТОР - Показывать
-    PageFunction::PageRecorder::PageSource::pointer,    ///< ФУНКЦИЯ - РЕГИСТРАТОР - ИСТОЧНИК
-    //PageFunction::PageRecorder::PageRecord::pointer,    ///< ФУНКЦИЯ - РЕГИСТРАТОР - ЗАПИСЬ
-    PageFunction::PageRecorder::PageShow::pointer,      ///< ФУНКЦИЯ - РЕГИСТРАТОР - ПРОСМОТР
-    Page::Name::Function_Recorder, PageFunction::pointer, 0, OnOpenClose_Recorder, 0, 0
+    PageFunction::PageRecorder::PageSource::self,    ///< ФУНКЦИЯ - РЕГИСТРАТОР - ИСТОЧНИК
+    //PageFunction::PageRecorder::PageRecord::self,    ///< ФУНКЦИЯ - РЕГИСТРАТОР - ЗАПИСЬ
+    PageFunction::PageRecorder::PageShow::self,      ///< ФУНКЦИЯ - РЕГИСТРАТОР - ПРОСМОТР
+    Page::Name::Function_Recorder, PageFunction::self, 0, OnOpenClose_Recorder, 0, 0
 )
-
-const PageBase *PageFunction::PageRecorder::pointer = &pageRecorder;

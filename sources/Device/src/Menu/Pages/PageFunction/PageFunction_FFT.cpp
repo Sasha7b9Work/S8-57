@@ -6,9 +6,11 @@
 #include "Menu/Pages/Include/PageFunction.h"
 
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 extern const PageBase ppFFT;
 extern const PageBase pppFFT_Cursors;
+
+const Page * const PageFunction::PageFFT::self = (const Page * const)&ppFFT;
+const Page * const PageFunction::PageFFT::PageCursors::self = (const Page * const)&pppFFT_Cursors;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -17,7 +19,7 @@ DEF_CHOICE_2( cFFT_View,                                                        
     "Включает и выключает отображение спектра",
     DISABLE_RU,
     ENABLE_RU,
-    FFT_ENABLED, ppFFT, 0, 0, 0
+    FFT_ENABLED, PageFunction::PageFFT::self, 0, 0, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -26,7 +28,7 @@ DEF_CHOICE_2( cFFT_Scale,                                                       
     "Задаёт масштаб вывода спектра - линейный или логарифмический",
     "Логарифм",
     "Линейная",
-    SCALE_FFT, ppFFT, 0, 0, 0
+    SCALE_FFT, PageFunction::PageFFT::self, 0, 0, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -36,7 +38,7 @@ DEF_CHOICE_3( cFFT_Source,                                                      
     "Канал 1",
     "Канал 2",
     "Канал 1 + 2",
-    SOURCE_FFT, ppFFT, 0, 0, 0
+    SOURCE_FFT, PageFunction::PageFFT::self, 0, 0, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -47,7 +49,7 @@ DEF_CHOICE_4( cFFT_Window,                                                      
     "Хэмминга",
     "Блэкмена",
     "Ханна",
-    WINDOW_FFT, ppFFT, 0, 0, 0
+    WINDOW_FFT, PageFunction::PageFFT::self, 0, 0, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -62,7 +64,7 @@ DEF_CHOICE_3( cFFT_Range,                                                       
     "-40дБ",
     "-60дБ",
     "-80дБ",
-    MAX_DB_FFT, ppFFT, IsActive_FFT_Range, 0, 0
+    MAX_DB_FFT, PageFunction::PageFFT::self, IsActive_FFT_Range, 0, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -79,7 +81,7 @@ static void Draw_FFT_Cursors_Source(int x, int y)
 DEF_SMALL_BUTTON( bFFT_Cursors_Source,                                                                                                        //--- ФУНКЦИЯ - СПЕКТР - КУРСОРЫ - Источник ---
     "Источник",
     "Выбор источника для расчёта спектра",
-    pppFFT_Cursors, 0, OnPress_FFT_Cursors_Source, Draw_FFT_Cursors_Source
+    PageFunction::PageFFT::PageCursors::self, 0, OnPress_FFT_Cursors_Source, Draw_FFT_Cursors_Source
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -109,9 +111,7 @@ DEF_PAGE_1( pppFFT_Cursors, // -V641 // -V1027                                  
     "КУРСОРЫ",
     "Включает курсоры для измерения параметров спектра",
     &bFFT_Cursors_Source,                       ///< СЕРВИС - СПЕКТР - КУРСОРЫ - Источник
-    Page::Name::SB_Service_FFT_Cursors, 
-    &ppFFT,                                     ///< СЕРВИС - СПЕКТР
-    IsActive_FFT_Cursors, 0, 0, HandlerKey_FFT_Cursors
+    Page::Name::SB_Service_FFT_Cursors, PageFunction::PageFFT::self, IsActive_FFT_Cursors, 0, 0, HandlerKey_FFT_Cursors
 )
 
 
@@ -129,9 +129,6 @@ static void OnPress_FFT(bool)
     }
 }
 
-const PageBase *PageFunction::PageFFT::pointer = &ppFFT;
-
-
 DEF_PAGE_6( ppFFT, // -V641 // -V1027                                                                                                                               //--- СЕРВИС - СПЕКТР ---
     "СПЕКТР",
     "Отображение спектра входного сигнала",
@@ -141,5 +138,5 @@ DEF_PAGE_6( ppFFT, // -V641 // -V1027                                           
     &cFFT_Window,       ///< СЕРВИС - СПЕКТР - Окно 
     &pppFFT_Cursors,    ///< СЕРВИС - СПЕКТР - КУРСОРЫ
     &cFFT_Range,        ///< СЕРВИС - СПЕКТР - Диапазон
-    Page::Name::Function_FFT, PageFunction::pointer, IsActive_FFT, OnPress_FFT, 0, 0
+    Page::Name::Function_FFT, PageFunction::self, IsActive_FFT, OnPress_FFT, 0, 0
 )

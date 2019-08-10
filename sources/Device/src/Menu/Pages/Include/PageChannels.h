@@ -10,7 +10,7 @@ public:
 
     static void OnChanged_Couple(bool active);
 
-    static const PageBase *pointer;
+    static const Page * const self;
 };
 
 
@@ -22,5 +22,5 @@ public:
 
     static void OnChanged_Couple(bool active);
 
-    static const PageBase *pointer;
+    static const Page * const self;
 };

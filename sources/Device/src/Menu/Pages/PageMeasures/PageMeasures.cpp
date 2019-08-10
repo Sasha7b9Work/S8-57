@@ -7,15 +7,15 @@
 
 extern const PageBase pageMeasures;
 
-const PageBase *PageMeasures::pointer = &pageMeasures;
+const Page * const PageMeasures::self = (const Page * const)&pageMeasures;
 
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 DEF_PAGE_3( pageMeasures, // -V1027                                                                                                                                       //--- ÈÇÌÅĞÅÍÈß ---
     "ÈÇÌÅĞÅÍÈß",
     "Äîñòóï ê íàñòğîéêàì èçìåğåíèé - êóğñîğíûõ è àâòîìàòè÷åñêèõ",
-    PageMeasures::PageCursors::pointer,     ///< ÈÇÌÅĞÅÍÈß - ÊÓĞÑÎĞÛ
-    PageMeasures::PageAuto::pointer,        ///< ÈÇÌÅĞÅÍÈß - ÀÂÒÎÌÀÒ
-    PageMeasures::PageMath::pointer,        ///< ÈÇÌÅĞÅÍÈß - ÌÀÒÅÌÀÒÈÊÀ
+    PageMeasures::PageCursors::self,     ///< ÈÇÌÅĞÅÍÈß - ÊÓĞÑÎĞÛ
+    PageMeasures::PageAuto::self,        ///< ÈÇÌÅĞÅÍÈß - ÀÂÒÎÌÀÒ
+    PageMeasures::PageMath::self,        ///< ÈÇÌÅĞÅÍÈß - ÌÀÒÅÌÀÒÈÊÀ
     Page::Name::Measures, nullptr, 0, 0, 0, 0
 )

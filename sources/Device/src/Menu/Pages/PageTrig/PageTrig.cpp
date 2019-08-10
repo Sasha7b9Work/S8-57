@@ -2,15 +2,15 @@
 #include "FPGA/FPGA.h"
 #include "Menu/Pages/Include/PageTrig.h"
 #include "Settings/Settings.h"
-
 #include "Osci/Osci.h"
 
 
 using namespace Osci::Settings;
 
-
 extern const PageBase pTrig;
 extern const PageBase ppSearch;
+
+const Page * const PageTrig::self = (const Page * const)&pTrig;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -56,7 +56,7 @@ DEF_CHOICE_3( cMode, // -V206                                                   
     "¿‚ÚÓ ",
     "∆‰Û˘ËÈ",
     "Œ‰ÌÓÍ‡ÚÌ˚È",
-    START_MODE, pTrig, 0, PageTrig::OnChanged_TrigMode, 0
+    START_MODE, PageTrig::self, 0, PageTrig::OnChanged_TrigMode, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -71,7 +71,7 @@ DEF_CHOICE_2( cSource, // -V206                                                 
     ,
     " ‡Ì‡Î 1",
     " ‡Ì‡Î 2",
-    TRIG_SOURCE, pTrig, 0, OnChanged_Source, 0
+    TRIG_SOURCE, PageTrig::self, 0, OnChanged_Source, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -88,7 +88,7 @@ DEF_CHOICE_2( cPolarity, //-V206                                                
     ,
     "‘ÓÌÚ",
     "—ÂÁ",
-    TRIG_POLARITY, pTrig, 0, OnChanged_Polarity, 0
+    TRIG_POLARITY, PageTrig::self, 0, OnChanged_Polarity, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -108,11 +108,8 @@ DEF_CHOICE_3( cFiltr, // -V206                                                  
     "œ—",
     "Õ◊",
     "¬◊",
-    TRIG_INPUT, pTrig, 0, OnChanged_Input, 0
+    TRIG_INPUT, PageTrig::self, 0, OnChanged_Input, 0
 )
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-const PageBase *PageTrig::pointer = &pTrig;
 
 DEF_PAGE_6( pTrig, // -V641 // -V1027                                                                                                                                         //--- —»Õ’– ---
     "—»Õ’–",
@@ -121,7 +118,7 @@ DEF_PAGE_6( pTrig, // -V641 // -V1027                                           
     &cSource,                       ///< —»Õ’– - »ÒÚÓ˜ÌËÍ
     &cPolarity,                     ///< —»Õ’– - œÓÎˇÌÓÒÚ¸
     &cFiltr,                        ///< —»Õ’– - ¬ıÓ‰
-    PageTrig::PageHoldOff::pointer, ///< —»Õ’– - ”ƒ≈–∆¿Õ»≈
-    PageTrig::PageFind::pointer,    ///< —»Õ’– - œŒ»— 
+    PageTrig::PageHoldOff::self, ///< —»Õ’– - ”ƒ≈–∆¿Õ»≈
+    PageTrig::PageFind::self,    ///< —»Õ’– - œŒ»— 
     Page::Name::Trig, nullptr, 0, 0, 0, 0
 )

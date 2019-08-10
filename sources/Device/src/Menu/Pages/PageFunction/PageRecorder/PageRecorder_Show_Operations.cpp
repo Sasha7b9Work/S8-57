@@ -5,6 +5,9 @@
 
 extern const PageBase pageOperations;
 
+const Page * const PageFunction::PageRecorder::PageShow::PageOperations::self = (const Page * const)&pageOperations;
+
+
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 static void OnPress_Rename()
@@ -15,7 +18,7 @@ static void OnPress_Rename()
 DEF_BUTTON( bRename,                                                                                                    //--- ФУНКЦИЯ - РЕГИСТРАТОР - ПРОСМОТР - ОПЕРАЦИИ - Переименовать ---
     "Переименовать",
     "",
-    pageOperations, 0, OnPress_Rename, 0
+    PageFunction::PageRecorder::PageShow::PageOperations::self, 0, OnPress_Rename, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -27,7 +30,7 @@ static void OnPress_Copy()
 DEF_BUTTON( bCopy,                                                                                                         //--- ФУНКЦИЯ - РЕГИСТРАТОР - ПРОСМОТР - ОПЕРАЦИИ - Копировать ---
     "Копировать",
     "",
-    pageOperations, 0, OnPress_Copy, 0
+    PageFunction::PageRecorder::PageShow::PageOperations::self, 0, OnPress_Copy, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -39,7 +42,7 @@ static void OnPress_Move()
 DEF_BUTTON( bMove,                                                                                                        //--- ФУНКЦИЯ - РЕГИСТРАТОР - ПРОСМОТР - ОПЕРАЦИИ - Переместить ---
     "Переместить",
     "",
-    pageOperations, 0, OnPress_Move, 0
+    PageFunction::PageRecorder::PageShow::PageOperations::self, 0, OnPress_Move, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -51,7 +54,7 @@ static void OnPress_Delete()
 DEF_BUTTON( bDelete,                                                                                                          //--- ФУНКЦИЯ - РЕГИСТРАТОР - ПРОСМОТР - ОПЕРАЦИИ - Удалить ---
     "Удалить",
     "",
-    pageOperations, 0, OnPress_Delete, 0
+    PageFunction::PageRecorder::PageShow::PageOperations::self, 0, OnPress_Delete, 0
 )
 
 
@@ -63,7 +66,5 @@ DEF_PAGE_4( pageOperations, // -V641 // -V1027                                  
     &bCopy,     ///< ФУНКЦИЯ - РЕГИСТРАТОР - ПРОСМОТР - ОПЕРАЦИИ - Копировать
     &bMove,     ///< ФУНКЦИЯ - РЕГИСТРАТОР - ПРОСМОТР - ОПЕРАЦИИ - Переместить
     &bDelete,   ///< ФУНКЦИЯ - РЕГИСТРАТОР - ПРОСМОТР - ОПЕРАЦИИ - Удалить
-    Page::Name::Function_Recorder_Show_Operations, PageFunction::PageRecorder::PageShow::pointer, 0, 0, 0, 0
+    Page::Name::Function_Recorder_Show_Operations, PageFunction::PageRecorder::PageShow::self, 0, 0, 0, 0
 )
-
-const PageBase *PageFunction::PageRecorder::PageShow::PageOperations::pointer = &pageOperations;

@@ -6,13 +6,13 @@
 class PageFunction
 {
 public:
-    static const PageBase *pointer;
+    static const Page * const self;
 
     //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     class PageFrequencyCounter
     {
     public:
-        static const PageBase *pointer;
+        static const Page * const self;
 
         /// \todo Здесь страшенный говнокод. Нельзя опускаться до персональных проверок
 
@@ -28,7 +28,14 @@ public:
     class PageFFT
     {
     public:
-        static const PageBase *pointer;
+        static const Page * const self;
+
+        //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+        class PageCursors
+        {
+        public:
+            static const Page * const self;
+        };
     };
 
     //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -39,13 +46,13 @@ public:
 
         static void OnChanged_Mode(bool);
 
-        static const PageBase *pointer;
+        static const Page * const self;
 
         //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
         class PageCalibration
         {
         public:
-            static const PageBase *pointer;
+            static const Page * const self;
         };
     };
 
@@ -58,54 +65,54 @@ public:
 
         static void OnChanged_Control(bool);
 
-        static const PageBase *pointer;
+        static const Page * const self;
     };
 
     //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     class PageRecorder
     {
     public:
-        static const PageBase *pointer;
+        static const Page * const self;
 
         //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
         class PageSource
         {
         public:
             
-            static const PageBase *pointer;
+            static const Page * const self;
         };
 
         //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
         class PageRecord
         {
         public:
-            static const PageBase *pointer;
+            static const Page * const self;
         };
 
         //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
         class PageShow
         {
         public:
-            static const PageBase *pointer;
+            static const Page * const self;
 
             //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
             class PageOperations
             {
             public:
-                static const PageBase *pointer;
+                static const Page * const self;
             };
 
             //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
             class PageView
             {
             public:
-                static const PageBase *pointer;
+                static const Page * const self;
 
                 //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
                 class PageCursors
                 {
                 public:
-                    static const PageBase *pointer;
+                    static const Page * const self;
                 };
             };
         };

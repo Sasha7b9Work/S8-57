@@ -15,8 +15,8 @@ using namespace Osci::Settings;
 extern const PageBase pageDisplay;
 extern const PageBase pageViewSignal;
 
-const PageBase *PageDisplay::PageView::pointer = &pageViewSignal;
-const PageBase *PageDisplay::pointer = &pageDisplay;
+const Page * const PageDisplay::PageView::self = (const Page * const)&pageViewSignal;
+const Page * const PageDisplay::self = (const Page * const)&pageDisplay;
 
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -58,7 +58,7 @@ DEF_CHOICE_8( cMinMax,                                                          
     "32",
     "64",
     "128",
-    ENUM_MIN_MAX, pageDisplay, IsActive_MinMax, OnChanged_MinMax, 0
+    ENUM_MIN_MAX, PageDisplay::self, IsActive_MinMax, OnChanged_MinMax, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -75,7 +75,7 @@ DEF_CHOICE_10( cSmoothing,                                                      
     "8 точек",
     "9 точек",
     "10 точек",
-    ENUM_SMOOTHING.value, pageDisplay, 0, 0, 0
+    ENUM_SMOOTHING.value, PageDisplay::self, 0, 0, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -87,7 +87,7 @@ DEF_CHOICE_5( cRefreshFPS,                                                      
     "5",
     "2",
     "1",
-    ENUM_SIGNALS_IN_SEC.value, pageDisplay, 0, 0, 0
+    ENUM_SIGNALS_IN_SEC.value, PageDisplay::self, 0, 0, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -97,7 +97,7 @@ DEF_CHOICE_2( cScaleYtype,                                                      
     "смещения на экране.",
     "Напряжение",
     "Деления",
-    LINKING_RSHIFT, pageDisplay, 0, 0, 0
+    LINKING_RSHIFT, PageDisplay::self, 0, 0, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -108,7 +108,7 @@ DEF_CHOICE_4( cType, // -V206                                                   
     "Тип 2",
     "Тип 3",
     "Тип 4",
-    TYPE_GRID, pageDisplay, 0, 0, 0
+    TYPE_GRID, PageDisplay::self, 0, 0, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -129,7 +129,7 @@ DEF_CHOICE_9(cAverage_Num,                                                      
     "64",
     "128",
     "256",
-    ENUM_AVE, pageDisplay, 0, OnChange_AverageNum, 0
+    ENUM_AVE, PageDisplay::self, 0, OnChange_AverageNum, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -138,7 +138,7 @@ DEF_CHOICE_2( cViewMode,                                                        
     "Задаёт режим отображения сигнала",
     "Вектор",
     "Точки",
-    MODE_DRAW_SIGNAL, pageDisplay, 0, 0, 0
+    MODE_DRAW_SIGNAL, PageDisplay::self, 0, 0, 0
 )
 
 
@@ -146,7 +146,7 @@ DEF_PAGE_1( pageViewSignal, //-V641
     "ОТОБРАЖ",
     "Настройки отображения сигналов",
     &cViewMode,
-    Page::Name::Display_View, PageDisplay::pointer, 0, 0, 0, 0
+    Page::Name::Display_View, PageDisplay::self, 0, 0, 0, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -154,16 +154,16 @@ DEF_PAGE_9( pageDisplay, // -V641 // -V1027                                     
     "ДИСПЛЕЙ",
     "Содержит настройки отображения дисплея.",
     &cViewMode,                             ///< ДИСПЛЕЙ - Отображение
-    PageDisplay::PageAccumulation::pointer, ///< ДИСПЛЕЙ - НАКОПЛЕНИЕ
+    PageDisplay::PageAccumulation::self, ///< ДИСПЛЕЙ - НАКОПЛЕНИЕ
     &cAverage_Num,                          ///< ДИСПЛЕЙ - Усреднение
-    //PageDisplay::PageAverage::pointer,      ///< ДИСПЛЕЙ - УСРЕДНЕНИЕ
+    //PageDisplay::PageAverage::self,      ///< ДИСПЛЕЙ - УСРЕДНЕНИЕ
     &cMinMax,                               ///< ДИСПЛЕЙ - Мин Макс
     &cSmoothing,                            ///< ДИСПЛЕЙ - Сглаживание
     &cRefreshFPS,                           ///< ДИСПЛЕЙ - Частота обновл
     &cType,                                 ///< ДИСПЛЕЙ - Сетка
-    //PageDisplay::PageGrid::pointer,         ///< ДИСПЛЕЙ - СЕТКА
+    //PageDisplay::PageGrid::self,         ///< ДИСПЛЕЙ - СЕТКА
     &cScaleYtype,                           ///< ДИСПЛЕЙ - Смещение
-    PageDisplay::PageSettings::pointer,     ///< ДИСПЛЕЙ - НАСТРОЙКИ
+    PageDisplay::PageSettings::self,     ///< ДИСПЛЕЙ - НАСТРОЙКИ
 //    &cThickness,                            ///< ДИСПЛЕЙ - Толщина
     Page::Name::Display, 0, 0, 0, 0, 0
 )

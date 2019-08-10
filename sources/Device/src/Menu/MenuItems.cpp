@@ -563,9 +563,9 @@ bool Control::IsPage() const
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-bool Control::ExistKeeper(const PageBase *_keeper)
+bool Control::ExistKeeper(const Page *_keeper)
 {
-    const PageBase *item = keeper;
+    const Page *item = keeper;
     while (item)
     {
         if (item == _keeper)
@@ -591,9 +591,9 @@ void Governor::SetValue(int16 v)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-bool Page::IsSubPage(const PageBase *parent)
+bool Page::IsSubPage(const Page *parent)
 {
-    PageBase *keep = KEEPER(this);
+    Page *keep = KEEPER(this);
 
     while (keep)
     {

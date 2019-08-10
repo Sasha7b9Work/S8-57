@@ -3,8 +3,9 @@
 #include "Settings/Settings.h"
 
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 extern const PageBase pageSource;
+
+const Page * const PageFunction::PageRecorder::PageSource::self = (const Page * const)&pageSource;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -13,7 +14,7 @@ DEF_CHOICE_2( cChanA,                                                           
     "Выбор канала 1 для записи и просмотра",
     DISABLE_RU,
     ENABLE_RU,
-    RECORDER_SOURCE_A, pageSource, 0, 0, 0
+    RECORDER_SOURCE_A, PageFunction::PageRecorder::PageSource::self, 0, 0, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -22,7 +23,7 @@ DEF_CHOICE_2( cChanB,                                                           
     "Выбор канала 2 для записи и просмотра",
     DISABLE_RU,
     ENABLE_RU,
-    RECORDER_SOURCE_B, pageSource, 0, 0, 0
+    RECORDER_SOURCE_B, PageFunction::PageRecorder::PageSource::self, 0, 0, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -31,7 +32,7 @@ DEF_CHOICE_2( cSensor,                                                          
     "Выбор датчика для записи и просмотра",
     DISABLE_RU,
     ENABLE_RU,
-    RECORDER_SOURCE_SENSOR, pageSource, 0, 0, 0
+    RECORDER_SOURCE_SENSOR, PageFunction::PageRecorder::PageSource::self, 0, 0, 0
 )
 
 
@@ -42,7 +43,5 @@ DEF_PAGE_2( pageSource, // -V641 // -V1027                                      
     &cChanA,        ///< ФУНКЦИЯ - РЕГИСТРАТОР - ИСТОЧНИК - Канал 1
     &cChanB,        ///< ФУНКЦИЯ - РЕГИСТРАТОР - ИСТОЧИНК - Канал 2
     //&cSensor,       ///< ФУНКЦИЯ - РЕГИСТРАТОР - ИСТОЧНИК - Датчик
-    Page::Name::Function_Recorder_Source, PageFunction::PageRecorder::pointer, 0, 0, 0, 0
+    Page::Name::Function_Recorder_Source, PageFunction::PageRecorder::self, 0, 0, 0, 0
 )
-
-const PageBase *PageFunction::PageRecorder::PageSource::pointer = &pageSource;

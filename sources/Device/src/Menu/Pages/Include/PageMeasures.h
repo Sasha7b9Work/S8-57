@@ -5,7 +5,7 @@
 class PageMeasures
 {
 public:
-    static const PageBase *pointer;
+    static const Page * const self;
 
     static const PageBase *GetPageFrequencyCounter();
 
@@ -13,13 +13,13 @@ public:
     class PageAuto
     {
     public:
-        static const PageBase *pointer;
+        static const Page * const self;
 
         //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
         class PageTune
         {
         public:
-            static const PageBase *pointer;
+            static const Page * const self;
         };
     };
 
@@ -27,13 +27,13 @@ public:
     class PageCursors
     {
     public:
-        static const PageBase *pointer;
+        static const Page * const self;
 
         //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
         class PageSet
         {
         public:
-            static const PageBase *pointer;
+            static const Page * const self;
 
             static void Draw_Set_Channel(int x, int y);
 
@@ -76,6 +76,6 @@ public:
     class PageMath
     {
     public:
-        static const PageBase *pointer;
+        static const Page * const self;
     };
 };

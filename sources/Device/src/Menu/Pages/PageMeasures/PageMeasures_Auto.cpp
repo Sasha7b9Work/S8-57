@@ -8,7 +8,7 @@
 
 extern const PageBase pageAuto;
 
-const PageBase *PageMeasures::PageAuto::pointer = &pageAuto;
+const Page * const PageMeasures::PageAuto::self = (const Page * const)&pageAuto;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -17,7 +17,7 @@ DEF_CHOICE_2( cIsShow,                                                          
     "Âûâîäèòü èëè íå âûâîäèòü èçìåðåíèÿ íà ýêðàí",
     "Íåò",
     "Äà",
-    SHOW_MEASURES, pageAuto, 0, 0, 0
+    SHOW_MEASURES, PageMeasures::PageAuto::self, 0, 0, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -45,7 +45,7 @@ DEF_CHOICE_7( cNumber,                                                          
     "3x5",
     "6x1",
     "6x2",
-    NUM_MEASURES, pageAuto, IsActive_NumberChannels, 0, 0
+    NUM_MEASURES, PageMeasures::PageAuto::self, IsActive_NumberChannels, 0, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -55,7 +55,7 @@ DEF_CHOICE_3(       cChannels,                                                  
     "1",
     "2",
     "1 è 2",
-    SOURCE_MEASURES, pageAuto, IsActive_NumberChannels, 0, 0
+    SOURCE_MEASURES, PageMeasures::PageAuto::self, IsActive_NumberChannels, 0, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -65,9 +65,9 @@ DEF_PAGE_4( pageAuto, // -V641 // -V1027                                        
     &cIsShow,                                   ///< ÈÇÌÅÐÅÍÈß - ÀÂÒÎÌÀÒ - Ïîêàçûâàòü
     &cNumber,                                   ///< ÈÇÌÅÐÅÍÈß - ÀÂÒÎÌÀÒ - Êîëè÷åñòâî
     &cChannels,                                 ///< ÈÇÌÅÐÅÍÈß - ÀÂÒÎÌÀÒ - Êàíàëû
-    PageMeasures::PageAuto::PageTune::pointer,  ///< ÈÇÌÅÐÅÍÈß - ÀÂÒÎÌÀÒ - ÍÀÑÒÐÎÈÒÜ
+    PageMeasures::PageAuto::PageTune::self,  ///< ÈÇÌÅÐÅÍÈß - ÀÂÒÎÌÀÒ - ÍÀÑÒÐÎÈÒÜ
     //&cMode,                                   ///< ÈÇÌÅÐÅÍÈß - ÀÂÒÎÌÀÒ - Âèä
-    Page::Name::Measures_Auto, PageMeasures::pointer, 0, 0, 0, 0
+    Page::Name::Measures_Auto, PageMeasures::self, 0, 0, 0, 0
 )
 
 

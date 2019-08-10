@@ -57,7 +57,7 @@ static bool EventIsProcessedInCurrentMode(const KeyEvent *event);
 /// Время последнего нажатия кнопки. Нужно для того, чтобы периодически сохранять настройки
 static uint timeLastPressedButton = MAX_UINT;
 /// Текущая главная страница
-static PageBase *mainPage = nullptr;
+static Page *mainPage = nullptr;
 /// Указатель на массив кнопок, которые разрешены для обработки. Если == 0, то разрешены все кнопки
 static const Key::E *allowedKeys = 0;
 
@@ -470,7 +470,7 @@ bool Menu::IsShown()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void ClosePage(PageBase *page)
+static void ClosePage(Page *page)
 {
     if (IS_PAGE_SB(page))
     {
@@ -491,7 +491,7 @@ static void ClosePage(PageBase *page)
         keeper->SetPosActItem(0x7f);
     }
 
-    if (page == (PageBase *)Menu::MainPage())    // -V1027
+    if (page == Menu::MainPage())    // -V1027
     {
         Menu::Show(false);
     }
@@ -499,7 +499,7 @@ static void ClosePage(PageBase *page)
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 // Закрыть parent, если он является хранителем page
-static void CloseIfSubPage(PageBase *parent, PageBase *page)
+static void CloseIfSubPage(Page *parent, Page *page)
 {
     if (page == parent)
     {
@@ -522,18 +522,18 @@ void Menu::Init()
     PageDisplay::Init();
     PageFunction::PageMultimeter::Init();
 
-    if ((PageBase *)LastOpened((Page *)PageFunction::pointer) == PageFunction::PageMultimeter::pointer) //-V1027
+    if ((Page *)LastOpened((Page *)PageFunction::self) == PageFunction::PageMultimeter::self) //-V1027
     {
-        ClosePage((PageBase *)PageFunction::PageMultimeter::pointer);
+        ClosePage((Page *)PageFunction::PageMultimeter::self);
     }
 
-    PageBase *opened = (PageBase *)LastOpened((Page *)PageFunction::pointer); //-V1027
+    Page *opened = (Page *)LastOpened((Page *)PageFunction::self); //-V1027
 
-    CloseIfSubPage((PageBase *)PageFunction::PageMultimeter::pointer, opened);
-    CloseIfSubPage((PageBase *)PageFunction::PageRecorder::pointer, opened);
-    CloseIfSubPage((PageBase *)PageFunction::PageTester::pointer, opened);
-    CloseIfSubPage((PageBase *)PageFunction::PageFrequencyCounter::pointer, opened);
-    CloseIfSubPage((PageBase *)PageFunction::PageFFT::pointer, opened);
+    CloseIfSubPage((Page *)PageFunction::PageMultimeter::self, opened);
+    CloseIfSubPage((Page *)PageFunction::PageRecorder::self, opened);
+    CloseIfSubPage((Page *)PageFunction::PageTester::self, opened);
+    CloseIfSubPage((Page *)PageFunction::PageFrequencyCounter::self, opened);
+    CloseIfSubPage((Page *)PageFunction::PageFFT::self, opened);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -543,7 +543,7 @@ void Menu::CloseOpenedItem()
 
     if (IS_PAGE(item))
     {
-        ClosePage((PageBase *)item); //-V1027
+        ClosePage((Page *)item); //-V1027
     }
     else
     {
@@ -571,9 +571,9 @@ Page::Name::E Menu::GetNameOpenedPage()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-PageBase *Menu::OpenedPage()
+Page *Menu::OpenedPage()
 {
-    return (PageBase *)OpenedItem(); //-V1027
+    return (Page *)OpenedItem(); //-V1027
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -805,13 +805,13 @@ void Menu::SetItemUnderButton(Key::E button, Control *control)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-PageBase *Menu::MainPage()
+Page *Menu::MainPage()
 {
     return mainPage;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Menu::SetMainPage(PageBase *page)
+void Menu::SetMainPage(Page *page)
 {
     mainPage = page;
 }

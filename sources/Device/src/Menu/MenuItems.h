@@ -15,15 +15,15 @@ extern int8 gCurDigit;
 
 /// Общая часть для всех типов элементов меню
 #define COMMON_PART_MENU_ITEM                                                                           \
-    uint8           type;           /* Тип итема */                                                     \
-    int8            num;            /* Число вариантов для Choice или число контролов для Page*/        \
-    bool            isPageSB;       /* Если true, то это страница малых кнопок */                       \
-    uint8           name;           /* Имя из перечисления Page::Name */                                \
-    const PageBase  *keeper;        /* Адрес страницы, которой принадлежит. Для Page_Main = 0 */        \
-    pFuncBV         funcOfActive;   /* Активен ли данный элемент */                                     \
-    const char      *titleHint[2]   /* Название страницы на русском и английском языках. Также подсказка для режима помощи */
+    uint8        type;           /* Тип итема */                                                     \
+    int8         num;            /* Число вариантов для Choice или число контролов для Page*/        \
+    bool         isPageSB;       /* Если true, то это страница малых кнопок */                       \
+    uint8        name;           /* Имя из перечисления Page::Name */                                \
+    const Page  *keeper;        /* Адрес страницы, которой принадлежит. Для Page_Main = 0 */        \
+    pFuncBV      funcOfActive;   /* Активен ли данный элемент */                                     \
+    const char  *titleHint[2]   /* Название страницы на русском и английском языках. Также подсказка для режима помощи */
 
-class PageBase;
+class Page;
 
 #define IS_PAGE(item)           (item->type == Control::Type::Page)
 #define NOT_PAGE(item)          (item->type != Control::Type::Page)
@@ -36,7 +36,7 @@ class PageBase;
 #define IS_GOVERNOR_COLOR(item) (item->type == Control::Type::GovernorColor)
 #define IS_TIME(item)           (item->type == Control::Type::Time)
     
-#define KEEPER(item)            ((PageBase *)item->keeper)
+#define KEEPER(item)            ((Page *)item->keeper)
 
 
 class Control
@@ -79,9 +79,9 @@ public:
     /// Возвращает true, если тип контрола - Page
     bool IsPage() const;
     /// Возвращает адрес родителя
-    const PageBase *Keeper() { return keeper; }
+    const Page *Keeper() { return keeper; }
     /// Возвращает true, если в древе предков стоит keeper
-    bool ExistKeeper(const PageBase *keeper);
+    bool ExistKeeper(const Page *keeper);
     /// Имеет родителя - не является главной страницей меню
     bool HaveParent() { return Keeper() != nullptr; };
 
@@ -176,7 +176,7 @@ public:
 
     void DrawNestingPage(int left, int bottom);
     /// true, если является вложенной подстраницей страницы parent
-    bool IsSubPage(const PageBase *parent);
+    bool IsSubPage(const Page *parent);
 
     struct Name
     {

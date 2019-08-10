@@ -10,16 +10,16 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 extern const PageBase pageFunction;
 
-const PageBase *PageFunction::pointer = &pageFunction;
+const Page * const PageFunction::self = (const Page * const)&pageFunction;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 DEF_PAGE_5( pageFunction,                                                                                                                                                   //--- ‘”Õ ÷»ﬂ ---
     "‘”Õ ÷»ﬂ",
     "¬˚·Ó ÙÛÌÍˆËË",
-    PageFunction::PageFrequencyCounter::pointer,   ///< ‘”Õ ÷»ﬂ - ◊¿—“Œ“ŒÃ≈–
-    PageFunction::PageFFT::pointer,                ///< ‘”Õ ÷»ﬂ - —œ≈ “–
-    PageFunction::PageMultimeter::pointer,         ///< ‘”Õ ÷»ﬂ - Ã”À‹“»Ã≈“–
-    PageFunction::PageTester::pointer,             ///< ‘”Õ ÷»ﬂ - “≈—“≈–
-    PageFunction::PageRecorder::pointer,           ///< ‘”Õ ÷»ﬂ - –≈√»—“–¿“Œ–
+    PageFunction::PageFrequencyCounter::self,   ///< ‘”Õ ÷»ﬂ - ◊¿—“Œ“ŒÃ≈–
+    PageFunction::PageFFT::self,                ///< ‘”Õ ÷»ﬂ - —œ≈ “–
+    PageFunction::PageMultimeter::self,         ///< ‘”Õ ÷»ﬂ - Ã”À‹“»Ã≈“–
+    PageFunction::PageTester::self,             ///< ‘”Õ ÷»ﬂ - “≈—“≈–
+    PageFunction::PageRecorder::self,           ///< ‘”Õ ÷»ﬂ - –≈√»—“–¿“Œ–
     Page::Name::Function, nullptr, 0, 0, 0, 0
 )

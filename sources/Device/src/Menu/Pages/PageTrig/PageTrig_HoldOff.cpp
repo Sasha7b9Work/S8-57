@@ -8,9 +8,7 @@
 
 extern const PageBase pageHoldOff;
 
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-const PageBase *PageTrig::PageHoldOff::pointer = &pageHoldOff;
+const Page * const PageTrig::PageHoldOff::self = (const Page * const)&pageHoldOff;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -25,7 +23,7 @@ DEF_CHOICE_2( cHoldOff,                                                         
     ,
     DISABLE_RU,
     ENABLE_RU,
-    TRIG_HOLDOFF_ENABLED, pageHoldOff, 0, OnChanged_HoldOff, 0
+    TRIG_HOLDOFF_ENABLED, PageTrig::PageHoldOff::self, 0, OnChanged_HoldOff, 0
 )
 
 
@@ -38,7 +36,7 @@ static void OnChanged_Duration()
 DEF_GOVERNOR( gDuration,                                                                                                                           //--- СИНХР - УДЕРЖАНИЕ - Длительность ---
     "Длительность",
     "Задаёт длительность промежутка между импульсами синхронизации",
-    TRIG_HOLDOFF, 10, 32000, pageHoldOff, 0, OnChanged_Duration, 0
+    TRIG_HOLDOFF, 10, 32000, PageTrig::PageHoldOff::self, 0, OnChanged_Duration, 0
 )
 
 /// \todo gDuration должен обеспечивать возможность хранения большего значения, чем 32000
@@ -50,5 +48,5 @@ DEF_PAGE_2( pageHoldOff, // -V641 // -V1027                                     
     "",
     &cHoldOff,          ///< СИНХР - УДЕРЖАНИЕ - Удержание
     &gDuration,         ///< СИНХР - УДЕРЖАНИЕ - Длительность
-    Page::Name::Trig_HoldOff, PageTrig::pointer, 0, 0, 0, 0
+    Page::Name::Trig_HoldOff, PageTrig::self, 0, 0, 0, 0
 )

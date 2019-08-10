@@ -1,13 +1,12 @@
 #include "defines.h"
 #include "Menu/Pages/Include/PageService.h"
 #include "Settings/Settings.h"
-
 #include "Hardware/Timer.h"
 
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 extern const PageBase pageCalibrate;
 
+const Page * const PageService::PageCalibrate::self = (const Page * const)&pageCalibrate;
 
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -21,7 +20,7 @@ DEF_CHOICE_2( cCalibrator_Calibrator, // -V206                                  
     "Режим работы калибратора",
     "Перем",
     "Пост",
-    CALIBRATOR_MODE, pageCalibrate, 0, OnChanged_Calibrator_Calibrator, 0
+    CALIBRATOR_MODE, PageService::PageCalibrate::self, 0, OnChanged_Calibrator_Calibrator, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -49,7 +48,7 @@ static void OnPress_Calibrator_Calibrate()
 DEF_BUTTON( bCalibrator_Calibrate,                                                                                                                //--- СЕРВИС - КАЛИБРАТОР - Калибровать ---
     "Калибровать",
     "Запуск процедуры калибровки",
-    pageCalibrate, IsActive_Calibrator_Calibrate, OnPress_Calibrator_Calibrate, 0
+    PageService::PageCalibrate::self, IsActive_Calibrator_Calibrate, OnPress_Calibrator_Calibrate, 0
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -58,9 +57,5 @@ DEF_PAGE_2( pageCalibrate, // -V641 // -V1027                                   
     "Управлением калибратором и калибровка осциллографа",
     &cCalibrator_Calibrator,     /// СЕРВИС - КАЛИБРАТОР - Калибратор
     &bCalibrator_Calibrate,      /// СЕРВИС - КАЛИБРАТОР - Калибровать
-    Page::Name::Service_Calibrator, PageService::pointer, 0, 0, 0, 0
+    Page::Name::Service_Calibrator, PageService::self, 0, 0, 0, 0
 )
-
-
-const PageBase * const PageService::PageCalibrate::pointer = &pageCalibrate;
-

@@ -11,7 +11,8 @@
 extern const PageBase pageConsole;
 extern const PageBase pageRegisters;
 
-const PageBase *PageService::PageDebug::PageConsole::pointer = &pageConsole;
+const Page * const PageDebug::PageConsole::self = (const Page * const)&pageConsole;
+const Page * const PageDebug::PageRegisters::self = (const Page * const)&pageRegisters;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -20,14 +21,14 @@ DEF_CHOICE_2( cShow,                                                            
     "",
     "Нет",
     "Да",
-    set.dbg_showConsole, pageConsole, 0, 0, 0
+    set.dbg_showConsole, PageDebug::PageConsole::self, 0, 0, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 DEF_GOVERNOR( gNumStrings,                                                                                                                          //--- ОТЛАДКА - КОНСОЛЬ - Число строк ---
     "Число строк",
     "",
-    CONSOLE_NUM_STRINGS, 0, 33, pageConsole, 0, Console::OnChangedMaxStringsInConsole, 0
+    CONSOLE_NUM_STRINGS, 0, 33, PageDebug::PageConsole::self, 0, Console::OnChangedMaxStringsInConsole, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -36,7 +37,7 @@ DEF_CHOICE_2( cSizeFont,                                                        
     "",
     "5",
     "8",
-    set.dbg_sizeFont, pageConsole, 0, 0, 0
+    set.dbg_sizeFont, PageDebug::PageConsole::self, 0, 0, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -45,7 +46,7 @@ DEF_CHOICE_2( cModeStop,                                                        
     "Предоставляет возможность приостановки вывода в консоль путём нажатия на кнопку ПУСК/СТОП",
     DISABLE_RU,
     ENABLE_RU,
-    MODE_PAUSE_CONSOLE, pageConsole, 0, 0, 0
+    MODE_PAUSE_CONSOLE, PageDebug::PageConsole::self, 0, 0, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -54,7 +55,7 @@ DEF_CHOICE_2( cRegisters_ShowAll,                                               
     "Показывать все значения, засылаемые в регистры",
     "Нет",
     "Да",
-    DBG_SHOW_ALL, pageRegisters, 0, 0, 0
+    DBG_SHOW_ALL, PageDebug::PageRegisters::self, 0, 0, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -68,7 +69,7 @@ DEF_CHOICE_2( cRegisters_RD_FL,                                                 
     "",
     DISABLE_RU,
     ENABLE_RU,
-    DBG_SHOW_FLAG, pageRegisters, IsActive_Console_Registers, 0, 0
+    DBG_SHOW_FLAG, PageDebug::PageRegisters::self, IsActive_Console_Registers, 0, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -77,7 +78,7 @@ DEF_CHOICE_2( cRegisters_RShiftA,                                               
     "",
     DISABLE_RU,
     ENABLE_RU,
-    set.dbg_showRShift[Chan::A], pageRegisters, IsActive_Console_Registers, 0, 0
+    set.dbg_showRShift[Chan::A], PageDebug::PageRegisters::self, IsActive_Console_Registers, 0, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -86,7 +87,7 @@ DEF_CHOICE_2( cRegisters_RShiftB,                                               
     "",
     DISABLE_RU,
     ENABLE_RU,
-    set.dbg_showRShift[Chan::B], pageRegisters, IsActive_Console_Registers, 0, 0
+    set.dbg_showRShift[Chan::B], PageDebug::PageRegisters::self, IsActive_Console_Registers, 0, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -95,7 +96,7 @@ DEF_CHOICE_2( cRegisters_TrigLev,                                               
     "",
     DISABLE_RU,
     ENABLE_RU,
-    set.dbg_showTrigLev, pageRegisters, IsActive_Console_Registers, 0, 0
+    set.dbg_showTrigLev, PageDebug::PageRegisters::self, IsActive_Console_Registers, 0, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -104,7 +105,7 @@ DEF_CHOICE_2( cRegisters_RangeA,                                                
     "",
     DISABLE_RU,
     ENABLE_RU,
-    set.dbg_showRange[Chan::A], pageRegisters, IsActive_Console_Registers, 0, 0
+    set.dbg_showRange[Chan::A], PageDebug::PageRegisters::self, IsActive_Console_Registers, 0, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -113,7 +114,7 @@ DEF_CHOICE_2( cRegisters_RangeB,                                                
     "",
     DISABLE_RU,
     ENABLE_RU,
-    set.dbg_showRange[Chan::B], pageRegisters, IsActive_Console_Registers, 0, 0
+    set.dbg_showRange[Chan::B], PageDebug::PageRegisters::self, IsActive_Console_Registers, 0, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -122,7 +123,7 @@ DEF_CHOICE_2( cRegisters_TrigParam,                                             
     "",
     DISABLE_RU,
     ENABLE_RU,
-    set.dbg_showTrigParam, pageRegisters, IsActive_Console_Registers, 0, 0
+    set.dbg_showTrigParam, PageDebug::PageRegisters::self, IsActive_Console_Registers, 0, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -131,7 +132,7 @@ DEF_CHOICE_2( cRegisters_ChanParamA,                                            
     "",
     DISABLE_RU,
     ENABLE_RU,
-    set.dbg_showChanParam[Chan::A], pageRegisters, IsActive_Console_Registers, 0, 0
+    set.dbg_showChanParam[Chan::A], PageDebug::PageRegisters::self, IsActive_Console_Registers, 0, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -140,7 +141,7 @@ DEF_CHOICE_2( cRegisters_ChanParamB,                                            
     "",
     DISABLE_RU,
     ENABLE_RU,
-    set.dbg_showChanParam[Chan::B], pageRegisters, IsActive_Console_Registers, 0, 0
+    set.dbg_showChanParam[Chan::B], PageDebug::PageRegisters::self, IsActive_Console_Registers, 0, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -149,7 +150,7 @@ DEF_CHOICE_2( cRegisters_TBase,                                                 
     "",
     DISABLE_RU,
     ENABLE_RU,
-    set.dbg_showTBase, pageRegisters, IsActive_Console_Registers, 0, 0
+    set.dbg_showTBase, PageDebug::PageRegisters::self, IsActive_Console_Registers, 0, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -158,7 +159,7 @@ DEF_CHOICE_2( cRegisters_TShift,                                                
     "",
     DISABLE_RU,
     ENABLE_RU,
-    set.dbg_showTShift, pageRegisters, IsActive_Console_Registers, 0, 0
+    set.dbg_showTShift, PageDebug::PageRegisters::self, IsActive_Console_Registers, 0, 0
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -177,7 +178,7 @@ DEF_PAGE_12( pageRegisters, // -V641                                            
     &cRegisters_ChanParamB,     ///< ОТЛАДКА - КОНСОЛЬ - РЕГИСТРЫ - Парам. кан. 2
     &cRegisters_TBase,          ///< ОТЛАДКА - КОНСОЛЬ - РЕГИСТРЫ - ВРЕМЯ/ДЕЛ
     &cRegisters_TShift,         ///< ОТЛАДКА - КОНСОЛЬ - РЕГИСТРЫ - Т см.
-    Page::Name::Debug_Console_Registers, &pageConsole, 0, 0, 0, 0
+    Page::Name::Debug_Console_Registers, PageDebug::PageConsole::self, 0, 0, 0, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -189,7 +190,7 @@ static void Draw_Console_SizeSettings(int x, int y)
 DEF_BUTTON( bSizeSettings,                                                                                                                      //--- ОТЛАДКА - КОНСОЛЬ - Размер настроек ---
     "",
     "Показывает текущий размер структуры для сохранения настроек",
-    pageConsole, 0, 0, Draw_Console_SizeSettings
+    PageDebug::PageConsole::self, 0, 0, Draw_Console_SizeSettings
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -202,6 +203,6 @@ DEF_PAGE_2( pageConsole, // -V641 // -V1027                                     
 //    &cModeStop,         ///< ОТЛАДКА - КОНСОЛЬ - Реж. останова
 //    &pageRegisters,     ///< ОТЛАДКА - КОНСОЛЬ - РЕГИСТРЫ
 //    &bSizeSettings,     ///< ОТЛАДКА - КОНСОЛЬ - Размер настроек
-    Page::Name::Debug_Console, PageService::PageDebug::pointer, 0, 0, 0, 0
+    Page::Name::Debug_Console, PageDebug::self, 0, 0, 0, 0
 )
 

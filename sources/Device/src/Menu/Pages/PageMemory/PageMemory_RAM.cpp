@@ -17,12 +17,9 @@
 
 using namespace Display::Primitives;
 
-
 extern const PageBase pageRAM;
 
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-const PageBase *PageMemory::PageRAM::pointer = &pageRAM;
+const Page * const PageRAM::self = (const Page * const)&pageRAM;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -41,7 +38,7 @@ static void Draw_Last_Next(int x, int y)
 DEF_SMALL_BUTTON( bLast_Next,                                                                                                                        //--- ПАМЯТЬ - ПОСЛЕДНИЕ - Следующий ---
     "Следующий",
     "Перейти к следующему сигналу",
-    pageRAM, 0, OnPress_Last_Next, Draw_Last_Next
+    PageRAM::self, 0, OnPress_Last_Next, Draw_Last_Next
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -60,13 +57,13 @@ static void Draw_Last_Prev(int x, int y)
 DEF_SMALL_BUTTON( bLast_Prev,                                                                                                                       //--- ПАМЯТЬ - ПОСЛЕДНИЕ - Предыдущий ---
     "Предыдущий",
     "Перейти к предыдущему сигналу",
-    pageRAM, 0, OnPress_Last_Prev, Draw_Last_Prev
+    PageRAM::self, 0, OnPress_Last_Prev, Draw_Last_Prev
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void OnPress_Last_SaveToROM()
 {
-    ((Page *)PageMemory::PageRAM::pointer)->SetAsCurrent();
+    ((Page *)PageRAM::self)->SetAsCurrent();
     MODE_WORK = ModeWork::ROM;      // Находимся в режиме внутренного ЗУ
     EXIT_FROM_ROM_TO_RAM = 1;       // Этот признак мы устанавливаем для того, чтобы:
                                     // 1 - по нажатии кнопки Выход со страницы "ВНУТР ЗУ" выходить в "Последние", а не в основное меню;
@@ -85,7 +82,7 @@ static void Draw_Last_SaveToROM(int x, int y)
 DEF_SMALL_BUTTON( bLast_SaveToROM,                                                                                                                    //--- ПАМЯТЬ - ПОСЛЕДНИЕ - Внутр ЗУ ---
     "Внутр ЗУ",
     "Нажмите эту кнопку, чтобы сохранить сигнал во внутреннем запоминающем устройстве",
-    pageRAM, 0, OnPress_Last_SaveToROM, Draw_Last_SaveToROM
+    PageRAM::self, 0, OnPress_Last_SaveToROM, Draw_Last_SaveToROM
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -108,7 +105,7 @@ static void Draw_Last_SaveToDrive(int x, int y)
 DEF_SMALL_BUTTON( bLast_SaveToDrive,                                                                                                                 //--- ПАМЯТЬ - ПОСЛЕДНИЕ - Сохранить ---
     "Сохранить",
     "Кнопка становится доступна при присоединённом внешнем ЗУ. Позволяет сохранить сигнал на внешем ЗУ",
-    pageRAM, 0, OnPress_Last_SaveToDrive, Draw_Last_SaveToDrive
+    PageRAM::self, 0, OnPress_Last_SaveToDrive, Draw_Last_SaveToDrive
 )
 
 
@@ -172,5 +169,5 @@ DEF_PAGE_2( pageRAM, // -V641 // -V1027                                         
     &bLast_Prev,                        ///< ПАМЯТЬ - ПОСЛЕДНИЕ - Предыдущий
     //&bLast_SaveToROM,                   ///< ПАМЯТЬ - ПОСЛЕДНИЕ - Внутр ЗУ
     //&bLast_SaveToDrive,                 ///< ПАМЯТЬ - ПОСЛЕДНИЕ - Сохранить
-    Page::Name::SB_Memory_Last, PageMemory::pointer, 0, OnPress_RAM, OnDraw_RAM, HandlerKey_RAM
+    Page::Name::SB_Memory_Last, PageMemory::self, 0, OnPress_RAM, OnDraw_RAM, HandlerKey_RAM
 )

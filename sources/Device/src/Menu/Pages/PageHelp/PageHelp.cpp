@@ -13,6 +13,8 @@ using namespace Display::Primitives;
 
 extern const PageBase pHelp;
 
+const Page * const PageHelp::self = (const Page * const)&pHelp;
+
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 static void DrawSB_Help_ParagraphEnter(int x, int y)
@@ -56,28 +58,28 @@ static bool HandlerKey_Help(KeyEvent)
 DEF_SMALL_BUTTON( sbHelpParagraphEnter,                                                                                                                            //--- ПОМОЩЬ - Открыть ---
     "Открыть",
     "Открывает раздел справки",
-    pHelp, HelpContent_EnterParagraphIsActive, HelpContent_EnterParagraph, DrawSB_Help_ParagraphEnter
+    PageHelp::self, HelpContent_EnterParagraphIsActive, HelpContent_EnterParagraph, DrawSB_Help_ParagraphEnter
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 DEF_SMALL_BUTTON( sbHelpParagraphLeave,                                                                                                                            //--- ПОМОЩЬ - Закрыть ---
      "Закрыть",
      "Закрывает раздел справки",
-    pHelp, HelpContent_LeaveParagraphIsActive, HelpContent_LeaveParagraph, DrawSB_Help_ParagraphLeave
+    PageHelp::self, HelpContent_LeaveParagraphIsActive, HelpContent_LeaveParagraph, DrawSB_Help_ParagraphLeave
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 DEF_SMALL_BUTTON( sbHelpParagraphPrev,                                                                                                                   //--- ПОМОЩЬ - Предыдущий раздел ---
     "Предыдущий раздел",
     "Выбрать предыдущий раздел справки",
-    pHelp, 0, HelpContent_PrevParagraph, DrawSB_Help_ParagraphPrev
+    PageHelp::self, 0, HelpContent_PrevParagraph, DrawSB_Help_ParagraphPrev
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 DEF_SMALL_BUTTON( sbHelpParagraphNext,                                                                                                                    //--- ПОМОЩЬ - Следующий раздел ---
     "Следующий раздел",
     "Выбрать следующий раздел справки",
-    pHelp, 0, HelpContent_NextParagraph, DrawSB_Help_ParagraphNext
+    PageHelp::self, 0, HelpContent_NextParagraph, DrawSB_Help_ParagraphNext
 )
 
 /*
@@ -93,8 +95,6 @@ DEF_SMALL_BUTTON_EXIT(  sbExitHelp,                                             
     pHelp, 0, PressSB_Help_Exit, DrawSB_Help_ParagraphNext
 )
 */
-
-const PageBase *PageHelp::pointer = &pHelp;
 
 /*
 DEF_PAGE_SB(        pHelp,                                                                                                                                                   //--- ПОМОЩЬ ---

@@ -4,8 +4,9 @@
 #include "Settings/Settings.h"
 
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 extern const PageBase ppFreqMeter;
+
+const Page * const PageFunction::PageFrequencyCounter::self = (const Page * const)&ppFreqMeter;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -30,7 +31,7 @@ DEF_CHOICE_2( cEnable,                                                          
     "",
     DISABLE_RU,
     ENABLE_RU,
-    FREQ_METER_ENABLED, ppFreqMeter, 0, OnChanged_FreqMeter_Enable, 0
+    FREQ_METER_ENABLED, PageFunction::PageFrequencyCounter::self, 0, OnChanged_FreqMeter_Enable, 0
 )
 
 
@@ -45,7 +46,7 @@ DEF_CHOICE_2( cModeView,                                                        
     "",
     "×àñòîòà",
     "Ïåðèîä",
-    FREQ_METER_MODE_VIEW, ppFreqMeter, IsActive_ModeView, 0, 0
+    FREQ_METER_MODE_VIEW, PageFunction::PageFrequencyCounter::self, IsActive_ModeView, 0, 0
 )
 
 
@@ -67,7 +68,7 @@ DEF_CHOICE_3( cTimeF,                                                           
     "100ìñ",
     "1ñ",
     "10ñ",
-    FREQ_METER_TIMECOUNTING, ppFreqMeter, IsActive_SettingsPeriod, OnChanged_FreqMeter_Frequency, 0
+    FREQ_METER_TIMECOUNTING, PageFunction::PageFrequencyCounter::self, IsActive_SettingsPeriod, OnChanged_FreqMeter_Frequency, 0
 )
 
 
@@ -78,7 +79,7 @@ DEF_CHOICE_4( cFreqClc,                                                         
     "1ÌÃö",
     "10ÌÃö",
     "100ÌÃö",
-    FREQ_METER_FREQ_CLC, ppFreqMeter, IsActive_SettingsFrequency, OnChanged_FreqMeter_Period, 0
+    FREQ_METER_FREQ_CLC, PageFunction::PageFrequencyCounter::self, IsActive_SettingsFrequency, OnChanged_FreqMeter_Period, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -91,13 +92,11 @@ DEF_CHOICE_6( cNumPeriods,                                                      
     "1000",
     "10000",
     "100000",
-    FREQ_METER_NUM_PERIODS, ppFreqMeter, IsActive_SettingsFrequency, OnChanged_FreqMeter_Period, 0
+    FREQ_METER_NUM_PERIODS, PageFunction::PageFrequencyCounter::self, IsActive_SettingsFrequency, OnChanged_FreqMeter_Period, 0
 )
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-const PageBase *PageFunction::PageFrequencyCounter::pointer = &ppFreqMeter;
-
 const Choice *PageFunction::PageFrequencyCounter::GetChoiceTimeF()
 {
     return (const Choice *)&cTimeF;
@@ -121,5 +120,5 @@ DEF_PAGE_5( ppFreqMeter, // -V641                                               
     &cTimeF,            ///< ÈÇÌÅÐÅÍÈß - ×ÀÑÒÎÒÎÌÅÐ - Âðåìÿ ñ÷¸òà F
     &cFreqClc,          ///< ÈÇÌÅÐÅÍÈß - ×ÀÑÒÎÒÎÌÅÐ - Ìåòêè âðåìåíè
     &cNumPeriods,       ///< ÈÇÌÅÐÅÍÈß - ×ÀÑÒÎÒÎÌÅÐ - Êîë-âî ïåðèîäîâ
-    Page::Name::Function_FrequencyCounter, PageFunction::pointer, 0, 0, 0, 0
+    Page::Name::Function_FrequencyCounter, PageFunction::self, 0, 0, 0, 0
 )
