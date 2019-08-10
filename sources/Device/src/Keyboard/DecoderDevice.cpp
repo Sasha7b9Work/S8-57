@@ -2,9 +2,9 @@
 #include "log.h"
 #include "DecoderDevice.h"
 #include "Menu/Menu.h"
-
 #include "Utils/Debug.h"
 #include "Display/Painter.h"
+#include "Menu/BufferButtons.h"
 #include <cstdlib>
 
 
@@ -144,7 +144,7 @@ static bool ButtonPress(uint8 data)
     }
     else
     {
-        Menu::ButtonEvent(KeyEvent(button, (TypePress::E)data));
+        BufferButtons::Push(KeyEvent(button, (TypePress::E)data));
     }
 
     return true;

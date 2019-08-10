@@ -19,8 +19,6 @@ struct Menu
     static void Update();
     /// Нарисовать меню
     static void Draw();
-    /// Функция вызывается при нажатии, повторе и отпускании кнопки
-    static void ButtonEvent(KeyEvent event);
     /// Установить время автоматического сокрытия меню в соответствии с установками.
     static void SetAutoHide(bool active);
     /// Показать/скрыть меню.

@@ -14,6 +14,7 @@
 #define pString const char * const
 
 #include "Display/Painter.h"
+#include "Menu/BufferButtons.h"
 
 #include <SDL.h>
 
@@ -330,7 +331,7 @@ void Frame::OnDown(wxCommandEvent &event)
     std::cout << "down " << Key(key).Name() << std::endl;
     event.Skip();
 
-    Menu::ButtonEvent(KeyEvent(key, TypePress::Press));
+    BufferButtons::Push(KeyEvent(key, TypePress::Press));
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -341,7 +342,7 @@ void Frame::OnUp(wxCommandEvent &event)
     std::cout << "up   " << Key(key).Name() << std::endl;
     event.Skip();
 
-    Menu::ButtonEvent(KeyEvent(key, TypePress::Release));
+    BufferButtons::Push(KeyEvent(key, TypePress::Release));
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
