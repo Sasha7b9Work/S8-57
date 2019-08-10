@@ -324,7 +324,7 @@ Page::Name::E Page::GetName() const
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void TimeControl::SetOpened()
+void TimeControl::SetOpened() const
 {
     PackedTime time = Clock::GetTime();
     *(seconds) = (int8)time.seconds;
@@ -364,7 +364,7 @@ void TimeControl::SetNewTime()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void TimeControl::SelectNextPosition()
+void TimeControl::SelectNextPosition() const
 {
     Math::CircleIncrease<int8>(curField, 0, 7);
     Color::ResetFlash();
@@ -433,46 +433,5 @@ void Choice::ShortPress() const
     else
     {
         ChangeIndex(1);
-    }
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Button::ShortPress() const
-{
-    if (IsActive())
-    {
-        SetCurrent(true);
-
-        if (funcOnPress)
-        {
-            funcOnPress();
-        }
-    }
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Page::ShortPress() const
-{
-    if (funcOnEnterExit)
-    {
-        funcOnEnterExit(true);
-    }
-
-    SetAsCurrent();
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Governor::ShortPress() const
-{
-    if (IsActive())
-    {
-        if (Menu::OpenedItem() == this)
-        {
-            NextPosition();
-        }
-        else
-        {
-            SetCurrent(!IsCurrentItem());
-        }
     }
 }

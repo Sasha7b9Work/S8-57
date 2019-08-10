@@ -401,17 +401,7 @@ void Control::ShortPress() const
     }
     else if(type == Control::Type::Time)
     {
-        TimeControl *time = (TimeControl *)this;
-        if(!IsOpened())
-        {
-            SetCurrent(true);
-            time->SetOpened();
-            Open(true);
-        }
-        else
-        {
-            time->SelectNextPosition();
-        }
+        ((TimeControl *)this)->ShortPress();
     }
     else if(type == Control::Type::GovernorColor)
     {
@@ -571,4 +561,60 @@ bool Page::IsSubPage(const Page *parent)
     }
 
     return false;
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Button::ShortPress() const
+{
+    if (IsActive())
+    {
+        SetCurrent(true);
+
+        if (funcOnPress)
+        {
+            funcOnPress();
+        }
+    }
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Page::ShortPress() const
+{
+    if (funcOnEnterExit)
+    {
+        funcOnEnterExit(true);
+    }
+
+    SetAsCurrent();
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Governor::ShortPress() const
+{
+    if (IsActive())
+    {
+        if (Menu::OpenedItem() == this)
+        {
+            NextPosition();
+        }
+        else
+        {
+            SetCurrent(!IsCurrentItem());
+        }
+    }
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void TimeControl::ShortPress() const
+{
+    if (!IsOpened())
+    {
+        SetCurrent(true);
+        SetOpened();
+        Open(true);
+    }
+    else
+    {
+        SelectNextPosition();
+    }
 }

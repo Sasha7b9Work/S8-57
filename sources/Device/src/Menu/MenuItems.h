@@ -482,15 +482,16 @@ public:
     int8 *month;
     int8 *day;
     int8 *year;
-    void SetOpened();
+    void SetOpened() const;
     void IncCurrentPosition();
     void SetNewTime();
-    void SelectNextPosition();
+    void SelectNextPosition() const;
     void DecCurrentPosition();
     void Draw(int x, int y, bool opened);
     void DrawClosed(int x, int y);
     void DrawOpened(int x, int y);
     char GetSymbol();
+    void ShortPress() const;
 };
 
 typedef void * pVOID;
