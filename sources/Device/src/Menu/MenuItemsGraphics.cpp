@@ -697,7 +697,7 @@ static void DrawValueWithSelectedPosition(int x, int y, int value, uint numDigit
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-int Page::ItemOpenedPosX(Control *item)
+int Page::ItemOpenedPosX(const Control *item)
 {
     const Page *page = item->Keeper();
     return (page->PosCurrentItem() % MENU_ITEMS_ON_DISPLAY) * item->Width();

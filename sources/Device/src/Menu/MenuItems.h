@@ -166,7 +166,7 @@ public:
 
     void DrawItems(int x, int y);
 
-    static int ItemOpenedPosX(Control *item);
+    static int ItemOpenedPosX(const Control *item);
 
     void DrawPagesUGO(int right, int bottom);
 
