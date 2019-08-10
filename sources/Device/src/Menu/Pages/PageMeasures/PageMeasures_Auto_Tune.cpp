@@ -19,7 +19,7 @@ using namespace Osci::Measurements;
 
 extern const PageBase pageTune;
 
-const Page * const PageMeasures::PageAuto::PageTune::self = (const Page *)&pageTune;
+const Page * const PageMeasuresAuto::PageTune::self = (const Page *)&pageTune;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -33,7 +33,7 @@ static void Draw_Tune_Markers(int x, int y)
 DEF_SMALL_BUTTON( bTune_Markers,                                                                                                                     //--- ИЗМЕРЕНИЯ - НАСТРОИТЬ - Маркер ---
     "Маркер",
     "Позволяет установить маркеры для визуального контроля измерений",
-    &PageMeasures::PageAuto::PageTune::self, 0, Measure::ShortPressOnSmallButonMarker, Draw_Tune_Markers
+    &PageMeasuresAuto::PageTune::self, 0, Measure::ShortPressOnSmallButonMarker, Draw_Tune_Markers
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -49,7 +49,7 @@ static void Draw_Tune_Settings(int x, int y)
 DEF_SMALL_BUTTON( bTune_Settings,                                                                                                                 //--- ИЗМЕРЕНИЯ - НАСТРОИТЬ - Настройка ---
     "Настройка",
     "Позволяет выбрать необходимые измерения",
-    &PageMeasures::PageAuto::PageTune::self, 0, Measurements::PageChoice::ChangeState, Draw_Tune_Settings
+    &PageMeasuresAuto::PageTune::self, 0, Measurements::PageChoice::ChangeState, Draw_Tune_Settings
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -70,5 +70,5 @@ DEF_PAGE_2( pageTune, // -V641 // -V1027
     "Переход в режим точной настройки количества и видов измерений",
     &bTune_Markers,
     &bTune_Settings,
-    Page::Name::Measures_Auto_Tune, &PageMeasures::PageAuto::self, IsActive_Tune, 0, 0, HandlerKey_Tune
+    Page::Name::Measures_Auto_Tune, &PageMeasuresAuto::self, IsActive_Tune, 0, 0, HandlerKey_Tune
 )

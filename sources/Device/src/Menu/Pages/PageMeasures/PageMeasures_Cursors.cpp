@@ -14,7 +14,7 @@
 
 extern const PageBase pageCursors;
 
-const Page * const PageMeasures::PageCursors::self = (const Page *)&pageCursors;
+const Page * const PageMeasuresCursors::self = (const Page *)&pageCursors;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -23,7 +23,7 @@ DEF_CHOICE_2( cShow,                                                            
     "Включает/отключает курсоры.",
     "Нет",
     "Да",
-    CURS_SHOW, &PageMeasures::PageCursors::self, 0, 0, 0
+    CURS_SHOW, &PageMeasuresCursors::self, 0, 0, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -40,7 +40,7 @@ DEF_CHOICE_2( cShow,                                                            
 //    "Напряжение",
 //    "Время",
 //    "Напряж и время",
-//    CURS_LOOK_MODE(Chan::A), &PageMeasures::PageCursors::self, 0, 0, 0
+//    CURS_LOOK_MODE(Chan::A), &PageMeasuresCursors::self, 0, 0, 0
 //)
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -57,7 +57,7 @@ DEF_CHOICE_2( cShow,                                                            
 //    "Напряжение",
 //    "Время",
 //    "Напряж. и время",
-//    CURS_LOOK_MODE(Chan::B), &PageMeasures::PageCursors::self, 0, 0, 0
+//    CURS_LOOK_MODE(Chan::B), &PageMeasuresCursors::self, 0, 0, 0
 //)
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -69,7 +69,7 @@ DEF_CHOICE_2( cShowFreq,                                                        
     ,
     DISABLE_RU,
     ENABLE_RU,
-    CURSORS_SHOW_FREQ, &PageMeasures::PageCursors::self, 0, 0, 0
+    CURSORS_SHOW_FREQ, &PageMeasuresCursors::self, 0, 0, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -80,6 +80,6 @@ DEF_PAGE_3( pageCursors, // -V641 // -V1027                                     
 //    &cLookModeChanA,                                ///< ИЗМЕРЕНИЯ - КУРСОРЫ - Слежение канал 1
 //    &cLookModeChanB,                                ///< ИЗМЕРЕНИЯ - КУРСОРЫ - Слежение канал 2
     &cShowFreq,                                     ///< ИЗМЕРЕНИЯ - КУРОСРЫ - 1/dT
-    PageMeasures::PageCursors::PageSet::self,    ///< ИЗМЕРЕНИЯ - КУРСОРЫ - УСТАНОВИТЬ
+    PageMeasuresCursors::PageSet::self,    ///< ИЗМЕРЕНИЯ - КУРСОРЫ - УСТАНОВИТЬ
     Page::Name::Measures_Cursors, &PageMeasures::self, 0, 0, 0, 0
 )
