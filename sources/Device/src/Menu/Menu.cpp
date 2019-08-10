@@ -632,7 +632,7 @@ static void DrawHintItem(int x, int y, int width)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-int Menu::Y()
+int Menu::Y0()
 {
     return Display::HEIGHT - Item::HEIGHT - 2;
 }
@@ -648,11 +648,11 @@ void Menu::Draw()
         {
             if (IS_PAGE(item))
             {
-                item->Draw(0, Y(), true);
+                item->Draw(0, Y0(), true);
             }
             else
             {
-                ((Page *)item->Keeper())->Draw(0, Y(), true);
+                ((Page *)item->Keeper())->Draw(0, Y0(), true);
             }
         }
     }
