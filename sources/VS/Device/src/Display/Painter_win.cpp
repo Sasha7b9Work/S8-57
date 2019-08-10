@@ -224,8 +224,10 @@ static void CreateButtons(Frame *frame)
 
     dX = 5;
 
+    int x00 = 145;
+
     width = height = 25;
-    x0 = 160;
+    x0 = x00 + 160;
     y0 = Frame::HEIGHT + 100;
 
     size.SetWidth(width);
@@ -240,7 +242,7 @@ static void CreateButtons(Frame *frame)
     // Кнопки времени
 
     width = 51;
-    x0 = 5;
+    x0 = x00 + 5;
 
     y0 = Frame::HEIGHT + 100;
 
@@ -252,7 +254,7 @@ static void CreateButtons(Frame *frame)
     CreateButton(Key::TShiftLess, frame, {x0, y0}, size, "<-");
     CreateButton(Key::TShiftMore, frame, {x0 + width + dY, y0}, size, "->");
 
-    int x = 5 + (2 * width + dX) / 2 - width / 2;
+    int x = x00 + 5 + (2 * width + dX) / 2 - width / 2;
 
     CreateButton(Key::Time, frame, {x, y0 - height - dY - height - dY}, size, "Развёртка");
 
@@ -260,15 +262,15 @@ static void CreateButtons(Frame *frame)
 
     int y = Frame::HEIGHT + 200;
 
-    CreateButtonsChannel(frame, "Канал 1", 5, y, Key::ChannelA, Key::RangeLessA, Key::RangeMoreA, Key::RShiftLessA, Key::RShiftMoreA);
+    CreateButtonsChannel(frame, "Канал 1", 5 + x00, y, Key::ChannelA, Key::RangeLessA, Key::RangeMoreA, Key::RShiftLessA, Key::RShiftMoreA);
 
     // Кнопки канала B
 
-    CreateButtonsChannel(frame, "Канал 1", 120, y, Key::ChannelB, Key::RangeLessB, Key::RangeMoreB, Key::RShiftLessB, Key::RShiftMoreB);
+    CreateButtonsChannel(frame, "Канал 1", 120 + x00, y, Key::ChannelB, Key::RangeLessB, Key::RangeMoreB, Key::RShiftLessB, Key::RShiftMoreB);
 
-    CreateButtonsTrig(frame, 235, y - 130);
+    CreateButtonsTrig(frame, 235 + x00, y - 130);
 
-    CreateButton(Key::Start, frame, { 230, Frame::HEIGHT + 198 }, { 80, 25 }, "ПУСК/СТОП");
+    CreateButton(Key::Start, frame, { 230 + x00, Frame::HEIGHT + 198 }, { 80, 25 }, "ПУСК/СТОП");
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
