@@ -14,7 +14,7 @@ static const TimeBase name = { Control::Type::Time, 0, false, Page::Name::NoPage
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #define DEF_GOVERNOR(name, title, hint, cell, min, max, keeper, funcActive, funcChanged, funcBeforeDraw)                                                \
-volatile static const GovernorBase name = {Control::Type::Governor, 0, false, Page::Name::NoPage, keeper, funcActive, {title, hint},                   \
+static const GovernorBase name = {Control::Type::Governor, 0, false, Page::Name::NoPage, keeper, funcActive, {title, hint},                   \
     &(cell), min, max, funcChanged, funcBeforeDraw};
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -216,7 +216,7 @@ static const ChoiceBase name = {Control::Type::Choice, 10, false, Page::Name::No
 #define DEF_CHOICE_16(name, title, hint, name1, name2,  name3,  name4,  name5,  name6,  name7,  name8, name9, name10,                                           \
     name11, name12, name13, name14, name15, name16, cell, keeper, funcActive, funcChanged, funcDraw)                                                            \
 static pString hints##name[] = {name1,  name2, name3,  name4,  name5,  name6, name7, name8, name9, name10, name11, name12, name13, name14, name15, name16 };    \
-volatile static const ChoiceBase name = {Control::Type::Choice, 16, false, Page::Name::NoPage, keeper, funcActive, {title, hint},                              \
+static const ChoiceBase name = {Control::Type::Choice, 16, false, Page::Name::NoPage, keeper, funcActive, {title, hint},                              \
     (int8 *)&cell, hints##name, funcChanged, funcDraw};
 
 #define DEF_CHOICE_REG_9(name, titleRU, titleEN, hintRU, hintEN,                                                                                        \
