@@ -9,5 +9,5 @@ public:
 
     static void OnChanged_TPos(bool active);
 
-    static const PageBase *pointer;
+    static const PageBase * const pointer;
 };
