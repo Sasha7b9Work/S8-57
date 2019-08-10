@@ -409,15 +409,7 @@ void Control::ShortPress() const
     }
     else if(type == Control::Type::ChoiceReg)
     {
-        Choice *choice = (Choice *)this;
-        if(IsActive())
-        {
-            choice->SetCurrent(!IsCurrentItem());
-        }
-        else
-        {
-            choice->Change(false);
-        }
+        ((Choice *)this)->ShortPress();
     }
     else if(type == Control::Type::DrawButton)
     {
@@ -620,6 +612,38 @@ void GovernorColor::ShortPress() const
                 SetCurrent(true);
             }
             Open(!IsOpened());
+        }
+    }
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Choice::ShortPress() const
+{
+    if (IS_CHOICE(this))
+    {
+        if (!IsActive())
+        {
+            Change(false);
+        }
+        else if (!IsOpened())
+        {
+            StartChange(1);
+        }
+        else
+        {
+            ChangeIndex(1);
+        }
+    }
+
+    if (IS_CHOICE_REG(this))
+    {
+        if (IsActive())
+        {
+            SetCurrent(!IsCurrentItem());
+        }
+        else
+        {
+            Change(false);
         }
     }
 }

@@ -418,20 +418,3 @@ void GovernorColor::ChangeValue(int delta)
 
     Color::InitGlobalColors();
 }
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Choice::ShortPress() const
-{
-    if (!IsActive())
-    {
-        Change(false);
-    }
-    else if (!IsOpened())
-    {
-        StartChange(1);
-    }
-    else
-    {
-        ChangeIndex(1);
-    }
-}
