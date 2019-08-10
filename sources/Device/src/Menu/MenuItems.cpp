@@ -216,7 +216,7 @@ bool Control::IsShade() const
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 bool Control::IsPressed() const
 {
-    return this == Menu::itemUnderKey;
+    return this == Menu::pressedItem;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -523,7 +523,7 @@ void Control::LongPress() const
     {
         SButton *button = (SButton *)this;
         button->funcOnPress();
-        Menu::itemUnderKey = this;
+        Menu::pressedItem = this;
     }
     else
     {
