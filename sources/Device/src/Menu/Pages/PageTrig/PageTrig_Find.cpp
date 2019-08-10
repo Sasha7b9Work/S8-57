@@ -14,7 +14,7 @@ const Page * const PageTrig::PageFind::self = (const Page *)&pageFind;
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 static const char *hintsSearch_Mode[] = { "Ручной", "Hand", "Автоматический",  "Auto" };
 
-static const ChoiceBase cMode =                                                                                                                               //--- СИНХР - ПОИСК - Режим ---
+static const ChoiceDef cMode =                                                                                                                               //--- СИНХР - ПОИСК - Режим ---
 {
     Control::Type::Choice, 2, false, Page::Name::NoPage, &PageTrig::PageFind::self, 0,
     {
