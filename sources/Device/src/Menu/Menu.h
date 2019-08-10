@@ -29,8 +29,6 @@ struct Menu
     static void TemporaryEnableStrNavi();
     /// Возвращает адрес открытого элемента меню
     static Control *OpenedItem();
-    /// Возвращает указатель на текущую главную страницу меню
-    static Page *MainPage();
 
     static const Control *ItemUnderButton(Key::E button);
 
@@ -61,6 +59,8 @@ struct Menu
     static const char *stringForHint;
     /// Item, подсказку для которого нужно выводить в случае включённого режима подсказок.
     static Control *itemHint;
+    /// Текущая главная страница
+    static const Page *mainPage;
 
     struct Title
     {
@@ -92,6 +92,4 @@ struct Menu
              _60 = 60   ///< Через 60 секунд.
         } value;
     };
-
-    static void SetMainPage(Page *page);
 };

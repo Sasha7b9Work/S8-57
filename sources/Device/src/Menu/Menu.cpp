@@ -35,9 +35,11 @@ using namespace Transceiver;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-const Control *Menu::itemUnderKey = 0;
-const char    *Menu::stringForHint = 0;
-   Control    *Menu::itemHint = 0;
+const Control *Menu::itemUnderKey = nullptr;
+const char    *Menu::stringForHint = nullptr;
+   Control    *Menu::itemHint = nullptr;
+const Page    *Menu::mainPage = nullptr;
+
 /// true, если нужно сохранять копию экрана на флешку
 static bool needSaveScreen = false;
 /// Элементы управления, назначенные в данный момент соответствующим кнопкам
@@ -56,8 +58,6 @@ static void ResetItemsUnderButton();
 static bool EventIsProcessedInCurrentMode(const KeyEvent *event);
 /// Время последнего нажатия кнопки. Нужно для того, чтобы периодически сохранять настройки
 static uint timeLastPressedButton = MAX_UINT;
-/// Текущая главная страница
-static Page *mainPage = nullptr;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -437,7 +437,7 @@ void Menu::Show(bool show)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 bool Menu::IsShown()
 {
-    return set.menu_show && MainPage() != nullptr;
+    return set.menu_show && mainPage != nullptr;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -462,7 +462,7 @@ static void ClosePage(Page *page)
         keeper->SetPosActItem(0x7f);
     }
 
-    if (page == Menu::MainPage())    // -V1027
+    if (page == Menu::mainPage)    // -V1027
     {
         Menu::Show(false);
     }
@@ -525,7 +525,7 @@ void Menu::CloseOpenedItem()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Control *Menu::OpenedItem()
 {
-    return LastOpened((Page *)MainPage());
+    return LastOpened((Page *)Menu::mainPage);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -729,16 +729,4 @@ const Control *Menu::ItemUnderButton(Key::E button)
 void Menu::SetItemUnderButton(Key::E button, const Control *control)
 {
     underButton[button] = control;
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-Page *Menu::MainPage()
-{
-    return mainPage;
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Menu::SetMainPage(Page *page)
-{
-    mainPage = page;
 }

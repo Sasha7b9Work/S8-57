@@ -489,7 +489,7 @@ static void ShowHidePage(const Page *page)
     }
     else
     {
-        Menu::SetMainPage((Page *)page);
+        Menu::mainPage = page;
 
         if (!Menu::IsShown())
         {
