@@ -688,7 +688,7 @@ static void ResetItemsUnderButton()
 {
     for (int i = 0; i < Key::Number; i++)
     {
-        Menu::SetItemUnderButton((Key::E)i, 0);
+        Menu::itemForButton[(Key::E)i] = 0;
     }
 }
 
@@ -710,10 +710,4 @@ void Menu::SaveSettings()
             Settings::Save();
         }
     }
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Menu::SetItemUnderButton(Key::E button, const Control *control)
-{
-    itemForButton[button] = control;
 }

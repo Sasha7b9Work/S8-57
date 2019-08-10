@@ -368,7 +368,7 @@ void Page::Draw(int x, int y, bool opened) const
             {
                 if (Menu::itemForButton[(Key::E)(Key::F1 + i)] != item)
                 {
-                    Menu::SetItemUnderButton((Key::E)(Key::F1 + i), 0);
+                    Menu::itemForButton[(Key::E)(Key::F1 + i)] = nullptr;
                 }
             }
             x = ItemOpenedPosX(item);
@@ -451,7 +451,7 @@ void Page::DrawTitle(int x, int yTop) const
 
     x = Text(Title().CString()).DrawInCenterRect(x, yTop, Menu::Title::WIDTH + 2 + delta, Menu::Title::HEIGHT, colorText);
 
-    Menu::SetItemUnderButton(GetFuncButtonFromX(yTop), this);
+    Menu::itemForButton[GetFuncButtonFromX(yTop)] = this;
 
     Color::GRAY_75.SetAsCurrent();
     DrawPagesUGO(eX + Menu::Title::WIDTH - 3, yTop + Menu::Title::HEIGHT);
@@ -472,8 +472,7 @@ void Page::DrawItems(int x, int y) const
         if (item)
         {
             item->Draw(x, y, false);
-            Key::E button = GetFuncButtonFromX(x);
-            Menu::SetItemUnderButton(button, item);
+            Menu::itemForButton[GetFuncButtonFromX(x)] = item;
         }
 
         x += Width();

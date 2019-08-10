@@ -30,8 +30,6 @@ struct Menu
     /// Возвращает адрес открытого элемента меню
     static Control *OpenedItem();
 
-    static void SetItemUnderButton(Key::E button, const Control *control);
-
     static Page::Name::E GetNameOpenedPage();
 
     static void SaveScreenToDrive();
