@@ -95,7 +95,7 @@ static void Device::SetCurrentMode()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static bool Device::SetCurrentMode(const Page *page, Device::Mode::E mode)
 {
-    Control *opened = Menu::OpenedItem();
+    Item *opened = Menu::OpenedItem();
 
     if (opened && 
         (opened == (Page *)page || opened->ExistKeeper(page)))

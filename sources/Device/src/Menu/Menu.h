@@ -28,7 +28,7 @@ struct Menu
     /// Функция временно включает отображение строки навигации меню, если задано настройками.
     static void TemporaryEnableStrNavi();
     /// Возвращает адрес открытого элемента меню
-    static Control *OpenedItem();
+    static Item *OpenedItem();
 
     static Page::Name::E GetNameOpenedPage();
 
@@ -37,24 +37,24 @@ struct Menu
     static void SaveRow(int row);
 
     /// Возвращает адрес текущего элемента меню (текущим, как правило, является элемент, кнопка которого была нажата последней
-    static Control *CurrentItem();
+    static Item *CurrentItem();
     /// Закрыть открытый элемент меню
     static void CloseOpenedItem();
 
-    static void SetItemForHint(const Control *item);
+    static void SetItemForHint(const Item *item);
 
     static void SaveSettings();
     /// С какоей позиции Y рисовать меню. Позиция берётся без учёта заголовка
     static int Y0();
     /// Возвращает адрес элемента, соответствующего функциональной кнопкке
-    static const Control *ItemForFuncKey(Key::E key);
+    static const Item *ItemForFuncKey(Key::E key);
     ///\brief  Здесь хранится адрес элемента меню, соответствующего функциональной клавише [1..5], если она находится в нижнем положении, и 0, 
     /// если ни одна кнопка не нажата.
-    static const Control *pressedItem;
+    static const Item *pressedItem;
     /// Строка подсказки, которую надо выводить в случае включённого режима подсказок.
     static const char *stringForHint;
     /// Item, подсказку для которого нужно выводить в случае включённого режима подсказок.
-    static Control *itemHint;
+    static Item *itemHint;
     /// Текущая главная страница
     static const Page *mainPage;
 
@@ -62,17 +62,6 @@ struct Menu
     {
         static const int HEIGHT = 9;
         static const int WIDTH = 320 / 5 * 2 - 2;
-    };
-
-    struct Item
-    {
-        static const int HEIGHT = 23;
-
-        struct Value
-        {
-            static const int HEIGHT = 13;
-            static const int WIDTH = 320 / 5 - 4; // -V112
-        };
     };
 
     /// Через какое время после последнего нажатия кнопки скрывать меню.

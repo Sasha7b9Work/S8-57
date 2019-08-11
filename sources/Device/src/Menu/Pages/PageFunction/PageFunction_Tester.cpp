@@ -112,15 +112,15 @@ void PageTester::OnChanged_Control(bool)
 {
     Page *page = (Page *)&pageTester;
 
-    Control **items = (Control **)page->items;
+    Item **items = (Item **)page->items;
 
     if (TESTER_CONTROL_IS_U)
     {
-        items[1] = (Control *)&cStepU; //-V641
+        items[1] = (Item *)&cStepU; //-V641
     }
     else
     {
-        items[1] = (Control *)&cStepI; //-V641
+        items[1] = (Item *)&cStepI; //-V641
     }
 
     Tester::LoadStep();

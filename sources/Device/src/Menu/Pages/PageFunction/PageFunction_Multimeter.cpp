@@ -179,27 +179,27 @@ void PageMultimeter::OnChanged_Mode(bool)
 {
     Page *page = (Page *)&pageMultimeter;
 
-    Control **items = (Control **)page->items;
+    Item **items = (Item **)page->items;
 
     if (MULTI_MEASURE == Multimeter::Measure::VoltageDC)
     {
-        items[1] = (Control *)&cRangesVoltageDC; //-V641
+        items[1] = (Item *)&cRangesVoltageDC; //-V641
     }
     else if (MULTI_MEASURE == Multimeter::Measure::VoltageAC)
     {
-        items[1] = (Control *)&cRangesVoltageAC; //-V641
+        items[1] = (Item *)&cRangesVoltageAC; //-V641
     }
     else if (MULTI_MEASURE == Multimeter::Measure::CurrentDC)
     {
-        items[1] = (Control *)&cRangesCurrentDC;  // -V641
+        items[1] = (Item *)&cRangesCurrentDC;  // -V641
     }
     else if (MULTI_MEASURE == Multimeter::Measure::CurrentAC)
     {
-        items[1] = (Control *)&cRangesCurrentAC;    // -V641
+        items[1] = (Item *)&cRangesCurrentAC;    // -V641
     }
     else if (MULTI_MEASURE == Multimeter::Measure::Resistance)
     {
-        items[1] = (Control *)&cRangesResistance; //-V641
+        items[1] = (Item *)&cRangesResistance; //-V641
     }
     else if (MULTI_MEASURE == Multimeter::Measure::TestDiode)
     {

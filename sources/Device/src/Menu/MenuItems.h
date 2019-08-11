@@ -25,18 +25,18 @@ extern int8 gCurDigit;
 
 class Page;
 
-#define IS_PAGE(item)           (item->type == Control::Type::Page)
-#define NOT_PAGE(item)          (item->type != Control::Type::Page)
+#define IS_PAGE(item)           (item->type == Item::Type::Page)
+#define NOT_PAGE(item)          (item->type != Item::Type::Page)
 #define IS_PAGE_SB(item)        (item->isPageSB)
-#define IS_CHOICE(item)         (item->type == Control::Type::Choice)
-#define IS_CHOICE_REG(item)     (item->type == Control::Type::ChoiceReg)
-#define NOT_CHOICE_REG(item)    (item->type != Control::Type::ChoiceReg)
-#define IS_GOVERNOR(item)       (item->type == Control::Type::Governor)
-#define NOT_GOVERNOR(item)      (item->type != Control::Type::Governor)
-#define IS_GOVERNOR_COLOR(item) (item->type == Control::Type::GovernorColor)
-#define IS_TIME(item)           (item->type == Control::Type::Time)
+#define IS_CHOICE(item)         (item->type == Item::Type::Choice)
+#define IS_CHOICE_REG(item)     (item->type == Item::Type::ChoiceReg)
+#define NOT_CHOICE_REG(item)    (item->type != Item::Type::ChoiceReg)
+#define IS_GOVERNOR(item)       (item->type == Item::Type::Governor)
+#define NOT_GOVERNOR(item)      (item->type != Item::Type::Governor)
+#define IS_GOVERNOR_COLOR(item) (item->type == Item::Type::GovernorColor)
+#define IS_TIME(item)           (item->type == Item::Type::Time)
     
-class Control
+class Item
 {
 public:
     COMMON_PART_MENU_ITEM;
@@ -102,6 +102,14 @@ public:
 
         explicit Type(E v) : value(v) {};
     };
+
+    static const int HEIGHT = 23;
+
+    struct Value
+    {
+        static const int HEIGHT = 13;
+        static const int WIDTH = 320 / 5 - 4; // -V112
+    };
 };
 
 
@@ -114,7 +122,7 @@ class PageDef
 {
 public:
     COMMON_PART_MENU_ITEM;
-    const Control * const *items;   ///< Здесь указатели на пункты этой страницы (в обычной странице)
+    const Item * const *items;   ///< Здесь указатели на пункты этой страницы (в обычной странице)
                                     ///< для страницы малых кнопок  здесь хранятся 6 указателей на SButton : 0 - K_Enter, 1...5 - K_1...K_5
     pFuncVB     funcOnEnterExit;    ///< Будет вызываться при нажатии на свёрнутую страницу и при выходе из этой страницы на предыдущую
     pFuncVV     funcOnDraw;         ///< Будет вызываться после отрисовки кнопок
@@ -124,10 +132,10 @@ public:
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 #define SMALL_BUTTON_FROM_PAGE(page, numButton)     ((SButton *)((Page *)page)->items[numButton])
 
-class Page : public Control
+class Page : public Item
 {
 public:
-    const Control * const *items;   ///< Здесь указатели на пункты этой страницы (в обычной странице)
+    const Item * const *items;   ///< Здесь указатели на пункты этой страницы (в обычной странице)
                                     ///< для страницы малых кнопок  здесь хранятся 6 указателей на SButton : 0 - K_Enter, 1...5 - K_1...K_5
     pFuncVB     funcOnEnterExit;    ///< Будет вызываться при нажатии на свёрнутую страницу и при выходе из этой страницы на предыдущую
     pFuncVV     funcOnDraw;         ///< Будет вызываться после отрисовки кнопок
@@ -147,7 +155,7 @@ public:
     ///< Устанавливает позицию активного пункта меню
     void SetPosActItem(int8 pos) const;
     ///< Возвращает указатель на заданный элемент страницы
-    Control *GetControl(int numControl) const;
+    Item *GetControl(int numControl) const;
     /// \todo Возвращает позицию первого элемента страницы по адресу page на экране. Если текущая подстраница 0, это будет 0, если текущая 
     /// подстраница 1, это будет 5 и т.д.
     int PosItemOnLeft() const;
@@ -164,7 +172,7 @@ public:
 
     void DrawItems(int x, int y) const;
 
-    static int ItemOpenedPosX(const Control *item);
+    static int ItemOpenedPosX(const Item *item);
 
     void DrawPagesUGO(int right, int bottom) const;
 
@@ -174,7 +182,7 @@ public:
 
     void ShortPress() const;
     /// Возвращает адрес элемента, соответствующего функциональной кнопкке
-    const Control *ItemForFuncKey(Key::E key);
+    const Item *ItemForFuncKey(Key::E key);
 
     struct Name
     {
@@ -270,7 +278,7 @@ public:
     pFuncVII    funcForDraw;        ///< Функция будет вызываться во время отрисовки кнопки.
 };
 
-class Button : public Control
+class Button : public Item
 {
 public:
     pFuncVV     funcOnPress;        ///< Функция, которая вызывается при нажатии на кнопку.
@@ -300,7 +308,7 @@ public:
 };
 
 
-class SButton : public Control
+class SButton : public Item
 {
 public:
     pFuncVV                     funcOnPress;    ///< Эта функция вызвается для обработки нажатия кнопки.
@@ -325,7 +333,7 @@ public:
     pFuncVV funcBeforeDraw; ///< Функция, которая вызывается перед отрисовкой
 };
 
-class Governor : public Control
+class Governor : public Item
 {
 public:
     int16  *cell;
@@ -385,7 +393,7 @@ public:
     pFuncVII            funcForDraw;        ///< Функция вызывается после отрисовки элемента. 
 };
 
-class Choice : public Control
+class Choice : public Item
 {
 public:
     int8       *cell;
@@ -437,7 +445,7 @@ public:
     pFuncVV     funcOnChanged;      ///< Эту функцию нужно вызывать после изменения значения элемента.
 };
 
-class GovernorColor : public Control
+class GovernorColor : public Item
 {
 public:
     ColorType  *ct;                 ///< Структура для описания цвета.
@@ -476,7 +484,7 @@ public:
 };
 
 /// Устанавливает и показывает время.
-class TimeControl : public Control
+class TimeControl : public Item
 {
 public:
     int8 *curField;   ///< Текущее поле установки. 0 - выход, 1 - сек, 2 - мин, 3 - часы, 4 - день, 5 - месяц, 6 - год, 7 - установить.
@@ -502,4 +510,4 @@ typedef void * pVOID;
 #define MAX_NUM_ITEMS_IN_PAGE 15
 typedef pVOID arrayItems[MAX_NUM_ITEMS_IN_PAGE];
 
-extern Control emptyControl;
+extern Item emptyControl;

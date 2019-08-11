@@ -153,7 +153,7 @@ static void RestoreOsciSettings()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Recorder::OnPressStart()
 {
-    if (Menu::OpenedItem() != (Control *)PageRecorder::self) //-V1027
+    if (Menu::OpenedItem() != (Item *)PageRecorder::self) //-V1027
     {
         Display::FuncOnWaitStart("Перейдите на страницу РЕГИСТРАТОР", false);
 

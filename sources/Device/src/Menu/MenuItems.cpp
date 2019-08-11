@@ -11,7 +11,7 @@ extern int8 gCurDigit;
 
 #define NAME_FROM_INDEX(index) (names[index])
 
-Control emptyControl = { Control::Type::None };
+Item emptyControl = { Item::Type::None };
 
 
 String Choice::NameCurrentSubItem() const
@@ -54,14 +54,14 @@ const char *Choice::NamePrevSubItem()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-Control *Page::GetControl(int numControl) const
+Item *Page::GetControl(int numControl) const
 {
     if (numControl >= num)
     {
         return nullptr;
     }
 
-    return (Control *)items[numControl + (isPageSB ? 1 : 0)];
+    return (Item *)items[numControl + (isPageSB ? 1 : 0)];
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -112,17 +112,17 @@ char TimeControl::GetSymbol()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-char Control::GetSymbol() const
+char Item::GetSymbol() const
 {
-    if (type == Control::Type::Governor)
+    if (type == Item::Type::Governor)
     {
         return ((Governor *)this)->GetSymbol();
     }
-    else if (type == Control::Type::Choice)
+    else if (type == Item::Type::Choice)
     {
         return ((Choice *)this)->GetSymbol();
     }
-    else if (type == Control::Type::Time)
+    else if (type == Item::Type::Time)
     {
         return ((TimeControl *)this)->GetSymbol();
     }
@@ -181,15 +181,15 @@ void Page::ChangeSubPage(int delta)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-int Control::HeightOpened() const
+int Item::HeightOpened() const
 {
-    if (type == Control::Type::Page)
+    if (type == Item::Type::Page)
     {
         int numItems = ((const Page *)this)->NumItems() - ((Page *)this)->CurrentSubPage() * MENU_ITEMS_ON_DISPLAY;
         LIMITATION(numItems, 0, MENU_ITEMS_ON_DISPLAY); // -V2516
-        return Menu::Title::HEIGHT + Menu::Item::HEIGHT * numItems;
+        return Menu::Title::HEIGHT + HEIGHT * numItems;
     }
-    else if (type == Control::Type::Choice || type == Control::Type::ChoiceReg)
+    else if (type == Item::Type::Choice || type == Item::Type::ChoiceReg)
     {
         return MOI_HEIGHT_TITLE + ((Choice *)this)->NumSubItems() * MOSI_HEIGHT - 5;
     }
@@ -198,23 +198,23 @@ int Control::HeightOpened() const
         // здесь ничего не делаем
     }
 
-    return Menu::Item::HEIGHT;
+    return HEIGHT;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-bool Control::IsShade() const
+bool Item::IsShade() const
 {
     return Keeper()->CurrentItemIsOpened() && (this != Menu::OpenedItem());
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-bool Control::IsPressed() const
+bool Item::IsPressed() const
 {
     return this == Menu::pressedItem;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Control::SetCurrent(bool active) const
+void Item::SetCurrent(bool active) const
 {
     Page *page = (Page *)Keeper();
 
@@ -236,9 +236,9 @@ void Control::SetCurrent(bool active) const
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-bool Control::IsOpened() const
+bool Item::IsOpened() const
 {
-    if (type == Control::Type::Page)
+    if (type == Item::Type::Page)
     {
         const Page *page = Keeper();
 
@@ -248,7 +248,7 @@ bool Control::IsOpened() const
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Control::Open(bool open) const
+void Item::Open(bool open) const
 {
     Page *parent = (Page *)Keeper();
     parent->SetPosActItem(open ? (parent->PosCurrentItem() | 0x80) : (parent->PosCurrentItem() & 0x7f));
@@ -259,7 +259,7 @@ void Control::Open(bool open) const
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-String Control::Title() const
+String Item::Title() const
 {
     return String(titleHint[0]);
 }
@@ -336,22 +336,22 @@ bool Choice::ProcessKey(KeyEvent event)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-bool Control::ProcessKey(KeyEvent event)
+bool Item::ProcessKey(KeyEvent event)
 {
     bool result = false;
     
     switch (type)
     {
-    case Control::Type::Choice:
-    case Control::Type::ChoiceReg:
+    case Item::Type::Choice:
+    case Item::Type::ChoiceReg:
         result = ((Choice *)this)->ProcessKey(event);
         break;
 
-    case Control::Type::Page:
+    case Item::Type::Page:
         result = ((Page *)this)->ProcessKey(event);
         break;
 
-    case Control::Type::Governor:
+    case Item::Type::Governor:
         result = ((Governor *)this)->ProcessKey(event);
         break;
     }
@@ -375,43 +375,43 @@ bool Page::CurrentItemIsOpened() const
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-bool Control::IsCurrentItem() const
+bool Item::IsCurrentItem() const
 {
     return (this == Menu::CurrentItem());
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Control::ShortPress() const
+void Item::ShortPress() const
 {
-    if(type == Control::Type::Choice)
+    if(type == Item::Type::Choice)
     {
         ((Choice *)this)->ShortPress();
     }
-    else if (type == Control::Type::ChoiceReg)
+    else if (type == Item::Type::ChoiceReg)
     {
         ((Choice *)this)->ShortPress();
     }
-    else if(type == Control::Type::Button)
+    else if(type == Item::Type::Button)
     {
         ((Button *)this)->ShortPress();
     }
-    else if(type == Control::Type::Page)
+    else if(type == Item::Type::Page)
     {
         ((Page *)this)->ShortPress();
     }
-    else if(type == Control::Type::Governor)
+    else if(type == Item::Type::Governor)
     {
         ((Governor *)this)->ShortPress();
     }
-    else if(type == Control::Type::Time)
+    else if(type == Item::Type::Time)
     {
         ((TimeControl *)this)->ShortPress();
     }
-    else if(type == Control::Type::GovernorColor)
+    else if(type == Item::Type::GovernorColor)
     {
         ((GovernorColor *)this)->ShortPress();
     }
-    else if(type == Control::Type::DrawButton)
+    else if(type == Item::Type::DrawButton)
     {
         ((SButton *)this)->ShortPress();
     }
@@ -422,18 +422,18 @@ void Control::ShortPress() const
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Control::LongPress() const
+void Item::LongPress() const
 {
     if(!IsActive())
     {
         return;
     }
     
-    if(type == Control::Type::Button)
+    if(type == Item::Type::Button)
     {
         ((Button *)this)->ShortPress();
     }
-    else if(type == Control::Type::Time)
+    else if(type == Item::Type::Time)
     {
         if(!IsCurrentItem())
         {
@@ -447,7 +447,7 @@ void Control::LongPress() const
         Open(!IsOpened());
         time->SetOpened();
     }
-    else if(type == Control::Type::DrawButton)
+    else if(type == Item::Type::DrawButton)
     {
         SButton *button = (SButton *)this;
         button->funcOnPress();
@@ -482,19 +482,19 @@ void Page::SetCurrentSubPage(int8 pos) const
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Control::LogInfo() const
+void Item::LogInfo() const
 {
     LOG_WRITE("%x %s", this, Title().CString());
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-bool Control::IsPage() const
+bool Item::IsPage() const
 {
-    return (type == Control::Type::Page);
+    return (type == Item::Type::Page);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-bool Control::ExistKeeper(const Page *_keeper) const
+bool Item::ExistKeeper(const Page *_keeper) const
 {
     const Page *item = Keeper();
     while (item)
@@ -533,7 +533,7 @@ bool Page::IsSubPage(const Page *parent)
             return true;
         }
 
-        keep = ((Control *)keep)->Keeper();
+        keep = ((Item *)keep)->Keeper();
     }
 
     return false;
@@ -653,7 +653,7 @@ void SButton::ShortPress() const
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-const Control *Page::ItemForFuncKey(Key::E key)
+const Item *Page::ItemForFuncKey(Key::E key)
 {
     return GetControl(PosItemOnLeft() + key - Key::F1);
 }

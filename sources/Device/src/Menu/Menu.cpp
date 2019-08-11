@@ -33,15 +33,15 @@ using namespace Display::Primitives;
 using namespace Osci::Settings;
 using namespace Transceiver;
 
-const Control *Menu::pressedItem = nullptr;
+const Item *Menu::pressedItem = nullptr;
 const char    *Menu::stringForHint = nullptr;
-   Control    *Menu::itemHint = nullptr;
+   Item    *Menu::itemHint = nullptr;
 const Page    *Menu::mainPage = nullptr;
 
 /// true, если нужно сохранять копию экрана на флешку
 static bool needSaveScreen = false;
 /// Последний открытый контрол на дереве странице page
-static Control *LastOpened(Page *page);
+static Item *LastOpened(Page *page);
 /// Обработка события таймера автоматического сокрытия меню
 static void OnTimerAutoHide();
 /// Функция, которая отключит вывод строки навигации меню
@@ -467,7 +467,7 @@ void Menu::Init()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Menu::CloseOpenedItem()
 {
-    Control *item = OpenedItem();
+    Item *item = OpenedItem();
 
     if (IS_PAGE(item))
     {
@@ -480,7 +480,7 @@ void Menu::CloseOpenedItem()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-Control *Menu::OpenedItem()
+Item *Menu::OpenedItem()
 {
     return LastOpened((Page *)Menu::mainPage);
 }
@@ -499,7 +499,7 @@ Page::Name::E Menu::GetNameOpenedPage()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static Control *LastOpened(Page *page)
+static Item *LastOpened(Page *page)
 {
     if (page == nullptr)
     {
@@ -509,7 +509,7 @@ static Control *LastOpened(Page *page)
     if (page->CurrentItemIsOpened())
     {
         int8 posActItem = page->PosCurrentItem();
-        Control *item = page->GetControl(posActItem);
+        Item *item = page->GetControl(posActItem);
 
         if (page->GetControl(posActItem)->IsPage())
         {
@@ -524,9 +524,9 @@ static Control *LastOpened(Page *page)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-Control *Menu::CurrentItem()
+Item *Menu::CurrentItem()
 {
-    Control *opened = OpenedItem();
+    Item *opened = OpenedItem();
 
     int8 pos = ((const Page *)opened)->PosCurrentItem();
 
@@ -535,7 +535,7 @@ Control *Menu::CurrentItem()
         return ((const Page *)opened)->GetControl(pos);
     }
 
-    return (Control *)opened;
+    return (Item *)opened;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -546,19 +546,19 @@ static void DrawHintItem(int x, int y, int width)
         return;
     }
 
-    //DEF__STRUCT(StructName, pString) names[Control::Type::Number] =
-    static pString names[Control::Type::Number] =
+    //DEF__STRUCT(StructName, pString) names[Item::Type::Number] =
+    static pString names[Item::Type::Number] =
     {
         "",                   // Item_None
-        "",                   // Control::Type::Choice
-        "Кнопка",             // Control::Type::Button
-        "Страница",           // Control::Type::Page
-        "Регулятор",          // Control::Type::Governor
-        "",                   // Control::Type::Time
-        "",                   // Control::Type::GovernorColor
-        "",                   // Control::Type::ChoiceReg
-        "Кнопка",             // Control::Type::DrawButton
-        "Выбор параметра"     // Control::Type::ChoiceParameter
+        "",                   // Item::Type::Choice
+        "Кнопка",             // Item::Type::Button
+        "Страница",           // Item::Type::Page
+        "Регулятор",          // Item::Type::Governor
+        "",                   // Item::Type::Time
+        "",                   // Item::Type::GovernorColor
+        "",                   // Item::Type::ChoiceReg
+        "Кнопка",             // Item::Type::DrawButton
+        "Выбор параметра"     // Item::Type::ChoiceParameter
     };
 
     Page *item = (Page *)Menu::itemHint;
@@ -567,7 +567,7 @@ static void DrawHintItem(int x, int y, int width)
     char title[SIZE];
     std::snprintf(title, SIZE, "%s \"%s\"", names[Menu::itemHint->type], item->titleHint[0]);
 
-    if (item->type == Control::Type::DrawButton)
+    if (item->type == Item::Type::DrawButton)
     {
         y -= 9;
     }
@@ -576,7 +576,7 @@ static void DrawHintItem(int x, int y, int width)
 
     y = Text(item->titleHint[1]).DrawInBoundedRectWithTransfers(x, y + 15, width, Color::BACK, Color::FILL);
 
-    if (item->type == Control::Type::DrawButton)
+    if (item->type == Item::Type::DrawButton)
     {
         ((SButton*)item)->DrawHints(x, y, width);   // -V1027
     }
@@ -593,7 +593,7 @@ void Menu::Draw()
 {
     if (Menu::IsShown())
     {
-        Control *item = OpenedItem();
+        Item *item = OpenedItem();
         if (Menu::IsShown())
         {
             if (IS_PAGE(item))
@@ -641,10 +641,10 @@ void Menu::Draw()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Menu::SetItemForHint(const Control *item)
+void Menu::SetItemForHint(const Item *item)
 {
     Menu::stringForHint = 0;
-    Menu::itemHint = (Control *)item;
+    Menu::itemHint = (Item *)item;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

@@ -247,7 +247,7 @@ DEF_GOVERNOR(       gADC_Stretch_Bk2V,                                          
 */
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//static const ChoiceBase emptyChoice = {Control::Type::Choice, 0, false, Page::Name::NoPage, 0, 0, {}, 0, 0, 0, 0};
+//static const ChoiceBase emptyChoice = {Item::Type::Choice, 0, false, Page::Name::NoPage, 0, 0, {}, 0, 0, 0, 0};
 
 DEF_PAGE_3( pppADC_Stretch, // -V641 // -V1027                                                                                                             //--- Œ“À¿ƒ ¿ - ¿÷œ - –¿—“ﬂ∆ ¿ ---
     "–¿—“ﬂ∆ ¿",
