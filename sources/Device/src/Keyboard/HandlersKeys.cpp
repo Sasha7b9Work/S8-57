@@ -415,7 +415,7 @@ static void Memory_Release()
 {
     if (FDrive::IsConnected())
     {
-        Menu::SaveScreenToDrive();
+        Display::SaveScreenToDrive();
     }
     else
     {

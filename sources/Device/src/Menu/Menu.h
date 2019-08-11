@@ -31,11 +31,6 @@ struct Menu
     static Item *OpenedItem();
 
     static Page::Name::E GetNameOpenedPage();
-
-    static void SaveScreenToDrive();
-
-    static void SaveRow(int row);
-
     /// Возвращает адрес текущего элемента меню (текущим, как правило, является элемент, кнопка которого была нажата последней
     static Item *CurrentItem();
     /// Закрыть открытый элемент меню

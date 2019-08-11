@@ -180,7 +180,7 @@ static bool FuncScreen(uint8 data)
 
     if (step == 321)
     {
-        Menu::SaveRow(numString);
+        Display::SaveRow(numString);
     }
 
 

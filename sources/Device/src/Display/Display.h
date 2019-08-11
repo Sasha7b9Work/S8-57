@@ -53,4 +53,8 @@ namespace Display
     int TimeMenuAutoHide();
     /// Если экран разделён на две части и основной сигнал выводится сверху - например, в режиме вывода спектра
     bool IsSeparate();
+
+    void SaveScreenToDrive();
+
+    void SaveRow(int row);
 };
