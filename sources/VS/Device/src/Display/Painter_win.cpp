@@ -49,6 +49,12 @@ static wxButton *buttons[Key::Number] = { nullptr };
 /// Цвета
 static uint colors[256];
 
+static bool needStartTimerLong = false;
+static bool needStopTimerLong = false;
+/// Здесь имя нажатой кнопки
+static Key::E pressedKey = Key::None;
+
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /// Создаёт окно приложения. Возвращает хэндл виджета для отрисовки
 static HANDLE CreateFrame();
@@ -64,8 +70,6 @@ static void CreateButton(Key::E key, Frame *frame, const wxPoint &pos, const wxS
 static void CreateButtonsChannel(Frame *frame, const char *title, int x, int y, Key::E keyChannel, Key::E keyRangeLess, Key::E keyRangeMore, Key::E keyRShiftLess, Key::E keyRShiftMore);
 /// Создаёт кнопки группы синхронизации
 static void CreateButtonsTrig(Frame *frame, int x, int y);
-/// Вызывается при "длинном" нажатии кнопки
-static void CallbackOnTimerLong();
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -85,8 +89,6 @@ void Painter::Init()
     }
 
     renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
-
-    Frame::SetCallbackOnTimerLong(CallbackOnTimerLong);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -314,7 +316,9 @@ void Frame::OnDown(wxCommandEvent &event)
 
     BufferButtons::Push(KeyEvent(key, TypePress::Press));
 
-    Frame::timerLongPress.Start(500);
+    needStartTimerLong = true;
+
+    pressedKey = key;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -327,13 +331,49 @@ void Frame::OnUp(wxCommandEvent &event)
 
     BufferButtons::Push(KeyEvent(key, TypePress::Release));
 
-    Frame::timerLongPress.Stop();
+    needStopTimerLong = true;
+
+    pressedKey = Key::None;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void CallbackOnTimerLong()
+void Frame::OnTimerLong(wxTimerEvent&)
 {
+    BufferButtons::Push(KeyEvent(pressedKey, TypePress::Long));
 
+    pressedKey = Key::None;
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Frame::HandlerEvents()
+{
+    SDL_Event event;
+
+    while (SDL_PollEvent(&event))
+    {
+        SDL_PumpEvents();
+        switch (event.type)
+        {
+        case SDL_KEYDOWN:
+            if (event.key.keysym.sym == SDLK_ESCAPE)
+            {
+                Close(true);
+            }
+            break;
+        }
+    }
+
+    if (needStartTimerLong)
+    {
+        timerLongPress.StartOnce(500);
+        needStartTimerLong = false;
+    }
+
+    if (needStopTimerLong)
+    {
+        timerLongPress.Stop();
+        needStopTimerLong = false;
+    }
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

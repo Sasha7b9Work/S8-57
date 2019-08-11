@@ -25,8 +25,6 @@ public:
     void OnAbout(wxCommandEvent& event);
     void OnTimer(wxTimerEvent& event);
     void OnTimerLong(wxTimerEvent& event);
-    
-    static void SetCallbackOnTimerLong(void(*func)());
 
 private:
     wxTimer timer;
