@@ -715,10 +715,6 @@ void Page::DrawPagesUGO(int right, int bottom) const
 //---------------------------------------------------------------------------------------------------------------------------------------------------
 void Page::DrawNestingPage(int left, int bottom) const
 {
-    int nesting = 0;
-
-    const Page *page = this;
-
     Page *parent = (Page *)Keeper();
 
     if (parent == nullptr)
@@ -726,9 +722,11 @@ void Page::DrawNestingPage(int left, int bottom) const
         return;
     }
 
+    int nesting = 0;
+
     while (parent != nullptr)
     {
-        page = (Page *)parent;
+        const Page *page = (Page *)parent;
         parent = (Page *)page->Keeper();
         nesting++;                                  // -V127
     }
