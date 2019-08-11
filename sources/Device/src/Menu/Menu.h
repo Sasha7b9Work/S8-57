@@ -48,8 +48,6 @@ struct Menu
     static int Y0();
     /// Возвращает адрес элемента, соответствующего функциональной кнопкке
     static const Item *ItemForFuncKey(Key::E key);
-    /// Строка подсказки, которую надо выводить в случае включённого режима подсказок.
-    static const char *stringForHint;
     /// Текущая главная страница
     static const Page *mainPage;
 

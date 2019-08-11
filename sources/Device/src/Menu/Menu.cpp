@@ -33,10 +33,12 @@ using namespace Display::Primitives;
 using namespace Osci::Settings;
 using namespace Transceiver;
 
-const char    *Menu::stringForHint = nullptr;
-static Item   *itemHint = nullptr;
 const Page    *Menu::mainPage = nullptr;
 
+/// Итем, для которого нужно выводить подсказку
+static Item   *itemHint = nullptr;
+/// Строка подсказки, которую надо выводить в случае включённого режима подсказок.
+const char    *stringForHint = nullptr;
 /// true, если нужно сохранять копию экрана на флешку
 static bool needSaveScreen = false;
 /// Последний открытый контрол на дереве странице page
@@ -254,7 +256,7 @@ static void ProcessButtonForHint(Key::E button)
 {
     if (button == Key::Enter)
     {
-        Menu::stringForHint =
+        stringForHint =
             "Кнопка МЕНЮ выполняет следующие функции:\n"
             "1. При закрытом меню нажатие либо нажатие с удержанием в течение 0.5с открывает меню.\n"
             "2. При открытом меню удержание кнопки в течение 0.5с закрывает меню.\n"
@@ -266,47 +268,47 @@ static void ProcessButtonForHint(Key::E button)
     } 
     else if (button == Key::Display)
     {
-        Menu::stringForHint = "Кнопка ДИСПЛЕЙ открывает меню настроек дисплея.";
+        stringForHint = "Кнопка ДИСПЛЕЙ открывает меню настроек дисплея.";
     }
     else if (button == Key::Memory)
     {
-        Menu::stringForHint =
+        stringForHint =
             "1. При настройке \"ПАМЯТЬ\x99ВНЕШН ЗУ\x99Реж кн ПАМЯТЬ\x99Меню\" открывает меню работы с памятью.\n"
             "2. При настройке \"ПАМЯТь\x99ВНЕШН ЗУ\x99Реж кн ПАМЯТЬ\x99Сохранение\" сохраняет сигнал на флеш-диск.";
     }
     else if (button == Key::Measure)
     {
-        Menu::stringForHint = "Кнопка ИЗМЕР открывает меню автоматических измерений.";
+        stringForHint = "Кнопка ИЗМЕР открывает меню автоматических измерений.";
     }
     else if (button == Key::Service)
     {
-        Menu::stringForHint = "Кнопка СЕРВИС открывает меню сервисных возможностей.";
+        stringForHint = "Кнопка СЕРВИС открывает меню сервисных возможностей.";
     }
     else if (button == Key::Start)
     {
-        Menu::stringForHint = "Кнопка ПУСК/СTOП запускает и останавливает процесс сбора информации.";
+        stringForHint = "Кнопка ПУСК/СTOП запускает и останавливает процесс сбора информации.";
     }
     else if (button == Key::ChannelA)
     {
-        Menu::stringForHint =
+        stringForHint =
             "1. Кнопка КАНАЛ1 открывает меню настроек канала 1.\n"
             "2. Нажатие и удержание кнопки КАНАЛ1 в течение 0.5с устанавливает смещение канала 1 по вертикали 0В.";
     }
     else if (button == Key::ChannelB)
     {
-        Menu::stringForHint =
+        stringForHint =
             "1. Кнопка КАНАЛ2 открывает меню настроек канала 2.\n"
             "2. Нажатие и удержание кнопки КАНАЛ2 в течение 0.5с устанавливает смещение канала 2 по вертикали 0В.";
     }
     else if (button == Key::Time)
     {
-        Menu::stringForHint =
+        stringForHint =
             "1. Кнопка РАЗВ открывает меню настроек развертки.\n"
             "2. Нажатие и удержание кнопки РАЗВ в течение 0.5с устанавливает смещение по горизонтали 0с.";
     }
     else if (button == Key::Trig)
     {
-        Menu::stringForHint =
+        stringForHint =
             "1. Кнопка СИНХР открывает меню настроек синхронизации.\n"
             "2. Нажатие и удержание в течение 0.5с кнопки СИНХР при настройке \"СЕРВИС\x99Реж длит СИНХР\x99Автоуровень\" производит автоматическую "
             "настройку уровня синхронизации.\n"
@@ -624,9 +626,9 @@ void Menu::Draw()
         ).DrawInBoundedRectWithTransfers(x, y, width, Color::BACK, Color::FILL);
 
         y += 49;
-        if (Menu::stringForHint)
+        if (stringForHint)
         {
-            Text(Menu::stringForHint).DrawInBoundedRectWithTransfers(x, y, width, Color::BACK, Color::WHITE);
+            Text(stringForHint).DrawInBoundedRectWithTransfers(x, y, width, Color::BACK, Color::WHITE);
         }
         else if (itemHint)
         {
@@ -642,7 +644,7 @@ void Menu::Draw()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Menu::SetItemForHint(const Item *item)
 {
-    Menu::stringForHint = 0;
+    stringForHint = nullptr;
     itemHint = (Item *)item;
 }
 
