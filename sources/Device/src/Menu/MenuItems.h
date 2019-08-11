@@ -24,6 +24,8 @@ extern int8 gCurDigit;
 #define NOT_GOVERNOR(item)      (item->type != Item::Type::Governor)
 #define IS_GOVERNOR_COLOR(item) (item->type == Item::Type::GovernorColor)
 #define IS_TIME(item)           (item->type == Item::Type::Time)
+#define IS_BUTTON(item)         (item->type == Item::Type::Button)
+#define IS_DRAW_BUTTON(item)    (item->type == Item::Type::DrawButton)
     
 class Item
 {

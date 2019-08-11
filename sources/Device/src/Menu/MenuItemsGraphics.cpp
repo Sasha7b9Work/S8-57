@@ -466,31 +466,31 @@ const Item *Menu::ItemForFuncKey(Key::E key)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Item::Draw(int x, int y, bool opened) const
 {
-    if (type == Item::Type::Choice || type == Item::Type::ChoiceReg)
+    if (IS_CHOICE(this) || IS_CHOICE_REG(this))
     {
         ((Choice *)this)->Draw(x, y, opened);
     }
-    else if (type == Item::Type::Button)
+    else if (IS_BUTTON(this))
     {
         ((Button *)this)->Draw(x, y);
     }
-    else if (type == Item::Type::Page)
+    else if (IS_PAGE(this))
     {
         ((Page *)this)->Draw(x, y, opened);
     }
-    else if (type == Item::Type::Governor)
+    else if (IS_GOVERNOR(this))
     {
         ((Governor *)this)->Draw(x, y, opened);
     }
-    else if (type == Item::Type::Time)
+    else if (IS_TIME(this))
     {
         ((TimeItem *)this)->Draw(x, y, opened);
     }
-    else if (type == Item::Type::GovernorColor)
+    else if (IS_GOVERNOR_COLOR(this))
     {
         ((GovernorColor *)this)->Draw(x, y, opened);
     }
-    else if (type == Item::Type::DrawButton)
+    else if (IS_DRAW_BUTTON(this))
     {
         ((SButton *)this)->Draw(x, y);
     }
