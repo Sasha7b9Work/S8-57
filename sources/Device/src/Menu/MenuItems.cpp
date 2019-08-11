@@ -431,7 +431,7 @@ int Page::PosItemOnLeft() const
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-const Item *Page::ItemForFuncKey(Key::E key)
+const Item *Page::ItemForFuncKey(Key::E key) const
 {
     return GetItem(PosItemOnLeft() + key - Key::F1);
 }

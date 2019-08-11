@@ -446,24 +446,6 @@ void Page::DrawItems(int x, int y) const
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-const Item *Menu::ItemForFuncKey(Key::E key)
-{
-    if (!Key(key).IsFunctional())
-    {
-        return &Item::empty;
-    }
-
-    Item *item = Menu::OpenedItem();
-
-    if (IS_PAGE(item))
-    {
-        return ((Page *)item)->ItemForFuncKey(key);
-    }
-
-    return item;
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Item::Draw(int x, int y, bool opened) const
 {
     if (IS_CHOICE(this) || IS_CHOICE_REG(this))

@@ -154,7 +154,7 @@ public:
 
     void ShortPress() const;
     /// Возвращает адрес элемента, соответствующего функциональной кнопкке
-    const Item *ItemForFuncKey(Key::E key);
+    const Item *ItemForFuncKey(Key::E key) const;
 
     struct Name
     {

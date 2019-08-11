@@ -494,3 +494,25 @@ void Menu::SaveSettings()
         }
     }
 }
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+const Item *Menu::ItemForFuncKey(Key::E key)
+{
+    if (!Key(key).IsFunctional())
+    {
+        return &Item::empty;
+    }
+
+    Item *item = Menu::OpenedItem();
+
+    if (IS_PAGE(item))
+    {
+        return ((Page *)item)->ItemForFuncKey(key);
+    }
+    else if(item->Keeper()->ItemForFuncKey(key) == item)
+    {
+        return item;
+    }
+
+    return &Item::empty;
+}
