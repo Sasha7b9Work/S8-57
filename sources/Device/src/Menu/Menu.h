@@ -50,8 +50,6 @@ struct Menu
     static const Item *ItemForFuncKey(Key::E key);
     /// Строка подсказки, которую надо выводить в случае включённого режима подсказок.
     static const char *stringForHint;
-    /// Item, подсказку для которого нужно выводить в случае включённого режима подсказок.
-    static Item *itemHint;
     /// Текущая главная страница
     static const Page *mainPage;
 

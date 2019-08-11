@@ -34,7 +34,7 @@ using namespace Osci::Settings;
 using namespace Transceiver;
 
 const char    *Menu::stringForHint = nullptr;
-   Item    *Menu::itemHint = nullptr;
+static Item   *itemHint = nullptr;
 const Page    *Menu::mainPage = nullptr;
 
 /// true, если нужно сохранять копию экрана на флешку
@@ -540,7 +540,7 @@ Item *Menu::CurrentItem()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void DrawHintItem(int x, int y, int width)
 {
-    if (!Menu::itemHint)
+    if (!itemHint)
     {
         return;
     }
@@ -560,11 +560,11 @@ static void DrawHintItem(int x, int y, int width)
         "Выбор параметра"     // Item::Type::ChoiceParameter
     };
 
-    Page *item = (Page *)Menu::itemHint;
+    Page *item = (Page *)itemHint;
 
     const int SIZE = 100;
     char title[SIZE];
-    std::snprintf(title, SIZE, "%s \"%s\"", names[Menu::itemHint->type], item->titleHint[0]);
+    std::snprintf(title, SIZE, "%s \"%s\"", names[itemHint->type], item->titleHint[0]);
 
     if (item->type == Item::Type::DrawButton)
     {
@@ -628,7 +628,7 @@ void Menu::Draw()
         {
             Text(Menu::stringForHint).DrawInBoundedRectWithTransfers(x, y, width, Color::BACK, Color::WHITE);
         }
-        else if (Menu::itemHint)
+        else if (itemHint)
         {
             DrawHintItem(x, y, width);
         }
@@ -643,7 +643,7 @@ void Menu::Draw()
 void Menu::SetItemForHint(const Item *item)
 {
     Menu::stringForHint = 0;
-    Menu::itemHint = (Item *)item;
+    itemHint = (Item *)item;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
