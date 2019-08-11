@@ -7,7 +7,7 @@ struct Command
     enum E
     {
 /* 00 */    None,                   //    |          |            |             |              |              |        |
-/* 01 */    ButtonPress,            // 01 |  Control | TypePress  |             |              |              |        |
+/* 01 */    ButtonPress,            // 01 |   Item   | TypePress  |             |              |              |        |
 /* 02 */    Paint_BeginScene,       // 02 |          |            |             |              |              |        |
 /* 03 */    Paint_EndScene,         // 03 |          |            |             |              |              |        |
 /* 04 */    Paint_SetColor,         // 04 |   Color  |            |             |              |              |        |
