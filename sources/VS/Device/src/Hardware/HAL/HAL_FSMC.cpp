@@ -142,27 +142,6 @@ void FSMC::WriteToPanel(const uint8 *, uint)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void ReadByte()
-{
-    CONFIGURE_TO_READ_PANEL;
-LabelReadByte:
-    NE4_RESET;
-    while (PAN_READY_TRANSMIT) {};
-    if (PAN_RECIEVE_TRANSMIT_CONFIRM)
-    {
-        uint8 data = GetOutData();
-        Decoder::AddData(data);
-        NE4_SET;
-        while (PAN_RECIEVE_TRANSMIT_CONFIRM) {};
-    }
-    if (PAN_READY_TRANSMIT)
-    {
-        goto LabelReadByte; //-V2505
-    }
-    CONFIGURE_TO_WRITE_PANEL;
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 uint8 FSMC::ReadByteNow()
 {
     uint8 result = 0;
@@ -190,21 +169,6 @@ LabelReadByte:
 static uint8 ReadPAN()
 {
     return 0;
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void SetOutData(uint8 data)
-{
-    if (mode != ModePanelWrite)
-    {
-        CONFIGURE_TO_WRITE_PANEL;
-    }
-
-    //                                                        биты 0,1                           биты 2, 3
-    GPIOD->ODR = (GPIOD->ODR & 0x3ffc) + (uint16)(((int16)data & 0x03) << 14) + (((uint16)(data & 0x0c)) >> 2);
-
-    //                                                    Ѕиты 4,5,6,7
-    GPIOE->ODR = (GPIOE->ODR & 0xf87f) + (uint16)(((int16)data & 0xf0) << 3);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
