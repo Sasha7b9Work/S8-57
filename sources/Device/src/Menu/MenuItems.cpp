@@ -110,13 +110,13 @@ void Item::ShortPress() const
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 int Item::HeightOpened() const
 {
-    if (type == Item::Type::Page)
+    if (IS_PAGE(this))
     {
         int numItems = ((const Page *)this)->NumItems() - ((Page *)this)->CurrentSubPage() * MENU_ITEMS_ON_DISPLAY;
         LIMITATION(numItems, 0, MENU_ITEMS_ON_DISPLAY); // -V2516
         return Menu::Title::HEIGHT + HEIGHT * numItems;
     }
-    else if (type == Item::Type::Choice || type == Item::Type::ChoiceReg)
+    else if (IS_CHOICE(this) || IS_CHOICE_REG(this))
     {
         return MOI_HEIGHT_TITLE + ((Choice *)this)->NumSubItems() * MOSI_HEIGHT - 5;
     }
@@ -148,7 +148,7 @@ void Item::Open(bool open) const
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 bool Item::IsOpened() const
 {
-    if (type == Item::Type::Page)
+    if (IS_PAGE(this))
     {
         const Page *page = Keeper();
 
@@ -187,11 +187,11 @@ void Item::LongPress() const
         return;
     }
 
-    if (type == Item::Type::Button)
+    if (IS_BUTTON(this))
     {
         ((Button *)this)->ShortPress();
     }
-    else if (type == Item::Type::Time)
+    else if (IS_TIME(this))
     {
         if (!IsCurrentItem())
         {
@@ -205,7 +205,7 @@ void Item::LongPress() const
         Open(!IsOpened());
         time->SetOpened();
     }
-    else if (type == Item::Type::DrawButton)
+    else if (IS_DRAW_BUTTON(this))
     {
         SButton *button = (SButton *)this;
         button->funcOnPress();
@@ -242,15 +242,15 @@ String Item::Title() const
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 char Item::GetSymbol() const
 {
-    if (type == Item::Type::Governor)
+    if (IS_GOVERNOR(this))
     {
         return ((Governor *)this)->GetSymbol();
     }
-    else if (type == Item::Type::Choice)
+    else if (IS_CHOICE(this))
     {
         return ((Choice *)this)->GetSymbol();
     }
-    else if (type == Item::Type::Time)
+    else if (IS_TIME(this))
     {
         return ((TimeItem *)this)->GetSymbol();
     }
