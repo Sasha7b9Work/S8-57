@@ -571,7 +571,7 @@ static void DrawHintItem(int x, int y, int width)
     char title[SIZE];
     std::snprintf(title, SIZE, "%s \"%s\"", names[itemHint->type], item->titleHint[0]);
 
-    if (item->type == Item::Type::DrawButton)
+    if (IS_DRAW_BUTTON(item))
     {
         y -= 9;
     }
@@ -580,7 +580,7 @@ static void DrawHintItem(int x, int y, int width)
 
     y = Text(item->titleHint[1]).DrawInBoundedRectWithTransfers(x, y + 15, width, Color::BACK, Color::FILL);
 
-    if (item->type == Item::Type::DrawButton)
+    if (IS_DRAW_BUTTON(item))
     {
         ((SButton*)item)->DrawHints(x, y, width);   // -V1027
     }

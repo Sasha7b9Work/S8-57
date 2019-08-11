@@ -46,59 +46,58 @@ static const Item *pressedItem = nullptr;
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 bool Item::ProcessKey(KeyEvent event)
 {
-    bool result = false;
-
-    switch (type)
+    if (IS_CHOICE(this))
     {
-    case Item::Type::Choice:
-    case Item::Type::ChoiceReg:
-        result = ((Choice *)this)->ProcessKey(event);
-        break;
-
-    case Item::Type::Page:
-        result = ((Page *)this)->ProcessKey(event);
-        break;
-
-    case Item::Type::Governor:
-        result = ((Governor *)this)->ProcessKey(event);
-        break;
+        return ((Choice *)this)->ProcessKey(event);
+    }
+    else if (IS_CHOICE_REG(this))
+    {
+        return ((Choice *)this)->ProcessKey(event);
+    }
+    else if (IS_PAGE(this))
+    {
+        return ((Page *)this)->ProcessKey(event);
+    }
+    else if (IS_GOVERNOR(this))
+    {
+        return ((Governor *)this)->ProcessKey(event);
     }
 
-    return result;
+    return false;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Item::ShortPress() const
 {
-    if (type == Item::Type::Choice)
+    if (IS_CHOICE(this))
     {
         ((Choice *)this)->ShortPress();
     }
-    else if (type == Item::Type::ChoiceReg)
+    else if (IS_CHOICE_REG(this))
     {
         ((Choice *)this)->ShortPress();
     }
-    else if (type == Item::Type::Button)
+    else if (IS_BUTTON(this))
     {
         ((Button *)this)->ShortPress();
     }
-    else if (type == Item::Type::Page)
+    else if (IS_PAGE(this))
     {
         ((Page *)this)->ShortPress();
     }
-    else if (type == Item::Type::Governor)
+    else if (IS_GOVERNOR(this))
     {
         ((Governor *)this)->ShortPress();
     }
-    else if (type == Item::Type::Time)
+    else if (IS_TIME(this))
     {
         ((TimeItem *)this)->ShortPress();
     }
-    else if (type == Item::Type::GovernorColor)
+    else if (IS_GOVERNOR_COLOR(this))
     {
         ((GovernorColor *)this)->ShortPress();
     }
-    else if (type == Item::Type::DrawButton)
+    else if (IS_DRAW_BUTTON(this))
     {
         ((SButton *)this)->ShortPress();
     }
