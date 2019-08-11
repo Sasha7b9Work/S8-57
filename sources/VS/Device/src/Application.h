@@ -24,9 +24,15 @@ public:
     void OnQuit(wxCommandEvent& event);
     void OnAbout(wxCommandEvent& event);
     void OnTimer(wxTimerEvent& event);
+    void OnTimerLong(wxTimerEvent& event);
+    
+    static void SetCallbackOnTimerLong(void(*func)());
 
 private:
     wxTimer timer;
+    /// Таймер для "длинного нажатия" кнопок
+    wxTimer timerLongPress;
+
     wxDECLARE_EVENT_TABLE(); //-V2504
 
     void DrawFPS();

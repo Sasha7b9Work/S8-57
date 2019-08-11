@@ -46,10 +46,8 @@ static SDL_Texture *texture = nullptr;
 
 /// Здесь хранятся указатели на кнопки
 static wxButton *buttons[Key::Number] = { nullptr };
-
 /// Цвета
 static uint colors[256];
-
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /// Создаёт окно приложения. Возвращает хэндл виджета для отрисовки
@@ -66,6 +64,8 @@ static void CreateButton(Key::E key, Frame *frame, const wxPoint &pos, const wxS
 static void CreateButtonsChannel(Frame *frame, const char *title, int x, int y, Key::E keyChannel, Key::E keyRangeLess, Key::E keyRangeMore, Key::E keyRShiftLess, Key::E keyRShiftMore);
 /// Создаёт кнопки группы синхронизации
 static void CreateButtonsTrig(Frame *frame, int x, int y);
+/// Вызывается при "длинном" нажатии кнопки
+static void CallbackOnTimerLong();
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -85,6 +85,8 @@ void Painter::Init()
     }
 
     renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
+
+    Frame::SetCallbackOnTimerLong(CallbackOnTimerLong);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -111,27 +113,6 @@ void Painter::EndScene()
 
     SDL_RenderPresent(renderer);
 }
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-/*
-void Painter::SetColorValue(Color color, uint value)
-{
-    colors[color.value] = value;
-}
-*/
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-//void Painter::SetColor(Color color)
-//{
-//    if (color != Color::NUMBER)
-//    {
-//        uint value = colors[color.value];
-//        uint8 blue = (uint8)value;
-//        uint8 green = (uint8)(value >> 8);
-//        uint8 red = (uint8)(value >> 16);
-//        SDL_SetRenderDrawColor(renderer, red, green, blue, 0x00);
-//    }
-//}
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void SetPositionAndSize(Frame *frame)
@@ -332,6 +313,8 @@ void Frame::OnDown(wxCommandEvent &event)
     event.Skip();
 
     BufferButtons::Push(KeyEvent(key, TypePress::Press));
+
+    Frame::timerLongPress.Start(500);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -343,6 +326,14 @@ void Frame::OnUp(wxCommandEvent &event)
     event.Skip();
 
     BufferButtons::Push(KeyEvent(key, TypePress::Release));
+
+    Frame::timerLongPress.Stop();
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+static void CallbackOnTimerLong()
+{
+
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

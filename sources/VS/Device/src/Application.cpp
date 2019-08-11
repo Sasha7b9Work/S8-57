@@ -22,7 +22,8 @@ enum
 
 enum
 {
-    TIMER_ID = 1
+    TIMER_ID = 1,
+    TIMER_LONG_ID = 2
 };
 
 wxBEGIN_EVENT_TABLE(Frame, wxFrame)
@@ -30,9 +31,12 @@ wxBEGIN_EVENT_TABLE(Frame, wxFrame)
     EVT_MENU(File_Quit, Frame::OnQuit)
     EVT_MENU(Help_About, Frame::OnAbout)
     EVT_TIMER(TIMER_ID, Frame::OnTimer)
+    EVT_TIMER(TIMER_LONG_ID, Frame::OnTimerLong)
 wxEND_EVENT_TABLE()
 
 wxIMPLEMENT_APP_NO_MAIN(Application);
+
+static void(*callbackOnTimer)();
 
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -90,6 +94,8 @@ Frame::Frame(const wxString& title)
     timer.SetOwner(this, TIMER_ID);
 
     timer.Start(0);
+
+    timerLongPress.SetOwner(this, TIMER_LONG_ID);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -100,6 +106,18 @@ void Frame::OnTimer(wxTimerEvent&)
     HandlerEvents();
 
     DrawFPS();
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Frame::OnTimerLong(wxTimerEvent&)
+{
+    callbackOnTimer();
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Frame::SetCallbackOnTimerLong(void(*func)())
+{
+    callbackOnTimer = func;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
