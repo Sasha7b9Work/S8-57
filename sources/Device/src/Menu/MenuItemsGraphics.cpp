@@ -50,13 +50,13 @@ void GovernorColor::DrawOpened(int x, int y)
     static const int delta = 43;
     x -= delta;
     ct->Init();
-    Rectangle(Item::HEIGHT + delta + 2, Item::HEIGHT + 2).Draw(x - 1, y - 1, Color::BACK);
-    Rectangle(Width() + delta, Item::HEIGHT).Draw(x, y, Color::MenuTitleText(false));
-    Region(Item::Value::WIDTH + 2 + delta, Item::Value::HEIGHT + 3).Fill(x + 1, y + 1, Color::MenuItem(false));
+    Rectangle(HEIGHT + delta + 2, HEIGHT + 2).Draw(x - 1, y - 1, Color::BACK);
+    Rectangle(WIDTH + delta, HEIGHT).Draw(x, y, Color::MenuTitleText(false));
+    Region(Value::WIDTH + 2 + delta, Item::Value::HEIGHT + 3).Fill(x + 1, y + 1, Color::MenuItem(false));
 
-    HLine(Width() + delta).Draw(x, y + Item::HEIGHT / 2 + 2, Color::MenuTitleText(false));
+    HLine(WIDTH + delta).Draw(x, y + HEIGHT / 2 + 2, Color::MenuTitleText(false));
 
-    Text(Title().CString()).DrawInCenterRect(x + (IsPressed() ? 2 : 1), y + (IsPressed() ? 2 : 1), Width() + delta, Item::HEIGHT / 2 + 2, Color::WHITE);
+    Text(Title().CString()).DrawInCenterRect(x + (IsPressed() ? 2 : 1), y + (IsPressed() ? 2 : 1), WIDTH + delta, HEIGHT / 2 + 2, Color::WHITE);
 
     DrawValue(x + 1, y + 19, delta);
 }
@@ -82,7 +82,7 @@ void GovernorColor::DrawValue(int x, int y, int delta)
     ct->Init();
     int16 vals[4] = {(int16)(ct->brightness * 100.0F), (int16)blue, (int16)green, (int16)red};
 
-    Region(Width() + delta - 2, Item::HEIGHT / 2 - 3).Fill(x, y, Color::BLACK);
+    Region(WIDTH + delta - 2, HEIGHT / 2 - 3).Fill(x, y, Color::BLACK);
     x += 92;
 
     for (int i = 0; i < 4; i++)
@@ -167,7 +167,7 @@ void Governor::DrawLowPart(int x, int y, bool shade)
 {
     Color colorTextDown = Color::BLACK;
 
-    Region(Item::Value::WIDTH + 1, Item::Value::HEIGHT - 3).Fill(x + 1, y - 1, Color::MenuItemField(shade));
+    Region(Value::WIDTH + 1, Value::HEIGHT - 3).Fill(x + 1, y - 1, Color::MenuItemField(shade));
 
     if (shade)
     {
@@ -178,7 +178,7 @@ void Governor::DrawLowPart(int x, int y, bool shade)
     {
         if (IsCurrentItem())
         {
-            Char(GetSymbol()).Draw4SymbolsInRect(x + Width() - 12, y - 1, Color::BACK);
+            Char(GetSymbol()).Draw4SymbolsInRect(x + WIDTH - 12, y - 1, Color::BACK);
         }
     
         x = Char(SYMBOL_GOVERNOR_LEFT).Draw(x + 4, y, colorTextDown);
@@ -193,8 +193,8 @@ void Governor::DrawLowPart(int x, int y, bool shade)
             int drawX = x + 1;
             int limX = x + 1;
             int limY = y - 2;
-            int limWidth = Item::Value::WIDTH;
-            int limHeight = Item::Value::HEIGHT - 1;
+            int limWidth = Value::WIDTH;
+            int limHeight = Value::HEIGHT - 1;
             Color::BLACK.SetAsCurrent();
             if (delta > 0)
             {
@@ -234,10 +234,10 @@ void Choice::DrawOpened(int x, int y)
 {
     int height = HeightOpened();
     
-    Rectangle(Width(), height).Draw(x, y, Color::FILL);
+    Rectangle(WIDTH, height).Draw(x, y, Color::FILL);
     DrawCommonHiPart(this, x, y, IsPressed(), false, true);
 
-    Region(Width() - 2, height - MOI_HEIGHT_TITLE + 4).Fill(x + 1, y + MOI_HEIGHT_TITLE - 5, Color::BACK);
+    Region(WIDTH - 2, height - MOI_HEIGHT_TITLE + 4).Fill(x + 1, y + MOI_HEIGHT_TITLE - 5, Color::BACK);
     int8 index = *cell;
     for (int i = 0; i < NumSubItems(); i++)
     {
@@ -245,7 +245,7 @@ void Choice::DrawOpened(int x, int y)
         bool pressed = i == index;
         if (pressed)
         {
-            Region(Width() - 2, MOSI_HEIGHT - 1).Fill(x + 1, yItem + 2, ColorMenuField(this));
+            Region(WIDTH - 2, MOSI_HEIGHT - 1).Fill(x + 1, yItem + 2, ColorMenuField(this));
         }
         NameSubItem(i).Draw(x + 4, yItem + 2, pressed ? Color::BLACK : ColorMenuField(this));
     }
@@ -293,12 +293,12 @@ void Button::Draw(int x, int y) const
 
     Color color = shade ? Color::MenuItem(true) : Color::WHITE;
     
-    Region(Width() - 2, Item::HEIGHT - 2).Fill(x + 1, y + 2, Color::MenuItem(false));
-    Region(Width() - 6, Item::HEIGHT - 6).Fill(x + 3, y + 4, Color::MenuItem(false));
+    Region(WIDTH - 2, HEIGHT - 2).Fill(x + 1, y + 2, Color::MenuItem(false));
+    Region(WIDTH - 6, HEIGHT - 6).Fill(x + 3, y + 4, Color::MenuItem(false));
 
     int delta = (pressed && (!shade)) ? 2 : 1;
 
-    Text(Title().CString()).DrawInCenterRect(x + delta, y + delta, Width(), Item::HEIGHT, color);
+    Text(Title().CString()).DrawInCenterRect(x + delta, y + delta, WIDTH, HEIGHT, color);
 
     if (funcForDraw)
     {
@@ -378,8 +378,8 @@ void Page::Draw(int x, int y, bool opened) const
     }
     else
     {
-        Region(Width() - 3, Item::HEIGHT - 2).Fill(x + 1, y + 2, Color::MenuItem(false));
-        Text(Title().CString()).DrawInCenterRect(x, y + 1, Width(), Item::HEIGHT, IsActive() ? Color::FILL : Color::MENU_TITLE_DARK);
+        Region(WIDTH - 3, HEIGHT - 2).Fill(x + 1, y + 2, Color::MenuItem(false));
+        Text(Title().CString()).DrawInCenterRect(x, y + 1, WIDTH, HEIGHT, IsActive() ? Color::FILL : Color::MENU_TITLE_DARK);
     }
 }
 
@@ -429,10 +429,8 @@ void Page::DrawItems(int x, int y) const
 {
     for (int i = 0; i < 5; i++)
     {
-        /// \todo Ќадо бы не делать это дл€ пунктов меню, которые существуют и всЄ равно отрисовыватьс€ будут - зачем зр€ грузить процессор
-
-        Rectangle(Width() - 1, Item::HEIGHT).Draw(x, y + 1, Color::FILL);
-        Region(Width() - 3, Item::HEIGHT - 2).Fill(x + 1, y + 2, Color::BACK);
+        Rectangle(WIDTH - 1, HEIGHT).Draw(x, y + 1, Color::FILL);
+        Region(WIDTH - 3, HEIGHT - 2).Fill(x + 1, y + 2, Color::BACK);
         
         Item *item = GetItem(PosItemOnLeft() + i);
         
@@ -441,8 +439,10 @@ void Page::DrawItems(int x, int y) const
             item->Draw(x, y, false);
         }
 
-        x += Width();
+        x += WIDTH - 1;
     }
+
+    VLine(HEIGHT).Draw(Display::WIDTH - 1, Display::HEIGHT - HEIGHT, Color::WHITE);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -551,9 +551,9 @@ void TimeItem::DrawOpened(int x, int y)
 
     Rectangle(width + 1, height + 1).Draw(x - 1, y, Color::MenuTitleText(false));
 
-    HLine(Width()).Draw(x, y + MOI_HEIGHT_TITLE - 1);
+    HLine(WIDTH).Draw(x, y + MOI_HEIGHT_TITLE - 1);
 
-    Region(Width() - 1, height - MOI_HEIGHT_TITLE).Fill(x, y + MOI_HEIGHT_TITLE, Color::BLACK);
+    Region(WIDTH - 1, height - MOI_HEIGHT_TITLE).Fill(x, y + MOI_HEIGHT_TITLE, Color::BLACK);
 
     int y0 = 21;
     int y1 = 31;
@@ -643,7 +643,7 @@ static void DrawCommonHiPart(Item *item, int x, int y, bool pressed, bool shade,
             // дл€ остальных контролов не нужно
         }
 
-        Char(symbol).Draw4SymbolsInRect(x + item->Width() - 13, y + (item->IsOpened() ? 0 : 13), shade ? color : Color::BLACK);
+        Char(symbol).Draw4SymbolsInRect(x + Item::WIDTH - 13, y + (item->IsOpened() ? 0 : 13), shade ? color : Color::BLACK);
     }
 }
 
@@ -683,7 +683,7 @@ static void DrawValueWithSelectedPosition(int x, int y, int value, uint numDigit
 int Page::ItemOpenedPosX(const Item *item)
 {
     const Page *page = item->Keeper();
-    return (page->PosCurrentItem() % MENU_ITEMS_ON_DISPLAY) * item->Width();
+    return (page->PosCurrentItem() % MENU_ITEMS_ON_DISPLAY) * Item::WIDTH;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

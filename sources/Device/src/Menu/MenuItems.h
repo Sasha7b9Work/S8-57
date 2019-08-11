@@ -60,8 +60,6 @@ public:
     bool IsCurrentItem() const;
     /// Возвращает изображение регулятора, соответствующее его текущему положению
     char GetSymbol() const;
-    /// Возвращает ширину контрола
-    int Width() const { return 320 / 5; };
     /// Возвращает адрес родителя
     const Page *Keeper() const { if (keeper) { return *keeper; }; return nullptr; }
     /// Возвращает true, если в древе предков стоит keeper
@@ -90,7 +88,10 @@ public:
         explicit Type(E v) : value(v) {};
     };
 
+    /// Высота итема
     static const int HEIGHT = 23;
+    /// Ширина итема
+    static const int WIDTH = 320 / 5 + 1;
 
     struct Value
     {

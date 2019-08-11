@@ -54,7 +54,7 @@ struct Menu
     struct Title
     {
         static const int HEIGHT = 9;
-        static const int WIDTH = 320 / 5 * 2 - 2;
+        static const int WIDTH = 320 / 5 * 2 - 1;
     };
 
     /// Через какое время после последнего нажатия кнопки скрывать меню.
