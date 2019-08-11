@@ -8,10 +8,11 @@
     Структуры вида XxxDef испльзутся ТОЛЬКО для инициализации структур
 */
 
+#define SMALL_BUTTON_FROM_PAGE(page, numButton)     ((SButton *)((Page *)page)->items[numButton])
 
 extern int8 gCurDigit;
 
-#define MENU_ITEMS_ON_DISPLAY       5   ///< Сколько пунктов меню помещается на экране по вертикали.
+#define MENU_ITEMS_ON_DISPLAY       5   ///< Сколько пунктов меню помещается на экране по горизонтали.
 
 #define IS_PAGE(item)           (item->type == Item::Type::Page)
 #define NOT_PAGE(item)          (item->type != Item::Type::Page)
@@ -98,8 +99,6 @@ public:
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// Page ///
-#define SMALL_BUTTON_FROM_PAGE(page, numButton)     ((SButton *)((Page *)page)->items[numButton])
-
 class Page : public Item
 {
 public:
@@ -237,15 +236,6 @@ public:
 };
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// Button ///
-/// Описывает кнопку.
-class ButtonDef
-{
-public:
-    COMMON_PART_MENU_ITEM;
-    pFuncVV     funcOnPress;        ///< Функция, которая вызывается при нажатии на кнопку.
-    pFuncVII    funcForDraw;        ///< Функция будет вызываться во время отрисовки кнопки.
-};
-
 class Button : public Item
 {
 public:
@@ -264,18 +254,6 @@ struct StructHelpDrawButton
 };
 
 
-/// Описывает кнопку для дополнительного режима меню.
-class SButtonDef
-{
-public:
-    COMMON_PART_MENU_ITEM;
-    pFuncVV                         funcOnPress;    ///< Эта функция вызвается для обработки нажатия кнопки.
-    pFuncVII                        funcForDraw;    ///< Эта функция вызывается для отрисовки кнопки в месте с координатами x, y.
-    const StructHelpDrawButton     *hintUGO;
-    int                             numHints;
-};
-
-
 class SButton : public Item
 {
 public:
@@ -289,18 +267,6 @@ public:
 };
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// Governor ///
-/// Описывает регулятор.
-class GovernorDef
-{
-public:
-    COMMON_PART_MENU_ITEM;
-    int16  *cell;
-    int16   minValue;       ///< Минмальное значение, которое может принимать регулятор.
-    int16   maxValue;       ///< Максимальное значение.
-    pFuncVV funcOfChanged;  ///< Функция, которую нужно вызывать после того, как значение регулятора изменилось.
-    pFuncVV funcBeforeDraw; ///< Функция, которая вызывается перед отрисовкой
-};
-
 class Governor : public Item
 {
 public:
@@ -349,16 +315,6 @@ private:
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// Choice ///
-class ChoiceDef
-{
-public:
-    COMMON_PART_MENU_ITEM;
-    int8                *cell;
-    const char  * const *names;             ///< Варианты выбора на русском и английском языках.
-    pFuncVB			    funcOnChanged;      ///< Функция должна вызываться после изменения значения элемента.
-    pFuncVII            funcForDraw;        ///< Функция вызывается после отрисовки элемента. 
-};
-
 class Choice : public Item
 {
 public:
@@ -401,22 +357,11 @@ public:
 };
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// GovernorColor ///
-class ColorType;
-
-class GovernorColorDef
-{
-public:
-    COMMON_PART_MENU_ITEM;
-    ColorType  *ct;                 ///< Структура для описания цвета.
-    pFuncVV     funcOnChanged;      ///< Эту функцию нужно вызывать после изменения значения элемента.
-};
-
 class GovernorColor : public Item
 {
 public:
     ColorType  *ct;                 ///< Структура для описания цвета.
     pFuncVV     funcOnChanged;      ///< Эту функцию нужно вызывать после изменения значения элемента.
-    void ChangeValue(int delta);    ///< Изменить яркость цвета в governor.
     void Draw(int x, int y, bool opened);
     void ShortPress() const;
 private:
@@ -436,19 +381,6 @@ private:
 #define iSEC    6
 #define iSET    7
 
-class TimeDef
-{
-public:
-    COMMON_PART_MENU_ITEM;
-    int8 *curField;   ///< Текущее поле установки. 0 - выход, 1 - сек, 2 - мин, 3 - часы, 4 - день, 5 - месяц, 6 - год, 7 - установить.
-    int8 *hours;
-    int8 *minutes;
-    int8 *seconds;
-    int8 *month;
-    int8 *day;
-    int8 *year;
-};
-
 /// Устанавливает и показывает время.
 class TimeItem : public Item
 {
@@ -463,7 +395,6 @@ public:
     void SetOpened() const;
     void SetNewTime();
     void SelectNextPosition() const;
-    void DecCurrentPosition();
     void Draw(int x, int y, bool opened);
     void DrawClosed(int x, int y);
     void DrawOpened(int x, int y);
