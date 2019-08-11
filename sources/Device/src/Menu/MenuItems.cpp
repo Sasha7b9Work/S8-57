@@ -54,14 +54,14 @@ const char *Choice::NamePrevSubItem()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-Control *Page::Item(int numElement) const
+Control *Page::GetControl(int numControl) const
 {
-    if (numElement >= num)
+    if (numControl >= num)
     {
         return nullptr;
     }
 
-    return (Control *)items[numElement + (isPageSB ? 1 : 0)];
+    return (Control *)items[numControl + (isPageSB ? 1 : 0)];
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -226,7 +226,7 @@ void Control::SetCurrent(bool active) const
     {
         for (int i = 0; i < page->NumItems(); i++)
         {
-            if (page->Item(i) == this)
+            if (page->GetControl(i) == this)
             {
                 page->SetPosActItem((int8)i);
                 return;
@@ -655,5 +655,5 @@ void SButton::ShortPress() const
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 const Control *Page::ItemForFuncKey(Key::E key)
 {
-    return Item(PosItemOnLeft() + key - Key::F1);
+    return GetControl(PosItemOnLeft() + key - Key::F1);
 }

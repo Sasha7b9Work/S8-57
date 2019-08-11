@@ -338,7 +338,7 @@ void Page::Draw(int x, int y, bool opened) const
     {
         if (CurrentItemIsOpened())
         {
-            Control *item = Item(PosCurrentItem());
+            Control *item = GetControl(PosCurrentItem());
 
             x = ItemOpenedPosX(item);
             y = Menu::Y0() - item->HeightOpened() + Menu::Item::HEIGHT + 1;
@@ -434,7 +434,7 @@ void Page::DrawItems(int x, int y) const
         Rectangle(Width() - 1, Menu::Item::HEIGHT).Draw(x, y + 1, Color::FILL);
         Region(Width() - 3, Menu::Item::HEIGHT - 2).Fill(x + 1, y + 2, Color::BACK);
         
-        Control *item = Item(PosItemOnLeft() + i);
+        Control *item = GetControl(PosItemOnLeft() + i);
         
         if (item)
         {

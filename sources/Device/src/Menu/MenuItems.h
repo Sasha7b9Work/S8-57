@@ -147,7 +147,7 @@ public:
     ///< Устанавливает позицию активного пункта меню
     void SetPosActItem(int8 pos) const;
     ///< Возвращает указатель на заданный элемент страницы
-    Control *Item(int numElement) const;
+    Control *GetControl(int numControl) const;
     /// \todo Возвращает позицию первого элемента страницы по адресу page на экране. Если текущая подстраница 0, это будет 0, если текущая 
     /// подстраница 1, это будет 5 и т.д.
     int PosItemOnLeft() const;

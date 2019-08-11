@@ -509,9 +509,9 @@ static Control *LastOpened(Page *page)
     if (page->CurrentItemIsOpened())
     {
         int8 posActItem = page->PosCurrentItem();
-        Control *item = page->Item(posActItem);
+        Control *item = page->GetControl(posActItem);
 
-        if (page->Item(posActItem)->IsPage())
+        if (page->GetControl(posActItem)->IsPage())
         {
             return LastOpened((Page *)item);
         }
@@ -532,7 +532,7 @@ Control *Menu::CurrentItem()
 
     if (opened->IsPage() && pos != 0x7f)
     {
-        return ((const Page *)opened)->Item(pos);
+        return ((const Page *)opened)->GetControl(pos);
     }
 
     return (Control *)opened;
