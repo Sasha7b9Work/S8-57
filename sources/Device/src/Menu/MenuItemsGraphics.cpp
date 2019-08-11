@@ -338,7 +338,7 @@ void Page::Draw(int x, int y, bool opened) const
     {
         if (CurrentItemIsOpened())
         {
-            Item *item = GetControl(PosCurrentItem());
+            Item *item = GetItem(PosCurrentItem());
 
             x = ItemOpenedPosX(item);
             y = Menu::Y0() - item->HeightOpened() + Item::HEIGHT + 1;
@@ -357,7 +357,7 @@ void Page::Draw(int x, int y, bool opened) const
             }
             else if (IS_TIME(item))
             {
-                ((TimeControl *)item)->Draw(x, y, true);
+                ((TimeItem *)item)->Draw(x, y, true);
             }
             else
             {
@@ -434,7 +434,7 @@ void Page::DrawItems(int x, int y) const
         Rectangle(Width() - 1, Item::HEIGHT).Draw(x, y + 1, Color::FILL);
         Region(Width() - 3, Item::HEIGHT - 2).Fill(x + 1, y + 2, Color::BACK);
         
-        Item *item = GetControl(PosItemOnLeft() + i);
+        Item *item = GetItem(PosItemOnLeft() + i);
         
         if (item)
         {
@@ -484,7 +484,7 @@ void Item::Draw(int x, int y, bool opened) const
     }
     else if (type == Item::Type::Time)
     {
-        ((TimeControl *)this)->Draw(x, y, opened);
+        ((TimeItem *)this)->Draw(x, y, opened);
     }
     else if (type == Item::Type::GovernorColor)
     {
@@ -501,7 +501,7 @@ void Item::Draw(int x, int y, bool opened) const
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void TimeControl::Draw(int x, int y, bool opened)
+void TimeItem::Draw(int x, int y, bool opened)
 {
     if (opened)
     {
@@ -514,7 +514,7 @@ void TimeControl::Draw(int x, int y, bool opened)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void TimeControl::DrawClosed(int x, int y)
+void TimeItem::DrawClosed(int x, int y)
 {
     bool pressed = IsPressed();
     bool shade = IsShade();
@@ -542,7 +542,7 @@ void TimeControl::DrawClosed(int x, int y)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void TimeControl::DrawOpened(int x, int y)
+void TimeItem::DrawOpened(int x, int y)
 {
     int width = Item::Value::WIDTH + 3;
     int height = 61;
@@ -632,7 +632,7 @@ static void DrawCommonHiPart(Item *item, int x, int y, bool pressed, bool shade,
         }
         else if (IS_TIME(item))
         {
-            TimeControl* time = (TimeControl*)item;
+            TimeItem* time = (TimeItem*)item;
             if ((Menu::OpenedItem() == item) && (*time->curField != iEXIT) && (*time->curField != iSET))
             {
                 symbol = time->GetSymbol();

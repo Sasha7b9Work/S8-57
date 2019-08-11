@@ -324,7 +324,7 @@ Page::Name::E Page::GetName() const
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void TimeControl::SetOpened() const
+void TimeItem::SetOpened() const
 {
     PackedTime time = Clock::GetTime();
     *(seconds) = (int8)time.seconds;
@@ -336,7 +336,7 @@ void TimeControl::SetOpened() const
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void TimeControl::IncCurrentPosition()
+void TimeItem::IncCurrentPosition()
 {
     Beeper::GovernorChangedValue();
     int8 *value[] = { 0, day, month, year, hours, minutes, seconds };
@@ -358,20 +358,20 @@ void TimeControl::IncCurrentPosition()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void TimeControl::SetNewTime()
+void TimeItem::SetNewTime()
 {
     Clock::SetTime(*day, *month, *year, *hours, *minutes, *seconds);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void TimeControl::SelectNextPosition() const
+void TimeItem::SelectNextPosition() const
 {
     Math::CircleIncrease<int8>(curField, 0, 7);
     Color::ResetFlash();
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void TimeControl::DecCurrentPosition()
+void TimeItem::DecCurrentPosition()
 {
     Beeper::GovernorChangedValue();
     static const int8 max[] = {0, 31, 12, 99, 23, 59, 59};

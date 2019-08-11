@@ -155,7 +155,7 @@ public:
     ///< ”станавливает позицию активного пункта меню
     void SetPosActItem(int8 pos) const;
     ///< ¬озвращает указатель на заданный элемент страницы
-    Item *GetControl(int numControl) const;
+    Item *GetItem(int numItem) const;
     /// \todo ¬озвращает позицию первого элемента страницы по адресу page на экране. ≈сли текуща€ подстраница 0, это будет 0, если текуща€ 
     /// подстраница 1, это будет 5 и т.д.
     int PosItemOnLeft() const;
@@ -484,7 +484,7 @@ public:
 };
 
 /// ”станавливает и показывает врем€.
-class TimeControl : public Item
+class TimeItem : public Item
 {
 public:
     int8 *curField;   ///< “екущее поле установки. 0 - выход, 1 - сек, 2 - мин, 3 - часы, 4 - день, 5 - мес€ц, 6 - год, 7 - установить.

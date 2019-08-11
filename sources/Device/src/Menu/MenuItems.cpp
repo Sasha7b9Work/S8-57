@@ -54,14 +54,14 @@ const char *Choice::NamePrevSubItem()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-Item *Page::GetControl(int numControl) const
+Item *Page::GetItem(int numItem) const
 {
-    if (numControl >= num)
+    if (numItem >= num)
     {
         return nullptr;
     }
 
-    return (Item *)items[numControl + (isPageSB ? 1 : 0)];
+    return (Item *)items[numItem + (isPageSB ? 1 : 0)];
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -83,7 +83,7 @@ char Choice::GetSymbol()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-char TimeControl::GetSymbol()
+char TimeItem::GetSymbol()
 {
     int8 values[7] =
     {
@@ -124,7 +124,7 @@ char Item::GetSymbol() const
     }
     else if (type == Item::Type::Time)
     {
-        return ((TimeControl *)this)->GetSymbol();
+        return ((TimeItem *)this)->GetSymbol();
     }
     else
     {
@@ -226,7 +226,7 @@ void Item::SetCurrent(bool active) const
     {
         for (int i = 0; i < page->NumItems(); i++)
         {
-            if (page->GetControl(i) == this)
+            if (page->GetItem(i) == this)
             {
                 page->SetPosActItem((int8)i);
                 return;
@@ -405,7 +405,7 @@ void Item::ShortPress() const
     }
     else if(type == Item::Type::Time)
     {
-        ((TimeControl *)this)->ShortPress();
+        ((TimeItem *)this)->ShortPress();
     }
     else if(type == Item::Type::GovernorColor)
     {
@@ -439,7 +439,7 @@ void Item::LongPress() const
         {
             SetCurrent(true);
         }
-        TimeControl *time = (TimeControl *)this;
+        TimeItem *time = (TimeItem *)this;
         if(IsOpened() && (*time->curField == iSET))
         {
             time->SetNewTime();
@@ -581,7 +581,7 @@ void Governor::ShortPress() const
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void TimeControl::ShortPress() const
+void TimeItem::ShortPress() const
 {
     if (!IsOpened())
     {
@@ -655,5 +655,5 @@ void SButton::ShortPress() const
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 const Item *Page::ItemForFuncKey(Key::E key)
 {
-    return GetControl(PosItemOnLeft() + key - Key::F1);
+    return GetItem(PosItemOnLeft() + key - Key::F1);
 }
