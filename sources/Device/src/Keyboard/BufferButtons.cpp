@@ -1,6 +1,7 @@
 #include "defines.h"
 #include "BufferButtons.h"
 #include "Hardware/Beeper.h"
+#include "Menu/Pages/Include/PageFunction.h"
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -29,6 +30,8 @@ void BufferButtons::Push(KeyEvent event)
     {
         return;                                         // то пропустим это событие - кнопка уже отработала
     }
+
+    PageMultimeter::DecodePassword(event);
 
     /// \todo На звуке иногда виснет при длительном удержании кнопки смещения. Вызвано ошибками при передаче данных
     Beeper::Beep(event.type);

@@ -225,7 +225,7 @@ DEF_PAGE_5_VAR( pageMultimeter, // -V641 //-V1027 //-V641
     &cRangesVoltageDC,
     &cAVP,
     &cZero,
-    PageMultimeter::PageCalibration::self,
+    &emptyControl,
     Page::Name::Function_Multimeter, &PageFunction::self, 0, OnEnterExit_Multimeter, 0, 0
 )
 
@@ -261,3 +261,49 @@ DEF_PAGE_2( pageCalibration, //-V641 //-V1027
     &bCalibrate1,
     Page::Name::Function_Multimeter_Cal, &PageMultimeter::self, 0, 0, 0, 0
 )
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void PageMultimeter::DecodePassword(KeyEvent &event)
+{
+#define NUM_SYMBOLS 8
+    /// Пароль
+    static const Key::E password[NUM_SYMBOLS] = { Key::F2, Key::F2, Key::F3, Key::F3, Key::F4, Key::F4, Key::F5, Key::F5 };
+    /// Число совпавших символов
+    static int charsMatch = 0;
+
+
+    if (!Device::State::InModeMultimeter())         // Декодирование производим только в режиме мультиметра
+    {
+        charsMatch = 0;
+        return;
+    }
+
+    if (Menu::OpenedItem() != (Item *)&cMode)       // И обязательно при раскрытом меню "Режим"
+    {
+        charsMatch = 0;
+        return;
+    }
+
+    if (event.type != TypePress::Release)
+    {
+        return;
+    }
+
+    if (password[charsMatch++] == event.key)
+    {
+        if (charsMatch == NUM_SYMBOLS)
+        {
+            Page *page = (Page *)&pageMultimeter;
+
+            Item **items = (Item **)page->items;
+
+            items[4] = (Item *)PageMultimeter::PageCalibration::self;
+
+            Menu::CloseOpenedItem();
+        }
+    }
+    else
+    {
+        charsMatch = 0;
+    }
+}
