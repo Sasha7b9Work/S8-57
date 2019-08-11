@@ -1,9 +1,9 @@
 #include "defines.h"
 #include "Transceiver.h"
 #include "Menu/Menu.h"
-#include "Menu/BufferButtons.h"
 #include "Hardware/Timer.h"
 #include "Menu/MenuTriggers.h"
+#include "Keyboard/BufferButtons.h"
 #include "Keyboard/HandlersKeys.h"
 #include "device.h"
 #include "FlashDrive/FlashDrive.h"
@@ -22,11 +22,11 @@
 #include "Display/Display_Primitives.h"
 #include "Display/Grid.h"
 #include "Display/Painter.h"
-#include <cstdio>
-
 #include "Utils/Debug.h"
 #include "Hardware/HAL/HAL.h"
 #include "Keyboard/DecoderDevice.h"
+
+#include <cstdio>
 
 
 using namespace Display::Primitives;

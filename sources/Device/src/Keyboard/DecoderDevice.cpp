@@ -4,7 +4,8 @@
 #include "Menu/Menu.h"
 #include "Utils/Debug.h"
 #include "Display/Painter.h"
-#include "Menu/BufferButtons.h"
+#include "Keyboard/BufferButtons.h"
+
 #include <cstdlib>
 
 

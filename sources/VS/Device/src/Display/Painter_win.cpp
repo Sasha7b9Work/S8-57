@@ -14,7 +14,7 @@
 #define pString const char * const
 
 #include "Display/Painter.h"
-#include "Menu/BufferButtons.h"
+#include "Keyboard/BufferButtons.h"
 
 #include <SDL.h>
 

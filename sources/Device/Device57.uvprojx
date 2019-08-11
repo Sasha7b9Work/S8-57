@@ -1031,6 +1031,16 @@
           <GroupName>Keyboard</GroupName>
           <Files>
             <File>
+              <FileName>BufferButtons.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Keyboard\BufferButtons.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>BufferButtons.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Keyboard\BufferButtons.h</FilePath>
+            </File>
+            <File>
               <FileName>DecoderDevice.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Keyboard\DecoderDevice.cpp</FilePath>
@@ -1065,16 +1075,6 @@
         <Group>
           <GroupName>Menu</GroupName>
           <Files>
-            <File>
-              <FileName>BufferButtons.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Menu\BufferButtons.h</FilePath>
-            </File>
-            <File>
-              <FileName>BufferButtons.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Menu\BufferButtons.cpp</FilePath>
-            </File>
             <File>
               <FileName>Menu.h</FileName>
               <FileType>5</FileType>
