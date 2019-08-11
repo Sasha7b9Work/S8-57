@@ -257,7 +257,7 @@ void Choice::DrawClosed(int x, int y)
     bool pressed = IsPressed();
     bool shade = IsShade() || !IsActive();
 
-    Region(Item::Value::WIDTH + 1, Item::Value::HEIGHT - 3).Fill(x + 1, y + Item::Value::HEIGHT, ColorMenuField(this));
+    Region(Item::Value::WIDTH + 2, Item::Value::HEIGHT - 3).Fill(x + 1, y + Item::Value::HEIGHT, ColorMenuField(this));
 
     int deltaY = (int)Step();
     Color colorText = shade ? Color::MenuItem(true) : Color::BLACK;
