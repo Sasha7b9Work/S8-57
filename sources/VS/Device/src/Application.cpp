@@ -65,8 +65,7 @@ bool Application::OnInit()
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 Frame::Frame(const wxString& title)
-    : wxFrame(NULL, wxID_ANY, title),
-    timer(this, TIMER_ID)
+    : wxFrame(NULL, wxID_ANY, title)
 {
     SetIcon(wxICON(sample));
 
@@ -87,6 +86,8 @@ Frame::Frame(const wxString& title)
 
     CreateStatusBar(2);
     SetStatusText("Welcome to wxWidgets!");
+
+    timer.SetOwner(this, TIMER_ID);
 
     timer.Start(0);
 }

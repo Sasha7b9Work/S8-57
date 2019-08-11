@@ -25,20 +25,16 @@ add_definitions(-DSTM32F437xx -DOLD_RECORDER -DWXUSINGDLL -DUSE_SDL2 -DGUI)
 
 SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -MP -Wall")
 
-add_compile_options(/wd4355)
-add_compile_options(/wd4459)
-add_compile_options(/wd4464) # relative include path contains '..'
-add_compile_options(/wd4505)
-add_compile_options(/wd4548)
-add_compile_options(/wd4571)
-add_compile_options(/wd4625)
-add_compile_options(/wd4626)
-add_compile_options(/wd4668)
-add_compile_options(/wd4710)
-add_compile_options(/wd4820)
-add_compile_options(/wd4996)
-add_compile_options(/wd5026)
-add_compile_options(/wd5039)
+add_compile_options(/wd4464)    # relative include path contains '..'
+add_compile_options(/wd4571)    # Informational: catch(...) semantics changed since Visual C++ 7.1; structured exceptions (SEH) are no longer caught
+add_compile_options(/wd4625)    # 'xxx': copy constructor was implicitly defined as deleted 
+add_compile_options(/wd4626)    # 'xxx': assignment operator was implicitly defined as deleted
+add_compile_options(/wd4668)    # 'xxx' is not defined as a preprocessor macro, replacing with '0' for '#if/#elif'
+add_compile_options(/wd4710)    # 'xxx': function not inlined
+add_compile_options(/wd4820)    # 'xxx': '4' bytes padding added after data member 'yyy'
+add_compile_options(/wd4996)    # 'xxx': This function or variable may be unsafe.
+add_compile_options(/wd5026)    # 'xxx': move constructor was implicitly defined as deleted
+add_compile_options(/wd5039)    # 'xxx': pointer or reference to potentially throwing function passed to extern C function under -EHc.
 
 source_group(common                 FILES ../../common/Command.h
                                           ../../common/Message.cpp
