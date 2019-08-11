@@ -67,6 +67,8 @@ public:
     /// Имеет родителя - не является главной страницей меню
     bool HaveParent() const { return Keeper() != nullptr; };
 
+    static Item empty;
+
     /// Разные виды пунктов меню
     struct Type
     {
@@ -408,5 +410,3 @@ public:
 typedef void * pVOID;
 #define MAX_NUM_ITEMS_IN_PAGE 15
 typedef pVOID arrayItems[MAX_NUM_ITEMS_IN_PAGE];
-
-extern Item emptyControl;

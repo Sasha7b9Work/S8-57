@@ -225,7 +225,7 @@ DEF_PAGE_5_VAR( pageMultimeter, // -V641 //-V1027 //-V641
     &cRangesVoltageDC,
     &cAVP,
     &cZero,
-    &emptyControl,
+    &Item::empty,
     Page::Name::Function_Multimeter, &PageFunction::self, 0, OnEnterExit_Multimeter, 0, 0
 )
 

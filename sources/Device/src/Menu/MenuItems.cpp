@@ -35,7 +35,7 @@ static TimeStruct tsGovernor = { 0, 0, NONE, 0, 0, 0 };
 
 int8 gCurDigit = 0;
 
-Item emptyControl = { Item::Type::None };
+Item Item::empty = { Item::Type::None };
 
 #define NAME_FROM_INDEX(index) (names[index])
 

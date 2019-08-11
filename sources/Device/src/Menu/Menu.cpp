@@ -336,7 +336,7 @@ static Item *LastOpened(Page *page)
 {
     if (page == nullptr)
     {
-        return &emptyControl;
+        return &Item::empty;
     }
 
     if (page->CurrentItemIsOpened())

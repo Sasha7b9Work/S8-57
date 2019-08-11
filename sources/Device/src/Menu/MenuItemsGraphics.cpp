@@ -450,7 +450,7 @@ const Item *Menu::ItemForFuncKey(Key::E key)
 {
     if (!Key(key).IsFunctional())
     {
-        return &emptyControl;
+        return &Item::empty;
     }
 
     Item *item = Menu::OpenedItem();
