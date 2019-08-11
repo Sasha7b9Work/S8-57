@@ -13,18 +13,6 @@ extern int8 gCurDigit;
 
 #define MENU_ITEMS_ON_DISPLAY       5   ///< Сколько пунктов меню помещается на экране по вертикали.
 
-/// Общая часть для всех типов элементов меню
-#define COMMON_PART_MENU_ITEM                                                                           \
-    uint8                type;          /* Тип итема */                                                     \
-    int8                 num;           /* Число вариантов для Choice или число контролов для Page*/        \
-    bool                 isPageSB;      /* Если true, то это страница малых кнопок */                       \
-    uint8                name;          /* Имя из перечисления Page::Name */                                \
-    const Page * const * keeper;        /* Адрес страницы, которой принадлежит. Для Page_Main = 0 */        \
-    pFuncBV              funcOfActive;  /* Активен ли данный элемент */                                     \
-    const char          *titleHint[2]   /* Название страницы на русском и английском языках. Также подсказка для режима помощи */
-
-class Page;
-
 #define IS_PAGE(item)           (item->type == Item::Type::Page)
 #define NOT_PAGE(item)          (item->type != Item::Type::Page)
 #define IS_PAGE_SB(item)        (item->isPageSB)
@@ -67,14 +55,10 @@ public:
     void Draw(int x, int y, bool opened) const;
 
     bool IsCurrentItem() const;
-    /// Вывести информацию в лог
-    void LogInfo() const;
     /// Возвращает изображение регулятора, соответствующее его текущему положению
     char GetSymbol() const;
     /// Возвращает ширину контрола
     int Width() const { return 320 / 5; };
-    /// Возвращает true, если тип контрола - Page
-    bool IsPage() const;
     /// Возвращает адрес родителя
     const Page *Keeper() const { if (keeper) { return *keeper; }; return nullptr; }
     /// Возвращает true, если в древе предков стоит keeper
@@ -114,22 +98,6 @@ public:
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// Page ///
-
-typedef bool(*pFuncBKE)(KeyEvent);
-
-/// Описывает страницу меню.
-class PageDef
-{
-public:
-    COMMON_PART_MENU_ITEM;
-    const Item * const *items;   ///< Здесь указатели на пункты этой страницы (в обычной странице)
-                                    ///< для страницы малых кнопок  здесь хранятся 6 указателей на SButton : 0 - K_Enter, 1...5 - K_1...K_5
-    pFuncVB     funcOnEnterExit;    ///< Будет вызываться при нажатии на свёрнутую страницу и при выходе из этой страницы на предыдущую
-    pFuncVV     funcOnDraw;         ///< Будет вызываться после отрисовки кнопок
-    pFuncBKE    funcRegSet;         ///< Вызывается при нажатии кнопок ВЛЕВО/ВПРАВО. Если отработала, возвращает true
-};
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 #define SMALL_BUTTON_FROM_PAGE(page, numButton)     ((SButton *)((Page *)page)->items[numButton])
 
 class Page : public Item
@@ -343,8 +311,6 @@ public:
     pFuncVV funcBeforeDraw; ///< Функция, которая вызывается перед отрисовкой
     /// Обработка события кнопки
     bool ProcessKey(KeyEvent event);
-    /// Запускает процессс анимации инкремента или декремента элемента меню типа Governor (в зависимости от знака delta).
-    void StartChange(int detla);
     /// Возвращает следующее большее значение, которое может принять governor.
     int16 NextValue();
     /// Возвращает следующее меньшее значение, которое может принять governor.
@@ -495,7 +461,6 @@ public:
     int8 *day;
     int8 *year;
     void SetOpened() const;
-    void IncCurrentPosition();
     void SetNewTime();
     void SelectNextPosition() const;
     void DecCurrentPosition();

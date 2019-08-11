@@ -330,7 +330,7 @@ static void HandlerArrow()
         return;
     }
     
-    if(Menu::OpenedItem()->IsPage())
+    if(IS_PAGE(Menu::OpenedItem()))
     {
         if(!Menu::CurrentItem()->ProcessKey(event))
         {
