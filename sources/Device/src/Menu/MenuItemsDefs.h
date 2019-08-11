@@ -159,6 +159,13 @@ static const Item * const items##name[] = {(Item *)item1, (Item *)item2, (Item *
 static const PageDef name = {Item::Type::Page, 5, false, namePage, keeper, funcActive, {title, hint},                                                                                       \
     items##name, funcPress, funcDraw, funcRegSet};
 
+/// Определяет страницу так, что items##name размещается в ОЗУ
+#define DEF_PAGE_5_VAR(name, title, hint,                                                                                                                                                   \
+    item1, item2, item3, item4, item5, namePage, keeper, funcActive, funcPress, funcDraw, funcRegSet)                                                                                       \
+static const Item * items##name[] = {(Item *)item1, (Item *)item2, (Item *)item3, (Item *)item4, (Item *)item5};                                                                            \
+static const PageDef name = {Item::Type::Page, 5, false, namePage, keeper, funcActive, {title, hint},                                                                                       \
+    items##name, funcPress, funcDraw, funcRegSet};
+
 #define DEF_PAGE_6(name, title, hint, item1, item2, item3, item4, item5, item6, namePage, keeper, funcActive, funcPress, funcDraw, funcRegSet)                                              \
 static const Item * const  items##name[] = {(Item *)item1, (Item *)item2, (Item *)item3, (Item *)item4, (Item *)item5, (Item *)item6};                                                      \
 static const PageDef name = {Item::Type::Page, 6, false, namePage, keeper, funcActive, {title, hint},                                                                                       \

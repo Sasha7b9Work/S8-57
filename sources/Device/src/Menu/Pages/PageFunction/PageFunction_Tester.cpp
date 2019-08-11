@@ -96,7 +96,7 @@ static void OnEnterExit_Tester(bool enter)
 }
 
 
-DEF_PAGE_5( pageTester, // -V641
+DEF_PAGE_5_VAR( pageTester, // -V641
     "реяреп",
     "",
     &cControl,

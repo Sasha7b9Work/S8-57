@@ -213,12 +213,12 @@ void PageMultimeter::OnChanged_Mode(bool)
     Multimeter::ChangeMode();
 }
 
-static void OnPress_Page(bool enter)
+static void OnEnterExit_Multimeter(bool enter)
 {
     Device::State::SetMode(enter ? Device::Mode::Multimeter : Device::Mode::Osci);
 }
 
-DEF_PAGE_5( pageMultimeter, // -V641 //-V1027 //-V641
+DEF_PAGE_5_VAR( pageMultimeter, // -V641 //-V1027 //-V641
     "МУЛЬТИМЕТР",
     "Управление прибором в режиме мультиметра",
     &cMode,
@@ -226,7 +226,7 @@ DEF_PAGE_5( pageMultimeter, // -V641 //-V1027 //-V641
     &cAVP,
     &cZero,
     PageMultimeter::PageCalibration::self,
-    Page::Name::Function_Multimeter, &PageFunction::self, 0, OnPress_Page, 0, 0
+    Page::Name::Function_Multimeter, &PageFunction::self, 0, OnEnterExit_Multimeter, 0, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
