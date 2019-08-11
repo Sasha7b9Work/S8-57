@@ -33,7 +33,6 @@ using namespace Display::Primitives;
 using namespace Osci::Settings;
 using namespace Transceiver;
 
-const Item *Menu::pressedItem = nullptr;
 const char    *Menu::stringForHint = nullptr;
    Item    *Menu::itemHint = nullptr;
 const Page    *Menu::mainPage = nullptr;
