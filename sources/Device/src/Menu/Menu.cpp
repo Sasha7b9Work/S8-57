@@ -44,6 +44,8 @@ static bool needSaveScreen = false;
 /// Время последнего нажатия кнопки. Нужно для того, чтобы периодически сохранять настройки
 static uint timeLastPressedButton = MAX_UINT;
 
+static int numRow = -1;
+
 /// Последний открытый контрол на дереве странице page
 static Item *LastOpened(Page *page);
 /// Обработка события таймера автоматического сокрытия меню
@@ -61,8 +63,6 @@ static void CreateFileName(char name[256])
 {
     std::strcpy(name, "screen.bmp");
 }
-
-static int numRow = -1;
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Menu::SaveRow(int row)
