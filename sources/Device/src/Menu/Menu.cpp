@@ -598,17 +598,13 @@ void Menu::Draw()
     if (Menu::IsShown())
     {
         Item *item = OpenedItem();
-        if (Menu::IsShown())
+
+        if (!IS_PAGE(item))
         {
-            if (IS_PAGE(item))
-            {
-                item->Draw(0, Y0(), true);
-            }
-            else
-            {
-                ((Page *)item->Keeper())->Draw(0, Y0(), true);
-            }
+            item = (Item *)item->Keeper();
         }
+
+        item->Draw(0, Y0(), true);
     }
 
     DrawHint();
