@@ -394,11 +394,6 @@ static void DrawHintItem(int x, int y, int width)
     char title[SIZE];
     std::snprintf(title, SIZE, "%s \"%s\"", names[itemHint->type], item->titleHint[0]);
 
-    if (IS_GRAPH_BUTTON(item))
-    {
-        y -= 9;
-    }
-
     Text(title).DrawInCenterRectAndBoundIt(x, y, width, 15, Color::BACK, Color::FILL);
 
     y = Text(item->titleHint[1]).DrawInBoundedRectWithTransfers(x, y + 15, width, Color::BACK, Color::FILL);
