@@ -97,10 +97,15 @@ static void Draw_Function_Type(int x, int y)
     funcs[MATH_FUNC](x, y);
 }
 
+static bool IsActive_Type()
+{
+    return FUNC_MODE_DRAW_IS_ENABLED;
+}
+
 DEF_GRAPH_BUTTON_HINTS_2(bFunction_Type,                                                                                                                    //--- СЕРВИС - ФУНКЦИЯ - Вид ---
     "Вид",
     "Выбор математической функции",
-    &PageMeasuresMath::self, 0, OnPress_Function_Type, Draw_Function_Type,
+    &PageMeasuresMath::self, IsActive_Type, OnPress_Function_Type, Draw_Function_Type,
     Draw_Function_Type_Sum, "Сложение",
     Draw_Function_Type_Mul, "Умножение"
 )
@@ -127,10 +132,15 @@ static void Draw_Function_ModeRegSet(int x, int y)
     funcs[MATH_MODE_REG_SET](x, y);
 }
 
+static bool IsActive_ModeRegSet()
+{
+    return FUNC_MODE_DRAW_IS_ENABLED;
+}
+
 DEF_GRAPH_BUTTON_HINTS_2(bFunction_ModeRegSet,                                                                                            //--- СЕРВИС - ФУНКЦИЯ - Режим ручки УСТАНОВКА ---
     "Режим ручки УСТАНОВКА",
     "Выбор режима ручки УСТАНОВКА - управление масштабом или смещением",
-    &PageMeasuresMath::self, 0, OnPress_Function_ModeRegSet, Draw_Function_ModeRegSet,
+    &PageMeasuresMath::self, IsActive_ModeRegSet, OnPress_Function_ModeRegSet, Draw_Function_ModeRegSet,
     Draw_Function_ModeRegSet_Range, "Управление масштабом",
     Draw_Function_ModeRegSet_RShift, "Управление смещением"
 )
@@ -147,10 +157,15 @@ static void Draw_Function_RangeA(int x, int y)
     Char('1').Draw(x + 8, y + 5);
 }
 
+static bool IsActive_RangeA()
+{
+    return FUNC_MODE_DRAW_IS_ENABLED;
+}
+
 DEF_GRAPH_BUTTON(bFunction_RangeA,                                                                                                          //--- СЕРВИС - ФУНКЦИЯ - Масштаб 1-го канала ---
     "Масштаб 1-го канала",
     "Использует масштаб первого канала для отображения результата",
-    &PageMeasuresMath::self, 0, OnPress_Function_RangeA, Draw_Function_RangeA
+    &PageMeasuresMath::self, IsActive_RangeA, OnPress_Function_RangeA, Draw_Function_RangeA
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -165,10 +180,15 @@ static void Draw_Function_RangeB(int x, int y)
     Char('2').Draw(x + 8, y + 5);
 }
 
+static bool IsActive_RangeB()
+{
+    return FUNC_MODE_DRAW_IS_ENABLED;
+}
+
 DEF_GRAPH_BUTTON(bFunction_RangeB,                                                                                                          //--- СЕРВИС - ФУНКЦИЯ - Масштаб 2-го канала ---
     "Масштаб 2-го канала",
     "Использует масштаб второго канала для отображения результата",
-    &PageMeasuresMath::self, 0, OnPress_Function_RangeB, Draw_Function_RangeB
+    &PageMeasuresMath::self, IsActive_RangeB, OnPress_Function_RangeB, Draw_Function_RangeB
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
