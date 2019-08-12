@@ -181,7 +181,7 @@ static void CreateButtons(Frame *frame)
     Key::E keys[2][5] = 
     {
         { Key::F1,       Key::F2,      Key::F3,     Key::F4,      Key::F5 },
-        { Key::Function, Key::Display, Key::Memory, Key::Measure, Key::Service }
+        { Key::Function, Key::Measure, Key::Memory, Key::Display, Key::Service }
     };
 
     int x0 = 37;
