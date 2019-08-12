@@ -422,12 +422,18 @@ void Menu::Draw()
     {
         Item *item = OpenedItem();
 
-        if (!IS_PAGE(item))
+        if (item)
         {
-            item = (Item *)item->Keeper();
-        }
+            if (!IS_PAGE(item))
+            {
+                item = (Item *)item->Keeper();
+            }
 
-        item->Draw(0, Y0(), true);
+            if (item)
+            {
+                item->Draw(0, Y0(), true);
+            }
+        }
     }
 
     DrawHint();
@@ -499,13 +505,22 @@ const Item *Menu::ItemForFuncKey(Key::E key)
 
     Item *item = Menu::OpenedItem();
 
+    if (!item)
+    {
+        return &Item::empty;
+    }
+
     if (IS_PAGE(item))
     {
         return ((Page *)item)->ItemForFuncKey(key);
     }
-    else if(item->Keeper()->ItemForFuncKey(key) == item)
+    else
     {
-        return item;
+        const Page *parent = item->Keeper();
+        if (parent && parent->ItemForFuncKey(key) == item)
+        {
+            return item;
+        }
     }
 
     return &Item::empty;

@@ -278,7 +278,7 @@ void PageMultimeter::DecodePassword(KeyEvent &event)
         return;
     }
 
-    if (Menu::OpenedItem() != (Item *)&cMode)       // И обязательно при раскрытом меню "Режим"
+    if (Menu::OpenedItem() != (Item *)&cMode)       // И обязательно при раскрытом меню "Режим" //-V641
     {
         charsMatch = 0;
         return;

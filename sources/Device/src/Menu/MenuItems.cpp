@@ -62,6 +62,10 @@ bool Item::ProcessKey(KeyEvent event)
     {
         return ((Governor *)this)->ProcessKey(event);
     }
+    else
+    {
+        // здесь ничего
+    }
 
     return false;
 }
@@ -138,29 +142,42 @@ bool Item::IsCurrentItem() const
 void Item::Open(bool open) const
 {
     Page *parent = (Page *)Keeper();
-    parent->SetPosActItem(open ? (parent->PosCurrentItem() | 0x80) : (parent->PosCurrentItem() & 0x7f));
-    if (!open)
+    if (parent)
     {
-        SetCurrent(false);
+        parent->SetPosActItem(open ? (parent->PosCurrentItem() | 0x80) : (parent->PosCurrentItem() & 0x7f));
+        if (!open)
+        {
+            SetCurrent(false);
+        }
     }
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 bool Item::IsOpened() const
 {
+    const Page *parent = Keeper();
+
+    if (parent == nullptr)
+    {
+        return false;
+    }
+
     if (IS_PAGE(this))
     {
-        const Page *page = Keeper();
-
-        return page->CurrentItemIsOpened();
+        return parent->CurrentItemIsOpened();
     }
-    return (MENU_POS_ACT_ITEM(Keeper()->name) & 0x80) != 0;
+    return (MENU_POS_ACT_ITEM(parent->name) & 0x80) != 0;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Item::SetCurrent(bool active) const
 {
     Page *page = (Page *)Keeper();
+
+    if (page == nullptr)
+    {
+        return;
+    }
 
     if (!active)
     {
@@ -224,7 +241,14 @@ void Item::LongPress() const
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 bool Item::IsShade() const
 {
-    return Keeper()->CurrentItemIsOpened() && (this != Menu::OpenedItem());
+    const Page *parent = Keeper();
+
+    if (parent == nullptr)
+    {
+        return false;
+    }
+
+    return parent->CurrentItemIsOpened() && (this != Menu::OpenedItem());
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -736,6 +760,10 @@ void Choice::ShortPress() const
         {
             Change(false);
         }
+    }
+    else
+    {
+        // здесь ничего
     }
 }
 
