@@ -234,29 +234,29 @@ ChoiceParameterBase name = {Item_ChoiceParameter, 0, false, Page::Name::NoPage, 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #define DEF_GRAPH_BUTTON(name, title, hint, keeper, funcActive, funcPress, funcDraw)                                                                                                        \
-static const GraphButtonDef name = { Item::Type::DrawButton, 0, false, Page::Name::NoPage, keeper, funcActive,                                                                              \
+static const GraphButtonDef name = { Item::Type::GraphButton, 0, false, Page::Name::NoPage, keeper, funcActive,                                                                             \
      {title, hint}, funcPress, funcDraw, 0, 0};
 
 #define DEF_GRAPH_BUTTON_EXIT(name, keeper, funcActive, funcPress, funcDraw)                                                                                                                \
-static const GraphButtonDef name = { Item::Type::DrawButton, 0, false, Page::Name::NoPage, keeper, funcActive, {"Выход",                                                                    \
+static const GraphButtonDef name = { Item::Type::GraphButton, 0, false, Page::Name::NoPage, keeper, funcActive, {"Выход",                                                                    \
     "Кнопка для выхода в предыдущее меню"}, funcPress, funcDraw, 0, 0};
 
 #define DEF_GRAPH_BUTTON_HINTS_2(name, title, hint, keeper, funcActive, funcPress, funcDraw, FuncDrawHint1, hint1, FuncDrawHint2, hint2)                                                    \
 static const StructHelpDrawButton hints##name[] = {{ FuncDrawHint1, hint1 }, { FuncDrawHint2, hint2 }};                                                                                     \
-static const GraphButtonDef name = { Item::Type::DrawButton, 0, false, Page::Name::NoPage, keeper, funcActive,                                                                              \
+static const GraphButtonDef name = { Item::Type::GraphButton, 0, false, Page::Name::NoPage, keeper, funcActive,                                                                             \
      {title, hint}, funcPress, funcDraw, hints##name, 2};
 
 #define DEF_GRAPH_BUTTON_HINTS_3(name, title, hint, keeper, funcActive, funcPress, funcDraw,                                                                                                \
     FuncDrawHint1, hint1, FuncDrawHint2, hint2, FuncDrawHint3, hint3)                                                                                                                       \
 static const StructHelpDrawButton hints##name[] = {{ FuncDrawHint1, hint1 }, { FuncDrawHint2, hint2 }, { FuncDrawHint3, hint3 } };                                                          \
-static const GraphButtonDef name = { Item::Type::DrawButton, 0, false, Page::Name::NoPage, keeper, funcActive, {title, hint},                                                               \
+static const GraphButtonDef name = { Item::Type::GraphButton, 0, false, Page::Name::NoPage, keeper, funcActive, {title, hint},                                                              \
     funcPress, funcDraw, hints##name, 3};
 
 #define DEF_GRAPH_BUTTON_HINTS_5(name, title, hint, keeper, funcActive, funcPress, funcDraw,                                                                                                \
     FuncDrawHint1, hint1, FuncDrawHint2, hint2, FuncDrawHint3, hint3, FuncDrawHint4, hint4, FuncDrawHint5, hint5)                                                                           \
 static const StructHelpDrawButton hints##name[] = {{ FuncDrawHint1, hint1 }, { FuncDrawHint2, hint2 },                                                                                      \
     { FuncDrawHint3, hint3 }, { FuncDrawHint4, hint4 }, { FuncDrawHint5, hint5 } };                                                                                                         \
-static const GraphButtonDef name = { Item::Type::DrawButton, 0, false, Page::Name::NoPage, keeper, funcActive, {title, hint},                                                               \
+static const GraphButtonDef name = { Item::Type::GraphButton, 0, false, Page::Name::NoPage, keeper, funcActive, {title, hint},                                                              \
     funcPress, funcDraw, hints##name, 5};
 
 

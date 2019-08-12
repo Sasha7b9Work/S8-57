@@ -8,7 +8,7 @@
     Структуры вида XxxDef испльзутся ТОЛЬКО для инициализации структур
 */
 
-#define SMALL_BUTTON_FROM_PAGE(page, numButton)     ((SButton *)((Page *)page)->items[numButton])
+#define GRAPH_BUTTON_FROM_PAGE(page, numButton)     ((GraphButton *)((Page *)page)->items[numButton])
 
 extern int8 gCurDigit;
 
@@ -25,7 +25,7 @@ extern int8 gCurDigit;
 #define IS_GOVERNOR_COLOR(item) (item->type == Item::Type::GovernorColor)
 #define IS_TIME(item)           (item->type == Item::Type::Time)
 #define IS_BUTTON(item)         (item->type == Item::Type::Button)
-#define IS_DRAW_BUTTON(item)    (item->type == Item::Type::DrawButton)
+#define IS_GRAPH_BUTTON(item)   (item->type == Item::Type::GraphButton)
     
 class Item
 {
@@ -82,7 +82,7 @@ public:
             Time,           ///< Позволяет ввести время.
             GovernorColor,  ///< Позволяет выбрать цвет.
             ChoiceReg,      ///< Элемент выбора, в котором выбор осуществляется не кнопкой, а ручкой
-            DrawButton,     ///< Кнопка для режима малых кнопок
+            GraphButton,    ///< Кнопка для режима малых кнопок
             ChoiceParameter,
             Number
         } value;
@@ -259,7 +259,7 @@ struct StructHelpDrawButton
 };
 
 
-class SButton : public Item
+class GraphButton : public Item
 {
 public:
     pFuncVV                     funcOnPress;    ///< Эта функция вызвается для обработки нажатия кнопки.

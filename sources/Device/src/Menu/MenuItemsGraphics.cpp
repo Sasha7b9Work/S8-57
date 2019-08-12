@@ -307,7 +307,7 @@ void Button::Draw(int x, int y) const
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void SButton::Draw(int x, int y) const
+void GraphButton::Draw(int x, int y) const
 {
     x += 22;
     y += 3;
@@ -390,7 +390,7 @@ void Page::DrawTitle(int x, int yTop) const
 
     if (isPageSB)
     {
-        SMALL_BUTTON_FROM_PAGE(this, 0)->Draw(x, yTop + 3);
+        GRAPH_BUTTON_FROM_PAGE(this, 0)->Draw(x, yTop + 3);
         return;
     }
 
@@ -475,9 +475,9 @@ void Item::Draw(int x, int y, bool opened) const
     {
         ((GovernorColor *)this)->Draw(x, y, opened);
     }
-    else if (IS_DRAW_BUTTON(this))
+    else if (IS_GRAPH_BUTTON(this))
     {
-        ((SButton *)this)->Draw(x, y);
+        ((GraphButton *)this)->Draw(x, y);
     }
     else
     {
@@ -733,7 +733,7 @@ void Page::DrawNestingPage(int left, int bottom) const
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void SButton::DrawHints(int x, int y, int width) const
+void GraphButton::DrawHints(int x, int y, int width) const
 {
     if (numHints == 0)
     {

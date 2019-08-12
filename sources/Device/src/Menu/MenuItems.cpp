@@ -101,9 +101,9 @@ void Item::ShortPress() const
     {
         ((GovernorColor *)this)->ShortPress();
     }
-    else if (IS_DRAW_BUTTON(this))
+    else if (IS_GRAPH_BUTTON(this))
     {
-        ((SButton *)this)->ShortPress();
+        ((GraphButton *)this)->ShortPress();
     }
     else
     {
@@ -222,9 +222,9 @@ void Item::LongPress() const
         Open(!IsOpened());
         time->SetOpened();
     }
-    else if (IS_DRAW_BUTTON(this))
+    else if (IS_GRAPH_BUTTON(this))
     {
-        SButton *button = (SButton *)this;
+        GraphButton *button = (GraphButton *)this;
         button->funcOnPress();
         pressedItem = this;
     }
@@ -477,7 +477,7 @@ void Button::ShortPress() const
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void SButton::ShortPress() const
+void GraphButton::ShortPress() const
 {
     if (IsActive())
     {

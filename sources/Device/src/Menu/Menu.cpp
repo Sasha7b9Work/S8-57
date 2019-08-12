@@ -229,7 +229,7 @@ static void ClosePage(Page *page)
 {
     if (IS_PAGE_SB(page))
     {
-        SMALL_BUTTON_FROM_PAGE(page, 0)->funcOnPress();
+        GRAPH_BUTTON_FROM_PAGE(page, 0)->funcOnPress();
     }
     else
     {
@@ -394,7 +394,7 @@ static void DrawHintItem(int x, int y, int width)
     char title[SIZE];
     std::snprintf(title, SIZE, "%s \"%s\"", names[itemHint->type], item->titleHint[0]);
 
-    if (IS_DRAW_BUTTON(item))
+    if (IS_GRAPH_BUTTON(item))
     {
         y -= 9;
     }
@@ -403,9 +403,9 @@ static void DrawHintItem(int x, int y, int width)
 
     y = Text(item->titleHint[1]).DrawInBoundedRectWithTransfers(x, y + 15, width, Color::BACK, Color::FILL);
 
-    if (IS_DRAW_BUTTON(item))
+    if (IS_GRAPH_BUTTON(item))
     {
-        ((SButton*)item)->DrawHints(x, y, width);   // -V1027
+        ((GraphButton*)item)->DrawHints(x, y, width);   // -V1027
     }
 }
 
