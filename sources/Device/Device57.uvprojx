@@ -1105,16 +1105,6 @@
               <FileType>8</FileType>
               <FilePath>.\src\Menu\MenuItemsGraphics.cpp</FilePath>
             </File>
-            <File>
-              <FileName>MenuTriggers.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Menu\MenuTriggers.h</FilePath>
-            </File>
-            <File>
-              <FileName>MenuTriggers.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Menu\MenuTriggers.cpp</FilePath>
-            </File>
           </Files>
         </Group>
         <Group>

@@ -2,7 +2,6 @@
 #include "Transceiver.h"
 #include "Menu/Menu.h"
 #include "Hardware/Timer.h"
-#include "Menu/MenuTriggers.h"
 #include "Keyboard/BufferButtons.h"
 #include "Keyboard/HandlersKeys.h"
 #include "device.h"
@@ -72,11 +71,6 @@ void Menu::Update()
         {
             ProcessButtonForHint(event.key);                    // то выводим подсказку для соответствующей кнопки
             continue;                                           // и переходим к следующей кнопке
-        }
-
-        if (TriggerDebugMenu::Triggered(event))                 // Если включелось меню отладки
-        {
-            continue;                                           // то выходим
         }
 
         Handlers::Process(event);                           // То обрабатываем его
