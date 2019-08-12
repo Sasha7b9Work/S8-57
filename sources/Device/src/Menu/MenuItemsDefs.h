@@ -20,9 +20,8 @@ typedef bool(*pFuncBKE)(KeyEvent);
 
 
 /// Описывает страницу меню.
-class PageDef
+struct PageDef
 {
-public:
     COMMON_PART_MENU_ITEM;
     const Item * const         *items;              ///< Здесь указатели на пункты этой страницы (в обычной странице)
                                                     ///< для страницы малых кнопок  здесь хранятся 6 указателей на SButton : 0 - K_Enter, 1...5 - K_1...K_5
@@ -32,18 +31,16 @@ public:
 };
 
 /// Описывает кнопку.
-class ButtonDef
+struct ButtonDef
 {
-public:
     COMMON_PART_MENU_ITEM;
     pFuncVV                     funcOnPress;        ///< Функция, которая вызывается при нажатии на кнопку.
     pFuncVII                    funcForDraw;        ///< Функция будет вызываться во время отрисовки кнопки.
 };
 
 /// Описывает кнопку для дополнительного режима меню.
-class SButtonDef
+struct SButtonDef
 {
-public:
     COMMON_PART_MENU_ITEM;
     pFuncVV                     funcOnPress;    ///< Эта функция вызвается для обработки нажатия кнопки.
     pFuncVII                    funcForDraw;    ///< Эта функция вызывается для отрисовки кнопки в месте с координатами x, y.
@@ -52,9 +49,8 @@ public:
 };
 
 /// Описывает регулятор.
-class GovernorDef
+struct GovernorDef
 {
-public:
     COMMON_PART_MENU_ITEM;
     int16                      *cell;
     int16                       minValue;       ///< Минмальное значение, которое может принимать регулятор.
@@ -63,9 +59,8 @@ public:
     pFuncVV                     funcBeforeDraw; ///< Функция, которая вызывается перед отрисовкой
 };
 
-class ChoiceDef
+struct ChoiceDef
 {
-public:
     COMMON_PART_MENU_ITEM;
     int8                       *cell;
     const char  * const        *names;          ///< Варианты выбора на русском и английском языках.
@@ -75,17 +70,15 @@ public:
 
 class ColorType;
 
-class GovernorColorDef
+struct GovernorColorDef
 {
-public:
     COMMON_PART_MENU_ITEM;
     ColorType                  *ct;             ///< Структура для описания цвета.
     pFuncVV                     funcOnChanged;  ///< Эту функцию нужно вызывать после изменения значения элемента.
 };
 
-class TimeDef
+struct TimeDef
 {
-public:
     COMMON_PART_MENU_ITEM;
     int8                        *curField;      ///< Текущее поле установки. 0 - выход, 1 - сек, 2 - мин, 3 - часы, 4 - день, 5 - месяц, 6 - год, 7 - установить.
     int8                        *hours;
