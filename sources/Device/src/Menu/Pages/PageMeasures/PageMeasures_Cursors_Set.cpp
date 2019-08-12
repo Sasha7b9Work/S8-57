@@ -45,7 +45,7 @@ void PageMeasuresCursors::PageSet::Draw_Set_Channel(int x, int y)
     func[CURS_SOURCE](x, y);
 }
 
-DEF_SMALL_BUTTON_HINTS_2( bSet_Channel,                                                                                                    //--- ИЗМЕРЕНИЯ - КУРСОРЫ - УСТАНОВИТЬ - Канал ---
+DEF_GRAPH_BUTTON_HINTS_2( bSet_Channel,                                                                                                    //--- ИЗМЕРЕНИЯ - КУРСОРЫ - УСТАНОВИТЬ - Канал ---
     "Канал",
     "Выбор канала для курсорных измерений",
     &PageMeasuresCursors::PageSet::self, 0, PageMeasuresCursors::PageSet::OnPress_Set_Channel, PageMeasuresCursors::PageSet::Draw_Set_Channel,
@@ -121,7 +121,7 @@ static void Draw_Set_T(int x, int y)
     }
 }
 
-DEF_SMALL_BUTTON_HINTS_5( bSet_T,                                                                                                      //--- ИЗМЕРЕНИЯ - КУРСОРЫ - УСТАНОВИТЬ - Курсоры Т ---
+DEF_GRAPH_BUTTON_HINTS_5( bSet_T,                                                                                                      //--- ИЗМЕРЕНИЯ - КУРСОРЫ - УСТАНОВИТЬ - Курсоры Т ---
     "Курсоры T",
     "Выбор курсоров времени для индикации и управления",
     &PageMeasuresCursors::PageSet::self, 0, PageMeasuresCursors::PageSet::OnPress_Set_T, Draw_Set_T,
@@ -201,7 +201,7 @@ static void Draw_Set_U(int x, int y)
 }
 
 // Выбор курсора напряжения - курсор 1, курсор 2, оба курсора или отключены.
-DEF_SMALL_BUTTON_HINTS_5( bSet_U,                                                                                                      //--- ИЗМЕРЕНИЯ - КУРСОРЫ - УСТАНОВИТЬ - Курсоры U ---
+DEF_GRAPH_BUTTON_HINTS_5( bSet_U,                                                                                                      //--- ИЗМЕРЕНИЯ - КУРСОРЫ - УСТАНОВИТЬ - Курсоры U ---
     "Курсоры U",
     "Выбор курсоров напряжения для индикации и управления",
     &PageMeasuresCursors::PageSet::self, 0, PageMeasuresCursors::PageSet::OnPress_Set_U, Draw_Set_U,
@@ -226,7 +226,7 @@ static void Draw_Set_100(int x, int y)
 }
 
 // Установка 100 процентов в текущие места курсоров.
-DEF_SMALL_BUTTON( bSet_100,                                                                                                                 //--- ИЗМЕРЕНИЯ - КУРСОРЫ - УСТАНОВИТЬ - 100% ---
+DEF_GRAPH_BUTTON( bSet_100,                                                                                                                 //--- ИЗМЕРЕНИЯ - КУРСОРЫ - УСТАНОВИТЬ - 100% ---
     "100%",
     "Используется для процентных измерений. Нажатие помечает расстояние между активными курсорами как 100%",
     &PageMeasuresCursors::PageSet::self, 0, OnPress_Set_100, Draw_Set_100
@@ -262,7 +262,7 @@ DEF_SMALL_BUTTON( bSet_100,                                                     
 //    }
 //}
 
-//DEF_SMALL_BUTTON_HINTS_2( bSet_Movement,                                                                                             //--- ИЗМЕРЕНИЯ - КУРСОРЫ - УСТАНОВИТЬ - Перемещение ---
+//DEF_GRAPH_BUTTON_HINTS_2( bSet_Movement,                                                                                             //--- ИЗМЕРЕНИЯ - КУРСОРЫ - УСТАНОВИТЬ - Перемещение ---
 //    "Перемещение",
 //    "Выбор шага перемещения курсоров - проценты или точки",
 //    &PageMeasuresCursors::PageSet::self, 0, OnPress_Set_Movement, Draw_Set_Movement,

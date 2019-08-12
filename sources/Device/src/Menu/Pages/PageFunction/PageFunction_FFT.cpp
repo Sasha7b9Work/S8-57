@@ -93,7 +93,7 @@ static void Draw_FFT_Cursors_Source(int x, int y)
     String(MATH_CURRENT_CUR_IS_0 ? "1" : "2").Draw(x + 7, y + 5);
 }
 
-DEF_SMALL_BUTTON( bFFT_Cursors_Source,                                                                                                        //--- ФУНКЦИЯ - СПЕКТР - КУРСОРЫ - Источник ---
+DEF_GRAPH_BUTTON( bFFT_Cursors_Source,                                                                                                        //--- ФУНКЦИЯ - СПЕКТР - КУРСОРЫ - Источник ---
     "Источник",
     "Выбор источника для расчёта спектра",
     &PageFFT::PageCursors::self, 0, OnPress_FFT_Cursors_Source, Draw_FFT_Cursors_Source

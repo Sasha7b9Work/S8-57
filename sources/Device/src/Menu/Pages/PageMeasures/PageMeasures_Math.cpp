@@ -63,7 +63,7 @@ static void Draw_Function_Screen(int x, int y)
     funcs[FUNC_MODE_DRAW](x, y);
 }
 
-DEF_SMALL_BUTTON_HINTS_3(bFunction_Screen,                                                                                                                //--- СЕРВИС - ФУНКЦИЯ - Экран ---
+DEF_GRAPH_BUTTON_HINTS_3(bFunction_Screen,                                                                                                                //--- СЕРВИС - ФУНКЦИЯ - Экран ---
     "Экран",
     "Выбирает режим отображения математического сигнала",
     &PageMeasuresMath::self, 0, OnPress_Function_Screen, Draw_Function_Screen,
@@ -97,7 +97,7 @@ static void Draw_Function_Type(int x, int y)
     funcs[MATH_FUNC](x, y);
 }
 
-DEF_SMALL_BUTTON_HINTS_2(bFunction_Type,                                                                                                                    //--- СЕРВИС - ФУНКЦИЯ - Вид ---
+DEF_GRAPH_BUTTON_HINTS_2(bFunction_Type,                                                                                                                    //--- СЕРВИС - ФУНКЦИЯ - Вид ---
     "Вид",
     "Выбор математической функции",
     &PageMeasuresMath::self, 0, OnPress_Function_Type, Draw_Function_Type,
@@ -127,7 +127,7 @@ static void Draw_Function_ModeRegSet(int x, int y)
     funcs[MATH_MODE_REG_SET](x, y);
 }
 
-DEF_SMALL_BUTTON_HINTS_2(bFunction_ModeRegSet,                                                                                            //--- СЕРВИС - ФУНКЦИЯ - Режим ручки УСТАНОВКА ---
+DEF_GRAPH_BUTTON_HINTS_2(bFunction_ModeRegSet,                                                                                            //--- СЕРВИС - ФУНКЦИЯ - Режим ручки УСТАНОВКА ---
     "Режим ручки УСТАНОВКА",
     "Выбор режима ручки УСТАНОВКА - управление масштабом или смещением",
     &PageMeasuresMath::self, 0, OnPress_Function_ModeRegSet, Draw_Function_ModeRegSet,
@@ -147,7 +147,7 @@ static void Draw_Function_RangeA(int x, int y)
     Char('1').Draw(x + 8, y + 5);
 }
 
-DEF_SMALL_BUTTON(bFunction_RangeA,                                                                                                          //--- СЕРВИС - ФУНКЦИЯ - Масштаб 1-го канала ---
+DEF_GRAPH_BUTTON(bFunction_RangeA,                                                                                                          //--- СЕРВИС - ФУНКЦИЯ - Масштаб 1-го канала ---
     "Масштаб 1-го канала",
     "Использует масштаб первого канала для отображения результата",
     &PageMeasuresMath::self, 0, OnPress_Function_RangeA, Draw_Function_RangeA
@@ -165,7 +165,7 @@ static void Draw_Function_RangeB(int x, int y)
     Char('2').Draw(x + 8, y + 5);
 }
 
-DEF_SMALL_BUTTON(bFunction_RangeB,                                                                                                          //--- СЕРВИС - ФУНКЦИЯ - Масштаб 2-го канала ---
+DEF_GRAPH_BUTTON(bFunction_RangeB,                                                                                                          //--- СЕРВИС - ФУНКЦИЯ - Масштаб 2-го канала ---
     "Масштаб 2-го канала",
     "Использует масштаб второго канала для отображения результата",
     &PageMeasuresMath::self, 0, OnPress_Function_RangeB, Draw_Function_RangeB

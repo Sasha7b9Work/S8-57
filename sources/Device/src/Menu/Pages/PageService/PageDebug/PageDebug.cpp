@@ -426,7 +426,7 @@ static void OnPress_Settings_Exit()
     Display::SetDrawMode(Display::DrawMode::Auto, 0);
 }
 
-DEF_SMALL_BUTTON_EXIT( bSettings_Exit,                                                                                                                  //--- ОТЛАДКА - НАСТРОЙКИ - Выход ---
+DEF_GRAPH_BUTTON_EXIT( bSettings_Exit,                                                                                                                  //--- ОТЛАДКА - НАСТРОЙКИ - Выход ---
     &PageDebug::PageSettings::self, 0, OnPress_Settings_Exit, DrawSB_Exit
 )
 
@@ -565,7 +565,7 @@ static void OnPress_SerialNumber_Exit()
     OnPressSB_Exit();
 }
 
-DEF_SMALL_BUTTON_EXIT( bSerialNumber_Exit,                                                                                                                    //--- ОТЛАДКА - С/Н - Выход ---
+DEF_GRAPH_BUTTON_EXIT( bSerialNumber_Exit,                                                                                                                    //--- ОТЛАДКА - С/Н - Выход ---
     &PageDebug::PageSerialNumber::self, 0, OnPress_SerialNumber_Exit, DrawSB_Exit
 )
 
@@ -584,7 +584,7 @@ static void Draw_SerialNumber_Change(int x, int y)
     Font::SetCurrent(Font::Type::_8);
 }
 
-DEF_SMALL_BUTTON( bSerialNumber_Change,                                                                                                                    //--- ОТЛАДКА - С/Н - Вставить ---
+DEF_GRAPH_BUTTON( bSerialNumber_Change,                                                                                                                    //--- ОТЛАДКА - С/Н - Вставить ---
     "Вставить",
     "Вставляет выбраный символ",
     &PageDebug::PageSerialNumber::self, 0, OnPress_SerialNumber_Change, Draw_SerialNumber_Change
@@ -602,7 +602,7 @@ static void Draw_SerialNumber_Save(int x, int y)
     Font::SetCurrent(Font::Type::_8);
 }
 
-DEF_SMALL_BUTTON( bSerialNumber_Save,                                                                                                                     //--- ОТЛАДКА - С/Н - Сохранить ---
+DEF_GRAPH_BUTTON( bSerialNumber_Save,                                                                                                                     //--- ОТЛАДКА - С/Н - Сохранить ---
     "Сохранить",
     "Записывает серийный номер в OTP",
     &PageDebug::PageSerialNumber::self, 0, OnPress_SerialNumber_Save, Draw_SerialNumber_Save

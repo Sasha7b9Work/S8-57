@@ -30,7 +30,7 @@ static void Draw_Tune_Markers(int x, int y)
     Font::SetCurrent(Font::Type::_8);
 }
 
-DEF_SMALL_BUTTON( bTune_Markers,                                                                                                                     //--- ИЗМЕРЕНИЯ - НАСТРОИТЬ - Маркер ---
+DEF_GRAPH_BUTTON( bTune_Markers,                                                                                                                     //--- ИЗМЕРЕНИЯ - НАСТРОИТЬ - Маркер ---
     "Маркер",
     "Позволяет установить маркеры для визуального контроля измерений",
     &PageMeasuresAuto::PageTune::self, 0, Measure::ShortPressOnSmallButonMarker, Draw_Tune_Markers
@@ -46,7 +46,7 @@ static void Draw_Tune_Settings(int x, int y)
     Font::SetCurrent(Font::Type::_8);
 }
 
-DEF_SMALL_BUTTON( bTune_Settings,                                                                                                                 //--- ИЗМЕРЕНИЯ - НАСТРОИТЬ - Настройка ---
+DEF_GRAPH_BUTTON( bTune_Settings,                                                                                                                 //--- ИЗМЕРЕНИЯ - НАСТРОИТЬ - Настройка ---
     "Настройка",
     "Позволяет выбрать необходимые измерения",
     &PageMeasuresAuto::PageTune::self, 0, Measurements::PageChoice::ChangeState, Draw_Tune_Settings

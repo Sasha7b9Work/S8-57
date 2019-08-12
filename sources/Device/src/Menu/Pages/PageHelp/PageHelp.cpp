@@ -55,28 +55,28 @@ static bool HandlerKey_Help(KeyEvent)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-DEF_SMALL_BUTTON( sbHelpParagraphEnter,                                                                                                                            //--- ПОМОЩЬ - Открыть ---
+DEF_GRAPH_BUTTON( sbHelpParagraphEnter,                                                                                                                            //--- ПОМОЩЬ - Открыть ---
     "Открыть",
     "Открывает раздел справки",
     &PageHelp::self, HelpContent_EnterParagraphIsActive, HelpContent_EnterParagraph, DrawSB_Help_ParagraphEnter
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-DEF_SMALL_BUTTON( sbHelpParagraphLeave,                                                                                                                            //--- ПОМОЩЬ - Закрыть ---
+DEF_GRAPH_BUTTON( sbHelpParagraphLeave,                                                                                                                            //--- ПОМОЩЬ - Закрыть ---
      "Закрыть",
      "Закрывает раздел справки",
     &PageHelp::self, HelpContent_LeaveParagraphIsActive, HelpContent_LeaveParagraph, DrawSB_Help_ParagraphLeave
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-DEF_SMALL_BUTTON( sbHelpParagraphPrev,                                                                                                                   //--- ПОМОЩЬ - Предыдущий раздел ---
+DEF_GRAPH_BUTTON( sbHelpParagraphPrev,                                                                                                                   //--- ПОМОЩЬ - Предыдущий раздел ---
     "Предыдущий раздел",
     "Выбрать предыдущий раздел справки",
     &PageHelp::self, 0, HelpContent_PrevParagraph, DrawSB_Help_ParagraphPrev
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-DEF_SMALL_BUTTON( sbHelpParagraphNext,                                                                                                                    //--- ПОМОЩЬ - Следующий раздел ---
+DEF_GRAPH_BUTTON( sbHelpParagraphNext,                                                                                                                    //--- ПОМОЩЬ - Следующий раздел ---
     "Следующий раздел",
     "Выбрать следующий раздел справки",
     &PageHelp::self, 0, HelpContent_NextParagraph, DrawSB_Help_ParagraphNext
@@ -91,7 +91,7 @@ static void PressSB_Help_Exit()
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 /*
-DEF_SMALL_BUTTON_EXIT(  sbExitHelp,                                                                                                                                  //--- ПОМОЩЬ - Выход ---
+DEF_GRAPH_BUTTON_EXIT(  sbExitHelp,                                                                                                                                  //--- ПОМОЩЬ - Выход ---
     pHelp, 0, PressSB_Help_Exit, DrawSB_Help_ParagraphNext
 )
 */

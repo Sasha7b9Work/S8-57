@@ -56,7 +56,7 @@ static void Draw_Internal_ShowAlways(int x, int y)
     }
 }
 
-DEF_SMALL_BUTTON_HINTS_2( bInternal_ShowAlways,                                                                                               //--- ПАМЯТЬ - ВНУТР ЗУ - Показывать всегда ---
+DEF_GRAPH_BUTTON_HINTS_2( bInternal_ShowAlways,                                                                                               //--- ПАМЯТЬ - ВНУТР ЗУ - Показывать всегда ---
     "Показывать всегда",
     "Позволяет всегда показывать выбранный сохранённый сигнал поверх текущего",
     &PageROM::self, 0, OnPress_Internal_ShowAlways, Draw_Internal_ShowAlways,
@@ -108,7 +108,7 @@ static void Draw_Internal_ModeShow(int x, int y)
     }
 }
 
-DEF_SMALL_BUTTON_HINTS_3( bInternal_ModeShow,                                                                                                       //--- ПАМЯТЬ - ВНУТР ЗУ - Вид сигнала ---
+DEF_GRAPH_BUTTON_HINTS_3( bInternal_ModeShow,                                                                                                       //--- ПАМЯТЬ - ВНУТР ЗУ - Вид сигнала ---
     "Вид сигнала",
     "Показывать записанный или текущий сигнал в режиме ВНУТР ЗУ",
     &PageROM::self, 0, OnPress_Internal_ModeShow, Draw_Internal_ModeShow,
@@ -132,7 +132,7 @@ static void Draw_Internal_Delete(int x, int y)
     Font::SetCurrent(Font::Type::_8);
 }
 
-DEF_SMALL_BUTTON( bInternal_Delete,                                                                                                                     //--- ПАМЯТЬ - ВНУТР ЗУ - Удалить ---
+DEF_GRAPH_BUTTON( bInternal_Delete,                                                                                                                     //--- ПАМЯТЬ - ВНУТР ЗУ - Удалить ---
     "Удалить",
     "Удаляет выбранный сигнал из внутреннего запоминающего устройства",
     &PageROM::self, 0, OnPress_Internal_Delete, Draw_Internal_Delete
@@ -166,7 +166,7 @@ static void Draw_Internal_SaveToMemory(int x, int y)
     Font::SetCurrent(Font::Type::_8);
 }
 
-DEF_SMALL_BUTTON( bInternal_SaveToMemory,                                                                                                    //--- ПАМЯТЬ - ВНУТР ЗУ - Сохранить в памяти ---
+DEF_GRAPH_BUTTON( bInternal_SaveToMemory,                                                                                                    //--- ПАМЯТЬ - ВНУТР ЗУ - Сохранить в памяти ---
     "Сохранить в памяти",
     "Сохранить сигнал во внутреннем запоминующем устройстве",
     &PageROM::self, 0, OnPress_Internal_SaveToMemory, Draw_Internal_SaveToMemory
@@ -189,7 +189,7 @@ static void Draw_Internal_SaveToDrive(int x, int y)
     }
 }
 
-DEF_SMALL_BUTTON( bInternal_SaveToDrive,                                                                                                    //--- ПАМЯТЬ - ВНУТР ЗУ - Сохранить на флешку ---
+DEF_GRAPH_BUTTON( bInternal_SaveToDrive,                                                                                                    //--- ПАМЯТЬ - ВНУТР ЗУ - Сохранить на флешку ---
     "Сохранить на флешку",
     "Сохраняет сигнал на флешку",
     &PageROM::self, 0, OnPress_Internal_SaveToDrive, Draw_Internal_SaveToDrive

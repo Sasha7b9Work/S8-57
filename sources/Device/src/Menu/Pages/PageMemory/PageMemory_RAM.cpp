@@ -34,7 +34,7 @@ static void Draw_Last_Next(int x, int y)
     Font::SetCurrent(Font::Type::_8);
 }
 
-DEF_SMALL_BUTTON( bLast_Next,                                                                                                                        //--- ПАМЯТЬ - ПОСЛЕДНИЕ - Следующий ---
+DEF_GRAPH_BUTTON( bLast_Next,                                                                                                                        //--- ПАМЯТЬ - ПОСЛЕДНИЕ - Следующий ---
     "Следующий",
     "Перейти к следующему сигналу",
     &PageRAM::self, 0, OnPress_Last_Next, Draw_Last_Next
@@ -53,7 +53,7 @@ static void Draw_Last_Prev(int x, int y)
     Font::SetCurrent(Font::Type::_8);
 }
 
-DEF_SMALL_BUTTON( bLast_Prev,                                                                                                                       //--- ПАМЯТЬ - ПОСЛЕДНИЕ - Предыдущий ---
+DEF_GRAPH_BUTTON( bLast_Prev,                                                                                                                       //--- ПАМЯТЬ - ПОСЛЕДНИЕ - Предыдущий ---
     "Предыдущий",
     "Перейти к предыдущему сигналу",
     &PageRAM::self, 0, OnPress_Last_Prev, Draw_Last_Prev
@@ -78,7 +78,7 @@ DEF_SMALL_BUTTON( bLast_Prev,                                                   
 //    Font::SetCurrent(Font::Type::_8);
 //}
 
-//DEF_SMALL_BUTTON( bLast_SaveToROM,                                                                                                                    //--- ПАМЯТЬ - ПОСЛЕДНИЕ - Внутр ЗУ ---
+//DEF_GRAPH_BUTTON( bLast_SaveToROM,                                                                                                                    //--- ПАМЯТЬ - ПОСЛЕДНИЕ - Внутр ЗУ ---
 //    "Внутр ЗУ",
 //    "Нажмите эту кнопку, чтобы сохранить сигнал во внутреннем запоминающем устройстве",
 //    &PageRAM::self, 0, OnPress_Last_SaveToROM, Draw_Last_SaveToROM
@@ -101,7 +101,7 @@ DEF_SMALL_BUTTON( bLast_Prev,                                                   
 //    }
 //}
 //
-//DEF_SMALL_BUTTON( bLast_SaveToDrive,                                                                                                                 //--- ПАМЯТЬ - ПОСЛЕДНИЕ - Сохранить ---
+//DEF_GRAPH_BUTTON( bLast_SaveToDrive,                                                                                                                 //--- ПАМЯТЬ - ПОСЛЕДНИЕ - Сохранить ---
 //    "Сохранить",
 //    "Кнопка становится доступна при присоединённом внешнем ЗУ. Позволяет сохранить сигнал на внешем ЗУ",
 //    &PageRAM::self, 0, OnPress_Last_SaveToDrive, Draw_Last_SaveToDrive
