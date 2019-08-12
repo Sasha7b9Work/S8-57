@@ -233,42 +233,42 @@ DEF_GRAPH_BUTTON( bSet_100,                                                     
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-//static void Draw_Set_Movement_Percents(int x, int y)
-//{
-//    String('\x83').Draw(x + 6, y + 5);
-//}
+static void Draw_Set_Movement_Percents(int x, int y)
+{
+    String('\x83').Draw(x + 6, y + 5);
+}
 
-//static void Draw_Set_Movement_Points(int x, int y)
-//{
-//    Font::SetCurrent(Font::Type::_5);
-//    String("тчк").Draw(x + 4, y + 3);
-//    Font::SetCurrent(Font::Type::_8);
-//}
+static void Draw_Set_Movement_Points(int x, int y)
+{
+    Font::SetCurrent(Font::Type::_5);
+    String("тчк").Draw(x + 4, y + 3);
+    Font::SetCurrent(Font::Type::_8);
+}
 
-//static void OnPress_Set_Movement()
-//{
-//    Math::CircleIncrease<int8>((int8 *)&CURS_MOVEMENT, 0, 1);
-//}
+static void OnPress_Set_Movement()
+{
+    Math::CircleIncrease<int8>((int8 *)&CURS_MOVEMENT, 0, 1);
+}
 
-//static void Draw_Set_Movement(int x, int y)
-//{
-//    if (CURS_MOVEMENT_IN_PERCENTS)
-//    {
-//        Draw_Set_Movement_Percents(x, y);
-//    }
-//    else
-//    {
-//        Draw_Set_Movement_Points(x, y);
-//    }
-//}
+static void Draw_Set_Movement(int x, int y)
+{
+    if (CURS_MOVEMENT_IN_PERCENTS)
+    {
+        Draw_Set_Movement_Percents(x, y);
+    }
+    else
+    {
+        Draw_Set_Movement_Points(x, y);
+    }
+}
 
-//DEF_GRAPH_BUTTON_HINTS_2( bSet_Movement,                                                                                             //--- ИЗМЕРЕНИЯ - КУРСОРЫ - УСТАНОВИТЬ - Перемещение ---
-//    "Перемещение",
-//    "Выбор шага перемещения курсоров - проценты или точки",
-//    &PageMeasuresCursors::PageSet::self, 0, OnPress_Set_Movement, Draw_Set_Movement,
-//    Draw_Set_Movement_Percents, "шаг перемещения курсоров кратен одному проценту",
-//    Draw_Set_Movement_Points,   "шаг перемещения курсора кратен одному пикселю"
-//)
+DEF_GRAPH_BUTTON_HINTS_2( bSet_Movement,                                                                                             //--- ИЗМЕРЕНИЯ - КУРСОРЫ - УСТАНОВИТЬ - Перемещение ---
+    "Перемещение",
+    "Выбор шага перемещения курсоров - проценты или точки",
+    &PageMeasuresCursors::PageSet::self, 0, OnPress_Set_Movement, Draw_Set_Movement,
+    Draw_Set_Movement_Percents, "шаг перемещения курсоров кратен одному проценту",
+    Draw_Set_Movement_Points,   "шаг перемещения курсора кратен одному пикселю"
+)
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 bool PageMeasuresCursors::PageSet::OnKey(KeyEvent event) //-V2506
@@ -333,14 +333,14 @@ static bool IsActive_PageSet()
     return CURS_SHOW;
 }
 
-DEF_PAGE_4( pageSet, // -V641 // -V1027                                                                                                            //--- ИЗМЕРЕНИЯ - КУРСОРЫ - УСТАНОВИТЬ ---
+DEF_PAGE_5( pageSet, // -V641 // -V1027                                                                                                            //--- ИЗМЕРЕНИЯ - КУРСОРЫ - УСТАНОВИТЬ ---
     "УСТАНОВИТЬ",
     "Переход в режим курсорных измерений",
     &bSet_Channel,          ///< ИЗМЕРЕНИЯ - КУРСОРЫ - УСТАНОВИТЬ - Канал
     &bSet_U,                ///< ИЗМЕРЕНИЯ - КУРСОРЫ - УСТАНОВИТЬ - Курсоры U
     &bSet_T,                ///< ИЗМЕРЕНИЯ - КУРСОРЫ - УСТАНОВИТЬ - Курсоры Т
     &bSet_100,              ///< ИЗМЕРЕНИЯ - КУРСОРЫ - УСТАНОВИТЬ - 100%
-    //&bSet_Movement,         ///< ИЗМЕРЕНИЯ - КУРСОРЫ - УСТАНОВИТЬ - Перемещение
+    &bSet_Movement,         ///< ИЗМЕРЕНИЯ - КУРСОРЫ - УСТАНОВИТЬ - Перемещение
     Page::Name::Measures_Cursors_Set, &PageMeasuresCursors::self, IsActive_PageSet, 0, 0, PageMeasuresCursors::PageSet::OnKey
 )
 
