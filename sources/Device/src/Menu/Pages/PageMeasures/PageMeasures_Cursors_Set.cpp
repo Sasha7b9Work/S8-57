@@ -328,6 +328,11 @@ bool PageMeasuresCursors::PageSet::OnKey(KeyEvent event) //-V2506
     return true;
 }
 
+static bool IsActive_PageSet()
+{
+    return CURS_SHOW;
+}
+
 DEF_PAGE_4( pageSet, // -V641 // -V1027                                                                                                            //--- ÈÇÌÅĞÅÍÈß - ÊÓĞÑÎĞÛ - ÓÑÒÀÍÎÂÈÒÜ ---
     "ÓÑÒÀÍÎÂÈÒÜ",
     "Ïåğåõîä â ğåæèì êóğñîğíûõ èçìåğåíèé",
@@ -336,7 +341,7 @@ DEF_PAGE_4( pageSet, // -V641 // -V1027                                         
     &bSet_T,                ///< ÈÇÌÅĞÅÍÈß - ÊÓĞÑÎĞÛ - ÓÑÒÀÍÎÂÈÒÜ - Êóğñîğû Ò
     &bSet_100,              ///< ÈÇÌÅĞÅÍÈß - ÊÓĞÑÎĞÛ - ÓÑÒÀÍÎÂÈÒÜ - 100%
     //&bSet_Movement,         ///< ÈÇÌÅĞÅÍÈß - ÊÓĞÑÎĞÛ - ÓÑÒÀÍÎÂÈÒÜ - Ïåğåìåùåíèå
-    Page::Name::Measures_Cursors_Set, &PageMeasuresCursors::self, 0, 0, 0, PageMeasuresCursors::PageSet::OnKey
+    Page::Name::Measures_Cursors_Set, &PageMeasuresCursors::self, IsActive_PageSet, 0, 0, PageMeasuresCursors::PageSet::OnKey
 )
 
 

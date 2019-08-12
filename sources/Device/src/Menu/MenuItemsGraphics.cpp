@@ -436,7 +436,10 @@ void Page::DrawItems(int x, int y) const
         
         if (item)
         {
-            item->Draw(x, y, false);
+            if (item->IsActive())
+            {
+                item->Draw(x, y, false);
+            }
         }
 
         x += WIDTH - 1;
