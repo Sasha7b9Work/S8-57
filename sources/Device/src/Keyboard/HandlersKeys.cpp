@@ -154,11 +154,6 @@ void Handlers::Process(KeyEvent e)
     Key::E code = event.key;
     TypePress::E type = event.type;
 
-    if (type == TypePress::Press)
-    {
-        type = type;
-    }
-
     if (code < Key::Number && type < TypePress::None)
     {
         func[code][type]();
@@ -311,7 +306,7 @@ static void FX_Press()
 {
     if (Menu::IsShown())
     {
-        //Menu::ItemForFuncKey()
+        Menu::ItemForFuncKey(event.key)->KeyPress();
     }
 }
 

@@ -48,7 +48,9 @@ public:
     String Title() const;
     /// Обработка события кнопки
     bool ProcessKey(KeyEvent event);
-    /// Вызывается при "коротком" нажатии
+    /// Вызывается при нажатии кнопки
+    void KeyPress() const;
+    /// Вызывается при "коротком" отпускании
     void KeyRelease() const;
     /// Вызывается при автоматическом срабатывании кнопки (нажатии и удержании более 0.5 сек)
     void KeyAutoRelease() const;
@@ -358,7 +360,7 @@ public:
     /// Вызывает функцию funcOnChanged, если таковая имеется
     void Change(bool active) const { if (funcOnChanged) { funcOnChanged(active); } }
 
-    void ShortPress() const;
+    void KeyRelease() const;
 };
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// GovernorColor ///
