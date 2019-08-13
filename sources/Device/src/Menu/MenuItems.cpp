@@ -79,6 +79,8 @@ void Item::KeyPress() const
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Item::KeyRelease() const
 {
+    pressedItem = nullptr;
+
     if (IS_CHOICE(this))
     {
         ((Choice *)this)->KeyRelease();
@@ -115,8 +117,38 @@ void Item::KeyRelease() const
     {
         // остальные типы контролов не обрабатываются
     }
+}
 
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Item::KeyAutoRelease() const
+{
     pressedItem = nullptr;
+
+    if (!IsActive())
+    {
+        return;
+    }
+
+    if (IS_BUTTON(this))
+    {
+        ((Button *)this)->KeyAutoRelease();
+    }
+    else if (IS_TIME(this))
+    {
+        ((TimeItem *)this)->KeyAutoRelease();
+    }
+    else if (IS_GRAPH_BUTTON(this))
+    {
+        ((GraphButton *)this)->KeyRelease();
+    }
+    else
+    {
+        if (!IsCurrentItem())
+        {
+            SetCurrent(true);
+        }
+        Open(!IsOpened());
+    }
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -202,48 +234,6 @@ void Item::SetCurrent(bool active) const
             }
         }
     }
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Item::KeyAutoRelease() const
-{
-    if (!IsActive())
-    {
-        return;
-    }
-
-    if (IS_BUTTON(this))
-    {
-        ((Button *)this)->KeyRelease();
-    }
-    else if (IS_TIME(this))
-    {
-        if (!IsCurrentItem())
-        {
-            SetCurrent(true);
-        }
-        TimeItem *time = (TimeItem *)this;
-        if (IsOpened() && (*time->curField == iSET))
-        {
-            time->SetNewTime();
-        }
-        Open(!IsOpened());
-        time->SetOpened();
-    }
-    else if (IS_GRAPH_BUTTON(this))
-    {
-        ((GraphButton *)this)->KeyRelease();
-    }
-    else
-    {
-        if (!IsCurrentItem())
-        {
-            SetCurrent(true);
-        }
-        Open(!IsOpened());
-    }
-
-    pressedItem = nullptr;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -481,6 +471,12 @@ void Button::KeyRelease() const
             funcOnPress();
         }
     }
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Button::KeyAutoRelease() const
+{
+    ((Button *)this)->KeyRelease();
 }
 
 
@@ -959,6 +955,22 @@ void TimeItem::KeyRelease() const
     {
         SelectNextPosition();
     }
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void TimeItem::KeyAutoRelease() const
+{
+    if (!IsCurrentItem())
+    {
+        SetCurrent(true);
+    }
+    TimeItem *time = (TimeItem *)this;
+    if (IsOpened() && (*time->curField == iSET))
+    {
+        time->SetNewTime();
+    }
+    Open(!IsOpened());
+    time->SetOpened();
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

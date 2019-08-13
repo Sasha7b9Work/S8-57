@@ -249,8 +249,8 @@ public:
     pFuncVV     funcOnPress;        ///< Функция, которая вызывается при нажатии на кнопку.
     pFuncVII    funcForDraw;        ///< Функция будет вызываться во время отрисовки кнопки.
     void Draw(int x, int y) const;
-
     void KeyRelease() const;
+    void KeyAutoRelease() const;
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// SButton ///
@@ -407,6 +407,7 @@ public:
     void DrawOpened(int x, int y);
     char GetSymbol();
     void KeyRelease() const;
+    void KeyAutoRelease() const;
 };
 
 typedef void * pVOID;
