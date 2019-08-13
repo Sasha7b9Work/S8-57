@@ -158,7 +158,7 @@ int Item::HeightOpened() const
     {
         int numItems = ((const Page *)this)->NumItems() - ((Page *)this)->CurrentSubPage() * MENU_ITEMS_ON_DISPLAY;
         LIMITATION(numItems, 0, MENU_ITEMS_ON_DISPLAY); // -V2516
-        return Menu::Title::HEIGHT + HEIGHT * numItems;
+        return Menu::Title::HEIGHT + Height() * numItems;
     }
     else if (IS_CHOICE(this) || IS_CHOICE_REG(this))
     {
@@ -169,7 +169,7 @@ int Item::HeightOpened() const
         // здесь ничего не делаем
     }
 
-    return HEIGHT;
+    return Height();
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -298,6 +298,12 @@ bool Item::ExistKeeper(const Page *_keeper) const
     }
 
     return false;
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+int Item::Height() const
+{
+    return 23;
 }
 
 
@@ -492,23 +498,19 @@ void GraphButton::KeyRelease() const
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 int GraphButton::Width() const
 {
+    int width = 320 / 5 + 1;
+
     const Page *parent = Keeper();
 
     for (int i = 0; i < parent->NumItems(); i++)
     {
         if (this == parent->items[i])
         {
-            return ((i + 1) % 5 == 0) ? (Item::WIDTH - 6) : (Item::WIDTH - 5);
+            return ((i + 1) % 5 == 0) ? (width - 6) : (width - 5);
         }
     }
 
-    return Item::WIDTH - 5;
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-int GraphButton::Height() const
-{
-    return Item::HEIGHT - 4;
+    return width - 5;
 }
 
 

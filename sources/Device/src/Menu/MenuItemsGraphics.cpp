@@ -50,13 +50,13 @@ void GovernorColor::DrawOpened(int x, int y)
     static const int delta = 43;
     x -= delta;
     ct->Init();
-    Rectangle(HEIGHT + delta + 2, HEIGHT + 2).Draw(x - 1, y - 1, Color::BACK);
-    Rectangle(WIDTH + delta, HEIGHT).Draw(x, y, Color::MenuTitleText(false));
+    Rectangle(Height() + delta + 2, Height() + 2).Draw(x - 1, y - 1, Color::BACK);
+    Rectangle(WIDTH + delta, Height()).Draw(x, y, Color::MenuTitleText(false));
     Region(Value::WIDTH + 2 + delta, Item::Value::HEIGHT + 3).Fill(x + 1, y + 1, Color::MenuItem(false));
 
-    HLine(WIDTH + delta).Draw(x, y + HEIGHT / 2 + 2, Color::MenuTitleText(false));
+    HLine(WIDTH + delta).Draw(x, y + Height() / 2 + 2, Color::MenuTitleText(false));
 
-    Text(Title().CString()).DrawInCenterRect(x + (IsPressed() ? 2 : 1), y + (IsPressed() ? 2 : 1), WIDTH + delta, HEIGHT / 2 + 2, Color::WHITE);
+    Text(Title().CString()).DrawInCenterRect(x + (IsPressed() ? 2 : 1), y + (IsPressed() ? 2 : 1), WIDTH + delta, Height() / 2 + 2, Color::WHITE);
 
     DrawValue(x + 1, y + 19, delta);
 }
@@ -82,7 +82,7 @@ void GovernorColor::DrawValue(int x, int y, int delta)
     ct->Init();
     int16 vals[4] = {(int16)(ct->brightness * 100.0F), (int16)blue, (int16)green, (int16)red};
 
-    Region(WIDTH + delta - 2, HEIGHT / 2 - 3).Fill(x, y, Color::BLACK);
+    Region(WIDTH + delta - 2, Height() / 2 - 3).Fill(x, y, Color::BLACK);
     x += 92;
 
     for (int i = 0; i < 4; i++)
@@ -293,12 +293,12 @@ void Button::Draw(int x, int y) const
 
     Color color = shade ? Color::MenuItem(true) : Color::WHITE;
     
-    Region(WIDTH - 2, HEIGHT - 2).Fill(x + 1, y + 2, Color::MenuItem(false));
-    Region(WIDTH - 6, HEIGHT - 6).Fill(x + 3, y + 4, Color::MenuItem(false));
+    Region(WIDTH - 2, Height() - 2).Fill(x + 1, y + 2, Color::MenuItem(false));
+    Region(WIDTH - 6, Height() - 6).Fill(x + 3, y + 4, Color::MenuItem(false));
 
     int delta = (pressed && (!shade)) ? 2 : 1;
 
-    Text(Title().CString()).DrawInCenterRect(x + delta, y + delta, WIDTH, HEIGHT, color);
+    Text(Title().CString()).DrawInCenterRect(x + delta, y + delta, WIDTH, Height(), color);
 
     if (funcForDraw)
     {
@@ -316,7 +316,7 @@ void GraphButton::Draw(int x, int y) const
     {
         if (IsPressed())
         {
-            Region(GraphButton::Width(), GraphButton::Height()).Fill(x, y, Color::FILL);
+            Region(GraphButton::Width(), GraphButton::Height() - 4).Fill(x, y, Color::FILL);
             Color::BLACK.SetAsCurrent();
         }
         else
@@ -341,7 +341,7 @@ void Page::Draw(int x, int y, bool opened) const
             Item *item = GetItem(PosCurrentItem());
 
             x = ItemOpenedPosX(item);
-            y = Menu::Y0() - item->HeightOpened() + Item::HEIGHT + 1;
+            y = Menu::Y0() - item->HeightOpened() + Item::Height() + 1;
 
             if (IS_CHOICE(item) || IS_CHOICE_REG(item))
             {
@@ -378,8 +378,8 @@ void Page::Draw(int x, int y, bool opened) const
     }
     else
     {
-        Region(WIDTH - 3, HEIGHT - 2).Fill(x + 1, y + 2, Color::MenuItem(false));
-        Text(Title().CString()).DrawInCenterRect(x, y + 1, WIDTH, HEIGHT, IsActive() ? Color::FILL : Color::MENU_TITLE_DARK);
+        Region(WIDTH - 3, Height() - 2).Fill(x + 1, y + 2, Color::MenuItem(false));
+        Text(Title().CString()).DrawInCenterRect(x, y + 1, WIDTH, Height(), IsActive() ? Color::FILL : Color::MENU_TITLE_DARK);
     }
 }
 
@@ -429,8 +429,8 @@ void Page::DrawItems(int x, int y) const
 {
     for (int i = 0; i < 5; i++)
     {
-        Rectangle(WIDTH - 1, HEIGHT).Draw(x, y + 1, Color::FILL);
-        Region(WIDTH - 3, HEIGHT - 2).Fill(x + 1, y + 2, Color::BACK);
+        Rectangle(WIDTH - 1, Height()).Draw(x, y + 1, Color::FILL);
+        Region(WIDTH - 3, Height() - 2).Fill(x + 1, y + 2, Color::BACK);
         
         Item *item = GetItem(PosItemOnLeft() + i);
         
@@ -445,7 +445,7 @@ void Page::DrawItems(int x, int y) const
         x += WIDTH - 1;
     }
 
-    VLine(HEIGHT).Draw(Display::WIDTH - 1, Display::HEIGHT - HEIGHT, Color::WHITE);
+    VLine(Height()).Draw(Display::WIDTH - 1, Display::HEIGHT - Height(), Color::WHITE);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

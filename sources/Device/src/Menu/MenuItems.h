@@ -93,9 +93,11 @@ public:
     };
 
     /// Высота итема
-    static const int HEIGHT = 23;
+    int Height() const;
     /// Ширина итема
     static const int WIDTH = 320 / 5 + 1;
+
+
 
     struct Value
     {
@@ -272,7 +274,6 @@ public:
     void DrawHints(int x, int y, int width) const;
     void KeyRelease() const;
     int Width() const;
-    int Height() const;
 };
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// Governor ///
