@@ -41,6 +41,8 @@ static Chan drawingChan = Chan(Chan::A);
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/// Обработчик нажатия функциональной кнопки
+static void FX_Press();
 /// Обработчик отпускания функциональной кнопки
 static void FX_Release();
 /// Обработчик длительного нажатия функциональной кнопки
@@ -142,11 +144,11 @@ void Handlers::Process(KeyEvent e)
         {HandlerArrow,      HandlerArrow,      HandlerArrow,     HandlerArrow},     // Up         
         {HandlerArrow,      HandlerArrow,      HandlerArrow,     HandlerArrow},     // Down       
         {Empty,             Empty,             EnterRelease,     EnterLong},        // Enter      
-        {Empty,             Empty,             FX_Release,       FX_Long},          // F1
-        {Empty,             Empty,             FX_Release,       FX_Long},          // F2
-        {Empty,             Empty,             FX_Release,       FX_Long},          // F3
-        {Empty,             Empty,             FX_Release,       FX_Long},          // F4
-        {Empty,             Empty,             FX_Release,       FX_Long}           // F5
+        {FX_Press,          Empty,             FX_Release,       FX_Long},          // F1
+        {FX_Press,          Empty,             FX_Release,       FX_Long},          // F2
+        {FX_Press,          Empty,             FX_Release,       FX_Long},          // F3
+        {FX_Press,          Empty,             FX_Release,       FX_Long},          // F4
+        {FX_Press,          Empty,             FX_Release,       FX_Long}           // F5
     };
 
     Key::E code = event.key;
@@ -160,11 +162,6 @@ void Handlers::Process(KeyEvent e)
     if (code < Key::Number && type < TypePress::None)
     {
         func[code][type]();
-    }
-    else
-    {
-        /// \todo Временная затычка. Доделать, чтобы такого не было
-        //LOG_WRITE("Ошибка приёма команды кнопки");
     }
 }
 
@@ -306,6 +303,15 @@ static void TBaseMore()
     else
     {
         OnChangeParameterTime(TBase::Change, 1);
+    }
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+static void FX_Press()
+{
+    if (Menu::IsShown())
+    {
+        //Menu::ItemForFuncKey()
     }
 }
 
