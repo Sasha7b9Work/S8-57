@@ -492,6 +492,16 @@ void GraphButton::KeyRelease() const
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 int GraphButton::Width() const
 {
+    const Page *parent = Keeper();
+
+    for (int i = 0; i < parent->NumItems(); i++)
+    {
+        if (this == parent->items[i])
+        {
+            return ((i + 1) % 5 == 0) ? (Item::WIDTH - 6) : (Item::WIDTH - 5);
+        }
+    }
+
     return Item::WIDTH - 5;
 }
 
