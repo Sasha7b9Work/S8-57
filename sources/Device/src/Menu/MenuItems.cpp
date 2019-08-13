@@ -89,7 +89,7 @@ void Item::KeyRelease() const
     }
     else if (IS_BUTTON(this))
     {
-        ((Button *)this)->ShortPress();
+        ((Button *)this)->KeyRelease();
     }
     else if (IS_PAGE(this))
     {
@@ -97,19 +97,19 @@ void Item::KeyRelease() const
     }
     else if (IS_GOVERNOR(this))
     {
-        ((Governor *)this)->ShortPress();
+        ((Governor *)this)->KeyRelease();
     }
     else if (IS_TIME(this))
     {
-        ((TimeItem *)this)->ShortPress();
+        ((TimeItem *)this)->KeyRelease();
     }
     else if (IS_GOVERNOR_COLOR(this))
     {
-        ((GovernorColor *)this)->ShortPress();
+        ((GovernorColor *)this)->KeyRelease();
     }
     else if (IS_GRAPH_BUTTON(this))
     {
-        ((GraphButton *)this)->ShortPress();
+        ((GraphButton *)this)->KeyRelease();
     }
     else
     {
@@ -214,7 +214,7 @@ void Item::KeyAutoRelease() const
 
     if (IS_BUTTON(this))
     {
-        ((Button *)this)->ShortPress();
+        ((Button *)this)->KeyRelease();
     }
     else if (IS_TIME(this))
     {
@@ -232,7 +232,7 @@ void Item::KeyAutoRelease() const
     }
     else if (IS_GRAPH_BUTTON(this))
     {
-        ((GraphButton *)this)->ShortPress();
+        ((GraphButton *)this)->KeyRelease();
     }
     else
     {
@@ -470,7 +470,7 @@ const Item *Page::ItemForFuncKey(Key::E key) const
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void Button::ShortPress() const
+void Button::KeyRelease() const
 {
     if (IsActive())
     {
@@ -485,7 +485,7 @@ void Button::ShortPress() const
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void GraphButton::ShortPress() const
+void GraphButton::KeyRelease() const
 {
     if (IsActive())
     {
@@ -495,7 +495,7 @@ void GraphButton::ShortPress() const
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void Governor::ShortPress() const
+void Governor::KeyRelease() const
 {
     if (IsActive())
     {
@@ -926,7 +926,7 @@ Color Choice::ColorMenuField(const Choice *choice)
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void GovernorColor::ShortPress() const
+void GovernorColor::KeyRelease() const
 {
     if (IsActive())
     {
@@ -947,7 +947,7 @@ void GovernorColor::ShortPress() const
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void TimeItem::ShortPress() const
+void TimeItem::KeyRelease() const
 {
     if (!IsOpened())
     {

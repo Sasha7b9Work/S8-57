@@ -193,7 +193,7 @@ void Menu::ChangeStateFlashDrive()
     {
         if(GetNameOpenedPage() == Page::Name::SB_Memory_Drive_Manager)
         {
-            ((Button *)OpenedItem())->ShortPress();
+            ((Button *)OpenedItem())->KeyRelease();
         }
     }
     else if(FLASH_AUTOCONNECT)

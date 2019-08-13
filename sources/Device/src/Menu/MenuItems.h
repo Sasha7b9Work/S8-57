@@ -250,7 +250,7 @@ public:
     pFuncVII    funcForDraw;        ///< Функция будет вызываться во время отрисовки кнопки.
     void Draw(int x, int y) const;
 
-    void ShortPress() const;
+    void KeyRelease() const;
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// SButton ///
@@ -270,7 +270,7 @@ public:
     int                         numHints;
     void Draw(int x, int y) const;
     void DrawHints(int x, int y, int width) const;
-    void ShortPress() const;
+    void KeyRelease() const;
 };
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// Governor ///
@@ -311,7 +311,7 @@ public:
 
     void SetValue(int16 v);
 
-    void ShortPress() const;
+    void KeyRelease() const;
 
 private:
 
@@ -370,7 +370,7 @@ public:
     ColorType  *ct;                 ///< Структура для описания цвета.
     pFuncVV     funcOnChanged;      ///< Эту функцию нужно вызывать после изменения значения элемента.
     void Draw(int x, int y, bool opened);
-    void ShortPress() const;
+    void KeyRelease() const;
 private:
     void DrawOpened(int x, int y);
     void DrawClosed(int x, int y);
@@ -406,7 +406,7 @@ public:
     void DrawClosed(int x, int y);
     void DrawOpened(int x, int y);
     char GetSymbol();
-    void ShortPress() const;
+    void KeyRelease() const;
 };
 
 typedef void * pVOID;
