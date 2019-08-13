@@ -9,9 +9,8 @@
 #include "Utils/Values.h"
 #include "Data/DataSettings.h"
 #include "Settings/Settings.h"
-#include <cstring>
-
 #include "Hardware/HAL/HAL.h"
+#include <cstring>
 
 #ifdef WIN32
 #include <cstdio>
@@ -378,8 +377,12 @@ void Page::Draw(int x, int y, bool opened) const
     }
     else
     {
-        Region(Width() - 3, Height() - 2).Fill(x + 1, y + 2, Color::MenuItem(false));
-        Text(Title().CString()).DrawInCenterRect(x, y + 1, Width(), Height(), IsActive() ? Color::FILL : Color::MENU_TITLE_DARK);
+        //Region(Width() - 3, Height() - 2).Fill(x + 1, y + 2, Color::MenuItem(false));
+        if (IsPressed())
+        {
+            Region(Width() - 5, Height() - 4).Fill(x + 2, y + 3, Color::FILL);
+        }
+        Text(Title().CString()).DrawInCenterRect(x, y + 1, Width(), Height(), IsPressed() ? Color::BACK : Color::FILL);
     }
 }
 
