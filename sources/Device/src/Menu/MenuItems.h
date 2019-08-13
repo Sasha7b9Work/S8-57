@@ -50,8 +50,8 @@ public:
     bool ProcessKey(KeyEvent event);
     /// Вызывается при "коротком" нажатии
     void ShortPress() const;
-    /// Вызывается при "длинном" нажатии
-    void LongPress() const;
+    /// Вызывается при автоматическом срабатывании кнопки (нажатии и удержании более 0.5 сек)
+    void AutoRelease() const;
     /// Возвращает true, если контрол находится в активном состоянии (реагирует на органы управления)
     bool IsActive() const { if (funcOfActive) { return funcOfActive(); } return true; };
 

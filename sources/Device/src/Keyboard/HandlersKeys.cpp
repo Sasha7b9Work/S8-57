@@ -329,7 +329,7 @@ static void FX_Long()
 {
     if (Menu::IsShown())
     {
-        Menu::ItemForFuncKey(event.key)->LongPress();
+        Menu::ItemForFuncKey(event.key)->AutoRelease();
     }
 }
 
