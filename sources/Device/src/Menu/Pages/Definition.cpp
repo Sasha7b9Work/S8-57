@@ -35,47 +35,22 @@ void OnPressSB_Exit()
     Display::RemoveAddDrawFunction();
 }
 
-//---------------------------------------------------------------------------------------------------------------------------------------------------
-static int CalculateYforCurs(int y, bool top)
-{
-    return y + 18 + (top ? -3 : 3);
-}
-
-
-//---------------------------------------------------------------------------------------------------------------------------------------------------
-static int CalculateXforCurs(int x, bool left)
-{
-    return x + 52 + (left ? -5 : 5);
-}
-
-//---------------------------------------------------------------------------------------------------------------------------------------------------
-static void CalculateXY(int *x0, int *x1, int *y0, int *y1)
-{
-    *x0 = CalculateXforCurs(*x0, true);
-    *x1 = CalculateXforCurs(*x1, false);
-    *y0 = CalculateYforCurs(*y0, true);
-    *y1 = CalculateYforCurs(*y1, false);
-}
-
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void DrawMenuCursVoltage(int x, int y, bool top, bool bottom)
 {
-    x -= 49;
-    y -= 14;
-    int x0 = x, x1 = x, yTop = y, yBottom = y;
+    x -= 10;
+    y += 6;
 
-    CalculateXY(&x0, &x1, &yTop, &yBottom);
-
-	HLine line(x1 - x0);
+	HLine line(40);
 
     for (int i = 0; i < (top ? 3 : 1); i++)
     {
-		line.Draw(x0, yTop + i);
+		line.Draw(x, y + i);
     }
 
     for (int i = 0; i < (bottom ? 3 : 1); i++)
     {
-		line.Draw(x0, yBottom - i);
+		line.Draw(x, y + 8 - i);
     }
 }
 
@@ -95,21 +70,19 @@ void CalculateConditions(int16 pos0, int16 pos1, Cursors::Control::E cursCntrl, 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void DrawMenuCursTime(int x, int y, bool left, bool right)
 {
-    x -= 40;
-    y -= 10;
-    int x0 = x, x1 = x, y0 = y, y1 = y;
-    CalculateXY(&x0, &x1, &y0, &y1);
+    x += 11;
+    y += 1;
 
-    VLine line(y1 - y0);
+    VLine line(15);
 
     for (int i = 0; i < (left ? 3 : 1); i++)
     {
-        line.Draw(x0 + i, y0);
+        line.Draw(x - 15 + i, y + 1);
     }
 
     for (int i = 0; i < (right ? 3 : 1); i++)
     {
-        line.Draw(x1 - i, y0);
+        line.Draw(x + 15 - i, y + 1);
     }
 }
 

@@ -140,22 +140,22 @@ static void Draw_Set_U_disable(int x, int y)
 
 static void Draw_Set_U_disableBoth(int x, int y)
 {
-    DrawMenuCursVoltage(x + 7, y + 5, false, false);
+    DrawMenuCursVoltage(x, y, false, false);
 }
 
 static void Draw_Set_U_enableUpper(int x, int y)
 {
-    DrawMenuCursVoltage(x + 7, y + 5, true, false);
+    DrawMenuCursVoltage(x, y, true, false);
 }
 
 static void Draw_Set_U_enableLower(int x, int y)
 {
-    DrawMenuCursVoltage(x + 7, y + 5, false, true);
+    DrawMenuCursVoltage(x, y, false, true);
 }
 
 static void Draw_Set_U_enableBoth(int x, int y)
 {
-    DrawMenuCursVoltage(x + 7, y + 5, true, true);
+    DrawMenuCursVoltage(x, y, true, true);
 }
 
 void PageMeasuresCursors::PageSet::OnPress_Set_U()
