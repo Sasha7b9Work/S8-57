@@ -309,21 +309,21 @@ void Button::Draw(int x, int y) const
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void GraphButton::Draw(int x, int y) const
 {
-    x += 22;
+    x += 2;
     y += 3;
     
     if (IsActive())
     {
         if (IsPressed())
         {
-            Region(WIDTH_SB, WIDTH_SB).Fill(x, y, Color::FILL);
+            Region(WIDTH_GRAPH_BTN, HEIGHT_GRAPH_BTN).Fill(x, y, Color::FILL);
             Color::BLACK.SetAsCurrent();
         }
         else
         {
             Color::FILL.SetAsCurrent();
         }
-        funcForDraw(x, y);
+        funcForDraw(x + 20, y);
     }
     else
     {
@@ -746,7 +746,7 @@ void GraphButton::DrawHints(int x, int y, int width) const
     y += 3;
     for (int i = 0; i < numHints; i++)
     {
-        Rectangle(WIDTH_SB, WIDTH_SB).Draw(x, y);
+        Rectangle(WIDTH_GRAPH_BTN, HEIGHT_GRAPH_BTN).Draw(x, y);
         structHelp->funcDrawUGO(x, y);
 
         int yNew = Text(structHelp->helpUGO).DrawInRectWithTransfers(x + 23, y + 1, width - 30, 20);
