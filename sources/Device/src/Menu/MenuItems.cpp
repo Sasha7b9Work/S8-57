@@ -224,9 +224,7 @@ void Item::LongPress() const
     }
     else if (IS_GRAPH_BUTTON(this))
     {
-        GraphButton *button = (GraphButton *)this;
-        button->funcOnPress();
-        pressedItem = this;
+        ((GraphButton *)this)->ShortPress();
     }
     else
     {

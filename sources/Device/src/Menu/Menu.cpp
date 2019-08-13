@@ -56,24 +56,24 @@ static void DrawHint();
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void Menu::Update()
 {
-    while(!BufferButtons::IsEmpty())                            // Если есть события клавиатуры
+    while(!BufferButtons::IsEmpty())                // Если есть события клавиатуры
     {
-        timeLastPressedButton = TIME_MS;                        // то сохраняем время последнего нажатия, чтобы знать, когда сохранить настройки
+        timeLastPressedButton = TIME_MS;            // то сохраняем время последнего нажатия, чтобы знать, когда сохранить настройки
 
-        KeyEvent event = BufferButtons::Extract();              // Извлекаем очередное событие
+        KeyEvent event = BufferButtons::Extract();  // Извлекаем очередное событие
 
-        if (!Keyboard::KeyIsActive(event.key))                        // Если кнопка не разрешена для обработки сейчас:
+        if (!Keyboard::KeyIsActive(event.key))      // Если кнопка не разрешена для обработки сейчас:
         {
-            continue;                                           // Перехдим к следующей
+            continue;                               // Перехдим к следующей
         }
 
-        if (HINT_MODE_ENABLED)                                  // Если всклюён режим подсказок
+        if (HINT_MODE_ENABLED)                      // Если всклюён режим подсказок
         {
-            ProcessButtonForHint(event.key);                    // то выводим подсказку для соответствующей кнопки
-            continue;                                           // и переходим к следующей кнопке
+            ProcessButtonForHint(event.key);        // то выводим подсказку для соответствующей кнопки
+            continue;                               // и переходим к следующей кнопке
         }
 
-        Handlers::Process(event);                           // То обрабатываем его
+        Handlers::Process(event);                   // То обрабатываем его
     }
 }
 
