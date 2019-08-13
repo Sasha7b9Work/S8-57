@@ -94,8 +94,8 @@ public:
 
     /// Высота итема
     int Height() const;
-    /// Ширина итема
-    int Width() const;
+    /// Ширина итема. pos - позиция итема на экране.
+    int Width(int pos = -1) const;
 
 
 

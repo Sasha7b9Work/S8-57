@@ -429,8 +429,8 @@ void Page::DrawItems(int x, int y) const
 {
     for (int i = 0; i < 5; i++)
     {
-        Rectangle(Width() - 1, Height()).Draw(x, y + 1, Color::FILL);
-        Region(Width() - 3, Height() - 2).Fill(x + 1, y + 2, Color::BACK);
+        Rectangle(Width(i) - 1, Height()).Draw(x, y + 1, Color::FILL);
+        Region(Width(i) - 3, Height() - 2).Fill(x + 1, y + 2, Color::BACK);
         
         Item *item = GetItem(PosItemOnLeft() + i);
         
