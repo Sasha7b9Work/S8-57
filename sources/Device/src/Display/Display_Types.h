@@ -5,8 +5,6 @@
 #define MOSI_HEIGHT         9
 #define MOI_HEIGHT_TITLE    19
 #define MOI_WIDTH_D_IP      34      /* ”величение ширины открытого ip-адреса в случае наличи€ порта */
-#define WIDTH_GRAPH_BTN     60
-#define HEIGHT_GRAPH_BTN    19
 #define GRID_DELTA          20      /*  оличество точек в клетке */
 
 #define BACKGROUND                  (set.disp_background)

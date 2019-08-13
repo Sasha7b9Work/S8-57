@@ -316,7 +316,7 @@ void GraphButton::Draw(int x, int y) const
     {
         if (IsPressed())
         {
-            Region(WIDTH_GRAPH_BTN, HEIGHT_GRAPH_BTN).Fill(x, y, Color::FILL);
+            Region(GraphButton::Width(), GraphButton::Height()).Fill(x, y, Color::FILL);
             Color::BLACK.SetAsCurrent();
         }
         else
@@ -746,7 +746,7 @@ void GraphButton::DrawHints(int x, int y, int width) const
     y += 3;
     for (int i = 0; i < numHints; i++)
     {
-        Rectangle(WIDTH_GRAPH_BTN, HEIGHT_GRAPH_BTN).Draw(x, y);
+        Rectangle(GraphButton::Width(), GraphButton::Height()).Draw(x, y);
         structHelp->funcDrawUGO(x, y);
 
         int yNew = Text(structHelp->helpUGO).DrawInRectWithTransfers(x + 23, y + 1, width - 30, 20);
