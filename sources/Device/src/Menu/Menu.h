@@ -4,7 +4,6 @@
 #include "Object.h"
 
 
-#define PAGE_IS_MAIN                   (name == Page::Name::Main)
 #define MENU_TEMP_ENABLE_STRING_NAVI() Menu::TemporaryEnableStrNavi()
 
 

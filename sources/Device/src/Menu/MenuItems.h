@@ -95,7 +95,7 @@ public:
     /// Высота итема
     int Height() const;
     /// Ширина итема
-    static const int WIDTH = 320 / 5 + 1;
+    int Width() const;
 
 
 
@@ -273,7 +273,6 @@ public:
     void Draw(int x, int y) const;
     void DrawHints(int x, int y, int width) const;
     void KeyRelease() const;
-    int Width() const;
 };
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// Governor ///
