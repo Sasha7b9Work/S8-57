@@ -220,14 +220,12 @@ static void OnPress_Set_100()
 
 static void Draw_Set_100(int x, int y)
 {
-    Font::SetCurrent(Font::Type::_5);
-    String("100%").Draw(x + 2, y + 3);
-    Font::SetCurrent(Font::Type::_8);
+    String("100%%").Draw(x + 1, y + 5);
 }
 
 // Установка 100 процентов в текущие места курсоров.
 DEF_GRAPH_BUTTON( bSet_100,                                                                                                                 //--- ИЗМЕРЕНИЯ - КУРСОРЫ - УСТАНОВИТЬ - 100% ---
-    "100%",
+    "100\x83",
     "Используется для процентных измерений. Нажатие помечает расстояние между активными курсорами как 100%",
     &PageMeasuresCursors::PageSet::self, 0, OnPress_Set_100, Draw_Set_100
 )
@@ -240,9 +238,7 @@ static void Draw_Set_Movement_Percents(int x, int y)
 
 static void Draw_Set_Movement_Points(int x, int y)
 {
-    Font::SetCurrent(Font::Type::_5);
-    String("тчк").Draw(x + 4, y + 3);
-    Font::SetCurrent(Font::Type::_8);
+    String("ТЧК").Draw(x + 2, y + 5);
 }
 
 static void OnPress_Set_Movement()
