@@ -33,9 +33,6 @@ public:
     COMMON_PART_MENU_ITEM;
     /// Возвращает высоту в пикселях открытого элемента Choice или Page::Name
     int HeightOpened() const;
-    /// @brief Возвращает true, если элемент меню item затенён (находится не на самом верхнем слое. Как правило, это означает, что раскрыт 
-    /// раскрывающийся элемент меню вроде Choice или Governor
-    bool IsShade() const;
     /// Возвращает true, если кнопка, соответствующая элементу меню item, находится в нажатом положении
     bool IsPressed() const;
     /// Сделать/разделать текущим
@@ -317,7 +314,7 @@ public:
 
 private:
 
-    void DrawLowPart(int x, int y, bool shade);
+    void DrawLowPart(int x, int y);
     /// Возвращает число знакомест в поле для ввода элемента governor. Зависит от максимального значения, которое может принимать governor.
     uint  NumDigits() const;
 };

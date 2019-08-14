@@ -237,19 +237,6 @@ void Item::SetCurrent(bool active) const
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-bool Item::IsShade() const
-{
-    const Page *parent = Keeper();
-
-    if (parent == nullptr)
-    {
-        return false;
-    }
-
-    return parent->CurrentItemIsOpened() && (this != Menu::OpenedItem());
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 bool Item::IsPressed() const
 {
     return (this == pressedItem);
@@ -949,7 +936,7 @@ Color Choice::ColorMenuField(const Choice *choice)
         // здесь ничего не делаем
     }
 
-    return Color::MenuItemField(choice->IsShade());
+    return Color::MenuItemField();
 }
 
 
