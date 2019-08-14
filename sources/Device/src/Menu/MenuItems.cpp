@@ -154,13 +154,7 @@ void Item::KeyAutoRelease() const
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 int Item::HeightOpened() const
 {
-    if (IS_PAGE(this))
-    {
-        int numItems = ((const Page *)this)->NumItems() - ((Page *)this)->CurrentSubPage() * MENU_ITEMS_ON_DISPLAY;
-        LIMITATION(numItems, 0, MENU_ITEMS_ON_DISPLAY); // -V2516
-        return Menu::Title::HEIGHT + Height() * numItems;
-    }
-    else if (IS_CHOICE(this) || IS_CHOICE_REG(this))
+    if (IS_CHOICE(this) || IS_CHOICE_REG(this))
     {
         return MOI_HEIGHT_TITLE + ((Choice *)this)->NumSubItems() * MOSI_HEIGHT - 5;
     }
@@ -280,6 +274,37 @@ int Item::Width(int pos) const
         return ((pos + 1) % 5 == 0) ? width - 1 : width;
     }
 
+    int position = PositionInKeeperList();
+
+    if (position != -1)
+    {
+        return (position + 1) % 5 == 0 ? width - 1 : width;
+    }
+
+    return width;
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+int Item::PositionOnScreenX() const
+{
+    int position = PositionInKeeperList();
+
+    if (position != -1)
+    {
+        while (position > 4)
+        {
+            position -= 5;
+        }
+
+        return (Width(0) - 1) * position;
+    }
+
+    return 0;
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+int Item::PositionInKeeperList() const
+{
     const Page *parent = Keeper();
 
     if (parent)
@@ -288,12 +313,12 @@ int Item::Width(int pos) const
         {
             if (this == parent->items[i])
             {
-                return ((i + 1) % 5 == 0) ? width - 1 : width;
+                return i;
             }
         }
     }
 
-    return width;
+    return -1;
 }
 
 

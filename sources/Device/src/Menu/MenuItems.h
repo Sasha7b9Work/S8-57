@@ -63,6 +63,10 @@ public:
     bool ExistKeeper(const Page *keeper) const;
     /// »меет родител€ - не €вл€етс€ главной страницей меню
     bool HaveParent() const { return Keeper() != nullptr; };
+    /// ѕозици€ итема по горизонтали - закрытого либо раскрытого.
+    int PositionOnScreenX() const;
+    /// ¬озвращает свою позицию в списке родител€
+    int PositionInKeeperList() const;
 
     static Item empty;
 
@@ -139,8 +143,6 @@ public:
     void DrawTitle(int x, int y) const;
 
     void DrawItems(int x, int y) const;
-
-    static int ItemOpenedPosX(const Item *item);
 
     void DrawPagesUGO(int right, int bottom) const;
 

@@ -226,10 +226,10 @@ void Choice::DrawOpened(int x, int y)
 {
     int height = HeightOpened();
     
-    Rectangle(Width(), height).Draw(x, y, Color::FILL);
-    DrawCommonHiPart(this, x, y, true);
+    Rectangle(Width() - 1, height - 1).Draw(x, y + 1, Color::FILL);
+    DrawCommonHiPart(this, x, y + 1, true);
 
-    Region(Width() - 2, height - MOI_HEIGHT_TITLE + 4).Fill(x + 1, y + MOI_HEIGHT_TITLE - 5, Color::BACK);
+    Region(Width() - 3, height - MOI_HEIGHT_TITLE + 4).Fill(x + 1, y + MOI_HEIGHT_TITLE - 5, Color::BACK);
     int8 index = *cell;
     for (int i = 0; i < NumSubItems(); i++)
     {
@@ -237,7 +237,7 @@ void Choice::DrawOpened(int x, int y)
         bool pressed = i == index;
         if (pressed)
         {
-            Region(Width() - 2, MOSI_HEIGHT - 1).Fill(x + 1, yItem + 2, ColorMenuField(this));
+            Region(Width() - 3, MOSI_HEIGHT - 1).Fill(x + 1, yItem + 2, ColorMenuField(this));
         }
         NameSubItem(i).Draw(x + 4, yItem + 2, pressed ? Color::BLACK : ColorMenuField(this));
     }
@@ -326,7 +326,7 @@ void Page::Draw(int x, int y, bool opened) const
         {
             Item *item = GetItem(PosCurrentItem());
 
-            x = ItemOpenedPosX(item);
+            x = item->PositionOnScreenX();
             y = Menu::Y0() - item->HeightOpened() + Item::Height() + 1;
 
             if (IS_CHOICE(item) || IS_CHOICE_REG(item))
@@ -563,20 +563,20 @@ static void DrawCommonHiPart(Item *item, int x, int y, bool opened)
 {
     bool pressed = item->IsPressed();
 
-    int width = item->Width() - 4;
+    int width = item->Width() - 3;
 
     Color colorFill = pressed ? Color::WHITE : Color::BLACK;
     Color colorText = pressed ? Color::BLACK : Color::WHITE;
 
-    Region(width + (opened ? 2 : 1), Item::Value::HEIGHT - (opened ? 2 : 3)).Fill(x + 1, y + (opened ? 1 : 2), colorFill);
+    Region(width, Item::Value::HEIGHT - 3).Fill(x + 1, y + (opened ? 1 : 2), colorFill);
 
-    item->Title().Draw(x + (opened ? 4 : 6), y + (opened ? 2 : 3), colorText);
-
+    item->Title().Draw(x + 6, y + (opened ? 2 : 3), colorText);
+    
     if (opened)
     {
-        HLine(width + 2).Draw(x + 1, y + Item::Value::HEIGHT, Color::FILL);
+        HLine(width).Draw(x + 1, y + Item::Value::HEIGHT - 1, Color::FILL);
     }
-
+    
     if(item->IsCurrentItem())
     {
         if (IS_TIME(item))
@@ -585,7 +585,7 @@ static void DrawCommonHiPart(Item *item, int x, int y, bool opened)
             if ((Menu::OpenedItem() == item) && (*time->curField != iEXIT) && (*time->curField != iSET))
             {
                 char symbol = time->GetSymbol();
-
+    
                 Char(symbol).Draw4SymbolsInRect(x + item->Width() - 13, y + (item->IsOpened() ? 0 : 13), colorText);
             }
         }
@@ -622,19 +622,6 @@ static void DrawValueWithSelectedPosition(int x, int y, int value, uint numDigit
         
         x += 6;
     }
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-int Page::ItemOpenedPosX(const Item *item)
-{
-    const Page *page = item->Keeper();
-
-    if (page)
-    {
-        return (page->PosCurrentItem() % MENU_ITEMS_ON_DISPLAY) * (320 / 5 + 1);
-    }
-
-    return 0;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
