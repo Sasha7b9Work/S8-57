@@ -378,21 +378,11 @@ void Page::DrawTitle(int x, int yTop) const
 {
     int eX = x;
 
-    bool shade = CurrentItemIsOpened();
-
     Region(Menu::Title::WIDTH + 2, Menu::Title::HEIGHT + 2).Fill(x - 1, yTop, Color::BACK);
 
     Rectangle(Menu::Title::WIDTH + 1, Menu::Title::HEIGHT + 1).Draw(x, yTop, Color::FILL);
 
-    if (shade)
-    {
-        Region(Menu::Title::WIDTH - 1, Menu::Title::HEIGHT - 1).Fill(x + 1, yTop + 1, Color::MENU_TITLE_DARK);
-        Region(Menu::Title::WIDTH - 7, Menu::Title::HEIGHT - 7).Fill(x + 4, yTop + 4, Color::MENU_TITLE_DARK);
-    }
-    else
-    {
-        Region(Menu::Title::WIDTH - 1, Menu::Title::HEIGHT - 1).Fill(x + 1, yTop + 1, Color::MenuTitleText());
-    }
+    Region(Menu::Title::WIDTH - 1, Menu::Title::HEIGHT - 1).Fill(x + 1, yTop + 1, Color::MenuTitleText());
 
     bool condDrawRSet = NumSubPages() > 1 &&
         NOT_CHOICE_REG(Menu::CurrentItem()) &&
