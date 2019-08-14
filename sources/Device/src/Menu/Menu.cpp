@@ -267,7 +267,6 @@ static void CloseIfSubPage(Page *parent, Page *page)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Menu::Init()
 {
-    PageDisplay::Init();
     PageMultimeter::Init();
 
     if ((Page *)LastOpened((Page *)PageFunction::self) == PageMultimeter::self) //-V1027

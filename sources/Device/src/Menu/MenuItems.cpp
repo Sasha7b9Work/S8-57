@@ -430,7 +430,7 @@ Item *Page::GetItem(int numItem) const
 {
     if (numItem >= num)
     {
-        return nullptr;
+        return &Item::empty;
     }
 
     return (Item *)items[numItem];

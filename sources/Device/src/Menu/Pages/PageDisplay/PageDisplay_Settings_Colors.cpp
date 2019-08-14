@@ -22,15 +22,6 @@ DEF_BUTTON( bReset,                                                             
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-DEF_CHOICE_2( cScheme,                                                                                                                 //--- ДИСПЛЕЙ - НАСТРОЙКИ - ЦВЕТА - Цветовая схема ---
-    "Цвет схема",
-    "Изменение цветовой схемы",
-    "Схема 1",
-    "Схема 2",
-    set.serv_colorScheme, &PageDisplay::PageSettings::PageColors::self, 0, 0, 0
-)
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ColorType PageDisplay::PageSettings::PageColors::colorTypeA = COLOR_TYPE(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, Color::Channel(Chan::A))
 
 DEF_GOVERNOR_COLOR( gcChannelA,                                                                                                               //--- ДИСПЛЕЙ - НАСТРОЙКИ - ЦВЕТА - Канал 1 ---
@@ -57,44 +48,13 @@ DEF_GOVERNOR_COLOR( gcGrid,                                                     
     PageDisplay::PageSettings::PageColors::colorTypeGrid, &PageDisplay::PageSettings::PageColors::self
 )
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void OnChanged_Settings_Colors_Background(bool)
-{
-    Color::InitGlobalColors();
-
-    gcChannelA.ct->color = Color::Channel(Chan::A);
-    gcChannelB.ct->color = Color::Channel(Chan::B);
-    gcGrid.ct->color = Color::GRID;
-
-    gcChannelA.ct->ReInit();
-    gcChannelB.ct->ReInit();
-    gcGrid.ct->ReInit();
-}
-
-DEF_CHOICE_2( cBackground,                                                                                                                        //--- ДИСПЛЕЙ - НАСТРОЙКИ - ЦВЕТА - Фон ---
-    "Фон",
-    "Выбор цвета фона",
-    "Чёрный",
-    "Белый",
-    BACKGROUND, &PageDisplay::PageSettings::PageColors::self, 0, OnChanged_Settings_Colors_Background, 0
-)
-
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void PageDisplay::PageSettings::PageColors::Init()
-{
-    OnChanged_Settings_Colors_Background(true);
-}
-
-
-/// \todo Добавить дополнительные цвета 1-го и 2-го каналов
-DEF_PAGE_6( pageColors, // -V641 // -V1027                                                                                                              //--- ДИСПЛЕЙ - НАСТРОЙКИ - ЦВЕТА ---
+DEF_PAGE_4( pageColors, // -V641 // -V1027                                                                                                              //--- ДИСПЛЕЙ - НАСТРОЙКИ - ЦВЕТА ---
     "ЦВЕТА",
     "Выбор цветов дисплея",
     &bReset,              ///< ДИСПЛЕЙ - НАСТРОЙКИ - ЦВЕТА - Сбросить
-    &cScheme,             ///< ДИСПЛЕЙ - НАСТРОЙКИ - ЦВЕТА - Цветовая схема
     &gcChannelA,          ///< ДИСПЛЕЙ - НАСТРОЙКИ - ЦВЕТА - Канал 1
     &gcChannelB,          ///< ДИСПЛЕЙ - НАСТРОЙКИ - ЦВЕТА - Канал 2
     &gcGrid,              ///< ДИСПЛЕЙ - НАСТРОЙКИ - ЦВЕТА - Сетка
-    &cBackground,         ///< ДИСПЛЕЙ - НАСТРОЙКИ - ЦВЕТА - Фон
     Page::Name::Display_Settings_Colors, &PageDisplay::PageSettings::self, 0, 0, 0, 0
 )
