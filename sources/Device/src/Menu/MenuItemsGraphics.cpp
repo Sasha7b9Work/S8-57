@@ -378,12 +378,6 @@ void Page::DrawTitle(int x, int yTop) const
 {
     int eX = x;
 
-    if (isPageSB)
-    {
-        GRAPH_BUTTON_FROM_PAGE(this, 0)->Draw(x, yTop + 3);
-        return;
-    }
-
     bool shade = CurrentItemIsOpened();
 
     Region(Menu::Title::WIDTH + 2, Menu::Title::HEIGHT + 2).Fill(x - 1, yTop, Color::BACK);

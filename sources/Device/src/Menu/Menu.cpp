@@ -227,16 +227,9 @@ bool Menu::IsShown()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void ClosePage(Page *page)
 {
-    if (IS_PAGE_SB(page))
+    if(((Page *)page)->funcOnEnterExit)
     {
-        GRAPH_BUTTON_FROM_PAGE(page, 0)->funcOnPress();
-    }
-    else
-    {
-        if(((Page *)page)->funcOnEnterExit)
-        {
-            ((Page *)page)->funcOnEnterExit(false);
-        }
+        ((Page *)page)->funcOnEnterExit(false);
     }
 
     Page *keeper = (Page *)page->Keeper();
