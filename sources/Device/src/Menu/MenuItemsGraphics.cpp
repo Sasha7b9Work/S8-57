@@ -246,7 +246,7 @@ void Choice::DrawOpened(int x, int y)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Choice::DrawClosed(int x, int y)
 {
-    Region(Width() + 2, Value::HEIGHT - 3).Fill(x + 1, y + Value::HEIGHT, ColorMenuField(this));
+    Region(Width() - 3, Value::HEIGHT - 3).Fill(x + 1, y + Value::HEIGHT, ColorMenuField(this));
 
     int deltaY = (int)Step();
     Color colorText = Color::BLACK;
@@ -563,7 +563,7 @@ static void DrawCommonHiPart(Item *item, int x, int y, bool opened)
 {
     bool pressed = item->IsPressed();
 
-    int width = item->Width();
+    int width = item->Width() - 4;
 
     Color colorFill = pressed ? Color::WHITE : Color::BLACK;
     Color colorText = pressed ? Color::BLACK : Color::WHITE;
