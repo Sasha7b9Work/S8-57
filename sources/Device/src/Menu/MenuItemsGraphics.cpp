@@ -51,7 +51,7 @@ void GovernorColor::DrawOpened(int x, int y)
     ct->Init();
     Rectangle(Height() + delta + 2, Height() + 2).Draw(x - 1, y - 1, Color::BACK);
     Rectangle(Width() + delta, Height()).Draw(x, y, Color::MenuTitleText());
-    Region(Value::WIDTH + 2 + delta, Item::Value::HEIGHT + 3).Fill(x + 1, y + 1, Color::MenuItem());
+    Region(Width() + 2 + delta, Value::HEIGHT + 3).Fill(x + 1, y + 1, Color::MenuItem());
 
     HLine(Width() + delta).Draw(x, y + Height() / 2 + 2, Color::MenuTitleText());
 
@@ -65,7 +65,7 @@ void GovernorColor::DrawClosed(int x, int y)
 {
     ct->Init();
     DrawCommonHiPart(this, x, y, false);
-    Region(Item::Value::WIDTH + 1, Item::Value::HEIGHT - 3).Fill(x + 1, y + 13, ct->color);
+    Region(Width() + 1, Value::HEIGHT - 3).Fill(x + 1, y + 13, ct->color);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -164,7 +164,7 @@ void Governor::DrawLowPart(int x, int y)
 {
     Color colorTextDown = Color::BLACK;
 
-    Region(Value::WIDTH + 1, Value::HEIGHT - 3).Fill(x + 1, y - 1, Color::MenuItemField());
+    Region(Width() + 1, Value::HEIGHT - 3).Fill(x + 1, y - 1, Color::MenuItemField());
 
     if (Menu::OpenedItem() != this)
     {
@@ -185,7 +185,7 @@ void Governor::DrawLowPart(int x, int y)
             int drawX = x + 1;
             int limX = x + 1;
             int limY = y - 2;
-            int limWidth = Value::WIDTH;
+            int limWidth = Width();
             int limHeight = Value::HEIGHT - 1;
             Color::BLACK.SetAsCurrent();
             if (delta > 0)
@@ -246,24 +246,24 @@ void Choice::DrawOpened(int x, int y)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Choice::DrawClosed(int x, int y)
 {
-    Region(Item::Value::WIDTH + 2, Item::Value::HEIGHT - 3).Fill(x + 1, y + Item::Value::HEIGHT, ColorMenuField(this));
+    Region(Width() + 2, Value::HEIGHT - 3).Fill(x + 1, y + Value::HEIGHT, ColorMenuField(this));
 
     int deltaY = (int)Step();
     Color colorText = Color::BLACK;
     colorText.SetAsCurrent();
     if (deltaY == 0)
     {
-        NameCurrentSubItem().Draw(x + 4, y + Item::Value::HEIGHT + 1);
+        NameCurrentSubItem().Draw(x + 4, y + Value::HEIGHT + 1);
     }
     else
     {
         Color::BACK.SetAsCurrent();
-		Text(NameCurrentSubItem()).DrawWithLimitation(x + 4, y + Item::Value::HEIGHT - deltaY + 1, x, y + 11, Item::Value::WIDTH, Item::Value::HEIGHT - 1);
+		Text(NameCurrentSubItem()).DrawWithLimitation(x + 4, y + Value::HEIGHT - deltaY + 1, x, y + 11, Width(), Value::HEIGHT - 1);
 
-        HLine(Item::Value::WIDTH + 1).Draw(x + 1, y + (deltaY > 0 ? 24 : 19) - deltaY);
+        HLine(Item::Width() + 1).Draw(x + 1, y + (deltaY > 0 ? 24 : 19) - deltaY);
 
-		Text(deltaY > 0 ? NameNextSubItem() : NamePrevSubItem()).DrawWithLimitation(x + 4, y + (deltaY > 0 ? (Item::Value::HEIGHT + 13) : 9) - deltaY, x, y + 11,
-            Item::Value::WIDTH, Item::Value::HEIGHT - 1);
+		Text(deltaY > 0 ? NameNextSubItem() : NamePrevSubItem()).DrawWithLimitation(x + 4, y + (deltaY > 0 ? (Value::HEIGHT + 13) : 9) - deltaY, x, y + 11,
+            Item::Width(), Value::HEIGHT - 1);
     }
   
     if (funcForDraw)
@@ -485,7 +485,7 @@ void TimeItem::DrawClosed(int x, int y)
 {
     DrawCommonHiPart(this, x, y, false);
 
-    Region(Item::Value::WIDTH + 2, Item::Value::HEIGHT + 3).Fill(x + 1, y + 17, Color::MenuItemField());
+    Region(Width() + 2, Value::HEIGHT + 3).Fill(x + 1, y + 17, Color::MenuItemField());
 
     int deltaField = 10;
     int deltaSeparator = 2;
@@ -509,7 +509,7 @@ void TimeItem::DrawClosed(int x, int y)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void TimeItem::DrawOpened(int x, int y)
 {
-    int width = Item::Value::WIDTH + 3;
+    int width = Width() + 3;
     int height = 61;
     Rectangle(width + 2, height + 3).Draw(x - 1, y - 1, Color::BACK);
     DrawCommonHiPart(this, x - 1, y - 1, false);
@@ -575,7 +575,7 @@ static void DrawCommonHiPart(Item *item, int x, int y, bool opened)
 {
     bool pressed = item->IsPressed();
 
-    int width = Item::Value::WIDTH;
+    int width = item->Width();
 
     Color colorFill = pressed ? Color::WHITE : Color::BLACK;
     Color colorText = pressed ? Color::BLACK : Color::WHITE;

@@ -95,7 +95,6 @@ public:
     struct Value
     {
         static const int HEIGHT = 13;
-        static const int WIDTH = 320 / 5 - 3; // -V112
     };
 };
 
