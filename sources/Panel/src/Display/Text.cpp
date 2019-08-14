@@ -70,21 +70,18 @@ void Text::DrawBigText(int eX, int eY, uint8 size, pString text)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-int Text::DrawBigChar(int eX, int eY, int size, uint8 _symbol)
+int Text::DrawBigChar(int eX, int eY, int size, uint8 symbol)
 {
-    uint8 symbol = (uint8)_symbol;
-
     uint8 width = Font::GetWidth(symbol);
     uint8 height = Font::GetHeight();
-
+    
     for (int b = 0; b < height; b++)
     {
         if (Font::RowNotEmpty(symbol, b))
         {
             int x = eX;
             int y = eY + b * size + 9 - height;
-            int endBit = 8 - width;
-            for (int bit = 7; bit >= endBit; bit--)
+            for (int bit = 0; bit < width; bit++)
             {
                 if (Font::BitIsExist(symbol, b, bit))
                 {
@@ -100,7 +97,7 @@ int Text::DrawBigChar(int eX, int eY, int size, uint8 _symbol)
             }
         }
     }
-
+    
     return eX + width * size;
 }
 
