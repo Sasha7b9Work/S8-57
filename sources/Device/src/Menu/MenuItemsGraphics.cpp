@@ -445,7 +445,7 @@ void Page::DrawItems(int x, int y) const
             }
         }
 
-        x += Width() - 1;
+        x += Width(i) - 1;
     }
 }
 
