@@ -46,15 +46,15 @@ void GovernorColor::Draw(int x, int y, bool opened)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void GovernorColor::DrawOpened(int x, int y)
 {
-    static const int delta = 43;
-    x -= delta;
+    int width = 125;
+    int height = 27;
     ct->Init();
-    Rectangle(Height() + delta + 2, Height() + 2).Draw(x - 1, y - 1, Color::BACK);
-    Rectangle(Width() + delta, Height()).Draw(x, y, ColorFrame());
-    Region(Width() + delta - 2, Value::HEIGHT - 2).Fill(x + 1, y + 1, ColorTitleBackground());
-    HLine(Width() + delta).Draw(x, y + Height() / 2 + 2, ColorFrame());
-    Text(Title().CString()).DrawInCenterRect(x +  1, y - 1, Width() + delta, Height() / 2 + 2, ColorTitleDraw());
-    //DrawValue(x + 1, y + 19, delta);
+    Rectangle(width + 2, height + 2).Draw(x - 1, y - 1, Color::BACK);
+    Rectangle(width, height).Draw(x, y, ColorFrame());
+    Region(width - 2, height - 2).Fill(x + 1, y + 1, ColorTitleBackground());
+    HLine(width).Draw(x, y + Height() / 2 + 2, ColorFrame());
+    Text(Title().CString()).DrawInCenterRect(x +  1, y - 1, width, Height() / 2 + 2, ColorTitleDraw());
+    DrawValue(x + 1, y + 14);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -66,7 +66,7 @@ void GovernorColor::DrawClosed(int x, int y)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void GovernorColor::DrawValue(int x, int y, int delta)
+void GovernorColor::DrawValue(int x, int y)
 {
     int8 field = ct->currentField;
     const pString texts[4] = {"ßð", "Ñí", "Çë", "Êð"};
@@ -78,7 +78,7 @@ void GovernorColor::DrawValue(int x, int y, int delta)
     ct->Init();
     int16 vals[4] = {(int16)(ct->brightness * 100.0F), (int16)blue, (int16)green, (int16)red};
 
-    Region(Width() + delta - 2, Height() / 2 - 3).Fill(x, y, Color::BLACK);
+    Region(Width() + 50 - 2, Height() / 2 - 3).Fill(x, y, Color::BLACK);
     x += 92;
 
     for (int i = 0; i < 4; i++)

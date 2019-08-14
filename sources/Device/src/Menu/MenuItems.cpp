@@ -158,6 +158,10 @@ int Item::HeightOpened() const
     {
         return MOI_HEIGHT_TITLE + ((Choice *)this)->NumSubItems() * MOSI_HEIGHT - 5;
     }
+    else if (IS_GOVERNOR_COLOR(this))
+    {
+        return 27;
+    }
     else
     {
         // здесь ничего не делаем
