@@ -24,7 +24,7 @@ using Utils::Stack;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-static void DrawCommonHiPart(Item *item, int x, int y, bool pressed, bool opened);
+static void DrawCommonHiPart(Item *item, int x, int y, bool opened);
 /// Нарисовать значение регулятора в режиме поразрядной регулировки
 /// setPosFromEnd - подсвеченный (активный) разряд, начиная с конца. Если selPosFromEnd == -1, подсвечивать не нужно
 static void DrawValueWithSelectedPosition(int x, int y, int value, uint numDigits, int selPosFromEnd, bool fillNull);
@@ -64,7 +64,7 @@ void GovernorColor::DrawOpened(int x, int y)
 void GovernorColor::DrawClosed(int x, int y)
 {
     ct->Init();
-    DrawCommonHiPart(this, x, y, IsPressed(), false);
+    DrawCommonHiPart(this, x, y, false);
     Region(Item::Value::WIDTH + 1, Item::Value::HEIGHT - 3).Fill(x + 1, y + 13, ct->color);
 }
 
@@ -115,7 +115,7 @@ void Governor::Draw(int x, int y, bool opened)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Governor::DrawOpened(int x, int y)
 {
-    DrawCommonHiPart(this, x, y, IsPressed(), true);
+    DrawCommonHiPart(this, x, y, true);
     DrawLowPart(x, y + 13);
 }
 
@@ -123,7 +123,7 @@ void Governor::DrawOpened(int x, int y)
 void Governor::DrawClosed(int x, int y)
 {
     DrawLowPart(x, y + 14);
-    DrawCommonHiPart(this, x, y, IsPressed(), false);
+    DrawCommonHiPart(this, x, y, false);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -227,7 +227,7 @@ void Choice::DrawOpened(int x, int y)
     int height = HeightOpened();
     
     Rectangle(Width(), height).Draw(x, y, Color::FILL);
-    DrawCommonHiPart(this, x, y, IsPressed(), true);
+    DrawCommonHiPart(this, x, y, true);
 
     Region(Width() - 2, height - MOI_HEIGHT_TITLE + 4).Fill(x + 1, y + MOI_HEIGHT_TITLE - 5, Color::BACK);
     int8 index = *cell;
@@ -271,7 +271,7 @@ void Choice::DrawClosed(int x, int y)
         funcForDraw(x, y);
     }
     
-    DrawCommonHiPart(this, x, y, IsPressed(), false);
+    DrawCommonHiPart(this, x, y, false);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -489,7 +489,7 @@ void TimeItem::Draw(int x, int y, bool opened)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void TimeItem::DrawClosed(int x, int y)
 {
-    DrawCommonHiPart(this, x, y, IsPressed(), false);
+    DrawCommonHiPart(this, x, y, false);
 
     Region(Item::Value::WIDTH + 2, Item::Value::HEIGHT + 3).Fill(x + 1, y + 17, Color::MenuItemField());
 
@@ -518,7 +518,7 @@ void TimeItem::DrawOpened(int x, int y)
     int width = Item::Value::WIDTH + 3;
     int height = 61;
     Rectangle(width + 2, height + 3).Draw(x - 1, y - 1, Color::BACK);
-    DrawCommonHiPart(this, x - 1, y - 1, IsPressed(), false);
+    DrawCommonHiPart(this, x - 1, y - 1, false);
 
     Rectangle(width + 1, height + 1).Draw(x - 1, y, Color::MenuTitleText());
 
@@ -577,16 +577,15 @@ void TimeItem::DrawOpened(int x, int y)
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-static void DrawCommonHiPart(Item *item, int x, int y, bool pressed, bool opened)
+static void DrawCommonHiPart(Item *item, int x, int y, bool opened)
 {
-    int delta = pressed ? 1 : 0;
     int width = Item::Value::WIDTH;
 
     Color color = Color::WHITE;
 
     Region(width + (opened ? 2 : 1), Item::Value::HEIGHT - (opened ? 2 : 3)).Fill(x + 1, y + (opened ? 1 : 2), Color::MenuItem());
 
-    item->Title().Draw(x + delta + (opened ? 4 : 6), y + delta + (opened ? 2 : 3), color);
+    item->Title().Draw(x + (opened ? 4 : 6), y + (opened ? 2 : 3), color);
 
     if (opened)
     {
