@@ -21,13 +21,16 @@ extern const PageDef pageROM;
 
 const Page * const PageROM::self = (const Page *)&pageROM;
 
-static void DrawMemoryWave(int num, bool exist);
+/// Нарисовать карту памяти сохраннных сигналов
+static void DrawMemoryMap(int num, bool exist);
+/// Обработчик нажатия кнопки при открытой странице
+static bool HandlerKey_Internal(KeyEvent event);
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 static void OnPress_Next()
 {
-
+    HandlerKey_Internal(KeyEvent(Key::Right, TypePress::Release));
 }
 
 static void Draw_Next(int x, int y)
@@ -46,7 +49,7 @@ DEF_GRAPH_BUTTON( bNext,
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void OnPress_Prev()
 {
-
+    HandlerKey_Internal(KeyEvent(Key::Left, TypePress::Release));
 }
 
 static void Draw_Prev(int x, int y)
@@ -133,11 +136,11 @@ static void OnDraw_Internal()
 
     for (int i = 0; i < MAX_NUM_SAVED_WAVES; i++)
     {
-        DrawMemoryWave(i, exist[i]);
+        DrawMemoryMap(i, exist[i]);
     }
 }
 
-static void DrawMemoryWave(int num, bool exist)
+static void DrawMemoryMap(int num, bool exist)
 {
     int x = Grid::Left() + 2 + num * 12;
     int y = Grid::FullBottom() - 13;
