@@ -76,7 +76,7 @@ static void OnPress_Internal_Delete()
 static void Draw_Internal_Delete(int x, int y)
 {
     Font::SetCurrent(Font::Type::_UGO2);
-    Char(SYMBOL_DELETE).Draw(x + 2, y + 1);
+    Char(SYMBOL_DELETE).Draw4SymbolsInRect(x + 2, y + 1);
     Font::SetCurrent(Font::Type::_8);
 }
 
@@ -110,7 +110,7 @@ static void OnPress_Internal_SaveToMemory()
 static void Draw_Internal_SaveToMemory(int x, int y)
 {
     Font::SetCurrent(Font::Type::_UGO2);
-    Char(SYMBOL_SAVE_TO_MEM).Draw(x + 2, y + 1);
+    Char(SYMBOL_SAVE_TO_MEM).Draw4SymbolsInRect(x + 2, y + 1);
     Font::SetCurrent(Font::Type::_8);
 }
 
