@@ -77,7 +77,7 @@ static void Draw_Internal_Delete(int x, int y)
     Font::SetCurrent(Font::Type::_8);
 }
 
-DEF_GRAPH_BUTTON( bInternal_Delete,                                                                                                                     //--- ѕјћя“№ - ¬Ќ”“– «” - ”далить ---
+DEF_GRAPH_BUTTON( bDelete,                                                                                                                              //--- ѕјћя“№ - ¬Ќ”“– «” - ”далить ---
     "”далить",
     "”дал€ет выбранный сигнал из внутреннего запоминающего устройства",
     &PageROM::self, 0, OnPress_Internal_Delete, Draw_Internal_Delete
@@ -111,33 +111,10 @@ static void Draw_Internal_SaveToMemory(int x, int y)
     Font::SetCurrent(Font::Type::_8);
 }
 
-DEF_GRAPH_BUTTON( bInternal_SaveToMemory,                                                                                                    //--- ѕјћя“№ - ¬Ќ”“– «” - —охранить в пам€ти ---
+DEF_GRAPH_BUTTON( bSave,                                                                                                                   //--- ѕјћя“№ - ¬Ќ”“– «” - —охранить в пам€ти ---
     "—охранить в пам€ти",
     "—охранить сигнал во внутреннем запоминующем устройстве",
     &PageROM::self, 0, OnPress_Internal_SaveToMemory, Draw_Internal_SaveToMemory
-)
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void OnPress_Internal_SaveToDrive()
-{
-    EXIT_FROM_SETNAME_TO = RETURN_TO_INT_MEM;
-    PageMemory::SaveSignalToFlashDrive();
-}
-
-static void Draw_Internal_SaveToDrive(int x, int y)
-{
-    if (FDrive::IsConnected())
-    {
-        Font::SetCurrent(Font::Type::_UGO2);
-        Char(SYMBOL_FLASH_DRIVE_BIG).Draw4SymbolsInRect(x + 2, y + 1);
-        Font::SetCurrent(Font::Type::_8);
-    }
-}
-
-DEF_GRAPH_BUTTON( bInternal_SaveToDrive,                                                                                                    //--- ѕјћя“№ - ¬Ќ”“– «” - —охранить на флешку ---
-    "—охранить на флешку",
-    "—охран€ет сигнал на флешку",
-    &PageROM::self, 0, OnPress_Internal_SaveToDrive, Draw_Internal_SaveToDrive
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -163,7 +140,7 @@ static void OnDraw_Internal()
 static void DrawMemoryWave(int num, bool exist)
 {
     int x = Grid::Left() + 2 + num * 12;
-    int y = Grid::FullBottom() - 10;
+    int y = Grid::FullBottom() - 13;
     int width = 12;
     Region(width, 10).Fill(x, y, num == NUM_ROM_SIGNAL ? Color::FLASH_10 : Color::BACK);
     Rectangle(width, 10).Draw(x, y, Color::FILL);
@@ -210,10 +187,10 @@ static bool HandlerKey_Internal(KeyEvent event)
 DEF_PAGE_4( pageROM, // -V641                                                                                                                                     //--- ѕјћя“№ - ¬Ќ”“– «” ---
     "¬Ќ”“– «”",
     "ѕереход в режим работы с внутренней пам€тью",
-    &bNext,                     ///< ѕјћя“№ - ¬Ќ”“– «” - —ледующий
-    &bPrev,                     ///< ѕјћя“№ - ¬Ќ”“– «” - ѕредыдущий
-    &bInternal_Delete,          ///< ѕјћя“№ - ¬Ќ”“– «” - ”далить
-    &bInternal_SaveToMemory,    ///< ѕјћя“№ - ¬Ќ”“– «” - —охранить
+    &bPrev,         ///< ѕјћя“№ - ¬Ќ”“– «” - ѕредыдущий
+    &bNext,         ///< ѕјћя“№ - ¬Ќ”“– «” - —ледующий
+    &bSave,         ///< ѕјћя“№ - ¬Ќ”“– «” - —охранить
+    &bDelete,       ///< ѕјћя“№ - ¬Ќ”“– «” - ”далить
     Page::Name::SB_Memory_Internal,
     &PageMemory::self, 0, OnPress_Internal, OnDraw_Internal, HandlerKey_Internal
 )
