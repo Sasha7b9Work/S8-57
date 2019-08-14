@@ -1,6 +1,5 @@
 #include "defines.h"
 #include "Display/Painter.h"
-#include "Menu/Pages/Include/Definition.h"
 #include "Menu/Pages/Include/PageMeasures.h"
 #include "Settings/Settings.h"
 #include "Keyboard/Keyboard.h"

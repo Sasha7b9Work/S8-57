@@ -10,7 +10,6 @@
 #include "Hardware/Memory.h"
 #include "Hardware/Beeper.h"
 #include "Menu/Menu.h"
-#include "Menu/Pages/Include/Definition.h"
 #include "Menu/Pages/Include/PageService.h"
 #include "Utils/CommonFunctions.h"
 #include "Utils/Math.h"
@@ -374,62 +373,6 @@ DEF_CHOICE_2( cStats,                                                           
     &PageDebug::self, 0, 0, 0
 )
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-//void PageDebug::OnChanged_DisplayOrientation(bool)
-//{
-//    Display::SetOrientation(DISPLAY_ORIENTATION);
-//}
-//
-//DEF_CHOICE_2( cDisplayOrientation,                                                                                                                             //--- ОТЛАДКА - Ориентация ---
-//    "Ориентация",
-//    "Устанавливает ориентацию дисплея"
-//    ,
-//    "Прямая",
-//    "Обратная",
-//    DISPLAY_ORIENTATION,
-//    &PageDebug::self, 0, PageDebug::OnChanged_DisplayOrientation, 0
-//)
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-//static int16 pred;
-//
-//static void OnChanged_Pred()
-//{
-//    FPGA::pred = (uint16)(~pred);
-//}
-//
-//DEF_GOVERNOR( mgPred,                                                                                                                                          //--- ОТЛАДКА - Предзапуск ---
-//    "Предзапуск",
-//    "",
-//    pred, 0, 15000,
-//    &PageDebug::self, 0, OnChanged_Pred, 0
-//)
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-//static int16 post;
-//
-//static void OnChanged_Post()
-//{
-//    FPGA::post = (uint16)~post;
-//}
-//
-//DEF_GOVERNOR( mgPost,                                                                                                                                         //--- ОТЛАДКА - Послезапуск ---
-//    "Послезапуск",
-//    "",
-//    post, 0, 15000,
-//    &PageDebug::self, 0, OnChanged_Post, 0
-//)
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void OnPress_Settings_Exit()
-{
-    Display::SetDrawMode(Display::DrawMode::Auto, 0);
-}
-
-DEF_GRAPH_BUTTON_EXIT( bSettings_Exit,                                                                                                                  //--- ОТЛАДКА - НАСТРОЙКИ - Выход ---
-    &PageDebug::PageSettings::self, 0, OnPress_Settings_Exit, DrawSB_Exit
-)
-
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 static void DebugShowSetInfo_Draw()
 {
@@ -508,10 +451,9 @@ static void OnPress_Settings(bool)
     Display::SetDrawMode(Display::DrawMode::Auto, DebugShowSetInfo_Draw);
 }
 
-DEF_PAGE_SB( ppSettings, // -V641 // -V1027                                                                                                                     //--- ОТЛАДКА - НАСТРОЙКИ ---
+DEF_PAGE_5( ppSettings, // -V641 // -V1027                                                                                                                     //--- ОТЛАДКА - НАСТРОЙКИ ---
     "НАСТРОЙКИ",
     "Показать информацию о настройках",
-    &bSettings_Exit,            // ОТЛАДКА - НАСТРОЙКИ - Выход
     0,
     0,
     0,
@@ -557,16 +499,6 @@ DEF_BUTTON( bSaveFirmware,                                                      
     "Сохр. прошивку",
     "Сохранение прошивки - секторов 5, 6, 7 общим объёмом 3 х 128 кБ, где хранится программа",
     &PageDebug::self, IsActive_SaveFirmware, OnPress_SaveFirmware, 0
-)
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void OnPress_SerialNumber_Exit()
-{
-    OnPressSB_Exit();
-}
-
-DEF_GRAPH_BUTTON_EXIT( bSerialNumber_Exit,                                                                                                                    //--- ОТЛАДКА - С/Н - Выход ---
-    &PageDebug::PageSerialNumber::self, 0, OnPress_SerialNumber_Exit, DrawSB_Exit
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -623,14 +555,10 @@ static bool HandlerKey_SerialNumber(KeyEvent /*event*/)
     return true;
 }
 
-DEF_PAGE_SB( ppSerialNumber, // -V641 // -V1027                                                                                                                       //--- ОТЛАДКА - С/Н ---
+DEF_PAGE_2( ppSerialNumber, // -V641 // -V1027                                                                                                                       //--- ОТЛАДКА - С/Н ---
     "С/Н",
     "Запись серийного номера в OTP-память. ВНИМАНИЕ!!! ОТP-память - память с однократной записью.",
-    &bSerialNumber_Exit,            // ОТЛАДКА - С/Н - Выход
     &bSerialNumber_Change,          // ОТЛАДКА - С/Н - Перейти
-    0,
-    0,
-    0,
     &bSerialNumber_Save,            // ОТЛАДКА - С/Н - Сохранить
     Page::Name::SB_Debug_SerialNumber,
     &PageDebug::self, 0, OnPress_SerialNumber, 0, HandlerKey_SerialNumber

@@ -120,11 +120,6 @@ static const GovernorColorDef name = {Item::Type::GovernorColor, 0, Page::Name::
     {title, hint}, &colorType, 0};
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-#define DEF_PAGE_SB(name, title, hint, item0, item1, item2, item3, item4, item5, namePage, keeper, funcActive, funcPress, funcDraw, funcRegSet)                                             \
-static const Item * const  items##name[] = {(Item *)item0, (Item *)item1, (Item *)item2, (Item *)item3, (Item *)item4,                                                                      \
-    (Item *)item5};                                                                                                                                                                         \
-static const PageDef name = {Item::Type::Page, 6, namePage, keeper, funcActive, {title, hint}, items##name, funcPress, funcDraw, funcRegSet};
-
 #define DEF_PAGE_1(name, title, hint, item1, namePage, keeper, funcActive, funcPress, funcDraw, funcRegSet)                                                                                 \
 static const Item * const  items##name[] = {(Item *)item1};                                                                                                                                 \
 static const PageDef name = {Item::Type::Page, 1, namePage, keeper, funcActive, {title, hint},                                                                                              \

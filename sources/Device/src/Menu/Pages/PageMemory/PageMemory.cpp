@@ -11,12 +11,10 @@
 #include "Hardware/Beeper.h"
 #include "FlashDrive/FileManager.h"
 #include "Menu/Menu.h"
-#include "Menu/Pages/Include/Definition.h"
 #include "Utils/Math.h"
 #include "Utils/StringUtils.h"
 #include "Utils/Values.h"
 #include "Utils/CommonFunctions.h"
-
 #include "Osci/Display/PainterData.h"
 #include "Osci/Osci.h"
 
@@ -556,8 +554,6 @@ static void DrawSetName()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void OnPress_SetName_Exit()
 {
-    OnPressSB_Exit();
-
     if (EXIT_FROM_SETNAME_TO == RETURN_TO_DISABLE_MENU)
     {
         //Menu::PagePointerFromName(Page::Name::SB_Memory_SetName)->ShortPressOnItem(0);

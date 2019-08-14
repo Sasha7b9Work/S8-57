@@ -1111,11 +1111,6 @@
           <GroupName>Menu/Pages</GroupName>
           <Files>
             <File>
-              <FileName>Definition.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Menu\Pages\Definition.cpp</FilePath>
-            </File>
-            <File>
               <FileName>PageChannels.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Menu\Pages\PageChannels.cpp</FilePath>
@@ -1131,11 +1126,6 @@
           <GroupName>Menu/Pages/Include</GroupName>
           <Files>
             <File>
-              <FileName>Definition.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Menu\Pages\Include\Definition.h</FilePath>
-            </File>
-            <File>
               <FileName>HelpContent.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Menu\Pages\Include\HelpContent.h</FilePath>
@@ -1149,11 +1139,6 @@
               <FileName>PageChannels.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Menu\Pages\Include\PageChannels.h</FilePath>
-            </File>
-            <File>
-              <FileName>PageDebug.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Menu\Pages\Include\PageDebug.h</FilePath>
             </File>
             <File>
               <FileName>PageDisplay.h</FileName>

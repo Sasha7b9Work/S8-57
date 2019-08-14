@@ -1,6 +1,5 @@
 #include "defines.h"
 #include "Menu/MenuItems.h"
-#include "Menu/Pages/Include/Definition.h"
 #include "Display/Display_Primitives.h"
 #include "Display/Painter.h"
 #include "Settings/SettingsTime.h"
@@ -9,7 +8,6 @@
 #include "Menu/Pages/Include/PageMeasures.h"
 #include "Utils/Math.h"
 #include "Hardware/Beeper.h"
-
 #include "Osci/Measurements/Measurements.h"
 
 
