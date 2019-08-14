@@ -219,7 +219,7 @@ static void OnPress_Drive_Mask_Backspace()
 static void Draw_Backspace(int x, int y)
 {
     Font::SetCurrent(Font::Type::_UGO2);
-    Char(SYMBOL_BACKSPACE).Draw(x + 2, y + 1);
+    Char(SYMBOL_ARROW_LEFT).Draw(x + 2, y + 1);
     Font::SetCurrent(Font::Type::_8);
 }
 

@@ -25,96 +25,41 @@ static void DrawMemoryWave(int num, bool exist);
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-static void OnPress_Internal_ShowAlways()
+static void OnPress_Next()
 {
-    ALWAYS_SHOW_ROM_SIGNAL = ALWAYS_SHOW_ROM_SIGNAL ? 0U : 1U;
+
 }
 
-static void Draw_Internal_ShowAlways_Yes(int x, int y)
+static void Draw_Next(int x, int y)
 {
     Font::SetCurrent(Font::Type::_UGO2);
-    Char('\x66').Draw4SymbolsInRect(x + 2, y + 1);
+    Char(SYMBOL_ARROW_RIGHT).Draw4SymbolsInRect(x + 2, y + 2);
     Font::SetCurrent(Font::Type::_8);
 }
 
-static void Draw_Internal_ShowAlways_No(int x, int y)
-{
-    Font::SetCurrent(Font::Type::_UGO2);
-    Char('\x68').Draw4SymbolsInRect(x + 2, y + 1);
-    Font::SetCurrent(Font::Type::_8);
-}
-
-static void Draw_Internal_ShowAlways(int x, int y)
-{
-    if (ALWAYS_SHOW_ROM_SIGNAL == 0)
-    {
-        Draw_Internal_ShowAlways_No(x, y);
-    }
-    else
-    {
-        Draw_Internal_ShowAlways_Yes(x, y);
-    }
-}
-
-DEF_GRAPH_BUTTON_HINTS_2( bInternal_ShowAlways,                                                                                               //--- ПАМЯТЬ - ВНУТР ЗУ - Показывать всегда ---
-    "Показывать всегда",
-    "Позволяет всегда показывать выбранный сохранённый сигнал поверх текущего",
-    &PageROM::self, 0, OnPress_Internal_ShowAlways, Draw_Internal_ShowAlways,
-    Draw_Internal_ShowAlways_Yes, "показывать выбранный сигнал из внутренней памяти поверх текущего",
-    Draw_Internal_ShowAlways_No,  "сигнал из внутренней памяти виден только в режиме работы с внутренним запоминающим устройством"
+DEF_GRAPH_BUTTON( bNext,
+    "Следующий",
+    "Перейти к следующему сигналу",
+    &PageROM::self, 0, OnPress_Next, Draw_Next
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void OnPress_Internal_ModeShow()
+static void OnPress_Prev()
 {
-    Math::CircleIncrease<int8>((int8 *)&SHOW_IN_INT, 0, 2);
+
 }
 
-static void Draw_Internal_ModeShow_Direct(int x, int y)
+static void Draw_Prev(int x, int y)
 {
     Font::SetCurrent(Font::Type::_UGO2);
-    Char('\x6a').Draw4SymbolsInRect(x + 2, y + 1);
+    Char(SYMBOL_ARROW_LEFT).Draw4SymbolsInRect(x + 2, y + 2);
     Font::SetCurrent(Font::Type::_8);
 }
 
-
-static void Draw_Internal_ModeShow_Saved(int x, int y)
-{
-    Font::SetCurrent(Font::Type::_UGO2);
-    Char('\x6c').Draw4SymbolsInRect(x + 2, y + 1);
-    Font::SetCurrent(Font::Type::_8);
-}
-
-static void Draw_Internal_ModeShow_Both(int x, int y)
-{
-    String("ОБА").Draw(x + 1, y + 5);
-    VLine(12).Draw(x + 1, y + 2, Color::BACK);
-    VLine(5).Draw(x + 2, y + 6, Color::FILL);
-}
-
-static void Draw_Internal_ModeShow(int x, int y)
-{
-    if (SHOW_IN_INT_DIRECT)
-    {
-        Draw_Internal_ModeShow_Direct(x, y);
-    }
-    else if (SHOW_IN_INT_SAVED)
-    {
-        Draw_Internal_ModeShow_Saved(x, y);
-    }
-    else
-    {
-        Draw_Internal_ModeShow_Both(x, y);
-    }
-}
-
-DEF_GRAPH_BUTTON_HINTS_3( bInternal_ModeShow,                                                                                                       //--- ПАМЯТЬ - ВНУТР ЗУ - Вид сигнала ---
-    "Вид сигнала",
-    "Показывать записанный или текущий сигнал в режиме ВНУТР ЗУ",
-    &PageROM::self, 0, OnPress_Internal_ModeShow, Draw_Internal_ModeShow,
-    Draw_Internal_ModeShow_Direct, "на дисплее текущий сигнал",
-    Draw_Internal_ModeShow_Saved,  "на дисплее сохранённый сигнал",
-    Draw_Internal_ModeShow_Both,   "на дисплее оба сигнала"
+DEF_GRAPH_BUTTON( bPrev,
+    "Предыдущий",
+    "Перейти к предыдущему сигналу",
+    &PageROM::self, 0, OnPress_Prev, Draw_Prev
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -236,37 +181,39 @@ static void DrawMemoryWave(int num, bool exist)
 
 static bool HandlerKey_Internal(KeyEvent event)
 {
-    Key::E key = event.key;
-
-    Beeper::RegulatorSwitchRotate();
-
-    if (key == Key::Left || key == Key::Down)
+    if (event.type == TypePress::Release || event.type == TypePress::Long)
     {
-        Math::CircleDecrease<int8>((int8 *)&NUM_ROM_SIGNAL, 0, MAX_NUM_SAVED_WAVES - 1);
-    }
-    else if (key == Key::Right || key == Key::Up)
-    {
-        Math::CircleIncrease<int8>((int8 *)&NUM_ROM_SIGNAL, 0, MAX_NUM_SAVED_WAVES - 1);
-    }
-    else
-    {
-        // остальные кнопки не обрабатываем
-    }
+        Key::E key = event.key;
 
-    Color::ResetFlash();
+        Beeper::RegulatorSwitchRotate();
+
+        if (key == Key::Left || key == Key::Down)
+        {
+            Math::CircleDecrease<int8>((int8 *)&NUM_ROM_SIGNAL, 0, MAX_NUM_SAVED_WAVES - 1);
+        }
+        else if (key == Key::Right || key == Key::Up)
+        {
+            Math::CircleIncrease<int8>((int8 *)&NUM_ROM_SIGNAL, 0, MAX_NUM_SAVED_WAVES - 1);
+        }
+        else
+        {
+            // остальные кнопки не обрабатываем
+        }
+
+        Color::ResetFlash();
+    }
 
     return true;
 }
 
 
-DEF_PAGE_5( pageROM, // -V641                                                                                                                                     //--- ПАМЯТЬ - ВНУТР ЗУ ---
+DEF_PAGE_4( pageROM, // -V641                                                                                                                                     //--- ПАМЯТЬ - ВНУТР ЗУ ---
     "ВНУТР ЗУ",
     "Переход в режим работы с внутренней памятью",
-    &bInternal_ShowAlways,      ///< ПАМЯТЬ - ВНУТР ЗУ - Показывать всегда
-    &bInternal_ModeShow,        ///< ПАМЯТЬ - ВНУТР ЗУ - Вид сигнала
+    &bNext,                     ///< ПАМЯТЬ - ВНУТР ЗУ - Следующий
+    &bPrev,                     ///< ПАМЯТЬ - ВНУТР ЗУ - Предыдущий
     &bInternal_Delete,          ///< ПАМЯТЬ - ВНУТР ЗУ - Удалить
     &bInternal_SaveToMemory,    ///< ПАМЯТЬ - ВНУТР ЗУ - Сохранить
-    &bInternal_SaveToDrive,     ///< ПАМЯТЬ - ВНУТР ЗУ - Сохранить на флешку
     Page::Name::SB_Memory_Internal,
     &PageMemory::self, 0, OnPress_Internal, OnDraw_Internal, HandlerKey_Internal
 )

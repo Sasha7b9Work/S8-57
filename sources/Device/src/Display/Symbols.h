@@ -44,7 +44,7 @@
 
 
 // Font::Type::_UGO2
-#define SYMBOL_BACKSPACE        '\x20'
+#define SYMBOL_ARROW_LEFT       '\x20'
 #define SYMBOL_DELETE           '\x22'  ///< ÂÍÅØÍ ÇÓ-ÌÀÑÊÀ-ÓÄÀËÈÒÜ
 #define SYMBOL_INSERT           '\x26'  ///< ÂÍÅØÍ ÇÓ-ÈÌß-ÂÑÒÀÂÈÒÜ
 #define SYMBOL_SAVE_TO_MEM      '\x2c'
