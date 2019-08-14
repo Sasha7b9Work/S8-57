@@ -47,7 +47,6 @@ public:
     static Color Channel(Chan::E ch);
     static Color Cursors(Chan::E ch);
     static Color Trig();
-    static Color MenuItem();        ///< ÷вет элемента меню.
     static Color MenuItemField();   ///< ÷вет пункта меню с выбранным значением.
     static Color MenuTitleText();   ///< ÷вет заголовка страницы или элемента меню.
     /// ”станавливает текущий цвет отрисовки

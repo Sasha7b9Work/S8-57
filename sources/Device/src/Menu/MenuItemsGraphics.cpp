@@ -51,7 +51,7 @@ void GovernorColor::DrawOpened(int x, int y)
     ct->Init();
     Rectangle(Height() + delta + 2, Height() + 2).Draw(x - 1, y - 1, Color::BACK);
     Rectangle(Width() + delta, Height()).Draw(x, y, Color::MenuTitleText());
-    Region(Width() + 2 + delta, Value::HEIGHT + 3).Fill(x + 1, y + 1, Color::MenuItem());
+    Region(Width() + 2 + delta, Value::HEIGHT + 3).Fill(x + 1, y + 1, Color::BACK);
 
     HLine(Width() + delta).Draw(x, y + Height() / 2 + 2, Color::MenuTitleText());
 
@@ -277,14 +277,9 @@ void Choice::DrawClosed(int x, int y)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Button::Draw(int x, int y) const
 {
-    Color color = Color::WHITE;
-    
-    Region(Width() - 2, Height() - 2).Fill(x + 1, y + 2, Color::MenuItem());
-    Region(Width() - 6, Height() - 6).Fill(x + 3, y + 4, Color::MenuItem());
+    Region(Width() - 5, Height() - 4).Fill(x + 2, y + 3, IsPressed() ? Color::FILL : Color::BACK);
 
-    int delta = IsPressed() ? 2 : 1;
-
-    Text(Title().CString()).DrawInCenterRect(x + delta, y + delta, Width(), Height(), color);
+    Text(Title().CString()).DrawInCenterRect(x + 2, y, Width(), Height(), IsPressed() ? Color::BACK : Color::FILL);
 
     if (funcForDraw)
     {
