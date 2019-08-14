@@ -67,6 +67,21 @@ public:
     int PositionOnScreenX() const;
     /// Возвращает свою позицию в списке родителя
     int PositionInKeeperList() const;
+    /// Высота итема
+    int Height() const;
+    /// Ширина итема. pos - позиция итема на экране.
+    int Width(int pos = -1) const;
+    /// Возвращает цвет фона заголовка итема
+    Color ColorTitleBackground() const;
+    /// Возвращает цвет, которым нужно рисовать на заголовке итема
+    Color ColorTitleDraw() const;
+    /// Цвет обводки итема
+    Color ColorFrame() const;
+
+    struct Value
+    {
+        static const int HEIGHT = 13;
+    };
 
     static Item empty;
 
@@ -89,16 +104,6 @@ public:
         } value;
 
         explicit Type(E v) : value(v) {};
-    };
-
-    /// Высота итема
-    int Height() const;
-    /// Ширина итема. pos - позиция итема на экране.
-    int Width(int pos = -1) const;
-
-    struct Value
-    {
-        static const int HEIGHT = 13;
     };
 };
 

@@ -50,14 +50,11 @@ void GovernorColor::DrawOpened(int x, int y)
     x -= delta;
     ct->Init();
     Rectangle(Height() + delta + 2, Height() + 2).Draw(x - 1, y - 1, Color::BACK);
-    Rectangle(Width() + delta, Height()).Draw(x, y, Color::MenuTitleText());
-    Region(Width() + 2 + delta, Value::HEIGHT + 3).Fill(x + 1, y + 1, Color::BACK);
-
-    HLine(Width() + delta).Draw(x, y + Height() / 2 + 2, Color::MenuTitleText());
-
-    Text(Title().CString()).DrawInCenterRect(x + (IsPressed() ? 2 : 1), y + (IsPressed() ? 2 : 1), Width() + delta, Height() / 2 + 2, Color::WHITE);
-
-    DrawValue(x + 1, y + 19, delta);
+    Rectangle(Width() + delta, Height()).Draw(x, y, ColorFrame());
+    Region(Width() + delta - 2, Value::HEIGHT - 2).Fill(x + 1, y + 1, ColorTitleBackground());
+    HLine(Width() + delta).Draw(x, y + Height() / 2 + 2, ColorFrame());
+    Text(Title().CString()).DrawInCenterRect(x +  1, y - 1, Width() + delta, Height() / 2 + 2, ColorTitleDraw());
+    //DrawValue(x + 1, y + 19, delta);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -696,4 +693,22 @@ void GraphButton::DrawHints(int x, int y, int width) const
         y = ((yNew - y) < 22) ? (y + 22) : yNew;
         structHelp++;
     }
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Color Item::ColorTitleBackground() const
+{
+    return IsPressed() ? Color::FILL : Color::BACK;
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Color Item::ColorFrame() const
+{
+    return Color::FILL;
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Color Item::ColorTitleDraw() const
+{
+    return IsPressed() ? Color::BACK : Color::FILL;
 }
