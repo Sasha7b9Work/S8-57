@@ -249,29 +249,6 @@ String Item::Title() const
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-char Item::GetSymbol() const
-{
-    if (IS_GOVERNOR(this))
-    {
-        return ((Governor *)this)->GetSymbol();
-    }
-    else if (IS_CHOICE(this))
-    {
-        return ((Choice *)this)->GetSymbol();
-    }
-    else if (IS_TIME(this))
-    {
-        return ((TimeItem *)this)->GetSymbol();
-    }
-    else
-    {
-        // здесь ничего не делаем
-    }
-
-    return 0;
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 bool Item::ExistKeeper(const Page *_keeper) const
 {
     const Page *item = Keeper();

@@ -579,13 +579,16 @@ void TimeItem::DrawOpened(int x, int y)
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 static void DrawCommonHiPart(Item *item, int x, int y, bool opened)
 {
+    bool pressed = item->IsPressed();
+
     int width = Item::Value::WIDTH;
 
-    Color color = Color::WHITE;
+    Color colorFill = pressed ? Color::WHITE : Color::BLACK;
+    Color colorText = pressed ? Color::BLACK : Color::WHITE;
 
-    Region(width + (opened ? 2 : 1), Item::Value::HEIGHT - (opened ? 2 : 3)).Fill(x + 1, y + (opened ? 1 : 2), Color::MenuItem());
+    Region(width + (opened ? 2 : 1), Item::Value::HEIGHT - (opened ? 2 : 3)).Fill(x + 1, y + (opened ? 1 : 2), colorFill);
 
-    item->Title().Draw(x + (opened ? 4 : 6), y + (opened ? 2 : 3), color);
+    item->Title().Draw(x + (opened ? 4 : 6), y + (opened ? 2 : 3), colorText);
 
     if (opened)
     {
@@ -594,26 +597,16 @@ static void DrawCommonHiPart(Item *item, int x, int y, bool opened)
 
     if(item->IsCurrentItem())
     {
-        char symbol = 0;
-   
-        if (IS_CHOICE_REG(item) || (item->IsOpened() && IS_CHOICE(item)))
-        {
-            symbol = item->GetSymbol();
-        }
-        else if (IS_TIME(item))
+        if (IS_TIME(item))
         {
             TimeItem* time = (TimeItem*)item;
             if ((Menu::OpenedItem() == item) && (*time->curField != iEXIT) && (*time->curField != iSET))
             {
-                symbol = time->GetSymbol();
+                char symbol = time->GetSymbol();
+
+                Char(symbol).Draw4SymbolsInRect(x + item->Width() - 13, y + (item->IsOpened() ? 0 : 13), colorText);
             }
         }
-        else
-        {
-            // для остальных контролов не нужно
-        }
-
-        Char(symbol).Draw4SymbolsInRect(x + item->Width() - 13, y + (item->IsOpened() ? 0 : 13), Color::BLACK);
     }
 }
 

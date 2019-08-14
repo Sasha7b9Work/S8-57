@@ -57,8 +57,6 @@ public:
     void Draw(int x, int y, bool opened) const;
 
     bool IsCurrentItem() const;
-    /// ¬озвращает изображение регул€тора, соответствующее его текущему положению
-    char GetSymbol() const;
     /// ¬озвращает адрес родител€
     const Page *Keeper() const { if (keeper) { return *keeper; }; return nullptr; }
     /// ¬озвращает true, если в древе предков стоит keeper
@@ -94,12 +92,10 @@ public:
     /// Ўирина итема. pos - позици€ итема на экране.
     int Width(int pos = -1) const;
 
-
-
     struct Value
     {
         static const int HEIGHT = 13;
-        static const int WIDTH = 320 / 5 - 4; // -V112
+        static const int WIDTH = 320 / 5 - 3; // -V112
     };
 };
 
