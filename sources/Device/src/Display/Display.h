@@ -46,8 +46,6 @@ namespace Display
     /// Удаляет дополнительую функцию отрисовки, установленную вызовом функции SetAddDrawFunction()
     void RemoveAddDrawFunction();
 
-    void ChangedRShiftMarkers(bool active);
-
     void SetOrientation(Orientation::E orientation);
     /// Возвращает время, через которое меню автоматически скрывается, если не было больше нажатий
     int TimeMenuAutoHide();

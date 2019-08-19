@@ -79,7 +79,6 @@ static uint             timeWarnings[NUM_WARNINGS] = {0};   ///< Здесь время, ко
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-volatile static bool drawRShiftMarkers = false;
 static pFuncVV funcOnHand = 0;
 static uint timeStart = 0;
 static const char *textWait = 0;
@@ -252,19 +251,6 @@ void Display::ShowWarning(Warning::E warning)
     {
         Beeper::WarnBeepBad();
     }
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void OnRShiftMarkersAutoHide()
-{
-    drawRShiftMarkers = false;
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Display::ChangedRShiftMarkers(bool /*active*/)
-{
-    drawRShiftMarkers = !ALT_MARKERS_HIDE;
-    Timer::SetAndStartOnce(Timer::Type::RShiftMarkersAutoHide, OnRShiftMarkersAutoHide, 5000);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

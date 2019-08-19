@@ -46,11 +46,6 @@
 #define DISPLAY_ORIENTATION         (set.dbg_Orientation)
 #define DISPLAY_ORIENTATION_IS_NORMAL (DISPLAY_ORIENTATION == Display::Orientation::Normal)
 
-#define ALT_MARKERS                 (set.disp_altMarkers)
-#define ALT_MARKERS_SHOW            (ALT_MARKERS == AltMarkers::Show)
-#define ALT_MARKERS_HIDE            (ALT_MARKERS == AltMarkers::Hide)
-#define ALT_MARKERS_AUTO            (ALT_MARKERS == AltMarkers::AutoHide)
-
 #define LINKING_RSHIFT              (set.disp_linkingRShift)
 
 #define MENU_AUTO_HIDE              (set.disp_menuAutoHide)
@@ -130,17 +125,6 @@ namespace Display
             Reverse
         } value;
         explicit Orientation(E v) : value(v) {};
-    };
-    /// Режим отображения дополнительных боковых маркеров смещения по напряжению.
-    struct AltMarkers
-    {
-        enum E
-        {
-            Hide,        /// Никода не выводить.
-            Show,        /// Всегда выводить.
-            AutoHide     /// Выводить и прятать через timeShowLevels.
-        } value;
-        explicit AltMarkers(E v) : value(v) {};
     };
 
     /// Тип привязки к смещению по вертикали
