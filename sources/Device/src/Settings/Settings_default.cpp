@@ -33,7 +33,6 @@ const Settings Settings::defaultSettings =
     50,                                                         // disp_brightnessGrid;      
     Display::LinkingRShift::Position,                           // disp_linkingRShift;       
     100,                                                        // disp_brightness;          
-    5,                                                          // disp_timeShowLevels;      
     5,                                                          // disp_timeMessages;        
     Display::AltMarkers::AutoHide,                              // disp_altMarkers;          
     Menu::AutoHide::None,                                       // disp_menuAutoHide;

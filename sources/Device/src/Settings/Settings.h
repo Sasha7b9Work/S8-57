@@ -75,7 +75,6 @@ public:
     int                             disp_brightnessGrid;        ///< Яркость сетки от 0 до 100.
     Display::LinkingRShift::E       disp_linkingRShift;         ///< Тип привязки к смещению по вертикали.
     int16                           disp_brightness;            ///< Яркость дисплея.
-    int16                           disp_timeShowLevels;        ///< Время, в течение которого нужно показывать уровин смещения.
     int16                           disp_timeMessages;          ///< Время в секундах, на которое сообщение остаётся на экрне.
     Display::AltMarkers::E          disp_altMarkers;            ///< Режим отображения дополнительных боковых маркеров смещений.
     Menu::AutoHide::E               disp_menuAutoHide;          ///< Через сколько времени после последнего нажатия клавиши прятать меню.

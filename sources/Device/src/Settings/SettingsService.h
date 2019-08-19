@@ -23,9 +23,6 @@ struct CalibratorMode
  
 #define RECORDER_MODE                   (set.serv_recorder)
 
-#define TIME_SHOW_LEVELS                (set.disp_timeShowLevels)
-
-
 #define CALIBRATOR_MODE                 (set.serv_calibratorMode)
 
 #define SOUND_VOLUME                    (set.serv_soundVolume)
