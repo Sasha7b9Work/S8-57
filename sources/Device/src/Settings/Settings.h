@@ -63,7 +63,6 @@ public:
     Display::ModeDrawSignal::E      disp_modeDrawSignal;
     //Display::ThicknessSignal::E     disp_thickness;             ///< Толщина линии, которой рисуется сигнал
     Display::Background::E          disp_background;            ///< Цвет фона.
-    Display::ShowStrNavi::E         disp_showStringNavigation;  ///< Режим показа строки навигации меню.
     Display::ENumMinMax::E          disp_ENumMinMax;            ///< Перечисление количества измерений для определения минимумов и масимумов.
     uint8                           not_using0;
     Display::ENumAverage::E         disp_ENumAverage;           ///< Число усреднений сигнала.

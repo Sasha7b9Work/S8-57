@@ -10,10 +10,6 @@
 #define BACKGROUND                  (set.disp_background)
 #define BACKGROUND_BLACK            (BACKGROUND == Display::Background::Black)
 
-#define SHOW_STRING_NAVI            (set.disp_showStringNavigation)
-#define SHOW_STRING_NAVI_TEMP       (SHOW_STRING_NAVI == Display::ShowStrNavi::Temp)
-#define SHOW_STRING_NAVI_ALL        (SHOW_STRING_NAVI == Display::ShowStrNavi::All)
-
 #define MODE_DRAW_SIGNAL            (set.disp_modeDrawSignal)
 #define MODE_DRAW_SIGNAL_IS_LINES   (MODE_DRAW_SIGNAL == Display::ModeDrawSignal::Lines)
 #define MODE_DRAW_SIGNAL_IS_POINTS  (MODE_DRAW_SIGNAL == Display::ModeDrawSignal::Points)
@@ -106,17 +102,6 @@ namespace Display
         {
             _1,         ///< Сигнал рисуется линией толщиной одна точка
             _3          ///< Сигнал рисуется линией толщиной три точки
-        } value;
-    };
-
-    /// Режим показа строки навигации
-    struct ShowStrNavi
-    {
-        enum E
-        {
-            Temp,   ///< Показывать на несколько секунд
-            All,    ///< Всегда показывать
-            None    ///< Никогда не показывать
         } value;
     };
 

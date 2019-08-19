@@ -24,8 +24,6 @@ struct Menu
     static void Show(bool show);
     /// Возвращает true, если меню отображается на экране
     static bool IsShown();
-    /// Функция временно включает отображение строки навигации меню, если задано настройками.
-    static void TemporaryEnableStrNavi();
     /// Возвращает адрес открытого элемента меню
     static Item *OpenedItem();
 

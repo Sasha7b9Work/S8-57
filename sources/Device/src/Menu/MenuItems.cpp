@@ -402,10 +402,6 @@ void Page::SetAsCurrent() const
 {
     if (IsActive())
     {
-        if (SHOW_STRING_NAVI_TEMP)
-        {
-            MENU_TEMP_ENABLE_STRING_NAVI();
-        }
         SetCurrent(true);
         Open(!IsOpened());
     }

@@ -45,8 +45,6 @@ static uint timeLastPressedButton = MAX_UINT;
 static Item *LastOpened(Page *page);
 /// Обработка события таймера автоматического сокрытия меню
 static void OnTimerAutoHide();
-/// Функция, которая отключит вывод строки навигации меню
-static void OnTimerStrNaviAutoHide();
 
 static void ProcessButtonForHint(Key::E button);
 /// Написать подсказку
@@ -170,22 +168,6 @@ static void OnTimerAutoHide()
     Menu::Show(false);
 }
 
-//---------------------------------------------------------------------------------------------------------------------------------------------------
-void Menu::TemporaryEnableStrNavi()
-{
-    if (SHOW_STRING_NAVI_TEMP)
-    {
-        SHOW_STRING_NAVIGATION = 1;                                            // Устанавливаем признак того, что надо выводить строку навигации меню
-        Timer::SetAndStartOnce(Timer::Type::StrNaviAutoHide, OnTimerStrNaviAutoHide, 3000); // и запускаем таймер, который его отключит
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------------------------------------
-static void OnTimerStrNaviAutoHide()
-{
-    SHOW_STRING_NAVIGATION = 0;
-}
-
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Menu::ChangeStateFlashDrive()
 {
@@ -211,10 +193,6 @@ void Menu::Show(bool show)
 {
     set.menu_show = show;
 
-    if (show)
-    {
-        Menu::TemporaryEnableStrNavi();
-    }
     Menu::SetAutoHide(true);
 }
 

@@ -21,7 +21,6 @@ const Settings Settings::defaultSettings =
     Display::ModeDrawSignal::Lines,                             // disp_modeDrawSignal;      
 //    Display::ThicknessSignal::_1,                             // disp_thickness;           
     Display::Background::Black,                                 // disp_background;          
-    Display::ShowStrNavi::Temp,                                 // disp_showStringNavigation;
     Display::ENumMinMax::_1,                                    // disp_ENumMinMax;          
     0,                                                          // not used
     Display::ENumAverage::_1,                                   // disp_ENumAverage;         
