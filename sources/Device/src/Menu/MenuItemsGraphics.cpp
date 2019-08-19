@@ -376,9 +376,9 @@ void Page::DrawTitle(int x, int y) const
 {
     int eX = x;
 
-    Region(Menu::Title::WIDTH + 2, Menu::Title::HEIGHT + 2).Fill(x - 1, y, Color::BLUE_50);
-
     Rectangle(Menu::Title::WIDTH + 1, Menu::Title::HEIGHT + 1).Draw(x, y, Color::FILL);
+
+    Region(Menu::Title::WIDTH - 1, Menu::Title::HEIGHT - 1).Fill(x + 1, y + 1, Color::BACK);
 
     bool condDrawRSet = NumSubPages() > 1 &&
         NOT_CHOICE_REG(Menu::CurrentItem()) &&
