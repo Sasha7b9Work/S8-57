@@ -363,7 +363,6 @@ void Page::Draw(int x, int y, bool opened) const
     }
     else
     {
-        //Region(Width() - 3, Height() - 2).Fill(x + 1, y + 2, Color::MenuItem(false));
         if (IsPressed())
         {
             Region(Width() - 5, Height() - 4).Fill(x + 2, y + 3, Color::FILL);
@@ -373,13 +372,13 @@ void Page::Draw(int x, int y, bool opened) const
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Page::DrawTitle(int x, int yTop) const
+void Page::DrawTitle(int x, int y) const
 {
     int eX = x;
 
-    Region(Menu::Title::WIDTH + 2, Menu::Title::HEIGHT + 2).Fill(x - 1, yTop, Color::BACK);
+    Region(Menu::Title::WIDTH + 2, Menu::Title::HEIGHT + 2).Fill(x - 1, y, Color::BLUE_50);
 
-    Rectangle(Menu::Title::WIDTH + 1, Menu::Title::HEIGHT + 1).Draw(x, yTop, Color::FILL);
+    Rectangle(Menu::Title::WIDTH + 1, Menu::Title::HEIGHT + 1).Draw(x, y, Color::FILL);
 
     bool condDrawRSet = NumSubPages() > 1 &&
         NOT_CHOICE_REG(Menu::CurrentItem()) &&
@@ -389,11 +388,11 @@ void Page::DrawTitle(int x, int yTop) const
     int delta = condDrawRSet ? -10 : 0;
     Color colorText = Color::FILL;
 
-    x = Text(Title().CString()).DrawInCenterRect(x, yTop, Menu::Title::WIDTH + 2 + delta, Menu::Title::HEIGHT, colorText);
+    x = Text(Title().CString()).DrawInCenterRect(x, y, Menu::Title::WIDTH + 2 + delta, Menu::Title::HEIGHT, colorText);
 
     Color::GRAY_75.SetAsCurrent();
-    DrawPagesUGO(eX + Menu::Title::WIDTH - 3, yTop + Menu::Title::HEIGHT);
-    DrawNestingPage(eX + 5, yTop + Menu::Title::HEIGHT - 6);
+    DrawPagesUGO(eX + Menu::Title::WIDTH - 3, y + Menu::Title::HEIGHT);
+    DrawNestingPage(eX + 5, y + Menu::Title::HEIGHT - 6);
 }
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Page::DrawItems(int x, int y) const
