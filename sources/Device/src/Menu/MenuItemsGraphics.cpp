@@ -51,7 +51,7 @@ void GovernorColor::DrawOpened(int x, int y)
     ct->Init();
     Rectangle(width + 2, height + 2).Draw(x - 1, y - 1, Color::BACK);
     Rectangle(width, height).Draw(x, y, ColorFrame());
-    Region(width - 2, height - 2).Fill(x + 1, y + 1, ColorTitleBackground());
+    Region(width - 2, height / 2).Fill(x + 1, y + 1, ColorTitleBackground());
     HLine(width).Draw(x, y + Height() / 2 + 2, ColorFrame());
     Text(Title().CString()).DrawInCenterRect(x +  1, y - 1, width, Height() / 2 + 2, ColorTitleDraw());
     DrawValue(x + 1, y + 14);
@@ -78,7 +78,7 @@ void GovernorColor::DrawValue(int x, int y)
     ct->Init();
     int16 vals[4] = {(int16)(ct->brightness * 100.0F), (int16)blue, (int16)green, (int16)red};
 
-    Region(Width() + 50 - 2, Height() / 2 - 3).Fill(x, y, Color::BLACK);
+    Region(123, 12).Fill(x, y, Color::BACK);
     x += 92;
 
     for (int i = 0; i < 4; i++)
