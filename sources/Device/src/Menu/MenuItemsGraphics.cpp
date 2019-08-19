@@ -35,6 +35,13 @@ void GovernorColor::Draw(int x, int y, bool opened)
 {
     if (opened)
     {
+        x = (x + Width() / 2) - widthOpened / 2;
+
+        if (x < 0)
+        {
+            x = 0;
+        }
+
         DrawOpened(x, y);
     }
     else
@@ -46,12 +53,12 @@ void GovernorColor::Draw(int x, int y, bool opened)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void GovernorColor::DrawOpened(int x, int y)
 {
-    int width = 125;
-    int height = 27;
+    int width = widthOpened;
+    int height = heightOpened;
     ct->Init();
     Rectangle(width + 2, height + 2).Draw(x - 1, y - 1, Color::BACK);
     Rectangle(width, height).Draw(x, y, ColorFrame());
-    Region(width - 2, height / 2).Fill(x + 1, y + 1, ColorTitleBackground());
+    Region(width - 2, height / 2 - 2).Fill(x + 1, y + 1, ColorTitleBackground());
     HLine(width).Draw(x, y + Height() / 2 + 2, ColorFrame());
     Text(Title().CString()).DrawInCenterRect(x +  1, y - 1, width, Height() / 2 + 2, ColorTitleDraw());
     DrawValue(x + 1, y + 14);
@@ -78,8 +85,8 @@ void GovernorColor::DrawValue(int x, int y)
     ct->Init();
     int16 vals[4] = {(int16)(ct->brightness * 100.0F), (int16)blue, (int16)green, (int16)red};
 
-    Region(123, 12).Fill(x, y, Color::BACK);
-    x += 92;
+    Region(widthOpened - 2, 12).Fill(x, y, Color::BACK);
+    x += 98;
 
     for (int i = 0; i < 4; i++)
     {
@@ -88,7 +95,7 @@ void GovernorColor::DrawValue(int x, int y)
         Region(29, 10).Fill(x - 1, y + 1, colorBack);
         String(texts[i]).Draw(x, y + 2, colorDraw);
         Integer(vals[i]).ToString(false, 1).Draw(x + 14, y + 2);
-        x -= 30;
+        x -= 32;
     }
 }
 

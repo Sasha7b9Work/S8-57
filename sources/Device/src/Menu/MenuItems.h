@@ -376,6 +376,8 @@ private:
     void DrawOpened(int x, int y);
     void DrawClosed(int x, int y);
     void DrawValue(int x, int y);
+    static const int widthOpened = 129;
+    static const int heightOpened = 27;
 };
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// Time ///
