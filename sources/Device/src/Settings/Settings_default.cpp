@@ -32,7 +32,6 @@ const Settings Settings::defaultSettings =
     50,                                                         // disp_brightnessGrid;      
     Display::LinkingRShift::Position,                           // disp_linkingRShift;       
     100,                                                        // disp_brightness;          
-    5,                                                          // disp_timeMessages;        
     Menu::AutoHide::None,                                       // disp_menuAutoHide;
     370,                                                        // disp_shiftInMemory;
     Chan::A,                                                    // disp_lastAffectedChannel;

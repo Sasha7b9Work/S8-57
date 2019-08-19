@@ -37,7 +37,7 @@
 #define NUM_AVE_MAX                 256
 #define IN_AVERAGING_MODE           (ENUM_AVE > Display::ENumAverage::_1 && (!IN_P2P_MODE))
 
-#define TIME_MESSAGES               (set.disp_timeMessages)
+#define TIME_MESSAGES               5
 
 #define ENUM_SIGNALS_IN_SEC         (set.disp_ENumSignalsInSec)
 

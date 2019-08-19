@@ -61,7 +61,6 @@ public:
     // Меню ДИСПЛЕЙ
                                                                 ///< вычисляется от первого байта, следующего за этим полем
     Display::ModeDrawSignal::E      disp_modeDrawSignal;
-    //Display::ThicknessSignal::E     disp_thickness;             ///< Толщина линии, которой рисуется сигнал
     Display::Background::E          disp_background;            ///< Цвет фона.
     Display::ENumMinMax::E          disp_ENumMinMax;            ///< Перечисление количества измерений для определения минимумов и масимумов.
     uint8                           not_using0;
@@ -74,7 +73,6 @@ public:
     int                             disp_brightnessGrid;        ///< Яркость сетки от 0 до 100.
     Display::LinkingRShift::E       disp_linkingRShift;         ///< Тип привязки к смещению по вертикали.
     int16                           disp_brightness;            ///< Яркость дисплея.
-    int16                           disp_timeMessages;          ///< Время в секундах, на которое сообщение остаётся на экрне.
     Menu::AutoHide::E               disp_menuAutoHide;          ///< Через сколько времени после последнего нажатия клавиши прятать меню.
     int16                           disp_shiftInMemory;         ///< \brief Показывает смещение левого края стеки относительно нулевого байта памяти в 
                                                                 ///< байтах. Т.е. для пикового детектора будет в два раза больше количества точек на экране.
