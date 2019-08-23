@@ -101,10 +101,6 @@ void Item::KeyRelease() const
     {
         ((Governor *)this)->KeyRelease();
     }
-    else if (IS_TIME(this))
-    {
-        ((TimeItem *)this)->KeyRelease();
-    }
     else if (IS_GOVERNOR_COLOR(this))
     {
         ((GovernorColor *)this)->KeyRelease();
@@ -132,10 +128,6 @@ void Item::KeyAutoRelease() const
     if (IS_BUTTON(this))
     {
         ((Button *)this)->KeyAutoRelease();
-    }
-    else if (IS_TIME(this))
-    {
-        ((TimeItem *)this)->KeyAutoRelease();
     }
     else if (IS_GRAPH_BUTTON(this))
     {
@@ -963,87 +955,12 @@ void GovernorColor::KeyRelease() const
 }
 
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void TimeItem::KeyRelease() const
-{
-    if (!IsOpened())
-    {
-        SetCurrent(true);
-        SetOpened();
-        Open(true);
-    }
-    else
-    {
-        SelectNextPosition();
-    }
-}
+//void TimeItem::SetOpened() const
+//{
+//    PackedTime time = Hardware::Clock::GetTime();
+//}
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void TimeItem::KeyAutoRelease() const
-{
-    if (!IsCurrentItem())
-    {
-        SetCurrent(true);
-    }
-    TimeItem *time = (TimeItem *)this;
-    if (IsOpened() && (*time->curField == iSET))
-    {
-        time->SetNewTime();
-    }
-    Open(!IsOpened());
-    time->SetOpened();
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void TimeItem::SetOpened() const
-{
-    PackedTime time = Hardware::Clock::GetTime();
-    *(seconds) = (int8)time.seconds;
-    *(minutes) = (int8)time.minutes;
-    *(hours) = (int8)time.hours;
-    *(day) = (int8)time.day;
-    *(month) = (int8)time.month;
-    *(year) = (int8)time.year;
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void TimeItem::SelectNextPosition() const
-{
-    Math::CircleIncrease<int8>(curField, 0, 7);
-    Color::ResetFlash();
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void TimeItem::SetNewTime()
-{
-    Hardware::Clock::SetTime(*day, *month, *year, *hours, *minutes, *seconds);
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-char TimeItem::GetSymbol()
-{
-    int8 values[7] =
-    {
-        0,
-        *day,
-        *month,
-        *year,
-        *hours,
-        *minutes,
-        *seconds
-    };
-
-    int8 value = values[*curField];
-
-#define NUM_POSITIONS 4
-
-    static const char chars[NUM_POSITIONS] =
-    {
-        SYMBOL_GOVERNOR_SHIFT_0,
-        SYMBOL_GOVERNOR_SHIFT_1,
-        SYMBOL_GOVERNOR_SHIFT_2,
-        SYMBOL_GOVERNOR_SHIFT_3
-    };
-
-    return chars[value % NUM_POSITIONS];
-}
+//void TimeItem::SetNewTime()
+//{
+//    Hardware::Clock::SetTime(*day, *month, *year, *hours, *minutes, *seconds);
+//}

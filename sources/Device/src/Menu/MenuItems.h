@@ -380,39 +380,6 @@ private:
     static const int heightOpened = 27;
 };
 
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// Time ///
-
-#define iEXIT   0
-#define iDAY    1
-#define iMONTH  2
-#define iYEAR   3
-#define iHOURS  4
-#define iMIN    5
-#define iSEC    6
-#define iSET    7
-
-/// ”станавливает и показывает врем€.
-class TimeItem : public Item
-{
-public:
-    int8 *curField;   ///< “екущее поле установки. 0 - выход, 1 - сек, 2 - мин, 3 - часы, 4 - день, 5 - мес€ц, 6 - год, 7 - установить.
-    int8 *hours;
-    int8 *minutes;
-    int8 *seconds;
-    int8 *month;
-    int8 *day;
-    int8 *year;
-    void SetOpened() const;
-    void SetNewTime();
-    void SelectNextPosition() const;
-    void Draw(int x, int y, bool opened);
-    void DrawClosed(int x, int y);
-    void DrawOpened(int x, int y);
-    char GetSymbol();
-    void KeyRelease() const;
-    void KeyAutoRelease() const;
-};
-
 typedef void * pVOID;
 #define MAX_NUM_ITEMS_IN_PAGE 15
 typedef pVOID arrayItems[MAX_NUM_ITEMS_IN_PAGE];

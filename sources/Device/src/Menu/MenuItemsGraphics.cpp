@@ -363,10 +363,6 @@ void Page::Draw(int x, int y, bool opened) const
             {
                 ((GovernorColor *)item)->Draw(x, y, true);
             }
-            else if (IS_TIME(item))
-            {
-                ((TimeItem *)item)->Draw(x, y, true);
-            }
             else
             {
                 // остальные контролы не обрабатываем
@@ -455,10 +451,6 @@ void Item::Draw(int x, int y, bool opened) const
     {
         ((Governor *)this)->Draw(x, y, opened);
     }
-    else if (IS_TIME(this))
-    {
-        ((TimeItem *)this)->Draw(x, y, opened);
-    }
     else if (IS_GOVERNOR_COLOR(this))
     {
         ((GovernorColor *)this)->Draw(x, y, opened);
@@ -470,109 +462,6 @@ void Item::Draw(int x, int y, bool opened) const
     else
     {
         // остальные типы контролов не обрабатываем
-    }
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void TimeItem::Draw(int x, int y, bool opened)
-{
-    if (opened)
-    {
-        DrawOpened(x, y);
-    }
-    else
-    {
-        DrawClosed(x, y);
-    }
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void TimeItem::DrawClosed(int x, int y)
-{
-    DrawCommonHiPart(this, x, y, false);
-
-    Region(Width() + 2, Value::HEIGHT + 3).Fill(x + 1, y + 17, Color::MenuItemField());
-
-    int deltaField = 10;
-    int deltaSeparator = 2;
-    int startX = 3;
-    y += 21;
-    PackedTime time = Clock::GetTime();
-    Integer((int)time.hours).ToString(false, 2).Draw(x + startX, y, Color::BLACK);
-    String(':').Draw(x + startX + deltaField, y);
-    Integer((int)time.minutes).ToString(false, 2).Draw(x + startX + deltaField + deltaSeparator, y);
-    String(':').Draw(x + startX + 2 * deltaField + deltaSeparator, y);
-    Integer((int)time.seconds).ToString(false, 2).Draw(x + startX + 2 * deltaField + 2 * deltaSeparator, y);
-
-    startX = 44;
-    Integer((int)time.day).ToString(false, 2).Draw(x + startX, y);
-    String(':').Draw(x + startX + deltaField, y);
-    Integer((int)time.month).ToString(false, 2).Draw(x + startX + deltaField + deltaSeparator, y);
-    String(':').Draw(x + startX + 2 * deltaField + deltaSeparator, y);
-    Integer((int)time.year).ToString(false, 2).Draw(x + startX + 2 * deltaField + 2 * deltaSeparator, y);
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void TimeItem::DrawOpened(int x, int y)
-{
-    int width = Width() + 3;
-    int height = 61;
-    Rectangle(width + 2, height + 3).Draw(x - 1, y - 1, Color::BACK);
-    DrawCommonHiPart(this, x - 1, y - 1, false);
-
-    Rectangle(width + 1, height + 1).Draw(x - 1, y, Color::MenuTitleText());
-
-    HLine(Width()).Draw(x, y + MOI_HEIGHT_TITLE - 1);
-
-    Region(Width() - 1, height - MOI_HEIGHT_TITLE).Fill(x, y + MOI_HEIGHT_TITLE, Color::BLACK);
-
-    int y0 = 21;
-    int y1 = 31;
-
-    typedef struct
-    {
-        int x;
-        int y;
-        int width;
-    } StructPaint;
-
-    int y2 = 41;
-    int y3 = 51;
-    int dX = 13;
-    int wS = 10;
-    int x0 = 41;
-    StructPaint strPaint[8] =
-    {
-        {3,             y3, 60},    // Ќе сохран€ть
-        {x0,            y0, wS},    // день
-        {x0 + dX,       y0, wS},    // мес€ц
-        {x0 + 2 * dX,   y0, wS},    // год
-        {x0,            y1, wS},    // часы
-        {x0 + dX,       y1, wS},    // мин
-        {x0 + 2 * dX,   y1, wS},    // сек
-        {3,             y2, 46}     // —охранить
-    };
-
-    char strI[8][20];
-    std::strcpy(strI[iEXIT],  "Ќе сохран€ть");
-    std::strcpy(strI[iDAY],   Integer(*day).ToString(false, 2).CString());
-    std::strcpy(strI[iMONTH], Integer(*month).ToString(false, 2).CString());
-    std::strcpy(strI[iYEAR],  Integer(*year).ToString(false, 2).CString());
-    std::strcpy(strI[iHOURS], Integer(*hours).ToString(false, 2).CString());
-    std::strcpy(strI[iMIN],   Integer(*minutes).ToString(false, 2).CString());
-    std::strcpy(strI[iSEC],   Integer(*seconds).ToString(false, 2).CString());
-    std::strcpy(strI[iSET],   "—охранить");
-
-    String("д м г - ").Draw(x + 3, y + y0, Color::WHITE);
-    String("ч м с - ").Draw(x + 3, y + y1);
-
-    for (int i = 0; i < 8; i++)
-    {
-        if (*curField == i)
-        {
-            Region(strPaint[i].width, 8).Fill(x + strPaint[i].x - 1, y + strPaint[i].y, Color::FLASH_10);
-        }
-        String(strI[i]).Draw(x + strPaint[i].x, y + strPaint[i].y, *curField == i ? Color::FLASH_01 : Color::WHITE);
     }
 }
 
@@ -593,20 +482,6 @@ static void DrawCommonHiPart(Item *item, int x, int y, bool opened)
     if (opened)
     {
         HLine(width).Draw(x + 1, y + Item::Value::HEIGHT - 1, Color::FILL);
-    }
-    
-    if(item->IsCurrentItem())
-    {
-        if (IS_TIME(item))
-        {
-            TimeItem* time = (TimeItem*)item;
-            if ((Menu::OpenedItem() == item) && (*time->curField != iEXIT) && (*time->curField != iSET))
-            {
-                char symbol = time->GetSymbol();
-    
-                Char(symbol).Draw4SymbolsInRect(x + item->Width() - 13, y + (item->IsOpened() ? 0 : 13), colorText);
-            }
-        }
     }
 }
 

@@ -95,24 +95,9 @@ static const ButtonDef name = { Item::Type::Button, 0, Page::Name::NoPage, keepe
     funcPress, funcDraw };
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-#define DEF_TIME(name, title, hint, keeper, funcActive, cur, h, mi, s, mo, d, y)                                                                                                            \
-static const TimeBase name = { Item::Type::Time, 0, false, Page::Name::NoPage, keeper, funcActive, {title, hint},                                                                           \
-    &cur, &h, &mi, &s, &mo, &d, &y };
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #define DEF_GOVERNOR(name, title, hint, cell, min, max, keeper, funcActive, funcChanged, funcBeforeDraw)                                                                                    \
 static const GovernorDef name = {Item::Type::Governor, 0, Page::Name::NoPage, keeper, funcActive, {title, hint},                                                                            \
     &(cell), min, max, funcChanged, funcBeforeDraw};
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-#define DEF_IP_ADDRESS(name, titleRU, titleEN, hintRU, hintEN, ip0, ip1, ip2, ip3, port, keeper, funcActive, funcOfChanged)                                                                 \
-static const IPaddressBase name = {Item_IP, 0, false, Page::Name::NoPage, keeper, funcActive, {titleRU, titleEN, hintRU, hintEN},                                                           \
-    &ip0, &ip1, &ip2, &ip3, funcOfChanged, port};
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-#define DEF_MAC_ADDRESS(name, titleRU, titleEN, hintRU, hintEN, mac0, mac1, mac2, mac3, mac4, mac5, keeper, funcActive, funcOfChanged)                                                      \
-static const MACaddressBase name = {Item_MAC, 0, false, Page::Name::NoPage, keeper, funcActive, {titleRU, titleEN, hintRU, hintEN},                                                         \
-    &mac0, &mac1, &mac2, &mac3, &mac4, &mac5, funcOfChanged};
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #define DEF_GOVERNOR_COLOR(name, title, hint, colorType, keeper)                                                                                                                            \
