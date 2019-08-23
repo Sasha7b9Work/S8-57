@@ -102,6 +102,11 @@ void GovernorColor::DrawValue(int x, int y)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Governor::Draw(int x, int y, bool opened)
 {
+    if (!IsActive())
+    {
+        return;
+    }
+
     if (funcBeforeDraw)
     {
         funcBeforeDraw();
@@ -250,29 +255,32 @@ void Choice::DrawOpened(int x, int y)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Choice::DrawClosed(int x, int y)
 {
-    Region(Width() - 3, Value::HEIGHT - 3).Fill(x + 1, y + Value::HEIGHT, ColorMenuField(this));
-
-    int deltaY = (int)Step();
-    Color colorText = Color::BLACK;
-    colorText.SetAsCurrent();
-    if (deltaY == 0)
+    if (IsActive())
     {
-        NameCurrentSubItem().Draw(x + 4, y + Value::HEIGHT + 1);
-    }
-    else
-    {
-        Color::BACK.SetAsCurrent();
-		Text(NameCurrentSubItem()).DrawWithLimitation(x + 4, y + Value::HEIGHT - deltaY + 1, x, y + 11, Width(), Value::HEIGHT - 1);
+        Region(Width() - 3, Value::HEIGHT - 3).Fill(x + 1, y + Value::HEIGHT, ColorMenuField(this));
 
-        HLine(Item::Width() + 1).Draw(x + 1, y + (deltaY > 0 ? 24 : 19) - deltaY);
+        int deltaY = (int)Step();
+        Color colorText = Color::BLACK;
+        colorText.SetAsCurrent();
+        if (deltaY == 0)
+        {
+            NameCurrentSubItem().Draw(x + 4, y + Value::HEIGHT + 1);
+        }
+        else
+        {
+            Color::BACK.SetAsCurrent();
+            Text(NameCurrentSubItem()).DrawWithLimitation(x + 4, y + Value::HEIGHT - deltaY + 1, x, y + 11, Width(), Value::HEIGHT - 1);
 
-		Text(deltaY > 0 ? NameNextSubItem() : NamePrevSubItem()).DrawWithLimitation(x + 4, y + (deltaY > 0 ? (Value::HEIGHT + 13) : 9) - deltaY, x, y + 11,
-            Item::Width(), Value::HEIGHT - 1);
-    }
-  
-    if (funcForDraw)
-    {
-        funcForDraw(x, y);
+            HLine(Item::Width() + 1).Draw(x + 1, y + (deltaY > 0 ? 24 : 19) - deltaY);
+
+            Text(deltaY > 0 ? NameNextSubItem() : NamePrevSubItem()).DrawWithLimitation(x + 4, y + (deltaY > 0 ? (Value::HEIGHT + 13) : 9) - deltaY, x, y + 11,
+                Item::Width(), Value::HEIGHT - 1);
+        }
+
+        if (funcForDraw)
+        {
+            funcForDraw(x, y);
+        }
     }
     
     DrawCommonHiPart(this, x, y, false);
@@ -281,6 +289,11 @@ void Choice::DrawClosed(int x, int y)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Button::Draw(int x, int y) const
 {
+    if (!IsActive())
+    {
+        return;
+    }
+
     Region(Width() - 5, Height() - 4).Fill(x + 2, y + 3, IsPressed() ? Color::FILL : Color::BACK);
 
     Text(Title().CString()).DrawInCenterRect(x + 2, y, Width(), Height(), IsPressed() ? Color::BACK : Color::FILL);
@@ -294,6 +307,11 @@ void Button::Draw(int x, int y) const
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void GraphButton::Draw(int x, int y) const
 {
+    if (!IsActive())
+    {
+        return;
+    }
+
     x += 2;
     y += 3;
     
@@ -319,6 +337,11 @@ void GraphButton::Draw(int x, int y) const
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Page::Draw(int x, int y, bool opened) const
 {
+    if (!IsActive())
+    {
+        return;
+    }
+
     if(opened)
     {
         if (CurrentItemIsOpened())
@@ -406,10 +429,7 @@ void Page::DrawItems(int x, int y) const
         
         if (item)
         {
-            if (item->IsActive())
-            {
-                item->Draw(x, y, false);
-            }
+            item->Draw(x, y, false);
         }
 
         x += Width(i) - 1;
