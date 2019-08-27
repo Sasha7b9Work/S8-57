@@ -10,8 +10,8 @@ inline bool EmptyFuncfBKE(KeyEvent) { return false; }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #define DEF_BUTTON(name, title, hint, keeper, funcActive, funcPress, funcDraw)                                                                                                              \
-static const char *name##titleHint[] = {title, hint};                                                                                                                                       \
-static const Button name(name##titleHint, keeper, funcActive, funcPress, funcDraw);
+static const pString th##name[] = {title, hint};                                                                                                                                       \
+static const Button name(th##name, keeper, funcActive, funcPress, funcDraw);
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #define DEF_GOVERNOR(name, title, hint, cell, min, max, keeper, funcActive, funcChanged, funcBeforeDraw)                                                                                    \
@@ -101,9 +101,9 @@ static const GraphButton name(th##name, h##name, 5, keeper, funcActive, funcPres
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #define DEF_CHOICE_2(name, title, hint, name1, name2, cell, keeper, funcActive, funcChanged, funcDraw)                                                                                      \
-static const pString name##names[] = {name1, name2};                                                                                                                                        \
+static const pString n##name[] = {name1, name2};                                                                                                                                        \
 static const char * const th##name[] = {title, hint};                                                                                                                                       \
-static const Choice name(&th##name[0], name##names, 2, (int8 *)&cell, keeper, funcActive, funcChanged, funcDraw);
+static const Choice name(&th##name[0], n##name, 2, (int8 *)&cell, keeper, funcActive, funcChanged, funcDraw);
 
 #define DEF_CHOICE_3(name, title, hint, name1, name2, name3, cell, keeper, funcActive, funcChanged, funcDraw)                                                                               \
 static const pString n##name[] = {name1, name2, name3};                                                                                                                                     \
@@ -129,10 +129,6 @@ static const Choice name(th##name, n##name, 6, (int8 *)&cell, keeper, funcActive
 static pString n##name[] = {name1, name2, name3, name4, name5, name6, name7};                                                                                                               \
 static const char *th##name[] = {title, hint};                                                                                                                                              \
 static const Choice name(th##name, n##name, 7, (int8 *)&cell, keeper, funcActive, funcChanged, funcDraw);
-
-#define DEF_CHOICE_8(name, title, hint, name1, name2, name3, name4, name5,  name6, name7, name8, cell, keeper, funcActive, funcChanged, funcDraw)                                           \
-static pString hints##name[] = {name1, name2, name3, name4, name5, name6, name7, name8};                                                                                                    \
-static const ChoiceDef name = {Item::Type::Choice, 8, false, Page::Name::NoPage, keeper, funcActive, {title, hint},(int8 *)&cell, hints##name, funcChanged, funcDraw};
 
 #define DEF_CHOICE_9(name, title, hint, name1, name2, name3, name4, name5, name6, name7, name8, name9, cell, keeper, funcActive, funcChanged, funcDraw)                                     \
 static pString n##name[] = {name1, name2, name3, name4, name5, name6, name7, name8, name9};                                                                                                 \
