@@ -351,22 +351,7 @@ void Page::Draw(int x, int y, bool opened) const
             x = item->PositionOnScreenX();
             y = Menu::Y0() - item->HeightOpened() + Item::Height() + 1;
 
-            if (IS_CHOICE(item))
-            {
-                ((Choice *)item)->Draw(x, y, true);
-            }
-            else if (IS_GOVERNOR(item))
-            {
-                ((Governor *)item)->Draw(x, y, true);
-            }
-            else if (IS_GOVERNOR_COLOR(item))
-            {
-                ((GovernorColor *)item)->Draw(x, y, true);
-            }
-            else
-            {
-                // остальные контролы не обрабатываем
-            }
+            item->Draw(x, y, true);
         }
         else
         {

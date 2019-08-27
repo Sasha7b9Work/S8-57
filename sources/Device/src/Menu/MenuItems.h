@@ -14,7 +14,6 @@
 
 #define IS_PAGE(item)           (item->type == Item::Type::Page)
 #define NOT_PAGE(item)          (item->type != Item::Type::Page)
-#define IS_CHOICE(item)         (item->type == Item::Type::Choice)
 #define IS_GOVERNOR(item)       (item->type == Item::Type::Governor)
 #define NOT_GOVERNOR(item)      (item->type != Item::Type::Governor)
 #define IS_GOVERNOR_COLOR(item) (item->type == Item::Type::GovernorColor)
