@@ -78,7 +78,7 @@ public:
     /// Возвращает true, если контрол находится в активном состоянии (реагирует на органы управления)
     bool IsActive() const { if (funcOfActive) { return funcOfActive(); } return true; };
 
-    void Draw(int x, int y, bool opened) const;
+    virtual void Draw(int /*x*/, int /*y*/, bool /*opened*/) const {};
 
     bool IsCurrentItem() const;
     /// Возвращает адрес родителя
@@ -148,7 +148,7 @@ public:
     /// Изменить номер текущей подстраницы на значение delta
     void ChangeSubPage(int delta);
     /// Нарисовать в заданных координатах
-    void Draw(int x, int y, bool opened) const;
+    virtual void Draw(int x, int y, bool opened) const;
     /// Обработка события кнопки
     bool ProcessKey(KeyEvent event);
 
@@ -262,7 +262,7 @@ public:
         Item(Item::Type::Button, titleHint, keeper, 0, funcActive),
         funcOnPress(funcPress), funcForDraw(funcDraw)
     {};
-    void Draw(int x, int y) const;
+    virtual void Draw(int x, int y, bool opened) const;
     virtual void KeyRelease() const;
     void KeyAutoRelease() const;
 };
@@ -287,7 +287,7 @@ public:
         Item(Item::Type::GraphButton, titleHint, keeper, 0, funcActive),
         funcOnPress(funcPress), funcForDraw(funcDraw), hintUGO(_hintUGO), numHints(num) {};
 
-    void Draw(int x, int y) const;
+    virtual void Draw(int x, int y, bool opened) const;
     void DrawHints(int x, int y, int width) const;
     virtual void KeyRelease() const;
 };
@@ -309,11 +309,11 @@ public:
     /// Обработка события кнопки
     bool ProcessKey(KeyEvent event);
     /// Возвращает следующее большее значение, которое может принять governor.
-    int16 NextValue();
+    int16 NextValue() const;
     /// Возвращает следующее меньшее значение, которое может принять governor.
-    int16 PrevValue();
+    int16 PrevValue() const;
     /// Рассчитывате следующий кадр анимации.
-    float Step();
+    float Step() const;
     /// Изменяет значение в текущей позиции при раскрытом элементе.
     void ChangeValue(int16 delta);
     /// При открытом элементе переставляет курсор на следующую позицию.
@@ -321,25 +321,25 @@ public:
     /// При открытом элементе переставляет курсор не предыдущую позицию
     void PrevPosition();
 
-    void Draw(int x, int y, bool opened);
+    virtual void Draw(int x, int y, bool opened) const;
 
-    void DrawOpened(int x, int y);
+    void DrawOpened(int x, int y) const;
 
-    void DrawClosed(int x, int y);
+    void DrawClosed(int x, int y) const;
 
-    void DrawValue(int x, int y);
+    void DrawValue(int x, int y) const;
 
-    char GetSymbol();
+    char GetSymbol() const;
 
-    int16 GetValue();
+    int16 GetValue() const;
 
-    void SetValue(int16 v);
+    void SetValue(int16 v) const;
 
     virtual void KeyRelease() const;
 
 private:
 
-    void DrawLowPart(int x, int y);
+    void DrawLowPart(int x, int y) const;
     /// Возвращает число знакомест в поле для ввода элемента governor. Зависит от максимального значения, которое может принимать governor.
     uint  NumDigits() const;
 
@@ -361,7 +361,7 @@ public:
     /// Запускает процесс изменения значения на delta
     void  StartChange(int delta) const;
     /// Рассчитывает следующий кадр анимации.
-    float Step();
+    float Step() const;
     /// Изменяет значение choice в зависимости от величины и знака delta.
     void  ChangeIndex(int delta) const;
     /// Возвращает количество вариантов выбора в элементе по адресу choice
@@ -369,19 +369,19 @@ public:
 
     bool ProcessKey(KeyEvent event);
 
-    void  Draw(int x, int y, bool opened);
+    virtual void  Draw(int x, int y, bool opened) const;
 
-    void  DrawOpened(int x, int y);
+    void  DrawOpened(int x, int y) const;
 
-    void  DrawClosed(int x, int y);
+    void  DrawClosed(int x, int y) const;
     /// Возвращает имя текущего варианта выбора элемента choice, как оно записано в исходном коде программы
     String NameCurrentSubItem() const;
     /// Возвращает имя следующего варианта выбора элемента choice, как оно записано в исходном коде программы
-    const char *NameNextSubItem();
+    const char *NameNextSubItem() const;
 
-    const char *NamePrevSubItem();
+    const char *NamePrevSubItem() const;
     /// Возвращает имя варианта выбора элемента choice в позиции i как оно записано в исходном коде программы
-    String NameSubItem(int i);
+    String NameSubItem(int i) const;
     /// Возвращает цвет, которым нужно заполнять участок выбора
     static Color ColorMenuField(const Choice *choice);
 
@@ -401,12 +401,12 @@ public:
     GovernorColor(const char * const * titleHint, ColorType *_ct, const Page * const *keeper, pFuncBV funcActive, pFuncVV funcChanged) :
         Item(Item::Type::GovernorColor, titleHint, keeper, 0, funcActive),
         ct(_ct), funcOnChanged(funcChanged) {};
-    void Draw(int x, int y, bool opened);
+    virtual void Draw(int x, int y, bool opened) const;
     virtual void KeyRelease() const;
 private:
-    void DrawOpened(int x, int y);
-    void DrawClosed(int x, int y);
-    void DrawValue(int x, int y);
+    void DrawOpened(int x, int y) const;
+    void DrawClosed(int x, int y) const;
+    void DrawValue(int x, int y) const;
     static const int widthOpened = 129;
     static const int heightOpened = 27;
 };

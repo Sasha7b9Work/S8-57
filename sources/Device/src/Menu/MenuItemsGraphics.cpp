@@ -24,14 +24,14 @@ using Utils::Stack;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-static void DrawCommonHiPart(Item *item, int x, int y, bool opened);
+static void DrawCommonHiPart(const Item *item, int x, int y, bool opened);
 /// Нарисовать значение регулятора в режиме поразрядной регулировки
 /// setPosFromEnd - подсвеченный (активный) разряд, начиная с конца. Если selPosFromEnd == -1, подсвечивать не нужно
 static void DrawValueWithSelectedPosition(int x, int y, int value, uint numDigits, int selPosFromEnd, bool fillNull);
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////q
-void GovernorColor::Draw(int x, int y, bool opened)
+void GovernorColor::Draw(int x, int y, bool opened) const
 {
     if (opened)
     {
@@ -51,7 +51,7 @@ void GovernorColor::Draw(int x, int y, bool opened)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void GovernorColor::DrawOpened(int x, int y)
+void GovernorColor::DrawOpened(int x, int y) const
 {
     int width = widthOpened;
     int height = heightOpened;
@@ -65,7 +65,7 @@ void GovernorColor::DrawOpened(int x, int y)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void GovernorColor::DrawClosed(int x, int y)
+void GovernorColor::DrawClosed(int x, int y) const
 {
     ct->Init();
     DrawCommonHiPart(this, x, y, false);
@@ -73,7 +73,7 @@ void GovernorColor::DrawClosed(int x, int y)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void GovernorColor::DrawValue(int x, int y)
+void GovernorColor::DrawValue(int x, int y) const
 {
     int8 field = ct->currentField;
     const pString texts[4] = {"Яр", "Сн", "Зл", "Кр"};
@@ -100,7 +100,7 @@ void GovernorColor::DrawValue(int x, int y)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Governor::Draw(int x, int y, bool opened)
+void Governor::Draw(int x, int y, bool opened) const
 {
     if (!IsActive())
     {
@@ -122,21 +122,21 @@ void Governor::Draw(int x, int y, bool opened)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Governor::DrawOpened(int x, int y)
+void Governor::DrawOpened(int x, int y) const
 {
     DrawCommonHiPart(this, x, y, true);
     DrawLowPart(x, y + 13);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Governor::DrawClosed(int x, int y)
+void Governor::DrawClosed(int x, int y) const
 {
     DrawLowPart(x, y + 14);
     DrawCommonHiPart(this, x, y, false);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Governor::DrawValue(int x, int y)
+void Governor::DrawValue(int x, int y) const
 {
     int startX = x + 40;
     int signGovernor = (GetValue() < 0) ? -1 : 1;
@@ -169,7 +169,7 @@ void Governor::DrawValue(int x, int y)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Governor::DrawLowPart(int x, int y)
+void Governor::DrawLowPart(int x, int y) const
 {
     Color colorTextDown = Color::BLACK;
 
@@ -218,7 +218,7 @@ void Governor::DrawLowPart(int x, int y)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Choice::Draw(int x, int y, bool opened)
+void Choice::Draw(int x, int y, bool opened) const
 {
     if (opened)
     {
@@ -231,7 +231,7 @@ void Choice::Draw(int x, int y, bool opened)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Choice::DrawOpened(int x, int y)
+void Choice::DrawOpened(int x, int y) const
 {
     int height = HeightOpened();
     
@@ -253,7 +253,7 @@ void Choice::DrawOpened(int x, int y)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Choice::DrawClosed(int x, int y)
+void Choice::DrawClosed(int x, int y) const
 {
     if (IsActive())
     {
@@ -287,7 +287,7 @@ void Choice::DrawClosed(int x, int y)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Button::Draw(int x, int y) const
+void Button::Draw(int x, int y, bool) const
 {
     if (!IsActive())
     {
@@ -305,7 +305,7 @@ void Button::Draw(int x, int y) const
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void GraphButton::Draw(int x, int y) const
+void GraphButton::Draw(int x, int y, bool) const
 {
     if (!IsActive())
     {
@@ -431,41 +431,9 @@ void Page::DrawItems(int x, int y) const
     }
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Item::Draw(int x, int y, bool opened) const
-{
-    if (IS_CHOICE(this))
-    {
-        ((Choice *)this)->Draw(x, y, opened);
-    }
-    else if (IS_BUTTON(this))
-    {
-        ((Button *)this)->Draw(x, y);
-    }
-    else if (IS_PAGE(this))
-    {
-        ((Page *)this)->Draw(x, y, opened);
-    }
-    else if (IS_GOVERNOR(this))
-    {
-        ((Governor *)this)->Draw(x, y, opened);
-    }
-    else if (IS_GOVERNOR_COLOR(this))
-    {
-        ((GovernorColor *)this)->Draw(x, y, opened);
-    }
-    else if (IS_GRAPH_BUTTON(this))
-    {
-        ((GraphButton *)this)->Draw(x, y);
-    }
-    else
-    {
-        // остальные типы контролов не обрабатываем
-    }
-}
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-static void DrawCommonHiPart(Item *item, int x, int y, bool opened)
+static void DrawCommonHiPart(const Item *item, int x, int y, bool opened)
 {
     bool pressed = item->IsPressed();
 
