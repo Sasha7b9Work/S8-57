@@ -283,9 +283,8 @@ public:
     int16   maxValue;       ///< Максимальное значение.
     pFuncVV funcOfChanged;  ///< Функция, которую нужно вызывать после того, как значение регулятора изменилось.
     pFuncVV funcBeforeDraw; ///< Функция, которая вызывается перед отрисовкой
-    Governor(const char * const * titleHint, int16 *_cell, int16 min, int16 max, const Page * const *keeper, pFuncBV funcActive, pFuncVV funcChanged, pFuncVV funcDraw) :
-        Item(Item::Type::Governor, titleHint, keeper, 0, funcActive),
-        cell(_cell), minValue(min), maxValue(max), funcOfChanged(funcChanged), funcBeforeDraw(funcDraw) {};
+    Governor(const char * const * titleHint, int16 *cell, int16 min, int16 max, const Page * const *keeper, pFuncBV funcActive, pFuncVV funcChanged, pFuncVV funcDraw);
+
     /// Возвращает следующее большее значение, которое может принять governor.
     int16 NextValue() const;
     /// Возвращает следующее меньшее значение, которое может принять governor.

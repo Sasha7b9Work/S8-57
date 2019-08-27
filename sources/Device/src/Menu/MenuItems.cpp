@@ -505,6 +505,22 @@ void GraphButton::KeyAutoRelease() const
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+Governor::Governor(const char * const * titleHint, int16 *_cell, int16 min, int16 max, const Page * const *keeper, pFuncBV funcActive, pFuncVV funcChanged, pFuncVV funcDraw) :
+    Item(Item::Type::Governor, titleHint, keeper, 0, funcActive),
+    cell(_cell), minValue(min), maxValue(max), funcOfChanged(funcChanged), funcBeforeDraw(funcDraw)
+{
+    if (funcOfChanged == nullptr)
+    {
+        funcOfChanged = EmptyFuncVV;
+    }
+
+    if (funcBeforeDraw == nullptr)
+    {
+        funcBeforeDraw = EmptyFuncVV;
+    }
+};
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Governor::KeyRelease() const
 {
     Item::KeyRelease();
@@ -578,10 +594,7 @@ float Governor::Step() const
             {
                 tsGovernor.dir = NONE;
                 SetValue(PrevValue());
-                if (funcOfChanged)
-                {
-                    funcOfChanged();
-                }
+                funcOfChanged();
                 delta = 0.0F;
                 tsGovernor.address = 0;
             }
@@ -596,10 +609,7 @@ float Governor::Step() const
             {
                 tsGovernor.dir = NONE;
                 SetValue(NextValue());
-                if (funcOfChanged)
-                {
-                    funcOfChanged();
-                }
+                funcOfChanged();
                 delta = 0.0F;
                 tsGovernor.address = 0;
             }
@@ -643,10 +653,7 @@ void Governor::ChangeValue(int16 delta)
 
     if (GetValue() != oldValue)
     {
-        if (funcOfChanged)
-        {
-            funcOfChanged();
-        }
+        funcOfChanged();
         Beeper::GovernorChangedValue();
     }
 }

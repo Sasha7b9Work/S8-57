@@ -107,10 +107,8 @@ void Governor::Draw(int x, int y, bool opened) const
         return;
     }
 
-    if (funcBeforeDraw)
-    {
-        funcBeforeDraw();
-    }
+    funcBeforeDraw();
+
     if (opened)
     {
         DrawOpened(x, y);
