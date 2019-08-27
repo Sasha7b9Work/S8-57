@@ -3,7 +3,7 @@
 #include "Settings/Settings.h"
 
 
-extern const PageDef pageRecord;
+extern const Page pageRecord;
 
 const Page * const PageRecorder::PageRecord::self = (const Page *)&pageRecord;
 

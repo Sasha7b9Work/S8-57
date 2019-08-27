@@ -16,7 +16,7 @@
 
 using namespace Display::Primitives;
 
-extern const PageDef pageRAM;
+extern const Page pageRAM;
 
 const Page * const PageRAM::self = (const Page *)&pageRAM;
 

@@ -3,7 +3,7 @@
 #include "Multimeter/Multimeter.h"
 
 
-extern const PageDef pMultimeter;
+extern const Page pMultimeter;
 
 const Page * const PageDebug::PageMultimeter::self = (const Page *)&pMultimeter;
 

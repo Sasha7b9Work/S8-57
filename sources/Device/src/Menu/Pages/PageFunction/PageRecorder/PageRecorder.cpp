@@ -5,7 +5,7 @@
 #include "Device.h"
 
 
-extern const PageDef pageRecorder;
+extern const Page pageRecorder;
 
 const Page * const PageRecorder::self = (const Page *)&pageRecorder;
 

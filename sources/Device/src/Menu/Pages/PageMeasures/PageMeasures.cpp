@@ -4,7 +4,7 @@
 #include "Menu/Menu.h"
 
 
-extern const PageDef pageMeasures;
+extern const Page pageMeasures;
 
 const Page * const PageMeasures::self = (const Page *)&pageMeasures;
 

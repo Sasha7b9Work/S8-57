@@ -4,8 +4,8 @@
 #include "Device.h"
 
 
-extern const PageDef pageMultimeter;
-extern const PageDef pageCalibration;
+extern const Page pageMultimeter;
+extern const Page pageCalibration;
 
 const Page * const PageMultimeter::self = (const Page *)&pageMultimeter;
 const Page * const PageMultimeter::PageCalibration::self = (const Page *)&pageCalibration;
@@ -217,7 +217,7 @@ static void OnEnterExit_Multimeter(bool enter)
     Device::State::SetMode(enter ? Device::Mode::Multimeter : Device::Mode::Osci);
 }
 
-DEF_PAGE_5_VAR( pageMultimeter, // -V641 //-V1027 //-V641
+DEF_PAGE_5( pageMultimeter, // -V641 //-V1027 //-V641
     "МУЛЬТИМЕТР",
     "Управление прибором в режиме мультиметра",
     &cMode,

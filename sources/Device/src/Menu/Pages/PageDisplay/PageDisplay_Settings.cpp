@@ -5,7 +5,7 @@
 #include "Display/Painter.h"
 
 
-extern const PageDef pageSettings;
+extern const Page pageSettings;
 
 const Page * const PageDisplay::PageSettings::self = (const Page *)&pageSettings;
 

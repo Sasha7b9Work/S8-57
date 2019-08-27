@@ -15,7 +15,7 @@ using namespace Display::Primitives;
 using namespace Osci;
 using namespace Osci::Measurements;
 
-extern const PageDef pageTune;
+extern const Page pageTune;
 
 const Page * const PageMeasuresAuto::PageTune::self = (const Page *)&pageTune;
 

@@ -17,7 +17,7 @@
 
 using namespace Display::Primitives;
 
-extern const PageDef pageROM;
+extern const Page pageROM;
 
 const Page * const PageROM::self = (const Page *)&pageROM;
 

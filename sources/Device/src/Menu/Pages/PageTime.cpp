@@ -11,7 +11,7 @@
 
 using namespace Osci::Settings;
 
-extern const PageDef pTime;
+extern const Page pTime;
 
 const Page * const PageTime::self = (const Page *)&pTime;
 

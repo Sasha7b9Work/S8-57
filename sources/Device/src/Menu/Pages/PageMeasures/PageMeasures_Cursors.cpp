@@ -11,7 +11,7 @@
 #include <cstring>
 
 
-extern const PageDef pageCursors;
+extern const Page pageCursors;
 
 const Page * const PageMeasuresCursors::self = (const Page *)&pageCursors;
 

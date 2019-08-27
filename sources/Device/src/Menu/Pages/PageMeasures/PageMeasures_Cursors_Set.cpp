@@ -16,7 +16,7 @@ using namespace Osci::Measurements;
 using Osci::Measurements::Cursors::Cursor;
 using Osci::Measurements::Measure;
 
-extern const PageDef pageSet;
+extern const Page pageSet;
 
 const Page * const PageMeasuresCursors::PageSet::self = (const Page *)&pageSet;
 

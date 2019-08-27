@@ -5,9 +5,9 @@
 #include "Settings/SettingsNRST.h"
 
 
-extern const PageDef pageRTC;
-extern const PageDef pageRTC_Set;
-extern const PageDef pageRTC_Correction;
+extern const Page pageRTC;
+extern const Page pageRTC_Set;
+extern const Page pageRTC_Correction;
 
 const Page * const PageRTC::self = (const Page *)&pageRTC;
 const Page * const PageRTC::PageCorrect::self = (const Page *)&pageRTC_Correction;

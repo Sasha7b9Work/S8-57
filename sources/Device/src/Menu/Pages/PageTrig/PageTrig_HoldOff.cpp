@@ -6,7 +6,7 @@
 #include "Settings/Settings.h"
 
 
-extern const PageDef pageHoldOff;
+extern const Page pageHoldOff;
 
 const Page * const PageTrig::PageHoldOff::self = (const Page *)&pageHoldOff;
 

@@ -9,7 +9,7 @@
 using namespace Osci::Settings;
 
 
-extern const PageDef pageAccum;
+extern const Page pageAccum;
 
 const Page * const PageDisplay::PageAccumulation::self = (const Page *)&pageAccum;
 

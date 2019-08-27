@@ -3,7 +3,7 @@
 #include "Menu/Pages/Include/PageFunction.h"
 
 
-extern const PageDef pageOperations;
+extern const Page pageOperations;
 
 const Page * const PageRecorder::PageShow::PageOperations::self = (const Page *)&pageOperations;
 

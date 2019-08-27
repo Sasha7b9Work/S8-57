@@ -12,8 +12,8 @@
 
 using namespace Osci::Settings;
 
-extern const PageDef pageDisplay;
-extern const PageDef pageViewSignal;
+extern const Page pageDisplay;
+extern const Page pageViewSignal;
 
 const Page * const PageDisplay::PageView::self = (const Page *)&pageViewSignal;
 const Page * const PageDisplay::self = (const Page *)&pageDisplay;

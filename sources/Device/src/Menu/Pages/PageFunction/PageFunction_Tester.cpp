@@ -6,7 +6,7 @@
 #include "Tester/Tester_Settings.h"
 
 
-extern const PageDef pageTester;
+extern const Page pageTester;
 
 const Page * const PageTester::self = (const Page *)&pageTester;
 
@@ -96,7 +96,7 @@ static void OnEnterExit_Tester(bool enter)
 }
 
 
-DEF_PAGE_5_VAR( pageTester, // -V641
+DEF_PAGE_5( pageTester, // -V641
     "реяреп",
     "",
     &cControl,

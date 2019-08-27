@@ -7,8 +7,8 @@
 
 using namespace Osci::Settings;
 
-extern const PageDef pTrig;
-extern const PageDef ppSearch;
+extern const Page pTrig;
+extern const Page ppSearch;
 
 const Page * const PageTrig::self = (const Page *)&pTrig;
 

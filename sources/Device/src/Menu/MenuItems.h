@@ -30,7 +30,37 @@ extern int8 gCurDigit;
 class Item
 {
 public:
-    COMMON_PART_MENU_ITEM;
+    /// Разные виды пунктов меню
+    struct Type
+    {
+        enum E
+        {
+            None,
+            Choice,         ///< Пункт выбора - позволяет выбрать одно из нескольких заданных значений.
+            Button,         ///< Кнопка.
+            Page,           ///< Страница.
+            Governor,       ///< Регулятор - позволяет выбрать любое целое числовое значение из заранее заданного диапазаона. Диапазон не может превышать [ -(1 << 16) / 2 , (1 << 16) / 2]
+            Time,           ///< Позволяет ввести время.
+            GovernorColor,  ///< Позволяет выбрать цвет.
+            ChoiceReg,      ///< Элемент выбора, в котором выбор осуществляется не кнопкой, а ручкой
+            GraphButton,    ///< Кнопка для режима малых кнопок
+            ChoiceParameter,
+            Number
+        } value;
+
+        explicit Type(E v) : value(v) {};
+    };
+    
+    uint8               type;            ///< Тип итема
+    int8                num;             ///< Число вариантов для Choice или число контролов для Page
+    uint8               name;            ///< Имя из перечисления Page::Name
+    const Page *const  *keeper;          ///< Адрес страницы, которой принадлежит. Для Page_Main = 0
+    pFuncBV             funcOfActive;    ///< Активен ли данный элемент
+    const char * const *titleHint;       ///< Название страницы. Также подсказка для режима помощи
+    Item(uint8 _type = Item::Type::None, const char * const *_titleHint = nullptr, const Page *const *_keeper = nullptr, int8 _num = 0, pFuncBV funcActive = nullptr) :
+        type(_type), num(_num), keeper(_keeper), funcOfActive(funcActive), titleHint(_titleHint)
+    {
+    };
     /// Возвращает высоту в пикселях открытого элемента Choice или Page::Name
     int HeightOpened() const;
     /// Возвращает true, если кнопка, соответствующая элементу меню item, находится в нажатом положении
@@ -84,31 +114,12 @@ public:
     };
 
     static Item empty;
-
-    /// Разные виды пунктов меню
-    struct Type
-    {
-        enum E
-        {
-            None,
-            Choice,         ///< Пункт выбора - позволяет выбрать одно из нескольких заданных значений.
-            Button,         ///< Кнопка.
-            Page,           ///< Страница.
-            Governor,       ///< Регулятор - позволяет выбрать любое целое числовое значение из заранее заданного диапазаона. Диапазон не может превышать [ -(1 << 16) / 2 , (1 << 16) / 2]
-            Time,           ///< Позволяет ввести время.
-            GovernorColor,  ///< Позволяет выбрать цвет.
-            ChoiceReg,      ///< Элемент выбора, в котором выбор осуществляется не кнопкой, а ручкой
-            GraphButton,    ///< Кнопка для режима малых кнопок
-            ChoiceParameter,
-            Number
-        } value;
-
-        explicit Type(E v) : value(v) {};
-    };
 };
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// Page ///
+
+/// Описывает страницу меню
 class Page : public Item
 {
 public:
@@ -117,6 +128,8 @@ public:
     pFuncVB     funcOnEnterExit;    ///< Будет вызываться при нажатии на свёрнутую страницу и при выходе из этой страницы на предыдущую
     pFuncVV     funcOnDraw;         ///< Будет вызываться после отрисовки кнопок
     pFuncBKE    funcKey;            ///< В странице малых кнопок вызывается при нажатии стрелки
+    Page(const char * const * titleHint, const Page * const *keeper, const Item * const *_items, int8 num, pFuncBV funcActive, pFuncVB funcEnterExit, pFuncVV funcDraw, pFuncBKE _funcKey) :
+        Item(Item::Type::Page, titleHint, keeper, num, funcActive), items(_items), funcOnEnterExit(funcEnterExit), funcOnDraw(funcDraw), funcKey(_funcKey) {};
     /// Возвращает true, если текущий элемент страницы открыт
     bool CurrentItemIsOpened() const;
     /// Dозвращает число подстраниц в странице по адресу page
@@ -249,6 +262,10 @@ class Button : public Item
 public:
     pFuncVV     funcOnPress;        ///< Функция, которая вызывается при нажатии на кнопку.
     pFuncVII    funcForDraw;        ///< Функция будет вызываться во время отрисовки кнопки.
+    Button(const char * const * titleHint, const Page * const *keeper, pFuncBV funcActive, pFuncVV funcPress, pFuncVII funcDraw) :
+        Item(Item::Type::Button, titleHint, keeper, 0, funcActive),
+        funcOnPress(funcPress), funcForDraw(funcDraw)
+    {};
     void Draw(int x, int y) const;
     void KeyRelease() const;
     void KeyAutoRelease() const;
@@ -262,6 +279,7 @@ struct StructHelpDrawButton
 };
 
 
+/// Описывает кнопку для дополнительного режима меню.
 class GraphButton : public Item
 {
 public:
@@ -269,12 +287,18 @@ public:
     pFuncVII                    funcForDraw;    ///< Эта функция вызывается для отрисовки кнопки в месте с координатами x, y.
     const StructHelpDrawButton *hintUGO; 
     int                         numHints;
+    GraphButton(const char * const * titleHint, const StructHelpDrawButton *_hintUGO, int num, const Page * const *keeper, pFuncBV funcActive, pFuncVV funcPress, pFuncVII funcDraw) :
+        Item(Item::Type::GraphButton, titleHint, keeper, 0, funcActive),
+        funcOnPress(funcPress), funcForDraw(funcDraw), hintUGO(_hintUGO), numHints(num) {};
+
     void Draw(int x, int y) const;
     void DrawHints(int x, int y, int width) const;
     void KeyRelease() const;
 };
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// Governor ///
+
+/// Описывает регулятор.
 class Governor : public Item
 {
 public:
@@ -283,6 +307,9 @@ public:
     int16   maxValue;       ///< Максимальное значение.
     pFuncVV funcOfChanged;  ///< Функция, которую нужно вызывать после того, как значение регулятора изменилось.
     pFuncVV funcBeforeDraw; ///< Функция, которая вызывается перед отрисовкой
+    Governor(const char * const * titleHint, int16 *_cell, int16 min, int16 max, const Page * const *keeper, pFuncBV funcActive, pFuncVV funcChanged, pFuncVV funcDraw) :
+        Item(Item::Type::Governor, titleHint, keeper, 0, funcActive),
+        cell(_cell), minValue(min), maxValue(max), funcOfChanged(funcChanged), funcBeforeDraw(funcDraw) {};
     /// Обработка события кнопки
     bool ProcessKey(KeyEvent event);
     /// Возвращает следующее большее значение, которое может принять governor.
@@ -327,9 +354,12 @@ class Choice : public Item
 {
 public:
     int8       *cell;
-    pString    *names;          ///< Варианты выбора на русском и английском языках.
+    pString    *names;          ///< Варианты выбора.
     pFuncVB     funcOnChanged;  ///< Функция должна вызываться после изменения значения элемента.
     pFuncVII    funcForDraw;    ///< Функция вызывается после отрисовки элемента. 
+    Choice(const char * const * titleHint, pString *_names, int8 num, int8 *_cell, const Page * const *keeper, pFuncBV funcActive, pFuncVB funcChanged, pFuncVII funcDraw) :
+        Item(Item::Type::Choice, titleHint, keeper, num, funcActive),
+        cell(_cell), names(_names), funcOnChanged(funcChanged), funcForDraw(funcDraw) {};
     /// Запускает процесс изменения значения на delta
     void  StartChange(int delta) const;
     /// Рассчитывает следующий кадр анимации.
@@ -370,6 +400,9 @@ class GovernorColor : public Item
 public:
     ColorType  *ct;                 ///< Структура для описания цвета.
     pFuncVV     funcOnChanged;      ///< Эту функцию нужно вызывать после изменения значения элемента.
+    GovernorColor(const char * const * titleHint, ColorType *_ct, const Page * const *keeper, pFuncBV funcActive, pFuncVV funcChanged) :
+        Item(Item::Type::GovernorColor, titleHint, keeper, 0, funcActive),
+        ct(_ct), funcOnChanged(funcChanged) {};
     void Draw(int x, int y, bool opened);
     void KeyRelease() const;
 private:

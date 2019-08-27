@@ -7,8 +7,8 @@
 #include "Settings/Settings.h"
 
 
-extern const PageDef pageConsole;
-extern const PageDef pageRegisters;
+extern const Page pageConsole;
+extern const Page pageRegisters;
 
 const Page * const PageDebug::PageConsole::self = (const Page *)&pageConsole;
 const Page * const PageDebug::PageRegisters::self = (const Page *)&pageRegisters;

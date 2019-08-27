@@ -7,7 +7,7 @@
 #include <cstdio>
 
 
-extern const PageDef pageServiceInfo;
+extern const Page pageServiceInfo;
 
 const Page * const PageService::PageInformation::self = (const Page *)&pageServiceInfo;
 

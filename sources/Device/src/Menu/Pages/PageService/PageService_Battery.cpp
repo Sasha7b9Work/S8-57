@@ -4,7 +4,7 @@
 #include "Settings/Settings.h"
 
 
-extern const PageDef pageBattery;
+extern const Page pageBattery;
 
 const Page * const PageService::PageBattery::self = (const Page *)&pageBattery;
 
