@@ -262,7 +262,7 @@ DEF_PAGE_2( pageCalibration, //-V641 //-V1027
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void PageMultimeter::DecodePassword(KeyEvent &event)
+void PageMultimeter::DecodePassword(const KeyEvent &event)
 {
 #define NUM_SYMBOLS 8
     /// Пароль

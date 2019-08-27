@@ -169,12 +169,12 @@ void Governor::DrawValue(int x, int y) const
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Governor::DrawLowPart(int x, int y) const
 {
-    Color colorTextDown = Color::BLACK;
-
     Region(Width() + 1, Value::HEIGHT - 3).Fill(x + 1, y - 1, Color::MenuItemField());
 
     if (Menu::OpenedItem() != this)
     {
+        Color colorTextDown = Color::BLACK;
+
         if (IsCurrentItem())
         {
             Char(GetSymbol()).Draw4SymbolsInRect(x + Width() - 12, y - 1, Color::BACK);
@@ -340,10 +340,7 @@ void Page::Draw(int x, int y, bool opened) const
         {
             Item *item = GetItem(PosCurrentItem());
 
-            x = item->PositionOnScreenX();
-            y = Menu::Y0() - item->HeightOpened() + Item::Height() + 1;
-
-            item->Draw(x, y, true);
+            item->Draw(item->PositionOnScreenX(), Menu::Y0() - item->HeightOpened() + Item::Height() + 1, true);
         }
         else
         {
