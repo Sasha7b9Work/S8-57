@@ -121,6 +121,11 @@ public:
         {
             funcOnEnterExit = EmptyFuncVB;
         }
+
+        if (funcOnDraw == nullptr)
+        {
+            funcOnDraw = EmptyFuncVV;
+        }
     };
     /// Возвращает true, если текущий элемент страницы открыт
     bool CurrentItemIsOpened() const;

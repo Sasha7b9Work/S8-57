@@ -360,10 +360,7 @@ void Page::Draw(int x, int y, bool opened) const
             DrawItems(x, y);
         }
 
-        if (funcOnDraw)
-        {
-            funcOnDraw();
-        }
+        funcOnDraw();
     }
     else
     {
