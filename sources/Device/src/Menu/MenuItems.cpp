@@ -44,29 +44,6 @@ static const Item *pressedItem = nullptr;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-bool Item::ProcessKey(KeyEvent event)
-{
-    if (IS_CHOICE(this))
-    {
-        return ((Choice *)this)->ProcessKey(event);
-    }
-    else if (IS_PAGE(this))
-    {
-        return ((Page *)this)->ProcessKey(event);
-    }
-    else if (IS_GOVERNOR(this))
-    {
-        return ((Governor *)this)->ProcessKey(event);
-    }
-    else
-    {
-        // здесь ничего
-    }
-
-    return false;
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Item::KeyPress() const
 {
     pressedItem = this;
@@ -720,9 +697,7 @@ bool Choice::ProcessKey(KeyEvent event)
 
         int delta = (key == Key::Down || key == Key::Right) ? 1 : -1;
 
-        Choice *choice = (Choice *)this;
-
-        choice->ChangeIndex(Menu::IsShown() ? delta : -delta);
+        ChangeIndex(Menu::IsShown() ? delta : -delta);
 
         return true;
     }

@@ -14,12 +14,10 @@
 
 #define IS_PAGE(item)           (item->type == Item::Type::Page)
 #define NOT_PAGE(item)          (item->type != Item::Type::Page)
-#define IS_PAGE_SB(item)        (item->isPageSB)
 #define IS_CHOICE(item)         (item->type == Item::Type::Choice)
 #define IS_GOVERNOR(item)       (item->type == Item::Type::Governor)
 #define NOT_GOVERNOR(item)      (item->type != Item::Type::Governor)
 #define IS_GOVERNOR_COLOR(item) (item->type == Item::Type::GovernorColor)
-#define IS_BUTTON(item)         (item->type == Item::Type::Button)
 #define IS_GRAPH_BUTTON(item)   (item->type == Item::Type::GraphButton)
 
 class Page;
@@ -67,18 +65,10 @@ public:
     void Open(bool open) const;
     /// Возвращает название элемента, как оно выглядит на дисплее прибора
     String Title() const;
-    /// Обработка события кнопки
-    bool ProcessKey(KeyEvent event);
     /// Вызывается при нажатии кнопки
     void KeyPress() const;
-    /// Вызывается при "коротком" отпускании
-    virtual void KeyRelease() const;
-    /// Вызывается при автоматическом срабатывании кнопки (нажатии и удержании более 0.5 сек)
-    virtual void KeyAutoRelease() const;
     /// Возвращает true, если контрол находится в активном состоянии (реагирует на органы управления)
     bool IsActive() const { if (funcOfActive) { return funcOfActive(); } return true; };
-
-    virtual void Draw(int /*x*/, int /*y*/, bool /*opened*/) const {};
 
     bool IsCurrentItem() const;
     /// Возвращает адрес родителя
@@ -108,6 +98,14 @@ public:
     };
 
     static Item empty;
+
+    virtual void Draw(int /*x*/, int /*y*/, bool /*opened*/) const {};
+    /// Вызывается при "коротком" отпускании
+    virtual void KeyRelease() const;
+    /// Вызывается при автоматическом срабатывании кнопки (нажатии и удержании более 0.5 сек)
+    virtual void KeyAutoRelease() const;
+    /// Обработка события кнопки
+    virtual bool ProcessKey(KeyEvent) { return false; };
 };
 
 
@@ -147,10 +145,6 @@ public:
     int8 PosCurrentItem() const;
     /// Изменить номер текущей подстраницы на значение delta
     void ChangeSubPage(int delta);
-    /// Нарисовать в заданных координатах
-    virtual void Draw(int x, int y, bool opened) const;
-    /// Обработка события кнопки
-    bool ProcessKey(KeyEvent event);
 
     void DrawTitle(int x, int y) const;
 
@@ -165,6 +159,10 @@ public:
     virtual void KeyRelease() const;
 
     virtual void KeyAutoRelease() const;
+    /// Обработка события кнопки
+    virtual bool ProcessKey(KeyEvent event);
+    /// Нарисовать в заданных координатах
+    virtual void Draw(int x, int y, bool opened) const;
 
     void ShortPress() const;
     /// Возвращает адрес элемента, соответствующего функциональной кнопкке
@@ -309,8 +307,6 @@ public:
     Governor(const char * const * titleHint, int16 *_cell, int16 min, int16 max, const Page * const *keeper, pFuncBV funcActive, pFuncVV funcChanged, pFuncVV funcDraw) :
         Item(Item::Type::Governor, titleHint, keeper, 0, funcActive),
         cell(_cell), minValue(min), maxValue(max), funcOfChanged(funcChanged), funcBeforeDraw(funcDraw) {};
-    /// Обработка события кнопки
-    bool ProcessKey(KeyEvent event);
     /// Возвращает следующее большее значение, которое может принять governor.
     int16 NextValue() const;
     /// Возвращает следующее меньшее значение, которое может принять governor.
@@ -323,8 +319,6 @@ public:
     void NextPosition() const;
     /// При открытом элементе переставляет курсор не предыдущую позицию
     void PrevPosition();
-
-    virtual void Draw(int x, int y, bool opened) const;
 
     void DrawOpened(int x, int y) const;
 
@@ -341,6 +335,10 @@ public:
     virtual void KeyRelease() const;
 
     virtual void KeyAutoRelease() const;
+    /// Обработка события кнопки
+    virtual bool ProcessKey(KeyEvent event);
+
+    virtual void Draw(int x, int y, bool opened) const;
 
 private:
 
@@ -372,10 +370,6 @@ public:
     /// Возвращает количество вариантов выбора в элементе по адресу choice
     int   NumSubItems() const { return num; };
 
-    bool ProcessKey(KeyEvent event);
-
-    virtual void  Draw(int x, int y, bool opened) const;
-
     void  DrawOpened(int x, int y) const;
 
     void  DrawClosed(int x, int y) const;
@@ -397,6 +391,10 @@ public:
     virtual void KeyRelease() const;
 
     virtual void KeyAutoRelease() const;
+
+    virtual void Draw(int x, int y, bool opened) const;
+
+    virtual bool ProcessKey(KeyEvent event);
 };
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// GovernorColor ///
