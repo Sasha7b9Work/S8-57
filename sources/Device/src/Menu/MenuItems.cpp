@@ -976,6 +976,18 @@ Color Choice::ColorMenuField(const Choice *choice)
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+GovernorColor::GovernorColor(const char * const * titleHint, ColorType *_ct, const Page * const *keeper, pFuncBV funcActive, pFuncVV funcChanged) :
+    Item(Item::Type::GovernorColor, titleHint, keeper, 0, funcActive),
+    ct(_ct), funcOnChanged(funcChanged)
+{
+    if (funcOnChanged == nullptr)
+    {
+        funcOnChanged = EmptyFuncVV;
+    }
+};
+
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void GovernorColor::KeyRelease() const
 {
     Item::KeyRelease();

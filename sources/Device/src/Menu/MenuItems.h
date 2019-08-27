@@ -379,9 +379,7 @@ class GovernorColor : public Item
 public:
     ColorType  *ct;                 ///< Структура для описания цвета.
     pFuncVV     funcOnChanged;      ///< Эту функцию нужно вызывать после изменения значения элемента.
-    GovernorColor(const char * const * titleHint, ColorType *_ct, const Page * const *keeper, pFuncBV funcActive, pFuncVV funcChanged) :
-        Item(Item::Type::GovernorColor, titleHint, keeper, 0, funcActive),
-        ct(_ct), funcOnChanged(funcChanged) {};
+    GovernorColor(const char * const * titleHint, ColorType *ct, const Page * const *keeper, pFuncBV funcActive, pFuncVV funcChanged);
     virtual void Draw(int x, int y, bool opened) const;
     virtual void KeyRelease() const;
     virtual void KeyAutoRelease() const;
