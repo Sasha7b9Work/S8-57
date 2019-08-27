@@ -10,8 +10,6 @@
 
 #define GRAPH_BUTTON_FROM_PAGE(page, numButton)     ((GraphButton *)((Page *)page)->items[numButton])
 
-extern int8 gCurDigit;
-
 #define MENU_ITEMS_ON_DISPLAY       5   ///< Сколько пунктов меню помещается на экране по горизонтали.
 
 #define IS_PAGE(item)           (item->type == Item::Type::Page)
@@ -26,6 +24,8 @@ extern int8 gCurDigit;
 #define IS_TIME(item)           (item->type == Item::Type::Time)
 #define IS_BUTTON(item)         (item->type == Item::Type::Button)
 #define IS_GRAPH_BUTTON(item)   (item->type == Item::Type::GraphButton)
+
+class Page;
     
 class Item
 {
@@ -346,6 +346,8 @@ private:
     void DrawLowPart(int x, int y);
     /// Возвращает число знакомест в поле для ввода элемента governor. Зависит от максимального значения, которое может принимать governor.
     uint  NumDigits() const;
+
+    static int8 currentDigit;
 };
 
 

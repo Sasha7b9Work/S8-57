@@ -217,7 +217,7 @@ static void OnEnterExit_Multimeter(bool enter)
     Device::State::SetMode(enter ? Device::Mode::Multimeter : Device::Mode::Osci);
 }
 
-DEF_PAGE_5( pageMultimeter, // -V641 //-V1027 //-V641
+DEF_PAGE_5_VAR( pageMultimeter, // -V641 //-V1027 //-V641
     "МУЛЬТИМЕТР",
     "Управление прибором в режиме мультиметра",
     &cMode,

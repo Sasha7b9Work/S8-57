@@ -3,9 +3,6 @@
 #include "Utils/CommonFunctions.h"
 
 
-class Page;
-class Item;
-struct StructHelpDrawButton;
 typedef bool(*pFuncBKE)(KeyEvent);
 
 
@@ -31,7 +28,7 @@ static const char * th##name[] = {title, hint};                                 
 static const Page name(th##name, keeper, i##name, 1, funcActive, funcPress, funcDraw, funcRegSet);
 
 #define DEF_PAGE_2(name, title, hint, item1, item2, namePage, keeper, funcActive, funcPress, funcDraw, funcRegSet)                                                                          \
-static const Item * const  i##name[] = {(Item *)item1, (Item *)item2};                                                                                                                  \
+static const Item * const  i##name[] = {(Item *)item1, (Item *)item2};                                                                                                                      \
 static const char *th##name[] = {title, hint};                                                                                                                                              \
 static const Page name(th##name, keeper, i##name, 2, funcActive ,funcPress, funcDraw, funcRegSet);
 
@@ -51,12 +48,11 @@ static const Item * const i##name[] = {(Item *)item1, (Item *)item2, (Item *)ite
 static const char *th##name[] = {title, hint};                                                                                                                                              \
 static const Page name(th##name, keeper, i##name, 5, funcActive ,funcPress, funcDraw, funcRegSet);
 
-///// Определяет страницу так, что items##name размещается в ОЗУ
-//#define DEF_PAGE_5_VAR(name, title, hint,                                                                                                                                                   \
-//    item1, item2, item3, item4, item5, namePage, keeper, funcActive, funcPress, funcDraw, funcRegSet)                                                                                       \
-//static const Item * items##name[] = {(Item *)item1, (Item *)item2, (Item *)item3, (Item *)item4, (Item *)item5};                                                                            \
-//static const PageDef name = {Item::Type::Page, 5, namePage, keeper, funcActive, {title, hint},                                                                                              \
-//    items##name, funcPress, funcDraw, funcRegSet};
+#define DEF_PAGE_5_VAR(name, title, hint,                                                                                                                                                   \
+    item1, item2, item3, item4, item5, namePage, keeper, funcActive, funcPress, funcDraw, funcRegSet)                                                                                       \
+static const Item *i##name[] = {(Item *)item1, (Item *)item2, (Item *)item3, (Item *)item4, (Item *)item5};                                                                                 \
+static const char *th##name[] = {title, hint};                                                                                                                                              \
+static const Page name(th##name, keeper, i##name, 5, funcActive ,funcPress, funcDraw, funcRegSet);
 
 #define DEF_PAGE_6(name, title, hint, item1, item2, item3, item4, item5, item6, namePage, keeper, funcActive, funcPress, funcDraw, funcRegSet)                                              \
 static const Item * const i##name[] = {(Item *)item1, (Item *)item2, (Item *)item3, (Item *)item4, (Item *)item5, (Item *)item6};                                                           \
@@ -75,29 +71,6 @@ static const Item * const  i##name[] = {(Item *)item1, (Item *)item2, (Item *)it
 static const char *th##name[] = {title, hint};                                                                                                                                              \
 static const Page name(th##name, keeper, i##name, 8, funcActive, funcPress, funcDraw, funcRegSet);
 
-#define DEF_PAGE_9(name, title, hint,                                                                                                                                                       \
-    item1, item2, item3, item4, item5, item6, item7, item8, item9, namePage, keeper, funcActive, funcPress, funcDraw, funcRegSet)                                                           \
-static const Item * const  items##name[] = {                                                                                                                                                \
-    (Item *)item1, (Item *)item2, (Item *)item3, (Item *)item4, (Item *)item5, (Item *)item6, (Item *)item7,                                                                                \
-    (Item *)item8, (Item *)item9};                                                                                                                                                          \
-static const PageDef name = {Item::Type::Page, 9, false, namePage, keeper, funcActive, {title, hint},                                                                                       \
-    items##name, funcPress, funcDraw, funcRegSet};
-
-#define DEF_PAGE_10(name, titleRU, titleEN, hintRU, hintEN,                                                                                                                                 \
-    item1, item2, item3, item4, item5, item6, item7, item8, item9, item10, namePage, keeper, funcActive, funcPress, funcDraw, funcRegSet)                                                   \
-static const Item * const  items##name[] = {                                                                                                                                                \
-    (Item *)item1, (Item *)item2, (Item *)item3, (Item *)item4, (Item *)item5, (Item *)item6, (Item *)item7,                                                                                \
-    (Item *)item8, (Item *)item9, (Item *)item10};                                                                                                                                          \
-static const PageDef name = {Item::Type::Page, 10, false, namePage, keeper, funcActive, {titleRU, titleEN, hintRU, hintEN},                                                                 \
-    items##name, funcPress, funcDraw, funcRegSet};
-
-#define DEF_PAGE_11(name, titleRU, titleEN, hintRU, hintEN,                                                                                                                                 \
-    item1, item2, item3, item4, item5, item6, item7, item8, item9, item10, item11, namePage, keeper, funcActive, funcPress, funcDraw, funcRegSet)                                           \
-static const Item * const  items##name[] = {(Item *)item1, (Item *)item2, (Item *)item3, (Item *)item4, (Item *)item5,                                                                      \
-    (Item *)item6, (Item *)item7, (Item *)item8, (Item *)item9, (Item *)item10, (Item *)item11};                                                                                            \
-static const PageDef name = {Item::Type::Page, 11, false, namePage, keeper, funcActive, {titleRU, titleEN, hintRU, hintEN},                                                                 \
-    items##name, funcPress, funcDraw, funcRegSet};
-
 #define DEF_PAGE_12(name, title, hint,                                                                                                                                                      \
     item1, item2, item3, item4, item5, item6, item7, item8, item9, item10, item11, item12, namePage, keeper, funcActive, funcPress, funcDraw, funcRegSet)                                   \
 static const Item * const  i##name[] = {(Item *)item1, (Item *)item2, (Item *)item3, (Item *)item4, (Item *)item5,                                                                          \
@@ -105,39 +78,11 @@ static const Item * const  i##name[] = {(Item *)item1, (Item *)item2, (Item *)it
 static const char *th##name[] = {title, hint};                                                                                                                                              \
 static const Page name(th##name, keeper, i##name, 12, funcActive, funcPress, funcDraw, funcRegSet);
 
-#define DEF_PAGE_13(name, namePage, keeper, funcActive, funcPress, titleRU, titleEN, hintRU, hintEN,                                                                                        \
-    item1, item2, item3, item4, item5, item6, item7, item8, item9, item10, item11, item12, item13)                                                                                          \
-static const Item * const  items##name[] = {                                                                                                                                                \
-    (Item *)item1, (Item *)item2, (Item *)item3, (Item *)item4, (Item *)item5, (Item *)item6, (Item *)item7,                                                                                \
-    (Item *)item8, (Item *)item9, (Item *)item10, (Item *)item11, (Item *)item12, (Item *)item13};                                                                                          \
-static const PageDef name = {Item::Type::Page, 13, false, namePage, keeper, funcActive, {titleRU, titleEN, hintRU, hintEN},                                                                 \
-    items##name, funcPress, FuncDrawPage, 0};
-
-#define DEF_PAGE_15(name, namePage, keeper, funcActive, funcPress, titleRU, titleEN, hintRU, hintEN,                                                                                        \
-    item1, item2, item3, item4, item5, item6, item7, item8, item9, item10,                                                                                                                  \
-    item11, item12, item13, item14, item15)                                                                                                                                                 \
-static const Item * const  items##name[] = {(Item *)item1, (Item *)item2, (Item *)item3, (Item *)item4, (Item *)item5,                                                                      \
-    (Item *)item6, (Item *)item7, (Item *)item8, (Item *)item9, (Item *)item10, (Item *)item11, (Item *)item12,                                                                             \
-    (Item *)item13, (Item *)item14, (Item *)item15};                                                                                                                                        \
-static const PageDef name = {Item::Type::Page, 15, false, namePage, keeper, funcActive, {titleRU, titleEN, hintRU, hintEN},                                                                 \
-    items##name, funcPress, FuncDrawPage, 0};
-
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-#define DEF_CHOICE_PARAMETER(name, titleRU, titleEN, hintRU, hintEN, keeper, funcActive, funcPress, numParam,                                                                               \
-    allow0, allow1, allow2, allow3, allow4, allow5, allow6, allow7)                                                                                                                         \
-ChoiceParameterBase name = {Item_ChoiceParameter, 0, false, Page::Name::NoPage, &keeper, funcActive, {titleRU, titleEN, hintRU, hintEN} ,                                                   \
-    funcPress, {allow0, allow1, allow2, allow3, allow4, allow5, allow6, allow7}, (uint8 *)&numParam};
-
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #define DEF_GRAPH_BUTTON(name, title, hint, keeper, funcActive, funcPress, funcDraw)                                                                                                        \
 static const char *th##name[] = {title, hint};                                                                                                                                              \
 static const GraphButton name(th##name, nullptr, 0, keeper, funcActive, funcPress, funcDraw);
-
-#define DEF_GRAPH_BUTTON_EXIT(name, keeper, funcActive, funcPress, funcDraw)                                                                                                                \
-static const GraphButtonDef name = { Item::Type::GraphButton, 0, Page::Name::NoPage, keeper, funcActive, {"Выход",                                                                          \
-    "Кнопка для выхода в предыдущее меню"}, funcPress, funcDraw, 0, 0};
 
 #define DEF_GRAPH_BUTTON_HINTS_2(name, title, hint, keeper, funcActive, funcPress, funcDraw, FuncDrawHint1, hint1, FuncDrawHint2, hint2)                                                    \
 static const StructHelpDrawButton h##name[] = {{ FuncDrawHint1, hint1 }, { FuncDrawHint2, hint2 }};                                                                                         \
@@ -211,19 +156,3 @@ static const Choice name(th##name, n##name, 10, (int8 *)&cell, keeper, funcActiv
 static pString n##name[] = {name1,  name2, name3,  name4,  name5,  name6, name7, name8, name9, name10, name11, name12, name13, name14, name15, name16 };                                \
 static const char *th##name[] = {title, hint};                                                                                                                                              \
 static const Choice name(th##name, n##name, 16, (int8 *)&cell, keeper, funcActive, funcChanged, funcDraw);
-
-#define DEF_CHOICE_REG_9(name, titleRU, titleEN, hintRU, hintEN,                                                                                                                            \
-    nameRu1, nameEn1, nameRu2, nameEn2, nameRu3, nameEn3, nameRu4, nameEn4, nameRu5, nameEn5,                                                                                               \
-    nameRu6, nameEn6, nameRu7, nameEn7, nameRu8, nameEn8, nameRu9, nameEn9, cell, keeper, funcActive, funcChanged, funcDraw)                                                                \
-static pString hints##name[] = {nameRu1, nameEn1, nameRu2, nameEn2, nameRu3, nameEn3, nameRu4, nameEn4,                                                                                     \
-    nameRu5, nameEn5, nameRu6, nameEn6, nameRu7, nameEn7, nameRu8, nameEn8, nameRu9, nameEn9};                                                                                              \
-static const ChoiceDef name = {Item::Type::ChoiceReg, 9, false, Page::Name::NoPage, &keeper, funcActive, {titleRU, titleEN, hintRU, hintEN},                                                \
-    (int8 *)&cell, hints##name, funcChanged, funcDraw};
-
-#define DEF_CHOICE_REG_10(name, titleRU, titleEN, hintRU, hintEN,                                                                                                                           \
-    nameRu1, nameEn1, nameRu2, nameEn2, nameRu3, nameEn3, nameRu4, nameEn4, nameRu5, nameEn5,                                                                                               \
-    nameRu6, nameEn6, nameRu7, nameEn7, nameRu8, nameEn8, nameRu9, nameEn9, nameRu10, nameEn10, cell, keeper, funcActive, funcChanged, funcDraw)                                            \
-static pString hints##name[] = {nameRu1, nameEn1, nameRu2, nameEn2, nameRu3, nameEn3, nameRu4, nameEn4,                                                                                     \
-    nameRu5, nameEn5, nameRu6, nameEn6, nameRu7, nameEn7, nameRu8, nameEn8, nameRu9, nameEn9, nameRu10, nameEn10};                                                                          \
-static const ChoiceDef name = {Item::Type::ChoiceReg, 10, false, Page::Name::NoPage, &keeper, funcActive, {titleRU, titleEN, hintRU, hintEN},                                               \
-    (int8 *)&cell, hints##name, funcChanged, funcDraw};

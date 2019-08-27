@@ -33,9 +33,9 @@ static TimeStruct tsChoice = { 0, 0, NONE, 0, 0, 0 };
 
 static TimeStruct tsGovernor = { 0, 0, NONE, 0, 0, 0 };
 
-int8 gCurDigit = 0;
-
 Item Item::empty;
+
+int8 Governor::currentDigit = 0;
 
 #define NAME_FROM_INDEX(index) (names[index])
 
@@ -524,7 +524,7 @@ void Governor::NextPosition() const
 {
     if (Menu::OpenedItem() == this)
     {
-        Math::CircleIncrease<int8>(&gCurDigit, 0, (int8)(NumDigits() - 1));
+        Math::CircleIncrease<int8>(&currentDigit, 0, (int8)(NumDigits() - 1));
     }
 }
 
@@ -614,12 +614,12 @@ void Governor::ChangeValue(int16 delta)
 {
     if (!IsOpened())
     {
-        gCurDigit = 0;
+        currentDigit = 0;
     }
 
     int16 oldValue = GetValue();
 
-    int16 newValue = GetValue() + (int16)(Math::Sign(delta) * Math::Pow10(gCurDigit));
+    int16 newValue = GetValue() + (int16)(Math::Sign(delta) * Math::Pow10(currentDigit));
 
     LIMITATION(newValue, minValue, maxValue); //-V2516
 
@@ -672,7 +672,7 @@ void Governor::PrevPosition()
 {
     if (Menu::OpenedItem() == this)
     {
-        Math::CircleDecrease<int8>(&gCurDigit, 0, (int8)(NumDigits() - 1));
+        Math::CircleDecrease<int8>(&currentDigit, 0, (int8)(NumDigits() - 1));
     }
 }
 

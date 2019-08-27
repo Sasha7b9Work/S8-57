@@ -160,7 +160,7 @@ void Governor::DrawValue(int x, int y)
     
     Font::SetCurrent(Font::Type::_8);
 
-    DrawValueWithSelectedPosition(x + 2, y, value, NumDigits(), gCurDigit, true);
+    DrawValueWithSelectedPosition(x + 2, y, value, NumDigits(), currentDigit, true);
 
     if (sign)
     {
