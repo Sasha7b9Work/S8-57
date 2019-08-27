@@ -27,12 +27,12 @@ public:
         explicit Type(E v) : value(v) {};
     };
     
-    uint8               type;           ///< Тип итема
-    int8                num;            ///< Число вариантов для Choice или число контролов для Page
-    uint8               name;           ///< Имя из перечисления Page::Name
-    const Page *const  *keeper;         ///< Адрес страницы, которой принадлежит. Для Page_Main = 0
-    pFuncBV             funcOfActive;   ///< Активен ли данный элемент
-    const char * const *titleHint;      ///< Название страницы. Также подсказка для режима помощи
+    uint8              type;           ///< Тип итема
+    int8               num;            ///< Число вариантов для Choice или число контролов для Page
+    uint8              name;           ///< Имя из перечисления Page::Name
+    const Page *const *keeper;         ///< Адрес страницы, которой принадлежит. Для Page_Main = 0
+    pFuncBV            funcOfActive;   ///< Активен ли данный элемент
+    const pString     *titleHint;      ///< Название страницы. Также подсказка для режима помощи
     Item(uint8 type = Item::Type::None, const char * const *titleHint = nullptr, const Page *const *keeper = nullptr, int8 num = 0, pFuncBV funcActive = nullptr, uint8 name = 0);
     /// Количество пунктов меню, умещающиееся на экране
     static const int NUM_ON_DISPLAY = 5;
