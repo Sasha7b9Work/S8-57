@@ -102,7 +102,7 @@ bool Item::IsOpened() const
         return false;
     }
 
-    if (IS_PAGE(this))
+    if (Is(Type::Page))
     {
         return parent->CurrentItemIsOpened();
     }

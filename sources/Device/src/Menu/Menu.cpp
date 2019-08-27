@@ -266,7 +266,7 @@ void Menu::CloseOpenedItem()
 {
     Item *item = OpenedItem();
 
-    if (IS_PAGE(item))
+    if (item->Is(Item::Type::Page))
     {
         ClosePage((Page *)item); //-V1027
     }
@@ -308,7 +308,7 @@ static Item *LastOpened(Page *page)
         int8 posActItem = page->PosCurrentItem();
         Item *item = page->GetItem(posActItem);
 
-        if (IS_PAGE(page->GetItem(posActItem)))
+        if (page->GetItem(posActItem)->Is(Item::Type::Page))
         {
             return LastOpened((Page *)item);
         }
@@ -327,7 +327,7 @@ Item *Menu::CurrentItem()
 
     int8 pos = ((const Page *)opened)->PosCurrentItem();
 
-    if (IS_PAGE(opened) && pos != 0x7f)
+    if (opened->Is(Item::Type::Page) && pos != 0x7f)
     {
         return ((const Page *)opened)->GetItem(pos);
     }
@@ -365,7 +365,7 @@ static void DrawHintItem(int x, int y, int width)
 
     y = Text(item->titleHint[1]).DrawInBoundedRectWithTransfers(x, y + 15, width, Color::BACK, Color::FILL);
 
-    if (IS_GRAPH_BUTTON(item))
+    if (item->Is(Item::Type::GraphButton))
     {
         ((GraphButton*)item)->DrawHints(x, y, width);   // -V1027
     }
@@ -386,7 +386,7 @@ void Menu::Draw()
 
         if (item)
         {
-            if (!IS_PAGE(item))
+            if (!item->Is(Item::Type::Page))
             {
                 item = (Item *)item->Keeper();
             }
@@ -472,7 +472,7 @@ const Item *Menu::ItemForFuncKey(Key::E key)
         return &Item::empty;
     }
 
-    if (IS_PAGE(item))
+    if (item->Is(Item::Type::Page))
     {
         return ((Page *)item)->ItemForFuncKey(key);
     }

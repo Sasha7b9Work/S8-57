@@ -12,13 +12,6 @@
 
 #define MENU_ITEMS_ON_DISPLAY       5   ///< Сколько пунктов меню помещается на экране по горизонтали.
 
-#define IS_PAGE(item)           (item->type == Item::Type::Page)
-#define NOT_PAGE(item)          (item->type != Item::Type::Page)
-#define IS_GOVERNOR(item)       (item->type == Item::Type::Governor)
-#define NOT_GOVERNOR(item)      (item->type != Item::Type::Governor)
-#define IS_GOVERNOR_COLOR(item) (item->type == Item::Type::GovernorColor)
-#define IS_GRAPH_BUTTON(item)   (item->type == Item::Type::GraphButton)
-
 class Page;
     
 class Item
@@ -96,6 +89,8 @@ public:
     };
 
     static Item empty;
+
+    bool Is(Type::E t) const { return type == t; };
 
     virtual void Draw(int /*x*/, int /*y*/, bool /*opened*/) const {};
     /// Вызывается при "коротком" отпускании
