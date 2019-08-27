@@ -44,13 +44,8 @@ static const Item *pressedItem = nullptr;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-Item::Item(uint8 _type, const char * const *_titleHint, const Page *const *_keeper, int8 _num, pFuncBV funcActive, uint8 _name) :
-    type(_type), num(_num), name(_name), keeper(_keeper), funcOfActive(funcActive), titleHint(_titleHint)
+Item::Item(const HeadItem * const _head) : head(_head)
 {
-    if (funcOfActive == nullptr)
-    {
-        funcOfActive = EmptyFuncBtV;
-    }
 };
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -116,7 +111,7 @@ bool Item::IsOpened() const
     {
         return parent->CurrentItemIsOpened();
     }
-    return (MENU_POS_ACT_ITEM(parent->name) & 0x80) != 0;
+    return (MENU_POS_ACT_ITEM(parent->head->name) & 0x80) != 0;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -155,7 +150,7 @@ bool Item::IsPressed() const
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 String Item::Title() const
 {
-    return String(titleHint[0]);
+    return String(head->titleHint[0]);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -239,8 +234,8 @@ int Item::PositionInKeeperList() const
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-Page::Page(uint8 name, const char * const * titleHint, const Page * const *keeper, const Item * const *_items, int8 num, pFuncBV funcActive, pFuncVB funcEnterExit, pFuncVV funcDraw, pFuncBKE _funcKey) :
-    Item(Item::Type::Page, titleHint, keeper, num, funcActive, name),
+Page::Page(const HeadItem * const head, const Item * const *_items, pFuncVB funcEnterExit, pFuncVV funcDraw, pFuncBKE _funcKey) :
+    Item(head),
     items(_items), funcOnEnterExit(funcEnterExit), funcOnDraw(funcDraw), funcKey(_funcKey)
 {
     if (funcOnEnterExit == nullptr)
@@ -268,11 +263,11 @@ int Page::NumSubPages() const
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 int Page::NumItems() const //-V2506
 {
-    if (name == Page::Name::Main)
+    if (head->name == Page::Name::Main)
     {
-        return SHOW_DEBUG_MENU ? num : (num - 1);
+        return SHOW_DEBUG_MENU ? head->num : (head->num - 1);
     }
-    return num;
+    return head->num;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -324,7 +319,7 @@ bool Page::IsSubPage(const Page *parent)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Page::Name::E Page::GetName() const
 {
-    return (Page::Name::E)name;
+    return (Page::Name::E)head->name;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -360,25 +355,25 @@ void Page::SetAsCurrent() const
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 bool Page::CurrentItemIsOpened() const
 {
-    return _GET_BIT(MENU_POS_ACT_ITEM(name), 7) == 1;
+    return _GET_BIT(MENU_POS_ACT_ITEM(head->name), 7) == 1;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Page::SetPosActItem(int8 pos) const
 {
-    MENU_POS_ACT_ITEM(name) = pos;
+    MENU_POS_ACT_ITEM(head->name) = pos;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 int8 Page::PosCurrentItem() const
 {
-    return MENU_POS_ACT_ITEM(name) & 0x7f;
+    return MENU_POS_ACT_ITEM(head->name) & 0x7f;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Item *Page::GetItem(int numItem) const
 {
-    if (numItem >= num)
+    if (numItem >= head->num)
     {
         return &Item::empty;
     }
@@ -408,13 +403,13 @@ void Page::ChangeSubPage(int delta)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 int8 Page::CurrentSubPage() const
 {
-    return set.menu_currentSubPage[name];
+    return set.menu_currentSubPage[head->name];
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Page::SetCurrentSubPage(int8 pos) const
 {
-    set.menu_currentSubPage[name] = pos;
+    set.menu_currentSubPage[head->name] = pos;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -431,8 +426,8 @@ const Item *Page::ItemForFuncKey(Key::E key) const
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-Button::Button(const char * const * titleHint, const Page * const *keeper, pFuncBV funcActive, pFuncVV funcPress, pFuncVII funcDraw) :
-    Item(Item::Type::Button, titleHint, keeper, 0, funcActive),
+Button::Button(const HeadItem * const head, pFuncVV funcPress, pFuncVII funcDraw) :
+    Item(head),
     funcOnPress(funcPress), funcForDraw(funcDraw)
 {
     if (funcOnPress == nullptr)
@@ -469,9 +464,9 @@ void Button::KeyAutoRelease() const
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-GraphButton::GraphButton(const char * const * titleHint, const StructHelpDrawButton *_hintUGO, int num, const Page * const *keeper, pFuncBV funcActive, pFuncVV funcPress, pFuncVII funcDraw) :
-    Item(Item::Type::GraphButton, titleHint, keeper, 0, funcActive),
-    funcOnPress(funcPress), funcForDraw(funcDraw), hintUGO(_hintUGO), numHints(num)
+GraphButton::GraphButton(const HeadItem * const head, const StructHelpDrawButton *_hintUGO, pFuncVV funcPress, pFuncVII funcDraw) :
+    Item(head),
+    funcOnPress(funcPress), funcForDraw(funcDraw), hintUGO(_hintUGO)
 {
     if (funcOnPress == nullptr)
     {
@@ -505,8 +500,8 @@ void GraphButton::KeyAutoRelease() const
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-Governor::Governor(const char * const * titleHint, int16 *_cell, int16 min, int16 max, const Page * const *keeper, pFuncBV funcActive, pFuncVV funcChanged, pFuncVV funcDraw) :
-    Item(Item::Type::Governor, titleHint, keeper, 0, funcActive),
+Governor::Governor(const HeadItem * const head, int16 *_cell, int16 min, int16 max, pFuncVV funcChanged, pFuncVV funcDraw) :
+    Item(head),
     cell(_cell), minValue(min), maxValue(max), funcOfChanged(funcChanged), funcBeforeDraw(funcDraw)
 {
     if (funcOfChanged == nullptr)
@@ -731,8 +726,8 @@ char Governor::GetSymbol() const
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-Choice::Choice(const char * const * titleHint, pString *_names, int8 num, int8 *_cell, const Page * const *keeper, pFuncBV funcActive, pFuncVB funcChanged, pFuncVII funcDraw) :
-    Item(Item::Type::Choice, titleHint, keeper, num, funcActive),
+Choice::Choice(const HeadItem * const head, pString *_names, int8 *_cell, pFuncVB funcChanged, pFuncVII funcDraw) :
+    Item(head),
     cell(_cell), names(_names), funcOnChanged(funcChanged), funcForDraw(funcDraw)
 {
     if (funcOnChanged == nullptr)
@@ -976,8 +971,8 @@ Color Choice::ColorMenuField(const Choice *choice)
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-GovernorColor::GovernorColor(const char * const * titleHint, ColorType *_ct, const Page * const *keeper, pFuncBV funcActive, pFuncVV funcChanged) :
-    Item(Item::Type::GovernorColor, titleHint, keeper, 0, funcActive),
+GovernorColor::GovernorColor(const HeadItem * const head, ColorType *_ct, pFuncVV funcChanged) :
+    Item(head),
     ct(_ct), funcOnChanged(funcChanged)
 {
     if (funcOnChanged == nullptr)

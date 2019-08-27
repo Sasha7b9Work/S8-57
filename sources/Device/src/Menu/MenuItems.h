@@ -5,6 +5,18 @@
 
 
 class Page;
+
+
+struct HeadItem
+{
+    uint8              type;           ///< Тип итема
+    int8               num;            ///< Число вариантов для Choice или число контролов для Page
+    uint8              name;           ///< Имя из перечисления Page::Name
+    const Page *const *keeper;         ///< Адрес страницы, которой принадлежит. Для Page_Main = 0
+    pFuncBV            funcOfActive;   ///< Активен ли данный элемент
+    const pString     *titleHint;      ///< Название страницы. Также подсказка для режима помощи
+};
+
     
 class Item
 {
@@ -26,14 +38,10 @@ public:
 
         explicit Type(E v) : value(v) {};
     };
+
+    const HeadItem *head;
     
-    uint8              type;           ///< Тип итема
-    int8               num;            ///< Число вариантов для Choice или число контролов для Page
-    uint8              name;           ///< Имя из перечисления Page::Name
-    const Page *const *keeper;         ///< Адрес страницы, которой принадлежит. Для Page_Main = 0
-    pFuncBV            funcOfActive;   ///< Активен ли данный элемент
-    const pString     *titleHint;      ///< Название страницы. Также подсказка для режима помощи
-    Item(uint8 type = Item::Type::None, const char * const *titleHint = nullptr, const Page *const *keeper = nullptr, int8 num = 0, pFuncBV funcActive = nullptr, uint8 name = 0);
+    Item(const HeadItem * const head = nullptr);
     /// Количество пунктов меню, умещающиееся на экране
     static const int NUM_ON_DISPLAY = 5;
     /// Возвращает true, если кнопка, соответствующая элементу меню item, находится в нажатом положении
@@ -49,11 +57,11 @@ public:
     /// Вызывается при нажатии кнопки
     void KeyPress() const;
     /// Возвращает true, если контрол находится в активном состоянии (реагирует на органы управления)
-    bool IsActive() const { return funcOfActive(); };
+    bool IsActive() const { if (head && head->funcOfActive) { return head->funcOfActive(); } return true; };
 
     bool IsCurrentItem() const;
     /// Возвращает адрес родителя
-    const Page *Keeper() const { if (keeper) { return *keeper; }; return nullptr; }
+    const Page *Keeper() const { if (head && head->keeper) { return *head->keeper; }; return nullptr; }
     /// Возвращает true, если в древе предков стоит keeper
     bool ExistKeeper(const Page *keeper) const;
     /// Имеет родителя - не является главной страницей меню
@@ -80,7 +88,7 @@ public:
 
     static Item empty;
 
-    bool Is(Type::E t) const { return type == t; };
+    bool Is(Type::E t) const { return head->type == t; };
 
     virtual void Draw(int /*x*/, int /*y*/, bool /*opened*/) const {};
     /// Вызывается при "коротком" отпускании
@@ -105,7 +113,7 @@ public:
     pFuncVB     funcOnEnterExit;    ///< Будет вызываться при нажатии на свёрнутую страницу и при выходе из этой страницы на предыдущую
     pFuncVV     funcOnDraw;         ///< Будет вызываться после отрисовки кнопок
     pFuncBKE    funcKey;            ///< В странице малых кнопок вызывается при нажатии стрелки
-    Page(uint8 name, const char * const * titleHint, const Page * const *keeper, const Item * const *items, int8 num, pFuncBV funcActive, pFuncVB funcEnterExit, pFuncVV funcDraw, pFuncBKE funcKey);
+    Page(const HeadItem * const head, const Item * const *items, pFuncVB funcEnterExit, pFuncVV funcDraw, pFuncBKE funcKey);
     /// Возвращает true, если текущий элемент страницы открыт
     bool CurrentItemIsOpened() const;
     /// Dозвращает число подстраниц в странице по адресу page
@@ -242,7 +250,7 @@ class Button : public Item
 public:
     pFuncVV     funcOnPress;        ///< Функция, которая вызывается при нажатии на кнопку.
     pFuncVII    funcForDraw;        ///< Функция будет вызываться во время отрисовки кнопки.
-    Button(const char * const * titleHint, const Page * const *keeper, pFuncBV funcActive, pFuncVV funcPress, pFuncVII funcDraw);
+    Button(const HeadItem * const head, pFuncVV funcPress, pFuncVII funcDraw);
     virtual void Draw(int x, int y, bool opened) const;
     virtual void KeyRelease() const;
     virtual void KeyAutoRelease() const;
@@ -264,7 +272,7 @@ public:
     pFuncVII                    funcForDraw;    ///< Эта функция вызывается для отрисовки кнопки в месте с координатами x, y.
     const StructHelpDrawButton *hintUGO; 
     int                         numHints;
-    GraphButton(const char * const * titleHint, const StructHelpDrawButton *hintUGO, int num, const Page * const *keeper, pFuncBV funcActive, pFuncVV funcPress, pFuncVII funcDraw);
+    GraphButton(const HeadItem * const head, const StructHelpDrawButton *hintUGO, pFuncVV funcPress, pFuncVII funcDraw);
 
     virtual void Draw(int x, int y, bool opened) const;
     void DrawHints(int x, int y, int width) const;
@@ -283,7 +291,7 @@ public:
     int16   maxValue;       ///< Максимальное значение.
     pFuncVV funcOfChanged;  ///< Функция, которую нужно вызывать после того, как значение регулятора изменилось.
     pFuncVV funcBeforeDraw; ///< Функция, которая вызывается перед отрисовкой
-    Governor(const char * const * titleHint, int16 *cell, int16 min, int16 max, const Page * const *keeper, pFuncBV funcActive, pFuncVV funcChanged, pFuncVV funcDraw);
+    Governor(const HeadItem * const head, int16 *cell, int16 min, int16 max, pFuncVV funcChanged, pFuncVV funcDraw);
 
     /// Возвращает следующее большее значение, которое может принять governor.
     int16 NextValue() const;
@@ -336,7 +344,7 @@ public:
     pString    *names;          ///< Варианты выбора.
     pFuncVB     funcOnChanged;  ///< Функция должна вызываться после изменения значения элемента.
     pFuncVII    funcForDraw;    ///< Функция вызывается после отрисовки элемента. 
-    Choice(const char * const * titleHint, pString *names, int8 num, int8 *cell, const Page * const *keeper, pFuncBV funcActive, pFuncVB funcChanged, pFuncVII funcDraw);
+    Choice(const HeadItem * const head, pString *names, int8 *cell, pFuncVB funcChanged, pFuncVII funcDraw);
     /// Запускает процесс изменения значения на delta
     void  StartChange(int delta) const;
     /// Рассчитывает следующий кадр анимации.
@@ -344,7 +352,7 @@ public:
     /// Изменяет значение choice в зависимости от величины и знака delta.
     void  ChangeIndex(int delta) const;
     /// Возвращает количество вариантов выбора в элементе по адресу choice
-    int   NumSubItems() const { return num; };
+    int   NumSubItems() const { return head->num; };
 
     void  DrawOpened(int x, int y) const;
 
@@ -379,7 +387,7 @@ class GovernorColor : public Item
 public:
     ColorType  *ct;                 ///< Структура для описания цвета.
     pFuncVV     funcOnChanged;      ///< Эту функцию нужно вызывать после изменения значения элемента.
-    GovernorColor(const char * const * titleHint, ColorType *ct, const Page * const *keeper, pFuncBV funcActive, pFuncVV funcChanged);
+    GovernorColor(const HeadItem * const head, ColorType *ct, pFuncVV funcChanged);
     virtual void Draw(int x, int y, bool opened) const;
     virtual void KeyRelease() const;
     virtual void KeyAutoRelease() const;
