@@ -469,6 +469,22 @@ void Button::KeyAutoRelease() const
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+GraphButton::GraphButton(const char * const * titleHint, const StructHelpDrawButton *_hintUGO, int num, const Page * const *keeper, pFuncBV funcActive, pFuncVV funcPress, pFuncVII funcDraw) :
+    Item(Item::Type::GraphButton, titleHint, keeper, 0, funcActive),
+    funcOnPress(funcPress), funcForDraw(funcDraw), hintUGO(_hintUGO), numHints(num)
+{
+    if (funcOnPress == nullptr)
+    {
+        funcOnPress = EmptyFuncVV;
+    }
+
+    if (funcForDraw == nullptr)
+    {
+        funcForDraw = EmptyFuncVII;
+    }
+};
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void GraphButton::KeyRelease() const
 {
     Item::KeyRelease();

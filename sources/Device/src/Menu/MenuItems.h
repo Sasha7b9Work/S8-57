@@ -264,9 +264,7 @@ public:
     pFuncVII                    funcForDraw;    ///< Эта функция вызывается для отрисовки кнопки в месте с координатами x, y.
     const StructHelpDrawButton *hintUGO; 
     int                         numHints;
-    GraphButton(const char * const * titleHint, const StructHelpDrawButton *_hintUGO, int num, const Page * const *keeper, pFuncBV funcActive, pFuncVV funcPress, pFuncVII funcDraw) :
-        Item(Item::Type::GraphButton, titleHint, keeper, 0, funcActive),
-        funcOnPress(funcPress), funcForDraw(funcDraw), hintUGO(_hintUGO), numHints(num) {};
+    GraphButton(const char * const * titleHint, const StructHelpDrawButton *hintUGO, int num, const Page * const *keeper, pFuncBV funcActive, pFuncVV funcPress, pFuncVII funcDraw);
 
     virtual void Draw(int x, int y, bool opened) const;
     void DrawHints(int x, int y, int width) const;
