@@ -88,22 +88,14 @@ void Item::KeyAutoRelease() const
         return;
     }
 
-    if (IS_BUTTON(this))
-    {
-        ((Button *)this)->KeyAutoRelease();
-    }
-    else if (IS_GRAPH_BUTTON(this))
-    {
-        ((GraphButton *)this)->KeyRelease();
-    }
-    else
-    {
-        if (!IsCurrentItem())
-        {
-            SetCurrent(true);
-        }
-        Open(!IsOpened());
-    }
+//    else
+//    {
+//        if (!IsCurrentItem())
+//        {
+//            SetCurrent(true);
+//        }
+//        Open(!IsOpened());
+//    }
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -317,6 +309,18 @@ void Page::KeyRelease() const
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Page::KeyAutoRelease() const
+{
+    Item::KeyAutoRelease();
+
+    if (!IsCurrentItem())
+    {
+        SetCurrent(true);
+    }
+    Open(!IsOpened());
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 bool Page::IsSubPage(const Page *parent)
 {
     const Page *keep = Keeper();
@@ -462,7 +466,9 @@ void Button::KeyRelease() const
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Button::KeyAutoRelease() const
 {
-    ((Button *)this)->KeyRelease();
+    Item::KeyAutoRelease();
+
+    KeyRelease();
 }
 
 
@@ -475,6 +481,14 @@ void GraphButton::KeyRelease() const
     {
         funcOnPress();
     }
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void GraphButton::KeyAutoRelease() const
+{
+    Item::KeyAutoRelease();
+
+    KeyRelease();
 }
 
 
@@ -495,6 +509,19 @@ void Governor::KeyRelease() const
         }
     }
 }
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Governor::KeyAutoRelease() const
+{
+    Item::KeyAutoRelease();
+
+    if (!IsCurrentItem())
+    {
+        SetCurrent(true);
+    }
+    Open(!IsOpened());
+}
+
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Governor::NextPosition() const
@@ -749,6 +776,19 @@ void Choice::KeyRelease() const
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Choice::KeyAutoRelease() const
+{
+    Item::KeyAutoRelease();
+
+    if (!IsCurrentItem())
+    {
+        SetCurrent(true);
+    }
+    Open(!IsOpened());
+}
+
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Choice::StartChange(int delta) const
 {
     if (tsChoice.address == 0)
@@ -917,13 +957,15 @@ void GovernorColor::KeyRelease() const
     }
 }
 
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void GovernorColor::KeyAutoRelease() const
+{
+    Item::KeyAutoRelease();
 
-//void TimeItem::SetOpened() const
-//{
-//    PackedTime time = Hardware::Clock::GetTime();
-//}
+    if (!IsCurrentItem())
+    {
+        SetCurrent(true);
+    }
+    Open(!IsOpened());
+}
 
-//void TimeItem::SetNewTime()
-//{
-//    Hardware::Clock::SetTime(*day, *month, *year, *hours, *minutes, *seconds);
-//}

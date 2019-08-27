@@ -74,7 +74,7 @@ public:
     /// Вызывается при "коротком" отпускании
     virtual void KeyRelease() const;
     /// Вызывается при автоматическом срабатывании кнопки (нажатии и удержании более 0.5 сек)
-    void KeyAutoRelease() const;
+    virtual void KeyAutoRelease() const;
     /// Возвращает true, если контрол находится в активном состоянии (реагирует на органы управления)
     bool IsActive() const { if (funcOfActive) { return funcOfActive(); } return true; };
 
@@ -163,6 +163,8 @@ public:
     bool IsSubPage(const Page *parent);
 
     virtual void KeyRelease() const;
+
+    virtual void KeyAutoRelease() const;
 
     void ShortPress() const;
     /// Возвращает адрес элемента, соответствующего функциональной кнопкке
@@ -264,7 +266,7 @@ public:
     {};
     virtual void Draw(int x, int y, bool opened) const;
     virtual void KeyRelease() const;
-    void KeyAutoRelease() const;
+    virtual void KeyAutoRelease() const;
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// SButton ///
@@ -290,6 +292,7 @@ public:
     virtual void Draw(int x, int y, bool opened) const;
     void DrawHints(int x, int y, int width) const;
     virtual void KeyRelease() const;
+    virtual void KeyAutoRelease() const;
 };
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// Governor ///
@@ -336,6 +339,8 @@ public:
     void SetValue(int16 v) const;
 
     virtual void KeyRelease() const;
+
+    virtual void KeyAutoRelease() const;
 
 private:
 
@@ -390,6 +395,8 @@ public:
     void Change(bool active) const { if (funcOnChanged) { funcOnChanged(active); } }
 
     virtual void KeyRelease() const;
+
+    virtual void KeyAutoRelease() const;
 };
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// GovernorColor ///
@@ -403,6 +410,7 @@ public:
         ct(_ct), funcOnChanged(funcChanged) {};
     virtual void Draw(int x, int y, bool opened) const;
     virtual void KeyRelease() const;
+    virtual void KeyAutoRelease() const;
 private:
     void DrawOpened(int x, int y) const;
     void DrawClosed(int x, int y) const;
