@@ -76,35 +76,6 @@ void Item::KeyPress() const
 void Item::KeyRelease() const
 {
     pressedItem = nullptr;
-
-    if (IS_CHOICE(this))
-    {
-        ((Choice *)this)->KeyRelease();
-    }
-    else if (IS_BUTTON(this))
-    {
-        ((Button *)this)->KeyRelease();
-    }
-    else if (IS_PAGE(this))
-    {
-        ((Page *)this)->ShortPress();
-    }
-    else if (IS_GOVERNOR(this))
-    {
-        ((Governor *)this)->KeyRelease();
-    }
-    else if (IS_GOVERNOR_COLOR(this))
-    {
-        ((GovernorColor *)this)->KeyRelease();
-    }
-    else if (IS_GRAPH_BUTTON(this))
-    {
-        ((GraphButton *)this)->KeyRelease();
-    }
-    else
-    {
-        // остальные типы контролов не обрабатываются
-    }
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -338,6 +309,14 @@ void Page::ShortPress() const
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Page::KeyRelease() const
+{
+    Item::KeyRelease();
+
+    ShortPress();
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 bool Page::IsSubPage(const Page *parent)
 {
     const Page *keep = Keeper();
@@ -467,6 +446,8 @@ const Item *Page::ItemForFuncKey(Key::E key) const
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void Button::KeyRelease() const
 {
+    Item::KeyRelease();
+
     if (IsActive())
     {
         SetCurrent(true);
@@ -488,6 +469,8 @@ void Button::KeyAutoRelease() const
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void GraphButton::KeyRelease() const
 {
+    Item::KeyRelease();
+
     if (IsActive())
     {
         funcOnPress();
@@ -498,6 +481,8 @@ void GraphButton::KeyRelease() const
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void Governor::KeyRelease() const
 {
+    Item::KeyRelease();
+
     if (IsActive())
     {
         if (Menu::OpenedItem() == this)
@@ -747,24 +732,19 @@ void Choice::ChangeIndex(int delta) const
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Choice::KeyRelease() const
 {
-    if (IS_CHOICE(this))
+    Item::KeyRelease();
+
+    if (!IsActive())
     {
-        if (!IsActive())
-        {
-            Change(false);
-        }
-        else if (!IsOpened())
-        {
-            StartChange(1);
-        }
-        else
-        {
-            ChangeIndex(1);
-        }
+        Change(false);
+    }
+    else if (!IsOpened())
+    {
+        StartChange(1);
     }
     else
     {
-        // здесь ничего
+        ChangeIndex(1);
     }
 }
 
@@ -918,6 +898,8 @@ Color Choice::ColorMenuField(const Choice *choice)
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void GovernorColor::KeyRelease() const
 {
+    Item::KeyRelease();
+
     if (IsActive())
     {
         if (Menu::OpenedItem() == this)

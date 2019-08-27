@@ -19,7 +19,6 @@
 #define IS_GOVERNOR(item)       (item->type == Item::Type::Governor)
 #define NOT_GOVERNOR(item)      (item->type != Item::Type::Governor)
 #define IS_GOVERNOR_COLOR(item) (item->type == Item::Type::GovernorColor)
-#define IS_TIME(item)           (item->type == Item::Type::Time)
 #define IS_BUTTON(item)         (item->type == Item::Type::Button)
 #define IS_GRAPH_BUTTON(item)   (item->type == Item::Type::GraphButton)
 
@@ -38,7 +37,6 @@ public:
             Button,         ///< Кнопка.
             Page,           ///< Страница.
             Governor,       ///< Регулятор - позволяет выбрать любое целое числовое значение из заранее заданного диапазаона. Диапазон не может превышать [ -(1 << 16) / 2 , (1 << 16) / 2]
-            Time,           ///< Позволяет ввести время.
             GovernorColor,  ///< Позволяет выбрать цвет.
             GraphButton,    ///< Кнопка для режима малых кнопок
             Number
@@ -74,7 +72,7 @@ public:
     /// Вызывается при нажатии кнопки
     void KeyPress() const;
     /// Вызывается при "коротком" отпускании
-    void KeyRelease() const;
+    virtual void KeyRelease() const;
     /// Вызывается при автоматическом срабатывании кнопки (нажатии и удержании более 0.5 сек)
     void KeyAutoRelease() const;
     /// Возвращает true, если контрол находится в активном состоянии (реагирует на органы управления)
@@ -163,6 +161,8 @@ public:
     void DrawNestingPage(int left, int bottom) const;
     /// true, если является вложенной подстраницей страницы parent
     bool IsSubPage(const Page *parent);
+
+    virtual void KeyRelease() const;
 
     void ShortPress() const;
     /// Возвращает адрес элемента, соответствующего функциональной кнопкке
@@ -263,7 +263,7 @@ public:
         funcOnPress(funcPress), funcForDraw(funcDraw)
     {};
     void Draw(int x, int y) const;
-    void KeyRelease() const;
+    virtual void KeyRelease() const;
     void KeyAutoRelease() const;
 };
 
@@ -289,7 +289,7 @@ public:
 
     void Draw(int x, int y) const;
     void DrawHints(int x, int y, int width) const;
-    void KeyRelease() const;
+    virtual void KeyRelease() const;
 };
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// Governor ///
@@ -335,7 +335,7 @@ public:
 
     void SetValue(int16 v);
 
-    void KeyRelease() const;
+    virtual void KeyRelease() const;
 
 private:
 
@@ -389,7 +389,7 @@ public:
     /// Вызывает функцию funcOnChanged, если таковая имеется
     void Change(bool active) const { if (funcOnChanged) { funcOnChanged(active); } }
 
-    void KeyRelease() const;
+    virtual void KeyRelease() const;
 };
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// GovernorColor ///
@@ -402,7 +402,7 @@ public:
         Item(Item::Type::GovernorColor, titleHint, keeper, 0, funcActive),
         ct(_ct), funcOnChanged(funcChanged) {};
     void Draw(int x, int y, bool opened);
-    void KeyRelease() const;
+    virtual void KeyRelease() const;
 private:
     void DrawOpened(int x, int y);
     void DrawClosed(int x, int y);
