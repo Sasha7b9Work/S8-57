@@ -242,10 +242,7 @@ class Button : public Item
 public:
     pFuncVV     funcOnPress;        ///< Функция, которая вызывается при нажатии на кнопку.
     pFuncVII    funcForDraw;        ///< Функция будет вызываться во время отрисовки кнопки.
-    Button(const char * const * titleHint, const Page * const *keeper, pFuncBV funcActive, pFuncVV funcPress, pFuncVII funcDraw) :
-        Item(Item::Type::Button, titleHint, keeper, 0, funcActive),
-        funcOnPress(funcPress), funcForDraw(funcDraw)
-    {};
+    Button(const char * const * titleHint, const Page * const *keeper, pFuncBV funcActive, pFuncVV funcPress, pFuncVII funcDraw);
     virtual void Draw(int x, int y, bool opened) const;
     virtual void KeyRelease() const;
     virtual void KeyAutoRelease() const;

@@ -431,6 +431,17 @@ const Item *Page::ItemForFuncKey(Key::E key) const
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+Button::Button(const char * const * titleHint, const Page * const *keeper, pFuncBV funcActive, pFuncVV funcPress, pFuncVII funcDraw) :
+    Item(Item::Type::Button, titleHint, keeper, 0, funcActive),
+    funcOnPress(funcPress), funcForDraw(funcDraw)
+{
+    if (funcOnPress == nullptr)
+    {
+        funcOnPress = EmptyFuncVV;
+    }
+};
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Button::KeyRelease() const
 {
     Item::KeyRelease();
@@ -439,10 +450,7 @@ void Button::KeyRelease() const
     {
         SetCurrent(true);
 
-        if (funcOnPress)
-        {
-            funcOnPress();
-        }
+        funcOnPress();
     }
 }
 
