@@ -4,14 +4,6 @@
 #include "MenuItemsDefs.h"
 
 
-/*
-    Структуры вида XxxDef испльзутся ТОЛЬКО для инициализации структур
-*/
-
-#define GRAPH_BUTTON_FROM_PAGE(page, numButton)     ((GraphButton *)((Page *)page)->items[numButton])
-
-#define MENU_ITEMS_ON_DISPLAY       5   ///< Сколько пунктов меню помещается на экране по горизонтали.
-
 class Page;
     
 class Item
@@ -44,8 +36,14 @@ public:
     Item(uint8 _type = Item::Type::None, const char * const *_titleHint = nullptr, const Page *const *_keeper = nullptr, int8 _num = 0, pFuncBV funcActive = nullptr, uint8 _name = 0) :
         type(_type), num(_num), name(_name), keeper(_keeper), funcOfActive(funcActive), titleHint(_titleHint)
     {
+        if (funcOfActive == nullptr)
+        {
+            funcOfActive = EmptyFuncBtV;
+        }
     };
 
+    /// Количество пунктов меню, умещающиееся на экране
+    static const int NUM_ON_DISPLAY = 5;
     /// Возвращает true, если кнопка, соответствующая элементу меню item, находится в нажатом положении
     bool IsPressed() const;
     /// Сделать/разделать текущим
@@ -59,7 +57,7 @@ public:
     /// Вызывается при нажатии кнопки
     void KeyPress() const;
     /// Возвращает true, если контрол находится в активном состоянии (реагирует на органы управления)
-    bool IsActive() const { if (funcOfActive) { return funcOfActive(); } return true; };
+    bool IsActive() const { return funcOfActive(); };
 
     bool IsCurrentItem() const;
     /// Возвращает адрес родителя

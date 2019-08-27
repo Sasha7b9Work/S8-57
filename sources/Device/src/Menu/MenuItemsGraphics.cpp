@@ -474,7 +474,7 @@ void Page::DrawPagesUGO(int right, int bottom) const
     int size = 4;
     int delta = 2;
 
-    int allPages = (NumItems() - 1) / MENU_ITEMS_ON_DISPLAY + 1;
+    int allPages = (NumItems() - 1) / Item::NUM_ON_DISPLAY + 1;
     int currentPage = CurrentSubPage();
 
     int left = right - (size + 1) * allPages - delta + (3 - allPages);
