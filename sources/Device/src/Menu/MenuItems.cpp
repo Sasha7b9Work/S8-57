@@ -731,6 +731,23 @@ char Governor::GetSymbol() const
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+Choice::Choice(const char * const * titleHint, pString *_names, int8 num, int8 *_cell, const Page * const *keeper, pFuncBV funcActive, pFuncVB funcChanged, pFuncVII funcDraw) :
+    Item(Item::Type::Choice, titleHint, keeper, num, funcActive),
+    cell(_cell), names(_names), funcOnChanged(funcChanged), funcForDraw(funcDraw)
+{
+    if (funcOnChanged == nullptr)
+    {
+        funcOnChanged = EmptyFuncVB;
+    }
+
+    if (funcForDraw == nullptr)
+    {
+        funcForDraw = EmptyFuncVII;
+    }
+};
+
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 bool Choice::ProcessKey(KeyEvent event)
 {
     if (event.type == TypePress::Press)
@@ -774,7 +791,7 @@ void Choice::ChangeIndex(int delta) const
         }
     }
     *cell = (int8)index;
-    Change(IsActive());
+    funcOnChanged(IsActive());
     Beeper::GovernorChangedValue();
     Osci::Display::SetFlagRedraw();
 }
@@ -786,7 +803,7 @@ void Choice::KeyRelease() const
 
     if (!IsActive())
     {
-        Change(false);
+        funcOnChanged(false);
     }
     else if (!IsOpened())
     {
@@ -824,7 +841,7 @@ void Choice::StartChange(int delta) const
         }
         else if (!IsActive())
         {
-            Change(false);
+            funcOnChanged(false);
         }
         else
         {
@@ -881,7 +898,7 @@ float Choice::Step() const //-V2506
 
         *cell = index;
         tsChoice.address = 0;
-        Change(IsActive());
+        funcOnChanged(IsActive());
         Osci::Display::SetFlagRedraw();
         tsChoice.dir = NONE;
         return 0.0F;

@@ -336,9 +336,7 @@ public:
     pString    *names;          ///< Варианты выбора.
     pFuncVB     funcOnChanged;  ///< Функция должна вызываться после изменения значения элемента.
     pFuncVII    funcForDraw;    ///< Функция вызывается после отрисовки элемента. 
-    Choice(const char * const * titleHint, pString *_names, int8 num, int8 *_cell, const Page * const *keeper, pFuncBV funcActive, pFuncVB funcChanged, pFuncVII funcDraw) :
-        Item(Item::Type::Choice, titleHint, keeper, num, funcActive),
-        cell(_cell), names(_names), funcOnChanged(funcChanged), funcForDraw(funcDraw) {};
+    Choice(const char * const * titleHint, pString *names, int8 num, int8 *cell, const Page * const *keeper, pFuncBV funcActive, pFuncVB funcChanged, pFuncVII funcDraw);
     /// Запускает процесс изменения значения на delta
     void  StartChange(int delta) const;
     /// Рассчитывает следующий кадр анимации.
@@ -363,8 +361,6 @@ public:
     static Color ColorMenuField(const Choice *choice);
 
     char GetSymbol();
-    /// Вызывает функцию funcOnChanged, если таковая имеется
-    void Change(bool active) const { if (funcOnChanged) { funcOnChanged(active); } }
 
     virtual void KeyRelease() const;
 
