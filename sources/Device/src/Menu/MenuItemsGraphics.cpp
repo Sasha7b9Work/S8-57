@@ -298,10 +298,7 @@ void Button::Draw(int x, int y, bool) const
 
     Text(Title().CString()).DrawInCenterRect(x + 2, y, Width(), Height(), IsPressed() ? Color::BACK : Color::FILL);
 
-    if (funcForDraw)
-    {
-        funcForDraw(x, y);
-    }
+    funcForDraw(x, y);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

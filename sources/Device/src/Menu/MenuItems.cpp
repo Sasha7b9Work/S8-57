@@ -439,6 +439,11 @@ Button::Button(const char * const * titleHint, const Page * const *keeper, pFunc
     {
         funcOnPress = EmptyFuncVV;
     }
+
+    if (funcForDraw == nullptr)
+    {
+        funcForDraw = EmptyFuncVII;
+    }
 };
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
