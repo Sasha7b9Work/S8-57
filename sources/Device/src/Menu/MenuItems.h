@@ -53,8 +53,7 @@ public:
         type(_type), num(_num), keeper(_keeper), funcOfActive(funcActive), titleHint(_titleHint)
     {
     };
-    /// Возвращает высоту в пикселях открытого элемента Choice или Page::Name
-    int HeightOpened() const;
+
     /// Возвращает true, если кнопка, соответствующая элементу меню item, находится в нажатом положении
     bool IsPressed() const;
     /// Сделать/разделать текущим
@@ -106,6 +105,8 @@ public:
     virtual void KeyAutoRelease() const;
     /// Обработка события кнопки
     virtual bool ProcessKey(KeyEvent) { return false; };
+    /// Возвращает высоту в пикселях открытого элемента Choice или Page::Name
+    virtual int HeightOpened() const;
 };
 
 
@@ -395,6 +396,8 @@ public:
     virtual void Draw(int x, int y, bool opened) const;
 
     virtual bool ProcessKey(KeyEvent event);
+
+    virtual int HeightOpened() const;
 };
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// GovernorColor ///
@@ -409,6 +412,7 @@ public:
     virtual void Draw(int x, int y, bool opened) const;
     virtual void KeyRelease() const;
     virtual void KeyAutoRelease() const;
+    virtual int HeightOpened() const { return 27; };
 private:
     void DrawOpened(int x, int y) const;
     void DrawClosed(int x, int y) const;

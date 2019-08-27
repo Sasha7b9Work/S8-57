@@ -64,33 +64,11 @@ void Item::KeyAutoRelease() const
     {
         return;
     }
-
-//    else
-//    {
-//        if (!IsCurrentItem())
-//        {
-//            SetCurrent(true);
-//        }
-//        Open(!IsOpened());
-//    }
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 int Item::HeightOpened() const
 {
-    if (IS_CHOICE(this))
-    {
-        return MOI_HEIGHT_TITLE + ((Choice *)this)->NumSubItems() * MOSI_HEIGHT - 5;
-    }
-    else if (IS_GOVERNOR_COLOR(this))
-    {
-        return 27;
-    }
-    else
-    {
-        // здесь ничего не делаем
-    }
-
     return Height();
 }
 
@@ -703,6 +681,12 @@ bool Choice::ProcessKey(KeyEvent event)
     }
 
     return false;
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+int Choice::HeightOpened() const
+{
+    return MOI_HEIGHT_TITLE + ((Choice *)this)->NumSubItems() * MOSI_HEIGHT - 5;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
