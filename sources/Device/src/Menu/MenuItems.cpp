@@ -50,10 +50,6 @@ bool Item::ProcessKey(KeyEvent event)
     {
         return ((Choice *)this)->ProcessKey(event);
     }
-    else if (IS_CHOICE_REG(this))
-    {
-        return ((Choice *)this)->ProcessKey(event);
-    }
     else if (IS_PAGE(this))
     {
         return ((Page *)this)->ProcessKey(event);
@@ -82,10 +78,6 @@ void Item::KeyRelease() const
     pressedItem = nullptr;
 
     if (IS_CHOICE(this))
-    {
-        ((Choice *)this)->KeyRelease();
-    }
-    else if (IS_CHOICE_REG(this))
     {
         ((Choice *)this)->KeyRelease();
     }
@@ -146,7 +138,7 @@ void Item::KeyAutoRelease() const
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 int Item::HeightOpened() const
 {
-    if (IS_CHOICE(this) || IS_CHOICE_REG(this))
+    if (IS_CHOICE(this))
     {
         return MOI_HEIGHT_TITLE + ((Choice *)this)->NumSubItems() * MOSI_HEIGHT - 5;
     }
@@ -768,17 +760,6 @@ void Choice::KeyRelease() const
         else
         {
             ChangeIndex(1);
-        }
-    }
-    else if (IS_CHOICE_REG(this))
-    {
-        if (IsActive())
-        {
-            SetCurrent(!IsCurrentItem());
-        }
-        else
-        {
-            Change(false);
         }
     }
     else

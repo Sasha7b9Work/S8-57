@@ -16,8 +16,6 @@
 #define NOT_PAGE(item)          (item->type != Item::Type::Page)
 #define IS_PAGE_SB(item)        (item->isPageSB)
 #define IS_CHOICE(item)         (item->type == Item::Type::Choice)
-#define IS_CHOICE_REG(item)     (item->type == Item::Type::ChoiceReg)
-#define NOT_CHOICE_REG(item)    (item->type != Item::Type::ChoiceReg)
 #define IS_GOVERNOR(item)       (item->type == Item::Type::Governor)
 #define NOT_GOVERNOR(item)      (item->type != Item::Type::Governor)
 #define IS_GOVERNOR_COLOR(item) (item->type == Item::Type::GovernorColor)
@@ -42,7 +40,6 @@ public:
             Governor,       ///< Регулятор - позволяет выбрать любое целое числовое значение из заранее заданного диапазаона. Диапазон не может превышать [ -(1 << 16) / 2 , (1 << 16) / 2]
             Time,           ///< Позволяет ввести время.
             GovernorColor,  ///< Позволяет выбрать цвет.
-            ChoiceReg,      ///< Элемент выбора, в котором выбор осуществляется не кнопкой, а ручкой
             GraphButton,    ///< Кнопка для режима малых кнопок
             ChoiceParameter,
             Number

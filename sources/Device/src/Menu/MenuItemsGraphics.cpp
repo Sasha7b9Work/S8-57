@@ -351,7 +351,7 @@ void Page::Draw(int x, int y, bool opened) const
             x = item->PositionOnScreenX();
             y = Menu::Y0() - item->HeightOpened() + Item::Height() + 1;
 
-            if (IS_CHOICE(item) || IS_CHOICE_REG(item))
+            if (IS_CHOICE(item))
             {
                 ((Choice *)item)->Draw(x, y, true);
             }
@@ -400,7 +400,6 @@ void Page::DrawTitle(int x, int y) const
     Region(Menu::Title::WIDTH - 1, Menu::Title::HEIGHT - 1).Fill(x + 1, y + 1, Color::BACK);
 
     bool condDrawRSet = NumSubPages() > 1 &&
-        NOT_CHOICE_REG(Menu::CurrentItem()) &&
         NOT_GOVERNOR(Menu::CurrentItem()) &&
         IS_PAGE(Menu::OpenedItem());
 
@@ -435,7 +434,7 @@ void Page::DrawItems(int x, int y) const
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Item::Draw(int x, int y, bool opened) const
 {
-    if (IS_CHOICE(this) || IS_CHOICE_REG(this))
+    if (IS_CHOICE(this))
     {
         ((Choice *)this)->Draw(x, y, opened);
     }
