@@ -271,7 +271,6 @@ public:
     pFuncVV                     funcOnPress;    ///< Эта функция вызвается для обработки нажатия кнопки.
     pFuncVII                    funcForDraw;    ///< Эта функция вызывается для отрисовки кнопки в месте с координатами x, y.
     const StructHelpDrawButton *hintUGO; 
-    int                         numHints;
     GraphButton(const HeadItem * const head, const StructHelpDrawButton *hintUGO, pFuncVV funcPress, pFuncVII funcDraw);
 
     virtual void Draw(int x, int y, bool opened) const;

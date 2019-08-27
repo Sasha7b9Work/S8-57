@@ -512,7 +512,7 @@ void Page::DrawNestingPage(int left, int bottom) const
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void GraphButton::DrawHints(int x, int y, int width) const
 {
-    if (numHints == 0)
+    if (head->num == 0)
     {
         return;
     }
@@ -521,7 +521,7 @@ void GraphButton::DrawHints(int x, int y, int width) const
     const StructHelpDrawButton *structHelp = &hintUGO[0];
     x += 3;
     y += 3;
-    for (int i = 0; i < numHints; i++)
+    for (int i = 0; i < head->num; i++)
     {
         Rectangle(GraphButton::Width(), GraphButton::Height()).Draw(x, y);
         structHelp->funcDrawUGO(x, y);
