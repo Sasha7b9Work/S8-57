@@ -117,6 +117,6 @@ DEF_PAGE_2( pageRAM, // -V641 // -V1027                                         
     "ѕереход в режим работы с последними полученными сигналами",
     &bLast_Prev,                        ///< ѕјћя“№ - ѕќ—Ћ≈ƒЌ»≈ - ѕредыдущий
     &bLast_Next,                        ///< ѕјћя“№ - ѕќ—Ћ≈ƒЌ»≈ - —ледующий
-    Page::Name::SB_Memory_Last,
+    Page::Name::Memory_Last,
     &PageMemory::self, 0, OnPress_RAM, OnDraw_RAM, HandlerKey_RAM
 )

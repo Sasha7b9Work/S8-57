@@ -159,7 +159,7 @@ DEF_PAGE_3( pppDrive_Manager, // -V641                                          
     &bDrive_Manager_Tab,        // ÏÀÌßÒÜ - ÂÍÅØÍ ÇÓ - ÊÀÒÀËÎÃ - Tab
     &bDrive_Manager_LevelUp,    // ÏÀÌßÒÜ - ÂÍÅØÍ ÇÓ - ÊÀÒÀËÎÃ - Âûéòè èç êàòàëîãà
     &bDrive_Manager_LevelDown,  // ÏÀÌßÒÜ - ÂÍÅØÍ ÇÓ - ÊÀÒÀËÎÃ - Âîéòè â êàòàëîã
-    Page::Name::SB_Memory_Drive_Manager,
+    Page::Name::Memory_Drive_Manager,
     &PageDrive::self, IsActive_Drive_Manager, PageMemory::OnPress_Drive_Manager, 0, FileManager::HandlerKey
 )
 
@@ -444,7 +444,7 @@ DEF_PAGE_3( pppDrive_Mask, // -V641                                             
     &bDrive_Mask_Delete,    // ÏÀÌßÒÜ - ÂÍÅØÍ ÇÓ - ÌÀÑÊÀ - Óäàëèòü
     &bDrive_Mask_Backspace, // ÏÀÌßÒÜ - ÂÍÅØÍ ÇÓ - ÌÀÑÊÀ - Backspace
     &bDrive_Mask_Insert,    // ÏÀÌßÒÜ - ÂÍÅØÍ ÇÓ - ÌÀÑÊÀ - Âñòàâèòü
-    Page::Name::SB_Memory_Drive_Mask,
+    Page::Name::Memory_Drive_Mask,
     &PageDrive::self, IsActive_Drive_Mask, OnPress_Drive_Mask, 0, HandlerKey_Drive_Mask
 )
 
@@ -677,5 +677,5 @@ DEF_PAGE_4(pSetName, // -V641                                                   
     &bSetName_Backspace,    /// ÂÂÎÄ ÈÌÅÍÈ ÔÀÉËÀ - Backspace
     &bSetName_Insert,       /// ÂÂÎÄ ÈÌÅÍÈ ÔÀÉËÀ - Âñòàâèòü
     &bSetName_Save,         /// ÂÂÎÄ ÈÌÅÍÈ ÔÀÉËÀ - Ñîõğàíèòü
-    Page::Name::SB_Memory_SetName, 0, 0, 0, 0, HandlerKey_SetName
+    Page::Name::Memory_SetName, 0, 0, 0, 0, HandlerKey_SetName
 )

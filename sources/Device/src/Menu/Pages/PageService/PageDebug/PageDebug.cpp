@@ -459,7 +459,7 @@ DEF_PAGE_5( ppSettings, // -V641 // -V1027                                      
     0,
     0,
     0,
-    Page::Name::SB_Debug_Settings,
+    Page::Name::Debug_Settings,
     &PageDebug::self, 0, OnPress_Settings, 0, 0
 )
 
@@ -560,7 +560,7 @@ DEF_PAGE_2( ppSerialNumber, // -V641 // -V1027                                  
     "Запись серийного номера в OTP-память. ВНИМАНИЕ!!! ОТP-память - память с однократной записью.",
     &bSerialNumber_Change,          // ОТЛАДКА - С/Н - Перейти
     &bSerialNumber_Save,            // ОТЛАДКА - С/Н - Сохранить
-    Page::Name::SB_Debug_SerialNumber,
+    Page::Name::Debug_SerialNumber,
     &PageDebug::self, 0, OnPress_SerialNumber, 0, HandlerKey_SerialNumber
 )
 

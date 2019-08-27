@@ -173,7 +173,7 @@ void Menu::ChangeStateFlashDrive()
 {
     if(!FDrive::IsConnected())
     {
-        if(GetNameOpenedPage() == Page::Name::SB_Memory_Drive_Manager)
+        if(GetNameOpenedPage() == Page::Name::Memory_Drive_Manager)
         {
             ((Button *)OpenedItem())->KeyRelease();
         }

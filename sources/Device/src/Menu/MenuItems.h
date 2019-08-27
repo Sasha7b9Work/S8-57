@@ -191,22 +191,22 @@ public:
             Trig_HoldOff,               ///< ÑÈÍÕÐ - ÓÄÅÐÆÀÍÈÅ
             Time,                       ///< ÐÀÇÂÅÐÒÊÀ
             Memory,                     ///< ÏÀÌßÒÜ
-            SB_Memory_Last,             ///< ÏÀÌßÒÜ - ÏÎÑËÅÄÍÈÅ
-            SB_Memory_Internal,         ///< ÏÀÌßÒÜ - ÂÍÓÒÐ ÇÓ
+            Memory_Last,                ///< ÏÀÌßÒÜ - ÏÎÑËÅÄÍÈÅ
+            Memory_Internal,            ///< ÏÀÌßÒÜ - ÂÍÓÒÐ ÇÓ
             Memory_Drive,               ///< ÏÀÌßÒÜ - ÂÍÅØÍ ÇÓ
-            SB_Memory_Drive_Manager,    ///< ÏÀÌßÒÜ - ÂÍÅØÍ ÇÓ - ÊÀÒÀËÎÃ
-            SB_Memory_Drive_Mask,       ///< ÏÀÌßÒÜ - ÂÍÅØÍ ÇÓ - ÌÀÑÊÀ
-            SB_Memory_SetName,          ///< \brief Ïîÿâëÿåòñÿ ïåðåä ñîõðàíåíèåì ôàéëà íà ôëåøêó äëÿ çàäàíèÿ èìåíè ôàéëà ïðè ñîîòâåòñòâóþùåé îïöèè 
+            Memory_Drive_Manager,       ///< ÏÀÌßÒÜ - ÂÍÅØÍ ÇÓ - ÊÀÒÀËÎÃ
+            Memory_Drive_Mask,          ///< ÏÀÌßÒÜ - ÂÍÅØÍ ÇÓ - ÌÀÑÊÀ
+            Memory_SetName,             ///< \brief Ïîÿâëÿåòñÿ ïåðåä ñîõðàíåíèåì ôàéëà íà ôëåøêó äëÿ çàäàíèÿ èìåíè ôàéëà ïðè ñîîòâåòñòâóþùåé îïöèè 
                                         ///< ÂÍÅØÍ ÇÓ - Èìÿ ôàéëà
             Service,                    ///< ÑÅÐÂÈÑ
             Service_Calibrator,         ///< ÑÅÐÂÈÑ - ÊÀËÈÁÐÀÒÎÐ
             Service_Ethernet,           ///< ÑÅÐÂÈÑ - ETHERNET
             Service_RTC,                ///< ÑÅÐÂÈÑ - ÂÐÅÌß
             Service_Battery,            ///< ÑÅÐÂÈÑ - ÁÀÒÀÐÅß
-            SB_Service_FFT_Cursors,     ///< ÑÅÐÂÈÑ - ÑÏÅÊÒÐ - ÊÓÐÑÎÐÛ
-            SB_Service_Function,        ///< ÑÅÐÂÈÑ - ÔÓÍÊÖÈß
-            SB_Service_Information,     ///< ÑÅÐÂÈÑ - ÈÍÔÎÐÌÀÖÈß
-            SB_Help,                    ///< ÏÎÌÎÙÜ
+            Service_FFT_Cursors,        ///< ÑÅÐÂÈÑ - ÑÏÅÊÒÐ - ÊÓÐÑÎÐÛ
+            Service_Function,           ///< ÑÅÐÂÈÑ - ÔÓÍÊÖÈß
+            Service_Information,        ///< ÑÅÐÂÈÑ - ÈÍÔÎÐÌÀÖÈß
+            Help,                       ///< ÏÎÌÎÙÜ
             Debug,                      ///< ÎÒËÀÄÊÀ
             Debug_Console,              ///< ÎÒËÀÄÊÀ - ÊÎÍÑÎËÜ
             Debug_Console_Registers,    ///< ÎÒËÀÄÊÀ - ÊÎÍÑÎËÜ - ÐÅÃÈÑÒÐÛ
@@ -218,8 +218,8 @@ public:
             Debug_Rand,                 ///< ÎÒËÀÄÊÀ - ÐÀÍÄ-ÒÎÐ
             Debug_Channels,             ///< ÎÒËÀÄÊÀ - ÊÀÍÀËÛ
             Debug_Multimeter,           ///< ÎÒËÀÄÊÀ - ÌÓËÜÒÈÌÅÒÐ
-            SB_Debug_Settings,          ///< ÎÒËÀÄÊÀ - ÍÀÑÒÐÎÉÊÈ
-            SB_Debug_SerialNumber,      ///< ÎÒËÀÄÊÀ - Ñ/Í
+            Debug_Settings,             ///< ÎÒËÀÄÊÀ - ÍÀÑÒÐÎÉÊÈ
+            Debug_SerialNumber,         ///< ÎÒËÀÄÊÀ - Ñ/Í
             Measures_Math,              ///< ÈÇÌÅÐÅÍÈß - ÌÀÒÅÌÀÒÈÊÀ
             Function_Multimeter_Cal,    ///< ÔÓÍÊÖÈß - ÌÓËÜÒÈÌÅÒÐ - ÊÀËÈÁÐÎÂÊÀ
             Display_View,               ///< ÄÈÑÏËÅÉ - ÎÒÎÁÐÀÆÅÍÈÅ

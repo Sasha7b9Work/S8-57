@@ -194,6 +194,6 @@ DEF_PAGE_4( pageROM, // -V641                                                   
     &bNext,         ///< ÏÀÌßÒÜ - ÂÍÓÒÐ ÇÓ - Ñëåäóþùèé
     &bSave,         ///< ÏÀÌßÒÜ - ÂÍÓÒÐ ÇÓ - Ñîõðàíèòü
     &bDelete,       ///< ÏÀÌßÒÜ - ÂÍÓÒÐ ÇÓ - Óäàëèòü
-    Page::Name::SB_Memory_Internal,
+    Page::Name::Memory_Internal,
     &PageMemory::self, 0, OnPress_Internal, OnDraw_Internal, HandlerKey_Internal
 )

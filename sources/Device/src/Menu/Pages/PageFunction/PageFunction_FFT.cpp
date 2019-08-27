@@ -125,7 +125,7 @@ DEF_PAGE_1( pppFFT_Cursors, // -V641 // -V1027                                  
     "КУРСОРЫ",
     "Включает курсоры для измерения параметров спектра",
     &bFFT_Cursors_Source,                       ///< СЕРВИС - СПЕКТР - КУРСОРЫ - Источник
-    Page::Name::SB_Service_FFT_Cursors, &PageFFT::self, IsActive_FFT_Cursors, 0, 0, HandlerKey_FFT_Cursors
+    Page::Name::Service_FFT_Cursors, &PageFFT::self, IsActive_FFT_Cursors, 0, 0, HandlerKey_FFT_Cursors
 )
 
 
