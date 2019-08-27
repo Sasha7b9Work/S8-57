@@ -35,13 +35,14 @@ public:
         explicit Type(E v) : value(v) {};
     };
     
-    uint8               type;            ///< Тип итема
-    int8                num;             ///< Число вариантов для Choice или число контролов для Page
-    const Page *const  *keeper;          ///< Адрес страницы, которой принадлежит. Для Page_Main = 0
-    pFuncBV             funcOfActive;    ///< Активен ли данный элемент
-    const char * const *titleHint;       ///< Название страницы. Также подсказка для режима помощи
-    Item(uint8 _type = Item::Type::None, const char * const *_titleHint = nullptr, const Page *const *_keeper = nullptr, int8 _num = 0, pFuncBV funcActive = nullptr) :
-        type(_type), num(_num), keeper(_keeper), funcOfActive(funcActive), titleHint(_titleHint)
+    uint8               type;           ///< Тип итема
+    int8                num;            ///< Число вариантов для Choice или число контролов для Page
+    uint8               name;           ///< Имя из перечисления Page::Name
+    const Page *const  *keeper;         ///< Адрес страницы, которой принадлежит. Для Page_Main = 0
+    pFuncBV             funcOfActive;   ///< Активен ли данный элемент
+    const char * const *titleHint;      ///< Название страницы. Также подсказка для режима помощи
+    Item(uint8 _type = Item::Type::None, const char * const *_titleHint = nullptr, const Page *const *_keeper = nullptr, int8 _num = 0, pFuncBV funcActive = nullptr, uint8 _name = 0) :
+        type(_type), num(_num), name(_name), keeper(_keeper), funcOfActive(funcActive), titleHint(_titleHint)
     {
     };
 
@@ -111,13 +112,12 @@ class Page : public Item
 public:
     const Item * const *items;      ///< Здесь указатели на пункты этой страницы (в обычной странице)
                                     ///< для страницы малых кнопок  здесь хранятся 6 указателей на SButton : 0 - K_Enter, 1...5 - K_1...K_5
-    uint8       name;            ///< Имя из перечисления Page::Name
     pFuncVB     funcOnEnterExit;    ///< Будет вызываться при нажатии на свёрнутую страницу и при выходе из этой страницы на предыдущую
     pFuncVV     funcOnDraw;         ///< Будет вызываться после отрисовки кнопок
     pFuncBKE    funcKey;            ///< В странице малых кнопок вызывается при нажатии стрелки
-    Page(uint8 _name, const char * const * titleHint, const Page * const *keeper, const Item * const *_items, int8 num, pFuncBV funcActive, pFuncVB funcEnterExit, pFuncVV funcDraw, pFuncBKE _funcKey) :
-        Item(Item::Type::Page, titleHint, keeper, num, funcActive),
-        items(_items), name(_name), funcOnEnterExit(funcEnterExit), funcOnDraw(funcDraw), funcKey(_funcKey) {};
+    Page(uint8 name, const char * const * titleHint, const Page * const *keeper, const Item * const *_items, int8 num, pFuncBV funcActive, pFuncVB funcEnterExit, pFuncVV funcDraw, pFuncBKE _funcKey) :
+        Item(Item::Type::Page, titleHint, keeper, num, funcActive, name),
+        items(_items), funcOnEnterExit(funcEnterExit), funcOnDraw(funcDraw), funcKey(_funcKey) {};
     /// Возвращает true, если текущий элемент страницы открыт
     bool CurrentItemIsOpened() const;
     /// Dозвращает число подстраниц в странице по адресу page

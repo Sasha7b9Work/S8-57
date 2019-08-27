@@ -14,7 +14,7 @@ static const Button name(name##titleHint, keeper, funcActive, funcPress, funcDra
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #define DEF_GOVERNOR(name, title, hint, cell, min, max, keeper, funcActive, funcChanged, funcBeforeDraw)                                                                                    \
 static const char *th##name[] = {title, hint};                                                                                                                                              \
-static const Governor name(th##name, (int16 *)cell, min, max, keeper, funcActive, funcChanged, funcBeforeDraw);
+static const Governor name(th##name, (int16 *)&cell, min, max, keeper, funcActive, funcChanged, funcBeforeDraw);
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #define DEF_GOVERNOR_COLOR(name, title, hint, colorType, keeper)                                                                                                                            \
