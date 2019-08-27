@@ -232,8 +232,8 @@ static void CreateButtons(Frame *frame)
 
     size.SetWidth(width);
 
-    CreateButton(Key::TBaseLess, frame, {x0, y0}, size, "с");
-    CreateButton(Key::TBaseMore, frame, {x0 + width + dY, y0}, size, "мс");
+    CreateButton(Key::TBaseLess, frame, {x0 + width + dY, y0}, size, "мс");
+    CreateButton(Key::TBaseMore, frame, {x0, y0}, size, "с");
     y0 += height + dY;
     CreateButton(Key::TShiftLess, frame, {x0, y0}, size, "<-");
     CreateButton(Key::TShiftMore, frame, {x0 + width + dY, y0}, size, "->");

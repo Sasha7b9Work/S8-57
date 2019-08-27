@@ -501,7 +501,6 @@ static void DrawValueWithSelectedPosition(int x, int y, int value, uint numDigit
     Color fill = Color::BACK;
     Color back = Color::FILL;
     
-    
     for (uint i = 0; i < numDigits; i++)
     {
         if (selPosFromEnd == ((int)numDigits - (int)i - 1))
