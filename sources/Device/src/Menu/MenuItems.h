@@ -41,7 +41,6 @@ public:
             Time,           ///< Позволяет ввести время.
             GovernorColor,  ///< Позволяет выбрать цвет.
             GraphButton,    ///< Кнопка для режима малых кнопок
-            ChoiceParameter,
             Number
         } value;
 

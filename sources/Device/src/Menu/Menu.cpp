@@ -353,8 +353,7 @@ static void DrawHintItem(int x, int y, int width)
         "Регулятор",          // Item::Type::Governor
         "",                   // Item::Type::Time
         "",                   // Item::Type::GovernorColor
-        "Кнопка",             // Item::Type::DrawButton
-        "Выбор параметра"     // Item::Type::ChoiceParameter
+        "Кнопка"              // Item::Type::DrawButton
     };
 
     Page *item = (Page *)itemHint;
