@@ -115,7 +115,13 @@ public:
     pFuncBKE    funcKey;            ///< В странице малых кнопок вызывается при нажатии стрелки
     Page(uint8 name, const char * const * titleHint, const Page * const *keeper, const Item * const *_items, int8 num, pFuncBV funcActive, pFuncVB funcEnterExit, pFuncVV funcDraw, pFuncBKE _funcKey) :
         Item(Item::Type::Page, titleHint, keeper, num, funcActive, name),
-        items(_items), funcOnEnterExit(funcEnterExit), funcOnDraw(funcDraw), funcKey(_funcKey) {};
+        items(_items), funcOnEnterExit(funcEnterExit), funcOnDraw(funcDraw), funcKey(_funcKey)
+    {
+        if (funcOnEnterExit == nullptr)
+        {
+            funcOnEnterExit = EmptyFuncVB;
+        }
+    };
     /// Возвращает true, если текущий элемент страницы открыт
     bool CurrentItemIsOpened() const;
     /// Dозвращает число подстраниц в странице по адресу page

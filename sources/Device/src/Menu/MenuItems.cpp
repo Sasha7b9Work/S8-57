@@ -247,10 +247,7 @@ int Page::NumItems() const //-V2506
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Page::ShortPress() const
 {
-    if (funcOnEnterExit)
-    {
-        funcOnEnterExit(true);
-    }
+    funcOnEnterExit(true);
 
     SetAsCurrent();
 }
