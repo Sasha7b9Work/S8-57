@@ -5,6 +5,8 @@
 
 typedef bool(*pFuncBKE)(KeyEvent);
 
+inline bool EmptyFuncfBKE(KeyEvent) { return false; }
+
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #define DEF_BUTTON(name, title, hint, keeper, funcActive, funcPress, funcDraw)                                                                                                              \

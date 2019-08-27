@@ -33,15 +33,7 @@ public:
     const Page *const  *keeper;         ///< Адрес страницы, которой принадлежит. Для Page_Main = 0
     pFuncBV             funcOfActive;   ///< Активен ли данный элемент
     const char * const *titleHint;      ///< Название страницы. Также подсказка для режима помощи
-    Item(uint8 _type = Item::Type::None, const char * const *_titleHint = nullptr, const Page *const *_keeper = nullptr, int8 _num = 0, pFuncBV funcActive = nullptr, uint8 _name = 0) :
-        type(_type), num(_num), name(_name), keeper(_keeper), funcOfActive(funcActive), titleHint(_titleHint)
-    {
-        if (funcOfActive == nullptr)
-        {
-            funcOfActive = EmptyFuncBtV;
-        }
-    };
-
+    Item(uint8 type = Item::Type::None, const char * const *titleHint = nullptr, const Page *const *keeper = nullptr, int8 num = 0, pFuncBV funcActive = nullptr, uint8 name = 0);
     /// Количество пунктов меню, умещающиееся на экране
     static const int NUM_ON_DISPLAY = 5;
     /// Возвращает true, если кнопка, соответствующая элементу меню item, находится в нажатом положении
@@ -113,20 +105,7 @@ public:
     pFuncVB     funcOnEnterExit;    ///< Будет вызываться при нажатии на свёрнутую страницу и при выходе из этой страницы на предыдущую
     pFuncVV     funcOnDraw;         ///< Будет вызываться после отрисовки кнопок
     pFuncBKE    funcKey;            ///< В странице малых кнопок вызывается при нажатии стрелки
-    Page(uint8 name, const char * const * titleHint, const Page * const *keeper, const Item * const *_items, int8 num, pFuncBV funcActive, pFuncVB funcEnterExit, pFuncVV funcDraw, pFuncBKE _funcKey) :
-        Item(Item::Type::Page, titleHint, keeper, num, funcActive, name),
-        items(_items), funcOnEnterExit(funcEnterExit), funcOnDraw(funcDraw), funcKey(_funcKey)
-    {
-        if (funcOnEnterExit == nullptr)
-        {
-            funcOnEnterExit = EmptyFuncVB;
-        }
-
-        if (funcOnDraw == nullptr)
-        {
-            funcOnDraw = EmptyFuncVV;
-        }
-    };
+    Page(uint8 name, const char * const * titleHint, const Page * const *keeper, const Item * const *items, int8 num, pFuncBV funcActive, pFuncVB funcEnterExit, pFuncVV funcDraw, pFuncBKE funcKey);
     /// Возвращает true, если текущий элемент страницы открыт
     bool CurrentItemIsOpened() const;
     /// Dозвращает число подстраниц в странице по адресу page

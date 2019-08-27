@@ -44,6 +44,16 @@ static const Item *pressedItem = nullptr;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+Item::Item(uint8 _type, const char * const *_titleHint, const Page *const *_keeper, int8 _num, pFuncBV funcActive, uint8 _name) :
+    type(_type), num(_num), name(_name), keeper(_keeper), funcOfActive(funcActive), titleHint(_titleHint)
+{
+    if (funcOfActive == nullptr)
+    {
+        funcOfActive = EmptyFuncBtV;
+    }
+};
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Item::KeyPress() const
 {
     pressedItem = this;
@@ -229,6 +239,27 @@ int Item::PositionInKeeperList() const
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+Page::Page(uint8 name, const char * const * titleHint, const Page * const *keeper, const Item * const *_items, int8 num, pFuncBV funcActive, pFuncVB funcEnterExit, pFuncVV funcDraw, pFuncBKE _funcKey) :
+    Item(Item::Type::Page, titleHint, keeper, num, funcActive, name),
+    items(_items), funcOnEnterExit(funcEnterExit), funcOnDraw(funcDraw), funcKey(_funcKey)
+{
+    if (funcOnEnterExit == nullptr)
+    {
+        funcOnEnterExit = EmptyFuncVB;
+    }
+
+    if (funcOnDraw == nullptr)
+    {
+        funcOnDraw = EmptyFuncVV;
+    }
+
+    if (funcKey == nullptr)
+    {
+        funcKey = EmptyFuncfBKE;
+    }
+};
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 int Page::NumSubPages() const
 {
     return (NumItems() - 1) / Item::NUM_ON_DISPLAY + 1;
@@ -299,7 +330,7 @@ Page::Name::E Page::GetName() const
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 bool Page::ProcessKey(KeyEvent event)
 {
-    if (funcKey && funcKey(event))
+    if (funcKey(event))
     {
         return true;
     }
