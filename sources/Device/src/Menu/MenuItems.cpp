@@ -441,29 +441,13 @@ void Button::KeyAutoRelease() const
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-GraphButton::GraphButton(const DataItem * const head, const StructHelpDrawButton *_hintUGO, pFuncVV funcPress, pFuncVII funcDraw) :
-    Item(head),
-    funcOnPress(funcPress), funcForDraw(funcDraw), hintUGO(_hintUGO)
-{
-    if (funcOnPress == nullptr)
-    {
-        funcOnPress = EmptyFuncVV;
-    }
-
-    if (funcForDraw == nullptr)
-    {
-        funcForDraw = EmptyFuncVII;
-    }
-};
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void GraphButton::KeyRelease() const
 {
     Item::KeyRelease();
 
     if (IsActive())
     {
-        funcOnPress();
+        OwnData()->FuncOnPress();
     }
 }
 

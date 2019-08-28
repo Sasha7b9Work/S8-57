@@ -318,7 +318,7 @@ void GraphButton::Draw(int x, int y, bool) const
         {
             Color::FILL.SetAsCurrent();
         }
-        funcForDraw(x + 20, y);
+        OwnData()->FuncForDraw(x + 20, y);
     }
     else
     {
@@ -518,7 +518,7 @@ void GraphButton::DrawHints(int x, int y, int width) const
     }
     Region(width, 239 - y).Fill(x, y, Color::BACK);
     Rectangle(width, 239 - y).Draw(x, y, Color::FILL);
-    const StructHelpDrawButton *structHelp = &hintUGO[0];
+    const StructHelpDrawButton *structHelp = &OwnData()->hintUGO[0];
     x += 3;
     y += 3;
     for (int i = 0; i < data->num; i++)

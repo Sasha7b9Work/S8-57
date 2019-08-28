@@ -282,20 +282,27 @@ struct StructHelpDrawButton
     pString     helpUGO;        ///< Подпись к данному изображению.
 };
 
+struct DataGraphButton
+{
+    pFuncVV                     funcOnPress;    ///< Эта функция вызвается для обработки нажатия кнопки.
+    pFuncVII                    funcForDraw;    ///< Эта функция вызывается для отрисовки кнопки в месте с координатами x, y.
+    const StructHelpDrawButton *hintUGO;
+
+    void FuncOnPress() { if (funcOnPress) funcOnPress(); }
+    void FuncForDraw(int x, int y) { if (funcForDraw) funcForDraw(x, y); }
+};
 
 /// Описывает кнопку для дополнительного режима меню.
 class GraphButton : public Item
 {
 public:
-    pFuncVV                     funcOnPress;    ///< Эта функция вызвается для обработки нажатия кнопки.
-    pFuncVII                    funcForDraw;    ///< Эта функция вызывается для отрисовки кнопки в месте с координатами x, y.
-    const StructHelpDrawButton *hintUGO; 
-    GraphButton(const DataItem * const head, const StructHelpDrawButton *hintUGO, pFuncVV funcPress, pFuncVII funcDraw);
+    GraphButton(const DataItem * const data) : Item(data) {};
 
     virtual void Draw(int x, int y, bool opened) const;
     void DrawHints(int x, int y, int width) const;
     virtual void KeyRelease() const;
     virtual void KeyAutoRelease() const;
+    DataGraphButton *OwnData() const { return (DataGraphButton *)data->ad; }
 };
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// Governor ///

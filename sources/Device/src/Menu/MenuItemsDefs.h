@@ -30,28 +30,32 @@ static const GovernorColor name(&hi##name, &colorType, 0);
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #define DEF_GRAPH_BUTTON(name, title, hint, keeper, funcActive, funcPress, funcDraw)                                                                                                        \
 static const pString th##name[] = {title, hint};                                                                                                                                            \
-static const DataItem hi##name = { Item::Type::GovernorColor, 0, Page::Name::NoPage, keeper, funcActive, th##name };                                                                        \
-static const GraphButton name(&hi##name, nullptr, funcPress, funcDraw);
+static const DataGraphButton dgb##name = {funcPress, funcDraw, nullptr};                                                                                                                    \
+static const DataItem hi##name = { Item::Type::GovernorColor, 0, Page::Name::NoPage, keeper, funcActive, th##name, &dgb##name };                                                            \
+static const GraphButton name(&hi##name);
 
 #define DEF_GRAPH_BUTTON_HINTS_2(name, title, hint, keeper, funcActive, funcPress, funcDraw, FuncDrawHint1, hint1, FuncDrawHint2, hint2)                                                    \
 static const StructHelpDrawButton h##name[] = {{ FuncDrawHint1, hint1 }, { FuncDrawHint2, hint2 }};                                                                                         \
 static const pString th##name[] = {title, hint};                                                                                                                                            \
-static const DataItem hi##name = { Item::Type::GovernorColor, 2, Page::Name::NoPage, keeper, funcActive, th##name };                                                                        \
-static const GraphButton name(&hi##name, h##name, funcPress, funcDraw);
+static const DataGraphButton dgb##name = {funcPress, funcDraw, h##name};                                                                                                                    \
+static const DataItem hi##name = { Item::Type::GovernorColor, 2, Page::Name::NoPage, keeper, funcActive, th##name, &dgb##name };                                                            \
+static const GraphButton name(&hi##name);
 
 #define DEF_GRAPH_BUTTON_HINTS_3(name, title, hint, keeper, funcActive, funcPress, funcDraw, FuncDrawHint1, hint1, FuncDrawHint2, hint2, FuncDrawHint3, hint3)                              \
 static const StructHelpDrawButton h##name[] = {{ FuncDrawHint1, hint1 }, { FuncDrawHint2, hint2 }, { FuncDrawHint3, hint3 } };                                                              \
 static const pString th##name[] = {title, hint};                                                                                                                                            \
-static const DataItem hi##name = { Item::Type::GovernorColor, 3, Page::Name::NoPage, keeper, funcActive, th##name };                                                                        \
-static const GraphButton name(&hi##name, h##name, funcPress, funcDraw);
+static const DataGraphButton dgb##name = {funcPress, funcDraw, h##name};                                                                                                                    \
+static const DataItem hi##name = { Item::Type::GovernorColor, 3, Page::Name::NoPage, keeper, funcActive, th##name, &dgb##name };                                                            \
+static const GraphButton name(&hi##name);
 
 #define DEF_GRAPH_BUTTON_HINTS_5(name, title, hint, keeper, funcActive, funcPress, funcDraw,                                                                                                \
     FuncDrawHint1, hint1, FuncDrawHint2, hint2, FuncDrawHint3, hint3, FuncDrawHint4, hint4, FuncDrawHint5, hint5)                                                                           \
 static const StructHelpDrawButton h##name[] = {{ FuncDrawHint1, hint1 }, { FuncDrawHint2, hint2 },                                                                                          \
     { FuncDrawHint3, hint3 }, { FuncDrawHint4, hint4 }, { FuncDrawHint5, hint5 } };                                                                                                         \
 static const pString th##name[] = {title, hint};                                                                                                                                            \
-static const DataItem hi##name = { Item::Type::GovernorColor, 5, Page::Name::NoPage, keeper, funcActive, th##name };                                                                        \
-static const GraphButton name(&hi##name, h##name, funcPress, funcDraw);
+static const DataGraphButton dgb##name = {funcPress, funcDraw, h##name};                                                                                                                    \
+static const DataItem hi##name = { Item::Type::GovernorColor, 5, Page::Name::NoPage, keeper, funcActive, th##name, &dgb##name };                                                            \
+static const GraphButton name(&hi##name);
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #define DEF_PAGE_1(name, title, hint, item1, namePage, keeper, funcActive, funcPress, funcDraw, funcRegSet)                                                                                 \
