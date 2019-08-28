@@ -117,7 +117,7 @@ DEF_CHOICE_16( gGateMax,                                                        
     "130",
     "140",
     "150",
-    set.dbg_enum_gate_max, &PageDebug::PageRand::self, 0, 0, 0
+    set.dbg_enum_gate_max, &PageDebug::PageRand::self, E_BtV, E_VB, E_VII
 )
 
 
@@ -141,7 +141,7 @@ DEF_CHOICE_16( gGateMin,                                                        
     "130",
     "140",
     "150",
-    set.dbg_enum_gate_min, &PageDebug::PageRand::self, 0, 0, 0
+    set.dbg_enum_gate_min, &PageDebug::PageRand::self, E_BtV, E_VB, E_VII
 )
 
 

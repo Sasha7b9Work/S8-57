@@ -22,7 +22,7 @@ DEF_CHOICE_2( cShow,                                                            
     "Включает/отключает курсоры.",
     "Нет",
     "Да",
-    CURS_SHOW, &PageMeasuresCursors::self, 0, 0, 0
+    CURS_SHOW, &PageMeasuresCursors::self, E_BtV, E_VB, E_VII
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -73,7 +73,7 @@ DEF_CHOICE_2( cShowFreq,                                                        
     ,
     DISABLE_RU,
     ENABLE_RU,
-    CURSORS_SHOW_FREQ, &PageMeasuresCursors::self, IsActive_ShowFreq, 0, 0
+    CURSORS_SHOW_FREQ, &PageMeasuresCursors::self, IsActive_ShowFreq, E_VB, E_VII
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

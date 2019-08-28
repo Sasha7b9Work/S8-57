@@ -280,9 +280,6 @@ struct DataChoice
     pString    *names;          ///< Варианты выбора.
     pFuncVB     funcOnChanged;  ///< Функция должна вызываться после изменения значения элемента.
     pFuncVII    funcForDraw;    ///< Функция вызывается после отрисовки элемента. 
-
-    void FuncOnChanged(bool active) { if (funcOnChanged) { funcOnChanged(active); } }
-    void FuncForDraw(int x, int y) { if (funcForDraw) { funcForDraw(x, y); } }
 };
 
 class Choice : public Item

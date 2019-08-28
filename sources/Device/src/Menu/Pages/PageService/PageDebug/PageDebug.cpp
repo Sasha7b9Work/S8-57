@@ -75,7 +75,7 @@ DEF_CHOICE_3( cADC_Balance_Mode,                                                
     "Реальный",
     "Ручной",
     NRST_BALANCE_ADC_TYPE,
-    &PageDebug::PageADC::PageBalance::self, 0, OnChanged_ADC_Balance_Mode, Draw_ADC_Balance_Mode
+    &PageDebug::PageADC::PageBalance::self, E_BtV, OnChanged_ADC_Balance_Mode, Draw_ADC_Balance_Mode
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -145,7 +145,7 @@ DEF_CHOICE_3( cADC_Stretch_Mode,                                                
     "Реальный",
     "Ручной",
     NRST_STRETCH_ADC_TYPE,
-    &PageDebug::PageADC::PageStretch::self, 0, PageDebug::OnChanged_ADC_Stretch_Mode, 0
+    &PageDebug::PageADC::PageStretch::self, E_BtV, PageDebug::OnChanged_ADC_Stretch_Mode, E_VII
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -370,7 +370,7 @@ DEF_CHOICE_2( cStats,                                                           
     "Не показывать",
     "Показывать",
     SHOW_STAT,
-    &PageDebug::self, 0, 0, 0
+    &PageDebug::self, E_BtV, E_VB, E_VII
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

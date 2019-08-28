@@ -15,7 +15,7 @@ DEF_CHOICE_3( cDestination,                                                     
     "ÎÇÓ",
     "USB-Flash",
     "USB-PC",
-    RECORDER_STORAGE_RECORD, &PageRecorder::PageRecord::self, 0, 0, 0
+    RECORDER_STORAGE_RECORD, &PageRecorder::PageRecord::self, E_BtV, E_VB, E_VII
 )
 
 

@@ -14,7 +14,7 @@ DEF_CHOICE_2( cChanA,                                                           
     "Выбор канала 1 для записи и просмотра",
     DISABLE_RU,
     ENABLE_RU,
-    RECORDER_SOURCE_A, &PageRecorder::PageSource::self, 0, 0, 0
+    RECORDER_SOURCE_A, &PageRecorder::PageSource::self, E_BtV, E_VB, E_VII
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -23,7 +23,7 @@ DEF_CHOICE_2( cChanB,                                                           
     "Выбор канала 2 для записи и просмотра",
     DISABLE_RU,
     ENABLE_RU,
-    RECORDER_SOURCE_B, &PageRecorder::PageSource::self, 0, 0, 0
+    RECORDER_SOURCE_B, &PageRecorder::PageSource::self, E_BtV, E_VB, E_VII
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

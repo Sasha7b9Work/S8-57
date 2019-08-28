@@ -23,7 +23,7 @@ DEF_CHOICE_2( cPolarity,                                                        
     "Полярность испытательного воздействия",
     "+",
     "-",
-    TESTER_POLARITY, &PageTester::self, 0, OnChanged_Polarity, 0
+    TESTER_POLARITY, &PageTester::self, E_BtV, OnChanged_Polarity, E_VII
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -32,7 +32,7 @@ DEF_CHOICE_2(   cControl,                                                       
     "Тип испытательного воздействия",
     "Напряжение",
     "Ток",
-    TESTER_CONTROL, &PageTester::self, 0, PageTester::OnChanged_Control, 0
+    TESTER_CONTROL, &PageTester::self, E_BtV, PageTester::OnChanged_Control, E_VII
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -46,7 +46,7 @@ DEF_CHOICE_2(   cStepU,                                                         
     "Шаг испытательного напряжения",
     "600 мВ",
     "3 В",
-    TESTER_STEP_U, &PageTester::self, 0, OnChanged_Step, 0
+    TESTER_STEP_U, &PageTester::self, E_BtV, OnChanged_Step, E_VII
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -55,7 +55,7 @@ DEF_CHOICE_2( cStepI,
     "Шаг исптытательного тока",
     "4 мкА",
     "20 мкА",
-    TESTER_STEP_I, &PageTester::self, 0, OnChanged_Step, 0
+    TESTER_STEP_I, &PageTester::self, E_BtV, OnChanged_Step, E_VII
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -64,7 +64,7 @@ DEF_CHOICE_2( cViewMode,
     "",
     "Линии",
     "Точки",
-    TESTER_VIEW_MODE, &PageTester::self, 0, 0, 0
+    TESTER_VIEW_MODE, &PageTester::self, E_BtV, E_VB, E_VII
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -80,7 +80,7 @@ DEF_CHOICE_9( cAveraging,
     "64",
     "128",
     "256",
-    TESTER_ENUM_AVERAGE, &PageTester::self, 0, 0, 0
+    TESTER_ENUM_AVERAGE, &PageTester::self, E_BtV, E_VB, E_VII
 )
 
 

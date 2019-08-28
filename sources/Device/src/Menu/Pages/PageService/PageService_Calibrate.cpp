@@ -20,7 +20,7 @@ DEF_CHOICE_2( cCalibrator_Calibrator, // -V206                                  
     "Режим работы калибратора",
     "Перем",
     "Пост",
-    CALIBRATOR_MODE, &PageService::PageCalibrate::self, 0, OnChanged_Calibrator_Calibrator, 0
+    CALIBRATOR_MODE, &PageService::PageCalibrate::self, E_BtV, OnChanged_Calibrator_Calibrator, E_VII
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

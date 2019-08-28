@@ -20,7 +20,7 @@ DEF_CHOICE_2( cShow,                                                            
     "",
     "Нет",
     "Да",
-    set.dbg_showConsole, &PageDebug::PageConsole::self, 0, 0, 0
+    set.dbg_showConsole, &PageDebug::PageConsole::self, E_BtV, E_VB, E_VII
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -54,7 +54,7 @@ DEF_CHOICE_2( cRegisters_ShowAll,                                               
     "Показывать все значения, засылаемые в регистры",
     "Нет",
     "Да",
-    DBG_SHOW_ALL, &PageDebug::PageRegisters::self, 0, 0, 0
+    DBG_SHOW_ALL, &PageDebug::PageRegisters::self, E_BtV, E_VB, E_VII
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -68,7 +68,7 @@ DEF_CHOICE_2( cRegisters_RD_FL,                                                 
     "",
     DISABLE_RU,
     ENABLE_RU,
-    DBG_SHOW_FLAG, &PageDebug::PageRegisters::self, IsActive_Console_Registers, 0, 0
+    DBG_SHOW_FLAG, &PageDebug::PageRegisters::self, IsActive_Console_Registers, E_VB, E_VII
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -77,7 +77,7 @@ DEF_CHOICE_2( cRegisters_RShiftA,                                               
     "",
     DISABLE_RU,
     ENABLE_RU,
-    set.dbg_showRShift[Chan::A], &PageDebug::PageRegisters::self, IsActive_Console_Registers, 0, 0
+    set.dbg_showRShift[Chan::A], &PageDebug::PageRegisters::self, IsActive_Console_Registers, E_VB, E_VII
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -86,7 +86,7 @@ DEF_CHOICE_2( cRegisters_RShiftB,                                               
     "",
     DISABLE_RU,
     ENABLE_RU,
-    set.dbg_showRShift[Chan::B], &PageDebug::PageRegisters::self, IsActive_Console_Registers, 0, 0
+    set.dbg_showRShift[Chan::B], &PageDebug::PageRegisters::self, IsActive_Console_Registers, E_VB, E_VII
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -95,7 +95,7 @@ DEF_CHOICE_2( cRegisters_TrigLev,                                               
     "",
     DISABLE_RU,
     ENABLE_RU,
-    set.dbg_showTrigLev, &PageDebug::PageRegisters::self, IsActive_Console_Registers, 0, 0
+    set.dbg_showTrigLev, &PageDebug::PageRegisters::self, IsActive_Console_Registers, E_VB, E_VII
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -104,7 +104,7 @@ DEF_CHOICE_2( cRegisters_RangeA,                                                
     "",
     DISABLE_RU,
     ENABLE_RU,
-    set.dbg_showRange[Chan::A], &PageDebug::PageRegisters::self, IsActive_Console_Registers, 0, 0
+    set.dbg_showRange[Chan::A], &PageDebug::PageRegisters::self, IsActive_Console_Registers, E_VB, E_VII
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -113,7 +113,7 @@ DEF_CHOICE_2( cRegisters_RangeB,                                                
     "",
     DISABLE_RU,
     ENABLE_RU,
-    set.dbg_showRange[Chan::B], &PageDebug::PageRegisters::self, IsActive_Console_Registers, 0, 0
+    set.dbg_showRange[Chan::B], &PageDebug::PageRegisters::self, IsActive_Console_Registers, E_VB, E_VII
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -122,7 +122,7 @@ DEF_CHOICE_2( cRegisters_TrigParam,                                             
     "",
     DISABLE_RU,
     ENABLE_RU,
-    set.dbg_showTrigParam, &PageDebug::PageRegisters::self, IsActive_Console_Registers, 0, 0
+    set.dbg_showTrigParam, &PageDebug::PageRegisters::self, IsActive_Console_Registers, E_VB, E_VII
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -131,7 +131,7 @@ DEF_CHOICE_2( cRegisters_ChanParamA,                                            
     "",
     DISABLE_RU,
     ENABLE_RU,
-    set.dbg_showChanParam[Chan::A], &PageDebug::PageRegisters::self, IsActive_Console_Registers, 0, 0
+    set.dbg_showChanParam[Chan::A], &PageDebug::PageRegisters::self, IsActive_Console_Registers, E_VB, E_VII
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -140,7 +140,7 @@ DEF_CHOICE_2( cRegisters_ChanParamB,                                            
     "",
     DISABLE_RU,
     ENABLE_RU,
-    set.dbg_showChanParam[Chan::B], &PageDebug::PageRegisters::self, IsActive_Console_Registers, 0, 0
+    set.dbg_showChanParam[Chan::B], &PageDebug::PageRegisters::self, IsActive_Console_Registers, E_VB, E_VII
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -149,7 +149,7 @@ DEF_CHOICE_2( cRegisters_TBase,                                                 
     "",
     DISABLE_RU,
     ENABLE_RU,
-    set.dbg_showTBase, &PageDebug::PageRegisters::self, IsActive_Console_Registers, 0, 0
+    set.dbg_showTBase, &PageDebug::PageRegisters::self, IsActive_Console_Registers, E_VB, E_VII
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -158,7 +158,7 @@ DEF_CHOICE_2( cRegisters_TShift,                                                
     "",
     DISABLE_RU,
     ENABLE_RU,
-    set.dbg_showTShift, &PageDebug::PageRegisters::self, IsActive_Console_Registers, 0, 0
+    set.dbg_showTShift, &PageDebug::PageRegisters::self, IsActive_Console_Registers, E_VB, E_VII
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

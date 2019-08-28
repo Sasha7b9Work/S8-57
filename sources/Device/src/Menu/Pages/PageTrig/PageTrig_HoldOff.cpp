@@ -24,7 +24,7 @@ DEF_CHOICE_2( cHoldOff,                                                         
     DISABLE_RU,
     ENABLE_RU,
     TRIG_HOLDOFF_ENABLED,
-    &PageTrig::PageHoldOff::self, 0, OnChanged_HoldOff, 0
+    &PageTrig::PageHoldOff::self, E_BtV, OnChanged_HoldOff, E_VII
 )
 
 

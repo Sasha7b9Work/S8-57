@@ -719,7 +719,7 @@ void Choice::ChangeIndex(int delta) const
         }
     }
     *OwnData()->cell = (int8)index;
-    OwnData()->FuncOnChanged(IsActive());
+    OwnData()->funcOnChanged(IsActive());
     Beeper::GovernorChangedValue();
     Osci::Display::SetFlagRedraw();
 }
@@ -746,7 +746,7 @@ void Choice::KeyRelease() const
 
     if (!IsActive())
     {
-        OwnData()->FuncOnChanged(false);
+        OwnData()->funcOnChanged(false);
     }
     else if (!IsOpened())
     {
@@ -784,7 +784,7 @@ void Choice::StartChange(int delta) const
         }
         else if (!IsActive())
         {
-            OwnData()->FuncOnChanged(false);
+            OwnData()->funcOnChanged(false);
         }
         else
         {
@@ -841,7 +841,7 @@ float Choice::Step() const //-V2506
 
         *OwnData()->cell = index;
         tsChoice.address = 0;
-        OwnData()->FuncOnChanged(IsActive());
+        OwnData()->funcOnChanged(IsActive());
         Osci::Display::SetFlagRedraw();
         tsChoice.dir = NONE;
         return 0.0F;

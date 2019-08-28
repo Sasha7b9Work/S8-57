@@ -57,7 +57,7 @@ DEF_CHOICE_2( cPeakDet,                                                         
     ,
     DISABLE_RU,
     ENABLE_RU,
-    SET_PEAKDET, &PageTime::self, IsActive_PeakDet, PageTime::OnChanged_PeakDet, 0
+    SET_PEAKDET, &PageTime::self, IsActive_PeakDet, PageTime::OnChanged_PeakDet, E_VII
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -74,7 +74,7 @@ DEF_CHOICE_3( cTPos,                                                            
     "Лево",
     "Центр",
     "Право",
-    TPOS, &PageTime::self, 0, PageTime::OnChanged_TPos, 0
+    TPOS, &PageTime::self, E_BtV, PageTime::OnChanged_TPos, E_VII
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -97,7 +97,7 @@ DEF_CHOICE_2( cShiftXtype,                                                      
     ,
     "Время",
     "Деления",
-    LINKING_TSHIFT, &PageTime::self, 0, 0, 0
+    LINKING_TSHIFT, &PageTime::self, E_BtV, E_VB, E_VII
 )
 
 DEF_PAGE_4( pTime, // -V641 // -V1027                                                                                                                                     //--- РАЗВЕРТКА ---

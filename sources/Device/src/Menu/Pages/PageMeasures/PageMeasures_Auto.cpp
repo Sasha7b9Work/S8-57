@@ -17,7 +17,7 @@ DEF_CHOICE_2( cIsShow,                                                          
     "Выводить или не выводить измерения на экран",
     "Нет",
     "Да",
-    SHOW_MEASURES, &PageMeasuresAuto::self, 0, 0, 0
+    SHOW_MEASURES, &PageMeasuresAuto::self, E_BtV, E_VB, E_VII
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -45,7 +45,7 @@ DEF_CHOICE_7( cNumber,                                                          
     "3x5",
     "6x1",
     "6x2",
-    NUM_MEASURES, &PageMeasuresAuto::self, IsActive_NumberChannels, 0, 0
+    NUM_MEASURES, &PageMeasuresAuto::self, IsActive_NumberChannels, E_VB, E_VII
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -55,7 +55,7 @@ DEF_CHOICE_3(       cChannels,                                                  
     "1",
     "2",
     "1 и 2",
-    SOURCE_MEASURES, &PageMeasuresAuto::self, IsActive_NumberChannels, 0, 0
+    SOURCE_MEASURES, &PageMeasuresAuto::self, IsActive_NumberChannels, E_VB, E_VII
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

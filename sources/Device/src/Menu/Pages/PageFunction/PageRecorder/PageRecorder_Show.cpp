@@ -27,7 +27,7 @@ DEF_CHOICE_2( cCursor,
     "",
     "1",
     "2",
-    Recorder::Settings::currentCursor, &PageRecorder::PageShow::self, 0, 0, 0
+    Recorder::Settings::currentCursor, &PageRecorder::PageShow::self, E_BtV, E_VB, E_VII
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

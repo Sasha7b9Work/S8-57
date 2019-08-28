@@ -36,7 +36,7 @@ DEF_CHOICE_6( cAutoHide,                                                        
     "Через 15 сек",
     "Через 30 сек",
     "Через 60 сек",
-    MENU_AUTO_HIDE, &PageDisplay::PageSettings::self, 0, OnChanged_Settings_AutoHide, 0
+    MENU_AUTO_HIDE, &PageDisplay::PageSettings::self, E_BtV, OnChanged_Settings_AutoHide, E_VII
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

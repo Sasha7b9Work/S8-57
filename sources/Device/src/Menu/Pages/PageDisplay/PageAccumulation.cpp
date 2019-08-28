@@ -20,7 +20,7 @@ DEF_CHOICE_2( cEnable,                                                          
     "",
     DISABLE_RU,
     ENABLE_RU,
-    ACCUMULATION, &PageDisplay::PageAccumulation::self, 0, 0, 0
+    ACCUMULATION, &PageDisplay::PageAccumulation::self, E_BtV, E_VB, E_VII
 )
 
 
@@ -39,7 +39,7 @@ DEF_CHOICE_9( cNumber,                                                          
     "64",
     "128",
     "Бесконечность",
-    ENUM_ACCUM, &PageDisplay::PageAccumulation::self, 0, 0, 0
+    ENUM_ACCUM, &PageDisplay::PageAccumulation::self, E_BtV, E_VB, E_VII
 )
 
 
