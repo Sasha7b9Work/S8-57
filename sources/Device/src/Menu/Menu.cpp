@@ -282,14 +282,21 @@ Item *Menu::OpenedItem()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 PageName::E Menu::GetNameOpenedPage()
 {
-    const Page *opened = (const Page *)OpenedItem();
+    Item *item = OpenedItem();
 
-    if (opened == nullptr)
+    if (item == nullptr)
     {
-        return PageName::NoPage;
+        return PageName::Number;            // Если нет открого итема
     }
 
-    return opened->GetName();
+    if (item->Is(Item::Type::Page))         // Если открыта страница
+    {
+        return ((Page *)item)->GetName();
+    }
+
+    const Page *page = item->Keeper();      // Если открыта не страница
+
+    return page->GetName();
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

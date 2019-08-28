@@ -69,8 +69,7 @@ struct PageName
         Trig_HoldOff,
         Trig_Search,
 
-        Number,
-        NoPage
+        Number
     } value;
 };
 
