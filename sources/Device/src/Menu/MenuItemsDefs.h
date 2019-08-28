@@ -86,8 +86,8 @@ struct PageName
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-#define DEF_BUTTON(name, title, hint, keeper, funcActive, funcPress, funcDraw)                                                                                                              \
-static const DataButton db##name = {funcPress, funcDraw};                                                                                                                                   \
+#define DEF_BUTTON(name, title, hint, keeper, funcActive, funcPress)                                                                                                              \
+static const DataButton db##name = {funcPress};                                                                                                                                   \
 static const DataItem di##name = { Item::Type::Button, title, hint, keeper, funcActive, &db##name };                                                                                        \
 static const Button name(&di##name);
 

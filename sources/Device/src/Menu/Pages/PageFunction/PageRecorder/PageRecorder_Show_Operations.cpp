@@ -18,7 +18,7 @@ static void OnPress_Rename()
 DEF_BUTTON( bRename,                                                                                                    //--- ФУНКЦИЯ - РЕГИСТРАТОР - ПРОСМОТР - ОПЕРАЦИИ - Переименовать ---
     "Переименовать",
     "",
-    &PageRecorder::PageShow::PageOperations::self, E_BtV, OnPress_Rename, E_VII
+    &PageRecorder::PageShow::PageOperations::self, E_BtV, OnPress_Rename
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -30,7 +30,7 @@ static void OnPress_Copy()
 DEF_BUTTON( bCopy,                                                                                                         //--- ФУНКЦИЯ - РЕГИСТРАТОР - ПРОСМОТР - ОПЕРАЦИИ - Копировать ---
     "Копировать",
     "",
-    &PageRecorder::PageShow::PageOperations::self, E_BtV, OnPress_Copy, E_VII
+    &PageRecorder::PageShow::PageOperations::self, E_BtV, OnPress_Copy
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -42,7 +42,7 @@ static void OnPress_Move()
 DEF_BUTTON( bMove,                                                                                                        //--- ФУНКЦИЯ - РЕГИСТРАТОР - ПРОСМОТР - ОПЕРАЦИИ - Переместить ---
     "Переместить",
     "",
-    &PageRecorder::PageShow::PageOperations::self, E_BtV, OnPress_Move, E_VII
+    &PageRecorder::PageShow::PageOperations::self, E_BtV, OnPress_Move
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -54,7 +54,7 @@ static void OnPress_Delete()
 DEF_BUTTON( bDelete,                                                                                                          //--- ФУНКЦИЯ - РЕГИСТРАТОР - ПРОСМОТР - ОПЕРАЦИИ - Удалить ---
     "Удалить",
     "",
-    &PageRecorder::PageShow::PageOperations::self, E_BtV, OnPress_Delete, E_VII
+    &PageRecorder::PageShow::PageOperations::self, E_BtV, OnPress_Delete
 )
 
 

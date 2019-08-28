@@ -44,31 +44,31 @@ DEF_PAGE_2( pageRTC, // -V641 // -V1027                                         
 DEF_BUTTON( bSetLeft,
     "Влево",
     "Предыдущий элемент",
-    &PageRTC::PageSet::self, E_BtV, E_VV, E_VII
+    &PageRTC::PageSet::self, E_BtV, E_VV
 )
 
 DEF_BUTTON( bSetRight,
     "Вправо",
     "Следующий элемент",
-    &PageRTC::PageSet::self, E_BtV, E_VV, E_VII
+    &PageRTC::PageSet::self, E_BtV, E_VV
 )
 
 DEF_BUTTON( bSetUp,
     "Больше",
     "Увеличить",
-    &PageRTC::PageSet::self, E_BtV, E_VV, E_VII
+    &PageRTC::PageSet::self, E_BtV, E_VV
 )
 
 DEF_BUTTON( bSetDown,
     "Меньше",
     "Уменьшить",
-    &PageRTC::PageSet::self, E_BtV, E_VV, E_VII
+    &PageRTC::PageSet::self, E_BtV, E_VV
 )
 
 DEF_BUTTON( bSetPick,
     "Выбрать",
     "Выбор подсвеченного элемента",
-    &PageRTC::PageSet::self, E_BtV, E_VV, E_VII
+    &PageRTC::PageSet::self, E_BtV, E_VV
 )
 
 DEF_PAGE_5( pageRTC_Set, //-V641 //-V1027
@@ -97,31 +97,31 @@ DEF_PAGE_5( pageRTC_Set, //-V641 //-V1027
 DEF_BUTTON( bCorrLeft,
     "Влево",
     "Предыдущий элемент",
-    &PageRTC::PageCorrect::self, E_BtV, E_VV, E_VII
+    &PageRTC::PageCorrect::self, E_BtV, E_VV
 )
 
 DEF_BUTTON( bCorrRight,
     "Вправо",
     "Следующий элемент",
-    &PageRTC::PageCorrect::self, E_BtV, E_VV, E_VII
+    &PageRTC::PageCorrect::self, E_BtV, E_VV
 )
 
 DEF_BUTTON( bCorrUp,
     "Больше",
     "Увеличить",
-    &PageRTC::PageCorrect::self, E_BtV, E_VV, E_VII
+    &PageRTC::PageCorrect::self, E_BtV, E_VV
 )
 
 DEF_BUTTON( bCorrDown,
     "Меньше",
     "Уменьшить",
-    &PageRTC::PageCorrect::self, E_BtV, E_VV, E_VII
+    &PageRTC::PageCorrect::self, E_BtV, E_VV
 )
 
 DEF_BUTTON( bCorrPick,
     "Выбор",
     "Активировать подсвеченный элемент",
-    &PageRTC::PageCorrect::self, E_BtV, E_VV, E_VII
+    &PageRTC::PageCorrect::self, E_BtV, E_VV
 )
 
 DEF_PAGE_5( pageRTC_Correction, //-V641 //-V1027

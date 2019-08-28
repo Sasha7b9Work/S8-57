@@ -294,8 +294,6 @@ void Button::Draw(int x, int y, bool) const
     Region(Width() - 5, Height() - 4).Fill(x + 2, y + 3, IsPressed() ? Color::FILL : Color::BACK);
 
     Text(Title().CString()).DrawInCenterRect(x + 2, y, Width(), Height(), IsPressed() ? Color::BACK : Color::FILL);
-
-    OwnData()->funcForDraw(x, y);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

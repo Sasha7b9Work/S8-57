@@ -57,7 +57,7 @@ void PageDisplay::PageAccumulation::OnPress_Accumulation_Clear()
 DEF_BUTTON( bClear,                                                                                                                                 //--- ДИСПЛЕЙ - НАКОПЛЕНИЕ - Очистить ---
     "Очистить",
     "Очищает экран от накопленных сигналов.",
-    &PageDisplay::PageAccumulation::self, IsActive_Accum_Clear, PageDisplay::PageAccumulation::OnPress_Accumulation_Clear, E_VII
+    &PageDisplay::PageAccumulation::self, IsActive_Accum_Clear, PageDisplay::PageAccumulation::OnPress_Accumulation_Clear
 )
 
 

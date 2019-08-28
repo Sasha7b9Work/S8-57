@@ -18,7 +18,7 @@ static void OnPress_ResetColors()
 DEF_BUTTON( bReset,                                                                                                                          //--- ДИСПЛЕЙ - НАСТРОЙКИ - ЦВЕТА - Сбросить ---
     "Сбросить",
     "Сброс всех цветов на значения по умолчанию",
-    &PageDisplay::PageSettings::PageColors::self, E_BtV, OnPress_ResetColors, E_VII
+    &PageDisplay::PageSettings::PageColors::self, E_BtV, OnPress_ResetColors
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

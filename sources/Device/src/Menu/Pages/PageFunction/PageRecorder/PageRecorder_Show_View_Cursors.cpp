@@ -17,7 +17,7 @@ static void OnPress_Center()
 DEF_BUTTON( bCenter,
     "В центр",
     "",
-    &PageRecorder::PageShow::PageView::PageCursors::self, E_BtV, OnPress_Center, E_VII
+    &PageRecorder::PageShow::PageView::PageCursors::self, E_BtV, OnPress_Center
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -29,7 +29,7 @@ static void OnPress_Left()
 DEF_BUTTON( bLeft,
     "Лево",
     "",
-    &PageRecorder::PageShow::PageView::PageCursors::self, E_BtV, OnPress_Left, E_VII
+    &PageRecorder::PageShow::PageView::PageCursors::self, E_BtV, OnPress_Left
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -41,7 +41,7 @@ static void OnPress_Right()
 DEF_BUTTON( bRight,
     "Право",
     "",
-    &PageRecorder::PageShow::PageView::PageCursors::self, E_BtV, OnPress_Right, E_VII
+    &PageRecorder::PageShow::PageView::PageCursors::self, E_BtV, OnPress_Right
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

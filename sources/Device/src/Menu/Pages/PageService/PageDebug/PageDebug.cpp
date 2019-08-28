@@ -275,7 +275,7 @@ static void OnPress_ADC_Shift_Reset()
 DEF_BUTTON( bADC_Shift_Reset,                                                                                                                       //-- ОТЛАДКА - АЦП - ДОП СМЕЩ - Сброс ---
     "Сброс",
     "",
-    &PageDebug::PageADC::PageShift::self, E_BtV, OnPress_ADC_Shift_Reset, E_VII
+    &PageDebug::PageADC::PageShift::self, E_BtV, OnPress_ADC_Shift_Reset
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -498,7 +498,7 @@ static void OnPress_SaveFirmware()
 DEF_BUTTON( bSaveFirmware,                                                                                                                                 //--- ОТЛАДКА - Сохр. прошивку ---
     "Сохр. прошивку",
     "Сохранение прошивки - секторов 5, 6, 7 общим объёмом 3 х 128 кБ, где хранится программа",
-    &PageDebug::self, IsActive_SaveFirmware, OnPress_SaveFirmware, E_VII
+    &PageDebug::self, IsActive_SaveFirmware, OnPress_SaveFirmware
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
