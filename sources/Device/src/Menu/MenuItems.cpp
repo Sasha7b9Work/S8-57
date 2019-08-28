@@ -33,6 +33,16 @@ static TimeStruct tsChoice = { 0, 0, NONE, 0, 0, 0 };
 
 static TimeStruct tsGovernor = { 0, 0, NONE, 0, 0, 0 };
 
+DataItem Item::emptyData =
+{
+    Item::Type::None,
+    0,
+    Page::Name::NoPage,
+    nullptr,
+    EmptyFuncBtV,
+    nullptr
+};
+
 Item Item::empty;
 
 int8 Governor::currentDigit = 0;
@@ -46,6 +56,10 @@ static const Item *pressedItem = nullptr;
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 Item::Item(const DataItem * const _head) : head(_head)
 {
+    if (head == nullptr)
+    {
+        head = &emptyData;
+    }
 };
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

@@ -9,12 +9,12 @@ class Page;
 
 struct DataItem
 {
-    uint8              type;           ///< Тип итема
-    int8               num;            ///< Число вариантов для Choice или число контролов для Page
-    uint8              name;           ///< Имя из перечисления Page::Name
-    const Page *const *keeper;         ///< Адрес страницы, которой принадлежит. Для Page_Main = 0
-    pFuncBV            funcOfActive;   ///< Активен ли данный элемент
-    const pString     *titleHint;      ///< Название страницы. Также подсказка для режима помощи
+    uint8              type;            ///< Тип итема
+    int8               num;             ///< Число вариантов для Choice или число контролов для Page
+    uint8              name;            ///< Имя из перечисления Page::Name
+    const Page *const *keeper;          ///< Адрес страницы, которой принадлежит. Для Page_Main = 0
+    pFuncBV            funcOfActive;    ///< Активен ли данный элемент
+    const pString     *titleHint;       ///< Название страницы. Также подсказка для режима помощи
 };
 
 
@@ -57,11 +57,11 @@ public:
     /// Вызывается при нажатии кнопки
     void KeyPress() const;
     /// Возвращает true, если контрол находится в активном состоянии (реагирует на органы управления)
-    bool IsActive() const { if (head && head->funcOfActive) { return head->funcOfActive(); } return true; };
+    bool IsActive() const { if (head->funcOfActive) { return head->funcOfActive(); }; return true; };
 
     bool IsCurrentItem() const;
     /// Возвращает адрес родителя
-    const Page *Keeper() const { if (head && head->keeper) { return *head->keeper; }; return nullptr; }
+    const Page *Keeper() const { if (head->keeper == nullptr) { return nullptr; } return *head->keeper; }
     /// Возвращает true, если в древе предков стоит keeper
     bool ExistKeeper(const Page *keeper) const;
     /// Имеет родителя - не является главной страницей меню
@@ -86,8 +86,6 @@ public:
         static const int HEIGHT = 13;
     };
 
-    static Item empty;
-
     bool Is(Type::E t) const { return head->type == t; };
 
     virtual void Draw(int /*x*/, int /*y*/, bool /*opened*/) const {};
@@ -99,6 +97,10 @@ public:
     virtual bool ProcessKey(KeyEvent) { return false; };
     /// Возвращает высоту в пикселях открытого элемента Choice или Page::Name
     virtual int HeightOpened() const;
+
+    static Item empty;
+
+    static DataItem emptyData;
 };
 
 
