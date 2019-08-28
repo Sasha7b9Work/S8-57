@@ -38,7 +38,6 @@ DataItem Item::emptyData =
     Item::Type::None,
     "",
     "",
-    0,
     nullptr,
     EmptyFuncBtV
 };
@@ -258,9 +257,9 @@ int Page::NumItems() const //-V2506
 {
     if (OwnData()->name == Page::Name::Main)
     {
-        return SHOW_DEBUG_MENU ? data->num : (data->num - 1);
+        return SHOW_DEBUG_MENU ? OwnData()->num : (OwnData()->num - 1);
     }
-    return data->num;
+    return OwnData()->num;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -366,7 +365,7 @@ int8 Page::PosCurrentItem() const
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Item *Page::GetItem(int numItem) const
 {
-    if (numItem >= data->num)
+    if (numItem >= OwnData()->num)
     {
         return &Item::empty;
     }

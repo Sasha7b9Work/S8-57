@@ -12,7 +12,6 @@ struct DataItem
     uint8              type;            ///< Тип итема
     const char * const title;           ///< Заголовок итема
     const char * const hint;            ///< Подсказка для режима помощи
-    int8               num;             ///< Число вариантов для Choice или число контролов для Page
     const Page *const *keeper;          ///< Адрес страницы, которой принадлежит. Для Page_Main = 0
     pFuncBV            funcOfActive;    ///< Активен ли данный элемент
     const void * const ad;              ///< Указатель на структуру с данными, специфическими для каждого подкласса Item
@@ -111,6 +110,7 @@ struct DataPage
     uint8               name;               ///< Имя из перечисления Page::Name
     const Item * const *items;              ///< Здесь указатели на пункты этой страницы (в обычной странице)
                                             ///< для страницы малых кнопок  здесь хранятся 6 указателей на SButton : 0 - K_Enter, 1...5 - K_1...K_5
+    int8                num;
     pFuncVB             funcOnEnterExit;    ///< Будет вызываться при нажатии на свёрнутую страницу и при выходе из этой страницы на предыдущую
     pFuncVV             funcOnDraw;         ///< Будет вызываться после отрисовки кнопок
     pFuncBKE            funcOnKey;          ///< В странице малых кнопок вызывается при нажатии стрелки
@@ -288,6 +288,7 @@ struct DataGraphButton
     pFuncVV                     funcOnPress;    ///< Эта функция вызвается для обработки нажатия кнопки.
     pFuncVII                    funcForDraw;    ///< Эта функция вызывается для отрисовки кнопки в месте с координатами x, y.
     const StructHelpDrawButton *hintUGO;
+    int8                        num;
 
     void FuncOnPress() { if (funcOnPress) funcOnPress(); }
     void FuncForDraw(int x, int y) { if (funcForDraw) funcForDraw(x, y); }
@@ -374,6 +375,7 @@ struct DataChoice
 {
     int8       *cell;
     pString    *names;          ///< Варианты выбора.
+    int8        num;
     pFuncVB     funcOnChanged;  ///< Функция должна вызываться после изменения значения элемента.
     pFuncVII    funcForDraw;    ///< Функция вызывается после отрисовки элемента. 
 
@@ -392,7 +394,7 @@ public:
     /// Изменяет значение choice в зависимости от величины и знака delta.
     void  ChangeIndex(int delta) const;
     /// Возвращает количество вариантов выбора в элементе по адресу choice
-    int   NumSubItems() const { return data->num; };
+    int   NumSubItems() const { return OwnData()->num; };
 
     void  DrawOpened(int x, int y) const;
 
