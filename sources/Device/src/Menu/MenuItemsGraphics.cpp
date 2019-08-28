@@ -24,7 +24,6 @@ using Utils::Stack;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-static void DrawCommonHiPart(const Item *item, int x, int y, bool opened);
 /// Нарисовать значение регулятора в режиме поразрядной регулировки
 /// setPosFromEnd - подсвеченный (активный) разряд, начиная с конца. Если selPosFromEnd == -1, подсвечивать не нужно
 static void DrawValueWithSelectedPosition(int x, int y, int value, uint numDigits, int selPosFromEnd, bool fillNull);
@@ -68,7 +67,7 @@ void GovernorColor::DrawOpened(int x, int y) const
 void GovernorColor::DrawClosed(int x, int y) const
 {
     OwnData()->ct->Init();
-    DrawCommonHiPart(this, x, y, false);
+    DrawCommonHiPart(x, y, false);
     Region(Width() + 1, Value::HEIGHT - 3).Fill(x + 1, y + 13, OwnData()->ct->color);
 }
 
@@ -122,7 +121,7 @@ void Governor::Draw(int x, int y, bool opened) const
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Governor::DrawOpened(int x, int y) const
 {
-    DrawCommonHiPart(this, x, y, true);
+    DrawCommonHiPart(x, y, true);
     DrawLowPart(x, y + 13);
 }
 
@@ -130,7 +129,7 @@ void Governor::DrawOpened(int x, int y) const
 void Governor::DrawClosed(int x, int y) const
 {
     DrawLowPart(x, y + 14);
-    DrawCommonHiPart(this, x, y, false);
+    DrawCommonHiPart(x, y, false);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -234,7 +233,7 @@ void Choice::DrawOpened(int x, int y) const
     int height = HeightOpened();
     
     Rectangle(Width() - 1, height - 1).Draw(x, y + 1, Color::FILL);
-    DrawCommonHiPart(this, x, y + 1, true);
+    DrawCommonHiPart(x, y + 1, true);
 
     Region(Width() - 3, height - MOI_HEIGHT_TITLE + 4).Fill(x + 1, y + MOI_HEIGHT_TITLE - 5, Color::BACK);
     int8 index = *OwnData()->cell;
@@ -278,7 +277,7 @@ void Choice::DrawClosed(int x, int y) const
         OwnData()->funcForDraw(x, y);
     }
     
-    DrawCommonHiPart(this, x, y, false);
+    DrawCommonHiPart(x, y, false);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -402,18 +401,18 @@ void Page::DrawItems(int x, int y) const
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-static void DrawCommonHiPart(const Item *item, int x, int y, bool opened)
+void Item::DrawCommonHiPart(int x, int y, bool opened) const
 {
-    bool pressed = item->IsPressed();
+    bool pressed = IsPressed();
 
-    int width = item->Width() - 3;
+    int width = Width() - 3;
 
     Color colorFill = pressed ? Color::WHITE : Color::BLACK;
     Color colorText = pressed ? Color::BLACK : Color::WHITE;
 
     Region(width, Item::Value::HEIGHT - 3).Fill(x + 1, y + (opened ? 1 : 2), colorFill);
 
-    item->Title().Draw(x + 6, y + (opened ? 2 : 3), colorText);
+    Title().Draw(x + 6, y + (opened ? 2 : 3), colorText);
     
     if (opened)
     {

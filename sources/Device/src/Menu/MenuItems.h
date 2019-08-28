@@ -81,6 +81,8 @@ public:
     /// Цвет обводки итема
     Color ColorFrame() const;
 
+    void DrawCommonHiPart(int x, int y, bool opened) const;
+
     struct Value
     {
         static const int HEIGHT = 13;
