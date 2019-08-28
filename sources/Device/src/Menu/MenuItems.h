@@ -108,8 +108,7 @@ public:
 struct DataPage
 {
     uint8               name;               ///< Имя из перечисления Page::Name
-    const Item * const *items;              ///< Здесь указатели на пункты этой страницы (в обычной странице)
-                                            ///< для страницы малых кнопок  здесь хранятся 6 указателей на SButton : 0 - K_Enter, 1...5 - K_1...K_5
+    const Item * const *items;              ///< Здесь указатели на пункты этой страницы
     pFuncVB             funcOnEnterExit;    ///< Будет вызываться при нажатии на свёрнутую страницу и при выходе из этой страницы на предыдущую
     pFuncVV             funcOnDraw;         ///< Будет вызываться после отрисовки кнопок
     pFuncBKE            funcOnKey;          ///< В странице малых кнопок вызывается при нажатии стрелки
@@ -261,8 +260,8 @@ struct DataButton
 {
     pFuncVV     funcOnPress;        ///< Функция, которая вызывается при нажатии на кнопку.
     pFuncVII    funcForDraw;        ///< Функция будет вызываться во время отрисовки кнопки.
-    void FuncOnPress() { if (funcOnPress) funcOnPress(); }
-    void FuncForDraw(int x, int y) { if (funcForDraw) funcForDraw(x, y); }
+    void FuncOnPress() { if (funcOnPress) { funcOnPress(); } }
+    void FuncForDraw(int x, int y) { if (funcForDraw) { funcForDraw(x, y); } }
 };
 
 class Button : public Item
@@ -288,8 +287,8 @@ struct DataGraphButton
     pFuncVII                    funcForDraw;    ///< Эта функция вызывается для отрисовки кнопки в месте с координатами x, y.
     const StructHelpDrawButton *hintUGO;
 
-    void FuncOnPress() { if (funcOnPress) funcOnPress(); }
-    void FuncForDraw(int x, int y) { if (funcForDraw) funcForDraw(x, y); }
+    void FuncOnPress() { if (funcOnPress) { funcOnPress(); } }
+    void FuncForDraw(int x, int y) { if (funcForDraw) { funcForDraw(x, y); } }
 };
 
 /// Описывает кнопку для дополнительного режима меню.
@@ -315,8 +314,8 @@ struct DataGovernor
     pFuncVV funcOnChanged;  ///< Функция, которую нужно вызывать после того, как значение регулятора изменилось.
     pFuncVV funcBeforeDraw; ///< Функция, которая вызывается перед отрисовкой
 
-    void FuncOnChanged() { if (funcOnChanged) funcOnChanged(); }
-    void FuncBeforeDraw() { if (funcBeforeDraw) funcBeforeDraw(); }
+    void FuncOnChanged() { if (funcOnChanged) { funcOnChanged(); } }
+    void FuncBeforeDraw() { if (funcBeforeDraw) { funcBeforeDraw(); } }
 };
 
 /// Описывает регулятор.
@@ -377,8 +376,8 @@ struct DataChoice
     pFuncVB     funcOnChanged;  ///< Функция должна вызываться после изменения значения элемента.
     pFuncVII    funcForDraw;    ///< Функция вызывается после отрисовки элемента. 
 
-    void FuncOnChanged(bool active) { if (funcOnChanged) funcOnChanged(active); }
-    void FuncForDraw(int x, int y) { if (funcForDraw) funcForDraw(x, y); }
+    void FuncOnChanged(bool active) { if (funcOnChanged) { funcOnChanged(active); } }
+    void FuncForDraw(int x, int y) { if (funcForDraw) { funcForDraw(x, y); } }
 };
 
 class Choice : public Item

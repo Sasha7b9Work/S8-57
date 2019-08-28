@@ -75,15 +75,17 @@ void GovernorColor::DrawClosed(int x, int y) const
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void GovernorColor::DrawValue(int x, int y) const
 {
-    int8 field = OwnData()->ct->currentField;
+    ColorType *ct = OwnData()->ct;
+
+    int8 field = ct->currentField;
     const pString texts[4] = {"ßð", "Ñí", "Çë", "Êð"};
 
-    uint color = COLOR(OwnData()->ct->color.value);
+    uint color = COLOR(ct->color.value);
     uint red = R_FROM_COLOR(color);
     uint green = G_FROM_COLOR(color);
     uint blue = B_FROM_COLOR(color);
-    OwnData()->ct->Init();
-    int16 vals[4] = {(int16)(OwnData()->ct->brightness * 100.0F), (int16)blue, (int16)green, (int16)red};
+    ct->Init();
+    int16 vals[4] = {(int16)(ct->brightness * 100.0F), (int16)blue, (int16)green, (int16)red};
 
     Region(widthOpened - 2, 12).Fill(x, y, Color::BACK);
     x += 98;
