@@ -47,7 +47,7 @@ Item Item::empty;
 
 int8 Governor::currentDigit = 0;
 
-#define NAME_FROM_INDEX(index) (names[index])
+#define NAME_FROM_INDEX(index) (OwnData()->names[index])
 
 /// «десь хранитс€ адрес итема, соответствующего функциональной клавише [1..5], если она находитс€ в нижнем положении, и 0,  если ни одна кнопка не нажата.
 static const Item *pressedItem = nullptr;
@@ -687,23 +687,6 @@ char Governor::GetSymbol() const
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-Choice::Choice(const DataItem * const head, pString *_names, int8 *_cell, pFuncVB funcChanged, pFuncVII funcDraw) :
-    Item(head),
-    cell(_cell), names(_names), funcOnChanged(funcChanged), funcForDraw(funcDraw)
-{
-    if (funcOnChanged == nullptr)
-    {
-        funcOnChanged = EmptyFuncVB;
-    }
-
-    if (funcForDraw == nullptr)
-    {
-        funcForDraw = EmptyFuncVII;
-    }
-};
-
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 bool Choice::ProcessKey(KeyEvent event)
 {
     if (event.type == TypePress::Press)
@@ -729,7 +712,7 @@ int Choice::HeightOpened() const
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Choice::ChangeIndex(int delta) const
 {
-    int index = *cell;
+    int index = *OwnData()->cell;
     if (delta > 0)
     {
         ++index;
@@ -746,8 +729,8 @@ void Choice::ChangeIndex(int delta) const
             index = NumSubItems() - 1;
         }
     }
-    *cell = (int8)index;
-    funcOnChanged(IsActive());
+    *OwnData()->cell = (int8)index;
+    OwnData()->FuncOnChanged(IsActive());
     Beeper::GovernorChangedValue();
     Osci::Display::SetFlagRedraw();
 }
@@ -759,7 +742,7 @@ void Choice::KeyRelease() const
 
     if (!IsActive())
     {
-        funcOnChanged(false);
+        OwnData()->FuncOnChanged(false);
     }
     else if (!IsOpened())
     {
@@ -797,7 +780,7 @@ void Choice::StartChange(int delta) const
         }
         else if (!IsActive())
         {
-            funcOnChanged(false);
+            OwnData()->FuncOnChanged(false);
         }
         else
         {
@@ -827,7 +810,7 @@ float Choice::Step() const //-V2506
         {
             delta = 0.001F; // “аймер в несколько первых кадров может показать, что прошло 0 мс, но мы возвращаем большее число, потому что ноль будет говорить о том, что движени€ нет
         }
-        int8 index = *cell;
+        int8 index = *OwnData()->cell;
 
         if (tsChoice.dir == INCREASE)
         {
@@ -852,9 +835,9 @@ float Choice::Step() const //-V2506
             // NONE
         }
 
-        *cell = index;
+        *OwnData()->cell = index;
         tsChoice.address = 0;
-        funcOnChanged(IsActive());
+        OwnData()->FuncOnChanged(IsActive());
         Osci::Display::SetFlagRedraw();
         tsChoice.dir = NONE;
         return 0.0F;
@@ -866,18 +849,18 @@ float Choice::Step() const //-V2506
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 String Choice::NameCurrentSubItem() const
 {
-    return ((int8 *)cell == 0) ? String("") : String(NAME_FROM_INDEX(*cell));
+    return ((int8 *)OwnData()->cell == 0) ? String("") : String(NAME_FROM_INDEX(*OwnData()->cell));
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 const char *Choice::NameNextSubItem() const
 {
-    if (cell == 0)
+    if (OwnData()->cell == 0)
     {
         return "";
     }
 
-    int index = *((int8 *)cell) + 1;
+    int index = *((int8 *)OwnData()->cell) + 1;
 
     if (index == NumSubItems())
     {
@@ -889,12 +872,12 @@ const char *Choice::NameNextSubItem() const
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 const char *Choice::NamePrevSubItem() const
 {
-    if (cell == 0)
+    if (OwnData()->cell == 0)
     {
         return "";
     }
 
-    int index = *((int8 *)cell) - 1;
+    int index = *((int8 *)OwnData()->cell) - 1;
 
     if (index < 0)
     {

@@ -134,55 +134,64 @@ static const Page name(&di##name);
 #define DEF_CHOICE_2(name, title, hint, name1, name2, cell, keeper, funcActive, funcChanged, funcDraw)                                                                                      \
 static const pString n##name[] = {name1, name2};                                                                                                                                            \
 static const pString th##name[] = {title, hint};                                                                                                                                            \
-static const DataItem hi##name = { Item::Type::Choice, 2, Page::Name::NoPage, keeper, funcActive, th##name };                                                                               \
-static const Choice name(&hi##name, n##name, (int8 *)&cell, funcChanged, funcDraw);
+static const DataChoice dc##name[] = {(int8 *)&cell, n##name, funcChanged, funcDraw};                                                                                                       \
+static const DataItem di##name = { Item::Type::Choice, 2, Page::Name::NoPage, keeper, funcActive, th##name, &dc##name };                                                                    \
+static const Choice name(&di##name);
 
 #define DEF_CHOICE_3(name, title, hint, name1, name2, name3, cell, keeper, funcActive, funcChanged, funcDraw)                                                                               \
 static const pString n##name[] = {name1, name2, name3};                                                                                                                                     \
 static const pString th##name[] = {title, hint};                                                                                                                                            \
-static const DataItem hi##name = { Item::Type::Choice, 3, Page::Name::NoPage, keeper, funcActive, th##name };                                                                               \
-static const Choice name(&hi##name, n##name, (int8 *)&cell, funcChanged, funcDraw);
+static const DataChoice dc##name[] = {(int8 *)&cell, n##name, funcChanged, funcDraw};                                                                                                       \
+static const DataItem di##name = { Item::Type::Choice, 3, Page::Name::NoPage, keeper, funcActive, th##name, &dc##name };                                                                    \
+static const Choice name(&di##name);
 
 #define DEF_CHOICE_4(name, title, hint, name1, name2, name3, name4, cell, keeper, funcActive, funcChanged, funcDraw)                                                                        \
 static const pString n##name[] = {name1, name2, name3, name4};                                                                                                                              \
 static const pString th##name[] = {title, hint};                                                                                                                                            \
-static const DataItem hi##name = { Item::Type::Choice, 4, Page::Name::NoPage, keeper, funcActive, th##name };                                                                               \
-static const Choice name(&hi##name, n##name, (int8 *)&cell, funcChanged, funcDraw);
+static const DataChoice dc##name[] = {(int8 *)&cell, n##name, funcChanged, funcDraw};                                                                                                       \
+static const DataItem di##name = { Item::Type::Choice, 4, Page::Name::NoPage, keeper, funcActive, th##name, &dc##name };                                                                    \
+static const Choice name(&di##name);
 
 #define DEF_CHOICE_5(name, title, hint, name1, name2, name3, name4, name5, cell, keeper, funcActive, funcChanged, funcDraw)                                                                 \
 static const pString n##name[] = {name1, name2, name3, name4, name5};                                                                                                                       \
 static const pString th##name[] = {title, hint};                                                                                                                                            \
-static const DataItem hi##name = { Item::Type::Choice, 5, Page::Name::NoPage, keeper, funcActive, th##name };                                                                               \
-static const Choice name(&hi##name, n##name, (int8 *)&cell, funcChanged, funcDraw);
+static const DataChoice dc##name[] = {(int8 *)&cell, n##name, funcChanged, funcDraw};                                                                                                       \
+static const DataItem di##name = { Item::Type::Choice, 5, Page::Name::NoPage, keeper, funcActive, th##name, &dc##name };                                                                    \
+static const Choice name(&di##name);
 
 #define DEF_CHOICE_6(name, title, hint, name1, name2, name3, name4, name5, name6, cell, keeper, funcActive, funcChanged, funcDraw)                                                          \
 static const pString n##name[] = {name1, name2, name3, name4, name5, name6};                                                                                                                \
 static const pString th##name[] = {title, hint};                                                                                                                                            \
-static const DataItem hi##name = { Item::Type::Choice, 6, Page::Name::NoPage, keeper, funcActive, th##name };                                                                               \
-static const Choice name(&hi##name, n##name, (int8 *)&cell, funcChanged, funcDraw);
+static const DataChoice dc##name[] = {(int8 *)&cell, n##name, funcChanged, funcDraw};                                                                                                       \
+static const DataItem di##name = { Item::Type::Choice, 6, Page::Name::NoPage, keeper, funcActive, th##name, &dc##name };                                                                    \
+static const Choice name(&di##name);
 
 #define DEF_CHOICE_7(name, title, hint, name1, name2, name3, name4, name5, name6, name7, cell, keeper, funcActive, funcChanged, funcDraw)                                                   \
 static const pString n##name[] = {name1, name2, name3, name4, name5, name6, name7};                                                                                                         \
 static const pString th##name[] = {title, hint};                                                                                                                                            \
-static const DataItem hi##name = { Item::Type::Choice, 7, Page::Name::NoPage, keeper, funcActive, th##name };                                                                               \
-static const Choice name(&hi##name, n##name, (int8 *)&cell, funcChanged, funcDraw);
+static const DataChoice dc##name[] = {(int8 *)&cell, n##name, funcChanged, funcDraw};                                                                                                       \
+static const DataItem di##name = { Item::Type::Choice, 7, Page::Name::NoPage, keeper, funcActive, th##name, &dc##name };                                                                    \
+static const Choice name(&di##name);
 
 #define DEF_CHOICE_9(name, title, hint, name1, name2, name3, name4, name5, name6, name7, name8, name9, cell, keeper, funcActive, funcChanged, funcDraw)                                     \
 static const pString n##name[] = {name1, name2, name3, name4, name5, name6, name7, name8, name9};                                                                                           \
 static const pString th##name[] = {title, hint};                                                                                                                                            \
-static const DataItem hi##name = { Item::Type::Choice, 9, Page::Name::NoPage, keeper, funcActive, th##name };                                                                               \
-static const Choice name(&hi##name, n##name, (int8 *)&cell, funcChanged, funcDraw);
+static const DataChoice dc##name = {(int8 *)&cell, n##name, funcChanged, funcDraw};                                                                                                         \
+static const DataItem di##name = { Item::Type::Choice, 9, Page::Name::NoPage, keeper, funcActive, th##name, &dc##name };                                                                    \
+static const Choice name(&di##name);
 
 #define DEF_CHOICE_10(name, title, hint, name1, name2, name3, name4, name5, name6, name7, name8, name9, name10, cell, keeper, funcActive, funcChanged, funcDraw)                            \
 static const pString n##name[] = {name1, name2, name3, name4, name5, name6, name7, name8, name9, name10};                                                                                   \
 static const pString th##name[] = {title, hint};                                                                                                                                            \
-static const DataItem hi##name = { Item::Type::Choice, 10, Page::Name::NoPage, keeper, funcActive, th##name };                                                                               \
-static const Choice name(&hi##name, n##name, (int8 *)&cell, funcChanged, funcDraw);
+static const DataChoice dc##name = {(int8 *)&cell, n##name, funcChanged, funcDraw};                                                                                                         \
+static const DataItem di##name = { Item::Type::Choice, 10, Page::Name::NoPage, keeper, funcActive, th##name, &dc##name };                                                                   \
+static const Choice name(&di##name);
 
 
 #define DEF_CHOICE_16(name, title, hint, name1, name2,  name3,  name4,  name5,  name6,  name7,  name8, name9, name10,                                                                       \
     name11, name12, name13, name14, name15, name16, cell, keeper, funcActive, funcChanged, funcDraw)                                                                                        \
 static const pString n##name[] = {name1,  name2, name3,  name4,  name5,  name6, name7, name8, name9, name10, name11, name12, name13, name14, name15, name16 };                              \
 static const pString th##name[] = {title, hint};                                                                                                                                            \
-static const DataItem hi##name = { Item::Type::Choice, 16, Page::Name::NoPage, keeper, funcActive, th##name };                                                                               \
-static const Choice name(&hi##name, n##name, (int8 *)&cell, funcChanged, funcDraw);
+static const DataChoice dc##name = {(int8 *)&cell, n##name, funcChanged, funcDraw};                                                                                                         \
+static const DataItem di##name = { Item::Type::Choice, 16, Page::Name::NoPage, keeper, funcActive, th##name, &dc##name };                                                                   \
+static const Choice name(&di##name);

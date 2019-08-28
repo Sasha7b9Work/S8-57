@@ -362,14 +362,21 @@ private:
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// Choice ///
-class Choice : public Item
+struct DataChoice
 {
-public:
     int8       *cell;
     pString    *names;          ///< Варианты выбора.
     pFuncVB     funcOnChanged;  ///< Функция должна вызываться после изменения значения элемента.
     pFuncVII    funcForDraw;    ///< Функция вызывается после отрисовки элемента. 
-    Choice(const DataItem * const data, pString *names, int8 *cell, pFuncVB funcChanged, pFuncVII funcDraw);
+
+    void FuncOnChanged(bool active) { if (funcOnChanged) funcOnChanged(active); }
+    void FuncForDraw(int x, int y) { if (funcForDraw) funcForDraw(x, y); }
+};
+
+class Choice : public Item
+{
+public:
+    Choice(const DataItem * const data) : Item(data) {};
     /// Запускает процесс изменения значения на delta
     void  StartChange(int delta) const;
     /// Рассчитывает следующий кадр анимации.
@@ -404,6 +411,8 @@ public:
     virtual bool ProcessKey(KeyEvent event);
 
     virtual int HeightOpened() const;
+
+    DataChoice *OwnData() const { return (DataChoice *)data->ad; }
 };
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// GovernorColor ///

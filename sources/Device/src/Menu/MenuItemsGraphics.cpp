@@ -237,7 +237,7 @@ void Choice::DrawOpened(int x, int y) const
     DrawCommonHiPart(this, x, y + 1, true);
 
     Region(Width() - 3, height - MOI_HEIGHT_TITLE + 4).Fill(x + 1, y + MOI_HEIGHT_TITLE - 5, Color::BACK);
-    int8 index = *cell;
+    int8 index = *OwnData()->cell;
     for (int i = 0; i < NumSubItems(); i++)
     {
         int yItem = y + MOI_HEIGHT_TITLE + i * MOSI_HEIGHT - 7;
@@ -275,7 +275,7 @@ void Choice::DrawClosed(int x, int y) const
                 Item::Width(), Value::HEIGHT - 1);
         }
 
-        funcForDraw(x, y);
+        OwnData()->FuncForDraw(x, y);
     }
     
     DrawCommonHiPart(this, x, y, false);
