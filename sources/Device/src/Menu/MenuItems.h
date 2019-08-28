@@ -7,7 +7,7 @@
 class Page;
 
 
-struct HeadItem
+struct DataItem
 {
     uint8              type;           ///< Тип итема
     int8               num;            ///< Число вариантов для Choice или число контролов для Page
@@ -17,7 +17,7 @@ struct HeadItem
     const pString     *titleHint;      ///< Название страницы. Также подсказка для режима помощи
 };
 
-    
+
 class Item
 {
 public:
@@ -39,9 +39,9 @@ public:
         explicit Type(E v) : value(v) {};
     };
 
-    const HeadItem *head;
+    const DataItem *head;
     
-    Item(const HeadItem * const head = nullptr);
+    Item(const DataItem * const head = nullptr);
     /// Количество пунктов меню, умещающиееся на экране
     static const int NUM_ON_DISPLAY = 5;
     /// Возвращает true, если кнопка, соответствующая элементу меню item, находится в нажатом положении
@@ -113,7 +113,7 @@ public:
     pFuncVB     funcOnEnterExit;    ///< Будет вызываться при нажатии на свёрнутую страницу и при выходе из этой страницы на предыдущую
     pFuncVV     funcOnDraw;         ///< Будет вызываться после отрисовки кнопок
     pFuncBKE    funcKey;            ///< В странице малых кнопок вызывается при нажатии стрелки
-    Page(const HeadItem * const head, const Item * const *items, pFuncVB funcEnterExit, pFuncVV funcDraw, pFuncBKE funcKey);
+    Page(const DataItem * const head, const Item * const *items, pFuncVB funcEnterExit, pFuncVV funcDraw, pFuncBKE funcKey);
     /// Возвращает true, если текущий элемент страницы открыт
     bool CurrentItemIsOpened() const;
     /// Dозвращает число подстраниц в странице по адресу page
@@ -250,7 +250,7 @@ class Button : public Item
 public:
     pFuncVV     funcOnPress;        ///< Функция, которая вызывается при нажатии на кнопку.
     pFuncVII    funcForDraw;        ///< Функция будет вызываться во время отрисовки кнопки.
-    Button(const HeadItem * const head, pFuncVV funcPress, pFuncVII funcDraw);
+    Button(const DataItem * const head, pFuncVV funcPress, pFuncVII funcDraw);
     virtual void Draw(int x, int y, bool opened) const;
     virtual void KeyRelease() const;
     virtual void KeyAutoRelease() const;
@@ -271,7 +271,7 @@ public:
     pFuncVV                     funcOnPress;    ///< Эта функция вызвается для обработки нажатия кнопки.
     pFuncVII                    funcForDraw;    ///< Эта функция вызывается для отрисовки кнопки в месте с координатами x, y.
     const StructHelpDrawButton *hintUGO; 
-    GraphButton(const HeadItem * const head, const StructHelpDrawButton *hintUGO, pFuncVV funcPress, pFuncVII funcDraw);
+    GraphButton(const DataItem * const head, const StructHelpDrawButton *hintUGO, pFuncVV funcPress, pFuncVII funcDraw);
 
     virtual void Draw(int x, int y, bool opened) const;
     void DrawHints(int x, int y, int width) const;
@@ -290,7 +290,7 @@ public:
     int16   maxValue;       ///< Максимальное значение.
     pFuncVV funcOfChanged;  ///< Функция, которую нужно вызывать после того, как значение регулятора изменилось.
     pFuncVV funcBeforeDraw; ///< Функция, которая вызывается перед отрисовкой
-    Governor(const HeadItem * const head, int16 *cell, int16 min, int16 max, pFuncVV funcChanged, pFuncVV funcDraw);
+    Governor(const DataItem * const head, int16 *cell, int16 min, int16 max, pFuncVV funcChanged, pFuncVV funcDraw);
 
     /// Возвращает следующее большее значение, которое может принять governor.
     int16 NextValue() const;
@@ -343,7 +343,7 @@ public:
     pString    *names;          ///< Варианты выбора.
     pFuncVB     funcOnChanged;  ///< Функция должна вызываться после изменения значения элемента.
     pFuncVII    funcForDraw;    ///< Функция вызывается после отрисовки элемента. 
-    Choice(const HeadItem * const head, pString *names, int8 *cell, pFuncVB funcChanged, pFuncVII funcDraw);
+    Choice(const DataItem * const head, pString *names, int8 *cell, pFuncVB funcChanged, pFuncVII funcDraw);
     /// Запускает процесс изменения значения на delta
     void  StartChange(int delta) const;
     /// Рассчитывает следующий кадр анимации.
@@ -386,7 +386,7 @@ class GovernorColor : public Item
 public:
     ColorType  *ct;                 ///< Структура для описания цвета.
     pFuncVV     funcOnChanged;      ///< Эту функцию нужно вызывать после изменения значения элемента.
-    GovernorColor(const HeadItem * const head, ColorType *ct, pFuncVV funcChanged);
+    GovernorColor(const DataItem * const head, ColorType *ct, pFuncVV funcChanged);
     virtual void Draw(int x, int y, bool opened) const;
     virtual void KeyRelease() const;
     virtual void KeyAutoRelease() const;

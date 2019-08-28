@@ -44,7 +44,7 @@ static const Item *pressedItem = nullptr;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-Item::Item(const HeadItem * const _head) : head(_head)
+Item::Item(const DataItem * const _head) : head(_head)
 {
 };
 
@@ -234,7 +234,7 @@ int Item::PositionInKeeperList() const
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-Page::Page(const HeadItem * const head, const Item * const *_items, pFuncVB funcEnterExit, pFuncVV funcDraw, pFuncBKE _funcKey) :
+Page::Page(const DataItem * const head, const Item * const *_items, pFuncVB funcEnterExit, pFuncVV funcDraw, pFuncBKE _funcKey) :
     Item(head),
     items(_items), funcOnEnterExit(funcEnterExit), funcOnDraw(funcDraw), funcKey(_funcKey)
 {
@@ -426,7 +426,7 @@ const Item *Page::ItemForFuncKey(Key::E key) const
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-Button::Button(const HeadItem * const head, pFuncVV funcPress, pFuncVII funcDraw) :
+Button::Button(const DataItem * const head, pFuncVV funcPress, pFuncVII funcDraw) :
     Item(head),
     funcOnPress(funcPress), funcForDraw(funcDraw)
 {
@@ -464,7 +464,7 @@ void Button::KeyAutoRelease() const
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-GraphButton::GraphButton(const HeadItem * const head, const StructHelpDrawButton *_hintUGO, pFuncVV funcPress, pFuncVII funcDraw) :
+GraphButton::GraphButton(const DataItem * const head, const StructHelpDrawButton *_hintUGO, pFuncVV funcPress, pFuncVII funcDraw) :
     Item(head),
     funcOnPress(funcPress), funcForDraw(funcDraw), hintUGO(_hintUGO)
 {
@@ -500,7 +500,7 @@ void GraphButton::KeyAutoRelease() const
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-Governor::Governor(const HeadItem * const head, int16 *_cell, int16 min, int16 max, pFuncVV funcChanged, pFuncVV funcDraw) :
+Governor::Governor(const DataItem * const head, int16 *_cell, int16 min, int16 max, pFuncVV funcChanged, pFuncVV funcDraw) :
     Item(head),
     cell(_cell), minValue(min), maxValue(max), funcOfChanged(funcChanged), funcBeforeDraw(funcDraw)
 {
@@ -726,7 +726,7 @@ char Governor::GetSymbol() const
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-Choice::Choice(const HeadItem * const head, pString *_names, int8 *_cell, pFuncVB funcChanged, pFuncVII funcDraw) :
+Choice::Choice(const DataItem * const head, pString *_names, int8 *_cell, pFuncVB funcChanged, pFuncVII funcDraw) :
     Item(head),
     cell(_cell), names(_names), funcOnChanged(funcChanged), funcForDraw(funcDraw)
 {
@@ -971,7 +971,7 @@ Color Choice::ColorMenuField(const Choice *choice)
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-GovernorColor::GovernorColor(const HeadItem * const head, ColorType *_ct, pFuncVV funcChanged) :
+GovernorColor::GovernorColor(const DataItem * const head, ColorType *_ct, pFuncVV funcChanged) :
     Item(head),
     ct(_ct), funcOnChanged(funcChanged)
 {
