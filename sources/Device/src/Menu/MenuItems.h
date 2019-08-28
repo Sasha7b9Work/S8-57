@@ -407,16 +407,20 @@ public:
 };
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// GovernorColor ///
+struct DataGovernorColor
+{
+    ColorType  *ct;                 ///< Структура для описания цвета.
+};
+
 class GovernorColor : public Item
 {
 public:
-    ColorType  *ct;                 ///< Структура для описания цвета.
-    pFuncVV     funcOnChanged;      ///< Эту функцию нужно вызывать после изменения значения элемента.
-    GovernorColor(const DataItem * const head, ColorType *ct, pFuncVV funcChanged);
+    GovernorColor(const DataItem * const data) : Item(data) {};
     virtual void Draw(int x, int y, bool opened) const;
     virtual void KeyRelease() const;
     virtual void KeyAutoRelease() const;
     virtual int HeightOpened() const { return 27; };
+    DataGovernorColor *OwnData() const { return (DataGovernorColor *)data->ad; }
 private:
     void DrawOpened(int x, int y) const;
     void DrawClosed(int x, int y) const;

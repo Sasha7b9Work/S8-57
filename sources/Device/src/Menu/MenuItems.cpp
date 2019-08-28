@@ -932,18 +932,6 @@ Color Choice::ColorMenuField(const Choice *choice)
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-GovernorColor::GovernorColor(const DataItem * const head, ColorType *_ct, pFuncVV funcChanged) :
-    Item(head),
-    ct(_ct), funcOnChanged(funcChanged)
-{
-    if (funcOnChanged == nullptr)
-    {
-        funcOnChanged = EmptyFuncVV;
-    }
-};
-
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void GovernorColor::KeyRelease() const
 {
     Item::KeyRelease();
@@ -952,7 +940,7 @@ void GovernorColor::KeyRelease() const
     {
         if (Menu::OpenedItem() == this)
         {
-            Math::CircleIncrease<int8>(&ct->currentField, 0, 3);
+            Math::CircleIncrease<int8>(&OwnData()->ct->currentField, 0, 3);
         }
         else
         {

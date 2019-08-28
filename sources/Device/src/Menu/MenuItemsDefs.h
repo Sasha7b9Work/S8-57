@@ -12,20 +12,21 @@ inline bool EmptyFuncfBKE(KeyEvent) { return false; }
 #define DEF_BUTTON(name, title, hint, keeper, funcActive, funcPress, funcDraw)                                                                                                              \
 static const pString th##name[] = {title, hint};                                                                                                                                            \
 static const DataButton db##name = {funcPress, funcDraw};                                                                                                                                   \
-static const DataItem hi##name = { Item::Type::Button, 0, Page::Name::NoPage, keeper, funcActive, th##name, &db##name };                                                                    \
-static const Button name(&hi##name);
+static const DataItem di##name = { Item::Type::Button, 0, Page::Name::NoPage, keeper, funcActive, th##name, &db##name };                                                                    \
+static const Button name(&di##name);
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #define DEF_GOVERNOR(name, title, hint, cell, min, max, keeper, funcActive, funcChanged, funcBeforeDraw)                                                                                    \
 static const pString th##name[] = {title, hint};                                                                                                                                            \
-static const DataItem hi##name = { Item::Type::Button, 0, Page::Name::NoPage, keeper, funcActive, th##name };                                                                               \
-static const Governor name(&hi##name, (int16 *)&cell, min, max, funcChanged, funcBeforeDraw);
+static const DataItem di##name = { Item::Type::Button, 0, Page::Name::NoPage, keeper, funcActive, th##name };                                                                               \
+static const Governor name(&di##name, (int16 *)&cell, min, max, funcChanged, funcBeforeDraw);
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #define DEF_GOVERNOR_COLOR(name, title, hint, colorType, keeper)                                                                                                                            \
 static const pString th##name[] = {title, hint};                                                                                                                                            \
-static const DataItem hi##name = { Item::Type::GovernorColor, 0, Page::Name::NoPage, keeper, EmptyFuncBtV, th##name };                                                                      \
-static const GovernorColor name(&hi##name, &colorType, 0);
+static const DataGovernorColor dgc##name = {&colorType};                                                                                                                                    \
+static const DataItem di##name = { Item::Type::GovernorColor, 0, Page::Name::NoPage, keeper, EmptyFuncBtV, th##name, &dgc##name };                                                          \
+static const GovernorColor name(&di##name);
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #define DEF_GRAPH_BUTTON(name, title, hint, keeper, funcActive, funcPress, funcDraw)                                                                                                        \

@@ -55,7 +55,7 @@ void GovernorColor::DrawOpened(int x, int y) const
 {
     int width = widthOpened;
     int height = heightOpened;
-    ct->Init();
+    OwnData()->ct->Init();
     Rectangle(width + 2, height + 2).Draw(x - 1, y - 1, Color::BACK);
     Rectangle(width, height).Draw(x, y, ColorFrame());
     Region(width - 2, height / 2 - 2).Fill(x + 1, y + 1, ColorTitleBackground());
@@ -67,23 +67,23 @@ void GovernorColor::DrawOpened(int x, int y) const
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void GovernorColor::DrawClosed(int x, int y) const
 {
-    ct->Init();
+    OwnData()->ct->Init();
     DrawCommonHiPart(this, x, y, false);
-    Region(Width() + 1, Value::HEIGHT - 3).Fill(x + 1, y + 13, ct->color);
+    Region(Width() + 1, Value::HEIGHT - 3).Fill(x + 1, y + 13, OwnData()->ct->color);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void GovernorColor::DrawValue(int x, int y) const
 {
-    int8 field = ct->currentField;
+    int8 field = OwnData()->ct->currentField;
     const pString texts[4] = {"ßð", "Ñí", "Çë", "Êð"};
 
-    uint color = COLOR(ct->color.value);
+    uint color = COLOR(OwnData()->ct->color.value);
     uint red = R_FROM_COLOR(color);
     uint green = G_FROM_COLOR(color);
     uint blue = B_FROM_COLOR(color);
-    ct->Init();
-    int16 vals[4] = {(int16)(ct->brightness * 100.0F), (int16)blue, (int16)green, (int16)red};
+    OwnData()->ct->Init();
+    int16 vals[4] = {(int16)(OwnData()->ct->brightness * 100.0F), (int16)blue, (int16)green, (int16)red};
 
     Region(widthOpened - 2, 12).Fill(x, y, Color::BACK);
     x += 98;
