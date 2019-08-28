@@ -107,7 +107,7 @@ void Governor::Draw(int x, int y, bool opened) const
         return;
     }
 
-    funcBeforeDraw();
+    OwnData()->FuncBeforeDraw();
 
     if (opened)
     {
@@ -148,12 +148,12 @@ void Governor::DrawValue(int x, int y) const
     }
     
     Font::SetCurrent(Font::Type::_5);
-    bool sign = (minValue < 0);
+    bool sign = (OwnData()->min < 0);
     
     //if(maxValue < 65536)
     {
-        Integer(maxValue).ToString(sign, 1).Draw(x + 55, y - 5, Color::WHITE);
-        Integer(minValue).ToString(sign, 1).Draw(x + 55, y + 2);
+        Integer(OwnData()->max).ToString(sign, 1).Draw(x + 55, y - 5, Color::WHITE);
+        Integer(OwnData()->min).ToString(sign, 1).Draw(x + 55, y + 2);
     }
     
     Font::SetCurrent(Font::Type::_8);

@@ -18,8 +18,9 @@ static const Button name(&di##name);
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #define DEF_GOVERNOR(name, title, hint, cell, min, max, keeper, funcActive, funcChanged, funcBeforeDraw)                                                                                    \
 static const pString th##name[] = {title, hint};                                                                                                                                            \
-static const DataItem di##name = { Item::Type::Button, 0, Page::Name::NoPage, keeper, funcActive, th##name };                                                                               \
-static const Governor name(&di##name, (int16 *)&cell, min, max, funcChanged, funcBeforeDraw);
+static const DataGovernor dg##name = {(int16 *)&cell, min, max, funcChanged, funcBeforeDraw};                                                                                               \
+static const DataItem di##name = { Item::Type::Button, 0, Page::Name::NoPage, keeper, funcActive, th##name, &dg##name };                                                                    \
+static const Governor name(&di##name);
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #define DEF_GOVERNOR_COLOR(name, title, hint, colorType, keeper)                                                                                                                            \

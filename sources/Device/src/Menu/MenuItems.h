@@ -306,18 +306,23 @@ public:
 };
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// Governor ///
+struct DataGovernor
+{
+    int16  *cell;
+    int16   min;            ///< Минмальное значение, которое может принимать регулятор.
+    int16   max;            ///< Максимальное значение.
+    pFuncVV funcOnChanged;  ///< Функция, которую нужно вызывать после того, как значение регулятора изменилось.
+    pFuncVV funcBeforeDraw; ///< Функция, которая вызывается перед отрисовкой
+
+    void FuncOnChanged() { if (funcOnChanged) funcOnChanged(); }
+    void FuncBeforeDraw() { if (funcBeforeDraw) funcBeforeDraw(); }
+};
 
 /// Описывает регулятор.
 class Governor : public Item
 {
 public:
-    int16  *cell;
-    int16   minValue;       ///< Минмальное значение, которое может принимать регулятор.
-    int16   maxValue;       ///< Максимальное значение.
-    pFuncVV funcOfChanged;  ///< Функция, которую нужно вызывать после того, как значение регулятора изменилось.
-    pFuncVV funcBeforeDraw; ///< Функция, которая вызывается перед отрисовкой
-    Governor(const DataItem * const head, int16 *cell, int16 min, int16 max, pFuncVV funcChanged, pFuncVV funcDraw);
-
+    Governor(const DataItem * const data) : Item(data) {};
     /// Возвращает следующее большее значение, которое может принять governor.
     int16 NextValue() const;
     /// Возвращает следующее меньшее значение, которое может принять governor.
@@ -350,6 +355,8 @@ public:
     virtual bool ProcessKey(KeyEvent event);
 
     virtual void Draw(int x, int y, bool opened) const;
+
+    DataGovernor *OwnData() const { return (DataGovernor *)data->ad; }
 
 private:
 

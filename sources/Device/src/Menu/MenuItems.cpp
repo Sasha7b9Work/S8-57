@@ -461,22 +461,6 @@ void GraphButton::KeyAutoRelease() const
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-Governor::Governor(const DataItem * const head, int16 *_cell, int16 min, int16 max, pFuncVV funcChanged, pFuncVV funcDraw) :
-    Item(head),
-    cell(_cell), minValue(min), maxValue(max), funcOfChanged(funcChanged), funcBeforeDraw(funcDraw)
-{
-    if (funcOfChanged == nullptr)
-    {
-        funcOfChanged = EmptyFuncVV;
-    }
-
-    if (funcBeforeDraw == nullptr)
-    {
-        funcBeforeDraw = EmptyFuncVV;
-    }
-};
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Governor::KeyRelease() const
 {
     Item::KeyRelease();
@@ -519,13 +503,13 @@ void Governor::NextPosition() const
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 int16 Governor::NextValue() const
 {
-    return (GetValue() < maxValue) ? (GetValue() + 1) : minValue;
+    return (GetValue() < OwnData()->max) ? (GetValue() + 1) : OwnData()->min;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 int16 Governor::PrevValue() const
 {
-    return (GetValue() > minValue) ? (GetValue() - 1) : maxValue;
+    return (GetValue() > OwnData()->min) ? (GetValue() - 1) : OwnData()->max;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -550,7 +534,7 @@ float Governor::Step() const
             {
                 tsGovernor.dir = NONE;
                 SetValue(PrevValue());
-                funcOfChanged();
+                OwnData()->FuncOnChanged();
                 delta = 0.0F;
                 tsGovernor.address = 0;
             }
@@ -565,7 +549,7 @@ float Governor::Step() const
             {
                 tsGovernor.dir = NONE;
                 SetValue(NextValue());
-                funcOfChanged();
+                OwnData()->FuncOnChanged();
                 delta = 0.0F;
                 tsGovernor.address = 0;
             }
@@ -582,8 +566,8 @@ float Governor::Step() const
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 uint Governor::NumDigits() const
 {
-    int min = Integer(Math::Abs(minValue)).NumDigits();
-    int max = Integer(Math::Abs(maxValue)).NumDigits();
+    int min = Integer(Math::Abs(OwnData()->min)).NumDigits();
+    int max = Integer(Math::Abs(OwnData()->max)).NumDigits();
     if (min > max)
     {
         max = min;
@@ -603,13 +587,13 @@ void Governor::ChangeValue(int16 delta)
 
     int16 newValue = GetValue() + (int16)(Math::Sign(delta) * Math::Pow10(currentDigit));
 
-    LIMITATION(newValue, minValue, maxValue); //-V2516
+    LIMITATION(newValue, OwnData()->min, OwnData()->max); //-V2516
 
     SetValue(newValue);
 
     if (GetValue() != oldValue)
     {
-        funcOfChanged();
+        OwnData()->FuncOnChanged();
         Beeper::GovernorChangedValue();
     }
 }
@@ -658,13 +642,13 @@ void Governor::PrevPosition()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 int16 Governor::GetValue() const
 {
-    return *cell;
+    return *OwnData()->cell;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Governor::SetValue(int16 v) const
 {
-    *cell = v;
+    *OwnData()->cell = v;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
