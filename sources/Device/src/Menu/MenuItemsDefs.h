@@ -11,8 +11,9 @@ inline bool EmptyFuncfBKE(KeyEvent) { return false; }
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #define DEF_BUTTON(name, title, hint, keeper, funcActive, funcPress, funcDraw)                                                                                                              \
 static const pString th##name[] = {title, hint};                                                                                                                                            \
-static const DataItem hi##name = { Item::Type::Button, 0, Page::Name::NoPage, keeper, funcActive, th##name };                                                                               \
-static const Button name(&hi##name, funcPress, funcDraw);
+static const DataButton db##name = {funcPress, funcDraw};                                                                                                                                   \
+static const DataItem hi##name = { Item::Type::Button, 0, Page::Name::NoPage, keeper, funcActive, th##name, &db##name };                                                                    \
+static const Button name(&hi##name);
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #define DEF_GOVERNOR(name, title, hint, cell, min, max, keeper, funcActive, funcChanged, funcBeforeDraw)                                                                                    \

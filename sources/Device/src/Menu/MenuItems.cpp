@@ -419,22 +419,6 @@ const Item *Page::ItemForFuncKey(Key::E key) const
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-Button::Button(const DataItem * const head, pFuncVV funcPress, pFuncVII funcDraw) :
-    Item(head),
-    funcOnPress(funcPress), funcForDraw(funcDraw)
-{
-    if (funcOnPress == nullptr)
-    {
-        funcOnPress = EmptyFuncVV;
-    }
-
-    if (funcForDraw == nullptr)
-    {
-        funcForDraw = EmptyFuncVII;
-    }
-};
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Button::KeyRelease() const
 {
     Item::KeyRelease();
@@ -443,7 +427,7 @@ void Button::KeyRelease() const
     {
         SetCurrent(true);
 
-        funcOnPress();
+        OwnData()->FuncOnPress();
     }
 }
 

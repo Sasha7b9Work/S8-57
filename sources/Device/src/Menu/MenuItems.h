@@ -256,19 +256,26 @@ public:
 
 };
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// Button ///
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// Button ///
+struct DataButton
+{
+    pFuncVV     _funcOnPress;        ///< Функция, которая вызывается при нажатии на кнопку.
+    pFuncVII    _funcForDraw;        ///< Функция будет вызываться во время отрисовки кнопки.
+    void FuncOnPress() { if (_funcOnPress) _funcOnPress(); }
+    void FuncForDraw(int x, int y) { if (_funcForDraw) _funcForDraw(x, y); }
+};
+
 class Button : public Item
 {
 public:
-    pFuncVV     funcOnPress;        ///< Функция, которая вызывается при нажатии на кнопку.
-    pFuncVII    funcForDraw;        ///< Функция будет вызываться во время отрисовки кнопки.
-    Button(const DataItem * const head, pFuncVV funcPress, pFuncVII funcDraw);
+    Button(const DataItem * const data) : Item(data) {};
     virtual void Draw(int x, int y, bool opened) const;
     virtual void KeyRelease() const;
     virtual void KeyAutoRelease() const;
+    DataButton *OwnData() const { return (DataButton *)data->ad; }
 };
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// SButton ///
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// GraphButton ///
 struct StructHelpDrawButton
 {
     pFuncVII    funcDrawUGO;    ///< Указатель на функцию отрисовки изображения варианта кнопки
