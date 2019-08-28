@@ -63,7 +63,7 @@ void PageMeasuresCursors::PageSet::Draw_Set_Channel(int x, int y)
 DEF_GRAPH_BUTTON_HINTS_2( bSet_Channel,                                                                                                    //--- ИЗМЕРЕНИЯ - КУРСОРЫ - УСТАНОВИТЬ - Канал ---
     "Канал",
     "Выбор канала для курсорных измерений",
-    &PageMeasuresCursors::PageSet::self, 0, PageMeasuresCursors::PageSet::OnPress_Set_Channel, PageMeasuresCursors::PageSet::Draw_Set_Channel,
+    &PageMeasuresCursors::PageSet::self, E_BtV, PageMeasuresCursors::PageSet::OnPress_Set_Channel, PageMeasuresCursors::PageSet::Draw_Set_Channel,
     Draw_Set_ChannelA, "канал 1",
     Draw_Set_ChannelB, "канал 2"
 )
@@ -157,7 +157,7 @@ static void Draw_Set_T(int x, int y)
 DEF_GRAPH_BUTTON_HINTS_5( bSet_T,                                                                                                      //--- ИЗМЕРЕНИЯ - КУРСОРЫ - УСТАНОВИТЬ - Курсоры Т ---
     "Курсоры T",
     "Выбор курсоров времени для индикации и управления",
-    &PageMeasuresCursors::PageSet::self, 0, PageMeasuresCursors::PageSet::OnPress_Set_T, Draw_Set_T,
+    &PageMeasuresCursors::PageSet::self, E_BtV, PageMeasuresCursors::PageSet::OnPress_Set_T, Draw_Set_T,
     Draw_Set_T_disable,     "курсоры времени выключены",
     Draw_Set_T_disableBoth, "курсоры времени включены",
     Draw_Set_T_enableLeft,  "курсоры времени включены, управление левым курсором",
@@ -255,7 +255,7 @@ static void Draw_Set_U(int x, int y)
 DEF_GRAPH_BUTTON_HINTS_5( bSet_U,                                                                                                      //--- ИЗМЕРЕНИЯ - КУРСОРЫ - УСТАНОВИТЬ - Курсоры U ---
     "Курсоры U",
     "Выбор курсоров напряжения для индикации и управления",
-    &PageMeasuresCursors::PageSet::self, 0, PageMeasuresCursors::PageSet::OnPress_Set_U, Draw_Set_U,
+    &PageMeasuresCursors::PageSet::self, E_BtV, PageMeasuresCursors::PageSet::OnPress_Set_U, Draw_Set_U,
     Draw_Set_U_disable,     "курсоры напряжения выключены",
     Draw_Set_U_disableBoth, "курсоры напряжения включены",
     Draw_Set_U_enableUpper, "курсоры напряжения включены, управление верхним курсором",
@@ -278,7 +278,7 @@ static void Draw_Set_100(int x, int y)
 DEF_GRAPH_BUTTON( bSet_100,                                                                                                                 //--- ИЗМЕРЕНИЯ - КУРСОРЫ - УСТАНОВИТЬ - 100% ---
     "100\x83",
     "Используется для процентных измерений. Нажатие помечает расстояние между активными курсорами как 100%",
-    &PageMeasuresCursors::PageSet::self, 0, OnPress_Set_100, Draw_Set_100
+    &PageMeasuresCursors::PageSet::self, E_BtV, OnPress_Set_100, Draw_Set_100
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -312,7 +312,7 @@ static void Draw_Set_Movement(int x, int y)
 DEF_GRAPH_BUTTON_HINTS_2( bSet_Movement,                                                                                             //--- ИЗМЕРЕНИЯ - КУРСОРЫ - УСТАНОВИТЬ - Перемещение ---
     "Перемещение",
     "Выбор шага перемещения курсоров - проценты или точки",
-    &PageMeasuresCursors::PageSet::self, 0, OnPress_Set_Movement, Draw_Set_Movement,
+    &PageMeasuresCursors::PageSet::self, E_BtV, OnPress_Set_Movement, Draw_Set_Movement,
     Draw_Set_Movement_Percents, "шаг перемещения курсоров кратен одному проценту",
     Draw_Set_Movement_Points,   "шаг перемещения курсора кратен одному пикселю"
 )

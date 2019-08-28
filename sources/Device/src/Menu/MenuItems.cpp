@@ -452,7 +452,7 @@ void GraphButton::KeyRelease() const
 
     if (IsActive())
     {
-        OwnData()->FuncOnPress();
+        OwnData()->funcOnPress();
     }
 }
 

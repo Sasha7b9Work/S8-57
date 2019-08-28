@@ -318,7 +318,7 @@ void GraphButton::Draw(int x, int y, bool) const
         {
             Color::FILL.SetAsCurrent();
         }
-        OwnData()->FuncForDraw(x + 20, y);
+        OwnData()->funcForDraw(x + 20, y);
     }
     else
     {

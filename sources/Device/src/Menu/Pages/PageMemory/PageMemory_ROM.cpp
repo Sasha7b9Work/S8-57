@@ -43,7 +43,7 @@ static void Draw_Next(int x, int y)
 DEF_GRAPH_BUTTON( bNext,
     "Следующий",
     "Перейти к следующему сигналу",
-    &PageROM::self, 0, OnPress_Next, Draw_Next
+    &PageROM::self, E_BtV, OnPress_Next, Draw_Next
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -62,7 +62,7 @@ static void Draw_Prev(int x, int y)
 DEF_GRAPH_BUTTON( bPrev,
     "Предыдущий",
     "Перейти к предыдущему сигналу",
-    &PageROM::self, 0, OnPress_Prev, Draw_Prev
+    &PageROM::self, E_BtV, OnPress_Prev, Draw_Prev
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -83,7 +83,7 @@ static void Draw_Internal_Delete(int x, int y)
 DEF_GRAPH_BUTTON( bDelete,                                                                                                                              //--- ПАМЯТЬ - ВНУТР ЗУ - Удалить ---
     "Удалить",
     "Удаляет выбранный сигнал из внутреннего запоминающего устройства",
-    &PageROM::self, 0, OnPress_Internal_Delete, Draw_Internal_Delete
+    &PageROM::self, E_BtV, OnPress_Internal_Delete, Draw_Internal_Delete
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -117,7 +117,7 @@ static void Draw_Internal_SaveToMemory(int x, int y)
 DEF_GRAPH_BUTTON( bSave,                                                                                                                   //--- ПАМЯТЬ - ВНУТР ЗУ - Сохранить в памяти ---
     "Сохранить в памяти",
     "Сохранить сигнал во внутреннем запоминующем устройстве",
-    &PageROM::self, 0, OnPress_Internal_SaveToMemory, Draw_Internal_SaveToMemory
+    &PageROM::self, E_BtV, OnPress_Internal_SaveToMemory, Draw_Internal_SaveToMemory
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

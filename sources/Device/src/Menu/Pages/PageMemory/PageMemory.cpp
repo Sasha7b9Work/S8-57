@@ -87,7 +87,7 @@ static void Draw_Drive_Manager_Tab(int x, int y)
 DEF_GRAPH_BUTTON( bDrive_Manager_Tab,                                                                                                             //--- ПАМЯТЬ - ВНЕШН ЗУ - КАТАЛОГ - Tab ---
     "Tab",
     "Переход между каталогами и файлами",
-    &PageDrive::PageManager::self, 0, FileManager::PressSB_Tab, Draw_Drive_Manager_Tab
+    &PageDrive::PageManager::self, E_BtV, FileManager::PressSB_Tab, Draw_Drive_Manager_Tab
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -101,7 +101,7 @@ static void Draw_Drive_Manager_LevelUp(int x, int y)
 DEF_GRAPH_BUTTON( bDrive_Manager_LevelUp,                                                                                           //--- ПАМЯТЬ - ВНЕШН ЗУ - КАТАЛОГ - Выйти из каталога ---
     "Выйти из каталого",
     "Переход в родительский каталог",
-    &PageDrive::PageManager::self, 0, FileManager::PressSB_LevelUp, Draw_Drive_Manager_LevelUp
+    &PageDrive::PageManager::self, E_BtV, FileManager::PressSB_LevelUp, Draw_Drive_Manager_LevelUp
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -115,7 +115,7 @@ static void Draw_Drive_Manager_LevelDown(int x, int y)
 DEF_GRAPH_BUTTON( bDrive_Manager_LevelDown,                                                                                           //--- ПАМЯТЬ - ВНЕШН ЗУ - КАТАЛОГ - Войти в каталог ---
     "Войти в каталог",
     "Переход в выбранный каталог",
-    &PageDrive::PageManager::self, 0, FileManager::PressSB_LevelDown, Draw_Drive_Manager_LevelDown
+    &PageDrive::PageManager::self, E_BtV, FileManager::PressSB_LevelDown, Draw_Drive_Manager_LevelDown
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -194,7 +194,7 @@ static void Draw_Delete(int x, int y)
 DEF_GRAPH_BUTTON( bDrive_Mask_Delete,                                                                                                           //--- ПАМЯТЬ - ВНЕШН ЗУ - МАСКА - Удалить ---
     "Удалить",
     "Удаляет все введённые символы",
-    &PageDrive::PageMask::self, 0, OnPress_Drive_Mask_Delete, Draw_Delete
+    &PageDrive::PageMask::self, E_BtV, OnPress_Drive_Mask_Delete, Draw_Delete
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -224,7 +224,7 @@ static void Draw_Backspace(int x, int y)
 DEF_GRAPH_BUTTON( bDrive_Mask_Backspace,                                                                                                      //--- ПАМЯТЬ - ВНЕШН ЗУ - МАСКА - Backspace ---
     "Backspace",
     "Удаляет последний введённый символ",
-    &PageDrive::PageMask::self, 0, OnPress_Drive_Mask_Backspace, Draw_Backspace
+    &PageDrive::PageMask::self, E_BtV, OnPress_Drive_Mask_Backspace, Draw_Backspace
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -274,7 +274,7 @@ static void Draw_Insert(int x, int y)
 DEF_GRAPH_BUTTON( bDrive_Mask_Insert,                                                                                                          //--- ПАМЯТЬ - ВНЕШН ЗУ - МАСКА - Вставить ---
     "Вставить",
     "Вставляет выбранный символ",
-    &PageDrive::PageMask::self, 0, OnPress_Drive_Mask_Insert, Draw_Insert
+    &PageDrive::PageMask::self, E_BtV, OnPress_Drive_Mask_Insert, Draw_Insert
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -581,7 +581,7 @@ static void OnPress_SetName_Delete()
 DEF_GRAPH_BUTTON( bSetName_Delete,                                                                                                                              //--- ИМЯ ФАЙЛА - Удалить ---
     "Удалить",
     "Удаляет все введённые символы",
-    &PageSetName::self, 0, OnPress_SetName_Delete, Draw_Delete
+    &PageSetName::self, E_BtV, OnPress_SetName_Delete, Draw_Delete
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -597,7 +597,7 @@ static void OnPress_SetName_Backspace()
 DEF_GRAPH_BUTTON( bSetName_Backspace,                                                                                                                         //--- ИМЯ ФАЙЛА - Backspace ---
     "Backspace",
     "Удаляет последний символ",
-    &PageSetName::self, 0, OnPress_SetName_Backspace, Draw_Backspace
+    &PageSetName::self, E_BtV, OnPress_SetName_Backspace, Draw_Backspace
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -614,7 +614,7 @@ static void OnPress_SetName_Insert()
 DEF_GRAPH_BUTTON( bSetName_Insert,                                                                                                                             //--- ИМЯ ФАЙЛА - Вставить ---
     "Вставить",
     "Вводит очередной символ",
-    &PageSetName::self, 0, OnPress_SetName_Insert, Draw_Insert
+    &PageSetName::self, E_BtV, OnPress_SetName_Insert, Draw_Insert
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -640,7 +640,7 @@ static void Draw_SetName_Save(int x, int y)
 DEF_GRAPH_BUTTON( bSetName_Save,                                                                                                                              //--- ИМЯ ФАЙЛА - Сохранить ---
     "Сохранить",
     "Сохранение на флеш под заданным именем",
-    &PageSetName::self, 0, OnPress_SetName_Save, Draw_SetName_Save
+    &PageSetName::self, E_BtV, OnPress_SetName_Save, Draw_SetName_Save
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

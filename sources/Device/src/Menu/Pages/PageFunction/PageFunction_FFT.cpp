@@ -95,7 +95,7 @@ static void Draw_FFT_Cursors_Source(int x, int y)
 DEF_GRAPH_BUTTON( bFFT_Cursors_Source,                                                                                                        //--- ФУНКЦИЯ - СПЕКТР - КУРСОРЫ - Источник ---
     "Источник",
     "Выбор источника для расчёта спектра",
-    &PageFFT::PageCursors::self, 0, OnPress_FFT_Cursors_Source, Draw_FFT_Cursors_Source
+    &PageFFT::PageCursors::self, E_BtV, OnPress_FFT_Cursors_Source, Draw_FFT_Cursors_Source
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

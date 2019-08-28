@@ -66,7 +66,7 @@ static void Draw_Function_Screen(int x, int y)
 DEF_GRAPH_BUTTON_HINTS_3(bFunction_Screen,                                                                                                                //--- СЕРВИС - ФУНКЦИЯ - Экран ---
     "Экран",
     "Выбирает режим отображения математического сигнала",
-    &PageMeasuresMath::self, 0, OnPress_Function_Screen, Draw_Function_Screen,
+    &PageMeasuresMath::self, E_BtV, OnPress_Function_Screen, Draw_Function_Screen,
     Draw_Function_Screen_Disable, "Вывод математической функции отключён",
     Draw_Function_Screen_Separate, "Сигналы и математическая функция выводятся в разных окнах",
     Draw_Function_Screen_Together, "Сигналы и математическая функция выводятся в одном окне"

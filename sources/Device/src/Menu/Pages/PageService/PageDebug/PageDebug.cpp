@@ -519,7 +519,7 @@ static void Draw_SerialNumber_Change(int x, int y)
 DEF_GRAPH_BUTTON( bSerialNumber_Change,                                                                                                                    //--- ОТЛАДКА - С/Н - Вставить ---
     "Вставить",
     "Вставляет выбраный символ",
-    &PageDebug::PageSerialNumber::self, 0, OnPress_SerialNumber_Change, Draw_SerialNumber_Change
+    &PageDebug::PageSerialNumber::self, E_BtV, OnPress_SerialNumber_Change, Draw_SerialNumber_Change
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -537,7 +537,7 @@ static void Draw_SerialNumber_Save(int x, int y)
 DEF_GRAPH_BUTTON( bSerialNumber_Save,                                                                                                                     //--- ОТЛАДКА - С/Н - Сохранить ---
     "Сохранить",
     "Записывает серийный номер в OTP",
-    &PageDebug::PageSerialNumber::self, 0, OnPress_SerialNumber_Save, Draw_SerialNumber_Save
+    &PageDebug::PageSerialNumber::self, E_BtV, OnPress_SerialNumber_Save, Draw_SerialNumber_Save
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

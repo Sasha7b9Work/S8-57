@@ -71,14 +71,14 @@ DEF_GRAPH_BUTTON( sbHelpParagraphLeave,                                         
 DEF_GRAPH_BUTTON( sbHelpParagraphPrev,                                                                                                                   //--- ПОМОЩЬ - Предыдущий раздел ---
     "Предыдущий раздел",
     "Выбрать предыдущий раздел справки",
-    &PageHelp::self, 0, HelpContent_PrevParagraph, DrawSB_Help_ParagraphPrev
+    &PageHelp::self, E_BtV, HelpContent_PrevParagraph, DrawSB_Help_ParagraphPrev
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 DEF_GRAPH_BUTTON( sbHelpParagraphNext,                                                                                                                    //--- ПОМОЩЬ - Следующий раздел ---
     "Следующий раздел",
     "Выбрать следующий раздел справки",
-    &PageHelp::self, 0, HelpContent_NextParagraph, DrawSB_Help_ParagraphNext
+    &PageHelp::self, E_BtV, HelpContent_NextParagraph, DrawSB_Help_ParagraphNext
 )
 
 /*
