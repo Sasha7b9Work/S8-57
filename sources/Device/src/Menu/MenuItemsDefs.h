@@ -56,63 +56,73 @@ static const GraphButton name(&hi##name, h##name, funcPress, funcDraw);
 #define DEF_PAGE_1(name, title, hint, item1, namePage, keeper, funcActive, funcPress, funcDraw, funcRegSet)                                                                                 \
 static const Item * const i##name[] = {(Item *)item1};                                                                                                                                      \
 static const pString th##name[] = {title, hint};                                                                                                                                            \
-static const DataItem hi##name = { Item::Type::Page, 1, namePage, keeper, funcActive, th##name };                                                                                           \
-static const Page name(&hi##name, i##name, funcPress, funcDraw, funcRegSet);
+static const DataPage dp##name = {i##name, funcPress, funcDraw, funcRegSet};                                                                                                                \
+static const DataItem di##name = { Item::Type::Page, 1, namePage, keeper, funcActive, th##name, &dp##name };                                                                                \
+static const Page name(&di##name);
 
 #define DEF_PAGE_2(name, title, hint, item1, item2, namePage, keeper, funcActive, funcPress, funcDraw, funcRegSet)                                                                          \
 static const Item * const  i##name[] = {(Item *)item1, (Item *)item2};                                                                                                                      \
 static const pString th##name[] = {title, hint};                                                                                                                                            \
-static const DataItem hi##name = { Item::Type::Page, 2, namePage, keeper, funcActive, th##name };                                                                                           \
-static const Page name(&hi##name, i##name, funcPress, funcDraw, funcRegSet);
+static const DataPage dp##name = {i##name, funcPress, funcDraw, funcRegSet};                                                                                                                \
+static const DataItem di##name = { Item::Type::Page, 2, namePage, keeper, funcActive, th##name, &dp##name };                                                                                \
+static const Page name(&di##name);
 
 #define DEF_PAGE_3(name, title, hint, item1, item2, item3, namePage, keeper, funcActive, funcPress, funcDraw, funcRegSet)                                                                   \
 static const Item * const i##name[] = {(Item *)(item1), (Item *)(item2), (Item *)(item3)};                                                                                                  \
 static const pString th##name[] = {title, hint};                                                                                                                                            \
-static const DataItem hi##name = { Item::Type::Page, 3, namePage, keeper, funcActive, th##name };                                                                                           \
-static const Page name(&hi##name, i##name, funcPress, funcDraw, funcRegSet);
+static const DataPage dp##name = {i##name, funcPress, funcDraw, funcRegSet};                                                                                                                \
+static const DataItem di##name = { Item::Type::Page, 3, namePage, keeper, funcActive, th##name, &dp##name};                                                                                 \
+static const Page name(&di##name);
 
 #define DEF_PAGE_4(name, title, hint, item1, item2, item3, item4, namePage, keeper, funcActive, funcPress, funcDraw, funcRegSet)                                                            \
 static const Item * const i##name[] = {(Item *)item1, (Item *)item2, (Item *)item3, (Item *)item4};                                                                                         \
 static const pString th##name[] = {title, hint};                                                                                                                                            \
-static const DataItem hi##name = { Item::Type::Page, 4, namePage, keeper, funcActive, th##name };                                                                                           \
-static const Page name(&hi##name, i##name, funcPress, funcDraw, funcRegSet);
+static const DataPage dp##name = {i##name, funcPress, funcDraw, funcRegSet};                                                                                                                \
+static const DataItem di##name = { Item::Type::Page, 4, namePage, keeper, funcActive, th##name, &dp##name };                                                                                \
+static const Page name(&di##name);
 
 #define DEF_PAGE_5(name, title, hint,  item1, item2, item3, item4, item5, namePage, keeper, funcActive, funcPress, funcDraw, funcRegSet)                                                    \
 static const Item * const i##name[] = {(Item *)item1, (Item *)item2, (Item *)item3, (Item *)item4, (Item *)item5};                                                                          \
 static const pString th##name[] = {title, hint};                                                                                                                                            \
-static const DataItem hi##name = { Item::Type::Page, 5, namePage, keeper, funcActive, th##name };                                                                                           \
-static const Page name(&hi##name, i##name, funcPress, funcDraw, funcRegSet);
+static const DataPage dp##name = {i##name, funcPress, funcDraw, funcRegSet};                                                                                                                \
+static const DataItem di##name = { Item::Type::Page, 5, namePage, keeper, funcActive, th##name, &dp##name };                                                                                \
+static const Page name(&di##name);
 
-#define DEF_PAGE_5_VAR(name, title, hint,  item1, item2, item3, item4, item5, namePage, keeper, funcActive, funcPress, funcDraw, funcRegSet)                                                    \
+#define DEF_PAGE_5_VAR(name, title, hint,  item1, item2, item3, item4, item5, namePage, keeper, funcActive, funcPress, funcDraw, funcRegSet)                                                \
 static const Item *i##name[] = {(Item *)item1, (Item *)item2, (Item *)item3, (Item *)item4, (Item *)item5};                                                                                 \
 static const pString th##name[] = {title, hint};                                                                                                                                            \
-static const DataItem hi##name = { Item::Type::Page, 5, namePage, keeper, funcActive, th##name };                                                                                           \
-static const Page name(&hi##name, i##name, funcPress, funcDraw, funcRegSet);
+static const DataPage dp##name = {i##name, funcPress, funcDraw, funcRegSet};                                                                                                                \
+static const DataItem di##name = { Item::Type::Page, 5, namePage, keeper, funcActive, th##name, &dp##name };                                                                                \
+static const Page name(&di##name);
 
 #define DEF_PAGE_6(name, title, hint, item1, item2, item3, item4, item5, item6, namePage, keeper, funcActive, funcPress, funcDraw, funcRegSet)                                              \
 static const Item * const i##name[] = {(Item *)item1, (Item *)item2, (Item *)item3, (Item *)item4, (Item *)item5, (Item *)item6};                                                           \
 static const pString th##name[] = {title, hint};                                                                                                                                            \
-static const DataItem hi##name = { Item::Type::Page, 6, namePage, keeper, funcActive, th##name };                                                                                           \
-static const Page name(&hi##name, i##name, funcPress, funcDraw, funcRegSet);
+static const DataPage dp##name = {i##name, funcPress, funcDraw, funcRegSet};                                                                                                                \
+static const DataItem di##name = { Item::Type::Page, 6, namePage, keeper, funcActive, th##name, &dp##name };                                                                                \
+static const Page name(&di##name);
 
 #define DEF_PAGE_7(name, title, hint, item1, item2, item3, item4, item5, item6, item7, namePage, keeper, funcActive, funcPress, funcDraw, funcRegSet)                                       \
 static const Item * const  i##name[] = { (Item *)item1, (Item *)item2, (Item *)item3, (Item *)item4, (Item *)item5, (Item *)item6, (Item *)item7};                                          \
 static const pString th##name[] = {title, hint};                                                                                                                                            \
-static const DataItem hi##name = { Item::Type::Page, 7, namePage, keeper, funcActive, th##name };                                                                                           \
-static const Page name(&hi##name, i##name, funcPress, funcDraw, funcRegSet);
+static const DataPage dp##name = {i##name, funcPress, funcDraw, funcRegSet};                                                                                                                \
+static const DataItem di##name = { Item::Type::Page, 7, namePage, keeper, funcActive, th##name, &dp##name };                                                                                \
+static const Page name(&di##name);
 
 #define DEF_PAGE_8(name, title, hint, item1, item2, item3, item4, item5, item6, item7, item8, namePage, keeper, funcActive, funcPress, funcDraw, funcRegSet)                                \
 static const Item * const  i##name[] = {(Item *)item1, (Item *)item2, (Item *)item3, (Item *)item4, (Item *)item5, (Item *)item6, (Item *)item7, (Item *)item8};                            \
 static const pString th##name[] = {title, hint};                                                                                                                                            \
-static const DataItem hi##name = { Item::Type::Page, 8, namePage, keeper, funcActive, th##name };                                                                                           \
-static const Page name(&hi##name, i##name, funcPress, funcDraw, funcRegSet);
+static const DataPage dp##name = {i##name, funcPress, funcDraw, funcRegSet};                                                                                                                \
+static const DataItem di##name = { Item::Type::Page, 8, namePage, keeper, funcActive, th##name, &dp##name };                                                                                \
+static const Page name(&di##name);
 
 #define DEF_PAGE_12(name, title, hint, item1, item2, item3, item4, item5, item6, item7, item8, item9, item10, item11, item12, namePage, keeper, funcActive, funcPress, funcDraw, funcRegSet)\
 static const Item * const  i##name[] = {(Item *)item1, (Item *)item2, (Item *)item3, (Item *)item4, (Item *)item5,                                                                          \
     (Item *)item6, (Item *)item7, (Item *)item8, (Item *)item9, (Item *)item10, (Item *)item11, (Item *)item12};                                                                            \
 static const pString th##name[] = {title, hint};                                                                                                                                            \
-static const DataItem hi##name = { Item::Type::Page, 12, namePage, keeper, funcActive, th##name };                                                                                           \
-static const Page name(&hi##name, i##name, funcPress, funcDraw, funcRegSet);
+static const DataPage dp##name = {i##name, funcPress, funcDraw, funcRegSet};                                                                                                                \
+static const DataItem di##name = { Item::Type::Page, 12, namePage, keeper, funcActive, th##name, &dp##name };                                                                               \
+static const Page name(&di##name);
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #define DEF_CHOICE_2(name, title, hint, name1, name2, cell, keeper, funcActive, funcChanged, funcDraw)                                                                                      \

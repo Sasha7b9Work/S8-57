@@ -178,7 +178,7 @@ void PageMultimeter::OnChanged_Mode(bool)
 {
     Page *page = (Page *)&pageMultimeter;
 
-    Item **items = (Item **)page->items;
+    Item **items = (Item **)page->OwnData()->items;
 
     if (MULTI_MEASURE == Multimeter::Measure::VoltageDC)
     {
@@ -294,7 +294,7 @@ void PageMultimeter::DecodePassword(const KeyEvent &event)
         {
             Page *page = (Page *)&pageMultimeter;
 
-            Item **items = (Item **)page->items;
+            Item **items = (Item **)page->OwnData()->items;
 
             items[4] = (Item *)PageMultimeter::PageCalibration::self;
 

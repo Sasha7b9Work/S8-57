@@ -112,7 +112,7 @@ void PageTester::OnChanged_Control(bool)
 {
     Page *page = (Page *)&pageTester;
 
-    Item **items = (Item **)page->items;
+    Item **items = (Item **)page->OwnData()->items;
 
     if (TESTER_CONTROL_IS_U)
     {

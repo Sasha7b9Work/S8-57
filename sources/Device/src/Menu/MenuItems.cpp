@@ -236,7 +236,7 @@ int Item::PositionInKeeperList() const
     {
         for (int i = 0; i < parent->NumItems(); i++)
         {
-            if (this == parent->items[i])
+            if (this == parent->OwnData()->items[i])
             {
                 return i;
             }
@@ -248,27 +248,6 @@ int Item::PositionInKeeperList() const
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-Page::Page(const DataItem * const head, const Item * const *_items, pFuncVB funcEnterExit, pFuncVV funcDraw, pFuncBKE _funcKey) :
-    Item(head),
-    items(_items), funcOnEnterExit(funcEnterExit), funcOnDraw(funcDraw), funcKey(_funcKey)
-{
-    if (funcOnEnterExit == nullptr)
-    {
-        funcOnEnterExit = EmptyFuncVB;
-    }
-
-    if (funcOnDraw == nullptr)
-    {
-        funcOnDraw = EmptyFuncVV;
-    }
-
-    if (funcKey == nullptr)
-    {
-        funcKey = EmptyFuncfBKE;
-    }
-};
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 int Page::NumSubPages() const
 {
     return (NumItems() - 1) / Item::NUM_ON_DISPLAY + 1;
@@ -287,7 +266,7 @@ int Page::NumItems() const //-V2506
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Page::ShortPress() const
 {
-    funcOnEnterExit(true);
+    OwnData()->funcOnEnterExit(true);
 
     SetAsCurrent();
 }
@@ -339,7 +318,7 @@ Page::Name::E Page::GetName() const
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 bool Page::ProcessKey(KeyEvent event)
 {
-    if (funcKey(event))
+    if (OwnData()->funcKey(event))
     {
         return true;
     }
@@ -392,7 +371,7 @@ Item *Page::GetItem(int numItem) const
         return &Item::empty;
     }
 
-    return (Item *)items[numItem];
+    return (Item *)OwnData()->items[numItem];
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

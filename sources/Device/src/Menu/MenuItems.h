@@ -15,6 +15,7 @@ struct DataItem
     const Page *const *keeper;          ///< Адрес страницы, которой принадлежит. Для Page_Main = 0
     pFuncBV            funcOfActive;    ///< Активен ли данный элемент
     const pString     *titleHint;       ///< Название страницы. Также подсказка для режима помощи
+    const void * const ad;              ///< Указатель на структуру с данными, специфическими для каждого подкласса Item
 };
 
 
@@ -105,17 +106,22 @@ public:
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// Page ///
-
-/// Описывает страницу меню
-class Page : public Item
+struct DataPage
 {
-public:
     const Item * const *items;      ///< Здесь указатели на пункты этой страницы (в обычной странице)
                                     ///< для страницы малых кнопок  здесь хранятся 6 указателей на SButton : 0 - K_Enter, 1...5 - K_1...K_5
     pFuncVB     funcOnEnterExit;    ///< Будет вызываться при нажатии на свёрнутую страницу и при выходе из этой страницы на предыдущую
     pFuncVV     funcOnDraw;         ///< Будет вызываться после отрисовки кнопок
     pFuncBKE    funcKey;            ///< В странице малых кнопок вызывается при нажатии стрелки
-    Page(const DataItem * const head, const Item * const *items, pFuncVB funcEnterExit, pFuncVV funcDraw, pFuncBKE funcKey);
+
+    void FuncOnDraw() { if (funcOnDraw) { funcOnDraw(); } };
+};
+
+/// Описывает страницу меню
+class Page : public Item
+{
+public:
+    Page(const DataItem * const data) : Item(data) {};
     /// Возвращает true, если текущий элемент страницы открыт
     bool CurrentItemIsOpened() const;
     /// Dозвращает число подстраниц в странице по адресу page
@@ -157,6 +163,8 @@ public:
     virtual bool ProcessKey(KeyEvent event);
     /// Нарисовать в заданных координатах
     virtual void Draw(int x, int y, bool opened) const;
+    /// Возвращает указатель на данные, специфичные для этого класса
+    DataPage *OwnData() const { return (DataPage *)data->ad; }
 
     void ShortPress() const;
     /// Возвращает адрес элемента, соответствующего функциональной кнопкке
