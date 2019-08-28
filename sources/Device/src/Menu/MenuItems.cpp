@@ -36,11 +36,12 @@ static TimeStruct tsGovernor = { 0, 0, NONE, 0, 0, 0 };
 DataItem Item::emptyData =
 {
     Item::Type::None,
+    "",
+    "",
     0,
     Page::Name::NoPage,
     nullptr,
-    EmptyFuncBtV,
-    nullptr
+    EmptyFuncBtV
 };
 
 Item Item::empty;
@@ -164,7 +165,7 @@ bool Item::IsPressed() const
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 String Item::Title() const
 {
-    return String(data->titleHint[0]);
+    return String(data->title);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

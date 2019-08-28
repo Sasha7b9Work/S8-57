@@ -356,11 +356,11 @@ static void DrawHintItem(int x, int y, int width)
 
     const int SIZE = 100;
     char title[SIZE];
-    std::snprintf(title, SIZE, "%s \"%s\"", names[itemHint->data->type], item->data->titleHint[0]);
+    std::snprintf(title, SIZE, "%s \"%s\"", names[itemHint->data->type], item->data->title);
 
     Text(title).DrawInCenterRectAndBoundIt(x, y, width, 15, Color::BACK, Color::FILL);
 
-    y = Text(item->data->titleHint[1]).DrawInBoundedRectWithTransfers(x, y + 15, width, Color::BACK, Color::FILL);
+    y = Text(item->data->hint).DrawInBoundedRectWithTransfers(x, y + 15, width, Color::BACK, Color::FILL);
 
     if (item->Is(Item::Type::GraphButton))
     {

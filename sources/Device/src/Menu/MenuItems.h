@@ -10,11 +10,12 @@ class Page;
 struct DataItem
 {
     uint8              type;            ///< Тип итема
+    const char * const title;           ///< Заголовок итема
+    const char * const hint;            ///< Подсказка для режима помощи
     int8               num;             ///< Число вариантов для Choice или число контролов для Page
     uint8              name;            ///< Имя из перечисления Page::Name
     const Page *const *keeper;          ///< Адрес страницы, которой принадлежит. Для Page_Main = 0
     pFuncBV            funcOfActive;    ///< Активен ли данный элемент
-    const pString     *titleHint;       ///< Название страницы. Также подсказка для режима помощи
     const void * const ad;              ///< Указатель на структуру с данными, специфическими для каждого подкласса Item
 };
 
