@@ -287,7 +287,6 @@ struct DataGraphButton
     pFuncVV                     funcOnPress;    ///< Эта функция вызвается для обработки нажатия кнопки.
     pFuncVII                    funcForDraw;    ///< Эта функция вызывается для отрисовки кнопки в месте с координатами x, y.
     const StructHelpDrawButton *hintUGO;
-    int8                        num;
 
     void FuncOnPress() { if (funcOnPress) funcOnPress(); }
     void FuncForDraw(int x, int y) { if (funcForDraw) funcForDraw(x, y); }
@@ -304,6 +303,7 @@ public:
     virtual void KeyRelease() const;
     virtual void KeyAutoRelease() const;
     DataGraphButton *OwnData() const { return (DataGraphButton *)data->ad; }
+    int NumHints() const;
 };
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// Governor ///
