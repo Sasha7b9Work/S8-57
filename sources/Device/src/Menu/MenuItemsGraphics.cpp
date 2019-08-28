@@ -238,7 +238,7 @@ void Choice::DrawOpened(int x, int y) const
 
     Region(Width() - 3, height - MOI_HEIGHT_TITLE + 4).Fill(x + 1, y + MOI_HEIGHT_TITLE - 5, Color::BACK);
     int8 index = *OwnData()->cell;
-    for (int i = 0; i < NumSubItems(); i++)
+    for (int i = 0; i < NumChoices(); i++)
     {
         int yItem = y + MOI_HEIGHT_TITLE + i * MOSI_HEIGHT - 7;
         bool pressed = i == index;

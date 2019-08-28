@@ -374,7 +374,6 @@ struct DataChoice
 {
     int8       *cell;
     pString    *names;          ///< Варианты выбора.
-    int8        num;
     pFuncVB     funcOnChanged;  ///< Функция должна вызываться после изменения значения элемента.
     pFuncVII    funcForDraw;    ///< Функция вызывается после отрисовки элемента. 
 
@@ -393,7 +392,7 @@ public:
     /// Изменяет значение choice в зависимости от величины и знака delta.
     void  ChangeIndex(int delta) const;
     /// Возвращает количество вариантов выбора в элементе по адресу choice
-    int   NumSubItems() const { return OwnData()->num; };
+    int   NumChoices() const;
 
     void  DrawOpened(int x, int y) const;
 

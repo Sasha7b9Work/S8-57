@@ -695,7 +695,7 @@ bool Choice::ProcessKey(KeyEvent event)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 int Choice::HeightOpened() const
 {
-    return MOI_HEIGHT_TITLE + ((Choice *)this)->NumSubItems() * MOSI_HEIGHT - 5;
+    return MOI_HEIGHT_TITLE + NumChoices() * MOSI_HEIGHT - 5;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -705,7 +705,7 @@ void Choice::ChangeIndex(int delta) const
     if (delta > 0)
     {
         ++index;
-        if (index == NumSubItems())
+        if (index == NumChoices())
         {
             index = 0;
         }
@@ -715,13 +715,28 @@ void Choice::ChangeIndex(int delta) const
         --index;
         if (index < 0)
         {
-            index = NumSubItems() - 1;
+            index = NumChoices() - 1;
         }
     }
     *OwnData()->cell = (int8)index;
     OwnData()->FuncOnChanged(IsActive());
     Beeper::GovernorChangedValue();
     Osci::Display::SetFlagRedraw();
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+int Choice::NumChoices() const
+{
+    pString *name = OwnData()->names;
+
+    int result = 0;
+
+    while (*name++)
+    {
+        result++;
+    }
+
+    return result;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -807,7 +822,7 @@ float Choice::Step() const //-V2506
             {
                 return delta;
             }
-            Math::CircleIncrease<int8>(&index, 0, (int8)NumSubItems() - 1);
+            Math::CircleIncrease<int8>(&index, 0, (int8)NumChoices() - 1);
         }
         else if (tsChoice.dir == DECREASE)
         {
@@ -817,7 +832,7 @@ float Choice::Step() const //-V2506
             {
                 return delta;
             }
-            Math::CircleDecrease<int8>(&index, 0, (int8)NumSubItems() - 1);
+            Math::CircleDecrease<int8>(&index, 0, (int8)NumChoices() - 1);
         }
         else
         {
@@ -851,7 +866,7 @@ const char *Choice::NameNextSubItem() const
 
     int index = *((int8 *)OwnData()->cell) + 1;
 
-    if (index == NumSubItems())
+    if (index == NumChoices())
     {
         index = 0;
     }
@@ -870,7 +885,7 @@ const char *Choice::NamePrevSubItem() const
 
     if (index < 0)
     {
-        index = NumSubItems() - 1;
+        index = NumChoices() - 1;
     }
     return NAME_FROM_INDEX(index);
 }
