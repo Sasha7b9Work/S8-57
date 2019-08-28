@@ -388,7 +388,7 @@ DEF_PAGE_5( pageSet, // -V641 // -V1027                                         
     &bSet_T,                ///< ÈÇÌÅÐÅÍÈß - ÊÓÐÑÎÐÛ - ÓÑÒÀÍÎÂÈÒÜ - Êóðñîðû Ò
     &bSet_100,              ///< ÈÇÌÅÐÅÍÈß - ÊÓÐÑÎÐÛ - ÓÑÒÀÍÎÂÈÒÜ - 100%
     &bSet_Movement,         ///< ÈÇÌÅÐÅÍÈß - ÊÓÐÑÎÐÛ - ÓÑÒÀÍÎÂÈÒÜ - Ïåðåìåùåíèå
-    PageName::Measures_Cursors_Set, &PageMeasuresCursors::self, IsActive_PageSet, 0, 0, PageMeasuresCursors::PageSet::OnKey
+    PageName::Measures_Cursors_Set, &PageMeasuresCursors::self, IsActive_PageSet, E_VB, E_VV, PageMeasuresCursors::PageSet::OnKey
 )
 
 

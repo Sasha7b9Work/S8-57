@@ -197,7 +197,7 @@ static bool IsActive_Function()
     return !FFT_ENABLED;
 }
 
-static void OnPress_Function(bool)
+static void OnOpenClose_Function(bool)
 {
     if (FFT_ENABLED)
     {
@@ -293,5 +293,5 @@ DEF_PAGE_5( pageMath, // -V641                                                  
     &bFunction_ModeRegSet,
     &bFunction_RangeA,
     &bFunction_RangeB,
-    PageName::Measures_Math, &PageMeasures::self, IsActive_Function, OnPress_Function, 0, HandlerKey_Function
+    PageName::Measures_Math, &PageMeasures::self, IsActive_Function, OnOpenClose_Function, E_VV, HandlerKey_Function
 )

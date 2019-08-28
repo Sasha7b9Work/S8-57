@@ -46,5 +46,5 @@ DEF_PAGE_3( pageSettings, // -V641 // -V1027                                    
     PageDisplay::PageSettings::PageColors::self,        ///< ÄÈÑÏËÅÉ - ÍÀÑÒÐÎÉÊÈ - ÖÂÅÒÀ
     &gBrightness,                                       ///< ÄÈÑÏËÅÉ - ÍÀÑÒÐÎÉÊÈ - ßðêîñòü
     &cAutoHide,                                         ///< ÄÈÑÏËÅÉ - ÍÀÑÒÐÎÉÊÈ - Ñêðûâàòü
-    PageName::Display_Settings, &PageDisplay::self, 0, 0, 0, 0
+    PageName::Display_Settings, &PageDisplay::self, E_BtV, E_VB, E_VV, E_BfKE
 )

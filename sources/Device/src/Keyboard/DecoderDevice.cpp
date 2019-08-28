@@ -72,28 +72,28 @@ static void RunStep(uint8 data)
     }
     commands[Command::Size] =
     {
-        EmptyFuncBtU8,      // None,
-        ButtonPress,        // ButtonPress,
-        EmptyFuncBtU8,      // Paint_BeginScene,
-        EmptyFuncBtU8,      // Paint_EndScene,
-        EmptyFuncBtU8,      // Paint_SetColor,
-        EmptyFuncBtU8,      // Paint_FillRegion,
-        EmptyFuncBtU8,      // Paint_DrawText,
-        EmptyFuncBtU8,      // Paint_SetPalette,
-        EmptyFuncBtU8,      // Paint_DrawRectangle,
-        EmptyFuncBtU8,      // Paint_DrawVLine,
-        EmptyFuncBtU8,      // Paint_DrawHLine,
-        EmptyFuncBtU8,      // Paint_SetFont,
-        EmptyFuncBtU8,      // Paint_SetPoint,
-        EmptyFuncBtU8,      // Paint_DrawLine,
-        EmptyFuncBtU8,      // Paint_TesterLines,
-        EmptyFuncBtU8,      // Paint_DrawBigText,
-        FuncScreen,         // Screen
-        EmptyFuncBtU8,      // Paint_VPointLine
-        EmptyFuncBtU8,      // Paint_HPointLine
-        EmptyFuncBtU8,      // Paint_SetMonoSpaceFont
-        EmptyFuncBtU8,      // Paint_SetTextSpacing
-        AddToConsole        // AddToConsole
+        E_BtU8,         // None,
+        ButtonPress,    // ButtonPress,
+        E_BtU8,         // Paint_BeginScene,
+        E_BtU8,         // Paint_EndScene,
+        E_BtU8,         // Paint_SetColor,
+        E_BtU8,         // Paint_FillRegion,
+        E_BtU8,         // Paint_DrawText,
+        E_BtU8,         // Paint_SetPalette,
+        E_BtU8,         // Paint_DrawRectangle,
+        E_BtU8,         // Paint_DrawVLine,
+        E_BtU8,         // Paint_DrawHLine,
+        E_BtU8,         // Paint_SetFont,
+        E_BtU8,         // Paint_SetPoint,
+        E_BtU8,         // Paint_DrawLine,
+        E_BtU8,         // Paint_TesterLines,
+        E_BtU8,         // Paint_DrawBigText,
+        FuncScreen,     // Screen
+        E_BtU8,         // Paint_VPointLine
+        E_BtU8,         // Paint_HPointLine
+        E_BtU8,         // Paint_SetMonoSpaceFont
+        E_BtU8,         // Paint_SetTextSpacing
+        AddToConsole    // AddToConsole
     };
 
     if (step == 0)

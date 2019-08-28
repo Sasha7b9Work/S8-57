@@ -129,7 +129,7 @@ DEF_PAGE_6( pChanA, // -V641 // -V1027                                          
     &cDividerA,         ///< ÊÀÍÀË 1 - Äåëèòåëü
     &bBalanceA,         ///< ÊÀÍÀË 1 - Áàëàíñèðîâêà
     &cInverseA,         ///< ÊÀÍÀË 1 - Èíâåðñèÿ
-    PageName::ChannelA, nullptr, 0, 0, 0, 0
+    PageName::ChannelA, nullptr, E_BtV, E_VB, E_VV, E_BfKE
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -219,5 +219,5 @@ DEF_PAGE_6( pChanB, // -V641 // -V1027                                          
     &cDividerB,         ///< ÊÀÍËÀ 2 - Äåëèòåëü
     &bBalanceB,         ///< ÊÀÍÀË 2 - Áàëàíñèðîâêà
     &cInverseB,         ///< ÊÀÍÀË 2 - Èíâåðñèÿ
-    PageName::ChannelB, nullptr, 0, 0, 0, 0
+    PageName::ChannelB, nullptr, E_BtV, E_VB, E_VV, E_BfKE
 )

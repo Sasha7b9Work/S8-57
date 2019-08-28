@@ -351,7 +351,7 @@ void Page::Draw(int x, int y, bool opened) const
             DrawItems(x, y);
         }
 
-        OwnData()->FuncOnDraw();
+        OwnData()->funcOnDraw();
     }
     else
     {

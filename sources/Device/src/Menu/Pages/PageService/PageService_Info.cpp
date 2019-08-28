@@ -63,7 +63,7 @@ DEF_BUTTON( bClose,
     &PageService::PageInformation::self, 0, OnPress_Close, 0
 )
 
-static void OnPress_Page(bool enter)
+static void OnOpenClose_Page(bool enter)
 {
     if (enter)
     {
@@ -82,5 +82,5 @@ DEF_PAGE_1 (pageServiceInfo, //-V641 //-V1027
     "ИНФОРМАЦИЯ",
     "Информация об изделии",
     &bClose,
-    PageName::Service_Info, &PageService::self, 0, OnPress_Page, 0, 0
+    PageName::Service_Info, &PageService::self, E_BtV, OnOpenClose_Page, E_VV, E_BfKE
 )

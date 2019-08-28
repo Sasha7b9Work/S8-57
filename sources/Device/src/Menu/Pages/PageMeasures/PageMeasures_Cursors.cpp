@@ -85,5 +85,5 @@ DEF_PAGE_3( pageCursors, // -V641 // -V1027                                     
 //    &cLookModeChanB,                                ///< ÈÇÌÅÐÅÍÈß - ÊÓÐÑÎÐÛ - Ñëåæåíèå êàíàë 2
     &cShowFreq,                                     ///< ÈÇÌÅÐÅÍÈß - ÊÓÐÎÑÐÛ - 1/dT
     PageMeasuresCursors::PageSet::self,    ///< ÈÇÌÅÐÅÍÈß - ÊÓÐÑÎÐÛ - ÓÑÒÀÍÎÂÈÒÜ
-    PageName::Measures_Cursors, &PageMeasures::self, 0, 0, 0, 0
+    PageName::Measures_Cursors, &PageMeasures::self, E_BtV, E_VB, E_VV, E_BfKE
 )

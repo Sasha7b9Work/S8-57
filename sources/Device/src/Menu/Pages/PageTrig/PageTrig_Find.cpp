@@ -44,5 +44,5 @@ DEF_PAGE_2( pageFind, // -V641 // -V1027                                        
     &cMode,                         ///< ÑÈÍÕÐ - ÏÎÈÑÊ - Ðåæèì
     &bSearch,                       ///< ÑÈÍÕÐ - ÏÎÈÑÊ - Íàéòè
     PageName::Trig_Search,
-    &PageTrig::self, 0, 0, 0, 0
+    &PageTrig::self, E_BtV, E_VB, E_VV, E_BfKE
 )

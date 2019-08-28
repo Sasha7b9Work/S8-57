@@ -39,5 +39,5 @@ DEF_PAGE_2( pMultimeter, // -V641 //-V1027 //-V641
     "",
     &bCalibrate0,
     &bCalibrate1,
-    PageName::Debug_Multimeter, &PageDebug::self, 0, 0, 0, 0
+    PageName::Debug_Multimeter, &PageDebug::self, E_BtV, E_VB, E_VV, E_BfKE
 )

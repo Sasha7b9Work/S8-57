@@ -130,7 +130,7 @@ void Grid::Draw()
     {
         DrawOsci,
         DrawTester,
-        EmptyFuncVV,
+        E_VV,
         DrawRecorder
     };
 

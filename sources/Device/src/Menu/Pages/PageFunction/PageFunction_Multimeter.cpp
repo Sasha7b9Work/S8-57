@@ -212,7 +212,7 @@ void PageMultimeter::OnChanged_Mode(bool)
     Multimeter::ChangeMode();
 }
 
-static void OnEnterExit_Multimeter(bool enter)
+static void OnOpenClose_Multimeter(bool enter)
 {
     Device::State::SetMode(enter ? Device::Mode::Multimeter : Device::Mode::Osci);
 }
@@ -225,7 +225,7 @@ DEF_PAGE_5_VAR( pageMultimeter, // -V641 //-V1027 //-V641
     &cAVP,
     &cZero,
     &Item::empty,
-    PageName::Function_Multimeter, &PageFunction::self, 0, OnEnterExit_Multimeter, 0, 0
+    PageName::Function_Multimeter, &PageFunction::self, E_BtV, OnOpenClose_Multimeter, E_VV, E_BfKE
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -258,7 +258,7 @@ DEF_PAGE_2( pageCalibration, //-V641 //-V1027
     "Калибровка мультиметра",
     &bCalibrate0,
     &bCalibrate1,
-    PageName::Function_Multimeter_Cal, &PageMultimeter::self, 0, 0, 0, 0
+    PageName::Function_Multimeter_Cal, &PageMultimeter::self, E_BtV, E_VB, E_VV, E_BfKE
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

@@ -63,14 +63,14 @@ typedef void (*pFuncVpI8I8I8)(int8 *, int8, int8);
 typedef bool (*pFuncBI)(int);
 typedef void (*pFuncVU8)(uint8);
 
-inline void EmptyFuncVV(){}
-inline void EmptyFuncVB(bool){}
-inline bool EmptyFuncBtV() { return true; }
-inline bool EmptyFuncBfV() { return false; }
-inline void EmptyFuncVI(int) {}
-inline void EmptyFuncVII(int, int) {}
-inline bool EmptyFuncBfI(int) { return false; }
-inline bool EmptyFuncBtU8(uint8) { return true; }
+inline void E_VV(){}
+inline void E_VB(bool){}
+inline bool E_BtV() { return true; }
+inline bool E_BfV() { return false; }
+inline void E_VI(int) {}
+inline void E_VII(int, int) {}
+inline bool E_BfI(int) { return false; }
+inline bool E_BtU8(uint8) { return true; }
 
 
 #ifndef _WIN32

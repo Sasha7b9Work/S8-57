@@ -86,11 +86,11 @@ static bool clearBackground = false;
 /// true, если нужно сохранять копию экрана на флешку
 static bool needSaveScreen = false;
 /// Дополнительная функция рисования. Выполняется после стандартной отрисовки, но перед вызовом EndScene;
-volatile static pFuncVV funcAdditionDraw = EmptyFuncVV;
+volatile static pFuncVV funcAdditionDraw = E_VV;
 /// true означает, что происходит процесс отрисовки
 static bool inStateDraw = false;
 
-static pFuncVV funcAfterUpdateOnce = EmptyFuncVV;
+static pFuncVV funcAfterUpdateOnce = E_VV;
 
 static int numRow = -1;
 
@@ -158,7 +158,7 @@ bool Display::InProcess()
 static void ExecuteFuncAfterUpdateOnce()
 {
     funcAfterUpdateOnce();
-    funcAfterUpdateOnce = EmptyFuncVV;
+    funcAfterUpdateOnce = E_VV;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -324,7 +324,7 @@ void Display::FuncOnWaitStart(const char *text, bool eraseBackground)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Display::RemoveAddDrawFunction()
 {
-    funcAdditionDraw = EmptyFuncVV;
+    funcAdditionDraw = E_VV;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -338,7 +338,7 @@ void Display::SetAddDrawFunction(pFuncVV func, uint time)
 {
     if (func == 0)
     {
-        func = EmptyFuncVV;
+        func = E_VV;
     }
 
     funcAdditionDraw = func;

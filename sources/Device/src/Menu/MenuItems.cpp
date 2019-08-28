@@ -39,7 +39,7 @@ DataItem Item::emptyData =
     "",
     "",
     nullptr,
-    EmptyFuncBtV
+    E_BtV
 };
 
 Item Item::empty;
@@ -271,7 +271,7 @@ int Page::NumItems() const //-V2506
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Page::ShortPress() const
 {
-    OwnData()->FuncOnEnterExit(true);
+    OwnData()->funcOnOpenClose(true);
 
     SetAsCurrent();
 }
@@ -323,7 +323,7 @@ PageName::E Page::GetName() const
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 bool Page::ProcessKey(KeyEvent event)
 {
-    if (OwnData()->FuncOnKey(event))
+    if (OwnData()->funcOnKey(event))
     {
         return true;
     }

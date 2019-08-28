@@ -117,7 +117,7 @@ DEF_PAGE_3( pppADC_Balance, // -V641 // -V1027                                  
     &gADC_Balance_ShiftA,    ///< ÎÒËÀÄÊÀ - ÀÖÏ - ÁÀËÀÍÑ - Ñìåùåíèå 1
     &gADC_Balance_ShiftB,    ///< ÎÒËÀÄÊÀ - ÀÖÏ - ÁÀËÀÍÑ - Ñìåùåíèå 2
     PageName::Debug_ADC_Balance,
-    &PageDebug::PageADC::self, 0, 0, 0, 0
+    &PageDebug::PageADC::self, E_BtV, E_VB, E_VV, E_BfKE
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -255,7 +255,7 @@ DEF_PAGE_3( pppADC_Stretch, // -V641 // -V1027                                  
     &gADC_Stretch_A,         ///< ÎÒËÀÄÊÀ - ÀÖÏ - ÐÀÑÒßÆÊÀ - Ðàñòÿæêà 1ê
     &gADC_Stretch_B,
     PageName::Debug_ADC_Stretch,
-    &PageDebug::PageADC::self, 0, 0, 0, 0
+    &PageDebug::PageADC::self, E_BtV, E_VB, E_VV, E_BfKE
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -348,7 +348,7 @@ DEF_PAGE_7( pppADC_Shift, // -V641  // -V1027                                   
     &gADC_Shift_A10mV,   // ÎÒËÀÄÊÀ - ÀÖÏ - ÄÎÏ ÑÌÅÙ - Ñì 1ê 10ìÂ ïîñò
     &gADC_Shift_B10mV,   // ÎÒËÀÄÊÀ - ÀÖÏ - ÄÎÏ ÑÌÅÙ - Ñì 2ê 10ìÂ ïîñò
     PageName::Debug_ADC_Shift,
-    &PageDebug::PageADC::self, 0, 0, 0, 0
+    &PageDebug::PageADC::self, E_BtV, E_VB, E_VV, E_BfKE
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -359,7 +359,7 @@ DEF_PAGE_3( ppADC, //-V641 //-V1027
     &pppADC_Stretch, // ÎÒËÀÄÊÀ - ÀÖÏ - ÐÀÑÒßÆÊÀ
     &pppADC_Shift,   // ÎÒËÀÄÊÀ - ÀÖÏ - ÄÎÏ ÑÌÅÙ
     PageName::Debug_ADC,
-    &PageDebug::self, 0, 0, 0, 0
+    &PageDebug::self, E_BtV, E_VB, E_VV, E_BfKE
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -446,7 +446,7 @@ static void DebugShowSetInfo_Draw()
     Painter::EndScene();
 }
 
-static void OnPress_Settings(bool)
+static void OnOpenClose_Settings(bool)
 {
     Display::SetDrawMode(Display::DrawMode::Auto, DebugShowSetInfo_Draw);
 }
@@ -460,7 +460,7 @@ DEF_PAGE_5( ppSettings, // -V641 // -V1027                                      
     0,
     0,
     PageName::Debug_Settings,
-    &PageDebug::self, 0, OnPress_Settings, 0, 0
+    &PageDebug::self, E_BtV, OnOpenClose_Settings, E_VV, E_BfKE
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -545,7 +545,7 @@ static void Draw_EnterSerialNumber()
 {
 }
 
-static void OnPress_SerialNumber(bool)
+static void OnOpenClose_SerialNumber(bool)
 {
     Draw_EnterSerialNumber();
 }
@@ -561,7 +561,7 @@ DEF_PAGE_2( ppSerialNumber, // -V641 // -V1027                                  
     &bSerialNumber_Change,          // ÎÒËÀÄÊÀ - Ñ/Í - Ïåðåéòè
     &bSerialNumber_Save,            // ÎÒËÀÄÊÀ - Ñ/Í - Ñîõðàíèòü
     PageName::Debug_SerialNumber,
-    &PageDebug::self, 0, OnPress_SerialNumber, 0, HandlerKey_SerialNumber
+    &PageDebug::self, E_BtV, OnOpenClose_SerialNumber, E_VV, HandlerKey_SerialNumber
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -595,5 +595,5 @@ DEF_PAGE_6( pageDebug, // -V641 // -V1027                                       
 //    &ppSerialNumber,                              ///< ÎÒËÀÄÊÀ - Ñ/Í
 //    &bEraseData,                                  ///< ÎÒËÀÄÊÀ - Ñòåðåòü äàííûå
     PageName::Debug,
-    &PageService::self, 0, 0, 0, 0
+    &PageService::self, E_BtV, E_VB, E_VV, E_BfKE
 )

@@ -103,7 +103,7 @@ DEF_PAGE_1( pageViewSignal, //-V641
     "ОТОБРАЖ",
     "Настройки отображения сигналов",
     &cViewMode,
-    PageName::Display_View, &PageDisplay::self, 0, 0, 0, 0
+    PageName::Display_View, &PageDisplay::self, E_BtV, E_VB, E_VV, E_BfKE
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -121,5 +121,5 @@ DEF_PAGE_8( pageDisplay, // -V641 // -V1027                                     
     &cScaleYtype,                           ///< ДИСПЛЕЙ - Смещение
     PageDisplay::PageSettings::self,     ///< ДИСПЛЕЙ - НАСТРОЙКИ
 //    &cThickness,                            ///< ДИСПЛЕЙ - Толщина
-    PageName::Display, 0, 0, 0, 0, 0
+    PageName::Display, nullptr, E_BtV, E_VB, E_VV, E_BfKE
 )

@@ -60,7 +60,7 @@ DEF_GRAPH_BUTTON( bLast_Prev,                                                   
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-static void OnPress_RAM(bool enter)
+static void OnOpenClose_RAM(bool enter)
 {
     if (enter)
     {
@@ -118,5 +118,5 @@ DEF_PAGE_2( pageRAM, // -V641 // -V1027                                         
     &bLast_Prev,                        ///< ÏÀÌßÒÜ - ÏÎÑËÅÄÍÈÅ - Ïðåäûäóùèé
     &bLast_Next,                        ///< ÏÀÌßÒÜ - ÏÎÑËÅÄÍÈÅ - Ñëåäóþùèé
     PageName::Memory_Last,
-    &PageMemory::self, 0, OnPress_RAM, OnDraw_RAM, HandlerKey_RAM
+    &PageMemory::self, E_BtV, OnOpenClose_RAM, OnDraw_RAM, HandlerKey_RAM
 )

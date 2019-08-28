@@ -180,7 +180,7 @@ void Menu::ChangeStateFlashDrive()
     }
     else if(FLASH_AUTOCONNECT)
     {
-        PageMemory::OnPress_Drive_Manager();
+        PageMemory::OnOpenClose_Drive_Manager();
     }
     else
     {
@@ -205,7 +205,7 @@ bool Menu::IsShown()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void ClosePage(Page *page)
 {
-    page->OwnData()->FuncOnEnterExit(false);
+    page->OwnData()->funcOnOpenClose(false);
 
     Page *keeper = (Page *)page->Keeper();
 

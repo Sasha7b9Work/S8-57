@@ -39,7 +39,7 @@ static void OnPress_ResetSettings()
 DEF_BUTTON( bResetSettings,                                                                                                                                 //--- СЕРВИС - Сброс настроек ---
     "Сброс настр",
     "Сброс настроек на настройки по умолчанию",
-    &PageService::self, EmptyFuncBtV, OnPress_ResetSettings, EmptyFuncVII
+    &PageService::self, E_BtV, OnPress_ResetSettings, E_VII
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -77,5 +77,5 @@ DEF_PAGE_7( pageService, // -V641 // -V1027                                     
     PageRTC::self,          ///< СЕРВИС - ВРЕМЯ
     PageService::PageInformation::self,  ///< СЕРВИС - ИНФОРМАЦИЯ
     PageDebug::self,        ///< СЕРВИС - ОТЛАДКА
-    PageName::Service, nullptr, 0, 0, 0, 0
+    PageName::Service, nullptr, E_BtV, E_VB, E_VV, E_BfKE
 )

@@ -51,5 +51,5 @@ DEF_PAGE_3( pageRecorderCursors, // -V641 // -V1027
     &bCenter,
     &bLeft,
     &bRight,
-    PageName::Function_Recorder_Show_View_Cursors, &PageRecorder::PageShow::PageView::self, 0, 0, 0, 0
+    PageName::Function_Recorder_Show_View_Cursors, &PageRecorder::PageShow::PageView::self, E_BtV, E_VB, E_VV, E_BfKE
 )

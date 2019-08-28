@@ -7,7 +7,7 @@ struct PageMemory
 {
     static void OnChanged_Points(bool active);
 
-    static void OnPress_Drive_Manager(bool enter = true);
+    static void OnOpenClose_Drive_Manager(bool enter = true);
 
     static void SaveSignalToFlashDrive();
 

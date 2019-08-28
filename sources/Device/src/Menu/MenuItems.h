@@ -109,13 +109,9 @@ struct DataPage
 {
     uint8               name;               ///< Имя из перечисления Page::Name
     const Item * const *items;              ///< Здесь указатели на пункты этой страницы
-    pFuncVB             funcOnEnterExit;    ///< Будет вызываться при нажатии на свёрнутую страницу и при выходе из этой страницы на предыдущую
+    pFuncVB             funcOnOpenClose;    ///< Будет вызываться при нажатии на свёрнутую страницу и при выходе из этой страницы на предыдущую
     pFuncVV             funcOnDraw;         ///< Будет вызываться после отрисовки кнопок
     pFuncBKE            funcOnKey;          ///< В странице малых кнопок вызывается при нажатии стрелки
-
-    void FuncOnDraw() { if (funcOnDraw) { funcOnDraw(); } };
-    void FuncOnEnterExit(bool enter) { if (funcOnEnterExit) { return funcOnEnterExit(enter); } };
-    bool FuncOnKey(KeyEvent event) { if (funcOnKey) { return funcOnKey(event); }; return false; };
 };
 
 /// Описывает страницу меню

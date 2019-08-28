@@ -21,7 +21,7 @@ DEF_PAGE_2( pageRTC, // -V641 // -V1027                                         
     PageRTC::PageSet::self,         ///< ÑÅÐÂÈÑ - ÂÐÅÌß - Âðåìÿ
     PageRTC::PageCorrect::self,     ///< CÅÐÂÈÑ - ÂÐÅÌß - Êîððåêöèÿ
     PageName::Service_RTC,
-    &PageService::self, 0, 0, 0, 0
+    &PageService::self, E_BtV, E_VB, E_VV, E_BfKE
 )
 
 
@@ -80,7 +80,7 @@ DEF_PAGE_5( pageRTC_Set, //-V641 //-V1027
     &bSetDown,
     &bSetPick,
     PageName::Service_RTC_Set,
-    &PageRTC::self, 0, 0, 0, 0
+    &PageRTC::self, E_BtV, E_VB, E_VV, E_BfKE
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -133,5 +133,5 @@ DEF_PAGE_5( pageRTC_Correction, //-V641 //-V1027
     &bCorrDown,
     &bCorrPick,
     PageName::Service_RTC_Correct,
-    &PageRTC::self, 0, 0, 0, 0
+    &PageRTC::self, E_BtV, E_VB, E_VV, E_BfKE
 )

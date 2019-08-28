@@ -177,7 +177,7 @@ DEF_PAGE_12( pageRegisters, // -V641                                            
     &cRegisters_ChanParamB,     ///< ÎÒËÀÄÊÀ - ÊÎÍÑÎËÜ - ÐÅÃÈÑÒÐÛ - Ïàðàì. êàí. 2
     &cRegisters_TBase,          ///< ÎÒËÀÄÊÀ - ÊÎÍÑÎËÜ - ÐÅÃÈÑÒÐÛ - ÂÐÅÌß/ÄÅË
     &cRegisters_TShift,         ///< ÎÒËÀÄÊÀ - ÊÎÍÑÎËÜ - ÐÅÃÈÑÒÐÛ - Ò ñì.
-    PageName::Debug_Console_Registers, &PageDebug::PageConsole::self, 0, 0, 0, 0
+    PageName::Debug_Console_Registers, &PageDebug::PageConsole::self, E_BtV, E_VB, E_VV, E_BfKE
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -202,6 +202,6 @@ DEF_PAGE_2( pageConsole, // -V641 // -V1027                                     
 //    &cModeStop,         ///< ÎÒËÀÄÊÀ - ÊÎÍÑÎËÜ - Ðåæ. îñòàíîâà
 //    &pageRegisters,     ///< ÎÒËÀÄÊÀ - ÊÎÍÑÎËÜ - ÐÅÃÈÑÒÐÛ
 //    &bSizeSettings,     ///< ÎÒËÀÄÊÀ - ÊÎÍÑÎËÜ - Ðàçìåð íàñòðîåê
-    PageName::Debug_Console, &PageDebug::self, 0, 0, 0, 0
+    PageName::Debug_Console, &PageDebug::self, E_BtV, E_VB, E_VV, E_BfKE
 )
 

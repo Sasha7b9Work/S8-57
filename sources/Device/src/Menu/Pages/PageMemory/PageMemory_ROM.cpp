@@ -121,7 +121,7 @@ DEF_GRAPH_BUTTON( bSave,                                                        
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-static void OnPress_Internal(bool)
+static void OnOpenClose_Internal(bool)
 {
     MODE_WORK = ModeWork::ROM;
 }
@@ -195,5 +195,5 @@ DEF_PAGE_4( pageROM, // -V641                                                   
     &bSave,         ///< ÏÀÌßÒÜ - ÂÍÓÒÐ ÇÓ - Ñîõðàíèòü
     &bDelete,       ///< ÏÀÌßÒÜ - ÂÍÓÒÐ ÇÓ - Óäàëèòü
     PageName::Memory_Internal,
-    &PageMemory::self, 0, OnPress_Internal, OnDraw_Internal, HandlerKey_Internal
+    &PageMemory::self, nullptr, OnOpenClose_Internal, OnDraw_Internal, HandlerKey_Internal
 )

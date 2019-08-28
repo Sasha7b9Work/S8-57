@@ -43,5 +43,5 @@ DEF_PAGE_2( pageSource, // -V641 // -V1027                                      
     &cChanA,        ///< ÔÓÍÊÖÈß - ÐÅÃÈÑÒÐÀÒÎÐ - ÈÑÒÎ×ÍÈÊ - Êàíàë 1
     &cChanB,        ///< ÔÓÍÊÖÈß - ÐÅÃÈÑÒÐÀÒÎÐ - ÈÑÒÎ×ÈÍÊ - Êàíàë 2
     //&cSensor,       ///< ÔÓÍÊÖÈß - ÐÅÃÈÑÒÐÀÒÎÐ - ÈÑÒÎ×ÍÈÊ - Äàò÷èê
-    PageName::Function_Recorder_Source, &PageRecorder::self, 0, 0, 0, 0
+    PageName::Function_Recorder_Source, &PageRecorder::self, E_BtV, E_VB, E_VV, E_BfKE
 )

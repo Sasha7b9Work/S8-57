@@ -60,7 +60,7 @@ static bool IsActive_PageShow()
     return (Recorder::Storage::CurrentFrame()->NumPoints() != 0) && (!Recorder::IsRunning());
 }
 
-static bool FuncOnKey_PageShow(KeyEvent event)
+static bool OnKey_PageShow(KeyEvent event)
 {
     if (event.type == TypePress::Press || event.type == TypePress::Repeat)
     {
@@ -92,5 +92,5 @@ DEF_PAGE_3( pageShow, // -V641 // -V1027                                        
     &cCursor,
     //PageRecorder::PageShow::PageOperations::self,  ///< ÔÓÍÊÖÈß - ÐÅÃÈÑÒÐÀÒÎÐ - ÏÐÎÑÌÎÒÐ - ÎÏÅÐÀÖÈÈ
     //PageRecorder::PageShow::PageView::self,        ///< ÔÓÍÊÖÈß - ÐÅÃÈÑÒÐÀÒÎÐ - ÏÐÎÑÌÒÎÐ - ÏÐÎÑÌÎÒÐ
-    PageName::Function_Recorder_Show, &PageRecorder::self, IsActive_PageShow, 0, 0, FuncOnKey_PageShow
+    PageName::Function_Recorder_Show, &PageRecorder::self, IsActive_PageShow, E_VB, E_VV, OnKey_PageShow
 )

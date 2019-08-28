@@ -160,5 +160,5 @@ DEF_PAGE_2( pageRand, // -V641 // -V1027                                        
     //&gRand_TimeCompensation,    ///< ÎÒËÀÄÊÀ - ÐÀÍÄ-ÒÎÐ - Êîìïåíñàöèÿ çàäåðæêè
     //&gRand_AddTimeShift,        ///< ÎÒËÀÄÊÀ - ÐÀÍÄ-ÒÎÐ - Ñìåùåíèå
     //&gRand_Pretriggered,        ///< ÎÒËÀÄÊÀ - ÐAÍÄ-ÒÎÐ - Ïðåäçàïóñê
-    PageName::Debug_Rand, &PageDebug::self, 0, 0, 0, 0
+    PageName::Debug_Rand, &PageDebug::self, E_BtV, E_VB, E_VV, E_BfKE
 )

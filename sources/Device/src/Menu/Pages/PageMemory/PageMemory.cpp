@@ -124,7 +124,7 @@ static bool IsActive_Drive_Manager()
     return FDrive::IsConnected();
 }
 
-void PageMemory::OnPress_Drive_Manager(bool)
+void PageMemory::OnOpenClose_Drive_Manager(bool)
 {
     if (FDrive::IsConnected())
     {
@@ -149,7 +149,7 @@ DEF_PAGE_SB(        pppDrive_Manager,                                           
     0,
     &bDrive_Manager_LevelUp,    // ÏÀÌßÒÜ - ÂÍÅØÍ ÇÓ - ÊÀÒÀËÎÃ - Âûéòè èç êàòàëîãà
     &bDrive_Manager_LevelDown,  // ÏÀÌßÒÜ - ÂÍÅØÍ ÇÓ - ÊÀÒÀËÎÃ - Âîéòè â êàòàëîã
-    Page::Name::SB_Memory_Drive_Manager, &ppDrive, IsActive_Drive_Manager, PageMemory::OnPress_Drive_Manager, FuncDrawPage, FileManager::RotateRegSet
+    Page::Name::SB_Memory_Drive_Manager, &ppDrive, IsActive_Drive_Manager, PageMemory::OnOpenClose_Drive_Manager, FuncDrawPage, FileManager::RotateRegSet
 )
 */
 
@@ -160,7 +160,7 @@ DEF_PAGE_3( pppDrive_Manager, // -V641                                          
     &bDrive_Manager_LevelUp,    // ÏÀÌßÒÜ - ÂÍÅØÍ ÇÓ - ÊÀÒÀËÎÃ - Âûéòè èç êàòàëîãà
     &bDrive_Manager_LevelDown,  // ÏÀÌßÒÜ - ÂÍÅØÍ ÇÓ - ÊÀÒÀËÎÃ - Âîéòè â êàòàëîã
     PageName::Memory_Drive_Manager,
-    &PageDrive::self, IsActive_Drive_Manager, PageMemory::OnPress_Drive_Manager, 0, FileManager::HandlerKey
+    &PageDrive::self, IsActive_Drive_Manager, PageMemory::OnOpenClose_Drive_Manager, E_VV, FileManager::HandlerKey
 )
 
 
@@ -306,7 +306,7 @@ static bool IsActive_Drive_Mask()
     return FILE_NAMING_MODE_MASK;
 }
 
-static void OnPress_Drive_Mask(bool)
+static void OnOpenClose_Drive_Mask(bool)
 {
     Display::SetAddDrawFunction(DrawSetMask);
 }
@@ -445,7 +445,7 @@ DEF_PAGE_3( pppDrive_Mask, // -V641                                             
     &bDrive_Mask_Backspace, // ÏÀÌßÒÜ - ÂÍÅØÍ ÇÓ - ÌÀÑÊÀ - Backspace
     &bDrive_Mask_Insert,    // ÏÀÌßÒÜ - ÂÍÅØÍ ÇÓ - ÌÀÑÊÀ - Âñòàâèòü
     PageName::Memory_Drive_Mask,
-    &PageDrive::self, IsActive_Drive_Mask, OnPress_Drive_Mask, 0, HandlerKey_Drive_Mask
+    &PageDrive::self, IsActive_Drive_Mask, OnOpenClose_Drive_Mask, E_VV, HandlerKey_Drive_Mask
 )
 
 
@@ -471,7 +471,7 @@ DEF_PAGE_6( ppDrive,  //-V641 //-V1027                                          
     &cDrive_Autoconnect,            ///< ÏÀÌßÒÜ - ÂÍÅØÍ ÇÓ - Àâòîïîäêëş÷åíèå
     PageName::Memory_Drive,
     &PageMemory::self,               ///< ÏÀÌßÒÜ
-    0, 0, 0, 0
+    E_BtV, E_VB, E_VV, E_BfKE
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -482,7 +482,7 @@ DEF_PAGE_4( pageMemory, // -V641 // -V1027                                      
     PageRAM::self,          ///< ÏÀÌßÒÜ - ÏÎÑËÅÄÍÈÅ
     PageROM::self,          ///< ÏÀÌßÒÜ - ÂÍÓÒĞ ÇÓ
     PageDrive::self,        ///< ÏÀÌßÒÜ - ÂÍÅØÍ ÇÓ
-    PageName::Memory, nullptr, 0, 0, 0, 0
+    PageName::Memory, nullptr, E_BtV, E_VB, E_VV, E_BfKE
 )
 
 void PageMemory::SaveSignalToFlashDrive()
@@ -677,5 +677,5 @@ DEF_PAGE_4(pSetName, // -V641                                                   
     &bSetName_Backspace,    /// ÂÂÎÄ ÈÌÅÍÈ ÔÀÉËÀ - Backspace
     &bSetName_Insert,       /// ÂÂÎÄ ÈÌÅÍÈ ÔÀÉËÀ - Âñòàâèòü
     &bSetName_Save,         /// ÂÂÎÄ ÈÌÅÍÈ ÔÀÉËÀ - Ñîõğàíèòü
-    PageName::Memory_SetName, 0, 0, 0, 0, HandlerKey_SetName
+    PageName::Memory_SetName, nullptr, E_BtV, E_VB, E_VV, HandlerKey_SetName
 )

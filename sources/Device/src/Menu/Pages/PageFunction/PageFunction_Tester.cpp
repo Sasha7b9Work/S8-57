@@ -90,7 +90,7 @@ void PageTester::Init()
     OnChanged_Control(true);
 }
 
-static void OnEnterExit_Tester(bool enter)
+static void OnOpenClose_Tester(bool enter)
 {
     Device::State::SetMode(enter ? Device::Mode::Tester : Device::Mode::Osci);
 }
@@ -104,7 +104,7 @@ DEF_PAGE_5_VAR( pageTester, // -V641
     &cPolarity,
     &cViewMode,
     &cAveraging,
-    PageName::Function_Tester, &PageFunction::self, 0, OnEnterExit_Tester, 0, 0
+    PageName::Function_Tester, &PageFunction::self, E_BtV, OnOpenClose_Tester, E_VV, E_BfKE
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
