@@ -39,9 +39,9 @@ public:
         explicit Type(E v) : value(v) {};
     };
 
-    const DataItem *head;
+    const DataItem *data;
     
-    Item(const DataItem * const head = nullptr);
+    Item(const DataItem * const data = nullptr);
     /// Количество пунктов меню, умещающиееся на экране
     static const int NUM_ON_DISPLAY = 5;
     /// Возвращает true, если кнопка, соответствующая элементу меню item, находится в нажатом положении
@@ -57,11 +57,11 @@ public:
     /// Вызывается при нажатии кнопки
     void KeyPress() const;
     /// Возвращает true, если контрол находится в активном состоянии (реагирует на органы управления)
-    bool IsActive() const { if (head->funcOfActive) { return head->funcOfActive(); }; return true; };
+    bool IsActive() const { if (data->funcOfActive) { return data->funcOfActive(); }; return true; };
 
     bool IsCurrentItem() const;
     /// Возвращает адрес родителя
-    const Page *Keeper() const { if (head->keeper == nullptr) { return nullptr; } return *head->keeper; }
+    const Page *Keeper() const { if (data->keeper == nullptr) { return nullptr; } return *data->keeper; }
     /// Возвращает true, если в древе предков стоит keeper
     bool ExistKeeper(const Page *keeper) const;
     /// Имеет родителя - не является главной страницей меню
@@ -86,7 +86,7 @@ public:
         static const int HEIGHT = 13;
     };
 
-    bool Is(Type::E t) const { return head->type == t; };
+    bool Is(Type::E t) const { return data->type == t; };
 
     virtual void Draw(int /*x*/, int /*y*/, bool /*opened*/) const {};
     /// Вызывается при "коротком" отпускании
@@ -345,7 +345,7 @@ public:
     pString    *names;          ///< Варианты выбора.
     pFuncVB     funcOnChanged;  ///< Функция должна вызываться после изменения значения элемента.
     pFuncVII    funcForDraw;    ///< Функция вызывается после отрисовки элемента. 
-    Choice(const DataItem * const head, pString *names, int8 *cell, pFuncVB funcChanged, pFuncVII funcDraw);
+    Choice(const DataItem * const data, pString *names, int8 *cell, pFuncVB funcChanged, pFuncVII funcDraw);
     /// Запускает процесс изменения значения на delta
     void  StartChange(int delta) const;
     /// Рассчитывает следующий кадр анимации.
@@ -353,7 +353,7 @@ public:
     /// Изменяет значение choice в зависимости от величины и знака delta.
     void  ChangeIndex(int delta) const;
     /// Возвращает количество вариантов выбора в элементе по адресу choice
-    int   NumSubItems() const { return head->num; };
+    int   NumSubItems() const { return data->num; };
 
     void  DrawOpened(int x, int y) const;
 
