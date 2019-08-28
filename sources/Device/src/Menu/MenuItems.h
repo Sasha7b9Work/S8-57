@@ -346,7 +346,3 @@ private:
     static const int widthOpened = 129;
     static const int heightOpened = 27;
 };
-
-typedef void * pVOID;
-#define MAX_NUM_ITEMS_IN_PAGE 15
-typedef pVOID arrayItems[MAX_NUM_ITEMS_IN_PAGE];
