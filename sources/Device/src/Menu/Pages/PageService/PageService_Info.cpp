@@ -60,7 +60,7 @@ static void OnPress_Close()
 DEF_BUTTON( bClose,
     "Закрыть",
     "Закрыть страницу информации",
-    &PageService::PageInformation::self, 0, OnPress_Close, 0
+    &PageService::PageInformation::self, E_BtV, OnPress_Close, E_VII
 )
 
 static void OnOpenClose_Page(bool enter)

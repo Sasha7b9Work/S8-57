@@ -432,7 +432,7 @@ void Button::KeyRelease() const
     {
         SetCurrent(true);
 
-        OwnData()->FuncOnPress();
+        OwnData()->funcOnPress();
     }
 }
 

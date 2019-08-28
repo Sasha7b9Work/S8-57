@@ -175,8 +175,6 @@ struct DataButton
 {
     pFuncVV     funcOnPress;        ///< Функция, которая вызывается при нажатии на кнопку.
     pFuncVII    funcForDraw;        ///< Функция будет вызываться во время отрисовки кнопки.
-    void FuncOnPress() { if (funcOnPress) { funcOnPress(); } }
-    void FuncForDraw(int x, int y) { if (funcForDraw) { funcForDraw(x, y); } }
 };
 
 class Button : public Item

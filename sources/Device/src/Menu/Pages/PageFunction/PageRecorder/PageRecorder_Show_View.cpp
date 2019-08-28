@@ -38,7 +38,7 @@ static void OnPress_Less()
 DEF_BUTTON( bLess,                                                                                                             //--- тсмйжхъ - пецхярпюрнп - опнялнрп - опнялнрп - лЕМЭЬЕ ---
     "лЕМЭЬЕ",
     "",
-    &PageRecorder::PageShow::PageView::self, 0, OnPress_Less, 0
+    &PageRecorder::PageShow::PageView::self, E_BtV, OnPress_Less, E_VII
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -50,7 +50,7 @@ static void OnPress_More()
 DEF_BUTTON( bMore,                                                                                                             //--- тсмйжхъ - пецхярпюрнп - опнялнрп - опнялнрп - аНКЭЬЕ ---
     "аНКЭЬЕ",
     "",
-    &PageRecorder::PageShow::PageView::self, 0, OnPress_More, 0
+    &PageRecorder::PageShow::PageView::self, E_BtV, OnPress_More, E_VII
 )
 
 
