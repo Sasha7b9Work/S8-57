@@ -259,10 +259,10 @@ public:
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// Button ///
 struct DataButton
 {
-    pFuncVV     _funcOnPress;        ///< Функция, которая вызывается при нажатии на кнопку.
-    pFuncVII    _funcForDraw;        ///< Функция будет вызываться во время отрисовки кнопки.
-    void FuncOnPress() { if (_funcOnPress) _funcOnPress(); }
-    void FuncForDraw(int x, int y) { if (_funcForDraw) _funcForDraw(x, y); }
+    pFuncVV     funcOnPress;        ///< Функция, которая вызывается при нажатии на кнопку.
+    pFuncVII    funcForDraw;        ///< Функция будет вызываться во время отрисовки кнопки.
+    void FuncOnPress() { if (funcOnPress) funcOnPress(); }
+    void FuncForDraw(int x, int y) { if (funcForDraw) funcForDraw(x, y); }
 };
 
 class Button : public Item
