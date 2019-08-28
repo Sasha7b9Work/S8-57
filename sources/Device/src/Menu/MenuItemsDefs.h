@@ -11,9 +11,12 @@ struct PageName
 {
     enum E
     {
-        ChannelA,                       ///< ÊÀÍÀË 1
-        ChannelB,                       ///< ÊÀÍÀË 2
-        Debug,                          ///< ÎÒËÀÄÊÀ
+        /// ÊÀÍÀË 1
+        ChannelA,
+        /// ÊÀÍÀË 2
+        ChannelB,
+        /// ÎÒËÀÄÊÀ
+        Debug,
         Debug_ADC,
         Debug_ADC_Balance,
         Debug_ADC_Shift,
@@ -24,12 +27,14 @@ struct PageName
         Debug_Rand,
         Debug_SerialNumber,
         Debug_Settings,
-        Display,                        ///< ÄÈÑÏËÅÉ
+        /// ÄÈÑÏËÅÉ
+        Display,
         Display_Accumulation,
         Display_Settings,
         Display_Settings_Colors,
         Display_View,
-        Function,                       ///< ÔÓÍÊÖÈß
+        /// ÔÓÍÊÖÈß
+        Function,
         Function_FFT,
         Function_FFT_Cursors,
         Function_FrequencyCounter,
@@ -43,29 +48,35 @@ struct PageName
         Function_Recorder_Show_View_Cursors,
         Function_Recorder_Source,
         Function_Tester,
-        Help,                           ///< ÏÎÌÎÙÜ
-        Measures,                       ///< ÈÇÌÅÐ
+        /// ÏÎÌÎÙÜ
+        Help,
+        /// ÈÇÌÅÐ
+        Measures,
         Measures_Auto,
         Measures_Auto_Tune,
         Measures_Cursors,
         Measures_Cursors_Set,
         Measures_Math,
-        Memory,                         ///< ÏÀÌßÒÜ
+        /// ÏÀÌßÒÜ
+        Memory,
         Memory_Drive,
         Memory_Drive_Manager,
         Memory_Drive_Mask,
         Memory_Internal,
         Memory_Last,
         Memory_SetName,
-        Service,                        ///< ÑÅÐÂÈÑ
+        /// ÑÅÐÂÈÑ
+        Service,
         Service_Battery,
         Service_Calibrator,
         Service_Info,
         Service_RTC,
         Service_RTC_Correct,
         Service_RTC_Set,
-        Time,                           ///< ÐÀÇÂ
-        Trig,                           ///< ÑÈÍÕÐ
+        /// ÐÀÇÂ
+        Time,
+        /// ÑÈÍÕÐ
+        Trig,
         Trig_HoldOff,
         Trig_Search,
 
