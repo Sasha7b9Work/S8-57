@@ -18,7 +18,7 @@ static void OnChanged_Settings_Brightness()
 DEF_GOVERNOR( gBrightness,                                                                                                                            //--- ДИСПЛЕЙ - НАСТРОЙКИ - Яркость ---
     "Яркость",
     "Установка яркости свечения дисплея",
-    BRIGHTNESS_DISPLAY, 0, 100, &PageDisplay::PageSettings::self, 0, OnChanged_Settings_Brightness, 0
+    BRIGHTNESS_DISPLAY, 0, 100, &PageDisplay::PageSettings::self, E_BtV, OnChanged_Settings_Brightness
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

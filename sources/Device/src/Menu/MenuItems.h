@@ -221,10 +221,6 @@ struct DataGovernor
     int16   min;            ///< Минмальное значение, которое может принимать регулятор.
     int16   max;            ///< Максимальное значение.
     pFuncVV funcOnChanged;  ///< Функция, которую нужно вызывать после того, как значение регулятора изменилось.
-    pFuncVV funcBeforeDraw; ///< Функция, которая вызывается перед отрисовкой
-
-    void FuncOnChanged() { if (funcOnChanged) { funcOnChanged(); } }
-    void FuncBeforeDraw() { if (funcBeforeDraw) { funcBeforeDraw(); } }
 };
 
 /// Описывает регулятор.

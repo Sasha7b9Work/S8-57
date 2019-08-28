@@ -92,8 +92,8 @@ static const DataItem di##name = { Item::Type::Button, title, hint, keeper, func
 static const Button name(&di##name);
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-#define DEF_GOVERNOR(name, title, hint, cell, min, max, keeper, funcActive, funcChanged, funcBeforeDraw)                                                                                    \
-static const DataGovernor dg##name = {(int16 *)&cell, min, max, funcChanged, funcBeforeDraw};                                                                                               \
+#define DEF_GOVERNOR(name, title, hint, cell, min, max, keeper, funcActive, funcChanged)                                                                                    \
+static const DataGovernor dg##name = {(int16 *)&cell, min, max, funcChanged};                                                                                               \
 static const DataItem di##name = { Item::Type::Button, title, hint, keeper, funcActive, &dg##name };                                                                                        \
 static const Governor name(&di##name);
 

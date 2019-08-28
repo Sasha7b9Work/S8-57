@@ -38,7 +38,7 @@ DEF_GOVERNOR( gDuration,                                                        
     "Длительность",
     "Задаёт длительность промежутка между импульсами синхронизации",
     TRIG_HOLDOFF, 10, 32000,
-    &PageTrig::PageHoldOff::self, 0, OnChanged_Duration, 0
+    &PageTrig::PageHoldOff::self, E_BtV, OnChanged_Duration
 )
 
 /// \todo gDuration должен обеспечивать возможность хранения большего значения, чем 32000

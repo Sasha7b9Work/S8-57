@@ -93,7 +93,7 @@ DEF_GOVERNOR( gADC_Balance_ShiftA,                                              
     "Смещение 1",
     "",
     shiftADCA, -125, 125,
-    &PageDebug::PageADC::PageBalance::self, IsActive_ADC_Balance_ShiftAB, OnChanged_ADC_Balance_ShiftA, 0
+    &PageDebug::PageADC::PageBalance::self, IsActive_ADC_Balance_ShiftAB, OnChanged_ADC_Balance_ShiftA
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -106,7 +106,7 @@ DEF_GOVERNOR( gADC_Balance_ShiftB,                                              
     "Смещение 2",
     "",
     shiftADCB, -125, 125,
-    &PageDebug::PageADC::PageBalance::self, IsActive_ADC_Balance_ShiftAB, OnChanged_ADC_Balance_ShiftB, 0
+    &PageDebug::PageADC::PageBalance::self, IsActive_ADC_Balance_ShiftAB, OnChanged_ADC_Balance_ShiftB
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -163,7 +163,7 @@ DEF_GOVERNOR( gADC_Stretch_A,                                                   
     "Растяжка 1к",
     "Задаёт ручную растяжку первого канала.\n1 единица = 0.0001",
     stretchA, -10000, 10000,
-    &PageDebug::PageADC::PageStretch::self, IsActive_ADC_StretchAB, OnChanged_ADC_Stretch_A, 0
+    &PageDebug::PageADC::PageStretch::self, IsActive_ADC_StretchAB, OnChanged_ADC_Stretch_A
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -176,7 +176,7 @@ DEF_GOVERNOR( gADC_Stretch_B,                                                   
     "Растяжка 2к",
     "Задаёт ручную растяжку второго канала.\n1 единица = 0.0001",
     stretchB, -10000, 10000,
-    &PageDebug::PageADC::PageStretch::self, IsActive_ADC_StretchAB, OnChanged_ADC_Stretch_B, 0
+    &PageDebug::PageADC::PageStretch::self, IsActive_ADC_StretchAB, OnChanged_ADC_Stretch_B
 )
 
 /*
@@ -288,7 +288,7 @@ DEF_GOVERNOR( gADC_Shift_A2mV, //-V641                                          
     "См 1к 2мВ пост",
     "",
     RSHIFT_ADD_STABLE_A(Range::_2mV), -100, 100,
-    &PageDebug::PageADC::PageShift::self, 0, OnChanged_ADC_Shift_A, 0
+    &PageDebug::PageADC::PageShift::self, 0, OnChanged_ADC_Shift_A
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -301,7 +301,7 @@ DEF_GOVERNOR( gADC_Shift_B2mV,                                                  
     "См 2к 2мВ пост",
     "",
     RSHIFT_ADD_STABLE_B(Range::_2mV), -100, 100,
-    &PageDebug::PageADC::PageShift::self, 0, OnChanged_ADC_Shift_B, 0
+    &PageDebug::PageADC::PageShift::self, 0, OnChanged_ADC_Shift_B
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -309,7 +309,7 @@ DEF_GOVERNOR( gADC_Shift_A5mV,                                                  
     "См 1к 5мВ пост",
     "",
     RSHIFT_ADD_STABLE_A(Range::_5mV), -100, 100,
-    &PageDebug::PageADC::PageShift::self, 0, OnChanged_ADC_Shift_A, 0
+    &PageDebug::PageADC::PageShift::self, 0, OnChanged_ADC_Shift_A
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -317,7 +317,7 @@ DEF_GOVERNOR( gADC_Shift_B5mV,                                                  
     "См 2к 5мВ пост",
     "",
     RSHIFT_ADD_STABLE_B(Range::_5mV), -100, 100,
-    &PageDebug::PageADC::PageShift::self, 0, OnChanged_ADC_Shift_B, 0
+    &PageDebug::PageADC::PageShift::self, 0, OnChanged_ADC_Shift_B
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -325,7 +325,7 @@ DEF_GOVERNOR( gADC_Shift_A10mV,                                                 
     "См 1к 10мВ пост",
     "",
     RSHIFT_ADD_STABLE_A(Range::_10mV), -100, 100,
-    &PageDebug::PageADC::PageShift::self, 0, OnChanged_ADC_Shift_A, 0
+    &PageDebug::PageADC::PageShift::self, 0, OnChanged_ADC_Shift_A
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -333,7 +333,7 @@ DEF_GOVERNOR( gADC_Shift_B10mV,                                                 
     "См 2к 10мВ пост",
     "",
     RSHIFT_ADD_STABLE_B(Range::_10mV), -100, 100,
-    &PageDebug::PageADC::PageShift::self, 0, OnChanged_ADC_Shift_B, 0
+    &PageDebug::PageADC::PageShift::self, 0, OnChanged_ADC_Shift_B
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

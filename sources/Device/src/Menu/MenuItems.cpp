@@ -539,7 +539,7 @@ float Governor::Step() const
             {
                 tsGovernor.dir = NONE;
                 SetValue(PrevValue());
-                OwnData()->FuncOnChanged();
+                OwnData()->funcOnChanged();
                 delta = 0.0F;
                 tsGovernor.address = 0;
             }
@@ -554,7 +554,7 @@ float Governor::Step() const
             {
                 tsGovernor.dir = NONE;
                 SetValue(NextValue());
-                OwnData()->FuncOnChanged();
+                OwnData()->funcOnChanged();
                 delta = 0.0F;
                 tsGovernor.address = 0;
             }
@@ -598,7 +598,7 @@ void Governor::ChangeValue(int16 delta)
 
     if (GetValue() != oldValue)
     {
-        OwnData()->FuncOnChanged();
+        OwnData()->funcOnChanged();
         Beeper::GovernorChangedValue();
     }
 }

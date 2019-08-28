@@ -109,8 +109,6 @@ void Governor::Draw(int x, int y, bool opened) const
         return;
     }
 
-    OwnData()->FuncBeforeDraw();
-
     if (opened)
     {
         DrawOpened(x, y);
