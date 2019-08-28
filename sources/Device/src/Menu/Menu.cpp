@@ -205,7 +205,7 @@ bool Menu::IsShown()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void ClosePage(Page *page)
 {
-    page->OwnData()->funcOnEnterExit(false);
+    page->OwnData()->FuncOnEnterExit(false);
 
     Page *keeper = (Page *)page->Keeper();
 

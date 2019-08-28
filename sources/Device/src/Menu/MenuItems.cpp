@@ -266,7 +266,7 @@ int Page::NumItems() const //-V2506
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Page::ShortPress() const
 {
-    OwnData()->funcOnEnterExit(true);
+    OwnData()->FuncOnEnterExit(true);
 
     SetAsCurrent();
 }
@@ -318,7 +318,7 @@ Page::Name::E Page::GetName() const
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 bool Page::ProcessKey(KeyEvent event)
 {
-    if (OwnData()->funcKey(event))
+    if (OwnData()->FuncOnKey(event))
     {
         return true;
     }

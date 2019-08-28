@@ -112,9 +112,11 @@ struct DataPage
                                     ///< для страницы малых кнопок  здесь хранятся 6 указателей на SButton : 0 - K_Enter, 1...5 - K_1...K_5
     pFuncVB     funcOnEnterExit;    ///< Будет вызываться при нажатии на свёрнутую страницу и при выходе из этой страницы на предыдущую
     pFuncVV     funcOnDraw;         ///< Будет вызываться после отрисовки кнопок
-    pFuncBKE    funcKey;            ///< В странице малых кнопок вызывается при нажатии стрелки
+    pFuncBKE    funcOnKey;          ///< В странице малых кнопок вызывается при нажатии стрелки
 
     void FuncOnDraw() { if (funcOnDraw) { funcOnDraw(); } };
+    void FuncOnEnterExit(bool enter) { if (funcOnEnterExit) { return funcOnEnterExit(enter); } };
+    bool FuncOnKey(KeyEvent event) { if (funcOnKey) { return funcOnKey(event); }; return false; };
 };
 
 /// Описывает страницу меню
