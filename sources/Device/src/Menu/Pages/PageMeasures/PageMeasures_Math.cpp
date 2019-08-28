@@ -293,5 +293,5 @@ DEF_PAGE_5( pageMath, // -V641                                                  
     &bFunction_ModeRegSet,
     &bFunction_RangeA,
     &bFunction_RangeB,
-    PageName::Service_Function, &PageMeasures::self, IsActive_Function, OnPress_Function, 0, HandlerKey_Function
+    PageName::Measures_Math, &PageMeasures::self, IsActive_Function, OnPress_Function, 0, HandlerKey_Function
 )
