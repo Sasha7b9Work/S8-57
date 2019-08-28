@@ -104,7 +104,7 @@ DEF_PAGE_5_VAR( pageTester, // -V641
     &cPolarity,
     &cViewMode,
     &cAveraging,
-    Page::Name::Function_Tester, &PageFunction::self, 0, OnEnterExit_Tester, 0, 0
+    PageName::Function_Tester, &PageFunction::self, 0, OnEnterExit_Tester, 0, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

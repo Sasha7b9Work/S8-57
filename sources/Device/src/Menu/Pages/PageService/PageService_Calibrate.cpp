@@ -57,5 +57,5 @@ DEF_PAGE_2( pageCalibrate, // -V641 // -V1027                                   
     "Управлением калибратором и калибровка осциллографа",
     &cCalibrator_Calibrator,     /// СЕРВИС - КАЛИБРАТОР - Калибратор
     &bCalibrator_Calibrate,      /// СЕРВИС - КАЛИБРАТОР - Калибровать
-    Page::Name::Service_Calibrator, &PageService::self, 0, 0, 0, 0
+    PageName::Service_Calibrator, &PageService::self, 0, 0, 0, 0
 )

@@ -16,5 +16,5 @@ DEF_PAGE_3( pageMeasures, // -V1027                                             
     PageMeasuresCursors::self,     ///< ÈÇÌÅĞÅÍÈß - ÊÓĞÑÎĞÛ
     PageMeasuresAuto::self,        ///< ÈÇÌÅĞÅÍÈß - ÀÂÒÎÌÀÒ
     PageMeasuresMath::self,        ///< ÈÇÌÅĞÅÍÈß - ÌÀÒÅÌÀÒÈÊÀ
-    Page::Name::Measures, nullptr, 0, 0, 0, 0
+    PageName::Measures, nullptr, 0, 0, 0, 0
 )

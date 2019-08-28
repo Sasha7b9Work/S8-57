@@ -77,5 +77,5 @@ DEF_PAGE_7( pageService, // -V641 // -V1027                                     
     PageRTC::self,          ///< ÑÅÐÂÈÑ - ÂÐÅÌß
     PageService::PageInformation::self,  ///< ÑÅÐÂÈÑ - ÈÍÔÎÐÌÀÖÈß
     PageDebug::self,        ///< ÑÅÐÂÈÑ - ÎÒËÀÄÊÀ
-    Page::Name::Service, nullptr, 0, 0, 0, 0
+    PageName::Service, nullptr, 0, 0, 0, 0
 )

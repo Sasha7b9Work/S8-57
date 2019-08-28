@@ -67,7 +67,7 @@ DEF_PAGE_4( pageAuto, // -V641 // -V1027                                        
     &cChannels,                                 ///< ÈÇÌÅÐÅÍÈß - ÀÂÒÎÌÀÒ - Êàíàëû
     PageMeasuresAuto::PageTune::self,  ///< ÈÇÌÅÐÅÍÈß - ÀÂÒÎÌÀÒ - ÍÀÑÒÐÎÈÒÜ
     //&cMode,                                   ///< ÈÇÌÅÐÅÍÈß - ÀÂÒÎÌÀÒ - Âèä
-    Page::Name::Measures_Auto, &PageMeasures::self, 0, 0, 0, 0
+    PageName::Measures_Auto, &PageMeasures::self, 0, 0, 0, 0
 )
 
 

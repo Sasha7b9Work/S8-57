@@ -63,5 +63,5 @@ DEF_PAGE_5( pageView, // -V641 // -V1027                                        
     &bLess,                                                                 ///< ÔÓÍÊÖÈß - ÐÅÃÈÑÒÐÀÒÎÐ - ÏÐÎÑÌÎÒÐ - ÏÐÎÑÌÎÒÐ - Ìåíüøå
     &bMore,                                                                 ///< ÔÓÍÊÖÈß - ÐÅÃÈÑÒÐÀÒÎÐ - ÏÐÎÑÌÎÒÐ - ÏÐÎÑÌÎÒÐ - Áîëüøå
     PageRecorder::PageShow::PageView::PageCursors::self,      ///< ÔÓÍÊÖÈß - ÐÅÃÈÑÒÐÀÒÎÐ - ÏÐÎÑÌÎÒÐ - ÏÐÎÑÌÎÒÐ - ÊÓÐÑÎÐÛ
-    Page::Name::Function_Recorder_Show_View, &PageRecorder::PageShow::self, 0, 0, 0, 0
+    PageName::Function_Recorder_Show_View, &PageRecorder::PageShow::self, 0, 0, 0, 0
 )

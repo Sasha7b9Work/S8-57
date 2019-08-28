@@ -50,6 +50,6 @@ DEF_PAGE_2( pageHoldOff, // -V641 // -V1027                                     
     "",
     &cHoldOff,          ///< ÑÈÍÕÐ - ÓÄÅÐÆÀÍÈÅ - Óäåðæàíèå
     &gDuration,         ///< ÑÈÍÕÐ - ÓÄÅÐÆÀÍÈÅ - Äëèòåëüíîñòü
-    Page::Name::Trig_HoldOff,
+    PageName::Trig_HoldOff,
     &PageTrig::self, 0, 0, 0, 0
 )

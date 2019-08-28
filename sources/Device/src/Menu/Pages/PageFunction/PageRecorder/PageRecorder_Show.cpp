@@ -92,5 +92,5 @@ DEF_PAGE_3( pageShow, // -V641 // -V1027                                        
     &cCursor,
     //PageRecorder::PageShow::PageOperations::self,  ///< ÔÓÍÊÖÈß - ÐÅÃÈÑÒÐÀÒÎÐ - ÏÐÎÑÌÎÒÐ - ÎÏÅÐÀÖÈÈ
     //PageRecorder::PageShow::PageView::self,        ///< ÔÓÍÊÖÈß - ÐÅÃÈÑÒÐÀÒÎÐ - ÏÐÎÑÌÒÎÐ - ÏÐÎÑÌÎÒÐ
-    Page::Name::Function_Recorder_Show, &PageRecorder::self, IsActive_PageShow, 0, 0, FuncOnKey_PageShow
+    PageName::Function_Recorder_Show, &PageRecorder::self, IsActive_PageShow, 0, 0, FuncOnKey_PageShow
 )

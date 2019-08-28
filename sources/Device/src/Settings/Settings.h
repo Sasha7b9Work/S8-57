@@ -231,8 +231,8 @@ public:
     // Настройки меню
 
     bool                menu_show;                                                  ///< Если true, то нужно показывать текущую страницу
-    int8                menu_posActItem[Page::Name::Number];                        ///< \brief Позиция активного пункта. bit7 == 1 - item is opened, 0x7f - нет активного пункта.
-    int8                menu_currentSubPage[Page::Name::Number];                    ///< Номер текущей подстраницы.
+    int8                menu_posActItem[PageName::Number];                          ///< \brief Позиция активного пункта. bit7 == 1 - item is opened, 0x7f - нет активного пункта.
+    int8                menu_currentSubPage[PageName::Number];                      ///< Номер текущей подстраницы.
 
     // Несбрасываемые настройки калибровки
 

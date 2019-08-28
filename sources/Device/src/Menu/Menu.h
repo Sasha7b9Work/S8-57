@@ -27,7 +27,7 @@ struct Menu
     /// Возвращает адрес открытого элемента меню
     static Item *OpenedItem();
 
-    static Page::Name::E GetNameOpenedPage();
+    static PageName::E GetNameOpenedPage();
     /// Возвращает адрес текущего элемента меню (текущим, как правило, является элемент, кнопка которого была нажата последней
     static Item *CurrentItem();
     /// Закрыть открытый элемент меню

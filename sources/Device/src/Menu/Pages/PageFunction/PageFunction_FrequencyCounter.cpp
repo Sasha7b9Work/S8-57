@@ -120,5 +120,5 @@ DEF_PAGE_5( ppFreqMeter, // -V641                                               
     &cTimeF,            ///< ÈÇÌÅÐÅÍÈß - ×ÀÑÒÎÒÎÌÅÐ - Âðåìÿ ñ÷¸òà F
     &cFreqClc,          ///< ÈÇÌÅÐÅÍÈß - ×ÀÑÒÎÒÎÌÅÐ - Ìåòêè âðåìåíè
     &cNumPeriods,       ///< ÈÇÌÅÐÅÍÈß - ×ÀÑÒÎÒÎÌÅÐ - Êîë-âî ïåðèîäîâ
-    Page::Name::Function_FrequencyCounter, &PageFunction::self, 0, 0, 0, 0
+    PageName::Function_FrequencyCounter, &PageFunction::self, 0, 0, 0, 0
 )

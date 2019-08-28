@@ -125,7 +125,7 @@ DEF_PAGE_1( pppFFT_Cursors, // -V641 // -V1027                                  
     "КУРСОРЫ",
     "Включает курсоры для измерения параметров спектра",
     &bFFT_Cursors_Source,                       ///< СЕРВИС - СПЕКТР - КУРСОРЫ - Источник
-    Page::Name::Service_FFT_Cursors, &PageFFT::self, IsActive_FFT_Cursors, 0, 0, HandlerKey_FFT_Cursors
+    PageName::Service_FFT_Cursors, &PageFFT::self, IsActive_FFT_Cursors, 0, 0, HandlerKey_FFT_Cursors
 )
 
 
@@ -152,5 +152,5 @@ DEF_PAGE_6( ppFFT, // -V641 // -V1027                                           
     &cFFT_Window,       ///< СЕРВИС - СПЕКТР - Окно 
     &pppFFT_Cursors,    ///< СЕРВИС - СПЕКТР - КУРСОРЫ
     &cFFT_Range,        ///< СЕРВИС - СПЕКТР - Диапазон
-    Page::Name::Function_FFT, &PageFunction::self, IsActive_FFT, OnPress_FFT, 0, 0
+    PageName::Function_FFT, &PageFunction::self, IsActive_FFT, OnPress_FFT, 0, 0
 )

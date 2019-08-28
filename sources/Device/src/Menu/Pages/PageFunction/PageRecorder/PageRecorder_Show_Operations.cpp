@@ -66,5 +66,5 @@ DEF_PAGE_4( pageOperations, // -V641 // -V1027                                  
     &bCopy,     ///< ÔÓÍÊÖÈß - ÐÅÃÈÑÒÐÀÒÎÐ - ÏÐÎÑÌÎÒÐ - ÎÏÅÐÀÖÈÈ - Êîïèðîâàòü
     &bMove,     ///< ÔÓÍÊÖÈß - ÐÅÃÈÑÒÐÀÒÎÐ - ÏÐÎÑÌÎÒÐ - ÎÏÅÐÀÖÈÈ - Ïåðåìåñòèòü
     &bDelete,   ///< ÔÓÍÊÖÈß - ÐÅÃÈÑÒÐÀÒÎÐ - ÏÐÎÑÌÎÒÐ - ÎÏÅÐÀÖÈÈ - Óäàëèòü
-    Page::Name::Function_Recorder_Show_Operations, &PageRecorder::PageShow::self, 0, 0, 0, 0
+    PageName::Function_Recorder_Show_Operations, &PageRecorder::PageShow::self, 0, 0, 0, 0
 )

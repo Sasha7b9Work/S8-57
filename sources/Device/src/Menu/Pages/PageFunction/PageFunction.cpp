@@ -20,5 +20,5 @@ DEF_PAGE_5( pageFunction,                                                       
     PageMultimeter::self,         ///< ÔÓÍÊÖÈß - ÌÓËÜÒÈÌÅÒÐ
     PageTester::self,             ///< ÔÓÍÊÖÈß - ÒÅÑÒÅÐ
     PageRecorder::self,           ///< ÔÓÍÊÖÈß - ÐÅÃÈÑÒÐÀÒÎÐ
-    Page::Name::Function, nullptr, 0, 0, 0, 0
+    PageName::Function, nullptr, 0, 0, 0, 0
 )

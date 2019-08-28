@@ -82,5 +82,5 @@ DEF_PAGE_1 (pageServiceInfo, //-V641 //-V1027
     "ИНФОРМАЦИЯ",
     "Информация об изделии",
     &bClose,
-    Page::Name::Service_Info, &PageService::self, 0, OnPress_Page, 0, 0
+    PageName::Service_Info, &PageService::self, 0, OnPress_Page, 0, 0
 )

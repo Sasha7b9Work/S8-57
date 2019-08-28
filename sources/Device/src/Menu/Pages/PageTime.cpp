@@ -108,5 +108,5 @@ DEF_PAGE_4( pTime, // -V641 // -V1027                                           
     &cTPos,             ///< ÐÀÇÂÅÐÒÊÀ - Òî
     //&cDivRole,          ///< ÐÀÇÂÅÐÒÊÀ - Ô-öèÿ ÂÐ/ÄÅË
     &cShiftXtype,       ///< ÐÀÇÂÅÐÒÊÀ - Ñìåùåíèå
-    Page::Name::Time, nullptr, 0, 0, 0, 0
+    PageName::Time, nullptr, 0, 0, 0, 0
 )

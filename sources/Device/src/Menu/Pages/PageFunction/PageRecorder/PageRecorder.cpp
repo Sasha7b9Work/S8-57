@@ -33,5 +33,5 @@ DEF_PAGE_2( pageRecorder, // -V641 // -V1027                                    
     PageRecorder::PageSource::self,    ///< ÔÓÍÊÖÈß - ÐÅÃÈÑÒÐÀÒÎÐ - ÈÑÒÎ×ÍÈÊ
     //PageRecorder::PageRecord::self,    ///< ÔÓÍÊÖÈß - ÐÅÃÈÑÒÐÀÒÎÐ - ÇÀÏÈÑÜ
     PageRecorder::PageShow::self,      ///< ÔÓÍÊÖÈß - ÐÅÃÈÑÒÐÀÒÎÐ - ÏÐÎÑÌÎÒÐ
-    Page::Name::Function_Recorder, &PageFunction::self, 0, OnOpenClose_Recorder, 0, 0
+    PageName::Function_Recorder, &PageFunction::self, 0, OnOpenClose_Recorder, 0, 0
 )

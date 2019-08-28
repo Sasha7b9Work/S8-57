@@ -73,5 +73,5 @@ DEF_PAGE_3(pageAccum, // -V641 // -V1027                                        
     &cEnable,    ///< ÄÈÑÏËÅÉ - ÍÀÊÎÏËÅÍÈÅ - Êîëè÷åñòâî
     &cNumber,    ///< ÄÈÑÏËÅÉ - ÍÀÊÎÏËÅÍÈÅ - Ðåæèì
     &bClear,     ///< ÄÈÑÏËÅÉ - ÍÀÊÎÏËÅÍÈÅ - Î÷èñòèòü
-    Page::Name::Display_Accumulation, &PageDisplay::self, IsActive_Accum, 0, 0, 0
+    PageName::Display_Accumulation, &PageDisplay::self, IsActive_Accum, 0, 0, 0
 )

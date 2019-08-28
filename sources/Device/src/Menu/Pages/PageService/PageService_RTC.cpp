@@ -20,7 +20,7 @@ DEF_PAGE_2( pageRTC, // -V641 // -V1027                                         
     "Установка и настройка времени",
     PageRTC::PageSet::self,         ///< СЕРВИС - ВРЕМЯ - Время
     PageRTC::PageCorrect::self,     ///< CЕРВИС - ВРЕМЯ - Коррекция
-    Page::Name::Service_RTC,
+    PageName::Service_RTC,
     &PageService::self, 0, 0, 0, 0
 )
 
@@ -79,7 +79,7 @@ DEF_PAGE_5( pageRTC_Set, //-V641 //-V1027
     &bSetUp,
     &bSetDown,
     &bSetPick,
-    Page::Name::Service_RTC_Set,
+    PageName::Service_RTC_Set,
     &PageRTC::self, 0, 0, 0, 0
 )
 
@@ -132,6 +132,6 @@ DEF_PAGE_5( pageRTC_Correction, //-V641 //-V1027
     &bCorrUp,
     &bCorrDown,
     &bCorrPick,
-    Page::Name::Service_RTC_Correct,
+    PageName::Service_RTC_Correct,
     &PageRTC::self, 0, 0, 0, 0
 )

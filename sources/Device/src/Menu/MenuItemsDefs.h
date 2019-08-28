@@ -7,6 +7,72 @@ typedef bool(*pFuncBKE)(KeyEvent);
 
 inline bool EmptyFuncfBKE(KeyEvent) { return false; }
 
+struct PageName
+{
+    enum E
+    {
+        Function,
+        Function_FrequencyCounter,
+        Function_FFT,
+        Function_Multimeter,
+        Function_Multimeter_Cal,
+        Function_Tester,
+        Function_Recorder,
+        Function_Recorder_Source,
+        Function_Recorder_Record,
+        Function_Recorder_Show,
+        Function_Recorder_Show_Operations,
+        Function_Recorder_Show_View,
+        Function_Recorder_Show_View_Cursors,
+        Measures,
+        Measures_Auto,
+        Measures_Auto_Tune,
+        Measures_Cursors,
+        Measures_Cursors_Set,
+        Display,
+        Display_Accumulation,
+        Display_View,
+        Display_Settings,
+        Display_Settings_Colors,
+        ChannelA,
+        ChannelB,
+        Trig,
+        Trig_Search,
+        Trig_HoldOff,
+        Time,
+        Memory,
+        Memory_Last,
+        Memory_Internal,
+        Memory_Drive,
+        Memory_Drive_Manager,
+        Memory_Drive_Mask,
+        Memory_SetName,
+        Service,
+        Service_Calibrator,
+        Service_RTC,
+        Service_Battery,
+        Service_FFT_Cursors,
+        Service_Function,
+        Help,
+        Debug,
+        Debug_Console,
+        Debug_Console_Registers,
+        Debug_ADC,
+        Debug_ADC_Balance,
+        Debug_ADC_Stretch,
+        Debug_ADC_Shift,
+        Debug_Rand,
+        Debug_Multimeter,
+        Debug_Settings,
+        Debug_SerialNumber,
+        Service_Info,
+        Service_RTC_Set,
+        Service_RTC_Correct,
+        Number,
+        NoPage
+    } value;
+};
+
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #define DEF_BUTTON(name, title, hint, keeper, funcActive, funcPress, funcDraw)                                                                                                              \

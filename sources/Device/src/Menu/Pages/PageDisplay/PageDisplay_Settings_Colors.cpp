@@ -56,5 +56,5 @@ DEF_PAGE_4( pageColors, // -V641 // -V1027                                      
     &gcChannelA,          ///< ÄÈÑÏËÅÉ - ÍÀÑÒÐÎÉÊÈ - ÖÂÅÒÀ - Êàíàë 1
     &gcChannelB,          ///< ÄÈÑÏËÅÉ - ÍÀÑÒÐÎÉÊÈ - ÖÂÅÒÀ - Êàíàë 2
     &gcGrid,              ///< ÄÈÑÏËÅÉ - ÍÀÑÒÐÎÉÊÈ - ÖÂÅÒÀ - Ñåòêà
-    Page::Name::Display_Settings_Colors, &PageDisplay::PageSettings::self, 0, 0, 0, 0
+    PageName::Display_Settings_Colors, &PageDisplay::PageSettings::self, 0, 0, 0, 0
 )

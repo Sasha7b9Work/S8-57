@@ -24,5 +24,5 @@ DEF_PAGE_1( pageRecord, // -V641 // -V1027                                      
     "ЗАПИСЬ",
     "Выбор места хранения данных",
     &cDestination,        ///< ФУНКЦИЯ - РЕГИСТРАТОР - ЗАПИСЬ - Сохранять в
-    Page::Name::Function_Recorder_Record, &PageRecorder::self, 0, 0, 0, 0
+    PageName::Function_Recorder_Record, &PageRecorder::self, 0, 0, 0, 0
 )

@@ -225,7 +225,7 @@ DEF_PAGE_5_VAR( pageMultimeter, // -V641 //-V1027 //-V641
     &cAVP,
     &cZero,
     &Item::empty,
-    Page::Name::Function_Multimeter, &PageFunction::self, 0, OnEnterExit_Multimeter, 0, 0
+    PageName::Function_Multimeter, &PageFunction::self, 0, OnEnterExit_Multimeter, 0, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -258,7 +258,7 @@ DEF_PAGE_2( pageCalibration, //-V641 //-V1027
     "Калибровка мультиметра",
     &bCalibrate0,
     &bCalibrate1,
-    Page::Name::Function_Multimeter_Cal, &PageMultimeter::self, 0, 0, 0, 0
+    PageName::Function_Multimeter_Cal, &PageMultimeter::self, 0, 0, 0, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

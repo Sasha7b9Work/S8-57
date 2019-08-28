@@ -173,7 +173,7 @@ void Menu::ChangeStateFlashDrive()
 {
     if(!FDrive::IsConnected())
     {
-        if(GetNameOpenedPage() == Page::Name::Memory_Drive_Manager)
+        if(GetNameOpenedPage() == PageName::Memory_Drive_Manager)
         {
             ((Button *)OpenedItem())->KeyRelease();
         }
@@ -280,13 +280,13 @@ Item *Menu::OpenedItem()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-Page::Name::E Menu::GetNameOpenedPage()
+PageName::E Menu::GetNameOpenedPage()
 {
     const Page *opened = (const Page *)OpenedItem();
 
     if (opened == nullptr)
     {
-        return Page::Name::NoPage;
+        return PageName::NoPage;
     }
 
     return opened->GetName();

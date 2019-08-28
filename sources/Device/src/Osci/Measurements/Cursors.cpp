@@ -37,7 +37,7 @@ float Cursor::PosU(Chan::E ch, int numCur)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 bool Cursor::NecessaryDraw()
 {
-    return (CURsU_ENABLED || CURsT_ENABLED) && (CURS_SHOW || Menu::GetNameOpenedPage() == Page::Name::Measures_Cursors_Set);
+    return (CURsU_ENABLED || CURsT_ENABLED) && (CURS_SHOW || Menu::GetNameOpenedPage() == PageName::Measures_Cursors_Set);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

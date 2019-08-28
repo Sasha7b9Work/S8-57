@@ -124,5 +124,5 @@ DEF_PAGE_6( pTrig, // -V641 // -V1027                                           
     &cFiltr,                        ///< ÑÈÍÕÐ - Âõîä
     PageTrig::PageHoldOff::self, ///< ÑÈÍÕÐ - ÓÄÅÐÆÀÍÈÅ
     PageTrig::PageFind::self,    ///< ÑÈÍÕÐ - ÏÎÈÑÊ
-    Page::Name::Trig, nullptr, 0, 0, 0, 0
+    PageName::Trig, nullptr, 0, 0, 0, 0
 )

@@ -388,7 +388,7 @@ DEF_PAGE_5( pageSet, // -V641 // -V1027                                         
     &bSet_T,                ///< ÈÇÌÅÐÅÍÈß - ÊÓÐÑÎÐÛ - ÓÑÒÀÍÎÂÈÒÜ - Êóðñîðû Ò
     &bSet_100,              ///< ÈÇÌÅÐÅÍÈß - ÊÓÐÑÎÐÛ - ÓÑÒÀÍÎÂÈÒÜ - 100%
     &bSet_Movement,         ///< ÈÇÌÅÐÅÍÈß - ÊÓÐÑÎÐÛ - ÓÑÒÀÍÎÂÈÒÜ - Ïåðåìåùåíèå
-    Page::Name::Measures_Cursors_Set, &PageMeasuresCursors::self, IsActive_PageSet, 0, 0, PageMeasuresCursors::PageSet::OnKey
+    PageName::Measures_Cursors_Set, &PageMeasuresCursors::self, IsActive_PageSet, 0, 0, PageMeasuresCursors::PageSet::OnKey
 )
 
 
@@ -481,6 +481,6 @@ void PageMeasuresCursors::PageSet::SetCursorT(Chan::E ch, int numCur, float pos)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 bool PageMeasuresCursors::PageSet::IsRegSetActiveOnCursors()
 {
-    return ((Menu::GetNameOpenedPage() == Page::Name::Measures_Cursors_Set) &&
+    return ((Menu::GetNameOpenedPage() == PageName::Measures_Cursors_Set) &&
         ((CURS_ACTIVE_U && CURsU_ENABLED) || (CURS_ACTIVE_T && CURsT_ENABLED)));
 }
