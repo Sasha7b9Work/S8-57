@@ -35,9 +35,9 @@ struct PageMeasuresCursors
     {
         static const Page * const self;
 
-        static void Draw_Set_Channel(int x, int y);
+        static void Draw_Channel(int x, int y);
 
-        static void OnPress_Set_Channel();
+        static void OnPress_Channel();
         /// Выбрать следующий курсор
         static void IncCursCntrlU(Chan::E ch);
         /// Выбрать следующий курсор

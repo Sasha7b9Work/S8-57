@@ -38,34 +38,34 @@ void CalculateConditions(int16 pos0, int16 pos1, Cursors::Control::E cursCntrl, 
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-static void Draw_Set_ChannelA(int x, int y)
+static void Draw_ChannelA(int x, int y)
 {
     String("1").Draw(x + 7, y + 5);
 }
 
-static void Draw_Set_ChannelB(int x, int y)
+static void Draw_ChannelB(int x, int y)
 {
     String("2").Draw(x + 7, y + 5);
 }
 
-void PageMeasuresCursors::PageSet::OnPress_Set_Channel()
+void PageMeasuresCursors::PageSet::OnPress_Channel()
 {
     Chan::E source = CURS_SOURCE_A ? Chan::B : Chan::A;
     SetCursSource(source);
 }
 
-void PageMeasuresCursors::PageSet::Draw_Set_Channel(int x, int y)
+void PageMeasuresCursors::PageSet::Draw_Channel(int x, int y)
 {
-    static const pFuncVII func[2] = {Draw_Set_ChannelA, Draw_Set_ChannelB};
+    static const pFuncVII func[2] = {Draw_ChannelA, Draw_ChannelB};
     func[CURS_SOURCE](x, y);
 }
 
-DEF_GRAPH_BUTTON_HINTS_2( bSet_Channel,                                                                                                    //--- ИЗМЕРЕНИЯ - КУРСОРЫ - УСТАНОВИТЬ - Канал ---
+DEF_GRAPH_BUTTON_HINTS_2( bChannel,                                                                                                        //--- ИЗМЕРЕНИЯ - КУРСОРЫ - УСТАНОВИТЬ - Канал ---
     "Канал",
     "Выбор канала для курсорных измерений",
-    &PageMeasuresCursors::PageSet::self, E_BtV, PageMeasuresCursors::PageSet::OnPress_Set_Channel, PageMeasuresCursors::PageSet::Draw_Set_Channel,
-    Draw_Set_ChannelA, "канал 1",
-    Draw_Set_ChannelB, "канал 2"
+    &PageMeasuresCursors::PageSet::self, E_BtV, PageMeasuresCursors::PageSet::OnPress_Channel, PageMeasuresCursors::PageSet::Draw_Channel,
+    Draw_ChannelA, "канал 1",
+    Draw_ChannelB, "канал 2"
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -282,39 +282,39 @@ DEF_GRAPH_BUTTON( b100,                                                         
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void Draw_Set_Movement_Percents(int x, int y)
+static void Draw_Movement_Percents(int x, int y)
 {
     String('\x83').Draw(x + 6, y + 5);
 }
 
-static void Draw_Set_Movement_Points(int x, int y)
+static void Draw_Movement_Points(int x, int y)
 {
     String("ТЧК").Draw(x + 2, y + 5);
 }
 
-static void OnPress_Set_Movement()
+static void OnPress_Movement()
 {
     Math::CircleIncrease<int8>((int8 *)&CURS_MOVEMENT, 0, 1);
 }
 
-static void Draw_Set_Movement(int x, int y)
+static void Draw_Movement(int x, int y)
 {
     if (CURS_MOVEMENT_IN_PERCENTS)
     {
-        Draw_Set_Movement_Percents(x, y);
+        Draw_Movement_Percents(x, y);
     }
     else
     {
-        Draw_Set_Movement_Points(x, y);
+        Draw_Movement_Points(x, y);
     }
 }
 
-DEF_GRAPH_BUTTON_HINTS_2( bSet_Movement,                                                                                             //--- ИЗМЕРЕНИЯ - КУРСОРЫ - УСТАНОВИТЬ - Перемещение ---
+DEF_GRAPH_BUTTON_HINTS_2( bMovement,                                                                                                 //--- ИЗМЕРЕНИЯ - КУРСОРЫ - УСТАНОВИТЬ - Перемещение ---
     "Перемещение",
     "Выбор шага перемещения курсоров - проценты или точки",
-    &PageMeasuresCursors::PageSet::self, E_BtV, OnPress_Set_Movement, Draw_Set_Movement,
-    Draw_Set_Movement_Percents, "шаг перемещения курсоров кратен одному проценту",
-    Draw_Set_Movement_Points,   "шаг перемещения курсора кратен одному пикселю"
+    &PageMeasuresCursors::PageSet::self, E_BtV, OnPress_Movement, Draw_Movement,
+    Draw_Movement_Percents, "шаг перемещения курсоров кратен одному проценту",
+    Draw_Movement_Points,   "шаг перемещения курсора кратен одному пикселю"
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -383,11 +383,11 @@ static bool IsActive_PageSet()
 DEF_PAGE_5( pageSet, // -V641 // -V1027                                                                                                            //--- ИЗМЕРЕНИЯ - КУРСОРЫ - УСТАНОВИТЬ ---
     "УСТАНОВИТЬ",
     "Переход в режим курсорных измерений",
-    &bSet_Channel,          ///< ИЗМЕРЕНИЯ - КУРСОРЫ - УСТАНОВИТЬ - Канал
+    &bChannel,          ///< ИЗМЕРЕНИЯ - КУРСОРЫ - УСТАНОВИТЬ - Канал
     &bSet_U,                ///< ИЗМЕРЕНИЯ - КУРСОРЫ - УСТАНОВИТЬ - Курсоры U
     &bSet_T,                ///< ИЗМЕРЕНИЯ - КУРСОРЫ - УСТАНОВИТЬ - Курсоры Т
     &b100,              ///< ИЗМЕРЕНИЯ - КУРСОРЫ - УСТАНОВИТЬ - 100%
-    &bSet_Movement,         ///< ИЗМЕРЕНИЯ - КУРСОРЫ - УСТАНОВИТЬ - Перемещение
+    &bMovement,         ///< ИЗМЕРЕНИЯ - КУРСОРЫ - УСТАНОВИТЬ - Перемещение
     PageName::Measures_Cursors_Set, &PageMeasuresCursors::self, IsActive_PageSet, E_VB, E_VV, PageMeasuresCursors::PageSet::OnKey
 )
 

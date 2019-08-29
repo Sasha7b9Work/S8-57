@@ -73,27 +73,27 @@ DEF_GRAPH_BUTTON_HINTS_3(bFunction_Screen,                                      
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void OnPress_Function_Type()
+static void OnPress_Type()
 {
     Math::CircleIncrease<int8>((int8 *)&MATH_FUNC, 0, 1);
 }
 
-static void Draw_Function_Type_Sum(int x, int y)
+static void Draw_Type_Sum(int x, int y)
 {
     HLine(10).Draw(x + 4, y + 9);
     VLine(10).Draw(x + 9, y + 4);
 }
 
-static void Draw_Function_Type_Mul(int x, int y)
+static void Draw_Type_Mul(int x, int y)
 {
     Font::SetCurrent(Font::Type::_UGO2);
     Char(SYMBOL_MATH_FUNC_MUL).Draw4SymbolsInRect(x + 4, y + 3);
     Font::SetCurrent(Font::Type::_8);
 }
 
-static void Draw_Function_Type(int x, int y)
+static void Draw_Type(int x, int y)
 {
-    const pFuncVII funcs[2] = { Draw_Function_Type_Sum, Draw_Function_Type_Mul };
+    const pFuncVII funcs[2] = { Draw_Type_Sum, Draw_Type_Mul };
     funcs[MATH_FUNC](x, y);
 }
 
@@ -102,47 +102,47 @@ static bool IsActive_Type()
     return FUNC_MODE_DRAW_IS_ENABLED;
 }
 
-DEF_GRAPH_BUTTON_HINTS_2(bFunction_Type,                                                                                                                    //--- СЕРВИС - ФУНКЦИЯ - Вид ---
+DEF_GRAPH_BUTTON_HINTS_2( bType,                                                                                                                             //--- СЕРВИС - ФУНКЦИЯ - Вид ---
     "Вид",
     "Выбор математической функции",
-    &PageMeasuresMath::self, IsActive_Type, OnPress_Function_Type, Draw_Function_Type,
-    Draw_Function_Type_Sum, "Сложение",
-    Draw_Function_Type_Mul, "Умножение"
+    &PageMeasuresMath::self, IsActive_Type, OnPress_Type, Draw_Type,
+    Draw_Type_Sum, "Сложение",
+    Draw_Type_Mul, "Умножение"
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void OnPress_Function_ModeRegSet()
+static void OnPress_ModeArrows()
 {
     Math::CircleIncrease<int8>((int8 *)&MATH_MODE_REG_SET, 0, 1);
 }
 
-static void Draw_Function_ModeRegSet_Range(int x, int y)
+static void Draw_ModeArrows_Range(int x, int y)
 {
     Char('M').Draw(x + 7, y + 5);
 }
 
-static void Draw_Function_ModeRegSet_RShift(int x, int y)
+static void Draw_ModeArrows_RShift(int x, int y)
 {
     String("См").Draw(x + 5, y + 5);
 }
 
-static void Draw_Function_ModeRegSet(int x, int y)
+static void Draw_ModeArrows(int x, int y)
 {
-    static const pFuncVII funcs[2] = { Draw_Function_ModeRegSet_Range, Draw_Function_ModeRegSet_RShift };
+    static const pFuncVII funcs[2] = { Draw_ModeArrows_Range, Draw_ModeArrows_RShift };
     funcs[MATH_MODE_REG_SET](x, y);
 }
 
-static bool IsActive_ModeRegSet()
+static bool IsActive_ModeArrows()
 {
     return FUNC_MODE_DRAW_IS_ENABLED;
 }
 
-DEF_GRAPH_BUTTON_HINTS_2(bFunction_ModeRegSet,                                                                                            //--- СЕРВИС - ФУНКЦИЯ - Режим ручки УСТАНОВКА ---
+DEF_GRAPH_BUTTON_HINTS_2( bModeArrows,                                                                                                     //--- СЕРВИС - ФУНКЦИЯ - Режим ручки УСТАНОВКА ---
     "Режим ручки УСТАНОВКА",
     "Выбор режима ручки УСТАНОВКА - управление масштабом или смещением",
-    &PageMeasuresMath::self, IsActive_ModeRegSet, OnPress_Function_ModeRegSet, Draw_Function_ModeRegSet,
-    Draw_Function_ModeRegSet_Range, "Управление масштабом",
-    Draw_Function_ModeRegSet_RShift, "Управление смещением"
+    &PageMeasuresMath::self, IsActive_ModeArrows, OnPress_ModeArrows, Draw_ModeArrows,
+    Draw_ModeArrows_Range, "Управление масштабом",
+    Draw_ModeArrows_RShift, "Управление смещением"
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -289,8 +289,8 @@ DEF_PAGE_5( pageMath, // -V641                                                  
     "МАТЕМАТИКА",
     "Установка и выбор математической функции - сложения или умножения",
     &bFunction_Screen,
-    &bFunction_Type,
-    &bFunction_ModeRegSet,
+    &bType,
+    &bModeArrows,
     &bRangeA,
     &bRangeB,
     PageName::Measures_Math, &PageMeasures::self, IsActive_Function, OnOpenClose_Function, E_VV, HandlerKey_Function
