@@ -106,28 +106,28 @@ static const GovernorColor name(&di##name);
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #define DEF_GRAPH_BUTTON(name, title, hint, keeper, funcActive, handlerPress, funcDraw)                                                                                                     \
 static const DataGraphButton dgb##name = { handlerPress, funcDraw, nullptr };                                                                                                               \
-static const DataItem hi##name = { Item::Type::GovernorColor, title, hint, keeper, funcActive, &dgb##name };                                                                                \
-static const GraphButton name(&hi##name);
+static const DataItem di##name = { Item::Type::GovernorColor, title, hint, keeper, funcActive, &dgb##name };                                                                                \
+static const GraphButton name(&di##name);
 
 #define DEF_GRAPH_BUTTON_HINTS_2(name, title, hint, keeper, funcActive, handlerPress, funcDraw, funcDrawHint1, hint1, funcDrawHint2, hint2)                                                 \
-static const StructHelpDrawButton h##name[] = { { funcDrawHint1, hint1 }, { funcDrawHint2, hint2 }, { nullptr } };                                                                          \
-static const DataGraphButton dgb##name = { handlerPress, funcDraw, h##name };                                                                                                               \
-static const DataItem hi##name = { Item::Type::GovernorColor, title, hint, keeper, funcActive, &dgb##name };                                                                                \
-static const GraphButton name(&hi##name);
+static const StructHelpDrawButton shdb##name[] = { { funcDrawHint1, hint1 }, { funcDrawHint2, hint2 }, { nullptr } };                                                                       \
+static const DataGraphButton dgb##name = { handlerPress, funcDraw, shdb##name };                                                                                                            \
+static const DataItem di##name = { Item::Type::GovernorColor, title, hint, keeper, funcActive, &dgb##name };                                                                                \
+static const GraphButton name(&di##name);
 
 #define DEF_GRAPH_BUTTON_HINTS_3(name, title, hint, keeper, funcActive, handlerPress, funcDraw, funcDrawHint1, hint1, funcDrawHint2, hint2, funcDrawHint3, hint3)                           \
-static const StructHelpDrawButton h##name[] = { { funcDrawHint1, hint1 }, { funcDrawHint2, hint2 }, { funcDrawHint3, hint3 }, { nullptr } };                                                \
-static const DataGraphButton dgb##name = { handlerPress, funcDraw, h##name };                                                                                                               \
-static const DataItem hi##name = { Item::Type::GovernorColor, title, hint, keeper, funcActive, &dgb##name };                                                                                \
-static const GraphButton name(&hi##name);
+static const StructHelpDrawButton shdb##name[] = { { funcDrawHint1, hint1 }, { funcDrawHint2, hint2 }, { funcDrawHint3, hint3 }, { nullptr } };                                             \
+static const DataGraphButton dgb##name = { handlerPress, funcDraw, shdb##name };                                                                                                            \
+static const DataItem di##name = { Item::Type::GovernorColor, title, hint, keeper, funcActive, &dgb##name };                                                                                \
+static const GraphButton name(&di##name);
 
-#define DEF_GRAPH_BUTTON_HINTS_5(name, title, hint, keeper, funcActive, funcPress, funcDraw,                                                                                                \
-    FuncDrawHint1, hint1, FuncDrawHint2, hint2, FuncDrawHint3, hint3, FuncDrawHint4, hint4, FuncDrawHint5, hint5)                                                                           \
-static const StructHelpDrawButton h##name[] = {{ FuncDrawHint1, hint1 }, { FuncDrawHint2, hint2 },                                                                                          \
-    { FuncDrawHint3, hint3 }, { FuncDrawHint4, hint4 }, { FuncDrawHint5, hint5 }, {nullptr} };                                                                                              \
-static const DataGraphButton dgb##name = {funcPress, funcDraw, h##name};                                                                                                                    \
-static const DataItem hi##name = { Item::Type::GovernorColor, title, hint, keeper, funcActive, &dgb##name };                                                                                \
-static const GraphButton name(&hi##name);
+#define DEF_GRAPH_BUTTON_HINTS_5(name, title, hint, keeper, funcActive, handlerPress, funcDraw,                                                                                             \
+    funcDrawHint1, hint1, funcDrawHint2, hint2, funcDrawHint3, hint3, funcDrawHint4, hint4, funcDrawHint5, hint5)                                                                           \
+static const StructHelpDrawButton shdb##name[] = { { funcDrawHint1, hint1 }, { funcDrawHint2, hint2 },                                                                                      \
+    { funcDrawHint3, hint3 }, { funcDrawHint4, hint4 }, { funcDrawHint5, hint5 }, { nullptr } };                                                                                            \
+static const DataGraphButton dgb##name = { handlerPress, funcDraw, shdb##name };                                                                                                            \
+static const DataItem di##name = { Item::Type::GovernorColor, title, hint, keeper, funcActive, &dgb##name };                                                                                \
+static const GraphButton name(&di##name);
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #define DEF_PAGE_1(name, title, hint, item1, namePage, keeper, funcActive, funcOpenClose, funcDraw, funcRegSet)                                                                                 \

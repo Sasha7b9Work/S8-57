@@ -87,32 +87,32 @@ void DrawMenuCursTime(int x, int y, bool left, bool right)
     }
 }
 
-static void Draw_Set_T_disable(int x, int y)
+static void Draw_T_disable(int x, int y)
 {
     String("T").Draw(x + 7, y + 5);
 }
 
-static void Draw_Set_T_disableBoth(int x, int y)
+static void Draw_T_disableBoth(int x, int y)
 {
     DrawMenuCursTime(x, y, false, false);
 }
 
-static void Draw_Set_T_enableLeft(int x, int y)
+static void Draw_T_enableLeft(int x, int y)
 {
     DrawMenuCursTime(x, y, true, false);
 }
 
-static void Draw_Set_T_enableRight(int x, int y)
+static void Draw_T_enableRight(int x, int y)
 {
     DrawMenuCursTime(x, y, false, true);
 }
 
-static void Draw_Set_T_enableBoth(int x, int y)
+static void Draw_T_enableBoth(int x, int y)
 {
     DrawMenuCursTime(x, y, true, true);
 }
 
-void PageMeasuresCursors::PageSet::OnPress_Set_T()
+void PageMeasuresCursors::PageSet::OnPress_T()
 {
     if (CURS_ACTIVE_T || CURsT_DISABLED)
     {
@@ -121,17 +121,17 @@ void PageMeasuresCursors::PageSet::OnPress_Set_T()
     CURS_ACTIVE = Cursors::Active::T;
 }
 
-static void Draw_Set_T(int x, int y)
+static void Draw_T(int x, int y)
 {
     if (CURsT_DISABLED)
     {
-        Draw_Set_T_disable(x, y);
+        Draw_T_disable(x, y);
     }
     else
     {
         if (!CURS_ACTIVE_T)
         {
-            Draw_Set_T_disableBoth(x, y);
+            Draw_T_disableBoth(x, y);
         }
         else
         {
@@ -140,29 +140,29 @@ static void Draw_Set_T(int x, int y)
             CalculateConditions((int16)CURsT_POS(source, 0), (int16)CURsT_POS(source, 1), CURsT_CNTRL, &condLeft, &condDown);
             if (condLeft && condDown)
             {
-                Draw_Set_T_enableBoth(x, y);
+                Draw_T_enableBoth(x, y);
             }
             else if (condLeft)
             {
-                Draw_Set_T_enableLeft(x, y);
+                Draw_T_enableLeft(x, y);
             }
             else
             {
-                Draw_Set_T_enableRight(x, y);
+                Draw_T_enableRight(x, y);
             }
         }
     }
 }
 
-DEF_GRAPH_BUTTON_HINTS_5( bSet_T,                                                                                                      //--- ИЗМЕРЕНИЯ - КУРСОРЫ - УСТАНОВИТЬ - Курсоры Т ---
+DEF_GRAPH_BUTTON_HINTS_5( bT,                                                                                                          //--- ИЗМЕРЕНИЯ - КУРСОРЫ - УСТАНОВИТЬ - Курсоры Т ---
     "Курсоры T",
     "Выбор курсоров времени для индикации и управления",
-    &PageMeasuresCursors::PageSet::self, E_BtV, PageMeasuresCursors::PageSet::OnPress_Set_T, Draw_Set_T,
-    Draw_Set_T_disable,     "курсоры времени выключены",
-    Draw_Set_T_disableBoth, "курсоры времени включены",
-    Draw_Set_T_enableLeft,  "курсоры времени включены, управление левым курсором",
-    Draw_Set_T_enableRight, "курсоры времени включены, управление правым курсором",
-    Draw_Set_T_enableBoth,  "курсоры времени включены, управление обоими курсорами"
+    &PageMeasuresCursors::PageSet::self, E_BtV, PageMeasuresCursors::PageSet::OnPress_T, Draw_T,
+    Draw_T_disable,     "курсоры времени выключены",
+    Draw_T_disableBoth, "курсоры времени включены",
+    Draw_T_enableLeft,  "курсоры времени включены, управление левым курсором",
+    Draw_T_enableRight, "курсоры времени включены, управление правым курсором",
+    Draw_T_enableBoth,  "курсоры времени включены, управление обоими курсорами"
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -184,32 +184,32 @@ void DrawMenuCursVoltage(int x, int y, bool top, bool bottom)
     }
 }
 
-static void Draw_Set_U_disable(int x, int y)
+static void Draw_U_disable(int x, int y)
 {
     String('U').Draw(x + 7, y + 5);
 }
 
-static void Draw_Set_U_disableBoth(int x, int y)
+static void Draw_U_disableBoth(int x, int y)
 {
     DrawMenuCursVoltage(x, y, false, false);
 }
 
-static void Draw_Set_U_enableUpper(int x, int y)
+static void Draw_U_enableUpper(int x, int y)
 {
     DrawMenuCursVoltage(x, y, true, false);
 }
 
-static void Draw_Set_U_enableLower(int x, int y)
+static void Draw_U_enableLower(int x, int y)
 {
     DrawMenuCursVoltage(x, y, false, true);
 }
 
-static void Draw_Set_U_enableBoth(int x, int y)
+static void Draw_U_enableBoth(int x, int y)
 {
     DrawMenuCursVoltage(x, y, true, true);
 }
 
-void PageMeasuresCursors::PageSet::OnPress_Set_U()
+void PageMeasuresCursors::PageSet::OnPress_U()
 {
     if (CURS_ACTIVE_U || CURsU_DISABLED)
     {
@@ -218,18 +218,18 @@ void PageMeasuresCursors::PageSet::OnPress_Set_U()
     CURS_ACTIVE = Cursors::Active::U;
 }
 
-static void Draw_Set_U(int x, int y)
+static void Draw_U(int x, int y)
 {
     Chan::E source = CURS_SOURCE;
     if (CURsU_DISABLED)
     {
-        Draw_Set_U_disable(x, y);
+        Draw_U_disable(x, y);
     }
     else
     {
         if (!CURS_ACTIVE_U)
         {
-            Draw_Set_U_disableBoth(x, y);
+            Draw_U_disableBoth(x, y);
         }
         else
         {
@@ -237,30 +237,30 @@ static void Draw_Set_U(int x, int y)
             CalculateConditions((int16)Cursor::PosU(source, 0), (int16)Cursor::PosU(source, 1), CURsU_CNTRL, &condTop, &condDown);
             if (condTop && condDown)
             {
-                Draw_Set_U_enableBoth(x, y);
+                Draw_U_enableBoth(x, y);
             }
             else if (condTop)
             {
-                Draw_Set_U_enableUpper(x, y);
+                Draw_U_enableUpper(x, y);
             }
             else
             {
-                Draw_Set_U_enableLower(x, y);
+                Draw_U_enableLower(x, y);
             }
         }
     }
 }
 
 // Выбор курсора напряжения - курсор 1, курсор 2, оба курсора или отключены.
-DEF_GRAPH_BUTTON_HINTS_5( bSet_U,                                                                                                      //--- ИЗМЕРЕНИЯ - КУРСОРЫ - УСТАНОВИТЬ - Курсоры U ---
+DEF_GRAPH_BUTTON_HINTS_5( bU,                                                                                                          //--- ИЗМЕРЕНИЯ - КУРСОРЫ - УСТАНОВИТЬ - Курсоры U ---
     "Курсоры U",
     "Выбор курсоров напряжения для индикации и управления",
-    &PageMeasuresCursors::PageSet::self, E_BtV, PageMeasuresCursors::PageSet::OnPress_Set_U, Draw_Set_U,
-    Draw_Set_U_disable,     "курсоры напряжения выключены",
-    Draw_Set_U_disableBoth, "курсоры напряжения включены",
-    Draw_Set_U_enableUpper, "курсоры напряжения включены, управление верхним курсором",
-    Draw_Set_U_enableLower, "курсоры напряжения включены, управление нижним курсором",
-    Draw_Set_U_enableBoth,  "курсоры напряжения включены, управление обоими курсорами"
+    &PageMeasuresCursors::PageSet::self, E_BtV, PageMeasuresCursors::PageSet::OnPress_U, Draw_U,
+    Draw_U_disable,     "курсоры напряжения выключены",
+    Draw_U_disableBoth, "курсоры напряжения включены",
+    Draw_U_enableUpper, "курсоры напряжения включены, управление верхним курсором",
+    Draw_U_enableLower, "курсоры напряжения включены, управление нижним курсором",
+    Draw_U_enableBoth,  "курсоры напряжения включены, управление обоими курсорами"
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -384,8 +384,8 @@ DEF_PAGE_5( pageSet, // -V641 // -V1027                                         
     "УСТАНОВИТЬ",
     "Переход в режим курсорных измерений",
     &bChannel,          ///< ИЗМЕРЕНИЯ - КУРСОРЫ - УСТАНОВИТЬ - Канал
-    &bSet_U,                ///< ИЗМЕРЕНИЯ - КУРСОРЫ - УСТАНОВИТЬ - Курсоры U
-    &bSet_T,                ///< ИЗМЕРЕНИЯ - КУРСОРЫ - УСТАНОВИТЬ - Курсоры Т
+    &bU,                ///< ИЗМЕРЕНИЯ - КУРСОРЫ - УСТАНОВИТЬ - Курсоры U
+    &bT,                ///< ИЗМЕРЕНИЯ - КУРСОРЫ - УСТАНОВИТЬ - Курсоры Т
     &b100,              ///< ИЗМЕРЕНИЯ - КУРСОРЫ - УСТАНОВИТЬ - 100%
     &bMovement,         ///< ИЗМЕРЕНИЯ - КУРСОРЫ - УСТАНОВИТЬ - Перемещение
     PageName::Measures_Cursors_Set, &PageMeasuresCursors::self, IsActive_PageSet, E_VB, E_VV, PageMeasuresCursors::PageSet::OnKey

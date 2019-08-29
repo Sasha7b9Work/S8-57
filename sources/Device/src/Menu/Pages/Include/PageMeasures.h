@@ -43,9 +43,9 @@ struct PageMeasuresCursors
         /// ¬ыбрать следующий курсор
         static void IncCursCntrlT(Chan::E ch);
 
-        static void OnPress_Set_U();
+        static void OnPress_U();
 
-        static void OnPress_Set_T();
+        static void OnPress_T();
 
         static void SetCursPos100(Chan::E ch);
         /// »зменить значение позиции курсора напр€жени€ на delta точек
