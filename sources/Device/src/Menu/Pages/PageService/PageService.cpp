@@ -13,20 +13,15 @@
 #include "Keyboard/Keyboard.h"
 #include "Utils/CommonFunctions.h"
 #include "Utils/Math.h"
-#include <cstdio>
-
 #include "Hardware/HAL/HAL.h"
+#include <cstdio>
 
 
 using namespace Display::Primitives;
 using namespace Osci::Settings;
 
-extern const Page pageService;
 
-const Page * const PageService::self = (const Page *)&pageService;
-
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void OnPress_ResetSettings()
 {
     Settings::Load(true);
@@ -67,15 +62,17 @@ DEF_CHOICE_4( cSoundVolume,
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-DEF_PAGE_7( pageService, // -V641 // -V1027                                                                                                                                    //--- СЕРВИС ---
+DEF_PAGE_7( pService, // -V641 // -V1027                                                                                                                                     //--- СЕРВИС ---
     "СЕРВИС",
     "Дополнительные настройки, калибровка, поиск сигнала, математические функции",
     &bResetSettings,                        ///< СЕРВИС - Сброс настроек
     &bAutoSearch,                           ///< СЕРВИС - Поиск сигнала
-    PageService::PageCalibrate::self,    ///< СЕРВИС - КАЛИБРОВКА
+    PageService::PageCalibrate::self,       ///< СЕРВИС - КАЛИБРОВКА
     &cSoundVolume,                          ///< СЕРВИС - ЗВУК
-    PageRTC::self,          ///< СЕРВИС - ВРЕМЯ
-    PageService::PageInformation::self,  ///< СЕРВИС - ИНФОРМАЦИЯ
-    PageDebug::self,        ///< СЕРВИС - ОТЛАДКА
+    PageRTC::self,                          ///< СЕРВИС - ВРЕМЯ
+    PageService::PageInformation::self,     ///< СЕРВИС - ИНФОРМАЦИЯ
+    PageDebug::self,                        ///< СЕРВИС - ОТЛАДКА
     PageName::Service, nullptr, E_BtV, E_VB, E_VV, E_BfKE
 )
+
+const Page * const PageService::self = (const Page *)&pService;

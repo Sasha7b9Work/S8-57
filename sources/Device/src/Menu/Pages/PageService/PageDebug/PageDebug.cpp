@@ -24,13 +24,11 @@ extern const Page mainPage;
 extern const Page pADC;
 extern const Page pBalance;
 extern const Page pStretch;
-extern const Page pppShift;
 extern const Page pSerialNumber;
 
 const Page * const PageDebug::PageADC::self = (const Page *)&pADC;
 const Page * const PageDebug::PageADC::PageBalance::self = (const Page *)&pBalance;
 const Page * const PageDebug::PageADC::PageStretch::self = (const Page *)&pStretch;
-const Page * const PageDebug::PageADC::PageShift::self = (const Page *)&pppShift;
 const Page * const PageDebug::PageSerialNumber::self = (const Page *)&pSerialNumber;
 
 
@@ -268,7 +266,7 @@ static void OnPress_ADC_Shift_Reset()
     RShift::Set(Chan::B, SET_RSHIFT_B);
 }
 
-DEF_BUTTON( bADC_Shift_Reset,                                                                                                                       //-- нркюдйю - южо - дно ялеы - яАПНЯ ---
+DEF_BUTTON( bShift_Reset,                                                                                                                       //-- нркюдйю - южо - дно ялеы - яАПНЯ ---
     "яАПНЯ",
     "",
     &PageDebug::PageADC::PageShift::self, E_BtV, OnPress_ADC_Shift_Reset
@@ -332,11 +330,11 @@ DEF_GOVERNOR( gShift_B10mV,                                                     
     &PageDebug::PageADC::PageShift::self, 0, OnChanged_Shift_B
 )
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-DEF_PAGE_7( pppShift, // -V641  // -V1027                                                                                                              //--- нркюдйю - южо - дно ялеы ---
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+DEF_PAGE_7( pShift, // -V641  // -V1027                                                                                                                    //--- нркюдйю - южо - дно ялеы ---
     "дно ялеы",
     "",
-    &bADC_Shift_Reset,   // нркюдйю - южо - дно ялеы - яАПНЯ
+    &bShift_Reset,   // нркюдйю - южо - дно ялеы - яАПНЯ
     &gShift_A2mV,    // нркюдйю - южо - дно ялеы - яЛ 1Й 2Лб ОНЯР
     &gShift_B2mV,    // нркюдйю - южо - дно ялеы - яЛ 2Й 2Лб ОНЯР
     &gShift_A5mV,    // нркюдйю - южо - дно ялеы - яЛ 1Й 5Лб ОНЯР
@@ -347,13 +345,15 @@ DEF_PAGE_7( pppShift, // -V641  // -V1027                                       
     &PageDebug::PageADC::self, E_BtV, E_VB, E_VV, E_BfKE
 )
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+const Page * const PageDebug::PageADC::PageShift::self = (const Page *)&pShift;
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 DEF_PAGE_3( pADC, //-V641 //-V1027
     "южо",
     "",
-    &pBalance, // нркюдйю - южо - аюкюмя
-    &pStretch, // нркюдйю - южо - пюяръфйю
-    &pppShift,   // нркюдйю - южо - дно ялеы
+    &pBalance,                              // нркюдйю - южо - аюкюмя
+    &pStretch,                              // нркюдйю - южо - пюяръфйю
+    PageDebug::PageADC::PageShift::self,    // нркюдйю - южо - дно ялеы
     PageName::Debug_ADC,
     &PageDebug::self, E_BtV, E_VB, E_VV, E_BfKE
 )
