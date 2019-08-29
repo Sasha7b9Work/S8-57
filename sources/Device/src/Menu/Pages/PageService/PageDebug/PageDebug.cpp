@@ -20,19 +20,8 @@
 using namespace Display::Primitives;
 using namespace Osci::Settings;
 
-extern const Page mainPage;
-extern const Page pADC;
-extern const Page pBalance;
-extern const Page pStretch;
-extern const Page pSerialNumber;
 
-const Page * const PageDebug::PageADC::self = (const Page *)&pADC;
-const Page * const PageDebug::PageADC::PageBalance::self = (const Page *)&pBalance;
-const Page * const PageDebug::PageADC::PageStretch::self = (const Page *)&pStretch;
-const Page * const PageDebug::PageSerialNumber::self = (const Page *)&pSerialNumber;
-
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 /// В этой структуре будут храниться данные серийного номера при открытой странице ppSerialNumer
 typedef struct
 {
@@ -113,6 +102,8 @@ DEF_PAGE_3( pBalance, // -V641 // -V1027                                        
     PageName::Debug_ADC_Balance,
     &PageDebug::PageADC::self, E_BtV, E_VB, E_VV, E_BfKE
 )
+
+const Page * const PageDebug::PageADC::PageBalance::self = (const Page *)&pBalance;
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static int16 stretchA;
@@ -252,6 +243,9 @@ DEF_PAGE_3( pStretch, // -V641 // -V1027                                        
     &PageDebug::PageADC::self, E_BtV, E_VB, E_VV, E_BfKE
 )
 
+const Page * const PageDebug::PageADC::PageStretch::self = (const Page *)&pStretch;
+
+
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void OnPress_ADC_Shift_Reset()
 {
@@ -357,6 +351,8 @@ DEF_PAGE_3( pADC, //-V641 //-V1027
     PageName::Debug_ADC,
     &PageDebug::self, E_BtV, E_VB, E_VV, E_BfKE
 )
+
+const Page * const PageDebug::PageADC::self = (const Page *)&pADC;
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 DEF_CHOICE_2( cStats,                                                                                                                                          //--- ОТЛАДКА - Статистика ---
@@ -555,7 +551,7 @@ static bool OnArrows_SerialNumber(KeyEvent /*event*/)
     return true;
 }
 
-DEF_PAGE_2( pSerialNumber, // -V641 // -V1027                                                                                                                       //--- ОТЛАДКА - С/Н ---
+DEF_PAGE_2( pSerialNumber, // -V641 // -V1027                                                                                                                         //--- ОТЛАДКА - С/Н ---
     "С/Н",
     "Запись серийного номера в OTP-память. ВНИМАНИЕ!!! ОТP-память - память с однократной записью.",
     &bSerialNumber_Change,          // ОТЛАДКА - С/Н - Перейти
@@ -563,6 +559,8 @@ DEF_PAGE_2( pSerialNumber, // -V641 // -V1027                                   
     PageName::Debug_SerialNumber,
     &PageDebug::self, E_BtV, OnOpenClose_SerialNumber, E_VV, OnArrows_SerialNumber
 )
+
+const Page * const PageDebug::PageSerialNumber::self = (const Page *)&pSerialNumber;
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 //static void OnPress_EraseData()

@@ -52,7 +52,7 @@ DEF_CHOICE_3( cCoupleA,                                                         
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void OnChanged_ChanA_Bandwidth(bool)
+static void OnChanged_BandwidthA(bool)
 {
     SET_BANDWIDTH_A.Load();
 }
@@ -62,7 +62,7 @@ DEF_CHOICE_2( cBandwidthA,                                                      
     "Задаёт полосу пропускания канала",
     "Полная",
     "20МГц",
-    SET_BANDWIDTH_A, &PageChannelA::self, E_BtV, OnChanged_ChanA_Bandwidth, E_VII
+    SET_BANDWIDTH_A, &PageChannelA::self, E_BtV, OnChanged_BandwidthA, E_VII
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

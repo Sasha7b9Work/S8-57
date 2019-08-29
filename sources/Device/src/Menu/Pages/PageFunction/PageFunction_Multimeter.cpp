@@ -4,12 +4,7 @@
 #include "Device.h"
 
 
-extern const Page pageCalibration;
-
-const Page * const PageMultimeter::PageCalibration::self = (const Page *)&pageCalibration;
-
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static bool FuncActive_RangesVoltageDC()
 {
     return MULTI_MEASURE == Multimeter::Measure::VoltageDC;
@@ -142,7 +137,7 @@ static void OnChanged_AVP(bool)
     Multimeter::ChangeAVP();
 }
 
-DEF_CHOICE_2 (cAVP,
+DEF_CHOICE_2 ( cAVP,
     "АВП",
     "Автовыбор предела",
     DISABLE_RU,
@@ -158,7 +153,7 @@ static void OnChanged_Zero(bool)
 
 static int8 zero = 0;
 
-DEF_CHOICE_2(cZero,
+DEF_CHOICE_2( cZero,
     "Нуль",
     "",
     DISABLE_RU,
@@ -166,7 +161,7 @@ DEF_CHOICE_2(cZero,
     zero, &PageMultimeter::self, E_BtV, OnChanged_Zero, E_VII
 )
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void PageMultimeter::Init()
 {
     OnChanged_Mode(true);
@@ -252,13 +247,15 @@ DEF_BUTTON( bCalibrate1,
     &PageMultimeter::PageCalibration::self, E_BtV, OnPress_Calibrate1
 )
 
-DEF_PAGE_2( pageCalibration, //-V641 //-V1027
+DEF_PAGE_2( pCalibration, //-V641 //-V1027
     "КАЛИБРОВКА",
     "Калибровка мультиметра",
     &bCalibrate0,
     &bCalibrate1,
     PageName::Function_Multimeter_Cal, &PageMultimeter::self, E_BtV, E_VB, E_VV, E_BfKE
 )
+
+const Page * const PageMultimeter::PageCalibration::self = (const Page *)&pCalibration;
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void PageMultimeter::DecodePassword(const KeyEvent &event)

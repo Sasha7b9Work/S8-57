@@ -11,12 +11,7 @@
 #include <cstring>
 
 
-extern const Page pCursors;
-
-const Page * const PageMeasuresCursors::self = (const Page *)&pCursors;
-
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 DEF_CHOICE_2( cShow,                                                                                                                                           //--- КУРСОРЫ - Показывать ---
     "Показывать",
     "Включает/отключает курсоры.",
@@ -87,3 +82,5 @@ DEF_PAGE_3( pCursors, // -V641 // -V1027                                        
     PageMeasuresCursors::PageSet::self,    ///< ИЗМЕРЕНИЯ - КУРСОРЫ - УСТАНОВИТЬ
     PageName::Measures_Cursors, &PageMeasures::self, E_BtV, E_VB, E_VV, E_BfKE
 )
+
+const Page * const PageMeasuresCursors::self = (const Page *)&pCursors;

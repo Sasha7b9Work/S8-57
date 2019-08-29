@@ -5,7 +5,7 @@
 
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void OnChanged_FreqMeter_Enable(bool)
+static void OnChanged_Enable(bool)
 {
     FrequencyCounter::Init();
 }
@@ -26,7 +26,7 @@ DEF_CHOICE_2( cEnable,                                                          
     "",
     DISABLE_RU,
     ENABLE_RU,
-    FREQ_METER_ENABLED, &PageFrequencyCounter::self, E_BtV, OnChanged_FreqMeter_Enable, E_VII
+    FREQ_METER_ENABLED, &PageFrequencyCounter::self, E_BtV, OnChanged_Enable, E_VII
 )
 
 

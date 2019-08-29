@@ -4,11 +4,6 @@
 #include "Hardware/Timer.h"
 
 
-extern const Page pCalibrate;
-
-const Page * const PageService::PageCalibrate::self = (const Page *)&pCalibrate;
-
-
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void OnChanged_Calibrator(bool)
 {
@@ -59,3 +54,5 @@ DEF_PAGE_2( pCalibrate, // -V641 // -V1027                                      
     &bCalibrate,      /// —≈–¬»— -  ¿À»¡–¿“Œ– -  ‡ÎË·Ó‚‡Ú¸
     PageName::Service_Calibrator, &PageService::self, E_BtV, E_VB, E_VV, E_BfKE
 )
+
+const Page * const PageService::PageCalibrate::self = (const Page *)&pCalibrate;

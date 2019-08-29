@@ -6,11 +6,6 @@
 #include "Recorder/Recorder_Display.h"
 
 
-extern const Page pShow;
-
-const Page * const PageRecorder::PageShow::self = (const Page *)&pShow;
-
-
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //DEF_CHOICE_3( cSource,                                                                                                                  //--- ‘”Õ ÷»ﬂ - –≈√»—“–¿“Œ– - œ–Œ—ÃŒ“– - »ÒÚÓ˜ÌËÍ ---
 //    "»ÒÚÓ˜ÌËÍ",
@@ -94,3 +89,5 @@ DEF_PAGE_3( pShow, // -V641 // -V1027                                           
     //PageRecorder::PageShow::PageView::self,        ///< ‘”Õ ÷»ﬂ - –≈√»—“–¿“Œ– - œ–Œ—Ã“Œ– - œ–Œ—ÃŒ“–
     PageName::Function_Recorder_Show, &PageRecorder::self, IsActive_PageShow, E_VB, E_VV, OnArrows_PageShow
 )
+
+const Page * const PageRecorder::PageShow::self = (const Page *)&pShow;

@@ -75,7 +75,7 @@ static bool IsActive_Mode()
     return SHOW_MEASURES;
 }
 
-DEF_CHOICE_2( cMode,                                                                                                                                      //--- ИЗМЕРЕНИЯ - АВТОМАТ - Вид ---
+_DEF_CHOICE_2( cMode,                                                                                                                                      //--- ИЗМЕРЕНИЯ - АВТОМАТ - Вид ---
     "Вид", "View",
     "Уменьшать или нет зону вывода сигнала для исключения перекрытия его результами измерений",
     "Decrease or no zone output signal to avoid overlapping of its measurement results",

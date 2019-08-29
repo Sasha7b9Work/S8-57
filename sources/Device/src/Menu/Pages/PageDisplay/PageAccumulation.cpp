@@ -9,12 +9,7 @@
 using namespace Osci::Settings;
 
 
-extern const Page pAccum;
-
-const Page * const PageDisplay::PageAccumulation::self = (const Page *)&pAccum;
-
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 DEF_CHOICE_2( cEnable,                                                                                                                                 //--- ƒ»—œÀ≈… - Õ¿ ŒœÀ≈Õ»≈ - –ÂÊËÏ ---
     "–ÂÊËÏ",
     "",
@@ -75,3 +70,5 @@ DEF_PAGE_3( pAccum, // -V641 // -V1027                                          
     &bClear,     ///< ƒ»—œÀ≈… - Õ¿ ŒœÀ≈Õ»≈ - Œ˜ËÒÚËÚ¸
     PageName::Display_Accumulation, &PageDisplay::self, IsActive_Accum, E_VB, E_VV, E_BfKE
 )
+
+const Page * const PageDisplay::PageAccumulation::self = (const Page *)&pAccum;

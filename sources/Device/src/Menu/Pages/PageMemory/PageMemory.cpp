@@ -22,16 +22,6 @@
 using namespace Display::Primitives;
 using namespace Osci::Settings;
 
-extern const Page pManager;
-extern const Page pMask;
-extern const Page pSetName;
-
-const Page * const PageSetName::self = (const Page *)&pSetName;
-const Page * const PageDrive::PageManager::self = (const Page *)&pManager;
-const Page * const PageDrive::PageMask::self = (const Page *)&pMask;
-
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 static void DrawSetMask();  // Эта функция рисует, когда выбран режим задания маски.
 static void DrawFileMask(int x, int y);
 static void DrawSetName();  // Эта функция рисует, когда нужно задать имя файла для сохранения
@@ -159,6 +149,7 @@ DEF_PAGE_3( pManager, // -V641                                                  
     &PageDrive::self, IsActive_Drive_Manager, PageMemory::OnOpenClose_Drive_Manager, E_VV, FileManager::OnArrows
 )
 
+const Page * const PageDrive::PageManager::self = (const Page *)&pManager;
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 DEF_CHOICE_2( cDrive_Name,                                                                                                                            //--- ПАМЯТЬ - ВНЕШН ЗУ - Имя файла ---
@@ -444,6 +435,7 @@ DEF_PAGE_3( pMask, // -V641                                                     
     &PageDrive::self, IsActive_Mask, OnOpenClose_Mask, E_VV, OnArrows_Mask
 )
 
+const Page * const PageDrive::PageMask::self = (const Page *)&pMask;
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 DEF_CHOICE_2( cDrive_Autoconnect,                                                                                                               //--- ПАМЯТЬ - ВНЕШН ЗУ - Автоподключение ---
@@ -680,3 +672,5 @@ DEF_PAGE_4( pSetName, // -V641                                                  
     &bSetName_Save,         /// ВВОД ИМЕНИ ФАЙЛА - Сохранить
     PageName::Memory_SetName, nullptr, E_BtV, E_VB, E_VV, OnArrows_SetName
 )
+
+const Page * const PageSetName::self = (const Page *)&pSetName;

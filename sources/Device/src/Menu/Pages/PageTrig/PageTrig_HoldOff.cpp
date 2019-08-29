@@ -6,12 +6,7 @@
 #include "Settings/Settings.h"
 
 
-extern const Page pHoldOff;
-
-const Page * const PageTrig::PageHoldOff::self = (const Page *)&pHoldOff;
-
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void OnChanged_HoldOff(bool)
 {
     Osci::Settings::LoadHoldfOff();
@@ -53,3 +48,5 @@ DEF_PAGE_2( pHoldOff, // -V641 // -V1027                                        
     PageName::Trig_HoldOff,
     &PageTrig::self, E_BtV, E_VB, E_VV, E_BfKE
 )
+
+const Page * const PageTrig::PageHoldOff::self = (const Page *)&pHoldOff;

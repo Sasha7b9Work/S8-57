@@ -269,7 +269,7 @@ struct DataChoice
     int8       *cell;
     pString    *names;          ///< Варианты выбора.
     pFuncVB     handlerChange;  ///< Функция должна вызываться после изменения значения элемента.
-    pFuncVII    funcDraw;       ///< Функция вызывается после отрисовки элемента. 
+    pFuncVII    funcAfterDraw;  ///< Функция вызывается после отрисовки элемента. 
 };
 
 class Choice : public Item
