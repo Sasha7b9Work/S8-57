@@ -4,12 +4,7 @@
 #include "Settings/Settings.h"
 
 
-extern const Page ppFreqMeter;
-
-const Page * const PageFrequencyCounter::self = (const Page *)&ppFreqMeter;
-
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void OnChanged_FreqMeter_Enable(bool)
 {
     FrequencyCounter::Init();
@@ -112,7 +107,7 @@ const Choice *PageFrequencyCounter::GetChoiceNumPeriods()
     return (const Choice *)&cNumPeriods;
 }
 
-DEF_PAGE_5( ppFreqMeter, // -V641                                                                                                                              //--- ‘”Õ ÷»ﬂ - ◊¿—“Œ“ŒÃ≈– ---
+DEF_PAGE_5( pFreqMeter, // -V641                                                                                                                               //--- ‘”Õ ÷»ﬂ - ◊¿—“Œ“ŒÃ≈– ---
     "◊¿—“Œ“ŒÃ≈–",
     "",
     &cEnable,           ///< »«Ã≈–≈Õ»ﬂ - ◊¿—“Œ“ŒÃ≈– - ◊‡ÒÚÓÚÓÏÂ
@@ -122,3 +117,5 @@ DEF_PAGE_5( ppFreqMeter, // -V641                                               
     &cNumPeriods,       ///< »«Ã≈–≈Õ»ﬂ - ◊¿—“Œ“ŒÃ≈– -  ÓÎ-‚Ó ÔÂËÓ‰Ó‚
     PageName::Function_FrequencyCounter, &PageFunction::self, E_BtV, E_VB, E_VV, E_BfKE
 )
+
+const Page * const PageFrequencyCounter::self = (const Page *)&pFreqMeter;

@@ -26,7 +26,6 @@ extern const Page pADC;
 extern const Page pBalance;
 extern const Page pStretch;
 extern const Page pppShift;
-extern const Page ppSettings;
 extern const Page pSerialNumber;
 
 const Page * const PageDebug::self = (const Page *)&pageDebug;
@@ -34,7 +33,6 @@ const Page * const PageDebug::PageADC::self = (const Page *)&pADC;
 const Page * const PageDebug::PageADC::PageBalance::self = (const Page *)&pBalance;
 const Page * const PageDebug::PageADC::PageStretch::self = (const Page *)&pStretch;
 const Page * const PageDebug::PageADC::PageShift::self = (const Page *)&pppShift;
-const Page * const PageDebug::PageSettings::self = (const Page *)&ppSettings;
 const Page * const PageDebug::PageSerialNumber::self = (const Page *)&pSerialNumber;
 
 
@@ -446,12 +444,13 @@ static void DebugShowSetInfo_Draw()
     Painter::EndScene();
 }
 
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void OnOpenClose_Settings(bool)
 {
     Display::SetDrawMode(Display::DrawMode::Auto, DebugShowSetInfo_Draw);
 }
 
-DEF_PAGE_5( ppSettings, // -V641 // -V1027                                                                                                                     //--- Œ“À¿ƒ ¿ - Õ¿—“–Œ… » ---
+DEF_PAGE_5( pSettings, // -V641 // -V1027                                                                                                                       //--- Œ“À¿ƒ ¿ - Õ¿—“–Œ… » ---
     "Õ¿—“–Œ… »",
     "œÓÍ‡Á‡Ú¸ ËÌÙÓÏ‡ˆË˛ Ó Ì‡ÒÚÓÈÍ‡ı",
     0,
@@ -462,6 +461,9 @@ DEF_PAGE_5( ppSettings, // -V641 // -V1027                                      
     PageName::Debug_Settings,
     &PageDebug::self, E_BtV, OnOpenClose_Settings, E_VV, E_BfKE
 )
+
+const Page * const PageDebug::PageSettings::self = (const Page *)&pSettings;
+
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static bool IsActive_SaveFirmware()
@@ -591,7 +593,7 @@ DEF_PAGE_6( pageDebug, // -V641 // -V1027                                       
 //    &cDisplayOrientation,                           ///< Œ“À¿ƒ ¿ - ŒËÂÌÚ‡ˆËˇ
 //    &mgPred,			                            ///< Œ“À¿ƒ ¿ - œÂ‰Á‡ÔÛÒÍ
 //    &mgPost,			                            ///< Œ“À¿ƒ ¿ - œÓÒÎÂÁ‡ÔÛÒÍ
-//    &ppSettings,		                            ///< Œ“À¿ƒ ¿ - Õ¿—“–Œ… »
+//    &pSettings,		                            ///< Œ“À¿ƒ ¿ - Õ¿—“–Œ… »
 //    &pSerialNumber,                              ///< Œ“À¿ƒ ¿ - —/Õ
 //    &bEraseData,                                  ///< Œ“À¿ƒ ¿ - —ÚÂÂÚ¸ ‰‡ÌÌ˚Â
     PageName::Debug,

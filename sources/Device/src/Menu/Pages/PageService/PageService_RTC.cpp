@@ -5,16 +5,7 @@
 #include "Settings/SettingsNRST.h"
 
 
-extern const Page pRTC;
-extern const Page pageRTC_Set;
-extern const Page pageRTC_Correction;
-
-const Page * const PageRTC::self = (const Page *)&pRTC;
-const Page * const PageRTC::PageCorrect::self = (const Page *)&pageRTC_Correction;
-const Page * const PageRTC::PageSet::self = (const Page *)&pageRTC_Set;
-
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 DEF_PAGE_2( pRTC, // -V641 // -V1027                                                                                                                                 //--- СЕРВИС - ВРЕМЯ ---
     "ВРЕМЯ",
     "Установка и настройка времени",
@@ -23,6 +14,8 @@ DEF_PAGE_2( pRTC, // -V641 // -V1027                                            
     PageName::Service_RTC,
     &PageService::self, E_BtV, E_VB, E_VV, E_BfKE
 )
+
+const Page * const PageRTC::self = (const Page *)&pRTC;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -38,50 +31,53 @@ DEF_PAGE_2( pRTC, // -V641 // -V1027                                            
 //    "панели управления. Меню установки текущего временя закроется с сохранением нового текущего времени. Нажатие длительное удержание кнопки на "
 //    "любом другом элементе приведёт к закрытию меню установки текущего вре    мени без сохранения нового текущего времени"
 //    ,
-//    pageRTC_Set, 0, dServicetime, hours, minutes, secondes, month, day, year
+//    pSet, 0, dServicetime, hours, minutes, secondes, month, day, year
 //)
 
-DEF_BUTTON( bSetLeft,
+DEF_BUTTON( bSet_Left,
     "Влево",
     "Предыдущий элемент",
     &PageRTC::PageSet::self, E_BtV, E_VV
 )
 
-DEF_BUTTON( bSetRight,
+DEF_BUTTON( bSet_Right,
     "Вправо",
     "Следующий элемент",
     &PageRTC::PageSet::self, E_BtV, E_VV
 )
 
-DEF_BUTTON( bSetUp,
+DEF_BUTTON( bSet_Up,
     "Больше",
     "Увеличить",
     &PageRTC::PageSet::self, E_BtV, E_VV
 )
 
-DEF_BUTTON( bSetDown,
+DEF_BUTTON( bSet_Down,
     "Меньше",
     "Уменьшить",
     &PageRTC::PageSet::self, E_BtV, E_VV
 )
 
-DEF_BUTTON( bSetPick,
+DEF_BUTTON( bSet_Pick,
     "Выбрать",
     "Выбор подсвеченного элемента",
     &PageRTC::PageSet::self, E_BtV, E_VV
 )
 
-DEF_PAGE_5( pageRTC_Set, //-V641 //-V1027
+DEF_PAGE_5( pSet, //-V641 //-V1027
     "УСТАНОВКА",
     "Установка текущего времени",
-    &bSetLeft,
-    &bSetRight,
-    &bSetUp,
-    &bSetDown,
-    &bSetPick,
+    &bSet_Left,
+    &bSet_Right,
+    &bSet_Up,
+    &bSet_Down,
+    &bSet_Pick,
     PageName::Service_RTC_Set,
     &PageRTC::self, E_BtV, E_VB, E_VV, E_BfKE
 )
+
+const Page * const PageRTC::PageSet::self = (const Page *)&pSet;
+
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //static void OnChanged_Time_Correction()
@@ -91,47 +87,50 @@ DEF_PAGE_5( pageRTC_Set, //-V641 //-V1027
 //_DEF_GOVERNOR(tRTC_Correction,                                                                                                                           //--- СЕРВИС - ВРЕМЯ - Коррекция ---
 //    "Коррекция",
 //    "Установка корректирующего коэффициента для компенсации хода времени",
-//    NRST_CORRECTION_TIME, -63, 63, pageRTC_Correction, 0, OnChanged_Time_Correction, 0
+//    NRST_CORRECTION_TIME, -63, 63, pCorrection, 0, OnChanged_Time_Correction, 0
 //)
 
-DEF_BUTTON( bCorrLeft,
+DEF_BUTTON( bCorrection_Left,
     "Влево",
     "Предыдущий элемент",
     &PageRTC::PageCorrect::self, E_BtV, E_VV
 )
 
-DEF_BUTTON( bCorrRight,
+DEF_BUTTON( bCorrection_Right,
     "Вправо",
     "Следующий элемент",
     &PageRTC::PageCorrect::self, E_BtV, E_VV
 )
 
-DEF_BUTTON( bCorrUp,
+DEF_BUTTON( bCorrection_Up,
     "Больше",
     "Увеличить",
     &PageRTC::PageCorrect::self, E_BtV, E_VV
 )
 
-DEF_BUTTON( bCorrDown,
+DEF_BUTTON( bCorrection_Down,
     "Меньше",
     "Уменьшить",
     &PageRTC::PageCorrect::self, E_BtV, E_VV
 )
 
-DEF_BUTTON( bCorrPick,
+DEF_BUTTON( bCorrection_Pick,
     "Выбор",
     "Активировать подсвеченный элемент",
     &PageRTC::PageCorrect::self, E_BtV, E_VV
 )
 
-DEF_PAGE_5( pageRTC_Correction, //-V641 //-V1027
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+DEF_PAGE_5( pCorrection, //-V641 //-V1027
     "КОРРЕКЦИЯ",
     "Коррекция скорости хода часов",
-    &bCorrLeft,
-    &bCorrRight,
-    &bCorrUp,
-    &bCorrDown,
-    &bCorrPick,
+    &bCorrection_Left,
+    &bCorrection_Right,
+    &bCorrection_Up,
+    &bCorrection_Down,
+    &bCorrection_Pick,
     PageName::Service_RTC_Correct,
     &PageRTC::self, E_BtV, E_VB, E_VV, E_BfKE
 )
+
+const Page * const PageRTC::PageCorrect::self = (const Page *)&pCorrection;

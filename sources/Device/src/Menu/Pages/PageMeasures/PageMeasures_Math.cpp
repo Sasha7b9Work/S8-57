@@ -16,12 +16,8 @@
 using namespace Display::Primitives;
 using namespace Osci::Settings;
 
-extern const Page pageMath;
 
-const Page * const PageMeasuresMath::self = (const Page *)&pageMath;
-
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void OnPress_Screen()
 {
     if (FFT_ENABLED)
@@ -192,12 +188,12 @@ DEF_GRAPH_BUTTON( bRangeB,                                                      
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static bool IsActive_Function()
+static bool IsActive_Math()
 {
     return !FFT_ENABLED;
 }
 
-static void OnOpenClose_Function(bool)
+static void OnOpenClose_Math(bool)
 {
     if (FFT_ENABLED)
     {
@@ -205,7 +201,7 @@ static void OnOpenClose_Function(bool)
     }
 }
 
-static bool HandlerKey_Function(KeyEvent event) // -V2506
+static bool OnArrows_Function(KeyEvent event) // -V2506
 {
     if (!FUNC_MODE_DRAW_IS_ENABLED)
     {
@@ -285,7 +281,7 @@ static bool HandlerKey_Function(KeyEvent event) // -V2506
     return true;
 }
 
-DEF_PAGE_5( pageMath, // -V641                                                                                                                                   //--- СЕРВИС - ФУНКЦИЯ ---
+DEF_PAGE_5( pMath, // -V641                                                                                                                                        //--- СЕРВИС - ФУНКЦИЯ ---
     "МАТЕМАТИКА",
     "Установка и выбор математической функции - сложения или умножения",
     &bScreen,
@@ -293,5 +289,7 @@ DEF_PAGE_5( pageMath, // -V641                                                  
     &bModeArrows,
     &bRangeA,
     &bRangeB,
-    PageName::Measures_Math, &PageMeasures::self, IsActive_Function, OnOpenClose_Function, E_VV, HandlerKey_Function
+    PageName::Measures_Math, &PageMeasures::self, IsActive_Math, OnOpenClose_Math, E_VV, OnArrows_Function
 )
+
+const Page * const PageMeasuresMath::self = (const Page *)&pMath;

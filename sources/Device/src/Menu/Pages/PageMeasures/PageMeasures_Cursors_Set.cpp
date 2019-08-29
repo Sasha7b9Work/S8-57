@@ -16,10 +16,6 @@ using namespace Osci::Measurements;
 using Osci::Measurements::Cursors::Cursor;
 using Osci::Measurements::Measure;
 
-extern const Page pageSet;
-
-const Page * const PageMeasuresCursors::PageSet::self = (const Page *)&pageSet;
-
 const float PageMeasuresCursors::PageSet::MAX_POS_U = 200.0F;
 const float PageMeasuresCursors::PageSet::MAX_POS_T = 280.0F;
 
@@ -318,7 +314,7 @@ DEF_GRAPH_BUTTON_HINTS_2( bMovement,                                            
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-bool PageMeasuresCursors::PageSet::OnKey(KeyEvent event) //-V2506
+bool PageMeasuresCursors::PageSet::OnArrows(KeyEvent event) //-V2506
 {
     TypePress::E type = event.type;
 
@@ -375,12 +371,12 @@ bool PageMeasuresCursors::PageSet::OnKey(KeyEvent event) //-V2506
     return true;
 }
 
-static bool IsActive_PageSet()
+static bool IsActive_Set()
 {
     return CURS_SHOW;
 }
 
-DEF_PAGE_5( pageSet, // -V641 // -V1027                                                                                                            //--- ÈÇÌÅĞÅÍÈß - ÊÓĞÑÎĞÛ - ÓÑÒÀÍÎÂÈÒÜ ---
+DEF_PAGE_5( pSet, // -V641 // -V1027                                                                                                              //--- ÈÇÌÅĞÅÍÈß - ÊÓĞÑÎĞÛ - ÓÑÒÀÍÎÂÈÒÜ ---
     "ÓÑÒÀÍÎÂÈÒÜ",
     "Ïåğåõîä â ğåæèì êóğñîğíûõ èçìåğåíèé",
     &bChannel,          ///< ÈÇÌÅĞÅÍÈß - ÊÓĞÑÎĞÛ - ÓÑÒÀÍÎÂÈÒÜ - Êàíàë
@@ -388,8 +384,10 @@ DEF_PAGE_5( pageSet, // -V641 // -V1027                                         
     &bT,                ///< ÈÇÌÅĞÅÍÈß - ÊÓĞÑÎĞÛ - ÓÑÒÀÍÎÂÈÒÜ - Êóğñîğû Ò
     &b100,              ///< ÈÇÌÅĞÅÍÈß - ÊÓĞÑÎĞÛ - ÓÑÒÀÍÎÂÈÒÜ - 100%
     &bMovement,         ///< ÈÇÌÅĞÅÍÈß - ÊÓĞÑÎĞÛ - ÓÑÒÀÍÎÂÈÒÜ - Ïåğåìåùåíèå
-    PageName::Measures_Cursors_Set, &PageMeasuresCursors::self, IsActive_PageSet, E_VB, E_VV, PageMeasuresCursors::PageSet::OnKey
+    PageName::Measures_Cursors_Set, &PageMeasuresCursors::self, IsActive_Set, E_VB, E_VV, PageMeasuresCursors::PageSet::OnArrows
 )
+
+const Page * const PageMeasuresCursors::PageSet::self = (const Page *)&pSet;
 
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
