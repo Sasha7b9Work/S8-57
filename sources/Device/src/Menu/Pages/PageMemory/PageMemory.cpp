@@ -22,13 +22,11 @@
 using namespace Display::Primitives;
 using namespace Osci::Settings;
 
-extern const Page ppDrive;
 extern const Page pManager;
 extern const Page pMask;
 extern const Page pSetName;
 
 const Page * const PageSetName::self = (const Page *)&pSetName;
-const Page * const PageDrive::self = (const Page *)&ppDrive;
 const Page * const PageDrive::PageManager::self = (const Page *)&pManager;
 const Page * const PageDrive::PageMask::self = (const Page *)&pMask;
 
@@ -147,7 +145,7 @@ DEF_PAGE_SB(        pManager,                                                   
     0,
     &bManager_LevelUp,    // ÏÀÌßÒÜ - ÂÍÅØÍ ÇÓ - ÊÀÒÀËÎÃ - Âûéòè èç êàòàëîãà
     &bManager_LevelDown,  // ÏÀÌßÒÜ - ÂÍÅØÍ ÇÓ - ÊÀÒÀËÎÃ - Âîéòè â êàòàëîã
-    Page::Name::SB_Memory_Drive_Manager, &ppDrive, IsActive_Drive_Manager, PageMemory::OnOpenClose_Drive_Manager, FuncDrawPage, FileManager::RotateRegSet
+    Page::Name::SB_Memory_Drive_Manager, &pDrive, IsActive_Drive_Manager, PageMemory::OnOpenClose_Drive_Manager, FuncDrawPage, FileManager::RotateRegSet
 )
 */
 
@@ -431,7 +429,7 @@ DEF_PAGE_SB( pMask,                                                             
     0,
     &bMask_Backspace, // ÏÀÌßÒÜ - ÂÍÅØÍ ÇÓ - ÌÀÑÊÀ - Backspace
     &bMask_Insert,    // ÏÀÌßÒÜ - ÂÍÅØÍ ÇÓ - ÌÀÑÊÀ - Âñòàâèòü
-    Page::Name::SB_Memory_Drive_Mask, &ppDrive, IsActive_Mask, OnPress_Drive_Mask, FuncDrawPage, OnRegSet_Drive_Mask
+    Page::Name::SB_Memory_Drive_Mask, &pDrive, IsActive_Mask, OnPress_Drive_Mask, FuncDrawPage, OnRegSet_Drive_Mask
 )
 */
 
@@ -458,7 +456,7 @@ DEF_CHOICE_2( cDrive_Autoconnect,                                               
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-DEF_PAGE_6( ppDrive,  //-V641 //-V1027                                                                                                                            //--- ÏÀÌßÒÜ - ÂÍÅØÍ ÇÓ ---
+DEF_PAGE_6( pDrive,  //-V641 //-V1027                                                                                                                             //--- ÏÀÌßÒÜ - ÂÍÅØÍ ÇÓ ---
     "ÂÍÅØÍ ÇÓ",
     "Ğàáîòà ñ âíåøíèì çàïîìèíàşùèì óñòğîéñòâîì.",
     PageDrive::PageManager::self,   ///< ÏÀÌßÒÜ - ÂÍÅØÍ ÇÓ - ÊÀÒÀËÎÃ
@@ -471,6 +469,8 @@ DEF_PAGE_6( ppDrive,  //-V641 //-V1027                                          
     &PageMemory::self,               ///< ÏÀÌßÒÜ
     E_BtV, E_VB, E_VV, E_BfKE
 )
+
+const Page * const PageDrive::self = (const Page *)&pDrive;
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 DEF_PAGE_4( pMemory, // -V641 // -V1027                                                                                                                                      //--- ÏßÌßÒÜ ---

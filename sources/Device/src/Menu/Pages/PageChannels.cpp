@@ -10,15 +10,8 @@
 #include "Hardware/Timer.h"
 #include "Osci/Osci.h"
 #include "Settings/SettingsChannel.h"
-
 #include <cstring>
 
-
-extern const Page pChanA;
-extern const Page pChanB;
-
-const Page * const PageChannelA::self = (const Page *)&pChanA;
-const Page * const PageChannelB::self = (const Page *)&pChanB;
 
 static const char chanInput[] =   "1. \"Вкл\" - выводить сигнал на экран.\n"
                                   "2. \"Откл\" - не выводить сигнал на экран.";
@@ -27,6 +20,7 @@ static const char chanCouple[] =  "Задаёт вид связи с источником сигнала.\n"
                                   "1. \"Пост\" - открытый вход.\n"
                                   "2. \"Перем\" - закрытый вход.\n"
                                   "3. \"Земля\" - вход соединён с землёй.";
+
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void PageChannelA::OnChanged_Input(bool)
@@ -132,6 +126,8 @@ DEF_PAGE_6( pChanA, // -V641 // -V1027                                          
     PageName::ChannelA, nullptr, E_BtV, E_VB, E_VV, E_BfKE
 )
 
+const Page * const PageChannelA::self = (const Page *)&pChanA;
+
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void PageChannelB::OnChanged_Input(bool active)
 {
@@ -221,3 +217,5 @@ DEF_PAGE_6( pChanB, // -V641 // -V1027                                          
     &cInverseB,         ///< КАНАЛ 2 - Инверсия
     PageName::ChannelB, nullptr, E_BtV, E_VB, E_VV, E_BfKE
 )
+
+const Page * const PageChannelB::self = (const Page *)&pChanB;

@@ -7,13 +7,8 @@
 
 using namespace Osci::Settings;
 
-extern const Page pTrig;
-extern const Page ppSearch;
 
-const Page * const PageTrig::self = (const Page *)&pTrig;
-
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void PageTrig::OnChanged_TrigMode(bool)
 {
     Osci::Stop(false);
@@ -126,3 +121,5 @@ DEF_PAGE_6( pTrig, // -V641 // -V1027                                           
     PageTrig::PageFind::self,    ///< ÑÈÍÕÐ - ÏÎÈÑÊ
     PageName::Trig, nullptr, E_BtV, E_VB, E_VV, E_BfKE
 )
+
+const Page * const PageTrig::self = (const Page *)&pTrig;
