@@ -324,7 +324,7 @@ static void FX_Long()
 {
     if (Menu::IsShown())
     {
-        Menu::ItemForFuncKey(event.key)->KeyAutoRelease();
+        Menu::ItemForFuncKey(event.key)->KeyLong();
     }
 }
 

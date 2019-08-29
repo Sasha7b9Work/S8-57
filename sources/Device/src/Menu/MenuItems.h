@@ -94,7 +94,7 @@ public:
     /// Вызывается при "коротком" отпускании
     virtual void KeyRelease() const;
     /// Вызывается при автоматическом срабатывании кнопки (нажатии и удержании более 0.5 сек)
-    virtual void KeyAutoRelease() const;
+    virtual void KeyLong() const;
     /// Обработка события кнопки
     virtual bool ProcessKey(KeyEvent) { return false; };
     /// Возвращает высоту в пикселях открытого элемента Choice или Page::Name
@@ -157,7 +157,7 @@ public:
 
     virtual void KeyRelease() const;
 
-    virtual void KeyAutoRelease() const;
+    virtual void KeyLong() const;
     /// Обработка события кнопки
     virtual bool ProcessKey(KeyEvent event);
     /// Нарисовать в заданных координатах
@@ -184,7 +184,7 @@ public:
     Button(const DataItem * const data) : Item(data) {};
     virtual void Draw(int x, int y, bool opened) const;
     virtual void KeyRelease() const;
-    virtual void KeyAutoRelease() const;
+    virtual void KeyLong() const;
     DataButton *OwnData() const { return (DataButton *)data->ad; }
 };
 
@@ -211,7 +211,7 @@ public:
     virtual void Draw(int x, int y, bool opened) const;
     void DrawHints(int x, int y, int width) const;
     virtual void KeyRelease() const;
-    virtual void KeyAutoRelease() const;
+    virtual void KeyLong() const;
     DataGraphButton *OwnData() const { return (DataGraphButton *)data->ad; }
     int NumHints() const;
 };
@@ -242,22 +242,22 @@ public:
     void NextPosition() const;
     /// При открытом элементе переставляет курсор не предыдущую позицию
     void PrevPosition();
-
+    /// Нарисовать в раскрытом виде
     void DrawOpened(int x, int y) const;
-
+    /// Нарисовать в закрытом виде (в строке меню)
     void DrawClosed(int x, int y) const;
-
+    /// Отобразить значение
     void DrawValue(int x, int y) const;
-
+    /// Возвращает символ ручки, соответствующий текущему значению
     char GetSymbol() const;
-
+    /// Возвращает значение, установленное в регуляторе
     int16 GetValue() const;
-
+    /// Задаёт новое значение
     void SetValue(int16 v) const;
-
+    /// Реакция на отпускание кнопки
     virtual void KeyRelease() const;
-
-    virtual void KeyAutoRelease() const;
+    /// Реакция на "длинное нажатие"
+    virtual void KeyLong() const;
     /// Обработка события кнопки
     virtual bool ProcessKey(KeyEvent event);
 
@@ -315,7 +315,7 @@ public:
 
     virtual void KeyRelease() const;
 
-    virtual void KeyAutoRelease() const;
+    virtual void KeyLong() const;
 
     virtual void Draw(int x, int y, bool opened) const;
 
@@ -338,7 +338,7 @@ public:
     GovernorColor(const DataItem * const data) : Item(data) {};
     virtual void Draw(int x, int y, bool opened) const;
     virtual void KeyRelease() const;
-    virtual void KeyAutoRelease() const;
+    virtual void KeyLong() const;
     virtual int HeightOpened() const { return 27; };
     DataGovernorColor *OwnData() const { return (DataGovernorColor *)data->ad; }
 private:

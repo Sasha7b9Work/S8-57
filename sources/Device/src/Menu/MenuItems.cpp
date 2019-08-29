@@ -74,7 +74,7 @@ void Item::KeyRelease() const
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Item::KeyAutoRelease() const
+void Item::KeyLong() const
 {
     pressedItem = nullptr;
 
@@ -285,9 +285,9 @@ void Page::KeyRelease() const
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Page::KeyAutoRelease() const
+void Page::KeyLong() const
 {
-    Item::KeyAutoRelease();
+    Item::KeyLong();
 
     if (!IsCurrentItem())
     {
@@ -437,9 +437,9 @@ void Button::KeyRelease() const
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Button::KeyAutoRelease() const
+void Button::KeyLong() const
 {
-    Item::KeyAutoRelease();
+    Item::KeyLong();
 
     KeyRelease();
 }
@@ -457,9 +457,9 @@ void GraphButton::KeyRelease() const
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void GraphButton::KeyAutoRelease() const
+void GraphButton::KeyLong() const
 {
-    Item::KeyAutoRelease();
+    Item::KeyLong();
 
     KeyRelease();
 }
@@ -484,9 +484,9 @@ void Governor::KeyRelease() const
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Governor::KeyAutoRelease() const
+void Governor::KeyLong() const
 {
-    Item::KeyAutoRelease();
+    Item::KeyLong();
 
     if (!IsCurrentItem())
     {
@@ -759,9 +759,9 @@ void Choice::KeyRelease() const
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Choice::KeyAutoRelease() const
+void Choice::KeyLong() const
 {
-    Item::KeyAutoRelease();
+    Item::KeyLong();
 
     if (!IsCurrentItem())
     {
@@ -941,9 +941,9 @@ void GovernorColor::KeyRelease() const
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void GovernorColor::KeyAutoRelease() const
+void GovernorColor::KeyLong() const
 {
-    Item::KeyAutoRelease();
+    Item::KeyLong();
 
     if (!IsCurrentItem())
     {
