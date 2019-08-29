@@ -9,12 +9,12 @@ class Page;
 
 struct DataItem
 {
-    uint8               type;           ///< Тип итема
-    const char         *title;          ///< Заголовок итема
-    const char         *hint;           ///< Подсказка для режима помощи
-    const Page * const *keeper;         ///< Адрес страницы, которой принадлежит. Для Page_Main = 0
-    pFuncBV             funcOfActive;   ///< Активен ли данный элемент
-    const void         *ad;             ///< Указатель на структуру с данными, специфическими для каждого подкласса Item
+    uint8               type;       ///< Тип итема
+    const char         *title;      ///< Заголовок итема
+    const char         *hint;       ///< Подсказка для режима помощи
+    const Page * const *keeper;     ///< Адрес страницы, которой принадлежит. Для Page_Main = 0
+    pFuncBV             isActive;   ///< Активен ли данный элемент
+    const void         *ad;         ///< Указатель на структуру с данными, специфическими для каждого подкласса Item
 };
 
 
@@ -55,7 +55,7 @@ public:
     /// Возвращает название элемента, как оно выглядит на дисплее прибора
     String Title() const;
     /// Возвращает true, если контрол находится в активном состоянии (реагирует на органы управления)
-    bool IsActive() const { if (data->funcOfActive) { return data->funcOfActive(); }; return true; };
+    bool IsActive() const { return data->isActive(); };
 
     bool IsCurrentItem() const;
     /// Возвращает адрес родителя
