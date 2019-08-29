@@ -669,7 +669,7 @@ void Choice::HandlerFX(TypePress::E type) const
     {
         if (!IsActive())
         {
-            OwnData()->funcOnChanged(false);
+            OwnData()->handlerChange(false);
         }
         else if (!IsOpened())
         {
@@ -717,7 +717,7 @@ void Choice::ChangeIndex(int delta) const
         }
     }
     *OwnData()->cell = (int8)index;
-    OwnData()->funcOnChanged(IsActive());
+    OwnData()->handlerChange(IsActive());
     Beeper::GovernorChangedValue();
     Osci::Display::SetFlagRedraw();
 }
@@ -750,7 +750,7 @@ void Choice::StartChange(int delta) const
         }
         else if (!IsActive())
         {
-            OwnData()->funcOnChanged(false);
+            OwnData()->handlerChange(false);
         }
         else
         {
@@ -807,7 +807,7 @@ float Choice::Step() const //-V2506
 
         *OwnData()->cell = index;
         tsChoice.address = 0;
-        OwnData()->funcOnChanged(IsActive());
+        OwnData()->handlerChange(IsActive());
         Osci::Display::SetFlagRedraw();
         tsChoice.dir = NONE;
         return 0.0F;

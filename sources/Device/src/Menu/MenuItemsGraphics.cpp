@@ -272,7 +272,7 @@ void Choice::DrawClosed(int x, int y) const
                 Item::Width(), Value::HEIGHT - 1);
         }
 
-        OwnData()->funcForDraw(x, y);
+        OwnData()->funcDraw(x, y);
     }
     
     DrawCommonHiPart(x, y, false);
