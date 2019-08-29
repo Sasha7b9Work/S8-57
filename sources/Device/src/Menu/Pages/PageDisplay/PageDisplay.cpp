@@ -5,18 +5,12 @@
 #include "Menu/Menu.h"
 #include "Utils/CommonFunctions.h"
 #include "Settings/Settings.h"
-
 #include "Osci/Osci.h"
 #include "Osci/Osci_Averager.h"
 
 
 using namespace Osci::Settings;
 
-extern const Page pageDisplay;
-//extern const Page pageViewSignal;
-
-//const Page * const PageDisplay::PageView::self = (const Page *)&pageViewSignal;
-const Page * const PageDisplay::self = (const Page *)&pageDisplay;
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 DEF_CHOICE_10( cSmoothing,                                                                                                                                    //--- ДИСПЛЕЙ - Сглаживание ---
@@ -107,7 +101,7 @@ DEF_CHOICE_2( cViewMode,                                                        
 //)
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-DEF_PAGE_8( pageDisplay, // -V641 // -V1027                                                                                                                                 //--- ДИСПЛЕЙ ---
+DEF_PAGE_8( pDisplay, // -V641 // -V1027                                                                                                                                    //--- ДИСПЛЕЙ ---
     "ДИСПЛЕЙ",
     "Содержит настройки отображения дисплея.",
     &cViewMode,                             ///< ДИСПЛЕЙ - Отображение
@@ -123,3 +117,5 @@ DEF_PAGE_8( pageDisplay, // -V641 // -V1027                                     
 //    &cThickness,                            ///< ДИСПЛЕЙ - Толщина
     PageName::Display, nullptr, E_BtV, E_VB, E_VV, E_BfKE
 )
+
+const Page * const PageDisplay::self = (const Page *)&pDisplay;
