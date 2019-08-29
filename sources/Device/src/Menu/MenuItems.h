@@ -107,9 +107,9 @@ struct DataPage
 {
     uint8               name;               ///< Имя из перечисления Page::Name
     const Item * const *items;              ///< Здесь указатели на пункты этой страницы
-    pFuncVB             funcOnOpenClose;    ///< Будет вызываться при открытии/закрытии страницы
+    pFuncVB             funcOnOpenClose;    ///< Будет вызываться при открытии/закрытии страницы. При открытии в неё передаётся true, при закрытии - false
     pFuncVV             funcAfterDraw;      ///< Будет вызываться после отрисовки страницы
-    pFuncBKE            funcOnKeyEvent;     ///< В странице малых кнопок вызывается при нажатии стрелки
+    pFuncBKE            handlerKeyEvent;    ///< В странице малых кнопок вызывается при нажатии стрелки
 };
 
 /// Описывает страницу меню
@@ -167,7 +167,7 @@ public:
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// Button ///
 struct DataButton
 {
-    pFuncVV     funcOnPress;        ///< Функция, которая вызывается при нажатии на кнопку.
+    pFuncVV     handlerPress;   ///< Функция, которая вызывается при нажатии на кнопку.
 };
 
 class Button : public Item
@@ -188,8 +188,8 @@ struct StructHelpDrawButton
 
 struct DataGraphButton
 {
-    pFuncVV                     funcOnPress;    ///< Эта функция вызвается для обработки нажатия кнопки.
-    pFuncVII                    funcForDraw;    ///< Эта функция вызывается для отрисовки кнопки в месте с координатами x, y.
+    pFuncVV                     handlerPress;   ///< Эта функция вызвается для обработки нажатия кнопки.
+    pFuncVII                    funcDraw;       ///< Эта функция вызывается для отрисовки кнопки в месте с координатами x, y.
     const StructHelpDrawButton *hintUGO;
 };
 

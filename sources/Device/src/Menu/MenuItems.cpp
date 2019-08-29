@@ -305,7 +305,7 @@ PageName::E Page::GetName() const
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 bool Page::HandlerKey(KeyEvent event)
 {
-    if (OwnData()->funcOnKeyEvent(event))
+    if (OwnData()->handlerKeyEvent(event))
     {
         return true;
     }
@@ -415,7 +415,7 @@ void Button::HandlerFX(TypePress::E type) const
         if (IsActive())
         {
             SetCurrent(true);
-            OwnData()->funcOnPress();
+            OwnData()->handlerPress();
         }
     }
 }
@@ -430,7 +430,7 @@ void GraphButton::HandlerFX(TypePress::E type) const
     {
         if (IsActive())
         {
-            OwnData()->funcOnPress();
+            OwnData()->handlerPress();
         }
     }
 }
