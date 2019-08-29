@@ -10,11 +10,6 @@ static void OnChanged_Enable(bool)
     FrequencyCounter::Init();
 }
 
-static void OnChanged_FreqMeter_Frequency(bool)
-{
-    FrequencyCounter::LoadFreqSettings();
-}
-
 static void OnChanged_FreqMeter_Period(bool)
 {
     FrequencyCounter::LoadPeriodSettings();
@@ -52,9 +47,14 @@ static bool IsActive_SettingsFrequency()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static bool IsActive_SettingsPeriod()
+static bool IsActive_TimeF()
 {
     return FREQ_METER_IS_ENABLED && FREQ_METER_MODE_VIEW_IS_FREQUENCY;
+}
+
+static void OnChanged_TimeF(bool)
+{
+    FrequencyCounter::LoadFreqSettings();
 }
 
 DEF_CHOICE_3( cTimeF,                                                                                                                          //--- ÔÓÍÊÖÈß - ×ÀÑÒÎÒÎÌÅÐ - Âðåìÿ ñ÷¸òà F ---
@@ -63,7 +63,7 @@ DEF_CHOICE_3( cTimeF,                                                           
     "100ìñ",
     "1ñ",
     "10ñ",
-    FREQ_METER_TIMECOUNTING, &PageFrequencyCounter::self, IsActive_SettingsPeriod, OnChanged_FreqMeter_Frequency, E_VII
+    FREQ_METER_TIMECOUNTING, &PageFrequencyCounter::self, IsActive_TimeF, OnChanged_TimeF, E_VII
 )
 
 

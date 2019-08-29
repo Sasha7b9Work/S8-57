@@ -34,7 +34,7 @@ typedef struct
 static int16 shiftADCA;
 static int16 shiftADCB;
 
-static void Draw_ADC_Balance_Mode(int, int)
+static void Draw_Balance_Mode(int, int)
 {
     int8 shift[2][3] =
     {
@@ -46,19 +46,19 @@ static void Draw_ADC_Balance_Mode(int, int)
     shiftADCB = shift[Chan::B][NRST_BALANCE_ADC_TYPE];
 }
 
-static void OnChanged_ADC_Balance_Mode(bool)
+static void OnChanged_Balance_Mode(bool)
 {
-    Draw_ADC_Balance_Mode(0, 0);
+    Draw_Balance_Mode(0, 0);
 }
 
-DEF_CHOICE_3( cADC_Balance_Mode,                                                                                                                     //--- Œ“À¿ƒ ¿ - ¿÷œ - ¡¿À¿Õ— - –ÂÊËÏ ---
+DEF_CHOICE_3( cBalance_Mode,                                                                                                                         //--- Œ“À¿ƒ ¿ - ¿÷œ - ¡¿À¿Õ— - –ÂÊËÏ ---
     "–ÂÊËÏ",
     "",
     DISABLE_RU,
     "–Â‡Î¸Ì˚È",
     "–Û˜ÌÓÈ",
     NRST_BALANCE_ADC_TYPE,
-    &PageDebug::PageADC::PageBalance::self, E_BtV, OnChanged_ADC_Balance_Mode, Draw_ADC_Balance_Mode
+    &PageDebug::PageADC::PageBalance::self, E_BtV, OnChanged_Balance_Mode, Draw_Balance_Mode
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -96,9 +96,9 @@ DEF_GOVERNOR( gShiftB,                                                          
 DEF_PAGE_3( pBalance, // -V641 // -V1027                                                                                                                     //--- Œ“À¿ƒ ¿ - ¿÷œ - ¡¿À¿Õ— ---
     "¡¿À¿Õ—",
     "",
-    &cADC_Balance_Mode,      ///< Œ“À¿ƒ ¿ - ¿÷œ - ¡¿À¿Õ— - –ÂÊËÏ
-    &gShiftA,    ///< Œ“À¿ƒ ¿ - ¿÷œ - ¡¿À¿Õ— - —ÏÂ˘ÂÌËÂ 1
-    &gShiftB,    ///< Œ“À¿ƒ ¿ - ¿÷œ - ¡¿À¿Õ— - —ÏÂ˘ÂÌËÂ 2
+    &cBalance_Mode,     ///< Œ“À¿ƒ ¿ - ¿÷œ - ¡¿À¿Õ— - –ÂÊËÏ
+    &gShiftA,           ///< Œ“À¿ƒ ¿ - ¿÷œ - ¡¿À¿Õ— - —ÏÂ˘ÂÌËÂ 1
+    &gShiftB,           ///< Œ“À¿ƒ ¿ - ¿÷œ - ¡¿À¿Õ— - —ÏÂ˘ÂÌËÂ 2
     PageName::Debug_ADC_Balance,
     &PageDebug::PageADC::self, E_BtV, E_VB, E_VV, E_BfKE
 )
@@ -109,7 +109,7 @@ const Page * const PageDebug::PageADC::PageBalance::self = (const Page *)&pBalan
 static int16 stretchA;
 static int16 stretchB;
 
-void PageDebug::OnChanged_ADC_Stretch_Mode(bool)
+void PageDebug::PageADC::PageStretch::OnChanged_Mode(bool)
 {
     if (NRST_STRETCH_ADC_TYPE_IS_DISABLE)
     {
@@ -130,7 +130,7 @@ DEF_CHOICE_3( cStretch_Mode,                                                    
     "–Â‡Î¸Ì˚È",
     "–Û˜ÌÓÈ",
     NRST_STRETCH_ADC_TYPE,
-    &PageDebug::PageADC::PageStretch::self, E_BtV, PageDebug::OnChanged_ADC_Stretch_Mode, E_VII
+    &PageDebug::PageADC::PageStretch::self, E_BtV, PageDebug::PageADC::PageStretch::OnChanged_Mode, E_VII
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

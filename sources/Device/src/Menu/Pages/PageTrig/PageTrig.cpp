@@ -9,7 +9,7 @@ using namespace Osci::Settings;
 
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void PageTrig::OnChanged_TrigMode(bool)
+void PageTrig::OnChanged_Mode(bool)
 {
     Osci::Stop(false);
     if(!START_MODE_IS_SINGLE)
@@ -52,7 +52,7 @@ DEF_CHOICE_3( cMode, // -V206                                                   
     "Ждущий",
     "Однократный",
     START_MODE,
-    &PageTrig::self, E_BtV, PageTrig::OnChanged_TrigMode, E_VII
+    &PageTrig::self, E_BtV, PageTrig::OnChanged_Mode, E_VII
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -90,7 +90,7 @@ DEF_CHOICE_2( cPolarity, //-V206                                                
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void OnChanged_Input(bool)
+static void OnChanged_Filtr(bool)
 {
     Trig::Input::Load();
 }
@@ -107,7 +107,7 @@ DEF_CHOICE_3( cFiltr, // -V206                                                  
     "НЧ",
     "ВЧ",
     TRIG_INPUT,
-    &PageTrig::self, E_BtV, OnChanged_Input, E_VII
+    &PageTrig::self, E_BtV, OnChanged_Filtr, E_VII
 )
 
 DEF_PAGE_6( pTrig, // -V641 // -V1027                                                                                                                                         //--- СИНХР ---

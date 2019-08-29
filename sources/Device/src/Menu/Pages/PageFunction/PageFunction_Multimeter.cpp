@@ -5,7 +5,7 @@
 
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static bool FuncActive_RangesVoltageDC()
+static bool IsActive_RangesVoltageDC()
 {
     return MULTI_MEASURE == Multimeter::Measure::VoltageDC;
 }
@@ -24,11 +24,11 @@ DEF_CHOICE_3( cRangesVoltageDC,                                                 
     "2 Â",
     "20 Â",
     "500 Â",
-    MULTI_RANGE_VOLTAGE_DC, &PageMultimeter::self, FuncActive_RangesVoltageDC, OnChange_VoltageDC, E_VII
+    MULTI_RANGE_VOLTAGE_DC, &PageMultimeter::self, IsActive_RangesVoltageDC, OnChange_VoltageDC, E_VII
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static bool FuncActive_RnagesVoltageAC()
+static bool IsActive_RnagesVoltageAC()
 {
     return MULTI_MEASURE == Multimeter::Measure::VoltageAC;
 }
@@ -47,7 +47,7 @@ DEF_CHOICE_3( cRangesVoltageAC,                                                 
     "2 Â",
     "20 Â",
     "400 Â",
-    MULTI_RANGE_VOLTAGE_AC, &PageMultimeter::self, FuncActive_RnagesVoltageAC, OnChange_VoltageAC, E_VII
+    MULTI_RANGE_VOLTAGE_AC, &PageMultimeter::self, IsActive_RnagesVoltageAC, OnChange_VoltageAC, E_VII
 )
 
 

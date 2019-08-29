@@ -49,7 +49,6 @@ struct PageRTC
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 struct PageDebug
 {
-    static void OnChanged_ADC_Stretch_Mode(bool);
     static void OnChanged_DisplayOrientation(bool);
 
     static const Page * const self;
@@ -101,6 +100,8 @@ struct PageDebug
         struct PageStretch
         {
             static const Page * const self;
+
+            static void OnChanged_Mode(bool);
         };
 
         //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
