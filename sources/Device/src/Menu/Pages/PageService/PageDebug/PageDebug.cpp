@@ -21,14 +21,12 @@ using namespace Display::Primitives;
 using namespace Osci::Settings;
 
 extern const Page mainPage;
-extern const Page pageDebug;
 extern const Page pADC;
 extern const Page pBalance;
 extern const Page pStretch;
 extern const Page pppShift;
 extern const Page pSerialNumber;
 
-const Page * const PageDebug::self = (const Page *)&pageDebug;
 const Page * const PageDebug::PageADC::self = (const Page *)&pADC;
 const Page * const PageDebug::PageADC::PageBalance::self = (const Page *)&pBalance;
 const Page * const PageDebug::PageADC::PageStretch::self = (const Page *)&pStretch;
@@ -581,14 +579,13 @@ DEF_PAGE_2( pSerialNumber, // -V641 // -V1027                                   
 //)
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-DEF_PAGE_6( pageDebug, // -V641 // -V1027                                                                                                                                   //--- Œ“À¿ƒ ¿ ---
+DEF_PAGE_5( pDebug, // -V641 // -V1027                                                                                                                                   //--- Œ“À¿ƒ ¿ ---
     "Œ“À¿ƒ ¿",
     "",
     PageDebug::PageConsole::self,   ///< Œ“À¿ƒ ¿ -  ŒÕ—ŒÀ‹
     &pADC,                                         ///< Œ“À¿ƒ ¿ - ¿÷œ
     PageDebug::PageRand::self,      ///< Œ“À¿ƒ ¿ - –¿Õƒ-“Œ–
     &cStats,			                            ///< Œ“À¿ƒ ¿ - —Ú‡ÚËÒÚËÍ‡
-    PageDebug::PageMultimeter::self,
     &bSaveFirmware,                                 ///< Œ“À¿ƒ ¿ - —Óı. ÔÓ¯Ë‚ÍÛ
 //    &cDisplayOrientation,                           ///< Œ“À¿ƒ ¿ - ŒËÂÌÚ‡ˆËˇ
 //    &mgPred,			                            ///< Œ“À¿ƒ ¿ - œÂ‰Á‡ÔÛÒÍ
@@ -599,3 +596,5 @@ DEF_PAGE_6( pageDebug, // -V641 // -V1027                                       
     PageName::Debug,
     &PageService::self, E_BtV, E_VB, E_VV, E_BfKE
 )
+
+const Page * const PageDebug::self = (const Page *)&pDebug;

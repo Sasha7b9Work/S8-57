@@ -23,7 +23,6 @@ struct PageName
         Debug_ADC_Stretch,
         Debug_Console,
         Debug_Console_Registers,
-        Debug_Multimeter,
         Debug_Rand,
         Debug_SerialNumber,
         Debug_Settings,
@@ -160,10 +159,10 @@ static const DataPage dp##name = { namePage, i##name, funcOpenClose, funcAfterDr
 static const DataItem di##name = { Item::Type::Page, title, hint, keeper, funcActive, &dp##name };                                                                                          \
 static const Page name(&di##name);
 
-#define DEF_PAGE_5_VAR(name, title, hint,  item1, item2, item3, item4, item5, namePage, keeper, funcActive, funcOpenClose, funcDraw, funcRegSet)                                                \
-static const Item *i##name[] = {(Item *)item1, (Item *)item2, (Item *)item3, (Item *)item4, (Item *)item5, nullptr};                                                                        \
-static const DataPage dp##name = {namePage, i##name, funcOpenClose, funcDraw, funcRegSet};                                                                                                      \
-   static const DataItem di##name = { Item::Type::Page, title, hint, keeper, funcActive, &dp##name };                                                                                       \
+#define DEF_PAGE_5_VAR(name, title, hint,  item1, item2, item3, item4, item5, namePage, keeper, funcActive, funcOpenClose, funcAfterDraw, funcArrows)                                       \
+static const Item *i##name[] = { (Item *)item1, (Item *)item2, (Item *)item3, (Item *)item4, (Item *)item5, nullptr };                                                                      \
+static const DataPage dp##name = { namePage, i##name, funcOpenClose, funcAfterDraw, funcArrows };                                                                                           \
+static const DataItem di##name = { Item::Type::Page, title, hint, keeper, funcActive, &dp##name };                                                                                          \
 static const Page name(&di##name);
 
 #define DEF_PAGE_6(name, title, hint, item1, item2, item3, item4, item5, item6, namePage, keeper, funcActive, funcOpenClose, funcDraw, funcRegSet)                                              \

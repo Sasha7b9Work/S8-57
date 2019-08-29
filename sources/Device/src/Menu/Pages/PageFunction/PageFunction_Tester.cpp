@@ -6,12 +6,7 @@
 #include "Tester/Tester_Settings.h"
 
 
-extern const Page pageTester;
-
-const Page * const PageTester::self = (const Page *)&pageTester;
-
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void OnChanged_Polarity(bool)
 {
     Tester::LoadPolarity();
@@ -96,7 +91,7 @@ static void OnOpenClose_Tester(bool enter)
 }
 
 
-DEF_PAGE_5_VAR( pageTester, // -V641
+DEF_PAGE_5_VAR( pTester, // -V641
     "реяреп",
     "",
     &cControl,
@@ -107,10 +102,12 @@ DEF_PAGE_5_VAR( pageTester, // -V641
     PageName::Function_Tester, &PageFunction::self, E_BtV, OnOpenClose_Tester, E_VV, E_BfKE
 )
 
+const Page * const PageTester::self = (const Page *)&pTester;
+
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void PageTester::OnChanged_Control(bool)
 {
-    Page *page = (Page *)&pageTester;
+    Page *page = (Page *)&pTester;
 
     Item **items = (Item **)page->OwnData()->items;
 

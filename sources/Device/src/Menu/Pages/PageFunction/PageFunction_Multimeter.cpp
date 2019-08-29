@@ -4,10 +4,8 @@
 #include "Device.h"
 
 
-extern const Page pageMultimeter;
 extern const Page pageCalibration;
 
-const Page * const PageMultimeter::self = (const Page *)&pageMultimeter;
 const Page * const PageMultimeter::PageCalibration::self = (const Page *)&pageCalibration;
 
 
@@ -176,7 +174,7 @@ void PageMultimeter::Init()
 
 void PageMultimeter::OnChanged_Mode(bool)
 {
-    Page *page = (Page *)&pageMultimeter;
+    Page *page = (Page *)PageMultimeter::self;
 
     Item **items = (Item **)page->OwnData()->items;
 
@@ -217,7 +215,7 @@ static void OnOpenClose_Multimeter(bool enter)
     Device::State::SetMode(enter ? Device::Mode::Multimeter : Device::Mode::Osci);
 }
 
-DEF_PAGE_5_VAR( pageMultimeter, // -V641 //-V1027 //-V641
+DEF_PAGE_5_VAR( pMultimeter, // -V641 //-V1027 //-V641
     "ÌÓËÜÒÈÌÅÒĞ",
     "Óïğàâëåíèå ïğèáîğîì â ğåæèìå ìóëüòèìåòğà",
     &cMode,
@@ -227,6 +225,8 @@ DEF_PAGE_5_VAR( pageMultimeter, // -V641 //-V1027 //-V641
     &Item::empty,
     PageName::Function_Multimeter, &PageFunction::self, E_BtV, OnOpenClose_Multimeter, E_VV, E_BfKE
 )
+
+const Page * const PageMultimeter::self = (const Page *)&pMultimeter;
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void OnPress_Calibrate0()
@@ -291,7 +291,7 @@ void PageMultimeter::DecodePassword(const KeyEvent &event)
     {
         if (charsMatch == NUM_SYMBOLS)
         {
-            Page *page = (Page *)&pageMultimeter;
+            Page *page = (Page *)&pMultimeter;
 
             Item **items = (Item **)page->OwnData()->items;
 
