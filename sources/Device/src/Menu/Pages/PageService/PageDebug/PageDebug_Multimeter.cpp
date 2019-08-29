@@ -26,7 +26,7 @@ static void OnPress_Calibrate1()
     //Multimeter::Calibrate(1);
 }
 
-DEF_BUTTON(bCalibrate1,
+DEF_BUTTON( bCalibrate1,
     "Калибр 1",
     "",
     &PageDebug::PageMultimeter::self, E_BtV, OnPress_Calibrate1

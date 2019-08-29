@@ -23,17 +23,17 @@ using namespace Osci::Settings;
 extern const Page mainPage;
 extern const Page pageDebug;
 extern const Page ppADC;
-extern const Page pppADC_Balance;
+extern const Page pppBalance;
 extern const Page pppADC_Stretch;
-extern const Page pppADC_Shift;
+extern const Page pppShift;
 extern const Page ppSettings;
 extern const Page ppSerialNumber;
 
 const Page * const PageDebug::self = (const Page *)&pageDebug;
 const Page * const PageDebug::PageADC::self = (const Page *)&ppADC;
-const Page * const PageDebug::PageADC::PageBalance::self = (const Page *)&pppADC_Balance;
+const Page * const PageDebug::PageADC::PageBalance::self = (const Page *)&pppBalance;
 const Page * const PageDebug::PageADC::PageStretch::self = (const Page *)&pppADC_Stretch;
-const Page * const PageDebug::PageADC::PageShift::self = (const Page *)&pppADC_Shift;
+const Page * const PageDebug::PageADC::PageShift::self = (const Page *)&pppShift;
 const Page * const PageDebug::PageSettings::self = (const Page *)&ppSettings;
 const Page * const PageDebug::PageSerialNumber::self = (const Page *)&ppSerialNumber;
 
@@ -110,7 +110,7 @@ DEF_GOVERNOR( gADC_Balance_ShiftB,                                              
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-DEF_PAGE_3( pppADC_Balance, // -V641 // -V1027                                                                                                               //--- Œ“À¿ƒ ¿ - ¿÷œ - ¡¿À¿Õ— ---
+DEF_PAGE_3( pppBalance, // -V641 // -V1027                                                                                                               //--- Œ“À¿ƒ ¿ - ¿÷œ - ¡¿À¿Õ— ---
     "¡¿À¿Õ—",
     "",
     &cADC_Balance_Mode,      ///< Œ“À¿ƒ ¿ - ¿÷œ - ¡¿À¿Õ— - –ÂÊËÏ
@@ -337,7 +337,7 @@ DEF_GOVERNOR( gADC_Shift_B10mV,                                                 
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-DEF_PAGE_7( pppADC_Shift, // -V641  // -V1027                                                                                                              //--- Œ“À¿ƒ ¿ - ¿÷œ - ƒŒœ —Ã≈Ÿ ---
+DEF_PAGE_7( pppShift, // -V641  // -V1027                                                                                                              //--- Œ“À¿ƒ ¿ - ¿÷œ - ƒŒœ —Ã≈Ÿ ---
     "ƒŒœ —Ã≈Ÿ",
     "",
     &bADC_Shift_Reset,   // Œ“À¿ƒ ¿ - ¿÷œ - ƒŒœ —Ã≈Ÿ - —·ÓÒ
@@ -355,9 +355,9 @@ DEF_PAGE_7( pppADC_Shift, // -V641  // -V1027                                   
 DEF_PAGE_3( ppADC, //-V641 //-V1027
     "¿÷œ",
     "",
-    &pppADC_Balance, // Œ“À¿ƒ ¿ - ¿÷œ - ¡¿À¿Õ—
+    &pppBalance, // Œ“À¿ƒ ¿ - ¿÷œ - ¡¿À¿Õ—
     &pppADC_Stretch, // Œ“À¿ƒ ¿ - ¿÷œ - –¿—“ﬂ∆ ¿
-    &pppADC_Shift,   // Œ“À¿ƒ ¿ - ¿÷œ - ƒŒœ —Ã≈Ÿ
+    &pppShift,   // Œ“À¿ƒ ¿ - ¿÷œ - ƒŒœ —Ã≈Ÿ
     PageName::Debug_ADC,
     &PageDebug::self, E_BtV, E_VB, E_VV, E_BfKE
 )
@@ -572,7 +572,7 @@ DEF_PAGE_2( ppSerialNumber, // -V641 // -V1027                                  
 //    Display::FuncOnWaitStop();
 //}
 
-//DEF_BUTTON( bEraseData,                                                                                                                                    //--- Œ“À¿ƒ ¿ - —ÚÂÂÚ¸ ‰‡ÌÌ˚Â ---
+//_DEF_BUTTON( bEraseData,                                                                                                                                    //--- Œ“À¿ƒ ¿ - —ÚÂÂÚ¸ ‰‡ÌÌ˚Â ---
 //    "—ÚÂÂÚ¸ ‰‡ÌÌÂ",
 //    "—ÚË‡ÂÚ ÒÓı‡Ì∏ÌÌ˚Â ‰‡ÌÌ˚Â ËÁ œœ«”",
 //    &PageDebug::self, 0, OnPress_EraseData, 0

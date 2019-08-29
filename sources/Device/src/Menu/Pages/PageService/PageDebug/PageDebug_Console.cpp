@@ -186,7 +186,7 @@ DEF_PAGE_12( pageRegisters, // -V641                                            
 //    String("Разм.настр. %d", sizeof(Settings)).Draw(x + 6, y + 13, Color::BACK);
 //}
 //
-//DEF_BUTTON( bSizeSettings,                                                                                                                      //--- ОТЛАДКА - КОНСОЛЬ - Размер настроек ---
+//_DEF_BUTTON( bSizeSettings,                                                                                                                      //--- ОТЛАДКА - КОНСОЛЬ - Размер настроек ---
 //    "",
 //    "Показывает текущий размер структуры для сохранения настроек",
 //    &PageDebug::PageConsole::self, 0, 0, Draw_Console_SizeSettings
