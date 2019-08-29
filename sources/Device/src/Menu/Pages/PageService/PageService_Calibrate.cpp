@@ -4,9 +4,9 @@
 #include "Hardware/Timer.h"
 
 
-extern const Page pageCalibrate;
+extern const Page pCalibrate;
 
-const Page * const PageService::PageCalibrate::self = (const Page *)&pageCalibrate;
+const Page * const PageService::PageCalibrate::self = (const Page *)&pCalibrate;
 
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -52,7 +52,7 @@ DEF_BUTTON( bCalibrate,                                                         
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-DEF_PAGE_2( pageCalibrate, // -V641 // -V1027                                                                                                                   //--- СЕРВИС - КАЛИБРАТОР ---
+DEF_PAGE_2( pCalibrate, // -V641 // -V1027                                                                                                                      //--- СЕРВИС - КАЛИБРАТОР ---
     "КАЛИБРОВКА",
     "Управлением калибратором и калибровка осциллографа",
     &cCalibrator,     /// СЕРВИС - КАЛИБРАТОР - Калибратор

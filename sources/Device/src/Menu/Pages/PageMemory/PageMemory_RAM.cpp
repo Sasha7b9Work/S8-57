@@ -79,7 +79,7 @@ static void OnOpenClose_RAM(bool enter)
     }
 }
 
-static void OnDraw_RAM()
+static void AfterDraw_RAM()
 {
     int width = 40;
     int height = 10;
@@ -90,7 +90,7 @@ static void OnDraw_RAM()
     Integer(Osci::Storage::NumElementsInStorage()).ToString(false, 3).Draw(Grid::Right() - width + 23, Grid::Top() + 1);
 }
 
-static bool HandlerKey_RAM(KeyEvent /*event*/)
+static bool OnArrows_RAM(KeyEvent /*event*/)
 {
     /*
     Key::E key = event.key;
@@ -118,5 +118,5 @@ DEF_PAGE_2( pageRAM, // -V641 // -V1027                                         
     &bPrev,                        ///< ÏÀÌßÒÜ - ÏÎÑËÅÄÍÈÅ - Ïðåäûäóùèé
     &bNext,                        ///< ÏÀÌßÒÜ - ÏÎÑËÅÄÍÈÅ - Ñëåäóþùèé
     PageName::Memory_Last,
-    &PageMemory::self, E_BtV, OnOpenClose_RAM, OnDraw_RAM, HandlerKey_RAM
+    &PageMemory::self, E_BtV, OnOpenClose_RAM, AfterDraw_RAM, OnArrows_RAM
 )

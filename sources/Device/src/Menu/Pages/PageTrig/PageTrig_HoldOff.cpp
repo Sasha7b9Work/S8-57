@@ -6,9 +6,9 @@
 #include "Settings/Settings.h"
 
 
-extern const Page pageHoldOff;
+extern const Page pHoldOff;
 
-const Page * const PageTrig::PageHoldOff::self = (const Page *)&pageHoldOff;
+const Page * const PageTrig::PageHoldOff::self = (const Page *)&pHoldOff;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -45,7 +45,7 @@ DEF_GOVERNOR( gDuration,                                                        
 
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-DEF_PAGE_2( pageHoldOff, // -V641 // -V1027                                                                                                                       //--- —»Õ’– - ”ƒ≈–∆¿Õ»≈ ---
+DEF_PAGE_2( pHoldOff, // -V641 // -V1027                                                                                                                          //--- —»Õ’– - ”ƒ≈–∆¿Õ»≈ ---
     "”ƒ≈–∆¿Õ»≈",
     "",
     &cHoldOff,          ///< —»Õ’– - ”ƒ≈–∆¿Õ»≈ - ”‰ÂÊ‡ÌËÂ

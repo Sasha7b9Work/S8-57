@@ -252,7 +252,6 @@ DEF_BUTTON( bCalibrate1,
     &PageMultimeter::PageCalibration::self, E_BtV, OnPress_Calibrate1
 )
 
-
 DEF_PAGE_2( pageCalibration, //-V641 //-V1027
     "КАЛИБРОВКА",
     "Калибровка мультиметра",

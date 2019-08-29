@@ -5,17 +5,17 @@
 #include "Settings/SettingsNRST.h"
 
 
-extern const Page pageRTC;
+extern const Page pRTC;
 extern const Page pageRTC_Set;
 extern const Page pageRTC_Correction;
 
-const Page * const PageRTC::self = (const Page *)&pageRTC;
+const Page * const PageRTC::self = (const Page *)&pRTC;
 const Page * const PageRTC::PageCorrect::self = (const Page *)&pageRTC_Correction;
 const Page * const PageRTC::PageSet::self = (const Page *)&pageRTC_Set;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-DEF_PAGE_2( pageRTC, // -V641 // -V1027                                                                                                                              //--- СЕРВИС - ВРЕМЯ ---
+DEF_PAGE_2( pRTC, // -V641 // -V1027                                                                                                                                 //--- СЕРВИС - ВРЕМЯ ---
     "ВРЕМЯ",
     "Установка и настройка времени",
     PageRTC::PageSet::self,         ///< СЕРВИС - ВРЕМЯ - Время

@@ -7,10 +7,10 @@
 #include "Settings/Settings.h"
 
 
-extern const Page pageConsole;
+extern const Page pConsole;
 extern const Page pageRegisters;
 
-const Page * const PageDebug::PageConsole::self = (const Page *)&pageConsole;
+const Page * const PageDebug::PageConsole::self = (const Page *)&pConsole;
 const Page * const PageDebug::PageRegisters::self = (const Page *)&pageRegisters;
 
 
@@ -193,7 +193,7 @@ DEF_PAGE_12( pageRegisters, // -V641                                            
 //)
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-DEF_PAGE_2( pageConsole, // -V641 // -V1027                                                                                                                       //--- ОТЛАДКА - КОНСОЛЬ ---
+DEF_PAGE_2( pConsole, // -V641 // -V1027                                                                                                                          //--- ОТЛАДКА - КОНСОЛЬ ---
     "КОНСОЛЬ",
     "Управляет отображением и параметрами отладочной консоли",
     &cShow,             ///< ОТЛАДКА - КОНСОЛЬ - Показывать

@@ -27,7 +27,7 @@ extern const Page pppBalance;
 extern const Page pppADC_Stretch;
 extern const Page pppShift;
 extern const Page ppSettings;
-extern const Page ppSerialNumber;
+extern const Page pSerialNumber;
 
 const Page * const PageDebug::self = (const Page *)&pageDebug;
 const Page * const PageDebug::PageADC::self = (const Page *)&ppADC;
@@ -35,7 +35,7 @@ const Page * const PageDebug::PageADC::PageBalance::self = (const Page *)&pppBal
 const Page * const PageDebug::PageADC::PageStretch::self = (const Page *)&pppADC_Stretch;
 const Page * const PageDebug::PageADC::PageShift::self = (const Page *)&pppShift;
 const Page * const PageDebug::PageSettings::self = (const Page *)&ppSettings;
-const Page * const PageDebug::PageSerialNumber::self = (const Page *)&ppSerialNumber;
+const Page * const PageDebug::PageSerialNumber::self = (const Page *)&pSerialNumber;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -550,18 +550,18 @@ static void OnOpenClose_SerialNumber(bool)
     Draw_EnterSerialNumber();
 }
 
-static bool HandlerKey_SerialNumber(KeyEvent /*event*/)
+static bool OnArrows_SerialNumber(KeyEvent /*event*/)
 {
     return true;
 }
 
-DEF_PAGE_2( ppSerialNumber, // -V641 // -V1027                                                                                                                       //--- ОТЛАДКА - С/Н ---
+DEF_PAGE_2( pSerialNumber, // -V641 // -V1027                                                                                                                       //--- ОТЛАДКА - С/Н ---
     "С/Н",
     "Запись серийного номера в OTP-память. ВНИМАНИЕ!!! ОТP-память - память с однократной записью.",
     &bSerialNumber_Change,          // ОТЛАДКА - С/Н - Перейти
     &bSerialNumber_Save,            // ОТЛАДКА - С/Н - Сохранить
     PageName::Debug_SerialNumber,
-    &PageDebug::self, E_BtV, OnOpenClose_SerialNumber, E_VV, HandlerKey_SerialNumber
+    &PageDebug::self, E_BtV, OnOpenClose_SerialNumber, E_VV, OnArrows_SerialNumber
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -592,7 +592,7 @@ DEF_PAGE_6( pageDebug, // -V641 // -V1027                                       
 //    &mgPred,			                            ///< ОТЛАДКА - Предзапуск
 //    &mgPost,			                            ///< ОТЛАДКА - Послезапуск
 //    &ppSettings,		                            ///< ОТЛАДКА - НАСТРОЙКИ
-//    &ppSerialNumber,                              ///< ОТЛАДКА - С/Н
+//    &pSerialNumber,                              ///< ОТЛАДКА - С/Н
 //    &bEraseData,                                  ///< ОТЛАДКА - Стереть данные
     PageName::Debug,
     &PageService::self, E_BtV, E_VB, E_VV, E_BfKE

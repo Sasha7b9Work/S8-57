@@ -56,7 +56,7 @@ static bool IsActive_Tune()
     return SHOW_MEASURES;
 }
 
-static bool HandlerKey_Tune(KeyEvent event)
+static bool OnArrows_Tune(KeyEvent event)
 {
     Osci::Measurements::PageChoice::OnKeyEvent(event);
 
@@ -68,5 +68,5 @@ DEF_PAGE_2( pageTune, // -V641 // -V1027
     "Переход в режим точной настройки количества и видов измерений",
     &bMarkers,
     &bSettings,
-    PageName::Measures_Auto_Tune, &PageMeasuresAuto::self, IsActive_Tune, E_VB, E_VV, HandlerKey_Tune
+    PageName::Measures_Auto_Tune, &PageMeasuresAuto::self, IsActive_Tune, E_VB, E_VV, OnArrows_Tune
 )
