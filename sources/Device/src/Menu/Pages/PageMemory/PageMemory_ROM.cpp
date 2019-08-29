@@ -17,20 +17,20 @@
 
 using namespace Display::Primitives;
 
-extern const Page pageROM;
+extern const Page pROM;
 
-const Page * const PageROM::self = (const Page *)&pageROM;
+const Page * const PageROM::self = (const Page *)&pROM;
 
 /// Нарисовать карту памяти сохраннных сигналов
 static void DrawMemoryMap(int num, bool exist);
 /// Обработчик нажатия кнопки при открытой странице
-static bool HandlerKey_Internal(KeyEvent event);
+static bool OnArrows_ROM(KeyEvent event);
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 static void OnPress_Next()
 {
-    HandlerKey_Internal(KeyEvent(Key::Right, TypePress::Release));
+    OnArrows_ROM(KeyEvent(Key::Right, TypePress::Release));
 }
 
 static void Draw_Next(int x, int y)
@@ -49,7 +49,7 @@ DEF_GRAPH_BUTTON( bNext,
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void OnPress_Prev()
 {
-    HandlerKey_Internal(KeyEvent(Key::Left, TypePress::Release));
+    OnArrows_ROM(KeyEvent(Key::Left, TypePress::Release));
 }
 
 static void Draw_Prev(int x, int y)
@@ -121,12 +121,12 @@ DEF_GRAPH_BUTTON( bSave,                                                        
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-static void OnOpenClose_Internal(bool)
+static void OnOpenClose_ROM(bool)
 {
     MODE_WORK = ModeWork::ROM;
 }
 
-static void OnDraw_Internal()
+static void AfterDraw_ROM()
 {
     // Теперь нарисуем состояние памяти
 
@@ -159,7 +159,7 @@ static void DrawMemoryMap(int num, bool exist)
     }
 }
 
-static bool HandlerKey_Internal(KeyEvent event)
+static bool OnArrows_ROM(KeyEvent event)
 {
     if (event.type == TypePress::Release || event.type == TypePress::Long)
     {
@@ -187,7 +187,7 @@ static bool HandlerKey_Internal(KeyEvent event)
 }
 
 
-DEF_PAGE_4( pageROM, // -V641                                                                                                                                     //--- ПАМЯТЬ - ВНУТР ЗУ ---
+DEF_PAGE_4( pROM, // -V641                                                                                                                                        //--- ПАМЯТЬ - ВНУТР ЗУ ---
     "ВНУТР ЗУ",
     "Переход в режим работы с внутренней памятью",
     &bPrev,         ///< ПАМЯТЬ - ВНУТР ЗУ - Предыдущий
@@ -195,5 +195,5 @@ DEF_PAGE_4( pageROM, // -V641                                                   
     &bSave,         ///< ПАМЯТЬ - ВНУТР ЗУ - Сохранить
     &bDelete,       ///< ПАМЯТЬ - ВНУТР ЗУ - Удалить
     PageName::Memory_Internal,
-    &PageMemory::self, nullptr, OnOpenClose_Internal, OnDraw_Internal, HandlerKey_Internal
+    &PageMemory::self, nullptr, OnOpenClose_ROM, AfterDraw_ROM, OnArrows_ROM
 )

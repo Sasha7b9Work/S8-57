@@ -11,12 +11,8 @@
 
 using namespace Osci::Settings;
 
-extern const Page pTime;
 
-const Page * const PageTime::self = (const Page *)&pTime;
-
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static bool IsActive_Sample()
 {
     return Osci::InModeRandomizer() && !START_MODE_IS_SINGLE;
@@ -110,3 +106,5 @@ DEF_PAGE_4( pTime, // -V641 // -V1027                                           
     &cShiftXtype,       ///< ÐÀÇÂÅÐÒÊÀ - Ñìåùåíèå
     PageName::Time, nullptr, E_BtV, E_VB, E_VV, E_BfKE
 )
+
+const Page * const PageTime::self = (const Page *)&pTime;

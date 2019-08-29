@@ -3,13 +3,7 @@
 #include "Menu/Pages/Include/PageFunction.h"
 
 
-extern const Page pageOperations;
-
-const Page * const PageRecorder::PageShow::PageOperations::self = (const Page *)&pageOperations;
-
-
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void OnPress_Rename()
 {
 
@@ -57,9 +51,8 @@ DEF_BUTTON( bDelete,                                                            
     &PageRecorder::PageShow::PageOperations::self, E_BtV, OnPress_Delete
 )
 
-
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-DEF_PAGE_4( pageOperations, // -V641 // -V1027                                                                                          //--- ‘”Õ ÷»ﬂ - –≈√»—“–¿“Œ– - œ–Œ—ÃŒ“– - Œœ≈–¿÷»» ---
+DEF_PAGE_4( pOperations, // -V641 // -V1027                                                                                             //--- ‘”Õ ÷»ﬂ - –≈√»—“–¿“Œ– - œ–Œ—ÃŒ“– - Œœ≈–¿÷»» ---
     "Œœ≈–¿÷»»",
     "",
     &bRename,   ///< ‘”Õ ÷»ﬂ - –≈√»—“–¿“Œ– - œ–Œ—ÃŒ“– - Œœ≈–¿÷»» - œÂÂËÏÂÌÓ‚‡Ú¸
@@ -68,3 +61,5 @@ DEF_PAGE_4( pageOperations, // -V641 // -V1027                                  
     &bDelete,   ///< ‘”Õ ÷»ﬂ - –≈√»—“–¿“Œ– - œ–Œ—ÃŒ“– - Œœ≈–¿÷»» - ”‰‡ÎËÚ¸
     PageName::Function_Recorder_Show_Operations, &PageRecorder::PageShow::self, E_BtV, E_VB, E_VV, E_BfKE
 )
+
+const Page * const PageRecorder::PageShow::PageOperations::self = (const Page *)&pOperations;

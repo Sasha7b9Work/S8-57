@@ -48,7 +48,7 @@ static void Draw_Next(int x, int y)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static bool HandlerKey_Help(KeyEvent)
+static bool OnArrows_Help(KeyEvent)
 {
     return true;
 }
@@ -117,5 +117,5 @@ DEF_PAGE_4( pHelp, // -V641 // -V1027                                           
     &bLeave,
     &bPrev,
     &bNext,
-    PageName::Help, nullptr, E_BtV, E_VB, HelpContent::Draw, HandlerKey_Help
+    PageName::Help, nullptr, E_BtV, E_VB, HelpContent::Draw, OnArrows_Help
 )

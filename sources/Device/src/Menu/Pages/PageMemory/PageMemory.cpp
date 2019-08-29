@@ -22,13 +22,11 @@
 using namespace Display::Primitives;
 using namespace Osci::Settings;
 
-extern const Page pageMemory;
 extern const Page ppDrive;
 extern const Page pManager;
 extern const Page pMask;
 extern const Page pSetName;
 
-const Page * const PageMemory::self = (const Page *)&pageMemory;
 const Page * const PageSetName::self = (const Page *)&pSetName;
 const Page * const PageDrive::self = (const Page *)&ppDrive;
 const Page * const PageDrive::PageManager::self = (const Page *)&pManager;
@@ -459,7 +457,7 @@ DEF_CHOICE_2( cDrive_Autoconnect,                                               
     &PageDrive::self, E_BtV, E_VB, E_VII
 )
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 DEF_PAGE_6( ppDrive,  //-V641 //-V1027                                                                                                                            //--- ПАМЯТЬ - ВНЕШН ЗУ ---
     "ВНЕШН ЗУ",
     "Работа с внешним запоминающим устройством.",
@@ -474,8 +472,8 @@ DEF_PAGE_6( ppDrive,  //-V641 //-V1027                                          
     E_BtV, E_VB, E_VV, E_BfKE
 )
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-DEF_PAGE_4( pageMemory, // -V641 // -V1027                                                                                                                                   //--- ПЯМЯТЬ ---
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+DEF_PAGE_4( pMemory, // -V641 // -V1027                                                                                                                                      //--- ПЯМЯТЬ ---
     "ПАМЯТЬ",
     "Работа с внешней и внутренней памятью.",
     &cPoints,               ///< ПАМЯТЬ - Точки
@@ -484,6 +482,9 @@ DEF_PAGE_4( pageMemory, // -V641 // -V1027                                      
     PageDrive::self,        ///< ПАМЯТЬ - ВНЕШН ЗУ
     PageName::Memory, nullptr, E_BtV, E_VB, E_VV, E_BfKE
 )
+
+const Page * const PageMemory::self = (const Page *)&pMemory;
+
 
 void PageMemory::SaveSignalToFlashDrive()
 {
@@ -644,7 +645,7 @@ DEF_GRAPH_BUTTON( bSetName_Save,                                                
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-static bool HandlerKey_SetName(KeyEvent event)
+static bool OnArrows_SetName(KeyEvent event)
 {
     OnMemExtSetMaskNameRegSet(event.Delta(), Tables::Size() / 4 - 7);
 
@@ -670,12 +671,12 @@ void OnMemExtSetMaskNameRegSet(int angle, int maxIndex)
 
 }
 
-DEF_PAGE_4(pSetName, // -V641                                                                                                                // Страница вызывается для ввода имени файла ///
+DEF_PAGE_4( pSetName, // -V641                                                                                                            //--- Страница вызывается для ввода имени файла ---
     "",
     "",
     &bSetName_Delete,       /// ВВОД ИМЕНИ ФАЙЛА - Удалить
     &bSetName_Backspace,    /// ВВОД ИМЕНИ ФАЙЛА - Backspace
     &bSetName_Insert,       /// ВВОД ИМЕНИ ФАЙЛА - Вставить
     &bSetName_Save,         /// ВВОД ИМЕНИ ФАЙЛА - Сохранить
-    PageName::Memory_SetName, nullptr, E_BtV, E_VB, E_VV, HandlerKey_SetName
+    PageName::Memory_SetName, nullptr, E_BtV, E_VB, E_VV, OnArrows_SetName
 )
