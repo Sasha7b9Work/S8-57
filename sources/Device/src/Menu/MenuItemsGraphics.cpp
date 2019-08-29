@@ -122,6 +122,7 @@ void Governor::Draw(int x, int y, bool opened) const
 void Governor::DrawOpened(int x, int y) const
 {
     DrawCommonHiPart(x, y, true);
+    Rectangle(Width() - 1, HeightOpened() - 1).Draw(x, y + 1, Color::FILL);
     DrawLowPart(x, y + 13);
 }
 
@@ -149,15 +150,12 @@ void Governor::DrawValue(int x, int y) const
     Font::SetCurrent(Font::Type::_5);
     bool sign = (OwnData()->min < 0);
     
-    //if(maxValue < 65536)
-    {
-        Integer(OwnData()->max).ToString(sign, 1).Draw(x + 55, y - 5, Color::WHITE);
-        Integer(OwnData()->min).ToString(sign, 1).Draw(x + 55, y + 2);
-    }
+    Integer(OwnData()->max).ToString(sign, 1).Draw(x + 50, y - 5, Color::WHITE);
+    Integer(OwnData()->min).ToString(sign, 1).Draw(x + 50, y + 1);
     
     Font::SetCurrent(Font::Type::_8);
 
-    DrawValueWithSelectedPosition(x + 2, y, value, NumDigits(), currentDigit, true);
+    DrawValueWithSelectedPosition(x + 3, y, value, NumDigits(), currentDigit, true);
 
     if (sign)
     {
@@ -168,7 +166,7 @@ void Governor::DrawValue(int x, int y) const
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Governor::DrawLowPart(int x, int y) const
 {
-    Region(Width() + 1, Value::HEIGHT - 3).Fill(x + 1, y - 1, Color::MenuItemField());
+    Region(Width() - 3, Value::HEIGHT - 3).Fill(x + 1, y - 1, Color::MenuItemField());
 
     if (Menu::OpenedItem() != this)
     {
