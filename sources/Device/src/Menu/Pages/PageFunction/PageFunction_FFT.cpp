@@ -34,7 +34,7 @@ static bool IsActive_Source()
     return FFT_ENABLED;
 }
 
-DEF_CHOICE_3( cSource,                                                                                                                              //--- ФУНКЦИЯ - СПЕКТР - Источник ---
+DEF_CHOICE_3( cSource,                                                                                                                                  //--- ФУНКЦИЯ - СПЕКТР - Источник ---
     "Источник",
     "Выбор источника для расчёта спектра",
     "Канал 1",
@@ -49,7 +49,7 @@ static bool IsActive_Window()
     return FFT_ENABLED;
 }
 
-DEF_CHOICE_4( cWindow,                                                                                                                                  //--- ФУНКЦИЯ - СПЕКТР - Окно ---
+DEF_CHOICE_4( cWindow,                                                                                                                                      //--- ФУНКЦИЯ - СПЕКТР - Окно ---
     "Окно",
     "Задаёт окно для расчёта спектра",
     "Прямоугольн",
@@ -65,7 +65,7 @@ static bool IsActive_Range()
     return FFT_ENABLED && SCALE_FFT_IS_LOG;
 }
 
-DEF_CHOICE_3( cRange,                                                                                                                               //--- ФУНКЦИЯ - СПЕКТР - Диапазон ---
+DEF_CHOICE_3( cRange,                                                                                                                                   //--- ФУНКЦИЯ - СПЕКТР - Диапазон ---
     "Диапазон",
     "Здесь можно задать предел наблюдения за мощностью спектра",
     "-40дБ",

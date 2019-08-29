@@ -86,7 +86,7 @@ DEF_CHOICE_2( cRangesCurrentAC,
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static bool FuncActive_RangesReistance()
+static bool IsActive_RangesReistance()
 {
     return MULTI_MEASURE == Multimeter::Measure::Resistance;
 }
@@ -99,14 +99,14 @@ static void OnChange_Resistance(bool active)
     }
 }
 
-DEF_CHOICE_4(   cRangesResistance,                                                                                                                              //--- ћультиметр - ѕредел ---
+DEF_CHOICE_4( cRangesResistance,                                                                                                                                //--- ћультиметр - ѕредел ---
     "ѕредел",
     "ƒиапазон измерени€",
     "2 кќм",
     "20 кќм",
     "200 кќм",
     "10 ћќм",
-    MULTI_RANGE_RESISTANCE, &PageMultimeter::self, FuncActive_RangesReistance, OnChange_Resistance, E_VII
+    MULTI_RANGE_RESISTANCE, &PageMultimeter::self, IsActive_RangesReistance, OnChange_Resistance, E_VII
 )
 
 DEF_CHOICE_7(   cMode,
