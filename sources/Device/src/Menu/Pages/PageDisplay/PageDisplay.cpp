@@ -68,7 +68,7 @@ static void OnChange_AverageNum(bool)
     Osci::Averager::SettingChanged();
 }
 
-DEF_CHOICE_9(cAverage_Num,                                                                                                                        //--- ДИСПЛЕЙ - УСРЕДНЕНИЕ - Количество ---
+DEF_CHOICE_9( cAverage_Num,                                                                                                                       //--- ДИСПЛЕЙ - УСРЕДНЕНИЕ - Количество ---
     "Усреднение",
     "Задаёт количество последних измерений, по которым производится усреднение.",
     DISABLE_RU,
