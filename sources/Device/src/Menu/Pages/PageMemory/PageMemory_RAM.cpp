@@ -22,41 +22,41 @@ const Page * const PageRAM::self = (const Page *)&pageRAM;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-static void OnPress_Last_Next()
+static void OnPress_Next()
 {
     Memory::RAM::SelectNextSignal();
 }
 
-static void Draw_Last_Next(int x, int y)
+static void Draw_Next(int x, int y)
 {
     Font::SetCurrent(Font::Type::_UGO2);
     Char(SYMBOL_ARROW_RIGHT).Draw4SymbolsInRect(x + 2, y + 2);
     Font::SetCurrent(Font::Type::_8);
 }
 
-DEF_GRAPH_BUTTON( bLast_Next,                                                                                                                        //--- ѕјћя“№ - ѕќ—Ћ≈ƒЌ»≈ - —ледующий ---
+DEF_GRAPH_BUTTON( bNext,                                                                                                                             //--- ѕјћя“№ - ѕќ—Ћ≈ƒЌ»≈ - —ледующий ---
     "—ледующий",
     "ѕерейти к следующему сигналу",
-    &PageRAM::self, E_BtV, OnPress_Last_Next, Draw_Last_Next
+    &PageRAM::self, E_BtV, OnPress_Next, Draw_Next
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void OnPress_Last_Prev()
+static void OnPress_Prev()
 {
     Memory::RAM::SelectPrevSignal();
 }
 
-static void Draw_Last_Prev(int x, int y)
+static void Draw_Prev(int x, int y)
 {
     Font::SetCurrent(Font::Type::_UGO2);
     Char(SYMBOL_ARROW_LEFT).Draw4SymbolsInRect(x + 2, y + 2);
     Font::SetCurrent(Font::Type::_8);
 }
 
-DEF_GRAPH_BUTTON( bLast_Prev,                                                                                                                       //--- ѕјћя“№ - ѕќ—Ћ≈ƒЌ»≈ - ѕредыдущий ---
+DEF_GRAPH_BUTTON( bPrev,                                                                                                                            //--- ѕјћя“№ - ѕќ—Ћ≈ƒЌ»≈ - ѕредыдущий ---
     "ѕредыдущий",
     "ѕерейти к предыдущему сигналу",
-    &PageRAM::self, E_BtV, OnPress_Last_Prev, Draw_Last_Prev
+    &PageRAM::self, E_BtV, OnPress_Prev, Draw_Prev
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -115,8 +115,8 @@ static bool HandlerKey_RAM(KeyEvent /*event*/)
 DEF_PAGE_2( pageRAM, // -V641 // -V1027                                                                                                                          //--- ѕјћя“№ - ѕќ—Ћ≈ƒЌ»≈ ---
     "ѕќ—Ћ≈ƒЌ»≈",
     "ѕереход в режим работы с последними полученными сигналами",
-    &bLast_Prev,                        ///< ѕјћя“№ - ѕќ—Ћ≈ƒЌ»≈ - ѕредыдущий
-    &bLast_Next,                        ///< ѕјћя“№ - ѕќ—Ћ≈ƒЌ»≈ - —ледующий
+    &bPrev,                        ///< ѕјћя“№ - ѕќ—Ћ≈ƒЌ»≈ - ѕредыдущий
+    &bNext,                        ///< ѕјћя“№ - ѕќ—Ћ≈ƒЌ»≈ - —ледующий
     PageName::Memory_Last,
     &PageMemory::self, E_BtV, OnOpenClose_RAM, OnDraw_RAM, HandlerKey_RAM
 )

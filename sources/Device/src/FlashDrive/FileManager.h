@@ -18,15 +18,15 @@ public:
     /// Нарисовать файловый менеджер
     static void Draw();
     
-    static void PressSB_LevelUp();
+    static void Press_LevelUp();
     
-    static void PressSB_LevelDown();
+    static void Press_LevelDown();
     
     static bool HandlerKey(KeyEvent event);
     
     static bool GetNameForNewFile(char name[255]);
 
-    static void PressSB_Tab();
+    static void Press_Tab();
 };
 
 /** @}

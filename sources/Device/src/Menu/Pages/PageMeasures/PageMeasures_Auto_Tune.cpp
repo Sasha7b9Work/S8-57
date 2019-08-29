@@ -21,21 +21,21 @@ const Page * const PageMeasuresAuto::PageTune::self = (const Page *)&pageTune;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-static void Draw_Tune_Markers(int x, int y)
+static void Draw_Markers(int x, int y)
 {
     Font::SetCurrent(Font::Type::_UGO2);
     Char('\x60').Draw4SymbolsInRect(x + 2, y + 2);
     Font::SetCurrent(Font::Type::_8);
 }
 
-DEF_GRAPH_BUTTON( bTune_Markers,                                                                                                                     //--- ИЗМЕРЕНИЯ - НАСТРОИТЬ - Маркер ---
+DEF_GRAPH_BUTTON( bMarkers,                                                                                                                          //--- ИЗМЕРЕНИЯ - НАСТРОИТЬ - Маркер ---
     "Маркер",
     "Позволяет установить маркеры для визуального контроля измерений",
-    &PageMeasuresAuto::PageTune::self, E_BtV, Measure::ShortPressOnSmallButonMarker, Draw_Tune_Markers
+    &PageMeasuresAuto::PageTune::self, E_BtV, Measure::ShortPressOnSmallButonMarker, Draw_Markers
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void Draw_Tune_Settings(int x, int y)
+static void Draw_Settings(int x, int y)
 {
     Font::SetCurrent(Font::Type::_UGO2);
 
@@ -44,10 +44,10 @@ static void Draw_Tune_Settings(int x, int y)
     Font::SetCurrent(Font::Type::_8);
 }
 
-DEF_GRAPH_BUTTON( bTune_Settings,                                                                                                                 //--- ИЗМЕРЕНИЯ - НАСТРОИТЬ - Настройка ---
+DEF_GRAPH_BUTTON( bSettings,                                                                                                                      //--- ИЗМЕРЕНИЯ - НАСТРОИТЬ - Настройка ---
     "Настройка",
     "Позволяет выбрать необходимые измерения",
-    &PageMeasuresAuto::PageTune::self, E_BtV, Measurements::PageChoice::ChangeState, Draw_Tune_Settings
+    &PageMeasuresAuto::PageTune::self, E_BtV, Measurements::PageChoice::ChangeState, Draw_Settings
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -66,7 +66,7 @@ static bool HandlerKey_Tune(KeyEvent event)
 DEF_PAGE_2( pageTune, // -V641 // -V1027
     "НАСТРОИТЬ",
     "Переход в режим точной настройки количества и видов измерений",
-    &bTune_Markers,
-    &bTune_Settings,
+    &bMarkers,
+    &bSettings,
     PageName::Measures_Auto_Tune, &PageMeasuresAuto::self, IsActive_Tune, E_VB, E_VV, HandlerKey_Tune
 )

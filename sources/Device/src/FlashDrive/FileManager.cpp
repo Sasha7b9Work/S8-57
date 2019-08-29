@@ -193,7 +193,7 @@ void FileManager::Draw() //-V2506
     //FSMC::SetMode(mode);
 }
 
-void FileManager::PressSB_LevelDown() //-V2506
+void FileManager::Press_LevelDown() //-V2506
 {
     FM_NEED_REDRAW = FM_REDRAW_FULL;
     if (!FM_CURSOR_IN_DIRS)
@@ -217,7 +217,7 @@ void FileManager::PressSB_LevelDown() //-V2506
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void FileManager::PressSB_LevelUp() //-V2506
+void FileManager::Press_LevelUp() //-V2506
 {
     FM_NEED_REDRAW = FM_REDRAW_FULL;
     if (std::strlen(currentDir) == 1)
@@ -410,7 +410,7 @@ bool FileManager::GetNameForNewFile(char name[255]) //-V2506
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void FileManager::PressSB_Tab()
+void FileManager::Press_Tab()
 {
     FM_NEED_REDRAW = FM_REDRAW_FOLDERS;
 

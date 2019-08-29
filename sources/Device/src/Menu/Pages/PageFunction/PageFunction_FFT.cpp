@@ -82,20 +82,20 @@ DEF_CHOICE_3( cFFT_Range,                                                       
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void OnPress_FFT_Cursors_Source()
+static void OnPress_Cursors_Source()
 {
     MATH_CURRENT_CUR = (uint8)((MATH_CURRENT_CUR + 1) % 2);
 }
 
-static void Draw_FFT_Cursors_Source(int x, int y)
+static void Draw_Cursors_Source(int x, int y)
 {
     String(MATH_CURRENT_CUR_IS_0 ? "1" : "2").Draw(x + 7, y + 5);
 }
 
-DEF_GRAPH_BUTTON( bFFT_Cursors_Source,                                                                                                        //--- ФУНКЦИЯ - СПЕКТР - КУРСОРЫ - Источник ---
+DEF_GRAPH_BUTTON( bCursors_Source,                                                                                                            //--- ФУНКЦИЯ - СПЕКТР - КУРСОРЫ - Источник ---
     "Источник",
     "Выбор источника для расчёта спектра",
-    &PageFFT::PageCursors::self, E_BtV, OnPress_FFT_Cursors_Source, Draw_FFT_Cursors_Source
+    &PageFFT::PageCursors::self, E_BtV, OnPress_Cursors_Source, Draw_Cursors_Source
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -124,7 +124,7 @@ static bool HandlerKey_FFT_Cursors(KeyEvent event)
 DEF_PAGE_1( pppFFT_Cursors, // -V641 // -V1027                                                                                                           //--- ФУНКЦИЯ - СПЕКТР - КУРСОРЫ ---
     "КУРСОРЫ",
     "Включает курсоры для измерения параметров спектра",
-    &bFFT_Cursors_Source,                       ///< СЕРВИС - СПЕКТР - КУРСОРЫ - Источник
+    &bCursors_Source,                       ///< СЕРВИС - СПЕКТР - КУРСОРЫ - Источник
     PageName::Function_FFT_Cursors, &PageFFT::self, IsActive_FFT_Cursors, E_VB, E_VV, HandlerKey_FFT_Cursors
 )
 

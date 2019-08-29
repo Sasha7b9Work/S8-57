@@ -66,14 +66,14 @@ DEF_GRAPH_BUTTON( bPrev,
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void OnPress_Internal_Delete()
+static void OnPress_Delete()
 {
     Display::FuncOnWaitStart("”дал€ю сохранЄнные данные", false);
     Memory::DeleteData(NUM_ROM_SIGNAL);
     Display::FuncOnWaitStop();
 }
 
-static void Draw_Internal_Delete(int x, int y)
+static void Draw_Delete(int x, int y)
 {
     Font::SetCurrent(Font::Type::_UGO2);
     Char(SYMBOL_DELETE).Draw4SymbolsInRect(x + 2, y + 1);
@@ -83,7 +83,7 @@ static void Draw_Internal_Delete(int x, int y)
 DEF_GRAPH_BUTTON( bDelete,                                                                                                                              //--- ѕјћя“№ - ¬Ќ”“– «” - ”далить ---
     "”далить",
     "”дал€ет выбранный сигнал из внутреннего запоминающего устройства",
-    &PageROM::self, E_BtV, OnPress_Internal_Delete, Draw_Internal_Delete
+    &PageROM::self, E_BtV, OnPress_Delete, Draw_Delete
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -100,24 +100,24 @@ static void SaveSignalToIntMemory()
     }
 }
 
-static void OnPress_Internal_SaveToMemory()
+static void OnPress_SaveToMemory()
 {
     Display::FuncOnWaitStart("«аписываю в пам€ть", false);
     SaveSignalToIntMemory();
     Display::FuncOnWaitStop();
 }
 
-static void Draw_Internal_SaveToMemory(int x, int y)
+static void Draw_SaveToMemory(int x, int y)
 {
     Font::SetCurrent(Font::Type::_UGO2);
     Char(SYMBOL_SAVE_TO_MEM).Draw4SymbolsInRect(x + 2, y + 1);
     Font::SetCurrent(Font::Type::_8);
 }
 
-DEF_GRAPH_BUTTON( bSave,                                                                                                                   //--- ѕјћя“№ - ¬Ќ”“– «” - —охранить в пам€ти ---
+DEF_GRAPH_BUTTON( bSave,                                                                                                                     //--- ѕјћя“№ - ¬Ќ”“– «” - —охранить в пам€ти ---
     "—охранить в пам€ти",
     "—охранить сигнал во внутреннем запоминующем устройстве",
-    &PageROM::self, E_BtV, OnPress_Internal_SaveToMemory, Draw_Internal_SaveToMemory
+    &PageROM::self, E_BtV, OnPress_SaveToMemory, Draw_SaveToMemory
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

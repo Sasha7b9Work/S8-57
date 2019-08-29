@@ -16,7 +16,7 @@ const Page * const PageHelp::self = (const Page *)&pHelp;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-static void DrawSB_Help_ParagraphEnter(int x, int y)
+static void Draw_Enter(int x, int y)
 {
     Font::SetCurrent(Font::Type::_UGO2);
     Char('\x4a').Draw4SymbolsInRect(x + 2, y + 2);
@@ -24,7 +24,7 @@ static void DrawSB_Help_ParagraphEnter(int x, int y)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void DrawSB_Help_ParagraphLeave(int x, int y)
+static void Draw_Leave(int x, int y)
 {
     Font::SetCurrent(Font::Type::_UGO2);
     Char('\x48').Draw4SymbolsInRect(x + 2, y + 1);
@@ -32,7 +32,7 @@ static void DrawSB_Help_ParagraphLeave(int x, int y)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void DrawSB_Help_ParagraphPrev(int x, int y)
+static void Draw_Prev(int x, int y)
 {
     Font::SetCurrent(Font::Type::_UGO2);
     Char('\x4c').Draw4SymbolsInRect(x + 2, y + 5);
@@ -40,7 +40,7 @@ static void DrawSB_Help_ParagraphPrev(int x, int y)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void DrawSB_Help_ParagraphNext(int x, int y)
+static void Draw_Next(int x, int y)
 {
     Font::SetCurrent(Font::Type::_UGO2);
     Char('\x4e').Draw4SymbolsInRect(x + 2, y + 5);
@@ -54,31 +54,31 @@ static bool HandlerKey_Help(KeyEvent)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-DEF_GRAPH_BUTTON( sbHelpParagraphEnter,                                                                                                                            //--- ПОМОЩЬ - Открыть ---
+DEF_GRAPH_BUTTON( bEnter,                                                                                                                                          //--- ПОМОЩЬ - Открыть ---
     "Открыть",
     "Открывает раздел справки",
-    &PageHelp::self, HelpContent_EnterParagraphIsActive, HelpContent_EnterParagraph, DrawSB_Help_ParagraphEnter
+    &PageHelp::self, HelpContent::EnterParagraphIsActive, HelpContent::EnterParagraph, Draw_Enter
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-DEF_GRAPH_BUTTON( sbHelpParagraphLeave,                                                                                                                            //--- ПОМОЩЬ - Закрыть ---
+DEF_GRAPH_BUTTON( bLeave,                                                                                                                                          //--- ПОМОЩЬ - Закрыть ---
      "Закрыть",
      "Закрывает раздел справки",
-    &PageHelp::self, HelpContent_LeaveParagraphIsActive, HelpContent_LeaveParagraph, DrawSB_Help_ParagraphLeave
+    &PageHelp::self, HelpContent::LeaveParagraphIsActive, HelpContent::LeaveParagraph, Draw_Leave
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-DEF_GRAPH_BUTTON( sbHelpParagraphPrev,                                                                                                                   //--- ПОМОЩЬ - Предыдущий раздел ---
+DEF_GRAPH_BUTTON( bPrev,                                                                                                                                 //--- ПОМОЩЬ - Предыдущий раздел ---
     "Предыдущий раздел",
     "Выбрать предыдущий раздел справки",
-    &PageHelp::self, E_BtV, HelpContent_PrevParagraph, DrawSB_Help_ParagraphPrev
+    &PageHelp::self, E_BtV, HelpContent::PrevParagraph, Draw_Prev
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-DEF_GRAPH_BUTTON( sbHelpParagraphNext,                                                                                                                    //--- ПОМОЩЬ - Следующий раздел ---
+DEF_GRAPH_BUTTON( bNext,                                                                                                                    //--- ПОМОЩЬ - Следующий раздел ---
     "Следующий раздел",
     "Выбрать следующий раздел справки",
-    &PageHelp::self, E_BtV, HelpContent_NextParagraph, DrawSB_Help_ParagraphNext
+    &PageHelp::self, E_BtV, HelpContent::NextParagraph, Draw_Next
 )
 
 /*
@@ -101,11 +101,11 @@ DEF_PAGE_SB(        pHelp,                                                      
     "Открыть разделы помощи",
     "To open sections of the help",
     &sbExitHelp,
-    &sbHelpParagraphEnter,
-    &sbHelpParagraphLeave,
+    &bEnter,
+    &bLeave,
     0,
-    &sbHelpParagraphPrev,
-    &sbHelpParagraphNext,
+    &bPrev,
+    &bNext,
     Page::Name::SB_Help, Menu::pageMain, 0, 0, HelpContent_Draw, HandlerKey_Help
 )
 */
@@ -113,9 +113,9 @@ DEF_PAGE_SB(        pHelp,                                                      
 DEF_PAGE_4( pHelp, // -V641 // -V1027                                                                                                                                        //--- ПОМОЩЬ ---
     "ПОМОЩЬ",
     "Открыть разделы помощи",
-    &sbHelpParagraphEnter,
-    &sbHelpParagraphLeave,
-    &sbHelpParagraphPrev,
-    &sbHelpParagraphNext,
-    PageName::Help, nullptr, E_BtV, E_VB, HelpContent_Draw, HandlerKey_Help
+    &bEnter,
+    &bLeave,
+    &bPrev,
+    &bNext,
+    PageName::Help, nullptr, E_BtV, E_VB, HelpContent::Draw, HandlerKey_Help
 )

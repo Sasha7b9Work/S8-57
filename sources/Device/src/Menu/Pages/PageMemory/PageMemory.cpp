@@ -77,45 +77,45 @@ DEF_CHOICE_5( cPoints,                                                          
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void Draw_Drive_Manager_Tab(int x, int y)
+static void Draw_Manager_Tab(int x, int y)
 {
     Font::SetCurrent(Font::Type::_UGO2);
     Char(SYMBOL_TAB).Draw4SymbolsInRect(x + 2, y + 1);
     Font::SetCurrent(Font::Type::_8);
 }
 
-DEF_GRAPH_BUTTON( bDrive_Manager_Tab,                                                                                                             //--- ПАМЯТЬ - ВНЕШН ЗУ - КАТАЛОГ - Tab ---
+DEF_GRAPH_BUTTON( bManager_Tab,                                                                                                                   //--- ПАМЯТЬ - ВНЕШН ЗУ - КАТАЛОГ - Tab ---
     "Tab",
     "Переход между каталогами и файлами",
-    &PageDrive::PageManager::self, E_BtV, FileManager::PressSB_Tab, Draw_Drive_Manager_Tab
+    &PageDrive::PageManager::self, E_BtV, FileManager::Press_Tab, Draw_Manager_Tab
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void Draw_Drive_Manager_LevelUp(int x, int y)
+static void Draw_Manager_LevelUp(int x, int y)
 {
     Font::SetCurrent(Font::Type::_UGO2);
     Char('\x48').Draw4SymbolsInRect(x + 2, y + 1);
     Font::SetCurrent(Font::Type::_8);
 }
 
-DEF_GRAPH_BUTTON( bDrive_Manager_LevelUp,                                                                                           //--- ПАМЯТЬ - ВНЕШН ЗУ - КАТАЛОГ - Выйти из каталога ---
+DEF_GRAPH_BUTTON( bManager_LevelUp,                                                                                                 //--- ПАМЯТЬ - ВНЕШН ЗУ - КАТАЛОГ - Выйти из каталога ---
     "Выйти из каталого",
     "Переход в родительский каталог",
-    &PageDrive::PageManager::self, E_BtV, FileManager::PressSB_LevelUp, Draw_Drive_Manager_LevelUp
+    &PageDrive::PageManager::self, E_BtV, FileManager::Press_LevelUp, Draw_Manager_LevelUp
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void Draw_Drive_Manager_LevelDown(int x, int y)
+static void Draw_Manager_LevelDown(int x, int y)
 {
     Font::SetCurrent(Font::Type::_UGO2);
     Char('\x4a').Draw4SymbolsInRect(x + 2, y + 2);
     Font::SetCurrent(Font::Type::_8);
 }
 
-DEF_GRAPH_BUTTON( bDrive_Manager_LevelDown,                                                                                           //--- ПАМЯТЬ - ВНЕШН ЗУ - КАТАЛОГ - Войти в каталог ---
+DEF_GRAPH_BUTTON( bManager_LevelDown,                                                                                                 //--- ПАМЯТЬ - ВНЕШН ЗУ - КАТАЛОГ - Войти в каталог ---
     "Войти в каталог",
     "Переход в выбранный каталог",
-    &PageDrive::PageManager::self, E_BtV, FileManager::PressSB_LevelDown, Draw_Drive_Manager_LevelDown
+    &PageDrive::PageManager::self, E_BtV, FileManager::Press_LevelDown, Draw_Manager_LevelDown
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -144,11 +144,11 @@ DEF_PAGE_SB(        pppDrive_Manager,                                           
     "Открывает доступ к файловой системе подключенного накопителя",
     "Provides access to the file system of the connected drive",
     &bDrive_Manager_Exit,       // ПАМЯТЬ - ВНЕШН ЗУ - КАТАЛОГ - Выход
-    &bDrive_Manager_Tab,        // ПАМЯТЬ - ВНЕШН ЗУ - КАТАЛОГ - Tab
+    &bManager_Tab,        // ПАМЯТЬ - ВНЕШН ЗУ - КАТАЛОГ - Tab
     0,
     0,
-    &bDrive_Manager_LevelUp,    // ПАМЯТЬ - ВНЕШН ЗУ - КАТАЛОГ - Выйти из каталога
-    &bDrive_Manager_LevelDown,  // ПАМЯТЬ - ВНЕШН ЗУ - КАТАЛОГ - Войти в каталог
+    &bManager_LevelUp,    // ПАМЯТЬ - ВНЕШН ЗУ - КАТАЛОГ - Выйти из каталога
+    &bManager_LevelDown,  // ПАМЯТЬ - ВНЕШН ЗУ - КАТАЛОГ - Войти в каталог
     Page::Name::SB_Memory_Drive_Manager, &ppDrive, IsActive_Drive_Manager, PageMemory::OnOpenClose_Drive_Manager, FuncDrawPage, FileManager::RotateRegSet
 )
 */
@@ -156,9 +156,9 @@ DEF_PAGE_SB(        pppDrive_Manager,                                           
 DEF_PAGE_3( pppDrive_Manager, // -V641                                                                                                                  //--- ПАМЯТЬ - ВНЕШН ЗУ - КАТАЛОГ ---
     "КАТАЛОГ",
     "Открывает доступ к файловой системе подключенного накопителя",
-    &bDrive_Manager_Tab,        // ПАМЯТЬ - ВНЕШН ЗУ - КАТАЛОГ - Tab
-    &bDrive_Manager_LevelUp,    // ПАМЯТЬ - ВНЕШН ЗУ - КАТАЛОГ - Выйти из каталога
-    &bDrive_Manager_LevelDown,  // ПАМЯТЬ - ВНЕШН ЗУ - КАТАЛОГ - Войти в каталог
+    &bManager_Tab,        // ПАМЯТЬ - ВНЕШН ЗУ - КАТАЛОГ - Tab
+    &bManager_LevelUp,    // ПАМЯТЬ - ВНЕШН ЗУ - КАТАЛОГ - Выйти из каталога
+    &bManager_LevelDown,  // ПАМЯТЬ - ВНЕШН ЗУ - КАТАЛОГ - Войти в каталог
     PageName::Memory_Drive_Manager,
     &PageDrive::self, IsActive_Drive_Manager, PageMemory::OnOpenClose_Drive_Manager, E_VV, FileManager::HandlerKey
 )
@@ -179,7 +179,7 @@ DEF_CHOICE_2( cDrive_Name,                                                      
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void OnPress_Drive_Mask_Delete()
+static void OnPress_Mask_Delete()
 {
     FILE_NAME_MASK[0] = '\0';
 }
@@ -191,14 +191,14 @@ static void Draw_Delete(int x, int y)
     Font::SetCurrent(Font::Type::_8);
 }
 
-DEF_GRAPH_BUTTON( bDrive_Mask_Delete,                                                                                                           //--- ПАМЯТЬ - ВНЕШН ЗУ - МАСКА - Удалить ---
+DEF_GRAPH_BUTTON( bMask_Delete,                                                                                                                 //--- ПАМЯТЬ - ВНЕШН ЗУ - МАСКА - Удалить ---
     "Удалить",
     "Удаляет все введённые символы",
-    &PageDrive::PageMask::self, E_BtV, OnPress_Drive_Mask_Delete, Draw_Delete
+    &PageDrive::PageMask::self, E_BtV, OnPress_Mask_Delete, Draw_Delete
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void OnPress_Drive_Mask_Backspace()
+static void OnPress_Mask_Backspace()
 {
     int size = (int)std::strlen(FILE_NAME_MASK);
     if (size > 0)
@@ -221,14 +221,14 @@ static void Draw_Backspace(int x, int y)
     Font::SetCurrent(Font::Type::_8);
 }
 
-DEF_GRAPH_BUTTON( bDrive_Mask_Backspace,                                                                                                      //--- ПАМЯТЬ - ВНЕШН ЗУ - МАСКА - Backspace ---
+DEF_GRAPH_BUTTON( bMask_Backspace,                                                                                                      //--- ПАМЯТЬ - ВНЕШН ЗУ - МАСКА - Backspace ---
     "Backspace",
     "Удаляет последний введённый символ",
-    &PageDrive::PageMask::self, E_BtV, OnPress_Drive_Mask_Backspace, Draw_Backspace
+    &PageDrive::PageMask::self, E_BtV, OnPress_Mask_Backspace, Draw_Backspace
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void OnPress_Drive_Mask_Insert()
+static void OnPress_Mask_Insert()
 {
     int index = INDEX_SYMBOL;
     int size = (int)std::strlen(FILE_NAME_MASK);
@@ -271,10 +271,10 @@ static void Draw_Insert(int x, int y)
     Font::SetCurrent(Font::Type::_8);
 }
 
-DEF_GRAPH_BUTTON( bDrive_Mask_Insert,                                                                                                          //--- ПАМЯТЬ - ВНЕШН ЗУ - МАСКА - Вставить ---
+DEF_GRAPH_BUTTON( bMask_Insert,                                                                                                                //--- ПАМЯТЬ - ВНЕШН ЗУ - МАСКА - Вставить ---
     "Вставить",
     "Вставляет выбранный символ",
-    &PageDrive::PageMask::self, E_BtV, OnPress_Drive_Mask_Insert, Draw_Insert
+    &PageDrive::PageMask::self, E_BtV, OnPress_Mask_Insert, Draw_Insert
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -428,11 +428,11 @@ DEF_PAGE_SB( pppDrive_Mask,                                                     
     "Режим ввода маски для автоматического именования файлов",
     "Input mode mask for automatic file naming",
     &bDrive_Mask_Exit,      // ПАМЯТЬ - ВНЕШН ЗУ - МАСКА - Выход
-    &bDrive_Mask_Delete,    // ПАМЯТЬ - ВНЕШН ЗУ - МАСКА - Удалить
+    &bMask_Delete,    // ПАМЯТЬ - ВНЕШН ЗУ - МАСКА - Удалить
     0,
     0,
-    &bDrive_Mask_Backspace, // ПАМЯТЬ - ВНЕШН ЗУ - МАСКА - Backspace
-    &bDrive_Mask_Insert,    // ПАМЯТЬ - ВНЕШН ЗУ - МАСКА - Вставить
+    &bMask_Backspace, // ПАМЯТЬ - ВНЕШН ЗУ - МАСКА - Backspace
+    &bMask_Insert,    // ПАМЯТЬ - ВНЕШН ЗУ - МАСКА - Вставить
     Page::Name::SB_Memory_Drive_Mask, &ppDrive, IsActive_Drive_Mask, OnPress_Drive_Mask, FuncDrawPage, OnRegSet_Drive_Mask
 )
 */
@@ -441,9 +441,9 @@ DEF_PAGE_SB( pppDrive_Mask,                                                     
 DEF_PAGE_3( pppDrive_Mask, // -V641                                                                                                                       //--- Память - ВНЕШН ЗУ - МАСКА ---
     "МАСКА",
     "Режим ввода маски для автоматического именования файлов",
-    &bDrive_Mask_Delete,    // ПАМЯТЬ - ВНЕШН ЗУ - МАСКА - Удалить
-    &bDrive_Mask_Backspace, // ПАМЯТЬ - ВНЕШН ЗУ - МАСКА - Backspace
-    &bDrive_Mask_Insert,    // ПАМЯТЬ - ВНЕШН ЗУ - МАСКА - Вставить
+    &bMask_Delete,    // ПАМЯТЬ - ВНЕШН ЗУ - МАСКА - Удалить
+    &bMask_Backspace, // ПАМЯТЬ - ВНЕШН ЗУ - МАСКА - Backspace
+    &bMask_Insert,    // ПАМЯТЬ - ВНЕШН ЗУ - МАСКА - Вставить
     PageName::Memory_Drive_Mask,
     &PageDrive::self, IsActive_Drive_Mask, OnOpenClose_Drive_Mask, E_VV, HandlerKey_Drive_Mask
 )

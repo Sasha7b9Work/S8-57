@@ -87,25 +87,25 @@ struct PageName
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #define DEF_BUTTON(name, title, hint, keeper, funcActive, handlerPress)                                                                                                                     \
-static const DataButton db##name = {handlerPress};                                                                                                                                          \
+static const DataButton db##name = { handlerPress };                                                                                                                                        \
 static const DataItem di##name = { Item::Type::Button, title, hint, keeper, funcActive, &db##name };                                                                                        \
 static const Button name(&di##name);
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #define DEF_GOVERNOR(name, title, hint, cell, min, max, keeper, funcActive, handlerChange)                                                                                                  \
-static const DataGovernor dg##name = {(int16 *)&cell, min, max, handlerChange};                                                                                                             \
+static const DataGovernor dg##name = { (int16 *)&cell, min, max, handlerChange };                                                                                                           \
 static const DataItem di##name = { Item::Type::Button, title, hint, keeper, funcActive, &dg##name };                                                                                        \
 static const Governor name(&di##name);
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #define DEF_GOVERNOR_COLOR(name, title, hint, colorType, keeper)                                                                                                                            \
-static const DataGovernorColor dgc##name = {&colorType};                                                                                                                                    \
-static const DataItem di##name = { Item::Type::GovernorColor, title, hint, keeper, E_BtV, &dgc##name };                                                                              \
+static const DataGovernorColor dgc##name = { &colorType };                                                                                                                                  \
+static const DataItem di##name = { Item::Type::GovernorColor, title, hint, keeper, E_BtV, &dgc##name };                                                                                     \
 static const GovernorColor name(&di##name);
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-#define DEF_GRAPH_BUTTON(name, title, hint, keeper, funcActive, funcPress, funcDraw)                                                                                                        \
-static const DataGraphButton dgb##name = {funcPress, funcDraw, nullptr};                                                                                                                    \
+#define DEF_GRAPH_BUTTON(name, title, hint, keeper, funcActive, handlerPress, funcDraw)                                                                                                     \
+static const DataGraphButton dgb##name = { handlerPress, funcDraw, nullptr };                                                                                                               \
 static const DataItem hi##name = { Item::Type::GovernorColor, title, hint, keeper, funcActive, &dgb##name };                                                                                \
 static const GraphButton name(&hi##name);
 

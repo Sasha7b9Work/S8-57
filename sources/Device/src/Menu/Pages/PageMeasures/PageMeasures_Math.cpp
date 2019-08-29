@@ -146,13 +146,13 @@ DEF_GRAPH_BUTTON_HINTS_2(bFunction_ModeRegSet,                                  
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void OnPress_Function_RangeA()
+static void OnPress_RangeA()
 {
     SET_RANGE_MATH = SET_RANGE_A;
     MATH_DIVIDER = (int8)SET_DIVIDER(Chan::A);
 }
 
-static void Draw_Function_RangeA(int x, int y)
+static void Draw_RangeA(int x, int y)
 {
     Char('1').Draw(x + 8, y + 5);
 }
@@ -162,20 +162,20 @@ static bool IsActive_RangeA()
     return FUNC_MODE_DRAW_IS_ENABLED;
 }
 
-DEF_GRAPH_BUTTON(bFunction_RangeA,                                                                                                          //--- СЕРВИС - ФУНКЦИЯ - Масштаб 1-го канала ---
+DEF_GRAPH_BUTTON( bRangeA,                                                                                                                   //--- СЕРВИС - ФУНКЦИЯ - Масштаб 1-го канала ---
     "Масштаб 1-го канала",
     "Использует масштаб первого канала для отображения результата",
-    &PageMeasuresMath::self, IsActive_RangeA, OnPress_Function_RangeA, Draw_Function_RangeA
+    &PageMeasuresMath::self, IsActive_RangeA, OnPress_RangeA, Draw_RangeA
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void OnPress_Function_RangeB()
+static void OnPress_RangeB()
 {
     SET_RANGE_MATH = SET_RANGE_B;
     MATH_DIVIDER = (int8)SET_DIVIDER(Chan::B);
 }
 
-static void Draw_Function_RangeB(int x, int y)
+static void Draw_RangeB(int x, int y)
 {
     Char('2').Draw(x + 8, y + 5);
 }
@@ -185,10 +185,10 @@ static bool IsActive_RangeB()
     return FUNC_MODE_DRAW_IS_ENABLED;
 }
 
-DEF_GRAPH_BUTTON(bFunction_RangeB,                                                                                                          //--- СЕРВИС - ФУНКЦИЯ - Масштаб 2-го канала ---
+DEF_GRAPH_BUTTON( bRangeB,                                                                                                                   //--- СЕРВИС - ФУНКЦИЯ - Масштаб 2-го канала ---
     "Масштаб 2-го канала",
     "Использует масштаб второго канала для отображения результата",
-    &PageMeasuresMath::self, IsActive_RangeB, OnPress_Function_RangeB, Draw_Function_RangeB
+    &PageMeasuresMath::self, IsActive_RangeB, OnPress_RangeB, Draw_RangeB
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -291,7 +291,7 @@ DEF_PAGE_5( pageMath, // -V641                                                  
     &bFunction_Screen,
     &bFunction_Type,
     &bFunction_ModeRegSet,
-    &bFunction_RangeA,
-    &bFunction_RangeB,
+    &bRangeA,
+    &bRangeB,
     PageName::Measures_Math, &PageMeasures::self, IsActive_Function, OnOpenClose_Function, E_VV, HandlerKey_Function
 )
