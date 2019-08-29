@@ -13,9 +13,9 @@
 using namespace Osci::Settings;
 
 extern const Page pageDisplay;
-extern const Page pageViewSignal;
+//extern const Page pageViewSignal;
 
-const Page * const PageDisplay::PageView::self = (const Page *)&pageViewSignal;
+//const Page * const PageDisplay::PageView::self = (const Page *)&pageViewSignal;
 const Page * const PageDisplay::self = (const Page *)&pageDisplay;
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -99,12 +99,12 @@ DEF_CHOICE_2( cViewMode,                                                        
 )
 
 
-DEF_PAGE_1( pageViewSignal, //-V641
-    "ОТОБРАЖ",
-    "Настройки отображения сигналов",
-    &cViewMode,
-    PageName::Display_View, &PageDisplay::self, E_BtV, E_VB, E_VV, E_BfKE
-)
+//_DEF_PAGE_1( pageViewSignal, //-V641
+//    "ОТОБРАЖ",
+//    "Настройки отображения сигналов",
+//    &cViewMode,
+//    PageName::Display_View, &PageDisplay::self, E_BtV, E_VB, E_VV, E_BfKE
+//)
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 DEF_PAGE_8( pageDisplay, // -V641 // -V1027                                                                                                                                 //--- ДИСПЛЕЙ ---

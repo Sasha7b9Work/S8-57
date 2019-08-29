@@ -305,7 +305,7 @@ PageName::E Page::GetName() const
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 bool Page::HandlerKey(KeyEvent event)
 {
-    if (OwnData()->handlerKeyEvent(event))
+    if (OwnData()->handlerArrows(event))
     {
         return true;
     }

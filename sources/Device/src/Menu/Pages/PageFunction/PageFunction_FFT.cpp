@@ -6,10 +6,10 @@
 
 
 extern const Page ppFFT;
-extern const Page pppFFT_Cursors;
+extern const Page pCursors;
 
 const Page * const PageFFT::self = (const Page *)&ppFFT;
-const Page * const PageFFT::PageCursors::self = (const Page *)&pppFFT_Cursors;
+const Page * const PageFFT::PageCursors::self = (const Page *)&pCursors;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -99,12 +99,12 @@ DEF_GRAPH_BUTTON( bCursors_Source,                                              
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-static bool IsActive_FFT_Cursors()
+static bool IsActive_Cursors()
 {
     return FFT_ENABLED;
 }
 
-static bool HandlerKey_FFT_Cursors(KeyEvent event)
+static bool OnArrows_FFT_Cursors(KeyEvent event)
 {
     if (event.type != TypePress::Press && event.type != TypePress::Repeat)
     {
@@ -121,11 +121,11 @@ static bool HandlerKey_FFT_Cursors(KeyEvent event)
     return true;
 }
 
-DEF_PAGE_1( pppFFT_Cursors, // -V641 // -V1027                                                                                                           //--- ÔÓÍÊÖÈß - ÑÏÅÊÒĞ - ÊÓĞÑÎĞÛ ---
+DEF_PAGE_1( pCursors, // -V641 // -V1027                                                                                                                 //--- ÔÓÍÊÖÈß - ÑÏÅÊÒĞ - ÊÓĞÑÎĞÛ ---
     "ÊÓĞÑÎĞÛ",
     "Âêëş÷àåò êóğñîğû äëÿ èçìåğåíèÿ ïàğàìåòğîâ ñïåêòğà",
     &bCursors_Source,                       ///< ÑÅĞÂÈÑ - ÑÏÅÊÒĞ - ÊÓĞÑÎĞÛ - Èñòî÷íèê
-    PageName::Function_FFT_Cursors, &PageFFT::self, IsActive_FFT_Cursors, E_VB, E_VV, HandlerKey_FFT_Cursors
+    PageName::Function_FFT_Cursors, &PageFFT::self, IsActive_Cursors, E_VB, E_VV, OnArrows_FFT_Cursors
 )
 
 
@@ -150,7 +150,7 @@ DEF_PAGE_6( ppFFT, // -V641 // -V1027                                           
     &cFFT_Scale,        ///< ÑÅĞÂÈÑ - ÑÏÅÊÒĞ - Øêàëà
     &cFFT_Source,       ///< ÑÅĞÂÈÑ - ÑÏÅÊÒĞ - Èñòî÷íèê
     &cFFT_Window,       ///< ÑÅĞÂÈÑ - ÑÏÅÊÒĞ - Îêíî 
-    &pppFFT_Cursors,    ///< ÑÅĞÂÈÑ - ÑÏÅÊÒĞ - ÊÓĞÑÎĞÛ
+    &pCursors,    ///< ÑÅĞÂÈÑ - ÑÏÅÊÒĞ - ÊÓĞÑÎĞÛ
     &cFFT_Range,        ///< ÑÅĞÂÈÑ - ÑÏÅÊÒĞ - Äèàïàçîí
     PageName::Function_FFT, &PageFunction::self, IsActive_FFT, OnOpenClose_FFT, E_VV, E_BfKE
 )

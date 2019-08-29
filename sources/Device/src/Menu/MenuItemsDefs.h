@@ -130,9 +130,9 @@ static const DataItem di##name = { Item::Type::GovernorColor, title, hint, keepe
 static const GraphButton name(&di##name);
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-#define DEF_PAGE_1(name, title, hint, item1, namePage, keeper, funcActive, funcOpenClose, funcDraw, funcRegSet)                                                                                 \
-static const Item * const i##name[] = {(Item *)item1, nullptr};                                                                                                                             \
-static const DataPage dp##name = { namePage, i##name, funcOpenClose, funcDraw, funcRegSet };                                                                                                    \
+#define DEF_PAGE_1(name, title, hint, item1, namePage, keeper, funcActive, funcOpenClose, funcAfterDraw, funcArrows)                                                                        \
+static const Item * const i##name[] = { (Item *)item1, nullptr };                                                                                                                           \
+static const DataPage dp##name = { namePage, i##name, funcOpenClose, funcAfterDraw, funcArrows };                                                                                           \
 static const DataItem di##name = { Item::Type::Page, title, hint, keeper, funcActive, &dp##name };                                                                                          \
 static const Page name(&di##name);
 
