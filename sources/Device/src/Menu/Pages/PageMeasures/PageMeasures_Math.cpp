@@ -22,7 +22,7 @@ const Page * const PageMeasuresMath::self = (const Page *)&pageMath;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-static void OnPress_Function_Screen()
+static void OnPress_Screen()
 {
     if (FFT_ENABLED)
     {
@@ -34,12 +34,12 @@ static void OnPress_Function_Screen()
     }
 }
 
-static void Draw_Function_Screen_Disable(int x, int y)
+static void Draw_Screen_Disable(int x, int y)
 {
     String("Выx").Draw(x + 2, y + 5);
 }
 
-static void Draw_Function_Screen_Separate(int x, int y)
+static void Draw_Screen_Separate(int x, int y)
 {
     Rectangle(13, 9).Draw(x + 3, y + 5);
     HLine line(13);
@@ -47,29 +47,29 @@ static void Draw_Function_Screen_Separate(int x, int y)
     line.Draw(x + 3, y + 10);
 }
 
-static void Draw_Function_Screen_Together(int x, int y)
+static void Draw_Screen_Together(int x, int y)
 {
     Rectangle(13, 9).Draw(x + 3, y + 5);
 }
 
-static void Draw_Function_Screen(int x, int y)
+static void Draw_Screen(int x, int y)
 {
     const pFuncVII funcs[3] =
     {
-        Draw_Function_Screen_Disable,
-        Draw_Function_Screen_Separate,
-        Draw_Function_Screen_Together
+        Draw_Screen_Disable,
+        Draw_Screen_Separate,
+        Draw_Screen_Together
     };
     funcs[FUNC_MODE_DRAW](x, y);
 }
 
-DEF_GRAPH_BUTTON_HINTS_3(bFunction_Screen,                                                                                                                //--- СЕРВИС - ФУНКЦИЯ - Экран ---
+DEF_GRAPH_BUTTON_HINTS_3( bScreen,                                                                                                                         //--- СЕРВИС - ФУНКЦИЯ - Экран ---
     "Экран",
     "Выбирает режим отображения математического сигнала",
-    &PageMeasuresMath::self, E_BtV, OnPress_Function_Screen, Draw_Function_Screen,
-    Draw_Function_Screen_Disable, "Вывод математической функции отключён",
-    Draw_Function_Screen_Separate, "Сигналы и математическая функция выводятся в разных окнах",
-    Draw_Function_Screen_Together, "Сигналы и математическая функция выводятся в одном окне"
+    &PageMeasuresMath::self, E_BtV, OnPress_Screen, Draw_Screen,
+    Draw_Screen_Disable, "Вывод математической функции отключён",
+    Draw_Screen_Separate, "Сигналы и математическая функция выводятся в разных окнах",
+    Draw_Screen_Together, "Сигналы и математическая функция выводятся в одном окне"
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -288,7 +288,7 @@ static bool HandlerKey_Function(KeyEvent event) // -V2506
 DEF_PAGE_5( pageMath, // -V641                                                                                                                                   //--- СЕРВИС - ФУНКЦИЯ ---
     "МАТЕМАТИКА",
     "Установка и выбор математической функции - сложения или умножения",
-    &bFunction_Screen,
+    &bScreen,
     &bType,
     &bModeArrows,
     &bRangeA,
