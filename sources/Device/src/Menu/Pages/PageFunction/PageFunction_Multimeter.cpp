@@ -109,7 +109,7 @@ DEF_CHOICE_4( cRangesResistance,                                                
     MULTI_RANGE_RESISTANCE, &PageMultimeter::self, IsActive_RangesReistance, OnChange_Resistance, E_VII
 )
 
-DEF_CHOICE_7(   cMode,
+DEF_CHOICE_7( cMode,
     "Режим"
     ,
     "Выбор типа измерениия\n"
