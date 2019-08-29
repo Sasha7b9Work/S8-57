@@ -6,6 +6,7 @@
 *.bin
 *.pyc
 *.uvoptx
+*.tmp
 
 JLinkLog.txt
 JLinkSettings.ini
@@ -14,6 +15,7 @@ out.txt
 
 sources/ThirdParty/*
 sources/generated/*
+sources/fonts/*.inc
 
 doc/doxygen/OSC/*
 
