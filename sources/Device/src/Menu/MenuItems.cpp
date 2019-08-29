@@ -62,25 +62,15 @@ Item::Item(const DataItem * const _data) : data(_data)
 };
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Item::KeyPress() const
+void Item::ProcessFX(TypePress::E type) const
 {
-    pressedItem = this;
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Item::KeyRelease() const
-{
-    pressedItem = nullptr;
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Item::KeyLong() const
-{
-    pressedItem = nullptr;
-
-    if (!IsActive())
+    if (type == TypePress::Press)
     {
-        return;
+        pressedItem = this;
+    }
+    else if (type == TypePress::Release || type == TypePress::Long)
+    {
+        pressedItem = nullptr;
     }
 }
 
@@ -269,31 +259,23 @@ int Page::NumItems() const //-V2506
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Page::ShortPress() const
+void Page::ProcessFX(TypePress::E type) const
 {
-    OwnData()->funcOnOpenClose(true);
+    Item::ProcessFX(type);
 
-    SetAsCurrent();
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Page::KeyRelease() const
-{
-    Item::KeyRelease();
-
-    ShortPress();
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Page::KeyLong() const
-{
-    Item::KeyLong();
-
-    if (!IsCurrentItem())
+    if (type == TypePress::Release)
     {
-        SetCurrent(true);
+        OwnData()->funcOnOpenClose(true);
+        SetAsCurrent();
     }
-    Open(!IsOpened());
+    else if (type == TypePress::Long)
+    {
+        if (!IsCurrentItem())
+        {
+            SetCurrent(true);
+        }
+        Open(!IsOpened());
+    }
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -424,77 +406,63 @@ const Item *Page::ItemForFuncKey(Key::E key) const
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void Button::KeyRelease() const
+void Button::ProcessFX(TypePress::E type) const
 {
-    Item::KeyRelease();
+    Item::ProcessFX(type);
 
-    if (IsActive())
+    if (type == TypePress::Release || type == TypePress::Long)
     {
-        SetCurrent(true);
-
-        OwnData()->funcOnPress();
-    }
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Button::KeyLong() const
-{
-    Item::KeyLong();
-
-    KeyRelease();
-}
-
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void GraphButton::KeyRelease() const
-{
-    Item::KeyRelease();
-
-    if (IsActive())
-    {
-        OwnData()->funcOnPress();
-    }
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void GraphButton::KeyLong() const
-{
-    Item::KeyLong();
-
-    KeyRelease();
-}
-
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void Governor::KeyRelease() const
-{
-    Item::KeyRelease();
-
-    if (IsActive())
-    {
-        if (Menu::OpenedItem() == this)
+        if (IsActive())
         {
-            NextPosition();
-        }
-        else
-        {
-            SetCurrent(!IsCurrentItem());
+            SetCurrent(true);
+            OwnData()->funcOnPress();
         }
     }
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Governor::KeyLong() const
-{
-    Item::KeyLong();
 
-    if (!IsCurrentItem())
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+void GraphButton::ProcessFX(TypePress::E type) const
+{
+    Item::ProcessFX(type);
+
+    if (type == TypePress::Release || type == TypePress::Long)
     {
-        SetCurrent(true);
+        if (IsActive())
+        {
+            OwnData()->funcOnPress();
+        }
     }
-    Open(!IsOpened());
 }
 
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+void Governor::ProcessFX(TypePress::E type) const
+{
+    Item::ProcessFX(type);
+    if (type == TypePress::Release)
+    {
+        if (IsActive())
+        {
+            if (Menu::OpenedItem() == this)
+            {
+                NextPosition();
+            }
+            else
+            {
+                SetCurrent(!IsCurrentItem());
+            }
+        }
+    }
+    else if (type == TypePress::Long)
+    {
+        if (!IsCurrentItem())
+        {
+            SetCurrent(true);
+        }
+        Open(!IsOpened());
+    }
+}
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Governor::NextPosition() const
@@ -693,6 +661,36 @@ bool Choice::ProcessKey(KeyEvent event)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Choice::ProcessFX(TypePress::E type) const
+{
+    Item::ProcessFX(type);
+
+    if (type == TypePress::Release)
+    {
+        if (!IsActive())
+        {
+            OwnData()->funcOnChanged(false);
+        }
+        else if (!IsOpened())
+        {
+            StartChange(1);
+        }
+        else
+        {
+            ChangeIndex(1);
+        }
+    }
+    else if (type == TypePress::Long)
+    {
+        if (!IsCurrentItem())
+        {
+            SetCurrent(true);
+        }
+        Open(!IsOpened());
+    }
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 int Choice::HeightOpened() const
 {
     return MOI_HEIGHT_TITLE + NumChoices() * MOSI_HEIGHT - 5;
@@ -738,38 +736,6 @@ int Choice::NumChoices() const
 
     return result;
 }
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Choice::KeyRelease() const
-{
-    Item::KeyRelease();
-
-    if (!IsActive())
-    {
-        OwnData()->funcOnChanged(false);
-    }
-    else if (!IsOpened())
-    {
-        StartChange(1);
-    }
-    else
-    {
-        ChangeIndex(1);
-    }
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Choice::KeyLong() const
-{
-    Item::KeyLong();
-
-    if (!IsCurrentItem())
-    {
-        SetCurrent(true);
-    }
-    Open(!IsOpened());
-}
-
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Choice::StartChange(int delta) const
@@ -919,36 +885,34 @@ Color Choice::ColorMenuField(const Choice *choice)
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void GovernorColor::KeyRelease() const
+void GovernorColor::ProcessFX(TypePress::E type) const
 {
-    Item::KeyRelease();
+    Item::ProcessFX(type);
 
-    if (IsActive())
+    if (type == TypePress::Release)
     {
-        if (Menu::OpenedItem() == this)
+        if (IsActive())
         {
-            Math::CircleIncrease<int8>(&OwnData()->ct->currentField, 0, 3);
-        }
-        else
-        {
-            if (!IsCurrentItem())
+            if (Menu::OpenedItem() == this)
             {
-                SetCurrent(true);
+                Math::CircleIncrease<int8>(&OwnData()->ct->currentField, 0, 3);
             }
-            Open(!IsOpened());
+            else
+            {
+                if (!IsCurrentItem())
+                {
+                    SetCurrent(true);
+                }
+                Open(!IsOpened());
+            }
         }
     }
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void GovernorColor::KeyLong() const
-{
-    Item::KeyLong();
-
-    if (!IsCurrentItem())
+    else if (type == TypePress::Long)
     {
-        SetCurrent(true);
+        if (!IsCurrentItem())
+        {
+            SetCurrent(true);
+        }
+        Open(!IsOpened());
     }
-    Open(!IsOpened());
 }
-

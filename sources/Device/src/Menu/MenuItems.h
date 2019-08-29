@@ -54,8 +54,6 @@ public:
     void Open(bool open) const;
     /// Возвращает название элемента, как оно выглядит на дисплее прибора
     String Title() const;
-    /// Вызывается при нажатии кнопки
-    void KeyPress() const;
     /// Возвращает true, если контрол находится в активном состоянии (реагирует на органы управления)
     bool IsActive() const { if (data->funcOfActive) { return data->funcOfActive(); }; return true; };
 
@@ -91,10 +89,8 @@ public:
     bool Is(Type::E t) const { return data->type == t; };
 
     virtual void Draw(int /*x*/, int /*y*/, bool /*opened*/) const {};
-    /// Вызывается при "коротком" отпускании
-    virtual void KeyRelease() const;
-    /// Вызывается при автоматическом срабатывании кнопки (нажатии и удержании более 0.5 сек)
-    virtual void KeyLong() const;
+
+    virtual void ProcessFX(TypePress::E type) const;
     /// Обработка события кнопки
     virtual bool ProcessKey(KeyEvent) { return false; };
     /// Возвращает высоту в пикселях открытого элемента Choice или Page::Name
@@ -154,18 +150,14 @@ public:
     void DrawNestingPage(int left, int bottom) const;
     /// true, если является вложенной подстраницей страницы parent
     bool IsSubPage(const Page *parent);
-
-    virtual void KeyRelease() const;
-
-    virtual void KeyLong() const;
     /// Обработка события кнопки
     virtual bool ProcessKey(KeyEvent event);
+    /// Реакция на событие функциональной клавиши, соотвествующей итем
+    virtual void ProcessFX(TypePress::E type) const;
     /// Нарисовать в заданных координатах
     virtual void Draw(int x, int y, bool opened) const;
     /// Возвращает указатель на данные, специфичные для этого класса
     DataPage *OwnData() const { return (DataPage *)data->ad; }
-
-    void ShortPress() const;
     /// Возвращает адрес элемента, соответствующего функциональной кнопкке
     const Item *ItemForFuncKey(Key::E key) const;
     /// Возвращает имя страницы page
@@ -183,8 +175,7 @@ class Button : public Item
 public:
     Button(const DataItem * const data) : Item(data) {};
     virtual void Draw(int x, int y, bool opened) const;
-    virtual void KeyRelease() const;
-    virtual void KeyLong() const;
+    virtual void ProcessFX(TypePress::E type) const;
     DataButton *OwnData() const { return (DataButton *)data->ad; }
 };
 
@@ -210,8 +201,7 @@ public:
 
     virtual void Draw(int x, int y, bool opened) const;
     void DrawHints(int x, int y, int width) const;
-    virtual void KeyRelease() const;
-    virtual void KeyLong() const;
+    virtual void ProcessFX(TypePress::E type) const;
     DataGraphButton *OwnData() const { return (DataGraphButton *)data->ad; }
     int NumHints() const;
 };
@@ -254,12 +244,10 @@ public:
     int16 GetValue() const;
     /// Задаёт новое значение
     void SetValue(int16 v) const;
-    /// Реакция на отпускание кнопки
-    virtual void KeyRelease() const;
-    /// Реакция на "длинное нажатие"
-    virtual void KeyLong() const;
     /// Обработка события кнопки
     virtual bool ProcessKey(KeyEvent event);
+    /// Обработка события функциональной кнопки, соответствующей данному итему
+    virtual void ProcessFX(TypePress::E type) const;
 
     virtual void Draw(int x, int y, bool opened) const;
 
@@ -313,13 +301,11 @@ public:
 
     char GetSymbol();
 
-    virtual void KeyRelease() const;
-
-    virtual void KeyLong() const;
-
     virtual void Draw(int x, int y, bool opened) const;
-
+    /// Обработка события кнопки
     virtual bool ProcessKey(KeyEvent event);
+    /// Обработка события функциональной кнопки, соответствующей данному итему
+    virtual void ProcessFX(TypePress::E type) const;
 
     virtual int HeightOpened() const;
 
@@ -337,8 +323,8 @@ class GovernorColor : public Item
 public:
     GovernorColor(const DataItem * const data) : Item(data) {};
     virtual void Draw(int x, int y, bool opened) const;
-    virtual void KeyRelease() const;
-    virtual void KeyLong() const;
+    /// Обработка события функциональной кнопки, соответствующей данному итему на странице
+    virtual void ProcessFX(TypePress::E type) const;
     virtual int HeightOpened() const { return 27; };
     DataGovernorColor *OwnData() const { return (DataGovernorColor *)data->ad; }
 private:

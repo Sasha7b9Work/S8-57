@@ -306,7 +306,7 @@ static void FX_Press()
 {
     if (Menu::IsShown())
     {
-        Menu::ItemForFuncKey(event.key)->KeyPress();
+        Menu::ItemForFuncKey(event.key)->ProcessFX(TypePress::Press);
     }
 }
 
@@ -315,7 +315,7 @@ static void FX_Release()
 {
     if (Menu::IsShown())
     {
-        Menu::ItemForFuncKey(event.key)->KeyRelease();
+        Menu::ItemForFuncKey(event.key)->ProcessFX(TypePress::Release);
     }
 }
 
@@ -324,7 +324,7 @@ static void FX_Long()
 {
     if (Menu::IsShown())
     {
-        Menu::ItemForFuncKey(event.key)->KeyLong();
+        Menu::ItemForFuncKey(event.key)->ProcessFX(TypePress::Long);
     }
 }
 

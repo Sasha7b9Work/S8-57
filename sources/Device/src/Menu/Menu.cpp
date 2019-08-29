@@ -175,7 +175,7 @@ void Menu::ChangeStateFlashDrive()
     {
         if(GetNameOpenedPage() == PageName::Memory_Drive_Manager)
         {
-            ((Button *)OpenedItem())->KeyRelease();
+            OpenedItem()->ProcessFX(TypePress::Release);
         }
     }
     else if(FLASH_AUTOCONNECT)
