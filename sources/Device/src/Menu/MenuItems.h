@@ -90,9 +90,9 @@ public:
 
     virtual void Draw(int /*x*/, int /*y*/, bool /*opened*/) const {};
 
-    virtual void ProcessFX(TypePress::E type) const;
+    virtual void HandlerFX(TypePress::E type) const;
     /// Обработка события кнопки
-    virtual bool ProcessKey(KeyEvent) { return false; };
+    virtual bool HandlerKey(KeyEvent) { return false; };
     /// Возвращает высоту в пикселях открытого элемента Choice или Page::Name
     virtual int HeightOpened() const;
 
@@ -151,9 +151,9 @@ public:
     /// true, если является вложенной подстраницей страницы parent
     bool IsSubPage(const Page *parent);
     /// Обработка события кнопки
-    virtual bool ProcessKey(KeyEvent event);
+    virtual bool HandlerKey(KeyEvent event);
     /// Реакция на событие функциональной клавиши, соотвествующей итем
-    virtual void ProcessFX(TypePress::E type) const;
+    virtual void HandlerFX(TypePress::E type) const;
     /// Нарисовать в заданных координатах
     virtual void Draw(int x, int y, bool opened) const;
     /// Возвращает указатель на данные, специфичные для этого класса
@@ -175,7 +175,7 @@ class Button : public Item
 public:
     Button(const DataItem * const data) : Item(data) {};
     virtual void Draw(int x, int y, bool opened) const;
-    virtual void ProcessFX(TypePress::E type) const;
+    virtual void HandlerFX(TypePress::E type) const;
     DataButton *OwnData() const { return (DataButton *)data->ad; }
 };
 
@@ -201,7 +201,7 @@ public:
 
     virtual void Draw(int x, int y, bool opened) const;
     void DrawHints(int x, int y, int width) const;
-    virtual void ProcessFX(TypePress::E type) const;
+    virtual void HandlerFX(TypePress::E type) const;
     DataGraphButton *OwnData() const { return (DataGraphButton *)data->ad; }
     int NumHints() const;
 };
@@ -245,9 +245,9 @@ public:
     /// Задаёт новое значение
     void SetValue(int16 v) const;
     /// Обработка события кнопки
-    virtual bool ProcessKey(KeyEvent event);
+    virtual bool HandlerKey(KeyEvent event);
     /// Обработка события функциональной кнопки, соответствующей данному итему
-    virtual void ProcessFX(TypePress::E type) const;
+    virtual void HandlerFX(TypePress::E type) const;
 
     virtual void Draw(int x, int y, bool opened) const;
 
@@ -303,9 +303,9 @@ public:
 
     virtual void Draw(int x, int y, bool opened) const;
     /// Обработка события кнопки
-    virtual bool ProcessKey(KeyEvent event);
+    virtual bool HandlerKey(KeyEvent event);
     /// Обработка события функциональной кнопки, соответствующей данному итему
-    virtual void ProcessFX(TypePress::E type) const;
+    virtual void HandlerFX(TypePress::E type) const;
 
     virtual int HeightOpened() const;
 
@@ -324,7 +324,7 @@ public:
     GovernorColor(const DataItem * const data) : Item(data) {};
     virtual void Draw(int x, int y, bool opened) const;
     /// Обработка события функциональной кнопки, соответствующей данному итему на странице
-    virtual void ProcessFX(TypePress::E type) const;
+    virtual void HandlerFX(TypePress::E type) const;
     virtual int HeightOpened() const { return 27; };
     DataGovernorColor *OwnData() const { return (DataGovernorColor *)data->ad; }
 private:

@@ -62,7 +62,7 @@ Item::Item(const DataItem * const _data) : data(_data)
 };
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Item::ProcessFX(TypePress::E type) const
+void Item::HandlerFX(TypePress::E type) const
 {
     if (type == TypePress::Press)
     {
@@ -259,9 +259,9 @@ int Page::NumItems() const //-V2506
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Page::ProcessFX(TypePress::E type) const
+void Page::HandlerFX(TypePress::E type) const
 {
-    Item::ProcessFX(type);
+    Item::HandlerFX(type);
 
     if (type == TypePress::Release)
     {
@@ -303,7 +303,7 @@ PageName::E Page::GetName() const
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-bool Page::ProcessKey(KeyEvent event)
+bool Page::HandlerKey(KeyEvent event)
 {
     if (OwnData()->funcOnKey(event))
     {
@@ -406,9 +406,9 @@ const Item *Page::ItemForFuncKey(Key::E key) const
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void Button::ProcessFX(TypePress::E type) const
+void Button::HandlerFX(TypePress::E type) const
 {
-    Item::ProcessFX(type);
+    Item::HandlerFX(type);
 
     if (type == TypePress::Release || type == TypePress::Long)
     {
@@ -422,9 +422,9 @@ void Button::ProcessFX(TypePress::E type) const
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void GraphButton::ProcessFX(TypePress::E type) const
+void GraphButton::HandlerFX(TypePress::E type) const
 {
-    Item::ProcessFX(type);
+    Item::HandlerFX(type);
 
     if (type == TypePress::Release || type == TypePress::Long)
     {
@@ -437,9 +437,9 @@ void GraphButton::ProcessFX(TypePress::E type) const
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void Governor::ProcessFX(TypePress::E type) const
+void Governor::HandlerFX(TypePress::E type) const
 {
-    Item::ProcessFX(type);
+    Item::HandlerFX(type);
     if (type == TypePress::Release)
     {
         if (IsActive())
@@ -572,7 +572,7 @@ void Governor::ChangeValue(int16 delta)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-bool Governor::ProcessKey(KeyEvent event)
+bool Governor::HandlerKey(KeyEvent event)
 {
     if (event.IsLeft())
     {
@@ -644,7 +644,7 @@ char Governor::GetSymbol() const
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-bool Choice::ProcessKey(KeyEvent event)
+bool Choice::HandlerKey(KeyEvent event)
 {
     if (event.type == TypePress::Press)
     {
@@ -661,9 +661,9 @@ bool Choice::ProcessKey(KeyEvent event)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Choice::ProcessFX(TypePress::E type) const
+void Choice::HandlerFX(TypePress::E type) const
 {
-    Item::ProcessFX(type);
+    Item::HandlerFX(type);
 
     if (type == TypePress::Release)
     {
@@ -885,9 +885,9 @@ Color Choice::ColorMenuField(const Choice *choice)
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void GovernorColor::ProcessFX(TypePress::E type) const
+void GovernorColor::HandlerFX(TypePress::E type) const
 {
-    Item::ProcessFX(type);
+    Item::HandlerFX(type);
 
     if (type == TypePress::Release)
     {

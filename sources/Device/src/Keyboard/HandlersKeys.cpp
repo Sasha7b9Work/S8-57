@@ -306,7 +306,7 @@ static void FX_Press()
 {
     if (Menu::IsShown())
     {
-        Menu::ItemForFuncKey(event.key)->ProcessFX(TypePress::Press);
+        Menu::ItemForFuncKey(event.key)->HandlerFX(TypePress::Press);
     }
 }
 
@@ -315,7 +315,7 @@ static void FX_Release()
 {
     if (Menu::IsShown())
     {
-        Menu::ItemForFuncKey(event.key)->ProcessFX(TypePress::Release);
+        Menu::ItemForFuncKey(event.key)->HandlerFX(TypePress::Release);
     }
 }
 
@@ -324,7 +324,7 @@ static void FX_Long()
 {
     if (Menu::IsShown())
     {
-        Menu::ItemForFuncKey(event.key)->ProcessFX(TypePress::Long);
+        Menu::ItemForFuncKey(event.key)->HandlerFX(TypePress::Long);
     }
 }
 
@@ -338,14 +338,14 @@ static void HandlerArrow()
     
     if(Menu::OpenedItem()->Is(Item::Type::Page))
     {
-        if(!Menu::CurrentItem()->ProcessKey(event))
+        if(!Menu::CurrentItem()->HandlerKey(event))
         {
-            Menu::OpenedItem()->ProcessKey(event);
+            Menu::OpenedItem()->HandlerKey(event);
         }
     }
     else
     {
-        Menu::OpenedItem()->ProcessKey(event);
+        Menu::OpenedItem()->HandlerKey(event);
     }
 }
 
