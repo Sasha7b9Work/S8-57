@@ -86,14 +86,14 @@ struct PageName
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-#define DEF_BUTTON(name, title, hint, keeper, funcActive, handlerPress)                                                                                                              \
-static const DataButton db##name = {handlerPress};                                                                                                                                   \
+#define DEF_BUTTON(name, title, hint, keeper, funcActive, handlerPress)                                                                                                                     \
+static const DataButton db##name = {handlerPress};                                                                                                                                          \
 static const DataItem di##name = { Item::Type::Button, title, hint, keeper, funcActive, &db##name };                                                                                        \
 static const Button name(&di##name);
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-#define DEF_GOVERNOR(name, title, hint, cell, min, max, keeper, funcActive, funcChanged)                                                                                    \
-static const DataGovernor dg##name = {(int16 *)&cell, min, max, funcChanged};                                                                                               \
+#define DEF_GOVERNOR(name, title, hint, cell, min, max, keeper, funcActive, handlerChange)                                                                                                  \
+static const DataGovernor dg##name = {(int16 *)&cell, min, max, handlerChange};                                                                                                             \
 static const DataItem di##name = { Item::Type::Button, title, hint, keeper, funcActive, &dg##name };                                                                                        \
 static const Governor name(&di##name);
 

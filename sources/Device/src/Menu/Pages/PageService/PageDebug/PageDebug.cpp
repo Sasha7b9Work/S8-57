@@ -79,34 +79,34 @@ DEF_CHOICE_3( cADC_Balance_Mode,                                                
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static bool IsActive_ADC_Balance_ShiftAB()
+static bool IsActive_ShiftAB()
 {
     return NRST_BALANCE_ADC_TYPE_IS_HAND;
 }
 
-static void OnChanged_ADC_Balance_ShiftA()
+static void OnChanged_ShiftA()
 {
     NRST_BALANCE_ADC_A = shiftADCA;
 }
 
-DEF_GOVERNOR( gADC_Balance_ShiftA,                                                                                                              //--- Œ“À¿ƒ ¿ - ¿÷œ - ¡¿À¿Õ— - —ÏÂ˘ÂÌËÂ 1 ---
+DEF_GOVERNOR( gShiftA,                                                                                                                          //--- Œ“À¿ƒ ¿ - ¿÷œ - ¡¿À¿Õ— - —ÏÂ˘ÂÌËÂ 1 ---
     "—ÏÂ˘ÂÌËÂ 1",
     "",
     shiftADCA, -125, 125,
-    &PageDebug::PageADC::PageBalance::self, IsActive_ADC_Balance_ShiftAB, OnChanged_ADC_Balance_ShiftA
+    &PageDebug::PageADC::PageBalance::self, IsActive_ShiftAB, OnChanged_ShiftA
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void OnChanged_ADC_Balance_ShiftB()
+static void OnChanged_ShiftB()
 {
     NRST_BALANCE_ADC_B = shiftADCB;
 }
 
-DEF_GOVERNOR( gADC_Balance_ShiftB,                                                                                                              //--- Œ“À¿ƒ ¿ - ¿÷œ - ¡¿À¿Õ— - —ÏÂ˘ÂÌËÂ 2 ---
+DEF_GOVERNOR( gShiftB,                                                                                                                          //--- Œ“À¿ƒ ¿ - ¿÷œ - ¡¿À¿Õ— - —ÏÂ˘ÂÌËÂ 2 ---
     "—ÏÂ˘ÂÌËÂ 2",
     "",
     shiftADCB, -125, 125,
-    &PageDebug::PageADC::PageBalance::self, IsActive_ADC_Balance_ShiftAB, OnChanged_ADC_Balance_ShiftB
+    &PageDebug::PageADC::PageBalance::self, IsActive_ShiftAB, OnChanged_ShiftB
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -114,8 +114,8 @@ DEF_PAGE_3( pppBalance, // -V641 // -V1027                                      
     "¡¿À¿Õ—",
     "",
     &cADC_Balance_Mode,      ///< Œ“À¿ƒ ¿ - ¿÷œ - ¡¿À¿Õ— - –ÂÊËÏ
-    &gADC_Balance_ShiftA,    ///< Œ“À¿ƒ ¿ - ¿÷œ - ¡¿À¿Õ— - —ÏÂ˘ÂÌËÂ 1
-    &gADC_Balance_ShiftB,    ///< Œ“À¿ƒ ¿ - ¿÷œ - ¡¿À¿Õ— - —ÏÂ˘ÂÌËÂ 2
+    &gShiftA,    ///< Œ“À¿ƒ ¿ - ¿÷œ - ¡¿À¿Õ— - —ÏÂ˘ÂÌËÂ 1
+    &gShiftB,    ///< Œ“À¿ƒ ¿ - ¿÷œ - ¡¿À¿Õ— - —ÏÂ˘ÂÌËÂ 2
     PageName::Debug_ADC_Balance,
     &PageDebug::PageADC::self, E_BtV, E_VB, E_VV, E_BfKE
 )
@@ -149,39 +149,39 @@ DEF_CHOICE_3( cADC_Stretch_Mode,                                                
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static bool IsActive_ADC_StretchAB()
+static bool IsActive_StretchAB()
 {
     return NRST_STRETCH_ADC_TYPE_IS_HAND;
 }
 
-static void OnChanged_ADC_Stretch_A()
+static void OnChanged_Stretch_A()
 {
     NRST_STRETCH_ADC_A(NRST_STRETCH_ADC_TYPE) = stretchA;
 }
 
-DEF_GOVERNOR( gADC_Stretch_A,                                                                                                                //--- Œ“À¿ƒ ¿ - ¿÷œ - –¿—“ﬂ∆ ¿ - –‡ÒÚˇÊÍ‡ 1Í ---
+DEF_GOVERNOR( gStretch_A,                                                                                                                //--- Œ“À¿ƒ ¿ - ¿÷œ - –¿—“ﬂ∆ ¿ - –‡ÒÚˇÊÍ‡ 1Í ---
     "–‡ÒÚˇÊÍ‡ 1Í",
     "«‡‰‡∏Ú Û˜ÌÛ˛ ‡ÒÚˇÊÍÛ ÔÂ‚Ó„Ó Í‡Ì‡Î‡.\n1 Â‰ËÌËˆ‡ = 0.0001",
     stretchA, -10000, 10000,
-    &PageDebug::PageADC::PageStretch::self, IsActive_ADC_StretchAB, OnChanged_ADC_Stretch_A
+    &PageDebug::PageADC::PageStretch::self, IsActive_StretchAB, OnChanged_Stretch_A
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void OnChanged_ADC_Stretch_B()
+static void OnChanged_Stretch_B()
 {
     NRST_STRETCH_ADC_B(NRST_STRETCH_ADC_TYPE) = stretchB;
 }
 
-DEF_GOVERNOR( gADC_Stretch_B,                                                                                                                //--- Œ“À¿ƒ ¿ - ¿÷œ - –¿—“ﬂ∆ ¿ - –‡ÒÚˇÊÍ‡ 2Í ---
+DEF_GOVERNOR( gStretch_B,                                                                                                                //--- Œ“À¿ƒ ¿ - ¿÷œ - –¿—“ﬂ∆ ¿ - –‡ÒÚˇÊÍ‡ 2Í ---
     "–‡ÒÚˇÊÍ‡ 2Í",
     "«‡‰‡∏Ú Û˜ÌÛ˛ ‡ÒÚˇÊÍÛ ‚ÚÓÓ„Ó Í‡Ì‡Î‡.\n1 Â‰ËÌËˆ‡ = 0.0001",
     stretchB, -10000, 10000,
-    &PageDebug::PageADC::PageStretch::self, IsActive_ADC_StretchAB, OnChanged_ADC_Stretch_B
+    &PageDebug::PageADC::PageStretch::self, IsActive_StretchAB, OnChanged_Stretch_B
 )
 
 /*
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-DEF_GOVERNOR(       gADC_Stretch_Ak20mV,                                                               //--- Œ“À¿ƒ ¿ - ¿÷œ - –¿—“ﬂ∆ ¿ - 20Ï¬/1¬ 1Í ---
+_DEF_GOVERNOR(       gADC_Stretch_Ak20mV,                                                               //--- Œ“À¿ƒ ¿ - ¿÷œ - –¿—“ﬂ∆ ¿ - 20Ï¬/1¬ 1Í ---
     "20Ï¬/1¬ 1Í", "20mV/1V 1k",
     "",
     "",
@@ -189,7 +189,7 @@ DEF_GOVERNOR(       gADC_Stretch_Ak20mV,                                        
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-DEF_GOVERNOR(       gADC_Stretch_Ak50mV,                                                                  //--- Œ“À¿ƒ ¿ - ¿÷œ - –¿—“ﬂ∆ ¿ - 50Ï¬ 1Í ---
+_DEF_GOVERNOR(       gADC_Stretch_Ak50mV,                                                                  //--- Œ“À¿ƒ ¿ - ¿÷œ - –¿—“ﬂ∆ ¿ - 50Ï¬ 1Í ---
     "50Ï¬ 1Í", "50mV 1k",
     "",
     "",
@@ -197,7 +197,7 @@ DEF_GOVERNOR(       gADC_Stretch_Ak50mV,                                        
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-DEF_GOVERNOR(       gADC_Stretch_Ak100mV,                                                             //--- Œ“À¿ƒ ¿ - ¿÷œ - –¿—“ﬂ∆ ¿ - 100Ï¬/5¬ 1Í ---
+_DEF_GOVERNOR(       gADC_Stretch_Ak100mV,                                                             //--- Œ“À¿ƒ ¿ - ¿÷œ - –¿—“ﬂ∆ ¿ - 100Ï¬/5¬ 1Í ---
     "100Ï¬/5¬ 1Í", "100mV/5V 1ch",
     "",
     "",
@@ -205,7 +205,7 @@ DEF_GOVERNOR(       gADC_Stretch_Ak100mV,                                       
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-DEF_GOVERNOR(       gADC_Stretch_Ak2V,                                                                      //--- Œ“À¿ƒ ¿ - ¿÷œ - –¿—“ﬂ∆ ¿ - 2¬ 1Í ---
+_DEF_GOVERNOR(       gADC_Stretch_Ak2V,                                                                      //--- Œ“À¿ƒ ¿ - ¿÷œ - –¿—“ﬂ∆ ¿ - 2¬ 1Í ---
     "2¬ 1Í", "2V 1ch",
     "",
     "",
@@ -213,7 +213,7 @@ DEF_GOVERNOR(       gADC_Stretch_Ak2V,                                          
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-DEF_GOVERNOR(       gADC_Stretch_Bk20mV,                                                               //--- Œ“À¿ƒ ¿ - ¿÷œ - –¿—“ﬂ∆ ¿ - 20Ï¬/1¬ 2Í ---
+_DEF_GOVERNOR(       gADC_Stretch_Bk20mV,                                                               //--- Œ“À¿ƒ ¿ - ¿÷œ - –¿—“ﬂ∆ ¿ - 20Ï¬/1¬ 2Í ---
     "20Ï¬/1¬ 2Í", "20mV/1V 2k",
     "",
     "",
@@ -221,7 +221,7 @@ DEF_GOVERNOR(       gADC_Stretch_Bk20mV,                                        
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-DEF_GOVERNOR(       gADC_Stretch_Bk50mV,                                                         //--- Œ“À¿ƒ ¿ - ¿÷œ - –¿—“ﬂ∆ ¿ - ƒÓÔ ÒÏÂ˘ 50Ï¬ 2Í ---
+_DEF_GOVERNOR(       gADC_Stretch_Bk50mV,                                                         //--- Œ“À¿ƒ ¿ - ¿÷œ - –¿—“ﬂ∆ ¿ - ƒÓÔ ÒÏÂ˘ 50Ï¬ 2Í ---
     "50Ï¬ 2Í", "50mV 2k",
     "",
     "",
@@ -229,7 +229,7 @@ DEF_GOVERNOR(       gADC_Stretch_Bk50mV,                                        
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-DEF_GOVERNOR(       gADC_Stretch_Bk100mV,                                                             //--- Œ“À¿ƒ ¿ - ¿÷œ - –¿—“ﬂ∆ ¿ - 100Ï¬/5¬ 2Í ---
+_DEF_GOVERNOR(       gADC_Stretch_Bk100mV,                                                             //--- Œ“À¿ƒ ¿ - ¿÷œ - –¿—“ﬂ∆ ¿ - 100Ï¬/5¬ 2Í ---
     "100Ï¬/5¬ 2Í", "100mV/5V 2k",
     "",
     "",
@@ -237,7 +237,7 @@ DEF_GOVERNOR(       gADC_Stretch_Bk100mV,                                       
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-DEF_GOVERNOR(       gADC_Stretch_Bk2V,                                                                      //--- Œ“À¿ƒ ¿ - ¿÷œ - –¿—“ﬂ∆ ¿ - 2¬ 2Í ---
+_DEF_GOVERNOR(       gADC_Stretch_Bk2V,                                                                      //--- Œ“À¿ƒ ¿ - ¿÷œ - –¿—“ﬂ∆ ¿ - 2¬ 2Í ---
     "2¬ 2Í", "2V 2ch",
     "",
     "",
@@ -252,8 +252,8 @@ DEF_PAGE_3( pppADC_Stretch, // -V641 // -V1027                                  
     "–¿—“ﬂ∆ ¿",
     "”ÒÚ‡Ì‡‚ÎË‚‡ÂÚ ÂÊËÏ Ë ‚ÂÎË˜ËÌÛ ‡ÒÚˇÊÍË (‰Îˇ Û˜ÌÓ„Ó ÂÊËÏ‡)",
     &cADC_Stretch_Mode,      ///< Œ“À¿ƒ ¿ - ¿÷œ - –¿—“ﬂ∆ ¿ - –ÂÊËÏ
-    &gADC_Stretch_A,         ///< Œ“À¿ƒ ¿ - ¿÷œ - –¿—“ﬂ∆ ¿ - –‡ÒÚˇÊÍ‡ 1Í
-    &gADC_Stretch_B,
+    &gStretch_A,         ///< Œ“À¿ƒ ¿ - ¿÷œ - –¿—“ﬂ∆ ¿ - –‡ÒÚˇÊÍ‡ 1Í
+    &gStretch_B,
     PageName::Debug_ADC_Stretch,
     &PageDebug::PageADC::self, E_BtV, E_VB, E_VV, E_BfKE
 )
@@ -279,61 +279,61 @@ DEF_BUTTON( bADC_Shift_Reset,                                                   
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void OnChanged_ADC_Shift_A()
+static void OnChanged_Shift_A()
 {
     RShift::Set(Chan::A, SET_RSHIFT_A);
 }
 
-DEF_GOVERNOR( gADC_Shift_A2mV, //-V641                                                                                                    //--- Œ“À¿ƒ ¿ - ¿÷œ - ƒŒœ —Ã≈Ÿ - —Ï 1Í 2Ï¬ ÔÓÒÚ ---
+DEF_GOVERNOR( gShift_A2mV, //-V641                                                                                                        //--- Œ“À¿ƒ ¿ - ¿÷œ - ƒŒœ —Ã≈Ÿ - —Ï 1Í 2Ï¬ ÔÓÒÚ ---
     "—Ï 1Í 2Ï¬ ÔÓÒÚ",
     "",
     RSHIFT_ADD_STABLE_A(Range::_2mV), -100, 100,
-    &PageDebug::PageADC::PageShift::self, 0, OnChanged_ADC_Shift_A
+    &PageDebug::PageADC::PageShift::self, 0, OnChanged_Shift_A
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void OnChanged_ADC_Shift_B()
+static void OnChanged_Shift_B()
 {
     RShift::Set(Chan::B, SET_RSHIFT_B);
 }
 
-DEF_GOVERNOR( gADC_Shift_B2mV,                                                                                                            //--- Œ“À¿ƒ ¿ - ¿÷œ - ƒŒœ —Ã≈Ÿ - —Ï 2Í 2Ï¬ ÔÓÒÚ ---
+DEF_GOVERNOR( gShift_B2mV,                                                                                                                //--- Œ“À¿ƒ ¿ - ¿÷œ - ƒŒœ —Ã≈Ÿ - —Ï 2Í 2Ï¬ ÔÓÒÚ ---
     "—Ï 2Í 2Ï¬ ÔÓÒÚ",
     "",
     RSHIFT_ADD_STABLE_B(Range::_2mV), -100, 100,
-    &PageDebug::PageADC::PageShift::self, 0, OnChanged_ADC_Shift_B
+    &PageDebug::PageADC::PageShift::self, 0, OnChanged_Shift_B
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-DEF_GOVERNOR( gADC_Shift_A5mV,                                                                                                            //--- Œ“À¿ƒ ¿ - ¿÷œ - ƒŒœ —Ã≈Ÿ - —Ï 1Í 5Ï¬ ÔÓÒÚ ---
+DEF_GOVERNOR( gShift_A5mV,                                                                                                                //--- Œ“À¿ƒ ¿ - ¿÷œ - ƒŒœ —Ã≈Ÿ - —Ï 1Í 5Ï¬ ÔÓÒÚ ---
     "—Ï 1Í 5Ï¬ ÔÓÒÚ",
     "",
     RSHIFT_ADD_STABLE_A(Range::_5mV), -100, 100,
-    &PageDebug::PageADC::PageShift::self, 0, OnChanged_ADC_Shift_A
+    &PageDebug::PageADC::PageShift::self, 0, OnChanged_Shift_A
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-DEF_GOVERNOR( gADC_Shift_B5mV,                                                                                                            //--- Œ“À¿ƒ ¿ - ¿÷œ - ƒŒœ —Ã≈Ÿ - —Ï 2Í 5Ï¬ ÔÓÒÚ ---
+DEF_GOVERNOR( gShift_B5mV,                                                                                                                //--- Œ“À¿ƒ ¿ - ¿÷œ - ƒŒœ —Ã≈Ÿ - —Ï 2Í 5Ï¬ ÔÓÒÚ ---
     "—Ï 2Í 5Ï¬ ÔÓÒÚ",
     "",
     RSHIFT_ADD_STABLE_B(Range::_5mV), -100, 100,
-    &PageDebug::PageADC::PageShift::self, 0, OnChanged_ADC_Shift_B
+    &PageDebug::PageADC::PageShift::self, 0, OnChanged_Shift_B
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-DEF_GOVERNOR( gADC_Shift_A10mV,                                                                                                          //--- Œ“À¿ƒ ¿ - ¿÷œ - ƒŒœ —Ã≈Ÿ - —Ï 1Í 10Ï¬ ÔÓÒÚ ---
+DEF_GOVERNOR( gShift_A10mV,                                                                                                              //--- Œ“À¿ƒ ¿ - ¿÷œ - ƒŒœ —Ã≈Ÿ - —Ï 1Í 10Ï¬ ÔÓÒÚ ---
     "—Ï 1Í 10Ï¬ ÔÓÒÚ",
     "",
     RSHIFT_ADD_STABLE_A(Range::_10mV), -100, 100,
-    &PageDebug::PageADC::PageShift::self, 0, OnChanged_ADC_Shift_A
+    &PageDebug::PageADC::PageShift::self, 0, OnChanged_Shift_A
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-DEF_GOVERNOR( gADC_Shift_B10mV,                                                                                                          //--- Œ“À¿ƒ ¿ - ¿÷œ - ƒŒœ —Ã≈Ÿ - —Ï 2Í 10Ï¬ ÔÓÒÚ ---
+DEF_GOVERNOR( gShift_B10mV,                                                                                                              //--- Œ“À¿ƒ ¿ - ¿÷œ - ƒŒœ —Ã≈Ÿ - —Ï 2Í 10Ï¬ ÔÓÒÚ ---
     "—Ï 2Í 10Ï¬ ÔÓÒÚ",
     "",
     RSHIFT_ADD_STABLE_B(Range::_10mV), -100, 100,
-    &PageDebug::PageADC::PageShift::self, 0, OnChanged_ADC_Shift_B
+    &PageDebug::PageADC::PageShift::self, 0, OnChanged_Shift_B
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -341,12 +341,12 @@ DEF_PAGE_7( pppShift, // -V641  // -V1027                                       
     "ƒŒœ —Ã≈Ÿ",
     "",
     &bADC_Shift_Reset,   // Œ“À¿ƒ ¿ - ¿÷œ - ƒŒœ —Ã≈Ÿ - —·ÓÒ
-    &gADC_Shift_A2mV,    // Œ“À¿ƒ ¿ - ¿÷œ - ƒŒœ —Ã≈Ÿ - —Ï 1Í 2Ï¬ ÔÓÒÚ
-    &gADC_Shift_B2mV,    // Œ“À¿ƒ ¿ - ¿÷œ - ƒŒœ —Ã≈Ÿ - —Ï 2Í 2Ï¬ ÔÓÒÚ
-    &gADC_Shift_A5mV,    // Œ“À¿ƒ ¿ - ¿÷œ - ƒŒœ —Ã≈Ÿ - —Ï 1Í 5Ï¬ ÔÓÒÚ
-    &gADC_Shift_B5mV,    // Œ“À¿ƒ ¿ - ¿÷œ - ƒŒœ —Ã≈Ÿ - —Ï 2Í 5Ï¬ ÔÓÒÚ
-    &gADC_Shift_A10mV,   // Œ“À¿ƒ ¿ - ¿÷œ - ƒŒœ —Ã≈Ÿ - —Ï 1Í 10Ï¬ ÔÓÒÚ
-    &gADC_Shift_B10mV,   // Œ“À¿ƒ ¿ - ¿÷œ - ƒŒœ —Ã≈Ÿ - —Ï 2Í 10Ï¬ ÔÓÒÚ
+    &gShift_A2mV,    // Œ“À¿ƒ ¿ - ¿÷œ - ƒŒœ —Ã≈Ÿ - —Ï 1Í 2Ï¬ ÔÓÒÚ
+    &gShift_B2mV,    // Œ“À¿ƒ ¿ - ¿÷œ - ƒŒœ —Ã≈Ÿ - —Ï 2Í 2Ï¬ ÔÓÒÚ
+    &gShift_A5mV,    // Œ“À¿ƒ ¿ - ¿÷œ - ƒŒœ —Ã≈Ÿ - —Ï 1Í 5Ï¬ ÔÓÒÚ
+    &gShift_B5mV,    // Œ“À¿ƒ ¿ - ¿÷œ - ƒŒœ —Ã≈Ÿ - —Ï 2Í 5Ï¬ ÔÓÒÚ
+    &gShift_A10mV,   // Œ“À¿ƒ ¿ - ¿÷œ - ƒŒœ —Ã≈Ÿ - —Ï 1Í 10Ï¬ ÔÓÒÚ
+    &gShift_B10mV,   // Œ“À¿ƒ ¿ - ¿÷œ - ƒŒœ —Ã≈Ÿ - —Ï 2Í 10Ï¬ ÔÓÒÚ
     PageName::Debug_ADC_Shift,
     &PageDebug::PageADC::self, E_BtV, E_VB, E_VV, E_BfKE
 )

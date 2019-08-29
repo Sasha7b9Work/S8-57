@@ -12,6 +12,6 @@ namespace Console
     /// Возвращает true, если консоль должна отображаться на экране
     bool IsShown();
     /// Эту фнукцию надо вызвыть, когда пользователь изменяет максимальное количество строк в консоли
-    void OnChangedMaxStringsInConsole();
+    void OnChanged_MaxStringsInConsole();
 };
 

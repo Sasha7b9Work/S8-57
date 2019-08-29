@@ -88,7 +88,7 @@ DEF_PAGE_5( pageRTC_Set, //-V641 //-V1027
 //{
 //}
 //
-//DEF_GOVERNOR(tRTC_Correction,                                                                                                                           //--- СЕРВИС - ВРЕМЯ - Коррекция ---
+//_DEF_GOVERNOR(tRTC_Correction,                                                                                                                           //--- СЕРВИС - ВРЕМЯ - Коррекция ---
 //    "Коррекция",
 //    "Установка корректирующего коэффициента для компенсации хода времени",
 //    NRST_CORRECTION_TIME, -63, 63, pageRTC_Correction, 0, OnChanged_Time_Correction, 0

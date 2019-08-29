@@ -15,14 +15,14 @@ const Page * const PageDebug::PageRand::self = (const Page *)&pageRand;
 
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-//DEF_GOVERNOR( gRand_NumAverage,                                                                                                                        //--- ОТЛАДКА - РАНД-ТОР - Усредн. ---
+//_DEF_GOVERNOR( gRand_NumAverage,                                                                                                                        //--- ОТЛАДКА - РАНД-ТОР - Усредн. ---
 //    "Усредн.",
 //    "",
 //    NRST_NUM_AVE_FOR_RAND, 1, 32, &PageDebug::PageRand::self, 0, 0, 0
 //)
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-//DEF_GOVERNOR( gRand_NumSmooth,                                                                                                                     //--- ОТЛАДКА - РАНД-ТОР - Сглаживание ---
+//_DEF_GOVERNOR( gRand_NumSmooth,                                                                                                                     //--- ОТЛАДКА - РАНД-ТОР - Сглаживание ---
 //    "Сглаживание",
 //    "",
 //    NRST_NUM_SMOOTH_FOR_RAND, 1, 10, &PageDebug::PageRand::self, 0, 0, 0
@@ -33,7 +33,7 @@ const Page * const PageDebug::PageRand::self = (const Page *)&pageRand;
 //{
 //}
 //
-//DEF_GOVERNOR( gRand_NumMeasures,                                                                                                                  //--- ОТЛАДКА - РАНД-ТОР - Выб-к/ворота ---
+//_DEF_GOVERNOR( gRand_NumMeasures,                                                                                                                  //--- ОТЛАДКА - РАНД-ТОР - Выб-к/ворота ---
 //    "Выб-к/ворота",
 //    "",
 //    NUM_MEASURES_FOR_GATES, 1, 2500, &PageDebug::PageRand::self, 0, OnChanged_Rand_NumMeasures, 0
@@ -64,7 +64,7 @@ const Page * const PageDebug::PageRand::self = (const Page *)&pageRand;
 //{
 //}
 //
-//DEF_GOVERNOR( gRand_TimeCompensation,                                                                                                     //--- ОТЛАДКА - РАНД-ТОР - Компенсация задержки ---
+//_DEF_GOVERNOR( gRand_TimeCompensation,                                                                                                     //--- ОТЛАДКА - РАНД-ТОР - Компенсация задержки ---
 //    "Компенсация задержки",
 //    "Подстройка компенсации задержки АЦП 40 нс",
 //    TIME_COMPENSATION, 0, 510, &PageDebug::PageRand::self, 0, OnChanged_Rand_TimeCompensation, 0
@@ -78,7 +78,7 @@ const Page * const PageDebug::PageRand::self = (const Page *)&pageRand;
 //
 //static int16 addShift = 0;
 //
-//DEF_GOVERNOR( gRand_AddTimeShift,                                                                                                                     //--- ОТЛАДКА - РАНД-ТОР - Смещение ---
+//_DEF_GOVERNOR( gRand_AddTimeShift,                                                                                                                     //--- ОТЛАДКА - РАНД-ТОР - Смещение ---
 //    "Доп смещение",
 //    "Добавочное смщение при вращении tShift",
 //    addShift, -100, 100, &PageDebug::PageRand::self, 0, OnChanged_Rand_AddTimeShift, 0
@@ -90,7 +90,7 @@ const Page * const PageDebug::PageRand::self = (const Page *)&pageRand;
 //    TShift::Load();
 //}
 //
-//DEF_GOVERNOR( gRand_Pretriggered,                                                                                                                   //--- ОТЛАДКА - РАНД-ТОР - Предзапуск ---
+//_DEF_GOVERNOR( gRand_Pretriggered,                                                                                                                   //--- ОТЛАДКА - РАНД-ТОР - Предзапуск ---
 //    "Предзапуск",
 //    "Величина предзапуска, которая пишется в рандомизатор",
 //    PRETRIGGERED, 0, 30000, &PageDebug::PageRand::self, 0, OnChanged_Rand_Pretriggered, 0

@@ -11,14 +11,14 @@ const Page * const PageDisplay::PageSettings::self = (const Page *)&pageSettings
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-static void OnChanged_Settings_Brightness()
+static void OnChanged_Brightness()
 {
 }
 
 DEF_GOVERNOR( gBrightness,                                                                                                                            //--- ДИСПЛЕЙ - НАСТРОЙКИ - Яркость ---
     "Яркость",
     "Установка яркости свечения дисплея",
-    BRIGHTNESS_DISPLAY, 0, 100, &PageDisplay::PageSettings::self, E_BtV, OnChanged_Settings_Brightness
+    BRIGHTNESS_DISPLAY, 0, 100, &PageDisplay::PageSettings::self, E_BtV, OnChanged_Brightness
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
