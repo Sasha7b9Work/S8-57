@@ -3,13 +3,6 @@
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-/** @addtogroup Menu
- *  @{
- *  @defgroup FileManager File Manager
- *  @{
- */
-
 class FileManager
 {
 public:
@@ -22,12 +15,9 @@ public:
     
     static void Press_LevelDown();
     
-    static bool HandlerKey(KeyEvent event);
+    static bool OnArrows(KeyEvent event);
     
     static bool GetNameForNewFile(char name[255]);
 
     static void Press_Tab();
 };
-
-/** @}
- */

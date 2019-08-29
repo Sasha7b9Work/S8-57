@@ -5,9 +5,9 @@
 #include "Display/Painter.h"
 
 
-extern const Page pageSettings;
+extern const Page pSettings;
 
-const Page * const PageDisplay::PageSettings::self = (const Page *)&pageSettings;
+const Page * const PageDisplay::PageSettings::self = (const Page *)&pSettings;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -40,7 +40,7 @@ DEF_CHOICE_6( cAutoHide,                                                        
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-DEF_PAGE_3( pageSettings, // -V641 // -V1027                                                                                                                    //--- ÄÈÑÏËÅÉ - ÍÀÑÒĞÎÉÊÈ ---
+DEF_PAGE_3( pSettings, // -V641 // -V1027                                                                                                                       //--- ÄÈÑÏËÅÉ - ÍÀÑÒĞÎÉÊÈ ---
     "ÍÀÑÒĞÎÉÊÈ",
     "Äîïîëíèòåëüíûå íàñòğîéêè äèñïëåÿ",
     PageDisplay::PageSettings::PageColors::self,        ///< ÄÈÑÏËÅÉ - ÍÀÑÒĞÎÉÊÈ - ÖÂÅÒÀ

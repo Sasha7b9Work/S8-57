@@ -22,17 +22,17 @@ using namespace Osci::Settings;
 
 extern const Page mainPage;
 extern const Page pageDebug;
-extern const Page ppADC;
-extern const Page pppBalance;
-extern const Page pppADC_Stretch;
+extern const Page pADC;
+extern const Page pBalance;
+extern const Page pStretch;
 extern const Page pppShift;
 extern const Page ppSettings;
 extern const Page pSerialNumber;
 
 const Page * const PageDebug::self = (const Page *)&pageDebug;
-const Page * const PageDebug::PageADC::self = (const Page *)&ppADC;
-const Page * const PageDebug::PageADC::PageBalance::self = (const Page *)&pppBalance;
-const Page * const PageDebug::PageADC::PageStretch::self = (const Page *)&pppADC_Stretch;
+const Page * const PageDebug::PageADC::self = (const Page *)&pADC;
+const Page * const PageDebug::PageADC::PageBalance::self = (const Page *)&pBalance;
+const Page * const PageDebug::PageADC::PageStretch::self = (const Page *)&pStretch;
 const Page * const PageDebug::PageADC::PageShift::self = (const Page *)&pppShift;
 const Page * const PageDebug::PageSettings::self = (const Page *)&ppSettings;
 const Page * const PageDebug::PageSerialNumber::self = (const Page *)&pSerialNumber;
@@ -110,7 +110,7 @@ DEF_GOVERNOR( gShiftB,                                                          
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-DEF_PAGE_3( pppBalance, // -V641 // -V1027                                                                                                               //--- Œ“À¿ƒ ¿ - ¿÷œ - ¡¿À¿Õ— ---
+DEF_PAGE_3( pBalance, // -V641 // -V1027                                                                                                                     //--- Œ“À¿ƒ ¿ - ¿÷œ - ¡¿À¿Õ— ---
     "¡¿À¿Õ—",
     "",
     &cADC_Balance_Mode,      ///< Œ“À¿ƒ ¿ - ¿÷œ - ¡¿À¿Õ— - –ÂÊËÏ
@@ -138,7 +138,7 @@ void PageDebug::OnChanged_ADC_Stretch_Mode(bool)
     }
 }
 
-DEF_CHOICE_3( cADC_Stretch_Mode,                                                                                                                   //--- Œ“À¿ƒ ¿ - ¿÷œ - –¿—“ﬂ∆ ¿ - –ÂÊËÏ ---
+DEF_CHOICE_3( cStretch_Mode,                                                                                                                   //--- Œ“À¿ƒ ¿ - ¿÷œ - –¿—“ﬂ∆ ¿ - –ÂÊËÏ ---
     "–ÂÊËÏ",
     "",
     DISABLE_RU,
@@ -185,7 +185,7 @@ _DEF_GOVERNOR(       gADC_Stretch_Ak20mV,                                       
     "20Ï¬/1¬ 1Í", "20mV/1V 1k",
     "",
     "",
-    NRST_ADD_STRETCH_20mV_A, -10000, 10000, pppADC_Stretch, 0, 0, FuncBeforeDraw
+    NRST_ADD_STRETCH_20mV_A, -10000, 10000, pStretch, 0, 0, FuncBeforeDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -193,7 +193,7 @@ _DEF_GOVERNOR(       gADC_Stretch_Ak50mV,                                       
     "50Ï¬ 1Í", "50mV 1k",
     "",
     "",
-    NRST_ADD_STRETCH_50mV_A, -10000, 10000, pppADC_Stretch, 0, 0, FuncBeforeDraw
+    NRST_ADD_STRETCH_50mV_A, -10000, 10000, pStretch, 0, 0, FuncBeforeDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -201,7 +201,7 @@ _DEF_GOVERNOR(       gADC_Stretch_Ak100mV,                                      
     "100Ï¬/5¬ 1Í", "100mV/5V 1ch",
     "",
     "",
-    NRST_ADD_STRETCH_100mV_A, -10000, 10000, pppADC_Stretch, 0, 0, FuncBeforeDraw
+    NRST_ADD_STRETCH_100mV_A, -10000, 10000, pStretch, 0, 0, FuncBeforeDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -209,7 +209,7 @@ _DEF_GOVERNOR(       gADC_Stretch_Ak2V,                                         
     "2¬ 1Í", "2V 1ch",
     "",
     "",
-    NRST_ADD_STRETCH_2V_A, -10000, 10000, pppADC_Stretch, 0, 0, FuncBeforeDraw
+    NRST_ADD_STRETCH_2V_A, -10000, 10000, pStretch, 0, 0, FuncBeforeDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -217,7 +217,7 @@ _DEF_GOVERNOR(       gADC_Stretch_Bk20mV,                                       
     "20Ï¬/1¬ 2Í", "20mV/1V 2k",
     "",
     "",
-    NRST_ADD_STRETCH_20mV_B, -10000, 10000, pppADC_Stretch, 0, 0, FuncBeforeDraw
+    NRST_ADD_STRETCH_20mV_B, -10000, 10000, pStretch, 0, 0, FuncBeforeDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -225,7 +225,7 @@ _DEF_GOVERNOR(       gADC_Stretch_Bk50mV,                                       
     "50Ï¬ 2Í", "50mV 2k",
     "",
     "",
-    NRST_ADD_STRETCH_50mV_B, -10000, 10000, pppADC_Stretch, 0, 0, FuncBeforeDraw
+    NRST_ADD_STRETCH_50mV_B, -10000, 10000, pStretch, 0, 0, FuncBeforeDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -233,7 +233,7 @@ _DEF_GOVERNOR(       gADC_Stretch_Bk100mV,                                      
     "100Ï¬/5¬ 2Í", "100mV/5V 2k",
     "",
     "",
-    NRST_ADD_STRETCH_100mV_B, -10000, 10000, pppADC_Stretch, 0, 0, FuncBeforeDraw
+    NRST_ADD_STRETCH_100mV_B, -10000, 10000, pStretch, 0, 0, FuncBeforeDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -241,17 +241,17 @@ _DEF_GOVERNOR(       gADC_Stretch_Bk2V,                                         
     "2¬ 2Í", "2V 2ch",
     "",
     "",
-    NRST_ADD_STRETCH_2V_B, -10000, 10000, pppADC_Stretch, 0, 0, FuncBeforeDraw
+    NRST_ADD_STRETCH_2V_B, -10000, 10000, pStretch, 0, 0, FuncBeforeDraw
 )
 */
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //static const ChoiceBase emptyChoice = {Item::Type::Choice, 0, false, Page::Name::NoPage, 0, 0, {}, 0, 0, 0, 0};
 
-DEF_PAGE_3( pppADC_Stretch, // -V641 // -V1027                                                                                                             //--- Œ“À¿ƒ ¿ - ¿÷œ - –¿—“ﬂ∆ ¿ ---
+DEF_PAGE_3( pStretch, // -V641 // -V1027                                                                                                                   //--- Œ“À¿ƒ ¿ - ¿÷œ - –¿—“ﬂ∆ ¿ ---
     "–¿—“ﬂ∆ ¿",
     "”ÒÚ‡Ì‡‚ÎË‚‡ÂÚ ÂÊËÏ Ë ‚ÂÎË˜ËÌÛ ‡ÒÚˇÊÍË (‰Îˇ Û˜ÌÓ„Ó ÂÊËÏ‡)",
-    &cADC_Stretch_Mode,      ///< Œ“À¿ƒ ¿ - ¿÷œ - –¿—“ﬂ∆ ¿ - –ÂÊËÏ
+    &cStretch_Mode,      ///< Œ“À¿ƒ ¿ - ¿÷œ - –¿—“ﬂ∆ ¿ - –ÂÊËÏ
     &gStretch_A,         ///< Œ“À¿ƒ ¿ - ¿÷œ - –¿—“ﬂ∆ ¿ - –‡ÒÚˇÊÍ‡ 1Í
     &gStretch_B,
     PageName::Debug_ADC_Stretch,
@@ -352,11 +352,11 @@ DEF_PAGE_7( pppShift, // -V641  // -V1027                                       
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-DEF_PAGE_3( ppADC, //-V641 //-V1027
+DEF_PAGE_3( pADC, //-V641 //-V1027
     "¿÷œ",
     "",
-    &pppBalance, // Œ“À¿ƒ ¿ - ¿÷œ - ¡¿À¿Õ—
-    &pppADC_Stretch, // Œ“À¿ƒ ¿ - ¿÷œ - –¿—“ﬂ∆ ¿
+    &pBalance, // Œ“À¿ƒ ¿ - ¿÷œ - ¡¿À¿Õ—
+    &pStretch, // Œ“À¿ƒ ¿ - ¿÷œ - –¿—“ﬂ∆ ¿
     &pppShift,   // Œ“À¿ƒ ¿ - ¿÷œ - ƒŒœ —Ã≈Ÿ
     PageName::Debug_ADC,
     &PageDebug::self, E_BtV, E_VB, E_VV, E_BfKE
@@ -583,7 +583,7 @@ DEF_PAGE_6( pageDebug, // -V641 // -V1027                                       
     "Œ“À¿ƒ ¿",
     "",
     PageDebug::PageConsole::self,   ///< Œ“À¿ƒ ¿ -  ŒÕ—ŒÀ‹
-    &ppADC,                                         ///< Œ“À¿ƒ ¿ - ¿÷œ
+    &pADC,                                         ///< Œ“À¿ƒ ¿ - ¿÷œ
     PageDebug::PageRand::self,      ///< Œ“À¿ƒ ¿ - –¿Õƒ-“Œ–
     &cStats,			                            ///< Œ“À¿ƒ ¿ - —Ú‡ÚËÒÚËÍ‡
     PageDebug::PageMultimeter::self,

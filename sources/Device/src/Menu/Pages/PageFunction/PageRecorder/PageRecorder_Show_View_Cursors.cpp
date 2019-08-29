@@ -3,12 +3,7 @@
 #include "Menu/Pages/Include/PageFunction.h"
 
 
-extern const Page pageRecorderCursors;
-
-const Page * const PageRecorder::PageShow::PageView::PageCursors::self = (const Page *)&pageRecorderCursors;
-
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void OnPress_Center()
 {
 
@@ -44,8 +39,8 @@ DEF_BUTTON( bRight,
     &PageRecorder::PageShow::PageView::PageCursors::self, E_BtV, OnPress_Right
 )
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-DEF_PAGE_3( pageRecorderCursors, // -V641 // -V1027
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+DEF_PAGE_3(pCursors, // -V641 // -V1027
     " ”–—Œ–€",
     "",
     &bCenter,
@@ -53,3 +48,5 @@ DEF_PAGE_3( pageRecorderCursors, // -V641 // -V1027
     &bRight,
     PageName::Function_Recorder_Show_View_Cursors, &PageRecorder::PageShow::PageView::self, E_BtV, E_VB, E_VV, E_BfKE
 )
+
+const Page * const PageRecorder::PageShow::PageView::PageCursors::self = (const Page *)&pCursors;

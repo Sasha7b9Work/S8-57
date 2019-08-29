@@ -5,15 +5,8 @@
 #include "Menu/Pages/Include/PageFunction.h"
 
 
-extern const Page ppFFT;
-extern const Page pCursors;
-
-const Page * const PageFFT::self = (const Page *)&ppFFT;
-const Page * const PageFFT::PageCursors::self = (const Page *)&pCursors;
-
-
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-DEF_CHOICE_2( cFFT_View,                                                                                                                             //--- ФУНКЦИЯ - СПЕКТР - Отображение ---
+DEF_CHOICE_2( cView,                                                                                                                             //--- ФУНКЦИЯ - СПЕКТР - Отображение ---
     "Отображение",
     "Включает и выключает отображение спектра",
     DISABLE_RU,
@@ -27,7 +20,7 @@ static bool IsActive_Scale()
     return FFT_ENABLED;
 }
 
-DEF_CHOICE_2( cFFT_Scale,                                                                                                                                  //--- ФУНКЦИЯ - СПЕКТР - Шкала ---
+DEF_CHOICE_2( cScale,                                                                                                                                  //--- ФУНКЦИЯ - СПЕКТР - Шкала ---
     "Шкала",
     "Задаёт масштаб вывода спектра - линейный или логарифмический",
     "Логарифм",
@@ -41,7 +34,7 @@ static bool IsActive_Source()
     return FFT_ENABLED;
 }
 
-DEF_CHOICE_3( cFFT_Source,                                                                                                                              //--- ФУНКЦИЯ - СПЕКТР - Источник ---
+DEF_CHOICE_3( cSource,                                                                                                                              //--- ФУНКЦИЯ - СПЕКТР - Источник ---
     "Источник",
     "Выбор источника для расчёта спектра",
     "Канал 1",
@@ -56,7 +49,7 @@ static bool IsActive_Window()
     return FFT_ENABLED;
 }
 
-DEF_CHOICE_4( cFFT_Window,                                                                                                                                  //--- ФУНКЦИЯ - СПЕКТР - Окно ---
+DEF_CHOICE_4( cWindow,                                                                                                                                  //--- ФУНКЦИЯ - СПЕКТР - Окно ---
     "Окно",
     "Задаёт окно для расчёта спектра",
     "Прямоугольн",
@@ -72,7 +65,7 @@ static bool IsActive_FFT_Range()
     return FFT_ENABLED && SCALE_FFT_IS_LOG;
 }
 
-DEF_CHOICE_3( cFFT_Range,                                                                                                                               //--- ФУНКЦИЯ - СПЕКТР - Диапазон ---
+DEF_CHOICE_3( cRange,                                                                                                                               //--- ФУНКЦИЯ - СПЕКТР - Диапазон ---
     "Диапазон",
     "Здесь можно задать предел наблюдения за мощностью спектра",
     "-40дБ",
@@ -128,7 +121,7 @@ DEF_PAGE_1( pCursors, // -V641 // -V1027                                        
     PageName::Function_FFT_Cursors, &PageFFT::self, IsActive_Cursors, E_VB, E_VV, OnArrows_FFT_Cursors
 )
 
-
+const Page * const PageFFT::PageCursors::self = (const Page *)&pCursors;
 
 static bool IsActive_FFT()
 {
@@ -143,14 +136,16 @@ static void OnOpenClose_FFT(bool)
     }
 }
 
-DEF_PAGE_6( ppFFT, // -V641 // -V1027                                                                                                                               //--- СЕРВИС - СПЕКТР ---
+DEF_PAGE_6( pFFT, // -V641 // -V1027                                                                                                                               //--- СЕРВИС - СПЕКТР ---
     "СПЕКТР",
     "Отображение спектра входного сигнала",
-    &cFFT_View,         ///< СЕРВИС - СПЕКТР - Отображение
-    &cFFT_Scale,        ///< СЕРВИС - СПЕКТР - Шкала
-    &cFFT_Source,       ///< СЕРВИС - СПЕКТР - Источник
-    &cFFT_Window,       ///< СЕРВИС - СПЕКТР - Окно 
-    &pCursors,    ///< СЕРВИС - СПЕКТР - КУРСОРЫ
-    &cFFT_Range,        ///< СЕРВИС - СПЕКТР - Диапазон
+    &cView,         ///< СЕРВИС - СПЕКТР - Отображение
+    &cScale,        ///< СЕРВИС - СПЕКТР - Шкала
+    &cSource,       ///< СЕРВИС - СПЕКТР - Источник
+    &cWindow,       ///< СЕРВИС - СПЕКТР - Окно 
+    &pCursors,      ///< СЕРВИС - СПЕКТР - КУРСОРЫ
+    &cRange,        ///< СЕРВИС - СПЕКТР - Диапазон
     PageName::Function_FFT, &PageFunction::self, IsActive_FFT, OnOpenClose_FFT, E_VV, E_BfKE
 )
+
+const Page * const PageFFT::self = (const Page *)&pFFT;

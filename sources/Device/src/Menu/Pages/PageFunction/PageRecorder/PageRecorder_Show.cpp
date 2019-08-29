@@ -6,9 +6,9 @@
 #include "Recorder/Recorder_Display.h"
 
 
-extern const Page pageShow;
+extern const Page pShow;
 
-const Page * const PageRecorder::PageShow::self = (const Page *)&pageShow;
+const Page * const PageRecorder::PageShow::self = (const Page *)&pShow;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -60,7 +60,7 @@ static bool IsActive_PageShow()
     return (Recorder::Storage::CurrentFrame()->NumPoints() != 0) && (!Recorder::IsRunning());
 }
 
-static bool OnKey_PageShow(KeyEvent event)
+static bool OnArrows_PageShow(KeyEvent event)
 {
     if (event.type == TypePress::Press || event.type == TypePress::Repeat)
     {
@@ -83,7 +83,7 @@ static bool OnKey_PageShow(KeyEvent event)
     return false;
 }
 
-DEF_PAGE_3( pageShow, // -V641 // -V1027                                                                                                           //--- тсмйжхъ - пецхярпюрнп - опнялнрп ---
+DEF_PAGE_3( pShow, // -V641 // -V1027                                                                                                              //--- тсмйжхъ - пецхярпюрнп - опнялнрп ---
     "опнялнрп",
     "оПНЯЛНРП ГЮОХЯЮММШУ ДЮММШУ",
     //&cSource,                                                       ///< тсмйжхъ - пецхярпюрнп - опнялнрп - хЯРНВМХЙ
@@ -92,5 +92,5 @@ DEF_PAGE_3( pageShow, // -V641 // -V1027                                        
     &cCursor,
     //PageRecorder::PageShow::PageOperations::self,  ///< тсмйжхъ - пецхярпюрнп - опнялнрп - ноепюжхх
     //PageRecorder::PageShow::PageView::self,        ///< тсмйжхъ - пецхярпюрнп - опнялрнп - опнялнрп
-    PageName::Function_Recorder_Show, &PageRecorder::self, IsActive_PageShow, E_VB, E_VV, OnKey_PageShow
+    PageName::Function_Recorder_Show, &PageRecorder::self, IsActive_PageShow, E_VB, E_VV, OnArrows_PageShow
 )

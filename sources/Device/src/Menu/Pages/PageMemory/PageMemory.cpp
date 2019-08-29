@@ -24,15 +24,15 @@ using namespace Osci::Settings;
 
 extern const Page pageMemory;
 extern const Page ppDrive;
-extern const Page pppDrive_Manager;
-extern const Page pppDrive_Mask;
+extern const Page pManager;
+extern const Page pMask;
 extern const Page pSetName;
 
 const Page * const PageMemory::self = (const Page *)&pageMemory;
 const Page * const PageSetName::self = (const Page *)&pSetName;
 const Page * const PageDrive::self = (const Page *)&ppDrive;
-const Page * const PageDrive::PageManager::self = (const Page *)&pppDrive_Manager;
-const Page * const PageDrive::PageMask::self = (const Page *)&pppDrive_Mask;
+const Page * const PageDrive::PageManager::self = (const Page *)&pManager;
+const Page * const PageDrive::PageMask::self = (const Page *)&pMask;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -139,7 +139,7 @@ void PageMemory::OnOpenClose_Drive_Manager(bool)
 }
 
 /*
-DEF_PAGE_SB(        pppDrive_Manager,                                                                               // ПАМЯТЬ - ВНЕШН ЗУ - КАТАЛОГ ///
+DEF_PAGE_SB(        pManager,                                                                               // ПАМЯТЬ - ВНЕШН ЗУ - КАТАЛОГ ///
     "КАТАЛОГ", "DIRECTORY",
     "Открывает доступ к файловой системе подключенного накопителя",
     "Provides access to the file system of the connected drive",
@@ -153,14 +153,14 @@ DEF_PAGE_SB(        pppDrive_Manager,                                           
 )
 */
 
-DEF_PAGE_3( pppDrive_Manager, // -V641                                                                                                                  //--- ПАМЯТЬ - ВНЕШН ЗУ - КАТАЛОГ ---
+DEF_PAGE_3( pManager, // -V641                                                                                                                          //--- ПАМЯТЬ - ВНЕШН ЗУ - КАТАЛОГ ---
     "КАТАЛОГ",
     "Открывает доступ к файловой системе подключенного накопителя",
     &bManager_Tab,        // ПАМЯТЬ - ВНЕШН ЗУ - КАТАЛОГ - Tab
     &bManager_LevelUp,    // ПАМЯТЬ - ВНЕШН ЗУ - КАТАЛОГ - Выйти из каталога
     &bManager_LevelDown,  // ПАМЯТЬ - ВНЕШН ЗУ - КАТАЛОГ - Войти в каталог
     PageName::Memory_Drive_Manager,
-    &PageDrive::self, IsActive_Drive_Manager, PageMemory::OnOpenClose_Drive_Manager, E_VV, FileManager::HandlerKey
+    &PageDrive::self, IsActive_Drive_Manager, PageMemory::OnOpenClose_Drive_Manager, E_VV, FileManager::OnArrows
 )
 
 
@@ -301,12 +301,12 @@ DEF_CHOICE_2( cDrive_ModeBtnMemory,                                             
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-static bool IsActive_Drive_Mask()
+static bool IsActive_Mask()
 {
     return FILE_NAMING_MODE_MASK;
 }
 
-static void OnOpenClose_Drive_Mask(bool)
+static void OnOpenClose_Mask(bool)
 {
     Display::SetAddDrawFunction(DrawSetMask);
 }
@@ -410,7 +410,7 @@ static void DrawFileMask(int x, int y)
     Region(5, 8).Fill(x, y, Color::FLASH_10);
 }
 
-static bool HandlerKey_Drive_Mask(KeyEvent event)
+static bool OnArrows_Mask(KeyEvent event)
 {
     Key::E key = event.key;
 
@@ -423,7 +423,7 @@ static bool HandlerKey_Drive_Mask(KeyEvent event)
 
 
 /*
-DEF_PAGE_SB( pppDrive_Mask,                                                                                                                               //--- Память - ВНЕШН ЗУ - МАСКА ---
+DEF_PAGE_SB( pMask,                                                                                                                               //--- Память - ВНЕШН ЗУ - МАСКА ---
     "МАСКА", "MASK",
     "Режим ввода маски для автоматического именования файлов",
     "Input mode mask for automatic file naming",
@@ -433,19 +433,19 @@ DEF_PAGE_SB( pppDrive_Mask,                                                     
     0,
     &bMask_Backspace, // ПАМЯТЬ - ВНЕШН ЗУ - МАСКА - Backspace
     &bMask_Insert,    // ПАМЯТЬ - ВНЕШН ЗУ - МАСКА - Вставить
-    Page::Name::SB_Memory_Drive_Mask, &ppDrive, IsActive_Drive_Mask, OnPress_Drive_Mask, FuncDrawPage, OnRegSet_Drive_Mask
+    Page::Name::SB_Memory_Drive_Mask, &ppDrive, IsActive_Mask, OnPress_Drive_Mask, FuncDrawPage, OnRegSet_Drive_Mask
 )
 */
 
 
-DEF_PAGE_3( pppDrive_Mask, // -V641                                                                                                                       //--- Память - ВНЕШН ЗУ - МАСКА ---
+DEF_PAGE_3( pMask, // -V641                                                                                                                               //--- Память - ВНЕШН ЗУ - МАСКА ---
     "МАСКА",
     "Режим ввода маски для автоматического именования файлов",
     &bMask_Delete,    // ПАМЯТЬ - ВНЕШН ЗУ - МАСКА - Удалить
     &bMask_Backspace, // ПАМЯТЬ - ВНЕШН ЗУ - МАСКА - Backspace
     &bMask_Insert,    // ПАМЯТЬ - ВНЕШН ЗУ - МАСКА - Вставить
     PageName::Memory_Drive_Mask,
-    &PageDrive::self, IsActive_Drive_Mask, OnOpenClose_Drive_Mask, E_VV, HandlerKey_Drive_Mask
+    &PageDrive::self, IsActive_Mask, OnOpenClose_Mask, E_VV, OnArrows_Mask
 )
 
 

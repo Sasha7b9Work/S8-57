@@ -9,9 +9,9 @@
 using namespace Osci::Settings;
 
 
-extern const Page pageAccum;
+extern const Page pAccum;
 
-const Page * const PageDisplay::PageAccumulation::self = (const Page *)&pageAccum;
+const Page * const PageDisplay::PageAccumulation::self = (const Page *)&pAccum;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -67,7 +67,7 @@ static bool IsActive_Accum()
     return !Osci::InModeRandomizer();
 }
 
-DEF_PAGE_3(pageAccum, // -V641 // -V1027                                                                                                                       //--- ДИСПЛЕЙ - НАКОПЛЕНИЕ ---
+DEF_PAGE_3( pAccum, // -V641 // -V1027                                                                                                                         //--- ДИСПЛЕЙ - НАКОПЛЕНИЕ ---
     "НАКОПЛ",
     "Настройки режима отображения последних сигналов на экране",
     &cEnable,    ///< ДИСПЛЕЙ - НАКОПЛЕНИЕ - Количество
