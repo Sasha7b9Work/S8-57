@@ -13,7 +13,7 @@ struct DataItem
     const char         *title;      ///< Заголовок итема
     const char         *hint;       ///< Подсказка для режима помощи
     const Page * const *keeper;     ///< Адрес страницы, которой принадлежит. Для Page_Main = 0
-    pFuncBV             isActive;   ///< Активен ли данный элемент
+    pFuncBV             funcActive; ///< Указатель на функцию, которая определяет, активен ли данный итем
     const void         *ad;         ///< Указатель на структуру с данными, специфическими для каждого подкласса Item
 };
 
@@ -55,7 +55,7 @@ public:
     /// Возвращает название элемента, как оно выглядит на дисплее прибора
     String Title() const;
     /// Возвращает true, если контрол находится в активном состоянии (реагирует на органы управления)
-    bool IsActive() const { return data->isActive(); };
+    bool IsActive() const { return data->funcActive(); };
 
     bool IsCurrentItem() const;
     /// Возвращает адрес родителя
@@ -107,9 +107,9 @@ struct DataPage
 {
     uint8               name;               ///< Имя из перечисления Page::Name
     const Item * const *items;              ///< Здесь указатели на пункты этой страницы
-    pFuncVB             funcOnOpenClose;    ///< Будет вызываться при нажатии на свёрнутую страницу и при выходе из этой страницы на предыдущую
-    pFuncVV             funcOnDraw;         ///< Будет вызываться после отрисовки кнопок
-    pFuncBKE            funcOnKey;          ///< В странице малых кнопок вызывается при нажатии стрелки
+    pFuncVB             funcOnOpenClose;    ///< Будет вызываться при открытии/закрытии страницы
+    pFuncVV             funcAfterDraw;      ///< Будет вызываться после отрисовки страницы
+    pFuncBKE            funcOnKeyEvent;     ///< В странице малых кнопок вызывается при нажатии стрелки
 };
 
 /// Описывает страницу меню
