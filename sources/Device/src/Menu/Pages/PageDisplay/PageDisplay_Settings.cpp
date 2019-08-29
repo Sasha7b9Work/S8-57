@@ -5,12 +5,7 @@
 #include "Display/Painter.h"
 
 
-extern const Page pSettings;
-
-const Page * const PageDisplay::PageSettings::self = (const Page *)&pSettings;
-
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void OnChanged_Brightness()
 {
 }
@@ -22,7 +17,7 @@ DEF_GOVERNOR( gBrightness,                                                      
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void OnChanged_Settings_AutoHide(bool autoHide)
+static void OnChanged_AutoHide(bool autoHide)
 {
     Menu::SetAutoHide(autoHide);
 }
@@ -36,10 +31,10 @@ DEF_CHOICE_6( cAutoHide,                                                        
     "Через 15 сек",
     "Через 30 сек",
     "Через 60 сек",
-    MENU_AUTO_HIDE, &PageDisplay::PageSettings::self, E_BtV, OnChanged_Settings_AutoHide, E_VII
+    MENU_AUTO_HIDE, &PageDisplay::PageSettings::self, E_BtV, OnChanged_AutoHide, E_VII
 )
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 DEF_PAGE_3( pSettings, // -V641 // -V1027                                                                                                                       //--- ДИСПЛЕЙ - НАСТРОЙКИ ---
     "НАСТРОЙКИ",
     "Дополнительные настройки дисплея",
@@ -48,3 +43,5 @@ DEF_PAGE_3( pSettings, // -V641 // -V1027                                       
     &cAutoHide,                                         ///< ДИСПЛЕЙ - НАСТРОЙКИ - Скрывать
     PageName::Display_Settings, &PageDisplay::self, E_BtV, E_VB, E_VV, E_BfKE
 )
+
+const Page * const PageDisplay::PageSettings::self = (const Page *)&pSettings;
