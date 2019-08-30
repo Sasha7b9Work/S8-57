@@ -44,6 +44,8 @@
 
 
 // Font::Type::_UGO2
+#define SYMBOL_PEAK_DET_LEFT    '\x12'  ///< Левая часть значка пикового детектора
+#define SYMBOL_PEAK_DET_RIGHT   '\x13'  ///< Правая часть значка пикового детектора
 #define SYMBOL_ARROW_LEFT       '\x20'
 #define SYMBOL_DELETE           '\x22'  ///< ВНЕШН ЗУ-МАСКА-УДАЛИТЬ
 #define SYMBOL_INSERT           '\x26'  ///< ВНЕШН ЗУ-ИМЯ-ВСТАВИТЬ
@@ -51,14 +53,17 @@
 #define SYMBOL_ROM              '\x40'  ///< Микросхемка
 #define SYMBOL_FLASH_DRIVE_BIG  '\x42'  ///< Символ флешки
 #define SYMBOL_FOLDER           '\x46'  ///< Каталог
+#define SYMBOL_TRIANGLE_UP      '\x4c'  ///< Стрелка треугольником вверх
+#define SYMBOL_TRIANGLE_DOWN    '\x4e'  ///< Стрекла треугольником вниз
 #define SYMBOL_FLASH_DRIVE      '\x80'  ///< Символ флешки внизу экрана
 #define SYMBOL_ETHERNET         '\x82'  ///< Символ Ethernet внизу экрана
 #define SYMBOL_USB              '\x84'  ///< Символ USB внизу экрана
 #define SYMBOL_ARROW_RIGHT      '\x64'
 #define SYMBOL_TAB              '\x6e'
 #define SYMBOL_MATH_FUNC_MUL    '\x8a'  ///< МАТЕМАТИКА-ФУНКЦИЯ-УМНОЖЕНИЕ
-#define SYMBOL_PEAK_DET_LEFT    '\x12'  ///< Левая часть значка пикового детектора
-#define SYMBOL_PEAK_DET_RIGHT   '\x13'  ///< Правая часть значка пикового детектора
+#define SYMBOL_TRIANGLE_LEFT    '\x8c'  ///< Стрелка треугольником влево
+#define SYMBOL_TRIANGLE_RIGHT   '\x8e'  ///< Стрелка треугольником вправо
+#define SYMBOL_SELECT           '\xa0'  ///< Символ выбора
 
 /** @}  @}
  */

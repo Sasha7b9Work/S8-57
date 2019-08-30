@@ -3,6 +3,12 @@
 #include "Menu/Pages/Include/PageService.h"
 #include "Settings/Settings.h"
 #include "Settings/SettingsNRST.h"
+#include "Display/Font/Font.h"
+#include "Display/Symbols.h"
+#include "Display/Display_Primitives.h"
+
+
+using namespace Display::Primitives;
 
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -19,49 +25,89 @@ const Page * const PageRTC::self = (const Page *)&pRTC;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//static int8 dServicetime = 0;
-//static int8 hours = 0, minutes = 0, secondes = 0, year = 0, month = 0, day = 0;
-//DEF_TIME(tRTC_Time,                                                                                                                                         //--- СЕРВИС - ВРЕМЯ - Время ---
-//    "Время"
-//    ,
-//    "Установка текущего времени.\nПорядок работы:\n"
-//    "Нажать на элемент меню \"Время\". Откроется меню установки текущего времени. Короткими нажатиями кнопки на цифровой клавиатуре, соответсвующей "
-//    "элементу управления \"Время\", выделить часы, минуты, секунды, год, месяц, или число. Выделенный элемент обозначается мигающей областью. "
-//    "Вращением ручки УСТАНОВКА установить необходимое значение. Затем выделить пункт \"Сохранить\", нажать и удреживать более 0.5 сек кнопку на "
-//    "панели управления. Меню установки текущего временя закроется с сохранением нового текущего времени. Нажатие длительное удержание кнопки на "
-//    "любом другом элементе приведёт к закрытию меню установки текущего вре    мени без сохранения нового текущего времени"
-//    ,
-//    pSet, 0, dServicetime, hours, minutes, secondes, month, day, year
-//)
+static void OnPress_SetLeft()
+{
+}
 
-DEF_BUTTON( bSet_Left,
+static void Draw_Left(int x, int y)
+{
+    Font::SetCurrent(Font::Type::_UGO2);
+    Char(SYMBOL_TRIANGLE_LEFT).Draw4SymbolsInRect(x + 2, y + 2);
+    Font::SetCurrent(Font::Type::_8);
+}
+
+DEF_GRAPH_BUTTON( bSet_Left,
     "Влево",
     "Предыдущий элемент",
-    &PageRTC::PageSet::self, E_BtV, E_VV
+    &PageRTC::PageSet::self, E_BtV, OnPress_SetLeft, Draw_Left
 )
 
-DEF_BUTTON( bSet_Right,
+static void OnPress_SetRight()
+{
+}
+
+static void Draw_Right(int x, int y)
+{
+    Font::SetCurrent(Font::Type::_UGO2);
+    Char(SYMBOL_TRIANGLE_RIGHT).Draw4SymbolsInRect(x + 2, y + 2);
+    Font::SetCurrent(Font::Type::_8);
+}
+
+DEF_GRAPH_BUTTON( bSet_Right,
     "Вправо",
     "Следующий элемент",
-    &PageRTC::PageSet::self, E_BtV, E_VV
+    &PageRTC::PageSet::self, E_BtV, OnPress_SetRight, Draw_Right
 )
 
-DEF_BUTTON( bSet_Up,
+static void OnPress_SetUp()
+{
+}
+
+static void Draw_Up(int x, int y)
+{
+    Font::SetCurrent(Font::Type::_UGO2);
+    Char(SYMBOL_TRIANGLE_UP).Draw4SymbolsInRect(x + 2, y + 4);
+    Font::SetCurrent(Font::Type::_8);
+}
+
+DEF_GRAPH_BUTTON( bSet_Up,
     "Больше",
     "Увеличить",
-    &PageRTC::PageSet::self, E_BtV, E_VV
+    &PageRTC::PageSet::self, E_BtV, OnPress_SetUp, Draw_Up
 )
 
-DEF_BUTTON( bSet_Down,
+static void OnPress_SetDown()
+{
+}
+
+static void Draw_Down(int x, int y)
+{
+    Font::SetCurrent(Font::Type::_UGO2);
+    Char(SYMBOL_TRIANGLE_DOWN).Draw4SymbolsInRect(x + 2, y + 4);
+    Font::SetCurrent(Font::Type::_8);
+}
+
+DEF_GRAPH_BUTTON( bSet_Down,
     "Меньше",
     "Уменьшить",
-    &PageRTC::PageSet::self, E_BtV, E_VV
+    &PageRTC::PageSet::self, E_BtV, OnPress_SetDown, Draw_Down
 )
 
-DEF_BUTTON( bSet_Pick,
+static void OnPress_SetPick()
+{
+}
+
+static void Draw_Pick(int x, int y)
+{
+    Font::SetCurrent(Font::Type::_UGO2);
+    Char(SYMBOL_SELECT).Draw4SymbolsInRect(x + 2 , y);
+    Font::SetCurrent(Font::Type::_8);
+}
+
+DEF_GRAPH_BUTTON( bSet_Pick,
     "Выбрать",
     "Выбор подсвеченного элемента",
-    &PageRTC::PageSet::self, E_BtV, E_VV
+    &PageRTC::PageSet::self, E_BtV, OnPress_SetPick, Draw_Pick
 )
 
 DEF_PAGE_5( pSet, //-V641 //-V1027
@@ -80,44 +126,54 @@ const Page * const PageRTC::PageSet::self = (const Page *)&pSet;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//static void OnChanged_Time_Correction()
-//{
-//}
-//
-//_DEF_GOVERNOR(tRTC_Correction,                                                                                                                           //--- СЕРВИС - ВРЕМЯ - Коррекция ---
-//    "Коррекция",
-//    "Установка корректирующего коэффициента для компенсации хода времени",
-//    NRST_CORRECTION_TIME, -63, 63, pCorrection, 0, OnChanged_Time_Correction, 0
-//)
+static void OnPress_CorrectionLeft()
+{
+}
 
-DEF_BUTTON( bCorrection_Left,
+DEF_GRAPH_BUTTON( bCorrection_Left,
     "Влево",
     "Предыдущий элемент",
-    &PageRTC::PageCorrect::self, E_BtV, E_VV
+    &PageRTC::PageCorrect::self, E_BtV, OnPress_CorrectionLeft, Draw_Left
 )
 
-DEF_BUTTON( bCorrection_Right,
+static void OnPress_CorrectionRight()
+{
+}
+
+DEF_GRAPH_BUTTON( bCorrection_Right,
     "Вправо",
     "Следующий элемент",
-    &PageRTC::PageCorrect::self, E_BtV, E_VV
+    &PageRTC::PageCorrect::self, E_BtV, OnPress_CorrectionRight, Draw_Right
 )
 
-DEF_BUTTON( bCorrection_Up,
+static void OnPress_CorrectionUp()
+{
+}
+
+DEF_GRAPH_BUTTON( bCorrection_Up,
     "Больше",
     "Увеличить",
-    &PageRTC::PageCorrect::self, E_BtV, E_VV
+    &PageRTC::PageCorrect::self, E_BtV, OnPress_CorrectionUp, Draw_Up
 )
 
-DEF_BUTTON( bCorrection_Down,
+static void OnPress_CorrectionDown()
+{
+}
+
+DEF_GRAPH_BUTTON( bCorrection_Down,
     "Меньше",
     "Уменьшить",
-    &PageRTC::PageCorrect::self, E_BtV, E_VV
+    &PageRTC::PageCorrect::self, E_BtV, OnPress_CorrectionDown, Draw_Down
 )
 
-DEF_BUTTON( bCorrection_Pick,
+static void OnPress_CorrectionPick()
+{
+}
+
+DEF_GRAPH_BUTTON( bCorrection_Pick,
     "Выбор",
     "Активировать подсвеченный элемент",
-    &PageRTC::PageCorrect::self, E_BtV, E_VV
+    &PageRTC::PageCorrect::self, E_BtV, OnPress_CorrectionPick, Draw_Pick
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
