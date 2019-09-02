@@ -41,6 +41,8 @@ public:
 
     static const int ERROR = 0x7fffffff;
 
+    int operator[](int n);
+
 private:
 
     int value;

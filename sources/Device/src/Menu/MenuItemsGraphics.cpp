@@ -331,6 +331,8 @@ void Page::Draw(int x, int y, bool opened) const
 
     if(opened)
     {
+        OwnData()->funcBeforeDraw();
+
         if (CurrentItemIsOpened())
         {
             Item *item = GetItem(PosCurrentItem());
@@ -343,8 +345,6 @@ void Page::Draw(int x, int y, bool opened) const
 
             DrawItems(x, y);
         }
-
-        OwnData()->funcAfterDraw();
     }
     else
     {

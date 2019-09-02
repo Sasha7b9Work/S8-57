@@ -72,7 +72,12 @@ public:
     static bool RowNotEmpty(uint8 symbol, int row);
     static bool BitIsExist(uint8 symbol, int row, int bit);
     static void SetMinWidth(uint8 width);
+    /// Устанавливает количество пустых пикселей между символами.
     static void SetSpacing(int spacing);
+    /// Возвращает количество пустых пикселей между символами
+#ifndef PANEL
+    static int GetSpacing();
+#endif
 };
 
 

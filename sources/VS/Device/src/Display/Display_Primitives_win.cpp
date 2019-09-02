@@ -72,7 +72,7 @@ int Display::Primitives::Text::DrawSmall(int x, int y, Color color)
     for (uint i = 0; i < numSymbols; i++)
     {
         x = DrawChar(x, y, text[i]);
-        ++x;
+        x += Font::GetSpacing();
     }
 
     return x;

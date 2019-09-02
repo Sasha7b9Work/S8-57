@@ -108,7 +108,7 @@ struct DataPage
     uint8               name;               ///< Имя из перечисления Page::Name
     const Item * const *items;              ///< Здесь указатели на пункты этой страницы
     pFuncVB             funcOnOpenClose;    ///< Будет вызываться при открытии/закрытии страницы. При открытии в неё передаётся true, при закрытии - false
-    pFuncVV             funcAfterDraw;      ///< Будет вызываться после отрисовки страницы
+    pFuncVV             funcBeforeDraw;     ///< Будет вызываться после отрисовки страницы
     pFuncBKE            handlerArrows;      ///< Вызывается при нажатии стрелок
 };
 

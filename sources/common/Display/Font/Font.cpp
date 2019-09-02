@@ -21,6 +21,10 @@ const BigFont *bigFont = &fontDigits64;
 Font::Type::E pushedFont = Font::Type::_8;
 Font::Type::E currentFont = Font::Type::_8;
 
+#ifndef PANEL
+static int spacing = 1;
+#endif
+
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 int Font::GetLengthText(pString text)
@@ -93,9 +97,15 @@ void Font::SetCurrent(Font::Type::E typeFont)
 #ifdef PANEL
 void Font::SetSpacing(int) {}
 #else
-void Font::SetSpacing(int spacing)
+void Font::SetSpacing(int _spacing)
 {
+    spacing = _spacing;
     Transmitter::Send(Command::Paint_SetTextSpacing, (uint8)spacing);
+}
+
+int Font::GetSpacing()
+{
+    return spacing;
 }
 #endif
 
