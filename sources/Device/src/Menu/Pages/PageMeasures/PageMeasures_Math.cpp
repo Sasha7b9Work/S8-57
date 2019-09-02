@@ -201,7 +201,7 @@ static void OnOpenClose_Math(bool)
     }
 }
 
-static bool OnArrows_Function(KeyEvent event) // -V2506
+static bool OnArrows_Function(const KeyEvent &event) // -V2506
 {
     if (!FUNC_MODE_DRAW_IS_ENABLED)
     {

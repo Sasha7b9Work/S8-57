@@ -37,7 +37,7 @@ void Osci::Measurements::PageChoice::OnOpenCloseEvent()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Osci::Measurements::PageChoice::OnKeyEvent(KeyEvent event)
+void Osci::Measurements::PageChoice::OnKeyEvent(const KeyEvent &event)
 {
     if (event.type != TypePress::Press)
     {

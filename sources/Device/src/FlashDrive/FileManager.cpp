@@ -313,7 +313,7 @@ static void DecCurrentFile()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-bool FileManager::OnArrows(KeyEvent event)
+bool FileManager::OnArrows(const KeyEvent &event)
 {
     Key::E key = event.key;
 

@@ -3,9 +3,9 @@
 #include "Utils/CommonFunctions.h"
 
 
-typedef bool(*pFuncBKE)(KeyEvent);
+typedef bool(*pFuncBKE)(const KeyEvent&);
 
-inline bool E_BfKE(KeyEvent) { return false; }
+inline bool E_BfKE(const KeyEvent&) { return false; }
 
 struct PageName
 {

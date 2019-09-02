@@ -397,7 +397,7 @@ static void DrawFileMask(int x, int y)
     Region(5, 8).Fill(x, y, Color::FLASH_10);
 }
 
-static bool OnArrows_Mask(KeyEvent event)
+static bool OnArrows_Mask(const KeyEvent &event)
 {
     Key::E key = event.key;
 
@@ -637,7 +637,7 @@ DEF_GRAPH_BUTTON( bSetName_Save,                                                
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-static bool OnArrows_SetName(KeyEvent event)
+static bool OnArrows_SetName(const KeyEvent &event)
 {
     OnMemExtSetMaskNameRegSet(event.Delta(), Tables::Size() / 4 - 7);
 

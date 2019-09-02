@@ -24,7 +24,7 @@ const Page * const PageROM::self = (const Page *)&pROM;
 /// Нарисовать карту памяти сохраннных сигналов
 static void DrawMemoryMap(int num, bool exist);
 /// Обработчик нажатия кнопки при открытой странице
-static bool OnArrows_ROM(KeyEvent event);
+static bool OnArrows_ROM(const KeyEvent &event);
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -159,7 +159,7 @@ static void DrawMemoryMap(int num, bool exist)
     }
 }
 
-static bool OnArrows_ROM(KeyEvent event)
+static bool OnArrows_ROM(const KeyEvent &event)
 {
     if (event.type == TypePress::Release || event.type == TypePress::Long)
     {

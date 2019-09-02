@@ -97,7 +97,7 @@ static bool IsActive_Cursors()
     return FFT_ENABLED;
 }
 
-static bool OnArrows_FFT_Cursors(KeyEvent event)
+static bool OnArrows_FFT_Cursors(const KeyEvent &event)
 {
     if (event.type != TypePress::Press && event.type != TypePress::Repeat)
     {

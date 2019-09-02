@@ -546,7 +546,7 @@ static void OnOpenClose_SerialNumber(bool)
     Draw_EnterSerialNumber();
 }
 
-static bool OnArrows_SerialNumber(KeyEvent /*event*/)
+static bool OnArrows_SerialNumber(const KeyEvent &)
 {
     return true;
 }

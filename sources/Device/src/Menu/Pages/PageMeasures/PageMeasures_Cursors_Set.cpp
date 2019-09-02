@@ -314,7 +314,7 @@ DEF_GRAPH_BUTTON_HINTS_2( bMovement,                                            
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-bool PageMeasuresCursors::PageSet::OnArrows(KeyEvent event) //-V2506
+bool PageMeasuresCursors::PageSet::OnArrows(const KeyEvent &event) //-V2506
 {
     TypePress::E type = event.type;
 

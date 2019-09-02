@@ -36,7 +36,7 @@ namespace Osci
         {
         public:
             /// Обработка нажатий при открытой странице
-            static void OnKeyEvent(KeyEvent event);
+            static void OnKeyEvent(const KeyEvent &event);
             /// Нужно вызывать для открытия/закрытия страницы выбора
             static void OnOpenCloseEvent();
             /// Включить/отключить отображение

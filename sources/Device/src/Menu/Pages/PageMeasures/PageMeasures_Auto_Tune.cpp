@@ -56,7 +56,7 @@ static bool IsActive_Tune()
     return SHOW_MEASURES;
 }
 
-static bool OnArrows_Tune(KeyEvent event)
+static bool OnArrows_Tune(const KeyEvent &event)
 {
     Osci::Measurements::PageChoice::OnKeyEvent(event);
 

@@ -4,10 +4,12 @@
 #include "Settings/Settings.h"
 #include "Settings/SettingsNRST.h"
 #include "Display/Font/Font.h"
+#include "Display/Display.h"
 #include "Display/Symbols.h"
 #include "Display/Display_Primitives.h"
 #include "Display/Painter.h"
 #include "Hardware/Clock.h"
+#include "Hardware/Timer.h"
 #include "Utils/Values.h"
 #include "Utils/Math.h"
 
@@ -167,7 +169,7 @@ static void DrawTime(PackedTime &time)
     int spacing = Font::GetSpacing();
     Font::SetSpacing(5);
 
-    for (int i = 0; i < 6; i++)
+    for (int i = 0; i < 1; i++)
     {
         DrawField(time, i);
     }
@@ -182,12 +184,62 @@ static void BeforeDraw_Set()
 
     PackedTime time = Hardware::Clock::GetTime();
 
-    DrawTime(time);
+    //DrawTime(time);
+
+    //Text("Test string").Draw(10, 10, Color::FLASH_10);
+
+    static int count = 0;
+
+    int numPoints = count;
+
+    int x = 0;
+    int y = 10;
+
+    while (numPoints--)
+    {
+        Point().Draw(x++, y, Color::WHITE);
+        if (x == 320)
+        {
+            y++;
+            x = 0;
+        }
+        if (y == 240)
+        {
+            y = 0;
+        }
+    }
+
+    count += 320;
+
+    Integer(count).ToString(false).Draw(10, 10, Color::BACK);
+
+    static uint timePrev = 0;
+
+    Integer((int)(TIME_MS - timePrev)).ToString(false).Draw(50, 10);
+
+    timePrev = TIME_MS;
+
+    //Painter::EndScene();
 }
 
-static void OnOpenClose_Set(bool)
+static void OnOpenClose_Set(bool open)
 {
-    Color::ResetFlash();
+    //if (open)
+    //{
+    //    Display::SetDrawMode(Display::DrawMode::Hand, BeforeDraw_Set);
+    //    Color::ResetFlash();
+    //}
+    //else
+    //{
+    //    Display::SetDrawMode(Display::DrawMode::Auto, nullptr);
+    //}
+
+    Font::SetSpacing(1);
+}
+
+static bool OnKey_Set(const KeyEvent &)
+{
+    return false;
 }
 
 DEF_PAGE_5( pSet, //-V641 //-V1027
@@ -199,7 +251,7 @@ DEF_PAGE_5( pSet, //-V641 //-V1027
     &bSet_Down,
     &bSet_Pick,
     PageName::Service_RTC_Set,
-    &PageRTC::self, E_BtV, OnOpenClose_Set, BeforeDraw_Set, E_BfKE
+    &PageRTC::self, E_BtV, OnOpenClose_Set, BeforeDraw_Set, OnKey_Set
 )
 
 const Page * const PageRTC::PageSet::self = (const Page *)&pSet;

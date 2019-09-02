@@ -90,7 +90,7 @@ static void AfterDraw_RAM()
     Integer(Osci::Storage::NumElementsInStorage()).ToString(false, 3).Draw(Grid::Right() - width + 23, Grid::Top() + 1);
 }
 
-static bool OnArrows_RAM(KeyEvent /*event*/)
+static bool OnArrows_RAM(const KeyEvent &)
 {
     /*
     Key::E key = event.key;

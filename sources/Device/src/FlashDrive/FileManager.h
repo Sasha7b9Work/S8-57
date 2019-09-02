@@ -15,7 +15,7 @@ public:
     
     static void Press_LevelDown();
     
-    static bool OnArrows(KeyEvent event);
+    static bool OnArrows(const KeyEvent &event);
     
     static bool GetNameForNewFile(char name[255]);
 

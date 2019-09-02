@@ -311,7 +311,7 @@ PageName::E Page::GetName() const
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-bool Page::HandlerKey(KeyEvent event)
+bool Page::HandlerKey(const KeyEvent &event)
 {
     if (OwnData()->handlerArrows(event))
     {
@@ -584,7 +584,7 @@ void Governor::ChangeValue(int16 delta)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-bool Governor::HandlerKey(KeyEvent event)
+bool Governor::HandlerKey(const KeyEvent &event)
 {
     if (event.IsLeft())
     {
@@ -656,7 +656,7 @@ char Governor::GetSymbol() const
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-bool Choice::HandlerKey(KeyEvent event)
+bool Choice::HandlerKey(const KeyEvent &event)
 {
     if (event.type == TypePress::Press)
     {

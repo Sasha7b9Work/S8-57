@@ -92,7 +92,7 @@ public:
 
     virtual void HandlerFX(TypePress::E type) const;
     /// Обработка события кнопки
-    virtual bool HandlerKey(KeyEvent) { return false; };
+    virtual bool HandlerKey(const KeyEvent &) { return false; };
     /// Возвращает высоту в пикселях открытого элемента Choice или Page::Name
     virtual int HeightOpened() const;
 
@@ -151,7 +151,7 @@ public:
     /// true, если является вложенной подстраницей страницы parent
     bool IsSubPage(const Page *parent);
     /// Обработка события кнопки
-    virtual bool HandlerKey(KeyEvent event);
+    virtual bool HandlerKey(const KeyEvent &event);
     /// Реакция на событие функциональной клавиши, соотвествующей итем
     virtual void HandlerFX(TypePress::E type) const;
     /// Нарисовать в заданных координатах
@@ -245,7 +245,7 @@ public:
     /// Задаёт новое значение
     void SetValue(int16 v) const;
     /// Обработка события кнопки
-    virtual bool HandlerKey(KeyEvent event);
+    virtual bool HandlerKey(const KeyEvent &event);
     /// Обработка события функциональной кнопки, соответствующей данному итему
     virtual void HandlerFX(TypePress::E type) const;
 
@@ -303,7 +303,7 @@ public:
 
     virtual void Draw(int x, int y, bool opened) const;
     /// Обработка события кнопки
-    virtual bool HandlerKey(KeyEvent event);
+    virtual bool HandlerKey(const KeyEvent &event);
     /// Обработка события функциональной кнопки, соответствующей данному итему
     virtual void HandlerFX(TypePress::E type) const;
 

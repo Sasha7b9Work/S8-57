@@ -257,6 +257,7 @@ void Display::ShowWarning(Warning::E warning)
 void Display::SetDrawMode(DrawMode::E mode, pFuncVV func)
 {
     funcOnHand = func;
+
     if (mode == DrawMode::Hand)
     {
         Timer::SetAndEnable(Timer::Type::Display, funcOnHand, 40);

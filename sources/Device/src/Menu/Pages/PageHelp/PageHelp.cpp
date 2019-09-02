@@ -48,7 +48,7 @@ static void Draw_Next(int x, int y)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static bool OnArrows_Help(KeyEvent)
+static bool OnArrows_Help(const KeyEvent &)
 {
     return true;
 }

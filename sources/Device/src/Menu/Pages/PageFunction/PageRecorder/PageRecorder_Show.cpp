@@ -55,7 +55,7 @@ static bool IsActive_PageShow()
     return (Recorder::Storage::CurrentFrame()->NumPoints() != 0) && (!Recorder::IsRunning());
 }
 
-static bool OnArrows_PageShow(KeyEvent event)
+static bool OnArrows_PageShow(const KeyEvent &event)
 {
     if (event.type == TypePress::Press || event.type == TypePress::Repeat)
     {
