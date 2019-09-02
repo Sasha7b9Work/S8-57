@@ -144,8 +144,8 @@ static void DrawField(PackedTime &time, int numField)
 
     if (numField == curField)
     {
-        Region(69, 67).Fill(x - 2, y - 2, Color::FILL);
-        Color::BACK.SetAsCurrent();
+        Region(69, 67).Fill(x - 2, y - 2, Color::FLASH_01);
+        Color::FLASH_10.SetAsCurrent();
     }
 
     Integer value((int)fields[numField]);
@@ -185,6 +185,11 @@ static void BeforeDraw_Set()
     DrawTime(time);
 }
 
+static void OnOpenClose_Set(bool)
+{
+    Color::ResetFlash();
+}
+
 DEF_PAGE_5( pSet, //-V641 //-V1027
     "УСТАНОВКА",
     "Установка текущего времени",
@@ -194,7 +199,7 @@ DEF_PAGE_5( pSet, //-V641 //-V1027
     &bSet_Down,
     &bSet_Pick,
     PageName::Service_RTC_Set,
-    &PageRTC::self, E_BtV, E_VB, BeforeDraw_Set, E_BfKE
+    &PageRTC::self, E_BtV, OnOpenClose_Set, BeforeDraw_Set, E_BfKE
 )
 
 const Page * const PageRTC::PageSet::self = (const Page *)&pSet;
