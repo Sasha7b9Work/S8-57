@@ -146,8 +146,8 @@ static void DrawField(PackedTime &time, int numField)
 
     if (numField == curField)
     {
-        Region(69, 67).Fill(x - 2, y - 2, Color::FLASH_01);
-        Color::FLASH_10.SetAsCurrent();
+        Region(69, 67).Fill(x - 2, y - 2, Color::FILL);
+        Color::BACK.SetAsCurrent();
     }
 
     Integer value((int)fields[numField]);
@@ -168,12 +168,12 @@ static void DrawTime(PackedTime &time)
     Font::SetCurrent(Font::Type::_Big64);
     int spacing = Font::GetSpacing();
     Font::SetSpacing(5);
-
-    for (int i = 0; i < 1; i++)
+    
+    for (int i = 0; i < 6; i++)
     {
         DrawField(time, i);
     }
-
+    
     Font::SetCurrent(Font::Type::_8);
     Font::SetSpacing(spacing);
 }
@@ -184,57 +184,11 @@ static void BeforeDraw_Set()
 
     PackedTime time = Hardware::Clock::GetTime();
 
-    //DrawTime(time);
-
-    //Text("Test string").Draw(10, 10, Color::FLASH_10);
-
-    static int count = 0;
-
-    int numPoints = count;
-
-    int x = 0;
-    int y = 10;
-
-    while (numPoints--)
-    {
-        Point().Draw(x++, y, Color::WHITE);
-        if (x == 320)
-        {
-            y++;
-            x = 0;
-        }
-        if (y == 240)
-        {
-            y = 0;
-        }
-    }
-
-    count += 320;
-
-    Integer(count).ToString(false).Draw(10, 10, Color::BACK);
-
-    static uint timePrev = 0;
-
-    Integer((int)(TIME_MS - timePrev)).ToString(false).Draw(50, 10);
-
-    timePrev = TIME_MS;
-
-    //Painter::EndScene();
+    DrawTime(time);
 }
 
-static void OnOpenClose_Set(bool open)
+static void OnOpenClose_Set(bool)
 {
-    //if (open)
-    //{
-    //    Display::SetDrawMode(Display::DrawMode::Hand, BeforeDraw_Set);
-    //    Color::ResetFlash();
-    //}
-    //else
-    //{
-    //    Display::SetDrawMode(Display::DrawMode::Auto, nullptr);
-    //}
-
-    Font::SetSpacing(1);
 }
 
 static bool OnKey_Set(const KeyEvent &)
