@@ -2,24 +2,21 @@ cmake_minimum_required(VERSION 3.0)
 
 project (Device57)
 
-include_directories(
-                    "..\\..\\VS\\Device\\src\\"
-                    "..\\..\\Device\\src\\"
-                    "..\\..\\Device\\src\\Hardware\\FatFS\\"
-                    "..\\..\\Device\\src\\Hardware\\HAL\\"
-                    "..\\..\\Device\\src\\Hardware\\USBD\\"
-                    "..\\..\\Device\\src\\Hardware\\USBH\\"
-                    "..\\..\\common\\"
-#                    "..\\..\\common\\_VS\\"
-                    "..\\..\\common\\_VS\\CMSIS\\"
-                    "..\\..\\common\\_VS\\FatFS\\"
-                    "..\\..\\common\\_VS\\HAL\\"
-                    "..\\..\\common\\_VS\\USBD\\"
-                    "..\\..\\common\\_VS\\USBH\\"
-                    "..\\..\\ThirdParty\\wxWidgets\\include\\"
-                    "..\\..\\ThirdParty\\wxWidgets\\generated\\lib\\vc_dll\\mswud\\"
-                    "..\\..\\ThirdParty\\SDL2\\SDL2-2.0.10\\include\\"
-                    )
+include_directories(../../VS/Device/src
+                    ../../Device/src
+                    ../../Device/src/Hardware/FatFS
+                    ../../Device/src/Hardware/HAL
+                    ../../Device/src/Hardware/USBD
+                    ../../Device/src/Hardware/USBH
+                    ../../common
+                    ../../common/_VS/CMSIS
+                    ../../common/_VS/FatFS
+                    ../../common/_VS/HAL
+                    ../../common/_VS/USBD
+                    ../../common/_VS/USBH
+                    ../../ThirdParty/wxWidgets/include
+                    ../../ThirdParty/wxWidgets/generated/lib/vc_dll/mswud
+                    ../../ThirdParty/SDL2/SDL2-2.0.10/include)
                     
 add_definitions(-DSTM32F437xx -DOLD_RECORDER -DWXUSINGDLL -DUSE_SDL2 -DGUI)
 
@@ -36,45 +33,46 @@ add_compile_options(/wd4996)    # 'xxx': This function or variable may be unsafe
 add_compile_options(/wd5026)    # 'xxx': move constructor was implicitly defined as deleted
 add_compile_options(/wd5039)    # 'xxx': pointer or reference to potentially throwing function passed to extern C function under -EHc.
 
-source_group(common                 FILES ../../common/Command.h
-                                          ../../common/Message.cpp
-                                          ../../common/Message.h
-                                          ../../common/Transceiver.cpp
-                                          ../../common/Transceiver.h
-                                          ../common/Transceiver_win.cpp)
-source_group(_VS                                        REGULAR_EXPRESSION "../common/_VS/*.*")
-source_group(_VS\\CMSIS                                 REGULAR_EXPRESSION "../common/_VS/CMSIS/*.*")
-source_group(_VS\\FatFS                                 REGULAR_EXPRESSION "../common/_VS/FatFS/*.*")
-source_group(_VS\\HAL                                   REGULAR_EXPRESSION "../common/_VS/HAL/*.*")
-source_group(_VS\\HAL\\Legacy                           REGULAR_EXPRESSION "../common/_VS/HAL/Legacy/*.*")
-source_group(_VS\\USBD                                  REGULAR_EXPRESSION "../common/_VS/USBD/*.*")
-source_group(_VS\\USBH                                  REGULAR_EXPRESSION "../common/_VS/USBH/*.*")
-source_group(Data                                       REGULAR_EXPRESSION "src/Data/*.*")
-source_group(Display\\Font                              REGULAR_EXPRESSION "../common/Display/Font/*.*")
-source_group(FlashDrive                                 REGULAR_EXPRESSION "src/FlashDrive/*.*")
-source_group(Hardware\\HAL                              REGULAR_EXPRESSION "src/Hardware/HAL/*.*")
-source_group(Keyboard                                   REGULAR_EXPRESSION "src/Keyboard/*.*")
-source_group(Menu                                       REGULAR_EXPRESSION "src/Menu/*.*")
-source_group(Menu\\Pages                                REGULAR_EXPRESSION "src/Menu/Pages/*.*")
-source_group(Menu\\Pages\\Include                       REGULAR_EXPRESSION "src/Menu/Pages/Include/*.*")
-source_group(Menu\\Pages\\PageDebug                     REGULAR_EXPRESSION "src/Menu/Pages/PageDebug/*.*")
-source_group(Menu\\Pages\\PageDisplay                   REGULAR_EXPRESSION "src/Menu/Pages/PageDisplay/*.*")
-source_group(Menu\\Pages\\PageFunction                  REGULAR_EXPRESSION "src/Menu/Pages/PageFunction/*.*")
-source_group(Menu\\Pages\\PageFunction\\PageRecorder    REGULAR_EXPRESSION "src/Menu/Pages/PageFunction/PageRecorder/*.*")
-source_group(Menu\\Pages\\PageHelp                      REGULAR_EXPRESSION "src/Menu/Pages/PageHelp/*.*")
-source_group(Menu\\Pages\\PageMeasures                  REGULAR_EXPRESSION "src/Menu/Pages/PageMeasures/*.*")
-source_group(Menu\\Pages\\PageMemory                    REGULAR_EXPRESSION "src/Menu/Pages/PageMemory/*.*")
-source_group(Menu\\Pages\\PageService                   REGULAR_EXPRESSION "src/Menu/Pages/PageService/*.*")
-source_group(Menu\\Pages\\PageService\\PageDebug        REGULAR_EXPRESSION "src/Menu/Pages/PageService/PageDebug/*.*")
-source_group(Menu\\Pages\\PageTrig                      REGULAR_EXPRESSION "src/Menu/Pages/PageTrig/*.*")
-source_group(Multimeter                                 REGULAR_EXPRESSION "src/Multimeter/*.*")
-source_group(Osci                                       REGULAR_EXPRESSION "src/Osci/*.*")
-source_group(Osci\\Display                              REGULAR_EXPRESSION "src/Osci/Display/*.*")
-source_group(Osci\\Measurements\\                       REGULAR_EXPRESSION "src/Osci/Measurements/*.*")
-source_group(Recorder                                   REGULAR_EXPRESSION "src/Recorder/*.*")
-source_group(SCPI                                       REGULAR_EXPRESSION "src/SCPI/*.*")
-source_group(Tester                                     REGULAR_EXPRESSION "src/Tester/*.*")
-source_group(Utils                                      REGULAR_EXPRESSION "src/Utils/*.*")
+source_group(common                 FILES   ../../common/Command.h
+                                            ../../common/DataBus.cpp
+                                            ../../common/DataBus.h
+                                            ../../common/Message.cpp
+                                            ../../common/Message.h
+                                            ../../common/Transceiver.cpp
+                                            ../../common/Transceiver.h
+                                            ../common/Transceiver_win.cpp)
+source_group(_VS                                        REGULAR_EXPRESSION ../common/_VS/*)
+source_group(_VS\\CMSIS                                 REGULAR_EXPRESSION ../common/_VS/CMSIS/*)
+source_group(_VS\\FatFS                                 REGULAR_EXPRESSION ../common/_VS/FatFS/*)
+source_group(_VS\\HAL                                   REGULAR_EXPRESSION ../common/_VS/HAL/*)
+source_group(_VS\\HAL\\Legacy                           REGULAR_EXPRESSION ../common/_VS/HAL/Legacy/*)
+source_group(_VS\\USBD                                  REGULAR_EXPRESSION ../common/_VS/USBD/*)
+source_group(_VS\\USBH                                  REGULAR_EXPRESSION ../common/_VS/USBH/*)
+source_group(Display\\Font                              REGULAR_EXPRESSION ../common/Display/Font/*)
+source_group(Data                                       REGULAR_EXPRESSION              src/Data/*)
+source_group(FlashDrive                                 REGULAR_EXPRESSION              src/FlashDrive/*)
+source_group(Keyboard                                   REGULAR_EXPRESSION              src/Keyboard/*)
+source_group(Menu                                       REGULAR_EXPRESSION              src/Menu/*)
+source_group(Menu\\Pages                                REGULAR_EXPRESSION              src/Menu/Pages/*)
+source_group(Menu\\Pages\\Include                       REGULAR_EXPRESSION              src/Menu/Pages/Include/*)
+source_group(Menu\\Pages\\PageDebug                     REGULAR_EXPRESSION              src/Menu/Pages/PageDebug/*)
+source_group(Menu\\Pages\\PageDisplay                   REGULAR_EXPRESSION              src/Menu/Pages/PageDisplay/*)
+source_group(Menu\\Pages\\PageFunction                  REGULAR_EXPRESSION              src/Menu/Pages/PageFunction/*)
+source_group(Menu\\Pages\\PageFunction\\PageRecorder    REGULAR_EXPRESSION              src/Menu/Pages/PageFunction/PageRecorder/*)
+source_group(Menu\\Pages\\PageHelp                      REGULAR_EXPRESSION              src/Menu/Pages/PageHelp/*)
+source_group(Menu\\Pages\\PageMeasures                  REGULAR_EXPRESSION              src/Menu/Pages/PageMeasures/*)
+source_group(Menu\\Pages\\PageMemory                    REGULAR_EXPRESSION              src/Menu/Pages/PageMemory/*)
+source_group(Menu\\Pages\\PageService                   REGULAR_EXPRESSION              src/Menu/Pages/PageService/*)
+source_group(Menu\\Pages\\PageService\\PageDebug        REGULAR_EXPRESSION              src/Menu/Pages/PageService/PageDebug/*)
+source_group(Menu\\Pages\\PageTrig                      REGULAR_EXPRESSION              src/Menu/Pages/PageTrig/*)
+source_group(Multimeter                                 REGULAR_EXPRESSION              src/Multimeter/*)
+source_group(Osci                                       REGULAR_EXPRESSION              src/Osci/*)
+source_group(Osci\\Display                              REGULAR_EXPRESSION              src/Osci/Display/*)
+source_group(Osci\\Measurements\\                       REGULAR_EXPRESSION              src/Osci/Measurements/*)
+source_group(Recorder                                   REGULAR_EXPRESSION              src/Recorder/*)
+source_group(SCPI                                       REGULAR_EXPRESSION              src/SCPI/*)
+source_group(Tester                                     REGULAR_EXPRESSION              src/Tester/*)
+source_group(Utils                                      REGULAR_EXPRESSION              src/Utils/*)
 source_group(src                FILES                src/Application.cpp
                                                      src/Application.h
                                                      src/main_win.cpp
@@ -135,6 +133,24 @@ source_group(Hardware           FILES   ../../Device/src/Hardware/Battery.h
                                         ../../Device/src/Hardware/VCP.h
                                                      src/Hardware/Transceiver_win.cpp
                                         ../../Device/src/Hardware/VCP.cpp)
+source_group(Hardware\\HAL      FILES   ../../Device/src/Hardware/HAL/HAL.h
+                                        ../../Device/src/Hardware/HAL/HAL_ADC1.cpp
+                                        ../../Device/src/Hardware/HAL/HAL_ADC3.cpp
+                                        ../../Device/src/Hardware/HAL/HAL_ADDRESSES.cpp
+                                        ../../Device/src/Hardware/HAL/HAL_CRC32.cpp
+                                        ../../Device/src/Hardware/HAL/HAL_DAC1.cpp
+                                        ../../Device/src/Hardware/HAL/HAL_DAC2.cpp
+                                        ../../Device/src/Hardware/HAL/HAL_EEPROM.cpp
+                                        ../../Device/src/Hardware/HAL/HAL_FSMC.cpp
+                                        ../../Device/src/Hardware/HAL/HAL_IT.cpp
+                                        ../../Device/src/Hardware/HAL/HAL_MSP.cpp
+                                        ../../Device/src/Hardware/HAL/HAL_NVIC.cpp
+                                        ../../Device/src/Hardware/HAL/HAL_OTP.cpp
+                                        ../../Device/src/Hardware/HAL/HAL_PIO.cpp
+                                        ../../Device/src/Hardware/HAL/HAL_PIO.h
+                                        ../../Device/src/Hardware/HAL/HAL_RTC.cpp
+                                        ../../Device/src/Hardware/HAL/HAL_TIM.cpp
+                                        ../../Device/src/Hardware/HAL/HAL_USART3.cpp)
 source_group(Settings           FILES   ../../Device/src/Settings/Settings.h
                                         ../../Device/src/Settings/Settings.cpp
                                                      src/Settings/Settings_win.cpp
@@ -152,6 +168,8 @@ file(GLOB SOURCES   ../../common/_VS/*
                     ../../common/_VS/USBH/*
                     
                     ../../common/Command.h
+                    ../../common/DataBus.cpp
+                    ../../common/DataBus.h
                     ../../common/Message.cpp
                     ../../common/Message.h
                     ../../common/Transceiver.cpp
@@ -213,7 +231,25 @@ file(GLOB SOURCES   ../../common/_VS/*
                     ../../Device/src/Hardware/VCP.cpp
                                  src/Hardware/Transceiver_win.cpp
                     
-                                 src/Hardware/HAL/*
+                    ../../Device/src/Hardware/HAL/HAL.h
+                    ../../Device/src/Hardware/HAL/HAL_ADC1.cpp
+                    ../../Device/src/Hardware/HAL/HAL_ADC3.cpp
+                    ../../Device/src/Hardware/HAL/HAL_ADDRESSES.cpp
+                    ../../Device/src/Hardware/HAL/HAL_CRC32.cpp
+                    ../../Device/src/Hardware/HAL/HAL_DAC1.cpp
+                    ../../Device/src/Hardware/HAL/HAL_DAC2.cpp
+                    ../../Device/src/Hardware/HAL/HAL_EEPROM.cpp
+                    ../../Device/src/Hardware/HAL/HAL_FSMC.cpp
+                    ../../Device/src/Hardware/HAL/HAL_IT.cpp
+                    ../../Device/src/Hardware/HAL/HAL_MSP.cpp
+                    ../../Device/src/Hardware/HAL/HAL_NVIC.cpp
+                    ../../Device/src/Hardware/HAL/HAL_OTP.cpp
+                    ../../Device/src/Hardware/HAL/HAL_PIO.cpp
+                    ../../Device/src/Hardware/HAL/HAL_PIO.h
+                    ../../Device/src/Hardware/HAL/HAL_RTC.cpp
+                    ../../Device/src/Hardware/HAL/HAL_TIM.cpp
+                    ../../Device/src/Hardware/HAL/HAL_USART3.cpp
+                    
                     ../../Device/src/Keyboard/*
                     ../../Device/src/Menu/*
                     ../../Device/src/Menu/Pages/*
@@ -263,10 +299,10 @@ file(GLOB SOURCES   ../../common/_VS/*
                     
 add_executable(Device57 ${SOURCES})
 
-target_link_libraries(Device57 "..\\..\\..\\ThirdParty\\wxWidgets\\generated\\lib\\vc_dll\\wxbase31ud.lib")
-target_link_libraries(Device57 "..\\..\\..\\ThirdParty\\wxWidgets\\generated\\lib\\vc_dll\\wxmsw31ud_core.lib")
+target_link_libraries(Device57 ../../../ThirdParty/wxWidgets/generated/lib/vc_dll/wxbase31ud)
+target_link_libraries(Device57 ../../../ThirdParty/wxWidgets/generated/lib/vc_dll/wxmsw31ud_core)
 
-target_link_libraries(Device57 "..\\..\\..\\ThirdParty\\SDL2\\SDL2-2.0.10\\generated\\Debug\\SDL2-staticd.lib")
+target_link_libraries(Device57 ../../../ThirdParty/SDL2/SDL2-2.0.10/generated/Debug/SDL2-staticd)
 
 target_link_libraries(Device57 WinMM.lib)
 target_link_libraries(Device57 version.lib)
