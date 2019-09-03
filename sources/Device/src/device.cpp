@@ -52,7 +52,7 @@ void Device::Init()
 
     Battery::Init();
 
-    Clock::Init();
+    HAL::RTC_::Init();
 
     VCP::Init();
 

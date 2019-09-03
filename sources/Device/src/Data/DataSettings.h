@@ -1,7 +1,27 @@
 #pragma once
 #include "Osci/Osci_Settings.h"
-#include "Hardware/Clock.h"
 
+
+struct PackedTime
+{
+    unsigned timeMS : 32;   /// \brief ¬рем€ в миллисекундах от старта системы. “.к. структура заполн€етс€ во врем€ сохранени€ данных в хранилище, то 
+                              /// timeMS == 0 означает, что полный сигнал в режиме поточеного вывода ещЄ не считан
+    unsigned hours : 5;
+    unsigned minutes : 6;
+    unsigned seconds : 6;
+    unsigned year : 7;
+    unsigned month : 4;
+    unsigned notUsed0 : 4;
+    unsigned day : 5;
+    unsigned notUsed1 : 27;
+    /// »зменение значени€ пол€ на +/- 1
+    void ChangeHours(int delta);
+    void ChangeMinutes(int delta);
+    void ChangeSeconds(int delta);
+    void ChangeDay(int delta);
+    void ChangeMonth(int delta);
+    void ChangeYear(int delta);
+};
 
 struct DataSettings
 {

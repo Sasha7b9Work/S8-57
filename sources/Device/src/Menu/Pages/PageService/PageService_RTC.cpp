@@ -8,10 +8,11 @@
 #include "Display/Symbols.h"
 #include "Display/Display_Primitives.h"
 #include "Display/Painter.h"
-#include "Hardware/Clock.h"
 #include "Hardware/Timer.h"
 #include "Utils/Values.h"
 #include "Utils/Math.h"
+#include "Hardware/HAL/HAL.h"
+#include "Data/DataSettings.h"
 
 
 using namespace Display::Primitives;
@@ -21,7 +22,22 @@ struct StructRTC
 {
     int        curField;
     PackedTime time;
-    StructRTC() : curField(0) { time = Hardware::Clock::GetTime(); };
+    StructRTC() : curField(0) { time = HAL::RTC_::GetPackedTime(); };
+    /// Изменить значение текущего поля на +/- 1
+    void ChangeCurrentField(int delta)
+    {
+        typedef void (PackedTime::*PackedTimeFunc)(int);
+
+        static const PackedTimeFunc funcs[] =
+        {
+            &PackedTime::ChangeHours, &PackedTime::ChangeMinutes, &PackedTime::ChangeSeconds,
+            &PackedTime::ChangeDay,   &PackedTime::ChangeMonth,   &PackedTime::ChangeYear
+        };
+
+        PackedTimeFunc func = funcs[curField];
+
+        (time.*func)(delta);
+    };
 };
 
 /// Указатель на структуру с рабочей информацией. Память под структуру выделяется при открытии страницы и освобождается при закрытии.
@@ -85,6 +101,7 @@ DEF_GRAPH_BUTTON( bSet_Right,
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void OnPress_SetUp()
 {
+    psRTC->ChangeCurrentField(1);
 }
 
 static void Draw_Up(int x, int y)
@@ -103,6 +120,7 @@ DEF_GRAPH_BUTTON( bSet_Up,
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void OnPress_SetDown()
 {
+    psRTC->ChangeCurrentField(-1);
 }
 
 static void Draw_Down(int x, int y)
@@ -208,9 +226,9 @@ static void OnOpenClose_Set(bool open)
 
 static void BeforeDraw_Set()
 {
-    if (psRTC == nullptr)
+    if (psRTC == nullptr)                   // Если страница открыта непредусмотренным способом
     {
-        OnOpenClose_Set(true);
+        OnOpenClose_Set(true);              // подведём подготовительные операции
     }
 
     Painter::BeginScene(Color::BACK);

@@ -6,7 +6,6 @@
 #include "Hardware/Beeper.h"
 #include "Osci/Display/Osci_Display.h"
 #include "Hardware/Timer.h"
-#include "Hardware/Clock.h"
 #include "Display/Symbols.h"
 #include "Menu/Pages/Include/PageFunction.h"
 

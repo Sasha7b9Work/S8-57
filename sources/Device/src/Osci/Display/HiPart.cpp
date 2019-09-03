@@ -10,14 +10,14 @@
 #include "Osci/Measurements/Measurements_Table.h"
 #include "Tables.h"
 #include "Utils/Values.h"
-#include <cmath>
-#include <cstdio>
-#include <cstring>
-
 #include "Utils/Debug.h"
 #include "Display/Font/Font.h"
 #include "Hardware/Timer.h"
 #include "Settings/Settings.h"
+#include "Hardware/HAL/HAL.h"
+#include <cmath>
+#include <cstdio>
+#include <cstring>
 
 
 using namespace Display::Primitives;
@@ -293,7 +293,7 @@ static void DrawTime(int x, int y)
     int dField = 10;
     int dSeparator = 2;
 
-    PackedTime time = Clock::GetTime();
+    PackedTime time = HAL::RTC_::GetPackedTime();
 
     Color::FILL.SetAsCurrent();
 

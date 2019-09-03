@@ -449,7 +449,7 @@ static void SetTimeForFile(const char *name)
 {
     FILINFO info;
 
-    PackedTime time = Clock::GetTime();
+    PackedTime time = HAL::RTC_::GetPackedTime();
 
     info.fdate = (WORD)(((time.year + 2000 - 1980) * 512) | time.month * 32 | time.day);        // -V112
     info.ftime = (WORD)(time.hours * 2048 | time.minutes * 32 | time.seconds / 2);              // -V112
