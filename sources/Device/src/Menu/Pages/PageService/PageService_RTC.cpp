@@ -139,6 +139,8 @@ DEF_GRAPH_BUTTON( bSet_Down,
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void OnPress_SetPick()
 {
+    HAL::RTC_::SetPackedTime(psRTC->time);
+    Menu::CloseOpenedItem();
 }
 
 static void Draw_Pick(int x, int y)
