@@ -70,6 +70,8 @@ source_group(Recorder                                REGULAR_EXPRESSION "src/Rec
 source_group(SCPI                                    REGULAR_EXPRESSION "src/SCPI/*.*")
 source_group(Settings                                REGULAR_EXPRESSION "src/Settings/*.*")
 source_group(Tester                                  REGULAR_EXPRESSION "src/Tester/*.*")
+source_group(ThirdParty\\HAL                         FILES ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rtc.h
+                                                           ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rtc_ex.h)
 source_group(Utils                                   REGULAR_EXPRESSION "src/Utils/*.*")
 
 
@@ -83,6 +85,10 @@ file(GLOB SOURCES   ../common/_VS/*
                     ../common/Transceiver.cpp
                     ../common/Transceiver.h
                     ../common/Transceiver_Device.cpp
+                    
+                    ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rtc.h
+                    ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rtc_ex.h
+                    
                     src/Data/*.*
                     src/Display/*.*
                     ../common/Display/Font/*.*

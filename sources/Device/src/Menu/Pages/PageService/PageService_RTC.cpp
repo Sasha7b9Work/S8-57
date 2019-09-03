@@ -16,8 +16,20 @@
 
 using namespace Display::Primitives;
 
-/// Номер подсвеченной ячейки
-static int curField = 0;
+/// Структура используется при работе со страницей установки текущего времени
+struct StructRTC
+{
+    int        curField;
+    PackedTime time;
+    StructRTC() : curField(0) { time = Hardware::Clock::GetTime(); };
+};
+
+/// Указатель на структуру с рабочей информацией. Память под структуру выделяется при открытии страницы и освобождается при закрытии.
+/// Также нужно проверять значение этого указателя в функции отрисовки. Если оно равно nullptr, значит, страница была открыта нестандартным способом и нужно провести инициализацию.
+static StructRTC *psRTC = nullptr;
+
+#define CUR_FIELD (psRTC->curField)
+#define TIME      (psRTC->time)
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 DEF_PAGE_2( pRTC, // -V641 // -V1027                                                                                                                                 //--- СЕРВИС - ВРЕМЯ ---
@@ -35,7 +47,7 @@ const Page * const PageRTC::self = (const Page *)&pRTC;
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 static void OnPress_SetLeft()
 {
-    Math::CircleDecrease(&curField, 0, 5);
+    Math::CircleDecrease(&CUR_FIELD, 0, 5);
 }
 
 static void Draw_Left(int x, int y)
@@ -54,7 +66,7 @@ DEF_GRAPH_BUTTON( bSet_Left,
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void OnPress_SetRight()
 {
-    Math::CircleIncrease(&curField, 0, 5);
+    Math::CircleIncrease(&CUR_FIELD, 0, 5);
 }
 
 static void Draw_Right(int x, int y)
@@ -130,70 +142,109 @@ static void DrawDigit(int x, int y, int digit)
     Integer(digit).ToString(false).Draw(x, y);
 }
 
-static void DrawField(PackedTime &time, int numField)
+static void DrawField(int numField)
 {
-    int x0 = 50;
+    int x0 = 30;
     int y0 = 20;
 
     int posX = (numField % 3);
 
-    int x = x0 + posX * 90;
+    int x = x0 + posX * 93;
     int y = numField < 3 ? y0 : y0 + 100;
 
-    uint fields[6] = { time.hours, time.minutes, time.seconds, time.day, time.month, time.year };
+    uint fields[6] = { TIME.hours, TIME.minutes, TIME.seconds, TIME.day, TIME.month, TIME.year };
 
     Color::FILL.SetAsCurrent();
 
-    if (numField == curField)
+    if (numField == CUR_FIELD)
     {
-        Region(69, 67).Fill(x - 2, y - 2, Color::FILL);
+        Region(72, 67).Fill(x - 2, y - 2, Color::FILL);
         Color::BACK.SetAsCurrent();
     }
 
     Integer value((int)fields[numField]);
 
     DrawDigit(x, y, value[1]);
-    DrawDigit(x + 35, y, value[0]);
+    DrawDigit(x + 38, y, value[0]);
 
     const char separator[2] = { (numField < 3) ? ':' : '.', '\0' };
 
     if (posX < 2)
     {
-        Text(separator).Draw(x + 74, (numField < 3) ? y - 14 : y, Color::FILL);
+        Text(separator).Draw(x + 76, (numField < 3) ? y - 14 : y, Color::FILL);
     }
 }
 
-static void DrawTime(PackedTime &time)
+static void DrawTime()
 {
+    uint time = TIME_MS;
+
     Font::SetCurrent(Font::Type::_Big64);
     int spacing = Font::GetSpacing();
     Font::SetSpacing(5);
     
     for (int i = 0; i < 6; i++)
     {
-        DrawField(time, i);
+        DrawField(i);
     }
     
     Font::SetCurrent(Font::Type::_8);
     Font::SetSpacing(spacing);
+
+    Integer((int)(TIME_MS - time)).ToString(false).Draw(5, 5);
+}
+
+static void OnOpenClose_Set(bool open)
+{
+    if (open)
+    {
+        psRTC = new StructRTC();
+    }
+    else
+    {
+        delete psRTC;
+    }
 }
 
 static void BeforeDraw_Set()
 {
+    if (psRTC == nullptr)
+    {
+        OnOpenClose_Set(true);
+    }
+
     Painter::BeginScene(Color::BACK);
 
-    PackedTime time = Hardware::Clock::GetTime();
-
-    DrawTime(time);
+    DrawTime();
 }
 
-static void OnOpenClose_Set(bool)
+static bool OnKey_Set(const KeyEvent &event)
 {
-}
+    if (event.IsRelease())
+    {
+        if (event.key == Key::Left)
+        {
+            OnPress_SetLeft();
+            return true;
+        }
+        else if (event.key == Key::Right)
+        {
+            OnPress_SetRight();
+            return true;
+        }
+        else if (event.key == Key::Up)
+        {
+            OnPress_SetUp();
+            return true;
+        }
+        else if (event.key == Key::Down)
+        {
+            OnPress_SetDown();
+            return true;
+        }
+    }
 
-static bool OnKey_Set(const KeyEvent &)
-{
-    return false;
+    return true;
 }
 
 DEF_PAGE_5( pSet, //-V641 //-V1027
