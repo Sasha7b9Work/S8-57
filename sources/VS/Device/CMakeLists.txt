@@ -139,9 +139,9 @@ source_group(Hardware\\HAL      FILES   ../../Device/src/Hardware/HAL/HAL.h
                                         ../../Device/src/Hardware/HAL/HAL_ADDRESSES.cpp
                                         ../../Device/src/Hardware/HAL/HAL_CRC32.cpp
                                         ../../Device/src/Hardware/HAL/HAL_DAC1.cpp
-                                        ../../Device/src/Hardware/HAL/HAL_DAC2.cpp
+                                        ../../Device/src/Hardware/HAL/HAL_DAC2_win.cpp
                                         ../../Device/src/Hardware/HAL/HAL_EEPROM.cpp
-                                        ../../Device/src/Hardware/HAL/HAL_FSMC.cpp
+                                                     src/Hardware/HAL/HAL_FSMC_win.cpp
                                         ../../Device/src/Hardware/HAL/HAL_IT.cpp
                                         ../../Device/src/Hardware/HAL/HAL_MSP.cpp
                                         ../../Device/src/Hardware/HAL/HAL_NVIC.cpp
@@ -149,8 +149,9 @@ source_group(Hardware\\HAL      FILES   ../../Device/src/Hardware/HAL/HAL.h
                                         ../../Device/src/Hardware/HAL/HAL_PIO.cpp
                                         ../../Device/src/Hardware/HAL/HAL_PIO.h
                                         ../../Device/src/Hardware/HAL/HAL_RTC.cpp
-                                        ../../Device/src/Hardware/HAL/HAL_TIM.cpp
-                                        ../../Device/src/Hardware/HAL/HAL_USART3.cpp)
+                                                     src/Hardware/HAL/HAL_TIM_win.cpp
+                                        ../../Device/src/Hardware/HAL/HAL_USART3.cpp
+                                                     src/Hardware/HAL/HAL_win.cpp)
 source_group(Settings           FILES   ../../Device/src/Settings/Settings.h
                                         ../../Device/src/Settings/Settings.cpp
                                                      src/Settings/Settings_win.cpp
@@ -230,16 +231,17 @@ file(GLOB SOURCES   ../../common/_VS/*
                     ../../Device/src/Hardware/VCP.h
                     ../../Device/src/Hardware/VCP.cpp
                                  src/Hardware/Transceiver_win.cpp
-                    
+
+                                 src/Hardware/HAL/HAL_win.cpp
                     ../../Device/src/Hardware/HAL/HAL.h
                     ../../Device/src/Hardware/HAL/HAL_ADC1.cpp
                     ../../Device/src/Hardware/HAL/HAL_ADC3.cpp
                     ../../Device/src/Hardware/HAL/HAL_ADDRESSES.cpp
                     ../../Device/src/Hardware/HAL/HAL_CRC32.cpp
                     ../../Device/src/Hardware/HAL/HAL_DAC1.cpp
-                    ../../Device/src/Hardware/HAL/HAL_DAC2.cpp
+                                 src/Hardware/HAL/HAL_DAC2_win.cpp
                     ../../Device/src/Hardware/HAL/HAL_EEPROM.cpp
-                    ../../Device/src/Hardware/HAL/HAL_FSMC.cpp
+                                 src/Hardware/HAL/HAL_FSMC_win.cpp
                     ../../Device/src/Hardware/HAL/HAL_IT.cpp
                     ../../Device/src/Hardware/HAL/HAL_MSP.cpp
                     ../../Device/src/Hardware/HAL/HAL_NVIC.cpp
@@ -247,7 +249,7 @@ file(GLOB SOURCES   ../../common/_VS/*
                     ../../Device/src/Hardware/HAL/HAL_PIO.cpp
                     ../../Device/src/Hardware/HAL/HAL_PIO.h
                     ../../Device/src/Hardware/HAL/HAL_RTC.cpp
-                    ../../Device/src/Hardware/HAL/HAL_TIM.cpp
+                                 src/Hardware/HAL/HAL_TIM_win.cpp
                     ../../Device/src/Hardware/HAL/HAL_USART3.cpp
                     
                     ../../Device/src/Keyboard/*
