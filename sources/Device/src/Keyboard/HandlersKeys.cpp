@@ -104,6 +104,8 @@ static void TBaseLess();
 static void TBaseMore();
 static void TShiftLess();
 static void TShiftMore();
+/// Общий обработчик раскрытой страницы. Возвращает true, если отработал и дальнейшая обработка события клавиатуры не требуется.
+static bool CommonHandlerPage();
 
 
 
@@ -156,7 +158,10 @@ void Handlers::Process(KeyEvent e)
 
     if (code < Key::Number && type < TypePress::None)
     {
-        func[code][type]();
+        if (!CommonHandlerPage())
+        {
+            func[code][type]();
+        }
     }
 }
 
@@ -336,17 +341,36 @@ static void HandlerArrow()
         return;
     }
     
-    if(Menu::OpenedItem()->Is(Item::Type::Page))
+
+    Item *openedItem = Menu::OpenedItem();
+
+    if (!openedItem->Is(Item::Type::Page))
     {
-        if(!Menu::CurrentItem()->HandlerKey(event))
-        {
-            Menu::OpenedItem()->HandlerKey(event);
-        }
+        openedItem->HandlerKey(event);
     }
-    else
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+static bool CommonHandlerPage()
+{
+    if (!Menu::IsShown())
     {
-        Menu::OpenedItem()->HandlerKey(event);
+        return false;
     }
+
+    Item *openedPage = Menu::OpenedItem();
+
+    if (!openedPage->Is(Item::Type::Page))
+    {
+        return false;
+    }
+
+    if (Menu::CurrentItem()->HandlerKey(event))
+    {
+        return true;
+    }
+
+    return openedPage->HandlerKey(event);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

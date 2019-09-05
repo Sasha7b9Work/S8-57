@@ -264,7 +264,17 @@ static bool OnKey_Set(const KeyEvent &event)
         }
     }
 
-    return true;
+    if (event.key == Key::Enter ||
+        event.key == Key::F1 ||
+        event.key == Key::F2 ||
+        event.key == Key::F3 ||
+        event.key == Key::F4 ||
+        event.key == Key::F5)
+    {
+        return false;                   /// «десь мы возвращаем признак того, что эти кнопки не обработаны - они будут обрабатыватьс€ обычным способом.
+    }
+
+    return true;                        /// ј все остальные кнопки €кобы обработаны - чтобы не происходило неправильных переключений на другие страницы
 }
 
 DEF_PAGE_5( pSet, //-V641 //-V1027

@@ -318,8 +318,16 @@ bool Page::HandlerKey(const KeyEvent &event)
     }
     else if (event.type == TypePress::Press)
     {
-        ChangeSubPage((event.key == Key::Left) ? -1 : 1);
-        return true;
+        if (event.key == Key::Left)
+        {
+            ChangeSubPage(-1);
+            return true;
+        }
+        else if (event.key == Key::Right)
+        {
+            ChangeSubPage(1);
+            return true;
+        }
     }
     else
     {
