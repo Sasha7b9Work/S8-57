@@ -328,6 +328,10 @@ bool Page::HandlerKey(const KeyEvent &event)
             ChangeSubPage(1);
             return true;
         }
+        else
+        {
+            // здесь ничего
+        }
     }
     else
     {
