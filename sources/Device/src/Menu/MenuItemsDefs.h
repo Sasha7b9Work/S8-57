@@ -70,8 +70,6 @@ struct PageName
         Service_Calibrator,
         Service_Info,
         Service_RTC,
-        Service_RTC_Correct,
-        Service_RTC_Set,
         /// ÐÀÇÂ
         Time,
         /// ÑÈÍÕÐ
