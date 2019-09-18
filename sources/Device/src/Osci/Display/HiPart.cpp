@@ -409,20 +409,17 @@ static void DrawRightPart(int x0, int y0)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void WriteCursors()
 {
-    const int x0 = 0;
-    const int y0 = 0;
-
-    int x = x0;
-    int y1 = y0;
-    int y2 = y0 + 9; //-V2007
-
-    VLine separator(Grid::Top() - 3); //-V821
+    int x = 0;
+    int y1 = 0;
+    int y2 = 0 + 9;
 
     if (Cursor::NecessaryDraw())
     {
+        VLine separator(Grid::Top() - 3);
+
         separator.Draw(x, 1, Color::FILL);
-        separator.Draw(x + 102, 1); //-V2007
-        separator.Draw(x + 203, 1); //-V2007
+        separator.Draw(102, 1);
+        separator.Draw(203, 1);
 
         x += 3;
         Chan::E source = CURS_SOURCE;
@@ -434,7 +431,7 @@ static void WriteCursors()
             x += 7;
             Cursor::Voltage(source, 0).Draw(x, y1);
             Cursor::Voltage(source, 1).Draw(x, y2);
-            x = x0 + 49; //-V2007
+            x = 49;
             float pos0 = FPGA::Math::VoltageCursor(Cursor::PosU(source, 0), SET_RANGE(source), SET_RSHIFT(source));
             float pos1 = FPGA::Math::VoltageCursor(Cursor::PosU(source, 1), SET_RANGE(source), SET_RSHIFT(source));
             float delta = std::fabsf(pos1 - pos0);
@@ -448,7 +445,7 @@ static void WriteCursors()
             Cursor::PercentsU(source).Draw(x + 10, y2);
         }
 
-        x = x0 + 101; //-V2007
+        x = 101;
         x += 3;
         if (CURsT_ENABLED)
         {
@@ -458,7 +455,7 @@ static void WriteCursors()
             x += 7;
             Cursor::Time(source, 0).Draw(x, y1);
             Cursor::Time(source, 1).Draw(x, y2);
-            x = x0 + 153; //-V2007
+            x = 153;
 
             float pos0 = FPGA::Math::TimeCursor(CURsT_POS(source, 0), SET_TBASE);
             float pos1 = FPGA::Math::TimeCursor(CURsT_POS(source, 1), SET_TBASE);
