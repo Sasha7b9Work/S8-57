@@ -225,8 +225,8 @@ const Settings Settings::defaultSettings =
     true,                               // rec_sourceChanA
     true,                               // rec_sourceChanB
     false,                              // rec_sourceSensor
-    TypeStorage::Flash,                 // rec_storageRecord
-    TypeStorage::Flash,                 // rec_storagePlay
+    TypeStorage::RAM,                   // rec_storageRecord
+    TypeStorage::RAM,                   // rec_storagePlay
     Axis::X,                            // rec_axisMove
     Axis::X,                            // rec_axisZoom
     ScaleX(ScaleX::_100ms),             // rec_scaleX

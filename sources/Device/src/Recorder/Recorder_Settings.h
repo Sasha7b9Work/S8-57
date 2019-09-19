@@ -38,9 +38,9 @@ namespace Recorder
         {
             enum E
             {
-                RAM,
-                Flash,
-                PC
+                RAM,    ///< ÎÇÓ
+                ROM,    ///< ÏÇÓ
+                EXT     ///< Âíåøí ÇÓ
             } value;
             explicit TypeStorage(E v) : value(v) {};
         };
