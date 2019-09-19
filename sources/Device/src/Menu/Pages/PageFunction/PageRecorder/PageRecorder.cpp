@@ -11,27 +11,17 @@ const Page * const PageRecorder::self = (const Page *)&pageRecorder;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//_DEF_CHOICE_2( cShow,                                                                                                                                 //--- ФУНКЦИЯ - РЕГИСТРАТОР - Всегда ---
-//    "Показывать",
-//    "Позволяет выводить данные регистратора при выключенном меню РЕГИСТРАТОР",
-//    "В режиме",
-//    "Всегда",
-//    RECORDER_VIEW_ALLWAYS, &PageRecorder::self, 0, 0, 0
-//)
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 static void OnOpenClose_Recorder(bool enter)
 {
     Device::State::SetMode(enter ? Device::Mode::Recorder : Device::Mode::Osci);
 }
 
 
-DEF_PAGE_2( pageRecorder, // -V641 // -V1027                                                                                                                  //--- ФУНКЦИЯ - РЕГИСТРАТОР ---
+DEF_PAGE_1( pageRecorder, // -V641 // -V1027                                                                                                                  //--- ФУНКЦИЯ - РЕГИСТРАТОР ---
     "РЕГИСТРАТОР",
     "Запись и воспроизведение сигналов входов и датчиков",
-    //&cShow,                                             ///< ФУНКЦИЯ - РЕГИСТРАТОР - Показывать
     PageRecorder::PageSource::self,    ///< ФУНКЦИЯ - РЕГИСТРАТОР - ИСТОЧНИК
-    //PageRecorder::PageRecord::self,    ///< ФУНКЦИЯ - РЕГИСТРАТОР - ЗАПИСЬ
-    PageRecorder::PageShow::self,      ///< ФУНКЦИЯ - РЕГИСТРАТОР - ПРОСМОТР
+//    PageRecorder::PageRecord::self,    ///< ФУНКЦИЯ - РЕГИСТРАТОР - ЗАПИСЬ
+//    PageRecorder::PageShow::self,      ///< ФУНКЦИЯ - РЕГИСТРАТОР - ПРОСМОТР
     PageName::Function_Recorder, &PageFunction::self, E_BtV, OnOpenClose_Recorder, E_VV, E_BfKE
 )
