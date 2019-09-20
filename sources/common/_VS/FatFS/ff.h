@@ -5,7 +5,7 @@
 
 #define TCHAR char
 
-typedef unsigned short WCHAR;
+typedef unsigned short WCHAR; //-V677
 
 
 #define	AM_RDO	0x01	/* Read only */
