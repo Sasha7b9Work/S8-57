@@ -32,6 +32,7 @@ add_compile_options(/wd4820)    # 'xxx': '4' bytes padding added after data memb
 add_compile_options(/wd4996)    # 'xxx': This function or variable may be unsafe.
 add_compile_options(/wd5026)    # 'xxx': move constructor was implicitly defined as deleted
 add_compile_options(/wd5039)    # 'xxx': pointer or reference to potentially throwing function passed to extern C function under -EHc.
+add_compile_options(/wd5045)    # Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
 
 source_group(common                 FILES   ../../common/Command.h
                                             ../../common/DataBus.cpp
