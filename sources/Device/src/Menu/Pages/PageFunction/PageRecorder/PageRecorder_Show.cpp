@@ -42,7 +42,7 @@ DEF_BUTTON( bPrev,                                                              
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 static bool IsActive_PageShow()
 {
-    return (Recorder::Storage::CurrentFrame()->NumPoints() != 0) && (!Recorder::IsRunning());
+    return true;
 }
 
 static bool OnArrows_PageShow(const KeyEvent &event)
