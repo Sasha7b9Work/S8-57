@@ -11,16 +11,26 @@ const Page * const PageRecorder::self = (const Page *)&pageRecorder;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+static bool IsActive_Destination()
+{
+    return !Recorder::IsRunning();
+}
+
 DEF_CHOICE_3( cDestination,                                                                                                                     //--- ФУНКЦИЯ - РЕГИСТРАТОР - Сохранять в ---
     "Сохранять в",
     "Куда сохранять данные",
     "ОЗУ",
     "ПЗУ",
     "Внешн ЗУ",
-    RECORDER_STORAGE_RECORD, &PageRecorder::self, E_BtV, E_VB, E_VII
+    REC_STORAGE_RECORD, &PageRecorder::self, IsActive_Destination, E_VB, E_VII
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+static bool IsActive_Start()
+{
+    return REC_SRC_A_IS_ENABLED || REC_SRC_B_IS_ENABLED || REC_SRC_SENSOR_IS_ENABLED;
+}
+
 static void Draw_Start(int x, int y)
 {
     String("ПУСК").Draw(x, y + 5);
@@ -44,7 +54,7 @@ static void OnPress_Start()
 DEF_GRAPH_BUTTON_HINTS_2( bStart,                                                                                                                 //--- ФУНКЦИЯ - РЕГИСТРАТОР - ПУСК/СТОП ---
     "Пуск",
     "Запуск/останов процесса регистрации",
-    &PageRecorder::self, E_BtV, OnPress_Start, Draw_StartStop,
+    &PageRecorder::self, IsActive_Start, OnPress_Start, Draw_StartStop,
     Draw_Start, "Запуск",
     Draw_Stop, "Останов"
 )

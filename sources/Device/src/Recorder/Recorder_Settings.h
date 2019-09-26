@@ -2,19 +2,22 @@
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-#define RECORDER_VIEW_ALLWAYS           (set.rec_viewAlways)
-#define RECORDER_SOURCE_A               (set.rec_sourceChanA)
-#define RECORDER_SOURCE_A_IS_ENABLED    (RECORDER_SOURCE_A == true)
-#define RECORDER_SOURCE_B               (set.rec_sourceChanB)
-#define RECORDER_SOURCE_B_IS_ENABLED    (RECORDER_SOURCE_B == true)
-#define RECORDER_SOURCE_SENSOR          (set.rec_sourceSensor)
-#define RECORDER_STORAGE_RECORD         (set.rec_storageRecord)
-#define RECORDER_STORAGE_PLAY           (set.rec_storagePlay)
-#define RECORDER_AXIS_MOVE              (set.rec_axisMove)
-#define RECORDER_AXIS_ZOOM              (set.rec_axisZoom)
+#define REC_VIEW_ALLWAYS                (set.rec_viewAlways)
+#define REC_SRC_A                       (set.rec_sourceChanA)
+#define REC_SRC_A_IS_ENABLED            (REC_SRC_A)
+#define REC_SRC_A_IS_DISABLED           (!(REC_SRC_A_IS_ENABLED))
+#define REC_SRC_B                       (set.rec_sourceChanB)
+#define REC_SRC_B_IS_ENABLED            (REC_SRC_B)
+#define REC_SRC_B_IS_DISABLED           (!(REC_SRC_B_IS_ENABLED))
+#define REC_SRC_SENSOR                  (set.rec_sourceSensor)
+#define REC_SRC_SENSOR_IS_ENABLED       (REC_SRC_SENSOR)
+#define REC_SOURCE_SENSOR_IS_DISABLED   (!(REC_SRC_SENSOR_IS_ENABLED))
+#define REC_STORAGE_RECORD              (set.rec_storageRecord)
+#define REC_STORAGE_PLAY                (set.rec_storagePlay)
+#define REC_AXIS_MOVE                   (set.rec_axisMove)
+#define REC_AXIS_ZOOM                   (set.rec_axisZoom)
 
-
-#define RECORDER_SCALE_X        (Recorder::Settings::ScaleX::Current())
+#define REC_SCALE_X                     (Recorder::Settings::ScaleX::Current())
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -33,7 +36,7 @@ namespace Recorder
             explicit ViewAlways(E v) : value(v) {};
         };
 
-        /// C каким источником работаем
+        /// √де хран€тс€ данные
         struct TypeStorage
         {
             enum E

@@ -77,7 +77,7 @@ void Recorder::Display::DrawSettings(int x, int y)
 
     Region(30, 30).DrawBounded(x, y, Color::BACK, Color::FILL);
 
-    Text(RECORDER_SCALE_X.ToString()).Draw(x + 2, y + 2);
+    Text(REC_SCALE_X.ToString()).Draw(x + 2, y + 2);
 
     Text(Osci::Settings::Range(SET_RANGE_A).ToString(SET_DIVIDER(0))).Draw(x + 2, y + 11, Color::Channel(Chan::A));
 
@@ -96,7 +96,7 @@ void Recorder::Display::DrawSizeMemory(int x, int y)
 
     //Text(Integer(Storage::CurrentFrame()->Size()).ToString(false)).Draw(x + 2, y + 2);
 
-    String text("Осталось %d сек", (int)(Storage::CurrentFrame()->FreeMemory() / RECORDER_SCALE_X.BytesToSec()));
+    String text("Осталось %d сек", (int)(Storage::CurrentFrame()->FreeMemory() / REC_SCALE_X.BytesToSec()));
 
     Text(text).Draw(x + 2, y + 1);
 }
@@ -125,7 +125,7 @@ static int Y(int value)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static char *DeltaTime(char buffer[20])
 {
-    float delta = std::fabsf((float)(posCursor[0] - posCursor[1])) * RECORDER_SCALE_X.TimeForPointMS() / 1000.0F;
+    float delta = std::fabsf((float)(posCursor[0] - posCursor[1])) * REC_SCALE_X.TimeForPointMS() / 1000.0F;
 
     std::strcpy(buffer, Time(delta).ToString(false).CString());
 
@@ -137,7 +137,7 @@ static char *TimeCursor(int numCur, char buffer[20])
 {
     int numPoint = startPoint + posCursor[numCur];
 
-    float time = (numPoint * RECORDER_SCALE_X.TimeForPointMS()) / 1000.0F;
+    float time = (numPoint * REC_SCALE_X.TimeForPointMS()) / 1000.0F;
 
     std::strcpy(buffer, Time(time).ToString(false).CString());
 
@@ -243,14 +243,14 @@ void Recorder::Display::DrawData()
     {
         if (!point.IsEmpty())
         {
-            if (RECORDER_SOURCE_A_IS_ENABLED)
+            if (REC_SRC_A_IS_ENABLED)
             {
                 int min = Y(point.Min(Chan::A));
                 int max = Y(point.Max(Chan::A));
 
                 VLine(max - min).Draw(x, min, Color::Channel(Chan::A));
             }
-            if (RECORDER_SOURCE_B_IS_ENABLED)
+            if (REC_SRC_B_IS_ENABLED)
             {
                 int min = Y(point.Min(Chan::B));
                 int max = Y(point.Max(Chan::B));

@@ -11,7 +11,7 @@ DEF_CHOICE_2( cMove,                                                            
     "",
     "X",
     "Y",
-    RECORDER_AXIS_MOVE, &PageRecorder::PageShow::PageView::self, E_BtV, E_VB, E_VII
+    REC_AXIS_MOVE, &PageRecorder::PageShow::PageView::self, E_BtV, E_VB, E_VII
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -20,7 +20,7 @@ DEF_CHOICE_2( cZoom,                                                            
     "",
     "X",
     "Y",
-    RECORDER_AXIS_ZOOM, &PageRecorder::PageShow::PageView::self, E_BtV, E_VB, E_VII
+    REC_AXIS_ZOOM, &PageRecorder::PageShow::PageView::self, E_BtV, E_VB, E_VII
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

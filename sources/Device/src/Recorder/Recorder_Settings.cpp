@@ -37,7 +37,7 @@ void Recorder::Settings::ScaleX::Load()
         BIN_U8(01011110)   // -V2501  // 10s
     };
 
-    FSMC::WriteToFPGA8(WR::TBASE, values[RECORDER_SCALE_X.value]);
+    FSMC::WriteToFPGA8(WR::TBASE, values[REC_SCALE_X.value]);
 
     if (Recorder::IsRunning())
     {

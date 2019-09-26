@@ -153,18 +153,28 @@ static void RestoreOsciSettings()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Recorder::OnPressStart()
 {
-    if (Menu::OpenedItem() != (Item *)PageRecorder::self) //-V1027
+    if (Menu::OpenedItem() == (Item *)PageRecorder::self)
+    {
+        if (running)
+        {
+            Stop();
+            Keyboard::Unlock();
+        }
+        else
+        {
+            static const Key::E keys[] = { Key::F4, Key::Start, Key::None };
+            Start();
+            Keyboard::Lock(keys);
+        }
+    }
+    else
     {
         Display::FuncOnWaitStart("Перейдите на страницу РЕГИСТРАТОР", false);
 
         Timer::PauseOnTime(2000);
 
         Display::FuncOnWaitStop();
-
-        return;
     }
-
-    return running ? Stop() : Start();
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
