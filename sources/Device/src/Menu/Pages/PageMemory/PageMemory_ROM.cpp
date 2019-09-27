@@ -186,7 +186,6 @@ static bool OnArrows_ROM(const KeyEvent &event)
     return true;
 }
 
-
 DEF_PAGE_4( pROM, // -V641                                                                                                                                        //--- ѕјћя“№ - ¬Ќ”“– «” ---
     "¬Ќ”“– «”",
     "ѕереход в режим работы с внутренней пам€тью",
@@ -195,5 +194,5 @@ DEF_PAGE_4( pROM, // -V641                                                      
     &bSave,         ///< ѕјћя“№ - ¬Ќ”“– «” - —охранить
     &bDelete,       ///< ѕјћя“№ - ¬Ќ”“– «” - ”далить
     PageName::Memory_Internal,
-    &PageMemory::self, nullptr, OnOpenClose_ROM, AfterDraw_ROM, OnArrows_ROM
+    &PageMemory::self, E_BtV, OnOpenClose_ROM, AfterDraw_ROM, OnArrows_ROM
 )
