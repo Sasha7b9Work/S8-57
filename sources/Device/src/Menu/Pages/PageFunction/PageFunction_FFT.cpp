@@ -11,7 +11,7 @@ DEF_CHOICE_2( cView,                                                            
     "Включает и выключает отображение спектра",
     DISABLE_RU,
     ENABLE_RU,
-    FFT_ENABLED, &PageFFT::self, Item::EmptyActive, E_VB, E_VII
+    FFT_ENABLED, &PageFFT::self, Item::Active, Choice::Changed, E_VII
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -25,7 +25,7 @@ DEF_CHOICE_2( cScale,                                                           
     "Задаёт масштаб вывода спектра - линейный или логарифмический",
     "Логарифм",
     "Линейная",
-    SCALE_FFT, &PageFFT::self, IsActive_Scale, E_VB, E_VII
+    SCALE_FFT, &PageFFT::self, IsActive_Scale, Choice::Changed, E_VII
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -40,7 +40,7 @@ DEF_CHOICE_3( cSource,                                                          
     "Канал 1",
     "Канал 2",
     "Канал 1 + 2",
-    SOURCE_FFT, &PageFFT::self, IsActive_Source, E_VB, E_VII
+    SOURCE_FFT, &PageFFT::self, IsActive_Source, Choice::Changed, E_VII
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -56,7 +56,7 @@ DEF_CHOICE_4( cWindow,                                                          
     "Хэмминга",
     "Блэкмена",
     "Ханна",
-    WINDOW_FFT, &PageFFT::self, IsActive_Window, E_VB, E_VII
+    WINDOW_FFT, &PageFFT::self, IsActive_Window, Choice::Changed, E_VII
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -71,7 +71,7 @@ DEF_CHOICE_3( cRange,                                                           
     "-40дБ",
     "-60дБ",
     "-80дБ",
-    MAX_DB_FFT, &PageFFT::self, IsActive_Range, E_VB, E_VII
+    MAX_DB_FFT, &PageFFT::self, IsActive_Range, Choice::Changed, E_VII
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -88,7 +88,7 @@ static void Draw_Cursors_Source(int x, int y)
 DEF_GRAPH_BUTTON( bCursors_Source,                                                                                                            //--- ФУНКЦИЯ - СПЕКТР - КУРСОРЫ - Источник ---
     "Источник",
     "Выбор источника для расчёта спектра",
-    &PageFFT::PageCursors::self, Item::EmptyActive, OnPress_Cursors_Source, Draw_Cursors_Source
+    &PageFFT::PageCursors::self, Item::Active, OnPress_Cursors_Source, Draw_Cursors_Source
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -118,7 +118,7 @@ DEF_PAGE_1( pCursors, // -V641 // -V1027                                        
     "КУРСОРЫ",
     "Включает курсоры для измерения параметров спектра",
     &bCursors_Source,                       ///< СЕРВИС - СПЕКТР - КУРСОРЫ - Источник
-    PageName::Function_FFT_Cursors, &PageFFT::self, IsActive_Cursors, E_VB, Page::EmptyBeforeDraw, OnArrows_FFT_Cursors
+    PageName::Function_FFT_Cursors, &PageFFT::self, IsActive_Cursors, Choice::Changed, Page::BeforeDraw, OnArrows_FFT_Cursors
 )
 
 const Page * const PageFFT::PageCursors::self = (const Page *)&pCursors;
@@ -145,7 +145,7 @@ DEF_PAGE_6( pFFT, // -V641 // -V1027                                            
     &cWindow,       ///< СЕРВИС - СПЕКТР - Окно 
     &pCursors,      ///< СЕРВИС - СПЕКТР - КУРСОРЫ
     &cRange,        ///< СЕРВИС - СПЕКТР - Диапазон
-    PageName::Function_FFT, &PageFunction::self, IsActive_FFT, OnOpenClose_FFT, Page::EmptyBeforeDraw, E_BfKE
+    PageName::Function_FFT, &PageFunction::self, IsActive_FFT, OnOpenClose_FFT, Page::BeforeDraw, E_BfKE
 )
 
 const Page * const PageFFT::self = (const Page *)&pFFT;

@@ -73,7 +73,7 @@ static void Draw_Manager_Tab(int x, int y)
 DEF_GRAPH_BUTTON( bManager_Tab,                                                                                                                   //--- ПАМЯТЬ - ВНЕШН ЗУ - КАТАЛОГ - Tab ---
     "Tab",
     "Переход между каталогами и файлами",
-    &PageDrive::PageManager::self, Item::EmptyActive, FileManager::Press_Tab, Draw_Manager_Tab
+    &PageDrive::PageManager::self, Item::Active, FileManager::Press_Tab, Draw_Manager_Tab
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -87,7 +87,7 @@ static void Draw_Manager_LevelUp(int x, int y)
 DEF_GRAPH_BUTTON( bManager_LevelUp,                                                                                                 //--- ПАМЯТЬ - ВНЕШН ЗУ - КАТАЛОГ - Выйти из каталога ---
     "Выйти из каталого",
     "Переход в родительский каталог",
-    &PageDrive::PageManager::self, Item::EmptyActive, FileManager::Press_LevelUp, Draw_Manager_LevelUp
+    &PageDrive::PageManager::self, Item::Active, FileManager::Press_LevelUp, Draw_Manager_LevelUp
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -101,7 +101,7 @@ static void Draw_Manager_LevelDown(int x, int y)
 DEF_GRAPH_BUTTON( bManager_LevelDown,                                                                                                 //--- ПАМЯТЬ - ВНЕШН ЗУ - КАТАЛОГ - Войти в каталог ---
     "Войти в каталог",
     "Переход в выбранный каталог",
-    &PageDrive::PageManager::self, Item::EmptyActive, FileManager::Press_LevelDown, Draw_Manager_LevelDown
+    &PageDrive::PageManager::self, Item::Active, FileManager::Press_LevelDown, Draw_Manager_LevelDown
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -146,7 +146,7 @@ DEF_PAGE_3( pManager, // -V641                                                  
     &bManager_LevelUp,    // ПАМЯТЬ - ВНЕШН ЗУ - КАТАЛОГ - Выйти из каталога
     &bManager_LevelDown,  // ПАМЯТЬ - ВНЕШН ЗУ - КАТАЛОГ - Войти в каталог
     PageName::Memory_Drive_Manager,
-    &PageDrive::self, IsActive_Drive_Manager, PageMemory::OnOpenClose_Drive_Manager, Page::EmptyBeforeDraw, FileManager::OnArrows
+    &PageDrive::self, IsActive_Drive_Manager, PageMemory::OnOpenClose_Drive_Manager, Page::BeforeDraw, FileManager::OnArrows
 )
 
 const Page * const PageDrive::PageManager::self = (const Page *)&pManager;
@@ -162,7 +162,7 @@ DEF_CHOICE_2( cDrive_Name,                                                      
     "По маске",
     "Вручную",
     FILE_NAMING_MODE,
-    &PageDrive::self, Item::EmptyActive, E_VB, E_VII
+    &PageDrive::self, Item::Active, Choice::Changed, E_VII
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -181,7 +181,7 @@ static void Draw_Delete(int x, int y)
 DEF_GRAPH_BUTTON( bMask_Delete,                                                                                                                 //--- ПАМЯТЬ - ВНЕШН ЗУ - МАСКА - Удалить ---
     "Удалить",
     "Удаляет все введённые символы",
-    &PageDrive::PageMask::self, Item::EmptyActive, OnPress_Mask_Delete, Draw_Delete
+    &PageDrive::PageMask::self, Item::Active, OnPress_Mask_Delete, Draw_Delete
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -211,7 +211,7 @@ static void Draw_Backspace(int x, int y)
 DEF_GRAPH_BUTTON( bMask_Backspace,                                                                                                      //--- ПАМЯТЬ - ВНЕШН ЗУ - МАСКА - Backspace ---
     "Backspace",
     "Удаляет последний введённый символ",
-    &PageDrive::PageMask::self, Item::EmptyActive, OnPress_Mask_Backspace, Draw_Backspace
+    &PageDrive::PageMask::self, Item::Active, OnPress_Mask_Backspace, Draw_Backspace
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -261,7 +261,7 @@ static void Draw_Insert(int x, int y)
 DEF_GRAPH_BUTTON( bMask_Insert,                                                                                                                //--- ПАМЯТЬ - ВНЕШН ЗУ - МАСКА - Вставить ---
     "Вставить",
     "Вставляет выбранный символ",
-    &PageDrive::PageMask::self, Item::EmptyActive, OnPress_Mask_Insert, Draw_Insert
+    &PageDrive::PageMask::self, Item::Active, OnPress_Mask_Insert, Draw_Insert
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -274,7 +274,7 @@ DEF_CHOICE_2( cDrive_SaveAs,                                                    
     "Изображение",
     "Текст",
     MODE_SAVE,
-    &PageDrive::self, Item::EmptyActive, E_VB, E_VII
+    &PageDrive::self, Item::Active, Choice::Changed, E_VII
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -284,7 +284,7 @@ DEF_CHOICE_2( cDrive_ModeBtnMemory,                                             
     "Меню",
     "Сохранение",
     MODE_BTN_MEMORY,
-    &PageDrive::self, Item::EmptyActive, E_VB, E_VII
+    &PageDrive::self, Item::Active, Choice::Changed, E_VII
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -432,7 +432,7 @@ DEF_PAGE_3( pMask, // -V641                                                     
     &bMask_Backspace, // ПАМЯТЬ - ВНЕШН ЗУ - МАСКА - Backspace
     &bMask_Insert,    // ПАМЯТЬ - ВНЕШН ЗУ - МАСКА - Вставить
     PageName::Memory_Drive_Mask,
-    &PageDrive::self, IsActive_Mask, OnOpenClose_Mask, Page::EmptyBeforeDraw, OnArrows_Mask
+    &PageDrive::self, IsActive_Mask, OnOpenClose_Mask, Page::BeforeDraw, OnArrows_Mask
 )
 
 const Page * const PageDrive::PageMask::self = (const Page *)&pMask;
@@ -444,7 +444,7 @@ DEF_CHOICE_2( cDrive_Autoconnect,                                               
     DISABLE_RU,
     ENABLE_RU,
     FLASH_AUTOCONNECT,
-    &PageDrive::self, Item::EmptyActive, E_VB, E_VII
+    &PageDrive::self, Item::Active, Choice::Changed, E_VII
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -459,7 +459,7 @@ DEF_PAGE_6( pDrive,  //-V641 //-V1027                                           
     &cDrive_Autoconnect,            ///< ПАМЯТЬ - ВНЕШН ЗУ - Автоподключение
     PageName::Memory_Drive,
     &PageMemory::self,               ///< ПАМЯТЬ
-    Item::EmptyActive, E_VB, Page::EmptyBeforeDraw, E_BfKE
+    Item::Active, Page::Changed, Page::BeforeDraw, E_BfKE
 )
 
 const Page * const PageDrive::self = (const Page *)&pDrive;
@@ -472,7 +472,7 @@ DEF_PAGE_4( pMemory, // -V641 // -V1027                                         
     PageRAM::self,          ///< ПАМЯТЬ - ПОСЛЕДНИЕ
     PageROM::self,          ///< ПАМЯТЬ - ВНУТР ЗУ
     PageDrive::self,        ///< ПАМЯТЬ - ВНЕШН ЗУ
-    PageName::Memory, nullptr, Item::EmptyActive, E_VB, Page::EmptyBeforeDraw, E_BfKE
+    PageName::Memory, nullptr, Item::Active, Page::Changed, Page::BeforeDraw, E_BfKE
 )
 
 const Page * const PageMemory::self = (const Page *)&pMemory;
@@ -574,7 +574,7 @@ static void OnPress_SetName_Delete()
 DEF_GRAPH_BUTTON( bSetName_Delete,                                                                                                                              //--- ИМЯ ФАЙЛА - Удалить ---
     "Удалить",
     "Удаляет все введённые символы",
-    &PageSetName::self, Item::EmptyActive, OnPress_SetName_Delete, Draw_Delete
+    &PageSetName::self, Item::Active, OnPress_SetName_Delete, Draw_Delete
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -590,7 +590,7 @@ static void OnPress_SetName_Backspace()
 DEF_GRAPH_BUTTON( bSetName_Backspace,                                                                                                                         //--- ИМЯ ФАЙЛА - Backspace ---
     "Backspace",
     "Удаляет последний символ",
-    &PageSetName::self, Item::EmptyActive, OnPress_SetName_Backspace, Draw_Backspace
+    &PageSetName::self, Item::Active, OnPress_SetName_Backspace, Draw_Backspace
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -607,7 +607,7 @@ static void OnPress_SetName_Insert()
 DEF_GRAPH_BUTTON( bSetName_Insert,                                                                                                                             //--- ИМЯ ФАЙЛА - Вставить ---
     "Вставить",
     "Вводит очередной символ",
-    &PageSetName::self, Item::EmptyActive, OnPress_SetName_Insert, Draw_Insert
+    &PageSetName::self, Item::Active, OnPress_SetName_Insert, Draw_Insert
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -633,7 +633,7 @@ static void Draw_SetName_Save(int x, int y)
 DEF_GRAPH_BUTTON( bSetName_Save,                                                                                                                              //--- ИМЯ ФАЙЛА - Сохранить ---
     "Сохранить",
     "Сохранение на флеш под заданным именем",
-    &PageSetName::self, Item::EmptyActive, OnPress_SetName_Save, Draw_SetName_Save
+    &PageSetName::self, Item::Active, OnPress_SetName_Save, Draw_SetName_Save
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -670,7 +670,7 @@ DEF_PAGE_4( pSetName, // -V641                                                  
     &bSetName_Backspace,    /// ВВОД ИМЕНИ ФАЙЛА - Backspace
     &bSetName_Insert,       /// ВВОД ИМЕНИ ФАЙЛА - Вставить
     &bSetName_Save,         /// ВВОД ИМЕНИ ФАЙЛА - Сохранить
-    PageName::Memory_SetName, nullptr, Item::EmptyActive, E_VB, Page::EmptyBeforeDraw, OnArrows_SetName
+    PageName::Memory_SetName, nullptr, Item::Active, Page::Changed, Page::BeforeDraw, OnArrows_SetName
 )
 
 const Page * const PageSetName::self = (const Page *)&pSetName;

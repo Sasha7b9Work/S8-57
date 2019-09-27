@@ -62,7 +62,7 @@ static void Draw_Screen(int x, int y)
 DEF_GRAPH_BUTTON_HINTS_3( bScreen,                                                                                                                         //--- СЕРВИС - ФУНКЦИЯ - Экран ---
     "Экран",
     "Выбирает режим отображения математического сигнала",
-    &PageMeasuresMath::self, Item::EmptyActive, OnPress_Screen, Draw_Screen,
+    &PageMeasuresMath::self, Item::Active, OnPress_Screen, Draw_Screen,
     Draw_Screen_Disable, "Вывод математической функции отключён",
     Draw_Screen_Separate, "Сигналы и математическая функция выводятся в разных окнах",
     Draw_Screen_Together, "Сигналы и математическая функция выводятся в одном окне"
@@ -289,7 +289,7 @@ DEF_PAGE_5( pMath, // -V641                                                     
     &bModeArrows,
     &bRangeA,
     &bRangeB,
-    PageName::Measures_Math, &PageMeasures::self, IsActive_Math, OnOpenClose_Math, Page::EmptyBeforeDraw, OnArrows_Function
+    PageName::Measures_Math, &PageMeasures::self, IsActive_Math, OnOpenClose_Math, Page::BeforeDraw, OnArrows_Function
 )
 
 const Page * const PageMeasuresMath::self = (const Page *)&pMath;

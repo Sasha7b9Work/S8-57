@@ -17,7 +17,7 @@ DEF_CHOICE_2( cShow,                                                            
     "Âêëþ÷àåò/îòêëþ÷àåò êóðñîðû.",
     "Íåò",
     "Äà",
-    CURS_SHOW, &PageMeasuresCursors::self, Item::EmptyActive, E_VB, E_VII
+    CURS_SHOW, &PageMeasuresCursors::self, Item::Active, Choice::Changed, E_VII
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -68,7 +68,7 @@ DEF_CHOICE_2( cShowFreq,                                                        
     ,
     DISABLE_RU,
     ENABLE_RU,
-    CURSORS_SHOW_FREQ, &PageMeasuresCursors::self, IsActive_ShowFreq, E_VB, E_VII
+    CURSORS_SHOW_FREQ, &PageMeasuresCursors::self, IsActive_ShowFreq, Choice::Changed, E_VII
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -80,7 +80,7 @@ DEF_PAGE_3( pCursors, // -V641 // -V1027                                        
 //    &cLookModeChanB,                                ///< ÈÇÌÅÐÅÍÈß - ÊÓÐÑÎÐÛ - Ñëåæåíèå êàíàë 2
     &cShowFreq,                                     ///< ÈÇÌÅÐÅÍÈß - ÊÓÐÎÑÐÛ - 1/dT
     PageMeasuresCursors::PageSet::self,    ///< ÈÇÌÅÐÅÍÈß - ÊÓÐÑÎÐÛ - ÓÑÒÀÍÎÂÈÒÜ
-    PageName::Measures_Cursors, &PageMeasures::self, Item::EmptyActive, E_VB, Page::EmptyBeforeDraw, E_BfKE
+    PageName::Measures_Cursors, &PageMeasures::self, Item::Active, Page::Changed, Page::BeforeDraw, E_BfKE
 )
 
 const Page * const PageMeasuresCursors::self = (const Page *)&pCursors;

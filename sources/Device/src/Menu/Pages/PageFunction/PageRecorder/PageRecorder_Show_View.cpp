@@ -11,7 +11,7 @@ DEF_CHOICE_2( cMove,                                                            
     "",
     "X",
     "Y",
-    REC_AXIS_MOVE, &PageRecorder::PageShow::PageView::self, Item::EmptyActive, E_VB, E_VII
+    REC_AXIS_MOVE, &PageRecorder::PageShow::PageView::self, Item::Active, Choice::Changed, E_VII
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -20,7 +20,7 @@ DEF_CHOICE_2( cZoom,                                                            
     "",
     "X",
     "Y",
-    REC_AXIS_ZOOM, &PageRecorder::PageShow::PageView::self, Item::EmptyActive, E_VB, E_VII
+    REC_AXIS_ZOOM, &PageRecorder::PageShow::PageView::self, Item::Active, Choice::Changed, E_VII
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -32,7 +32,7 @@ static void OnPress_Less()
 DEF_BUTTON( bLess,                                                                                                             //--- ‘”Õ ÷»ﬂ - –≈√»—“–¿“Œ– - œ–Œ—ÃŒ“– - œ–Œ—ÃŒ“– - ÃÂÌ¸¯Â ---
     "ÃÂÌ¸¯Â",
     "",
-    &PageRecorder::PageShow::PageView::self, Item::EmptyActive, OnPress_Less
+    &PageRecorder::PageShow::PageView::self, Item::Active, OnPress_Less
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -44,7 +44,7 @@ static void OnPress_More()
 DEF_BUTTON( bMore,                                                                                                             //--- ‘”Õ ÷»ﬂ - –≈√»—“–¿“Œ– - œ–Œ—ÃŒ“– - œ–Œ—ÃŒ“– - ¡ÓÎ¸¯Â ---
     "¡ÓÎ¸¯Â",
     "",
-    &PageRecorder::PageShow::PageView::self, Item::EmptyActive, OnPress_More
+    &PageRecorder::PageShow::PageView::self, Item::Active, OnPress_More
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -56,7 +56,7 @@ DEF_PAGE_5( pView, // -V641 // -V1027                                           
     &bLess,                                                                 ///< ‘”Õ ÷»ﬂ - –≈√»—“–¿“Œ– - œ–Œ—ÃŒ“– - œ–Œ—ÃŒ“– - ÃÂÌ¸¯Â
     &bMore,                                                                 ///< ‘”Õ ÷»ﬂ - –≈√»—“–¿“Œ– - œ–Œ—ÃŒ“– - œ–Œ—ÃŒ“– - ¡ÓÎ¸¯Â
     PageRecorder::PageShow::PageView::PageCursors::self,      ///< ‘”Õ ÷»ﬂ - –≈√»—“–¿“Œ– - œ–Œ—ÃŒ“– - œ–Œ—ÃŒ“– -  ”–—Œ–€
-    PageName::Function_Recorder_Show_View, &PageRecorder::PageShow::self, Item::EmptyActive, E_VB, Page::EmptyBeforeDraw, E_BfKE
+    PageName::Function_Recorder_Show_View, &PageRecorder::PageShow::self, Item::Active, Page::Changed, Page::BeforeDraw, E_BfKE
 )
 
 const Page * const PageRecorder::PageShow::PageView::self = (const Page *)&pView;

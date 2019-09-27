@@ -33,7 +33,7 @@ DEF_CHOICE_2( cInputA,                                                          
     chanInput,
     DISABLE_RU,
     ENABLE_RU,
-    SET_ENABLED_A, &PageChannelA::self, Item::EmptyActive, PageChannelA::OnChanged_Input, E_VII
+    SET_ENABLED_A, &PageChannelA::self, Item::Active, PageChannelA::OnChanged_Input, E_VII
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -48,7 +48,7 @@ DEF_CHOICE_3( cCoupleA,                                                         
     "Пост",
     "Перем",
     "Земля",
-    SET_COUPLE_A, &PageChannelA::self, Item::EmptyActive, PageChannelA::OnChanged_Couple, E_VII
+    SET_COUPLE_A, &PageChannelA::self, Item::Active, PageChannelA::OnChanged_Couple, E_VII
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -62,7 +62,7 @@ DEF_CHOICE_2( cBandwidthA,                                                      
     "Задаёт полосу пропускания канала",
     "Полная",
     "20МГц",
-    SET_BANDWIDTH_A, &PageChannelA::self, Item::EmptyActive, OnChanged_BandwidthA, E_VII
+    SET_BANDWIDTH_A, &PageChannelA::self, Item::Active, OnChanged_BandwidthA, E_VII
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -92,7 +92,7 @@ static void OnPress_BalanceA()
 DEF_BUTTON( bBalanceA,                                                                                                                                      //--- КАНАЛ 1 - Балансировать ---
     "Балансировка",
     "",
-    &PageChannelA::self, Item::EmptyActive, OnPress_BalanceA
+    &PageChannelA::self, Item::Active, OnPress_BalanceA
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -101,7 +101,7 @@ DEF_CHOICE_2( cDividerA,                                                        
     "",
     "1X",
     "10X",
-    divider[0], &PageChannelA::self, Item::EmptyActive, E_VB, E_VII
+    divider[0], &PageChannelA::self, Item::Active, Choice::Changed, E_VII
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -110,7 +110,7 @@ DEF_CHOICE_2( cInverseA,                                                        
     "Инвертирует сигнал относительно уровня 0В",
     "Откл",
     "Вкл",
-    SET_INVERSE_A, &PageChannelA::self, Item::EmptyActive, E_VB, E_VII
+    SET_INVERSE_A, &PageChannelA::self, Item::Active, Choice::Changed, E_VII
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -123,7 +123,7 @@ DEF_PAGE_6( pChanA, // -V641 // -V1027                                          
     &cDividerA,         ///< КАНАЛ 1 - Делитель
     &bBalanceA,         ///< КАНАЛ 1 - Балансировка
     &cInverseA,         ///< КАНАЛ 1 - Инверсия
-    PageName::ChannelA, nullptr, Item::EmptyActive, E_VB, Page::EmptyBeforeDraw, E_BfKE
+    PageName::ChannelA, nullptr, Item::Active, Page::Changed, Page::BeforeDraw, E_BfKE
 )
 
 const Page * const PageChannelA::self = (const Page *)&pChanA;
@@ -143,7 +143,7 @@ DEF_CHOICE_2( cInputB,                                                          
     chanInput,
     DISABLE_RU,
     ENABLE_RU,
-    SET_ENABLED_B, &PageChannelB::self, Item::EmptyActive, PageChannelB::OnChanged_Input, E_VII
+    SET_ENABLED_B, &PageChannelB::self, Item::Active, PageChannelB::OnChanged_Input, E_VII
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -158,7 +158,7 @@ DEF_CHOICE_3( cCoupleB,                                                         
     "Пост",
     "Перем",
     "Земля",
-    SET_COUPLE_B, &PageChannelB::self, Item::EmptyActive, PageChannelB::OnChanged_Couple, E_VII
+    SET_COUPLE_B, &PageChannelB::self, Item::Active, PageChannelB::OnChanged_Couple, E_VII
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -172,7 +172,7 @@ DEF_CHOICE_2( cBandwidthB,                                                      
     "",
     "Полная",
     "20МГц",
-    SET_BANDWIDTH_B, &PageChannelB::self, Item::EmptyActive, OnChanged_BandwidthB, E_VII
+    SET_BANDWIDTH_B, &PageChannelB::self, Item::Active, OnChanged_BandwidthB, E_VII
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -184,7 +184,7 @@ static void OnPress_BalanceB()
 DEF_BUTTON( bBalanceB,                                                                                                                                       //--- КАНАЛ 2 - Балансировка ---
     "Балансировка",
     "",
-    &PageChannelB::self, Item::EmptyActive, OnPress_BalanceB
+    &PageChannelB::self, Item::Active, OnPress_BalanceB
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -193,7 +193,7 @@ DEF_CHOICE_2( cDividerB,                                                        
     "",
     "1X",
     "10X",
-    divider[1], &PageChannelB::self, Item::EmptyActive, E_VB, E_VII
+    divider[1], &PageChannelB::self, Item::Active, Choice::Changed, E_VII
     )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -202,7 +202,7 @@ DEF_CHOICE_2( cInverseB,                                                        
     "Инвертирует сигнал относительно уровня 0В",
     "Откл",
     "Вкл",
-    SET_INVERSE_B, &PageChannelB::self, Item::EmptyActive, E_VB, E_VII
+    SET_INVERSE_B, &PageChannelB::self, Item::Active, Choice::Changed, E_VII
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -215,7 +215,7 @@ DEF_PAGE_6( pChanB, // -V641 // -V1027                                          
     &cDividerB,         ///< КАНЛА 2 - Делитель
     &bBalanceB,         ///< КАНАЛ 2 - Балансировка
     &cInverseB,         ///< КАНАЛ 2 - Инверсия
-    PageName::ChannelB, nullptr, Item::EmptyActive, E_VB, Page::EmptyBeforeDraw, E_BfKE
+    PageName::ChannelB, nullptr, Item::Active, Page::Changed, Page::BeforeDraw, E_BfKE
 )
 
 const Page * const PageChannelB::self = (const Page *)&pChanB;

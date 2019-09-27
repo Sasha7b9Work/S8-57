@@ -12,7 +12,7 @@ DEF_CHOICE_2( cIsShow,                                                          
     "Выводить или не выводить измерения на экран",
     "Нет",
     "Да",
-    SHOW_MEASURES, &PageMeasuresAuto::self, Item::EmptyActive, E_VB, E_VII
+    SHOW_MEASURES, &PageMeasuresAuto::self, Item::Active, Choice::Changed, E_VII
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -40,7 +40,7 @@ DEF_CHOICE_7( cNumber,                                                          
     "3x5",
     "6x1",
     "6x2",
-    NUM_MEASURES, &PageMeasuresAuto::self, IsActive_NumberChannels, E_VB, E_VII
+    NUM_MEASURES, &PageMeasuresAuto::self, IsActive_NumberChannels, Choice::Changed, E_VII
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -50,7 +50,7 @@ DEF_CHOICE_3( cChannels,                                                        
     "1",
     "2",
     "1 и 2",
-    SOURCE_MEASURES, &PageMeasuresAuto::self, IsActive_NumberChannels, E_VB, E_VII
+    SOURCE_MEASURES, &PageMeasuresAuto::self, IsActive_NumberChannels, Choice::Changed, E_VII
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -62,7 +62,7 @@ DEF_PAGE_4( pAuto, // -V641 // -V1027                                           
     &cChannels,                                 ///< ИЗМЕРЕНИЯ - АВТОМАТ - Каналы
     PageMeasuresAuto::PageTune::self,  ///< ИЗМЕРЕНИЯ - АВТОМАТ - НАСТРОИТЬ
     //&cMode,                                   ///< ИЗМЕРЕНИЯ - АВТОМАТ - Вид
-    PageName::Measures_Auto, &PageMeasures::self, Item::EmptyActive, E_VB, Page::EmptyBeforeDraw, E_BfKE
+    PageName::Measures_Auto, &PageMeasures::self, Item::Active, Page::Changed, Page::BeforeDraw, E_BfKE
 )
 
 const Page * const PageMeasuresAuto::self = (const Page *)&pAuto;

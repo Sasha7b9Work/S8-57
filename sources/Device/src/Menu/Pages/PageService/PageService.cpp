@@ -34,7 +34,7 @@ static void OnPress_ResetSettings()
 DEF_BUTTON( bResetSettings,                                                                                                                                 //--- СЕРВИС - Сброс настроек ---
     "Сброс настр",
     "Сброс настроек на настройки по умолчанию",
-    &PageService::self, Item::EmptyActive, OnPress_ResetSettings
+    &PageService::self, Item::Active, OnPress_ResetSettings
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -46,7 +46,7 @@ static void OnPress_AutoSearch()
 DEF_BUTTON( bAutoSearch,                                                                                                                                     //--- СЕРВИС - Поиск сигнала ---
     "Поиск сигн",
     "Устанавливает оптимальные установки осциллографа для сигнала в канале 1",
-    &PageService::self, Item::EmptyActive, OnPress_AutoSearch
+    &PageService::self, Item::Active, OnPress_AutoSearch
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -58,7 +58,7 @@ DEF_CHOICE_4( cSoundVolume,
     "Средн",
     "Макс",
     SOUND_VOLUME,
-    &PageService::self, Item::EmptyActive, E_VB, E_VII
+    &PageService::self, Item::Active, Choice::Changed, E_VII
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -72,7 +72,7 @@ DEF_PAGE_7( pService, // -V641 // -V1027                                        
     PageRTC::self,                          ///< СЕРВИС - ВРЕМЯ
     PageService::PageInformation::self,     ///< СЕРВИС - ИНФОРМАЦИЯ
     PageDebug::self,                        ///< СЕРВИС - ОТЛАДКА
-    PageName::Service, nullptr, Item::EmptyActive, E_VB, Page::EmptyBeforeDraw, E_BfKE
+    PageName::Service, nullptr, Item::Active, Page::Changed, Page::BeforeDraw, E_BfKE
 )
 
 const Page * const PageService::self = (const Page *)&pService;

@@ -100,7 +100,7 @@ public:
 
     static DataItem emptyData;
 
-    static bool EmptyActive() { return true; }
+    static bool Active() { return true; }
 };
 
 
@@ -165,7 +165,9 @@ public:
     /// Возвращает имя страницы page
     PageName::E GetName() const;
 
-    static void EmptyBeforeDraw() {};
+    static void BeforeDraw() {};
+
+    static void Changed(bool) {};
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// Button ///
@@ -314,6 +316,8 @@ public:
     virtual int HeightOpened() const;
 
     DataChoice *OwnData() const { return (DataChoice *)data->ad; }
+
+    static void Changed(bool) {};
 };
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// GovernorColor ///

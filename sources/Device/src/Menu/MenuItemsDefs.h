@@ -97,7 +97,7 @@ static const Governor name(&di##name);
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #define DEF_GOVERNOR_COLOR(name, title, hint, colorType, keeper)                                                                                                                            \
 static const DataGovernorColor dgc##name = { &colorType };                                                                                                                                  \
-static const DataItem di##name = { Item::Type::GovernorColor, title, hint, keeper, Item::EmptyActive, &dgc##name };                                                                                     \
+static const DataItem di##name = { Item::Type::GovernorColor, title, hint, keeper, Item::Active, &dgc##name };                                                                                     \
 static const GovernorColor name(&di##name);
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

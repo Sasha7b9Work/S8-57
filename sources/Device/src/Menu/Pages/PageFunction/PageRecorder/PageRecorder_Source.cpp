@@ -10,7 +10,7 @@ DEF_CHOICE_2( cChanA,                                                           
     "Выбор канала 1 для записи и просмотра",
     DISABLE_RU,
     ENABLE_RU,
-    REC_SRC_A, &PageRecorder::PageSource::self, Item::EmptyActive, E_VB, E_VII
+    REC_SRC_A, &PageRecorder::PageSource::self, Item::Active, Choice::Changed, E_VII
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -19,7 +19,7 @@ DEF_CHOICE_2( cChanB,                                                           
     "Выбор канала 2 для записи и просмотра",
     DISABLE_RU,
     ENABLE_RU,
-    REC_SRC_B, &PageRecorder::PageSource::self, Item::EmptyActive, E_VB, E_VII
+    REC_SRC_B, &PageRecorder::PageSource::self, Item::Active, Choice::Changed, E_VII
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -28,7 +28,7 @@ DEF_CHOICE_2( cSensor,                                                          
     "Выбор датчика для записи и просмотра",
     DISABLE_RU,
     ENABLE_RU,
-    REC_SRC_SENSOR, &PageRecorder::PageSource::self, Item::EmptyActive, E_VB, E_VII
+    REC_SRC_SENSOR, &PageRecorder::PageSource::self, Item::Active, Choice::Changed, E_VII
 )
 
 
@@ -44,7 +44,7 @@ DEF_PAGE_3( pSource, // -V641 // -V1027                                         
     &cChanA,        ///< ФУНКЦИЯ - РЕГИСТРАТОР - ИСТОЧНИК - Канал 1
     &cChanB,        ///< ФУНКЦИЯ - РЕГИСТРАТОР - ИСТОЧИНК - Канал 2
     &cSensor,       ///< ФУНКЦИЯ - РЕГИСТРАТОР - ИСТОЧНИК - Датчик
-    PageName::Function_Recorder_Source, &PageRecorder::self, IsActive_Source, E_VB, Page::EmptyBeforeDraw, E_BfKE
+    PageName::Function_Recorder_Source, &PageRecorder::self, IsActive_Source, Page::Changed, Page::BeforeDraw, E_BfKE
 )
 
 const Page * const PageRecorder::PageSource::self = (const Page *)&pSource;

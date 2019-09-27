@@ -59,7 +59,7 @@ void PageMeasuresCursors::PageSet::Draw_Channel(int x, int y)
 DEF_GRAPH_BUTTON_HINTS_2( bChannel,                                                                                                        //--- ИЗМЕРЕНИЯ - КУРСОРЫ - УСТАНОВИТЬ - Канал ---
     "Канал",
     "Выбор канала для курсорных измерений",
-    &PageMeasuresCursors::PageSet::self, Item::EmptyActive, PageMeasuresCursors::PageSet::OnPress_Channel, PageMeasuresCursors::PageSet::Draw_Channel,
+    &PageMeasuresCursors::PageSet::self, Item::Active, PageMeasuresCursors::PageSet::OnPress_Channel, PageMeasuresCursors::PageSet::Draw_Channel,
     Draw_ChannelA, "канал 1",
     Draw_ChannelB, "канал 2"
 )
@@ -153,7 +153,7 @@ static void Draw_T(int x, int y)
 DEF_GRAPH_BUTTON_HINTS_5( bT,                                                                                                          //--- ИЗМЕРЕНИЯ - КУРСОРЫ - УСТАНОВИТЬ - Курсоры Т ---
     "Курсоры T",
     "Выбор курсоров времени для индикации и управления",
-    &PageMeasuresCursors::PageSet::self, Item::EmptyActive, PageMeasuresCursors::PageSet::OnPress_T, Draw_T,
+    &PageMeasuresCursors::PageSet::self, Item::Active, PageMeasuresCursors::PageSet::OnPress_T, Draw_T,
     Draw_T_disable,     "курсоры времени выключены",
     Draw_T_disableBoth, "курсоры времени включены",
     Draw_T_enableLeft,  "курсоры времени включены, управление левым курсором",
@@ -251,7 +251,7 @@ static void Draw_U(int x, int y)
 DEF_GRAPH_BUTTON_HINTS_5( bU,                                                                                                          //--- ИЗМЕРЕНИЯ - КУРСОРЫ - УСТАНОВИТЬ - Курсоры U ---
     "Курсоры U",
     "Выбор курсоров напряжения для индикации и управления",
-    &PageMeasuresCursors::PageSet::self, Item::EmptyActive, PageMeasuresCursors::PageSet::OnPress_U, Draw_U,
+    &PageMeasuresCursors::PageSet::self, Item::Active, PageMeasuresCursors::PageSet::OnPress_U, Draw_U,
     Draw_U_disable,     "курсоры напряжения выключены",
     Draw_U_disableBoth, "курсоры напряжения включены",
     Draw_U_enableUpper, "курсоры напряжения включены, управление верхним курсором",
@@ -274,7 +274,7 @@ static void Draw_100(int x, int y)
 DEF_GRAPH_BUTTON( b100,                                                                                                                     //--- ИЗМЕРЕНИЯ - КУРСОРЫ - УСТАНОВИТЬ - 100% ---
     "100\x83",
     "Используется для процентных измерений. Нажатие помечает расстояние между активными курсорами как 100%",
-    &PageMeasuresCursors::PageSet::self, Item::EmptyActive, OnPress_100, Draw_100
+    &PageMeasuresCursors::PageSet::self, Item::Active, OnPress_100, Draw_100
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -308,7 +308,7 @@ static void Draw_Movement(int x, int y)
 DEF_GRAPH_BUTTON_HINTS_2( bMovement,                                                                                                 //--- ИЗМЕРЕНИЯ - КУРСОРЫ - УСТАНОВИТЬ - Перемещение ---
     "Перемещение",
     "Выбор шага перемещения курсоров - проценты или точки",
-    &PageMeasuresCursors::PageSet::self, Item::EmptyActive, OnPress_Movement, Draw_Movement,
+    &PageMeasuresCursors::PageSet::self, Item::Active, OnPress_Movement, Draw_Movement,
     Draw_Movement_Percents, "шаг перемещения курсоров кратен одному проценту",
     Draw_Movement_Points,   "шаг перемещения курсора кратен одному пикселю"
 )
@@ -384,7 +384,7 @@ DEF_PAGE_5( pSet, // -V641 // -V1027                                            
     &bT,                ///< ИЗМЕРЕНИЯ - КУРСОРЫ - УСТАНОВИТЬ - Курсоры Т
     &b100,              ///< ИЗМЕРЕНИЯ - КУРСОРЫ - УСТАНОВИТЬ - 100%
     &bMovement,         ///< ИЗМЕРЕНИЯ - КУРСОРЫ - УСТАНОВИТЬ - Перемещение
-    PageName::Measures_Cursors_Set, &PageMeasuresCursors::self, IsActive_Set, E_VB, Page::EmptyBeforeDraw, PageMeasuresCursors::PageSet::OnArrows
+    PageName::Measures_Cursors_Set, &PageMeasuresCursors::self, IsActive_Set, Page::Changed, Page::BeforeDraw, PageMeasuresCursors::PageSet::OnArrows
 )
 
 const Page * const PageMeasuresCursors::PageSet::self = (const Page *)&pSet;

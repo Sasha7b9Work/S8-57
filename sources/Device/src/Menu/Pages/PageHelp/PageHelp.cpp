@@ -71,14 +71,14 @@ DEF_GRAPH_BUTTON( bLeave,                                                       
 DEF_GRAPH_BUTTON( bPrev,                                                                                                                                 //--- ПОМОЩЬ - Предыдущий раздел ---
     "Предыдущий раздел",
     "Выбрать предыдущий раздел справки",
-    &PageHelp::self, Item::EmptyActive, HelpContent::PrevParagraph, Draw_Prev
+    &PageHelp::self, Item::Active, HelpContent::PrevParagraph, Draw_Prev
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 DEF_GRAPH_BUTTON( bNext,                                                                                                                    //--- ПОМОЩЬ - Следующий раздел ---
     "Следующий раздел",
     "Выбрать следующий раздел справки",
-    &PageHelp::self, Item::EmptyActive, HelpContent::NextParagraph, Draw_Next
+    &PageHelp::self, Item::Active, HelpContent::NextParagraph, Draw_Next
 )
 
 /*
@@ -117,5 +117,5 @@ DEF_PAGE_4( pHelp, // -V641 // -V1027                                           
     &bLeave,
     &bPrev,
     &bNext,
-    PageName::Help, nullptr, Item::EmptyActive, E_VB, HelpContent::Draw, OnArrows_Help
+    PageName::Help, nullptr, Item::Active, Page::Changed, HelpContent::Draw, OnArrows_Help
 )

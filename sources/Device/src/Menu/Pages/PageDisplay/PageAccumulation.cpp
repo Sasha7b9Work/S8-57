@@ -15,7 +15,7 @@ DEF_CHOICE_2( cEnable,                                                          
     "",
     DISABLE_RU,
     ENABLE_RU,
-    ACCUMULATION, &PageDisplay::PageAccumulation::self, Item::EmptyActive, E_VB, E_VII
+    ACCUMULATION, &PageDisplay::PageAccumulation::self, Item::Active, Choice::Changed, E_VII
 )
 
 
@@ -34,7 +34,7 @@ DEF_CHOICE_9( cNumber,                                                          
     "64",
     "128",
     "Áåñêîíå÷íîñòü",
-    ENUM_ACCUM, &PageDisplay::PageAccumulation::self, Item::EmptyActive, E_VB, E_VII
+    ENUM_ACCUM, &PageDisplay::PageAccumulation::self, Item::Active, Choice::Changed, E_VII
 )
 
 
@@ -68,7 +68,7 @@ DEF_PAGE_3( pAccum, // -V641 // -V1027                                          
     &cEnable,    ///< ÄÈÑÏËÅÉ - ÍÀÊÎÏËÅÍÈÅ - Êîëè÷åñòâî
     &cNumber,    ///< ÄÈÑÏËÅÉ - ÍÀÊÎÏËÅÍÈÅ - Ðåæèì
     &bClear,     ///< ÄÈÑÏËÅÉ - ÍÀÊÎÏËÅÍÈÅ - Î÷èñòèòü
-    PageName::Display_Accumulation, &PageDisplay::self, IsActive_Accum, E_VB, Page::EmptyBeforeDraw, E_BfKE
+    PageName::Display_Accumulation, &PageDisplay::self, IsActive_Accum, Page::Changed, Page::BeforeDraw, E_BfKE
 )
 
 const Page * const PageDisplay::PageAccumulation::self = (const Page *)&pAccum;

@@ -70,7 +70,7 @@ DEF_CHOICE_3( cTPos,                                                            
     "Лево",
     "Центр",
     "Право",
-    TPOS, &PageTime::self, Item::EmptyActive, PageTime::OnChanged_TPos, E_VII
+    TPOS, &PageTime::self, Item::Active, PageTime::OnChanged_TPos, E_VII
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -93,7 +93,7 @@ DEF_CHOICE_2( cShiftXtype,                                                      
     ,
     "Время",
     "Деления",
-    LINKING_TSHIFT, &PageTime::self, Item::EmptyActive, E_VB, E_VII
+    LINKING_TSHIFT, &PageTime::self, Item::Active, Choice::Changed, E_VII
 )
 
 DEF_PAGE_4( pTime, // -V641 // -V1027                                                                                                                                     //--- РАЗВЕРТКА ---
@@ -104,7 +104,7 @@ DEF_PAGE_4( pTime, // -V641 // -V1027                                           
     &cTPos,             ///< РАЗВЕРТКА - То
     //&cDivRole,          ///< РАЗВЕРТКА - Ф-ция ВР/ДЕЛ
     &cShiftXtype,       ///< РАЗВЕРТКА - Смещение
-    PageName::Time, nullptr, Item::EmptyActive, E_VB, Page::EmptyBeforeDraw, E_BfKE
+    PageName::Time, nullptr, Item::Active, Page::Changed, Page::BeforeDraw, E_BfKE
 )
 
 const Page * const PageTime::self = (const Page *)&pTime;

@@ -64,7 +64,7 @@ static void Draw_Left(int x, int y)
 DEF_GRAPH_BUTTON( bSet_Left,
     "Влево",
     "Предыдущий элемент",
-    &PageRTC::self, Item::EmptyActive, OnPress_SetLeft, Draw_Left
+    &PageRTC::self, Item::Active, OnPress_SetLeft, Draw_Left
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -83,7 +83,7 @@ static void Draw_Right(int x, int y)
 DEF_GRAPH_BUTTON( bSet_Right,
     "Вправо",
     "Следующий элемент",
-    &PageRTC::self, Item::EmptyActive, OnPress_SetRight, Draw_Right
+    &PageRTC::self, Item::Active, OnPress_SetRight, Draw_Right
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -102,7 +102,7 @@ static void Draw_Up(int x, int y)
 DEF_GRAPH_BUTTON( bSet_Up,
     "Больше",
     "Увеличить",
-    &PageRTC::self, Item::EmptyActive, OnPress_SetUp, Draw_Up
+    &PageRTC::self, Item::Active, OnPress_SetUp, Draw_Up
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -121,7 +121,7 @@ static void Draw_Down(int x, int y)
 DEF_GRAPH_BUTTON( bSet_Down,
     "Меньше",
     "Уменьшить",
-    &PageRTC::self, Item::EmptyActive, OnPress_SetDown, Draw_Down
+    &PageRTC::self, Item::Active, OnPress_SetDown, Draw_Down
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -141,7 +141,7 @@ static void Draw_Pick(int x, int y)
 DEF_GRAPH_BUTTON(bSet_Pick,
     "Выбрать",
     "Выбор подсвеченного элемента",
-    &PageRTC::self, Item::EmptyActive, OnPress_SetPick, Draw_Pick
+    &PageRTC::self, Item::Active, OnPress_SetPick, Draw_Pick
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -278,7 +278,7 @@ DEF_PAGE_5( pSet, //-V641 //-V1027
     &bSet_Down,
     &bSet_Pick,
     PageName::Service_RTC,
-    &PageService::self, Item::EmptyActive, OnOpenClose_Set, BeforeDraw_Set, OnKey_Set
+    &PageService::self, Item::Active, OnOpenClose_Set, BeforeDraw_Set, OnKey_Set
 )
 
 const Page * const PageRTC::self = (const Page *)&pSet;

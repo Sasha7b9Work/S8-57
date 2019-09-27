@@ -21,7 +21,7 @@ DEF_CHOICE_2( cEnable,                                                          
     "",
     DISABLE_RU,
     ENABLE_RU,
-    FREQ_METER_ENABLED, &PageFrequencyCounter::self, Item::EmptyActive, OnChanged_Enable, E_VII
+    FREQ_METER_ENABLED, &PageFrequencyCounter::self, Item::Active, OnChanged_Enable, E_VII
 )
 
 
@@ -36,7 +36,7 @@ DEF_CHOICE_2( cModeView,                                                        
     "",
     "×àñòîòà",
     "Ïåðèîä",
-    FREQ_METER_MODE_VIEW, &PageFrequencyCounter::self, IsActive_ModeView, E_VB, E_VII
+    FREQ_METER_MODE_VIEW, &PageFrequencyCounter::self, IsActive_ModeView, Choice::Changed, E_VII
 )
 
 
@@ -115,7 +115,7 @@ DEF_PAGE_5( pFreqMeter, // -V641                                                
     &cTimeF,            ///< ÈÇÌÅÐÅÍÈß - ×ÀÑÒÎÒÎÌÅÐ - Âðåìÿ ñ÷¸òà F
     &cFreqClc,          ///< ÈÇÌÅÐÅÍÈß - ×ÀÑÒÎÒÎÌÅÐ - Ìåòêè âðåìåíè
     &cNumPeriods,       ///< ÈÇÌÅÐÅÍÈß - ×ÀÑÒÎÒÎÌÅÐ - Êîë-âî ïåðèîäîâ
-    PageName::Function_FrequencyCounter, &PageFunction::self, Item::EmptyActive, E_VB, Page::EmptyBeforeDraw, E_BfKE
+    PageName::Function_FrequencyCounter, &PageFunction::self, Item::Active, Choice::Changed, Page::BeforeDraw, E_BfKE
 )
 
 const Page * const PageFrequencyCounter::self = (const Page *)&pFreqMeter;

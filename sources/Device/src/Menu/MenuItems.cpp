@@ -38,7 +38,7 @@ DataItem Item::emptyData =
     "",
     "",
     nullptr,
-    Item::EmptyActive
+    Item::Active
 };
 
 Item Item::empty;

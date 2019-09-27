@@ -52,7 +52,7 @@ DEF_CHOICE_3( cMode, // -V206                                                   
     "∆‰Û˘ËÈ",
     "Œ‰ÌÓÍ‡ÚÌ˚È",
     START_MODE,
-    &PageTrig::self, Item::EmptyActive, PageTrig::OnChanged_Mode, E_VII
+    &PageTrig::self, Item::Active, PageTrig::OnChanged_Mode, E_VII
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -68,7 +68,7 @@ DEF_CHOICE_2( cSource, // -V206                                                 
     " ‡Ì‡Î 1",
     " ‡Ì‡Î 2",
     TRIG_SOURCE,
-    &PageTrig::self, Item::EmptyActive, OnChanged_Source, E_VII
+    &PageTrig::self, Item::Active, OnChanged_Source, E_VII
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -86,7 +86,7 @@ DEF_CHOICE_2( cPolarity, //-V206                                                
     "‘ÓÌÚ",
     "—ÂÁ",
     TRIG_POLARITY,
-    &PageTrig::self, Item::EmptyActive, OnChanged_Polarity, E_VII
+    &PageTrig::self, Item::Active, OnChanged_Polarity, E_VII
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -107,7 +107,7 @@ DEF_CHOICE_3( cFiltr, // -V206                                                  
     "Õ◊",
     "¬◊",
     TRIG_INPUT,
-    &PageTrig::self, Item::EmptyActive, OnChanged_Filtr, E_VII
+    &PageTrig::self, Item::Active, OnChanged_Filtr, E_VII
 )
 
 DEF_PAGE_6( pTrig, // -V641 // -V1027                                                                                                                                         //--- —»Õ’– ---
@@ -119,7 +119,7 @@ DEF_PAGE_6( pTrig, // -V641 // -V1027                                           
     &cFiltr,                        ///< —»Õ’– - ¬ıÓ‰
     PageTrig::PageHoldOff::self, ///< —»Õ’– - ”ƒ≈–∆¿Õ»≈
     PageTrig::PageFind::self,    ///< —»Õ’– - œŒ»— 
-    PageName::Trig, nullptr, Item::EmptyActive, E_VB, Page::EmptyBeforeDraw, E_BfKE
+    PageName::Trig, nullptr, Item::Active, Page::Changed, Page::BeforeDraw, E_BfKE
 )
 
 const Page * const PageTrig::self = (const Page *)&pTrig;
