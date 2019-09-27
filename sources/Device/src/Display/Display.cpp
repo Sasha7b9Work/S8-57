@@ -78,19 +78,23 @@ static const char       *warnings[NUM_WARNINGS] = {0};      ///< Здесь предупреж
 static uint             timeWarnings[NUM_WARNINGS] = {0};   ///< Здесь время, когда предупреждающее сообщение поступило на экран.
 
 
+static void EmptyFunc()
+{
+}
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-static pFuncVV funcOnHand = 0;
+static pFuncVV funcOnHand = nullptr;
 static uint timeStart = 0;
 static const char *textWait = 0;
 static bool clearBackground = false;
 /// true, если нужно сохранять копию экрана на флешку
 static bool needSaveScreen = false;
 /// Дополнительная функция рисования. Выполняется после стандартной отрисовки, но перед вызовом EndScene;
-volatile static pFuncVV funcAdditionDraw = EmptyVV;
+volatile static pFuncVV funcAdditionDraw = EmptyFunc;
 /// true означает, что происходит процесс отрисовки
 static bool inStateDraw = false;
 
-static pFuncVV funcAfterUpdateOnce = EmptyVV;
+static pFuncVV funcAfterUpdateOnce = EmptyFunc;
 
 static int numRow = -1;
 
@@ -158,7 +162,7 @@ bool Display::InProcess()
 static void ExecuteFuncAfterUpdateOnce()
 {
     funcAfterUpdateOnce();
-    funcAfterUpdateOnce = EmptyVV;
+    funcAfterUpdateOnce = EmptyFunc;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -325,7 +329,7 @@ void Display::FuncOnWaitStart(const char *text, bool eraseBackground)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Display::RemoveAddDrawFunction()
 {
-    funcAdditionDraw = EmptyVV;
+    funcAdditionDraw = EmptyFunc;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -339,7 +343,7 @@ void Display::SetAddDrawFunction(pFuncVV func, uint time)
 {
     if (func == 0)
     {
-        func = EmptyVV;
+        func = EmptyFunc;
     }
 
     funcAdditionDraw = func;

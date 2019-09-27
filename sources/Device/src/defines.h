@@ -63,8 +63,6 @@ typedef void (*pFuncVpI8I8I8)(int8 *, int8, int8);
 typedef bool (*pFuncBI)(int);
 typedef void (*pFuncVU8)(uint8);
 
-inline void EmptyVV(){}
-
 
 #ifndef _WIN32
 #if __ARMCLIB_VERSION < 6070001

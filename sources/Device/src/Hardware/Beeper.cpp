@@ -285,15 +285,20 @@ void Beeper::WarnBeepGood()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+static void EmptyFunc()
+{
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Beeper::Beep(TypePress::E type)
 {
     static const pFuncVV func[TypePress::Size] =
     {
         Beeper::ButtonPress,
-        EmptyVV,
+        EmptyFunc,
         Beeper::ButtonRelease,
-        EmptyVV,
-        EmptyVV
+        EmptyFunc,
+        EmptyFunc
     };
 
     if (type < TypePress::Size)
