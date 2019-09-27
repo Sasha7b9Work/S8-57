@@ -63,6 +63,12 @@ void Decoder::Update()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+static bool EmptyFunc(uint8)
+{
+    return true;
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void RunStep(uint8 data)
 {
     static const struct StructFunc
@@ -72,27 +78,27 @@ static void RunStep(uint8 data)
     }
     commands[Command::Size] =
     {
-        E_BtU8,         // None,
+        EmptyFunc,      // None,
         ButtonPress,    // ButtonPress,
-        E_BtU8,         // Paint_BeginScene,
-        E_BtU8,         // Paint_EndScene,
-        E_BtU8,         // Paint_SetColor,
-        E_BtU8,         // Paint_FillRegion,
-        E_BtU8,         // Paint_DrawText,
-        E_BtU8,         // Paint_SetPalette,
-        E_BtU8,         // Paint_DrawRectangle,
-        E_BtU8,         // Paint_DrawVLine,
-        E_BtU8,         // Paint_DrawHLine,
-        E_BtU8,         // Paint_SetFont,
-        E_BtU8,         // Paint_SetPoint,
-        E_BtU8,         // Paint_DrawLine,
-        E_BtU8,         // Paint_TesterLines,
-        E_BtU8,         // Paint_DrawBigText,
+        EmptyFunc,      // Paint_BeginScene,
+        EmptyFunc,      // Paint_EndScene,
+        EmptyFunc,      // Paint_SetColor,
+        EmptyFunc,      // Paint_FillRegion,
+        EmptyFunc,      // Paint_DrawText,
+        EmptyFunc,      // Paint_SetPalette,
+        EmptyFunc,      // Paint_DrawRectangle,
+        EmptyFunc,      // Paint_DrawVLine,
+        EmptyFunc,      // Paint_DrawHLine,
+        EmptyFunc,      // Paint_SetFont,
+        EmptyFunc,      // Paint_SetPoint,
+        EmptyFunc,      // Paint_DrawLine,
+        EmptyFunc,      // Paint_TesterLines,
+        EmptyFunc,      // Paint_DrawBigText,
         FuncScreen,     // Screen
-        E_BtU8,         // Paint_VPointLine
-        E_BtU8,         // Paint_HPointLine
-        E_BtU8,         // Paint_SetMonoSpaceFont
-        E_BtU8,         // Paint_SetTextSpacing
+        EmptyFunc,      // Paint_VPointLine
+        EmptyFunc,      // Paint_HPointLine
+        EmptyFunc,      // Paint_SetMonoSpaceFont
+        EmptyFunc,      // Paint_SetTextSpacing
         AddToConsole    // AddToConsole
     };
 
