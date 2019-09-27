@@ -130,7 +130,7 @@ DEF_CHOICE_3( cStretch_Mode,                                                    
     "Реальный",
     "Ручной",
     NRST_STRETCH_ADC_TYPE,
-    &PageDebug::PageADC::PageStretch::self, Item::Active, PageDebug::PageADC::PageStretch::OnChanged_Mode, E_VII
+    &PageDebug::PageADC::PageStretch::self, Item::Active, PageDebug::PageADC::PageStretch::OnChanged_Mode, Choice::AfterDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -362,7 +362,7 @@ DEF_CHOICE_2( cStats,                                                           
     "Не показывать",
     "Показывать",
     SHOW_STAT,
-    &PageDebug::self, Item::Active, Choice::Changed, E_VII
+    &PageDebug::self, Item::Active, Choice::Changed, Choice::AfterDraw
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

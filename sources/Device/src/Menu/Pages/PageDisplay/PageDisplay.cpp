@@ -26,7 +26,7 @@ DEF_CHOICE_10( cSmoothing,                                                      
     "8 точек",
     "9 точек",
     "10 точек",
-    ENUM_SMOOTHING.value, &PageDisplay::self, Item::Active, Choice::Changed, E_VII
+    ENUM_SMOOTHING.value, &PageDisplay::self, Item::Active, Choice::Changed, Choice::AfterDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -38,7 +38,7 @@ DEF_CHOICE_5( cRefreshFPS,                                                      
     "5",
     "2",
     "1",
-    ENUM_SIGNALS_IN_SEC.value, &PageDisplay::self, Item::Active, Choice::Changed, E_VII
+    ENUM_SIGNALS_IN_SEC.value, &PageDisplay::self, Item::Active, Choice::Changed, Choice::AfterDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -48,7 +48,7 @@ DEF_CHOICE_2( cScaleYtype,                                                      
     "смещения на экране.",
     "Напряжение",
     "Деления",
-    LINKING_RSHIFT, &PageDisplay::self, Item::Active, Choice::Changed, E_VII
+    LINKING_RSHIFT, &PageDisplay::self, Item::Active, Choice::Changed, Choice::AfterDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -59,7 +59,7 @@ DEF_CHOICE_4( cType, // -V206                                                   
     "Тип 2",
     "Тип 3",
     "Тип 4",
-    TYPE_GRID, &PageDisplay::self, Item::Active, Choice::Changed, E_VII
+    TYPE_GRID, &PageDisplay::self, Item::Active, Choice::Changed, Choice::AfterDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -80,7 +80,7 @@ DEF_CHOICE_9( cAverage_Num,                                                     
     "64",
     "128",
     "256",
-    ENUM_AVE, &PageDisplay::self, Item::Active, OnChange_AverageNum, E_VII
+    ENUM_AVE, &PageDisplay::self, Item::Active, OnChange_AverageNum, Choice::AfterDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -89,7 +89,7 @@ DEF_CHOICE_2( cViewMode,                                                        
     "Задаёт режим отображения сигнала",
     "Вектор",
     "Точки",
-    MODE_DRAW_SIGNAL, &PageDisplay::self, Item::Active, Choice::Changed, E_VII
+    MODE_DRAW_SIGNAL, &PageDisplay::self, Item::Active, Choice::Changed, Choice::AfterDraw
 )
 
 

@@ -15,7 +15,7 @@ DEF_CHOICE_2( cCalibrator, // -V206                                             
     "Режим работы калибратора",
     "Перем",
     "Пост",
-    CALIBRATOR_MODE, &PageService::PageCalibrate::self, Item::Active, OnChanged_Calibrator, E_VII
+    CALIBRATOR_MODE, &PageService::PageCalibrate::self, Item::Active, OnChanged_Calibrator, Choice::AfterDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

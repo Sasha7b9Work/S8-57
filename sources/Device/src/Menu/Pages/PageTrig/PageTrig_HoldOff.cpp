@@ -19,7 +19,7 @@ DEF_CHOICE_2( cHoldOff,                                                         
     DISABLE_RU,
     ENABLE_RU,
     TRIG_HOLDOFF_ENABLED,
-    &PageTrig::PageHoldOff::self, Item::Active, OnChanged_HoldOff, E_VII
+    &PageTrig::PageHoldOff::self, Item::Active, OnChanged_HoldOff, Choice::AfterDraw
 )
 
 

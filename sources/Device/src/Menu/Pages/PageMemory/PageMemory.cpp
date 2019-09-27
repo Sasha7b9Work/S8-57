@@ -59,7 +59,7 @@ DEF_CHOICE_5( cPoints,                                                          
     namesLengthMemory[3],
     namesLengthMemory[4],
     FPGA_ENUM_POINTS,
-    &PageMemory::self, IsActive_Points, PageMemory::OnChanged_Points, E_VII
+    &PageMemory::self, IsActive_Points, PageMemory::OnChanged_Points, Choice::AfterDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -162,7 +162,7 @@ DEF_CHOICE_2( cDrive_Name,                                                      
     "По маске",
     "Вручную",
     FILE_NAMING_MODE,
-    &PageDrive::self, Item::Active, Choice::Changed, E_VII
+    &PageDrive::self, Item::Active, Choice::Changed, Choice::AfterDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -274,7 +274,7 @@ DEF_CHOICE_2( cDrive_SaveAs,                                                    
     "Изображение",
     "Текст",
     MODE_SAVE,
-    &PageDrive::self, Item::Active, Choice::Changed, E_VII
+    &PageDrive::self, Item::Active, Choice::Changed, Choice::AfterDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -284,7 +284,7 @@ DEF_CHOICE_2( cDrive_ModeBtnMemory,                                             
     "Меню",
     "Сохранение",
     MODE_BTN_MEMORY,
-    &PageDrive::self, Item::Active, Choice::Changed, E_VII
+    &PageDrive::self, Item::Active, Choice::Changed, Choice::AfterDraw
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -444,7 +444,7 @@ DEF_CHOICE_2( cDrive_Autoconnect,                                               
     DISABLE_RU,
     ENABLE_RU,
     FLASH_AUTOCONNECT,
-    &PageDrive::self, Item::Active, Choice::Changed, E_VII
+    &PageDrive::self, Item::Active, Choice::Changed, Choice::AfterDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

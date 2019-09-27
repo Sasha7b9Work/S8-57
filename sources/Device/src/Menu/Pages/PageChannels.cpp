@@ -33,7 +33,7 @@ DEF_CHOICE_2( cInputA,                                                          
     chanInput,
     DISABLE_RU,
     ENABLE_RU,
-    SET_ENABLED_A, &PageChannelA::self, Item::Active, PageChannelA::OnChanged_Input, E_VII
+    SET_ENABLED_A, &PageChannelA::self, Item::Active, PageChannelA::OnChanged_Input, Choice::AfterDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -48,7 +48,7 @@ DEF_CHOICE_3( cCoupleA,                                                         
     "Пост",
     "Перем",
     "Земля",
-    SET_COUPLE_A, &PageChannelA::self, Item::Active, PageChannelA::OnChanged_Couple, E_VII
+    SET_COUPLE_A, &PageChannelA::self, Item::Active, PageChannelA::OnChanged_Couple, Choice::AfterDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -62,7 +62,7 @@ DEF_CHOICE_2( cBandwidthA,                                                      
     "Задаёт полосу пропускания канала",
     "Полная",
     "20МГц",
-    SET_BANDWIDTH_A, &PageChannelA::self, Item::Active, OnChanged_BandwidthA, E_VII
+    SET_BANDWIDTH_A, &PageChannelA::self, Item::Active, OnChanged_BandwidthA, Choice::AfterDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -101,7 +101,7 @@ DEF_CHOICE_2( cDividerA,                                                        
     "",
     "1X",
     "10X",
-    divider[0], &PageChannelA::self, Item::Active, Choice::Changed, E_VII
+    divider[0], &PageChannelA::self, Item::Active, Choice::Changed, Choice::AfterDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -110,7 +110,7 @@ DEF_CHOICE_2( cInverseA,                                                        
     "Инвертирует сигнал относительно уровня 0В",
     "Откл",
     "Вкл",
-    SET_INVERSE_A, &PageChannelA::self, Item::Active, Choice::Changed, E_VII
+    SET_INVERSE_A, &PageChannelA::self, Item::Active, Choice::Changed, Choice::AfterDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -143,7 +143,7 @@ DEF_CHOICE_2( cInputB,                                                          
     chanInput,
     DISABLE_RU,
     ENABLE_RU,
-    SET_ENABLED_B, &PageChannelB::self, Item::Active, PageChannelB::OnChanged_Input, E_VII
+    SET_ENABLED_B, &PageChannelB::self, Item::Active, PageChannelB::OnChanged_Input, Choice::AfterDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -158,7 +158,7 @@ DEF_CHOICE_3( cCoupleB,                                                         
     "Пост",
     "Перем",
     "Земля",
-    SET_COUPLE_B, &PageChannelB::self, Item::Active, PageChannelB::OnChanged_Couple, E_VII
+    SET_COUPLE_B, &PageChannelB::self, Item::Active, PageChannelB::OnChanged_Couple, Choice::AfterDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -172,7 +172,7 @@ DEF_CHOICE_2( cBandwidthB,                                                      
     "",
     "Полная",
     "20МГц",
-    SET_BANDWIDTH_B, &PageChannelB::self, Item::Active, OnChanged_BandwidthB, E_VII
+    SET_BANDWIDTH_B, &PageChannelB::self, Item::Active, OnChanged_BandwidthB, Choice::AfterDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -193,7 +193,7 @@ DEF_CHOICE_2( cDividerB,                                                        
     "",
     "1X",
     "10X",
-    divider[1], &PageChannelB::self, Item::Active, Choice::Changed, E_VII
+    divider[1], &PageChannelB::self, Item::Active, Choice::Changed, Choice::AfterDraw
     )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -202,7 +202,7 @@ DEF_CHOICE_2( cInverseB,                                                        
     "Инвертирует сигнал относительно уровня 0В",
     "Откл",
     "Вкл",
-    SET_INVERSE_B, &PageChannelB::self, Item::Active, Choice::Changed, E_VII
+    SET_INVERSE_B, &PageChannelB::self, Item::Active, Choice::Changed, Choice::AfterDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

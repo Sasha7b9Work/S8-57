@@ -17,7 +17,7 @@ DEF_CHOICE_2( cShow,                                                            
     "Включает/отключает курсоры.",
     "Нет",
     "Да",
-    CURS_SHOW, &PageMeasuresCursors::self, Item::Active, Choice::Changed, E_VII
+    CURS_SHOW, &PageMeasuresCursors::self, Item::Active, Choice::Changed, Choice::AfterDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -68,7 +68,7 @@ DEF_CHOICE_2( cShowFreq,                                                        
     ,
     DISABLE_RU,
     ENABLE_RU,
-    CURSORS_SHOW_FREQ, &PageMeasuresCursors::self, IsActive_ShowFreq, Choice::Changed, E_VII
+    CURSORS_SHOW_FREQ, &PageMeasuresCursors::self, IsActive_ShowFreq, Choice::Changed, Choice::AfterDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

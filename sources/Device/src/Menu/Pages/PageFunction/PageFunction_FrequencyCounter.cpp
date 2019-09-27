@@ -21,7 +21,7 @@ DEF_CHOICE_2( cEnable,                                                          
     "",
     DISABLE_RU,
     ENABLE_RU,
-    FREQ_METER_ENABLED, &PageFrequencyCounter::self, Item::Active, OnChanged_Enable, E_VII
+    FREQ_METER_ENABLED, &PageFrequencyCounter::self, Item::Active, OnChanged_Enable, Choice::AfterDraw
 )
 
 
@@ -36,7 +36,7 @@ DEF_CHOICE_2( cModeView,                                                        
     "",
     "„астота",
     "ѕериод",
-    FREQ_METER_MODE_VIEW, &PageFrequencyCounter::self, IsActive_ModeView, Choice::Changed, E_VII
+    FREQ_METER_MODE_VIEW, &PageFrequencyCounter::self, IsActive_ModeView, Choice::Changed, Choice::AfterDraw
 )
 
 
@@ -63,7 +63,7 @@ DEF_CHOICE_3( cTimeF,                                                           
     "100мс",
     "1с",
     "10с",
-    FREQ_METER_TIMECOUNTING, &PageFrequencyCounter::self, IsActive_TimeF, OnChanged_TimeF, E_VII
+    FREQ_METER_TIMECOUNTING, &PageFrequencyCounter::self, IsActive_TimeF, OnChanged_TimeF, Choice::AfterDraw
 )
 
 
@@ -74,7 +74,7 @@ DEF_CHOICE_4( cFreqClc,                                                         
     "1ћ√ц",
     "10ћ√ц",
     "100ћ√ц",
-    FREQ_METER_FREQ_CLC, &PageFrequencyCounter::self, IsActive_SettingsFrequency, OnChanged_FreqMeter_Period, E_VII
+    FREQ_METER_FREQ_CLC, &PageFrequencyCounter::self, IsActive_SettingsFrequency, OnChanged_FreqMeter_Period, Choice::AfterDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -87,7 +87,7 @@ DEF_CHOICE_6( cNumPeriods,                                                      
     "1000",
     "10000",
     "100000",
-    FREQ_METER_NUM_PERIODS, &PageFrequencyCounter::self, IsActive_SettingsFrequency, OnChanged_FreqMeter_Period, E_VII
+    FREQ_METER_NUM_PERIODS, &PageFrequencyCounter::self, IsActive_SettingsFrequency, OnChanged_FreqMeter_Period, Choice::AfterDraw
 )
 
 

@@ -22,7 +22,7 @@ DEF_CHOICE_3( cDestination,                                                     
     "ОЗУ",
     "Внутр ЗУ",
     "Внешн ЗУ",
-    REC_STORAGE_RECORD, &PageRecorder::self, IsActive_Destination, Choice::Changed, E_VII
+    REC_STORAGE_RECORD, &PageRecorder::self, IsActive_Destination, Choice::Changed, Choice::AfterDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

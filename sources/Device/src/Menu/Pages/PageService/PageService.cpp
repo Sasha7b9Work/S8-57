@@ -58,7 +58,7 @@ DEF_CHOICE_4( cSoundVolume,
     "Средн",
     "Макс",
     SOUND_VOLUME,
-    &PageService::self, Item::Active, Choice::Changed, E_VII
+    &PageService::self, Item::Active, Choice::Changed, Choice::AfterDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

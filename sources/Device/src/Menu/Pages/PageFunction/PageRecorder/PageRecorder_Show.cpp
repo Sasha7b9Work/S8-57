@@ -13,7 +13,7 @@ DEF_CHOICE_3( cSource,
     "ÎÇÓ",
     "Âíóòð ÇÓ",
     "Âíåøí ÇÓ",
-    REC_STORAGE_PLAY, &PageRecorder::PageShow::self, Item::Active, Choice::Changed, E_VII
+    REC_STORAGE_PLAY, &PageRecorder::PageShow::self, Item::Active, Choice::Changed, Choice::AfterDraw
 )
 
 
@@ -23,7 +23,7 @@ DEF_CHOICE_2( cCursor,
     "",
     "1",
     "2",
-    Recorder::Settings::currentCursor, &PageRecorder::PageShow::self, Item::Active, Choice::Changed, E_VII
+    Recorder::Settings::currentCursor, &PageRecorder::PageShow::self, Item::Active, Choice::Changed, Choice::AfterDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

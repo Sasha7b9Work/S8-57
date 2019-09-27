@@ -10,7 +10,7 @@ DEF_CHOICE_2( cShow,                                                            
     "Включает/отключает вывод иноформации о напряжении батарии на экран",
     DISABLE_RU,
     ENABLE_RU,
-    BAT_SHOW_ON_DISPLAY, &PageService::PageBattery::self, Item::Active, Choice::Changed, E_VII
+    BAT_SHOW_ON_DISPLAY, &PageService::PageBattery::self, Item::Active, Choice::Changed, Choice::AfterDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

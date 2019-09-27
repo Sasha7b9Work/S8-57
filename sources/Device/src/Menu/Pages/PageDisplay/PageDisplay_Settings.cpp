@@ -31,7 +31,7 @@ DEF_CHOICE_6( cAutoHide,                                                        
     "Через 15 сек",
     "Через 30 сек",
     "Через 60 сек",
-    MENU_AUTO_HIDE, &PageDisplay::PageSettings::self, Item::Active, OnChanged_AutoHide, E_VII
+    MENU_AUTO_HIDE, &PageDisplay::PageSettings::self, Item::Active, OnChanged_AutoHide, Choice::AfterDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

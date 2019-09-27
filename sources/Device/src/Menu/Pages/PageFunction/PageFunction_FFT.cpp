@@ -11,7 +11,7 @@ DEF_CHOICE_2( cView,                                                            
     "Включает и выключает отображение спектра",
     DISABLE_RU,
     ENABLE_RU,
-    FFT_ENABLED, &PageFFT::self, Item::Active, Choice::Changed, E_VII
+    FFT_ENABLED, &PageFFT::self, Item::Active, Choice::Changed, Choice::AfterDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -25,7 +25,7 @@ DEF_CHOICE_2( cScale,                                                           
     "Задаёт масштаб вывода спектра - линейный или логарифмический",
     "Логарифм",
     "Линейная",
-    SCALE_FFT, &PageFFT::self, IsActive_Scale, Choice::Changed, E_VII
+    SCALE_FFT, &PageFFT::self, IsActive_Scale, Choice::Changed, Choice::AfterDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -40,7 +40,7 @@ DEF_CHOICE_3( cSource,                                                          
     "Канал 1",
     "Канал 2",
     "Канал 1 + 2",
-    SOURCE_FFT, &PageFFT::self, IsActive_Source, Choice::Changed, E_VII
+    SOURCE_FFT, &PageFFT::self, IsActive_Source, Choice::Changed, Choice::AfterDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -56,7 +56,7 @@ DEF_CHOICE_4( cWindow,                                                          
     "Хэмминга",
     "Блэкмена",
     "Ханна",
-    WINDOW_FFT, &PageFFT::self, IsActive_Window, Choice::Changed, E_VII
+    WINDOW_FFT, &PageFFT::self, IsActive_Window, Choice::Changed, Choice::AfterDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -71,7 +71,7 @@ DEF_CHOICE_3( cRange,                                                           
     "-40дБ",
     "-60дБ",
     "-80дБ",
-    MAX_DB_FFT, &PageFFT::self, IsActive_Range, Choice::Changed, E_VII
+    MAX_DB_FFT, &PageFFT::self, IsActive_Range, Choice::Changed, Choice::AfterDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

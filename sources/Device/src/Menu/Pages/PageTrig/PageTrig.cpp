@@ -52,7 +52,7 @@ DEF_CHOICE_3( cMode, // -V206                                                   
     "Ждущий",
     "Однократный",
     START_MODE,
-    &PageTrig::self, Item::Active, PageTrig::OnChanged_Mode, E_VII
+    &PageTrig::self, Item::Active, PageTrig::OnChanged_Mode, Choice::AfterDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -68,7 +68,7 @@ DEF_CHOICE_2( cSource, // -V206                                                 
     "Канал 1",
     "Канал 2",
     TRIG_SOURCE,
-    &PageTrig::self, Item::Active, OnChanged_Source, E_VII
+    &PageTrig::self, Item::Active, OnChanged_Source, Choice::AfterDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -86,7 +86,7 @@ DEF_CHOICE_2( cPolarity, //-V206                                                
     "Фронт",
     "Срез",
     TRIG_POLARITY,
-    &PageTrig::self, Item::Active, OnChanged_Polarity, E_VII
+    &PageTrig::self, Item::Active, OnChanged_Polarity, Choice::AfterDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -107,7 +107,7 @@ DEF_CHOICE_3( cFiltr, // -V206                                                  
     "НЧ",
     "ВЧ",
     TRIG_INPUT,
-    &PageTrig::self, Item::Active, OnChanged_Filtr, E_VII
+    &PageTrig::self, Item::Active, OnChanged_Filtr, Choice::AfterDraw
 )
 
 DEF_PAGE_6( pTrig, // -V641 // -V1027                                                                                                                                         //--- СИНХР ---
