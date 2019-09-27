@@ -50,7 +50,9 @@ static void Draw_Screen_Together(int x, int y)
 
 static void Draw_Screen(int x, int y)
 {
-    const pFuncVII funcs[3] =
+    typedef void (*pFuncDraw)(int, int);
+
+    const pFuncDraw funcs[3] =
     {
         Draw_Screen_Disable,
         Draw_Screen_Separate,
@@ -89,7 +91,9 @@ static void Draw_Type_Mul(int x, int y)
 
 static void Draw_Type(int x, int y)
 {
-    const pFuncVII funcs[2] = { Draw_Type_Sum, Draw_Type_Mul };
+    typedef void (*pFuncDraw)(int, int);
+
+    const pFuncDraw funcs[2] = { Draw_Type_Sum, Draw_Type_Mul };
     funcs[MATH_FUNC](x, y);
 }
 
@@ -124,7 +128,9 @@ static void Draw_ModeArrows_RShift(int x, int y)
 
 static void Draw_ModeArrows(int x, int y)
 {
-    static const pFuncVII funcs[2] = { Draw_ModeArrows_Range, Draw_ModeArrows_RShift };
+    typedef void (*pFuncDraw)(int, int);
+
+    static const pFuncDraw funcs[2] = { Draw_ModeArrows_Range, Draw_ModeArrows_RShift };
     funcs[MATH_MODE_REG_SET](x, y);
 }
 

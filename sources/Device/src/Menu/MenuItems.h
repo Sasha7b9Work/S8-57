@@ -6,7 +6,9 @@
 
 class Page;
 
-typedef void (*pFuncVII)(int, int);
+typedef void (*pFuncDrawUGO)(int, int);
+typedef void (*pFuncDraw)(int, int);
+typedef void (*pFuncAfterDraw)(int, int);
 typedef bool (*pFuncActive)();
 
 
@@ -191,14 +193,14 @@ public:
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// GraphButton ///
 struct StructHelpDrawButton
 {
-    pFuncVII    funcDrawUGO;    ///< Указатель на функцию отрисовки изображения варианта кнопки
-    pString     helpUGO;        ///< Подпись к данному изображению.
+    pFuncDrawUGO    funcDrawUGO;    ///< Указатель на функцию отрисовки изображения варианта кнопки
+    pString         helpUGO;        ///< Подпись к данному изображению.
 };
 
 struct DataGraphButton
 {
     pFuncVV                     handlerPress;   ///< Эта функция вызвается для обработки нажатия кнопки.
-    pFuncVII                    funcDraw;       ///< Эта функция вызывается для отрисовки кнопки в месте с координатами x, y.
+    pFuncDraw                   funcDraw;       ///< Эта функция вызывается для отрисовки кнопки в месте с координатами x, y.
     const StructHelpDrawButton *hintUGO;
 };
 
@@ -275,10 +277,10 @@ private:
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// Choice ///
 struct DataChoice
 {
-    int8       *cell;
-    pString    *names;          ///< Варианты выбора.
-    pFuncVB     handlerChange;  ///< Функция должна вызываться после изменения значения элемента.
-    pFuncVII    funcAfterDraw;  ///< Функция вызывается после отрисовки элемента. 
+    int8           *cell;
+    pString        *names;          ///< Варианты выбора.
+    pFuncVB         handlerChange;  ///< Функция должна вызываться после изменения значения элемента.
+    pFuncAfterDraw  funcAfterDraw;  ///< Функция вызывается после отрисовки элемента. 
 };
 
 class Choice : public Item

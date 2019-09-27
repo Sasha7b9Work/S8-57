@@ -52,7 +52,9 @@ void PageMeasuresCursors::PageSet::OnPress_Channel()
 
 void PageMeasuresCursors::PageSet::Draw_Channel(int x, int y)
 {
-    static const pFuncVII func[2] = {Draw_ChannelA, Draw_ChannelB};
+    typedef void (*pFuncDraw)(int, int);
+
+    static const pFuncDraw func[2] = {Draw_ChannelA, Draw_ChannelB};
     func[CURS_SOURCE](x, y);
 }
 
