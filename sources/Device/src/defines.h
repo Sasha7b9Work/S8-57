@@ -55,7 +55,6 @@ typedef unsigned int   uint32_t;
 
 typedef void (*pFuncVV)();
 typedef void (*pFuncVB)(bool);
-typedef bool (*pFuncBV)();
 
 
 #ifndef _WIN32

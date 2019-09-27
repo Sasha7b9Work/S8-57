@@ -18,7 +18,7 @@ struct PageHelpContent
     uint8              notUsed[3];
     void              *parent;              ///< Адрес родительской страницы
     /// \todo избавиться от этого рудимента
-    pFuncBV            funcNotUsed;         ///< Оставлено для соместимости с типом Page - нужно для отрисовки.
+    //pFuncBV            funcNotUsed;         ///< Оставлено для соместимости с типом Page - нужно для отрисовки.
     const char * const titleHint[2];        ///< \brief Название страницы на русском и английском языке, а затем содержимое на русском и английском 
                                             /// (для случая TypePage_Description)
     void              *pages[MAX_PAGES];    ///< Массив содержит адреса ссылаемых страниц в случае TypePage_Content
@@ -37,7 +37,7 @@ extern const PageHelpContent helpMenu;
 static const PageHelpContent helpMenuCommon =
 {
     TypePage_Description, {},
-    (void *)&helpMenu, 0,
+    (void *)&helpMenu,
     {
         "Общее описание принципов меню",
         "Кнопки на панели управления имеют два типа нажатия - короткое, длительностью менее 0.5 сек и длинное, длительностьи более 0.5 сек. "
@@ -62,7 +62,7 @@ static const PageHelpContent helpMenuCommon =
 static const PageHelpContent helpMenuControls =
 {
     TypePage_Description, {},
-    (void *)&helpMenu, 0,
+    (void *)&helpMenu,
     {
         "Описание органов управлениея",
         ""
@@ -75,7 +75,7 @@ extern const PageHelpContent helpMain;
 static const PageHelpContent helpSCPI =
 {
     TypePage_Description, {},
-    (void *)&helpMain, 0,
+    (void *)&helpMain,
     {
         "Работа с SCPI",
         ""
@@ -86,7 +86,7 @@ static const PageHelpContent helpSCPI =
 const PageHelpContent helpMenu =
 {
     TypePage_Content, {},
-    (void *)&helpMain, 0,
+    (void *)&helpMain,
     {
         "Работа с меню",
         "Working with menus"
@@ -100,7 +100,7 @@ const PageHelpContent helpMenu =
 const PageHelpContent helpMain =
 {
     TypePage_Content, {},
-    0, 0,
+    0,
     {
         "ПОМОЩЬ",
         "HELP"

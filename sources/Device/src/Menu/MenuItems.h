@@ -7,6 +7,7 @@
 class Page;
 
 typedef void (*pFuncVII)(int, int);
+typedef bool (*pFuncActive)();
 
 
 struct DataItem
@@ -15,7 +16,7 @@ struct DataItem
     const char         *title;      ///< Заголовок итема
     const char         *hint;       ///< Подсказка для режима помощи
     const Page * const *keeper;     ///< Адрес страницы, которой принадлежит. Для Page_Main = 0
-    pFuncBV             funcActive; ///< Указатель на функцию, которая определяет, активен ли данный итем
+    pFuncActive         funcActive; ///< Указатель на функцию, которая определяет, активен ли данный итем
     const void         *ad;         ///< Указатель на структуру с данными, специфическими для каждого подкласса Item
 };
 
