@@ -258,7 +258,6 @@ public:
     Multimeter::Settings::RangeResistance::E  multi_rangeResist;
 
     // Настройки регистратора
-    Recorder::Settings::ViewAlways::E  rec_viewAlways;       ///< Показывать ли всегда данные регистратора
     bool                               rec_sourceChanA;      ///< Включение записи канала 1
     bool                               rec_sourceChanB;      ///< Включение записи канала 2
     bool                               rec_sourceSensor;     ///< Включение записи показаний датчика

@@ -11,7 +11,7 @@ DEF_CHOICE_3( cSource,
     "Источник",
     "Откуда брать данные для просмотра",
     "ОЗУ",
-    "ПЗУ",
+    "Внутр ЗУ",
     "Внешн ЗУ",
     REC_STORAGE_PLAY, &PageRecorder::PageShow::self, E_BtV, E_VB, E_VII
 )
@@ -79,13 +79,13 @@ static bool OnArrows_PageShow(const KeyEvent &event)
     return false;
 }
 
-DEF_PAGE_4( pShow, // -V641 // -V1027                                                                                                              //--- ФУНКЦИЯ - РЕГИСТРАТОР - ПРОСМОТР ---
+DEF_PAGE_1( pShow, // -V641 // -V1027                                                                                                              //--- ФУНКЦИЯ - РЕГИСТРАТОР - ПРОСМОТР ---
     "ПРОСМОТР",
     "Просмотр записанных данных",
     &cSource,                                       ///< ФУНКЦИЯ - РЕГИСТРАТОР - ПРОСМОТР - Источник
-    &bNext,                                         ///< ФУНКЦИЯ - РЕГИСТРАТОР - ПРОСМОТР - Следующий
-    &bPrev,                                         ///< ФУНКЦИЯ - РЕГИСТРАТОР - ПРОСМОТР - Предыдущий
-    &cCursor,                                       ///< ФУНКЦИЯ - РЕГИСТРАТОР - ПРОСМОТР - Курсор
+    //&bNext,                                         ///< ФУНКЦИЯ - РЕГИСТРАТОР - ПРОСМОТР - Следующий
+    //&bPrev,                                         ///< ФУНКЦИЯ - РЕГИСТРАТОР - ПРОСМОТР - Предыдущий
+    //&cCursor,                                       ///< ФУНКЦИЯ - РЕГИСТРАТОР - ПРОСМОТР - Курсор
     //PageRecorder::PageShow::PageOperations::self,  ///< ФУНКЦИЯ - РЕГИСТРАТОР - ПРОСМОТР - ОПЕРАЦИИ
     //PageRecorder::PageShow::PageView::self,        ///< ФУНКЦИЯ - РЕГИСТРАТОР - ПРОСМТОР - ПРОСМОТР
     PageName::Function_Recorder_Show, &PageRecorder::self, IsActive_PageShow, E_VB, E_VV, OnArrows_PageShow

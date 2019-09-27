@@ -25,24 +25,13 @@ namespace Recorder
 {
     namespace Settings
     {
-        /// Показывать ли всегда результаты измерений
-        struct ViewAlways
-        {
-            enum E
-            {
-                InMode,
-                InAlways
-            } value;
-            explicit ViewAlways(E v) : value(v) {};
-        };
-
         /// Где хранятся данные
         struct TypeStorage
         {
             enum E
             {
                 RAM,    ///< ОЗУ
-                ROM,    ///< ПЗУ
+                ROM,    ///< Внутр ЗУ
                 EXT     ///< Внешн ЗУ
             } value;
             explicit TypeStorage(E v) : value(v) {};

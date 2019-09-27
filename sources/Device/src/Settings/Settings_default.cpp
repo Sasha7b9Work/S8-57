@@ -221,7 +221,6 @@ const Settings Settings::defaultSettings =
     
     // Настройки регистратора
 
-    ViewAlways::InMode,                 // rec_viewAlways
     true,                               // rec_sourceChanA
     true,                               // rec_sourceChanB
     false,                              // rec_sourceSensor

@@ -20,7 +20,7 @@ DEF_CHOICE_3( cDestination,                                                     
     "Сохранять в",
     "Куда сохранять данные",
     "ОЗУ",
-    "ПЗУ",
+    "Внутр ЗУ",
     "Внешн ЗУ",
     REC_STORAGE_RECORD, &PageRecorder::self, IsActive_Destination, E_VB, E_VII
 )
