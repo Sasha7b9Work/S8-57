@@ -57,7 +57,6 @@ typedef void (*pFuncVV)();
 typedef void (*pFuncVB)(bool);
 typedef bool (*pFuncBV)();
 typedef void (*pFuncVI)(int);
-typedef void (*pFuncVII)(int, int);
 
 
 #ifndef _WIN32

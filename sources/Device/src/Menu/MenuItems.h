@@ -6,6 +6,8 @@
 
 class Page;
 
+typedef void (*pFuncVII)(int, int);
+
 
 struct DataItem
 {
