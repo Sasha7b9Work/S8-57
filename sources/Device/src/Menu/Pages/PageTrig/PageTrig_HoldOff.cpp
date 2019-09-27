@@ -19,7 +19,7 @@ DEF_CHOICE_2( cHoldOff,                                                         
     DISABLE_RU,
     ENABLE_RU,
     TRIG_HOLDOFF_ENABLED,
-    &PageTrig::PageHoldOff::self, E_BtV, OnChanged_HoldOff, E_VII
+    &PageTrig::PageHoldOff::self, Item::EmptyActive, OnChanged_HoldOff, E_VII
 )
 
 
@@ -33,7 +33,7 @@ DEF_GOVERNOR( gDuration,                                                        
     "Длительность",
     "Задаёт длительность промежутка между импульсами синхронизации",
     TRIG_HOLDOFF, 10, 32000,
-    &PageTrig::PageHoldOff::self, E_BtV, OnChanged_Duration
+    &PageTrig::PageHoldOff::self, Item::EmptyActive, OnChanged_Duration
 )
 
 /// \todo gDuration должен обеспечивать возможность хранения большего значения, чем 32000
@@ -46,7 +46,7 @@ DEF_PAGE_2( pHoldOff, // -V641 // -V1027                                        
     &cHoldOff,          ///< СИНХР - УДЕРЖАНИЕ - Удержание
     &gDuration,         ///< СИНХР - УДЕРЖАНИЕ - Длительность
     PageName::Trig_HoldOff,
-    &PageTrig::self, E_BtV, E_VB, E_VV, E_BfKE
+    &PageTrig::self, Item::EmptyActive, E_VB, Page::EmptyBeforeDraw, E_BfKE
 )
 
 const Page * const PageTrig::PageHoldOff::self = (const Page *)&pHoldOff;

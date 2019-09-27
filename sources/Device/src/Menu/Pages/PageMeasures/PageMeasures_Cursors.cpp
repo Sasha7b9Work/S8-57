@@ -17,7 +17,7 @@ DEF_CHOICE_2( cShow,                                                            
     "Включает/отключает курсоры.",
     "Нет",
     "Да",
-    CURS_SHOW, &PageMeasuresCursors::self, E_BtV, E_VB, E_VII
+    CURS_SHOW, &PageMeasuresCursors::self, Item::EmptyActive, E_VB, E_VII
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -80,7 +80,7 @@ DEF_PAGE_3( pCursors, // -V641 // -V1027                                        
 //    &cLookModeChanB,                                ///< ИЗМЕРЕНИЯ - КУРСОРЫ - Слежение канал 2
     &cShowFreq,                                     ///< ИЗМЕРЕНИЯ - КУРОСРЫ - 1/dT
     PageMeasuresCursors::PageSet::self,    ///< ИЗМЕРЕНИЯ - КУРСОРЫ - УСТАНОВИТЬ
-    PageName::Measures_Cursors, &PageMeasures::self, E_BtV, E_VB, E_VV, E_BfKE
+    PageName::Measures_Cursors, &PageMeasures::self, Item::EmptyActive, E_VB, Page::EmptyBeforeDraw, E_BfKE
 )
 
 const Page * const PageMeasuresCursors::self = (const Page *)&pCursors;

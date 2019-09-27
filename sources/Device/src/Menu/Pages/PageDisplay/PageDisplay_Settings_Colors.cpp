@@ -12,7 +12,7 @@ static void OnPress_ResetColors()
 DEF_BUTTON( bReset,                                                                                                                          //--- ДИСПЛЕЙ - НАСТРОЙКИ - ЦВЕТА - Сбросить ---
     "Сбросить",
     "Сброс всех цветов на значения по умолчанию",
-    &PageDisplay::PageSettings::PageColors::self, E_BtV, OnPress_ResetColors
+    &PageDisplay::PageSettings::PageColors::self, Item::EmptyActive, OnPress_ResetColors
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -50,7 +50,7 @@ DEF_PAGE_4( pColors, // -V641 // -V1027                                         
     &gcChannelA,          ///< ДИСПЛЕЙ - НАСТРОЙКИ - ЦВЕТА - Канал 1
     &gcChannelB,          ///< ДИСПЛЕЙ - НАСТРОЙКИ - ЦВЕТА - Канал 2
     &gcGrid,              ///< ДИСПЛЕЙ - НАСТРОЙКИ - ЦВЕТА - Сетка
-    PageName::Display_Settings_Colors, &PageDisplay::PageSettings::self, E_BtV, E_VB, E_VV, E_BfKE
+    PageName::Display_Settings_Colors, &PageDisplay::PageSettings::self, Item::EmptyActive, E_VB, Page::EmptyBeforeDraw, E_BfKE
 )
 
 const Page * const PageDisplay::PageSettings::PageColors::self = (const Page *)&pColors;

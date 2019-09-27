@@ -13,7 +13,7 @@ static void OnChanged_Brightness()
 DEF_GOVERNOR( gBrightness,                                                                                                                            //--- ДИСПЛЕЙ - НАСТРОЙКИ - Яркость ---
     "Яркость",
     "Установка яркости свечения дисплея",
-    BRIGHTNESS_DISPLAY, 0, 100, &PageDisplay::PageSettings::self, E_BtV, OnChanged_Brightness
+    BRIGHTNESS_DISPLAY, 0, 100, &PageDisplay::PageSettings::self, Item::EmptyActive, OnChanged_Brightness
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -31,7 +31,7 @@ DEF_CHOICE_6( cAutoHide,                                                        
     "Через 15 сек",
     "Через 30 сек",
     "Через 60 сек",
-    MENU_AUTO_HIDE, &PageDisplay::PageSettings::self, E_BtV, OnChanged_AutoHide, E_VII
+    MENU_AUTO_HIDE, &PageDisplay::PageSettings::self, Item::EmptyActive, OnChanged_AutoHide, E_VII
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -41,7 +41,7 @@ DEF_PAGE_3( pSettings, // -V641 // -V1027                                       
     PageDisplay::PageSettings::PageColors::self,        ///< ДИСПЛЕЙ - НАСТРОЙКИ - ЦВЕТА
     &gBrightness,                                       ///< ДИСПЛЕЙ - НАСТРОЙКИ - Яркость
     &cAutoHide,                                         ///< ДИСПЛЕЙ - НАСТРОЙКИ - Скрывать
-    PageName::Display_Settings, &PageDisplay::self, E_BtV, E_VB, E_VV, E_BfKE
+    PageName::Display_Settings, &PageDisplay::self, Item::EmptyActive, E_VB, Page::EmptyBeforeDraw, E_BfKE
 )
 
 const Page * const PageDisplay::PageSettings::self = (const Page *)&pSettings;

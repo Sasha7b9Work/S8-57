@@ -26,7 +26,7 @@ DEF_CHOICE_10( cSmoothing,                                                      
     "8 точек",
     "9 точек",
     "10 точек",
-    ENUM_SMOOTHING.value, &PageDisplay::self, E_BtV, E_VB, E_VII
+    ENUM_SMOOTHING.value, &PageDisplay::self, Item::EmptyActive, E_VB, E_VII
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -38,7 +38,7 @@ DEF_CHOICE_5( cRefreshFPS,                                                      
     "5",
     "2",
     "1",
-    ENUM_SIGNALS_IN_SEC.value, &PageDisplay::self, E_BtV, E_VB, E_VII
+    ENUM_SIGNALS_IN_SEC.value, &PageDisplay::self, Item::EmptyActive, E_VB, E_VII
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -48,7 +48,7 @@ DEF_CHOICE_2( cScaleYtype,                                                      
     "смещения на экране.",
     "Напряжение",
     "Деления",
-    LINKING_RSHIFT, &PageDisplay::self, E_BtV, E_VB, E_VII
+    LINKING_RSHIFT, &PageDisplay::self, Item::EmptyActive, E_VB, E_VII
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -59,7 +59,7 @@ DEF_CHOICE_4( cType, // -V206                                                   
     "Тип 2",
     "Тип 3",
     "Тип 4",
-    TYPE_GRID, &PageDisplay::self, E_BtV, E_VB, E_VII
+    TYPE_GRID, &PageDisplay::self, Item::EmptyActive, E_VB, E_VII
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -80,7 +80,7 @@ DEF_CHOICE_9( cAverage_Num,                                                     
     "64",
     "128",
     "256",
-    ENUM_AVE, &PageDisplay::self, E_BtV, OnChange_AverageNum, E_VII
+    ENUM_AVE, &PageDisplay::self, Item::EmptyActive, OnChange_AverageNum, E_VII
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -89,7 +89,7 @@ DEF_CHOICE_2( cViewMode,                                                        
     "Задаёт режим отображения сигнала",
     "Вектор",
     "Точки",
-    MODE_DRAW_SIGNAL, &PageDisplay::self, E_BtV, E_VB, E_VII
+    MODE_DRAW_SIGNAL, &PageDisplay::self, Item::EmptyActive, E_VB, E_VII
 )
 
 
@@ -97,7 +97,7 @@ DEF_CHOICE_2( cViewMode,                                                        
 //    "ОТОБРАЖ",
 //    "Настройки отображения сигналов",
 //    &cViewMode,
-//    PageName::Display_View, &PageDisplay::self, E_BtV, E_VB, E_VV, E_BfKE
+//    PageName::Display_View, &PageDisplay::self, Item::EmptyActive, E_VB, E_VV, E_BfKE
 //)
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -115,7 +115,7 @@ DEF_PAGE_8( pDisplay, // -V641 // -V1027                                        
     &cScaleYtype,                           ///< ДИСПЛЕЙ - Смещение
     PageDisplay::PageSettings::self,     ///< ДИСПЛЕЙ - НАСТРОЙКИ
 //    &cThickness,                            ///< ДИСПЛЕЙ - Толщина
-    PageName::Display, nullptr, E_BtV, E_VB, E_VV, E_BfKE
+    PageName::Display, nullptr, Item::EmptyActive, E_VB, Page::EmptyBeforeDraw, E_BfKE
 )
 
 const Page * const PageDisplay::self = (const Page *)&pDisplay;

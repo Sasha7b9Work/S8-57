@@ -63,9 +63,8 @@ typedef void (*pFuncVpI8I8I8)(int8 *, int8, int8);
 typedef bool (*pFuncBI)(int);
 typedef void (*pFuncVU8)(uint8);
 
-inline void E_VV(){}
+inline void EmptyVV(){}
 inline void E_VB(bool){}
-inline bool E_BtV() { return true; }
 inline bool E_BfV() { return false; }
 inline void E_VI(int) {}
 inline void E_VII(int, int) {}

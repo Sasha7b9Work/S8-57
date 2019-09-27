@@ -38,7 +38,7 @@ DataItem Item::emptyData =
     "",
     "",
     nullptr,
-    E_BtV
+    Item::EmptyActive
 };
 
 Item Item::empty;

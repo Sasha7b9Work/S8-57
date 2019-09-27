@@ -117,7 +117,7 @@ DEF_CHOICE_16( gGateMax,                                                        
     "130",
     "140",
     "150",
-    set.dbg_enum_gate_max, &PageDebug::PageRand::self, E_BtV, E_VB, E_VII
+    set.dbg_enum_gate_max, &PageDebug::PageRand::self, Item::EmptyActive, E_VB, E_VII
 )
 
 
@@ -141,7 +141,7 @@ DEF_CHOICE_16( gGateMin,                                                        
     "130",
     "140",
     "150",
-    set.dbg_enum_gate_min, &PageDebug::PageRand::self, E_BtV, E_VB, E_VII
+    set.dbg_enum_gate_min, &PageDebug::PageRand::self, Item::EmptyActive, E_VB, E_VII
 )
 
 
@@ -160,5 +160,5 @@ DEF_PAGE_2( pRand, // -V641 // -V1027                                           
     //&gRand_TimeCompensation,    ///< ÎÒËÀÄÊÀ - ÐÀÍÄ-ÒÎÐ - Êîìïåíñàöèÿ çàäåðæêè
     //&gRand_AddTimeShift,        ///< ÎÒËÀÄÊÀ - ÐÀÍÄ-ÒÎÐ - Ñìåùåíèå
     //&gRand_Pretriggered,        ///< ÎÒËÀÄÊÀ - ÐAÍÄ-ÒÎÐ - Ïðåäçàïóñê
-    PageName::Debug_Rand, &PageDebug::self, E_BtV, E_VB, E_VV, E_BfKE
+    PageName::Debug_Rand, &PageDebug::self, Item::EmptyActive, E_VB, Page::EmptyBeforeDraw, E_BfKE
 )

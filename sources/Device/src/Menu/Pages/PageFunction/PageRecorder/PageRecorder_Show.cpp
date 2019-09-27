@@ -13,7 +13,7 @@ DEF_CHOICE_3( cSource,
     "Œ«”",
     "¬ÌÛÚ «”",
     "¬ÌÂ¯Ì «”",
-    REC_STORAGE_PLAY, &PageRecorder::PageShow::self, E_BtV, E_VB, E_VII
+    REC_STORAGE_PLAY, &PageRecorder::PageShow::self, Item::EmptyActive, E_VB, E_VII
 )
 
 
@@ -23,7 +23,7 @@ DEF_CHOICE_2( cCursor,
     "",
     "1",
     "2",
-    Recorder::Settings::currentCursor, &PageRecorder::PageShow::self, E_BtV, E_VB, E_VII
+    Recorder::Settings::currentCursor, &PageRecorder::PageShow::self, Item::EmptyActive, E_VB, E_VII
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -35,7 +35,7 @@ static void OnPress_Next()
 DEF_BUTTON( bNext,                                                                                                                     //--- ‘”Õ ÷»ﬂ - –≈√»—“–¿“Œ– - œ–Œ—ÃŒ“– - —ÎÂ‰Û˛˘ËÈ ---
     "¬ÎÂ‚Ó",
     "",
-    &PageRecorder::PageShow::self, E_BtV, OnPress_Next
+    &PageRecorder::PageShow::self, Item::EmptyActive, OnPress_Next
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -47,7 +47,7 @@ static void OnPress_Prev()
 DEF_BUTTON( bPrev,                                                                                                                    //--- ‘”Õ ÷»ﬂ - –≈√»—“–¿“Œ– - œ–Œ—ÃŒ“– - œÂ‰˚‰Û˘ËÈ ---
     "¬Ô‡‚Ó",
     "",
-    &PageRecorder::PageShow::self, E_BtV, OnPress_Prev
+    &PageRecorder::PageShow::self, Item::EmptyActive, OnPress_Prev
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -88,7 +88,7 @@ DEF_PAGE_1( pShow, // -V641 // -V1027                                           
     //&cCursor,                                       ///< ‘”Õ ÷»ﬂ - –≈√»—“–¿“Œ– - œ–Œ—ÃŒ“– -  ÛÒÓ
     //PageRecorder::PageShow::PageOperations::self,  ///< ‘”Õ ÷»ﬂ - –≈√»—“–¿“Œ– - œ–Œ—ÃŒ“– - Œœ≈–¿÷»»
     //PageRecorder::PageShow::PageView::self,        ///< ‘”Õ ÷»ﬂ - –≈√»—“–¿“Œ– - œ–Œ—Ã“Œ– - œ–Œ—ÃŒ“–
-    PageName::Function_Recorder_Show, &PageRecorder::self, IsActive_PageShow, E_VB, E_VV, OnArrows_PageShow
+    PageName::Function_Recorder_Show, &PageRecorder::self, IsActive_PageShow, E_VB, Page::EmptyBeforeDraw, OnArrows_PageShow
 )
 
 const Page * const PageRecorder::PageShow::self = (const Page *)&pShow;

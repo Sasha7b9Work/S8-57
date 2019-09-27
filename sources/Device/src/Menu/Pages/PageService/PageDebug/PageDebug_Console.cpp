@@ -13,7 +13,7 @@ DEF_CHOICE_2( cShow,                                                            
     "",
     "Нет",
     "Да",
-    set.dbg_showConsole, &PageDebug::PageConsole::self, E_BtV, E_VB, E_VII
+    set.dbg_showConsole, &PageDebug::PageConsole::self, Item::EmptyActive, E_VB, E_VII
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -47,7 +47,7 @@ DEF_CHOICE_2( cShowAll,                                                         
     "Показывать все значения, засылаемые в регистры",
     "Нет",
     "Да",
-    DBG_SHOW_ALL, &PageDebug::PageRegisters::self, E_BtV, E_VB, E_VII
+    DBG_SHOW_ALL, &PageDebug::PageRegisters::self, Item::EmptyActive, E_VB, E_VII
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -170,7 +170,7 @@ DEF_PAGE_12( pRegisters, // -V641                                               
     &cChanParamB,     ///< ОТЛАДКА - КОНСОЛЬ - РЕГИСТРЫ - Парам. кан. 2
     &cTBase,          ///< ОТЛАДКА - КОНСОЛЬ - РЕГИСТРЫ - ВРЕМЯ/ДЕЛ
     &cTShift,         ///< ОТЛАДКА - КОНСОЛЬ - РЕГИСТРЫ - Т см.
-    PageName::Debug_Console_Registers, &PageDebug::PageConsole::self, E_BtV, E_VB, E_VV, E_BfKE
+    PageName::Debug_Console_Registers, &PageDebug::PageConsole::self, Item::EmptyActive, E_VB, Page::EmptyBeforeDraw, E_BfKE
 )
 
 const Page * const PageDebug::PageRegisters::self = (const Page *)&pRegisters;
@@ -197,7 +197,7 @@ DEF_PAGE_2( pConsole, // -V641 // -V1027                                        
 //    &cModeStop,         ///< ОТЛАДКА - КОНСОЛЬ - Реж. останова
 //    &pageRegisters,     ///< ОТЛАДКА - КОНСОЛЬ - РЕГИСТРЫ
 //    &bSizeSettings,     ///< ОТЛАДКА - КОНСОЛЬ - Размер настроек
-    PageName::Debug_Console, &PageDebug::self, E_BtV, E_VB, E_VV, E_BfKE
+    PageName::Debug_Console, &PageDebug::self, Item::EmptyActive, E_VB, Page::EmptyBeforeDraw, E_BfKE
 )
 
 const Page * const PageDebug::PageConsole::self = (const Page *)&pConsole;

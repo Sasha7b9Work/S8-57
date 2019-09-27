@@ -37,7 +37,7 @@ static void Draw_Next(int x, int y)
 DEF_GRAPH_BUTTON( bNext,                                                                                                                             //--- ѕјћя“№ - ѕќ—Ћ≈ƒЌ»≈ - —ледующий ---
     "—ледующий",
     "ѕерейти к следующему сигналу",
-    &PageRAM::self, E_BtV, OnPress_Next, Draw_Next
+    &PageRAM::self, Item::EmptyActive, OnPress_Next, Draw_Next
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -56,7 +56,7 @@ static void Draw_Prev(int x, int y)
 DEF_GRAPH_BUTTON( bPrev,                                                                                                                            //--- ѕјћя“№ - ѕќ—Ћ≈ƒЌ»≈ - ѕредыдущий ---
     "ѕредыдущий",
     "ѕерейти к предыдущему сигналу",
-    &PageRAM::self, E_BtV, OnPress_Prev, Draw_Prev
+    &PageRAM::self, Item::EmptyActive, OnPress_Prev, Draw_Prev
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -118,5 +118,5 @@ DEF_PAGE_2( pageRAM, // -V641 // -V1027                                         
     &bPrev,                        ///< ѕјћя“№ - ѕќ—Ћ≈ƒЌ»≈ - ѕредыдущий
     &bNext,                        ///< ѕјћя“№ - ѕќ—Ћ≈ƒЌ»≈ - —ледующий
     PageName::Memory_Last,
-    &PageMemory::self, E_BtV, OnOpenClose_RAM, AfterDraw_RAM, OnArrows_RAM
+    &PageMemory::self, Item::EmptyActive, OnOpenClose_RAM, AfterDraw_RAM, OnArrows_RAM
 )

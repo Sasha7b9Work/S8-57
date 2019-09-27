@@ -65,7 +65,7 @@ DEF_CHOICE_2( cRangesCurrentDC,
     "Диапазон измерения",
     "20мА",
     "2А",
-    MULTI_RANGE_CURRENT_DC, &PageMultimeter::self, E_BtV, OnChange_CurrentDC, E_VII
+    MULTI_RANGE_CURRENT_DC, &PageMultimeter::self, Item::EmptyActive, OnChange_CurrentDC, E_VII
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -82,7 +82,7 @@ DEF_CHOICE_2( cRangesCurrentAC,
     "Диапазон измерения",
     "20мА",
     "2А",
-    MULTI_RANGE_CURRENT_AC, &PageMultimeter::self, E_BtV, OnChange_CurrentAC, E_VII
+    MULTI_RANGE_CURRENT_AC, &PageMultimeter::self, Item::EmptyActive, OnChange_CurrentAC, E_VII
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -128,7 +128,7 @@ DEF_CHOICE_7( cMode,
     "R",
     "VD",
     "Прозвонка",
-    MULTI_MEASURE, &PageMultimeter::self, E_BtV, PageMultimeter::OnChanged_Mode, E_VII
+    MULTI_MEASURE, &PageMultimeter::self, Item::EmptyActive, PageMultimeter::OnChanged_Mode, E_VII
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -142,7 +142,7 @@ DEF_CHOICE_2 ( cAVP,
     "Автовыбор предела",
     DISABLE_RU,
     ENABLE_RU,
-    MULTI_AVP, &PageMultimeter::self, E_BtV, OnChanged_AVP, E_VII
+    MULTI_AVP, &PageMultimeter::self, Item::EmptyActive, OnChanged_AVP, E_VII
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -158,7 +158,7 @@ DEF_CHOICE_2( cZero,
     "",
     DISABLE_RU,
     ENABLE_RU,
-    zero, &PageMultimeter::self, E_BtV, OnChanged_Zero, E_VII
+    zero, &PageMultimeter::self, Item::EmptyActive, OnChanged_Zero, E_VII
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -218,7 +218,7 @@ DEF_PAGE_5_VAR( pMultimeter, // -V641 //-V1027 //-V641
     &cAVP,
     &cZero,
     &Item::empty,
-    PageName::Function_Multimeter, &PageFunction::self, E_BtV, OnOpenClose_Multimeter, E_VV, E_BfKE
+    PageName::Function_Multimeter, &PageFunction::self, Item::EmptyActive, OnOpenClose_Multimeter, Page::EmptyBeforeDraw, E_BfKE
 )
 
 const Page * const PageMultimeter::self = (const Page *)&pMultimeter;
@@ -232,7 +232,7 @@ static void OnPress_Calibrate0()
 DEF_BUTTON( bCalibrate0,
     "Калибр 0",
     "",
-    &PageMultimeter::PageCalibration::self, E_BtV, OnPress_Calibrate0
+    &PageMultimeter::PageCalibration::self, Item::EmptyActive, OnPress_Calibrate0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -244,7 +244,7 @@ static void OnPress_Calibrate1()
 DEF_BUTTON( bCalibrate1,
     "Калибр 1",
     "",
-    &PageMultimeter::PageCalibration::self, E_BtV, OnPress_Calibrate1
+    &PageMultimeter::PageCalibration::self, Item::EmptyActive, OnPress_Calibrate1
 )
 
 DEF_PAGE_2( pCalibration, //-V641 //-V1027
@@ -252,7 +252,7 @@ DEF_PAGE_2( pCalibration, //-V641 //-V1027
     "Калибровка мультиметра",
     &bCalibrate0,
     &bCalibrate1,
-    PageName::Function_Multimeter_Cal, &PageMultimeter::self, E_BtV, E_VB, E_VV, E_BfKE
+    PageName::Function_Multimeter_Cal, &PageMultimeter::self, Item::EmptyActive, E_VB, Page::EmptyBeforeDraw, E_BfKE
 )
 
 const Page * const PageMultimeter::PageCalibration::self = (const Page *)&pCalibration;

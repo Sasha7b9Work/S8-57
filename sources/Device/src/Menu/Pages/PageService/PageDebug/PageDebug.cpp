@@ -58,7 +58,7 @@ DEF_CHOICE_3( cBalance_Mode,                                                    
     "Ðåàëüíûé",
     "Ðó÷íîé",
     NRST_BALANCE_ADC_TYPE,
-    &PageDebug::PageADC::PageBalance::self, E_BtV, OnChanged_Balance_Mode, Draw_Balance_Mode
+    &PageDebug::PageADC::PageBalance::self, Item::EmptyActive, OnChanged_Balance_Mode, Draw_Balance_Mode
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -100,7 +100,7 @@ DEF_PAGE_3( pBalance, // -V641 // -V1027                                        
     &gShiftA,           ///< ÎÒËÀÄÊÀ - ÀÖÏ - ÁÀËÀÍÑ - Ñìåùåíèå 1
     &gShiftB,           ///< ÎÒËÀÄÊÀ - ÀÖÏ - ÁÀËÀÍÑ - Ñìåùåíèå 2
     PageName::Debug_ADC_Balance,
-    &PageDebug::PageADC::self, E_BtV, E_VB, E_VV, E_BfKE
+    &PageDebug::PageADC::self, Item::EmptyActive, E_VB, Page::EmptyBeforeDraw, E_BfKE
 )
 
 const Page * const PageDebug::PageADC::PageBalance::self = (const Page *)&pBalance;
@@ -130,7 +130,7 @@ DEF_CHOICE_3( cStretch_Mode,                                                    
     "Ðåàëüíûé",
     "Ðó÷íîé",
     NRST_STRETCH_ADC_TYPE,
-    &PageDebug::PageADC::PageStretch::self, E_BtV, PageDebug::PageADC::PageStretch::OnChanged_Mode, E_VII
+    &PageDebug::PageADC::PageStretch::self, Item::EmptyActive, PageDebug::PageADC::PageStretch::OnChanged_Mode, E_VII
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -240,7 +240,7 @@ DEF_PAGE_3( pStretch, // -V641 // -V1027                                        
     &gStretch_A,         ///< ÎÒËÀÄÊÀ - ÀÖÏ - ÐÀÑÒßÆÊÀ - Ðàñòÿæêà 1ê
     &gStretch_B,
     PageName::Debug_ADC_Stretch,
-    &PageDebug::PageADC::self, E_BtV, E_VB, E_VV, E_BfKE
+    &PageDebug::PageADC::self, Item::EmptyActive, E_VB, Page::EmptyBeforeDraw, E_BfKE
 )
 
 const Page * const PageDebug::PageADC::PageStretch::self = (const Page *)&pStretch;
@@ -263,7 +263,7 @@ static void OnPress_ADC_Shift_Reset()
 DEF_BUTTON( bShift_Reset,                                                                                                                       //-- ÎÒËÀÄÊÀ - ÀÖÏ - ÄÎÏ ÑÌÅÙ - Ñáðîñ ---
     "Ñáðîñ",
     "",
-    &PageDebug::PageADC::PageShift::self, E_BtV, OnPress_ADC_Shift_Reset
+    &PageDebug::PageADC::PageShift::self, Item::EmptyActive, OnPress_ADC_Shift_Reset
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -336,7 +336,7 @@ DEF_PAGE_7( pShift, // -V641  // -V1027                                         
     &gShift_A10mV,   // ÎÒËÀÄÊÀ - ÀÖÏ - ÄÎÏ ÑÌÅÙ - Ñì 1ê 10ìÂ ïîñò
     &gShift_B10mV,   // ÎÒËÀÄÊÀ - ÀÖÏ - ÄÎÏ ÑÌÅÙ - Ñì 2ê 10ìÂ ïîñò
     PageName::Debug_ADC_Shift,
-    &PageDebug::PageADC::self, E_BtV, E_VB, E_VV, E_BfKE
+    &PageDebug::PageADC::self, Item::EmptyActive, E_VB, Page::EmptyBeforeDraw, E_BfKE
 )
 
 const Page * const PageDebug::PageADC::PageShift::self = (const Page *)&pShift;
@@ -349,7 +349,7 @@ DEF_PAGE_3( pADC, //-V641 //-V1027
     &pStretch,                              // ÎÒËÀÄÊÀ - ÀÖÏ - ÐÀÑÒßÆÊÀ
     PageDebug::PageADC::PageShift::self,    // ÎÒËÀÄÊÀ - ÀÖÏ - ÄÎÏ ÑÌÅÙ
     PageName::Debug_ADC,
-    &PageDebug::self, E_BtV, E_VB, E_VV, E_BfKE
+    &PageDebug::self, Item::EmptyActive, E_VB, Page::EmptyBeforeDraw, E_BfKE
 )
 
 const Page * const PageDebug::PageADC::self = (const Page *)&pADC;
@@ -362,7 +362,7 @@ DEF_CHOICE_2( cStats,                                                           
     "Íå ïîêàçûâàòü",
     "Ïîêàçûâàòü",
     SHOW_STAT,
-    &PageDebug::self, E_BtV, E_VB, E_VII
+    &PageDebug::self, Item::EmptyActive, E_VB, E_VII
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -453,7 +453,7 @@ DEF_PAGE_5( pSettings, // -V641 // -V1027                                       
     0,
     0,
     PageName::Debug_Settings,
-    &PageDebug::self, E_BtV, OnOpenClose_Settings, E_VV, E_BfKE
+    &PageDebug::self, Item::EmptyActive, OnOpenClose_Settings, Page::EmptyBeforeDraw, E_BfKE
 )
 
 const Page * const PageDebug::PageSettings::self = (const Page *)&pSettings;
@@ -515,7 +515,7 @@ static void Draw_SerialNumber_Change(int x, int y)
 DEF_GRAPH_BUTTON( bSerialNumber_Change,                                                                                                                    //--- ÎÒËÀÄÊÀ - Ñ/Í - Âñòàâèòü ---
     "Âñòàâèòü",
     "Âñòàâëÿåò âûáðàíûé ñèìâîë",
-    &PageDebug::PageSerialNumber::self, E_BtV, OnPress_SerialNumber_Change, Draw_SerialNumber_Change
+    &PageDebug::PageSerialNumber::self, Item::EmptyActive, OnPress_SerialNumber_Change, Draw_SerialNumber_Change
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -533,7 +533,7 @@ static void Draw_SerialNumber_Save(int x, int y)
 DEF_GRAPH_BUTTON( bSerialNumber_Save,                                                                                                                     //--- ÎÒËÀÄÊÀ - Ñ/Í - Ñîõðàíèòü ---
     "Ñîõðàíèòü",
     "Çàïèñûâàåò ñåðèéíûé íîìåð â OTP",
-    &PageDebug::PageSerialNumber::self, E_BtV, OnPress_SerialNumber_Save, Draw_SerialNumber_Save
+    &PageDebug::PageSerialNumber::self, Item::EmptyActive, OnPress_SerialNumber_Save, Draw_SerialNumber_Save
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -557,7 +557,7 @@ DEF_PAGE_2( pSerialNumber, // -V641 // -V1027                                   
     &bSerialNumber_Change,          // ÎÒËÀÄÊÀ - Ñ/Í - Ïåðåéòè
     &bSerialNumber_Save,            // ÎÒËÀÄÊÀ - Ñ/Í - Ñîõðàíèòü
     PageName::Debug_SerialNumber,
-    &PageDebug::self, E_BtV, OnOpenClose_SerialNumber, E_VV, OnArrows_SerialNumber
+    &PageDebug::self, Item::EmptyActive, OnOpenClose_SerialNumber, Page::EmptyBeforeDraw, OnArrows_SerialNumber
 )
 
 const Page * const PageDebug::PageSerialNumber::self = (const Page *)&pSerialNumber;
@@ -592,7 +592,7 @@ DEF_PAGE_5( pDebug, // -V641 // -V1027                                          
 //    &pSerialNumber,                              ///< ÎÒËÀÄÊÀ - Ñ/Í
 //    &bEraseData,                                  ///< ÎÒËÀÄÊÀ - Ñòåðåòü äàííûå
     PageName::Debug,
-    &PageService::self, E_BtV, E_VB, E_VV, E_BfKE
+    &PageService::self, Item::EmptyActive, E_VB, Page::EmptyBeforeDraw, E_BfKE
 )
 
 const Page * const PageDebug::self = (const Page *)&pDebug;

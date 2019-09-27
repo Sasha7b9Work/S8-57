@@ -12,7 +12,7 @@ DEF_CHOICE_2( cIsShow,                                                          
     "Выводить или не выводить измерения на экран",
     "Нет",
     "Да",
-    SHOW_MEASURES, &PageMeasuresAuto::self, E_BtV, E_VB, E_VII
+    SHOW_MEASURES, &PageMeasuresAuto::self, Item::EmptyActive, E_VB, E_VII
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -62,7 +62,7 @@ DEF_PAGE_4( pAuto, // -V641 // -V1027                                           
     &cChannels,                                 ///< ИЗМЕРЕНИЯ - АВТОМАТ - Каналы
     PageMeasuresAuto::PageTune::self,  ///< ИЗМЕРЕНИЯ - АВТОМАТ - НАСТРОИТЬ
     //&cMode,                                   ///< ИЗМЕРЕНИЯ - АВТОМАТ - Вид
-    PageName::Measures_Auto, &PageMeasures::self, E_BtV, E_VB, E_VV, E_BfKE
+    PageName::Measures_Auto, &PageMeasures::self, Item::EmptyActive, E_VB, Page::EmptyBeforeDraw, E_BfKE
 )
 
 const Page * const PageMeasuresAuto::self = (const Page *)&pAuto;

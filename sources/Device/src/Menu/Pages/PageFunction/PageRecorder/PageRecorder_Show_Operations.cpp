@@ -12,7 +12,7 @@ static void OnPress_Rename()
 DEF_BUTTON( bRename,                                                                                                    //--- ФУНКЦИЯ - РЕГИСТРАТОР - ПРОСМОТР - ОПЕРАЦИИ - Переименовать ---
     "Переименовать",
     "",
-    &PageRecorder::PageShow::PageOperations::self, E_BtV, OnPress_Rename
+    &PageRecorder::PageShow::PageOperations::self, Item::EmptyActive, OnPress_Rename
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -24,7 +24,7 @@ static void OnPress_Copy()
 DEF_BUTTON( bCopy,                                                                                                         //--- ФУНКЦИЯ - РЕГИСТРАТОР - ПРОСМОТР - ОПЕРАЦИИ - Копировать ---
     "Копировать",
     "",
-    &PageRecorder::PageShow::PageOperations::self, E_BtV, OnPress_Copy
+    &PageRecorder::PageShow::PageOperations::self, Item::EmptyActive, OnPress_Copy
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -36,7 +36,7 @@ static void OnPress_Move()
 DEF_BUTTON( bMove,                                                                                                        //--- ФУНКЦИЯ - РЕГИСТРАТОР - ПРОСМОТР - ОПЕРАЦИИ - Переместить ---
     "Переместить",
     "",
-    &PageRecorder::PageShow::PageOperations::self, E_BtV, OnPress_Move
+    &PageRecorder::PageShow::PageOperations::self, Item::EmptyActive, OnPress_Move
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -48,7 +48,7 @@ static void OnPress_Delete()
 DEF_BUTTON( bDelete,                                                                                                          //--- ФУНКЦИЯ - РЕГИСТРАТОР - ПРОСМОТР - ОПЕРАЦИИ - Удалить ---
     "Удалить",
     "",
-    &PageRecorder::PageShow::PageOperations::self, E_BtV, OnPress_Delete
+    &PageRecorder::PageShow::PageOperations::self, Item::EmptyActive, OnPress_Delete
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -59,7 +59,7 @@ DEF_PAGE_4( pOperations, // -V641 // -V1027                                     
     &bCopy,     ///< ФУНКЦИЯ - РЕГИСТРАТОР - ПРОСМОТР - ОПЕРАЦИИ - Копировать
     &bMove,     ///< ФУНКЦИЯ - РЕГИСТРАТОР - ПРОСМОТР - ОПЕРАЦИИ - Переместить
     &bDelete,   ///< ФУНКЦИЯ - РЕГИСТРАТОР - ПРОСМОТР - ОПЕРАЦИИ - Удалить
-    PageName::Function_Recorder_Show_Operations, &PageRecorder::PageShow::self, E_BtV, E_VB, E_VV, E_BfKE
+    PageName::Function_Recorder_Show_Operations, &PageRecorder::PageShow::self, Item::EmptyActive, E_VB, Page::EmptyBeforeDraw, E_BfKE
 )
 
 const Page * const PageRecorder::PageShow::PageOperations::self = (const Page *)&pOperations;

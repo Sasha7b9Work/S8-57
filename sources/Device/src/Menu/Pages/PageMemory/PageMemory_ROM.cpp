@@ -43,7 +43,7 @@ static void Draw_Next(int x, int y)
 DEF_GRAPH_BUTTON( bNext,
     "Следующий",
     "Перейти к следующему сигналу",
-    &PageROM::self, E_BtV, OnPress_Next, Draw_Next
+    &PageROM::self, Item::EmptyActive, OnPress_Next, Draw_Next
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -62,7 +62,7 @@ static void Draw_Prev(int x, int y)
 DEF_GRAPH_BUTTON( bPrev,
     "Предыдущий",
     "Перейти к предыдущему сигналу",
-    &PageROM::self, E_BtV, OnPress_Prev, Draw_Prev
+    &PageROM::self, Item::EmptyActive, OnPress_Prev, Draw_Prev
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -83,7 +83,7 @@ static void Draw_Delete(int x, int y)
 DEF_GRAPH_BUTTON( bDelete,                                                                                                                              //--- ПАМЯТЬ - ВНУТР ЗУ - Удалить ---
     "Удалить",
     "Удаляет выбранный сигнал из внутреннего запоминающего устройства",
-    &PageROM::self, E_BtV, OnPress_Delete, Draw_Delete
+    &PageROM::self, Item::EmptyActive, OnPress_Delete, Draw_Delete
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -117,7 +117,7 @@ static void Draw_SaveToMemory(int x, int y)
 DEF_GRAPH_BUTTON( bSave,                                                                                                                     //--- ПАМЯТЬ - ВНУТР ЗУ - Сохранить в памяти ---
     "Сохранить в памяти",
     "Сохранить сигнал во внутреннем запоминующем устройстве",
-    &PageROM::self, E_BtV, OnPress_SaveToMemory, Draw_SaveToMemory
+    &PageROM::self, Item::EmptyActive, OnPress_SaveToMemory, Draw_SaveToMemory
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -194,5 +194,5 @@ DEF_PAGE_4( pROM, // -V641                                                      
     &bSave,         ///< ПАМЯТЬ - ВНУТР ЗУ - Сохранить
     &bDelete,       ///< ПАМЯТЬ - ВНУТР ЗУ - Удалить
     PageName::Memory_Internal,
-    &PageMemory::self, E_BtV, OnOpenClose_ROM, AfterDraw_ROM, OnArrows_ROM
+    &PageMemory::self, Item::EmptyActive, OnOpenClose_ROM, AfterDraw_ROM, OnArrows_ROM
 )

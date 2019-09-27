@@ -99,6 +99,8 @@ public:
     static Item empty;
 
     static DataItem emptyData;
+
+    static bool EmptyActive() { return true; }
 };
 
 
@@ -162,6 +164,8 @@ public:
     const Item *ItemForFuncKey(Key::E key) const;
     /// Возвращает имя страницы page
     PageName::E GetName() const;
+
+    static void EmptyBeforeDraw() {};
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// Button ///

@@ -15,7 +15,7 @@ DEF_PAGE_5( pFunction,                                                          
     PageMultimeter::self,         ///< ÔÓÍÊÖÈß - ÌÓËÜÒÈÌÅÒÐ
     PageTester::self,             ///< ÔÓÍÊÖÈß - ÒÅÑÒÅÐ
     PageRecorder::self,           ///< ÔÓÍÊÖÈß - ÐÅÃÈÑÒÐÀÒÎÐ
-    PageName::Function, nullptr, E_BtV, E_VB, E_VV, E_BfKE
+    PageName::Function, nullptr, Item::EmptyActive, E_VB, Page::EmptyBeforeDraw, E_BfKE
 )
 
 const Page * const PageFunction::self = (const Page *)&pFunction;

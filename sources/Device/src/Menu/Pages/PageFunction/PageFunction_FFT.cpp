@@ -11,7 +11,7 @@ DEF_CHOICE_2( cView,                                                            
     "Включает и выключает отображение спектра",
     DISABLE_RU,
     ENABLE_RU,
-    FFT_ENABLED, &PageFFT::self, E_BtV, E_VB, E_VII
+    FFT_ENABLED, &PageFFT::self, Item::EmptyActive, E_VB, E_VII
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -88,7 +88,7 @@ static void Draw_Cursors_Source(int x, int y)
 DEF_GRAPH_BUTTON( bCursors_Source,                                                                                                            //--- ФУНКЦИЯ - СПЕКТР - КУРСОРЫ - Источник ---
     "Источник",
     "Выбор источника для расчёта спектра",
-    &PageFFT::PageCursors::self, E_BtV, OnPress_Cursors_Source, Draw_Cursors_Source
+    &PageFFT::PageCursors::self, Item::EmptyActive, OnPress_Cursors_Source, Draw_Cursors_Source
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -118,7 +118,7 @@ DEF_PAGE_1( pCursors, // -V641 // -V1027                                        
     "КУРСОРЫ",
     "Включает курсоры для измерения параметров спектра",
     &bCursors_Source,                       ///< СЕРВИС - СПЕКТР - КУРСОРЫ - Источник
-    PageName::Function_FFT_Cursors, &PageFFT::self, IsActive_Cursors, E_VB, E_VV, OnArrows_FFT_Cursors
+    PageName::Function_FFT_Cursors, &PageFFT::self, IsActive_Cursors, E_VB, Page::EmptyBeforeDraw, OnArrows_FFT_Cursors
 )
 
 const Page * const PageFFT::PageCursors::self = (const Page *)&pCursors;
@@ -145,7 +145,7 @@ DEF_PAGE_6( pFFT, // -V641 // -V1027                                            
     &cWindow,       ///< СЕРВИС - СПЕКТР - Окно 
     &pCursors,      ///< СЕРВИС - СПЕКТР - КУРСОРЫ
     &cRange,        ///< СЕРВИС - СПЕКТР - Диапазон
-    PageName::Function_FFT, &PageFunction::self, IsActive_FFT, OnOpenClose_FFT, E_VV, E_BfKE
+    PageName::Function_FFT, &PageFunction::self, IsActive_FFT, OnOpenClose_FFT, Page::EmptyBeforeDraw, E_BfKE
 )
 
 const Page * const PageFFT::self = (const Page *)&pFFT;

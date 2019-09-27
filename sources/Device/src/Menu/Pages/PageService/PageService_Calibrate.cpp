@@ -15,7 +15,7 @@ DEF_CHOICE_2( cCalibrator, // -V206                                             
     "Режим работы калибратора",
     "Перем",
     "Пост",
-    CALIBRATOR_MODE, &PageService::PageCalibrate::self, E_BtV, OnChanged_Calibrator, E_VII
+    CALIBRATOR_MODE, &PageService::PageCalibrate::self, Item::EmptyActive, OnChanged_Calibrator, E_VII
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -52,7 +52,7 @@ DEF_PAGE_2( pCalibrate, // -V641 // -V1027                                      
     "Управлением калибратором и калибровка осциллографа",
     &cCalibrator,     /// СЕРВИС - КАЛИБРАТОР - Калибратор
     &bCalibrate,      /// СЕРВИС - КАЛИБРАТОР - Калибровать
-    PageName::Service_Calibrator, &PageService::self, E_BtV, E_VB, E_VV, E_BfKE
+    PageName::Service_Calibrator, &PageService::self, Item::EmptyActive, E_VB, Page::EmptyBeforeDraw, E_BfKE
 )
 
 const Page * const PageService::PageCalibrate::self = (const Page *)&pCalibrate;

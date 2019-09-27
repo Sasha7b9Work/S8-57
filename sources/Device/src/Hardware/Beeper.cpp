@@ -290,10 +290,10 @@ void Beeper::Beep(TypePress::E type)
     static const pFuncVV func[TypePress::Size] =
     {
         Beeper::ButtonPress,
-        E_VV,
+        EmptyVV,
         Beeper::ButtonRelease,
-        E_VV,
-        E_VV
+        EmptyVV,
+        EmptyVV
     };
 
     if (type < TypePress::Size)

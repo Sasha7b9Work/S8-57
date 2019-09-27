@@ -17,7 +17,7 @@ DEF_CHOICE_2( cMode,                                                            
     "Ручной",
     "Автоматический",
     TRIG_MODE_FIND,
-    &PageTrig::PageFind::self, E_BtV, E_VB, E_VII
+    &PageTrig::PageFind::self, Item::EmptyActive, E_VB, E_VII
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -29,7 +29,7 @@ static void OnPress_Search()
 DEF_BUTTON( bSearch,                                                                                                                                          //--- СИНХР - ПОИСК - Найти ---
     "Найти",
     "Производит поиск уровня синхронизации.",
-    &PageTrig::PageFind::self, E_BtV, OnPress_Search
+    &PageTrig::PageFind::self, Item::EmptyActive, OnPress_Search
 )
 
 
@@ -40,7 +40,7 @@ DEF_PAGE_2( pFind, // -V641 // -V1027                                           
     &cMode,                         ///< СИНХР - ПОИСК - Режим
     &bSearch,                       ///< СИНХР - ПОИСК - Найти
     PageName::Trig_Search,
-    &PageTrig::self, E_BtV, E_VB, E_VV, E_BfKE
+    &PageTrig::self, Item::EmptyActive, E_VB, Page::EmptyBeforeDraw, E_BfKE
 )
 
 const Page * const PageTrig::PageFind::self = (const Page *)&pFind;
