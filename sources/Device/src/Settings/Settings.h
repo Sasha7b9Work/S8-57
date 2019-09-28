@@ -91,6 +91,18 @@ struct SettingsTrig
     bool                               holdOffEnabled;      ///< Включение удержания синхронизации
 };
 
+struct SettingsTime
+{
+    int                              shift;
+    Osci::Settings::TBase::E         base;
+    Osci::Settings::PeakDetMode::E   peakDet;
+    Osci::Settings::TPos::E          TPos;
+    Osci::Settings::SampleType::E    sampleType;
+    Osci::Settings::FunctionTime::E  timeDivXPos;
+    Osci::Settings::LinkingTShift::E linkingTShift;                 ///< Тип привязки смещения по горизонтали
+    Osci::Settings::SampleType::E    sampleTypeOld;
+};
+
 class Settings
 {
 public:
@@ -108,17 +120,7 @@ public:
     SettingsDisplay disp;
     SettingsChannel ch;
     SettingsTrig    trig;
-
-    // Меню РАЗВЁРТКА
-
-    int                              time_shift;
-    Osci::Settings::TBase::E         time_base;
-    Osci::Settings::PeakDetMode::E   time_peakDet;
-    Osci::Settings::TPos::E          time_TPos;
-    Osci::Settings::SampleType::E    time_sampleType;
-    Osci::Settings::FunctionTime::E  time_timeDivXPos;
-    Osci::Settings::LinkingTShift::E time_linkingTShift;                 ///< Тип привязки смещения по горизонтали
-    Osci::Settings::SampleType::E    time_sampleTypeOld;
+    SettingsTime    time;
 
     // Меню КУРСОРЫ
 

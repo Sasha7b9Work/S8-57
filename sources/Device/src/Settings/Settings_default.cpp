@@ -62,15 +62,16 @@ const Settings Settings::defaultSettings =
     },
 
     // Ìåíþ ÐÀÇÂ¨ÐÒÊÀ
-
-    0,                      // time_shift;         
-    TBase::_5ms,            // time_base;         
-    PeakDetMode::Disabled,  // time_peakDet;      
-    TPos::Center,           // time_TPos;         
-    SampleType::Real,       // time_sampleType;   
-    FunctionTime::Time,     // time_timeDivXPos;  
-    LinkingTShift::Time,    // time_linkingTShift;
-    SampleType::Real,       // time_sampleTypeOld;
+    {
+        0,                      // time_shift;         
+        TBase::_5ms,            // time_base;         
+        PeakDetMode::Disabled,  // time_peakDet;      
+        TPos::Center,           // time_TPos;         
+        SampleType::Real,       // time_sampleType;   
+        FunctionTime::Time,     // time_timeDivXPos;  
+        LinkingTShift::Time,    // time_linkingTShift;
+        SampleType::Real,       // time_sampleTypeOld;
+    },
 
     // Ìåíþ ÊÓÐÑÎÐÛ
 
