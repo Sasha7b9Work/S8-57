@@ -190,7 +190,7 @@ public:
     Button(const DataItem * const data) : Item(data) {};
     virtual void Draw(int x, int y, bool opened) const;
     virtual void HandlerFX(TypePress::E type) const;
-    DataButton *OwnData() const { return (DataButton *)data->ad; }
+    const DataButton *OwnData() const { return static_cast<const DataButton *>(data->ad); }
 };
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// GraphButton ///
