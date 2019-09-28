@@ -167,7 +167,7 @@ public:
     /// Нарисовать в заданных координатах
     virtual void Draw(int x, int y, bool opened) const;
     /// Возвращает указатель на данные, специфичные для этого класса
-    DataPage *OwnData() const { return (DataPage *)data->ad; }
+    const DataPage *OwnData() const { return static_cast<const DataPage *>(data->ad); }
     /// Возвращает адрес элемента, соответствующего функциональной кнопкке
     const Item *ItemForFuncKey(Key::E key) const;
     /// Возвращает имя страницы page

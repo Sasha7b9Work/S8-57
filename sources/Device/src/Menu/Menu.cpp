@@ -40,7 +40,6 @@ static Item   *itemHint = nullptr;
 const char    *stringForHint = nullptr;
 /// Ќужно дл€ того, чтобы периодически сохран€ть настройки
 static uint timeLastKeyboardEvent = MAX_UINT;
-
 /// ѕоследний открытый контрол на дереве странице page
 static Item *LastOpened(Page *page);
 /// ќбработка событи€ таймера автоматического сокрыти€ меню
@@ -59,6 +58,11 @@ void Menu::ProcessingAllKeyboardEvents()
         timeLastKeyboardEvent = TIME_MS;            // то сохран€ем врем€ последнего нажати€, чтобы знать, когда сохранить настройки
 
         KeyEvent event = BufferButtons::Extract();  // »звлекаем очередное событие
+
+        if (event.IsRelease())
+        {
+            event = event;
+        }
 
         if (!Keyboard::KeyIsActive(event.key))      // ≈сли кнопка не разрешена дл€ обработки сейчас:
         {
