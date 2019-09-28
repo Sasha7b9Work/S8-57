@@ -18,6 +18,7 @@
 #include "Tester/Tester_Settings.h"
 #include "Multimeter/Multimeter_Settings.h"
 #include "Menu/Pages/Include/PageDisplay.h"
+#include "Menu/Pages/Include/PageChannels.h"
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -43,19 +44,6 @@
 #pragma pack(push, 1)
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-struct SettingsChannel
-{
-    uint16                         shift[Chan::Size];      ///< Сдвиг канала по вертикали
-    Osci::Settings::Range::E       range[Chan::Size];      ///< Масштаб канала по вертикали
-    FPGA::Settings::ModeCouple::E  couple[Chan::Size];     ///< Связь по входу
-    bool                           enabled[Chan::Size];    ///< Включен/выключен канал
-    int8                           balanceShiftADC[2];     ///< Добавочное смещение для балансировки АЦП.
-    FPGA::Settings::Bandwidth      bandwidth[2];           ///< Ограничение полосы.
-    bool                           inverse[2];
-    Divider::E                     divider[2];             ///< Множитель.
-    CalibrationMode::E             calibrationMode[2];     ///< Режим калибровки.
-};
-
 struct SettingsTrig
 {
     Osci::Settings::Trig::Source::E    source;
