@@ -324,11 +324,6 @@ void GraphButton::Draw(int x, int y, bool) const
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Page::Draw(int x, int y, bool opened) const
 {
-    if (!IsActive())
-    {
-        return;
-    }
-
     if(opened)
     {
         OwnData()->funcBeforeDraw();
@@ -352,7 +347,7 @@ void Page::Draw(int x, int y, bool opened) const
         {
             Region(Width() - 5, Height() - 4).Fill(x + 2, y + 3, Color::FILL);
         }
-        Text(Title().CString()).DrawInCenterRect(x, y + 1, Width(), Height(), IsPressed() ? Color::BACK : Color::FILL);
+        Text(Title().CString()).DrawInCenterRect(x, y + 1, Width(), Height(), ColorTitleText());
     }
 }
 
