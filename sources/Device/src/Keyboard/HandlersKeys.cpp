@@ -157,6 +157,11 @@ void Handlers::Process(KeyEvent e)
     Key::E code = event.key;
     TypePress::E type = event.type;
 
+    if (type == TypePress::Release)
+    {
+        type = type;
+    }
+
     if (code < Key::Number && type < TypePress::None)
     {
         if (!CommonHandlerPage())
@@ -174,34 +179,34 @@ static void Empty()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void ChangeRShift(Chan::E ch, int delta)
 {
-    if (Device::State::InModeRecorder())
+    if (!Device::State::InModeRecorder())
     {
-        return;
-    }
+        static bool stop[Chan::Size] = { false, false };      // Признак того, что смещение изменять не нужно - оно равно нулю и прошло мало времени
+        static uint timeStop[Chan::Size] = { 0, 0 };          // Время устновки признака stop
 
-    static bool stop[Chan::Size] = { false, false };      // Признак того, что смещение изменять не нужно - оно равно нулю и прошло мало времени
-    static uint timeStop[Chan::Size] = { 0, 0 };          // Время устновки признака stop
-
-    if (stop[ch])
-    {
-        if (TIME_MS - timeStop[ch] > 500)
+        if (stop[ch])
         {
-            stop[ch] = false;
+            if (TIME_MS - timeStop[ch] > 500)
+            {
+                stop[ch] = false;
+            }
         }
-        return;
-    }
-    else
-    {
-        RShift::Change(ch, delta);
-    }
+        else
+        {
+            RShift::Change(ch, delta);
+        }
 
-    if (SET_RSHIFT(ch) == RShift::ZERO)
-    {
-        stop[ch] = true;
-        timeStop[ch] = TIME_MS;
-    }
+        if (!stop[ch])
+        {
+            if (SET_RSHIFT(ch) == RShift::ZERO)
+            {
+                stop[ch] = true;
+                timeStop[ch] = TIME_MS;
+            }
 
-    Osci::Display::SetFlagRedraw();
+            Osci::Display::SetFlagRedraw();
+        }
+    }
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -337,41 +342,40 @@ static void FX_Long()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void HandlerArrow()
 { 
-    if(!Menu::IsShown())
+    if (Menu::IsShown())
     {
-        return;
-    }
-    
+        Item *openedItem = Menu::OpenedItem();
 
-    Item *openedItem = Menu::OpenedItem();
-
-    if (!openedItem->Is(Item::Type::Page))
-    {
-        openedItem->HandlerKey(event);
+        if (!openedItem->Is(Item::Type::Page))
+        {
+            openedItem->HandlerKey(event);
+        }
     }
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static bool CommonHandlerPage()
 {
-    if (!Menu::IsShown())
+    bool result = false;
+
+    if (Menu::IsShown())
     {
-        return false;
+        Item *openedPage = Menu::OpenedItem();
+
+        if (!openedPage->Is(Item::Type::Page))
+        {
+        }
+        else if (Menu::CurrentItem()->HandlerKey(event))
+        {
+            result = true;
+        }
+        else
+        {
+            result = openedPage->HandlerKey(event);
+        }
     }
 
-    Item *openedPage = Menu::OpenedItem();
-
-    if (!openedPage->Is(Item::Type::Page))
-    {
-        return false;
-    }
-
-    if (Menu::CurrentItem()->HandlerKey(event))
-    {
-        return true;
-    }
-
-    return openedPage->HandlerKey(event);
+    return result;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

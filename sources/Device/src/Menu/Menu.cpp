@@ -291,19 +291,23 @@ PageName::E Menu::GetNameOpenedPage()
 {
     Item *item = OpenedItem();
 
-    if (item == nullptr)
+    PageName::E result = PageName::Number;
+
+    if (item)
     {
-        return PageName::Number;            // Если нет открого итема
+        if (item->Is(Item::Type::Page))         // Если открыта страница
+        {
+            result = ((Page *)item)->GetName();
+        }
+        else
+        {
+            const Page *page = item->Keeper();      // Если открыта не страница
+
+            result = page ? page->GetName() : PageName::Number;
+        }
     }
 
-    if (item->Is(Item::Type::Page))         // Если открыта страница
-    {
-        return ((Page *)item)->GetName();
-    }
-
-    const Page *page = item->Keeper();      // Если открыта не страница
-
-    return page ? page->GetName() : PageName::Number;
+    return result;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
