@@ -122,7 +122,7 @@ void Governor::Draw(int x, int y, bool opened) const
 void Governor::DrawOpened(int x, int y) const
 {
     DrawCommonHiPart(x, y, true);
-    Rectangle(Width() - 1, HeightOpened() - 1).Draw(x, y + 1, Color::FILL);
+    Rectangle(Width() - 1, HeightOpened() - 1).Draw(x, y + 1, ColorFrame());
     DrawLowPart(x, y + 13);
 }
 
@@ -230,7 +230,7 @@ void Choice::DrawOpened(int x, int y) const
 {
     int height = HeightOpened();
     
-    Rectangle(Width() - 1, height - 1).Draw(x, y + 1, Color::FILL);
+    Rectangle(Width() - 1, height - 1).Draw(x, y + 1, ColorFrame());
     DrawCommonHiPart(x, y + 1, true);
 
     Region(Width() - 3, height - MOI_HEIGHT_TITLE + 4).Fill(x + 1, y + MOI_HEIGHT_TITLE - 5, Color::BACK);
@@ -321,10 +321,8 @@ void Page::Draw(int x, int y, bool opened) const
     }
     else
     {
-        if (IsPressed())
-        {
-            Region(Width() - 5, Height() - 4).Fill(x + 2, y + 3, Color::FILL);
-        }
+        Region(Width() - 5, Height() - 4).Fill(x + 2, y + 3, ColorTitleBackground());
+
         Text(Title().CString()).DrawInCenterRect(x, y + 1, Width(), Height(), ColorTitleText());
     }
 }
@@ -334,7 +332,7 @@ void Page::DrawTitle(int x, int y) const
 {
     int eX = x;
 
-    Rectangle(Menu::Title::WIDTH + 1, Menu::Title::HEIGHT + 1).Draw(x, y, Color::FILL);
+    Rectangle(Menu::Title::WIDTH + 1, Menu::Title::HEIGHT + 1).Draw(x, y, ColorFrame());
 
     Region(Menu::Title::WIDTH - 1, Menu::Title::HEIGHT - 1).Fill(x + 1, y + 1, Color::BACK);
 
@@ -343,9 +341,8 @@ void Page::DrawTitle(int x, int y) const
         Menu::OpenedItem()->Is(Item::Type::Page);
 
     int delta = condDrawRSet ? -10 : 0;
-    Color colorText = Color::FILL;
 
-    x = Text(Title().CString()).DrawInCenterRect(x, y, Menu::Title::WIDTH + 2 + delta, Menu::Title::HEIGHT, colorText);
+    x = Text(Title().CString()).DrawInCenterRect(x, y, Menu::Title::WIDTH + 2 + delta, Menu::Title::HEIGHT, ColorTitleText());
 
     Color::GRAY_75.SetAsCurrent();
     DrawPagesUGO(eX + Menu::Title::WIDTH - 3, y + Menu::Title::HEIGHT);
