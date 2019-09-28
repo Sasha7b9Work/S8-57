@@ -338,51 +338,49 @@ static Item *LastOpened(Page *page)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Item *Menu::CurrentItem()
 {
-    Item *opened = OpenedItem();
+    Item *result = OpenedItem();
 
-    int8 pos = ((const Page *)opened)->PosCurrentItem();
+    int8 pos = ((const Page *)result)->PosCurrentItem();
 
-    if (opened->Is(Item::Type::Page) && pos != 0x7f)
+    if (result->Is(Item::Type::Page) && pos != 0x7f)
     {
-        return ((const Page *)opened)->GetItem(pos);
+        result = ((const Page *)result)->GetItem(pos);
     }
 
-    return (Item *)opened;
+    return result;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void DrawHintItem(int x, int y, int width)
 {
-    if (!itemHint)
+    if (itemHint)
     {
-        return;
-    }
+        //DEF__STRUCT(StructName, pString) names[Item::Type::Number] =
+        static pString names[Item::Type::Number] =
+        {
+            "",                   // Item_None
+            "",                   // Item::Type::Choice
+            "Кнопка",             // Item::Type::Button
+            "Страница",           // Item::Type::Page
+            "Регулятор",          // Item::Type::Governor
+            "",                   // Item::Type::GovernorColor
+            "Кнопка"              // Item::Type::DrawButton
+        };
 
-    //DEF__STRUCT(StructName, pString) names[Item::Type::Number] =
-    static pString names[Item::Type::Number] =
-    {
-        "",                   // Item_None
-        "",                   // Item::Type::Choice
-        "Кнопка",             // Item::Type::Button
-        "Страница",           // Item::Type::Page
-        "Регулятор",          // Item::Type::Governor
-        "",                   // Item::Type::GovernorColor
-        "Кнопка"              // Item::Type::DrawButton
-    };
+        Page *item = (Page *)itemHint;
 
-    Page *item = (Page *)itemHint;
+        const int SIZE = 100;
+        char title[SIZE];
+        std::snprintf(title, SIZE, "%s \"%s\"", names[itemHint->data->type], item->data->title);
 
-    const int SIZE = 100;
-    char title[SIZE];
-    std::snprintf(title, SIZE, "%s \"%s\"", names[itemHint->data->type], item->data->title);
+        Text(title).DrawInCenterRectAndBoundIt(x, y, width, 15, Color::BACK, Color::FILL);
 
-    Text(title).DrawInCenterRectAndBoundIt(x, y, width, 15, Color::BACK, Color::FILL);
+        y = Text(item->data->hint).DrawInBoundedRectWithTransfers(x, y + 15, width, Color::BACK, Color::FILL);
 
-    y = Text(item->data->hint).DrawInBoundedRectWithTransfers(x, y + 15, width, Color::BACK, Color::FILL);
-
-    if (item->Is(Item::Type::GraphButton))
-    {
-        ((GraphButton*)item)->DrawHints(x, y, width);   // -V1027
+        if (item->Is(Item::Type::GraphButton))
+        {
+            ((GraphButton *)item)->DrawHints(x, y, width);   // -V1027
+        }
     }
 }
 
@@ -475,32 +473,30 @@ void Menu::SaveSettings()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 const Item *Menu::ItemUnderFunctionalKey(Key::E key)
 {
-    if (!Key(key).IsFunctional())
-    {
-        return &Item::empty;
-    }
-
-    Item *item = Menu::OpenedItem();
-
     const Item *result = &Item::empty;
 
-    if (item == nullptr)
+    if (Key(key).IsFunctional())
     {
-    }
-    else if (item->Is(Item::Type::Page))
-    {
-        result = ((Page *)item)->ItemForFuncKey(key);
-        if (!result->IsActive())
+        Item *item = Menu::OpenedItem();
+
+        if (item == nullptr)
         {
-            result = &Item::empty;
         }
-    }
-    else
-    {
-        const Page *parent = item->Keeper();
-        if (parent && parent->ItemForFuncKey(key) == item && item->IsActive())
+        else if (item->Is(Item::Type::Page))
         {
-            result = item;
+            result = ((Page *)item)->ItemForFuncKey(key);
+            if (!result->IsActive())
+            {
+                result = &Item::empty;
+            }
+        }
+        else
+        {
+            const Page *parent = item->Keeper();
+            if (parent && parent->ItemForFuncKey(key) == item && item->IsActive())
+            {
+                result = item;
+            }
         }
     }
 
