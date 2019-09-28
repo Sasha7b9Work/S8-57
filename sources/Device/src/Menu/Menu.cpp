@@ -155,7 +155,7 @@ void Menu::SetAutoHide(bool)
         }
         else
         {
-            Timer::SetAndStartOnce(Timer::Type::MenuAutoHide, OnTimerAutoHide, (uint)Display::TimeMenuAutoHide());
+            Timer::SetAndStartOnce(Timer::Type::MenuAutoHide, OnTimerAutoHide, static_cast<uint>(Display::TimeMenuAutoHide()));
         }
     }
 }
@@ -213,7 +213,7 @@ static void ClosePage(Page *page)
 {
     page->OwnData()->funcOnOpenClose(false);
 
-    Page *keeper = (Page *)page->Keeper();
+    Page *keeper = const_cast<Page *>(page->Keeper());
 
     if (keeper)
     {
@@ -258,11 +258,11 @@ void Menu::Init()
 
     Page *opened = (Page *)LastOpened((Page *)PageFunction::self); //-V1027
 
-    CloseIfSubPage((Page *)PageMultimeter::self, opened);
-    CloseIfSubPage((Page *)PageRecorder::self, opened);
-    CloseIfSubPage((Page *)PageTester::self, opened);
-    CloseIfSubPage((Page *)PageFrequencyCounter::self, opened);
-    CloseIfSubPage((Page *)PageFFT::self, opened);
+    CloseIfSubPage(const_cast<Page *>(PageMultimeter::self), opened);
+    CloseIfSubPage(const_cast<Page *>(PageRecorder::self), opened);
+    CloseIfSubPage(const_cast<Page *>(PageTester::self), opened);
+    CloseIfSubPage(const_cast<Page *>(PageFrequencyCounter::self), opened);
+    CloseIfSubPage(const_cast<Page *>(PageFFT::self), opened);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -324,7 +324,7 @@ static Item *LastOpened(Page *page)
 
             if (page->GetItem(posActItem)->Is(Item::Type::Page))
             {
-                result = LastOpened((Page *)item);
+                result = LastOpened(static_cast<Page *>(item));
             }
             else
             {

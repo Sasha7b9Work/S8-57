@@ -143,4 +143,8 @@ void PageFrequencyCounter::Init()
         items[2] = (Item *)&cFreqClc;
         items[3] = (Item *)&cNumPeriods;
     }
+    else
+    {
+        // здесь ничего
+    }
 }

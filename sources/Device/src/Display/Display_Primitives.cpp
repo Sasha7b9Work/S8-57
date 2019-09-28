@@ -140,10 +140,10 @@ int Display::Primitives::Text::DrawWithLimitation(int x, int y, int limitX, int 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 int Display::Primitives::Text::DrawCharWithLimitation(int eX, int eY, char _symbol, int limitX, int limitY, int limitWidth, int limitHeight)
 {
-    uint8 symbol = (uint8)_symbol;
+    uint8 symbol = static_cast<uint8>(_symbol);
 
-    int8 width = (int8)Font::GetWidth(symbol);
-    int8 height = (int8)Font::GetHeight();
+    int8 width = static_cast<int8>(Font::GetWidth(symbol));
+    int8 height = static_cast<int8>(Font::GetHeight());
 
     for (int b = 0; b < height; b++)
     {
@@ -222,7 +222,7 @@ static bool IsLetter(char symbol)
         true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true
     };
 
-    return isLetter[(uint8)symbol];
+    return isLetter[static_cast<uint8>(symbol)];
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -266,7 +266,7 @@ static bool IsConsonant(char symbol)
         true, true, true, false, true, true, true, true, true, true, true, false, true, false, false, false
     };
 
-    return isConsonat[(uint8)symbol];
+    return isConsonat[static_cast<uint8>(symbol)];
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -291,7 +291,7 @@ static bool FindNextTransfer(const char *letters, int8 *lettersInSyllable) //-V2
 #define VOWEL       0   // Гласная
 #define CONSONANT   1   // Согласная
 
-    * lettersInSyllable = (int8)std::strlen(letters); //-V2513 //-V1029
+    *lettersInSyllable = static_cast<int8>(std::strlen(letters)); //-V1029
 
     if (std::strlen(letters) <= 3) //-V2513
     {
@@ -309,7 +309,7 @@ static bool FindNextTransfer(const char *letters, int8 *lettersInSyllable) //-V2
 
     bool consonant[20];
 
-    int size = (int)std::strlen(letters); //-V2513
+    int size = static_cast<int>(std::strlen(letters)); //-V2513
 
     for (int i = 0; i < size; i++)
     {
@@ -398,9 +398,9 @@ static char *PartWordForTransfer(char *word, const int8 *lengthSyllables, int nu
     uint length = 0;
     for (int i = 0; i <= numSyllable; i++)
     {
-        length += (uint)lengthSyllables[i];
+        length += static_cast<uint>(lengthSyllables[i]);
     }
-    std::memcpy((void *)buffer, (void *)word, length);
+    std::memcpy(static_cast<void *>(buffer), static_cast<void *>(word), length);
     buffer[length] = '-';
     buffer[length + 1] = '\0';
     return buffer;
@@ -432,7 +432,7 @@ static int DrawPartWord(char *word, int x, int y, int xRight, bool draw) //-V250
             {
                 String(subString).Draw(x, y);
             }
-            return (int)std::strlen(subString) - 1; //-V2513
+            return static_cast<int>(std::strlen(subString) - 1);
         }
     }
 
@@ -450,7 +450,7 @@ int Display::Primitives::Text::DrawInRectWithTransfers(int eX, int eY, int eWidt
     int bottom = eY + eHeight;
 
     char buffer[20];
-    int numSymbols = (int)std::strlen(text); //-V2513
+    int numSymbols = static_cast<int>(std::strlen(text));
 
     int y = top - 1;
     int x = left;
@@ -509,7 +509,7 @@ int Display::Primitives::Text::DrawInRectWithTransfers(int eX, int eY, int eWidt
 static bool GetHeightTextWithTransfers(int left, int top, int right, const char *text, int *height)
 {
     char buffer[20];
-    int numSymbols = (int)std::strlen(text); //-V2513
+    int numSymbols = static_cast<int>(std::strlen(text)); //-V2513
 
     int y = top - 1;
     int x = left;
@@ -686,7 +686,7 @@ void Display::Primitives::VPointLine::Draw(int _x, int _y, Color color)
     int y0 = _y;
     int y1 = y0 + height;
 
-    for (int y = y0; y <= y1; y += (int)delta)
+    for (int y = y0; y <= y1; y += static_cast<int>(delta))
     {
         //SetPoint(x, y);
         Point().Draw(_x, y);
@@ -704,7 +704,7 @@ void Display::Primitives::HPointLine::Draw(int _x, int _y)
     int x0 = _x;
     int x1 = _x + width;
 
-    for (int x = x0; x <= x1; x += (int)delta)
+    for (int x = x0; x <= x1; x += static_cast<int>(delta))
     {
         //SetPoint(x, y);
         Point().Draw(x, _y);
