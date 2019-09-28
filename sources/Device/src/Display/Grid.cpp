@@ -240,10 +240,10 @@ void Grid::DrawGridSpectrum()
     else // SCALE_FFT_IS_LINEAR
     {
         static pString strs[] = {"1.0", "0.8", "0.6", "0.4", "0.2"};
-        float scale = (float)MathHeight() / 5;
+        float scale = static_cast<float>(MathHeight()) / 5;
         for (int i = 1; i < 5; i++)
         {
-            int y = MathTop() + (int)(i * scale);
+            int y = MathTop() + static_cast<int>(i * scale);
 
 			HLine(256).Draw(Left(), y, Color::GRID);
 
@@ -272,61 +272,61 @@ static float Grid::DeltaX()
 static void Grid::DrawGridType1(int left, int top, int right, int bottom, float centerX, float centerY, float deltaX, float deltaY, float stepX, float stepY)
 {
     uint16 masX[17];
-    masX[0] = (uint16)(left + 1);
+    masX[0] = static_cast<uint16>(left + 1);
     for (int i = 1; i < 7; i++)
     {
-        masX[i] = (uint16)(left + (int)(deltaX * i));
+        masX[i] = static_cast<uint16>(left + static_cast<int>(deltaX * i));
     }
     for (int i = 7; i < 10; i++)
     {
-        masX[i] = (uint16)((int)centerX - 8 + i);
+        masX[i] = static_cast<uint16>(static_cast<int>(centerX) - 8 + i);
     }
     for (int i = 10; i < 16; i++)
     {
-        masX[i] = (uint16)(centerX + deltaX * (i - 9)); //-V2004
+        masX[i] = static_cast<uint16>(centerX + deltaX * (i - 9)); //-V2004
     }
     masX[16] = static_cast<uint16>(right - 1);
 
-    MultiVPointLine(17, masX, (int)stepY, DeltaVforLineGrid()).Draw(top + (int)stepY, Color::GRID);
+    MultiVPointLine(17, masX, static_cast<int>(stepY), DeltaVforLineGrid()).Draw(top + static_cast<int>(stepY), Color::GRID);
 
     uint8 mas[13];
     mas[0] = static_cast<uint8>(top + 1);
     for (int i = 1; i < 5; i++)
     {
-        mas[i] = static_cast<uint8>(top + (int)(deltaY * i));
+        mas[i] = static_cast<uint8>(top + static_cast<int>(deltaY * i));
     }
     for (int i = 5; i < 8; i++)
     {
-        mas[i] = static_cast<uint8>((int)(centerY)-6 + i);
+        mas[i] = static_cast<uint8>(static_cast<int>(centerY) - 6 + i);
     }
     for (int i = 8; i < 12; i++)
     {
-        mas[i] = static_cast<uint8>((int)centerY + (int)(deltaY * (i - 7)));
+        mas[i] = static_cast<uint8>(static_cast<int>(centerY) + static_cast<int>(deltaY * (i - 7)));
     }
-    mas[12] = (uint8)(bottom - 1);
+    mas[12] = static_cast<uint8>(bottom - 1);
 
-    MultiHPointLine(13, mas, (int)stepX, DeltaHforLineGrid()).Draw(left + (int)stepX, Color::GRID);
+    MultiHPointLine(13, mas, static_cast<int>(stepX), DeltaHforLineGrid()).Draw(left + static_cast<int>(stepX), Color::GRID);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void Grid::DrawGridType2(int left, int top, int right, int bottom, int deltaX, int deltaY, int stepX, int stepY)
 {
     uint16 masX[15];
-    masX[0] = (uint16)(left + 1);
+    masX[0] = static_cast<uint16>(left + 1);
     for (int i = 1; i < 14; i++)
     {
-        masX[i] = (uint16)(left + static_cast<int>(deltaX * i));
+        masX[i] = static_cast<uint16>(left + static_cast<int>(deltaX * i));
     }
-    masX[14] = (uint16)(right - 1);
+    masX[14] = static_cast<uint16>(right - 1);
     MultiVPointLine(15, masX, stepY, DeltaVforLineGrid()).Draw(top + stepY, Color::GRID);
 
     uint8 mas[11];
-    mas[0] = (uint8)(top + 1);
+    mas[0] = static_cast<uint8>(top + 1);
     for (int i = 1; i < 10; i++)
     {
-        mas[i] = (uint8)(top + (int)(deltaY * i));
+        mas[i] = static_cast<uint8>(top + static_cast<int>(deltaY * i));
     }
-    mas[10] = (uint8)(bottom - 1);
+    mas[10] = static_cast<uint8>(bottom - 1);
 
     MultiHPointLine(11, mas, stepX, DeltaHforLineGrid()).Draw(left + stepX, Color::GRID);
 }
@@ -334,7 +334,7 @@ static void Grid::DrawGridType2(int left, int top, int right, int bottom, int de
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void Grid::DrawGridType3(int left, int top, int right, int bottom, int centerX, int centerY, int deltaX, int deltaY, int stepX)
 {
-    HPointLine(right - left - stepX, (float)stepX).Draw(left + stepX, centerY);
+    HPointLine(right - left - stepX, static_cast<float>(stepX)).Draw(left + stepX, centerY);
 
     uint8 masY[6] = {
         static_cast<uint8>(top + 1),
@@ -347,9 +347,18 @@ static void Grid::DrawGridType3(int left, int top, int right, int bottom, int ce
 
     MultiHPointLine(6, masY, deltaX, (right - top) / deltaX).Draw(left + deltaX, Color::GRID);
 
-    VPointLine(bottom - top - 2 * stepX, (float)stepX).Draw(centerX, top + stepX, Color::GRID);
+    VPointLine(bottom - top - 2 * stepX, static_cast<float>(stepX)).Draw(centerX, top + stepX, Color::GRID);
 
-    uint16 masX[6] = {(uint16)(left + 1), (uint16)(left + 2), (uint16)(centerX - 1), (uint16)(centerX + 1), (uint16)(right - 2), (uint16)(right - 1)};
+    uint16 masX[6] =
+    {
+        static_cast<uint16>(left + 1),
+        static_cast<uint16>(left + 2),
+        static_cast<uint16>(centerX - 1),
+        static_cast<uint16>(centerX + 1),
+        static_cast<uint16>(right - 2),
+        static_cast<uint16>(right - 1)
+    };
+
     MultiVPointLine(6, masX, deltaY, (bottom - top) / deltaY).Draw(top + deltaY, Color::GRID);
 }
 
@@ -418,8 +427,8 @@ static void Grid::DrawTester()
 
     Color::GRID.SetAsCurrent();
 
-    int x = (int)(x0 + Display::WIDTH / 2);
-    int y = (int)(y0 + Display::HEIGHT / 2);
+    int x = static_cast<int>(x0 + Display::WIDTH / 2);
+    int y = static_cast<int>(y0 + Display::HEIGHT / 2);
 
     VLine(Display::HEIGHT).Draw(x, 0);
 
@@ -442,7 +451,7 @@ static void Grid::DrawTester()
         x += deltaX;
     }
 
-    x = (int)(x0 + Display::WIDTH / 2 - deltaX);
+    x = static_cast<int>(x0 + Display::WIDTH / 2 - deltaX);
 
     while (x > 0)
     {
@@ -460,7 +469,7 @@ static void Grid::DrawTester()
         y += deltaY;
     }
 
-    y = (int)(y0 + Display::HEIGHT / 2 - deltaY);
+    y = static_cast<int>(y0 + Display::HEIGHT / 2 - deltaY);
 
     while (y > 0)
     {
