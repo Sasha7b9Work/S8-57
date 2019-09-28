@@ -1095,11 +1095,15 @@ float CalculatePhazaMinus(Chan::E ch)
 {
     float delay = CalculateDelayMinus(ch);
     float period = CalculatePeriod(ch);
-    if(delay == Float::ERROR || period == Float::ERROR) //-V550 //-V2550
+
+    float result = Float::ERROR;
+
+    if(delay != Float::ERROR && period != Float::ERROR) //-V550 //-V2550
     {
-        return Float::ERROR;
+        result = delay / period * 360.0F;
     }
-    return delay / period * 360.0F; 
+    
+    return result;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -1306,8 +1310,10 @@ String Osci::Measurements::Measure::GetStringMeasure(Chan::E ch, char* buffer, i
     {
         return String("");
     }
+
     buffer[0] = '\0';
     std::strcpy(buffer, Chan(ch).IsA() ? "1: " : "2: ");
+
     if(!isSet || values[type].value[ch] == Float::ERROR) //-V550 //-V2550
     {
         std::strcat(buffer, "-.-");
@@ -1338,6 +1344,7 @@ String Osci::Measurements::Measure::GetStringMeasure(Chan::E ch, char* buffer, i
     {
         return String(buffer);
     }
+
     return String(buffer);
 }
 
@@ -1382,12 +1389,15 @@ static float Divide(float val1, float val2)
 
     if(result == std::numeric_limits<float>::infinity())
     {
-        return Float::ERROR;
+        result = Float::ERROR;
     }
-
-    if(isnan(result))
+    else if(isnan(result))
     {
-        return Float::ERROR;
+        result = Float::ERROR;
+    }
+    else
+    {
+        // здесь ничего
     }
 
     return result;
@@ -1404,32 +1414,30 @@ void Osci::Measurements::SetData()
 {
     isSet = (DATA != nullptr);
 
-    if (!isSet)
+    if (isSet)
     {
-        return;
-    }
- 
-    CountedToCurrentSettings();
+        CountedToCurrentSettings();
 
-    BitSet64 points = Osci::Display::PainterData::BytesOnDisplay();
-    firstByte = points.sword0;
-    lastByte = points.sword1;
-    nBytes = lastByte - firstByte;
+        BitSet64 points = Osci::Display::PainterData::BytesOnDisplay();
+        firstByte = points.sword0;
+        lastByte = points.sword1;
+        nBytes = lastByte - firstByte;
 
-    if (TBASE_DS >= TBase::MIN_P2P)             // ≈сли находимс€ в поточечном режме, то нужно брать последние считанные точки дл€ проведени€ измерений
-    {
-        for (int i = (int)(BYTES_IN_CHANNEL_DS - 1); i >= 0; --i)
+        if (TBASE_DS >= TBase::MIN_P2P)             // ≈сли находимс€ в поточечном режме, то нужно брать последние считанные точки дл€ проведени€ измерений
         {
-            if (IN_A[i] != NONE)                // ≈сли это значение считано
+            for (int i = (int)(BYTES_IN_CHANNEL_DS - 1); i >= 0; --i)
             {
-                lastByte = i;
-                firstByte = lastByte - nBytes;
-                if (firstByte < 0)
+                if (IN_A[i] != NONE)                // ≈сли это значение считано
                 {
-                    firstByte = 0;
-                    lastByte = nBytes;
+                    lastByte = i;
+                    firstByte = lastByte - nBytes;
+                    if (firstByte < 0)
+                    {
+                        firstByte = 0;
+                        lastByte = nBytes;
+                    }
+                    break;
                 }
-                break;
             }
         }
     }

@@ -147,17 +147,16 @@ static void ProcessButtonForHint(Key::E button)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Menu::SetAutoHide(bool)
 {
-    if(!Menu::IsShown())
+    if (Menu::IsShown())
     {
-        return;
-    }
-    if(Display::TimeMenuAutoHide() == 0)
-    {
-        Timer::Disable(Timer::Type::MenuAutoHide);
-    }
-    else
-    {
-        Timer::SetAndStartOnce(Timer::Type::MenuAutoHide, OnTimerAutoHide, (uint)Display::TimeMenuAutoHide());
+        if (Display::TimeMenuAutoHide() == 0)
+        {
+            Timer::Disable(Timer::Type::MenuAutoHide);
+        }
+        else
+        {
+            Timer::SetAndStartOnce(Timer::Type::MenuAutoHide, OnTimerAutoHide, (uint)Display::TimeMenuAutoHide());
+        }
     }
 }
 
