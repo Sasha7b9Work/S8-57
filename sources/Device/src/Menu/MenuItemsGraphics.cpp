@@ -23,12 +23,6 @@ using namespace Hardware;
 using Utils::Stack;
 
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/// Нарисовать значение регулятора в режиме поразрядной регулировки
-/// setPosFromEnd - подсвеченный (активный) разряд, начиная с конца. Если selPosFromEnd == -1, подсвечивать не нужно
-static void DrawValueWithSelectedPosition(int x, int y, int value, uint numDigits, int selPosFromEnd, bool fillNull);
-
-
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////q
 void GovernorColor::Draw(int x, int y, bool opened) const
 {
@@ -388,7 +382,7 @@ void Item::DrawCommonHiPart(int x, int y, bool opened) const
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void DrawValueWithSelectedPosition(int x, int y, int value, uint numDigits, int selPosFromEnd, bool)
+void Governor::DrawValueWithSelectedPosition(int x, int y, int value, uint numDigits, int selPosFromEnd, bool) const
 {
     Stack<uint8> stack(numDigits);
     
