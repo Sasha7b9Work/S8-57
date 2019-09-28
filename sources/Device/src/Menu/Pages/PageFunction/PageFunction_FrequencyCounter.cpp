@@ -4,7 +4,7 @@
 #include "Settings/Settings.h"
 
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 static void OnChanged_Enable(bool)
 {
     FrequencyCounter::Init();
@@ -31,12 +31,17 @@ static bool IsActive_ModeView()
     return FREQ_METER_IS_ENABLED;
 }
 
+static void OnChanged_ModeView(bool)
+{
+    PageFrequencyCounter::Init();
+}
+
 DEF_CHOICE_2( cModeView,                                                                                                                               //--- ‘”Õ ÷»ﬂ - ◊¿—“Œ“ŒÃ≈– - –ÂÊËÏ ---
     "–ÂÊËÏ",
     "",
     "◊‡ÒÚÓÚ‡",
     "œÂËÓ‰",
-    FREQ_METER_MODE_VIEW, &PageFrequencyCounter::self, IsActive_ModeView, Choice::Changed, Choice::AfterDraw
+    FREQ_METER_MODE_VIEW, &PageFrequencyCounter::self, IsActive_ModeView, OnChanged_ModeView, Choice::AfterDraw
 )
 
 
@@ -107,15 +112,35 @@ const Choice *PageFrequencyCounter::GetChoiceNumPeriods()
     return (const Choice *)&cNumPeriods;
 }
 
-DEF_PAGE_5( pFreqMeter, // -V641                                                                                                                               //--- ‘”Õ ÷»ﬂ - ◊¿—“Œ“ŒÃ≈– ---
+DEF_PAGE_5_VAR( pFreqMeter, // -V641                                                                                                                               //--- ‘”Õ ÷»ﬂ - ◊¿—“Œ“ŒÃ≈– ---
     "◊¿—“Œ“ŒÃ≈–",
     "",
     &cEnable,           ///< »«Ã≈–≈Õ»ﬂ - ◊¿—“Œ“ŒÃ≈– - ◊‡ÒÚÓÚÓÏÂ
     &cModeView,         ///< »«Ã≈–≈Õ»ﬂ - ◊¿—“Œ“ŒÃ≈– - –ÂÊËÏ
-    &cTimeF,            ///< »«Ã≈–≈Õ»ﬂ - ◊¿—“Œ“ŒÃ≈– - ¬ÂÏˇ Ò˜∏Ú‡ F
-    &cFreqClc,          ///< »«Ã≈–≈Õ»ﬂ - ◊¿—“Œ“ŒÃ≈– - ÃÂÚÍË ‚ÂÏÂÌË
-    &cNumPeriods,       ///< »«Ã≈–≈Õ»ﬂ - ◊¿—“Œ“ŒÃ≈– -  ÓÎ-‚Ó ÔÂËÓ‰Ó‚
+    &Item::empty,       ///< »«Ã≈–≈Õ»ﬂ - ◊¿—“Œ“ŒÃ≈– - ¬ÂÏˇ Ò˜∏Ú‡ F / ÃÂÚÍË ‚ÂÏÂÌË
+    &Item::empty,       ///< »«Ã≈–≈Õ»ﬂ - ◊¿—“Œ“ŒÃ≈– -  ÓÎ/‚Ó ÔÂËÓ‰Ó‚
+    &Item::empty,
     PageName::Function_FrequencyCounter, &PageFunction::self, Item::Active, Choice::Changed, Page::BeforeDraw, E_BfKE
 )
 
 const Page * const PageFrequencyCounter::self = (const Page *)&pFreqMeter;
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+void PageFrequencyCounter::Init()
+{
+    Page *page = (Page *)PageFrequencyCounter::self;
+
+    Item **items = (Item **)page->OwnData()->items;
+
+    if (FREQ_METER_MODE_VIEW_IS_FREQUENCY)
+    {
+        items[2] = (Item *)&cTimeF;
+        items[3] = &Item::empty;
+    }
+    else if (FREQ_METER_MODE_VIEW_IS_PERIOD)
+    {
+        items[2] = (Item *)&cFreqClc;
+        items[3] = (Item *)&cNumPeriods;
+    }
+}

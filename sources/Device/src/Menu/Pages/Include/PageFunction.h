@@ -14,9 +14,11 @@ struct PageFrequencyCounter
 {
     static const Page * const self;
 
+    static void Init();
+
     /// \todo Здесь страшенный говнокод. Нельзя опускаться до персональных проверок
 
-/// Возвращает указатель на ИЗМЕРЕНИЯ - ЧАСТОТОМЕР - Время счёта F
+    /// Возвращает указатель на ИЗМЕРЕНИЯ - ЧАСТОТОМЕР - Время счёта F
     static const Choice *GetChoiceTimeF();
     /// Возвращает указаетль на ИЗМЕРЕНИЯ - ЧАСТОТОМЕР - Метки времени
     static const Choice *GetChoiceFreqClc();
