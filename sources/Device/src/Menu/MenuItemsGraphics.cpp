@@ -401,12 +401,10 @@ void Page::DrawItems(int x, int y) const
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void Item::DrawCommonHiPart(int x, int y, bool opened) const
 {
-    bool pressed = IsPressed();
-
     int width = Width() - 3;
 
-    Color colorFill = pressed ? Color::WHITE : Color::BLACK;
-    Color colorText = pressed ? Color::BLACK : Color::WHITE;
+    Color colorFill = (IsPressed() && IsActive()) ? Color::WHITE : Color::BLACK;
+    Color colorText = ColorTitleDraw();
 
     Region(width, Item::Value::HEIGHT - 3).Fill(x + 1, y + (opened ? 1 : 2), colorFill);
 
@@ -563,5 +561,10 @@ Color Item::ColorFrame() const
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Color Item::ColorTitleDraw() const
 {
+    if (!IsActive())
+    {
+        return ColorMenuField(this);
+    }
+
     return IsPressed() ? Color::BACK : Color::FILL;
 }

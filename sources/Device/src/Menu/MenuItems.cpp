@@ -890,7 +890,7 @@ String Choice::NameSubItem(int i) const
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-Color Choice::ColorMenuField(const Choice *choice)
+Color Item::ColorMenuField(const Item *choice)
 {
     // Измерения по частоте
     if (choice == PageFrequencyCounter::GetChoiceTimeF())

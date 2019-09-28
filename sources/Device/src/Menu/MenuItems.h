@@ -83,6 +83,8 @@ public:
     Color ColorTitleDraw() const;
     /// Цвет обводки итема
     Color ColorFrame() const;
+    /// Возвращает цвет, которым нужно заполнять участок выбора
+    static Color ColorMenuField(const Item *choice);
 
     void DrawCommonHiPart(int x, int y, bool opened) const;
 
@@ -307,8 +309,6 @@ public:
     const char *NamePrevSubItem() const;
     /// Возвращает имя варианта выбора элемента choice в позиции i как оно записано в исходном коде программы
     String NameSubItem(int i) const;
-    /// Возвращает цвет, которым нужно заполнять участок выбора
-    static Color ColorMenuField(const Choice *choice);
 
     char GetSymbol();
 
