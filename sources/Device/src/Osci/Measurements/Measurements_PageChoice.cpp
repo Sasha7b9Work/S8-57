@@ -108,14 +108,7 @@ void Osci::Measurements::PageChoice::Draw()
             Rectangle(dX, dY).Draw(x0, y0, Color::WHITE);
             Region(dX - 2, dY - 2).Fill(x0 + 1, y0 + 1, (active ? Color::FLASH_10 : Color::BACK));
 
-            if (active)
-            {
-                Color::FLASH_01.SetAsCurrent();
-            }
-            else
-            {
-                Color::FILL.SetAsCurrent();
-            }
+            Color(active ? Color::FLASH_01 : Color::FILL).SetAsCurrent();
 
             Char(Measure::GetChar(meas)).Draw10SymbolsInRect(x0 + 2, y0 + 1);
             Font::SetCurrent(Font::Type::_5);
