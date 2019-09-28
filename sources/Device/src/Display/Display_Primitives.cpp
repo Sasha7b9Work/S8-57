@@ -107,7 +107,7 @@ int Display::Primitives::Text::Draw(int x, int y, Color color)
 {
     color.SetAsCurrent();
 
-    if (std::strlen(text) != 0)
+    if (text[0] != '\0')
     {
         if (sizeOfType != 1)
         {

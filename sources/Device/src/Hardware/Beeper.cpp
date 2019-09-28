@@ -188,27 +188,25 @@ static void Beep(const TypeWave::E newTypeWave, const float newFreq, const float
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Beeper::Bell::On()
 {
-    if (bellIsEnabled)
+    if (!bellIsEnabled)
     {
-        return;
+        Beeper::WaitForCompletion();
+
+
+        frequency = 2000.0F;
+        amplitude = 1.0F;
+        typeWave = TypeWave::Sine;
+
+        Stop();
+
+        SetWave();
+
+        Beeper::DAC1_::StartDMA(points, POINTS_IN_PERIOD_SOUND);
+
+        Timer::SetAndStartOnce(Timer::Type::StopSound, Stop, 1000000U);
+
+        bellIsEnabled = true;
     }
-
-    Beeper::WaitForCompletion();
-
-
-    frequency = 2000.0F;
-    amplitude = 1.0F;
-    typeWave = TypeWave::Sine;
-
-    Stop();
-
-    SetWave();
-
-    Beeper::DAC1_::StartDMA(points, POINTS_IN_PERIOD_SOUND);
-
-    Timer::SetAndStartOnce(Timer::Type::StopSound, Stop, 1000000U);
-
-    bellIsEnabled = true;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
