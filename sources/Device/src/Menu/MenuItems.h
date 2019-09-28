@@ -108,7 +108,7 @@ public:
     /// Цвет обводки итема
     Color ColorFrame() const;
     /// Возвращает цвет, которым нужно заполнять участок выбора
-    Color ColorMenuField(const Item *choice) const;
+    Color ColorBackground(const Item *choice) const;
 };
 
 
