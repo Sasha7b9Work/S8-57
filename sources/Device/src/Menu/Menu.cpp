@@ -313,25 +313,26 @@ PageName::E Menu::GetNameOpenedPage()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static Item *LastOpened(Page *page)
 {
-    if (page == nullptr)
+    Item *result = &Item::empty;
+
+    if (page)
     {
-        return &Item::empty;
+        if (page->CurrentItemIsOpened())
+        {
+            int8 posActItem = page->PosCurrentItem();
+            Item *item = page->GetItem(posActItem);
+
+            if (page->GetItem(posActItem)->Is(Item::Type::Page))
+            {
+                result = LastOpened((Page *)item);
+            }
+            else
+            {
+                result = item;
+            }
+        }
     }
 
-    if (page->CurrentItemIsOpened())
-    {
-        int8 posActItem = page->PosCurrentItem();
-        Item *item = page->GetItem(posActItem);
-
-        if (page->GetItem(posActItem)->Is(Item::Type::Page))
-        {
-            return LastOpened((Page *)item);
-        }
-        else
-        {
-            return item;
-        }
-    }
     return page;
 }
 
