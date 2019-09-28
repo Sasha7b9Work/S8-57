@@ -87,6 +87,7 @@ struct KeyEvent
     bool IsRight() const { return key == Key::Right; };
     bool IsUp() const { return key == Key::Up; };
     bool IsDown() const { return key == Key::Down; };
+    bool IsArrow() const;
     
     bool IsPress() const { return type == TypePress::Press; };
     bool IsRepeat() const { return type == TypePress::Repeat; };

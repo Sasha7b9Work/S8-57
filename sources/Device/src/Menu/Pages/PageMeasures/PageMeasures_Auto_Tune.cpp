@@ -58,9 +58,13 @@ static bool IsActive_Tune()
 
 static bool OnArrows_Tune(const KeyEvent &event)
 {
-    Osci::Measurements::PageChoice::OnKeyEvent(event);
+    if (event.IsArrow())
+    {
+        Osci::Measurements::PageChoice::OnKeyEvent(event);
+        return true;
+    }
 
-    return true;
+    return false;
 }
 
 DEF_PAGE_2( pageTune, // -V641 // -V1027
