@@ -365,6 +365,13 @@ DEF_CHOICE_2( cStats,                                                           
     &PageDebug::self, Item::Active, Choice::Changed, Choice::AfterDraw
 )
 
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+static int IncreaseY(int &y, int dY)
+{
+    y += dY;
+    return y;
+}
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 static void DebugShowSetInfo_Draw()
 {
@@ -376,16 +383,16 @@ static void DebugShowSetInfo_Draw()
     int dY = 10;
     int y = y0 - dY;
 
-#define Y_AND_INCREASE (y += dY, y)
-#define DRAW_TEXT(str)                  Painter::DrawText(x0, Y_AND_INCREASE, str)
-#define DRAW_FORMAT(str, value)         String(str, value).Draw(x0, Y_AND_INCREASE)
-#define DRAW_FORMAT2(str, val1, val2)   String(str, val1, val2).Draw(x0, Y_AND_INCREASE)
+#define INC_Y IncreaseY(y, dY)
+#define DRAW_TEXT(str)                  Painter::DrawText(x0, INC_Y, str)
+#define DRAW_FORMAT(str, value)         String(str, value).Draw(x0, INC_Y)
+#define DRAW_FORMAT2(str, val1, val2)   String(str, val1, val2).Draw(x0, INC_Y)
 
     //Painter_DrawFormatText(x0, Y_AND_INCREASE, "Размер основной структуры %d", sizeof(set));
     DRAW_FORMAT("Размер основной структуры : %d", sizeof(set)); //-V2528
-    String("Несбрасываемая структура:").Draw(x0, Y_AND_INCREASE); //-V2528
+    String("Несбрасываемая структура:").Draw(x0, INC_Y); //-V2528
 
-    int x = String("rShiftAdd :").Draw(x0, Y_AND_INCREASE) + 5; //-V2528
+    int x = String("rShiftAdd :").Draw(x0, INC_Y) + 5; //-V2528
 
     int ddY = 0;
 
@@ -411,7 +418,7 @@ static void DebugShowSetInfo_Draw()
     DRAW_FORMAT("balanceADCtype : %s", (NRST_BALANCE_ADC_TYPE < 3 ? s[NRST_BALANCE_ADC_TYPE] : "!!! неправильное значение !!!")); //-V547 //-V2528
     DRAW_FORMAT("stretchADCtype : %s", (NRST_STRETCH_ADC_TYPE < 3 ? s[NRST_STRETCH_ADC_TYPE] : "!!! неправильное значение !!!")); //-V547 //-V2528
 
-    x = String("stretchADC :").Draw(x0, Y_AND_INCREASE) + 5; //-V2528
+    x = String("stretchADC :").Draw(x0, INC_Y) + 5; //-V2528
 
     for (int ch = 0; ch < 2; ch++)
     {
@@ -473,8 +480,8 @@ static void OnPress_SaveFirmware()
 
     FDrive::OpenNewFileForWrite(NAME_FILE_FIRMWARE, &structForWrite);
 
-    uint8 *address = (uint8 *)0x08020000;   // -V566
-    uint8 *endAddress = address + SIZE_FILE_FIRMWARE;
+    uint8 *address = (uint8 *)0x08020000;
+    uint8 *endAddress = address + SIZE_FILE_FIRMWARE; //-V566
 
     int sizeBlock = 512;
 
