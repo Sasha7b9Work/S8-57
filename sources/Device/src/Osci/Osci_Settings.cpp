@@ -6,7 +6,6 @@
 #include "Hardware/HAL/HAL.h"
 #include "Settings/Settings.h"
 #include "Utils/Math.h"
-
 #include "Osci/Display/Osci_Display.h"
 #include "Data/Reader.h"
 #include "Display/Grid.h"
@@ -29,6 +28,30 @@ using FPGA::HAL::GPIO::Pin;
 using FPGA::Settings::ModeCouple;
 using HAL::FSMC;
 using Osci::Settings::Range;
+
+
+// Массив структур описаний масштабов по напряжению.
+static const struct RangeStruct
+{
+    pString name;     // Название диапазона в текстовом виде, пригодном для вывода на экран.
+    RangeStruct(pString nRU) : name(nRU) {};
+}
+ranges[Range::Size][2] =
+{
+    {RangeStruct("2\x10мВ"),  RangeStruct("20\x10мВ")},
+    {RangeStruct("5\x10мВ"),  RangeStruct("50\x10мВ")},
+    {RangeStruct("10\x10мВ"), RangeStruct("0.1\x10В")},
+    {RangeStruct("20\x10мВ"), RangeStruct("0.2\x10В")},
+    {RangeStruct("50\x10мВ"), RangeStruct("0.5\x10В")},
+    {RangeStruct("0.1\x10В"), RangeStruct("1\x10В")},
+    {RangeStruct("0.2\x10В"), RangeStruct("2\x10В")},
+    {RangeStruct("0.5\x10В"), RangeStruct("5\x10В")},
+    {RangeStruct("1\x10В"),   RangeStruct("10\x10В")},
+    {RangeStruct("2\x10В"),   RangeStruct("20\x10В")},
+    {RangeStruct("5\x10В"),   RangeStruct("50\x10В")},
+    {RangeStruct("10\x10В"),  RangeStruct("100\x10В")},
+    {RangeStruct("20\x10В"),  RangeStruct("200\x10В")}
+};
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -245,6 +268,12 @@ void Osci::Settings::Range::LoadBoth()
     Osci::Restart();
 
     MessageMgr::OsciSettingsEffectOnAverageChanged();
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+pString Range::ToString(int8 _divider)
+{
+    return ranges[value][_divider].name;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
