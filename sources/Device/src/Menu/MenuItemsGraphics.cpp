@@ -55,7 +55,7 @@ void GovernorColor::DrawOpened(int x, int y) const
     int width = widthOpened;
     int height = heightOpened;
     OwnData()->ct->Init();
-    Rectangle(width + 2, height + 2).Draw(x - 1, y - 1, Color::BACK);
+    Rectangle(width + 2, height + 2).Draw(x - 1, y - 1, ColorTitleBackground());
     Rectangle(width, height).Draw(x, y, ColorFrame());
     Region(width - 2, height / 2 - 2).Fill(x + 1, y + 1, ColorTitleBackground());
     HLine(width).Draw(x, y + Height() / 2 + 2, ColorFrame());
@@ -86,7 +86,7 @@ void GovernorColor::DrawValue(int x, int y) const
     ct->Init();
     int16 vals[4] = {(int16)(ct->brightness * 100.0F), (int16)blue, (int16)green, (int16)red};
 
-    Region(widthOpened - 2, 12).Fill(x, y, Color::BACK);
+    Region(widthOpened - 2, 12).Fill(x, y, ColorTitleBackground());
     x += 98;
 
     for (int i = 0; i < 4; i++)
@@ -353,7 +353,8 @@ void Page::DrawItems(int x, int y) const
 {
     for (int i = 0; i < 5; i++)
     {
-        Rectangle(Width(i) - 1, Height()).Draw(x, y + 1, Color::FILL);
+        Rectangle(Width(i) - 1, Height()).Draw(x, y + 1, ColorFrame());
+
         Region(Width(i) - 3, Height() - 2).Fill(x + 1, y + 2, Color::BACK);
         
         Item *item = GetItem(PosItemOnLeft() + i);
@@ -382,7 +383,7 @@ void Item::DrawCommonHiPart(int x, int y, bool opened) const
     
     if (opened)
     {
-        HLine(width).Draw(x + 1, y + Item::Value::HEIGHT - 1, Color::FILL);
+        HLine(width).Draw(x + 1, y + Item::Value::HEIGHT - 1, ColorFrame());
     }
 }
 
@@ -399,19 +400,16 @@ static void DrawValueWithSelectedPosition(int x, int y, int value, uint numDigit
     
     int height = 8;
     
-    Color fill = Color::BACK;
-    Color back = Color::FILL;
-    
     for (uint i = 0; i < numDigits; i++)
     {
         if (selPosFromEnd == ((int)numDigits - (int)i - 1))
         {
-            Region(5, height).Fill(x - 1, y, back);
+            Region(5, height).Fill(x - 1, y, Color::FILL);
         }
         
         uint8 val = stack.Pop();
         
-        Char((char)(val + 48)).Draw(x, y, fill);
+        Char((char)(val + 48)).Draw(x, y, Color::BACK);
         
         x += 6;
     }
@@ -499,8 +497,8 @@ void GraphButton::DrawHints(int x, int y, int width) const
     {
         return;
     }
-    Region(width, 239 - y).Fill(x, y, Color::BACK);
-    Rectangle(width, 239 - y).Draw(x, y, Color::FILL);
+    Region(width, 239 - y).Fill(x, y, ColorTitleBackground());
+    Rectangle(width, 239 - y).Draw(x, y, ColorFrame());
     const StructHelpDrawButton *structHelp = &OwnData()->hintUGO[0];
     x += 3;
     y += 3;
@@ -514,27 +512,4 @@ void GraphButton::DrawHints(int x, int y, int width) const
         y = ((yNew - y) < 22) ? (y + 22) : yNew;
         structHelp++;
     }
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-Color Item::ColorTitleBackground() const
-{
-    return IsPressed() ? Color::FILL : Color::BACK;
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-Color Item::ColorFrame() const
-{
-    return Color::FILL;
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-Color Item::ColorTitleText() const
-{
-    if (!IsActive())
-    {
-        return ColorBackground(this);
-    }
-
-    return IsPressed() ? Color::BACK : Color::FILL;
 }

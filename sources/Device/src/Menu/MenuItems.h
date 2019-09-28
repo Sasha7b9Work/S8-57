@@ -102,11 +102,16 @@ public:
     static bool Active() { return true; }
 
     /// Возвращает цвет фона заголовка итема
-    Color ColorTitleBackground() const;
+    Color ColorTitleBackground() const { return IsPressed() ? Color::FILL : Color::BACK; };
     /// Возвращает цвет, которым нужно рисовать на заголовке итема
-    Color ColorTitleText() const;
+    Color ColorTitleText() const
+    {
+        if (!IsActive())  { return ColorBackground(this);  }
+
+        return IsPressed() ? Color::BACK : Color::FILL;
+    }
     /// Цвет обводки итема
-    Color ColorFrame() const;
+    Color ColorFrame() const { return Color::FILL; };
     /// Возвращает цвет, которым нужно заполнять участок выбора
     Color ColorBackground(const Item *choice) const;
 };
