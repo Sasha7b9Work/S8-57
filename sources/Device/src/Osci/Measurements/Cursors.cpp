@@ -64,14 +64,14 @@ String Cursor::Time(Chan::E source, int numCur)
 float Cursor::PosT(Chan::E ch, int num)
 {
     float retValue = 0.0F;
-    std::memcpy(&retValue, &set.curs_posCurT[ch][num], sizeof(float));
+    std::memcpy(&retValue, &set.curs.posCurT[ch][num], sizeof(float));
     return retValue;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Cursor::SetCursPosT_temp(Chan::E ch, int num, float value)
 {
-    std::memcpy(&set.curs_posCurT[ch][num], &value, sizeof(float));
+    std::memcpy(&set.curs.posCurT[ch][num], &value, sizeof(float));
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
