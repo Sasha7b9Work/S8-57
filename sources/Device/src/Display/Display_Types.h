@@ -7,52 +7,52 @@
 #define MOI_WIDTH_D_IP      34      /* ”величение ширины открытого ip-адреса в случае наличи€ порта */
 #define GRID_DELTA          20      /*  оличество точек в клетке */
 
-#define BACKGROUND                  (set.disp_background)
+#define BACKGROUND                  (set.disp.background)
 #define BACKGROUND_BLACK            (BACKGROUND == Display::Background::Black)
 
-#define MODE_DRAW_SIGNAL            (set.disp_modeDrawSignal)
+#define MODE_DRAW_SIGNAL            (set.disp.modeDrawSignal)
 #define MODE_DRAW_SIGNAL_IS_LINES   (MODE_DRAW_SIGNAL == Display::ModeDrawSignal::Lines)
 #define MODE_DRAW_SIGNAL_IS_POINTS  (MODE_DRAW_SIGNAL == Display::ModeDrawSignal::Points)
 
 //#define THICKNESS_SIGNAL            (set.disp_thickness)
 //#define THICKNESS_SIGNAL_IS_3       (THICKNESS_SIGNAL == Display::ThicknessSignal::_3)
 
-#define ENUM_MIN_MAX                (set.disp_ENumMinMax)
+#define ENUM_MIN_MAX                (set.disp.ENumMinMax)
 #define MIN_MAX_ENABLED             (ENUM_MIN_MAX != Display::ENumMinMax::_1)
 #define NUM_MIN_MAX                 (1 << (int)ENUM_MIN_MAX)        /* ¬озвращает количество измерений сигналов дл€ расчЄта минимумов и максимумов. */
 
-#define ENUM_SMOOTHING              (set.disp_ENumSmoothing)
+#define ENUM_SMOOTHING              (set.disp.ENumSmoothing)
 #define SMOOTHING_ENABLED           (ENUM_SMOOTHING != Display::ENumSmoothing::Disable)
 
-#define ACCUMULATION                (set.disp_modeAccumulation)
+#define ACCUMULATION                (set.disp.modeAccumulation)
 #define ACCUMULATION_IS_ENABLED     (ACCUMULATION == ::Display::ModeAccumulation::Reset)
 
 
-#define ENUM_ACCUM                  (set.disp_ENumAccum)
+#define ENUM_ACCUM                  (set.disp.ENumAccum)
 #define NUM_ACCUM                   (1 << (int)ENUM_ACCUM)                   /* ¬озвращает число накоплений */
 
-#define MODE_AVE                    (set.disp_modeAveraging)
-#define ENUM_AVE                    (set.disp_ENumAverage)
+#define MODE_AVE                    (set.disp.modeAveraging)
+#define ENUM_AVE                    (set.disp.ENumAverage)
 #define NUM_AVE                     (1 << (int)ENUM_AVE)
 #define NUM_AVE_MAX                 256
 #define IN_AVERAGING_MODE           (ENUM_AVE > Display::ENumAverage::_1 && (!IN_P2P_MODE))
 
 #define TIME_MESSAGES               5
 
-#define ENUM_SIGNALS_IN_SEC         (set.disp_ENumSignalsInSec)
+#define ENUM_SIGNALS_IN_SEC         (set.disp.ENumSignalsInSec)
 
-#define LAST_AFFECTED_CH            (set.disp_lastAffectedChannel)
+#define LAST_AFFECTED_CH            (set.disp.lastAffectedChannel)
 #define LAST_AFFECTED_CH_IS_A       (LAST_AFFECTED_CH == Chan::A)
 #define DISPLAY_ORIENTATION         (set.dbg_Orientation)
 #define DISPLAY_ORIENTATION_IS_NORMAL (DISPLAY_ORIENTATION == Display::Orientation::Normal)
 
-#define LINKING_RSHIFT              (set.disp_linkingRShift)
+#define LINKING_RSHIFT              (set.disp.linkingRShift)
 
-#define MENU_AUTO_HIDE              (set.disp_menuAutoHide)
+#define MENU_AUTO_HIDE              (set.disp.menuAutoHide)
 
-#define BRIGHTNESS_DISPLAY          (set.disp_brightness)
+#define BRIGHTNESS_DISPLAY          (set.disp.brightness)
 
-#define BRIGHTNESS_GRID             (set.disp_brightnessGrid)
+#define BRIGHTNESS_GRID             (set.disp.brightnessGrid)
 
 #define SET_NUM_BYTES_ON_DISPLAY    (SET_PEAKDET_EN ? 281 * 2 : 281)
 

@@ -86,7 +86,7 @@ struct FFTmaxDB
     {
         static const float arrayMAX_DB_FOR_FFT[] = { -40.0F, -60.0F, -80.0F };
 
-        return arrayMAX_DB_FOR_FFT[maxDB];
+        return arrayMAX_DB_FOR_FFT[static_cast<int>(maxDB)];
     }
 };
 

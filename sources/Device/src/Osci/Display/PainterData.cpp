@@ -460,7 +460,7 @@ static void DrawTShift(int /*leftX*/, int /*rightX*/, int /*numBytes*/)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 int Osci::Display::PainterData::FirstPointOnScreen()
 {
-    return set.disp_shiftInMemory;
+    return set.disp.shiftInMemory;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -497,14 +497,14 @@ void Osci::Display::PainterData::ChangeTPos()
 
     if (TPOS_IS_LEFT)
     {
-        set.disp_shiftInMemory = 0;
+        set.disp.shiftInMemory = 0;
     }
     else if (TPOS_IS_CENTER)
     {
-        set.disp_shiftInMemory = (int16)(FPGA_NUM_POINTS / 2 - width / 2);
+        set.disp.shiftInMemory = (int16)(FPGA_NUM_POINTS / 2 - width / 2);
     }
     else // TPOS_IS_RIGHT
     {
-        set.disp_shiftInMemory = (int16)(FPGA_NUM_POINTS - width - 2);
+        set.disp.shiftInMemory = (int16)(FPGA_NUM_POINTS - width - 2);
     }
 }

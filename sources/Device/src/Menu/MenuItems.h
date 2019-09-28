@@ -85,7 +85,7 @@ public:
         static const int HEIGHT = 13;
     };
 
-    bool Is(Type::E t) const { return data->type == t; };
+    bool Is(Type::E t) const { return data->type == static_cast<uint8>(t); };
 
     virtual void Draw(int /*x*/, int /*y*/, bool /*opened*/) const {};
 
