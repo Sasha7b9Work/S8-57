@@ -65,6 +65,19 @@ struct SettingsDisplay
                                                            ///< на экран с наложением один поверх другого
 };
 
+struct SettingsChannel
+{
+    uint16                         shift[Chan::Size];      ///< Сдвиг канала по вертикали
+    Osci::Settings::Range::E       range[Chan::Size];      ///< Масштаб канала по вертикали
+    FPGA::Settings::ModeCouple::E  couple[Chan::Size];     ///< Связь по входу
+    bool                           enabled[Chan::Size];    ///< Включен/выключен канал
+    int8                           balanceShiftADC[2];     ///< Добавочное смещение для балансировки АЦП.
+    FPGA::Settings::Bandwidth      bandwidth[2];           ///< Ограничение полосы.
+    bool                           inverse[2];
+    Divider::E                     divider[2];             ///< Множитель.
+    CalibrationMode::E             calibrationMode[2];     ///< Режим калибровки.
+};
+
 class Settings
 {
 public:
@@ -80,18 +93,7 @@ public:
     uint                crc32;                              ///< \brief Контрольная сумма данной структуры с хранящимися в ней настройками
 
     SettingsDisplay disp;
-
-    // Меню КАНАЛ 1, КАНАЛ 2
-
-    uint16                         chan_shift[Chan::Size];      ///< Сдвиг канала по вертикали
-    Osci::Settings::Range::E       chan_range[Chan::Size];      ///< Масштаб канала по вертикали
-    FPGA::Settings::ModeCouple::E  chan_couple[Chan::Size];     ///< Связь по входу
-    bool                           chan_enabled[Chan::Size];    ///< Включен/выключен канал
-    int8                           chan_balanceShiftADC[2];     ///< Добавочное смещение для балансировки АЦП.
-    FPGA::Settings::Bandwidth      chan_bandwidth[2];           ///< Ограничение полосы.
-    bool                           chan_inverse[2];
-    Divider::E                     chan_divider[2];             ///< Множитель.
-    CalibrationMode::E             chan_calibrationMode[2];     ///< Режим калибровки.
+    SettingsChannel ch;
 
     // Меню СИНХРОНИЗАЦИЯ
 
