@@ -71,25 +71,6 @@ namespace Display
         } value;
     };
 
-    /// Выбор цвета фона.
-    struct Background
-    {
-        enum E
-        {
-            Black,
-            White
-        } value;
-    };
-
-    struct ModeDrawSignal
-    {
-        enum E
-        {
-            Lines,
-            Points
-        } value;
-    };
-
     /// Толщина рисуемого сигнала
     struct ThicknessSignal
     {
@@ -98,23 +79,6 @@ namespace Display
             _1,         ///< Сигнал рисуется линией толщиной одна точка
             _3          ///< Сигнал рисуется линией толщиной три точки
         } value;
-    };
-
-    /// Количество измерений для расчёта минимального и максимального значений.
-    struct ENumMinMax
-    {
-        enum E
-        {
-            _1,
-            _2,
-            _4,
-            _8,
-            _16,
-            _32,
-            _64,
-            _128
-        } value;
-        explicit ENumMinMax(E v) : value(v) {};
     };
 
     struct Orientation
@@ -134,85 +98,6 @@ namespace Display
         {
             Voltage,      ///< Смещение привязано к напряжению
             Position      ///< Смещение привязано к позиции
-        } value;
-    };
-
-    /// Ограничение FPS.
-    struct ENumSignalsInSec
-    {
-        enum E
-        {
-            _25,
-            _10,
-            _5,
-            _2,
-            _1
-        } value;
-        explicit ENumSignalsInSec(E v) : value(v) { };
-        /// Возвращает количество миллисекунда между кадрами
-        uint TimeBetweenFramesMS() const;
-    };
-
-    /// Количество точек для расчёта сглаживания.
-    struct ENumSmoothing
-    {
-        enum E
-        {
-            Disable,
-            _2points,
-            _3points,
-            _4points,
-            _5points,
-            _6points,
-            _7points,
-            _8points,
-            _9points,
-            _10points
-        } value;
-        explicit ENumSmoothing(E v) : value(v) { };
-        uint ToNumber() const;
-    };
-
-    struct ModeAccumulation
-    {
-        enum E
-        {
-            NoReset,   /// В этом режиме показываются строго N последних.
-            Reset      /// В этом режиме набираются N последних и потом сбрасываются.
-        } value;
-    };
-
-    /// Количество накоплений.
-    struct ENumAccum
-    {
-        enum E
-        {
-            _1,
-            _2,
-            _4,
-            _8,
-            _16,
-            _32,
-            _64,
-            _128,
-            _Infinity
-        } value;
-    };
-
-    /// Количество усреднений по измерениям.
-    struct ENumAverage
-    {
-        enum E
-        {
-            _1,
-            _2,
-            _4,
-            _8,
-            _16,
-            _32,
-            _64,
-            _128,
-            _256
         } value;
     };
 }

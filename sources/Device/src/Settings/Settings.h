@@ -9,7 +9,6 @@
 #include "Osci/FrequencyCounter.h"
 #include "Osci/Measurements/Cursors.h"
 #include "Menu/Menu.h"
-#include "Display/Grid_Types.h"
 #include "Display/Colors.h"
 #include "Osci/Measurements/Measures.h"
 #include "Osci/Measurements/Measures_Settings.h"
@@ -18,6 +17,7 @@
 #include "Osci/Measurements/Cursors_Settings.h"
 #include "Tester/Tester_Settings.h"
 #include "Multimeter/Multimeter_Settings.h"
+#include "Menu/Pages/Include/PageDisplay.h"
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -43,28 +43,6 @@
 #pragma pack(push, 1)
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-struct SettingsDisplay
-{
-    Display::ModeDrawSignal::E      modeDrawSignal;
-    Display::Background::E          background;            ///< Цвет фона.
-    Display::ENumMinMax::E          ENumMinMax;            ///< Перечисление количества измерений для определения минимумов и масимумов.
-    uint8                           notUsing0;
-    Display::ENumAverage::E         ENumAverage;           ///< Число усреднений сигнала.
-    Display::ENumAccum::E           ENumAccum;             ///< Число накоплений сигнала на экране.
-    Display::ModeAccumulation::E    modeAccumulation;      ///< Режим накопления сигналов.
-    Display::ENumSmoothing          ENumSmoothing;         ///< Перечисление количества точек для скользящего фильтра.
-    Display::ENumSignalsInSec       ENumSignalsInSec;      ///< Перечисление числа считываний сигнала в секунда.
-    Grid::Type::E                   typeGrid;              ///< Тип сетки
-    int                             brightnessGrid;        ///< Яркость сетки от 0 до 100.
-    Display::LinkingRShift::E       linkingRShift;         ///< Тип привязки к смещению по вертикали.
-    int16                           brightness;            ///< Яркость дисплея.
-    Menu::AutoHide::E               menuAutoHide;          ///< Через сколько времени после последнего нажатия клавиши прятать меню.
-    int16                           shiftInMemory;         ///< \brief Показывает смещение левого края стеки относительно нулевого байта памяти в 
-                                                           ///< байтах. Т.е. для пикового детектора будет в два раза больше количества точек на экране.
-    Chan::E                         lastAffectedChannel;   ///< \brief Последний управляемый канал. Используется для правильного вывода сигналов
-                                                           ///< на экран с наложением один поверх другого
-};
-
 struct SettingsChannel
 {
     uint16                         shift[Chan::Size];      ///< Сдвиг канала по вертикали
