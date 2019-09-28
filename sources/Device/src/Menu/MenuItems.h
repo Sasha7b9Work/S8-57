@@ -77,14 +77,6 @@ public:
     int Height() const;
     /// Ширина итема. pos - позиция итема на экране.
     int Width(int pos = -1) const;
-    /// Возвращает цвет фона заголовка итема
-    Color ColorTitleBackground() const;
-    /// Возвращает цвет, которым нужно рисовать на заголовке итема
-    Color ColorTitleDraw() const;
-    /// Цвет обводки итема
-    Color ColorFrame() const;
-    /// Возвращает цвет, которым нужно заполнять участок выбора
-    Color ColorMenuField(const Item *choice) const;
 
     void DrawCommonHiPart(int x, int y, bool opened) const;
 
@@ -108,6 +100,15 @@ public:
     static DataItem emptyData;
 
     static bool Active() { return true; }
+
+    /// Возвращает цвет фона заголовка итема
+    Color ColorTitleBackground() const;
+    /// Возвращает цвет, которым нужно рисовать на заголовке итема
+    Color ColorTitleText() const;
+    /// Цвет обводки итема
+    Color ColorFrame() const;
+    /// Возвращает цвет, которым нужно заполнять участок выбора
+    Color ColorMenuField(const Item *choice) const;
 };
 
 

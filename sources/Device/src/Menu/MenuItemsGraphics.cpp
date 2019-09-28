@@ -59,7 +59,7 @@ void GovernorColor::DrawOpened(int x, int y) const
     Rectangle(width, height).Draw(x, y, ColorFrame());
     Region(width - 2, height / 2 - 2).Fill(x + 1, y + 1, ColorTitleBackground());
     HLine(width).Draw(x, y + Height() / 2 + 2, ColorFrame());
-    Text(Title().CString()).DrawInCenterRect(x +  1, y - 1, width, Height() / 2 + 2, ColorTitleDraw());
+    Text(Title().CString()).DrawInCenterRect(x +  1, y - 1, width, Height() / 2 + 2, ColorTitleText());
     DrawValue(x + 1, y + 14);
 }
 
@@ -404,7 +404,7 @@ void Item::DrawCommonHiPart(int x, int y, bool opened) const
     int width = Width() - 3;
 
     Color colorFill = (IsPressed() && IsActive()) ? Color::WHITE : Color::BLACK;
-    Color colorText = ColorTitleDraw();
+    Color colorText = ColorTitleText();
 
     Region(width, Item::Value::HEIGHT - 3).Fill(x + 1, y + (opened ? 1 : 2), colorFill);
 
@@ -559,7 +559,7 @@ Color Item::ColorFrame() const
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-Color Item::ColorTitleDraw() const
+Color Item::ColorTitleText() const
 {
     if (!IsActive())
     {
