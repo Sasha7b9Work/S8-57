@@ -38,8 +38,8 @@ const Page    *Menu::mainPage = nullptr;
 static Item   *itemHint = nullptr;
 /// Строка подсказки, которую надо выводить в случае включённого режима подсказок.
 const char    *stringForHint = nullptr;
-/// Время последнего нажатия кнопки. Нужно для того, чтобы периодически сохранять настройки
-static uint timeLastPressedButton = MAX_UINT;
+/// Нужно для того, чтобы периодически сохранять настройки
+static uint timeLastKeyboardEvent = MAX_UINT;
 
 /// Последний открытый контрол на дереве странице page
 static Item *LastOpened(Page *page);
@@ -56,7 +56,7 @@ void Menu::ProcessingAllKeyboardEvents()
 {
     while(!BufferButtons::IsEmpty())                // Если есть события клавиатуры
     {
-        timeLastPressedButton = TIME_MS;            // то сохраняем время последнего нажатия, чтобы знать, когда сохранить настройки
+        timeLastKeyboardEvent = TIME_MS;            // то сохраняем время последнего нажатия, чтобы знать, когда сохранить настройки
 
         KeyEvent event = BufferButtons::Extract();  // Извлекаем очередное событие
 
@@ -459,9 +459,9 @@ void Menu::SetItemForHint(const Item *item)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Menu::SaveSettings()
 {
-    if((timeLastPressedButton != MAX_UINT) && (TIME_MS - timeLastPressedButton > 5000))
+    if((timeLastKeyboardEvent != MAX_UINT) && (TIME_MS - timeLastKeyboardEvent > 5000))
     {
-        timeLastPressedButton = MAX_UINT;
+        timeLastKeyboardEvent = MAX_UINT;
         if(!Device::State::InModeTester())
         {
             Settings::Save();
