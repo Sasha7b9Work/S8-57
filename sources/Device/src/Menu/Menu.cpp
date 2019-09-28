@@ -59,11 +59,6 @@ void Menu::ProcessingAllKeyboardEvents()
 
         KeyEvent event = BufferButtons::Extract();  // Извлекаем очередное событие
 
-        if (event.IsRelease())
-        {
-            event = event;
-        }
-
         if (!Keyboard::KeyIsActive(event.key))      // Если кнопка не разрешена для обработки сейчас:
         {
             continue;                               // Перехдим к следующей

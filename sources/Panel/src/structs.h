@@ -7,7 +7,7 @@
 #endif
 
 
-union BitSet16
+union BitSet16 //-V2514
 {
     uint16 halfWord;
     uint8  byte[2];
@@ -21,7 +21,7 @@ union BitSet16
 };
 
 
-union BitSet32
+union BitSet32 //-V2514
 {
     uint    word;
     uint16  halfWord[2];

@@ -36,7 +36,7 @@ typedef unsigned char  BYTE; //-V677
 typedef unsigned short WORD; //-V677
 //#define WCHAR unsigned short
 #ifndef GUI
-typedef unsigned short WCHAR;
+typedef unsigned short WCHAR; //-V677
 #endif
 typedef unsigned long  DWORD; //-V677
 typedef unsigned long  FSIZE_t;

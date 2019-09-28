@@ -251,7 +251,7 @@ typedef struct
 class Settings
 {
 public:
-    union
+    union //-V2514
     {
         SettingsNonReset nr;                    // здесь хранятся настройки, которые не сбрасываются при СЕРВИС - Сброс настроек
         uint8 buf[SIZE_NONRESET_SETTINGS];
