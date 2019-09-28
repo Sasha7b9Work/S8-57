@@ -64,7 +64,7 @@ public:
 
     bool IsCurrentItem() const;
     /// ¬озвращает адрес родител€
-    const Page *Keeper() const { if (data->keeper == nullptr) { return nullptr; } return *data->keeper; }
+    const Page *Keeper() const { return (data->keeper) ? *data->keeper : nullptr; }
     /// ¬озвращает true, если в древе предков стоит keeper
     bool ExistKeeper(const Page *keeper) const;
     /// »меет родител€ - не €вл€етс€ главной страницей меню
