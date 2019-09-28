@@ -84,7 +84,7 @@ public:
     /// Цвет обводки итема
     Color ColorFrame() const;
     /// Возвращает цвет, которым нужно заполнять участок выбора
-    static Color ColorMenuField(const Item *choice);
+    Color ColorMenuField(const Item *choice) const;
 
     void DrawCommonHiPart(int x, int y, bool opened) const;
 
