@@ -1666,11 +1666,6 @@
               <FilePath>.\src\Settings\Settings_default.cpp</FilePath>
             </File>
             <File>
-              <FileName>SettingsChannel.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Settings\SettingsChannel.cpp</FilePath>
-            </File>
-            <File>
               <FileName>SettingsChannel.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Settings\SettingsChannel.h</FilePath>

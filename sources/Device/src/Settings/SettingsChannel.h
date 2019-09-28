@@ -21,7 +21,3 @@ struct Chan
     int RequestBytes(DataSettings *ds) const;
     pString Name() const;
 };
-
-
-
-
