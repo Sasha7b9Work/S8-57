@@ -63,7 +63,7 @@ Item::Item(const DataItem * const _data) : data(_data)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Item::HandlerFX(TypePress::E type) const
 {
-    if (type == TypePress::Press)
+    if (type == TypePress::Press && IsActive())
     {
         pressedItem = this;
     }
