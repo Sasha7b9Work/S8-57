@@ -281,44 +281,22 @@ void Choice::DrawClosed(int x, int y) const
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Button::Draw(int x, int y, bool) const
 {
-    if (!IsActive())
-    {
-        return;
-    }
+    Region(Width() - 5, Height() - 4).Fill(x + 2, y + 3, ColorTitleBackground());
 
-    Region(Width() - 5, Height() - 4).Fill(x + 2, y + 3, IsPressed() ? Color::FILL : Color::BACK);
-
-    Text(Title().CString()).DrawInCenterRect(x + 2, y, Width(), Height(), IsPressed() ? Color::BACK : Color::FILL);
+    Text(Title().CString()).DrawInCenterRect(x + 2, y, Width(), Height(), ColorTitleText());
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void GraphButton::Draw(int x, int y, bool) const
 {
-    if (!IsActive())
-    {
-        return;
-    }
-
     x += 2;
     y += 3;
     
-    if (IsActive())
-    {
-        if (IsPressed())
-        {
-            Region(GraphButton::Width() - 5, GraphButton::Height() - 4).Fill(x, y, Color::FILL);
-            Color::BLACK.SetAsCurrent();
-        }
-        else
-        {
-            Color::FILL.SetAsCurrent();
-        }
-        OwnData()->funcDraw(x + 20, y);
-    }
-    else
-    {
-        Color::FILL.SetAsCurrent();
-    }
+    Region(GraphButton::Width() - 5, GraphButton::Height() - 4).Fill(x, y, ColorTitleBackground());
+
+    ColorTitleText().SetAsCurrent();
+
+    OwnData()->funcDraw(x + 20, y);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
