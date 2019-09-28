@@ -470,7 +470,7 @@ void Menu::SaveSettings()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-const Item *Menu::ItemForFuncKey(Key::E key)
+const Item *Menu::ItemUnderFunctionalKey(Key::E key)
 {
     if (!Key(key).IsFunctional())
     {

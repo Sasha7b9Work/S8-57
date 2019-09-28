@@ -24,15 +24,14 @@ struct Menu
 
     static void Hide();
 
-    /// Возвращает true, если меню отображается на экране
     static bool IsShown();
-    /// Возвращает адрес открытого элемента меню
+
     static Item *OpenedItem();
 
     static PageName::E GetNameOpenedPage();
     /// Возвращает адрес текущего элемента меню (текущим, как правило, является элемент, кнопка которого была нажата последней
     static Item *CurrentItem();
-    /// Закрыть открытый элемент меню
+
     static void CloseOpenedItem();
 
     static void SetItemForHint(const Item *item);
@@ -40,8 +39,8 @@ struct Menu
     static void SaveSettings();
     /// С какоей позиции Y рисовать меню. Позиция берётся без учёта заголовка
     static int Y0();
-    /// Возвращает адрес элемента, соответствующего функциональной кнопкке
-    static const Item *ItemForFuncKey(Key::E key);
+
+    static const Item *ItemUnderFunctionalKey(Key::E key);
     /// Текущая главная страница
     static const Page *mainPage;
 

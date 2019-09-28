@@ -312,7 +312,7 @@ static void FX_Press()
 {
     if (Menu::IsShown())
     {
-        Menu::ItemForFuncKey(event.key)->HandlerFX(TypePress::Press);
+        Menu::ItemUnderFunctionalKey(event.key)->HandlerFX(TypePress::Press);
     }
 }
 
@@ -321,7 +321,7 @@ static void FX_Release()
 {
     if (Menu::IsShown())
     {
-        Menu::ItemForFuncKey(event.key)->HandlerFX(TypePress::Release);
+        Menu::ItemUnderFunctionalKey(event.key)->HandlerFX(TypePress::Release);
     }
 }
 
@@ -330,7 +330,7 @@ static void FX_Long()
 {
     if (Menu::IsShown())
     {
-        Menu::ItemForFuncKey(event.key)->HandlerFX(TypePress::Long);
+        Menu::ItemUnderFunctionalKey(event.key)->HandlerFX(TypePress::Long);
     }
 }
 
