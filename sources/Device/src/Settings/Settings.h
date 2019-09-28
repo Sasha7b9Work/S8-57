@@ -26,9 +26,9 @@
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-#define TRIG_MODE                   (set.trig_mode)
-#define TRIG_HOLDOFF                (set.trig_holdOff)
-#define TRIG_HOLDOFF_ENABLED        (set.trig_holdOffEnabled)
+#define TRIG_MODE                   (set.trig.mode)
+#define TRIG_HOLDOFF                (set.trig.holdOff)
+#define TRIG_HOLDOFF_ENABLED        (set.trig.holdOffEnabled)
 
 /// Возвращает позицию активного пункта на странице Page::Name.
 #define MENU_POS_ACT_ITEM(name)     (set.menu_posActItem[name])
@@ -78,6 +78,19 @@ struct SettingsChannel
     CalibrationMode::E             calibrationMode[2];     ///< Режим калибровки.
 };
 
+struct SettingsTrig
+{
+    Osci::Settings::Trig::Source::E    source;
+    Osci::Settings::Trig::Input::E     input;
+    Osci::Settings::Trig::Polarity::E  polarity;
+    uint16                             lev[Chan::Size];
+    Osci::Settings::Trig::StartMode::E startMode;           ///< Режим запуска.
+    Osci::Settings::Trig::ModeFind::E  modeFind;            ///< Поиск синхронизации - вручную или автоматически.
+                                            /// \todo разрядности trig_holdOff недостаточно
+    int16                              holdOff;             ///< Удержание синхронизации
+    bool                               holdOffEnabled;      ///< Включение удержания синхронизации
+};
+
 class Settings
 {
 public:
@@ -94,18 +107,7 @@ public:
 
     SettingsDisplay disp;
     SettingsChannel ch;
-
-    // Меню СИНХРОНИЗАЦИЯ
-
-    Osci::Settings::Trig::Source::E    trig_source;
-    Osci::Settings::Trig::Input::E     trig_input;
-    Osci::Settings::Trig::Polarity::E  trig_polarity;
-    uint16                             trig_lev[Chan::Size];
-    Osci::Settings::Trig::StartMode::E trig_startMode;           ///< Режим запуска.
-    Osci::Settings::Trig::ModeFind::E  trig_modeFind;            ///< Поиск синхронизации - вручную или автоматически.
-    /// \todo разрядности trig_holdOff недостаточно
-    int16                              trig_holdOff;             ///< Удержание синхронизации
-    bool                               trig_holdOffEnabled;      ///< Включение удержания синхронизации
+    SettingsTrig    trig;
 
     // Меню РАЗВЁРТКА
 

@@ -50,15 +50,16 @@ const Settings Settings::defaultSettings =
     },
 
     // ÃÂÌ˛ —»Õ’–ŒÕ»«¿÷»ﬂ
-
-    Trig::Source::A,                        // trig_source;           
-    Trig::Input::Full,                      // trig_input;            
-    Trig::Polarity::Rising,                 // trig_polarity;         
-    {Trig::Level::ZERO, Trig::Level::ZERO}, // trig_lev[Chan::Size];
-    Trig::StartMode::Auto,                  // trig_startMode;        
-    Trig::ModeFind::Hand,                   // trig_modeFind;         
-    10,                                     // trig_holdOff;          
-    false,                                  // trig_holdOffEnable     
+    {
+        Trig::Source::A,                        // trig_source;           
+        Trig::Input::Full,                      // trig_input;            
+        Trig::Polarity::Rising,                 // trig_polarity;         
+        {Trig::Level::ZERO, Trig::Level::ZERO}, // trig_lev[Chan::Size];
+        Trig::StartMode::Auto,                  // trig_startMode;        
+        Trig::ModeFind::Hand,                   // trig_modeFind;         
+        10,                                     // trig_holdOff;          
+        false,                                  // trig_holdOffEnable     
+    },
 
     // ÃÂÌ˛ –¿«¬®–“ ¿
 

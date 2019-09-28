@@ -6,16 +6,16 @@
 #define SET_RSHIFT_A            (SET_RSHIFT(Chan::A))
 #define SET_RSHIFT_B            (SET_RSHIFT(Chan::B))
 
-#define TRIG_SOURCE             (set.trig_source)
+#define TRIG_SOURCE             (set.trig.source)
 #define TRIG_SOURCE_IS_A        (TRIG_SOURCE == Trig::Source::A)
 #define TRIG_SOURCE_IS_B        (TRIG_SOURCE == Trig::Source::B)
 
-#define SET_TRIGLEV(ch)         (set.trig_lev[(uint8)ch])
+#define SET_TRIGLEV(ch)         (set.trig.lev[(uint8)ch])
 #define SET_TRIGLEV_SOURCE      SET_TRIGLEV(TRIG_SOURCE)
 #define SET_TRIGLEV_A           (SET_TRIGLEV(Chan::A))
 #define SET_TRIGLEV_B           (SET_TRIGLEV(Chan::B))
 
-#define TRIG_MODE_FIND          (set.trig_modeFind)
+#define TRIG_MODE_FIND          (set.trig.modeFind)
 #define TRIG_MODE_FIND_IS_HAND  (TRIG_MODE_FIND == Osci::Settings::Trig::ModeFind::Hand)
 #define TRIG_MODE_FIND_IS_AUTO  (TRIG_MODE_FIND == Osci::Settings::Trig::ModeFind::Auto)
 
