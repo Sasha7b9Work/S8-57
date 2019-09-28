@@ -379,7 +379,7 @@ static void EnterRelease()
 {
     if (!Menu::IsShown())
     {
-        Menu::Show(true);
+        Menu::Show();
     }
     else
     {
@@ -390,7 +390,7 @@ static void EnterRelease()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void EnterLong()
 {
-    Menu::Show(!Menu::IsShown());
+    return Menu::IsShown() ? Menu::Hide() : Menu::Show();
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -508,7 +508,7 @@ static void ShowHidePage(const Page *page)
 {
     if (Menu::OpenedItem() == page)
     {
-        Menu::Show(!Menu::IsShown());
+        Menu::IsShown() ? Menu::Hide() : Menu::Show();
     }
     else
     {
@@ -516,7 +516,7 @@ static void ShowHidePage(const Page *page)
 
         if (!Menu::IsShown())
         {
-            Menu::Show(true);
+            Menu::Show();
         }
     }
 }

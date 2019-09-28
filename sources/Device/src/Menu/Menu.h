@@ -15,12 +15,15 @@ struct Menu
     static void ChangeStateFlashDrive();
 
     static void ProcessingAllKeyboardEvents();
-    /// Нарисовать меню
+
     static void Draw();
     /// Установить время автоматического сокрытия меню в соответствии с установками.
     static void SetAutoHide(bool active);
-    /// Показать/скрыть меню.
-    static void Show(bool show);
+    
+    static void Show();
+
+    static void Hide();
+
     /// Возвращает true, если меню отображается на экране
     static bool IsShown();
     /// Возвращает адрес открытого элемента меню
