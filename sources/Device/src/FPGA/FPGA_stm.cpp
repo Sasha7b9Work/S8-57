@@ -10,13 +10,11 @@
 #include "Settings/Settings.h"
 #include "Utils/Buffer.h"
 #include "Utils/Values.h"
-#include <stdlib.h>
-#include <cstring>
-
 #include "Hardware/HAL/HAL.h"
 #include "Osci/Osci_Storage.h"
 #include "Data/Reader.h"
-#include "Display/Display_Types.h"
+#include <stdlib.h>
+#include <cstring>
 
 
 using namespace FPGA::HAL::GPIO;

@@ -1,6 +1,5 @@
 #include "defines.h"
 #include "Data/Reader.h"
-#include "Display/Display_Types.h"
 #include "Osci/Display/Accumulator.h"
 #include "Osci/Display/Osci_Display.h"
 #include "Settings/Settings.h"

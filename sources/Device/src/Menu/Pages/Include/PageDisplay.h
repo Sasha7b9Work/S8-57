@@ -4,11 +4,50 @@
 #include "Menu/Menu.h"
 
 
-#define TYPE_GRID       (set.disp.typeGrid)
-#define TYPE_GRID_1     (TYPE_GRID == Grid::Type::_1)
-#define TYPE_GRID_2     (TYPE_GRID == Grid::Type::_2)
-#define TYPE_GRID_3     (TYPE_GRID == Grid::Type::_3)
-#define TYPE_GRID_4     (TYPE_GRID == Grid::Type::_4)
+#define TYPE_GRID                   (set.disp.typeGrid)
+#define TYPE_GRID_1                 (TYPE_GRID == Display::TypeGrid::_1)
+#define TYPE_GRID_2                 (TYPE_GRID == Display::TypeGrid::_2)
+#define TYPE_GRID_3                 (TYPE_GRID == Display::TypeGrid::_3)
+#define TYPE_GRID_4                 (TYPE_GRID == Display::TypeGrid::_4)
+
+#define LINKING_RSHIFT              (set.disp.linkingRShift)
+
+#define MENU_AUTO_HIDE              (set.disp.menuAutoHide)
+
+#define BRIGHTNESS_DISPLAY          (set.disp.brightness)
+
+#define BRIGHTNESS_GRID             (set.disp.brightnessGrid)
+
+#define BACKGROUND                  (set.disp.background)
+#define BACKGROUND_BLACK            (BACKGROUND == Display::Background::Black)
+
+#define MODE_DRAW_SIGNAL            (set.disp.modeDrawSignal)
+#define MODE_DRAW_SIGNAL_IS_LINES   (MODE_DRAW_SIGNAL == Display::ModeDrawSignal::Lines)
+#define MODE_DRAW_SIGNAL_IS_POINTS  (MODE_DRAW_SIGNAL == Display::ModeDrawSignal::Points)
+
+#define ENUM_MIN_MAX                (set.disp.ENumMinMax)
+#define MIN_MAX_ENABLED             (ENUM_MIN_MAX != Display::ENumMinMax::_1)
+#define NUM_MIN_MAX                 (1 << (int)ENUM_MIN_MAX)        /* Возвращает количество измерений сигналов для расчёта минимумов и максимумов. */
+
+#define ENUM_SMOOTHING              (set.disp.ENumSmoothing)
+#define SMOOTHING_ENABLED           (ENUM_SMOOTHING != Display::ENumSmoothing::Disable)
+
+#define ACCUMULATION                (set.disp.modeAccumulation)
+#define ACCUMULATION_IS_ENABLED     (ACCUMULATION == ::Display::ModeAccumulation::Reset)
+
+#define ENUM_ACCUM                  (set.disp.ENumAccum)
+#define NUM_ACCUM                   (1 << (int)ENUM_ACCUM)                   /* Возвращает число накоплений */
+
+#define MODE_AVE                    (set.disp.modeAveraging)
+#define ENUM_AVE                    (set.disp.ENumAverage)
+#define NUM_AVE                     (1 << (int)ENUM_AVE)
+#define NUM_AVE_MAX                 256
+#define IN_AVERAGING_MODE           (ENUM_AVE > Display::ENumAverage::_1 && (!IN_P2P_MODE))
+
+#define ENUM_SIGNALS_IN_SEC         (set.disp.ENumSignalsInSec)
+
+#define LAST_AFFECTED_CH            (set.disp.lastAffectedChannel)
+#define LAST_AFFECTED_CH_IS_A       (LAST_AFFECTED_CH == Chan::A)
 
 
 namespace Display
@@ -127,12 +166,9 @@ namespace Display
         /// Возвращает количество миллисекунда между кадрами
         uint TimeBetweenFramesMS() const;
     };
-}
 
-namespace Grid
-{
     /// Тип сетки на экране.
-    struct Type
+    struct TypeGrid
     {
         enum E
         {
@@ -156,7 +192,7 @@ struct SettingsDisplay
     Display::ModeAccumulation::E    modeAccumulation;      ///< Режим накопления сигналов.
     Display::ENumSmoothing          ENumSmoothing;         ///< Перечисление количества точек для скользящего фильтра.
     Display::ENumSignalsInSec       ENumSignalsInSec;      ///< Перечисление числа считываний сигнала в секунда.
-    Grid::Type::E                   typeGrid;              ///< Тип сетки
+    Display::TypeGrid::E            typeGrid;              ///< Тип сетки
     int                             brightnessGrid;        ///< Яркость сетки от 0 до 100.
     Display::LinkingRShift::E       linkingRShift;         ///< Тип привязки к смещению по вертикали.
     int16                           brightness;            ///< Яркость дисплея.

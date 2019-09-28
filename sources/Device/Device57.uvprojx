@@ -556,11 +556,6 @@
               <FilePath>.\src\Display\Display.h</FilePath>
             </File>
             <File>
-              <FileName>Display_Types.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Display\Display_Types.h</FilePath>
-            </File>
-            <File>
               <FileName>Display_Primitives.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Display\Display_Primitives.cpp</FilePath>
@@ -1189,11 +1184,6 @@
               <FileName>PageAccumulation.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Menu\Pages\PageDisplay\PageAccumulation.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>PageDisplay_View.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Menu\Pages\PageDisplay\PageDisplay_View.cpp</FilePath>
             </File>
           </Files>
         </Group>

@@ -18,19 +18,19 @@ const Settings Settings::defaultSettings =
 
     // Ìåíþ ÄÈÑÏËÅÉ
     {
-        Display::ModeDrawSignal::Lines,                             // disp_modeDrawSignal;      
-        Display::Background::Black,                                 // disp_background;          
-        Display::ENumMinMax::_1,                                    // disp_ENumMinMax;          
+        Display::ModeDrawSignal::Lines,                             // disp_modeDrawSignal;
+        Display::Background::Black,                                 // disp_background;
+        Display::ENumMinMax::_1,                                    // disp_ENumMinMax;
         0,                                                          // not used
-        Display::ENumAverage::_1,                                   // disp_ENumAverage;         
-        Display::ENumAccum::_1,                                     // disp_ENumAccum;           
-        Display::ModeAccumulation::NoReset,                         // disp_modeAccumulation;    
-        Display::ENumSmoothing(Display::ENumSmoothing::Disable),    // disp_ENumSmoothing;       
-        Display::ENumSignalsInSec(Display::ENumSignalsInSec::_25),  // disp_ENumSignalsInSec;    
-        Grid::Type::_1,                                             // disp_typeGrid;            
-        50,                                                         // disp_brightnessGrid;      
-        Display::LinkingRShift::Position,                           // disp_linkingRShift;       
-        100,                                                        // disp_brightness;          
+        Display::ENumAverage::_1,                                   // disp_ENumAverage;
+        Display::ENumAccum::_1,                                     // disp_ENumAccum;
+        Display::ModeAccumulation::NoReset,                         // disp_modeAccumulation;
+        Display::ENumSmoothing(Display::ENumSmoothing::Disable),    // disp_ENumSmoothing;
+        Display::ENumSignalsInSec(Display::ENumSignalsInSec::_25),  // disp_ENumSignalsInSec;
+        Display::TypeGrid::_1,                                      // disp_typeGrid;
+        50,                                                         // disp_brightnessGrid;
+        Display::LinkingRShift::Position,                           // disp_linkingRShift;
+        100,                                                        // disp_brightness;
         Menu::AutoHide::None,                                       // disp_menuAutoHide;
         370,                                                        // disp_shiftInMemory;
         Chan::A,                                                    // disp_lastAffectedChannel;

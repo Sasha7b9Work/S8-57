@@ -1,15 +1,13 @@
 #include "defines.h"
 #include "Osci_Averager.h"
 #include "Display/Display_Primitives.h"
-#include "Display/Display_Types.h"
 #include "Settings/Settings.h"
 #include "Osci.h"
 #include "Data/Reader.h"
 #include "FPGA/FPGA.h"
-#include <cstring>
-
 #include "Display/Grid.h"
 #include <cmath>
+#include <cstring>
 
 using namespace Display::Primitives;
 

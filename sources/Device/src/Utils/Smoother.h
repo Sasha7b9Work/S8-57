@@ -1,5 +1,4 @@
 #pragma once
-#include "Display/Display_Types.h"
 #include "Settings/Settings.h"
 #include <cstring>
 

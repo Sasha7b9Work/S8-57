@@ -1,5 +1,4 @@
 #pragma once
-#include "Display_Types.h"
 #include "Display_Warnings.h"
 #include "Keyboard/Keyboard.h"
 
@@ -12,9 +11,64 @@ class LogEntity
 
 #define DISPLAY_SHOW_WARNING(warn)  Display::ShowWarning(warn)
 
+#define MOSI_HEIGHT         9
+#define MOI_HEIGHT_TITLE    19
+#define MOI_WIDTH_D_IP      34      /* Увеличение ширины открытого ip-адреса в случае наличия порта */
+#define GRID_DELTA          20      /* Количество точек в клетке */
+
+#define TIME_MESSAGES               5
+
+
+#define DISPLAY_ORIENTATION         (set.dbg_Orientation)
+#define DISPLAY_ORIENTATION_IS_NORMAL (DISPLAY_ORIENTATION == Display::Orientation::Normal)
+
+#define SET_NUM_BYTES_ON_DISPLAY    (SET_PEAKDET_EN ? 281 * 2 : 281)
+
+#define SHIFT_IN_MEMORY_IN_POINTS   Display::ShiftInMemoryInPoints()
+
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 namespace Display
 {
+    struct DrawMode
+    {
+        enum E
+        {
+            Auto,
+            Hand
+        } value;
+    };
+
+    /// Толщина рисуемого сигнала
+    struct ThicknessSignal
+    {
+        enum E
+        {
+            _1,         ///< Сигнал рисуется линией толщиной одна точка
+            _3          ///< Сигнал рисуется линией толщиной три точки
+        } value;
+    };
+
+    struct Orientation
+    {
+        enum E
+        {
+            Normal,
+            Reverse
+        } value;
+        explicit Orientation(E v) : value(v) {};
+    };
+
+    /// Тип привязки к смещению по вертикали
+    struct LinkingRShift
+    {
+        enum E
+        {
+            Voltage,      ///< Смещение привязано к напряжению
+            Position      ///< Смещение привязано к позиции
+        } value;
+    };
+
     static const int HEIGHT = 240;
 
     static const int WIDTH = 320;

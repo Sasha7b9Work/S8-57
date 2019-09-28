@@ -1,6 +1,5 @@
 #pragma once
 #include "Colors.h"
-#include "Display_Types.h"
 #include "Display/Font/Font.h"
 
 
