@@ -2,19 +2,6 @@
 #include "Utils/String.h"
 
 
- /// Делитель.
-struct Divider
-{
-    enum E
-    {
-        _1,
-        _10
-    } value;
-    explicit Divider(E v) : value(v) { };
-    explicit Divider(uint v) : value(static_cast<E>(v)) { };
-    int ToAbs() const { return (value == _1) ? 1 : 10; };
-};
-
 struct DataSettings;
 
 struct Chan
@@ -35,15 +22,6 @@ struct Chan
     pString Name() const;
 };
 
-/// Режим калибровки.
-struct CalibrationMode
-{
-    enum E
-    {
-        x1,
-        x10,
-        Disable
-    } value;
-};
+
 
 

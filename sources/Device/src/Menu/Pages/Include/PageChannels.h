@@ -39,6 +39,30 @@
 #define SET_CALIBR_MODE_A       (SET_CALIBR_MODE(Chan::A))
 #define CALIBR_MODE_B           (SET_CALIBR_MODE(Chan::B))
 
+/// Режим калибровки.
+struct CalibrationMode
+{
+    enum E
+    {
+        x1,
+        x10,
+        Disable
+    } value;
+};
+
+/// Делитель.
+struct Divider
+{
+    enum E
+    {
+        _1,
+        _10
+    } value;
+    explicit Divider(E v) : value(v) { };
+    explicit Divider(uint v) : value(static_cast<E>(v)) { };
+    int ToAbs() const { return (value == _1) ? 1 : 10; };
+};
+
 
 struct SettingsChannel
 {
