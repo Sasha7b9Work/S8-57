@@ -56,14 +56,14 @@ public:
     /// Это системная функция. Вызывать самому нельзя
     static void OnTimerFlashDisplay();
 
-    void SetValue(uint value);
+    void LoadValueRGB(uint value);
     
-    uint8 value;
-
     static void InitGlobalColors();
     static void Log(Color color);
 
     Color& operator=(const Color &color);
+
+    uint8 value;
 
 private:
 
@@ -113,7 +113,7 @@ private:
     static void WriteToDisplay(Color color);
 
     static Color currentColor;
-
+    
 public:
 
     struct Scheme

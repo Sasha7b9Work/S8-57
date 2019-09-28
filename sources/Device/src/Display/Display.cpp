@@ -113,7 +113,7 @@ void Display::Init()
 {
     for(uint8 i = 0; i < Color::NUMBER.value; i++)
     {
-        Color(i).SetValue(COLOR(i));
+        Color(i).LoadValueRGB(COLOR(i));
     }
 
     Painter::Init();
