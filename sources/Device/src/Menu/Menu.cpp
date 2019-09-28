@@ -471,23 +471,27 @@ const Item *Menu::ItemForFuncKey(Key::E key)
 
     Item *item = Menu::OpenedItem();
 
-    if (!item)
-    {
-        return &Item::empty;
-    }
+    const Item *result = &Item::empty;
 
-    if (item->Is(Item::Type::Page))
+    if (item == nullptr)
     {
-        return ((Page *)item)->ItemForFuncKey(key);
+    }
+    else if (item->Is(Item::Type::Page))
+    {
+        result = ((Page *)item)->ItemForFuncKey(key);
+        if (!result->IsActive())
+        {
+            result = &Item::empty;
+        }
     }
     else
     {
         const Page *parent = item->Keeper();
-        if (parent && parent->ItemForFuncKey(key) == item)
+        if (parent && parent->ItemForFuncKey(key) == item && item->IsActive())
         {
-            return item;
+            result = item;
         }
     }
 
-    return &Item::empty;
+    return result;
 }
