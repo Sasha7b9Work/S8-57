@@ -106,8 +106,8 @@ void Table::Cell::DrawStringMeasure(int x, int y)
     String measureA = measure.GetStringMeasure(Chan::A, buffer, SIZE_BUFFER);
     String measureB = measure.GetStringMeasure(Chan::B, buffer, SIZE_BUFFER);
 
-    Color colA = Color::Channel(Chan::A);
-    Color colB = Color::Channel(Chan::B);
+    Color colA = Color::CHAN[Chan::A];
+    Color colB = Color::CHAN[Chan::B];
 
     if (VIEW_MEASURES_BOTH)
     {

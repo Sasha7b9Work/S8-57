@@ -143,7 +143,7 @@ static void WriteParametersFFT(Chan::E ch, float freq0, float density0, float fr
         y += dY * 3 + 4;
     }
 
-    Color::Channel(ch).SetAsCurrent();
+    Color::CHAN[ch].SetAsCurrent();
 
     Text(SCALE_FFT_IS_LOG ? SU::Db2String(density0, 4, buffer) : Osci::Measurements::Float2String(density0, false, buffer)).Draw(x, y);
 
@@ -186,7 +186,7 @@ static void DRAW_SPECTRUM(const uint8 *dataIn, int numPoints, Chan::E ch)
 
         FPGA::Math::CalculateFFT(dataR, numPoints, spectrum, &freq0, &density0, &freq1, &density1, &y0, &y1);
 
-        DrawSpectrumChannel(spectrum, Color::Channel(ch));
+        DrawSpectrumChannel(spectrum, Color::CHAN[ch]);
 
         Color color = Color::FILL;
 
@@ -319,7 +319,7 @@ static void DrawChannel(Chan::E ch)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void DrawModeLines(Chan::E ch, int left, int center, const uint8 *data, float scale)
 {
-    Color::Channel(ch).SetAsCurrent();
+    Color::CHAN[ch].SetAsCurrent();
 
     int x = left;
 
@@ -376,7 +376,7 @@ static void DrawModeLinesPeakDetOff(int center, const uint8 *data, float scale, 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void DrawModePoints(Chan::E ch, int left, int center, const uint8 *data, float scale)
 {
-    Color::Channel(ch).SetAsCurrent();
+    Color::CHAN[ch].SetAsCurrent();
 
     if (SET_PEAKDET_EN)
     {

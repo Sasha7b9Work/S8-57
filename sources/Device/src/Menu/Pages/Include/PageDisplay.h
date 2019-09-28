@@ -2,6 +2,7 @@
 #include "Display/Colors.h"
 #include "Menu/MenuItems.h"
 #include "Menu/Menu.h"
+#include "Osci/Osci_Settings.h"
 
 
 #define TYPE_GRID                   (set.disp.typeGrid)

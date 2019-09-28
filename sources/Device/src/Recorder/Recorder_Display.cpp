@@ -79,9 +79,9 @@ void Recorder::Display::DrawSettings(int x, int y)
 
     Text(REC_SCALE_X.ToString()).Draw(x + 2, y + 2);
 
-    Text(Osci::Settings::Range(SET_RANGE_A).ToString(SET_DIVIDER(0))).Draw(x + 2, y + 11, Color::Channel(Chan::A));
+    Text(Osci::Settings::Range(SET_RANGE_A).ToString(SET_DIVIDER(0))).Draw(x + 2, y + 11, Color::CHAN[Chan::A]);
 
-    Text(Osci::Settings::Range(SET_RANGE_B).ToString(SET_DIVIDER(1))).Draw(x + 2, y + 20, Color::Channel(Chan::B));
+    Text(Osci::Settings::Range(SET_RANGE_B).ToString(SET_DIVIDER(1))).Draw(x + 2, y + 20, Color::CHAN[Chan::B]);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -186,15 +186,15 @@ static void DrawParametersCursors()
 
     Text(String("1:%s", TimeCursor(0, buffer))).Draw(x + 2, y1, Color::FILL);
 
-    Text(VoltageCursor(Chan::A, 0, buffer)).Draw(x1, y2, Color::Channel(Chan::A));
+    Text(VoltageCursor(Chan::A, 0, buffer)).Draw(x1, y2, Color::CHAN[Chan::A]);
 
-    Text(VoltageCursor(Chan::B, 0, buffer)).Draw(x1, y3, Color::Channel(Chan::B));
+    Text(VoltageCursor(Chan::B, 0, buffer)).Draw(x1, y3, Color::CHAN[Chan::B]);
 
     Text(String("2:%s", TimeCursor(1, buffer))).Draw(x + 2, y4, Color::FILL);
 
-    Text(VoltageCursor(Chan::A, 1, buffer)).Draw(x1, y5, Color::Channel(Chan::A));
+    Text(VoltageCursor(Chan::A, 1, buffer)).Draw(x1, y5, Color::CHAN[Chan::A]);
 
-    Text(VoltageCursor(Chan::B, 1, buffer)).Draw(x1, y6, Color::Channel(Chan::B));
+    Text(VoltageCursor(Chan::B, 1, buffer)).Draw(x1, y6, Color::CHAN[Chan::B]);
 
     Text(String("dT %s", DeltaTime(buffer))).Draw(x + 2, y7, Color::FILL);
 }
@@ -248,14 +248,14 @@ void Recorder::Display::DrawData()
                 int min = Y(point.Min(Chan::A));
                 int max = Y(point.Max(Chan::A));
 
-                VLine(max - min).Draw(x, min, Color::Channel(Chan::A));
+                VLine(max - min).Draw(x, min, Color::CHAN[Chan::A]);
             }
             if (REC_SRC_B_IS_ENABLED)
             {
                 int min = Y(point.Min(Chan::B));
                 int max = Y(point.Max(Chan::B));
 
-                VLine(max - min).Draw(x, min, Color::Channel(Chan::B));
+                VLine(max - min).Draw(x, min, Color::CHAN[Chan::B]);
             }
         }
 

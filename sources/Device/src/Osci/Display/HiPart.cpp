@@ -244,7 +244,7 @@ static void WriteTextVoltage(Chan::E ch, int x, int y)
         return;
     }
 
-    Color color = Color::Channel(ch);
+    Color color = Color::CHAN[ch];
 
     bool inverse = SET_INVERSE(ch);
     //int8 divider = (int8)SET_DIVIDER(ch);
@@ -423,7 +423,7 @@ static void WriteCursors()
 
         x += 3;
         Chan::E source = CURS_SOURCE;
-        Color colorText = Color::Channel(source);
+        Color colorText = Color::CHAN[source];
         if (CURsU_ENABLED)
         {
             String("1:").Draw(x, y1, colorText);

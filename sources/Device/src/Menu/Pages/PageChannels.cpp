@@ -9,7 +9,6 @@
 #include "Utils/CommonFunctions.h"
 #include "Hardware/Timer.h"
 #include "Osci/Osci.h"
-#include "Settings/SettingsChannel.h"
 #include <cstring>
 
 

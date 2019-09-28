@@ -1,6 +1,5 @@
 #pragma once
 #include "FPGA/FPGA_Settings.h"
-#include "Settings/SettingsChannel.h"
 #include "Settings/SettingsTime.h"
 
 

@@ -1,5 +1,4 @@
 #pragma once
-#include "Settings/SettingsChannel.h"
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -44,8 +43,6 @@ public:
     explicit Color(uint8 val) : value(val) { }
     Color(const Color &color) : value(color.value) { }
 
-    static Color Channel(Chan::E ch);
-    static Color Cursors(Chan::E ch);
     static Color Trig();
     /// Устанавливает текущий цвет отрисовки
     void SetAsCurrent();
@@ -65,10 +62,10 @@ public:
 
     uint8 value;
 
-private:
-
     static Color CHAN[4];
-    
+
+private:
+   
     enum
     {
         COLOR_BLACK = 0,

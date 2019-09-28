@@ -1,5 +1,6 @@
 #pragma once
 #include "Settings/SettingsService.h"
+#include "Osci/Osci_Settings.h"
 
 
 /// На столько единиц нужно изменить значение смещения, чтобы маркер смещения по напряжению передвинулся на одну точку.

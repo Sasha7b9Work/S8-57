@@ -381,7 +381,7 @@ void Osci::Settings::RShift::DrawBoth()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Osci::Settings::RShift::Draw(Chan::E ch)
 {
-    Color::Channel(ch).SetAsCurrent();
+    Color::CHAN[ch].SetAsCurrent();
 
     int delta = (SET_RSHIFT(ch) - ZERO) / STEP_RSHIFT;
 

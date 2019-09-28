@@ -46,7 +46,7 @@ void Osci::Display::MemoryWindow::Draw()
         Chan::E chan = chans[i];
         if (SET_ENABLED(chan))
         {
-            Color::Channel(chan).SetAsCurrent();
+            Color::CHAN[chan].SetAsCurrent();
             DrawDataInRect(X(), Y(), Width(), Height(), OUT(chan), FPGA_NUM_POINTS);
         }
     }

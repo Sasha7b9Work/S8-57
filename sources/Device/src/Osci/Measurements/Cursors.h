@@ -1,6 +1,6 @@
 #pragma once
-#include "Settings/SettingsChannel.h"
 #include "Utils/String.h"
+#include "Osci/Osci_Settings.h"
 
 
 /// Перемемещение курсоров при вращении ручки УСТАНОВКА - по точкам или процентам
