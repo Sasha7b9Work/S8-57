@@ -94,17 +94,18 @@ const Settings Settings::defaultSettings =
     },
 
     // ÃÂÌ˛ œ¿Ãﬂ“‹
-
-    Osci::Settings::Memory::ENumPointsFPGA::_1k,    // mem_enumPoints;                            
-    ModeBtnMemory::Menu,                            // mem_modeBtnMemory;                         
-    ModeWork::Dir,                                  // mem_modeWork;                              
-    false,                                          // mem_flashAutoConnect;                      
-    0,                                              // mem_indexCurSymbolNameMask;                
-    ModeSaveSignal::BMP,                            // mem_modeSaveSignal;                        
-    {},                                             // mem_fileName[MAX_SYMBOLS_IN_FILE_NAME];    
-    ModeShowIntMem::Saved,                          // mem_modeShowIntMem;                        
-    FileNamingMode::Mask,                           // mem_fileNamingMode;                        
-    {},                                             // mem_fileNameMask[MAX_SYMBOLS_IN_FILE_NAME];
+    {
+        Osci::Settings::Memory::ENumPointsFPGA::_1k,    // mem_enumPoints;                            
+        ModeBtnMemory::Menu,                            // mem_modeBtnMemory;                         
+        ModeWork::Dir,                                  // mem_modeWork;                              
+        false,                                          // mem_flashAutoConnect;                      
+        0,                                              // mem_indexCurSymbolNameMask;                
+        ModeSaveSignal::BMP,                            // mem_modeSaveSignal;                        
+        {},                                             // mem_fileName[MAX_SYMBOLS_IN_FILE_NAME];    
+        ModeShowIntMem::Saved,                          // mem_modeShowIntMem;                        
+        FileNamingMode::Mask,                           // mem_fileNamingMode;                        
+        {},                                             // mem_fileNameMask[MAX_SYMBOLS_IN_FILE_NAME];
+    },
     
     // ÃÂÌ˛ »«Ã≈–≈Õ»ﬂ
     

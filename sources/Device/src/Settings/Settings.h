@@ -119,6 +119,30 @@ struct SettingsCursors
     float                                    posCurT[Chan::Size][2];  ///< Текущие позиции курсоров времени обоих каналов.
 };
 
+struct SettingsMemory
+{
+#define MAX_SYMBOLS_IN_FILE_NAME 35
+    Osci::Settings::Memory::ENumPointsFPGA::E   enumPoints;                             ///< Число точек
+    ModeBtnMemory::E                            modeBtnMemory;
+    ModeWork::E                                 modeWork;                               ///< Режим работы.
+    bool                                        flashAutoConnect;                       ///< Если true, при подключении флешки автоматически выводится Файл-Менеджер.
+    int8                                        indexCurSymbolNameMask;                 ///< Индекс текущего символа в режиме задания маски или выбора имени.
+    ModeSaveSignal::E                           modeSaveSignal;                         ///< В каком виде сохранять сигнал.
+    char                                        fileName[MAX_SYMBOLS_IN_FILE_NAME];     ///< Имя файла для режима ручного задания.
+    ModeShowIntMem::E                           modeShowIntMem;                         ///< Что показывать в режиме ВНУТР ЗУ - считанный или записанный сигнал.
+    FileNamingMode::E                           fileNamingMode;                         ///< Режим именования файлов.
+    char                                        fileNameMask[MAX_SYMBOLS_IN_FILE_NAME]; ///< \brief Здесь маска для автоматического именования файлов.
+                        ///< \details Правила именования.\n
+                        /// \code
+                        /// %y('\x42') - год, %m('\x43') - месяц, %d('\x44') - день, %H('\x45') - часы, %M('\x46') - минуты, %S('\x47') - секунды
+                        /// %Nn('\x48''n') - порядковый номер, котрый занимает не менее n знакомест, например, 7 в %3N будет преобразовано в 007
+                        /// Примеры
+                        /// name_%4N_%y_%m_%d_%H_%M_%S будет генерировать файлы вида name_0043_2014_04_25_14_45_32
+                        /// При этом обратите внимание, что если спецификатор %4N стоИт после временнЫх параметров, то, скорее всего, этот параметр 
+                        /// будет всегда равен 0001, т.к. для определения номера просматриваются.
+                        /// \endcode
+};
+
 class Settings
 {
 public:
@@ -138,29 +162,8 @@ public:
     SettingsTrig    trig;
     SettingsTime    time;
     SettingsCursors curs;
+    SettingsMemory  mem;
 
-    // Меню ПАМЯТЬ
-
-#define MAX_SYMBOLS_IN_FILE_NAME 35
-    Osci::Settings::Memory::ENumPointsFPGA::E   mem_enumPoints;                             ///< Число точек
-    ModeBtnMemory::E                            mem_modeBtnMemory;
-    ModeWork::E                                 mem_modeWork;                               ///< Режим работы.
-    bool                                        mem_flashAutoConnect;                       ///< Если true, при подключении флешки автоматически выводится Файл-Менеджер.
-    int8                                        mem_indexCurSymbolNameMask;                 ///< Индекс текущего символа в режиме задания маски или выбора имени.
-    ModeSaveSignal::E                           mem_modeSaveSignal;                         ///< В каком виде сохранять сигнал.
-    char                                        mem_fileName[MAX_SYMBOLS_IN_FILE_NAME];     ///< Имя файла для режима ручного задания.
-    ModeShowIntMem::E                           mem_modeShowIntMem;                         ///< Что показывать в режиме ВНУТР ЗУ - считанный или записанный сигнал.
-    FileNamingMode::E                           mem_fileNamingMode;                         ///< Режим именования файлов.
-    char                                        mem_fileNameMask[MAX_SYMBOLS_IN_FILE_NAME]; ///< \brief Здесь маска для автоматического именования файлов.
-                        ///< \details Правила именования.\n
-                        /// \code
-                        /// %y('\x42') - год, %m('\x43') - месяц, %d('\x44') - день, %H('\x45') - часы, %M('\x46') - минуты, %S('\x47') - секунды
-                        /// %Nn('\x48''n') - порядковый номер, котрый занимает не менее n знакомест, например, 7 в %3N будет преобразовано в 007
-                        /// Примеры
-                        /// name_%4N_%y_%m_%d_%H_%M_%S будет генерировать файлы вида name_0043_2014_04_25_14_45_32
-                        /// При этом обратите внимание, что если спецификатор %4N стоИт после временнЫх параметров, то, скорее всего, этот параметр 
-                        /// будет всегда равен 0001, т.к. для определения номера просматриваются.
-                        /// \endcode
 
     // Меню ИЗМЕРЕНИЯ
 
