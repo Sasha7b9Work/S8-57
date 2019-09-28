@@ -187,13 +187,13 @@ void Grid::DrawGridSignal(int left, int top, int width, int height)
         line.Draw(319, top + 2);
     }
 
-    float deltaX = DeltaX() * (float)width / width;
-    float deltaY = DeltaY() * (float)height / height;
+    float deltaX = DeltaX() * static_cast<float>(width) / width;
+    float deltaY = DeltaY() * static_cast<float>(height) / height;
     float stepX = deltaX / 5;
     float stepY = deltaY / 5;
 
-    float centerX = (float)(left + width / 2);
-    float centerY = (float)(top + height / 2);
+    float centerX = static_cast<float>(left + width / 2);
+    float centerY = static_cast<float>(top + height / 2);
 
     Color::GRID.SetAsCurrent();
 
@@ -203,11 +203,11 @@ void Grid::DrawGridSignal(int left, int top, int width, int height)
     }
     else if (TYPE_GRID_2)
     {
-        DrawGridType2(left, top, right, bottom, (int)deltaX, (int)deltaY, (int)stepX, (int)stepY);
+        DrawGridType2(left, top, right, bottom, static_cast<int>(deltaX), static_cast<int>(deltaY), static_cast<int>(stepX), static_cast<int>(stepY));
     }
     else if (TYPE_GRID_3)
     {
-        DrawGridType3(left, top, right, bottom, (int)centerX, (int)centerY, (int)deltaX, (int)deltaY, (int)stepX);
+        DrawGridType3(left, top, right, bottom, static_cast<int>(centerX), static_cast<int>(centerY), static_cast<int>(deltaX), static_cast<int>(deltaY), static_cast<int>(stepX));
     }
     else
     {
@@ -223,15 +223,15 @@ void Grid::DrawGridSpectrum()
         static const int nums[] = {4, 6, 8};
         static pString strs[] = {"0", "-10", "-20", "-30", "-40", "-50", "-60", "-70"};
         int numParts = nums[MAX_DB_FFT];
-        float scale = (float)MathHeight() / numParts;
+        float scale = static_cast<float>(MathHeight()) / numParts;
         for (int i = 1; i < numParts; i++)
         {
-            int y = MathTop() + (int)(i * scale);
+            int y = MathTop() + static_cast<int>(i * scale);
 
 			HLine(256).Draw(Left(), y, Color::GRID);
 
             Color::FILL.SetAsCurrent();
-            String((char *)strs[i]).Draw(3, y - 4);
+            String(const_cast<char *>(strs[i])).Draw(3, y - 4);
         }
 
         Color::FILL.SetAsCurrent();
@@ -247,7 +247,7 @@ void Grid::DrawGridSpectrum()
 
 			HLine(256).Draw(Left(), y, Color::GRID);
 
-            String((char *)strs[i]).Draw(5, y - 4, Color::FILL);
+            String(const_cast<char *>(strs[i])).Draw(5, y - 4, Color::FILL);
         }
     }
 
@@ -285,23 +285,23 @@ static void Grid::DrawGridType1(int left, int top, int right, int bottom, float 
     {
         masX[i] = (uint16)(centerX + deltaX * (i - 9)); //-V2004
     }
-    masX[16] = (uint16)(right - 1);
+    masX[16] = static_cast<uint16>(right - 1);
 
     MultiVPointLine(17, masX, (int)stepY, DeltaVforLineGrid()).Draw(top + (int)stepY, Color::GRID);
 
     uint8 mas[13];
-    mas[0] = (uint8)(top + 1);
+    mas[0] = static_cast<uint8>(top + 1);
     for (int i = 1; i < 5; i++)
     {
-        mas[i] = (uint8)(top + (int)(deltaY * i));
+        mas[i] = static_cast<uint8>(top + (int)(deltaY * i));
     }
     for (int i = 5; i < 8; i++)
     {
-        mas[i] = (uint8)((int)(centerY)-6 + i);
+        mas[i] = static_cast<uint8>((int)(centerY)-6 + i);
     }
     for (int i = 8; i < 12; i++)
     {
-        mas[i] = (uint8)((int)centerY + (int)(deltaY * (i - 7)));
+        mas[i] = static_cast<uint8>((int)centerY + (int)(deltaY * (i - 7)));
     }
     mas[12] = (uint8)(bottom - 1);
 
@@ -315,7 +315,7 @@ static void Grid::DrawGridType2(int left, int top, int right, int bottom, int de
     masX[0] = (uint16)(left + 1);
     for (int i = 1; i < 14; i++)
     {
-        masX[i] = (uint16)(left + (int)(deltaX * i));
+        masX[i] = (uint16)(left + static_cast<int>(deltaX * i));
     }
     masX[14] = (uint16)(right - 1);
     MultiVPointLine(15, masX, stepY, DeltaVforLineGrid()).Draw(top + stepY, Color::GRID);
@@ -336,7 +336,15 @@ static void Grid::DrawGridType3(int left, int top, int right, int bottom, int ce
 {
     HPointLine(right - left - stepX, (float)stepX).Draw(left + stepX, centerY);
 
-    uint8 masY[6] = {(uint8)(top + 1), (uint8)(top + 2), (uint8)(centerY - 1), (uint8)(centerY + 1), (uint8)(bottom - 2), (uint8)(bottom - 1)};
+    uint8 masY[6] = {
+        static_cast<uint8>(top + 1),
+        static_cast<uint8>(top + 2),
+        static_cast<uint8>(centerY - 1),
+        static_cast<uint8>(centerY + 1),
+        static_cast<uint8>(bottom - 2),
+        static_cast<uint8>(bottom - 1)
+    };
+
     MultiHPointLine(6, masY, deltaX, (right - top) / deltaX).Draw(left + deltaX, Color::GRID);
 
     VPointLine(bottom - top - 2 * stepX, (float)stepX).Draw(centerX, top + stepX, Color::GRID);
@@ -348,40 +356,53 @@ static void Grid::DrawGridType3(int left, int top, int right, int bottom, int ce
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static int Grid::DeltaVforLineGrid()
 {
+    int result = 49;
+
     if (SHOW_MEASURES && MODE_VIEW_SIGNALS_IS_COMPRESS)
     {
         if (NUM_MEASURES_IS_1_5)
         {
-            return VIEW_MEASURES_BOTH ? 55 : 59;
+            result = VIEW_MEASURES_BOTH ? 55 : 59;
         }
-        if (NUM_MEASURES_IS_2_5)
+        else if (NUM_MEASURES_IS_2_5)
         {
-            return VIEW_MEASURES_BOTH ? 69 : 51;
+            result = VIEW_MEASURES_BOTH ? 69 : 51;
         }
-        if (NUM_MEASURES_IS_3_5)
+        else if (NUM_MEASURES_IS_3_5)
         {
-            return VIEW_MEASURES_BOTH ? 54 : 68;
+            result = VIEW_MEASURES_BOTH ? 54 : 68;
+        }
+        else
+        {
+            // здесь ничего
         }
     }
 
-    return 49;
+    return result;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static int Grid::DeltaHforLineGrid()
 {
+    int result = 69;
+
     if (MODE_VIEW_SIGNALS_IS_COMPRESS)
     {
         if (NUM_MEASURES_IS_6_1)
         {
-            return 73;
+            result = 73;
         }
-        if (NUM_MEASURES_IS_6_2)
+        else if (NUM_MEASURES_IS_6_2)
         {
-            return 83;
+            result = 83;
+        }
+        else
+        {
+            // здесь ничего
         }
     }
-    return 69;
+
+    return result;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

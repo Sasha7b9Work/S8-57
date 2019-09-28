@@ -105,7 +105,7 @@ typedef void (*pFuncVB)(bool);
 #define NULL_TSHIFT 1000000
 
 
-union BitSet16
+union BitSet16 //-V2514
 {
     uint16 halfWord;
     uint8  byte[2];
@@ -118,7 +118,7 @@ union BitSet16
     explicit BitSet16(uint8 v0, uint8 v1) : byte0(v0), byte1(v1) {};
 };
 
-union BitSet32
+union BitSet32 //-V2514
 {
     uint    word;
     uint16  halfWord[2];
@@ -158,7 +158,7 @@ union BitSet32
     }
 };
 
-union BitSet64
+union BitSet64 //-V2514
 {
     uint64 dword;
     uint   word[2];

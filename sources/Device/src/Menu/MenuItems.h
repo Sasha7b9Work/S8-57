@@ -216,7 +216,7 @@ public:
     virtual void Draw(int x, int y, bool opened) const;
     void DrawHints(int x, int y, int width) const;
     virtual void HandlerFX(TypePress::E type) const;
-    DataGraphButton *OwnData() const { return (DataGraphButton *)data->ad; }
+    const DataGraphButton *OwnData() const { return static_cast<const DataGraphButton *>(data->ad); }
     int NumHints() const;
 };
 
@@ -265,7 +265,7 @@ public:
 
     virtual void Draw(int x, int y, bool opened) const;
 
-    DataGovernor *OwnData() const { return (DataGovernor *)data->ad; }
+    const DataGovernor *OwnData() const { return static_cast<const DataGovernor *>(data->ad); }
 
 private:
 
@@ -321,7 +321,7 @@ public:
 
     virtual int HeightOpened() const;
 
-    DataChoice *OwnData() const { return (DataChoice *)data->ad; }
+    const DataChoice *OwnData() const { return static_cast<const DataChoice *>(data->ad); }
 
     static void Changed(bool) {};
 
@@ -342,7 +342,7 @@ public:
     /// Обработка события функциональной кнопки, соответствующей данному итему на странице
     virtual void HandlerFX(TypePress::E type) const;
     virtual int HeightOpened() const { return 27; };
-    DataGovernorColor *OwnData() const { return (DataGovernorColor *)data->ad; }
+    const DataGovernorColor *OwnData() const { return static_cast<const DataGovernorColor *>(data->ad); }
 private:
     void DrawOpened(int x, int y) const;
     void DrawClosed(int x, int y) const;

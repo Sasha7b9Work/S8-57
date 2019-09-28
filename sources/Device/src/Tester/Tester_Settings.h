@@ -102,7 +102,7 @@ namespace Tester
                 Number
             } value;
             Chan::E ch;
-            explicit Scale(Osci::Settings::Range::E range, Chan::E _ch) : value((E)range), ch(_ch) {};
+            explicit Scale(Osci::Settings::Range::E range, Chan::E _ch) : value(static_cast<E>(range)), ch(_ch) {};
             pString ToString() const;
         };
 
