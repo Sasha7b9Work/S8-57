@@ -108,16 +108,21 @@ bool Item::IsOpened() const
 {
     const Page *parent = Keeper();
 
+    bool result = false;
+
     if (parent == nullptr)
     {
-        return false;
+    }
+    else if (Is(Type::Page))
+    {
+        result = parent->CurrentItemIsOpened();
+    }
+    else
+    {
+        result = (MENU_POS_ACT_ITEM(parent->OwnData()->name) & 0x80) != 0;
     }
 
-    if (Is(Type::Page))
-    {
-        return parent->CurrentItemIsOpened();
-    }
-    return (MENU_POS_ACT_ITEM(parent->OwnData()->name) & 0x80) != 0;
+    return result;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -125,23 +130,21 @@ void Item::SetCurrent(bool active) const
 {
     Page *page = (Page *)Keeper();
 
-    if (page == nullptr)
+    if (page)
     {
-        return;
-    }
-
-    if (!active)
-    {
-        page->SetPosActItem(0x7f);
-    }
-    else
-    {
-        for (int i = 0; i < page->NumItems(); i++)
+        if (!active)
         {
-            if (page->GetItem(i) == this)
+            page->SetPosActItem(0x7f);
+        }
+        else
+        {
+            for (int i = 0; i < page->NumItems(); i++)
             {
-                page->SetPosActItem((int8)i);
-                return;
+                if (page->GetItem(i) == this)
+                {
+                    page->SetPosActItem((int8)i);
+                    return;
+                }
             }
         }
     }
@@ -163,16 +166,20 @@ String Item::Title() const
 bool Item::ExistKeeper(const Page *_keeper) const
 {
     const Page *item = Keeper();
+
+    bool result = false;
+
     while (item)
     {
         if (item == _keeper)
         {
-            return true;
+            result = true;
+            break;
         }
         item = item->Keeper();
     }
 
-    return false;
+    return result;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -186,25 +193,31 @@ int Item::Width(int pos) const
 {
     int width = 320 / 5 + 1;
 
+    int result = width;
+
     if (pos != -1)
     {
-        return ((pos + 1) % 5 == 0) ? width - 1 : width;
+        result = ((pos + 1) % 5 == 0) ? width - 1 : width;
     }
-
-    int position = PositionInKeeperList();
-
-    if (position != -1)
+    else
     {
-        return (position + 1) % 5 == 0 ? width - 1 : width;
+        int position = PositionInKeeperList();
+
+        if (position != -1)
+        {
+            result = (position + 1) % 5 == 0 ? width - 1 : width;
+        }
     }
 
-    return width;
+    return result;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 int Item::PositionOnScreenX() const
 {
     int position = PositionInKeeperList();
+
+    int result = 0;
 
     if (position != -1)
     {
@@ -213,10 +226,10 @@ int Item::PositionOnScreenX() const
             position -= 5;
         }
 
-        return (Width(0) - 1) * position;
+        result = (Width(0) - 1) * position;
     }
 
-    return 0;
+    return result;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -224,18 +237,21 @@ int Item::PositionInKeeperList() const
 {
     const Page *parent = Keeper();
 
+    int result = -1;
+
     if (parent)
     {
         for (int i = 0; i < parent->NumItems(); i++)
         {
             if (this == parent->OwnData()->items[i])
             {
-                return i;
+                result = i;
+                break;
             }
         }
     }
 
-    return -1;
+    return result;
 }
 
 
@@ -290,17 +306,20 @@ bool Page::IsSubPage(const Page *parent)
 {
     const Page *keep = Keeper();
 
+    bool result = false;
+
     while (keep)
     {
         if (keep == parent)
         {
-            return true;
+            result = true;
+            break;
         }
 
         keep = ((Item *)keep)->Keeper();
     }
 
-    return false;
+    return result;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -312,21 +331,23 @@ PageName::E Page::GetName() const
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 bool Page::HandlerKey(const KeyEvent &event)
 {
+    bool result = false;
+
     if (OwnData()->handlerArrows(event))
     {
-        return true;
+        result = true;
     }
     else if (event.type == TypePress::Press)
     {
         if (event.key == Key::Left)
         {
             ChangeSubPage(-1);
-            return true;
+            result = true;
         }
         else if (event.key == Key::Right)
         {
             ChangeSubPage(1);
-            return true;
+            result = true;
         }
         else
         {
@@ -338,7 +359,7 @@ bool Page::HandlerKey(const KeyEvent &event)
         // остальные типы событий не обрабатываются
     }
 
-    return false;
+    return result;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -372,12 +393,14 @@ int8 Page::PosCurrentItem() const
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Item *Page::GetItem(int numItem) const
 {
-    if (numItem >= NumItems())
+    Item *result = &Item::empty;
+
+    if (numItem < NumItems())
     {
-        return &Item::empty;
+        result = (Item *)OwnData()->items[numItem];
     }
 
-    return (Item *)OwnData()->items[numItem];
+    return result;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -524,9 +547,9 @@ float Governor::Step() const
             delta *= -1.0F;
             if (delta == 0.0F)  // -V550 //-V2550 //-V550
             {
-                return -0.001F;
+                delta = -0.001F;
             }
-            if (delta < -numLines)
+            else if (delta < -numLines)
             {
                 tsGovernor.dir = NONE;
                 SetValue(PrevValue());
@@ -534,20 +557,28 @@ float Governor::Step() const
                 delta = 0.0F;
                 tsGovernor.address = 0;
             }
+            else
+            {
+                // здесь ничего
+            }
         }
         else if (tsGovernor.dir == INCREASE)
         {
             if (delta == 0.0F)  // -V550 //-V2550 //-V550
             {
-                return 0.001F;
+                delta = 0.001F;
             }
-            if (delta > numLines)
+            else if (delta > numLines)
             {
                 tsGovernor.dir = NONE;
                 SetValue(NextValue());
                 OwnData()->handlerChange();
                 delta = 0.0F;
                 tsGovernor.address = 0;
+            }
+            else
+            {
+                // здесь ничего
             }
         }
         else
@@ -556,6 +587,7 @@ float Governor::Step() const
         }
 
     }
+
     return delta;
 }
 
@@ -669,6 +701,8 @@ char Governor::GetSymbol() const
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 bool Choice::HandlerKey(const KeyEvent &event)
 {
+    bool result = false;
+
     if (event.type == TypePress::Press)
     {
         Key::E key = event.key;
@@ -677,10 +711,10 @@ bool Choice::HandlerKey(const KeyEvent &event)
 
         ChangeIndex(Menu::IsShown() ? delta : -delta);
 
-        return true;
+        result = true;
     }
 
-    return false;
+    return result;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -852,35 +886,41 @@ String Choice::NameCurrentSubItem() const
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 const char *Choice::NameNextSubItem() const
 {
-    if (OwnData()->cell == 0)
+    const char *result = "";
+
+    if (OwnData()->cell != 0)
     {
-        return "";
+        int index = *((int8 *)OwnData()->cell) + 1;
+
+        if (index == NumChoices())
+        {
+            index = 0;
+        }
+
+        result = NAME_FROM_INDEX(index);
     }
 
-    int index = *((int8 *)OwnData()->cell) + 1;
-
-    if (index == NumChoices())
-    {
-        index = 0;
-    }
-    return NAME_FROM_INDEX(index);
+    return result;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 const char *Choice::NamePrevSubItem() const
 {
-    if (OwnData()->cell == 0)
+    const char *result = "";
+
+    if (OwnData()->cell != 0)
     {
-        return "";
+        int index = *((int8 *)OwnData()->cell) - 1;
+
+        if (index < 0)
+        {
+            index = NumChoices() - 1;
+        }
+
+        result = NAME_FROM_INDEX(index);
     }
 
-    int index = *((int8 *)OwnData()->cell) - 1;
-
-    if (index < 0)
-    {
-        index = NumChoices() - 1;
-    }
-    return NAME_FROM_INDEX(index);
+    return result;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -892,22 +932,24 @@ String Choice::NameSubItem(int i) const
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Color Item::ColorBackground(const Item *choice) const
 {
+    Color result = Color::GRAY_50;
+
     // Измерения по частоте
     if (choice == PageFrequencyCounter::GetChoiceTimeF())
     {
-        return Color(Color::WHITE);
+        result = Color::WHITE;
     }
     // Измерения по периоду
     else if (choice == PageFrequencyCounter::GetChoiceFreqClc() || choice == PageFrequencyCounter::GetChoiceNumPeriods())
     {
-        return Color(Color::YELLOW);
+        result = Color::YELLOW;
     }
     else
     {
         // здесь ничего не делаем
     }
 
-    return Color::GRAY_50;
+    return result;
 }
 
 

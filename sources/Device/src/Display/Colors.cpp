@@ -307,18 +307,20 @@ Color Color::GetCurent()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 bool Color::WriteFlashColor()
 {
+    bool result = false;
+
     if (currentColor == Color::FLASH_01)
     {
         WriteToDisplay(inverseColor ? Color::FILL : Color::BACK);
-        return true;
+        result = true;
     }
     if (currentColor == Color::FLASH_10)
     {
         WriteToDisplay(inverseColor ? Color::BACK : Color::FILL);
-        return true;
+        result = true;
     }
 
-    return false;
+    return result;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

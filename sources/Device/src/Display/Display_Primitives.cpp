@@ -107,18 +107,16 @@ int Display::Primitives::Text::Draw(int x, int y, Color color)
 {
     color.SetAsCurrent();
 
-    if (std::strlen(text) == 0) //-V805
+    if (std::strlen(text) != 0)
     {
-        return x;
-    }
-
-    if (sizeOfType != 1)
-    {
-        DrawBig(x, y);
-    }
-    else
-    {
-        return DrawSmall(x, y);
+        if (sizeOfType != 1)
+        {
+            DrawBig(x, y);
+        }
+        else
+        {
+            x = DrawSmall(x, y);
+        }
     }
 
     return x;
