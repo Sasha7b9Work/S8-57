@@ -147,7 +147,15 @@ static void DrawMemoryMap(int num, bool exist)
     int width = 12;
     Region(width, 10).Fill(x, y, num == NUM_ROM_SIGNAL ? Color::FLASH_10 : Color::BACK);
     Rectangle(width, 10).Draw(x, y, Color::FILL);
-    Color::SetCurrent(num == NUM_ROM_SIGNAL ? Color::FLASH_01 : Color::FILL);
+
+    if (num == NUM_ROM_SIGNAL)
+    {
+        Color::FLASH_01.SetAsCurrent();
+    }
+    else
+    {
+        Color::FILL.SetAsCurrent();
+    }
 
     if (exist)
     {

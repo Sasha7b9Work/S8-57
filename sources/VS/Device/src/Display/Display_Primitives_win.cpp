@@ -21,7 +21,7 @@ static void DrawVPointLine(int x, int y, int count, int delta);
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void Display::Primitives::Region::Fill(int x, int y, Color color)
 {
-    Color::SetCurrent(color);
+    color.SetAsCurrent();
     SDL_Rect rect = { x, y, width + 1, height + 1 };
     SDL_RenderFillRect(renderer, &rect);
 }
@@ -29,7 +29,7 @@ void Display::Primitives::Region::Fill(int x, int y, Color color)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Display::Primitives::Rectangle::Draw(int x, int y, Color color)
 {
-    Color::SetCurrent(color);
+    color.SetAsCurrent();
     SDL_Rect rect = { x, y, width + 1, height + 1 };
     SDL_RenderDrawRect(renderer, &rect);
 }
@@ -37,35 +37,35 @@ void Display::Primitives::Rectangle::Draw(int x, int y, Color color)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Display::Primitives::HLine::Draw(int x, int y, Color color)
 {
-    Color::SetCurrent(color);
+    color.SetAsCurrent();
     SDL_RenderDrawLine(renderer, x, y, x + width, y);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Display::Primitives::VLine::Draw(int x, int y, Color color)
 {
-    Color::SetCurrent(color);
+    color.SetAsCurrent();
     SDL_RenderDrawLine(renderer, x, y, x, y + height);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Display::Primitives::Point::Draw(int x, int y, Color color)
 {
-    Color::SetCurrent(color);
+    color.SetAsCurrent();
     SDL_RenderDrawPoint(renderer, x, y);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Display::Primitives::Line::Draw(Color color)
 {
-    Color::SetCurrent(color);
+    color.SetAsCurrent();
     SDL_RenderDrawLine(renderer, x0, y0, x1, y1);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 int Display::Primitives::Text::DrawSmall(int x, int y, Color color)
 {
-    Color::SetCurrent(color);
+    color.SetAsCurrent();
 
     uint numSymbols = std::strlen(text);
 
@@ -81,7 +81,7 @@ int Display::Primitives::Text::DrawSmall(int x, int y, Color color)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Display::Primitives::Text::DrawBig(int x, int y, Color color)
 {
-    Color::SetCurrent(color);
+    color.SetAsCurrent();
 
     uint numSymbols = std::strlen(text);
 
@@ -160,7 +160,7 @@ static int DrawBigChar(int eX, int eY, int size, char _symbol)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Display::Primitives::MultiHPointLine::Draw(int x, Color color)
 {
-    Color::SetCurrent(color);
+    color.SetAsCurrent();
 
     for (int i = 0; i < numLines; i++)
     {
@@ -181,7 +181,7 @@ static void DrawHPointLine(int x, int y, int count, int delta)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Display::Primitives::MultiVPointLine::Draw(int y, Color color)
 {
-    Color::SetCurrent(color);
+    color.SetAsCurrent();
 
     for (int i = 0; i < numLines; i++)
     {

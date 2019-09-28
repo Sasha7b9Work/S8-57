@@ -97,7 +97,7 @@ void Painter::BeginScene(Color color)
     texture = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_RGBA8888, SDL_RENDERER_ACCELERATED, Display::WIDTH, Display::HEIGHT);
 
     SDL_SetRenderTarget(renderer, texture);
-    Color::SetCurrent(color);
+    color.SetAsCurrent();
     SDL_RenderClear(renderer);
 }
 
