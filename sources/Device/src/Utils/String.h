@@ -12,6 +12,8 @@ public:
     explicit String(const char *format, ...);
     ~String();
 
+    void Set(const char *format, ...);
+
     char *CString() const;
     /// Отобразить текст на экране в заданнх координатах
     int Draw(int x, int y, Color color = Color::NUMBER) const;
