@@ -243,7 +243,7 @@ void ColorType::CalcSteps()
 void ColorType::SetColor()
 {
     COLOR(color.value) = MAKE_COLOR((int)red, (int)green, (int)blue);
-    color.LoadValueRGB(COLOR(color.value));
+    color.LoadValueRGB();
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -350,8 +350,10 @@ void Color::WriteToDisplay(Color color)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Color::LoadValueRGB(uint rgb)
+void Color::LoadValueRGB()
 {
+    uint rgb = COLOR(value);
+
     uint8 buffer[6] = { Command::Paint_SetPalette, value, (uint8)rgb, (uint8)(rgb >> 8), (uint8)(rgb >> 16), (uint8)(rgb >> 24) };
 
     Transmitter::Send(buffer, 6);

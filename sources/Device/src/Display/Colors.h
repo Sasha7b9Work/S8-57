@@ -55,11 +55,11 @@ public:
     static void ResetFlash();
     /// Это системная функция. Вызывать самому нельзя
     static void OnTimerFlashDisplay();
-
-    void LoadValueRGB(uint value);
-    
+  
     static void InitGlobalColors();
     static void Log(Color color);
+
+    void LoadValueRGB();
 
     Color& operator=(const Color &color);
 
@@ -113,7 +113,7 @@ private:
     static void WriteToDisplay(Color color);
 
     static Color currentColor;
-    
+   
 public:
 
     struct Scheme
