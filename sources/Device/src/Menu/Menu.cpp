@@ -6,7 +6,6 @@
 #include "Keyboard/HandlersKeys.h"
 #include "device.h"
 #include "FlashDrive/FlashDrive.h"
-#include "Settings/SettingsMemory.h"
 #include "Settings/Settings.h"
 #include "Pages/Include/PageMemory.h"
 #include "Pages/Include/PageChannels.h"

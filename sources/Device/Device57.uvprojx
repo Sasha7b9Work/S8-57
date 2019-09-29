@@ -1676,16 +1676,6 @@
               <FilePath>.\src\Settings\SettingsDebug.h</FilePath>
             </File>
             <File>
-              <FileName>SettingsMemory.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Settings\SettingsMemory.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>SettingsMemory.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Settings\SettingsMemory.h</FilePath>
-            </File>
-            <File>
               <FileName>SettingsNRST.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Settings\SettingsNRST.h</FilePath>

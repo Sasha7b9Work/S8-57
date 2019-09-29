@@ -1,5 +1,4 @@
 #pragma once
-#include "SettingsMemory.h"
 #include "SettingsDebug.h"
 #include "SettingsNRST.h"
 #include "SettingsService.h"
@@ -18,6 +17,7 @@
 #include "Menu/Pages/Include/PageChannels.h"
 #include "Menu/Pages/Include/PageDisplay.h"
 #include "Menu/Pages/Include/PageFunction.h"
+#include "Menu/Pages/Include/PageMemory.h"
 #include "Menu/Pages/Include/PageTime.h"
 #include "Menu/Pages/Include/PageTrig.h"
 
@@ -45,46 +45,6 @@
 #pragma pack(push, 1)
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-struct SettingsCursors
-{
-    bool                                     showCursors;             ///< Показывать ли курсоры.
-    Osci::Measurements::Cursors::LookMode::E lookMode[2];             ///< Режимы слежения за курсорами для двух пар курсоров.
-    bool                                     showFreq;                ///< Установленное в true значение, что нужно показывать на экране 1/dT между курсорами.
-    Osci::Measurements::Cursors::Active::E   active;                  ///< Какие курсоры сейас активны.
-    Chan::E                                  source;                  ///< Источник - к какому каналу относятся курсоры.
-    Osci::Measurements::Cursors::Control::E  cntrlU[Chan::Size];      ///< Активные курсоры напряжения.
-    Osci::Measurements::Cursors::Control::E  cntrlT[Chan::Size];      ///< Активные курсоры времени.
-    Osci::Measurements::Cursors::Movement::E movement;                ///< Как перемещаться курсорам - по точкам или процентам.
-    float                                    deltaU100percents[2];    ///< Расстояние между курсорами напряжения для 100%, для обоих каналов.
-    float                                    deltaT100percents[2];    ///< Расстояние между курсорами времени для 100%, для обоих каналов.
-    float                                    posCurU[Chan::Size][2];  ///< Текущие позиции курсоров напряжения обоих каналов.
-    float                                    posCurT[Chan::Size][2];  ///< Текущие позиции курсоров времени обоих каналов.
-};
-
-struct SettingsMemory
-{
-#define MAX_SYMBOLS_IN_FILE_NAME 35
-    Osci::Settings::Memory::ENumPointsFPGA::E   enumPoints;                             ///< Число точек
-    ModeBtnMemory::E                            modeBtnMemory;
-    ModeWork::E                                 modeWork;                               ///< Режим работы.
-    bool                                        flashAutoConnect;                       ///< Если true, при подключении флешки автоматически выводится Файл-Менеджер.
-    int8                                        indexCurSymbolNameMask;                 ///< Индекс текущего символа в режиме задания маски или выбора имени.
-    ModeSaveSignal::E                           modeSaveSignal;                         ///< В каком виде сохранять сигнал.
-    char                                        fileName[MAX_SYMBOLS_IN_FILE_NAME];     ///< Имя файла для режима ручного задания.
-    ModeShowIntMem::E                           modeShowIntMem;                         ///< Что показывать в режиме ВНУТР ЗУ - считанный или записанный сигнал.
-    FileNamingMode::E                           fileNamingMode;                         ///< Режим именования файлов.
-    char                                        fileNameMask[MAX_SYMBOLS_IN_FILE_NAME]; ///< \brief Здесь маска для автоматического именования файлов.
-                        ///< \details Правила именования.\n
-                        /// \code
-                        /// %y('\x42') - год, %m('\x43') - месяц, %d('\x44') - день, %H('\x45') - часы, %M('\x46') - минуты, %S('\x47') - секунды
-                        /// %Nn('\x48''n') - порядковый номер, котрый занимает не менее n знакомест, например, 7 в %3N будет преобразовано в 007
-                        /// Примеры
-                        /// name_%4N_%y_%m_%d_%H_%M_%S будет генерировать файлы вида name_0043_2014_04_25_14_45_32
-                        /// При этом обратите внимание, что если спецификатор %4N стоИт после временнЫх параметров, то, скорее всего, этот параметр 
-                        /// будет всегда равен 0001, т.к. для определения номера просматриваются.
-                        /// \endcode
-};
-
 class Settings
 {
 public:

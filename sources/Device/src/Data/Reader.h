@@ -1,6 +1,6 @@
 #pragma once
-#include "Settings/SettingsMemory.h"
 #include "Osci/Osci_Storage.h"
+#include "Menu/Pages/Include/PageMemory.h"
 
 
 extern Osci::DataP2P*      pDataP2P;
