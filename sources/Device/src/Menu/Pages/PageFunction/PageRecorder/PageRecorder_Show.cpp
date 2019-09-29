@@ -23,7 +23,7 @@ DEF_CHOICE_2( cCursor,
     "",
     "1",
     "2",
-    Recorder::Settings::currentCursor, &PageRecorder::PageShow::self, Item::Active, Choice::Changed, Choice::AfterDraw
+    set.rec.currentCursor, &PageRecorder::PageShow::self, Item::Active, Choice::Changed, Choice::AfterDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

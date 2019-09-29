@@ -1,6 +1,5 @@
 #include "defines.h"
 #include "Recorder/Recorder_Display.h"
-#include "Recorder/Recorder_Settings.h"
 #include "Display/Display_Primitives.h"
 #include "Display/Grid.h"
 #include "Display/Painter.h"
@@ -340,7 +339,7 @@ void Recorder::Display::MoveRight()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Recorder::Display::MoveCursorLeft()
 {
-    uint16 &position = posCursor[Recorder::Settings::currentCursor];
+    uint16 &position = posCursor[set.rec.currentCursor];
 
     if (position > 0)
     {
@@ -351,7 +350,7 @@ void Recorder::Display::MoveCursorLeft()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Recorder::Display::MoveCursorRight()
 {
-    uint16 &position = posCursor[Recorder::Settings::currentCursor];
+    uint16 &position = posCursor[set.rec.currentCursor];
 
     if (position < 319)
     {

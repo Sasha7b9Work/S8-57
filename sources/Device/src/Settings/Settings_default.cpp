@@ -5,7 +5,6 @@
 
 using namespace FPGA::Settings;
 using namespace Osci::Settings;
-using namespace Recorder::Settings;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -229,16 +228,18 @@ const Settings Settings::defaultSettings =
     },
     
     // Настройки регистратора
-
-    true,                               // rec_sourceChanA
-    true,                               // rec_sourceChanB
-    false,                              // rec_sourceSensor
-    TypeStorage::RAM,                   // rec_storageRecord
-    TypeStorage::RAM,                   // rec_storagePlay
-    Axis::X,                            // rec_axisMove
-    Axis::X,                            // rec_axisZoom
-    ScaleX(ScaleX::_100ms),             // rec_scaleX
-    { Range::_1V, Range::_1V },         // rec_range
+    {
+        true,                                   // sourceChanA
+        true,                                   // sourceChanB
+        false,                                  // sourceSensor
+        RecorderTypeStorage::RAM,               // storageRecord
+        RecorderTypeStorage::RAM,               // storagePlay
+        RecorderAxis::X,                        // axisMove
+        RecorderAxis::X,                        // axisZoom
+        RecorderScaleX(RecorderScaleX::_100ms), // scaleX
+        0,                                      // currentCursor
+        { Range::_1V, Range::_1V },             // range
+    },
 
     0,  // dbg_gate_max
     0,  // dbg_gate_min

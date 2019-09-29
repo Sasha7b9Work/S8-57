@@ -3,7 +3,6 @@
 #include "FPGA/FPGA_HAL.h"
 #include "Hardware/HAL/HAL.h"
 #include "Recorder/Recorder.h"
-#include "Recorder/Recorder_Settings.h"
 #include "Recorder/Recorder_Storage.h"
 #include "Hardware/HAL/HAL_PIO.h"
 #include "Data/Heap.h"
@@ -52,7 +51,7 @@ void Recorder::Init()
     FPGA::HAL::LoadRegUPR();
     Osci::Settings::Range::LoadBoth();
     Osci::Settings::Trig::Input::Load();
-    Settings::ScaleX::Load();
+    RecorderScaleX::Load();
     Osci::Settings::TShift::Load();
     Osci::Settings::LoadHoldfOff();
 

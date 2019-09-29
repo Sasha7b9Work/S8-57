@@ -15,17 +15,15 @@
 #include "Menu/Pages/Include/PageTrig.h"
 #include "Menu/Pages/Include/PageDisplay.h"
 #include "Settings/Settings.h"
-#include <cstdio>
-
 #include "Osci/Display/Osci_Display.h"
 #include "FlashDrive/FlashDrive.h"
+#include <cstdio>
 
 
 using namespace Display::Primitives;
 using namespace FPGA::Settings;
 using namespace Osci::Display;
 using namespace Osci::Settings;
-using namespace Recorder::Settings;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -286,7 +284,7 @@ static void TBaseLess()
 {
     if (Device::State::InModeRecorder())
     {
-        OnChangeParameterTime(ScaleX::Change, -1);
+        OnChangeParameterTime(RecorderScaleX::Change, -1);
     }
     else
     {
@@ -299,7 +297,7 @@ static void TBaseMore()
 {
     if (Device::State::InModeRecorder())
     {
-        OnChangeParameterTime(ScaleX::Change, 1);
+        OnChangeParameterTime(RecorderScaleX::Change, 1);
     }
     else
     {

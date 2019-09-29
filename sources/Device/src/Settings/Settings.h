@@ -7,12 +7,12 @@
 #include "Display/Colors.h"
 #include "Osci/Measurements/Measures.h"
 #include "Multimeter/Multimeter.h"
-#include "Recorder/Recorder_Settings.h"
 #include "Osci/Measurements/Cursors_Settings.h"
 #include "Menu/Pages/Include/PageChannels.h"
 #include "Menu/Pages/Include/PageDisplay.h"
 #include "Menu/Pages/Include/PageFunction.h"
 #include "Menu/Pages/Include/PageMemory.h"
+#include "Menu/Pages/Include/PageRecorder.h"
 #include "Menu/Pages/Include/PageService.h"
 #include "Menu/Pages/Include/PageTime.h"
 #include "Menu/Pages/Include/PageTrig.h"
@@ -67,18 +67,7 @@ public:
     SettingsMenu        menu;
     SettingsNRST        nrst;
     SettingsMultimeter  mult;
-
-    // Настройки регистратора
-    bool                               rec_sourceChanA;      ///< Включение записи канала 1
-    bool                               rec_sourceChanB;      ///< Включение записи канала 2
-    bool                               rec_sourceSensor;     ///< Включение записи показаний датчика
-    Recorder::Settings::TypeStorage::E rec_storageRecord;    ///< Куда сохранять данные
-    Recorder::Settings::TypeStorage::E rec_storagePlay;      ///< Откуда брать сохранённые данные
-    Recorder::Settings::Axis::E        rec_axisMove;         ///< Текущая ось перемещения
-    Recorder::Settings::Axis::E        rec_axisZoom;         ///< Текущая ось масштабирования
-    Recorder::Settings::ScaleX         rec_scaleX;           ///< Установленный масштаб по времени
-    Osci::Settings::Range::E           unused[2];            ///< Масштаб по вертикали в режиме регистратора
-
+    SettingsRecorder    rec;
 
     /*  !!!!!!!!!!!!!!!!!!!!!!                                    !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         !!!!!!!!!!!!!!!!!!!!!! Эти настройки задаются при наладке !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!

@@ -1,8 +1,6 @@
 #include "defines.h"
-#include "Recorder/Recorder_Settings.h"
 #include "Settings/Settings.h"
 #include "Utils/Math.h"
-
 #include "Recorder/Recorder.h"
 #include "Hardware/HAL/HAL.h"
 #include "FPGA/FPGA.h"
@@ -19,14 +17,10 @@ using HAL::FSMC;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-int8 Recorder::Settings::currentCursor = 0;
 
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-void Recorder::Settings::ScaleX::Load()
+void RecorderScaleX::Load()
 {
-    static const uint8 values[ScaleX::Size] =
+    static const uint8 values[RecorderScaleX::Size] =
     {
         BIN_U8(01010110),  // -V2501  // 100ms  
         BIN_U8(01010111),  // -V2501  // 200ms  
@@ -41,13 +35,13 @@ void Recorder::Settings::ScaleX::Load()
 
     if (Recorder::IsRunning())
     {
-        Stop();
-        Start();
+        Recorder::Stop();
+        Recorder::Start();
     }
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Recorder::Settings::ScaleX::Change(int delta)
+void RecorderScaleX::Change(int delta)
 {
     if (Recorder::IsRunning())
     {
@@ -56,24 +50,24 @@ void Recorder::Settings::ScaleX::Change(int delta)
 
     if (delta > 0)
     {
-        ::Math::LimitationIncrease<uint8>((uint8 *)(&set.rec_scaleX), (uint8)(ScaleX::Size - 1));
+        ::Math::LimitationIncrease<uint8>((uint8 *)(&set.rec.scaleX), (uint8)(RecorderScaleX::Size - 1));
     }
     else
     {
-        ::Math::LimitationDecrease<uint8>((uint8 *)(&set.rec_scaleX), 0);
+        ::Math::LimitationDecrease<uint8>((uint8 *)(&set.rec.scaleX), 0);
     }
 
     Load();
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-Recorder::Settings::ScaleX &Recorder::Settings::ScaleX::Current()
+RecorderScaleX &RecorderScaleX::Current()
 {
-    return set.rec_scaleX;
+    return set.rec.scaleX;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-pString Recorder::Settings::ScaleX::ToString() const
+pString RecorderScaleX::ToString() const
 {
     static const struct StructScaleX
     {
@@ -83,7 +77,7 @@ pString Recorder::Settings::ScaleX::ToString() const
             name = nRU;
         };
     }
-    scales[ScaleX::Size] =
+    scales[RecorderScaleX::Size] =
     {
         StructScaleX("0.1\x10ñ"),
         StructScaleX("0.2\x10ñ"),
@@ -98,14 +92,14 @@ pString Recorder::Settings::ScaleX::ToString() const
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-uint Recorder::Settings::ScaleX::BytesToSec() const
+uint RecorderScaleX::BytesToSec() const
 {
     static const struct StructBytes
     {
         uint value;
         StructBytes(uint v) : value(v) {};
     }
-    bytes[ScaleX::Size] =
+    bytes[RecorderScaleX::Size] =
     {
         800,
         400,
@@ -120,14 +114,14 @@ uint Recorder::Settings::ScaleX::BytesToSec() const
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-uint Recorder::Settings::ScaleX::TimeForPointMS() const
+uint RecorderScaleX::TimeForPointMS() const
 {
     static const struct StructTime
     {
         uint value;
         StructTime(uint v) : value(v) {};
     }
-    bytes[ScaleX::Size] =
+    bytes[RecorderScaleX::Size] =
     {
         5,
         10,
