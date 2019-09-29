@@ -373,7 +373,7 @@ bool PageMeasuresCursors::PageSet::OnArrows(const KeyEvent &event) //-V2506
 
 static bool IsActive_Set()
 {
-    return CURS_SHOW;
+    return set.curs.showCursors;
 }
 
 DEF_PAGE_5( pSet, // -V641 // -V1027                                                                                                              //--- хглепемхъ - йспянпш - сярюмнбхрэ ---

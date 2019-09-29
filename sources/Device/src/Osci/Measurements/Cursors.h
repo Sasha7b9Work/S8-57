@@ -36,8 +36,6 @@
 /// јбсолютное значение времени, соотвествующее 100%
 #define dTperc(ch)                  (set.curs.deltaT100percents[ch])
 
-#define CURS_SHOW                   (set.curs.showCursors)
-
 
 namespace Osci
 {

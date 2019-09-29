@@ -17,7 +17,7 @@ DEF_CHOICE_2( cShow,                                                            
     "Включает/отключает курсоры.",
     "Нет",
     "Да",
-    CURS_SHOW, &PageMeasuresCursors::self, Item::Active, Choice::Changed, Choice::AfterDraw
+    set.curs.showCursors, &PageMeasuresCursors::self, Item::Active, Choice::Changed, Choice::AfterDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -57,7 +57,7 @@ DEF_CHOICE_2( cShow,                                                            
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static bool IsActive_ShowFreq()
 {
-    return CURS_SHOW;
+    return set.curs.showCursors;
 }
 
 DEF_CHOICE_2( cShowFreq,                                                                                                                                             //--- КУРОСРЫ - 1/dT ---
