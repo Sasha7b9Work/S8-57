@@ -162,7 +162,7 @@ struct MenuAutoHide
 
 
 struct SettingsDisplay
-{
+{ //-V802
     ModeDrawSignal::E      modeDrawSignal;
     Background::E          background;            ///< Цвет фона.
     ENumMinMax::E          ENumMinMax;            ///< Перечисление количества измерений для определения минимумов и масимумов.

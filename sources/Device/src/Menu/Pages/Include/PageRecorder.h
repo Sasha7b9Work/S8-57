@@ -69,7 +69,7 @@ struct RecorderScaleX
 #define REC_SCALE_X                     (RecorderScaleX::Current())
 
 struct SettingsRecorder
-{
+{ //-V802
     bool                    enabledChanA;   ///< Включение записи канала 1
     bool                    enabledChanB;   ///< Включение записи канала 2
     bool                    enabledSensor;  ///< Включение записи показаний датчика

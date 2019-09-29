@@ -105,7 +105,7 @@ struct ModeRegSet
 };
 
 struct SettingsMath
-{
+{ //-V802
     FuncModeDraw::E modeDraw;             ///< Раздельный или общий дисплей в режиме математической функции.
     WindowFFT::E    windowFFT;
     uint8           currentCursor;        ///< Определяет, каким курсором спектра управляет ручка УСТАНОВКА.
