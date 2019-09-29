@@ -44,7 +44,7 @@ static void Draw_ChannelB(int x, int y)
 
 void PageMeasuresCursors::PageSet::OnPress_Channel()
 {
-    Chan::E source = CURS_SOURCE_A ? Chan::B : Chan::A;
+    Chan::E source = (set.curs.source == Chan::A) ? Chan::B : Chan::A;
     SetCursSource(source);
 }
 

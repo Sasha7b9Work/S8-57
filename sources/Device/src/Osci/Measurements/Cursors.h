@@ -26,11 +26,6 @@
 #define CURsT_DISABLED              (CURsT_CNTRL == CursorsControl::Disable)
 #define CURsT_ENABLED               (!CURsT_DISABLED)
 
-/// Активны курсоры канала A
-#define CURS_SOURCE_A               (set.curs.source == Chan::A)
-/// Активны курсоры канала B
-#define CURS_SOURCE_B               (set.curs.source == Chan::B)
-
 /// Абсолютное значение напряжения, соответствующее 100%
 #define dUperc(ch)                  (set.curs.deltaU100percents[ch])
 /// Абсолютное значение времени, соотвествующее 100%
