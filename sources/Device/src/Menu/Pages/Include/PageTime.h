@@ -6,8 +6,8 @@
 #define TIME_DIV_XPOS       (set.time.timeDivXPos)
 
 #define SET_PEAKDET         (set.time.peakDet)
-#define SET_PEAKDET_EN      (SET_PEAKDET == Osci::Settings::PeakDetMode::Enabled)
-#define SET_PEAKDET_DIS     (SET_PEAKDET == Osci::Settings::PeakDetMode::Disabled)
+#define SET_PEAKDET_EN      (SET_PEAKDET == PeakDetMode::Enabled)
+#define SET_PEAKDET_DIS     (SET_PEAKDET == PeakDetMode::Disabled)
 
 #define TPOS                (set.time.TPos)
 #define TPOS_IS_RIGHT       (TPOS == TPos::Right)
@@ -23,14 +23,14 @@
 
 struct SettingsTime
 {
-    int                              shift;
-    TBase::E         base;
-    Osci::Settings::PeakDetMode::E   peakDet;
-    Osci::Settings::TPos::E          TPos;
-    Osci::Settings::SampleType::E    sampleType;
-    Osci::Settings::FunctionTime::E  timeDivXPos;
-    Osci::Settings::LinkingTShift::E linkingTShift;                 ///< Тип привязки смещения по горизонтали
-    Osci::Settings::SampleType::E    sampleTypeOld;
+    int                 shift;
+    TBase::E            base;
+    PeakDetMode::E      peakDet;
+    TPos::E             TPos;
+    SampleType::E       sampleType;
+    FunctionTime::E     timeDivXPos;
+    LinkingTShift::E    linkingTShift;  ///< Тип привязки смещения по горизонтали
+    SampleType::E       sampleTypeOld;
 };
 
 

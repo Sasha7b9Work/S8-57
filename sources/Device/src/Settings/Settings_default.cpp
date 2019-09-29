@@ -103,16 +103,16 @@ const Settings Settings::defaultSettings =
 
     // Меню ПАМЯТЬ
     {
-        Osci::Settings::Memory::ENumPointsFPGA::_1k,    // enumPoints
-        ModeBtnMemory::Menu,                            // modeBtnMemory
-        ModeWork::Dir,                                  // modeWork
-        false,                                          // flashAutoConnect
-        0,                                              // indexCurSymbolNameMask
-        ModeSaveSignal::BMP,                            // modeSaveSignal
-        {},                                             // fileName[MAX_SYMBOLS_IN_FILE_NAME]
-        ModeShowIntMem::Saved,                          // modeShowIntMem
-        FileNamingMode::Mask,                           // fileNamingMode
-        {}                                              // fileNameMask[MAX_SYMBOLS_IN_FILE_NAME]
+        ENumPointsFPGA::_1k,        // enumPoints
+        ModeBtnMemory::Menu,        // modeBtnMemory
+        ModeWork::Dir,              // modeWork
+        false,                      // flashAutoConnect
+        0,                          // indexCurSymbolNameMask
+        ModeSaveSignal::BMP,        // modeSaveSignal
+        {},                         // fileName[MAX_SYMBOLS_IN_FILE_NAME]
+        ModeShowIntMem::Saved,      // modeShowIntMem
+        FileNamingMode::Mask,       // fileNamingMode
+        {}                          // fileNameMask[MAX_SYMBOLS_IN_FILE_NAME]
     },
 
     // Настройки математики

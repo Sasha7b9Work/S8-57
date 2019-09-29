@@ -153,7 +153,7 @@ pString TBase::ToString() const
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-int Osci::Settings::TPos::InBytes()
+int TPos::InBytes()
 {
     static const int m[][2][3] =
     {
@@ -320,7 +320,7 @@ uint16 &RShift::Value(Chan::E ch)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-uint Osci::Settings::Memory::ENumPointsFPGA::BytesInChannel(PeakDetMode::E mode) const
+uint ENumPointsFPGA::BytesInChannel(PeakDetMode::E mode) const
 {
     uint result = ENUM_TO_REL_POINTS(value);
     if (mode == PeakDetMode::Enabled)
@@ -332,7 +332,7 @@ uint Osci::Settings::Memory::ENumPointsFPGA::BytesInChannel(PeakDetMode::E mode)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-uint Osci::Settings::Memory::ENumPointsFPGA::PointsInChannel() const
+uint ENumPointsFPGA::PointsInChannel() const
 {
     return ENUM_TO_REL_POINTS(value);
 }
@@ -406,7 +406,7 @@ void RShift::Draw(Chan::E ch)
 int Chan::PointsInChannel() const
 {
     //DEF__STRUCT(StructNumPoints, int) numPoints[ENumPointsFPGA::Size] =
-    static const int numPoints[Osci::Settings::Memory::ENumPointsFPGA::Size] =
+    static const int numPoints[ENumPointsFPGA::Size] =
     {
         512,
         1024,

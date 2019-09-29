@@ -62,20 +62,37 @@ struct FileNamingMode
     } value;
 };
 
+/// Число точек сигнала, с которым идёт работа.
+struct ENumPointsFPGA
+{
+    enum E
+    {
+        _512,
+        _1k,
+        _2k,
+        _4k,
+        _8k,
+        Size
+    } value;
+    explicit ENumPointsFPGA(E v) : value(v) {};
+    uint BytesInChannel(PeakDetMode::E mode) const;
+    uint PointsInChannel() const;
+};
+
 
 struct SettingsMemory
 {
 #define MAX_SYMBOLS_IN_FILE_NAME 35
-    Osci::Settings::Memory::ENumPointsFPGA::E   enumPoints;                             ///< Число точек
-    ModeBtnMemory::E                            modeBtnMemory;
-    ModeWork::E                                 modeWork;                               ///< Режим работы.
-    bool                                        flashAutoConnect;                       ///< Если true, при подключении флешки автоматически выводится Файл-Менеджер.
-    int8                                        indexCurSymbolNameMask;                 ///< Индекс текущего символа в режиме задания маски или выбора имени.
-    ModeSaveSignal::E                           modeSaveSignal;                         ///< В каком виде сохранять сигнал.
-    char                                        fileName[MAX_SYMBOLS_IN_FILE_NAME];     ///< Имя файла для режима ручного задания.
-    ModeShowIntMem::E                           modeShowIntMem;                         ///< Что показывать в режиме ВНУТР ЗУ - считанный или записанный сигнал.
-    FileNamingMode::E                           fileNamingMode;                         ///< Режим именования файлов.
-    char                                        fileNameMask[MAX_SYMBOLS_IN_FILE_NAME]; ///< \brief Здесь маска для автоматического именования файлов.
+    ENumPointsFPGA::E   enumPoints;                             ///< Число точек
+    ModeBtnMemory::E    modeBtnMemory;
+    ModeWork::E         modeWork;                               ///< Режим работы.
+    bool                flashAutoConnect;                       ///< Если true, при подключении флешки автоматически выводится Файл-Менеджер.
+    int8                indexCurSymbolNameMask;                 ///< Индекс текущего символа в режиме задания маски или выбора имени.
+    ModeSaveSignal::E   modeSaveSignal;                         ///< В каком виде сохранять сигнал.
+    char                fileName[MAX_SYMBOLS_IN_FILE_NAME];     ///< Имя файла для режима ручного задания.
+    ModeShowIntMem::E   modeShowIntMem;                         ///< Что показывать в режиме ВНУТР ЗУ - считанный или записанный сигнал.
+    FileNamingMode::E   fileNamingMode;                         ///< Режим именования файлов.
+    char                fileNameMask[MAX_SYMBOLS_IN_FILE_NAME]; ///< \brief Здесь маска для автоматического именования файлов.
                         ///< \details Правила именования.\n
                         /// \code
                         /// %y('\x42') - год, %m('\x43') - месяц, %d('\x44') - день, %H('\x45') - часы, %M('\x46') - минуты, %S('\x47') - секунды
@@ -87,8 +104,8 @@ struct SettingsMemory
                         /// \endcode
 };
 
-Osci::Settings::Memory::ENumPointsFPGA::E NumPoints_2_ENumPoints(int numPoints);
-int ENumPoints_2_NumPoints(Osci::Settings::Memory::ENumPointsFPGA::E numPoints);
+ENumPointsFPGA::E NumPoints_2_ENumPoints(int numPoints);
+int ENumPoints_2_NumPoints(ENumPointsFPGA::E numPoints);
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

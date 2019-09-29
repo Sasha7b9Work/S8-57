@@ -8,22 +8,20 @@
 #include "Osci/Measurements/Measurements.h"
 #include "Settings/Settings.h"
 #include "Utils/Math.h"
-
 #include "Utils/Buffer.h"
 #include "Utils/Debug.h"
 #include "Osci/Display/Accumulator.h"
 #include "Hardware/Timer.h"
 #include "FPGA/FPGA.h"
-#include <cstdlib>
-#include <cstring>
 #include "FPGA/FPGA_Math.h"
 #include "Utils/StringUtils.h"
+#include <cstdlib>
+#include <cstring>
 
 
 using namespace Display::Primitives;
 using namespace FPGA;
 using namespace Osci::Settings;
-using namespace Osci::Settings::Memory;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

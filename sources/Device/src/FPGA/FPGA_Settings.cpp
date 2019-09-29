@@ -20,7 +20,6 @@ using namespace Display::Primitives;
 using namespace FPGA::HAL::GPIO;
 using namespace HAL::ADDRESSES::FPGA;
 using namespace Osci::Settings;
-using namespace Osci::Settings::Memory;
 
 using HAL::FSMC;
 
