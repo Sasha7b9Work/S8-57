@@ -16,7 +16,7 @@ const Settings Settings::defaultSettings =
     // Ìåíş ÄÈÑÏËÅÉ
     {
         ModeDrawSignal::Lines,                                      // modeDrawSignal
-        Display::Background::Black,                                 // background
+        Background::Black,                                          // background
         Display::ENumMinMax::_1,                                    // ENumMinMax
         0,                                                          // not used
         Display::ENumAverage::_1,                                   // ENumAverage

@@ -19,9 +19,6 @@
 
 #define BRIGHTNESS_GRID             (set.disp.brightnessGrid)
 
-#define BACKGROUND                  (set.disp.background)
-#define BACKGROUND_BLACK            (BACKGROUND == Display::Background::Black)
-
 #define ENUM_MIN_MAX                (set.disp.ENumMinMax)
 #define MIN_MAX_ENABLED             (ENUM_MIN_MAX != Display::ENumMinMax::_1)
 #define NUM_MIN_MAX                 (1 << (int)ENUM_MIN_MAX)        /* Возвращает количество измерений сигналов для расчёта минимумов и максимумов. */
@@ -56,18 +53,18 @@ struct ModeDrawSignal
     } value;
 };
 
+/// Цвет фона
+struct Background
+{
+    enum E
+    {
+        Black,
+        White
+    } value;
+};
+
 namespace Display
 {
-    /// Выбор цвета фона.
-    struct Background
-    {
-        enum E
-        {
-            Black,
-            White
-        } value;
-    };
-
     /// Количество измерений для расчёта минимального и максимального значений.
     struct ENumMinMax
     {
@@ -181,7 +178,7 @@ namespace Display
 struct SettingsDisplay
 {
     ModeDrawSignal::E      modeDrawSignal;
-    Display::Background::E          background;            ///< Цвет фона.
+    Background::E          background;                     ///< Цвет фона.
     Display::ENumMinMax::E          ENumMinMax;            ///< Перечисление количества измерений для определения минимумов и масимумов.
     uint8                           notUsing0;
     Display::ENumAverage::E         ENumAverage;           ///< Число усреднений сигнала.

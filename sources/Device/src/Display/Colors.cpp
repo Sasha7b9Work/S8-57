@@ -90,10 +90,10 @@ static bool  inverseColor = false;
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void Color::InitGlobalColors()
 {
-    Color::BACK.value = BACKGROUND_BLACK ? Color::BLACK.value : Color::WHITE.value;
-    Color::FILL.value = BACKGROUND_BLACK ? Color::WHITE.value : Color::BLACK.value;
-    Color::CHAN[Chan::A].value = BACKGROUND_BLACK ? Color::CHAN[Chan::A].value : Color::DATA_WHITE_ACCUM_A.value;
-    Color::CHAN[Chan::B].value = BACKGROUND_BLACK ? Color::CHAN[Chan::B].value : Color::DATA_WHITE_ACCUM_B.value;
+    Color::BACK.value = (set.disp.background == Background::Black) ? Color::BLACK.value : Color::WHITE.value;
+    Color::FILL.value = (set.disp.background == Background::Black) ? Color::WHITE.value : Color::BLACK.value;
+    Color::CHAN[Chan::A].value = (set.disp.background == Background::Black) ? Color::CHAN[Chan::A].value : Color::DATA_WHITE_ACCUM_A.value;
+    Color::CHAN[Chan::B].value = (set.disp.background == Background::Black) ? Color::CHAN[Chan::B].value : Color::DATA_WHITE_ACCUM_B.value;
     //Color::CHAN[A_B].value = Color::CHAN[MathCh].value = BACKGROUND_BLACK ? Color::WHITE.value : Color::BLACK.value;
 }
 
