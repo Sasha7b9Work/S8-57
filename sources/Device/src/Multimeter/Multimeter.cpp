@@ -81,7 +81,7 @@ void Multimeter::ChangeAVP()
 {
     ChangeMode();
 
-    char send[] = { 0x02, 'Z', (MULTI_AVP == MultimeterAVP::On) ? '1' : '0', 0x0a };
+    char send[] = { 0x02, 'Z', (set.mult.avp == MultimeterAVP::On) ? '1' : '0', 0x0a };
 
     USART3_::Transmit(send, 100);
 
@@ -105,11 +105,11 @@ void Multimeter::Update()
     }
     
     uint8 range = 0;
-    if(set.mult.meas == Measure::VoltageDC)        { range = (uint8)MULTI_RANGE_VOLTAGE_DC; }
-    else if(set.mult.meas == Measure::VoltageAC)   { range = (uint8)MULTI_RANGE_VOLTAGE_AC; }
-    else if(set.mult.meas == Measure::CurrentDC)   { range = (uint8)MULTI_RANGE_CURRENT_DC; }
-    else if(set.mult.meas == Measure::CurrentAC)   { range = (uint8)MULTI_RANGE_CURRENT_AC; }
-    else if(set.mult.meas == Measure::Resistance)  { range = (uint8)MULTI_RANGE_RESISTANCE; }
+    if(set.mult.meas == Measure::VoltageDC)        { range = (uint8)set.mult.rangeVoltageDC; }
+    else if(set.mult.meas == Measure::VoltageAC)   { range = (uint8)set.mult.rangeVoltageAC; }
+    else if(set.mult.meas == Measure::CurrentDC)   { range = (uint8)set.mult.rangeCurrentDC; }
+    else if(set.mult.meas == Measure::CurrentAC)   { range = (uint8)set.mult.rangeCurrentAC; }
+    else if(set.mult.meas == Measure::Resistance)  { range = (uint8)set.mult.rangeResist; }
     else
     {
         // больше выборов нету

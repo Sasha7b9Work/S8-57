@@ -108,23 +108,23 @@ static int GetRange()
 {
     if (set.mult.meas == Multimeter::Measure::VoltageDC)
     {
-        return MULTI_RANGE_VOLTAGE_DC;
+        return set.mult.rangeVoltageDC;
     }
     else if (set.mult.meas == Multimeter::Measure::VoltageAC)
     {
-        return MULTI_RANGE_VOLTAGE_AC;
+        return set.mult.rangeVoltageAC;
     }
     else if (set.mult.meas == Multimeter::Measure::CurrentDC)
     {
-        return MULTI_RANGE_CURRENT_DC;
+        return set.mult.rangeCurrentDC;
     }
     else if (set.mult.meas == Multimeter::Measure::CurrentAC)
     {
-        return MULTI_RANGE_CURRENT_AC;
+        return set.mult.rangeCurrentAC;
     }
     else if (set.mult.meas == Multimeter::Measure::Resistance)
     {
-        return MULTI_RANGE_RESISTANCE;
+        return set.mult.rangeResist;
     }
     else
     {

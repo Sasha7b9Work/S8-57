@@ -7,15 +7,6 @@
 #include "Multimeter/Multimeter.h"
 
 
-#define MULTI_RANGE_VOLTAGE_AC  (set.mult.rangeAC)
-#define MULTI_RANGE_VOLTAGE_DC  (set.mult.rangeDC)
-#define MULTI_RANGE_CURRENT_AC  (set.mult.rangeCurrentAC)
-#define MULTI_RANGE_CURRENT_DC  (set.mult.rangeCurrentDC)
-#define MULTI_RANGE_RESISTANCE  (set.mult.rangeResist)
-#define MULTI_AVP               (set.mult.avp)
-
-
-
 struct FuncModeDraw
 {
     enum E
@@ -337,8 +328,8 @@ struct SettingsMultimeter
 {
     MultimeterAVP::E              avp;
     Multimeter::Measure::E        meas;
-    MultimeterRangeDC::E          rangeDC;
-    MultimeterRangeAC::E          rangeAC;
+    MultimeterRangeDC::E          rangeVoltageDC;
+    MultimeterRangeAC::E          rangeVoltageAC;
     MultimeterRangeCurrent::E     rangeCurrentAC;     ///< Предел измерения переменного тока
     MultimeterRangeCurrent::E     rangeCurrentDC;     ///< Предел измерения постоянного тока
     MultimeterRangeResistance::E  rangeResist;
