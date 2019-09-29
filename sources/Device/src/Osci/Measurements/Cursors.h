@@ -3,8 +3,6 @@
 #include "Osci/Osci_Settings.h"
 
 
-/// Включено слежение за курсорами времени
-#define CURS_LOOK_T(ch)             (set.curs.lookMode[ch] == CursorsLookMode::Time)
 /// Включено слежение за курсорами времени и напряжения
 #define CURS_LOOK_BOTH(ch)          (set.curs.lookMode[ch] == CursorsLookMode::Both)
 
