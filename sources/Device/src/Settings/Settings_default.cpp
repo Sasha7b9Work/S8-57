@@ -1,9 +1,7 @@
 #include "defines.h"
-#include "FPGA/FPGA_Settings.h"
 #include "Settings/Settings.h"
 
 
-using namespace FPGA::Settings;
 using namespace Osci::Settings;
 
 

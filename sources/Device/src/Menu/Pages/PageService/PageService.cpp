@@ -5,7 +5,6 @@
 #include "Display/Painter.h"
 #include "FPGA/FPGA.h"
 #include "FPGA/FPGA_Math.h"
-#include "FPGA/FPGA_Settings.h"
 #include "Hardware/Beeper.h"
 #include "Hardware/Timer.h"
 #include "Menu/Menu.h"

@@ -1,5 +1,4 @@
 #include "defines.h"
-#include "FPGA/FPGA_Settings.h"
 #include "Menu/Pages/Include/PageTrig.h"
 #include "Settings/Settings.h"
 

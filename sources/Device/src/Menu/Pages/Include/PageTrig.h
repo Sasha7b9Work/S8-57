@@ -1,5 +1,6 @@
 #pragma once
 #include "Menu/MenuItems.h"
+#include "Settings/SettingsOsci.h"
 
 
 /// Источник синхронизации

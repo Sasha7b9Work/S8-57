@@ -3,24 +3,22 @@
 #include "log.h"
 #include "FPGA/FPGA.h"
 #include "FPGA/FPGA_HAL.h"
-#include "FPGA/FPGA_Settings.h"
 #include "Hardware/HAL/HAL.h"
 #include "Hardware/Timer.h"
 #include "Menu/Pages/Include/PageChannels.h"
 #include "Utils/Math.h"
 #include "Settings/Settings.h"
-#include <cstring>
-#include <stdlib.h>
-
 #include "Recorder/Recorder.h"
 #include "Osci/Osci_Storage.h"
 #include "Data/Reader.h"
 #include "Osci/Osci_Averager.h"
+#include <cstring>
+#include <stdlib.h>
+
 
 
 using namespace HAL::ADDRESSES::FPGA;
 using namespace FPGA::HAL;
-using namespace FPGA::Settings;
 using namespace Osci::Settings;
 
 using HAL::FSMC;

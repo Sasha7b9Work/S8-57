@@ -16,7 +16,6 @@
 #include "Pages/Include/PageRecorder.h"
 #include "Hardware/Beeper.h"
 #include "FPGA/FPGA.h"
-#include "FPGA/FPGA_Settings.h"
 #include "Utils/Math.h"
 #include "Display/Display_Primitives.h"
 #include "Display/Grid.h"
@@ -24,7 +23,6 @@
 #include "Utils/Debug.h"
 #include "Hardware/HAL/HAL.h"
 #include "Keyboard/DecoderDevice.h"
-
 #include <cstdio>
 
 

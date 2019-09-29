@@ -12,7 +12,6 @@
 #include "Utils/Values.h"
 
 
-using namespace FPGA::Settings;
 using namespace Osci::Settings;
 
 

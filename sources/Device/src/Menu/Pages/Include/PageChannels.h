@@ -1,11 +1,10 @@
 #pragma once
 #include "Menu/MenuItems.h"
-#include "FPGA/FPGA_Settings.h"
+#include "Settings/SettingsOsci.h"
 
 
 #define SET_ENABLED_BOTH        (set.ch[Chan::A].enabled && set.ch[Chan::B].enabled)
 #define SET_DISABLED_BOTH       (!set.ch[Chan::A].enabled && !set.ch[Chan::B].enabled)
-
 #define DIVIDER_ABS(c)          ((set.ch[c].divider == Divider::_1) ? 1 : 10)
 
 

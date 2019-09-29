@@ -24,7 +24,6 @@
 using namespace Display::Primitives;
 using namespace FPGA;
 using namespace FPGA::Math;
-using namespace FPGA::Settings;
 using namespace Hardware;
 using namespace Osci::Measurements;
 using namespace Osci::Settings;

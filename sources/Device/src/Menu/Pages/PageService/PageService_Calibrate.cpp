@@ -2,12 +2,13 @@
 #include "Menu/Pages/Include/PageService.h"
 #include "Settings/Settings.h"
 #include "Hardware/Timer.h"
+#include "FPGA/FPGA.h"
 
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void OnChanged_Calibrator(bool)
 {
-    FPGA::Settings::LoadCalibratorMode();
+    FPGA::LoadCalibratorMode();
 }
 
 DEF_CHOICE_2( cCalibrator, // -V206                                                                                                                //--- —≈–¬»— -  ¿À»¡–¿“Œ– -  ‡ÎË·‡ÚÓ ---

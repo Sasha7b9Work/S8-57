@@ -33,6 +33,8 @@ namespace FPGA
     bool ReadDataChanenl(Chan::E ch, uint8 data[MAX_NUM_POINTS]);
 
     void ClearDataRand();
+    /// Включить/выключить калибратор.
+    void LoadCalibratorMode();
     /// Время подачи старта
     extern uint timeStart;
     /// Значение, считанное из handleADC

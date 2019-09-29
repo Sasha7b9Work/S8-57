@@ -53,7 +53,7 @@ void Osci::Init()
     TrigPolarity::Load();
     TBase::Load();
     Settings::TShift::Load();
-    FPGA::Settings::LoadCalibratorMode();
+    FPGA::LoadCalibratorMode();
     Settings::LoadHoldfOff();
     ::HAL::PIO::Init(::HAL::PIO::Port::_G, ::HAL::PIO::Pin::_1, ::HAL::PIO::Mode::Input, ::HAL::PIO::Pull::Up);
     Osci::Storage::Clear();
