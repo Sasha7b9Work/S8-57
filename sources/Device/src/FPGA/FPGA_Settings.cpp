@@ -76,7 +76,7 @@ void RShift::Load(Chan::E ch)
 
     uint16 shift = SET_RSHIFT(ch);
 
-    int8 add = set.dbg.addRShift[ch][set.ch.range[ch]];
+    int8 add = set.dbg.addRShift[ch][set.ch[ch].range];
 
     shift += add;
 
@@ -195,11 +195,11 @@ void Range::Change(Chan::E ch, int delta)
 
     if (delta > 0)
     {
-        ::Math::LimitationIncrease<uint8>((uint8 *)(&set.ch.range[ch]), (uint8)(Range::Size - 1)); // -V206
+        ::Math::LimitationIncrease<uint8>((uint8 *)(&set.ch[ch].range), (uint8)(Range::Size - 1)); // -V206
     }
     else
     {
-        ::Math::LimitationDecrease<uint8>((uint8 *)(&set.ch.range[ch]), 0);  // -V206
+        ::Math::LimitationDecrease<uint8>((uint8 *)(&set.ch[ch].range), 0);  // -V206
     }
     Range::LoadBoth();
 
@@ -209,7 +209,7 @@ void Range::Change(Chan::E ch, int delta)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Range::Set(Chan::E ch, E range)
 {
-    set.ch.range[ch] = range;
+    set.ch[ch].range = range;
     LoadBoth();
 }
 
@@ -337,7 +337,7 @@ void Trig::DrawOnGrid()
 
         Region(width, height).DrawBounded(x, y, Color::BACK, Color::FILL);
 
-        float trigLevVal = FPGA::Math::RShift2Abs(set.trig.lev[set.trig.source], set.ch.range[set.trig.source]) * Divider((uint8)set.ch.divider[set.trig.source]).ToAbs();
+        float trigLevVal = FPGA::Math::RShift2Abs(set.trig.lev[set.trig.source], set.ch[set.trig.source].range) * Divider((uint8)set.ch[set.trig.source].divider).ToAbs();
 
         Voltage voltage(trigLevVal);
 
@@ -436,7 +436,7 @@ pString Range::Name() const
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void ModeCouple::Set(Chan::E ch, ModeCouple::E modeCoupe)
 {
-    SET_COUPLE(ch) = modeCoupe;
+    set.ch[ch].couple = modeCoupe;
     Range::LoadBoth();
 }
 

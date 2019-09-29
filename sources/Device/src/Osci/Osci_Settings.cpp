@@ -211,8 +211,8 @@ void TBase::Load()
 
     Osci::Settings::TShift::Load();
 
-    SET_BANDWIDTH_A.Load();
-    SET_BANDWIDTH_B.Load();
+    set.ch[Chan::A].bandwidth.Load();
+    set.ch[Chan::B].bandwidth.Load();
 
     MessageMgr::OsciSettingsEffectOnAverageChanged();
 }
@@ -246,18 +246,18 @@ void Range::LoadBoth()
         BIN_U8(00000011)   // 20V      // -V2501
     };
 
-    uint8 valueA = vals[set.ch.range[Chan::A]];
+    uint8 valueA = vals[set.ch[Chan::A].range];
 
     WritePin(Pin::A1, _GET_BIT(valueA, 1));
     WritePin(Pin::A2, _GET_BIT(valueA, 0));
 
-    uint8 valueB = vals[set.ch.range[Chan::B]];
+    uint8 valueB = vals[set.ch[Chan::B].range];
 
     WritePin(Pin::A3, _GET_BIT(valueB, 1));
     WritePin(Pin::A4, _GET_BIT(valueB, 0));
 
-    SET_BANDWIDTH_A.Load();
-    SET_BANDWIDTH_B.Load();
+    set.ch[Chan::A].bandwidth.Load();
+    set.ch[Chan::B].bandwidth.Load();
 
     RShift::Load(Chan::A);
 
@@ -302,8 +302,8 @@ static uint8 ValueForRange(Chan::E ch) // -V2506
         { BIN_U8(00011000), BIN_U8(00011000) }  // -V2501  // 20V
     };
 
-    ModeCouple::E couple = (Device::State::InModeRecorder()) ? ModeCouple::DC : SET_COUPLE(ch);
-    Range::E range = set.ch.range[ch];
+    ModeCouple::E couple = (Device::State::InModeRecorder()) ? ModeCouple::DC : set.ch[ch].couple;
+    Range::E range = set.ch[ch].range;
 
     if (Device::State::InModeOsci() && couple == ModeCouple::GND)
     {
@@ -316,7 +316,7 @@ static uint8 ValueForRange(Chan::E ch) // -V2506
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 uint16 &RShift::Value(Chan::E ch)
 {
-    return set.ch.rShift[ch];
+    return set.ch[ch].rShift;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

@@ -32,13 +32,13 @@ DEF_CHOICE_2( cInputA,                                                          
     chanInput,
     DISABLE_RU,
     ENABLE_RU,
-    SET_ENABLED_A, &PageChannelA::self, Item::Active, PageChannelA::OnChanged_Input, Choice::AfterDraw
+    set.ch[Chan::A].enabled, &PageChannelA::self, Item::Active, PageChannelA::OnChanged_Input, Choice::AfterDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void PageChannelA::OnChanged_Couple(bool)
 {
-    ModeCouple::Set(Chan::A, SET_COUPLE_A);
+    ModeCouple::Set(Chan::A, set.ch[Chan::A].couple);
 }
 
 DEF_CHOICE_3( cCoupleA,                                                                                                                                             //--- КАНАЛ 1 - Связь ---
@@ -47,13 +47,13 @@ DEF_CHOICE_3( cCoupleA,                                                         
     "Пост",
     "Перем",
     "Земля",
-    SET_COUPLE_A, &PageChannelA::self, Item::Active, PageChannelA::OnChanged_Couple, Choice::AfterDraw
+    set.ch[Chan::A].couple, &PageChannelA::self, Item::Active, PageChannelA::OnChanged_Couple, Choice::AfterDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void OnChanged_BandwidthA(bool)
 {
-    SET_BANDWIDTH_A.Load();
+    set.ch[Chan::A].bandwidth.Load();
 }
 
 DEF_CHOICE_2( cBandwidthA,                                                                                                                                         //--- КАНАЛ 1 - Полоса ---
@@ -61,7 +61,7 @@ DEF_CHOICE_2( cBandwidthA,                                                      
     "Задаёт полосу пропускания канала",
     "Полная",
     "20МГц",
-    SET_BANDWIDTH_A, &PageChannelA::self, Item::Active, OnChanged_BandwidthA, Choice::AfterDraw
+    set.ch[Chan::A].bandwidth, &PageChannelA::self, Item::Active, OnChanged_BandwidthA, Choice::AfterDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -100,7 +100,7 @@ DEF_CHOICE_2( cDividerA,                                                        
     "",
     "1X",
     "10X",
-    set.ch.divider[Chan::A], &PageChannelA::self, Item::Active, Choice::Changed, Choice::AfterDraw
+    set.ch[Chan::A].divider, &PageChannelA::self, Item::Active, Choice::Changed, Choice::AfterDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -109,7 +109,7 @@ DEF_CHOICE_2( cInverseA,                                                        
     "Инвертирует сигнал относительно уровня 0В",
     "Откл",
     "Вкл",
-    set.ch.inverse[Chan::A], &PageChannelA::self, Item::Active, Choice::Changed, Choice::AfterDraw
+    set.ch[Chan::A].inverse, &PageChannelA::self, Item::Active, Choice::Changed, Choice::AfterDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -142,13 +142,13 @@ DEF_CHOICE_2( cInputB,                                                          
     chanInput,
     DISABLE_RU,
     ENABLE_RU,
-    SET_ENABLED_B, &PageChannelB::self, Item::Active, PageChannelB::OnChanged_Input, Choice::AfterDraw
+    set.ch[Chan::B].enabled, &PageChannelB::self, Item::Active, PageChannelB::OnChanged_Input, Choice::AfterDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void PageChannelB::OnChanged_Couple(bool)
 {
-    ModeCouple::Set(Chan::B, SET_COUPLE_B);
+    ModeCouple::Set(Chan::B, set.ch[Chan::B].couple);
 }
 
 DEF_CHOICE_3( cCoupleB,                                                                                                                                             //--- КАНАЛ 2 - Связь ---
@@ -157,13 +157,13 @@ DEF_CHOICE_3( cCoupleB,                                                         
     "Пост",
     "Перем",
     "Земля",
-    SET_COUPLE_B, &PageChannelB::self, Item::Active, PageChannelB::OnChanged_Couple, Choice::AfterDraw
+    set.ch[Chan::B].couple, &PageChannelB::self, Item::Active, PageChannelB::OnChanged_Couple, Choice::AfterDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void OnChanged_BandwidthB(bool)
 {
-    SET_BANDWIDTH_B.Load();
+    set.ch[Chan::B].bandwidth.Load();
 }
 
 DEF_CHOICE_2( cBandwidthB,                                                                                                                                         //--- КАНАЛ 2 - Полоса ---
@@ -171,7 +171,7 @@ DEF_CHOICE_2( cBandwidthB,                                                      
     "",
     "Полная",
     "20МГц",
-    SET_BANDWIDTH_B, &PageChannelB::self, Item::Active, OnChanged_BandwidthB, Choice::AfterDraw
+    set.ch[Chan::B].bandwidth, &PageChannelB::self, Item::Active, OnChanged_BandwidthB, Choice::AfterDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -192,8 +192,8 @@ DEF_CHOICE_2( cDividerB,                                                        
     "",
     "1X",
     "10X",
-    set.ch.divider[Chan::B], &PageChannelB::self, Item::Active, Choice::Changed, Choice::AfterDraw
-    )
+    set.ch[Chan::B].divider, &PageChannelB::self, Item::Active, Choice::Changed, Choice::AfterDraw
+)
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 DEF_CHOICE_2( cInverseB,                                                                                                                                         //--- КАНАЛ 2 - Инверсия ---
@@ -201,7 +201,7 @@ DEF_CHOICE_2( cInverseB,                                                        
     "Инвертирует сигнал относительно уровня 0В",
     "Откл",
     "Вкл",
-    set.ch.inverse[Chan::B], &PageChannelB::self, Item::Active, Choice::Changed, Choice::AfterDraw
+    set.ch[Chan::B].inverse, &PageChannelB::self, Item::Active, Choice::Changed, Choice::AfterDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

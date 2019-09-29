@@ -155,7 +155,7 @@ static void WriteParametersFFT(Chan::E ch, float freq0, float density0, float fr
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 static void DRAW_SPECTRUM(const uint8 *dataIn, int numPoints, Chan::E ch)
 {
-    if (!SET_ENABLED(ch))
+    if (!set.ch[ch].enabled)
     {
         return;
     }
@@ -258,7 +258,7 @@ static void DrawROM()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void DrawChannel(Chan::E ch)
 {
-    if (!SET_ENABLED(ch))
+    if (!set.ch[ch].enabled)
     {
         return;
     }

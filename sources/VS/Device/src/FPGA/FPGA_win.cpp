@@ -37,7 +37,7 @@ static float NextNoise()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 bool FPGA::ReadDataChanenl(Chan::E ch, uint8 data[MAX_NUM_POINTS])
 {
-    if (!SET_ENABLED(ch))
+    if (!set.ch[ch].enabled)
     {
         return false;
     }

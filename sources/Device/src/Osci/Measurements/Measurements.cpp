@@ -1303,7 +1303,7 @@ String Measure::GetStringMeasure(Chan::E ch, char* buffer, int lenBuf)
 {
     Measure::Type::E type = GetType();
 
-    if (!SET_ENABLED(ch))
+    if (!set.ch[ch].enabled)
     {
         return String("");
     }
@@ -1321,7 +1321,7 @@ String Measure::GetStringMeasure(Chan::E ch, char* buffer, int lenBuf)
         pFuncPCFBPC func = sMeas[type].FucnConvertate;
         float value = values[type].value[ch];
        
-        if ((set.ch.divider[ch] == Divider::_10) && (func == Voltage2String))
+        if ((set.ch[ch].divider == Divider::_10) && (func == Voltage2String))
         {
             value *= 10.0F;                         // Домножаем, если включён делитель
         }

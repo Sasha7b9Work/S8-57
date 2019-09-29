@@ -237,16 +237,16 @@ static int DrawMainParameters(int _x, int _y)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void WriteTextVoltage(Chan::E ch, int x, int y)
 {
-    if (!SET_ENABLED(ch))
+    if (!set.ch[ch].enabled)
     {
         return;
     }
 
     Color color = Color::CHAN[ch];
 
-    bool inverse = set.ch.inverse[ch];
+    bool inverse = set.ch[ch].inverse;
     //int8 divider = (int8)SET_DIVIDER(ch);
-    Range::E range = set.ch.range[ch];
+    Range::E range = set.ch[ch].range;
 
     const int widthField = 91;
     const int heightField = 8;
@@ -258,11 +258,11 @@ static void WriteTextVoltage(Chan::E ch, int x, int y)
     const int SIZE = 100;
 
     char buffer[SIZE];
-    std::snprintf(buffer, SIZE, "%s\xa5%s\xa5%s", Chan(ch).IsA() ? "1ê" : "2ê", ModeCouple(SET_COUPLE(ch)).UGO(), Range(range).ToString(static_cast<int8>(set.ch.divider[ch])));
+    std::snprintf(buffer, SIZE, "%s\xa5%s\xa5%s", Chan(ch).IsA() ? "1ê" : "2ê", ModeCouple(SET_COUPLE(ch)).UGO(), Range(range).ToString(static_cast<int8>(set.ch[ch].divider)));
     String(buffer).Draw(x + 1, y, colorDraw);
 
     char bufferTemp[SIZE];
-    std::snprintf(bufferTemp, SIZE, "\xa5%s", RShift::ToString((uint16)SET_RSHIFT(ch), range, static_cast<int8>(set.ch.divider[ch])).CString());
+    std::snprintf(bufferTemp, SIZE, "\xa5%s", RShift::ToString((uint16)SET_RSHIFT(ch), range, static_cast<int8>(set.ch[ch].divider)).CString());
     String(bufferTemp).Draw(x + 46, y);
 }
 
@@ -430,8 +430,8 @@ static void WriteCursors()
             Cursor::Voltage(source, 0).Draw(x, y1);
             Cursor::Voltage(source, 1).Draw(x, y2);
             x = 49;
-            float pos0 = FPGA::Math::VoltageCursor(Cursor::PosU(source, 0), set.ch.range[source], SET_RSHIFT(source));
-            float pos1 = FPGA::Math::VoltageCursor(Cursor::PosU(source, 1), set.ch.range[source], SET_RSHIFT(source));
+            float pos0 = FPGA::Math::VoltageCursor(Cursor::PosU(source, 0), set.ch[source].range, SET_RSHIFT(source));
+            float pos1 = FPGA::Math::VoltageCursor(Cursor::PosU(source, 1), set.ch[source].range, SET_RSHIFT(source));
             float delta = std::fabsf(pos1 - pos0) * DIVIDER_ABS(source);
             String(":dU=").Draw(x, y1);
             Voltage(delta).ToString(false).Draw(x + 17, y1);

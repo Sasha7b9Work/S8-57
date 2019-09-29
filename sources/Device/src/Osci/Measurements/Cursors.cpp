@@ -43,8 +43,8 @@ bool Cursor::NecessaryDraw()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 String Cursor::Voltage(Chan::E source, int numCur)
 {
-    float voltage = FPGA::Math::VoltageCursor(Cursor::PosU(source, numCur), set.ch.range[source], SET_RSHIFT(source));
-    if (set.ch.divider[source] == 1)
+    float voltage = FPGA::Math::VoltageCursor(Cursor::PosU(source, numCur), set.ch[source].range, SET_RSHIFT(source));
+    if (set.ch[source].divider == 1)
     {
         voltage *= 10.0F;
     }

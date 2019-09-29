@@ -123,8 +123,8 @@ void Tester::Enable() // -V2506
 
     SET_COUPLE_A = SET_COUPLE_B = ModeCouple::GND;
 
-    set.ch.range[Chan::A] = Range::_2V;
-    set.ch.range[Chan::B] = Range::_2V;
+    set.ch[Chan::A].range = Range::_2V;
+    set.ch[Chan::B].range = Range::_2V;
 
     Range::LoadBoth();
 

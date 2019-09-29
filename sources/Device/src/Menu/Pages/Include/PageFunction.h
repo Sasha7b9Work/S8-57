@@ -217,9 +217,9 @@ struct MeasuresModeViewSignals
 /// јвтоматические измерени€ производ€тс€ по каналам A и B
 #define SOURCE_MEASURES_IS_BOTH         (SOURCE_MEASURES == MeasuresSource::A_B)
 /// ¬ыводить автоматические измерени€ по каналу A
-#define VIEW_MEASURES_A                 (SET_ENABLED_A && (SOURCE_MEASURES_IS_A || SOURCE_MEASURES_IS_BOTH))
+#define VIEW_MEASURES_A                 (set.ch[Chan::A].enabled && (SOURCE_MEASURES_IS_A || SOURCE_MEASURES_IS_BOTH))
 /// ¬ыводить автоматические измерени€ по каналу B
-#define VIEW_MEASURES_B                 (SET_ENABLED_B && (SOURCE_MEASURES_IS_B || SOURCE_MEASURES_IS_BOTH))
+#define VIEW_MEASURES_B                 (set.ch[Chan::B].enabled && (SOURCE_MEASURES_IS_B || SOURCE_MEASURES_IS_BOTH))
 /// ¬ыводить автоматические измерени€ по обоим каналам
 #define VIEW_MEASURES_BOTH              (SET_ENABLED_BOTH && SOURCE_MEASURES_IS_BOTH)
 

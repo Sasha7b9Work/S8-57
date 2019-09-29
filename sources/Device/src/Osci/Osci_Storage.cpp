@@ -38,14 +38,14 @@ public:
 
         uint8 *addrData = (uint8 *)data + sizeof(Data);     // Адрес начала данных
 
-        if (SET_ENABLED_A)
+        if (set.ch[Chan::A].enabled)
         {
             data->dataA = addrData;
         }
-        if (SET_ENABLED_B)
+        if (set.ch[Chan::B].enabled)
         {
             data->dataB = addrData;
-            if (SET_ENABLED_A)
+            if (set.ch[Chan::A].enabled)
             {
                 data->dataB += bytesInChannel;
             }

@@ -3,21 +3,18 @@
 #include "FPGA/FPGA_Settings.h"
 
 
-#define SET_COUPLE(c)           (set.ch.couple[c])
+#define SET_COUPLE(c)           (set.ch[c].couple)
 #define SET_COUPLE_A            (SET_COUPLE(Chan::A))
 #define SET_COUPLE_B            (SET_COUPLE(Chan::B))
 
-#define SET_ENABLED(c)          (set.ch.enabled[c])
-#define SET_ENABLED_A           (SET_ENABLED(Chan::A))
-#define SET_ENABLED_B           (SET_ENABLED(Chan::B))
-#define SET_ENABLED_BOTH        (SET_ENABLED_A && SET_ENABLED_B)
-#define SET_DISABLED_BOTH       (!SET_ENABLED_A && !SET_ENABLED_B)
+#define SET_ENABLED_BOTH        (set.ch[Chan::A].enabled && set.ch[Chan::B].enabled)
+#define SET_DISABLED_BOTH       (!set.ch[Chan::A].enabled && !set.ch[Chan::B].enabled)
 
-#define SET_BALANCE_ADC(c)      (set.ch.balanceShiftADC[c])
+#define SET_BALANCE_ADC(c)      (set.ch[c].balanceShiftADC)
 #define SET_BALANCE_ADC_A       (SET_BALANCE_ADC(Chan::A))
 #define SET_BALANCE_ADC_B       (SET_BALANCE_ADC(Chan::B))
 
-#define SET_BANDWIDTH(c)        (set.ch.bandwidth[c])
+#define SET_BANDWIDTH(c)        (set.ch[c].bandwidth)
 #define SET_BANDWIDTH_A         (SET_BANDWIDTH(Chan::A))
 #define SET_BANDWIDTH_B         (SET_BANDWIDTH(Chan::B))
 
@@ -29,7 +26,7 @@
 #define SET_CALIBR_MODE_A       (SET_CALIBR_MODE(Chan::A))
 #define CALIBR_MODE_B           (SET_CALIBR_MODE(Chan::B))
 
-#define DIVIDER_ABS(c)          ((set.ch.divider[c] == Divider::_1) ? 1 : 10)
+#define DIVIDER_ABS(c)          ((set.ch[c].divider == Divider::_1) ? 1 : 10)
 
 /// Режим калибровки.
 struct CalibrationMode
@@ -58,15 +55,15 @@ struct Divider
 
 struct SettingsChannel
 {
-    uint16              rShift[2];              ///< Сдвиг канала по вертикали
-    Range::E            range[2];               ///< Масштаб канала по вертикали
-    ModeCouple::E       couple[2];              ///< Связь по входу
-    bool                enabled[2];             ///< Включен/выключен канал
-    int8                balanceShiftADC[2];     ///< Добавочное смещение для балансировки АЦП
-    Bandwidth           bandwidth[2];           ///< Ограничение полосы
-    bool                inverse[2];
-    Divider::E          divider[2];             ///< Множитель
-    CalibrationMode::E  calibrationMode[2];     ///< Режим калибровки
+    uint16              rShift;              ///< Сдвиг канала по вертикали
+    Range::E            range;               ///< Масштаб канала по вертикали
+    ModeCouple::E       couple;              ///< Связь по входу
+    bool                enabled;             ///< Включен/выключен канал
+    int8                balanceShiftADC;     ///< Добавочное смещение для балансировки АЦП
+    Bandwidth           bandwidth;           ///< Ограничение полосы
+    bool                inverse;
+    Divider::E          divider;             ///< Множитель
+    CalibrationMode::E  calibrationMode;     ///< Режим калибровки
 };
 
 

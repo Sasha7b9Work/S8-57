@@ -12,23 +12,23 @@ void DataSettings::Fill(uint8 *_dataA, uint8 * _dataB)
     dataA = _dataA;
     dataB = _dataB;
 
-    Lval_ENABLED_A(this) = SET_ENABLED_A ? 1U : 0U;
-    Lval_ENABLED_B(this) = SET_ENABLED_B ? 1U : 0U;
-    INVERSE_A(this) = set.ch.inverse[Chan::A] ? 1U : 0U;
-    INVERSE_B(this) = set.ch.inverse[Chan::B] ? 1U : 0U;
-    Lval_RANGE_A(this) = set.ch.range[Chan::A];
-    Lval_RANGE_B(this) = set.ch.range[Chan::B];
+    Lval_ENABLED_A(this) = set.ch[Chan::A].enabled ? 1U : 0U;
+    Lval_ENABLED_B(this) = set.ch[Chan::B].enabled ? 1U : 0U;
+    INVERSE_A(this) = set.ch[Chan::A].inverse ? 1U : 0U;
+    INVERSE_B(this) = set.ch[Chan::B].inverse ? 1U : 0U;
+    Lval_RANGE_A(this) = set.ch[Chan::A].range;
+    Lval_RANGE_B(this) = set.ch[Chan::B].range;
     RSHIFT_A(this) = SET_RSHIFT_A;
     RSHIFT_B(this) = SET_RSHIFT_B;
     Lval_TBASE(this) = SET_TBASE;
     TSHIFT(this) = (int16)SET_TSHIFT;
-    Lval_COUPLE_A(this) = SET_COUPLE_A;
-    Lval_COUPLE_B(this) = SET_COUPLE_B;
+    Lval_COUPLE_A(this) = set.ch[Chan::A].couple;
+    Lval_COUPLE_B(this) = set.ch[Chan::B].couple;
     TRIGLEV_A(this) = set.trig.lev[Chan::A];
     TRIGLEV_B(this) = set.trig.lev[Chan::B];
     Lval_PEAKDET(this) = SET_PEAKDET;
-    Lval_DIVIDER_A(this) = (uint)set.ch.divider[Chan::A];
-    Lval_DIVIDER_B(this) = (uint)set.ch.divider[Chan::B];
+    Lval_DIVIDER_A(this) = (uint)set.ch[Chan::A].divider;
+    Lval_DIVIDER_B(this) = (uint)set.ch[Chan::B].divider;
     TIME_MS_DS(this) = 0;                        // Ёто важно дл€ режима поточеного вывода. ќзначает, что полный сигнал ещЄ не считан
     ENUM_POINTS(this) = FPGA_ENUM_POINTS;
 }

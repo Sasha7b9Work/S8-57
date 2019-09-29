@@ -42,7 +42,7 @@ public:
     uint                crc32;                              ///< \brief Контрольная сумма данной структуры с хранящимися в ней настройками
 
     SettingsDisplay     disp;
-    SettingsChannel     ch;
+    SettingsChannel     ch[Chan::Size];
     SettingsTrig        trig;
     SettingsTime        time;
     SettingsCursors     curs;

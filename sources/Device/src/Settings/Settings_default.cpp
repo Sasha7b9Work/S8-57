@@ -35,15 +35,28 @@ const Settings Settings::defaultSettings =
 
     // ÃÂÌ˛  ¿Õ¿À 1,  ¿Õ¿À 2
     {
-        {RShift::ZERO, RShift::ZERO},                               // shift[Chan::Size]
-        {Range::_500mV, Range::_500mV},                             // range[Chan::Size]
-        {ModeCouple::DC, ModeCouple::DC},                           // couple[Chan::Size]
-        {true, true},                                               // enabled[Chan::Size]
-        {0, 0},                                                     // balanceShiftADC[2]
-        {Bandwidth(Bandwidth::Full), Bandwidth(Bandwidth::Full)},   // bandwidth[2]
-        {false, false},                                             // inverse[2]
-        {Divider::_1, Divider::_1},                                 // divider[2]
-        {CalibrationMode::Disable, CalibrationMode::Disable}        // calibrationMode[2]
+        {
+            RShift::ZERO,                   // shift
+            Range::_500mV,                  // range
+            ModeCouple::DC,                 // couple
+            true,                           // enabled
+            0,                              // balanceShiftADC
+            Bandwidth(Bandwidth::Full),     // bandwidth
+            false,                          // inverse
+            Divider::_1,                    // divider
+            CalibrationMode::Disable,       // calibrationMode
+        },
+        {
+            RShift::ZERO,                   // shift
+            Range::_500mV,                  // range
+            ModeCouple::DC,                 // couple
+            true,                           // enabled
+            0,                              // balanceShiftADC
+            Bandwidth(Bandwidth::Full),     // bandwidth
+            false,                          // inverse
+            Divider::_1,                    // divider
+            CalibrationMode::Disable,       // calibrationMode
+        }
     },
 
     // ÃÂÌ˛ —»Õ’–ŒÕ»«¿÷»ﬂ
