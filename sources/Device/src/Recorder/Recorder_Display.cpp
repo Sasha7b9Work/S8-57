@@ -135,7 +135,7 @@ static char *TimeCursor(int numCur, char buffer[20])
 {
     int numPoint = startPoint + posCursor[numCur];
 
-    float time = (numPoint * RecorderScaleX::Current().TimeForPointMS()) / 1000.0F;
+    float time = (static_cast<float>(numPoint) * RecorderScaleX::Current().TimeForPointMS()) / 1000.0F;
 
     std::strcpy(buffer, Time(time).ToString(false).CString());
 

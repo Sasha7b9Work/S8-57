@@ -56,7 +56,7 @@ struct MaxDBFFT
 };
 
 struct SettingsFFT
-{
+{ //-V802
     bool            enabled;
     uint8           posCur[2];      ///< Позиция курсора спектра. Изменяется 0...256.
     ScaleFFT::E     scale;
