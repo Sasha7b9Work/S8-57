@@ -157,7 +157,6 @@ source_group(Settings           FILES   ../../Device/src/Settings/Settings.cpp
                                         ../../Device/src/Settings/Settings.h
                                                      src/Settings/Settings_win.cpp
                                         ../../Device/src/Settings/Settings_default.cpp
-                                        ../../Device/src/Settings/SettingsOsci.cpp
                                         ../../Device/src/Settings/SettingsOsci.h
                                         ../../Device/src/Settings/SettingsNRST.h
                                         ../../Device/src/Settings/SettingsTransformation.cpp)
@@ -279,7 +278,6 @@ file(GLOB SOURCES   ../../common/_VS/*
                     ../../Device/src/Settings/Settings.h
                                  src/Settings/Settings_win.cpp
                     ../../Device/src/Settings/Settings_default.cpp
-                    ../../Device/src/Settings/SettingsOsci.cpp
                     ../../Device/src/Settings/SettingsOsci.h
                     ../../Device/src/Settings/SettingsNRST.h
                     ../../Device/src/Settings/SettingsTransformation.cpp

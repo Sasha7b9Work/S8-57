@@ -1670,11 +1670,6 @@
               <FileType>5</FileType>
               <FilePath>.\src\Settings\SettingsOsci.h</FilePath>
             </File>
-            <File>
-              <FileName>SettingsOsci.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Settings\SettingsOsci.cpp</FilePath>
-            </File>
           </Files>
         </Group>
         <Group>
