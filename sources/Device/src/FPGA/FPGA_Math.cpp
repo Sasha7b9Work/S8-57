@@ -280,8 +280,8 @@ void FPGA::Math::CalculateFFT(float *dataR, int numPoints, float *result, float 
 
     float koeff = 1024.0F / numPoints;
 
-    *freq0 = scale * FFT_POS_CURSOR_0 * koeff;
-    *freq1 = scale * FFT_POS_CURSOR_1 * koeff;
+    *freq0 = scale * set.fft.posCur[0] * koeff;
+    *freq1 = scale * set.fft.posCur[1] * koeff;
 
     if (SET_PEAKDET)
     {
@@ -408,11 +408,11 @@ void FPGA::Math::CalculateFFT(float *dataR, int numPoints, float *result, float 
             result[i] = Log10[(int)(result[i] * 10000)];
 #endif
 
-            if (i == FFT_POS_CURSOR_0)
+            if (i == set.fft.posCur[0])
             {
                 *density0 = result[i];
             }
-            else if (i == FFT_POS_CURSOR_1)
+            else if (i == set.fft.posCur[1])
             {
                 *density1 = result[i];
             }
@@ -431,11 +431,11 @@ void FPGA::Math::CalculateFFT(float *dataR, int numPoints, float *result, float 
     }
     else
     {
-        *density0 = result[FFT_POS_CURSOR_0];
-        *density1 = result[FFT_POS_CURSOR_1];
+        *density0 = result[set.fft.posCur[0]];
+        *density1 = result[set.fft.posCur[1]];
     }
-    *y0 = (int)(Grid::MathBottom() - result[FFT_POS_CURSOR_0] * Grid::MathHeight());
-    *y1 = (int)(Grid::MathBottom() - result[FFT_POS_CURSOR_1] * Grid::MathHeight());
+    *y0 = (int)(Grid::MathBottom() - result[set.fft.posCur[0]] * Grid::MathHeight());
+    *y1 = (int)(Grid::MathBottom() - result[set.fft.posCur[1]] * Grid::MathHeight());
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

@@ -192,10 +192,10 @@ static void DRAW_SPECTRUM(const uint8 *dataIn, int numPoints, Chan::E ch)
 
         WriteParametersFFT(ch, freq0, density0, freq1, density1);
 
-        Rectangle(s * 2, s * 2).Draw(FFT_POS_CURSOR_0 + Grid::Left() - s, y0 - s, color);
-        Rectangle(s * 2, s * 2).Draw(FFT_POS_CURSOR_1 + Grid::Left() - s, y1 - s);
-        VLine(y0 + s - Grid::MathBottom()).Draw(Grid::Left() + FFT_POS_CURSOR_0, Grid::MathBottom());
-        VLine(y1 + s - Grid::MathBottom()).Draw(Grid::Left() + FFT_POS_CURSOR_1, Grid::MathBottom());
+        Rectangle(s * 2, s * 2).Draw(set.fft.posCur[0] + Grid::Left() - s, y0 - s, color);
+        Rectangle(s * 2, s * 2).Draw(set.fft.posCur[1] + Grid::Left() - s, y1 - s);
+        VLine(y0 + s - Grid::MathBottom()).Draw(Grid::Left() + set.fft.posCur[0], Grid::MathBottom());
+        VLine(y1 + s - Grid::MathBottom()).Draw(Grid::Left() + set.fft.posCur[1], Grid::MathBottom());
 
         std::free(spectrum);
     }

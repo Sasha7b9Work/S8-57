@@ -48,6 +48,7 @@ public:
     SettingsCursors     curs;
     SettingsMemory      mem;
     SettingsMath        math;
+    SettingsFFT         fft;
     SettingsMeasures    meas;
     SettingsService     serv;
     SettingsFreqMeter   freq;

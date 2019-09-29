@@ -125,13 +125,16 @@ const Settings Settings::defaultSettings =
         SourceFFT::Both,            // sourceFFT
         WindowFFT::Hamming,         // windowFFT
         0,                          // currentCursor
-        { 50, 50 },                 // posCur[2]
         FFTmaxDB::_60,              // FFTmaxDB
         MathFunction::Sum,          // function
         ModeRegSet::Range,          // modeRegSet
         Divider::_1,                // divider
         RShift::ZERO,
         Range::_500mV
+    },
+
+    {
+        { 50, 50 }                  // posCur[2]
     },
     
     // ÃÂÌ˛ »«Ã≈–≈Õ»ﬂ

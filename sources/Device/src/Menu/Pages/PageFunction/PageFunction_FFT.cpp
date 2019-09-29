@@ -108,7 +108,7 @@ static bool OnArrows_FFT_Cursors(const KeyEvent &event)
 
     int delta = (key == Key::Up || key == Key::Right) ? 1 : -1;
 
-    FFT_POS_CURSOR(MATH_CURRENT_CUR) += (uint8)delta;
+    set.fft.posCur[MATH_CURRENT_CUR] += (uint8)delta;
     Beeper::RegulatorShiftRotate();
 
     return true;

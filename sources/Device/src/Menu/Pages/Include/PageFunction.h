@@ -16,10 +16,6 @@
 #define FFT_ENABLED                 (set.math.enableFFT)
 #define MATH_ENABLED                (FUNC_MODE_DRAW_IS_ENABLED || FFT_ENABLED)
 
-#define FFT_POS_CURSOR(num)         (set.math.posCur[num])
-#define FFT_POS_CURSOR_0            (FFT_POS_CURSOR(0))
-#define FFT_POS_CURSOR_1            (FFT_POS_CURSOR(1))
-
 #define MATH_CURRENT_CUR            (set.math.currentCursor)
 #define MATH_CURRENT_CUR_IS_0       (MATH_CURRENT_CUR == 0)
 
@@ -118,13 +114,17 @@ struct SettingsMath
     SourceFFT::E    sourceFFT;
     WindowFFT::E    windowFFT;
     uint8           currentCursor;        ///< Определяет, каким курсором спектра управляет ручка УСТАНОВКА.
-    uint8           posCur[2];            ///< Позиция курсора спектра. Изменяется 0...256.
     FFTmaxDB::E     FFTmaxDB;
     MathFunction::E function;
     ModeRegSet::E   modeRegSet;           ///< Функция ручки УСТАНОВКА - масштаб по времени или смещение по вертикали.
     int8            divider;
     uint16          rShift;
     Range::E        range;
+};
+
+struct SettingsFFT
+{
+    uint8           posCur[2];            ///< Позиция курсора спектра. Изменяется 0...256.
 };
 
 struct SettingsCursors
