@@ -3,14 +3,6 @@
 #include "Osci/Osci_Settings.h"
 
 
-#define CURsU_CNTRL_CH(ch)          (set.curs.cntrlU[ch])
-#define CURsU_CNTRL                 (CURsU_CNTRL_CH(set.curs.source))
-#define CURsU_CNTRL_1               (CURsU_CNTRL == CursorsControl::_1)
-#define CURsU_CNTRL_2               (CURsU_CNTRL == CursorsControl::_2)
-#define CURsU_CNTRL_1_2             (CURsU_CNTRL == CursorsControl::_1_2)
-#define CURsU_DISABLED              (CURsU_CNTRL == CursorsControl::Disable)
-#define CURsU_ENABLED               (!CURsU_DISABLED)
-
 #define CURsT_CNTRL_CH(ch)          (set.curs.cntrlT[ch])
 #define CURsT_CNTRL                 (CURsT_CNTRL_CH(set.curs.source))
 #define CURsT_CNTRL_1               (CURsT_CNTRL == CursorsControl::_1)

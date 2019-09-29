@@ -37,7 +37,7 @@ float Cursors::PosU(Chan::E ch, int numCur)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 bool Cursors::NecessaryDraw()
 {
-    return (CURsU_ENABLED || CURsT_ENABLED) && (set.curs.showCursors || Menu::GetNameOpenedPage() == PageName::Measures_Cursors_Set);
+    return ((set.curs.cntrlU[set.curs.source] == CursorsControl::Disable) || CURsT_ENABLED) && (set.curs.showCursors || Menu::GetNameOpenedPage() == PageName::Measures_Cursors_Set);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -83,7 +83,7 @@ void Cursors::Draw()
 
     if (NecessaryDraw())
     {
-        bool bothCursors = CURsT_ENABLED && CURsU_ENABLED;  // Признак того, что включены и вертикальные и горизонтальные курсоры - надо нарисовать 
+        bool bothCursors = CURsT_ENABLED && (set.curs.cntrlU[set.curs.source] == CursorsControl::Disable);  // Признак того, что включены и вертикальные и горизонтальные курсоры - надо нарисовать 
                                                             // квадраты в местах пересечения
 
         int x0 = -1;
@@ -107,7 +107,7 @@ void Cursors::Draw()
             DrawVertical((int)Cursors::PosT(source, 0), y0);
             DrawVertical((int)Cursors::PosT(source, 1), y1);
         }
-        if (CURsU_ENABLED)
+        if (set.curs.cntrlU[set.curs.source] == CursorsControl::Disable)
         {
             DrawHorizontal((int)set.curs.posCurU[source][0], x0);
             DrawHorizontal((int)set.curs.posCurU[source][1], x1);

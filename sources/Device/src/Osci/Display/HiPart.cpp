@@ -423,7 +423,7 @@ static void WriteCursors()
         x += 3;
         Chan::E source = set.curs.source;
         Color colorText = Color::CHAN[source];
-        if (CURsU_ENABLED)
+        if (set.curs.cntrlU[set.curs.source] == CursorsControl::Disable)
         {
             String("1:").Draw(x, y1, colorText);
             String("2:").Draw(x, y2);
