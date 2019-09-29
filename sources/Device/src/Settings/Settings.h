@@ -1,5 +1,4 @@
 #pragma once
-#include "SettingsMath.h"
 #include "SettingsMemory.h"
 #include "SettingsDebug.h"
 #include "SettingsNRST.h"
@@ -17,8 +16,9 @@
 #include "Osci/Measurements/Cursors_Settings.h"
 #include "Tester/Tester_Settings.h"
 #include "Multimeter/Multimeter_Settings.h"
-#include "Menu/Pages/Include/PageDisplay.h"
 #include "Menu/Pages/Include/PageChannels.h"
+#include "Menu/Pages/Include/PageDisplay.h"
+#include "Menu/Pages/Include/PageFunction.h"
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

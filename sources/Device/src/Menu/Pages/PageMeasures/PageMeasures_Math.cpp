@@ -2,7 +2,6 @@
 #include "Menu/MenuItems.h"
 #include "Menu/Pages/Include/PageMeasures.h"
 #include "Settings/Settings.h"
-#include "Settings/SettingsMath.h"
 #include "Utils/Math.h"
 #include "Display/Display_Primitives.h"
 #include "Display/Painter.h"

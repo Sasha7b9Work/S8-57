@@ -153,10 +153,17 @@ source_group(Hardware\\HAL      FILES   ../../Device/src/Hardware/HAL/HAL.h
                                                      src/Hardware/HAL/HAL_TIM_win.cpp
                                         ../../Device/src/Hardware/HAL/HAL_USART3.cpp
                                                      src/Hardware/HAL/HAL_win.cpp)
-source_group(Settings           FILES   ../../Device/src/Settings/Settings.h
-                                        ../../Device/src/Settings/Settings.cpp
+source_group(Settings           FILES   ../../Device/src/Settings/Settings.cpp
+                                        ../../Device/src/Settings/Settings.h
                                                      src/Settings/Settings_win.cpp
                                         ../../Device/src/Settings/Settings_default.cpp
+                                        ../../Device/src/Settings/SettingsDebug.cpp
+                                        ../../Device/src/Settings/SettingsDebug.h
+                                        ../../Device/src/Settings/SettingsMemory.cpp
+                                        ../../Device/src/Settings/SettingsMemory.h
+                                        ../../Device/src/Settings/SettingsNRST.h
+                                        ../../Device/src/Settings/SettingsService.h
+                                        ../../Device/src/Settings/SettingsTime.h
                                         ../../Device/src/Settings/SettingsTransformation.cpp)
 
 file(GLOB SOURCES   ../../common/_VS/*
@@ -176,7 +183,7 @@ file(GLOB SOURCES   ../../common/_VS/*
                     ../../common/Transceiver.h
                     ../common/Transceiver_win.cpp
                     
-                    ../../Device/src/Data/*.*
+                    ../../Device/src/Data/*
                     
                     ../../Device/src/Display/Colors.h
                     ../../Device/src/Display/Colors.cpp
@@ -199,8 +206,8 @@ file(GLOB SOURCES   ../../common/_VS/*
                     ../../Device/src/Display/PainterMem.cpp
                     ../../Device/src/Display/Symbols.h
                     
-                    ../../common/Display/Font/*.*
-                    ../../Device/src/FlashDrive/*.*
+                    ../../common/Display/Font/*
+                    ../../Device/src/FlashDrive/*
                     
                     ../../Device/src/FPGA/AD9286.h
                     ../../Device/src/FPGA/AD9286.cpp
@@ -272,10 +279,17 @@ file(GLOB SOURCES   ../../common/_VS/*
                     ../../Device/src/Recorder/*
                     ../../Device/src/SCPI/*
                     
-                    ../../Device/src/Settings/Settings.h
                     ../../Device/src/Settings/Settings.cpp
+                    ../../Device/src/Settings/Settings.h
                                  src/Settings/Settings_win.cpp
                     ../../Device/src/Settings/Settings_default.cpp
+                    ../../Device/src/Settings/SettingsDebug.cpp
+                    ../../Device/src/Settings/SettingsDebug.h
+                    ../../Device/src/Settings/SettingsMemory.cpp
+                    ../../Device/src/Settings/SettingsMemory.h
+                    ../../Device/src/Settings/SettingsNRST.h
+                    ../../Device/src/Settings/SettingsService.h
+                    ../../Device/src/Settings/SettingsTime.h
                     ../../Device/src/Settings/SettingsTransformation.cpp
                     
                     ../../Device/src/Tester/*
