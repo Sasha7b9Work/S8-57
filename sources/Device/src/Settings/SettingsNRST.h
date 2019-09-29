@@ -40,11 +40,6 @@ struct StretchADC
 #define NRST_STRETCH_ADC_TYPE_IS_DISABLE    (NRST_STRETCH_ADC_TYPE == StretchADC::Disable)
 #define NRST_STRETCH_ADC_TYPE_IS_HAND       (NRST_STRETCH_ADC_TYPE == StretchADC::Hand)
 
-#define NRST_STRETCH_ADC(ch, type)          (set.nrst.stretchADC[ch][type])
-#define NRST_STRETCH_ADC_A(type)            (NRST_STRETCH_ADC(Chan::A, type))
-#define NRST_STRETCH_ADC_B(type)            (NRST_STRETCH_ADC(Chan::B, type))
-
-
 struct SettingsNRST
 {
     int16           balanceADC[Chan::Size];                 ///< Значение дополнительного смещения АЦП для ручной балансировки.

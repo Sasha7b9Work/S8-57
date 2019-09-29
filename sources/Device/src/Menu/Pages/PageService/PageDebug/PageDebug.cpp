@@ -110,13 +110,13 @@ void PageDebug::PageADC::PageStretch::OnChanged_Mode(bool)
 {
     if (NRST_STRETCH_ADC_TYPE_IS_DISABLE)
     {
-        stretchA = NRST_STRETCH_ADC_A(StretchADC::Disable) = 0;
-        stretchB = NRST_STRETCH_ADC_B(StretchADC::Disable) = 0;
+        stretchA = set.nrst.stretchADC[Chan::A][StretchADC::Disable] = 0;
+        stretchB = set.nrst.stretchADC[Chan::B][StretchADC::Disable] = 0;
     }
     else
     {
-        stretchA = NRST_STRETCH_ADC_A(NRST_STRETCH_ADC_TYPE);
-        stretchB = NRST_STRETCH_ADC_B(NRST_STRETCH_ADC_TYPE);
+        stretchA = set.nrst.stretchADC[Chan::A][NRST_STRETCH_ADC_TYPE];
+        stretchB = set.nrst.stretchADC[Chan::B][NRST_STRETCH_ADC_TYPE];
     }
 }
 
@@ -138,7 +138,7 @@ static bool IsActive_StretchAB()
 
 static void OnChanged_Stretch_A()
 {
-    NRST_STRETCH_ADC_A(NRST_STRETCH_ADC_TYPE) = stretchA;
+    set.nrst.stretchADC[Chan::A][NRST_STRETCH_ADC_TYPE] = stretchA;
 }
 
 DEF_GOVERNOR( gStretch_A,                                                                                                                //--- Œ“À¿ƒ ¿ - ¿÷œ - –¿—“ﬂ∆ ¿ - –‡ÒÚˇÊÍ‡ 1Í ---
@@ -151,7 +151,7 @@ DEF_GOVERNOR( gStretch_A,                                                       
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void OnChanged_Stretch_B()
 {
-    NRST_STRETCH_ADC_B(NRST_STRETCH_ADC_TYPE) = stretchB;
+    set.nrst.stretchADC[Chan::B][NRST_STRETCH_ADC_TYPE] = stretchB;
 }
 
 DEF_GOVERNOR( gStretch_B,                                                                                                                //--- Œ“À¿ƒ ¿ - ¿÷œ - –¿—“ﬂ∆ ¿ - –‡ÒÚˇÊÍ‡ 2Í ---
@@ -420,7 +420,7 @@ static void DebugShowSetInfo_Draw()
     {
         for (int num = 0; num < 3; num++)
         {
-            String("%d", NRST_STRETCH_ADC(ch, num)).Draw(x + num * 20, y + dY * ch);
+            String("%d", set.nrst.stretchADC[ch][num]).Draw(x + num * 20, y + dY * ch);
         }
     }
 
@@ -631,7 +631,7 @@ float GetStretchADC(Chan::E ch)
 
     const int16 *address = addStretch[set.ch[ch].range][ch];
 
-    int16 stretch = NRST_STRETCH_ADC(ch, NRST_STRETCH_ADC_TYPE);
+    int16 stretch = set.nrst.stretchADC[ch][NRST_STRETCH_ADC_TYPE];
 
     if (address)
     {
@@ -645,6 +645,6 @@ float GetStretchADC(Chan::E ch)
 //---------------------------------------------------------------------------------------------------------------------------------------------------
 void SetStretchADC(Chan::E ch, float kStretch)
 {
-    NRST_STRETCH_ADC(ch, NRST_STRETCH_ADC_TYPE) = (int16)((kStretch - 1.0F) * 1e4F);
+    set.nrst.stretchADC[ch][NRST_STRETCH_ADC_TYPE] = (int16)((kStretch - 1.0F) * 1e4F);
 }
 
