@@ -21,7 +21,7 @@ const Settings Settings::defaultSettings =
         0,                                                          // not used
         ENumAverage::_1,                                   // ENumAverage
         ENumAccum::_1,                                     // ENumAccum
-        Display::ModeAccumulation::NoReset,                         // modeAccumulation
+        ModeAccumulation::NoReset,                         // modeAccumulation
         Display::ENumSmoothing(Display::ENumSmoothing::Disable),    // ENumSmoothing
         Display::ENumSignalsInSec(Display::ENumSignalsInSec::_25),  // ENumSignalsInSec
         Display::TypeGrid::_1,                                      // typeGrid

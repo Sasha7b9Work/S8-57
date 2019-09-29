@@ -26,11 +26,6 @@
 #define ENUM_SMOOTHING              (set.disp.ENumSmoothing)
 #define SMOOTHING_ENABLED           (ENUM_SMOOTHING != Display::ENumSmoothing::Disable)
 
-#define ACCUMULATION                (set.disp.modeAccumulation)
-#define ACCUMULATION_IS_ENABLED     (ACCUMULATION == ::Display::ModeAccumulation::Reset)
-
-#define NUM_ACCUM                   (1 << (int)ENUM_ACCUM)                   /* Возвращает число накоплений */
-
 #define NUM_AVE_MAX                 256
 
 #define ENUM_SIGNALS_IN_SEC         (set.disp.ENumSignalsInSec)
@@ -109,17 +104,17 @@ struct ENumAccum
     } value;
 };
 
+struct ModeAccumulation
+{
+    enum E
+    {
+        NoReset,   /// В этом режиме показываются строго N последних.
+        Reset      /// В этом режиме набираются N последних и потом сбрасываются.
+    } value;
+};
+
 namespace Display
 {
-    struct ModeAccumulation
-    {
-        enum E
-        {
-            NoReset,   /// В этом режиме показываются строго N последних.
-            Reset      /// В этом режиме набираются N последних и потом сбрасываются.
-        } value;
-    };
-
     /// Количество точек для расчёта сглаживания.
     struct ENumSmoothing
     {
@@ -178,7 +173,7 @@ struct SettingsDisplay
     uint8                  notUsing0;
     ENumAverage::E         ENumAverage;           ///< Число усреднений сигнала.
     ENumAccum::E           ENumAccum;             ///< Число накоплений сигнала на экране.
-    Display::ModeAccumulation::E    modeAccumulation;      ///< Режим накопления сигналов.
+    ModeAccumulation::E    modeAccumulation;      ///< Режим накопления сигналов.
     Display::ENumSmoothing          ENumSmoothing;         ///< Перечисление количества точек для скользящего фильтра.
     Display::ENumSignalsInSec       ENumSignalsInSec;      ///< Перечисление числа считываний сигнала в секунда.
     Display::TypeGrid::E            typeGrid;              ///< Тип сетки
