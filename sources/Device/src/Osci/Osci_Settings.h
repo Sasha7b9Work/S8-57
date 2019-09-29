@@ -1,4 +1,5 @@
 #pragma once
+#include "Settings/SettingsOsci.h"
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -18,27 +19,6 @@
 #define TRIG_MODE_FIND          (set.trig.modeFind)
 #define TRIG_MODE_FIND_IS_HAND  (TRIG_MODE_FIND == Osci::Settings::Trig::ModeFind::Hand)
 #define TRIG_MODE_FIND_IS_AUTO  (TRIG_MODE_FIND == Osci::Settings::Trig::ModeFind::Auto)
-
-struct DataSettings;
-
-struct Chan
-{
-    enum E
-    {
-        A,
-        B,
-        Math,
-        Size
-    } value;
-    explicit Chan(E v) : value(v) { };
-    bool IsA() { return value == A; };
-    bool IsB() { return value == B; }
-    int PointsInChannel() const;
-    /// Возвращает количество памяти, требуемой для сохранения данных одного канала
-    int RequestBytes(DataSettings *ds) const;
-    pString Name() const;
-};
-
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 namespace Osci

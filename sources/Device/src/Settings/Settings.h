@@ -19,10 +19,11 @@
 #include "Menu/Pages/Include/PageTrig.h"
 
 
-#pragma pack(push, 1)
+
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+#pragma pack(push, 1)
 class Settings
 {
 public:
@@ -57,7 +58,6 @@ public:
     SettingsRecorder    rec;
     SettingsDebug       dbg;
 };
-
 #pragma pack(pop)
 
 extern Settings set;

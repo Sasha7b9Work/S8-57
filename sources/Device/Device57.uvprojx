@@ -1665,6 +1665,11 @@
               <FileType>8</FileType>
               <FilePath>.\src\Settings\SettingsTransformation.cpp</FilePath>
             </File>
+            <File>
+              <FileName>SettingsOsci.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Settings\SettingsOsci.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
