@@ -3,12 +3,13 @@
 #include "Menu/Pages/Include/PageTrig.h"
 #include "Menu/MenuItems.h"
 #include "Settings/Settings.h"
+#include "Osci/Osci.h"
 
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void OnChanged_HoldOff(bool)
 {
-    Osci::Settings::LoadHoldfOff();
+    Osci::LoadHoldfOff();
 }
 
 DEF_CHOICE_2( cHoldOff,                                                                                                                               //--- СИНХР - УДЕРЖАНИЕ - Удержание ---
@@ -24,7 +25,7 @@ DEF_CHOICE_2( cHoldOff,                                                         
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void OnChanged_Duration()
 {
-    Osci::Settings::LoadHoldfOff();
+    Osci::LoadHoldfOff();
 }
 
 DEF_GOVERNOR( gDuration,                                                                                                                           //--- СИНХР - УДЕРЖАНИЕ - Длительность ---

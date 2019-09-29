@@ -13,6 +13,7 @@
 #include "Display/Display_Primitives.h"
 #include "Display/Painter.h"
 #include "Hardware/Timer.h"
+#include "Osci/Osci.h"
 
 
 using namespace Display::Primitives;
@@ -54,7 +55,7 @@ void Recorder::Init()
     TrigInput::Load();
     RecorderScaleX::Load();
     TShift::Load();
-    Osci::Settings::LoadHoldfOff();
+    Osci::LoadHoldfOff();
 
     running = false;
 

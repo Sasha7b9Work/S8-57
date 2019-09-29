@@ -54,7 +54,7 @@ void Osci::Init()
     TBase::Load();
     TShift::Load();
     FPGA::LoadCalibratorMode();
-    Settings::LoadHoldfOff();
+    LoadHoldfOff();
     ::HAL::PIO::Init(::HAL::PIO::Port::_G, ::HAL::PIO::Pin::_1, ::HAL::PIO::Mode::Input, ::HAL::PIO::Pull::Up);
     Osci::Storage::Clear();
     FPGA::OnPressStart();

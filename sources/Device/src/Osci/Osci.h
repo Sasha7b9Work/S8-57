@@ -26,6 +26,8 @@ namespace Osci
     void ReadPointP2P();
     /// Балансировать канал
     void Balance(Chan::E ch);
+    /// Загрузить значение удержания синхронизации
+    void LoadHoldfOff();
 
     extern int addShift;
 
