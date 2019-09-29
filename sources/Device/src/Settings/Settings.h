@@ -1,7 +1,6 @@
 #pragma once
 #include "SettingsDebug.h"
 #include "SettingsNRST.h"
-#include "SettingsService.h"
 #include "Tester/Tester.h"
 #include "Osci/FrequencyCounter.h"
 #include "Osci/Measurements/Cursors.h"
@@ -17,6 +16,7 @@
 #include "Menu/Pages/Include/PageDisplay.h"
 #include "Menu/Pages/Include/PageFunction.h"
 #include "Menu/Pages/Include/PageMemory.h"
+#include "Menu/Pages/Include/PageService.h"
 #include "Menu/Pages/Include/PageTime.h"
 #include "Menu/Pages/Include/PageTrig.h"
 
@@ -66,16 +66,7 @@ public:
     SettingsMemory      mem;
     SettingsMath        math;
     SettingsMeasures    meas;
-
-
-    // Меню СЕРВИС
-
-    uint8               notUsing;
-    Color::Scheme::E    serv_colorScheme;
-    bool                serv_notUsing;
-    CalibratorMode::E   serv_calibratorMode;            ///< Режим работы калибратора.
-    uint8               serv_soundVolume;               ///< Громкость звука
-    bool                serv_showInfoVoltage;           ///< Показывать напряжение батареи на экране
+    SettingsService     serv;
 
     // Настройки частотомера
 

@@ -160,7 +160,6 @@ source_group(Settings           FILES   ../../Device/src/Settings/Settings.cpp
                                         ../../Device/src/Settings/SettingsDebug.cpp
                                         ../../Device/src/Settings/SettingsDebug.h
                                         ../../Device/src/Settings/SettingsNRST.h
-                                        ../../Device/src/Settings/SettingsService.h
                                         ../../Device/src/Settings/SettingsTransformation.cpp)
 
 file(GLOB SOURCES   ../../common/_VS/*
@@ -283,7 +282,6 @@ file(GLOB SOURCES   ../../common/_VS/*
                     ../../Device/src/Settings/SettingsDebug.cpp
                     ../../Device/src/Settings/SettingsDebug.h
                     ../../Device/src/Settings/SettingsNRST.h
-                    ../../Device/src/Settings/SettingsService.h
                     ../../Device/src/Settings/SettingsTransformation.cpp
                     
                     ../../Device/src/Tester/*

@@ -140,13 +140,12 @@ const Settings Settings::defaultSettings =
     },
 
     // Меню СЕРВИС
-
-    0,                                  // notUsed
-    Color::Scheme::WhiteLetters,        // serv_colorScheme
-    false,                              // serv_recorder
-    CalibratorMode::Freq,               // serv_calibratorMode
-    0,                                  // serv_soundVolume
-    false,                              // serv_showInfoVoltage  
+    {
+        Color::Scheme::WhiteLetters,        // colorScheme
+        CalibratorMode::Freq,               // calibratorMode
+        0,                                  // soundVolume
+        false                               // showInfoVoltage
+    },
     
     // Настройки частотомера
     
