@@ -58,8 +58,7 @@ DEF_CHOICE_5( cPoints,                                                          
     namesLengthMemory[2],
     namesLengthMemory[3],
     namesLengthMemory[4],
-    FPGA_ENUM_POINTS,
-    &PageMemory::self, IsActive_Points, PageMemory::OnChanged_Points, Choice::AfterDraw
+    set.mem.enumPoints, &PageMemory::self, IsActive_Points, PageMemory::OnChanged_Points, Choice::AfterDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -272,8 +271,7 @@ DEF_CHOICE_2( cDrive_SaveAs,                                                    
     ,
     "Изображение",
     "Текст",
-    MODE_SAVE,
-    &PageDrive::self, Item::Active, Choice::Changed, Choice::AfterDraw
+    set.mem.modeSaveSignal, &PageDrive::self, Item::Active, Choice::Changed, Choice::AfterDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -282,8 +280,7 @@ DEF_CHOICE_2( cDrive_ModeBtnMemory,                                             
     "",
     "Меню",
     "Сохранение",
-    MODE_BTN_MEMORY,
-    &PageDrive::self, Item::Active, Choice::Changed, Choice::AfterDraw
+    set.mem.modeBtnMemory, &PageDrive::self, Item::Active, Choice::Changed, Choice::AfterDraw
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

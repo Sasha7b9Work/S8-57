@@ -3,29 +3,9 @@
 #include "Osci/Osci_Settings.h"
 
 
-#define SHOW_IN_INT             (set.mem.modeShowIntMem)
-#define SHOW_IN_INT_SAVED       (SHOW_IN_INT == ModeShowIntMem::Saved)
-#define SHOW_IN_INT_DIRECT      (SHOW_IN_INT == ModeShowIntMem::Direct)
-#define SHOW_IN_INT_BOTH        (SHOW_IN_INT == ModeShowIntMem::Both)
-
 /// Преобразует перечисление в количество точек
-#define ENUM_TO_REL_POINTS(enum) ((uint)(1 << ((enum) + 9)))
-
-#define FPGA_ENUM_POINTS        (set.mem.enumPoints)
-#define FPGA_POINTS_512         (FPGA_ENUM_POINTS == ENumPointsFPGA::_512)
-#define FPGA_POINTS_8k          (FPGA_ENUM_POINTS == ENumPointsFPGA::_8k)
-#define FPGA_NUM_POINTS         ENUM_TO_REL_POINTS(FPGA_ENUM_POINTS)
-
-#define MODE_BTN_MEMORY         (set.mem.modeBtnMemory)
-#define MODE_BTN_MEMORY_IS_MENU (MODE_BTN_MEMORY == ModeBtnMemory::Menu)
-#define MODE_BTN_MEMORY_IS_SAVE (MODE_BTN_MEMORY == ModeBtnMemory::Save)
-
-#define MODE_SAVE               (set.mem.modeSaveSignal)
-#define MODE_SAVE_BMP           (MODE_SAVE == ModeSaveSignal::BMP)
-#define MODE_SAVE_TXT           (MODE_SAVE == ModeSaveSignal::TXT)
-
-#define MEM_DATA_SCALE          (set.mem.DataScale)
-#define MEM_DATA_SCALE_RECALC   (MEM_DATA_SCALE == MemDataScale_Recalculated)
+#define ENUM_TO_REL_POINTS(enum)    ((uint)(1 << ((enum) + 9)))
+#define FPGA_NUM_POINTS             ENUM_TO_REL_POINTS(set.mem.enumPoints)
 
 
 /// Режим работы.
