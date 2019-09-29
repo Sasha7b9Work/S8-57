@@ -1,5 +1,5 @@
 #include "defines.h"
-#include "Menu/Pages/Include/PageFunction.h"
+#include "Menu/Pages/Include/PageRecorder.h"
 #include "Settings/Settings.h"
 #include "Recorder/Recorder.h"
 #include "Device.h"

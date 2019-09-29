@@ -13,6 +13,7 @@
 #include "Pages/Include/PageMeasures.h"
 #include "Pages/Include/PageDisplay.h"
 #include "Pages/Include/PageFunction.h"
+#include "Pages/Include/PageRecorder.h"
 #include "Hardware/Beeper.h"
 #include "FPGA/FPGA.h"
 #include "FPGA/FPGA_Settings.h"

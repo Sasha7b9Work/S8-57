@@ -5,7 +5,6 @@
 #include "Display/Grid.h"
 #include "Display/Painter.h"
 #include "Menu/Menu.h"
-
 #include "Recorder/Recorder_Storage.h"
 #include "Hardware/Timer.h"
 #include "FPGA/FPGA.h"
@@ -14,6 +13,7 @@
 #include "Utils/Values.h"
 #include "Data/Heap.h"
 #include "Menu/Pages/Include/PageFunction.h"
+#include "Menu/Pages/Include/PageRecorder.h"
 #include "Recorder/Recorder.h"
 #include <cstring>
 #include <cstdlib>

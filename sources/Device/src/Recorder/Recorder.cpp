@@ -5,11 +5,10 @@
 #include "Recorder/Recorder.h"
 #include "Recorder/Recorder_Settings.h"
 #include "Recorder/Recorder_Storage.h"
-
 #include "Hardware/HAL/HAL_PIO.h"
 #include "Data/Heap.h"
 #include "Menu/Menu.h"
-#include "Menu/Pages/Include/PageFunction.h"
+#include "Menu/Pages/Include/PageRecorder.h"
 #include "Hardware/Memory.h"
 #include "Display/Display_Primitives.h"
 #include "Display/Painter.h"

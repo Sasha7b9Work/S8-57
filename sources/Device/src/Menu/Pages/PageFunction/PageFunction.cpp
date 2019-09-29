@@ -1,5 +1,6 @@
 #include "defines.h"
 #include "Menu/Pages/Include/PageFunction.h"
+#include "Menu/Pages/Include/PageRecorder.h"
 #include "Menu/Menu.h"
 #include "Settings/Settings.h"
 #include "Hardware/Beeper.h"

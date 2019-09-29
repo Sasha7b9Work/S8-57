@@ -11,12 +11,12 @@
 #include "Keyboard/DecoderDevice.h"
 #include "Menu/Menu.h"
 #include "Menu/Pages/Include/PageFunction.h"
+#include "Menu/Pages/Include/PageRecorder.h"
 #include "Recorder/Recorder.h"
 #include "Settings/Settings.h"
 #include "Utils/Math.h"
 #include <stdlib.h>
 #include <cmath>
-
 #include "Hardware/Battery.h"
 #include "Hardware/HAL/HAL.h"
 #include "Utils/Debug.h"

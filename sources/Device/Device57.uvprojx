@@ -1146,6 +1146,11 @@
               <FilePath>.\src\Menu\Pages\Include\PageMemory.h</FilePath>
             </File>
             <File>
+              <FileName>PageRecorder.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Menu\Pages\Include\PageRecorder.h</FilePath>
+            </File>
+            <File>
               <FileName>PageService.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Menu\Pages\Include\PageService.h</FilePath>
