@@ -28,7 +28,7 @@ const Settings Settings::defaultSettings =
         50,                                                         // brightnessGrid
         LinkingRShift::Position,                           // linkingRShift
         100,                                                        // brightness
-        Menu::AutoHide::None,                                       // menuAutoHide
+        MenuAutoHide::None,                                       // menuAutoHide
         370,                                                        // shiftInMemory
         Chan::A,                                                    // lastAffectedChannel
     },

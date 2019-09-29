@@ -5,8 +5,6 @@
 #include "Osci/Osci_Settings.h"
 
 
-#define MENU_AUTO_HIDE              (set.disp.menuAutoHide)
-
 #define BRIGHTNESS_DISPLAY          (set.disp.brightness)
 
 #define BRIGHTNESS_GRID             (set.disp.brightnessGrid)
@@ -159,12 +157,26 @@ struct LinkingRShift
     } value;
 };
 
+/// Через какое время после последнего нажатия кнопки скрывать меню.
+struct MenuAutoHide
+{
+    enum E
+    {
+        None = 0,   ///< Никогда.
+        _5 = 5,   ///< Через 5 секунд.
+        _10 = 10,  ///< Через 10 секунд.
+        _15 = 15,  ///< Через 15 секунд.
+        _30 = 30,  ///< Через 30 секунд.
+        _60 = 60   ///< Через 60 секунд.
+    } value;
+};
+
 
 struct SettingsDisplay
 {
     ModeDrawSignal::E      modeDrawSignal;
-    Background::E          background;                     ///< Цвет фона.
-    ENumMinMax::E          ENumMinMax;                     ///< Перечисление количества измерений для определения минимумов и масимумов.
+    Background::E          background;            ///< Цвет фона.
+    ENumMinMax::E          ENumMinMax;            ///< Перечисление количества измерений для определения минимумов и масимумов.
     uint8                  notUsing0;
     ENumAverage::E         ENumAverage;           ///< Число усреднений сигнала.
     ENumAccum::E           ENumAccum;             ///< Число накоплений сигнала на экране.
@@ -172,14 +184,14 @@ struct SettingsDisplay
     ENumSmoothing          ENumSmoothing;         ///< Перечисление количества точек для скользящего фильтра.
     ENumSignalsInSec       ENumSignalsInSec;      ///< Перечисление числа считываний сигнала в секунда.
     TypeGrid::E            typeGrid;              ///< Тип сетки
-    int                             brightnessGrid;        ///< Яркость сетки от 0 до 100.
+    int                    brightnessGrid;        ///< Яркость сетки от 0 до 100.
     LinkingRShift::E       linkingRShift;         ///< Тип привязки к смещению по вертикали.
-    int16                           brightness;            ///< Яркость дисплея.
-    Menu::AutoHide::E               menuAutoHide;          ///< Через сколько времени после последнего нажатия клавиши прятать меню.
-    int16                           shiftInMemory;         ///< \brief Показывает смещение левого края стеки относительно нулевого байта памяти в 
-                                                           ///< байтах. Т.е. для пикового детектора будет в два раза больше количества точек на экране.
-    Chan::E                         lastAffectedChannel;   ///< \brief Последний управляемый канал. Используется для правильного вывода сигналов
-                                                           ///< на экран с наложением один поверх другого
+    int16                  brightness;            ///< Яркость дисплея.
+    MenuAutoHide::E        menuAutoHide;          ///< Через сколько времени после последнего нажатия клавиши прятать меню.
+    int16                  shiftInMemory;         ///< \brief Показывает смещение левого края стеки относительно нулевого байта памяти в 
+                                                  ///< байтах. Т.е. для пикового детектора будет в два раза больше количества точек на экране.
+    Chan::E                lastAffectedChannel;   ///< \brief Последний управляемый канал. Используется для правильного вывода сигналов
+                                                  ///< на экран с наложением один поверх другого
 };
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
