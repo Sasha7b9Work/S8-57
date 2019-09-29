@@ -3,7 +3,6 @@
 #include "Settings/Settings.h"
 #include "Menu/Pages/Include/PageFunction.h"
 #include "Device.h"
-#include "Tester/Tester_Settings.h"
 
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
