@@ -105,17 +105,17 @@ void Multimeter::Update()
     }
     
     uint8 range = 0;
-    if(set.mult.meas == Measure::VoltageDC)        { range = (uint8)set.mult.rangeVoltageDC; }
-    else if(set.mult.meas == Measure::VoltageAC)   { range = (uint8)set.mult.rangeVoltageAC; }
-    else if(set.mult.meas == Measure::CurrentDC)   { range = (uint8)set.mult.rangeCurrentDC; }
-    else if(set.mult.meas == Measure::CurrentAC)   { range = (uint8)set.mult.rangeCurrentAC; }
-    else if(set.mult.meas == Measure::Resistance)  { range = (uint8)set.mult.rangeResist; }
+    if(set.mult.meas == MultimeterMeasure::VoltageDC)        { range = (uint8)set.mult.rangeVoltageDC; }
+    else if(set.mult.meas == MultimeterMeasure::VoltageAC)   { range = (uint8)set.mult.rangeVoltageAC; }
+    else if(set.mult.meas == MultimeterMeasure::CurrentDC)   { range = (uint8)set.mult.rangeCurrentDC; }
+    else if(set.mult.meas == MultimeterMeasure::CurrentAC)   { range = (uint8)set.mult.rangeCurrentAC; }
+    else if(set.mult.meas == MultimeterMeasure::Resistance)  { range = (uint8)set.mult.rangeResist; }
     else
     {
         // больше выборов нету
     }
 
-    char symbol = Measure(set.mult.meas).Symbol();
+    char symbol = MultimeterMeasure(set.mult.meas).Symbol();
 
     uint8 send[] = {0x02, (uint8)symbol, (uint8)(range + 0x30), 0x0a};
 
@@ -125,9 +125,9 @@ void Multimeter::Update()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-Multimeter::Measure::E Multimeter::Measure::GetCode(const char buffer[13])
+MultimeterMeasure::E MultimeterMeasure::GetCode(const char buffer[13])
 {
-    Measure::E result = Measure::Size;
+    MultimeterMeasure::E result = MultimeterMeasure::Size;
 
     int pos = 0;
 
@@ -138,31 +138,31 @@ Multimeter::Measure::E Multimeter::Measure::GetCode(const char buffer[13])
 
     if (pos == 13)
     {
-        return Measure::Size;
+        return MultimeterMeasure::Size;
     }
 
     switch (buffer[pos - 2])
     {
     case 'U':
-        result = Measure::VoltageDC;
+        result = MultimeterMeasure::VoltageDC;
         break;
     case 'V':
-        result = Measure::VoltageAC;
+        result = MultimeterMeasure::VoltageAC;
         break;
     case 'I':
-        result = Measure::CurrentDC;
+        result = MultimeterMeasure::CurrentDC;
         break;
     case 'J':
-        result = Measure::CurrentAC;
+        result = MultimeterMeasure::CurrentAC;
         break;
     case 'R':
-        result = Measure::Resistance;
+        result = MultimeterMeasure::Resistance;
         break;
     case 'Y':
-        result = Measure::TestDiode;
+        result = MultimeterMeasure::TestDiode;
         break;
     case 'W':
-        result = Measure::Bell;
+        result = MultimeterMeasure::Bell;
         break;
     }
 

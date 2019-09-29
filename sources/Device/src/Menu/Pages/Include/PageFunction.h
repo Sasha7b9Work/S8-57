@@ -307,10 +307,34 @@ struct MultimeterRangeResistance
     explicit MultimeterRangeResistance(E v) : value(v) {};
 };
 
+/// Режим измерений мультиметра
+struct MultimeterMeasure
+{
+    enum E
+    {
+        VoltageDC,
+        VoltageAC,
+        CurrentDC,
+        CurrentAC,
+        Resistance,
+        TestDiode,
+        Bell,
+        Size
+    } value;
+    explicit MultimeterMeasure(E v) : value(v) { };
+    char Symbol() const
+    {
+        static const char symbols[Size] = { 'U', 'V', 'I', 'J', 'R', 'Y', 'W' };
+        return symbols[value]; //-V2006
+    }
+    /// Получить код измерения из принятого буфера
+    static MultimeterMeasure::E GetCode(const char buffer[13]);
+};
+
 struct SettingsMultimeter
 {
     MultimeterAVP::E              avp;
-    Multimeter::Measure::E        meas;
+    MultimeterMeasure::E          meas;
     MultimeterRangeDC::E          rangeVoltageDC;
     MultimeterRangeAC::E          rangeVoltageAC;
     MultimeterRangeCurrent::E     rangeCurrentAC;     ///< Предел измерения переменного тока

@@ -106,23 +106,23 @@ void Multimeter::Display::Update()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static int GetRange()
 {
-    if (set.mult.meas == Multimeter::Measure::VoltageDC)
+    if (set.mult.meas == MultimeterMeasure::VoltageDC)
     {
         return set.mult.rangeVoltageDC;
     }
-    else if (set.mult.meas == Multimeter::Measure::VoltageAC)
+    else if (set.mult.meas == MultimeterMeasure::VoltageAC)
     {
         return set.mult.rangeVoltageAC;
     }
-    else if (set.mult.meas == Multimeter::Measure::CurrentDC)
+    else if (set.mult.meas == MultimeterMeasure::CurrentDC)
     {
         return set.mult.rangeCurrentDC;
     }
-    else if (set.mult.meas == Multimeter::Measure::CurrentAC)
+    else if (set.mult.meas == MultimeterMeasure::CurrentAC)
     {
         return set.mult.rangeCurrentAC;
     }
-    else if (set.mult.meas == Multimeter::Measure::Resistance)
+    else if (set.mult.meas == MultimeterMeasure::Resistance)
     {
         return set.mult.rangeResist;
     }
@@ -141,7 +141,7 @@ void Multimeter::Display::ChangedMode()
 
     std::memset(outBuffer, '-', 7); //-V512
 
-    static const int position[Measure::Size][4] =
+    static const int position[MultimeterMeasure::Size][4] =
     {
         {2, 3, 4},      // VoltageDC
         {2, 3, 4},      // VoltageAC
@@ -152,7 +152,7 @@ void Multimeter::Display::ChangedMode()
         (2),            // Bell
     };
     
-    static const pString suffix[Measure::Size][4] =
+    static const pString suffix[MultimeterMeasure::Size][4] =
     {
         {"V=", "V=", "V="},
         {"V~", "V~", "V~"},
@@ -178,7 +178,7 @@ void Multimeter::Display::SetMeasure(const uint8 buf[13])
         pFuncVCC func;
         Func(pFuncVCC f) : func(f) {};
     }
-    funcs[Multimeter::Measure::Size] =
+    funcs[MultimeterMeasure::Size] =
     {
         PrepareConstantVoltage,
         PrepareVariableVoltage,
@@ -189,9 +189,9 @@ void Multimeter::Display::SetMeasure(const uint8 buf[13])
         PrepareBell
     };
 
-    Measure::E meas = Measure::GetCode((const char *)buf);
+    MultimeterMeasure::E meas = MultimeterMeasure::GetCode((const char *)buf);
 
-    if (meas >= Measure::Size)
+    if (meas >= MultimeterMeasure::Size)
     {
         return;
     }

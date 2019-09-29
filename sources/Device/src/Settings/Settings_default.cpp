@@ -171,18 +171,18 @@ const Settings Settings::defaultSettings =
     
     // Настройки тестер-компонента
     {
-        TesterControl::Voltage,     // control
-        TesterPolarity::Positive,   // polarity
-        TesterStepU::_100mV,        // stepU
-        TesterStepI::_4mA,          // stepI
-        ENumAverage::_1,            // smooth
-        TesterViewMode::Lines       // viewMode
+        TesterControl::Voltage,         // control
+        TesterPolarity::Positive,       // polarity
+        TesterStepU::_100mV,            // stepU
+        TesterStepI::_4mA,              // stepI
+        ENumAverage::_1,                // smooth
+        TesterViewMode::Lines           // viewMode
     },
     
     // Настройки меню
     {
-        false,                          // menu_show;
-        {                               // menu_posActItem[Page_NumPages];    
+        false,                                  // menu_show;
+        {                                       // menu_posActItem[Page_NumPages];    
             0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f,
             0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f,
             0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f,
@@ -190,31 +190,31 @@ const Settings Settings::defaultSettings =
             0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f,
             0x7f, 0x7f, 0x7f, 0x7f
         },
-        {}                              // menu_currentSubPage[Page_NumPages];
+        {}                                      // menu_currentSubPage[Page_NumPages];
     },
     
     // Несбрасываемые настройки калибровки
     {
-        {},                             // nrst_balanceADC[Chan::Size]
-        BalanceADC::Disable,            // nrst_balanceADCtype
-        StretchADC::Disable,            // nrst_stretchADCtype
-        {},                             // nrst_StretchADC[Chan::Size][3]
-        {},                             // nrst_rShiftAddStable[Chan::Size][3]
-        0,                              // nrst_numAveForRand
-        0,                              // nrst_numSmoothForRand
-        {},                             // nrst_rShiftAdd[Chan::Size][Range::Size][2]
-        0                               // nrst_correctionTime
+        {},                                     // nrst_balanceADC[Chan::Size]
+        BalanceADC::Disable,                    // nrst_balanceADCtype
+        StretchADC::Disable,                    // nrst_stretchADCtype
+        {},                                     // nrst_StretchADC[Chan::Size][3]
+        {},                                     // nrst_rShiftAddStable[Chan::Size][3]
+        0,                                      // nrst_numAveForRand
+        0,                                      // nrst_numSmoothForRand
+        {},                                     // nrst_rShiftAdd[Chan::Size][Range::Size][2]
+        0                                       // nrst_correctionTime
     },
     
     // Настройки мультиметра
     {
-        MultimeterAVP::Off,                 // avp
-        Multimeter::Measure::VoltageDC,     // meas
-        MultimeterRangeDC::_2V,             // rangeCV
-        MultimeterRangeAC::_2V,             // rangeVV
-        MultimeterRangeCurrent::_2A,        // rangeCurrentAC
-        MultimeterRangeCurrent::_2A,        // rangeCurrentDC
-        MultimeterRangeResistance::_10M     // rangeResist
+        MultimeterAVP::Off,                     // avp
+        MultimeterMeasure::VoltageDC,           // meas
+        MultimeterRangeDC::_2V,                 // rangeCV
+        MultimeterRangeAC::_2V,                 // rangeVV
+        MultimeterRangeCurrent::_2A,            // rangeCurrentAC
+        MultimeterRangeCurrent::_2A,            // rangeCurrentDC
+        MultimeterRangeResistance::_10M         // rangeResist
     },
     
     // Настройки регистратора
