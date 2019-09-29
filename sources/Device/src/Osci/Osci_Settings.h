@@ -152,30 +152,6 @@ namespace Osci
                 static void Find();
             };
 
-            /// Режим запуска.
-            struct StartMode
-            {
-                enum E
-                {
-                    Auto,     ///< Автоматический.
-                    Wait,     ///< Ждущий.
-                    Single    ///< Однократный.
-                } value;
-                explicit StartMode(E v) : value(v) {};
-            };
-
-            struct Polarity
-            {
-                enum E
-                {
-                    Rising,
-                    Falling
-                } value;
-                explicit Polarity(E v) : value(v) {};
-
-                static void Load();
-            };
-
             extern bool pulse;
         };
 

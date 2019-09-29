@@ -50,9 +50,9 @@ const Settings Settings::defaultSettings =
     {
         TrigSource::A,                            // source
         TrigInput::Full,                          // input
-        Trig::Polarity::Rising,                     // polarity
+        TrigPolarity::Rising,                     // polarity
         {Trig::Level::ZERO, Trig::Level::ZERO},     // lev[Chan::Size]
-        Trig::StartMode::Auto,                      // startMode
+        TrigStartMode::Auto,                      // startMode
         TrigModeFind::Hand,                       // modeFind
         10,                                         // holdOff
         false                                       // holdOffEnable

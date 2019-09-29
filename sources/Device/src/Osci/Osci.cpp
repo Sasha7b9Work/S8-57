@@ -50,7 +50,7 @@ void Osci::Init()
     Settings::RShift::Load(Chan::B);
     TrigInput::Load();
     Settings::Trig::Level::Load();
-    Settings::Trig::Polarity::Load();
+    TrigPolarity::Load();
     Settings::TBase::Load();
     Settings::TShift::Load();
     FPGA::Settings::LoadCalibratorMode();
