@@ -237,6 +237,92 @@ struct SettingsMeasures
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+struct FreqMeterEnabled
+{
+    enum E
+    {
+        Off,
+        On
+    } value;
+    explicit FreqMeterEnabled(E v) : value(v) {};
+};
+
+/// Что показывать - период или частоту
+struct FreqMeterModeView
+{
+    enum E
+    {
+        Frequency,
+        Period,
+        Number
+    } value;
+    explicit FreqMeterModeView(E v) : value(v) {};
+};
+
+/// Время счёта периода.
+struct FreqMeterTimeCounting
+{
+    enum E
+    {
+        _100ms,
+        _1s,
+        _10s
+    } value;
+    explicit FreqMeterTimeCounting(E v) : value(v) {};
+};
+
+/// Частота заполняющих импульсов для счёта частоты.
+struct FreqMeterFreqClc
+{
+    enum E
+    {
+        _100kHz,
+        _1MHz,
+        _10MHz,
+        _100MHz,
+        Number
+    } value;
+    explicit FreqMeterFreqClc(E v) : value(v) {};
+};
+
+/// Количество периодов.
+struct FreqMeterNumberPeriods
+{
+    enum E
+    {
+        _1,
+        _10,
+        _100,
+        _1k,
+        _10k,
+        _100k,
+        Number
+    } value;
+    explicit FreqMeterNumberPeriods(E v) : value(v) {};
+};
+
+#define FREQ_METER_TIMECOUNTING             (set.freq.timeCounting)
+#define FREQ_METER_FREQ_CLC                 (set.freq.freqClc)
+#define FREQ_METER_NUM_PERIODS              (set.freq.numberPeriods)
+
+#define FREQ_METER_ENABLED                  (set.freq.enabled)
+#define FREQ_METER_IS_ENABLED               (FREQ_METER_ENABLED == FreqMeterEnabled::On)
+
+#define FREQ_METER_MODE_VIEW                (set.freq.modeView)
+#define FREQ_METER_MODE_VIEW_IS_PERIOD      (FREQ_METER_MODE_VIEW == FreqMeterModeView::Period)
+#define FREQ_METER_MODE_VIEW_IS_FREQUENCY   (FREQ_METER_MODE_VIEW == FreqMeterModeView::Frequency)
+
+struct SettingsFreqMeter
+{
+    FreqMeterEnabled::E        enabled;
+    FreqMeterModeView::E       modeView;
+    FreqMeterTimeCounting::E   timeCounting;  ///< Время счёта частоты.
+    FreqMeterFreqClc::E        freqClc;       ///< Частота заполнения.
+    FreqMeterNumberPeriods::E  numberPeriods; ///< Количество периодов.
+};
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 struct PageFunction
 {
     static const Page * const self;

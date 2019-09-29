@@ -148,12 +148,13 @@ const Settings Settings::defaultSettings =
     },
     
     // Настройки частотомера
-    
-    FrequencyCounter::Enabled::Off,         // freq_enabled;      
-    FrequencyCounter::ModeView::Frequency,  // freq_modeView      
-    FrequencyCounter::TimeCounting::_1s,    // freq_timeCounting; 
-    FrequencyCounter::FreqClc::_1MHz,       // freq_freqClc;      
-    FrequencyCounter::NumberPeriods::_10,   // freq_numberPeriods;
+    {
+        FreqMeterEnabled::Off,         // enabled
+        FreqMeterModeView::Frequency,  // modeView
+        FreqMeterTimeCounting::_1s,    // timeCounting
+        FreqMeterFreqClc::_1MHz,       // freqClc
+        FreqMeterNumberPeriods::_10,   // numberPeriods
+    },
     
     // Меню ОТЛАДКА
 

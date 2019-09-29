@@ -59,7 +59,7 @@ static pString FreqSetToString(const BitSet32 *fr);
 
 static pString PeriodSetToString(const BitSet32 *pr);
 /// Возвращает порядок младшего разряда считанного значения счётчика периода при данных настройках
-static int LowOrder(FrequencyCounter::FreqClc::E freqCLC, FrequencyCounter::NumberPeriods::E numPeriods);
+static int LowOrder(FreqMeterFreqClc::E freqCLC, FreqMeterNumberPeriods::E numPeriods);
 /// Преобразует 6 разрядов числа, хранящиеся в стеке, в текстовую строку периода. Младший значащий разряд хранится на вершине стека. order - его порядок
 static pString StackToString(Utils::Stack<uint> *stack, int order);
 /// Записывает 6 разрядов из стека stack в буфер buffer. Младший разряд на вершине стека. Точку ставить на point позиции, начиная с buffer[0]
@@ -93,7 +93,7 @@ void FrequencyCounter::LoadSettings()
         const uint16 maskFreqClc[4] = {0, (1 << 2), (1 << 3), ((1 << 3) + (1 << 2))};
 
         //DEF__STRUCT(StructPeriod, uint16) maskPeriod[NumberPeriods::Number] =
-        static const uint16 maskPeriod[NumberPeriods::Number] =
+        static const uint16 maskPeriod[FreqMeterNumberPeriods::Number] =
         { //        654 - задействованные биты
             BIN_U8(00000000), //-V2501
             BIN_U8(00010000), //-V2501
@@ -476,7 +476,7 @@ pString PeriodSetToString(const BitSet32 *pr)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static int LowOrder(FrequencyCounter::FreqClc::E freqCLC, FrequencyCounter::NumberPeriods::E numPeriods)
+static int LowOrder(FreqMeterFreqClc::E freqCLC, FreqMeterNumberPeriods::E numPeriods)
 {
 /*
     Измеряемое значение | Принимаемое значение | Вывод на экран | последний значащий разряд
@@ -655,7 +655,7 @@ static pString FreqSetToString(const BitSet32 *fr)
 
     switch (FREQ_METER_TIMECOUNTING)
     {
-        case FrequencyCounter::TimeCounting::_100ms:
+        case FreqMeterTimeCounting::_100ms:
 
             giverFreq *= 100;
 
@@ -675,7 +675,7 @@ static pString FreqSetToString(const BitSet32 *fr)
             }            
             break;
 
-        case FrequencyCounter::TimeCounting::_1s:
+        case FreqMeterTimeCounting::_1s:
 
             giverFreq *= 10;
 
@@ -700,7 +700,7 @@ static pString FreqSetToString(const BitSet32 *fr)
             }
             break;
 
-        case FrequencyCounter::TimeCounting::_10s:
+        case FreqMeterTimeCounting::_10s:
 
             WRITE_SUFFIX("Гц");
 
