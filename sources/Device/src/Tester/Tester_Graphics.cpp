@@ -86,7 +86,7 @@ static void DrawData(int numStep)
     uint16 *x = &(*datX)[numStep][0];
     uint8 *y = &(*datY)[numStep][0];
     
-    uint8 mode = BUILD_MODE(TESTER_VIEW_MODE, numStep, TESTER_ENUM_AVERAGE);
+    uint8 mode = BUILD_MODE(set.test.viewMode, numStep, set.test.ave);
 
     Painter::DrawTesterData(mode, ColorForStep(numStep), x, y);
 }
@@ -130,9 +130,9 @@ static String ValueForStep(int step)
         {"0 ֲ", "3 ֲ",   "6 ֲ",   "9 ֲ",   "12 ֲ"}
     };
 
-    if (TESTER_CONTROL_IS_U)
+    if (set.test.control == TesterControl::Voltage)
     {
-        return String(valuesU[TESTER_STEP_U][step]);
+        return String(valuesU[set.test.stepU][step]);
     }
 
     static pString valuesI[2][5] =
@@ -141,7 +141,7 @@ static String ValueForStep(int step)
         {"0 לךְ", "20 לךְ", "40 לךְ", "60 לךְ", "80 לךְ"}
     };
 
-    return String(valuesI[TESTER_STEP_I][step]);
+    return String(valuesI[set.test.stepI][step]);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

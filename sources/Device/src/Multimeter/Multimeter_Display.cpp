@@ -106,23 +106,23 @@ void Multimeter::Display::Update()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static int GetRange()
 {
-    if (MULTI_MEASURE == Multimeter::Measure::VoltageDC)
+    if (set.mult.meas == Multimeter::Measure::VoltageDC)
     {
         return MULTI_RANGE_VOLTAGE_DC;
     }
-    else if (MULTI_MEASURE == Multimeter::Measure::VoltageAC)
+    else if (set.mult.meas == Multimeter::Measure::VoltageAC)
     {
         return MULTI_RANGE_VOLTAGE_AC;
     }
-    else if (MULTI_MEASURE == Multimeter::Measure::CurrentDC)
+    else if (set.mult.meas == Multimeter::Measure::CurrentDC)
     {
         return MULTI_RANGE_CURRENT_DC;
     }
-    else if (MULTI_MEASURE == Multimeter::Measure::CurrentAC)
+    else if (set.mult.meas == Multimeter::Measure::CurrentAC)
     {
         return MULTI_RANGE_CURRENT_AC;
     }
-    else if (MULTI_MEASURE == Multimeter::Measure::Resistance)
+    else if (set.mult.meas == Multimeter::Measure::Resistance)
     {
         return MULTI_RANGE_RESISTANCE;
     }
@@ -163,9 +163,9 @@ void Multimeter::Display::ChangedMode()
         {"k\x5e="}
     };
 
-    outBuffer[position[MULTI_MEASURE][GetRange()]] = '.';
+    outBuffer[position[set.mult.meas][GetRange()]] = '.';
     
-    std::strcpy(&outBuffer[7], suffix[MULTI_MEASURE][GetRange()]);
+    std::strcpy(&outBuffer[7], suffix[set.mult.meas][GetRange()]);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

@@ -7,7 +7,7 @@
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static bool IsActive_RangesVoltageDC()
 {
-    return MULTI_MEASURE == Multimeter::Measure::VoltageDC;
+    return (set.mult.meas == Multimeter::Measure::VoltageDC);
 }
 
 static void OnChange_VoltageDC(bool active)
@@ -30,7 +30,7 @@ DEF_CHOICE_3( cRangesVoltageDC,                                                 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static bool IsActive_RnagesVoltageAC()
 {
-    return MULTI_MEASURE == Multimeter::Measure::VoltageAC;
+    return (set.mult.meas == Multimeter::Measure::VoltageAC);
 }
 
 static void OnChange_VoltageAC(bool active)
@@ -88,7 +88,7 @@ DEF_CHOICE_2( cRangesCurrentAC,
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static bool IsActive_RangesReistance()
 {
-    return MULTI_MEASURE == Multimeter::Measure::Resistance;
+    return (set.mult.meas == Multimeter::Measure::Resistance);
 }
 
 static void OnChange_Resistance(bool active)
@@ -128,7 +128,7 @@ DEF_CHOICE_7( cMode,
     "R",
     "VD",
     "Прозвонка",
-    MULTI_MEASURE, &PageMultimeter::self, Item::Active, PageMultimeter::OnChanged_Mode, Choice::AfterDraw
+    set.mult.meas, &PageMultimeter::self, Item::Active, PageMultimeter::OnChanged_Mode, Choice::AfterDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -173,27 +173,27 @@ void PageMultimeter::OnChanged_Mode(bool)
 
     Item **items = (Item **)page->OwnData()->items;
 
-    if (MULTI_MEASURE == Multimeter::Measure::VoltageDC)
+    if (set.mult.meas == Multimeter::Measure::VoltageDC)
     {
         items[1] = (Item *)&cRangesVoltageDC; //-V641
     }
-    else if (MULTI_MEASURE == Multimeter::Measure::VoltageAC)
+    else if (set.mult.meas == Multimeter::Measure::VoltageAC)
     {
         items[1] = (Item *)&cRangesVoltageAC; //-V641
     }
-    else if (MULTI_MEASURE == Multimeter::Measure::CurrentDC)
+    else if (set.mult.meas == Multimeter::Measure::CurrentDC)
     {
         items[1] = (Item *)&cRangesCurrentDC;  // -V641
     }
-    else if (MULTI_MEASURE == Multimeter::Measure::CurrentAC)
+    else if (set.mult.meas == Multimeter::Measure::CurrentAC)
     {
         items[1] = (Item *)&cRangesCurrentAC;    // -V641
     }
-    else if (MULTI_MEASURE == Multimeter::Measure::Resistance)
+    else if (set.mult.meas == Multimeter::Measure::Resistance)
     {
         items[1] = (Item *)&cRangesResistance; //-V641
     }
-    else if (MULTI_MEASURE == Multimeter::Measure::TestDiode)
+    else if (set.mult.meas == Multimeter::Measure::TestDiode)
     {
         items[1] = nullptr;
     }

@@ -105,17 +105,17 @@ void Multimeter::Update()
     }
     
     uint8 range = 0;
-    if(MULTI_MEASURE == Measure::VoltageDC)        { range = (uint8)MULTI_RANGE_VOLTAGE_DC; }
-    else if(MULTI_MEASURE == Measure::VoltageAC)   { range = (uint8)MULTI_RANGE_VOLTAGE_AC; }
-    else if(MULTI_MEASURE == Measure::CurrentDC)   { range = (uint8)MULTI_RANGE_CURRENT_DC; }
-    else if(MULTI_MEASURE == Measure::CurrentAC)   { range = (uint8)MULTI_RANGE_CURRENT_AC; }
-    else if(MULTI_MEASURE == Measure::Resistance)  { range = (uint8)MULTI_RANGE_RESISTANCE; }
+    if(set.mult.meas == Measure::VoltageDC)        { range = (uint8)MULTI_RANGE_VOLTAGE_DC; }
+    else if(set.mult.meas == Measure::VoltageAC)   { range = (uint8)MULTI_RANGE_VOLTAGE_AC; }
+    else if(set.mult.meas == Measure::CurrentDC)   { range = (uint8)MULTI_RANGE_CURRENT_DC; }
+    else if(set.mult.meas == Measure::CurrentAC)   { range = (uint8)MULTI_RANGE_CURRENT_AC; }
+    else if(set.mult.meas == Measure::Resistance)  { range = (uint8)MULTI_RANGE_RESISTANCE; }
     else
     {
         // больше выборов нету
     }
 
-    char symbol = Measure(MULTI_MEASURE).Symbol();
+    char symbol = Measure(set.mult.meas).Symbol();
 
     uint8 send[] = {0x02, (uint8)symbol, (uint8)(range + 0x30), 0x0a};
 
