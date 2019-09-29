@@ -25,7 +25,7 @@ void Osci::Averager::Process(Chan::E ch, const uint8 *dataNew, int size)
         ƒл€ этого нужно завести битовый массив, в котором отмечать те точки, которые считаны в данной итерации.
     */
 
-    uint16 numAve = (uint16)ENUM_AVE;
+    uint16 numAve = (uint16)set.disp.ENumAverage;
 
     int index = 0;
     int step = 1;
@@ -43,7 +43,7 @@ void Osci::Averager::Process(Chan::E ch, const uint8 *dataNew, int size)
 
     /// \todo «десь неправильно - места в AVE_DATA слишком мало дл€ 8к * 16биты
 
-    if (numSignals[ch] < NUM_AVE)
+    if (numSignals[ch] < set.disp.ENumAverage)
     {
         if (numSignals[ch] == 0)
         {
@@ -91,12 +91,12 @@ void Osci::Averager::SettingChanged()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Osci::Averager::Draw()
 {
-    if (NUM_AVE > 1 && numSignals[0] < NUM_AVE)
+    if (set.disp.ENumAverage > 1 && numSignals[0] < set.disp.ENumAverage)
     {
         int height = 10;
 
         Rectangle(Grid::Width(), height).Draw(Grid::Left(), Grid::Top(), Color::GRID);
 
-        Region((int)(Grid::Width() * (float)numSignals[0] / NUM_AVE), height).Fill(Grid::Left(), Grid::Top());
+        Region((int)(Grid::Width() * (float)numSignals[0] / set.disp.ENumAverage), height).Fill(Grid::Left(), Grid::Top());
     }
 }

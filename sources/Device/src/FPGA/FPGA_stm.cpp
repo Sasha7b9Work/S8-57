@@ -182,7 +182,7 @@ static bool ReadDataChanenlRand(Chan::E ch, const uint8 *address, uint8 *data) /
 
     uint8 *last = &dataRand[ch][FPGA_NUM_POINTS];
 
-    if (NUM_AVE > 1)
+    if (set.disp.ENumAverage > 1)
     {
         uint8 *dataPointer = &data[infoRead.posFirst];              // ”казатель в переданном массиве
 

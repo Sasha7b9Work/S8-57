@@ -80,7 +80,7 @@ DEF_CHOICE_9( cAverage_Num,                                                     
     "64",
     "128",
     "256",
-    ENUM_AVE, &PageDisplay::self, Item::Active, OnChange_AverageNum, Choice::AfterDraw
+    set.disp.ENumAverage, &PageDisplay::self, Item::Active, OnChange_AverageNum, Choice::AfterDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

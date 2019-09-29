@@ -33,7 +33,6 @@
 #define NUM_ACCUM                   (1 << (int)ENUM_ACCUM)                   /* Возвращает число накоплений */
 
 #define MODE_AVE                    (set.disp.modeAveraging)
-#define ENUM_AVE                    (set.disp.ENumAverage)
 #define NUM_AVE                     (1 << (int)ENUM_AVE)
 #define NUM_AVE_MAX                 256
 #define IN_AVERAGING_MODE           (ENUM_AVE > Display::ENumAverage::_1 && (!IN_P2P_MODE))
@@ -63,41 +62,42 @@ struct Background
     } value;
 };
 
+/// Количество измерений для расчёта минимального и максимального значений.
+struct ENumMinMax
+{
+    enum E
+    {
+        _1,
+        _2,
+        _4,
+        _8,
+        _16,
+        _32,
+        _64,
+        _128
+    } value;
+    explicit ENumMinMax(E v) : value(v) {};
+};
+
+/// Количество усреднений по измерениям.
+struct ENumAverage
+{
+    enum E
+    {
+        _1,
+        _2,
+        _4,
+        _8,
+        _16,
+        _32,
+        _64,
+        _128,
+        _256
+    } value;
+};
+
 namespace Display
 {
-    /// Количество измерений для расчёта минимального и максимального значений.
-    struct ENumMinMax
-    {
-        enum E
-        {
-            _1,
-            _2,
-            _4,
-            _8,
-            _16,
-            _32,
-            _64,
-            _128
-        } value;
-        explicit ENumMinMax(E v) : value(v) {};
-    };
-
-    /// Количество усреднений по измерениям.
-    struct ENumAverage
-    {
-        enum E
-        {
-            _1,
-            _2,
-            _4,
-            _8,
-            _16,
-            _32,
-            _64,
-            _128,
-            _256
-        } value;
-    };
 
     /// Количество накоплений.
     struct ENumAccum
@@ -179,9 +179,9 @@ struct SettingsDisplay
 {
     ModeDrawSignal::E      modeDrawSignal;
     Background::E          background;                     ///< Цвет фона.
-    Display::ENumMinMax::E          ENumMinMax;            ///< Перечисление количества измерений для определения минимумов и масимумов.
+    ENumMinMax::E          ENumMinMax;                     ///< Перечисление количества измерений для определения минимумов и масимумов.
     uint8                           notUsing0;
-    Display::ENumAverage::E         ENumAverage;           ///< Число усреднений сигнала.
+    ENumAverage::E         ENumAverage;           ///< Число усреднений сигнала.
     Display::ENumAccum::E           ENumAccum;             ///< Число накоплений сигнала на экране.
     Display::ModeAccumulation::E    modeAccumulation;      ///< Режим накопления сигналов.
     Display::ENumSmoothing          ENumSmoothing;         ///< Перечисление количества точек для скользящего фильтра.

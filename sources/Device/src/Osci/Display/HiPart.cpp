@@ -225,7 +225,7 @@ static int DrawMainParameters(int _x, int _y)
     if (MODE_WORK == ModeWork::Dir)
     {
         WriteStringAndNumber("накопл", x, y0 - 4, NUM_ACCUM);
-        WriteStringAndNumber("усредн", x, y1, NUM_AVE);
+        WriteStringAndNumber("усредн", x, y1, set.disp.ENumAverage);
         WriteStringAndNumber("мн\x93мкс", x, y2, NUM_MIN_MAX);
     }
 

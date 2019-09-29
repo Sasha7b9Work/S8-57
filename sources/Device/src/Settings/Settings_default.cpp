@@ -17,9 +17,9 @@ const Settings Settings::defaultSettings =
     {
         ModeDrawSignal::Lines,                                      // modeDrawSignal
         Background::Black,                                          // background
-        Display::ENumMinMax::_1,                                    // ENumMinMax
+        ENumMinMax::_1,                                             // ENumMinMax
         0,                                                          // not used
-        Display::ENumAverage::_1,                                   // ENumAverage
+        ENumAverage::_1,                                   // ENumAverage
         Display::ENumAccum::_1,                                     // ENumAccum
         Display::ModeAccumulation::NoReset,                         // modeAccumulation
         Display::ENumSmoothing(Display::ENumSmoothing::Disable),    // ENumSmoothing
@@ -161,7 +161,7 @@ const Settings Settings::defaultSettings =
         TesterPolarity::Positive,   // polarity
         TesterStepU::_100mV,        // stepU
         TesterStepI::_4mA,          // stepI
-        Display::ENumAverage::_1,   // smooth
+        ENumAverage::_1,   // smooth
         TesterViewMode::Lines,      // viewMode
     },
     

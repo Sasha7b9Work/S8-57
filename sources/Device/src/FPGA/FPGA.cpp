@@ -232,7 +232,7 @@ void FPGA::ReadData()
         }
     }
 
-    if (ENUM_AVE != Display::ENumAverage::_1)               // Если включено усреднение
+    if (set.disp.ENumAverage != ENumAverage::_1)               // Если включено усреднение
     {
         Osci::Data *last = Osci::Storage::GetData(0);
         Osci::Data *prev = Osci::Storage::GetData(1);

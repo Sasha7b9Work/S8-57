@@ -390,12 +390,12 @@ struct TesterViewMode
 
 struct SettingsTester
 {
-    TesterControl::E        control;
-    TesterPolarity::E       polarity;
-    TesterStepU::E          stepU;
-    TesterStepI::E          stepI;
-    Display::ENumAverage::E ave;                   ///< Количество усреднений
-    TesterViewMode::E       viewMode;
+    TesterControl::E    control;
+    TesterPolarity::E   polarity;
+    TesterStepU::E      stepU;
+    TesterStepI::E      stepI;
+    ENumAverage::E      ave;                   ///< Количество усреднений
+    TesterViewMode::E   viewMode;
 };
 
 
