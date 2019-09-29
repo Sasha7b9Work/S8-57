@@ -205,16 +205,17 @@ const Settings Settings::defaultSettings =
     },
     
     // Несбрасываемые настройки калибровки
-    
-    {},                             // nrst_balanceADC[Chan::Size];               
-    BalanceADC::Disable,            // nrst_balanceADCtype;                         
-    StretchADC::Disable,            // nrst_stretchADCtype;                         
-    {},                             // nrst_StretchADC[Chan::Size][3];            
-    {},                             // nrst_rShiftAddStable[Chan::Size][3];       
-    0,                              // nrst_numAveForRand;                          
-    0,                              // nrst_numSmoothForRand;                       
-    {},                             // nrst_rShiftAdd[Chan::Size][Range::Size][2];
-    0,                              // nrst_correctionTime;                         
+    {
+        {},                             // nrst_balanceADC[Chan::Size];               
+        BalanceADC::Disable,            // nrst_balanceADCtype;                         
+        StretchADC::Disable,            // nrst_stretchADCtype;                         
+        {},                             // nrst_StretchADC[Chan::Size][3];            
+        {},                             // nrst_rShiftAddStable[Chan::Size][3];       
+        0,                              // nrst_numAveForRand;                          
+        0,                              // nrst_numSmoothForRand;                       
+        {},                             // nrst_rShiftAdd[Chan::Size][Range::Size][2];
+        0,                              // nrst_correctionTime;                         
+    },
     
     // Настройки мультиметра
 

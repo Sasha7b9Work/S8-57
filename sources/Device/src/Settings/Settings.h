@@ -66,20 +66,7 @@ public:
     SettingsDebug       dbg;
     SettingsTester      test;
     SettingsMenu        menu;
-
-    // Несбрасываемые настройки калибровки
-
-    int16               nrst_balanceADC[Chan::Size];                                ///< Значение дополнительного смещения АЦП для ручной балансировки.
-    BalanceADC::E       nrst_balanceADCtype;                                        ///< Тип балансировки.
-    StretchADC::E       nrst_stretchADCtype;                                        ///< Тип растяжки канала.
-    int16               nrst_StretchADC[Chan::Size][3];                             ///< \brief Поправочный коэффициент для ручного, калибровочного и
-                        ///< отключенного режимов. Здесь хранится в целом виде, чтобы получить реальный коэффициент, нужно разделить на 1000 и
-                        ///< прибавить единицу.
-    int16               nrst_rShiftAddStable[Chan::Size][3];                        ///< Добавочное смещение для трёх самых чувствительных диапазонов. Задаётся единожды при настройке
-    int16               nrst_numAveForRand;                                         ///< По скольким измерениям усреднять сигнал в режиме рандомизатора.
-    int16               nrst_numSmoothForRand;                                      ///< Число точек для скользящего фильта в рандомизаторе.
-    int16               nrst_rShiftAdd[Chan::Size][Osci::Settings::Range::Size][2]; ///< Добавочное смещение, которое пишется сюда при калибровке и балансировке
-    int16               nrst_correctionTime;                                        ///< Коэффициент коррекции времени.
+    SettingsNRST        nrst;
 
     // Настройки мультиметра
     Multimeter::Settings::AVP::E              multi_avp;
