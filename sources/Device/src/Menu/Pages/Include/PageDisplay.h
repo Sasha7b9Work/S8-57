@@ -5,13 +5,7 @@
 #include "Osci/Osci_Settings.h"
 
 
-#define MIN_MAX_ENABLED             (ENUM_MIN_MAX != Display::ENumMinMax::_1)
-#define NUM_MIN_MAX                 (1 << (int)ENUM_MIN_MAX)        /* ¬озвращает количество измерений сигналов дл€ расчЄта минимумов и максимумов. */
-
 #define NUM_AVE_MAX                 256
-
-#define LAST_AFFECTED_CH            (set.disp.lastAffectedChannel)
-#define LAST_AFFECTED_CH_IS_A       (LAST_AFFECTED_CH == Chan::A)
 
 
 struct ModeDrawSignal

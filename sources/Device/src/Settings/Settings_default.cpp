@@ -15,22 +15,22 @@ const Settings Settings::defaultSettings =
 
     // ÃÂÌ˛ ƒ»—œÀ≈…
     {
-        ModeDrawSignal::Lines,                                      // modeDrawSignal
-        Background::Black,                                          // background
-        ENumMinMax::_1,                                             // ENumMinMax
-        0,                                                          // not used
-        ENumAverage::_1,                                   // ENumAverage
-        ENumAccum::_1,                                     // ENumAccum
-        ModeAccumulation::NoReset,                         // modeAccumulation
-        ENumSmoothing(ENumSmoothing::Disable),    // ENumSmoothing
-        ENumSignalsInSec(ENumSignalsInSec::_25),  // ENumSignalsInSec
-        TypeGrid::_1,                                      // typeGrid
-        50,                                                         // brightnessGrid
-        LinkingRShift::Position,                           // linkingRShift
-        100,                                                        // brightness
-        MenuAutoHide::None,                                       // menuAutoHide
-        370,                                                        // shiftInMemory
-        Chan::A,                                                    // lastAffectedChannel
+        ModeDrawSignal::Lines,                      // modeDrawSignal
+        Background::Black,                          // background
+        ENumMinMax::_1,                             // ENumMinMax
+        0,                                          // not used
+        ENumAverage::_1,                            // ENumAverage
+        ENumAccum::_1,                              // ENumAccum
+        ModeAccumulation::NoReset,                  // modeAccumulation
+        ENumSmoothing(ENumSmoothing::Disable),      // ENumSmoothing
+        ENumSignalsInSec(ENumSignalsInSec::_25),    // ENumSignalsInSec
+        TypeGrid::_1,                               // typeGrid
+        50,                                         // brightnessGrid
+        LinkingRShift::Position,                    // linkingRShift
+        100,                                        // brightness
+        MenuAutoHide::None,                         // menuAutoHide
+        370,                                        // shiftInMemory
+        Chan::A,                                    // lastAffectedChannel
     },
 
     // ÃÂÌ˛  ¿Õ¿À 1,  ¿Õ¿À 2
@@ -48,26 +48,26 @@ const Settings Settings::defaultSettings =
 
     // ÃÂÌ˛ —»Õ’–ŒÕ»«¿÷»ﬂ
     {
-        Trig::Source::A,                        // source
-        Trig::Input::Full,                      // input
-        Trig::Polarity::Rising,                 // polarity
-        {Trig::Level::ZERO, Trig::Level::ZERO}, // lev[Chan::Size]
-        Trig::StartMode::Auto,                  // startMode
-        Trig::ModeFind::Hand,                   // modeFind
-        10,                                     // holdOff
-        false,                                  // holdOffEnable
+        Trig::Source::A,                            // source
+        Trig::Input::Full,                          // input
+        Trig::Polarity::Rising,                     // polarity
+        {Trig::Level::ZERO, Trig::Level::ZERO},     // lev[Chan::Size]
+        Trig::StartMode::Auto,                      // startMode
+        Trig::ModeFind::Hand,                       // modeFind
+        10,                                         // holdOff
+        false,                                      // holdOffEnable
     },
 
     // ÃÂÌ˛ –¿«¬®–“ ¿
     {
-        0,                      // time_shift
-        TBase::_5ms,            // time_base
-        PeakDetMode::Disabled,  // time_peakDet
-        TPos::Center,           // time_TPos
-        SampleType::Real,       // time_sampleType
-        FunctionTime::Time,     // time_timeDivXPos
-        LinkingTShift::Time,    // time_linkingTShift
-        SampleType::Real,       // time_sampleTypeOld
+        0,                                          // shift
+        TBase::_5ms,                                // base
+        PeakDetMode::Disabled,                      // peakDet
+        TPos::Center,                               // TPos
+        SampleType::Real,                           // sampleType
+        FunctionTime::Time,                         // timeDivXPos
+        LinkingTShift::Time,                        // linkingTShift
+        SampleType::Real,                           // sampleTypeOld
     },
 
     // ÃÂÌ˛  ”–—Œ–€

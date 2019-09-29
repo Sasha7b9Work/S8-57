@@ -82,7 +82,7 @@ void Osci::Display::PainterData::DrawData()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void DrawCurrent()
 {
-    if(LAST_AFFECTED_CH_IS_A)
+    if(set.disp.lastAffectedChannel == Chan::A)
     {
         DrawChannel(Chan::B);
         DrawChannel(Chan::A);
@@ -231,7 +231,7 @@ static void DrawSpectrum()
         }
         else
         {
-            if (LAST_AFFECTED_CH_IS_A)
+            if (set.disp.lastAffectedChannel == Chan::A)
             {
                 DRAW_SPECTRUM(OUT_B, numPoints, Chan::B);
                 DRAW_SPECTRUM(OUT_A, numPoints, Chan::A);

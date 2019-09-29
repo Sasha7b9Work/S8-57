@@ -39,7 +39,7 @@ void Osci::Display::MemoryWindow::Draw()
 
     DrawScreenArea();
 
-    Chan::E chans[2] = { LAST_AFFECTED_CH_IS_A ? Chan::B : Chan::A, LAST_AFFECTED_CH_IS_A ? Chan::A : Chan::B };
+    Chan::E chans[2] = { (set.disp.lastAffectedChannel == Chan::A) ? Chan::B : Chan::A, (set.disp.lastAffectedChannel == Chan::A) ? Chan::A : Chan::B };
 
     for (int i = 0; i < 2; i++)
     {
