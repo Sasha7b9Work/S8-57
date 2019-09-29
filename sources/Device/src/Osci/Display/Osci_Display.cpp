@@ -52,7 +52,7 @@ void Osci::Display::Update()
 
     DrawCursorTrigLevel();
     
-    Osci::Measurements::Cursors::Cursor::Draw();
+    Osci::Measurements::Cursors::Draw();
 
     BottomPart::Draw(273, Grid::Bottom() + 1);
     

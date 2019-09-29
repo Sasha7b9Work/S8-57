@@ -20,7 +20,7 @@
 /// Позиция курсора напряжения
 #define CURsU_POS(ch, num)          (set.curs.posCurU[ch][num])
 /// Позиция куросра времени
-#define CURsT_POS(ch, num)          Cursors::Cursor::PosT(ch, num)
+#define CURsT_POS(ch, num)          Cursors::PosT(ch, num)
 
 /// Режим слежения за курсорами
 #define CURS_LOOK_MODE(ch)          (set.curs.lookMode[ch])
@@ -68,29 +68,26 @@ namespace Osci
 {
     namespace Measurements
     {
-        namespace Cursors
+        struct Cursors
         {
-            struct Cursor
-            {
-                /// Нарисовать курсоры и результаты курсорных измерений
-                static void Draw();
-                /// Возвращает true,если нужно рисовать курсоры
-                static bool  NecessaryDraw();
-                /// Получить позицию курсора напряжения
-                static float PosU(Chan::E ch, int numCur);
-                /// Возвращает значение курсора времени
-                static float PosT(Chan::E ch, int num);
-                /// Получить строку курсора напряжения
-                static String Voltage(Chan::E source, int numCur);
-                /// Получть строку курсора времени
-                static String Time(Chan::E source, int numCur);
-                /// Возвращает строку процентных измерений по напряжению
-                static String PercentsU(Chan::E source);
-                /// Возвращает строку процентных измерений по времени
-                static String PercentsT(Chan::E source);
+            /// Нарисовать курсоры и результаты курсорных измерений
+            static void Draw();
+            /// Возвращает true,если нужно рисовать курсоры
+            static bool  NecessaryDraw();
+            /// Получить позицию курсора напряжения
+            static float PosU(Chan::E ch, int numCur);
+            /// Возвращает значение курсора времени
+            static float PosT(Chan::E ch, int num);
+            /// Получить строку курсора напряжения
+            static String Voltage(Chan::E source, int numCur);
+            /// Получть строку курсора времени
+            static String Time(Chan::E source, int numCur);
+            /// Возвращает строку процентных измерений по напряжению
+            static String PercentsU(Chan::E source);
+            /// Возвращает строку процентных измерений по времени
+            static String PercentsT(Chan::E source);
 
-                static void SetCursPosT_temp(Chan::E ch, int num, float value);
-            };
+            static void SetCursPosT_temp(Chan::E ch, int num, float value);
         };
     };
 };

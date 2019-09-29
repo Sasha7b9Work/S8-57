@@ -12,7 +12,7 @@
 using namespace Display::Primitives;
 using namespace Osci::Measurements;
 
-using Osci::Measurements::Cursors::Cursor;
+using Osci::Measurements::Cursors;
 
 const float PageMeasuresCursors::PageSet::MAX_POS_U = 200.0F;
 const float PageMeasuresCursors::PageSet::MAX_POS_T = 280.0F;
@@ -230,7 +230,7 @@ static void Draw_U(int x, int y)
         else
         {
             bool condTop = false, condDown = false;
-            CalculateConditions((int16)Cursor::PosU(source, 0), (int16)Cursor::PosU(source, 1), CURsU_CNTRL, &condTop, &condDown);
+            CalculateConditions((int16)Cursors::PosU(source, 0), (int16)Cursors::PosU(source, 1), CURsU_CNTRL, &condTop, &condDown);
             if (condTop && condDown)
             {
                 Draw_U_enableBoth(x, y);
@@ -431,7 +431,7 @@ void PageMeasuresCursors::PageSet::SetShiftCursPosT(Chan::E ch, int numCur, floa
 {
     /// \todo одинаковые ветки
     // CURsT_POS(ch, numCur) = LimitationFloat(CURsT_POS(ch, numCur) + delta, 0, MAX_POS_T);   
-    Cursor::SetCursPosT_temp(ch, numCur, Math::LimitationRet(CURsT_POS(ch, numCur) + delta, 0.0F, MAX_POS_T));
+    Cursors::SetCursPosT_temp(ch, numCur, Math::LimitationRet(CURsT_POS(ch, numCur) + delta, 0.0F, MAX_POS_T));
 
     if (CURS_MOVEMENT_IN_PIXELS)                        // Если перемещение по пикселям, то нужно привести к пиксельной сетке экрана
     {
@@ -473,7 +473,7 @@ void PageMeasuresCursors::PageSet::SetCursorT(Chan::E ch, int numCur, float pos)
 {
     /// \todo одинаковые ветки
     // CURsT_POS(ch, numCur) = LimitationFloat(pos, 0, MAX_POS_T);      
-    Cursor::SetCursPosT_temp(ch, numCur, Math::LimitationRet(pos, 0.0F, MAX_POS_T));
+    Cursors::SetCursPosT_temp(ch, numCur, Math::LimitationRet(pos, 0.0F, MAX_POS_T));
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

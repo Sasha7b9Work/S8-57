@@ -16,7 +16,8 @@
 
 using namespace Display::Primitives;
 using namespace FPGA;
-using namespace Osci::Measurements::Cursors;
+
+using Osci::Measurements::Cursors;
 
 using Osci::Display::MemoryWindow::Width;
 using Osci::Display::MemoryWindow::Height;
@@ -32,7 +33,7 @@ static void DrawScreenArea();
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void Osci::Display::MemoryWindow::Draw()
 {
-    if (Cursor::NecessaryDraw())
+    if (Cursors::NecessaryDraw())
     {
         return;
     }

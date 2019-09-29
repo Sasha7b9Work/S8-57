@@ -8,18 +8,20 @@
 #include "FPGA/FPGA_Math.h"
 #include "Settings/Settings.h"
 #include "Utils/Values.h"
-#include <cmath>
-
 #include "FlashDrive/FlashDrive.h"
 #include "Hardware/VCP.h"
 #include "Hardware/Battery.h"
 #include "Osci/Display/MemoryWindow.h"
+#include <cmath>
+
 
 
 using namespace Display::Primitives;
 using namespace Osci::Measurements;
-using namespace Osci::Measurements::Cursors;
 using namespace Osci::Settings;
+
+using Osci::Measurements::Cursors;
+
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
