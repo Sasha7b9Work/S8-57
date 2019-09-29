@@ -1,6 +1,7 @@
 #pragma once
 #include "Menu/MenuItems.h"
 #include "Osci/Osci_Settings.h"
+#include "Menu/Pages/Include/PageTime.h"
 
 
 /// ѕреобразует перечисление в количество точек
