@@ -94,7 +94,7 @@ void RShift::Load(Chan::E ch)
 void Trig::Level::Load()
 {
     /// \todo Здесь много лишних движений. Нужно что-то сделать с вводом SET_TRIGLEV_SOURCE
-    uint16 value = (uint16)((Trig::Level::MAX + Trig::Level::MIN) - SET_TRIGLEV_SOURCE);
+    uint16 value = (uint16)((Trig::Level::MAX + Trig::Level::MIN) - set.trig.lev[set.trig.source]);
 
     WriteRegisters(Pin::SPI3_CS1, (uint16)(0xa000 | (value << 2)));
 
@@ -224,7 +224,7 @@ void RShift::Change(Chan::E ch, int delta)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Trig::Level::Change(int delta)
 {
-    ::Math::AdditionThisLimitation<uint16>(&SET_TRIGLEV_SOURCE, STEP_TRIGLEV * delta, Trig::Level::MIN, Trig::Level::MAX);
+    ::Math::AdditionThisLimitation<uint16>(&set.trig.lev[set.trig.source], STEP_TRIGLEV * delta, Trig::Level::MIN, Trig::Level::MAX);
 
     Load();
 
@@ -234,9 +234,9 @@ void Trig::Level::Change(int delta)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Trig::Level::Set(int level)
 {
-    SET_TRIGLEV_SOURCE = (uint16)(level);
+    set.trig.lev[set.trig.source] = (uint16)(level);
 
-    ::Math::Limitation<uint16>(&SET_TRIGLEV_SOURCE, Trig::Level::MIN, Trig::Level::MAX);
+    ::Math::Limitation<uint16>(&set.trig.lev[set.trig.source], Trig::Level::MIN, Trig::Level::MAX);
 
     Load();
 
@@ -337,7 +337,7 @@ void Trig::DrawOnGrid()
 
         Region(width, height).DrawBounded(x, y, Color::BACK, Color::FILL);
 
-        float trigLevVal = FPGA::Math::RShift2Abs(SET_TRIGLEV_SOURCE, SET_RANGE(set.trig.source)) * Divider((uint8)set.ch.divider[set.trig.source]).ToAbs();
+        float trigLevVal = FPGA::Math::RShift2Abs(set.trig.lev[set.trig.source], SET_RANGE(set.trig.source)) * Divider((uint8)set.ch.divider[set.trig.source]).ToAbs();
 
         Voltage voltage(trigLevVal);
 

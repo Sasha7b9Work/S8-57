@@ -68,7 +68,7 @@ void Osci::Display::DrawCursorTrigLevel()
 {
     Chan::E ch = (Chan::E)set.trig.source;
 
-    int trigLev = SET_TRIGLEV_SOURCE + (SET_RSHIFT(ch) - RShift::ZERO);
+    int trigLev = set.trig.lev[set.trig.source] + (SET_RSHIFT(ch) - RShift::ZERO);
     float scale = 1.0F / ((Trig::Level::MAX - Trig::Level::MIN) / 2.4F / Grid::Height());
     int y0 = (Grid::Top() + Grid::ChannelBottom()) / 2 + (int)(scale * (Trig::Level::ZERO - Trig::Level::MIN));
     int y = y0 - (int)(scale * (trigLev - Trig::Level::MIN));

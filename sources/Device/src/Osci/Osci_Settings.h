@@ -8,7 +8,6 @@
 #define SET_RSHIFT_B            (SET_RSHIFT(Chan::B))
 
 #define SET_TRIGLEV(ch)         (set.trig.lev[(uint8)ch])
-#define SET_TRIGLEV_SOURCE      SET_TRIGLEV(set.trig.source)
 #define SET_TRIGLEV_A           (SET_TRIGLEV(Chan::A))
 #define SET_TRIGLEV_B           (SET_TRIGLEV(Chan::B))
 
