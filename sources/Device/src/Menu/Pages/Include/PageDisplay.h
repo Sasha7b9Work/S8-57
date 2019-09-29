@@ -23,9 +23,6 @@
 #define MIN_MAX_ENABLED             (ENUM_MIN_MAX != Display::ENumMinMax::_1)
 #define NUM_MIN_MAX                 (1 << (int)ENUM_MIN_MAX)        /* Возвращает количество измерений сигналов для расчёта минимумов и максимумов. */
 
-#define ENUM_SMOOTHING              (set.disp.ENumSmoothing)
-#define SMOOTHING_ENABLED           (ENUM_SMOOTHING != Display::ENumSmoothing::Disable)
-
 #define NUM_AVE_MAX                 256
 
 #define ENUM_SIGNALS_IN_SEC         (set.disp.ENumSignalsInSec)
@@ -113,28 +110,29 @@ struct ModeAccumulation
     } value;
 };
 
+/// Количество точек для расчёта сглаживания.
+struct ENumSmoothing
+{
+    enum E
+    {
+        Disable,
+        _2points,
+        _3points,
+        _4points,
+        _5points,
+        _6points,
+        _7points,
+        _8points,
+        _9points,
+        _10points
+    } value;
+    explicit ENumSmoothing(E v) : value(v) { };
+    uint ToNumber() const;
+};
+
+
 namespace Display
 {
-    /// Количество точек для расчёта сглаживания.
-    struct ENumSmoothing
-    {
-        enum E
-        {
-            Disable,
-            _2points,
-            _3points,
-            _4points,
-            _5points,
-            _6points,
-            _7points,
-            _8points,
-            _9points,
-            _10points
-        } value;
-        explicit ENumSmoothing(E v) : value(v) { };
-        uint ToNumber() const;
-    };
-
     /// Ограничение FPS.
     struct ENumSignalsInSec
     {
@@ -174,7 +172,7 @@ struct SettingsDisplay
     ENumAverage::E         ENumAverage;           ///< Число усреднений сигнала.
     ENumAccum::E           ENumAccum;             ///< Число накоплений сигнала на экране.
     ModeAccumulation::E    modeAccumulation;      ///< Режим накопления сигналов.
-    Display::ENumSmoothing          ENumSmoothing;         ///< Перечисление количества точек для скользящего фильтра.
+    ENumSmoothing          ENumSmoothing;         ///< Перечисление количества точек для скользящего фильтра.
     Display::ENumSignalsInSec       ENumSignalsInSec;      ///< Перечисление числа считываний сигнала в секунда.
     Display::TypeGrid::E            typeGrid;              ///< Тип сетки
     int                             brightnessGrid;        ///< Яркость сетки от 0 до 100.

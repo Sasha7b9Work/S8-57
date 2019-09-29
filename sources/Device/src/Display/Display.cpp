@@ -374,7 +374,7 @@ uint Display::ENumSignalsInSec::TimeBetweenFramesMS() const
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-uint Display::ENumSmoothing::ToNumber() const
+uint ENumSmoothing::ToNumber() const
 {
     return (uint)value + 1U;
 }

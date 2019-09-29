@@ -22,7 +22,7 @@ const Settings Settings::defaultSettings =
         ENumAverage::_1,                                   // ENumAverage
         ENumAccum::_1,                                     // ENumAccum
         ModeAccumulation::NoReset,                         // modeAccumulation
-        Display::ENumSmoothing(Display::ENumSmoothing::Disable),    // ENumSmoothing
+        ENumSmoothing(ENumSmoothing::Disable),    // ENumSmoothing
         Display::ENumSignalsInSec(Display::ENumSignalsInSec::_25),  // ENumSignalsInSec
         Display::TypeGrid::_1,                                      // typeGrid
         50,                                                         // brightnessGrid
