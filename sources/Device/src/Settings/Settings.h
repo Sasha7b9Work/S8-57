@@ -68,15 +68,7 @@ public:
     SettingsService     serv;
     SettingsFreqMeter   freq;
     SettingsDebug       dbg;
-
-    // Настройки тестер-компонента
-
-    Tester::Settings::Control::E    test_control;
-    Tester::Settings::Polarity::E   test_polarity;
-    Tester::Settings::StepU::E      test_stepU;
-    Tester::Settings::StepI::E      test_stepI;
-    Display::ENumAverage::E         test_ave;                   ///< Количество усреднений
-    Tester::Settings::ViewMode::E   test_viewMode;
+    SettingsTester      test;
 
     // Настройки меню
 

@@ -181,13 +181,14 @@ const Settings Settings::defaultSettings =
     },
     
     // Настройки тестер-компонента
-    
-    Tester::Settings::Control::Voltage,     // test_control; 
-    Tester::Settings::Polarity::Positive,   // test_polarity;
-    Tester::Settings::StepU::_100mV,        // test_stepU;   
-    Tester::Settings::StepI::_4mA,          // test_stepI;   
-    Display::ENumAverage::_1,               // test_smooth;  
-    Tester::Settings::ViewMode::Lines,      // test_viewMode 
+    {
+        TesterControl::Voltage,     // control
+        TesterPolarity::Positive,   // polarity
+        TesterStepU::_100mV,        // stepU
+        TesterStepI::_4mA,          // stepI
+        Display::ENumAverage::_1,   // smooth
+        TesterViewMode::Lines,      // viewMode
+    },
     
     // Настройки меню
     

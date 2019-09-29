@@ -166,10 +166,10 @@ void Tester::Disable() // -V2506
 
     HAL::PIO::Set(Port_TEST_ON, Pin_TEST_ON);
 
-    oldSet.test_control = TESTER_CONTROL;
-    oldSet.test_polarity = TESTER_POLARITY;
-    oldSet.test_stepU = TESTER_STEP_U;
-    oldSet.test_stepI = TESTER_STEP_I;
+    oldSet.test.control = TESTER_CONTROL;
+    oldSet.test.polarity = TESTER_POLARITY;
+    oldSet.test.stepU = TESTER_STEP_U;
+    oldSet.test.stepI = TESTER_STEP_I;
 
     set = oldSet;
     //set.Save();
@@ -300,11 +300,11 @@ void Tester::LoadStep()
 
     if (TESTER_CONTROL_IS_U)
     {
-        stepU =  255.0F / 3 * ((TESTER_STEP_U == StepU::_500mV) ? 2 : 0.4F) / 5;
+        stepU =  255.0F / 3 * ((TESTER_STEP_U == TesterStepU::_500mV) ? 2 : 0.4F) / 5;
     }
     else
     {
-        stepU = 255.0F / 3 * ((TESTER_STEP_I == StepI::_20mA) ? 2 : 0.4F) / 5;
+        stepU = 255.0F / 3 * ((TESTER_STEP_I == TesterStepI::_20mA) ? 2 : 0.4F) / 5;
     }
 }
 

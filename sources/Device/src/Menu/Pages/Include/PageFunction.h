@@ -3,6 +3,7 @@
 #include "Osci/Osci_Settings.h"
 #include "Osci/Measurements/Cursors_Settings.h"
 #include "Osci/Measurements/Measures.h"
+#include "PageDisplay.h"
 
 
 #define SOURCE_FFT                  (set.math.sourceFFT)
@@ -319,6 +320,81 @@ struct SettingsFreqMeter
     FreqMeterTimeCounting::E   timeCounting;  ///< Время счёта частоты.
     FreqMeterFreqClc::E        freqClc;       ///< Частота заполнения.
     FreqMeterNumberPeriods::E  numberPeriods; ///< Количество периодов.
+};
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/// Чем будем управлять в тестер-компоненте - напряжением или током
+struct TesterControl
+{
+    enum E
+    {
+        Voltage,
+        Current
+    } value;
+    explicit TesterControl(E v) : value(v) {};
+};
+
+struct TesterPolarity
+{
+    enum E
+    {
+        Positive,
+        Negative
+    } value;
+    explicit TesterPolarity(E v) : value(v) {};
+};
+
+struct TesterStepU
+{
+    enum E
+    {
+        _100mV,
+        _500mV
+    } value;
+    explicit TesterStepU(E v) : value(v) {};
+};
+
+struct TesterStepI
+{
+    enum E
+    {
+        _4mA,
+        _20mA
+    } value;
+    explicit TesterStepI(E v) : value(v) {};
+};
+
+struct TesterViewMode
+{
+    enum E
+    {
+        Lines,
+        Points
+    } value;
+    explicit TesterViewMode(E v) : value(v) {};
+};
+
+#define TESTER_STEP_U                   (set.test.stepU)
+#define TESTER_STEP_I                   (set.test.stepI)
+#define TESTER_VIEW_MODE                (set.test.viewMode)
+#define TESTER_ENUM_AVERAGE             (set.test.ave)
+
+#define TESTER_POLARITY                 (set.test.polarity)
+#define TESTER_POLARITY_IS_POSITITVE    (TESTER_POLARITY == TesterPolarity::Positive)
+
+#define TESTER_CONTROL                  (set.test.control)
+#define TESTER_CONTROL_IS_U             (TESTER_CONTROL == TesterControl::Voltage)
+
+
+struct SettingsTester
+{
+    TesterControl::E        control;
+    TesterPolarity::E       polarity;
+    TesterStepU::E          stepU;
+    TesterStepI::E          stepI;
+    Display::ENumAverage::E ave;                   ///< Количество усреднений
+    TesterViewMode::E       viewMode;
 };
 
 

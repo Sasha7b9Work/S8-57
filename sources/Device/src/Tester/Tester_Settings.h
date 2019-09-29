@@ -2,62 +2,10 @@
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-#define TESTER_CONTROL                  (set.test_control)
-#define TESTER_CONTROL_IS_U             (TESTER_CONTROL == Tester::Settings::Control::Voltage)
-#define TESTER_POLARITY                 (set.test_polarity)
-#define TESTER_POLARITY_IS_POSITITVE    (TESTER_POLARITY == Tester::Settings::Polarity::Positive)
-#define TESTER_STEP_U                   (set.test_stepU)
-#define TESTER_STEP_I                   (set.test_stepI)
-#define TESTER_ENUM_AVERAGE             (set.test_ave)
-#define TESTER_VIEW_MODE                (set.test_viewMode)
-
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 namespace Tester
 {
     namespace Settings
     {
-        /// Чем будем управлять в тестер-компоненте - напряжением или током
-        struct Control
-        {
-            enum E
-            {
-                Voltage,
-                Current
-            } value;
-            explicit Control(E v) : value(v) {};
-        };
-
-        struct Polarity
-        {
-            enum E
-            {
-                Positive,
-                Negative
-            } value;
-            explicit Polarity(E v) : value(v) {};
-        };
-
-        struct StepU
-        {
-            enum E
-            {
-                _100mV,
-                _500mV
-            } value;
-            explicit StepU(E v) : value(v) {};
-        };
-
-        struct StepI
-        {
-            enum E
-            {
-                _4mA,
-                _20mA
-            } value;
-            explicit StepI(E v) : value(v) {};
-        };
-
         struct Smoothing
         {
             enum E
@@ -69,16 +17,6 @@ namespace Tester
                 _5
             } value;
             explicit Smoothing(E v) : value(v) {};
-        };
-
-        struct ViewMode
-        {
-            enum E
-            {
-                Lines,
-                Points
-            } value;
-            explicit ViewMode(E v) : value(v) {};
         };
 
         /// Масштаб
