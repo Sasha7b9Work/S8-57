@@ -14,10 +14,10 @@ void DataSettings::Fill(uint8 *_dataA, uint8 * _dataB)
 
     Lval_ENABLED_A(this) = SET_ENABLED_A ? 1U : 0U;
     Lval_ENABLED_B(this) = SET_ENABLED_B ? 1U : 0U;
-    INVERSE_A(this) = SET_INVERSE_A ? 1U : 0U;
-    INVERSE_B(this) = SET_INVERSE_B ? 1U : 0U;
-    Lval_RANGE_A(this) = SET_RANGE_A;
-    Lval_RANGE_B(this) = SET_RANGE_B;
+    INVERSE_A(this) = set.ch.inverse[Chan::A] ? 1U : 0U;
+    INVERSE_B(this) = set.ch.inverse[Chan::B] ? 1U : 0U;
+    Lval_RANGE_A(this) = set.ch.range[Chan::A];
+    Lval_RANGE_B(this) = set.ch.range[Chan::B];
     RSHIFT_A(this) = SET_RSHIFT_A;
     RSHIFT_B(this) = SET_RSHIFT_B;
     Lval_TBASE(this) = SET_TBASE;

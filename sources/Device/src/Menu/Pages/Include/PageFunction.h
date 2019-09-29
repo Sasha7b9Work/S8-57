@@ -137,9 +137,7 @@ struct SettingsMath
     FFTmaxDB::E     FFTmaxDB;
     MathFunction::E function;
     ModeRegSet::E   modeRegSet;           ///< Функция ручки УСТАНОВКА - масштаб по времени или смещение по вертикали.
-    Range::E        range;
     int8            divider;
-    uint16          rShift;
 };
 
 struct SettingsCursors

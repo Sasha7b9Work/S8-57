@@ -244,9 +244,9 @@ static void WriteTextVoltage(Chan::E ch, int x, int y)
 
     Color color = Color::CHAN[ch];
 
-    bool inverse = SET_INVERSE(ch);
+    bool inverse = set.ch.inverse[ch];
     //int8 divider = (int8)SET_DIVIDER(ch);
-    Range::E range = SET_RANGE(ch);
+    Range::E range = set.ch.range[ch];
 
     const int widthField = 91;
     const int heightField = 8;
@@ -430,8 +430,8 @@ static void WriteCursors()
             Cursor::Voltage(source, 0).Draw(x, y1);
             Cursor::Voltage(source, 1).Draw(x, y2);
             x = 49;
-            float pos0 = FPGA::Math::VoltageCursor(Cursor::PosU(source, 0), SET_RANGE(source), SET_RSHIFT(source));
-            float pos1 = FPGA::Math::VoltageCursor(Cursor::PosU(source, 1), SET_RANGE(source), SET_RSHIFT(source));
+            float pos0 = FPGA::Math::VoltageCursor(Cursor::PosU(source, 0), set.ch.range[source], SET_RSHIFT(source));
+            float pos1 = FPGA::Math::VoltageCursor(Cursor::PosU(source, 1), set.ch.range[source], SET_RSHIFT(source));
             float delta = std::fabsf(pos1 - pos0) * DIVIDER_ABS(source);
             String(":dU=").Draw(x, y1);
             Voltage(delta).ToString(false).Draw(x + 17, y1);

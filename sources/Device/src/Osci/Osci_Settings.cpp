@@ -247,12 +247,12 @@ void Range::LoadBoth()
         BIN_U8(00000011)   // 20V      // -V2501
     };
 
-    uint8 valueA = vals[SET_RANGE_A];
+    uint8 valueA = vals[set.ch.range[Chan::A]];
 
     WritePin(Pin::A1, _GET_BIT(valueA, 1));
     WritePin(Pin::A2, _GET_BIT(valueA, 0));
 
-    uint8 valueB = vals[SET_RANGE_B];
+    uint8 valueB = vals[set.ch.range[Chan::B]];
 
     WritePin(Pin::A3, _GET_BIT(valueB, 1));
     WritePin(Pin::A4, _GET_BIT(valueB, 0));
@@ -304,7 +304,7 @@ static uint8 ValueForRange(Chan::E ch) // -V2506
     };
 
     ModeCouple::E couple = (Device::State::InModeRecorder()) ? ModeCouple::DC : SET_COUPLE(ch);
-    Range::E range = SET_RANGE(ch);
+    Range::E range = set.ch.range[ch];
 
     if (Device::State::InModeOsci() && couple == ModeCouple::GND)
     {
@@ -317,7 +317,7 @@ static uint8 ValueForRange(Chan::E ch) // -V2506
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 uint16 &RShift::Value(Chan::E ch)
 {
-    return set.ch.shift[ch];
+    return set.ch.rShift[ch];
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

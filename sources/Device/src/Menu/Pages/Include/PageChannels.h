@@ -3,16 +3,6 @@
 #include "FPGA/FPGA_Settings.h"
 
 
-#define SET_INVERSE(c)          (set.ch.inverse[c])
-#define SET_INVERSE_A           (SET_INVERSE(Chan::A))
-#define SET_INVERSE_B           (SET_INVERSE(Chan::B))
-#define SET_RSHIFT_MATH         (set.math.rShift)
-#define SET_RANGE_MATH          (set.math.range)
-
-#define SET_RANGE(c)            (set.ch.range[c])
-#define SET_RANGE_A             (SET_RANGE(Chan::A))
-#define SET_RANGE_B             (SET_RANGE(Chan::B))
-
 #define SET_COUPLE(c)           (set.ch.couple[c])
 #define SET_COUPLE_A            (SET_COUPLE(Chan::A))
 #define SET_COUPLE_B            (SET_COUPLE(Chan::B))
@@ -68,8 +58,8 @@ struct Divider
 
 struct SettingsChannel
 {
-    uint16                         shift[Chan::Size];      ///< Сдвиг канала по вертикали
-    Range::E       range[Chan::Size];      ///< Масштаб канала по вертикали
+    uint16                         rShift[Chan::Size];     ///< Сдвиг канала по вертикали
+    Range::E                       range[Chan::Size];      ///< Масштаб канала по вертикали
     FPGA::Settings::ModeCouple::E  couple[Chan::Size];     ///< Связь по входу
     bool                           enabled[Chan::Size];    ///< Включен/выключен канал
     int8                           balanceShiftADC[2];     ///< Добавочное смещение для балансировки АЦП

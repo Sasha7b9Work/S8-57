@@ -632,7 +632,7 @@ float GetStretchADC(Chan::E ch)
         */
     };
 
-    const int16 *address = addStretch[SET_RANGE(ch)][ch];
+    const int16 *address = addStretch[set.ch.range[ch]][ch];
 
     int16 stretch = NRST_STRETCH_ADC(ch, NRST_STRETCH_ADC_TYPE);
 

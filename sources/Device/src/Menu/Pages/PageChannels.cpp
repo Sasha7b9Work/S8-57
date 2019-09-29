@@ -109,7 +109,7 @@ DEF_CHOICE_2( cInverseA,                                                        
     "Инвертирует сигнал относительно уровня 0В",
     "Откл",
     "Вкл",
-    SET_INVERSE_A, &PageChannelA::self, Item::Active, Choice::Changed, Choice::AfterDraw
+    set.ch.inverse[Chan::A], &PageChannelA::self, Item::Active, Choice::Changed, Choice::AfterDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -201,7 +201,7 @@ DEF_CHOICE_2( cInverseB,                                                        
     "Инвертирует сигнал относительно уровня 0В",
     "Откл",
     "Вкл",
-    SET_INVERSE_B, &PageChannelB::self, Item::Active, Choice::Changed, Choice::AfterDraw
+    set.ch.inverse[Chan::B], &PageChannelB::self, Item::Active, Choice::Changed, Choice::AfterDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
