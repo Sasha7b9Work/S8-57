@@ -397,7 +397,7 @@ static void DebugShowSetInfo_Draw()
         {
             for (int range = 0; range < Range::Size; ++range)
             {
-                String("%d", NRST_RSHIFT_ADD(ch, range, type)).Draw(x + range * 20, y + dY * ddY);
+                String("%d", set.nrst.rShiftAdd[ch][range][type]).Draw(x + range * 20, y + dY * ddY);
             }
             ddY++;
         }

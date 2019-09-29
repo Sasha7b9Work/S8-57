@@ -28,10 +28,6 @@ struct StretchADC
 };
 
 
-#define NRST_RSHIFT_ADD(ch, range, mode)    (set.nrst.rShiftAdd[ch][range][mode])
-#define NRST_RSHIFT_ADD_A(range, mode)      (NRST_RSHIFT_ADD(Chan::A, range, mode))
-#define NRST_RSHIFT_ADD_B(range, mode)      (NRST_RSHIFT_ADD(Chan::B, range, mode))
-
 struct SettingsNRST
 {
     int16           balanceADC[Chan::Size];                 ///< Значение дополнительного смещения АЦП для ручной балансировки.
