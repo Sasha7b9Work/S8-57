@@ -29,9 +29,6 @@
 #define TRIG_HOLDOFF                (set.trig.holdOff)
 #define TRIG_HOLDOFF_ENABLED        (set.trig.holdOffEnabled)
 
-/// Возвращает позицию активного пункта на странице Page::Name.
-#define MENU_POS_ACT_ITEM(name)     (set.menu_posActItem[name])
-
 #define SET_DIVIDER(ch)             (divider[ch])
 #define SET_DIVIDER_IS_1(ch)        (SET_DIVIDER(ch) == 0)
 #define SET_DIVIDER_IS_10(ch)       (SET_DIVIDER(ch) == 1)
@@ -68,12 +65,7 @@ public:
     SettingsFreqMeter   freq;
     SettingsDebug       dbg;
     SettingsTester      test;
-
-    // Настройки меню
-
-    bool                menu_show;                                                  ///< Если true, то нужно показывать текущую страницу
-    int8                menu_posActItem[PageName::Number];                          ///< \brief Позиция активного пункта. bit7 == 1 - item is opened, 0x7f - нет активного пункта.
-    int8                menu_currentSubPage[PageName::Number];                      ///< Номер текущей подстраницы.
+    SettingsMenu        menu;
 
     // Несбрасываемые настройки калибровки
 

@@ -4,7 +4,16 @@
 #include "Object.h"
 
 
-#define MENU_TEMP_ENABLE_STRING_NAVI() Menu::TemporaryEnableStrNavi()
+/// Возвращает позицию активного пункта на странице Page::Name.
+#define MENU_POS_ACT_ITEM(name)     (set.menu.posActItem[name])
+
+
+struct SettingsMenu
+{
+    bool    show;                               ///< Если true, то нужно показывать текущую страницу
+    int8    posActItem[PageName::Number];       ///< \brief Позиция активного пункта. bit7 == 1 - item is opened, 0x7f - нет активного пункта.
+    int8    currentSubPage[PageName::Number];   ///< Номер текущей подстраницы.
+};
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
