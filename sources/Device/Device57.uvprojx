@@ -1590,11 +1590,6 @@
               <FileType>5</FileType>
               <FilePath>.\src\Osci\Measurements\Measures.h</FilePath>
             </File>
-            <File>
-              <FileName>Measures_Settings.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Osci\Measurements\Measures_Settings.h</FilePath>
-            </File>
           </Files>
         </Group>
         <Group>

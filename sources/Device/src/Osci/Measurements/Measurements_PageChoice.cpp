@@ -6,8 +6,6 @@
 #include "Osci/Measurements/Measurements.h"
 
 
-using namespace Osci::Measurements::Settings;
-
 using Display::Primitives::Char;
 using Display::Primitives::Rectangle;
 using Display::Primitives::Region;
@@ -32,7 +30,7 @@ void Osci::Measurements::PageChoice::OnOpenCloseEvent()
     ChangeState();
     if (isActive)
     {
-        posCursor = (int8)set.meas_measures[Osci::Measurements::posActive];
+        posCursor = (int8)set.meas.measures[Osci::Measurements::posActive];
     }
 }
 
@@ -66,7 +64,7 @@ void Osci::Measurements::PageChoice::OnKeyEvent(const KeyEvent &event)
             // здесь ничего делать не нужно
         }
 
-        set.meas_measures[Osci::Measurements::posActive] = (Measure::Type::E)posCursor;
+        set.meas.measures[Osci::Measurements::posActive] = (Measure::Type::E)posCursor;
         Color::ResetFlash();
     }
     else

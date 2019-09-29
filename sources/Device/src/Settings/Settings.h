@@ -8,7 +8,6 @@
 #include "Menu/Menu.h"
 #include "Display/Colors.h"
 #include "Osci/Measurements/Measures.h"
-#include "Osci/Measurements/Measures_Settings.h"
 #include "Multimeter/Multimeter.h"
 #include "Recorder/Recorder_Settings.h"
 #include "Osci/Measurements/Cursors_Settings.h"
@@ -59,23 +58,15 @@ public:
     uint                size;                               ///< Размер данной структуры в байтах
     uint                crc32;                              ///< \brief Контрольная сумма данной структуры с хранящимися в ней настройками
 
-    SettingsDisplay disp;
-    SettingsChannel ch;
-    SettingsTrig    trig;
-    SettingsTime    time;
-    SettingsCursors curs;
-    SettingsMemory  mem;
-    SettingsMath    math;
+    SettingsDisplay     disp;
+    SettingsChannel     ch;
+    SettingsTrig        trig;
+    SettingsTime        time;
+    SettingsCursors     curs;
+    SettingsMemory      mem;
+    SettingsMath        math;
+    SettingsMeasures    meas;
 
-
-    // Меню ИЗМЕРЕНИЯ
-
-    bool                                                meas_show;              ///< Показывать ли измерения.
-    Osci::Measurements::Settings::OnDisplay::E          meas_number;            ///< Сколько измерений выводить.
-    Osci::Measurements::Settings::Source::E             meas_source;            ///< Для каких каналов выводить измерения.
-    Osci::Measurements::Settings::ModeViewSignals::E    meas_modeViewSignals;   ///< Сжимать ли сигналы при выводе измерений.
-    Osci::Measurements::Measure::Type::E                meas_measures[15];      ///< Выбранные для индикации измерения.
-    Osci::Measurements::Measure::Type::E                meas_marked;            ///< Измерение, на которое нужно выводить маркеры.
 
     // Меню СЕРВИС
 

@@ -7,8 +7,6 @@ using namespace FPGA::Settings;
 using namespace Osci::Settings;
 using namespace Recorder::Settings;
 
-using Osci::Measurements::Measure;
-
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 const Settings Settings::defaultSettings =
@@ -18,127 +16,128 @@ const Settings Settings::defaultSettings =
 
     // ÃÂÌ˛ ƒ»—œÀ≈…
     {
-        Display::ModeDrawSignal::Lines,                             // disp_modeDrawSignal;
-        Display::Background::Black,                                 // disp_background;
-        Display::ENumMinMax::_1,                                    // disp_ENumMinMax;
+        Display::ModeDrawSignal::Lines,                             // modeDrawSignal
+        Display::Background::Black,                                 // background
+        Display::ENumMinMax::_1,                                    // ENumMinMax
         0,                                                          // not used
-        Display::ENumAverage::_1,                                   // disp_ENumAverage;
-        Display::ENumAccum::_1,                                     // disp_ENumAccum;
-        Display::ModeAccumulation::NoReset,                         // disp_modeAccumulation;
-        Display::ENumSmoothing(Display::ENumSmoothing::Disable),    // disp_ENumSmoothing;
-        Display::ENumSignalsInSec(Display::ENumSignalsInSec::_25),  // disp_ENumSignalsInSec;
-        Display::TypeGrid::_1,                                      // disp_typeGrid;
-        50,                                                         // disp_brightnessGrid;
-        Display::LinkingRShift::Position,                           // disp_linkingRShift;
-        100,                                                        // disp_brightness;
-        Menu::AutoHide::None,                                       // disp_menuAutoHide;
-        370,                                                        // disp_shiftInMemory;
-        Chan::A,                                                    // disp_lastAffectedChannel;
+        Display::ENumAverage::_1,                                   // ENumAverage
+        Display::ENumAccum::_1,                                     // ENumAccum
+        Display::ModeAccumulation::NoReset,                         // modeAccumulation
+        Display::ENumSmoothing(Display::ENumSmoothing::Disable),    // ENumSmoothing
+        Display::ENumSignalsInSec(Display::ENumSignalsInSec::_25),  // ENumSignalsInSec
+        Display::TypeGrid::_1,                                      // typeGrid
+        50,                                                         // brightnessGrid
+        Display::LinkingRShift::Position,                           // linkingRShift
+        100,                                                        // brightness
+        Menu::AutoHide::None,                                       // menuAutoHide
+        370,                                                        // shiftInMemory
+        Chan::A,                                                    // lastAffectedChannel
     },
 
     // ÃÂÌ˛  ¿Õ¿À 1,  ¿Õ¿À 2
     {
-        {RShift::ZERO, RShift::ZERO},                               // chan_shift[Chan::Size];  
-        {Range::_500mV, Range::_500mV},                             // chan_range[Chan::Size];  
-        {ModeCouple::DC, ModeCouple::DC},                           // chan_couple[Chan::Size]; 
-        {true, true},                                               // chan_enabled[Chan::Size];
-        {0, 0},                                                     // chan_balanceShiftADC[2];   
-        {Bandwidth(Bandwidth::Full), Bandwidth(Bandwidth::Full)},   // chan_bandwidth[2];         
-        {false, false},                                             // chan_inverse[2];           
-        {Divider::_1, Divider::_1},                                 // chan_divider[2];           
-        {CalibrationMode::Disable, CalibrationMode::Disable},       // chan_calibrationMode[2];   
+        {RShift::ZERO, RShift::ZERO},                               // shift[Chan::Size]
+        {Range::_500mV, Range::_500mV},                             // range[Chan::Size]
+        {ModeCouple::DC, ModeCouple::DC},                           // couple[Chan::Size]
+        {true, true},                                               // enabled[Chan::Size]
+        {0, 0},                                                     // balanceShiftADC[2]
+        {Bandwidth(Bandwidth::Full), Bandwidth(Bandwidth::Full)},   // bandwidth[2]
+        {false, false},                                             // inverse[2]
+        {Divider::_1, Divider::_1},                                 // divider[2]
+        {CalibrationMode::Disable, CalibrationMode::Disable},       // calibrationMode[2]
     },
 
     // ÃÂÌ˛ —»Õ’–ŒÕ»«¿÷»ﬂ
     {
-        Trig::Source::A,                        // trig_source;           
-        Trig::Input::Full,                      // trig_input;            
-        Trig::Polarity::Rising,                 // trig_polarity;         
-        {Trig::Level::ZERO, Trig::Level::ZERO}, // trig_lev[Chan::Size];
-        Trig::StartMode::Auto,                  // trig_startMode;        
-        Trig::ModeFind::Hand,                   // trig_modeFind;         
-        10,                                     // trig_holdOff;          
-        false,                                  // trig_holdOffEnable     
+        Trig::Source::A,                        // source
+        Trig::Input::Full,                      // input
+        Trig::Polarity::Rising,                 // polarity
+        {Trig::Level::ZERO, Trig::Level::ZERO}, // lev[Chan::Size]
+        Trig::StartMode::Auto,                  // startMode
+        Trig::ModeFind::Hand,                   // modeFind
+        10,                                     // holdOff
+        false,                                  // holdOffEnable
     },
 
     // ÃÂÌ˛ –¿«¬®–“ ¿
     {
-        0,                      // time_shift;         
-        TBase::_5ms,            // time_base;         
-        PeakDetMode::Disabled,  // time_peakDet;      
-        TPos::Center,           // time_TPos;         
-        SampleType::Real,       // time_sampleType;   
-        FunctionTime::Time,     // time_timeDivXPos;  
-        LinkingTShift::Time,    // time_linkingTShift;
-        SampleType::Real,       // time_sampleTypeOld;
+        0,                      // time_shift
+        TBase::_5ms,            // time_base
+        PeakDetMode::Disabled,  // time_peakDet
+        TPos::Center,           // time_TPos
+        SampleType::Real,       // time_sampleType
+        FunctionTime::Time,     // time_timeDivXPos
+        LinkingTShift::Time,    // time_linkingTShift
+        SampleType::Real,       // time_sampleTypeOld
     },
 
     // ÃÂÌ˛  ”–—Œ–€
     {
-        false,                                                                                          // curs_showCursors;
-        {Osci::Measurements::Cursors::LookMode::None, Osci::Measurements::Cursors::LookMode::None},     // curs_lookMode[2];
-        true,                                                                                           // curs_showFreq;
-        Osci::Measurements::Cursors::Active::None,                                                      // curs_active;
-        Chan::A,                                                                                        // curs_source;
-        {Osci::Measurements::Cursors::Control::Disable, Osci::Measurements::Cursors::Control::Disable}, // curs_cntrlU[Chan::Size];
-        {Osci::Measurements::Cursors::Control::Disable, Osci::Measurements::Cursors::Control::Disable}, // curs_cntrlT[Chan::Size];
-        Osci::Measurements::Cursors::Movement::Pixels,                                                  // curs_movement;                
-        {80,  80},                                              // curs_deltaU100percents[2];    
-        {120, 120},                                             // curs_deltaT100percents[2];    
-        {                                                       // curs_posCurU[Chan::Size][2];
-        { 60, 140 },                                            //  ‡Ì‡Î 1
-        { 60, 140 }},                                           //  ‡Ì‡Î 2
-        {                                                       // curs_posCurT[Chan::Size][2];
-        { 80, 200 },                                            //  ‡Ì‡Î 1
-        { 80, 200 }},                                           //  ‡Ì‡Î 2
+        false,                                                                                          // showCursors
+        {Osci::Measurements::Cursors::LookMode::None, Osci::Measurements::Cursors::LookMode::None},     // lookMode[2]
+        true,                                                                                           // showFreq
+        Osci::Measurements::Cursors::Active::None,                                                      // active
+        Chan::A,                                                                                        // source
+        {Osci::Measurements::Cursors::Control::Disable, Osci::Measurements::Cursors::Control::Disable}, // cntrlU[Chan::Size]
+        {Osci::Measurements::Cursors::Control::Disable, Osci::Measurements::Cursors::Control::Disable}, // cntrlT[Chan::Size]
+        Osci::Measurements::Cursors::Movement::Pixels,                                                  // movement
+        {80,  80},                                                                                      // deltaU100percents[2]
+        {120, 120},                                                                                     // deltaT100percents[2]
+        {                                                                                               // posCurU[Chan::Size][2]
+        { 60, 140 },                                                                                    //  ‡Ì‡Î 1
+        { 60, 140 }},                                                                                   //  ‡Ì‡Î 2
+        {                                                                                               // posCurT[Chan::Size][2]
+        { 80, 200 },                                                                                    //  ‡Ì‡Î 1
+        { 80, 200 }},                                                                                   //  ‡Ì‡Î 2
     },
 
     // ÃÂÌ˛ œ¿Ãﬂ“‹
     {
-        Osci::Settings::Memory::ENumPointsFPGA::_1k,    // mem_enumPoints;                            
-        ModeBtnMemory::Menu,                            // mem_modeBtnMemory;                         
-        ModeWork::Dir,                                  // mem_modeWork;                              
-        false,                                          // mem_flashAutoConnect;                      
-        0,                                              // mem_indexCurSymbolNameMask;                
-        ModeSaveSignal::BMP,                            // mem_modeSaveSignal;                        
-        {},                                             // mem_fileName[MAX_SYMBOLS_IN_FILE_NAME];    
-        ModeShowIntMem::Saved,                          // mem_modeShowIntMem;                        
-        FileNamingMode::Mask,                           // mem_fileNamingMode;                        
-        {},                                             // mem_fileNameMask[MAX_SYMBOLS_IN_FILE_NAME];
+        Osci::Settings::Memory::ENumPointsFPGA::_1k,    // enumPoints
+        ModeBtnMemory::Menu,                            // modeBtnMemory
+        ModeWork::Dir,                                  // modeWork
+        false,                                          // flashAutoConnect
+        0,                                              // indexCurSymbolNameMask
+        ModeSaveSignal::BMP,                            // modeSaveSignal
+        {},                                             // fileName[MAX_SYMBOLS_IN_FILE_NAME]
+        ModeShowIntMem::Saved,                          // modeShowIntMem
+        FileNamingMode::Mask,                           // fileNamingMode
+        {},                                             // fileNameMask[MAX_SYMBOLS_IN_FILE_NAME]
     },
 
     // Õ‡ÒÚÓÈÍË Ï‡ÚÂÏ‡ÚËÍË
     {
-        FuncModeDraw::Disable,      // math_modeDraw;     
-        false,                      // math_enableFFT;    
-        ScaleFFT::Log,              // math_scaleFFT;     
-        SourceFFT::Both,            // math_sourceFFT;    
-        WindowFFT::Hamming,         // math_windowFFT;    
-        0,                          // math_currentCursor;
-        { 50, 50 },                 // math_posCur[2];    
-        FFTmaxDB::_60,              // math_FFTmaxDB;     
-        MathFunction::Sum,          // math_function;     
-        ModeRegSet::Range,          // math_modeRegSet;   
-        Range::_1V,                 // math_range;        
-        Divider::_1,                // math_divider;      
-        RShift::ZERO,               // math_rShift;   
+        FuncModeDraw::Disable,      // modeDraw
+        false,                      // enableFFT
+        ScaleFFT::Log,              // scaleFFT
+        SourceFFT::Both,            // sourceFFT
+        WindowFFT::Hamming,         // windowFFT
+        0,                          // currentCursor
+        { 50, 50 },                 // posCur[2]
+        FFTmaxDB::_60,              // FFTmaxDB
+        MathFunction::Sum,          // function
+        ModeRegSet::Range,          // modeRegSet
+        Range::_1V,                 // range
+        Divider::_1,                // divider
+        RShift::ZERO,               // rShift
     },
     
     // ÃÂÌ˛ »«Ã≈–≈Õ»ﬂ
-    
-    false,                                                  // meas_show;  
-    Osci::Measurements::Settings::OnDisplay::_1_5,          // meas_number;
-    Osci::Measurements::Settings::Source::A_B,              // meas_source;
-    Osci::Measurements::Settings::ModeViewSignals::AsIs,    // meas_modeViewSignals; 
-    {                                                       // meas_measures[15];
-        Measure::Type::VoltageMax,          Measure::Type::VoltageMin,  Measure::Type::VoltagePic,      Measure::Type::VoltageMaxSteady,
-        Measure::Type::VoltageMinSteady,
-        Measure::Type::VoltageAverage,      Measure::Type::VoltageAmpl, Measure::Type::VoltageRMS,      Measure::Type::VoltageVybrosPlus,
-        Measure::Type::VoltageVybrosMinus,
-        Measure::Type::Period,              Measure::Type::Freq,        Measure::Type::TimeNarastaniya, Measure::Type::TimeSpada,
-        Measure::Type::DurationPlus
+    {
+        false,                              // show
+        MeasuresOnDisplay::_1_5,            // number
+        MeasuresSource::A_B,                // source
+        MeasuresModeViewSignals::AsIs,      // modeViewSignals
+        {                                   // measures[15]
+            Measure::Type::VoltageMax,          Measure::Type::VoltageMin,  Measure::Type::VoltagePic,      Measure::Type::VoltageMaxSteady,
+            Measure::Type::VoltageMinSteady,
+            Measure::Type::VoltageAverage,      Measure::Type::VoltageAmpl, Measure::Type::VoltageRMS,      Measure::Type::VoltageVybrosPlus,
+            Measure::Type::VoltageVybrosMinus,
+            Measure::Type::Period,              Measure::Type::Freq,        Measure::Type::TimeNarastaniya, Measure::Type::TimeSpada,
+            Measure::Type::DurationPlus
+        },
+        Measure::Type::Freq,                // marked
     },
-    Measure::Type::Freq,    // meas_marked;
 
     // ÃÂÌ˛ —≈–¬»—
 

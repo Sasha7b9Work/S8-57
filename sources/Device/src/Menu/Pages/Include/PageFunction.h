@@ -2,6 +2,7 @@
 #include "Menu/MenuItems.h"
 #include "Osci/Osci_Settings.h"
 #include "Osci/Measurements/Cursors_Settings.h"
+#include "Osci/Measurements/Measures.h"
 
 
 #define SOURCE_FFT                  (set.math.sourceFFT)
@@ -40,7 +41,6 @@
 #define MATH_MODE_REG_SET           (set.math.modeRegSet)
 #define MATH_MODE_REG_SET_IS_RSHIFT (MATH_MODE_REG_SET == ModeRegSet::RShift)
 #define MATH_MODE_REG_SET_IS_RANGE  (MATH_MODE_REG_SET == ModeRegSet::Range)
-
 
 struct FuncModeDraw
 {
@@ -123,7 +123,6 @@ struct ModeRegSet
     explicit ModeRegSet(E v) : value(v) {};
 };
 
-
 struct SettingsMath
 {
     FuncModeDraw::E          modeDraw;             ///< –аздельный или общий дисплей в режиме математической функции.
@@ -155,6 +154,85 @@ struct SettingsCursors
     float                                    deltaT100percents[2];    ///< –ассто€ние между курсорами времени дл€ 100%, дл€ обоих каналов.
     float                                    posCurU[Chan::Size][2];  ///< “екущие позиции курсоров напр€жени€ обоих каналов.
     float                                    posCurT[Chan::Size][2];  ///< “екущие позиции курсоров времени обоих каналов.
+};
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/// —колько автоматических измерений помещаетс€ на экран
+struct MeasuresOnDisplay
+{
+    enum E
+    {
+        _1,      ///< 1 измерение слева внизу.
+        _2,      ///< 2 измерени€ слева внизу.
+        _1_5,    ///< 1 строка с 5 измерени€ми.
+        _2_5,    ///< 2 строки по 5 измерений.
+        _3_5,    ///< 3 строки по 5 измерений.
+        _6_1,    ///< 6 строк по 1 измерению.
+        _6_2     ///< 6 строк по 2 измерени€.
+    } value;
+    explicit MeasuresOnDisplay(E v) : value(v) {};
+};
+
+struct MeasuresSource
+{
+    enum E
+    {
+        A,
+        B,
+        A_B
+    } value;
+    explicit MeasuresSource(E v) : value(v) {};
+};
+
+/// —жимать ли сигналы при выводе измерений.
+struct MeasuresModeViewSignals
+{
+    enum E
+    {
+        AsIs,       ///< ѕоказывать сигналы как есть.
+        Compress    ///< —жимать сетку с сигналами.
+    } value;
+    explicit MeasuresModeViewSignals(E v) : value(v) {};
+};
+
+#define NUM_MEASURES                    (set.meas.number)
+#define NUM_MEASURES_IS_1_5             (NUM_MEASURES == MeasuresOnDisplay::_1_5)
+#define NUM_MEASURES_IS_2_5             (NUM_MEASURES == MeasuresOnDisplay::_2_5)
+#define NUM_MEASURES_IS_3_5             (NUM_MEASURES == MeasuresOnDisplay::_3_5)
+#define NUM_MEASURES_IS_6_1             (NUM_MEASURES == MeasuresOnDisplay::_6_1)
+#define NUM_MEASURES_IS_6_2             (NUM_MEASURES == MeasuresOnDisplay::_6_2)
+
+/// —жимать ли сетку при выводе измерений
+#define MODE_VIEW_SIGNALS               (set.meas.modeViewSignals) 
+#define MODE_VIEW_SIGNALS_IS_COMPRESS   (MODE_VIEW_SIGNALS == MeasuresModeViewSignals::Compress)
+
+/// ѕо какому каналу производить автоматические измерени€
+#define SOURCE_MEASURES                 (set.meas.source)
+/// јвтоматические измерени€ производ€тс€ только по каналу A
+#define SOURCE_MEASURES_IS_A            (SOURCE_MEASURES == MeasuresSource::A)
+/// јвтоматические измерени€ производ€тс€ только по каналу B
+#define SOURCE_MEASURES_IS_B            (SOURCE_MEASURES == MeasuresSource::B)
+/// јвтоматические измерени€ производ€тс€ по каналам A и B
+#define SOURCE_MEASURES_IS_BOTH         (SOURCE_MEASURES == MeasuresSource::A_B)
+/// ¬ыводить автоматические измерени€ по каналу A
+#define VIEW_MEASURES_A                 (SET_ENABLED_A && (SOURCE_MEASURES_IS_A || SOURCE_MEASURES_IS_BOTH))
+/// ¬ыводить автоматические измерени€ по каналу B
+#define VIEW_MEASURES_B                 (SET_ENABLED_B && (SOURCE_MEASURES_IS_B || SOURCE_MEASURES_IS_BOTH))
+/// ¬ыводить автоматические измерени€ по обоим каналам
+#define VIEW_MEASURES_BOTH              (SET_ENABLED_BOTH && SOURCE_MEASURES_IS_BOTH)
+
+#define SHOW_MEASURES                   (set.meas.show)
+
+#define MEAS_MARKED                     (set.meas.marked)
+
+struct SettingsMeasures
+{
+    bool                        show;              ///< ѕоказывать ли измерени€.
+    MeasuresOnDisplay::E        number;            ///< —колько измерений выводить.
+    MeasuresSource::E           source;            ///< ƒл€ каких каналов выводить измерени€.
+    MeasuresModeViewSignals::E  modeViewSignals;   ///< —жимать ли сигналы при выводе измерений.
+    Measure::Type::E            measures[15];      ///< ¬ыбранные дл€ индикации измерени€.
+    Measure::Type::E            marked;            ///< »змерение, на которое нужно выводить маркеры.
 };
 
 

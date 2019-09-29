@@ -4,14 +4,12 @@
 #include "Display/Painter.h"
 #include "Hardware/Beeper.h"
 #include "Utils/Math.h"
-
 #include "Osci/Measurements/Measurements.h"
 #include "Osci/Measurements/Measurements_Table.h"
 
 
 using namespace Display::Primitives;
 using namespace Osci::Measurements;
-using namespace Osci::Measurements::Settings;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -129,19 +127,19 @@ String Measure::GetName(Measure::Type::E type)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Measure::Type::E Measure::GetType()
 {
-    return set.meas_measures[row * Table::NumCols() + col];
+    return set.meas.measures[row * Table::NumCols() + col];
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Measure::ShortPressOnSmallButonMarker()
 {
-    if(set.meas_measures[posActive] == MEAS_MARKED)
+    if(set.meas.measures[posActive] == MEAS_MARKED)
     {
         MEAS_MARKED = Measure::Type::None;
     }
     else
     {
-        MEAS_MARKED = set.meas_measures[posActive];
+        MEAS_MARKED = set.meas.measures[posActive];
     }
 }
 

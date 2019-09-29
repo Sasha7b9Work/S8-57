@@ -7,25 +7,22 @@
 #include "Settings/Settings.h"
 #include "Utils/Math.h"
 #include "Utils/Values.h"
-#include <cmath>
-#include <cstdlib>
-#include <cstring>
-
 #include "Data/DataSettings.h"
 #include "Hardware/Timer.h"
 #include "Osci/Display/PainterData.h"
 #include "Utils/Smoother.h"
+#include <cmath>
+#include <cstdlib>
+#include <cstring>
 
 
 using namespace Osci;
 using namespace Osci::Settings;
-using namespace Osci::Measurements::Settings;
 
 using FPGA::VALUE::MIN;
 using FPGA::VALUE::MAX;
 using FPGA::VALUE::AVE;
 using FPGA::VALUE::NONE;
-using Osci::Measurements::Measure;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -91,7 +88,7 @@ static char* Voltage2String(float, bool, char buffer[20]);
 static char* Phase2String(float, bool, char buffer[20]);
 
 
-static const MeasureCalculate sMeas[Osci::Measurements::Measure::Type::Number] =
+static const MeasureCalculate sMeas[Measure::Type::Number] =
 {
     {"", 0, 0, false, {}},
     {"CalculateVoltageMax",         CalculateVoltageMax,         Voltage2String,                    true,  {}},
@@ -1302,7 +1299,7 @@ void InterpolationSinX_X(uint8 *data, int numPoints, TBase::E tBase)
 
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-String Osci::Measurements::Measure::GetStringMeasure(Chan::E ch, char* buffer, int lenBuf)
+String Measure::GetStringMeasure(Chan::E ch, char* buffer, int lenBuf)
 {
     Measure::Type::E type = GetType();
 
