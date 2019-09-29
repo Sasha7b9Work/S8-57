@@ -344,7 +344,7 @@ void Osci::Settings::Trig::Level::Find()
 {
     if (DATA)
     {
-        Chan::E ch = (Chan::E)TRIG_SOURCE;
+        Chan::E ch = (Chan::E)set.trig.source;
 
         if (!ENABLED_DS(ch))
         {

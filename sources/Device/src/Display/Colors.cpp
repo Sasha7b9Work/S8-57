@@ -270,11 +270,11 @@ Color Color::Trig()
 {
     Color result = Color::FILL;
 
-    if(TRIG_SOURCE_IS_A)
+    if(set.trig.source == Trig::Source::A)
     {
         result = CHAN[Chan::A];
     }
-    else if(TRIG_SOURCE_IS_B)
+    else if(set.trig.source == Trig::Source::B)
     {
         result = CHAN[Chan::B];
     }

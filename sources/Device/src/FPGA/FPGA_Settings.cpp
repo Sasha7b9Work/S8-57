@@ -62,9 +62,9 @@ void Trig::Input::Load()
         {BIN_U8(00000000), BIN_U8(00000110)}  // -V2501      // อื
     };
 
-    WritePin(Pin::A1S, _GET_BIT(datas[TRIG_INPUT][TRIG_SOURCE], 2));
-    WritePin(Pin::A0S, _GET_BIT(datas[TRIG_INPUT][TRIG_SOURCE], 1));
-    WritePin(Pin::LFS, _GET_BIT(datas[TRIG_INPUT][TRIG_SOURCE], 0));
+    WritePin(Pin::A1S, _GET_BIT(datas[TRIG_INPUT][set.trig.source], 2));
+    WritePin(Pin::A0S, _GET_BIT(datas[TRIG_INPUT][set.trig.source], 1));
+    WritePin(Pin::LFS, _GET_BIT(datas[TRIG_INPUT][set.trig.source], 0));
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -337,7 +337,7 @@ void Trig::DrawOnGrid()
 
         Region(width, height).DrawBounded(x, y, Color::BACK, Color::FILL);
 
-        float trigLevVal = FPGA::Math::RShift2Abs(SET_TRIGLEV_SOURCE, SET_RANGE(TRIG_SOURCE)) * Divider((uint8)set.ch.divider[TRIG_SOURCE]).ToAbs();
+        float trigLevVal = FPGA::Math::RShift2Abs(SET_TRIGLEV_SOURCE, SET_RANGE(set.trig.source)) * Divider((uint8)set.ch.divider[set.trig.source]).ToAbs();
 
         Voltage voltage(trigLevVal);
 
