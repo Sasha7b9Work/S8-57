@@ -9,7 +9,6 @@
 #include <cmath>
 
 
-using namespace Osci::Settings;
 using namespace Transceiver;
 
 using HAL::FSMC;

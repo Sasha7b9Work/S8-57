@@ -1,6 +1,6 @@
 #pragma once
 #include "Menu/MenuItems.h"
-#include "Osci/Osci_Settings.h"
+#include "Settings/SettingsOsci.h"
 
 
 /// Где хранятся данные

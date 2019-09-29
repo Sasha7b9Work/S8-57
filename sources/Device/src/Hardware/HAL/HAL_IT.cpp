@@ -7,13 +7,9 @@
 #include "FPGA/FPGA_HAL.h"
 #include "Hardware/Timer.h"
 #include "Hardware/VCP.h"
-
 #include "Utils/Debug.h"
 #include "Display/Painter.h"
 #include "Hardware/HAL/HAL.h"
-
-
-using namespace Osci::Settings;
 
 
 INTERRUPT_BEGIN

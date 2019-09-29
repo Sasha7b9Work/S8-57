@@ -26,7 +26,6 @@ using namespace FPGA;
 using namespace FPGA::Math;
 using namespace Hardware;
 using namespace Osci::Measurements;
-using namespace Osci::Settings;
 
 
 class Separator

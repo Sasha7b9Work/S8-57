@@ -10,7 +10,6 @@
 #include "Osci/Display/HiPart.h"
 #include "Display/Display.h"
 #include "Osci/Display/PainterData.h"
-#include "Osci/Osci_Settings.h"
 #include "Osci/Measurements/Measurements.h"
 
 

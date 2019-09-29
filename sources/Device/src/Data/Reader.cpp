@@ -3,8 +3,6 @@
 #include "Osci/Osci_Storage.h"
 #include "Utils/CommonFunctions.h"
 #include "Osci/Osci.h"
-
-#include "Osci/Osci_Settings.h"
 #include "Settings/Settings.h"
 #include "Hardware/RAM.h"
 

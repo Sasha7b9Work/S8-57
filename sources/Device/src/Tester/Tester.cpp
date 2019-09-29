@@ -12,9 +12,6 @@
 #include "Utils/Values.h"
 
 
-using namespace Osci::Settings;
-
-
 using HAL::FSMC;
 using HAL::PIO::State;
 

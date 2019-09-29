@@ -11,7 +11,6 @@
 
 using namespace FPGA::HAL;
 using namespace HAL::ADDRESSES::FPGA;
-using namespace Osci::Settings;
 
 using HAL::FSMC;
 

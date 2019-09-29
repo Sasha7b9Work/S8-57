@@ -20,13 +20,10 @@
 
 
 using namespace Display::Primitives;
-using namespace Osci::Settings;
 
 static void DrawSetMask();  // Эта функция рисует, когда выбран режим задания маски.
 static void DrawFileMask(int x, int y);
 static void DrawSetName();  // Эта функция рисует, когда нужно задать имя файла для сохранения
-
-//static void SaveSignalToIntMemory();
        void OnMemExtSetMaskNameRegSet(int angle, int maxIndex);
 
 

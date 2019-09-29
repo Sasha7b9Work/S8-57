@@ -6,8 +6,6 @@
 #include "Settings/SettingsNRST.h"
 
 
-using namespace Osci::Settings;
-
 extern const Page pRand;
 
 const Page * const PageDebug::PageRand::self = (const Page *)&pRand;

@@ -16,10 +16,8 @@
 #include <stdlib.h>
 
 
-
 using namespace HAL::ADDRESSES::FPGA;
 using namespace FPGA::HAL;
-using namespace Osci::Settings;
 
 using HAL::FSMC;
 

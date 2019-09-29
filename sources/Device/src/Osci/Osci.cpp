@@ -8,17 +8,15 @@
 #include "Hardware/HAL/HAL.h"
 #include "Osci/Measurements/Measurements.h"
 #include "Settings/Settings.h"
-#include <cstring>
-#include <cmath>
-
 #include "Osci/Display/PainterData.h"
 #include "Utils/Debug.h"
+#include <cstring>
+#include <cmath>
 
 
 using namespace FPGA;
 using namespace ::HAL;
 using namespace ::HAL::ADDRESSES::FPGA;
-using namespace Osci::Settings;
 
 
 extern bool givingStart;

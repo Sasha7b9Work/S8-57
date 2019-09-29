@@ -8,7 +8,6 @@
 #include "Hardware/Timer.h"
 #include "FPGA/FPGA.h"
 #include "Settings/Settings.h"
-#include "Osci/Osci_Settings.h"
 #include "Utils/Values.h"
 #include "Data/Heap.h"
 #include "Menu/Pages/Include/PageFunction.h"

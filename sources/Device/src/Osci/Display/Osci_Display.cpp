@@ -17,7 +17,6 @@
 
 
 using namespace Display::Primitives;
-using namespace Osci::Settings;
 using namespace Osci::Measurements;
 
 

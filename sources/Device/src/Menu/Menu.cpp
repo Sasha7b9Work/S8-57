@@ -27,7 +27,6 @@
 
 
 using namespace Display::Primitives;
-using namespace Osci::Settings;
 using namespace Transceiver;
 
 const Page    *Menu::mainPage = nullptr;

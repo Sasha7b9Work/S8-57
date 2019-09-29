@@ -6,14 +6,12 @@
 #include "Display/Display_Primitives.h"
 #include "Display/Painter.h"
 #include "Display/Symbols.h"
-#include "Osci/Osci_Settings.h"
 #include "FPGA/FPGA.h"
 #include "Hardware/Beeper.h"
 #include "FPGA/FPGA_Math.h"
 
 
 using namespace Display::Primitives;
-using namespace Osci::Settings;
 
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

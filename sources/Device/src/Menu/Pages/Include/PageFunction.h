@@ -1,6 +1,5 @@
 #pragma once
 #include "Menu/MenuItems.h"
-#include "Osci/Osci_Settings.h"
 #include "Osci/Measurements/Measures.h"
 #include "PageDisplay.h"
 #include "Multimeter/Multimeter.h"
