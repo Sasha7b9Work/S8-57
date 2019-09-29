@@ -56,7 +56,7 @@ DEF_CHOICE_4( cWindow,                                                          
     "Хэмминга",
     "Блэкмена",
     "Ханна",
-    WINDOW_FFT, &PageFFT::self, IsActive_Window, Choice::Changed, Choice::AfterDraw
+    set.fft.window, &PageFFT::self, IsActive_Window, Choice::Changed, Choice::AfterDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -71,7 +71,7 @@ DEF_CHOICE_3( cRange,                                                           
     "-40дБ",
     "-60дБ",
     "-80дБ",
-    MAX_DB_FFT, &PageFFT::self, IsActive_Range, Choice::Changed, Choice::AfterDraw
+    set.fft.maxDB, &PageFFT::self, IsActive_Range, Choice::Changed, Choice::AfterDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

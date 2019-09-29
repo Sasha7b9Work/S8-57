@@ -7,12 +7,7 @@
 #include "Multimeter/Multimeter.h"
 
 
-#define WINDOW_FFT                  (set.math.windowFFT)
-#define WINDOW_FFT_IS_HAMMING       (WINDOW_FFT == WindowFFT::Hamming)
-#define WINDOW_FFT_IS_BLACKMAN      (WINDOW_FFT == WindowFFT::Blackman)
-#define WINDOW_FFT_IS_HANN          (WINDOW_FFT == WindowFFT::Hann)
-#define MAX_DB_FFT                  (set.math.FFTmaxDB)
-#define MAX_DB_FOR_FFT              FFTmaxDB::MaxDBforFFT(MAX_DB_FFT)
+#define MAX_DB_FOR_FFT              FFTmaxDB::MaxDBforFFT(set.fft.maxDB)
 
 #define MATH_CURRENT_CUR            (set.math.currentCursor)
 #define MATH_CURRENT_CUR_IS_0       (MATH_CURRENT_CUR == 0)
@@ -107,9 +102,7 @@ struct ModeRegSet
 struct SettingsMath
 { //-V802
     FuncModeDraw::E modeDraw;             ///< Раздельный или общий дисплей в режиме математической функции.
-    WindowFFT::E    windowFFT;
     uint8           currentCursor;        ///< Определяет, каким курсором спектра управляет ручка УСТАНОВКА.
-    FFTmaxDB::E     FFTmaxDB;
     MathFunction::E function;
     ModeRegSet::E   modeRegSet;           ///< Функция ручки УСТАНОВКА - масштаб по времени или смещение по вертикали.
     int8            divider;
@@ -123,6 +116,8 @@ struct SettingsFFT
     uint8           posCur[2];            ///< Позиция курсора спектра. Изменяется 0...256.
     ScaleFFT::E     scale;
     SourceFFT::E    source;
+    WindowFFT::E    window;
+    FFTmaxDB::E     maxDB;
 };
 
 struct SettingsCursors

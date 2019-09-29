@@ -120,9 +120,7 @@ const Settings Settings::defaultSettings =
     // Настройки математики
     {
         FuncModeDraw::Disable,      // modeDraw
-        WindowFFT::Hamming,         // windowFFT
         0,                          // currentCursor
-        FFTmaxDB::_60,              // FFTmaxDB
         MathFunction::Sum,          // function
         ModeRegSet::Range,          // modeRegSet
         Divider::_1,                // divider
@@ -135,6 +133,8 @@ const Settings Settings::defaultSettings =
         { 50, 50 },                 // posCur[2]
         ScaleFFT::Log,              // scale
         SourceFFT::Both,            // source
+        WindowFFT::Hamming,         // window
+        FFTmaxDB::_60,              // maxDB
     },
     
     // Меню ИЗМЕРЕНИЯ

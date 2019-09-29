@@ -221,7 +221,7 @@ void Grid::DrawGridSpectrum()
     {
         static const int nums[] = {4, 6, 8};
         static pString strs[] = {"0", "-10", "-20", "-30", "-40", "-50", "-60", "-70"};
-        int numParts = nums[MAX_DB_FFT];
+        int numParts = nums[set.fft.maxDB];
         float scale = static_cast<float>(MathHeight()) / numParts;
         for (int i = 1; i < numParts; i++)
         {
