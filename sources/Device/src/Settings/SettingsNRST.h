@@ -36,10 +36,6 @@ struct StretchADC
 #define RSHIFT_ADD_STABLE_A(range)          (RSHIFT_ADD_STABLE(Chan::A, range))
 #define RSHIFT_ADD_STABLE_B(range)          (RSHIFT_ADD_STABLE(Chan::B, range))
 
-#define NRST_STRETCH_ADC_TYPE               (set.nrst.stretchADCtype)
-#define NRST_STRETCH_ADC_TYPE_IS_DISABLE    (NRST_STRETCH_ADC_TYPE == StretchADC::Disable)
-#define NRST_STRETCH_ADC_TYPE_IS_HAND       (NRST_STRETCH_ADC_TYPE == StretchADC::Hand)
-
 struct SettingsNRST
 {
     int16           balanceADC[Chan::Size];                 ///< Значение дополнительного смещения АЦП для ручной балансировки.

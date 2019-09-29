@@ -108,15 +108,15 @@ static int16 stretchB;
 
 void PageDebug::PageADC::PageStretch::OnChanged_Mode(bool)
 {
-    if (NRST_STRETCH_ADC_TYPE_IS_DISABLE)
+    if (set.nrst.stretchADCtype == StretchADC::Disable)
     {
         stretchA = set.nrst.stretchADC[Chan::A][StretchADC::Disable] = 0;
         stretchB = set.nrst.stretchADC[Chan::B][StretchADC::Disable] = 0;
     }
     else
     {
-        stretchA = set.nrst.stretchADC[Chan::A][NRST_STRETCH_ADC_TYPE];
-        stretchB = set.nrst.stretchADC[Chan::B][NRST_STRETCH_ADC_TYPE];
+        stretchA = set.nrst.stretchADC[Chan::A][set.nrst.stretchADCtype];
+        stretchB = set.nrst.stretchADC[Chan::B][set.nrst.stretchADCtype];
     }
 }
 
@@ -126,19 +126,18 @@ DEF_CHOICE_3( cStretch_Mode,                                                    
     DISABLE_RU,
     "Реальный",
     "Ручной",
-    NRST_STRETCH_ADC_TYPE,
-    &PageDebug::PageADC::PageStretch::self, Item::Active, PageDebug::PageADC::PageStretch::OnChanged_Mode, Choice::AfterDraw
+    set.nrst.stretchADCtype, &PageDebug::PageADC::PageStretch::self, Item::Active, PageDebug::PageADC::PageStretch::OnChanged_Mode, Choice::AfterDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static bool IsActive_StretchAB()
 {
-    return NRST_STRETCH_ADC_TYPE_IS_HAND;
+    return (set.nrst.stretchADCtype == StretchADC::Hand);
 }
 
 static void OnChanged_Stretch_A()
 {
-    set.nrst.stretchADC[Chan::A][NRST_STRETCH_ADC_TYPE] = stretchA;
+    set.nrst.stretchADC[Chan::A][set.nrst.stretchADCtype] = stretchA;
 }
 
 DEF_GOVERNOR( gStretch_A,                                                                                                                //--- ОТЛАДКА - АЦП - РАСТЯЖКА - Растяжка 1к ---
@@ -151,7 +150,7 @@ DEF_GOVERNOR( gStretch_A,                                                       
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void OnChanged_Stretch_B()
 {
-    set.nrst.stretchADC[Chan::B][NRST_STRETCH_ADC_TYPE] = stretchB;
+    set.nrst.stretchADC[Chan::B][set.nrst.stretchADCtype] = stretchB;
 }
 
 DEF_GOVERNOR( gStretch_B,                                                                                                                //--- ОТЛАДКА - АЦП - РАСТЯЖКА - Растяжка 2к ---
@@ -412,7 +411,7 @@ static void DebugShowSetInfo_Draw()
 
     pString s[3] = {"выключено", "настроено автоматически", "задано вручную"};
     DRAW_FORMAT("balanceADCtype : %s", (set.nrst.balanceADCtype < 3 ? s[set.nrst.balanceADCtype] : "!!! неправильное значение !!!")); //-V547 //-V2528
-    DRAW_FORMAT("stretchADCtype : %s", (NRST_STRETCH_ADC_TYPE < 3 ? s[NRST_STRETCH_ADC_TYPE] : "!!! неправильное значение !!!")); //-V547 //-V2528
+    DRAW_FORMAT("stretchADCtype : %s", (set.nrst.stretchADCtype < 3 ? s[set.nrst.stretchADCtype] : "!!! неправильное значение !!!")); //-V547 //-V2528
 
     x = String("stretchADC :").Draw(x0, INC_Y) + 5; //-V2528
 
@@ -631,7 +630,7 @@ float GetStretchADC(Chan::E ch)
 
     const int16 *address = addStretch[set.ch[ch].range][ch];
 
-    int16 stretch = set.nrst.stretchADC[ch][NRST_STRETCH_ADC_TYPE];
+    int16 stretch = set.nrst.stretchADC[ch][set.nrst.stretchADCtype];
 
     if (address)
     {
@@ -645,6 +644,6 @@ float GetStretchADC(Chan::E ch)
 //---------------------------------------------------------------------------------------------------------------------------------------------------
 void SetStretchADC(Chan::E ch, float kStretch)
 {
-    set.nrst.stretchADC[ch][NRST_STRETCH_ADC_TYPE] = (int16)((kStretch - 1.0F) * 1e4F);
+    set.nrst.stretchADC[ch][set.nrst.stretchADCtype] = (int16)((kStretch - 1.0F) * 1e4F);
 }
 
