@@ -36,34 +36,34 @@ int Tables::Size()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-Display::ENumSignalsInSec::E Tables::ENumSignalsInSecToENUM(int numSignalsInSec)
+ENumSignalsInSec::E Tables::ENumSignalsInSecToENUM(int numSignalsInSec)
 {
     if(numSignalsInSec == 1)
     {
-        return Display::ENumSignalsInSec::_1;
+        return ENumSignalsInSec::_1;
     }
     else if(numSignalsInSec == 2)
     {
-        return Display::ENumSignalsInSec::_2;
+        return ENumSignalsInSec::_2;
     }
     else if(numSignalsInSec == 5)
     {
-        return Display::ENumSignalsInSec::_5;
+        return ENumSignalsInSec::_5;
     }
     else if(numSignalsInSec == 10)
     {
-        return Display::ENumSignalsInSec::_10;
+        return ENumSignalsInSec::_10;
     }
     else if(numSignalsInSec == 25)
     {
-        return Display::ENumSignalsInSec::_25;
+        return ENumSignalsInSec::_25;
     }
     else
     {
         LOG_ERROR("");
     }
 
-    return Display::ENumSignalsInSec::_1;
+    return ENumSignalsInSec::_1;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

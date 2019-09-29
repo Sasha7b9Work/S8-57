@@ -25,8 +25,6 @@
 
 #define NUM_AVE_MAX                 256
 
-#define ENUM_SIGNALS_IN_SEC         (set.disp.ENumSignalsInSec)
-
 #define LAST_AFFECTED_CH            (set.disp.lastAffectedChannel)
 #define LAST_AFFECTED_CH_IS_A       (LAST_AFFECTED_CH == Chan::A)
 
@@ -130,25 +128,24 @@ struct ENumSmoothing
     uint ToNumber() const;
 };
 
+/// Ограничение FPS.
+struct ENumSignalsInSec
+{
+    enum E
+    {
+        _25,
+        _10,
+        _5,
+        _2,
+        _1
+    } value;
+    explicit ENumSignalsInSec(E v) : value(v) { };
+    /// Возвращает количество миллисекунда между кадрами
+    uint TimeBetweenFramesMS() const;
+};
 
 namespace Display
 {
-    /// Ограничение FPS.
-    struct ENumSignalsInSec
-    {
-        enum E
-        {
-            _25,
-            _10,
-            _5,
-            _2,
-            _1
-        } value;
-        explicit ENumSignalsInSec(E v) : value(v) { };
-        /// Возвращает количество миллисекунда между кадрами
-        uint TimeBetweenFramesMS() const;
-    };
-
     /// Тип сетки на экране.
     struct TypeGrid
     {
@@ -173,7 +170,7 @@ struct SettingsDisplay
     ENumAccum::E           ENumAccum;             ///< Число накоплений сигнала на экране.
     ModeAccumulation::E    modeAccumulation;      ///< Режим накопления сигналов.
     ENumSmoothing          ENumSmoothing;         ///< Перечисление количества точек для скользящего фильтра.
-    Display::ENumSignalsInSec       ENumSignalsInSec;      ///< Перечисление числа считываний сигнала в секунда.
+    ENumSignalsInSec       ENumSignalsInSec;      ///< Перечисление числа считываний сигнала в секунда.
     Display::TypeGrid::E            typeGrid;              ///< Тип сетки
     int                             brightnessGrid;        ///< Яркость сетки от 0 до 100.
     Display::LinkingRShift::E       linkingRShift;         ///< Тип привязки к смещению по вертикали.

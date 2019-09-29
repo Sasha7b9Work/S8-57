@@ -262,14 +262,14 @@ bool Osci::InModeRandomizer()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static bool CanReadData()
 {
-    if (ENUM_SIGNALS_IN_SEC.value == Display::ENumSignalsInSec::_25)
+    if (set.disp.ENumSignalsInSec.value == ENumSignalsInSec::_25)
     {
         return true;
     }
     
     static uint timePrevRead = 0;
 
-    if (TIME_MS > timePrevRead + ENUM_SIGNALS_IN_SEC.TimeBetweenFramesMS())
+    if (TIME_MS > timePrevRead + set.disp.ENumSignalsInSec.TimeBetweenFramesMS())
     {
         timePrevRead = TIME_MS;
 

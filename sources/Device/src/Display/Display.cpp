@@ -366,7 +366,7 @@ bool Display::IsSeparate()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-uint Display::ENumSignalsInSec::TimeBetweenFramesMS() const
+uint ENumSignalsInSec::TimeBetweenFramesMS() const
 {
     static const uint time[] = { 40, 100, 200, 500, 1000 };
 

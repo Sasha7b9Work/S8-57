@@ -6,7 +6,7 @@
 class Tables
 {
 public:
-    static Display::ENumSignalsInSec::E ENumSignalsInSecToENUM(int numSignalsInSec);
+    static ENumSignalsInSec::E ENumSignalsInSecToENUM(int numSignalsInSec);
     
     static pString Get(int index);
     /// Выводит строку из таблицы symbolsAlphaBet
