@@ -1141,6 +1141,11 @@
               <FilePath>.\src\Menu\Pages\Include\PageMemory.h</FilePath>
             </File>
             <File>
+              <FileName>PageMultimeter.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Menu\Pages\Include\PageMultimeter.h</FilePath>
+            </File>
+            <File>
               <FileName>PageRecorder.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Menu\Pages\Include\PageRecorder.h</FilePath>
@@ -1149,6 +1154,11 @@
               <FileName>PageService.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Menu\Pages\Include\PageService.h</FilePath>
+            </File>
+            <File>
+              <FileName>PageTester.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Menu\Pages\Include\PageTester.h</FilePath>
             </File>
             <File>
               <FileName>PageTime.h</FileName>
@@ -1164,11 +1174,6 @@
               <FileName>DebugPage.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Menu\Pages\Include\DebugPage.h</FilePath>
-            </File>
-            <File>
-              <FileName>PageTester.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Menu\Pages\Include\PageTester.h</FilePath>
             </File>
           </Files>
         </Group>

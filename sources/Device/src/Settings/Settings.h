@@ -12,6 +12,7 @@
 #include "Menu/Pages/Include/PageFunction.h"
 #include "Menu/Pages/Include/PageMeasures.h"
 #include "Menu/Pages/Include/PageMemory.h"
+#include "Menu/Pages/Include/PageMultimeter.h"
 #include "Menu/Pages/Include/PageRecorder.h"
 #include "Menu/Pages/Include/PageService.h"
 #include "Menu/Pages/Include/PageTester.h"
