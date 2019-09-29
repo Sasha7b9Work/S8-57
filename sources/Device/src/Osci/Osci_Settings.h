@@ -146,18 +146,6 @@ namespace Osci
             /// После вызова этой функции уровень синхронизации будет отрисовываться поверх сигнала в течение timMS миллисекунд
             static void NeedForDraw();
 
-            /// Источник синхронизации
-            struct Source
-            {
-                enum E
-                {
-                    A,    /// Канал 1
-                    B     /// Канал 2
-                } value;
-
-                static void Load();
-            };
-
             struct Level
             {
                 static const int MIN = 20;

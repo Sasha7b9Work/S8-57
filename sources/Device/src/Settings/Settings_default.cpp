@@ -48,7 +48,7 @@ const Settings Settings::defaultSettings =
 
     // ÃÂÌ˛ —»Õ’–ŒÕ»«¿÷»ﬂ
     {
-        Trig::Source::A,                            // source
+        TrigSource::A,                            // source
         Trig::Input::Full,                          // input
         Trig::Polarity::Rising,                     // polarity
         {Trig::Level::ZERO, Trig::Level::ZERO},     // lev[Chan::Size]

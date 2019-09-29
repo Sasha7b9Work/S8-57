@@ -2,9 +2,22 @@
 #include "Menu/MenuItems.h"
 
 
+/// Источник синхронизации
+struct TrigSource
+{
+    enum E
+    {
+        A,    /// Канал 1
+        B     /// Канал 2
+    } value;
+
+    static void Load();
+};
+
+
 struct SettingsTrig
 {
-    Osci::Settings::Trig::Source::E    source;
+    TrigSource::E    source;
     Osci::Settings::Trig::Input::E     input;
     Osci::Settings::Trig::Polarity::E  polarity;
     uint16                             lev[Chan::Size];
