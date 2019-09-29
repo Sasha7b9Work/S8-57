@@ -5,8 +5,6 @@
 #include "Osci/Osci_Settings.h"
 
 
-#define LINKING_RSHIFT              (set.disp.linkingRShift)
-
 #define MENU_AUTO_HIDE              (set.disp.menuAutoHide)
 
 #define BRIGHTNESS_DISPLAY          (set.disp.brightness)
@@ -151,6 +149,16 @@ struct TypeGrid
     } value;
 };
 
+/// Тип привязки к смещению по вертикали
+struct LinkingRShift
+{
+    enum E
+    {
+        Voltage,      ///< Смещение привязано к напряжению
+        Position      ///< Смещение привязано к позиции
+    } value;
+};
+
 
 struct SettingsDisplay
 {
@@ -165,7 +173,7 @@ struct SettingsDisplay
     ENumSignalsInSec       ENumSignalsInSec;      ///< Перечисление числа считываний сигнала в секунда.
     TypeGrid::E            typeGrid;              ///< Тип сетки
     int                             brightnessGrid;        ///< Яркость сетки от 0 до 100.
-    Display::LinkingRShift::E       linkingRShift;         ///< Тип привязки к смещению по вертикали.
+    LinkingRShift::E       linkingRShift;         ///< Тип привязки к смещению по вертикали.
     int16                           brightness;            ///< Яркость дисплея.
     Menu::AutoHide::E               menuAutoHide;          ///< Через сколько времени после последнего нажатия клавиши прятать меню.
     int16                           shiftInMemory;         ///< \brief Показывает смещение левого края стеки относительно нулевого байта памяти в 

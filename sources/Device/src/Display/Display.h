@@ -49,16 +49,6 @@ namespace Display
         } value;
     };
 
-    /// Тип привязки к смещению по вертикали
-    struct LinkingRShift
-    {
-        enum E
-        {
-            Voltage,      ///< Смещение привязано к напряжению
-            Position      ///< Смещение привязано к позиции
-        } value;
-    };
-
     static const int HEIGHT = 240;
 
     static const int WIDTH = 320;

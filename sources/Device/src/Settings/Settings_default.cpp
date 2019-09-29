@@ -26,7 +26,7 @@ const Settings Settings::defaultSettings =
         ENumSignalsInSec(ENumSignalsInSec::_25),  // ENumSignalsInSec
         TypeGrid::_1,                                      // typeGrid
         50,                                                         // brightnessGrid
-        Display::LinkingRShift::Position,                           // linkingRShift
+        LinkingRShift::Position,                           // linkingRShift
         100,                                                        // brightness
         Menu::AutoHide::None,                                       // menuAutoHide
         370,                                                        // shiftInMemory

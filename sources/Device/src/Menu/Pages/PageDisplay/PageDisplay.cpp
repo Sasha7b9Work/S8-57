@@ -48,7 +48,7 @@ DEF_CHOICE_2( cScaleYtype,                                                      
     "смещения на экране.",
     "Напряжение",
     "Деления",
-    LINKING_RSHIFT, &PageDisplay::self, Item::Active, Choice::Changed, Choice::AfterDraw
+    set.disp.linkingRShift, &PageDisplay::self, Item::Active, Choice::Changed, Choice::AfterDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
