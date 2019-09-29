@@ -18,8 +18,7 @@ DEF_CHOICE_2( cHoldOff,                                                         
     ,
     DISABLE_RU,
     ENABLE_RU,
-    TRIG_HOLDOFF_ENABLED,
-    &PageTrig::PageHoldOff::self, Item::Active, OnChanged_HoldOff, Choice::AfterDraw
+    set.trig.holdOffEnabled, &PageTrig::PageHoldOff::self, Item::Active, OnChanged_HoldOff, Choice::AfterDraw
 )
 
 
@@ -32,8 +31,7 @@ static void OnChanged_Duration()
 DEF_GOVERNOR( gDuration,                                                                                                                           //--- СИНХР - УДЕРЖАНИЕ - Длительность ---
     "Длительность",
     "Задаёт длительность промежутка между импульсами синхронизации",
-    TRIG_HOLDOFF, 10, 32000,
-    &PageTrig::PageHoldOff::self, Item::Active, OnChanged_Duration
+    set.trig.holdOff, 10, 32000, &PageTrig::PageHoldOff::self, Item::Active, OnChanged_Duration
 )
 
 /// \todo gDuration должен обеспечивать возможность хранения большего значения, чем 32000

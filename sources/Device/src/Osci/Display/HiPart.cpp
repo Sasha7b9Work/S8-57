@@ -258,11 +258,11 @@ static void WriteTextVoltage(Chan::E ch, int x, int y)
     const int SIZE = 100;
 
     char buffer[SIZE];
-    std::snprintf(buffer, SIZE, "%s\xa5%s\xa5%s", Chan(ch).IsA() ? "1ê" : "2ê", ModeCouple(SET_COUPLE(ch)).UGO(), Range(range).ToString(SET_DIVIDER(ch)));
+    std::snprintf(buffer, SIZE, "%s\xa5%s\xa5%s", Chan(ch).IsA() ? "1ê" : "2ê", ModeCouple(SET_COUPLE(ch)).UGO(), Range(range).ToString(divider[ch]));
     String(buffer).Draw(x + 1, y, colorDraw);
 
     char bufferTemp[SIZE];
-    std::snprintf(bufferTemp, SIZE, "\xa5%s", RShift::ToString((uint16)SET_RSHIFT(ch), range, SET_DIVIDER(ch)).CString());
+    std::snprintf(bufferTemp, SIZE, "\xa5%s", RShift::ToString((uint16)SET_RSHIFT(ch), range, divider[ch]).CString());
     String(bufferTemp).Draw(x + 46, y);
 }
 
@@ -433,7 +433,7 @@ static void WriteCursors()
             float pos0 = FPGA::Math::VoltageCursor(Cursor::PosU(source, 0), SET_RANGE(source), SET_RSHIFT(source));
             float pos1 = FPGA::Math::VoltageCursor(Cursor::PosU(source, 1), SET_RANGE(source), SET_RSHIFT(source));
             float delta = std::fabsf(pos1 - pos0);
-            if (SET_DIVIDER_IS_10(source))
+            if (divider[source] == 1)
             {
                 delta *= 10;
             }
