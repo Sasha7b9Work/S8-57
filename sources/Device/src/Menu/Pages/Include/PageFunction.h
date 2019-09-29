@@ -107,7 +107,6 @@ struct ModeRegSet
 struct SettingsMath
 {
     FuncModeDraw::E modeDraw;             ///< Раздельный или общий дисплей в режиме математической функции.
-    SourceFFT::E    sourceFFT;
     WindowFFT::E    windowFFT;
     uint8           currentCursor;        ///< Определяет, каким курсором спектра управляет ручка УСТАНОВКА.
     FFTmaxDB::E     FFTmaxDB;
@@ -123,6 +122,7 @@ struct SettingsFFT
     bool            enabled;
     uint8           posCur[2];            ///< Позиция курсора спектра. Изменяется 0...256.
     ScaleFFT::E     scale;
+    SourceFFT::E    source;
 };
 
 struct SettingsCursors

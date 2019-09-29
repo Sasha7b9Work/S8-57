@@ -120,7 +120,6 @@ const Settings Settings::defaultSettings =
     // Настройки математики
     {
         FuncModeDraw::Disable,      // modeDraw
-        SourceFFT::Both,            // sourceFFT
         WindowFFT::Hamming,         // windowFFT
         0,                          // currentCursor
         FFTmaxDB::_60,              // FFTmaxDB
@@ -135,6 +134,7 @@ const Settings Settings::defaultSettings =
         false,                      // enabled
         { 50, 50 },                 // posCur[2]
         ScaleFFT::Log,              // scale
+        SourceFFT::Both,            // source
     },
     
     // Меню ИЗМЕРЕНИЯ
