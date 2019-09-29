@@ -30,7 +30,7 @@ const Settings Settings::defaultSettings =
         100,                                        // brightness
         MenuAutoHide::None,                         // menuAutoHide
         370,                                        // shiftInMemory
-        Chan::A,                                    // lastAffectedChannel
+        Chan::A                                     // lastAffectedChannel
     },
 
     // Меню КАНАЛ 1, КАНАЛ 2
@@ -43,7 +43,7 @@ const Settings Settings::defaultSettings =
         {Bandwidth(Bandwidth::Full), Bandwidth(Bandwidth::Full)},   // bandwidth[2]
         {false, false},                                             // inverse[2]
         {Divider::_1, Divider::_1},                                 // divider[2]
-        {CalibrationMode::Disable, CalibrationMode::Disable},       // calibrationMode[2]
+        {CalibrationMode::Disable, CalibrationMode::Disable}        // calibrationMode[2]
     },
 
     // Меню СИНХРОНИЗАЦИЯ
@@ -55,7 +55,7 @@ const Settings Settings::defaultSettings =
         Trig::StartMode::Auto,                      // startMode
         Trig::ModeFind::Hand,                       // modeFind
         10,                                         // holdOff
-        false,                                      // holdOffEnable
+        false                                       // holdOffEnable
     },
 
     // Меню РАЗВЁРТКА
@@ -67,7 +67,7 @@ const Settings Settings::defaultSettings =
         SampleType::Real,                           // sampleType
         FunctionTime::Time,                         // timeDivXPos
         LinkingTShift::Time,                        // linkingTShift
-        SampleType::Real,                           // sampleTypeOld
+        SampleType::Real                            // sampleTypeOld
     },
 
     // Меню КУРСОРЫ
@@ -87,7 +87,7 @@ const Settings Settings::defaultSettings =
         { 60, 140 }},                                                                                   // Канал 2
         {                                                                                               // posCurT[Chan::Size][2]
         { 80, 200 },                                                                                    // Канал 1
-        { 80, 200 }},                                                                                   // Канал 2
+        { 80, 200 }}                                                                                    // Канал 2
     },
 
     // Меню ПАМЯТЬ
@@ -101,7 +101,7 @@ const Settings Settings::defaultSettings =
         {},                                             // fileName[MAX_SYMBOLS_IN_FILE_NAME]
         ModeShowIntMem::Saved,                          // modeShowIntMem
         FileNamingMode::Mask,                           // fileNamingMode
-        {},                                             // fileNameMask[MAX_SYMBOLS_IN_FILE_NAME]
+        {}                                              // fileNameMask[MAX_SYMBOLS_IN_FILE_NAME]
     },
 
     // Настройки математики
@@ -118,7 +118,7 @@ const Settings Settings::defaultSettings =
         ModeRegSet::Range,          // modeRegSet
         Range::_1V,                 // range
         Divider::_1,                // divider
-        RShift::ZERO,               // rShift
+        RShift::ZERO                // rShift
     },
     
     // Меню ИЗМЕРЕНИЯ
@@ -135,7 +135,7 @@ const Settings Settings::defaultSettings =
             Measure::Type::Period,              Measure::Type::Freq,        Measure::Type::TimeNarastaniya, Measure::Type::TimeSpada,
             Measure::Type::DurationPlus
         },
-        Measure::Type::Freq,                // marked
+        Measure::Type::Freq                 // marked
     },
 
     // Меню СЕРВИС
@@ -152,7 +152,7 @@ const Settings Settings::defaultSettings =
         FreqMeterModeView::Frequency,  // modeView
         FreqMeterTimeCounting::_1s,    // timeCounting
         FreqMeterFreqClc::_1MHz,       // freqClc
-        FreqMeterNumberPeriods::_10,   // numberPeriods
+        FreqMeterNumberPeriods::_10    // numberPeriods
     },
     
     // Настройки тестер-компонента
@@ -161,8 +161,8 @@ const Settings Settings::defaultSettings =
         TesterPolarity::Positive,   // polarity
         TesterStepU::_100mV,        // stepU
         TesterStepI::_4mA,          // stepI
-        ENumAverage::_1,   // smooth
-        TesterViewMode::Lines,      // viewMode
+        ENumAverage::_1,            // smooth
+        TesterViewMode::Lines       // viewMode
     },
     
     // Настройки меню
@@ -176,7 +176,7 @@ const Settings Settings::defaultSettings =
             0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f,
             0x7f, 0x7f, 0x7f, 0x7f
         },
-        {},                             // menu_currentSubPage[Page_NumPages];
+        {}                              // menu_currentSubPage[Page_NumPages];
     },
     
     // Несбрасываемые настройки калибровки
@@ -189,7 +189,7 @@ const Settings Settings::defaultSettings =
         0,                              // nrst_numAveForRand
         0,                              // nrst_numSmoothForRand
         {},                             // nrst_rShiftAdd[Chan::Size][Range::Size][2]
-        0,                              // nrst_correctionTime
+        0                               // nrst_correctionTime
     },
     
     // Настройки мультиметра
@@ -200,7 +200,7 @@ const Settings Settings::defaultSettings =
         MultimeterRangeAC::_2V,             // rangeVV
         MultimeterRangeCurrent::_2A,        // rangeCurrentAC
         MultimeterRangeCurrent::_2A,        // rangeCurrentDC
-        MultimeterRangeResistance::_10M,    // rangeResist
+        MultimeterRangeResistance::_10M     // rangeResist
     },
     
     // Настройки регистратора
@@ -214,7 +214,7 @@ const Settings Settings::defaultSettings =
         RecorderAxis::X,                        // axisZoom
         RecorderScaleX(RecorderScaleX::_100ms), // scaleX
         0,                                      // currentCursor
-        { Range::_1V, Range::_1V },             // range
+        { Range::_1V, Range::_1V }              // range
     },
 
     // Меню ОТЛАДКА

@@ -39,6 +39,8 @@
 #define SET_CALIBR_MODE_A       (SET_CALIBR_MODE(Chan::A))
 #define CALIBR_MODE_B           (SET_CALIBR_MODE(Chan::B))
 
+#define DIVIDER_ABS(c)          ((set.ch.divider[c] == Divider::_1) ? 1 : 10)
+
 /// Режим калибровки.
 struct CalibrationMode
 {
@@ -70,11 +72,11 @@ struct SettingsChannel
     Osci::Settings::Range::E       range[Chan::Size];      ///< Масштаб канала по вертикали
     FPGA::Settings::ModeCouple::E  couple[Chan::Size];     ///< Связь по входу
     bool                           enabled[Chan::Size];    ///< Включен/выключен канал
-    int8                           balanceShiftADC[2];     ///< Добавочное смещение для балансировки АЦП.
-    FPGA::Settings::Bandwidth      bandwidth[2];           ///< Ограничение полосы.
+    int8                           balanceShiftADC[2];     ///< Добавочное смещение для балансировки АЦП
+    FPGA::Settings::Bandwidth      bandwidth[2];           ///< Ограничение полосы
     bool                           inverse[2];
-    Divider::E                     divider[2];             ///< Множитель.
-    CalibrationMode::E             calibrationMode[2];     ///< Режим калибровки.
+    Divider::E                     divider[2];             ///< Множитель
+    CalibrationMode::E             calibrationMode[2];     ///< Режим калибровки
 };
 
 

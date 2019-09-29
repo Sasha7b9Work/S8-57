@@ -100,7 +100,7 @@ DEF_CHOICE_2( cDividerA,                                                        
     "",
     "1X",
     "10X",
-    divider[0], &PageChannelA::self, Item::Active, Choice::Changed, Choice::AfterDraw
+    set.ch.divider[Chan::A], &PageChannelA::self, Item::Active, Choice::Changed, Choice::AfterDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -192,7 +192,7 @@ DEF_CHOICE_2( cDividerB,                                                        
     "",
     "1X",
     "10X",
-    divider[1], &PageChannelB::self, Item::Active, Choice::Changed, Choice::AfterDraw
+    set.ch.divider[Chan::B], &PageChannelB::self, Item::Active, Choice::Changed, Choice::AfterDraw
     )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

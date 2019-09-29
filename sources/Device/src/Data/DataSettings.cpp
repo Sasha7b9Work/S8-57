@@ -27,8 +27,8 @@ void DataSettings::Fill(uint8 *_dataA, uint8 * _dataB)
     TRIGLEV_A(this) = SET_TRIGLEV_A;
     TRIGLEV_B(this) = SET_TRIGLEV_A;
     Lval_PEAKDET(this) = SET_PEAKDET;
-    Lval_DIVIDER_A(this) = (uint)divider[Chan::A];
-    Lval_DIVIDER_B(this) = (uint)divider[Chan::B];
+    Lval_DIVIDER_A(this) = (uint)set.ch.divider[Chan::A];
+    Lval_DIVIDER_B(this) = (uint)set.ch.divider[Chan::B];
     TIME_MS_DS(this) = 0;                        // Ёто важно дл€ режима поточеного вывода. ќзначает, что полный сигнал ещЄ не считан
     ENUM_POINTS(this) = FPGA_ENUM_POINTS;
 }
