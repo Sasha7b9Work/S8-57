@@ -32,7 +32,7 @@ void Osci::Display::Accumulator::NextFrame()
         prevFrame = CurrentFrame();
 
         numFrames++;
-        if (numFrames >= NUM_ACCUM)
+        if (numFrames >= set.disp.ENumAccum)
         {
             Osci::Display::SetFlagRedraw();
             numFrames = 0;

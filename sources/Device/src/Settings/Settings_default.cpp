@@ -20,7 +20,7 @@ const Settings Settings::defaultSettings =
         ENumMinMax::_1,                                             // ENumMinMax
         0,                                                          // not used
         ENumAverage::_1,                                   // ENumAverage
-        Display::ENumAccum::_1,                                     // ENumAccum
+        ENumAccum::_1,                                     // ENumAccum
         Display::ModeAccumulation::NoReset,                         // modeAccumulation
         Display::ENumSmoothing(Display::ENumSmoothing::Disable),    // ENumSmoothing
         Display::ENumSignalsInSec(Display::ENumSignalsInSec::_25),  // ENumSignalsInSec

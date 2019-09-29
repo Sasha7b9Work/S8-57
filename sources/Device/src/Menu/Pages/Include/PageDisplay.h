@@ -29,13 +29,9 @@
 #define ACCUMULATION                (set.disp.modeAccumulation)
 #define ACCUMULATION_IS_ENABLED     (ACCUMULATION == ::Display::ModeAccumulation::Reset)
 
-#define ENUM_ACCUM                  (set.disp.ENumAccum)
 #define NUM_ACCUM                   (1 << (int)ENUM_ACCUM)                   /* Возвращает число накоплений */
 
-#define MODE_AVE                    (set.disp.modeAveraging)
-#define NUM_AVE                     (1 << (int)ENUM_AVE)
 #define NUM_AVE_MAX                 256
-#define IN_AVERAGING_MODE           (ENUM_AVE > Display::ENumAverage::_1 && (!IN_P2P_MODE))
 
 #define ENUM_SIGNALS_IN_SEC         (set.disp.ENumSignalsInSec)
 
@@ -96,26 +92,25 @@ struct ENumAverage
     } value;
 };
 
+/// Количество накоплений.
+struct ENumAccum
+{
+    enum E
+    {
+        _1,
+        _2,
+        _4,
+        _8,
+        _16,
+        _32,
+        _64,
+        _128,
+        _Infinity
+    } value;
+};
+
 namespace Display
 {
-
-    /// Количество накоплений.
-    struct ENumAccum
-    {
-        enum E
-        {
-            _1,
-            _2,
-            _4,
-            _8,
-            _16,
-            _32,
-            _64,
-            _128,
-            _Infinity
-        } value;
-    };
-
     struct ModeAccumulation
     {
         enum E
@@ -180,9 +175,9 @@ struct SettingsDisplay
     ModeDrawSignal::E      modeDrawSignal;
     Background::E          background;                     ///< Цвет фона.
     ENumMinMax::E          ENumMinMax;                     ///< Перечисление количества измерений для определения минимумов и масимумов.
-    uint8                           notUsing0;
+    uint8                  notUsing0;
     ENumAverage::E         ENumAverage;           ///< Число усреднений сигнала.
-    Display::ENumAccum::E           ENumAccum;             ///< Число накоплений сигнала на экране.
+    ENumAccum::E           ENumAccum;             ///< Число накоплений сигнала на экране.
     Display::ModeAccumulation::E    modeAccumulation;      ///< Режим накопления сигналов.
     Display::ENumSmoothing          ENumSmoothing;         ///< Перечисление количества точек для скользящего фильтра.
     Display::ENumSignalsInSec       ENumSignalsInSec;      ///< Перечисление числа считываний сигнала в секунда.

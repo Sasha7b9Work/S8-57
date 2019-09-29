@@ -34,7 +34,7 @@ DEF_CHOICE_9( cNumber,                                                          
     "64",
     "128",
     "Бесконечность",
-    ENUM_ACCUM, &PageDisplay::PageAccumulation::self, Item::Active, Choice::Changed, Choice::AfterDraw
+    set.disp.ENumAccum, &PageDisplay::PageAccumulation::self, Item::Active, Choice::Changed, Choice::AfterDraw
 )
 
 
