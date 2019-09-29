@@ -6,17 +6,6 @@
 #include "Multimeter/Multimeter.h"
 
 
-struct FuncModeDraw
-{
-    enum E
-    {
-        Disable,
-        Separate,
-        Together
-    } value;
-    explicit FuncModeDraw(E v) : value(v) {};
-};
-
 struct ScaleFFT
 {
     enum E
@@ -65,36 +54,6 @@ struct MaxDBFFT
 
         return arrayMAX_DB_FOR_FFT[static_cast<int>(maxDB)];
     }
-};
-
-struct MathFunction
-{
-    enum E
-    {
-        Sum,
-        Mul
-    } value;
-    explicit MathFunction(E v) : value(v) {};
-};
-
-struct ModeRegSet
-{
-    enum E
-    {
-        Range,
-        RShift
-    } value;
-    explicit ModeRegSet(E v) : value(v) {};
-};
-
-struct SettingsMath
-{ //-V802
-    FuncModeDraw::E modeDraw;       ///< Раздельный или общий дисплей в режиме математической функции.
-    MathFunction::E function;
-    ModeRegSet::E   modeRegSet;     ///< Функция ручки УСТАНОВКА - масштаб по времени или смещение по вертикали.
-    int8            divider;
-    uint16          rShift;
-    Range::E        range;
 };
 
 struct SettingsFFT
