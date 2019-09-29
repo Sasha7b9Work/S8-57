@@ -217,7 +217,7 @@ void Grid::DrawGridSignal(int left, int top, int width, int height)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Grid::DrawGridSpectrum()
 {
-    if (SCALE_FFT_IS_LOG)
+    if (set.math.scaleFFT == ScaleFFT::Log)
     {
         static const int nums[] = {4, 6, 8};
         static pString strs[] = {"0", "-10", "-20", "-30", "-40", "-50", "-60", "-70"};

@@ -16,10 +16,6 @@
 #define FFT_ENABLED                 (set.math.enableFFT)
 #define MATH_ENABLED                (FUNC_MODE_DRAW_IS_ENABLED || FFT_ENABLED)
 
-#define SCALE_FFT                   (set.math.scaleFFT)
-#define SCALE_FFT_IS_LOG            (SCALE_FFT == ScaleFFT::Log)
-#define SCALE_FFT_IS_LINEAR         (SCALE_FFT == ScaleFFT::Linear)
-
 #define MATH_FUNC                   (set.math.function)
 
 #define FUNC_MODE_DRAW              (set.math.modeDraw)

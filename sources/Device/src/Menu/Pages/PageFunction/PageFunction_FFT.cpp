@@ -25,7 +25,7 @@ DEF_CHOICE_2( cScale,                                                           
     "Задаёт масштаб вывода спектра - линейный или логарифмический",
     "Логарифм",
     "Линейная",
-    SCALE_FFT, &PageFFT::self, IsActive_Scale, Choice::Changed, Choice::AfterDraw
+    set.math.scaleFFT, &PageFFT::self, IsActive_Scale, Choice::Changed, Choice::AfterDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -62,7 +62,7 @@ DEF_CHOICE_4( cWindow,                                                          
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static bool IsActive_Range()
 {
-    return FFT_ENABLED && SCALE_FFT_IS_LOG;
+    return FFT_ENABLED && (set.math.scaleFFT == ScaleFFT::Log);
 }
 
 DEF_CHOICE_3( cRange,                                                                                                                                   //--- ФУНКЦИЯ - СПЕКТР - Диапазон ---
