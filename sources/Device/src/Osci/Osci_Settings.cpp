@@ -383,7 +383,7 @@ void RShift::Draw(Chan::E ch)
 
     int delta = (SET_RSHIFT(ch) - ZERO) / STEP_RSHIFT;
 
-    if (FFT_ENABLED)
+    if (set.fft.enabled)
     {
         delta /= 2;
     }

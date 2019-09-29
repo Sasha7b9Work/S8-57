@@ -19,7 +19,7 @@ using namespace Osci::Settings;
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void OnPress_Screen()
 {
-    if (FFT_ENABLED)
+    if (set.fft.enabled)
     {
         Display::ShowWarning(Warning::ImpossibleEnableMathFunction);
     }
@@ -195,12 +195,12 @@ DEF_GRAPH_BUTTON( bRangeB,                                                      
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static bool IsActive_Math()
 {
-    return !FFT_ENABLED;
+    return !set.fft.enabled;
 }
 
 static void OnOpenClose_Math(bool)
 {
-    if (FFT_ENABLED)
+    if (set.fft.enabled)
     {
         Display::ShowWarning(Warning::ImpossibleEnableMathFunction);
     }

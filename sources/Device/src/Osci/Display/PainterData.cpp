@@ -204,7 +204,7 @@ static void DRAW_SPECTRUM(const uint8 *dataIn, int numPoints, Chan::E ch)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void DrawSpectrum()
 {
-    if (!FFT_ENABLED)
+    if (!set.fft.enabled)
     {
         return;
     }
@@ -299,7 +299,7 @@ static void DrawChannel(Chan::E ch)
 
     float scale = (float)Grid::Height() / (VALUE::MAX - VALUE::MIN);
 
-    if (FFT_ENABLED)
+    if (set.fft.enabled)
     {
         center -= (Grid::Bottom() - Grid::Top()) / 4;
         scale /= 2.0F;

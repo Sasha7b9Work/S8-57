@@ -120,7 +120,6 @@ const Settings Settings::defaultSettings =
     // Настройки математики
     {
         FuncModeDraw::Disable,      // modeDraw
-        false,                      // enableFFT
         ScaleFFT::Log,              // scaleFFT
         SourceFFT::Both,            // sourceFFT
         WindowFFT::Hamming,         // windowFFT
@@ -134,6 +133,7 @@ const Settings Settings::defaultSettings =
     },
 
     {
+        false,                      // enabled
         { 50, 50 }                  // posCur[2]
     },
     

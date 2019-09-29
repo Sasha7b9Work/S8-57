@@ -11,13 +11,13 @@ DEF_CHOICE_2( cView,                                                            
     "Включает и выключает отображение спектра",
     DISABLE_RU,
     ENABLE_RU,
-    FFT_ENABLED, &PageFFT::self, Item::Active, Choice::Changed, Choice::AfterDraw
+    set.fft.enabled, &PageFFT::self, Item::Active, Choice::Changed, Choice::AfterDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static bool IsActive_Scale()
 {
-    return FFT_ENABLED;
+    return set.fft.enabled;
 }
 
 DEF_CHOICE_2( cScale,                                                                                                                                      //--- ФУНКЦИЯ - СПЕКТР - Шкала ---
@@ -31,7 +31,7 @@ DEF_CHOICE_2( cScale,                                                           
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static bool IsActive_Source()
 {
-    return FFT_ENABLED;
+    return set.fft.enabled;
 }
 
 DEF_CHOICE_3( cSource,                                                                                                                                  //--- ФУНКЦИЯ - СПЕКТР - Источник ---
@@ -46,7 +46,7 @@ DEF_CHOICE_3( cSource,                                                          
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static bool IsActive_Window()
 {
-    return FFT_ENABLED;
+    return set.fft.enabled;
 }
 
 DEF_CHOICE_4( cWindow,                                                                                                                                      //--- ФУНКЦИЯ - СПЕКТР - Окно ---
@@ -62,7 +62,7 @@ DEF_CHOICE_4( cWindow,                                                          
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static bool IsActive_Range()
 {
-    return FFT_ENABLED && (set.math.scaleFFT == ScaleFFT::Log);
+    return set.fft.enabled && (set.math.scaleFFT == ScaleFFT::Log);
 }
 
 DEF_CHOICE_3( cRange,                                                                                                                                   //--- ФУНКЦИЯ - СПЕКТР - Диапазон ---
@@ -94,7 +94,7 @@ DEF_GRAPH_BUTTON( bCursors_Source,                                              
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 static bool IsActive_Cursors()
 {
-    return FFT_ENABLED;
+    return set.fft.enabled;
 }
 
 static bool OnArrows_FFT_Cursors(const KeyEvent &event)

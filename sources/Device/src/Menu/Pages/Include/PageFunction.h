@@ -13,8 +13,6 @@
 #define WINDOW_FFT_IS_HANN          (WINDOW_FFT == WindowFFT::Hann)
 #define MAX_DB_FFT                  (set.math.FFTmaxDB)
 #define MAX_DB_FOR_FFT              FFTmaxDB::MaxDBforFFT(MAX_DB_FFT)
-#define FFT_ENABLED                 (set.math.enableFFT)
-#define MATH_ENABLED                (FUNC_MODE_DRAW_IS_ENABLED || FFT_ENABLED)
 
 #define MATH_CURRENT_CUR            (set.math.currentCursor)
 #define MATH_CURRENT_CUR_IS_0       (MATH_CURRENT_CUR == 0)
@@ -109,7 +107,6 @@ struct ModeRegSet
 struct SettingsMath
 {
     FuncModeDraw::E modeDraw;             ///< Раздельный или общий дисплей в режиме математической функции.
-    bool            enableFFT;
     ScaleFFT::E     scaleFFT;
     SourceFFT::E    sourceFFT;
     WindowFFT::E    windowFFT;
@@ -124,6 +121,7 @@ struct SettingsMath
 
 struct SettingsFFT
 {
+    bool            enabled;
     uint8           posCur[2];            ///< Позиция курсора спектра. Изменяется 0...256.
 };
 
