@@ -40,8 +40,8 @@ static void Draw_Balance_Mode(int, int)
         {0, set.ch[Chan::B].balanceShiftADC, (int8)NRST_BALANCE_ADC_B}
     };
 
-    shiftADCA = shift[Chan::A][NRST_BALANCE_ADC_TYPE];
-    shiftADCB = shift[Chan::B][NRST_BALANCE_ADC_TYPE];
+    shiftADCA = shift[Chan::A][set.nrst.balanceADCtype];
+    shiftADCB = shift[Chan::B][set.nrst.balanceADCtype];
 }
 
 static void OnChanged_Balance_Mode(bool)
@@ -55,14 +55,13 @@ DEF_CHOICE_3( cBalance_Mode,                                                    
     DISABLE_RU,
     "Реальный",
     "Ручной",
-    NRST_BALANCE_ADC_TYPE,
-    &PageDebug::PageADC::PageBalance::self, Item::Active, OnChanged_Balance_Mode, Draw_Balance_Mode
+    set.nrst.balanceADCtype, &PageDebug::PageADC::PageBalance::self, Item::Active, OnChanged_Balance_Mode, Draw_Balance_Mode
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static bool IsActive_ShiftAB()
 {
-    return NRST_BALANCE_ADC_TYPE_IS_HAND;
+    return (set.nrst.balanceADCtype == BalanceADC::Hand);
 }
 
 static void OnChanged_ShiftA()
@@ -407,12 +406,12 @@ static void DebugShowSetInfo_Draw()
 
     y += dY * 3;
 
-    DRAW_FORMAT("correctionTime : %d", NRST_CORRECTION_TIME); //-V2528
+    DRAW_FORMAT("correctionTime : %d", set.nrst.correctionTime); //-V2528
     DRAW_FORMAT2("balanceADC : %d %d", NRST_BALANCE_ADC_A, NRST_BALANCE_ADC_B); //-V2528
-    DRAW_FORMAT("numAveForRand : %d", NRST_NUM_AVE_FOR_RAND); //-V2528
+    DRAW_FORMAT("numAveForRand : %d", set.nrst.numAveForRand); //-V2528
 
     pString s[3] = {"выключено", "настроено автоматически", "задано вручную"};
-    DRAW_FORMAT("balanceADCtype : %s", (NRST_BALANCE_ADC_TYPE < 3 ? s[NRST_BALANCE_ADC_TYPE] : "!!! неправильное значение !!!")); //-V547 //-V2528
+    DRAW_FORMAT("balanceADCtype : %s", (set.nrst.balanceADCtype < 3 ? s[set.nrst.balanceADCtype] : "!!! неправильное значение !!!")); //-V547 //-V2528
     DRAW_FORMAT("stretchADCtype : %s", (NRST_STRETCH_ADC_TYPE < 3 ? s[NRST_STRETCH_ADC_TYPE] : "!!! неправильное значение !!!")); //-V547 //-V2528
 
     x = String("stretchADC :").Draw(x0, INC_Y) + 5; //-V2528
@@ -436,7 +435,7 @@ static void DebugShowSetInfo_Draw()
     DRAW_STRETCH(AddStretch2V);
     */
 
-    DRAW_FORMAT("numSmoothForRand : %d", NRST_NUM_SMOOTH_FOR_RAND); //-V2528
+    DRAW_FORMAT("numSmoothForRand : %d", set.nrst.numSmoothForRand); //-V2528
 
     Menu::Draw();
     Painter::EndScene();

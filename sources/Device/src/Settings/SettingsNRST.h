@@ -28,10 +28,6 @@ struct StretchADC
 };
 
 
-#define NRST_CORRECTION_TIME                (set.nrst.correctionTime)
-#define NRST_NUM_SMOOTH_FOR_RAND            (set.nrst.numSmoothForRand)
-#define NRST_NUM_AVE_FOR_RAND               (set.nrst.numAveForRand)
-
 #define NRST_RSHIFT_ADD(ch, range, mode)    (set.nrst.rShiftAdd[ch][range][mode])
 #define NRST_RSHIFT_ADD_A(range, mode)      (NRST_RSHIFT_ADD(Chan::A, range, mode))
 #define NRST_RSHIFT_ADD_B(range, mode)      (NRST_RSHIFT_ADD(Chan::B, range, mode))
@@ -47,9 +43,6 @@ struct StretchADC
 #define NRST_STRETCH_ADC(ch, type)          (set.nrst.StretchADC[ch][type])
 #define NRST_STRETCH_ADC_A(type)            (NRST_STRETCH_ADC(Chan::A, type))
 #define NRST_STRETCH_ADC_B(type)            (NRST_STRETCH_ADC(Chan::B, type))
-
-#define NRST_BALANCE_ADC_TYPE               (set.nrst.balanceADCtype)
-#define NRST_BALANCE_ADC_TYPE_IS_HAND       (NRST_BALANCE_ADC_TYPE == BalanceADC::Hand)
 
 #define NRST_BALANCE_ADC(ch)                (set.nrst.balanceADC[ch])
 #define NRST_BALANCE_ADC_A                  (NRST_BALANCE_ADC(Chan::A))
