@@ -34,7 +34,7 @@ void Osci::Display::BottomPart::Draw(int x0, int y0)
 
     Color::FILL.SetAsCurrent();
     // Пиковый детектор
-    if (!SET_PEAKDET_DIS)
+    if (set.time.peakDet != PeakDetMode::Disabled)
     {
         Char('\x12').Draw(x0 + 38, y0 + 11);
         Char('\x13').Draw(x0 + 46, y0 + 11);

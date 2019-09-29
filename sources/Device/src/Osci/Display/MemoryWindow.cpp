@@ -55,7 +55,7 @@ void Osci::Display::MemoryWindow::Draw()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void DrawDataInRect(int x, int y, int width, int height, const uint8 *data, uint length)
 {
-    if (SET_PEAKDET_EN)
+    if (set.time.peakDet == PeakDetMode::Enabled)
     {
         length *= 2;
     }

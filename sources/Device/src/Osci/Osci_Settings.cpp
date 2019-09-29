@@ -81,7 +81,7 @@ void TBase::Change(int delta)
     }
     else
     {
-        if (SET_PEAKDET_EN &&                                   // Если вклюён режим пикового детектора
+        if ((set.time.peakDet == PeakDetMode::Enabled) &&                                   // Если вклюён режим пикового детектора
             set.time.base == TBase::MIN_PEAK_DET)                   // и установлен масштаб по времени, соответствующий минмальному в режиме пикового детектора :
         {
             ::Display::ShowWarning(Warning::EnabledPeakDet);    // выводим сообщение об этом
@@ -165,7 +165,7 @@ int TPos::InBytes()
         {{0,  8192, 16382}, {0,  8192, 16382}},
         {{0, 16384, 32766}, {0, 16384, 32766}}
     };
-    return m[(int)set.mem.enumPoints][SET_PEAKDET][value];
+    return m[(int)set.mem.enumPoints][set.time.peakDet][value];
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

@@ -243,7 +243,7 @@ bool FPGA::ReadDataChanenl(Chan::E ch, uint8 data[FPGA::MAX_NUM_POINTS])
         *p = *addr0;    // Первая точка почему-то неправильная читается. Просто откидываем её.
         *p = *addr1;    // -V519
 
-        if (SET_PEAKDET_EN)
+        if (set.time.peakDet == PeakDetMode::Enabled)
         {
             for (uint i = 0; i < numPoints; i++)
             {

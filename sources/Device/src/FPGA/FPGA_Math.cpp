@@ -283,7 +283,7 @@ void FPGA::Math::CalculateFFT(float *dataR, int numPoints, float *result, float 
     *freq0 = scale * set.fft.posCur[0] * koeff;
     *freq1 = scale * set.fft.posCur[1] * koeff;
 
-    if (SET_PEAKDET)
+    if (set.time.peakDet)
     {
         *freq0 *= 2;
         *freq1 *= 2;

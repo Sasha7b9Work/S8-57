@@ -26,7 +26,7 @@ void DataSettings::Fill(uint8 *_dataA, uint8 * _dataB)
     Lval_COUPLE_B(this) = set.ch[Chan::B].couple;
     TRIGLEV_A(this) = set.trig.lev[Chan::A];
     TRIGLEV_B(this) = set.trig.lev[Chan::B];
-    Lval_PEAKDET(this) = SET_PEAKDET;
+    Lval_PEAKDET(this) = set.time.peakDet;
     Lval_DIVIDER_A(this) = (uint)set.ch[Chan::A].divider;
     Lval_DIVIDER_B(this) = (uint)set.ch[Chan::B].divider;
     TIME_MS_DS(this) = 0;                        // Ёто важно дл€ режима поточеного вывода. ќзначает, что полный сигнал ещЄ не считан

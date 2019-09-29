@@ -477,7 +477,7 @@ static void WriteCursors()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void DrawPeakDet(int x, int y)
 {
-    if (SET_PEAKDET_EN)
+    if (set.time.peakDet == PeakDetMode::Enabled)
     {
         Font::SetCurrent(Font::Type::_UGO2);
         Char(SYMBOL_PEAK_DET_LEFT).Draw(x, y, Color::FILL);

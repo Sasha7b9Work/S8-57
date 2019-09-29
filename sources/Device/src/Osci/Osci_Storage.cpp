@@ -405,7 +405,7 @@ float DataP2P::TimePointMS(uint numPoint) const
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void DataP2P::AddPoints(BitSet16 a, BitSet16 b)
 {
-    if (SET_PEAKDET_EN)
+    if (set.time.peakDet == PeakDetMode::Enabled)
     {
         data.dataA[pointerToByte] = a.byte0;
         data.dataB[pointerToByte] = b.byte0;

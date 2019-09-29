@@ -52,7 +52,7 @@ void FPGA::HAL::LoadRegUPR()
 {
     uint8 data = 0;
 
-    if (SET_PEAKDET_EN || Device::State::InModeRecorder())
+    if ((set.time.peakDet == PeakDetMode::Enabled) || Device::State::InModeRecorder())
     {
         data |= 1 << BIT_UPR_PEAK;
     }

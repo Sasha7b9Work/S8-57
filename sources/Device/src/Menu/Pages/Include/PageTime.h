@@ -1,9 +1,6 @@
 #pragma once
 #include "Osci/Osci_Settings.h"
 
-#define SET_PEAKDET         (set.time.peakDet)
-#define SET_PEAKDET_EN      (SET_PEAKDET == PeakDetMode::Enabled)
-#define SET_PEAKDET_DIS     (SET_PEAKDET == PeakDetMode::Disabled)
 
 #define TPOS                (set.time.TPos)
 #define TPOS_IS_RIGHT       (TPOS == TPos::Right)

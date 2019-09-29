@@ -193,7 +193,7 @@ void FPGA::Reset()
 uint FPGA::BytesInChannel()
 {
     ENumPointsFPGA points(set.mem.enumPoints);
-    return points.BytesInChannel(SET_PEAKDET);
+    return points.BytesInChannel(set.time.peakDet);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

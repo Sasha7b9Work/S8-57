@@ -33,13 +33,13 @@ static void DrawSetName();  // Эта функция рисует, когда нужно задать имя файла 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static bool IsActive_Points()
 {
-    return SET_PEAKDET_DIS;
+    return (set.time.peakDet == PeakDetMode::Disabled);
 }
 
 void PageMemory::OnChanged_Points(bool active)
 {
     // Если включен пиковый детектор, то не можем переключать память
-    if (SET_PEAKDET_EN && !active)
+    if ((set.time.peakDet == PeakDetMode::Enabled) && !active)
     {
         Display::ShowWarning(Warning::WrongModePeackDet);
         return;
