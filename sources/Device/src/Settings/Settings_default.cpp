@@ -85,22 +85,22 @@ const Settings Settings::defaultSettings =
 
     // Меню КУРСОРЫ
     {
-        false,                                                                                          // showCursors
-        {Osci::Measurements::Cursors::LookMode::None, Osci::Measurements::Cursors::LookMode::None},     // lookMode[2]
-        true,                                                                                           // showFreq
-        Osci::Measurements::Cursors::Active::None,                                                      // active
-        Chan::A,                                                                                        // source
-        {Osci::Measurements::Cursors::Control::Disable, Osci::Measurements::Cursors::Control::Disable}, // cntrlU[Chan::Size]
-        {Osci::Measurements::Cursors::Control::Disable, Osci::Measurements::Cursors::Control::Disable}, // cntrlT[Chan::Size]
-        Osci::Measurements::Cursors::Movement::Pixels,                                                  // movement
-        {80,  80},                                                                                      // deltaU100percents[2]
-        {120, 120},                                                                                     // deltaT100percents[2]
-        {                                                                                               // posCurU[Chan::Size][2]
-        { 60, 140 },                                                                                    // Канал 1
-        { 60, 140 }},                                                                                   // Канал 2
-        {                                                                                               // posCurT[Chan::Size][2]
-        { 80, 200 },                                                                                    // Канал 1
-        { 80, 200 }}                                                                                    // Канал 2
+        false,                                              // showCursors
+        {CursorsLookMode::None, CursorsLookMode::None},     // lookMode[2]
+        true,                                               // showFreq
+        CursorsActive::None,                                // active
+        Chan::A,                                            // source
+        {CursorsControl::Disable, CursorsControl::Disable}, // cntrlU[Chan::Size]
+        {CursorsControl::Disable, CursorsControl::Disable}, // cntrlT[Chan::Size]
+        Osci::Measurements::Cursors::Movement::Pixels,      // movement
+        {80,  80},                                          // deltaU100percents[2]
+        {120, 120},                                         // deltaT100percents[2]
+        {                                                   // posCurU[Chan::Size][2]
+        { 60, 140 },                                        // Канал 1
+        { 60, 140 }},                                       // Канал 2
+        {                                                   // posCurT[Chan::Size][2]
+        { 80, 200 },                                        // Канал 1
+        { 80, 200 }}                                        // Канал 2
     },
 
     // Меню ПАМЯТЬ

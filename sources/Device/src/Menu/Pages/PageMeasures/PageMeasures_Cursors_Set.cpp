@@ -19,16 +19,16 @@ const float PageMeasuresCursors::PageSet::MAX_POS_T = 280.0F;
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 /// Рассчитывает условия отрисовки УГО малых кнопок управления выбором курсорами.
-void CalculateConditions(int16 pos0, int16 pos1, Cursors::Control::E cursCntrl, bool *condTopLeft, bool *condBottomRight)
+void CalculateConditions(int16 pos0, int16 pos1, CursorsControl::E cursCntrl, bool *condTopLeft, bool *condBottomRight)
 {
     bool zeroLessFirst = pos0 < pos1;
-    *condTopLeft = (cursCntrl == Cursors::Control::_1_2) ||                    // если управление двумя курсорами одновременно
-        (cursCntrl == Cursors::Control::_1 && zeroLessFirst) ||     // или управление первым курсором и позиция первого меньше, чем позиция второго
-        (cursCntrl == Cursors::Control::_2 && !zeroLessFirst);      // или управление вторым курсором и позиция второго курсора меньше
+    *condTopLeft = (cursCntrl == CursorsControl::_1_2) ||         // если управление двумя курсорами одновременно
+        (cursCntrl == CursorsControl::_1 && zeroLessFirst) ||     // или управление первым курсором и позиция первого меньше, чем позиция второго
+        (cursCntrl == CursorsControl::_2 && !zeroLessFirst);      // или управление вторым курсором и позиция второго курсора меньше
 
-    *condBottomRight = (cursCntrl == Cursors::Control::_1_2) ||
-        (cursCntrl == Cursors::Control::_1 && !zeroLessFirst) ||
-        (cursCntrl == Cursors::Control::_2 && zeroLessFirst);
+    *condBottomRight = (cursCntrl == CursorsControl::_1_2) ||
+        (cursCntrl == CursorsControl::_1 && !zeroLessFirst) ||
+        (cursCntrl == CursorsControl::_2 && zeroLessFirst);
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -114,7 +114,7 @@ void PageMeasuresCursors::PageSet::OnPress_T()
     {
         IncCursCntrlT(CURS_SOURCE);
     }
-    CURS_ACTIVE = Cursors::Active::T;
+    CURS_ACTIVE = CursorsActive::T;
 }
 
 static void Draw_T(int x, int y)
@@ -211,7 +211,7 @@ void PageMeasuresCursors::PageSet::OnPress_U()
     {
         IncCursCntrlU(CURS_SOURCE);
     }
-    CURS_ACTIVE = Cursors::Active::U;
+    CURS_ACTIVE = CursorsActive::U;
 }
 
 static void Draw_U(int x, int y)

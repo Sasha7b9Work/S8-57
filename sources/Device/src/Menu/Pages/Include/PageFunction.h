@@ -109,22 +109,6 @@ struct SettingsFFT
     uint8           cursor;         ///< Определяет, каким курсором спектра управляет ручка УСТАНОВКА.
 };
 
-struct SettingsCursors
-{
-    bool                                     showCursors;             ///< Показывать ли курсоры.
-    Osci::Measurements::Cursors::LookMode::E lookMode[2];             ///< Режимы слежения за курсорами для двух пар курсоров.
-    bool                                     showFreq;                ///< Установленное в true значение, что нужно показывать на экране 1/dT между курсорами.
-    Osci::Measurements::Cursors::Active::E   active;                  ///< Какие курсоры сейас активны.
-    Chan::E                                  source;                  ///< Источник - к какому каналу относятся курсоры.
-    Osci::Measurements::Cursors::Control::E  cntrlU[Chan::Size];      ///< Активные курсоры напряжения.
-    Osci::Measurements::Cursors::Control::E  cntrlT[Chan::Size];      ///< Активные курсоры времени.
-    Osci::Measurements::Cursors::Movement::E movement;                ///< Как перемещаться курсорам - по точкам или процентам.
-    float                                    deltaU100percents[2];    ///< Расстояние между курсорами напряжения для 100%, для обоих каналов.
-    float                                    deltaT100percents[2];    ///< Расстояние между курсорами времени для 100%, для обоих каналов.
-    float                                    posCurU[Chan::Size][2];  ///< Текущие позиции курсоров напряжения обоих каналов.
-    float                                    posCurT[Chan::Size][2];  ///< Текущие позиции курсоров времени обоих каналов.
-};
-
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 struct FreqMeterEnabled

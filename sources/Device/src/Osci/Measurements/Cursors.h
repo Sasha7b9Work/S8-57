@@ -13,9 +13,9 @@
 /// Какими курсорами управляет ручка УСТАНОВКА
 #define CURS_ACTIVE                 (set.curs.active)
 /// Ручка УСТАНОВКА управляет курсорами напряжения
-#define CURS_ACTIVE_U               (CURS_ACTIVE == Cursors::Active::U)
+#define CURS_ACTIVE_U               (CURS_ACTIVE == CursorsActive::U)
 /// Ручка УСТАНОВКА управляет курсорами времени
-#define CURS_ACTIVE_T               (CURS_ACTIVE == Cursors::Active::T)
+#define CURS_ACTIVE_T               (CURS_ACTIVE == CursorsActive::T)
 
 /// Позиция курсора напряжения
 #define CURsU_POS(ch, num)          (set.curs.posCurU[ch][num])
@@ -25,26 +25,26 @@
 /// Режим слежения за курсорами
 #define CURS_LOOK_MODE(ch)          (set.curs.lookMode[ch])
 /// Включено слежение за курсорами напряжения
-#define CURS_LOOK_U(ch)             (CURS_LOOK_MODE(ch) == Cursors::LookMode::Voltage)
+#define CURS_LOOK_U(ch)             (CURS_LOOK_MODE(ch) == CursorsLookMode::Voltage)
 /// Включено слежение за курсорами времени
-#define CURS_LOOK_T(ch)             (CURS_LOOK_MODE(ch) == Cursors::LookMode::Time)
+#define CURS_LOOK_T(ch)             (CURS_LOOK_MODE(ch) == CursorsLookMode::Time)
 /// Включено слежение за курсорами времени и напряжения
-#define CURS_LOOK_BOTH(ch)          (CURS_LOOK_MODE(ch) == Cursors::LookMode::Both)
+#define CURS_LOOK_BOTH(ch)          (CURS_LOOK_MODE(ch) == CursorsLookMode::Both)
 
 #define CURsU_CNTRL_CH(ch)          (set.curs.cntrlU[ch])
 #define CURsU_CNTRL                 (CURsU_CNTRL_CH(CURS_SOURCE))
-#define CURsU_CNTRL_1               (CURsU_CNTRL == Cursors::Control::_1)
-#define CURsU_CNTRL_2               (CURsU_CNTRL == Cursors::Control::_2)
-#define CURsU_CNTRL_1_2             (CURsU_CNTRL == Cursors::Control::_1_2)
-#define CURsU_DISABLED              (CURsU_CNTRL == Cursors::Control::Disable)
+#define CURsU_CNTRL_1               (CURsU_CNTRL == CursorsControl::_1)
+#define CURsU_CNTRL_2               (CURsU_CNTRL == CursorsControl::_2)
+#define CURsU_CNTRL_1_2             (CURsU_CNTRL == CursorsControl::_1_2)
+#define CURsU_DISABLED              (CURsU_CNTRL == CursorsControl::Disable)
 #define CURsU_ENABLED               (!CURsU_DISABLED)
 
 #define CURsT_CNTRL_CH(ch)          (set.curs.cntrlT[ch])
 #define CURsT_CNTRL                 (CURsT_CNTRL_CH(CURS_SOURCE))
-#define CURsT_CNTRL_1               (CURsT_CNTRL == Cursors::Control::_1)
-#define CURsT_CNTRL_2               (CURsT_CNTRL == Cursors::Control::_2)
-#define CURsT_CNTRL_1_2             (CURsT_CNTRL == Cursors::Control::_1_2)
-#define CURsT_DISABLED              (CURsT_CNTRL == Cursors::Control::Disable)
+#define CURsT_CNTRL_1               (CURsT_CNTRL == CursorsControl::_1)
+#define CURsT_CNTRL_2               (CURsT_CNTRL == CursorsControl::_2)
+#define CURsT_CNTRL_1_2             (CURsT_CNTRL == CursorsControl::_1_2)
+#define CURsT_DISABLED              (CURsT_CNTRL == CursorsControl::Disable)
 #define CURsT_ENABLED               (!CURsT_DISABLED)
 
 #define CURSORS_SHOW_FREQ           (set.curs.showFreq)
