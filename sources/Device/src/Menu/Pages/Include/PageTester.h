@@ -9,8 +9,7 @@ struct TesterControl
     {
         Voltage,
         Current
-    } value;
-    explicit TesterControl(E v) : value(v) {};
+    };
 };
 
 struct TesterPolarity
@@ -19,8 +18,7 @@ struct TesterPolarity
     {
         Positive,
         Negative
-    } value;
-    explicit TesterPolarity(E v) : value(v) {};
+    };
 };
 
 struct TesterStepU
@@ -29,8 +27,7 @@ struct TesterStepU
     {
         _100mV,
         _500mV
-    } value;
-    explicit TesterStepU(E v) : value(v) {};
+    };
 };
 
 struct TesterStepI
@@ -39,8 +36,7 @@ struct TesterStepI
     {
         _4mA,
         _20mA
-    } value;
-    explicit TesterStepI(E v) : value(v) {};
+    };
 };
 
 struct TesterViewMode
@@ -49,8 +45,7 @@ struct TesterViewMode
     {
         Lines,
         Points
-    } value;
-    explicit TesterViewMode(E v) : value(v) {};
+    };
 };
 
 struct SettingsTester
