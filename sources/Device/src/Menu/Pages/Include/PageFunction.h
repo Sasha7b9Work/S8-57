@@ -7,11 +7,6 @@
 #include "Multimeter/Multimeter.h"
 
 
-#define MAX_DB_FOR_FFT              FFTmaxDB::MaxDBforFFT(set.fft.maxDB)
-
-#define MATH_CURRENT_CUR            (set.math.currentCursor)
-#define MATH_CURRENT_CUR_IS_0       (MATH_CURRENT_CUR == 0)
-
 #define MATH_DIVIDER                (set.math.divider)
 
 #define MATH_MODE_REG_SET           (set.math.modeRegSet)
@@ -62,7 +57,7 @@ struct WindowFFT
     explicit WindowFFT(E v) : value(v) {};
 };
 
-struct FFTmaxDB
+struct MaxDBFFT
 {
     enum E
     {
@@ -70,8 +65,8 @@ struct FFTmaxDB
         _60,
         _80
     } value;
-    explicit FFTmaxDB(E v) : value(v) {};
-    static float MaxDBforFFT(FFTmaxDB::E maxDB)
+    explicit MaxDBFFT(E v) : value(v) {};
+    static float MaxDBforFFT(MaxDBFFT::E maxDB)
     {
         static const float arrayMAX_DB_FOR_FFT[] = { -40.0F, -60.0F, -80.0F };
 
@@ -101,10 +96,9 @@ struct ModeRegSet
 
 struct SettingsMath
 { //-V802
-    FuncModeDraw::E modeDraw;             ///< Раздельный или общий дисплей в режиме математической функции.
-    uint8           currentCursor;        ///< Определяет, каким курсором спектра управляет ручка УСТАНОВКА.
+    FuncModeDraw::E modeDraw;       ///< Раздельный или общий дисплей в режиме математической функции.
     MathFunction::E function;
-    ModeRegSet::E   modeRegSet;           ///< Функция ручки УСТАНОВКА - масштаб по времени или смещение по вертикали.
+    ModeRegSet::E   modeRegSet;     ///< Функция ручки УСТАНОВКА - масштаб по времени или смещение по вертикали.
     int8            divider;
     uint16          rShift;
     Range::E        range;
@@ -113,11 +107,12 @@ struct SettingsMath
 struct SettingsFFT
 {
     bool            enabled;
-    uint8           posCur[2];            ///< Позиция курсора спектра. Изменяется 0...256.
+    uint8           posCur[2];      ///< Позиция курсора спектра. Изменяется 0...256.
     ScaleFFT::E     scale;
     SourceFFT::E    source;
     WindowFFT::E    window;
-    FFTmaxDB::E     maxDB;
+    MaxDBFFT::E     maxDB;
+    uint8           cursor;         ///< Определяет, каким курсором спектра управляет ручка УСТАНОВКА.
 };
 
 struct SettingsCursors

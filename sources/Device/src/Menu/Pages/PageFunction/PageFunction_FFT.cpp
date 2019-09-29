@@ -77,12 +77,12 @@ DEF_CHOICE_3( cRange,                                                           
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void OnPress_Cursors_Source()
 {
-    MATH_CURRENT_CUR = (uint8)((MATH_CURRENT_CUR + 1) % 2);
+    set.fft.cursor = (uint8)((set.fft.cursor + 1) % 2);
 }
 
 static void Draw_Cursors_Source(int x, int y)
 {
-    String(MATH_CURRENT_CUR_IS_0 ? "1" : "2").Draw(x + 7, y + 5);
+    String((set.fft.cursor == 0) ? "1" : "2").Draw(x + 7, y + 5);
 }
 
 DEF_GRAPH_BUTTON( bCursors_Source,                                                                                                            //--- ‘”Õ ÷»ﬂ - —œ≈ “– -  ”–—Œ–€ - »ÒÚÓ˜ÌËÍ ---
@@ -108,7 +108,7 @@ static bool OnArrows_FFT_Cursors(const KeyEvent &event)
 
     int delta = (key == Key::Up || key == Key::Right) ? 1 : -1;
 
-    set.fft.posCur[MATH_CURRENT_CUR] += (uint8)delta;
+    set.fft.posCur[set.fft.cursor] += (uint8)delta;
     Beeper::RegulatorShiftRotate();
 
     return true;
