@@ -3,9 +3,6 @@
 #include "Osci/Osci_Settings.h"
 
 
-/// Позиция куросра времени
-#define CURsT_POS(ch, num)          Cursors::PosT(ch, num)
-
 /// Режим слежения за курсорами
 #define CURS_LOOK_MODE(ch)          (set.curs.lookMode[ch])
 /// Включено слежение за курсорами напряжения

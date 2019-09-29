@@ -452,8 +452,8 @@ static void WriteCursors()
             Cursors::Time(source, 1).Draw(x, y2);
             x = 153;
 
-            float pos0 = FPGA::Math::TimeCursor(CURsT_POS(source, 0), SET_TBASE);
-            float pos1 = FPGA::Math::TimeCursor(CURsT_POS(source, 1), SET_TBASE);
+            float pos0 = FPGA::Math::TimeCursor(Cursors::PosT(source, 0), SET_TBASE);
+            float pos1 = FPGA::Math::TimeCursor(Cursors::PosT(source, 1), SET_TBASE);
             float delta = std::fabsf(pos1 - pos0);
             String(":dT=").Draw(x, y1);
             Time(delta).ToString(false).Draw(x + 17, y1);

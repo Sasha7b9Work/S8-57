@@ -55,7 +55,7 @@ String Cursors::Voltage(Chan::E source, int numCur)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 String Cursors::Time(Chan::E source, int numCur)
 {
-    float time = FPGA::Math::TimeCursor(CURsT_POS(source, numCur), SET_TBASE);
+    float time = FPGA::Math::TimeCursor(Cursors::PosT(source, numCur), SET_TBASE);
 
     return ::Time(time).ToString(true);
 }
@@ -93,8 +93,8 @@ void Cursors::Draw()
 
         if (bothCursors)
         {
-            x0 = Grid::Left() + (int)CURsT_POS(source, 0);
-            x1 = Grid::Left() + (int)CURsT_POS(source, 1);
+            x0 = Grid::Left() + (int)Cursors::PosT(source, 0);
+            x1 = Grid::Left() + (int)Cursors::PosT(source, 1);
             y0 = Grid::Top() + (int)set.curs.posCurU[source][0];
             y1 = Grid::Top() + (int)set.curs.posCurU[source][1];
 
@@ -104,8 +104,8 @@ void Cursors::Draw()
 
         if (CURsT_ENABLED)
         {
-            DrawVertical((int)CURsT_POS(source, 0), y0);
-            DrawVertical((int)CURsT_POS(source, 1), y1);
+            DrawVertical((int)Cursors::PosT(source, 0), y0);
+            DrawVertical((int)Cursors::PosT(source, 1), y1);
         }
         if (CURsU_ENABLED)
         {
@@ -192,6 +192,6 @@ String Cursors::PercentsT(Chan::E source)
     float dPerc = 100.0F;
     std::memcpy(&dPerc, &dTperc(source), sizeof(float));
 
-    float dValue = std::fabsf(CURsT_POS(source, 0) - CURsT_POS(source, 1));
+    float dValue = std::fabsf(Cursors::PosT(source, 0) - Cursors::PosT(source, 1));
     return String("%s%%", Float(dValue / dPerc * 100.0F).ToString(false, 6).CString());
 }

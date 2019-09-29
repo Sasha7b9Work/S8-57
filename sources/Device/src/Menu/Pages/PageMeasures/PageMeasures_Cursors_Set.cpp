@@ -133,7 +133,7 @@ static void Draw_T(int x, int y)
         {
             bool condLeft = false, condDown = false;
             Chan::E source = CURS_SOURCE;
-            CalculateConditions((int16)CURsT_POS(source, 0), (int16)CURsT_POS(source, 1), CURsT_CNTRL, &condLeft, &condDown);
+            CalculateConditions((int16)Cursors::PosT(source, 0), (int16)Cursors::PosT(source, 1), CURsT_CNTRL, &condLeft, &condDown);
             if (condLeft && condDown)
             {
                 Draw_T_enableBoth(x, y);
@@ -412,7 +412,7 @@ void PageMeasuresCursors::PageSet::IncCursCntrlT(Chan::E ch)
 void PageMeasuresCursors::PageSet::SetCursPos100(Chan::E ch)
 {
     dUperc(ch) = (float)std::fabsf(set.curs.posCurU[ch][0] - set.curs.posCurU[ch][1]);
-    dTperc(ch) = (float)std::fabsf(CURsT_POS(ch, 0) - CURsT_POS(ch, 1));
+    dTperc(ch) = (float)std::fabsf(Cursors::PosT(ch, 0) - Cursors::PosT(ch, 1));
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -431,7 +431,7 @@ void PageMeasuresCursors::PageSet::SetShiftCursPosT(Chan::E ch, int numCur, floa
 {
     /// \todo одинаковые ветки
     // CURsT_POS(ch, numCur) = LimitationFloat(CURsT_POS(ch, numCur) + delta, 0, MAX_POS_T);   
-    Cursors::SetCursPosT_temp(ch, numCur, Math::LimitationRet(CURsT_POS(ch, numCur) + delta, 0.0F, MAX_POS_T));
+    Cursors::SetCursPosT_temp(ch, numCur, Math::LimitationRet(Cursors::PosT(ch, numCur) + delta, 0.0F, MAX_POS_T));
 
     if (set.curs.movement == CursorsMovement::Pixels)                        // ≈сли перемещение по пиксел€м, то нужно привести к пиксельной сетке экрана
     {
@@ -446,11 +446,11 @@ void PageMeasuresCursors::PageSet::UpdateCursorsForLook()
 
     if ((set.curs.active == CursorsActive::T) && (CURS_LOOK_U(Chan::A) || CURS_LOOK_BOTH(Chan::A)))
     {
-        SetCursorU(source, 0, Measure::CalculateCursorU(source, CURsT_POS(source, 0)));
+        SetCursorU(source, 0, Measure::CalculateCursorU(source, Cursors::PosT(source, 0)));
     }
     if ((set.curs.active == CursorsActive::T) && (CURS_LOOK_U(Chan::B) || CURS_LOOK_BOTH(Chan::B)))
     {
-        SetCursorU(source, 1, Measure::CalculateCursorU(source, CURsT_POS(source, 1)));
+        SetCursorU(source, 1, Measure::CalculateCursorU(source, Cursors::PosT(source, 1)));
     }
     if ((set.curs.active == CursorsActive::U) && (CURS_LOOK_T(Chan::A) || CURS_LOOK_BOTH(Chan::A)))
     {
