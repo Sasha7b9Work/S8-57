@@ -3,8 +3,6 @@
 #include "Osci/Osci_Settings.h"
 
 
-/// Позиция курсора напряжения
-#define CURsU_POS(ch, num)          (set.curs.posCurU[ch][num])
 /// Позиция куросра времени
 #define CURsT_POS(ch, num)          Cursors::PosT(ch, num)
 

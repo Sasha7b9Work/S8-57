@@ -411,14 +411,14 @@ void PageMeasuresCursors::PageSet::IncCursCntrlT(Chan::E ch)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void PageMeasuresCursors::PageSet::SetCursPos100(Chan::E ch)
 {
-    dUperc(ch) = (float)std::fabsf(CURsU_POS(ch, 0) - CURsU_POS(ch, 1));
+    dUperc(ch) = (float)std::fabsf(set.curs.posCurU[ch][0] - set.curs.posCurU[ch][1]);
     dTperc(ch) = (float)std::fabsf(CURsT_POS(ch, 0) - CURsT_POS(ch, 1));
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void PageMeasuresCursors::PageSet::SetShiftCursPosU(Chan::E ch, int numCur, float delta)
 {
-    CURsU_POS(ch, numCur) = Math::LimitationRet(CURsU_POS(ch, numCur) - delta, 0.0F, MAX_POS_U);
+    set.curs.posCurU[ch][numCur] = Math::LimitationRet(set.curs.posCurU[ch][numCur] - delta, 0.0F, MAX_POS_U);
 
     if (set.curs.movement == CursorsMovement::Pixels)                        // ≈сли перемещение по пиксел€м, то нужно привести к пиксельной сетке экрана
     {
@@ -454,18 +454,18 @@ void PageMeasuresCursors::PageSet::UpdateCursorsForLook()
     }
     if ((set.curs.active == CursorsActive::U) && (CURS_LOOK_T(Chan::A) || CURS_LOOK_BOTH(Chan::A)))
     {
-        SetCursorT(source, 0, Measure::CalculateCursorT(source, CURsU_POS(source, 0), 0));
+        SetCursorT(source, 0, Measure::CalculateCursorT(source, set.curs.posCurU[source][0], 0));
     }
     if ((set.curs.active == CursorsActive::U) && (CURS_LOOK_T(Chan::B) || CURS_LOOK_BOTH(Chan::B)))
     {
-        SetCursorT(source, 1, Measure::CalculateCursorT(source, CURsU_POS(source, 1), 1));
+        SetCursorT(source, 1, Measure::CalculateCursorT(source, set.curs.posCurU[source][1], 1));
     }
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void PageMeasuresCursors::PageSet::SetCursorU(Chan::E ch, int numCur, float pos)
 {
-    CURsU_POS(ch, numCur) = Math::LimitationRet(pos, 0.0F, MAX_POS_U);
+    set.curs.posCurU[ch][numCur] = Math::LimitationRet(pos, 0.0F, MAX_POS_U);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

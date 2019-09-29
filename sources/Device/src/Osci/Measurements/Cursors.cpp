@@ -31,7 +31,7 @@ static void UpdateCursorsForLook();
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 float Cursors::PosU(Chan::E ch, int numCur)
 {
-    return CURsU_POS(ch, numCur) / (Grid::Bottom() == Grid::FullBottom() ? 1.0F : 2.0F);
+    return set.curs.posCurU[ch][numCur] / (Grid::Bottom() == Grid::FullBottom() ? 1.0F : 2.0F);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -95,8 +95,8 @@ void Cursors::Draw()
         {
             x0 = Grid::Left() + (int)CURsT_POS(source, 0);
             x1 = Grid::Left() + (int)CURsT_POS(source, 1);
-            y0 = Grid::Top() + (int)CURsU_POS(source, 0);
-            y1 = Grid::Top() + (int)CURsU_POS(source, 1);
+            y0 = Grid::Top() + (int)set.curs.posCurU[source][0];
+            y1 = Grid::Top() + (int)set.curs.posCurU[source][1];
 
             Rectangle(4, 4).Draw(x0 - 2, y0 - 2);
             Rectangle(4, 4).Draw(x1 - 2, y1 - 2);
@@ -109,8 +109,8 @@ void Cursors::Draw()
         }
         if (CURsU_ENABLED)
         {
-            DrawHorizontal((int)CURsU_POS(source, 0), x0);
-            DrawHorizontal((int)CURsU_POS(source, 1), x1);
+            DrawHorizontal((int)set.curs.posCurU[source][0], x0);
+            DrawHorizontal((int)set.curs.posCurU[source][1], x1);
         }
 
         UpdateCursorsForLook();
