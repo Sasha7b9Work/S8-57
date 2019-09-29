@@ -156,11 +156,11 @@ static void UpdateCursorsForLook()
 {
 //    Chan::E source = CURS_SOURCE;
 
-    if ((set.curs.active == CursorsActive::T) && (CURS_LOOK_U(Chan::A) || CURS_LOOK_BOTH(Chan::A)))
+    if ((set.curs.active == CursorsActive::T) && ((set.curs.lookMode[Chan::A] == CursorsLookMode::Voltage) || CURS_LOOK_BOTH(Chan::A)))
     {
         //SetCursorU(source, 0, Processing::CalculateCursorU(source, CURsT_POS(source, 0)));
     }
-    if ((set.curs.active == CursorsActive::T) && (CURS_LOOK_U(Chan::B) || CURS_LOOK_BOTH(Chan::B)))
+    if ((set.curs.active == CursorsActive::T) && ((set.curs.lookMode[Chan::B] == CursorsLookMode::Voltage) || CURS_LOOK_BOTH(Chan::B)))
     {
         //SetCursorU(source, 1, Processing::CalculateCursorU(source, CURsT_POS(source, 1)));
     }
