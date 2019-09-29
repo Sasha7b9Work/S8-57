@@ -133,7 +133,7 @@ static void Osci::UpdateFPGA()
     
         if (FPGA::HAL::GetFlag::PRED() && !givingStart)
         {
-            if (!Osci::InModeRandomizer() && START_MODE_IS_AUTO && FPGA::HAL::GetFlag::HOLD_OFF())
+            if (!Osci::InModeRandomizer() && (set.trig.startMode == TrigStartMode::Auto) && FPGA::HAL::GetFlag::HOLD_OFF())
             {
                 GiveStart();
                 givingStart = true;
@@ -152,7 +152,7 @@ static void Osci::UpdateFPGA()
     
                 ReadData();
     
-                if (START_MODE_IS_SINGLE)
+                if (set.trig.startMode == TrigStartMode::Single)
                 {
                     needStop = true;
                     Trig::pulse = false;

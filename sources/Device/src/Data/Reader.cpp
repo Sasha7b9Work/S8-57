@@ -69,7 +69,7 @@ void Reader::ReadDataP2P()
         {
             if (DS)
             {
-                if (START_MODE_IS_WAIT && DS->Equals(*DATA_P2P->Settings()))
+                if ((set.trig.startMode == TrigStartMode::Wait) && DS->Equals(*DATA_P2P->Settings()))
                 {
                     DATA_P2P = nullptr;
                 }

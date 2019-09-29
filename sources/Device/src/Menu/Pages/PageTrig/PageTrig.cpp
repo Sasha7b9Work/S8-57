@@ -12,7 +12,7 @@ using namespace Osci::Settings;
 void PageTrig::OnChanged_Mode(bool)
 {
     Osci::Stop(false);
-    if(!START_MODE_IS_SINGLE)
+    if(set.trig.startMode != TrigStartMode::Single)
     {
         FPGA::OnPressStart();
     }
@@ -24,12 +24,12 @@ void PageTrig::OnChanged_Mode(bool)
     {
         // и переключаемся на одиночный режим запуска, то надо сохранить имеющийся тип выборки, чтобы восстановить при возвращении в режим 
         // рандомизатора автоматический или ждущий
-        if (START_MODE_IS_SINGLE)
+        if (set.trig.startMode == TrigStartMode::Single)
         {
             SAMPLE_TYPE_OLD = SAMPLE_TYPE;
             SAMPLE_TYPE = SampleType::Real;
         }
-        else if(START_MODE_IS_AUTO)    // Иначе восстановим ранее сохранённый
+        else if(set.trig.startMode == TrigStartMode::Auto)    // Иначе восстановим ранее сохранённый
         {
             SAMPLE_TYPE = SAMPLE_TYPE_OLD;
         }
@@ -51,8 +51,7 @@ DEF_CHOICE_3( cMode, // -V206                                                   
     "Авто ",
     "Ждущий",
     "Однократный",
-    START_MODE,
-    &PageTrig::self, Item::Active, PageTrig::OnChanged_Mode, Choice::AfterDraw
+    set.trig.startMode, &PageTrig::self, Item::Active, PageTrig::OnChanged_Mode, Choice::AfterDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

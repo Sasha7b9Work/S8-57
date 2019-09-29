@@ -2,11 +2,6 @@
 #include "Menu/MenuItems.h"
 
 
-#define START_MODE              (set.trig.startMode)
-#define START_MODE_IS_AUTO      (START_MODE == TrigStartMode::Auto)
-#define START_MODE_IS_WAIT      (START_MODE == TrigStartMode::Wait)
-#define START_MODE_IS_SINGLE    (START_MODE == TrigStartMode::Single)
-
 #define TRIG_POLARITY           (set.trig.polarity)
 #define TRIG_POLARITY_FALLING   (TRIG_POLARITY == TrigPolarity::Falling)
 #define TRIG_POLARITY_FRONT     (TRIG_POLARITY == TrigPolarity::Rising)

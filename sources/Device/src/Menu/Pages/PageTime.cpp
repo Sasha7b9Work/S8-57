@@ -15,7 +15,7 @@ using namespace Osci::Settings;
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static bool IsActive_Sample()
 {
-    return Osci::InModeRandomizer() && !START_MODE_IS_SINGLE;
+    return Osci::InModeRandomizer() && (set.trig.startMode != TrigStartMode::Single);
 }
 
 DEF_CHOICE_2( cSample,                                                                                                                                          //--- ÐÀÇÂÅÐÒÊÀ - Âûáîðêà ---
