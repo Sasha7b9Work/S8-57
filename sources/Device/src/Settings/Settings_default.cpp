@@ -155,30 +155,6 @@ const Settings Settings::defaultSettings =
         FreqMeterNumberPeriods::_10,   // numberPeriods
     },
     
-    // Меню ОТЛАДКА
-    {
-        true,                                   // showConsole
-        30,                                     // numStrings
-        8,                                      // sizeFont
-        false,                                  // modePauseConsole
-        false,                                  // showAll
-        false,                                  // showFlag
-        { false, false },                       // showRShift[2]
-        false,                                  // showTrigLev
-        { false, false },                       // showRange[2]
-        { false, false },                       // showChanParam[2]
-        false,                                  // showTrigParam
-        false,                                  // showTShift
-        false,                                  // showTBase
-        10,                                     // numMeasuresForGates
-        false,                                  // showRandInfo
-        false,                                  // showRandStat
-        0,                                      // timeCompensation
-        0,                                      // pretriggered
-        { Bandwidth::Full, Bandwidth::Full },   // bandwidth[2]
-        false,                                  // ShowStats
-    },
-    
     // Настройки тестер-компонента
     {
         TesterControl::Voltage,     // control
@@ -241,10 +217,32 @@ const Settings Settings::defaultSettings =
         { Range::_1V, Range::_1V },             // range
     },
 
-    0,  // dbg_gate_max
-    0,  // dbg_gate_min
-
+    // Меню ОТЛАДКА
     {
-        {0}, {0}
+        true,                                   // showConsole
+        30,                                     // numStrings
+        8,                                      // sizeFont
+        false,                                  // modePauseConsole
+        false,                                  // showAll
+        false,                                  // showFlag
+        { false, false },                       // showRShift[2]
+        false,                                  // showTrigLev
+        { false, false },                       // showRange[2]
+        { false, false },                       // showChanParam[2]
+        false,                                  // showTrigParam
+        false,                                  // showTShift
+        false,                                  // showTBase
+        10,                                     // numMeasuresForGates
+        false,                                  // showRandInfo
+        false,                                  // showRandStat
+        0,                                      // timeCompensation
+        0,                                      // pretriggered
+        { Bandwidth::Full, Bandwidth::Full },   // bandwidth[2]
+        false,                                  // ShowStats
+        0,                                      // gate_max
+        0,                                      // gate_min
+        {
+            {0}, {0}
+        }
     }
 };

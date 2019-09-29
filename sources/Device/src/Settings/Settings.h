@@ -50,6 +50,9 @@ public:
     /// Сохраняет значение перечислимого типа. Возвращает адрес первой свободной ячейки (туда надо записывать следующее значение)
     void SaveEnum16(uint8 name, uint8 value);
 
+    /// Настройки по умолчанию
+    static const Settings defaultSettings;
+
     uint                size;                               ///< Размер данной структуры в байтах
     uint                crc32;                              ///< \brief Контрольная сумма данной структуры с хранящимися в ней настройками
 
@@ -63,25 +66,12 @@ public:
     SettingsMeasures    meas;
     SettingsService     serv;
     SettingsFreqMeter   freq;
-    SettingsDebug       dbg;
     SettingsTester      test;
     SettingsMenu        menu;
     SettingsNRST        nrst;
     SettingsMultimeter  mult;
     SettingsRecorder    rec;
-
-    /*  !!!!!!!!!!!!!!!!!!!!!!                                    !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        !!!!!!!!!!!!!!!!!!!!!! Эти настройки задаются при наладке !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        !!!!!!!!!!!!!!!!!!!!!!                                    !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    */
-
-    int16   dbg_enum_gate_max;                              ///< Ограничение ворот в рандомизаторе сверху
-    int16   dbg_enum_gate_min;                              ///< Ограничение ворот в рандомизаторе снизу
-
-    int8    addRShift[2][Osci::Settings::Range::Size];      ///< Добавочные смещения для 
-
-    /// Настройки по умолчанию
-    static const Settings defaultSettings;
+    SettingsDebug       dbg;
 };
 
 #pragma pack(pop)

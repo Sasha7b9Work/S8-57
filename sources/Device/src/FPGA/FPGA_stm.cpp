@@ -143,8 +143,8 @@ static int CalculateShift()
         return NULL_TSHIFT;
     }
 
-    int deltaMAX = set.dbg_enum_gate_max * 10;
-    int deltaMIN = set.dbg_enum_gate_min * 10;
+    int deltaMAX = set.dbg.enum_gate_max * 10;
+    int deltaMIN = set.dbg.enum_gate_min * 10;
 
     if (FPGA::valueADC > max - deltaMAX || FPGA::valueADC < min + deltaMIN)
     {

@@ -41,6 +41,9 @@ struct SettingsDebug
     FPGA::Settings::Bandwidth::E bandwidth[2];              ///< \brief Здесь задаётся полоса, которая будет включаться при выборе в "КАНАЛ-Полоса" 
                                                             ///< значения "Полная".
     bool                         ShowStats;                 ///< Показывать статистику на экране (fps, например).
+    int16                        enum_gate_max;             ///< Ограничение ворот в рандомизаторе сверху
+    int16                        enum_gate_min;             ///< Ограничение ворот в рандомизаторе снизу
+    int8                         addRShift[2][Osci::Settings::Range::Size];      ///< Добавочные смещения для 
 };
 
 float   GetStretchADC(Chan::E ch);

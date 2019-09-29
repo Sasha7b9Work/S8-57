@@ -76,7 +76,7 @@ void RShift::Load(Chan::E ch)
 
     uint16 shift = SET_RSHIFT(ch);
 
-    int8 add = set.addRShift[ch][SET_RANGE(ch)];
+    int8 add = set.dbg.addRShift[ch][SET_RANGE(ch)];
 
     shift += add;
 
