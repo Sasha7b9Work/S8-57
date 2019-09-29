@@ -7,6 +7,28 @@
 #include "Multimeter/Multimeter.h"
 
 
+#define TESTER_STEP_U                   (set.test.stepU)
+#define TESTER_STEP_I                   (set.test.stepI)
+#define TESTER_VIEW_MODE                (set.test.viewMode)
+#define TESTER_ENUM_AVERAGE             (set.test.ave)
+
+#define TESTER_POLARITY                 (set.test.polarity)
+#define TESTER_POLARITY_IS_POSITITVE    (TESTER_POLARITY == TesterPolarity::Positive)
+
+#define TESTER_CONTROL                  (set.test.control)
+#define TESTER_CONTROL_IS_U             (TESTER_CONTROL == TesterControl::Voltage)
+
+
+#define MULTI_MEASURE           (set.mult.meas)
+#define MULTI_RANGE_VOLTAGE_AC  (set.mult.rangeAC)
+#define MULTI_RANGE_VOLTAGE_DC  (set.mult.rangeDC)
+#define MULTI_RANGE_CURRENT_AC  (set.mult.rangeCurrentAC)
+#define MULTI_RANGE_CURRENT_DC  (set.mult.rangeCurrentDC)
+#define MULTI_RANGE_RESISTANCE  (set.mult.rangeResist)
+#define MULTI_AVP               (set.mult.avp)
+
+
+
 struct FuncModeDraw
 {
     enum E
@@ -191,17 +213,6 @@ struct FreqMeterNumberPeriods
     explicit FreqMeterNumberPeriods(E v) : value(v) {};
 };
 
-#define FREQ_METER_TIMECOUNTING             (set.freq.timeCounting)
-#define FREQ_METER_FREQ_CLC                 (set.freq.freqClc)
-#define FREQ_METER_NUM_PERIODS              (set.freq.numberPeriods)
-
-#define FREQ_METER_ENABLED                  (set.freq.enabled)
-#define FREQ_METER_IS_ENABLED               (FREQ_METER_ENABLED == FreqMeterEnabled::On)
-
-#define FREQ_METER_MODE_VIEW                (set.freq.modeView)
-#define FREQ_METER_MODE_VIEW_IS_PERIOD      (FREQ_METER_MODE_VIEW == FreqMeterModeView::Period)
-#define FREQ_METER_MODE_VIEW_IS_FREQUENCY   (FREQ_METER_MODE_VIEW == FreqMeterModeView::Frequency)
-
 struct SettingsFreqMeter
 {
     FreqMeterEnabled::E        enabled;
@@ -263,18 +274,6 @@ struct TesterViewMode
     } value;
     explicit TesterViewMode(E v) : value(v) {};
 };
-
-#define TESTER_STEP_U                   (set.test.stepU)
-#define TESTER_STEP_I                   (set.test.stepI)
-#define TESTER_VIEW_MODE                (set.test.viewMode)
-#define TESTER_ENUM_AVERAGE             (set.test.ave)
-
-#define TESTER_POLARITY                 (set.test.polarity)
-#define TESTER_POLARITY_IS_POSITITVE    (TESTER_POLARITY == TesterPolarity::Positive)
-
-#define TESTER_CONTROL                  (set.test.control)
-#define TESTER_CONTROL_IS_U             (TESTER_CONTROL == TesterControl::Voltage)
-
 
 struct SettingsTester
 {
@@ -346,14 +345,6 @@ struct MultimeterRangeResistance
     } value;
     explicit MultimeterRangeResistance(E v) : value(v) {};
 };
-
-#define MULTI_MEASURE           (set.mult.meas)
-#define MULTI_RANGE_VOLTAGE_AC  (set.mult.rangeAC)
-#define MULTI_RANGE_VOLTAGE_DC  (set.mult.rangeDC)
-#define MULTI_RANGE_CURRENT_AC  (set.mult.rangeCurrentAC)
-#define MULTI_RANGE_CURRENT_DC  (set.mult.rangeCurrentDC)
-#define MULTI_RANGE_RESISTANCE  (set.mult.rangeResist)
-#define MULTI_AVP               (set.mult.avp)
 
 struct SettingsMultimeter
 {

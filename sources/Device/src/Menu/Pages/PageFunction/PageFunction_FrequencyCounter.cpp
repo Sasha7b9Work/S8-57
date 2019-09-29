@@ -21,14 +21,14 @@ DEF_CHOICE_2( cEnable,                                                          
     "",
     DISABLE_RU,
     ENABLE_RU,
-    FREQ_METER_ENABLED, &PageFrequencyCounter::self, Item::Active, OnChanged_Enable, Choice::AfterDraw
+    set.freq.enabled, &PageFrequencyCounter::self, Item::Active, OnChanged_Enable, Choice::AfterDraw
 )
 
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static bool IsActive_ModeView()
 {
-    return FREQ_METER_IS_ENABLED;
+    return (set.freq.enabled == FreqMeterEnabled::On);
 }
 
 static void OnChanged_ModeView(bool)
@@ -41,20 +41,20 @@ DEF_CHOICE_2( cModeView,                                                        
     "",
     "×àñòîòà",
     "Ïåðèîä",
-    FREQ_METER_MODE_VIEW, &PageFrequencyCounter::self, IsActive_ModeView, OnChanged_ModeView, Choice::AfterDraw
+    set.freq.modeView, &PageFrequencyCounter::self, IsActive_ModeView, OnChanged_ModeView, Choice::AfterDraw
 )
 
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static bool IsActive_SettingsFrequency()
 {
-    return FREQ_METER_IS_ENABLED && FREQ_METER_MODE_VIEW_IS_PERIOD;
+    return (set.freq.enabled == FreqMeterEnabled::On) && (set.freq.modeView == FreqMeterModeView::Period);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static bool IsActive_TimeF()
 {
-    return FREQ_METER_IS_ENABLED && FREQ_METER_MODE_VIEW_IS_FREQUENCY;
+    return (set.freq.enabled == FreqMeterEnabled::On) && (set.freq.modeView == FreqMeterModeView::Frequency);
 }
 
 static void OnChanged_TimeF(bool)
@@ -68,7 +68,7 @@ DEF_CHOICE_3( cTimeF,                                                           
     "100ìñ",
     "1ñ",
     "10ñ",
-    FREQ_METER_TIMECOUNTING, &PageFrequencyCounter::self, IsActive_TimeF, OnChanged_TimeF, Choice::AfterDraw
+    set.freq.timeCounting, &PageFrequencyCounter::self, IsActive_TimeF, OnChanged_TimeF, Choice::AfterDraw
 )
 
 
@@ -79,7 +79,7 @@ DEF_CHOICE_4( cFreqClc,                                                         
     "1ÌÃö",
     "10ÌÃö",
     "100ÌÃö",
-    FREQ_METER_FREQ_CLC, &PageFrequencyCounter::self, IsActive_SettingsFrequency, OnChanged_FreqMeter_Period, Choice::AfterDraw
+    set.freq.freqClc, &PageFrequencyCounter::self, IsActive_SettingsFrequency, OnChanged_FreqMeter_Period, Choice::AfterDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -92,7 +92,7 @@ DEF_CHOICE_6( cNumPeriods,                                                      
     "1000",
     "10000",
     "100000",
-    FREQ_METER_NUM_PERIODS, &PageFrequencyCounter::self, IsActive_SettingsFrequency, OnChanged_FreqMeter_Period, Choice::AfterDraw
+    set.freq.numberPeriods, &PageFrequencyCounter::self, IsActive_SettingsFrequency, OnChanged_FreqMeter_Period, Choice::AfterDraw
 )
 
 
@@ -133,12 +133,12 @@ void PageFrequencyCounter::Init()
 
     Item **items = (Item **)page->OwnData()->items;
 
-    if (FREQ_METER_MODE_VIEW_IS_FREQUENCY)
+    if (set.freq.modeView == FreqMeterModeView::Frequency)
     {
         items[2] = (Item *)&cTimeF;
         items[3] = &Item::empty;
     }
-    else if (FREQ_METER_MODE_VIEW_IS_PERIOD)
+    else if (set.freq.modeView == FreqMeterModeView::Period)
     {
         items[2] = (Item *)&cFreqClc;
         items[3] = (Item *)&cNumPeriods;

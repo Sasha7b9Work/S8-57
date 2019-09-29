@@ -87,7 +87,7 @@ void FrequencyCounter::LoadSettings()
 {
     uint8 data = 0;
 
-    if (FREQ_METER_IS_ENABLED)
+    if ((set.freq.enabled == FreqMeterEnabled::On))
     {
         const uint16 maskTime[3] = {0, 1, 2};
         const uint16 maskFreqClc[4] = {0, (1 << 2), (1 << 3), ((1 << 3) + (1 << 2))};
@@ -103,9 +103,9 @@ void FrequencyCounter::LoadSettings()
             BIN_U8(01010000)  //-V2501
         };
 
-        data |= maskTime[FREQ_METER_TIMECOUNTING];
-        data |= maskFreqClc[FREQ_METER_FREQ_CLC];
-        data |= maskPeriod[FREQ_METER_NUM_PERIODS];
+        data |= maskTime[set.freq.timeCounting];
+        data |= maskFreqClc[set.freq.freqClc];
+        data |= maskPeriod[set.freq.numberPeriods];
     }
     else
     {
@@ -244,7 +244,7 @@ void FrequencyCounter::ReadPeriod()
 float FrequencyCounter::FreqSetToFreq(const BitSet32 *fr)
 {
     const float k[3] = {10.0F, 1.0F, 0.1F};
-    return FREQ_METER_IS_ENABLED ? (fr->word * k[FREQ_METER_TIMECOUNTING]) : (fr->word * 10.0F);
+    return (set.freq.enabled == FreqMeterEnabled::On) ? (fr->word * k[set.freq.timeCounting]) : (fr->word * 10.0F);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -258,7 +258,7 @@ float FrequencyCounter::PeriodSetToFreq(const BitSet32 *period_)
     const float k[4] = {10e4F, 10e5F, 10e6F, 10e7F};
     const float kP[3] = {1.0F, 10.0F, 100.0F};
 
-    return FREQ_METER_IS_ENABLED ? (k[FREQ_METER_FREQ_CLC] * kP[FREQ_METER_NUM_PERIODS] / (float)period_->word) : (10e5F / (float)period_->word);
+    return (set.freq.enabled == FreqMeterEnabled::On) ? (k[set.freq.freqClc] * kP[set.freq.numberPeriods] / (float)period_->word) : (10e5F / (float)period_->word);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -389,7 +389,7 @@ void FrequencyCounter::Draw()
 {
     /// \todo В этой строке точку ставить не где придётся, а в той позиции, где она стояла последний раз
 
-    if (!FREQ_METER_IS_ENABLED)
+    if (set.freq.enabled == FreqMeterEnabled::Off)
     {
         return;
     }
@@ -406,7 +406,7 @@ void FrequencyCounter::Draw()
     x += 2;
     y += 2;
 
-    if (FREQ_METER_MODE_VIEW_IS_FREQUENCY)
+    if (set.freq.modeView == FreqMeterModeView::Frequency)
     {
         DrawFrequency(x, y);
     }
@@ -448,7 +448,7 @@ pString PeriodSetToString(const BitSet32 *pr)
         _period /= 10;
     }
 
-    int order = LowOrder(FREQ_METER_FREQ_CLC, FREQ_METER_NUM_PERIODS);  // В ордер - порядок младшего значащего разряда
+    int order = LowOrder(set.freq.freqClc, set.freq.numberPeriods);  // В ордер - порядок младшего значащего разряда
 
     while(stack.Size() < 6)
     {
@@ -653,7 +653,7 @@ static pString FreqSetToString(const BitSet32 *fr)
     }
 
 
-    switch (FREQ_METER_TIMECOUNTING)
+    switch (set.freq.timeCounting)
     {
         case FreqMeterTimeCounting::_100ms:
 
