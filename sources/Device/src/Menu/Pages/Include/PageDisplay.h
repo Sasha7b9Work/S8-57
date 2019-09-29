@@ -22,10 +22,6 @@
 #define BACKGROUND                  (set.disp.background)
 #define BACKGROUND_BLACK            (BACKGROUND == Display::Background::Black)
 
-#define MODE_DRAW_SIGNAL            (set.disp.modeDrawSignal)
-#define MODE_DRAW_SIGNAL_IS_LINES   (MODE_DRAW_SIGNAL == Display::ModeDrawSignal::Lines)
-#define MODE_DRAW_SIGNAL_IS_POINTS  (MODE_DRAW_SIGNAL == Display::ModeDrawSignal::Points)
-
 #define ENUM_MIN_MAX                (set.disp.ENumMinMax)
 #define MIN_MAX_ENABLED             (ENUM_MIN_MAX != Display::ENumMinMax::_1)
 #define NUM_MIN_MAX                 (1 << (int)ENUM_MIN_MAX)        /* Возвращает количество измерений сигналов для расчёта минимумов и максимумов. */
@@ -51,17 +47,17 @@
 #define LAST_AFFECTED_CH_IS_A       (LAST_AFFECTED_CH == Chan::A)
 
 
+struct ModeDrawSignal
+{
+    enum E
+    {
+        Lines,
+        Points
+    } value;
+};
+
 namespace Display
 {
-    struct ModeDrawSignal
-    {
-        enum E
-        {
-            Lines,
-            Points
-        } value;
-    };
-
     /// Выбор цвета фона.
     struct Background
     {
@@ -184,7 +180,7 @@ namespace Display
 
 struct SettingsDisplay
 {
-    Display::ModeDrawSignal::E      modeDrawSignal;
+    ModeDrawSignal::E      modeDrawSignal;
     Display::Background::E          background;            ///< Цвет фона.
     Display::ENumMinMax::E          ENumMinMax;            ///< Перечисление количества измерений для определения минимумов и масимумов.
     uint8                           notUsing0;

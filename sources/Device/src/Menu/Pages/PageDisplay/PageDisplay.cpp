@@ -89,7 +89,7 @@ DEF_CHOICE_2( cViewMode,                                                        
     "Задаёт режим отображения сигнала",
     "Вектор",
     "Точки",
-    MODE_DRAW_SIGNAL, &PageDisplay::self, Item::Active, Choice::Changed, Choice::AfterDraw
+    set.disp.modeDrawSignal, &PageDisplay::self, Item::Active, Choice::Changed, Choice::AfterDraw
 )
 
 
