@@ -161,14 +161,13 @@ DEF_CHOICE_2( cDrive_Name,                                                      
     ,
     "По маске",
     "Вручную",
-    FILE_NAMING_MODE,
-    &PageDrive::self, Item::Active, Choice::Changed, Choice::AfterDraw
+    set.mem.fileNamingMode, &PageDrive::self, Item::Active, Choice::Changed, Choice::AfterDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void OnPress_Mask_Delete()
 {
-    FILE_NAME_MASK[0] = '\0';
+    set.mem.fileNameMask[0] = '\0';
 }
 
 static void Draw_Delete(int x, int y)
@@ -187,16 +186,16 @@ DEF_GRAPH_BUTTON( bMask_Delete,                                                 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void OnPress_Mask_Backspace()
 {
-    int size = (int)std::strlen(FILE_NAME_MASK);
+    int size = (int)std::strlen(set.mem.fileNameMask);
     if (size > 0)
     {
-        if (size > 1 && FILE_NAME_MASK[size - 2] == 0x07)
+        if (size > 1 && set.mem.fileNameMask[size - 2] == 0x07)
         {
-            FILE_NAME_MASK[size - 2] = '\0';
+            set.mem.fileNameMask[size - 2] = '\0';
         }
         else
         {
-            FILE_NAME_MASK[size - 1] = '\0';
+            set.mem.fileNameMask[size - 1] = '\0';
         }
     }
 }
@@ -217,16 +216,16 @@ DEF_GRAPH_BUTTON( bMask_Backspace,                                              
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void OnPress_Mask_Insert()
 {
-    int index = INDEX_SYMBOL;
-    int size = (int)std::strlen(FILE_NAME_MASK);
+    int index = set.mem.indexCurSymbolNameMask;
+    int size = (int)std::strlen(set.mem.fileNameMask);
     if (size == MAX_SYMBOLS_IN_FILE_NAME - 1)
     {
         return;
     }
     if (index < 0x41)
     {
-        FILE_NAME_MASK[size] = Tables::Get(index)[0];
-        FILE_NAME_MASK[size + 1] = '\0';
+        set.mem.fileNameMask[size] = Tables::Get(index)[0];
+        set.mem.fileNameMask[size + 1] = '\0';
     }
     else
     {
@@ -235,18 +234,18 @@ static void OnPress_Mask_Insert()
         {
             if (size < MAX_SYMBOLS_IN_FILE_NAME - 2 && size > 0)
             {
-                if (FILE_NAME_MASK[size - 1] >= 0x30 && FILE_NAME_MASK[size - 1] <= 0x39) // Если ранее введено число
+                if (set.mem.fileNameMask[size - 1] >= 0x30 && set.mem.fileNameMask[size - 1] <= 0x39) // Если ранее введено число
                 {
-                    FILE_NAME_MASK[size] = FILE_NAME_MASK[size - 1] - 0x30;
-                    FILE_NAME_MASK[size - 1] = 0x07;
-                    FILE_NAME_MASK[size + 1] = '\0';
+                    set.mem.fileNameMask[size] = set.mem.fileNameMask[size - 1] - 0x30;
+                    set.mem.fileNameMask[size - 1] = 0x07;
+                    set.mem.fileNameMask[size + 1] = '\0';
                 }
             }
         }
         else
         {
-            FILE_NAME_MASK[size] = (char)index;
-            FILE_NAME_MASK[size + 1] = '\0';
+            set.mem.fileNameMask[size] = (char)index;
+            set.mem.fileNameMask[size + 1] = '\0';
         }
     }
 }
@@ -290,7 +289,7 @@ DEF_CHOICE_2( cDrive_ModeBtnMemory,                                             
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 static bool IsActive_Mask()
 {
-    return FILE_NAMING_MODE_MASK;
+    return (set.mem.fileNamingMode == FileNamingMode::Mask);
 }
 
 static void OnOpenClose_Mask(bool)
@@ -369,7 +368,7 @@ static void DrawSetMask()
 
 static void DrawFileMask(int x, int y)
 {
-    char *ch = FILE_NAME_MASK;
+    char *ch = set.mem.fileNameMask;
 
     Color::FILL.SetAsCurrent();
     while (*ch != '\0')
@@ -443,8 +442,7 @@ DEF_CHOICE_2( cDrive_Autoconnect,                                               
     "Eсли \"Вкл\", при подключении внешнего накопителя происходит автоматический переход на страницу ПАМЯТЬ - Внешн ЗУ",
     DISABLE_RU,
     ENABLE_RU,
-    FLASH_AUTOCONNECT,
-    &PageDrive::self, Item::Active, Choice::Changed, Choice::AfterDraw
+    set.mem.flashAutoConnect, &PageDrive::self, Item::Active, Choice::Changed, Choice::AfterDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -539,7 +537,7 @@ static void DrawSetName()
         position++;
     }
 
-    int x = String(FILE_NAME).Draw(x0 + deltaX, y0 + 65, Color::FILL);
+    int x = String(set.mem.fileName).Draw(x0 + deltaX, y0 + 65, Color::FILL);
 
     Region(5, 8).Fill(x, y0 + 65, Color::FLASH_10);
 }
@@ -568,7 +566,7 @@ static void OnPress_SetName_Exit()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void OnPress_SetName_Delete()
 {
-    FILE_NAME[0] = '\0';
+    set.mem.fileName[0] = '\0';
 }
 
 DEF_GRAPH_BUTTON( bSetName_Delete,                                                                                                                              //--- ИМЯ ФАЙЛА - Удалить ---
@@ -580,10 +578,10 @@ DEF_GRAPH_BUTTON( bSetName_Delete,                                              
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void OnPress_SetName_Backspace()
 {
-    int size = (int)std::strlen(FILE_NAME);
+    int size = (int)std::strlen(set.mem.fileName);
     if (size > 0)
     {
-        FILE_NAME[size - 1] = '\0';
+        set.mem.fileName[size - 1] = '\0';
     }
 }
 
@@ -596,11 +594,11 @@ DEF_GRAPH_BUTTON( bSetName_Backspace,                                           
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void OnPress_SetName_Insert()
 {
-    int size = (int)std::strlen(FILE_NAME);
+    int size = (int)std::strlen(set.mem.fileName);
     if (size < MAX_SYMBOLS_IN_FILE_NAME - 1)
     {
-        FILE_NAME[size] = Tables::Get(INDEX_SYMBOL)[0];
-        FILE_NAME[size + 1] = '\0';
+        set.mem.fileName[size] = Tables::Get(set.mem.indexCurSymbolNameMask)[0];
+        set.mem.fileName[size + 1] = '\0';
     }
 }
 
@@ -656,11 +654,11 @@ void OnMemExtSetMaskNameRegSet(int angle, int maxIndex)
     };
 
     Color::ResetFlash();
-    if (INDEX_SYMBOL > maxIndex)
+    if (set.mem.indexCurSymbolNameMask > maxIndex)
     {
-        INDEX_SYMBOL = (int8)(maxIndex - 1);
+        set.mem.indexCurSymbolNameMask = (int8)(maxIndex - 1);
     }
-    func[Math::Sign(angle) + 1](&INDEX_SYMBOL, 0, (int8)(maxIndex - 1));
+    func[Math::Sign(angle) + 1](&set.mem.indexCurSymbolNameMask, 0, (int8)(maxIndex - 1));
     Beeper::RegulatorSwitchRotate();
 
 }

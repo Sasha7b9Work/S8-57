@@ -176,7 +176,7 @@ void Menu::ChangeStateFlashDrive()
             OpenedItem()->HandlerFX(TypePress::Release);
         }
     }
-    else if(FLASH_AUTOCONNECT)
+    else if(set.mem.flashAutoConnect)
     {
         PageMemory::OnOpenClose_Drive_Manager();
     }

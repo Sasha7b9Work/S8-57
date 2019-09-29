@@ -3,15 +3,6 @@
 #include "Osci/Osci_Settings.h"
 
 
-#define FILE_NAME_MASK          (set.mem.fileNameMask)
-#define FILE_NAME               (set.mem.fileName)
-#define INDEX_SYMBOL            (set.mem.indexCurSymbolNameMask)
-#define FLASH_AUTOCONNECT       (set.mem.flashAutoConnect)
-
-#define FILE_NAMING_MODE        (set.mem.fileNamingMode)
-#define FILE_NAMING_MODE_MASK   (FILE_NAMING_MODE == FileNamingMode::Mask)
-#define FILE_NAMING_MODE_MANUAL (FILE_NAMING_MODE == FileNamingMode::Manually)
-
 #define MODE_WORK               (set.mem.modeWork)
 #define MODE_WORK_IS_DIR        (MODE_WORK == ModeWork::Dir)
 #define MODE_WORK_IS_RAM        (MODE_WORK == ModeWork::RAM)
