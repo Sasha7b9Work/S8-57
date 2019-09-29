@@ -92,7 +92,7 @@ const Settings Settings::defaultSettings =
         Chan::A,                                            // source
         {CursorsControl::Disable, CursorsControl::Disable}, // cntrlU[Chan::Size]
         {CursorsControl::Disable, CursorsControl::Disable}, // cntrlT[Chan::Size]
-        Osci::Measurements::Cursors::Movement::Pixels,      // movement
+        CursorsMovement::Pixels,                            // movement
         {80,  80},                                          // deltaU100percents[2]
         {120, 120},                                         // deltaT100percents[2]
         {                                                   // posCurU[Chan::Size][2]

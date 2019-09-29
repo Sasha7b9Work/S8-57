@@ -95,20 +95,31 @@ struct CursorsControl
     explicit CursorsControl(E v) : value(v) {};
 };
 
+/// Дискретность перемещения курсоров.
+struct CursorsMovement
+{
+    enum E
+    {
+        Pixels,    ///< По пикселям экрана
+        Percents   ///< По процентам
+    } value;
+    explicit CursorsMovement(E v) : value(v) {};
+};
+
 struct SettingsCursors
 {
-    bool                                     showCursors;             ///< Показывать ли курсоры.
+    bool               showCursors;             ///< Показывать ли курсоры.
     CursorsLookMode::E lookMode[2];             ///< Режимы слежения за курсорами для двух пар курсоров.
-    bool                                     showFreq;                ///< Установленное в true значение, что нужно показывать на экране 1/dT между курсорами.
+    bool               showFreq;                ///< Установленное в true значение, что нужно показывать на экране 1/dT между курсорами.
     CursorsActive::E   active;                  ///< Какие курсоры сейас активны.
-    Chan::E                                  source;                  ///< Источник - к какому каналу относятся курсоры.
+    Chan::E            source;                  ///< Источник - к какому каналу относятся курсоры.
     CursorsControl::E  cntrlU[Chan::Size];      ///< Активные курсоры напряжения.
     CursorsControl::E  cntrlT[Chan::Size];      ///< Активные курсоры времени.
-    Osci::Measurements::Cursors::Movement::E movement;                ///< Как перемещаться курсорам - по точкам или процентам.
-    float                                    deltaU100percents[2];    ///< Расстояние между курсорами напряжения для 100%, для обоих каналов.
-    float                                    deltaT100percents[2];    ///< Расстояние между курсорами времени для 100%, для обоих каналов.
-    float                                    posCurU[Chan::Size][2];  ///< Текущие позиции курсоров напряжения обоих каналов.
-    float                                    posCurT[Chan::Size][2];  ///< Текущие позиции курсоров времени обоих каналов.
+    CursorsMovement::E movement;                ///< Как перемещаться курсорам - по точкам или процентам.
+    float              deltaU100percents[2];    ///< Расстояние между курсорами напряжения для 100%, для обоих каналов.
+    float              deltaT100percents[2];    ///< Расстояние между курсорами времени для 100%, для обоих каналов.
+    float              posCurU[Chan::Size][2];  ///< Текущие позиции курсоров напряжения обоих каналов.
+    float              posCurT[Chan::Size][2];  ///< Текущие позиции курсоров времени обоих каналов.
 };
 
 

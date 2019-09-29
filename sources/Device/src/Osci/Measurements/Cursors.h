@@ -6,9 +6,9 @@
 /// Перемемещение курсоров при вращении ручки УСТАНОВКА - по точкам или процентам
 #define CURS_MOVEMENT               (set.curs.movement)
 /// Курсоры перемещаются при вращении ручка УСТАНОВКА с дискретностью 1%
-#define CURS_MOVEMENT_IN_PERCENTS   (CURS_MOVEMENT == Cursors::Movement::Percents)
+#define CURS_MOVEMENT_IN_PERCENTS   (CURS_MOVEMENT == CursorsMovement::Percents)
 /// Курсоры перемещаются при вращении ручка УСТАНОВКА с дискретностью 1 пиксель
-#define CURS_MOVEMENT_IN_PIXELS     (CURS_MOVEMENT == Cursors::Movement::Pixels)
+#define CURS_MOVEMENT_IN_PIXELS     (CURS_MOVEMENT == CursorsMovement::Pixels)
 
 /// Какими курсорами управляет ручка УСТАНОВКА
 #define CURS_ACTIVE                 (set.curs.active)
