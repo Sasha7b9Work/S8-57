@@ -9,8 +9,8 @@
 #include "Osci/Display/PainterData.h"
 #include "Osci/Measurements/Measures.h"
 #include "Osci/Measurements/Measurements_Table.h"
+#include "Osci/Measurements/Measurements.h"
 #include "Settings/Settings.h"
-
 #include "Utils/Debug.h"
 #include "Osci/Display/Accumulator.h"
 #include "Osci/Osci_Averager.h"
@@ -18,6 +18,8 @@
 
 using namespace Display::Primitives;
 using namespace Osci::Settings;
+
+using Osci::Measurements::Cursors;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

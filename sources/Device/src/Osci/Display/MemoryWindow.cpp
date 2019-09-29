@@ -6,12 +6,12 @@
 #include "Display/Painter.h"
 #include "FPGA/FPGA.h"
 #include "Settings/Settings.h"
-
 #include "Hardware/Battery.h"
 #include "Osci/Display/HiPart.h"
 #include "Display/Display.h"
 #include "Osci/Display/PainterData.h"
 #include "Osci/Osci_Settings.h"
+#include "Osci/Measurements/Measurements.h"
 
 
 using namespace Display::Primitives;

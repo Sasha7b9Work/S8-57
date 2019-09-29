@@ -15,6 +15,7 @@
 #include "Hardware/Timer.h"
 #include "Settings/Settings.h"
 #include "Hardware/HAL/HAL.h"
+#include "Osci/Measurements/Measurements.h"
 #include <cmath>
 #include <cstdio>
 #include <cstring>

@@ -2,7 +2,6 @@
 #include "SettingsNRST.h"
 #include "Tester/Tester.h"
 #include "Osci/FrequencyCounter.h"
-#include "Osci/Measurements/Cursors.h"
 #include "Menu/Menu.h"
 #include "Display/Colors.h"
 #include "Osci/Measurements/Measures.h"
@@ -17,9 +16,6 @@
 #include "Menu/Pages/Include/PageService.h"
 #include "Menu/Pages/Include/PageTime.h"
 #include "Menu/Pages/Include/PageTrig.h"
-
-
-
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

@@ -1,5 +1,4 @@
 #include "defines.h"
-#include "Cursors.h"
 #include "Display/Colors.h"
 #include "Display/Display_Primitives.h"
 #include "Display/Grid.h"
@@ -9,6 +8,7 @@
 #include "Utils/StringUtils.h"
 #include "Utils/Values.h"
 #include "Settings/Settings.h"
+#include "Osci/Measurements/Measurements.h"
 #include <cmath>
 #include <cstring>
 

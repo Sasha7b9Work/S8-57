@@ -12,12 +12,11 @@
 #include "Hardware/VCP.h"
 #include "Hardware/Battery.h"
 #include "Osci/Display/MemoryWindow.h"
+#include "Osci/Measurements/Measurements.h"
 #include <cmath>
 
 
-
 using namespace Display::Primitives;
-using namespace Osci::Measurements;
 using namespace Osci::Settings;
 
 using Osci::Measurements::Cursors;

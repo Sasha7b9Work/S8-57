@@ -6,11 +6,11 @@
 #include "Settings/Settings.h"
 #include "Utils/Math.h"
 #include "Hardware/Beeper.h"
+#include "Osci/Measurements/Measurements.h"
 #include <cmath>
 
 
 using namespace Display::Primitives;
-using namespace Osci::Measurements;
 
 using Osci::Measurements::Cursors;
 
