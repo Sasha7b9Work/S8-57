@@ -36,8 +36,8 @@ static void Draw_Balance_Mode(int, int)
 {
     int8 shift[2][3] =
     {
-        {0, set.ch[Chan::A].balanceShiftADC, (int8)NRST_BALANCE_ADC_A},
-        {0, set.ch[Chan::B].balanceShiftADC, (int8)NRST_BALANCE_ADC_B}
+        {0, set.ch[Chan::A].balanceShiftADC, (int8)set.nrst.balanceADC[Chan::A]},
+        {0, set.ch[Chan::B].balanceShiftADC, (int8)set.nrst.balanceADC[Chan::B]}
     };
 
     shiftADCA = shift[Chan::A][set.nrst.balanceADCtype];
@@ -66,7 +66,7 @@ static bool IsActive_ShiftAB()
 
 static void OnChanged_ShiftA()
 {
-    NRST_BALANCE_ADC_A = shiftADCA;
+    set.nrst.balanceADC[Chan::A] = shiftADCA;
 }
 
 DEF_GOVERNOR( gShiftA,                                                                                                                          //--- ОТЛАДКА - АЦП - БАЛАНС - Смещение 1 ---
@@ -79,7 +79,7 @@ DEF_GOVERNOR( gShiftA,                                                          
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void OnChanged_ShiftB()
 {
-    NRST_BALANCE_ADC_B = shiftADCB;
+    set.nrst.balanceADC[Chan::B] = shiftADCB;
 }
 
 DEF_GOVERNOR( gShiftB,                                                                                                                          //--- ОТЛАДКА - АЦП - БАЛАНС - Смещение 2 ---
@@ -407,7 +407,7 @@ static void DebugShowSetInfo_Draw()
     y += dY * 3;
 
     DRAW_FORMAT("correctionTime : %d", set.nrst.correctionTime); //-V2528
-    DRAW_FORMAT2("balanceADC : %d %d", NRST_BALANCE_ADC_A, NRST_BALANCE_ADC_B); //-V2528
+    DRAW_FORMAT2("balanceADC : %d %d", set.nrst.balanceADC[Chan::A], set.nrst.balanceADC[Chan::B]); //-V2528
     DRAW_FORMAT("numAveForRand : %d", set.nrst.numAveForRand); //-V2528
 
     pString s[3] = {"выключено", "настроено автоматически", "задано вручную"};

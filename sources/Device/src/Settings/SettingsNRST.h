@@ -40,13 +40,9 @@ struct StretchADC
 #define NRST_STRETCH_ADC_TYPE_IS_DISABLE    (NRST_STRETCH_ADC_TYPE == StretchADC::Disable)
 #define NRST_STRETCH_ADC_TYPE_IS_HAND       (NRST_STRETCH_ADC_TYPE == StretchADC::Hand)
 
-#define NRST_STRETCH_ADC(ch, type)          (set.nrst.StretchADC[ch][type])
+#define NRST_STRETCH_ADC(ch, type)          (set.nrst.stretchADC[ch][type])
 #define NRST_STRETCH_ADC_A(type)            (NRST_STRETCH_ADC(Chan::A, type))
 #define NRST_STRETCH_ADC_B(type)            (NRST_STRETCH_ADC(Chan::B, type))
-
-#define NRST_BALANCE_ADC(ch)                (set.nrst.balanceADC[ch])
-#define NRST_BALANCE_ADC_A                  (NRST_BALANCE_ADC(Chan::A))
-#define NRST_BALANCE_ADC_B                  (NRST_BALANCE_ADC(Chan::B))
 
 
 struct SettingsNRST
@@ -54,7 +50,7 @@ struct SettingsNRST
     int16           balanceADC[Chan::Size];                 ///< Значение дополнительного смещения АЦП для ручной балансировки.
     BalanceADC::E   balanceADCtype;                         ///< Тип балансировки.
     StretchADC::E   stretchADCtype;                         ///< Тип растяжки канала.
-    int16           StretchADC[Chan::Size][3];              ///< \brief Поправочный коэффициент для ручного, калибровочного и
+    int16           stretchADC[Chan::Size][3];              ///< \brief Поправочный коэффициент для ручного, калибровочного и
                     ///< отключенного режимов. Здесь хранится в целом виде, чтобы получить реальный коэффициент, нужно разделить на 1000 и
                     ///< прибавить единицу.
     int16           rShiftAddStable[Chan::Size][3];         ///< Добавочное смещение для трёх самых чувствительных диапазонов. Задаётся единожды при настройке
