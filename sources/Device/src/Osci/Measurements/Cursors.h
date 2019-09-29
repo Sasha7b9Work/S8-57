@@ -3,13 +3,6 @@
 #include "Osci/Osci_Settings.h"
 
 
-/// Какими курсорами управляет ручка УСТАНОВКА
-#define CURS_ACTIVE                 (set.curs.active)
-/// Ручка УСТАНОВКА управляет курсорами напряжения
-#define CURS_ACTIVE_U               (CURS_ACTIVE == CursorsActive::U)
-/// Ручка УСТАНОВКА управляет курсорами времени
-#define CURS_ACTIVE_T               (CURS_ACTIVE == CursorsActive::T)
-
 /// Позиция курсора напряжения
 #define CURsU_POS(ch, num)          (set.curs.posCurU[ch][num])
 /// Позиция куросра времени

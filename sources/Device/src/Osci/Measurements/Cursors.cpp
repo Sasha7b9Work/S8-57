@@ -156,19 +156,19 @@ static void UpdateCursorsForLook()
 {
 //    Chan::E source = CURS_SOURCE;
 
-    if (CURS_ACTIVE_T && (CURS_LOOK_U(Chan::A) || CURS_LOOK_BOTH(Chan::A)))
+    if ((set.curs.active == CursorsActive::T) && (CURS_LOOK_U(Chan::A) || CURS_LOOK_BOTH(Chan::A)))
     {
         //SetCursorU(source, 0, Processing::CalculateCursorU(source, CURsT_POS(source, 0)));
     }
-    if (CURS_ACTIVE_T && (CURS_LOOK_U(Chan::B) || CURS_LOOK_BOTH(Chan::B)))
+    if ((set.curs.active == CursorsActive::T) && (CURS_LOOK_U(Chan::B) || CURS_LOOK_BOTH(Chan::B)))
     {
         //SetCursorU(source, 1, Processing::CalculateCursorU(source, CURsT_POS(source, 1)));
     }
-    if (CURS_ACTIVE_U && (CURS_LOOK_T(Chan::A) || CURS_LOOK_BOTH(Chan::A)))
+    if ((set.curs.active == CursorsActive::U) && (CURS_LOOK_T(Chan::A) || CURS_LOOK_BOTH(Chan::A)))
     {
         //SetCursorT(source, 0, Processing::CalculateCursorT(source, CURsU_POS(source, 0), 0));
     }
-    if (CURS_ACTIVE_U && (CURS_LOOK_T(Chan::B) || CURS_LOOK_BOTH(Chan::B)))
+    if ((set.curs.active == CursorsActive::U) && (CURS_LOOK_T(Chan::B) || CURS_LOOK_BOTH(Chan::B)))
     {
         //SetCursorT(source, 1, Processing::CalculateCursorT(source, CURsU_POS(source, 1), 1));
     }

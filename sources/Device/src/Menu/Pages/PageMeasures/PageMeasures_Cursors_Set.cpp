@@ -110,11 +110,11 @@ static void Draw_T_enableBoth(int x, int y)
 
 void PageMeasuresCursors::PageSet::OnPress_T()
 {
-    if (CURS_ACTIVE_T || CURsT_DISABLED)
+    if ((set.curs.active == CursorsActive::T) || CURsT_DISABLED)
     {
         IncCursCntrlT(CURS_SOURCE);
     }
-    CURS_ACTIVE = CursorsActive::T;
+    set.curs.active = CursorsActive::T;
 }
 
 static void Draw_T(int x, int y)
@@ -125,7 +125,7 @@ static void Draw_T(int x, int y)
     }
     else
     {
-        if (!CURS_ACTIVE_T)
+        if (set.curs.active != CursorsActive::T)
         {
             Draw_T_disableBoth(x, y);
         }
@@ -207,11 +207,11 @@ static void Draw_U_enableBoth(int x, int y)
 
 void PageMeasuresCursors::PageSet::OnPress_U()
 {
-    if (CURS_ACTIVE_U || CURsU_DISABLED)
+    if ((set.curs.active == CursorsActive::U) || CURsU_DISABLED)
     {
         IncCursCntrlU(CURS_SOURCE);
     }
-    CURS_ACTIVE = CursorsActive::U;
+    set.curs.active = CursorsActive::U;
 }
 
 static void Draw_U(int x, int y)
@@ -223,7 +223,7 @@ static void Draw_U(int x, int y)
     }
     else
     {
-        if (!CURS_ACTIVE_U)
+        if (set.curs.active != CursorsActive::U)
         {
             Draw_U_disableBoth(x, y);
         }
@@ -327,7 +327,7 @@ bool PageMeasuresCursors::PageSet::OnArrows(const KeyEvent &event) //-V2506
 
     float value = event.IsAboveZero() ? 1.0F : -1.0F;
 
-    if (CURS_ACTIVE_U && (key == Key::Up || key == Key::Down))
+    if ((set.curs.active == CursorsActive::U) && (key == Key::Up || key == Key::Down))
     {
         if (set.curs.movement == CursorsMovement::Percents)
         {
@@ -344,7 +344,7 @@ bool PageMeasuresCursors::PageSet::OnArrows(const KeyEvent &event) //-V2506
         }
         UpdateCursorsForLook();
     }
-    else if(CURS_ACTIVE_T && (key == Key::Left || key == Key::Right))
+    else if((set.curs.active == CursorsActive::T) && (key == Key::Left || key == Key::Right))
     {
         if (set.curs.movement == CursorsMovement::Percents)
         {
@@ -444,19 +444,19 @@ void PageMeasuresCursors::PageSet::UpdateCursorsForLook()
 {
     Chan::E source = CURS_SOURCE;
 
-    if (CURS_ACTIVE_T && (CURS_LOOK_U(Chan::A) || CURS_LOOK_BOTH(Chan::A)))
+    if ((set.curs.active == CursorsActive::T) && (CURS_LOOK_U(Chan::A) || CURS_LOOK_BOTH(Chan::A)))
     {
         SetCursorU(source, 0, Measure::CalculateCursorU(source, CURsT_POS(source, 0)));
     }
-    if (CURS_ACTIVE_T && (CURS_LOOK_U(Chan::B) || CURS_LOOK_BOTH(Chan::B)))
+    if ((set.curs.active == CursorsActive::T) && (CURS_LOOK_U(Chan::B) || CURS_LOOK_BOTH(Chan::B)))
     {
         SetCursorU(source, 1, Measure::CalculateCursorU(source, CURsT_POS(source, 1)));
     }
-    if (CURS_ACTIVE_U && (CURS_LOOK_T(Chan::A) || CURS_LOOK_BOTH(Chan::A)))
+    if ((set.curs.active == CursorsActive::U) && (CURS_LOOK_T(Chan::A) || CURS_LOOK_BOTH(Chan::A)))
     {
         SetCursorT(source, 0, Measure::CalculateCursorT(source, CURsU_POS(source, 0), 0));
     }
-    if (CURS_ACTIVE_U && (CURS_LOOK_T(Chan::B) || CURS_LOOK_BOTH(Chan::B)))
+    if ((set.curs.active == CursorsActive::U) && (CURS_LOOK_T(Chan::B) || CURS_LOOK_BOTH(Chan::B)))
     {
         SetCursorT(source, 1, Measure::CalculateCursorT(source, CURsU_POS(source, 1), 1));
     }
@@ -480,5 +480,5 @@ void PageMeasuresCursors::PageSet::SetCursorT(Chan::E ch, int numCur, float pos)
 bool PageMeasuresCursors::PageSet::IsRegSetActiveOnCursors()
 {
     return ((Menu::GetNameOpenedPage() == PageName::Measures_Cursors_Set) &&
-        ((CURS_ACTIVE_U && CURsU_ENABLED) || (CURS_ACTIVE_T && CURsT_ENABLED)));
+        (((set.curs.active == CursorsActive::U) && CURsU_ENABLED) || ((set.curs.active == CursorsActive::T) && CURsT_ENABLED)));
 }
