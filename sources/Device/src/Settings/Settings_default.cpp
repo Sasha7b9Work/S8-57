@@ -206,26 +206,27 @@ const Settings Settings::defaultSettings =
     
     // Несбрасываемые настройки калибровки
     {
-        {},                             // nrst_balanceADC[Chan::Size];               
-        BalanceADC::Disable,            // nrst_balanceADCtype;                         
-        StretchADC::Disable,            // nrst_stretchADCtype;                         
-        {},                             // nrst_StretchADC[Chan::Size][3];            
-        {},                             // nrst_rShiftAddStable[Chan::Size][3];       
-        0,                              // nrst_numAveForRand;                          
-        0,                              // nrst_numSmoothForRand;                       
-        {},                             // nrst_rShiftAdd[Chan::Size][Range::Size][2];
-        0,                              // nrst_correctionTime;                         
+        {},                             // nrst_balanceADC[Chan::Size]
+        BalanceADC::Disable,            // nrst_balanceADCtype
+        StretchADC::Disable,            // nrst_stretchADCtype
+        {},                             // nrst_StretchADC[Chan::Size][3]
+        {},                             // nrst_rShiftAddStable[Chan::Size][3]
+        0,                              // nrst_numAveForRand
+        0,                              // nrst_numSmoothForRand
+        {},                             // nrst_rShiftAdd[Chan::Size][Range::Size][2]
+        0,                              // nrst_correctionTime
     },
     
     // Настройки мультиметра
-
-    Multimeter::Settings::AVP::Off,                 // multi_avp
-    Multimeter::Measure::VoltageDC,                 // multi_meas
-    Multimeter::Settings::RangeDC::_2V,             // multi_rangeCV
-    Multimeter::Settings::RangeAC::_2V,             // multi_rangeVV
-    Multimeter::Settings::RangeCurrent::_2A,        // multi_rangeCurrentAC
-    Multimeter::Settings::RangeCurrent::_2A,        // multi_rangeCurrentDC
-    Multimeter::Settings::RangeResistance::_10M,    // multi_rangeResist
+    {
+        MultimeterAVP::Off,                 // avp
+        Multimeter::Measure::VoltageDC,     // meas
+        MultimeterRangeDC::_2V,             // rangeCV
+        MultimeterRangeAC::_2V,             // rangeVV
+        MultimeterRangeCurrent::_2A,        // rangeCurrentAC
+        MultimeterRangeCurrent::_2A,        // rangeCurrentDC
+        MultimeterRangeResistance::_10M,    // rangeResist
+    },
     
     // Настройки регистратора
 

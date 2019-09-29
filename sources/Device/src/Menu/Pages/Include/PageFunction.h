@@ -4,6 +4,7 @@
 #include "Osci/Measurements/Cursors_Settings.h"
 #include "Osci/Measurements/Measures.h"
 #include "PageDisplay.h"
+#include "Multimeter/Multimeter.h"
 
 
 #define SOURCE_FFT                  (set.math.sourceFFT)
@@ -395,6 +396,86 @@ struct SettingsTester
     TesterStepI::E          stepI;
     Display::ENumAverage::E ave;                   ///< Количество усреднений
     TesterViewMode::E       viewMode;
+};
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/// АВП - автовыбор предела
+struct MultimeterAVP
+{
+    enum E
+    {
+        Off,
+        On
+    } value;
+    explicit MultimeterAVP(E v) : value(v) { };
+};
+
+/// Предел имзерения постоянного напряжения
+struct MultimeterRangeDC
+{
+    enum E
+    {
+        _2V,
+        _20V,
+        _500V
+    } value;
+    explicit MultimeterRangeDC(E v) : value(v) { };
+};
+
+/// Предел измерения переменного напряжения
+struct MultimeterRangeAC
+{
+    enum E
+    {
+        _2V,
+        _20V,
+        _400V
+    } value;
+    explicit MultimeterRangeAC(E v) : value(v) {};
+};
+
+/// Предел измерения тока
+struct MultimeterRangeCurrent
+{
+    enum E
+    {
+        _20mA,
+        _2A
+    } value;
+    explicit MultimeterRangeCurrent(E v) : value(v) {};
+};
+
+/// Предел измерения сопротивленя постоянному току
+struct MultimeterRangeResistance
+{
+    enum E
+    {
+        _2k,
+        _20k,
+        _200k,
+        _10M
+    } value;
+    explicit MultimeterRangeResistance(E v) : value(v) {};
+};
+
+#define MULTI_MEASURE           (set.mult.meas)
+#define MULTI_RANGE_VOLTAGE_AC  (set.mult.rangeAC)
+#define MULTI_RANGE_VOLTAGE_DC  (set.mult.rangeDC)
+#define MULTI_RANGE_CURRENT_AC  (set.mult.rangeCurrentAC)
+#define MULTI_RANGE_CURRENT_DC  (set.mult.rangeCurrentDC)
+#define MULTI_RANGE_RESISTANCE  (set.mult.rangeResist)
+#define MULTI_AVP               (set.mult.avp)
+
+struct SettingsMultimeter
+{
+    MultimeterAVP::E              avp;
+    Multimeter::Measure::E        meas;
+    MultimeterRangeDC::E          rangeDC;
+    MultimeterRangeAC::E          rangeAC;
+    MultimeterRangeCurrent::E     rangeCurrentAC;     ///< Предел измерения переменного тока
+    MultimeterRangeCurrent::E     rangeCurrentDC;     ///< Предел измерения постоянного тока
+    MultimeterRangeResistance::E  rangeResist;
 };
 
 

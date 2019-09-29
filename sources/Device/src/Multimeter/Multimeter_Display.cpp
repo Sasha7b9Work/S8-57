@@ -2,14 +2,11 @@
 #include "Multimeter/Multimeter.h"
 #include "Display/Painter.h"
 #include "Settings/Settings.h"
-#include <cstring>
-
 #include "Display/Display_Primitives.h"
 #include "Hardware/Beeper.h"
 #include "Utils/Debug.h"
+#include <cstring>
 
-
-using namespace Multimeter::Settings;
 
 using Display::Primitives::Text;
 

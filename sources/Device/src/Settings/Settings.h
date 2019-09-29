@@ -9,7 +9,6 @@
 #include "Multimeter/Multimeter.h"
 #include "Recorder/Recorder_Settings.h"
 #include "Osci/Measurements/Cursors_Settings.h"
-#include "Multimeter/Multimeter_Settings.h"
 #include "Menu/Pages/Include/PageChannels.h"
 #include "Menu/Pages/Include/PageDisplay.h"
 #include "Menu/Pages/Include/PageFunction.h"
@@ -67,15 +66,7 @@ public:
     SettingsTester      test;
     SettingsMenu        menu;
     SettingsNRST        nrst;
-
-    // Настройки мультиметра
-    Multimeter::Settings::AVP::E              multi_avp;
-    Multimeter::Measure::E                    multi_meas;
-    Multimeter::Settings::RangeDC::E          multi_rangeDC;
-    Multimeter::Settings::RangeAC::E          multi_rangeAC;
-    Multimeter::Settings::RangeCurrent::E     multi_rangeCurrentAC;     ///< Предел измерения переменного тока
-    Multimeter::Settings::RangeCurrent::E     multi_rangeCurrentDC;     ///< Предел измерения постоянного тока
-    Multimeter::Settings::RangeResistance::E  multi_rangeResist;
+    SettingsMultimeter  mult;
 
     // Настройки регистратора
     bool                               rec_sourceChanA;      ///< Включение записи канала 1

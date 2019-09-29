@@ -5,13 +5,11 @@
 #include "Settings/Settings.h"
 #include "Hardware/Timer.h"
 #include "Device.h"
-#include <cstring>
-
 #include "Hardware/HAL/HAL.h"
+#include <cstring>
 
 
 using namespace Display::Primitives;
-using namespace Multimeter::Settings;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -83,7 +81,7 @@ void Multimeter::ChangeAVP()
 {
     ChangeMode();
 
-    char send[] = { 0x02, 'Z', (MULTI_AVP == AVP::On) ? '1' : '0', 0x0a };
+    char send[] = { 0x02, 'Z', (MULTI_AVP == MultimeterAVP::On) ? '1' : '0', 0x0a };
 
     USART3_::Transmit(send, 100);
 
