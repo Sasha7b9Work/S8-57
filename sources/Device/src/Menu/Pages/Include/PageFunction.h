@@ -7,10 +7,6 @@
 #include "Multimeter/Multimeter.h"
 
 
-#define SOURCE_FFT                  (set.math.sourceFFT)
-#define SOURCE_FFT_IS_A             (SOURCE_FFT == SourceFFT::A)
-#define SOURCE_FFT_IS_B             (SOURCE_FFT == SourceFFT::B)
-
 #define WINDOW_FFT                  (set.math.windowFFT)
 #define WINDOW_FFT_IS_HAMMING       (WINDOW_FFT == WindowFFT::Hamming)
 #define WINDOW_FFT_IS_BLACKMAN      (WINDOW_FFT == WindowFFT::Blackman)

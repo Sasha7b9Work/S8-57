@@ -221,11 +221,11 @@ static void DrawSpectrum()
             numPoints = 2048;
         }
     
-        if (SOURCE_FFT_IS_A)
+        if (set.math.sourceFFT == SourceFFT::A)
         {
             DRAW_SPECTRUM(OUT_A, numPoints, Chan::A);
         }
-        else if (SOURCE_FFT_IS_B)
+        else if (set.math.sourceFFT == SourceFFT::B)
         {
             DRAW_SPECTRUM(OUT_B, numPoints, Chan::B);
         }

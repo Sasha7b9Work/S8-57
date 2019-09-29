@@ -40,7 +40,7 @@ DEF_CHOICE_3( cSource,                                                          
     "Канал 1",
     "Канал 2",
     "Канал 1 + 2",
-    SOURCE_FFT, &PageFFT::self, IsActive_Source, Choice::Changed, Choice::AfterDraw
+    set.math.sourceFFT, &PageFFT::self, IsActive_Source, Choice::Changed, Choice::AfterDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
