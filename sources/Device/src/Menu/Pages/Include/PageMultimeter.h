@@ -9,8 +9,7 @@ struct MultimeterAVP
     {
         Off,
         On
-    } value;
-    explicit MultimeterAVP(E v) : value(v) { };
+    };
 };
 
 /// Предел имзерения постоянного напряжения
@@ -21,8 +20,7 @@ struct MultimeterRangeDC
         _2V,
         _20V,
         _500V
-    } value;
-    explicit MultimeterRangeDC(E v) : value(v) { };
+    };
 };
 
 /// Предел измерения переменного напряжения
@@ -33,8 +31,7 @@ struct MultimeterRangeAC
         _2V,
         _20V,
         _400V
-    } value;
-    explicit MultimeterRangeAC(E v) : value(v) {};
+    };
 };
 
 /// Предел измерения тока
@@ -44,8 +41,7 @@ struct MultimeterRangeCurrent
     {
         _20mA,
         _2A
-    } value;
-    explicit MultimeterRangeCurrent(E v) : value(v) {};
+    };
 };
 
 /// Предел измерения сопротивленя постоянному току
@@ -57,8 +53,7 @@ struct MultimeterRangeResistance
         _20k,
         _200k,
         _10M
-    } value;
-    explicit MultimeterRangeResistance(E v) : value(v) {};
+    };
 };
 
 /// Режим измерений мультиметра

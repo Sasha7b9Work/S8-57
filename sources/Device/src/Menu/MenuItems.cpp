@@ -935,12 +935,12 @@ Color Item::ColorBackground(const Item *choice) const
     Color result = Color::GRAY_50;
 
     // Измерения по частоте
-    if (choice == PageFrequencyCounter::GetChoiceTimeF())
+    if (choice == PageFreqMeter::GetChoiceTimeF())
     {
         result = Color::WHITE;
     }
     // Измерения по периоду
-    else if (choice == PageFrequencyCounter::GetChoiceFreqClc() || choice == PageFrequencyCounter::GetChoiceNumPeriods())
+    else if (choice == PageFreqMeter::GetChoiceFreqClc() || choice == PageFreqMeter::GetChoiceNumPeriods())
     {
         result = Color::YELLOW;
     }

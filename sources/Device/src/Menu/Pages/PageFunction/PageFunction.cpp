@@ -11,11 +11,11 @@
 DEF_PAGE_5( pFunction,                                                                                                                                                      //--- тсмйжхъ ---
     "тсмйжхъ",
     "бШАНП ТСМЙЖХХ",
-    PageFrequencyCounter::self,   ///< тсмйжхъ - вюярнрнлеп
-    PageFFT::self,                ///< тсмйжхъ - яоейрп
-    PageMultimeter::self,         ///< тсмйжхъ - лскэрхлерп
-    PageTester::self,             ///< тсмйжхъ - реяреп
-    PageRecorder::self,           ///< тсмйжхъ - пецхярпюрнп
+    PageFreqMeter::self,        ///< тсмйжхъ - вюярнрнлеп
+    PageFFT::self,              ///< тсмйжхъ - яоейрп
+    PageMultimeter::self,       ///< тсмйжхъ - лскэрхлерп
+    PageTester::self,           ///< тсмйжхъ - реяреп
+    PageRecorder::self,         ///< тсмйжхъ - пецхярпюрнп
     PageName::Function, nullptr, Item::Active, Page::Changed, Page::BeforeDraw, E_BfKE
 )
 

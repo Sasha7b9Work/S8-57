@@ -21,7 +21,7 @@ DEF_CHOICE_2( cEnable,                                                          
     "",
     DISABLE_RU,
     ENABLE_RU,
-    set.freq.enabled, &PageFrequencyCounter::self, Item::Active, OnChanged_Enable, Choice::AfterDraw
+    set.freq.enabled, &PageFreqMeter::self, Item::Active, OnChanged_Enable, Choice::AfterDraw
 )
 
 
@@ -33,7 +33,7 @@ static bool IsActive_ModeView()
 
 static void OnChanged_ModeView(bool)
 {
-    PageFrequencyCounter::Init();
+    PageFreqMeter::Init();
 }
 
 DEF_CHOICE_2( cModeView,                                                                                                                               //--- ÔÓÍÊÖÈß - ×ÀÑÒÎÒÎÌÅĞ - Ğåæèì ---
@@ -41,7 +41,7 @@ DEF_CHOICE_2( cModeView,                                                        
     "",
     "×àñòîòà",
     "Ïåğèîä",
-    set.freq.modeView, &PageFrequencyCounter::self, IsActive_ModeView, OnChanged_ModeView, Choice::AfterDraw
+    set.freq.modeView, &PageFreqMeter::self, IsActive_ModeView, OnChanged_ModeView, Choice::AfterDraw
 )
 
 
@@ -68,7 +68,7 @@ DEF_CHOICE_3( cTimeF,                                                           
     "100ìñ",
     "1ñ",
     "10ñ",
-    set.freq.timeCounting, &PageFrequencyCounter::self, IsActive_TimeF, OnChanged_TimeF, Choice::AfterDraw
+    set.freq.timeCounting, &PageFreqMeter::self, IsActive_TimeF, OnChanged_TimeF, Choice::AfterDraw
 )
 
 
@@ -79,7 +79,7 @@ DEF_CHOICE_4( cFreqClc,                                                         
     "1ÌÃö",
     "10ÌÃö",
     "100ÌÃö",
-    set.freq.freqClc, &PageFrequencyCounter::self, IsActive_SettingsFrequency, OnChanged_FreqMeter_Period, Choice::AfterDraw
+    set.freq.freqClc, &PageFreqMeter::self, IsActive_SettingsFrequency, OnChanged_FreqMeter_Period, Choice::AfterDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -92,22 +92,22 @@ DEF_CHOICE_6( cNumPeriods,                                                      
     "1000",
     "10000",
     "100000",
-    set.freq.numberPeriods, &PageFrequencyCounter::self, IsActive_SettingsFrequency, OnChanged_FreqMeter_Period, Choice::AfterDraw
+    set.freq.numberPeriods, &PageFreqMeter::self, IsActive_SettingsFrequency, OnChanged_FreqMeter_Period, Choice::AfterDraw
 )
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-const Choice *PageFrequencyCounter::GetChoiceTimeF()
+const Choice *PageFreqMeter::GetChoiceTimeF()
 {
     return (const Choice *)&cTimeF;
 }
 
-const Choice *PageFrequencyCounter::GetChoiceFreqClc()
+const Choice *PageFreqMeter::GetChoiceFreqClc()
 {
     return (const Choice *)&cFreqClc;
 }
 
-const Choice *PageFrequencyCounter::GetChoiceNumPeriods()
+const Choice *PageFreqMeter::GetChoiceNumPeriods()
 {
     return (const Choice *)&cNumPeriods;
 }
@@ -123,13 +123,13 @@ DEF_PAGE_5_VAR( pFreqMeter, // -V641                                            
     PageName::Function_FrequencyCounter, &PageFunction::self, Item::Active, Choice::Changed, Page::BeforeDraw, E_BfKE
 )
 
-const Page * const PageFrequencyCounter::self = (const Page *)&pFreqMeter;
+const Page * const PageFreqMeter::self = (const Page *)&pFreqMeter;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void PageFrequencyCounter::Init()
+void PageFreqMeter::Init()
 {
-    Page *page = (Page *)PageFrequencyCounter::self;
+    Page *page = (Page *)PageFreqMeter::self;
 
     Item **items = (Item **)page->OwnData()->items;
 

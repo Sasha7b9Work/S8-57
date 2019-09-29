@@ -247,7 +247,7 @@ static void CloseIfSubPage(Page *parent, Page *page)
 void Menu::Init()
 {
     PageMultimeter::Init();
-    PageFrequencyCounter::Init();
+    PageFreqMeter::Init();
 
     if ((Page *)LastOpened((Page *)PageFunction::self) == PageMultimeter::self) //-V1027
     {
@@ -259,7 +259,7 @@ void Menu::Init()
     CloseIfSubPage(const_cast<Page *>(PageMultimeter::self), opened);
     CloseIfSubPage(const_cast<Page *>(PageRecorder::self), opened);
     CloseIfSubPage(const_cast<Page *>(PageTester::self), opened);
-    CloseIfSubPage(const_cast<Page *>(PageFrequencyCounter::self), opened);
+    CloseIfSubPage(const_cast<Page *>(PageFreqMeter::self), opened);
     CloseIfSubPage(const_cast<Page *>(PageFFT::self), opened);
 }
 
