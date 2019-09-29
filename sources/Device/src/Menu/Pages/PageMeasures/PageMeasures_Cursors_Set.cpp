@@ -53,7 +53,7 @@ void PageMeasuresCursors::PageSet::Draw_Channel(int x, int y)
     typedef void (*pFuncDraw)(int, int);
 
     static const pFuncDraw func[2] = {Draw_ChannelA, Draw_ChannelB};
-    func[CURS_SOURCE](x, y);
+    func[set.curs.source](x, y);
 }
 
 DEF_GRAPH_BUTTON_HINTS_2( bChannel,                                                                                                        //--- »«Ã≈–≈Õ»ﬂ -  ”–—Œ–€ - ”—“¿ÕŒ¬»“‹ -  ‡Ì‡Î ---
@@ -112,7 +112,7 @@ void PageMeasuresCursors::PageSet::OnPress_T()
 {
     if ((set.curs.active == CursorsActive::T) || CURsT_DISABLED)
     {
-        IncCursCntrlT(CURS_SOURCE);
+        IncCursCntrlT(set.curs.source);
     }
     set.curs.active = CursorsActive::T;
 }
@@ -132,7 +132,7 @@ static void Draw_T(int x, int y)
         else
         {
             bool condLeft = false, condDown = false;
-            Chan::E source = CURS_SOURCE;
+            Chan::E source = set.curs.source;
             CalculateConditions((int16)Cursors::PosT(source, 0), (int16)Cursors::PosT(source, 1), CURsT_CNTRL, &condLeft, &condDown);
             if (condLeft && condDown)
             {
@@ -209,14 +209,14 @@ void PageMeasuresCursors::PageSet::OnPress_U()
 {
     if ((set.curs.active == CursorsActive::U) || CURsU_DISABLED)
     {
-        IncCursCntrlU(CURS_SOURCE);
+        IncCursCntrlU(set.curs.source);
     }
     set.curs.active = CursorsActive::U;
 }
 
 static void Draw_U(int x, int y)
 {
-    Chan::E source = CURS_SOURCE;
+    Chan::E source = set.curs.source;
     if (CURsU_DISABLED)
     {
         Draw_U_disable(x, y);
@@ -262,7 +262,7 @@ DEF_GRAPH_BUTTON_HINTS_5( bU,                                                   
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void OnPress_100()
 {
-    PageMeasuresCursors::PageSet::SetCursPos100(CURS_SOURCE);
+    PageMeasuresCursors::PageSet::SetCursPos100(set.curs.source);
 }
 
 static void Draw_100(int x, int y)
@@ -331,16 +331,16 @@ bool PageMeasuresCursors::PageSet::OnArrows(const KeyEvent &event) //-V2506
     {
         if (set.curs.movement == CursorsMovement::Percents)
         {
-            value *= dUperc(CURS_SOURCE) / 100.0F;
+            value *= dUperc(set.curs.source) / 100.0F;
         }
 
         if (CURsU_CNTRL_1 || CURsU_CNTRL_1_2)
         {
-            SetShiftCursPosU(CURS_SOURCE, 0, value);
+            SetShiftCursPosU(set.curs.source, 0, value);
         }
         if (CURsU_CNTRL_2 || CURsU_CNTRL_1_2)
         {
-            SetShiftCursPosU(CURS_SOURCE, 1, value);
+            SetShiftCursPosU(set.curs.source, 1, value);
         }
         UpdateCursorsForLook();
     }
@@ -348,16 +348,16 @@ bool PageMeasuresCursors::PageSet::OnArrows(const KeyEvent &event) //-V2506
     {
         if (set.curs.movement == CursorsMovement::Percents)
         {
-            value *= dTperc(CURS_SOURCE) / 100.0F;
+            value *= dTperc(set.curs.source) / 100.0F;
         }
 
         if (CURsT_CNTRL_1 || CURsT_CNTRL_1_2)
         {
-            SetShiftCursPosT(CURS_SOURCE, 0, value);
+            SetShiftCursPosT(set.curs.source, 0, value);
         }
         if (CURsT_CNTRL_2 || CURsT_CNTRL_1_2)
         {
-            SetShiftCursPosT(CURS_SOURCE, 1, value);
+            SetShiftCursPosT(set.curs.source, 1, value);
         }
         UpdateCursorsForLook();
     }
@@ -393,7 +393,7 @@ const Page * const PageMeasuresCursors::PageSet::self = (const Page *)&pSet;
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void PageMeasuresCursors::PageSet::SetCursSource(Chan::E ch)
 {
-    CURS_SOURCE = ch;
+    set.curs.source = ch;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -442,7 +442,7 @@ void PageMeasuresCursors::PageSet::SetShiftCursPosT(Chan::E ch, int numCur, floa
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void PageMeasuresCursors::PageSet::UpdateCursorsForLook()
 {
-    Chan::E source = CURS_SOURCE;
+    Chan::E source = set.curs.source;
 
     if ((set.curs.active == CursorsActive::T) && (CURS_LOOK_U(Chan::A) || CURS_LOOK_BOTH(Chan::A)))
     {

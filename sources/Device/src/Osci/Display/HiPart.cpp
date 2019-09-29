@@ -421,7 +421,7 @@ static void WriteCursors()
         separator.Draw(203, 1);
 
         x += 3;
-        Chan::E source = CURS_SOURCE;
+        Chan::E source = set.curs.source;
         Color colorText = Color::CHAN[source];
         if (CURsU_ENABLED)
         {
@@ -460,7 +460,7 @@ static void WriteCursors()
             String(':').Draw(x, y2);
             Cursors::PercentsT(source).Draw(x + 8, y2);
 
-            if (CURSORS_SHOW_FREQ)
+            if (set.curs.showFreq)
             {
                 int width = 65;
                 x = Grid::Right() - width;

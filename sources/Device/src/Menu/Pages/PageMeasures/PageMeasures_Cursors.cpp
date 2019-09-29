@@ -68,7 +68,7 @@ DEF_CHOICE_2( cShowFreq,                                                        
     ,
     DISABLE_RU,
     ENABLE_RU,
-    CURSORS_SHOW_FREQ, &PageMeasuresCursors::self, IsActive_ShowFreq, Choice::Changed, Choice::AfterDraw
+    set.curs.showFreq, &PageMeasuresCursors::self, IsActive_ShowFreq, Choice::Changed, Choice::AfterDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

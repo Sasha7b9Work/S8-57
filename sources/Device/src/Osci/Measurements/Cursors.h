@@ -3,17 +3,15 @@
 #include "Osci/Osci_Settings.h"
 
 
-/// Режим слежения за курсорами
-#define CURS_LOOK_MODE(ch)          (set.curs.lookMode[ch])
 /// Включено слежение за курсорами напряжения
-#define CURS_LOOK_U(ch)             (CURS_LOOK_MODE(ch) == CursorsLookMode::Voltage)
+#define CURS_LOOK_U(ch)             (set.curs.lookMode[ch] == CursorsLookMode::Voltage)
 /// Включено слежение за курсорами времени
-#define CURS_LOOK_T(ch)             (CURS_LOOK_MODE(ch) == CursorsLookMode::Time)
+#define CURS_LOOK_T(ch)             (set.curs.lookMode[ch] == CursorsLookMode::Time)
 /// Включено слежение за курсорами времени и напряжения
-#define CURS_LOOK_BOTH(ch)          (CURS_LOOK_MODE(ch) == CursorsLookMode::Both)
+#define CURS_LOOK_BOTH(ch)          (set.curs.lookMode[ch] == CursorsLookMode::Both)
 
 #define CURsU_CNTRL_CH(ch)          (set.curs.cntrlU[ch])
-#define CURsU_CNTRL                 (CURsU_CNTRL_CH(CURS_SOURCE))
+#define CURsU_CNTRL                 (CURsU_CNTRL_CH(set.curs.source))
 #define CURsU_CNTRL_1               (CURsU_CNTRL == CursorsControl::_1)
 #define CURsU_CNTRL_2               (CURsU_CNTRL == CursorsControl::_2)
 #define CURsU_CNTRL_1_2             (CURsU_CNTRL == CursorsControl::_1_2)
@@ -21,21 +19,17 @@
 #define CURsU_ENABLED               (!CURsU_DISABLED)
 
 #define CURsT_CNTRL_CH(ch)          (set.curs.cntrlT[ch])
-#define CURsT_CNTRL                 (CURsT_CNTRL_CH(CURS_SOURCE))
+#define CURsT_CNTRL                 (CURsT_CNTRL_CH(set.curs.source))
 #define CURsT_CNTRL_1               (CURsT_CNTRL == CursorsControl::_1)
 #define CURsT_CNTRL_2               (CURsT_CNTRL == CursorsControl::_2)
 #define CURsT_CNTRL_1_2             (CURsT_CNTRL == CursorsControl::_1_2)
 #define CURsT_DISABLED              (CURsT_CNTRL == CursorsControl::Disable)
 #define CURsT_ENABLED               (!CURsT_DISABLED)
 
-#define CURSORS_SHOW_FREQ           (set.curs.showFreq)
-
-/// Курсоры какого канала сейчас активны
-#define CURS_SOURCE                 (set.curs.source)
 /// Активны курсоры канала A
-#define CURS_SOURCE_A               (CURS_SOURCE == Chan::A)
+#define CURS_SOURCE_A               (set.curs.source == Chan::A)
 /// Активны курсоры канала B
-#define CURS_SOURCE_B               (CURS_SOURCE == Chan::B)
+#define CURS_SOURCE_B               (set.curs.source == Chan::B)
 
 /// Абсолютное значение напряжения, соответствующее 100%
 #define dUperc(ch)                  (set.curs.deltaU100percents[ch])

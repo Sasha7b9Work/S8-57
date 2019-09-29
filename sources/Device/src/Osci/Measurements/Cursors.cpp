@@ -77,7 +77,7 @@ void Cursors::SetCursPosT_temp(Chan::E ch, int num, float value)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Cursors::Draw()
 {
-    Chan::E source = CURS_SOURCE;
+    Chan::E source = set.curs.source;
 
     Color::CHAN[source].SetAsCurrent();
 
