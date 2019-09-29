@@ -116,7 +116,9 @@ const Settings Settings::defaultSettings =
         FFTmaxDB::_60,              // FFTmaxDB
         MathFunction::Sum,          // function
         ModeRegSet::Range,          // modeRegSet
-        Divider::_1                 // divider
+        Divider::_1,                // divider
+        RShift::ZERO,
+        Range::_500mV
     },
     
     // ÃÂÌ˛ »«Ã≈–≈Õ»ﬂ

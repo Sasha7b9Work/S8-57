@@ -25,7 +25,6 @@ using namespace Osci::Display;
 using namespace Display::Primitives;
 
 using FPGA::HAL::GPIO::Pin;
-using FPGA::Settings::ModeCouple;
 using HAL::FSMC;
 
 

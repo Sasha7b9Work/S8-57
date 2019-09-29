@@ -235,7 +235,7 @@ static void BalanceChannel(Chan::E ch, Range::E range)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Osci::Balance(Chan::E ch)
 {
-    FPGA::Settings::ModeCouple::Set(ch, FPGA::Settings::ModeCouple::GND);
+    ModeCouple::Set(ch, ModeCouple::GND);
 
     SET_TBASE = TBase::_100ms;
 

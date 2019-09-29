@@ -434,7 +434,7 @@ pString Range::Name() const
 };
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void FPGA::Settings::ModeCouple::Set(Chan::E ch, ModeCouple::E modeCoupe)
+void ModeCouple::Set(Chan::E ch, ModeCouple::E modeCoupe)
 {
     SET_COUPLE(ch) = modeCoupe;
     Range::LoadBoth();

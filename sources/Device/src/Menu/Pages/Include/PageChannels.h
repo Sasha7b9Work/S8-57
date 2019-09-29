@@ -58,15 +58,15 @@ struct Divider
 
 struct SettingsChannel
 {
-    uint16                         rShift[Chan::Size];     ///< Сдвиг канала по вертикали
-    Range::E                       range[Chan::Size];      ///< Масштаб канала по вертикали
-    FPGA::Settings::ModeCouple::E  couple[Chan::Size];     ///< Связь по входу
-    bool                           enabled[Chan::Size];    ///< Включен/выключен канал
-    int8                           balanceShiftADC[2];     ///< Добавочное смещение для балансировки АЦП
-    FPGA::Settings::Bandwidth      bandwidth[2];           ///< Ограничение полосы
-    bool                           inverse[2];
-    Divider::E                     divider[2];             ///< Множитель
-    CalibrationMode::E             calibrationMode[2];     ///< Режим калибровки
+    uint16              rShift[2];              ///< Сдвиг канала по вертикали
+    Range::E            range[2];               ///< Масштаб канала по вертикали
+    ModeCouple::E       couple[2];              ///< Связь по входу
+    bool                enabled[2];             ///< Включен/выключен канал
+    int8                balanceShiftADC[2];     ///< Добавочное смещение для балансировки АЦП
+    Bandwidth           bandwidth[2];           ///< Ограничение полосы
+    bool                inverse[2];
+    Divider::E          divider[2];             ///< Множитель
+    CalibrationMode::E  calibrationMode[2];     ///< Режим калибровки
 };
 
 

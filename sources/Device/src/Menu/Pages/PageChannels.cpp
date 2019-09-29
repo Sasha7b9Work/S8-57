@@ -38,7 +38,7 @@ DEF_CHOICE_2( cInputA,                                                          
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void PageChannelA::OnChanged_Couple(bool)
 {
-    FPGA::Settings::ModeCouple::Set(Chan::A, SET_COUPLE_A);
+    ModeCouple::Set(Chan::A, SET_COUPLE_A);
 }
 
 DEF_CHOICE_3( cCoupleA,                                                                                                                                             //--- ÊÀÍÀË 1 - Ñâÿçü ---
@@ -148,7 +148,7 @@ DEF_CHOICE_2( cInputB,                                                          
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void PageChannelB::OnChanged_Couple(bool)
 {
-    FPGA::Settings::ModeCouple::Set(Chan::B, SET_COUPLE_B);
+    ModeCouple::Set(Chan::B, SET_COUPLE_B);
 }
 
 DEF_CHOICE_3( cCoupleB,                                                                                                                                             //--- ÊÀÍÀË 2 - Ñâÿçü ---

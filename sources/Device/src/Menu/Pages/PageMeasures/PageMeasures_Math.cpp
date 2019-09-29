@@ -149,7 +149,7 @@ DEF_GRAPH_BUTTON_HINTS_2( bModeArrows,                                          
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void OnPress_RangeA()
 {
-    set.ch.range[Chan::Math] = set.ch.range[Chan::A];
+    set.math.range = set.ch.range[Chan::A];
     MATH_DIVIDER = (int8)set.ch.divider[Chan::A];
 }
 
@@ -172,7 +172,7 @@ DEF_GRAPH_BUTTON( bRangeA,                                                      
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void OnPress_RangeB()
 {
-    set.ch.range[Chan::Math] = set.ch.range[Chan::B];
+    set.math.range = set.ch.range[Chan::B];
     MATH_DIVIDER = (int8)set.ch.divider[Chan::B];
 }
 
@@ -219,7 +219,7 @@ static bool OnArrows_Function(const KeyEvent &event) // -V2506
 
     if (MATH_MODE_REG_SET_IS_RSHIFT)
     {
-        uint16 prevRShift = set.ch.rShift[Chan::Math];
+        uint16 prevRShift = set.math.rShift;
         uint16 rShift = prevRShift;
         if (delta > 0)
         {
@@ -232,7 +232,7 @@ static bool OnArrows_Function(const KeyEvent &event) // -V2506
                     rShift = RShift::ZERO;
                 }
                 Beeper::RegulatorShiftRotate();
-                set.ch.rShift[Chan::Math] = rShift;
+                set.math.rShift = rShift;
             }
         }
         else
@@ -246,7 +246,7 @@ static bool OnArrows_Function(const KeyEvent &event) // -V2506
                     rShift = RShift::ZERO;
                 }
                 Beeper::RegulatorShiftRotate();
-                set.ch.rShift[Chan::Math] = rShift;
+                set.math.rShift = rShift;
             }
         }
     }
@@ -255,24 +255,24 @@ static bool OnArrows_Function(const KeyEvent &event) // -V2506
         static int sum = 0;
         sum -= delta;
 
-        float rShiftAbs = FPGA::Math::RShift2Abs(set.ch.rShift[Chan::Math], set.ch.range[Chan::Math]);
+        float rShiftAbs = FPGA::Math::RShift2Abs(set.math.rShift, set.math.range);
 
         if (sum > 2)
         {
-            if (set.ch.range[Chan::Math] < Range::Size - 1)
+            if (set.math.range < Range::Size - 1)
             {
-                set.ch.range[Chan::Math] = (Range::E)((uint8)(set.ch.range[Chan::Math] + 1));  // SET_RANGE_MATH++;
-                set.ch.rShift[Chan::Math] = (uint16)FPGA::Math::RShift2Rel(rShiftAbs, set.ch.range[Chan::Math]);
+                set.math.range = (Range::E)((uint8)(set.math.range + 1));  // SET_RANGE_MATH++;
+                set.math.rShift = (uint16)FPGA::Math::RShift2Rel(rShiftAbs, set.math.range);
                 Beeper::RegulatorSwitchRotate();
             }
             sum = 0;
         }
         else if (sum < -2)
         {
-            if (set.ch.range[Chan::Math] > 0)
+            if (set.math.range > 0)
             {
-                set.ch.range[Chan::Math] = (Range::E)((uint8)(set.ch.range[Chan::Math] - 1));  // SET_RANGE_MATH--;
-                set.ch.rShift[Chan::Math] = (uint16)FPGA::Math::RShift2Rel(rShiftAbs, set.ch.range[Chan::Math]);
+                set.math.range = (Range::E)((uint8)(set.math.range - 1));  // SET_RANGE_MATH--;
+                set.math.rShift = (uint16)FPGA::Math::RShift2Rel(rShiftAbs, set.math.range);
                 Beeper::RegulatorSwitchRotate();
             }
             sum = 0;

@@ -20,7 +20,6 @@ struct Chan
     {
         A,
         B,
-        Math,
         Size
     } value;
     explicit Chan(E v) : value(v) { };
@@ -142,4 +141,36 @@ struct RShift
 private:
     /// Отрисовать маркер вертикального смещения на сетке
     static void Draw(Chan::E ch);
+};
+
+/// Режим канала по входу.
+struct ModeCouple
+{
+    enum E
+    {
+        DC,      ///< Закрытый вход
+        AC,      ///< Открытый вход
+        GND,     ///< Вход заземлён.
+        Size
+    } value;
+    explicit ModeCouple(E v) : value(v) {};
+    pString UGO() const;
+
+    static void Set(Chan::E ch, ModeCouple::E couple);
+};
+
+struct Bandwidth
+{
+    enum E
+    {
+        Full,     ///< Если это значение выбрано в меню КАНАЛ, то при этом положение устанавливается полоса из ОТЛАДКА-КАНАЛЫ-Полоса.
+        _20MHz,
+    } value;
+
+    explicit Bandwidth(E v) : value(v) {};
+    void Load();
+
+private:
+    /// Возвращает канал, для которого является действующей эта настройка
+    Chan::E GetChannel() const;
 };
