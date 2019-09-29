@@ -154,7 +154,7 @@ static int CalculateShift()
     {
 
         float tin = (float)(FPGA::valueADC - min + deltaMIN) / (max - deltaMAX - (min + deltaMIN));
-        int retValue = (int)(tin * Osci::Kr[SET_TBASE]);
+        int retValue = (int)(tin * Osci::Kr[set.time.base]);
 
         return retValue;
     }
@@ -219,7 +219,7 @@ bool FPGA::ReadDataChanenl(Chan::E ch, uint8 data[FPGA::MAX_NUM_POINTS])
 
         if (Osci::InModeRandomizer())
         {
-            k = Osci::Kr[SET_TBASE];
+            k = Osci::Kr[set.time.base];
         }
 
         addrRead = (uint16)(ReadLastRecord(ch) - (int)numPoints / k);

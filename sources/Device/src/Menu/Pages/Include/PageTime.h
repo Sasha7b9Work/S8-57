@@ -1,8 +1,6 @@
 #pragma once
 #include "Osci/Osci_Settings.h"
 
-#define TIME_DIV_XPOS       (set.time.timeDivXPos)
-
 #define SET_PEAKDET         (set.time.peakDet)
 #define SET_PEAKDET_EN      (SET_PEAKDET == PeakDetMode::Enabled)
 #define SET_PEAKDET_DIS     (SET_PEAKDET == PeakDetMode::Disabled)
