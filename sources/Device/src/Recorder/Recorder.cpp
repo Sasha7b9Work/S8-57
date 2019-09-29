@@ -53,7 +53,7 @@ void Recorder::Init()
     Range::LoadBoth();
     TrigInput::Load();
     RecorderScaleX::Load();
-    Osci::Settings::TShift::Load();
+    TShift::Load();
     Osci::Settings::LoadHoldfOff();
 
     running = false;

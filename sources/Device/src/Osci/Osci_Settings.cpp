@@ -209,7 +209,7 @@ void TBase::Load()
 
     FSMC::WriteToFPGA8(WR::TBASE, values[SET_TBASE]);
 
-    Osci::Settings::TShift::Load();
+    TShift::Load();
 
     set.ch[Chan::A].bandwidth.Load();
     set.ch[Chan::B].bandwidth.Load();

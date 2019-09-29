@@ -174,3 +174,18 @@ private:
     /// Возвращает канал, для которого является действующей эта настройка
     Chan::E GetChannel() const;
 };
+
+struct TShift
+{
+    static int Min();
+    static int Zero();
+    static int Max();
+
+    static void Set(int tShift);
+
+    static void Load();
+
+    static void Change(int delta);
+
+    static String ToString(TBase::E tBase);
+};
