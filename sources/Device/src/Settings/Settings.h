@@ -129,6 +129,7 @@ public:
     SettingsTime    time;
     SettingsCursors curs;
     SettingsMemory  mem;
+    SettingsMath    math;
 
 
     // Меню ИЗМЕРЕНИЯ
@@ -148,22 +149,6 @@ public:
     CalibratorMode::E   serv_calibratorMode;            ///< Режим работы калибратора.
     uint8               serv_soundVolume;               ///< Громкость звука
     bool                serv_showInfoVoltage;           ///< Показывать напряжение батареи на экране
-
-    // Настройки математики
-
-    FuncModeDraw::E          math_modeDraw;             ///< Раздельный или общий дисплей в режиме математической функции.
-    bool                     math_enableFFT;
-    ScaleFFT::E              math_scaleFFT;
-    SourceFFT::E             math_sourceFFT;
-    WindowFFT::E             math_windowFFT;
-    uint8                    math_currentCursor;        ///< Определяет, каким курсором спектра управляет ручка УСТАНОВКА.
-    uint8                    math_posCur[2];            ///< Позиция курсора спектра. Изменяется 0...256.
-    FFTmaxDB::E              math_FFTmaxDB;
-    MathFunction::E          math_function;
-    ModeRegSet::E            math_modeRegSet;           ///< Функция ручки УСТАНОВКА - масштаб по времени или смещение по вертикали.
-    Osci::Settings::Range::E math_range;
-    int8                     math_divider;
-    uint16                   math_rShift;
 
     // Настройки частотомера
 

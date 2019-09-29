@@ -106,6 +106,23 @@ const Settings Settings::defaultSettings =
         FileNamingMode::Mask,                           // mem_fileNamingMode;                        
         {},                                             // mem_fileNameMask[MAX_SYMBOLS_IN_FILE_NAME];
     },
+
+    // Настройки математики
+    {
+        FuncModeDraw::Disable,      // math_modeDraw;     
+        false,                      // math_enableFFT;    
+        ScaleFFT::Log,              // math_scaleFFT;     
+        SourceFFT::Both,            // math_sourceFFT;    
+        WindowFFT::Hamming,         // math_windowFFT;    
+        0,                          // math_currentCursor;
+        { 50, 50 },                 // math_posCur[2];    
+        FFTmaxDB::_60,              // math_FFTmaxDB;     
+        MathFunction::Sum,          // math_function;     
+        ModeRegSet::Range,          // math_modeRegSet;   
+        Range::_1V,                 // math_range;        
+        Divider::_1,                // math_divider;      
+        RShift::ZERO,               // math_rShift;   
+    },
     
     // Меню ИЗМЕРЕНИЯ
     
@@ -130,23 +147,7 @@ const Settings Settings::defaultSettings =
     false,                              // serv_recorder
     CalibratorMode::Freq,               // serv_calibratorMode
     0,                                  // serv_soundVolume
-    false,                              // serv_showInfoVoltage
-    
-    // Настройки математики
-    
-    FuncModeDraw::Disable,      // math_modeDraw;     
-    false,                      // math_enableFFT;    
-    ScaleFFT::Log,              // math_scaleFFT;     
-    SourceFFT::Both,            // math_sourceFFT;    
-    WindowFFT::Hamming,         // math_windowFFT;    
-    0,                          // math_currentCursor;
-    { 50, 50 },                 // math_posCur[2];    
-    FFTmaxDB::_60,              // math_FFTmaxDB;     
-    MathFunction::Sum,          // math_function;     
-    ModeRegSet::Range,          // math_modeRegSet;   
-    Range::_1V,                 // math_range;        
-    Divider::_1,                // math_divider;      
-    RShift::ZERO,               // math_rShift;       
+    false,                              // serv_showInfoVoltage  
     
     // Настройки частотомера
     

@@ -1,41 +1,42 @@
 #pragma once
 #include "Menu/MenuItems.h"
+#include "Osci/Osci_Settings.h"
 
 
-#define SOURCE_FFT                  (set.math_sourceFFT)
+#define SOURCE_FFT                  (set.math.sourceFFT)
 #define SOURCE_FFT_IS_A             (SOURCE_FFT == SourceFFT::A)
 #define SOURCE_FFT_IS_B             (SOURCE_FFT == SourceFFT::B)
 
-#define WINDOW_FFT                  (set.math_windowFFT)
+#define WINDOW_FFT                  (set.math.windowFFT)
 #define WINDOW_FFT_IS_HAMMING       (WINDOW_FFT == WindowFFT::Hamming)
 #define WINDOW_FFT_IS_BLACKMAN      (WINDOW_FFT == WindowFFT::Blackman)
 #define WINDOW_FFT_IS_HANN          (WINDOW_FFT == WindowFFT::Hann)
-#define MAX_DB_FFT                  (set.math_FFTmaxDB)
+#define MAX_DB_FFT                  (set.math.FFTmaxDB)
 #define MAX_DB_FOR_FFT              FFTmaxDB::MaxDBforFFT(MAX_DB_FFT)
-#define FFT_ENABLED                 (set.math_enableFFT)
+#define FFT_ENABLED                 (set.math.enableFFT)
 #define MATH_ENABLED                (FUNC_MODE_DRAW_IS_ENABLED || FFT_ENABLED)
 
-#define SCALE_FFT                   (set.math_scaleFFT)
+#define SCALE_FFT                   (set.math.scaleFFT)
 #define SCALE_FFT_IS_LOG            (SCALE_FFT == ScaleFFT::Log)
 #define SCALE_FFT_IS_LINEAR         (SCALE_FFT == ScaleFFT::Linear)
 
-#define MATH_FUNC                   (set.math_function)
+#define MATH_FUNC                   (set.math.function)
 
-#define FUNC_MODE_DRAW              (set.math_modeDraw)
+#define FUNC_MODE_DRAW              (set.math.modeDraw)
 #define FUNC_MODE_DRAW_IS_ENABLED   (FUNC_MODE_DRAW != FuncModeDraw::Disable)
 #define FUNC_MODE_DRAW_IS_SEPARATE  (FUNC_MODE_DRAW == FuncModeDraw::Separate)
 #define FUNC_MODE_DRAW_IS_TOGETHER  (FUNC_MODE_DRAW == FuncModeDraw::Together)
 
-#define FFT_POS_CURSOR(num)         (set.math_posCur[num])
+#define FFT_POS_CURSOR(num)         (set.math.posCur[num])
 #define FFT_POS_CURSOR_0            (FFT_POS_CURSOR(0))
 #define FFT_POS_CURSOR_1            (FFT_POS_CURSOR(1))
 
-#define MATH_CURRENT_CUR            (set.math_currentCursor)
+#define MATH_CURRENT_CUR            (set.math.currentCursor)
 #define MATH_CURRENT_CUR_IS_0       (MATH_CURRENT_CUR == 0)
 
-#define MATH_DIVIDER                (set.math_divider)
+#define MATH_DIVIDER                (set.math.divider)
 
-#define MATH_MODE_REG_SET           (set.math_modeRegSet)
+#define MATH_MODE_REG_SET           (set.math.modeRegSet)
 #define MATH_MODE_REG_SET_IS_RSHIFT (MATH_MODE_REG_SET == ModeRegSet::RShift)
 #define MATH_MODE_REG_SET_IS_RANGE  (MATH_MODE_REG_SET == ModeRegSet::Range)
 
@@ -119,6 +120,24 @@ struct ModeRegSet
         RShift
     } value;
     explicit ModeRegSet(E v) : value(v) {};
+};
+
+
+struct SettingsMath
+{
+    FuncModeDraw::E          modeDraw;             ///< Раздельный или общий дисплей в режиме математической функции.
+    bool                     enableFFT;
+    ScaleFFT::E              scaleFFT;
+    SourceFFT::E             sourceFFT;
+    WindowFFT::E             windowFFT;
+    uint8                    currentCursor;        ///< Определяет, каким курсором спектра управляет ручка УСТАНОВКА.
+    uint8                    posCur[2];            ///< Позиция курсора спектра. Изменяется 0...256.
+    FFTmaxDB::E              FFTmaxDB;
+    MathFunction::E          function;
+    ModeRegSet::E            modeRegSet;           ///< Функция ручки УСТАНОВКА - масштаб по времени или смещение по вертикали.
+    Osci::Settings::Range::E range;
+    int8                     divider;
+    uint16                   rShift;
 };
 
 

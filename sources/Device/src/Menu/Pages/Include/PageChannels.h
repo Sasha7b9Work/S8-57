@@ -6,8 +6,8 @@
 #define SET_INVERSE(c)          (set.ch.inverse[c])
 #define SET_INVERSE_A           (SET_INVERSE(Chan::A))
 #define SET_INVERSE_B           (SET_INVERSE(Chan::B))
-#define SET_RSHIFT_MATH         (set.math_rShift)
-#define SET_RANGE_MATH          (set.math_range)
+#define SET_RSHIFT_MATH         (set.math.rShift)
+#define SET_RANGE_MATH          (set.math.range)
 
 #define SET_RANGE(c)            (set.ch.range[c])
 #define SET_RANGE_A             (SET_RANGE(Chan::A))
