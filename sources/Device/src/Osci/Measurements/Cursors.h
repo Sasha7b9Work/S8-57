@@ -24,11 +24,6 @@
 #define CURsT_DISABLED              (CURsT_CNTRL == CursorsControl::Disable)
 #define CURsT_ENABLED               (!CURsT_DISABLED)
 
-/// јбсолютное значение напр€жени€, соответствующее 100%
-#define dUperc(ch)                  (set.curs.deltaU100percents[ch])
-/// јбсолютное значение времени, соотвествующее 100%
-#define dTperc(ch)                  (set.curs.deltaT100percents[ch])
-
 
 namespace Osci
 {

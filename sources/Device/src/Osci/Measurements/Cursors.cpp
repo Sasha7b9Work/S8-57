@@ -180,7 +180,7 @@ String Cursors::PercentsU(Chan::E source)
     /// \todo Тут дикая дичь. Эта строчка вызывает HardFault. Возможно, из-за включенного выравнивания Settings. Надо подумать
     // float dPerc = dUperc(source);     
     float dPerc = 100.0F;
-    std::memcpy(&dPerc, &dUperc(source), sizeof(float));
+    std::memcpy(&dPerc, &set.curs.deltaU100percents[source], sizeof(float));
 
     float dValue = std::fabsf(PosU(source, 0) - PosU(source, 1));
     return String("%s%%", Float(dValue / dPerc * 100.0F).ToString(false, 5).CString());
@@ -190,7 +190,7 @@ String Cursors::PercentsU(Chan::E source)
 String Cursors::PercentsT(Chan::E source)
 {
     float dPerc = 100.0F;
-    std::memcpy(&dPerc, &dTperc(source), sizeof(float));
+    std::memcpy(&dPerc, &set.curs.deltaT100percents[source], sizeof(float));
 
     float dValue = std::fabsf(Cursors::PosT(source, 0) - Cursors::PosT(source, 1));
     return String("%s%%", Float(dValue / dPerc * 100.0F).ToString(false, 6).CString());

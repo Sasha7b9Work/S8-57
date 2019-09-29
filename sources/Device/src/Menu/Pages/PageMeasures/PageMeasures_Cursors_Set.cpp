@@ -331,7 +331,7 @@ bool PageMeasuresCursors::PageSet::OnArrows(const KeyEvent &event) //-V2506
     {
         if (set.curs.movement == CursorsMovement::Percents)
         {
-            value *= dUperc(set.curs.source) / 100.0F;
+            value *= set.curs.deltaU100percents[set.curs.source] / 100.0F;
         }
 
         if (CURsU_CNTRL_1 || CURsU_CNTRL_1_2)
@@ -348,7 +348,7 @@ bool PageMeasuresCursors::PageSet::OnArrows(const KeyEvent &event) //-V2506
     {
         if (set.curs.movement == CursorsMovement::Percents)
         {
-            value *= dTperc(set.curs.source) / 100.0F;
+            value *= set.curs.deltaT100percents[set.curs.source] / 100.0F;
         }
 
         if (CURsT_CNTRL_1 || CURsT_CNTRL_1_2)
@@ -411,8 +411,8 @@ void PageMeasuresCursors::PageSet::IncCursCntrlT(Chan::E ch)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void PageMeasuresCursors::PageSet::SetCursPos100(Chan::E ch)
 {
-    dUperc(ch) = (float)std::fabsf(set.curs.posCurU[ch][0] - set.curs.posCurU[ch][1]);
-    dTperc(ch) = (float)std::fabsf(Cursors::PosT(ch, 0) - Cursors::PosT(ch, 1));
+    set.curs.deltaU100percents[ch] = (float)std::fabsf(set.curs.posCurU[ch][0] - set.curs.posCurU[ch][1]);
+    set.curs.deltaT100percents[ch] = (float)std::fabsf(Cursors::PosT(ch, 0) - Cursors::PosT(ch, 1));
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
