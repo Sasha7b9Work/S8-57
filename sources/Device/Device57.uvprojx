@@ -1556,11 +1556,6 @@
               <FilePath>.\src\Osci\Measurements\Cursors.h</FilePath>
             </File>
             <File>
-              <FileName>Cursors_Settings.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Osci\Measurements\Cursors_Settings.h</FilePath>
-            </File>
-            <File>
               <FileName>Measurements.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Osci\Measurements\Measurements.cpp</FilePath>
