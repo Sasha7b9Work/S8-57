@@ -112,7 +112,7 @@ DEF_GRAPH_BUTTON_HINTS_2( bType,                                                
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void OnPress_ModeArrows()
 {
-    Math::CircleIncrease<int8>((int8 *)&MATH_MODE_REG_SET, 0, 1);
+    Math::CircleIncrease<int8>((int8 *)&set.math.modeRegSet, 0, 1);
 }
 
 static void Draw_ModeArrows_Range(int x, int y)
@@ -130,7 +130,7 @@ static void Draw_ModeArrows(int x, int y)
     typedef void (*pFuncDraw)(int, int);
 
     static const pFuncDraw funcs[2] = { Draw_ModeArrows_Range, Draw_ModeArrows_RShift };
-    funcs[MATH_MODE_REG_SET](x, y);
+    funcs[set.math.modeRegSet](x, y);
 }
 
 static bool IsActive_ModeArrows()
@@ -150,7 +150,7 @@ DEF_GRAPH_BUTTON_HINTS_2( bModeArrows,                                          
 static void OnPress_RangeA()
 {
     set.math.range = set.ch[Chan::A].range;
-    MATH_DIVIDER = (int8)set.ch[Chan::A].divider;
+    set.math.divider = (int8)set.ch[Chan::A].divider;
 }
 
 static void Draw_RangeA(int x, int y)
@@ -173,7 +173,7 @@ DEF_GRAPH_BUTTON( bRangeA,                                                      
 static void OnPress_RangeB()
 {
     set.math.range = set.ch[Chan::B].range;
-    MATH_DIVIDER = (int8)set.ch[Chan::B].divider;
+    set.math.divider = (int8)set.ch[Chan::B].divider;
 }
 
 static void Draw_RangeB(int x, int y)
@@ -217,7 +217,7 @@ static bool OnArrows_Function(const KeyEvent &event) // -V2506
 
     int delta = (key == Key::Up || key == Key::Right) ? 1 : -1;
 
-    if (MATH_MODE_REG_SET_IS_RSHIFT)
+    if (set.math.modeRegSet == ModeRegSet::RShift)
     {
         uint16 prevRShift = set.math.rShift;
         uint16 rShift = prevRShift;
@@ -250,7 +250,7 @@ static bool OnArrows_Function(const KeyEvent &event) // -V2506
             }
         }
     }
-    if (MATH_MODE_REG_SET_IS_RANGE)
+    if (set.math.modeRegSet == ModeRegSet::Range)
     {
         static int sum = 0;
         sum -= delta;

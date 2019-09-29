@@ -7,12 +7,6 @@
 #include "Multimeter/Multimeter.h"
 
 
-#define MATH_DIVIDER                (set.math.divider)
-
-#define MATH_MODE_REG_SET           (set.math.modeRegSet)
-#define MATH_MODE_REG_SET_IS_RSHIFT (MATH_MODE_REG_SET == ModeRegSet::RShift)
-#define MATH_MODE_REG_SET_IS_RANGE  (MATH_MODE_REG_SET == ModeRegSet::Range)
-
 struct FuncModeDraw
 {
     enum E
