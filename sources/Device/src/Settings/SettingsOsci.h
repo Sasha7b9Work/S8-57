@@ -189,3 +189,30 @@ struct TShift
 
     static String ToString(TBase::E tBase);
 };
+
+namespace Trig
+{
+    /// Возвращает true в случае наличия синхроимпульса
+    bool SyncPulse();
+    /// Вывести уровень синхронизации поверх сетки
+    void DrawOnGrid();
+    /// После вызова этой функции уровень синхронизации будет отрисовываться поверх сигнала в течение timMS миллисекунд
+    static void NeedForDraw();
+
+    struct Level
+    {
+        static const int MIN = 20;
+        static const int MAX = 980;
+        static const int ZERO = 500;
+        /// Загрузить уровень синхронизации в аппаратную часть
+        static void Load();
+        /// Изменить уровень синхронизации на delta единиц
+        static void Change(int delta);
+        /// Установить заданный уровень синхронизации
+        static void Set(int level);
+        /// Однократно найти уровень синхронизации
+        static void Find();
+    };
+
+    extern bool pulse;
+};
