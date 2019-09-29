@@ -480,7 +480,7 @@ void PageMemory::SaveSignalToFlashDrive()
 {
     if (FDrive::IsConnected())
     {
-        if (FILE_NAMING_MODE_MANUAL)
+        if (set.mem.fileNamingMode == FileNamingMode::Manually)
         {
             Display::SetAddDrawFunction(DrawSetName);
         }

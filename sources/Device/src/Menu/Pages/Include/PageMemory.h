@@ -3,10 +3,6 @@
 #include "Osci/Osci_Settings.h"
 
 
-#define MODE_WORK               (set.mem.modeWork)
-#define MODE_WORK_IS_DIR        (MODE_WORK == ModeWork::Dir)
-#define MODE_WORK_IS_RAM        (MODE_WORK == ModeWork::RAM)
-
 #define SHOW_IN_INT             (set.mem.modeShowIntMem)
 #define SHOW_IN_INT_SAVED       (SHOW_IN_INT == ModeShowIntMem::Saved)
 #define SHOW_IN_INT_DIRECT      (SHOW_IN_INT == ModeShowIntMem::Direct)

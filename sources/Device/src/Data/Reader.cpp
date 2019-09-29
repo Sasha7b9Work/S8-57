@@ -40,7 +40,7 @@ void Reader::ReadDataFromStorage()
 
     IN_A = IN_B = nullptr;
 
-    DATA = Osci::Storage::GetData(MODE_WORK_IS_RAM ? Memory::RAM::CurrentSignal() : 0);
+    DATA = Osci::Storage::GetData((set.mem.modeWork == ModeWork::RAM) ? Memory::RAM::CurrentSignal() : 0);
 
     if (DATA != nullptr)
     {
@@ -52,7 +52,7 @@ void Reader::ReadDataFromStorage()
         FindTrigLevelIfNeed();
     }
 
-    if (MODE_WORK_IS_DIR && Osci::InModeP2P())
+    if ((set.mem.modeWork == ModeWork::Dir) && Osci::InModeP2P())
     {
         ReadDataP2P();
     }

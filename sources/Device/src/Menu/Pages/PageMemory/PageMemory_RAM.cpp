@@ -66,12 +66,12 @@ static void OnOpenClose_RAM(bool enter)
     {
         RUN_FPGA_BEFORE_SB = FPGA::IsRunning() ? 1U : 0U;
         Osci::Stop(false);
-        MODE_WORK = ModeWork::RAM;
+        set.mem.modeWork = ModeWork::RAM;
         Memory::RAM::ResetSignal();
     }
     else
     {
-        MODE_WORK = ModeWork::Dir;
+        set.mem.modeWork = ModeWork::Dir;
         if (RUN_FPGA_BEFORE_SB)
         {
             FPGA::OnPressStart();
