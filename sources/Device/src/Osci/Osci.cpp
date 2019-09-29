@@ -45,9 +45,9 @@ void Osci::Init()
     Stop();
 
     FPGA::HAL::LoadRegUPR();
-    Settings::Range::LoadBoth();
-    Settings::RShift::Load(Chan::A);
-    Settings::RShift::Load(Chan::B);
+    Range::LoadBoth();
+    RShift::Load(Chan::A);
+    RShift::Load(Chan::B);
     TrigInput::Load();
     Settings::Trig::Level::Load();
     TrigPolarity::Load();
@@ -193,11 +193,11 @@ static void BalanceChannel(Chan::E ch, Range::E range)
 {
     Osci::Stop();
 
-    Osci::Settings::Range::Set(ch, range);
+    Range::Set(ch, range);
 
     set.dbg.addRShift[ch][range] = 0;
 
-    Osci::Settings::RShift::Set(ch, Osci::Settings::RShift::ZERO);
+    RShift::Set(ch, RShift::ZERO);
 
     Osci::Start();
 

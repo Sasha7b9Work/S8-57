@@ -70,16 +70,16 @@ struct RecorderScaleX
 
 struct SettingsRecorder
 {
-    bool                     enabledChanA;   ///< Включение записи канала 1
-    bool                     enabledChanB;   ///< Включение записи канала 2
-    bool                     enabledSensor;  ///< Включение записи показаний датчика
-    RecorderTypeStorage::E   storageRecord;  ///< Куда сохранять данные
-    RecorderTypeStorage::E   storagePlay;    ///< Откуда брать сохранённые данные
-    RecorderAxis::E          axisMove;       ///< Текущая ось перемещения
-    RecorderAxis::E          axisZoom;       ///< Текущая ось масштабирования
-    RecorderScaleX           scaleX;         ///< Установленный масштаб по времени
-    int8                     currentCursor;
-    Osci::Settings::Range::E unused[2];      ///< Масштаб по вертикали в режиме регистратора
+    bool                    enabledChanA;   ///< Включение записи канала 1
+    bool                    enabledChanB;   ///< Включение записи канала 2
+    bool                    enabledSensor;  ///< Включение записи показаний датчика
+    RecorderTypeStorage::E  storageRecord;  ///< Куда сохранять данные
+    RecorderTypeStorage::E  storagePlay;    ///< Откуда брать сохранённые данные
+    RecorderAxis::E         axisMove;       ///< Текущая ось перемещения
+    RecorderAxis::E         axisZoom;       ///< Текущая ось масштабирования
+    RecorderScaleX          scaleX;         ///< Установленный масштаб по времени
+    int8                    currentCursor;
+    Range::E                unused[2];      ///< Масштаб по вертикали в режиме регистратора
 };
 
 

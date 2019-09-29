@@ -127,19 +127,19 @@ struct ModeRegSet
 
 struct SettingsMath
 {
-    FuncModeDraw::E          modeDraw;             ///< Раздельный или общий дисплей в режиме математической функции.
-    bool                     enableFFT;
-    ScaleFFT::E              scaleFFT;
-    SourceFFT::E             sourceFFT;
-    WindowFFT::E             windowFFT;
-    uint8                    currentCursor;        ///< Определяет, каким курсором спектра управляет ручка УСТАНОВКА.
-    uint8                    posCur[2];            ///< Позиция курсора спектра. Изменяется 0...256.
-    FFTmaxDB::E              FFTmaxDB;
-    MathFunction::E          function;
-    ModeRegSet::E            modeRegSet;           ///< Функция ручки УСТАНОВКА - масштаб по времени или смещение по вертикали.
-    Osci::Settings::Range::E range;
-    int8                     divider;
-    uint16                   rShift;
+    FuncModeDraw::E modeDraw;             ///< Раздельный или общий дисплей в режиме математической функции.
+    bool            enableFFT;
+    ScaleFFT::E     scaleFFT;
+    SourceFFT::E    sourceFFT;
+    WindowFFT::E    windowFFT;
+    uint8           currentCursor;        ///< Определяет, каким курсором спектра управляет ручка УСТАНОВКА.
+    uint8           posCur[2];            ///< Позиция курсора спектра. Изменяется 0...256.
+    FFTmaxDB::E     FFTmaxDB;
+    MathFunction::E function;
+    ModeRegSet::E   modeRegSet;           ///< Функция ручки УСТАНОВКА - масштаб по времени или смещение по вертикали.
+    Range::E        range;
+    int8            divider;
+    uint16          rShift;
 };
 
 struct SettingsCursors

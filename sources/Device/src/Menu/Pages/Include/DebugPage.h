@@ -43,7 +43,7 @@ struct SettingsDebug
     bool                         ShowStats;                 ///< Показывать статистику на экране (fps, например).
     int16                        enum_gate_max;             ///< Ограничение ворот в рандомизаторе сверху
     int16                        enum_gate_min;             ///< Ограничение ворот в рандомизаторе снизу
-    int8                         addRShift[2][Osci::Settings::Range::Size];      ///< Добавочные смещения для 
+    int8                         addRShift[2][Range::Size]; ///< Добавочные смещения для 
 };
 
 float   GetStretchADC(Chan::E ch);

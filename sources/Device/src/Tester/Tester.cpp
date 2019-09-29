@@ -123,10 +123,10 @@ void Tester::Enable() // -V2506
 
     SET_COUPLE_A = SET_COUPLE_B = ModeCouple::GND;
 
-    SET_RANGE(Chan::A) = Osci::Settings::Range::_2V;
-    SET_RANGE(Chan::B) = Osci::Settings::Range::_2V;
+    SET_RANGE(Chan::A) = Range::_2V;
+    SET_RANGE(Chan::B) = Range::_2V;
 
-    Osci::Settings::Range::LoadBoth();
+    Range::LoadBoth();
 
     RShift::Set(Chan::A, RShift::ZERO);
     RShift::Set(Chan::B, RShift::ZERO);
@@ -323,7 +323,7 @@ pString Tester::Scale::ToString() const // -V2506
 {
     if (Chan(ch).IsA())
     {
-        return Osci::Settings::Range((Osci::Settings::Range::E)value).ToString(Divider::_1);
+        return Range((Range::E)value).ToString(Divider::_1);
     }
 
     static const pString names[] =
@@ -362,10 +362,10 @@ String Tester::Shift::ToString(Scale::E scale) // -V2506
 {
     if (ch == Chan::A)
     {
-        return Osci::Settings::RShift::ToString(shift, (Osci::Settings::Range::E)scale, Divider::_1);
+        return RShift::ToString(shift, (Range::E)scale, Divider::_1);
     }
 
-    float shiftAbs = FPGA::Math::RShift2Abs(shift, (Osci::Settings::Range::E)scale) * 1e-3F;
+    float shiftAbs = FPGA::Math::RShift2Abs(shift, (Range::E)scale) * 1e-3F;
 
     return Current(shiftAbs).ToString();
 }

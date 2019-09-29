@@ -246,7 +246,7 @@ static void WriteTextVoltage(Chan::E ch, int x, int y)
 
     bool inverse = SET_INVERSE(ch);
     //int8 divider = (int8)SET_DIVIDER(ch);
-    Osci::Settings::Range::E range = SET_RANGE(ch);
+    Range::E range = SET_RANGE(ch);
 
     const int widthField = 91;
     const int heightField = 8;

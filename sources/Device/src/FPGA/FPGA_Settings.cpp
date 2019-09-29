@@ -312,7 +312,7 @@ String TShift::ToString(TBase::E tBase)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-String RShift::ToString(uint16 rShiftRel, Osci::Settings::Range::E range, int8 _divider)
+String RShift::ToString(uint16 rShiftRel, Range::E range, int8 _divider)
 {
     float rShiftVal = FPGA::Math::RShift2Abs(rShiftRel, range) * Divider((uint)_divider).ToAbs();
     return Voltage(rShiftVal).ToString(true);
@@ -437,7 +437,7 @@ pString Range::Name() const
 void FPGA::Settings::ModeCouple::Set(Chan::E ch, ModeCouple::E modeCoupe)
 {
     SET_COUPLE(ch) = modeCoupe;
-    ::Osci::Settings::Range::LoadBoth();
+    Range::LoadBoth();
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

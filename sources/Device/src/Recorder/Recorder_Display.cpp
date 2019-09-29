@@ -78,9 +78,9 @@ void Recorder::Display::DrawSettings(int x, int y)
 
     Text(REC_SCALE_X.ToString()).Draw(x + 2, y + 2);
 
-    Text(Osci::Settings::Range(SET_RANGE_A).ToString(static_cast<int8>(set.ch.divider[Chan::A]))).Draw(x + 2, y + 11, Color::CHAN[Chan::A]);
+    Text(Range(SET_RANGE_A).ToString(static_cast<int8>(set.ch.divider[Chan::A]))).Draw(x + 2, y + 11, Color::CHAN[Chan::A]);
 
-    Text(Osci::Settings::Range(SET_RANGE_B).ToString(static_cast<int8>(set.ch.divider[Chan::B]))).Draw(x + 2, y + 20, Color::CHAN[Chan::B]);
+    Text(Range(SET_RANGE_B).ToString(static_cast<int8>(set.ch.divider[Chan::B]))).Draw(x + 2, y + 20, Color::CHAN[Chan::B]);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -154,7 +154,7 @@ static char *VoltageCursor(Chan::E ch, int numCur, char buffer[20])
 
     uint8 value = (uint8)((point.Min(ch) + point.Max(ch)) / 2);
 
-    float voltage = FPGA::Math::Point2Voltage(value, SET_RANGE(ch), Osci::Settings::RShift::ZERO);
+    float voltage = FPGA::Math::Point2Voltage(value, SET_RANGE(ch), RShift::ZERO);
 
     std::strcpy(buffer, Voltage(voltage).ToString(false).CString());
 

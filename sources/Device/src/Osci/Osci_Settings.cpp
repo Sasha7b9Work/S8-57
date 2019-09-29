@@ -27,7 +27,6 @@ using namespace Display::Primitives;
 using FPGA::HAL::GPIO::Pin;
 using FPGA::Settings::ModeCouple;
 using HAL::FSMC;
-using Osci::Settings::Range;
 
 
 // Массив структур описаний масштабов по напряжению.
@@ -220,7 +219,7 @@ void TBase::Load()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Osci::Settings::Range::LoadBoth()
+void Range::LoadBoth()
 {
     uint16 val = (uint16)(ValueForRange(Chan::B) + (ValueForRange(Chan::A) << 8));
 
@@ -261,9 +260,9 @@ void Osci::Settings::Range::LoadBoth()
     SET_BANDWIDTH_A.Load();
     SET_BANDWIDTH_B.Load();
 
-    Osci::Settings::RShift::Load(Chan::A);
+    RShift::Load(Chan::A);
 
-    Osci::Settings::RShift::Load(Chan::B);
+    RShift::Load(Chan::B);
 
     Osci::Restart();
 
@@ -316,7 +315,7 @@ static uint8 ValueForRange(Chan::E ch) // -V2506
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-uint16 &Osci::Settings::RShift::Value(Chan::E ch)
+uint16 &RShift::Value(Chan::E ch)
 {
     return set.ch.shift[ch];
 }
@@ -372,14 +371,14 @@ void Osci::Settings::Trig::Level::Find()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Osci::Settings::RShift::DrawBoth()
+void RShift::DrawBoth()
 {
     Draw(Chan::A);
     Draw(Chan::B);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Osci::Settings::RShift::Draw(Chan::E ch)
+void RShift::Draw(Chan::E ch)
 {
     Color::CHAN[ch].SetAsCurrent();
 

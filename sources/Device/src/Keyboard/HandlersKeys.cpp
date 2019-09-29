@@ -229,25 +229,25 @@ static void RShiftMoreB()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void RangeLessA()
 {
-    OnChangeParameterChannel(Osci::Settings::Range::Change, Chan::A, -1);
+    OnChangeParameterChannel(Range::Change, Chan::A, -1);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void RangeMoreA()
 {
-    OnChangeParameterChannel(Osci::Settings::Range::Change, Chan::A, +1);
+    OnChangeParameterChannel(Range::Change, Chan::A, +1);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void RangeLessB()
 {
-    OnChangeParameterChannel(Osci::Settings::Range::Change, Chan::B, -1);
+    OnChangeParameterChannel(Range::Change, Chan::B, -1);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void RangeMoreB()
 {
-    OnChangeParameterChannel(Osci::Settings::Range::Change, Chan::B, +1);
+    OnChangeParameterChannel(Range::Change, Chan::B, +1);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

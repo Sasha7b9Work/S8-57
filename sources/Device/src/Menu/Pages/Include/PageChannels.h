@@ -69,7 +69,7 @@ struct Divider
 struct SettingsChannel
 {
     uint16                         shift[Chan::Size];      ///< Сдвиг канала по вертикали
-    Osci::Settings::Range::E       range[Chan::Size];      ///< Масштаб канала по вертикали
+    Range::E       range[Chan::Size];      ///< Масштаб канала по вертикали
     FPGA::Settings::ModeCouple::E  couple[Chan::Size];     ///< Связь по входу
     bool                           enabled[Chan::Size];    ///< Включен/выключен канал
     int8                           balanceShiftADC[2];     ///< Добавочное смещение для балансировки АЦП

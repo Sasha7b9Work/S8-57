@@ -1,6 +1,18 @@
 #pragma once
 
+
+#define SET_RSHIFT(ch)  (RShift::Value(ch))
+#define SET_RSHIFT_A    (SET_RSHIFT(Chan::A))
+#define SET_RSHIFT_B    (SET_RSHIFT(Chan::B))
+
+/// На столько единиц нужно изменить значение смещения, чтобы маркер смещения по напряжению передвинулся на одну точку.
+#define STEP_RSHIFT     (((RShift::MAX - RShift::MIN) / 24) / 20)
+#define STEP_TRIGLEV    STEP_RSHIFT
+
+
+
 struct DataSettings;
+
 
 struct Chan
 {
@@ -19,6 +31,7 @@ struct Chan
     int RequestBytes(DataSettings *ds) const;
     pString Name() const;
 };
+
 
 struct TBase
 {
@@ -70,4 +83,63 @@ struct TBase
     static const E MIN_P2P = _50ms;
     /// Минимальный масштаб по времени, при котором ещё возможно включение режима пикового детектора
     static const E MIN_PEAK_DET = _200ns;
+};
+
+
+struct Range
+{
+    static void Change(Chan::E ch, int delta);
+    /// Загружаться эта настройка может только для обоих каналов одновременно
+    static void LoadBoth();
+
+    enum E
+    {
+        _2mV,
+        _5mV,
+        _10mV,
+        _20mV,
+        _50mV,
+        _100mV,
+        _200mV,
+        _500mV,
+        _1V,
+        _2V,
+        _5V,
+        _10V,
+        _20V,
+        Size
+    } value;
+    explicit Range(E v) : value(v) {};
+    pString Name() const;
+
+    static void Set(Chan::E ch, E range);
+
+    pString ToString(int8 divider);
+
+};
+
+
+struct RShift
+{
+    /// Это значение соответствует минимуму смещения
+    static const int MIN = 20;
+    /// Это значение соотвествует максимуму смещения
+    static const int MAX = 980;
+    /// Это значение соответствует середине экрана
+    static const int ZERO = 500;
+    /// Изменить на delta
+    static void Change(Chan::E ch, int delta);
+    /// Установить значение
+    static void Set(Chan::E ch, uint16 rShift);
+    /// Загрузить в аппаратуру
+    static void Load(Chan::E ch);
+    /// Отрисовать оба на экране
+    static void DrawBoth();
+    /// Преобразовать в строку
+    static String ToString(uint16 rShiftRel, Range::E range, int8 divider);
+    /// Возвращает ссылку на значение
+    static uint16 &Value(Chan::E ch);
+private:
+    /// Отрисовать маркер вертикального смещения на сетке
+    static void Draw(Chan::E ch);
 };

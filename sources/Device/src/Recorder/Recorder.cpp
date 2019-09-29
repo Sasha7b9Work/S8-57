@@ -50,7 +50,7 @@ void Recorder::Init()
     StoreOsciSettings();
 
     FPGA::HAL::LoadRegUPR();
-    Osci::Settings::Range::LoadBoth();
+    Range::LoadBoth();
     TrigInput::Load();
     RecorderScaleX::Load();
     Osci::Settings::TShift::Load();
@@ -115,8 +115,8 @@ void Recorder::Start()
     Text("Подготовка к записи").DrawInCenterRect(85, 100, 150, 50, Color::FILL);
     Painter::EndScene();
 
-    Osci::Settings::RShift::Set(Chan::A, Osci::Settings::RShift::ZERO);
-    Osci::Settings::RShift::Set(Chan::B, Osci::Settings::RShift::ZERO);
+    RShift::Set(Chan::A, RShift::ZERO);
+    RShift::Set(Chan::B, RShift::ZERO);
 
     Memory::EraseSector(ADDR_SECTOR_RECORDER_1);
 
@@ -145,8 +145,8 @@ static void StoreOsciSettings()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void RestoreOsciSettings()
 {
-    Osci::Settings::RShift::Set(Chan::A, osci.storedRShift[Chan::A]);
-    Osci::Settings::RShift::Set(Chan::B, osci.storedRShift[Chan::B]);
+    RShift::Set(Chan::A, osci.storedRShift[Chan::A]);
+    RShift::Set(Chan::B, osci.storedRShift[Chan::B]);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
