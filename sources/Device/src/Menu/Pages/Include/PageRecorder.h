@@ -52,22 +52,6 @@ struct RecorderScaleX
 };
 
 
-#define REC_AXIS_MOVE                   (set.rec.axisMove)
-#define REC_AXIS_ZOOM                   (set.rec.axisZoom)
-#define REC_STORAGE_RECORD              (set.rec.storageRecord)
-#define REC_STORAGE_PLAY                (set.rec.storagePlay)
-
-#define REC_SRC_A                       (set.rec.enabledChanA)
-#define REC_SRC_A_IS_ENABLED            (REC_SRC_A)
-
-#define REC_SRC_B                       (set.rec.enabledChanB)
-#define REC_SRC_B_IS_ENABLED            (REC_SRC_B)
-
-#define REC_SRC_SENSOR                  (set.rec.enabledSensor)
-#define REC_SRC_SENSOR_IS_ENABLED       (REC_SRC_SENSOR)
-
-#define REC_SCALE_X                     (RecorderScaleX::Current())
-
 struct SettingsRecorder
 { //-V802
     bool                    enabledChanA;   ///< Включение записи канала 1

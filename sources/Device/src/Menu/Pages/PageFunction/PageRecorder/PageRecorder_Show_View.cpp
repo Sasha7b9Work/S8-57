@@ -11,7 +11,7 @@ DEF_CHOICE_2( cMove,                                                            
     "",
     "X",
     "Y",
-    REC_AXIS_MOVE, &PageRecorder::PageShow::PageView::self, Item::Active, Choice::Changed, Choice::AfterDraw
+    set.rec.axisMove, &PageRecorder::PageShow::PageView::self, Item::Active, Choice::Changed, Choice::AfterDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -20,7 +20,7 @@ DEF_CHOICE_2( cZoom,                                                            
     "",
     "X",
     "Y",
-    REC_AXIS_ZOOM, &PageRecorder::PageShow::PageView::self, Item::Active, Choice::Changed, Choice::AfterDraw
+    set.rec.axisZoom, &PageRecorder::PageShow::PageView::self, Item::Active, Choice::Changed, Choice::AfterDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

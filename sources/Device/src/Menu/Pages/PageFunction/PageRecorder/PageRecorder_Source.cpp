@@ -10,7 +10,7 @@ DEF_CHOICE_2( cChanA,                                                           
     "Выбор канала 1 для записи и просмотра",
     DISABLE_RU,
     ENABLE_RU,
-    REC_SRC_A, &PageRecorder::PageSource::self, Item::Active, Choice::Changed, Choice::AfterDraw
+    set.rec.enabledChanA, &PageRecorder::PageSource::self, Item::Active, Choice::Changed, Choice::AfterDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -19,7 +19,7 @@ DEF_CHOICE_2( cChanB,                                                           
     "Выбор канала 2 для записи и просмотра",
     DISABLE_RU,
     ENABLE_RU,
-    REC_SRC_B, &PageRecorder::PageSource::self, Item::Active, Choice::Changed, Choice::AfterDraw
+    set.rec.enabledChanB, &PageRecorder::PageSource::self, Item::Active, Choice::Changed, Choice::AfterDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -28,7 +28,7 @@ DEF_CHOICE_2( cSensor,                                                          
     "Выбор датчика для записи и просмотра",
     DISABLE_RU,
     ENABLE_RU,
-    REC_SRC_SENSOR, &PageRecorder::PageSource::self, Item::Active, Choice::Changed, Choice::AfterDraw
+    set.rec.enabledSensor, &PageRecorder::PageSource::self, Item::Active, Choice::Changed, Choice::AfterDraw
 )
 
 

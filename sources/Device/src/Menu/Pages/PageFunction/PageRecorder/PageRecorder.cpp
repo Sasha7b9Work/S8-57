@@ -26,13 +26,13 @@ DEF_CHOICE_3( cDestination,                                                     
     "ÎÇÓ",
     "Âíóòð ÇÓ",
     "Âíåøí ÇÓ",
-    REC_STORAGE_RECORD, &PageRecorder::self, IsActive_Destination, Choice::Changed, Choice::AfterDraw
+    set.rec.storageRecord, &PageRecorder::self, IsActive_Destination, Choice::Changed, Choice::AfterDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static bool IsActive_Start()
 {
-    return REC_SRC_A_IS_ENABLED || REC_SRC_B_IS_ENABLED || REC_SRC_SENSOR_IS_ENABLED;
+    return set.rec.enabledChanA || set.rec.enabledChanB || set.rec.enabledSensor;
 }
 
 static void Draw_Start(int x, int y)
@@ -100,7 +100,7 @@ void RecorderScaleX::Load()
         BIN_U8(01011110)   // -V2501  // 10s
     };
 
-    FSMC::WriteToFPGA8(WR::TBASE, values[REC_SCALE_X.value]);
+    FSMC::WriteToFPGA8(WR::TBASE, values[RecorderScaleX::Current().value]);
 
     if (Recorder::IsRunning())
     {

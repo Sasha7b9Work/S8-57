@@ -13,7 +13,7 @@ DEF_CHOICE_3( cSource,
     "ОЗУ",
     "Внутр ЗУ",
     "Внешн ЗУ",
-    REC_STORAGE_PLAY, &PageRecorder::PageShow::self, Item::Active, Choice::Changed, Choice::AfterDraw
+    set.rec.storagePlay, &PageRecorder::PageShow::self, Item::Active, Choice::Changed, Choice::AfterDraw
 )
 
 
