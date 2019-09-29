@@ -226,7 +226,7 @@ static int DrawMainParameters(int _x, int _y)
     {
         WriteStringAndNumber("накопл", x, y0 - 4, set.disp.ENumAccum);
         WriteStringAndNumber("усредн", x, y1, set.disp.ENumAverage);
-        WriteStringAndNumber("мн\x93мкс", x, y2, NUM_MIN_MAX);
+        WriteStringAndNumber("мн\x93мкс", x, y2, set.disp.ENumMinMax);
     }
 
     Separator().Draw(x + 43, y0 - 1);

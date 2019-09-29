@@ -5,11 +5,6 @@
 #include "Osci/Osci_Settings.h"
 
 
-#define BRIGHTNESS_DISPLAY          (set.disp.brightness)
-
-#define BRIGHTNESS_GRID             (set.disp.brightnessGrid)
-
-#define ENUM_MIN_MAX                (set.disp.ENumMinMax)
 #define MIN_MAX_ENABLED             (ENUM_MIN_MAX != Display::ENumMinMax::_1)
 #define NUM_MIN_MAX                 (1 << (int)ENUM_MIN_MAX)        /* ¬озвращает количество измерений сигналов дл€ расчЄта минимумов и максимумов. */
 
