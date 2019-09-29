@@ -3,9 +3,6 @@
 #include "Osci/Osci_Settings.h"
 
 
-/// ¬ключено слежение за курсорами времени и напр€жени€
-#define CURS_LOOK_BOTH(ch)          (set.curs.lookMode[ch] == CursorsLookMode::Both)
-
 #define CURsU_CNTRL_CH(ch)          (set.curs.cntrlU[ch])
 #define CURsU_CNTRL                 (CURsU_CNTRL_CH(set.curs.source))
 #define CURsU_CNTRL_1               (CURsU_CNTRL == CursorsControl::_1)
