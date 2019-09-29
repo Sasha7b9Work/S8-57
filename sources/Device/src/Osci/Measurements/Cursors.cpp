@@ -37,7 +37,8 @@ float Cursors::PosU(Chan::E ch, int numCur)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 bool Cursors::NecessaryDraw()
 {
-    return ((set.curs.cntrlU[set.curs.source] == CursorsControl::Disable) || CURsT_ENABLED) && (set.curs.showCursors || Menu::GetNameOpenedPage() == PageName::Measures_Cursors_Set);
+    return ((set.curs.cntrlU[set.curs.source] == CursorsControl::Disable) || (set.curs.cntrlT[set.curs.source] == CursorsControl::Disable)) &&
+        (set.curs.showCursors || Menu::GetNameOpenedPage() == PageName::Measures_Cursors_Set);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -83,8 +84,9 @@ void Cursors::Draw()
 
     if (NecessaryDraw())
     {
-        bool bothCursors = CURsT_ENABLED && (set.curs.cntrlU[set.curs.source] == CursorsControl::Disable);  // Признак того, что включены и вертикальные и горизонтальные курсоры - надо нарисовать 
-                                                            // квадраты в местах пересечения
+        bool bothCursors = (set.curs.cntrlT[set.curs.source] == CursorsControl::Disable) &&
+                           (set.curs.cntrlU[set.curs.source] == CursorsControl::Disable);  // Признак того, что включены и вертикальные и горизонтальные курсоры - надо нарисовать 
+                                                                                           // квадраты в местах пересечения
 
         int x0 = -1;
         int x1 = -1;
@@ -102,7 +104,7 @@ void Cursors::Draw()
             Rectangle(4, 4).Draw(x1 - 2, y1 - 2);
         }
 
-        if (CURsT_ENABLED)
+        if (set.curs.cntrlT[set.curs.source] == CursorsControl::Disable)
         {
             DrawVertical((int)Cursors::PosT(source, 0), y0);
             DrawVertical((int)Cursors::PosT(source, 1), y1);

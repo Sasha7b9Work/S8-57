@@ -110,7 +110,7 @@ static void Draw_T_enableBoth(int x, int y)
 
 void PageMeasuresCursors::PageSet::OnPress_T()
 {
-    if ((set.curs.active == CursorsActive::T) || CURsT_DISABLED)
+    if ((set.curs.active == CursorsActive::T) || (set.curs.cntrlT[set.curs.source] == CursorsControl::Disable))
     {
         IncCursCntrlT(set.curs.source);
     }
@@ -119,7 +119,7 @@ void PageMeasuresCursors::PageSet::OnPress_T()
 
 static void Draw_T(int x, int y)
 {
-    if (CURsT_DISABLED)
+    if (set.curs.cntrlT[set.curs.source] == CursorsControl::Disable)
     {
         Draw_T_disable(x, y);
     }
@@ -133,7 +133,7 @@ static void Draw_T(int x, int y)
         {
             bool condLeft = false, condDown = false;
             Chan::E source = set.curs.source;
-            CalculateConditions((int16)Cursors::PosT(source, 0), (int16)Cursors::PosT(source, 1), CURsT_CNTRL, &condLeft, &condDown);
+            CalculateConditions((int16)Cursors::PosT(source, 0), (int16)Cursors::PosT(source, 1), set.curs.cntrlT[set.curs.source], &condLeft, &condDown);
             if (condLeft && condDown)
             {
                 Draw_T_enableBoth(x, y);
@@ -351,11 +351,11 @@ bool PageMeasuresCursors::PageSet::OnArrows(const KeyEvent &event) //-V2506
             value *= set.curs.deltaT100percents[set.curs.source] / 100.0F;
         }
 
-        if (CURsT_CNTRL_1 || CURsT_CNTRL_1_2)
+        if ((set.curs.cntrlT[set.curs.source] == CursorsControl::_1) || (set.curs.cntrlT[set.curs.source] == CursorsControl::_1_2))
         {
             SetShiftCursPosT(set.curs.source, 0, value);
         }
-        if (CURsT_CNTRL_2 || CURsT_CNTRL_1_2)
+        if ((set.curs.cntrlT[set.curs.source] == CursorsControl::_2) || (set.curs.cntrlT[set.curs.source] == CursorsControl::_1_2))
         {
             SetShiftCursPosT(set.curs.source, 1, value);
         }
@@ -405,7 +405,7 @@ void PageMeasuresCursors::PageSet::IncCursCntrlU(Chan::E ch)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void PageMeasuresCursors::PageSet::IncCursCntrlT(Chan::E ch)
 {
-    Math::CircleIncrease<int8>((int8 *)&CURsT_CNTRL_CH(ch), 0, 3);
+    Math::CircleIncrease<int8>((int8 *)& set.curs.cntrlT[ch], 0, 3);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -480,5 +480,6 @@ void PageMeasuresCursors::PageSet::SetCursorT(Chan::E ch, int numCur, float pos)
 bool PageMeasuresCursors::PageSet::IsRegSetActiveOnCursors()
 {
     return ((Menu::GetNameOpenedPage() == PageName::Measures_Cursors_Set) &&
-        (((set.curs.active == CursorsActive::U) && (set.curs.cntrlU[set.curs.source] == CursorsControl::Disable)) || ((set.curs.active == CursorsActive::T) && CURsT_ENABLED)));
+        (((set.curs.active == CursorsActive::U) && (set.curs.cntrlU[set.curs.source] == CursorsControl::Disable)) ||
+        ((set.curs.active == CursorsActive::T) && (set.curs.cntrlT[set.curs.source] == CursorsControl::Disable))));
 }

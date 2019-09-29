@@ -442,7 +442,7 @@ static void WriteCursors()
 
         x = 101;
         x += 3;
-        if (CURsT_ENABLED)
+        if (set.curs.cntrlT[set.curs.source] == CursorsControl::Disable)
         {
             colorText.SetAsCurrent();
             String("1:").Draw(x, y1);
