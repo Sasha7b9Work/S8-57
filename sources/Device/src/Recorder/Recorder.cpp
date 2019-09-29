@@ -8,6 +8,7 @@
 #include "Data/Heap.h"
 #include "Menu/Menu.h"
 #include "Menu/Pages/Include/PageRecorder.h"
+#include "Menu/Pages/Include/PageTrig.h"
 #include "Hardware/Memory.h"
 #include "Display/Display_Primitives.h"
 #include "Display/Painter.h"
@@ -50,7 +51,7 @@ void Recorder::Init()
 
     FPGA::HAL::LoadRegUPR();
     Osci::Settings::Range::LoadBoth();
-    Osci::Settings::Trig::Input::Load();
+    TrigInput::Load();
     RecorderScaleX::Load();
     Osci::Settings::TShift::Load();
     Osci::Settings::LoadHoldfOff();

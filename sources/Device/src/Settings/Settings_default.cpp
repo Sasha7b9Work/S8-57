@@ -49,7 +49,7 @@ const Settings Settings::defaultSettings =
     // ÃÂÌ˛ —»Õ’–ŒÕ»«¿÷»ﬂ
     {
         TrigSource::A,                            // source
-        Trig::Input::Full,                          // input
+        TrigInput::Full,                          // input
         Trig::Polarity::Rising,                     // polarity
         {Trig::Level::ZERO, Trig::Level::ZERO},     // lev[Chan::Size]
         Trig::StartMode::Auto,                      // startMode

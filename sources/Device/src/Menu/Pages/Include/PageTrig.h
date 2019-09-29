@@ -25,11 +25,24 @@ struct TrigModeFind
     explicit TrigModeFind(E v) : value(v) {};
 };
 
+struct TrigInput
+{
+    enum E
+    {
+        Full,
+        HF,
+        LF
+    } value;
+
+    /// Установить в соотвествующие положения выводы, отвечающие за источник и вход синхронизации
+    static void Load();
+};
+
 
 struct SettingsTrig
 {
     TrigSource::E    source;
-    Osci::Settings::Trig::Input::E     input;
+    TrigInput::E     input;
     Osci::Settings::Trig::Polarity::E  polarity;
     uint16                             lev[Chan::Size];
     Osci::Settings::Trig::StartMode::E startMode;           ///< Режим запуска.

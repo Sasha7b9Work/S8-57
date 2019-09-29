@@ -164,19 +164,6 @@ namespace Osci
                 explicit StartMode(E v) : value(v) {};
             };
 
-            struct Input
-            {
-                enum E
-                {
-                    Full,
-                    HF,
-                    LF
-                } value;
-
-                /// Установить в соотвествующие положения выводы, отвечающие за источник и вход синхронизации
-                static void Load();
-            };
-
             struct Polarity
             {
                 enum E
