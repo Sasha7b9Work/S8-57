@@ -31,7 +31,7 @@ DEF_CHOICE_2( cSample,                                                          
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static bool IsActive_PeakDet()
 {
-    return (SET_TBASE >= TBase::MIN_PEAK_DET);
+    return (set.time.base >= TBase::MIN_PEAK_DET);
 }
 
 void PageTime::OnChanged_PeakDet(bool active)
@@ -59,7 +59,7 @@ DEF_CHOICE_2( cPeakDet,                                                         
 void PageTime::OnChanged_TPos(bool active)
 {
     PageMemory::OnChanged_Points(active);
-    TShift::Set(SET_TSHIFT);
+    TShift::Set(set.time.shift);
 }
 
 DEF_CHOICE_3( cTPos,                                                                                                                                                 //--- –¿«¬≈–“ ¿ - “Ó ---

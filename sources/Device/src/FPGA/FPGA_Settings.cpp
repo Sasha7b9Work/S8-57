@@ -106,7 +106,7 @@ void FPGA::LoadCalibratorMode()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void LoadReal()
 {
-    FPGA::post = (uint16)(SET_TSHIFT - TShift::Min());
+    FPGA::post = (uint16)(set.time.shift - TShift::Min());
     int Pred = (int)FPGA_NUM_POINTS - (int)FPGA::post;
 
     if (Pred < 0)
@@ -125,15 +125,15 @@ static void LoadReal()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static int GetK()
 {
-    return (-TShift::Min()) % Osci::Kr[SET_TBASE];
+    return (-TShift::Min()) % Osci::Kr[set.time.base];
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void LoadRandomize()
 {
-    int k = Osci::Kr[SET_TBASE];
+    int k = Osci::Kr[set.time.base];
 
-    FPGA::post = (uint16)((SET_TSHIFT - TShift::Min() - GetK()) / k);
+    FPGA::post = (uint16)((set.time.shift - TShift::Min() - GetK()) / k);
 
     int Pred = (int)FPGA_NUM_POINTS / k - (int)FPGA::post;
 
@@ -149,7 +149,7 @@ static void LoadRandomize()
     FSMC::WriteToFPGA16(WR::PRED_LO, FPGA::pred);
     FSMC::WriteToFPGA16(WR::POST_LO, FPGA::post);
 
-    Osci::addShift = (SET_TSHIFT) % k;
+    Osci::addShift = (set.time.shift) % k;
 
     if (Osci::addShift < 0)
     {
@@ -178,7 +178,7 @@ void TShift::Change(int delta)
         return;
     }
 
-    TShift::Set(SET_TSHIFT + delta);
+    TShift::Set(set.time.shift + delta);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -292,7 +292,7 @@ void TShift::Set(int tShift)
 {
     LIMITATION(tShift, Min(), Max()); //-V2516
 
-    SET_TSHIFT = tShift;
+    set.time.shift = tShift;
 
     TShift::Load();
 
@@ -304,7 +304,7 @@ void TShift::Set(int tShift)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 String TShift::ToString(TBase::E tBase)
 {
-    return Time(FPGA::Math::TShift2Abs(SET_TSHIFT, tBase)).ToString(true);
+    return Time(FPGA::Math::TShift2Abs(set.time.shift, tBase)).ToString(true);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

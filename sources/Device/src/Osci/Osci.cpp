@@ -125,7 +125,7 @@ static void Osci::UpdateFPGA()
 {
     bool needStop = false;
     
-    int number = (Osci::InModeRandomizer()) ? Kr[SET_TBASE] : 1;
+    int number = (Osci::InModeRandomizer()) ? Kr[set.time.base] : 1;
 
     for (int i = 0; i < number; i++)
     {
@@ -237,7 +237,7 @@ void Osci::Balance(Chan::E ch)
 {
     ModeCouple::Set(ch, ModeCouple::GND);
 
-    SET_TBASE = TBase::_100ms;
+    set.time.base = TBase::_100ms;
 
     TBase::Load();
 
@@ -250,13 +250,13 @@ void Osci::Balance(Chan::E ch)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 bool Osci::InModeP2P()
 {
-    return (SET_TBASE >= TBase::MIN_P2P);
+    return (set.time.base >= TBase::MIN_P2P);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 bool Osci::InModeRandomizer()
 {
-    return (SET_TBASE <= TBase::_50ns);
+    return (set.time.base <= TBase::_50ns);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -286,7 +286,7 @@ void Osci::OnChangedPoints()
     FPGA::Reset();
     Osci::Display::PainterData::ChangeTPos();
     FPGA::Reset();
-    TShift::Set(SET_TSHIFT);
+    TShift::Set(set.time.shift);
     FPGA::Reset();
     Osci::Storage::Clear();
 }
@@ -298,7 +298,7 @@ Osci::StructReadRand Osci::GetInfoForReadRand(int Tsm, const uint8 *address)
 
     if (Tsm != NULL_TSHIFT)
     {
-        result.step = Kr[SET_TBASE];
+        result.step = Kr[set.time.base];
 
         int index = Tsm - addShift;
 

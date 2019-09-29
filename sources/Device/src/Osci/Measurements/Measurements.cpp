@@ -419,7 +419,7 @@ float CalculatePeriod(Chan::E ch)
 
             EXIT_IF_ERRORS_FLOAT(firstIntersection, secondIntersection); //-V2507
 
-            float per = FPGA::Math::TShift2Abs(ROUND(uint16, secondIntersection - firstIntersection), SET_TBASE);
+            float per = FPGA::Math::TShift2Abs(ROUND(uint16, secondIntersection - firstIntersection), set.time.base);
 
             period[ch] = per;
 

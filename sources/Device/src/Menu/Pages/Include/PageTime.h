@@ -1,8 +1,6 @@
 #pragma once
 #include "Osci/Osci_Settings.h"
 
-#define SET_TSHIFT          (set.time.shift)
-#define SET_TBASE           (set.time.base)
 #define TIME_DIV_XPOS       (set.time.timeDivXPos)
 
 #define SET_PEAKDET         (set.time.peakDet)

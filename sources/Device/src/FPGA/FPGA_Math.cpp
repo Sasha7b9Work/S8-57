@@ -276,7 +276,7 @@ static float const *Koeff(int numPoints)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void FPGA::Math::CalculateFFT(float *dataR, int numPoints, float *result, float *freq0, float *density0, float *freq1, float *density1, int *y0, int *y1)
 {
-    float scale = 1.0F / absStepTShift[SET_TBASE] / 1024.0F;
+    float scale = 1.0F / absStepTShift[set.time.base] / 1024.0F;
 
     float koeff = 1024.0F / numPoints;
 

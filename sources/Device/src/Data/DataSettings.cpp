@@ -20,8 +20,8 @@ void DataSettings::Fill(uint8 *_dataA, uint8 * _dataB)
     Lval_RANGE_B(this) = set.ch[Chan::B].range;
     RSHIFT_A(this) = SET_RSHIFT_A;
     RSHIFT_B(this) = SET_RSHIFT_B;
-    Lval_TBASE(this) = SET_TBASE;
-    TSHIFT(this) = (int16)SET_TSHIFT;
+    Lval_TBASE(this) = set.time.base;
+    TSHIFT(this) = (int16)set.time.shift;
     Lval_COUPLE_A(this) = set.ch[Chan::A].couple;
     Lval_COUPLE_B(this) = set.ch[Chan::B].couple;
     TRIGLEV_A(this) = set.trig.lev[Chan::A];
