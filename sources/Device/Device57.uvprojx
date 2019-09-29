@@ -1165,6 +1165,11 @@
               <FileType>5</FileType>
               <FilePath>.\src\Menu\Pages\Include\PageTrig.h</FilePath>
             </File>
+            <File>
+              <FileName>DebugPage.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Menu\Pages\Include\DebugPage.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

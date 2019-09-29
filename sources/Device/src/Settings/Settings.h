@@ -9,6 +9,7 @@
 #include "Multimeter/Multimeter.h"
 #include "Osci/Measurements/Cursors_Settings.h"
 #include "Menu/Pages/Include/PageChannels.h"
+#include "Menu/Pages/Include/DebugPage.h"
 #include "Menu/Pages/Include/PageDisplay.h"
 #include "Menu/Pages/Include/PageFunction.h"
 #include "Menu/Pages/Include/PageMemory.h"
