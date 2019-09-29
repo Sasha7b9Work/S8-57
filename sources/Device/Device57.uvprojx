@@ -1121,6 +1121,11 @@
               <FilePath>.\src\Menu\Pages\Include\PageDisplay.h</FilePath>
             </File>
             <File>
+              <FileName>PageFreqMeter.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Menu\Pages\Include\PageFreqMeter.h</FilePath>
+            </File>
+            <File>
               <FileName>PageFunction.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Menu\Pages\Include\PageFunction.h</FilePath>
