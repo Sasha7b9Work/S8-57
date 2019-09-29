@@ -161,7 +161,7 @@ int Osci::Measurements::Table::NumRows()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 int Osci::Measurements::Table::GetDeltaGridLeft()
 {
-    if (SHOW_MEASURES && MODE_VIEW_SIGNALS_IS_COMPRESS)
+    if (SHOW_MEASURES && (set.meas.modeViewSignals == MeasuresModeViewSignals::Compress))
     {
         if (set.meas.number == MeasuresOnDisplay::_6_1)
         {

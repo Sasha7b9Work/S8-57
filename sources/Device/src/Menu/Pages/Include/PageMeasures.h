@@ -4,10 +4,6 @@
 #include "Osci/Measurements/Measures.h"
 
 
-/// —жимать ли сетку при выводе измерений
-#define MODE_VIEW_SIGNALS               (set.meas.modeViewSignals) 
-#define MODE_VIEW_SIGNALS_IS_COMPRESS   (MODE_VIEW_SIGNALS == MeasuresModeViewSignals::Compress)
-
 /// ѕо какому каналу производить автоматические измерени€
 #define SOURCE_MEASURES                 (set.meas.source)
 /// јвтоматические измерени€ производ€тс€ только по каналу A
