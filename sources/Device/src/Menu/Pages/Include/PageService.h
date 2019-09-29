@@ -2,7 +2,6 @@
 #include "Menu/MenuItems.h"
 
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 struct CalibratorMode
 {
     enum E
@@ -14,19 +13,20 @@ struct CalibratorMode
     explicit CalibratorMode(E v) : value(v) {};
 };
 
-
-#define CALIBRATOR_MODE                 (set.serv.calibratorMode)
-#define BAT_SHOW_ON_DISPLAY             (set.serv.showInfoVoltage)
-
-#define SOUND_VOLUME                    (set.serv.soundVolume)
-#define SOUND_ENABLED                   (SOUND_VOLUME == 0)
-
-#define COLOR_SCHEME                    (set.serv.colorScheme)
+struct ColorScheme
+{
+    enum E
+    {
+        WhiteLetters,   ///< В этом случае заголовки элементов меню пишутся белым - не очень хорошо видно снизу
+        BlackLetters    ///< В этом случае заголовки элементов меню пишутся чёрным - не очень красиво выглядит
+    } value;
+    explicit ColorScheme(E v) : value(v) {}
+};
 
 
 struct SettingsService
 {
-    Color::Scheme::E    colorScheme;
+    ColorScheme::E      colorScheme;
     CalibratorMode::E   calibratorMode;            ///< Режим работы калибратора.
     uint8               soundVolume;               ///< Громкость звука
     bool                showInfoVoltage;           ///< Показывать напряжение батареи на экране

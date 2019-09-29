@@ -56,8 +56,7 @@ DEF_CHOICE_4( cSoundVolume,
     "Мин",
     "Средн",
     "Макс",
-    SOUND_VOLUME,
-    &PageService::self, Item::Active, Choice::Changed, Choice::AfterDraw
+    set.serv.soundVolume, &PageService::self, Item::Active, Choice::Changed, Choice::AfterDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

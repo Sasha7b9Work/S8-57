@@ -110,18 +110,6 @@ private:
     static void WriteToDisplay(Color color);
 
     static Color currentColor;
-   
-public:
-
-    struct Scheme
-    {
-        enum E
-        {
-            WhiteLetters,   ///< В этом случае заголовки элементов меню пишутся белым - не очень хорошо видно снизу
-            BlackLetters    ///< В этом случае заголовки элементов меню пишутся чёрным - не очень красиво выглядит
-        } value;
-        explicit Scheme(E v) : value(v) {}
-    };
 };
 
 bool operator!=(const Color &left, const Color &right);

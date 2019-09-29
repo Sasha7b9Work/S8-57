@@ -160,7 +160,7 @@ static void SetWave()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void Beep(const TypeWave::E newTypeWave, const float newFreq, const float newAmpl, const int newDuration)
 {
-    if (bellIsEnabled || soundWarnIsBeep || !SOUND_ENABLED)
+    if (bellIsEnabled || soundWarnIsBeep || !(set.serv.soundVolume == 0))
     {
         return;
     }
@@ -168,7 +168,7 @@ static void Beep(const TypeWave::E newTypeWave, const float newFreq, const float
     if (frequency != newFreq || amplitude != newAmpl || typeWave != newTypeWave) //-V550 //-V2550
     {
         frequency = newFreq;
-        amplitude = newAmpl * SOUND_VOLUME / 100.0F;
+        amplitude = newAmpl * set.serv.soundVolume / 100.0F;
         typeWave = newTypeWave;
         
         Stop();
