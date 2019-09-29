@@ -133,13 +133,13 @@ Measure::Type::E Measure::GetType()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Measure::ShortPressOnSmallButonMarker()
 {
-    if(set.meas.measures[posActive] == MEAS_MARKED)
+    if(set.meas.measures[posActive] == set.meas.marked)
     {
-        MEAS_MARKED = Measure::Type::None;
+        set.meas.marked = Measure::Type::None;
     }
     else
     {
-        MEAS_MARKED = set.meas.measures[posActive];
+        set.meas.marked = set.meas.measures[posActive];
     }
 }
 

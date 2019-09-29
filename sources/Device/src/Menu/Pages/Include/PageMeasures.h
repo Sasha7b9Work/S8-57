@@ -4,17 +4,6 @@
 #include "Osci/Measurements/Measures.h"
 
 
-/// ¬ыводить автоматические измерени€ по каналу A
-#define VIEW_MEASURES_A                 (set.ch[Chan::A].enabled && (SOURCE_MEASURES_IS_A || SOURCE_MEASURES_IS_BOTH))
-/// ¬ыводить автоматические измерени€ по каналу B
-#define VIEW_MEASURES_B                 (set.ch[Chan::B].enabled && (SOURCE_MEASURES_IS_B || SOURCE_MEASURES_IS_BOTH))
-/// ¬ыводить автоматические измерени€ по обоим каналам
-#define VIEW_MEASURES_BOTH              (SET_ENABLED_BOTH && SOURCE_MEASURES_IS_BOTH)
-
-#define SHOW_MEASURES                   (set.meas.show)
-
-#define MEAS_MARKED                     (set.meas.marked)
-
 /// —колько автоматических измерений помещаетс€ на экран
 struct MeasuresOnDisplay
 {

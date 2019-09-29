@@ -29,7 +29,7 @@ static int GetTopTable();
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void Table::Draw()
 {
-    if (!SHOW_MEASURES)
+    if (!set.meas.show)
     {
         return;
     }
@@ -82,7 +82,7 @@ void Table::Cell::Draw(int x, int y)
 
         measure.Name().Draw(x + 4, y + 2, color);
 
-        if (type == MEAS_MARKED)
+        if (type == set.meas.marked)
         {
             Region(DX() - 2, 9).Fill(x + 1, y + 1, active ? Color::BACK : Color::FILL);
             measure.Name().Draw(x + 4, y + 2, active ? Color::FILL : Color::BACK);
@@ -161,7 +161,7 @@ int Osci::Measurements::Table::NumRows()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 int Osci::Measurements::Table::GetDeltaGridLeft()
 {
-    if (SHOW_MEASURES && (set.meas.modeViewSignals == MeasuresModeViewSignals::Compress))
+    if (set.meas.show && (set.meas.modeViewSignals == MeasuresModeViewSignals::Compress))
     {
         if (set.meas.number == MeasuresOnDisplay::_6_1)
         {

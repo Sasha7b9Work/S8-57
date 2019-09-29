@@ -366,7 +366,7 @@ static int Grid::DeltaVforLineGrid()
 {
     int result = 49;
 
-    if (SHOW_MEASURES && set.meas.modeViewSignals == MeasuresModeViewSignals::Compress)
+    if (set.meas.show && set.meas.modeViewSignals == MeasuresModeViewSignals::Compress)
     {
         if (set.meas.number == MeasuresOnDisplay::_1_5)
         {

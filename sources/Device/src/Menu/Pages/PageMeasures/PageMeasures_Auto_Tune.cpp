@@ -52,7 +52,7 @@ DEF_GRAPH_BUTTON( bSettings,                                                    
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static bool IsActive_Tune()
 {
-    return SHOW_MEASURES;
+    return set.meas.show;
 }
 
 static bool OnArrows_Tune(const KeyEvent &event)
