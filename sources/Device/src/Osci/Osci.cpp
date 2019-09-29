@@ -51,7 +51,7 @@ void Osci::Init()
     TrigInput::Load();
     Settings::Trig::Level::Load();
     TrigPolarity::Load();
-    Settings::TBase::Load();
+    TBase::Load();
     Settings::TShift::Load();
     FPGA::Settings::LoadCalibratorMode();
     Settings::LoadHoldfOff();
@@ -237,9 +237,9 @@ void Osci::Balance(Chan::E ch)
 {
     FPGA::Settings::ModeCouple::Set(ch, FPGA::Settings::ModeCouple::GND);
 
-    SET_TBASE = Osci::Settings::TBase::_100ms;
+    SET_TBASE = TBase::_100ms;
 
-    Osci::Settings::TBase::Load();
+    TBase::Load();
 
     for (int range = 0; range < Range::Size; range++)
     {

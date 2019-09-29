@@ -13,7 +13,7 @@ namespace FPGA
 
         int RShift2Rel(float rShixftAbs, Osci::Settings::Range::E range);
 
-        float TimeCursor(float shiftCurT, Osci::Settings::TBase::E tBase);
+        float TimeCursor(float shiftCurT, TBase::E tBase);
 
         void PointsRel2Voltage(const uint8 *points, int numPoints, Osci::Settings::Range::E range, int16 rShift, float *voltage);
 
@@ -25,6 +25,6 @@ namespace FPGA
 
         void CalculateFFT(float *data, int numPoints, float *result, float *freq0, float *density0, float *freq1, float *density1, int *y0, int *y1);
 
-        float TShift2Abs(int tShift, Osci::Settings::TBase::E tBase);
+        float TShift2Abs(int tShift, TBase::E tBase);
     }
 };

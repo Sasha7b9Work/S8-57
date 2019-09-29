@@ -29,7 +29,7 @@ namespace Osci
 
     extern int addShift;
 
-    extern const int Kr[Settings::TBase::Size];
+    extern const int Kr[TBase::Size];
 
     /// Структура для хранения информации, необходимой для чтения в режиме рандомизатора
     struct StructReadRand

@@ -16,7 +16,7 @@ namespace Osci
         /// Расчитать все автоматические измерения
         void CalculateMeasures();
         /// Аппроксимировать единичное измерение режима рандомизатора функцией sinX/X
-        void InterpolationSinX_X(uint8 *data, int numPoints, Osci::Settings::TBase::E tBase);
+        void InterpolationSinX_X(uint8 *data, int numPoints, TBase::E tBase);
         /// Возвращает активное измерение
         Measure GetActiveMeasure();
 

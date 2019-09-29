@@ -24,7 +24,7 @@
 struct SettingsTime
 {
     int                              shift;
-    Osci::Settings::TBase::E         base;
+    TBase::E         base;
     Osci::Settings::PeakDetMode::E   peakDet;
     Osci::Settings::TPos::E          TPos;
     Osci::Settings::SampleType::E    sampleType;

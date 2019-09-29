@@ -73,7 +73,7 @@ void Osci::Settings::LoadHoldfOff()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Osci::Settings::TBase::Change(int delta)
+void TBase::Change(int delta)
 {
     TBase::E old = SET_TBASE;
 
@@ -106,7 +106,7 @@ void Osci::Settings::TBase::Change(int delta)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-pString Osci::Settings::TBase::ToString() const
+pString TBase::ToString() const
 {
     /// Структура для описания диапазона масштаба по времени.
     static const struct StructTBase
@@ -171,7 +171,7 @@ int Osci::Settings::TPos::InBytes()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Osci::Settings::TBase::Load()
+void TBase::Load()
 {
     static const uint8 values[TBase::Size] =
     {
@@ -211,7 +211,7 @@ void Osci::Settings::TBase::Load()
 
     FSMC::WriteToFPGA8(WR::TBASE, values[SET_TBASE]);
 
-    TShift::Load();
+    Osci::Settings::TShift::Load();
 
     SET_BANDWIDTH_A.Load();
     SET_BANDWIDTH_B.Load();
