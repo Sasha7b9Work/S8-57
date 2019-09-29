@@ -53,7 +53,7 @@ const Settings Settings::defaultSettings =
         Trig::Polarity::Rising,                     // polarity
         {Trig::Level::ZERO, Trig::Level::ZERO},     // lev[Chan::Size]
         Trig::StartMode::Auto,                      // startMode
-        Trig::ModeFind::Hand,                       // modeFind
+        TrigModeFind::Hand,                       // modeFind
         10,                                         // holdOff
         false                                       // holdOffEnable
     },

@@ -14,6 +14,17 @@ struct TrigSource
     static void Load();
 };
 
+/// Режим поиска синхронизции
+struct TrigModeFind
+{
+    enum E
+    {
+        Hand,      ///< Уровень синхронизации устанавливается вручную или автоматически - однократным нажажтием кнопки.
+        Auto       ///< Подстройки уровня синхронизации производится автоматически после каждого нового считанного сигнала.
+    } value;
+    explicit TrigModeFind(E v) : value(v) {};
+};
+
 
 struct SettingsTrig
 {
@@ -22,7 +33,7 @@ struct SettingsTrig
     Osci::Settings::Trig::Polarity::E  polarity;
     uint16                             lev[Chan::Size];
     Osci::Settings::Trig::StartMode::E startMode;           ///< Режим запуска.
-    Osci::Settings::Trig::ModeFind::E  modeFind;            ///< Поиск синхронизации - вручную или автоматически.
+    TrigModeFind::E  modeFind;            ///< Поиск синхронизации - вручную или автоматически.
                                             /// \todo разрядности trig_holdOff недостаточно
     int16                              holdOff;             ///< Удержание синхронизации
     bool                               holdOffEnabled;      ///< Включение удержания синхронизации

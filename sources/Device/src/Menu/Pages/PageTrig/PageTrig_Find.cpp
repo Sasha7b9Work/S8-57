@@ -16,8 +16,7 @@ DEF_CHOICE_2( cMode,                                                            
     "2. \"Автоматический\" - поиск производится автоматически.",
     "Ручной",
     "Автоматический",
-    TRIG_MODE_FIND,
-    &PageTrig::PageFind::self, Item::Active, Choice::Changed, Choice::AfterDraw
+    set.trig.modeFind, &PageTrig::PageFind::self, Item::Active, Choice::Changed, Choice::AfterDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

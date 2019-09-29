@@ -85,7 +85,7 @@ void Reader::ReadDataP2P()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void FindTrigLevelIfNeed()
 {
-    if (TRIG_MODE_FIND_IS_AUTO)
+    if (set.trig.modeFind == TrigModeFind::Auto)
     {
         Osci::Settings::Trig::Level::Find();
     }

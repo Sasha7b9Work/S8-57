@@ -24,8 +24,8 @@ void DataSettings::Fill(uint8 *_dataA, uint8 * _dataB)
     TSHIFT(this) = (int16)SET_TSHIFT;
     Lval_COUPLE_A(this) = SET_COUPLE_A;
     Lval_COUPLE_B(this) = SET_COUPLE_B;
-    TRIGLEV_A(this) = SET_TRIGLEV_A;
-    TRIGLEV_B(this) = SET_TRIGLEV_A;
+    TRIGLEV_A(this) = set.trig.lev[Chan::A];
+    TRIGLEV_B(this) = set.trig.lev[Chan::B];
     Lval_PEAKDET(this) = SET_PEAKDET;
     Lval_DIVIDER_A(this) = (uint)set.ch.divider[Chan::A];
     Lval_DIVIDER_B(this) = (uint)set.ch.divider[Chan::B];

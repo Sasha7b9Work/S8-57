@@ -7,14 +7,6 @@
 #define SET_RSHIFT_A            (SET_RSHIFT(Chan::A))
 #define SET_RSHIFT_B            (SET_RSHIFT(Chan::B))
 
-#define SET_TRIGLEV(ch)         (set.trig.lev[(uint8)ch])
-#define SET_TRIGLEV_A           (SET_TRIGLEV(Chan::A))
-#define SET_TRIGLEV_B           (SET_TRIGLEV(Chan::B))
-
-#define TRIG_MODE_FIND          (set.trig.modeFind)
-#define TRIG_MODE_FIND_IS_HAND  (TRIG_MODE_FIND == Osci::Settings::Trig::ModeFind::Hand)
-#define TRIG_MODE_FIND_IS_AUTO  (TRIG_MODE_FIND == Osci::Settings::Trig::ModeFind::Auto)
-
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 namespace Osci
 {
@@ -170,16 +162,6 @@ namespace Osci
                     Single    ///< Однократный.
                 } value;
                 explicit StartMode(E v) : value(v) {};
-            };
-
-            struct ModeFind
-            {
-                enum E
-                {
-                    Hand,      ///< Уровень синхронизации устанавливается вручную или автоматически - однократным нажажтием кнопки.
-                    Auto       ///< Подстройки уровня синхронизации производится автоматически после каждого нового считанного сигнала.
-                } value;
-                explicit ModeFind(E v) : value(v) {};
             };
 
             struct Input

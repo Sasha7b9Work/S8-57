@@ -348,7 +348,7 @@ void Trig::DrawOnGrid()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Trig::NeedForDraw()
 {
-    if (!FFT_ENABLED && TRIG_MODE_FIND_IS_HAND)
+    if (!FFT_ENABLED && (set.trig.modeFind == TrigModeFind::Hand))
     {
         needDraw = true;
         Timer::SetAndStartOnce(Timer::Type::ShowLevelTrigLev, DisableDrawing, 2000);
