@@ -368,15 +368,15 @@ static int Grid::DeltaVforLineGrid()
 
     if (SHOW_MEASURES && MODE_VIEW_SIGNALS_IS_COMPRESS)
     {
-        if (NUM_MEASURES_IS_1_5)
+        if (set.meas.number == MeasuresOnDisplay::_1_5)
         {
             result = VIEW_MEASURES_BOTH ? 55 : 59;
         }
-        else if (NUM_MEASURES_IS_2_5)
+        else if (set.meas.number == MeasuresOnDisplay::_2_5)
         {
             result = VIEW_MEASURES_BOTH ? 69 : 51;
         }
-        else if (NUM_MEASURES_IS_3_5)
+        else if (set.meas.number == MeasuresOnDisplay::_3_5)
         {
             result = VIEW_MEASURES_BOTH ? 54 : 68;
         }
@@ -396,11 +396,11 @@ static int Grid::DeltaHforLineGrid()
 
     if (MODE_VIEW_SIGNALS_IS_COMPRESS)
     {
-        if (NUM_MEASURES_IS_6_1)
+        if (set.meas.number == MeasuresOnDisplay::_6_1)
         {
             result = 73;
         }
-        else if (NUM_MEASURES_IS_6_2)
+        else if (set.meas.number == MeasuresOnDisplay::_6_2)
         {
             result = 83;
         }

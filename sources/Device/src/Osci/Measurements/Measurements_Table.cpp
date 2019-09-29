@@ -129,7 +129,7 @@ void Table::Cell::DrawStringMeasure(int x, int y)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static int GetTopTable()
 {
-    if (NUM_MEASURES_IS_6_1 || NUM_MEASURES_IS_6_2)
+    if ((set.meas.number == MeasuresOnDisplay::_6_1) || (set.meas.number == MeasuresOnDisplay::_6_2))
     {
         return Grid::Bottom() - Osci::Measurements::Table::DY() * 6;
     }
@@ -148,14 +148,14 @@ static int GetTopTable()
 int Osci::Measurements::Table::NumCols()
 {
     const int cols[] = { 1, 2, 5, 5, 5, 1, 2 };
-    return cols[NUM_MEASURES];
+    return cols[set.meas.number];
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 int Osci::Measurements::Table::NumRows()
 {
     int rows[] = { 1, 1, 1, 2, 3, 6, 6 };
-    return rows[NUM_MEASURES];
+    return rows[set.meas.number];
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -163,11 +163,11 @@ int Osci::Measurements::Table::GetDeltaGridLeft()
 {
     if (SHOW_MEASURES && MODE_VIEW_SIGNALS_IS_COMPRESS)
     {
-        if (NUM_MEASURES_IS_6_1)
+        if (set.meas.number == MeasuresOnDisplay::_6_1)
         {
             return DX();
         }
-        else if (NUM_MEASURES_IS_6_2)
+        else if (set.meas.number == MeasuresOnDisplay::_6_2)
         {
             return DX() * 2;
         }
