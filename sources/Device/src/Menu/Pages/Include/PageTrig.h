@@ -2,18 +2,6 @@
 #include "Menu/MenuItems.h"
 
 
-#define TRIG_POLARITY           (set.trig.polarity)
-#define TRIG_POLARITY_FALLING   (TRIG_POLARITY == TrigPolarity::Falling)
-#define TRIG_POLARITY_FRONT     (TRIG_POLARITY == TrigPolarity::Rising)
-
-#define TRIG_INPUT              (set.trig.input)
-#define TRIG_INPUT_AC           (TRIG_INPUT == TrigInput_AC)
-#define TRIG_INPUT_LPF          (TRIG_INPUT == TrigInput_LPF)
-#define TRIG_INPUT_FULL         (TRIG_INPUT == TrigInput_Full)
-
-#define TRIG_TIME_DELAY         (set.trig.TimeDelay)
-
-
 /// Источник синхронизации
 struct TrigSource
 {
