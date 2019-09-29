@@ -49,16 +49,6 @@ namespace Display
         } value;
     };
 
-    struct Orientation
-    {
-        enum E
-        {
-            Normal,
-            Reverse
-        } value;
-        explicit Orientation(E v) : value(v) {};
-    };
-
     /// Тип привязки к смещению по вертикали
     struct LinkingRShift
     {
@@ -99,8 +89,6 @@ namespace Display
     void SetAddDrawFunction(pFuncVV func, uint timeRemove = 0);
     /// Удаляет дополнительую функцию отрисовки, установленную вызовом функции SetAddDrawFunction()
     void RemoveAddDrawFunction();
-
-    void SetOrientation(Orientation::E orientation);
     /// Возвращает время, через которое меню автоматически скрывается, если не было больше нажатий
     int TimeMenuAutoHide();
     /// Если экран разделён на две части и основной сигнал выводится сверху - например, в режиме вывода спектра

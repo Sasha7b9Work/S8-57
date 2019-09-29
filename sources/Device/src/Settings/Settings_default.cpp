@@ -157,28 +157,28 @@ const Settings Settings::defaultSettings =
     },
     
     // Меню ОТЛАДКА
-
-    true,                                   // dbg_showConsole
-    30,                                     // dbg_numStrings;         
-    8,                                      // dbg_sizeFont;           
-    false,                                  // dbg_modePauseConsole;   
-    false,                                  // dbg_showAll;            
-    false,                                  // dbg_showFlag;           
-    { false, false },                       // dbg_showRShift[2];      
-    false,                                  // dbg_showTrigLev;        
-    { false, false },                       // dbg_showRange[2];       
-    { false, false },                       // dbg_showChanParam[2];   
-    false,                                  // dbg_showTrigParam;      
-    false,                                  // dbg_showTShift;         
-    false,                                  // dbg_showTBase;          
-    10,                                     // dbg_numMeasuresForGates;
-    false,                                  // dbg_showRandInfo;       
-    false,                                  // dbg_showRandStat;       
-    0,                                      // dbg_timeCompensation;   
-    0,                                      // dbg_pretriggered;       
-    { Bandwidth::Full, Bandwidth::Full },   // dbg_bandwidth[2];       
-    false,                                  // dbg_ShowStats;          
-    Display::Orientation::Normal,           // dbg_Orientation;        
+    {
+        true,                                   // showConsole
+        30,                                     // numStrings
+        8,                                      // sizeFont
+        false,                                  // modePauseConsole
+        false,                                  // showAll
+        false,                                  // showFlag
+        { false, false },                       // showRShift[2]
+        false,                                  // showTrigLev
+        { false, false },                       // showRange[2]
+        { false, false },                       // showChanParam[2]
+        false,                                  // showTrigParam
+        false,                                  // showTShift
+        false,                                  // showTBase
+        10,                                     // numMeasuresForGates
+        false,                                  // showRandInfo
+        false,                                  // showRandStat
+        0,                                      // timeCompensation
+        0,                                      // pretriggered
+        { Bandwidth::Full, Bandwidth::Full },   // bandwidth[2]
+        false,                                  // ShowStats
+    },
     
     // Настройки тестер-компонента
     
