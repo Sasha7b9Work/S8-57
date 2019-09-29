@@ -290,12 +290,12 @@ static void Draw_Movement_Points(int x, int y)
 
 static void OnPress_Movement()
 {
-    Math::CircleIncrease<int8>((int8 *)&CURS_MOVEMENT, 0, 1);
+    Math::CircleIncrease<int8>((int8 *)& set.curs.movement, 0, 1);
 }
 
 static void Draw_Movement(int x, int y)
 {
-    if (CURS_MOVEMENT_IN_PERCENTS)
+    if (set.curs.movement == CursorsMovement::Percents)
     {
         Draw_Movement_Percents(x, y);
     }
@@ -329,7 +329,7 @@ bool PageMeasuresCursors::PageSet::OnArrows(const KeyEvent &event) //-V2506
 
     if (CURS_ACTIVE_U && (key == Key::Up || key == Key::Down))
     {
-        if (CURS_MOVEMENT_IN_PERCENTS)
+        if (set.curs.movement == CursorsMovement::Percents)
         {
             value *= dUperc(CURS_SOURCE) / 100.0F;
         }
@@ -346,7 +346,7 @@ bool PageMeasuresCursors::PageSet::OnArrows(const KeyEvent &event) //-V2506
     }
     else if(CURS_ACTIVE_T && (key == Key::Left || key == Key::Right))
     {
-        if (CURS_MOVEMENT_IN_PERCENTS)
+        if (set.curs.movement == CursorsMovement::Percents)
         {
             value *= dTperc(CURS_SOURCE) / 100.0F;
         }
@@ -420,7 +420,7 @@ void PageMeasuresCursors::PageSet::SetShiftCursPosU(Chan::E ch, int numCur, floa
 {
     CURsU_POS(ch, numCur) = Math::LimitationRet(CURsU_POS(ch, numCur) - delta, 0.0F, MAX_POS_U);
 
-    if (CURS_MOVEMENT_IN_PIXELS)                        // ≈сли перемещение по пиксел€м, то нужно привести к пиксельной сетке экрана
+    if (set.curs.movement == CursorsMovement::Pixels)                        // ≈сли перемещение по пиксел€м, то нужно привести к пиксельной сетке экрана
     {
         /// \todo
     }
@@ -433,7 +433,7 @@ void PageMeasuresCursors::PageSet::SetShiftCursPosT(Chan::E ch, int numCur, floa
     // CURsT_POS(ch, numCur) = LimitationFloat(CURsT_POS(ch, numCur) + delta, 0, MAX_POS_T);   
     Cursors::SetCursPosT_temp(ch, numCur, Math::LimitationRet(CURsT_POS(ch, numCur) + delta, 0.0F, MAX_POS_T));
 
-    if (CURS_MOVEMENT_IN_PIXELS)                        // ≈сли перемещение по пиксел€м, то нужно привести к пиксельной сетке экрана
+    if (set.curs.movement == CursorsMovement::Pixels)                        // ≈сли перемещение по пиксел€м, то нужно привести к пиксельной сетке экрана
     {
         /// \todo
     }
