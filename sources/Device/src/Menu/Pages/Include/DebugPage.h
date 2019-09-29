@@ -3,21 +3,6 @@
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-#define CONSOLE_NUM_STRINGS     (set.dbg.numStrings)
-#define CONSOLE_SIZE_FONT       (set.dbg.sizeFont ? 8 : 5)
-/// Если truе, то включён режим остновки консоли, в котором нажатие ПУСК/СТОП приостанавливает вывод в консоль.
-#define MODE_PAUSE_CONSOLE      (set.dbg.modePauseConsole)
-#define NUM_MEASURES_FOR_GATES  (set.dbg.numMeasuresForGates)
-#define TIME_COMPENSATION       (set.dbg.timeCompensation)
-#define SHOW_RAND_INFO          (set.dbg.showRandInfo)
-#define SHOW_RAND_STAT          (set.dbg.showRandStat)
-#define SHOW_STAT               (set.dbg.ShowStats)
-#define PRETRIGGERED            (set.dbg.pretriggered)
-#define BANDWIDTH_DEBUG(ch)     (set.dbg.bandwidth[ch])
-
-#define DBG_SHOW_ALL            (set.dbg.showAll)
-#define DBG_SHOW_FLAG           (set.dbg.showFlag)
-
 struct SettingsDebug
 {
     int8                         showConsole;               ///< Показывать ли консоль
@@ -38,8 +23,6 @@ struct SettingsDebug
     bool                         showRandStat;              ///< Выводить график статистики.
     int16                        timeCompensation;          ///< Дополнительное смещение по времени для данной развёртки режима рандомизатора.
     int16                        pretriggered;              ///< Регулируемая величина предзапуска для исследования рандомизатора.
-    FPGA::Settings::Bandwidth::E bandwidth[2];              ///< \brief Здесь задаётся полоса, которая будет включаться при выборе в "КАНАЛ-Полоса" 
-                                                            ///< значения "Полная".
     bool                         ShowStats;                 ///< Показывать статистику на экране (fps, например).
     int16                        enum_gate_max;             ///< Ограничение ворот в рандомизаторе сверху
     int16                        enum_gate_min;             ///< Ограничение ворот в рандомизаторе снизу

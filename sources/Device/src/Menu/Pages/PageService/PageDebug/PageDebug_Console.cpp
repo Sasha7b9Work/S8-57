@@ -20,7 +20,7 @@ DEF_CHOICE_2( cShow,                                                            
 DEF_GOVERNOR( gNumStrings,                                                                                                                          //--- ОТЛАДКА - КОНСОЛЬ - Число строк ---
     "Число строк",
     "",
-    CONSOLE_NUM_STRINGS, 0, 33, &PageDebug::PageConsole::self, 0, Console::OnChanged_MaxStringsInConsole
+    set.dbg.numStrings, 0, 33, &PageDebug::PageConsole::self, 0, Console::OnChanged_MaxStringsInConsole
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -47,13 +47,13 @@ DEF_CHOICE_2( cShowAll,                                                         
     "Показывать все значения, засылаемые в регистры",
     "Нет",
     "Да",
-    DBG_SHOW_ALL, &PageDebug::PageRegisters::self, Item::Active, Choice::Changed, Choice::AfterDraw
+    set.dbg.showAll, &PageDebug::PageRegisters::self, Item::Active, Choice::Changed, Choice::AfterDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static bool IsActive_Registers()
 {
-    return DBG_SHOW_ALL;
+    return set.dbg.showAll;
 }
 
 DEF_CHOICE_2( cRD_FL,                                                                                                                          //--- ОТЛАДКА - КОНСОЛЬ - РЕГИСТРЫ - RD_FL ---
@@ -61,7 +61,7 @@ DEF_CHOICE_2( cRD_FL,                                                           
     "",
     DISABLE_RU,
     ENABLE_RU,
-    DBG_SHOW_FLAG, &PageDebug::PageRegisters::self, IsActive_Registers, Choice::Changed, Choice::AfterDraw
+    set.dbg.showFlag, &PageDebug::PageRegisters::self, IsActive_Registers, Choice::Changed, Choice::AfterDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

@@ -237,7 +237,6 @@ const Settings Settings::defaultSettings =
         false,                                  // showRandStat
         0,                                      // timeCompensation
         0,                                      // pretriggered
-        { Bandwidth::Full, Bandwidth::Full },   // bandwidth[2]
         false,                                  // ShowStats
         0,                                      // gate_max
         0,                                      // gate_min

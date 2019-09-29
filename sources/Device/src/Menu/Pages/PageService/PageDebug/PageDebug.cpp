@@ -361,8 +361,7 @@ DEF_CHOICE_2( cStats,                                                           
     ,
     "Не показывать",
     "Показывать",
-    SHOW_STAT,
-    &PageDebug::self, Item::Active, Choice::Changed, Choice::AfterDraw
+    set.dbg.ShowStats, &PageDebug::self, Item::Active, Choice::Changed, Choice::AfterDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

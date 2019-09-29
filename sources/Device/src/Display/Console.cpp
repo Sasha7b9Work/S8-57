@@ -2,10 +2,9 @@
 #include "Console.h"
 #include "Display/Display_Primitives.h"
 #include "Display/Painter.h"
+#include "Settings/Settings.h"
 #include <cstring>
 #include <cstdio>
-
-#include "Settings/Settings.h"
 
 
 using namespace Display::Primitives;
@@ -27,7 +26,7 @@ void Console::Draw()
 {
     if (prevMaxStrinsInConsole == -1)
     {
-        prevMaxStrinsInConsole = CONSOLE_NUM_STRINGS;
+        prevMaxStrinsInConsole = set.dbg.numStrings;
     }
 
     if (!IsShown())
@@ -71,7 +70,7 @@ void Console::AddString(char *string)
     if (!inProcessDrawConsole)      // Страхуемся на предмет того, что сейчас не происходит вывод консоли в другом потоке
     {
         static int count = 0;
-        if (stringInConsole == CONSOLE_NUM_STRINGS)
+        if (stringInConsole == set.dbg.numStrings)
         {
             DeleteFirstString();
         }
@@ -97,14 +96,14 @@ void Console::OnChanged_MaxStringsInConsole()
 {
     /// \todo Здесь, видимо, не совсем корректное поведение в случае, когда реальных строк меньше, чем максимально допустимое их количество
 
-    int delta = prevMaxStrinsInConsole - CONSOLE_NUM_STRINGS;
+    int delta = prevMaxStrinsInConsole - set.dbg.numStrings;
 
     for (int i = 0; i < delta; i++)
     {
         DeleteFirstString();
     }
 
-    prevMaxStrinsInConsole = CONSOLE_NUM_STRINGS;
+    prevMaxStrinsInConsole = set.dbg.numStrings;
 
 
 }
