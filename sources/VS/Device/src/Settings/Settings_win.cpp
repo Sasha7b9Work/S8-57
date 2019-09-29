@@ -2,7 +2,6 @@
 #include "Settings/Settings.h"
 #include "Hardware/Memory.h"
 #include "FPGA/FPGA.h"
-#include "FPGA/FPGA_Settings.h"
 #include "Osci/Osci.h"
 
 
