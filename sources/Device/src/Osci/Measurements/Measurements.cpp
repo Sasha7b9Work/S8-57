@@ -183,12 +183,12 @@ void Osci::Measurements::CalculateMeasures()
                     markerVoltage[Chan::A][0] = markerVoltage[Chan::A][1] = markerVoltage[Chan::B][0] = markerVoltage[Chan::B][1] = Integer::ERROR;
                 }
                 
-                if(VIEW_MEASURES_A)
+                if(set.meas.source == MeasuresSource::A)
                 {
                     values[type].value[Chan::A] = func(Chan::A);
                 }
                 
-                if(VIEW_MEASURES_B)
+                if(set.meas.source == MeasuresSource::B)
                 {
                     values[type].value[Chan::B] = func(Chan::B);
                 }

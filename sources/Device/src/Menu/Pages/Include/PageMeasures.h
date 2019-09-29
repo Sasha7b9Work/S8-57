@@ -4,14 +4,6 @@
 #include "Osci/Measurements/Measures.h"
 
 
-/// По какому каналу производить автоматические измерения
-#define SOURCE_MEASURES                 (set.meas.source)
-/// Автоматические измерения производятся только по каналу A
-#define SOURCE_MEASURES_IS_A            (SOURCE_MEASURES == MeasuresSource::A)
-/// Автоматические измерения производятся только по каналу B
-#define SOURCE_MEASURES_IS_B            (SOURCE_MEASURES == MeasuresSource::B)
-/// Автоматические измерения производятся по каналам A и B
-#define SOURCE_MEASURES_IS_BOTH         (SOURCE_MEASURES == MeasuresSource::A_B)
 /// Выводить автоматические измерения по каналу A
 #define VIEW_MEASURES_A                 (set.ch[Chan::A].enabled && (SOURCE_MEASURES_IS_A || SOURCE_MEASURES_IS_BOTH))
 /// Выводить автоматические измерения по каналу B

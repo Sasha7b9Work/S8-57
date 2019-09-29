@@ -107,16 +107,16 @@ void Table::Cell::DrawStringMeasure(int x, int y)
     Color colA = Color::CHAN[Chan::A];
     Color colB = Color::CHAN[Chan::B];
 
-    if (VIEW_MEASURES_BOTH)
+    if (set.meas.source == MeasuresSource::A_B)
     {
         measureA.Draw(x + 2, y + 11, colA);
         measureB.Draw(x + 2, y + (set.ch[Chan::A].enabled ? 20 : 11), colB); //-V547
     }
-    else if (VIEW_MEASURES_A)
+    else if (set.meas.source == MeasuresSource::A)
     {
         measureA.Draw(x + 2, y + 11, colA);
     }
-    else if (VIEW_MEASURES_B)
+    else if (set.meas.source == MeasuresSource::B)
     {
         measureB.Draw(x + 2, y + 11, colB);
     }
@@ -182,7 +182,7 @@ int Osci::Measurements::Table::GetDeltaGridLeft()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 int Osci::Measurements::Table::DY()
 {
-    if (VIEW_MEASURES_BOTH)
+    if (set.meas.source == MeasuresSource::A_B)
     {
         return 30;
     }

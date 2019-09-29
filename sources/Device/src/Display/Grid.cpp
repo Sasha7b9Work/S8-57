@@ -370,15 +370,15 @@ static int Grid::DeltaVforLineGrid()
     {
         if (set.meas.number == MeasuresOnDisplay::_1_5)
         {
-            result = VIEW_MEASURES_BOTH ? 55 : 59;
+            result = set.meas.source == MeasuresSource::A_B ? 55 : 59;
         }
         else if (set.meas.number == MeasuresOnDisplay::_2_5)
         {
-            result = VIEW_MEASURES_BOTH ? 69 : 51;
+            result = (set.meas.source == MeasuresSource::A_B) ? 69 : 51;
         }
         else if (set.meas.number == MeasuresOnDisplay::_3_5)
         {
-            result = VIEW_MEASURES_BOTH ? 54 : 68;
+            result = (set.meas.source == MeasuresSource::A_B) ? 54 : 68;
         }
         else
         {
