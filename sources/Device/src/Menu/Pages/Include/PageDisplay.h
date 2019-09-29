@@ -5,12 +5,6 @@
 #include "Osci/Osci_Settings.h"
 
 
-#define TYPE_GRID                   (set.disp.typeGrid)
-#define TYPE_GRID_1                 (TYPE_GRID == Display::TypeGrid::_1)
-#define TYPE_GRID_2                 (TYPE_GRID == Display::TypeGrid::_2)
-#define TYPE_GRID_3                 (TYPE_GRID == Display::TypeGrid::_3)
-#define TYPE_GRID_4                 (TYPE_GRID == Display::TypeGrid::_4)
-
 #define LINKING_RSHIFT              (set.disp.linkingRShift)
 
 #define MENU_AUTO_HIDE              (set.disp.menuAutoHide)
@@ -144,21 +138,19 @@ struct ENumSignalsInSec
     uint TimeBetweenFramesMS() const;
 };
 
-namespace Display
+/// Тип сетки на экране.
+struct TypeGrid
 {
-    /// Тип сетки на экране.
-    struct TypeGrid
+    enum E
     {
-        enum E
-        {
-            _1,
-            _2,
-            _3,
-            _4,
-            Size
-        } value;
-    };
-}
+        _1,
+        _2,
+        _3,
+        _4,
+        Size
+    } value;
+};
+
 
 struct SettingsDisplay
 {
@@ -171,7 +163,7 @@ struct SettingsDisplay
     ModeAccumulation::E    modeAccumulation;      ///< Режим накопления сигналов.
     ENumSmoothing          ENumSmoothing;         ///< Перечисление количества точек для скользящего фильтра.
     ENumSignalsInSec       ENumSignalsInSec;      ///< Перечисление числа считываний сигнала в секунда.
-    Display::TypeGrid::E            typeGrid;              ///< Тип сетки
+    TypeGrid::E            typeGrid;              ///< Тип сетки
     int                             brightnessGrid;        ///< Яркость сетки от 0 до 100.
     Display::LinkingRShift::E       linkingRShift;         ///< Тип привязки к смещению по вертикали.
     int16                           brightness;            ///< Яркость дисплея.
@@ -185,16 +177,7 @@ struct SettingsDisplay
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 struct PageDisplay
 {
-    static void OnChanged_RefreshFPS(bool);
-
     static const Page * const self;
-
-    //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    class PageView
-    {
-    public:
-        //static const Page * const self;
-    };
 
     //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     struct PageAccumulation
