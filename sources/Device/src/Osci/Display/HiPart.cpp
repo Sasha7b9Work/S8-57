@@ -29,8 +29,6 @@ using namespace Hardware;
 using namespace Osci::Measurements;
 using namespace Osci::Settings;
 
-using Osci::Measurements::Cursors;
-
 
 class Separator
 {

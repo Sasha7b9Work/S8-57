@@ -3,23 +3,17 @@
 #include "Display/Display_Primitives.h"
 #include "Display/Painter.h"
 #include "Display/Symbols.h"
-#include "Display/Grid.h"
-#include "FPGA/FPGA.h"
-#include "FPGA/FPGA_Math.h"
 #include "Settings/Settings.h"
-#include "Utils/Values.h"
 #include "FlashDrive/FlashDrive.h"
 #include "Hardware/VCP.h"
 #include "Hardware/Battery.h"
 #include "Osci/Display/MemoryWindow.h"
 #include "Osci/Measurements/Measurements.h"
-#include <cmath>
 
 
 using namespace Display::Primitives;
 using namespace Osci::Settings;
-
-using Osci::Measurements::Cursors;
+using namespace Osci::Measurements;
 
 
 

@@ -11,8 +11,7 @@
 
 
 using namespace Display::Primitives;
-
-using Osci::Measurements::Cursors;
+using namespace Osci::Measurements;
 
 const float PageMeasuresCursors::PageSet::MAX_POS_U = 200.0F;
 const float PageMeasuresCursors::PageSet::MAX_POS_T = 280.0F;

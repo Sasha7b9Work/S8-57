@@ -30,40 +30,39 @@ namespace Osci
 
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         /// Страница выбора измерений
-        class PageChoice
+        namespace PageChoice
         {
-        public:
             /// Обработка нажатий при открытой странице
-            static void OnKeyEvent(const KeyEvent &event);
+            void OnKeyEvent(const KeyEvent &event);
             /// Нужно вызывать для открытия/закрытия страницы выбора
-            static void OnOpenCloseEvent();
+            void OnOpenCloseEvent();
             /// Включить/отключить отображение
-            static void ChangeState();
+            void ChangeState();
 
-            static void Draw();
+            void Draw();
         };
 
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        struct Cursors
+        namespace Cursors
         {
             /// Нарисовать курсоры и результаты курсорных измерений
-            static void Draw();
+            void Draw();
             /// Возвращает true,если нужно рисовать курсоры
-            static bool  NecessaryDraw();
+            bool  NecessaryDraw();
             /// Получить позицию курсора напряжения
-            static float PosU(Chan::E ch, int numCur);
+            float PosU(Chan::E ch, int numCur);
             /// Возвращает значение курсора времени
-            static float PosT(Chan::E ch, int num);
+            float PosT(Chan::E ch, int num);
             /// Получить строку курсора напряжения
-            static String Voltage(Chan::E source, int numCur);
+            String Voltage(Chan::E source, int numCur);
             /// Получть строку курсора времени
-            static String Time(Chan::E source, int numCur);
+            String Time(Chan::E source, int numCur);
             /// Возвращает строку процентных измерений по напряжению
-            static String PercentsU(Chan::E source);
+            String PercentsU(Chan::E source);
             /// Возвращает строку процентных измерений по времени
-            static String PercentsT(Chan::E source);
+            String PercentsT(Chan::E source);
 
-            static void SetCursPosT_temp(Chan::E ch, int num, float value);
+            void SetCursPosT_temp(Chan::E ch, int num, float value);
         };
     };
 };
