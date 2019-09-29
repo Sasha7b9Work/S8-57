@@ -2,7 +2,6 @@
 #include "Menu/MenuItems.h"
 #include "Display/Display_Primitives.h"
 #include "Display/Painter.h"
-#include "Settings/SettingsTime.h"
 #include "Osci/Measurements/Measures.h"
 #include "Settings/Settings.h"
 #include "Menu/Pages/Include/PageMeasures.h"

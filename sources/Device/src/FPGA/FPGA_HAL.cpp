@@ -4,9 +4,7 @@
 #include "Hardware/HAL/HAL_PIO.h"
 #include "Hardware/Timer.h"
 #include "Settings/Settings.h"
-#include "Settings/SettingsTime.h"
 #include "Utils/Math.h"
-
 #include "device.h"
 #include "Hardware/HAL/HAL.h"
 

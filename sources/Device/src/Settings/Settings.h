@@ -3,7 +3,6 @@
 #include "SettingsDebug.h"
 #include "SettingsNRST.h"
 #include "SettingsService.h"
-#include "SettingsTime.h"
 #include "Tester/Tester.h"
 #include "Osci/FrequencyCounter.h"
 #include "Osci/Measurements/Cursors.h"
@@ -19,6 +18,7 @@
 #include "Menu/Pages/Include/PageChannels.h"
 #include "Menu/Pages/Include/PageDisplay.h"
 #include "Menu/Pages/Include/PageFunction.h"
+#include "Menu/Pages/Include/PageTime.h"
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -55,18 +55,6 @@ struct SettingsTrig
                                             /// \todo разрядности trig_holdOff недостаточно
     int16                              holdOff;             ///< Удержание синхронизации
     bool                               holdOffEnabled;      ///< Включение удержания синхронизации
-};
-
-struct SettingsTime
-{
-    int                              shift;
-    Osci::Settings::TBase::E         base;
-    Osci::Settings::PeakDetMode::E   peakDet;
-    Osci::Settings::TPos::E          TPos;
-    Osci::Settings::SampleType::E    sampleType;
-    Osci::Settings::FunctionTime::E  timeDivXPos;
-    Osci::Settings::LinkingTShift::E linkingTShift;                 ///< Тип привязки смещения по горизонтали
-    Osci::Settings::SampleType::E    sampleTypeOld;
 };
 
 struct SettingsCursors

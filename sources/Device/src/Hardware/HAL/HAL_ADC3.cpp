@@ -2,10 +2,8 @@
 #include "defines.h"
 #include "HAL.h"
 #include "Settings/Settings.h"
-#include "Settings/SettingsTime.h"
 #include "Osci/Osci_Settings.h"
 #include "FPGA/FPGA.h"
-
 #include "Osci/Osci.h"
 
 
