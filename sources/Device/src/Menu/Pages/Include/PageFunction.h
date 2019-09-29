@@ -16,13 +16,6 @@
 #define FFT_ENABLED                 (set.math.enableFFT)
 #define MATH_ENABLED                (FUNC_MODE_DRAW_IS_ENABLED || FFT_ENABLED)
 
-#define MATH_FUNC                   (set.math.function)
-
-#define FUNC_MODE_DRAW              (set.math.modeDraw)
-#define FUNC_MODE_DRAW_IS_ENABLED   (FUNC_MODE_DRAW != FuncModeDraw::Disable)
-#define FUNC_MODE_DRAW_IS_SEPARATE  (FUNC_MODE_DRAW == FuncModeDraw::Separate)
-#define FUNC_MODE_DRAW_IS_TOGETHER  (FUNC_MODE_DRAW == FuncModeDraw::Together)
-
 #define FFT_POS_CURSOR(num)         (set.math.posCur[num])
 #define FFT_POS_CURSOR_0            (FFT_POS_CURSOR(0))
 #define FFT_POS_CURSOR_1            (FFT_POS_CURSOR(1))
