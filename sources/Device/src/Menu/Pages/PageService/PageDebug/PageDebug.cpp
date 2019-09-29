@@ -249,7 +249,7 @@ static void OnPress_ADC_Shift_Reset()
     {
         for (int range = 0; range < 3; range++)
         {
-            RSHIFT_ADD_STABLE(ch, range) = 0;
+            set.nrst.rShiftAddStable[ch][range] = 0;
         }
     }
     RShift::Set(Chan::A, SET_RSHIFT_A);
@@ -271,7 +271,7 @@ static void OnChanged_Shift_A()
 DEF_GOVERNOR( gShift_A2mV, //-V641                                                                                                        //--- ÎÒËÀÄÊÀ - ÀÖÏ - ÄÎÏ ÑÌÅÙ - Ñì 1ê 2ìÂ ïîñò ---
     "Ñì 1ê 2ìÂ ïîñò",
     "",
-    RSHIFT_ADD_STABLE_A(Range::_2mV), -100, 100,
+    set.nrst.rShiftAddStable[Chan::A][Range::_2mV], -100, 100,
     &PageDebug::PageADC::PageShift::self, 0, OnChanged_Shift_A
 )
 
@@ -284,7 +284,7 @@ static void OnChanged_Shift_B()
 DEF_GOVERNOR( gShift_B2mV,                                                                                                                //--- ÎÒËÀÄÊÀ - ÀÖÏ - ÄÎÏ ÑÌÅÙ - Ñì 2ê 2ìÂ ïîñò ---
     "Ñì 2ê 2ìÂ ïîñò",
     "",
-    RSHIFT_ADD_STABLE_B(Range::_2mV), -100, 100,
+    set.nrst.rShiftAddStable[Chan::B][Range::_2mV], -100, 100,
     &PageDebug::PageADC::PageShift::self, 0, OnChanged_Shift_B
 )
 
@@ -292,7 +292,7 @@ DEF_GOVERNOR( gShift_B2mV,                                                      
 DEF_GOVERNOR( gShift_A5mV,                                                                                                                //--- ÎÒËÀÄÊÀ - ÀÖÏ - ÄÎÏ ÑÌÅÙ - Ñì 1ê 5ìÂ ïîñò ---
     "Ñì 1ê 5ìÂ ïîñò",
     "",
-    RSHIFT_ADD_STABLE_A(Range::_5mV), -100, 100,
+    set.nrst.rShiftAddStable[Chan::A][Range::_5mV], -100, 100,
     &PageDebug::PageADC::PageShift::self, 0, OnChanged_Shift_A
 )
 
@@ -300,7 +300,7 @@ DEF_GOVERNOR( gShift_A5mV,                                                      
 DEF_GOVERNOR( gShift_B5mV,                                                                                                                //--- ÎÒËÀÄÊÀ - ÀÖÏ - ÄÎÏ ÑÌÅÙ - Ñì 2ê 5ìÂ ïîñò ---
     "Ñì 2ê 5ìÂ ïîñò",
     "",
-    RSHIFT_ADD_STABLE_B(Range::_5mV), -100, 100,
+    set.nrst.rShiftAddStable[Chan::B][Range::_5mV], -100, 100,
     &PageDebug::PageADC::PageShift::self, 0, OnChanged_Shift_B
 )
 
@@ -308,7 +308,7 @@ DEF_GOVERNOR( gShift_B5mV,                                                      
 DEF_GOVERNOR( gShift_A10mV,                                                                                                              //--- ÎÒËÀÄÊÀ - ÀÖÏ - ÄÎÏ ÑÌÅÙ - Ñì 1ê 10ìÂ ïîñò ---
     "Ñì 1ê 10ìÂ ïîñò",
     "",
-    RSHIFT_ADD_STABLE_A(Range::_10mV), -100, 100,
+    set.nrst.rShiftAddStable[Chan::A][Range::_10mV], -100, 100,
     &PageDebug::PageADC::PageShift::self, 0, OnChanged_Shift_A
 )
 
@@ -316,7 +316,7 @@ DEF_GOVERNOR( gShift_A10mV,                                                     
 DEF_GOVERNOR( gShift_B10mV,                                                                                                              //--- ÎÒËÀÄÊÀ - ÀÖÏ - ÄÎÏ ÑÌÅÙ - Ñì 2ê 10ìÂ ïîñò ---
     "Ñì 2ê 10ìÂ ïîñò",
     "",
-    RSHIFT_ADD_STABLE_B(Range::_10mV), -100, 100,
+    set.nrst.rShiftAddStable[Chan::B][Range::_10mV], -100, 100,
     &PageDebug::PageADC::PageShift::self, 0, OnChanged_Shift_B
 )
 
