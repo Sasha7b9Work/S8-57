@@ -145,11 +145,11 @@ static void WriteParametersFFT(Chan::E ch, float freq0, float density0, float fr
 
     Color::CHAN[ch].SetAsCurrent();
 
-    Text((set.math.scaleFFT == ScaleFFT::Log) ? SU::Db2String(density0, 4, buffer) : Osci::Measurements::Float2String(density0, false, buffer)).Draw(x, y);
+    Text((set.fft.scale == ScaleFFT::Log) ? SU::Db2String(density0, 4, buffer) : Osci::Measurements::Float2String(density0, false, buffer)).Draw(x, y);
 
     y += dY;
 
-    Text((set.math.scaleFFT == ScaleFFT::Log) ? SU::Db2String(density1, 4, buffer) : Osci::Measurements::Float2String(density1, false, buffer)).Draw(x, y);
+    Text((set.fft.scale == ScaleFFT::Log) ? SU::Db2String(density1, 4, buffer) : Osci::Measurements::Float2String(density1, false, buffer)).Draw(x, y);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
