@@ -5,8 +5,10 @@
 #include "Settings/SettingsOsci.h"
 
 
-#define NUM_AVE_MAX                 256
-
+#define NUM_AVE_MAX     256
+#define NUM_AVE         (1 << (int)set.disp.ENumAverage)
+#define NUM_ACCUM       (1 << (int)set.disp.ENumAccum)
+#define NUM_MIN_MAX     (1 << (int)set.disp.ENumMinMax)
 
 struct ModeDrawSignal
 {
