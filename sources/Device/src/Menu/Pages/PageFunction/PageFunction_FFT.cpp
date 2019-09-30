@@ -99,19 +99,22 @@ static bool IsActive_Cursors()
 
 static bool HandlerKey_FFT_Cursors(const KeyEvent &event)
 {
-    if (event.type != TypePress::Press && event.type != TypePress::Repeat)
+    if (event.IsArrow())
     {
-        return true;
+        if (event.type == TypePress::Press || event.type == TypePress::Repeat)
+        {
+            Key::E key = event.key;
+
+            int delta = (key == Key::Up || key == Key::Right) ? 1 : -1;
+
+            set.fft.posCur[set.fft.cursor] += (uint8)delta;
+            Beeper::RegulatorShiftRotate();
+
+            return true;
+        }
     }
 
-    Key::E key = event.key;
-
-    int delta = (key == Key::Up || key == Key::Right) ? 1 : -1;
-
-    set.fft.posCur[set.fft.cursor] += (uint8)delta;
-    Beeper::RegulatorShiftRotate();
-
-    return true;
+    return false;
 }
 
 DEF_PAGE_1( pCursors, // -V641 // -V1027                                                                                                                 //--- ‘”Õ ÷»ﬂ - —œ≈ “– -  ”–—Œ–€ ---
