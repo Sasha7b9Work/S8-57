@@ -27,7 +27,7 @@ static void DrawSetName();  // Ёта функци€ рисует, когда нужно задать им€ файла 
        void OnMemExtSetMaskNameRegSet(int angle, int maxIndex);
 
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 static bool IsActive_Points()
 {
     return (set.time.peakDet == PeakDetMode::Disabled);
@@ -58,7 +58,7 @@ DEF_CHOICE_5( cPoints,                                                          
     set.mem.enumPoints, &PageMemory::self, IsActive_Points, PageMemory::OnChanged_Points, Choice::AfterDraw
 )
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 static void Draw_Manager_Tab(int x, int y)
 {
     Font::SetCurrent(Font::Type::_UGO2);
@@ -72,7 +72,7 @@ DEF_GRAPH_BUTTON( bManager_Tab,                                                 
     &PageDrive::PageManager::self, Item::Active, FileManager::Press_Tab, Draw_Manager_Tab
 )
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 static void Draw_Manager_LevelUp(int x, int y)
 {
     Font::SetCurrent(Font::Type::_UGO2);
@@ -86,7 +86,7 @@ DEF_GRAPH_BUTTON( bManager_LevelUp,                                             
     &PageDrive::PageManager::self, Item::Active, FileManager::Press_LevelUp, Draw_Manager_LevelUp
 )
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 static void Draw_Manager_LevelDown(int x, int y)
 {
     Font::SetCurrent(Font::Type::_UGO2);
@@ -100,7 +100,7 @@ DEF_GRAPH_BUTTON( bManager_LevelDown,                                           
     &PageDrive::PageManager::self, Item::Active, FileManager::Press_LevelDown, Draw_Manager_LevelDown
 )
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 static bool IsActive_Drive_Manager()
 {
     return FDrive::IsConnected();
@@ -147,7 +147,7 @@ DEF_PAGE_3( pManager, // -V641                                                  
 
 const Page * const PageDrive::PageManager::self = (const Page *)&pManager;
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 DEF_CHOICE_2( cDrive_Name,                                                                                                                            //--- ѕјћя“№ - ¬Ќ≈ЎЌ «” - »м€ файла ---
     "»м€ файла"
     ,
@@ -160,7 +160,7 @@ DEF_CHOICE_2( cDrive_Name,                                                      
     set.mem.fileNamingMode, &PageDrive::self, Item::Active, Choice::Changed, Choice::AfterDraw
 )
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 static void OnPress_Mask_Delete()
 {
     set.mem.fileNameMask[0] = '\0';
@@ -179,7 +179,7 @@ DEF_GRAPH_BUTTON( bMask_Delete,                                                 
     &PageDrive::PageMask::self, Item::Active, OnPress_Mask_Delete, Draw_Delete
 )
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 static void OnPress_Mask_Backspace()
 {
     int size = (int)std::strlen(set.mem.fileNameMask);
@@ -209,7 +209,7 @@ DEF_GRAPH_BUTTON( bMask_Backspace,                                              
     &PageDrive::PageMask::self, Item::Active, OnPress_Mask_Backspace, Draw_Backspace
 )
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 static void OnPress_Mask_Insert()
 {
     int index = set.mem.indexCurSymbolNameMask;
@@ -259,7 +259,7 @@ DEF_GRAPH_BUTTON( bMask_Insert,                                                 
     &PageDrive::PageMask::self, Item::Active, OnPress_Mask_Insert, Draw_Insert
 )
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 DEF_CHOICE_2( cDrive_SaveAs,                                                                                                                      //--- ѕјћя“№ - ¬Ќ≈ЎЌ «” - —охран€ть как ---
     "—охран€ть как"
     ,
@@ -271,7 +271,7 @@ DEF_CHOICE_2( cDrive_SaveAs,                                                    
     set.mem.modeSaveSignal, &PageDrive::self, Item::Active, Choice::Changed, Choice::AfterDraw
 )
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 DEF_CHOICE_2( cDrive_ModeBtnMemory,                                                                                                               //--- ѕјћя“№ - ¬Ќ≈ЎЌ «” - –еж кн ѕјћя“№ ---
     "–еж кн ѕјћя“№",
     "",
@@ -280,7 +280,7 @@ DEF_CHOICE_2( cDrive_ModeBtnMemory,                                             
     set.mem.modeBtnMemory, &PageDrive::self, Item::Active, Choice::Changed, Choice::AfterDraw
 )
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 static bool IsActive_Mask()
 {
     return (set.mem.fileNamingMode == FileNamingMode::Mask);
@@ -430,7 +430,7 @@ DEF_PAGE_3( pMask, // -V641                                                     
 
 const Page * const PageDrive::PageMask::self = (const Page *)&pMask;
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 DEF_CHOICE_2( cDrive_Autoconnect,                                                                                                               //--- ѕјћя“№ - ¬Ќ≈ЎЌ «” - јвтоподключение ---
     "јвтоподкл.",
     "Eсли \"¬кл\", при подключении внешнего накопител€ происходит автоматический переход на страницу ѕјћя“№ - ¬нешн «”",
@@ -439,7 +439,7 @@ DEF_CHOICE_2( cDrive_Autoconnect,                                               
     set.mem.flashAutoConnect, &PageDrive::self, Item::Active, Choice::Changed, Choice::AfterDraw
 )
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 DEF_PAGE_6( pDrive,  //-V641 //-V1027                                                                                                                             //--- ѕјћя“№ - ¬Ќ≈ЎЌ «” ---
     "¬Ќ≈ЎЌ «”",
     "–абота с внешним запоминающим устройством.",
@@ -456,7 +456,7 @@ DEF_PAGE_6( pDrive,  //-V641 //-V1027                                           
 
 const Page * const PageDrive::self = (const Page *)&pDrive;
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 DEF_PAGE_4( pMemory, // -V641 // -V1027                                                                                                                                      //--- ѕяћя“№ ---
     "ѕјћя“№",
     "–абота с внешней и внутренней пам€тью.",
@@ -536,7 +536,7 @@ static void DrawSetName()
     Region(5, 8).Fill(x, y0 + 65, Color::FLASH_10);
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 static void OnPress_SetName_Exit()
 {
     if (EXIT_FROM_SETNAME_TO == RETURN_TO_DISABLE_MENU)
@@ -557,7 +557,7 @@ static void OnPress_SetName_Exit()
     EXIT_FROM_SETNAME_TO = RETURN_TO_DISABLE_MENU;
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 static void OnPress_SetName_Delete()
 {
     set.mem.fileName[0] = '\0';
@@ -569,7 +569,7 @@ DEF_GRAPH_BUTTON( bSetName_Delete,                                              
     &PageSetName::self, Item::Active, OnPress_SetName_Delete, Draw_Delete
 )
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 static void OnPress_SetName_Backspace()
 {
     int size = (int)std::strlen(set.mem.fileName);
@@ -585,7 +585,7 @@ DEF_GRAPH_BUTTON( bSetName_Backspace,                                           
     &PageSetName::self, Item::Active, OnPress_SetName_Backspace, Draw_Backspace
 )
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 static void OnPress_SetName_Insert()
 {
     int size = (int)std::strlen(set.mem.fileName);
@@ -602,7 +602,7 @@ DEF_GRAPH_BUTTON( bSetName_Insert,                                              
     &PageSetName::self, Item::Active, OnPress_SetName_Insert, Draw_Insert
 )
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 static void OnPress_SetName_Save()
 {
     if (FDrive::IsConnected())
@@ -628,7 +628,7 @@ DEF_GRAPH_BUTTON( bSetName_Save,                                                
     &PageSetName::self, Item::Active, OnPress_SetName_Save, Draw_SetName_Save
 )
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 static bool OnArrows_SetName(const KeyEvent &event)
 {
     OnMemExtSetMaskNameRegSet(event.Delta(), Tables::Size() / 4 - 7);
@@ -669,7 +669,7 @@ DEF_PAGE_4( pSetName, // -V641                                                  
 
 const Page * const PageSetName::self = (const Page *)&pSetName;
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 ENumPointsFPGA::E NumPoints_2_ENumPoints(int numPoints)
 {
     if (numPoints == 8192) { return ENumPointsFPGA::_8k; }
@@ -684,7 +684,7 @@ ENumPointsFPGA::E NumPoints_2_ENumPoints(int numPoints)
 }
 
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 int ENumPoints_2_NumPoints(ENumPointsFPGA::E numPoints)
 {
     static const int n[ENumPointsFPGA::Size] =

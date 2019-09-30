@@ -19,7 +19,7 @@ using HAL::FSMC;
 using Utils::Stack;
 
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 /// «десь хранитс€ последнее действительное значение частоты. ƒл€ вывода в режиме частотомера. 0 означает, что значение выводить не надо
 static BitSet32 freqActual;
 /// «десь хранитс€ последнее действительное значение периода. ƒл€ вывода в режиме частотомера. 0 означает, что значение выводить не надо
@@ -51,7 +51,7 @@ float    FrequencyCounter::frequency;
 static char buffer[11] = {'0', '0', '0', '0', '0', '0', '0', 0, 0, 0, 0};
 
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 /// ¬ыводит отладочную информацию
 static void DrawDebugInfo();
 
@@ -66,7 +66,7 @@ static pString StackToString(Utils::Stack<uint> *stack, int order);
 static void WriteStackToBuffer(Utils::Stack<uint> *stack, int point, const char *suffix);
 
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 void FrequencyCounter::Init()
 {
     LoadSettings();
@@ -82,7 +82,7 @@ void FrequencyCounter::Init()
 #endif
 
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void FrequencyCounter::LoadSettings()
 {
     uint8 data = 0;
@@ -121,7 +121,7 @@ void FrequencyCounter::LoadSettings()
 #endif
 
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void FrequencyCounter::LoadFreqSettings()
 {
     LoadSettings();
@@ -130,7 +130,7 @@ void FrequencyCounter::LoadFreqSettings()
     lampFreq = false;
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void FrequencyCounter::LoadPeriodSettings()
 {
     LoadSettings();
@@ -139,7 +139,7 @@ void FrequencyCounter::LoadPeriodSettings()
     lampPeriod = false;
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void FrequencyCounter::Update()
 {
     SetStateLamps();
@@ -194,7 +194,7 @@ void FrequencyCounter::Update()
     }
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void FrequencyCounter::ReadFreq()
 {
     BitSet32 freqSet(*RD::FREQ_BYTE_3, *RD::FREQ_BYTE_2, *RD::FREQ_BYTE_1, *RD::FREQ_BYTE_0);
@@ -220,7 +220,7 @@ void FrequencyCounter::ReadFreq()
     }
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void FrequencyCounter::ReadPeriod()
 {
     BitSet32 periodSet(*RD::PERIOD_BYTE_3, *RD::PERIOD_BYTE_2, *RD::PERIOD_BYTE_1, *RD::PERIOD_BYTE_0);
@@ -240,14 +240,14 @@ void FrequencyCounter::ReadPeriod()
     readPeriod = false;
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 float FrequencyCounter::FreqSetToFreq(const BitSet32 *fr)
 {
     const float k[3] = {10.0F, 1.0F, 0.1F};
     return (set.freq.enabled == FreqMeterEnabled::On) ? (fr->word * k[set.freq.timeCounting]) : (fr->word * 10.0F);
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 float FrequencyCounter::PeriodSetToFreq(const BitSet32 *period_)
 {
     if (period_->word == 0)
@@ -261,7 +261,7 @@ float FrequencyCounter::PeriodSetToFreq(const BitSet32 *period_)
     return (set.freq.enabled == FreqMeterEnabled::On) ? (k[set.freq.freqClc] * kP[set.freq.numberPeriods] / (float)period_->word) : (10e5F / (float)period_->word);
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 float FrequencyCounter::GetFreq()
 {
     return frequency;
@@ -272,7 +272,7 @@ float FrequencyCounter::GetFreq()
 #define EMPTY_STRING    "\xa9\xa9\xa9.\xa9\xa9\xa9"
 #define OVERFLOW_STRING ">>>"
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 static void DrawFrequency(int x, int y)
 {
     Text("F", SIZE).Draw(x + 2, y + 1, Color::FILL);
@@ -330,7 +330,7 @@ static void DrawFrequency(int x, int y)
     Text(time.ToStringAccuracy(false, strFreq, 6), SIZE).Draw(x + dX, y + 10 * SIZE);
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 static void DrawPeriod(int x, int y)
 {
     Text("T", SIZE).Draw(x + 2, y + 1, Color::FILL);
@@ -384,7 +384,7 @@ static void DrawPeriod(int x, int y)
     Text(freq.ToStringAccuracy(strPeriod, 6), SIZE).Draw(x + dX, y + 10 * SIZE);
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void FrequencyCounter::Draw()
 {
     /// \todo ¬ этой строке точку ставить не где придЄтс€, а в той позиции, где она сто€ла последний раз
@@ -422,7 +422,7 @@ void FrequencyCounter::Draw()
 }
 
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 pString PeriodSetToString(const BitSet32 *pr)
 {
     if (pr->word == 0)
@@ -475,7 +475,7 @@ pString PeriodSetToString(const BitSet32 *pr)
     return StackToString(&stackResult, order);
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 static int LowOrder(FreqMeterFreqClc::E freqCLC, FreqMeterNumberPeriods::E numPeriods)
 {
 /*
@@ -529,7 +529,7 @@ static int LowOrder(FreqMeterFreqClc::E freqCLC, FreqMeterNumberPeriods::E numPe
     return order[freqCLC + numPeriods];
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 static pString StackToString(Stack<uint> *stack, int order)
 {
     static const struct StructOrder
@@ -572,7 +572,7 @@ static pString StackToString(Stack<uint> *stack, int order)
     return buffer;
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 static void WriteStackToBuffer(Stack<uint> *stack, int point, const char *suffix)
 {
     for(int i = 6; i >= 0; i--)
@@ -588,7 +588,7 @@ static void WriteStackToBuffer(Stack<uint> *stack, int point, const char *suffix
     std::strcpy(&buffer[7], suffix);
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 static pString FreqSetToString(const BitSet32 *fr)
 {
     if(fr->word == 0)
@@ -736,14 +736,14 @@ static pString FreqSetToString(const BitSet32 *fr)
 }
 
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void FrequencyCounter::SetStateLamps()
 {
     SetStateLampFreq();
     SetStateLampPeriod();
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void FrequencyCounter::SetStateLampFreq()
 {
     if(!lampFreq)
@@ -762,7 +762,7 @@ void FrequencyCounter::SetStateLampFreq()
     }
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void FrequencyCounter::SetStateLampPeriod()
 {
     if(!lampPeriod)
@@ -781,7 +781,7 @@ void FrequencyCounter::SetStateLampPeriod()
     }
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 static void DrawDebugInfo()
 {
     int width = 50;

@@ -26,7 +26,7 @@ static void DrawMemoryMap(int num, bool exist);
 static bool OnArrows_ROM(const KeyEvent &event);
 
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 static void OnPress_Next()
 {
     OnArrows_ROM(KeyEvent(Key::Right, TypePress::Release));
@@ -45,7 +45,7 @@ DEF_GRAPH_BUTTON( bNext,
     &PageROM::self, Item::Active, OnPress_Next, Draw_Next
 )
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 static void OnPress_Prev()
 {
     OnArrows_ROM(KeyEvent(Key::Left, TypePress::Release));
@@ -64,7 +64,7 @@ DEF_GRAPH_BUTTON( bPrev,
     &PageROM::self, Item::Active, OnPress_Prev, Draw_Prev
 )
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 static void OnPress_Delete()
 {
     Display::FuncOnWaitStart("Удаляю сохранённые данные", false);
@@ -85,7 +85,7 @@ DEF_GRAPH_BUTTON( bDelete,                                                      
     &PageROM::self, Item::Active, OnPress_Delete, Draw_Delete
 )
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 static void SaveSignalToIntMemory()
 {
     // Заносим в указатели DS, DATA_A, DATA_B данные из ОЗУ или последний считанный сигнал, в зависимости от того, из какого режима зашли в 
@@ -119,7 +119,7 @@ DEF_GRAPH_BUTTON( bSave,                                                        
     &PageROM::self, Item::Active, OnPress_SaveToMemory, Draw_SaveToMemory
 )
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 static void OnOpenClose_ROM(bool)
 {
     set.mem.modeWork = ModeWork::ROM;

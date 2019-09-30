@@ -18,7 +18,7 @@ using namespace FPGA::Math;
 using namespace Osci::Measurements;
 
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 /// Нарисовать вертикальный курсор
 static void DrawVertical(int x, int yTearing);
 /// Нарисовать горизонтальный курсор
@@ -27,20 +27,20 @@ static void DrawHorizontal(int y, int xTearing);
 static void UpdateCursorsForLook();
 
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 float Cursors::PosU(Chan::E ch, int numCur)
 {
     return set.curs.posCurU[ch][numCur] / (Grid::Bottom() == Grid::FullBottom() ? 1.0F : 2.0F);
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 bool Cursors::NecessaryDraw()
 {
     return ((set.curs.cntrlU[set.curs.source] == CursorsControl::Disable) || (set.curs.cntrlT[set.curs.source] == CursorsControl::Disable)) &&
         (set.curs.showCursors || Menu::GetNameOpenedPage() == PageName::Measures_Cursors_Set);
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 String Cursors::Voltage(Chan::E source, int numCur)
 {
     float voltage = FPGA::Math::VoltageCursor(PosU(source, numCur), set.ch[source].range, SET_RSHIFT(source));
@@ -52,7 +52,7 @@ String Cursors::Voltage(Chan::E source, int numCur)
     return ::Voltage(voltage).ToString(true);
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 String Cursors::Time(Chan::E source, int numCur)
 {
     float time = FPGA::Math::TimeCursor(Cursors::PosT(source, numCur), set.time.base);
@@ -60,7 +60,7 @@ String Cursors::Time(Chan::E source, int numCur)
     return ::Time(time).ToString(true);
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 float Cursors::PosT(Chan::E ch, int num)
 {
     float retValue = 0.0F;
@@ -68,13 +68,13 @@ float Cursors::PosT(Chan::E ch, int num)
     return retValue;
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void Cursors::SetCursPosT_temp(Chan::E ch, int num, float value)
 {
     std::memcpy(&set.curs.posCurT[ch][num], &value, sizeof(float));
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void Cursors::Draw()
 {
     Chan::E source = set.curs.source;
@@ -118,7 +118,7 @@ void Cursors::Draw()
     }
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 static void DrawVertical(int x, int yTearing)
 {
     x += Grid::Left();
@@ -135,7 +135,7 @@ static void DrawVertical(int x, int yTearing)
     Rectangle(2, 2).Draw(x - 1, Grid::ChannelBottom() - 1);
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 static void DrawHorizontal(int y, int xTearing)
 {
     y += Grid::Top();
@@ -152,7 +152,7 @@ static void DrawHorizontal(int y, int xTearing)
     Rectangle(2, 2).Draw(Grid::Right() - 1, y - 1);
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 static void UpdateCursorsForLook()
 {
 //    Chan::E source = CURS_SOURCE;
@@ -175,7 +175,7 @@ static void UpdateCursorsForLook()
     }
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 String Cursors::PercentsU(Chan::E source)
 {
     /// \todo Тут дикая дичь. Эта строчка вызывает HardFault. Возможно, из-за включенного выравнивания Settings. Надо подумать
@@ -187,7 +187,7 @@ String Cursors::PercentsU(Chan::E source)
     return String("%s%%", Float(dValue / dPerc * 100.0F).ToString(false, 5).CString());
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 String Cursors::PercentsT(Chan::E source)
 {
     float dPerc = 100.0F;

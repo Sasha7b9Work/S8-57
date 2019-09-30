@@ -4,7 +4,7 @@
 #include "Device.h"
 
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 static bool IsActive_RangesVoltageDC()
 {
     return (set.mult.meas == MultimeterMeasure::VoltageDC);
@@ -27,7 +27,7 @@ DEF_CHOICE_3( cRangesVoltageDC,                                                 
     set.mult.rangeVoltageDC, &PageMultimeter::self, IsActive_RangesVoltageDC, OnChange_VoltageDC, Choice::AfterDraw
 )
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 static bool IsActive_RnagesVoltageAC()
 {
     return (set.mult.meas == MultimeterMeasure::VoltageAC);
@@ -51,7 +51,7 @@ DEF_CHOICE_3( cRangesVoltageAC,                                                 
 )
 
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 static void OnChange_CurrentDC(bool active)
 {
     if (active)
@@ -68,7 +68,7 @@ DEF_CHOICE_2( cRangesCurrentDC,
     set.mult.rangeCurrentDC, &PageMultimeter::self, Item::Active, OnChange_CurrentDC, Choice::AfterDraw
 )
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 static void OnChange_CurrentAC(bool active)
 {
     if (active)
@@ -85,7 +85,7 @@ DEF_CHOICE_2( cRangesCurrentAC,
     set.mult.rangeCurrentAC, &PageMultimeter::self, Item::Active, OnChange_CurrentAC, Choice::AfterDraw
 )
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 static bool IsActive_RangesReistance()
 {
     return (set.mult.meas == MultimeterMeasure::Resistance);
@@ -131,7 +131,7 @@ DEF_CHOICE_7( cMode,
     set.mult.meas, &PageMultimeter::self, Item::Active, PageMultimeter::OnChanged_Mode, Choice::AfterDraw
 )
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 static void OnChanged_AVP(bool)
 {
     Multimeter::ChangeAVP();
@@ -145,7 +145,7 @@ DEF_CHOICE_2 ( cAVP,
     set.mult.avp, &PageMultimeter::self, Item::Active, OnChanged_AVP, Choice::AfterDraw
 )
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 static void OnChanged_Zero(bool)
 {
     //Multimeter::LoadZero();
@@ -161,7 +161,7 @@ DEF_CHOICE_2( cZero,
     zero, &PageMultimeter::self, Item::Active, OnChanged_Zero, Choice::AfterDraw
 )
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void PageMultimeter::Init()
 {
     OnChanged_Mode(true);
@@ -223,7 +223,7 @@ DEF_PAGE_5_VAR( pMultimeter, // -V641 //-V1027 //-V641
 
 const Page * const PageMultimeter::self = (const Page *)&pMultimeter;
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 static void OnPress_Calibrate0()
 {
     Multimeter::Calibrate(0);
@@ -235,7 +235,7 @@ DEF_BUTTON( bCalibrate0,
     &PageMultimeter::PageCalibration::self, Item::Active, OnPress_Calibrate0
 )
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 static void OnPress_Calibrate1()
 {
     Multimeter::Calibrate(1);
@@ -257,7 +257,7 @@ DEF_PAGE_2( pCalibration, //-V641 //-V1027
 
 const Page * const PageMultimeter::PageCalibration::self = (const Page *)&pCalibration;
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void PageMultimeter::DecodePassword(const KeyEvent &event)
 {
 #define NUM_SYMBOLS 8

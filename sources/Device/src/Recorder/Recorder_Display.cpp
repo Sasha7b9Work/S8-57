@@ -23,14 +23,14 @@
 using namespace Display::Primitives;
 
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 /// С этой точки начинается вывод
 static int startPoint = -1;
 
 static uint16 posCursor[2] = { 100, 220 };
 
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 namespace Recorder
 {
 namespace Display
@@ -47,7 +47,7 @@ namespace Display
 };
 
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 void Recorder::Display::Update()
 {
     Painter::BeginScene(Color::BLACK);
@@ -65,7 +65,7 @@ void Recorder::Display::Update()
     Menu::Draw();
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void Recorder::Display::DrawSettings(int x, int y)
 {
     if (Menu::OpenedItem() != PageRecorder::self)
@@ -82,7 +82,7 @@ void Recorder::Display::DrawSettings(int x, int y)
     Text(Range(set.ch[Chan::B].range).ToString(static_cast<int8>(set.ch[Chan::B].divider))).Draw(x + 2, y + 20, Color::CHAN[Chan::B]);
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void Recorder::Display::DrawSizeMemory(int x, int y)
 {
     if (Menu::OpenedItem() != PageRecorder::self)
@@ -99,7 +99,7 @@ void Recorder::Display::DrawSizeMemory(int x, int y)
     Text(text).Draw(x + 2, y + 1);
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 static int Y(int value)
 {
     int delta = FPGA::VALUE::AVE - value;
@@ -120,7 +120,7 @@ static int Y(int value)
     return y;
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 static char *DeltaTime(char buffer[20])
 {
     float delta = std::fabsf((float)(posCursor[0] - posCursor[1])) * RecorderScaleX::Current().TimeForPointMS() / 1000.0F;
@@ -130,7 +130,7 @@ static char *DeltaTime(char buffer[20])
     return buffer;
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 static char *TimeCursor(int numCur, char buffer[20])
 {
     int numPoint = startPoint + posCursor[numCur];
@@ -142,7 +142,7 @@ static char *TimeCursor(int numCur, char buffer[20])
     return buffer;
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 static char *VoltageCursor(Chan::E ch, int numCur, char buffer[20])
 {
     uint numPoint = (uint)(startPoint + posCursor[numCur]);
@@ -160,7 +160,7 @@ static char *VoltageCursor(Chan::E ch, int numCur, char buffer[20])
     return buffer;
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 static void DrawParametersCursors()
 {
     int width = 49;
@@ -197,7 +197,7 @@ static void DrawParametersCursors()
     Text(String("dT %s", DeltaTime(buffer))).Draw(x + 2, y7, Color::FILL);
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 static void DrawCursors()
 {
     if (Menu::OpenedItem() != PageRecorder::PageShow::self)
@@ -216,7 +216,7 @@ static void DrawCursors()
     DrawParametersCursors();
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void Recorder::Display::DrawData()
 {
     Storage::Frame *frame = Storage::CurrentFrame();
@@ -264,7 +264,7 @@ void Recorder::Display::DrawData()
     DrawCursors();
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void Recorder::Display::DrawMemoryWindow()
 {
     static int prevNumPoints = 0;
@@ -305,7 +305,7 @@ void Recorder::Display::DrawMemoryWindow()
     Region(width, 10).DrawBounded(x, 0, Color::BACK, Color::FILL);
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void Recorder::Display::MoveLeft()
 {
     if (Storage::CurrentFrame()->NumPoints() < 321)
@@ -320,7 +320,7 @@ void Recorder::Display::MoveLeft()
     }
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void Recorder::Display::MoveRight()
 {
     if (Storage::CurrentFrame()->NumPoints() < 321)
@@ -335,7 +335,7 @@ void Recorder::Display::MoveRight()
     }
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void Recorder::Display::MoveCursorLeft()
 {
     uint16 &position = posCursor[set.rec.currentCursor];
@@ -346,7 +346,7 @@ void Recorder::Display::MoveCursorLeft()
     }
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void Recorder::Display::MoveCursorRight()
 {
     uint16 &position = posCursor[set.rec.currentCursor];

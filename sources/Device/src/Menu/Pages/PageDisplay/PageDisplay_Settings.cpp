@@ -5,7 +5,7 @@
 #include "Display/Painter.h"
 
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 static void OnChanged_Brightness()
 {
 }
@@ -16,7 +16,7 @@ DEF_GOVERNOR( gBrightness,                                                      
     set.disp.brightness, 0, 100, &PageDisplay::PageSettings::self, Item::Active, OnChanged_Brightness
 )
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 static void OnChanged_AutoHide(bool autoHide)
 {
     Menu::SetAutoHide(autoHide);
@@ -34,7 +34,7 @@ DEF_CHOICE_6( cAutoHide,                                                        
     set.disp.menuAutoHide, &PageDisplay::PageSettings::self, Item::Active, OnChanged_AutoHide, Choice::AfterDraw
 )
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 DEF_PAGE_3( pSettings, // -V641 // -V1027                                                                                                                       //--- ДИСПЛЕЙ - НАСТРОЙКИ ---
     "НАСТРОЙКИ",
     "Дополнительные настройки дисплея",

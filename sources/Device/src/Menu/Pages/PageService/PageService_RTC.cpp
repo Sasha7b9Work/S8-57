@@ -48,7 +48,7 @@ static StructRTC *psRTC = nullptr;
 #define TIME      (psRTC->time)
 
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 static void OnPress_SetLeft()
 {
     Math::CircleDecrease(&CUR_FIELD, 0, 5);
@@ -67,7 +67,7 @@ DEF_GRAPH_BUTTON( bSet_Left,
     &PageRTC::self, Item::Active, OnPress_SetLeft, Draw_Left
 )
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 static void OnPress_SetRight()
 {
     Math::CircleIncrease(&CUR_FIELD, 0, 5);
@@ -86,7 +86,7 @@ DEF_GRAPH_BUTTON( bSet_Right,
     &PageRTC::self, Item::Active, OnPress_SetRight, Draw_Right
 )
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 static void OnPress_SetUp()
 {
     psRTC->ChangeCurrentField(1);
@@ -105,7 +105,7 @@ DEF_GRAPH_BUTTON( bSet_Up,
     &PageRTC::self, Item::Active, OnPress_SetUp, Draw_Up
 )
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 static void OnPress_SetDown()
 {
     psRTC->ChangeCurrentField(-1);
@@ -124,7 +124,7 @@ DEF_GRAPH_BUTTON( bSet_Down,
     &PageRTC::self, Item::Active, OnPress_SetDown, Draw_Down
 )
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 static void OnPress_SetPick()
 {
     HAL::RTC_::SetPackedTime(psRTC->time);
@@ -144,7 +144,7 @@ DEF_GRAPH_BUTTON(bSet_Pick,
     &PageRTC::self, Item::Active, OnPress_SetPick, Draw_Pick
 )
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 static void DrawDigit(int x, int y, int digit)
 {
     Integer(digit).ToString(false).Draw(x, y);

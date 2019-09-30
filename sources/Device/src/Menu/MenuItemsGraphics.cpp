@@ -23,7 +23,6 @@ using namespace Hardware;
 using Utils::Stack;
 
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////q
 void GovernorColor::Draw(int x, int y, bool opened) const
 {
     if (opened)
@@ -43,7 +42,7 @@ void GovernorColor::Draw(int x, int y, bool opened) const
     }
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void GovernorColor::DrawOpened(int x, int y) const
 {
     int width = widthOpened;
@@ -57,7 +56,7 @@ void GovernorColor::DrawOpened(int x, int y) const
     DrawValue(x + 1, y + 14);
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void GovernorColor::DrawClosed(int x, int y) const
 {
     OwnData()->ct->Init();
@@ -65,7 +64,7 @@ void GovernorColor::DrawClosed(int x, int y) const
     Region(Width() + 1, Value::HEIGHT - 3).Fill(x + 1, y + 13, OwnData()->ct->color);
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void GovernorColor::DrawValue(int x, int y) const
 {
     ColorType *ct = OwnData()->ct;
@@ -94,7 +93,7 @@ void GovernorColor::DrawValue(int x, int y) const
     }
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void Governor::Draw(int x, int y, bool opened) const
 {
     if (!IsActive())
@@ -112,7 +111,7 @@ void Governor::Draw(int x, int y, bool opened) const
     }
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void Governor::DrawOpened(int x, int y) const
 {
     DrawCommonHiPart(x, y, true);
@@ -120,14 +119,14 @@ void Governor::DrawOpened(int x, int y) const
     DrawLowPart(x, y + 13);
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void Governor::DrawClosed(int x, int y) const
 {
     DrawLowPart(x, y + 14);
     DrawCommonHiPart(x, y, false);
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void Governor::DrawValue(int x, int y) const
 {
     int startX = x + 40;
@@ -157,7 +156,7 @@ void Governor::DrawValue(int x, int y) const
     }
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void Governor::DrawLowPart(int x, int y) const
 {
     Region(Width() - 3, Value::HEIGHT - 3).Fill(x + 1, y - 1, ColorBackground(this));
@@ -206,7 +205,7 @@ void Governor::DrawLowPart(int x, int y) const
     }
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void Choice::Draw(int x, int y, bool opened) const
 {
     if (opened)
@@ -219,7 +218,7 @@ void Choice::Draw(int x, int y, bool opened) const
     }
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void Choice::DrawOpened(int x, int y) const
 {
     int height = HeightOpened();
@@ -241,7 +240,7 @@ void Choice::DrawOpened(int x, int y) const
     }
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void Choice::DrawClosed(int x, int y) const
 {
     if (IsActive())
@@ -272,7 +271,7 @@ void Choice::DrawClosed(int x, int y) const
     DrawCommonHiPart(x, y, false);
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void Button::Draw(int x, int y, bool) const
 {
     Region(Width() - 5, Height() - 4).Fill(x + 2, y + 3, ColorTitleBackground());
@@ -280,7 +279,7 @@ void Button::Draw(int x, int y, bool) const
     Text(Title().CString()).DrawInCenterRect(x + 2, y, Width(), Height(), ColorTitleText());
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void GraphButton::Draw(int x, int y, bool) const
 {
     x += 2;
@@ -293,7 +292,7 @@ void GraphButton::Draw(int x, int y, bool) const
     OwnData()->funcDraw(x + 20, y);
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void Page::Draw(int x, int y, bool opened) const
 {
     if(opened)
@@ -321,7 +320,7 @@ void Page::Draw(int x, int y, bool opened) const
     }
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void Page::DrawTitle(int x, int y) const
 {
     int eX = x;
@@ -342,7 +341,7 @@ void Page::DrawTitle(int x, int y) const
     DrawPagesUGO(eX + Menu::Title::WIDTH - 3, y + Menu::Title::HEIGHT);
     DrawNestingPage(eX + 5, y + Menu::Title::HEIGHT - 6);
 }
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void Page::DrawItems(int x, int y) const
 {
     for (int i = 0; i < 5; i++)
@@ -363,7 +362,7 @@ void Page::DrawItems(int x, int y) const
 }
 
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 void Item::DrawCommonHiPart(int x, int y, bool opened) const
 {
     int width = Width() - 3;
@@ -381,7 +380,7 @@ void Item::DrawCommonHiPart(int x, int y, bool opened) const
     }
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void Governor::DrawValueWithSelectedPosition(int x, int y, int value, uint numDigits, int selPosFromEnd, bool) const
 {
     Stack<uint8> stack(numDigits);
@@ -409,7 +408,7 @@ void Governor::DrawValueWithSelectedPosition(int x, int y, int value, uint numDi
     }
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void Page::DrawPagesUGO(int right, int bottom) const
 {
     int size = 4;
@@ -464,7 +463,7 @@ void Page::DrawNestingPage(int left, int bottom) const
     }
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 int GraphButton::NumHints() const
 {
     if (OwnData()->hintUGO == nullptr)
@@ -484,7 +483,7 @@ int GraphButton::NumHints() const
     return result;
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void GraphButton::DrawHints(int x, int y, int width) const
 {
     if (NumHints() == 0)

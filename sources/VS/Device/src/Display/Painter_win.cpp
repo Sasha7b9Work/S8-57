@@ -39,7 +39,7 @@
 #include "Utils/Math.h"
 
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 SDL_Renderer *renderer = nullptr;
 static SDL_Window *window = nullptr;
 static SDL_Texture *texture = nullptr;
@@ -55,7 +55,7 @@ static bool needStopTimerLong = false;
 static Key::E pressedKey = Key::None;
 
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 /// Создаёт окно приложения. Возвращает хэндл виджета для отрисовки
 static HANDLE CreateFrame();
 /// Установить размер и оптимальную позицию для окна приложения
@@ -72,7 +72,7 @@ static void CreateButtonsChannel(Frame *frame, const char *title, int x, int y, 
 static void CreateButtonsTrig(Frame *frame, int x, int y);
 
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 void Painter::Init()
 {
     HANDLE handle = CreateFrame();
@@ -91,7 +91,7 @@ void Painter::Init()
     renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void Painter::BeginScene(Color color)
 {
     texture = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_RGBA8888, SDL_RENDERER_ACCELERATED, Display::WIDTH, Display::HEIGHT);
@@ -101,7 +101,7 @@ void Painter::BeginScene(Color color)
     SDL_RenderClear(renderer);
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void Painter::EndScene()
 {
     SDL_SetRenderTarget(renderer, NULL);
@@ -116,7 +116,7 @@ void Painter::EndScene()
     SDL_RenderPresent(renderer);
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 static void SetPositionAndSize(Frame *frame)
 {
     wxSize size = {Frame::WIDTH + 9, Frame::HEIGHT + 320 };
@@ -130,7 +130,7 @@ static void SetPositionAndSize(Frame *frame)
     frame->SetPosition({ rect.width / 2 - size.GetWidth() / 2, rect.height / 2 - size.GetHeight() / 2 });
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 static wxRect GetMaxDisplay()
 {
     wxRect result = {0, 0, 0, 0};
@@ -150,7 +150,7 @@ static wxRect GetMaxDisplay()
     return result;
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 static HANDLE CreateFrame()
 {
     Frame *frame = new Frame("");
@@ -173,7 +173,7 @@ static HANDLE CreateFrame()
     return button->GetHandle();
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 static void CreateButtons(Frame *frame)
 {
     // Рисуем кнопки меню и функциональные
@@ -257,7 +257,7 @@ static void CreateButtons(Frame *frame)
     CreateButton(Key::Start, frame, { 230 + x00, Frame::HEIGHT + 198 }, { 80, 25 }, "ПУСК/СТОП");
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 static void CreateButton(Key::E key, Frame *frame, const wxPoint &pos, const wxSize &size, pString title)
 {
     wxButton *button = new wxButton(frame, (wxWindowID)key, title, pos, size);
@@ -268,7 +268,7 @@ static void CreateButton(Key::E key, Frame *frame, const wxPoint &pos, const wxS
     buttons[key] = button;
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 static void CreateButtonsChannel(Frame *frame, const char *title, int x, int y, Key::E keyChannel, Key::E keyRangeLess, Key::E keyRangeMore, Key::E keyRShiftLess, Key::E keyRShiftMore)
 {
     int width = 45;
@@ -293,7 +293,7 @@ static void CreateButtonsChannel(Frame *frame, const char *title, int x, int y, 
     CreateButton(keyChannel, frame, pos, size, title);
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 static void CreateButtonsTrig(Frame *frame, int x, int y)
 {
     int width = 45;
@@ -306,7 +306,7 @@ static void CreateButtonsTrig(Frame *frame, int x, int y)
     CreateButton(Key::TrigLevLess, frame, { x, y + 60 }, size, "меньше");
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void Frame::OnDown(wxCommandEvent &event)
 {
     Key::E key = (Key::E)event.GetId();
@@ -321,7 +321,7 @@ void Frame::OnDown(wxCommandEvent &event)
     pressedKey = key;
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void Frame::OnUp(wxCommandEvent &event)
 {
     Key::E key = (Key::E)event.GetId();
@@ -336,7 +336,7 @@ void Frame::OnUp(wxCommandEvent &event)
     pressedKey = Key::None;
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void Frame::OnTimerLong(wxTimerEvent&)
 {
     BufferButtons::Push(KeyEvent(pressedKey, TypePress::Long));
@@ -344,7 +344,7 @@ void Frame::OnTimerLong(wxTimerEvent&)
     pressedKey = Key::None;
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void Frame::HandlerEvents()
 {
     SDL_Event event;
@@ -376,7 +376,7 @@ void Frame::HandlerEvents()
     }
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void Painter::DrawTesterData(uint8, Color, const uint16 *, const uint8 *)
 {
 

@@ -11,7 +11,7 @@
 #include "FPGA/FPGA.h"
 
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 template void  Math::Swap<int>(int *, int *);
 template int   Math::Sign<int>(int);
 template int   Math::Sign<int8>(int8);
@@ -40,7 +40,7 @@ template int   Math::Min<int>(int, int);
 template uint  Math::Min<uint>(uint, uint);
 
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 int Math::LowSignedBit(uint value)
 {
     int verValue = 1;
@@ -58,7 +58,7 @@ int Math::LowSignedBit(uint value)
     return -1;
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void Math::Smoothing(uint8 *data, int numPoints, int numSmooth)
 {
     if (numSmooth == 0 || numSmooth == 1)
@@ -97,7 +97,7 @@ void Math::Smoothing(uint8 *data, int numPoints, int numSmooth)
     std::free(num);
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 template<class T>
 T Math::Max(T val1, T val2, T val3)
 {
@@ -113,14 +113,14 @@ T Math::Max(T val1, T val2, T val3)
     return retValue;
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 template<class T>
 T Math::Min(T x1, T x2)
 {
     return (x1 < x2) ? x1 : x2;
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 int Math::MinFrom2Int(int val0, int val1)
 {
     if (val0 < val1)
@@ -130,7 +130,7 @@ int Math::MinFrom2Int(int val0, int val1)
     return val1;
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 int Math::Pow10(int pow)
 {
     int retValue = 1;
@@ -143,7 +143,7 @@ int Math::Pow10(int pow)
     return retValue;
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 uint8 Math::MaxFromArray(const uint8 *data, int firstPoint, int lastPoint)
 {
 
@@ -168,7 +168,7 @@ uint8 Math::MaxFromArray(const uint8 *data, int firstPoint, int lastPoint)
     return max;
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 uint8 Math::MinFromArray(const uint8 *data, int firstPoint, int lastPoint)
 {
 
@@ -193,7 +193,7 @@ uint8 Math::MinFromArray(const uint8 *data, int firstPoint, int lastPoint)
     return min;
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void Math::MinMaxFromArray(const uint8 *data, int firstPoint, int lastPoint, uint8 *outMin, uint8 *outMax)
 {
     uint8 min = 255;
@@ -221,7 +221,7 @@ void Math::MinMaxFromArray(const uint8 *data, int firstPoint, int lastPoint, uin
     *outMax = max;
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 uint8 Math::MaxFromArrayWithErrorCode(const uint8 *data, int firstPoint, int lastPoint)
 {
     uint8 max = Math::MaxFromArray(data, firstPoint, lastPoint);
@@ -232,7 +232,7 @@ uint8 Math::MaxFromArrayWithErrorCode(const uint8 *data, int firstPoint, int las
     return max;
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 uint8 Math::MinFromArrayWithErrorCode(const uint8 *data, int firstPoint, int lastPoint)
 {
     uint8 min = Math::MinFromArray(data, firstPoint, lastPoint);
@@ -243,7 +243,7 @@ uint8 Math::MinFromArrayWithErrorCode(const uint8 *data, int firstPoint, int las
     return min;
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 float Math::GetIntersectionWithHorizontalLine(int x0, int y0, int x1, int y1, int yHorLine)
 {
     if (y0 == y1)
@@ -254,7 +254,7 @@ float Math::GetIntersectionWithHorizontalLine(int x0, int y0, int x1, int y1, in
     return (yHorLine - y0) / ((float)(y1 - y0) / (float)(x1 - x0)) + x0;
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void Math::CalculateMathFunction(float *dataAandResult, const float *dataB, int numPoints)
 {
     if (set.math.function == MathFunction::Sum)
@@ -283,7 +283,7 @@ void Math::CalculateMathFunction(float *dataAandResult, const float *dataB, int 
     }
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 uint8 Math::CalculateFiltr(const uint8 *data, int x, int numPoints, int numSmoothing)
 {
     if (numSmoothing < 2)
@@ -320,7 +320,7 @@ uint8 Math::CalculateFiltr(const uint8 *data, int x, int numPoints, int numSmoot
     return (uint8)(sum / (float)count);
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void Math::CalculateFiltrArray(const uint8 *dataIn, uint8 *dataOut, int numPoints, int numSmoothing)
 {
     if (numSmoothing < 2)
@@ -363,7 +363,7 @@ void Math::CalculateFiltrArray(const uint8 *dataIn, uint8 *dataOut, int numPoint
     }
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 int Math::FindAnotherElement(const uint8 *data, uint8 value, int numElements)
 {
     for (int i = 0; i < numElements; i++)
@@ -377,7 +377,7 @@ int Math::FindAnotherElement(const uint8 *data, uint8 value, int numElements)
     return -1;
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 int Math::DigitsInIntPart(float value)
 {
     if (value == std::numeric_limits<float>::infinity())
@@ -399,7 +399,7 @@ int Math::DigitsInIntPart(float value)
     return num;
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 float Math::RoundFloat(float value, int numDigits)
 {
     if(value == std::numeric_limits<float>::infinity())
@@ -420,13 +420,13 @@ float Math::RoundFloat(float value, int numDigits)
     return value > 0.0F ? absValue : -absValue;
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 bool Math::IsEquals(float x, float y)
 {
     return std::fabsf(x - y) < std::numeric_limits<float>::epsilon();
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 bool Math::FloatsIsEquals(float value0, float value1, float epsilonPart)
 {
     float max = std::fabsf(value0) > std::fabsf(value1) ? std::fabsf(value0) : std::fabsf(value1);
@@ -436,14 +436,14 @@ bool Math::FloatsIsEquals(float value0, float value1, float epsilonPart)
     return std::fabsf(value0 - value1) < epsilonAbs;
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 template<class T>
 void Math::Swap(T *value0, T *value1)
 {
      T temp = *value0; *value0 = *value1; *value1 = temp;
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 template<class T>
 void Math::Sort(T *value0, T *value1)
 {
@@ -453,7 +453,7 @@ void Math::Sort(T *value0, T *value1)
      } 
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 template<class T>
 int Math::Sign(T x)
 {
@@ -468,7 +468,7 @@ int Math::Sign(T x)
      return 0; 
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 template<class T>
 T Math::Abs(T x)
 {
@@ -479,7 +479,7 @@ T Math::Abs(T x)
      return x; 
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 template<class T>
 void Math::CircleIncrease(T *value, T min, T max)
 {
@@ -493,7 +493,7 @@ void Math::CircleIncrease(T *value, T min, T max)
     }
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 template<class T>
 void Math::CircleDecrease(T *value, T min, T max)
 {
@@ -507,7 +507,7 @@ void Math::CircleDecrease(T *value, T min, T max)
     }
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 template<class T>
 void Math::LimitationIncrease(T *value, T max)
 {
@@ -517,7 +517,7 @@ void Math::LimitationIncrease(T *value, T max)
     }
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 template<class T>
 void Math::Limitation(T *value, T min, T max)
 {
@@ -535,7 +535,7 @@ void Math::Limitation(T *value, T min, T max)
     }
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 template<class T>
 void Math::LimitationDecrease(T *value, T min)
 {
@@ -545,7 +545,7 @@ void Math::LimitationDecrease(T *value, T min)
     }
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 template<class T>
 T Math::LimitationRet(T value, T min, T max)
 {
@@ -560,7 +560,7 @@ T Math::LimitationRet(T value, T min, T max)
     return value;
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 template<class T>
 void Math::AdditionThisLimitation(T *value, int term, T min, T max)
 {
@@ -588,7 +588,7 @@ void Math::AdditionThisLimitation(T *value, int term, T min, T max)
     }
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 float Math::RandFloat(float min, float max)
 {
     float range = max - min;

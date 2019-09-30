@@ -16,7 +16,7 @@ using namespace Osci::Measurements;
 const float PageMeasuresCursors::PageSet::MAX_POS_U = 200.0F;
 const float PageMeasuresCursors::PageSet::MAX_POS_T = 280.0F;
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 /// –ассчитывает услови€ отрисовки ”√ќ малых кнопок управлени€ выбором курсорами.
 void CalculateConditions(int16 pos0, int16 pos1, CursorsControl::E cursCntrl, bool *condTopLeft, bool *condBottomRight)
 {
@@ -30,7 +30,7 @@ void CalculateConditions(int16 pos0, int16 pos1, CursorsControl::E cursCntrl, bo
         (cursCntrl == CursorsControl::_2 && zeroLessFirst);
 }
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 static void Draw_ChannelA(int x, int y)
 {
     String("1").Draw(x + 7, y + 5);
@@ -63,7 +63,7 @@ DEF_GRAPH_BUTTON_HINTS_2( bChannel,                                             
     Draw_ChannelB, "канал 2"
 )
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void DrawMenuCursTime(int x, int y, bool left, bool right)
 {
     x += 11;
@@ -160,7 +160,7 @@ DEF_GRAPH_BUTTON_HINTS_5( bT,                                                   
     Draw_T_enableBoth,  "курсоры времени включены, управление обоими курсорами"
 )
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void DrawMenuCursVoltage(int x, int y, bool top, bool bottom)
 {
     x -= 10;
@@ -258,7 +258,7 @@ DEF_GRAPH_BUTTON_HINTS_5( bU,                                                   
     Draw_U_enableBoth,  "курсоры напр€жени€ включены, управление обоими курсорами"
 )
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 static void OnPress_100()
 {
     PageMeasuresCursors::PageSet::SetCursPos100(set.curs.source);
@@ -276,7 +276,7 @@ DEF_GRAPH_BUTTON( b100,                                                         
     &PageMeasuresCursors::PageSet::self, Item::Active, OnPress_100, Draw_100
 )
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 static void Draw_Movement_Percents(int x, int y)
 {
     String('\x83').Draw(x + 6, y + 5);
@@ -312,7 +312,7 @@ DEF_GRAPH_BUTTON_HINTS_2( bMovement,                                            
     Draw_Movement_Points,   "шаг перемещени€ курсора кратен одному пикселю"
 )
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 bool PageMeasuresCursors::PageSet::OnArrows(const KeyEvent &event) //-V2506
 {
     TypePress::E type = event.type;
@@ -389,32 +389,32 @@ DEF_PAGE_5( pSet, // -V641 // -V1027                                            
 const Page * const PageMeasuresCursors::PageSet::self = (const Page *)&pSet;
 
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void PageMeasuresCursors::PageSet::SetCursSource(Chan::E ch)
 {
     set.curs.source = ch;
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void PageMeasuresCursors::PageSet::IncCursCntrlU(Chan::E ch)
 {
     Math::CircleIncrease<int8>((int8 *)& set.curs.cntrlU[ch], 0, 3);
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void PageMeasuresCursors::PageSet::IncCursCntrlT(Chan::E ch)
 {
     Math::CircleIncrease<int8>((int8 *)& set.curs.cntrlT[ch], 0, 3);
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void PageMeasuresCursors::PageSet::SetCursPos100(Chan::E ch)
 {
     set.curs.deltaU100percents[ch] = (float)std::fabsf(set.curs.posCurU[ch][0] - set.curs.posCurU[ch][1]);
     set.curs.deltaT100percents[ch] = (float)std::fabsf(Cursors::PosT(ch, 0) - Cursors::PosT(ch, 1));
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void PageMeasuresCursors::PageSet::SetShiftCursPosU(Chan::E ch, int numCur, float delta)
 {
     set.curs.posCurU[ch][numCur] = Math::LimitationRet(set.curs.posCurU[ch][numCur] - delta, 0.0F, MAX_POS_U);
@@ -425,7 +425,7 @@ void PageMeasuresCursors::PageSet::SetShiftCursPosU(Chan::E ch, int numCur, floa
     }
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void PageMeasuresCursors::PageSet::SetShiftCursPosT(Chan::E ch, int numCur, float delta)
 {
     /// \todo одинаковые ветки
@@ -438,7 +438,7 @@ void PageMeasuresCursors::PageSet::SetShiftCursPosT(Chan::E ch, int numCur, floa
     }
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void PageMeasuresCursors::PageSet::UpdateCursorsForLook()
 {
     Chan::E source = set.curs.source;
@@ -461,13 +461,13 @@ void PageMeasuresCursors::PageSet::UpdateCursorsForLook()
     }
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void PageMeasuresCursors::PageSet::SetCursorU(Chan::E ch, int numCur, float pos)
 {
     set.curs.posCurU[ch][numCur] = Math::LimitationRet(pos, 0.0F, MAX_POS_U);
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void PageMeasuresCursors::PageSet::SetCursorT(Chan::E ch, int numCur, float pos)
 {
     /// \todo одинаковые ветки
@@ -475,7 +475,7 @@ void PageMeasuresCursors::PageSet::SetCursorT(Chan::E ch, int numCur, float pos)
     Cursors::SetCursPosT_temp(ch, numCur, Math::LimitationRet(pos, 0.0F, MAX_POS_T));
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 bool PageMeasuresCursors::PageSet::IsRegSetActiveOnCursors()
 {
     return ((Menu::GetNameOpenedPage() == PageName::Measures_Cursors_Set) &&

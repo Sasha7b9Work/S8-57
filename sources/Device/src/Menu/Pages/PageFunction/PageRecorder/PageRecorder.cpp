@@ -14,7 +14,7 @@ using HAL::FSMC;
 extern const Page pageRecorder;
 
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 static bool IsActive_Destination()
 {
     return !Recorder::IsRunning();
@@ -29,7 +29,7 @@ DEF_CHOICE_3( cDestination,                                                     
     set.rec.storageRecord, &PageRecorder::self, IsActive_Destination, Choice::Changed, Choice::AfterDraw
 )
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 static bool IsActive_Start()
 {
     return set.rec.enabledChanA || set.rec.enabledChanB || set.rec.enabledSensor;
@@ -64,7 +64,7 @@ DEF_GRAPH_BUTTON_HINTS_2( bStart,                                               
 )
 
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 static void OnOpenClose_Recorder(bool enter)
 {
     Device::State::SetMode(enter ? Device::Mode::Recorder : Device::Mode::Osci);
@@ -86,7 +86,7 @@ const Page *const PageRecorder::self = (const Page *)& pageRecorder;
 #pragma warning(disable:4310)
 #endif
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 void RecorderScaleX::Load()
 {
     static const uint8 values[RecorderScaleX::Size] =
@@ -109,7 +109,7 @@ void RecorderScaleX::Load()
     }
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void RecorderScaleX::Change(int delta)
 {
     if (Recorder::IsRunning())
@@ -129,13 +129,13 @@ void RecorderScaleX::Change(int delta)
     Load();
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 RecorderScaleX &RecorderScaleX::Current()
 {
     return set.rec.scaleX;
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 pString RecorderScaleX::ToString() const
 {
     static const struct StructScaleX
@@ -160,7 +160,7 @@ pString RecorderScaleX::ToString() const
     return scales[value].name;
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 uint RecorderScaleX::BytesToSec() const
 {
     static const struct StructBytes
@@ -182,7 +182,7 @@ uint RecorderScaleX::BytesToSec() const
     return bytes[value].value;
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 uint RecorderScaleX::TimeForPointMS() const
 {
     static const struct StructTime

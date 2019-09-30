@@ -21,7 +21,7 @@ extern const Page pageRAM;
 const Page * const PageRAM::self = (const Page *)&pageRAM;
 
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 static void OnPress_Next()
 {
     Memory::RAM::SelectNextSignal();
@@ -40,7 +40,7 @@ DEF_GRAPH_BUTTON( bNext,                                                        
     &PageRAM::self, Item::Active, OnPress_Next, Draw_Next
 )
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 static void OnPress_Prev()
 {
     Memory::RAM::SelectPrevSignal();
@@ -59,7 +59,7 @@ DEF_GRAPH_BUTTON( bPrev,                                                        
     &PageRAM::self, Item::Active, OnPress_Prev, Draw_Prev
 )
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 static void OnOpenClose_RAM(bool enter)
 {
     if (enter)

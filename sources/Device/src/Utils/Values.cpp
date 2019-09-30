@@ -9,11 +9,11 @@
 #include <limits>
 
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 const float Float::ERROR = std::numeric_limits<float>::quiet_NaN();
 
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 /// Преобразует значение частоты в текстовую строку
 static char *FrequencyToString(float freq, char buffer[20]);
 /// Преобразует время в текстовую строку
@@ -29,7 +29,7 @@ static char *FloatToString(float value, bool alwaysSign, int numDigits, char buf
 static char *IntegerToString(int value, bool alwaysSign, int numMinFields, char bufferOut[20]);
 
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 Float::Float(float val) : value(val)
 {
     if (value == std::numeric_limits<float>::infinity())
@@ -38,7 +38,7 @@ Float::Float(float val) : value(val)
     }
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 char* Hex::ToBin(int depth, char buffer[36]) const
 {
     int byte = 3;       /// С этого байта начинаем вывод. Т.к. в начале строки - старший байт, в конце - младший
@@ -65,7 +65,7 @@ char* Hex::ToBin(int depth, char buffer[36]) const
     return buffer;
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 char* Hex::BinToString8(uint8 val, char buffer[9]) const
 {
     for (int bit = 0; bit < 8; bit++)
@@ -76,7 +76,7 @@ char* Hex::BinToString8(uint8 val, char buffer[9]) const
     return buffer;
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 char* Hex::ToHex(int depth, char buffer[9]) const
 {
     switch (depth)
@@ -92,7 +92,7 @@ char* Hex::ToHex(int depth, char buffer[9]) const
     return buffer;
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 char Hex::DigitInPosition(int pos) const
 {
     uint val = value;
@@ -106,7 +106,7 @@ char Hex::DigitInPosition(int pos) const
     return (char)((val % 10) | 0x30);
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 static char *IntegerToString(int value, bool alwaysSign, int numMinFields, char buffer[20])
 {
     const int SIZE = 20;
@@ -127,7 +127,7 @@ static char *IntegerToString(int value, bool alwaysSign, int numMinFields, char 
     return buffer;
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 static char *FrequencyToString(float freq, char bufferOut[20]) //-V2506
 {
     bufferOut[0] = 0;
@@ -158,7 +158,7 @@ static char *FrequencyToString(float freq, char bufferOut[20]) //-V2506
     return bufferOut;
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 char *Frequency::ToStringAccuracy(char bufferOut[20], int numDigits) const //-V2506
 {
     float freq = value;
@@ -192,21 +192,21 @@ char *Frequency::ToStringAccuracy(char bufferOut[20], int numDigits) const //-V2
     return bufferOut;
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 String Time::ToString(bool alwaysSign) const
 {
     char buffer[20];
     return String(TimeToString(value, alwaysSign, buffer));
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 String Frequency::ToString() const
 {
     char buffer[50];
     return String(FrequencyToString(value, buffer));
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 char *TimeToString(float time, bool alwaysSign, char buffer[20]) //-V2506
 {
     if (Math::IsEquals(time, Float::ERROR))
@@ -247,7 +247,7 @@ char *TimeToString(float time, bool alwaysSign, char buffer[20]) //-V2506
     return buffer;
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 char* Time::ToStringAccuracy(bool alwaysSign, char buffer[20], int numDigits) const //-V2506
 {
     float time = value;
@@ -288,14 +288,14 @@ char* Time::ToStringAccuracy(bool alwaysSign, char buffer[20], int numDigits) co
     return buffer;
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 String Voltage::ToString(bool alwaysSign) const
 {
     char buffer[20];
     return String(VoltageToString(value, alwaysSign, buffer));
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 static char* VoltageToString(float voltage, bool alwaysSign, char buffer[20]) //-V2506
 {
     if (Math::IsEquals(voltage, Float::ERROR))
@@ -336,14 +336,14 @@ static char* VoltageToString(float voltage, bool alwaysSign, char buffer[20]) //
     return buffer;
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 String Current::ToString() const
 {
     char buffer[50];
     return String(ToString(buffer));
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 char *Current::ToString(char buffer[50]) const //-V2506
 {
     float current = value;
@@ -387,28 +387,28 @@ char *Current::ToString(char buffer[50]) const //-V2506
     return buffer;
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 char* Phase::ToString(char bufferOut[20]) const
 {
     std::sprintf(bufferOut, "%s\xa8", Float(value).ToString(false, 4).CString());
     return bufferOut;
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 String Float::ToString(bool alwaysSign, int numDigits) const
 {
     char buffer[30];
     return String(FloatToString(value, alwaysSign, numDigits, buffer));
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 String Integer::ToString(bool alwaysSign, int numMinFields) const
 {
     char buffer[30];
     return String(IntegerToString(value, alwaysSign, numMinFields, buffer));
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 int Integer::operator [](int n)
 {
     int val = value;
@@ -423,7 +423,7 @@ int Integer::operator [](int n)
     return (int)rest;
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 static char *FloatToString(float value, bool alwaysSign, int numDigits, char bufferOut[20]) //-V2506
 {
     if (Math::IsEquals(value, Float::ERROR))
@@ -486,7 +486,7 @@ static char *FloatToString(float value, bool alwaysSign, int numDigits, char buf
     return bufferOut;
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 int Hex::NumDigits() const
 {
     uint val = value;
@@ -499,7 +499,7 @@ int Hex::NumDigits() const
     return num;
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 int Integer::NumDigits() const
 {
     int val = Math::Abs(value);

@@ -23,7 +23,7 @@ using namespace Display::Primitives;
 using namespace FPGA;
 
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 /// Нарисовать актуальные данные - соответствующие текущим установкам
 static void DrawCurrent();
 /// Нарисовать данные из ОЗУ
@@ -52,7 +52,7 @@ static void DrawModePointsPeakDetOff(int center, const uint8 *data, float scale,
 static void DrawSpectrum();
 
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 void Osci::Display::PainterData::DrawData()
 {
     if (Measurements::DataIsSetting())
@@ -76,7 +76,7 @@ void Osci::Display::PainterData::DrawData()
     Accumulator::NextFrame();
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 static void DrawCurrent()
 {
     if(set.disp.lastAffectedChannel == Chan::A)
@@ -92,7 +92,7 @@ static void DrawCurrent()
     Osci::Display::MemoryWindow::Draw();
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 static void DrawRAM()
 {
     DrawChannel(Chan::A);
@@ -198,7 +198,7 @@ static void DRAW_SPECTRUM(const uint8 *dataIn, int numPoints, Chan::E ch)
     }
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 static void DrawSpectrum()
 {
     if (!set.fft.enabled)
@@ -246,13 +246,13 @@ static void DrawSpectrum()
     HLine(Grid::Right() - Grid::Left()).Draw(Grid::MathBottom(), Grid::Left());
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 static void DrawROM()
 {
 
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 static void DrawChannel(Chan::E ch)
 {
     if (!set.ch[ch].enabled)
@@ -313,7 +313,7 @@ static void DrawChannel(Chan::E ch)
     }
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 static void DrawModeLines(Chan::E ch, int left, int center, const uint8 *data, float scale)
 {
     Color::CHAN[ch].SetAsCurrent();
@@ -330,7 +330,7 @@ static void DrawModeLines(Chan::E ch, int left, int center, const uint8 *data, f
     }
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 static void DrawModeLinesPeakDetOn(int center, const uint8 *data, float scale, int x)
 {
     for (int i = 0; i < 281 * 2; i += 2)
@@ -342,7 +342,7 @@ static void DrawModeLinesPeakDetOn(int center, const uint8 *data, float scale, i
     }
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 static void DrawModeLinesPeakDetOff(int center, const uint8 *data, float scale, int x)
 {
     int coordVert = -1;  // На этой координате нужно нарисовать вертикальную линию, чтобы скрыть дефект поточечного вывода, когда считана только часть точек
@@ -370,7 +370,7 @@ static void DrawModeLinesPeakDetOff(int center, const uint8 *data, float scale, 
     }
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 static void DrawModePoints(Chan::E ch, int left, int center, const uint8 *data, float scale)
 {
     Color::CHAN[ch].SetAsCurrent();
@@ -385,7 +385,7 @@ static void DrawModePoints(Chan::E ch, int left, int center, const uint8 *data, 
     }
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 static void DrawModePointsPeakDetOn(int center, const uint8 *data, float scale, int x)
 {
     for (int i = 0; i < 281 * 2; i += 2)
@@ -396,7 +396,7 @@ static void DrawModePointsPeakDetOn(int center, const uint8 *data, float scale, 
     }
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 static void DrawModePointsPeakDetOff(int center, const uint8 *data, float scale, int x)
 {
     for (int i = 0; i < 280; i++)
@@ -406,7 +406,7 @@ static void DrawModePointsPeakDetOff(int center, const uint8 *data, float scale,
     }
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 static void DrawTPos(int leftX, int rightX)
 {
     int x[] = {leftX, (rightX - leftX) / 2 + leftX, rightX};
@@ -415,7 +415,7 @@ static void DrawTPos(int leftX, int rightX)
     Char(SYMBOL_TPOS_1).Draw(x0 - 3, 10, Color::FILL);
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 static void DrawTShift(int /*leftX*/, int /*rightX*/, int /*numBytes*/)
 {
     //float scale = (float)(rightX - leftX + 1) / ((float)numBytes - (numBytes == 281 ? 1 : 0));
@@ -454,13 +454,13 @@ static void DrawTShift(int /*leftX*/, int /*rightX*/, int /*numBytes*/)
     //Line((int)xShift + dX02, 4, (int)xShift + 2, dY12 - 2).Draw();
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 int Osci::Display::PainterData::FirstPointOnScreen()
 {
     return set.disp.shiftInMemory;
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 BitSet64 Osci::Display::PainterData::PointsOnDisplay()
 {
     BitSet64 retValue;
@@ -471,7 +471,7 @@ BitSet64 Osci::Display::PainterData::PointsOnDisplay()
     return retValue;
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 BitSet64 Osci::Display::PainterData::BytesOnDisplay()
 {
     BitSet64 retValue;
@@ -487,7 +487,7 @@ BitSet64 Osci::Display::PainterData::BytesOnDisplay()
     return retValue;
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void Osci::Display::PainterData::ChangeTPos()
 {
     int width = Grid::Width();

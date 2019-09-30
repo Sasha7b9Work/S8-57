@@ -9,6 +9,7 @@
 #include "Menu/Pages/Include/PageChannels.h"
 #include "Menu/Pages/Include/DebugPage.h"
 #include "Menu/Pages/Include/PageDisplay.h"
+#include "Menu/Pages/Include/PageFFT.h"
 #include "Menu/Pages/Include/PageFreqMeter.h"
 #include "Menu/Pages/Include/PageFunction.h"
 #include "Menu/Pages/Include/PageMeasures.h"
@@ -21,7 +22,7 @@
 #include "Menu/Pages/Include/PageTrig.h"
 
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 #pragma pack(push, 1)
 class Settings
 {

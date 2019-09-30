@@ -5,7 +5,7 @@
 #include "Menu/Pages/Include/PageFunction.h"
 
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 DEF_CHOICE_2( cView,                                                                                                                                 //--- ФУНКЦИЯ - СПЕКТР - Отображение ---
     "Отображение",
     "Включает и выключает отображение спектра",
@@ -14,7 +14,7 @@ DEF_CHOICE_2( cView,                                                            
     set.fft.enabled, &PageFFT::self, Item::Active, Choice::Changed, Choice::AfterDraw
 )
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 static bool IsActive_Scale()
 {
     return set.fft.enabled;
@@ -28,7 +28,7 @@ DEF_CHOICE_2( cScale,                                                           
     set.fft.scale, &PageFFT::self, IsActive_Scale, Choice::Changed, Choice::AfterDraw
 )
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 static bool IsActive_Source()
 {
     return set.fft.enabled;
@@ -43,7 +43,7 @@ DEF_CHOICE_3( cSource,                                                          
     set.fft.source, &PageFFT::self, IsActive_Source, Choice::Changed, Choice::AfterDraw
 )
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 static bool IsActive_Window()
 {
     return set.fft.enabled;
@@ -59,7 +59,7 @@ DEF_CHOICE_4( cWindow,                                                          
     set.fft.window, &PageFFT::self, IsActive_Window, Choice::Changed, Choice::AfterDraw
 )
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 static bool IsActive_Range()
 {
     return set.fft.enabled && (set.fft.scale == ScaleFFT::Log);
@@ -74,7 +74,7 @@ DEF_CHOICE_3( cRange,                                                           
     set.fft.maxDB, &PageFFT::self, IsActive_Range, Choice::Changed, Choice::AfterDraw
 )
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 static void OnPress_Cursors_Source()
 {
     set.fft.cursor = (uint8)((set.fft.cursor + 1) % 2);
@@ -91,7 +91,7 @@ DEF_GRAPH_BUTTON( bCursors_Source,                                              
     &PageFFT::PageCursors::self, Item::Active, OnPress_Cursors_Source, Draw_Cursors_Source
 )
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 static bool IsActive_Cursors()
 {
     return set.fft.enabled;

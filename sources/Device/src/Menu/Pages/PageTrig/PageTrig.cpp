@@ -5,7 +5,7 @@
 #include "Osci/Osci.h"
 
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void PageTrig::OnChanged_Mode(bool)
 {
     Osci::Stop(false);
@@ -51,7 +51,7 @@ DEF_CHOICE_3( cMode, // -V206                                                   
     set.trig.startMode, &PageTrig::self, Item::Active, PageTrig::OnChanged_Mode, Choice::AfterDraw
 )
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 static void OnChanged_Source(bool)
 {
     TrigSource::Load();
@@ -66,7 +66,7 @@ DEF_CHOICE_2( cSource, // -V206                                                 
     set.trig.source, &PageTrig::self, Item::Active, OnChanged_Source, Choice::AfterDraw
 )
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 static void OnChanged_Polarity(bool)
 {
     TrigPolarity::Load();
@@ -83,7 +83,7 @@ DEF_CHOICE_2( cPolarity, //-V206                                                
     set.trig.polarity, &PageTrig::self, Item::Active, OnChanged_Polarity, Choice::AfterDraw
 )
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 static void OnChanged_Filtr(bool)
 {
     TrigInput::Load();

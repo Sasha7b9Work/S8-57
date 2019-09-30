@@ -19,7 +19,7 @@ extern const Page pageTune;
 const Page * const PageMeasuresAuto::PageTune::self = (const Page *)&pageTune;
 
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 static void Draw_Markers(int x, int y)
 {
     Font::SetCurrent(Font::Type::_UGO2);
@@ -33,7 +33,7 @@ DEF_GRAPH_BUTTON( bMarkers,                                                     
     &PageMeasuresAuto::PageTune::self, Item::Active, Measure::ShortPressOnSmallButonMarker, Draw_Markers
 )
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 static void Draw_Settings(int x, int y)
 {
     Font::SetCurrent(Font::Type::_UGO2);
@@ -49,7 +49,7 @@ DEF_GRAPH_BUTTON( bSettings,                                                    
     &PageMeasuresAuto::PageTune::self, Item::Active, Measurements::PageChoice::ChangeState, Draw_Settings
 )
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 static bool IsActive_Tune()
 {
     return set.meas.show;

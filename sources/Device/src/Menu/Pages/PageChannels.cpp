@@ -20,7 +20,7 @@ static const char chanCouple[] =  "Задаёт вид связи с источником сигнала.\n"
                                   "3. \"Земля\" - вход соединён с землёй.";
 
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void PageChannelA::OnChanged_Input(bool)
 {
 
@@ -34,7 +34,7 @@ DEF_CHOICE_2( cInputA,                                                          
     set.ch[Chan::A].enabled, &PageChannelA::self, Item::Active, PageChannelA::OnChanged_Input, Choice::AfterDraw
 )
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void PageChannelA::OnChanged_Couple(bool)
 {
     ModeCouple::Set(Chan::A, set.ch[Chan::A].couple);
@@ -49,7 +49,7 @@ DEF_CHOICE_3( cCoupleA,                                                         
     set.ch[Chan::A].couple, &PageChannelA::self, Item::Active, PageChannelA::OnChanged_Couple, Choice::AfterDraw
 )
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 static void OnChanged_BandwidthA(bool)
 {
     set.ch[Chan::A].bandwidth.Load();
@@ -63,7 +63,7 @@ DEF_CHOICE_2( cBandwidthA,                                                      
     set.ch[Chan::A].bandwidth, &PageChannelA::self, Item::Active, OnChanged_BandwidthA, Choice::AfterDraw
 )
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 static void Balance(Chan::E ch)
 {
     Display::FuncOnWaitStart(ch == Chan::A ? "Балансировка канала 1" : "Балансировка канала 2", false);
@@ -81,7 +81,7 @@ static void Balance(Chan::E ch)
     Display::FuncOnWaitStop();
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 static void OnPress_BalanceA()
 {
     Balance(Chan::A);
@@ -93,7 +93,7 @@ DEF_BUTTON( bBalanceA,                                                          
     &PageChannelA::self, Item::Active, OnPress_BalanceA
 )
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 DEF_CHOICE_2( cDividerA,                                                                                                                                         //--- КАНАЛ 1 - Делитель ---
     "Делитель",
     "",
@@ -102,7 +102,7 @@ DEF_CHOICE_2( cDividerA,                                                        
     set.ch[Chan::A].divider, &PageChannelA::self, Item::Active, Choice::Changed, Choice::AfterDraw
 )
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 DEF_CHOICE_2( cInverseA,                                                                                                                                         //--- КАНАЛ 1 - Инверсия ---
     "Инверсия",
     "Инвертирует сигнал относительно уровня 0В",
@@ -111,7 +111,7 @@ DEF_CHOICE_2( cInverseA,                                                        
     set.ch[Chan::A].inverse, &PageChannelA::self, Item::Active, Choice::Changed, Choice::AfterDraw
 )
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 DEF_PAGE_6( pChanA, // -V641 // -V1027                                                                                                                                      //--- КАНАЛ 1 ---
     "КАНАЛ 1",
     "Содержит настройки канала 1.",
@@ -126,7 +126,7 @@ DEF_PAGE_6( pChanA, // -V641 // -V1027                                          
 
 const Page * const PageChannelA::self = (const Page *)&pChanA;
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void PageChannelB::OnChanged_Input(bool active)
 {
     if (!active)
@@ -144,7 +144,7 @@ DEF_CHOICE_2( cInputB,                                                          
     set.ch[Chan::B].enabled, &PageChannelB::self, Item::Active, PageChannelB::OnChanged_Input, Choice::AfterDraw
 )
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void PageChannelB::OnChanged_Couple(bool)
 {
     ModeCouple::Set(Chan::B, set.ch[Chan::B].couple);
@@ -159,7 +159,7 @@ DEF_CHOICE_3( cCoupleB,                                                         
     set.ch[Chan::B].couple, &PageChannelB::self, Item::Active, PageChannelB::OnChanged_Couple, Choice::AfterDraw
 )
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 static void OnChanged_BandwidthB(bool)
 {
     set.ch[Chan::B].bandwidth.Load();
@@ -173,7 +173,7 @@ DEF_CHOICE_2( cBandwidthB,                                                      
     set.ch[Chan::B].bandwidth, &PageChannelB::self, Item::Active, OnChanged_BandwidthB, Choice::AfterDraw
 )
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 static void OnPress_BalanceB()
 {
     Balance(Chan::B);
@@ -185,7 +185,7 @@ DEF_BUTTON( bBalanceB,                                                          
     &PageChannelB::self, Item::Active, OnPress_BalanceB
 )
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 DEF_CHOICE_2( cDividerB,                                                                                                                                         //--- КАНАЛ 2 - Делитель ---
     "Делитель",
     "",
@@ -194,7 +194,7 @@ DEF_CHOICE_2( cDividerB,                                                        
     set.ch[Chan::B].divider, &PageChannelB::self, Item::Active, Choice::Changed, Choice::AfterDraw
 )
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 DEF_CHOICE_2( cInverseB,                                                                                                                                         //--- КАНАЛ 2 - Инверсия ---
     "Инверсия",
     "Инвертирует сигнал относительно уровня 0В",
@@ -203,7 +203,7 @@ DEF_CHOICE_2( cInverseB,                                                        
     set.ch[Chan::B].inverse, &PageChannelB::self, Item::Active, Choice::Changed, Choice::AfterDraw
 )
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 DEF_PAGE_6( pChanB, // -V641 // -V1027                                                                                                                                      //--- КАНАЛ 2 ---
     "КАНАЛ 2",
     "Содержит настройки канала 2.",

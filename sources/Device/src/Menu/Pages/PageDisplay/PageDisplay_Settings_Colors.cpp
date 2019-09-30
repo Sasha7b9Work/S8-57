@@ -4,7 +4,7 @@
 #include "Settings/Settings.h"
 
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 static void OnPress_ResetColors()
 {
 }
@@ -15,7 +15,7 @@ DEF_BUTTON( bReset,                                                             
     &PageDisplay::PageSettings::PageColors::self, Item::Active, OnPress_ResetColors
 )
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 ColorType PageDisplay::PageSettings::PageColors::colorTypeA = COLOR_TYPE(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, Color::CHAN[Chan::A])
 
 DEF_GOVERNOR_COLOR( gcChannelA,                                                                                                               //--- ƒ»—œÀ≈… - Õ¿—“–Œ… » - ÷¬≈“¿ -  ‡Ì‡Î 1 ---
@@ -24,7 +24,7 @@ DEF_GOVERNOR_COLOR( gcChannelA,                                                 
     PageDisplay::PageSettings::PageColors::colorTypeA, &PageDisplay::PageSettings::PageColors::self
 )
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 ColorType PageDisplay::PageSettings::PageColors::colorTypeB = COLOR_TYPE(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, Color::CHAN[Chan::B])
 
 DEF_GOVERNOR_COLOR( gcChannelB,                                                                                                               //--- ƒ»—œÀ≈… - Õ¿—“–Œ… » - ÷¬≈“¿ -  ‡Ì‡Î 2 ---
@@ -33,7 +33,7 @@ DEF_GOVERNOR_COLOR( gcChannelB,                                                 
     PageDisplay::PageSettings::PageColors::colorTypeB, &PageDisplay::PageSettings::PageColors::self
 )
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 ColorType PageDisplay::PageSettings::PageColors::colorTypeGrid = COLOR_TYPE(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, Color::GRID)
 
 DEF_GOVERNOR_COLOR( gcGrid,                                                                                                                     //--- ƒ»—œÀ≈… - Õ¿—“–Œ… » - ÷¬≈“¿ - —ÂÚÍ‡ ---
@@ -42,7 +42,7 @@ DEF_GOVERNOR_COLOR( gcGrid,                                                     
     PageDisplay::PageSettings::PageColors::colorTypeGrid, &PageDisplay::PageSettings::PageColors::self
 )
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 DEF_PAGE_4( pColors, // -V641 // -V1027                                                                                                                 //--- ƒ»—œÀ≈… - Õ¿—“–Œ… » - ÷¬≈“¿ ---
     "÷¬≈“¿",
     "¬˚·Ó ˆ‚ÂÚÓ‚ ‰ËÒÔÎÂˇ",

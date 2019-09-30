@@ -5,7 +5,7 @@
 #include "FPGA/FPGA.h"
 
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 static void OnChanged_Calibrator(bool)
 {
     FPGA::LoadCalibratorMode();
@@ -19,7 +19,7 @@ DEF_CHOICE_2( cCalibrator, // -V206                                             
     set.serv.calibratorMode, &PageService::PageCalibrate::self, Item::Active, OnChanged_Calibrator, Choice::AfterDraw
 )
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 static bool IsActive_Calibrate()
 {
     //return !(SET_CALIBR_MODE_A == CalibrationMode::Disable && CALIBR_MODE_B == CalibrationMode::Disable);
@@ -47,7 +47,7 @@ DEF_BUTTON( bCalibrate,                                                         
     &PageService::PageCalibrate::self, IsActive_Calibrate, OnPress_Calibrate
 )
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 DEF_PAGE_2( pCalibrate, // -V641 // -V1027                                                                                                                      //--- СЕРВИС - КАЛИБРАТОР ---
     "КАЛИБРОВКА",
     "Управлением калибратором и калибровка осциллографа",

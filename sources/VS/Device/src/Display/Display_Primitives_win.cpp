@@ -8,7 +8,7 @@
 extern SDL_Renderer *renderer;
 
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 static int DrawChar(int x, int y, char symbol);
 
 static int DrawBigChar(int eX, int eY, int size, char _symbol);
@@ -18,7 +18,7 @@ static void DrawHPointLine(int x, int y, int count, int delta);
 static void DrawVPointLine(int x, int y, int count, int delta);
 
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 void Display::Primitives::Region::Fill(int x, int y, Color color)
 {
     color.SetAsCurrent();
@@ -26,7 +26,7 @@ void Display::Primitives::Region::Fill(int x, int y, Color color)
     SDL_RenderFillRect(renderer, &rect);
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void Display::Primitives::Rectangle::Draw(int x, int y, Color color)
 {
     color.SetAsCurrent();
@@ -34,35 +34,35 @@ void Display::Primitives::Rectangle::Draw(int x, int y, Color color)
     SDL_RenderDrawRect(renderer, &rect);
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void Display::Primitives::HLine::Draw(int x, int y, Color color)
 {
     color.SetAsCurrent();
     SDL_RenderDrawLine(renderer, x, y, x + width, y);
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void Display::Primitives::VLine::Draw(int x, int y, Color color)
 {
     color.SetAsCurrent();
     SDL_RenderDrawLine(renderer, x, y, x, y + height);
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void Display::Primitives::Point::Draw(int x, int y, Color color)
 {
     color.SetAsCurrent();
     SDL_RenderDrawPoint(renderer, x, y);
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void Display::Primitives::Line::Draw(Color color)
 {
     color.SetAsCurrent();
     SDL_RenderDrawLine(renderer, x0, y0, x1, y1);
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 int Display::Primitives::Text::DrawSmall(int x, int y, Color color)
 {
     color.SetAsCurrent();
@@ -78,7 +78,7 @@ int Display::Primitives::Text::DrawSmall(int x, int y, Color color)
     return x;
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void Display::Primitives::Text::DrawBig(int x, int y, Color color)
 {
     color.SetAsCurrent();
@@ -92,7 +92,7 @@ void Display::Primitives::Text::DrawBig(int x, int y, Color color)
     }
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 static int DrawChar(int eX, int eY, char _symbol)
 {
     uint8 symbol = (uint8)_symbol;
@@ -122,7 +122,7 @@ static int DrawChar(int eX, int eY, char _symbol)
     return eX + width;
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 static int DrawBigChar(int eX, int eY, int size, char _symbol)
 {
     uint8 symbol = (uint8)_symbol;
@@ -157,7 +157,7 @@ static int DrawBigChar(int eX, int eY, int size, char _symbol)
     return eX + width * size;
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void Display::Primitives::MultiHPointLine::Draw(int x, Color color)
 {
     color.SetAsCurrent();
@@ -168,7 +168,7 @@ void Display::Primitives::MultiHPointLine::Draw(int x, Color color)
     }
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 static void DrawHPointLine(int x, int y, int count, int delta)
 {
     for (int i = 0; i < count; i++)
@@ -178,7 +178,7 @@ static void DrawHPointLine(int x, int y, int count, int delta)
     }
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void Display::Primitives::MultiVPointLine::Draw(int y, Color color)
 {
     color.SetAsCurrent();
@@ -189,7 +189,7 @@ void Display::Primitives::MultiVPointLine::Draw(int y, Color color)
     }
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 static void DrawVPointLine(int x, int y, int count, int delta)
 {
     for (int i = 0; i < count; i++)
