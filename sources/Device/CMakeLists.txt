@@ -51,7 +51,7 @@ source_group(Menu\\Pages                             REGULAR_EXPRESSION src/Menu
 source_group(Menu\\Pages\\Include                    REGULAR_EXPRESSION src/Menu/Pages/Include/*)
 source_group(Menu\\Pages\\PageDisplay                REGULAR_EXPRESSION src/Menu/Pages/PageDisplay/*)
 source_group(Menu\\Pages\\PageFunction               REGULAR_EXPRESSION src/Menu/Pages/PageFunction/*)
-source_group(Menu\\Pages\\PageFunction\\PageRecorder REGULAR_EXPRESSION src/Menu/Pages/PageFunction/PageRecorder/*)
+source_group(Menu\\Pages\\PageRecorder               REGULAR_EXPRESSION src/Menu/Pages/PageRecorder/*)
 source_group(Menu\\Pages\\PageHelp                   REGULAR_EXPRESSION src/Menu/Pages/PageHelp/*)
 source_group(Menu\\Pages\\PageMeasures               REGULAR_EXPRESSION src/Menu/Pages/PageMeasures/*)
 source_group(Menu\\Pages\\PageMemory                 REGULAR_EXPRESSION src/Menu/Pages/PageMemory/*)
@@ -99,7 +99,7 @@ file(GLOB SOURCES   ../common/_VS/*
                     src/Menu/Pages/Include/*
                     src/Menu/Pages/PageDisplay/*
                     src/Menu/Pages/PageFunction/*
-                    src/Menu/Pages/PageFunction/PageRecorder/*
+                    src/Menu/Pages/PageRecorder/*
                     src/Menu/Pages/PageHelp/*
                     src/Menu/Pages/PageMeasures/*
                     src/Menu/Pages/PageMemory/*

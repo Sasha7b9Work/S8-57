@@ -1095,6 +1095,31 @@
               <FileType>8</FileType>
               <FilePath>.\src\Menu\Pages\PageTime.cpp</FilePath>
             </File>
+            <File>
+              <FileName>PageFFT.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Menu\Pages\PageFFT.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>PageFreqMeter.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Menu\Pages\PageFreqMeter.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>PageFunction.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Menu\Pages\PageFunction.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>PageMultimeter.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Menu\Pages\PageMultimeter.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>PageTester.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Menu\Pages\PageTester.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1208,71 +1233,6 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>Menu/Pages/PageFunction</GroupName>
-          <Files>
-            <File>
-              <FileName>PageFunction.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Menu\Pages\PageFunction\PageFunction.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>PageFunction_FFT.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Menu\Pages\PageFunction\PageFunction_FFT.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>PageFunction_FrequencyCounter.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Menu\Pages\PageFunction\PageFunction_FrequencyCounter.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>PageFunction_Multimeter.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Menu\Pages\PageFunction\PageFunction_Multimeter.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>PageFunction_Tester.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Menu\Pages\PageFunction\PageFunction_Tester.cpp</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>Menu/Pages/PageFunction/PageRecorder</GroupName>
-          <Files>
-            <File>
-              <FileName>PageRecorder.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Menu\Pages\PageFunction\PageRecorder\PageRecorder.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>PageRecorder_Show.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Menu\Pages\PageFunction\PageRecorder\PageRecorder_Show.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>PageRecorder_Show_Operations.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Menu\Pages\PageFunction\PageRecorder\PageRecorder_Show_Operations.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>PageRecorder_Show_View.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Menu\Pages\PageFunction\PageRecorder\PageRecorder_Show_View.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>PageRecorder_Show_View_Cursors.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Menu\Pages\PageFunction\PageRecorder\PageRecorder_Show_View_Cursors.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>PageRecorder_Source.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Menu\Pages\PageFunction\PageRecorder\PageRecorder_Source.cpp</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
           <GroupName>Menu/Pages/PageHelp</GroupName>
           <Files>
             <File>
@@ -1339,6 +1299,26 @@
               <FileName>PageMemory_ROM.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Menu\Pages\PageMemory\PageMemory_ROM.cpp</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Menu/Pages/PageRecorder</GroupName>
+          <Files>
+            <File>
+              <FileName>PageRecorder.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Menu\Pages\PageRecorder\PageRecorder.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>PageRecorder_Show.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Menu\Pages\PageRecorder\PageRecorder_Show.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>PageRecorder_Source.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Menu\Pages\PageRecorder\PageRecorder_Source.cpp</FilePath>
             </File>
           </Files>
         </Group>
