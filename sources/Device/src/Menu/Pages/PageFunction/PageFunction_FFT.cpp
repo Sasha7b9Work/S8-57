@@ -97,7 +97,7 @@ static bool IsActive_Cursors()
     return set.fft.enabled;
 }
 
-static bool OnArrows_FFT_Cursors(const KeyEvent &event)
+static bool HandlerKey_FFT_Cursors(const KeyEvent &event)
 {
     if (event.type != TypePress::Press && event.type != TypePress::Repeat)
     {
@@ -118,7 +118,7 @@ DEF_PAGE_1( pCursors, // -V641 // -V1027                                        
     "КУРСОРЫ",
     "Включает курсоры для измерения параметров спектра",
     &bCursors_Source,                       ///< СЕРВИС - СПЕКТР - КУРСОРЫ - Источник
-    PageName::Function_FFT_Cursors, &PageFFT::self, IsActive_Cursors, Choice::Changed, Page::BeforeDraw, OnArrows_FFT_Cursors
+    PageName::Function_FFT_Cursors, &PageFFT::self, IsActive_Cursors, Choice::Changed, Page::BeforeDraw, HandlerKey_FFT_Cursors
 )
 
 const Page * const PageFFT::PageCursors::self = (const Page *)&pCursors;
@@ -145,7 +145,7 @@ DEF_PAGE_6( pFFT, // -V641 // -V1027                                            
     &cWindow,       ///< СЕРВИС - СПЕКТР - Окно 
     &pCursors,      ///< СЕРВИС - СПЕКТР - КУРСОРЫ
     &cRange,        ///< СЕРВИС - СПЕКТР - Диапазон
-    PageName::Function_FFT, &PageFunction::self, IsActive_FFT, OnOpenClose_FFT, Page::BeforeDraw, Page::Handler
+    PageName::Function_FFT, &PageFunction::self, IsActive_FFT, OnOpenClose_FFT, Page::BeforeDraw, Page::HandlerKeyEvent
 )
 
 const Page * const PageFFT::self = (const Page *)&pFFT;

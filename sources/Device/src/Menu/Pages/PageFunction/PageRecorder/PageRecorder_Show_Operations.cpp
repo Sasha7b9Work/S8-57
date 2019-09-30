@@ -55,11 +55,11 @@ DEF_BUTTON( bDelete,                                                            
 DEF_PAGE_4( pOperations, // -V641 // -V1027                                                                                             //--- ‘”Õ ÷»ﬂ - –≈√»—“–¿“Œ– - œ–Œ—ÃŒ“– - Œœ≈–¿÷»» ---
     "Œœ≈–¿÷»»",
     "",
-    &bRename,   ///< ‘”Õ ÷»ﬂ - –≈√»—“–¿“Œ– - œ–Œ—ÃŒ“– - Œœ≈–¿÷»» - œÂÂËÏÂÌÓ‚‡Ú¸
-    &bCopy,     ///< ‘”Õ ÷»ﬂ - –≈√»—“–¿“Œ– - œ–Œ—ÃŒ“– - Œœ≈–¿÷»» -  ÓÔËÓ‚‡Ú¸
-    &bMove,     ///< ‘”Õ ÷»ﬂ - –≈√»—“–¿“Œ– - œ–Œ—ÃŒ“– - Œœ≈–¿÷»» - œÂÂÏÂÒÚËÚ¸
-    &bDelete,   ///< ‘”Õ ÷»ﬂ - –≈√»—“–¿“Œ– - œ–Œ—ÃŒ“– - Œœ≈–¿÷»» - ”‰‡ÎËÚ¸
-    PageName::Function_Recorder_Show_Operations, &PageRecorder::PageShow::self, Item::Active, Page::Changed, Page::BeforeDraw, Page::Handler
+    &bRename,
+    &bCopy,
+    &bMove,
+    &bDelete,
+    PageName::Function_Recorder_Show_Operations, &PageRecorder::PageShow::self, Item::Active, Page::Changed, Page::BeforeDraw, Page::HandlerKeyEvent
 )
 
 const Page * const PageRecorder::PageShow::PageOperations::self = (const Page *)&pOperations;

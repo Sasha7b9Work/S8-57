@@ -61,7 +61,7 @@ DEF_PAGE_4( pAuto, // -V641 // -V1027                                           
     &cChannels,                                 ///< ÈÇÌÅÐÅÍÈß - ÀÂÒÎÌÀÒ - Êàíàëû
     PageMeasuresAuto::PageTune::self,  ///< ÈÇÌÅÐÅÍÈß - ÀÂÒÎÌÀÒ - ÍÀÑÒÐÎÈÒÜ
     //&cMode,                                   ///< ÈÇÌÅÐÅÍÈß - ÀÂÒÎÌÀÒ - Âèä
-    PageName::Measures_Auto, &PageMeasures::self, Item::Active, Page::Changed, Page::BeforeDraw, Page::Handler
+    PageName::Measures_Auto, &PageMeasures::self, Item::Active, Page::Changed, Page::BeforeDraw, Page::HandlerKeyEvent
 )
 
 const Page * const PageMeasuresAuto::self = (const Page *)&pAuto;

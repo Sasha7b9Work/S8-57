@@ -157,5 +157,5 @@ DEF_PAGE_2( pRand, // -V641 // -V1027                                           
     //&gRand_TimeCompensation,    ///< ÎÒËÀÄÊÀ - ÐÀÍÄ-ÒÎÐ - Êîìïåíñàöèÿ çàäåðæêè
     //&gRand_AddTimeShift,        ///< ÎÒËÀÄÊÀ - ÐÀÍÄ-ÒÎÐ - Ñìåùåíèå
     //&gRand_Pretriggered,        ///< ÎÒËÀÄÊÀ - ÐAÍÄ-ÒÎÐ - Ïðåäçàïóñê
-    PageName::Debug_Rand, &PageDebug::self, Item::Active, Page::Changed, Page::BeforeDraw, Page::Handler
+    PageName::Debug_Rand, &PageDebug::self, Item::Active, Page::Changed, Page::BeforeDraw, Page::HandlerKeyEvent
 )

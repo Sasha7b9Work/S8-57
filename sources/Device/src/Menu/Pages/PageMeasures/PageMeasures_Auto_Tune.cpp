@@ -55,7 +55,7 @@ static bool IsActive_Tune()
     return set.meas.show;
 }
 
-static bool OnArrows_Tune(const KeyEvent &event)
+static bool HandlerKey_Tune(const KeyEvent &event)
 {
     if (event.IsArrow())
     {
@@ -71,5 +71,5 @@ DEF_PAGE_2( pageTune, // -V641 // -V1027
     "Переход в режим точной настройки количества и видов измерений",
     &bMarkers,
     &bSettings,
-    PageName::Measures_Auto_Tune, &PageMeasuresAuto::self, IsActive_Tune, Page::Changed, Page::BeforeDraw, OnArrows_Tune
+    PageName::Measures_Auto_Tune, &PageMeasuresAuto::self, IsActive_Tune, Page::Changed, Page::BeforeDraw, HandlerKey_Tune
 )

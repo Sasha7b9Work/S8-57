@@ -46,11 +46,11 @@ DEF_GOVERNOR_COLOR( gcGrid,                                                     
 DEF_PAGE_4( pColors, // -V641 // -V1027                                                                                                                 //--- ДИСПЛЕЙ - НАСТРОЙКИ - ЦВЕТА ---
     "ЦВЕТА",
     "Выбор цветов дисплея",
-    &bReset,              ///< ДИСПЛЕЙ - НАСТРОЙКИ - ЦВЕТА - Сбросить
-    &gcChannelA,          ///< ДИСПЛЕЙ - НАСТРОЙКИ - ЦВЕТА - Канал 1
-    &gcChannelB,          ///< ДИСПЛЕЙ - НАСТРОЙКИ - ЦВЕТА - Канал 2
-    &gcGrid,              ///< ДИСПЛЕЙ - НАСТРОЙКИ - ЦВЕТА - Сетка
-    PageName::Display_Settings_Colors, &PageDisplay::PageSettings::self, Item::Active, Page::Changed, Page::BeforeDraw, Page::Handler
+    &bReset,
+    &gcChannelA,
+    &gcChannelB,
+    &gcGrid,
+    PageName::Display_Settings_Colors, &PageDisplay::PageSettings::self, Item::Active, Page::Changed, Page::BeforeDraw, Page::HandlerKeyEvent
 )
 
 const Page * const PageDisplay::PageSettings::PageColors::self = (const Page *)&pColors;

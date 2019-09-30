@@ -35,7 +35,7 @@ DEF_PAGE_2( pFind, // -V641 // -V1027                                           
     &cMode,                         ///< ÑÈÍÕÐ - ÏÎÈÑÊ - Ðåæèì
     &bSearch,                       ///< ÑÈÍÕÐ - ÏÎÈÑÊ - Íàéòè
     PageName::Trig_Search,
-    &PageTrig::self, Item::Active, Page::Changed, Page::BeforeDraw, Page::Handler
+    &PageTrig::self, Item::Active, Page::Changed, Page::BeforeDraw, Page::HandlerKeyEvent
 )
 
 const Page * const PageTrig::PageFind::self = (const Page *)&pFind;

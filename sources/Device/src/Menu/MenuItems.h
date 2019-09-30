@@ -167,22 +167,22 @@ public:
     bool IsSubPage(const Page *parent);
     /// Обработка события кнопки
     virtual bool HandlerKey(const KeyEvent &event);
-    /// Реакция на событие функциональной клавиши, соотвествующей итем
+    /// Реакция на событие функциональной клавиши, соотвествующей итему
     virtual void HandlerFX(TypePress::E type) const;
-    /// Нарисовать в заданных координатах
+
     virtual void Draw(int x, int y, bool opened) const;
-    /// Возвращает указатель на данные, специфичные для этого класса
+
     const DataPage *OwnData() const { return static_cast<const DataPage *>(data->ad); }
-    /// Возвращает адрес элемента, соответствующего функциональной кнопкке
+
     const Item *ItemForFuncKey(Key::E key) const;
-    /// Возвращает имя страницы page
+
     PageName::E GetName() const;
 
     static void BeforeDraw() {}
 
     static void Changed(bool) {}
 
-    static bool Handler(const KeyEvent &) { return false; }
+    static bool HandlerKeyEvent(const KeyEvent &) { return false; }
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// Button ///

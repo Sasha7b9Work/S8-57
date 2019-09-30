@@ -90,7 +90,7 @@ static void AfterDraw_RAM()
     Integer(Osci::Storage::NumElementsInStorage()).ToString(false, 3).Draw(Grid::Right() - width + 23, Grid::Top() + 1);
 }
 
-static bool OnArrows_RAM(const KeyEvent &)
+static bool HandlerKey_RAM(const KeyEvent &)
 {
     /*
     Key::E key = event.key;
@@ -109,7 +109,7 @@ static bool OnArrows_RAM(const KeyEvent &)
     }
     */
 
-    return true;
+    return false;
 }
 
 DEF_PAGE_2( pageRAM, // -V641 // -V1027                                                                                                                          //--- œ¿Ãﬂ“‹ - œŒ—À≈ƒÕ»≈ ---
@@ -118,5 +118,5 @@ DEF_PAGE_2( pageRAM, // -V641 // -V1027                                         
     &bPrev,                        ///< œ¿Ãﬂ“‹ - œŒ—À≈ƒÕ»≈ - œÂ‰˚‰Û˘ËÈ
     &bNext,                        ///< œ¿Ãﬂ“‹ - œŒ—À≈ƒÕ»≈ - —ÎÂ‰Û˛˘ËÈ
     PageName::Memory_Last,
-    &PageMemory::self, Item::Active, OnOpenClose_RAM, AfterDraw_RAM, OnArrows_RAM
+    &PageMemory::self, Item::Active, OnOpenClose_RAM, AfterDraw_RAM, HandlerKey_RAM
 )

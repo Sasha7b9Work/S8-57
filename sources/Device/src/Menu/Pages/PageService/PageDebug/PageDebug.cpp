@@ -97,7 +97,7 @@ DEF_PAGE_3( pBalance, // -V641 // -V1027                                        
     &gShiftA,           ///< ÎÒËÀÄÊÀ - ÀÖÏ - ÁÀËÀÍÑ - Ñìåùåíèå 1
     &gShiftB,           ///< ÎÒËÀÄÊÀ - ÀÖÏ - ÁÀËÀÍÑ - Ñìåùåíèå 2
     PageName::Debug_ADC_Balance,
-    &PageDebug::PageADC::self, Item::Active, Page::Changed, Page::BeforeDraw, Page::Handler
+    &PageDebug::PageADC::self, Item::Active, Page::Changed, Page::BeforeDraw, Page::HandlerKeyEvent
 )
 
 const Page * const PageDebug::PageADC::PageBalance::self = (const Page *)&pBalance;
@@ -236,7 +236,7 @@ DEF_PAGE_3( pStretch, // -V641 // -V1027                                        
     &gStretch_A,         ///< ÎÒËÀÄÊÀ - ÀÖÏ - ÐÀÑÒßÆÊÀ - Ðàñòÿæêà 1ê
     &gStretch_B,
     PageName::Debug_ADC_Stretch,
-    &PageDebug::PageADC::self, Item::Active, Page::Changed, Page::BeforeDraw, Page::Handler
+    &PageDebug::PageADC::self, Item::Active, Page::Changed, Page::BeforeDraw, Page::HandlerKeyEvent
 )
 
 const Page * const PageDebug::PageADC::PageStretch::self = (const Page *)&pStretch;
@@ -332,7 +332,7 @@ DEF_PAGE_7( pShift, // -V641  // -V1027                                         
     &gShift_A10mV,   // ÎÒËÀÄÊÀ - ÀÖÏ - ÄÎÏ ÑÌÅÙ - Ñì 1ê 10ìÂ ïîñò
     &gShift_B10mV,   // ÎÒËÀÄÊÀ - ÀÖÏ - ÄÎÏ ÑÌÅÙ - Ñì 2ê 10ìÂ ïîñò
     PageName::Debug_ADC_Shift,
-    &PageDebug::PageADC::self, Item::Active, Page::Changed, Page::BeforeDraw, Page::Handler
+    &PageDebug::PageADC::self, Item::Active, Page::Changed, Page::BeforeDraw, Page::HandlerKeyEvent
 )
 
 const Page * const PageDebug::PageADC::PageShift::self = (const Page *)&pShift;
@@ -345,7 +345,7 @@ DEF_PAGE_3( pADC, //-V641 //-V1027
     &pStretch,                              // ÎÒËÀÄÊÀ - ÀÖÏ - ÐÀÑÒßÆÊÀ
     PageDebug::PageADC::PageShift::self,    // ÎÒËÀÄÊÀ - ÀÖÏ - ÄÎÏ ÑÌÅÙ
     PageName::Debug_ADC,
-    &PageDebug::self, Item::Active, Page::Changed, Page::BeforeDraw, Page::Handler
+    &PageDebug::self, Item::Active, Page::Changed, Page::BeforeDraw, Page::HandlerKeyEvent
 )
 
 const Page * const PageDebug::PageADC::self = (const Page *)&pADC;
@@ -455,7 +455,7 @@ DEF_PAGE_5( pSettings, // -V641 // -V1027                                       
     0,
     0,
     PageName::Debug_Settings,
-    &PageDebug::self, Item::Active, OnOpenClose_Settings, Page::BeforeDraw, Page::Handler
+    &PageDebug::self, Item::Active, OnOpenClose_Settings, Page::BeforeDraw, Page::HandlerKeyEvent
 )
 
 const Page * const PageDebug::PageSettings::self = (const Page *)&pSettings;
@@ -548,9 +548,9 @@ static void OnOpenClose_SerialNumber(bool)
     Draw_EnterSerialNumber();
 }
 
-static bool OnArrows_SerialNumber(const KeyEvent &)
+static bool HandlerKey_SerialNumber(const KeyEvent &)
 {
-    return true;
+    return false;
 }
 
 DEF_PAGE_2( pSerialNumber, // -V641 // -V1027                                                                                                                         //--- ÎÒËÀÄÊÀ - Ñ/Í ---
@@ -559,7 +559,7 @@ DEF_PAGE_2( pSerialNumber, // -V641 // -V1027                                   
     &bSerialNumber_Change,          // ÎÒËÀÄÊÀ - Ñ/Í - Ïåðåéòè
     &bSerialNumber_Save,            // ÎÒËÀÄÊÀ - Ñ/Í - Ñîõðàíèòü
     PageName::Debug_SerialNumber,
-    &PageDebug::self, Item::Active, OnOpenClose_SerialNumber, Page::BeforeDraw, OnArrows_SerialNumber
+    &PageDebug::self, Item::Active, OnOpenClose_SerialNumber, Page::BeforeDraw, HandlerKey_SerialNumber
 )
 
 const Page * const PageDebug::PageSerialNumber::self = (const Page *)&pSerialNumber;
@@ -594,7 +594,7 @@ DEF_PAGE_5( pDebug, // -V641 // -V1027                                          
 //    &pSerialNumber,                              ///< ÎÒËÀÄÊÀ - Ñ/Í
 //    &bEraseData,                                  ///< ÎÒËÀÄÊÀ - Ñòåðåòü äàííûå
     PageName::Debug,
-    &PageService::self, Item::Active, Page::Changed, Page::BeforeDraw, Page::Handler
+    &PageService::self, Item::Active, Page::Changed, Page::BeforeDraw, Page::HandlerKeyEvent
 )
 
 const Page * const PageDebug::self = (const Page *)&pDebug;

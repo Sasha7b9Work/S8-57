@@ -100,7 +100,7 @@ DEF_PAGE_4( pTime, // -V641 // -V1027                                           
     &cTPos,             ///< ÐÀÇÂÅÐÒÊÀ - Òî
     //&cDivRole,          ///< ÐÀÇÂÅÐÒÊÀ - Ô-öèÿ ÂÐ/ÄÅË
     &cShiftXtype,       ///< ÐÀÇÂÅÐÒÊÀ - Ñìåùåíèå
-    PageName::Time, nullptr, Item::Active, Page::Changed, Page::BeforeDraw, Page::Handler
+    PageName::Time, nullptr, Item::Active, Page::Changed, Page::BeforeDraw, Page::HandlerKeyEvent
 )
 
 const Page * const PageTime::self = (const Page *)&pTime;

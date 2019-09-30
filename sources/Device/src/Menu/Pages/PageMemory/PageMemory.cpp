@@ -142,7 +142,7 @@ DEF_PAGE_3( pManager, // -V641                                                  
     &bManager_LevelUp,    // ÏÀÌßÒÜ - ÂÍÅØÍ ÇÓ - ÊÀÒÀËÎÃ - Âûéòè èç êàòàëîãà
     &bManager_LevelDown,  // ÏÀÌßÒÜ - ÂÍÅØÍ ÇÓ - ÊÀÒÀËÎÃ - Âîéòè â êàòàëîã
     PageName::Memory_Drive_Manager,
-    &PageDrive::self, IsActive_Drive_Manager, PageMemory::OnOpenClose_Drive_Manager, Page::BeforeDraw, FileManager::OnArrows
+    &PageDrive::self, IsActive_Drive_Manager, PageMemory::OnOpenClose_Drive_Manager, Page::BeforeDraw, FileManager::HandlerKey
 )
 
 const Page * const PageDrive::PageManager::self = (const Page *)&pManager;
@@ -390,7 +390,7 @@ static void DrawFileMask(int x, int y)
     Region(5, 8).Fill(x, y, Color::FLASH_10);
 }
 
-static bool OnArrows_Mask(const KeyEvent &event)
+static bool HandlerKey_Mask(const KeyEvent &event)
 {
     Key::E key = event.key;
 
@@ -425,7 +425,7 @@ DEF_PAGE_3( pMask, // -V641                                                     
     &bMask_Backspace, // ÏÀÌßÒÜ - ÂÍÅØÍ ÇÓ - ÌÀÑÊÀ - Backspace
     &bMask_Insert,    // ÏÀÌßÒÜ - ÂÍÅØÍ ÇÓ - ÌÀÑÊÀ - Âñòàâèòü
     PageName::Memory_Drive_Mask,
-    &PageDrive::self, IsActive_Mask, OnOpenClose_Mask, Page::BeforeDraw, OnArrows_Mask
+    &PageDrive::self, IsActive_Mask, OnOpenClose_Mask, Page::BeforeDraw, HandlerKey_Mask
 )
 
 const Page * const PageDrive::PageMask::self = (const Page *)&pMask;
@@ -451,7 +451,7 @@ DEF_PAGE_6( pDrive,  //-V641 //-V1027                                           
     &cDrive_Autoconnect,            ///< ÏÀÌßÒÜ - ÂÍÅØÍ ÇÓ - Àâòîïîäêëş÷åíèå
     PageName::Memory_Drive,
     &PageMemory::self,               ///< ÏÀÌßÒÜ
-    Item::Active, Page::Changed, Page::BeforeDraw, Page::Handler
+    Item::Active, Page::Changed, Page::BeforeDraw, Page::HandlerKeyEvent
 )
 
 const Page * const PageDrive::self = (const Page *)&pDrive;
@@ -464,7 +464,7 @@ DEF_PAGE_4( pMemory, // -V641 // -V1027                                         
     PageRAM::self,          ///< ÏÀÌßÒÜ - ÏÎÑËÅÄÍÈÅ
     PageROM::self,          ///< ÏÀÌßÒÜ - ÂÍÓÒĞ ÇÓ
     PageDrive::self,        ///< ÏÀÌßÒÜ - ÂÍÅØÍ ÇÓ
-    PageName::Memory, nullptr, Item::Active, Page::Changed, Page::BeforeDraw, Page::Handler
+    PageName::Memory, nullptr, Item::Active, Page::Changed, Page::BeforeDraw, Page::HandlerKeyEvent
 )
 
 const Page * const PageMemory::self = (const Page *)&pMemory;
@@ -629,7 +629,7 @@ DEF_GRAPH_BUTTON( bSetName_Save,                                                
 )
 
 
-static bool OnArrows_SetName(const KeyEvent &event)
+static bool HandlerKey_SetName(const KeyEvent &event)
 {
     OnMemExtSetMaskNameRegSet(event.Delta(), Tables::Size() / 4 - 7);
 
@@ -660,11 +660,11 @@ void OnMemExtSetMaskNameRegSet(int angle, int maxIndex)
 DEF_PAGE_4( pSetName, // -V641                                                                                                            //--- Ñòğàíèöà âûçûâàåòñÿ äëÿ ââîäà èìåíè ôàéëà ---
     "",
     "",
-    &bSetName_Delete,       /// ÂÂÎÄ ÈÌÅÍÈ ÔÀÉËÀ - Óäàëèòü
-    &bSetName_Backspace,    /// ÂÂÎÄ ÈÌÅÍÈ ÔÀÉËÀ - Backspace
-    &bSetName_Insert,       /// ÂÂÎÄ ÈÌÅÍÈ ÔÀÉËÀ - Âñòàâèòü
-    &bSetName_Save,         /// ÂÂÎÄ ÈÌÅÍÈ ÔÀÉËÀ - Ñîõğàíèòü
-    PageName::Memory_SetName, nullptr, Item::Active, Page::Changed, Page::BeforeDraw, OnArrows_SetName
+    &bSetName_Delete,
+    &bSetName_Backspace,
+    &bSetName_Insert,
+    &bSetName_Save,
+    PageName::Memory_SetName, nullptr, Item::Active, Page::Changed, Page::BeforeDraw, HandlerKey_SetName
 )
 
 const Page * const PageSetName::self = (const Page *)&pSetName;

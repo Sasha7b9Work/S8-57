@@ -56,7 +56,7 @@ static bool IsActive_PageShow()
     return !Recorder::IsRunning();
 }
 
-static bool OnArrows_PageShow(const KeyEvent &event)
+static bool HandlerKey_PageShow(const KeyEvent &event)
 {
     if (event.type == TypePress::Press || event.type == TypePress::Repeat)
     {
@@ -88,7 +88,7 @@ DEF_PAGE_1( pShow, // -V641 // -V1027                                           
     //&cCursor,                                       ///< ÔÓÍÊÖÈß - ÐÅÃÈÑÒÐÀÒÎÐ - ÏÐÎÑÌÎÒÐ - Êóðñîð
     //PageRecorder::PageShow::PageOperations::self,  ///< ÔÓÍÊÖÈß - ÐÅÃÈÑÒÐÀÒÎÐ - ÏÐÎÑÌÎÒÐ - ÎÏÅÐÀÖÈÈ
     //PageRecorder::PageShow::PageView::self,        ///< ÔÓÍÊÖÈß - ÐÅÃÈÑÒÐÀÒÎÐ - ÏÐÎÑÌÒÎÐ - ÏÐÎÑÌÎÒÐ
-    PageName::Function_Recorder_Show, &PageRecorder::self, IsActive_PageShow, Page::Changed, Page::BeforeDraw, OnArrows_PageShow
+    PageName::Function_Recorder_Show, &PageRecorder::self, IsActive_PageShow, Page::Changed, Page::BeforeDraw, HandlerKey_PageShow
 )
 
 const Page * const PageRecorder::PageShow::self = (const Page *)&pShow;

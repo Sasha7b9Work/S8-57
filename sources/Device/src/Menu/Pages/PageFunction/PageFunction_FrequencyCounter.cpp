@@ -120,7 +120,7 @@ DEF_PAGE_5_VAR( pFreqMeter, // -V641                                            
     &Item::empty,       ///< ÈÇÌÅÐÅÍÈß - ×ÀÑÒÎÒÎÌÅÐ - Âðåìÿ ñ÷¸òà F / Ìåòêè âðåìåíè
     &Item::empty,       ///< ÈÇÌÅÐÅÍÈß - ×ÀÑÒÎÒÎÌÅÐ - Êîë/âî ïåðèîäîâ
     &Item::empty,
-    PageName::Function_FrequencyCounter, &PageFunction::self, Item::Active, Choice::Changed, Page::BeforeDraw, Page::Handler
+    PageName::Function_FrequencyCounter, &PageFunction::self, Item::Active, Choice::Changed, Page::BeforeDraw, Page::HandlerKeyEvent
 )
 
 const Page * const PageFreqMeter::self = (const Page *)&pFreqMeter;

@@ -46,7 +46,7 @@ DEF_PAGE_3(pCursors, // -V641 // -V1027
     &bCenter,
     &bLeft,
     &bRight,
-    PageName::Function_Recorder_Show_View_Cursors, &PageRecorder::PageShow::PageView::self, Item::Active, Page::Changed, Page::BeforeDraw, Page::Handler
+    PageName::Function_Recorder_Show_View_Cursors, &PageRecorder::PageShow::PageView::self, Item::Active, Page::Changed, Page::BeforeDraw, Page::HandlerKeyEvent
 )
 
 const Page * const PageRecorder::PageShow::PageView::PageCursors::self = (const Page *)&pCursors;

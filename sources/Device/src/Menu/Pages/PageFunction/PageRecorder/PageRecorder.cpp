@@ -73,11 +73,11 @@ static void OnOpenClose_Recorder(bool enter)
 DEF_PAGE_4( pageRecorder, // -V641 // -V1027                                                                                                                  //--- ФУНКЦИЯ - РЕГИСТРАТОР ---
     "РЕГИСТРАТОР",
     "Запись и воспроизведение сигналов входов и датчиков",
-    PageRecorder::PageSource::self,     ///< ФУНКЦИЯ - РЕГИСТРАТОР - ИСТОЧНИК
-    &cDestination,                      ///< ФУНКЦИЯ - РЕГИСТРАТОР - Сохранять в
-    PageRecorder::PageShow::self,       ///< ФУНКЦИЯ - РЕГИСТРАТОР - ПРОСМОТР
-    &bStart,                            ///< ФУНКЦИЯ - РЕГИСТРАТОР - ПУСК/СТОП
-    PageName::Function_Recorder, &PageFunction::self, Item::Active, OnOpenClose_Recorder, Page::BeforeDraw, Page::Handler
+    PageRecorder::PageSource::self,
+    &cDestination,
+    PageRecorder::PageShow::self,
+    &bStart,
+    PageName::Function_Recorder, &PageFunction::self, Item::Active, OnOpenClose_Recorder, Page::BeforeDraw, Page::HandlerKeyEvent
 )
 
 const Page *const PageRecorder::self = (const Page *)& pageRecorder;
