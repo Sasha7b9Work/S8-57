@@ -36,12 +36,12 @@ static void Draw_Balance_Mode(int, int)
 {
     int8 shift[2][3] =
     {
-        {0, set.ch[Chan::A].balanceShiftADC, (int8)set.nrst.balanceADC[Chan::A]},
-        {0, set.ch[Chan::B].balanceShiftADC, (int8)set.nrst.balanceADC[Chan::B]}
+        {0, set.ch[Chan::A].balanceShiftADC, (int8)set.dbg.nrst.balanceADC[Chan::A]},
+        {0, set.ch[Chan::B].balanceShiftADC, (int8)set.dbg.nrst.balanceADC[Chan::B]}
     };
 
-    shiftADCA = shift[Chan::A][set.nrst.balanceADCtype];
-    shiftADCB = shift[Chan::B][set.nrst.balanceADCtype];
+    shiftADCA = shift[Chan::A][set.dbg.nrst.balanceADCtype];
+    shiftADCB = shift[Chan::B][set.dbg.nrst.balanceADCtype];
 }
 
 static void OnChanged_Balance_Mode(bool)
@@ -55,18 +55,18 @@ DEF_CHOICE_3( cBalance_Mode,                                                    
     DISABLE_RU,
     "–Â‡Î¸Ì˚È",
     "–Û˜ÌÓÈ",
-    set.nrst.balanceADCtype, &PageDebug::PageADC::PageBalance::self, Item::Active, OnChanged_Balance_Mode, Draw_Balance_Mode
+    set.dbg.nrst.balanceADCtype, &PageDebug::PageADC::PageBalance::self, Item::Active, OnChanged_Balance_Mode, Draw_Balance_Mode
 )
 
 
 static bool IsActive_ShiftAB()
 {
-    return (set.nrst.balanceADCtype == BalanceADC::Hand);
+    return (set.dbg.nrst.balanceADCtype == BalanceADC::Hand);
 }
 
 static void OnChanged_ShiftA()
 {
-    set.nrst.balanceADC[Chan::A] = shiftADCA;
+    set.dbg.nrst.balanceADC[Chan::A] = shiftADCA;
 }
 
 DEF_GOVERNOR( gShiftA,                                                                                                                          //--- Œ“À¿ƒ ¿ - ¿÷œ - ¡¿À¿Õ— - —ÏÂ˘ÂÌËÂ 1 ---
@@ -79,7 +79,7 @@ DEF_GOVERNOR( gShiftA,                                                          
 
 static void OnChanged_ShiftB()
 {
-    set.nrst.balanceADC[Chan::B] = shiftADCB;
+    set.dbg.nrst.balanceADC[Chan::B] = shiftADCB;
 }
 
 DEF_GOVERNOR( gShiftB,                                                                                                                          //--- Œ“À¿ƒ ¿ - ¿÷œ - ¡¿À¿Õ— - —ÏÂ˘ÂÌËÂ 2 ---
@@ -108,15 +108,15 @@ static int16 stretchB;
 
 void PageDebug::PageADC::PageStretch::OnChanged_Mode(bool)
 {
-    if (set.nrst.stretchADCtype == StretchADC::Disable)
+    if (set.dbg.nrst.stretchADCtype == StretchADC::Disable)
     {
-        stretchA = set.nrst.stretchADC[Chan::A][StretchADC::Disable] = 0;
-        stretchB = set.nrst.stretchADC[Chan::B][StretchADC::Disable] = 0;
+        stretchA = set.dbg.nrst.stretchADC[Chan::A][StretchADC::Disable] = 0;
+        stretchB = set.dbg.nrst.stretchADC[Chan::B][StretchADC::Disable] = 0;
     }
     else
     {
-        stretchA = set.nrst.stretchADC[Chan::A][set.nrst.stretchADCtype];
-        stretchB = set.nrst.stretchADC[Chan::B][set.nrst.stretchADCtype];
+        stretchA = set.dbg.nrst.stretchADC[Chan::A][set.dbg.nrst.stretchADCtype];
+        stretchB = set.dbg.nrst.stretchADC[Chan::B][set.dbg.nrst.stretchADCtype];
     }
 }
 
@@ -126,18 +126,18 @@ DEF_CHOICE_3( cStretch_Mode,                                                    
     DISABLE_RU,
     "–Â‡Î¸Ì˚È",
     "–Û˜ÌÓÈ",
-    set.nrst.stretchADCtype, &PageDebug::PageADC::PageStretch::self, Item::Active, PageDebug::PageADC::PageStretch::OnChanged_Mode, Choice::AfterDraw
+    set.dbg.nrst.stretchADCtype, &PageDebug::PageADC::PageStretch::self, Item::Active, PageDebug::PageADC::PageStretch::OnChanged_Mode, Choice::AfterDraw
 )
 
 
 static bool IsActive_StretchAB()
 {
-    return (set.nrst.stretchADCtype == StretchADC::Hand);
+    return (set.dbg.nrst.stretchADCtype == StretchADC::Hand);
 }
 
 static void OnChanged_Stretch_A()
 {
-    set.nrst.stretchADC[Chan::A][set.nrst.stretchADCtype] = stretchA;
+    set.dbg.nrst.stretchADC[Chan::A][set.dbg.nrst.stretchADCtype] = stretchA;
 }
 
 DEF_GOVERNOR( gStretch_A,                                                                                                                //--- Œ“À¿ƒ ¿ - ¿÷œ - –¿—“ﬂ∆ ¿ - –‡ÒÚˇÊÍ‡ 1Í ---
@@ -150,7 +150,7 @@ DEF_GOVERNOR( gStretch_A,                                                       
 
 static void OnChanged_Stretch_B()
 {
-    set.nrst.stretchADC[Chan::B][set.nrst.stretchADCtype] = stretchB;
+    set.dbg.nrst.stretchADC[Chan::B][set.dbg.nrst.stretchADCtype] = stretchB;
 }
 
 DEF_GOVERNOR( gStretch_B,                                                                                                                //--- Œ“À¿ƒ ¿ - ¿÷œ - –¿—“ﬂ∆ ¿ - –‡ÒÚˇÊÍ‡ 2Í ---
@@ -249,7 +249,7 @@ static void OnPress_ADC_Shift_Reset()
     {
         for (int range = 0; range < 3; range++)
         {
-            set.nrst.rShiftAddStable[ch][range] = 0;
+            set.dbg.nrst.rShiftAddStable[ch][range] = 0;
         }
     }
     RShift::Set(Chan::A, SET_RSHIFT_A);
@@ -271,7 +271,7 @@ static void OnChanged_Shift_A()
 DEF_GOVERNOR( gShift_A2mV, //-V641                                                                                                        //--- Œ“À¿ƒ ¿ - ¿÷œ - ƒŒœ —Ã≈Ÿ - —Ï 1Í 2Ï¬ ÔÓÒÚ ---
     "—Ï 1Í 2Ï¬ ÔÓÒÚ",
     "",
-    set.nrst.rShiftAddStable[Chan::A][Range::_2mV], -100, 100,
+    set.dbg.nrst.rShiftAddStable[Chan::A][Range::_2mV], -100, 100,
     &PageDebug::PageADC::PageShift::self, 0, OnChanged_Shift_A
 )
 
@@ -284,7 +284,7 @@ static void OnChanged_Shift_B()
 DEF_GOVERNOR( gShift_B2mV,                                                                                                                //--- Œ“À¿ƒ ¿ - ¿÷œ - ƒŒœ —Ã≈Ÿ - —Ï 2Í 2Ï¬ ÔÓÒÚ ---
     "—Ï 2Í 2Ï¬ ÔÓÒÚ",
     "",
-    set.nrst.rShiftAddStable[Chan::B][Range::_2mV], -100, 100,
+    set.dbg.nrst.rShiftAddStable[Chan::B][Range::_2mV], -100, 100,
     &PageDebug::PageADC::PageShift::self, 0, OnChanged_Shift_B
 )
 
@@ -292,7 +292,7 @@ DEF_GOVERNOR( gShift_B2mV,                                                      
 DEF_GOVERNOR( gShift_A5mV,                                                                                                                //--- Œ“À¿ƒ ¿ - ¿÷œ - ƒŒœ —Ã≈Ÿ - —Ï 1Í 5Ï¬ ÔÓÒÚ ---
     "—Ï 1Í 5Ï¬ ÔÓÒÚ",
     "",
-    set.nrst.rShiftAddStable[Chan::A][Range::_5mV], -100, 100,
+    set.dbg.nrst.rShiftAddStable[Chan::A][Range::_5mV], -100, 100,
     &PageDebug::PageADC::PageShift::self, 0, OnChanged_Shift_A
 )
 
@@ -300,7 +300,7 @@ DEF_GOVERNOR( gShift_A5mV,                                                      
 DEF_GOVERNOR( gShift_B5mV,                                                                                                                //--- Œ“À¿ƒ ¿ - ¿÷œ - ƒŒœ —Ã≈Ÿ - —Ï 2Í 5Ï¬ ÔÓÒÚ ---
     "—Ï 2Í 5Ï¬ ÔÓÒÚ",
     "",
-    set.nrst.rShiftAddStable[Chan::B][Range::_5mV], -100, 100,
+    set.dbg.nrst.rShiftAddStable[Chan::B][Range::_5mV], -100, 100,
     &PageDebug::PageADC::PageShift::self, 0, OnChanged_Shift_B
 )
 
@@ -308,7 +308,7 @@ DEF_GOVERNOR( gShift_B5mV,                                                      
 DEF_GOVERNOR( gShift_A10mV,                                                                                                              //--- Œ“À¿ƒ ¿ - ¿÷œ - ƒŒœ —Ã≈Ÿ - —Ï 1Í 10Ï¬ ÔÓÒÚ ---
     "—Ï 1Í 10Ï¬ ÔÓÒÚ",
     "",
-    set.nrst.rShiftAddStable[Chan::A][Range::_10mV], -100, 100,
+    set.dbg.nrst.rShiftAddStable[Chan::A][Range::_10mV], -100, 100,
     &PageDebug::PageADC::PageShift::self, 0, OnChanged_Shift_A
 )
 
@@ -316,7 +316,7 @@ DEF_GOVERNOR( gShift_A10mV,                                                     
 DEF_GOVERNOR( gShift_B10mV,                                                                                                              //--- Œ“À¿ƒ ¿ - ¿÷œ - ƒŒœ —Ã≈Ÿ - —Ï 2Í 10Ï¬ ÔÓÒÚ ---
     "—Ï 2Í 10Ï¬ ÔÓÒÚ",
     "",
-    set.nrst.rShiftAddStable[Chan::B][Range::_10mV], -100, 100,
+    set.dbg.nrst.rShiftAddStable[Chan::B][Range::_10mV], -100, 100,
     &PageDebug::PageADC::PageShift::self, 0, OnChanged_Shift_B
 )
 
@@ -397,7 +397,7 @@ static void DebugShowSetInfo_Draw()
         {
             for (int range = 0; range < Range::Size; ++range)
             {
-                String("%d", set.nrst.rShiftAdd[ch][range][type]).Draw(x + range * 20, y + dY * ddY);
+                String("%d", set.dbg.nrst.rShiftAdd[ch][range][type]).Draw(x + range * 20, y + dY * ddY);
             }
             ddY++;
         }
@@ -405,13 +405,13 @@ static void DebugShowSetInfo_Draw()
 
     y += dY * 3;
 
-    DRAW_FORMAT("correctionTime : %d", set.nrst.correctionTime); //-V2528
-    DRAW_FORMAT2("balanceADC : %d %d", set.nrst.balanceADC[Chan::A], set.nrst.balanceADC[Chan::B]); //-V2528
-    DRAW_FORMAT("numAveForRand : %d", set.nrst.numAveForRand); //-V2528
+    DRAW_FORMAT("correctionTime : %d", set.dbg.nrst.correctionTime); //-V2528
+    DRAW_FORMAT2("balanceADC : %d %d", set.dbg.nrst.balanceADC[Chan::A], set.dbg.nrst.balanceADC[Chan::B]); //-V2528
+    DRAW_FORMAT("numAveForRand : %d", set.dbg.nrst.numAveForRand); //-V2528
 
     pString s[3] = {"‚˚ÍÎ˛˜ÂÌÓ", "Ì‡ÒÚÓÂÌÓ ‡‚ÚÓÏ‡ÚË˜ÂÒÍË", "Á‡‰‡ÌÓ ‚Û˜ÌÛ˛"};
-    DRAW_FORMAT("balanceADCtype : %s", (set.nrst.balanceADCtype < 3 ? s[set.nrst.balanceADCtype] : "!!! ÌÂÔ‡‚ËÎ¸ÌÓÂ ÁÌ‡˜ÂÌËÂ !!!")); //-V547 //-V2528
-    DRAW_FORMAT("stretchADCtype : %s", (set.nrst.stretchADCtype < 3 ? s[set.nrst.stretchADCtype] : "!!! ÌÂÔ‡‚ËÎ¸ÌÓÂ ÁÌ‡˜ÂÌËÂ !!!")); //-V547 //-V2528
+    DRAW_FORMAT("balanceADCtype : %s", (set.dbg.nrst.balanceADCtype < 3 ? s[set.dbg.nrst.balanceADCtype] : "!!! ÌÂÔ‡‚ËÎ¸ÌÓÂ ÁÌ‡˜ÂÌËÂ !!!")); //-V547 //-V2528
+    DRAW_FORMAT("stretchADCtype : %s", (set.dbg.nrst.stretchADCtype < 3 ? s[set.dbg.nrst.stretchADCtype] : "!!! ÌÂÔ‡‚ËÎ¸ÌÓÂ ÁÌ‡˜ÂÌËÂ !!!")); //-V547 //-V2528
 
     x = String("stretchADC :").Draw(x0, INC_Y) + 5; //-V2528
 
@@ -419,7 +419,7 @@ static void DebugShowSetInfo_Draw()
     {
         for (int num = 0; num < 3; num++)
         {
-            String("%d", set.nrst.stretchADC[ch][num]).Draw(x + num * 20, y + dY * ch);
+            String("%d", set.dbg.nrst.stretchADC[ch][num]).Draw(x + num * 20, y + dY * ch);
         }
     }
 
@@ -434,7 +434,7 @@ static void DebugShowSetInfo_Draw()
     DRAW_STRETCH(AddStretch2V);
     */
 
-    DRAW_FORMAT("numSmoothForRand : %d", set.nrst.numSmoothForRand); //-V2528
+    DRAW_FORMAT("numSmoothForRand : %d", set.dbg.nrst.numSmoothForRand); //-V2528
 
     Menu::Draw();
     Painter::EndScene();
@@ -630,7 +630,7 @@ float GetStretchADC(Chan::E ch)
 
     const int16 *address = addStretch[set.ch[ch].range][ch];
 
-    int16 stretch = set.nrst.stretchADC[ch][set.nrst.stretchADCtype];
+    int16 stretch = set.dbg.nrst.stretchADC[ch][set.dbg.nrst.stretchADCtype];
 
     if (address)
     {
@@ -644,6 +644,6 @@ float GetStretchADC(Chan::E ch)
 //---------------------------------------------------------------------------------------------------------------------------------------------------
 void SetStretchADC(Chan::E ch, float kStretch)
 {
-    set.nrst.stretchADC[ch][set.nrst.stretchADCtype] = (int16)((kStretch - 1.0F) * 1e4F);
+    set.dbg.nrst.stretchADC[ch][set.dbg.nrst.stretchADCtype] = (int16)((kStretch - 1.0F) * 1e4F);
 }
 

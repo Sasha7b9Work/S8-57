@@ -1656,11 +1656,6 @@
               <FilePath>.\src\Settings\Settings_default.cpp</FilePath>
             </File>
             <File>
-              <FileName>SettingsNRST.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Settings\SettingsNRST.h</FilePath>
-            </File>
-            <File>
               <FileName>SettingsTransformation.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Settings\SettingsTransformation.cpp</FilePath>

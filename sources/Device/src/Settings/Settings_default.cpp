@@ -189,20 +189,7 @@ const Settings Settings::defaultSettings =
         },
         {}                                      // menu_currentSubPage[Page_NumPages];
     },
-    
-    // Несбрасываемые настройки калибровки
-    {
-        {},                                     // nrst_balanceADC[Chan::Size]
-        BalanceADC::Disable,                    // nrst_balanceADCtype
-        StretchADC::Disable,                    // nrst_stretchADCtype
-        {},                                     // nrst_StretchADC[Chan::Size][3]
-        {},                                     // nrst_rShiftAddStable[Chan::Size][3]
-        0,                                      // nrst_numAveForRand
-        0,                                      // nrst_numSmoothForRand
-        {},                                     // nrst_rShiftAdd[Chan::Size][Range::Size][2]
-        0                                       // nrst_correctionTime
-    },
-    
+       
     // Настройки мультиметра
     {
         MultimeterAVP::Off,                     // avp
@@ -253,6 +240,18 @@ const Settings Settings::defaultSettings =
         0,                                      // gate_min
         {
             {0}, {0}
-        }
+        },
+        // Несбрасываемые настройки калибровки
+        {
+            {},                                 // balanceADC[Chan::Size]
+            BalanceADC::Disable,                // balanceADCtype
+            StretchADC::Disable,                // stretchADCtype
+            {},                                 // StretchADC[Chan::Size][3]
+            {},                                 // rShiftAddStable[Chan::Size][3]
+            0,                                  // numAveForRand
+            0,                                  // numSmoothForRand
+            {},                                 // rShiftAdd[Chan::Size][Range::Size][2]
+            0                                   // correctionTime
+        },
     }
 };

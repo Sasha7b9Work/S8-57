@@ -1,5 +1,4 @@
 #pragma once
-#include "SettingsNRST.h"
 #include "Tester/Tester.h"
 #include "Osci/FrequencyCounter.h"
 #include "Menu/Menu.h"
@@ -54,7 +53,6 @@ public:
     SettingsFreqMeter   freq;
     SettingsTester      test;
     SettingsMenu        menu;
-    SettingsNRST        nrst;
     SettingsMultimeter  mult;
     SettingsRecorder    rec;
     SettingsDebug       dbg;

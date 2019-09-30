@@ -3,7 +3,6 @@
 #include "Menu/MenuItems.h"
 #include "Menu/Pages/Include/PageService.h"
 #include "Settings/Settings.h"
-#include "Settings/SettingsNRST.h"
 
 
 extern const Page pRand;
