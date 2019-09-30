@@ -14,9 +14,9 @@ using namespace Display::Primitives;
 using namespace Osci;
 using namespace Osci::Measurements;
 
-extern const Page pageTune;
+extern const Page pTune;
 
-const Page * const PageMeasuresAuto::PageTune::self = (const Page *)&pageTune;
+const Page * const PageMeasuresAuto::PageTune::self = (const Page *)&pTune;
 
 
 
@@ -66,7 +66,7 @@ static bool HandlerKey_Tune(const KeyEvent &event)
     return false;
 }
 
-DEF_PAGE_2( pageTune, // -V641 // -V1027
+DEF_PAGE_2( pTune, // -V641 // -V1027
     "НАСТРОИТЬ",
     "Переход в режим точной настройки количества и видов измерений",
     &bMarkers,

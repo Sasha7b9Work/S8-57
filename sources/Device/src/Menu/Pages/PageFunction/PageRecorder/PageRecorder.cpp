@@ -11,7 +11,7 @@ using namespace HAL::ADDRESSES::FPGA;
 
 using HAL::FSMC;
 
-extern const Page pageRecorder;
+extern const Page pRecorder;
 
 
 
@@ -70,7 +70,7 @@ static void OnOpenClose_Recorder(bool enter)
     Device::State::SetMode(enter ? Device::Mode::Recorder : Device::Mode::Osci);
 }
 
-DEF_PAGE_4( pageRecorder, // -V641 // -V1027                                                                                                                  //--- ФУНКЦИЯ - РЕГИСТРАТОР ---
+DEF_PAGE_4( pRecorder, // -V641 // -V1027                                                                                                                     //--- ФУНКЦИЯ - РЕГИСТРАТОР ---
     "РЕГИСТРАТОР",
     "Запись и воспроизведение сигналов входов и датчиков",
     PageRecorder::PageSource::self,
@@ -80,7 +80,7 @@ DEF_PAGE_4( pageRecorder, // -V641 // -V1027                                    
     PageName::Function_Recorder, &PageFunction::self, Item::Active, OnOpenClose_Recorder, Page::BeforeDraw, Page::HandlerKeyEvent
 )
 
-const Page *const PageRecorder::self = (const Page *)& pageRecorder;
+const Page *const PageRecorder::self = (const Page *)& pRecorder;
 
 #ifdef WIN32
 #pragma warning(disable:4310)

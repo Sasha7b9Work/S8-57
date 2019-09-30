@@ -16,9 +16,9 @@
 
 using namespace Display::Primitives;
 
-extern const Page pageRAM;
+extern const Page pRAM;
 
-const Page * const PageRAM::self = (const Page *)&pageRAM;
+const Page * const PageRAM::self = (const Page *)&pRAM;
 
 
 
@@ -112,7 +112,7 @@ static bool HandlerKey_RAM(const KeyEvent &)
     return false;
 }
 
-DEF_PAGE_2( pageRAM, // -V641 // -V1027                                                                                                                          //--- ПАМЯТЬ - ПОСЛЕДНИЕ ---
+DEF_PAGE_2( pRAM, // -V641 // -V1027                                                                                                                             //--- ПАМЯТЬ - ПОСЛЕДНИЕ ---
     "ПОСЛЕДНИЕ",
     "Переход в режим работы с последними полученными сигналами",
     &bPrev,

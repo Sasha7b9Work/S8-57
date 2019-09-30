@@ -90,7 +90,7 @@ DEF_CHOICE_2( cViewMode,                                                        
 )
 
 
-//_DEF_PAGE_1( pageViewSignal, //-V641
+//_DEF_PAGE_1( pViewSignal, //-V641
 //    "ОТОБРАЖ",
 //    "Настройки отображения сигналов",
 //    &cViewMode,

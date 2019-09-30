@@ -7,9 +7,9 @@
 #include <cstdio>
 
 
-extern const Page pageInfo;
+extern const Page pInfo;
 
-const Page * const PageService::PageInformation::self = (const Page *)&pageInfo;
+const Page * const PageService::PageInformation::self = (const Page *)&pInfo;
 
 using namespace Display::Primitives;
 
@@ -78,7 +78,7 @@ static void OnOpenClose_Page(bool enter)
     }
 }
 
-DEF_PAGE_1 ( pageInfo, //-V641 //-V1027
+DEF_PAGE_1 ( pInfo, //-V641 //-V1027
     "ИНФОРМАЦИЯ",
     "Информация об изделии",
     &bClose,

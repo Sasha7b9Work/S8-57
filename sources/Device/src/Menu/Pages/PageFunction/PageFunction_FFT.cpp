@@ -118,7 +118,7 @@ static bool HandlerKey_FFT_Cursors(const KeyEvent &event)
 }
 
 DEF_PAGE_1( pCursors, // -V641 // -V1027                                                                                                                 //--- ФУНКЦИЯ - СПЕКТР - КУРСОРЫ ---
-    "КУРСОРЫ",
+    "КУРСОРЫ", 
     "Включает курсоры для измерения параметров спектра",
     &bCursors_Source,
     PageName::Function_FFT_Cursors, &PageFFT::self, IsActive_Cursors, Choice::Changed, Page::BeforeDraw, HandlerKey_FFT_Cursors
@@ -128,7 +128,7 @@ const Page * const PageFFT::PageCursors::self = (const Page *)&pCursors;
 
 static bool IsActive_FFT()
 {
-    return (set.math.modeDraw != FuncModeDraw::Disable);
+    return (set.math.modeDraw == FuncModeDraw::Disable);
 }
 
 static void OnOpenClose_FFT(bool)
