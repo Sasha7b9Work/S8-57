@@ -77,7 +77,7 @@ DEF_PAGE_4( pageRecorder, // -V641 // -V1027                                    
     &cDestination,                      ///< ÔÓÍÊÖÈß - ÐÅÃÈÑÒÐÀÒÎÐ - Ñîõðàíÿòü â
     PageRecorder::PageShow::self,       ///< ÔÓÍÊÖÈß - ÐÅÃÈÑÒÐÀÒÎÐ - ÏÐÎÑÌÎÒÐ
     &bStart,                            ///< ÔÓÍÊÖÈß - ÐÅÃÈÑÒÐÀÒÎÐ - ÏÓÑÊ/ÑÒÎÏ
-    PageName::Function_Recorder, &PageFunction::self, Item::Active, OnOpenClose_Recorder, Page::BeforeDraw, E_BfKE
+    PageName::Function_Recorder, &PageFunction::self, Item::Active, OnOpenClose_Recorder, Page::BeforeDraw, Page::Handler
 )
 
 const Page *const PageRecorder::self = (const Page *)& pageRecorder;

@@ -333,7 +333,7 @@ bool Page::HandlerKey(const KeyEvent &event)
 {
     bool result = false;
 
-    if (OwnData()->handlerArrows(event))
+    if (OwnData()->handlerKey(event))
     {
         result = true;
     }

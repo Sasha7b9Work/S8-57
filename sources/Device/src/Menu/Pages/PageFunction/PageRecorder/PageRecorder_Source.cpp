@@ -44,7 +44,7 @@ DEF_PAGE_3( pSource, // -V641 // -V1027                                         
     &cChanA,        ///< ÔÓÍÊÖÈß - ÐÅÃÈÑÒÐÀÒÎÐ - ÈÑÒÎ×ÍÈÊ - Êàíàë 1
     &cChanB,        ///< ÔÓÍÊÖÈß - ÐÅÃÈÑÒÐÀÒÎÐ - ÈÑÒÎ×ÈÍÊ - Êàíàë 2
     &cSensor,       ///< ÔÓÍÊÖÈß - ÐÅÃÈÑÒÐÀÒÎÐ - ÈÑÒÎ×ÍÈÊ - Äàò÷èê
-    PageName::Function_Recorder_Source, &PageRecorder::self, IsActive_Source, Page::Changed, Page::BeforeDraw, E_BfKE
+    PageName::Function_Recorder_Source, &PageRecorder::self, IsActive_Source, Page::Changed, Page::BeforeDraw, Page::Handler
 )
 
 const Page * const PageRecorder::PageSource::self = (const Page *)&pSource;

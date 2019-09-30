@@ -170,7 +170,7 @@ DEF_PAGE_12( pRegisters, // -V641                                               
     &cChanParamB,     ///< ÎÒËÀÄÊÀ - ÊÎÍÑÎËÜ - ÐÅÃÈÑÒÐÛ - Ïàðàì. êàí. 2
     &cTBase,          ///< ÎÒËÀÄÊÀ - ÊÎÍÑÎËÜ - ÐÅÃÈÑÒÐÛ - ÂÐÅÌß/ÄÅË
     &cTShift,         ///< ÎÒËÀÄÊÀ - ÊÎÍÑÎËÜ - ÐÅÃÈÑÒÐÛ - Ò ñì.
-    PageName::Debug_Console_Registers, &PageDebug::PageConsole::self, Item::Active, Page::Changed, Page::BeforeDraw, E_BfKE
+    PageName::Debug_Console_Registers, &PageDebug::PageConsole::self, Item::Active, Page::Changed, Page::BeforeDraw, Page::Handler
 )
 
 const Page * const PageDebug::PageRegisters::self = (const Page *)&pRegisters;
@@ -197,7 +197,7 @@ DEF_PAGE_2( pConsole, // -V641 // -V1027                                        
 //    &cModeStop,         ///< ÎÒËÀÄÊÀ - ÊÎÍÑÎËÜ - Ðåæ. îñòàíîâà
 //    &pageRegisters,     ///< ÎÒËÀÄÊÀ - ÊÎÍÑÎËÜ - ÐÅÃÈÑÒÐÛ
 //    &bSizeSettings,     ///< ÎÒËÀÄÊÀ - ÊÎÍÑÎËÜ - Ðàçìåð íàñòðîåê
-    PageName::Debug_Console, &PageDebug::self, Item::Active, Page::Changed, Page::BeforeDraw, E_BfKE
+    PageName::Debug_Console, &PageDebug::self, Item::Active, Page::Changed, Page::BeforeDraw, Page::Handler
 )
 
 const Page * const PageDebug::PageConsole::self = (const Page *)&pConsole;

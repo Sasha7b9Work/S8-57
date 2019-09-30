@@ -5,8 +5,6 @@
 
 typedef bool(*pFuncBKE)(const KeyEvent&);
 
-inline bool E_BfKE(const KeyEvent&) { return false; }
-
 struct PageName
 {
     enum E

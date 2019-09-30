@@ -112,7 +112,7 @@ DEF_PAGE_8( pDisplay, // -V641 // -V1027                                        
     &cScaleYtype,                           ///< ÄÈÑÏËÅÉ - Ñìåùåíèå
     PageDisplay::PageSettings::self,     ///< ÄÈÑÏËÅÉ - ÍÀÑÒÐÎÉÊÈ
 //    &cThickness,                            ///< ÄÈÑÏËÅÉ - Òîëùèíà
-    PageName::Display, nullptr, Item::Active, Page::Changed, Page::BeforeDraw, E_BfKE
+    PageName::Display, nullptr, Item::Active, Page::Changed, Page::BeforeDraw, Page::Handler
 )
 
 const Page * const PageDisplay::self = (const Page *)&pDisplay;

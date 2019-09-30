@@ -218,7 +218,7 @@ DEF_PAGE_5_VAR( pMultimeter, // -V641 //-V1027 //-V641
     &cAVP,
     &cZero,
     &Item::empty,
-    PageName::Function_Multimeter, &PageFunction::self, Item::Active, OnOpenClose_Multimeter, Page::BeforeDraw, E_BfKE
+    PageName::Function_Multimeter, &PageFunction::self, Item::Active, OnOpenClose_Multimeter, Page::BeforeDraw, Page::Handler
 )
 
 const Page * const PageMultimeter::self = (const Page *)&pMultimeter;
@@ -252,7 +252,7 @@ DEF_PAGE_2( pCalibration, //-V641 //-V1027
     "Калибровка мультиметра",
     &bCalibrate0,
     &bCalibrate1,
-    PageName::Function_Multimeter_Cal, &PageMultimeter::self, Item::Active, Choice::Changed, Page::BeforeDraw, E_BfKE
+    PageName::Function_Multimeter_Cal, &PageMultimeter::self, Item::Active, Choice::Changed, Page::BeforeDraw, Page::Handler
 )
 
 const Page * const PageMultimeter::PageCalibration::self = (const Page *)&pCalibration;

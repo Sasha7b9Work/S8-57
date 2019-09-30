@@ -451,7 +451,7 @@ DEF_PAGE_6( pDrive,  //-V641 //-V1027                                           
     &cDrive_Autoconnect,            ///< ÏÀÌßÒÜ - ÂÍÅØÍ ÇÓ - Àâòîïîäêëþ÷åíèå
     PageName::Memory_Drive,
     &PageMemory::self,               ///< ÏÀÌßÒÜ
-    Item::Active, Page::Changed, Page::BeforeDraw, E_BfKE
+    Item::Active, Page::Changed, Page::BeforeDraw, Page::Handler
 )
 
 const Page * const PageDrive::self = (const Page *)&pDrive;
@@ -464,7 +464,7 @@ DEF_PAGE_4( pMemory, // -V641 // -V1027                                         
     PageRAM::self,          ///< ÏÀÌßÒÜ - ÏÎÑËÅÄÍÈÅ
     PageROM::self,          ///< ÏÀÌßÒÜ - ÂÍÓÒÐ ÇÓ
     PageDrive::self,        ///< ÏÀÌßÒÜ - ÂÍÅØÍ ÇÓ
-    PageName::Memory, nullptr, Item::Active, Page::Changed, Page::BeforeDraw, E_BfKE
+    PageName::Memory, nullptr, Item::Active, Page::Changed, Page::BeforeDraw, Page::Handler
 )
 
 const Page * const PageMemory::self = (const Page *)&pMemory;

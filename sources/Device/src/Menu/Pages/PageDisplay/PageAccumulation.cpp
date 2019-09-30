@@ -65,7 +65,7 @@ DEF_PAGE_3( pAccum, // -V641 // -V1027                                          
     &cEnable,    ///< ÄÈÑÏËÅÉ - ÍÀÊÎÏËÅÍÈÅ - Êîëè÷åñòâî
     &cNumber,    ///< ÄÈÑÏËÅÉ - ÍÀÊÎÏËÅÍÈÅ - Ðåæèì
     &bClear,     ///< ÄÈÑÏËÅÉ - ÍÀÊÎÏËÅÍÈÅ - Î÷èñòèòü
-    PageName::Display_Accumulation, &PageDisplay::self, IsActive_Accum, Page::Changed, Page::BeforeDraw, E_BfKE
+    PageName::Display_Accumulation, &PageDisplay::self, IsActive_Accum, Page::Changed, Page::BeforeDraw, Page::Handler
 )
 
 const Page * const PageDisplay::PageAccumulation::self = (const Page *)&pAccum;

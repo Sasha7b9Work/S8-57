@@ -59,7 +59,7 @@ DEF_PAGE_4( pOperations, // -V641 // -V1027                                     
     &bCopy,     ///< ÔÓÍÊÖÈß - ÐÅÃÈÑÒÐÀÒÎÐ - ÏÐÎÑÌÎÒÐ - ÎÏÅÐÀÖÈÈ - Êîïèðîâàòü
     &bMove,     ///< ÔÓÍÊÖÈß - ÐÅÃÈÑÒÐÀÒÎÐ - ÏÐÎÑÌÎÒÐ - ÎÏÅÐÀÖÈÈ - Ïåðåìåñòèòü
     &bDelete,   ///< ÔÓÍÊÖÈß - ÐÅÃÈÑÒÐÀÒÎÐ - ÏÐÎÑÌÎÒÐ - ÎÏÅÐÀÖÈÈ - Óäàëèòü
-    PageName::Function_Recorder_Show_Operations, &PageRecorder::PageShow::self, Item::Active, Page::Changed, Page::BeforeDraw, E_BfKE
+    PageName::Function_Recorder_Show_Operations, &PageRecorder::PageShow::self, Item::Active, Page::Changed, Page::BeforeDraw, Page::Handler
 )
 
 const Page * const PageRecorder::PageShow::PageOperations::self = (const Page *)&pOperations;

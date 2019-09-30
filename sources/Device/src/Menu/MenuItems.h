@@ -124,7 +124,7 @@ struct DataPage
     const Item * const *items;              ///< Здесь указатели на пункты этой страницы
     pFuncVB             funcOnOpenClose;    ///< Будет вызываться при открытии/закрытии страницы. При открытии в неё передаётся true, при закрытии - false
     pFuncVV             funcBeforeDraw;     ///< Будет вызываться после отрисовки страницы
-    pFuncBKE            handlerArrows;      ///< Вызывается при нажатии стрелок
+    pFuncBKE            handlerKey;         ///< При нажатии кнопки в первую очередь вызывается эта функция (при открытой странице). Если она обработала событие клавиатуры, то возвращает true
 };
 
 /// Описывает страницу меню
@@ -178,9 +178,11 @@ public:
     /// Возвращает имя страницы page
     PageName::E GetName() const;
 
-    static void BeforeDraw() {};
+    static void BeforeDraw() {}
 
-    static void Changed(bool) {};
+    static void Changed(bool) {}
+
+    static bool Handler(const KeyEvent &) { return false; }
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// Button ///

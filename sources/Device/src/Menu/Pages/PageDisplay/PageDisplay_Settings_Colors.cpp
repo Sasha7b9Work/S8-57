@@ -50,7 +50,7 @@ DEF_PAGE_4( pColors, // -V641 // -V1027                                         
     &gcChannelA,          ///< ÄÈÑÏËÅÉ - ÍÀÑÒÐÎÉÊÈ - ÖÂÅÒÀ - Êàíàë 1
     &gcChannelB,          ///< ÄÈÑÏËÅÉ - ÍÀÑÒÐÎÉÊÈ - ÖÂÅÒÀ - Êàíàë 2
     &gcGrid,              ///< ÄÈÑÏËÅÉ - ÍÀÑÒÐÎÉÊÈ - ÖÂÅÒÀ - Ñåòêà
-    PageName::Display_Settings_Colors, &PageDisplay::PageSettings::self, Item::Active, Page::Changed, Page::BeforeDraw, E_BfKE
+    PageName::Display_Settings_Colors, &PageDisplay::PageSettings::self, Item::Active, Page::Changed, Page::BeforeDraw, Page::Handler
 )
 
 const Page * const PageDisplay::PageSettings::PageColors::self = (const Page *)&pColors;

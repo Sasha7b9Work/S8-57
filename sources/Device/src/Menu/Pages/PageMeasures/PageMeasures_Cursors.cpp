@@ -80,7 +80,7 @@ DEF_PAGE_3( pCursors, // -V641 // -V1027                                        
 //    &cLookModeChanB,                                ///< ÈÇÌÅÐÅÍÈß - ÊÓÐÑÎÐÛ - Ñëåæåíèå êàíàë 2
     &cShowFreq,                                     ///< ÈÇÌÅÐÅÍÈß - ÊÓÐÎÑÐÛ - 1/dT
     PageMeasuresCursors::PageSet::self,    ///< ÈÇÌÅÐÅÍÈß - ÊÓÐÑÎÐÛ - ÓÑÒÀÍÎÂÈÒÜ
-    PageName::Measures_Cursors, &PageMeasures::self, Item::Active, Page::Changed, Page::BeforeDraw, E_BfKE
+    PageName::Measures_Cursors, &PageMeasures::self, Item::Active, Page::Changed, Page::BeforeDraw, Page::Handler
 )
 
 const Page * const PageMeasuresCursors::self = (const Page *)&pCursors;

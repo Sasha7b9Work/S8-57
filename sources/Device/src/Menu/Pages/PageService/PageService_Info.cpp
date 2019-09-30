@@ -82,5 +82,5 @@ DEF_PAGE_1 ( pageInfo, //-V641 //-V1027
     "ИНФОРМАЦИЯ",
     "Информация об изделии",
     &bClose,
-    PageName::Service_Info, &PageService::self, Item::Active, OnOpenClose_Page, Page::BeforeDraw, E_BfKE
+    PageName::Service_Info, &PageService::self, Item::Active, OnOpenClose_Page, Page::BeforeDraw, Page::Handler
 )

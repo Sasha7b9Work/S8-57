@@ -56,7 +56,7 @@ DEF_PAGE_5( pView, // -V641 // -V1027                                           
     &bLess,                                                                 ///< ÔÓÍÊÖÈß - ÐÅÃÈÑÒÐÀÒÎÐ - ÏÐÎÑÌÎÒÐ - ÏÐÎÑÌÎÒÐ - Ìåíüøå
     &bMore,                                                                 ///< ÔÓÍÊÖÈß - ÐÅÃÈÑÒÐÀÒÎÐ - ÏÐÎÑÌÎÒÐ - ÏÐÎÑÌÎÒÐ - Áîëüøå
     PageRecorder::PageShow::PageView::PageCursors::self,      ///< ÔÓÍÊÖÈß - ÐÅÃÈÑÒÐÀÒÎÐ - ÏÐÎÑÌÎÒÐ - ÏÐÎÑÌÎÒÐ - ÊÓÐÑÎÐÛ
-    PageName::Function_Recorder_Show_View, &PageRecorder::PageShow::self, Item::Active, Page::Changed, Page::BeforeDraw, E_BfKE
+    PageName::Function_Recorder_Show_View, &PageRecorder::PageShow::self, Item::Active, Page::Changed, Page::BeforeDraw, Page::Handler
 )
 
 const Page * const PageRecorder::PageShow::PageView::self = (const Page *)&pView;

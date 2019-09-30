@@ -145,7 +145,7 @@ DEF_PAGE_6( pFFT, // -V641 // -V1027                                            
     &cWindow,       ///< ÑÅÐÂÈÑ - ÑÏÅÊÒÐ - Îêíî 
     &pCursors,      ///< ÑÅÐÂÈÑ - ÑÏÅÊÒÐ - ÊÓÐÑÎÐÛ
     &cRange,        ///< ÑÅÐÂÈÑ - ÑÏÅÊÒÐ - Äèàïàçîí
-    PageName::Function_FFT, &PageFunction::self, IsActive_FFT, OnOpenClose_FFT, Page::BeforeDraw, E_BfKE
+    PageName::Function_FFT, &PageFunction::self, IsActive_FFT, OnOpenClose_FFT, Page::BeforeDraw, Page::Handler
 )
 
 const Page * const PageFFT::self = (const Page *)&pFFT;
