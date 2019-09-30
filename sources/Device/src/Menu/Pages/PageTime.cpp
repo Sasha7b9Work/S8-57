@@ -95,11 +95,11 @@ DEF_CHOICE_2( cShiftXtype,                                                      
 DEF_PAGE_4( pTime, // -V641 // -V1027                                                                                                                                     //--- РАЗВЕРТКА ---
     "РАЗВ",
     "Содержит настройки развёртки",
-    &cSample,           ///< РАЗВЕРТКА - Выборка
-    &cPeakDet,          ///< РАЗВЕРТКА - Пик дет
-    &cTPos,             ///< РАЗВЕРТКА - То
-    //&cDivRole,          ///< РАЗВЕРТКА - Ф-ция ВР/ДЕЛ
-    &cShiftXtype,       ///< РАЗВЕРТКА - Смещение
+    &cSample,
+    &cPeakDet,
+    &cTPos,
+    //&cDivRole,
+    &cShiftXtype,
     PageName::Time, nullptr, Item::Active, Page::Changed, Page::BeforeDraw, Page::HandlerKeyEvent
 )
 

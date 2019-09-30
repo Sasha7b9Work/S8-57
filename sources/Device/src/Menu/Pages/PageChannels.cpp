@@ -115,12 +115,12 @@ DEF_CHOICE_2( cInverseA,                                                        
 DEF_PAGE_6( pChanA, // -V641 // -V1027                                                                                                                                      //--- КАНАЛ 1 ---
     "КАНАЛ 1",
     "Содержит настройки канала 1.",
-    &cInputA,           ///< КАНАЛ 1 - Вход
-    &cCoupleA,          ///< КАНАЛ 1 - Связь
-    &cBandwidthA,       ///< КАНАЛ 1 - Полоса
-    &cDividerA,         ///< КАНАЛ 1 - Делитель
-    &bBalanceA,         ///< КАНАЛ 1 - Балансировка
-    &cInverseA,         ///< КАНАЛ 1 - Инверсия
+    &cInputA,
+    &cCoupleA,
+    &cBandwidthA,
+    &cDividerA,
+    &bBalanceA,
+    &cInverseA,
     PageName::ChannelA, nullptr, Item::Active, Page::Changed, Page::BeforeDraw, Page::HandlerKeyEvent
 )
 
@@ -207,12 +207,12 @@ DEF_CHOICE_2( cInverseB,                                                        
 DEF_PAGE_6( pChanB, // -V641 // -V1027                                                                                                                                      //--- КАНАЛ 2 ---
     "КАНАЛ 2",
     "Содержит настройки канала 2.",
-    &cInputB,           ///< КАНАЛ 2 - Вход
-    &cCoupleB,          ///< КАНАЛ 2 - Связь
-    &cBandwidthB,       ///< КАНАЛ 2 - Полоса
-    &cDividerB,         ///< КАНЛА 2 - Делитель
-    &bBalanceB,         ///< КАНАЛ 2 - Балансировка
-    &cInverseB,         ///< КАНАЛ 2 - Инверсия
+    &cInputB,
+    &cCoupleB,
+    &cBandwidthB,
+    &cDividerB,
+    &bBalanceB,
+    &cInverseB,
     PageName::ChannelB, nullptr, Item::Active, Page::Changed, Page::BeforeDraw, Page::HandlerKeyEvent
 )
 

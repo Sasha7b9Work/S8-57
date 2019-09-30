@@ -62,13 +62,13 @@ DEF_CHOICE_4( cSoundVolume,
 DEF_PAGE_7( pService, // -V641 // -V1027                                                                                                                                     //--- СЕРВИС ---
     "СЕРВИС",
     "Дополнительные настройки, калибровка, поиск сигнала, математические функции",
-    &bResetSettings,                        ///< СЕРВИС - Сброс настроек
-    &bAutoSearch,                           ///< СЕРВИС - Поиск сигнала
-    PageService::PageCalibrate::self,       ///< СЕРВИС - КАЛИБРОВКА
-    &cSoundVolume,                          ///< СЕРВИС - ЗВУК
-    PageRTC::self,                          ///< СЕРВИС - ВРЕМЯ
-    PageService::PageInformation::self,     ///< СЕРВИС - ИНФОРМАЦИЯ
-    PageDebug::self,                        ///< СЕРВИС - ОТЛАДКА
+    &bResetSettings,
+    &bAutoSearch,
+    PageService::PageCalibrate::self,
+    &cSoundVolume,
+    PageRTC::self,
+    PageService::PageInformation::self,
+    PageDebug::self,
     PageName::Service, nullptr, Item::Active, Page::Changed, Page::BeforeDraw, Page::HandlerKeyEvent
 )
 

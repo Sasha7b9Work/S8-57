@@ -56,11 +56,11 @@ DEF_CHOICE_3( cChannels,                                                        
 DEF_PAGE_4( pAuto, // -V641 // -V1027                                                                                                                              //--- ИЗМЕРЕНИЯ - АВТО ---
     "АВТОМАТ",
     "Доступ к настройкам автоматических измерений",
-    &cIsShow,                                   ///< ИЗМЕРЕНИЯ - АВТОМАТ - Показывать
-    &cNumber,                                   ///< ИЗМЕРЕНИЯ - АВТОМАТ - Количество
-    &cChannels,                                 ///< ИЗМЕРЕНИЯ - АВТОМАТ - Каналы
-    PageMeasuresAuto::PageTune::self,  ///< ИЗМЕРЕНИЯ - АВТОМАТ - НАСТРОИТЬ
-    //&cMode,                                   ///< ИЗМЕРЕНИЯ - АВТОМАТ - Вид
+    &cIsShow,
+    &cNumber,
+    &cChannels,
+    PageMeasuresAuto::PageTune::self,
+    //&cMode,
     PageName::Measures_Auto, &PageMeasures::self, Item::Active, Page::Changed, Page::BeforeDraw, Page::HandlerKeyEvent
 )
 

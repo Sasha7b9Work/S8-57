@@ -32,8 +32,8 @@ DEF_BUTTON( bSearch,                                                            
 DEF_PAGE_2( pFind, // -V641 // -V1027                                                                                                                                 //--- СИНХР - ПОИСК ---
     "ПОИСК",
     "Управление автоматическим поиском уровня синхронизации.",
-    &cMode,                         ///< СИНХР - ПОИСК - Режим
-    &bSearch,                       ///< СИНХР - ПОИСК - Найти
+    &cMode,
+    &bSearch,
     PageName::Trig_Search,
     &PageTrig::self, Item::Active, Page::Changed, Page::BeforeDraw, Page::HandlerKeyEvent
 )

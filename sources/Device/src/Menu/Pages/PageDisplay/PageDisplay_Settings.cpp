@@ -38,9 +38,9 @@ DEF_CHOICE_6( cAutoHide,                                                        
 DEF_PAGE_3( pSettings, // -V641 // -V1027                                                                                                                       //--- ДИСПЛЕЙ - НАСТРОЙКИ ---
     "НАСТРОЙКИ",
     "Дополнительные настройки дисплея",
-    PageDisplay::PageSettings::PageColors::self,        ///< ДИСПЛЕЙ - НАСТРОЙКИ - ЦВЕТА
-    &gBrightness,                                       ///< ДИСПЛЕЙ - НАСТРОЙКИ - Яркость
-    &cAutoHide,                                         ///< ДИСПЛЕЙ - НАСТРОЙКИ - Скрывать
+    PageDisplay::PageSettings::PageColors::self,
+    &gBrightness,
+    &cAutoHide,
     PageName::Display_Settings, &PageDisplay::self, Item::Active, Page::Changed, Page::BeforeDraw, Page::HandlerKeyEvent
 )
 

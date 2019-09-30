@@ -117,7 +117,7 @@ static bool HandlerKey_FFT_Cursors(const KeyEvent &event)
 DEF_PAGE_1( pCursors, // -V641 // -V1027                                                                                                                 //--- ФУНКЦИЯ - СПЕКТР - КУРСОРЫ ---
     "КУРСОРЫ",
     "Включает курсоры для измерения параметров спектра",
-    &bCursors_Source,                       ///< СЕРВИС - СПЕКТР - КУРСОРЫ - Источник
+    &bCursors_Source,
     PageName::Function_FFT_Cursors, &PageFFT::self, IsActive_Cursors, Choice::Changed, Page::BeforeDraw, HandlerKey_FFT_Cursors
 )
 
@@ -139,12 +139,12 @@ static void OnOpenClose_FFT(bool)
 DEF_PAGE_6( pFFT, // -V641 // -V1027                                                                                                                                //--- СЕРВИС - СПЕКТР ---
     "СПЕКТР",
     "Отображение спектра входного сигнала",
-    &cView,         ///< СЕРВИС - СПЕКТР - Отображение
-    &cScale,        ///< СЕРВИС - СПЕКТР - Шкала
-    &cSource,       ///< СЕРВИС - СПЕКТР - Источник
-    &cWindow,       ///< СЕРВИС - СПЕКТР - Окно 
-    &pCursors,      ///< СЕРВИС - СПЕКТР - КУРСОРЫ
-    &cRange,        ///< СЕРВИС - СПЕКТР - Диапазон
+    &cView,
+    &cScale,
+    &cSource,
+    &cWindow,
+    &pCursors,
+    &cRange,
     PageName::Function_FFT, &PageFunction::self, IsActive_FFT, OnOpenClose_FFT, Page::BeforeDraw, Page::HandlerKeyEvent
 )
 

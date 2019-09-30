@@ -41,9 +41,9 @@ static bool IsActive_Source()
 DEF_PAGE_3( pSource, // -V641 // -V1027                                                                                                            //--- ФУНКЦИЯ - РЕГИСТРАТОР - ИСТОЧНИК ---
     "ИСТОЧНИК",
     "Выбор записываемых сигналов",
-    &cChanA,        ///< ФУНКЦИЯ - РЕГИСТРАТОР - ИСТОЧНИК - Канал 1
-    &cChanB,        ///< ФУНКЦИЯ - РЕГИСТРАТОР - ИСТОЧИНК - Канал 2
-    &cSensor,       ///< ФУНКЦИЯ - РЕГИСТРАТОР - ИСТОЧНИК - Датчик
+    &cChanA,
+    &cChanB,
+    &cSensor,
     PageName::Function_Recorder_Source, &PageRecorder::self, IsActive_Source, Page::Changed, Page::BeforeDraw, Page::HandlerKeyEvent
 )
 

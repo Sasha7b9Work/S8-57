@@ -115,10 +115,10 @@ const Choice *PageFreqMeter::GetChoiceNumPeriods()
 DEF_PAGE_5_VAR( pFreqMeter, // -V641                                                                                                                               //--- ‘”Õ ÷»ﬂ - ◊¿—“Œ“ŒÃ≈– ---
     "◊¿—“Œ“ŒÃ≈–",
     "",
-    &cEnable,           ///< »«Ã≈–≈Õ»ﬂ - ◊¿—“Œ“ŒÃ≈– - ◊‡ÒÚÓÚÓÏÂ
-    &cModeView,         ///< »«Ã≈–≈Õ»ﬂ - ◊¿—“Œ“ŒÃ≈– - –ÂÊËÏ
-    &Item::empty,       ///< »«Ã≈–≈Õ»ﬂ - ◊¿—“Œ“ŒÃ≈– - ¬ÂÏˇ Ò˜∏Ú‡ F / ÃÂÚÍË ‚ÂÏÂÌË
-    &Item::empty,       ///< »«Ã≈–≈Õ»ﬂ - ◊¿—“Œ“ŒÃ≈– -  ÓÎ/‚Ó ÔÂËÓ‰Ó‚
+    &cEnable,
+    &cModeView,
+    &Item::empty,
+    &Item::empty,
     &Item::empty,
     PageName::Function_FrequencyCounter, &PageFunction::self, Item::Active, Choice::Changed, Page::BeforeDraw, Page::HandlerKeyEvent
 )

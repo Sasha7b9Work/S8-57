@@ -51,11 +51,11 @@ DEF_BUTTON( bMore,                                                              
 DEF_PAGE_5( pView, // -V641 // -V1027                                                                                                   //--- ‘”Õ ÷»ﬂ - –≈√»—“–¿“Œ– - œ–Œ—ÃŒ“– - œ–Œ—ÃŒ“– ---
     "œ–Œ—ÃŒ“–",
     "",
-    &cMove,                                                                 ///< ‘”Õ ÷»ﬂ - –≈√»—“–¿“Œ– - œ–Œ—ÃŒ“– - œ–Œ—ÃŒ“– - œÂÂÏÂ˘ÂÌËÂ
-    &cZoom,                                                                 ///< ‘”Õ ÷»ﬂ - –≈√»—“–¿“Œ– - œ–Œ—ÃŒ“– - œ–Œ—ÃŒ“– - Ã‡Ò¯Ú‡·
-    &bLess,                                                                 ///< ‘”Õ ÷»ﬂ - –≈√»—“–¿“Œ– - œ–Œ—ÃŒ“– - œ–Œ—ÃŒ“– - ÃÂÌ¸¯Â
-    &bMore,                                                                 ///< ‘”Õ ÷»ﬂ - –≈√»—“–¿“Œ– - œ–Œ—ÃŒ“– - œ–Œ—ÃŒ“– - ¡ÓÎ¸¯Â
-    PageRecorder::PageShow::PageView::PageCursors::self,      ///< ‘”Õ ÷»ﬂ - –≈√»—“–¿“Œ– - œ–Œ—ÃŒ“– - œ–Œ—ÃŒ“– -  ”–—Œ–€
+    &cMove,
+    &cZoom,
+    &bLess,
+    &bMore,
+    PageRecorder::PageShow::PageView::PageCursors::self,
     PageName::Function_Recorder_Show_View, &PageRecorder::PageShow::self, Item::Active, Page::Changed, Page::BeforeDraw, Page::HandlerKeyEvent
 )
 

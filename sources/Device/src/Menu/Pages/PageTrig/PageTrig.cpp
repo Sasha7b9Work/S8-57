@@ -106,12 +106,12 @@ DEF_CHOICE_3( cFiltr, // -V206                                                  
 DEF_PAGE_6( pTrig, // -V641 // -V1027                                                                                                                                         //--- СИНХР ---
     "СИНХР",
     "Содержит настройки синхронизации.",
-    &cMode,                         ///< СИНХР - Режим
-    &cSource,                       ///< СИНХР - Источник
-    &cPolarity,                     ///< СИНХР - Полярность
-    &cFiltr,                        ///< СИНХР - Вход
-    PageTrig::PageHoldOff::self, ///< СИНХР - УДЕРЖАНИЕ
-    PageTrig::PageFind::self,    ///< СИНХР - ПОИСК
+    &cMode,
+    &cSource,
+    &cPolarity,
+    &cFiltr,
+    PageTrig::PageHoldOff::self,
+    PageTrig::PageFind::self,
     PageName::Trig, nullptr, Item::Active, Page::Changed, Page::BeforeDraw, Page::HandlerKeyEvent
 )
 

@@ -62,9 +62,9 @@ static bool IsActive_Accum()
 DEF_PAGE_3( pAccum, // -V641 // -V1027                                                                                                                         //--- ДИСПЛЕЙ - НАКОПЛЕНИЕ ---
     "НАКОПЛ",
     "Настройки режима отображения последних сигналов на экране",
-    &cEnable,    ///< ДИСПЛЕЙ - НАКОПЛЕНИЕ - Количество
-    &cNumber,    ///< ДИСПЛЕЙ - НАКОПЛЕНИЕ - Режим
-    &bClear,     ///< ДИСПЛЕЙ - НАКОПЛЕНИЕ - Очистить
+    &cEnable,
+    &cNumber,
+    &bClear,
     PageName::Display_Accumulation, &PageDisplay::self, IsActive_Accum, Page::Changed, Page::BeforeDraw, Page::HandlerKeyEvent
 )
 

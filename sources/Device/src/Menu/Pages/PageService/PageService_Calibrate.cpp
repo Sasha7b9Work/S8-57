@@ -51,8 +51,8 @@ DEF_BUTTON( bCalibrate,                                                         
 DEF_PAGE_2( pCalibrate, // -V641 // -V1027                                                                                                                      //--- СЕРВИС - КАЛИБРАТОР ---
     "КАЛИБРОВКА",
     "Управлением калибратором и калибровка осциллографа",
-    &cCalibrator,     /// СЕРВИС - КАЛИБРАТОР - Калибратор
-    &bCalibrate,      /// СЕРВИС - КАЛИБРАТОР - Калибровать
+    &cCalibrator,
+    &bCalibrate,
     PageName::Service_Calibrator, &PageService::self, Item::Active, Page::Changed, Page::BeforeDraw, Page::HandlerKeyEvent
 )
 

@@ -226,7 +226,7 @@ static void BeforeDraw_Set()
     DrawTime();
 }
 
-static bool OnKey_Set(const KeyEvent &event)
+static bool HandlerKey_Set(const KeyEvent &event)
 {
     if (event.IsRelease())
     {
@@ -278,7 +278,7 @@ DEF_PAGE_5( pSet, //-V641 //-V1027
     &bSet_Down,
     &bSet_Pick,
     PageName::Service_RTC,
-    &PageService::self, Item::Active, OnOpenClose_Set, BeforeDraw_Set, OnKey_Set
+    &PageService::self, Item::Active, OnOpenClose_Set, BeforeDraw_Set, HandlerKey_Set
 )
 
 const Page * const PageRTC::self = (const Page *)&pSet;

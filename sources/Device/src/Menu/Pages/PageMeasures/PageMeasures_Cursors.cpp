@@ -75,11 +75,11 @@ DEF_CHOICE_2( cShowFreq,                                                        
 DEF_PAGE_3( pCursors, // -V641 // -V1027                                                                                                                                  //--- хглепемхъ ---
     "йспянпш",
     "йСПЯНПМШЕ ХГЛЕПЕМХЪ",
-    &cShow,                                         ///< хглепемхъ - йспянпш - оНЙЮГШБЮРЭ
-//    &cLookModeChanA,                                ///< хглепемхъ - йспянпш - яКЕФЕМХЕ ЙЮМЮК 1
-//    &cLookModeChanB,                                ///< хглепемхъ - йспянпш - яКЕФЕМХЕ ЙЮМЮК 2
-    &cShowFreq,                                     ///< хглепемхъ - йспняпш - 1/dT
-    PageMeasuresCursors::PageSet::self,    ///< хглепемхъ - йспянпш - сярюмнбхрэ
+    &cShow,
+//    &cLookModeChanA,
+//    &cLookModeChanB,
+    &cShowFreq,
+    PageMeasuresCursors::PageSet::self,
     PageName::Measures_Cursors, &PageMeasures::self, Item::Active, Page::Changed, Page::BeforeDraw, Page::HandlerKeyEvent
 )
 

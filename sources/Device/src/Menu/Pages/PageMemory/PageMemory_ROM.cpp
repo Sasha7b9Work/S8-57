@@ -22,14 +22,14 @@ const Page * const PageROM::self = (const Page *)&pROM;
 
 /// Нарисовать карту памяти сохраннных сигналов
 static void DrawMemoryMap(int num, bool exist);
-/// Обработчик нажатия кнопки при открытой странице
-static bool OnArrows_ROM(const KeyEvent &event);
+
+static bool HandlerKey_ROM(const KeyEvent &event);
 
 
 
 static void OnPress_Next()
 {
-    OnArrows_ROM(KeyEvent(Key::Right, TypePress::Release));
+    HandlerKey_ROM(KeyEvent(Key::Right, TypePress::Release));
 }
 
 static void Draw_Next(int x, int y)
@@ -48,7 +48,7 @@ DEF_GRAPH_BUTTON( bNext,
 
 static void OnPress_Prev()
 {
-    OnArrows_ROM(KeyEvent(Key::Left, TypePress::Release));
+    HandlerKey_ROM(KeyEvent(Key::Left, TypePress::Release));
 }
 
 static void Draw_Prev(int x, int y)
@@ -159,7 +159,7 @@ static void DrawMemoryMap(int num, bool exist)
     }
 }
 
-static bool OnArrows_ROM(const KeyEvent &event)
+static bool HandlerKey_ROM(const KeyEvent &event)
 {
     if (event.type == TypePress::Release || event.type == TypePress::Long)
     {
@@ -189,10 +189,10 @@ static bool OnArrows_ROM(const KeyEvent &event)
 DEF_PAGE_4( pROM, // -V641                                                                                                                                        //--- ПАМЯТЬ - ВНУТР ЗУ ---
     "ВНУТР ЗУ",
     "Переход в режим работы с внутренней памятью",
-    &bPrev,         ///< ПАМЯТЬ - ВНУТР ЗУ - Предыдущий
-    &bNext,         ///< ПАМЯТЬ - ВНУТР ЗУ - Следующий
-    &bSave,         ///< ПАМЯТЬ - ВНУТР ЗУ - Сохранить
-    &bDelete,       ///< ПАМЯТЬ - ВНУТР ЗУ - Удалить
+    &bPrev,
+    &bNext,
+    &bSave,
+    &bDelete,
     PageName::Memory_Internal,
-    &PageMemory::self, Item::Active, OnOpenClose_ROM, AfterDraw_ROM, OnArrows_ROM
+    &PageMemory::self, Item::Active, OnOpenClose_ROM, AfterDraw_ROM, HandlerKey_ROM
 )

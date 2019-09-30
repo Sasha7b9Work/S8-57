@@ -101,17 +101,17 @@ DEF_CHOICE_2( cViewMode,                                                        
 DEF_PAGE_8( pDisplay, // -V641 // -V1027                                                                                                                                    //--- ДИСПЛЕЙ ---
     "ДИСПЛЕЙ",
     "Содержит настройки отображения дисплея.",
-    &cViewMode,                             ///< ДИСПЛЕЙ - Отображение
-    PageDisplay::PageAccumulation::self, ///< ДИСПЛЕЙ - НАКОПЛЕНИЕ
-    &cAverage_Num,                          ///< ДИСПЛЕЙ - Усреднение
-    //PageDisplay::PageAverage::self,      ///< ДИСПЛЕЙ - УСРЕДНЕНИЕ
-    &cSmoothing,                            ///< ДИСПЛЕЙ - Сглаживание
-    &cType,                                 ///< ДИСПЛЕЙ - Сетка
-    &cRefreshFPS,                           ///< ДИСПЛЕЙ - Частота обновл
-    //PageDisplay::PageGrid::self,         ///< ДИСПЛЕЙ - СЕТКА
-    &cScaleYtype,                           ///< ДИСПЛЕЙ - Смещение
-    PageDisplay::PageSettings::self,     ///< ДИСПЛЕЙ - НАСТРОЙКИ
-//    &cThickness,                            ///< ДИСПЛЕЙ - Толщина
+    &cViewMode,
+    PageDisplay::PageAccumulation::self,
+    &cAverage_Num,
+    //PageDisplay::PageAverage::self,
+    &cSmoothing,
+    &cType,
+    &cRefreshFPS,
+    //PageDisplay::PageGrid::self,
+    &cScaleYtype,
+    PageDisplay::PageSettings::self,
+//    &cThickness,
     PageName::Display, nullptr, Item::Active, Page::Changed, Page::BeforeDraw, Page::HandlerKeyEvent
 )
 

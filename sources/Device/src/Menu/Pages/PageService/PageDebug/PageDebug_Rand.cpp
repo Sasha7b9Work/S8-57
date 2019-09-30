@@ -146,16 +146,16 @@ DEF_CHOICE_16( gGateMin,                                                        
 DEF_PAGE_2( pRand, // -V641 // -V1027                                                                                                                            //--- ОТЛАДКА - РАНД-ТОР ---
     "РАНД-ТОР",
     "",
-    &gGateMin,                      ///< ОТЛАДКА - РАНД-ТОР - Ворота низ
-    &gGateMax,                      ///< ОТЛАДКА - РАНД-ТОР - Ворота верх
+    &gGateMin,
+    &gGateMax,
 
-    //&gRand_NumAverage,          ///< ОТЛАДКА - РАНД-ТОР - Усредн.
-    //&gRand_NumSmooth,           ///< ОТЛАДКА - РАНД-ТОР - Сглаживание
-    //&gRand_NumMeasures,         ///< ОТЛАДКА - РАНД-ТОР - Выб-к/ворота
-    //&cRand_ShowInfo,            ///< ОТЛАДКА - РАНД-ТОР - Информация
-    //&gRand_ShowStat,            ///< ОТЛАДКА - РАНД-ТОР - Статистика
-    //&gRand_TimeCompensation,    ///< ОТЛАДКА - РАНД-ТОР - Компенсация задержки
-    //&gRand_AddTimeShift,        ///< ОТЛАДКА - РАНД-ТОР - Смещение
-    //&gRand_Pretriggered,        ///< ОТЛАДКА - РAНД-ТОР - Предзапуск
+    //&gRand_NumAverage,
+    //&gRand_NumSmooth,
+    //&gRand_NumMeasures,
+    //&cRand_ShowInfo,
+    //&gRand_ShowStat,
+    //&gRand_TimeCompensation,
+    //&gRand_AddTimeShift,
+    //&gRand_Pretriggered,
     PageName::Debug_Rand, &PageDebug::self, Item::Active, Page::Changed, Page::BeforeDraw, Page::HandlerKeyEvent
 )

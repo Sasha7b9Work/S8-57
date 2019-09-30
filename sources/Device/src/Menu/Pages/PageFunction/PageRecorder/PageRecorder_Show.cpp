@@ -82,12 +82,12 @@ static bool HandlerKey_PageShow(const KeyEvent &event)
 DEF_PAGE_1( pShow, // -V641 // -V1027                                                                                                              //--- тсмйжхъ - пецхярпюрнп - опнялнрп ---
     "опнялнрп",
     "оПНЯЛНРП ГЮОХЯЮММШУ ДЮММШУ",
-    &cSource,                                       ///< тсмйжхъ - пецхярпюрнп - опнялнрп - хЯРНВМХЙ
-    //&bNext,                                         ///< тсмйжхъ - пецхярпюрнп - опнялнрп - яКЕДСЧЫХИ
-    //&bPrev,                                         ///< тсмйжхъ - пецхярпюрнп - опнялнрп - оПЕДШДСЫХИ
-    //&cCursor,                                       ///< тсмйжхъ - пецхярпюрнп - опнялнрп - йСПЯНП
-    //PageRecorder::PageShow::PageOperations::self,  ///< тсмйжхъ - пецхярпюрнп - опнялнрп - ноепюжхх
-    //PageRecorder::PageShow::PageView::self,        ///< тсмйжхъ - пецхярпюрнп - опнялрнп - опнялнрп
+    &cSource,
+    //&bNext,
+    //&bPrev,
+    //&cCursor,
+    //PageRecorder::PageShow::PageOperations::self,
+    //PageRecorder::PageShow::PageView::self,
     PageName::Function_Recorder_Show, &PageRecorder::self, IsActive_PageShow, Page::Changed, Page::BeforeDraw, HandlerKey_PageShow
 )
 

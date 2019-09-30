@@ -313,7 +313,7 @@ DEF_GRAPH_BUTTON_HINTS_2( bMovement,                                            
 )
 
 
-bool PageMeasuresCursors::PageSet::OnArrows(const KeyEvent &event) //-V2506
+bool PageMeasuresCursors::PageSet::HandlerKey(const KeyEvent &event) //-V2506
 {
     TypePress::E type = event.type;
 
@@ -378,12 +378,12 @@ static bool IsActive_Set()
 DEF_PAGE_5( pSet, // -V641 // -V1027                                                                                                              //--- ÈÇÌÅĞÅÍÈß - ÊÓĞÑÎĞÛ - ÓÑÒÀÍÎÂÈÒÜ ---
     "ÓÑÒÀÍÎÂÈÒÜ",
     "Ïåğåõîä â ğåæèì êóğñîğíûõ èçìåğåíèé",
-    &bChannel,          ///< ÈÇÌÅĞÅÍÈß - ÊÓĞÑÎĞÛ - ÓÑÒÀÍÎÂÈÒÜ - Êàíàë
-    &bU,                ///< ÈÇÌÅĞÅÍÈß - ÊÓĞÑÎĞÛ - ÓÑÒÀÍÎÂÈÒÜ - Êóğñîğû U
-    &bT,                ///< ÈÇÌÅĞÅÍÈß - ÊÓĞÑÎĞÛ - ÓÑÒÀÍÎÂÈÒÜ - Êóğñîğû Ò
-    &b100,              ///< ÈÇÌÅĞÅÍÈß - ÊÓĞÑÎĞÛ - ÓÑÒÀÍÎÂÈÒÜ - 100%
-    &bMovement,         ///< ÈÇÌÅĞÅÍÈß - ÊÓĞÑÎĞÛ - ÓÑÒÀÍÎÂÈÒÜ - Ïåğåìåùåíèå
-    PageName::Measures_Cursors_Set, &PageMeasuresCursors::self, IsActive_Set, Page::Changed, Page::BeforeDraw, PageMeasuresCursors::PageSet::OnArrows
+    &bChannel,
+    &bU,
+    &bT,
+    &b100,
+    &bMovement,
+    PageName::Measures_Cursors_Set, &PageMeasuresCursors::self, IsActive_Set, Page::Changed, Page::BeforeDraw, PageMeasuresCursors::PageSet::HandlerKey
 )
 
 const Page * const PageMeasuresCursors::PageSet::self = (const Page *)&pSet;

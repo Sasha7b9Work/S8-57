@@ -204,7 +204,7 @@ static void OnOpenClose_Math(bool)
     }
 }
 
-static bool OnArrows_Function(const KeyEvent &event) // -V2506
+static bool HandlerKey_Function(const KeyEvent &event) // -V2506
 {
     if (set.math.modeDraw == FuncModeDraw::Disable)
     {
@@ -292,7 +292,7 @@ DEF_PAGE_5( pMath, // -V641                                                     
     &bModeArrows,
     &bRangeA,
     &bRangeB,
-    PageName::Measures_Math, &PageMeasures::self, IsActive_Math, OnOpenClose_Math, Page::BeforeDraw, OnArrows_Function
+    PageName::Measures_Math, &PageMeasures::self, IsActive_Math, OnOpenClose_Math, Page::BeforeDraw, HandlerKey_Function
 )
 
 const Page * const PageMeasuresMath::self = (const Page *)&pMath;

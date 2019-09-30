@@ -93,9 +93,9 @@ DEF_GOVERNOR( gShiftB,                                                          
 DEF_PAGE_3( pBalance, // -V641 // -V1027                                                                                                                     //--- Œ“À¿ƒ ¿ - ¿÷œ - ¡¿À¿Õ— ---
     "¡¿À¿Õ—",
     "",
-    &cBalance_Mode,     ///< Œ“À¿ƒ ¿ - ¿÷œ - ¡¿À¿Õ— - –ÂÊËÏ
-    &gShiftA,           ///< Œ“À¿ƒ ¿ - ¿÷œ - ¡¿À¿Õ— - —ÏÂ˘ÂÌËÂ 1
-    &gShiftB,           ///< Œ“À¿ƒ ¿ - ¿÷œ - ¡¿À¿Õ— - —ÏÂ˘ÂÌËÂ 2
+    &cBalance_Mode,
+    &gShiftA,
+    &gShiftB,
     PageName::Debug_ADC_Balance,
     &PageDebug::PageADC::self, Item::Active, Page::Changed, Page::BeforeDraw, Page::HandlerKeyEvent
 )
@@ -232,8 +232,8 @@ _DEF_GOVERNOR(       gADC_Stretch_Bk2V,                                         
 DEF_PAGE_3( pStretch, // -V641 // -V1027                                                                                                                   //--- Œ“À¿ƒ ¿ - ¿÷œ - –¿—“ﬂ∆ ¿ ---
     "–¿—“ﬂ∆ ¿",
     "”ÒÚ‡Ì‡‚ÎË‚‡ÂÚ ÂÊËÏ Ë ‚ÂÎË˜ËÌÛ ‡ÒÚˇÊÍË (‰Îˇ Û˜ÌÓ„Ó ÂÊËÏ‡)",
-    &cStretch_Mode,      ///< Œ“À¿ƒ ¿ - ¿÷œ - –¿—“ﬂ∆ ¿ - –ÂÊËÏ
-    &gStretch_A,         ///< Œ“À¿ƒ ¿ - ¿÷œ - –¿—“ﬂ∆ ¿ - –‡ÒÚˇÊÍ‡ 1Í
+    &cStretch_Mode,
+    &gStretch_A,
     &gStretch_B,
     PageName::Debug_ADC_Stretch,
     &PageDebug::PageADC::self, Item::Active, Page::Changed, Page::BeforeDraw, Page::HandlerKeyEvent
@@ -324,13 +324,13 @@ DEF_GOVERNOR( gShift_B10mV,                                                     
 DEF_PAGE_7( pShift, // -V641  // -V1027                                                                                                                    //--- Œ“À¿ƒ ¿ - ¿÷œ - ƒŒœ —Ã≈Ÿ ---
     "ƒŒœ —Ã≈Ÿ",
     "",
-    &bShift_Reset,   // Œ“À¿ƒ ¿ - ¿÷œ - ƒŒœ —Ã≈Ÿ - —·ÓÒ
-    &gShift_A2mV,    // Œ“À¿ƒ ¿ - ¿÷œ - ƒŒœ —Ã≈Ÿ - —Ï 1Í 2Ï¬ ÔÓÒÚ
-    &gShift_B2mV,    // Œ“À¿ƒ ¿ - ¿÷œ - ƒŒœ —Ã≈Ÿ - —Ï 2Í 2Ï¬ ÔÓÒÚ
-    &gShift_A5mV,    // Œ“À¿ƒ ¿ - ¿÷œ - ƒŒœ —Ã≈Ÿ - —Ï 1Í 5Ï¬ ÔÓÒÚ
-    &gShift_B5mV,    // Œ“À¿ƒ ¿ - ¿÷œ - ƒŒœ —Ã≈Ÿ - —Ï 2Í 5Ï¬ ÔÓÒÚ
-    &gShift_A10mV,   // Œ“À¿ƒ ¿ - ¿÷œ - ƒŒœ —Ã≈Ÿ - —Ï 1Í 10Ï¬ ÔÓÒÚ
-    &gShift_B10mV,   // Œ“À¿ƒ ¿ - ¿÷œ - ƒŒœ —Ã≈Ÿ - —Ï 2Í 10Ï¬ ÔÓÒÚ
+    &bShift_Reset,
+    &gShift_A2mV,
+    &gShift_B2mV,
+    &gShift_A5mV,
+    &gShift_B5mV,
+    &gShift_A10mV,
+    &gShift_B10mV,
     PageName::Debug_ADC_Shift,
     &PageDebug::PageADC::self, Item::Active, Page::Changed, Page::BeforeDraw, Page::HandlerKeyEvent
 )
@@ -341,9 +341,9 @@ const Page * const PageDebug::PageADC::PageShift::self = (const Page *)&pShift;
 DEF_PAGE_3( pADC, //-V641 //-V1027
     "¿÷œ",
     "",
-    &pBalance,                              // Œ“À¿ƒ ¿ - ¿÷œ - ¡¿À¿Õ—
-    &pStretch,                              // Œ“À¿ƒ ¿ - ¿÷œ - –¿—“ﬂ∆ ¿
-    PageDebug::PageADC::PageShift::self,    // Œ“À¿ƒ ¿ - ¿÷œ - ƒŒœ —Ã≈Ÿ
+    &pBalance,
+    &pStretch,
+    PageDebug::PageADC::PageShift::self,
     PageName::Debug_ADC,
     &PageDebug::self, Item::Active, Page::Changed, Page::BeforeDraw, Page::HandlerKeyEvent
 )
@@ -556,8 +556,8 @@ static bool HandlerKey_SerialNumber(const KeyEvent &)
 DEF_PAGE_2( pSerialNumber, // -V641 // -V1027                                                                                                                         //--- Œ“À¿ƒ ¿ - —/Õ ---
     "—/Õ",
     "«‡ÔËÒ¸ ÒÂËÈÌÓ„Ó ÌÓÏÂ‡ ‚ OTP-Ô‡ÏˇÚ¸. ¬Õ»Ã¿Õ»≈!!! Œ“P-Ô‡ÏˇÚ¸ - Ô‡ÏˇÚ¸ Ò Ó‰ÌÓÍ‡ÚÌÓÈ Á‡ÔËÒ¸˛.",
-    &bSerialNumber_Change,          // Œ“À¿ƒ ¿ - —/Õ - œÂÂÈÚË
-    &bSerialNumber_Save,            // Œ“À¿ƒ ¿ - —/Õ - —Óı‡ÌËÚ¸
+    &bSerialNumber_Change,
+    &bSerialNumber_Save,
     PageName::Debug_SerialNumber,
     &PageDebug::self, Item::Active, OnOpenClose_SerialNumber, Page::BeforeDraw, HandlerKey_SerialNumber
 )
@@ -582,17 +582,17 @@ const Page * const PageDebug::PageSerialNumber::self = (const Page *)&pSerialNum
 DEF_PAGE_5( pDebug, // -V641 // -V1027                                                                                                                                   //--- Œ“À¿ƒ ¿ ---
     "Œ“À¿ƒ ¿",
     "",
-    PageDebug::PageConsole::self,   ///< Œ“À¿ƒ ¿ -  ŒÕ—ŒÀ‹
-    &pADC,                                         ///< Œ“À¿ƒ ¿ - ¿÷œ
-    PageDebug::PageRand::self,      ///< Œ“À¿ƒ ¿ - –¿Õƒ-“Œ–
-    &cStats,			                            ///< Œ“À¿ƒ ¿ - —Ú‡ÚËÒÚËÍ‡
-    &bSaveFirmware,                                 ///< Œ“À¿ƒ ¿ - —Óı. ÔÓ¯Ë‚ÍÛ
-//    &cDisplayOrientation,                           ///< Œ“À¿ƒ ¿ - ŒËÂÌÚ‡ˆËˇ
-//    &mgPred,			                            ///< Œ“À¿ƒ ¿ - œÂ‰Á‡ÔÛÒÍ
-//    &mgPost,			                            ///< Œ“À¿ƒ ¿ - œÓÒÎÂÁ‡ÔÛÒÍ
-//    &pSettings,		                            ///< Œ“À¿ƒ ¿ - Õ¿—“–Œ… »
-//    &pSerialNumber,                              ///< Œ“À¿ƒ ¿ - —/Õ
-//    &bEraseData,                                  ///< Œ“À¿ƒ ¿ - —ÚÂÂÚ¸ ‰‡ÌÌ˚Â
+    PageDebug::PageConsole::self,
+    &pADC,
+    PageDebug::PageRand::self,
+    &cStats,
+    &bSaveFirmware,
+//    &cDisplayOrientation,
+//    &mgPred,
+//    &mgPost,
+//    &pSettings,
+//    &pSerialNumber,
+//    &bEraseData,
     PageName::Debug,
     &PageService::self, Item::Active, Page::Changed, Page::BeforeDraw, Page::HandlerKeyEvent
 )

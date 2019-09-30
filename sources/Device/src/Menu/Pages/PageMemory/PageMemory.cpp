@@ -138,9 +138,9 @@ DEF_PAGE_SB(        pManager,                                                   
 DEF_PAGE_3( pManager, // -V641                                                                                                                          //--- ПАМЯТЬ - ВНЕШН ЗУ - КАТАЛОГ ---
     "КАТАЛОГ",
     "Открывает доступ к файловой системе подключенного накопителя",
-    &bManager_Tab,        // ПАМЯТЬ - ВНЕШН ЗУ - КАТАЛОГ - Tab
-    &bManager_LevelUp,    // ПАМЯТЬ - ВНЕШН ЗУ - КАТАЛОГ - Выйти из каталога
-    &bManager_LevelDown,  // ПАМЯТЬ - ВНЕШН ЗУ - КАТАЛОГ - Войти в каталог
+    &bManager_Tab,
+    &bManager_LevelUp,
+    &bManager_LevelDown,
     PageName::Memory_Drive_Manager,
     &PageDrive::self, IsActive_Drive_Manager, PageMemory::OnOpenClose_Drive_Manager, Page::BeforeDraw, FileManager::HandlerKey
 )
@@ -421,9 +421,9 @@ DEF_PAGE_SB( pMask,                                                             
 DEF_PAGE_3( pMask, // -V641                                                                                                                               //--- Память - ВНЕШН ЗУ - МАСКА ---
     "МАСКА",
     "Режим ввода маски для автоматического именования файлов",
-    &bMask_Delete,    // ПАМЯТЬ - ВНЕШН ЗУ - МАСКА - Удалить
-    &bMask_Backspace, // ПАМЯТЬ - ВНЕШН ЗУ - МАСКА - Backspace
-    &bMask_Insert,    // ПАМЯТЬ - ВНЕШН ЗУ - МАСКА - Вставить
+    &bMask_Delete,
+    &bMask_Backspace,
+    &bMask_Insert,
     PageName::Memory_Drive_Mask,
     &PageDrive::self, IsActive_Mask, OnOpenClose_Mask, Page::BeforeDraw, HandlerKey_Mask
 )
@@ -443,14 +443,14 @@ DEF_CHOICE_2( cDrive_Autoconnect,                                               
 DEF_PAGE_6( pDrive,  //-V641 //-V1027                                                                                                                             //--- ПАМЯТЬ - ВНЕШН ЗУ ---
     "ВНЕШН ЗУ",
     "Работа с внешним запоминающим устройством.",
-    PageDrive::PageManager::self,   ///< ПАМЯТЬ - ВНЕШН ЗУ - КАТАЛОГ
-    &cDrive_Name,                   ///< ПАМЯТЬ - ВНЕШН ЗУ - Имя файла
-    PageDrive::PageMask::self,      ///< Память - ВНЕШН ЗУ - МАСКА
-    &cDrive_SaveAs,                 ///< ПАМЯТЬ - ВНЕШН ЗУ - Сохранять как
-    &cDrive_ModeBtnMemory,          ///< ПАМЯТЬ - ВНЕШН ЗУ - Реж кн ПАМЯТЬ
-    &cDrive_Autoconnect,            ///< ПАМЯТЬ - ВНЕШН ЗУ - Автоподключение
+    PageDrive::PageManager::self,
+    &cDrive_Name,
+    PageDrive::PageMask::self,
+    &cDrive_SaveAs,
+    &cDrive_ModeBtnMemory,
+    &cDrive_Autoconnect,
     PageName::Memory_Drive,
-    &PageMemory::self,               ///< ПАМЯТЬ
+    &PageMemory::self,
     Item::Active, Page::Changed, Page::BeforeDraw, Page::HandlerKeyEvent
 )
 
@@ -460,10 +460,10 @@ const Page * const PageDrive::self = (const Page *)&pDrive;
 DEF_PAGE_4( pMemory, // -V641 // -V1027                                                                                                                                      //--- ПЯМЯТЬ ---
     "ПАМЯТЬ",
     "Работа с внешней и внутренней памятью.",
-    &cPoints,               ///< ПАМЯТЬ - Точки
-    PageRAM::self,          ///< ПАМЯТЬ - ПОСЛЕДНИЕ
-    PageROM::self,          ///< ПАМЯТЬ - ВНУТР ЗУ
-    PageDrive::self,        ///< ПАМЯТЬ - ВНЕШН ЗУ
+    &cPoints,
+    PageRAM::self,
+    PageROM::self,
+    PageDrive::self,
     PageName::Memory, nullptr, Item::Active, Page::Changed, Page::BeforeDraw, Page::HandlerKeyEvent
 )
 

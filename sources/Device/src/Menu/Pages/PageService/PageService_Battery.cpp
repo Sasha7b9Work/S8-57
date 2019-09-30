@@ -17,7 +17,7 @@ DEF_CHOICE_2( cShow,                                                            
 DEF_PAGE_1( pBattery, // -V641 // -V1027                                                                                                                           //--- СЕРВИС - БАТАРЕЯ ---
     "БАТАРЕЯ",
     "Функции работы с аккумуляторами",
-    &cShow,                     ///< СЕРВИС - БАТАРЕЯ - Показывать
+    &cShow,
     PageName::Service_Battery, &PageService::self, Item::Active, Page::Changed, Page::BeforeDraw, Page::HandlerKeyEvent
 )
 

@@ -213,7 +213,7 @@ struct PageMeasuresCursors
         /// »зменить значение позиции курсора времени на delta точек
         static void SetShiftCursPosT(Chan::E ch, int numCur, float delta);
 
-        static bool OnArrows(const KeyEvent &event);
+        static bool HandlerKey(const KeyEvent &event);
 
         static void UpdateCursorsForLook();
         /// ”становить позицию курсора напр€жени€

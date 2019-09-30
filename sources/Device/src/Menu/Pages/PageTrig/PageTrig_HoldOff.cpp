@@ -41,8 +41,8 @@ DEF_GOVERNOR( gDuration,                                                        
 DEF_PAGE_2( pHoldOff, // -V641 // -V1027                                                                                                                          //--- —»Õ’– - ”ƒ≈–∆¿Õ»≈ ---
     "”ƒ≈–∆¿Õ»≈",
     "",
-    &cHoldOff,          ///< —»Õ’– - ”ƒ≈–∆¿Õ»≈ - ”‰ÂÊ‡ÌËÂ
-    &gDuration,         ///< —»Õ’– - ”ƒ≈–∆¿Õ»≈ - ƒÎËÚÂÎ¸ÌÓÒÚ¸
+    &cHoldOff,
+    &gDuration,
     PageName::Trig_HoldOff,
     &PageTrig::self, Item::Active, Page::Changed, Page::BeforeDraw, Page::HandlerKeyEvent
 )

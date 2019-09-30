@@ -115,8 +115,8 @@ static bool HandlerKey_RAM(const KeyEvent &)
 DEF_PAGE_2( pageRAM, // -V641 // -V1027                                                                                                                          //--- ѕјћя“№ - ѕќ—Ћ≈ƒЌ»≈ ---
     "ѕќ—Ћ≈ƒЌ»≈",
     "ѕереход в режим работы с последними полученными сигналами",
-    &bPrev,                        ///< ѕјћя“№ - ѕќ—Ћ≈ƒЌ»≈ - ѕредыдущий
-    &bNext,                        ///< ѕјћя“№ - ѕќ—Ћ≈ƒЌ»≈ - —ледующий
+    &bPrev,
+    &bNext,
     PageName::Memory_Last,
     &PageMemory::self, Item::Active, OnOpenClose_RAM, AfterDraw_RAM, HandlerKey_RAM
 )

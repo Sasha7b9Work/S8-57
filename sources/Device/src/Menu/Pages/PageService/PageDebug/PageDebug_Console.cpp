@@ -158,18 +158,18 @@ DEF_CHOICE_2( cTShift,                                                          
 DEF_PAGE_12( pRegisters, // -V641                                                                                                                      //--- Œ“À¿ƒ ¿ -  ŒÕ—ŒÀ‹ - –≈√»—“–€ ---
     "–≈√»—“–€",
     "",
-    &cShowAll,        ///< Œ“À¿ƒ ¿ -  ŒÕ—ŒÀ‹ - –≈√»—“–€ - œÓÍ‡Á˚‚‡Ú¸ ‚ÒÂ
-    &cRD_FL,          ///< Œ“À¿ƒ ¿ -  ŒÕ—ŒÀ‹ - –≈√»—“–€ - RD_FL
-    &cRShiftA,        ///< Œ“À¿ƒ ¿ -  ŒÕ—ŒÀ‹ - –≈√»—“–€ - U ÒÏ. 1Í
-    &cRShiftB,        ///< Œ“À¿ƒ ¿ -  ŒÕ—ŒÀ‹ - –≈√»—“–€ - U ÒÏ. 2Í
-    &cTrigLev,        ///< Œ“À¿ƒ ¿ -  ŒÕ—ŒÀ‹ - –≈√»—“–€ - U ÒËÌı
-    &cRangeA,         ///< Œ“À¿ƒ ¿ -  ŒÕ—ŒÀ‹ - –≈√»—“–€ - ¬ŒÀ‹“/ƒ≈À 1
-    &cRangeB,         ///< Œ“À¿ƒ ¿ -  ŒÕ—ŒÀ‹ - –≈√»—“–€ - ¬ŒÀ‹“/ƒ≈À 2
-    &cTrigParam,      ///< Œ“À¿ƒ ¿ -  ŒÕ—ŒÀ‹ - –≈√»—“–€ - œ‡‡Ï. ÒËÌı.
-    &cChanParamA,     ///< Œ“À¿ƒ ¿ -  ŒÕ—ŒÀ‹ - –≈√»—“–€ - œ‡‡Ï. Í‡Ì. 1
-    &cChanParamB,     ///< Œ“À¿ƒ ¿ -  ŒÕ—ŒÀ‹ - –≈√»—“–€ - œ‡‡Ï. Í‡Ì. 2
-    &cTBase,          ///< Œ“À¿ƒ ¿ -  ŒÕ—ŒÀ‹ - –≈√»—“–€ - ¬–≈Ãﬂ/ƒ≈À
-    &cTShift,         ///< Œ“À¿ƒ ¿ -  ŒÕ—ŒÀ‹ - –≈√»—“–€ - “ ÒÏ.
+    &cShowAll,
+    &cRD_FL,
+    &cRShiftA,
+    &cRShiftB,
+    &cTrigLev,
+    &cRangeA,
+    &cRangeB,
+    &cTrigParam,
+    &cChanParamA,
+    &cChanParamB,
+    &cTBase,
+    &cTShift,
     PageName::Debug_Console_Registers, &PageDebug::PageConsole::self, Item::Active, Page::Changed, Page::BeforeDraw, Page::HandlerKeyEvent
 )
 
@@ -191,12 +191,12 @@ const Page * const PageDebug::PageRegisters::self = (const Page *)&pRegisters;
 DEF_PAGE_2( pConsole, // -V641 // -V1027                                                                                                                          //--- Œ“À¿ƒ ¿ -  ŒÕ—ŒÀ‹ ---
     " ŒÕ—ŒÀ‹",
     "”Ô‡‚ÎˇÂÚ ÓÚÓ·‡ÊÂÌËÂÏ Ë Ô‡‡ÏÂÚ‡ÏË ÓÚÎ‡‰Ó˜ÌÓÈ ÍÓÌÒÓÎË",
-    &cShow,             ///< Œ“À¿ƒ ¿ -  ŒÕ—ŒÀ‹ - œÓÍ‡Á˚‚‡Ú¸
-    &gNumStrings,       ///< Œ“À¿ƒ ¿ -  ŒÕ—ŒÀ‹ - ◊ËÒÎÓ ÒÚÓÍ
-//    &cSizeFont,         ///< Œ“À¿ƒ ¿ -  ŒÕ—ŒÀ‹ - –‡ÁÏÂ ¯ËÙÚ‡
-//    &cModeStop,         ///< Œ“À¿ƒ ¿ -  ŒÕ—ŒÀ‹ - –ÂÊ. ÓÒÚ‡ÌÓ‚‡
-//    &pageRegisters,     ///< Œ“À¿ƒ ¿ -  ŒÕ—ŒÀ‹ - –≈√»—“–€
-//    &bSizeSettings,     ///< Œ“À¿ƒ ¿ -  ŒÕ—ŒÀ‹ - –‡ÁÏÂ Ì‡ÒÚÓÂÍ
+    &cShow,
+    &gNumStrings,
+//    &cSizeFont,
+//    &cModeStop,
+//    &pageRegisters,
+//    &bSizeSettings,
     PageName::Debug_Console, &PageDebug::self, Item::Active, Page::Changed, Page::BeforeDraw, Page::HandlerKeyEvent
 )
 
