@@ -122,8 +122,6 @@ static void DrawBatteryUGO(int x, int y, float percents)
 
 void Battery::Draw(int x, int y)
 {
-    Font::SetCurrent(Font::Type::_8);
-
     uint akkADC = 0;
     float akk = GetVoltageAKK(&akkADC);
 

@@ -68,7 +68,7 @@ void Osci::Display::PainterData::DrawData()
     }
 
     DrawTPos(0, 0);
-    
+
     DrawTShift(0, 0, 0);
 
     DrawSpectrum();
@@ -412,6 +412,7 @@ static void DrawTPos(int leftX, int rightX)
     int x[] = {leftX, (rightX - leftX) / 2 + leftX, rightX};
     int x0 = x[set.time.TPos];
     Region(6, 6).Fill(x0 - 3, 10, Color::BACK);
+
     Char(Symbol8::TPOS_1).Draw(x0 - 3, 10, Color::FILL);
 }
 
