@@ -17,7 +17,7 @@ DEF_CHOICE_2( cShow,                                                            
     "Включает/отключает курсоры.",
     "Нет",
     "Да",
-    set.curs.showCursors, &PageMeasuresCursors::self, Item::Active, Choice::Changed, Choice::AfterDraw
+    set.curs.showCursors, &PageCursorsMeasures::self, Item::Active, Choice::Changed, Choice::AfterDraw
 )
 
 
@@ -34,7 +34,7 @@ DEF_CHOICE_2( cShow,                                                            
 //    "Напряжение",
 //    "Время",
 //    "Напряж и время",
-//    CURS_LOOK_MODE(Chan::A), &PageMeasuresCursors::self, 0, 0, 0
+//    CURS_LOOK_MODE(Chan::A), &PageCursorsMeasures::self, 0, 0, 0
 //)
 
 
@@ -51,7 +51,7 @@ DEF_CHOICE_2( cShow,                                                            
 //    "Напряжение",
 //    "Время",
 //    "Напряж. и время",
-//    CURS_LOOK_MODE(Chan::B), &PageMeasuresCursors::self, 0, 0, 0
+//    CURS_LOOK_MODE(Chan::B), &PageCursorsMeasures::self, 0, 0, 0
 //)
 
 
@@ -68,7 +68,7 @@ DEF_CHOICE_2( cShowFreq,                                                        
     ,
     DISABLE_RU,
     ENABLE_RU,
-    set.curs.showFreq, &PageMeasuresCursors::self, IsActive_ShowFreq, Choice::Changed, Choice::AfterDraw
+    set.curs.showFreq, &PageCursorsMeasures::self, IsActive_ShowFreq, Choice::Changed, Choice::AfterDraw
 )
 
 
@@ -79,8 +79,8 @@ DEF_PAGE_3( pCursors, // -V641 // -V1027                                        
 //    &cLookModeChanA,
 //    &cLookModeChanB,
     &cShowFreq,
-    PageMeasuresCursors::PageSet::self,
+    PageCursorsMeasures::PageSet::self,
     PageName::CursorsMeasures, &PageMeasures::self, Item::Active, Page::Changed, Page::BeforeDraw, Page::HandlerKeyEvent
 )
 
-const Page * const PageMeasuresCursors::self = (const Page *)&pCursors;
+const Page * const PageCursorsMeasures::self = (const Page *)&pCursors;

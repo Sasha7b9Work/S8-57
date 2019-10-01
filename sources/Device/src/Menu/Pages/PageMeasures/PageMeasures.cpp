@@ -13,8 +13,8 @@ const Page * const PageMeasures::self = (const Page *)&pMeasures;
 DEF_PAGE_3( pMeasures, // -V1027                                                                                                                                          //--- ИЗМЕРЕНИЯ ---
     "ИЗМЕРЕНИЯ",
     "Доступ к настройкам измерений - курсорных и автоматических",
-    PageMeasuresCursors::self,
-    PageMeasuresAuto::self,
-    PageMeasuresMath::self,
+    PageCursorsMeasures::self,
+    PageAutoMeasures::self,
+    PageMath::self,
     PageName::Measures, nullptr, Item::Active, Page::Changed, Page::BeforeDraw, Page::HandlerKeyEvent
 )

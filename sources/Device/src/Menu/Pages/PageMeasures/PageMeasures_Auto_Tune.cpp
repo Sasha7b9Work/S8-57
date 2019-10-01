@@ -16,7 +16,7 @@ using namespace Osci::Measurements;
 
 extern const Page pTune;
 
-const Page * const PageMeasuresAuto::PageTune::self = (const Page *)&pTune;
+const Page * const PageAutoMeasures::PageTune::self = (const Page *)&pTune;
 
 
 
@@ -30,7 +30,7 @@ static void Draw_Markers(int x, int y)
 DEF_GRAPH_BUTTON( bMarkers,                                                                                                                          //--- ИЗМЕРЕНИЯ - НАСТРОИТЬ - Маркер ---
     "Маркер",
     "Позволяет установить маркеры для визуального контроля измерений",
-    &PageMeasuresAuto::PageTune::self, Item::Active, Measure::ShortPressOnSmallButonMarker, Draw_Markers
+    &PageAutoMeasures::PageTune::self, Item::Active, Measure::ShortPressOnSmallButonMarker, Draw_Markers
 )
 
 
@@ -46,7 +46,7 @@ static void Draw_Settings(int x, int y)
 DEF_GRAPH_BUTTON( bSettings,                                                                                                                      //--- ИЗМЕРЕНИЯ - НАСТРОИТЬ - Настройка ---
     "Настройка",
     "Позволяет выбрать необходимые измерения",
-    &PageMeasuresAuto::PageTune::self, Item::Active, Measurements::PageChoice::ChangeState, Draw_Settings
+    &PageAutoMeasures::PageTune::self, Item::Active, Measurements::PageChoice::ChangeState, Draw_Settings
 )
 
 
@@ -71,5 +71,5 @@ DEF_PAGE_2( pTune, // -V641 // -V1027
     "Переход в режим точной настройки количества и видов измерений",
     &bMarkers,
     &bSettings,
-    PageName::AutoMeasures_Tune, &PageMeasuresAuto::self, IsActive_Tune, Page::Changed, Page::BeforeDraw, HandlerKey_Tune
+    PageName::AutoMeasures_Tune, &PageAutoMeasures::self, IsActive_Tune, Page::Changed, Page::BeforeDraw, HandlerKey_Tune
 )

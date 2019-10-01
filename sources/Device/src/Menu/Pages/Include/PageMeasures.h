@@ -43,7 +43,7 @@ struct MeasuresModeViewSignals
 };
 
 
-struct SettingsMeasures
+struct SettingsAutoMeasures
 {
     bool                        show;              ///< Показывать ли измерения.
     MeasuresOnDisplay::E        number;            ///< Сколько измерений выводить.
@@ -104,7 +104,7 @@ struct CursorsMovement
     explicit CursorsMovement(E v) : value(v) {};
 };
 
-struct SettingsCursors
+struct SettingsCursorsMeasures
 {
     bool               showCursors;             ///< Показывать ли курсоры.
     CursorsLookMode::E lookMode[2];             ///< Режимы слежения за курсорами для двух пар курсоров.
@@ -172,7 +172,7 @@ struct PageMeasures
 
 
 
-struct PageMeasuresAuto
+struct PageAutoMeasures
 {
     static const Page * const self;
 
@@ -186,7 +186,7 @@ struct PageMeasuresAuto
 
 
 
-struct PageMeasuresCursors
+struct PageCursorsMeasures
 {
     static const Page * const self;
 
@@ -234,7 +234,7 @@ struct PageMeasuresCursors
 
 
 
-struct PageMeasuresMath
+struct PageMath
 {
     static const Page * const self;
 };

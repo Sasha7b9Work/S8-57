@@ -11,7 +11,7 @@ DEF_CHOICE_2( cIsShow,                                                          
     "Выводить или не выводить измерения на экран",
     "Нет",
     "Да",
-    set.meas.show, &PageMeasuresAuto::self, Item::Active, Choice::Changed, Choice::AfterDraw
+    set.meas.show, &PageAutoMeasures::self, Item::Active, Choice::Changed, Choice::AfterDraw
 )
 
 
@@ -39,7 +39,7 @@ DEF_CHOICE_7( cNumber,                                                          
     "3x5",
     "6x1",
     "6x2",
-    set.meas.number, &PageMeasuresAuto::self, IsActive_NumberChannels, Choice::Changed, Choice::AfterDraw
+    set.meas.number, &PageAutoMeasures::self, IsActive_NumberChannels, Choice::Changed, Choice::AfterDraw
 )
 
 
@@ -49,7 +49,7 @@ DEF_CHOICE_3( cChannels,                                                        
     "1",
     "2",
     "1 и 2",
-    set.meas.source, &PageMeasuresAuto::self, IsActive_NumberChannels, Choice::Changed, Choice::AfterDraw
+    set.meas.source, &PageAutoMeasures::self, IsActive_NumberChannels, Choice::Changed, Choice::AfterDraw
 )
 
 
@@ -59,12 +59,12 @@ DEF_PAGE_4( pAuto, // -V641 // -V1027                                           
     &cIsShow,
     &cNumber,
     &cChannels,
-    PageMeasuresAuto::PageTune::self,
+    PageAutoMeasures::PageTune::self,
     //&cMode,
     PageName::AutoMeasures, &PageMeasures::self, Item::Active, Page::Changed, Page::BeforeDraw, Page::HandlerKeyEvent
 )
 
-const Page * const PageMeasuresAuto::self = (const Page *)&pAuto;
+const Page * const PageAutoMeasures::self = (const Page *)&pAuto;
 
 
 

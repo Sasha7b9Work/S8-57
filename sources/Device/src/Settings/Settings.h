@@ -37,25 +37,25 @@ public:
     /// Настройки по умолчанию
     static const Settings defaultSettings;
 
-    uint                size;                               ///< Размер данной структуры в байтах
-    uint                crc32;                              ///< \brief Контрольная сумма данной структуры с хранящимися в ней настройками
+    uint                    size;           ///< Размер данной структуры в байтах
+    uint                    crc32;          ///< \brief Контрольная сумма данной структуры с хранящимися в ней настройками
 
-    SettingsDisplay     disp;
-    SettingsChannel     ch[Chan::Size];
-    SettingsTrig        trig;
-    SettingsTime        time;
-    SettingsCursors     curs;
-    SettingsMemory      mem;
-    SettingsMath        math;
-    SettingsFFT         fft;
-    SettingsMeasures    meas;
-    SettingsService     serv;
-    SettingsFreqMeter   freq;
-    SettingsTester      test;
-    SettingsMenu        menu;
-    SettingsMultimeter  mult;
-    SettingsRecorder    rec;
-    SettingsDebug       dbg;
+    SettingsDisplay         disp;
+    SettingsChannel         ch[Chan::Size];
+    SettingsTrig            trig;
+    SettingsTime            time;
+    SettingsCursorsMeasures curs;
+    SettingsMemory          mem;
+    SettingsMath            math;
+    SettingsFFT             fft;
+    SettingsAutoMeasures    meas;
+    SettingsService         serv;
+    SettingsFreqMeter       freq;
+    SettingsTester          test;
+    SettingsMenu            menu;
+    SettingsMultimeter      mult;
+    SettingsRecorder        rec;
+    SettingsDebug           dbg;
 };
 #pragma pack(pop)
 

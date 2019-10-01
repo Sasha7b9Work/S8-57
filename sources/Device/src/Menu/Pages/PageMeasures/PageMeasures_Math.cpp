@@ -61,7 +61,7 @@ static void Draw_Screen(int x, int y)
 DEF_GRAPH_BUTTON_HINTS_3( bScreen,                                                                                                                         //--- СЕРВИС - ФУНКЦИЯ - Экран ---
     "Экран",
     "Выбирает режим отображения математического сигнала",
-    &PageMeasuresMath::self, Item::Active, OnPress_Screen, Draw_Screen,
+    &PageMath::self, Item::Active, OnPress_Screen, Draw_Screen,
     Draw_Screen_Disable, "Вывод математической функции отключён",
     Draw_Screen_Separate, "Сигналы и математическая функция выводятся в разных окнах",
     Draw_Screen_Together, "Сигналы и математическая функция выводятся в одном окне"
@@ -102,7 +102,7 @@ static bool IsActive_Type()
 DEF_GRAPH_BUTTON_HINTS_2( bType,                                                                                                                             //--- СЕРВИС - ФУНКЦИЯ - Вид ---
     "Вид",
     "Выбор математической функции",
-    &PageMeasuresMath::self, IsActive_Type, OnPress_Type, Draw_Type,
+    &PageMath::self, IsActive_Type, OnPress_Type, Draw_Type,
     Draw_Type_Sum, "Сложение",
     Draw_Type_Mul, "Умножение"
 )
@@ -139,7 +139,7 @@ static bool IsActive_ModeArrows()
 DEF_GRAPH_BUTTON_HINTS_2( bModeArrows,                                                                                                     //--- СЕРВИС - ФУНКЦИЯ - Режим ручки УСТАНОВКА ---
     "Режим ручки УСТАНОВКА",
     "Выбор режима ручки УСТАНОВКА - управление масштабом или смещением",
-    &PageMeasuresMath::self, IsActive_ModeArrows, OnPress_ModeArrows, Draw_ModeArrows,
+    &PageMath::self, IsActive_ModeArrows, OnPress_ModeArrows, Draw_ModeArrows,
     Draw_ModeArrows_Range, "Управление масштабом",
     Draw_ModeArrows_RShift, "Управление смещением"
 )
@@ -164,7 +164,7 @@ static bool IsActive_RangeA()
 DEF_GRAPH_BUTTON( bRangeA,                                                                                                                   //--- СЕРВИС - ФУНКЦИЯ - Масштаб 1-го канала ---
     "Масштаб 1-го канала",
     "Использует масштаб первого канала для отображения результата",
-    &PageMeasuresMath::self, IsActive_RangeA, OnPress_RangeA, Draw_RangeA
+    &PageMath::self, IsActive_RangeA, OnPress_RangeA, Draw_RangeA
 )
 
 
@@ -187,7 +187,7 @@ static bool IsActive_RangeB()
 DEF_GRAPH_BUTTON( bRangeB,                                                                                                                   //--- СЕРВИС - ФУНКЦИЯ - Масштаб 2-го канала ---
     "Масштаб 2-го канала",
     "Использует масштаб второго канала для отображения результата",
-    &PageMeasuresMath::self, IsActive_RangeB, OnPress_RangeB, Draw_RangeB
+    &PageMath::self, IsActive_RangeB, OnPress_RangeB, Draw_RangeB
 )
 
 
@@ -295,4 +295,4 @@ DEF_PAGE_5( pMath, // -V641                                                     
     PageName::Math, &PageMeasures::self, IsActive_Math, OnOpenClose_Math, Page::BeforeDraw, HandlerKey_Function
 )
 
-const Page * const PageMeasuresMath::self = (const Page *)&pMath;
+const Page * const PageMath::self = (const Page *)&pMath;
