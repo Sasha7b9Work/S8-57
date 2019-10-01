@@ -147,14 +147,5 @@ DEF_PAGE_2( pRand, // -V641 // -V1027                                           
     "",
     &gGateMin,
     &gGateMax,
-
-    //&gRand_NumAverage,
-    //&gRand_NumSmooth,
-    //&gRand_NumMeasures,
-    //&cRand_ShowInfo,
-    //&gRand_ShowStat,
-    //&gRand_TimeCompensation,
-    //&gRand_AddTimeShift,
-    //&gRand_Pretriggered,
-    PageName::Debug_Rand, &PageDebug::self, Item::Active, Page::Changed, Page::BeforeDraw, Page::HandlerKeyEvent
+    PageName::Debug_Rand, &PageDebug::self, Item::Active, Page::OpenClose, Page::BeforeDraw, Page::HandlerKeyEvent
 )

@@ -170,22 +170,10 @@ DEF_PAGE_12( pRegisters, // -V641                                               
     &cChanParamB,
     &cTBase,
     &cTShift,
-    PageName::Debug_Console_Registers, &PageDebug::PageConsole::self, Item::Active, Page::Changed, Page::BeforeDraw, Page::HandlerKeyEvent
+    PageName::Debug_Console_Registers, &PageDebug::PageConsole::self, Item::Active, Page::OpenClose, Page::BeforeDraw, Page::HandlerKeyEvent
 )
 
 const Page * const PageDebug::PageRegisters::self = (const Page *)&pRegisters;
-
-
-//static void Draw_Console_SizeSettings(int x, int y)
-//{
-//    String("Разм.настр. %d", sizeof(Settings)).Draw(x + 6, y + 13, Color::BACK);
-//}
-//
-//_DEF_BUTTON( bSizeSettings,                                                                                                                      //--- ОТЛАДКА - КОНСОЛЬ - Размер настроек ---
-//    "",
-//    "Показывает текущий размер структуры для сохранения настроек",
-//    &PageDebug::PageConsole::self, 0, 0, Draw_Console_SizeSettings
-//)
 
 
 DEF_PAGE_2( pConsole, // -V641 // -V1027                                                                                                                          //--- ОТЛАДКА - КОНСОЛЬ ---
@@ -193,11 +181,7 @@ DEF_PAGE_2( pConsole, // -V641 // -V1027                                        
     "Управляет отображением и параметрами отладочной консоли",
     &cShow,
     &gNumStrings,
-//    &cSizeFont,
-//    &cModeStop,
-//    &pageRegisters,
-//    &bSizeSettings,
-    PageName::Debug_Console, &PageDebug::self, Item::Active, Page::Changed, Page::BeforeDraw, Page::HandlerKeyEvent
+    PageName::Debug_Console, &PageDebug::self, Item::Active, Page::OpenClose, Page::BeforeDraw, Page::HandlerKeyEvent
 )
 
 const Page * const PageDebug::PageConsole::self = (const Page *)&pConsole;

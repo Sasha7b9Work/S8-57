@@ -16,5 +16,5 @@ DEF_PAGE_3( pMeasures, // -V1027                                                
     PageCursorsMeasures::self,
     PageAutoMeasures::self,
     PageMath::self,
-    PageName::Measures, nullptr, Item::Active, Page::Changed, Page::BeforeDraw, Page::HandlerKeyEvent
+    PageName::Measures, nullptr, Item::Active, Page::OpenClose, Page::BeforeDraw, Page::HandlerKeyEvent
 )

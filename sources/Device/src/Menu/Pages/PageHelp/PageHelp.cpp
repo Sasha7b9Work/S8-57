@@ -75,40 +75,11 @@ DEF_GRAPH_BUTTON( bPrev,                                                        
 )
 
 
-DEF_GRAPH_BUTTON( bNext,                                                                                                                    //--- ѕќћќў№ - —ледующий раздел ---
+DEF_GRAPH_BUTTON( bNext,                                                                                                                                  //--- ѕќћќў№ - —ледующий раздел ---
     "—ледующий раздел",
     "¬ыбрать следующий раздел справки",
     &PageHelp::self, Item::Active, HelpContent::NextParagraph, Draw_Next
 )
-
-/*
-static void PressSB_Help_Exit()
-{
-
-}
-*/
-
-
-/*
-DEF_GRAPH_BUTTON_EXIT(  sbExitHelp,                                                                                                                                  //--- ѕќћќў№ - ¬ыход ---
-    pHelp, 0, PressSB_Help_Exit, DrawSB_Help_ParagraphNext
-)
-*/
-
-/*
-DEF_PAGE_SB(        pHelp,                                                                                                                                                   //--- ѕќћќў№ ---
-    "ѕќћќў№", "HELP",
-    "ќткрыть разделы помощи",
-    "To open sections of the help",
-    &sbExitHelp,
-    &bEnter,
-    &bLeave,
-    0,
-    &bPrev,
-    &bNext,
-    Page::Name::SB_Help, Menu::pageMain, 0, 0, HelpContent_Draw, HandlerKey_Help
-)
-*/
 
 DEF_PAGE_4( pHelp, // -V641 // -V1027                                                                                                                                        //--- ѕќћќў№ ---
     "ѕќћќў№",
@@ -117,5 +88,5 @@ DEF_PAGE_4( pHelp, // -V641 // -V1027                                           
     &bLeave,
     &bPrev,
     &bNext,
-    PageName::Help, nullptr, Item::Active, Page::Changed, HelpContent::Draw, HandlerKey_Help
+    PageName::Help, nullptr, Item::Active, Page::OpenClose, HelpContent::Draw, HandlerKey_Help
 )

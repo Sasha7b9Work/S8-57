@@ -44,7 +44,7 @@ DEF_PAGE_2( pHoldOff, // -V641 // -V1027                                        
     &cHoldOff,
     &gDuration,
     PageName::Trig_HoldOff,
-    &PageTrig::self, Item::Active, Page::Changed, Page::BeforeDraw, Page::HandlerKeyEvent
+    &PageTrig::self, Item::Active, Page::OpenClose, Page::BeforeDraw, Page::HandlerKeyEvent
 )
 
 const Page * const PageTrig::PageHoldOff::self = (const Page *)&pHoldOff;

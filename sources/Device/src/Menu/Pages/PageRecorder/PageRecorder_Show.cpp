@@ -79,11 +79,12 @@ static bool HandlerKey_PageShow(const KeyEvent &event)
     return false;
 }
 
-DEF_PAGE_1( pShow, // -V641 // -V1027                                                                                                              //--- ÔÓÍÊÖÈß - ĞÅÃÈÑÒĞÀÒÎĞ - ÏĞÎÑÌÎÒĞ ---
+DEF_PAGE_2( pShow, // -V641 // -V1027                                                                                                              //--- ÔÓÍÊÖÈß - ĞÅÃÈÑÒĞÀÒÎĞ - ÏĞÎÑÌÎÒĞ ---
     "ÏĞÎÑÌÎÒĞ",
     "Ïğîñìîòğ çàïèñàííûõ äàííûõ",
     &cSource,
-    PageName::Recorder_Show, &PageRecorder::self, IsActive_PageShow, Page::Changed, Page::BeforeDraw, HandlerKey_PageShow
+    PageRecorder::PageShow::PageChoice::self,
+    PageName::Recorder_Show, &PageRecorder::self, IsActive_PageShow, Page::OpenClose, Page::BeforeDraw, HandlerKey_PageShow
 )
 
 const Page * const PageRecorder::PageShow::self = (const Page *)&pShow;

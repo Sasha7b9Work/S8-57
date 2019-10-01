@@ -121,7 +121,7 @@ DEF_PAGE_6( pChanA, // -V641 // -V1027                                          
     &cDividerA,
     &bBalanceA,
     &cInverseA,
-    PageName::ChannelA, nullptr, Item::Active, Page::Changed, Page::BeforeDraw, Page::HandlerKeyEvent
+    PageName::ChannelA, nullptr, Item::Active, Page::OpenClose, Page::BeforeDraw, Page::HandlerKeyEvent
 )
 
 const Page * const PageChannelA::self = (const Page *)&pChanA;
@@ -213,7 +213,7 @@ DEF_PAGE_6( pChanB, // -V641 // -V1027                                          
     &cDividerB,
     &bBalanceB,
     &cInverseB,
-    PageName::ChannelB, nullptr, Item::Active, Page::Changed, Page::BeforeDraw, Page::HandlerKeyEvent
+    PageName::ChannelB, nullptr, Item::Active, Page::OpenClose, Page::BeforeDraw, Page::HandlerKeyEvent
 )
 
 const Page * const PageChannelB::self = (const Page *)&pChanB;

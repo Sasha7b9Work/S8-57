@@ -65,7 +65,7 @@ DEF_PAGE_3( pAccum, // -V641 // -V1027                                          
     &cEnable,
     &cNumber,
     &bClear,
-    PageName::Display_Accumulation, &PageDisplay::self, IsActive_Accum, Page::Changed, Page::BeforeDraw, Page::HandlerKeyEvent
+    PageName::Display_Accumulation, &PageDisplay::self, IsActive_Accum, Page::OpenClose, Page::BeforeDraw, Page::HandlerKeyEvent
 )
 
 const Page * const PageDisplay::PageAccumulation::self = (const Page *)&pAccum;

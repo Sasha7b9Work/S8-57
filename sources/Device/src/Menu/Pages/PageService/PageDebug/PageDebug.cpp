@@ -97,7 +97,7 @@ DEF_PAGE_3( pBalance, // -V641 // -V1027                                        
     &gShiftA,
     &gShiftB,
     PageName::Debug_ADC_Balance,
-    &PageDebug::PageADC::self, Item::Active, Page::Changed, Page::BeforeDraw, Page::HandlerKeyEvent
+    &PageDebug::PageADC::self, Item::Active, Page::OpenClose, Page::BeforeDraw, Page::HandlerKeyEvent
 )
 
 const Page * const PageDebug::PageADC::PageBalance::self = (const Page *)&pBalance;
@@ -160,73 +160,6 @@ DEF_GOVERNOR( gStretch_B,                                                       
     &PageDebug::PageADC::PageStretch::self, IsActive_StretchAB, OnChanged_Stretch_B
 )
 
-/*
-
-_DEF_GOVERNOR(       gADC_Stretch_Ak20mV,                                                               //--- Œ“À¿ƒ ¿ - ¿÷œ - –¿—“ﬂ∆ ¿ - 20Ï¬/1¬ 1Í ---
-    "20Ï¬/1¬ 1Í", "20mV/1V 1k",
-    "",
-    "",
-    NRST_ADD_STRETCH_20mV_A, -10000, 10000, pStretch, 0, 0, FuncBeforeDraw
-)
-
-
-_DEF_GOVERNOR(       gADC_Stretch_Ak50mV,                                                                  //--- Œ“À¿ƒ ¿ - ¿÷œ - –¿—“ﬂ∆ ¿ - 50Ï¬ 1Í ---
-    "50Ï¬ 1Í", "50mV 1k",
-    "",
-    "",
-    NRST_ADD_STRETCH_50mV_A, -10000, 10000, pStretch, 0, 0, FuncBeforeDraw
-)
-
-
-_DEF_GOVERNOR(       gADC_Stretch_Ak100mV,                                                             //--- Œ“À¿ƒ ¿ - ¿÷œ - –¿—“ﬂ∆ ¿ - 100Ï¬/5¬ 1Í ---
-    "100Ï¬/5¬ 1Í", "100mV/5V 1ch",
-    "",
-    "",
-    NRST_ADD_STRETCH_100mV_A, -10000, 10000, pStretch, 0, 0, FuncBeforeDraw
-)
-
-
-_DEF_GOVERNOR(       gADC_Stretch_Ak2V,                                                                      //--- Œ“À¿ƒ ¿ - ¿÷œ - –¿—“ﬂ∆ ¿ - 2¬ 1Í ---
-    "2¬ 1Í", "2V 1ch",
-    "",
-    "",
-    NRST_ADD_STRETCH_2V_A, -10000, 10000, pStretch, 0, 0, FuncBeforeDraw
-)
-
-
-_DEF_GOVERNOR(       gADC_Stretch_Bk20mV,                                                               //--- Œ“À¿ƒ ¿ - ¿÷œ - –¿—“ﬂ∆ ¿ - 20Ï¬/1¬ 2Í ---
-    "20Ï¬/1¬ 2Í", "20mV/1V 2k",
-    "",
-    "",
-    NRST_ADD_STRETCH_20mV_B, -10000, 10000, pStretch, 0, 0, FuncBeforeDraw
-)
-
-
-_DEF_GOVERNOR(       gADC_Stretch_Bk50mV,                                                         //--- Œ“À¿ƒ ¿ - ¿÷œ - –¿—“ﬂ∆ ¿ - ƒÓÔ ÒÏÂ˘ 50Ï¬ 2Í ---
-    "50Ï¬ 2Í", "50mV 2k",
-    "",
-    "",
-    NRST_ADD_STRETCH_50mV_B, -10000, 10000, pStretch, 0, 0, FuncBeforeDraw
-)
-
-
-_DEF_GOVERNOR(       gADC_Stretch_Bk100mV,                                                             //--- Œ“À¿ƒ ¿ - ¿÷œ - –¿—“ﬂ∆ ¿ - 100Ï¬/5¬ 2Í ---
-    "100Ï¬/5¬ 2Í", "100mV/5V 2k",
-    "",
-    "",
-    NRST_ADD_STRETCH_100mV_B, -10000, 10000, pStretch, 0, 0, FuncBeforeDraw
-)
-
-
-_DEF_GOVERNOR(       gADC_Stretch_Bk2V,                                                                      //--- Œ“À¿ƒ ¿ - ¿÷œ - –¿—“ﬂ∆ ¿ - 2¬ 2Í ---
-    "2¬ 2Í", "2V 2ch",
-    "",
-    "",
-    NRST_ADD_STRETCH_2V_B, -10000, 10000, pStretch, 0, 0, FuncBeforeDraw
-)
-*/
-
-
 //static const ChoiceBase emptyChoice = {Item::Type::Choice, 0, false, Page::Name::NoPage, 0, 0, {}, 0, 0, 0, 0};
 
 DEF_PAGE_3( pStretch, // -V641 // -V1027                                                                                                                   //--- Œ“À¿ƒ ¿ - ¿÷œ - –¿—“ﬂ∆ ¿ ---
@@ -236,7 +169,7 @@ DEF_PAGE_3( pStretch, // -V641 // -V1027                                        
     &gStretch_A,
     &gStretch_B,
     PageName::Debug_ADC_Stretch,
-    &PageDebug::PageADC::self, Item::Active, Page::Changed, Page::BeforeDraw, Page::HandlerKeyEvent
+    &PageDebug::PageADC::self, Item::Active, Page::OpenClose, Page::BeforeDraw, Page::HandlerKeyEvent
 )
 
 const Page * const PageDebug::PageADC::PageStretch::self = (const Page *)&pStretch;
@@ -332,7 +265,7 @@ DEF_PAGE_7( pShift, // -V641  // -V1027                                         
     &gShift_A10mV,
     &gShift_B10mV,
     PageName::Debug_ADC_Shift,
-    &PageDebug::PageADC::self, Item::Active, Page::Changed, Page::BeforeDraw, Page::HandlerKeyEvent
+    &PageDebug::PageADC::self, Item::Active, Page::OpenClose, Page::BeforeDraw, Page::HandlerKeyEvent
 )
 
 const Page * const PageDebug::PageADC::PageShift::self = (const Page *)&pShift;
@@ -345,7 +278,7 @@ DEF_PAGE_3( pADC, //-V641 //-V1027
     &pStretch,
     PageDebug::PageADC::PageShift::self,
     PageName::Debug_ADC,
-    &PageDebug::self, Item::Active, Page::Changed, Page::BeforeDraw, Page::HandlerKeyEvent
+    &PageDebug::self, Item::Active, Page::OpenClose, Page::BeforeDraw, Page::HandlerKeyEvent
 )
 
 const Page * const PageDebug::PageADC::self = (const Page *)&pADC;
@@ -426,13 +359,6 @@ static void DebugShowSetInfo_Draw()
     y += dY;
 
 #define DRAW_STRETCH(name) DRAW_FORMAT2(#name " : %d %d", set.nrst_##name[0], set.nrst_##name[1])
-
-    /*
-    DRAW_STRETCH(AddStretch20mV);
-    DRAW_STRETCH(AddStretch50mV);
-    DRAW_STRETCH(AddStretch100mV);
-    DRAW_STRETCH(AddStretch2V);
-    */
 
     DRAW_FORMAT("numSmoothForRand : %d", set.dbg.nrst.numSmoothForRand); //-V2528
 
@@ -565,20 +491,6 @@ DEF_PAGE_2( pSerialNumber, // -V641 // -V1027                                   
 const Page * const PageDebug::PageSerialNumber::self = (const Page *)&pSerialNumber;
 
 
-//static void OnPress_EraseData()
-//{
-//    Display::FuncOnWaitStart("”‰‡Îˇ˛ ÒÓı‡Ì∏ÌÌ˚Â ‰‡ÌÌ˚Â", false);
-//    ::Memory::DeleteAllData();
-//    Display::FuncOnWaitStop();
-//}
-
-//_DEF_BUTTON( bEraseData,                                                                                                                                    //--- Œ“À¿ƒ ¿ - —ÚÂÂÚ¸ ‰‡ÌÌ˚Â ---
-//    "—ÚÂÂÚ¸ ‰‡ÌÌÂ",
-//    "—ÚË‡ÂÚ ÒÓı‡Ì∏ÌÌ˚Â ‰‡ÌÌ˚Â ËÁ œœ«”",
-//    &PageDebug::self, 0, OnPress_EraseData, 0
-//)
-
-
 DEF_PAGE_5( pDebug, // -V641 // -V1027                                                                                                                                   //--- Œ“À¿ƒ ¿ ---
     "Œ“À¿ƒ ¿",
     "",
@@ -587,14 +499,8 @@ DEF_PAGE_5( pDebug, // -V641 // -V1027                                          
     PageDebug::PageRand::self,
     &cStats,
     &bSaveFirmware,
-//    &cDisplayOrientation,
-//    &mgPred,
-//    &mgPost,
-//    &pSettings,
-//    &pSerialNumber,
-//    &bEraseData,
     PageName::Debug,
-    &PageService::self, Item::Active, Page::Changed, Page::BeforeDraw, Page::HandlerKeyEvent
+    &PageService::self, Item::Active, Page::OpenClose, Page::BeforeDraw, Page::HandlerKeyEvent
 )
 
 const Page * const PageDebug::self = (const Page *)&pDebug;
@@ -611,21 +517,11 @@ float GetStretchADC(Chan::E ch)
         {0, 0},
         {0, 0},
         {0, 0},
-        /*
-        {&NRST_ADD_STRETCH_20mV_A, &NRST_ADD_STRETCH_20mV_B},   // 20mV
-        {&NRST_ADD_STRETCH_50mV_A, &NRST_ADD_STRETCH_50mV_B},   // 50mV
-        {&NRST_ADD_STRETCH_100mV_A, &NRST_ADD_STRETCH_100mV_B}, // 100mV
-        */
         {0, 0}, // 200mV
         {0, 0}, // 500mV
         {0, 0},
         {0, 0},
         {0, 0}
-        /*
-        {&NRST_ADD_STRETCH_20mV_A, &NRST_ADD_STRETCH_20mV_B},   // 1V
-        {&NRST_ADD_STRETCH_2V_A, &NRST_ADD_STRETCH_2V_B},       // 2V
-        {&NRST_ADD_STRETCH_100mV_A, &NRST_ADD_STRETCH_100mV_B}  // 5V
-        */
     };
 
     const int16 *address = addStretch[set.ch[ch].range][ch];

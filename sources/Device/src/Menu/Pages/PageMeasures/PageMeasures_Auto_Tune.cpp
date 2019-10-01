@@ -71,5 +71,5 @@ DEF_PAGE_2( pTune, // -V641 // -V1027
     "Переход в режим точной настройки количества и видов измерений",
     &bMarkers,
     &bSettings,
-    PageName::AutoMeasures_Tune, &PageAutoMeasures::self, IsActive_Tune, Page::Changed, Page::BeforeDraw, HandlerKey_Tune
+    PageName::AutoMeasures_Tune, &PageAutoMeasures::self, IsActive_Tune, Page::OpenClose, Page::BeforeDraw, HandlerKey_Tune
 )

@@ -383,7 +383,7 @@ DEF_PAGE_5( pSet, // -V641 // -V1027                                            
     &bT,
     &b100,
     &bMovement,
-    PageName::CursorsMeasures_Set, &PageCursorsMeasures::self, IsActive_Set, Page::Changed, Page::BeforeDraw, PageCursorsMeasures::PageSet::HandlerKey
+    PageName::CursorsMeasures_Set, &PageCursorsMeasures::self, IsActive_Set, Page::OpenClose, Page::BeforeDraw, PageCursorsMeasures::PageSet::HandlerKey
 )
 
 const Page * const PageCursorsMeasures::PageSet::self = (const Page *)&pSet;

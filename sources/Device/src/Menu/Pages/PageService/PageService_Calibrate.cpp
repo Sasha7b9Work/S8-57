@@ -22,7 +22,6 @@ DEF_CHOICE_2( cCalibrator, // -V206                                             
 
 static bool IsActive_Calibrate()
 {
-    //return !(SET_CALIBR_MODE_A == CalibrationMode::Disable && CALIBR_MODE_B == CalibrationMode::Disable);
     return true;
 }
 
@@ -53,7 +52,7 @@ DEF_PAGE_2( pCalibrate, // -V641 // -V1027                                      
     "”правлением калибратором и калибровка осциллографа",
     &cCalibrator,
     &bCalibrate,
-    PageName::Service_Calibrator, &PageService::self, Item::Active, Page::Changed, Page::BeforeDraw, Page::HandlerKeyEvent
+    PageName::Service_Calibrator, &PageService::self, Item::Active, Page::OpenClose, Page::BeforeDraw, Page::HandlerKeyEvent
 )
 
 const Page * const PageService::PageCalibrate::self = (const Page *)&pCalibrate;

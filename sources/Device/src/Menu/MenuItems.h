@@ -180,7 +180,7 @@ public:
 
     static void BeforeDraw() {}
 
-    static void Changed(bool) {}
+    static void OpenClose(bool) {}
 
     static bool HandlerKeyEvent(const KeyEvent &) { return false; }
 };

@@ -18,9 +18,6 @@ using namespace Display::Primitives;
 
 extern const Page pRAM;
 
-const Page * const PageRAM::self = (const Page *)&pRAM;
-
-
 
 static void OnPress_Next()
 {
@@ -92,23 +89,6 @@ static void AfterDraw_RAM()
 
 static bool HandlerKey_RAM(const KeyEvent &)
 {
-    /*
-    Key::E key = event.key;
-
-    if (DataStorage::NumElementsInStorage() > 1)
-    {
-        Beeper::RegulatorSwitchRotate();
-    }
-    if (key == Key::Up || key == Key::Right)
-    {
-        OnPress_Last_Next();
-    }
-    else
-    {
-        OnPress_Last_Prev();
-    }
-    */
-
     return false;
 }
 
@@ -120,3 +100,5 @@ DEF_PAGE_2( pRAM, // -V641 // -V1027                                            
     PageName::Memory_Last,
     &PageMemory::self, Item::Active, OnOpenClose_RAM, AfterDraw_RAM, HandlerKey_RAM
 )
+
+const Page *const PageRAM::self = (const Page *)&pRAM;

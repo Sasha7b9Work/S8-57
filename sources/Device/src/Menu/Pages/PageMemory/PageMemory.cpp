@@ -120,21 +120,6 @@ void PageMemory::OnOpenClose_Drive_Manager(bool)
     }
 }
 
-/*
-DEF_PAGE_SB(        pManager,                                                                               // ПАМЯТЬ - ВНЕШН ЗУ - КАТАЛОГ ///
-    "КАТАЛОГ", "DIRECTORY",
-    "Открывает доступ к файловой системе подключенного накопителя",
-    "Provides access to the file system of the connected drive",
-    &bDrive_Manager_Exit,       // ПАМЯТЬ - ВНЕШН ЗУ - КАТАЛОГ - Выход
-    &bManager_Tab,        // ПАМЯТЬ - ВНЕШН ЗУ - КАТАЛОГ - Tab
-    0,
-    0,
-    &bManager_LevelUp,    // ПАМЯТЬ - ВНЕШН ЗУ - КАТАЛОГ - Выйти из каталога
-    &bManager_LevelDown,  // ПАМЯТЬ - ВНЕШН ЗУ - КАТАЛОГ - Войти в каталог
-    Page::Name::SB_Memory_Drive_Manager, &pDrive, IsActive_Drive_Manager, PageMemory::OnOpenClose_Drive_Manager, FuncDrawPage, FileManager::RotateRegSet
-)
-*/
-
 DEF_PAGE_3( pManager, // -V641                                                                                                                          //--- ПАМЯТЬ - ВНЕШН ЗУ - КАТАЛОГ ---
     "КАТАЛОГ",
     "Открывает доступ к файловой системе подключенного накопителя",
@@ -451,7 +436,7 @@ DEF_PAGE_6( pDrive,  //-V641 //-V1027                                           
     &cDrive_Autoconnect,
     PageName::Memory_Drive,
     &PageMemory::self,
-    Item::Active, Page::Changed, Page::BeforeDraw, Page::HandlerKeyEvent
+    Item::Active, Page::OpenClose, Page::BeforeDraw, Page::HandlerKeyEvent
 )
 
 const Page * const PageDrive::self = (const Page *)&pDrive;
@@ -464,7 +449,7 @@ DEF_PAGE_4( pMemory, // -V641 // -V1027                                         
     PageRAM::self,
     PageROM::self,
     PageDrive::self,
-    PageName::Memory, nullptr, Item::Active, Page::Changed, Page::BeforeDraw, Page::HandlerKeyEvent
+    PageName::Memory, nullptr, Item::Active, Page::OpenClose, Page::BeforeDraw, Page::HandlerKeyEvent
 )
 
 const Page * const PageMemory::self = (const Page *)&pMemory;
@@ -664,7 +649,7 @@ DEF_PAGE_4( pSetName, // -V641                                                  
     &bSetName_Backspace,
     &bSetName_Insert,
     &bSetName_Save,
-    PageName::Memory_SetName, nullptr, Item::Active, Page::Changed, Page::BeforeDraw, HandlerKey_SetName
+    PageName::Memory_SetName, nullptr, Item::Active, Page::OpenClose, Page::BeforeDraw, HandlerKey_SetName
 )
 
 const Page * const PageSetName::self = (const Page *)&pSetName;

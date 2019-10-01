@@ -90,29 +90,18 @@ DEF_CHOICE_2( cViewMode,                                                        
 )
 
 
-//_DEF_PAGE_1( pViewSignal, //-V641
-//    "ОТОБРАЖ",
-//    "Настройки отображения сигналов",
-//    &cViewMode,
-//    PageName::Display_View, &PageDisplay::self, Item::Active, E_VB, E_VV, E_BfKE
-//)
-
-
 DEF_PAGE_8( pDisplay, // -V641 // -V1027                                                                                                                                    //--- ДИСПЛЕЙ ---
     "ДИСПЛЕЙ",
     "Содержит настройки отображения дисплея.",
     &cViewMode,
     PageDisplay::PageAccumulation::self,
     &cAverage_Num,
-    //PageDisplay::PageAverage::self,
     &cSmoothing,
     &cType,
     &cRefreshFPS,
-    //PageDisplay::PageGrid::self,
     &cScaleYtype,
     PageDisplay::PageSettings::self,
-//    &cThickness,
-    PageName::Display, nullptr, Item::Active, Page::Changed, Page::BeforeDraw, Page::HandlerKeyEvent
+    PageName::Display, nullptr, Item::Active, Page::OpenClose, Page::BeforeDraw, Page::HandlerKeyEvent
 )
 
 const Page * const PageDisplay::self = (const Page *)&pDisplay;

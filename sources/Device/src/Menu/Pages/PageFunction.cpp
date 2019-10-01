@@ -16,7 +16,7 @@ DEF_PAGE_5( pFunction,                                                          
     PageMultimeter::self,
     PageTester::self,
     PageRecorder::self,
-    PageName::Function, nullptr, Item::Active, Page::Changed, Page::BeforeDraw, Page::HandlerKeyEvent
+    PageName::Function, nullptr, Item::Active, Page::OpenClose, Page::BeforeDraw, Page::HandlerKeyEvent
 )
 
 const Page * const PageFunction::self = (const Page *)&pFunction;

@@ -1316,6 +1316,11 @@
               <FilePath>.\src\Menu\Pages\PageRecorder\PageRecorder_Show.cpp</FilePath>
             </File>
             <File>
+              <FileName>PageRecorder_Show_Choice.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Menu\Pages\PageRecorder\PageRecorder_Show_Choice.cpp</FilePath>
+            </File>
+            <File>
               <FileName>PageRecorder_Source.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Menu\Pages\PageRecorder\PageRecorder_Source.cpp</FilePath>

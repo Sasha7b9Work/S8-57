@@ -69,7 +69,7 @@ DEF_PAGE_7( pService, // -V641 // -V1027                                        
     PageRTC::self,
     PageService::PageInformation::self,
     PageDebug::self,
-    PageName::Service, nullptr, Item::Active, Page::Changed, Page::BeforeDraw, Page::HandlerKeyEvent
+    PageName::Service, nullptr, Item::Active, Page::OpenClose, Page::BeforeDraw, Page::HandlerKeyEvent
 )
 
 const Page * const PageService::self = (const Page *)&pService;

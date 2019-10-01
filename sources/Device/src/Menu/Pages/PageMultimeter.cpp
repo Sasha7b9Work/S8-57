@@ -252,7 +252,7 @@ DEF_PAGE_2( pCalibration, //-V641 //-V1027
     "Калибровка мультиметра",
     &bCalibrate0,
     &bCalibrate1,
-    PageName::Multimeter_Cal, &PageMultimeter::self, Item::Active, Choice::Changed, Page::BeforeDraw, Page::HandlerKeyEvent
+    PageName::Multimeter_Cal, &PageMultimeter::self, Item::Active, Page::OpenClose, Page::BeforeDraw, Page::HandlerKeyEvent
 )
 
 const Page * const PageMultimeter::PageCalibration::self = (const Page *)&pCalibration;

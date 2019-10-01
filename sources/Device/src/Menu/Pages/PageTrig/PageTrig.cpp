@@ -112,7 +112,7 @@ DEF_PAGE_6( pTrig, // -V641 // -V1027                                           
     &cFiltr,
     PageTrig::PageHoldOff::self,
     PageTrig::PageFind::self,
-    PageName::Trig, nullptr, Item::Active, Page::Changed, Page::BeforeDraw, Page::HandlerKeyEvent
+    PageName::Trig, nullptr, Item::Active, Page::OpenClose, Page::BeforeDraw, Page::HandlerKeyEvent
 )
 
 const Page * const PageTrig::self = (const Page *)&pTrig;

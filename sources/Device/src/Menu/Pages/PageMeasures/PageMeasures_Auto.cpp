@@ -60,26 +60,7 @@ DEF_PAGE_4( pAuto, // -V641 // -V1027                                           
     &cNumber,
     &cChannels,
     PageAutoMeasures::PageTune::self,
-    //&cMode,
-    PageName::AutoMeasures, &PageMeasures::self, Item::Active, Page::Changed, Page::BeforeDraw, Page::HandlerKeyEvent
+    PageName::AutoMeasures, &PageMeasures::self, Item::Active, Page::OpenClose, Page::BeforeDraw, Page::HandlerKeyEvent
 )
 
 const Page * const PageAutoMeasures::self = (const Page *)&pAuto;
-
-
-
-/*
-static bool IsActive_Mode()
-{
-    return SHOW_MEASURES;
-}
-
-_DEF_CHOICE_2( cMode,                                                                                                                                      //--- ИЗМЕРЕНИЯ - АВТОМАТ - Вид ---
-    "Вид", "View",
-    "Уменьшать или нет зону вывода сигнала для исключения перекрытия его результами измерений",
-    "Decrease or no zone output signal to avoid overlapping of its measurement results",
-    "Как есть",  "As is",
-    "Уменьшать", "Reduce",
-    MODE_VIEW_SIGNALS, pAuto, IsActive_Mode, 0, FuncDraw
-)
-*/
