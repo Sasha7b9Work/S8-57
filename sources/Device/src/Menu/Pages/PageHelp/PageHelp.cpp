@@ -18,33 +18,25 @@ const Page * const PageHelp::self = (const Page *)&pHelp;
 
 static void Draw_Enter(int x, int y)
 {
-    Font::SetCurrent(Font::Type::_UGO2);
-    Char('\x4a').Draw4SymbolsInRect(x + 2, y + 2);
-    Font::SetCurrent(Font::Type::_8);
+    Char(SymbolUGO2::ENTER).Draw4SymbolsInRect(x + 2, y + 2);
 }
 
 
 static void Draw_Leave(int x, int y)
 {
-    Font::SetCurrent(Font::Type::_UGO2);
-    Char('\x48').Draw4SymbolsInRect(x + 2, y + 1);
-    Font::SetCurrent(Font::Type::_8);
+    Char(SymbolUGO2::LEAVE).Draw4SymbolsInRect(x + 2, y + 1);
 }
 
 
 static void Draw_Prev(int x, int y)
 {
-    Font::SetCurrent(Font::Type::_UGO2);
-    Char('\x4c').Draw4SymbolsInRect(x + 2, y + 5);
-    Font::SetCurrent(Font::Type::_8);
+    Char(SymbolUGO2::TRIANGLE_UP).Draw4SymbolsInRect(x + 2, y + 5);
 }
 
 
 static void Draw_Next(int x, int y)
 {
-    Font::SetCurrent(Font::Type::_UGO2);
-    Char('\x4e').Draw4SymbolsInRect(x + 2, y + 5);
-    Font::SetCurrent(Font::Type::_8);
+    Char(SymbolUGO2::TRIANGLE_DOWN).Draw4SymbolsInRect(x + 2, y + 5);
 }
 
 

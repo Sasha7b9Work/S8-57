@@ -89,7 +89,6 @@ void Osci::Measurements::PageChoice::Draw()
     int maxRow = ((set.meas.number == MeasuresOnDisplay::_6_1) || (set.meas.number == MeasuresOnDisplay::_6_2)) ? 8 : 5;
     int maxCol = ((set.meas.number == MeasuresOnDisplay::_6_1) || (set.meas.number == MeasuresOnDisplay::_6_2)) ? 3 : 5;
     Measure::Type::E meas = Measure::Type::None;
-    Font::SetCurrent(Font::Type::_UGO);
 
     for (int row = 0; row < maxRow; row++)
     {
@@ -108,10 +107,9 @@ void Osci::Measurements::PageChoice::Draw()
 
             Color(active ? Color::FLASH_01 : Color::FILL).SetAsCurrent();
 
-            Char(Measure::GetChar(meas)).Draw10SymbolsInRect(x0 + 2, y0 + 1);
+            Char((SymbolUGO::E)Measure::GetChar(meas)).Draw10SymbolsInRect(x0 + 2, y0 + 1);
             Font::SetCurrent(Font::Type::_5);
             Text(Measure::GetName(meas)).DrawRelativelyRight(x0 + dX, y0 + 12, active ? Color::FLASH_01 : Color::FILL);
-            Font::SetCurrent(Font::Type::_UGO);
             meas = (Measure::Type::E)((int)meas + 1);    // meas++;
         }
     }

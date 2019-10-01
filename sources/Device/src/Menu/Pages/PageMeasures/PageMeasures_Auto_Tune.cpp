@@ -22,9 +22,7 @@ const Page * const PageAutoMeasures::PageTune::self = (const Page *)&pTune;
 
 static void Draw_Markers(int x, int y)
 {
-    Font::SetCurrent(Font::Type::_UGO2);
-    Char('\x60').Draw4SymbolsInRect(x + 2, y + 2);
-    Font::SetCurrent(Font::Type::_8);
+    Char(SymbolUGO2::BIG_M).Draw4SymbolsInRect(x + 2, y + 2);
 }
 
 DEF_GRAPH_BUTTON( bMarkers,                                                                                                                          //--- »«Ã≈–≈Õ»ﬂ - Õ¿—“–Œ»“‹ - Ã‡ÍÂ ---
@@ -36,11 +34,7 @@ DEF_GRAPH_BUTTON( bMarkers,                                                     
 
 static void Draw_Settings(int x, int y)
 {
-    Font::SetCurrent(Font::Type::_UGO2);
-
-    Char('\x62').Draw4SymbolsInRect(x + 2, y + 1);
-
-    Font::SetCurrent(Font::Type::_8);
+    Char(SymbolUGO2::SETTINGS).Draw4SymbolsInRect(x + 2, y + 1);
 }
 
 DEF_GRAPH_BUTTON( bSettings,                                                                                                                      //--- »«Ã≈–≈Õ»ﬂ - Õ¿—“–Œ»“‹ - Õ‡ÒÚÓÈÍ‡ ---

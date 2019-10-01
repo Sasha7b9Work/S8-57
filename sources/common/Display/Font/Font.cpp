@@ -13,7 +13,7 @@ using namespace Transceiver;
 
 
 
-const Font *fonts[Font::Type::Size] = {&font5, &font8, &fontUGO, &fontUGO2, nullptr};
+const Font *fonts[Font::Type::Count] = {&font5, &font8, &fontUGO, &fontUGO2, nullptr};
 const Font *font = &font8;
 
 const BigFont *bigFont = &fontDigits64;
@@ -58,6 +58,18 @@ int Font::GetLengthSymbol(char symbol)
     return font->symbols[symbol].width + 1;
 }
 
+static void SendTypeFontToPanel(Font::Type::E type)
+{
+#ifndef PANEL
+    static Font::Type::E prevType = Font::Type::Count;
+
+    if (prevType != type)
+    {
+        Transmitter::Send(Command::Paint_SetFont, (uint8)type);
+        prevType = type;
+    }
+#endif
+}
 
 void Font::SetCurrent(Font::Type::E typeFont)
 {
@@ -81,13 +93,11 @@ void Font::SetCurrent(Font::Type::E typeFont)
             bigFont = &fontDigits64;
             break;
         case Type::None:
-        case Type::Size:
+        case Type::Count:
             break;
         }
 
-#ifndef PANEL
-        Transmitter::Send(Command::Paint_SetFont, (uint8)typeFont);
-#endif
+        SendTypeFontToPanel(typeFont);
 
         pushedFont = currentFont;
         currentFont = typeFont;

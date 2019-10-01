@@ -50,7 +50,7 @@ struct Font
             _UGO,
             _UGO2,
             _Big64,
-            Size,
+            Count,
             None
         } value;
     };

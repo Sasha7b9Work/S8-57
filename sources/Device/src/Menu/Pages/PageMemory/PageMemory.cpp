@@ -73,9 +73,7 @@ DEF_GRAPH_BUTTON( bManager_Tab,                                                 
 
 static void Draw_Manager_LevelUp(int x, int y)
 {
-    Font::SetCurrent(Font::Type::_UGO2);
-    Char('\x48').Draw4SymbolsInRect(x + 2, y + 1);
-    Font::SetCurrent(Font::Type::_8);
+    Char(SymbolUGO2::LEAVE).Draw4SymbolsInRect(x + 2, y + 1);
 }
 
 DEF_GRAPH_BUTTON( bManager_LevelUp,                                                                                                 //--- ПАМЯТЬ - ВНЕШН ЗУ - КАТАЛОГ - Выйти из каталога ---
@@ -87,9 +85,7 @@ DEF_GRAPH_BUTTON( bManager_LevelUp,                                             
 
 static void Draw_Manager_LevelDown(int x, int y)
 {
-    Font::SetCurrent(Font::Type::_UGO2);
-    Char('\x4a').Draw4SymbolsInRect(x + 2, y + 2);
-    Font::SetCurrent(Font::Type::_8);
+    Char(SymbolUGO2::ENTER).Draw4SymbolsInRect(x + 2, y + 2);
 }
 
 DEF_GRAPH_BUTTON( bManager_LevelDown,                                                                                                 //--- ПАМЯТЬ - ВНЕШН ЗУ - КАТАЛОГ - Войти в каталог ---

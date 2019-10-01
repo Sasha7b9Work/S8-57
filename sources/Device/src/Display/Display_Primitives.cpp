@@ -57,6 +57,18 @@ Display::Primitives::Line::Line(int _x0, int _y0, int _x1, int _y1) : x0(_x0), y
 }
 
 
+Display::Primitives::Char::Char(Symbol5::E _ch) : ch((char)_ch), font(Font::Type::_5)
+{
+
+}
+
+
+Display::Primitives::Char::Char(SymbolUGO::E _ch) : ch((char)_ch), font(Font::Type::_UGO)
+{
+
+}
+
+
 Display::Primitives::Char::Char(SymbolUGO2::E _ch) : ch((char)_ch), font(Font::Type::_UGO2)
 {
 
@@ -64,6 +76,7 @@ Display::Primitives::Char::Char(SymbolUGO2::E _ch) : ch((char)_ch), font(Font::T
 
 Display::Primitives::Char::Char(char _ch) : ch(_ch), font(Font::Type::_8)
 {
+
 }
 
 
@@ -103,8 +116,8 @@ void Display::Primitives::Char::Draw10SymbolsInRect(int x, int y)
 
     for (char i = 0; i < 5; i++)
     {
-        Char(ch + i).Draw(x + 8 * i, y);
-        Char(ch + i + 16).Draw(x + 8 * i, y + 8);
+        String("%c", ch + i).Draw(x + 8 * i, y);
+        String("%c", ch + i + 16).Draw(x + 8 * i, y + 8);
     }
 
     Font::Pop();
