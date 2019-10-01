@@ -80,19 +80,19 @@ void Osci::Display::DrawCursorTrigLevel()
 
     if (y > Grid::ChannelBottom())
     {
-        Char(SYMBOL_TRIG_LEV_LOWER).Draw(x + 3, Grid::ChannelBottom() - 11);
+        Char(Symbol8::TRIG_LEV_LOWER).Draw(x + 3, Grid::ChannelBottom() - 11);
         Point().Draw(x + 5, Grid::ChannelBottom() - 2);
         y = Grid::ChannelBottom() - 7;
         x--;
     }
     else if (y < Grid::Top())
     {
-        Char(SYMBOL_TRIG_LEV_ABOVE).Draw(x + 3, Grid::Top() + 2);
+        Char(Symbol8::TRIG_LEV_ABOVE).Draw(x + 3, Grid::Top() + 2);
         Point().Draw(x + 5, Grid::Top() + 2);
     }
     else
     {
-        Char(SYMBOL_TRIG_LEV_NORMAL).Draw(x + 1, y - 4);
+        Char(Symbol8::TRIG_LEV_NORMAL).Draw(x + 1, y - 4);
     }
 
     Font::SetCurrent(Font::Type::_5);

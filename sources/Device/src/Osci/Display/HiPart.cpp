@@ -380,7 +380,7 @@ static void DrawRightPart(int x0, int y0)
 
         if (FPGA::IsRunning())       // Рабочий режим
         {
-            Char(SYMBOL_PLAY).Draw4SymbolsInRect(x, 1);
+            Char(Symbol8::PLAY).Draw4SymbolsInRect(x, 1);
         }
         else if (FPGA_IN_STATE_STOP)  // Режим остановки
         {

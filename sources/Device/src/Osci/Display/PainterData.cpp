@@ -412,7 +412,7 @@ static void DrawTPos(int leftX, int rightX)
     int x[] = {leftX, (rightX - leftX) / 2 + leftX, rightX};
     int x0 = x[set.time.TPos];
     Region(6, 6).Fill(x0 - 3, 10, Color::BACK);
-    Char(SYMBOL_TPOS_1).Draw(x0 - 3, 10, Color::FILL);
+    Char(Symbol8::TPOS_1).Draw(x0 - 3, 10, Color::FILL);
 }
 
 

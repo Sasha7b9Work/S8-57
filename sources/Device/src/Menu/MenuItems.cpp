@@ -684,10 +684,10 @@ char Governor::GetSymbol() const
 {
     static const char chars[] =
     {
-        SYMBOL_GOVERNOR_SHIFT_0,
-        SYMBOL_GOVERNOR_SHIFT_1,
-        SYMBOL_GOVERNOR_SHIFT_2,
-        SYMBOL_GOVERNOR_SHIFT_3
+        Symbol8::GOVERNOR_SHIFT_0,
+        Symbol8::GOVERNOR_SHIFT_1,
+        Symbol8::GOVERNOR_SHIFT_2,
+        Symbol8::GOVERNOR_SHIFT_3
     };
     int value = GetValue();
     while (value < 0)

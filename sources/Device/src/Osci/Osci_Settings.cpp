@@ -403,7 +403,7 @@ void RShift::Draw(Chan::E ch)
 
     Math::Limitation(&y, Grid::Top(), Grid::ChannelBottom());
 
-    Char((char)SYMBOL_RSHIFT_NORMAL).Draw(Grid::Left() - 8, y - 4);
+    Char((char)Symbol8::RSHIFT_NORMAL).Draw(Grid::Left() - 8, y - 4);
 
     Font::SetCurrent(Font::Type::_5);
 

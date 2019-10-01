@@ -170,7 +170,7 @@ void Governor::DrawLowPart(int x, int y) const
             Char(GetSymbol()).Draw4SymbolsInRect(x + Width() - 12, y - 1, Color::BACK);
         }
     
-        x = Char(SYMBOL_GOVERNOR_LEFT).Draw(x + 4, y, colorTextDown);
+        x = Char(Symbol8::GOVERNOR_LEFT).Draw(x + 4, y, colorTextDown);
         
         int delta = (int)Step();
         if (delta == 0)
@@ -197,7 +197,7 @@ void Governor::DrawLowPart(int x, int y) const
             }
         }
         
-        Char(SYMBOL_GOVERNOR_RIGHT).Draw(x + 1, y, colorTextDown);
+        Char(Symbol8::GOVERNOR_RIGHT).Draw(x + 1, y, colorTextDown);
     }
     else
     {
