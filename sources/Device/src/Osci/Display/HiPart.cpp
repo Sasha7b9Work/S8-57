@@ -479,8 +479,8 @@ static void DrawPeakDet(int x, int y)
     if (set.time.peakDet == PeakDetMode::Enabled)
     {
         Font::SetCurrent(Font::Type::_UGO2);
-        Char(SYMBOL_PEAK_DET_LEFT).Draw(x, y, Color::FILL);
-        Char(SYMBOL_PEAK_DET_RIGHT).Draw(x + 8, y);
+        Char(SymbolUGO2::PEAK_DET_LEFT).Draw(x, y, Color::FILL);
+        Char(SymbolUGO2::PEAK_DET_RIGHT).Draw(x + 8, y);
         Font::SetCurrent(Font::Type::_8);
     }
 }

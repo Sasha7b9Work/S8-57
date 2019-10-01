@@ -1,18 +1,7 @@
 #pragma once
 
 
-
-
-/** @addtogroup Painter
- *  @{
- *  @defgroup Symbols
- *  @brief Используемые УГО
- *  @{
- */
-
-
  // Font::Type::_5
-
 #define SYMBOL_COUPLE_AC        '\x91'
 #define SYMBOL_COUPLE_DC        '\x92'
 #define SYMBOL_COUPLE_GND       '\x90'
@@ -43,27 +32,29 @@
 #define SYMBOL_GOVERNOR_RIGHT   '\x81'
 
 
-// Font::Type::_UGO2
-#define SYMBOL_PEAK_DET_LEFT    '\x12'  ///< Левая часть значка пикового детектора
-#define SYMBOL_PEAK_DET_RIGHT   '\x13'  ///< Правая часть значка пикового детектора
-#define SYMBOL_ARROW_LEFT       '\x20'
-#define SYMBOL_DELETE           '\x22'  ///< ВНЕШН ЗУ-МАСКА-УДАЛИТЬ
-#define SYMBOL_INSERT           '\x26'  ///< ВНЕШН ЗУ-ИМЯ-ВСТАВИТЬ
-#define SYMBOL_SAVE_TO_MEM      '\x2c'
-#define SYMBOL_ROM              '\x40'  ///< Микросхемка
-#define SYMBOL_FLASH_DRIVE_BIG  '\x42'  ///< Символ флешки
-#define SYMBOL_FOLDER           '\x46'  ///< Каталог
-#define SYMBOL_TRIANGLE_UP      '\x4c'  ///< Стрелка треугольником вверх
-#define SYMBOL_TRIANGLE_DOWN    '\x4e'  ///< Стрекла треугольником вниз
-#define SYMBOL_FLASH_DRIVE      '\x80'  ///< Символ флешки внизу экрана
-#define SYMBOL_ETHERNET         '\x82'  ///< Символ Ethernet внизу экрана
-#define SYMBOL_USB              '\x84'  ///< Символ USB внизу экрана
-#define SYMBOL_ARROW_RIGHT      '\x64'
-#define SYMBOL_TAB              '\x6e'
-#define SYMBOL_MATH_FUNC_MUL    '\x8a'  ///< МАТЕМАТИКА-ФУНКЦИЯ-УМНОЖЕНИЕ
-#define SYMBOL_TRIANGLE_LEFT    '\x8c'  ///< Стрелка треугольником влево
-#define SYMBOL_TRIANGLE_RIGHT   '\x8e'  ///< Стрелка треугольником вправо
-#define SYMBOL_SELECT           '\xa0'  ///< Символ выбора
-
-/** @}  @}
- */
+struct SymbolUGO2
+{
+    enum E
+    {
+        PEAK_DET_LEFT   = '\x12',  ///< Левая часть значка пикового детектора
+        PEAK_DET_RIGHT  = '\x13',  ///< Правая часть значка пикового детектора
+        ARROW_LEFT      = '\x20',
+        DELETE          = '\x22',  ///< ВНЕШН ЗУ-МАСКА-УДАЛИТЬ
+        INSERT          = '\x26',  ///< ВНЕШН ЗУ-ИМЯ-ВСТАВИТЬ
+        SAVE_TO_MEM     = '\x2c',
+        ROM             = '\x40',  ///< Микросхемка
+        FLASH_DRIVE_BIG = '\x42',  ///< Символ флешки
+        FOLDER          = '\x46',  ///< Каталог
+        TRIANGLE_UP     = '\x4c',  ///< Стрелка треугольником вверх
+        TRIANGLE_DOWN   = '\x4e',  ///< Стрекла треугольником вниз
+        ARROW_RIGHT     = '\x64',
+        TAB             = '\x6e',
+        FLASH_DRIVE     = '\x80',  ///< Символ флешки внизу экрана
+        ETHERNET        = '\x82',  ///< Символ Ethernet внизу экрана
+        USB             = '\x84',  ///< Символ USB внизу экрана
+        MATH_FUNC_MUL   = '\x8a',  ///< МАТЕМАТИКА-ФУНКЦИЯ-УМНОЖЕНИЕ
+        TRIANGLE_LEFT   = '\x8c',  ///< Стрелка треугольником влево
+        TRIANGLE_RIGHT  = '\x8e',  ///< Стрелка треугольником вправо
+        SELECT          = '\xa0'   ///< Символ выбора
+    };
+};

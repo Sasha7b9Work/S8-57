@@ -62,7 +62,7 @@ DEF_CHOICE_5( cPoints,                                                          
 static void Draw_Manager_Tab(int x, int y)
 {
     Font::SetCurrent(Font::Type::_UGO2);
-    Char(SYMBOL_TAB).Draw4SymbolsInRect(x + 2, y + 1);
+    Char(SymbolUGO2::TAB).Draw4SymbolsInRect(x + 2, y + 1);
     Font::SetCurrent(Font::Type::_8);
 }
 
@@ -154,7 +154,7 @@ static void OnPress_Mask_Delete()
 static void Draw_Delete(int x, int y)
 {
     Font::SetCurrent(Font::Type::_UGO2);
-    Char(SYMBOL_DELETE).Draw4SymbolsInRect(x + 2, y + 1);
+    Char(SymbolUGO2::DELETE).Draw4SymbolsInRect(x + 2, y + 1);
     Font::SetCurrent(Font::Type::_8);
 }
 
@@ -184,7 +184,7 @@ static void OnPress_Mask_Backspace()
 static void Draw_Backspace(int x, int y)
 {
     Font::SetCurrent(Font::Type::_UGO2);
-    Char(SYMBOL_ARROW_LEFT).Draw(x + 2, y + 1);
+    Char(SymbolUGO2::ARROW_LEFT).Draw(x + 2, y + 1);
     Font::SetCurrent(Font::Type::_8);
 }
 
@@ -234,7 +234,7 @@ static void OnPress_Mask_Insert()
 static void Draw_Insert(int x, int y)
 {
     Font::SetCurrent(Font::Type::_UGO2);
-    Char(SYMBOL_INSERT).Draw4SymbolsInRect(x + 2, y + 2);
+    Char(SymbolUGO2::INSERT).Draw4SymbolsInRect(x + 2, y + 2);
     Font::SetCurrent(Font::Type::_8);
 }
 
@@ -602,7 +602,7 @@ static void Draw_SetName_Save(int x, int y)
     if (FDrive::IsConnected())
     {
         Font::SetCurrent(Font::Type::_UGO2);
-        Char(SYMBOL_FLASH_DRIVE_BIG).Draw4SymbolsInRect(x + 2, y + 1);
+        Char(SymbolUGO2::FLASH_DRIVE_BIG).Draw4SymbolsInRect(x + 2, y + 1);
         Font::SetCurrent(Font::Type::_8);
     }
 }

@@ -28,7 +28,7 @@ void Osci::Display::BottomPart::Draw(int x0, int y0)
 
     if (CONNECTED_TO_USB || CABLE_USB_IS_CONNECTED)
     {
-        Char(SYMBOL_USB).Draw4SymbolsInRect(x0 + 72, y0 + 2, CONNECTED_TO_USB ? Color::WHITE : Color::FLASH_01);
+        Char(SymbolUGO2::USB).Draw4SymbolsInRect(x0 + 72, y0 + 2, CONNECTED_TO_USB ? Color::WHITE : Color::FLASH_01);
     }
 
     Color::FILL.SetAsCurrent();

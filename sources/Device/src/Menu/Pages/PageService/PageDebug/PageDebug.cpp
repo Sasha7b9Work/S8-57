@@ -434,9 +434,7 @@ static void OnPress_SerialNumber_Change()
 static void Draw_SerialNumber_Change(int x, int y)
 {
     Font::SetCurrent(Font::Type::_UGO2);
-
-    Char(SYMBOL_TAB).Draw4SymbolsInRect(x + 2, y + 2);
-
+    Char(SymbolUGO2::TAB).Draw4SymbolsInRect(x + 2, y + 2);
     Font::SetCurrent(Font::Type::_8);
 }
 
@@ -454,7 +452,7 @@ static void OnPress_SerialNumber_Save()
 static void Draw_SerialNumber_Save(int x, int y)
 {
     Font::SetCurrent(Font::Type::_UGO2);
-    Char(SYMBOL_SAVE_TO_MEM).Draw4SymbolsInRect(x + 2, y + 1);
+    Char(SymbolUGO2::SAVE_TO_MEM).Draw4SymbolsInRect(x + 2, y + 1);
     Font::SetCurrent(Font::Type::_8);
 }
 

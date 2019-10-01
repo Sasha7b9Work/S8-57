@@ -1,6 +1,11 @@
 #include "defines.h"
 #include "Menu/Pages/Include/PageRecorder.h"
+#include "Display/Font/Font.h"
+#include "Display/Symbols.h"
+#include "Display/Display_Primitives.h"
 
+
+using namespace Display::Primitives;
 
 extern const Page pChoice;
 
@@ -9,9 +14,11 @@ static void OnPress_Up()
 {
 }
 
-static void Draw_Up(int, int)
+static void Draw_Up(int x, int y)
 {
-
+    Font::SetCurrent(Font::Type::_UGO2);
+    Char(SymbolUGO2::TRIANGLE_UP).Draw4SymbolsInRect(x + 2, y + 4);
+    Font::SetCurrent(Font::Type::_8);
 }
 
 static bool IsActive_Up()
@@ -31,9 +38,11 @@ static void OnPress_Down()
 
 }
 
-static void Draw_Down(int, int)
+static void Draw_Down(int x, int y)
 {
-
+    Font::SetCurrent(Font::Type::_UGO2);
+    Char(SymbolUGO2::TRIANGLE_DOWN).Draw4SymbolsInRect(x + 2, y + 4);
+    Font::SetCurrent(Font::Type::_8);
 }
 
 static bool IsActive_Down()
