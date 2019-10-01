@@ -292,7 +292,7 @@ DEF_PAGE_5( pMath, // -V641                                                     
     &bModeArrows,
     &bRangeA,
     &bRangeB,
-    PageName::Measures_Math, &PageMeasures::self, IsActive_Math, OnOpenClose_Math, Page::BeforeDraw, HandlerKey_Function
+    PageName::Math, &PageMeasures::self, IsActive_Math, OnOpenClose_Math, Page::BeforeDraw, HandlerKey_Function
 )
 
 const Page * const PageMeasuresMath::self = (const Page *)&pMath;

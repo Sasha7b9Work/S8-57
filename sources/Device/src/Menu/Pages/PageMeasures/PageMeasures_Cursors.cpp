@@ -80,7 +80,7 @@ DEF_PAGE_3( pCursors, // -V641 // -V1027                                        
 //    &cLookModeChanB,
     &cShowFreq,
     PageMeasuresCursors::PageSet::self,
-    PageName::Measures_Cursors, &PageMeasures::self, Item::Active, Page::Changed, Page::BeforeDraw, Page::HandlerKeyEvent
+    PageName::CursorsMeasures, &PageMeasures::self, Item::Active, Page::Changed, Page::BeforeDraw, Page::HandlerKeyEvent
 )
 
 const Page * const PageMeasuresCursors::self = (const Page *)&pCursors;

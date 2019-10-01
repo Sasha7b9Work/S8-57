@@ -83,7 +83,7 @@ DEF_PAGE_1( pShow, // -V641 // -V1027                                           
     "ПРОСМОТР",
     "Просмотр записанных данных",
     &cSource,
-    PageName::Function_Recorder_Show, &PageRecorder::self, IsActive_PageShow, Page::Changed, Page::BeforeDraw, HandlerKey_PageShow
+    PageName::Recorder_Show, &PageRecorder::self, IsActive_PageShow, Page::Changed, Page::BeforeDraw, HandlerKey_PageShow
 )
 
 const Page * const PageRecorder::PageShow::self = (const Page *)&pShow;

@@ -383,7 +383,7 @@ DEF_PAGE_5( pSet, // -V641 // -V1027                                            
     &bT,
     &b100,
     &bMovement,
-    PageName::Measures_Cursors_Set, &PageMeasuresCursors::self, IsActive_Set, Page::Changed, Page::BeforeDraw, PageMeasuresCursors::PageSet::HandlerKey
+    PageName::CursorsMeasures_Set, &PageMeasuresCursors::self, IsActive_Set, Page::Changed, Page::BeforeDraw, PageMeasuresCursors::PageSet::HandlerKey
 )
 
 const Page * const PageMeasuresCursors::PageSet::self = (const Page *)&pSet;
@@ -478,7 +478,7 @@ void PageMeasuresCursors::PageSet::SetCursorT(Chan::E ch, int numCur, float pos)
 
 bool PageMeasuresCursors::PageSet::IsRegSetActiveOnCursors()
 {
-    return ((Menu::GetNameOpenedPage() == PageName::Measures_Cursors_Set) &&
+    return ((Menu::GetNameOpenedPage() == PageName::CursorsMeasures_Set) &&
         (((set.curs.active == CursorsActive::U) && (set.curs.cntrlU[set.curs.source] == CursorsControl::Disable)) ||
         ((set.curs.active == CursorsActive::T) && (set.curs.cntrlT[set.curs.source] == CursorsControl::Disable))));
 }

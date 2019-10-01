@@ -44,7 +44,7 @@ DEF_PAGE_3( pSource, // -V641 // -V1027                                         
     &cChanA,
     &cChanB,
     &cSensor,
-    PageName::Function_Recorder_Source, &PageRecorder::self, IsActive_Source, Page::Changed, Page::BeforeDraw, Page::HandlerKeyEvent
+    PageName::Recorder_Source, &PageRecorder::self, IsActive_Source, Page::Changed, Page::BeforeDraw, Page::HandlerKeyEvent
 )
 
 const Page * const PageRecorder::PageSource::self = (const Page *)&pSource;
