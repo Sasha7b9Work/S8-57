@@ -110,8 +110,10 @@ void Display::Primitives::Char::Draw4SymbolsInRect(int x, int y, Color color)
 }
 
 
-void Display::Primitives::Char::Draw10SymbolsInRect(int x, int y)
+void Display::Primitives::Char::Draw10SymbolsInRect(int x, int y, Color color)
 {
+    color.SetAsCurrent();
+
     Font::SetCurrent(font);
 
     for (char i = 0; i < 5; i++)

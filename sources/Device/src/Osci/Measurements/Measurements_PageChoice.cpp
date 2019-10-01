@@ -94,23 +94,18 @@ void Osci::Measurements::PageChoice::Draw()
     {
         for (int col = 0; col < maxCol; col++)
         {
-            if (meas >= Measure::Type::Number)
+            if (meas < Measure::Type::Number)
             {
-                break;
+                int x0 = x + col * dX;
+                int y0 = y + row * dY;
+                bool active = (meas == posCursor);
+                Rectangle(dX, dY).Draw(x0, y0, Color::WHITE);
+                Region(dX - 2, dY - 2).Fill(x0 + 1, y0 + 1, (active ? Color::FLASH_10 : Color::BACK));
+                Char((SymbolUGO::E)Measure::GetChar(meas)).Draw10SymbolsInRect(x0 + 2, y0 + 1, active ? Color::FLASH_01 : Color::FILL);
+                Font::SetCurrent(Font::Type::_5);
+                Text(Measure::GetName(meas)).DrawRelativelyRight(x0 + dX, y0 + 12);
+                meas = (Measure::Type::E)((int)meas + 1);    // meas++;
             }
-
-            int x0 = x + col * dX;
-            int y0 = y + row * dY;
-            bool active = (meas == posCursor);
-            Rectangle(dX, dY).Draw(x0, y0, Color::WHITE);
-            Region(dX - 2, dY - 2).Fill(x0 + 1, y0 + 1, (active ? Color::FLASH_10 : Color::BACK));
-
-            Color(active ? Color::FLASH_01 : Color::FILL).SetAsCurrent();
-
-            Char((SymbolUGO::E)Measure::GetChar(meas)).Draw10SymbolsInRect(x0 + 2, y0 + 1);
-            Font::SetCurrent(Font::Type::_5);
-            Text(Measure::GetName(meas)).DrawRelativelyRight(x0 + dX, y0 + 12, active ? Color::FLASH_01 : Color::FILL);
-            meas = (Measure::Type::E)((int)meas + 1);    // meas++;
         }
     }
 
