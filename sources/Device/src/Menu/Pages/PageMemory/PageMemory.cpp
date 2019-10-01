@@ -61,9 +61,7 @@ DEF_CHOICE_5( cPoints,                                                          
 
 static void Draw_Manager_Tab(int x, int y)
 {
-    Font::SetCurrent(Font::Type::_UGO2);
     Char(SymbolUGO2::TAB).Draw4SymbolsInRect(x + 2, y + 1);
-    Font::SetCurrent(Font::Type::_8);
 }
 
 DEF_GRAPH_BUTTON( bManager_Tab,                                                                                                                   //--- œ¿Ãﬂ“‹ - ¬Õ≈ÿÕ «” -  ¿“¿ÀŒ√ - Tab ---
@@ -153,9 +151,7 @@ static void OnPress_Mask_Delete()
 
 static void Draw_Delete(int x, int y)
 {
-    Font::SetCurrent(Font::Type::_UGO2);
     Char(SymbolUGO2::DELETE).Draw4SymbolsInRect(x + 2, y + 1);
-    Font::SetCurrent(Font::Type::_8);
 }
 
 DEF_GRAPH_BUTTON( bMask_Delete,                                                                                                                 //--- œ¿Ãﬂ“‹ - ¬Õ≈ÿÕ «” - Ã¿— ¿ - ”‰‡ÎËÚ¸ ---
@@ -183,9 +179,7 @@ static void OnPress_Mask_Backspace()
 
 static void Draw_Backspace(int x, int y)
 {
-    Font::SetCurrent(Font::Type::_UGO2);
     Char(SymbolUGO2::ARROW_LEFT).Draw(x + 2, y + 1);
-    Font::SetCurrent(Font::Type::_8);
 }
 
 DEF_GRAPH_BUTTON( bMask_Backspace,                                                                                                      //--- œ¿Ãﬂ“‹ - ¬Õ≈ÿÕ «” - Ã¿— ¿ - Backspace ---
@@ -233,9 +227,7 @@ static void OnPress_Mask_Insert()
 
 static void Draw_Insert(int x, int y)
 {
-    Font::SetCurrent(Font::Type::_UGO2);
     Char(SymbolUGO2::INSERT).Draw4SymbolsInRect(x + 2, y + 2);
-    Font::SetCurrent(Font::Type::_8);
 }
 
 DEF_GRAPH_BUTTON( bMask_Insert,                                                                                                                //--- œ¿Ãﬂ“‹ - ¬Õ≈ÿÕ «” - Ã¿— ¿ - ¬ÒÚ‡‚ËÚ¸ ---
@@ -601,9 +593,7 @@ static void Draw_SetName_Save(int x, int y)
 {
     if (FDrive::IsConnected())
     {
-        Font::SetCurrent(Font::Type::_UGO2);
         Char(SymbolUGO2::FLASH_DRIVE_BIG).Draw4SymbolsInRect(x + 2, y + 1);
-        Font::SetCurrent(Font::Type::_8);
     }
 }
 

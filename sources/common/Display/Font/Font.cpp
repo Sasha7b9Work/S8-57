@@ -61,8 +61,10 @@ int Font::GetLengthSymbol(char symbol)
 
 void Font::SetCurrent(Font::Type::E typeFont)
 {
-    switch (typeFont)
+    if (typeFont != currentFont)
     {
+        switch (typeFont)
+        {
         case Type::_5:
             font = &font5;
             break;
@@ -81,16 +83,21 @@ void Font::SetCurrent(Font::Type::E typeFont)
         case Type::None:
         case Type::Size:
             break;
-    }
+        }
 
 #ifndef PANEL
-
-    Transmitter::Send(Command::Paint_SetFont, (uint8)typeFont);
-
+        Transmitter::Send(Command::Paint_SetFont, (uint8)typeFont);
 #endif
 
-    pushedFont = currentFont;
-    currentFont = typeFont;
+        pushedFont = currentFont;
+        currentFont = typeFont;
+    }
+}
+
+
+void Font::Pop()
+{
+    SetCurrent(pushedFont);
 }
 
 
@@ -118,12 +125,6 @@ void Font::SetMinWidth(uint8 width)
     Transmitter::Send(Command::Paint_SetMinWidthFont, width);
 }
 #endif
-
-
-void Font::Pop()
-{
-    SetCurrent(pushedFont);
-}
 
 
 static bool FontIsSmall()

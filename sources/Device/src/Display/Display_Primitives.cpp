@@ -57,16 +57,27 @@ Display::Primitives::Line::Line(int _x0, int _y0, int _x1, int _y1) : x0(_x0), y
 }
 
 
-Display::Primitives::Char::Char(char _ch) : ch(_ch)
+Display::Primitives::Char::Char(SymbolUGO2::E _ch) : ch((char)_ch), font(Font::Type::_UGO2)
+{
+
+}
+
+Display::Primitives::Char::Char(char _ch) : ch(_ch), font(Font::Type::_8)
 {
 }
 
 
 int Display::Primitives::Char::Draw(int x, int y, Color color)
 {
+    Font::SetCurrent(font);
+
 	String("%c", ch).Draw(x, y, color);
 
-	return x + Font::GetLengthSymbol(ch) + 1;
+    int result = x + Font::GetLengthSymbol(ch) + 1;
+
+    Font::Pop();
+
+    return result;
 }
 
 
@@ -74,21 +85,29 @@ void Display::Primitives::Char::Draw4SymbolsInRect(int x, int y, Color color)
 {
     color.SetAsCurrent();
 
+    Font::SetCurrent(font);
+
     for (char i = 0; i < 2; i++)
     {
-        Char(ch + i).Draw(x + 8 * i, y);
-        Char(ch + i + 16).Draw(x + 8 * i, y + 8);
+        String("%c", ch + i).Draw(x + 8 * i, y);
+        String("%c", ch + i + 16).Draw(x + 8 * i, y + 8);
     }
+
+    Font::Pop();
 }
 
 
 void Display::Primitives::Char::Draw10SymbolsInRect(int x, int y)
 {
+    Font::SetCurrent(font);
+
     for (char i = 0; i < 5; i++)
     {
         Char(ch + i).Draw(x + 8 * i, y);
         Char(ch + i + 16).Draw(x + 8 * i, y + 8);
     }
+
+    Font::Pop();
 }
 
 

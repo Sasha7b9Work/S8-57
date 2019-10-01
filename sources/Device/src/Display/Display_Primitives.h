@@ -1,5 +1,7 @@
 #pragma once
 #include "Utils/String.h"
+#include "Display/Symbols.h"
+#include "Display/Font/Font.h"
 
 
 namespace Display
@@ -70,12 +72,14 @@ namespace Display
         class Char
         {
         public:
+            Char(SymbolUGO2::E ch);
             Char(char ch);
             int Draw(int x, int y, Color color = Color::NUMBER);
             void Draw4SymbolsInRect(int x, int y, Color color = Color::NUMBER);
             void Draw10SymbolsInRect(int x, int y);
         private:
             char ch;
+            Font::Type::E font;
         };
 
 

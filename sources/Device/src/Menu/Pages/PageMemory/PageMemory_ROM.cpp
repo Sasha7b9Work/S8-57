@@ -34,9 +34,7 @@ static void OnPress_Next()
 
 static void Draw_Next(int x, int y)
 {
-    Font::SetCurrent(Font::Type::_UGO2);
     Char(SymbolUGO2::ARROW_RIGHT).Draw4SymbolsInRect(x + 2, y + 2);
-    Font::SetCurrent(Font::Type::_8);
 }
 
 DEF_GRAPH_BUTTON( bNext,
@@ -53,9 +51,7 @@ static void OnPress_Prev()
 
 static void Draw_Prev(int x, int y)
 {
-    Font::SetCurrent(Font::Type::_UGO2);
     Char(SymbolUGO2::ARROW_LEFT).Draw4SymbolsInRect(x + 2, y + 2);
-    Font::SetCurrent(Font::Type::_8);
 }
 
 DEF_GRAPH_BUTTON( bPrev,
@@ -74,9 +70,7 @@ static void OnPress_Delete()
 
 static void Draw_Delete(int x, int y)
 {
-    Font::SetCurrent(Font::Type::_UGO2);
     Char(SymbolUGO2::DELETE).Draw4SymbolsInRect(x + 2, y + 1);
-    Font::SetCurrent(Font::Type::_8);
 }
 
 DEF_GRAPH_BUTTON( bDelete,                                                                                                                              //--- œ¿Ãﬂ“‹ - ¬Õ”“– «” - ”‰‡ÎËÚ¸ ---
@@ -108,9 +102,7 @@ static void OnPress_SaveToMemory()
 
 static void Draw_SaveToMemory(int x, int y)
 {
-    Font::SetCurrent(Font::Type::_UGO2);
     Char(SymbolUGO2::SAVE_TO_MEM).Draw4SymbolsInRect(x + 2, y + 1);
-    Font::SetCurrent(Font::Type::_8);
 }
 
 DEF_GRAPH_BUTTON( bSave,                                                                                                                     //--- œ¿Ãﬂ“‹ - ¬Õ”“– «” - —Óı‡ÌËÚ¸ ‚ Ô‡ÏˇÚË ---

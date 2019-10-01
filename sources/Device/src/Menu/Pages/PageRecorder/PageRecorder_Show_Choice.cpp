@@ -16,9 +16,7 @@ static void OnPress_Up()
 
 static void Draw_Up(int x, int y)
 {
-    Font::SetCurrent(Font::Type::_UGO2);
     Char(SymbolUGO2::TRIANGLE_UP).Draw4SymbolsInRect(x + 2, y + 4);
-    Font::SetCurrent(Font::Type::_8);
 }
 
 static bool IsActive_Up()
@@ -40,9 +38,7 @@ static void OnPress_Down()
 
 static void Draw_Down(int x, int y)
 {
-    Font::SetCurrent(Font::Type::_UGO2);
     Char(SymbolUGO2::TRIANGLE_DOWN).Draw4SymbolsInRect(x + 2, y + 4);
-    Font::SetCurrent(Font::Type::_8);
 }
 
 static bool IsActive_Down()
