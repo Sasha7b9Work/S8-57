@@ -168,7 +168,7 @@ void Menu::ChangeStateFlashDrive()
 {
     if(!FDrive::IsConnected())
     {
-        if(GetNameOpenedPage() == PageName::Memory_Drive_Manager)
+        if(Menu::OpenedItem() == PageDrive::PageManager::self)
         {
             OpenedItem()->HandlerFX(TypePress::Release);
         }
@@ -281,30 +281,6 @@ void Menu::CloseOpenedItem()
 Item *Menu::OpenedItem()
 {
     return LastOpened((Page *)Menu::mainPage);
-}
-
-
-PageName::E Menu::GetNameOpenedPage()
-{
-    Item *item = OpenedItem();
-
-    PageName::E result = PageName::Number;
-
-    if (item)
-    {
-        if (item->Is(Item::Type::Page))         // Если открыта страница
-        {
-            result = ((Page *)item)->GetName();
-        }
-        else
-        {
-            const Page *page = item->Keeper();      // Если открыта не страница
-
-            result = page ? page->GetName() : PageName::Number;
-        }
-    }
-
-    return result;
 }
 
 

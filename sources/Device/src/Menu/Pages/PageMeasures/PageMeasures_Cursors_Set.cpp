@@ -478,7 +478,7 @@ void PageMeasuresCursors::PageSet::SetCursorT(Chan::E ch, int numCur, float pos)
 
 bool PageMeasuresCursors::PageSet::IsRegSetActiveOnCursors()
 {
-    return ((Menu::GetNameOpenedPage() == PageName::CursorsMeasures_Set) &&
+    return ((Menu::OpenedItem() == PageMeasuresCursors::PageSet::self) &&
         (((set.curs.active == CursorsActive::U) && (set.curs.cntrlU[set.curs.source] == CursorsControl::Disable)) ||
         ((set.curs.active == CursorsActive::T) && (set.curs.cntrlT[set.curs.source] == CursorsControl::Disable))));
 }

@@ -36,8 +36,6 @@ struct Menu
     static bool IsShown();
 
     static Item *OpenedItem();
-
-    static PageName::E GetNameOpenedPage();
     /// Возвращает адрес текущего элемента меню (текущим, как правило, является элемент, кнопка которого была нажата последней
     static Item *CurrentItem();
 

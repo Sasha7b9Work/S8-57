@@ -37,7 +37,7 @@ float Cursors::PosU(Chan::E ch, int numCur)
 bool Cursors::NecessaryDraw()
 {
     return ((set.curs.cntrlU[set.curs.source] == CursorsControl::Disable) || (set.curs.cntrlT[set.curs.source] == CursorsControl::Disable)) &&
-        (set.curs.showCursors || Menu::GetNameOpenedPage() == PageName::CursorsMeasures_Set);
+        (set.curs.showCursors || (Menu::OpenedItem() == PageMeasuresCursors::PageSet::self));
 }
 
 

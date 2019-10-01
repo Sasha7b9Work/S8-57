@@ -49,7 +49,7 @@ void Table::Draw()
         }
     }
 
-    if (Menu::GetNameOpenedPage() == PageName::AutoMeasures_Tune)
+    if(Menu::OpenedItem() == PageMeasuresAuto::PageTune::self)
     {
         PageChoice::Draw();
     }
@@ -60,7 +60,7 @@ void Table::Cell::Draw(int x, int y)
 {
     Measure measure(row, col);
 
-    bool active = measure.IsActive() && Menu::GetNameOpenedPage() == PageName::AutoMeasures_Tune;
+    bool active = measure.IsActive() && (Menu::OpenedItem() == PageMeasuresAuto::PageTune::self);
 
     Measure::Type::E type = measure.GetType();
 
