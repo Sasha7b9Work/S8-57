@@ -8,6 +8,20 @@ const Settings Settings::defaultSettings =
     0,  // size
     0,  // crc32
 
+    // Настройки меню
+    {
+        false,                                  // menu_show;
+        {                                       // menu_posActItem[Page_NumPages];    
+            0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f,
+            0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f,
+            0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f,
+            0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f,
+            0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f,
+            0x7f
+        },
+        {}                                      // menu_currentSubPage[Page_NumPages];
+    },
+
     // Меню ДИСПЛЕЙ
     {
         ModeDrawSignal::Lines,                      // modeDrawSignal
@@ -78,7 +92,21 @@ const Settings Settings::defaultSettings =
         SampleType::Real                            // sampleTypeOld
     },
 
-    // Меню КУРСОРЫ
+    // Меню ПАМЯТЬ
+    {
+        ENumPointsFPGA::_1k,        // enumPoints
+        ModeBtnMemory::Menu,        // modeBtnMemory
+        ModeWork::Dir,              // modeWork
+        false,                      // flashAutoConnect
+        0,                          // indexCurSymbolNameMask
+        ModeSaveSignal::BMP,        // modeSaveSignal
+        {},                         // fileName[MAX_SYMBOLS_IN_FILE_NAME]
+        ModeShowIntMem::Saved,      // modeShowIntMem
+        FileNamingMode::Mask,       // fileNamingMode
+        {}                          // fileNameMask[MAX_SYMBOLS_IN_FILE_NAME]
+    },
+
+    // Курсорные измерения
     {
         false,                                              // showCursors
         {CursorsLookMode::None, CursorsLookMode::None},     // lookMode[2]
@@ -98,40 +126,6 @@ const Settings Settings::defaultSettings =
         { 80, 200 }}                                        // Канал 2
     },
 
-    // Меню ПАМЯТЬ
-    {
-        ENumPointsFPGA::_1k,        // enumPoints
-        ModeBtnMemory::Menu,        // modeBtnMemory
-        ModeWork::Dir,              // modeWork
-        false,                      // flashAutoConnect
-        0,                          // indexCurSymbolNameMask
-        ModeSaveSignal::BMP,        // modeSaveSignal
-        {},                         // fileName[MAX_SYMBOLS_IN_FILE_NAME]
-        ModeShowIntMem::Saved,      // modeShowIntMem
-        FileNamingMode::Mask,       // fileNamingMode
-        {}                          // fileNameMask[MAX_SYMBOLS_IN_FILE_NAME]
-    },
-
-    // Настройки математики
-    {
-        FuncModeDraw::Disable,      // modeDraw
-        MathFunction::Sum,          // function
-        ModeRegSet::Range,          // modeRegSet
-        Divider::_1,                // divider
-        RShift::ZERO,
-        Range::_500mV
-    },
-
-    {
-        false,                      // enabled
-        { 50, 50 },                 // posCur[2]
-        ScaleFFT::Log,              // scale
-        SourceFFT::Both,            // source
-        WindowFFT::Hamming,         // window
-        MaxDBFFT::_60,              // maxDB
-        0                           // cursor
-    },
-    
     // Меню ИЗМЕРЕНИЯ
     {
         false,                              // show
@@ -149,14 +143,27 @@ const Settings Settings::defaultSettings =
         Measure::Type::Freq                 // marked
     },
 
-    // Меню СЕРВИС
+    // Настройки математики
     {
-        ColorScheme::WhiteLetters,          // colorScheme
-        CalibratorMode::Freq,               // calibratorMode
-        0,                                  // soundVolume
-        false                               // showInfoVoltage
+        FuncModeDraw::Disable,      // modeDraw
+        MathFunction::Sum,          // function
+        ModeRegSet::Range,          // modeRegSet
+        Divider::_1,                // divider
+        RShift::ZERO,
+        Range::_500mV
     },
-    
+
+    // FFT
+    {
+        false,                      // enabled
+        { 50, 50 },                 // posCur[2]
+        ScaleFFT::Log,              // scale
+        SourceFFT::Both,            // source
+        WindowFFT::Hamming,         // window
+        MaxDBFFT::_60,              // maxDB
+        0                           // cursor
+    },
+
     // Настройки частотомера
     {
         FreqMeterEnabled::Off,         // enabled
@@ -165,7 +172,7 @@ const Settings Settings::defaultSettings =
         FreqMeterFreqClc::_1MHz,       // freqClc
         FreqMeterNumberPeriods::_10    // numberPeriods
     },
-    
+
     // Настройки тестер-компонента
     {
         TesterControl::Voltage,         // control
@@ -175,21 +182,7 @@ const Settings Settings::defaultSettings =
         ENumAverage::_1,                // smooth
         TesterViewMode::Lines           // viewMode
     },
-    
-    // Настройки меню
-    {
-        false,                                  // menu_show;
-        {                                       // menu_posActItem[Page_NumPages];    
-            0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f,
-            0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f,
-            0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f,
-            0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f,
-            0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f,
-            0x7f
-        },
-        {}                                      // menu_currentSubPage[Page_NumPages];
-    },
-       
+
     // Настройки мультиметра
     {
         MultimeterAVP::Off,                     // avp
@@ -200,7 +193,7 @@ const Settings Settings::defaultSettings =
         MultimeterRangeCurrent::_2A,            // rangeCurrentDC
         MultimeterRangeResistance::_10M         // rangeResist
     },
-    
+
     // Настройки регистратора
     {
         true,                                   // sourceChanA
@@ -215,6 +208,14 @@ const Settings Settings::defaultSettings =
         { Range::_1V, Range::_1V }              // range
     },
 
+    // Меню СЕРВИС
+    {
+        ColorScheme::WhiteLetters,          // colorScheme
+        CalibratorMode::Freq,               // calibratorMode
+        0,                                  // soundVolume
+        false                               // showInfoVoltage
+    },
+        
     // Меню ОТЛАДКА
     {
         true,                                   // showConsole

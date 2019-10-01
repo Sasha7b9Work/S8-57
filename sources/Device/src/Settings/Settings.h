@@ -40,21 +40,21 @@ public:
     uint                    size;           ///< Размер данной структуры в байтах
     uint                    crc32;          ///< \brief Контрольная сумма данной структуры с хранящимися в ней настройками
 
+    SettingsMenu            menu;
     SettingsDisplay         disp;
     SettingsChannel         ch[Chan::Size];
     SettingsTrig            trig;
     SettingsTime            time;
-    SettingsCursorsMeasures curs;
     SettingsMemory          mem;
+    SettingsCursorsMeasures curs;
+    SettingsAutoMeasures    meas;
     SettingsMath            math;
     SettingsFFT             fft;
-    SettingsAutoMeasures    meas;
-    SettingsService         serv;
     SettingsFreqMeter       freq;
     SettingsTester          test;
-    SettingsMenu            menu;
     SettingsMultimeter      mult;
     SettingsRecorder        rec;
+    SettingsService         serv;
     SettingsDebug           dbg;
 };
 #pragma pack(pop)
