@@ -1,10 +1,15 @@
 #pragma once
 
 
- // Font::Type::_5
-#define SYMBOL_COUPLE_AC        '\x91'
-#define SYMBOL_COUPLE_DC        '\x92'
-#define SYMBOL_COUPLE_GND       '\x90'
+struct Symbol5
+{
+    enum E
+    {
+        COUPLE_AC  = '\x91',
+        COUPLE_DC  = '\x92',
+        COUPLE_GND = '\x90'
+    };
+};
 
 struct Symbol8
 {
