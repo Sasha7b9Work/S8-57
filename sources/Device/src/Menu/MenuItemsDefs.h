@@ -38,11 +38,8 @@ struct PageName
         Function_Multimeter,
         Function_Multimeter_Cal,
         Function_Recorder,
-        Function_Recorder_Record,
         Function_Recorder_Show,
-        Function_Recorder_Show_Operations,
-        Function_Recorder_Show_View,
-        Function_Recorder_Show_View_Cursors,
+        Function_Recorder_Show_Choice,
         Function_Recorder_Source,
         Function_Tester,
         /// онлныэ
