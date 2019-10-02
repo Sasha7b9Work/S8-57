@@ -74,7 +74,7 @@ static const GPIO_TypeDef *ports[] = { GPIOD,       GPIOD,       GPIOD,      GPI
 static const uint16 pins[]         = { GPIO_PIN_14, GPIO_PIN_15, GPIO_PIN_0, GPIO_PIN_1, GPIO_PIN_7, GPIO_PIN_8, GPIO_PIN_9, GPIO_PIN_10 };
 
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 void Transceiver::Init()
 {
     GPIO_InitTypeDef gpio;

@@ -51,6 +51,11 @@ struct HAL_ADC1
     static uint ReadValue();
 };
 
+struct HAL_ADC3
+{
+    static void Init();
+};
+
 namespace HAL
 {
     void Init();
@@ -60,13 +65,6 @@ namespace HAL
     void Delay(uint timeMS);
 
     uint TimeMS();
-
-    class ADC3_
-    {
-    friend class FPGA::ADC3_;
-    private:
-        static void Init();
-    };
 
     struct USART3_
     {

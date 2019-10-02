@@ -11,7 +11,7 @@ static ADC_HandleTypeDef handle;
 
 
 
-void HAL::ADC3_::Init()
+void HAL_ADC3::Init()
 {
     // Теперь настроим вход АЦП от рандомизатора
     // PF10 - ADC3 IN8
