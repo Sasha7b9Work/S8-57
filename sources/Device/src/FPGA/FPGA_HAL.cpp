@@ -23,19 +23,19 @@ struct PinStruct
 
 static PinStruct pins[GPIO::Pin::Number] =
 {
-    {HPort::_C , ::HAL::PIO::Pin::_10},   // SPI3_SCK
-    {HPort::_C , ::HAL::PIO::Pin::_12},   // SPI3_DAT
-    {HPort::_D , ::HAL::PIO::Pin::_3},    // SPI3_CS1
-    {HPort::_G , ::HAL::PIO::Pin::_13},   // SPI3_CS2
-    {HPort::_D , ::HAL::PIO::Pin::_10},   // A1
-    {HPort::_D , ::HAL::PIO::Pin::_11},   // A2
-    {HPort::_D , ::HAL::PIO::Pin::_12},   // A3
-    {HPort::_D , ::HAL::PIO::Pin::_13},   // A4
-    {HPort::_G , ::HAL::PIO::Pin::_2},    // LF1 Ограничение полосы
-    {HPort::_G , ::HAL::PIO::Pin::_3},    // LF2 Ограничение полосы
-    {HPort::_G , ::HAL::PIO::Pin::_4},    // A1S
-    {HPort::_G , ::HAL::PIO::Pin::_5},    // A0S
-    {HPort::_G , ::HAL::PIO::Pin::_6}     // LFS
+    {HPort::_C , HPin::_10},   // SPI3_SCK
+    {HPort::_C , HPin::_12},   // SPI3_DAT
+    {HPort::_D , HPin::_3},    // SPI3_CS1
+    {HPort::_G , HPin::_13},   // SPI3_CS2
+    {HPort::_D , HPin::_10},   // A1
+    {HPort::_D , HPin::_11},   // A2
+    {HPort::_D , HPin::_12},   // A3
+    {HPort::_D , HPin::_13},   // A4
+    {HPort::_G , HPin::_2},    // LF1 Ограничение полосы
+    {HPort::_G , HPin::_3},    // LF2 Ограничение полосы
+    {HPort::_G , HPin::_4},    // A1S
+    {HPort::_G , HPin::_5},    // A0S
+    {HPort::_G , HPin::_6}     // LFS
 };
 
 

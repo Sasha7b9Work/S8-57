@@ -3,28 +3,28 @@
 #include <stm32f4xx_hal.h>
 
 
+uint16 HPin::_0 = GPIO_PIN_0;
+uint16 HPin::_1 = GPIO_PIN_1;
+uint16 HPin::_2 = GPIO_PIN_2;
+uint16 HPin::_3 = GPIO_PIN_3;
+uint16 HPin::_4 = GPIO_PIN_4;
+uint16 HPin::_5 = GPIO_PIN_5;
+uint16 HPin::_6 = GPIO_PIN_6;
+uint16 HPin::_7 = GPIO_PIN_7;
+uint16 HPin::_8 = GPIO_PIN_8;
+uint16 HPin::_9 = GPIO_PIN_9;
+uint16 HPin::_10 = GPIO_PIN_10;
+uint16 HPin::_11 = GPIO_PIN_11;
+uint16 HPin::_12 = GPIO_PIN_12;
+uint16 HPin::_13 = GPIO_PIN_13;
+uint16 HPin::_14 = GPIO_PIN_14;
+uint16 HPin::_15 = GPIO_PIN_15;
+
 
 namespace HAL
 {
     namespace PIO
     {
-        uint16 Pin::_0 = GPIO_PIN_0;
-        uint16 Pin::_1 = GPIO_PIN_1;
-        uint16 Pin::_2 = GPIO_PIN_2;
-        uint16 Pin::_3 = GPIO_PIN_3;
-        uint16 Pin::_4 = GPIO_PIN_4;
-        uint16 Pin::_5 = GPIO_PIN_5;
-        uint16 Pin::_6 = GPIO_PIN_6;
-        uint16 Pin::_7 = GPIO_PIN_7;
-        uint16 Pin::_8 = GPIO_PIN_8;
-        uint16 Pin::_9 = GPIO_PIN_9;
-        uint16 Pin::_10 = GPIO_PIN_10;
-        uint16 Pin::_11 = GPIO_PIN_11;
-        uint16 Pin::_12 = GPIO_PIN_12;
-        uint16 Pin::_13 = GPIO_PIN_13;
-        uint16 Pin::_14 = GPIO_PIN_14;
-        uint16 Pin::_15 = GPIO_PIN_15;
-
         static const uint modes[Mode::Size] =
         {
             GPIO_MODE_ANALOG,

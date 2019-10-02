@@ -14,11 +14,11 @@ using HAL::PIO::State;
 
 static Settings oldSet = Settings::defaultSettings;
 
-uint16 Tester::Pin_TEST_ON = HAL::PIO::Pin::_13;
-uint16 Tester::Pin_PNP = HAL::PIO::Pin::_14;
-uint16 Tester::Pin_U = HAL::PIO::Pin::_15;
-uint16 Tester::Pin_I = HAL::PIO::Pin::_0;
-uint16 Tester::Pin_TEST_STR = HAL::PIO::Pin::_9;
+uint16 Tester::Pin_TEST_ON = HPin::_13;
+uint16 Tester::Pin_PNP = HPin::_14;
+uint16 Tester::Pin_U = HPin::_15;
+uint16 Tester::Pin_I = HPin::_0;
+uint16 Tester::Pin_TEST_STR = HPin::_9;
 
 /// Загрузить FPGA в соответствии с установленными настройками
 static void LoadFPGA();
@@ -67,7 +67,7 @@ void Tester::Init()
         }
     }
 
-    HAL::PIO::Init(HPort::_A, HAL::PIO::Pin::_5, HAL::PIO::Mode::Analog, HAL::PIO::Pull::No);    // Настраиваем выходной порт
+    HAL::PIO::Init(HPort::_A, HPin::_5, HAL::PIO::Mode::Analog, HAL::PIO::Pull::No);    // Настраиваем выходной порт
 
     //                         TEST_ON               PNP               U
     uint pins = (uint)(Tester::Pin_TEST_ON | Tester::Pin_PNP | Tester::Pin_U);
@@ -299,7 +299,7 @@ void Tester::LoadStep()
 
 void HAL_GPIO_EXTI_Callback(uint16 pin)
 {
-    if (pin == HAL::PIO::Pin::_9)      // Прерывание от тестер-компонента
+    if (pin == HPin::_9)      // Прерывание от тестер-компонента
     {
         Tester::ProcessStep();
     }

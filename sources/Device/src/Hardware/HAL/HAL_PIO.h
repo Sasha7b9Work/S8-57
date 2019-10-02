@@ -17,32 +17,32 @@ struct HPort
     } value;
 };
 
+struct HPin
+{
+    static uint16 _0;
+    static uint16 _1;
+    static uint16 _2;
+    static uint16 _3;
+    static uint16 _4;
+    static uint16 _5;
+    static uint16 _6;
+    static uint16 _7;
+    static uint16 _8;
+    static uint16 _9;
+    static uint16 _10;
+    static uint16 _11;
+    static uint16 _12;
+    static uint16 _13;
+    static uint16 _14;
+    static uint16 _15;
+
+};
+
 
 namespace HAL
 {
     namespace PIO
     {
-        struct Pin
-        {
-            static uint16 _0;
-            static uint16 _1;
-            static uint16 _2;
-            static uint16 _3;
-            static uint16 _4;
-            static uint16 _5;
-            static uint16 _6;
-            static uint16 _7;
-            static uint16 _8;
-            static uint16 _9;
-            static uint16 _10;
-            static uint16 _11;
-            static uint16 _12;
-            static uint16 _13;
-            static uint16 _14;
-            static uint16 _15;
-
-        };
-
         struct State
         {
             enum E
