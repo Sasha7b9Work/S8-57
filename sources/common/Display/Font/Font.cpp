@@ -58,9 +58,11 @@ int Font::GetLengthSymbol(char symbol)
     return font->symbols[symbol].width + 1;
 }
 
+#ifdef PANEL
+static void SendTypeFontToPanel(Font::Type::E) {};
+#else
 static void SendTypeFontToPanel(Font::Type::E type)
 {
-#ifndef PANEL
     static Font::Type::E prevType = Font::Type::Count;
 
     if (prevType != type)
@@ -68,8 +70,9 @@ static void SendTypeFontToPanel(Font::Type::E type)
         Transmitter::Send(Command::Paint_SetFont, (uint8)type);
         prevType = type;
     }
-#endif
 }
+#endif
+
 
 void Font::SetCurrent(Font::Type::E typeFont)
 {

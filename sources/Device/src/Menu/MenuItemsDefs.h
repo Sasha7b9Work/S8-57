@@ -40,6 +40,7 @@ struct PageName
         Recorder,
         Recorder_Show,
         Recorder_Show_Choice,
+        Recorder_Show_Choice_Cursors,
         Recorder_Source,
         Tester,
         /// онлныэ
@@ -72,7 +73,7 @@ struct PageName
         Trig_HoldOff,
         Trig_Search,
 
-        Number
+        Count
     } value;
 };
 

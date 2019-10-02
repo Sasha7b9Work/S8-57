@@ -1,10 +1,14 @@
 #include "defines.h"
+#include "Display/Symbols.h"
+#include "Display/Display_Primitives.h"
 #include "Menu/Pages/Include/PageRecorder.h"
 #include "Recorder/Recorder.h"
-#include "Settings/Settings.h"
-#include "Recorder/Recorder_Storage.h"
 #include "Recorder/Recorder_Display.h"
+#include "Recorder/Recorder_Storage.h"
+#include "Settings/Settings.h"
 
+
+using namespace Display::Primitives;
 
 
 DEF_CHOICE_3( cSource,
@@ -18,37 +22,47 @@ DEF_CHOICE_3( cSource,
 
 
 
-DEF_CHOICE_2( cCursor,
-    "Курсор",
-    "",
-    "1",
-    "2",
-    set.rec.currentCursor, &PageRecorder::PageShow::self, Item::Active, Choice::Changed, Choice::AfterDraw
-)
+//DEF_CHOICE_2( cCursor,
+//    "Курсор",
+//    "",
+//    "1",
+//    "2",
+//    set.rec.currentCursor, &PageRecorder::PageShow::self, Item::Active, Choice::Changed, Choice::AfterDraw
+//)
 
 
 static void OnPress_Next()
 {
-    Recorder::Display::MoveLeft();
 }
 
-DEF_BUTTON( bNext,                                                                                                                     //--- ФУНКЦИЯ - РЕГИСТРАТОР - ПРОСМОТР - Следующий ---
-    "Влево",
-    "",
-    &PageRecorder::PageShow::self, Item::Active, OnPress_Next
+static void Draw_Next(int x, int y)
+{
+    Char(SymbolUGO2::TRIANGLE_RIGHT).Draw4SymbolsInRect(x + 6, y + 2);
+}
+
+DEF_GRAPH_BUTTON( bRight,                                                                                                                 //--- ФУНКЦИЯ - РЕГИСТРАТОР - ПРОСМОТР - Вправо ---
+    "Вправо",
+    "Переместить окно просмотра вправо",
+    &PageRecorder::PageShow::self, Item::Active, OnPress_Next, Draw_Next
 )
 
 
 static void OnPress_Prev()
 {
-    Recorder::Display::MoveRight();
 }
 
-DEF_BUTTON( bPrev,                                                                                                                    //--- ФУНКЦИЯ - РЕГИСТРАТОР - ПРОСМОТР - Предыдущий ---
-    "Вправо",
+static void Draw_Prev(int x, int y)
+{
+    Char(SymbolUGO2::TRIANGLE_LEFT).Draw4SymbolsInRect(x + 6, y + 2);
+}
+
+DEF_GRAPH_BUTTON( bLeft,                                                                                                                   //--- ФУНКЦИЯ - РЕГИСТРАТОР - ПРОСМОТР - Влево ---
+    "Влево",
     "",
-    &PageRecorder::PageShow::self, Item::Active, OnPress_Prev
+    &PageRecorder::PageShow::self, Item::Active, OnPress_Prev, Draw_Prev
 )
+
+
 
 
 static bool IsActive_PageShow()
@@ -79,11 +93,14 @@ static bool HandlerKey_PageShow(const KeyEvent &event)
     return false;
 }
 
-DEF_PAGE_2( pShow, // -V641 // -V1027                                                                                                              //--- ФУНКЦИЯ - РЕГИСТРАТОР - ПРОСМОТР ---
+DEF_PAGE_5( pShow, // -V641 // -V1027                                                                                                              //--- ФУНКЦИЯ - РЕГИСТРАТОР - ПРОСМОТР ---
     "ПРОСМОТР",
     "Просмотр записанных данных",
     &cSource,
     PageRecorder::PageShow::PageChoice::self,
+    &bLeft,
+    &bRight,
+    PageRecorder::PageShow::PageCursors::self,
     PageName::Recorder_Show, &PageRecorder::self, IsActive_PageShow, Page::OpenClose, Page::BeforeDraw, HandlerKey_PageShow
 )
 

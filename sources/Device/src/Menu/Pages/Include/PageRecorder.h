@@ -62,7 +62,7 @@ struct SettingsRecorder
     RecorderAxis::E         axisMove;       ///< Текущая ось перемещения
     RecorderAxis::E         axisZoom;       ///< Текущая ось масштабирования
     RecorderScaleX          scaleX;         ///< Установленный масштаб по времени
-    int8                    currentCursor;
+    int8                    currentCursor;  ///< Курсор, которым сейчас можно управлять
     Range::E                unused[2];      ///< Масштаб по вертикали в режиме регистратора
 };
 
@@ -82,6 +82,11 @@ struct PageRecorder
         static const Page *const self;
 
         struct PageChoice
+        {
+            static const Page *const self;
+        };
+
+        struct PageCursors
         {
             static const Page *const self;
         };

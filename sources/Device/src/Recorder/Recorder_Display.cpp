@@ -338,21 +338,9 @@ void Recorder::Display::MoveRight()
 
 void Recorder::Display::MoveCursorLeft()
 {
-    uint16 &position = posCursor[set.rec.currentCursor];
-
-    if (position > 0)
-    {
-        position--;
-    }
 }
 
 
 void Recorder::Display::MoveCursorRight()
 {
-    uint16 &position = posCursor[set.rec.currentCursor];
-
-    if (position < 319)
-    {
-        position++;
-    }
 }
