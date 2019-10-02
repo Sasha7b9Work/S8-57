@@ -1,17 +1,8 @@
 #pragma once
 
-
-
-namespace Display
-{
-    class MultimeterWorker;
-};
-
-
-
 namespace Multimeter
 {
-    class DisplayWorker;
+    //class DisplayWorker;
 
     /// Инициализация
     void Init();
@@ -29,8 +20,6 @@ namespace Multimeter
     /// Используется для отрисовки
     class Display
     {
-    friend class DisplayWorker;
-    friend class ::Display::MultimeterWorker;
     public:
         static void Update();
         /// Через эту функцию поступает измерение от прибора

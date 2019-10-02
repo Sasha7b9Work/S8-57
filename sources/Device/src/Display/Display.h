@@ -39,16 +39,6 @@ namespace Display
         } value;
     };
 
-    /// Толщина рисуемого сигнала
-    struct ThicknessSignal
-    {
-        enum E
-        {
-            _1,         ///< Сигнал рисуется линией толщиной одна точка
-            _3          ///< Сигнал рисуется линией толщиной три точки
-        } value;
-    };
-
     static const int HEIGHT = 240;
 
     static const int WIDTH = 320;
