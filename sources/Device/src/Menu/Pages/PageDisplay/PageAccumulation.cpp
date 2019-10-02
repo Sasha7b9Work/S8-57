@@ -2,7 +2,7 @@
 #include "Menu/MenuItems.h"
 #include "Menu/Pages/Include/PageDisplay.h"
 #include "Osci/Osci.h"
-#include "Osci/Display/Osci_Display.h"
+#include "Osci/Display/DisplayOsci.h"
 #include "Settings/Settings.h"
 
 

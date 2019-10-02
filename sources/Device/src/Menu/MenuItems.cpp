@@ -4,7 +4,7 @@
 #include "Utils/Math.h"
 #include "Utils/Values.h"
 #include "Hardware/Beeper.h"
-#include "Osci/Display/Osci_Display.h"
+#include "Osci/Display/DisplayOsci.h"
 #include "Hardware/Timer.h"
 #include "Display/Symbols.h"
 #include "Menu/Pages/Include/PageFunction.h"

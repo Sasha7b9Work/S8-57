@@ -10,7 +10,7 @@
 #include "Hardware/Timer.h"
 #include "Hardware/Beeper.h"
 #include "Keyboard/DecoderDevice.h"
-#include "Osci/Display/Osci_Display.h"
+#include "Osci/Display/DisplayOsci.h"
 #include "Recorder/Recorder_Display.h"
 #include <cstring>
 
