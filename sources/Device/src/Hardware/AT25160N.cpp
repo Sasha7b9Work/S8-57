@@ -58,17 +58,17 @@ void AT25160N::Init()
 
     //                                  SCK                    NSS
     uint pins = (uint)(HPin::_10 | HPin::_12);
-    HAL::PIO::Init(HPort::_B, pins, HMode::Output_PP, HPull::Down);
+    HAL_PIO::Init(HPort::_B, pins, HMode::Output_PP, HPull::Down);
 
     //                                                      MOSI
-    HAL::PIO::Init(HPort::_C, HPin::_3, HMode::Output_PP, HPull::Down);
+    HAL_PIO::Init(HPort::_C, HPin::_3, HMode::Output_PP, HPull::Down);
 
     //                                                      MISO
-    HAL::PIO::Init(HPort::_C, HPin::_2, HMode::Input, HPull::Down);
+    HAL_PIO::Init(HPort::_C, HPin::_2, HMode::Input, HPull::Down);
 
-    HAL::PIO::Set(PIN_CS);
-    HAL::PIO::Reset(PIN_OUT);
-    HAL::PIO::Reset(PIN_CLK);
+    HAL_PIO::Set(PIN_CS);
+    HAL_PIO::Reset(PIN_OUT);
+    HAL_PIO::Reset(PIN_CLK);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -149,7 +149,7 @@ static void Write32BytesOrLess(uint address, const uint8 * /*data*/, uint size)
 
     SetWriteLatch();
 
-    HAL::PIO::Reset(PIN_CS);
+    HAL_PIO::Reset(PIN_CS);
 
     WriteByte(WRITE); //-V2501
 
@@ -173,15 +173,15 @@ static void Write32BytesOrLess(uint address, const uint8 * /*data*/, uint size)
         }
     }
 
-    HAL::PIO::Set(PIN_CS);
+    HAL_PIO::Set(PIN_CS);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void SetWriteLatch()
 {
-    HAL::PIO::Reset(PIN_CS);
+    HAL_PIO::Reset(PIN_CS);
     WriteByte(WREN); //-V2501
-    HAL::PIO::Set(PIN_CS);
+    HAL_PIO::Set(PIN_CS);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -189,18 +189,18 @@ static void ResetWriteLatch()
 {
     WaitFinishWrite();
 
-    HAL::PIO::Reset(PIN_CS);
+    HAL_PIO::Reset(PIN_CS);
     WriteByte(WRDI); //-V2501
-    HAL::PIO::Set(PIN_CS);
+    HAL_PIO::Set(PIN_CS);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static uint8 ReadStatusRegister()
 {
-    HAL::PIO::Reset(PIN_CS);
+    HAL_PIO::Reset(PIN_CS);
     WriteByte(RDSR); //-V2501
     uint8 result = ReadByte();
-    HAL::PIO::Set(PIN_CS);
+    HAL_PIO::Set(PIN_CS);
     return result;
 }
 
@@ -209,10 +209,10 @@ static void WriteStatusRegister(uint8 data)
 {
     WaitFinishWrite();
 
-    HAL::PIO::Reset(PIN_CS);
+    HAL_PIO::Reset(PIN_CS);
     WriteByte(WRSR); //-V2501
     WriteByte(data);
-    HAL::PIO::Set(PIN_CS);
+    HAL_PIO::Set(PIN_CS);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -243,11 +243,11 @@ static void WriteByte(uint8 byte)
     {
         if (_GET_BIT(byte, bit))
         {
-            HAL::PIO::Set(PIN_OUT);
+            HAL_PIO::Set(PIN_OUT);
         }
-        HAL::PIO::Set(PIN_CLK);
-        HAL::PIO::Reset(PIN_CLK);
-        HAL::PIO::Reset(PIN_OUT);
+        HAL_PIO::Set(PIN_CLK);
+        HAL_PIO::Reset(PIN_CLK);
+        HAL_PIO::Reset(PIN_OUT);
     }
 }
 
@@ -258,13 +258,13 @@ static uint8 ReadByte()
 
     for(int i = 0; i < 8; i++)
     {
-        HAL::PIO::Set(PIN_CLK);
+        HAL_PIO::Set(PIN_CLK);
         retValue <<= 1;
-        if(HAL::PIO::Read(PIN_IN))
+        if(HAL_PIO::Read(PIN_IN))
         {
             retValue |= 0x01;
         }
-        HAL::PIO::Reset(PIN_CLK);
+        HAL_PIO::Reset(PIN_CLK);
     }
 
     return retValue;
@@ -275,7 +275,7 @@ static void ReadData(uint address, uint8 *data, uint size)
 {
     WaitFinishWrite();
 
-    HAL::PIO::Reset(PIN_CS);
+    HAL_PIO::Reset(PIN_CS);
 
     WriteByte(READ); //-V2501
     WriteByte((address >> 8) & 0xff);
@@ -290,7 +290,7 @@ static void ReadData(uint address, uint8 *data, uint size)
             //GPIOB->BSRR = GPIO_PIN_10;
             //
             //data[i] <<= 1;
-            //if (HAL::PIO::Read(PIN_IN))
+            //if (HAL_PIO::Read(PIN_IN))
             //{
             //    data[i] |= 0x01;
             //}
@@ -299,5 +299,5 @@ static void ReadData(uint address, uint8 *data, uint size)
         }
     }
 
-    HAL::PIO::Set(PIN_CS);
+    HAL_PIO::Set(PIN_CS);
 }

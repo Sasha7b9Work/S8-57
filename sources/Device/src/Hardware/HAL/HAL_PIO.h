@@ -92,18 +92,15 @@ struct HAlternate
     };
 };
 
-namespace HAL
+struct HAL_PIO
 {
-    namespace PIO
-    {
-        void Init(HPort::E port, uint pins, HMode::E mode, HPull::E pull, HSpeed::E speed = HSpeed::Low, HAlternate::E alternate = HAlternate::AF0_MCO);
-        /// Установка в "1"
-        void Set(HPort::E port, uint16 pin);
-        /// Установка в "0"
-        void Reset(HPort::E port, uint16 pin);
-        void Write(HPort::E port, uint16 pin, HState::E state);
-        bool Read(HPort::E port, uint16 pin);
+    static void Init(HPort::E port, uint pins, HMode::E mode, HPull::E pull, HSpeed::E speed = HSpeed::Low, HAlternate::E alternate = HAlternate::AF0_MCO);
+    /// Установка в "1"
+    static void Set(HPort::E port, uint16 pin);
+    /// Установка в "0"
+    static void Reset(HPort::E port, uint16 pin);
+    static void Write(HPort::E port, uint16 pin, HState::E state);
+    static bool Read(HPort::E port, uint16 pin);
 
-        void EXTI_CLEAR_IT_BIT(uint16 pin);
-    }
-}
+    static void EXTI_CLEAR_IT_BIT(uint16 pin);
+};

@@ -72,7 +72,7 @@ void FPGA::HAL::GPIO::Init()
 {
     for (int i = 0; i < Pin::Number; i++)
     {
-        ::HAL::PIO::Init(PORT((Pin::E)i), GetPin((Pin::E)i) , HMode::Output_PP, HPull::Down);
+        HAL_PIO::Init(PORT((Pin::E)i), GetPin((Pin::E)i) , HMode::Output_PP, HPull::Down);
     }
 }
 
@@ -118,19 +118,19 @@ void FPGA::HAL::GPIO::WriteRegisters(Pin::E cs, uint16 value)
 
 void FPGA::HAL::GPIO::SetPin(Pin::E pin)
 {
-    ::HAL::PIO::Set(PORT(pin), GetPin(pin));
+    HAL_PIO::Set(PORT(pin), GetPin(pin));
 }
 
 
 void FPGA::HAL::GPIO::ResetPin(Pin::E pin)
 {
-    ::HAL::PIO::Reset(PORT(pin), GetPin(pin));
+    HAL_PIO::Reset(PORT(pin), GetPin(pin));
 }
 
 
 void FPGA::HAL::GPIO::WritePin(Pin::E pin, int enable)
 {
-    ::HAL::PIO::Write(PORT(pin), GetPin(pin), enable ? HState::Enabled : HState::Disabled);
+    HAL_PIO::Write(PORT(pin), GetPin(pin), enable ? HState::Enabled : HState::Disabled);
 }
 
 

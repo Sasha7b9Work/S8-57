@@ -64,19 +64,19 @@ void Tester::Init()
         }
     }
 
-    HAL::PIO::Init(HPort::_A, HPin::_5, HMode::Analog, HPull::No);    // Настраиваем выходной порт
+    HAL_PIO::Init(HPort::_A, HPin::_5, HMode::Analog, HPull::No);    // Настраиваем выходной порт
 
     //                         TEST_ON               PNP               U
     uint pins = (uint)(Tester::Pin_TEST_ON | Tester::Pin_PNP | Tester::Pin_U);
-    HAL::PIO::Init(Port_TEST_ON, pins, HMode::Output_PP, HPull::Down);
+    HAL_PIO::Init(Port_TEST_ON, pins, HMode::Output_PP, HPull::Down);
 
     //                               I
-    HAL::PIO::Init(Port_I, Tester::Pin_I, HMode::Output_PP, HPull::Down);
+    HAL_PIO::Init(Port_I, Tester::Pin_I, HMode::Output_PP, HPull::Down);
 
     //              TEST_STR - EXTI9
-    HAL::PIO::Init(Port_TEST_STR, Tester::Pin_TEST_STR, HMode::RisingIT, HPull::No);
+    HAL_PIO::Init(Port_TEST_STR, Tester::Pin_TEST_STR, HMode::RisingIT, HPull::No);
 
-    HAL::PIO::Set(Port_TEST_ON, Tester::Pin_TEST_ON);         // Отключаем тестер-компонет
+    HAL_PIO::Set(Port_TEST_ON, Tester::Pin_TEST_ON);         // Отключаем тестер-компонет
 
     DAC2_::Init();
 
@@ -116,7 +116,7 @@ void Tester::Enable() // -V2506
     RShift::Set(Chan::A, RShift::ZERO);
     RShift::Set(Chan::B, RShift::ZERO);
 
-    HAL::PIO::Reset(Port_TEST_ON, Pin_TEST_ON);       // Включаем тестер-компонент
+    HAL_PIO::Reset(Port_TEST_ON, Pin_TEST_ON);       // Включаем тестер-компонент
 
     LoadFPGA();
 
@@ -149,7 +149,7 @@ void Tester::Disable() // -V2506
 
     HAL_NVIC::DisableIRQ(HAL_NVIC::irqEXTI9_5);      // Выключаем прерывания от тактовых импульсов
 
-    HAL::PIO::Set(Port_TEST_ON, Pin_TEST_ON);
+    HAL_PIO::Set(Port_TEST_ON, Pin_TEST_ON);
 
     oldSet.test.control = set.test.control;
     oldSet.test.polarity = set.test.polarity;
@@ -272,16 +272,16 @@ static void RecountPoints(uint16 *x, uint8 *y)
 void Tester::LoadPolarity()
 {
     // Устанавливаем полярность
-    HAL::PIO::Write(Port_PNP, Pin_PNP, (set.test.polarity == TesterPolarity::Positive) ? HState::Enabled : HState::Disabled);
+    HAL_PIO::Write(Port_PNP, Pin_PNP, (set.test.polarity == TesterPolarity::Positive) ? HState::Enabled : HState::Disabled);
 }
 
 
 void Tester::LoadStep()
 {
     // Устанавливаем управление напряжением или током
-    HAL::PIO::Write(Port_U, Pin_U, (set.test.control == TesterControl::Voltage) ? HState::Enabled : HState::Disabled);
+    HAL_PIO::Write(Port_U, Pin_U, (set.test.control == TesterControl::Voltage) ? HState::Enabled : HState::Disabled);
 
-    HAL::PIO::Write(Port_I, Pin_I, (set.test.control == TesterControl::Voltage) ? HState::Disabled : HState::Enabled);
+    HAL_PIO::Write(Port_I, Pin_I, (set.test.control == TesterControl::Voltage) ? HState::Disabled : HState::Enabled);
 
     if (set.test.control == TesterControl::Voltage)
     {

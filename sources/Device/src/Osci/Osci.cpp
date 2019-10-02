@@ -50,7 +50,7 @@ void Osci::Init()
     TShift::Load();
     FPGA::LoadCalibratorMode();
     LoadHoldfOff();
-    ::HAL::PIO::Init(HPort::_G, HPin::_1, HMode::Input, HPull::Up);
+    HAL_PIO::Init(HPort::_G, HPin::_1, HMode::Input, HPull::Up);
     StorageOsci::Clear();
     FPGA::OnPressStart();
 }
@@ -175,7 +175,7 @@ void Osci::ReadPointP2P()
         return;
     }
 
-    if (::HAL::PIO::Read(HPort::_G, HPin::_1))
+    if (HAL_PIO::Read(HPort::_G, HPin::_1))
     {
         BitSet16 dataA(HAL_FSMC::ReadFromFPGA(RD::DATA_A), HAL_FSMC::ReadFromFPGA(RD::DATA_A + 1));
         BitSet16 dataB(HAL_FSMC::ReadFromFPGA(RD::DATA_B), HAL_FSMC::ReadFromFPGA(RD::DATA_B + 1));
@@ -207,7 +207,7 @@ static void BalanceChannel(Chan::E ch, Range::E range)
     {
         if(!Transceiver::InInteraction())
         {
-            if (::HAL::PIO::Read(HPort::_G, HPin::_1))
+            if (HAL_PIO::Read(HPort::_G, HPin::_1))
             {
                 sum += HAL_FSMC::ReadFromFPGA(address);
                 numPoints++;

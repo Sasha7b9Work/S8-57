@@ -4,12 +4,7 @@
 #include <stm32f4xx_hal.h>
 
 
-using namespace HAL::PIO;
-
-
-
 static DAC_HandleTypeDef handle = { DAC };
-
 
 
 void HAL_DAC2::Init()

@@ -4,9 +4,6 @@
 #include <stm32f4xx_hal.h>
 
 
-using namespace HAL::PIO;
-
-
 static UART_HandleTypeDef handler;
 
 static pFuncVV recvHandler = 0;
@@ -16,7 +13,7 @@ void HAL_USART3::Init(pFuncVV _recvHandler)
 {
     __HAL_RCC_USART3_CLK_ENABLE();
 
-    HAL::PIO::Init(HPort::_D, (uint)(HPin::_8 | HPin::_9), HMode::AF_PP, HPull::Up, HSpeed::VeryHigh, HAlternate::AF7_USART3);
+    HAL_PIO::Init(HPort::_D, (uint)(HPin::_8 | HPin::_9), HMode::AF_PP, HPull::Up, HSpeed::VeryHigh, HAlternate::AF7_USART3);
 
     recvHandler = _recvHandler;
 
