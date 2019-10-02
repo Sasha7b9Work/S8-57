@@ -47,7 +47,7 @@ namespace HAL
             GPIO_SPEED_FREQ_VERY_HIGH
         };
 
-        static const uint alternates[Alternate::Speed] =
+        static const uint alternates[HAlternate::Count] =
         {
             GPIO_AF0_MCO,
             GPIO_AF7_USART3
@@ -76,7 +76,7 @@ static GPIO_TypeDef * const ports[HPort::Size] =
 
 
 
-void HAL::PIO::Init(HPort::E port, uint pins, HMode::E mode, HPull::E pull, HSpeed::E speed, Alternate::E alternate)
+void HAL::PIO::Init(HPort::E port, uint pins, HMode::E mode, HPull::E pull, HSpeed::E speed, HAlternate::E alternate)
 {
     GPIO_InitTypeDef isGPIO =
     {

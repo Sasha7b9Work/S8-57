@@ -82,21 +82,21 @@ struct HSpeed
     };
 };
 
+struct HAlternate
+{
+    enum E
+    {
+        AF0_MCO,
+        AF7_USART3,
+        Count
+    };
+};
+
 namespace HAL
 {
     namespace PIO
     {
-        struct Alternate
-        {
-            enum E
-            {
-                AF0_MCO,
-                AF7_USART3,
-                Speed
-            };
-        };
-
-        void Init(HPort::E port, uint pins, HMode::E mode, HPull::E pull, HSpeed::E speed = HSpeed::Low, Alternate::E alternate = Alternate::AF0_MCO);
+        void Init(HPort::E port, uint pins, HMode::E mode, HPull::E pull, HSpeed::E speed = HSpeed::Low, HAlternate::E alternate = HAlternate::AF0_MCO);
         /// Установка в "1"
         void Set(HPort::E port, uint16 pin);
         /// Установка в "0"
