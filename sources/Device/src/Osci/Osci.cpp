@@ -27,14 +27,11 @@ extern uint16 addrRead;
 /// Возвращает true, если уже можно читать данные
 static bool CanReadData();
 
-namespace Osci
-{
-    static void UpdateFPGA();
+static void UpdateFPGA();
 
-    int addShift = 0;
-                              //  2нс 5нс 10нс 20нс 50нс
-    const int Kr[TBase::Size] = { 50, 20, 10,  5,   2 };
-}
+int Osci::addShift = 0;
+//  2нс 5нс 10нс 20нс 50нс
+const int Osci::Kr[TBase::Size] = { 50, 20, 10,  5,   2 };
 
 
 
@@ -119,11 +116,11 @@ void Osci::Update()
 }
 
 
-static void Osci::UpdateFPGA()
+static void UpdateFPGA()
 {
     bool needStop = false;
     
-    int number = (Osci::InModeRandomizer()) ? Kr[set.time.base] : 1;
+    int number = (Osci::InModeRandomizer()) ? Osci::Kr[set.time.base] : 1;
 
     for (int i = 0; i < number; i++)
     {
@@ -158,7 +155,7 @@ static void Osci::UpdateFPGA()
                 else
                 {
                     Timer::PauseOnTicks(5 * 90 * 20);
-                    Start();
+                    Osci::Start();
                 }
             }
         }

@@ -2,36 +2,35 @@
 #include "Settings/SettingsOsci.h"
 
 
-
-namespace Osci
+struct Osci
 {
-    void Init();
+    static void Init();
 
-    void Update();
+    static void Update();
 
-    void DeInit();
+    static void DeInit();
 
-    void Start();
+    static void Start();
 
-    void Stop(bool pause = false);
+    static void Stop(bool pause = false);
     /// Это вызываем в случае изменения настройки
-    void Restart();
+    static void Restart();
     /// Возвращает true, если находится в поточечном режиме
-    bool InModeP2P();
+    static bool InModeP2P();
     /// Возвращает true, если работает в режиме рандомизатора
-    bool InModeRandomizer();
+    static bool InModeRandomizer();
     /// Эту функцию надо вызывать при изменении длины памяти. Ну или режима пикового детектора
-    void OnChangedPoints();
+    static void OnChangedPoints();
 
-    void ReadPointP2P();
+    static void ReadPointP2P();
     /// Балансировать канал
-    void Balance(Chan::E ch);
+    static void Balance(Chan::E ch);
     /// Загрузить значение удержания синхронизации
-    void LoadHoldfOff();
+    static void LoadHoldfOff();
 
-    extern int addShift;
+    static int addShift;
 
-    extern const int Kr[TBase::Size];
+    static const int Kr[TBase::Size];
 
     /// Структура для хранения информации, необходимой для чтения в режиме рандомизатора
     struct StructReadRand
@@ -42,7 +41,7 @@ namespace Osci
     /// Возвращает данные, необходимые для чтения даннхы в режмиме рандомизатора.
     /// Если Tsm == 0, то структура будет использоваться не для чтения данных, а для правильного усредения.
     /// В этом случае
-    StructReadRand GetInfoForReadRand(int Tsm = NULL_TSHIFT, const uint8 *address = nullptr);
+    static StructReadRand GetInfoForReadRand(int Tsm = NULL_TSHIFT, const uint8 *address = nullptr);
 };
 
 struct AveragerOsci
