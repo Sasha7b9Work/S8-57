@@ -721,19 +721,14 @@
               <FilePath>.\src\FPGA\FPGA_HAL.h</FilePath>
             </File>
             <File>
-              <FileName>FPGA_Math.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\FPGA\FPGA_Math.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>FPGA_Math.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\FPGA\FPGA_Math.h</FilePath>
-            </File>
-            <File>
               <FileName>FPGA_Settings.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\FPGA\FPGA_Settings.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>MathFPGA.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\FPGA\MathFPGA.cpp</FilePath>
             </File>
           </Files>
         </Group>

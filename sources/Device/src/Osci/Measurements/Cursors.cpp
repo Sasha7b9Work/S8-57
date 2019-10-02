@@ -33,7 +33,7 @@ bool CursorsOsci::NecessaryDraw()
 
 String CursorsOsci::Voltage(Chan::E source, int numCur)
 {
-    float voltage = FPGA::Math::VoltageCursor(PosU(source, numCur), set.ch[source].range, SET_RSHIFT(source));
+    float voltage = MathFPGA::VoltageCursor(PosU(source, numCur), set.ch[source].range, SET_RSHIFT(source));
     if (set.ch[source].divider == 1)
     {
         voltage *= 10.0F;
@@ -45,7 +45,7 @@ String CursorsOsci::Voltage(Chan::E source, int numCur)
 
 String CursorsOsci::Time(Chan::E source, int numCur)
 {
-    float time = FPGA::Math::TimeCursor(CursorsOsci::PosT(source, numCur), set.time.base);
+    float time = MathFPGA::TimeCursor(CursorsOsci::PosT(source, numCur), set.time.base);
 
     return ::Time(time).ToString(true);
 }

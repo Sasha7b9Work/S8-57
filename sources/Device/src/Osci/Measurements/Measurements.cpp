@@ -206,7 +206,7 @@ float CalculateVoltageMax(Chan::E ch)
 
     uint8 value = ROUND(uint8, max);
 
-    return FPGA::Math::Point2Voltage(value, range, rShift);
+    return MathFPGA::Point2Voltage(value, range, rShift);
 }
 
 
@@ -220,7 +220,7 @@ float CalculateVoltageMin(Chan::E ch)
         Measure::SetMarkerVoltage(ch, 0, min);             // Здесь не округляем, потому что min может быть только целым
     }
     
-    return FPGA::Math::Point2Voltage(ROUND(uint8, min), RANGE_DS(ch),RSHIFT_DS(ch));
+    return MathFPGA::Point2Voltage(ROUND(uint8, min), RANGE_DS(ch),RSHIFT_DS(ch));
 }
 
 
@@ -251,7 +251,7 @@ float CalculateVoltageMinSteady(Chan::E ch)
         Measure::SetMarkerVoltage(ch, 0, ROUND(float, min));
     }
 
-    return FPGA::Math::Point2Voltage(ROUND(uint8, min), RANGE_DS(ch), RSHIFT_DS(ch));
+    return MathFPGA::Point2Voltage(ROUND(uint8, min), RANGE_DS(ch), RSHIFT_DS(ch));
 }
 
 
@@ -267,7 +267,7 @@ float CalculateVoltageMaxSteady(Chan::E ch)
         Measure::SetMarkerVoltage(ch, 0, max);
     }
 
-    return FPGA::Math::Point2Voltage(ROUND(uint8, max), RANGE_DS(ch), RSHIFT_DS(ch));
+    return MathFPGA::Point2Voltage(ROUND(uint8, max), RANGE_DS(ch), RSHIFT_DS(ch));
 }
 
 
@@ -286,7 +286,7 @@ float CalculateVoltageVybrosPlus(Chan::E ch)
     }
 
     uint16 rShift = RSHIFT_DS(ch);
-    return std::fabsf(FPGA::Math::Point2Voltage(ROUND(uint8, maxSteady), RANGE_DS(ch), rShift) - FPGA::Math::Point2Voltage(ROUND(uint8, max), RANGE_DS(ch), rShift));
+    return std::fabsf(MathFPGA::Point2Voltage(ROUND(uint8, maxSteady), RANGE_DS(ch), rShift) - MathFPGA::Point2Voltage(ROUND(uint8, max), RANGE_DS(ch), rShift));
 }
 
 
@@ -304,7 +304,7 @@ float CalculateVoltageVybrosMinus(Chan::E ch)
     }
 
     uint16 rShift = RSHIFT_DS(ch);
-    return std::fabsf(FPGA::Math::Point2Voltage(ROUND(uint8, minSteady), RANGE_DS(ch), rShift) - FPGA::Math::Point2Voltage(ROUND(uint8, min), RANGE_DS(ch), rShift));
+    return std::fabsf(MathFPGA::Point2Voltage(ROUND(uint8, minSteady), RANGE_DS(ch), rShift) - MathFPGA::Point2Voltage(ROUND(uint8, min), RANGE_DS(ch), rShift));
 }
 
 
@@ -348,7 +348,7 @@ float CalculateVoltageAverage(Chan::E ch)
         Measure::SetMarkerVoltage(ch, 0, aveRel);
     }
 
-    return FPGA::Math::Point2Voltage(aveRel, RANGE_DS(ch), RSHIFT_DS(ch));
+    return MathFPGA::Point2Voltage(aveRel, RANGE_DS(ch), RSHIFT_DS(ch));
 }
 
 
@@ -368,7 +368,7 @@ float CalculateVoltageRMS(Chan::E ch)
 
     for(int i = firstByte; i < firstByte + period; i++)
     {
-        float volts = FPGA::Math::Point2Voltage(dataIn[i], range, rShift);
+        float volts = MathFPGA::Point2Voltage(dataIn[i], range, rShift);
         rms +=  volts * volts;
     }
 
@@ -376,7 +376,7 @@ float CalculateVoltageRMS(Chan::E ch)
 
     if(set.meas.marked == Measure::Type::VoltageRMS)
     {
-        Measure::SetMarkerVoltage(ch, 0, FPGA::Math::Voltage2Point(rms, range, rShift));
+        Measure::SetMarkerVoltage(ch, 0, MathFPGA::Voltage2Point(rms, range, rShift));
     }
 
     return rms;
@@ -411,7 +411,7 @@ float CalculatePeriod(Chan::E ch)
 
             EXIT_IF_ERRORS_FLOAT(firstIntersection, secondIntersection); //-V2507
 
-            float per = FPGA::Math::TShift2Abs(ROUND(uint16, secondIntersection - firstIntersection), set.time.base);
+            float per = MathFPGA::TShift2Abs(ROUND(uint16, secondIntersection - firstIntersection), set.time.base);
 
             period[ch] = per;
 
@@ -616,7 +616,7 @@ float CalculateDurationPlus(Chan::E ch)
 
     EXIT_IF_ERROR_FLOAT(secondIntersection); //-V2507
 
-    return FPGA::Math::TShift2Abs(ROUND(uint16, (secondIntersection - firstIntersection) / 2.0F * 2.0F), (TBase::E)TBASE_DS);
+    return MathFPGA::TShift2Abs(ROUND(uint16, (secondIntersection - firstIntersection) / 2.0F * 2.0F), (TBase::E)TBASE_DS);
 }
 
 
@@ -644,7 +644,7 @@ float CalculateDurationMinus(Chan::E ch)
 
     EXIT_IF_ERROR_FLOAT(secondIntersection); //-V2507
 
-    return FPGA::Math::TShift2Abs(ROUND(uint16, (secondIntersection - firstIntersection) / 2.0F * 2.0F), TBASE_DS);
+    return MathFPGA::TShift2Abs(ROUND(uint16, (secondIntersection - firstIntersection) / 2.0F * 2.0F), TBASE_DS);
 }
 
 
@@ -673,7 +673,7 @@ float CalculateTimeNarastaniya(Chan::E ch)   /** \todo Здесь, возможно, нужно ув
 
     EXIT_IF_ERROR_FLOAT(secondIntersection); //-V2507
 
-    float retValue = FPGA::Math::TShift2Abs(ROUND(uint16, (secondIntersection - firstIntersection) / 2.0F * 2.0F), TBASE_DS);
+    float retValue = MathFPGA::TShift2Abs(ROUND(uint16, (secondIntersection - firstIntersection) / 2.0F * 2.0F), TBASE_DS);
 
     if (set.meas.marked == Measure::Type::TimeNarastaniya)
     {
@@ -711,7 +711,7 @@ float CalculateTimeSpada(Chan::E ch)        /// \todo Аналогично времени нараста
 
     EXIT_IF_ERROR_FLOAT(secondIntersection); //-V2507
 
-    float retValue = FPGA::Math::TShift2Abs(ROUND(uint16, (secondIntersection - firstIntersection) / 2.0F * 2.0F), TBASE_DS);
+    float retValue = MathFPGA::TShift2Abs(ROUND(uint16, (secondIntersection - firstIntersection) / 2.0F * 2.0F), TBASE_DS);
 
     if (set.meas.marked == Measure::Type::TimeSpada)
     {
@@ -1015,7 +1015,7 @@ float CalculateDelayPlus(Chan::E ch)
 
     EXIT_IF_ERROR_FLOAT(secondIntersection); //-V2507
 
-    return FPGA::Math::TShift2Abs(ROUND(uint16, (secondIntersection - firstIntersection) / 2.0F * 2.0F), TBASE_DS);
+    return MathFPGA::TShift2Abs(ROUND(uint16, (secondIntersection - firstIntersection) / 2.0F * 2.0F), TBASE_DS);
 }
 
 
@@ -1062,7 +1062,7 @@ float CalculateDelayMinus(Chan::E ch)
 
     EXIT_IF_ERROR_FLOAT(secondIntersection); //-V2507
 
-    return FPGA::Math::TShift2Abs(ROUND(uint16, (secondIntersection - firstIntersection) / 2.0F * 2.0F), TBASE_DS);
+    return MathFPGA::TShift2Abs(ROUND(uint16, (secondIntersection - firstIntersection) / 2.0F * 2.0F), TBASE_DS);
 }
 
 

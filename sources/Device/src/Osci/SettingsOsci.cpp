@@ -513,7 +513,7 @@ void Trig::DrawOnGrid()
 
         Region(width, height).DrawBounded(x, y, Color::BACK, Color::FILL);
 
-        float trigLevVal = FPGA::Math::RShift2Abs(set.trig.lev[set.trig.source], set.ch[set.trig.source].range) * Divider((uint8)set.ch[set.trig.source].divider).ToAbs();
+        float trigLevVal = MathFPGA::RShift2Abs(set.trig.lev[set.trig.source], set.ch[set.trig.source].range) * Divider((uint8)set.ch[set.trig.source].divider).ToAbs();
 
         Voltage voltage(trigLevVal);
 

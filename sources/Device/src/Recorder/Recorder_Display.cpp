@@ -141,7 +141,7 @@ static char *VoltageCursor(Chan::E ch, int numCur, char buffer[20])
 
     uint8 value = (uint8)((point.Min(ch) + point.Max(ch)) / 2);
 
-    float voltage = FPGA::Math::Point2Voltage(value, set.ch[ch].range, RShift::ZERO);
+    float voltage = MathFPGA::Point2Voltage(value, set.ch[ch].range, RShift::ZERO);
 
     std::strcpy(buffer, Voltage(voltage).ToString(false).CString());
 

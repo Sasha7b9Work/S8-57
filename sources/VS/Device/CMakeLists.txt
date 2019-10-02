@@ -114,9 +114,8 @@ source_group(FPGA               FILES   ../../Device/src/FPGA/AD9286.h
                                         ../../Device/src/FPGA/FPGA_HAL.h
                                         ../../Device/src/FPGA/FPGA_HAL.cpp
                                                      src/FPGA/FPGA_HAL_win.cpp
-                                        ../../Device/src/FPGA/FPGA_Math.h
-                                        ../../Device/src/FPGA/FPGA_Math.cpp
                                         ../../Device/src/FPGA/FPGA_Settings.h
+                                        ../../Device/src/FPGA/MathFPGA.cpp
                                         ../../Device/src/FPGA/FPGA_Settings.cpp)
 source_group(Hardware           FILES   ../../Device/src/Hardware/Battery.h
                                         ../../Device/src/Hardware/Battery.cpp
@@ -209,10 +208,9 @@ file(GLOB SOURCES   ../../common/_VS/*
                     ../../Device/src/FPGA/FPGA_HAL.h
                     ../../Device/src/FPGA/FPGA_HAL.cpp
                                  src/FPGA/FPGA_HAL_win.cpp
-                    ../../Device/src/FPGA/FPGA_Math.h
-                    ../../Device/src/FPGA/FPGA_Math.cpp
                     ../../Device/src/FPGA/FPGA_Settings.h
                     ../../Device/src/FPGA/FPGA_Settings.cpp
+                    ../../Device/src/FPGA/MathFPGA.cpp
                     
                     ../../Device/src/Hardware/Battery.h
                     ../../Device/src/Hardware/Battery.cpp

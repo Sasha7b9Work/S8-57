@@ -414,8 +414,8 @@ static void WriteCursors()
             CursorsOsci::Voltage(source, 0).Draw(x, y1);
             CursorsOsci::Voltage(source, 1).Draw(x, y2);
             x = 49;
-            float pos0 = FPGA::Math::VoltageCursor(CursorsOsci::PosU(source, 0), set.ch[source].range, SET_RSHIFT(source));
-            float pos1 = FPGA::Math::VoltageCursor(CursorsOsci::PosU(source, 1), set.ch[source].range, SET_RSHIFT(source));
+            float pos0 = MathFPGA::VoltageCursor(CursorsOsci::PosU(source, 0), set.ch[source].range, SET_RSHIFT(source));
+            float pos1 = MathFPGA::VoltageCursor(CursorsOsci::PosU(source, 1), set.ch[source].range, SET_RSHIFT(source));
             float delta = std::fabsf(pos1 - pos0) * DIVIDER_ABS(source);
             String(":dU=").Draw(x, y1);
             Voltage(delta).ToString(false).Draw(x + 17, y1);
@@ -435,8 +435,8 @@ static void WriteCursors()
             CursorsOsci::Time(source, 1).Draw(x, y2);
             x = 153;
 
-            float pos0 = FPGA::Math::TimeCursor(CursorsOsci::PosT(source, 0), set.time.base);
-            float pos1 = FPGA::Math::TimeCursor(CursorsOsci::PosT(source, 1), set.time.base);
+            float pos0 = MathFPGA::TimeCursor(CursorsOsci::PosT(source, 0), set.time.base);
+            float pos1 = MathFPGA::TimeCursor(CursorsOsci::PosT(source, 1), set.time.base);
             float delta = std::fabsf(pos1 - pos0);
             String(":dT=").Draw(x, y1);
             Time(delta).ToString(false).Draw(x + 17, y1);

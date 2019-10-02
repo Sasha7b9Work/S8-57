@@ -356,7 +356,7 @@ String Tester::Shift::ToString(Scale::E scale) // -V2506
         return RShift::ToString(shift, (Range::E)scale, Divider::_1);
     }
 
-    float shiftAbs = FPGA::Math::RShift2Abs(shift, (Range::E)scale) * 1e-3F;
+    float shiftAbs = MathFPGA::RShift2Abs(shift, (Range::E)scale) * 1e-3F;
 
     return Current(shiftAbs).ToString();
 }
