@@ -21,7 +21,7 @@ static ADC_ChannelConfTypeDef config =
 
 
 
-void ADC1_::Init()
+void HAL_ADC1::Init()
 {
     // Настроим входы АЦП для контроля напряжений
     // 36 : PA2 - ADC1 IN2 - контроль АКБ
@@ -64,7 +64,7 @@ void ADC1_::Init()
 }
 
 
-uint ADC1_::ReadValue()
+uint HAL_ADC1::ReadValue()
 {
     if (HAL_ADC_Start(&handle) != HAL_OK)
     {
@@ -79,7 +79,7 @@ uint ADC1_::ReadValue()
 }
 
 
-void ADC1_::SetActiveChannel2()
+void HAL_ADC1::SetActiveChannel2()
 {
     config.Channel = ADC_CHANNEL_2;
 
@@ -87,7 +87,7 @@ void ADC1_::SetActiveChannel2()
 }
 
 
-void ADC1_::SetActiveChannel9()
+void HAL_ADC1::SetActiveChannel9()
 {
     config.Channel = ADC_CHANNEL_9;
 

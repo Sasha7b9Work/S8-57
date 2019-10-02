@@ -35,11 +35,20 @@ namespace Timer
 
 class Battery;
 
+
 struct HAL_RTC
 {
     static void Init();
     static PackedTime GetPackedTime();
     static bool SetPackedTime(const PackedTime &time);
+};
+
+struct HAL_ADC1
+{
+    static void Init();
+    static void SetActiveChannel2();
+    static void SetActiveChannel9();
+    static uint ReadValue();
 };
 
 namespace HAL
@@ -51,21 +60,6 @@ namespace HAL
     void Delay(uint timeMS);
 
     uint TimeMS();
-
-    ////
-    class ADC1_
-    {
-    friend class ::Battery;
-    friend class Hardware::ADC1_;
-    private:
-        static void Init();
-
-        static void SetActiveChannel2();
-
-        static void SetActiveChannel9();
-
-        static uint ReadValue();
-    };
 
     class ADC3_
     {
