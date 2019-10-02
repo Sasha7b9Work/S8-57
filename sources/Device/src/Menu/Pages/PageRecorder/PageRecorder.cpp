@@ -11,9 +11,6 @@ using namespace HAL::ADDRESSES::FPGA;
 
 using HAL::FSMC;
 
-extern const Page pRecorder;
-
-
 
 static bool IsActive_Destination()
 {

@@ -7,8 +7,6 @@
 
 using namespace Display::Primitives;
 
-extern const Page pChoice;
-
 
 static void OnPress_Up()
 {

@@ -7,11 +7,8 @@
 #include <cstdio>
 
 
-extern const Page pInfo;
-
-const Page * const PageService::PageInformation::self = (const Page *)&pInfo;
-
 using namespace Display::Primitives;
+
 
 static void Information_Draw()
 {
@@ -84,3 +81,5 @@ DEF_PAGE_1 ( pInfo, //-V641 //-V1027
     &bClose,
     PageName::Service_Info, &PageService::self, Item::Active, OnOpenClose_Page, Page::BeforeDraw, Page::HandlerKeyEvent
 )
+
+const Page *const PageService::PageInformation::self = (const Page *)&pInfo;

@@ -16,10 +16,6 @@
 
 using namespace Display::Primitives;
 
-extern const Page pROM;
-
-const Page * const PageROM::self = (const Page *)&pROM;
-
 /// Ќарисовать карту пам€ти сохраннных сигналов
 static void DrawMemoryMap(int num, bool exist);
 
@@ -188,3 +184,5 @@ DEF_PAGE_4( pROM, // -V641                                                      
     PageName::Memory_Internal,
     &PageMemory::self, Item::Active, OnOpenClose_ROM, AfterDraw_ROM, HandlerKey_ROM
 )
+
+const Page *const PageROM::self = (const Page *)&pROM;

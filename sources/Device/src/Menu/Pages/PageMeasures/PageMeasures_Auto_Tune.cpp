@@ -14,11 +14,6 @@ using namespace Display::Primitives;
 using namespace Osci;
 using namespace Osci::Measurements;
 
-extern const Page pTune;
-
-const Page * const PageAutoMeasures::PageTune::self = (const Page *)&pTune;
-
-
 
 static void Draw_Markers(int x, int y)
 {
@@ -67,3 +62,5 @@ DEF_PAGE_2( pTune, // -V641 // -V1027
     &bSettings,
     PageName::AutoMeasures_Tune, &PageAutoMeasures::self, IsActive_Tune, Page::OpenClose, Page::BeforeDraw, HandlerKey_Tune
 )
+
+const Page *const PageAutoMeasures::PageTune::self = (const Page *)&pTune;

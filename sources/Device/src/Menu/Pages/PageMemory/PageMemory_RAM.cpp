@@ -16,8 +16,6 @@
 
 using namespace Display::Primitives;
 
-extern const Page pRAM;
-
 
 static void OnPress_Next()
 {

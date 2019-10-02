@@ -3,6 +3,7 @@
 #include "Menu/Pages/Include/PageMeasures.h"
 #include "Menu/Menu.h"
 
+
 DEF_PAGE_3( pMeasures, // -V1027                                                                                                                                          //--- ИЗМЕРЕНИЯ ---
     "ИЗМЕРЕНИЯ",
     "Доступ к настройкам измерений - курсорных и автоматических",
