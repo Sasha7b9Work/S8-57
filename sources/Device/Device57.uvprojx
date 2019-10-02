@@ -1496,11 +1496,6 @@
               <FilePath>.\src\Osci\Display\BottomPart.cpp</FilePath>
             </File>
             <File>
-              <FileName>BottomPart.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Osci\Display\BottomPart.h</FilePath>
-            </File>
-            <File>
               <FileName>HiPart.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Osci\Display\HiPart.cpp</FilePath>

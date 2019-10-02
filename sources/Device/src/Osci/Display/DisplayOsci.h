@@ -1,7 +1,6 @@
 #pragma once
 
 
-
 namespace Osci
 {
     namespace Display
@@ -17,6 +16,13 @@ namespace Osci
         namespace HiPart
         {
             void Draw();
+        };
+
+        namespace BottomPart
+        {
+            void Draw(int x, int y);
+
+            void WriteCursors();
         };
     }
 }
