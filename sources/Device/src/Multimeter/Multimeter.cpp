@@ -10,7 +10,7 @@ class USART3_
 public:
     static void Init(pFuncVV recvCallback)
     {
-        HAL::USART3_::Init(recvCallback);
+        HAL_USART3::Init(recvCallback);
     }
     static void Transmit(void *_buffer, uint timeout)
     {
@@ -23,11 +23,11 @@ public:
             pointer++;
         }
 
-        HAL::USART3_::Transmit(_buffer, size + 1, timeout);
+        HAL_USART3::Transmit(_buffer, size + 1, timeout);
     }
     static void StartReceiveIT(void *_buffer)
     {
-        HAL::USART3_::StartReceiveIT(_buffer, 13);
+        HAL_USART3::StartReceiveIT(_buffer, 13);
     }
 };
 

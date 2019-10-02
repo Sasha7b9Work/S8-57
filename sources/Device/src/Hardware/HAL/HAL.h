@@ -64,6 +64,12 @@ struct HAL_TIM3
     static void StopIT();
 };
 
+struct HAL_USART3
+{
+    static void Init(pFuncVV recvCallback);
+    static void Transmit(void *buffer, uint size, uint timeout);
+    static void StartReceiveIT(void *buffer, uint size);
+};
 
 
 namespace HAL
@@ -75,15 +81,6 @@ namespace HAL
     void Delay(uint timeMS);
 
     uint TimeMS();
-
-    struct USART3_
-    {
-        static void Init(pFuncVV recvCallback);
-
-        static void Transmit(void *buffer, uint size, uint timeout);
-
-        static void StartReceiveIT(void *buffer, uint size);
-    };
 
     class DAC2_
     {
