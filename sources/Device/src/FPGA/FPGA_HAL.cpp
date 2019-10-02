@@ -17,25 +17,25 @@ uint16 FPGA::HAL::flag = 0;
 
 struct PinStruct
 {
-    ::HAL::PIO::Port::E gpioTD;
+    HPort::E gpioTD;
     uint16              pin;
 };
 
 static PinStruct pins[GPIO::Pin::Number] =
 {
-    {::HAL::PIO::Port::_C , ::HAL::PIO::Pin::_10},   // SPI3_SCK
-    {::HAL::PIO::Port::_C , ::HAL::PIO::Pin::_12},   // SPI3_DAT
-    {::HAL::PIO::Port::_D , ::HAL::PIO::Pin::_3},    // SPI3_CS1
-    {::HAL::PIO::Port::_G , ::HAL::PIO::Pin::_13},   // SPI3_CS2
-    {::HAL::PIO::Port::_D , ::HAL::PIO::Pin::_10},   // A1
-    {::HAL::PIO::Port::_D , ::HAL::PIO::Pin::_11},   // A2
-    {::HAL::PIO::Port::_D , ::HAL::PIO::Pin::_12},   // A3
-    {::HAL::PIO::Port::_D , ::HAL::PIO::Pin::_13},   // A4
-    {::HAL::PIO::Port::_G , ::HAL::PIO::Pin::_2},    // LF1 Ограничение полосы
-    {::HAL::PIO::Port::_G , ::HAL::PIO::Pin::_3},    // LF2 Ограничение полосы
-    {::HAL::PIO::Port::_G , ::HAL::PIO::Pin::_4},    // A1S
-    {::HAL::PIO::Port::_G , ::HAL::PIO::Pin::_5},    // A0S
-    {::HAL::PIO::Port::_G , ::HAL::PIO::Pin::_6}     // LFS
+    {HPort::_C , ::HAL::PIO::Pin::_10},   // SPI3_SCK
+    {HPort::_C , ::HAL::PIO::Pin::_12},   // SPI3_DAT
+    {HPort::_D , ::HAL::PIO::Pin::_3},    // SPI3_CS1
+    {HPort::_G , ::HAL::PIO::Pin::_13},   // SPI3_CS2
+    {HPort::_D , ::HAL::PIO::Pin::_10},   // A1
+    {HPort::_D , ::HAL::PIO::Pin::_11},   // A2
+    {HPort::_D , ::HAL::PIO::Pin::_12},   // A3
+    {HPort::_D , ::HAL::PIO::Pin::_13},   // A4
+    {HPort::_G , ::HAL::PIO::Pin::_2},    // LF1 Ограничение полосы
+    {HPort::_G , ::HAL::PIO::Pin::_3},    // LF2 Ограничение полосы
+    {HPort::_G , ::HAL::PIO::Pin::_4},    // A1S
+    {HPort::_G , ::HAL::PIO::Pin::_5},    // A0S
+    {HPort::_G , ::HAL::PIO::Pin::_6}     // LFS
 };
 
 

@@ -85,7 +85,7 @@ void Recorder::ReadPoint()
         return;
     }
 
-    if(::HAL::PIO::Read(::HAL::PIO::Port::_G, ::HAL::PIO::Pin::_1))
+    if(::HAL::PIO::Read(HPort::_G, ::HAL::PIO::Pin::_1))
     {
         if (StorageRecorder::CurrentFrame()->FreeMemory() > 4)
         {

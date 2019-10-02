@@ -1,26 +1,27 @@
 #pragma once
 
 
+struct HPort
+{
+    enum E
+    {
+        _A,
+        _B,
+        _C,
+        _D,
+        _E,
+        _F,
+        _G,
+        _H,
+        Size
+    } value;
+};
+
+
 namespace HAL
 {
     namespace PIO
     {
-        struct Port
-        {
-            enum E
-            {
-                _A,
-                _B,
-                _C,
-                _D,
-                _E,
-                _F,
-                _G,
-                _H,
-                Size
-            } value;
-        };
-
         struct Pin
         {
             static uint16 _0;
@@ -96,13 +97,13 @@ namespace HAL
             };
         };
 
-        void Init(Port::E port, uint pins, Mode::E mode, Pull::E pull, Speed::E speed = Speed::Low, Alternate::E alternate = Alternate::AF0_MCO);
+        void Init(HPort::E port, uint pins, Mode::E mode, Pull::E pull, Speed::E speed = Speed::Low, Alternate::E alternate = Alternate::AF0_MCO);
         /// Установка в "1"
-        void Set(Port::E port, uint16 pin);
+        void Set(HPort::E port, uint16 pin);
         /// Установка в "0"
-        void Reset(Port::E port, uint16 pin);
-        void Write(Port::E port, uint16 pin, State::E state);
-        bool Read(Port::E port, uint16 pin);
+        void Reset(HPort::E port, uint16 pin);
+        void Write(HPort::E port, uint16 pin, State::E state);
+        bool Read(HPort::E port, uint16 pin);
 
         void EXTI_CLEAR_IT_BIT(uint16 pin);
     }

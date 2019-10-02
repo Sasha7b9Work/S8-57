@@ -67,7 +67,7 @@ void Tester::Init()
         }
     }
 
-    HAL::PIO::Init(HAL::PIO::Port::_A, HAL::PIO::Pin::_5, HAL::PIO::Mode::Analog, HAL::PIO::Pull::No);    // Настраиваем выходной порт
+    HAL::PIO::Init(HPort::_A, HAL::PIO::Pin::_5, HAL::PIO::Mode::Analog, HAL::PIO::Pull::No);    // Настраиваем выходной порт
 
     //                         TEST_ON               PNP               U
     uint pins = (uint)(Tester::Pin_TEST_ON | Tester::Pin_PNP | Tester::Pin_U);

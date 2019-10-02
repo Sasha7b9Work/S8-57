@@ -14,11 +14,11 @@ struct DisplayTester
 
 struct Tester
 {
-#define Port_TEST_ON  HAL::PIO::Port::_F
-#define Port_PNP      HAL::PIO::Port::_F
-#define Port_U        HAL::PIO::Port::_F
-#define Port_I        HAL::PIO::Port::_G
-#define Port_TEST_STR HAL::PIO::Port::_C
+#define Port_TEST_ON  HPort::_F
+#define Port_PNP      HPort::_F
+#define Port_U        HPort::_F
+#define Port_I        HPort::_G
+#define Port_TEST_STR HPort::_C
 
     static uint16 Pin_TEST_ON;
     static uint16 Pin_PNP;

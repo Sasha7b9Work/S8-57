@@ -9,10 +9,10 @@ using HAL::PIO::Pull;
 
 
 
-#define PIN_OUT     HAL::PIO::Port::_C, HAL::PIO::Pin::_3
-#define PIN_IN      HAL::PIO::Port::_C, HAL::PIO::Pin::_2
-#define PIN_CLK     HAL::PIO::Port::_B, HAL::PIO::Pin::_10
-#define PIN_CS      HAL::PIO::Port::_B, HAL::PIO::Pin::_12
+#define PIN_OUT     HPort::_C, HAL::PIO::Pin::_3
+#define PIN_IN      HPort::_C, HAL::PIO::Pin::_2
+#define PIN_CLK     HPort::_B, HAL::PIO::Pin::_10
+#define PIN_CS      HPort::_B, HAL::PIO::Pin::_12
 
 #define WREN    BIN_U8(00000110)        ///< Set Write Enable Latch
 #define WRDI    BIN_U8(00000100)        ///< Reset Write Enable Latch
@@ -64,13 +64,13 @@ void AT25160N::Init()
 
     //                                  SCK                    NSS
     uint pins = (uint)(HAL::PIO::Pin::_10 | HAL::PIO::Pin::_12);
-    HAL::PIO::Init(HAL::PIO::Port::_B, pins, Mode::Output_PP, Pull::Down);
+    HAL::PIO::Init(HPort::_B, pins, Mode::Output_PP, Pull::Down);
 
     //                                                      MOSI
-    HAL::PIO::Init(HAL::PIO::Port::_C, HAL::PIO::Pin::_3, Mode::Output_PP, Pull::Down);
+    HAL::PIO::Init(HPort::_C, HAL::PIO::Pin::_3, Mode::Output_PP, Pull::Down);
 
     //                                                      MISO
-    HAL::PIO::Init(HAL::PIO::Port::_C, HAL::PIO::Pin::_2, Mode::Input, Pull::Down);
+    HAL::PIO::Init(HPort::_C, HAL::PIO::Pin::_2, Mode::Input, Pull::Down);
 
     HAL::PIO::Set(PIN_CS);
     HAL::PIO::Reset(PIN_OUT);

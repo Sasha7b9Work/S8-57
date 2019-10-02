@@ -13,13 +13,13 @@ using HAL::PIO::Pull;
 
 
 #define PIN_SCK     HAL::PIO::Pin::_10
-#define PORT_SCK    HAL::PIO::Port::_B
+#define PORT_SCK    HPort::_B
 
 #define PIN_DAT     HAL::PIO::Pin::_3
-#define PORT_DAT    HAL::PIO::Port::_C
+#define PORT_DAT    HPort::_C
 
 #define PIN_CS      HAL::PIO::Pin::_11
-#define PORT_CS     HAL::PIO::Port::_E
+#define PORT_CS     HPort::_E
 
 #define SCK         PORT_SCK, PIN_SCK
 #define DAT         PORT_DAT, PIN_DAT

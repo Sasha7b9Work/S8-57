@@ -56,7 +56,7 @@ namespace HAL
 }
 
 
-static GPIO_TypeDef * const ports[HAL::PIO::Port::Size] =
+static GPIO_TypeDef * const ports[HPort::Size] =
 {
     GPIOA,
     GPIOB,
@@ -76,7 +76,7 @@ static GPIO_TypeDef * const ports[HAL::PIO::Port::Size] =
 
 
 
-void HAL::PIO::Init(Port::E port, uint pins, Mode::E mode, Pull::E pull, Speed::E speed, Alternate::E alternate)
+void HAL::PIO::Init(HPort::E port, uint pins, Mode::E mode, Pull::E pull, Speed::E speed, Alternate::E alternate)
 {
     GPIO_InitTypeDef isGPIO =
     {
@@ -91,25 +91,25 @@ void HAL::PIO::Init(Port::E port, uint pins, Mode::E mode, Pull::E pull, Speed::
 }
 
 
-void HAL::PIO::Set(Port::E port, uint16 pin)
+void HAL::PIO::Set(HPort::E port, uint16 pin)
 {
     HAL_GPIO_WritePin(PORT(port), pin, GPIO_PIN_SET);
 }
 
 
-void HAL::PIO::Reset(Port::E port, uint16 pin)
+void HAL::PIO::Reset(HPort::E port, uint16 pin)
 {
     HAL_GPIO_WritePin(PORT(port), pin, GPIO_PIN_RESET);
 }
 
 
-void HAL::PIO::Write(Port::E port, uint16 pin, State::E state)
+void HAL::PIO::Write(HPort::E port, uint16 pin, State::E state)
 {
     HAL_GPIO_WritePin(PORT(port), pin, (state == State::Enabled) ? GPIO_PIN_SET : GPIO_PIN_RESET);
 }
 
 
-bool HAL::PIO::Read(Port::E port, uint16 pin)
+bool HAL::PIO::Read(HPort::E port, uint16 pin)
 {
     return (HAL_GPIO_ReadPin(PORT(port), pin) == GPIO_PIN_SET);
 }
