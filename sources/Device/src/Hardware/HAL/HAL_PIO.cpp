@@ -41,7 +41,7 @@ namespace HAL
             GPIO_PULLUP
         };
 
-        static const uint speedes[Speed::Size] =
+        static const uint speedes[HSpeed::Count] =
         {
             GPIO_SPEED_FREQ_LOW,
             GPIO_SPEED_FREQ_VERY_HIGH
@@ -76,7 +76,7 @@ static GPIO_TypeDef * const ports[HPort::Size] =
 
 
 
-void HAL::PIO::Init(HPort::E port, uint pins, HMode::E mode, HPull::E pull, Speed::E speed, Alternate::E alternate)
+void HAL::PIO::Init(HPort::E port, uint pins, HMode::E mode, HPull::E pull, HSpeed::E speed, Alternate::E alternate)
 {
     GPIO_InitTypeDef isGPIO =
     {
