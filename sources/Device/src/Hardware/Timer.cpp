@@ -5,8 +5,6 @@
 #include "Hardware/HAL/HAL.h"
 
 
-using namespace Hardware;
-
 using Timer::Type;
 
 

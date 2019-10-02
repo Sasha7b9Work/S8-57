@@ -10,13 +10,6 @@
 typedef void(*pFuncTester)();
 
 
-
-namespace Hardware
-{
-    class Clock;
-    class ADC1_;
-}
-
 namespace FPGA
 {
     class ADC3_;

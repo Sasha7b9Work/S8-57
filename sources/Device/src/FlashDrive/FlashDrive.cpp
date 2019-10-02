@@ -5,15 +5,11 @@
 #include "FileManager.h"
 #include "usbh_diskio.h"
 #include "Settings/Settings.h"
-
 #include "Hardware/HAL/HAL.h"
 
 
-using namespace Hardware;
-
-
-
 #define NEED_MOUNT (bf.needToMoundFlash)
+
 
 static struct BitFieldFlashDrive
 {

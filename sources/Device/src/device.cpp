@@ -21,10 +21,6 @@
 #include "Utils/Debug.h"
 
 
-using Hardware::Clock;
-
-
-
 namespace Device
 {
     /// Настроить устройство в соответствии с установленным режимом
