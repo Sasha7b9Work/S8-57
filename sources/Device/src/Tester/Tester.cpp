@@ -131,7 +131,7 @@ void Tester::Enable() // -V2506
 
     LoadStep();
 
-    HAL::NVIC_::EnableIRQ(HAL::NVIC_::irqEXTI9_5);    // Включаем прерывания от тактовых импульсов
+    HAL_NVIC::EnableIRQ(HAL_NVIC::irqEXTI9_5);    // Включаем прерывания от тактовых импульсов
 }
 
 
@@ -150,7 +150,7 @@ void Tester::Disable() // -V2506
 
     enabled = false;
 
-    HAL::NVIC_::DisableIRQ(HAL::NVIC_::irqEXTI9_5);      // Выключаем прерывания от тактовых импульсов
+    HAL_NVIC::DisableIRQ(HAL_NVIC::irqEXTI9_5);      // Выключаем прерывания от тактовых импульсов
 
     HAL::PIO::Set(Port_TEST_ON, Pin_TEST_ON);
 
@@ -172,12 +172,12 @@ void Tester::StartStop()
 {
     if (enabled)
     {
-        HAL::NVIC_::DisableIRQ(HAL::NVIC_::irqEXTI9_5);      // Выключаем прерывания от тактовых импульсов
+        HAL_NVIC::DisableIRQ(HAL_NVIC::irqEXTI9_5);      // Выключаем прерывания от тактовых импульсов
         enabled = false;
     }
     else
     {
-        HAL::NVIC_::EnableIRQ(HAL::NVIC_::irqEXTI9_5);    // Включаем прерывания от тактовых импульсов
+        HAL_NVIC::EnableIRQ(HAL_NVIC::irqEXTI9_5);    // Включаем прерывания от тактовых импульсов
         enabled = true;
     }
 }

@@ -11,8 +11,6 @@
 
 using namespace Transceiver;
 
-using HAL::FSMC;
-
 
 extern uint GlobalColors[256] =
 {

@@ -3,11 +3,10 @@
 #include <stm32f4xx_hal.h>
 
 
-
 static CRC_HandleTypeDef handle = { CRC };
 
 
-void HAL::CRC32_::Init()
+void HAL_CRC32::Init()
 {
     if (HAL_CRC_Init(&handle) != HAL_OK)
     {
@@ -16,7 +15,7 @@ void HAL::CRC32_::Init()
 }
 
 
-uint HAL::CRC32_::Calculate(uint address, uint size)
+uint HAL_CRC32::Calculate(uint address, uint size)
 {
     return HAL_CRC_Calculate(&handle, (uint *)address, size);
 }

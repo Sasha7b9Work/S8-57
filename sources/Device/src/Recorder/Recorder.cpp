@@ -14,8 +14,6 @@
 
 using namespace HAL::ADDRESSES::FPGA;
 
-using HAL::FSMC;
-
 
 /// Состояние осциллографа перед переходом в режим регистратора
 struct StateOsci
@@ -91,8 +89,8 @@ void Recorder::ReadPoint()
     {
         if (StorageRecorder::CurrentFrame()->FreeMemory() > 4)
         {
-            BitSet16 dataA(FSMC::ReadFromFPGA(RD::DATA_A), FSMC::ReadFromFPGA(RD::DATA_A + 1));
-            BitSet16 dataB(FSMC::ReadFromFPGA(RD::DATA_B), FSMC::ReadFromFPGA(RD::DATA_B + 1));
+            BitSet16 dataA(HAL_FSMC::ReadFromFPGA(RD::DATA_A), HAL_FSMC::ReadFromFPGA(RD::DATA_A + 1));
+            BitSet16 dataB(HAL_FSMC::ReadFromFPGA(RD::DATA_B), HAL_FSMC::ReadFromFPGA(RD::DATA_B + 1));
 
             StorageRecorder::CurrentFrame()->AddPoint(dataA, dataB);
         }
@@ -117,9 +115,9 @@ void Recorder::Start()
 
     StorageRecorder::CreateNewFrame();
 
-    FSMC::WriteToFPGA16(WR::PRED_LO, 0); //-V525
-    FSMC::WriteToFPGA16(WR::POST_LO, 0);
-    FSMC::WriteToFPGA8(WR::START, 0xff);
+    HAL_FSMC::WriteToFPGA16(WR::PRED_LO, 0); //-V525
+    HAL_FSMC::WriteToFPGA16(WR::POST_LO, 0);
+    HAL_FSMC::WriteToFPGA8(WR::START, 0xff);
 
     running = true;
 }
@@ -290,7 +288,7 @@ void RecorderScaleX::Load()
         BIN_U8(01011110)   // -V2501  // 10s
     };
 
-    FSMC::WriteToFPGA8(WR::TBASE, values[RecorderScaleX::Current().value]);
+    HAL_FSMC::WriteToFPGA8(WR::TBASE, values[RecorderScaleX::Current().value]);
 
     if (Recorder::IsRunning())
     {

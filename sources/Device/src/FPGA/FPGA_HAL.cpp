@@ -12,9 +12,6 @@
 using namespace FPGA::HAL;
 using namespace HAL::ADDRESSES::FPGA;
 
-using HAL::FSMC;
-
-
 
 uint16 FPGA::HAL::flag = 0;
 
@@ -67,7 +64,7 @@ void FPGA::HAL::LoadRegUPR()
 
     data |= mask[set.serv.calibratorMode];
 
-    FSMC::WriteToFPGA8(WR::UPR, data);
+    HAL_FSMC::WriteToFPGA8(WR::UPR, data);
 }
 
 

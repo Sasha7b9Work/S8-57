@@ -6,12 +6,7 @@
 #include "Keyboard/DecoderDevice.h"
 #include "Utils/Debug.h"
 #include "Osci/Osci.h"
-
 #include "Recorder/Recorder.h"
-
-
-using HAL::FSMC;
-
 
 
 #define ADDR_ALTERA1    ((uint8 *)NOR_MEMORY_ADRESS1)
@@ -39,7 +34,7 @@ using HAL::FSMC;
 static void Configure();
 
 
-void FSMC::Init()
+void HAL_FSMC::Init()
 {
     __HAL_RCC_FMC_CLK_ENABLE();
     __HAL_RCC_GPIOF_CLK_ENABLE();
@@ -193,7 +188,7 @@ static void Configure()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void FSMC::WriteToFPGA16(uint8 *address, uint16 value)
+void HAL_FSMC::WriteToFPGA16(uint8 *address, uint16 value)
 {
     if (DataBus::mode != DataBus::Mode::FPGA)
     {
@@ -207,7 +202,7 @@ void FSMC::WriteToFPGA16(uint8 *address, uint16 value)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void FSMC::WriteToFPGA8(uint8 *address, uint8 value)
+void HAL_FSMC::WriteToFPGA8(uint8 *address, uint8 value)
 {
     if (DataBus::mode != DataBus::Mode::FPGA)
     {
@@ -218,7 +213,7 @@ void FSMC::WriteToFPGA8(uint8 *address, uint8 value)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-uint8 FSMC::ReadFromFPGA(const uint8 *address)
+uint8 HAL_FSMC::ReadFromFPGA(const uint8 *address)
 {
     if (DataBus::mode != DataBus::Mode::FPGA)
     {

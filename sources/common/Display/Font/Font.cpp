@@ -8,9 +8,7 @@
 #include "fontUGO2.inc"
 
 
-using HAL::FSMC;
 using namespace Transceiver;
-
 
 
 const Font *fonts[TypeFont::Count] = {&font5, &font8, &fontUGO, &fontUGO2, nullptr};
@@ -24,7 +22,6 @@ TypeFont::E currentFont = TypeFont::_8;
 #ifndef PANEL
 static int spacing = 1;
 #endif
-
 
 
 int Font::GetLengthText(pString text)

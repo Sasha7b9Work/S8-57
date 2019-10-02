@@ -67,9 +67,9 @@ void Osci::Start()
     givingStart = false;
     addrRead = 0xffff;
 
-    FSMC::WriteToFPGA16(WR::PRED_LO, FPGA::pred);
-    FSMC::WriteToFPGA16(WR::POST_LO, FPGA::post);
-    FSMC::WriteToFPGA8(WR::START, 0xff);
+    HAL_FSMC::WriteToFPGA16(WR::PRED_LO, FPGA::pred);
+    HAL_FSMC::WriteToFPGA16(WR::POST_LO, FPGA::post);
+    HAL_FSMC::WriteToFPGA8(WR::START, 0xff);
 
     FPGA::timeStart = TIME_MS;
 
@@ -177,8 +177,8 @@ void Osci::ReadPointP2P()
 
     if (::HAL::PIO::Read(::HAL::PIO::Port::_G, ::HAL::PIO::Pin::_1))
     {
-        BitSet16 dataA(FSMC::ReadFromFPGA(RD::DATA_A), FSMC::ReadFromFPGA(RD::DATA_A + 1));
-        BitSet16 dataB(FSMC::ReadFromFPGA(RD::DATA_B), FSMC::ReadFromFPGA(RD::DATA_B + 1));
+        BitSet16 dataA(HAL_FSMC::ReadFromFPGA(RD::DATA_A), HAL_FSMC::ReadFromFPGA(RD::DATA_A + 1));
+        BitSet16 dataB(HAL_FSMC::ReadFromFPGA(RD::DATA_B), HAL_FSMC::ReadFromFPGA(RD::DATA_B + 1));
         StorageOsci::GetFrameP2P()->AddPoints(dataA, dataB);
     }
 }
@@ -209,7 +209,7 @@ static void BalanceChannel(Chan::E ch, Range::E range)
         {
             if (::HAL::PIO::Read(::HAL::PIO::Port::_G, ::HAL::PIO::Pin::_1))
             {
-                sum += FSMC::ReadFromFPGA(address);
+                sum += HAL_FSMC::ReadFromFPGA(address);
                 numPoints++;
             }
         }

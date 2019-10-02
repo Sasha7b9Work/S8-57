@@ -15,7 +15,6 @@
 using namespace HAL::ADDRESSES::FPGA;
 
 using FPGA::HAL::GetFlag;
-using HAL::FSMC;
 
 
 /// Здесь хранится последнее действительное значение частоты. Для вывода в режиме частотомера. 0 означает, что значение выводить не надо
@@ -68,8 +67,8 @@ static void WriteStackToBuffer(Stack<uint> *stack, int point, const char *suffix
 void FrequencyCounter::Init()
 {
     LoadSettings();
-    FSMC::WriteToFPGA8(WR::RESET_COUNTER_FREQ, 1);
-    FSMC::WriteToFPGA8(WR::RESET_COUNTER_PERIOD, 1);
+    HAL_FSMC::WriteToFPGA8(WR::RESET_COUNTER_FREQ, 1);
+    HAL_FSMC::WriteToFPGA8(WR::RESET_COUNTER_PERIOD, 1);
     freqActual.word = periodActual.word = 0;
 }
 
@@ -110,7 +109,7 @@ void FrequencyCounter::LoadSettings()
         _SET_BIT(data, 2);
     }
 
-    FSMC::WriteToFPGA8(WR::FREQMETER, data);
+    HAL_FSMC::WriteToFPGA8(WR::FREQMETER, data);
 }
 
 
@@ -123,7 +122,7 @@ void FrequencyCounter::LoadSettings()
 void FrequencyCounter::LoadFreqSettings()
 {
     LoadSettings();
-    FSMC::WriteToFPGA8(WR::RESET_COUNTER_FREQ, 1);
+    HAL_FSMC::WriteToFPGA8(WR::RESET_COUNTER_FREQ, 1);
     freqActual.word = 0;
     lampFreq = false;
 }
@@ -132,7 +131,7 @@ void FrequencyCounter::LoadFreqSettings()
 void FrequencyCounter::LoadPeriodSettings()
 {
     LoadSettings();
-    FSMC::WriteToFPGA8(WR::RESET_COUNTER_PERIOD, 1);
+    HAL_FSMC::WriteToFPGA8(WR::RESET_COUNTER_PERIOD, 1);
     periodActual.word = 0;
     lampPeriod = false;
 }

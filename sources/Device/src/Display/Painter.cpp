@@ -10,13 +10,11 @@
 #include "Utils/Buffer.h"
 #include <cstdlib>
 #include <cstring>
-
 #include "FlashDrive/FlashDrive.h"
 #include "Keyboard/DecoderDevice.h"
 #include "Display/Display.h"
 
 
-using HAL::FSMC;
 using namespace Transceiver;
 
 

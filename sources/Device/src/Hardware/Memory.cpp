@@ -4,10 +4,6 @@
 #include "Hardware/HAL/HAL.h"
 
 
-using HAL::OTP_;
-
-
-
 /// Возвращает адрес первого свободного байта в секторе настроек
 static uint FirstFreeAddressForSettings();
 /// \brief Возвращает адрес сохранённых настроек или 0, если настройки не сохранялись. fromEnd указывает, какие настройки от конца
@@ -154,14 +150,14 @@ void Memory::DeleteAllData()
 String OTPmem::GetSerialNumber(int *freeForWrite)
 {
     char buffer[20];
-    *freeForWrite = OTP_::GetSerialNumber(buffer);
+    *freeForWrite = HAL_OTP::GetSerialNumber(buffer);
     return String(buffer);
 }
 
 
 bool OTPmem::SaveSerialNumber(char *servialNumber) //-V2506
 {
-    return OTP_::SaveSerialNumber(servialNumber);
+    return HAL_OTP::SaveSerialNumber(servialNumber);
 }
 
 

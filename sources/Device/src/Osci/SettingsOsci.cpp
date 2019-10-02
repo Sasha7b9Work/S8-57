@@ -24,7 +24,6 @@
 using namespace HAL::ADDRESSES::FPGA;
 
 using FPGA::HAL::GPIO::Pin;
-using HAL::FSMC;
 
 
 // Массив структур описаний масштабов по напряжению.
@@ -67,15 +66,15 @@ static uint8 ValueForRange(Chan::E ch);
 
 void Osci::LoadHoldfOff()
 {
-    FSMC::WriteToFPGA8(WR::TRIG_HOLD_ENABLE, set.trig.holdOffEnabled ? 1U : 0U);
+    HAL_FSMC::WriteToFPGA8(WR::TRIG_HOLD_ENABLE, set.trig.holdOffEnabled ? 1U : 0U);
 
     uint value = (uint)(0 - set.trig.holdOff + 1);
 
     BitSet32 bs(value);
 
-    FSMC::WriteToFPGA8(WR::TRIG_HOLD_VALUE_LOW, bs.byte0);
-    FSMC::WriteToFPGA8(WR::TRIG_HOLD_VALUE_MID, bs.byte1);
-    FSMC::WriteToFPGA8(WR::TRIG_HOLD_VALUE_HI, bs.byte2);
+    HAL_FSMC::WriteToFPGA8(WR::TRIG_HOLD_VALUE_LOW, bs.byte0);
+    HAL_FSMC::WriteToFPGA8(WR::TRIG_HOLD_VALUE_MID, bs.byte1);
+    HAL_FSMC::WriteToFPGA8(WR::TRIG_HOLD_VALUE_HI, bs.byte2);
 }
 
 
@@ -215,7 +214,7 @@ void TBase::Load()
 
     FPGA::ClearDataRand();
 
-    FSMC::WriteToFPGA8(WR::TBASE, values[set.time.base]);
+    HAL_FSMC::WriteToFPGA8(WR::TBASE, values[set.time.base]);
 
     TShift::Load();
 

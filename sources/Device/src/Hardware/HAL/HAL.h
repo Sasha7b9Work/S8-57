@@ -84,6 +84,37 @@ struct HAL_EEPROM
     static void WriteBufferBytes(uint address, void *buffer, int size);
 };
 
+struct HAL_OTP
+{
+    /// ¬озвращает число свободных мест дл€ записи. ≈сли 0, то места в OTP уже не осталось.
+    static int GetSerialNumber(char buffer[17]);
+    static bool SaveSerialNumber(char *servialNumber);
+
+};
+
+struct HAL_CRC32
+{
+    static void Init();
+    static uint Calculate(uint address, uint size);
+};
+
+struct HAL_NVIC
+{
+    static uint irqEXTI1;
+    static uint irqEXTI9_5;
+    static void EnableIRQ(uint irq);
+    static void DisableIRQ(uint irq);
+    static void SetPriorityIRQ(uint irq, uint main, uint sub);
+};
+
+struct HAL_FSMC
+{
+    static void Init();
+    static void WriteToFPGA8(uint8 *address, uint8 value);
+    static void WriteToFPGA16(uint8 *address, uint16 value);
+    static uint8 ReadFromFPGA(const uint8 *address);
+};
+
 namespace HAL
 {
     void Init();
@@ -94,50 +125,6 @@ namespace HAL
 
     uint TimeMS();
 
-    ////
-    class OTP_
-    {
-    public:
-        /// ¬озвращает число свободных мест дл€ записи. ≈сли 0, то места в OTP уже не осталось.
-        static int GetSerialNumber(char buffer[17]);
-        static bool SaveSerialNumber(char *servialNumber);
-
-    };
-
-
-    ////
-    class CRC32_
-    {
-    public:
-        static void Init();
-        static uint Calculate(uint address, uint size);
-    };
-
-    ////
-    class NVIC_
-    {
-    public:
-        static uint irqEXTI1;
-        static uint irqEXTI9_5;
-        static void EnableIRQ(uint irq);
-        static void DisableIRQ(uint irq);
-        static void SetPriorityIRQ(uint irq, uint main, uint sub);
-    };
-
-    ////
-    class FSMC
-    {
-    public:
-        static void Init();
-
-        static void WriteToFPGA8(uint8 *address, uint8 value);
-
-        static void WriteToFPGA16(uint8 *address, uint16 value);
-
-        static uint8 ReadFromFPGA(const uint8 *address);
-    };
-
-    ////
     namespace ADDRESSES
     {
         namespace FPGA

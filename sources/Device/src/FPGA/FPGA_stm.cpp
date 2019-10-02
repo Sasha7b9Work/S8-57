@@ -210,8 +210,8 @@ bool FPGA::ReadDataChanenl(Chan::E ch, uint8 data[FPGA::MAX_NUM_POINTS])
         addrRead = (uint16)(ReadLastRecord(ch) - (int)numPoints / k);
     }
 
-    FSMC::WriteToFPGA16(WR::PRED_LO, (uint16)(addrRead));
-    FSMC::WriteToFPGA8(WR::START_ADDR, 0xff);
+    HAL_FSMC::WriteToFPGA16(WR::PRED_LO, (uint16)(addrRead));
+    HAL_FSMC::WriteToFPGA8(WR::START_ADDR, 0xff);
 
 
     uint8 *addr0 = Chan(ch).IsA() ? RD::DATA_A : RD::DATA_B;  // -V566

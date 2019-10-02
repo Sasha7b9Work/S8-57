@@ -6,15 +6,12 @@
 
 using namespace HAL::ADDRESSES::FPGA;
 
-using HAL::FSMC;
-
 extern bool givingStart;
-
 
 
 void FPGA::HAL::ReadFlag()
 {
-    flag = (uint16)(FSMC::ReadFromFPGA(RD::FLAG_LO) | (FSMC::ReadFromFPGA(RD::FLAG_HI) << 8));
+    flag = (uint16)(HAL_FSMC::ReadFromFPGA(RD::FLAG_LO) | (HAL_FSMC::ReadFromFPGA(RD::FLAG_HI) << 8));
 
     if (GetFlag::TRIG_READY() && !givingStart)
     {

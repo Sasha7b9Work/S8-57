@@ -13,9 +13,6 @@
 using namespace FPGA::HAL::GPIO;
 using namespace HAL::ADDRESSES::FPGA;
 
-using HAL::FSMC;
-
-
 
 void TrigSource::Load()
 {
@@ -81,8 +78,8 @@ static void LoadReal()
     FPGA::post = (uint16)(~(FPGA::post + 1));
     FPGA::pred = (uint16)(~(FPGA::pred + 3));
 
-    FSMC::WriteToFPGA16(WR::PRED_LO, FPGA::post);
-    FSMC::WriteToFPGA16(WR::POST_LO, FPGA::pred);
+    HAL_FSMC::WriteToFPGA16(WR::PRED_LO, FPGA::post);
+    HAL_FSMC::WriteToFPGA16(WR::POST_LO, FPGA::pred);
 }
 
 
@@ -109,8 +106,8 @@ static void LoadRandomize()
     FPGA::post = (uint16)(~(FPGA::post + 1));
     FPGA::pred = (uint16)(~(FPGA::pred));
 
-    FSMC::WriteToFPGA16(WR::PRED_LO, FPGA::pred);
-    FSMC::WriteToFPGA16(WR::POST_LO, FPGA::post);
+    HAL_FSMC::WriteToFPGA16(WR::PRED_LO, FPGA::pred);
+    HAL_FSMC::WriteToFPGA16(WR::POST_LO, FPGA::post);
 
     Osci::addShift = (set.time.shift) % k;
 
