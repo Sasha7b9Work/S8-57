@@ -7,7 +7,7 @@
 #include "Hardware/HAL/HAL.h"
 #include "Osci/Osci.h"
 #include "Recorder/Recorder.h"
-#include "Recorder/Recorder_Storage.h"
+#include "Recorder/StorageRecorder.h"
 #include "Settings/Settings.h"
 #include "Utils/Math.h"
 
@@ -89,12 +89,12 @@ void Recorder::ReadPoint()
 
     if(::HAL::PIO::Read(::HAL::PIO::Port::_G, ::HAL::PIO::Pin::_1))
     {
-        if (Recorder::Storage::CurrentFrame()->FreeMemory() > 4)
+        if (StorageRecorder::CurrentFrame()->FreeMemory() > 4)
         {
             BitSet16 dataA(FSMC::ReadFromFPGA(RD::DATA_A), FSMC::ReadFromFPGA(RD::DATA_A + 1));
             BitSet16 dataB(FSMC::ReadFromFPGA(RD::DATA_B), FSMC::ReadFromFPGA(RD::DATA_B + 1));
 
-            Recorder::Storage::CurrentFrame()->AddPoint(dataA, dataB);
+            StorageRecorder::CurrentFrame()->AddPoint(dataA, dataB);
         }
         else
         {
@@ -115,7 +115,7 @@ void Recorder::Start()
 
     Memory::EraseSector(ADDR_SECTOR_RECORDER_1);
 
-    Storage::CreateNewFrame();
+    StorageRecorder::CreateNewFrame();
 
     FSMC::WriteToFPGA16(WR::PRED_LO, 0); //-V525
     FSMC::WriteToFPGA16(WR::POST_LO, 0);

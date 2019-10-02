@@ -1561,16 +1561,6 @@
               <FilePath>.\src\Recorder\Recorder.h</FilePath>
             </File>
             <File>
-              <FileName>Recorder_Storage.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Recorder\Recorder_Storage.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Recorder_Storage.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Recorder\Recorder_Storage.h</FilePath>
-            </File>
-            <File>
               <FileName>DisplayRecorder.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Recorder\DisplayRecorder.cpp</FilePath>
@@ -1579,6 +1569,16 @@
               <FileName>DisplayRecorder.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Recorder\DisplayRecorder.h</FilePath>
+            </File>
+            <File>
+              <FileName>StorageRecorder.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Recorder\StorageRecorder.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>StorageRecorder.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Recorder\StorageRecorder.h</FilePath>
             </File>
           </Files>
         </Group>

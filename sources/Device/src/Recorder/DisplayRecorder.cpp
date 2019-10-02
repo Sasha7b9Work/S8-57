@@ -6,7 +6,7 @@
 #include "Menu/Menu.h"
 #include "Recorder/Recorder.h"
 #include "Recorder/DisplayRecorder.h"
-#include "Recorder/Recorder_Storage.h"
+#include "Recorder/StorageRecorder.h"
 #include "Settings/Settings.h"
 #include "Utils/Values.h"
 #include <cstring>
@@ -110,9 +110,9 @@ static char *VoltageCursor(Chan::E ch, int numCur, char buffer[20])
 {
     uint numPoint = (uint)(startPoint + posCursor[numCur]);
 
-    Recorder::Storage::Frame *frame = Recorder::Storage::CurrentFrame();
+    FrameRec *frame = StorageRecorder::CurrentFrame();
 
-    Recorder::Storage::Point point = frame->GetPoint(numPoint, frame->NumPoints());
+    PointRec point = frame->GetPoint(numPoint, frame->NumPoints());
 
     uint8 value = (uint8)((point.Min(ch) + point.Max(ch)) / 2);
 
@@ -182,7 +182,7 @@ static void DrawCursors()
 
 static void DrawData()
 {
-    Recorder::Storage::Frame *frame = Recorder::Storage::CurrentFrame();
+    FrameRec *frame = StorageRecorder::CurrentFrame();
 
     uint numPoints = frame->NumPoints();
 
@@ -195,7 +195,7 @@ static void DrawData()
 
     int x = 0;
 
-    Recorder::Storage::Point point = frame->GetPoint((Recorder::IsRunning() || startPoint < 0) ? 
+    PointRec point = frame->GetPoint((Recorder::IsRunning() || startPoint < 0) ? 
                                                            ((numPoints < 320) ? (0) : (numPoints - 320))
                                                             : startPoint,
                                                             numPoints);
@@ -232,12 +232,12 @@ static void DrawMemoryWindow()
 {
     static int prevNumPoints = 0;
 
-    if (Menu::OpenedItem() != PageRecorder::PageShow::self || Recorder::Storage::CurrentFrame()->NumPoints() == 0)
+    if (Menu::OpenedItem() != PageRecorder::PageShow::self || StorageRecorder::CurrentFrame()->NumPoints() == 0)
     {
         return;
     }
 
-    int numPoints = (int)Recorder::Storage::CurrentFrame()->NumPoints();
+    int numPoints = (int)StorageRecorder::CurrentFrame()->NumPoints();
 
     if (prevNumPoints != numPoints)
     {
@@ -271,7 +271,7 @@ static void DrawMemoryWindow()
 
 void DisplayRecorder::MoveLeft()
 {
-    if (Recorder::Storage::CurrentFrame()->NumPoints() < 321)
+    if (StorageRecorder::CurrentFrame()->NumPoints() < 321)
     {
         return;
     }
@@ -286,15 +286,15 @@ void DisplayRecorder::MoveLeft()
 
 void DisplayRecorder::MoveRight()
 {
-    if (Recorder::Storage::CurrentFrame()->NumPoints() < 321)
+    if (StorageRecorder::CurrentFrame()->NumPoints() < 321)
     {
         return;
     }
 
     startPoint += 320;
-    if (startPoint > (int)(Recorder::Storage::CurrentFrame()->NumPoints() - 320))
+    if (startPoint > (int)(StorageRecorder::CurrentFrame()->NumPoints() - 320))
     {
-        startPoint = (int)(Recorder::Storage::CurrentFrame()->NumPoints() - 320);
+        startPoint = (int)(StorageRecorder::CurrentFrame()->NumPoints() - 320);
     }
 }
 
