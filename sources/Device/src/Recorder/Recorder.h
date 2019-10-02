@@ -1,22 +1,21 @@
 #pragma once
 
 
-
-namespace Recorder
+struct Recorder
 {
-    void Init();
+    static void Init();
 
-    void DeInit();
+    static void DeInit();
 
-    void Update();
+    static void Update();
 
-    void OnPressStart();
+    static void OnPressStart();
 
-    void Start();
+    static void Start();
 
-    void Stop();
+    static void Stop();
 
-    bool IsRunning();
+    static bool IsRunning();
 
-    void ReadPoint();
+    static void ReadPoint();
 };
