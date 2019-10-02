@@ -1,37 +1,65 @@
 #pragma once
 
 
+#define SHIFT_IN_MEMORY     Osci::Display::PainterData::FirstPointOnScreen()
+
+
 namespace Osci
 {
-    namespace Display
+    struct Display
     {
-        void Update();
+        static void Update();
 
-        void DrawCursorTrigLevel();
+        static void DrawCursorTrigLevel();
 
         void DrawScaleLine(int x, bool forTrigLev);
         /// Установить признак того, что дисплей нуждается в перерисовке
-        void SetFlagRedraw();
+        static void SetFlagRedraw();
 
-        namespace HiPart
+        struct HiPart
         {
-            void Draw();
+            static void Draw();
         };
 
-        namespace BottomPart
+        struct BottomPart
         {
-            void Draw(int x, int y);
+            static void Draw(int x, int y);
 
             void WriteCursors();
         };
 
-        class Accumulator
+        struct Accumulator
         {
-        public:
             /// Эту функцию нужно вызывать после каждой отрисовки сигналов
             static void NextFrame();
             /// Сброс информации
             static void Reset();
         };
-    }
+
+        struct PainterData
+        {
+            static void DrawData();
+            /// Индекс первой точки, выводимой поверх сетки
+            static int FirstPointOnScreen();
+            /// Возвращает адрес первой и последней точки на экране в координатах экрана
+            static BitSet64 PointsOnDisplay();
+            /// \brief Возращает адрес первой и последней точки в координатах экрана
+            static BitSet64 BytesOnDisplay();
+            /// Эту функцию надо вызывать при переключении TPos для перерасчёта смещения первого выводимого байта относительно левого края экрана
+            static void ChangeTPos();
+        };
+
+        struct MemoryWindow
+        {
+            static void Draw();
+
+            static int X();
+
+            static int Y();
+
+            static int Width();
+
+            static int Height();
+        };
+    };
 }

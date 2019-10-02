@@ -1501,19 +1501,9 @@
               <FilePath>.\src\Osci\Display\MemoryWindow.cpp</FilePath>
             </File>
             <File>
-              <FileName>MemoryWindow.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Osci\Display\MemoryWindow.h</FilePath>
-            </File>
-            <File>
               <FileName>PainterData.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Osci\Display\PainterData.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>PainterData.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Osci\Display\PainterData.h</FilePath>
             </File>
             <File>
               <FileName>DisplayOsci.cpp</FileName>

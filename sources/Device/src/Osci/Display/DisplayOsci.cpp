@@ -6,7 +6,6 @@
 #include "Osci/FrequencyCounter.h"
 #include "Osci/Osci_Averager.h"
 #include "Osci/Display/DisplayOsci.h"
-#include "Osci/Display/PainterData.h"
 #include "Osci/Measurements/Measurements.h"
 #include "Settings/Settings.h"
 

@@ -3,8 +3,7 @@
 #include "Display/Grid.h"
 #include "Display/Primitives.h"
 #include "FPGA/FPGA.h"
-#include "MemoryWindow.h"
-#include "Osci/Display/PainterData.h"
+#include "Osci/Display/DisplayOsci.h"
 #include "Osci/Measurements/Measurements.h"
 #include "Settings/Settings.h"
 
@@ -12,10 +11,10 @@
 using namespace FPGA;
 using namespace Osci::Measurements;
 
-using Osci::Display::MemoryWindow::Width;
-using Osci::Display::MemoryWindow::Height;
-using Osci::Display::MemoryWindow::X;
-using Osci::Display::MemoryWindow::Y;
+//using Osci::Display::MemoryWindow::Width;
+//using Osci::Display::MemoryWindow::Height;
+//using Osci::Display::MemoryWindow::X;
+//using Osci::Display::MemoryWindow::Y;
 
 
 
@@ -94,12 +93,12 @@ static void DrawScreenArea()
     float relBegin = (float)SHIFT_IN_MEMORY / FPGA_NUM_POINTS;          // Относительное начало экранной области относительно всей памяти
     float relWidth = (float)(Grid::Width() + 1) / FPGA_NUM_POINTS;      // Относительное (относительно всей шириный окна) ширина видимой области
 
-    int begin = (int)(relBegin * Width() + 0.5F);   // Реальное начало экранной области относительно начала окна памяти
-    int width = (int)(relWidth * Width() + 0.5F);   // Реальная ширина видимой области
+    int begin = (int)(relBegin * Osci::Display::MemoryWindow::Width() + 0.5F);   // Реальное начало экранной области относительно начала окна памяти
+    int width = (int)(relWidth * Osci::Display::MemoryWindow::Width() + 0.5F);   // Реальная ширина видимой области
 
-    Region(width, Height()).Fill(X() + begin, Y(), Color::GRAY_20);
+    Region(width, Osci::Display::MemoryWindow::Height()).Fill(Osci::Display::MemoryWindow::X() + begin, Osci::Display::MemoryWindow::Y(), Color::GRAY_20);
 
-    Rectangle(width, Height()).Draw(X() + begin, Y(), Color::FILL);
+    Rectangle(width, Osci::Display::MemoryWindow::Height()).Draw(Osci::Display::MemoryWindow::X() + begin, Osci::Display::MemoryWindow::Y(), Color::FILL);
 }
 
 

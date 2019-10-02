@@ -6,9 +6,9 @@
 #include "FPGA/FPGA_HAL.h"
 #include "Hardware/Timer.h"
 #include "Hardware/HAL/HAL.h"
+#include "Osci/Display/DisplayOsci.h"
 #include "Osci/Measurements/Measurements.h"
 #include "Settings/Settings.h"
-#include "Osci/Display/PainterData.h"
 #include "Utils/Debug.h"
 #include <cstring>
 #include <cmath>

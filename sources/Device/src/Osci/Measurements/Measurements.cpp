@@ -1,7 +1,7 @@
 #include "defines.h"
 #include "Data/Reader.h"
 #include "FPGA/FPGA.h"
-#include "Osci/Display/PainterData.h"
+#include "Osci/Display/DisplayOsci.h"
 #include "Osci/Measurements/Measurements.h"
 #include "Settings/Settings.h"
 #include "Utils/Math.h"
