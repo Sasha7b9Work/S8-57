@@ -13,5 +13,10 @@ namespace Osci
         void DrawScaleLine(int x, bool forTrigLev);
         /// Установить признак того, что дисплей нуждается в перерисовке
         void SetFlagRedraw();
+
+        namespace HiPart
+        {
+            void Draw();
+        };
     }
 }

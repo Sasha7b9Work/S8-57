@@ -1506,11 +1506,6 @@
               <FilePath>.\src\Osci\Display\HiPart.cpp</FilePath>
             </File>
             <File>
-              <FileName>HiPart.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Osci\Display\HiPart.h</FilePath>
-            </File>
-            <File>
               <FileName>MemoryWindow.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Osci\Display\MemoryWindow.cpp</FilePath>
@@ -1521,16 +1516,6 @@
               <FilePath>.\src\Osci\Display\MemoryWindow.h</FilePath>
             </File>
             <File>
-              <FileName>Osci_Display.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Osci\Display\Osci_Display.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Osci_Display.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Osci\Display\Osci_Display.h</FilePath>
-            </File>
-            <File>
               <FileName>PainterData.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Osci\Display\PainterData.cpp</FilePath>
@@ -1539,6 +1524,16 @@
               <FileName>PainterData.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Osci\Display\PainterData.h</FilePath>
+            </File>
+            <File>
+              <FileName>DisplayOsci.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Osci\Display\DisplayOsci.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>DisplayOsci.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Osci\Display\DisplayOsci.h</FilePath>
             </File>
           </Files>
         </Group>
