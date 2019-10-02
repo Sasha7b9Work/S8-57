@@ -1,5 +1,5 @@
 #include "defines.h"
-#include "Osci/Osci_Storage.h"
+#include "Osci/StorageOsci.h"
 #include "FPGA/FPGA.h"
 #include "Data/Heap.h"
 #include "Settings/Settings.h"

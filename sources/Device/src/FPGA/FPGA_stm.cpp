@@ -10,7 +10,7 @@
 #include "Utils/Buffer.h"
 #include "Utils/Values.h"
 #include "Hardware/HAL/HAL.h"
-#include "Osci/Osci_Storage.h"
+#include "Osci/StorageOsci.h"
 #include "Data/Reader.h"
 #include <stdlib.h>
 #include <cstring>

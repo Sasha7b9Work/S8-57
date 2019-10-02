@@ -1,5 +1,5 @@
 #pragma once
-#include "Osci/Osci_Storage.h"
+#include "Osci/StorageOsci.h"
 #include "Menu/Pages/Include/PageMemory.h"
 
 

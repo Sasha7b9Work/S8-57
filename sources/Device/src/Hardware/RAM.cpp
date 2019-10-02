@@ -1,7 +1,7 @@
 #include "defines.h"
 #include "Hardware/RAM.h"
 #include "Utils/Math.h"
-#include "Osci/Osci_Storage.h"
+#include "Osci/StorageOsci.h"
 
 
 static int16 currentSignal = 0;

@@ -1,6 +1,6 @@
 #include "defines.h"
 #include "Data/Reader.h"
-#include "Osci/Osci_Storage.h"
+#include "Osci/StorageOsci.h"
 #include "Utils/CommonFunctions.h"
 #include "Osci/Osci.h"
 #include "Settings/Settings.h"

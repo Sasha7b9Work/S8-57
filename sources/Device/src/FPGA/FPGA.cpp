@@ -9,7 +9,7 @@
 #include "Utils/Math.h"
 #include "Settings/Settings.h"
 #include "Recorder/Recorder.h"
-#include "Osci/Osci_Storage.h"
+#include "Osci/StorageOsci.h"
 #include "Data/Reader.h"
 #include <cstring>
 #include <stdlib.h>

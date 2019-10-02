@@ -2680,20 +2680,20 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\src\Osci\Osci_Storage.cpp</PathWithFileName>
-      <FilenameWithoutPath>Osci_Storage.cpp</FilenameWithoutPath>
+      <PathWithFileName>.\src\Osci\AveragerOsci.cpp</PathWithFileName>
+      <FilenameWithoutPath>AveragerOsci.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
     <File>
       <GroupNumber>27</GroupNumber>
       <FileNumber>189</FileNumber>
-      <FileType>5</FileType>
+      <FileType>8</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\src\Osci\Osci_Storage.h</PathWithFileName>
-      <FilenameWithoutPath>Osci_Storage.h</FilenameWithoutPath>
+      <PathWithFileName>.\src\Osci\SettingsOsci.cpp</PathWithFileName>
+      <FilenameWithoutPath>SettingsOsci.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -2704,20 +2704,20 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\src\Osci\AveragerOsci.cpp</PathWithFileName>
-      <FilenameWithoutPath>AveragerOsci.cpp</FilenameWithoutPath>
+      <PathWithFileName>.\src\Osci\StorageOsci.cpp</PathWithFileName>
+      <FilenameWithoutPath>StorageOsci.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
     <File>
       <GroupNumber>27</GroupNumber>
       <FileNumber>191</FileNumber>
-      <FileType>8</FileType>
+      <FileType>5</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\src\Osci\SettingsOsci.cpp</PathWithFileName>
-      <FilenameWithoutPath>SettingsOsci.cpp</FilenameWithoutPath>
+      <PathWithFileName>.\src\Osci\StorageOsci.h</PathWithFileName>
+      <FilenameWithoutPath>StorageOsci.h</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>

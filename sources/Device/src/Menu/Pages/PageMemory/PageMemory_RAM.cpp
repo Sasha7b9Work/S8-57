@@ -6,7 +6,7 @@
 #include "Hardware/RAM.h"
 #include "Menu/MenuItems.h"
 #include "Osci/Osci.h"
-#include "Osci/Osci_Storage.h"
+#include "Osci/StorageOsci.h"
 #include "Settings/Settings.h"
 #include "Utils/Values.h"
 
