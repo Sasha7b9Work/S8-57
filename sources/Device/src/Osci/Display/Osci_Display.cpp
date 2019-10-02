@@ -45,7 +45,7 @@ void Osci::Display::Update()
     Rectangle(Grid::Width(), Grid::Height()).Draw(Grid::Left(), Grid::Top(), Color::FILL);
 
     /// \todo Говнокод. Этого здесь быть не должно, но иначе напряжение в параметрах каналов выводится малыми буквами
-    Font::SetCurrent(Font::Type::_8);
+    Font::SetCurrent(TypeFont::_8);
 
     HiPart::Draw();
 
@@ -98,13 +98,13 @@ void Osci::Display::DrawCursorTrigLevel()
         Char(Symbol8::TRIG_LEV_NORMAL).Draw(x + 1, y - 4);
     }
 
-    Font::SetCurrent(Font::Type::_5);
+    Font::SetCurrent(TypeFont::_5);
 
     static const char symbols[2] = {'1', '2'};
 
     Char(symbols[(uint8)set.trig.source]).Draw(x + 5, y - 6, Color::BACK);
 
-    Font::SetCurrent(Font::Type::_8);
+    Font::SetCurrent(TypeFont::_8);
 
     Trig::DrawOnGrid();
 }

@@ -2,6 +2,7 @@
 #include "defines.h"
 #include "Display/Colors.h"
 #include "Display/DisplayTypes.h"
+#include "Display/Font/Font.h"
 #include "ffconf.h"
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -85,9 +86,9 @@ public:
 
     static void SendToInterfaces(uint8 *pointer, int size);
 
-    static void SetFont(TypeFont typeFont);
+    static void SetFont(TypeFont::E typeFont);
     ///  Загрузить шрифта в дисплей
-    static void LoadFont(TypeFont typeFont);
+    static void LoadFont(TypeFont::E typeFont);
 
     static int DrawChar(int x, int y, char symbol, Color color = Color::NUMBER);
 
@@ -144,7 +145,7 @@ private:
 
     static Color currentColor;
 
-    static TypeFont currentTypeFont;
+    static TypeFont::E currentTypeFont;
 
     static void DrawCharHardCol(int x, int y, char symbol);
 

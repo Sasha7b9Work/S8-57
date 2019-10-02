@@ -90,9 +90,9 @@ void Display::Init()
 
     Painter::LoadPalette();
 
-    Painter::LoadFont(TypeFont_8);
+    Painter::LoadFont(TypeFont::_8);
 
-    Font::SetCurrent(Font::Type::_8);
+    Font::SetCurrent(TypeFont::_8);
 
     InitPoints();
 }

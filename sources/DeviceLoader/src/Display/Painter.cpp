@@ -8,8 +8,8 @@
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-Color    Painter::currentColor = Color::NUMBER;
-TypeFont Painter::currentTypeFont = TypeFont_None;
+Color       Painter::currentColor = Color::NUMBER;
+TypeFont::E Painter::currentTypeFont = TypeFont::Count;
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -152,7 +152,7 @@ void Painter::DrawRectangle(int, int , int , int , Color )
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Painter::LoadFont(TypeFont typeFont)
+void Painter::LoadFont(TypeFont::E typeFont)
 {
 
 }

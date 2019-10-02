@@ -176,7 +176,7 @@ static void DrawTime()
 {
     uint time = TIME_MS;
 
-    Font::SetCurrent(Font::Type::_Big64);
+    Font::SetCurrent(TypeFont::_Big64);
     int spacing = Font::GetSpacing();
     Font::SetSpacing(5);
     
@@ -185,7 +185,7 @@ static void DrawTime()
         DrawField(i);
     }
     
-    Font::SetCurrent(Font::Type::_8);
+    Font::SetCurrent(TypeFont::_8);
     Font::SetSpacing(spacing);
 
     Integer((int)(TIME_MS - time)).ToString(false).Draw(5, 5);

@@ -81,7 +81,7 @@ namespace Display
             void Draw10SymbolsInRect(int x, int y, Color color = Color::NUMBER);
         private:
             char ch;
-            Font::Type::E font;
+            TypeFont::E font;
         };
 
 

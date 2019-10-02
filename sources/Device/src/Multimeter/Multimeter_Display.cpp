@@ -82,7 +82,7 @@ static void DrawMeasure()
 {
     Color color = received ? Color::FILL : Color::GRAY_50;
 
-    Font::SetCurrent(Font::Type::_Big64);
+    Font::SetCurrent(TypeFont::_Big64);
 
     color.SetAsCurrent();
     

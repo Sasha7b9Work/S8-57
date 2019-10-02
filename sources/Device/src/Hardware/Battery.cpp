@@ -132,11 +132,11 @@ void Battery::Draw(int x, int y)
 
     Color::FILL.SetAsCurrent();
 
-    Font::SetCurrent(Font::Type::_5);
+    Font::SetCurrent(TypeFont::_5);
 
     Text(String("%1.2f Â %4.1f%%", akk, percents)).Draw(x + 4, y - 1);
 
-    Font::SetCurrent(Font::Type::_8);
+    Font::SetCurrent(TypeFont::_8);
 
     DrawBatteryUGO(x + 1, y + 10, percents);
 }

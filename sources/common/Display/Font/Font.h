@@ -39,22 +39,22 @@ struct Symbol
     uchar bytes[8];
 };
 
+struct TypeFont
+{
+    enum E
+    {
+        _5,
+        _8,
+        _UGO,
+        _UGO2,
+        _Big64,
+        Count,
+        None
+    } value;
+};
+
 struct Font
 {
-    struct Type
-    {
-        enum E
-        {
-            _5,
-            _8,
-            _UGO,
-            _UGO2,
-            _Big64,
-            Count,
-            None
-        } value;
-    };
-
     int _height;
     Symbol symbols[256];
 
@@ -63,7 +63,7 @@ public:
     static int  GetHeightSymbol(char symbol);
     static int  GetLengthSymbol(char symbol);
     /// Устанавливает текущий шрифт. Ранее установленный можно восстановить функцией Pop()
-    static void SetCurrent(Font::Type::E typeFont);
+    static void SetCurrent(TypeFont::E typeFont);
     /// Восстанавливает шрифт, бывший текущим перед последним вызовом SetCurrent()
     static void Pop();
     static bool IsBig();

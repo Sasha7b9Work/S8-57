@@ -57,24 +57,24 @@ Display::Primitives::Line::Line(int _x0, int _y0, int _x1, int _y1) : x0(_x0), y
 }
 
 
-Display::Primitives::Char::Char(Symbol5::E _ch) : ch((char)_ch), font(Font::Type::_5)
+Display::Primitives::Char::Char(Symbol5::E _ch) : ch((char)_ch), font(TypeFont::_5)
 {
 
 }
 
 
-Display::Primitives::Char::Char(SymbolUGO::E _ch) : ch((char)_ch), font(Font::Type::_UGO)
+Display::Primitives::Char::Char(SymbolUGO::E _ch) : ch((char)_ch), font(TypeFont::_UGO)
 {
 
 }
 
 
-Display::Primitives::Char::Char(SymbolUGO2::E _ch) : ch((char)_ch), font(Font::Type::_UGO2)
+Display::Primitives::Char::Char(SymbolUGO2::E _ch) : ch((char)_ch), font(TypeFont::_UGO2)
 {
 
 }
 
-Display::Primitives::Char::Char(char _ch) : ch(_ch), font(Font::Type::_8)
+Display::Primitives::Char::Char(char _ch) : ch(_ch), font(TypeFont::_8)
 {
 
 }

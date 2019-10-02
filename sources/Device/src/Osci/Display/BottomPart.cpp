@@ -19,7 +19,7 @@ using namespace Osci::Measurements;
 
 void Osci::Display::BottomPart::Draw(int x0, int y0)
 {
-    Font::SetCurrent(Font::Type::_UGO2);
+    Font::SetCurrent(TypeFont::_UGO2);
 
     // Флешка
     if (FDrive::IsConnected())

@@ -13,13 +13,13 @@ using namespace Transceiver;
 
 
 
-const Font *fonts[Font::Type::Count] = {&font5, &font8, &fontUGO, &fontUGO2, nullptr};
+const Font *fonts[TypeFont::Count] = {&font5, &font8, &fontUGO, &fontUGO2, nullptr};
 const Font *font = &font8;
 
 const BigFont *bigFont = &fontDigits64;
 
-Font::Type::E pushedFont = Font::Type::_8;
-Font::Type::E currentFont = Font::Type::_8;
+TypeFont::E pushedFont = TypeFont::_8;
+TypeFont::E currentFont = TypeFont::_8;
 
 #ifndef PANEL
 static int spacing = 1;
@@ -59,11 +59,11 @@ int Font::GetLengthSymbol(char symbol)
 }
 
 #ifdef PANEL
-static void SendTypeFontToPanel(Font::Type::E) {};
+static void SendTypeFontToPanel(TypeFont::E) {};
 #else
-static void SendTypeFontToPanel(Font::Type::E type)
+static void SendTypeFontToPanel(TypeFont::E type)
 {
-    static Font::Type::E prevType = Font::Type::Count;
+    static TypeFont::E prevType = TypeFont::Count;
 
     if (prevType != type)
     {
@@ -74,29 +74,29 @@ static void SendTypeFontToPanel(Font::Type::E type)
 #endif
 
 
-void Font::SetCurrent(Font::Type::E typeFont)
+void Font::SetCurrent(TypeFont::E typeFont)
 {
     if (typeFont != currentFont)
     {
         switch (typeFont)
         {
-        case Type::_5:
+        case TypeFont::_5:
             font = &font5;
             break;
-        case Type::_8:
+        case TypeFont::_8:
             font = &font8;
             break;
-        case Type::_UGO:
+        case TypeFont::_UGO:
             font = &fontUGO;
             break;
-        case Type::_UGO2:
+        case TypeFont::_UGO2:
             font = &fontUGO2;
             break;
-        case Type::_Big64:
+        case TypeFont::_Big64:
             bigFont = &fontDigits64;
             break;
-        case Type::None:
-        case Type::Count:
+        case TypeFont::None:
+        case TypeFont::Count:
             break;
         }
 
@@ -142,7 +142,7 @@ void Font::SetMinWidth(uint8 width)
 
 static bool FontIsSmall()
 {
-    return currentFont <= Font::Type::_UGO2;
+    return currentFont <= TypeFont::_UGO2;
 }
 
 

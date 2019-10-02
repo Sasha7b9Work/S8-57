@@ -82,7 +82,7 @@ void Osci::Display::HiPart::Draw()
 
     x += 42;
 
-    Font::SetCurrent(Font::Type::_8);
+    Font::SetCurrent(TypeFont::_8);
 
     Separator().Draw(x + 1, y0);
 
@@ -214,7 +214,7 @@ static int DrawMainParameters(int _x, int _y)
 
     y1 = y1 - 6;
     int y2 = y1 + 6;
-    Font::SetCurrent(Font::Type::_5);
+    Font::SetCurrent(TypeFont::_5);
 
     x += 77;
 
