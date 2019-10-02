@@ -44,7 +44,20 @@ struct HState
     {
         Disabled,
         Enabled,
-        Size
+        Count
+    };
+};
+
+struct HMode
+{
+    enum E
+    {
+        Analog,
+        Output_PP,
+        RisingIT,
+        Input,
+        AF_PP,
+        Count
     };
 };
 
@@ -52,19 +65,6 @@ namespace HAL
 {
     namespace PIO
     {
-        struct Mode
-        {
-            enum E
-            {
-                Analog,
-                Output_PP,
-                RisingIT,
-                Input,
-                AF_PP,
-                Size
-            };
-        };
-
         struct Pull
         {
             enum E
@@ -96,7 +96,7 @@ namespace HAL
             };
         };
 
-        void Init(HPort::E port, uint pins, Mode::E mode, Pull::E pull, Speed::E speed = Speed::Low, Alternate::E alternate = Alternate::AF0_MCO);
+        void Init(HPort::E port, uint pins, HMode::E mode, Pull::E pull, Speed::E speed = Speed::Low, Alternate::E alternate = Alternate::AF0_MCO);
         /// Установка в "1"
         void Set(HPort::E port, uint16 pin);
         /// Установка в "0"

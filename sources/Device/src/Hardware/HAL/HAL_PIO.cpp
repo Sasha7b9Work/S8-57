@@ -25,7 +25,7 @@ namespace HAL
 {
     namespace PIO
     {
-        static const uint modes[Mode::Size] =
+        static const uint modes[HMode::Count] =
         {
             GPIO_MODE_ANALOG,
             GPIO_MODE_OUTPUT_PP,
@@ -76,7 +76,7 @@ static GPIO_TypeDef * const ports[HPort::Size] =
 
 
 
-void HAL::PIO::Init(HPort::E port, uint pins, Mode::E mode, Pull::E pull, Speed::E speed, Alternate::E alternate)
+void HAL::PIO::Init(HPort::E port, uint pins, HMode::E mode, Pull::E pull, Speed::E speed, Alternate::E alternate)
 {
     GPIO_InitTypeDef isGPIO =
     {

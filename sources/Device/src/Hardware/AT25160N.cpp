@@ -4,9 +4,7 @@
 #include "Hardware/HAL/HAL_PIO.h"
 
 
-using HAL::PIO::Mode;
 using HAL::PIO::Pull;
-
 
 
 #define PIN_OUT     HPort::_C, HPin::_3
@@ -20,7 +18,6 @@ using HAL::PIO::Pull;
 #define READ    BIN_U8(00000011)        ///< Read Data from Memory Array
 #define WRITE   BIN_U8(00000010)        ///< Write Data to Memory Array
 #define WRSR    BIN_U8(00000001)        ///< Write Status Register
-
 
 
 /// Разрешить запись
@@ -64,13 +61,13 @@ void AT25160N::Init()
 
     //                                  SCK                    NSS
     uint pins = (uint)(HPin::_10 | HPin::_12);
-    HAL::PIO::Init(HPort::_B, pins, Mode::Output_PP, Pull::Down);
+    HAL::PIO::Init(HPort::_B, pins, HMode::Output_PP, Pull::Down);
 
     //                                                      MOSI
-    HAL::PIO::Init(HPort::_C, HPin::_3, Mode::Output_PP, Pull::Down);
+    HAL::PIO::Init(HPort::_C, HPin::_3, HMode::Output_PP, Pull::Down);
 
     //                                                      MISO
-    HAL::PIO::Init(HPort::_C, HPin::_2, Mode::Input, Pull::Down);
+    HAL::PIO::Init(HPort::_C, HPin::_2, HMode::Input, Pull::Down);
 
     HAL::PIO::Set(PIN_CS);
     HAL::PIO::Reset(PIN_OUT);

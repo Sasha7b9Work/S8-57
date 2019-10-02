@@ -6,10 +6,7 @@
 
 using namespace Hardware;
 
-using HAL::PIO::Mode;
 using HAL::PIO::Pull;
-
-
 
 
 #define PIN_SCK     HPin::_10
@@ -26,9 +23,7 @@ using HAL::PIO::Pull;
 #define CS          PORT_CS,  PIN_CS
 
 
-
 static void  WriteByte(uint8 address, uint8 byte);
-
 
 
 void AD9286::Init()
@@ -42,11 +37,11 @@ void AD9286::Init()
         SCK - 69 - PB10
     */
    
-    HAL::PIO::Init(PORT_CS, PIN_CS, Mode::Output_PP, Pull::Up);       // Инициализация CS
+    HAL::PIO::Init(PORT_CS, PIN_CS, HMode::Output_PP, Pull::Up);       // Инициализация CS
 
-    HAL::PIO::Init(PORT_DAT, PIN_DAT, Mode::Output_PP, Pull::Up);     // Инициализация DAT
+    HAL::PIO::Init(PORT_DAT, PIN_DAT, HMode::Output_PP, Pull::Up);     // Инициализация DAT
     
-    HAL::PIO::Init(PORT_SCK, PIN_SCK, Mode::Output_PP, Pull::Up);     // Инициализация SCK
+    HAL::PIO::Init(PORT_SCK, PIN_SCK, HMode::Output_PP, Pull::Up);     // Инициализация SCK
 
     HAL::PIO::Set(CS);
     HAL::PIO::Reset(DAT);
