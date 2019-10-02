@@ -4,7 +4,7 @@
 #include "Display/Primitives.h"
 #include "FPGA/FPGA.h"
 #include "Osci/Osci.h"
-#include "Osci/Display/Accumulator.h"
+#include "Osci/Display/DisplayOsci.h"
 #include "Osci/Display/MemoryWindow.h"
 #include "Osci/Measurements/Measurements.h"
 #include "Settings/Settings.h"
