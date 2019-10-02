@@ -7,12 +7,10 @@
 using namespace HAL::PIO;
 
 
-
 static DAC_HandleTypeDef handle = { DAC };
 
 
-
-void HAL::DAC2_::Init()
+void HAL_DAC2::Init()
 {
     RCC->APB1ENR |= RCC_APB1ENR_DACEN;      // Включаем ЦАП
 
@@ -50,7 +48,7 @@ void HAL::DAC2_::Init()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void HAL::DAC2_::SetValue(uint value)
+void HAL_DAC2::SetValue(uint value)
 {
     HAL_DAC_SetValue(&handle, DAC1_CHANNEL_2, DAC_ALIGN_8B_R, value);
 }

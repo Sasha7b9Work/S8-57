@@ -12,12 +12,12 @@ static DAC_HandleTypeDef handle = { DAC };
 
 
 
-void HAL::DAC2_::Init()
+void HAL_DAC2::Init()
 {
 }
 
 
-void HAL::DAC2_::SetValue(uint value)
+void HAL_DAC2::SetValue(uint value)
 {
     HAL_DAC_SetValue(&handle, DAC1_CHANNEL_2, DAC_ALIGN_8B_R, value);
 }

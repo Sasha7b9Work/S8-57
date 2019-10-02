@@ -3,19 +3,19 @@
 
 
 
-void HAL::EEPROM_::WriteBufferBytes(uint, void *, int)
+void HAL_EEPROM::WriteBufferBytes(uint, void *, int)
 {
 
 }
 
 
-void HAL::EEPROM_::EraseSector(uint)
+void HAL_EEPROM::EraseSector(uint)
 {
 
 }
 
 
-void HAL::EEPROM_::WriteBytes(uint, const uint8 *, int)
+void HAL_EEPROM::WriteBytes(uint, const uint8 *, int)
 {
 
 }

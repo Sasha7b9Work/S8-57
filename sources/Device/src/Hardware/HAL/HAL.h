@@ -71,6 +71,18 @@ struct HAL_USART3
     static void StartReceiveIT(void *buffer, uint size);
 };
 
+struct HAL_DAC2
+{
+    static void Init();
+    static void SetValue(uint value);
+};
+
+struct HAL_EEPROM
+{
+    static void EraseSector(uint startAddress);
+    static void WriteBytes(uint address, const uint8 *data, int size);
+    static void WriteBufferBytes(uint address, void *buffer, int size);
+};
 
 namespace HAL
 {
@@ -81,23 +93,6 @@ namespace HAL
     void Delay(uint timeMS);
 
     uint TimeMS();
-
-    class DAC2_
-    {
-    public:
-        static void Init();
-        static void SetValue(uint value);
-    };
-
-
-    ////
-    class EEPROM_
-    {
-    public:
-        static void EraseSector(uint startAddress);
-        static void WriteBytes(uint address, const uint8 *data, int size);
-        static void WriteBufferBytes(uint address, void *buffer, int size);
-    };
 
     ////
     class OTP_

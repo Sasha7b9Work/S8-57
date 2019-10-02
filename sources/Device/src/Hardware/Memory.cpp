@@ -1,12 +1,9 @@
 #include "defines.h"
 #include "Memory.h"
-#include "Hardware/Beeper.h"
-#include <cstring>
-
+#include "Settings/Settings.h"
 #include "Hardware/HAL/HAL.h"
 
 
-using HAL::EEPROM_;
 using HAL::OTP_;
 
 
@@ -69,13 +66,13 @@ void Memory::SaveSettings()
 
 void Memory::EraseSector(uint address)
 {
-    EEPROM_::EraseSector(address);
+    HAL_EEPROM::EraseSector(address);
 }
 
 
 void Memory::WriteData(uint address, const void *data, int size)
 {
-    EEPROM_::WriteBytes(address, (const uint8 *)data, size);
+    HAL_EEPROM::WriteBytes(address, (const uint8 *)data, size);
 }
 
 

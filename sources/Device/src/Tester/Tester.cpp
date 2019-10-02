@@ -43,11 +43,11 @@ class DAC2_
 public:
     static void Init()
     {
-        HAL::DAC2_::Init();
+        HAL_DAC2::Init();
     }
     static void SetValue(uint value)
     {
-        HAL::DAC2_::SetValue(value);
+        HAL_DAC2::SetValue(value);
     }
 };
 

@@ -19,7 +19,7 @@ static uint GetSector(uint strtAddress);
 
 
 
-void HAL::EEPROM_::EraseSector(uint startAddress)
+void HAL_EEPROM::EraseSector(uint startAddress)
 {
     CLEAR_FLASH_FLAGS;
 
@@ -90,7 +90,7 @@ static uint GetSector(uint startAddress)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void HAL::EEPROM_::WriteBytes(uint address, const uint8 *data, int size)
+void HAL_EEPROM::WriteBytes(uint address, const uint8 *data, int size)
 {
     CLEAR_FLASH_FLAGS;
 
