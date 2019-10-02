@@ -282,7 +282,7 @@ void Osci::OnChangedPoints()
 {
     FPGA::HAL::LoadRegUPR();
     FPGA::Reset();
-    Osci::Display::PainterData::ChangeTPos();
+    DisplayOsci::PainterData::ChangeTPos();
     FPGA::Reset();
     TShift::Set(set.time.shift);
     FPGA::Reset();

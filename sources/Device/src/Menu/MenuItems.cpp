@@ -780,7 +780,7 @@ void Choice::ChangeIndex(int delta) const
     *OwnData()->cell = (int8)index;
     OwnData()->handlerChange(IsActive());
     Beeper::GovernorChangedValue();
-    Osci::Display::SetFlagRedraw();
+    DisplayOsci::SetFlagRedraw();
 }
 
 
@@ -869,7 +869,7 @@ float Choice::Step() const //-V2506
         *OwnData()->cell = index;
         tsChoice.address = 0;
         OwnData()->handlerChange(IsActive());
-        Osci::Display::SetFlagRedraw();
+        DisplayOsci::SetFlagRedraw();
         tsChoice.dir = NONE;
         return 0.0F;
     }

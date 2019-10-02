@@ -44,9 +44,9 @@ static void DrawSpectrum();
 
 
 
-void Osci::Display::PainterData::DrawData()
+void DisplayOsci::PainterData::DrawData()
 {
-    if (Measurements::DataIsSetting())
+    if (Osci::Measurements::DataIsSetting())
     {
         static const pFuncVV func[ModeWork::Number] =
         {
@@ -80,7 +80,7 @@ static void DrawCurrent()
         DrawChannel(Chan::A);
         DrawChannel(Chan::B);
     }
-    Osci::Display::MemoryWindow::Draw();
+    DisplayOsci::MemoryWindow::Draw();
 }
 
 
@@ -88,7 +88,7 @@ static void DrawRAM()
 {
     DrawChannel(Chan::A);
     DrawChannel(Chan::B);
-    Osci::Display::MemoryWindow::Draw();
+    DisplayOsci::MemoryWindow::Draw();
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -447,13 +447,13 @@ static void DrawTShift(int /*leftX*/, int /*rightX*/, int /*numBytes*/)
 }
 
 
-int Osci::Display::PainterData::FirstPointOnScreen()
+int DisplayOsci::PainterData::FirstPointOnScreen()
 {
     return set.disp.shiftInMemory;
 }
 
 
-BitSet64 Osci::Display::PainterData::PointsOnDisplay()
+BitSet64 DisplayOsci::PainterData::PointsOnDisplay()
 {
     BitSet64 retValue;
 
@@ -464,7 +464,7 @@ BitSet64 Osci::Display::PainterData::PointsOnDisplay()
 }
 
 
-BitSet64 Osci::Display::PainterData::BytesOnDisplay()
+BitSet64 DisplayOsci::PainterData::BytesOnDisplay()
 {
     BitSet64 retValue;
 
@@ -480,7 +480,7 @@ BitSet64 Osci::Display::PainterData::BytesOnDisplay()
 }
 
 
-void Osci::Display::PainterData::ChangeTPos()
+void DisplayOsci::PainterData::ChangeTPos()
 {
     int width = Grid::Width();
 

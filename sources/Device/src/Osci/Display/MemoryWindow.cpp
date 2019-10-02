@@ -11,10 +11,10 @@
 using namespace FPGA;
 using namespace Osci::Measurements;
 
-//using Osci::Display::MemoryWindow::Width;
-//using Osci::Display::MemoryWindow::Height;
-//using Osci::Display::MemoryWindow::X;
-//using Osci::Display::MemoryWindow::Y;
+//using DisplayOsci::MemoryWindow::Width;
+//using DisplayOsci::MemoryWindow::Height;
+//using DisplayOsci::MemoryWindow::X;
+//using DisplayOsci::MemoryWindow::Y;
 
 
 
@@ -23,7 +23,7 @@ static void DrawDataInRect(int x, int y, int width, int height, const uint8 *dat
 static void DrawScreenArea();
 
 
-void Osci::Display::MemoryWindow::Draw()
+void DisplayOsci::MemoryWindow::Draw()
 {
     if (Cursors::NecessaryDraw())
     {
@@ -93,34 +93,34 @@ static void DrawScreenArea()
     float relBegin = (float)SHIFT_IN_MEMORY / FPGA_NUM_POINTS;          // Относительное начало экранной области относительно всей памяти
     float relWidth = (float)(Grid::Width() + 1) / FPGA_NUM_POINTS;      // Относительное (относительно всей шириный окна) ширина видимой области
 
-    int begin = (int)(relBegin * Osci::Display::MemoryWindow::Width() + 0.5F);   // Реальное начало экранной области относительно начала окна памяти
-    int width = (int)(relWidth * Osci::Display::MemoryWindow::Width() + 0.5F);   // Реальная ширина видимой области
+    int begin = (int)(relBegin * DisplayOsci::MemoryWindow::Width() + 0.5F);   // Реальное начало экранной области относительно начала окна памяти
+    int width = (int)(relWidth * DisplayOsci::MemoryWindow::Width() + 0.5F);   // Реальная ширина видимой области
 
-    Region(width, Osci::Display::MemoryWindow::Height()).Fill(Osci::Display::MemoryWindow::X() + begin, Osci::Display::MemoryWindow::Y(), Color::GRAY_20);
+    Region(width, DisplayOsci::MemoryWindow::Height()).Fill(DisplayOsci::MemoryWindow::X() + begin, DisplayOsci::MemoryWindow::Y(), Color::GRAY_20);
 
-    Rectangle(width, Osci::Display::MemoryWindow::Height()).Draw(Osci::Display::MemoryWindow::X() + begin, Osci::Display::MemoryWindow::Y(), Color::FILL);
+    Rectangle(width, DisplayOsci::MemoryWindow::Height()).Draw(DisplayOsci::MemoryWindow::X() + begin, DisplayOsci::MemoryWindow::Y(), Color::FILL);
 }
 
 
-int Osci::Display::MemoryWindow::Width()
+int DisplayOsci::MemoryWindow::Width()
 {
     return 270;
 }
 
 
-int Osci::Display::MemoryWindow::Height()
+int DisplayOsci::MemoryWindow::Height()
 {
     return 17;
 }
 
 
-int Osci::Display::MemoryWindow::X()
+int DisplayOsci::MemoryWindow::X()
 {
     return 0;
 }
 
 
-int Osci::Display::MemoryWindow::Y()
+int DisplayOsci::MemoryWindow::Y()
 {
     return ::Display::HEIGHT - 19;
 }

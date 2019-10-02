@@ -162,7 +162,7 @@ void Range::Change(Chan::E ch, int delta)
     }
     Range::LoadBoth();
 
-    Osci::Display::SetFlagRedraw();
+    DisplayOsci::SetFlagRedraw();
 }
 
 
@@ -239,7 +239,7 @@ void TShift::Set(int tShift)
 
     Osci::Restart();
 
-    Osci::Display::SetFlagRedraw();
+    DisplayOsci::SetFlagRedraw();
 }
 
 

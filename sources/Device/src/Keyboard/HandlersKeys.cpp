@@ -175,7 +175,7 @@ static void ChangeRShift(Chan::E ch, int delta)
                 timeStop[ch] = TIME_MS;
             }
 
-            Osci::Display::SetFlagRedraw();
+            DisplayOsci::SetFlagRedraw();
         }
     }
 }

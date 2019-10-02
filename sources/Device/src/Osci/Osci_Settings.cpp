@@ -108,7 +108,7 @@ void TBase::Change(int delta)
 
     Osci::Restart();
 
-    Osci::Display::SetFlagRedraw();
+    DisplayOsci::SetFlagRedraw();
 }
 
 
@@ -478,7 +478,7 @@ void Trig::NeedForDraw()
     {
         needDraw = true;
         Timer::SetAndStartOnce(Timer::Type::ShowLevelTrigLev, DisableDrawing, 2000);
-        Osci::Display::SetFlagRedraw();
+        DisplayOsci::SetFlagRedraw();
     }
 }
 

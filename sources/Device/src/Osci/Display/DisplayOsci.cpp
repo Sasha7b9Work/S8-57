@@ -16,7 +16,7 @@ static bool needRedraw = false;
 
 
 
-void Osci::Display::Update()
+void DisplayOsci::Update()
 {
     if (needRedraw)
     {
@@ -38,7 +38,7 @@ void Osci::Display::Update()
 
     HiPart::Draw();
 
-    Averager::Draw();
+    Osci::Averager::Draw();
     
     RShift::DrawBoth();
 
@@ -50,13 +50,13 @@ void Osci::Display::Update()
     
     FrequencyCounter::Draw();
 
-    Measurements::Table::Draw();
+    Osci::Measurements::Table::Draw();
 
     Menu::Draw();
 }
 
 
-void Osci::Display::DrawCursorTrigLevel()
+void DisplayOsci::DrawCursorTrigLevel()
 {
     Chan::E ch = (Chan::E)set.trig.source;
 
@@ -99,7 +99,7 @@ void Osci::Display::DrawCursorTrigLevel()
 }
 
 
-void Osci::Display::DrawScaleLine(int x, bool forTrigLev)
+void DisplayOsci::DrawScaleLine(int x, bool forTrigLev)
 {
     int width = 6;
     int topY = Grid::Top() + DELTA;
@@ -122,7 +122,7 @@ void Osci::Display::DrawScaleLine(int x, bool forTrigLev)
 }
 
 
-void Osci::Display::SetFlagRedraw()
+void DisplayOsci::SetFlagRedraw()
 {
     needRedraw = true;
 }

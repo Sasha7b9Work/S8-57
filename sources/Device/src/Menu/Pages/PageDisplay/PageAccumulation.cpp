@@ -43,7 +43,7 @@ static bool IsActive_Accum_Clear()
 
 void PageDisplay::PageAccumulation::OnPress_Accumulation_Clear()
 {
-    Osci::Display::SetFlagRedraw();
+    DisplayOsci::SetFlagRedraw();
 }
 
 DEF_BUTTON( bClear,                                                                                                                                 //--- ÄÈÑÏËÅÉ - ÍÀÊÎÏËÅÍÈÅ - Î÷èñòèòü ---

@@ -15,7 +15,7 @@ static uint CurrentFrame();
 
 
 
-void Osci::Display::Accumulator::NextFrame()
+void DisplayOsci::Accumulator::NextFrame()
 {
     if (set.disp.modeAccumulation == ModeAccumulation::Reset)
     {
@@ -33,18 +33,18 @@ void Osci::Display::Accumulator::NextFrame()
         numFrames++;
         if (numFrames >= set.disp.ENumAccum)
         {
-            Osci::Display::SetFlagRedraw();
+            DisplayOsci::SetFlagRedraw();
             numFrames = 0;
         }
     }
     else
     {
-        Osci::Display::SetFlagRedraw();
+        DisplayOsci::SetFlagRedraw();
     }
 }
 
 
-void Osci::Display::Accumulator::Reset()
+void DisplayOsci::Accumulator::Reset()
 {
     numFrames = 0;
 }
