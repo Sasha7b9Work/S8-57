@@ -38,21 +38,20 @@ struct HPin
 
 };
 
+struct HState
+{
+    enum E
+    {
+        Disabled,
+        Enabled,
+        Size
+    };
+};
 
 namespace HAL
 {
     namespace PIO
     {
-        struct State
-        {
-            enum E
-            {
-                Disabled,
-                Enabled,
-                Size
-            };
-        };
-
         struct Mode
         {
             enum E
@@ -102,7 +101,7 @@ namespace HAL
         void Set(HPort::E port, uint16 pin);
         /// Установка в "0"
         void Reset(HPort::E port, uint16 pin);
-        void Write(HPort::E port, uint16 pin, State::E state);
+        void Write(HPort::E port, uint16 pin, HState::E state);
         bool Read(HPort::E port, uint16 pin);
 
         void EXTI_CLEAR_IT_BIT(uint16 pin);

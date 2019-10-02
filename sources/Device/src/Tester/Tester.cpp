@@ -9,9 +9,6 @@
 #include "Utils/Values.h"
 
 
-using HAL::PIO::State;
-
-
 static Settings oldSet = Settings::defaultSettings;
 
 uint16 Tester::Pin_TEST_ON = HPin::_13;
@@ -275,16 +272,16 @@ static void RecountPoints(uint16 *x, uint8 *y)
 void Tester::LoadPolarity()
 {
     // ”станавливаем пол€рность
-    HAL::PIO::Write(Port_PNP, Pin_PNP, (set.test.polarity == TesterPolarity::Positive) ? State::Enabled : State::Disabled);
+    HAL::PIO::Write(Port_PNP, Pin_PNP, (set.test.polarity == TesterPolarity::Positive) ? HState::Enabled : HState::Disabled);
 }
 
 
 void Tester::LoadStep()
 {
     // ”станавливаем управление напр€жением или током
-    HAL::PIO::Write(Port_U, Pin_U, (set.test.control == TesterControl::Voltage) ? State::Enabled : State::Disabled);
+    HAL::PIO::Write(Port_U, Pin_U, (set.test.control == TesterControl::Voltage) ? HState::Enabled : HState::Disabled);
 
-    HAL::PIO::Write(Port_I, Pin_I, (set.test.control == TesterControl::Voltage) ? State::Disabled : State::Enabled);
+    HAL::PIO::Write(Port_I, Pin_I, (set.test.control == TesterControl::Voltage) ? HState::Disabled : HState::Enabled);
 
     if (set.test.control == TesterControl::Voltage)
     {
