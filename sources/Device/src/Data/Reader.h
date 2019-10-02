@@ -3,8 +3,8 @@
 #include "Menu/Pages/Include/PageMemory.h"
 
 
-extern Osci::DataP2P*      pDataP2P;
-extern Osci::Data*         pData;
+extern DataOsciP2P*        pDataP2P;
+extern DataOsci*           pData;
 extern const DataSettings *pDS;         ///< ”казатель на настройки текущего рисуемого сигнала. ќбращатьс€ к нему следует через макрос DS.
 extern uint8 *dataOUT[2];               ///< —читанные данные второго канала
 extern const uint8 *dataIN[2];

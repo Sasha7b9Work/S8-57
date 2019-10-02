@@ -54,7 +54,7 @@ void Osci::Init()
     FPGA::LoadCalibratorMode();
     LoadHoldfOff();
     ::HAL::PIO::Init(::HAL::PIO::Port::_G, ::HAL::PIO::Pin::_1, ::HAL::PIO::Mode::Input, ::HAL::PIO::Pull::Up);
-    Osci::Storage::Clear();
+    StorageOsci::Clear();
     FPGA::OnPressStart();
 }
 
@@ -78,7 +78,7 @@ void Osci::Start()
 
     if (InModeP2P())
     {
-        Storage::PrepareNewFrameP2P();
+        StorageOsci::PrepareNewFrameP2P();
     }
 
     FPGA::isRunning = true;
@@ -182,7 +182,7 @@ void Osci::ReadPointP2P()
     {
         BitSet16 dataA(FSMC::ReadFromFPGA(RD::DATA_A), FSMC::ReadFromFPGA(RD::DATA_A + 1));
         BitSet16 dataB(FSMC::ReadFromFPGA(RD::DATA_B), FSMC::ReadFromFPGA(RD::DATA_B + 1));
-        Osci::Storage::GetFrameP2P()->AddPoints(dataA, dataB);
+        StorageOsci::GetFrameP2P()->AddPoints(dataA, dataB);
     }
 }
 
@@ -286,7 +286,7 @@ void Osci::OnChangedPoints()
     FPGA::Reset();
     TShift::Set(set.time.shift);
     FPGA::Reset();
-    Osci::Storage::Clear();
+    StorageOsci::Clear();
 }
 
 

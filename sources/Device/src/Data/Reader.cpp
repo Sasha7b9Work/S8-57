@@ -19,9 +19,9 @@ uint16 *ave[2] = { reinterpret_cast<uint16 *>(ccm[2]), reinterpret_cast<uint16 *
 /// ”казатель на настройки считанных данных
 const DataSettings *pDS = nullptr;
 /// ”казатель на считанные даныне
-Osci::Data *pData = nullptr;
+DataOsci *pData = nullptr;
 /// ”казатель на фрейм поточечного вывода
-Osci::DataP2P *pDataP2P = nullptr;
+DataOsciP2P *pDataP2P = nullptr;
 
 
 
@@ -38,7 +38,7 @@ void Reader::ReadDataFromStorage()
 
     IN_A = IN_B = nullptr;
 
-    DATA = Osci::Storage::GetData((set.mem.modeWork == ModeWork::RAM) ? Memory::RAM::CurrentSignal() : 0);
+    DATA = StorageOsci::GetData((set.mem.modeWork == ModeWork::RAM) ? Memory::RAM::CurrentSignal() : 0);
 
     if (DATA != nullptr)
     {
@@ -61,7 +61,7 @@ void Reader::ReadDataP2P()
 {
     if (Osci::InModeP2P())
     {
-        DATA_P2P = Osci::Storage::GetFrameP2P();
+        DATA_P2P = StorageOsci::GetFrameP2P();
 
         if (DATA_P2P)
         {

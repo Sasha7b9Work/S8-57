@@ -44,11 +44,11 @@ namespace FPGA
     class DataAccessor
     {
     public:
-        static uint8 *DataA(Osci::Data *data)
+        static uint8 *DataA(DataOsci *data)
         {
             return data->dataA;
         }
-        static uint8 *DataB(Osci::Data *data)
+        static uint8 *DataB(DataOsci *data)
         {
             return data->dataB;
         }
@@ -214,7 +214,7 @@ void FPGA::ClearDataRand()
 
 void FPGA::ReadData()
 {
-    Osci::Data *data = Osci::Storage::PrepareForNewData();
+    DataOsci *data = StorageOsci::PrepareForNewData();
 
     if (ReadDataChanenl(Chan::A, DataAccessor::DataA(data)))
     {
@@ -229,8 +229,8 @@ void FPGA::ReadData()
 
     if (set.disp.ENumAverage != ENumAverage::_1)               // Если включено усреднение
     {
-        Osci::Data *last = Osci::Storage::GetData(0);
-        Osci::Data *prev = Osci::Storage::GetData(1);
+        DataOsci *last = StorageOsci::GetData(0);
+        DataOsci *prev = StorageOsci::GetData(1);
 
         if (prev && last)
         {

@@ -16,13 +16,13 @@ int16 Memory::RAM::CurrentSignal()
 
 void Memory::RAM::SelectNextSignal()
 {
-    Math::CircleIncrease<int16>(&currentSignal, 0, (int16)Osci::Storage::NumElementsInStorage() - 1);
+    Math::CircleIncrease<int16>(&currentSignal, 0, (int16)StorageOsci::NumElementsInStorage() - 1);
 }
 
 
 void Memory::RAM::SelectPrevSignal()
 {
-    Math::CircleDecrease<int16>(&currentSignal, 0, (int16)Osci::Storage::NumElementsInStorage() - 1);
+    Math::CircleDecrease<int16>(&currentSignal, 0, (int16)StorageOsci::NumElementsInStorage() - 1);
 }
 
 

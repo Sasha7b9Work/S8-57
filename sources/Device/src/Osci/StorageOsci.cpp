@@ -16,26 +16,19 @@
 */
 
 
-using namespace Osci;
-
-
-
-namespace Osci
-{
-
-uint Data::allDatas = 0;
+uint DataOsci::allDatas = 0;
 
 class DataAccessor
 {
 public:
     /// Заполнить вновь выделенную память нужными значениями
-    static void FillNewData(Data *data)
+    static void FillNewData(DataOsci *data)
     {
         uint bytesInChannel = FPGA::BytesInChannel();
 
         data->settings.Fill();
 
-        uint8 *addrData = (uint8 *)data + sizeof(Data);     // Адрес начала данных
+        uint8 *addrData = (uint8 *)data + sizeof(DataOsci);     // Адрес начала данных
 
         if (set.ch[Chan::A].enabled)
         {
@@ -52,7 +45,7 @@ public:
     }
 
     /// Заполнить Data значениями
-    static void FillNewData(DataP2P *data)
+    static void FillNewData(DataOsciP2P *data)
     {
         FillNewData(&data->data);
     }
@@ -142,7 +135,7 @@ public:
     {
         int result = 0;
 
-        Data *data = oldest;
+        DataOsci *data = oldest;
 
         while (data)
         {
@@ -154,16 +147,16 @@ public:
     }
 
     /// Выделить место для нового фрейма, чтобы хватило памяти для хранения данных с настройками DataSettings
-    static Data *GetMemoryForData(const DataSettings *ds)
+    static DataOsci *GetMemoryForData(const DataSettings *ds)
     {
         if (oldest == nullptr)
         {
-            newest = oldest = (Data *)BeginMemory();
+            newest = oldest = (DataOsci *)BeginMemory();
             newest->prev = newest->next = oldest->next = oldest->prev = nullptr;
             return oldest;
         }
 
-        uint needMemory = sizeof(Data) + ds->NeedMemoryForData();       // Вычисляем требуемое количество памяти
+        uint needMemory = sizeof(DataOsci) + ds->NeedMemoryForData();       // Вычисляем требуемое количество памяти
 
         uint8 *address = Allocate(needMemory);
 
@@ -173,7 +166,7 @@ public:
             address = Allocate(needMemory);         // пока не освободится достаточно место для хранения новых
         }
 
-        Data *data = (Data *)address;
+        DataOsci *data = (DataOsci *)address;
 
         if (newest == oldest)                       // Сохранены только одни данные
         {
@@ -193,9 +186,9 @@ public:
         return newest;
     }
 
-    static Data *GetData(int fromEnd)
+    static DataOsci *GetData(int fromEnd)
     {
-        Data *data = newest;
+        DataOsci *data = newest;
 
         while (fromEnd > 0 && data != nullptr)
         {
@@ -206,18 +199,18 @@ public:
         return data;
     }
 
-    static DataP2P *GetMemoryForDataP2P()
+    static DataOsciP2P *GetMemoryForDataP2P()
     {
         return GetDataP2P();
     }
 
-    static DataP2P *GetDataP2P()
+    static DataOsciP2P *GetDataP2P()
     {
         DataSettings ds;
         ds.Fill();
-        uint size = sizeof(DataP2P) + ds.SizeChannel() * 2;
+        uint size = sizeof(DataOsciP2P) + ds.SizeChannel() * 2;
 
-        return (DataP2P *)(((uint)Heap::End() - size));
+        return (DataOsciP2P *)(((uint)Heap::End() - size));
     }
 
     static void Reset()
@@ -227,19 +220,17 @@ public:
 
 private:
     /// Указатель на первые хранящиеся данные (самые старые)
-    static Data *oldest;
+    static DataOsci *oldest;
     /// Указатель на последние хранящиеся данные (самые свежие)
-    static Data *newest;
+    static DataOsci *newest;
 };
 
-Data *HeapWorker::oldest = nullptr;
-Data *HeapWorker::newest = nullptr;
-
-};
+DataOsci *HeapWorker::oldest = nullptr;
+DataOsci *HeapWorker::newest = nullptr;
 
 
 
-Data *Storage::PrepareForNewData()
+DataOsci *StorageOsci::PrepareForNewData()
 {
     if (SET_DISABLED_BOTH)
     {
@@ -249,7 +240,7 @@ Data *Storage::PrepareForNewData()
     DataSettings ds;
     ds.Fill();
 
-    Data *data = (Data *)HeapWorker::GetMemoryForData(&ds);
+    DataOsci *data = (DataOsci *)HeapWorker::GetMemoryForData(&ds);
 
     data->Create();
 
@@ -259,9 +250,9 @@ Data *Storage::PrepareForNewData()
 }
 
 
-void Storage::PrepareNewFrameP2P()
+void StorageOsci::PrepareNewFrameP2P()
 {
-    DataP2P *data = HeapWorker::GetMemoryForDataP2P();
+    DataOsciP2P *data = HeapWorker::GetMemoryForDataP2P();
 
     data->Create();
 
@@ -271,26 +262,26 @@ void Storage::PrepareNewFrameP2P()
 }
 
 
-Data *Storage::GetData(int fromEnd)
+DataOsci *StorageOsci::GetData(int fromEnd)
 {
     return HeapWorker::GetData(fromEnd);
 }
 
 
-DataP2P *Storage::GetFrameP2P()
+DataOsciP2P *StorageOsci::GetFrameP2P()
 {
     return HeapWorker::GetDataP2P();
 }
 
 
-void Data::Create()
+void DataOsci::Create()
 {
     num = allDatas++;
     dataA = dataB = nullptr;
 }
 
 
-void DataP2P::Create()
+void DataOsciP2P::Create()
 {
     data.Create();
     data.allDatas--;
@@ -301,33 +292,33 @@ void DataP2P::Create()
 }
 
 
-const DataSettings *Data::Settings()
+const DataSettings *DataOsci::Settings()
 {
     return &settings;
 }
 
 
-const DataSettings *DataP2P::Settings()
+const DataSettings *DataOsciP2P::Settings()
 {
     return &data.settings;
 }
 
 
-const uint8 *Data::DataA()
+const uint8 *DataOsci::DataA()
 {
     return dataA;
 }
 
 
-const uint8 *Data::DataB()
+const uint8 *DataOsci::DataB()
 {
     return dataB;
 }
 
 
-uint Data::FullSize() const
+uint DataOsci::FullSize() const
 {
-    uint result = sizeof(Data);
+    uint result = sizeof(DataOsci);
 
     if (ENABLED_A(&settings))
     {
@@ -342,25 +333,25 @@ uint Data::FullSize() const
 }
 
 
-const uint8 *Data::GetData(Chan::E ch)
+const uint8 *DataOsci::GetData(Chan::E ch)
 {
     return (ch == Chan::A) ? dataA : dataB;
 }
 
 
-const uint8 *DataP2P::DataA()
+const uint8 *DataOsciP2P::DataA()
 {
     return data.dataA;
 }
 
 
-const uint8 *DataP2P::DataB()
+const uint8 *DataOsciP2P::DataB()
 {
     return data.dataB;
 }
 
 
-float DataP2P::TimePointMS(uint numPoint) const
+float DataOsciP2P::TimePointMS(uint numPoint) const
 {
     static const float timePoint[TBase::Size] =
     {
@@ -402,7 +393,7 @@ float DataP2P::TimePointMS(uint numPoint) const
 }
 
 
-void DataP2P::AddPoints(BitSet16 a, BitSet16 b)
+void DataOsciP2P::AddPoints(BitSet16 a, BitSet16 b)
 {
     if (set.time.peakDet == PeakDetMode::Enabled)
     {
@@ -425,7 +416,7 @@ void DataP2P::AddPoints(BitSet16 a, BitSet16 b)
 }
 
 
-bool DataP2P::NeedAdditionPoints(uint timeMS) const
+bool DataOsciP2P::NeedAdditionPoints(uint timeMS) const
 {
     float timePoint = TimePointMS(readingPoints);
 
@@ -433,7 +424,7 @@ bool DataP2P::NeedAdditionPoints(uint timeMS) const
 }
 
 
-void DataP2P::FillBufferForDraw(Chan::E ch, Buffer *buffer)
+void DataOsciP2P::FillBufferForDraw(Chan::E ch, Buffer *buffer)
 {
     if (PEAKDET_DISABLED(&data.settings))
     {
@@ -446,7 +437,7 @@ void DataP2P::FillBufferForDraw(Chan::E ch, Buffer *buffer)
 }
 
 
-void DataP2P::FillBufferForPeakDetDisabled(Chan::E ch, Buffer *buffer)
+void DataOsciP2P::FillBufferForPeakDetDisabled(Chan::E ch, Buffer *buffer)
 {
     static const uint NUM_BYTES = 281;
 
@@ -466,7 +457,7 @@ void DataP2P::FillBufferForPeakDetDisabled(Chan::E ch, Buffer *buffer)
 }
 
 
-void DataP2P::FillBufferForPeakDetEnabled(Chan::E ch, Buffer *buffer)
+void DataOsciP2P::FillBufferForPeakDetEnabled(Chan::E ch, Buffer *buffer)
 {
     static const uint NUM_BYTES = 281 * 2;
     uint readingBytes = (uint)ReadingBytes();
@@ -487,14 +478,14 @@ void DataP2P::FillBufferForPeakDetEnabled(Chan::E ch, Buffer *buffer)
 }
 
 
-void DataP2P::PrepareBuffer(Buffer *buffer, uint size)
+void DataOsciP2P::PrepareBuffer(Buffer *buffer, uint size)
 {
     buffer->Realloc(size);
     std::memset(buffer->data, FPGA::VALUE::NONE, size);
 }
 
 
-uint8 DataP2P::ByteFromEnd(Chan::E ch, int fromEnd)
+uint8 DataOsciP2P::ByteFromEnd(Chan::E ch, int fromEnd)
 {
     if (fromEnd > data.settings.SizeChannel())      // Если требуется значение, большее чем возможно сохранить
     {
@@ -517,7 +508,7 @@ uint8 DataP2P::ByteFromEnd(Chan::E ch, int fromEnd)
 }
 
 
-uint DataP2P::ReadingBytes() const
+uint DataOsciP2P::ReadingBytes() const
 {
     if (PEAKDET_DISABLED(&data.settings))
     {
@@ -528,13 +519,13 @@ uint DataP2P::ReadingBytes() const
 }
 
 
-int Osci::Storage::NumElementsInStorage()
+int StorageOsci::NumElementsInStorage()
 {
     return HeapWorker::NumElementsInStorage();
 }
 
 
-void Osci::Storage::Clear()
+void StorageOsci::Clear()
 {
     HeapWorker::Reset();
 }
