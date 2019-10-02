@@ -119,7 +119,7 @@ void Display::Update()
     static const pFuncVV funcs[Device::Mode::Size] =
     {
         DisplayOsci::Update,
-        Tester::Display::Update,
+        DisplayTester::Update,
         Multimeter::Display::Update,
         DisplayRecorder::Update
     };

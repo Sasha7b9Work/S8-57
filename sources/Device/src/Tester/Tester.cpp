@@ -38,21 +38,18 @@ static uint8  dataY[Tester::NUM_STEPS][TESTER_NUM_POINTS];
 
 
 
-namespace Tester
+class DAC2_
 {
-    class DAC2_
+public:
+    static void Init()
     {
-    public:
-        static void Init()
-        {
-            HAL::DAC2_::Init();
-        }
-        static void SetValue(uint value)
-        {
-            HAL::DAC2_::SetValue(value);
-        }
-    };
-}
+        HAL::DAC2_::Init();
+    }
+    static void SetValue(uint value)
+    {
+        HAL::DAC2_::SetValue(value);
+    }
+};
 
 
 
@@ -244,7 +241,7 @@ static void ReadData()
     {
         RecountPoints(x, y);
 
-        Tester::Display::SetPoints(halfStep, x, y);
+        DisplayTester::SetPoints(halfStep, x, y);
     }
 }
 

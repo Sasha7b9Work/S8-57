@@ -1631,9 +1631,9 @@
               <FilePath>.\src\Tester\Tester.h</FilePath>
             </File>
             <File>
-              <FileName>Tester_Graphics.cpp</FileName>
+              <FileName>DisplayTester.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\Tester\Tester_Graphics.cpp</FilePath>
+              <FilePath>.\src\Tester\DisplayTester.cpp</FilePath>
             </File>
           </Files>
         </Group>

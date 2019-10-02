@@ -38,14 +38,7 @@ namespace Timer
     class TIM3_;
 }
 
-namespace Tester
-{
-    class DAC2_;
-}
-
 class Battery;
-
-
 
 namespace HAL
 {
@@ -118,8 +111,7 @@ namespace HAL
     ////
     class DAC2_
     {
-    friend class Tester::DAC2_;
-    private:
+    public:
         static void Init();
         static void SetValue(uint value);
     };

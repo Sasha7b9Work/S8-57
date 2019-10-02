@@ -31,13 +31,13 @@ static String ValueForStep(int step);
 
 
 
-void Tester::Display::Update()
+void DisplayTester::Update()
 {
     Painter::BeginScene(Color::BACK);
 
     Grid::Draw();
 
-    for (int i = 0; i < NUM_STEPS; i++)
+    for (int i = 0; i < Tester::NUM_STEPS; i++)
     {
         DrawData(i);
     }
@@ -86,7 +86,7 @@ static void DrawData(int numStep)
 }
 
 
-void Tester::Display::SetPoints(int numStep, const uint16 dx[TESTER_NUM_POINTS], const uint8 dy[TESTER_NUM_POINTS])
+void DisplayTester::SetPoints(int numStep, const uint16 dx[TESTER_NUM_POINTS], const uint8 dy[TESTER_NUM_POINTS])
 {
     ready[numStep] = true;
 
