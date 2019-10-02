@@ -1,6 +1,6 @@
 #include "defines.h"
 #include "PainterData.h"
-#include "Display/Display_Primitives.h"
+#include "Display/Primitives.h"
 #include "Display/Grid.h"
 #include "Display/Symbols.h"
 #include "Osci/Osci.h"

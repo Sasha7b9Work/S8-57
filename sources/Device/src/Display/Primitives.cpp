@@ -1,9 +1,5 @@
 #include "defines.h"
-#include "Command.h"
-#include "Display_Primitives.h"
-#include "Painter.h"
-#include "Utils/Buffer.h"
-#include "Utils/Debug.h"
+#include "Primitives.h"
 #include "Utils/Math.h"
 #include <cstring>
 

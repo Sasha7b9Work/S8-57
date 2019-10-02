@@ -3,7 +3,7 @@
 #include "device.h"
 #include "Display/Console.h"
 #include "Display/Painter.h"
-#include "Display/Display_Primitives.h"
+#include "Display/Primitives.h"
 #include "Hardware/Timer.h"
 #include "Hardware/Beeper.h"
 #include "Recorder/Recorder_Display.h"

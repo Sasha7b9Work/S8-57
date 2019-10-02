@@ -1,6 +1,6 @@
 #include "defines.h"
 #include "Osci_Averager.h"
-#include "Display/Display_Primitives.h"
+#include "Display/Primitives.h"
 #include "Settings/Settings.h"
 #include "Osci.h"
 #include "Data/Reader.h"

@@ -1,7 +1,7 @@
 #include "defines.h"
 #include "MemoryWindow.h"
 #include "Data/Reader.h"
-#include "Display/Display_Primitives.h"
+#include "Display/Primitives.h"
 #include "Display/Grid.h"
 #include "Display/Painter.h"
 #include "FPGA/FPGA.h"

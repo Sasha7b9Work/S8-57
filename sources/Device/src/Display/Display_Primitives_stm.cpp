@@ -1,7 +1,7 @@
 #include "defines.h"
 #include "Command.h"
 #include "Transceiver.h"
-#include "Display/Display_Primitives.h"
+#include "Display/Primitives.h"
 #include "Hardware/HAL/HAL.h"
 #include <cstring>
 #include "Utils/Buffer.h"

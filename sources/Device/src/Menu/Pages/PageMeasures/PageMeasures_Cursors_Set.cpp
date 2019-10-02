@@ -2,7 +2,7 @@
 #include "Menu/MenuItems.h"
 #include "Menu/Pages/Include/PageMeasures.h"
 #include "Display/Painter.h"
-#include "Display/Display_Primitives.h"
+#include "Display/Primitives.h"
 #include "Settings/Settings.h"
 #include "Utils/Math.h"
 #include "Hardware/Beeper.h"

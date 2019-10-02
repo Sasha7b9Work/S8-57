@@ -1,6 +1,6 @@
 #include "defines.h"
 #include "Recorder/Recorder_Display.h"
-#include "Display/Display_Primitives.h"
+#include "Display/Primitives.h"
 #include "Display/Grid.h"
 #include "Display/Painter.h"
 #include "Menu/Menu.h"

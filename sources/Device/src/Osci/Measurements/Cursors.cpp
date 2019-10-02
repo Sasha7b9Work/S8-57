@@ -1,6 +1,6 @@
 #include "defines.h"
 #include "Display/Colors.h"
-#include "Display/Display_Primitives.h"
+#include "Display/Primitives.h"
 #include "Display/Grid.h"
 #include "Display/Painter.h"
 #include "FPGA/FPGA_Math.h"

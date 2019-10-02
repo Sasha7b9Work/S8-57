@@ -1,5 +1,5 @@
 #include "defines.h"
-#include "Display/Display_Primitives.h"
+#include "Display/Primitives.h"
 #include "Display/Grid.h"
 #include "Osci/Measurements/Measurements_Table.h"
 #include "Settings/Settings.h"

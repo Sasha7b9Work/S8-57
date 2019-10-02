@@ -17,7 +17,7 @@
 #include "Hardware/Beeper.h"
 #include "FPGA/FPGA.h"
 #include "Utils/Math.h"
-#include "Display/Display_Primitives.h"
+#include "Display/Primitives.h"
 #include "Display/Grid.h"
 #include "Display/Painter.h"
 #include "Utils/Debug.h"

@@ -1,6 +1,6 @@
 #include "defines.h"
 #include "String.h"
-#include "Display/Display_Primitives.h"
+#include "Display/Primitives.h"
 #include "Display/Painter.h"
 #include <cstring>
 #include <cstdio>

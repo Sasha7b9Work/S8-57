@@ -3,7 +3,7 @@
 #include "Menu/Pages/Include/PageMeasures.h"
 #include "Settings/Settings.h"
 #include "Utils/Math.h"
-#include "Display/Display_Primitives.h"
+#include "Display/Primitives.h"
 #include "Display/Painter.h"
 #include "Display/Symbols.h"
 #include "FPGA/FPGA.h"

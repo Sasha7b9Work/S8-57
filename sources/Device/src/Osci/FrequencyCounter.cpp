@@ -1,6 +1,6 @@
 #include "defines.h"
 #include "log.h"
-#include "Display/Display_Primitives.h"
+#include "Display/Primitives.h"
 #include "Display/Grid.h"
 #include "FPGA/FPGA_HAL.h"
 #include "Hardware/Timer.h"

@@ -1,7 +1,7 @@
 #include "defines.h"
 #include "log.h"
 #include "Settings/Settings.h"
-#include "Display/Display_Primitives.h"
+#include "Display/Primitives.h"
 #include "Display/Font/Font.h"
 #include "Display/Painter.h"
 #include "Tables.h"

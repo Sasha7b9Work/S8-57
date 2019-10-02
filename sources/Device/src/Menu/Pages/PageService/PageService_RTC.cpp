@@ -5,7 +5,7 @@
 #include "Display/Font/Font.h"
 #include "Display/Display.h"
 #include "Display/Symbols.h"
-#include "Display/Display_Primitives.h"
+#include "Display/Primitives.h"
 #include "Display/Painter.h"
 #include "Hardware/Timer.h"
 #include "Utils/Values.h"

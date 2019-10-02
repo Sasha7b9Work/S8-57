@@ -1,7 +1,7 @@
 #include "defines.h"
 #include "HiPart.h"
 #include "Data/Reader.h"
-#include "Display/Display_Primitives.h"
+#include "Display/Primitives.h"
 #include "Display/Grid.h"
 #include "Display/Painter.h"
 #include "Display/Symbols.h"

@@ -2,7 +2,7 @@
 #include "Multimeter/Multimeter.h"
 #include "Display/Painter.h"
 #include "Settings/Settings.h"
-#include "Display/Display_Primitives.h"
+#include "Display/Primitives.h"
 #include "Hardware/Beeper.h"
 #include "Utils/Debug.h"
 #include <cstring>

@@ -1,6 +1,6 @@
 #include "defines.h"
 #include "Display/Symbols.h"
-#include "Display/Display_Primitives.h"
+#include "Display/Primitives.h"
 #include "Menu/Pages/Include/PageRecorder.h"
 #include "Settings/Settings.h"
 

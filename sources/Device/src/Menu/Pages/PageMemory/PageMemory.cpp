@@ -2,7 +2,7 @@
 #include "Menu/Pages/Include/PageMemory.h"
 #include "Tables.h"
 #include "Data/Reader.h"
-#include "Display/Display_Primitives.h"
+#include "Display/Primitives.h"
 #include "Display/Grid.h"
 #include "Display/Symbols.h"
 #include "Display/Painter.h"

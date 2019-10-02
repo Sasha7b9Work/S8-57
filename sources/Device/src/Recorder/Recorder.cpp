@@ -1,5 +1,5 @@
 #include "defines.h"
-#include "Display/Display_Primitives.h"
+#include "Display/Primitives.h"
 #include "Display/Painter.h"
 #include "FPGA/FPGA_HAL.h"
 #include "Hardware/Memory.h"

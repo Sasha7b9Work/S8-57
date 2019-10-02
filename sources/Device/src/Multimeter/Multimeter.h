@@ -2,8 +2,6 @@
 
 namespace Multimeter
 {
-    //class DisplayWorker;
-
     /// Инициализация
     void Init();
 

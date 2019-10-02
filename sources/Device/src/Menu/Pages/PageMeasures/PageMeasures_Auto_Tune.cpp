@@ -1,6 +1,6 @@
 #include "defines.h"
 #include "Menu/MenuItems.h"
-#include "Display/Display_Primitives.h"
+#include "Display/Primitives.h"
 #include "Display/Painter.h"
 #include "Osci/Measurements/Measures.h"
 #include "Settings/Settings.h"

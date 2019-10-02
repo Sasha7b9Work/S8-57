@@ -1,6 +1,6 @@
 #include "defines.h"
 #include "device.h"
-#include "Display/Display_Primitives.h"
+#include "Display/Primitives.h"
 #include "Display/Symbols.h"
 #include "Display/Painter.h"
 #include "FPGA/FPGA.h"

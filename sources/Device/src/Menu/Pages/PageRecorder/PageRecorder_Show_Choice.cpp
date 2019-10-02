@@ -2,7 +2,7 @@
 #include "Menu/Pages/Include/PageRecorder.h"
 #include "Display/Font/Font.h"
 #include "Display/Symbols.h"
-#include "Display/Display_Primitives.h"
+#include "Display/Primitives.h"
 
 
 using namespace Display::Primitives;

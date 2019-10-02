@@ -11,7 +11,7 @@
 #include "Data/Reader.h"
 #include "Display/Grid.h"
 #include "Display/Symbols.h"
-#include "Display/Display_Primitives.h"
+#include "Display/Primitives.h"
 #include "Display/Font/Font.h"
 #include "MessageMgr.h"
 #include "Utils/Values.h"
