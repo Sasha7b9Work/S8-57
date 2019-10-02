@@ -21,21 +21,11 @@ DEF_CHOICE_3( cSource,
 )
 
 
-
-//DEF_CHOICE_2( cCursor,
-//    "Курсор",
-//    "",
-//    "1",
-//    "2",
-//    set.rec.currentCursor, &PageRecorder::PageShow::self, Item::Active, Choice::Changed, Choice::AfterDraw
-//)
-
-
-static void OnPress_Next()
+static void OnPress_Right()
 {
 }
 
-static void Draw_Next(int x, int y)
+static void Draw_Right(int x, int y)
 {
     Char(SymbolUGO2::TRIANGLE_RIGHT).Draw4SymbolsInRect(x + 6, y + 2);
 }
@@ -43,15 +33,15 @@ static void Draw_Next(int x, int y)
 DEF_GRAPH_BUTTON( bRight,                                                                                                                 //--- ФУНКЦИЯ - РЕГИСТРАТОР - ПРОСМОТР - Вправо ---
     "Вправо",
     "Переместить окно просмотра вправо",
-    &PageRecorder::PageShow::self, Item::Active, OnPress_Next, Draw_Next
+    &PageRecorder::PageShow::self, Item::Active, OnPress_Right, Draw_Right
 )
 
 
-static void OnPress_Prev()
+static void OnPress_Left()
 {
 }
 
-static void Draw_Prev(int x, int y)
+static void Draw_Left(int x, int y)
 {
     Char(SymbolUGO2::TRIANGLE_LEFT).Draw4SymbolsInRect(x + 6, y + 2);
 }
@@ -59,10 +49,8 @@ static void Draw_Prev(int x, int y)
 DEF_GRAPH_BUTTON( bLeft,                                                                                                                   //--- ФУНКЦИЯ - РЕГИСТРАТОР - ПРОСМОТР - Влево ---
     "Влево",
     "",
-    &PageRecorder::PageShow::self, Item::Active, OnPress_Prev, Draw_Prev
+    &PageRecorder::PageShow::self, Item::Active, OnPress_Left, Draw_Left
 )
-
-
 
 
 static bool IsActive_PageShow()
