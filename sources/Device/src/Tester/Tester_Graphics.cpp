@@ -1,16 +1,11 @@
 #include "defines.h"
 #include "Data/Reader.h"
-#include "Display/Primitives.h"
 #include "Display/Grid.h"
 #include "Display/Painter.h"
-#include "FPGA/FPGA.h"
+#include "Display/Primitives.h"
+#include "Menu/Menu.h"
 #include "Settings/Settings.h"
-#include "Utils/Math.h"
-
-
-using namespace Display::Primitives;
-using namespace FPGA;
-
+#include "Tester/Tester.h"
 
 
 /// В таком массиве хранятся считанные точки тестер-компонента

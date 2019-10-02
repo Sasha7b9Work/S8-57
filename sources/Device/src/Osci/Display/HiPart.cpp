@@ -1,30 +1,19 @@
 #include "defines.h"
-#include "HiPart.h"
 #include "Data/Reader.h"
-#include "Display/Primitives.h"
+#include "Data/DataSettings.h"
 #include "Display/Grid.h"
-#include "Display/Painter.h"
-#include "Display/Symbols.h"
+#include "Display/Primitives.h"
 #include "FPGA/FPGA.h"
-#include "FPGA/FPGA_Math.h"
-#include "Osci/Measurements/Measurements_Table.h"
-#include "Tables.h"
-#include "Utils/Values.h"
-#include "Utils/Debug.h"
-#include "Display/Font/Font.h"
-#include "Hardware/Timer.h"
-#include "Settings/Settings.h"
 #include "Hardware/HAL/HAL.h"
+#include "Osci/Display/HiPart.h"
 #include "Osci/Measurements/Measurements.h"
+#include "Settings/Settings.h"
+#include "Utils/Values.h"
 #include <cmath>
-#include <cstdio>
 #include <cstring>
+#include <cstdio>
 
 
-using namespace Display::Primitives;
-using namespace FPGA;
-using namespace FPGA::Math;
-using namespace Hardware;
 using namespace Osci::Measurements;
 
 

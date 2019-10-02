@@ -1,20 +1,17 @@
 #include "defines.h"
-#include "Display/Primitives.h"
+#include "Data/DataSettings.h"
 #include "Display/Grid.h"
 #include "Display/Painter.h"
+#include "Display/Primitives.h"
+#include "Display/Font/Font.h"
 #include "FileManager.h"
 #include "FlashDrive/FlashDrive.h"
 #include "Hardware/Beeper.h"
-#include "Utils/Math.h"
-#include "Utils/StringUtils.h"
-#include "Utils/Values.h"
-
 #include "Hardware/HAL/HAL.h"
-
-
-using namespace Display::Primitives;
-using namespace Hardware;
-
+#include "Menu/Menu.h"
+#include "Utils/Math.h"
+#include "Utils/Values.h"
+#include <cstring>
 
 
 #define FM_CURSOR_IN_DIRS       (bf.cursorsInDirs)

@@ -1,16 +1,8 @@
 #include "defines.h"
 #include "Display/Primitives.h"
-#include "Display/Grid.h"
 #include "Hardware/Battery.h"
-
-#include "Settings/Settings.h"
-#include "Utils/Averager.h"
-#include "Display/Font/Font.h"
 #include "Hardware/HAL/HAL.h"
-
-
-using namespace Display::Primitives;
-
+#include "Utils/Averager.h"
 
 
 /// Максимальное значение, которое возможно считать с АЦП

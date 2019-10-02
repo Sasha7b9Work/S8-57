@@ -1,23 +1,15 @@
 #include "defines.h"
 #include "device.h"
-#include "Display/Primitives.h"
-#include "Display/Grid.h"
-#include "Display/Symbols.h"
-#include "Display/Font/Font.h"
 #include "FPGA.h"
 #include "FPGA_HAL.h"
-#include "FPGA_Math.h"
 #include "Hardware/HAL/HAL.h"
-#include "Hardware/Timer.h"
+#include "Osci/Display/Osci_Display.h"
+#include "Recorder/Recorder.h"
 #include "Settings/Settings.h"
 #include "Utils/Math.h"
 #include "Utils/Values.h"
-#include "Osci/Display/Osci_Display.h"
-#include "Recorder/Recorder.h"
-#include "Settings/SettingsOsci.h"
 
 
-using namespace Display::Primitives;
 using namespace FPGA::HAL::GPIO;
 using namespace HAL::ADDRESSES::FPGA;
 

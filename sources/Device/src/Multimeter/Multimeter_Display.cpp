@@ -1,15 +1,11 @@
 #include "defines.h"
-#include "Multimeter/Multimeter.h"
 #include "Display/Painter.h"
-#include "Settings/Settings.h"
 #include "Display/Primitives.h"
 #include "Hardware/Beeper.h"
-#include "Utils/Debug.h"
+#include "Menu/Menu.h"
+#include "Multimeter/Multimeter.h"
+#include "Settings/Settings.h"
 #include <cstring>
-
-
-using Display::Primitives::Text;
-
 
 
 /// Данные для вывода.

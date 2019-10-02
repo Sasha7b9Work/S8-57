@@ -1,20 +1,15 @@
 #include "defines.h"
-#include "Menu/MenuItems.h"
-#include "Menu/Pages/Include/PageService.h"
-#include "Settings/Settings.h"
-#include "Display/Font/Font.h"
-#include "Display/Display.h"
-#include "Display/Symbols.h"
-#include "Display/Primitives.h"
-#include "Display/Painter.h"
-#include "Hardware/Timer.h"
-#include "Utils/Values.h"
-#include "Utils/Math.h"
-#include "Hardware/HAL/HAL.h"
 #include "Data/DataSettings.h"
+#include "Display/Painter.h"
+#include "Display/Primitives.h"
+#include "Display/Symbols.h"
+#include "Hardware/Timer.h"
+#include "Hardware/HAL/HAL.h"
+#include "Menu/MenuItems.h"
+#include "Settings/Settings.h"
+#include "Utils/Math.h"
+#include "Utils/Values.h"
 
-
-using namespace Display::Primitives;
 
 /// Структура используется при работе со страницей установки текущего времени
 struct StructRTC

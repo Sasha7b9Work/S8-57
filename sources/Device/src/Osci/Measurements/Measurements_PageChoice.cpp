@@ -1,22 +1,14 @@
 #include "defines.h"
-#include "Display/Primitives.h"
 #include "Display/Grid.h"
-#include "Display/Font/Font.h"
+#include "Display/Primitives.h"
 #include "Hardware/Beeper.h"
 #include "Osci/Measurements/Measurements.h"
-
-
-using Display::Primitives::Char;
-using Display::Primitives::Rectangle;
-using Display::Primitives::Region;
-using Display::Primitives::Text;
-
+#include "Settings/Settings.h"
 
 
 static bool isActive = false;
 /// Позиция курсора
 static int8 posCursor = 0;
-
 
 
 void Osci::Measurements::PageChoice::ChangeState()

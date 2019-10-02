@@ -8,9 +8,6 @@
 #include "Settings/Settings.h"
 
 
-using namespace Display::Primitives;
-
-
 DEF_CHOICE_3( cSource,
     "Источник",
     "Откуда брать данные для просмотра",

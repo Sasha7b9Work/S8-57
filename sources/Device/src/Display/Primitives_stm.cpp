@@ -2,18 +2,15 @@
 #include "Command.h"
 #include "Transceiver.h"
 #include "Display/Primitives.h"
-#include "Hardware/HAL/HAL.h"
-#include <cstring>
 #include "Utils/Buffer.h"
-#include "Display/Font/Font.h"
+#include <cstring>
 
-using HAL::FSMC;
 
 using namespace Transceiver;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void Display::Primitives::Region::Fill(int x, int y, Color color)
+void Region::Fill(int x, int y, Color color)
 {
     color.SetAsCurrent();
     uint8 buffer[7] = { Command::Paint_FillRegion, (uint8)x, (uint8)(x >> 8), (uint8)y, (uint8)width, (uint8)(width >> 8), (uint8)height };
@@ -21,7 +18,7 @@ void Display::Primitives::Region::Fill(int x, int y, Color color)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Display::Primitives::Rectangle::Draw(int x, int y, Color color)
+void Rectangle::Draw(int x, int y, Color color)
 {
     color.SetAsCurrent();
     uint8 buffer[7] = { Command::Paint_DrawRectangle, (uint8)x, (uint8)(x >> 8), (uint8)y, (uint8)width, (uint8)(width >> 8), (uint8)height };
@@ -29,7 +26,7 @@ void Display::Primitives::Rectangle::Draw(int x, int y, Color color)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Display::Primitives::HLine::Draw(int x, int y, Color color)
+void HLine::Draw(int x, int y, Color color)
 {
     color.SetAsCurrent();
     int x0 = x;
@@ -39,7 +36,7 @@ void Display::Primitives::HLine::Draw(int x, int y, Color color)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Display::Primitives::VLine::Draw(int x, int y, Color color)
+void VLine::Draw(int x, int y, Color color)
 {
     color.SetAsCurrent();
     int y0 = y;
@@ -49,7 +46,7 @@ void Display::Primitives::VLine::Draw(int x, int y, Color color)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Display::Primitives::Point::Draw(int x, int y, Color color)
+void Point::Draw(int x, int y, Color color)
 {
     color.SetAsCurrent();
     uint8 buffer[4] = { Command::Paint_SetPoint, (uint8)x, (uint8)(x >> 8), (uint8)y };
@@ -57,7 +54,7 @@ void Display::Primitives::Point::Draw(int x, int y, Color color)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Display::Primitives::Line::Draw(Color color)
+void Line::Draw(Color color)
 {
     color.SetAsCurrent();
     uint8 buffer[7] = { Command::Paint_DrawLine, (uint8)x0, (uint8)(x0 >> 8), (uint8)y0, (uint8)x1, (uint8)(x1 >> 8), (uint8)y1 };
@@ -65,7 +62,7 @@ void Display::Primitives::Line::Draw(Color color)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-int Display::Primitives::Text::DrawSmall(int x, int y, Color color)
+int Text::DrawSmall(int x, int y, Color color)
 {
     color.SetAsCurrent();
 
@@ -86,7 +83,7 @@ int Display::Primitives::Text::DrawSmall(int x, int y, Color color)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Display::Primitives::Text::DrawBig(int x, int y, Color color)
+void Text::DrawBig(int x, int y, Color color)
 {
 #define MAX_SIZE_BUFFER 100
 
@@ -106,7 +103,7 @@ void Display::Primitives::Text::DrawBig(int x, int y, Color color)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Display::Primitives::MultiHPointLine::Draw(int x, Color color)
+void MultiHPointLine::Draw(int x, Color color)
 {
     color.SetAsCurrent();
 
@@ -123,7 +120,7 @@ void Display::Primitives::MultiHPointLine::Draw(int x, Color color)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Display::Primitives::MultiVPointLine::Draw(int y0, Color color)
+void MultiVPointLine::Draw(int y0, Color color)
 {
     color.SetAsCurrent();
 

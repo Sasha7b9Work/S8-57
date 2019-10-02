@@ -1,27 +1,19 @@
 #include "defines.h"
 #include "PainterData.h"
-#include "Display/Primitives.h"
 #include "Display/Grid.h"
-#include "Display/Symbols.h"
+#include "Display/Primitives.h"
+#include "FPGA/FPGA.h"
 #include "Osci/Osci.h"
+#include "Osci/Display/Accumulator.h"
 #include "Osci/Display/MemoryWindow.h"
 #include "Osci/Measurements/Measurements.h"
 #include "Settings/Settings.h"
-#include "Utils/Math.h"
 #include "Utils/Buffer.h"
-#include "Utils/Debug.h"
-#include "Osci/Display/Accumulator.h"
-#include "Hardware/Timer.h"
-#include "FPGA/FPGA.h"
-#include "FPGA/FPGA_Math.h"
+#include "Utils/Math.h"
 #include "Utils/StringUtils.h"
 #include <cstdlib>
-#include <cstring>
 
-
-using namespace Display::Primitives;
 using namespace FPGA;
-
 
 
 /// Ќарисовать актуальные данные - соответствующие текущим установкам

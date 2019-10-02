@@ -1,21 +1,11 @@
 #pragma once
 
-
 #define START_MULTI_MEASUREMENT() Timer::StartMultiMeasurement()
 #define PAUSE_ON_TICKS(ticks)     Timer::PauseOnTicks(ticks)
 #define PAUSE_ON_MS(ms)           Timer::PauseOnTime(ms)
 
 
-
-
-/** @addtogroup Hardware
- *  @{
- *  @defgroup Timer
- *  @brief Разные таймеры
- *  @{
- */
-
- /// Количество тиков, прошедших с момента последнего вызова функции Timer_StartMultiMeasurement(). Не более (1 << 32)
+/// Количество тиков, прошедших с момента последнего вызова функции Timer_StartMultiMeasurement(). Не более (1 << 32)
  /// В одной секунде 120.000.000 тиков для С8-53 и 90.000.000 тиков для С8-54.
  /// Максимальный отрезок времени, который можно отсчитать с её помощью - 35 сек.
 #define TIME_TICKS Timer::TimeTicks()
@@ -87,7 +77,3 @@ namespace Timer
     /// Служебная функция. Вызывается строго из прерывания
     void ElapsedCallback();
 }
-
-
-/** @}  @}
- */

@@ -1,4 +1,5 @@
 #include "defines.h"
+#include "Keyboard/Keyboard.h"
 #include "Data/Reader.h"
 #include "Display/Primitives.h"
 #include "Display/Grid.h"
@@ -13,8 +14,6 @@
 #include "Utils/Math.h"
 #include "Utils/Values.h"
 
-
-using namespace Display::Primitives;
 
 /// Ќарисовать карту пам€ти сохраннных сигналов
 static void DrawMemoryMap(int num, bool exist);

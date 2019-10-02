@@ -5,9 +5,6 @@
 #include "Display/Primitives.h"
 
 
-using namespace Display::Primitives;
-
-
 static void OnPress_Up()
 {
 }

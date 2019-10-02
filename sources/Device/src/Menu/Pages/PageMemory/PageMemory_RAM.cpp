@@ -1,20 +1,14 @@
 #include "defines.h"
-#include "Display/Primitives.h"
 #include "Display/Grid.h"
-#include "Display/Painter.h"
+#include "Display/Primitives.h"
 #include "Display/Symbols.h"
-#include "FlashDrive/FlashDrive.h"
 #include "FPGA/FPGA.h"
-#include "Hardware/Beeper.h"
-#include "Menu/Pages/Include/PageMemory.h"
-#include "Utils/Math.h"
-#include "Utils/Values.h"
-#include "Osci/Osci.h"
 #include "Hardware/RAM.h"
+#include "Menu/MenuItems.h"
+#include "Osci/Osci.h"
 #include "Osci/Osci_Storage.h"
-
-
-using namespace Display::Primitives;
+#include "Settings/Settings.h"
+#include "Utils/Values.h"
 
 
 static void OnPress_Next()

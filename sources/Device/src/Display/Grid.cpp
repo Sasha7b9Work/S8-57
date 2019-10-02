@@ -7,10 +7,6 @@
 #include "Utils/Debug.h"
 
 
-using namespace Display::Primitives;
-
-
-
 namespace Grid
 {
     /// Нарисовать сетку для режима осциллографа

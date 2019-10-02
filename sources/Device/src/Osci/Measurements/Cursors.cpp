@@ -1,22 +1,15 @@
 #include "defines.h"
-#include "Display/Colors.h"
-#include "Display/Primitives.h"
 #include "Display/Grid.h"
-#include "Display/Painter.h"
-#include "FPGA/FPGA_Math.h"
-#include "Menu/Menu.h"
-#include "Utils/StringUtils.h"
-#include "Utils/Values.h"
-#include "Settings/Settings.h"
+#include "Display/Primitives.h"
+#include "FPGA/FPGA.h"
 #include "Osci/Measurements/Measurements.h"
-#include <cmath>
+#include "Settings/Settings.h"
+#include "Utils/Values.h"
 #include <cstring>
+#include <cmath>
 
 
-using namespace Display::Primitives;
-using namespace FPGA::Math;
 using namespace Osci::Measurements;
-
 
 
 /// Нарисовать вертикальный курсор

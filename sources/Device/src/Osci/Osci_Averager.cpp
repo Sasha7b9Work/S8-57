@@ -1,21 +1,16 @@
 #include "defines.h"
-#include "Osci_Averager.h"
-#include "Display/Primitives.h"
-#include "Settings/Settings.h"
 #include "Osci.h"
+#include "Osci_Averager.h"
 #include "Data/Reader.h"
-#include "FPGA/FPGA.h"
 #include "Display/Grid.h"
-#include <cmath>
+#include "Display/Primitives.h"
+#include "FPGA/FPGA.h"
+#include "Settings/Settings.h"
 #include <cstring>
-
-using namespace Display::Primitives;
-
 
 
 /// «десь хранитс€ количество сигналов дл€ каждого из каналов, уже поучавствовавших в усреднении
 static uint16 numSignals[2] = { 0, 0 };
-
 
 
 void Osci::Averager::Process(Chan::E ch, const uint8 *dataNew, int size)

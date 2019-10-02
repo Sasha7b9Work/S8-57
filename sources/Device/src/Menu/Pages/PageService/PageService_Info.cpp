@@ -1,13 +1,9 @@
 #include "defines.h"
-#include "Menu/Pages/Include/PageService.h"
-#include "Menu/Menu.h"
-#include "Menu/MenuItems.h"
 #include "Display/Painter.h"
 #include "Display/Primitives.h"
+#include "Menu/Menu.h"
+#include "Settings/Settings.h"
 #include <cstdio>
-
-
-using namespace Display::Primitives;
 
 
 static void Information_Draw()

@@ -1,17 +1,10 @@
 #include "defines.h"
-#include "Settings/Settings.h"
-#include "Display/Primitives.h"
-#include "Display/Font/Font.h"
 #include "Display/Grid.h"
-#include "Display/Painter.h"
-#include "Hardware/Timer.h"
-#include "Utils/Math.h"
-#include "Menu/Pages/Include/HelpContentPages.h"
+#include "Display/Primitives.h"
 #include "Menu/Pages/Include/HelpContent.h"
-
-
-using namespace Display::Primitives;
-
+#include "Menu/Pages/Include/HelpContentPages.h"
+#include "Settings/Settings.h"
+#include "Utils/Math.h"
 
 
 static int currentParagraph = 0;   // ≈сли TypePage(currentPage) == TypePage_Content, то указывает не текущий раздел оглавлени€

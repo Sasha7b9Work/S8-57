@@ -3,29 +3,27 @@
 #include <stdlib.h>
 
 
-
-template class Utils::Stack<uint>;
-template class Utils::Stack<int8>;
-template class Utils::Stack<uint8>;
-
+template class Stack<uint>;
+template class Stack<int8>;
+template class Stack<uint8>;
 
 
 template <typename T>
-Utils::Stack<T>::Stack(uint _size) : buffer(0), size(_size), numElements(0U)
+Stack<T>::Stack(uint _size) : buffer(0), size(_size), numElements(0U)
 {
     buffer = (T *)malloc(sizeof(T) * _size);
 }
 
 
 template <typename T>
-Utils::Stack<T>::~Stack()
+Stack<T>::~Stack()
 {
     free(buffer);
 }
 
 
 template <typename T>
-void Utils::Stack<T>::Push(T elem)
+void Stack<T>::Push(T elem)
 {
     if(numElements < size)
     {
@@ -36,7 +34,7 @@ void Utils::Stack<T>::Push(T elem)
 
 
 template <typename T>
-T Utils::Stack<T>::Pop()
+T Stack<T>::Pop()
 {
     if(numElements != 0)
     {
@@ -49,21 +47,21 @@ T Utils::Stack<T>::Pop()
 
 
 template <typename T>
-uint Utils::Stack<T>::Size() const
+uint Stack<T>::Size() const
 {
     return numElements;
 }
 
 
 template <typename T>
-bool Utils::Stack<T>::Empty() const
+bool Stack<T>::Empty() const
 {
     return Size() == 0;
 }
 
 
 template <typename T>
-int Utils::Stack<T>::NumFirstZeros() const
+int Stack<T>::NumFirstZeros() const
 {
     int result = 0;
 

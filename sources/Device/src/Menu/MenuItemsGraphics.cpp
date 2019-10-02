@@ -1,26 +1,11 @@
 #include "defines.h"
-#include "log.h"
-#include "MenuItems.h"
 #include "Display/Primitives.h"
-#include "Display/Grid.h"
-#include "Display/Painter.h"
-#include "Display/Symbols.h"
 #include "Menu/Menu.h"
+#include "Utils/Stack.h"
 #include "Utils/Values.h"
-#include "Data/DataSettings.h"
-#include "Settings/Settings.h"
-#include "Hardware/HAL/HAL.h"
-#include <cstring>
-
 #ifdef WIN32
 #include <cstdio>
 #endif
-
-
-using namespace Display::Primitives;
-using namespace Hardware;
-
-using Utils::Stack;
 
 
 void GovernorColor::Draw(int x, int y, bool opened) const

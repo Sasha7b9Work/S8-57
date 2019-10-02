@@ -1,26 +1,19 @@
 #include "defines.h"
 #include "Data/Reader.h"
 #include "FPGA/FPGA.h"
-#include "FPGA/FPGA_Math.h"
+#include "Osci/Display/PainterData.h"
 #include "Osci/Measurements/Measurements.h"
-#include "Osci/Measurements/Measurements_Table.h"
 #include "Settings/Settings.h"
 #include "Utils/Math.h"
-#include "Utils/Values.h"
-#include "Data/DataSettings.h"
-#include "Hardware/Timer.h"
-#include "Osci/Display/PainterData.h"
 #include "Utils/Smoother.h"
+#include "Utils/Values.h"
 #include <cmath>
 #include <cstdlib>
 #include <cstring>
 
 
-using namespace Osci;
-
 using FPGA::VALUE::MIN;
 using FPGA::VALUE::MAX;
-using FPGA::VALUE::AVE;
 using FPGA::VALUE::NONE;
 
 

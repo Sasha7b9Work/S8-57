@@ -5,9 +5,6 @@
 #include "Settings/Settings.h"
 
 
-using namespace Display::Primitives;
-
-
 DEF_CHOICE_2(cChoice,
     "Курсор",
     "Выбор курсора",

@@ -1,32 +1,16 @@
 #include "defines.h"
+#include "device.h"
 #include "Transceiver.h"
-#include "Menu/Menu.h"
+#include "Display/Primitives.h"
+#include "FlashDrive/FlashDrive.h"
 #include "Hardware/Timer.h"
 #include "Keyboard/BufferButtons.h"
 #include "Keyboard/HandlersKeys.h"
-#include "device.h"
-#include "FlashDrive/FlashDrive.h"
+#include "Menu/Menu.h"
 #include "Settings/Settings.h"
-#include "Pages/Include/PageMemory.h"
-#include "Pages/Include/PageChannels.h"
-#include "Pages/Include/PageHelp.h"
-#include "Pages/Include/PageMeasures.h"
-#include "Pages/Include/PageDisplay.h"
-#include "Pages/Include/PageFunction.h"
-#include "Pages/Include/PageRecorder.h"
-#include "Hardware/Beeper.h"
-#include "FPGA/FPGA.h"
-#include "Utils/Math.h"
-#include "Display/Primitives.h"
-#include "Display/Grid.h"
-#include "Display/Painter.h"
-#include "Utils/Debug.h"
-#include "Hardware/HAL/HAL.h"
-#include "Keyboard/DecoderDevice.h"
 #include <cstdio>
 
 
-using namespace Display::Primitives;
 using namespace Transceiver;
 
 const Page    *Menu::mainPage = nullptr;

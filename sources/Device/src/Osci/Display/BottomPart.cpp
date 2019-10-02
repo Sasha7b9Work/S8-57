@@ -1,20 +1,17 @@
 #include "defines.h"
-#include "BottomPart.h"
-#include "Display/Primitives.h"
-#include "Display/Painter.h"
 #include "Display/Symbols.h"
-#include "Settings/Settings.h"
+#include "Display/Primitives.h"
+#include "Display/Font/Font.h"
 #include "FlashDrive/FlashDrive.h"
-#include "Hardware/VCP.h"
 #include "Hardware/Battery.h"
-#include "Osci/Display/MemoryWindow.h"
+#include "Hardware/VCP.h"
+#include "Osci/Display/BottomPart.h"
+#include "Osci/Display/Osci_Display.h"
 #include "Osci/Measurements/Measurements.h"
+#include "Settings/Settings.h"
 
 
-using namespace Display::Primitives;
 using namespace Osci::Measurements;
-
-
 
 
 void Osci::Display::BottomPart::Draw(int x0, int y0)

@@ -5,34 +5,34 @@
 
 
 
-Display::Primitives::Region::Region(int _width, int _height) : width(_width), height(_height)
+Region::Region(int _width, int _height) : width(_width), height(_height)
 {
 }
 
 
-void Display::Primitives::Region::DrawBounded(int x, int y, Color colorFill, Color colorBound)
+void Region::DrawBounded(int x, int y, Color colorFill, Color colorBound)
 {
     Region(width - 2, height - 2).Fill(x + 1, y + 1, colorFill);
     Rectangle(width, height).Draw(x, y, colorBound);
 }
 
 
-Display::Primitives::Rectangle::Rectangle(int _width, int _height) : width(_width), height(_height)
+Rectangle::Rectangle(int _width, int _height) : width(_width), height(_height)
 {
 }
     
 
-Display::Primitives::HLine::HLine(int _width) : width(_width)
+HLine::HLine(int _width) : width(_width)
 {
 }
 
 
-Display::Primitives::VLine::VLine(int _height) : height(_height)
+VLine::VLine(int _height) : height(_height)
 {
 }
 
 
-Display::Primitives::Line::Line(int _x0, int _y0, int _x1, int _y1) : x0(_x0), y0(_y0), x1(_x1), y1(_y1)
+Line::Line(int _x0, int _y0, int _x1, int _y1) : x0(_x0), y0(_y0), x1(_x1), y1(_y1)
 {
     if (x0 < 0)
     {
@@ -53,30 +53,30 @@ Display::Primitives::Line::Line(int _x0, int _y0, int _x1, int _y1) : x0(_x0), y
 }
 
 
-Display::Primitives::Char::Char(Symbol5::E _ch) : ch((char)_ch), font(TypeFont::_5)
+Char::Char(Symbol5::E _ch) : ch((char)_ch), font(TypeFont::_5)
 {
 
 }
 
 
-Display::Primitives::Char::Char(SymbolUGO::E _ch) : ch((char)_ch), font(TypeFont::_UGO)
+Char::Char(SymbolUGO::E _ch) : ch((char)_ch), font(TypeFont::_UGO)
 {
 
 }
 
 
-Display::Primitives::Char::Char(SymbolUGO2::E _ch) : ch((char)_ch), font(TypeFont::_UGO2)
+Char::Char(SymbolUGO2::E _ch) : ch((char)_ch), font(TypeFont::_UGO2)
 {
 
 }
 
-Display::Primitives::Char::Char(char _ch) : ch(_ch), font(TypeFont::_8)
+Char::Char(char _ch) : ch(_ch), font(TypeFont::_8)
 {
 
 }
 
 
-int Display::Primitives::Char::Draw(int x, int y, Color color)
+int Char::Draw(int x, int y, Color color)
 {
     Font::SetCurrent(font);
 
@@ -90,7 +90,7 @@ int Display::Primitives::Char::Draw(int x, int y, Color color)
 }
 
 
-void Display::Primitives::Char::Draw4SymbolsInRect(int x, int y, Color color)
+void Char::Draw4SymbolsInRect(int x, int y, Color color)
 {
     color.SetAsCurrent();
 
@@ -106,7 +106,7 @@ void Display::Primitives::Char::Draw4SymbolsInRect(int x, int y, Color color)
 }
 
 
-void Display::Primitives::Char::Draw10SymbolsInRect(int x, int y, Color color)
+void Char::Draw10SymbolsInRect(int x, int y, Color color)
 {
     color.SetAsCurrent();
 
@@ -122,18 +122,18 @@ void Display::Primitives::Char::Draw10SymbolsInRect(int x, int y, Color color)
 }
 
 
-Display::Primitives::Text::Text(const char *_text, uint8 _size) : text(_text), sizeOfType(_size)
+Text::Text(const char *_text, uint8 _size) : text(_text), sizeOfType(_size)
 {
 }
 
 
-Display::Primitives::Text::Text(const String &string, uint8 _size) : sizeOfType(_size)
+Text::Text(const String &string, uint8 _size) : sizeOfType(_size)
 {
     text = string.CString();
 }
 
 
-int Display::Primitives::Text::Draw(int x, int y, Color color)
+int Text::Draw(int x, int y, Color color)
 {
     color.SetAsCurrent();
 
@@ -153,7 +153,7 @@ int Display::Primitives::Text::Draw(int x, int y, Color color)
 }
 
 
-int Display::Primitives::Text::DrawWithLimitation(int x, int y, int limitX, int limitY, int limitWidth, int limitHeight)
+int Text::DrawWithLimitation(int x, int y, int limitX, int limitY, int limitWidth, int limitHeight)
 {
     int retValue = x;
 
@@ -168,7 +168,7 @@ int Display::Primitives::Text::DrawWithLimitation(int x, int y, int limitX, int 
 }
 
 
-int Display::Primitives::Text::DrawCharWithLimitation(int eX, int eY, char _symbol, int limitX, int limitY, int limitWidth, int limitHeight)
+int Text::DrawCharWithLimitation(int eX, int eY, char _symbol, int limitX, int limitY, int limitWidth, int limitHeight)
 {
     uint8 symbol = static_cast<uint8>(_symbol);
 
@@ -200,7 +200,7 @@ int Display::Primitives::Text::DrawCharWithLimitation(int eX, int eY, char _symb
 }
 
 
-int Display::Primitives::Text::DrawInCenterRect(int eX, int eY, int width, int eHeight, Color color)
+int Text::DrawInCenterRect(int eX, int eY, int width, int eHeight, Color color)
 {
     int lenght = Font::GetLengthText(text);
     int height = Font::GetHeightSymbol(text[0]);
@@ -210,7 +210,7 @@ int Display::Primitives::Text::DrawInCenterRect(int eX, int eY, int width, int e
 }
 
 
-int Display::Primitives::Text::DrawOnBackground(int x, int y, Color colorBackground)
+int Text::DrawOnBackground(int x, int y, Color colorBackground)
 {
     int width = Font::GetLengthText(text);
     int height = Font::GetHeight();
@@ -224,7 +224,7 @@ int Display::Primitives::Text::DrawOnBackground(int x, int y, Color colorBackgro
 }
 
 
-void Display::Primitives::Text::DrawRelativelyRight(int xRight, int y, Color color)
+void Text::DrawRelativelyRight(int xRight, int y, Color color)
 {
     Text(text).Draw(xRight - Font::GetLengthText(text), y, color);
 }
@@ -470,7 +470,7 @@ static int DrawPartWord(char *word, int x, int y, int xRight, bool draw) //-V250
 }
 
 
-int Display::Primitives::Text::DrawInRectWithTransfers(int eX, int eY, int eWidth, int eHeight, Color color)
+int Text::DrawInRectWithTransfers(int eX, int eY, int eWidth, int eHeight, Color color)
 {
     color.SetAsCurrent();
 
@@ -596,7 +596,7 @@ static bool GetHeightTextWithTransfers(int left, int top, int right, const char 
 }
 
 
-int Display::Primitives::Text::DrawInBoundedRectWithTransfers(int x, int y, int width, Color colorBackground, Color colorFill)
+int Text::DrawInBoundedRectWithTransfers(int x, int y, int width, Color colorBackground, Color colorFill)
 {
     int height = 0;
     GetHeightTextWithTransfers(x + 3, y + 3, x + width - 8, text, &height);
@@ -608,7 +608,7 @@ int Display::Primitives::Text::DrawInBoundedRectWithTransfers(int x, int y, int 
 }
 
 
-int Display::Primitives::Text::DrawInCenterRectAndBoundIt(int x, int y, int width, int height, Color colorBackground, Color colorFill)
+int Text::DrawInCenterRectAndBoundIt(int x, int y, int width, int height, Color colorBackground, Color colorFill)
 {
     Region(width, height).DrawBounded(x, y, colorBackground, colorFill);
 
@@ -618,7 +618,7 @@ int Display::Primitives::Text::DrawInCenterRectAndBoundIt(int x, int y, int widt
 }
 
 
-void Display::Primitives::Text::DrawInCenterRectOnBackground(int x, int y, int width, int height, Color colorText, int widthBorder, Color colorBackground)
+void Text::DrawInCenterRectOnBackground(int x, int y, int width, int height, Color colorText, int widthBorder, Color colorBackground)
 {
     int lenght = Font::GetLengthText(text);
     //int eX = DrawStringInCenterRect(x, y, width, height, text, colorBackground);
@@ -631,12 +631,12 @@ void Display::Primitives::Text::DrawInCenterRectOnBackground(int x, int y, int w
 }
 
 
-Display::Primitives::DashedVLine::DashedVLine(int _height, int _deltaFill, int _deltaEmpty, int _deltaStart) : height(_height), deltaFill(_deltaFill), deltaEmpty(_deltaEmpty), deltaStart(_deltaStart)
+DashedVLine::DashedVLine(int _height, int _deltaFill, int _deltaEmpty, int _deltaStart) : height(_height), deltaFill(_deltaFill), deltaEmpty(_deltaEmpty), deltaStart(_deltaStart)
 {
 }
 
 
-void Display::Primitives::DashedVLine::Draw(int x, int y0)
+void DashedVLine::Draw(int x, int y0)
 {
     if (deltaStart < 0 || deltaStart >= (deltaFill + deltaEmpty))
     {
@@ -666,13 +666,13 @@ void Display::Primitives::DashedVLine::Draw(int x, int y0)
 }
 
 
-Display::Primitives::DashedHLine::DashedHLine(int _width, int _deltaFill, int _deltaEmpty, int _deltaStart) : 
+DashedHLine::DashedHLine(int _width, int _deltaFill, int _deltaEmpty, int _deltaStart) : 
     width(_width), deltaFill(_deltaFill), deltaEmpty(_deltaEmpty), deltaStart(_deltaStart)
 {
 }
 
 
-void Display::Primitives::DashedHLine::Draw(int x0, int y)
+void DashedHLine::Draw(int x0, int y)
 {
     if (deltaStart < 0 || deltaStart >= (deltaFill + deltaEmpty))
     {
@@ -704,12 +704,12 @@ void Display::Primitives::DashedHLine::Draw(int x0, int y)
 }
 
 
-Display::Primitives::VPointLine::VPointLine(int _height, float _delta) : height(_height), delta(_delta)
+VPointLine::VPointLine(int _height, float _delta) : height(_height), delta(_delta)
 {
 }
 
 
-void Display::Primitives::VPointLine::Draw(int _x, int _y, Color color)
+void VPointLine::Draw(int _x, int _y, Color color)
 {
     color.SetAsCurrent();
 
@@ -724,12 +724,12 @@ void Display::Primitives::VPointLine::Draw(int _x, int _y, Color color)
 }
 
 
-Display::Primitives::HPointLine::HPointLine(int _width, float _delta) : width(_width), delta(_delta)
+HPointLine::HPointLine(int _width, float _delta) : width(_width), delta(_delta)
 {
 }
 
 
-void Display::Primitives::HPointLine::Draw(int _x, int _y)
+void HPointLine::Draw(int _x, int _y)
 {
     int x0 = _x;
     int x1 = _x + width;
@@ -742,17 +742,17 @@ void Display::Primitives::HPointLine::Draw(int _x, int _y)
 }
 
 
-Display::Primitives::MultiHPointLine::MultiHPointLine(int _numLines, const uint8 *_y, int _delta, int _count) : numLines(_numLines), y(_y), delta(_delta), count(_count)
+MultiHPointLine::MultiHPointLine(int _numLines, const uint8 *_y, int _delta, int _count) : numLines(_numLines), y(_y), delta(_delta), count(_count)
 {
 }
 
 
-Display::Primitives::VLineArray::VLineArray(int _numLines, uint8 *_y0y1) : numLines(_numLines), y0y1(_y0y1)
+VLineArray::VLineArray(int _numLines, uint8 *_y0y1) : numLines(_numLines), y0y1(_y0y1)
 {
 }
 
 
-void Display::Primitives::VLineArray::Draw(int x, Color color)
+void VLineArray::Draw(int x, Color color)
 {
     color.SetAsCurrent();
 
@@ -765,6 +765,6 @@ void Display::Primitives::VLineArray::Draw(int x, Color color)
 }
 
 
-Display::Primitives::MultiVPointLine::MultiVPointLine(int _numLines, uint16 *_x0, int _delta, int _count) : numLines(_numLines), x0(_x0), delta(_delta), count(_count)
+MultiVPointLine::MultiVPointLine(int _numLines, uint16 *_x0, int _delta, int _count) : numLines(_numLines), x0(_x0), delta(_delta), count(_count)
 {
 }

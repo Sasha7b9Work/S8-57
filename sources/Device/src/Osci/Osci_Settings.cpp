@@ -1,19 +1,18 @@
 #include "defines.h"
 #include "device.h"
-#include "FPGA/FPGA.h"
-#include "FPGA/FPGA_Hal.h"
-#include "FPGA/FPGA_Math.h"
-#include "Hardware/Timer.h"
-#include "Hardware/HAL/HAL.h"
-#include "Settings/Settings.h"
-#include "Utils/Math.h"
-#include "Osci/Display/Osci_Display.h"
+#include "MessageMgr.h"
 #include "Data/Reader.h"
 #include "Display/Grid.h"
-#include "Display/Symbols.h"
 #include "Display/Primitives.h"
-#include "Display/Font/Font.h"
-#include "MessageMgr.h"
+#include "Display/Symbols.h"
+#include "FPGA/FPGA.h"
+#include "FPGA/FPGA_Hal.h"
+#include "Hardware/Timer.h"
+#include "Hardware/HAL/HAL.h"
+#include "Osci/Osci.h"
+#include "Osci/Display/Osci_Display.h"
+#include "Settings/Settings.h"
+#include "Utils/Math.h"
 #include "Utils/Values.h"
 
 
@@ -23,8 +22,6 @@
 
 
 using namespace HAL::ADDRESSES::FPGA;
-using namespace Osci::Display;
-using namespace Display::Primitives;
 
 using FPGA::HAL::GPIO::Pin;
 using HAL::FSMC;

@@ -1,24 +1,17 @@
 #include "defines.h"
-#include "Display/Primitives.h"
 #include "Display/Grid.h"
 #include "Display/Painter.h"
-#include "Display/Symbols.h"
-#include "Osci/Display/HiPart.h"
+#include "Display/Primitives.h"
+#include "menu/Menu.h"
+#include "Osci/FrequencyCounter.h"
+#include "Osci/Osci_Averager.h"
+#include "Osci/Display/Accumulator.h"
 #include "Osci/Display/BottomPart.h"
+#include "Osci/Display/HiPart.h"
 #include "Osci/Display/Osci_Display.h"
 #include "Osci/Display/PainterData.h"
-#include "Osci/Measurements/Measures.h"
-#include "Osci/Measurements/Measurements_Table.h"
 #include "Osci/Measurements/Measurements.h"
 #include "Settings/Settings.h"
-#include "Utils/Debug.h"
-#include "Osci/Display/Accumulator.h"
-#include "Osci/Osci_Averager.h"
-
-
-using namespace Display::Primitives;
-using namespace Osci::Measurements;
-
 
 
 static const int DELTA = 5;

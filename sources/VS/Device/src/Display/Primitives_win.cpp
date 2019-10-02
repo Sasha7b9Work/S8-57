@@ -19,7 +19,7 @@ static void DrawVPointLine(int x, int y, int count, int delta);
 
 
 
-void Display::Primitives::Region::Fill(int x, int y, Color color)
+void Region::Fill(int x, int y, Color color)
 {
     color.SetAsCurrent();
     SDL_Rect rect = { x, y, width + 1, height + 1 };
@@ -27,7 +27,7 @@ void Display::Primitives::Region::Fill(int x, int y, Color color)
 }
 
 
-void Display::Primitives::Rectangle::Draw(int x, int y, Color color)
+void Rectangle::Draw(int x, int y, Color color)
 {
     color.SetAsCurrent();
     SDL_Rect rect = { x, y, width + 1, height + 1 };
@@ -35,35 +35,35 @@ void Display::Primitives::Rectangle::Draw(int x, int y, Color color)
 }
 
 
-void Display::Primitives::HLine::Draw(int x, int y, Color color)
+void HLine::Draw(int x, int y, Color color)
 {
     color.SetAsCurrent();
     SDL_RenderDrawLine(renderer, x, y, x + width, y);
 }
 
 
-void Display::Primitives::VLine::Draw(int x, int y, Color color)
+void VLine::Draw(int x, int y, Color color)
 {
     color.SetAsCurrent();
     SDL_RenderDrawLine(renderer, x, y, x, y + height);
 }
 
 
-void Display::Primitives::Point::Draw(int x, int y, Color color)
+void Point::Draw(int x, int y, Color color)
 {
     color.SetAsCurrent();
     SDL_RenderDrawPoint(renderer, x, y);
 }
 
 
-void Display::Primitives::Line::Draw(Color color)
+void Line::Draw(Color color)
 {
     color.SetAsCurrent();
     SDL_RenderDrawLine(renderer, x0, y0, x1, y1);
 }
 
 
-int Display::Primitives::Text::DrawSmall(int x, int y, Color color)
+int Text::DrawSmall(int x, int y, Color color)
 {
     color.SetAsCurrent();
 
@@ -79,7 +79,7 @@ int Display::Primitives::Text::DrawSmall(int x, int y, Color color)
 }
 
 
-void Display::Primitives::Text::DrawBig(int x, int y, Color color)
+void Text::DrawBig(int x, int y, Color color)
 {
     color.SetAsCurrent();
 
@@ -158,7 +158,7 @@ static int DrawBigChar(int eX, int eY, int size, char _symbol)
 }
 
 
-void Display::Primitives::MultiHPointLine::Draw(int x, Color color)
+void MultiHPointLine::Draw(int x, Color color)
 {
     color.SetAsCurrent();
 
@@ -179,7 +179,7 @@ static void DrawHPointLine(int x, int y, int count, int delta)
 }
 
 
-void Display::Primitives::MultiVPointLine::Draw(int y, Color color)
+void MultiVPointLine::Draw(int y, Color color)
 {
     color.SetAsCurrent();
 

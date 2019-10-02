@@ -1,18 +1,9 @@
 #include "defines.h"
-#include "Menu/MenuItems.h"
 #include "Display/Primitives.h"
-#include "Display/Painter.h"
-#include "Osci/Measurements/Measures.h"
-#include "Settings/Settings.h"
-#include "Menu/Pages/Include/PageMeasures.h"
-#include "Utils/Math.h"
-#include "Hardware/Beeper.h"
+#include "Display/Symbols.h"
+#include "Menu/MenuItems.h"
 #include "Osci/Measurements/Measurements.h"
-
-
-using namespace Display::Primitives;
-using namespace Osci;
-using namespace Osci::Measurements;
+#include "Settings/Settings.h"
 
 
 static void Draw_Markers(int x, int y)
@@ -35,7 +26,7 @@ static void Draw_Settings(int x, int y)
 DEF_GRAPH_BUTTON( bSettings,                                                                                                                      //--- ИЗМЕРЕНИЯ - НАСТРОИТЬ - Настройка ---
     "Настройка",
     "Позволяет выбрать необходимые измерения",
-    &PageAutoMeasures::PageTune::self, Item::Active, Measurements::PageChoice::ChangeState, Draw_Settings
+    &PageAutoMeasures::PageTune::self, Item::Active, Osci::Measurements::PageChoice::ChangeState, Draw_Settings
 )
 
 

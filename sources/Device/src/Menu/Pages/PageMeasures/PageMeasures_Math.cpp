@@ -1,18 +1,9 @@
 #include "defines.h"
-#include "Menu/MenuItems.h"
-#include "Menu/Pages/Include/PageMeasures.h"
-#include "Settings/Settings.h"
-#include "Utils/Math.h"
 #include "Display/Primitives.h"
-#include "Display/Painter.h"
-#include "Display/Symbols.h"
 #include "FPGA/FPGA.h"
 #include "Hardware/Beeper.h"
-#include "FPGA/FPGA_Math.h"
-
-
-using namespace Display::Primitives;
-
+#include "Settings/Settings.h"
+#include "Utils/Math.h"
 
 
 static void OnPress_Screen()

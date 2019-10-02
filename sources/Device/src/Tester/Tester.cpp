@@ -1,20 +1,15 @@
 #include "defines.h"
 #include "Transceiver.h"
 #include "FPGA/FPGA.h"
+#include "Hardware/Timer.h"
 #include "Hardware/HAL/HAL.h"
 #include "Osci/Osci.h"
 #include "Settings/Settings.h"
-#include <stm32f4xx_hal.h>
-#include "Hardware/Timer.h"
-#include "Data/Reader.h"
 #include "Utils/Math.h"
-#include "FPGA/FPGA_Math.h"
 #include "Utils/Values.h"
 
 
-using HAL::FSMC;
 using HAL::PIO::State;
-
 
 
 static Settings oldSet = Settings::defaultSettings;

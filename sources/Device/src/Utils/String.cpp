@@ -1,19 +1,12 @@
 #include "defines.h"
-#include "String.h"
 #include "Display/Primitives.h"
-#include "Display/Painter.h"
 #include <cstring>
 #include <cstdio>
 #include <cstdlib>
 #include <cstdarg>
 
 
-using namespace Display::Primitives;
-
-
-
 const char * const String::ERROR = "---.---";
-
 
 
 String::String() : buffer(0)

@@ -1,16 +1,8 @@
 #include "defines.h"
+#include "device.h"
 #include "Multimeter.h"
-#include "Display/Primitives.h"
-#include "Display/Painter.h"
-#include "Settings/Settings.h"
-#include "Hardware/Timer.h"
-#include "Device.h"
 #include "Hardware/HAL/HAL.h"
-#include <cstring>
-
-
-using namespace Display::Primitives;
-
+#include "Settings/Settings.h"
 
 
 namespace Multimeter

@@ -1,15 +1,7 @@
 #include "defines.h"
-#include "log.h"
-#include "Settings/Settings.h"
+#include "Tables.h"
 #include "Display/Primitives.h"
 #include "Display/Font/Font.h"
-#include "Display/Painter.h"
-#include "Tables.h"
-
-
-using namespace Display::Primitives;
-
-
 
 
 /// Таблица символов алфавита и спецсимволов для ввода текста

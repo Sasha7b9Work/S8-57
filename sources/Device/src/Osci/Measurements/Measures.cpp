@@ -1,14 +1,9 @@
 #include "defines.h"
-#include "Display/Primitives.h"
-#include "Display/Grid.h"
-#include "Display/Painter.h"
-#include "Hardware/Beeper.h"
-#include "Utils/Math.h"
 #include "Osci/Measurements/Measurements.h"
-#include "Osci/Measurements/Measurements_Table.h"
+#include "Settings/Settings.h"
+#include "Utils/Math.h"
 
 
-using namespace Display::Primitives;
 using namespace Osci::Measurements;
 
 

@@ -1,7 +1,7 @@
 #include "defines.h"
 #include "Utils/Stack.h"
 #include "Utils/StringUtils.h"
-#include "Values.h"
+#include "Utils/Values.h"
 #include <cstring>
 #include <ctype.h>
 #include <locale>
@@ -10,10 +10,6 @@
 #define LANG 0
 #define LANG_RU true
 #endif
-
-
-using Utils::Stack;
-
 
 
 /// Возвращает false, если выбор невозможен - строка кончилась.

@@ -556,26 +556,6 @@
               <FilePath>.\src\Display\Display.h</FilePath>
             </File>
             <File>
-              <FileName>Display_Primitives.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Display\Display_Primitives.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Display_Primitives_stm.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Display\Display_Primitives_stm.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Display_Primitives.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Display\Display_Primitives.h</FilePath>
-            </File>
-            <File>
-              <FileName>Display_Warnings.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Display\Display_Warnings.h</FilePath>
-            </File>
-            <File>
               <FileName>Grid.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Display\Grid.cpp</FilePath>
@@ -609,6 +589,26 @@
               <FileName>Symbols.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Display\Symbols.h</FilePath>
+            </File>
+            <File>
+              <FileName>Primitives.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Display\Primitives.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Primitives.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Display\Primitives.h</FilePath>
+            </File>
+            <File>
+              <FileName>Primitives_stm.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Display\Primitives_stm.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Warnings.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Display\Warnings.h</FilePath>
             </File>
           </Files>
         </Group>

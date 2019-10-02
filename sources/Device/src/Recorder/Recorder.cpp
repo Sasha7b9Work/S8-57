@@ -1,9 +1,9 @@
 #include "defines.h"
-#include "Display/Primitives.h"
 #include "Display/Painter.h"
+#include "Display/Primitives.h"
 #include "FPGA/FPGA_HAL.h"
-#include "Hardware/Memory.h"
 #include "Hardware/Timer.h"
+#include "Hardware/Memory.h"
 #include "Hardware/HAL/HAL.h"
 #include "Osci/Osci.h"
 #include "Recorder/Recorder.h"
@@ -12,7 +12,6 @@
 #include "Utils/Math.h"
 
 
-using namespace Display::Primitives;
 using namespace HAL::ADDRESSES::FPGA;
 
 using HAL::FSMC;

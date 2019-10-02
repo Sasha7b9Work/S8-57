@@ -1,23 +1,7 @@
 #include "defines.h"
 #include "device.h"
-#include "Display/Primitives.h"
-#include "Display/Symbols.h"
-#include "Display/Painter.h"
 #include "FPGA/FPGA.h"
-#include "FPGA/FPGA_Math.h"
-#include "Hardware/Beeper.h"
-#include "Hardware/Timer.h"
-#include "Menu/Menu.h"
-#include "Menu/Pages/Include/PageService.h"
-#include "Keyboard/Keyboard.h"
-#include "Utils/CommonFunctions.h"
-#include "Utils/Math.h"
-#include "Hardware/HAL/HAL.h"
-#include <cstdio>
-
-
-using namespace Display::Primitives;
-
+#include "Settings/Settings.h"
 
 
 static void OnPress_ResetSettings()

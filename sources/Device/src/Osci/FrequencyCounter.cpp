@@ -1,23 +1,21 @@
 #include "defines.h"
-#include "log.h"
-#include "Display/Primitives.h"
 #include "Display/Grid.h"
+#include "Display/Primitives.h"
+#include "FrequencyCounter.h"
 #include "FPGA/FPGA_HAL.h"
 #include "Hardware/Timer.h"
 #include "Hardware/HAL/HAL.h"
 #include "Settings/Settings.h"
-#include "Utils/StringUtils.h"
 #include "Utils/Values.h"
+#include "Utils/Stack.h"
+#include "Utils/StringUtils.h"
 #include <cstring>
 
 
-using namespace Display::Primitives;
 using namespace HAL::ADDRESSES::FPGA;
 
 using FPGA::HAL::GetFlag;
 using HAL::FSMC;
-using Utils::Stack;
-
 
 
 /// Здесь хранится последнее действительное значение частоты. Для вывода в режиме частотомера. 0 означает, что значение выводить не надо
@@ -61,9 +59,9 @@ static pString PeriodSetToString(const BitSet32 *pr);
 /// Возвращает порядок младшего разряда считанного значения счётчика периода при данных настройках
 static int LowOrder(FreqMeterFreqClc::E freqCLC, FreqMeterNumberPeriods::E numPeriods);
 /// Преобразует 6 разрядов числа, хранящиеся в стеке, в текстовую строку периода. Младший значащий разряд хранится на вершине стека. order - его порядок
-static pString StackToString(Utils::Stack<uint> *stack, int order);
+static pString StackToString(Stack<uint> *stack, int order);
 /// Записывает 6 разрядов из стека stack в буфер buffer. Младший разряд на вершине стека. Точку ставить на point позиции, начиная с buffer[0]
-static void WriteStackToBuffer(Utils::Stack<uint> *stack, int point, const char *suffix);
+static void WriteStackToBuffer(Stack<uint> *stack, int point, const char *suffix);
 
 
 

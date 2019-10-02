@@ -16,10 +16,6 @@
 #include <cstdio>
 
 
-using namespace Display::Primitives;
-
-
-
 /// В этой структуре будут храниться данные серийного номера при открытой странице ppSerialNumer
 typedef struct
 {

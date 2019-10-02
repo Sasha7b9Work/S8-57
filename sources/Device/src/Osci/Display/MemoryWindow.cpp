@@ -1,19 +1,14 @@
 #include "defines.h"
-#include "MemoryWindow.h"
 #include "Data/Reader.h"
-#include "Display/Primitives.h"
 #include "Display/Grid.h"
-#include "Display/Painter.h"
+#include "Display/Primitives.h"
 #include "FPGA/FPGA.h"
-#include "Settings/Settings.h"
-#include "Hardware/Battery.h"
-#include "Osci/Display/HiPart.h"
-#include "Display/Display.h"
+#include "MemoryWindow.h"
 #include "Osci/Display/PainterData.h"
 #include "Osci/Measurements/Measurements.h"
+#include "Settings/Settings.h"
 
 
-using namespace Display::Primitives;
 using namespace FPGA;
 using namespace Osci::Measurements;
 

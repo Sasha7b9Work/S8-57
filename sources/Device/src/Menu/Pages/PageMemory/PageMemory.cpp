@@ -1,25 +1,15 @@
 #include "defines.h"
-#include "Menu/Pages/Include/PageMemory.h"
 #include "Tables.h"
-#include "Data/Reader.h"
-#include "Display/Primitives.h"
 #include "Display/Grid.h"
+#include "Display/Primitives.h"
 #include "Display/Symbols.h"
-#include "Display/Painter.h"
-#include "FlashDrive/FlashDrive.h"
-#include "Hardware/Memory.h"
-#include "Hardware/Beeper.h"
 #include "FlashDrive/FileManager.h"
-#include "Menu/Menu.h"
-#include "Utils/Math.h"
-#include "Utils/StringUtils.h"
-#include "Utils/Values.h"
-#include "Utils/CommonFunctions.h"
-#include "Osci/Display/PainterData.h"
+#include "FlashDrive/FlashDrive.h"
+#include "Hardware/Beeper.h"
 #include "Osci/Osci.h"
+#include "Settings/Settings.h"
+#include "Utils/Math.h"
 
-
-using namespace Display::Primitives;
 
 static void DrawSetMask();  // Эта функция рисует, когда выбран режим задания маски.
 static void DrawFileMask(int x, int y);

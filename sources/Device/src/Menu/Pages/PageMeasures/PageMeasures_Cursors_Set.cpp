@@ -1,16 +1,12 @@
 #include "defines.h"
-#include "Menu/MenuItems.h"
-#include "Menu/Pages/Include/PageMeasures.h"
-#include "Display/Painter.h"
 #include "Display/Primitives.h"
-#include "Settings/Settings.h"
-#include "Utils/Math.h"
 #include "Hardware/Beeper.h"
 #include "Osci/Measurements/Measurements.h"
+#include "Settings/Settings.h"
+#include "Utils/Math.h"
 #include <cmath>
 
 
-using namespace Display::Primitives;
 using namespace Osci::Measurements;
 
 const float PageCursorsMeasures::PageSet::MAX_POS_U = 200.0F;

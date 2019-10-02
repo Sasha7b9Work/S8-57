@@ -1,24 +1,18 @@
 #include "defines.h"
-#include "log.h"
 #include "device.h"
+#include "Transceiver.h"
 #include "Display/Console.h"
+#include "Display/Display.h"
 #include "Display/Painter.h"
+#include "Display/Warnings.h"
 #include "Display/Primitives.h"
+#include "FlashDrive/FlashDrive.h"
 #include "Hardware/Timer.h"
 #include "Hardware/Beeper.h"
-#include "Recorder/Recorder_Display.h"
-#include "Osci/Display/Osci_Display.h"
-#include "Osci/Display/PainterData.h"
-#include "Multimeter/Multimeter.h"
-#include "Utils/Debug.h"
-#include "FlashDrive/FlashDrive.h"
 #include "Keyboard/DecoderDevice.h"
-#include "Transceiver.h"
+#include "Osci/Display/Osci_Display.h"
+#include "Recorder/Recorder_Display.h"
 #include <cstring>
-
-
-using namespace Display::Primitives;
-
 
 
 #define NEED_SET_ORIENTATION    (bf.needSetOrientation)

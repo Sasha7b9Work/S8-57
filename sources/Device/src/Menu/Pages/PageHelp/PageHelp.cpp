@@ -1,19 +1,10 @@
 #include "defines.h"
 #include "Display/Primitives.h"
-#include "Display/Painter.h"
+#include "Display/Symbols.h"
+#include "Keyboard/Keyboard.h"
 #include "Menu/MenuItems.h"
-#include "Utils/CommonFunctions.h"
-#include "Menu/Menu.h"
-#include "Menu/Pages/Include/PageHelp.h"
 #include "Menu/Pages/Include/HelpContent.h"
-
-
-using namespace Display::Primitives;
-
-extern const Page pHelp;
-
-const Page * const PageHelp::self = (const Page *)&pHelp;
-
+#include "Menu/Pages/Include/PageHelp.h"
 
 
 static void Draw_Enter(int x, int y)
@@ -82,3 +73,5 @@ DEF_PAGE_4( pHelp, // -V641 // -V1027                                           
     &bNext,
     PageName::Help, nullptr, Item::Active, Page::OpenClose, HelpContent::Draw, HandlerKey_Help
 )
+
+const Page *const PageHelp::self = (const Page *)&pHelp;

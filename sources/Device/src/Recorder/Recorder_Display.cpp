@@ -1,34 +1,22 @@
 #include "defines.h"
-#include "Recorder/Recorder_Display.h"
-#include "Display/Primitives.h"
 #include "Display/Grid.h"
 #include "Display/Painter.h"
-#include "Menu/Menu.h"
-#include "Recorder/Recorder_Storage.h"
-#include "Hardware/Timer.h"
+#include "Display/Primitives.h"
 #include "FPGA/FPGA.h"
+#include "Menu/Menu.h"
+#include "Recorder/Recorder.h"
+#include "Recorder/Recorder_Display.h"
+#include "Recorder/Recorder_Storage.h"
 #include "Settings/Settings.h"
 #include "Utils/Values.h"
-#include "Data/Heap.h"
-#include "Menu/Pages/Include/PageFunction.h"
-#include "Menu/Pages/Include/PageRecorder.h"
-#include "Recorder/Recorder.h"
 #include <cstring>
-#include <cstdlib>
-#include <cstdio>
 #include <cmath>
-#include "FPGA/FPGA_Math.h"
-
-
-using namespace Display::Primitives;
-
 
 
 /// С этой точки начинается вывод
 static int startPoint = -1;
 
 static uint16 posCursor[2] = { 100, 220 };
-
 
 
 namespace Recorder

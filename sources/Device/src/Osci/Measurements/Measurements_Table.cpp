@@ -1,21 +1,12 @@
 #include "defines.h"
-#include "Display/Primitives.h"
 #include "Display/Grid.h"
-#include "Osci/Measurements/Measurements_Table.h"
+#include "Display/Primitives.h"
+#include "Osci/Measurements/Measurements.h"
 #include "Settings/Settings.h"
 #include "Utils/Math.h"
-#include "Display/Font/Font.h"
-#include "Osci/Measurements/Measurements.h"
 
 
-using namespace Osci;
 using namespace Osci::Measurements;
-
-using Display::Primitives::Char;
-using Display::Primitives::Rectangle;
-using Display::Primitives::Region;
-using Display::Primitives::Text;
-
 
 
 /// Верхняя координата y выводимой таблицы автоматических измерений
