@@ -11,7 +11,7 @@
 #include "Hardware/Beeper.h"
 #include "Keyboard/DecoderDevice.h"
 #include "Osci/Display/DisplayOsci.h"
-#include "Recorder/Recorder_Display.h"
+#include "Recorder/DisplayRecorder.h"
 #include <cstring>
 
 
@@ -121,7 +121,7 @@ void Display::Update()
         DisplayOsci::Update,
         Tester::Display::Update,
         Multimeter::Display::Update,
-        Recorder::Display::Update
+        DisplayRecorder::Update
     };
 
     funcs[Device::State::CurrentMode()]();

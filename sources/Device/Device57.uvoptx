@@ -913,7 +913,7 @@
 
   <Group>
     <GroupName>FPGA</GroupName>
-    <tvExp>1</tvExp>
+    <tvExp>0</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
@@ -2944,8 +2944,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\src\Recorder\Recorder_Display.cpp</PathWithFileName>
-      <FilenameWithoutPath>Recorder_Display.cpp</FilenameWithoutPath>
+      <PathWithFileName>.\src\Recorder\Recorder_Storage.cpp</PathWithFileName>
+      <FilenameWithoutPath>Recorder_Storage.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -2956,8 +2956,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\src\Recorder\Recorder_Display.h</PathWithFileName>
-      <FilenameWithoutPath>Recorder_Display.h</FilenameWithoutPath>
+      <PathWithFileName>.\src\Recorder\Recorder_Storage.h</PathWithFileName>
+      <FilenameWithoutPath>Recorder_Storage.h</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -2968,8 +2968,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\src\Recorder\Recorder_Storage.cpp</PathWithFileName>
-      <FilenameWithoutPath>Recorder_Storage.cpp</FilenameWithoutPath>
+      <PathWithFileName>.\src\Recorder\DisplayRecorder.cpp</PathWithFileName>
+      <FilenameWithoutPath>DisplayRecorder.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -2980,8 +2980,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\src\Recorder\Recorder_Storage.h</PathWithFileName>
-      <FilenameWithoutPath>Recorder_Storage.h</FilenameWithoutPath>
+      <PathWithFileName>.\src\Recorder\DisplayRecorder.h</PathWithFileName>
+      <FilenameWithoutPath>DisplayRecorder.h</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>

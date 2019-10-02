@@ -3,7 +3,7 @@
 #include "Display/Primitives.h"
 #include "Menu/Pages/Include/PageRecorder.h"
 #include "Recorder/Recorder.h"
-#include "Recorder/Recorder_Display.h"
+#include "Recorder/DisplayRecorder.h"
 #include "Recorder/Recorder_Storage.h"
 #include "Settings/Settings.h"
 
@@ -61,12 +61,12 @@ static bool HandlerKey_PageShow(const KeyEvent &event)
     {
         if (event.key == Key::Left)
         {
-            Recorder::Display::MoveCursorLeft();
+            DisplayRecorder::MoveCursorLeft();
             return true;
         }
         else if (event.key == Key::Right)
         {
-            Recorder::Display::MoveCursorRight();
+            DisplayRecorder::MoveCursorRight();
             return true;
         }
         else

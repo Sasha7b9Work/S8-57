@@ -5,7 +5,7 @@
 #include "FPGA/FPGA.h"
 #include "Menu/Menu.h"
 #include "Recorder/Recorder.h"
-#include "Recorder/Recorder_Display.h"
+#include "Recorder/DisplayRecorder.h"
 #include "Recorder/Recorder_Storage.h"
 #include "Settings/Settings.h"
 #include "Utils/Values.h"
@@ -19,24 +19,16 @@ static int startPoint = -1;
 static uint16 posCursor[2] = { 100, 220 };
 
 
-namespace Recorder
-{
-namespace Display
-{
-    /// Изобразить установленные настройки
-    void DrawSettings(int x, int y);
-    /// Отобразить данные
-    static void DrawData();
-    /// Отобразить размер памяти, занимаемой данными
-    void DrawSizeMemory(int x, int y);
+/// Изобразить установленные настройки
+static void DrawSettings(int x, int y);
+/// Отобразить данные
+static void DrawData();
 
-    void DrawMemoryWindow();
-};
-};
+static void DrawMemoryWindow();
 
 
 
-void Recorder::Display::Update()
+void DisplayRecorder::Update()
 {
     Painter::BeginScene(Color::BLACK);
 
@@ -54,7 +46,7 @@ void Recorder::Display::Update()
 }
 
 
-void Recorder::Display::DrawSettings(int x, int y)
+static void DrawSettings(int x, int y)
 {
     if (Menu::OpenedItem() != PageRecorder::self)
     {
@@ -68,23 +60,6 @@ void Recorder::Display::DrawSettings(int x, int y)
     Text(Range(set.ch[Chan::A].range).ToString(static_cast<int8>(set.ch[Chan::A].divider))).Draw(x + 2, y + 11, Color::CHAN[Chan::A]);
 
     Text(Range(set.ch[Chan::B].range).ToString(static_cast<int8>(set.ch[Chan::B].divider))).Draw(x + 2, y + 20, Color::CHAN[Chan::B]);
-}
-
-
-void Recorder::Display::DrawSizeMemory(int x, int y)
-{
-    if (Menu::OpenedItem() != PageRecorder::self)
-    {
-        return;
-    }
-
-    Region(100, 10).DrawBounded(x, y, Color::BACK, Color::FILL);
-
-    //Text(Integer(Storage::CurrentFrame()->Size()).ToString(false)).Draw(x + 2, y + 2);
-
-    String text("Осталось %d сек", (int)(Storage::CurrentFrame()->FreeMemory() / RecorderScaleX::Current().BytesToSec()));
-
-    Text(text).Draw(x + 2, y + 1);
 }
 
 
@@ -205,9 +180,9 @@ static void DrawCursors()
 }
 
 
-void Recorder::Display::DrawData()
+static void DrawData()
 {
-    Storage::Frame *frame = Storage::CurrentFrame();
+    Recorder::Storage::Frame *frame = Recorder::Storage::CurrentFrame();
 
     uint numPoints = frame->NumPoints();
 
@@ -220,7 +195,7 @@ void Recorder::Display::DrawData()
 
     int x = 0;
 
-    Storage::Point point = frame->GetPoint((Recorder::IsRunning() || startPoint < 0) ? 
+    Recorder::Storage::Point point = frame->GetPoint((Recorder::IsRunning() || startPoint < 0) ? 
                                                            ((numPoints < 320) ? (0) : (numPoints - 320))
                                                             : startPoint,
                                                             numPoints);
@@ -253,16 +228,16 @@ void Recorder::Display::DrawData()
 }
 
 
-void Recorder::Display::DrawMemoryWindow()
+static void DrawMemoryWindow()
 {
     static int prevNumPoints = 0;
 
-    if (Menu::OpenedItem() != PageRecorder::PageShow::self || Storage::CurrentFrame()->NumPoints() == 0)
+    if (Menu::OpenedItem() != PageRecorder::PageShow::self || Recorder::Storage::CurrentFrame()->NumPoints() == 0)
     {
         return;
     }
 
-    int numPoints = (int)Storage::CurrentFrame()->NumPoints();
+    int numPoints = (int)Recorder::Storage::CurrentFrame()->NumPoints();
 
     if (prevNumPoints != numPoints)
     {
@@ -294,9 +269,9 @@ void Recorder::Display::DrawMemoryWindow()
 }
 
 
-void Recorder::Display::MoveLeft()
+void DisplayRecorder::MoveLeft()
 {
-    if (Storage::CurrentFrame()->NumPoints() < 321)
+    if (Recorder::Storage::CurrentFrame()->NumPoints() < 321)
     {
         return;
     }
@@ -309,26 +284,26 @@ void Recorder::Display::MoveLeft()
 }
 
 
-void Recorder::Display::MoveRight()
+void DisplayRecorder::MoveRight()
 {
-    if (Storage::CurrentFrame()->NumPoints() < 321)
+    if (Recorder::Storage::CurrentFrame()->NumPoints() < 321)
     {
         return;
     }
 
     startPoint += 320;
-    if (startPoint > (int)(Storage::CurrentFrame()->NumPoints() - 320))
+    if (startPoint > (int)(Recorder::Storage::CurrentFrame()->NumPoints() - 320))
     {
-        startPoint = (int)(Storage::CurrentFrame()->NumPoints() - 320);
+        startPoint = (int)(Recorder::Storage::CurrentFrame()->NumPoints() - 320);
     }
 }
 
 
-void Recorder::Display::MoveCursorLeft()
+void DisplayRecorder::MoveCursorLeft()
 {
 }
 
 
-void Recorder::Display::MoveCursorRight()
+void DisplayRecorder::MoveCursorRight()
 {
 }
