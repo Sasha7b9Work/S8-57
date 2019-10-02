@@ -44,3 +44,10 @@ namespace Osci
     /// В этом случае
     StructReadRand GetInfoForReadRand(int Tsm = NULL_TSHIFT, const uint8 *address = nullptr);
 };
+
+struct AveragerOsci
+{
+    static void Process(Chan::E ch, const uint8 *dataNew, int size);
+    static void SettingChanged();
+    static void Draw();
+};

@@ -6,7 +6,6 @@
 #include "Utils/CommonFunctions.h"
 #include "Settings/Settings.h"
 #include "Osci/Osci.h"
-#include "Osci/Osci_Averager.h"
 
 
 
@@ -62,7 +61,7 @@ DEF_CHOICE_4( cType, // -V206                                                   
 
 static void OnChange_AverageNum(bool)
 {
-    Osci::Averager::SettingChanged();
+    AveragerOsci::SettingChanged();
 }
 
 DEF_CHOICE_9( cAverage_Num,                                                                                                                       //--- ÄÈÑÏËÅÉ - ÓÑĞÅÄÍÅÍÈÅ - Êîëè÷åñòâî ---

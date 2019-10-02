@@ -1446,16 +1446,6 @@
               <FilePath>.\src\Osci\Osci.h</FilePath>
             </File>
             <File>
-              <FileName>Osci_Settings.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Osci\Osci_Settings.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Osci_Settings.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Osci\Osci_Settings.h</FilePath>
-            </File>
-            <File>
               <FileName>Osci_Storage.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Osci\Osci_Storage.cpp</FilePath>
@@ -1466,14 +1456,14 @@
               <FilePath>.\src\Osci\Osci_Storage.h</FilePath>
             </File>
             <File>
-              <FileName>Osci_Averager.cpp</FileName>
+              <FileName>AveragerOsci.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\Osci\Osci_Averager.cpp</FilePath>
+              <FilePath>.\src\Osci\AveragerOsci.cpp</FilePath>
             </File>
             <File>
-              <FileName>Osci_Averager.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Osci\Osci_Averager.h</FilePath>
+              <FileName>SettingsOsci.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Osci\SettingsOsci.cpp</FilePath>
             </File>
           </Files>
         </Group>

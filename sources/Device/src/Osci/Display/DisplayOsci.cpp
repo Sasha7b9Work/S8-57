@@ -3,8 +3,8 @@
 #include "Display/Painter.h"
 #include "Display/Primitives.h"
 #include "menu/Menu.h"
+#include "Osci/Osci.h"
 #include "Osci/FrequencyCounter.h"
-#include "Osci/Osci_Averager.h"
 #include "Osci/Display/DisplayOsci.h"
 #include "Osci/Measurements/Measurements.h"
 #include "Settings/Settings.h"
@@ -38,7 +38,7 @@ void DisplayOsci::Update()
 
     HiPart::Draw();
 
-    Osci::Averager::Draw();
+    AveragerOsci::Draw();
     
     RShift::DrawBoth();
 

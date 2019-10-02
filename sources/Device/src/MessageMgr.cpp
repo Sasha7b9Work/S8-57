@@ -1,10 +1,10 @@
 #include "defines.h"
 #include "MessageMgr.h"
-#include "Osci/Osci_Averager.h"
+#include "Osci/Osci.h"
 
 
 
 void MessageMgr::OsciSettingsEffectOnAverageChanged()
 {
-    Osci::Averager::SettingChanged();
+    AveragerOsci::SettingChanged();
 }

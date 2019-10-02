@@ -1,6 +1,5 @@
 #include "defines.h"
 #include "Osci.h"
-#include "Osci_Averager.h"
 #include "Data/Reader.h"
 #include "Display/Grid.h"
 #include "Display/Primitives.h"
@@ -13,7 +12,7 @@
 static uint16 numSignals[2] = { 0, 0 };
 
 
-void Osci::Averager::Process(Chan::E ch, const uint8 *dataNew, int size)
+void AveragerOsci::Process(Chan::E ch, const uint8 *dataNew, int size)
 {
     /*
         ¬ режиме рандомизатора в усреднении надо использовать только те данные, которы считаны. Ќельз€ брать данные дл€ усреднени€ из предыдущего сохранЄнного сигнала.
@@ -78,13 +77,13 @@ void Osci::Averager::Process(Chan::E ch, const uint8 *dataNew, int size)
 }
 
 
-void Osci::Averager::SettingChanged()
+void AveragerOsci::SettingChanged()
 {
     numSignals[0] = numSignals[1] = 0;
 }
 
 
-void Osci::Averager::Draw()
+void AveragerOsci::Draw()
 {
     if (set.disp.ENumAverage > 1 && numSignals[0] < set.disp.ENumAverage)
     {

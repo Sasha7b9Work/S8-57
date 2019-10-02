@@ -11,7 +11,6 @@
 #include "Recorder/Recorder.h"
 #include "Osci/Osci_Storage.h"
 #include "Data/Reader.h"
-#include "Osci/Osci_Averager.h"
 #include <cstring>
 #include <stdlib.h>
 
@@ -242,11 +241,11 @@ void FPGA::ReadData()
             {
                 if (ENABLED_A(setLast))
                 {
-                    Osci::Averager::Process(Chan::A, last->DataA(), setLast->SizeChannel());
+                    AveragerOsci::Process(Chan::A, last->DataA(), setLast->SizeChannel());
                 }
                 if (ENABLED_B(setLast))
                 {
-                    Osci::Averager::Process(Chan::B, last->DataB(), setLast->SizeChannel());
+                    AveragerOsci::Process(Chan::B, last->DataB(), setLast->SizeChannel());
                 }
             }
         }
