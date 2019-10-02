@@ -10,12 +10,6 @@
 typedef void(*pFuncTester)();
 
 
-namespace Timer
-{
-    class TIM2_;
-    class TIM3_;
-}
-
 class Battery;
 
 
@@ -47,6 +41,30 @@ struct HAL_DAC1
     static void ConfigTIM7(uint16 prescaler, uint16 period);
 };
 
+struct HAL_TIM2
+{
+    static uint TimeUS();
+    static uint TimeTicks();
+    static void Init(uint prescaler, uint period);
+    static void DeInit();
+    static void Start();
+    static void Stop();
+    static void StartMultiMeasurement();
+};
+
+struct HAL_TIM3
+{
+    static void Init(uint prescaler, uint period);
+    static void DeInit();
+    static void Start();
+    static void Stop();
+    static void EnableIRQ(uint mainPriority, uint subPriority);
+    static void DisableIRQ();
+    static void StartIT(uint period);
+    static void StopIT();
+};
+
+
 
 namespace HAL
 {
@@ -74,48 +92,6 @@ namespace HAL
         static void SetValue(uint value);
     };
 
-    ////
-    class TIM2_
-    {
-    public:
-        static uint TimeUS();
-
-        static uint TimeTicks();
-
-    friend class Timer::TIM2_;
-    private:
-        static void Init(uint prescaler, uint period);
-
-        static void DeInit();
-
-        static void Start();
-
-        static void Stop();
-
-        static void StartMultiMeasurement();
-    };
-
-    ////
-    class TIM3_
-    {
-    friend class Timer::TIM3_;
-    private:
-        static void Init(uint prescaler, uint period);
-
-        static void DeInit();
-
-        static void Start();
-
-        static void Stop();
-
-        static void EnableIRQ(uint mainPriority, uint subPriority);
-
-        static void DisableIRQ();
-
-        static void StartIT(uint period);
-
-        static void StopIT();
-    };
 
     ////
     class EEPROM_
