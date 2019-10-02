@@ -36,41 +36,15 @@ static void CalculateSine();
 static void CalculateTriangle();
 
 
-namespace Beeper
-{
-    class DAC1_
-    {
-    public:
-        static void Init()
-        {
-            HAL::DAC1_::Init();
-        }
-        static void StartDMA(void *_points, uint numPoints)
-        {
-            HAL::DAC1_::StartDMA(_points, numPoints);
-        }
-        static void StopDMA()
-        {
-            HAL::DAC1_::StopDMA();
-        }
-        static void ConfigTIM7(uint16 prescaler, uint16 period)
-        {
-            HAL::DAC1_::ConfigTIM7(prescaler, period);
-        }
-    };
-}
-
-
-
 void Beeper::Init()
 {
-    DAC1_::Init();
+    HAL_DAC1::Init();
 }
 
 
 static void Stop()
 {
-    Beeper::DAC1_::StopDMA();
+    HAL_DAC1::StopDMA();
     isBeep = false;
     soundWarnIsBeep = false;
 }
@@ -136,7 +110,7 @@ static void CalculateTriangle()
 
 static void SetWave()
 {
-    Beeper::DAC1_::ConfigTIM7(0, CalculatePeriodForTIM());
+    HAL_DAC1::ConfigTIM7(0, CalculatePeriodForTIM());
 
     if(typeWave == TypeWave::Sine)
     {
@@ -179,7 +153,7 @@ static void Beep(const TypeWave::E newTypeWave, const float newFreq, const float
     
     isBeep = true;
 
-    Beeper::DAC1_::StartDMA(points, POINTS_IN_PERIOD_SOUND);
+    HAL_DAC1::StartDMA(points, POINTS_IN_PERIOD_SOUND);
 
     Timer::SetAndStartOnce(Timer::Type::StopSound, Stop, (uint)newDuration);
 }
@@ -200,7 +174,7 @@ void Beeper::Bell::On()
 
         SetWave();
 
-        Beeper::DAC1_::StartDMA(points, POINTS_IN_PERIOD_SOUND);
+        HAL_DAC1::StartDMA(points, POINTS_IN_PERIOD_SOUND);
 
         Timer::SetAndStartOnce(Timer::Type::StopSound, Stop, 1000000U);
 

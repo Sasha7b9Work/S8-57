@@ -10,16 +10,6 @@
 typedef void(*pFuncTester)();
 
 
-namespace FPGA
-{
-    class ADC3_;
-}
-
-namespace Beeper
-{
-    class DAC1_;
-}
-
 namespace Timer
 {
     class TIM2_;
@@ -49,6 +39,15 @@ struct HAL_ADC3
     static void Init();
 };
 
+struct HAL_DAC1
+{
+    static void Init();
+    static void StartDMA(void *points, uint numPoints);
+    static void StopDMA();
+    static void ConfigTIM7(uint16 prescaler, uint16 period);
+};
+
+
 namespace HAL
 {
     void Init();
@@ -66,19 +65,6 @@ namespace HAL
         static void Transmit(void *buffer, uint size, uint timeout);
 
         static void StartReceiveIT(void *buffer, uint size);
-    };
-
-    class DAC1_
-    {
-    friend class Beeper::DAC1_;
-    private:
-        static void Init();
-
-        static void StartDMA(void *points, uint numPoints);
-
-        static void StopDMA();
-
-        static void ConfigTIM7(uint16 prescaler, uint16 period);
     };
 
     class DAC2_

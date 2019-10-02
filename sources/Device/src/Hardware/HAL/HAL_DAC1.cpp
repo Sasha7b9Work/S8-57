@@ -6,7 +6,7 @@
 static DAC_HandleTypeDef handle = { DAC };
 
 
-void HAL::DAC1_::Init()
+void HAL_DAC1::Init()
 {
     __DMA1_CLK_ENABLE();
     __TIM7_CLK_ENABLE();
@@ -64,19 +64,19 @@ void HAL::DAC1_::Init()
 }
 
 
-void HAL::DAC1_::StartDMA(void *points, uint numPoints)
+void HAL_DAC1::StartDMA(void *points, uint numPoints)
 {
     HAL_DAC_Start_DMA(&handle, DAC_CHANNEL_1, (uint32_t*)points, numPoints, DAC_ALIGN_8B_R);
 }
 
 
-void HAL::DAC1_::StopDMA()
+void HAL_DAC1::StopDMA()
 {
     HAL_DAC_Stop_DMA(&handle, DAC_CHANNEL_1);
 }
 
 
-void HAL::DAC1_::ConfigTIM7(uint16 prescaler, uint16 period)
+void HAL_DAC1::ConfigTIM7(uint16 prescaler, uint16 period)
 {
     static TIM_HandleTypeDef htim =
     {
