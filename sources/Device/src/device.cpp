@@ -51,7 +51,7 @@ void Device::Init()
 
     Battery::Init();
 
-    HAL::RTC_::Init();
+    HAL_RTC::Init();
 
     VCP::Init();
 

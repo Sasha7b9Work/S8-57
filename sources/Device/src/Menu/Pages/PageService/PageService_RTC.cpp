@@ -16,7 +16,7 @@ struct StructRTC
 {
     int        curField;
     PackedTime time;
-    StructRTC() : curField(0) { time = HAL::RTC_::GetPackedTime(); };
+    StructRTC() : curField(0) { time = HAL_RTC::GetPackedTime(); };
     /// Изменить значение текущего поля на +/- 1
     void ChangeCurrentField(int delta)
     {
@@ -113,7 +113,7 @@ DEF_GRAPH_BUTTON( bSet_Down,
 
 static void OnPress_SetPick()
 {
-    HAL::RTC_::SetPackedTime(psRTC->time);
+    HAL_RTC::SetPackedTime(psRTC->time);
     Menu::CloseOpenedItem();
 }
 

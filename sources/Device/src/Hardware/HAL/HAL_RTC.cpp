@@ -43,7 +43,7 @@ static RTC_HandleTypeDef handleRTC =
 
 
 
-void RTC_::Init()
+void HAL_RTC::Init()
 {
     RCC_OscInitTypeDef        RCC_OscInitStruct;
     RCC_PeriphCLKInitTypeDef  PeriphClkInitStruct;
@@ -82,7 +82,7 @@ void RTC_::Init()
 }
 
 
-PackedTime HAL::RTC_::GetPackedTime()
+PackedTime HAL_RTC::GetPackedTime()
 {
     PackedTime time;
 
@@ -107,7 +107,7 @@ PackedTime HAL::RTC_::GetPackedTime()
 }
 
 
-bool HAL::RTC_::SetPackedTime(const PackedTime &time)
+bool HAL_RTC::SetPackedTime(const PackedTime &time)
 {
     RTC_DateTypeDef dateStruct;
     dateStruct.WeekDay = RTC_WEEKDAY_MONDAY;

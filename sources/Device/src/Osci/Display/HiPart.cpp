@@ -275,7 +275,7 @@ static void DrawTime(int x, int y)
     int dField = 10;
     int dSeparator = 2;
 
-    PackedTime time = HAL::RTC_::GetPackedTime();
+    PackedTime time = HAL_RTC::GetPackedTime();
 
     Color::FILL.SetAsCurrent();
 
