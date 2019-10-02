@@ -34,7 +34,7 @@ namespace HAL
             GPIO_MODE_AF_PP
         };
 
-        static const uint pulles[Pull::Size] =
+        static const uint pulles[HPull::Count] =
         {
             GPIO_NOPULL,
             GPIO_PULLDOWN,
@@ -76,7 +76,7 @@ static GPIO_TypeDef * const ports[HPort::Size] =
 
 
 
-void HAL::PIO::Init(HPort::E port, uint pins, HMode::E mode, Pull::E pull, Speed::E speed, Alternate::E alternate)
+void HAL::PIO::Init(HPort::E port, uint pins, HMode::E mode, HPull::E pull, Speed::E speed, Alternate::E alternate)
 {
     GPIO_InitTypeDef isGPIO =
     {

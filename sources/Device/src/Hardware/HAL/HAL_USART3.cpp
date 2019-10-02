@@ -16,7 +16,7 @@ void HAL_USART3::Init(pFuncVV _recvHandler)
 {
     __HAL_RCC_USART3_CLK_ENABLE();
 
-    HAL::PIO::Init(HPort::_D, (uint)(HPin::_8 | HPin::_9), HMode::AF_PP, Pull::Up, Speed::VeryHigh, Alternate::AF7_USART3);
+    HAL::PIO::Init(HPort::_D, (uint)(HPin::_8 | HPin::_9), HMode::AF_PP, HPull::Up, Speed::VeryHigh, Alternate::AF7_USART3);
 
     recvHandler = _recvHandler;
 

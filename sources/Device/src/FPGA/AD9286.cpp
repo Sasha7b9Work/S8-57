@@ -6,8 +6,6 @@
 
 using namespace Hardware;
 
-using HAL::PIO::Pull;
-
 
 #define PIN_SCK     HPin::_10
 #define PORT_SCK    HPort::_B
@@ -37,11 +35,11 @@ void AD9286::Init()
         SCK - 69 - PB10
     */
    
-    HAL::PIO::Init(PORT_CS, PIN_CS, HMode::Output_PP, Pull::Up);       // Инициализация CS
+    HAL::PIO::Init(PORT_CS, PIN_CS, HMode::Output_PP, HPull::Up);       // Инициализация CS
 
-    HAL::PIO::Init(PORT_DAT, PIN_DAT, HMode::Output_PP, Pull::Up);     // Инициализация DAT
+    HAL::PIO::Init(PORT_DAT, PIN_DAT, HMode::Output_PP, HPull::Up);     // Инициализация DAT
     
-    HAL::PIO::Init(PORT_SCK, PIN_SCK, HMode::Output_PP, Pull::Up);     // Инициализация SCK
+    HAL::PIO::Init(PORT_SCK, PIN_SCK, HMode::Output_PP, HPull::Up);     // Инициализация SCK
 
     HAL::PIO::Set(CS);
     HAL::PIO::Reset(DAT);

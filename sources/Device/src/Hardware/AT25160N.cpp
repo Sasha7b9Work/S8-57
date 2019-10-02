@@ -4,9 +4,6 @@
 #include "Hardware/HAL/HAL_PIO.h"
 
 
-using HAL::PIO::Pull;
-
-
 #define PIN_OUT     HPort::_C, HPin::_3
 #define PIN_IN      HPort::_C, HPin::_2
 #define PIN_CLK     HPort::_B, HPin::_10
@@ -61,13 +58,13 @@ void AT25160N::Init()
 
     //                                  SCK                    NSS
     uint pins = (uint)(HPin::_10 | HPin::_12);
-    HAL::PIO::Init(HPort::_B, pins, HMode::Output_PP, Pull::Down);
+    HAL::PIO::Init(HPort::_B, pins, HMode::Output_PP, HPull::Down);
 
     //                                                      MOSI
-    HAL::PIO::Init(HPort::_C, HPin::_3, HMode::Output_PP, Pull::Down);
+    HAL::PIO::Init(HPort::_C, HPin::_3, HMode::Output_PP, HPull::Down);
 
     //                                                      MISO
-    HAL::PIO::Init(HPort::_C, HPin::_2, HMode::Input, Pull::Down);
+    HAL::PIO::Init(HPort::_C, HPin::_2, HMode::Input, HPull::Down);
 
     HAL::PIO::Set(PIN_CS);
     HAL::PIO::Reset(PIN_OUT);

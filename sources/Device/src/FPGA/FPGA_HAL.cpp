@@ -72,7 +72,7 @@ void FPGA::HAL::GPIO::Init()
 {
     for (int i = 0; i < Pin::Number; i++)
     {
-        ::HAL::PIO::Init(PORT((Pin::E)i), GetPin((Pin::E)i) , HMode::Output_PP, ::HAL::PIO::Pull::Down);
+        ::HAL::PIO::Init(PORT((Pin::E)i), GetPin((Pin::E)i) , HMode::Output_PP, HPull::Down);
     }
 }
 

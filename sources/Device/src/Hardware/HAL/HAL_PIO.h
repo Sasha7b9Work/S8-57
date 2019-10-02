@@ -61,21 +61,21 @@ struct HMode
     };
 };
 
+struct HPull
+{
+    enum E
+    {
+        No,
+        Down,
+        Up,
+        Count
+    };
+};
+
 namespace HAL
 {
     namespace PIO
     {
-        struct Pull
-        {
-            enum E
-            {
-                No,
-                Down,
-                Up,
-                Size
-            };
-        };
-
         struct Speed
         {
             enum E
@@ -96,7 +96,7 @@ namespace HAL
             };
         };
 
-        void Init(HPort::E port, uint pins, HMode::E mode, Pull::E pull, Speed::E speed = Speed::Low, Alternate::E alternate = Alternate::AF0_MCO);
+        void Init(HPort::E port, uint pins, HMode::E mode, HPull::E pull, Speed::E speed = Speed::Low, Alternate::E alternate = Alternate::AF0_MCO);
         /// Установка в "1"
         void Set(HPort::E port, uint16 pin);
         /// Установка в "0"
