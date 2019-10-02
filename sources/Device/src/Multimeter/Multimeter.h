@@ -1,28 +1,28 @@
 #pragma once
 
-namespace Multimeter
+
+struct DisplayMultimeter
+{
+    static void Update();
+    /// Через эту функцию поступает измерение от прибора
+    static void SetMeasure(const uint8 buffer[13]);
+
+    static void ChangedMode();
+};
+
+
+struct Multimeter
 {
     /// Инициализация
-    void Init();
+    static void Init();
 
-    void DeInit();
+    static void DeInit();
 
-    void Update();
+    static void Update();
     /// Сообщает мультиметру, что произошло изменение режима и нужно дождаться результата измерения перед выводом
-    void ChangeMode();
+    static void ChangeMode();
 
-    void Calibrate(int calibr);
+    static void Calibrate(int calibr);
 
-    void ChangeAVP();
-
-    /// Используется для отрисовки
-    class Display
-    {
-    public:
-        static void Update();
-        /// Через эту функцию поступает измерение от прибора
-        static void SetMeasure(const uint8 buffer[13]);
-
-        static void ChangedMode();
-    };
+    static void ChangeAVP();
 };

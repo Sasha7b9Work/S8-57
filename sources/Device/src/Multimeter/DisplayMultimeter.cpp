@@ -88,7 +88,7 @@ static void DrawMeasure()
 }
 
 
-void Multimeter::Display::Update()
+void DisplayMultimeter::Update()
 {
     Painter::BeginScene(Color::BACK);
 
@@ -131,7 +131,7 @@ static int GetRange()
 }
 
 
-void Multimeter::Display::ChangedMode()
+void DisplayMultimeter::ChangedMode()
 {
     received = false;
 
@@ -165,7 +165,7 @@ void Multimeter::Display::ChangedMode()
 }
 
 
-void Multimeter::Display::SetMeasure(const uint8 buf[13])
+void DisplayMultimeter::SetMeasure(const uint8 buf[13])
 {
     typedef void(*pFuncVCC)(const char *);
 

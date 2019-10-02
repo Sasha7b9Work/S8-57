@@ -120,7 +120,7 @@ void Display::Update()
     {
         DisplayOsci::Update,
         DisplayTester::Update,
-        Multimeter::Display::Update,
+        DisplayMultimeter::Update,
         DisplayRecorder::Update
     };
 

@@ -17,11 +17,6 @@ namespace Hardware
     class ADC1_;
 }
 
-namespace Multimeter
-{
-    class USART3_;
-}
-
 namespace FPGA
 {
     class ADC3_;
@@ -74,7 +69,6 @@ namespace HAL
         static uint ReadValue();
     };
 
-    ////
     class ADC3_
     {
     friend class FPGA::ADC3_;
@@ -82,11 +76,8 @@ namespace HAL
         static void Init();
     };
 
-    ////
-    class USART3_
+    struct USART3_
     {
-    friend class Multimeter::USART3_;
-    private:
         static void Init(pFuncVV recvCallback);
 
         static void Transmit(void *buffer, uint size, uint timeout);
@@ -94,7 +85,6 @@ namespace HAL
         static void StartReceiveIT(void *buffer, uint size);
     };
 
-    ////
     class DAC1_
     {
     friend class Beeper::DAC1_;
@@ -108,7 +98,6 @@ namespace HAL
         static void ConfigTIM7(uint16 prescaler, uint16 period);
     };
 
-    ////
     class DAC2_
     {
     public:

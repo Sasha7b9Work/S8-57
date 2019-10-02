@@ -5,34 +5,31 @@
 #include "Settings/Settings.h"
 
 
-namespace Multimeter
+class USART3_
 {
-    class USART3_
+public:
+    static void Init(pFuncVV recvCallback)
     {
-    public:
-        static void Init(pFuncVV recvCallback)
-        {
-            HAL::USART3_::Init(recvCallback);
-        }
-        static void Transmit(void *_buffer, uint timeout)
-        {
-            uint8 *pointer = (uint8 *)_buffer;
+        HAL::USART3_::Init(recvCallback);
+    }
+    static void Transmit(void *_buffer, uint timeout)
+    {
+        uint8 *pointer = (uint8 *)_buffer;
 
-            uint size = 0;
-            while (*pointer != 0x0a)
-            {
-                size++;
-                pointer++;
-            }
-
-            HAL::USART3_::Transmit(_buffer, size + 1, timeout);
-        }
-        static void StartReceiveIT(void *_buffer)
+        uint size = 0;
+        while (*pointer != 0x0a)
         {
-            HAL::USART3_::StartReceiveIT(_buffer, 13);
+            size++;
+            pointer++;
         }
-    };
-}
+
+        HAL::USART3_::Transmit(_buffer, size + 1, timeout);
+    }
+    static void StartReceiveIT(void *_buffer)
+    {
+        HAL::USART3_::StartReceiveIT(_buffer, 13);
+    }
+};
 
 
 
@@ -47,7 +44,7 @@ static void ReceiveCallback();
 
 void Multimeter::ChangeMode()
 {
-    Display::ChangedMode();
+    DisplayMultimeter::ChangedMode();
 }
 
 
@@ -164,6 +161,6 @@ MultimeterMeasure::E MultimeterMeasure::GetCode(const char buffer[13])
 
 static void ReceiveCallback()
 {
-    Multimeter::Display::SetMeasure(bufferUART);
-    Multimeter::USART3_::StartReceiveIT(bufferUART);
+    DisplayMultimeter::SetMeasure(bufferUART);
+    USART3_::StartReceiveIT(bufferUART);
 }
