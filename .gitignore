@@ -2,10 +2,8 @@
 *.out
 *.bak
 *~*
-*.uvgui*.*
 *.bin
 *.pyc
-*.uvoptx
 *.tmp
 
 JLinkLog.txt

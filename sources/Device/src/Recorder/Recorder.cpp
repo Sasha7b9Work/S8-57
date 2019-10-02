@@ -1,26 +1,21 @@
 #include "defines.h"
-#include "Display/Display.h"
-#include "FPGA/FPGA_HAL.h"
-#include "Hardware/HAL/HAL.h"
-#include "Recorder/Recorder.h"
-#include "Recorder/Recorder_Storage.h"
-#include "Hardware/HAL/HAL_PIO.h"
-#include "Data/Heap.h"
-#include "Menu/Menu.h"
-#include "Menu/Pages/Include/PageRecorder.h"
-#include "Menu/Pages/Include/PageTrig.h"
-#include "Hardware/Memory.h"
 #include "Display/Display_Primitives.h"
 #include "Display/Painter.h"
+#include "FPGA/FPGA_HAL.h"
+#include "Hardware/Memory.h"
 #include "Hardware/Timer.h"
+#include "Hardware/HAL/HAL.h"
 #include "Osci/Osci.h"
+#include "Recorder/Recorder.h"
+#include "Recorder/Recorder_Storage.h"
+#include "Settings/Settings.h"
+#include "Utils/Math.h"
 
 
 using namespace Display::Primitives;
 using namespace HAL::ADDRESSES::FPGA;
 
 using HAL::FSMC;
-
 
 
 /// Состояние осциллографа перед переходом в режим регистратора
@@ -181,4 +176,126 @@ void Recorder::OnPressStart()
 bool Recorder::IsRunning()
 {
     return running;
+}
+
+
+void RecorderScaleX::Change(int delta)
+{
+    if (Recorder::IsRunning())
+    {
+        return;
+    }
+
+    if (delta > 0)
+    {
+        ::Math::LimitationIncrease<uint8>((uint8 *)(&set.rec.scaleX), (uint8)(RecorderScaleX::Size - 1));
+    }
+    else
+    {
+        ::Math::LimitationDecrease<uint8>((uint8 *)(&set.rec.scaleX), 0);
+    }
+
+    Load();
+}
+
+
+RecorderScaleX &RecorderScaleX::Current()
+{
+    return set.rec.scaleX;
+}
+
+
+pString RecorderScaleX::ToString() const
+{
+    static const struct StructScaleX
+    {
+        const char *name;
+        StructScaleX(pString nRU)
+        {
+            name = nRU;
+        };
+    }
+    scales[RecorderScaleX::Size] =
+    {
+        StructScaleX("0.1\x10с"),
+        StructScaleX("0.2\x10с"),
+        StructScaleX("0.5\x10с"),
+        StructScaleX("1\x10с"),
+        StructScaleX("2\x10с"),
+        StructScaleX("5\x10с"),
+        StructScaleX("10\x10с")
+    };
+
+    return scales[value].name;
+}
+
+
+uint RecorderScaleX::BytesToSec() const
+{
+    static const struct StructBytes
+    {
+        uint value;
+        StructBytes(uint v) : value(v) {};
+    }
+    bytes[RecorderScaleX::Size] =
+    {
+        800,
+        400,
+        160,
+        80,
+        40,
+        16,
+        8
+    };
+
+    return bytes[value].value;
+}
+
+
+uint RecorderScaleX::TimeForPointMS() const
+{
+    static const struct StructTime
+    {
+        uint value;
+        StructTime(uint v) : value(v) {};
+    }
+    bytes[RecorderScaleX::Size] =
+    {
+        5,
+        10,
+        25,
+        50,
+        100,
+        250,
+        500
+    };
+
+    return bytes[value].value;
+}
+
+#ifdef WIN32
+#pragma warning(disable:4310)
+#endif
+
+
+void RecorderScaleX::Load()
+{
+    static const uint8 values[RecorderScaleX::Size] =
+    {
+        BIN_U8(01010110),  // -V2501  // 100ms  
+        BIN_U8(01010111),  // -V2501  // 200ms  
+        BIN_U8(01011001),  // -V2501  // 500ms  
+        BIN_U8(01011010),  // -V2501  // 1s     
+        BIN_U8(01011011),  // -V2501  // 2s     
+        BIN_U8(01011101),  // -V2501  // 5s     
+        BIN_U8(01011110)   // -V2501  // 10s
+    };
+
+    FSMC::WriteToFPGA8(WR::TBASE, values[RecorderScaleX::Current().value]);
+
+    if (Recorder::IsRunning())
+    {
+        Recorder::Stop();
+        Recorder::Start();
+    }
 }
