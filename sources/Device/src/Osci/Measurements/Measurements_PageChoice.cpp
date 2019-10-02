@@ -11,23 +11,23 @@ static bool isActive = false;
 static int8 posCursor = 0;
 
 
-void Osci::Measurements::PageChoice::ChangeState()
+void PageChoiceMeasures::ChangeState()
 {
     isActive = !isActive;
 }
 
 
-void Osci::Measurements::PageChoice::OnOpenCloseEvent()
+void PageChoiceMeasures::OnOpenCloseEvent()
 {
     ChangeState();
     if (isActive)
     {
-        posCursor = (int8)set.meas.measures[Osci::Measurements::posActive];
+        posCursor = (int8)set.meas.measures[MeasurementsOsci::posActive];
     }
 }
 
 
-void Osci::Measurements::PageChoice::OnKeyEvent(const KeyEvent &event)
+void PageChoiceMeasures::OnKeyEvent(const KeyEvent &event)
 {
     if (event.type != TypePress::Press)
     {
@@ -56,7 +56,7 @@ void Osci::Measurements::PageChoice::OnKeyEvent(const KeyEvent &event)
             // здесь ничего делать не нужно
         }
 
-        set.meas.measures[Osci::Measurements::posActive] = (Measure::Type::E)posCursor;
+        set.meas.measures[MeasurementsOsci::posActive] = (Measure::Type::E)posCursor;
         Color::ResetFlash();
     }
     else
@@ -68,7 +68,7 @@ void Osci::Measurements::PageChoice::OnKeyEvent(const KeyEvent &event)
 }
 
 
-void Osci::Measurements::PageChoice::Draw()
+void PageChoiceMeasures::Draw()
 {
     if (!isActive)
     {

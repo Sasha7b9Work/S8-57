@@ -26,7 +26,7 @@ static void Draw_Settings(int x, int y)
 DEF_GRAPH_BUTTON( bSettings,                                                                                                                      //--- ИЗМЕРЕНИЯ - НАСТРОИТЬ - Настройка ---
     "Настройка",
     "Позволяет выбрать необходимые измерения",
-    &PageAutoMeasures::PageTune::self, Item::Active, Osci::Measurements::PageChoice::ChangeState, Draw_Settings
+    &PageAutoMeasures::PageTune::self, Item::Active, PageChoiceMeasures::ChangeState, Draw_Settings
 )
 
 
@@ -39,7 +39,7 @@ static bool HandlerKey_Tune(const KeyEvent &event)
 {
     if (event.IsArrow())
     {
-        Osci::Measurements::PageChoice::OnKeyEvent(event);
+        PageChoiceMeasures::OnKeyEvent(event);
         return true;
     }
 

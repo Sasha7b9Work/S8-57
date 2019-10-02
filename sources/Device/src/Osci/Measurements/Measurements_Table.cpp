@@ -6,9 +6,6 @@
 #include "Utils/Math.h"
 
 
-using namespace Osci::Measurements;
-
-
 /// Верхняя координата y выводимой таблицы автоматических измерений
 static int top = 0;
 
@@ -18,7 +15,7 @@ static int GetTopTable();
 
 
 
-void Table::Draw()
+void TableMeasures::Draw()
 {
     if (!set.meas.show)
     {
@@ -27,7 +24,7 @@ void Table::Draw()
 
     top = Grid::Bottom();
 
-    CalculateMeasures();
+    MeasurementsOsci::CalculateMeasures();
 
     for (int str = 0; str < NumRows(); str++)
     {
@@ -42,12 +39,12 @@ void Table::Draw()
 
     if(Menu::OpenedItem() == PageAutoMeasures::PageTune::self)
     {
-        PageChoice::Draw();
+        PageChoiceMeasures::Draw();
     }
 }
 
 
-void Table::Cell::Draw(int x, int y)
+void TableMeasures::Cell::Draw(int x, int y)
 {
     Measure measure(row, col);
 
@@ -84,7 +81,7 @@ void Table::Cell::Draw(int x, int y)
 }
 
 
-void Table::Cell::DrawStringMeasure(int x, int y)
+void TableMeasures::Cell::DrawStringMeasure(int x, int y)
 {
     Measure measure(row, col);
 
@@ -122,10 +119,10 @@ static int GetTopTable()
 {
     if ((set.meas.number == MeasuresOnDisplay::_6_1) || (set.meas.number == MeasuresOnDisplay::_6_2))
     {
-        return Grid::Bottom() - Osci::Measurements::Table::DY() * 6;
+        return Grid::Bottom() - TableMeasures::DY() * 6;
     }
 
-    int y = Grid::Bottom() - Table::NumRows() * Osci::Measurements::Table::DY();
+    int y = Grid::Bottom() - TableMeasures::NumRows() * TableMeasures::DY();
 
     if (Menu::IsShown())
     {
@@ -136,21 +133,21 @@ static int GetTopTable()
 }
 
 
-int Osci::Measurements::Table::NumCols()
+int TableMeasures::NumCols()
 {
     const int cols[] = { 1, 2, 5, 5, 5, 1, 2 };
     return cols[set.meas.number];
 }
 
 
-int Osci::Measurements::Table::NumRows()
+int TableMeasures::NumRows()
 {
     int rows[] = { 1, 1, 1, 2, 3, 6, 6 };
     return rows[set.meas.number];
 }
 
 
-int Osci::Measurements::Table::GetDeltaGridLeft()
+int TableMeasures::GetDeltaGridLeft()
 {
     if (set.meas.show && (set.meas.modeViewSignals == MeasuresModeViewSignals::Compress))
     {
@@ -171,7 +168,7 @@ int Osci::Measurements::Table::GetDeltaGridLeft()
 }
 
 
-int Osci::Measurements::Table::DY()
+int TableMeasures::DY()
 {
     if (set.meas.source == MeasuresSource::A_B)
     {
@@ -181,7 +178,7 @@ int Osci::Measurements::Table::DY()
 }
 
 
-int Osci::Measurements::Table::DX()
+int TableMeasures::DX()
 {
     return Grid::Width() / 5;
 }

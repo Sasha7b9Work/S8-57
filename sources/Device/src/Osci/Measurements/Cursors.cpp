@@ -9,9 +9,6 @@
 #include <cmath>
 
 
-using namespace Osci::Measurements;
-
-
 /// Нарисовать вертикальный курсор
 static void DrawVertical(int x, int yTearing);
 /// Нарисовать горизонтальный курсор
@@ -21,20 +18,20 @@ static void UpdateCursorsForLook();
 
 
 
-float Cursors::PosU(Chan::E ch, int numCur)
+float CursorsOsci::PosU(Chan::E ch, int numCur)
 {
     return set.curs.posCurU[ch][numCur] / (Grid::Bottom() == Grid::FullBottom() ? 1.0F : 2.0F);
 }
 
 
-bool Cursors::NecessaryDraw()
+bool CursorsOsci::NecessaryDraw()
 {
     return ((set.curs.cntrlU[set.curs.source] == CursorsControl::Disable) || (set.curs.cntrlT[set.curs.source] == CursorsControl::Disable)) &&
         (set.curs.showCursors || (Menu::OpenedItem() == PageCursorsMeasures::PageSet::self));
 }
 
 
-String Cursors::Voltage(Chan::E source, int numCur)
+String CursorsOsci::Voltage(Chan::E source, int numCur)
 {
     float voltage = FPGA::Math::VoltageCursor(PosU(source, numCur), set.ch[source].range, SET_RSHIFT(source));
     if (set.ch[source].divider == 1)
@@ -46,15 +43,15 @@ String Cursors::Voltage(Chan::E source, int numCur)
 }
 
 
-String Cursors::Time(Chan::E source, int numCur)
+String CursorsOsci::Time(Chan::E source, int numCur)
 {
-    float time = FPGA::Math::TimeCursor(Cursors::PosT(source, numCur), set.time.base);
+    float time = FPGA::Math::TimeCursor(CursorsOsci::PosT(source, numCur), set.time.base);
 
     return ::Time(time).ToString(true);
 }
 
 
-float Cursors::PosT(Chan::E ch, int num)
+float CursorsOsci::PosT(Chan::E ch, int num)
 {
     float retValue = 0.0F;
     std::memcpy(&retValue, &set.curs.posCurT[ch][num], sizeof(float));
@@ -62,13 +59,13 @@ float Cursors::PosT(Chan::E ch, int num)
 }
 
 
-void Cursors::SetCursPosT_temp(Chan::E ch, int num, float value)
+void CursorsOsci::SetCursPosT_temp(Chan::E ch, int num, float value)
 {
     std::memcpy(&set.curs.posCurT[ch][num], &value, sizeof(float));
 }
 
 
-void Cursors::Draw()
+void CursorsOsci::Draw()
 {
     Chan::E source = set.curs.source;
 
@@ -87,8 +84,8 @@ void Cursors::Draw()
 
         if (bothCursors)
         {
-            x0 = Grid::Left() + (int)Cursors::PosT(source, 0);
-            x1 = Grid::Left() + (int)Cursors::PosT(source, 1);
+            x0 = Grid::Left() + (int)CursorsOsci::PosT(source, 0);
+            x1 = Grid::Left() + (int)CursorsOsci::PosT(source, 1);
             y0 = Grid::Top() + (int)set.curs.posCurU[source][0];
             y1 = Grid::Top() + (int)set.curs.posCurU[source][1];
 
@@ -98,8 +95,8 @@ void Cursors::Draw()
 
         if (set.curs.cntrlT[set.curs.source] == CursorsControl::Disable)
         {
-            DrawVertical((int)Cursors::PosT(source, 0), y0);
-            DrawVertical((int)Cursors::PosT(source, 1), y1);
+            DrawVertical((int)CursorsOsci::PosT(source, 0), y0);
+            DrawVertical((int)CursorsOsci::PosT(source, 1), y1);
         }
         if (set.curs.cntrlU[set.curs.source] == CursorsControl::Disable)
         {
@@ -169,7 +166,7 @@ static void UpdateCursorsForLook()
 }
 
 
-String Cursors::PercentsU(Chan::E source)
+String CursorsOsci::PercentsU(Chan::E source)
 {
     /// \todo Тут дикая дичь. Эта строчка вызывает HardFault. Возможно, из-за включенного выравнивания Settings. Надо подумать
     // float dPerc = dUperc(source);     
@@ -181,11 +178,11 @@ String Cursors::PercentsU(Chan::E source)
 }
 
 
-String Cursors::PercentsT(Chan::E source)
+String CursorsOsci::PercentsT(Chan::E source)
 {
     float dPerc = 100.0F;
     std::memcpy(&dPerc, &set.curs.deltaT100percents[source], sizeof(float));
 
-    float dValue = std::fabsf(Cursors::PosT(source, 0) - Cursors::PosT(source, 1));
+    float dValue = std::fabsf(PosT(source, 0) - PosT(source, 1));
     return String("%s%%", Float(dValue / dPerc * 100.0F).ToString(false, 6).CString());
 }

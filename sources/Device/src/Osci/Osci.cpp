@@ -115,7 +115,7 @@ void Osci::Update()
 
     Reader::ReadDataFromStorage();
 
-    Measurements::SetData();
+    MeasurementsOsci::SetData();
 }
 
 

@@ -7,8 +7,6 @@
 #include <cmath>
 
 
-using namespace Osci::Measurements;
-
 const float PageCursorsMeasures::PageSet::MAX_POS_U = 200.0F;
 const float PageCursorsMeasures::PageSet::MAX_POS_T = 280.0F;
 
@@ -128,7 +126,7 @@ static void Draw_T(int x, int y)
         {
             bool condLeft = false, condDown = false;
             Chan::E source = set.curs.source;
-            CalculateConditions((int16)Cursors::PosT(source, 0), (int16)Cursors::PosT(source, 1), set.curs.cntrlT[set.curs.source], &condLeft, &condDown);
+            CalculateConditions((int16)CursorsOsci::PosT(source, 0), (int16)CursorsOsci::PosT(source, 1), set.curs.cntrlT[set.curs.source], &condLeft, &condDown);
             if (condLeft && condDown)
             {
                 Draw_T_enableBoth(x, y);
@@ -225,7 +223,7 @@ static void Draw_U(int x, int y)
         else
         {
             bool condTop = false, condDown = false;
-            CalculateConditions((int16)Cursors::PosU(source, 0), (int16)Cursors::PosU(source, 1), set.curs.cntrlU[set.curs.source], &condTop, &condDown);
+            CalculateConditions((int16)CursorsOsci::PosU(source, 0), (int16)CursorsOsci::PosU(source, 1), set.curs.cntrlU[set.curs.source], &condTop, &condDown);
             if (condTop && condDown)
             {
                 Draw_U_enableBoth(x, y);
@@ -407,7 +405,7 @@ void PageCursorsMeasures::PageSet::IncCursCntrlT(Chan::E ch)
 void PageCursorsMeasures::PageSet::SetCursPos100(Chan::E ch)
 {
     set.curs.deltaU100percents[ch] = (float)std::fabsf(set.curs.posCurU[ch][0] - set.curs.posCurU[ch][1]);
-    set.curs.deltaT100percents[ch] = (float)std::fabsf(Cursors::PosT(ch, 0) - Cursors::PosT(ch, 1));
+    set.curs.deltaT100percents[ch] = (float)std::fabsf(CursorsOsci::PosT(ch, 0) - CursorsOsci::PosT(ch, 1));
 }
 
 
@@ -426,7 +424,7 @@ void PageCursorsMeasures::PageSet::SetShiftCursPosT(Chan::E ch, int numCur, floa
 {
     /// \todo одинаковые ветки
     // CURsT_POS(ch, numCur) = LimitationFloat(CURsT_POS(ch, numCur) + delta, 0, MAX_POS_T);   
-    Cursors::SetCursPosT_temp(ch, numCur, Math::LimitationRet(Cursors::PosT(ch, numCur) + delta, 0.0F, MAX_POS_T));
+    CursorsOsci::SetCursPosT_temp(ch, numCur, Math::LimitationRet(CursorsOsci::PosT(ch, numCur) + delta, 0.0F, MAX_POS_T));
 
     if (set.curs.movement == CursorsMovement::Pixels)                        // Если перемещение по пикселям, то нужно привести к пиксельной сетке экрана
     {
@@ -441,11 +439,11 @@ void PageCursorsMeasures::PageSet::UpdateCursorsForLook()
 
     if ((set.curs.active == CursorsActive::T) && ((set.curs.lookMode[Chan::A] == CursorsLookMode::Voltage) || (set.curs.lookMode[Chan::A] == CursorsLookMode::Both)))
     {
-        SetCursorU(source, 0, Measure::CalculateCursorU(source, Cursors::PosT(source, 0)));
+        SetCursorU(source, 0, Measure::CalculateCursorU(source, CursorsOsci::PosT(source, 0)));
     }
     if ((set.curs.active == CursorsActive::T) && ((set.curs.lookMode[Chan::B] == CursorsLookMode::Voltage) || (set.curs.lookMode[Chan::B] == CursorsLookMode::Both)))
     {
-        SetCursorU(source, 1, Measure::CalculateCursorU(source, Cursors::PosT(source, 1)));
+        SetCursorU(source, 1, Measure::CalculateCursorU(source, CursorsOsci::PosT(source, 1)));
     }
     if ((set.curs.active == CursorsActive::U) && ((set.curs.lookMode[Chan::A] == CursorsLookMode::Time) || (set.curs.lookMode[Chan::A] == CursorsLookMode::Both)))
     {
@@ -468,7 +466,7 @@ void PageCursorsMeasures::PageSet::SetCursorT(Chan::E ch, int numCur, float pos)
 {
     /// \todo одинаковые ветки
     // CURsT_POS(ch, numCur) = LimitationFloat(pos, 0, MAX_POS_T);      
-    Cursors::SetCursPosT_temp(ch, numCur, Math::LimitationRet(pos, 0.0F, MAX_POS_T));
+    CursorsOsci::SetCursPosT_temp(ch, numCur, Math::LimitationRet(pos, 0.0F, MAX_POS_T));
 }
 
 

@@ -10,9 +10,6 @@
 #include "Settings/Settings.h"
 
 
-using namespace Osci::Measurements;
-
-
 void DisplayOsci::BottomPart::Draw(int x0, int y0)
 {
     Font::SetCurrent(TypeFont::_UGO2);

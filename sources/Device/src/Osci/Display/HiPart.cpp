@@ -14,9 +14,6 @@
 #include <cstdio>
 
 
-using namespace Osci::Measurements;
-
-
 class Separator
 {
 private:
@@ -103,7 +100,7 @@ void DisplayOsci::HiPart::Draw()
 
 static void DrawSeparators()
 {
-    HLine line(Grid::Left() - Osci::Measurements::Table::GetDeltaGridLeft() - 1);
+    HLine line(Grid::Left() - TableMeasures::GetDeltaGridLeft() - 1);
 
     line.Draw(1, Grid::ChannelBottom(), Color::SEPARATOR);
     line.Draw(1, Grid::FullBottom());
@@ -121,7 +118,7 @@ static int DrawMainParameters(int _x, int _y)
         ≈сли активны курсоры ручных измерений, то нужно корректировать положение вывода
     */
 
-    if (Cursors::NecessaryDraw())
+    if (CursorsOsci::NecessaryDraw())
     {
         _y = Grid::Bottom() + 3;
     }
@@ -398,7 +395,7 @@ static void WriteCursors()
     int y1 = 0;
     int y2 = 0 + 9;
 
-    if (Cursors::NecessaryDraw())
+    if (CursorsOsci::NecessaryDraw())
     {
         VLine separator(Grid::Top() - 3);
 
@@ -414,16 +411,16 @@ static void WriteCursors()
             String("1:").Draw(x, y1, colorText);
             String("2:").Draw(x, y2);
             x += 7;
-            Cursors::Voltage(source, 0).Draw(x, y1);
-            Cursors::Voltage(source, 1).Draw(x, y2);
+            CursorsOsci::Voltage(source, 0).Draw(x, y1);
+            CursorsOsci::Voltage(source, 1).Draw(x, y2);
             x = 49;
-            float pos0 = FPGA::Math::VoltageCursor(Cursors::PosU(source, 0), set.ch[source].range, SET_RSHIFT(source));
-            float pos1 = FPGA::Math::VoltageCursor(Cursors::PosU(source, 1), set.ch[source].range, SET_RSHIFT(source));
+            float pos0 = FPGA::Math::VoltageCursor(CursorsOsci::PosU(source, 0), set.ch[source].range, SET_RSHIFT(source));
+            float pos1 = FPGA::Math::VoltageCursor(CursorsOsci::PosU(source, 1), set.ch[source].range, SET_RSHIFT(source));
             float delta = std::fabsf(pos1 - pos0) * DIVIDER_ABS(source);
             String(":dU=").Draw(x, y1);
             Voltage(delta).ToString(false).Draw(x + 17, y1);
             String(':').Draw(x, y2);
-            Cursors::PercentsU(source).Draw(x + 10, y2);
+            CursorsOsci::PercentsU(source).Draw(x + 10, y2);
         }
 
         x = 101;
@@ -434,17 +431,17 @@ static void WriteCursors()
             String("1:").Draw(x, y1);
             String("2:").Draw(x, y2);
             x += 7;
-            Cursors::Time(source, 0).Draw(x, y1);
-            Cursors::Time(source, 1).Draw(x, y2);
+            CursorsOsci::Time(source, 0).Draw(x, y1);
+            CursorsOsci::Time(source, 1).Draw(x, y2);
             x = 153;
 
-            float pos0 = FPGA::Math::TimeCursor(Cursors::PosT(source, 0), set.time.base);
-            float pos1 = FPGA::Math::TimeCursor(Cursors::PosT(source, 1), set.time.base);
+            float pos0 = FPGA::Math::TimeCursor(CursorsOsci::PosT(source, 0), set.time.base);
+            float pos1 = FPGA::Math::TimeCursor(CursorsOsci::PosT(source, 1), set.time.base);
             float delta = std::fabsf(pos1 - pos0);
             String(":dT=").Draw(x, y1);
             Time(delta).ToString(false).Draw(x + 17, y1);
             String(':').Draw(x, y2);
-            Cursors::PercentsT(source).Draw(x + 8, y2);
+            CursorsOsci::PercentsT(source).Draw(x + 8, y2);
 
             if (set.curs.showFreq)
             {

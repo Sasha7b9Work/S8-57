@@ -9,13 +9,6 @@
 
 
 using namespace FPGA;
-using namespace Osci::Measurements;
-
-//using DisplayOsci::MemoryWindow::Width;
-//using DisplayOsci::MemoryWindow::Height;
-//using DisplayOsci::MemoryWindow::X;
-//using DisplayOsci::MemoryWindow::Y;
-
 
 
 static void DrawDataInRect(int x, int y, int width, int height, const uint8 *data, uint length);
@@ -25,7 +18,7 @@ static void DrawScreenArea();
 
 void DisplayOsci::MemoryWindow::Draw()
 {
-    if (Cursors::NecessaryDraw())
+    if (CursorsOsci::NecessaryDraw())
     {
         return;
     }

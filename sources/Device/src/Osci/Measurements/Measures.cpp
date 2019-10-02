@@ -4,10 +4,6 @@
 #include "Utils/Math.h"
 
 
-using namespace Osci::Measurements;
-
-
-
 struct StructMeasure
 {
     const char *name;
@@ -50,17 +46,17 @@ static const StructMeasure sMeas[Measure::Type::Number] =
 
 bool Measure::IsActive()
 {
-    if(posActive >= Table::NumCols() * Table::NumRows())
+    if(MeasurementsOsci::posActive >= TableMeasures::NumCols() * TableMeasures::NumRows())
     {
-        posActive = 0;
+        MeasurementsOsci::posActive = 0;
     }
-    return (row * Table::NumCols() + col) == posActive;
+    return (row * TableMeasures::NumCols() + col) == MeasurementsOsci::posActive;
 }
 
 
 void Measure::SetActive(int row, int col)
 {
-    posActive = (int8)(row * Table::NumCols() + col);
+    MeasurementsOsci::posActive = (int8)(row * TableMeasures::NumCols() + col);
 }
 
 
@@ -72,7 +68,7 @@ char Measure::GetChar(Measure::Type::E measure)
 
 void Measure::ChangeActive(int delta)
 {
-    Measure measure = GetActiveMeasure();
+    Measure measure = MeasurementsOsci::GetActiveMeasure();
 
     int row = measure.row;
     int col = measure.col;
@@ -81,18 +77,18 @@ void Measure::ChangeActive(int delta)
 
     if (col < 0)
     {
-        col = Table::NumCols() - 1;
+        col = TableMeasures::NumCols() - 1;
         row--;
         if (row < 0)
         {
-            row = Table::NumRows() - 1;
+            row = TableMeasures::NumRows() - 1;
         }
     }
-    else if (col == Table::NumCols())
+    else if (col == TableMeasures::NumCols())
     {
         col = 0;
         row++;
-        if (row >= Table::NumRows())
+        if (row >= TableMeasures::NumRows())
         {
             row = 0;
         }
@@ -122,30 +118,30 @@ String Measure::GetName(Measure::Type::E type)
 
 Measure::Type::E Measure::GetType()
 {
-    return set.meas.measures[row * Table::NumCols() + col];
+    return set.meas.measures[row * TableMeasures::NumCols() + col];
 }
 
 
 void Measure::ShortPressOnSmallButonMarker()
 {
-    if(set.meas.measures[posActive] == set.meas.marked)
+    if(set.meas.measures[MeasurementsOsci::posActive] == set.meas.marked)
     {
         set.meas.marked = Measure::Type::None;
     }
     else
     {
-        set.meas.marked = set.meas.measures[posActive];
+        set.meas.marked = set.meas.measures[MeasurementsOsci::posActive];
     }
 }
 
 
 void Measure::SetMarkerVoltage(Chan::E ch, int num, float value)
 {
-    markerVoltage[ch][num] = (int)value;
+    MeasurementsOsci::markerVoltage[ch][num] = (int)value;
 }
 
 
 void Measure::SetMarkerTime(Chan::E ch, int num, int value)
 {
-    markerTime[ch][num] = value;
+    MeasurementsOsci::markerTime[ch][num] = value;
 }

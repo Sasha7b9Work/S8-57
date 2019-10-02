@@ -44,13 +44,13 @@ void DisplayOsci::Update()
 
     DrawCursorTrigLevel();
     
-    Osci::Measurements::Cursors::Draw();
+    CursorsOsci::Draw();
 
     BottomPart::Draw(273, Grid::Bottom() + 1);
     
     FrequencyCounter::Draw();
 
-    Osci::Measurements::Table::Draw();
+    TableMeasures::Draw();
 
     Menu::Draw();
 }
