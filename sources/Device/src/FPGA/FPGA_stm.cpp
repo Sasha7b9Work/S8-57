@@ -38,11 +38,11 @@ void FPGA::Init()
 
     HAL::GPIO::Init();
 
-    SetPin(Pin::SPI3_CS1);
-    SetPin(Pin::SPI3_CS2);
+    SetPin(FPin::SPI3_CS1);
+    SetPin(FPin::SPI3_CS2);
 
-    ResetPin(Pin::SPI3_SCK);
-    ResetPin(Pin::SPI3_DAT);
+    ResetPin(FPin::SPI3_SCK);
+    ResetPin(FPin::SPI3_DAT);
 
     AD9286::Init();
 

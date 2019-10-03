@@ -74,6 +74,28 @@ struct Flag
     } value;
 };
 
+struct FPin
+{
+    enum E
+    {
+        SPI3_SCK,
+        SPI3_DAT,
+        SPI3_CS1,
+        SPI3_CS2,
+        A1,
+        A2,
+        A3,
+        A4,
+        LF1,
+        LF2,
+        A1S,
+        A0S,
+        LFS,
+        Number
+    } value;
+    explicit FPin(E v) : value(v) {};
+};
+
 
 namespace FPGA
 {
@@ -103,37 +125,15 @@ namespace FPGA
         {
             void Init();
 
-            struct Pin
-            {
-                enum E
-                {
-                    SPI3_SCK,
-                    SPI3_DAT,
-                    SPI3_CS1,
-                    SPI3_CS2,
-                    A1,
-                    A2,
-                    A3,
-                    A4,
-                    LF1,
-                    LF2,
-                    A1S,
-                    A0S,
-                    LFS,
-                    Number
-                } value;
-                explicit Pin(E v) : value(v) {};
-            };
+            uint16 GetPin(FPin::E pin);
 
-            uint16 GetPin(Pin::E pin);
+            void WritePin(FPin::E pin, int enable);
 
-            void WritePin(Pin::E pin, int enable);
+            void SetPin(FPin::E pin);
 
-            void SetPin(Pin::E pin);
+            void ResetPin(FPin::E pin);
 
-            void ResetPin(Pin::E pin);
-
-            void WriteRegisters(Pin::E cs, uint16 value);
+            void WriteRegisters(FPin::E cs, uint16 value);
         }
     }
 }
