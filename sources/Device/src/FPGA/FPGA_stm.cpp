@@ -16,7 +16,6 @@
 #include <cstring>
 
 
-using namespace FPGA::HAL::GPIO;
 using namespace Address;
 
 using Hardware::AD9286;
@@ -36,13 +35,13 @@ void FPGA::Init()
 {
     givingStart = false;
 
-    HAL::GPIO::Init();
+    FPGA::GPIO::Init();
 
-    SetPin(FPin::SPI3_CS1);
-    SetPin(FPin::SPI3_CS2);
+    FPGA::GPIO::SetPin(FPin::SPI3_CS1);
+    FPGA::GPIO::SetPin(FPin::SPI3_CS2);
 
-    ResetPin(FPin::SPI3_SCK);
-    ResetPin(FPin::SPI3_DAT);
+    FPGA::GPIO::ResetPin(FPin::SPI3_SCK);
+    FPGA::GPIO::ResetPin(FPin::SPI3_DAT);
 
     AD9286::Init();
 

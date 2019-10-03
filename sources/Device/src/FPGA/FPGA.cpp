@@ -15,7 +15,6 @@
 #include <stdlib.h>
 
 
-using namespace FPGA::HAL;
 using namespace Address;
 
 
@@ -138,10 +137,10 @@ bool FPGA::ForTester::Start() // -V2506
 bool FPGA::ForTester::Read(uint16 *dataA, uint8 *dataB) // -V2506
 {
     uint start = TIME_MS;
-    HAL::flag = 0;
+    FPGA::flag = 0;
     while (!GetFlag::DATA_READY())    // Ждём флага готовности данных
     {
-        HAL::ReadFlag();
+        FPGA::ReadFlag();
 
         if(TIME_MS - start > 20)        /// \todo Временная затычка. Надо сделать так, чтобы такие ситуации были исключены. Сбои происходят, во время
         {                               /// нажатия кнопок
@@ -179,7 +178,7 @@ void FPGA::Reset()
 {
     TShift::Load();
 
-    HAL::LoadRegUPR();
+    FPGA::LoadRegUPR();
 }
 
 

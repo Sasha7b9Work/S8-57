@@ -42,7 +42,7 @@ void Recorder::Init()
 {
     StoreOsciSettings();
 
-    FPGA::HAL::LoadRegUPR();
+    FPGA::LoadRegUPR();
     Range::LoadBoth();
     TrigInput::Load();
     RecorderScaleX::Load();

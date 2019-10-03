@@ -10,11 +10,10 @@
 #include <stm32f4xx_hal.h>
 
 
-using namespace FPGA::HAL;
 using namespace Address;
 
 
-uint16 FPGA::HAL::flag = 0;
+uint16 FPGA::flag = 0;
 
 struct PinStruct
 {
@@ -45,7 +44,7 @@ static PinStruct pins[FPin::Number] =
 
 
 
-void FPGA::HAL::LoadRegUPR()
+void FPGA::LoadRegUPR()
 {
     uint8 data = 0;
 
@@ -69,7 +68,7 @@ void FPGA::HAL::LoadRegUPR()
 }
 
 
-void FPGA::HAL::GPIO::Init()
+void FPGA::GPIO::Init()
 {
     for (int i = 0; i < FPin::Number; i++)
     {
@@ -78,13 +77,13 @@ void FPGA::HAL::GPIO::Init()
 }
 
 
-uint16 FPGA::HAL::GPIO::GetPin(FPin::E pin)
+uint16 FPGA::GPIO::GetPin(FPin::E pin)
 {
     return pins[pin].pin;
 }
 
 
-void FPGA::HAL::GPIO::WriteRegisters(FPin::E cs, uint16 value)
+void FPGA::GPIO::WriteRegisters(FPin::E cs, uint16 value)
 {
     ResetPin(cs);
 
@@ -117,19 +116,19 @@ void FPGA::HAL::GPIO::WriteRegisters(FPin::E cs, uint16 value)
 }
 
 
-void FPGA::HAL::GPIO::SetPin(FPin::E pin)
+void FPGA::GPIO::SetPin(FPin::E pin)
 {
     HAL_PIO::Set(PORT(pin), GetPin(pin));
 }
 
 
-void FPGA::HAL::GPIO::ResetPin(FPin::E pin)
+void FPGA::GPIO::ResetPin(FPin::E pin)
 {
     HAL_PIO::Reset(PORT(pin), GetPin(pin));
 }
 
 
-void FPGA::HAL::GPIO::WritePin(FPin::E pin, int enable)
+void FPGA::GPIO::WritePin(FPin::E pin, int enable)
 {
     HAL_PIO::Write(PORT(pin), GetPin(pin), enable ? HState::Enabled : HState::Disabled);
 }

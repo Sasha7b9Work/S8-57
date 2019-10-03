@@ -38,7 +38,7 @@ void Osci::Init()
 {
     Stop();
 
-    FPGA::HAL::LoadRegUPR();
+    FPGA::LoadRegUPR();
     Range::LoadBoth();
     RShift::Load(Chan::A);
     RShift::Load(Chan::B);
@@ -123,7 +123,7 @@ static void UpdateFPGA()
 
     for (int i = 0; i < number; i++)
     {
-        FPGA::HAL::ReadFlag();
+        FPGA::ReadFlag();
     
         if (GetFlag::PRED() && !givingStart)
         {
@@ -276,7 +276,7 @@ static bool CanReadData()
 
 void Osci::OnChangedPoints()
 {
-    FPGA::HAL::LoadRegUPR();
+    FPGA::LoadRegUPR();
     FPGA::Reset();
     DisplayOsci::PainterData::ChangeTPos();
     FPGA::Reset();

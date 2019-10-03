@@ -113,27 +113,24 @@ namespace FPGA
         static bool PERIOD_IN_PROCESS();
     };
 
-    namespace HAL
+    void LoadRegUPR();
+
+    void ReadFlag();
+
+    extern uint16 flag;
+
+    namespace GPIO
     {
-        void LoadRegUPR();
+        void Init();
 
-        void ReadFlag();
+        uint16 GetPin(FPin::E pin);
 
-        extern uint16 flag;
-     
-        namespace GPIO
-        {
-            void Init();
+        void WritePin(FPin::E pin, int enable);
 
-            uint16 GetPin(FPin::E pin);
+        void SetPin(FPin::E pin);
 
-            void WritePin(FPin::E pin, int enable);
+        void ResetPin(FPin::E pin);
 
-            void SetPin(FPin::E pin);
-
-            void ResetPin(FPin::E pin);
-
-            void WriteRegisters(FPin::E cs, uint16 value);
-        }
+        void WriteRegisters(FPin::E cs, uint16 value);
     }
 }
