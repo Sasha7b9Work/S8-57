@@ -1,5 +1,5 @@
 #include "defines.h"
-#include "FPGA/FPGA_HAL.h"
+#include "FPGA/FPGA.h"
 #include "Hardware/HAL/HAL.h"
 #include "Osci/FrequencyCounter.h"
 

@@ -2,7 +2,6 @@
 #include "log.h"
 #include "device.h"
 #include "FPGA.h"
-#include "FPGA_HAL.h"
 #include "AD9286.h"
 #include "Display/Display.h"
 #include "Hardware/Timer.h"

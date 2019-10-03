@@ -4,7 +4,6 @@
 #include "Utils/Debug.h"
 #include "FlashDrive/FlashDrive.h"      
 #include "FPGA/FPGA.h"
-#include "FPGA/FPGA_HAL.h"
 #include "Hardware/Timer.h"
 #include "Hardware/VCP.h"
 #include "Utils/Debug.h"

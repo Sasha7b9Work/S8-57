@@ -1,7 +1,6 @@
 #include "defines.h"
 #include "device.h"
 #include "FPGA.h"
-#include "FPGA_HAL.h"
 #include "Hardware/HAL/HAL.h"
 #include "Osci/Display/DisplayOsci.h"
 #include "Recorder/Recorder.h"

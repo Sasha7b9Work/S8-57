@@ -3,7 +3,6 @@
 #include "Transceiver.h"
 #include "Data/Reader.h"
 #include "FPGA/FPGA.h"
-#include "FPGA/FPGA_HAL.h"
 #include "Hardware/Timer.h"
 #include "Hardware/HAL/HAL.h"
 #include "Osci/Display/DisplayOsci.h"

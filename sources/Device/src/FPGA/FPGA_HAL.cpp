@@ -1,5 +1,5 @@
 #include "defines.h"
-#include "FPGA_HAL.h"
+#include "FPGA/FPGA.h"
 #include "Hardware/HAL/HAL.h"
 #include "Hardware/HAL/HAL_PIO.h"
 #include "Hardware/Timer.h"

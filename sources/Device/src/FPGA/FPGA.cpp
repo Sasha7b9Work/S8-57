@@ -2,7 +2,6 @@
 #include "device.h"
 #include "log.h"
 #include "FPGA/FPGA.h"
-#include "FPGA/FPGA_HAL.h"
 #include "Hardware/HAL/HAL.h"
 #include "Hardware/Timer.h"
 #include "Menu/Pages/Include/PageChannels.h"

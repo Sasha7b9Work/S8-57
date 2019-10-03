@@ -6,7 +6,6 @@
 #include "Display/Primitives.h"
 #include "Display/Symbols.h"
 #include "FPGA/FPGA.h"
-#include "FPGA/FPGA_Hal.h"
 #include "Hardware/Timer.h"
 #include "Hardware/HAL/HAL.h"
 #include "Osci/Osci.h"

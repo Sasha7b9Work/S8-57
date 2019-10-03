@@ -1,7 +1,7 @@
 #include "defines.h"
 #include "Display/Painter.h"
 #include "Display/Primitives.h"
-#include "FPGA/FPGA_HAL.h"
+#include "FPGA/FPGA.h"
 #include "Hardware/Timer.h"
 #include "Hardware/Memory.h"
 #include "Hardware/HAL/HAL.h"
