@@ -161,7 +161,7 @@ void Tester::Disable() // -V2506
 
     Osci::Init();
 
-    FPGA::OnPressStart();
+    TesterC::OnPressStart();
 }
 
 
@@ -208,7 +208,7 @@ void Tester::ProcessStep()
     {
         DAC2_::SetValue((uint)(stepU * step / 2));
         // Запускаем ПЛИС для записи необходимого количества точек. Набор будет производиться в течение 2.5 мс (длительсность одного такта)
-        if (!FPGA::ForTester::Start())
+        if (!TesterC::Start())
         {
             return;
         }
@@ -234,7 +234,7 @@ static void ReadData()
     uint16 *x = &dataX[halfStep][0];
     uint8 *y = &dataY[halfStep][0];
 
-    if(FPGA::ForTester::Read(x, y))
+    if(TesterC::Read(x, y))
     {
         RecountPoints(x, y);
 

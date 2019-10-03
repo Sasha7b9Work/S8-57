@@ -65,7 +65,7 @@ static void DrawSettings(int x, int y)
 
 static int Y(int value)
 {
-    int delta = FPGA::VALUE::AVE - value;
+    int delta = _FPGA::VALUE::AVE - value;
 
     float scale = 120.0F / 125.0F;
 

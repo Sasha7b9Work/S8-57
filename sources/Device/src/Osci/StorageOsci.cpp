@@ -24,7 +24,7 @@ public:
     /// Заполнить вновь выделенную память нужными значениями
     static void FillNewData(DataOsci *data)
     {
-        uint bytesInChannel = FPGA::BytesInChannel();
+        uint bytesInChannel = OsciC::BytesInChannel();
 
         data->settings.Fill();
 
@@ -481,7 +481,7 @@ void DataOsciP2P::FillBufferForPeakDetEnabled(Chan::E ch, Buffer *buffer)
 void DataOsciP2P::PrepareBuffer(Buffer *buffer, uint size)
 {
     buffer->Realloc(size);
-    std::memset(buffer->data, FPGA::VALUE::NONE, size);
+    std::memset(buffer->data, _FPGA::VALUE::NONE, size);
 }
 
 
@@ -489,7 +489,7 @@ uint8 DataOsciP2P::ByteFromEnd(Chan::E ch, int fromEnd)
 {
     if (fromEnd > data.settings.SizeChannel())      // Если требуется значение, большее чем возможно сохранить
     {
-        return FPGA::VALUE::NONE;
+        return _FPGA::VALUE::NONE;
     }
 
     int index = pointerToByte;        // index будет указывать на позицию возвращаемого значения

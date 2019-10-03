@@ -8,7 +8,7 @@
 
 static void OnChanged_Calibrator(bool)
 {
-    FPGA::LoadCalibratorMode();
+    OsciC::LoadCalibratorMode();
 }
 
 DEF_CHOICE_2( cCalibrator, // -V206                                                                                                                //--- СЕРВИС - КАЛИБРАТОР - Калибратор ---

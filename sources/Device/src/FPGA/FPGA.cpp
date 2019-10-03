@@ -17,21 +17,21 @@
 using namespace Address;
 
 
-uint16 FPGA::valueADC = 0;
-uint16 FPGA::post = (uint16)~(512);
-uint16 FPGA::pred = (uint16)~(512);
+uint16 _FPGA::valueADC = 0;
+uint16 _FPGA::post = (uint16)~(512);
+uint16 _FPGA::pred = (uint16)~(512);
 
-uint8 dataRand[Chan::Size][FPGA::MAX_NUM_POINTS];    ///< Здесь будут данные рандомизатора
+uint8 dataRand[Chan::Size][_FPGA::MAX_NUM_POINTS];    ///< Здесь будут данные рандомизатора
 
-bool          FPGA::isRunning = false;
-uint          FPGA::timeStart = 0;
-StateWorkFPGA FPGA::fpgaStateWork = StateWorkFPGA_Stop;
+bool          _FPGA::isRunning = false;
+uint          _FPGA::timeStart = 0;
+StateWorkFPGA _FPGA::fpgaStateWork = StateWorkFPGA_Stop;
 
 /// True, если дан запуск
 bool givingStart = false;
 
 
-void FPGA::GiveStart()
+void _FPGA::GiveStart()
 {
     uint8 value = (uint8)(((uint8)set.trig.polarity) % 2);
 
@@ -46,7 +46,7 @@ void FPGA::GiveStart()
 }
 
 
-uint16 FPGA::ReadLastRecord(Chan::E ch)
+uint16 _FPGA::ReadLastRecord(Chan::E ch)
 {
     static uint16 address = 0;
 
@@ -59,7 +59,7 @@ uint16 FPGA::ReadLastRecord(Chan::E ch)
 }
 
 
-void FPGA::OnPressStart()
+void _FPGA::OnPressStart()
 {
     if (Device::State::InModeRecorder())
     {
@@ -79,7 +79,7 @@ void FPGA::OnPressStart()
 }
 
 
-bool FPGA::ForTester::Start() // -V2506
+bool _FPGA::ForTester::Start() // -V2506
 {
     // У нас двенадцать делений. На двенадцать делений должно приходиться не менее 2.5 мс
     // 2.5мс / 12дел = 0.2 мс/дел = 10мкс/тчк
@@ -92,7 +92,7 @@ bool FPGA::ForTester::Start() // -V2506
     HAL_FSMC::WriteToFPGA16(WR::PRED_LO, (uint16)(~(1)));
     HAL_FSMC::WriteToFPGA8(WR::START, 0xff);
 
-    FPGA::GiveStart();
+    _FPGA::GiveStart();
 
     return true;
 
@@ -114,13 +114,13 @@ bool FPGA::ForTester::Start() // -V2506
 }
 
 
-bool FPGA::ForTester::Read(uint16 *dataA, uint8 *dataB) // -V2506
+bool _FPGA::ForTester::Read(uint16 *dataA, uint8 *dataB) // -V2506
 {
     uint start = TIME_MS;
-    FPGA::flag = 0;
+    _FPGA::flag = 0;
     while (!GetFlag::DATA_READY())    // Ждём флага готовности данных
     {
-        FPGA::ReadFlag();
+        _FPGA::ReadFlag();
 
         if(TIME_MS - start > 20)        /// \todo Временная затычка. Надо сделать так, чтобы такие ситуации были исключены. Сбои происходят, во время
         {                               /// нажатия кнопок
@@ -154,40 +154,40 @@ bool FPGA::ForTester::Read(uint16 *dataA, uint8 *dataB) // -V2506
 }
 
 
-void FPGA::Reset()
+void _FPGA::Reset()
 {
     TShift::Load();
 
-    FPGA::LoadRegUPR();
+    _FPGA::LoadRegUPR();
 }
 
 
-uint FPGA::BytesInChannel()
+uint _FPGA::BytesInChannel()
 {
     ENumPointsFPGA points(set.mem.enumPoints);
     return points.BytesInChannel(set.time.peakDet);
 }
 
 
-void FPGA::SetValueADC(uint16 value)
+void _FPGA::SetValueADC(uint16 value)
 {
     valueADC = value;
 }
 
 
-bool FPGA::IsRunning()
+bool _FPGA::IsRunning()
 {
     return isRunning;
 }
 
 
-void FPGA::ClearDataRand()
+void _FPGA::ClearDataRand()
 {
-    std::memset(dataRand, 0, FPGA::MAX_NUM_POINTS * 2 * sizeof(uint8));  // -V512
+    std::memset(dataRand, 0, _FPGA::MAX_NUM_POINTS * 2 * sizeof(uint8));  // -V512
 }
 
 
-void FPGA::ReadData()
+void _FPGA::ReadData()
 {
     DataOsci *data = StorageOsci::PrepareForNewData();
 

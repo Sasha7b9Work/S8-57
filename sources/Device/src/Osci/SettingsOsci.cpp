@@ -209,7 +209,7 @@ void TBase::Load()
         BIN_U8(01011110)   // -V2501  // 10s     100M    2Hz
     };
 
-    FPGA::ClearDataRand();
+    _FPGA::ClearDataRand();
 
     HAL_FSMC::WriteToFPGA8(WR::TBASE, values[set.time.base]);
 
@@ -226,11 +226,11 @@ void Range::LoadBoth()
 {
     uint16 val = (uint16)(ValueForRange(Chan::B) + (ValueForRange(Chan::A) << 8));
 
-    FPGA::GPIO::WriteRegisters(FPin::SPI3_CS2, val);
+    _FPGA::GPIO::WriteRegisters(FPin::SPI3_CS2, val);
 
     PAUSE_ON_MS(10);                // Задержка нужна, чтобы импульсные реле успели отработать
 
-    FPGA::GPIO::WriteRegisters(FPin::SPI3_CS2, 0);    // Записываем ноль, чтобы реле не потребляли энергии
+    _FPGA::GPIO::WriteRegisters(FPin::SPI3_CS2, 0);    // Записываем ноль, чтобы реле не потребляли энергии
 
     //DEF__STRUCT(StructRange, uint8) vals[Range::Size] =
     static const uint8 vals[Range::Size] =
@@ -252,13 +252,13 @@ void Range::LoadBoth()
 
     uint8 valueA = vals[set.ch[Chan::A].range];
 
-    FPGA::GPIO::WritePin(FPin::A1, _GET_BIT(valueA, 1));
-    FPGA::GPIO::WritePin(FPin::A2, _GET_BIT(valueA, 0));
+    _FPGA::GPIO::WritePin(FPin::A1, _GET_BIT(valueA, 1));
+    _FPGA::GPIO::WritePin(FPin::A2, _GET_BIT(valueA, 0));
 
     uint8 valueB = vals[set.ch[Chan::B].range];
 
-    FPGA::GPIO::WritePin(FPin::A3, _GET_BIT(valueB, 1));
-    FPGA::GPIO::WritePin(FPin::A4, _GET_BIT(valueB, 0));
+    _FPGA::GPIO::WritePin(FPin::A3, _GET_BIT(valueB, 1));
+    _FPGA::GPIO::WritePin(FPin::A4, _GET_BIT(valueB, 0));
 
     set.ch[Chan::A].bandwidth.Load();
     set.ch[Chan::B].bandwidth.Load();
@@ -360,7 +360,7 @@ void Trig::Level::Find()
         uint8 max = Math::MaxFromArray(data, 0, (int)numBytes - 1);
         uint8 min = Math::MinFromArray(data, 0, (int)numBytes - 1);
 
-        int deltaValue = (int)FPGA::VALUE::AVE - (max + min) / 2;
+        int deltaValue = (int)_FPGA::VALUE::AVE - (max + min) / 2;
 
         int deltaRShift = SET_RSHIFT(ch) - RShift::ZERO;
 
@@ -425,7 +425,7 @@ int Chan::PointsInChannel() const
 
 int Chan::RequestBytes(DataSettings *) const
 {
-    return FPGA::MAX_NUM_POINTS;
+    return _FPGA::MAX_NUM_POINTS;
 }
 
 
@@ -446,7 +446,7 @@ void Trig::Level::Load()
     /// \todo Здесь много лишних движений. Нужно что-то сделать с вводом SET_TRIGLEV_SOURCE
     uint16 value = (uint16)((Trig::Level::MAX + Trig::Level::MIN) - set.trig.lev[set.trig.source]);
 
-    FPGA::GPIO::WriteRegisters(FPin::SPI3_CS1, (uint16)(0xa000 | (value << 2)));
+    _FPGA::GPIO::WriteRegisters(FPin::SPI3_CS1, (uint16)(0xa000 | (value << 2)));
 
     Osci::Restart();
 }

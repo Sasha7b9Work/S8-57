@@ -93,7 +93,7 @@ void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc)
 
     if (Osci::InModeRandomizer())
     {
-        FPGA::SetValueADC((uint16)HAL_ADC_GetValue(hadc));
+        OsciC::SetValueADC((uint16)HAL_ADC_GetValue(hadc));
     }
 }
 

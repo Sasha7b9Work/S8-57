@@ -10,7 +10,7 @@ uint16 addrRead = 0;
 
 
 
-void FPGA::Init()
+void _FPGA::Init()
 {
 
 }
@@ -35,7 +35,7 @@ static float NextNoise()
 }
 
 
-bool FPGA::ReadDataChanenl(Chan::E ch, uint8 data[MAX_NUM_POINTS])
+bool _FPGA::ReadDataChanenl(Chan::E ch, uint8 data[MAX_NUM_POINTS])
 {
     if (!set.ch[ch].enabled)
     {
@@ -46,7 +46,7 @@ bool FPGA::ReadDataChanenl(Chan::E ch, uint8 data[MAX_NUM_POINTS])
 
     for (uint i = 0; i < FPGA_NUM_POINTS; i++)
     {
-        data[i] = (uint8)(FPGA::VALUE::AVE + amplitude * (sinf(i * 0.1F)) + NextNoise());
+        data[i] = (uint8)(_FPGA::VALUE::AVE + amplitude * (sinf(i * 0.1F)) + NextNoise());
     }
 
     return true;

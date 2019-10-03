@@ -36,7 +36,7 @@ void Osci::Init()
 {
     Stop();
 
-    FPGA::LoadRegUPR();
+    OsciC::LoadRegUPR();
     Range::LoadBoth();
     RShift::Load(Chan::A);
     RShift::Load(Chan::B);
@@ -45,11 +45,11 @@ void Osci::Init()
     TrigPolarity::Load();
     TBase::Load();
     TShift::Load();
-    FPGA::LoadCalibratorMode();
+    OsciC::LoadCalibratorMode();
     LoadHoldfOff();
     HAL_PIO::Init(HPort::_G, HPin::_1, HMode::Input, HPull::Up);
     StorageOsci::Clear();
-    FPGA::OnPressStart();
+    OsciC::OnPressStart();
 }
 
 
@@ -64,34 +64,40 @@ void Osci::Start()
     givingStart = false;
     addrRead = 0xffff;
 
-    HAL_FSMC::WriteToFPGA16(WR::PRED_LO, FPGA::pred);
-    HAL_FSMC::WriteToFPGA16(WR::POST_LO, FPGA::post);
+    HAL_FSMC::WriteToFPGA16(WR::PRED_LO, OsciC::pred);
+    HAL_FSMC::WriteToFPGA16(WR::POST_LO, OsciC::post);
     HAL_FSMC::WriteToFPGA8(WR::START, 0xff);
 
-    FPGA::timeStart = TIME_MS;
+    OsciC::timeStart = TIME_MS;
 
     if (InModeP2P())
     {
         StorageOsci::PrepareNewFrameP2P();
     }
 
-    FPGA::isRunning = true;
+    OsciC::isRunning = true;
 }
 
 
 void Osci::Stop(bool)
 {
-    FPGA::isRunning = false;
+    OsciC::isRunning = false;
 }
 
 
 void Osci::Restart()
 {
-    if (FPGA::IsRunning())
+    if (OsciC::IsRunning())
     {
         Stop();
         Start();
     }
+}
+
+
+bool Osci::IsRunning()
+{
+    return OsciC::IsRunning();
 }
 
 
@@ -102,7 +108,7 @@ void Osci::Update()
         return;
     }
 
-    if (FPGA::IsRunning())
+    if (OsciC::IsRunning())
     {
         UpdateFPGA();
     };
@@ -121,28 +127,28 @@ static void UpdateFPGA()
 
     for (int i = 0; i < number; i++)
     {
-        FPGA::ReadFlag();
+        OsciC::ReadFlag();
     
-        if (FPGA::GetFlag::PRED() && !givingStart)
+        if (OsciC::GetFlag::PRED() && !givingStart)
         {
-            if (!Osci::InModeRandomizer() && (set.trig.startMode == TrigStartMode::Auto) && FPGA::GetFlag::HOLD_OFF())
+            if (!Osci::InModeRandomizer() && (set.trig.startMode == TrigStartMode::Auto) && OsciC::GetFlag::HOLD_OFF())
             {
-                FPGA::GiveStart();
+                OsciC::GiveStart();
                 givingStart = true;
             }
-            if (!FPGA::GetFlag::TRIG_READY())
+            if (!OsciC::GetFlag::TRIG_READY())
             {
                 Trig::pulse = false;
             }
         }
     
-        if (FPGA::GetFlag::DATA_READY())
+        if (OsciC::GetFlag::DATA_READY())
         {
             if (CanReadData())
             {
                 Timer::PauseOnTicks(5 * 90 * 20);
     
-                FPGA::ReadData();
+                OsciC::ReadData();
     
                 if (set.trig.startMode == TrigStartMode::Single)
                 {
@@ -160,14 +166,14 @@ static void UpdateFPGA()
     
     if(needStop)
     {
-        FPGA::OnPressStart();
+        OsciC::OnPressStart();
     }
 }
 
 
 void Osci::ReadPointP2P()
 {
-    if (!InModeP2P() || !FPGA::IsRunning())
+    if (!InModeP2P() || !OsciC::IsRunning())
     {
         return;
     }
@@ -274,12 +280,12 @@ static bool CanReadData()
 
 void Osci::OnChangedPoints()
 {
-    FPGA::LoadRegUPR();
-    FPGA::Reset();
+    OsciC::LoadRegUPR();
+    OsciC::Reset();
     DisplayOsci::PainterData::ChangeTPos();
-    FPGA::Reset();
+    OsciC::Reset();
     TShift::Set(set.time.shift);
-    FPGA::Reset();
+    OsciC::Reset();
     StorageOsci::Clear();
 }
 

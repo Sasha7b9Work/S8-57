@@ -27,9 +27,9 @@ void TrigInput::Load()
         {BIN_U8(00000000), BIN_U8(00000110)}  // -V2501      // อื
     };
 
-    FPGA::GPIO::WritePin(FPin::A1S, _GET_BIT(datas[set.trig.input][set.trig.source], 2));
-    FPGA::GPIO::WritePin(FPin::A0S, _GET_BIT(datas[set.trig.input][set.trig.source], 1));
-    FPGA::GPIO::WritePin(FPin::LFS, _GET_BIT(datas[set.trig.input][set.trig.source], 0));
+    _FPGA::GPIO::WritePin(FPin::A1S, _GET_BIT(datas[set.trig.input][set.trig.source], 2));
+    _FPGA::GPIO::WritePin(FPin::A0S, _GET_BIT(datas[set.trig.input][set.trig.source], 1));
+    _FPGA::GPIO::WritePin(FPin::LFS, _GET_BIT(datas[set.trig.input][set.trig.source], 0));
 }
 
 
@@ -50,34 +50,34 @@ void RShift::Load(Chan::E ch)
         shift = (uint16)((int)shift - Tester::DeltaRShiftA());
     }
 
-    FPGA::GPIO::WriteRegisters(FPin::SPI3_CS1, (uint16)(mask[ch] | (shift << 2)));
+    _FPGA::GPIO::WriteRegisters(FPin::SPI3_CS1, (uint16)(mask[ch] | (shift << 2)));
 
     Osci::Restart();
 }
 
 
-void FPGA::LoadCalibratorMode()
+void _FPGA::LoadCalibratorMode()
 {
-    FPGA::LoadRegUPR();
+    _FPGA::LoadRegUPR();
 }
 
 
 static void LoadReal()
 {
-    FPGA::post = (uint16)(set.time.shift - TShift::Min());
-    int Pred = (int)FPGA_NUM_POINTS - (int)FPGA::post;
+    _FPGA::post = (uint16)(set.time.shift - TShift::Min());
+    int Pred = (int)FPGA_NUM_POINTS - (int)_FPGA::post;
 
     if (Pred < 0)
     {
         Pred = 0;
     }
-    FPGA::pred = (uint16)Pred;
+    _FPGA::pred = (uint16)Pred;
 
-    FPGA::post = (uint16)(~(FPGA::post + 1));
-    FPGA::pred = (uint16)(~(FPGA::pred + 3));
+    _FPGA::post = (uint16)(~(_FPGA::post + 1));
+    _FPGA::pred = (uint16)(~(_FPGA::pred + 3));
 
-    HAL_FSMC::WriteToFPGA16(WR::PRED_LO, FPGA::post);
-    HAL_FSMC::WriteToFPGA16(WR::POST_LO, FPGA::pred);
+    HAL_FSMC::WriteToFPGA16(WR::PRED_LO, _FPGA::post);
+    HAL_FSMC::WriteToFPGA16(WR::POST_LO, _FPGA::pred);
 }
 
 
@@ -91,21 +91,21 @@ static void LoadRandomize()
 {
     int k = Osci::Kr[set.time.base];
 
-    FPGA::post = (uint16)((set.time.shift - TShift::Min() - GetK()) / k);
+    _FPGA::post = (uint16)((set.time.shift - TShift::Min() - GetK()) / k);
 
-    int Pred = (int)FPGA_NUM_POINTS / k - (int)FPGA::post;
+    int Pred = (int)FPGA_NUM_POINTS / k - (int)_FPGA::post;
 
     if (Pred < 0)
     {
         Pred = 0;
     }
-    FPGA::pred = (uint16)Pred;
+    _FPGA::pred = (uint16)Pred;
 
-    FPGA::post = (uint16)(~(FPGA::post + 1));
-    FPGA::pred = (uint16)(~(FPGA::pred));
+    _FPGA::post = (uint16)(~(_FPGA::post + 1));
+    _FPGA::pred = (uint16)(~(_FPGA::pred));
 
-    HAL_FSMC::WriteToFPGA16(WR::PRED_LO, FPGA::pred);
-    HAL_FSMC::WriteToFPGA16(WR::POST_LO, FPGA::post);
+    HAL_FSMC::WriteToFPGA16(WR::PRED_LO, _FPGA::pred);
+    HAL_FSMC::WriteToFPGA16(WR::POST_LO, _FPGA::post);
 
     Osci::addShift = (set.time.shift) % k;
 
@@ -186,7 +186,7 @@ void RShift::Set(Chan::E ch, uint16 rShift)
 
 void TrigPolarity::Load()
 {
-    FPGA::GiveStart();
+    _FPGA::GiveStart();
 }
 
 
@@ -341,7 +341,7 @@ void Bandwidth::Load()
     Chan::E ch = GetChannel();
     static const FPin::E pinsLF[2] = { FPin::LF1, FPin::LF2 };
 
-    FPGA::GPIO::WritePin(pinsLF[ch], (set.ch[ch].bandwidth.value == Bandwidth::_20MHz));
+    _FPGA::GPIO::WritePin(pinsLF[ch], (set.ch[ch].bandwidth.value == Bandwidth::_20MHz));
 }
 
 

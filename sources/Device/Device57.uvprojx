@@ -725,6 +725,16 @@
               <FileType>8</FileType>
               <FilePath>.\src\FPGA\MathFPGA.cpp</FilePath>
             </File>
+            <File>
+              <FileName>Context.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\FPGA\Context.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Context.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\FPGA\Context.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

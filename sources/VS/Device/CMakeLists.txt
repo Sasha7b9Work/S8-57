@@ -108,6 +108,8 @@ source_group(Display            FILES   ../../Device/src/Display/Colors.h
                                         ../../Device/src/Display/Symbols.h)
 source_group(FPGA               FILES   ../../Device/src/FPGA/AD9286.h
                                         ../../Device/src/FPGA/AD9286.cpp
+                                        ../../Device/src/FPGA/Context.cpp
+                                        ../../Device/src/FPGA/Context.h
                                         ../../Device/src/FPGA/FPGA.cpp
                                                      src/FPGA/FPGA_win.cpp
                                         ../../Device/src/FPGA/FPGA_HAL.h
@@ -200,6 +202,8 @@ file(GLOB SOURCES   ../../common/_VS/*
                     
                     ../../Device/src/FPGA/AD9286.h
                     ../../Device/src/FPGA/AD9286.cpp
+                    ../../Device/src/FPGA/Context.cpp
+                    ../../Device/src/FPGA/Context.h
                     ../../Device/src/FPGA/FPGA.h
                     ../../Device/src/FPGA/FPGA.cpp
                                  src/FPGA/FPGA_win.cpp

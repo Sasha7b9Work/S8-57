@@ -364,7 +364,7 @@ static void DrawRightPart(int x0, int y0)
         x += 2;
         int y = y0 + 1;
 
-        if (FPGA::IsRunning())       // Рабочий режим
+        if (OsciC::IsRunning())       // Рабочий режим
         {
             Char(Symbol8::PLAY).Draw4SymbolsInRect(x, 1);
         }

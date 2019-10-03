@@ -139,14 +139,14 @@ void FrequencyCounter::Update()
 {
     SetStateLamps();
 
-    bool freqReady = FPGA::GetFlag::FREQ_READY();
+    bool freqReady = FreqMeterC::GetFlag::FREQ_READY();
 
     if(freqReady)
     {
         lastFreqRead = TIME_MS;
     }
 
-    bool periodReady = FPGA::GetFlag::PERIOD_READY();
+    bool periodReady = FreqMeterC::GetFlag::PERIOD_READY();
 
     if(periodReady)
     {
@@ -177,12 +177,12 @@ void FrequencyCounter::Update()
         }
     }
 
-    if(FPGA::GetFlag::FREQ_OVERFLOW())
+    if(FreqMeterC::GetFlag::FREQ_OVERFLOW())
     {
         freqActual.word = MAX_UINT;
         lastFreqOver = TIME_MS;
     }
-    if(FPGA::GetFlag::PERIOD_OVERFLOW())
+    if(FreqMeterC::GetFlag::PERIOD_OVERFLOW())
     {
         periodActual.word = MAX_UINT;
         lastPeriodOver = TIME_MS;
@@ -743,14 +743,14 @@ void FrequencyCounter::SetStateLampFreq()
 {
     if(!lampFreq)
     {
-        if(FPGA::GetFlag::FREQ_IN_PROCESS())
+        if(FreqMeterC::GetFlag::FREQ_IN_PROCESS())
         {
             lampFreq = true;
         }
     }
     else
     {
-        if(FPGA::GetFlag::FREQ_READY())
+        if(FreqMeterC::GetFlag::FREQ_READY())
         {
             lampFreq = false;
         }
@@ -762,14 +762,14 @@ void FrequencyCounter::SetStateLampPeriod()
 {
     if(!lampPeriod)
     {
-        if(FPGA::GetFlag::PERIOD_IN_PROCESS())
+        if(FreqMeterC::GetFlag::PERIOD_IN_PROCESS())
         {
             lampPeriod = true;
         }
     }
     else
     {
-        if(FPGA::GetFlag::PERIOD_READY())
+        if(FreqMeterC::GetFlag::PERIOD_READY())
         {
             lampPeriod = false;
         }
@@ -837,12 +837,12 @@ static void DrawDebugInfo()
 
     x += 20;
 
-    if (FPGA::GetFlag::FREQ_IN_PROCESS())
+    if (FreqMeterC::GetFlag::FREQ_IN_PROCESS())
     {
         Region(size - 2, size - 2).Fill(x + 1, y + 5, Color::FILL);
     }
 
-    if (FPGA::GetFlag::PERIOD_IN_PROCESS())
+    if (FreqMeterC::GetFlag::PERIOD_IN_PROCESS())
     {
         Region(size - 2, size - 2).Fill(x + 1, y + 16, Color::FILL);
     }

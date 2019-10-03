@@ -46,7 +46,7 @@ static void DrawDataInRect(int x, int y, int width, int height, const uint8 *dat
     int numIntervals = width + 1;                               // Количество интервалов, в которых будем рисовать наш сигнал - фактически, количество вертикальных линий
     float pointsInInterval = (float)length / numIntervals;      // Количество точек, рисуемых в одном интервале.
 
-    float stepY = (float)height / (float)(FPGA::VALUE::MAX - FPGA::VALUE::MIN);
+    float stepY = (float)height / (float)(_FPGA::VALUE::MAX - _FPGA::VALUE::MIN);
 
     int y0 = y + height;
 

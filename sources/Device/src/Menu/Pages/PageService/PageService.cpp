@@ -9,7 +9,7 @@ static void OnPress_ResetSettings()
     Settings::Load(true);
     if (Device::State::InModeOsci())
     {
-        FPGA::OnPressStart();
+        Osci::Start();
     }
 }
 

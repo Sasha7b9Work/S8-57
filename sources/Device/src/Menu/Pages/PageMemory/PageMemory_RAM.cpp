@@ -49,7 +49,7 @@ static void OnOpenClose_RAM(bool enter)
 {
     if (enter)
     {
-        RUN_FPGA_BEFORE_SB = FPGA::IsRunning() ? 1U : 0U;
+        RUN_FPGA_BEFORE_SB = Osci::IsRunning() ? 1U : 0U;
         Osci::Stop(false);
         set.mem.modeWork = ModeWork::RAM;
         Memory::RAM::ResetSignal();
@@ -59,7 +59,7 @@ static void OnOpenClose_RAM(bool enter)
         set.mem.modeWork = ModeWork::Dir;
         if (RUN_FPGA_BEFORE_SB)
         {
-            FPGA::OnPressStart();
+            OsciC::OnPressStart();
         }
     }
 }

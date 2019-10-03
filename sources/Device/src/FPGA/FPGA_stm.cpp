@@ -21,7 +21,7 @@ using Hardware::AD9286;
 
 
 extern bool givingStart;
-extern uint8 dataRand[Chan::Size][FPGA::MAX_NUM_POINTS];
+extern uint8 dataRand[Chan::Size][_FPGA::MAX_NUM_POINTS];
 
 /// Здесь хранится адрес, начиная с которого будем читать данные по каналам. Если addrRead == 0xffff, то адрес вначале нужно считать
 uint16 addrRead = 0xffff;
@@ -30,17 +30,17 @@ volatile static int numberMeasuresForGates = 10000;
 
 
 
-void FPGA::Init()
+void _FPGA::Init()
 {
     givingStart = false;
 
-    FPGA::GPIO::Init();
+    _FPGA::GPIO::Init();
 
-    FPGA::GPIO::SetPin(FPin::SPI3_CS1);
-    FPGA::GPIO::SetPin(FPin::SPI3_CS2);
+    _FPGA::GPIO::SetPin(FPin::SPI3_CS1);
+    _FPGA::GPIO::SetPin(FPin::SPI3_CS2);
 
-    FPGA::GPIO::ResetPin(FPin::SPI3_SCK);
-    FPGA::GPIO::ResetPin(FPin::SPI3_DAT);
+    _FPGA::GPIO::ResetPin(FPin::SPI3_SCK);
+    _FPGA::GPIO::ResetPin(FPin::SPI3_DAT);
 
     AD9286::Init();
 
@@ -119,7 +119,7 @@ static int CalculateShift()
     uint16 min = 0;
     uint16 max = 0;
 
-    if (!CalculateGate(FPGA::valueADC, &min, &max))
+    if (!CalculateGate(_FPGA::valueADC, &min, &max))
     {
         return NULL_TSHIFT;
     }
@@ -127,7 +127,7 @@ static int CalculateShift()
     int deltaMAX = set.dbg.enum_gate_max * 10;
     int deltaMIN = set.dbg.enum_gate_min * 10;
 
-    if (FPGA::valueADC > max - deltaMAX || FPGA::valueADC < min + deltaMIN)
+    if (_FPGA::valueADC > max - deltaMAX || _FPGA::valueADC < min + deltaMIN)
     {
         return NULL_TSHIFT;
     }
@@ -135,7 +135,7 @@ static int CalculateShift()
     if (Osci::InModeRandomizer())
     {
 
-        float tin = (float)(FPGA::valueADC - min + deltaMIN) / (max - deltaMAX - (min + deltaMIN));
+        float tin = (float)(_FPGA::valueADC - min + deltaMIN) / (max - deltaMAX - (min + deltaMIN));
         int retValue = (int)(tin * Osci::Kr[set.time.base]);
 
         return retValue;
@@ -191,7 +191,7 @@ static bool ReadDataChanenlRand(Chan::E ch, const uint8 *address, uint8 *data) /
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-bool FPGA::ReadDataChanenl(Chan::E ch, uint8 data[FPGA::MAX_NUM_POINTS])
+bool _FPGA::ReadDataChanenl(Chan::E ch, uint8 data[_FPGA::MAX_NUM_POINTS])
 {
     uint numPoints = FPGA_NUM_POINTS;
 

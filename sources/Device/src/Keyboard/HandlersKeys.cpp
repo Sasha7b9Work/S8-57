@@ -434,7 +434,7 @@ static void Start()
     }
     else
     {
-        FPGA::OnPressStart();
+        OsciC::OnPressStart();
     }
 }
 

@@ -13,6 +13,8 @@ struct Osci
     static void Start();
 
     static void Stop(bool pause = false);
+
+    static bool IsRunning();
     /// Это вызываем в случае изменения настройки
     static void Restart();
     /// Возвращает true, если находится в поточечном режиме

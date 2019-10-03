@@ -13,7 +13,7 @@ void Settings::Load(bool _default)
         Reset();
         Osci::Init();
         Menu::Init();
-        FPGA::OnPressStart();
+        OsciC::OnPressStart();
     }
 }
 

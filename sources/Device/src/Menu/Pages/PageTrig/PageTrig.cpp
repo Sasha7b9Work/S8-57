@@ -11,7 +11,7 @@ void PageTrig::OnChanged_Mode(bool)
     Osci::Stop(false);
     if(set.trig.startMode != TrigStartMode::Single)
     {
-        FPGA::OnPressStart();
+        OsciC::OnPressStart();
     }
     
     // Елси находимся в режиме рандомизатора

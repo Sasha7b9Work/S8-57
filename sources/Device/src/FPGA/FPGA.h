@@ -1,10 +1,11 @@
 #pragma once
 #include "Settings/SettingsOsci.h"
+#include "FPGA/Context.h"
 
 
-#define FPGA_IN_STATE_STOP (FPGA::fpgaStateWork == StateWorkFPGA_Stop)
-#define FPGA_IN_STATE_WORK (FPGA::fpgaStateWork == StateWorkFPGA_Work)
-#define FPGA_IN_STATE_WAIT (FPGA::fpgaStateWork == StateWorkFPGA_Wait)
+#define FPGA_IN_STATE_STOP (_FPGA::fpgaStateWork == StateWorkFPGA_Stop)
+#define FPGA_IN_STATE_WORK (_FPGA::fpgaStateWork == StateWorkFPGA_Work)
+#define FPGA_IN_STATE_WAIT (_FPGA::fpgaStateWork == StateWorkFPGA_Wait)
 
 
 namespace Address
@@ -104,7 +105,7 @@ struct FPin
 };
 
 
-struct FPGA
+struct _FPGA
 {
     static const uint MAX_NUM_POINTS = (16 * 1024U);
 

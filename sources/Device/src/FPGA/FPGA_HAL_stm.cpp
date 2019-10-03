@@ -9,7 +9,7 @@ using namespace Address;
 extern bool givingStart;
 
 
-void FPGA::ReadFlag()
+void _FPGA::ReadFlag()
 {
     flag = (uint16)(HAL_FSMC::ReadFromFPGA(RD::FLAG_LO) | (HAL_FSMC::ReadFromFPGA(RD::FLAG_HI) << 8));
 
