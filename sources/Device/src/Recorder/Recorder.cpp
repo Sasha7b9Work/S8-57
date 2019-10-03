@@ -12,7 +12,7 @@
 #include "Utils/Math.h"
 
 
-using namespace HAL::ADDRESSES::FPGA;
+using namespace Address;
 
 
 /// Состояние осциллографа перед переходом в режим регистратора

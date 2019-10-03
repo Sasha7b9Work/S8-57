@@ -135,7 +135,6 @@ source_group(Hardware           FILES   ../../Device/src/Hardware/Battery.h
 source_group(Hardware\\HAL      FILES   ../../Device/src/Hardware/HAL/HAL.h
                                         ../../Device/src/Hardware/HAL/HAL_ADC1.cpp
                                         ../../Device/src/Hardware/HAL/HAL_ADC3.cpp
-                                        ../../Device/src/Hardware/HAL/HAL_ADDRESSES.cpp
                                         ../../Device/src/Hardware/HAL/HAL_CRC32.cpp
                                         ../../Device/src/Hardware/HAL/HAL_DAC1.cpp
                                                      src/Hardware/HAL/HAL_DAC2_win.cpp
@@ -232,7 +231,6 @@ file(GLOB SOURCES   ../../common/_VS/*
                     ../../Device/src/Hardware/HAL/HAL.h
                     ../../Device/src/Hardware/HAL/HAL_ADC1.cpp
                     ../../Device/src/Hardware/HAL/HAL_ADC3.cpp
-                    ../../Device/src/Hardware/HAL/HAL_ADDRESSES.cpp
                     ../../Device/src/Hardware/HAL/HAL_CRC32.cpp
                     ../../Device/src/Hardware/HAL/HAL_DAC1.cpp
                                  src/Hardware/HAL/HAL_DAC2_win.cpp

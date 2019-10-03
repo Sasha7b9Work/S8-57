@@ -1,11 +1,6 @@
 #include "defines.h"
 #include "HAL.h"
-
 #include <stm32f4xx_hal.h>
-
-
-using namespace HAL;
-
 
 
 /// Для датчика напряжения аккумулятора
@@ -18,7 +13,6 @@ static ADC_ChannelConfTypeDef config =
     ADC_SAMPLETIME_3CYCLES,
     0
 };
-
 
 
 void HAL_ADC1::Init()

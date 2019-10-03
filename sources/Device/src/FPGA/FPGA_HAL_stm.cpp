@@ -4,7 +4,7 @@
 #include "Osci/FrequencyCounter.h"
 
 
-using namespace HAL::ADDRESSES::FPGA;
+using namespace Address;
 
 extern bool givingStart;
 

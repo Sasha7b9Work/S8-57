@@ -21,9 +21,8 @@
 #endif
 
 
-using namespace HAL::ADDRESSES::FPGA;
-
 using FPGA::HAL::GPIO::Pin;
+using namespace Address;
 
 
 // Массив структур описаний масштабов по напряжению.

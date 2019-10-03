@@ -11,7 +11,7 @@
 
 
 using namespace FPGA::HAL::GPIO;
-using namespace HAL::ADDRESSES::FPGA;
+using namespace Address;
 
 
 void TrigSource::Load()

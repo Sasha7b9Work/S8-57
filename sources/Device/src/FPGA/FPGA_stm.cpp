@@ -17,8 +17,7 @@
 
 
 using namespace FPGA::HAL::GPIO;
-using namespace ::HAL;
-using namespace ::HAL::ADDRESSES::FPGA;
+using namespace Address;
 
 using Hardware::AD9286;
 

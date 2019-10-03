@@ -15,8 +15,7 @@
 
 
 using namespace FPGA;
-using namespace ::HAL;
-using namespace ::HAL::ADDRESSES::FPGA;
+using namespace Address;
 
 
 extern bool givingStart;

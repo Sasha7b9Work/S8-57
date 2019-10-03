@@ -12,9 +12,8 @@
 #include <cstring>
 
 
-using namespace HAL::ADDRESSES::FPGA;
-
 using FPGA::HAL::GetFlag;
+using namespace Address;
 
 
 /// Здесь хранится последнее действительное значение частоты. Для вывода в режиме частотомера. 0 означает, что значение выводить не надо
