@@ -92,7 +92,7 @@ bool FPGA::ForTester::Start() // -V2506
     HAL_FSMC::WriteToFPGA16(WR::PRED_LO, (uint16)(~(1)));
     HAL_FSMC::WriteToFPGA8(WR::START, 0xff);
 
-    GiveStart();
+    FPGA::GiveStart();
 
     return true;
 

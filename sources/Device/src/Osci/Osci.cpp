@@ -13,7 +13,6 @@
 #include <cmath>
 
 
-using namespace FPGA;
 using namespace Address;
 
 
@@ -124,11 +123,11 @@ static void UpdateFPGA()
     {
         FPGA::ReadFlag();
     
-        if (GetFlag::PRED() && !givingStart)
+        if (FPGA::GetFlag::PRED() && !givingStart)
         {
-            if (!Osci::InModeRandomizer() && (set.trig.startMode == TrigStartMode::Auto) && GetFlag::HOLD_OFF())
+            if (!Osci::InModeRandomizer() && (set.trig.startMode == TrigStartMode::Auto) && FPGA::GetFlag::HOLD_OFF())
             {
-                GiveStart();
+                FPGA::GiveStart();
                 givingStart = true;
             }
             if (!FPGA::GetFlag::TRIG_READY())
@@ -143,7 +142,7 @@ static void UpdateFPGA()
             {
                 Timer::PauseOnTicks(5 * 90 * 20);
     
-                ReadData();
+                FPGA::ReadData();
     
                 if (set.trig.startMode == TrigStartMode::Single)
                 {
@@ -161,7 +160,7 @@ static void UpdateFPGA()
     
     if(needStop)
     {
-        OnPressStart();
+        FPGA::OnPressStart();
     }
 }
 

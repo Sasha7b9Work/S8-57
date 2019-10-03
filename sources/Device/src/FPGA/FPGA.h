@@ -104,68 +104,66 @@ struct FPin
 };
 
 
-namespace FPGA
+struct FPGA
 {
-    const uint MAX_NUM_POINTS = (16 * 1024U);
+    static const uint MAX_NUM_POINTS = (16 * 1024U);
 
-    void Init();
+    static void Init();
 
-    void OnPressStart();
+    static void OnPressStart();
     /// Принудительный запуск синхронизации
-    void GiveStart();
+    static void GiveStart();
     /// Возвращает количество байт в канале на текущих настройках
-    uint BytesInChannel();
+    static uint BytesInChannel();
 
-    bool IsRunning();
+    static bool IsRunning();
 
-    void Reset();
+    static void Reset();
 
-    void SetValueADC(uint16 value);
+    static void SetValueADC(uint16 value);
 
-    void ReadData();
+    static void ReadData();
 
-    uint16 ReadLastRecord(Chan::E ch);
+    static uint16 ReadLastRecord(Chan::E ch);
 
-    bool ReadDataChanenl(Chan::E ch, uint8 data[MAX_NUM_POINTS]);
+    static bool ReadDataChanenl(Chan::E ch, uint8 data[MAX_NUM_POINTS]);
 
-    void ClearDataRand();
+    static void ClearDataRand();
     /// Включить/выключить калибратор.
-    void LoadCalibratorMode();
+    static void LoadCalibratorMode();
     /// Время подачи старта
-    extern uint timeStart;
+    static uint timeStart;
     /// Значение, считанное из handleADC
-    extern uint16 valueADC;
+    static uint16 valueADC;
     
-    extern StateWorkFPGA fpgaStateWork;
+    static StateWorkFPGA fpgaStateWork;
 
-    extern bool isRunning;
+    static bool isRunning;
 
-    extern uint16 post;
-    extern uint16 pred;
+    static uint16 post;
+    static uint16 pred;
 
-    class FreqMeter
+    struct FreqMeter
     {
-    public:
         static float GetFreq();
     };
 
-    class ForTester
+    struct ForTester
     {
-    public:
         static bool Read(uint16 *dataA, uint8 *dataB);
         /// Запустить цикл чтения для тестер-компонента. В течение time секунд должно быть считано numPoints точек
         /// Если возвращает false - старт не прошёл
         static bool Start();
     };
 
-    namespace VALUE
+    struct VALUE
     {
-        const uint8 AVE = 127;
-        const uint8 MIN = AVE - 125;
-        const uint8 MAX = AVE + 125;
+        static const uint8 AVE = 127;
+        static const uint8 MIN = AVE - 125;
+        static const uint8 MAX = AVE + 125;
         /// Если значение == 0, значит, его нет. Это нужно для режимов рандомизатора и поточечного вывода p2p, а также для tShift ранее считанного сигнала
-        const uint8 NONE = 0;
-    }
+        static const uint8 NONE = 0;
+    };
 
     struct GetFlag
     {
@@ -181,26 +179,21 @@ namespace FPGA
         static bool PERIOD_IN_PROCESS();
     };
 
-    void LoadRegUPR();
+    static void LoadRegUPR();
 
-    void ReadFlag();
+    static void ReadFlag();
 
-    extern uint16 flag;
+    static uint16 flag;
 
-    namespace GPIO
+    struct GPIO
     {
-        void Init();
-
-        uint16 GetPin(FPin::E pin);
-
-        void WritePin(FPin::E pin, int enable);
-
-        void SetPin(FPin::E pin);
-
-        void ResetPin(FPin::E pin);
-
-        void WriteRegisters(FPin::E cs, uint16 value);
-    }
+        static void Init();
+        static uint16 GetPin(FPin::E pin);
+        static void WritePin(FPin::E pin, int enable);
+        static void SetPin(FPin::E pin);
+        static void ResetPin(FPin::E pin);
+        static void WriteRegisters(FPin::E cs, uint16 value);
+    };
 };
 
 namespace MathFPGA

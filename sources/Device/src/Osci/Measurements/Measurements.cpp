@@ -12,12 +12,6 @@
 #include <cstring>
 
 
-using FPGA::VALUE::MIN;
-using FPGA::VALUE::MAX;
-using FPGA::VALUE::NONE;
-
-
-
 static float CalculateVoltageMax(Chan::E ch);
 static float CalculateVoltageMin(Chan::E ch);
 static float CalculateVoltagePic(Chan::E ch);
@@ -473,7 +467,7 @@ int CalculatePeriodAccurately(Chan::E ch)
         while (data < end)
         {
             uint8 point = *data++;
-            if(point < MIN || point >= MAX)
+            if(point < FPGA::VALUE::MIN || point >= FPGA::VALUE::MAX)
             {
                 EXIT_FROM_PERIOD_ACCURACY
             }
@@ -1105,9 +1099,9 @@ float Measure::CalculateCursorU(Chan::E ch, float posCurT)
     
     BitSet64 points = DisplayOsci::PainterData::PointsOnDisplay();
 
-    int rel = (int)(CHOICE_BUFFER)[(int)points.word0 + ROUND(int, posCurT)] - MIN;
+    int rel = (int)(CHOICE_BUFFER)[(int)points.word0 + ROUND(int, posCurT)] - FPGA::VALUE::MIN;
 
-#define SCALE (200.0F / (MAX - MIN))
+#define SCALE (200.0F / (FPGA::VALUE::MAX - FPGA::VALUE::MIN))
 
     float value = 200.0F - rel * SCALE;
     LIMITATION(value, 0.0F, 200.0F); //-V2516
@@ -1130,13 +1124,13 @@ float Measure::CalculateCursorT(Chan::E ch, float posCurU, int numCur)
     
     BitSet64 points = DisplayOsci::PainterData::PointsOnDisplay();
 
-    int prevData = 200 - dataIn[FIRST_POINT] + MIN;
+    int prevData = 200 - dataIn[FIRST_POINT] + FPGA::VALUE::MIN;
 
     int numIntersections = 0;
 
     for(int i = FIRST_POINT + 1; i < LAST_POINT; i++)
     {
-        int curData = 200 - (dataIn)[i] + MIN;
+        int curData = 200 - (dataIn)[i] + FPGA::VALUE::MIN;
 
         if(curData <= posCurU && prevData > posCurU)
         {
@@ -1416,7 +1410,7 @@ void MeasurementsOsci::SetData()
         {
             for (int i = (int)(BYTES_IN_CHANNEL_DS - 1); i >= 0; --i)
             {
-                if (IN_A[i] != NONE)                // Если это значение считано
+                if (IN_A[i] != FPGA::VALUE::NONE)                // Если это значение считано
                 {
                     lastByte = i;
                     firstByte = lastByte - nBytes;

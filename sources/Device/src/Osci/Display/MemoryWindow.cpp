@@ -8,9 +8,6 @@
 #include "Settings/Settings.h"
 
 
-using namespace FPGA;
-
-
 static void DrawDataInRect(int x, int y, int width, int height, const uint8 *data, uint length);
 /// Ќарисовать область экрана
 static void DrawScreenArea();
@@ -49,7 +46,7 @@ static void DrawDataInRect(int x, int y, int width, int height, const uint8 *dat
     int numIntervals = width + 1;                               //  оличество интервалов, в которых будем рисовать наш сигнал - фактически, количество вертикальных линий
     float pointsInInterval = (float)length / numIntervals;      //  оличество точек, рисуемых в одном интервале.
 
-    float stepY = (float)height / (float)(VALUE::MAX - VALUE::MIN);
+    float stepY = (float)height / (float)(FPGA::VALUE::MAX - FPGA::VALUE::MIN);
 
     int y0 = y + height;
 
