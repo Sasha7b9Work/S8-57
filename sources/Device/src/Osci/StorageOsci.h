@@ -2,23 +2,13 @@
 #include "Data/DataSettings.h"
 
 
-namespace FPGA
-{
-    class DataAccessor;
-}
-
 class Buffer;
-
 class Reader;
-
-class DataAccessor;
 class DataOsciP2P;
 class Storage;
 
 class DataOsci
 {
-    friend class DataAccessor;
-    friend class FPGA::DataAccessor;
     friend class DataOsciP2P;
     friend class HeapWorker;
 public:
@@ -30,11 +20,13 @@ public:
     uint Number() const { return num; };
     /// Возвращает место, занимаемое структурой вместе с данными
     uint FullSize() const;
-protected:
     /// Указатель на данные первого канала
     uint8 *dataA;
     /// Указатель на данные второго канала
     uint8 *dataB;
+    /// Настройки сигналов
+    DataSettings settings;
+protected:
     /// Указатель на предыдущие сохранённые данные
     DataOsci *prev;
     /// Указатель на следующие сохранённые данные
@@ -43,13 +35,10 @@ protected:
     uint num;
     /// Сколько всего данных уже есть
     static uint allDatas;
-    /// Настройки сигналов
-    DataSettings settings;
 };
 
 class DataOsciP2P
 {
-    friend class DataAccessor;
     friend class Storage;
     friend class StructDataP2P;
     friend class ::Reader;
@@ -65,6 +54,8 @@ public:
     void Create();
     /// Время начала съёма информации. Первая точка будет поставлена через время, соответствующее TBase
     uint timeStart;
+
+    DataOsci data;
 private:
     /// Время, в которое должна прийити точка numPoint
     float TimePointMS(uint numPoint) const;
@@ -84,8 +75,6 @@ private:
     uint readingPoints;
     /// Указатель на положение байта, который будет записан следующим
     int pointerToByte;
-
-    DataOsci data;
 };
 
 class StorageOsci

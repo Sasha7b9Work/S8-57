@@ -32,25 +32,6 @@ StateWorkFPGA FPGA::fpgaStateWork = StateWorkFPGA_Stop;
 bool givingStart = false;
 
 
-
-namespace FPGA
-{
-    ////
-    class DataAccessor
-    {
-    public:
-        static uint8 *DataA(DataOsci *data)
-        {
-            return data->dataA;
-        }
-        static uint8 *DataB(DataOsci *data)
-        {
-            return data->dataB;
-        }
-    };
-}
-
-
 void FPGA::GiveStart()
 {
     uint8 value = (uint8)(((uint8)set.trig.polarity) % 2);
@@ -211,9 +192,9 @@ void FPGA::ReadData()
 {
     DataOsci *data = StorageOsci::PrepareForNewData();
 
-    if (ReadDataChanenl(Chan::A, DataAccessor::DataA(data)))
+    if (ReadDataChanenl(Chan::A, data->dataA))
     {
-        if (ReadDataChanenl(Chan::B, DataAccessor::DataB(data)))
+        if (ReadDataChanenl(Chan::B, data->dataB))
         {
         }
         else
