@@ -125,20 +125,20 @@ static void UpdateFPGA()
     {
         FPGA::HAL::ReadFlag();
     
-        if (FPGA::HAL::GetFlag::PRED() && !givingStart)
+        if (GetFlag::PRED() && !givingStart)
         {
-            if (!Osci::InModeRandomizer() && (set.trig.startMode == TrigStartMode::Auto) && FPGA::HAL::GetFlag::HOLD_OFF())
+            if (!Osci::InModeRandomizer() && (set.trig.startMode == TrigStartMode::Auto) && GetFlag::HOLD_OFF())
             {
                 GiveStart();
                 givingStart = true;
             }
-            if (!FPGA::HAL::GetFlag::TRIG_READY())
+            if (!FPGA::GetFlag::TRIG_READY())
             {
                 Trig::pulse = false;
             }
         }
     
-        if (FPGA::HAL::GetFlag::DATA_READY())
+        if (FPGA::GetFlag::DATA_READY())
         {
             if (CanReadData())
             {

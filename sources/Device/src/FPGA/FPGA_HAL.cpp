@@ -135,61 +135,61 @@ void FPGA::HAL::GPIO::WritePin(Pin::E pin, int enable)
 }
 
 
-bool FPGA::HAL::GetFlag::DATA_READY()
+bool FPGA::GetFlag::DATA_READY()
 {
     return _GET_BIT(flag, Flag::_DATA_READY) == 1;
 }
 
 
-bool FPGA::HAL::GetFlag::TRIG_READY()
+bool FPGA::GetFlag::TRIG_READY()
 {
     return _GET_BIT(flag, Flag::_TRIG_READY) == 1;
 }
 
 
-bool FPGA::HAL::GetFlag::HOLD_OFF()
+bool FPGA::GetFlag::HOLD_OFF()
 {
     return _GET_BIT(flag, Flag::_HOLD_OFF_FLAG) == 1;
 }
 
 
-bool FPGA::HAL::GetFlag::PRED()
+bool FPGA::GetFlag::PRED()
 {
     return _GET_BIT(flag, Flag::_PRED) == 1;
 }
 
 
-bool FPGA::HAL::GetFlag::FREQ_READY()
+bool FPGA::GetFlag::FREQ_READY()
 {
     return _GET_BIT(flag, Flag::_FREQ_READY) == 1;
 }
 
 
-bool FPGA::HAL::GetFlag::PERIOD_READY()
+bool FPGA::GetFlag::PERIOD_READY()
 {
     return _GET_BIT(flag, Flag::_PERIOD_READY) == 1;
 }
 
 
-bool FPGA::HAL::GetFlag::FREQ_OVERFLOW()
+bool FPGA::GetFlag::FREQ_OVERFLOW()
 {
     return _GET_BIT(flag, Flag::_FREQ_OVERFLOW) == 1;
 }
 
 
-bool FPGA::HAL::GetFlag::PERIOD_OVERFLOW()
+bool FPGA::GetFlag::PERIOD_OVERFLOW()
 {
     return _GET_BIT(flag, Flag::_PERIOD_OVERFLOW) == 1;
 }
 
 
-bool FPGA::HAL::GetFlag::FREQ_IN_PROCESS()
+bool FPGA::GetFlag::FREQ_IN_PROCESS()
 {
     return _GET_BIT(flag, Flag::_FREQ_IN_PROCESS) == 1;
 }
 
 
-bool FPGA::HAL::GetFlag::PERIOD_IN_PROCESS()
+bool FPGA::GetFlag::PERIOD_IN_PROCESS()
 {
     return _GET_BIT(flag, Flag::_PERIOD_IN_PROCESS) == 1;
 }

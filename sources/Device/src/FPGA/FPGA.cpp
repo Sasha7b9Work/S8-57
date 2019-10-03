@@ -139,7 +139,7 @@ bool FPGA::ForTester::Read(uint16 *dataA, uint8 *dataB) // -V2506
 {
     uint start = TIME_MS;
     HAL::flag = 0;
-    while (!HAL::GetFlag::DATA_READY())    // ∆дЄм флага готовности данных
+    while (!GetFlag::DATA_READY())    // ∆дЄм флага готовности данных
     {
         HAL::ReadFlag();
 
