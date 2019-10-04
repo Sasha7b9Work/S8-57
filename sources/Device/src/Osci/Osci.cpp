@@ -205,7 +205,7 @@ static void BalanceChannel(Chan::E ch, Range::E range)
 
     while (numPoints < 100)
     {
-        if(!Transceiver::InInteraction())
+        if(!Transceiver::inInteraction)
         {
             if (HAL_PIO::Read(HPort::_G, HPin::_1))
             {

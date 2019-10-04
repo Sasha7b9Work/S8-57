@@ -12,8 +12,6 @@ struct Transceiver
     /// если мы хотим использовать их в другом режиме.
     static void Init();
 
-    static bool InInteraction();
-
     /// Функция циклического опроса. Принимает данные, если таковые имеются, и передаёт их через функцию, установленную в SetCallbackReceive.
     static bool Update();
 
@@ -23,6 +21,8 @@ struct Transceiver
         static void Send(uint8 data);
         static void Send(uint8 byte0, uint8 byte1);
     };
+
+    static bool inInteraction;
 };
 
 /// Режим, в котором сейчас находится шина

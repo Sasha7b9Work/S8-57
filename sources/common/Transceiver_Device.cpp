@@ -61,8 +61,6 @@ struct Receiver
     static uint8 ReadData();
 };
 
-extern bool inInteraction;
-
 
 //                                      D0           D1           D2          D3          D4          D5          D6          D7
 static const GPIO_TypeDef *ports[] = { GPIOD,       GPIOD,       GPIOD,      GPIOD,      GPIOE,      GPIOE,      GPIOE,      GPIOE };
