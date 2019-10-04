@@ -14,9 +14,6 @@
 #include <stdlib.h>
 
 
-using namespace Address;
-
-
 uint16 FPGA::valueADC = 0;
 uint16 FPGA::post = (uint16)~(512);
 uint16 FPGA::pred = (uint16)~(512);

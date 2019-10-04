@@ -12,9 +12,6 @@
 #include "Utils/Math.h"
 
 
-using namespace Address;
-
-
 /// Состояние осциллографа перед переходом в режим регистратора
 struct StateOsci
 {

@@ -13,9 +13,6 @@
 #include <cmath>
 
 
-using namespace Address;
-
-
 extern bool givingStart;
 
 extern uint16 addrRead;

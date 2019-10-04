@@ -6,9 +6,6 @@
 #include "Hardware/Timer.h"
 
 
-using namespace Address;
-
-
 void ContextTester::OnPressStart()
 {
     FPGA::OnPressStart();

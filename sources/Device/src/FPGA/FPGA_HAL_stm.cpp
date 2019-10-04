@@ -4,8 +4,6 @@
 #include "Osci/FrequencyCounter.h"
 
 
-using namespace Address;
-
 extern bool givingStart;
 
 

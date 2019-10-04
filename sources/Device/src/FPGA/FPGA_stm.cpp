@@ -15,8 +15,6 @@
 #include <cstring>
 
 
-using namespace Address;
-
 extern bool givingStart;
 extern uint8 dataRand[Chan::Size][FPGA::MAX_NUM_POINTS];
 

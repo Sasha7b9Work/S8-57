@@ -20,9 +20,6 @@
 #endif
 
 
-using namespace Address;
-
-
 // Массив структур описаний масштабов по напряжению.
 static const struct RangeStruct
 {

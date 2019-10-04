@@ -10,9 +10,6 @@
 #include "Utils/Values.h"
 
 
-using namespace Address;
-
-
 void TrigSource::Load()
 {
     TrigInput::Load();
