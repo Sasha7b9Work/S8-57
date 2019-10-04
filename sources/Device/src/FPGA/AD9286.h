@@ -1,13 +1,8 @@
 #pragma once
 
 
-
-namespace Hardware
+struct AD9286
 {
-    class AD9286
-    {
-    public:
-        static void Init();
-        static void Tune();
-    };
-}
+    static void Init();
+    static void Tune();
+};

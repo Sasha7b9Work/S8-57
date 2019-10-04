@@ -17,9 +17,6 @@
 
 using namespace Address;
 
-using Hardware::AD9286;
-
-
 extern bool givingStart;
 extern uint8 dataRand[Chan::Size][FPGA::MAX_NUM_POINTS];
 

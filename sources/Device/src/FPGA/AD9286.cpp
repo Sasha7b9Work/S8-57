@@ -4,9 +4,6 @@
 #include "Hardware/HAL/HAL_PIO.h"
 
 
-using namespace Hardware;
-
-
 #define PIN_SCK     HPin::_10
 #define PORT_SCK    HPort::_B
 
