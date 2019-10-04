@@ -109,11 +109,6 @@ bool FreqMeterC::GetFlag::PERIOD_IN_PROCESS()
     return FPGA::GetFlag::PERIOD_IN_PROCESS();
 }
 
-void RecorderC::LoadRegUPR()
-{
-    FPGA::LoadRegUPR();
-}
-
 void TesterC::OnPressStart()
 {
     FPGA::OnPressStart();

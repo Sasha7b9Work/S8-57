@@ -691,14 +691,29 @@
               <FilePath>.\src\FPGA\AD9286.h</FilePath>
             </File>
             <File>
+              <FileName>Context.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\FPGA\Context.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Context.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\FPGA\Context.h</FilePath>
+            </File>
+            <File>
+              <FileName>ContextRecorder.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\FPGA\ContextRecorder.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>ContextRecorder.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\FPGA\ContextRecorder.h</FilePath>
+            </File>
+            <File>
               <FileName>FPGA.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\FPGA\FPGA.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>FPGA_stm.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\FPGA\FPGA_stm.cpp</FilePath>
             </File>
             <File>
               <FileName>FPGA.h</FileName>
@@ -721,19 +736,19 @@
               <FilePath>.\src\FPGA\FPGA_Settings.cpp</FilePath>
             </File>
             <File>
+              <FileName>FPGA_stm.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\FPGA\FPGA_stm.cpp</FilePath>
+            </File>
+            <File>
               <FileName>MathFPGA.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\FPGA\MathFPGA.cpp</FilePath>
             </File>
             <File>
-              <FileName>Context.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\FPGA\Context.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Context.h</FileName>
+              <FileName>TypesFPGA.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\src\FPGA\Context.h</FilePath>
+              <FilePath>.\src\FPGA\TypesFPGA.h</FilePath>
             </File>
           </Files>
         </Group>

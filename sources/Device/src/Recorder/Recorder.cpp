@@ -1,7 +1,7 @@
 #include "defines.h"
 #include "Display/Painter.h"
 #include "Display/Primitives.h"
-#include "FPGA/FPGA.h"
+#include "FPGA/ContextRecorder.h"
 #include "Hardware/Timer.h"
 #include "Hardware/Memory.h"
 #include "Hardware/HAL/HAL.h"
@@ -42,7 +42,7 @@ void Recorder::Init()
 {
     StoreOsciSettings();
 
-    RecorderC::LoadRegUPR();
+    ContextRecorder::LoadRegUPR();
     Range::LoadBoth();
     TrigInput::Load();
     RecorderScaleX::Load();

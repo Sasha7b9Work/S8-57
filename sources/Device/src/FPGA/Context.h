@@ -52,12 +52,6 @@ struct FreqMeterC
 };
 
 
-struct RecorderC
-{
-    static void LoadRegUPR();
-};
-
-
 struct TesterC
 {
     static void OnPressStart();
