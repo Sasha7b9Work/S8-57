@@ -1,8 +1,8 @@
 #pragma once
 
 
-namespace MessageMgr
+struct MessageMgr
 {
     /// Вызывается при изменении настройки осциллографа, существенно влияющей на усредненеие
-    void OsciSettingsEffectOnAverageChanged();
-}
+    static void OsciSettingsEffectOnAverageChanged();
+};
