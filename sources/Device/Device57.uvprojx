@@ -1451,16 +1451,6 @@
           <GroupName>Osci</GroupName>
           <Files>
             <File>
-              <FileName>FrequencyCounter.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Osci\FrequencyCounter.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>FrequencyCounter.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Osci\FrequencyCounter.h</FilePath>
-            </File>
-            <File>
               <FileName>Osci.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Osci\Osci.cpp</FilePath>
@@ -1489,6 +1479,16 @@
               <FileName>StorageOsci.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Osci\StorageOsci.h</FilePath>
+            </File>
+            <File>
+              <FileName>FreqMeter.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Osci\FreqMeter.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>FreqMeter.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Osci\FreqMeter.h</FilePath>
             </File>
           </Files>
         </Group>

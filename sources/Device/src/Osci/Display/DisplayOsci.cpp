@@ -4,7 +4,7 @@
 #include "Display/Primitives.h"
 #include "menu/Menu.h"
 #include "Osci/Osci.h"
-#include "Osci/FrequencyCounter.h"
+#include "Osci/FreqMeter.h"
 #include "Osci/Display/DisplayOsci.h"
 #include "Osci/Measurements/Measurements.h"
 #include "Settings/Settings.h"

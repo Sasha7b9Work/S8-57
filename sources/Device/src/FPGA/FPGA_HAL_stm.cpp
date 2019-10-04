@@ -1,7 +1,7 @@
 #include "defines.h"
 #include "FPGA/FPGA.h"
 #include "Hardware/HAL/HAL.h"
-#include "Osci/FrequencyCounter.h"
+#include "Osci/FreqMeter.h"
 
 
 extern bool givingStart;

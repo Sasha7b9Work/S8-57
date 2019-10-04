@@ -1,6 +1,6 @@
 #pragma once
 #include "Tester/Tester.h"
-#include "Osci/FrequencyCounter.h"
+#include "Osci/FreqMeter.h"
 #include "Menu/Menu.h"
 #include "Display/Colors.h"
 #include "Osci/Measurements/Measures.h"

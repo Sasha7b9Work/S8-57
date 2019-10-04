@@ -1,5 +1,5 @@
 #include "defines.h"
-#include "FrequencyCounter.h"
+#include "Osci/FreqMeter.h"
 #include "Display/Grid.h"
 #include "Display/Primitives.h"
 #include "FPGA/ContextFreqMeter.h"
