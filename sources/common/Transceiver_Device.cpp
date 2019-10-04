@@ -131,9 +131,9 @@ void Transceiver::Transmitter::Send(const uint8 *data, uint size)
 {
     inInteraction = true;
 
-    if (DataBus::mode != DataBus::Mode::DeviceTransmit)        // Если пины ещё не инициализированы для передачи -
+    if (DataBusMode::state != DataBusMode::DeviceTransmit)        // Если пины ещё не инициализированы для передачи -
     {
-        DataBus::mode = DataBus::Mode::DeviceTransmit;          // инициализируем
+        DataBusMode::state = DataBusMode::DeviceTransmit;          // инициализируем
     
         /* Настроим пины 14, 15, 0, 1 на запись D0, D1, D2, D3 */
         /* Устанавливаем для этих пинов GPIO_MODE_OUTPUT_PP. */
@@ -171,7 +171,7 @@ bool Transceiver::Update()
 {
     inInteraction = true;
 
-    DataBus::mode = DataBus::Mode::DeviceReceive;
+    DataBusMode::state = DataBusMode::DeviceReceive;
 
     Receiver::Init_FL0_IN();                        // Инициализируем FL0 на чтение
 

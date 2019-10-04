@@ -2,8 +2,4 @@
 #include "DataBus.h"
 
 
-
-namespace DataBus
-{
-    Mode::E mode = Mode::FPGA;
-}
+DataBusMode::E DataBusMode::state = DataBusMode::FPGA;

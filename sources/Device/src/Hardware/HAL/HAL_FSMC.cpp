@@ -144,7 +144,7 @@ void HAL_FSMC::Init()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void Configure()
 {
-    DataBus::mode = DataBus::Mode::FPGA;
+    DataBusMode::state = DataBusMode::FPGA;
 
     static const GPIO_InitTypeDef isGPIO =
     {   //    NOE          NWE          NE1
@@ -190,7 +190,7 @@ static void Configure()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void HAL_FSMC::WriteToFPGA16(uint8 *address, uint16 value)
 {
-    if (DataBus::mode != DataBus::Mode::FPGA)
+    if (DataBusMode::state != DataBusMode::FPGA)
     {
         Configure();
     }
@@ -204,7 +204,7 @@ void HAL_FSMC::WriteToFPGA16(uint8 *address, uint16 value)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void HAL_FSMC::WriteToFPGA8(uint8 *address, uint8 value)
 {
-    if (DataBus::mode != DataBus::Mode::FPGA)
+    if (DataBusMode::state != DataBusMode::FPGA)
     {
         Configure();
     }
@@ -215,7 +215,7 @@ void HAL_FSMC::WriteToFPGA8(uint8 *address, uint8 value)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 uint8 HAL_FSMC::ReadFromFPGA(const uint8 *address)
 {
-    if (DataBus::mode != DataBus::Mode::FPGA)
+    if (DataBusMode::state != DataBusMode::FPGA)
     {
         Configure();
     }

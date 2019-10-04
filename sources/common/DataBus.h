@@ -1,18 +1,15 @@
 #pragma once
 
 
-namespace DataBus
+/// Режим, в котором сейчас находится шина
+struct DataBusMode
 {
-    /// Режим, в котором сейчас находится шина
-    struct Mode
+    enum E
     {
-        enum E
-        {
-            DeviceTransmit, ///< Передача в панель
-            DeviceReceive,  ///< Чтение из панели
-            FPGA            ///< Обмен с FPGA
-        };
+        DeviceTransmit, ///< Передача в панель
+        DeviceReceive,  ///< Чтение из панели
+        FPGA            ///< Обмен с FPGA
     };
 
-    extern Mode::E mode;
-}
+    static DataBusMode::E state;
+};
