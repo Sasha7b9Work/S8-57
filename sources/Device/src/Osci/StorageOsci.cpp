@@ -1,6 +1,6 @@
 #include "defines.h"
 #include "Osci/StorageOsci.h"
-#include "FPGA/FPGA.h"
+#include "FPGA/ContextOsci.h"
 #include "Data/Heap.h"
 #include "Settings/Settings.h"
 #include <cstring>
@@ -481,7 +481,7 @@ void DataOsciP2P::FillBufferForPeakDetEnabled(Chan::E ch, Buffer *buffer)
 void DataOsciP2P::PrepareBuffer(Buffer *buffer, uint size)
 {
     buffer->Realloc(size);
-    std::memset(buffer->data, FPGA::VALUE::NONE, size);
+    std::memset(buffer->data, VALUE::NONE, size);
 }
 
 
@@ -489,7 +489,7 @@ uint8 DataOsciP2P::ByteFromEnd(Chan::E ch, int fromEnd)
 {
     if (fromEnd > data.settings.SizeChannel())      // Если требуется значение, большее чем возможно сохранить
     {
-        return FPGA::VALUE::NONE;
+        return VALUE::NONE;
     }
 
     int index = pointerToByte;        // index будет указывать на позицию возвращаемого значения

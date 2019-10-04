@@ -1,4 +1,5 @@
 #include "defines.h"
+#include "FPGA/ContextOsci.h"
 #include "FPGA/FPGA.h"
 
 
@@ -46,6 +47,16 @@ void OsciC::ReadData()
 void OsciC::Reset()
 {
     FPGA::Reset();
+}
+
+bool OsciC::InStateStop()
+{
+    return FPGA_IN_STATE_STOP;
+}
+
+bool OsciC::InStateWait()
+{
+    return FPGA_IN_STATE_WAIT;
 }
 
 void OsciC::SetValueADC(uint16 value)

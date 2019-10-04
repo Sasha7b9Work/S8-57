@@ -467,7 +467,7 @@ int CalculatePeriodAccurately(Chan::E ch)
         while (data < end)
         {
             uint8 point = *data++;
-            if(point < FPGA::VALUE::MIN || point >= FPGA::VALUE::MAX)
+            if(point < VALUE::MIN || point >= VALUE::MAX)
             {
                 EXIT_FROM_PERIOD_ACCURACY
             }
@@ -1099,9 +1099,9 @@ float Measure::CalculateCursorU(Chan::E ch, float posCurT)
     
     BitSet64 points = DisplayOsci::PainterData::PointsOnDisplay();
 
-    int rel = (int)(CHOICE_BUFFER)[(int)points.word0 + ROUND(int, posCurT)] - FPGA::VALUE::MIN;
+    int rel = (int)(CHOICE_BUFFER)[(int)points.word0 + ROUND(int, posCurT)] - VALUE::MIN;
 
-#define SCALE (200.0F / (FPGA::VALUE::MAX - FPGA::VALUE::MIN))
+#define SCALE (200.0F / (VALUE::MAX - VALUE::MIN))
 
     float value = 200.0F - rel * SCALE;
     LIMITATION(value, 0.0F, 200.0F); //-V2516
@@ -1124,13 +1124,13 @@ float Measure::CalculateCursorT(Chan::E ch, float posCurU, int numCur)
     
     BitSet64 points = DisplayOsci::PainterData::PointsOnDisplay();
 
-    int prevData = 200 - dataIn[FIRST_POINT] + FPGA::VALUE::MIN;
+    int prevData = 200 - dataIn[FIRST_POINT] + VALUE::MIN;
 
     int numIntersections = 0;
 
     for(int i = FIRST_POINT + 1; i < LAST_POINT; i++)
     {
-        int curData = 200 - (dataIn)[i] + FPGA::VALUE::MIN;
+        int curData = 200 - (dataIn)[i] + VALUE::MIN;
 
         if(curData <= posCurU && prevData > posCurU)
         {
@@ -1410,7 +1410,7 @@ void MeasurementsOsci::SetData()
         {
             for (int i = (int)(BYTES_IN_CHANNEL_DS - 1); i >= 0; --i)
             {
-                if (IN_A[i] != FPGA::VALUE::NONE)                // Если это значение считано
+                if (IN_A[i] != VALUE::NONE)                // Если это значение считано
                 {
                     lastByte = i;
                     firstByte = lastByte - nBytes;
@@ -1468,7 +1468,7 @@ static void LimitationData(Chan::E ch, uint numBytes)
 
     for (uint i = 0; i < numBytes; i++)
     {
-        Math::Limitation<uint8>(data, FPGA::VALUE::MIN, FPGA::VALUE::MAX);
+        Math::Limitation<uint8>(data, VALUE::MIN, VALUE::MAX);
         data++;
     }
 }

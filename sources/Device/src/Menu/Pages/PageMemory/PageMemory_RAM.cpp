@@ -2,7 +2,7 @@
 #include "Display/Grid.h"
 #include "Display/Primitives.h"
 #include "Display/Symbols.h"
-#include "FPGA/FPGA.h"
+#include "FPGA/ContextOsci.h"
 #include "Hardware/RAM.h"
 #include "Menu/MenuItems.h"
 #include "Osci/Osci.h"

@@ -1,4 +1,6 @@
 #pragma once
+#include "FPGA/TypesFPGA.h"
+#include "FPGA/MathFPGA.h"
 
 
 struct OsciC
@@ -22,6 +24,10 @@ struct OsciC
     static void SetValueADC(uint16 value);
 
     static uint BytesInChannel();
+
+    static bool InStateStop();
+
+    static bool InStateWait();
 
     static uint16 &post;
     static uint16 &pred;

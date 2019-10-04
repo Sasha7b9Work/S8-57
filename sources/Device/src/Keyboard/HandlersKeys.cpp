@@ -1,7 +1,7 @@
 #include "defines.h"
 #include "HandlersKeys.h"
 #include "FlashDrive/FlashDrive.h"
-#include "FPGA/FPGA.h"
+#include "FPGA/ContextOsci.h"
 #include "Hardware/Timer.h"
 #include "Keyboard/Keyboard.h"
 #include "Menu/Menu.h"

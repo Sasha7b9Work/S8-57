@@ -2,7 +2,7 @@
 #include "Menu/Pages/Include/PageService.h"
 #include "Settings/Settings.h"
 #include "Hardware/Timer.h"
-#include "FPGA/FPGA.h"
+#include "FPGA/ContextOsci.h"
 
 
 

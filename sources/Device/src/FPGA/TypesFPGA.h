@@ -1,5 +1,6 @@
 #pragma once
 
+
 namespace Address
 {
     namespace WR
@@ -94,4 +95,13 @@ struct FPin
         Number
     } value;
     explicit FPin(E v) : value(v) {};
+};
+
+struct VALUE
+{
+    static const uint8 AVE = 127;
+    static const uint8 MIN = AVE - 125;
+    static const uint8 MAX = AVE + 125;
+    /// Если значение == 0, значит, его нет. Это нужно для режимов рандомизатора и поточечного вывода p2p, а также для tShift ранее считанного сигнала
+    static const uint8 NONE = 0;
 };

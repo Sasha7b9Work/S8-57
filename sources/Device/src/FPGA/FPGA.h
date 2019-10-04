@@ -1,6 +1,5 @@
 #pragma once
 #include "Settings/SettingsOsci.h"
-#include "FPGA/Context.h"
 #include "FPGA/TypesFPGA.h"
 #include "FPGA/MathFPGA.h"
 
@@ -60,15 +59,6 @@ struct FPGA
         /// Запустить цикл чтения для тестер-компонента. В течение time секунд должно быть считано numPoints точек
         /// Если возвращает false - старт не прошёл
         static bool Start();
-    };
-
-    struct VALUE
-    {
-        static const uint8 AVE = 127;
-        static const uint8 MIN = AVE - 125;
-        static const uint8 MAX = AVE + 125;
-        /// Если значение == 0, значит, его нет. Это нужно для режимов рандомизатора и поточечного вывода p2p, а также для tShift ранее считанного сигнала
-        static const uint8 NONE = 0;
     };
 
     struct GetFlag

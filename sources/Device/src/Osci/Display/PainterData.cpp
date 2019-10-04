@@ -283,7 +283,7 @@ static void DrawChannel(Chan::E ch)
 
     int left = Grid::Left();
 
-    float scale = (float)Grid::Height() / (FPGA::VALUE::MAX - FPGA::VALUE::MIN);
+    float scale = (float)Grid::Height() / (VALUE::MAX - VALUE::MIN);
 
     if (set.fft.enabled)
     {
@@ -324,8 +324,8 @@ static void DrawModeLinesPeakDetOn(int center, const uint8 *data, float scale, i
 {
     for (int i = 0; i < 281 * 2; i += 2)
     {
-        int min = (int)(center - (data[i] - FPGA::VALUE::AVE) * scale + 0.5F);
-        int max = (int)(center - (data[i + 1] - FPGA::VALUE::AVE) * scale + 0.5F);
+        int min = (int)(center - (data[i] - VALUE::AVE) * scale + 0.5F);
+        int max = (int)(center - (data[i + 1] - VALUE::AVE) * scale + 0.5F);
 
         VLine(min - max).Draw(x++, max);
     }
@@ -338,8 +338,8 @@ static void DrawModeLinesPeakDetOff(int center, const uint8 *data, float scale, 
 
     for (int i = 1; i < 281; i++)
     {
-        int value = (int)(center - (data[i] - FPGA::VALUE::AVE) * scale + 0.5F);
-        int valuePrev = (int)(center - (data[i - 1] - FPGA::VALUE::AVE) * scale + 0.5F);
+        int value = (int)(center - (data[i] - VALUE::AVE) * scale + 0.5F);
+        int valuePrev = (int)(center - (data[i - 1] - VALUE::AVE) * scale + 0.5F);
 
         if (value == valuePrev)
         {
@@ -351,7 +351,7 @@ static void DrawModeLinesPeakDetOff(int center, const uint8 *data, float scale, 
             VLine(val - valuePrev).Draw(x++, valuePrev);
         }
 
-        if (coordVert == -1 && data[i] == FPGA::VALUE::NONE)
+        if (coordVert == -1 && data[i] == VALUE::NONE)
         {
             coordVert = i;
             VLine(Grid::Height()).Draw(x - 1, Grid::Top(), Color::GRID);
@@ -379,8 +379,8 @@ static void DrawModePointsPeakDetOn(int center, const uint8 *data, float scale, 
 {
     for (int i = 0; i < 281 * 2; i += 2)
     {
-        Point().Draw(x, (int)(center - (data[i] - FPGA::VALUE::AVE) * scale + 0.5F));
-        Point().Draw(x, (int)(center - (data[i + 1] - FPGA::VALUE::AVE) * scale + 0.5F));
+        Point().Draw(x, (int)(center - (data[i] - VALUE::AVE) * scale + 0.5F));
+        Point().Draw(x, (int)(center - (data[i + 1] - VALUE::AVE) * scale + 0.5F));
         x++;
     }
 }
@@ -390,7 +390,7 @@ static void DrawModePointsPeakDetOff(int center, const uint8 *data, float scale,
 {
     for (int i = 0; i < 280; i++)
     {
-        float value = center - (data[i] - FPGA::VALUE::AVE) * scale;
+        float value = center - (data[i] - VALUE::AVE) * scale;
         Point().Draw(x + i, ROUND(uint8, value));
     }
 }

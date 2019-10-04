@@ -3,7 +3,7 @@
 #include "Data/DataSettings.h"
 #include "Display/Grid.h"
 #include "Display/Primitives.h"
-#include "FPGA/FPGA.h"
+#include "FPGA/ContextOsci.h"
 #include "Hardware/HAL/HAL.h"
 #include "Osci/Display/DisplayOsci.h"
 #include "Osci/Measurements/Measurements.h"
@@ -368,11 +368,11 @@ static void DrawRightPart(int x0, int y0)
         {
             Char(Symbol8::PLAY).Draw4SymbolsInRect(x, 1);
         }
-        else if (FPGA_IN_STATE_STOP)  // Режим остановки
+        else if (OsciC::InStateStop())  // Режим остановки
         {
             Region(10, 10).Fill(x + 3, y + 3);
         }
-        else if (FPGA_IN_STATE_WAIT)  // Режим ожидания сигнала
+        else if (OsciC::InStateWait())  // Режим ожидания сигнала
         {
             int w = 4;
             int h = 14;

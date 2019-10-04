@@ -360,7 +360,7 @@ void Trig::Level::Find()
         uint8 max = Math::MaxFromArray(data, 0, (int)numBytes - 1);
         uint8 min = Math::MinFromArray(data, 0, (int)numBytes - 1);
 
-        int deltaValue = (int)FPGA::VALUE::AVE - (max + min) / 2;
+        int deltaValue = (int)VALUE::AVE - (max + min) / 2;
 
         int deltaRShift = SET_RSHIFT(ch) - RShift::ZERO;
 

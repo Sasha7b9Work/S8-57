@@ -1,5 +1,5 @@
 #include "defines.h"
-#include "FPGA/FPGA.h"
+#include "FPGA/ContextOsci.h"
 #include "Menu/Pages/Include/PageTrig.h"
 #include "Settings/Settings.h"
 #include "Osci/Osci.h"

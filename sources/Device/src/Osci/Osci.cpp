@@ -2,7 +2,7 @@
 #include "device.h"
 #include "Transceiver.h"
 #include "Data/Reader.h"
-#include "FPGA/FPGA.h"
+#include "FPGA/ContextOsci.h"
 #include "Hardware/Timer.h"
 #include "Hardware/HAL/HAL.h"
 #include "Osci/Display/DisplayOsci.h"
