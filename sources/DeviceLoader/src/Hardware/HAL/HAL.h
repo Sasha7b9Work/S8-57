@@ -12,14 +12,13 @@ struct HAL_EEPROM
 };
 
 
-namespace HAL
+struct HAL
 {
-    void ErrorHandler(const char *, int);
-    
-    class FSMC
+    static void ErrorHandler(const char *, int);
+
+    struct FSMC
     {
-    public:
         static void WriteToPanel(uint8 *buffer, int size);
     };
-}
+};
 
