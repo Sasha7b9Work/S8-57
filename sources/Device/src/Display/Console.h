@@ -1,17 +1,16 @@
 #pragma once
 
 
-
-namespace Console
+struct Console
 {
-    void Draw();
+    static void Draw();
 
-    void AddString(char *string);
+    static void AddString(char *string);
 
-    int NumberOfLines();
+    static int NumberOfLines();
     /// Возвращает true, если консоль должна отображаться на экране
-    bool IsShown();
+    static bool IsShown();
     /// Эту фнукцию надо вызвыть, когда пользователь изменяет максимальное количество строк в консоли
-    void OnChanged_MaxStringsInConsole();
+    static void OnChanged_MaxStringsInConsole();
 };
 
