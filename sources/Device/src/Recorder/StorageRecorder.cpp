@@ -6,7 +6,7 @@
 
 
 /// Обёртка для Heap()
-namespace Stack
+struct Stack
 {
     static FrameRec frame;
 
@@ -20,7 +20,7 @@ namespace Stack
     {
         return &frame;
     }
-}
+};
 
 
 
