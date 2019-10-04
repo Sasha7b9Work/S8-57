@@ -1,7 +1,7 @@
 #include "defines.h"
 #include "Display/Primitives.h"
 #include "Hardware/Beeper.h"
-#include "Osci/Measurements/AutoMeasurements.h"
+#include "Osci/Measurements/CursorsMeasurements.h"
 #include "Settings/Settings.h"
 #include "Utils/Math.h"
 #include <cmath>

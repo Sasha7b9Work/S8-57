@@ -1556,11 +1556,6 @@
               <FilePath>.\src\Osci\Measurements\AutoMeasurements_Table.cpp</FilePath>
             </File>
             <File>
-              <FileName>Cursors.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Osci\Measurements\Cursors.cpp</FilePath>
-            </File>
-            <File>
               <FileName>Measures.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Osci\Measurements\Measures.cpp</FilePath>
@@ -1569,6 +1564,16 @@
               <FileName>Measures.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Osci\Measurements\Measures.h</FilePath>
+            </File>
+            <File>
+              <FileName>CursorsMeasurements.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Osci\Measurements\CursorsMeasurements.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>CursorsMeasurements.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Osci\Measurements\CursorsMeasurements.h</FilePath>
             </File>
           </Files>
         </Group>

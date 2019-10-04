@@ -7,6 +7,7 @@
 #include "Hardware/HAL/HAL.h"
 #include "Osci/Display/DisplayOsci.h"
 #include "Osci/Measurements/AutoMeasurements.h"
+#include "Osci/Measurements/CursorsMeasurements.h"
 #include "Settings/Settings.h"
 #include "Utils/Values.h"
 #include <cmath>
