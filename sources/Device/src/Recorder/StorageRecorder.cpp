@@ -40,7 +40,7 @@ void FrameRec::AddPoint(BitSet16 dataA, BitSet16 dataB)
 {
     BitSet32 bs(dataA.halfWord, dataB.halfWord);
 
-    Memory::WriteData(ADDR_SECTOR_RECORDER_1 + numPoints * sizeof(PointRec), &bs, sizeof(BitSet32));
+    EEPROM::WriteData(ADDR_SECTOR_RECORDER_1 + numPoints * sizeof(PointRec), &bs, sizeof(BitSet32));
 
     numPoints++;
 }

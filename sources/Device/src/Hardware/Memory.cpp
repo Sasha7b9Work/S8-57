@@ -22,7 +22,7 @@ static uint ReadDoubleWord(uint address);
 
 
 
-void Memory::SaveSettings()
+void EEPROM::SaveSettings()
 {
     /*
         Алгоритм нахождения первого свободного слова
@@ -60,13 +60,13 @@ void Memory::SaveSettings()
 }
 
 
-void Memory::EraseSector(uint address)
+void EEPROM::EraseSector(uint address)
 {
     HAL_EEPROM::EraseSector(address);
 }
 
 
-void Memory::WriteData(uint address, const void *data, int size)
+void EEPROM::WriteData(uint address, const void *data, int size)
 {
     HAL_EEPROM::WriteBytes(address, (const uint8 *)data, size);
 }
@@ -121,28 +121,28 @@ static void ReadBytes(uint address, void *data, uint size)
 }
 
 
-bool Memory::GetData(int /*num*/, DataSettings * /*ds*/, uint8 * /*dataA*/, uint8 * /*dataB*/)
+bool EEPROM::GetData(int /*num*/, DataSettings * /*ds*/, uint8 * /*dataA*/, uint8 * /*dataB*/)
 {
     return false;
 }
 
 
-void Memory::DeleteData(int /*num*/)
+void EEPROM::DeleteData(int /*num*/)
 {
 }
 
 
-void Memory::GetDataInfo(bool /*existData*/[MAX_NUM_SAVED_WAVES])
+void EEPROM::GetDataInfo(bool /*existData*/[MAX_NUM_SAVED_WAVES])
 {
 }
 
 
-void Memory::SaveData(int /*num*/, const DataSettings * /*ds*/, uint8 * /*dataA*/, uint8 * /*dataB*/)
+void EEPROM::SaveData(int /*num*/, const DataSettings * /*ds*/, uint8 * /*dataA*/, uint8 * /*dataB*/)
 {
 }
 
 
-void Memory::DeleteAllData()
+void EEPROM::DeleteAllData()
 {
 }
 
@@ -167,7 +167,7 @@ static uint ReadDoubleWord(uint address)
 }
 
 
-bool Memory::LoadSettings()
+bool EEPROM::LoadSettings()
 {
     uint address = AddressSavedSettings(0);
 

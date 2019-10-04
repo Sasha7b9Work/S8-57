@@ -16,27 +16,25 @@ struct DataSettings;
                                 ///< вывести в одну линию внизу сетки.
 
 
-namespace Memory
+struct EEPROM
 {
-    void SaveSettings();
+    static void SaveSettings();
 
-    bool LoadSettings();
+    static bool LoadSettings();
 
-    void DeleteAllData();
+    static void DeleteAllData();
     /// —тирает сектор с начальным адресом address
-    void EraseSector(uint address);
+    static void EraseSector(uint address);
 
-    void WriteData(uint address, const void *data, int size);
+    static void WriteData(uint address, const void *data, int size);
 
-    bool GetData(int num, DataSettings *ds, uint8 *dataA, uint8 *dataB);
+    static bool GetData(int num, DataSettings *ds, uint8 *dataA, uint8 *dataB);
 
-    void DeleteData(int num);
+    static void DeleteData(int num);
 
-    void SaveData(int num, const DataSettings *ds, uint8 *dataA, uint8 *dataB);
+    static void SaveData(int num, const DataSettings *ds, uint8 *dataA, uint8 *dataB);
     /// ≈сли даннные есть, соответствующий элемент массива равен true.
-    void GetDataInfo(bool existData[MAX_NUM_SAVED_WAVES]);
-
-
+    static void GetDataInfo(bool existData[MAX_NUM_SAVED_WAVES]);
 };
 
 
