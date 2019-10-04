@@ -71,20 +71,20 @@ uint ContextOsci::BytesInChannel()
 
 bool ContextOsci::GetFlag::PRED()
 {
-    return FPGA::GetFlag::PRED();
+    return FPGA::flag.Pred();
 }
 
 bool ContextOsci::GetFlag::HOLD_OFF()
 {
-    return FPGA::GetFlag::HOLD_OFF();
+    return FPGA::flag.HoldOff();
 }
 
 bool ContextOsci::GetFlag::TRIG_READY()
 {
-    return FPGA::GetFlag::TRIG_READY();
+    return FPGA::flag.TrigReady();
 }
 
 bool ContextOsci::GetFlag::DATA_READY()
 {
-    return FPGA::GetFlag::DATA_READY();
+    return FPGA::flag.DataReady();
 }

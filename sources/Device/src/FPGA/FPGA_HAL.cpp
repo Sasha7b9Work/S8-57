@@ -12,8 +12,9 @@
 
 using namespace Address;
 
+FlagFPGA FPGA::flag;
 
-uint16 FPGA::flag = 0;
+uint16 FlagFPGA::flag = 0;
 
 struct PinStruct
 {
@@ -134,61 +135,61 @@ void GPIO::WritePin(FPin::E pin, int enable)
 }
 
 
-bool FPGA::GetFlag::DATA_READY()
+bool FlagFPGA::DataReady()
 {
     return _GET_BIT(flag, Flag::_DATA_READY) == 1;
 }
 
 
-bool FPGA::GetFlag::TRIG_READY()
+bool FlagFPGA::TrigReady()
 {
     return _GET_BIT(flag, Flag::_TRIG_READY) == 1;
 }
 
 
-bool FPGA::GetFlag::HOLD_OFF()
+bool FlagFPGA::HoldOff()
 {
     return _GET_BIT(flag, Flag::_HOLD_OFF_FLAG) == 1;
 }
 
 
-bool FPGA::GetFlag::PRED()
+bool FlagFPGA::Pred()
 {
     return _GET_BIT(flag, Flag::_PRED) == 1;
 }
 
 
-bool FPGA::GetFlag::FREQ_READY()
+bool FlagFPGA::FreqReady()
 {
     return _GET_BIT(flag, Flag::_FREQ_READY) == 1;
 }
 
 
-bool FPGA::GetFlag::PERIOD_READY()
+bool FlagFPGA::PeriodReady()
 {
     return _GET_BIT(flag, Flag::_PERIOD_READY) == 1;
 }
 
 
-bool FPGA::GetFlag::FREQ_OVERFLOW()
+bool FlagFPGA::FreqOverflow()
 {
     return _GET_BIT(flag, Flag::_FREQ_OVERFLOW) == 1;
 }
 
 
-bool FPGA::GetFlag::PERIOD_OVERFLOW()
+bool FlagFPGA::PeriodOverflow()
 {
     return _GET_BIT(flag, Flag::_PERIOD_OVERFLOW) == 1;
 }
 
 
-bool FPGA::GetFlag::FREQ_IN_PROCESS()
+bool FlagFPGA::FreqInProcess()
 {
     return _GET_BIT(flag, Flag::_FREQ_IN_PROCESS) == 1;
 }
 
 
-bool FPGA::GetFlag::PERIOD_IN_PROCESS()
+bool FlagFPGA::PeriodInProcess()
 {
     return _GET_BIT(flag, Flag::_PERIOD_IN_PROCESS) == 1;
 }

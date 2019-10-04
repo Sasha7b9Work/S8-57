@@ -11,9 +11,9 @@ extern bool givingStart;
 
 void FPGA::ReadFlag()
 {
-    flag = (uint16)(HAL_FSMC::ReadFromFPGA(RD::FLAG_LO) | (HAL_FSMC::ReadFromFPGA(RD::FLAG_HI) << 8));
+    flag.flag = (uint16)(HAL_FSMC::ReadFromFPGA(RD::FLAG_LO) | (HAL_FSMC::ReadFromFPGA(RD::FLAG_HI) << 8));
 
-    if (GetFlag::TRIG_READY() && !givingStart)
+    if (flag.TrigReady() && !givingStart)
     {
         Trig::pulse = true;
     }

@@ -12,7 +12,6 @@ uint16 addrRead = 0;
 
 void FPGA::Init()
 {
-
 }
 
 

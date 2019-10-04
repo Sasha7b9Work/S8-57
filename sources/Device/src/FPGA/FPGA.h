@@ -9,6 +9,25 @@
 #define FPGA_IN_STATE_WAIT (FPGA::fpgaStateWork == StateWorkFPGA_Wait)
 
 
+struct FlagFPGA
+{
+    static uint16 flag;
+
+    FlagFPGA() { flag = 0; }
+
+    static bool DataReady();
+    static bool TrigReady();
+    static bool Pred();
+    static bool FreqReady();
+    static bool HoldOff();
+    static bool PeriodReady();
+    static bool FreqOverflow();
+    static bool PeriodOverflow();
+    static bool FreqInProcess();
+    static bool PeriodInProcess();
+};
+
+
 struct FPGA
 {
     friend struct ContextFreqMeter;
@@ -73,21 +92,7 @@ private:
 
     static bool isRunning;
 
-    static uint16 flag;
-
-    struct GetFlag
-    {
-        static bool DATA_READY();
-        static bool TRIG_READY();
-        static bool PRED();
-        static bool FREQ_READY();
-        static bool HOLD_OFF();
-        static bool PERIOD_READY();
-        static bool FREQ_OVERFLOW();
-        static bool PERIOD_OVERFLOW();
-        static bool FREQ_IN_PROCESS();
-        static bool PERIOD_IN_PROCESS();
-    };
+    static FlagFPGA flag;
 };
 
 struct GPIO

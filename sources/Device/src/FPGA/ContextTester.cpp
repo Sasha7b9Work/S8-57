@@ -35,8 +35,8 @@ bool ContextTester::Start()
 bool ContextTester::Read(uint16 *dataA, uint8 *dataB)
 {
     uint start = TIME_MS;
-    FPGA::flag = 0;
-    while (!FPGA::GetFlag::DATA_READY())    // ∆дЄм флага готовности данных
+    FPGA::flag.flag = 0;
+    while (!FPGA::flag.DataReady())    // ∆дЄм флага готовности данных
     {
         FPGA::ReadFlag();
 

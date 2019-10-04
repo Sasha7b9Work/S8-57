@@ -4,5 +4,5 @@
 
 void FPGA::ReadFlag()
 {
-    flag = 0xFFFF;
+    flag.flag = 0xFFFF;
 }
