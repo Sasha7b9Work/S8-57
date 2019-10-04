@@ -188,6 +188,10 @@ struct TShift
     static void Change(int delta);
 
     static String ToString(TBase::E tBase);
+
+private:
+    static void LoadReal();
+    static void LoadRandomize();
 };
 
 namespace Trig

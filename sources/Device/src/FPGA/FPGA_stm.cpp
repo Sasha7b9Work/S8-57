@@ -114,12 +114,12 @@ static bool CalculateGate(uint16 rand, uint16 *eMin, uint16 *eMax)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static int CalculateShift()
+int FPGA::CalculateShift()
 {
     uint16 min = 0;
     uint16 max = 0;
 
-    if (!CalculateGate(FPGA::valueADC, &min, &max))
+    if (!CalculateGate(valueADC, &min, &max))
     {
         return NULL_TSHIFT;
     }
@@ -127,7 +127,7 @@ static int CalculateShift()
     int deltaMAX = set.dbg.enum_gate_max * 10;
     int deltaMIN = set.dbg.enum_gate_min * 10;
 
-    if (FPGA::valueADC > max - deltaMAX || FPGA::valueADC < min + deltaMIN)
+    if (FPGA::valueADC > max - deltaMAX || valueADC < min + deltaMIN)
     {
         return NULL_TSHIFT;
     }
@@ -135,7 +135,7 @@ static int CalculateShift()
     if (Osci::InModeRandomizer())
     {
 
-        float tin = (float)(FPGA::valueADC - min + deltaMIN) / (max - deltaMAX - (min + deltaMIN));
+        float tin = (float)(valueADC - min + deltaMIN) / (max - deltaMAX - (min + deltaMIN));
         int retValue = (int)(tin * Osci::Kr[set.time.base]);
 
         return retValue;
@@ -145,7 +145,7 @@ static int CalculateShift()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static bool ReadDataChanenlRand(Chan::E ch, const uint8 *address, uint8 *data) // -V2506
+bool FPGA::ReadDataChanenlRand(Chan::E ch, const uint8 *address, uint8 *data)
 {
     int Tsm = CalculateShift();
 

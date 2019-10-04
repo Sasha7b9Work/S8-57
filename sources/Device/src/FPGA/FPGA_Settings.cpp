@@ -63,7 +63,7 @@ void FPGA::LoadCalibratorMode()
 }
 
 
-static void LoadReal()
+void TShift::LoadReal()
 {
     FPGA::post = (uint16)(set.time.shift - TShift::Min());
     int Pred = (int)FPGA_NUM_POINTS - (int)FPGA::post;
@@ -88,7 +88,7 @@ static int GetK()
 }
 
 
-static void LoadRandomize()
+void TShift::LoadRandomize()
 {
     int k = Osci::Kr[set.time.base];
 

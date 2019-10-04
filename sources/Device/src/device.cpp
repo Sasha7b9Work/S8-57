@@ -21,15 +21,12 @@
 #include "Utils/Debug.h"
 
 
-namespace Device
-{
-    /// Настроить устройство в соответствии с установленным режимом
-    static void SetCurrentMode();
-    /// Установить режим работы mode, если открыта страница page или в числе предков открытой страницы есть page
-    static bool SetCurrentMode(const Page *page, Mode::E mode);
+/// Настроить устройство в соответствии с установленным режимом
+static void SetCurrentMode();
+/// Установить режим работы mode, если открыта страница page или в числе предков открытой страницы есть page
+static bool SetCurrentMode(const Page *page, Device::Mode::E mode);
 
-    static Mode::E currentMode = Mode::Osci;
-}
+static Device::Mode::E currentMode = Device::Mode::Osci;
 
 
 
@@ -73,7 +70,7 @@ void Device::Init()
 }
 
 
-static void Device::SetCurrentMode()
+void SetCurrentMode()
 {
     if (!SetCurrentMode(PageMultimeter::self, Device::Mode::Multimeter))
     {
@@ -81,21 +78,21 @@ static void Device::SetCurrentMode()
         {
             if (!SetCurrentMode(PageRecorder::self, Device::Mode::Recorder))
             {
-                State::SetMode(Mode::Osci);
+                Device::State::SetMode(Device::Mode::Osci);
             }
         }
     }
 }
 
 
-static bool Device::SetCurrentMode(const Page *page, Device::Mode::E mode)
+bool SetCurrentMode(const Page *page, Device::Mode::E mode)
 {
     Item *opened = Menu::OpenedItem();
 
     if (opened && 
         (opened == (Page *)page || opened->ExistKeeper(page)))
     {
-        State::SetMode(mode);
+        Device::State::SetMode(mode);
         return true;
     }
 

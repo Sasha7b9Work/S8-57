@@ -11,7 +11,24 @@
 
 struct FPGA
 {
+    friend struct ContextFreqMeter;
+    friend struct ContextOsci;
+    friend struct ContextRecorder;
+    friend struct ContextTester;
+
+    friend struct Bandwidth;
+    friend struct Device;
+    friend struct Range;
+    friend struct RShift;
+    friend struct TBase;
+    friend struct TrigInput;
+    friend struct TrigPolarity;
+    friend struct TShift;
+    friend struct Trig::Level;
+
     static const uint MAX_NUM_POINTS = (16 * 1024U);
+
+private:
 
     static void Init();
 
@@ -90,4 +107,8 @@ struct FPGA
         static void ResetPin(FPin::E pin);
         static void WriteRegisters(FPin::E cs, uint16 value);
     };
+
+    static bool ReadDataChanenlRand(Chan::E ch, const uint8 *address, uint8 *data);
+
+    static int CalculateShift();
 };
