@@ -110,8 +110,12 @@ source_group(FPGA               FILES   ../../Device/src/FPGA/AD9286.h
                                         ../../Device/src/FPGA/AD9286.cpp
                                         ../../Device/src/FPGA/Context.cpp
                                         ../../Device/src/FPGA/Context.h
+                                        ../../Device/src/FPGA/ContextFreqMeter.cpp
+                                        ../../Device/src/FPGA/ContextFreqMeter.h
                                         ../../Device/src/FPGA/ContextRecorder.cpp
                                         ../../Device/src/FPGA/ContextRecorder.h
+                                        ../../Device/src/FPGA/ContextTester.cpp
+                                        ../../Device/src/FPGA/ContextTester.h
                                         ../../Device/src/FPGA/FPGA.cpp
                                         ../../Device/src/FPGA/FPGA.h
                                                      src/FPGA/FPGA_win.cpp
@@ -207,8 +211,12 @@ file(GLOB SOURCES   ../../common/_VS/*
                     ../../Device/src/FPGA/AD9286.cpp
                     ../../Device/src/FPGA/Context.cpp
                     ../../Device/src/FPGA/Context.h
+                    ../../Device/src/FPGA/ContextFreqMeter.cpp
+                    ../../Device/src/FPGA/ContextFreqMeter.h
                     ../../Device/src/FPGA/ContextRecorder.cpp
                     ../../Device/src/FPGA/ContextRecorder.h
+                    ../../Device/src/FPGA/ContextTester.cpp
+                    ../../Device/src/FPGA/ContextTester.h
                     ../../Device/src/FPGA/FPGA.h
                     ../../Device/src/FPGA/FPGA.cpp
                                  src/FPGA/FPGA_win.cpp

@@ -2,7 +2,7 @@
 #include "FrequencyCounter.h"
 #include "Display/Grid.h"
 #include "Display/Primitives.h"
-#include "FPGA/FPGA.h"
+#include "FPGA/ContextFreqMeter.h"
 #include "Hardware/Timer.h"
 #include "Hardware/HAL/HAL.h"
 #include "Settings/Settings.h"
@@ -139,14 +139,14 @@ void FrequencyCounter::Update()
 {
     SetStateLamps();
 
-    bool freqReady = FreqMeterC::GetFlag::FREQ_READY();
+    bool freqReady = ContextFreqMeter::GetFlag::FREQ_READY();
 
     if(freqReady)
     {
         lastFreqRead = TIME_MS;
     }
 
-    bool periodReady = FreqMeterC::GetFlag::PERIOD_READY();
+    bool periodReady = ContextFreqMeter::GetFlag::PERIOD_READY();
 
     if(periodReady)
     {
@@ -177,12 +177,12 @@ void FrequencyCounter::Update()
         }
     }
 
-    if(FreqMeterC::GetFlag::FREQ_OVERFLOW())
+    if(ContextFreqMeter::GetFlag::FREQ_OVERFLOW())
     {
         freqActual.word = MAX_UINT;
         lastFreqOver = TIME_MS;
     }
-    if(FreqMeterC::GetFlag::PERIOD_OVERFLOW())
+    if(ContextFreqMeter::GetFlag::PERIOD_OVERFLOW())
     {
         periodActual.word = MAX_UINT;
         lastPeriodOver = TIME_MS;
@@ -743,14 +743,14 @@ void FrequencyCounter::SetStateLampFreq()
 {
     if(!lampFreq)
     {
-        if(FreqMeterC::GetFlag::FREQ_IN_PROCESS())
+        if(ContextFreqMeter::GetFlag::FREQ_IN_PROCESS())
         {
             lampFreq = true;
         }
     }
     else
     {
-        if(FreqMeterC::GetFlag::FREQ_READY())
+        if(ContextFreqMeter::GetFlag::FREQ_READY())
         {
             lampFreq = false;
         }
@@ -762,14 +762,14 @@ void FrequencyCounter::SetStateLampPeriod()
 {
     if(!lampPeriod)
     {
-        if(FreqMeterC::GetFlag::PERIOD_IN_PROCESS())
+        if(ContextFreqMeter::GetFlag::PERIOD_IN_PROCESS())
         {
             lampPeriod = true;
         }
     }
     else
     {
-        if(FreqMeterC::GetFlag::PERIOD_READY())
+        if(ContextFreqMeter::GetFlag::PERIOD_READY())
         {
             lampPeriod = false;
         }
@@ -837,12 +837,12 @@ static void DrawDebugInfo()
 
     x += 20;
 
-    if (FreqMeterC::GetFlag::FREQ_IN_PROCESS())
+    if (ContextFreqMeter::GetFlag::FREQ_IN_PROCESS())
     {
         Region(size - 2, size - 2).Fill(x + 1, y + 5, Color::FILL);
     }
 
-    if (FreqMeterC::GetFlag::PERIOD_IN_PROCESS())
+    if (ContextFreqMeter::GetFlag::PERIOD_IN_PROCESS())
     {
         Region(size - 2, size - 2).Fill(x + 1, y + 16, Color::FILL);
     }

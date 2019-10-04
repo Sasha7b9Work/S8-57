@@ -1,6 +1,7 @@
 #include "defines.h"
 #include "Display/Primitives.h"
 #include "FPGA/FPGA.h"
+#include "FPGA/MathFPGA.h"
 #include "Hardware/Beeper.h"
 #include "Settings/Settings.h"
 #include "Utils/Math.h"

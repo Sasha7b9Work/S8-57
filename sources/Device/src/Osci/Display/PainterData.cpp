@@ -3,6 +3,7 @@
 #include "Display/Grid.h"
 #include "Display/Primitives.h"
 #include "FPGA/FPGA.h"
+#include "FPGA/MathFPGA.h"
 #include "Osci/Osci.h"
 #include "Osci/Display/DisplayOsci.h"
 #include "Osci/Measurements/Measurements.h"

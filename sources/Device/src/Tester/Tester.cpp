@@ -1,6 +1,7 @@
 #include "defines.h"
 #include "Transceiver.h"
-#include "FPGA/FPGA.h"
+#include "FPGA/ContextTester.h"
+#include "FPGA/MathFPGA.h"
 #include "Hardware/Timer.h"
 #include "Hardware/HAL/HAL.h"
 #include "Osci/Osci.h"
@@ -161,7 +162,7 @@ void Tester::Disable() // -V2506
 
     Osci::Init();
 
-    TesterC::OnPressStart();
+    ContextTester::OnPressStart();
 }
 
 
@@ -208,7 +209,7 @@ void Tester::ProcessStep()
     {
         DAC2_::SetValue((uint)(stepU * step / 2));
         // Запускаем ПЛИС для записи необходимого количества точек. Набор будет производиться в течение 2.5 мс (длительсность одного такта)
-        if (!TesterC::Start())
+        if (!ContextTester::Start())
         {
             return;
         }
@@ -234,7 +235,7 @@ static void ReadData()
     uint16 *x = &dataX[halfStep][0];
     uint8 *y = &dataY[halfStep][0];
 
-    if(TesterC::Read(x, y))
+    if(ContextTester::Read(x, y))
     {
         RecountPoints(x, y);
 

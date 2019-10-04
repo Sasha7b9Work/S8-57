@@ -750,6 +750,31 @@
               <FileType>5</FileType>
               <FilePath>.\src\FPGA\TypesFPGA.h</FilePath>
             </File>
+            <File>
+              <FileName>ContextFreqMeter.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\FPGA\ContextFreqMeter.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>ContextFreqMeter.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\FPGA\ContextFreqMeter.h</FilePath>
+            </File>
+            <File>
+              <FileName>ContextTester.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\FPGA\ContextTester.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>ContextTester.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\FPGA\ContextTester.h</FilePath>
+            </File>
+            <File>
+              <FileName>MathFPGA.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\FPGA\MathFPGA.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
