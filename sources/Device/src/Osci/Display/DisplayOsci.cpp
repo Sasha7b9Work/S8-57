@@ -6,7 +6,7 @@
 #include "Osci/Osci.h"
 #include "Osci/FreqMeter.h"
 #include "Osci/Display/DisplayOsci.h"
-#include "Osci/Measurements/Measurements.h"
+#include "Osci/Measurements/AutoMeasurements.h"
 #include "Settings/Settings.h"
 
 

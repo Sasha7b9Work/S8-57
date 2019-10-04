@@ -6,7 +6,7 @@
 #include "Hardware/Battery.h"
 #include "Hardware/VCP.h"
 #include "Osci/Display/DisplayOsci.h"
-#include "Osci/Measurements/Measurements.h"
+#include "Osci/Measurements/AutoMeasurements.h"
 #include "Settings/Settings.h"
 
 

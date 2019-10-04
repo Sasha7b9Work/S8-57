@@ -19,7 +19,7 @@ struct TableMeasures
     static int DX();
 
 
-    class Cell
+    struct Cell
     {
     public:
         Cell(int _row, int _col) : row(_row), col(_col) {};

@@ -2,7 +2,7 @@
 #include "Display/Grid.h"
 #include "Display/Primitives.h"
 #include "FPGA/FPGA.h"
-#include "Osci/Measurements/Measurements.h"
+#include "Osci/Measurements/AutoMeasurements.h"
 #include "Settings/Settings.h"
 #include "Utils/Values.h"
 #include <cstring>

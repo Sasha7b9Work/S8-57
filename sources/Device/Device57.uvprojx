@@ -1536,34 +1536,29 @@
           <GroupName>Osci/Measurements</GroupName>
           <Files>
             <File>
+              <FileName>AutoMeasurements.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Osci\Measurements\AutoMeasurements.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>AutoMeasurements.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Osci\Measurements\AutoMeasurements.h</FilePath>
+            </File>
+            <File>
+              <FileName>AutoMeasurements_PageChoice.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Osci\Measurements\AutoMeasurements_PageChoice.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>AutoMeasurements_Table.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Osci\Measurements\AutoMeasurements_Table.cpp</FilePath>
+            </File>
+            <File>
               <FileName>Cursors.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Osci\Measurements\Cursors.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Measurements.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Osci\Measurements\Measurements.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Measurements.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Osci\Measurements\Measurements.h</FilePath>
-            </File>
-            <File>
-              <FileName>Measurements_PageChoice.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Osci\Measurements\Measurements_PageChoice.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Measurements_Table.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Osci\Measurements\Measurements_Table.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Measurements_Table.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Osci\Measurements\Measurements_Table.h</FilePath>
             </File>
             <File>
               <FileName>Measures.cpp</FileName>

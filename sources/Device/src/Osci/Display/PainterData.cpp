@@ -6,7 +6,7 @@
 #include "FPGA/MathFPGA.h"
 #include "Osci/Osci.h"
 #include "Osci/Display/DisplayOsci.h"
-#include "Osci/Measurements/Measurements.h"
+#include "Osci/Measurements/AutoMeasurements.h"
 #include "Settings/Settings.h"
 #include "Utils/Buffer.h"
 #include "Utils/Math.h"

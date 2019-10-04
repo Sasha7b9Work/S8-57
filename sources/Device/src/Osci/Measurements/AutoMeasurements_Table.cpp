@@ -1,7 +1,7 @@
 #include "defines.h"
 #include "Display/Grid.h"
 #include "Display/Primitives.h"
-#include "Osci/Measurements/Measurements.h"
+#include "Osci/Measurements/AutoMeasurements.h"
 #include "Settings/Settings.h"
 #include "Utils/Math.h"
 
@@ -135,14 +135,14 @@ static int GetTopTable()
 
 int TableMeasures::NumCols()
 {
-    const int cols[] = { 1, 2, 5, 5, 5, 1, 2 };
+    static const int cols[] = { 1, 2, 5, 5, 5, 1, 2 };
     return cols[set.meas.number];
 }
 
 
 int TableMeasures::NumRows()
 {
-    int rows[] = { 1, 1, 1, 2, 3, 6, 6 };
+    static const int rows[] = { 1, 1, 1, 2, 3, 6, 6 };
     return rows[set.meas.number];
 }
 

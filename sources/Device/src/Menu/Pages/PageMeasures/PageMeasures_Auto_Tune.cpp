@@ -2,7 +2,7 @@
 #include "Display/Primitives.h"
 #include "Display/Symbols.h"
 #include "Menu/MenuItems.h"
-#include "Osci/Measurements/Measurements.h"
+#include "Osci/Measurements/AutoMeasurements.h"
 #include "Settings/Settings.h"
 
 

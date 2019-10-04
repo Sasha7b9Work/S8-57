@@ -3,7 +3,7 @@
 
 
 
-class Measure
+struct Measure
 {
 public:
     // Виды измерений

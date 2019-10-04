@@ -1,5 +1,5 @@
 #include "defines.h"
-#include "Osci/Measurements/Measurements.h"
+#include "Osci/Measurements/AutoMeasurements.h"
 #include "Settings/Settings.h"
 #include "Utils/Math.h"
 
