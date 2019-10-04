@@ -63,19 +63,16 @@ static uint prevRepeat = 0;
 static uint prevPause = 0;
 
 
-namespace Keyboard
-{
-    void SendCommand(Control control, Control::Action::E action);
+static void SendCommand(Control control, Control::Action::E action);
 
-    uint TimeBetweenRepeats(uint time);
-    /// При обнаружении нажатия кнопки сюда записывается время нажатия
-    uint timePress[NUM_RL][NUM_SL];
-    /// Установленное в true значение означает, что сохранять куда-либо информацию о её состоянии нельзя до отпускания (чтобы не было ложных
-    /// срабатываний типа Long
-    bool alreadyLong[NUM_RL][NUM_SL];
+static uint TimeBetweenRepeats(uint time);
+/// При обнаружении нажатия кнопки сюда записывается время нажатия
+static uint timePress[Keyboard::NUM_RL][Keyboard::NUM_SL];
+/// Установленное в true значение означает, что сохранять куда-либо информацию о её состоянии нельзя до отпускания (чтобы не было ложных
+/// срабатываний типа Long
+static bool alreadyLong[Keyboard::NUM_RL][Keyboard::NUM_SL];
 
-    bool init;
-}
+static bool init;
 
 
 
@@ -198,7 +195,7 @@ void Keyboard::Update()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Keyboard::SendCommand(Control control, Control::Action::E action)
+static void SendCommand(Control control, Control::Action::E action)
 {
     uint8 data[3] = {Command::ButtonPress, (uint8)control, (uint8)action};
     Transceiver::Transmitter::Send(data, 3);
@@ -267,7 +264,7 @@ bool Control::IsRepeatable() const
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-uint Keyboard::TimeBetweenRepeats(uint prev)
+static uint TimeBetweenRepeats(uint prev)
 {
     uint retValue = (uint)(prev / 1.1F);
 
