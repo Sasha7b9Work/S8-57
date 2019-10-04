@@ -1,16 +1,13 @@
 #pragma once
 
 
-namespace Averager
+struct AveragerTester
 {
-    namespace Tester
-    {
-        /// Задать количество измерений. Если аргумент отличается от того, который был передан при предыдущем вызове, происходит обнуление.
-        void SetCount(int enumAverage);
+    /// Задать количество измерений. Если аргумент отличается от того, который был передан при предыдущем вызове, происходит обнуление.
+    static void SetCount(int enumAverage);
 
-        void Process(const uint16 *x, const uint8 *y, int step);
+    static void Process(const uint16 *x, const uint8 *y, int step);
 
-        uint16 *X();
-        uint8 *Y();
-    }
-}
+    static uint16 *X();
+    static uint8 *Y();
+};

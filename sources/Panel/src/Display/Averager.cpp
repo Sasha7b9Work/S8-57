@@ -59,7 +59,7 @@ static void Copy8(uint8 *dest, const uint8 *src)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Averager::Tester::SetCount(int count)
+void AveragerTester::SetCount(int count)
 {
     if (enumAve != count)
     {
@@ -77,7 +77,7 @@ void Averager::Tester::SetCount(int count)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Averager::Tester::Process(const uint16 *dataX, const uint8 *dataY, int step)
+void AveragerTester::Process(const uint16 *dataX, const uint8 *dataY, int step)
 {
     Copy16(current[step].x, dataX);
     Copy8(current[step].y, dataY);
@@ -111,13 +111,13 @@ void Averager::Tester::Process(const uint16 *dataX, const uint8 *dataY, int step
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-uint16 *Averager::Tester::X()
+uint16 *AveragerTester::X()
 {
     return data.x;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-uint8 *Averager::Tester::Y()
+uint8 *AveragerTester::Y()
 {
     return data.y;
 }
