@@ -1,21 +1,14 @@
-#include "Painter.h"
+#include "defines.h"
 #include "Transceiver.h"
-#include "Hardware/CPU.h"
+#include "Display/Averager.h"
+#include "Display/Painter.h"
+#include "Display/Display.h"
 #include "Hardware/LTDC.h"
 #include "Utils/Math.h"
-#include "Colors.h"
-#include "Display/Display.h"
-#include <math.h>
-#include <string.h>
-#include <cstdlib>
+#include <cstring>
+#include <cmath>
 
 #include "Painter_common.h"
-#include "Averager.h"
-
-
-using namespace Transceiver;
-
-
 
 /// Установленное в true значение означает, что скриншот нужно заслать в устройство
 static int sendingString = -1;
@@ -58,9 +51,9 @@ void Painter::EndScene(void)
     {
 #define SIZE  (SIZE_STRING + 2)
         uint8 buffer[SIZE] = { Command::Screen, (uint8)sendingString };
-        memcpy(buffer + 2, Display::GetBuffer() + sendingString * SIZE_STRING, SIZE_STRING);
+        std::memcpy(buffer + 2, Display::GetBuffer() + sendingString * SIZE_STRING, SIZE_STRING);
 
-        Transmitter::Send(buffer, SIZE_STRING);
+        Transceiver::Transmitter::Send(buffer, SIZE_STRING);
 
         sendingString++;
         if (sendingString == 120)
@@ -124,8 +117,8 @@ void Painter::DrawLine(int x1, int y1, int x2, int y2)
 
     int x = x1;
     int y = y1;
-    int dx = (int)fabsf((float)(x2 - x1));
-    int dy = (int)fabsf((float)(y2 - y1));
+    int dx = (int)std::fabsf((float)(x2 - x1));
+    int dy = (int)std::fabsf((float)(y2 - y1));
     int s1 = Math::Sign(x2 - x1);
     int s2 = Math::Sign(y2 - y1);
     int temp;
@@ -265,9 +258,9 @@ void Painter::SendRow(int row)
 
     uint8 data[322] = { Command::Screen, (uint8)row };
 
-    memcpy(&data[2], points, 320);
+    std::memcpy(&data[2], points, 320);
 
-    Transmitter::Send(data, 322);
+    Transceiver::Transmitter::Send(data, 322);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

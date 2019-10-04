@@ -2,25 +2,22 @@
 #include "Transceiver.h"
 
 
-namespace Transceiver
+namespace Transmitter
 {
-    namespace Transmitter
-    {
-        void Init();
-        /// Инициализация пинов для режима передачи.
-        void InitPinsSend();
-    }
-
-    namespace Receiver
-    {
-        void Init();
-        /// Инициализация пинов для режима приёма.
-        void InitPinsRecieve();
-    }
-
-    /// Установленое в true значение означает, что идёт обмен с панелью
-    bool inInteraction = false;
+    void Init();
+    /// Инициализация пинов для режима передачи.
+    void InitPinsSend();
 }
+
+namespace Receiver
+{
+    void Init();
+    /// Инициализация пинов для режима приёма.
+    void InitPinsRecieve();
+}
+
+/// Установленое в true значение означает, что идёт обмен с панелью
+bool inInteraction = false;
 
 
 

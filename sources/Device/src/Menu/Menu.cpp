@@ -11,8 +11,6 @@
 #include <cstdio>
 
 
-using namespace Transceiver;
-
 const Page    *Menu::mainPage = nullptr;
 
 /// Итем, для которого нужно выводить подсказку

@@ -1,17 +1,7 @@
-#include "Keyboard.h"
+#include "defines.h"
+#include "Command.h"
 #include "Transceiver.h"
-#include "Display/Display.h"
-#include "Hardware/CPU.h"
-#include "Utils/DecoderPanel.h"
-#include "Hardware/Timer.h"
-#include "Utils/Math.h"
-#include "stm32f4xx_it.h"
-
-
-using namespace Transceiver;
-
-using namespace Transceiver;
-
+#include "Hardware/Keyboard.h"
 
 
 #define SL0 GPIO_PIN_14
@@ -211,7 +201,7 @@ void Keyboard::Update()
 void Keyboard::SendCommand(Control control, Control::Action::E action)
 {
     uint8 data[3] = {Command::ButtonPress, (uint8)control, (uint8)action};
-    Transmitter::Send(data, 3);
+    Transceiver::Transmitter::Send(data, 3);
 }   
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

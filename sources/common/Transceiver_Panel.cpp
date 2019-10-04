@@ -22,65 +22,59 @@
 #define FL0         PORT_FL0, PIN_FL0
 
 
-namespace Transceiver
+struct Mode
 {
-    struct Mode
+    enum E
     {
-        enum E
-        {
-            Disabled,   ///< Обмен между устройствами не идёт
-            Send,       ///< Передача данных в панель
-            Receive,    ///< Приём данных от панели
-            Forbidden   ///< Недопустимый режим
-        };
+        Disabled,   ///< Обмен между устройствами не идёт
+        Send,       ///< Передача данных в панель
+        Receive,    ///< Приём данных от панели
+        Forbidden   ///< Недопустимый режим
     };
+};
 
-    struct State
+struct State
+{
+    enum E
     {
-        enum E
-        {
-            Passive,
-            Active
-        };
+        Passive,
+        Active
     };
+};
 
 
-    /// /// Эту функцию нужно вызывать всякий раз при инициализации пинов на приём или передачу.
-    void(*CallbackOnInitPins)();
-    /// В этой функции все пины должны быть инициализированы на вход, чтобы не блокировать шины.
-    void DeInitPins();
-    /// Удалить из буфера переданные данные
-    void DiscardTransmittedData();
+/// /// Эту функцию нужно вызывать всякий раз при инициализации пинов на приём или передачу.
+void(*CallbackOnInitPins)();
+/// В этой функции все пины должны быть инициализированы на вход, чтобы не блокировать шины.
+void DeInitPins();
+/// Удалить из буфера переданные данные
+void DiscardTransmittedData();
 
-    Mode::E Mode_Device();
+Mode::E Mode_Device();
 
-    void Set_READY(State::E state);
-    ///  Деинициализировать D
-    void DeInit_FL0();
-   
-    namespace Transmitter
-    {
-        void InitDataPins();
-        /// Засылает данные в устройство, если таковые имеются
-        void TransmitData();
-        /// Установить данные на шину
-        void SetData(uint8 data);
-        /// Инициализировать FL0 на вывод - будем через него ссобщать о наличии/отутсвии данных для передачи
-        void Init_FL0_OUT();
+void Set_READY(State::E state);
+///  Деинициализировать D
+void DeInit_FL0();
 
-        void Set_FL0(State::E state);
-    }
+void InitDataPins();
+/// Засылает данные в устройство, если таковые имеются
+void TransmitData();
+/// Установить данные на шину
+void SetData(uint8 data);
+/// Инициализировать FL0 на вывод - будем через него ссобщать о наличии/отутсвии данных для передачи
+void Init_FL0_OUT();
 
-    namespace Receiver
-    {
-        /// Инициализирует 8 выводов данных на приём
-        void InitDataPins();
-    }
+void Set_FL0(State::E state);
 
-    static uint8 buffer[1024];
+struct Receiver
+{
+    /// Инициализирует 8 выводов данных на приём
+    static void InitDataPins();
+};
 
-    static uint _bytesInBuffer = 0;
-}
+static uint8 buffer[1024];
+
+static uint _bytesInBuffer = 0;
 
 
 
@@ -109,7 +103,7 @@ void Transceiver::Init()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Transceiver::DeInitPins()
+void DeInitPins()
 {
     DeInit_FL0();
 
@@ -117,7 +111,7 @@ void Transceiver::DeInitPins()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Transceiver::Receiver::InitDataPins()
+void Receiver::InitDataPins()
 {
     GPIO_InitTypeDef gpio;
     gpio.Pin = GPIO_PIN_0 | GPIO_PIN_1 | GPIO_PIN_2 | GPIO_PIN_3 | GPIO_PIN_4 | GPIO_PIN_5 | GPIO_PIN_6 | GPIO_PIN_7;   // D0...D7
@@ -127,7 +121,7 @@ void Transceiver::Receiver::InitDataPins()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Transceiver::Transmitter::InitDataPins()
+void InitDataPins()
 {
     GPIO_InitTypeDef gpio;
     gpio.Pin = GPIO_PIN_0 | GPIO_PIN_1 | GPIO_PIN_2 | GPIO_PIN_3 | GPIO_PIN_4 | GPIO_PIN_5 | GPIO_PIN_6 | GPIO_PIN_7;   // D0...D7
@@ -149,7 +143,7 @@ bool Transceiver::Update()
 
     if (mode == Mode::Receive)
     {
-        Transmitter::TransmitData();
+        TransmitData();
 
         return true;
     }
@@ -171,7 +165,7 @@ bool Transceiver::Update()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Transceiver::Transmitter::TransmitData()
+void TransmitData()
 {
     Init_FL0_OUT();                             // Инициализируем FL0 для того, чтобы выставить на нём признак наличия или отсутствия данных
 
@@ -200,7 +194,7 @@ void Transceiver::Transmitter::TransmitData()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Transceiver::DiscardTransmittedData()
+void DiscardTransmittedData()
 {
     if (_bytesInBuffer > 0)
     {
@@ -211,19 +205,19 @@ void Transceiver::DiscardTransmittedData()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Transceiver::Set_READY(State::E state)
+void Set_READY(State::E state)
 {
     HAL_GPIO_WritePin(READY, (state == State::Active) ? GPIO_PIN_SET : GPIO_PIN_RESET);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Transceiver::Transmitter::Set_FL0(State::E state)
+void Set_FL0(State::E state)
 {
     HAL_GPIO_WritePin(FL0, (state == State::Active) ? GPIO_PIN_SET : GPIO_PIN_RESET);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Transceiver::Transmitter::SetData(uint8 data)
+void SetData(uint8 data)
 {
     static const uint16 pins[8] = {GPIO_PIN_0, GPIO_PIN_1, GPIO_PIN_2, GPIO_PIN_3, GPIO_PIN_4, GPIO_PIN_5, GPIO_PIN_6, GPIO_PIN_7};
 
@@ -235,7 +229,7 @@ void Transceiver::Transmitter::SetData(uint8 data)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Transceiver::Transmitter::Init_FL0_OUT()
+void Init_FL0_OUT()
 {
     GPIO_InitTypeDef gpio;
     gpio.Pin = PIN_FL0;
@@ -244,7 +238,7 @@ void Transceiver::Transmitter::Init_FL0_OUT()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Transceiver::DeInit_FL0()
+void DeInit_FL0()
 {
     GPIO_InitTypeDef gpio;
     gpio.Pin = PIN_FL0;
@@ -254,7 +248,7 @@ void Transceiver::DeInit_FL0()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-Transceiver::Mode::E Transceiver::Mode_Device()
+Mode::E Mode_Device()
 {
     //                  MODE    0  1
     static const Mode::E modes [2][2] =

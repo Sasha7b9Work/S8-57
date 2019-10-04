@@ -24,49 +24,45 @@
 #define FL0         PORT_FL0, PIN_FL0
 
 
-namespace Transceiver
+struct Mode
 {
-
-    struct Mode
+    enum E
     {
-        enum E
-        {
-            Disabled,   ///< Обмен между устройствами не идёт
-            Send,       ///< Передача данных в панель
-            Receive,    ///< Приём данных от панели
-            Forbidden   ///< Недопустимый режим
-        };
+        Disabled,   ///< Обмен между устройствами не идёт
+        Send,       ///< Передача данных в панель
+        Receive,    ///< Приём данных от панели
+        Forbidden   ///< Недопустимый режим
     };
+};
 
-    struct State
+struct State
+{
+    enum E
     {
-        enum E
-        {
-            Passive,
-            Active
-        };
+        Passive,
+        Active
     };
+};
 
 
-    /// Установка режима работы
-    void Set_MODE(Mode::E mode);
+/// Установка режима работы
+void Set_MODE(Mode::E mode);
 
-    State::E State_READY();
+State::E State_READY();
 
-    namespace Receiver
-    {
-        /// Инициализация FL0 на чтение
-        void Init_FL0_IN();
-        /// Инициализировать пины для приёма из панели
-        void InitPinsReceive();
-        /// Возвращает состояние FL0
-        State::E State_FL0();
-        /// Считывает байт данных с ШД
-        uint8 ReadData();
-    }
+struct Receiver
+{
+    /// Инициализация FL0 на чтение
+    static void Init_FL0_IN();
+    /// Инициализировать пины для приёма из панели
+    static void InitPinsReceive();
+    /// Возвращает состояние FL0
+    static State::E State_FL0();
+    /// Считывает байт данных с ШД
+    static uint8 ReadData();
+};
 
-    extern bool inInteraction;
-}
+extern bool inInteraction;
 
 
 //                                      D0           D1           D2          D3          D4          D5          D6          D7
@@ -94,7 +90,7 @@ void Transceiver::Init()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Transceiver::Receiver::Init_FL0_IN()
+void Receiver::Init_FL0_IN()
 {
     GPIO_InitTypeDef gpio;
     gpio.Pin = PIN_FL0;
@@ -104,7 +100,7 @@ void Transceiver::Receiver::Init_FL0_IN()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Transceiver::Receiver::InitPinsReceive()
+void Receiver::InitPinsReceive()
 {
     GPIO_InitTypeDef gpio;
 
@@ -204,13 +200,13 @@ bool Transceiver::Update()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-Transceiver::State::E Transceiver::State_READY()
+State::E State_READY()
 {
     return (HAL_GPIO_ReadPin(READY) == GPIO_PIN_SET) ? State::Active : State::Passive;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Transceiver::Set_MODE(Mode::E mode)
+void Set_MODE(Mode::E mode)
 {
     if (mode == Mode::Send)
     {
@@ -236,13 +232,13 @@ void Transceiver::Set_MODE(Mode::E mode)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-Transceiver::State::E Transceiver::Receiver::State_FL0()
+State::E Receiver::State_FL0()
 {
     return (HAL_GPIO_ReadPin(FL0) == GPIO_PIN_SET) ? State::Active : State::Passive;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-uint8 Transceiver::Receiver::ReadData()
+uint8 Receiver::ReadData()
 {
     uint8 result = 0;
 

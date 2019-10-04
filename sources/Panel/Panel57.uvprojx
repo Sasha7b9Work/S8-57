@@ -1291,11 +1291,6 @@
               <FilePath>.\src\Display\PainterText.cpp</FilePath>
             </File>
             <File>
-              <FileName>PainterSTM429.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Display\PainterSTM429.cpp</FilePath>
-            </File>
-            <File>
               <FileName>Colors.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Display\Colors.cpp</FilePath>
@@ -1316,11 +1311,6 @@
               <FilePath>.\src\Display\Text.h</FilePath>
             </File>
             <File>
-              <FileName>Text_429.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Display\Text_429.cpp</FilePath>
-            </File>
-            <File>
               <FileName>Painter_common.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Display\Painter_common.h</FilePath>
@@ -1334,6 +1324,16 @@
               <FileName>Averager.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Display\Averager.h</FilePath>
+            </File>
+            <File>
+              <FileName>Painter_stm.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Display\Painter_stm.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Text_stm.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Display\Text_stm.cpp</FilePath>
             </File>
           </Files>
         </Group>

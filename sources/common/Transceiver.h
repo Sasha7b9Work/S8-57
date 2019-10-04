@@ -6,23 +6,22 @@
 
 
 
-namespace Transceiver
+struct Transceiver
 {
     /// Параметром передаётся указатель на функцию, которая будет вызываться при инициализации пинов на приём или передачу, чтобы внешняя программа знала, что нужно перенастроить выводы,
     /// если мы хотим использовать их в другом режиме.
-    void Init();
+    static void Init();
 
-    bool InInteraction();
+    static bool InInteraction();
 
     /// Функция циклического опроса. Принимает данные, если таковые имеются, и передаёт их через функцию, установленную в SetCallbackReceive.
-    bool Update();
+    static bool Update();
 
-    ////
-    namespace Transmitter
+    struct Transmitter
     {
-        void Send(const uint8 *data, uint size);
-        void Send(uint8 data);
-        void Send(uint8 byte0, uint8 byte1);
+        static void Send(const uint8 *data, uint size);
+        static void Send(uint8 data);
+        static void Send(uint8 byte0, uint8 byte1);
     };
 };
 

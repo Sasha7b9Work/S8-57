@@ -9,9 +9,6 @@
 #include <cmath>
 
 
-using namespace Transceiver;
-
-
 extern uint GlobalColors[256] =
 {
     /* 0  */    MAKE_COLOR(0x00, 0x00, 0x00),       // BLACK
@@ -328,7 +325,7 @@ void Color::WriteToDisplay(Color color)
     {
         lastColor = color;
 
-        Transmitter::Send(Command::Paint_SetColor, lastColor.value);
+        Transceiver::Transmitter::Send(Command::Paint_SetColor, lastColor.value);
     }
 }
 
@@ -339,5 +336,5 @@ void Color::LoadValueRGB()
 
     uint8 buffer[6] = { Command::Paint_SetPalette, value, (uint8)rgb, (uint8)(rgb >> 8), (uint8)(rgb >> 16), (uint8)(rgb >> 24) };
 
-    Transmitter::Send(buffer, 6);
+    Transceiver::Transmitter::Send(buffer, 6);
 }

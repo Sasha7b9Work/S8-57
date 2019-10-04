@@ -142,7 +142,6 @@ source_group(Hardware           FILES   ../../Device/src/Hardware/Battery.h
                                         ../../Device/src/Hardware/Timer.h
                                         ../../Device/src/Hardware/Timer.cpp
                                         ../../Device/src/Hardware/VCP.h
-                                                     src/Hardware/Transceiver_win.cpp
                                         ../../Device/src/Hardware/VCP.cpp)
 source_group(Hardware\\HAL      FILES   ../../Device/src/Hardware/HAL/HAL.h
                                         ../../Device/src/Hardware/HAL/HAL_ADC1.cpp
@@ -249,7 +248,6 @@ file(GLOB SOURCES   ../../common/_VS/*
                     ../../Device/src/Hardware/Timer.cpp
                     ../../Device/src/Hardware/VCP.h
                     ../../Device/src/Hardware/VCP.cpp
-                                 src/Hardware/Transceiver_win.cpp
 
                                  src/Hardware/HAL/HAL_win.cpp
                     ../../Device/src/Hardware/HAL/HAL.h

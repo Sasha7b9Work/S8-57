@@ -6,15 +6,11 @@
 #include <cstring>
 
 
-using namespace Transceiver;
-
-
-
 void Region::Fill(int x, int y, Color color)
 {
     color.SetAsCurrent();
     uint8 buffer[7] = { Command::Paint_FillRegion, (uint8)x, (uint8)(x >> 8), (uint8)y, (uint8)width, (uint8)(width >> 8), (uint8)height };
-    Transmitter::Send(buffer, 7);
+    Transceiver::Transmitter::Send(buffer, 7);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -22,7 +18,7 @@ void Rectangle::Draw(int x, int y, Color color)
 {
     color.SetAsCurrent();
     uint8 buffer[7] = { Command::Paint_DrawRectangle, (uint8)x, (uint8)(x >> 8), (uint8)y, (uint8)width, (uint8)(width >> 8), (uint8)height };
-    Transmitter::Send(buffer, 7);
+    Transceiver::Transmitter::Send(buffer, 7);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -32,7 +28,7 @@ void HLine::Draw(int x, int y, Color color)
     int x0 = x;
     int x1 = x0 + width;
     uint8 buffer[6] = { Command::Paint_DrawHLine, (uint8)y, (uint8)x0, (uint8)(x0 >> 8), (uint8)x1, (uint8)(x1 >> 8) };
-    Transmitter::Send(buffer, 6);
+    Transceiver::Transmitter::Send(buffer, 6);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -42,7 +38,7 @@ void VLine::Draw(int x, int y, Color color)
     int y0 = y;
     int y1 = y0 + height;
     uint8 buffer[5] = { Command::Paint_DrawVLine, (uint8)x, (uint8)(x >> 8), (uint8)y0, (uint8)y1 };
-    Transmitter::Send(buffer, 5);
+    Transceiver::Transmitter::Send(buffer, 5);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -50,7 +46,7 @@ void Point::Draw(int x, int y, Color color)
 {
     color.SetAsCurrent();
     uint8 buffer[4] = { Command::Paint_SetPoint, (uint8)x, (uint8)(x >> 8), (uint8)y };
-    Transmitter::Send(buffer, 4);
+    Transceiver::Transmitter::Send(buffer, 4);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -58,7 +54,7 @@ void Line::Draw(Color color)
 {
     color.SetAsCurrent();
     uint8 buffer[7] = { Command::Paint_DrawLine, (uint8)x0, (uint8)(x0 >> 8), (uint8)y0, (uint8)x1, (uint8)(x1 >> 8), (uint8)y1 };
-    Transmitter::Send(buffer, 7);
+    Transceiver::Transmitter::Send(buffer, 7);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -77,7 +73,7 @@ int Text::DrawSmall(int x, int y, Color color)
 
     std::memcpy(&buffer.data[5], (void *)text, std::strlen(text));
 
-    Transmitter::Send(buffer.data, sizeBuffer);
+    Transceiver::Transmitter::Send(buffer.data, sizeBuffer);
 
     return x + Font::GetLengthText(text) + 1;
 }
@@ -99,7 +95,7 @@ void Text::DrawBig(int x, int y, Color color)
         *pointer++ = (uint8)*text++;
     }
 
-    Transmitter::Send(buffer, 1 + 2 + 1 + 1 + numSymbols + 1);
+    Transceiver::Transmitter::Send(buffer, 1 + 2 + 1 + 1 + numSymbols + 1);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -115,7 +111,7 @@ void MultiHPointLine::Draw(int x, Color color)
         buffer[2] = (uint8)(x >> 8);
         buffer[3] = y[i];
 
-        Transmitter::Send(buffer, 6);
+        Transceiver::Transmitter::Send(buffer, 6);
     }
 }
 
@@ -134,6 +130,6 @@ void MultiVPointLine::Draw(int y0, Color color)
         buffer[2] = (uint8)(x >> 8);
         buffer[3] = (uint8)y0;
 
-        Transmitter::Send(buffer, 6);
+        Transceiver::Transmitter::Send(buffer, 6);
     }
 }

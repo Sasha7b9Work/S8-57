@@ -8,9 +8,6 @@
 #include "fontUGO2.inc"
 
 
-using namespace Transceiver;
-
-
 const Font *fonts[TypeFont::Count] = {&font5, &font8, &fontUGO, &fontUGO2, nullptr};
 const Font *font = &font8;
 
@@ -64,7 +61,7 @@ static void SendTypeFontToPanel(TypeFont::E type)
 
     if (prevType != type)
     {
-        Transmitter::Send(Command::Paint_SetFont, (uint8)type);
+        Transceiver::Transmitter::Send(Command::Paint_SetFont, (uint8)type);
         prevType = type;
     }
 }
@@ -117,7 +114,7 @@ void Font::SetSpacing(int) {}
 void Font::SetSpacing(int _spacing)
 {
     spacing = _spacing;
-    Transmitter::Send(Command::Paint_SetTextSpacing, (uint8)spacing);
+    Transceiver::Transmitter::Send(Command::Paint_SetTextSpacing, (uint8)spacing);
 }
 
 int Font::GetSpacing()
@@ -132,7 +129,7 @@ void Font::SetMinWidth(uint8) {}
 #else
 void Font::SetMinWidth(uint8 width)
 {
-    Transmitter::Send(Command::Paint_SetMinWidthFont, width);
+    Transceiver::Transmitter::Send(Command::Paint_SetMinWidthFont, width);
 }
 #endif
 
