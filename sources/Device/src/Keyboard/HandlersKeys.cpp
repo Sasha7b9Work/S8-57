@@ -434,7 +434,7 @@ static void Start()
     }
     else
     {
-        OsciC::OnPressStart();
+        ContextOsci::OnPressStart();
     }
 }
 

@@ -364,15 +364,15 @@ static void DrawRightPart(int x0, int y0)
         x += 2;
         int y = y0 + 1;
 
-        if (OsciC::IsRunning())       // Рабочий режим
+        if (ContextOsci::IsRunning())       // Рабочий режим
         {
             Char(Symbol8::PLAY).Draw4SymbolsInRect(x, 1);
         }
-        else if (OsciC::InStateStop())  // Режим остановки
+        else if (ContextOsci::InStateStop())  // Режим остановки
         {
             Region(10, 10).Fill(x + 3, y + 3);
         }
-        else if (OsciC::InStateWait())  // Режим ожидания сигнала
+        else if (ContextOsci::InStateWait())  // Режим ожидания сигнала
         {
             int w = 4;
             int h = 14;

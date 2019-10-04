@@ -93,7 +93,7 @@ void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc)
 
     if (Osci::InModeRandomizer())
     {
-        OsciC::SetValueADC((uint16)HAL_ADC_GetValue(hadc));
+        ContextOsci::SetValueADC((uint16)HAL_ADC_GetValue(hadc));
     }
 }
 

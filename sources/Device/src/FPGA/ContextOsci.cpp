@@ -3,88 +3,88 @@
 #include "FPGA/FPGA.h"
 
 
-uint16 &OsciC::pred = FPGA::pred;
-uint16 &OsciC::post = FPGA::post;
-uint &OsciC::timeStart = FPGA::timeStart;
-bool &OsciC::isRunning = FPGA::isRunning;
+uint16 &ContextOsci::pred = FPGA::pred;
+uint16 &ContextOsci::post = FPGA::post;
+uint &ContextOsci::timeStart = FPGA::timeStart;
+bool &ContextOsci::isRunning = FPGA::isRunning;
 
 
-void OsciC::LoadRegUPR()
+void ContextOsci::LoadRegUPR()
 {
     FPGA::LoadRegUPR();
 }
 
-void OsciC::LoadCalibratorMode()
+void ContextOsci::LoadCalibratorMode()
 {
     FPGA::LoadCalibratorMode();
 }
 
-void OsciC::OnPressStart()
+void ContextOsci::OnPressStart()
 {
     FPGA::OnPressStart();
 }
 
-bool OsciC::IsRunning()
+bool ContextOsci::IsRunning()
 {
     return FPGA::IsRunning();
 }
 
-void OsciC::ReadFlag()
+void ContextOsci::ReadFlag()
 {
     FPGA::ReadFlag();
 }
 
-void OsciC::GiveStart()
+void ContextOsci::GiveStart()
 {
     FPGA::GiveStart();
 }
 
-void OsciC::ReadData()
+void ContextOsci::ReadData()
 {
     FPGA::ReadData();
 }
 
-void OsciC::Reset()
+void ContextOsci::Reset()
 {
     FPGA::Reset();
 }
 
-bool OsciC::InStateStop()
+bool ContextOsci::InStateStop()
 {
     return FPGA_IN_STATE_STOP;
 }
 
-bool OsciC::InStateWait()
+bool ContextOsci::InStateWait()
 {
     return FPGA_IN_STATE_WAIT;
 }
 
-void OsciC::SetValueADC(uint16 value)
+void ContextOsci::SetValueADC(uint16 value)
 {
     FPGA::SetValueADC(value);
 }
 
-uint OsciC::BytesInChannel()
+uint ContextOsci::BytesInChannel()
 {
     return FPGA::BytesInChannel();
 }
 
-bool OsciC::GetFlag::PRED()
+bool ContextOsci::GetFlag::PRED()
 {
     return FPGA::GetFlag::PRED();
 }
 
-bool OsciC::GetFlag::HOLD_OFF()
+bool ContextOsci::GetFlag::HOLD_OFF()
 {
     return FPGA::GetFlag::HOLD_OFF();
 }
 
-bool OsciC::GetFlag::TRIG_READY()
+bool ContextOsci::GetFlag::TRIG_READY()
 {
     return FPGA::GetFlag::TRIG_READY();
 }
 
-bool OsciC::GetFlag::DATA_READY()
+bool ContextOsci::GetFlag::DATA_READY()
 {
     return FPGA::GetFlag::DATA_READY();
 }

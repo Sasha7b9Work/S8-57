@@ -8,7 +8,7 @@
 
 static void OnChanged_Calibrator(bool)
 {
-    OsciC::LoadCalibratorMode();
+    ContextOsci::LoadCalibratorMode();
 }
 
 DEF_CHOICE_2( cCalibrator, // -V206                                                                                                                //--- СЕРВИС - КАЛИБРАТОР - Калибратор ---

@@ -24,7 +24,7 @@ public:
     /// Заполнить вновь выделенную память нужными значениями
     static void FillNewData(DataOsci *data)
     {
-        uint bytesInChannel = OsciC::BytesInChannel();
+        uint bytesInChannel = ContextOsci::BytesInChannel();
 
         data->settings.Fill();
 

@@ -3,7 +3,7 @@
 #include "FPGA/MathFPGA.h"
 
 
-struct OsciC
+struct ContextOsci
 {
     static void LoadRegUPR();
 
