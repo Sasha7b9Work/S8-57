@@ -18,20 +18,20 @@ static void UpdateCursorsForLook();
 
 
 
-float CursorsOsci::PosU(Chan::E ch, int numCur)
+float CursorsMeasurements::PosU(Chan::E ch, int numCur)
 {
     return set.curs.posCurU[ch][numCur] / (Grid::Bottom() == Grid::FullBottom() ? 1.0F : 2.0F);
 }
 
 
-bool CursorsOsci::NecessaryDraw()
+bool CursorsMeasurements::NecessaryDraw()
 {
     return ((set.curs.cntrlU[set.curs.source] == CursorsControl::Disable) || (set.curs.cntrlT[set.curs.source] == CursorsControl::Disable)) &&
         (set.curs.showCursors || (Menu::OpenedItem() == PageCursorsMeasures::PageSet::self));
 }
 
 
-String CursorsOsci::Voltage(Chan::E source, int numCur)
+String CursorsMeasurements::Voltage(Chan::E source, int numCur)
 {
     float voltage = MathFPGA::VoltageCursor(PosU(source, numCur), set.ch[source].range, SET_RSHIFT(source));
     if (set.ch[source].divider == 1)
@@ -43,15 +43,15 @@ String CursorsOsci::Voltage(Chan::E source, int numCur)
 }
 
 
-String CursorsOsci::Time(Chan::E source, int numCur)
+String CursorsMeasurements::Time(Chan::E source, int numCur)
 {
-    float time = MathFPGA::TimeCursor(CursorsOsci::PosT(source, numCur), set.time.base);
+    float time = MathFPGA::TimeCursor(CursorsMeasurements::PosT(source, numCur), set.time.base);
 
     return ::Time(time).ToString(true);
 }
 
 
-float CursorsOsci::PosT(Chan::E ch, int num)
+float CursorsMeasurements::PosT(Chan::E ch, int num)
 {
     float retValue = 0.0F;
     std::memcpy(&retValue, &set.curs.posCurT[ch][num], sizeof(float));
@@ -59,13 +59,13 @@ float CursorsOsci::PosT(Chan::E ch, int num)
 }
 
 
-void CursorsOsci::SetCursPosT_temp(Chan::E ch, int num, float value)
+void CursorsMeasurements::SetCursPosT_temp(Chan::E ch, int num, float value)
 {
     std::memcpy(&set.curs.posCurT[ch][num], &value, sizeof(float));
 }
 
 
-void CursorsOsci::Draw()
+void CursorsMeasurements::Draw()
 {
     Chan::E source = set.curs.source;
 
@@ -84,8 +84,8 @@ void CursorsOsci::Draw()
 
         if (bothCursors)
         {
-            x0 = Grid::Left() + (int)CursorsOsci::PosT(source, 0);
-            x1 = Grid::Left() + (int)CursorsOsci::PosT(source, 1);
+            x0 = Grid::Left() + (int)CursorsMeasurements::PosT(source, 0);
+            x1 = Grid::Left() + (int)CursorsMeasurements::PosT(source, 1);
             y0 = Grid::Top() + (int)set.curs.posCurU[source][0];
             y1 = Grid::Top() + (int)set.curs.posCurU[source][1];
 
@@ -95,8 +95,8 @@ void CursorsOsci::Draw()
 
         if (set.curs.cntrlT[set.curs.source] == CursorsControl::Disable)
         {
-            DrawVertical((int)CursorsOsci::PosT(source, 0), y0);
-            DrawVertical((int)CursorsOsci::PosT(source, 1), y1);
+            DrawVertical((int)CursorsMeasurements::PosT(source, 0), y0);
+            DrawVertical((int)CursorsMeasurements::PosT(source, 1), y1);
         }
         if (set.curs.cntrlU[set.curs.source] == CursorsControl::Disable)
         {
@@ -166,7 +166,7 @@ static void UpdateCursorsForLook()
 }
 
 
-String CursorsOsci::PercentsU(Chan::E source)
+String CursorsMeasurements::PercentsU(Chan::E source)
 {
     /// \todo Тут дикая дичь. Эта строчка вызывает HardFault. Возможно, из-за включенного выравнивания Settings. Надо подумать
     // float dPerc = dUperc(source);     
@@ -178,7 +178,7 @@ String CursorsOsci::PercentsU(Chan::E source)
 }
 
 
-String CursorsOsci::PercentsT(Chan::E source)
+String CursorsMeasurements::PercentsT(Chan::E source)
 {
     float dPerc = 100.0F;
     std::memcpy(&dPerc, &set.curs.deltaT100percents[source], sizeof(float));

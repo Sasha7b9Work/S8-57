@@ -46,17 +46,17 @@ static const StructMeasure sMeas[Measure::Type::Number] =
 
 bool Measure::IsActive()
 {
-    if(MeasurementsOsci::posActive >= TableMeasures::NumCols() * TableMeasures::NumRows())
+    if(AutoMeasurements::posActive >= TableMeasures::NumCols() * TableMeasures::NumRows())
     {
-        MeasurementsOsci::posActive = 0;
+        AutoMeasurements::posActive = 0;
     }
-    return (row * TableMeasures::NumCols() + col) == MeasurementsOsci::posActive;
+    return (row * TableMeasures::NumCols() + col) == AutoMeasurements::posActive;
 }
 
 
 void Measure::SetActive(int row, int col)
 {
-    MeasurementsOsci::posActive = (int8)(row * TableMeasures::NumCols() + col);
+    AutoMeasurements::posActive = (int8)(row * TableMeasures::NumCols() + col);
 }
 
 
@@ -68,7 +68,7 @@ char Measure::GetChar(Measure::Type::E measure)
 
 void Measure::ChangeActive(int delta)
 {
-    Measure measure = MeasurementsOsci::GetActiveMeasure();
+    Measure measure = AutoMeasurements::GetActiveMeasure();
 
     int row = measure.row;
     int col = measure.col;
@@ -124,24 +124,24 @@ Measure::Type::E Measure::GetType()
 
 void Measure::ShortPressOnSmallButonMarker()
 {
-    if(set.meas.measures[MeasurementsOsci::posActive] == set.meas.marked)
+    if(set.meas.measures[AutoMeasurements::posActive] == set.meas.marked)
     {
         set.meas.marked = Measure::Type::None;
     }
     else
     {
-        set.meas.marked = set.meas.measures[MeasurementsOsci::posActive];
+        set.meas.marked = set.meas.measures[AutoMeasurements::posActive];
     }
 }
 
 
 void Measure::SetMarkerVoltage(Chan::E ch, int num, float value)
 {
-    MeasurementsOsci::markerVoltage[ch][num] = (int)value;
+    AutoMeasurements::markerVoltage[ch][num] = (int)value;
 }
 
 
 void Measure::SetMarkerTime(Chan::E ch, int num, int value)
 {
-    MeasurementsOsci::markerTime[ch][num] = value;
+    AutoMeasurements::markerTime[ch][num] = value;
 }

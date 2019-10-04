@@ -88,13 +88,13 @@ static const MeasureCalculate sMeas[Measure::Type::Number] =
     {"CalculateVoltageVybrosPlus",  CalculateVoltageVybrosPlus,  Voltage2String,                    false, {}},
     {"CalculateVoltageVybrosMinus", CalculateVoltageVybrosMinus, Voltage2String,                    false, {}},
     {"CalculatePeriod",             CalculatePeriod,             Time2String,                       false, {}},
-    {"CalculateFreq",               CalculateFreq,               MeasurementsOsci::Freq2String,     false, {}},
+    {"CalculateFreq",               CalculateFreq,               AutoMeasurements::Freq2String,     false, {}},
     {"CalculateTimeNarastaniya",    CalculateTimeNarastaniya,    Time2String,                       false, {}},
     {"CalculateTimeSpada",          CalculateTimeSpada,          Time2String,                       false, {}},
     {"CalculateDurationPlus",       CalculateDurationPlus,       Time2String,                       false, {}},
     {"CalculateDurationPlus",       CalculateDurationMinus,      Time2String,                       false, {}},
-    {"CalculateSkvaznostPlus",      CalculateSkvaznostPlus,      MeasurementsOsci::Float2String,    false, {}},
-    {"CalculateSkvaznostMinus",     CalculateSkvaznostMinus,     MeasurementsOsci::Float2String,    false, {}},
+    {"CalculateSkvaznostPlus",      CalculateSkvaznostPlus,      AutoMeasurements::Float2String,    false, {}},
+    {"CalculateSkvaznostMinus",     CalculateSkvaznostMinus,     AutoMeasurements::Float2String,    false, {}},
     {"CalculateDelayPlus",          CalculateDelayPlus,          Time2String,                       false, {}},
     {"CalculateDelayMinus",         CalculateDelayMinus,         Time2String,                       false, {}},
     {"CalculatePhazaPlus",          CalculatePhazaPlus,          Phase2String,                      false, {}},
@@ -102,9 +102,9 @@ static const MeasureCalculate sMeas[Measure::Type::Number] =
 };
 
 
-int MeasurementsOsci::markerTime[Chan::Size][2] = {{Integer::ERROR}, {Integer::ERROR}};
-int MeasurementsOsci::markerVoltage[Chan::Size][2] = {{Integer::ERROR}, {Integer::ERROR}};
-int8 MeasurementsOsci::posActive = 0;
+int AutoMeasurements::markerTime[Chan::Size][2] = {{Integer::ERROR}, {Integer::ERROR}};
+int AutoMeasurements::markerVoltage[Chan::Size][2] = {{Integer::ERROR}, {Integer::ERROR}};
+int8 AutoMeasurements::posActive = 0;
 
 typedef struct
 {
@@ -139,7 +139,7 @@ static void LimitationData(Chan::E ch, uint numBytes);
 
 
 
-void MeasurementsOsci::CalculateMeasures()
+void AutoMeasurements::CalculateMeasures()
 {
     if(!set.meas.show || !isSet)
     {
@@ -1332,7 +1332,7 @@ String Measure::GetStringMeasure(Chan::E ch, char* buffer, int lenBuf)
 }
 
 
-char* MeasurementsOsci::Freq2String(float freq, bool, char buffer[20])
+char* AutoMeasurements::Freq2String(float freq, bool, char buffer[20])
 {
     std::strcpy(buffer, Frequency(freq).ToString().CString());
     return buffer;
@@ -1359,7 +1359,7 @@ char* Phase2String(float phase, bool, char buffer[20])
 }
 
 
-char* MeasurementsOsci::Float2String(float value, bool always, char buffer[20])
+char* AutoMeasurements::Float2String(float value, bool always, char buffer[20])
 {
     std::strcpy(buffer, Float(value).ToString(always, 4).CString());
     return buffer;
@@ -1387,13 +1387,13 @@ static float Divide(float val1, float val2)
 }
 
 
-bool MeasurementsOsci::DataIsSetting()
+bool AutoMeasurements::DataIsSetting()
 {
     return isSet;
 }
 
 
-void MeasurementsOsci::SetData()
+void AutoMeasurements::SetData()
 {
     isSet = (DATA != nullptr);
 
@@ -1427,7 +1427,7 @@ void MeasurementsOsci::SetData()
 }
 
 
-Measure MeasurementsOsci::GetActiveMeasure()
+Measure AutoMeasurements::GetActiveMeasure()
 {
     int row = posActive / TableMeasures::NumCols();
     int col = posActive - row * TableMeasures::NumCols();

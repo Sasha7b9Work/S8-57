@@ -1,7 +1,7 @@
 #pragma once
 
 
-struct CursorsOsci
+struct CursorsMeasurements
 {
     /// Нарисовать курсоры и результаты курсорных измерений
     static void Draw();

@@ -22,7 +22,7 @@ void PageChoiceMeasures::OnOpenCloseEvent()
     ChangeState();
     if (isActive)
     {
-        posCursor = (int8)set.meas.measures[MeasurementsOsci::posActive];
+        posCursor = (int8)set.meas.measures[AutoMeasurements::posActive];
     }
 }
 
@@ -56,7 +56,7 @@ void PageChoiceMeasures::OnKeyEvent(const KeyEvent &event)
             // здесь ничего делать не нужно
         }
 
-        set.meas.measures[MeasurementsOsci::posActive] = (Measure::Type::E)posCursor;
+        set.meas.measures[AutoMeasurements::posActive] = (Measure::Type::E)posCursor;
         Color::ResetFlash();
     }
     else

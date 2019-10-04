@@ -44,7 +44,7 @@ static void DrawSpectrum();
 
 void DisplayOsci::PainterData::DrawData()
 {
-    if (MeasurementsOsci::DataIsSetting())
+    if (AutoMeasurements::DataIsSetting())
     {
         static const pFuncVV func[ModeWork::Number] =
         {
@@ -114,11 +114,11 @@ static void WriteParametersFFT(Chan::E ch, float freq0, float density0, float fr
     char buffer[20];
     Color::FILL.SetAsCurrent();
 
-    Text(MeasurementsOsci::Freq2String(freq0, false, buffer)).Draw(x, y);
+    Text(AutoMeasurements::Freq2String(freq0, false, buffer)).Draw(x, y);
 
     y += dY;
 
-    Text(MeasurementsOsci::Freq2String(freq1, false, buffer)).Draw(x, y);
+    Text(AutoMeasurements::Freq2String(freq1, false, buffer)).Draw(x, y);
 
     if (Chan(ch).IsA())
     {
@@ -131,11 +131,11 @@ static void WriteParametersFFT(Chan::E ch, float freq0, float density0, float fr
 
     Color::CHAN[ch].SetAsCurrent();
 
-    Text((set.fft.scale == ScaleFFT::Log) ? SU::Db2String(density0, 4, buffer) : MeasurementsOsci::Float2String(density0, false, buffer)).Draw(x, y);
+    Text((set.fft.scale == ScaleFFT::Log) ? SU::Db2String(density0, 4, buffer) : AutoMeasurements::Float2String(density0, false, buffer)).Draw(x, y);
 
     y += dY;
 
-    Text((set.fft.scale == ScaleFFT::Log) ? SU::Db2String(density1, 4, buffer) : MeasurementsOsci::Float2String(density1, false, buffer)).Draw(x, y);
+    Text((set.fft.scale == ScaleFFT::Log) ? SU::Db2String(density1, 4, buffer) : AutoMeasurements::Float2String(density1, false, buffer)).Draw(x, y);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------

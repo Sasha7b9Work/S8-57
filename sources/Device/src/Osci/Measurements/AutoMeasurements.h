@@ -48,7 +48,7 @@ struct PageChoiceMeasures
 };
 
 
-struct MeasurementsOsci
+struct AutoMeasurements
 {
     /// \brief ”становить сигнал дл€ обработки. ƒанные берутс€ из DS, inA, inB.
     /// ¬ыходные данные, соответствующие текущим настройками set, рассчитываютс€ сразу и записываютс€ в outA, outB.

@@ -16,7 +16,7 @@ static void DrawScreenArea();
 
 void DisplayOsci::MemoryWindow::Draw()
 {
-    if (CursorsOsci::NecessaryDraw())
+    if (CursorsMeasurements::NecessaryDraw())
     {
         return;
     }

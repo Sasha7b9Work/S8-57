@@ -24,7 +24,7 @@ void TableMeasures::Draw()
 
     top = Grid::Bottom();
 
-    MeasurementsOsci::CalculateMeasures();
+    AutoMeasurements::CalculateMeasures();
 
     for (int str = 0; str < NumRows(); str++)
     {

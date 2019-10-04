@@ -45,7 +45,7 @@ void DisplayOsci::Update()
 
     DrawCursorTrigLevel();
     
-    CursorsOsci::Draw();
+    CursorsMeasurements::Draw();
 
     BottomPart::Draw(273, Grid::Bottom() + 1);
     
