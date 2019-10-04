@@ -2,16 +2,16 @@
 
 
 
-namespace CF
+struct CF
 {
     /// ¬ыводит в консоль num первых значений из buffer в шестнадцатиричном виде
-    void LogBufferU8_HEX(const uint8 *buffer, int num);
+    static void LogBufferU8_HEX(const uint8 *buffer, int num);
     /// ¬ыводит в консоль num первых значений из buffer в дес€тичном виде
-    void LogBufferU8_DEC(const uint8 *buffer, int num);
+    static void LogBufferU8_DEC(const uint8 *buffer, int num);
     /// ¬озвращает число слов в строке string
-    int NumWords(char *string);
+    static int NumWords(char *string);
     /// ¬озвращает указатель на n слово в строке. ≈сли char == 0 - слова нет, если ret value == 0xffffffff - выходной буфер слишком мал
-    char *GetWord(char *string, int n, char *out, int size);
+    static char *GetWord(char *string, int n, char *out, int size);
 };
 
 
