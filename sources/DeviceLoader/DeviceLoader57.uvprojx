@@ -425,16 +425,6 @@
               <FileType>8</FileType>
               <FilePath>..\common\Transceiver_Device.cpp</FilePath>
             </File>
-            <File>
-              <FileName>DataBus.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\common\DataBus.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>DataBus.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\common\DataBus.h</FilePath>
-            </File>
           </Files>
         </Group>
         <Group>

@@ -2,6 +2,9 @@
 #include "Transceiver.h"
 
 
+DataBusMode::E DataBusMode::state = DataBusMode::FPGA;
+
+
 namespace Transmitter
 {
     void Init();

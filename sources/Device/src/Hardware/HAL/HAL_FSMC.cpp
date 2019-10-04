@@ -1,12 +1,8 @@
-#include <stm32f4xx_hal.h>
 #include "defines.h"
-#include "DataBus.h"
-#include "HAL.h"
+#include "Transceiver.h"
 #include "Hardware/Timer.h"
-#include "Keyboard/DecoderDevice.h"
-#include "Utils/Debug.h"
-#include "Osci/Osci.h"
-#include "Recorder/Recorder.h"
+#include "Hardware/HAL/HAL.h"
+#include <stm32f4xx_hal.h>
 
 
 #define ADDR_ALTERA1    ((uint8 *)NOR_MEMORY_ADRESS1)
