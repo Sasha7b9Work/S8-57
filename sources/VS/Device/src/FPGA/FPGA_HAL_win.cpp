@@ -2,7 +2,7 @@
 #include "FPGA/FPGA.h"
 
 
-void _FPGA::ReadFlag()
+void FPGA::ReadFlag()
 {
     flag = 0xFFFF;
 }

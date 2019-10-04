@@ -13,7 +13,7 @@
 using namespace Address;
 
 
-uint16 _FPGA::flag = 0;
+uint16 FPGA::flag = 0;
 
 struct PinStruct
 {
@@ -44,7 +44,7 @@ static PinStruct pins[FPin::Number] =
 
 
 
-void _FPGA::LoadRegUPR()
+void FPGA::LoadRegUPR()
 {
     uint8 data = 0;
 
@@ -68,7 +68,7 @@ void _FPGA::LoadRegUPR()
 }
 
 
-void _FPGA::GPIO::Init()
+void FPGA::GPIO::Init()
 {
     for (int i = 0; i < FPin::Number; i++)
     {
@@ -77,13 +77,13 @@ void _FPGA::GPIO::Init()
 }
 
 
-uint16 _FPGA::GPIO::GetPin(FPin::E pin)
+uint16 FPGA::GPIO::GetPin(FPin::E pin)
 {
     return pins[pin].pin;
 }
 
 
-void _FPGA::GPIO::WriteRegisters(FPin::E cs, uint16 value)
+void FPGA::GPIO::WriteRegisters(FPin::E cs, uint16 value)
 {
     ResetPin(cs);
 
@@ -116,79 +116,79 @@ void _FPGA::GPIO::WriteRegisters(FPin::E cs, uint16 value)
 }
 
 
-void _FPGA::GPIO::SetPin(FPin::E pin)
+void FPGA::GPIO::SetPin(FPin::E pin)
 {
     HAL_PIO::Set(PORT(pin), GetPin(pin));
 }
 
 
-void _FPGA::GPIO::ResetPin(FPin::E pin)
+void FPGA::GPIO::ResetPin(FPin::E pin)
 {
     HAL_PIO::Reset(PORT(pin), GetPin(pin));
 }
 
 
-void _FPGA::GPIO::WritePin(FPin::E pin, int enable)
+void FPGA::GPIO::WritePin(FPin::E pin, int enable)
 {
     HAL_PIO::Write(PORT(pin), GetPin(pin), enable ? HState::Enabled : HState::Disabled);
 }
 
 
-bool _FPGA::GetFlag::DATA_READY()
+bool FPGA::GetFlag::DATA_READY()
 {
     return _GET_BIT(flag, Flag::_DATA_READY) == 1;
 }
 
 
-bool _FPGA::GetFlag::TRIG_READY()
+bool FPGA::GetFlag::TRIG_READY()
 {
     return _GET_BIT(flag, Flag::_TRIG_READY) == 1;
 }
 
 
-bool _FPGA::GetFlag::HOLD_OFF()
+bool FPGA::GetFlag::HOLD_OFF()
 {
     return _GET_BIT(flag, Flag::_HOLD_OFF_FLAG) == 1;
 }
 
 
-bool _FPGA::GetFlag::PRED()
+bool FPGA::GetFlag::PRED()
 {
     return _GET_BIT(flag, Flag::_PRED) == 1;
 }
 
 
-bool _FPGA::GetFlag::FREQ_READY()
+bool FPGA::GetFlag::FREQ_READY()
 {
     return _GET_BIT(flag, Flag::_FREQ_READY) == 1;
 }
 
 
-bool _FPGA::GetFlag::PERIOD_READY()
+bool FPGA::GetFlag::PERIOD_READY()
 {
     return _GET_BIT(flag, Flag::_PERIOD_READY) == 1;
 }
 
 
-bool _FPGA::GetFlag::FREQ_OVERFLOW()
+bool FPGA::GetFlag::FREQ_OVERFLOW()
 {
     return _GET_BIT(flag, Flag::_FREQ_OVERFLOW) == 1;
 }
 
 
-bool _FPGA::GetFlag::PERIOD_OVERFLOW()
+bool FPGA::GetFlag::PERIOD_OVERFLOW()
 {
     return _GET_BIT(flag, Flag::_PERIOD_OVERFLOW) == 1;
 }
 
 
-bool _FPGA::GetFlag::FREQ_IN_PROCESS()
+bool FPGA::GetFlag::FREQ_IN_PROCESS()
 {
     return _GET_BIT(flag, Flag::_FREQ_IN_PROCESS) == 1;
 }
 
 
-bool _FPGA::GetFlag::PERIOD_IN_PROCESS()
+bool FPGA::GetFlag::PERIOD_IN_PROCESS()
 {
     return _GET_BIT(flag, Flag::_PERIOD_IN_PROCESS) == 1;
 }

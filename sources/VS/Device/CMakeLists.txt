@@ -111,6 +111,7 @@ source_group(FPGA               FILES   ../../Device/src/FPGA/AD9286.h
                                         ../../Device/src/FPGA/Context.cpp
                                         ../../Device/src/FPGA/Context.h
                                         ../../Device/src/FPGA/FPGA.cpp
+                                        ../../Device/src/FPGA/FPGA.h
                                                      src/FPGA/FPGA_win.cpp
                                         ../../Device/src/FPGA/FPGA_HAL.h
                                         ../../Device/src/FPGA/FPGA_HAL.cpp

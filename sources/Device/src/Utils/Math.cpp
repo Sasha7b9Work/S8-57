@@ -225,7 +225,7 @@ void Math::MinMaxFromArray(const uint8 *data, int firstPoint, int lastPoint, uin
 uint8 Math::MaxFromArrayWithErrorCode(const uint8 *data, int firstPoint, int lastPoint)
 {
     uint8 max = Math::MaxFromArray(data, firstPoint, lastPoint);
-    if (max >= _FPGA::VALUE::MAX)
+    if (max >= FPGA::VALUE::MAX)
     {
         max = Uint8::ERROR;
     }
@@ -236,7 +236,7 @@ uint8 Math::MaxFromArrayWithErrorCode(const uint8 *data, int firstPoint, int las
 uint8 Math::MinFromArrayWithErrorCode(const uint8 *data, int firstPoint, int lastPoint)
 {
     uint8 min = Math::MinFromArray(data, firstPoint, lastPoint);
-    if (min < _FPGA::VALUE::MIN || min >= _FPGA::VALUE::MAX)
+    if (min < FPGA::VALUE::MIN || min >= FPGA::VALUE::MAX)
     {
         min = Uint8::ERROR;
     }
