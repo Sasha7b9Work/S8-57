@@ -5,12 +5,12 @@
 DataBusMode::E DataBusMode::state = DataBusMode::FPGA;
 
 
-namespace Transmitter
-{
-    void Init();
-    /// Инициализация пинов для режима передачи.
-    void InitPinsSend();
-}
+//namespace Transmitter
+//{
+//    void Init();
+//    /// Инициализация пинов для режима передачи.
+//    void InitPinsSend();
+//}
 
 namespace Receiver
 {

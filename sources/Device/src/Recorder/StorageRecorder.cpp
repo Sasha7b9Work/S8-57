@@ -22,6 +22,7 @@ struct Stack
     }
 };
 
+FrameRec Stack::frame;
 
 
 uint FrameRec::NumPoints()
