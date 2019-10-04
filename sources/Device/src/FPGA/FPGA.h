@@ -53,29 +53,36 @@ private:
     static void ClearDataRand();
     /// Включить/выключить калибратор.
     static void LoadCalibratorMode();
+
+    static void LoadRegUPR();
+
+    static void ReadFlag();
+
+    static bool ReadDataChanenlRand(Chan::E ch, const uint8 *address, uint8 *data);
+
+    static int CalculateShift();
+
+    static uint16 flag;
+    static uint16 post;
+    static uint16 pred;
     /// Время подачи старта
     static uint timeStart;
     /// Значение, считанное из handleADC
     static uint16 valueADC;
-    
+
     static StateWorkFPGA fpgaStateWork;
 
     static bool isRunning;
 
-    static uint16 post;
-    static uint16 pred;
 
-    struct FreqMeter
+    struct GPIO
     {
-        static float GetFreq();
-    };
-
-    struct ForTester
-    {
-        static bool Read(uint16 *dataA, uint8 *dataB);
-        /// Запустить цикл чтения для тестер-компонента. В течение time секунд должно быть считано numPoints точек
-        /// Если возвращает false - старт не прошёл
-        static bool Start();
+        static void Init();
+        static uint16 GetPin(FPin::E pin);
+        static void WritePin(FPin::E pin, int enable);
+        static void SetPin(FPin::E pin);
+        static void ResetPin(FPin::E pin);
+        static void WriteRegisters(FPin::E cs, uint16 value);
     };
 
     struct GetFlag
@@ -91,24 +98,4 @@ private:
         static bool FREQ_IN_PROCESS();
         static bool PERIOD_IN_PROCESS();
     };
-
-    static void LoadRegUPR();
-
-    static void ReadFlag();
-
-    static uint16 flag;
-
-    struct GPIO
-    {
-        static void Init();
-        static uint16 GetPin(FPin::E pin);
-        static void WritePin(FPin::E pin, int enable);
-        static void SetPin(FPin::E pin);
-        static void ResetPin(FPin::E pin);
-        static void WriteRegisters(FPin::E cs, uint16 value);
-    };
-
-    static bool ReadDataChanenlRand(Chan::E ch, const uint8 *address, uint8 *data);
-
-    static int CalculateShift();
 };
