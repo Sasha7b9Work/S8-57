@@ -2,16 +2,6 @@
 #include "Settings/Settings.h"
 
 
-
-
-/** @addtogroup Hardware
- *  @{
- *  @defgroup Sound
- *  @brief Работа со звуковым динамиком
- *  @{
- */
-
-
 struct TypeWave
 {
     enum E
@@ -23,39 +13,34 @@ struct TypeWave
 };
 
 
-namespace Beeper
+struct Beeper
 {
-    void Init();
-
+    static void Init();
     /// Звук нажатия на кнопку.
-    void ButtonPress();
+    static void ButtonPress();
     /// Функция вызовет звук отпускаемой кнопки только если перед этим проигрывался звук нажатия кнопки.
-    void ButtonRelease();
+    static void ButtonRelease();
 
-    void GovernorChangedValue();
+    static void GovernorChangedValue();
     
-    void RegulatorShiftRotate();
+    static void RegulatorShiftRotate();
 
-    void RegulatorSwitchRotate();
+    static void RegulatorSwitchRotate();
 
-    void WarnBeepBad();
+    static void WarnBeepBad();
 
-    void WarnBeepGood();
+    static void WarnBeepGood();
     /// Эту функцию надо вызывать перед записью/стиранием ППЗУ. Звук конфликтует с ППЗУ.
-    void WaitForCompletion();
+    static void WaitForCompletion();
 
-    void Beep(TypePress::E type);
+    static void Beep(TypePress::E type);
 
-    void Test();
+    static void Test();
 
-    namespace Bell
+    struct Bell
     {
-        void On();
+        static void On();
 
-        void Off();
-    }
+        static void Off();
+    };
 };
-
-
-/** @}  @}
- */
