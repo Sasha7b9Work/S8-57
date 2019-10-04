@@ -711,11 +711,6 @@
               <FilePath>.\src\FPGA\FPGA_HAL_stm.cpp</FilePath>
             </File>
             <File>
-              <FileName>FPGA_Settings.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\FPGA\FPGA_Settings.cpp</FilePath>
-            </File>
-            <File>
               <FileName>FPGA_stm.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\FPGA\FPGA_stm.cpp</FilePath>
@@ -764,6 +759,11 @@
               <FileName>ContextOsci.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\FPGA\ContextOsci.h</FilePath>
+            </File>
+            <File>
+              <FileName>SettingsFPGA.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\FPGA\SettingsFPGA.cpp</FilePath>
             </File>
           </Files>
         </Group>
