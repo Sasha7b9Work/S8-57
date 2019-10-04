@@ -28,9 +28,9 @@ void TrigInput::Load()
         {BIN_U8(00000000), BIN_U8(00000110)}  // -V2501      // อื
     };
 
-    FPGA::GPIO::WritePin(FPin::A1S, _GET_BIT(datas[set.trig.input][set.trig.source], 2));
-    FPGA::GPIO::WritePin(FPin::A0S, _GET_BIT(datas[set.trig.input][set.trig.source], 1));
-    FPGA::GPIO::WritePin(FPin::LFS, _GET_BIT(datas[set.trig.input][set.trig.source], 0));
+    GPIO::WritePin(FPin::A1S, _GET_BIT(datas[set.trig.input][set.trig.source], 2));
+    GPIO::WritePin(FPin::A0S, _GET_BIT(datas[set.trig.input][set.trig.source], 1));
+    GPIO::WritePin(FPin::LFS, _GET_BIT(datas[set.trig.input][set.trig.source], 0));
 }
 
 
@@ -51,7 +51,7 @@ void RShift::Load(Chan::E ch)
         shift = (uint16)((int)shift - Tester::DeltaRShiftA());
     }
 
-    FPGA::GPIO::WriteRegisters(FPin::SPI3_CS1, (uint16)(mask[ch] | (shift << 2)));
+    GPIO::WriteRegisters(FPin::SPI3_CS1, (uint16)(mask[ch] | (shift << 2)));
 
     Osci::Restart();
 }
@@ -342,7 +342,7 @@ void Bandwidth::Load()
     Chan::E ch = GetChannel();
     static const FPin::E pinsLF[2] = { FPin::LF1, FPin::LF2 };
 
-    FPGA::GPIO::WritePin(pinsLF[ch], (set.ch[ch].bandwidth.value == Bandwidth::_20MHz));
+    GPIO::WritePin(pinsLF[ch], (set.ch[ch].bandwidth.value == Bandwidth::_20MHz));
 }
 
 

@@ -34,13 +34,13 @@ void FPGA::Init()
 {
     givingStart = false;
 
-    FPGA::GPIO::Init();
+    GPIO::Init();
 
-    FPGA::GPIO::SetPin(FPin::SPI3_CS1);
-    FPGA::GPIO::SetPin(FPin::SPI3_CS2);
+    GPIO::SetPin(FPin::SPI3_CS1);
+    GPIO::SetPin(FPin::SPI3_CS2);
 
-    FPGA::GPIO::ResetPin(FPin::SPI3_SCK);
-    FPGA::GPIO::ResetPin(FPin::SPI3_DAT);
+    GPIO::ResetPin(FPin::SPI3_SCK);
+    GPIO::ResetPin(FPin::SPI3_DAT);
 
     AD9286::Init();
 

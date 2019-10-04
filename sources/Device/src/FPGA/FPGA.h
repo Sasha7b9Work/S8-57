@@ -62,7 +62,6 @@ private:
 
     static int CalculateShift();
 
-    static uint16 flag;
     static uint16 post;
     static uint16 pred;
     /// Время подачи старта
@@ -74,16 +73,7 @@ private:
 
     static bool isRunning;
 
-
-    struct GPIO
-    {
-        static void Init();
-        static uint16 GetPin(FPin::E pin);
-        static void WritePin(FPin::E pin, int enable);
-        static void SetPin(FPin::E pin);
-        static void ResetPin(FPin::E pin);
-        static void WriteRegisters(FPin::E cs, uint16 value);
-    };
+    static uint16 flag;
 
     struct GetFlag
     {
@@ -98,4 +88,14 @@ private:
         static bool FREQ_IN_PROCESS();
         static bool PERIOD_IN_PROCESS();
     };
+};
+
+struct GPIO
+{
+    static void Init();
+    static uint16 GetPin(FPin::E pin);
+    static void WritePin(FPin::E pin, int enable);
+    static void SetPin(FPin::E pin);
+    static void ResetPin(FPin::E pin);
+    static void WriteRegisters(FPin::E cs, uint16 value);
 };

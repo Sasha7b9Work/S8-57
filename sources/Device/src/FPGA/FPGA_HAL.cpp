@@ -68,7 +68,7 @@ void FPGA::LoadRegUPR()
 }
 
 
-void FPGA::GPIO::Init()
+void GPIO::Init()
 {
     for (int i = 0; i < FPin::Number; i++)
     {
@@ -77,13 +77,13 @@ void FPGA::GPIO::Init()
 }
 
 
-uint16 FPGA::GPIO::GetPin(FPin::E pin)
+uint16 GPIO::GetPin(FPin::E pin)
 {
     return pins[pin].pin;
 }
 
 
-void FPGA::GPIO::WriteRegisters(FPin::E cs, uint16 value)
+void GPIO::WriteRegisters(FPin::E cs, uint16 value)
 {
     ResetPin(cs);
 
@@ -116,19 +116,19 @@ void FPGA::GPIO::WriteRegisters(FPin::E cs, uint16 value)
 }
 
 
-void FPGA::GPIO::SetPin(FPin::E pin)
+void GPIO::SetPin(FPin::E pin)
 {
     HAL_PIO::Set(PORT(pin), GetPin(pin));
 }
 
 
-void FPGA::GPIO::ResetPin(FPin::E pin)
+void GPIO::ResetPin(FPin::E pin)
 {
     HAL_PIO::Reset(PORT(pin), GetPin(pin));
 }
 
 
-void FPGA::GPIO::WritePin(FPin::E pin, int enable)
+void GPIO::WritePin(FPin::E pin, int enable)
 {
     HAL_PIO::Write(PORT(pin), GetPin(pin), enable ? HState::Enabled : HState::Disabled);
 }
