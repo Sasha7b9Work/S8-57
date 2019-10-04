@@ -130,11 +130,11 @@ void Menu::SetAutoHide(bool)
     {
         if (Display::TimeMenuAutoHide() == 0)
         {
-            Timer::Disable(Timer::Type::MenuAutoHide);
+            Timer::Disable(TypeTimer::MenuAutoHide);
         }
         else
         {
-            Timer::SetAndStartOnce(Timer::Type::MenuAutoHide, OnTimerAutoHide, static_cast<uint>(Display::TimeMenuAutoHide()));
+            Timer::SetAndStartOnce(TypeTimer::MenuAutoHide, OnTimerAutoHide, static_cast<uint>(Display::TimeMenuAutoHide()));
         }
     }
 }

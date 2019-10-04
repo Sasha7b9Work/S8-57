@@ -5,9 +5,6 @@
 #include "Hardware/HAL/HAL.h"
 
 
-using Timer::Type;
-
-
 struct TimerStruct
 {
     pFuncVV func;           // Функция таймера
@@ -21,7 +18,7 @@ struct TimerStruct
 
 
 
-static TimerStruct timers[Timer::Type::Number];
+static TimerStruct timers[TypeTimer::Number];
 static uint timeStartLogging = 0;
 static uint timePrevPoint = 0;
 static bool busy = false;
@@ -40,9 +37,9 @@ static void StopTIM();
 /// Возвращает время срабатывания ближайщего таймера, либо 0, если таймеров нет
 static uint NearestTime();
 /// Настроить систему на таймер
-static void TuneTIM(::Timer::Type::E type);
+static void TuneTIM(::TypeTimer::E type);
 
-bool ::Timer::IsRun(::Timer::Type::E type)
+bool ::Timer::IsRun(::TypeTimer::E type)
 {
     return TIME_NEXT(type) != UINT_MAX; //-V2523
 }
@@ -50,7 +47,7 @@ bool ::Timer::IsRun(::Timer::Type::E type)
 
 void Timer::Init()
 {
-    for(uint i = 0; i < Timer::Type::Number; i++)
+    for(uint i = 0; i < TypeTimer::Number; i++)
     {
         timers[i].timeNextMS = UINT_MAX; //-V2523
     }
@@ -85,7 +82,7 @@ void Timer::ElapsedCallback()
 
     StopTIM();
 
-    for (uint type = 0; type < Timer::Type::Number; type++)
+    for (uint type = 0; type < TypeTimer::Number; type++)
     {
         if (TIME_NEXT(type) <= time)            // Если пришло время срабатывания
         {
@@ -113,7 +110,7 @@ void Timer::ElapsedCallback()
 }
 
 
-void Timer::Set(Timer::Type::E type, pFuncVV func, uint dTms)
+void Timer::Set(TypeTimer::E type, pFuncVV func, uint dTms)
 {
     TimerStruct *timer = &timers[type];
     timer->func = func;
@@ -121,35 +118,35 @@ void Timer::Set(Timer::Type::E type, pFuncVV func, uint dTms)
 }
 
 
-void Timer::SetAndStartOnce(Timer::Type::E type, pFuncVV func, uint dTms)
+void Timer::SetAndStartOnce(TypeTimer::E type, pFuncVV func, uint dTms)
 {
     Timer::Set(type, func, dTms);
     StartOnce(type);
 }
 
 
-void Timer::SetAndEnable(Timer::Type::E type, pFuncVV func, uint dTms)
+void Timer::SetAndEnable(TypeTimer::E type, pFuncVV func, uint dTms)
 {
     Set(type, func, dTms);
     Enable(type);
 }
 
 
-void Timer::StartOnce(Timer::Type::E type)
+void Timer::StartOnce(TypeTimer::E type)
 {
     timers[type].repeat = false;
     TuneTIM(type);
 }
 
 
-void Timer::Enable(Timer::Type::E type)
+void Timer::Enable(TypeTimer::E type)
 {
     timers[type].repeat = true;
     TuneTIM(type);
 }
 
 
-static void TuneTIM(Timer::Type::E type)
+static void TuneTIM(TypeTimer::E type)
 {
     TimerStruct *timer = &timers[type];
 
@@ -165,7 +162,7 @@ static void TuneTIM(Timer::Type::E type)
 }
 
 
-void Timer::Disable(Timer::Type::E type)
+void Timer::Disable(TypeTimer::E type)
 {
     timers[type].timeNextMS = UINT_MAX; //-V2523
     timers[type].repeat = false;
@@ -176,7 +173,7 @@ static uint NearestTime()
 {
     uint time = UINT_MAX; //-V2523
 
-    for(uint type = 0; type < Timer::Type::Number; type++)
+    for(uint type = 0; type < TypeTimer::Number; type++)
     {
         if(TIME_NEXT(type) < time)
         {

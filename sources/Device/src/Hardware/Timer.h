@@ -13,67 +13,67 @@
 #define TIME_MS    Timer::TimeMS()
 
 
-namespace Timer
+struct TypeTimer
 {
-    struct Type
+    enum E
     {
-        enum E
-        {
-            ShowLevelTrigLev,       ///< Нужно устанавливать, когда изменяется положение ручки уровня синхронизации
-            FlashDisplay,           ///< Таймер для мерцающих участков экрана чёрно-белого дисплея.
-            ShowMessages,           ///< Таймер для засекания время показа информационных и предупреждающих сообщений.
-            MenuAutoHide,           ///< Таймер для отсчёта времени скрывания меню.
-            RShiftMarkersAutoHide,  ///< Таймер для отсчёта времени скрывания дополнительных боковых меток.
-            StopSound,              ///< Выключить звук
-            StrNaviAutoHide,        ///< Прятать строку навигации меню
-            Display,                ///< Таймер на ручную отрисовку экрана
-            RemoveAddFunction,      ///< Таймер на удаление дополнительной функции отрисовки
-            USB,                    ///<
-            Temp,
-            Number
-        };
+        ShowLevelTrigLev,       ///< Нужно устанавливать, когда изменяется положение ручки уровня синхронизации
+        FlashDisplay,           ///< Таймер для мерцающих участков экрана чёрно-белого дисплея.
+        ShowMessages,           ///< Таймер для засекания время показа информационных и предупреждающих сообщений.
+        MenuAutoHide,           ///< Таймер для отсчёта времени скрывания меню.
+        RShiftMarkersAutoHide,  ///< Таймер для отсчёта времени скрывания дополнительных боковых меток.
+        StopSound,              ///< Выключить звук
+        StrNaviAutoHide,        ///< Прятать строку навигации меню
+        Display,                ///< Таймер на ручную отрисовку экрана
+        RemoveAddFunction,      ///< Таймер на удаление дополнительной функции отрисовки
+        USB,                    ///<
+        Temp,
+        Number
     };
+};
 
 
-    void Init();
+struct Timer
+{
+    static void Init();
 
-    void DeInit();
+    static void DeInit();
     /// Назначает таймеру timer функцию и время срабатывания
-    void Set(Timer::Type::E type, pFuncVV func, uint dTms);
+    static void Set(TypeTimer::E type, pFuncVV func, uint dTms);
 
-    void SetAndStartOnce(Timer::Type::E type, pFuncVV func, uint dTms);
+    static void SetAndStartOnce(TypeTimer::E type, pFuncVV func, uint dTms);
 
-    void SetAndEnable(Timer::Type::E type, pFuncVV func, uint dTms);
+    static void SetAndEnable(TypeTimer::E type, pFuncVV func, uint dTms);
 
-    void StartOnce(Timer::Type::E type);
+    static void StartOnce(TypeTimer::E type);
 
-    void Enable(Timer::Type::E type);
+    static void Enable(TypeTimer::E type);
 
-    void Disable(Timer::Type::E type);
+    static void Disable(TypeTimer::E type);
 
-    bool IsRun(Timer::Type::E type);
+    static bool IsRun(TypeTimer::E type);
 
-    void PauseOnTime(uint timeMS);
+    static void PauseOnTime(uint timeMS);
 
-    void PauseOnTicks(uint numTicks);
+    static void PauseOnTicks(uint numTicks);
     /// Запускает счётчик для измерения малых отрезков времени
-    void StartMultiMeasurement();
+    static void StartMultiMeasurement();
     /// Ожидать определённое число элементарных операция в цилке for
-    void PauseOnOPS(uint ops);
+    static void PauseOnOPS(uint ops);
 
-    bool IsBusy();
+    static bool IsBusy();
     /// Возвращает количество микросекунд, прошедших с момента последнего вызова StartMultiMeasurement()
-    uint TimeUS();
+    static uint TimeUS();
     /// Возвращает количество тиков, прошедших с момента последнего вызова StartMultiMeasurement();
-    uint TimeTicks();
+    static uint TimeTicks();
     /// Возвращает количество миллисекунд, прошедших с момента старта программы
-    uint TimeMS();
+    static uint TimeMS();
     /// Устанавливает стартовую точку логгирования. Далее вызовы Timer_LogPoint засекают временные интервалы от это точки
-    void StartLogging();
+    static void StartLogging();
 
-    uint LogPointUS(char *name);
+    static uint LogPointUS(char *name);
 
-    uint LogPointMS(char *name);
+    static uint LogPointMS(char *name);
     /// Служебная функция. Вызывается строго из прерывания
-    void ElapsedCallback();
-}
+    static void ElapsedCallback();
+};

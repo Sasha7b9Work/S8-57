@@ -468,7 +468,7 @@ void Trig::NeedForDraw()
     if (!set.fft.enabled && (set.trig.modeFind == TrigModeFind::Hand))
     {
         needDraw = true;
-        Timer::SetAndStartOnce(Timer::Type::ShowLevelTrigLev, DisableDrawing, 2000);
+        Timer::SetAndStartOnce(TypeTimer::ShowLevelTrigLev, DisableDrawing, 2000);
         DisplayOsci::SetFlagRedraw();
     }
 }

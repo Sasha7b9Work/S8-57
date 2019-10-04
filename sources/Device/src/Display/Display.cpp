@@ -194,7 +194,7 @@ static void OnTimerShowWarning()
 
     if (pointer == 0)
     {
-        Timer::Disable(Timer::Type::ShowMessages);
+        Timer::Disable(TypeTimer::ShowMessages);
     }
 }
 
@@ -203,7 +203,7 @@ static void ShowWarn(const char *message)
 {
     if (warnings[0] == 0)
     {
-        Timer::SetAndEnable(Timer::Type::ShowMessages, OnTimerShowWarning, 100);
+        Timer::SetAndEnable(TypeTimer::ShowMessages, OnTimerShowWarning, 100);
     }
     bool alreadyStored = false;
 
@@ -256,11 +256,11 @@ void Display::SetDrawMode(DrawMode::E mode, pFuncVV func)
 
     if (mode == DrawMode::Hand)
     {
-        Timer::SetAndEnable(Timer::Type::Display, funcOnHand, 40);
+        Timer::SetAndEnable(TypeTimer::Display, funcOnHand, 40);
     }
     else
     {
-        Timer::Disable(Timer::Type::Display);
+        Timer::Disable(TypeTimer::Display);
     }
 }
 
@@ -336,7 +336,7 @@ void Display::SetAddDrawFunction(pFuncVV func, uint time)
 
     if (time)
     {
-        Timer::SetAndStartOnce(Timer::Type::RemoveAddFunction, RemoveAddDrawFunction, time);
+        Timer::SetAndStartOnce(TypeTimer::RemoveAddFunction, RemoveAddDrawFunction, time);
     }
 }
 
