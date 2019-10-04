@@ -70,26 +70,26 @@ const Settings Settings::defaultSettings =
 
     // ÃÂÌ˛ —»Õ’–ŒÕ»«¿÷»ﬂ
     {
-        TrigSource::A,                            // source
-        TrigInput::Full,                          // input
-        TrigPolarity::Rising,                     // polarity
-        {Trig::Level::ZERO, Trig::Level::ZERO},     // lev[Chan::Size]
-        TrigStartMode::Auto,                      // startMode
-        TrigModeFind::Hand,                       // modeFind
-        10,                                         // holdOff
-        false                                       // holdOffEnable
+        TrigSource::A,                      // source
+        TrigInput::Full,                    // input
+        TrigPolarity::Rising,               // polarity
+        {TrigLevel::ZERO, TrigLevel::ZERO}, // lev[Chan::Size]
+        TrigStartMode::Auto,                // startMode
+        TrigModeFind::Hand,                 // modeFind
+        10,                                 // holdOff
+        false                               // holdOffEnable
     },
 
     // ÃÂÌ˛ –¿«¬®–“ ¿
     {
-        0,                                          // shift
-        TBase::_5ms,                                // base
-        PeakDetMode::Disabled,                      // peakDet
-        TPos::Center,                               // TPos
-        SampleType::Real,                           // sampleType
-        FunctionTime::Time,                         // timeDivXPos
-        LinkingTShift::Time,                        // linkingTShift
-        SampleType::Real                            // sampleTypeOld
+        0,                                  // shift
+        TBase::_5ms,                        // base
+        PeakDetMode::Disabled,              // peakDet
+        TPos::Center,                       // TPos
+        SampleType::Real,                   // sampleType
+        FunctionTime::Time,                 // timeDivXPos
+        LinkingTShift::Time,                // linkingTShift
+        SampleType::Real                    // sampleTypeOld
     },
 
     // ÃÂÌ˛ œ¿Ãﬂ“‹

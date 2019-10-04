@@ -49,16 +49,11 @@ ranges[Range::Size][2] =
 
 ///< Нужно ли рисовать горизонтальную линию уровня смещения уровня синхронизации.
 static bool needDraw = false;
-namespace Trig
-{
-    /// Установленное в true значение означает, что нужно выводить значок синхроимпульса
-    bool pulse = false;
-}
-
+/// Установленное в true значение означает, что нужно выводить значок синхроимпульса
+bool Trig::pulse = false;
 
 
 static uint8 ValueForRange(Chan::E ch);
-
 
 
 void Osci::LoadHoldfOff()
@@ -342,7 +337,7 @@ uint ENumPointsFPGA::PointsInChannel() const
 }
 
 
-void Trig::Level::Find()
+void TrigLevel::Find()
 {
     if (DATA)
     {
@@ -441,10 +436,10 @@ pString Chan::Name() const
 }
 
 
-void Trig::Level::Load()
+void TrigLevel::Load()
 {
     /// \todo Здесь много лишних движений. Нужно что-то сделать с вводом SET_TRIGLEV_SOURCE
-    uint16 value = (uint16)((Trig::Level::MAX + Trig::Level::MIN) - set.trig.lev[set.trig.source]);
+    uint16 value = (uint16)((TrigLevel::MAX + TrigLevel::MIN) - set.trig.lev[set.trig.source]);
 
     FPGA::GPIO::WriteRegisters(FPin::SPI3_CS1, (uint16)(0xa000 | (value << 2)));
 
@@ -452,13 +447,13 @@ void Trig::Level::Load()
 }
 
 
-void Trig::Level::Change(int delta)
+void TrigLevel::Change(int delta)
 {
-    Math::AdditionThisLimitation<uint16>(&set.trig.lev[set.trig.source], STEP_TRIGLEV * delta, Trig::Level::MIN, Trig::Level::MAX);
+    Math::AdditionThisLimitation<uint16>(&set.trig.lev[set.trig.source], STEP_TRIGLEV * delta, TrigLevel::MIN, TrigLevel::MAX);
 
     Load();
 
-    NeedForDraw();
+    Trig::NeedForDraw();
 }
 
 
@@ -479,15 +474,15 @@ void Trig::NeedForDraw()
 }
 
 
-void Trig::Level::Set(int level)
+void TrigLevel::Set(int level)
 {
     set.trig.lev[set.trig.source] = (uint16)(level);
 
-    Math::Limitation<uint16>(&set.trig.lev[set.trig.source], Trig::Level::MIN, Trig::Level::MAX);
+    Math::Limitation<uint16>(&set.trig.lev[set.trig.source], TrigLevel::MIN, TrigLevel::MAX);
 
     Load();
 
-    NeedForDraw();
+    Trig::NeedForDraw();
 }
 
 

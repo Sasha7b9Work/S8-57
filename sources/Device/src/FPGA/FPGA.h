@@ -24,7 +24,7 @@ struct FPGA
     friend struct TrigInput;
     friend struct TrigPolarity;
     friend struct TShift;
-    friend struct Trig::Level;
+    friend struct TrigLevel;
 
     static const uint MAX_NUM_POINTS = (16 * 1024U);
 

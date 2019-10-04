@@ -349,13 +349,13 @@ static void EnterLong()
 
 static void TrigLevMore_Press()
 {
-    Trig::Level::Change(1);
+    TrigLevel::Change(1);
 }
 
 
 static void TrigLevLess_Press()
 {
-    Trig::Level::Change(-1);
+    TrigLevel::Change(-1);
 }
 
 
@@ -447,7 +447,7 @@ static void Trig_Release()
 
 static void Trig_Long()
 {
-    Trig::Level::Set(Trig::Level::ZERO);
+    TrigLevel::Set(TrigLevel::ZERO);
 }
 
 
