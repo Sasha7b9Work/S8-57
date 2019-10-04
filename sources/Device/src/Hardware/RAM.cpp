@@ -8,25 +8,25 @@ static int16 currentSignal = 0;
 
 
 
-int16 Memory::RAM::CurrentSignal()
+int16 MemoryRAM::CurrentSignal()
 {
     return currentSignal;
 }
 
 
-void Memory::RAM::SelectNextSignal()
+void MemoryRAM::SelectNextSignal()
 {
     Math::CircleIncrease<int16>(&currentSignal, 0, (int16)StorageOsci::NumElementsInStorage() - 1);
 }
 
 
-void Memory::RAM::SelectPrevSignal()
+void MemoryRAM::SelectPrevSignal()
 {
     Math::CircleDecrease<int16>(&currentSignal, 0, (int16)StorageOsci::NumElementsInStorage() - 1);
 }
 
 
-void Memory::RAM::ResetSignal()
+void MemoryRAM::ResetSignal()
 {
     currentSignal = 0;
 }

@@ -38,7 +38,7 @@ void Reader::ReadDataFromStorage()
 
     IN_A = IN_B = nullptr;
 
-    DATA = StorageOsci::GetData((set.mem.modeWork == ModeWork::RAM) ? Memory::RAM::CurrentSignal() : 0);
+    DATA = StorageOsci::GetData((set.mem.modeWork == ModeWork::RAM) ? MemoryRAM::CurrentSignal() : 0);
 
     if (DATA != nullptr)
     {

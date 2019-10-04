@@ -13,7 +13,7 @@
 
 static void OnPress_Next()
 {
-    Memory::RAM::SelectNextSignal();
+    MemoryRAM::SelectNextSignal();
 }
 
 static void Draw_Next(int x, int y)
@@ -30,7 +30,7 @@ DEF_GRAPH_BUTTON( bNext,                                                        
 
 static void OnPress_Prev()
 {
-    Memory::RAM::SelectPrevSignal();
+    MemoryRAM::SelectPrevSignal();
 }
 
 static void Draw_Prev(int x, int y)
@@ -52,7 +52,7 @@ static void OnOpenClose_RAM(bool enter)
         RUN_FPGA_BEFORE_SB = Osci::IsRunning() ? 1U : 0U;
         Osci::Stop(false);
         set.mem.modeWork = ModeWork::RAM;
-        Memory::RAM::ResetSignal();
+        MemoryRAM::ResetSignal();
     }
     else
     {
@@ -70,7 +70,7 @@ static void AfterDraw_RAM()
     int height = 10;
     Region(width, height).Fill(Grid::Right() - width, Grid::Top(), Color::BACK);
     Rectangle(width, height).Draw(Grid::Right() - width, Grid::Top(), Color::FILL);
-    Integer(Memory::RAM::CurrentSignal() + 1).ToString(false, 3).Draw(Grid::Right() - width + 2, Grid::Top() + 1);
+    Integer(MemoryRAM::CurrentSignal() + 1).ToString(false, 3).Draw(Grid::Right() - width + 2, Grid::Top() + 1);
     String("/").Draw(Grid::Right() - width + 17, Grid::Top() + 1);
     Integer(StorageOsci::NumElementsInStorage()).ToString(false, 3).Draw(Grid::Right() - width + 23, Grid::Top() + 1);
 }
