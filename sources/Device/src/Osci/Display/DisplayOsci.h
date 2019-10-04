@@ -22,8 +22,6 @@ struct DisplayOsci
     struct BottomPart
     {
         static void Draw(int x, int y);
-
-        void WriteCursors();
     };
 
     struct Accumulator
