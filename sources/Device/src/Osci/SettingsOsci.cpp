@@ -77,11 +77,11 @@ void TBase::Change(int delta)
     }
     else
     {
-        if ((set.time.peakDet == PeakDetMode::Enabled) &&                                   // Если вклюён режим пикового детектора
+        if ((set.time.peakDet == PeakDetMode::Enabled) &&           // Если вклюён режим пикового детектора
             set.time.base == TBase::MIN_PEAK_DET)                   // и установлен масштаб по времени, соответствующий минмальному в режиме пикового детектора :
         {
-            ::Display::ShowWarning(Warning::EnabledPeakDet);    // выводим сообщение об этом
-            return;                                             // и выходим
+            ::Display::ShowWarning("ВКЛЮЧЕН ПИКОВЫЙ ДЕТЕКТОР");		// выводим сообщение об этом
+            return;													// и выходим
         }
 
         ::Math::LimitationDecrease<uint8>((uint8 *)(&set.time.base), 0);

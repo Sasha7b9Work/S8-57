@@ -21,17 +21,12 @@ static const char chanCouple[] =  "Задаёт вид связи с источником сигнала.\n"
 
 
 
-void PageChannelA::OnChanged_Input(bool)
-{
-
-}
-
 DEF_CHOICE_2( cInputA,                                                                                                                                               //--- КАНАЛ 1 - Вход ---
     "Вход",
     chanInput,
     DISABLE_RU,
     ENABLE_RU,
-    set.ch[Chan::A].enabled, &PageChannelA::self, Item::Active, PageChannelA::OnChanged_Input, Choice::AfterDraw
+    set.ch[Chan::A].enabled, &PageChannelA::self, Item::Active, Choice::Changed, Choice::AfterDraw
 )
 
 
@@ -127,21 +122,12 @@ DEF_PAGE_6( pChanA, // -V641 // -V1027                                          
 const Page * const PageChannelA::self = (const Page *)&pChanA;
 
 
-void PageChannelB::OnChanged_Input(bool active)
-{
-    if (!active)
-    {
-        Display::ShowWarning(Warning::TooLongMemory);
-        return;
-    }
-}
-
 DEF_CHOICE_2( cInputB,                                                                                                                                               //--- КАНАЛ 2 - Вход ---
     "Вход",
     chanInput,
     DISABLE_RU,
     ENABLE_RU,
-    set.ch[Chan::B].enabled, &PageChannelB::self, Item::Active, PageChannelB::OnChanged_Input, Choice::AfterDraw
+    set.ch[Chan::B].enabled, &PageChannelB::self, Item::Active, Choice::Changed, Choice::AfterDraw
 )
 
 

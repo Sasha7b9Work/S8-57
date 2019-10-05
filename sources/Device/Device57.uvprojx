@@ -595,11 +595,6 @@
               <FileType>8</FileType>
               <FilePath>.\src\Display\Primitives_stm.cpp</FilePath>
             </File>
-            <File>
-              <FileName>Warnings.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Display\Warnings.h</FilePath>
-            </File>
           </Files>
         </Group>
         <Group>

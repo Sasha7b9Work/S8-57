@@ -11,7 +11,7 @@ static void OnPress_Screen()
 {
     if (set.fft.enabled)
     {
-        Display::ShowWarning(Warning::ImpossibleEnableMathFunction);
+        Display::ShowWarning("Отключите вычисление БПФ");
     }
     else
     {
@@ -190,7 +190,7 @@ static void OnOpenClose_Math(bool)
 {
     if (set.fft.enabled)
     {
-        Display::ShowWarning(Warning::ImpossibleEnableMathFunction);
+        Display::ShowWarning("Отключите вычисление БПФ");
     }
 }
 

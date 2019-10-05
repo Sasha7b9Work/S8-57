@@ -120,7 +120,7 @@ void FDrive::Update()
 
         if (f_mount(&USBDISKFatFs, (TCHAR const*)USBDISKPath, 1) != FR_OK)
         {
-            Display::ShowWarning(Warning::WrongFileSystem);
+            Display::ShowWarning("Не могу прочитать флешку. Убедитесь, что на ней FAT32");
         }
         else
         {

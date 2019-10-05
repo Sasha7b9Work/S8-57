@@ -28,7 +28,7 @@ void PageMemory::OnChanged_Points(bool active)
     // Если включен пиковый детектор, то не можем переключать память
     if ((set.time.peakDet == PeakDetMode::Enabled) && !active)
     {
-        Display::ShowWarning(Warning::WrongModePeackDet);
+        Display::ShowWarning("Чтобы изменить длину памяти, отключите пиковый детектор");
         return;
     }
 
@@ -100,7 +100,7 @@ void PageMemory::OnOpenClose_Drive_Manager(bool)
     }
     else
     {
-        Display::ShowWarning(Warning::WarnNeedForFlashDrive);
+        Display::ShowWarning("Сначала подключите флеш-диск");
     }
 }
 

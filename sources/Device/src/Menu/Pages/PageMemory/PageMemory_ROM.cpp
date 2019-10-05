@@ -84,7 +84,7 @@ static void SaveSignalToIntMemory()
     if (DS)                                             // Если есть что сохранять
     {
 //        Memory::SaveData(NUM_ROM_SIGNAL, DS, IN_A, IN_B);   // То сохраняем данные из DS, DATA_A, DATA_B на место NUM_ROM_SIGNAL в ППЗУ
-        Display::ShowWarning(Warning::SignalIsSaved);
+        Display::ShowWarning("СИГНАЛ СОХРАНЕН");
     }
 }
 

@@ -412,7 +412,7 @@ static void OnPress_SaveFirmware()
 
     Display::FuncOnWaitStop();
 
-    Display::ShowWarning(Warning::FirmwareSaved);
+    Display::ShowWarning("Прошивка сохранена");
 }
 
 DEF_BUTTON( bSaveFirmware,                                                                                                                                 //--- ОТЛАДКА - Сохр. прошивку ---

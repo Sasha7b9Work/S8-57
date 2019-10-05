@@ -1,5 +1,4 @@
 #pragma once
-#include "Warnings.h"
 #include "Keyboard/Keyboard.h"
 
 
@@ -51,7 +50,7 @@ struct Display
     /// Устанавливает функцию, которая выполится после отрисовки кадра однократно
     static void SetFuncAfterUpadteOnce(pFuncVV func);
 
-    static void ShowWarning(Warning::E warning);
+	static void ShowWarning(const char* warning);
     /// @brief Установить функцию и режим отрисовки экрана.
     /// @details Возможны три варианта.
     /// 1. DrawMode_Hand - в этом случае будет вызываться функция func(), определяемая пользователем, с частотой 25 раз в секунду.

@@ -39,7 +39,7 @@ void PageTime::OnChanged_PeakDet(bool active)
     }
     else
     {
-        Display::ShowWarning(Warning::TooSmallSweepForPeakDet);
+        Display::ShowWarning("Пик. Дет. не работает на развёртках менее 0.5мкс/дел");
     }
 }
 

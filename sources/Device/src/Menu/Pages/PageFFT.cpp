@@ -135,7 +135,7 @@ static void OnOpenClose_FFT(bool)
 {
     if (!IsActive_FFT())
     {
-        Display::ShowWarning(Warning::ImpossibleEnableFFT);
+        Display::ShowWarning("Отключите математическую функцию");
     }
 }
 
