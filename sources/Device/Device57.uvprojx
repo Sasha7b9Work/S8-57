@@ -811,14 +811,14 @@
               <FilePath>.\src\Hardware\Memory.h</FilePath>
             </File>
             <File>
-              <FileName>RAM.cpp</FileName>
+              <FileName>MemoryRAM.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\Hardware\RAM.cpp</FilePath>
+              <FilePath>.\src\Hardware\MemoryRAM.cpp</FilePath>
             </File>
             <File>
-              <FileName>RAM.h</FileName>
+              <FileName>MemoryRAM.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\src\Hardware\RAM.h</FilePath>
+              <FilePath>.\src\Hardware\MemoryRAM.h</FilePath>
             </File>
             <File>
               <FileName>Timer.cpp</FileName>

@@ -136,8 +136,8 @@ source_group(Hardware           FILES   ../../Device/src/Hardware/Battery.h
                                         ../../Device/src/Hardware/Clock.cpp
                                         ../../Device/src/Hardware/Memory.h
                                         ../../Device/src/Hardware/Memory.cpp
-                                        ../../Device/src/Hardware/RAM.h
-                                        ../../Device/src/Hardware/RAM.cpp
+                                        ../../Device/src/Hardware/MemoryRAM.h
+                                        ../../Device/src/Hardware/MemoryRAM.cpp
                                         ../../Device/src/Hardware/Timer.h
                                         ../../Device/src/Hardware/Timer.cpp
                                         ../../Device/src/Hardware/VCP.h
@@ -240,8 +240,8 @@ file(GLOB SOURCES   ../../common/_VS/*
                     ../../Device/src/Hardware/Clock.cpp
                     ../../Device/src/Hardware/Memory.h
                     ../../Device/src/Hardware/Memory.cpp
-                    ../../Device/src/Hardware/RAM.h
-                    ../../Device/src/Hardware/RAM.cpp
+                    ../../Device/src/Hardware/MemoryRAM.h
+                    ../../Device/src/Hardware/MemoryRAM.cpp
                     ../../Device/src/Hardware/Timer.h
                     ../../Device/src/Hardware/Timer.cpp
                     ../../Device/src/Hardware/VCP.h

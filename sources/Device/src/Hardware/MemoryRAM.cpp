@@ -1,5 +1,5 @@
 #include "defines.h"
-#include "Hardware/RAM.h"
+#include "Hardware/MemoryRAM.h"
 #include "Utils/Math.h"
 #include "Osci/StorageOsci.h"
 

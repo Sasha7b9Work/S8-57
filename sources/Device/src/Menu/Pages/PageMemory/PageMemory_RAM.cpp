@@ -3,7 +3,7 @@
 #include "Display/Primitives.h"
 #include "Display/Symbols.h"
 #include "FPGA/ContextOsci.h"
-#include "Hardware/RAM.h"
+#include "Hardware/MemoryRAM.h"
 #include "Menu/MenuItems.h"
 #include "Osci/Osci.h"
 #include "Osci/StorageOsci.h"

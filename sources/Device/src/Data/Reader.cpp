@@ -1,11 +1,10 @@
 #include "defines.h"
+#include "Data/DataSettings.h"
 #include "Data/Reader.h"
-#include "Osci/StorageOsci.h"
-#include "Utils/CommonFunctions.h"
+#include "Hardware/MemoryRAM.h"
 #include "Osci/Osci.h"
+#include "Osci/StorageOsci.h"
 #include "Settings/Settings.h"
-#include "Hardware/RAM.h"
-
 
 
 /// Это пространство CCM-памяти
@@ -22,7 +21,6 @@ const DataSettings *pDS = nullptr;
 DataOsci *pData = nullptr;
 /// Указатель на фрейм поточечного вывода
 DataOsciP2P *pDataP2P = nullptr;
-
 
 
 /// Поиск уровня синхронизации, если установлен автоматический режим поиска

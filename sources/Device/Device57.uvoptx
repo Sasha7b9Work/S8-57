@@ -1125,7 +1125,7 @@
 
   <Group>
     <GroupName>Hardware</GroupName>
-    <tvExp>0</tvExp>
+    <tvExp>1</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
@@ -1232,8 +1232,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\src\Hardware\RAM.cpp</PathWithFileName>
-      <FilenameWithoutPath>RAM.cpp</FilenameWithoutPath>
+      <PathWithFileName>.\src\Hardware\MemoryRAM.cpp</PathWithFileName>
+      <FilenameWithoutPath>MemoryRAM.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1244,8 +1244,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\src\Hardware\RAM.h</PathWithFileName>
-      <FilenameWithoutPath>RAM.h</FilenameWithoutPath>
+      <PathWithFileName>.\src\Hardware\MemoryRAM.h</PathWithFileName>
+      <FilenameWithoutPath>MemoryRAM.h</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -2877,7 +2877,7 @@
 
   <Group>
     <GroupName>Osci/Measurements</GroupName>
-    <tvExp>1</tvExp>
+    <tvExp>0</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
