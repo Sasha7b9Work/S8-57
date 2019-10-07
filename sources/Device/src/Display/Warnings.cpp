@@ -10,14 +10,10 @@ Queue<WarningStruct> warnings;
 
 /// ”далить предупреждени€ с истЄкшим времени жизни
 static void RemoveOld();
-/// ¬озвращает true, если врем€ жизни первого сообщени€ в очереди истекло
-static bool FrontMessageIsDead();
 /// ¬озвращает true, если последнее сообщение в очереди такое же
 static bool BackMessageSame(const char *message);
 
 static void DrawMessages(int left, int down, int width, int height);
-/// ¬озвращает высоту отрисованного в области шириной weidth сообщени€
-static int HeightMessage(const char *message, int width);
 
 
 
@@ -58,16 +54,10 @@ void Warnings::Show(int left, int down, int width, int height)
 
 static void RemoveOld()
 {
-    while (!warnings.IsEmpty() && FrontMessageIsDead())
+    while (!warnings.IsEmpty() && warnings[0].IsDead())
     {
         warnings.Front();
     }
-}
-
-
-static bool FrontMessageIsDead()
-{
-    return (TIME_MS - warnings[0].timeStart) > 3000;
 }
 
 
@@ -79,8 +69,7 @@ static void DrawMessages(int left, int down, int width, int height)
 
     for (int i = size - 1; i >= 0; i--)
     {
-        const char *warning = warnings[i].message;
-
+        int height = warnings[i].Height(width);
     }
 }
 
@@ -88,4 +77,15 @@ static void DrawMessages(int left, int down, int width, int height)
 WarningStruct::WarningStruct(const char *msg) : message(msg)
 {
     timeStart = TIME_MS;
+}
+
+
+bool WarningStruct::IsDead()
+{
+    return (TIME_MS - timeStart) > 3000;
+}
+
+int WarningStruct::Height(int width) const
+{
+    return 10;
 }
