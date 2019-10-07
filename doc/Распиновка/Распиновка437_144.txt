@@ -1,0 +1,106 @@
+stm32f437zit6
+
+OSC_I   23
+OSC_O   24
+BOOT0   138
+OS32_I  8
+OS32_O  9
+
+VDD     17, 30, 39, 52, 62, 72, 84, 95, 108, 121, 131, 144
+VSS     16, 38, 51, 61, 83, 94, 107, 120, 130
+PDR_ON  143
+VDDA    33
+VBAT    6
+VREF+   32
+VSSA    31
+VCAP1   71
+VCAP2   106
+
+NRST    25
+NTRST   134
+TDI     110
+TMS     105
+TCK     109
+TDO     133
+
+NOE     118
+NWE     119
+NL1     137
+NE1     123
+NE2     124
+NE3     125
+NE4     127 Дисплей
+A0      10
+A1      11
+A2      12
+A3      13
+A4      14
+A5      15
+D0      85
+D1      86
+D2      114
+D3      115
+D4      58
+D5      59
+D6      60
+D7      63
+
+SPI3
+    SCK 111
+    MO  113
+    CS1 117
+    CS2 128
+    CS3 129
+
+SPI4
+    SCK 65
+    MO  67
+    MI  66
+    NSS 64
+
+A1  PD10    79
+A2  PD11    80
+A3  PD12    81
+A4  PD13    82
+LF1 PG2     87
+LF2 PG3     88
+A1S PG4     89
+A0S PG5     90
+LFS PG6     91
+    PG7     92    
+    
+FL_DISP 136
+FLAG0   57
+    
+USB OTG FS   USB PC
+    DP      104
+    DM      103
+    VBUS    101
+    
+USB OTG HS   USB Flash, датчики
+    DP      76
+    DM      75
+    VBUS    74
+    
+AЦП
+    INT     22
+    STR     70
+    
+ЦАП1        40
+ЦАП2 тестер 41
+
+Тестер-компонент
+    ON      53
+    PNP     54
+    U       55
+    I       56
+    
+TEST_STR    99
+
+CS_DISP     43
+SEL_DIS     44
+LED1        45
+
+USART3
+    RXD     78
+    TXD     77
