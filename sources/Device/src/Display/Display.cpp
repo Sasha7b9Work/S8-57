@@ -14,52 +14,7 @@
 #include <cstring>
 
 
-#define NEED_SET_ORIENTATION    (bf.needSetOrientation)
-
-#define NU {0, 0}
-
-//{
-//    {Warning::LimitChan1_Volts, false, NU,           {"ПРЕДЕЛ КАНАЛ 1 - ВОЛЬТ/ДЕЛ"}},
-//    {Warning::LimitChan2_Volts, false, NU,           {"ПРЕДЕЛ КАНАЛ 2 - ВОЛЬТ/ДЕЛ"}},
-//    {Warning::LimitSweep_Time, false, NU,            {"ПРЕДЕЛ РАЗВЕРТКА - ВРЕМЯ/ДЕЛ"}},
-//    {Warning::EnabledPeakDet, false, NU,             {"ВКЛЮЧЕН ПИКОВЫЙ ДЕТЕКТОР"}},
-//    {Warning::LimitChan1_RShift, false, NU,          {"ПРЕДЕЛ КАНАЛ 1 - \x0d"}},
-//    {Warning::LimitChan2_RShift, false, NU,          {"ПРЕДЕЛ КАНАЛ 2 - \x0d"}},
-//    {Warning::LimitSweep_Level, false, NU,           {"ПРЕДЕЛ РАЗВЕРТКА - УРОВЕНЬ"}},
-//    {Warning::LimitSweep_TShift, false, NU,          {"ПРЕДЕЛ РАЗВЕРТКА - \x97"}},
-//    {Warning::TooSmallSweepForPeakDet, false, NU,    {"ПИК. ДЕТ. НЕ РАБОТАЕТ НА РАЗВЕРТКАХ МЕНЕЕ 0.5мкс/дел"}},
-//    {Warning::TooFastScanForRecorder, false, NU,     {"САМОПИСЕЦ НЕ МОЖЕТ РАБОТАТЬ НА БЫСТРЫХ РАЗВЁРТКАХ"}},
-//    {Warning::FileIsSaved, true, NU,                 {"ФАЙЛ СОХРАНЕН"}},
-//    {Warning::SignalIsSaved, true, NU,               {"СИГНАЛ СОХРАНЕН"}},
-//    {Warning::SignalIsDeleted, true, NU,             {"СИГНАЛ УДАЛЕН"}},
-//    {Warning::MenuDebugEnabled, true, NU,            {"МЕНЮ ОТЛАДКА ВКЛЮЧЕНО"}},
-//    {Warning::TimeNotSet, true, NU,                  {"ВРЕМЯ НЕ УСТАНОВЛЕНО. МОЖЕТЕ УСТАНОВИТЬ ЕГО СЕЙЧАС"}},
-//    {Warning::SignalNotFound, true, NU,              {"СИГНАЛ НЕ НАЙДЕН"}},
-//    {Warning::SetTPosToLeft, true, NU,               {  "НА РАЗВЕРТКАХ МЕДЛЕННЕЕ 10мс/дел ЖЕЛАТЕЛЬНО УСТАНАВ-",
-//                                                        "ЛИВАТЬ \"РАЗВЕРТКА - \x7b\" В ПОЛОЖЕНИЕ \"Лево\" ДЛЯ УСКОРЕ-", 
-//                                                        "НИЯ ВЫВОДА СИГНАЛА"}},
-//    {Warning::NeedRebootDevice, true, NU,               {"Для вступления изменений в силу", 
-//                                                         "выключите прибор"}},
-//    {Warning::ImpossibleEnableMathFunction, true, NU,   {"Отключите вычисление БПФ"}},
-//    {Warning::ImpossibleEnableFFT, true, NU,            {"Отключите математическую функцию"}},
-//    {Warning::WrongFileSystem, false, NU,               {"Не могу прочитать флешку. Убедитесь, что на ней FAT32"}},
-//    {Warning::WrongModePeackDet, true, NU,              {"Чтобы изменить длину памяти, отключите пиковый детектор"}},
-//    {Warning::DisableChannelB, true, NU,                {"Сначала выключите канал 2"}},
-//    {Warning::TooLongMemory, true, NU,                  {"Второй канал рабоатает при длине памяти 16к и менее"}},
-//    {Warning::NoPeakDet32k, true, NU,                   {"Пиковый детектор не работает при длине памяти 32к"}},
-//    {Warning::NoPeakDet16k, true, NU,                   {"Для работы пикового детектора при длине памяти 16к", 
-//                                                         "отключите канал 2"}},
-//    {Warning::Warn50Ohms, false, NU,                    {"При величине входного сопротивления 50 Ом", 
-//                                                         "запрещается подавать на вход более 5 В"}},
-//    {Warning::WarnNeedForFlashDrive, true, NU,          {"Сначала подключите флеш-диск"}},
-//    {Warning::FirmwareSaved, true, NU,                  {"Прошивка сохранена"}},
-//    {Warning::FullyCompletedOTP, false, NU,             {"Память OTP полностью заполнена"}}
-//};
-
-
-static void EmptyFunc()
-{
-}
+static void EmptyFunc() { }
 
 
 static pFuncVV funcOnHand = nullptr;
@@ -153,6 +108,7 @@ void Display::SetFuncAfterUpadteOnce(pFuncVV func)
 
 void Display::ShowWarning(const char *)
 {
+
 }
 
 
