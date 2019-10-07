@@ -3,7 +3,6 @@
 #include "Transceiver.h"
 #include "Display/Console.h"
 #include "Display/Display.h"
-#include "Display/DisplayTypes.h"
 #include "Display/Painter.h"
 #include "Display/Primitives.h"
 #include "Display/Warnings.h"

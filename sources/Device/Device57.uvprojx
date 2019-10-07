@@ -546,16 +546,6 @@
               <FilePath>.\src\Display\Display.h</FilePath>
             </File>
             <File>
-              <FileName>DisplayTypes.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Display\DisplayTypes.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>DisplayTypes.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Display\DisplayTypes.h</FilePath>
-            </File>
-            <File>
               <FileName>Grid.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Display\Grid.cpp</FilePath>

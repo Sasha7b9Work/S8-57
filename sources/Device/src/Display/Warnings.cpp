@@ -1,5 +1,4 @@
 #include "defines.h"
-#include "Display/DisplayTypes.h"
 #include "Display/Warnings.h"
 #include "Hardware/Timer.h"
 #include "Utils/Queue.h"
@@ -85,3 +84,8 @@ static void DrawMessages(int left, int down, int width, int height)
     }
 }
 
+
+WarningStruct::WarningStruct(const char *msg) : message(msg)
+{
+    timeStart = TIME_MS;
+}

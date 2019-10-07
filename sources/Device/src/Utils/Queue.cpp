@@ -1,5 +1,5 @@
 #include "defines.h"
-#include "Display/DisplayTypes.h"
+#include "Display/Warnings.h"
 #include "Utils/Queue.h"
 
 
