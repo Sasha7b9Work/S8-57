@@ -94,17 +94,20 @@ source_group(Display            FILES   ../../Device/src/Display/Colors.h
                                         ../../Device/src/Display/Console.cpp
                                         ../../Device/src/Display/Display.h
                                         ../../Device/src/Display/Display.cpp
+                                        ../../Device/src/Display/DisplayTypes.h
+                                        ../../Device/src/Display/DisplayTypes.cpp
                                         ../../Device/src/Display/Primitives.h
                                         ../../Device/src/Display/Primitives.cpp
                                                      src/Display/Primitives_win.cpp
                                         ../../Device/src/Display/Grid.h
                                         ../../Device/src/Display/Grid.cpp
-                                        ../../Device/src/Display/Grid_Types.h
                                         ../../Device/src/Display/Painter.h
                                                      src/Display/Painter_win.cpp
                                         ../../Device/src/Display/PainterMem.h
                                         ../../Device/src/Display/PainterMem.cpp
-                                        ../../Device/src/Display/Symbols.h)
+                                        ../../Device/src/Display/Symbols.h
+                                        ../../Device/src/Display/Warnings.h
+                                        ../../Device/src/Display/Warnings.cpp)
 source_group(FPGA               FILES   ../../Device/src/FPGA/AD9286.h
                                         ../../Device/src/FPGA/AD9286.cpp
                                         ../../Device/src/FPGA/Context.cpp
@@ -192,19 +195,22 @@ file(GLOB SOURCES   ../../common/_VS/*
                     ../../Device/src/Display/Console.cpp
                     ../../Device/src/Display/Display.h
                     ../../Device/src/Display/Display.cpp
+                    ../../Device/src/Display/DisplayTypes.h
+                    ../../Device/src/Display/DisplayTypes.cpp
                     ../../Device/src/Display/Primitives.h
                     ../../Device/src/Display/Primitives.cpp
                                  src/Display/Primitives_win.cpp
                     ../../Device/src/Display/Grid.h
                     ../../Device/src/Display/Grid.cpp
-                    ../../Device/src/Display/Grid_Types.h
                     ../../Device/src/Display/Painter.h
                                  src/Display/Painter_win.cpp
                     ../../Device/src/Display/PainterMem.h
                     ../../Device/src/Display/PainterMem.cpp
                     ../../Device/src/Display/Symbols.h
-                    
+                    ../../Device/src/Display/Warnings.h
+                    ../../Device/src/Display/Warnings.cpp                    
                     ../../common/Display/Font/*
+
                     ../../Device/src/FlashDrive/*
                     
                     ../../Device/src/FPGA/AD9286.h

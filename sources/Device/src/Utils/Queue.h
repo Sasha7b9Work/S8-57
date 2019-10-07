@@ -15,9 +15,11 @@ public:
 
     T Back();
 
-    uint Size() const;
+    int Size() const;
 
-    T operator[](int n);
+    bool IsEmpty() const;
+
+    T &operator[](int n);
 private:
 
     void Destroy();

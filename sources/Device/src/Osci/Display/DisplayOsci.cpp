@@ -2,7 +2,8 @@
 #include "Display/Grid.h"
 #include "Display/Painter.h"
 #include "Display/Primitives.h"
-#include "menu/Menu.h"
+#include "Display/Warnings.h"
+#include "Menu/Menu.h"
 #include "Osci/Osci.h"
 #include "Osci/FreqMeter.h"
 #include "Osci/Display/DisplayOsci.h"
@@ -54,6 +55,8 @@ void DisplayOsci::Update()
     TableMeasures::Draw();
 
     Menu::Draw();
+
+    Warnings::Show(Grid::Left(), Grid::Bottom(), Grid::Width(), Grid::Height());
 }
 
 

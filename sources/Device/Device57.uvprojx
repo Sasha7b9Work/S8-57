@@ -516,14 +516,14 @@
               <FilePath>.\src\Display\Colors.cpp</FilePath>
             </File>
             <File>
-              <FileName>Colors_stm.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Display\Colors_stm.cpp</FilePath>
-            </File>
-            <File>
               <FileName>Colors.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Display\Colors.h</FilePath>
+            </File>
+            <File>
+              <FileName>Colors_stm.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Display\Colors_stm.cpp</FilePath>
             </File>
             <File>
               <FileName>Console.cpp</FileName>
@@ -544,6 +544,16 @@
               <FileName>Display.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Display\Display.h</FilePath>
+            </File>
+            <File>
+              <FileName>DisplayTypes.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Display\DisplayTypes.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>DisplayTypes.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Display\DisplayTypes.h</FilePath>
             </File>
             <File>
               <FileName>Grid.cpp</FileName>
@@ -576,11 +586,6 @@
               <FilePath>.\src\Display\PainterMem.h</FilePath>
             </File>
             <File>
-              <FileName>Symbols.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Display\Symbols.h</FilePath>
-            </File>
-            <File>
               <FileName>Primitives.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Display\Primitives.cpp</FilePath>
@@ -594,6 +599,21 @@
               <FileName>Primitives_stm.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Display\Primitives_stm.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Symbols.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Display\Symbols.h</FilePath>
+            </File>
+            <File>
+              <FileName>Warnings.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Display\Warnings.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Warnings.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Display\Warnings.h</FilePath>
             </File>
           </Files>
         </Group>

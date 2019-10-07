@@ -3,14 +3,17 @@
 #include "Transceiver.h"
 #include "Display/Console.h"
 #include "Display/Display.h"
+#include "Display/DisplayTypes.h"
 #include "Display/Painter.h"
 #include "Display/Primitives.h"
+#include "Display/Warnings.h"
 #include "FlashDrive/FlashDrive.h"
 #include "Hardware/Timer.h"
 #include "Hardware/Beeper.h"
 #include "Keyboard/DecoderDevice.h"
 #include "Osci/Display/DisplayOsci.h"
 #include "Recorder/DisplayRecorder.h"
+#include "Utils/Queue.h"
 #include <cstring>
 
 
@@ -32,12 +35,12 @@ static pFuncVV funcAfterUpdateOnce = EmptyFunc;
 
 static int numRow = -1;
 
+
+
+
 static void SaveScreenToFlash();
 
 static void ReadRow(uint8 row);
-
-
-
 /// Выполняет функцию, определённую для выполнения после отрисовки
 static void ExecuteFuncAfterUpdateOnce();
 
@@ -106,9 +109,9 @@ void Display::SetFuncAfterUpadteOnce(pFuncVV func)
 }
 
 
-void Display::ShowWarning(const char *)
+void Display::ShowWarning(const char *warn)
 {
-
+    Warnings::AddWarning(warn);
 }
 
 

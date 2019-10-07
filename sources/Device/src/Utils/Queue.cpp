@@ -1,5 +1,9 @@
 #include "defines.h"
-#include "Queue.h"
+#include "Display/DisplayTypes.h"
+#include "Utils/Queue.h"
+
+
+template class Queue<WarningStruct>;
 
 
 template<typename T>
@@ -41,7 +45,7 @@ void Queue<T>::Push(T elem)
     {
         T *temp = pointer;
         int num = iBack - iFront + 1;
-        pointer = new T[num];
+        pointer = new T[(uint)num];
         for (int i = 0; i < num - 1; i++)
         {
             pointer[i] = temp[i + iFront];
@@ -57,7 +61,7 @@ void Queue<T>::Push(T elem)
 template<typename T>
 T Queue<T>::Front()
 {
-    T result = static_cast<T>(0);
+    T result(0);
 
     if (pointer != nullptr)
     {
@@ -76,7 +80,7 @@ T Queue<T>::Front()
 template<typename T>
 T Queue<T>::Back()
 {
-    T result = static_cast<T>(0);
+    T result(0);
 
     if (pointer != nullptr)
     {
@@ -91,20 +95,29 @@ T Queue<T>::Back()
     return result;
 }
 
-template<typename T>
-uint Queue<T>::Size() const
-{
-    return iBack - iFront;
-}
 
 template<typename T>
-T Queue<T>::operator[](int n)
+int Queue<T>::Size() const
 {
-    T result = static_cast<T>(0);
+    return (iBack - iFront);
+}
+
+
+template<typename T>
+bool Queue<T>::IsEmpty() const
+{
+    return (Size() == 0);
+}
+
+
+template<typename T>
+T &Queue<T>::operator[](int n)
+{
+    static T result(0);
 
     if (pointer != nullptr)
     {
-        int index = pointer + n;
+        int index = iFront + n;
         if (index >= iFront && index < iBack)
         {
             result = pointer[index];

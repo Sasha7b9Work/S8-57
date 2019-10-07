@@ -5,7 +5,7 @@ namespace std
     char   *strcat(char *, const char *);
     char   *strcpy(char *dest, const char *src);
     unsigned int  strlen(const char *);
-    int     strcmp(void *, const void *);
+    int     strcmp(const void *, const void *);
     char    toupper(char);
     char    tolower(char);
     void    memcpy(void *dest, const void *src, unsigned int size);
