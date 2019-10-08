@@ -1,5 +1,7 @@
 #include "defines.h"
+#include "Display/Grid.h"
 #include "Display/Primitives.h"
+#include "Display/Warnings.h"
 #include "Menu/Menu.h"
 #include "Utils/Stack.h"
 #include "Utils/Values.h"
@@ -308,6 +310,11 @@ void Page::Draw(int x, int y, bool opened) const
 
 void Page::DrawTitle(int y) const
 {
+    if (Warnings::IsDrawing())
+    {
+        y = Grid::Top();
+    }
+
     Rectangle(Menu::Title::WIDTH + 1, Menu::Title::HEIGHT + 1).Draw(0, y, ColorFrame());
 
     Region(Menu::Title::WIDTH - 1, Menu::Title::HEIGHT - 1).Fill(1, y + 1, Color::BACK);
