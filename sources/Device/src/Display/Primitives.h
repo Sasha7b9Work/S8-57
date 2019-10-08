@@ -101,6 +101,8 @@ public:
 
     int DrawInCenterRect(int x, int y, int width, int height, Color color = Color::NUMBER);
 
+    void DrawInCenterBoundedRect(int x, int y, int width, int height, Color color = Color::NUMBER);
+
     int DrawWithLimitation(int x, int y, int limitX, int limitY, int limitWidth, int limitHeight);
     /// Выводит текст на прямоугольнике цвета colorBackgound
     int DrawOnBackground(int x, int y, Color colorBackground);
@@ -111,7 +113,7 @@ public:
     /// Возвращает нижнюю координату прямоугольника
     int DrawInBoundedRectWithTransfers(int x, int y, int width, Color colorBackground, Color colorFill);
 
-    int DrawInCenterRectAndBoundIt(int x, int y, int width, int height, Color colorBackground, Color colorFill);
+    void DrawInCenterRectAndBoundIt(int x, int y, int width, int height, Color colorBackground, Color colorFill);
     /// Пишет строку текста в центре области(x, y, width, height)цветом ColorText на прямоугольнике с шириной бордюра widthBorder цвета colorBackground
     void DrawInCenterRectOnBackground(int x, int y, int width, int height, Color colorText, int widthBorder, Color colorBackground);
 private:

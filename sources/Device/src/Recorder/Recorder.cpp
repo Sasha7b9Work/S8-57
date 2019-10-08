@@ -101,8 +101,7 @@ void Recorder::ReadPoint()
 
 void Recorder::Start()
 {
-    Region(150, 50).DrawBounded(85, 100, Color::BACK, Color::FILL);
-    Text("Подготовка к записи").DrawInCenterRect(85, 100, 150, 50, Color::FILL);
+    Text("Подготовка к записи").DrawInCenterBoundedRect(85, 100, 150, 50, Color::FILL);
     Painter::EndScene();
 
     RShift::Set(Chan::A, RShift::ZERO);

@@ -210,6 +210,13 @@ int Text::DrawInCenterRect(int eX, int eY, int width, int eHeight, Color color)
 }
 
 
+void Text::DrawInCenterBoundedRect(int x, int y, int width, int height, Color color)
+{
+    Region(width, height).DrawBounded(x, y, Color::BACK, color);
+    DrawInCenterRect(x, y, width, height, color);
+}
+
+
 int Text::DrawOnBackground(int x, int y, Color colorBackground)
 {
     int width = Font::GetLengthText(text);
@@ -220,13 +227,13 @@ int Text::DrawOnBackground(int x, int y, Color colorBackground)
 
     colorText.SetAsCurrent();
 
-    return Text(text).Draw(x, y);
+    return Draw(x, y);
 }
 
 
 void Text::DrawRelativelyRight(int xRight, int y, Color color)
 {
-    Text(text).Draw(xRight - Font::GetLengthText(text), y, color);
+    Draw(xRight - Font::GetLengthText(text), y, color);
 }
 
 
@@ -606,26 +613,24 @@ int Text::DrawInBoundedRectWithTransfers(int x, int y, int width, Color colorBac
 }
 
 
-int Text::DrawInCenterRectAndBoundIt(int x, int y, int width, int height, Color colorBackground, Color colorFill)
+void Text::DrawInCenterRectAndBoundIt(int x, int y, int width, int height, Color colorBackground, Color colorFill)
 {
     Region(width, height).DrawBounded(x, y, colorBackground, colorFill);
 
     colorFill.SetAsCurrent();
 
-    return Text(text).DrawInCenterRect(x, y, width, height);
+    DrawInCenterRect(x, y, width, height);
 }
 
 
 void Text::DrawInCenterRectOnBackground(int x, int y, int width, int height, Color colorText, int widthBorder, Color colorBackground)
 {
     int lenght = Font::GetLengthText(text);
-    //int eX = DrawStringInCenterRect(x, y, width, height, text, colorBackground);
-    int eX = Text(text).DrawInCenterRect(x, y, width, height, colorBackground);
+    int eX = DrawInCenterRect(x, y, width, height, colorBackground);
     int w = lenght + widthBorder * 2 - 2;
     int h = 7 + widthBorder * 2 - 1;
     Region(w, h).Fill(eX - lenght - widthBorder, y - widthBorder + 1);
-    //DrawStringInCenterRect(x, y, width, height, text, colorText);
-    Text(text).DrawInCenterRect(x, y, width, height, colorText);
+    DrawInCenterRect(x, y, width, height, colorText);
 }
 
 
