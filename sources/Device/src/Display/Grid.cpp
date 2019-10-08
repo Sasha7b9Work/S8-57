@@ -38,7 +38,7 @@ static int MathTop();
 
 int Grid::Left()
 {
-    static const int left[Device::Mode::Size] = { 20, 0, 0, 0 };
+    static const int left[Device::Mode::Count] = { 20, 0, 0, 0 };
 
     return left[Device::State::CurrentMode()];
 }
@@ -46,7 +46,7 @@ int Grid::Left()
 
 int Grid::Top()
 {
-    static const int top[Device::Mode::Size] = { 19, 0, 0, 0 };
+    static const int top[Device::Mode::Count] = { 19, 0, 0, 0 };
 
     return top[Device::State::CurrentMode()];
 }
@@ -54,7 +54,7 @@ int Grid::Top()
 
 int Grid::Width()
 {
-    static const int width[Device::Mode::Size] = { 280, Display::WIDTH - 1, 0, 0 };
+    static const int width[Device::Mode::Count] = { 280, Display::WIDTH - 1, 0, 320 };
 
     return width[Device::State::CurrentMode()];
 }
@@ -62,7 +62,7 @@ int Grid::Width()
 
 int Grid::Height()
 {
-    static const int height[Device::Mode::Size] = { 200, Display::HEIGHT - 1, 0, 0 };
+    static const int height[Device::Mode::Count] = { 200, Display::HEIGHT - 1, 0, 240 };
 
     return height[Device::State::CurrentMode()];
 }

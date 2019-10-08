@@ -15,7 +15,7 @@ struct Device
             Tester,
             Multimeter,
             Recorder,
-            Size
+            Count
         } value;
         explicit Mode(E v) : value(v) {};
     };

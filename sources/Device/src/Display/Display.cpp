@@ -60,7 +60,7 @@ void Display::Update()
 {
     inStateDraw = true;
 
-    static const pFuncVV funcs[Device::Mode::Size] =
+    static const pFuncVV funcs[Device::Mode::Count] =
     {
         DisplayOsci::Update,
         DisplayTester::Update,
