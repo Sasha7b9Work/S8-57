@@ -12,7 +12,6 @@ void HAL_EEPROM::WriteBufferBytes(uint, void *, int)
 
 void HAL_EEPROM::EraseSector(uint)
 {
-    Timer::PauseOnTime(2000);
 }
 
 

@@ -70,7 +70,6 @@ source_group(Multimeter                                 REGULAR_EXPRESSION      
 source_group(Osci                                       REGULAR_EXPRESSION              src/Osci/*)
 source_group(Osci\\Display                              REGULAR_EXPRESSION              src/Osci/Display/*)
 source_group(Osci\\Measurements\\                       REGULAR_EXPRESSION              src/Osci/Measurements/*)
-source_group(Recorder                                   REGULAR_EXPRESSION              src/Recorder/*)
 source_group(SCPI                                       REGULAR_EXPRESSION              src/SCPI/*)
 source_group(Tester                                     REGULAR_EXPRESSION              src/Tester/*)
 source_group(Utils                                      REGULAR_EXPRESSION              src/Utils/*)
@@ -160,6 +159,13 @@ source_group(Hardware\\HAL      FILES   ../../Device/src/Hardware/HAL/HAL.h
                                                      src/Hardware/HAL/HAL_TIM_win.cpp
                                         ../../Device/src/Hardware/HAL/HAL_USART3.cpp
                                                      src/Hardware/HAL/HAL_win.cpp)
+source_group(Recorder           FILES   ../../Device/src/Recorder/DisplayRecorder.h
+                                        ../../Device/src/Recorder/DisplayRecorder.cpp
+                                        ../../Device/src/Recorder/Recorder.h
+                                        ../../Device/src/Recorder/Recorder.cpp
+                                                     src/Recorder/Recorder_win.cpp
+                                        ../../Device/src/Recorder/StorageRecorder.h
+                                        ../../Device/src/Recorder/StorageRecorder.cpp)
 source_group(Settings           FILES   ../../Device/src/Settings/Settings.cpp
                                         ../../Device/src/Settings/Settings.h
                                                      src/Settings/Settings_win.cpp
@@ -284,8 +290,15 @@ file(GLOB SOURCES   ../../common/_VS/*
                     ../../Device/src/Osci/*
                     ../../Device/src/Osci/Display/*
                     ../../Device/src/Osci/Measurements/*
-                    ../../Device/src/Recorder/*
                     ../../Device/src/SCPI/*
+
+                    ../../Device/src/Recorder/DisplayRecorder.h
+                    ../../Device/src/Recorder/DisplayRecorder.cpp
+                    ../../Device/src/Recorder/Recorder.h
+                    ../../Device/src/Recorder/Recorder.cpp
+                                 src/Recorder/Recorder_win.cpp
+                    ../../Device/src/Recorder/StorageRecorder.h
+                    ../../Device/src/Recorder/StorageRecorder.cpp
                     
                     ../../Device/src/Settings/Settings.cpp
                     ../../Device/src/Settings/Settings.h
