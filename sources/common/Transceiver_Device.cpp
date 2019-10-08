@@ -1,9 +1,8 @@
 #include "defines.h"
-#include "log.h"
 #include "Transceiver.h"
-#include "Hardware/Timer.h"
-#include <stm32f4xx_hal.h>
 #include "Keyboard/DecoderDevice.h"
+#include <stm32f4xx_hal.h>
+
 #ifdef DEVICE
 #include "Recorder/Recorder.h"
 #endif
