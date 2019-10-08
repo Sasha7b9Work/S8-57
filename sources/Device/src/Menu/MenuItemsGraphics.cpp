@@ -292,7 +292,7 @@ void Page::Draw(int x, int y, bool opened) const
         }
         else
         {
-            DrawTitle(x, y - Menu::Title::HEIGHT);
+            DrawTitle(y - Menu::Title::HEIGHT);
 
             DrawItems(x, y);
         }
@@ -306,13 +306,11 @@ void Page::Draw(int x, int y, bool opened) const
 }
 
 
-void Page::DrawTitle(int x, int y) const
+void Page::DrawTitle(int y) const
 {
-    int eX = x;
+    Rectangle(Menu::Title::WIDTH + 1, Menu::Title::HEIGHT + 1).Draw(0, y, ColorFrame());
 
-    Rectangle(Menu::Title::WIDTH + 1, Menu::Title::HEIGHT + 1).Draw(x, y, ColorFrame());
-
-    Region(Menu::Title::WIDTH - 1, Menu::Title::HEIGHT - 1).Fill(x + 1, y + 1, Color::BACK);
+    Region(Menu::Title::WIDTH - 1, Menu::Title::HEIGHT - 1).Fill(1, y + 1, Color::BACK);
 
     bool condDrawRSet = NumSubPages() > 1 &&
         !Menu::CurrentItem()->Is(Item::Type::Governor) &&
@@ -320,11 +318,11 @@ void Page::DrawTitle(int x, int y) const
 
     int delta = condDrawRSet ? -10 : 0;
 
-    x = Text(Title().CString()).DrawInCenterRect(x, y, Menu::Title::WIDTH + 2 + delta, Menu::Title::HEIGHT, ColorTitleText());
+    Text(Title().CString()).DrawInCenterRect(0, y, Menu::Title::WIDTH + 2 + delta, Menu::Title::HEIGHT, ColorTitleText());
 
     Color::GRAY_75.SetAsCurrent();
-    DrawPagesUGO(eX + Menu::Title::WIDTH - 3, y + Menu::Title::HEIGHT);
-    DrawNestingPage(eX + 5, y + Menu::Title::HEIGHT - 6);
+    DrawPagesUGO(Menu::Title::WIDTH - 3, y + Menu::Title::HEIGHT);
+    DrawNestingPage(5, y + Menu::Title::HEIGHT - 6);
 }
 
 void Page::DrawItems(int x, int y) const
