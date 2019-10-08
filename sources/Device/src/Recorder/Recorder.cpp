@@ -158,11 +158,7 @@ void Recorder::OnPressStart()
     }
     else
     {
-        Display::FuncOnWaitStart("Перейдите на страницу РЕГИСТРАТОР", false);
-
-        Timer::PauseOnTime(2000);
-
-        Display::FuncOnWaitStop();
+        Display::ShowWarning("Перейдите на страницу РЕГИСТРАТОР");
     }
 }
 

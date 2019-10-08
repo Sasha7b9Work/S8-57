@@ -114,6 +114,8 @@ public:
     Color ColorFrame() const { return Color::FILL; };
     /// Возвращает цвет, которым нужно заполнять участок выбора
     Color ColorBackground(const Item *choice) const;
+
+    bool IsPage() const { return data->type == Item::Type::Page; };
 };
 
 
