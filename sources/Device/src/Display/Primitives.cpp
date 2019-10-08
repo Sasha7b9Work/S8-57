@@ -225,9 +225,7 @@ int Text::DrawOnBackground(int x, int y, Color colorBackground)
     Color colorText(Color::GetCurent());
     Region(width, height).Fill(x - 1, y, colorBackground);
 
-    colorText.SetAsCurrent();
-
-    return Draw(x, y);
+    return Draw(x, y, colorText);
 }
 
 
@@ -652,7 +650,6 @@ void DashedVLine::Draw(int x, int y0)
         y += (deltaFill + deltaEmpty - deltaStart);
         if (deltaStart < deltaFill)     // Если начало линии приходится на штрих
         {
-            //DrawVLine(x, y0, y - 1);
             VLine(y - y0 - 1).Draw(x, y0);
         }
     }
@@ -661,7 +658,6 @@ void DashedVLine::Draw(int x, int y0)
 
     while (y < y1)
     {
-        //DrawVLine(x, y, y + deltaFill - 1);
         VLine(deltaFill - 1).Draw(x, y);
 
         y += (deltaFill + deltaEmpty);
@@ -690,7 +686,6 @@ void DashedHLine::Draw(int x0, int y)
         x += (deltaFill + deltaEmpty - deltaStart);
         if (deltaStart < deltaFill)     // Если начало линии приходится на штрих
         {
-            //DrawHLine(y, x0, x - 1);
             HLine(x - 1 - x0).Draw(x0, y);
         }
     }
@@ -699,7 +694,6 @@ void DashedHLine::Draw(int x0, int y)
 
     while (x < x1)
     {
-        //DrawHLine(y, x, x + deltaFill - 1);
         HLine(deltaFill - 1).Draw(x, y);
 
         x += (deltaFill + deltaEmpty);
@@ -721,7 +715,6 @@ void VPointLine::Draw(int _x, int _y, Color color)
 
     for (int y = y0; y <= y1; y += static_cast<int>(delta))
     {
-        //SetPoint(x, y);
         Point().Draw(_x, y);
     }
 }
@@ -739,7 +732,6 @@ void HPointLine::Draw(int _x, int _y)
 
     for (int x = x0; x <= x1; x += static_cast<int>(delta))
     {
-        //SetPoint(x, y);
         Point().Draw(x, _y);
     }
 }
