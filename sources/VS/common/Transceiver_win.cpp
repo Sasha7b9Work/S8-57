@@ -1,5 +1,6 @@
 #include "defines.h"
 #include "Transceiver.h"
+#include "Recorder/Recorder.h"
 
 
 void Transceiver::Init()
@@ -10,7 +11,7 @@ void Transceiver::Init()
 
 void Transceiver::Transmitter::Send(const uint8 *, uint)
 {
-
+    Recorder::ReadPoint();
 }
 
 

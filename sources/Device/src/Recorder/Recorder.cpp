@@ -77,12 +77,7 @@ void Recorder::Update()
 
 void Recorder::ReadPoint()
 {
-    if (!IsRunning())
-    {
-        return;
-    }
-
-    if(HAL_PIO::Read(HPort::_G, HPin::_1))
+    if (IsRunning() && HAL_PIO::Read(HPort::_G, HPin::_1))
     {
         if (StorageRecorder::CurrentFrame()->FreeMemory() > 4)
         {

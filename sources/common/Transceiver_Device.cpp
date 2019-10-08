@@ -4,6 +4,9 @@
 #include "Hardware/Timer.h"
 #include <stm32f4xx_hal.h>
 #include "Keyboard/DecoderDevice.h"
+#ifdef DEVICE
+#include "Recorder/Recorder.h"
+#endif
 
 
 #define PORT_MODE0  GPIOA
@@ -161,6 +164,10 @@ void Transceiver::Transmitter::Send(const uint8 *data, uint size)
     }
 
     inInteraction = false;
+
+#ifdef DEVICE
+    Recorder::ReadPoint();
+#endif
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
