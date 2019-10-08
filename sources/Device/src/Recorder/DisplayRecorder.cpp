@@ -2,6 +2,7 @@
 #include "Display/Grid.h"
 #include "Display/Painter.h"
 #include "Display/Primitives.h"
+#include "Display/Warnings.h"
 #include "FPGA/FPGA.h"
 #include "Menu/Menu.h"
 #include "Recorder/Recorder.h"
@@ -41,6 +42,8 @@ void DisplayRecorder::Update()
     //DrawSizeMemory(0, 0);
 
     DrawMemoryWindow();
+
+    Warnings::Show(Grid::Left(), Grid::Bottom(), Grid::Width(), Grid::Height());
 
     Menu::Draw();
 }

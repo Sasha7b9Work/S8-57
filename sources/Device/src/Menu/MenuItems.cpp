@@ -454,11 +454,8 @@ void Button::HandlerFX(TypePress::E type) const
 
     if (type == TypePress::Release || type == TypePress::Long)
     {
-        if (IsActive())
-        {
-            SetCurrent(true);
-            OwnData()->handlerPress();
-        }
+         SetCurrent(true);
+         OwnData()->handlerPress();
     }
 }
 
@@ -470,10 +467,7 @@ void GraphButton::HandlerFX(TypePress::E type) const
 
     if (type == TypePress::Release || type == TypePress::Long)
     {
-        if (IsActive())
-        {
-            OwnData()->handlerPress();
-        }
+        OwnData()->handlerPress();
     }
 }
 

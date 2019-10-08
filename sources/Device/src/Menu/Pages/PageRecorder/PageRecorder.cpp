@@ -42,7 +42,14 @@ static void Draw_StartStop(int x, int y)
 
 static void OnPress_Start()
 {
-    Recorder::OnPressStart();
+    if (IsActive_Start())
+    {
+        Recorder::OnPressStart();
+    }
+    else
+    {
+        Display::ShowWarning("Нужно выбрать хотя бы один источник записи");
+    }
 }
 
 DEF_GRAPH_BUTTON_HINTS_2( bStart,                                                                                                                 //--- ФУНКЦИЯ - РЕГИСТРАТОР - ПУСК/СТОП ---

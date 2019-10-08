@@ -445,10 +445,6 @@ const Item *Menu::ItemUnderFunctionalKey(Key::E key)
         else if (item->Is(Item::Type::Page))
         {
             result = ((Page *)item)->ItemForFuncKey(key);
-            if (!result->IsActive())
-            {
-                result = &Item::empty;
-            }
         }
         else
         {

@@ -1,4 +1,5 @@
 #include "defines.h"
+#include "Display/Primitives.h"
 #include "Display/Warnings.h"
 #include "Hardware/Timer.h"
 #include "Utils/Queue.h"
@@ -43,6 +44,11 @@ static bool BackMessageSame(const char *message)
 
 void Warnings::Show(int left, int down, int width, int height)
 {
+    if (warnings.Size() == 0)
+    {
+        return;
+    }
+
     RemoveOld();
 
     if (!warnings.IsEmpty())
@@ -69,7 +75,16 @@ static void DrawMessages(int left, int down, int width, int height)
 
     for (int i = size - 1; i >= 0; i--)
     {
-        int height = warnings[i].Height(width);
+        int h = warnings[i].Height(width);
+
+        y -= h;
+
+        if (y < (down - height))
+        {
+            break;
+        }
+
+        warnings[i].Draw(left, y, width);
     }
 }
 
@@ -80,12 +95,17 @@ WarningStruct::WarningStruct(const char *msg) : message(msg)
 }
 
 
-bool WarningStruct::IsDead()
+bool WarningStruct::IsDead() const
 {
-    return (TIME_MS - timeStart) > 3000;
+    return (TIME_MS - timeStart) > 10000;
 }
 
-int WarningStruct::Height(int width) const
+int WarningStruct::Height(int) const
 {
     return 10;
+}
+
+void WarningStruct::Draw(int x, int y, int width) const
+{
+    Text(message).DrawInBoundedRectWithTransfers(x, y, width, Color::BACK, Color::FILL);
 }
