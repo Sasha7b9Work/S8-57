@@ -183,7 +183,7 @@ bool Item::ExistKeeper(const Page *_keeper) const
 }
 
 
-int Item::Height() const
+int Item::Height()
 {
     return 23;
 }

@@ -22,4 +22,6 @@ struct Grid
     static int MathBottom();
     static int MathHeight();
     static int ChannelBottom();
+    /// ¬озвращает нижнюю y-координату окна, в котором нужно выводить предупреждени€
+    static int BottomForWarnings();
 };

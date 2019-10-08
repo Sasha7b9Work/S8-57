@@ -18,5 +18,7 @@ public:
 
     static void AddWarning(const char *warning);
 
-    static void Show(int left, int down, int width, int height);
+    static void Draw();
+
+    static bool IsDrawing();
 };

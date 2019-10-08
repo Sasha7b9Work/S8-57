@@ -3,6 +3,7 @@
 #include "device.h"
 #include "Display/Primitives.h"
 #include "Display/Grid.h"
+#include "Menu/MenuItems.h"
 #include "Settings/Settings.h"
 #include "Utils/Debug.h"
 
@@ -54,7 +55,7 @@ int Grid::Top()
 
 int Grid::Width()
 {
-    static const int width[Device::Mode::Count] = { 280, Display::WIDTH - 1, 0, 320 };
+    static const int width[Device::Mode::Count] = { 280, Display::WIDTH - 1, 0, 319 };
 
     return width[Device::State::CurrentMode()];
 }
@@ -62,7 +63,7 @@ int Grid::Width()
 
 int Grid::Height()
 {
-    static const int height[Device::Mode::Count] = { 200, Display::HEIGHT - 1, 0, 240 };
+    static const int height[Device::Mode::Count] = { 200, Display::HEIGHT - 1, 0, 239 };
 
     return height[Device::State::CurrentMode()];
 }
@@ -494,4 +495,17 @@ void DrawRecorder()
     HLine(Display::WIDTH - 1).Draw(0, Display::HEIGHT / 2, Color::GRAY_20);
 
     Rectangle(Display::WIDTH - 1, Display::HEIGHT - 1).Draw(0, 0, Color::FILL);
+}
+
+
+int Grid::BottomForWarnings()
+{
+    int result = Bottom();
+
+    if (Menu::IsShown())
+    {
+        result -= Item::Height();
+    }
+
+    return result;
 }

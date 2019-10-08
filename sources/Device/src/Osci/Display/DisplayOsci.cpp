@@ -56,7 +56,7 @@ void DisplayOsci::Update()
 
     Menu::Draw();
 
-    Warnings::Show(Grid::Left(), Grid::Bottom(), Grid::Width(), Grid::Height());
+    Warnings::Draw();
 }
 
 

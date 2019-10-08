@@ -77,4 +77,4 @@ DEF_PAGE_4( pRecorder, // -V641 // -V1027                                       
     PageName::Recorder, &PageFunction::self, Item::Active, OnOpenClose_Recorder, Page::BeforeDraw, Page::HandlerKeyEvent
 )
 
-const Page *const PageRecorder::self = (const Page *)& pRecorder;
+const Page *const PageRecorder::self = (const Page *)&pRecorder;

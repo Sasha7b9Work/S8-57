@@ -74,7 +74,7 @@ public:
     /// Возвращает свою позицию в списке родителя
     int PositionInKeeperList() const;
     /// Высота итема
-    int Height() const;
+    static int Height();
     /// Ширина итема. pos - позиция итема на экране.
     int Width(int pos = -1) const;
 
@@ -156,7 +156,7 @@ public:
     /// Изменить номер текущей подстраницы на значение delta
     void ChangeSubPage(int delta);
 
-    void DrawTitle(int x, int y) const;
+    void DrawTitle(int y) const;
 
     void DrawItems(int x, int y) const;
 

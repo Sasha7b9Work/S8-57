@@ -1,4 +1,5 @@
 #include "defines.h"
+#include "Display/Grid.h"
 #include "Display/Primitives.h"
 #include "Display/Warnings.h"
 #include "Hardware/Timer.h"
@@ -14,7 +15,7 @@ static void RemoveOld();
 /// Возвращает true, если последнее сообщение в очереди такое же
 static bool BackMessageSame(const char *message);
 
-static void DrawMessages(int left, int down, int width, int height);
+static void DrawMessages();
 
 
 
@@ -42,7 +43,7 @@ static bool BackMessageSame(const char *message)
 }
 
 
-void Warnings::Show(int left, int down, int width, int height)
+void Warnings::Draw()
 {
     if (warnings.Size() == 0)
     {
@@ -53,7 +54,7 @@ void Warnings::Show(int left, int down, int width, int height)
 
     if (!warnings.IsEmpty())
     {
-        DrawMessages(left, down, width, height);
+        DrawMessages();
     }
 }
 
@@ -67,27 +68,33 @@ static void RemoveOld()
 }
 
 
-static void DrawMessages(int left, int down, int width, int height)
+static void DrawMessages()
 {
     Font::SetCurrent(TypeFont::_8);
 
-    int y = down;                   // Координата y нижнего левого угла прямоугольника, в котором будет отрисовано очередное сообщение
+    int y = Grid::BottomForWarnings();                   // Координата y нижнего левого угла прямоугольника, в котором будет отрисовано очередное сообщение
 
     int size = warnings.Size();
 
     for (int i = size - 1; i >= 0; i--)
     {
-        int h = warnings[i].Height(width);
+        int h = warnings[i].Height(Grid::Width());
 
         y -= h;
 
-        if (y < (down - height))
+        if (y < (Grid::Bottom() - Grid::Height()))
         {
             break;
         }
 
-        warnings[i].Draw(left, y, width);
+        warnings[i].Draw(Grid::Left(), y, Grid::Width());
     }
+}
+
+
+bool Warnings::IsDrawing()
+{
+    return (warnings.Size() != 0);
 }
 
 
@@ -99,7 +106,7 @@ WarningStruct::WarningStruct(const char *msg) : message(msg)
 
 bool WarningStruct::IsDead() const
 {
-    return (TIME_MS - timeStart) > 10000;
+    return (TIME_MS - timeStart) > 5000;
 }
 
 int WarningStruct::Height(int) const

@@ -45,7 +45,7 @@ void DisplayRecorder::Update()
 
     Font::SetCurrent(TypeFont::_8);
 
-    Warnings::Show(Grid::Left(), Grid::Bottom(), Grid::Width(), Grid::Height());
+    Warnings::Draw();
 
     Menu::Draw();
 }
