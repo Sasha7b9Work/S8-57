@@ -20,5 +20,5 @@ public:
 
     static void Draw();
 
-    static bool IsDrawing();
+    static bool IsShown();
 };

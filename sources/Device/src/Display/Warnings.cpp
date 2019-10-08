@@ -23,12 +23,10 @@ void Warnings::AddWarning(const char *warning)
 {
     if (BackMessageSame(warning))
     {
-        warnings[warnings.Size() - 1].timeStart = TIME_MS;
+        warnings.Back();
     }
-    else
-    {
-        warnings.Push(WarningStruct(warning));
-    }
+
+    warnings.Push(WarningStruct(warning));
 }
 
 
@@ -39,7 +37,7 @@ static bool BackMessageSame(const char *message)
         return false;
     }
 
-    return std::strcmp(message, warnings[warnings.Size() - 1].message) != 0;
+    return (std::strcmp(message, warnings[warnings.Size() - 1].message) == 0);
 }
 
 
@@ -82,7 +80,7 @@ static void DrawMessages()
 
         y -= h;
 
-        if (y < (Grid::Bottom() - Grid::Height()))
+        if (y < Grid::Top())
         {
             break;
         }
@@ -92,7 +90,7 @@ static void DrawMessages()
 }
 
 
-bool Warnings::IsDrawing()
+bool Warnings::IsShown()
 {
     return (warnings.Size() != 0);
 }
@@ -106,12 +104,12 @@ WarningStruct::WarningStruct(const char *msg) : message(msg)
 
 bool WarningStruct::IsDead() const
 {
-    return (TIME_MS - timeStart) > 5000;
+    return (TIME_MS - timeStart) > 3500;
 }
 
 int WarningStruct::Height(int) const
 {
-    return 10;
+    return 12;
 }
 
 void WarningStruct::Draw(int x, int y, int width) const

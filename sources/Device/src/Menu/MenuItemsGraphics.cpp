@@ -5,9 +5,6 @@
 #include "Menu/Menu.h"
 #include "Utils/Stack.h"
 #include "Utils/Values.h"
-#ifdef WIN32
-#include <cstdio>
-#endif
 
 
 void GovernorColor::Draw(int x, int y, bool opened) const
@@ -310,7 +307,7 @@ void Page::Draw(int x, int y, bool opened) const
 
 void Page::DrawTitle(int y) const
 {
-    if (Warnings::IsDrawing())
+    if (Warnings::IsShown())
     {
         y = Grid::Top();
     }
