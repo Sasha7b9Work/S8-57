@@ -69,6 +69,8 @@ static void RemoveOld()
 
 static void DrawMessages(int left, int down, int width, int height)
 {
+    Font::SetCurrent(TypeFont::_8);
+
     int y = down;                   // Координата y нижнего левого угла прямоугольника, в котором будет отрисовано очередное сообщение
 
     int size = warnings.Size();

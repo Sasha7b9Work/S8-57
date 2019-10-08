@@ -43,6 +43,8 @@ void DisplayRecorder::Update()
 
     DrawMemoryWindow();
 
+    Font::SetCurrent(TypeFont::_8);
+
     Warnings::Show(Grid::Left(), Grid::Bottom(), Grid::Width(), Grid::Height());
 
     Menu::Draw();

@@ -506,7 +506,6 @@ int Text::DrawInRectWithTransfers(int eX, int eY, int eWidth, int eHeight, Color
                 {
                     continue;
                 }
-                //x = DrawChar(x, y, symbol);
                 x = Char(symbol).Draw(x, y);
             }
             else                                            // ј здесь найдено по крайней мере два буквенных символа, т.е. найдено слово
@@ -522,7 +521,6 @@ int Text::DrawInRectWithTransfers(int eX, int eY, int eWidth, int eHeight, Color
                 else
                 {
                     curSymbol += length;
-                    //x = DrawText(x, y, word);
                     x = Text(word).Draw(x, y);
                 }
             }

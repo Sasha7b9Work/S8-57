@@ -25,7 +25,7 @@ void Console::Draw()
         prevMaxStrinsInConsole = set.dbg.numStrings;
     }
 
-    if (!IsShown())
+    if (!IsShown() || stringInConsole == 0)
     {
         return;
     }

@@ -26,6 +26,7 @@ void Queue<T>::Destroy()
     if (pointer != nullptr)
     {
         delete[] pointer;
+        pointer = nullptr;
         iFront = iBack = 0;
     }
 }

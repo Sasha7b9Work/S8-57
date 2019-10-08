@@ -70,6 +70,8 @@ static void SendTypeFontToPanel(TypeFont::E type)
 
 void Font::SetCurrent(TypeFont::E typeFont)
 {
+    pushedFont = currentFont;
+
     if (typeFont != currentFont)
     {
         switch (typeFont)
@@ -96,7 +98,6 @@ void Font::SetCurrent(TypeFont::E typeFont)
 
         SendTypeFontToPanel(typeFont);
 
-        pushedFont = currentFont;
         currentFont = typeFont;
     }
 }
