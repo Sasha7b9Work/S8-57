@@ -130,14 +130,14 @@ void InitDataPins()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Transceiver::Transmitter::Send(const uint8 *data, uint size)
+void Transceiver::Send(const uint8 *data, uint size)
 {
     std::memcpy(&buffer[_bytesInBuffer], data, size);
     _bytesInBuffer += size;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-bool Transceiver::Update()
+bool Transceiver::Receive()
 {
     Mode::E mode = Mode_Device();
 

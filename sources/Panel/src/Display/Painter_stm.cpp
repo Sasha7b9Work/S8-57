@@ -53,7 +53,7 @@ void Painter::EndScene(void)
         uint8 buffer[SIZE] = { Command::Screen, (uint8)sendingString };
         std::memcpy(buffer + 2, Display::GetBuffer() + sendingString * SIZE_STRING, SIZE_STRING);
 
-        Transceiver::Transmitter::Send(buffer, SIZE_STRING);
+        Transceiver::Send(buffer, SIZE_STRING);
 
         sendingString++;
         if (sendingString == 120)
@@ -260,7 +260,7 @@ void Painter::SendRow(int row)
 
     std::memcpy(&data[2], points, 320);
 
-    Transceiver::Transmitter::Send(data, 322);
+    Transceiver::Send(data, 322);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

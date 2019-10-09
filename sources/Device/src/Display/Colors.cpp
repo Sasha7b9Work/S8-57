@@ -325,7 +325,7 @@ void Color::WriteToDisplay(Color color)
     {
         lastColor = color;
 
-        Transceiver::Transmitter::Send(Command::Paint_SetColor, lastColor.value);
+        Transceiver::Send(Command::Paint_SetColor, lastColor.value);
     }
 }
 
@@ -336,5 +336,5 @@ void Color::LoadValueRGB()
 
     uint8 buffer[6] = { Command::Paint_SetPalette, value, (uint8)rgb, (uint8)(rgb >> 8), (uint8)(rgb >> 16), (uint8)(rgb >> 24) };
 
-    Transceiver::Transmitter::Send(buffer, 6);
+    Transceiver::Send(buffer, 6);
 }

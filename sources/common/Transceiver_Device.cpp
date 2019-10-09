@@ -120,13 +120,13 @@ void Receiver::InitPinsReceive()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Transceiver::Transmitter::Send(uint8 data)
+void Transceiver::Send(uint8 data)
 {
     Send(&data, 1);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Transceiver::Transmitter::Send(const uint8 *data, uint size)
+void Transceiver::Send(const uint8 *data, uint size)
 {
     inInteraction = true;
 
@@ -170,7 +170,7 @@ void Transceiver::Transmitter::Send(const uint8 *data, uint size)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-bool Transceiver::Update()
+bool Transceiver::Receive()
 {
     inInteraction = true;
 

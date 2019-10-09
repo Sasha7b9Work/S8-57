@@ -23,6 +23,7 @@ void  HAL_GPIO_DeInit(GPIO_TypeDef  *, uint32_t)
 }
 
 #ifdef DEVICE
+
 GPIO_PinState HAL_GPIO_ReadPin(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin)
 {
     if (GPIOx == GPIOG && GPIO_Pin == GPIO_PIN_1)
@@ -32,11 +33,14 @@ GPIO_PinState HAL_GPIO_ReadPin(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin)
 
     return GPIO_PIN_RESET;
 }
+
 #else
+
 GPIO_PinState HAL_GPIO_ReadPin(GPIO_TypeDef *, uint16_t)
 {
     return GPIO_PIN_RESET;
 }
+
 #endif
 
 

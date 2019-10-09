@@ -9,19 +9,19 @@ void Transceiver::Init()
 }
 
 
-void Transceiver::Transmitter::Send(const uint8 *, uint)
+void Transceiver::Send(const uint8 *, uint)
 {
     Recorder::ReadPoint();
 }
 
 
-void Transceiver::Transmitter::Send(uint8)
+void Transceiver::Send(uint8)
 {
 
 }
 
 
-bool Transceiver::Update()
+bool Transceiver::Receive()
 {
     return false;
 }

@@ -61,7 +61,7 @@ static void SendTypeFontToPanel(TypeFont::E type)
 
     if (prevType != type)
     {
-        Transceiver::Transmitter::Send(Command::Paint_SetFont, (uint8)type);
+        Transceiver::Send(Command::Paint_SetFont, (uint8)type);
         prevType = type;
     }
 }
@@ -115,7 +115,7 @@ void Font::SetSpacing(int) {}
 void Font::SetSpacing(int _spacing)
 {
     spacing = _spacing;
-    Transceiver::Transmitter::Send(Command::Paint_SetTextSpacing, (uint8)spacing);
+    Transceiver::Send(Command::Paint_SetTextSpacing, (uint8)spacing);
 }
 
 int Font::GetSpacing()
@@ -130,7 +130,7 @@ void Font::SetMinWidth(uint8) {}
 #else
 void Font::SetMinWidth(uint8 width)
 {
-    Transceiver::Transmitter::Send(Command::Paint_SetMinWidthFont, width);
+    Transceiver::Send(Command::Paint_SetMinWidthFont, width);
 }
 #endif
 

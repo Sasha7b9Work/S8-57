@@ -21,7 +21,7 @@ int main()
     {
         static uint prevTime = 0;
         
-        Transceiver::Update();
+        Transceiver::Receive();
 
         if(TIME_MS - prevTime > 2)
         {

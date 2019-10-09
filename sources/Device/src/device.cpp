@@ -120,7 +120,7 @@ void Device::Update()
 
     FDrive::Update();
 
-    while (Transceiver::Update()) {};
+    while (Transceiver::Receive()) {};
     
     Decoder::Update();
 }

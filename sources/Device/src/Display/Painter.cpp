@@ -16,13 +16,13 @@ void Painter::BeginScene(Color color)
 {
     color.SetAsCurrent();
 
-    Transceiver::Transmitter::Send(Command::Paint_BeginScene);
+    Transceiver::Send(Command::Paint_BeginScene);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Painter::EndScene()
 {
-    Transceiver::Transmitter::Send(Command::Paint_EndScene);
+    Transceiver::Send(Command::Paint_EndScene);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -45,6 +45,6 @@ void Painter::DrawTesterData(uint8 mode, Color color, const uint16 *x, const uin
         *pointer8++ = y[i];
     }
 
-    Transceiver::Transmitter::Send(buffer.data, buffer.size);
+    Transceiver::Send(buffer.data, buffer.size);
 }
 

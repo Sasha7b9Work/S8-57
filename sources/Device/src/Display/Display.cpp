@@ -374,12 +374,12 @@ static void ReadRow(uint8 row)
 {
     numRow = -1;
 
-    Transceiver::Transmitter::Send(Command::Screen, row);
+    Transceiver::Send(Command::Screen, row);
 
     while (numRow == -1)
     {
         uint8 data = 0;
-        Transceiver::Transmitter::Send(data);
+        Transceiver::Send(data);
         Decoder::Update();
     }
 }

@@ -80,7 +80,7 @@ static void AddToConsole(const char *text)
         buffer[0] = Command::AddToConsole;
         buffer[1] = (uint8)std::strlen(text);
         std::strcpy((char *)(buffer + 1), text);
-        Transceiver::Transmitter::Send(buffer, std::strlen(text) + 2);
+        Transceiver::Send(buffer, std::strlen(text) + 2);
 
         std::free(buffer);
     }

@@ -12,15 +12,12 @@ struct Transceiver
     /// если мы хотим использовать их в другом режиме.
     static void Init();
 
-    /// Функция циклического опроса. Принимает данные, если таковые имеются, и передаёт их через функцию, установленную в SetCallbackReceive.
-    static bool Update();
+    /// Функция циклического опроса. Принимает данные, если таковые имеются.
+    static bool Receive();
 
-    struct Transmitter
-    {
-        static void Send(const uint8 *data, uint size);
-        static void Send(uint8 data);
-        static void Send(uint8 byte0, uint8 byte1);
-    };
+    static void Send(const uint8 *data, uint size);
+    static void Send(uint8 data);
+    static void Send(uint8 byte0, uint8 byte1);
 
     static bool inInteraction;
 };

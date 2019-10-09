@@ -198,7 +198,7 @@ void Keyboard::Update()
 static void SendCommand(Control control, Control::Action::E action)
 {
     uint8 data[3] = {Command::ButtonPress, (uint8)control, (uint8)action};
-    Transceiver::Transmitter::Send(data, 3);
+    Transceiver::Send(data, 3);
 }   
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
