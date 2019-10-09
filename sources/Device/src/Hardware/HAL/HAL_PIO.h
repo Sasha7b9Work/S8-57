@@ -13,7 +13,7 @@ struct HPort
         _F,
         _G,
         _H,
-        Size
+        Count
     } value;
 };
 

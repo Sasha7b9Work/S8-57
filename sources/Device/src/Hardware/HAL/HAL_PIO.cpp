@@ -1,5 +1,6 @@
 #include "defines.h"
 #include "HAL_PIO.h"
+#include "Recorder/Recorder_win.h"
 #include <stm32f4xx_hal.h>
 
 
@@ -50,7 +51,7 @@ static const uint alternates[HAlternate::Count] =
 };
 
 
-static GPIO_TypeDef * const ports[HPort::Size] =
+static GPIO_TypeDef * const ports[HPort::Count] =
 {
     GPIOA,
     GPIOB,
@@ -105,6 +106,25 @@ void HAL_PIO::Write(HPort::E port, uint16 pin, HState::E state)
 
 bool HAL_PIO::Read(HPort::E port, uint16 pin)
 {
+    switch (port)
+    {
+    case HPort::_G:
+        return RecorderHAL::ReadyPoint();
+        break;
+    case HPort::_A:
+    case HPort::_B:
+    case HPort::_C:
+    case HPort::_D:
+    case HPort::_E:
+    case HPort::_F:
+    case HPort::_H:
+    case HPort::Count:
+        break;
+    default:
+        // здесь ничего не делаем
+        break;
+    }
+
     return (HAL_GPIO_ReadPin(PORT(port), pin) == GPIO_PIN_SET);
 }
 

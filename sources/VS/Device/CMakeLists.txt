@@ -163,6 +163,7 @@ source_group(Recorder           FILES   ../../Device/src/Recorder/DisplayRecorde
                                         ../../Device/src/Recorder/DisplayRecorder.cpp
                                         ../../Device/src/Recorder/Recorder.h
                                         ../../Device/src/Recorder/Recorder.cpp
+                                                     src/Recorder/Recorder_win.h
                                                      src/Recorder/Recorder_win.cpp
                                         ../../Device/src/Recorder/StorageRecorder.h
                                         ../../Device/src/Recorder/StorageRecorder.cpp)
@@ -296,6 +297,7 @@ file(GLOB SOURCES   ../../common/_VS/*
                     ../../Device/src/Recorder/DisplayRecorder.cpp
                     ../../Device/src/Recorder/Recorder.h
                     ../../Device/src/Recorder/Recorder.cpp
+                                 src/Recorder/Recorder_win.h
                                  src/Recorder/Recorder_win.cpp
                     ../../Device/src/Recorder/StorageRecorder.h
                     ../../Device/src/Recorder/StorageRecorder.cpp
