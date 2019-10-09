@@ -1,4 +1,5 @@
 #include "defines.h"
+#include "Transceiver.h"
 #include "Display/Primitives.h"
 #include "Display/Painter.h"
 #include <SDL.h>
@@ -32,6 +33,7 @@ void Rectangle::Draw(int x, int y, Color color)
     color.SetAsCurrent();
     SDL_Rect rect = { x, y, width + 1, height + 1 };
     SDL_RenderDrawRect(renderer, &rect);
+    Transceiver::Send(nullptr, 0);                            // Это нужно лишь для того, чтобы регистратор читал точки
 }
 
 
