@@ -4,42 +4,12 @@
 #include <cstring>
 
 
-#define  _16K (16 * 1024)
-#define  _64K (64 * 1024)
-#define _128K (128 * 1024)
-
-
-static uint8 sector0 [ _16K];   // 0x08000000
-static uint8 sector1 [ _16K];   // 0x08004000
-static uint8 sector2 [ _16K];   // 0x08008000
-static uint8 sector3 [ _16K];   // 0x0800C000
-static uint8 sector4 [ _64K];   // 0x08010000
-static uint8 sector5 [_128K];   // 0x08020000
-static uint8 sector6 [_128K];   // 0x08040000
-static uint8 sector7 [_128K];   // 0x08060000
-static uint8 sector8 [_128K];   // 0x08080000
-static uint8 sector9 [_128K];   // 0x080A0000
-static uint8 sector10[_128K];   // 0x080C0000
-static uint8 sector11[_128K];   // 0x080E0000
-static uint8 sector12[ _16K];   // 0x08100000
-static uint8 sector13[ _16K];   // 0x08104000
-static uint8 sector14[ _16K];   // 0x08108000
-static uint8 sector15[ _16K];   // 0x0810C000
-static uint8 sector16[ _64K];   // 0x08110000
-static uint8 sector17[_128K];   // 0x08120000
-static uint8 sector18[_128K];   // 0x08140000
-static uint8 sector19[_128K];   // 0x08160000
-static uint8 sector20[_128K];   // 0x08180000
-static uint8 sector21[_128K];   // 0x081A0000
-static uint8 sector22[_128K];   // 0x081C0000
-static uint8 sector23[_128K];   // 0x081E0000
-
-
 struct SectorTypeDef
 {
     uint address;
     uint8 *memory;
     uint size;
+
     /// Возвращает true, если сектор содержит ячейку памяти с адресом addr
     bool IsConsist(uint addr) const
     {
@@ -54,33 +24,39 @@ struct SectorTypeDef
     }
 };
 
+#define  _16K (16 * 1024)
+#define  _64K (64 * 1024)
+#define _128K (128 * 1024)
+
+static uint8 memory[2 * 1024 * 1024];
+
 
 static const SectorTypeDef sectors[24] =
 {
-    {0x08000000, sector0,   _16K},
-    {0x08004000, sector1,   _16K},
-    {0x08008000, sector2,   _16K},
-    {0x0800C000, sector3,   _16K},
-    {0x08010000, sector4,   _64K},
-    {0x08020000, sector5,  _128K},
-    {0x08040000, sector6,  _128K},
-    {0x08060000, sector7,  _128K},
-    {0x08080000, sector8,  _128K},
-    {0x080A0000, sector9,  _128K},
-    {0x080C0000, sector10, _128K},
-    {0x080E0000, sector11, _128K},
-    {0x08100000, sector12,  _16K},
-    {0x08104000, sector13,  _16K},
-    {0x08108000, sector14,  _16K},
-    {0x0810C000, sector15,  _64K},
-    {0x08110000, sector16, _128K},
-    {0x08120000, sector17, _128K},
-    {0x08140000, sector18, _128K},
-    {0x08160000, sector19, _128K},
-    {0x08180000, sector20, _128K},
-    {0x081A0000, sector21, _128K},
-    {0x081C0000, sector22, _128K},
-    {0x081E0000, sector23, _128K}
+    {0x08000000, &memory[0],                     _16K},     // sector0
+    {0x08004000, &memory[_16K],                  _16K},     // sector1
+    {0x08008000, &memory[_16K * 2],              _16K},     // sector2
+    {0x0800C000, &memory[_16K * 3],              _16K},     // sector3
+    {0x08010000, &memory[_16K * 4],              _64K},     // sector4
+    {0x08020000, &memory[_128K],                 _128K},    // sector5
+    {0x08040000, &memory[_128K * 2],             _128K},    // sector6
+    {0x08060000, &memory[_128K * 3],             _128K},    // sector7
+    {0x08080000, &memory[_128K * 4],             _128K},    // sector8
+    {0x080A0000, &memory[_128K * 5],             _128K},    // sector9
+    {0x080C0000, &memory[_128K * 6],             _128K},    // sector10
+    {0x080E0000, &memory[_128K * 7],             _128K},    // sector11
+    {0x08100000, &memory[_128K * 8],             _16K},     // sector12
+    {0x08104000, &memory[_128K * 8 + _16K],      _16K},     // sector13
+    {0x08108000, &memory[_128K * 8 + _16K * 2],  _16K},     // sector14
+    {0x0810C000, &memory[_128K * 8 + _16K * 3],  _16K},     // sector15
+    {0x08110000, &memory[_128K * 8 + _16K * 4],  _64K},     // sector16
+    {0x08120000, &memory[_128K * 8 + _128K],     _128K},    // sector17
+    {0x08140000, &memory[_128K * 8 + _128K * 2], _128K},    // sector18
+    {0x08160000, &memory[_128K * 8 + _128K * 3], _128K},    // sector19
+    {0x08180000, &memory[_128K * 8 + _128K * 4], _128K},    // sector20
+    {0x081A0000, &memory[_128K * 8 + _128K * 5], _128K},    // sector21
+    {0x081C0000, &memory[_128K * 8 + _128K * 6], _128K},    // sector22
+    {0x081E0000, &memory[_128K * 8 + _128K * 7], _128K}     // sector23
 };
 
 
@@ -124,6 +100,5 @@ void HAL_EEPROM::WriteBytes(uint address, const uint8 *buffer, int size)
         const SectorTypeDef &sector = GetSector(address);
 
         sector.WriteByte(address++, *data++);
-
     }
 }
