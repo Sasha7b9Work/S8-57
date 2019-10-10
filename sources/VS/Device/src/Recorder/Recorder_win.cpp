@@ -15,7 +15,7 @@ bool RecorderHAL::ReadyPoint()
 }
 
 
-uint8 RecorderHAL::ReadData(Chan::E channel)
+uint8 RecorderHAL::ReadData(Chan::E)
 {
     return VALUE::AVE;
 }
