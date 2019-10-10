@@ -21,10 +21,12 @@ extern const SectorTypeDef sectors[];
 #define ADDR_SECTOR_RECORDER_1 ((uint)sectors[17].memory)
 
 #else
+
 /// ѕервый сектор дл€ сохранени€ настроек. ѕри его заполнении начинает использоватьс€ сектор 2.
 #define ADDR_SECTOR_SETTINGS_1  ((uint)0x080C0000)
 #define ADDR_SECTOR_RECORDER_1  ((uint)0x08120000)
 #define ADDR_SECTOR_RECORDER_2  ((uint)0x08140000)
+
 #endif
 
 

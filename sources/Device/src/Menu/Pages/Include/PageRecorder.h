@@ -54,9 +54,9 @@ struct RecorderScaleX
 
 struct SettingsRecorder
 { //-V802
-    bool                    enabledChanA;   ///< Включение записи канала 1
-    bool                    enabledChanB;   ///< Включение записи канала 2
-    bool                    enabledSensor;  ///< Включение записи показаний датчика
+    bool                    enA;            ///< Включение записи канала 1
+    bool                    enB;            ///< Включение записи канала 2
+    bool                    enSensor;       ///< Включение записи показаний датчика
     RecorderTypeStorage::E  storageRecord;  ///< Куда сохранять данные
     RecorderTypeStorage::E  storagePlay;    ///< Откуда брать сохранённые данные
     RecorderAxis::E         axisMove;       ///< Текущая ось перемещения

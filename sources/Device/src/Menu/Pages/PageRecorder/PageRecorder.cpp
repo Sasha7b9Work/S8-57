@@ -22,7 +22,7 @@ DEF_CHOICE_3( cDestination,                                                     
 
 static bool IsActive_Start()
 {
-    return set.rec.enabledChanA || set.rec.enabledChanB || set.rec.enabledSensor;
+    return set.rec.enA || set.rec.enB || set.rec.enSensor;
 }
 
 static void Draw_Start(int x, int y)

@@ -209,14 +209,14 @@ static void DrawData()
     {
         if (!point.IsEmpty())
         {
-            if (set.rec.enabledChanA)
+            if (set.rec.enA)
             {
                 int min = Y(point.Min(Chan::A));
                 int max = Y(point.Max(Chan::A));
 
                 VLine(max - min).Draw(x, min, Color::CHAN[Chan::A]);
             }
-            if (set.rec.enabledChanB)
+            if (set.rec.enB)
             {
                 int min = Y(point.Min(Chan::B));
                 int max = Y(point.Max(Chan::B));
