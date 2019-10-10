@@ -1,8 +1,6 @@
 #include "stdafx.h"
-#ifdef WIN32
-#ifndef DEVICE
+#ifdef GUI
 #include "Recorder/Recorder_win.h"
-#endif
 #endif
 #include <stm32f4xx_hal.h>
 
@@ -24,8 +22,7 @@ void  HAL_GPIO_DeInit(GPIO_TypeDef  *, uint32_t)
 
 }
 
-#ifdef WIN32
-#ifndef DEVICE
+#ifdef GUI
 
 GPIO_PinState HAL_GPIO_ReadPin(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin)
 {
@@ -37,7 +34,6 @@ GPIO_PinState HAL_GPIO_ReadPin(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin)
     return GPIO_PIN_RESET;
 }
 
-#endif
 #else
 
 GPIO_PinState HAL_GPIO_ReadPin(GPIO_TypeDef *, uint16_t)
