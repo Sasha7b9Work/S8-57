@@ -51,7 +51,7 @@ void VLine::Draw(int x, int y, Color color)
 }
 
 
-void Point::Draw(int x, int y, Color color)
+void Pixel::Draw(int x, int y, Color color)
 {
     color.SetAsCurrent();
     SDL_RenderDrawPoint(renderer, x, y);

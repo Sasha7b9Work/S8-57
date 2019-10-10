@@ -81,10 +81,10 @@ private:
 
 
 
-class Point
+class Pixel
 {
 public:
-    Point() {};
+    Pixel() {};
     void Draw(int x, int y, Color color = Color::NUMBER);
 private:
 };

@@ -188,7 +188,7 @@ int Text::DrawCharWithLimitation(int eX, int eY, char _symbol, int limitX, int l
                 {
                     if ((x >= limitX) && (x <= (limitX + limitWidth)) && (y >= limitY) && (y <= limitY + limitHeight))
                     {
-                        Point().Draw(x, y);
+                        Pixel().Draw(x, y);
                     }
                 }
                 x++;
@@ -715,7 +715,7 @@ void VPointLine::Draw(int _x, int _y, Color color)
 
     for (int y = y0; y <= y1; y += static_cast<int>(delta))
     {
-        Point().Draw(_x, y);
+        Pixel().Draw(_x, y);
     }
 }
 
@@ -732,7 +732,7 @@ void HPointLine::Draw(int _x, int _y)
 
     for (int x = x0; x <= x1; x += static_cast<int>(delta))
     {
-        Point().Draw(x, _y);
+        Pixel().Draw(x, _y);
     }
 }
 

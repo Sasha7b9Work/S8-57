@@ -42,7 +42,7 @@ void VLine::Draw(int x, int y, Color color)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Point::Draw(int x, int y, Color color)
+void Pixel::Draw(int x, int y, Color color)
 {
     color.SetAsCurrent();
     uint8 buffer[4] = { Command::Paint_SetPoint, (uint8)x, (uint8)(x >> 8), (uint8)y };

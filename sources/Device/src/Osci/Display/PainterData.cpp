@@ -343,7 +343,7 @@ static void DrawModeLinesPeakDetOff(int center, const uint8 *data, float scale, 
 
         if (value == valuePrev)
         {
-            Point().Draw(x++, valuePrev);
+            Pixel().Draw(x++, valuePrev);
         }
         else
         {
@@ -379,8 +379,8 @@ static void DrawModePointsPeakDetOn(int center, const uint8 *data, float scale, 
 {
     for (int i = 0; i < 281 * 2; i += 2)
     {
-        Point().Draw(x, (int)(center - (data[i] - VALUE::AVE) * scale + 0.5F));
-        Point().Draw(x, (int)(center - (data[i + 1] - VALUE::AVE) * scale + 0.5F));
+        Pixel().Draw(x, (int)(center - (data[i] - VALUE::AVE) * scale + 0.5F));
+        Pixel().Draw(x, (int)(center - (data[i + 1] - VALUE::AVE) * scale + 0.5F));
         x++;
     }
 }
@@ -391,7 +391,7 @@ static void DrawModePointsPeakDetOff(int center, const uint8 *data, float scale,
     for (int i = 0; i < 280; i++)
     {
         float value = center - (data[i] - VALUE::AVE) * scale;
-        Point().Draw(x + i, ROUND(uint8, value));
+        Pixel().Draw(x + i, ROUND(uint8, value));
     }
 }
 
