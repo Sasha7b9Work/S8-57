@@ -33,7 +33,7 @@ uint Record::NumPoints()
 
 int Record::FreeMemory()
 {
-    return 1024 * 128 - (int)(sizeof(PointRec) * numPoints);
+    return 1024 * 128 - (int)(sizeof(Point) * numPoints);
 }
 
 
@@ -41,7 +41,7 @@ void Record::AddPoint(BitSet16 dataA, BitSet16 dataB)
 {
     BitSet32 bs(dataA.halfWord, dataB.halfWord);
 
-    EEPROM::WriteData(ADDR_SECTOR_RECORDER_1 + numPoints * sizeof(PointRec), &bs, sizeof(BitSet32));
+    EEPROM::WriteData(ADDR_SECTOR_RECORDER_1 + numPoints * sizeof(Point), &bs, sizeof(BitSet32));
 
     numPoints++;
 }
@@ -62,13 +62,13 @@ void StorageRecorder::CreateNewRecord()
 
 void Record::SetDataAddress(uint16 *address)
 {
-    start = (PointRec *)address;
+    start = (Point *)address;
     numPoints = 0;
     pointer = MAX_UINT;
 }
 
 
-PointRec Record::GetPoint(uint position, uint maxPoints)
+Point Record::GetPoint(uint position, uint maxPoints)
 {
     pointer = position - 1;
 
@@ -76,40 +76,40 @@ PointRec Record::GetPoint(uint position, uint maxPoints)
 }
 
 
-PointRec Record::NextPoint(uint maxPoints)
+Point Record::NextPoint(uint maxPoints)
 {
     pointer++;
 
     if (pointer >= maxPoints)
     {
-        return PointRec::CreateEmpty();
+        return Point::CreateEmpty();
     }
 
-    return PointRec(start[pointer]);
+    return Point(start[pointer]);
 }
 
 
-int PointRec::Max(Chan::E ch)
+int Point::Max(Chan::E ch)
 {
     return data[ch].byte0;
 }
 
 
-int PointRec::Min(Chan::E ch)
+int Point::Min(Chan::E ch)
 {
     return data[ch].byte1;
 }
 
 
-bool PointRec::IsEmpty()
+bool Point::IsEmpty()
 {
     return (data[Chan::A].halfWord == 0 && data[Chan::B].halfWord == 0);
 }
 
 
-PointRec PointRec::CreateEmpty()
+Point Point::CreateEmpty()
 {
-    return PointRec(BitSet16(0), BitSet16(0));
+    return Point(BitSet16(0), BitSet16(0));
 }
 
 

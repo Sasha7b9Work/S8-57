@@ -3,14 +3,14 @@
 
 
 /// Точка на графике
-struct PointRec
+struct Point
 {
-    PointRec(BitSet16 dataA, BitSet16 dataB)
+    Point(BitSet16 dataA, BitSet16 dataB)
     {
         data[Chan::A] = dataA;
         data[Chan::B] = dataB;
     }
-    static PointRec CreateEmpty();
+    static Point CreateEmpty();
     bool IsEmpty();
     int Min(Chan::E ch);
     int Max(Chan::E ch);
@@ -30,16 +30,16 @@ struct Record
     /// Число точек в регистрограмме
     uint NumPoints();
     /// Получить точку в позиции position
-    PointRec GetPoint(uint position, uint maxPoints);
+    Point GetPoint(uint position, uint maxPoints);
     /// Получить следующую точку
-    PointRec NextPoint(uint maxPoints);
+    Point NextPoint(uint maxPoints);
     /// Время записи первой точки
     PackedTime timeStart;
     /// Возвращает размер свободной памяти
     int FreeMemory();
 private:
     /// Указатель на буфер данных - фактически адрес первой сохранённой точки
-    PointRec *start;
+    Point *start;
     /// Количество сохранённых точек
     uint numPoints;
     /// Указатель на последние считаннные данные

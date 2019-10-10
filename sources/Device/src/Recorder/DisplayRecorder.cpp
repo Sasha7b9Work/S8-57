@@ -117,7 +117,7 @@ static char *VoltageCursor(Chan::E ch, int numCur, char buffer[20])
 
     Record *frame = StorageRecorder::CurrentRecord();
 
-    PointRec point = frame->GetPoint(numPoint, frame->NumPoints());
+    Point point = frame->GetPoint(numPoint, frame->NumPoints());
 
     uint8 value = (uint8)((point.Min(ch) + point.Max(ch)) / 2);
 
@@ -200,7 +200,7 @@ static void DrawData()
 
     int x = 0;
 
-    PointRec point = record->GetPoint((Recorder::IsRunning() || startPoint < 0) ? 
+    Point point = record->GetPoint((Recorder::IsRunning() || startPoint < 0) ? 
                                                            ((numPoints < 320) ? (0) : (numPoints - 320))
                                                             : startPoint,
                                                             numPoints);
