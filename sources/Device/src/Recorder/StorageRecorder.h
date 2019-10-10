@@ -22,7 +22,7 @@ private:
 /// ќписывает данные регистратора - цельную запись точек
 struct Record
 {
-    Record() : start(0), numPoints(0), pointer(0) {} //-V730
+    Record() : start(nullptr), numPoints(0), pointer(0) {} //-V730
 
     void SetDataAddress(uint16 *address);
     /// ƒобавление считаной точки

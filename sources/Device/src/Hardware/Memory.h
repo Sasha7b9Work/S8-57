@@ -2,11 +2,30 @@
 #include "Utils/String.h"
 
 
+#ifdef GUI
 
+struct SectorTypeDef
+{
+    uint address;
+    uint8 *memory;
+    uint size;
+    /// ¬озвращает true, если сектор содержит €чейку пам€ти с адресом addr
+    bool IsConsist(uint addr) const;
+
+    void WriteByte(uint addr, uint8 value) const;
+};
+
+extern const SectorTypeDef sectors[];
+
+#define ADDR_SECTOR_SETTINGS_1 ((uint)sectors[10].memory)
+#define ADDR_SECTOR_RECORDER_1 ((uint)sectors[17].memory)
+
+#else
 /// ѕервый сектор дл€ сохранени€ настроек. ѕри его заполнении начинает использоватьс€ сектор 2.
 #define ADDR_SECTOR_SETTINGS_1  ((uint)0x080C0000)
 #define ADDR_SECTOR_RECORDER_1  ((uint)0x08120000)
 #define ADDR_SECTOR_RECORDER_2  ((uint)0x08140000)
+#endif
 
 
 
