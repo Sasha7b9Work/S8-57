@@ -4,14 +4,23 @@
 
 #include "defines.h"
 #include "FPGA/FPGA.h"
+#include "Hardware/Timer.h"
 #include "Recorder/Recorder_win.h"
 
 
 bool RecorderHAL::ReadyPoint()
 {
-    static bool timeLastRead = 0;   // Время предыдущего чтения точки
+    static uint timeLastRead = 0;   // Время предыдущего чтения точки
 
-    return true;
+    bool result = false;
+
+    if (TIME_MS - timeLastRead > 100)
+    {
+        timeLastRead = TIME_MS;
+        result = true;
+    }
+
+    return result;
 }
 
 

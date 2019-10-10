@@ -40,7 +40,7 @@ static const SectorTypeDef sectors[24] =
 
 bool SectorTypeDef::IsConsist(uint addr) const
 {
-    return (addr >= address) && (addr < (address + size));
+    return (addr >= (uint)memory) && (addr < (uint)(memory + size));
 }
 
 
@@ -48,6 +48,6 @@ void SectorTypeDef::WriteByte(uint addr, uint8 value) const
 {
     if (IsConsist(addr))
     {
-        memory[addr - address] = value;
+        *((uint8 *)addr) = value;
     }
 }
