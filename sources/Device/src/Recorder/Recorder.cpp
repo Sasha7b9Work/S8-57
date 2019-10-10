@@ -79,12 +79,12 @@ void Recorder::ReadPoint()
 {
     if (IsRunning() && HAL_PIO::Read(HPort::_G, HPin::_1))
     {
-        if (StorageRecorder::CurrentFrame()->FreeMemory() > 4)
+        if (StorageRecorder::CurrentRecord()->FreeMemory() > 4)
         {
             BitSet16 dataA(HAL_FSMC::ReadFromFPGA(RD::DATA_A), HAL_FSMC::ReadFromFPGA(RD::DATA_A + 1));
             BitSet16 dataB(HAL_FSMC::ReadFromFPGA(RD::DATA_B), HAL_FSMC::ReadFromFPGA(RD::DATA_B + 1));
 
-            StorageRecorder::CurrentFrame()->AddPoint(dataA, dataB);
+            StorageRecorder::CurrentRecord()->AddPoint(dataA, dataB);
         }
         else
         {
@@ -104,7 +104,7 @@ void Recorder::Start()
 
     EEPROM::EraseSector(ADDR_SECTOR_RECORDER_1);
 
-    StorageRecorder::CreateNewFrame();
+    StorageRecorder::CreateNewRecord();
 
     HAL_FSMC::WriteToFPGA16(WR::PRED_LO, 0); //-V525
     HAL_FSMC::WriteToFPGA16(WR::POST_LO, 0);

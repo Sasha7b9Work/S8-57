@@ -20,9 +20,9 @@ private:
 
 
 /// ќписывает данные регистратора - цельную запись точек
-struct FrameRec
+struct Record
 {
-    FrameRec() : start(0), numPoints(0), pointer(0) {} //-V730
+    Record() : start(0), numPoints(0), pointer(0) {} //-V730
 
     void SetDataAddress(uint16 *address);
     /// ƒобавление считаной точки
@@ -49,7 +49,7 @@ private:
 
 struct StorageRecorder
 {
-    static void CreateNewFrame();
+    static void CreateNewRecord();
 
-    static FrameRec *CurrentFrame();
+    static Record *CurrentRecord();
 };

@@ -8,36 +8,36 @@
 /// Обёртка для Heap()
 struct Stack
 {
-    static FrameRec frame;
+    static Record record;
 
-    static void Push(const FrameRec &_frame)
+    static void Push(const Record &_record)
     {
-        frame = _frame;
-        frame.SetDataAddress((uint16 *)ADDR_SECTOR_RECORDER_1); //-V566
+        record = _record;
+        record.SetDataAddress((uint16 *)ADDR_SECTOR_RECORDER_1); //-V566
     }
 
-    static FrameRec *Top()
+    static Record *Top()
     {
-        return &frame;
+        return &record;
     }
 };
 
-FrameRec Stack::frame;
+Record Stack::record;
 
 
-uint FrameRec::NumPoints()
+uint Record::NumPoints()
 {
     return numPoints;
 }
 
 
-int FrameRec::FreeMemory()
+int Record::FreeMemory()
 {
     return 1024 * 128 - (int)(sizeof(PointRec) * numPoints);
 }
 
 
-void FrameRec::AddPoint(BitSet16 dataA, BitSet16 dataB)
+void Record::AddPoint(BitSet16 dataA, BitSet16 dataB)
 {
     BitSet32 bs(dataA.halfWord, dataB.halfWord);
 
@@ -47,20 +47,20 @@ void FrameRec::AddPoint(BitSet16 dataA, BitSet16 dataB)
 }
 
 
-FrameRec *StorageRecorder::CurrentFrame()
+Record *StorageRecorder::CurrentRecord()
 {
     return Stack::Top();
 }
 
 
-void StorageRecorder::CreateNewFrame()
+void StorageRecorder::CreateNewRecord()
 {
-    FrameRec frame;
-    Stack::Push(frame);
+    Record record;
+    Stack::Push(record);
 }
 
 
-void FrameRec::SetDataAddress(uint16 *address)
+void Record::SetDataAddress(uint16 *address)
 {
     start = (PointRec *)address;
     numPoints = 0;
@@ -68,7 +68,7 @@ void FrameRec::SetDataAddress(uint16 *address)
 }
 
 
-PointRec FrameRec::GetPoint(uint position, uint maxPoints)
+PointRec Record::GetPoint(uint position, uint maxPoints)
 {
     pointer = position - 1;
 
@@ -76,7 +76,7 @@ PointRec FrameRec::GetPoint(uint position, uint maxPoints)
 }
 
 
-PointRec FrameRec::NextPoint(uint maxPoints)
+PointRec Record::NextPoint(uint maxPoints)
 {
     pointer++;
 
