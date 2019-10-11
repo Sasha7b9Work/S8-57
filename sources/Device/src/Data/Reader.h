@@ -15,14 +15,14 @@ extern uint16 *ave[2];
 #define DATA        pData
 #define DS          pDS                 ///< ”казатель на настройки текущего рисуемого сигнала.
 
-#define IN(ch)  (dataIN[ch])
+#define IN(ch)  (dataIN[static_cast<int>(ch)])
 #define IN_A    IN(Chan::A)
 #define IN_B    IN(Chan::B)
-#define OUT(ch) (dataOUT[ch])
+#define OUT(ch) (dataOUT[static_cast<int>(ch)])
 #define OUT_A   OUT(Chan::A)
 #define OUT_B   OUT(Chan::B)
 
-#define AVE_DATA(ch) ave[ch]
+#define AVE_DATA(ch) ave[static_cast<int>(ch)]
 #define AVE_1        AVE_DATA(Chan::A)
 #define AVE_2        AVE_DATA(Chan::B)
 

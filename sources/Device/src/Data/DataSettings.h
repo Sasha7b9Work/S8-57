@@ -69,11 +69,11 @@ struct DataSettings
 #define ENABLED_DS_A            ENABLED_A(DS)
 #define ENABLED_DS_B            ENABLED_B(DS)
 
-#define RSHIFT(ds, ch)          ((ds)->rShift[ch])
+#define RSHIFT(ds, ch)          ((ds)->rShift[static_cast<int>(ch)])
 #define RSHIFT_A(ds)            (RSHIFT(ds, Chan::A))
 #define RSHIFT_B(ds)            (RSHIFT(ds, Chan::B))
 
-#define Lval_RANGE(ds, ch)      ((ds)->range[ch])
+#define Lval_RANGE(ds, ch)      ((ds)->range[static_cast<int>(ch)])
 #define Lval_RANGE_A(ds)        (Lval_RANGE(ds, Chan::A))
 #define Lval_RANGE_B(ds)        (Lval_RANGE(ds, Chan::B))
 #define RANGE(ds, ch)           ((Range::E)Lval_RANGE(ds, ch))
