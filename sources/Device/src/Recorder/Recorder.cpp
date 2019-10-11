@@ -136,7 +136,7 @@ static void RestoreOsciSettings()
 
 void Recorder::OnPressStart()
 {
-    if (Menu::OpenedItem() == (Item *)PageRecorder::self)
+    if (Menu::OpenedItem() == const_cast<Page *>(PageRecorder::self))
     {
         if (running)
         {
@@ -169,11 +169,11 @@ void RecorderScaleX::Change(int delta)
     {
         if (delta > 0)
         {
-            ::Math::LimitationIncrease<uint8>((uint8 *)(&set.rec.scaleX), (uint8)(RecorderScaleX::Size - 1));
+            ::Math::LimitationIncrease<uint8>(reinterpret_cast<uint8 *>(&set.rec.scaleX.value), static_cast<uint8>(RecorderScaleX::Count - 1));
         }
         else
         {
-            ::Math::LimitationDecrease<uint8>((uint8 *)(&set.rec.scaleX), 0);
+            ::Math::LimitationDecrease<uint8>(reinterpret_cast<uint8 *>(&set.rec.scaleX.value), 0);
         }
 
         Load();
@@ -197,7 +197,7 @@ pString RecorderScaleX::ToString() const
             name = nRU;
         };
     }
-    scales[RecorderScaleX::Size] =
+    scales[RecorderScaleX::Count] =
     {
         StructScaleX("0.1\x10ñ"),
         StructScaleX("0.2\x10ñ"),
@@ -208,7 +208,7 @@ pString RecorderScaleX::ToString() const
         StructScaleX("10\x10ñ")
     };
 
-    return scales[value].name;
+    return scales[static_cast<int>(value)].name;
 }
 
 
@@ -219,7 +219,7 @@ uint RecorderScaleX::BytesToSec() const
         uint value;
         StructBytes(uint v) : value(v) {};
     }
-    bytes[RecorderScaleX::Size] =
+    bytes[RecorderScaleX::Count] =
     {
         800,
         400,
@@ -230,7 +230,7 @@ uint RecorderScaleX::BytesToSec() const
         8
     };
 
-    return bytes[value].value;
+    return bytes[static_cast<int>(value)].value;
 }
 
 
@@ -241,7 +241,7 @@ uint RecorderScaleX::TimeForPointMS() const
         uint value;
         StructTime(uint v) : value(v) {};
     }
-    bytes[RecorderScaleX::Size] =
+    bytes[RecorderScaleX::Count] =
     {
         5,
         10,
@@ -252,7 +252,7 @@ uint RecorderScaleX::TimeForPointMS() const
         500
     };
 
-    return bytes[value].value;
+    return bytes[static_cast<int>(value)].value;
 }
 
 #ifdef WIN32
@@ -262,7 +262,7 @@ uint RecorderScaleX::TimeForPointMS() const
 
 void RecorderScaleX::Load()
 {
-    static const uint8 values[RecorderScaleX::Size] =
+    static const uint8 values[RecorderScaleX::Count] =
     {
         BIN_U8(01010110),  // -V2501  // 100ms  
         BIN_U8(01010111),  // -V2501  // 200ms  
@@ -273,7 +273,7 @@ void RecorderScaleX::Load()
         BIN_U8(01011110)   // -V2501  // 10s
     };
 
-    HAL_FSMC::WriteToFPGA8(WR::TBASE, values[RecorderScaleX::Current().value]);
+    HAL_FSMC::WriteToFPGA8(WR::TBASE, values[static_cast<int>(RecorderScaleX::Current().value)]);
 
     if (Recorder::IsRunning())
     {

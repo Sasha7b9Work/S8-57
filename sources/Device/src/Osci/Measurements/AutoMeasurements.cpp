@@ -102,8 +102,8 @@ static const MeasureCalculate sMeas[Measure::Type::Number] =
 };
 
 
-int AutoMeasurements::markerTime[Chan::Size][2] = {{Integer::ERROR}, {Integer::ERROR}};
-int AutoMeasurements::markerVoltage[Chan::Size][2] = {{Integer::ERROR}, {Integer::ERROR}};
+int AutoMeasurements::markerTime[Chan::Count][2] = {{Integer::ERROR}, {Integer::ERROR}};
+int AutoMeasurements::markerVoltage[Chan::Count][2] = {{Integer::ERROR}, {Integer::ERROR}};
 int8 AutoMeasurements::posActive = 0;
 
 typedef struct

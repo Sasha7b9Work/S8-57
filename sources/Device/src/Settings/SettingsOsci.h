@@ -20,7 +20,7 @@ struct Chan
     {
         A,
         B,
-        Size
+        Count
     } value;
     explicit Chan(E v) : value(v) { };
     bool IsA() { return value == A; };

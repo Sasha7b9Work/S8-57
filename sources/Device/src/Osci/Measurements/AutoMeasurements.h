@@ -64,9 +64,9 @@ struct AutoMeasurements
 
     static char *Float2String(float, bool, char buffer[20]);
 
-    static int markerTime[Chan::Size][2];
+    static int markerTime[Chan::Count][2];
 
-    static int markerVoltage[Chan::Size][2];
+    static int markerVoltage[Chan::Count][2];
     /// ѕозици€ активного измерени€ (на котором курсор)
     static int8 posActive;
 };

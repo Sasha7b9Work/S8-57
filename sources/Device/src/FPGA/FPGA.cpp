@@ -18,7 +18,7 @@ uint16 FPGA::valueADC = 0;
 uint16 FPGA::post = (uint16)~(512);
 uint16 FPGA::pred = (uint16)~(512);
 
-uint8 dataRand[Chan::Size][FPGA::MAX_NUM_POINTS];    ///< Здесь будут данные рандомизатора
+uint8 dataRand[Chan::Count][FPGA::MAX_NUM_POINTS];    ///< Здесь будут данные рандомизатора
 
 bool          FPGA::isRunning = false;
 uint          FPGA::timeStart = 0;

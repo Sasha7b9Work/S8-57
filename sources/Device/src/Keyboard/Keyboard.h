@@ -50,6 +50,7 @@ struct Key
     /// Возвращает true, если кнопка управляет параметром сигнала - развёрткой там, смещением
     bool IsControlSignal() const;
     pString Name();
+    operator int() const { return static_cast<int>(value); }
 };
 
 
@@ -69,6 +70,7 @@ struct TypePress
     explicit TypePress(E v) : value(v)  { };
     pString ToString();
     bool IsLong() const { return value == Long; };
+    operator int() const { return static_cast<int>(value); }
 };
 
 

@@ -423,7 +423,7 @@ int Chan::RequestBytes(DataSettings *) const
 
 pString Chan::Name() const
 {
-    static pString names[Chan::Size] =
+    static pString names[Chan::Count] =
     {
         "Канал 1",
         "Канал 2"

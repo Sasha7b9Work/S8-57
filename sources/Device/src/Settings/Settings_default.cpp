@@ -73,7 +73,7 @@ const Settings Settings::defaultSettings =
         TrigSource::A,                      // source
         TrigInput::Full,                    // input
         TrigPolarity::Rising,               // polarity
-        {TrigLevel::ZERO, TrigLevel::ZERO}, // lev[Chan::Size]
+        {TrigLevel::ZERO, TrigLevel::ZERO}, // lev[Chan::Count]
         TrigStartMode::Auto,                // startMode
         TrigModeFind::Hand,                 // modeFind
         10,                                 // holdOff
@@ -113,15 +113,15 @@ const Settings Settings::defaultSettings =
         true,                                               // showFreq
         CursorsActive::None,                                // active
         Chan::A,                                            // source
-        {CursorsControl::Disable, CursorsControl::Disable}, // cntrlU[Chan::Size]
-        {CursorsControl::Disable, CursorsControl::Disable}, // cntrlT[Chan::Size]
+        {CursorsControl::Disable, CursorsControl::Disable}, // cntrlU[Chan::Count]
+        {CursorsControl::Disable, CursorsControl::Disable}, // cntrlT[Chan::Count]
         CursorsMovement::Pixels,                            // movement
         {80,  80},                                          // deltaU100percents[2]
         {120, 120},                                         // deltaT100percents[2]
-        {                                                   // posCurU[Chan::Size][2]
+        {                                                   // posCurU[Chan::Count][2]
         { 60, 140 },                                        // Канал 1
         { 60, 140 }},                                       // Канал 2
-        {                                                   // posCurT[Chan::Size][2]
+        {                                                   // posCurT[Chan::Count][2]
         { 80, 200 },                                        // Канал 1
         { 80, 200 }}                                        // Канал 2
     },
@@ -244,14 +244,14 @@ const Settings Settings::defaultSettings =
         },
         // Несбрасываемые настройки калибровки
         {
-            {},                                 // balanceADC[Chan::Size]
+            {},                                 // balanceADC[Chan::Count]
             BalanceADC::Disable,                // balanceADCtype
             StretchADC::Disable,                // stretchADCtype
-            {},                                 // StretchADC[Chan::Size][3]
-            {},                                 // rShiftAddStable[Chan::Size][3]
+            {},                                 // StretchADC[Chan::Count][3]
+            {},                                 // rShiftAddStable[Chan::Count][3]
             0,                                  // numAveForRand
             0,                                  // numSmoothForRand
-            {},                                 // rShiftAdd[Chan::Size][Range::Size][2]
+            {},                                 // rShiftAdd[Chan::Count][Range::Size][2]
             0                                   // correctionTime
         },
     }

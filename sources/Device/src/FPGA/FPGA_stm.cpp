@@ -16,7 +16,7 @@
 
 
 extern bool givingStart;
-extern uint8 dataRand[Chan::Size][FPGA::MAX_NUM_POINTS];
+extern uint8 dataRand[Chan::Count][FPGA::MAX_NUM_POINTS];
 
 /// Здесь хранится адрес, начиная с которого будем читать данные по каналам. Если addrRead == 0xffff, то адрес вначале нужно считать
 uint16 addrRead = 0xffff;

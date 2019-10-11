@@ -152,8 +152,8 @@ static void ChangeRShift(Chan::E ch, int delta)
 {
     if (!Device::State::InModeRecorder())
     {
-        static bool stop[Chan::Size] = { false, false };      // Признак того, что смещение изменять не нужно - оно равно нулю и прошло мало времени
-        static uint timeStop[Chan::Size] = { 0, 0 };          // Время устновки признака stop
+        static bool stop[Chan::Count] = { false, false };      // Признак того, что смещение изменять не нужно - оно равно нулю и прошло мало времени
+        static uint timeStop[Chan::Count] = { 0, 0 };          // Время устновки признака stop
 
         if (stop[ch])
         {

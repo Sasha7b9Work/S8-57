@@ -24,7 +24,7 @@ static const SectorTypeDef &GetSector(uint address)
 
 void HAL_EEPROM::WriteBufferBytes(uint address, const void *buffer, int size)
 {
-    WriteBytes(address, (const uint8 *)buffer, size);
+    WriteBytes(address, static_cast<const uint8 *>(buffer), size);
 }
 
 
@@ -38,12 +38,10 @@ void HAL_EEPROM::EraseSector(uint address)
 
 void HAL_EEPROM::WriteBytes(uint address, const uint8 *buffer, int size)
 {
-    uint8 *data = (uint8 *)buffer;
-
     for (int i = 0; i < size; i++)
     {
         const SectorTypeDef &sector = GetSector(address);
 
-        sector.WriteByte(address++, *data++);
+        sector.WriteByte(address++, *buffer++);
     }
 }

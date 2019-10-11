@@ -53,7 +53,7 @@ public:
 
 void Tester::Init()
 {
-    for (int i = 0; i < Chan::Size; i++)
+    for (int i = 0; i < Chan::Count; i++)
     {
         for (int j = 0; j < NUM_STEPS; j++)
         {

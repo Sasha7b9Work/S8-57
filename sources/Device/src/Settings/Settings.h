@@ -42,7 +42,7 @@ public:
 
     SettingsMenu            menu;
     SettingsDisplay         disp;
-    SettingsChannel         ch[Chan::Size];
+    SettingsChannel         ch[Chan::Count];
     SettingsTrig            trig;
     SettingsTime            time;
     SettingsMemory          mem;

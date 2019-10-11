@@ -111,13 +111,13 @@ struct SettingsCursorsMeasures
     bool               showFreq;                ///< Установленное в true значение, что нужно показывать на экране 1/dT между курсорами.
     CursorsActive::E   active;                  ///< Какие курсоры сейас активны.
     Chan::E            source;                  ///< Источник - к какому каналу относятся курсоры.
-    CursorsControl::E  cntrlU[Chan::Size];      ///< Активные курсоры напряжения.
-    CursorsControl::E  cntrlT[Chan::Size];      ///< Активные курсоры времени.
+    CursorsControl::E  cntrlU[Chan::Count];      ///< Активные курсоры напряжения.
+    CursorsControl::E  cntrlT[Chan::Count];      ///< Активные курсоры времени.
     CursorsMovement::E movement;                ///< Как перемещаться курсорам - по точкам или процентам.
     float              deltaU100percents[2];    ///< Расстояние между курсорами напряжения для 100%, для обоих каналов.
     float              deltaT100percents[2];    ///< Расстояние между курсорами времени для 100%, для обоих каналов.
-    float              posCurU[Chan::Size][2];  ///< Текущие позиции курсоров напряжения обоих каналов.
-    float              posCurT[Chan::Size][2];  ///< Текущие позиции курсоров времени обоих каналов.
+    float              posCurU[Chan::Count][2];  ///< Текущие позиции курсоров напряжения обоих каналов.
+    float              posCurT[Chan::Count][2];  ///< Текущие позиции курсоров времени обоих каналов.
 };
 
 

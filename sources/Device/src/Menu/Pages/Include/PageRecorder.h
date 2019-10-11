@@ -38,7 +38,7 @@ struct RecorderScaleX
         _2s,    // TBase = 2c
         _5s,    // TBase = 5c
         _10s,   // TBase = 10c
-        Size
+        Count
     } value;
     explicit RecorderScaleX(E v) : value(v) {};
     static void Load();
