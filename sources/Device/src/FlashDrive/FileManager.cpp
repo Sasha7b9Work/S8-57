@@ -339,7 +339,7 @@ bool FileManager::GetNameForNewFile(char name[255]) //-V2506
     std::strcpy(name, currentDir);
     std::strcat(name, "\\");
 
-    int size = (int)std::strlen(set.mem.fileName);
+    int size = static_cast<int>(std::strlen(set.mem.fileName));
     if (size == 0)
     {
         return false;
@@ -388,7 +388,7 @@ bool FileManager::GetNameForNewFile(char name[255]) //-V2506
                 {
                     if (*ch >= 0x01 && *ch <= 0x06)
                     {
-                        char *strValue = Integer((int)values[*ch]).ToString(false, 2).CString();
+                        char *strValue = Integer(static_cast<int>(values[*ch])).ToString(false, 2).CString();
                         std::strcpy(wr, strValue);
                         wr += std::strlen(strValue);
                     }

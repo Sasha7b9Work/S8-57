@@ -74,7 +74,7 @@ static int Y(int value)
 
     float scale = 120.0F / 125.0F;
 
-    int y = 120 + (int)(delta * scale);
+    int y = 120 + static_cast<int>(delta * scale);
 
     if (y < 0)
     {
@@ -242,7 +242,7 @@ static void DrawMemoryWindow()
         return;
     }
 
-    int numPoints = (int)StorageRecorder::CurrentRecord()->NumPoints();
+    int numPoints = static_cast<int>(StorageRecorder::CurrentRecord()->NumPoints());
 
     if (prevNumPoints != numPoints)
     {
@@ -256,7 +256,7 @@ static void DrawMemoryWindow()
 
     Region(319, 5).DrawBounded(0, 3, Color::BACK, Color::FILL);
 
-    int width = (int)(320.0F / numPoints * 320.0F + 0.5F);
+    int width = static_cast<int>(320.0F / numPoints * 320.0F + 0.5F);
 
     if (width > 319)
     {
@@ -267,7 +267,7 @@ static void DrawMemoryWindow()
 
     if (numPoints > 320)
     {
-        x = (int)((float)startPoint / numPoints * 320.0F + 0.5F);
+        x = static_cast<int>((float)startPoint / numPoints * 320.0F + 0.5F);
     }
 
     Region(width, 10).DrawBounded(x, 0, Color::BACK, Color::FILL);
@@ -297,9 +297,9 @@ void DisplayRecorder::MoveRight()
     }
 
     startPoint += 320;
-    if (startPoint > (int)(StorageRecorder::CurrentRecord()->NumPoints() - 320))
+    if (startPoint > static_cast<int>(StorageRecorder::CurrentRecord()->NumPoints() - 320))
     {
-        startPoint = (int)(StorageRecorder::CurrentRecord()->NumPoints() - 320);
+        startPoint = static_cast<int>(StorageRecorder::CurrentRecord()->NumPoints() - 320);
     }
 }
 

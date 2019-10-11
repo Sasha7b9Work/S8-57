@@ -291,11 +291,11 @@ static void DrawTime(int x, int y)
             time.seconds = TIME_SECONDS_DS;
             time.month = TIME_MONTH_DS;
             time.year = TIME_YEAR_DS;
-            Integer((int)time.day).ToString(false, 2).Draw(x, y);
+            Integer(static_cast<int>(time.day)).ToString(false, 2).Draw(x, y);
             String(':').Draw(x + dField, y);
-            Integer((int)time.month).ToString(false, 2).Draw(x + dField + dSeparator, y);
+            Integer(static_cast<int>(time.month)).ToString(false, 2).Draw(x + dField + dSeparator, y);
             String(':').Draw(x + 2 * dField + dSeparator, y);
-            Integer((int)time.year + 2000).ToString(false, 4).Draw(x + 2 * dField + 2 * dSeparator, y);
+            Integer(static_cast<int>(time.year) + 2000).ToString(false, 4).Draw(x + 2 * dField + 2 * dSeparator, y);
 
             y += 9;
         }
@@ -305,11 +305,11 @@ static void DrawTime(int x, int y)
         }
     }
 
-    Integer((int)time.hours).ToString(false, 2).Draw(x, y);
+    Integer(static_cast<int>(time.hours)).ToString(false, 2).Draw(x, y);
     String(':').Draw(x + dField, y);
-    Integer((int)time.minutes).ToString(false, 2).Draw(x + dField + dSeparator, y);
+    Integer(static_cast<int>(time.minutes)).ToString(false, 2).Draw(x + dField + dSeparator, y);
     String(':').Draw(x + 2 * dField + dSeparator, y);
-    Integer((int)time.seconds).ToString(false, 2).Draw(x + 2 * dField + 2 * dSeparator, y);
+    Integer(static_cast<int>(time.seconds)).ToString(false, 2).Draw(x + 2 * dField + 2 * dSeparator, y);
 }
 
 

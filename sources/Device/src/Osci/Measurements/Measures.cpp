@@ -137,7 +137,7 @@ void Measure::ShortPressOnSmallButonMarker()
 
 void Measure::SetMarkerVoltage(Chan::E ch, int num, float value)
 {
-    AutoMeasurements::markerVoltage[ch][num] = (int)value;
+    AutoMeasurements::markerVoltage[ch][num] = static_cast<int>(value);
 }
 
 

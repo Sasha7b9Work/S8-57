@@ -48,13 +48,13 @@ bool DataSettings::Equals(const DataSettings &ds) const
 int DataSettings::SizeChannel() const
 {
     ENumPointsFPGA points((ENumPointsFPGA::E)ENUM_POINTS(this));
-    return (int)points.BytesInChannel(PEAKDET(this));
+    return static_cast<int>(points.BytesInChannel(PEAKDET(this)));
 }
 
 
 int DataSettings::PointsInChannel() const
 {
-    return (int)ENumPointsFPGA((ENumPointsFPGA::E)ENUM_POINTS(this)).PointsInChannel();
+    return static_cast<int>(ENumPointsFPGA((ENumPointsFPGA::E)ENUM_POINTS(this)).PointsInChannel());
 }
 
 

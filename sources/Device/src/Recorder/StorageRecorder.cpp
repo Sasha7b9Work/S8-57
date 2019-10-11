@@ -33,7 +33,7 @@ uint Record::NumPoints()
 
 int Record::FreeMemory()
 {
-    return 1024 * 128 - (int)(sizeof(Point) * numPoints);
+    return 1024 * 128 - static_cast<int>(sizeof(Point) * numPoints);
 }
 
 

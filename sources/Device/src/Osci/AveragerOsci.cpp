@@ -91,6 +91,6 @@ void AveragerOsci::Draw()
 
         Rectangle(Grid::Width(), height).Draw(Grid::Left(), Grid::Top(), Color::GRID);
 
-        Region((int)(Grid::Width() * (float)numSignals[0] / set.disp.ENumAverage), height).Fill(Grid::Left(), Grid::Top());
+        Region(static_cast<int>(Grid::Width() * (float)numSignals[0] / set.disp.ENumAverage), height).Fill(Grid::Left(), Grid::Top());
     }
 }

@@ -1049,8 +1049,8 @@ float CalculateDelayMinus(Chan::E ch)
     /*
     if (MEAS_MARKED == Measure_DelayMinus)
     {
-        markerTime[ch][0] = (int)((int16)firstIntersection - firstByte);
-        markerTime[ch][1] = (int)((int16)secondIntersection - firstByte);
+        markerTime[ch][0] = static_cast<int>((int16)firstIntersection - firstByte);
+        markerTime[ch][1] = static_cast<int>((int16)secondIntersection - firstByte);
     }
     */
 
@@ -1245,10 +1245,10 @@ void InterpolationSinX_X(uint8 *data, int numPoints, TBase::E tBase)
 
             if (tBase > TBase::_5ns)                 // Здесь используем более быструю, но более неправильную арифметику целвых чисел
             {
-                int sinXint = (int)(sinX * MUL_SIN);
+                int sinXint = static_cast<int>(sinX * MUL_SIN);
                 int value = 0;
-                int x = (int)((x0 - deltaX) * MUL);
-                int deltaXint = (int)(deltaX * MUL);
+                int x = static_cast<int>((x0 - deltaX) * MUL);
+                int deltaXint = static_cast<int>(deltaX * MUL);
 
                 for (int n = 0; n < numSignedPoints; n++)
                 {
@@ -1408,7 +1408,7 @@ void AutoMeasurements::SetData()
 
         if (TBASE_DS >= TBase::MIN_P2P)             // Если находимся в поточечном режме, то нужно брать последние считанные точки для проведения измерений
         {
-            for (int i = (int)(BYTES_IN_CHANNEL_DS - 1); i >= 0; --i)
+            for (int i = static_cast<int>(BYTES_IN_CHANNEL_DS - 1); i >= 0; --i)
             {
                 if (IN_A[i] != VALUE::NONE)                // Если это значение считано
                 {

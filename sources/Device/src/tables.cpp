@@ -24,7 +24,7 @@ pString Tables::Get(int index)
 
 int Tables::Size()
 {
-    return (int)sizeof(symbolsAlphaBet);
+    return static_cast<int>(sizeof(symbolsAlphaBet));
 }
 
 

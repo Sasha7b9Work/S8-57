@@ -45,7 +45,7 @@ void RShift::Load(Chan::E ch)
 
     if (Chan(ch).IsA() && Device::State::InModeTester())
     {
-        shift = (uint16)((int)shift - Tester::DeltaRShiftA());
+        shift = (uint16)(static_cast<int>(shift) - Tester::DeltaRShiftA());
     }
 
     GPIO::WriteRegisters(FPin::SPI3_CS1, (uint16)(mask[static_cast<int>(ch)] | (shift << 2)));
@@ -63,7 +63,7 @@ void FPGA::LoadCalibratorMode()
 void TShift::LoadReal()
 {
     FPGA::post = (uint16)(set.time.shift - TShift::Min());
-    int Pred = (int)FPGA_NUM_POINTS - (int)FPGA::post;
+    int Pred = static_cast<int>FPGA_NUM_POINTS - static_cast<int>(FPGA::post);
 
     if (Pred < 0)
     {
@@ -91,7 +91,7 @@ void TShift::LoadRandomize()
 
     FPGA::post = (uint16)((set.time.shift - TShift::Min() - GetK()) / k);
 
-    int Pred = (int)FPGA_NUM_POINTS / k - (int)FPGA::post;
+    int Pred = static_cast<int>(FPGA_NUM_POINTS) / k - static_cast<int>(FPGA::post);
 
     if (Pred < 0)
     {
@@ -207,7 +207,7 @@ int TShift::Min()
         StructENumPoints(-4096 * mul + k, -2048 * mul + k, 0 * mul + k)   // 8192
     };
 
-    return m[(int)set.mem.enumPoints].m[(int)set.time.TPos];
+    return m[static_cast<int>(set.mem.enumPoints)].m[static_cast<int>(set.time.TPos)];
 }
 
 
@@ -322,7 +322,7 @@ pString Range::Name() const
 
 void ModeCouple::Set(Chan::E ch, ModeCouple::E modeCoupe)
 {
-    set.ch[(int)ch].couple = modeCoupe;
+    set.ch[static_cast<int>(ch)].couple = modeCoupe;
     Range::LoadBoth();
 }
 
@@ -330,7 +330,7 @@ void ModeCouple::Set(Chan::E ch, ModeCouple::E modeCoupe)
 pString ModeCouple::UGO() const
 {
     static const pString couple[] = { "\x92", "\x91", "\x90" };
-    return couple[(int)value];
+    return couple[static_cast<int>(value)];
 }
 
 
@@ -339,7 +339,7 @@ void Bandwidth::Load()
     Chan::E ch = GetChannel();
     static const FPin::E pinsLF[2] = { FPin::LF1, FPin::LF2 };
 
-    GPIO::WritePin(pinsLF[(int)ch], (set.ch[(int)ch].bandwidth.value == Bandwidth::_20MHz));
+    GPIO::WritePin(pinsLF[static_cast<int>(ch)], (set.ch[static_cast<int>(ch)].bandwidth.value == Bandwidth::_20MHz));
 }
 
 

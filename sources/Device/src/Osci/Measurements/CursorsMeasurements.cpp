@@ -84,10 +84,10 @@ void CursorsMeasurements::Draw()
 
         if (bothCursors)
         {
-            x0 = Grid::Left() + (int)CursorsMeasurements::PosT(source, 0);
-            x1 = Grid::Left() + (int)CursorsMeasurements::PosT(source, 1);
-            y0 = Grid::Top() + (int)set.curs.posCurU[source][0];
-            y1 = Grid::Top() + (int)set.curs.posCurU[source][1];
+            x0 = Grid::Left() + static_cast<int>(CursorsMeasurements::PosT(source, 0));
+            x1 = Grid::Left() + static_cast<int>(CursorsMeasurements::PosT(source, 1));
+            y0 = Grid::Top() + static_cast<int>(set.curs.posCurU[source][0]);
+            y1 = Grid::Top() + static_cast<int>(set.curs.posCurU[source][1]);
 
             Rectangle(4, 4).Draw(x0 - 2, y0 - 2);
             Rectangle(4, 4).Draw(x1 - 2, y1 - 2);
@@ -95,13 +95,13 @@ void CursorsMeasurements::Draw()
 
         if (set.curs.cntrlT[set.curs.source] == CursorsControl::Disable)
         {
-            DrawVertical((int)CursorsMeasurements::PosT(source, 0), y0);
-            DrawVertical((int)CursorsMeasurements::PosT(source, 1), y1);
+            DrawVertical(static_cast<int>(CursorsMeasurements::PosT(source, 0)), y0);
+            DrawVertical(static_cast<int>(CursorsMeasurements::PosT(source, 1)), y1);
         }
         if (set.curs.cntrlU[set.curs.source] == CursorsControl::Disable)
         {
-            DrawHorizontal((int)set.curs.posCurU[source][0], x0);
-            DrawHorizontal((int)set.curs.posCurU[source][1], x1);
+            DrawHorizontal(static_cast<int>(set.curs.posCurU[source][0]), x0);
+            DrawHorizontal(static_cast<int>(set.curs.posCurU[source][1]), x1);
         }
 
         UpdateCursorsForLook();

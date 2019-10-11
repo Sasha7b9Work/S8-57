@@ -154,7 +154,7 @@ static void DrawField(int numField)
         Color::BACK.SetAsCurrent();
     }
 
-    Integer value((int)fields[numField]);
+    Integer value(static_cast<int>(fields[numField]));
 
     DrawDigit(x, y, value[1]);
     DrawDigit(x + 38, y, value[0]);
@@ -183,7 +183,7 @@ static void DrawTime()
     Font::SetCurrent(TypeFont::_8);
     Font::SetSpacing(spacing);
 
-    Integer((int)(TIME_MS - time)).ToString(false).Draw(5, 5);
+    Integer(static_cast<int>(TIME_MS - time)).ToString(false).Draw(5, 5);
 }
 
 static void OnOpenClose_Set(bool open)

@@ -258,7 +258,7 @@ static void RecountPoints(uint16 *x, uint8 *y)
     for (int i = 0; i < TESTER_NUM_POINTS; i++)
     {
         int X = 255 - x[i] + dX;
-        X = (int)(x0 + (X - x0) * scaleX);
+        X = static_cast<int>(x0 + (X - x0) * scaleX);
         LIMITATION(X, 0, 319); //-V2516
         x[i] = (uint16)X;
 

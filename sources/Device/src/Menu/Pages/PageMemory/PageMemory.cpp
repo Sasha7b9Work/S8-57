@@ -149,7 +149,7 @@ DEF_GRAPH_BUTTON( bMask_Delete,                                                 
 
 static void OnPress_Mask_Backspace()
 {
-    int size = (int)std::strlen(set.mem.fileNameMask);
+    int size = static_cast<int>(std::strlen(set.mem.fileNameMask));
     if (size > 0)
     {
         if (size > 1 && set.mem.fileNameMask[size - 2] == 0x07)
@@ -178,7 +178,7 @@ DEF_GRAPH_BUTTON( bMask_Backspace,                                              
 static void OnPress_Mask_Insert()
 {
     int index = set.mem.indexCurSymbolNameMask;
-    int size = (int)std::strlen(set.mem.fileNameMask);
+    int size = static_cast<int>(std::strlen(set.mem.fileNameMask));
     if (size == MAX_SYMBOLS_IN_FILE_NAME - 1)
     {
         return;
@@ -317,7 +317,7 @@ static void DrawSetMask()
 
     deltaY--;
     Color::FILL.SetAsCurrent();
-    for (int i = 0; i < (int)sizeof(strings) / 4; i++)
+    for (int i = 0; i < static_cast<int>(sizeof(strings)) / 4; i++)
     {
         String(strings[i]).Draw(x0 + deltaX, y0 + 100 + deltaY * i);
     }
@@ -535,7 +535,7 @@ DEF_GRAPH_BUTTON( bSetName_Delete,                                              
 
 static void OnPress_SetName_Backspace()
 {
-    int size = (int)std::strlen(set.mem.fileName);
+    int size = static_cast<int>(std::strlen(set.mem.fileName));
     if (size > 0)
     {
         set.mem.fileName[size - 1] = '\0';
@@ -551,7 +551,7 @@ DEF_GRAPH_BUTTON( bSetName_Backspace,                                           
 
 static void OnPress_SetName_Insert()
 {
-    int size = (int)std::strlen(set.mem.fileName);
+    int size = static_cast<int>(std::strlen(set.mem.fileName));
     if (size < MAX_SYMBOLS_IN_FILE_NAME - 1)
     {
         set.mem.fileName[size] = Tables::Get(set.mem.indexCurSymbolNameMask)[0];

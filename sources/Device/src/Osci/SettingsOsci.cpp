@@ -161,7 +161,7 @@ int TPos::InBytes()
         {{0,  8192, 16382}, {0,  8192, 16382}},
         {{0, 16384, 32766}, {0, 16384, 32766}}
     };
-    return m[(int)set.mem.enumPoints][set.time.peakDet][value];
+    return m[static_cast<int>(set.mem.enumPoints)][set.time.peakDet][value];
 }
 
 
@@ -349,10 +349,10 @@ void TrigLevel::Find()
 
         int numBytes = DS->SizeChannel();
 
-        uint8 max = Math::MaxFromArray(data, 0, (int)numBytes - 1);
-        uint8 min = Math::MinFromArray(data, 0, (int)numBytes - 1);
+        uint8 max = Math::MaxFromArray(data, 0, static_cast<int>(numBytes) - 1);
+        uint8 min = Math::MinFromArray(data, 0, static_cast<int>(numBytes) - 1);
 
-        int deltaValue = (int)VALUE::AVE - (max + min) / 2;
+        int deltaValue = static_cast<int>(VALUE::AVE) - (max + min) / 2;
 
         int deltaRShift = SET_RSHIFT(ch) - RShift::ZERO;
 
@@ -361,7 +361,7 @@ void TrigLevel::Find()
 
         float additionShift = deltaValue + deltaRShift / k;     // Итоговое смщение, которое нужно добавить к TrigLev::Zero
 
-        Set((int)(ZERO - (additionShift * k + 0.5F)));
+        Set(static_cast<int>(ZERO - (additionShift * k + 0.5F)));
     }
 }
 
@@ -411,7 +411,7 @@ int Chan::PointsInChannel() const
         8192
     };
 
-    return numPoints[(int)set.mem.enumPoints];
+    return numPoints[static_cast<int>(set.mem.enumPoints)];
 }
 
 

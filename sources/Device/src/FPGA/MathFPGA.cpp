@@ -400,7 +400,7 @@ void MathFPGA::CalculateFFT(float *dataR, int numPoints, float *result, float *f
 #ifdef DEBUG
             result[i] = 20 * std::log10f(result[i]);
 #else
-            result[i] = Log10[(int)(result[i] * 10000)];
+            result[i] = Log10[static_cast<int>(result[i] * 10000)];
 #endif
 
             if (i == set.fft.posCur[0])

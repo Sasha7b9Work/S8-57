@@ -409,7 +409,7 @@ bool FDrive::WriteToFile(uint8 *data, int sizeData, StructForWrite *structForWri
         if (structForWrite->sizeData == SIZE_FLASH_TEMP_BUFFER)
         {
             uint wr = 0;
-            if (f_write(&structForWrite->fileObj, structForWrite->tempBuffer, (uint)structForWrite->sizeData, &wr) != FR_OK || structForWrite->sizeData != (int)wr)
+            if (f_write(&structForWrite->fileObj, structForWrite->tempBuffer, (uint)structForWrite->sizeData, &wr) != FR_OK || structForWrite->sizeData != static_cast<int>(wr))
             {
                 return false;
             }
@@ -427,7 +427,7 @@ bool FDrive::CloseFile(StructForWrite *structForWrite) // -V2506
     if (structForWrite->sizeData != 0)
     {
         uint wr = 0;
-        if (f_write(&structForWrite->fileObj, structForWrite->tempBuffer, (uint)structForWrite->sizeData, &wr) != FR_OK || structForWrite->sizeData != (int)wr)
+        if (f_write(&structForWrite->fileObj, structForWrite->tempBuffer, (uint)structForWrite->sizeData, &wr) != FR_OK || structForWrite->sizeData != static_cast<int>(wr))
         {
             f_close(&structForWrite->fileObj);
             return false;

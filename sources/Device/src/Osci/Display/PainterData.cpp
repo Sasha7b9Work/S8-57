@@ -98,7 +98,7 @@ static void DrawSpectrumChannel(const float *spectrum, Color color)
     int gridHeight = Grid::MathHeight();
     for (int i = 0; i < 256; i++)
     {
-        int height = (int)(gridHeight * spectrum[i]);
+        int height = static_cast<int>(gridHeight * spectrum[i]);
 
         VLine(height).Draw(gridLeft + i, gridBottom - height);
     }
@@ -324,8 +324,8 @@ static void DrawModeLinesPeakDetOn(int center, const uint8 *data, float scale, i
 {
     for (int i = 0; i < 281 * 2; i += 2)
     {
-        int min = (int)(center - (data[i] - VALUE::AVE) * scale + 0.5F);
-        int max = (int)(center - (data[i + 1] - VALUE::AVE) * scale + 0.5F);
+        int min = static_cast<int>(center - (data[i] - VALUE::AVE) * scale + 0.5F);
+        int max = static_cast<int>(center - (data[i + 1] - VALUE::AVE) * scale + 0.5F);
 
         VLine(min - max).Draw(x++, max);
     }
@@ -338,8 +338,8 @@ static void DrawModeLinesPeakDetOff(int center, const uint8 *data, float scale, 
 
     for (int i = 1; i < 281; i++)
     {
-        int value = (int)(center - (data[i] - VALUE::AVE) * scale + 0.5F);
-        int valuePrev = (int)(center - (data[i - 1] - VALUE::AVE) * scale + 0.5F);
+        int value = static_cast<int>(center - (data[i] - VALUE::AVE) * scale + 0.5F);
+        int valuePrev = static_cast<int>(center - (data[i - 1] - VALUE::AVE) * scale + 0.5F);
 
         if (value == valuePrev)
         {
@@ -379,8 +379,8 @@ static void DrawModePointsPeakDetOn(int center, const uint8 *data, float scale, 
 {
     for (int i = 0; i < 281 * 2; i += 2)
     {
-        Pixel().Draw(x, (int)(center - (data[i] - VALUE::AVE) * scale + 0.5F));
-        Pixel().Draw(x, (int)(center - (data[i + 1] - VALUE::AVE) * scale + 0.5F));
+        Pixel().Draw(x, static_cast<int>(center - (data[i] - VALUE::AVE) * scale + 0.5F));
+        Pixel().Draw(x, static_cast<int>(center - (data[i + 1] - VALUE::AVE) * scale + 0.5F));
         x++;
     }
 }
@@ -409,7 +409,7 @@ static void DrawTPos(int leftX, int rightX)
 static void DrawTShift(int /*leftX*/, int /*rightX*/, int /*numBytes*/)
 {
     //float scale = (float)(rightX - leftX + 1) / ((float)numBytes - (numBytes == 281 ? 1 : 0));
-    //int xShift = (int)(1.5F + (TPos(TPOS).InBytes() - SET_TSHIFT.InPoints()) * scale) - 1;
+    //int xShift = static_cast<int>(1.5F + (TPos(TPOS).InBytes() - SET_TSHIFT.InPoints()) * scale) - 1;
     //if (SET_PEAKDET_EN && TPOS_IS_RIGHT)
     //{
     //    --xShift;
@@ -437,11 +437,11 @@ static void DrawTShift(int /*leftX*/, int /*rightX*/, int /*numBytes*/)
     //    dY11 = 5; dY12 = 7;
     //}
     //
-    //Region(6, 6).Fill((int)xShift - 1, 1, Color::BACK);
-    //Region(4, 4).Fill((int)xShift, 2, Color::FILL);
+    //Region(6, 6).Fill(static_cast<int>xShift - 1, 1, Color::BACK);
+    //Region(4, 4).Fill(static_cast<int>xShift, 2, Color::FILL);
     //
-    //Line((int)xShift + dX01, 3, (int)xShift + dX11, dY11 - 2).Draw(Color::BACK);
-    //Line((int)xShift + dX02, 4, (int)xShift + 2, dY12 - 2).Draw();
+    //Line(static_cast<int>xShift + dX01, 3, static_cast<int>xShift + dX11, dY11 - 2).Draw(Color::BACK);
+    //Line(static_cast<int>xShift + dX02, 4, static_cast<int>xShift + 2, dY12 - 2).Draw();
 }
 
 

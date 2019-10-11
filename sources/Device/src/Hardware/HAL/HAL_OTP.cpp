@@ -42,7 +42,7 @@ bool HAL_OTP::SaveSerialNumber(char *servialNumber)
 
     if (address < (uint8 *)FLASH_OTP_END - 16) //-V566
     {
-        HAL_EEPROM::WriteBufferBytes((uint)address, (uint8 *)servialNumber, (int)std::strlen(servialNumber) + 1); //-V205
+        HAL_EEPROM::WriteBufferBytes((uint)address, (uint8 *)servialNumber, static_cast<int>(std::strlen(servialNumber)) + 1); //-V205
         return true;
     }
 

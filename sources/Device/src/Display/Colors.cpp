@@ -230,7 +230,7 @@ void ColorType::CalcSteps()
 
 void ColorType::SetColor()
 {
-    COLOR(color.value) = MAKE_COLOR((int)red, (int)green, (int)blue);
+    COLOR(color.value) = MAKE_COLOR(static_cast<int>(red), static_cast<int>(green), static_cast<int>(blue));
     color.LoadValueRGB();
 }
 

@@ -103,7 +103,7 @@ void VCP::SendDataSynch(const void *_buffer, uint size)
             if (sizeBuffer + size > SIZE_BUFFER_VCP)
             {
                 int reqBytes = SIZE_BUFFER_VCP - sizeBuffer;
-                LIMITATION(reqBytes, 0, (int)size); //-V2516
+                LIMITATION(reqBytes, 0, static_cast<int>(size)); //-V2516
 
                 while (pCDC->TxState == 1) {}; //-V712
 
