@@ -1099,7 +1099,7 @@ float Measure::CalculateCursorU(Chan::E ch, float posCurT)
     
     BitSet64 points = DisplayOsci::PainterData::PointsOnDisplay();
 
-    int rel = static_cast<int>(CHOICE_BUFFER)[static_cast<int>(points.word0) + ROUND(int, posCurT)] - VALUE::MIN;
+    int rel = static_cast<int>((CHOICE_BUFFER)[static_cast<int>(points.word0) + ROUND(int, posCurT)]) - VALUE::MIN;
 
 #define SCALE (200.0F / (VALUE::MAX - VALUE::MIN))
 
