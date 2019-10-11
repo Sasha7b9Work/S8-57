@@ -24,7 +24,7 @@ void  HAL_GPIO_DeInit(GPIO_TypeDef  *, uint32_t)
 
 #ifdef GUI
 
-GPIO_PinState HAL_GPIO_ReadPin(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin)
+GPIO_PinState HAL_GPIO_ReadPin(const GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin)
 {
     if (GPIOx == GPIOG && GPIO_Pin == GPIO_PIN_1)
     {

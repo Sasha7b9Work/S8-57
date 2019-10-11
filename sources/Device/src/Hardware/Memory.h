@@ -15,7 +15,7 @@ struct SectorTypeDef
     void WriteByte(uint addr, uint8 value) const;
 };
 
-extern const SectorTypeDef sectors[];
+extern const SectorTypeDef sectors[24];
 
 #define ADDR_SECTOR_SETTINGS_1 ((uint)sectors[10].memory)
 #define ADDR_SECTOR_RECORDER_1 ((uint)sectors[17].memory)

@@ -165,21 +165,19 @@ bool Recorder::IsRunning()
 
 void RecorderScaleX::Change(int delta)
 {
-    if (Recorder::IsRunning())
+    if (!Recorder::IsRunning())
     {
-        return;
-    }
+        if (delta > 0)
+        {
+            ::Math::LimitationIncrease<uint8>((uint8 *)(&set.rec.scaleX), (uint8)(RecorderScaleX::Size - 1));
+        }
+        else
+        {
+            ::Math::LimitationDecrease<uint8>((uint8 *)(&set.rec.scaleX), 0);
+        }
 
-    if (delta > 0)
-    {
-        ::Math::LimitationIncrease<uint8>((uint8 *)(&set.rec.scaleX), (uint8)(RecorderScaleX::Size - 1));
+        Load();
     }
-    else
-    {
-        ::Math::LimitationDecrease<uint8>((uint8 *)(&set.rec.scaleX), 0);
-    }
-
-    Load();
 }
 
 

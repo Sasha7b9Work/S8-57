@@ -22,7 +22,7 @@ static const SectorTypeDef &GetSector(uint address)
 }
 
 
-void HAL_EEPROM::WriteBufferBytes(uint address, void *buffer, int size)
+void HAL_EEPROM::WriteBufferBytes(uint address, const void *buffer, int size)
 {
     WriteBytes(address, (const uint8 *)buffer, size);
 }

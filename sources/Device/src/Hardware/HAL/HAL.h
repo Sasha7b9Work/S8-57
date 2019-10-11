@@ -81,7 +81,7 @@ struct HAL_EEPROM
 {
     static void EraseSector(uint startAddress);
     static void WriteBytes(uint address, const uint8 *data, int size);
-    static void WriteBufferBytes(uint address, void *buffer, int size);
+    static void WriteBufferBytes(uint address, const void *buffer, int size);
 };
 
 struct HAL_OTP

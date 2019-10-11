@@ -109,7 +109,7 @@ void HAL_EEPROM::WriteBytes(uint address, const uint8 *data, int size)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void HAL_EEPROM::WriteBufferBytes(uint address, void *buffer, int size)
+void HAL_EEPROM::WriteBufferBytes(uint address, const void *buffer, int size)
 {
     Beeper::WaitForCompletion();
 
