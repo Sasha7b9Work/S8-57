@@ -56,16 +56,14 @@ void Recorder::Init()
 
 void Recorder::DeInit()
 {
-    if (!initialized)
+    if (initialized)
     {
-        return;
+        Stop();
+
+        RestoreOsciSettings();
+
+        initialized = false;
     }
-
-    Stop();
-
-    RestoreOsciSettings();
-
-    initialized = false;
 }
 
 

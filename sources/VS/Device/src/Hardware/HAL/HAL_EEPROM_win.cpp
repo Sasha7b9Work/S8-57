@@ -8,17 +8,20 @@
 /// Возвращает ссылку на структуру описания сектора с начальным адресом address
 static const SectorTypeDef &GetSector(uint address)
 {
+    const SectorTypeDef *result = &sectors[0];
+
     for (int i = 0; i < 24; i++)
     {
         const SectorTypeDef &sector = sectors[i];
 
         if (sector.IsConsist(address))
         {
-            return sector;
+            result = &sector;
+            break;
         }
     }
 
-    return sectors[-1];
+    return *result;
 }
 
 

@@ -139,7 +139,7 @@ void Handlers::Process(KeyEvent e)
     {
         if (!CommonHandlerPage())
         {
-            func[code][type]();
+            func[static_cast<int>(code)][static_cast<int>(type)]();
         }
     }
 }
@@ -155,11 +155,11 @@ static void ChangeRShift(Chan::E ch, int delta)
         static bool stop[Chan::Count] = { false, false };      // Признак того, что смещение изменять не нужно - оно равно нулю и прошло мало времени
         static uint timeStop[Chan::Count] = { 0, 0 };          // Время устновки признака stop
 
-        if (stop[ch])
+        if (stop[static_cast<int>(ch)])
         {
-            if (TIME_MS - timeStop[ch] > 500)
+            if (TIME_MS - timeStop[static_cast<int>(ch)] > 500)
             {
-                stop[ch] = false;
+                stop[static_cast<int>(ch)] = false;
             }
         }
         else
@@ -167,12 +167,12 @@ static void ChangeRShift(Chan::E ch, int delta)
             RShift::Change(ch, delta);
         }
 
-        if (!stop[ch])
+        if (!stop[static_cast<int>(ch)])
         {
             if (SET_RSHIFT(ch) == RShift::ZERO)
             {
-                stop[ch] = true;
-                timeStop[ch] = TIME_MS;
+                stop[static_cast<int>(ch)] = true;
+                timeStop[static_cast<int>(ch)] = TIME_MS;
             }
 
             DisplayOsci::SetFlagRedraw();

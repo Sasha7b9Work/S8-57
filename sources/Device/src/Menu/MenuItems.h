@@ -106,9 +106,14 @@ public:
     /// Возвращает цвет, которым нужно рисовать на заголовке итема
     Color ColorTitleText() const
     {
-        if (!IsActive())  { return ColorBackground(this);  }
+        Color result = ColorBackground(this);
 
-        return IsPressed() ? Color::BACK : Color::FILL;
+        if (IsActive())
+        {
+            result = IsPressed() ? Color::BACK : Color::FILL;
+        }
+
+        return result;
     }
     /// Цвет обводки итема
     Color ColorFrame() const { return Color::FILL; };
