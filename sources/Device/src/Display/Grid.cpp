@@ -41,7 +41,7 @@ int Grid::Left()
 {
     static const int left[Device::Mode::Count] = { 20, 0, 0, 0 };
 
-    return left[Device::State::CurrentMode()];
+    return left[static_cast<int>(Device::State::CurrentMode())];
 }
 
 
@@ -49,7 +49,7 @@ int Grid::Top()
 {
     static const int top[Device::Mode::Count] = { 19, 0, 0, 0 };
 
-    return top[Device::State::CurrentMode()];
+    return top[static_cast<int>(Device::State::CurrentMode())];
 }
 
 
@@ -57,7 +57,7 @@ int Grid::Width()
 {
     static const int width[Device::Mode::Count] = { 280, Display::WIDTH - 1, 0, 319 };
 
-    return width[Device::State::CurrentMode()];
+    return width[static_cast<int>(Device::State::CurrentMode())];
 }
 
 
@@ -65,7 +65,7 @@ int Grid::Height()
 {
     static const int height[Device::Mode::Count] = { 200, Display::HEIGHT - 1, 0, 239 };
 
-    return height[Device::State::CurrentMode()];
+    return height[static_cast<int>(Device::State::CurrentMode())];
 }
 
 
@@ -133,7 +133,7 @@ void Grid::Draw()
         DrawRecorder
     };
 
-    funcs[Device::State::CurrentMode()]();
+    funcs[static_cast<int>(Device::State::CurrentMode())]();
 }
 
 
@@ -215,7 +215,7 @@ void DrawGridSpectrum()
     {
         static const int nums[] = {4, 6, 8};
         static pString strs[] = {"0", "-10", "-20", "-30", "-40", "-50", "-60", "-70"};
-        int numParts = nums[set.fft.maxDB];
+        int numParts = nums[static_cast<int>(set.fft.maxDB)];
         float scale = static_cast<float>(Grid::MathHeight()) / numParts;
         for (int i = 1; i < numParts; i++)
         {

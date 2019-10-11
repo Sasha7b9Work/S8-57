@@ -132,7 +132,7 @@ float MathFPGA::VoltageCursor(float shiftCurU, Range::E range, uint16 rShift)
 
 int MathFPGA::RShift2Rel(float rShiftAbs, Range::E range)
 {
-    int retValue = RShift::ZERO + (int)(rShiftAbs / absStepRShift[range]);
+    int retValue = RShift::ZERO + static_cast<int>(rShiftAbs / absStepRShift[range]);
 
     if (retValue < RShift::MIN)
     {
@@ -162,7 +162,7 @@ void MathFPGA::PointsRel2Voltage(const uint8 *points, int numPoints, Range::E ra
     int voltInPixel = voltsInPixelInt[range];
     float maxVoltsOnScreen = MaxVoltageOnScreen(range);
     float rShiftAbs = RShift2Abs(rShift, range);
-    int diff = (int)((VALUE::MIN * voltInPixel) + (maxVoltsOnScreen + rShiftAbs) * 20e3F);
+    int diff = static_cast<int>((VALUE::MIN * voltInPixel) + (maxVoltsOnScreen + rShiftAbs) * 20e3F);
     float koeff = 1.0F / 20e3F;
     for (int i = 0; i < numPoints; i++)
     {
@@ -173,9 +173,9 @@ void MathFPGA::PointsRel2Voltage(const uint8 *points, int numPoints, Range::E ra
 
 uint8 MathFPGA::Voltage2Point(float voltage, Range::E range, uint16 rShift)
 {
-    int relValue = (int)((voltage + MaxVoltageOnScreen(range) + RShift2Abs(rShift, range)) / voltsInPoint[range] + VALUE::MIN);
+    int relValue = static_cast<int>((voltage + MaxVoltageOnScreen(range) + RShift2Abs(rShift, range)) / voltsInPoint[range] + VALUE::MIN);
     ::Math::Limitation<int>(&relValue, 0, 255);
-    return (uint8)relValue;
+    return static_cast<uint8>(relValue);
 }
 
 
@@ -186,7 +186,7 @@ float MathFPGA::Point2Voltage(uint8 value, Range::E range, uint16 rShift)
         range = range;
     }
     
-    uint8 delta = (uint8)(value - VALUE::MIN);
+    uint8 delta = static_cast<uint8>(value - VALUE::MIN);
 
     float rShiftAbs = RShift2Abs(rShift, range);
 
@@ -208,7 +208,7 @@ void MathFPGA::PointsVoltage2Rel(const float *voltage, int numPoints, Range::E r
 
     for (int i = 0; i < numPoints; i++)
     {
-        int value = (int)(voltage[i] * voltInPixel + delta);
+        int value = static_cast<int>(voltage[i] * voltInPixel + delta);
 
         if (value < 0)
         {
@@ -225,7 +225,7 @@ void MathFPGA::PointsVoltage2Rel(const float *voltage, int numPoints, Range::E r
             // здесь ничего не делаем
         }
 
-        points[i] = (uint8)value;
+        points[i] = static_cast<uint8>(value);
     }
 }
 
@@ -429,8 +429,8 @@ void MathFPGA::CalculateFFT(float *dataR, int numPoints, float *result, float *f
         *density0 = result[set.fft.posCur[0]];
         *density1 = result[set.fft.posCur[1]];
     }
-    *y0 = (int)(Grid::MathBottom() - result[set.fft.posCur[0]] * Grid::MathHeight());
-    *y1 = (int)(Grid::MathBottom() - result[set.fft.posCur[1]] * Grid::MathHeight());
+    *y0 = static_cast<int>(Grid::MathBottom() - result[set.fft.posCur[0]] * Grid::MathHeight());
+    *y1 = static_cast<int>(Grid::MathBottom() - result[set.fft.posCur[1]] * Grid::MathHeight());
 }
 
 
@@ -511,5 +511,5 @@ static float MaxVoltageOnScreen(Range::E range)
 
 float MathFPGA::RShift2Abs(int rShift, Range::E range)
 {
-    return -(RShift::ZERO - (int)rShift) * absStepRShift[range];
+    return -(RShift::ZERO - static_cast<int>(rShift)) * absStepRShift[range];
 }

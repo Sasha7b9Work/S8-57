@@ -59,7 +59,7 @@ void FPGA::LoadRegUPR()
 
     data |= 1;
 
-    data |= mask[set.serv.calibratorMode];
+    data |= mask[static_cast<int>(set.serv.calibratorMode)];
 
     HAL_FSMC::WriteToFPGA8(WR::UPR, data);
 }
@@ -69,14 +69,14 @@ void GPIO::Init()
 {
     for (int i = 0; i < FPin::Number; i++)
     {
-        HAL_PIO::Init(PORT((FPin::E)i), GetPin((FPin::E)i) , HMode::Output_PP, HPull::Down);
+        HAL_PIO::Init(PORT(static_cast<int>(i)), GetPin((FPin::E)i) , HMode::Output_PP, HPull::Down);
     }
 }
 
 
 uint16 GPIO::GetPin(FPin::E pin)
 {
-    return pins[pin].pin;
+    return pins[static_cast<int>(pin)].pin;
 }
 
 
@@ -115,19 +115,19 @@ void GPIO::WriteRegisters(FPin::E cs, uint16 value)
 
 void GPIO::SetPin(FPin::E pin)
 {
-    HAL_PIO::Set(PORT(pin), GetPin(pin));
+    HAL_PIO::Set(PORT(static_cast<int>(pin)), GetPin(pin));
 }
 
 
 void GPIO::ResetPin(FPin::E pin)
 {
-    HAL_PIO::Reset(PORT(pin), GetPin(pin));
+    HAL_PIO::Reset(PORT(static_cast<int>(pin)), GetPin(pin));
 }
 
 
 void GPIO::WritePin(FPin::E pin, int enable)
 {
-    HAL_PIO::Write(PORT(pin), GetPin(pin), enable ? HState::Enabled : HState::Disabled);
+    HAL_PIO::Write(PORT(static_cast<int>(pin)), GetPin(pin), enable ? HState::Enabled : HState::Disabled);
 }
 
 

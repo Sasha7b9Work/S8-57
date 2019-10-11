@@ -68,7 +68,7 @@ void Display::Update()
         DisplayRecorder::Update
     };
 
-    funcs[Device::State::CurrentMode()]();
+    funcs[static_cast<int>(Device::State::CurrentMode())]();
 
     Console::Draw();
 
@@ -211,7 +211,7 @@ int Display::TimeMenuAutoHide()
     {
         0, 5, 10, 15, 30, 60
     };
-    return times[set.disp.menuAutoHide] * 1000;
+    return times[static_cast<int>(set.disp.menuAutoHide)] * 1000;
 }
 
 
@@ -226,13 +226,13 @@ uint ENumSignalsInSec::TimeBetweenFramesMS() const
 {
     static const uint time[] = { 40, 100, 200, 500, 1000 };
 
-    return time[value];
+    return time[static_cast<int>(value)];
 }
 
 
 uint ENumSmoothing::ToNumber() const
 {
-    return (uint)value + 1U;
+    return static_cast<uint>(value + 1U);
 }
 
 
@@ -318,9 +318,9 @@ static void SaveScreenToFlash()
 
     FDrive::OpenNewFileForWrite(fileName, &structForWrite);
 
-    FDrive::WriteToFile((uint8 *)(&bmFH), 14, &structForWrite);
+    FDrive::WriteToFile(reinterpret_cast<uint8 *>(&bmFH), 14, &structForWrite);
 
-    FDrive::WriteToFile((uint8 *)(&bmIH), 40, &structForWrite);
+    FDrive::WriteToFile(reinterpret_cast<uint8 *>(&bmIH), 40, &structForWrite);
 
     uint8 buffer[320 * 3] = { 0 };
 
@@ -341,7 +341,7 @@ static void SaveScreenToFlash()
         colorStruct.green = (uint8)((float)G_FROM_COLOR(color));
         colorStruct.red = (uint8)((float)R_FROM_COLOR(color));
         colorStruct.rgbReserved = 0;
-        ((RGBQUAD*)(buffer))[i] = colorStruct;
+        (reinterpret_cast<RGBQUAD*>(buffer))[i] = colorStruct;
     }
 
     for (int i = 0; i < 4; i++)
@@ -355,7 +355,7 @@ static void SaveScreenToFlash()
 
     for (int row = 239; row >= 0; row--)
     {
-        ReadRow((uint8)row);
+        ReadRow(static_cast<uint8>(row));
 
         FDrive::WriteToFile(pixels, 320, &structForWrite);
     }

@@ -25,9 +25,9 @@ void TrigInput::Load()
         {BIN_U8(00000000), BIN_U8(00000110)}  // -V2501      // อื
     };
 
-    GPIO::WritePin(FPin::A1S, _GET_BIT(datas[set.trig.input][set.trig.source], 2));
-    GPIO::WritePin(FPin::A0S, _GET_BIT(datas[set.trig.input][set.trig.source], 1));
-    GPIO::WritePin(FPin::LFS, _GET_BIT(datas[set.trig.input][set.trig.source], 0));
+    GPIO::WritePin(FPin::A1S, _GET_BIT(datas[static_cast<int>(set.trig.input)][static_cast<int>(set.trig.source)], 2));
+    GPIO::WritePin(FPin::A0S, _GET_BIT(datas[static_cast<int>(set.trig.input)][static_cast<int>(set.trig.source)], 1));
+    GPIO::WritePin(FPin::LFS, _GET_BIT(datas[static_cast<int>(set.trig.input)][static_cast<int>(set.trig.source)], 0));
 }
 
 
@@ -39,7 +39,7 @@ void RShift::Load(Chan::E ch)
 
     uint16 shift = SET_RSHIFT(ch);
 
-    int8 add = set.dbg.addRShift[ch][set.ch[ch].range];
+    int8 add = set.dbg.addRShift[static_cast<int>(ch)][static_cast<int>(set.ch[static_cast<int>(ch)].range)];
 
     shift += add;
 
@@ -48,7 +48,7 @@ void RShift::Load(Chan::E ch)
         shift = (uint16)((int)shift - Tester::DeltaRShiftA());
     }
 
-    GPIO::WriteRegisters(FPin::SPI3_CS1, (uint16)(mask[ch] | (shift << 2)));
+    GPIO::WriteRegisters(FPin::SPI3_CS1, (uint16)(mask[static_cast<int>(ch)] | (shift << 2)));
 
     Osci::Restart();
 }
@@ -81,13 +81,13 @@ void TShift::LoadReal()
 
 static int GetK()
 {
-    return (-TShift::Min()) % Osci::Kr[set.time.base];
+    return (-TShift::Min()) % Osci::Kr[static_cast<int>(set.time.base)];
 }
 
 
 void TShift::LoadRandomize()
 {
-    int k = Osci::Kr[set.time.base];
+    int k = Osci::Kr[static_cast<int>(set.time.base)];
 
     FPGA::post = (uint16)((set.time.shift - TShift::Min() - GetK()) / k);
 
@@ -147,11 +147,11 @@ void Range::Change(Chan::E ch, int delta)
 
     if (delta > 0)
     {
-        ::Math::LimitationIncrease<uint8>((uint8 *)(&set.ch[ch].range), (uint8)(Range::Size - 1)); // -V206
+        ::Math::LimitationIncrease<uint8>((uint8 *)(&set.ch[static_cast<int>(ch)].range), (uint8)(Range::Size - 1)); // -V206
     }
     else
     {
-        ::Math::LimitationDecrease<uint8>((uint8 *)(&set.ch[ch].range), 0);  // -V206
+        ::Math::LimitationDecrease<uint8>((uint8 *)(&set.ch[static_cast<int>(ch)].range), 0);  // -V206
     }
     Range::LoadBoth();
 
@@ -161,7 +161,7 @@ void Range::Change(Chan::E ch, int delta)
 
 void Range::Set(Chan::E ch, E range)
 {
-    set.ch[ch].range = range;
+    set.ch[static_cast<int>(ch)].range = range;
     LoadBoth();
 }
 
@@ -207,7 +207,7 @@ int TShift::Min()
         StructENumPoints(-4096 * mul + k, -2048 * mul + k, 0 * mul + k)   // 8192
     };
 
-    return m[(int)set.mem.enumPoints].m[set.time.TPos];
+    return m[(int)set.mem.enumPoints].m[(int)set.time.TPos];
 }
 
 
@@ -285,7 +285,7 @@ pString TBase::Name() const
         "10๑"
     };
 
-    return names[value];
+    return names[static_cast<int>(value)];
 }
 
 
@@ -316,21 +316,21 @@ pString Range::Name() const
         StructRange("20ย")
     };
 
-    return names[value].name;
+    return names[static_cast<int>(value)].name;
 };
 
 
 void ModeCouple::Set(Chan::E ch, ModeCouple::E modeCoupe)
 {
-    set.ch[ch].couple = modeCoupe;
+    set.ch[(int)ch].couple = modeCoupe;
     Range::LoadBoth();
 }
 
 
 pString ModeCouple::UGO() const
 {
-    static pString couple[] = { "\x92", "\x91", "\x90" };
-    return couple[value];
+    static const pString couple[] = { "\x92", "\x91", "\x90" };
+    return couple[(int)value];
 }
 
 
@@ -339,7 +339,7 @@ void Bandwidth::Load()
     Chan::E ch = GetChannel();
     static const FPin::E pinsLF[2] = { FPin::LF1, FPin::LF2 };
 
-    GPIO::WritePin(pinsLF[ch], (set.ch[ch].bandwidth.value == Bandwidth::_20MHz));
+    GPIO::WritePin(pinsLF[(int)ch], (set.ch[(int)ch].bandwidth.value == Bandwidth::_20MHz));
 }
 
 

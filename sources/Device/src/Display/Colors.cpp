@@ -161,7 +161,7 @@ void ColorType::SetBrightness(float bright)
     }
     else
     {
-        int delta = (int)((bright + 0.0005F) * 100.0F) - (int)(brightness * 100.0F);
+        int delta = static_cast<int>((bright + 0.0005F) * 100.0F) - static_cast<int>(brightness * 100.0F);
 
         if (delta > 0)
         {

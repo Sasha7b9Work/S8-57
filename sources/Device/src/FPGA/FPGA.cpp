@@ -15,8 +15,8 @@
 
 
 uint16 FPGA::valueADC = 0;
-uint16 FPGA::post = (uint16)~(512);
-uint16 FPGA::pred = (uint16)~(512);
+uint16 FPGA::post = static_cast<uint16>(~(512));
+uint16 FPGA::pred = static_cast<uint16>(~(512));
 
 uint8 dataRand[Chan::Count][FPGA::MAX_NUM_POINTS];    ///< «десь будут данные рандомизатора
 
@@ -30,7 +30,7 @@ bool givingStart = false;
 
 void FPGA::GiveStart()
 {
-    uint8 value = (uint8)(((uint8)set.trig.polarity) % 2);
+    uint8 value = static_cast<uint8>((static_cast<uint8>(set.trig.polarity)) % 2);
 
     uint8 stop = 0;
     if (Device::State::InModeRecorder())    // ¬ режиме регистратора
@@ -38,8 +38,8 @@ void FPGA::GiveStart()
         stop = (1 << BIT_TRIG_ENABLED);     // устанавливаем признак того, что процесс чтени€ данных бесконечен
     }
 
-    HAL_FSMC::WriteToFPGA8(WR::TRIG, (uint8)(value++ | stop));
-    HAL_FSMC::WriteToFPGA8(WR::TRIG, (uint8)((value % 2) | stop));
+    HAL_FSMC::WriteToFPGA8(WR::TRIG, static_cast<uint8>(value++ | stop));
+    HAL_FSMC::WriteToFPGA8(WR::TRIG, static_cast<uint8>((value % 2) | stop));
 }
 
 
@@ -49,7 +49,7 @@ uint16 FPGA::ReadLastRecord(Chan::E ch)
 
     if (Chan(ch).IsA())
     {
-        address = (uint16)(HAL_FSMC::ReadFromFPGA(RD::LAST_RECORD_LO) + ((HAL_FSMC::ReadFromFPGA(RD::LAST_RECORD_HI)) << 8));
+        address = static_cast<uint16>(HAL_FSMC::ReadFromFPGA(RD::LAST_RECORD_LO) + ((HAL_FSMC::ReadFromFPGA(RD::LAST_RECORD_HI)) << 8));
     }
 
     return address;

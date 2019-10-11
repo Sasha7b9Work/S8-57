@@ -6,7 +6,7 @@
 
 
 /// Максимальное значение, которое возможно считать с АЦП
-static const float MAX_ADC_REL = (float)((1 << 12) - 1);
+static const float MAX_ADC_REL = static_cast<float>((1 << 12) - 1);
 /// Напряжение, соответствующее MAX_ADC_REL
 static const float MAX_ADC_ABS = 2.91F;
 
@@ -59,9 +59,9 @@ float Battery::GetVoltageAKK(uint *adc)
 
     *adc = ADC1_::ReadValueAKK();
 
-    averager.Push((float)*adc);
+    averager.Push(static_cast<float>(*adc));
 
-    return BatADC_ToVoltage((float)*adc);
+    return BatADC_ToVoltage(static_cast<float>(*adc));
 }
 
 
@@ -71,7 +71,7 @@ float Battery::GetVoltagePOW(uint *adc)
 
     *adc = ADC1_::ReadValuePOW();
 
-    averager.Push((float)*adc);
+    averager.Push(static_cast<float>(*adc));
 
     return PowerADC_ToVoltage(averager.Value());
 }
@@ -103,7 +103,7 @@ static void DrawBatteryUGO(int x, int y, float percents)
     Rectangle(width + 2, 8).Draw(x + 5, y, Color::FILL);
     Rectangle(4, 4).Draw(x + 1, y + 2);
 
-    int filled = (int)((width - 2) * percents / 100.0F + 0.5F);
+    int filled = static_cast<int>((width - 2) * percents / 100.0F + 0.5F);
 
     Region(filled, 4).Fill(x + width - filled + 5, y + 2);
 }

@@ -17,17 +17,17 @@ void DataSettings::Fill(uint8 *_dataA, uint8 * _dataB)
     Lval_RANGE_B(this) = set.ch[Chan::B].range;
     RSHIFT_A(this) = SET_RSHIFT_A;
     RSHIFT_B(this) = SET_RSHIFT_B;
-    Lval_TBASE(this) = set.time.base;
-    TSHIFT(this) = (int16)set.time.shift;
-    Lval_COUPLE_A(this) = set.ch[Chan::A].couple;
-    Lval_COUPLE_B(this) = set.ch[Chan::B].couple;
+    Lval_TBASE(this) = static_cast<uint>(set.time.base);
+    TSHIFT(this) = static_cast<int16>(set.time.shift);
+    Lval_COUPLE_A(this) = static_cast<uint>(set.ch[Chan::A].couple);
+    Lval_COUPLE_B(this) = static_cast<uint>(set.ch[Chan::B].couple);
     TRIGLEV_A(this) = set.trig.lev[Chan::A];
     TRIGLEV_B(this) = set.trig.lev[Chan::B];
-    Lval_PEAKDET(this) = set.time.peakDet;
-    Lval_DIVIDER_A(this) = (uint)set.ch[Chan::A].divider;
-    Lval_DIVIDER_B(this) = (uint)set.ch[Chan::B].divider;
+    Lval_PEAKDET(this) = static_cast<uint>(set.time.peakDet);
+    Lval_DIVIDER_A(this) = static_cast<uint>(set.ch[Chan::A].divider);
+    Lval_DIVIDER_B(this) = static_cast<uint>(set.ch[Chan::B].divider);
     TIME_MS_DS(this) = 0;                        // Ёто важно дл€ режима поточеного вывода. ќзначает, что полный сигнал ещЄ не считан
-    ENUM_POINTS(this) = set.mem.enumPoints;
+    ENUM_POINTS(this) = static_cast<uint>(set.mem.enumPoints);
 }
 
 

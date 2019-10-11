@@ -335,7 +335,7 @@ float CalculateVoltageAverage(Chan::E ch)
         sum += *data++;
     }
 
-    uint8 aveRel = (uint8)((float)sum / period);
+    uint8 aveRel = static_cast<uint8>(static_cast<float>(sum) / period);
 
     if(set.meas.marked == Measure::Type::VoltageAverage)
     {
@@ -394,14 +394,14 @@ float CalculatePeriod(Chan::E ch)
         }
         else
         {
-            float intersectionDownToTop = FindIntersectionWithHorLine(ch, 1, true, (uint8)aveValue);
-            float intersectionTopToDown = FindIntersectionWithHorLine(ch, 1, false, (uint8)aveValue);
+            float intersectionDownToTop = FindIntersectionWithHorLine(ch, 1, true, static_cast<uint8>(aveValue));
+            float intersectionTopToDown = FindIntersectionWithHorLine(ch, 1, false, static_cast<uint8>(aveValue));
 
             EXIT_IF_ERRORS_FLOAT(intersectionDownToTop, intersectionTopToDown); //-V2507
 
             bool firstDownToTop = intersectionDownToTop < intersectionTopToDown;
             firstIntersection = firstDownToTop ? intersectionDownToTop : intersectionTopToDown;
-            secondIntersection = FindIntersectionWithHorLine(ch, 2, firstDownToTop, (uint8)aveValue);
+            secondIntersection = FindIntersectionWithHorLine(ch, 2, firstDownToTop, static_cast<uint8>(aveValue));
 
             EXIT_IF_ERRORS_FLOAT(firstIntersection, secondIntersection); //-V2507
 
@@ -415,8 +415,8 @@ float CalculatePeriod(Chan::E ch)
 
     if ((set.meas.marked == Measure::Type::Period || set.meas.marked == Measure::Type::Freq) && periodIsCaclulating[ch])
     {
-        Measure::SetMarkerTime(ch, 0, (int16)firstIntersection - firstByte);
-        Measure::SetMarkerTime(ch, 1, (int16)secondIntersection - firstByte);
+        Measure::SetMarkerTime(ch, 0, static_cast<int16>(firstIntersection) - firstByte);
+        Measure::SetMarkerTime(ch, 1, static_cast<int16>(secondIntersection) - firstByte);
     }
 
     return period[ch];
@@ -436,7 +436,7 @@ int CalculatePeriodAccurately(Chan::E ch)
 {
     static int period[2];
 
-    int *sums = (int *)std::malloc((uint)nBytes);
+    int *sums = static_cast<int *>(std::malloc(static_cast<uint>(nBytes)));
 
     if (sums == 0)
     {
@@ -456,7 +456,7 @@ int CalculatePeriodAccurately(Chan::E ch)
         {
             EXIT_FROM_PERIOD_ACCURACY
         }
-        int delta = (int)(pic * 5.0F);
+        int delta = static_cast<int>(pic * 5.0F);
         sums[firstByte] = dataIn[firstByte];
 
         int i = firstByte + 1;
@@ -476,7 +476,7 @@ int CalculatePeriodAccurately(Chan::E ch)
         }
 
         int addShift = firstByte - 1;
-        int maxPeriod = (int)(nBytes * 0.95F);
+        int maxPeriod = static_cast<int>(nBytes * 0.95F);
 
         for(int nextPeriod = 10; nextPeriod < maxPeriod; nextPeriod++)
         {
@@ -592,20 +592,20 @@ float CalculateDurationPlus(Chan::E ch)
     float aveValue = CalculateAverageRel(ch);
     EXIT_IF_ERROR_FLOAT(aveValue); //-V2507
 
-    float firstIntersection = FindIntersectionWithHorLine(ch, 1, true, (uint8)aveValue);
-    float secondIntersection = FindIntersectionWithHorLine(ch, 1, false, (uint8)aveValue);
+    float firstIntersection = FindIntersectionWithHorLine(ch, 1, true, static_cast<uint8>(aveValue));
+    float secondIntersection = FindIntersectionWithHorLine(ch, 1, false, static_cast<uint8>(aveValue));
 
     EXIT_IF_ERRORS_FLOAT(firstIntersection, secondIntersection); //-V2507
 
     if(secondIntersection < firstIntersection)
     {
-        secondIntersection = FindIntersectionWithHorLine(ch, 2, false, (uint8)aveValue);
+        secondIntersection = FindIntersectionWithHorLine(ch, 2, false, static_cast<uint8>(aveValue));
     }
 
     if (set.meas.marked == Measure::Type::DurationPlus)
     {
-        Measure::SetMarkerTime(ch, 0, (int16)firstIntersection - firstByte);
-        Measure::SetMarkerTime(ch, 1, (int16)secondIntersection - firstByte);
+        Measure::SetMarkerTime(ch, 0, static_cast<int16>(firstIntersection) - firstByte);
+        Measure::SetMarkerTime(ch, 1, static_cast<int16>(secondIntersection) - firstByte);
     }
 
     EXIT_IF_ERROR_FLOAT(secondIntersection); //-V2507
@@ -620,20 +620,20 @@ float CalculateDurationMinus(Chan::E ch)
     float aveValue = CalculateAverageRel(ch);
     EXIT_IF_ERROR_FLOAT(aveValue); //-V2507
 
-    float firstIntersection = FindIntersectionWithHorLine(ch, 1, false, (uint8)aveValue);
-    float secondIntersection = FindIntersectionWithHorLine(ch, 1, true, (uint8)aveValue);
+    float firstIntersection = FindIntersectionWithHorLine(ch, 1, false, static_cast<uint8>(aveValue));
+    float secondIntersection = FindIntersectionWithHorLine(ch, 1, true, static_cast<uint8>(aveValue));
 
     EXIT_IF_ERRORS_FLOAT(firstIntersection, secondIntersection); //-V2507
 
     if(secondIntersection < firstIntersection)
     {
-        secondIntersection = FindIntersectionWithHorLine(ch, 2, true, (uint8)aveValue);
+        secondIntersection = FindIntersectionWithHorLine(ch, 2, true, static_cast<uint8>(aveValue));
     }
 
     if (set.meas.marked == Measure::Type::DurationMinus)
     {
-        Measure::SetMarkerTime(ch, 0, (int16)firstIntersection - firstByte);
-        Measure::SetMarkerTime(ch, 1, (int16)secondIntersection - firstByte);
+        Measure::SetMarkerTime(ch, 0, static_cast<int16>(firstIntersection) - firstByte);
+        Measure::SetMarkerTime(ch, 1, static_cast<int16>(secondIntersection) - firstByte);
     }
 
     EXIT_IF_ERROR_FLOAT(secondIntersection); //-V2507
@@ -655,14 +655,14 @@ float CalculateTimeNarastaniya(Chan::E ch)   /** \todo Здесь, возможно, нужно ув
     float max09 = maxSteady - value01;
     float min01 = minSteady + value01;
 
-    float firstIntersection = FindIntersectionWithHorLine(ch, 1, true, (uint8)min01);
-    float secondIntersection = FindIntersectionWithHorLine(ch, 1, true, (uint8)max09);
+    float firstIntersection = FindIntersectionWithHorLine(ch, 1, true, static_cast<uint8>(min01));
+    float secondIntersection = FindIntersectionWithHorLine(ch, 1, true, static_cast<uint8>(max09));
 
     EXIT_IF_ERRORS_FLOAT(firstIntersection, secondIntersection); //-V2507
     
     if (secondIntersection < firstIntersection)
     {
-        secondIntersection = FindIntersectionWithHorLine(ch, 2, true, (uint8)max09);
+        secondIntersection = FindIntersectionWithHorLine(ch, 2, true, static_cast<uint8>(max09));
     }
 
     EXIT_IF_ERROR_FLOAT(secondIntersection); //-V2507
@@ -673,8 +673,8 @@ float CalculateTimeNarastaniya(Chan::E ch)   /** \todo Здесь, возможно, нужно ув
     {
         Measure::SetMarkerVoltage(ch, 0, max09);
         Measure::SetMarkerVoltage(ch, 1, min01);
-        Measure::SetMarkerTime(ch, 0, (int16)firstIntersection - firstByte);
-        Measure::SetMarkerTime(ch, 1, (int16)secondIntersection - firstByte);
+        Measure::SetMarkerTime(ch, 0, static_cast<int16>(firstIntersection) - firstByte);
+        Measure::SetMarkerTime(ch, 1, static_cast<int16>(secondIntersection) - firstByte);
     }
 
     return retValue;
@@ -693,14 +693,14 @@ float CalculateTimeSpada(Chan::E ch)        /// \todo Аналогично времени нараста
     float max09 = maxSteady - value01;
     float min01 = minSteady + value01;
 
-    float firstIntersection = FindIntersectionWithHorLine(ch, 1, false, (uint8)max09);
-    float secondIntersection = FindIntersectionWithHorLine(ch, 1, false, (uint8)min01);
+    float firstIntersection = FindIntersectionWithHorLine(ch, 1, false, static_cast<uint8>(max09));
+    float secondIntersection = FindIntersectionWithHorLine(ch, 1, false, static_cast<uint8>(min01));
 
     EXIT_IF_ERRORS_FLOAT(firstIntersection, secondIntersection); //-V2507
 
     if (secondIntersection < firstIntersection)
     {
-        secondIntersection = FindIntersectionWithHorLine(ch, 2, false, (uint8)min01);
+        secondIntersection = FindIntersectionWithHorLine(ch, 2, false, static_cast<uint8>(min01));
     }
 
     EXIT_IF_ERROR_FLOAT(secondIntersection); //-V2507
@@ -711,8 +711,8 @@ float CalculateTimeSpada(Chan::E ch)        /// \todo Аналогично времени нараста
     {
         Measure::SetMarkerVoltage(ch, 0, max09);
         Measure::SetMarkerVoltage(ch, 1, min01);
-        Measure::SetMarkerTime(ch, 0, (int16)firstIntersection - SHIFT_IN_MEMORY);
-        Measure::SetMarkerTime(ch, 1, (int16)secondIntersection - SHIFT_IN_MEMORY);
+        Measure::SetMarkerTime(ch, 0, static_cast<int16>(firstIntersection) - SHIFT_IN_MEMORY);
+        Measure::SetMarkerTime(ch, 1, static_cast<int16>(secondIntersection) - SHIFT_IN_MEMORY);
     }
 
     return retValue;
@@ -773,7 +773,7 @@ float CalculateMinSteadyRel(Chan::E ch)
                     numSums++; //-V127
                 }
             }
-            min[ch] = (float)sum / numSums;
+            min[ch] = static_cast<float>(sum) / numSums;
             int numMin = numSums;
 
             int numDeleted = 0;
@@ -816,7 +816,7 @@ float CalculateMinSteadyRel(Chan::E ch)
                         }
                     }
                 }
-                min[ch] = (numDeleted > numMin / 2.0F) ? CalculateMinRel(ch) : (float)sum / numSums;
+                min[ch] = (numDeleted > numMin / 2.0F) ? CalculateMinRel(ch) : static_cast<float>(sum) / numSums;
             }
         }
         minSteadyIsCalculating[ch] = true;
@@ -856,7 +856,7 @@ float CalculateMaxSteadyRel(Chan::E ch)
                     numSums++; //-V127
                 }
             }
-            max[ch] = (float)sum / numSums;
+            max[ch] = static_cast<float>(sum) / numSums;
             int numMax = numSums;
 
             int numDeleted = 0;
@@ -872,7 +872,7 @@ float CalculateMaxSteadyRel(Chan::E ch)
                 float value = pic / 9.0F;
 
                 data = &dataIn[firstByte];
-                uint8 _max = (uint8)max[ch];
+                uint8 _max = static_cast<uint8>(max[ch]);
 
                 while (data <= end)
                 {
@@ -900,7 +900,7 @@ float CalculateMaxSteadyRel(Chan::E ch)
                         }
                     }
                 }
-                max[ch] = (numDeleted > numMax / 2) ? CalculateMaxRel(ch) : (float)sum / numSums;
+                max[ch] = (numDeleted > numMax / 2) ? CalculateMaxRel(ch) : static_cast<float>(sum) / numSums;
             }
         }
         maxSteadyIsCalculating[ch] = true;
@@ -997,14 +997,14 @@ float CalculateDelayPlus(Chan::E ch)
     Chan::E firstChannel = ch;
     Chan::E secondChannel = Chan(ch).IsA() ? Chan::B : Chan::A;
 
-    float firstIntersection = FindIntersectionWithHorLine(firstChannel, 1, true, (uint8)averageFirst);
-    float secondIntersection = FindIntersectionWithHorLine(secondChannel, 1, true, (uint8)averageSecond);
+    float firstIntersection = FindIntersectionWithHorLine(firstChannel, 1, true, static_cast<uint8>(averageFirst));
+    float secondIntersection = FindIntersectionWithHorLine(secondChannel, 1, true, static_cast<uint8>(averageSecond));
 
     EXIT_IF_ERRORS_FLOAT(firstIntersection, secondIntersection); //-V2507
 
     if(secondIntersection < firstIntersection)
     {
-        secondIntersection = FindIntersectionWithHorLine(secondChannel, 2, true, (uint8)averageSecond);
+        secondIntersection = FindIntersectionWithHorLine(secondChannel, 2, true, static_cast<uint8>(averageSecond));
     }
 
     EXIT_IF_ERROR_FLOAT(secondIntersection); //-V2507
@@ -1036,14 +1036,14 @@ float CalculateDelayMinus(Chan::E ch)
     Chan::E firstChannel = ch;
     Chan::E secondChannel = Chan(ch).IsA() ? Chan::B : Chan::A;
 
-    float firstIntersection = FindIntersectionWithHorLine(firstChannel, 1, false, (uint8)averageFirst);
-    float secondIntersection = FindIntersectionWithHorLine(secondChannel, 1, false, (uint8)averageSecond);
+    float firstIntersection = FindIntersectionWithHorLine(firstChannel, 1, false, static_cast<uint8>(averageFirst));
+    float secondIntersection = FindIntersectionWithHorLine(secondChannel, 1, false, static_cast<uint8>(averageSecond));
 
     EXIT_IF_ERRORS_FLOAT(firstIntersection, secondIntersection); //-V2507
 
     if(secondIntersection < firstIntersection)
     {
-        secondIntersection = FindIntersectionWithHorLine(secondChannel, 2, false, (uint8)averageSecond);
+        secondIntersection = FindIntersectionWithHorLine(secondChannel, 2, false, static_cast<uint8>(averageSecond));
     }
 
     /*
@@ -1099,7 +1099,7 @@ float Measure::CalculateCursorU(Chan::E ch, float posCurT)
     
     BitSet64 points = DisplayOsci::PainterData::PointsOnDisplay();
 
-    int rel = (int)(CHOICE_BUFFER)[(int)points.word0 + ROUND(int, posCurT)] - VALUE::MIN;
+    int rel = static_cast<int>(CHOICE_BUFFER)[static_cast<int>(points.word0) + ROUND(int, posCurT)] - VALUE::MIN;
 
 #define SCALE (200.0F / (VALUE::MAX - VALUE::MIN))
 
@@ -1197,7 +1197,7 @@ void InterpolationSinX_X(uint8 *data, int numPoints, TBase::E tBase)
     static const int deltas[5] = {100, 50, 20, 10, 5};
     int delta = deltas[tBase];
 
-    uint8 *signedData = (uint8 *)std::malloc((uint)numPoints / 2U);
+    uint8 *signedData = static_cast<uint8 *>(std::malloc(static_cast<uint>(numPoints) / 2U));
     if (signedData == 0)
     {
         LOG_ERROR("Нет памяти");
@@ -1226,7 +1226,7 @@ void InterpolationSinX_X(uint8 *data, int numPoints, TBase::E tBase)
     }
 
     float deltaX = PI;
-    float stepX0 = PI / (float)delta;
+    float stepX0 = PI / static_cast<float>(delta);
     float x0 = PI - stepX0;
     int num = 0;
     
@@ -1268,7 +1268,7 @@ void InterpolationSinX_X(uint8 *data, int numPoints, TBase::E tBase)
                     value += signedData[n] * sinX / x;
                     sinX = -sinX;
                 }
-                data[i] = (uint8)value;
+                data[i] = static_cast<uint8>(value);
             }
         }
     }
@@ -1313,7 +1313,7 @@ String Measure::GetStringMeasure(Chan::E ch, char* buffer, int lenBuf)
         }
                
         char *text = func(value, sMeas[type].showSign, bufferForFunc);
-        int len = (int)std::strlen(text) + (int)std::strlen(buffer) + 1;
+        int len = static_cast<int>(std::strlen(text)) + static_cast<int>(std::strlen(buffer)) + 1;
         if (len + 1 <= lenBuf)
         {
             std::strcat(buffer, text);
