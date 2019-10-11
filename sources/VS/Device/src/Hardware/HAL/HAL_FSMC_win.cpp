@@ -16,9 +16,10 @@ void HAL_FSMC::WriteToFPGA16(uint8 *, uint16)
 
 uint8 HAL_FSMC::ReadFromFPGA(const uint8 *address)
 {
-    if (address == RD::DATA_A || address == RD::DATA_B)
+    if (address == RD::DATA_A || (address == RD::DATA_A + 1) ||
+        address == RD::DATA_B || (address == RD::DATA_B + 1))
     {
-        return RecorderHAL::ReadData(address == RD::DATA_A ? Chan::A : Chan::B);
+        return RecorderHAL::ReadData((address == RD::DATA_A) || (address == RD::DATA_A + 1) ? Chan::A : Chan::B);
     }
 
     return 0;
