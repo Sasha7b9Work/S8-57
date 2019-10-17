@@ -8,7 +8,7 @@ static const Key::E *allowedKeys = 0;
 
 pString Key::Name()
 {
-    static const pString names[Key::Number] =
+    static const pString names[Key::Count] =
     {
         "None",
         "Функция",
@@ -68,7 +68,7 @@ pString TypePress::ToString()
 
 bool Key::IsControlSignal() const
 {
-    static const bool isControl[Key::Number] =
+    static const bool isControl[Key::Count] =
     {
         false, // None
         false, // Function

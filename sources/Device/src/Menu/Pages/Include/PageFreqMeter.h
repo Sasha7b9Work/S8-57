@@ -18,7 +18,7 @@ struct FreqMeterModeView
     {
         Frequency,
         Period,
-        Number
+        Count
     };
 };
 
@@ -42,7 +42,7 @@ struct FreqMeterFreqClc
         _1MHz,
         _10MHz,
         _100MHz,
-        Number
+        Count
     };
 };
 
@@ -57,7 +57,7 @@ struct FreqMeterNumberPeriods
         _1k,
         _10k,
         _100k,
-        Number
+        Count
     };
 };
 

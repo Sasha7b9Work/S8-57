@@ -18,7 +18,7 @@ struct PinStruct
     uint16              pin;
 };
 
-static PinStruct pins[FPin::Number] =
+static PinStruct pins[FPin::Count] =
 {
     {HPort::_C , HPin::_10},   // SPI3_SCK
     {HPort::_C , HPin::_12},   // SPI3_DAT
@@ -67,7 +67,7 @@ void FPGA::LoadRegUPR()
 
 void GPIO::Init()
 {
-    for (int i = 0; i < FPin::Number; i++)
+    for (int i = 0; i < FPin::Count; i++)
     {
         HAL_PIO::Init(PORT(static_cast<int>(i)), GetPin((FPin::E)i) , HMode::Output_PP, HPull::Down);
     }

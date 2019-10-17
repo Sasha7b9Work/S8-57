@@ -45,9 +45,9 @@ void PageChoiceMeasures::OnKeyEvent(const KeyEvent &event)
 
         if (posCursor < 0)
         {
-            posCursor = Measure::Type::Number - 1;
+            posCursor = TypeMeasure::Count - 1;
         }
-        else if (posCursor == Measure::Type::Number)
+        else if (posCursor == TypeMeasure::Count)
         {
             posCursor = 0;
         }
@@ -56,7 +56,7 @@ void PageChoiceMeasures::OnKeyEvent(const KeyEvent &event)
             // здесь ничего делать не нужно
         }
 
-        set.meas.measures[AutoMeasurements::posActive] = (Measure::Type::E)posCursor;
+        set.meas.measures[AutoMeasurements::posActive] = (TypeMeasure::E)posCursor;
         Color::ResetFlash();
     }
     else
@@ -80,13 +80,13 @@ void PageChoiceMeasures::Draw()
     int dY = 22;
     int maxRow = ((set.meas.number == MeasuresOnDisplay::_6_1) || (set.meas.number == MeasuresOnDisplay::_6_2)) ? 8 : 5;
     int maxCol = ((set.meas.number == MeasuresOnDisplay::_6_1) || (set.meas.number == MeasuresOnDisplay::_6_2)) ? 3 : 5;
-    Measure::Type::E meas = Measure::Type::None;
+    TypeMeasure::E meas = TypeMeasure::None;
 
     for (int row = 0; row < maxRow; row++)
     {
         for (int col = 0; col < maxCol; col++)
         {
-            if (meas < Measure::Type::Number)
+            if (meas < TypeMeasure::Count)
             {
                 int x0 = x + col * dX;
                 int y0 = y + row * dY;
@@ -96,7 +96,7 @@ void PageChoiceMeasures::Draw()
                 Char((SymbolUGO::E)Measure::GetChar(meas)).Draw10SymbolsInRect(x0 + 2, y0 + 1, active ? Color::FLASH_01 : Color::FILL);
                 Font::SetCurrent(TypeFont::_5);
                 Text(Measure::GetName(meas)).DrawRelativelyRight(x0 + dX, y0 + 12);
-                meas = (Measure::Type::E)(static_cast<int>(meas) + 1);    // meas++;
+                meas = (TypeMeasure::E)(static_cast<int>(meas) + 1);    // meas++;
             }
         }
     }

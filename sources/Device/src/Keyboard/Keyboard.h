@@ -41,7 +41,7 @@ struct Key
         F3,
         F4,
         F5,
-        Number
+        Count
     } value;
 
     explicit Key(E v = None) : value(v) {};

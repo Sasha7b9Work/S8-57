@@ -317,8 +317,8 @@ void Page::DrawTitle(int y) const
     Region(Menu::Title::WIDTH - 1, Menu::Title::HEIGHT - 1).Fill(1, y + 1, Color::BACK);
 
     bool condDrawRSet = NumSubPages() > 1 &&
-        !Menu::CurrentItem()->Is(Item::Type::Governor) &&
-        Menu::OpenedItem()->Is(Item::Type::Page);
+        !Menu::CurrentItem()->Is(TypeItem::Governor) &&
+        Menu::OpenedItem()->Is(TypeItem::Page);
 
     int delta = condDrawRSet ? -10 : 0;
 

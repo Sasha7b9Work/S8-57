@@ -50,9 +50,9 @@ void TableMeasures::Cell::Draw(int x, int y)
 
     bool active = measure.IsActive() && (Menu::OpenedItem() == PageAutoMeasures::PageTune::self);
 
-    Measure::Type::E type = measure.GetType();
+    TypeMeasure::E type = measure.GetType();
 
-    if (type != Measure::Type::None)
+    if (type != TypeMeasure::None)
     {
         Region(DX(), DY()).Fill(x, y, Color::BACK);
         Rectangle(DX(), DY()).Draw(x, y, Color::FILL);
@@ -64,7 +64,7 @@ void TableMeasures::Cell::Draw(int x, int y)
         Region(DX() - 4, DY() - 4).Fill(x + 2, y + 2, Color::FILL);
     }
 
-    if (type != Measure::Type::None)
+    if (type != TypeMeasure::None)
     {
         Color color = active ? Color::BACK : Color::FILL;
 

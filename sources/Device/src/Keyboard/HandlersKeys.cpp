@@ -93,7 +93,7 @@ void Handlers::Process(KeyEvent e)
 {
     event = e;
 
-    static const pFuncVV func[Key::Number][4] =
+    static const pFuncVV func[Key::Count][4] =
     { // Press              Repead             Release           Long
         {Empty,             Empty,             Empty,            Empty},            // None       
         {Empty,             Empty,             Function_Release, Empty},            // Function   
@@ -135,7 +135,7 @@ void Handlers::Process(KeyEvent e)
     Key::E code = event.key;
     TypePress::E type = event.type;
 
-    if (code < Key::Number && type < TypePress::None)
+    if (code < Key::Count && type < TypePress::None)
     {
         if (!CommonHandlerPage())
         {
@@ -299,7 +299,7 @@ static void HandlerArrow()
     {
         Item *openedItem = Menu::OpenedItem();
 
-        if (!openedItem->Is(Item::Type::Page))
+        if (!openedItem->Is(TypeItem::Page))
         {
             openedItem->HandlerKey(event);
         }
@@ -314,7 +314,7 @@ static bool CommonHandlerPage()
     {
         Item *openedPage = Menu::OpenedItem();
 
-        if (!openedPage->Is(Item::Type::Page))
+        if (!openedPage->Is(TypeItem::Page))
         {
         }
         else if (Menu::CurrentItem()->HandlerKey(event))

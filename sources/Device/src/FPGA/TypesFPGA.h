@@ -89,7 +89,7 @@ struct FPin
         A1S,
         A0S,
         LFS,
-        Number
+        Count
     } value;
     explicit FPin(E v) : value(v) {};
 };

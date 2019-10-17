@@ -15,7 +15,7 @@ struct StructMeasure
 
 #define DEF_STRUCT_MEASURE(name, ugo) {name, ugo, 0, 0, 0}
 
-static const StructMeasure sMeas[Measure::Type::Number] =
+static const StructMeasure sMeas[TypeMeasure::Count] =
 {
     DEF_STRUCT_MEASURE("",            '\x00'),
     DEF_STRUCT_MEASURE("U макс",      '\x20'),
@@ -60,7 +60,7 @@ void Measure::SetActive(int row, int col)
 }
 
 
-char Measure::GetChar(Measure::Type::E measure)
+char Measure::GetChar(TypeMeasure::E measure)
 {
     return sMeas[measure].UGO;
 }
@@ -104,19 +104,19 @@ void Measure::ChangeActive(int delta)
 
 String Measure::Name()
 {
-    Type::E type = GetType();
+    TypeMeasure::E type = GetType();
 
-    return (type > Type::None && type < Type::Number) ? String(sMeas[type].name) : String("");
+    return (type > TypeMeasure::None && type < TypeMeasure::Count) ? String(sMeas[type].name) : String("");
 }
 
 
-String Measure::GetName(Measure::Type::E type)
+String Measure::GetName(TypeMeasure::E type)
 {
     return String(sMeas[type].name);
 }
 
 
-Measure::Type::E Measure::GetType()
+TypeMeasure::E Measure::GetType()
 {
     return set.meas.measures[row * TableMeasures::NumCols() + col];
 }
@@ -126,7 +126,7 @@ void Measure::ShortPressOnSmallButonMarker()
 {
     if(set.meas.measures[AutoMeasurements::posActive] == set.meas.marked)
     {
-        set.meas.marked = Measure::Type::None;
+        set.meas.marked = TypeMeasure::None;
     }
     else
     {

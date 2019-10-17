@@ -45,7 +45,7 @@ static SDL_Window *window = nullptr;
 static SDL_Texture *texture = nullptr;
 
 /// Здесь хранятся указатели на кнопки
-static wxButton *buttons[Key::Number] = { nullptr };
+static wxButton *buttons[Key::Count] = { nullptr };
 /// Цвета
 static uint colors[256];
 

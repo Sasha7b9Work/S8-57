@@ -133,14 +133,14 @@ const Settings Settings::defaultSettings =
         MeasuresSource::A_B,                // source
         MeasuresModeViewSignals::AsIs,      // modeViewSignals
         {                                   // measures[15]
-            Measure::Type::VoltageMax,          Measure::Type::VoltageMin,  Measure::Type::VoltagePic,      Measure::Type::VoltageMaxSteady,
-            Measure::Type::VoltageMinSteady,
-            Measure::Type::VoltageAverage,      Measure::Type::VoltageAmpl, Measure::Type::VoltageRMS,      Measure::Type::VoltageVybrosPlus,
-            Measure::Type::VoltageVybrosMinus,
-            Measure::Type::Period,              Measure::Type::Freq,        Measure::Type::TimeNarastaniya, Measure::Type::TimeSpada,
-            Measure::Type::DurationPlus
+            TypeMeasure::VoltageMax,          TypeMeasure::VoltageMin,  TypeMeasure::VoltagePic,      TypeMeasure::VoltageMaxSteady,
+            TypeMeasure::VoltageMinSteady,
+            TypeMeasure::VoltageAverage,      TypeMeasure::VoltageAmpl, TypeMeasure::VoltageRMS,      TypeMeasure::VoltageVybrosPlus,
+            TypeMeasure::VoltageVybrosMinus,
+            TypeMeasure::Period,              TypeMeasure::Freq,        TypeMeasure::TimeNarastaniya, TypeMeasure::TimeSpada,
+            TypeMeasure::DurationPlus
         },
-        Measure::Type::Freq                 // marked
+        TypeMeasure::Freq                 // marked
     },
 
     // Настройки математики

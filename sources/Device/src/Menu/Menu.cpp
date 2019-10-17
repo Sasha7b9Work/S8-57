@@ -249,7 +249,7 @@ void Menu::CloseOpenedItem()
 {
     Item *item = OpenedItem();
 
-    if (item->Is(Item::Type::Page))
+    if (item->Is(TypeItem::Page))
     {
         ClosePage((Page *)item); //-V1027
     }
@@ -277,7 +277,7 @@ static Item *LastOpened(Page *page)
             int8 posActItem = page->PosCurrentItem();
             Item *item = page->GetItem(posActItem);
 
-            if (page->GetItem(posActItem)->Is(Item::Type::Page))
+            if (page->GetItem(posActItem)->Is(TypeItem::Page))
             {
                 result = LastOpened(static_cast<Page *>(item));
             }
@@ -302,7 +302,7 @@ Item *Menu::CurrentItem()
 
     int8 pos = ((const Page *)result)->PosCurrentItem();
 
-    if (result->Is(Item::Type::Page) && pos != 0x7f)
+    if (result->Is(TypeItem::Page) && pos != 0x7f)
     {
         result = ((const Page *)result)->GetItem(pos);
     }
@@ -316,7 +316,7 @@ static void DrawHintItem(int x, int y, int width)
     if (itemHint)
     {
         //DEF__STRUCT(StructName, pString) names[Item::Type::Number] =
-        static pString names[Item::Type::Number] =
+        static pString names[TypeItem::Count] =
         {
             "",                   // Item_None
             "",                   // Item::Type::Choice
@@ -337,7 +337,7 @@ static void DrawHintItem(int x, int y, int width)
 
         y = Text(item->data->hint).DrawInBoundedRectWithTransfers(x, y + 15, width, Color::BACK, Color::FILL);
 
-        if (item->Is(Item::Type::GraphButton))
+        if (item->Is(TypeItem::GraphButton))
         {
             ((GraphButton *)item)->DrawHints(x, y, width);   // -V1027
         }
@@ -359,7 +359,7 @@ void Menu::Draw()
 
         if (item)
         {
-            if (!item->Is(Item::Type::Page))
+            if (!item->Is(TypeItem::Page))
             {
                 item = (Item *)item->Keeper();
             }
@@ -442,7 +442,7 @@ const Item *Menu::ItemUnderFunctionalKey(Key::E key)
         if (item == nullptr)
         {
         }
-        else if (item->Is(Item::Type::Page))
+        else if (item->Is(TypeItem::Page))
         {
             result = ((Page *)item)->ItemForFuncKey(key);
         }

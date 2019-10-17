@@ -28,7 +28,7 @@ struct TypeTimer
         RemoveAddFunction,      ///< Таймер на удаление дополнительной функции отрисовки
         USB,                    ///<
         Temp,
-        Number
+        Count
     };
 };
 

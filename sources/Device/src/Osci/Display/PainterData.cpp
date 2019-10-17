@@ -46,7 +46,7 @@ void DisplayOsci::PainterData::DrawData()
 {
     if (AutoMeasurements::DataIsSetting())
     {
-        static const pFuncVV func[ModeWork::Number] =
+        static const pFuncVV func[ModeWork::Count] =
         {
             DrawCurrent,
             DrawRAM,

@@ -18,7 +18,7 @@ struct TimerStruct
 
 
 
-static TimerStruct timers[TypeTimer::Number];
+static TimerStruct timers[TypeTimer::Count];
 static uint timeStartLogging = 0;
 static uint timePrevPoint = 0;
 static bool busy = false;
@@ -47,7 +47,7 @@ bool ::Timer::IsRun(::TypeTimer::E type)
 
 void Timer::Init()
 {
-    for(uint i = 0; i < TypeTimer::Number; i++)
+    for(uint i = 0; i < TypeTimer::Count; i++)
     {
         timers[i].timeNextMS = UINT_MAX; //-V2523
     }
@@ -82,7 +82,7 @@ void Timer::ElapsedCallback()
 
     StopTIM();
 
-    for (uint type = 0; type < TypeTimer::Number; type++)
+    for (uint type = 0; type < TypeTimer::Count; type++)
     {
         if (TIME_NEXT(type) <= time)            // Если пришло время срабатывания
         {
@@ -173,7 +173,7 @@ static uint NearestTime()
 {
     uint time = UINT_MAX; //-V2523
 
-    for(uint type = 0; type < TypeTimer::Number; type++)
+    for(uint type = 0; type < TypeTimer::Count; type++)
     {
         if(TIME_NEXT(type) < time)
         {

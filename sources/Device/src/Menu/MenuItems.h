@@ -23,27 +23,28 @@ struct DataItem
 };
 
 
+/// Разные виды пунктов меню
+struct TypeItem
+{
+    enum E
+    {
+        None,
+        Choice,         ///< Пункт выбора - позволяет выбрать одно из нескольких заданных значений.
+        Button,         ///< Кнопка.
+        Page,           ///< Страница.
+        Governor,       ///< Регулятор - позволяет выбрать любое целое числовое значение из заранее заданного диапазаона. Диапазон не может превышать [ -(1 << 16) / 2 , (1 << 16) / 2]
+        GovernorColor,  ///< Позволяет выбрать цвет.
+        GraphButton,    ///< Кнопка для режима малых кнопок
+        Count
+    } value;
+
+    explicit TypeItem(E v) : value(v) {};
+};
+
+
 class Item
 {
 public:
-    /// Разные виды пунктов меню
-    struct Type
-    {
-        enum E
-        {
-            None,
-            Choice,         ///< Пункт выбора - позволяет выбрать одно из нескольких заданных значений.
-            Button,         ///< Кнопка.
-            Page,           ///< Страница.
-            Governor,       ///< Регулятор - позволяет выбрать любое целое числовое значение из заранее заданного диапазаона. Диапазон не может превышать [ -(1 << 16) / 2 , (1 << 16) / 2]
-            GovernorColor,  ///< Позволяет выбрать цвет.
-            GraphButton,    ///< Кнопка для режима малых кнопок
-            Number
-        } value;
-
-        explicit Type(E v) : value(v) {};
-    };
-
     const DataItem *data;
     
     Item(const DataItem * const data = nullptr);
@@ -85,7 +86,7 @@ public:
         static const int HEIGHT = 13;
     };
 
-    bool Is(Type::E t) const { return data->type == static_cast<uint8>(t); };
+    bool Is(TypeItem::E t) const { return data->type == static_cast<uint8>(t); };
 
     virtual void Draw(int /*x*/, int /*y*/, bool /*opened*/) const {};
 
@@ -120,7 +121,7 @@ public:
     /// Возвращает цвет, которым нужно заполнять участок выбора
     Color ColorBackground(const Item *choice) const;
 
-    bool IsPage() const { return data->type == Item::Type::Page; };
+    bool IsPage() const { return data->type == TypeItem::Page; };
 };
 
 

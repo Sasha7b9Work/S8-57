@@ -7,6 +7,7 @@
 #include "Hardware/Timer.h"
 #include "Recorder/Recorder_win.h"
 #include "Settings/Settings.h"
+#include <cmath>
 
 
 bool RecorderHAL::ReadyPoint()
@@ -17,16 +18,16 @@ bool RecorderHAL::ReadyPoint()
 
     static const uint delta[RecorderScaleX::Count] =
     {
-        100 / 20, // 
-        200 / 20, // 
-        500 / 20, // 
-        1000 / 20, // 
-        2000 / 20, // 
-        5000 / 20, // 
-        10000 / 20  // 
+        100 / 20,   // 0.1ñ
+        200 / 20,   // 0.2ñ
+        500 / 20,   // 0.5ñ
+        1000 / 20,  // 1ñ
+        2000 / 20,  // 2ñ
+        5000 / 20,  // 5ñ
+        10000 / 20  // 10ñ
     };
 
-    if (TIME_MS - delta[static_cast<int>(set.rec.scaleX.value)] > 100)
+    if (TIME_MS - timeLastRead >= delta[static_cast<int>(set.rec.scaleX.value)])
     {
         timeLastRead = TIME_MS;
         result = true;
@@ -36,7 +37,11 @@ bool RecorderHAL::ReadyPoint()
 }
 
 
-uint8 RecorderHAL::ReadData(Chan::E)
+uint8 RecorderHAL::ReadData(Chan::E ch)
 {
-    return VALUE::AVE;
+    static float start[2] = { 0.0F, 250.0F };
+
+    float amplitude = 120;
+
+    return static_cast<uint8>(VALUE::AVE + std::sinf(start[ch] + TIME_MS / 500.0F) * amplitude);
 }

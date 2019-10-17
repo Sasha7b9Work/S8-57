@@ -2,46 +2,46 @@
 #include "Settings/SettingsOsci.h"
 
 
+// Виды измерений
+struct TypeMeasure
+{
+    enum E
+    {
+        None,
+        VoltageMax,
+        VoltageMin,
+        VoltagePic,
+        VoltageMaxSteady,
+        VoltageMinSteady,
+        VoltageAmpl,
+        VoltageAverage,
+        VoltageRMS,
+        VoltageVybrosPlus,
+        VoltageVybrosMinus,
+        Period,
+        Freq,
+        TimeNarastaniya,
+        TimeSpada,
+        DurationPlus,
+        DurationMinus,
+        SkvaznostPlus,
+        SkvaznostMinus,
+        DelayPlus,
+        DelayMinus,
+        PhazaPlus,
+        PhazaMinus,
+        Count
+    } value;
+    explicit TypeMeasure(E v) : value(v) {};
+};
+
 
 struct Measure
 {
 public:
-    // Виды измерений
-    struct Type
-    {
-        enum E
-        {
-            None,
-            VoltageMax,
-            VoltageMin,
-            VoltagePic,
-            VoltageMaxSteady,
-            VoltageMinSteady,
-            VoltageAmpl,
-            VoltageAverage,
-            VoltageRMS,
-            VoltageVybrosPlus,
-            VoltageVybrosMinus,
-            Period,
-            Freq,
-            TimeNarastaniya,
-            TimeSpada,
-            DurationPlus,
-            DurationMinus,
-            SkvaznostPlus,
-            SkvaznostMinus,
-            DelayPlus,
-            DelayMinus,
-            PhazaPlus,
-            PhazaMinus,
-            Number
-        } value;
-        explicit Type(E v) : value(v) {};
-    };
-
     Measure(int r, int c) : row(r), col(c) {};
 
-    Type::E GetType();
+    TypeMeasure::E GetType();
 
     String GetStringMeasure(Chan::E ch, char *buffer, int lenBuf);
     /// Устанавливает активным следующее или предыдущее измерение
@@ -55,7 +55,7 @@ public:
 
     static void SetMarkerTime(Chan::E ch, int num, int value);
 
-    static char GetChar(Type::E measure);
+    static char GetChar(TypeMeasure::E measure);
 
     static void ShortPressOnSmallButonMarker();
     /// Возвращает true, если измерение активное - выбрано ручкой
@@ -63,7 +63,7 @@ public:
 
     String Name();
 
-    static String GetName(Type::E type);
+    static String GetName(TypeMeasure::E type);
 
 private:
 

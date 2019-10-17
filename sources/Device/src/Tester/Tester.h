@@ -66,7 +66,7 @@ struct Tester
             _5mA,
             _10mA,
             _20mA,
-            Number
+            Count
         } value;
         Chan::E ch;
         explicit Scale(Range::E range, Chan::E _ch) : value(static_cast<E>(range)), ch(_ch) {};

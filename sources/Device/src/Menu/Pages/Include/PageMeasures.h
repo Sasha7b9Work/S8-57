@@ -49,8 +49,8 @@ struct SettingsAutoMeasures
     MeasuresOnDisplay::E        number;            ///< —колько измерений выводить.
     MeasuresSource::E           source;            ///< ƒл€ каких каналов выводить измерени€.
     MeasuresModeViewSignals::E  modeViewSignals;   ///< —жимать ли сигналы при выводе измерений.
-    Measure::Type::E            measures[15];      ///< ¬ыбранные дл€ индикации измерени€.
-    Measure::Type::E            marked;            ///< »змерение, на которое нужно выводить маркеры.
+    TypeMeasure::E              measures[15];      ///< ¬ыбранные дл€ индикации измерени€.
+    TypeMeasure::E              marked;            ///< »змерение, на которое нужно выводить маркеры.
 };
 
 
