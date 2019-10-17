@@ -33,6 +33,8 @@ struct TypeMeasure
         Count
     } value;
     explicit TypeMeasure(E v) : value(v) {};
+
+    static String GetName(TypeMeasure::E type);
 };
 
 
@@ -62,8 +64,6 @@ public:
     bool IsActive();
 
     String Name();
-
-    static String GetName(TypeMeasure::E type);
 
 private:
 

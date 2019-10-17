@@ -43,6 +43,11 @@ static const StructMeasure sMeas[TypeMeasure::Count] =
 };
 
 
+String TypeMeasure::GetName(TypeMeasure::E type)
+{
+    return String(sMeas[type].name);
+}
+
 
 bool Measure::IsActive()
 {
@@ -107,12 +112,6 @@ String Measure::Name()
     TypeMeasure::E type = GetType();
 
     return (type > TypeMeasure::None && type < TypeMeasure::Count) ? String(sMeas[type].name) : String("");
-}
-
-
-String Measure::GetName(TypeMeasure::E type)
-{
-    return String(sMeas[type].name);
 }
 
 

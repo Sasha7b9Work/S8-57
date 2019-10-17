@@ -95,7 +95,7 @@ void PageChoiceMeasures::Draw()
                 Region(dX - 2, dY - 2).Fill(x0 + 1, y0 + 1, (active ? Color::FLASH_10 : Color::BACK));
                 Char((SymbolUGO::E)Measure::GetChar(meas)).Draw10SymbolsInRect(x0 + 2, y0 + 1, active ? Color::FLASH_01 : Color::FILL);
                 Font::SetCurrent(TypeFont::_5);
-                Text(Measure::GetName(meas)).DrawRelativelyRight(x0 + dX, y0 + 12);
+                Text(TypeMeasure::GetName(meas)).DrawRelativelyRight(x0 + dX, y0 + 12);
                 meas = (TypeMeasure::E)(static_cast<int>(meas) + 1);    // meas++;
             }
         }
