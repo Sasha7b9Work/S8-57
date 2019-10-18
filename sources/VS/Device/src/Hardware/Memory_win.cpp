@@ -1,13 +1,19 @@
 #include "defines.h"
 #include "Hardware/Memory.h"
 
+#include <SDL.h>
+
 
 #define  _16K (16 * 1024)
 #define  _64K (64 * 1024)
 #define _128K (128 * 1024)
 
 
-uint8 eeprom[2 * 1024 * 1024];
+#define FILE_NAME "memory.bin"
+
+#define SIZE_MEMORY (2 * 1024 * 1024)
+
+uint8 eeprom[SIZE_MEMORY];
 
 static const SectorTypeDef sectors[24] =
 {
@@ -36,6 +42,29 @@ static const SectorTypeDef sectors[24] =
     {0x081C0000, &eeprom[_128K * 8 + _128K * 6], _128K},    // sector22
     {0x081E0000, &eeprom[_128K * 8 + _128K * 7], _128K}     // sector23
 };
+
+
+void MemorySave()
+{
+    SDL_RWops *file = SDL_RWFromFile(FILE_NAME, "wb");
+    if (file != nullptr)
+    {
+        SDL_RWseek(file, 0, RW_SEEK_SET);
+        SDL_RWwrite(file, eeprom, 1, SIZE_MEMORY);
+        SDL_RWclose(file);
+    }
+}
+
+
+void MemoryLoad()
+{
+    SDL_RWops *file = SDL_RWFromFile(FILE_NAME, "rb");
+    if (file != nullptr)
+    {
+        SDL_RWread(file, eeprom, 1, SIZE_MEMORY);
+        SDL_RWclose(file);
+    }
+}
 
 
 bool SectorTypeDef::IsConsist(uint addr) const

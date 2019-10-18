@@ -1,3 +1,6 @@
+#include "defines.h"
+#include "Settings/Settings.h"
+
 #pragma warning(push)
 #pragma warning(disable:4018 4189 4355 4365 4459 4571 4625 4668 4774 5026 5027)
 #include "Application.h"
@@ -62,6 +65,14 @@ bool Application::OnInit()
     init();
 
     return true;
+}
+
+
+int Application::OnExit()
+{
+    set.Save();
+
+    return wxApp::OnExit();
 }
 
 
