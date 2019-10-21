@@ -78,4 +78,4 @@ DEF_PAGE_4( pShow, // -V641 // -V1027                                           
     PageName::Recorder_Show, &PageRecorder::self, IsActive_PageShow, Page::OpenClose, Page::BeforeDraw, HandlerKey_PageShow
 )
 
-const Page * const PageRecorder::PageShow::self = (const Page *)&pShow;
+const Page * const PageRecorder::PageShow::self = static_cast<const Page *>(&pShow);

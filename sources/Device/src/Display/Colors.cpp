@@ -243,7 +243,7 @@ void ColorType::ComponentChange(int delta)
 
     if (index >= 1 && index <= 3)
     {
-        *(pointers[index]) += (float)Math::Sign(delta);
+        *(pointers[index]) += static_cast<float>(Math::Sign(delta));
         Math::Limitation<float>(pointers[index], 0.0F, maxs[index]);
     }
 
@@ -334,7 +334,15 @@ void Color::LoadValueRGB()
 {
     uint rgb = COLOR(value);
 
-    uint8 buffer[6] = { Command::Paint_SetPalette, value, (uint8)rgb, (uint8)(rgb >> 8), (uint8)(rgb >> 16), (uint8)(rgb >> 24) };
+    uint8 buffer[6] = 
+    {
+        Command::Paint_SetPalette,
+        value,
+        static_cast<uint8>(rgb),
+        static_cast<uint8>(rgb >> 8),
+        static_cast<uint8>(rgb >> 16),
+        static_cast<uint8>(rgb >> 24)
+    };
 
     Transceiver::Send(buffer, 6);
 }
