@@ -14,12 +14,15 @@ static void OnPress_Right()
 
 static void Draw_Right(int x, int y)
 {
-    Char(SymbolUGO2::TRIANGLE_RIGHT).Draw4SymbolsInRect(x + 6, y + 2);
+    for (int i = 0; i < 2; i++)
+    {
+        Char(SymbolUGO2::TRIANGLE_RIGHT).Draw4SymbolsInRect(x + i * 12, y + 2);
+    }
 }
 
-DEF_GRAPH_BUTTON( bRight,                                                                                                                 //--- ÔÓÍÊÖÈß - ÐÅÃÈÑÒÐÀÒÎÐ - ÏÐÎÑÌÎÒÐ - Âïðàâî ---
-    "Âïðàâî",
-    "Ïåðåìåñòèòü îêíî ïðîñìîòðà âïðàâî",
+DEF_GRAPH_BUTTON( bScreenRight,                                                                                                     //--- ÔÓÍÊÖÈß - ÐÅÃÈÑÒÐÀÒÎÐ - ÏÐÎÑÌÎÒÐ - Ýêðàí âïðàâî ---
+    "Ýêðàí âïðàâî",
+    "Ïåðåìåñòèòü îêíî ïðîñìîòðà íà îäèí ýêðàí âïðàâî",
     &PageRecorder::PageShow::self, Item::Active, OnPress_Right, Draw_Right
 )
 
@@ -30,12 +33,15 @@ static void OnPress_Left()
 
 static void Draw_Left(int x, int y)
 {
-    Char(SymbolUGO2::TRIANGLE_LEFT).Draw4SymbolsInRect(x + 6, y + 2);
+    for (int i = 0; i < 2; i++)
+    {
+        Char(SymbolUGO2::TRIANGLE_LEFT).Draw4SymbolsInRect(x + i * 12, y + 2);
+    }
 }
 
-DEF_GRAPH_BUTTON( bLeft,                                                                                                                   //--- ÔÓÍÊÖÈß - ÐÅÃÈÑÒÐÀÒÎÐ - ÏÐÎÑÌÎÒÐ - Âëåâî ---
-    "Âëåâî",
-    "",
+DEF_GRAPH_BUTTON( bScreenLeft,                                                                                                       //--- ÔÓÍÊÖÈß - ÐÅÃÈÑÒÐÀÒÎÐ - ÏÐÎÑÌÎÒÐ - Ýêðàí âëåâî ---
+    "Ýêðàí âëåâî",
+    "Ïåðåìåñòèòü îêíî ïðîñìîòðà íà îäèí ýêðàí âëåâî",
     &PageRecorder::PageShow::self, Item::Active, OnPress_Left, Draw_Left
 )
 
@@ -72,8 +78,8 @@ DEF_PAGE_4( pShow, // -V641 // -V1027                                           
     "ÏÐÎÑÌÎÒÐ",
     "Ïðîñìîòð çàïèñàííûõ äàííûõ",
     PageRecorder::PageShow::PageChoice::self,
-    &bLeft,
-    &bRight,
+    &bScreenLeft,
+    &bScreenRight,
     PageRecorder::PageShow::PageCursors::self,
     PageName::Recorder_Show, &PageRecorder::self, IsActive_PageShow, Page::OpenClose, Page::BeforeDraw, HandlerKey_PageShow
 )
