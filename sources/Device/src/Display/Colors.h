@@ -155,10 +155,10 @@ private:
 #define COLOR_TYPE(r, g, b, sR, sG, sB, bright, col) {r, g, b, sR, sG, sB, bright, col, 0, false};
 
 
-#define MAKE_COLOR(r, g, b) ((uint)((b) + ((g) << 8) + ((r) << 16)))
-#define R_FROM_COLOR(color) (((uint)(color) >> 16) & 0xff)
-#define G_FROM_COLOR(color) (((uint)(color) >> 8)  & 0xff)
-#define B_FROM_COLOR(color) (((uint)(color))       & 0xff)
+#define MAKE_COLOR(r, g, b) (static_cast<uint>((b) + ((g) << 8) + ((r) << 16)))
+#define R_FROM_COLOR(color) ((static_cast<uint>(color) >> 16) & 0xff)
+#define G_FROM_COLOR(color) ((static_cast<uint>(color) >> 8)  & 0xff)
+#define B_FROM_COLOR(color) ((static_cast<uint>(color))       & 0xff)
 
 #define COLOR(x) GlobalColors[x]
 

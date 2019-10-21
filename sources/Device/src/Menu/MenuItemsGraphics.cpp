@@ -61,7 +61,13 @@ void GovernorColor::DrawValue(int x, int y) const
     uint green = G_FROM_COLOR(color);
     uint blue = B_FROM_COLOR(color);
     ct->Init();
-    int16 vals[4] = {(int16)(ct->brightness * 100.0F), (int16)blue, (int16)green, (int16)red};
+    int16 vals[4] =
+    {
+        static_cast<int16>(ct->brightness * 100.0F),
+        static_cast<int16>(blue),
+        static_cast<int16>(green),
+        static_cast<int16>(red)
+    };
 
     Region(widthOpened - 2, 12).Fill(x, y, ColorTitleBackground());
     x += 98;
@@ -374,7 +380,7 @@ void Governor::DrawValueWithSelectedPosition(int x, int y, int value, uint numDi
     
     for(uint i = 0; i < numDigits; i++)
     {
-        stack.Push((uint8)(value % 10));
+        stack.Push(static_cast<uint8>(value % 10));
         value /= 10;
     }
     
@@ -389,7 +395,7 @@ void Governor::DrawValueWithSelectedPosition(int x, int y, int value, uint numDi
         
         uint8 val = stack.Pop();
         
-        Char((char)(val + 48)).Draw(x, y, Color::BACK);
+        Char(static_cast<char>(val + 48)).Draw(x, y, Color::BACK);
         
         x += 6;
     }
@@ -424,29 +430,27 @@ void Page::DrawPagesUGO(int right, int bottom) const
 //---------------------------------------------------------------------------------------------------------------------------------------------------
 void Page::DrawNestingPage(int left, int bottom) const
 {
-    Page *parent = (Page *)Keeper();
+    Page *parent = const_cast<Page *>(Keeper());
 
-    if (parent == nullptr)
+    if (parent != nullptr)
     {
-        return;
-    }
+        int nesting = 0;
 
-    int nesting = 0;
+        while (parent != nullptr)
+        {
+            const Page *page = parent;
+            parent = const_cast<Page *>(page->Keeper());
+            nesting++;                                  // -V127
+        }
 
-    while (parent != nullptr)
-    {
-        const Page *page = (Page *)parent;
-        parent = (Page *)page->Keeper();
-        nesting++;                                  // -V127
-    }
+        int size = 4;
+        int delta = 2;
 
-    int size = 4;
-    int delta = 2;
-
-    for (int i = 0; i <= nesting; i++)
-    {
-        int x = left + i * (size + delta);
-        Rectangle(size, size).Draw(x, bottom);
+        for (int i = 0; i <= nesting; i++)
+        {
+            int x = left + i * (size + delta);
+            Rectangle(size, size).Draw(x, bottom);
+        }
     }
 }
 

@@ -90,7 +90,7 @@ void VCP::SendDataSynch(const void *_buffer, uint size)
 {
     if (CONNECTED_TO_USB)
     {
-        char *buffer = (char *)(_buffer);
+        char *buffer = static_cast<char *>(const_cast<void *>(_buffer));
         if (size == 0)
         {
             size = std::strlen(buffer);

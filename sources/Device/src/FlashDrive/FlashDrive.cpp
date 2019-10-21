@@ -171,7 +171,7 @@ void FDrive::GetNumDirsAndFiles(const char *fullPath, int *numDirs, int *numFile
     
 
     char nameDir[_MAX_LFN + 1];
-    std::memcpy(nameDir, (void *)(fullPath), std::strlen(fullPath));
+    std::memcpy(nameDir, fullPath, std::strlen(fullPath));
     nameDir[std::strlen(fullPath)] = '\0';
 
     if (f_opendir(&dir, nameDir) == FR_OK)
@@ -214,7 +214,7 @@ void FDrive::GetNumDirsAndFiles(const char *fullPath, int *numDirs, int *numFile
 
 bool FDrive::GetNameDir(const char *fullPath, int numDir, char *nameDirOut, StructForReadDir *s) // -V2506
 {
-    std::memcpy(s->nameDir, (void *)(fullPath), std::strlen(fullPath));
+    std::memcpy(s->nameDir, fullPath, std::strlen(fullPath));
     s->nameDir[std::strlen(fullPath)] = '\0';
 
     DIR *pDir = &s->dir;
@@ -302,7 +302,7 @@ void FDrive::CloseCurrentDir(StructForReadDir *s)
 
 bool FDrive::GetNameFile(const char *fullPath, int numFile, char *nameFileOut, StructForReadDir *s) // -V2506
 {
-    std::memcpy(s->nameDir, (void *)(fullPath), std::strlen(fullPath));
+    std::memcpy(s->nameDir, fullPath, std::strlen(fullPath));
     s->nameDir[std::strlen(fullPath)] = '\0';
 
     DIR *pDir = &s->dir;
@@ -386,7 +386,7 @@ bool FDrive::OpenNewFileForWrite(const char *fullPathToFile, StructForWrite *str
     {
         return false;
     }
-    std::strcpy(structForWrite->name, (char *)fullPathToFile);
+    std::strcpy(structForWrite->name, const_cast<char *>(fullPathToFile));
     structForWrite->sizeData = 0;
     return true;
 }
@@ -403,13 +403,13 @@ bool FDrive::WriteToFile(uint8 *data, int sizeData, StructForWrite *structForWri
             dataToCopy = SIZE_FLASH_TEMP_BUFFER - structForWrite->sizeData;
         }
         sizeData -= dataToCopy;
-        std::memcpy(structForWrite->tempBuffer + structForWrite->sizeData, data, (uint)dataToCopy);
+        std::memcpy(structForWrite->tempBuffer + structForWrite->sizeData, data, static_cast<uint>(dataToCopy));
         data += dataToCopy; // -V102
         structForWrite->sizeData += dataToCopy;
         if (structForWrite->sizeData == SIZE_FLASH_TEMP_BUFFER)
         {
             uint wr = 0;
-            if (f_write(&structForWrite->fileObj, structForWrite->tempBuffer, (uint)structForWrite->sizeData, &wr) != FR_OK || structForWrite->sizeData != static_cast<int>(wr))
+            if (f_write(&structForWrite->fileObj, structForWrite->tempBuffer, static_cast<uint>(structForWrite->sizeData), &wr) != FR_OK || structForWrite->sizeData != static_cast<int>(wr))
             {
                 return false;
             }
@@ -427,7 +427,7 @@ bool FDrive::CloseFile(StructForWrite *structForWrite) // -V2506
     if (structForWrite->sizeData != 0)
     {
         uint wr = 0;
-        if (f_write(&structForWrite->fileObj, structForWrite->tempBuffer, (uint)structForWrite->sizeData, &wr) != FR_OK || structForWrite->sizeData != static_cast<int>(wr))
+        if (f_write(&structForWrite->fileObj, structForWrite->tempBuffer, static_cast<uint>(structForWrite->sizeData), &wr) != FR_OK || structForWrite->sizeData != static_cast<int>(wr))
         {
             f_close(&structForWrite->fileObj);
             return false;
@@ -447,8 +447,8 @@ static void SetTimeForFile(const char *name)
 
     PackedTime time = HAL_RTC::GetPackedTime();
 
-    info.fdate = (WORD)(((time.year + 2000 - 1980) * 512) | time.month * 32 | time.day);        // -V112
-    info.ftime = (WORD)(time.hours * 2048 | time.minutes * 32 | time.seconds / 2);              // -V112
+    info.fdate = static_cast<WORD>(((time.year + 2000 - 1980) * 512) | time.month * 32 | time.day);        // -V112
+    info.ftime = static_cast<WORD>(time.hours * 2048 | time.minutes * 32 | time.seconds / 2);              // -V112
 
     f_utime(name, &info);
 }
