@@ -199,8 +199,7 @@ const Settings Settings::defaultSettings =
         true,                                   // sourceChanA
         true,                                   // sourceChanB
         false,                                  // sourceSensor
-        RecorderTypeStorage::RAM,               // storageRecord
-        RecorderTypeStorage::RAM,               // storagePlay
+        RecorderTypeMemory::RAM,                // typeMemory
         RecorderAxis::X,                        // axisMove
         RecorderAxis::X,                        // axisZoom
         RecorderScaleX(RecorderScaleX::_100ms), // scaleX

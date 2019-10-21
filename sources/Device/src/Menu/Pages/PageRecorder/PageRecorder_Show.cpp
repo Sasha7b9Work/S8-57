@@ -8,16 +8,6 @@
 #include "Settings/Settings.h"
 
 
-DEF_CHOICE_3( cSource,
-    "Источник",
-    "Откуда брать данные для просмотра",
-    "ОЗУ",
-    "Внутр ЗУ",
-    "Внешн ЗУ",
-    set.rec.storagePlay, &PageRecorder::PageShow::self, Item::Active, Choice::Changed, Choice::AfterDraw
-)
-
-
 static void OnPress_Right()
 {
 }
@@ -78,10 +68,9 @@ static bool HandlerKey_PageShow(const KeyEvent &event)
     return false;
 }
 
-DEF_PAGE_5( pShow, // -V641 // -V1027                                                                                                              //--- ФУНКЦИЯ - РЕГИСТРАТОР - ПРОСМОТР ---
+DEF_PAGE_4( pShow, // -V641 // -V1027                                                                                                              //--- ФУНКЦИЯ - РЕГИСТРАТОР - ПРОСМОТР ---
     "ПРОСМОТР",
     "Просмотр записанных данных",
-    &cSource,
     PageRecorder::PageShow::PageChoice::self,
     &bLeft,
     &bRight,

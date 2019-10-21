@@ -10,13 +10,13 @@ static bool IsActive_Destination()
     return !Recorder::IsRunning();
 }
 
-DEF_CHOICE_3( cDestination,                                                                                                                     //--- ФУНКЦИЯ - РЕГИСТРАТОР - Сохранять в ---
-    "Сохранять в",
+DEF_CHOICE_3( cTypeMemory,                                                                                                                           //--- ФУНКЦИЯ - РЕГИСТРАТОР - Память ---
+    "Память",
     "Куда сохранять данные",
     "ОЗУ",
     "Внутр ЗУ",
     "Внешн ЗУ",
-    set.rec.storageRecord, &PageRecorder::self, IsActive_Destination, Choice::Changed, Choice::AfterDraw
+    set.rec.typeMemory, &PageRecorder::self, IsActive_Destination, Choice::Changed, Choice::AfterDraw
 )
 
 
@@ -71,7 +71,7 @@ DEF_PAGE_4( pRecorder, // -V641 // -V1027                                       
     "РЕГИСТРАТОР",
     "Запись и воспроизведение сигналов входов и датчиков",
     PageRecorder::PageSource::self,
-    &cDestination,
+    &cTypeMemory,
     PageRecorder::PageShow::self,
     &bStart,
     PageName::Recorder, &PageFunction::self, Item::Active, OnOpenClose_Recorder, Page::BeforeDraw, Page::HandlerKeyEvent
