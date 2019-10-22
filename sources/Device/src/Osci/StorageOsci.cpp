@@ -28,7 +28,7 @@ public:
 
         data->settings.Fill();
 
-        uint8 *addrData = (uint8 *)data + sizeof(DataOsci);     // Адрес начала данных
+        uint8 *addrData = reinterpret_cast<uint8 *>(data) + sizeof(DataOsci);     // Адрес начала данных
 
         if (set.ch[Chan::A].enabled)
         {
@@ -80,29 +80,29 @@ public:
         
         if (newest >= oldest)           // Данные расположены нормально - новейшие по бОльшим адресам
         {
-            if ((uint8 *)oldest == BeginMemory())
+            if (reinterpret_cast<uint8 *>(oldest) == BeginMemory())
             {
-                freeMemory = EndMemory() - (uint8 *)newest - newest->FullSize();
+                freeMemory = EndMemory() - reinterpret_cast<uint8 *>(newest) - newest->FullSize();
                 if (freeMemory >= size)
                 {
-                    return (uint8 *)newest + newest->FullSize();
+                    return reinterpret_cast<uint8 *>(newest) + newest->FullSize();
                 }
             }
             else
             {
-                freeMemory = (uint)((uint8 *)oldest - (uint8 *)BeginMemory());
+                freeMemory = static_cast<uint>(reinterpret_cast<uint8 *>(oldest) - reinterpret_cast<uint8 *>(BeginMemory()));
                 if (freeMemory >= size)
                 {
-                    return (uint8 *)BeginMemory();
+                    return reinterpret_cast<uint8 *>(BeginMemory());
                 }
             }
         }
         else
         {
-            freeMemory = (uint8 *)oldest - (uint8 *)newest - newest->FullSize();
+            freeMemory = reinterpret_cast<uint8 *>(oldest) - reinterpret_cast<uint8 *>(newest) - newest->FullSize();
             if (freeMemory >= size)
             {
-                return (uint8 *)newest + newest->FullSize();
+                return reinterpret_cast<uint8 *>(newest) + newest->FullSize();
             }
         }
 
@@ -121,13 +121,13 @@ public:
     /// Возвращает адрес, следующий за последним доступным для сохранения данных
     static uint8 *EndMemory()
     {
-        return (uint8 *)GetMemoryForDataP2P();
+        return reinterpret_cast<uint8 *>(GetMemoryForDataP2P());
     }
 
     /// Возвращает первый доступный адрес для хранения данных
     static uint8 *BeginMemory()
     {
-        return (uint8 *)Heap::Begin();
+        return reinterpret_cast<uint8 *>(Heap::Begin());
     }
 
     /// Возвращает количество сохранённых данных
@@ -151,7 +151,7 @@ public:
     {
         if (oldest == nullptr)
         {
-            newest = oldest = (DataOsci *)BeginMemory();
+            newest = oldest = reinterpret_cast<DataOsci *>(BeginMemory());
             newest->prev = newest->next = oldest->next = oldest->prev = nullptr;
             return oldest;
         }
@@ -166,7 +166,7 @@ public:
             address = Allocate(needMemory);         // пока не освободится достаточно место для хранения новых
         }
 
-        DataOsci *data = (DataOsci *)address;
+        DataOsci *data = reinterpret_cast<DataOsci *>(address);
 
         if (newest == oldest)                       // Сохранены только одни данные
         {
@@ -210,7 +210,7 @@ public:
         ds.Fill();
         uint size = sizeof(DataOsciP2P) + ds.SizeChannel() * 2;
 
-        return (DataOsciP2P *)(((uint)Heap::End() - size));
+        return reinterpret_cast<DataOsciP2P *>((reinterpret_cast<uint>(Heap::End()) - size));
     }
 
     static void Reset()
@@ -240,7 +240,7 @@ DataOsci *StorageOsci::PrepareForNewData()
     DataSettings ds;
     ds.Fill();
 
-    DataOsci *data = (DataOsci *)HeapWorker::GetMemoryForData(&ds);
+    DataOsci *data = HeapWorker::GetMemoryForData(&ds);
 
     data->Create();
 
@@ -460,7 +460,7 @@ void DataOsciP2P::FillBufferForPeakDetDisabled(Chan::E ch, Buffer *buffer)
 void DataOsciP2P::FillBufferForPeakDetEnabled(Chan::E ch, Buffer *buffer)
 {
     static const uint NUM_BYTES = 281 * 2;
-    uint readingBytes = (uint)ReadingBytes();
+    uint readingBytes = ReadingBytes();
 
     PrepareBuffer(buffer, NUM_BYTES);
 

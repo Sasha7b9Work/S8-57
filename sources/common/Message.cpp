@@ -111,12 +111,12 @@ Message::Message(uint8 v0, uint16 v1, uint8 v2, char *string) : allocated(0), us
         PutByte(v0);
         PutHalfWord(v1);
         PutByte(v2);
-        PutByte((uint8)std::strlen(string)); //-V2513
+        PutByte(static_cast<uint8>(std::strlen(string))); //-V2513
 
         uint8 *pointer = Data(5);
         while (*string)
         {
-            *pointer++ = (uint8)*string++;
+            *pointer++ = static_cast<uint8>(*string++);
         }
     }
 }
@@ -164,7 +164,7 @@ void Message::PutWord(uint v)
 bool Message::Allocate(uint size)
 {
     Free();
-    data = (uint8 *)std::malloc(size);  // -V106
+    data = static_cast<uint8 *>(std::malloc(size));  // -V106
     if (data)
     {
         allocated = size;
@@ -191,14 +191,14 @@ void Message::Create::DrawBigText(Message &message, int x, int y, uint8 sizeSymb
     if (message.Allocate(size))
     {
         message.PutByte(Command::Paint_DrawBigText);
-        message.PutHalfWord((uint16)x);
-        message.PutByte((uint8)y);
+        message.PutHalfWord(static_cast<uint16>(x));
+        message.PutByte(static_cast<uint8>(y));
         message.PutByte(sizeSymbol);
-        message.PutByte((uint8)numSymbols);
+        message.PutByte(static_cast<uint8>(numSymbols));
 
         uint8 *pointer = message.Data(6);
 
-        uint8 *text = (uint8 *)string;
+        uint8 *text = reinterpret_cast<uint8 *>(const_cast<char *>(string));
 
         while (*text)
         {
@@ -213,9 +213,9 @@ void Message::Create::DrawHLine(Message &message, int y, int x0, int x1)
     if (message.Allocate(6))
     {
         message.PutByte(Command::Paint_DrawHLine);
-        message.PutByte((uint8)y);
-        message.PutHalfWord((uint16)x0);
-        message.PutHalfWord((uint16)x1);
+        message.PutByte(static_cast<uint8>(y));
+        message.PutHalfWord(static_cast<uint16>(x0));
+        message.PutHalfWord(static_cast<uint16>(x1));
     }
 }
 
@@ -225,9 +225,9 @@ void Message::Create::DrawRectangle(Message &message, int x, int y, int width, i
     if (message.Allocate(7))
     {
         message.PutByte(Command::Paint_DrawRectangle);
-        message.PutHalfWord((uint16)x);
-        message.PutByte((uint8)y);
-        message.PutHalfWord((uint16)width);
-        message.PutByte((uint8)height);
+        message.PutHalfWord(static_cast<uint16>(x));
+        message.PutByte(static_cast<uint8>(y));
+        message.PutHalfWord(static_cast<uint16>(width));
+        message.PutByte(static_cast<uint8>(height));
     }
 }

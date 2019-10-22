@@ -57,7 +57,7 @@ void Osci::LoadHoldfOff()
 {
     HAL_FSMC::WriteToFPGA8(WR::TRIG_HOLD_ENABLE, set.trig.holdOffEnabled ? 1U : 0U);
 
-    uint value = (uint)(0 - set.trig.holdOff + 1);
+    uint value = static_cast<uint>(0 - set.trig.holdOff + 1);
 
     BitSet32 bs(value);
 
@@ -73,7 +73,7 @@ void TBase::Change(int delta)
 
     if (delta > 0)
     {
-        ::Math::LimitationIncrease<uint8>((uint8 *)(&set.time.base), (uint8)(TBase::Size - 1));
+        ::Math::LimitationIncrease<uint8>(reinterpret_cast<uint8 *>(&set.time.base), static_cast<uint8>(TBase::Size - 1));
     }
     else
     {
@@ -84,7 +84,7 @@ void TBase::Change(int delta)
             return;													// и выходим
         }
 
-        ::Math::LimitationDecrease<uint8>((uint8 *)(&set.time.base), 0);
+        ::Math::LimitationDecrease<uint8>(reinterpret_cast<uint8 *>(&set.time.base), 0);
     }
 
     if (old == set.time.base)
@@ -216,7 +216,7 @@ void TBase::Load()
 
 void Range::LoadBoth()
 {
-    uint16 val = (uint16)(ValueForRange(Chan::B) + (ValueForRange(Chan::A) << 8));
+    uint16 val = static_cast<uint16>(ValueForRange(Chan::B) + (ValueForRange(Chan::A) << 8));
 
     GPIO::WriteRegisters(FPin::SPI3_CS2, val);
 
@@ -306,7 +306,7 @@ static uint8 ValueForRange(Chan::E ch) // -V2506
         return datas[ModeCouple::GND];
     }
 
-    return (uint8)(values[range][ch] | datas[couple]);
+    return static_cast<uint8>(values[range][ch] | datas[couple]);
 }
 
 
@@ -338,7 +338,7 @@ void TrigLevel::Find()
 {
     if (DATA)
     {
-        Chan::E ch = (Chan::E)set.trig.source;
+        Chan::E ch = static_cast<Chan::E>(set.trig.source);
 
         if (!ENABLED_DS(ch))
         {
@@ -388,7 +388,7 @@ void RShift::Draw(Chan::E ch)
 
     Math::Limitation(&y, Grid::Top(), Grid::ChannelBottom());
 
-    Char((char)Symbol8::RSHIFT_NORMAL).Draw(Grid::Left() - 8, y - 4);
+    Char(Symbol8::RSHIFT_NORMAL).Draw(Grid::Left() - 8, y - 4);
 
     Font::SetCurrent(TypeFont::_5);
 
@@ -436,9 +436,9 @@ pString Chan::Name() const
 void TrigLevel::Load()
 {
     /// \todo Здесь много лишних движений. Нужно что-то сделать с вводом SET_TRIGLEV_SOURCE
-    uint16 value = (uint16)((TrigLevel::MAX + TrigLevel::MIN) - set.trig.lev[set.trig.source]);
+    uint16 value = static_cast<uint16>((TrigLevel::MAX + TrigLevel::MIN) - set.trig.lev[set.trig.source]);
 
-    GPIO::WriteRegisters(FPin::SPI3_CS1, (uint16)(0xa000 | (value << 2)));
+    GPIO::WriteRegisters(FPin::SPI3_CS1, static_cast<uint16>(0xa000 | (value << 2)));
 
     Osci::Restart();
 }
@@ -473,7 +473,7 @@ void Trig::NeedForDraw()
 
 void TrigLevel::Set(int level)
 {
-    set.trig.lev[set.trig.source] = (uint16)(level);
+    set.trig.lev[set.trig.source] = static_cast<uint16>(level);
 
     Math::Limitation<uint16>(&set.trig.lev[set.trig.source], TrigLevel::MIN, TrigLevel::MAX);
 
@@ -501,7 +501,7 @@ void Trig::DrawOnGrid()
 
         Region(width, height).DrawBounded(x, y, Color::BACK, Color::FILL);
 
-        float trigLevVal = MathFPGA::RShift2Abs(set.trig.lev[set.trig.source], set.ch[set.trig.source].range) * Divider((uint8)set.ch[set.trig.source].divider).ToAbs();
+        float trigLevVal = MathFPGA::RShift2Abs(set.trig.lev[set.trig.source], set.ch[set.trig.source].range) * Divider(static_cast<uint8>(set.ch[set.trig.source].divider)).ToAbs();
 
         Voltage voltage(trigLevVal);
 
