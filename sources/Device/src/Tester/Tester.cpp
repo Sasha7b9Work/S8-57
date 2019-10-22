@@ -67,8 +67,8 @@ void Tester::Init()
 
     HAL_PIO::Init(HPort::_A, HPin::_5, HMode::Analog, HPull::No);    // Настраиваем выходной порт
 
-    //                         TEST_ON               PNP               U
-    uint pins = (uint)(Tester::Pin_TEST_ON | Tester::Pin_PNP | Tester::Pin_U);
+    //                                      TEST_ON               PNP               U
+    uint pins = static_cast<uint>(Tester::Pin_TEST_ON | Tester::Pin_PNP | Tester::Pin_U);
     HAL_PIO::Init(Port_TEST_ON, pins, HMode::Output_PP, HPull::Down);
 
     //                               I
@@ -207,7 +207,7 @@ void Tester::ProcessStep()
 
     if ((step % 2) == 0)        // Если шаг кратен двум, то нужно устанавливать напряжение
     {
-        DAC2_::SetValue((uint)(stepU * step / 2));
+        DAC2_::SetValue(static_cast<uint>(stepU * step / 2));
         // Запускаем ПЛИС для записи необходимого количества точек. Набор будет производиться в течение 2.5 мс (длительсность одного такта)
         if (!ContextTester::Start())
         {
@@ -260,12 +260,12 @@ static void RecountPoints(uint16 *x, uint8 *y)
         int X = 255 - x[i] + dX;
         X = static_cast<int>(x0 + (X - x0) * scaleX);
         LIMITATION(X, 0, 319); //-V2516
-        x[i] = (uint16)X;
+        x[i] = static_cast<uint16>(X);
 
         int Y = y[i] + dY;
-        Y = (uint8)(y0 + (Y - y0) * scaleY);
+        Y = static_cast<uint8>(y0 + (Y - y0) * scaleY);
         LIMITATION(Y, 0, 239); //-V2516
-        y[i] = (uint8)Y;
+        y[i] = static_cast<uint8>(Y);
     }
 }
 
@@ -309,7 +309,7 @@ pString Tester::Scale::ToString() const // -V2506
 {
     if (Chan(ch).IsA())
     {
-        return Range((Range::E)value).ToString(Divider::_1);
+        return Range(static_cast<Range::E>(value)).ToString(Divider::_1);
     }
 
     static const pString names[] =
@@ -348,10 +348,10 @@ String Tester::Shift::ToString(Scale::E scale) // -V2506
 {
     if (ch == Chan::A)
     {
-        return RShift::ToString(shift, (Range::E)scale, Divider::_1);
+        return RShift::ToString(shift, static_cast<Range::E>(scale), Divider::_1);
     }
 
-    float shiftAbs = MathFPGA::RShift2Abs(shift, (Range::E)scale) * 1e-3F;
+    float shiftAbs = MathFPGA::RShift2Abs(shift, static_cast<Range::E>(scale)) * 1e-3F;
 
     return Current(shiftAbs).ToString();
 }

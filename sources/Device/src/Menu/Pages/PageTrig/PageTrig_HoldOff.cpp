@@ -38,7 +38,7 @@ DEF_GOVERNOR( gDuration,                                                        
 
 
 
-DEF_PAGE_2( pHoldOff,                                                                                                                            //--- —»Õ’– - ”ƒ≈–∆¿Õ»≈ ---
+DEF_PAGE_2( pHoldOff,                                                                                                                                             //--- —»Õ’– - ”ƒ≈–∆¿Õ»≈ ---
     "”ƒ≈–∆¿Õ»≈",
     "",
     &cHoldOff,
@@ -47,4 +47,4 @@ DEF_PAGE_2( pHoldOff,                                                           
     &PageTrig::self, Item::Active, Page::OpenClose, Page::BeforeDraw, Page::HandlerKeyEvent
 )
 
-const Page * const PageTrig::PageHoldOff::self = (const Page *)&pHoldOff;
+const Page * const PageTrig::PageHoldOff::self = static_cast<const Page *>(&pHoldOff);

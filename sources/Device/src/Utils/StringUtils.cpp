@@ -128,15 +128,15 @@ bool SU::GetWord(const char *string, Word *word, const int numWord)
     {
         if (currentWord == numWord)
         {
-            word->address = (char *)string;
+            word->address = const_cast<char *>(string);
             ChooseSymbols(&string);
-            word->numSymbols = (int8)(string - word->address);
+            word->numSymbols = static_cast<int8>(string - word->address);
 
             char *pointer = word->address;
             int numSymbols = word->numSymbols;
             for (int i = 0; i < numSymbols; i++)
             {
-                *pointer = (char)toupper(*pointer);
+                *pointer = static_cast<char>(toupper(*pointer));
                 pointer++;
             }
             return true;
@@ -157,7 +157,7 @@ bool SU::GetWord(const char *string, Word *word, const int numWord)
 bool SU::WordEqualZeroString(Word *word, char* string)
 {
     char *ch = string;
-    char *w = (char*)(word->address);
+    char *w = word->address;
 
     while (*ch != 0)
     {
@@ -188,14 +188,14 @@ bool SU::EqualsZeroStrings(char *str1, char *str2)
 
 bool SU::EqualsStrings(uint8 *str1, const char * const str2, uint size)
 {
-    return EqualsStrings((void *)str1, (void *)str2, size);
+    return EqualsStrings(static_cast<void *>(str1), const_cast<char *>(str2), size);
 }
 
 
 bool SU::EqualsStrings(void *_str1, void *_str2, uint size)
 {
-    char *str1 = (char *)_str1;
-    char *str2 = (char *)_str2;
+    char *str1 = static_cast<char *>(_str1);
+    char *str2 = static_cast<char *>(_str2);
 
     for (uint i = 0; i < size; i++)
     {
@@ -265,7 +265,7 @@ float SU::StringToFloat(char *string)
 
         while (stack.Size() > 0)
         {
-            result += (float)pow * stack.Pop();
+            result += static_cast<float>(pow) * stack.Pop();
             pow *= 10;
         }
     }
@@ -298,11 +298,11 @@ float SU::StringToFloat(char *string)
 
 char *SU::ToUpper(void *_str, uint size)
 {
-    char *str = (char *)_str;
+    char *str = static_cast<char *>(_str);
 
     for(uint i = 0; i < size; i++)
     {
-        str[i] = (char)toupper(str[i]);
+        str[i] = static_cast<char>(toupper(str[i]));
     }
 
     return str;

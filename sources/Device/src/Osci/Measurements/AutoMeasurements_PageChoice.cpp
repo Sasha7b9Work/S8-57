@@ -22,7 +22,7 @@ void PageChoiceMeasures::OnOpenCloseEvent()
     ChangeState();
     if (isActive)
     {
-        posCursor = (int8)set.meas.measures[AutoMeasurements::posActive];
+        posCursor = static_cast<int8>(set.meas.measures[AutoMeasurements::posActive]);
     }
 }
 
@@ -56,7 +56,7 @@ void PageChoiceMeasures::OnKeyEvent(const KeyEvent &event)
             // здесь ничего делать не нужно
         }
 
-        set.meas.measures[AutoMeasurements::posActive] = (TypeMeasure::E)posCursor;
+        set.meas.measures[AutoMeasurements::posActive] = static_cast<TypeMeasure::E>(posCursor);
         Color::ResetFlash();
     }
     else
@@ -93,10 +93,10 @@ void PageChoiceMeasures::Draw()
                 bool active = (meas == posCursor);
                 Rectangle(dX, dY).Draw(x0, y0, Color::WHITE);
                 Region(dX - 2, dY - 2).Fill(x0 + 1, y0 + 1, (active ? Color::FLASH_10 : Color::BACK));
-                Char((SymbolUGO::E)Measure::GetChar(meas)).Draw10SymbolsInRect(x0 + 2, y0 + 1, active ? Color::FLASH_01 : Color::FILL);
+                Char(static_cast<SymbolUGO::E>(Measure::GetChar(meas))).Draw10SymbolsInRect(x0 + 2, y0 + 1, active ? Color::FLASH_01 : Color::FILL);
                 Font::SetCurrent(TypeFont::_5);
                 Text(TypeMeasure::GetName(meas)).DrawRelativelyRight(x0 + dX, y0 + 12);
-                meas = (TypeMeasure::E)(static_cast<int>(meas) + 1);    // meas++;
+                meas = static_cast<TypeMeasure::E>(static_cast<int>(meas) + 1);    // meas++;
             }
         }
     }

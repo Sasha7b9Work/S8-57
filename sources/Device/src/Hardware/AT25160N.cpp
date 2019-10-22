@@ -57,7 +57,7 @@ void AT25160N::Init()
     //__HAL_RCC_SPI2_CLK_ENABLE();
 
     //                                  SCK                    NSS
-    uint pins = (uint)(HPin::_10 | HPin::_12);
+    uint pins = static_cast<uint>(HPin::_10 | HPin::_12);
     HAL_PIO::Init(HPort::_B, pins, HMode::Output_PP, HPull::Down);
 
     //                                                      MOSI
@@ -79,7 +79,7 @@ void AT25160N::Test()
     uint8 out[size];
     for(uint i = 0; i < size; i++)
     {
-        data[i] = (uint8)std::rand();
+        data[i] = static_cast<uint8>(std::rand());
     }
 
 //    uint timeStart = TIME_MS;

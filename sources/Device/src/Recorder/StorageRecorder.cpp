@@ -62,7 +62,7 @@ void StorageRecorder::CreateNewRecord()
 
 void Record::SetDataAddress(uint16 *address)
 {
-    start = (Point *)address;
+    start = reinterpret_cast<Point *>(address);
     numPoints = 0;
     pointer = MAX_UINT;
 }

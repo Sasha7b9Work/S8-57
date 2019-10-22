@@ -53,7 +53,7 @@ char* Hex::ToBin(int depth, char buffer[36]) const
 
     while (byte >= 0)
     {
-        BinToString8((uint8)(value >> (byte * 8)), pointer);
+        BinToString8(static_cast<uint8>(value >> (byte * 8)), pointer);
         if (byte > 0)
         {
             *(pointer + 8) = ' ';
@@ -103,7 +103,7 @@ char Hex::DigitInPosition(int pos) const
         pos--;
     }
 
-    return (char)((val % 10) | 0x30);
+    return static_cast<char>((val % 10) | 0x30);
 }
 
 
@@ -451,36 +451,36 @@ static char *FloatToString(float value, bool alwaysSign, int numDigits, char buf
     
     char format[10] = "%4.2f\0\0";
     
-    format[1] = (char)numDigits + 0x30;
+    format[1] = static_cast<char>(numDigits) + 0x30;
     
     int numDigitsInInt = Math::DigitsInIntPart(value);
     
-    format[3] = (char)((numDigits - numDigitsInInt) + 0x30);
+    format[3] = static_cast<char>((numDigits - numDigitsInInt) + 0x30);
     if (numDigits == numDigitsInInt)
     {
         format[5] = '.';
     }
     
     float absValue = std::fabsf(value);
-    std::sprintf(pBuffer, (char *)format, (double)absValue);
+    std::sprintf(pBuffer, static_cast<char *>(format), static_cast<double>(absValue));
     
-    float val = (float)atof(pBuffer); //-V2508
+    float val = static_cast<float>(atof(pBuffer)); //-V2508
     
     if (Math::DigitsInIntPart(val) != numDigitsInInt)
     {
         numDigitsInInt = Math::DigitsInIntPart(val);
-        format[3] = (char)((numDigits - numDigitsInInt) + 0x30);
+        format[3] = static_cast<char>((numDigits - numDigitsInInt) + 0x30);
         if (numDigits == numDigitsInInt)
         {
             format[5] = '.';
         }
-        std::sprintf(pBuffer, format, (double)value);
+        std::sprintf(pBuffer, format, static_cast<double>(value));
     }
     
     bool signExist = alwaysSign || value < 0;
-    while (std::strlen(bufferOut) < (size_t)(numDigits + (signExist ? 2 : 1))) //-V2513
+    while (std::strlen(bufferOut) < static_cast<size_t>(numDigits + (signExist ? 2 : 1)))
     {
-        std::strcat(bufferOut, "0"); //-V2513
+        std::strcat(bufferOut, "0");
     }
     
     return bufferOut;

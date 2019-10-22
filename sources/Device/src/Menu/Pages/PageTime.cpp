@@ -92,7 +92,7 @@ DEF_CHOICE_2( cShiftXtype,                                                      
     set.time.linkingTShift, &PageTime::self, Item::Active, Choice::Changed, Choice::AfterDraw
 )
 
-DEF_PAGE_4( pTime,                                                                                                                                       //--- РАЗВЕРТКА ---
+DEF_PAGE_4( pTime,                                                                                                                                                        //--- РАЗВЕРТКА ---
     "РАЗВ",
     "Содержит настройки развёртки",
     &cSample,
@@ -103,4 +103,4 @@ DEF_PAGE_4( pTime,                                                              
     PageName::Time, nullptr, Item::Active, Page::OpenClose, Page::BeforeDraw, Page::HandlerKeyEvent
 )
 
-const Page * const PageTime::self = (const Page *)&pTime;
+const Page * const PageTime::self = static_cast<const Page *>(&pTime);
