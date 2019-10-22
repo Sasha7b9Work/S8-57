@@ -80,7 +80,7 @@ static bool HandlerKey_RAM(const KeyEvent &)
     return false;
 }
 
-DEF_PAGE_2( pRAM,                                                                                                                               //--- ПАМЯТЬ - ПОСЛЕДНИЕ ---
+DEF_PAGE_2( pRAM,                                                                                                                                                //--- ПАМЯТЬ - ПОСЛЕДНИЕ ---
     "ПОСЛЕДНИЕ",
     "Переход в режим работы с последними полученными сигналами",
     &bPrev,
@@ -89,4 +89,4 @@ DEF_PAGE_2( pRAM,                                                               
     &PageMemory::self, Item::Active, OnOpenClose_RAM, AfterDraw_RAM, HandlerKey_RAM
 )
 
-const Page *const PageRAM::self = (const Page *)&pRAM;
+const Page *const PageRAM::self = static_cast<const Page *>(&pRAM);

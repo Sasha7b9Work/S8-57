@@ -29,7 +29,7 @@ DEF_BUTTON( bSearch,                                                            
 
 
 
-DEF_PAGE_2( pFind,                                                                                                                                   //--- СИНХР - ПОИСК ---
+DEF_PAGE_2( pFind,                                                                                                                                                    //--- СИНХР - ПОИСК ---
     "ПОИСК",
     "Управление автоматическим поиском уровня синхронизации.",
     &cMode,
@@ -38,4 +38,4 @@ DEF_PAGE_2( pFind,                                                              
     &PageTrig::self, Item::Active, Page::OpenClose, Page::BeforeDraw, Page::HandlerKeyEvent
 )
 
-const Page * const PageTrig::PageFind::self = (const Page *)&pFind;
+const Page * const PageTrig::PageFind::self = static_cast<const Page *>(&pFind);

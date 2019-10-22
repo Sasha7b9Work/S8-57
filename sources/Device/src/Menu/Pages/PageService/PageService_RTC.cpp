@@ -253,7 +253,7 @@ static bool HandlerKey_Set(const KeyEvent &event)
     return true;                        /// А все остальные кнопки якобы обработаны - чтобы не происходило неправильных переключений на другие страницы
 }
 
-DEF_PAGE_5( pSet,  //-V1027
+DEF_PAGE_5( pSet,
     "Время",
     "Установка текущего времени",
     &bSet_Left,
@@ -265,4 +265,4 @@ DEF_PAGE_5( pSet,  //-V1027
     &PageService::self, Item::Active, OnOpenClose_Set, BeforeDraw_Set, HandlerKey_Set
 )
 
-const Page * const PageRTC::self = (const Page *)&pSet;
+const Page * const PageRTC::self = static_cast<const Page *>(&pSet);

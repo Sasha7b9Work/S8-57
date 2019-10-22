@@ -71,11 +71,11 @@ static void OnOpenClose_Page(bool enter)
     }
 }
 
-DEF_PAGE_1 ( pInfo,  //-V1027
+DEF_PAGE_1 ( pInfo,
     "ИНФОРМАЦИЯ",
     "Информация об изделии",
     &bClose,
     PageName::Service_Info, &PageService::self, Item::Active, OnOpenClose_Page, Page::BeforeDraw, Page::HandlerKeyEvent
 )
 
-const Page *const PageService::PageInformation::self = (const Page *)&pInfo;
+const Page *const PageService::PageInformation::self = static_cast<const Page *>(&pInfo);

@@ -47,7 +47,7 @@ DEF_BUTTON( bCalibrate,                                                         
 )
 
 
-DEF_PAGE_2( pCalibrate,                                                                                                                        //--- СЕРВИС - КАЛИБРАТОР ---
+DEF_PAGE_2( pCalibrate,                                                                                                                                         //--- СЕРВИС - КАЛИБРАТОР ---
     "КАЛИБРОВКА",
     "Управлением калибратором и калибровка осциллографа",
     &cCalibrator,
@@ -55,4 +55,4 @@ DEF_PAGE_2( pCalibrate,                                                         
     PageName::Service_Calibrator, &PageService::self, Item::Active, Page::OpenClose, Page::BeforeDraw, Page::HandlerKeyEvent
 )
 
-const Page * const PageService::PageCalibrate::self = (const Page *)&pCalibrate;
+const Page * const PageService::PageCalibrate::self = static_cast<const Page *>(&pCalibrate);

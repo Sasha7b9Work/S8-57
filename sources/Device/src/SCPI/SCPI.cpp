@@ -18,6 +18,6 @@ void SCPI::AddNewData(uint8 *buffer, uint length)
     if (SU::EqualsStrings(buffer, "*IDN?", 5))
     {
         const char *answer = "MNIPI, S8-57, v.1.2";
-        VCP::SendDataAsynch((uint8 *)answer, std::strlen(answer) + 1);
+        VCP::SendDataAsynch(reinterpret_cast<const uint8 *>(answer), std::strlen(answer) + 1);
     }
 }

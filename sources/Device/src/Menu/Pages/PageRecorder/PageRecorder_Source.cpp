@@ -38,7 +38,7 @@ static bool IsActive_Source()
     return !Recorder::IsRunning();
 }
 
-DEF_PAGE_3( pSource,                                                                                                              //--- ÔÓÍÊÖÈß - ĞÅÃÈÑÒĞÀÒÎĞ - ÈÑÒÎ×ÍÈÊ ---
+DEF_PAGE_3( pSource,                                                                                                                               //--- ÔÓÍÊÖÈß - ĞÅÃÈÑÒĞÀÒÎĞ - ÈÑÒÎ×ÍÈÊ ---
     "ÈÑÒÎ×ÍÈÊ",
     "Âûáîğ çàïèñûâàåìûõ ñèãíàëîâ",
     &cChanA,
@@ -47,4 +47,4 @@ DEF_PAGE_3( pSource,                                                            
     PageName::Recorder_Source, &PageRecorder::self, IsActive_Source, Page::OpenClose, Page::BeforeDraw, Page::HandlerKeyEvent
 )
 
-const Page * const PageRecorder::PageSource::self = (const Page *)&pSource;
+const Page * const PageRecorder::PageSource::self = static_cast<const Page *>(&pSource);

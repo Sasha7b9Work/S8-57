@@ -101,7 +101,7 @@ char *String::CString() const
 
 bool String::Allocate(uint size)
 {
-    buffer = (char *)std::malloc(size);
+    buffer = static_cast<char *>(std::malloc(size));
     if (buffer)
     {
         return true;

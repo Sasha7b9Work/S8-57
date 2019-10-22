@@ -103,7 +103,7 @@ DEF_CHOICE_3( cFiltr, // -V206                                                  
     set.trig.input, &PageTrig::self, Item::Active, OnChanged_Filtr, Choice::AfterDraw
 )
 
-DEF_PAGE_6( pTrig,                                                                                                                                           //--- СИНХР ---
+DEF_PAGE_6( pTrig,                                                                                                                                                            //--- СИНХР ---
     "СИНХР",
     "Содержит настройки синхронизации.",
     &cMode,
@@ -115,4 +115,4 @@ DEF_PAGE_6( pTrig,                                                              
     PageName::Trig, nullptr, Item::Active, Page::OpenClose, Page::BeforeDraw, Page::HandlerKeyEvent
 )
 
-const Page * const PageTrig::self = (const Page *)&pTrig;
+const Page * const PageTrig::self = static_cast<const Page *>(&pTrig);

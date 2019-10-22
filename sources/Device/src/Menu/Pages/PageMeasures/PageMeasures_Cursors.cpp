@@ -37,7 +37,7 @@ DEF_CHOICE_2( cShowFreq,                                                        
 )
 
 
-DEF_PAGE_3( pCursors,                                                                                                                                    //--- ÈÇÌÅĞÅÍÈß ---
+DEF_PAGE_3( pCursors,                                                                                                                                                     //--- ÈÇÌÅĞÅÍÈß ---
     "ÊÓĞÑÎĞÛ",
     "Êóğñîğíûå èçìåğåíèÿ",
     &cShow,
@@ -46,4 +46,4 @@ DEF_PAGE_3( pCursors,                                                           
     PageName::CursorsMeasures, &PageMeasures::self, Item::Active, Page::OpenClose, Page::BeforeDraw, Page::HandlerKeyEvent
 )
 
-const Page * const PageCursorsMeasures::self = (const Page *)&pCursors;
+const Page * const PageCursorsMeasures::self = static_cast<const Page *>(&pCursors);

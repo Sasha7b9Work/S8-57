@@ -14,11 +14,11 @@ DEF_CHOICE_2( cShow,                                                            
 )
 
 
-DEF_PAGE_1( pBattery,                                                                                                                             //--- СЕРВИС - БАТАРЕЯ ---
+DEF_PAGE_1( pBattery,                                                                                                                                              //--- СЕРВИС - БАТАРЕЯ ---
     "БАТАРЕЯ",
     "Функции работы с аккумуляторами",
     &cShow,
     PageName::Service_Battery, &PageService::self, Item::Active, Page::OpenClose, Page::BeforeDraw, Page::HandlerKeyEvent
 )
 
-const Page * const PageService::PageBattery::self = (const Page *)&pBattery;
+const Page * const PageService::PageBattery::self = static_cast<const Page *>(&pBattery);
