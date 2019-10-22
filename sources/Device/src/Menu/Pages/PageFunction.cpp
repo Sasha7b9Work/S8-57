@@ -19,4 +19,4 @@ DEF_PAGE_5( pFunction,                                                          
     PageName::Function, nullptr, Item::Active, Page::OpenClose, Page::BeforeDraw, Page::HandlerKeyEvent
 )
 
-const Page * const PageFunction::self = (const Page *)&pFunction;
+const Page * const PageFunction::self = static_cast<const Page *>(&pFunction);

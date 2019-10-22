@@ -169,29 +169,29 @@ void PageMultimeter::Init()
 
 void PageMultimeter::OnChanged_Mode(bool)
 {
-    Page *page = (Page *)PageMultimeter::self;
+    Page *page = const_cast<Page *>(PageMultimeter::self);
 
-    Item **items = (Item **)page->OwnData()->items;
+    Item **items = const_cast<Item **>(page->OwnData()->items);
 
     if (set.mult.meas == MultimeterMeasure::VoltageDC)
     {
-        items[1] = (Item *)&cRangesVoltageDC; //-V641
+        items[1] = const_cast<Choice *>(&cRangesVoltageDC);
     }
     else if (set.mult.meas == MultimeterMeasure::VoltageAC)
     {
-        items[1] = (Item *)&cRangesVoltageAC; //-V641
+        items[1] = const_cast<Choice *>(&cRangesVoltageAC);
     }
     else if (set.mult.meas == MultimeterMeasure::CurrentDC)
     {
-        items[1] = (Item *)&cRangesCurrentDC;  // -V641
+        items[1] = const_cast<Choice *>(&cRangesCurrentDC);
     }
     else if (set.mult.meas == MultimeterMeasure::CurrentAC)
     {
-        items[1] = (Item *)&cRangesCurrentAC;    // -V641
+        items[1] = const_cast<Choice *>(&cRangesCurrentAC);
     }
     else if (set.mult.meas == MultimeterMeasure::Resistance)
     {
-        items[1] = (Item *)&cRangesResistance; //-V641
+        items[1] = const_cast<Choice *>(&cRangesResistance);
     }
     else if (set.mult.meas == MultimeterMeasure::TestDiode)
     {
@@ -210,7 +210,7 @@ static void OnOpenClose_Multimeter(bool enter)
     Device::State::SetMode(enter ? Device::Mode::Multimeter : Device::Mode::Osci);
 }
 
-DEF_PAGE_5_VAR( pMultimeter, // -V641 //-V1027 //-V641
+DEF_PAGE_5_VAR( pMultimeter,
     "МУЛЬТИМЕТР",
     "Управление прибором в режиме мультиметра",
     &cMode,
@@ -221,7 +221,7 @@ DEF_PAGE_5_VAR( pMultimeter, // -V641 //-V1027 //-V641
     PageName::Multimeter, &PageFunction::self, Item::Active, OnOpenClose_Multimeter, Page::BeforeDraw, Page::HandlerKeyEvent
 )
 
-const Page * const PageMultimeter::self = (const Page *)&pMultimeter;
+const Page * const PageMultimeter::self = static_cast<const Page *>(&pMultimeter);
 
 
 static void OnPress_Calibrate0()
@@ -247,7 +247,7 @@ DEF_BUTTON( bCalibrate1,
     &PageMultimeter::PageCalibration::self, Item::Active, OnPress_Calibrate1
 )
 
-DEF_PAGE_2( pCalibration, //-V641 //-V1027
+DEF_PAGE_2( pCalibration,
     "КАЛИБРОВКА",
     "Калибровка мультиметра",
     &bCalibrate0,
@@ -255,7 +255,7 @@ DEF_PAGE_2( pCalibration, //-V641 //-V1027
     PageName::Multimeter_Cal, &PageMultimeter::self, Item::Active, Page::OpenClose, Page::BeforeDraw, Page::HandlerKeyEvent
 )
 
-const Page * const PageMultimeter::PageCalibration::self = (const Page *)&pCalibration;
+const Page * const PageMultimeter::PageCalibration::self = static_cast<const Page *>(&pCalibration);
 
 
 void PageMultimeter::DecodePassword(const KeyEvent &event)
@@ -273,7 +273,7 @@ void PageMultimeter::DecodePassword(const KeyEvent &event)
         return;
     }
 
-    if (Menu::OpenedItem() != (Item *)&cMode)       // И обязательно при раскрытом меню "Режим" //-V641
+    if (Menu::OpenedItem() != const_cast<Choice *>(&cMode))       // И обязательно при раскрытом меню "Режим"
     {
         charsMatch = 0;
         return;
@@ -288,11 +288,11 @@ void PageMultimeter::DecodePassword(const KeyEvent &event)
     {
         if (charsMatch == NUM_SYMBOLS)
         {
-            Page *page = (Page *)&pMultimeter;
+            Page *page = const_cast<Page *>(&pMultimeter);
 
-            Item **items = (Item **)page->OwnData()->items;
+            Item **items = const_cast<Item **>(page->OwnData()->items);
 
-            items[4] = (Item *)PageMultimeter::PageCalibration::self;
+            items[4] = const_cast<Page *>(PageMultimeter::PageCalibration::self);
 
             Menu::CloseOpenedItem();
         }
