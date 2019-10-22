@@ -62,7 +62,7 @@ void DisplayOsci::Update()
 
 void DisplayOsci::DrawCursorTrigLevel()
 {
-    Chan::E ch = (Chan::E)set.trig.source;
+    Chan::E ch = static_cast<Chan::E>(set.trig.source);
 
     int trigLev = set.trig.lev[set.trig.source] + (SET_RSHIFT(ch) - RShift::ZERO);
     float scale = 1.0F / ((TrigLevel::MAX - TrigLevel::MIN) / 2.4F / Grid::Height());
@@ -95,7 +95,7 @@ void DisplayOsci::DrawCursorTrigLevel()
 
     static const char symbols[2] = {'1', '2'};
 
-    Char(symbols[(uint8)set.trig.source]).Draw(x + 5, y - 6, Color::BACK);
+    Char(symbols[static_cast<uint8>(set.trig.source)]).Draw(x + 5, y - 6, Color::BACK);
 
     Font::SetCurrent(TypeFont::_8);
 

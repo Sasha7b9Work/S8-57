@@ -126,7 +126,7 @@ void HAL_FSMC::Init()
     };
 
     SRAM_HandleTypeDef *hsram = &gSramHandle;
-    FMC_NORSRAM_TimingTypeDef *Timing = (FMC_NORSRAM_TimingTypeDef *)&sramTiming;
+    FMC_NORSRAM_TimingTypeDef *Timing = const_cast<FMC_NORSRAM_TimingTypeDef *>(&sramTiming);
 
     FMC_NORSRAM_Init(hsram->Instance, &(hsram->Init));
 
@@ -153,7 +153,7 @@ static void Configure()
 
     /// \todo Здесь не довеедно - не хотит, почему-то
 
-    HAL_GPIO_Init(GPIOD, (GPIO_InitTypeDef *)&isGPIO);
+    HAL_GPIO_Init(GPIOD, const_cast<GPIO_InitTypeDef *>(&isGPIO));
 
     //uint startTime = TIME_TICKS;
 
@@ -193,8 +193,8 @@ void HAL_FSMC::WriteToFPGA16(uint8 *address, uint16 value)
 
     PAUSE_ON_TICKS(100);    /// \todo Без этой строки замедлен вывод при включённой оптимизации и TBase >= 0.5мс
 
-    *address = (uint8)value;
-    *(address + 1) = (uint8)(value >> 8);
+    *address = static_cast<uint8>(value);
+    *(address + 1) = static_cast<uint8>(value >> 8);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

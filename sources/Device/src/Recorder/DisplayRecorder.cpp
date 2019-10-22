@@ -91,7 +91,7 @@ static int Y(int value)
 
 static char *DeltaTime(char buffer[20])
 {
-    float delta = std::fabsf((float)(posCursor[0] - posCursor[1])) * RecorderScaleX::Current().TimeForPointMS() / 1000.0F;
+    float delta = std::fabsf(static_cast<float>(posCursor[0] - posCursor[1])) * RecorderScaleX::Current().TimeForPointMS() / 1000.0F;
 
     std::strcpy(buffer, Time(delta).ToString(false).CString());
 
@@ -113,13 +113,13 @@ static char *TimeCursor(int numCur, char buffer[20])
 
 static char *VoltageCursor(Chan::E ch, int numCur, char buffer[20])
 {
-    uint numPoint = (uint)(startPoint + posCursor[numCur]);
+    uint numPoint = static_cast<uint>(startPoint + posCursor[numCur]);
 
     Record *frame = StorageRecorder::CurrentRecord();
 
     Point point = frame->GetPoint(numPoint, frame->NumPoints());
 
-    uint8 value = (uint8)((point.Min(ch) + point.Max(ch)) / 2);
+    uint8 value = static_cast<uint8>((point.Min(ch) + point.Max(ch)) / 2);
 
     float voltage = MathFPGA::Point2Voltage(value, set.ch[ch].range, RShift::ZERO);
 
@@ -267,7 +267,7 @@ static void DrawMemoryWindow()
 
     if (numPoints > 320)
     {
-        x = static_cast<int>((float)startPoint / numPoints * 320.0F + 0.5F);
+        x = static_cast<int>(static_cast<float>(startPoint) / numPoints * 320.0F + 0.5F);
     }
 
     Region(width, 10).DrawBounded(x, 0, Color::BACK, Color::FILL);

@@ -9,7 +9,7 @@ extern bool givingStart;
 
 void FPGA::ReadFlag()
 {
-    flag.flag = (uint16)(HAL_FSMC::ReadFromFPGA(RD::FLAG_LO) | (HAL_FSMC::ReadFromFPGA(RD::FLAG_HI) << 8));
+    flag.flag = static_cast<uint16>(HAL_FSMC::ReadFromFPGA(RD::FLAG_LO) | (HAL_FSMC::ReadFromFPGA(RD::FLAG_HI) << 8));
 
     if (flag.TrigReady() && !givingStart)
     {

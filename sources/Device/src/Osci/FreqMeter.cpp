@@ -250,7 +250,8 @@ float FrequencyCounter::PeriodSetToFreq(const BitSet32 *period_)
     const float k[4] = {10e4F, 10e5F, 10e6F, 10e7F};
     const float kP[3] = {1.0F, 10.0F, 100.0F};
 
-    return (set.freq.enabled == FreqMeterEnabled::On) ? (k[set.freq.freqClc] * kP[set.freq.numberPeriods] / (float)period_->word) : (10e5F / (float)period_->word);
+    return (set.freq.enabled == FreqMeterEnabled::On) ?
+        (k[set.freq.freqClc] * kP[set.freq.numberPeriods] / static_cast<float>(period_->word)) : (10e5F / static_cast<float>(period_->word));
 }
 
 
@@ -574,7 +575,7 @@ static void WriteStackToBuffer(Stack<uint> *stack, int point, const char *suffix
             buffer[i] = '.';
             continue;
         }
-        buffer[i] = ((char)stack->Pop() | 0x30);
+        buffer[i] = static_cast<char>(stack->Pop()) | 0x30;
     }
 
     std::strcpy(&buffer[7], suffix);

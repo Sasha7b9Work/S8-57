@@ -66,7 +66,7 @@ void HAL_DAC1::Init()
 
 void HAL_DAC1::StartDMA(void *points, uint numPoints)
 {
-    HAL_DAC_Start_DMA(&handle, DAC_CHANNEL_1, (uint32_t*)points, numPoints, DAC_ALIGN_8B_R);
+    HAL_DAC_Start_DMA(&handle, DAC_CHANNEL_1, reinterpret_cast<uint32_t*>(points), numPoints, DAC_ALIGN_8B_R);
 }
 
 

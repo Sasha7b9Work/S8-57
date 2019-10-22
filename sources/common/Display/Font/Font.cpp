@@ -24,7 +24,7 @@ static int spacing = 1;
 int Font::GetLengthText(pString text)
 {
     int result = 0;
-    char *symbol = (char *)text;
+    char *symbol = const_cast<char *>(text);
 
     while (*symbol)
     {
@@ -61,7 +61,7 @@ static void SendTypeFontToPanel(TypeFont::E type)
 
     if (prevType != type)
     {
-        Transceiver::Send(Command::Paint_SetFont, (uint8)type);
+        Transceiver::Send(Command::Paint_SetFont, static_cast<uint8>(type));
         prevType = type;
     }
 }
@@ -115,7 +115,7 @@ void Font::SetSpacing(int) {}
 void Font::SetSpacing(int _spacing)
 {
     spacing = _spacing;
-    Transceiver::Send(Command::Paint_SetTextSpacing, (uint8)spacing);
+    Transceiver::Send(Command::Paint_SetTextSpacing, static_cast<uint8>(spacing));
 }
 
 int Font::GetSpacing()
@@ -156,7 +156,7 @@ uint8 Font::GetHeight()
 {
     if (FontIsSmall())
     {
-        return (uint8)font->_height;
+        return static_cast<uint8>(font->_height);
     }
 
     return bigFont->height;
@@ -219,7 +219,7 @@ uint8 *FullSymbol::GetRow(int row) const
 
 uint8 FullSymbol::BytesInRow() const
 {
-    uint8 width = (uint8)(symbol.width >> 3);
+    uint8 width = static_cast<uint8>(symbol.width >> 3);
 
     if (symbol.width % 8 != 0)
     {
@@ -268,7 +268,7 @@ bool BigFont::GetFullSymbol(FullSymbol &symbol, uint8 code) const
         if (symbols[i].code == code)
         {
             symbol.symbol = symbols[i];
-            symbol.offset = (uint8 *)data + symbols[i].offset;
+            symbol.offset = const_cast<uint8 *>(data) + symbols[i].offset;
             return true;
         }
     }

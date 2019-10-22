@@ -69,7 +69,7 @@ void GPIO::Init()
 {
     for (int i = 0; i < FPin::Count; i++)
     {
-        HAL_PIO::Init(PORT(static_cast<int>(i)), GetPin((FPin::E)i) , HMode::Output_PP, HPull::Down);
+        HAL_PIO::Init(PORT(static_cast<int>(i)), GetPin(static_cast<FPin::E>(i)) , HMode::Output_PP, HPull::Down);
     }
 }
 

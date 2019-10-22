@@ -75,7 +75,7 @@ static void SystemClockConfig()
 
     /**Configure the Systick interrupt time
     */
-    HAL_SYSTICK_Config((uint32_t)(HAL_RCC_GetHCLKFreq() / 1000));
+    HAL_SYSTICK_Config(static_cast<uint32_t>(HAL_RCC_GetHCLKFreq() / 1000));
 
     //HAL_SYSTICK_CLKSourceConfig(SYSTICK_CLKSOURCE_HCLK);
 

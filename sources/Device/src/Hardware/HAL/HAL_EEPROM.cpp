@@ -119,7 +119,7 @@ void HAL_EEPROM::WriteBufferBytes(uint address, const void *buffer, int size)
 
     for (int i = 0; i < size; i++)
     {
-        uint64_t data = ((uint8 *)buffer)[i];
+        uint64_t data = static_cast<uint8 *>(const_cast<void *>(buffer))[i];
         HAL_FLASH_Program(TYPEPROGRAM_BYTE, address, data);
         address++;
     }
