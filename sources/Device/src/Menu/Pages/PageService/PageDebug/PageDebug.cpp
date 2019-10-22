@@ -397,7 +397,7 @@ static void OnPress_SaveFirmware()
 
     FDrive::OpenNewFileForWrite(NAME_FILE_FIRMWARE, &structForWrite);
 
-    uint8 *address = (uint8 *)0x08020000;
+    uint8 *address = reinterpret_cast<uint8 *>(0x08020000); //-V566
     uint8 *endAddress = address + SIZE_FILE_FIRMWARE; //-V566
 
     int sizeBlock = 512;

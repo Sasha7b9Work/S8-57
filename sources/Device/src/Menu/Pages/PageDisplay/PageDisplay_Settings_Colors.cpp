@@ -43,7 +43,7 @@ DEF_GOVERNOR_COLOR( gcGrid,                                                     
 )
 
 
-DEF_PAGE_4( pColors,                                                                                                                   //--- ÄÈÑÏËÅÉ - ÍÀÑÒĞÎÉÊÈ - ÖÂÅÒÀ ---
+DEF_PAGE_4( pColors,                                                                                                                                    //--- ÄÈÑÏËÅÉ - ÍÀÑÒĞÎÉÊÈ - ÖÂÅÒÀ ---
     "ÖÂÅÒÀ",
     "Âûáîğ öâåòîâ äèñïëåÿ",
     &bReset,
@@ -53,4 +53,4 @@ DEF_PAGE_4( pColors,                                                            
     PageName::Display_Settings_Colors, &PageDisplay::PageSettings::self, Item::Active, Page::OpenClose, Page::BeforeDraw, Page::HandlerKeyEvent
 )
 
-const Page * const PageDisplay::PageSettings::PageColors::self = (const Page *)&pColors;
+const Page * const PageDisplay::PageSettings::PageColors::self = static_cast<const Page *>(&pColors);

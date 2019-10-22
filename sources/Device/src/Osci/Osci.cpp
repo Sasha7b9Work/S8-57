@@ -219,11 +219,11 @@ static void BalanceChannel(Chan::E ch, Range::E range)
 
     if (delta > 0)
     {
-        set.dbg.addRShift[ch][range] = (int8)(delta * 200.0F / 125.0F + 0.5F);
+        set.dbg.addRShift[ch][range] = static_cast<int8>(delta * 200.0F / 125.0F + 0.5F);
     }
     else
     {
-        set.dbg.addRShift[ch][range] = (int8)(delta * 200.0F / 125.0F - 0.5F);
+        set.dbg.addRShift[ch][range] = static_cast<int8>(delta * 200.0F / 125.0F - 0.5F);
     }
 }
 
@@ -238,7 +238,7 @@ void Osci::Balance(Chan::E ch)
 
     for (int range = 0; range < Range::Count; range++)
     {
-        BalanceChannel(ch, (Range::E)range);
+        BalanceChannel(ch, static_cast<Range::E>(range));
     }
 }
 

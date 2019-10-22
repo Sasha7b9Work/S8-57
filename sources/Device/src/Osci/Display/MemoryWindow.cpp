@@ -45,9 +45,9 @@ static void DrawDataInRect(int x, int y, int width, int height, const uint8 *dat
     }
 
     int numIntervals = width + 1;                               //  оличество интервалов, в которых будем рисовать наш сигнал - фактически, количество вертикальных линий
-    float pointsInInterval = (float)length / numIntervals;      //  оличество точек, рисуемых в одном интервале.
+    float pointsInInterval = static_cast<float>(length) / numIntervals;      //  оличество точек, рисуемых в одном интервале.
 
-    float stepY = (float)height / (float)(VALUE::MAX - VALUE::MIN);
+    float stepY = static_cast<float>(height) / static_cast<float>(VALUE::MAX - VALUE::MIN);
 
     int y0 = y + height;
 
@@ -81,8 +81,8 @@ static void DrawDataInRect(int x, int y, int width, int height, const uint8 *dat
 
 static void DrawScreenArea()
 {
-    float relBegin = (float)SHIFT_IN_MEMORY / FPGA_NUM_POINTS;          // ќтносительное начало экранной области относительно всей пам€ти
-    float relWidth = (float)(Grid::Width() + 1) / FPGA_NUM_POINTS;      // ќтносительное (относительно всей шириный окна) ширина видимой области
+    float relBegin = static_cast<float>(SHIFT_IN_MEMORY) / FPGA_NUM_POINTS;          // ќтносительное начало экранной области относительно всей пам€ти
+    float relWidth = static_cast<float>(Grid::Width() + 1) / FPGA_NUM_POINTS;      // ќтносительное (относительно всей шириный окна) ширина видимой области
 
     int begin = static_cast<int>(relBegin * DisplayOsci::MemoryWindow::Width() + 0.5F);   // –еальное начало экранной области относительно начала окна пам€ти
     int width = static_cast<int>(relWidth * DisplayOsci::MemoryWindow::Width() + 0.5F);   // –еальна€ ширина видимой области

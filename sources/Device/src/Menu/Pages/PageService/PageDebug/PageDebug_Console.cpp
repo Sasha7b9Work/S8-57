@@ -137,7 +137,7 @@ DEF_CHOICE_2( cTShift,                                                          
 )
 
 
-DEF_PAGE_12( pRegisters,                                                                                                                       //--- ОТЛАДКА - КОНСОЛЬ - РЕГИСТРЫ ---
+DEF_PAGE_12( pRegisters,                                                                                                                               //--- ОТЛАДКА - КОНСОЛЬ - РЕГИСТРЫ ---
     "РЕГИСТРЫ",
     "",
     &cShowAll,
@@ -155,10 +155,10 @@ DEF_PAGE_12( pRegisters,                                                        
     PageName::Debug_Console_Registers, &PageDebug::PageConsole::self, Item::Active, Page::OpenClose, Page::BeforeDraw, Page::HandlerKeyEvent
 )
 
-const Page * const PageDebug::PageRegisters::self = (const Page *)&pRegisters;
+const Page * const PageDebug::PageRegisters::self = static_cast<const Page *>(&pRegisters);
 
 
-DEF_PAGE_2( pConsole,                                                                                                                            //--- ОТЛАДКА - КОНСОЛЬ ---
+DEF_PAGE_2( pConsole,                                                                                                                                             //--- ОТЛАДКА - КОНСОЛЬ ---
     "КОНСОЛЬ",
     "Управляет отображением и параметрами отладочной консоли",
     &cShow,
@@ -166,4 +166,4 @@ DEF_PAGE_2( pConsole,                                                           
     PageName::Debug_Console, &PageDebug::self, Item::Active, Page::OpenClose, Page::BeforeDraw, Page::HandlerKeyEvent
 )
 
-const Page * const PageDebug::PageConsole::self = (const Page *)&pConsole;
+const Page * const PageDebug::PageConsole::self = static_cast<const Page *>(&pConsole);

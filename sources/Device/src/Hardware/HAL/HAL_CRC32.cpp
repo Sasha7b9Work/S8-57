@@ -17,5 +17,5 @@ void HAL_CRC32::Init()
 
 uint HAL_CRC32::Calculate(uint address, uint size)
 {
-    return HAL_CRC_Calculate(&handle, (uint *)address, size);
+    return HAL_CRC_Calculate(&handle, reinterpret_cast<uint *>(address), size);
 }

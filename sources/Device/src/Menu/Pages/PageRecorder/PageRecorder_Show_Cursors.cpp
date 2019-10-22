@@ -58,4 +58,4 @@ DEF_PAGE_3(pCursors,
     &PageRecorder::PageShow::self, Item::Active, Page::OpenClose, Page::BeforeDraw, Page::HandlerKeyEvent
 )
 
-const Page *const PageRecorder::PageShow::PageCursors::self = (const Page *)&pCursors;
+const Page *const PageRecorder::PageShow::PageCursors::self = static_cast<const Page *>(&pCursors);
