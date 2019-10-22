@@ -107,7 +107,7 @@ DEF_CHOICE_2( cInverseA,                                                        
 )
 
 
-DEF_PAGE_6( pChanA,                                                                                                                                        //--- КАНАЛ 1 ---
+DEF_PAGE_6( pChanA,                                                                                                                                                         //--- КАНАЛ 1 ---
     "КАНАЛ 1",
     "Содержит настройки канала 1.",
     &cInputA,
@@ -119,7 +119,7 @@ DEF_PAGE_6( pChanA,                                                             
     PageName::ChannelA, nullptr, Item::Active, Page::OpenClose, Page::BeforeDraw, Page::HandlerKeyEvent
 )
 
-const Page * const PageChannelA::self = (const Page *)&pChanA;
+const Page * const PageChannelA::self = static_cast<const Page *>(&pChanA);
 
 
 DEF_CHOICE_2( cInputB,                                                                                                                                               //--- КАНАЛ 2 - Вход ---
@@ -190,7 +190,7 @@ DEF_CHOICE_2( cInverseB,                                                        
 )
 
 
-DEF_PAGE_6( pChanB,                                                                                                                                        //--- КАНАЛ 2 ---
+DEF_PAGE_6( pChanB,                                                                                                                                                         //--- КАНАЛ 2 ---
     "КАНАЛ 2",
     "Содержит настройки канала 2.",
     &cInputB,
@@ -202,4 +202,4 @@ DEF_PAGE_6( pChanB,                                                             
     PageName::ChannelB, nullptr, Item::Active, Page::OpenClose, Page::BeforeDraw, Page::HandlerKeyEvent
 )
 
-const Page * const PageChannelB::self = (const Page *)&pChanB;
+const Page * const PageChannelB::self = static_cast<const Page *>(&pChanB);

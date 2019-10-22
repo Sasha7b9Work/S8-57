@@ -77,7 +77,7 @@ DEF_CHOICE_3( cRange,                                                           
 
 static void OnPress_Cursors_Source()
 {
-    set.fft.cursor = (uint8)((set.fft.cursor + 1) % 2);
+    set.fft.cursor = static_cast<uint8>((set.fft.cursor + 1) % 2);
 }
 
 static void Draw_Cursors_Source(int x, int y)
@@ -107,7 +107,7 @@ static bool HandlerKey_FFT_Cursors(const KeyEvent &event)
 
             int delta = (key == Key::Up || key == Key::Right) ? 1 : -1;
 
-            set.fft.posCur[set.fft.cursor] += (uint8)delta;
+            set.fft.posCur[set.fft.cursor] += static_cast<uint8>(delta);
             Beeper::RegulatorShiftRotate();
 
             return true;
@@ -117,14 +117,14 @@ static bool HandlerKey_FFT_Cursors(const KeyEvent &event)
     return false;
 }
 
-DEF_PAGE_1( pCursors,                                                                                                                   //--- ФУНКЦИЯ - СПЕКТР - КУРСОРЫ ---
+DEF_PAGE_1( pCursors,                                                                                                                                    //--- ФУНКЦИЯ - СПЕКТР - КУРСОРЫ ---
     "КУРСОРЫ", 
     "Включает курсоры для измерения параметров спектра",
     &bCursors_Source,
     PageName::FFT_Cursors, &PageFFT::self, IsActive_Cursors, Page::OpenClose, Page::BeforeDraw, HandlerKey_FFT_Cursors
 )
 
-const Page * const PageFFT::PageCursors::self = (const Page *)&pCursors;
+const Page * const PageFFT::PageCursors::self = static_cast<const Page *>(&pCursors);
 
 static bool IsActive_FFT()
 {
@@ -139,7 +139,7 @@ static void OnOpenClose_FFT(bool)
     }
 }
 
-DEF_PAGE_6( pFFT,                                                                                                                                  //--- СЕРВИС - СПЕКТР ---
+DEF_PAGE_6( pFFT,                                                                                                                                                   //--- СЕРВИС - СПЕКТР ---
     "СПЕКТР",
     "Отображение спектра входного сигнала",
     &cView,
@@ -151,4 +151,4 @@ DEF_PAGE_6( pFFT,                                                               
     PageName::FFT, &PageFunction::self, IsActive_FFT, OnOpenClose_FFT, Page::BeforeDraw, Page::HandlerKeyEvent
 )
 
-const Page * const PageFFT::self = (const Page *)&pFFT;
+const Page * const PageFFT::self = static_cast<const Page *>(&pFFT);

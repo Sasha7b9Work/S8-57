@@ -53,7 +53,7 @@ DEF_CHOICE_3( cChannels,                                                        
 )
 
 
-DEF_PAGE_4( pAuto,                                                                                                                                //--- ИЗМЕРЕНИЯ - АВТО ---
+DEF_PAGE_4( pAuto,                                                                                                                                                 //--- ИЗМЕРЕНИЯ - АВТО ---
     "АВТОМАТ",
     "Доступ к настройкам автоматических измерений",
     &cIsShow,
@@ -63,4 +63,4 @@ DEF_PAGE_4( pAuto,                                                              
     PageName::AutoMeasures, &PageMeasures::self, Item::Active, Page::OpenClose, Page::BeforeDraw, Page::HandlerKeyEvent
 )
 
-const Page * const PageAutoMeasures::self = (const Page *)&pAuto;
+const Page * const PageAutoMeasures::self = static_cast<const Page *>(&pAuto);

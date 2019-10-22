@@ -89,7 +89,7 @@ DEF_CHOICE_2( cViewMode,                                                        
 )
 
 
-DEF_PAGE_8( pDisplay,                                                                                                                                      //--- ДИСПЛЕЙ ---
+DEF_PAGE_8( pDisplay,                                                                                                                                                       //--- ДИСПЛЕЙ ---
     "ДИСПЛЕЙ",
     "Содержит настройки отображения дисплея.",
     &cViewMode,
@@ -103,4 +103,4 @@ DEF_PAGE_8( pDisplay,                                                           
     PageName::Display, nullptr, Item::Active, Page::OpenClose, Page::BeforeDraw, Page::HandlerKeyEvent
 )
 
-const Page * const PageDisplay::self = (const Page *)&pDisplay;
+const Page * const PageDisplay::self = static_cast<const Page *>(&pDisplay);

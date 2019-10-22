@@ -35,7 +35,7 @@ DEF_CHOICE_6( cAutoHide,                                                        
 )
 
 
-DEF_PAGE_3( pSettings,                                                                                                                         //--- ДИСПЛЕЙ - НАСТРОЙКИ ---
+DEF_PAGE_3( pSettings,                                                                                                                                          //--- ДИСПЛЕЙ - НАСТРОЙКИ ---
     "НАСТРОЙКИ",
     "Дополнительные настройки дисплея",
     PageDisplay::PageSettings::PageColors::self,
@@ -44,4 +44,4 @@ DEF_PAGE_3( pSettings,                                                          
     PageName::Display_Settings, &PageDisplay::self, Item::Active, Page::OpenClose, Page::BeforeDraw, Page::HandlerKeyEvent
 )
 
-const Page * const PageDisplay::PageSettings::self = (const Page *)&pSettings;
+const Page * const PageDisplay::PageSettings::self = static_cast<const Page *>(&pSettings);

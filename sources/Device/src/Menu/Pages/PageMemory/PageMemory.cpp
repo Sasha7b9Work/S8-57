@@ -104,7 +104,7 @@ void PageMemory::OnOpenClose_Drive_Manager(bool)
     }
 }
 
-DEF_PAGE_3( pManager,                                                                                                                           //--- ПАМЯТЬ - ВНЕШН ЗУ - КАТАЛОГ ---
+DEF_PAGE_3( pManager,                                                                                                                                   //--- ПАМЯТЬ - ВНЕШН ЗУ - КАТАЛОГ ---
     "КАТАЛОГ",
     "Открывает доступ к файловой системе подключенного накопителя",
     &bManager_Tab,
@@ -114,7 +114,7 @@ DEF_PAGE_3( pManager,                                                           
     &PageDrive::self, IsActive_Drive_Manager, PageMemory::OnOpenClose_Drive_Manager, Page::BeforeDraw, FileManager::HandlerKey
 )
 
-const Page * const PageDrive::PageManager::self = (const Page *)&pManager;
+const Page * const PageDrive::PageManager::self = static_cast<const Page *>(&pManager);
 
 
 DEF_CHOICE_2( cDrive_Name,                                                                                                                            //--- ПАМЯТЬ - ВНЕШН ЗУ - Имя файла ---
@@ -205,7 +205,7 @@ static void OnPress_Mask_Insert()
         }
         else
         {
-            set.mem.fileNameMask[size] = (char)index;
+            set.mem.fileNameMask[size] = static_cast<char>(index);
             set.mem.fileNameMask[size + 1] = '\0';
         }
     }
@@ -339,7 +339,7 @@ static void DrawFileMask(int x, int y)
             if (*ch == 0x07)
             {
                 x = Char('%').Draw(x, y);
-                x = Char((char)(0x30 | *(ch + 1))).Draw(x, y);
+                x = Char(0x30 | *(ch + 1)).Draw(x, y);
                 x = Char('N').Draw(x, y);
                 ch++;
             }
@@ -366,7 +366,7 @@ static bool HandlerKey_Mask(const KeyEvent &event)
 
 
 /*
-DEF_PAGE_SB( pMask,                                                                                                                               //--- Память - ВНЕШН ЗУ - МАСКА ---
+DEF_PAGE_SB( pMask,                                                                                                                                       //--- Память - ВНЕШН ЗУ - МАСКА ---
     "МАСКА", "MASK",
     "Режим ввода маски для автоматического именования файлов",
     "Input mode mask for automatic file naming",
@@ -381,7 +381,7 @@ DEF_PAGE_SB( pMask,                                                             
 */
 
 
-DEF_PAGE_3( pMask,                                                                                                                                //--- Память - ВНЕШН ЗУ - МАСКА ---
+DEF_PAGE_3( pMask,                                                                                                                                        //--- Память - ВНЕШН ЗУ - МАСКА ---
     "МАСКА",
     "Режим ввода маски для автоматического именования файлов",
     &bMask_Delete,
@@ -391,7 +391,7 @@ DEF_PAGE_3( pMask,                                                              
     &PageDrive::self, IsActive_Mask, OnOpenClose_Mask, Page::BeforeDraw, HandlerKey_Mask
 )
 
-const Page * const PageDrive::PageMask::self = (const Page *)&pMask;
+const Page * const PageDrive::PageMask::self = static_cast<const Page *>(&pMask);
 
 
 DEF_CHOICE_2( cDrive_Autoconnect,                                                                                                               //--- ПАМЯТЬ - ВНЕШН ЗУ - Автоподключение ---
@@ -403,7 +403,7 @@ DEF_CHOICE_2( cDrive_Autoconnect,                                               
 )
 
 
-DEF_PAGE_6( pDrive,   //-V1027                                                                                                                             //--- ПАМЯТЬ - ВНЕШН ЗУ ---
+       DEF_PAGE_6( pDrive,   //-V1027                                                                                                                             //--- ПАМЯТЬ - ВНЕШН ЗУ ---
     "ВНЕШН ЗУ",
     "Работа с внешним запоминающим устройством.",
     PageDrive::PageManager::self,
@@ -417,10 +417,10 @@ DEF_PAGE_6( pDrive,   //-V1027                                                  
     Item::Active, Page::OpenClose, Page::BeforeDraw, Page::HandlerKeyEvent
 )
 
-const Page * const PageDrive::self = (const Page *)&pDrive;
+const Page * const PageDrive::self = static_cast<const Page *>(&pDrive);
 
 
-DEF_PAGE_4( pMemory,                                                                                                                                        //--- ПЯМЯТЬ ---
+DEF_PAGE_4( pMemory,                                                                                                                                                         //--- ПЯМЯТЬ ---
     "ПАМЯТЬ",
     "Работа с внешней и внутренней памятью.",
     &cPoints,
@@ -430,7 +430,7 @@ DEF_PAGE_4( pMemory,                                                            
     PageName::Memory, nullptr, Item::Active, Page::OpenClose, Page::BeforeDraw, Page::HandlerKeyEvent
 )
 
-const Page * const PageMemory::self = (const Page *)&pMemory;
+const Page * const PageMemory::self = static_cast<const Page *>(&pMemory);
 
 
 void PageMemory::SaveSignalToFlashDrive()
@@ -611,11 +611,10 @@ void OnMemExtSetMaskNameRegSet(int angle, int maxIndex)
     Color::ResetFlash();
     if (set.mem.indexCurSymbolNameMask > maxIndex)
     {
-        set.mem.indexCurSymbolNameMask = (int8)(maxIndex - 1);
+        set.mem.indexCurSymbolNameMask = static_cast<int8>(maxIndex - 1);
     }
-    func[Math::Sign(angle) + 1](&set.mem.indexCurSymbolNameMask, 0, (int8)(maxIndex - 1));
+    func[Math::Sign(angle) + 1](&set.mem.indexCurSymbolNameMask, 0, static_cast<int8>(maxIndex - 1));
     Beeper::RegulatorSwitchRotate();
-
 }
 
 DEF_PAGE_4( pSetName,                                                                                                             //--- Страница вызывается для ввода имени файла ---
@@ -628,7 +627,7 @@ DEF_PAGE_4( pSetName,                                                           
     PageName::Memory_SetName, nullptr, Item::Active, Page::OpenClose, Page::BeforeDraw, HandlerKey_SetName
 )
 
-const Page * const PageSetName::self = (const Page *)&pSetName;
+const Page * const PageSetName::self = static_cast<const Page *>(&pSetName);
 
 
 ENumPointsFPGA::E NumPoints_2_ENumPoints(int numPoints)
@@ -656,5 +655,5 @@ int ENumPoints_2_NumPoints(ENumPointsFPGA::E numPoints)
         4096,
         8192
     };
-    return n[(uint)numPoints];
+    return n[static_cast<uint>(numPoints)];
 }
