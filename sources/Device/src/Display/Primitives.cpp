@@ -53,19 +53,19 @@ Line::Line(int _x0, int _y0, int _x1, int _y1) : x0(_x0), y0(_y0), x1(_x1), y1(_
 }
 
 
-Char::Char(Symbol5::E _ch) : ch((char)_ch), font(TypeFont::_5)
+Char::Char(Symbol5::E _ch) : ch(static_cast<char>(_ch)), font(TypeFont::_5)
 {
 
 }
 
 
-Char::Char(SymbolUGO::E _ch) : ch((char)_ch), font(TypeFont::_UGO)
+Char::Char(SymbolUGO::E _ch) : ch(static_cast<char>(_ch)), font(TypeFont::_UGO)
 {
 
 }
 
 
-Char::Char(SymbolUGO2::E _ch) : ch((char)_ch), font(TypeFont::_UGO2)
+Char::Char(SymbolUGO2::E _ch) : ch(static_cast<char>(_ch)), font(TypeFont::_UGO2)
 {
 
 }

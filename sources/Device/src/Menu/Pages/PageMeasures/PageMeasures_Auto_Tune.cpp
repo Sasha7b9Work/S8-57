@@ -54,4 +54,4 @@ DEF_PAGE_2( pTune,
     PageName::AutoMeasures_Tune, &PageAutoMeasures::self, IsActive_Tune, Page::OpenClose, Page::BeforeDraw, HandlerKey_Tune
 )
 
-const Page *const PageAutoMeasures::PageTune::self = (const Page *)&pTune;
+const Page *const PageAutoMeasures::PageTune::self = static_cast<const Page *>(&pTune);

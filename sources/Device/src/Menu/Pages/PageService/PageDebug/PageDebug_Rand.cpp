@@ -53,7 +53,7 @@ DEF_CHOICE_16( gGateMin,                                                        
 
 
 
-DEF_PAGE_2( pRand,                                                                                                                              //--- Œ“À¿ƒ ¿ - –¿Õƒ-“Œ– ---
+DEF_PAGE_2( pRand,                                                                                                                                               //--- Œ“À¿ƒ ¿ - –¿Õƒ-“Œ– ---
     "–¿Õƒ-“Œ–",
     "",
     &gGateMin,
@@ -61,4 +61,4 @@ DEF_PAGE_2( pRand,                                                              
     PageName::Debug_Rand, &PageDebug::self, Item::Active, Page::OpenClose, Page::BeforeDraw, Page::HandlerKeyEvent
 )
 
-const Page *const PageDebug::PageRand::self = (const Page *)&pRand;
+const Page *const PageDebug::PageRand::self = static_cast<const Page *>(&pRand);

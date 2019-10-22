@@ -43,7 +43,7 @@ DEF_CHOICE_4( cSoundVolume,
 )
 
 
-DEF_PAGE_7( pService,                                                                                                                                       //--- СЕРВИС ---
+DEF_PAGE_7( pService,                                                                                                                                                        //--- СЕРВИС ---
     "СЕРВИС",
     "Дополнительные настройки, калибровка, поиск сигнала, математические функции",
     &bResetSettings,
@@ -56,4 +56,4 @@ DEF_PAGE_7( pService,                                                           
     PageName::Service, nullptr, Item::Active, Page::OpenClose, Page::BeforeDraw, Page::HandlerKeyEvent
 )
 
-const Page * const PageService::self = (const Page *)&pService;
+const Page * const PageService::self = static_cast<const Page *>(&pService);

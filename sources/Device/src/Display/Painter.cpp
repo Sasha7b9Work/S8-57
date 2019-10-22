@@ -33,13 +33,13 @@ void Painter::DrawTesterData(uint8 mode, Color color, const uint16 *x, const uin
     buffer.data[1] = mode;
     buffer.data[2] = color.value;
 
-    uint16 *pointer16 = (uint16 *)(buffer.data + 3);
+    uint16 *pointer16 = reinterpret_cast<uint16 *>(buffer.data + 3);
     for (int i = 0; i < TESTER_NUM_POINTS; i++)
     {
         *pointer16++ = x[i];
     }
 
-    uint8 *pointer8 = (uint8 *)(pointer16);
+    uint8 *pointer8 = reinterpret_cast<uint8 *>(pointer16);
     for (int i = 0; i < TESTER_NUM_POINTS; i++)
     {
         *pointer8++ = y[i];

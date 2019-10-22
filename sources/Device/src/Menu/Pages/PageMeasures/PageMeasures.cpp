@@ -4,7 +4,7 @@
 #include "Menu/Menu.h"
 
 
-DEF_PAGE_3( pMeasures,                                                                                                                                           //--- ИЗМЕРЕНИЯ ---
+DEF_PAGE_3( pMeasures,                                                                                                                                                    //--- ИЗМЕРЕНИЯ ---
     "ИЗМЕРЕНИЯ",
     "Доступ к настройкам измерений - курсорных и автоматических",
     PageCursorsMeasures::self,
@@ -13,4 +13,4 @@ DEF_PAGE_3( pMeasures,                                                          
     PageName::Measures, nullptr, Item::Active, Page::OpenClose, Page::BeforeDraw, Page::HandlerKeyEvent
 )
 
-const Page *const PageMeasures::self = (const Page *)&pMeasures;
+const Page *const PageMeasures::self = static_cast<const Page *>(&pMeasures);
