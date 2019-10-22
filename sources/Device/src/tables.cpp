@@ -61,7 +61,7 @@ ENumSignalsInSec::E Tables::ENumSignalsInSecToENUM(int numSignalsInSec)
 
 const char *Tables_RangeNameFromValue(Range::E range)
 {
-    static const struct StructName { pString name; } names[Range::Size] =
+    static const struct StructName { pString name; } names[Range::Count] =
     {
         "Range_2mV",
         "Range_5mV",

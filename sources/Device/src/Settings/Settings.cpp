@@ -20,5 +20,5 @@ void Settings::Reset()
     set.dbg.enum_gate_max = old.dbg.enum_gate_max;
     set.dbg.enum_gate_min = old.dbg.enum_gate_min;
 
-    std::memcpy(set.dbg.addRShift, old.dbg.addRShift, sizeof(int8) * 2 * Range::Size);
+    std::memcpy(set.dbg.addRShift, old.dbg.addRShift, sizeof(int8) * 2 * Range::Count);
 }

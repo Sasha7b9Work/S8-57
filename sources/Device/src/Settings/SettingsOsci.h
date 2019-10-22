@@ -66,7 +66,7 @@ struct TBase
         _2s,
         _5,
         _10s,
-        Size
+        Count
     } value;
     explicit TBase(E v) : value(v) {};
 
@@ -106,7 +106,7 @@ struct Range
         _5V,
         _10V,
         _20V,
-        Size
+        Count
     } value;
     explicit Range(E v) : value(v) {};
     pString Name() const;
@@ -151,7 +151,7 @@ struct ModeCouple
         DC,      ///< Закрытый вход
         AC,      ///< Открытый вход
         GND,     ///< Вход заземлён.
-        Size
+        Count
     } value;
     explicit ModeCouple(E v) : value(v) {};
     pString UGO() const;

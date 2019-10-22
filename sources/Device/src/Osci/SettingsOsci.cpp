@@ -26,7 +26,7 @@ static const struct RangeStruct
     pString name;     // Название диапазона в текстовом виде, пригодном для вывода на экран.
     RangeStruct(pString nRU) : name(nRU) {};
 }
-ranges[Range::Size][2] =
+ranges[Range::Count][2] =
 {
     {RangeStruct("2\x10мВ"),  RangeStruct("20\x10мВ")},
     {RangeStruct("5\x10мВ"),  RangeStruct("50\x10мВ")},
@@ -73,7 +73,7 @@ void TBase::Change(int delta)
 
     if (delta > 0)
     {
-        ::Math::LimitationIncrease<uint8>(reinterpret_cast<uint8 *>(&set.time.base), static_cast<uint8>(TBase::Size - 1));
+        ::Math::LimitationIncrease<uint8>(reinterpret_cast<uint8 *>(&set.time.base), static_cast<uint8>(TBase::Count - 1));
     }
     else
     {
@@ -111,7 +111,7 @@ pString TBase::ToString() const
             name = nRU;
         };
     }
-    tBases[TBase::Size] =
+    tBases[TBase::Count] =
     {
         StructTBase("2\x10нс"),
         StructTBase("5\x10нс"),
@@ -167,7 +167,7 @@ int TPos::InBytes()
 
 void TBase::Load()
 {
-    static const uint8 values[TBase::Size] =
+    static const uint8 values[TBase::Count] =
     {
         BIN_U8(00000000),  // -V2501  // 2ns     1       200MHz
         BIN_U8(00000000),  // -V2501  // 5ns     1       200MHz
@@ -224,8 +224,8 @@ void Range::LoadBoth()
 
     GPIO::WriteRegisters(FPin::SPI3_CS2, 0);    // Записываем ноль, чтобы реле не потребляли энергии
 
-    //DEF__STRUCT(StructRange, uint8) vals[Range::Size] =
-    static const uint8 vals[Range::Size] =
+    //DEF__STRUCT(StructRange, uint8) vals[Range::Count] =
+    static const uint8 vals[Range::Count] =
     {
         BIN_U8(00000000),  // 2mV      // -V2501
         BIN_U8(00000001),  // 5mV      // -V2501
@@ -273,15 +273,15 @@ pString Range::ToString(int8 _divider)
 
 static uint8 ValueForRange(Chan::E ch) // -V2506
 {
-    static const uint8 datas[ModeCouple::Size] =
+    static const uint8 datas[ModeCouple::Count] =
     {
         BIN_U8(01000001),  // -V2501  // DC
         BIN_U8(10000001),  // -V2501  // AC
         BIN_U8(00000010)   // -V2501  // GND
     };
 
-    //DEF__STRUCT(StructRange, uint16) values[Range::Size][2] =
-    static const uint16 values[Range::Size][2] =
+    //DEF__STRUCT(StructRange, uint16) values[Range::Count][2] =
+    static const uint16 values[Range::Count][2] =
     {   //             A                    B
         { BIN_U8(00100100), BIN_U8(00100100) }, // -V2501  // 2mV
         { BIN_U8(00100100), BIN_U8(00100100) }, // -V2501  // 5mV

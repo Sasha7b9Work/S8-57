@@ -25,7 +25,7 @@ static void UpdateFPGA();
 
 int Osci::addShift = 0;
 //  2нс 5нс 10нс 20нс 50нс
-const int Osci::Kr[TBase::Size] = { 50, 20, 10,  5,   2 };
+const int Osci::Kr[TBase::Count] = { 50, 20, 10,  5,   2 };
 
 
 
@@ -236,7 +236,7 @@ void Osci::Balance(Chan::E ch)
 
     TBase::Load();
 
-    for (int range = 0; range < Range::Size; range++)
+    for (int range = 0; range < Range::Count; range++)
     {
         BalanceChannel(ch, (Range::E)range);
     }

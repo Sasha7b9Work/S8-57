@@ -324,7 +324,7 @@ static void DebugShowSetInfo_Draw()
     {
         for (int ch = 0; ch < 2; ch++)
         {
-            for (int range = 0; range < Range::Size; ++range)
+            for (int range = 0; range < Range::Count; ++range)
             {
                 String("%d", set.dbg.nrst.rShiftAdd[ch][range][type]).Draw(x + range * 20, y + dY * ddY);
             }
@@ -499,7 +499,7 @@ const Page * const PageDebug::self = (const Page *)&pDebug;
 
 float GetStretchADC(Chan::E ch)
 {
-    static const int16 *addStretch[Range::Size][2] =
+    static const int16 *addStretch[Range::Count][2] =
     {
         {0, 0},  // 2mV
         {0, 0},  // 5mV

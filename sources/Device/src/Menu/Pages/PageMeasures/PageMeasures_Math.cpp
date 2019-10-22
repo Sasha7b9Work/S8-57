@@ -247,7 +247,7 @@ static bool HandlerKey_Function(const KeyEvent &event) // -V2506
 
         if (sum > 2)
         {
-            if (set.math.range < Range::Size - 1)
+            if (set.math.range < Range::Count - 1)
             {
                 set.math.range = static_cast<Range::E>(static_cast<uint8>(set.math.range + 1));  // SET_RANGE_MATH++;
                 set.math.rShift = static_cast<uint16>(MathFPGA::RShift2Rel(rShiftAbs, set.math.range));

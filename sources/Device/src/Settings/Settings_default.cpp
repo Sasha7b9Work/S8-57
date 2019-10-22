@@ -250,7 +250,7 @@ const Settings Settings::defaultSettings =
             {},                                 // rShiftAddStable[Chan::Count][3]
             0,                                  // numAveForRand
             0,                                  // numSmoothForRand
-            {},                                 // rShiftAdd[Chan::Count][Range::Size][2]
+            {},                                 // rShiftAdd[Chan::Count][Range::Count][2]
             0                                   // correctionTime
         },
     }

@@ -353,7 +353,7 @@ const uint8 *DataOsciP2P::DataB()
 
 float DataOsciP2P::TimePointMS(uint numPoint) const
 {
-    static const float timePoint[TBase::Size] =
+    static const float timePoint[TBase::Count] =
     {
         /* 2 нс    */ 0,
         /* 5 нс    */ 0,

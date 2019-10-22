@@ -67,7 +67,7 @@ static void Balance(Chan::E ch)
 
     Osci::Balance(ch);
 
-    std::memcpy(&old.dbg.addRShift[0][0], &set.dbg.addRShift[0][0], sizeof(int8) * 2 * Range::Size);
+    std::memcpy(&old.dbg.addRShift[0][0], &set.dbg.addRShift[0][0], sizeof(int8) * 2 * Range::Count);
 
     set = old;
 

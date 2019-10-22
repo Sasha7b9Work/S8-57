@@ -38,7 +38,7 @@ struct SettingsNRST
     int16           rShiftAddStable[Chan::Count][3];        ///< Добавочное смещение для трёх самых чувствительных диапазонов. Задаётся единожды при настройке
     int16           numAveForRand;                          ///< По скольким измерениям усреднять сигнал в режиме рандомизатора.
     int16           numSmoothForRand;                       ///< Число точек для скользящего фильта в рандомизаторе.
-    int16           rShiftAdd[Chan::Count][Range::Size][2]; ///< Добавочное смещение, которое пишется сюда при калибровке и балансировке
+    int16           rShiftAdd[Chan::Count][Range::Count][2]; ///< Добавочное смещение, которое пишется сюда при калибровке и балансировке
     int16           correctionTime;                         ///< Коэффициент коррекции времени.
 };
 
@@ -67,7 +67,7 @@ struct SettingsDebug
     bool         ShowStats;                 ///< Показывать статистику на экране (fps, например).
     int16        enum_gate_max;             ///< Ограничение ворот в рандомизаторе сверху
     int16        enum_gate_min;             ///< Ограничение ворот в рандомизаторе снизу
-    int8         addRShift[2][Range::Size]; ///< Добавочные смещения для 
+    int8         addRShift[2][Range::Count]; ///< Добавочные смещения для 
     SettingsNRST nrst;
 };
 

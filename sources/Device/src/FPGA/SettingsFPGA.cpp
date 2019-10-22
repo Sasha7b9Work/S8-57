@@ -147,7 +147,7 @@ void Range::Change(Chan::E ch, int delta)
 
     if (delta > 0)
     {
-        ::Math::LimitationIncrease<uint8>(reinterpret_cast<uint8 *>(&set.ch[static_cast<int>(ch)].range), static_cast<uint8>(Range::Size - 1)); // -V206
+        ::Math::LimitationIncrease<uint8>(reinterpret_cast<uint8 *>(&set.ch[static_cast<int>(ch)].range), static_cast<uint8>(Range::Count - 1)); // -V206
     }
     else
     {
@@ -251,7 +251,7 @@ String RShift::ToString(uint16 rShiftRel, Range::E range, int8 _divider)
 
 pString TBase::Name() const
 {
-    static pString names[TBase::Size] =
+    static pString names[TBase::Count] =
     {
         "2нс",
         "5нс",
@@ -299,7 +299,7 @@ pString Range::Name() const
             name = nRU;
         }
     }
-    names[Range::Size] =
+    names[Range::Count] =
     {
         StructRange("2м¬"),
         StructRange("5м¬"),
