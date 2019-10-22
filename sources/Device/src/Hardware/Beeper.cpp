@@ -65,7 +65,7 @@ static void CalculateSine()
         float step = 2.0F * PI / (POINTS_IN_PERIOD_SOUND - 1);
         float value = (std::sinf(i * step) + 1.0F) / 2.0F;
         float v = value * amplitude * 255.0F;
-        points[i] = (uint8)v;
+        points[i] = static_cast<uint8>(v);
     }
 
     for (int i = 0; i < POINTS_IN_PERIOD_SOUND; i++)
@@ -76,7 +76,7 @@ static void CalculateSine()
         }
         else
         {
-            points[i] = (uint8)(255.0F * amplitude);
+            points[i] = static_cast<uint8>(255.0F * amplitude);
         }
     }
 }
@@ -87,7 +87,7 @@ static void CalculateMeandr()
 {
     for(int i = 0; i < POINTS_IN_PERIOD_SOUND / 2; i++)
     {
-        points[i] = (uint8)(255.0F * amplitude);
+        points[i] = static_cast<uint8>(255.0F * amplitude);
     }
     for(int i = POINTS_IN_PERIOD_SOUND / 2; i < POINTS_IN_PERIOD_SOUND; i++)
     {
@@ -102,7 +102,7 @@ static void CalculateTriangle()
     float k = 255.0F / POINTS_IN_PERIOD_SOUND;
     for(int i = 0; i < POINTS_IN_PERIOD_SOUND; i++)
     {
-        points[i] = (uint8)(k * (float)i * amplitude);
+        points[i] = static_cast<uint8>(k * static_cast<float>(i) * amplitude);
     }
 }
 
@@ -155,7 +155,7 @@ static void Beep(const TypeWave::E newTypeWave, const float newFreq, const float
 
     HAL_DAC1::StartDMA(points, POINTS_IN_PERIOD_SOUND);
 
-    Timer::SetAndStartOnce(TypeTimer::StopSound, Stop, (uint)newDuration);
+    Timer::SetAndStartOnce(TypeTimer::StopSound, Stop, static_cast<uint>(newDuration));
 }
 
 

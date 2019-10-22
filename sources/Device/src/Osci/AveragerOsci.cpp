@@ -19,7 +19,7 @@ void AveragerOsci::Process(Chan::E ch, const uint8 *dataNew, int size)
         ƒл€ этого нужно завести битовый массив, в котором отмечать те точки, которые считаны в данной итерации.
     */
 
-    uint16 numAve = (uint16)set.disp.ENumAverage;
+    uint16 numAve = static_cast<uint16>(set.disp.ENumAverage);
 
     int index = 0;
     int step = 1;
@@ -32,7 +32,7 @@ void AveragerOsci::Process(Chan::E ch, const uint8 *dataNew, int size)
         step = str.step;
     }
 
-    uint8 *_new = (uint8 *)dataNew + index;
+    uint8 *_new = const_cast<uint8 *>(dataNew) + index;
     uint16 *av = AVE_DATA(ch);
 
     /// \todo «десь неправильно - места в AVE_DATA слишком мало дл€ 8к * 16биты
@@ -41,7 +41,7 @@ void AveragerOsci::Process(Chan::E ch, const uint8 *dataNew, int size)
     {
         if (numSignals[ch] == 0)
         {
-            std::memset(AVE_DATA(ch), 0, (uint)size * 2);
+            std::memset(AVE_DATA(ch), 0, static_cast<uint>(size) * 2);
 
             for (int i = 0; i < size; i++)
             {
@@ -62,9 +62,9 @@ void AveragerOsci::Process(Chan::E ch, const uint8 *dataNew, int size)
     {
         for (int i = index; i < size; i += step)
         {
-            av[i] = (uint16)(av[i] - (av[i] >> numAve) + *_new);
+            av[i] = static_cast<uint16>(av[i] - (av[i] >> numAve) + *_new);
 
-            *_new = (uint8)(av[i] >> numAve);
+            *_new = static_cast<uint8>(av[i] >> numAve);
 
             _new += step;
         }
@@ -91,6 +91,6 @@ void AveragerOsci::Draw()
 
         Rectangle(Grid::Width(), height).Draw(Grid::Left(), Grid::Top(), Color::GRID);
 
-        Region(static_cast<int>(Grid::Width() * (float)numSignals[0] / set.disp.ENumAverage), height).Fill(Grid::Left(), Grid::Top());
+        Region(static_cast<int>(Grid::Width() * static_cast<float>(numSignals[0]) / set.disp.ENumAverage), height).Fill(Grid::Left(), Grid::Top());
     }
 }

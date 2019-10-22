@@ -20,8 +20,8 @@ bool ContextTester::Start()
 
     TBase::Load();
 
-    HAL_FSMC::WriteToFPGA16(WR::POST_LO, (uint16)(~(400)));
-    HAL_FSMC::WriteToFPGA16(WR::PRED_LO, (uint16)(~(1)));
+    HAL_FSMC::WriteToFPGA16(WR::POST_LO, static_cast<uint16>(~(400)));
+    HAL_FSMC::WriteToFPGA16(WR::PRED_LO, static_cast<uint16>(~(1)));
     HAL_FSMC::WriteToFPGA8(WR::START, 0xff);
 
     FPGA::GiveStart();

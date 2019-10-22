@@ -146,12 +146,12 @@ static bool ButtonPress(uint8 data)
     }
     else if (step == 1)
     {
-        button = (Key::E)data;
+        button = static_cast<Key::E>(data);
         return false;
     }
     else
     {
-        BufferButtons::Push(KeyEvent(button, (TypePress::E)data));
+        BufferButtons::Push(KeyEvent(button, static_cast<TypePress::E>(data)));
     }
 
     return true;
@@ -211,12 +211,12 @@ static bool AddToConsole(uint8 data)
     if (step == 1)
     {
         allSymbols = data;
-        text = (char *)std::malloc(allSymbols + 1U);
+        text = static_cast<char *>(std::malloc(allSymbols + 1U));
         recvSymbols = 0;
         return false;
     }
 
-    text[recvSymbols++] = (char)data;
+    text[recvSymbols++] = static_cast<char>(data);
 
     if (recvSymbols == allSymbols)
     {

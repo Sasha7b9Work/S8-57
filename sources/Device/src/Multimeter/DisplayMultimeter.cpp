@@ -185,7 +185,7 @@ void DisplayMultimeter::SetMeasure(const uint8 buf[13])
         PrepareBell
     };
 
-    MultimeterMeasure::E meas = MultimeterMeasure::GetCode((const char *)buf);
+    MultimeterMeasure::E meas = MultimeterMeasure::GetCode(reinterpret_cast<const char *>(buf));
 
     if (meas >= MultimeterMeasure::Size)
     {
@@ -194,7 +194,7 @@ void DisplayMultimeter::SetMeasure(const uint8 buf[13])
 
     std::memcpy(outBuffer, buf + 1, 7); //-V512
 
-    funcs[meas].func((const char *)buf);
+    funcs[meas].func(reinterpret_cast<const char *>(buf));
 
     received = true;
 }
