@@ -105,17 +105,17 @@ const Page * const PageTester::self = static_cast<const Page *>(&pTester);
 
 void PageTester::OnChanged_Control(bool)
 {
-    Page *page = (Page *)&pTester;
+    Page *page = const_cast<Page *>(&pTester);
 
-    Item **items = (Item **)page->OwnData()->items;
+    Item **items = const_cast<Item **>(page->OwnData()->items);
 
     if (set.test.control == TesterControl::Voltage)
     {
-        items[1] = (Item *)&cStepU; 
+        items[1] = const_cast<Choice *>(&cStepU);
     }
     else
     {
-        items[1] = (Item *)&cStepI;
+        items[1] = const_cast<Choice *>(&cStepI);
     }
 
     Tester::LoadStep();

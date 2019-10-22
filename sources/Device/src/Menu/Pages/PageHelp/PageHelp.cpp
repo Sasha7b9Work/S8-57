@@ -64,7 +64,7 @@ DEF_GRAPH_BUTTON( bNext,                                                        
     &PageHelp::self, Item::Active, HelpContent::NextParagraph, Draw_Next
 )
 
-DEF_PAGE_4( pHelp,                                                                                                                                          //--- ѕќћќў№ ---
+DEF_PAGE_4( pHelp,                                                                                                                                                           //--- ѕќћќў№ ---
     "ѕќћќў№",
     "ќткрыть разделы помощи",
     &bEnter,
@@ -74,4 +74,4 @@ DEF_PAGE_4( pHelp,                                                              
     PageName::Help, nullptr, Item::Active, Page::OpenClose, HelpContent::Draw, HandlerKey_Help
 )
 
-const Page *const PageHelp::self = (const Page *)&pHelp;
+const Page *const PageHelp::self = static_cast<const Page *>(&pHelp);

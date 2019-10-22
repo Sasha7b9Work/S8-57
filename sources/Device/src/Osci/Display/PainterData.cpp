@@ -164,7 +164,7 @@ static void DRAW_SPECTRUM(const uint8 *dataIn, int numPoints, Chan::E ch)
     int y1 = 0;
     int s = 2;
 
-    float *spectrum = (float *)std::malloc(numPoints * sizeof(float));
+    float *spectrum = static_cast<float *>(std::malloc(numPoints * sizeof(float)));
 
     if (spectrum)
     {
@@ -283,7 +283,7 @@ static void DrawChannel(Chan::E ch)
 
     int left = Grid::Left();
 
-    float scale = (float)Grid::Height() / (VALUE::MAX - VALUE::MIN);
+    float scale = static_cast<float>(Grid::Height()) / (VALUE::MAX - VALUE::MIN);
 
     if (set.fft.enabled)
     {

@@ -99,20 +99,20 @@ DEF_CHOICE_6( cNumPeriods,                                                      
 
 const Choice *PageFreqMeter::GetChoiceTimeF()
 {
-    return (const Choice *)&cTimeF;
+    return static_cast<const Choice *>(&cTimeF);
 }
 
 const Choice *PageFreqMeter::GetChoiceFreqClc()
 {
-    return (const Choice *)&cFreqClc;
+    return static_cast<const Choice *>(&cFreqClc);
 }
 
 const Choice *PageFreqMeter::GetChoiceNumPeriods()
 {
-    return (const Choice *)&cNumPeriods;
+    return static_cast<const Choice *>(&cNumPeriods);
 }
 
-DEF_PAGE_5_VAR( pFreqMeter,                                                                                                                                //--- ‘”Õ ÷»ﬂ - ◊¿—“Œ“ŒÃ≈– ---
+DEF_PAGE_5_VAR( pFreqMeter,                                                                                                                                    //--- ‘”Õ ÷»ﬂ - ◊¿—“Œ“ŒÃ≈– ---
     "◊¿—“Œ“ŒÃ≈–",
     "",
     &cEnable,
@@ -123,25 +123,25 @@ DEF_PAGE_5_VAR( pFreqMeter,                                                     
     PageName::FreqMeter, &PageFunction::self, Item::Active, Page::OpenClose, Page::BeforeDraw, Page::HandlerKeyEvent
 )
 
-const Page * const PageFreqMeter::self = (const Page *)&pFreqMeter;
+const Page * const PageFreqMeter::self = static_cast<const Page *>(&pFreqMeter);
 
 
 
 void PageFreqMeter::Init()
 {
-    Page *page = (Page *)PageFreqMeter::self;
+    Page *page = const_cast<Page *>(PageFreqMeter::self);
 
-    Item **items = (Item **)page->OwnData()->items;
+    Item **items = const_cast<Item **>(page->OwnData()->items);
 
     if (set.freq.modeView == FreqMeterModeView::Frequency)
     {
-        items[2] = (Item *)&cTimeF;
+        items[2] = const_cast<Choice *>(&cTimeF);
         items[3] = &Item::empty;
     }
     else if (set.freq.modeView == FreqMeterModeView::Period)
     {
-        items[2] = (Item *)&cFreqClc;
-        items[3] = (Item *)&cNumPeriods;
+        items[2] = const_cast<Choice *>(&cFreqClc);
+        items[3] = const_cast<Choice *>(&cNumPeriods);
     }
     else
     {
