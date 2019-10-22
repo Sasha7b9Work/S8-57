@@ -32,8 +32,8 @@ static void Draw_Balance_Mode(int, int)
 {
     int8 shift[2][3] =
     {
-        {0, set.ch[Chan::A].balanceShiftADC, (int8)set.dbg.nrst.balanceADC[Chan::A]},
-        {0, set.ch[Chan::B].balanceShiftADC, (int8)set.dbg.nrst.balanceADC[Chan::B]}
+        {0, set.ch[Chan::A].balanceShiftADC, static_cast<int8>(set.dbg.nrst.balanceADC[Chan::A])},
+        {0, set.ch[Chan::B].balanceShiftADC, static_cast<int8>(set.dbg.nrst.balanceADC[Chan::B])}
     };
 
     shiftADCA = shift[Chan::A][set.dbg.nrst.balanceADCtype];
@@ -96,7 +96,7 @@ DEF_PAGE_3( pBalance, // -V641 // -V1027                                        
     &PageDebug::PageADC::self, Item::Active, Page::OpenClose, Page::BeforeDraw, Page::HandlerKeyEvent
 )
 
-const Page * const PageDebug::PageADC::PageBalance::self = (const Page *)&pBalance;
+const Page * const PageDebug::PageADC::PageBalance::self = static_cast<const Page *>(&pBalance);
 
 
 static int16 stretchA;
@@ -168,7 +168,7 @@ DEF_PAGE_3( pStretch, // -V641 // -V1027                                        
     &PageDebug::PageADC::self, Item::Active, Page::OpenClose, Page::BeforeDraw, Page::HandlerKeyEvent
 )
 
-const Page * const PageDebug::PageADC::PageStretch::self = (const Page *)&pStretch;
+const Page * const PageDebug::PageADC::PageStretch::self = static_cast<const Page *>(&pStretch);
 
 
 
@@ -264,7 +264,7 @@ DEF_PAGE_7( pShift, // -V641  // -V1027                                         
     &PageDebug::PageADC::self, Item::Active, Page::OpenClose, Page::BeforeDraw, Page::HandlerKeyEvent
 )
 
-const Page * const PageDebug::PageADC::PageShift::self = (const Page *)&pShift;
+const Page * const PageDebug::PageADC::PageShift::self = static_cast<const Page *>(&pShift);
 
 
 DEF_PAGE_3( pADC, //-V641 //-V1027
@@ -277,7 +277,7 @@ DEF_PAGE_3( pADC, //-V641 //-V1027
     &PageDebug::self, Item::Active, Page::OpenClose, Page::BeforeDraw, Page::HandlerKeyEvent
 )
 
-const Page * const PageDebug::PageADC::self = (const Page *)&pADC;
+const Page * const PageDebug::PageADC::self = static_cast<const Page *>(&pADC);
 
 
 DEF_CHOICE_2( cStats,                                                                                                                                          //--- Œ“À¿ƒ ¿ - —Ú‡ÚËÒÚËÍ‡ ---
@@ -380,7 +380,7 @@ DEF_PAGE_5( pSettings, // -V641 // -V1027                                       
     &PageDebug::self, Item::Active, OnOpenClose_Settings, Page::BeforeDraw, Page::HandlerKeyEvent
 )
 
-const Page * const PageDebug::PageSettings::self = (const Page *)&pSettings;
+const Page * const PageDebug::PageSettings::self = static_cast<const Page *>(&pSettings);
 
 
 
@@ -478,7 +478,7 @@ DEF_PAGE_2( pSerialNumber, // -V641 // -V1027                                   
     &PageDebug::self, Item::Active, OnOpenClose_SerialNumber, Page::BeforeDraw, HandlerKey_SerialNumber
 )
 
-const Page * const PageDebug::PageSerialNumber::self = (const Page *)&pSerialNumber;
+const Page * const PageDebug::PageSerialNumber::self = static_cast<const Page *>(&pSerialNumber);
 
 
 DEF_PAGE_5( pDebug, // -V641 // -V1027                                                                                                                                   //--- Œ“À¿ƒ ¿ ---
@@ -493,7 +493,7 @@ DEF_PAGE_5( pDebug, // -V641 // -V1027                                          
     &PageService::self, Item::Active, Page::OpenClose, Page::BeforeDraw, Page::HandlerKeyEvent
 )
 
-const Page * const PageDebug::self = (const Page *)&pDebug;
+const Page * const PageDebug::self = static_cast<const Page *>(&pDebug);
 
 
 
@@ -530,6 +530,6 @@ float GetStretchADC(Chan::E ch)
 //---------------------------------------------------------------------------------------------------------------------------------------------------
 void SetStretchADC(Chan::E ch, float kStretch)
 {
-    set.dbg.nrst.stretchADC[ch][set.dbg.nrst.stretchADCtype] = (int16)((kStretch - 1.0F) * 1e4F);
+    set.dbg.nrst.stretchADC[ch][set.dbg.nrst.stretchADCtype] = static_cast<int16>((kStretch - 1.0F) * 1e4F);
 }
 

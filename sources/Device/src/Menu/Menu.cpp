@@ -214,12 +214,12 @@ static void CloseIfSubPage(Page *parent, Page *page)
         ClosePage(parent);
     }
 
-    if (((Page *)page)->IsSubPage(parent))
+    if (page->IsSubPage(parent))
     {
         while (page)
         {
             ClosePage(page);
-            page = (Page *)page->Keeper();
+            page = const_cast<Page *>(page->Keeper());
         }
     }
 }
@@ -230,12 +230,12 @@ void Menu::Init()
     PageMultimeter::Init();
     PageFreqMeter::Init();
 
-    if ((Page *)LastOpened((Page *)PageFunction::self) == PageMultimeter::self) //-V1027
+    if (static_cast<Page *>(LastOpened(const_cast<Page *>(PageFunction::self))) == PageMultimeter::self) //-V1027
     {
-        ClosePage((Page *)PageMultimeter::self);
+        ClosePage(const_cast<Page *>(PageMultimeter::self));
     }
 
-    Page *opened = (Page *)LastOpened((Page *)PageFunction::self); //-V1027
+    Page *opened = static_cast<Page *>(LastOpened(const_cast<Page *>(PageFunction::self))); //-V1027
 
     CloseIfSubPage(const_cast<Page *>(PageMultimeter::self), opened);
     CloseIfSubPage(const_cast<Page *>(PageRecorder::self), opened);
@@ -251,7 +251,7 @@ void Menu::CloseOpenedItem()
 
     if (item->Is(TypeItem::Page))
     {
-        ClosePage((Page *)item); //-V1027
+        ClosePage(static_cast<Page *>(item)); //-V1027
     }
     else
     {
@@ -262,7 +262,7 @@ void Menu::CloseOpenedItem()
 
 Item *Menu::OpenedItem()
 {
-    return LastOpened((Page *)Menu::mainPage);
+    return LastOpened(const_cast<Page *>(Menu::mainPage));
 }
 
 
@@ -300,11 +300,11 @@ Item *Menu::CurrentItem()
 {
     Item *result = OpenedItem();
 
-    int8 pos = ((const Page *)result)->PosCurrentItem();
+    int8 pos = static_cast<Page *>(result)->PosCurrentItem();
 
     if (result->Is(TypeItem::Page) && pos != 0x7f)
     {
-        result = ((const Page *)result)->GetItem(pos);
+        result = static_cast<Page *>(result)->GetItem(pos);
     }
 
     return result;
@@ -327,7 +327,7 @@ static void DrawHintItem(int x, int y, int width)
             "Кнопка"              // Item::Type::DrawButton
         };
 
-        Page *item = (Page *)itemHint;
+        Page *item = static_cast<Page *>(itemHint);
 
         const int SIZE = 100;
         char title[SIZE];
@@ -339,7 +339,7 @@ static void DrawHintItem(int x, int y, int width)
 
         if (item->Is(TypeItem::GraphButton))
         {
-            ((GraphButton *)item)->DrawHints(x, y, width);   // -V1027
+            reinterpret_cast<GraphButton *>(item)->DrawHints(x, y, width);   // -V1027
         }
     }
 }
@@ -361,7 +361,7 @@ void Menu::Draw()
         {
             if (!item->Is(TypeItem::Page))
             {
-                item = (Item *)item->Keeper();
+                item = const_cast<Item *>(static_cast<const Item *>(item->Keeper()));
             }
 
             if (item)
@@ -414,7 +414,7 @@ static void DrawHint()
 void Menu::SetItemForHint(const Item *item)
 {
     stringForHint = nullptr;
-    itemHint = (Item *)item;
+    itemHint = const_cast<Item *>(item);
 }
 
 
@@ -444,7 +444,7 @@ const Item *Menu::ItemUnderFunctionalKey(Key::E key)
         }
         else if (item->Is(TypeItem::Page))
         {
-            result = ((Page *)item)->ItemForFuncKey(key);
+            result = (static_cast<Page *>(item))->ItemForFuncKey(key);
         }
         else
         {

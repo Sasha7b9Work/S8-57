@@ -126,7 +126,10 @@ static void Draw_T(int x, int y)
         {
             bool condLeft = false, condDown = false;
             Chan::E source = set.curs.source;
-            CalculateConditions((int16)CursorsMeasurements::PosT(source, 0), (int16)CursorsMeasurements::PosT(source, 1), set.curs.cntrlT[set.curs.source], &condLeft, &condDown);
+
+            CalculateConditions(static_cast<int16>(CursorsMeasurements::PosT(source, 0)), static_cast<int16>(CursorsMeasurements::PosT(source, 1)), 
+                set.curs.cntrlT[set.curs.source], &condLeft, &condDown);
+
             if (condLeft && condDown)
             {
                 Draw_T_enableBoth(x, y);
@@ -223,7 +226,10 @@ static void Draw_U(int x, int y)
         else
         {
             bool condTop = false, condDown = false;
-            CalculateConditions((int16)CursorsMeasurements::PosU(source, 0), (int16)CursorsMeasurements::PosU(source, 1), set.curs.cntrlU[set.curs.source], &condTop, &condDown);
+
+            CalculateConditions(static_cast<int16>(CursorsMeasurements::PosU(source, 0)), static_cast<int16>(CursorsMeasurements::PosU(source, 1)),
+                set.curs.cntrlU[set.curs.source], &condTop, &condDown);
+
             if (condTop && condDown)
             {
                 Draw_U_enableBoth(x, y);
@@ -283,7 +289,7 @@ static void Draw_Movement_Points(int x, int y)
 
 static void OnPress_Movement()
 {
-    Math::CircleIncrease<int8>((int8 *)& set.curs.movement, 0, 1);
+    Math::CircleIncrease<int8>(reinterpret_cast<int8 *>(&set.curs.movement), 0, 1);
 }
 
 static void Draw_Movement(int x, int y)
@@ -380,7 +386,7 @@ DEF_PAGE_5( pSet, // -V641 // -V1027                                            
     PageName::CursorsMeasures_Set, &PageCursorsMeasures::self, IsActive_Set, Page::OpenClose, Page::BeforeDraw, PageCursorsMeasures::PageSet::HandlerKey
 )
 
-const Page * const PageCursorsMeasures::PageSet::self = (const Page *)&pSet;
+const Page * const PageCursorsMeasures::PageSet::self = static_cast<const Page *>(&pSet);
 
 
 
@@ -392,20 +398,20 @@ void PageCursorsMeasures::PageSet::SetCursSource(Chan::E ch)
 
 void PageCursorsMeasures::PageSet::IncCursCntrlU(Chan::E ch)
 {
-    Math::CircleIncrease<int8>((int8 *)& set.curs.cntrlU[ch], 0, 3);
+    Math::CircleIncrease<int8>(reinterpret_cast<int8 *>(&set.curs.cntrlU[ch]), 0, 3);
 }
 
 
 void PageCursorsMeasures::PageSet::IncCursCntrlT(Chan::E ch)
 {
-    Math::CircleIncrease<int8>((int8 *)& set.curs.cntrlT[ch], 0, 3);
+    Math::CircleIncrease<int8>(reinterpret_cast<int8 *>(&set.curs.cntrlT[ch]), 0, 3);
 }
 
 
 void PageCursorsMeasures::PageSet::SetCursPos100(Chan::E ch)
 {
-    set.curs.deltaU100percents[ch] = (float)std::fabsf(set.curs.posCurU[ch][0] - set.curs.posCurU[ch][1]);
-    set.curs.deltaT100percents[ch] = (float)std::fabsf(CursorsMeasurements::PosT(ch, 0) - CursorsMeasurements::PosT(ch, 1));
+    set.curs.deltaU100percents[ch] = static_cast<float>(std::fabsf(set.curs.posCurU[ch][0] - set.curs.posCurU[ch][1]));
+    set.curs.deltaT100percents[ch] = static_cast<float>(std::fabsf(CursorsMeasurements::PosT(ch, 0) - CursorsMeasurements::PosT(ch, 1)));
 }
 
 

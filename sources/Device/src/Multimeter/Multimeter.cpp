@@ -14,7 +14,7 @@ public:
     }
     static void Transmit(void *_buffer, uint timeout)
     {
-        uint8 *pointer = (uint8 *)_buffer;
+        uint8 *pointer = static_cast<uint8 *>(_buffer);
 
         uint size = 0;
         while (*pointer != 0x0a)
@@ -94,11 +94,11 @@ void Multimeter::Update()
     }
     
     uint8 range = 0;
-    if(set.mult.meas == MultimeterMeasure::VoltageDC)        { range = (uint8)set.mult.rangeVoltageDC; }
-    else if(set.mult.meas == MultimeterMeasure::VoltageAC)   { range = (uint8)set.mult.rangeVoltageAC; }
-    else if(set.mult.meas == MultimeterMeasure::CurrentDC)   { range = (uint8)set.mult.rangeCurrentDC; }
-    else if(set.mult.meas == MultimeterMeasure::CurrentAC)   { range = (uint8)set.mult.rangeCurrentAC; }
-    else if(set.mult.meas == MultimeterMeasure::Resistance)  { range = (uint8)set.mult.rangeResist; }
+    if(set.mult.meas == MultimeterMeasure::VoltageDC)        { range = static_cast<uint8>(set.mult.rangeVoltageDC); }
+    else if(set.mult.meas == MultimeterMeasure::VoltageAC)   { range = static_cast<uint8>(set.mult.rangeVoltageAC); }
+    else if(set.mult.meas == MultimeterMeasure::CurrentDC)   { range = static_cast<uint8>(set.mult.rangeCurrentDC); }
+    else if(set.mult.meas == MultimeterMeasure::CurrentAC)   { range = static_cast<uint8>(set.mult.rangeCurrentAC); }
+    else if(set.mult.meas == MultimeterMeasure::Resistance)  { range = static_cast<uint8>(set.mult.rangeResist); }
     else
     {
         // больше выборов нету
@@ -106,7 +106,13 @@ void Multimeter::Update()
 
     char symbol = MultimeterMeasure(set.mult.meas).Symbol();
 
-    uint8 send[] = {0x02, (uint8)symbol, (uint8)(range + 0x30), 0x0a};
+    uint8 send[] =
+    {
+        0x02,
+        static_cast<uint8>(symbol),
+        static_cast<uint8>(range + 0x30),
+        0x0a
+    };
 
     USART3_::Transmit(send, 100);
 
