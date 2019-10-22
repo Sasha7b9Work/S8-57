@@ -92,7 +92,7 @@ bool Item::IsCurrentItem() const
 
 void Item::Open(bool open) const
 {
-    Page *parent = (Page *)Keeper();
+    Page *parent = const_cast<Page *>(Keeper());
     if (parent)
     {
         parent->SetPosActItem(open ? (parent->PosCurrentItem() | 0x80) : (parent->PosCurrentItem() & 0x7f));
@@ -128,7 +128,7 @@ bool Item::IsOpened() const
 
 void Item::SetCurrent(bool active) const
 {
-    Page *page = (Page *)Keeper();
+    Page *page = const_cast<Page *>(Keeper());
 
     if (page)
     {
@@ -142,7 +142,7 @@ void Item::SetCurrent(bool active) const
             {
                 if (page->GetItem(i) == this)
                 {
-                    page->SetPosActItem((int8)i);
+                    page->SetPosActItem(static_cast<int8>(i));
                     return;
                 }
             }
@@ -316,7 +316,7 @@ bool Page::IsSubPage(const Page *parent)
             break;
         }
 
-        keep = ((Item *)keep)->Keeper();
+        keep = (static_cast<Item *>(const_cast<Page *>(keep)))->Keeper();
     }
 
     return result;
@@ -325,7 +325,7 @@ bool Page::IsSubPage(const Page *parent)
 
 PageName::E Page::GetName() const
 {
-    return (PageName::E)OwnData()->name;
+    return static_cast<PageName::E>(OwnData()->name);
 }
 
 
@@ -397,7 +397,7 @@ Item *Page::GetItem(int numItem) const
 
     if (numItem < NumItems())
     {
-        result = (Item *)OwnData()->items[numItem];
+        result = const_cast<Item *>(OwnData()->items[numItem]);
     }
 
     return result;
@@ -509,7 +509,7 @@ void Governor::NextPosition() const
 {
     if (Menu::OpenedItem() == this)
     {
-        Math::CircleIncrease<int8>(&currentDigit, 0, (int8)(NumDigits() - 1));
+        Math::CircleIncrease<int8>(&currentDigit, 0, static_cast<int8>(NumDigits() - 1));
     }
 }
 
@@ -594,7 +594,7 @@ uint Governor::NumDigits() const
     {
         max = min;
     }
-    return (uint)max;
+    return static_cast<uint>(max);
 }
 
 
@@ -607,7 +607,7 @@ void Governor::ChangeValue(int16 delta)
 
     int16 oldValue = GetValue();
 
-    int16 newValue = GetValue() + (int16)(Math::Sign(delta) * Math::Pow10(currentDigit));
+    int16 newValue = GetValue() + static_cast<int16>(Math::Sign(delta) * Math::Pow10(currentDigit));
 
     LIMITATION(newValue, OwnData()->min, OwnData()->max); //-V2516
 
@@ -657,7 +657,7 @@ void Governor::PrevPosition()
 {
     if (Menu::OpenedItem() == this)
     {
-        Math::CircleDecrease<int8>(&currentDigit, 0, (int8)(NumDigits() - 1));
+        Math::CircleDecrease<int8>(&currentDigit, 0, static_cast<int8>(NumDigits() - 1));
     }
 }
 
@@ -771,7 +771,7 @@ void Choice::ChangeIndex(int delta) const
             index = NumChoices() - 1;
         }
     }
-    *OwnData()->cell = (int8)index;
+    *OwnData()->cell = static_cast<int8>(index);
     OwnData()->handlerChange(IsActive());
     Beeper::GovernorChangedValue();
     DisplayOsci::SetFlagRedraw();
@@ -809,7 +809,7 @@ void Choice::StartChange(int delta) const
         }
         else
         {
-            tsChoice.address = (void *)this;
+            tsChoice.address = const_cast<void *>(static_cast<const void *>(this));
             tsChoice.timeStart = TIME_MS;
             tsChoice.dir = delta > 0 ? INCREASE : DECREASE;
         }
@@ -819,7 +819,7 @@ void Choice::StartChange(int delta) const
 
 char Choice::GetSymbol()
 {
-    return ((Governor*)this)->GetSymbol();  // -V1027
+    return (reinterpret_cast<Governor*>(this))->GetSymbol();  // -V1027
 }
 
 
@@ -843,7 +843,7 @@ float Choice::Step() const //-V2506
             {
                 return delta;
             }
-            Math::CircleIncrease<int8>(&index, 0, (int8)NumChoices() - 1);
+            Math::CircleIncrease<int8>(&index, 0, static_cast<int8>(NumChoices()) - 1);
         }
         else if (tsChoice.dir == DECREASE)
         {
@@ -853,7 +853,7 @@ float Choice::Step() const //-V2506
             {
                 return delta;
             }
-            Math::CircleDecrease<int8>(&index, 0, (int8)NumChoices() - 1);
+            Math::CircleDecrease<int8>(&index, 0, static_cast<int8>(NumChoices()) - 1);
         }
         else
         {
@@ -874,7 +874,7 @@ float Choice::Step() const //-V2506
 
 String Choice::NameCurrentSubItem() const
 {
-    return ((int8 *)OwnData()->cell == 0) ? String("") : String(NAME_FROM_INDEX(*OwnData()->cell));
+    return (OwnData()->cell == 0) ? String("") : String(NAME_FROM_INDEX(*OwnData()->cell));
 }
 
 
@@ -884,7 +884,7 @@ const char *Choice::NameNextSubItem() const
 
     if (OwnData()->cell != 0)
     {
-        int index = *((int8 *)OwnData()->cell) + 1;
+        int index = *(static_cast<int8 *>(OwnData()->cell)) + 1;
 
         if (index == NumChoices())
         {
@@ -904,7 +904,7 @@ const char *Choice::NamePrevSubItem() const
 
     if (OwnData()->cell != 0)
     {
-        int index = *((int8 *)OwnData()->cell) - 1;
+        int index = *(static_cast<int8 *>(OwnData()->cell)) - 1;
 
         if (index < 0)
         {

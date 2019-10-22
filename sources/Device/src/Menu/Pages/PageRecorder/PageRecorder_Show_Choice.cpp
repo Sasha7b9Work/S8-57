@@ -55,7 +55,7 @@ static void OnPress_Confirm()
 
 static void Draw_Confirm(int x, int y)
 {
-    Char(SymbolUGO2::SELECT).Draw4SymbolsInRect(x + 2, y + 4);
+    Char(SymbolUGO2::SELECT).Draw4SymbolsInRect(x + 4, y);
 }
 
 static bool IsActive_Confirm()
@@ -63,19 +63,53 @@ static bool IsActive_Confirm()
     return true;
 }
 
-DEF_GRAPH_BUTTON( bConfirm,
+DEF_GRAPH_BUTTON( bConfirm,                                                                                                  //--- ФУНКЦИЯ - РЕГИСТРАТОР - ПРОСМОТР - ВЫБОР - Подтвердить ---
     "Подтвердить",
     "Выбрать текущий сигнал",
     &PageRecorder::PageShow::PageChoice::self, IsActive_Confirm, OnPress_Confirm, Draw_Confirm
 )
 
 
-DEF_PAGE_3( pChoice,
+static void OnPress_Leave()
+{
+}
+
+static void Draw_Leave(int x, int y)
+{
+    Char(SymbolUGO2::LEAVE).Draw4SymbolsInRect(x + 4, y);
+}
+
+DEF_GRAPH_BUTTON( bLeave,                                                                                                        //--- ФУНКЦИЯ - РЕГИСТРАТОР - ПРОСМОТР - ВЫБОР - Возврат ---
+    "Возврат",
+    "Возврат на предыдущую страницу меню",
+    &PageRecorder::PageShow::PageChoice::self, Button::Active, OnPress_Leave, Draw_Leave
+)
+
+
+static void OnPress_Delete()
+{
+}
+
+static void Draw_Delete(int x, int y)
+{
+    Char(SymbolUGO2::DELETE).Draw4SymbolsInRect(x + 4, y);
+}
+
+DEF_GRAPH_BUTTON( bDelete,                                                                                                       //--- ФУНКЦИЯ - РЕГИСТРАТОР - ПРОСМОТР - ВЫБОР - Удалить ---
+    "Удалить",
+    "Удаление текущей записи",
+    &PageRecorder::PageShow::PageChoice::self, Button::Active, OnPress_Delete, Draw_Delete
+)
+
+
+DEF_PAGE_5( pChoice,
     "ВЫБОР",
     "Выбор сигнала для показа",
     &bPrevious,
     &bNext,
     &bConfirm,
+    &bLeave,
+    &bDelete,
     PageName::Recorder_Show_Choice,
     &PageRecorder::PageShow::self, Item::Active, Page::OpenClose, Page::BeforeDraw, Page::HandlerKeyEvent
 )

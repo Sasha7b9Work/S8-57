@@ -15,7 +15,7 @@ static void OnPress_Screen()
     }
     else
     {
-        Math::CircleIncrease<int8>((int8 *)&set.math.modeDraw, 0, 2);
+        Math::CircleIncrease<int8>(reinterpret_cast<int8 *>(&set.math.modeDraw), 0, 2);
     }
 }
 
@@ -62,7 +62,7 @@ DEF_GRAPH_BUTTON_HINTS_3( bScreen,                                              
 
 static void OnPress_Type()
 {
-    Math::CircleIncrease<int8>((int8 *)&set.math.function, 0, 1);
+    Math::CircleIncrease<int8>(reinterpret_cast<int8 *>(&set.math.function), 0, 1);
 }
 
 static void Draw_Type_Sum(int x, int y)
@@ -100,7 +100,7 @@ DEF_GRAPH_BUTTON_HINTS_2( bType,                                                
 
 static void OnPress_ModeArrows()
 {
-    Math::CircleIncrease<int8>((int8 *)&set.math.modeRegSet, 0, 1);
+    Math::CircleIncrease<int8>(reinterpret_cast<int8*>(&set.math.modeRegSet), 0, 1);
 }
 
 static void Draw_ModeArrows_Range(int x, int y)
@@ -138,7 +138,7 @@ DEF_GRAPH_BUTTON_HINTS_2( bModeArrows,                                          
 static void OnPress_RangeA()
 {
     set.math.range = set.ch[Chan::A].range;
-    set.math.divider = (int8)set.ch[Chan::A].divider;
+    set.math.divider = static_cast<int8>(set.ch[Chan::A].divider);
 }
 
 static void Draw_RangeA(int x, int y)
@@ -161,7 +161,7 @@ DEF_GRAPH_BUTTON( bRangeA,                                                      
 static void OnPress_RangeB()
 {
     set.math.range = set.ch[Chan::B].range;
-    set.math.divider = (int8)set.ch[Chan::B].divider;
+    set.math.divider = static_cast<int8>(set.ch[Chan::B].divider);
 }
 
 static void Draw_RangeB(int x, int y)
@@ -249,8 +249,8 @@ static bool HandlerKey_Function(const KeyEvent &event) // -V2506
         {
             if (set.math.range < Range::Size - 1)
             {
-                set.math.range = (Range::E)((uint8)(set.math.range + 1));  // SET_RANGE_MATH++;
-                set.math.rShift = (uint16)MathFPGA::RShift2Rel(rShiftAbs, set.math.range);
+                set.math.range = static_cast<Range::E>(static_cast<uint8>(set.math.range + 1));  // SET_RANGE_MATH++;
+                set.math.rShift = static_cast<uint16>(MathFPGA::RShift2Rel(rShiftAbs, set.math.range));
                 Beeper::RegulatorSwitchRotate();
             }
             sum = 0;
@@ -259,8 +259,8 @@ static bool HandlerKey_Function(const KeyEvent &event) // -V2506
         {
             if (set.math.range > 0)
             {
-                set.math.range = (Range::E)((uint8)(set.math.range - 1));  // SET_RANGE_MATH--;
-                set.math.rShift = (uint16)MathFPGA::RShift2Rel(rShiftAbs, set.math.range);
+                set.math.range = static_cast<Range::E>(static_cast<uint8>(set.math.range - 1));  // SET_RANGE_MATH--;
+                set.math.rShift = static_cast<uint16>(MathFPGA::RShift2Rel(rShiftAbs, set.math.range));
                 Beeper::RegulatorSwitchRotate();
             }
             sum = 0;
@@ -285,4 +285,4 @@ DEF_PAGE_5( pMath, // -V641                                                     
     PageName::Math, &PageMeasures::self, IsActive_Math, OnOpenClose_Math, Page::BeforeDraw, HandlerKey_Function
 )
 
-const Page * const PageMath::self = (const Page *)&pMath;
+const Page * const PageMath::self = static_cast<const Page *>(&pMath);

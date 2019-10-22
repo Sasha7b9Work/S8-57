@@ -45,10 +45,10 @@ void RShift::Load(Chan::E ch)
 
     if (Chan(ch).IsA() && Device::State::InModeTester())
     {
-        shift = (uint16)(static_cast<int>(shift) - Tester::DeltaRShiftA());
+        shift = static_cast<uint16>(static_cast<int>(shift) - Tester::DeltaRShiftA());
     }
 
-    GPIO::WriteRegisters(FPin::SPI3_CS1, (uint16)(mask[static_cast<int>(ch)] | (shift << 2)));
+    GPIO::WriteRegisters(FPin::SPI3_CS1, static_cast<uint16>(mask[static_cast<int>(ch)] | (shift << 2)));
 
     Osci::Restart();
 }
@@ -62,17 +62,17 @@ void FPGA::LoadCalibratorMode()
 
 void TShift::LoadReal()
 {
-    FPGA::post = (uint16)(set.time.shift - TShift::Min());
+    FPGA::post = static_cast<uint16>(set.time.shift - TShift::Min());
     int Pred = static_cast<int>FPGA_NUM_POINTS - static_cast<int>(FPGA::post);
 
     if (Pred < 0)
     {
         Pred = 0;
     }
-    FPGA::pred = (uint16)Pred;
+    FPGA::pred = static_cast<uint16>(Pred);
 
-    FPGA::post = (uint16)(~(FPGA::post + 1));
-    FPGA::pred = (uint16)(~(FPGA::pred + 3));
+    FPGA::post = static_cast<uint16>(~(FPGA::post + 1));
+    FPGA::pred = static_cast<uint16>(~(FPGA::pred + 3));
 
     HAL_FSMC::WriteToFPGA16(WR::PRED_LO, FPGA::post);
     HAL_FSMC::WriteToFPGA16(WR::POST_LO, FPGA::pred);
@@ -89,7 +89,7 @@ void TShift::LoadRandomize()
 {
     int k = Osci::Kr[static_cast<int>(set.time.base)];
 
-    FPGA::post = (uint16)((set.time.shift - TShift::Min() - GetK()) / k);
+    FPGA::post = static_cast<uint16>((set.time.shift - TShift::Min() - GetK()) / k);
 
     int Pred = static_cast<int>(FPGA_NUM_POINTS) / k - static_cast<int>(FPGA::post);
 
@@ -97,10 +97,10 @@ void TShift::LoadRandomize()
     {
         Pred = 0;
     }
-    FPGA::pred = (uint16)Pred;
+    FPGA::pred = static_cast<uint16>(Pred);
 
-    FPGA::post = (uint16)(~(FPGA::post + 1));
-    FPGA::pred = (uint16)(~(FPGA::pred));
+    FPGA::post = static_cast<uint16>(~(FPGA::post + 1));
+    FPGA::pred = static_cast<uint16>(~(FPGA::pred));
 
     HAL_FSMC::WriteToFPGA16(WR::PRED_LO, FPGA::pred);
     HAL_FSMC::WriteToFPGA16(WR::POST_LO, FPGA::post);
@@ -147,11 +147,11 @@ void Range::Change(Chan::E ch, int delta)
 
     if (delta > 0)
     {
-        ::Math::LimitationIncrease<uint8>((uint8 *)(&set.ch[static_cast<int>(ch)].range), (uint8)(Range::Size - 1)); // -V206
+        ::Math::LimitationIncrease<uint8>(reinterpret_cast<uint8 *>(&set.ch[static_cast<int>(ch)].range), static_cast<uint8>(Range::Size - 1)); // -V206
     }
     else
     {
-        ::Math::LimitationDecrease<uint8>((uint8 *)(&set.ch[static_cast<int>(ch)].range), 0);  // -V206
+        ::Math::LimitationDecrease<uint8>(reinterpret_cast<uint8 *>(&set.ch[static_cast<int>(ch)].range), 0);  // -V206
     }
     Range::LoadBoth();
 
@@ -244,7 +244,7 @@ String TShift::ToString(TBase::E tBase)
 
 String RShift::ToString(uint16 rShiftRel, Range::E range, int8 _divider)
 {
-    float rShiftVal = MathFPGA::RShift2Abs(rShiftRel, range) * Divider((uint)_divider).ToAbs();
+    float rShiftVal = MathFPGA::RShift2Abs(rShiftRel, range) * Divider(static_cast<uint>(_divider)).ToAbs();
     return Voltage(rShiftVal).ToString(true);
 }
 
