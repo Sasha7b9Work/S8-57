@@ -60,18 +60,18 @@ void HAL_RTC::Init()
 
     __HAL_RCC_RTC_ENABLE();
 
-    HAL_StatusTypeDef status = HAL_RTC_Init((RTC_HandleTypeDef*)&handleRTC);
+    HAL_StatusTypeDef status = HAL_RTC_Init(&handleRTC);
 
     if (status != HAL_OK)
     {
         ERROR_HANDLER();
     }
 
-    if (HAL_RTCEx_BKUPRead((RTC_HandleTypeDef*)&handleRTC, RTC_BKP_DR0) != VALUE_FOR_RTC)
+    if (HAL_RTCEx_BKUPRead(&handleRTC, RTC_BKP_DR0) != VALUE_FOR_RTC)
     {
         if (SetPackedTime(PackedTime()))
         {
-            HAL_RTCEx_BKUPWrite((RTC_HandleTypeDef*)&handleRTC, RTC_BKP_DR0, VALUE_FOR_RTC);
+            HAL_RTCEx_BKUPWrite(&handleRTC, RTC_BKP_DR0, VALUE_FOR_RTC);
         }
     }
 }
@@ -83,14 +83,14 @@ PackedTime HAL_RTC::GetPackedTime()
 
     RTC_TimeTypeDef isTime;
 
-    HAL_RTC_GetTime((RTC_HandleTypeDef*)&handleRTC, &isTime, FORMAT_BIN);
+    HAL_RTC_GetTime(&handleRTC, &isTime, FORMAT_BIN);
 
     time.hours = isTime.Hours;
     time.minutes = isTime.Minutes;
     time.seconds = isTime.Seconds;
 
     RTC_DateTypeDef isDate;
-    HAL_RTC_GetDate((RTC_HandleTypeDef*)&handleRTC, &isDate, FORMAT_BIN);
+    HAL_RTC_GetDate(&handleRTC, &isDate, FORMAT_BIN);
 
     time.year = isDate.Year;
     time.month = isDate.Month;
@@ -106,24 +106,24 @@ bool HAL_RTC::SetPackedTime(const PackedTime &time)
 {
     RTC_DateTypeDef dateStruct;
     dateStruct.WeekDay = RTC_WEEKDAY_MONDAY;
-    dateStruct.Month = (uint8)time.month;
-    dateStruct.Date = (uint8)time.day;
-    dateStruct.Year = (uint8)time.year;
+    dateStruct.Month = static_cast<uint8>(time.month);
+    dateStruct.Date = static_cast<uint8>(time.day);
+    dateStruct.Year = static_cast<uint8>(time.year);
 
-    if (HAL_RTC_SetDate((RTC_HandleTypeDef*)&handleRTC, &dateStruct, FORMAT_BIN) != HAL_OK)
+    if (HAL_RTC_SetDate(&handleRTC, &dateStruct, FORMAT_BIN) != HAL_OK)
     {
         return false;
     };
 
     RTC_TimeTypeDef timeStruct;
-    timeStruct.Hours = (uint8)time.hours;
-    timeStruct.Minutes = (uint8)time.minutes;
-    timeStruct.Seconds = (uint8)time.seconds;
+    timeStruct.Hours = static_cast<uint8>(time.hours);
+    timeStruct.Minutes = static_cast<uint8>(time.minutes);
+    timeStruct.Seconds = static_cast<uint8>(time.seconds);
     timeStruct.TimeFormat = RTC_HOURFORMAT_24;
     timeStruct.DayLightSaving = RTC_DAYLIGHTSAVING_NONE;
     timeStruct.StoreOperation = RTC_STOREOPERATION_SET;
 
-    if (HAL_RTC_SetTime((RTC_HandleTypeDef*)&handleRTC, &timeStruct, FORMAT_BIN) != HAL_OK)
+    if (HAL_RTC_SetTime(&handleRTC, &timeStruct, FORMAT_BIN) != HAL_OK)
     {
         return false;
     };

@@ -13,7 +13,7 @@
 
 void Log::Message(const char *message)
 {
-    Console::AddString((char *)message);
+    Console::AddString(const_cast<char *>(message));
 }
 
 

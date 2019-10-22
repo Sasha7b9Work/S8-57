@@ -13,7 +13,7 @@ void HAL_USART3::Init(pFuncVV _recvHandler)
 {
     __HAL_RCC_USART3_CLK_ENABLE();
 
-    HAL_PIO::Init(HPort::_D, (uint)(HPin::_8 | HPin::_9), HMode::AF_PP, HPull::Up, HSpeed::VeryHigh, HAlternate::AF7_USART3);
+    HAL_PIO::Init(HPort::_D, static_cast<uint>(HPin::_8 | HPin::_9), HMode::AF_PP, HPull::Up, HSpeed::VeryHigh, HAlternate::AF7_USART3);
 
     recvHandler = _recvHandler;
 
@@ -38,13 +38,13 @@ void HAL_USART3::Init(pFuncVV _recvHandler)
 
 void HAL_USART3::Transmit(void *buffer, uint size, uint timeout)
 {
-    HAL_UART_Transmit(&handler, (uint8 *)buffer, (uint16)size, timeout);
+    HAL_UART_Transmit(&handler, static_cast<uint8 *>(buffer), static_cast<uint16>(size), timeout);
 }
 
 
 void HAL_USART3::StartReceiveIT(void *buffer, uint size)
 {
-    HAL_UART_Receive_IT(&handler, (uint8 *)buffer, (uint16)size);
+    HAL_UART_Receive_IT(&handler, static_cast<uint8 *>(buffer), static_cast<uint16>(size));
 }
 
 

@@ -68,7 +68,7 @@ void EEPROM::EraseSector(uint address)
 
 void EEPROM::WriteData(uint address, const void *data, int size)
 {
-    HAL_EEPROM::WriteBytes(address, (const uint8 *)data, size);
+    HAL_EEPROM::WriteBytes(address, static_cast<const uint8 *>(data), size);
 }
 
 
@@ -112,7 +112,7 @@ static uint AddressSavedSettings(int)
 
 static void ReadBytes(uint address, void *data, uint size)
 {
-    uint8 *buffer = (uint8 *)data;
+    uint8 *buffer = static_cast<uint8 *>(data);
 
     for (uint i = 0; i < size; i++)
     {
@@ -155,7 +155,7 @@ String OTPmem::GetSerialNumber(int *freeForWrite)
 }
 
 
-bool OTPmem::SaveSerialNumber(char *servialNumber) //-V2506
+bool OTPmem::SaveSerialNumber(char *servialNumber)
 {
     return HAL_OTP::SaveSerialNumber(servialNumber);
 }
@@ -163,7 +163,7 @@ bool OTPmem::SaveSerialNumber(char *servialNumber) //-V2506
 
 static uint ReadDoubleWord(uint address)
 {
-    return (*((uint *)address));
+    return *(reinterpret_cast<uint *>(address));
 }
 
 
