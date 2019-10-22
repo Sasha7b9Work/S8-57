@@ -148,10 +148,10 @@ void Transceiver::Send(const uint8 *data, uint size)
     {
         uint8 d = *data++;
 
-        //                                                      биты 0,1                      биты 2, 3
-        GPIOD->ODR = (GPIOD->ODR & 0x3ffc) + (uint16)(((int16)d & 0x03) << 14) + (((uint16)(d & 0x0c)) >> 2);           // Записываем данные в выходные пины
-        //                                                    Биты 4,5,6,7
-        GPIOE->ODR = (GPIOE->ODR & 0xf87f) + (uint16)(((int16)d & 0xf0) << 3);
+        //                                                                             биты 0,1                                 биты 2,3
+        GPIOD->ODR = (GPIOD->ODR & 0x3ffc) + static_cast<uint16>((static_cast<int16>(d) & 0x03) << 14) + ((static_cast<uint16>(d & 0x0c)) >> 2);           // Записываем данные в выходные пины
+        //                                                                          Биты 4,5,6,7
+        GPIOE->ODR = (GPIOE->ODR & 0xf87f) + static_cast<uint16>((static_cast<int16>(d) & 0xf0) << 3);
 
         PORT_MODE1->BSRR = PIN_MODE1;                   // Установить MODE1 в "1" - это означает, что M0M1 == 01 и устройство ждёт подверждения от панели о принятых данных
 
@@ -247,7 +247,7 @@ uint8 Receiver::ReadData()
 
     for (int i = 7; i >= 0; i--)
     {
-        result |= HAL_GPIO_ReadPin((GPIO_TypeDef *)ports[i], pins[i]);
+        result |= HAL_GPIO_ReadPin(const_cast<GPIO_TypeDef *>(ports[i]), pins[i]);
 
         if (i != 0)
         {
