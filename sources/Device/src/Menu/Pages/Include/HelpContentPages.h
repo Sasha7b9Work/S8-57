@@ -37,7 +37,7 @@ extern const PageHelpContent helpMenu;
 static const PageHelpContent helpMenuCommon =
 {
     TypePage_Description, {},
-    (void *)&helpMenu,
+    static_cast<void *>(const_cast<PageHelpContent *>(&helpMenu)),
     {
         "Общее описание принципов меню",
         "Кнопки на панели управления имеют два типа нажатия - короткое, длительностью менее 0.5 сек и длинное, длительностьи более 0.5 сек. "
@@ -62,7 +62,7 @@ static const PageHelpContent helpMenuCommon =
 static const PageHelpContent helpMenuControls =
 {
     TypePage_Description, {},
-    (void *)&helpMenu,
+    static_cast<void *>(const_cast<PageHelpContent *>(&helpMenu)),
     {
         "Описание органов управлениея",
         ""
@@ -75,7 +75,7 @@ extern const PageHelpContent helpMain;
 static const PageHelpContent helpSCPI =
 {
     TypePage_Description, {},
-    (void *)&helpMain,
+    static_cast<void *>(const_cast<PageHelpContent *>(&helpMain)),
     {
         "Работа с SCPI",
         ""
@@ -86,14 +86,14 @@ static const PageHelpContent helpSCPI =
 const PageHelpContent helpMenu =
 {
     TypePage_Content, {},
-    (void *)&helpMain,
+    static_cast<void *>(const_cast<PageHelpContent *>(&helpMain)),
     {
         "Работа с меню",
         "Working with menus"
     },
     {
-        (void *)&helpMenuCommon,
-        (void *)&helpMenuControls
+        static_cast<void *>(const_cast<PageHelpContent *>(&helpMenuCommon)),
+        static_cast<void *>(const_cast<PageHelpContent *>(&helpMenuControls))
     }
 };
 
