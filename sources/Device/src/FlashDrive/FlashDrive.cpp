@@ -59,7 +59,7 @@ static void USBH_UserProcess(USBH_HandleTypeDef *, uint8 id)
             break;
 
         case HOST_USER_CONNECTION:
-            f_mount(NULL, (TCHAR const*)"", 0);
+            f_mount(NULL, static_cast<TCHAR const*>(""), 0);
             break;
 
         case HOST_USER_DISCONNECTION:
@@ -79,7 +79,7 @@ void FDrive::Mount()
 {
     FileManager::Init();
     Menu::ChangeStateFlashDrive();
-    if (f_mount(&USBDISKFatFs, (TCHAR const*)USBDISKPath, 0) != FR_OK)
+    if (f_mount(&USBDISKFatFs, static_cast<TCHAR const*>(USBDISKPath), 0) != FR_OK)
     {
         LOG_ERROR("Не могу примонтировать диск");
     }
@@ -118,7 +118,7 @@ void FDrive::Update()
 
         Display::FuncOnWaitStart("Обнаружено запоминающее устройство", false);
 
-        if (f_mount(&USBDISKFatFs, (TCHAR const*)USBDISKPath, 1) != FR_OK)
+        if (f_mount(&USBDISKFatFs, static_cast<TCHAR const*>(USBDISKPath), 1) != FR_OK)
         {
             Display::ShowWarning("Не могу прочитать флешку. Убедитесь, что на ней FAT32");
         }

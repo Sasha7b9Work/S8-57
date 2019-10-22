@@ -27,7 +27,7 @@ static void DrawPageContent()
 
     while(currentPage->pages[numPage])
     {
-        Page *page = (Page *)currentPage->pages[numPage];
+        Page *page = reinterpret_cast<Page *>(currentPage->pages[numPage]);
         const char *title = page->Title().CString();
         if(currentParagraph == numPage)
         {

@@ -66,8 +66,8 @@ void Math::Smoothing(uint8 *data, int numPoints, int numSmooth)
         return;
     }
 
-    float *buffer = (float *)std::malloc((uint)(numPoints * static_cast<int>(sizeof(float))));
-    int  *num = (int *)std::malloc((uint)(numPoints * static_cast<int>(sizeof(int))));
+    float *buffer = static_cast<float *>(std::malloc(static_cast<uint>(numPoints * static_cast<int>(sizeof(float)))));
+    int  *num = static_cast<int *>(std::malloc(static_cast<uint>(numPoints * static_cast<int>(sizeof(int)))));
 
     if (num != 0 && buffer != 0)
     {
@@ -89,7 +89,7 @@ void Math::Smoothing(uint8 *data, int numPoints, int numSmooth)
 
         for (int i = 1; i < numPoints; i++)
         {
-            data[i] = (uint8)(buffer[i] / num[i] + 0.5F);
+            data[i] = static_cast<uint8>(buffer[i] / num[i] + 0.5F);
         }
     }
 
@@ -248,10 +248,10 @@ float Math::GetIntersectionWithHorizontalLine(int x0, int y0, int x1, int y1, in
 {
     if (y0 == y1)
     {
-        return (float)x1;
+        return static_cast<float>(x1);
     }
 
-    return (yHorLine - y0) / ((float)(y1 - y0) / (float)(x1 - x0)) + x0;
+    return (yHorLine - y0) / (static_cast<float>(y1 - y0) / static_cast<float>(x1 - x0)) + x0;
 }
 
 
@@ -317,7 +317,7 @@ uint8 Math::CalculateFiltr(const uint8 *data, int x, int numPoints, int numSmoot
         }
     }
 
-    return (uint8)(sum / (float)count);
+    return static_cast<uint8>(sum / static_cast<float>(count));
 }
 
 
@@ -325,7 +325,7 @@ void Math::CalculateFiltrArray(const uint8 *dataIn, uint8 *dataOut, int numPoint
 {
     if (numSmoothing < 2)
     {
-        std::memcpy(dataOut, dataIn, (uint)numPoints); //-V107
+        std::memcpy(dataOut, dataIn, static_cast<uint>(numPoints)); //-V107
     }
     else
     {
@@ -358,7 +358,7 @@ void Math::CalculateFiltrArray(const uint8 *dataIn, uint8 *dataOut, int numPoint
                 }
             }
 
-            dataOut[i] = (uint8)(sum / (float)count);
+            dataOut[i] = static_cast<uint8>(sum / static_cast<float>(count));
         }
     }
 }
@@ -414,7 +414,7 @@ float Math::RoundFloat(float value, int numDigits)
     if (digsInInt < numDigits)  // Подстрахуемся
     {
         int pow = Pow10(numDigits - digsInInt);
-        absValue = (static_cast<int>(absValue * pow + 0.5F)) / (float)pow;
+        absValue = (static_cast<int>(absValue * pow + 0.5F)) / static_cast<float>(pow);
     }
 
     return value > 0.0F ? absValue : -absValue;

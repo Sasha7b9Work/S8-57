@@ -94,11 +94,11 @@ static bool CalculateGate(uint16 rand, uint16 *eMin, uint16 *eMax)
         min = 0xffff;
         max = 0;
 
-        LOG_WRITE("Новые ворота %d %d", (uint16)minGate, (uint16)(maxGate - 50));
+        LOG_WRITE("Новые ворота %d %d", static_cast<uint16>(minGate), static_cast<uint16>(maxGate - 50));
     }
 
-    *eMin = (uint16)(minGate);      // -V519 // -V2004
-    *eMax = (uint16)(maxGate - 50); // -V519 // -V2004
+    *eMin = static_cast<uint16>(minGate);      // -V519 // -V2004
+    *eMax = static_cast<uint16>(maxGate - 50); // -V519 // -V2004
 
     if (rand < *eMin || rand > *eMax)
     {
@@ -130,8 +130,8 @@ int FPGA::CalculateShift()
     if (Osci::InModeRandomizer())
     {
 
-        float tin = (float)(valueADC - min + deltaMIN) / (max - deltaMAX - (min + deltaMIN));
-        int retValue = (int)(tin * Osci::Kr[set.time.base]);
+        float tin = static_cast<float>(valueADC - min + deltaMIN) / (max - deltaMAX - (min + deltaMIN));
+        int retValue = static_cast<int>(tin * Osci::Kr[set.time.base]);
 
         return retValue;
     }
@@ -199,10 +199,10 @@ bool FPGA::ReadDataChanenl(Chan::E ch, uint8 data[FPGA::MAX_NUM_POINTS])
             k = Osci::Kr[set.time.base];
         }
 
-        addrRead = (uint16)(ReadLastRecord(ch) - (int)numPoints / k);
+        addrRead = static_cast<uint16>(ReadLastRecord(ch) - static_cast<int>(numPoints) / k);
     }
 
-    HAL_FSMC::WriteToFPGA16(WR::PRED_LO, (uint16)(addrRead));
+    HAL_FSMC::WriteToFPGA16(WR::PRED_LO, static_cast<uint16>(addrRead));
     HAL_FSMC::WriteToFPGA8(WR::START_ADDR, 0xff);
 
 
