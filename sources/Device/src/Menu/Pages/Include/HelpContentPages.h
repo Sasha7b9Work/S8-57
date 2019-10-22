@@ -106,7 +106,7 @@ const PageHelpContent helpMain =
         "HELP"
     },
     {
-        (void *)&helpMenu,
-        (void *)&helpSCPI
+        static_cast<void *>(const_cast<PageHelpContent *>(&helpMenu)),
+        static_cast<void *>(const_cast<PageHelpContent *>(&helpSCPI))
     }
 };
