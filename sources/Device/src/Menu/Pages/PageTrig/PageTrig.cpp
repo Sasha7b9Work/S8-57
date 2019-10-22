@@ -103,7 +103,7 @@ DEF_CHOICE_3( cFiltr, // -V206                                                  
     set.trig.input, &PageTrig::self, Item::Active, OnChanged_Filtr, Choice::AfterDraw
 )
 
-DEF_PAGE_6( pTrig, // -V641 // -V1027                                                                                                                                         //--- СИНХР ---
+DEF_PAGE_6( pTrig,                                                                                                                                           //--- СИНХР ---
     "СИНХР",
     "Содержит настройки синхронизации.",
     &cMode,

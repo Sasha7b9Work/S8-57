@@ -274,7 +274,7 @@ static bool HandlerKey_Function(const KeyEvent &event) // -V2506
     return true;
 }
 
-DEF_PAGE_5( pMath, // -V641                                                                                                                                        //--- СЕРВИС - ФУНКЦИЯ ---
+DEF_PAGE_5( pMath,                                                                                                                                         //--- СЕРВИС - ФУНКЦИЯ ---
     "МАТЕМАТИКА",
     "Установка и выбор математической функции - сложения или умножения",
     &bScreen,

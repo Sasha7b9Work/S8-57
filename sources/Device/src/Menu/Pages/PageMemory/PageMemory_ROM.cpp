@@ -173,7 +173,7 @@ static bool HandlerKey_ROM(const KeyEvent &event)
     return true;
 }
 
-DEF_PAGE_4( pROM, // -V641                                                                                                                                        //--- ѕјћя“№ - ¬Ќ”“– «” ---
+DEF_PAGE_4( pROM,                                                                                                                                                 //--- ѕјћя“№ - ¬Ќ”“– «” ---
     "¬Ќ”“– «”",
     "ѕереход в режим работы с внутренней пам€тью",
     &bPrev,
@@ -184,4 +184,4 @@ DEF_PAGE_4( pROM, // -V641                                                      
     &PageMemory::self, Item::Active, OnOpenClose_ROM, AfterDraw_ROM, HandlerKey_ROM
 )
 
-const Page *const PageROM::self = (const Page *)&pROM;
+const Page *const PageROM::self = static_cast<const Page *>(&pROM);

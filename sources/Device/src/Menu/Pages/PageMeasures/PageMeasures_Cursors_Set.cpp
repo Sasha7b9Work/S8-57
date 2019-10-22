@@ -375,7 +375,7 @@ static bool IsActive_Set()
     return set.curs.showCursors;
 }
 
-DEF_PAGE_5( pSet, // -V641 // -V1027                                                                                                              //--- ИЗМЕРЕНИЯ - КУРСОРЫ - УСТАНОВИТЬ ---
+DEF_PAGE_5( pSet,                                                                                                                //--- ИЗМЕРЕНИЯ - КУРСОРЫ - УСТАНОВИТЬ ---
     "УСТАНОВИТЬ",
     "Переход в режим курсорных измерений",
     &bChannel,

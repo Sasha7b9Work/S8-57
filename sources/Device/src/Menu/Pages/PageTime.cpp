@@ -92,7 +92,7 @@ DEF_CHOICE_2( cShiftXtype,                                                      
     set.time.linkingTShift, &PageTime::self, Item::Active, Choice::Changed, Choice::AfterDraw
 )
 
-DEF_PAGE_4( pTime, // -V641 // -V1027                                                                                                                                     //--- РАЗВЕРТКА ---
+DEF_PAGE_4( pTime,                                                                                                                                       //--- РАЗВЕРТКА ---
     "РАЗВ",
     "Содержит настройки развёртки",
     &cSample,

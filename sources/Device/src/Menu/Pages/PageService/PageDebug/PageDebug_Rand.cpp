@@ -53,7 +53,7 @@ DEF_CHOICE_16( gGateMin,                                                        
 
 
 
-DEF_PAGE_2( pRand, // -V641 // -V1027                                                                                                                            //--- Œ“À¿ƒ ¿ - –¿Õƒ-“Œ– ---
+DEF_PAGE_2( pRand,                                                                                                                              //--- Œ“À¿ƒ ¿ - –¿Õƒ-“Œ– ---
     "–¿Õƒ-“Œ–",
     "",
     &gGateMin,

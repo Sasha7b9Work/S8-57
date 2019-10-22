@@ -74,7 +74,7 @@ static bool HandlerKey_PageShow(const KeyEvent &event)
     return false;
 }
 
-DEF_PAGE_4( pShow, // -V641 // -V1027                                                                                                              //--- ФУНКЦИЯ - РЕГИСТРАТОР - ПРОСМОТР ---
+DEF_PAGE_4( pShow,                                                                                                                //--- ФУНКЦИЯ - РЕГИСТРАТОР - ПРОСМОТР ---
     "ПРОСМОТР",
     "Просмотр записанных данных",
     PageRecorder::PageShow::PageChoice::self,

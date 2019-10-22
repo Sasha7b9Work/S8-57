@@ -199,7 +199,7 @@ static void ClosePage(Page *page)
         keeper->SetPosActItem(0x7f);
     }
 
-    if (page == Menu::mainPage)    // -V1027
+    if (page == Menu::mainPage)    
     {
         Menu::Hide();
     }
@@ -339,7 +339,7 @@ static void DrawHintItem(int x, int y, int width)
 
         if (item->Is(TypeItem::GraphButton))
         {
-            reinterpret_cast<GraphButton *>(item)->DrawHints(x, y, width);   // -V1027
+            reinterpret_cast<GraphButton *>(item)->DrawHints(x, y, width);   
         }
     }
 }

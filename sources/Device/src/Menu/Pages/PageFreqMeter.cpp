@@ -112,7 +112,7 @@ const Choice *PageFreqMeter::GetChoiceNumPeriods()
     return (const Choice *)&cNumPeriods;
 }
 
-DEF_PAGE_5_VAR( pFreqMeter, // -V641                                                                                                                               //--- тсмйжхъ - вюярнрнлеп ---
+DEF_PAGE_5_VAR( pFreqMeter,                                                                                                                                //--- тсмйжхъ - вюярнрнлеп ---
     "вюярнрнлеп",
     "",
     &cEnable,

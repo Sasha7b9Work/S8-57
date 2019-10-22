@@ -89,7 +89,7 @@ static void OnOpenClose_Tester(bool enter)
 }
 
 
-DEF_PAGE_5_VAR( pTester, // -V641
+DEF_PAGE_5_VAR( pTester, 
     "реяреп",
     "",
     &cControl,
@@ -100,7 +100,7 @@ DEF_PAGE_5_VAR( pTester, // -V641
     PageName::Tester, &PageFunction::self, Item::Active, OnOpenClose_Tester, Page::BeforeDraw, Page::HandlerKeyEvent
 )
 
-const Page * const PageTester::self = (const Page *)&pTester;
+const Page * const PageTester::self = static_cast<const Page *>(&pTester);
 
 
 void PageTester::OnChanged_Control(bool)
@@ -111,11 +111,11 @@ void PageTester::OnChanged_Control(bool)
 
     if (set.test.control == TesterControl::Voltage)
     {
-        items[1] = (Item *)&cStepU; //-V641
+        items[1] = (Item *)&cStepU; 
     }
     else
     {
-        items[1] = (Item *)&cStepI; //-V641
+        items[1] = (Item *)&cStepI;
     }
 
     Tester::LoadStep();

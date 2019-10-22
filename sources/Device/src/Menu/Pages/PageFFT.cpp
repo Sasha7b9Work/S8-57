@@ -117,7 +117,7 @@ static bool HandlerKey_FFT_Cursors(const KeyEvent &event)
     return false;
 }
 
-DEF_PAGE_1( pCursors, // -V641 // -V1027                                                                                                                 //--- ФУНКЦИЯ - СПЕКТР - КУРСОРЫ ---
+DEF_PAGE_1( pCursors,                                                                                                                   //--- ФУНКЦИЯ - СПЕКТР - КУРСОРЫ ---
     "КУРСОРЫ", 
     "Включает курсоры для измерения параметров спектра",
     &bCursors_Source,
@@ -139,7 +139,7 @@ static void OnOpenClose_FFT(bool)
     }
 }
 
-DEF_PAGE_6( pFFT, // -V641 // -V1027                                                                                                                                //--- СЕРВИС - СПЕКТР ---
+DEF_PAGE_6( pFFT,                                                                                                                                  //--- СЕРВИС - СПЕКТР ---
     "СПЕКТР",
     "Отображение спектра входного сигнала",
     &cView,

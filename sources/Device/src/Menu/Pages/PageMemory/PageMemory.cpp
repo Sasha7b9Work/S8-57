@@ -104,7 +104,7 @@ void PageMemory::OnOpenClose_Drive_Manager(bool)
     }
 }
 
-DEF_PAGE_3( pManager, // -V641                                                                                                                          //--- ПАМЯТЬ - ВНЕШН ЗУ - КАТАЛОГ ---
+DEF_PAGE_3( pManager,                                                                                                                           //--- ПАМЯТЬ - ВНЕШН ЗУ - КАТАЛОГ ---
     "КАТАЛОГ",
     "Открывает доступ к файловой системе подключенного накопителя",
     &bManager_Tab,
@@ -381,7 +381,7 @@ DEF_PAGE_SB( pMask,                                                             
 */
 
 
-DEF_PAGE_3( pMask, // -V641                                                                                                                               //--- Память - ВНЕШН ЗУ - МАСКА ---
+DEF_PAGE_3( pMask,                                                                                                                                //--- Память - ВНЕШН ЗУ - МАСКА ---
     "МАСКА",
     "Режим ввода маски для автоматического именования файлов",
     &bMask_Delete,
@@ -403,7 +403,7 @@ DEF_CHOICE_2( cDrive_Autoconnect,                                               
 )
 
 
-DEF_PAGE_6( pDrive,  //-V641 //-V1027                                                                                                                             //--- ПАМЯТЬ - ВНЕШН ЗУ ---
+DEF_PAGE_6( pDrive,   //-V1027                                                                                                                             //--- ПАМЯТЬ - ВНЕШН ЗУ ---
     "ВНЕШН ЗУ",
     "Работа с внешним запоминающим устройством.",
     PageDrive::PageManager::self,
@@ -420,7 +420,7 @@ DEF_PAGE_6( pDrive,  //-V641 //-V1027                                           
 const Page * const PageDrive::self = (const Page *)&pDrive;
 
 
-DEF_PAGE_4( pMemory, // -V641 // -V1027                                                                                                                                      //--- ПЯМЯТЬ ---
+DEF_PAGE_4( pMemory,                                                                                                                                        //--- ПЯМЯТЬ ---
     "ПАМЯТЬ",
     "Работа с внешней и внутренней памятью.",
     &cPoints,
@@ -618,7 +618,7 @@ void OnMemExtSetMaskNameRegSet(int angle, int maxIndex)
 
 }
 
-DEF_PAGE_4( pSetName, // -V641                                                                                                            //--- Страница вызывается для ввода имени файла ---
+DEF_PAGE_4( pSetName,                                                                                                             //--- Страница вызывается для ввода имени файла ---
     "",
     "",
     &bSetName_Delete,

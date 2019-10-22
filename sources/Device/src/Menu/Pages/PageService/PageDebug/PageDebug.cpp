@@ -86,7 +86,7 @@ DEF_GOVERNOR( gShiftB,                                                          
 )
 
 
-DEF_PAGE_3( pBalance, // -V641 // -V1027                                                                                                                     //--- ОТЛАДКА - АЦП - БАЛАНС ---
+DEF_PAGE_3( pBalance,                                                                                                                       //--- ОТЛАДКА - АЦП - БАЛАНС ---
     "БАЛАНС",
     "",
     &cBalance_Mode,
@@ -158,7 +158,7 @@ DEF_GOVERNOR( gStretch_B,                                                       
 
 //static const ChoiceBase emptyChoice = {Item::Type::Choice, 0, false, Page::Name::NoPage, 0, 0, {}, 0, 0, 0, 0};
 
-DEF_PAGE_3( pStretch, // -V641 // -V1027                                                                                                                   //--- ОТЛАДКА - АЦП - РАСТЯЖКА ---
+DEF_PAGE_3( pStretch,                                                                                                                     //--- ОТЛАДКА - АЦП - РАСТЯЖКА ---
     "РАСТЯЖКА",
     "Устанавливает режим и величину растяжки (для ручного режима)",
     &cStretch_Mode,
@@ -197,7 +197,7 @@ static void OnChanged_Shift_A()
     RShift::Set(Chan::A, SET_RSHIFT_A);
 }
 
-DEF_GOVERNOR( gShift_A2mV, //-V641                                                                                                        //--- ОТЛАДКА - АЦП - ДОП СМЕЩ - См 1к 2мВ пост ---
+DEF_GOVERNOR( gShift_A2mV,                                                                                                         //--- ОТЛАДКА - АЦП - ДОП СМЕЩ - См 1к 2мВ пост ---
     "См 1к 2мВ пост",
     "",
     set.dbg.nrst.rShiftAddStable[Chan::A][Range::_2mV], -100, 100,
@@ -250,7 +250,7 @@ DEF_GOVERNOR( gShift_B10mV,                                                     
 )
 
 
-DEF_PAGE_7( pShift, // -V641  // -V1027                                                                                                                    //--- ОТЛАДКА - АЦП - ДОП СМЕЩ ---
+DEF_PAGE_7( pShift,                                                                                                                       //--- ОТЛАДКА - АЦП - ДОП СМЕЩ ---
     "ДОП СМЕЩ",
     "",
     &bShift_Reset,
@@ -267,7 +267,7 @@ DEF_PAGE_7( pShift, // -V641  // -V1027                                         
 const Page * const PageDebug::PageADC::PageShift::self = static_cast<const Page *>(&pShift);
 
 
-DEF_PAGE_3( pADC, //-V641 //-V1027
+DEF_PAGE_3( pADC,  //-V1027
     "АЦП",
     "",
     &pBalance,
@@ -368,7 +368,7 @@ static void OnOpenClose_Settings(bool)
     Display::SetDrawMode(Display::DrawMode::Auto, DebugShowSetInfo_Draw);
 }
 
-DEF_PAGE_5( pSettings, // -V641 // -V1027                                                                                                                       //--- ОТЛАДКА - НАСТРОЙКИ ---
+DEF_PAGE_5( pSettings,                                                                                                                         //--- ОТЛАДКА - НАСТРОЙКИ ---
     "НАСТРОЙКИ",
     "Показать информацию о настройках",
     0,
@@ -469,7 +469,7 @@ static bool HandlerKey_SerialNumber(const KeyEvent &)
     return false;
 }
 
-DEF_PAGE_2( pSerialNumber, // -V641 // -V1027                                                                                                                         //--- ОТЛАДКА - С/Н ---
+DEF_PAGE_2( pSerialNumber,                                                                                                                           //--- ОТЛАДКА - С/Н ---
     "С/Н",
     "Запись серийного номера в OTP-память. ВНИМАНИЕ!!! ОТP-память - память с однократной записью.",
     &bSerialNumber_Change,
@@ -481,7 +481,7 @@ DEF_PAGE_2( pSerialNumber, // -V641 // -V1027                                   
 const Page * const PageDebug::PageSerialNumber::self = static_cast<const Page *>(&pSerialNumber);
 
 
-DEF_PAGE_5( pDebug, // -V641 // -V1027                                                                                                                                   //--- ОТЛАДКА ---
+DEF_PAGE_5( pDebug,                                                                                                                                     //--- ОТЛАДКА ---
     "ОТЛАДКА",
     "",
     PageDebug::PageConsole::self,

@@ -67,7 +67,7 @@ static void OnOpenClose_Recorder(bool enter)
     Device::State::SetMode(enter ? Device::Mode::Recorder : Device::Mode::Osci);
 }
 
-DEF_PAGE_4( pRecorder, // -V641 // -V1027                                                                                                                     //--- ФУНКЦИЯ - РЕГИСТРАТОР ---
+DEF_PAGE_4( pRecorder,                                                                                                                       //--- ФУНКЦИЯ - РЕГИСТРАТОР ---
     "РЕГИСТРАТОР",
     "Запись и воспроизведение сигналов входов и датчиков",
     PageRecorder::PageSource::self,

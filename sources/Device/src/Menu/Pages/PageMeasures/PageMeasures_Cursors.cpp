@@ -37,7 +37,7 @@ DEF_CHOICE_2( cShowFreq,                                                        
 )
 
 
-DEF_PAGE_3( pCursors, // -V641 // -V1027                                                                                                                                  //--- ИЗМЕРЕНИЯ ---
+DEF_PAGE_3( pCursors,                                                                                                                                    //--- ИЗМЕРЕНИЯ ---
     "КУРСОРЫ",
     "Курсорные измерения",
     &cShow,

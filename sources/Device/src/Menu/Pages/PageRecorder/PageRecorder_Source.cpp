@@ -38,7 +38,7 @@ static bool IsActive_Source()
     return !Recorder::IsRunning();
 }
 
-DEF_PAGE_3( pSource, // -V641 // -V1027                                                                                                            //--- ФУНКЦИЯ - РЕГИСТРАТОР - ИСТОЧНИК ---
+DEF_PAGE_3( pSource,                                                                                                              //--- ФУНКЦИЯ - РЕГИСТРАТОР - ИСТОЧНИК ---
     "ИСТОЧНИК",
     "Выбор записываемых сигналов",
     &cChanA,

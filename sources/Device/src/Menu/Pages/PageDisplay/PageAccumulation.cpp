@@ -59,7 +59,7 @@ static bool IsActive_Accum()
     return !Osci::InModeRandomizer();
 }
 
-DEF_PAGE_3( pAccum, // -V641 // -V1027                                                                                                                         //--- ДИСПЛЕЙ - НАКОПЛЕНИЕ ---
+DEF_PAGE_3( pAccum,                                                                                                                           //--- ДИСПЛЕЙ - НАКОПЛЕНИЕ ---
     "НАКОПЛ",
     "Настройки режима отображения последних сигналов на экране",
     &cEnable,

@@ -38,7 +38,7 @@ DEF_GOVERNOR( gDuration,                                                        
 
 
 
-DEF_PAGE_2( pHoldOff, // -V641 // -V1027                                                                                                                          //--- яхмуп - сдепфюмхе ---
+DEF_PAGE_2( pHoldOff,                                                                                                                            //--- яхмуп - сдепфюмхе ---
     "сдепфюмхе",
     "",
     &cHoldOff,

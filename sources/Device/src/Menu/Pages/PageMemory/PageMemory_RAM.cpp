@@ -80,7 +80,7 @@ static bool HandlerKey_RAM(const KeyEvent &)
     return false;
 }
 
-DEF_PAGE_2( pRAM, // -V641 // -V1027                                                                                                                             //--- ПАМЯТЬ - ПОСЛЕДНИЕ ---
+DEF_PAGE_2( pRAM,                                                                                                                               //--- ПАМЯТЬ - ПОСЛЕДНИЕ ---
     "ПОСЛЕДНИЕ",
     "Переход в режим работы с последними полученными сигналами",
     &bPrev,

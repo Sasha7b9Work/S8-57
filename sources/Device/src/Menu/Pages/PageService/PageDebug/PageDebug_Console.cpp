@@ -137,7 +137,7 @@ DEF_CHOICE_2( cTShift,                                                          
 )
 
 
-DEF_PAGE_12( pRegisters, // -V641                                                                                                                      //--- ОТЛАДКА - КОНСОЛЬ - РЕГИСТРЫ ---
+DEF_PAGE_12( pRegisters,                                                                                                                       //--- ОТЛАДКА - КОНСОЛЬ - РЕГИСТРЫ ---
     "РЕГИСТРЫ",
     "",
     &cShowAll,
@@ -158,7 +158,7 @@ DEF_PAGE_12( pRegisters, // -V641                                               
 const Page * const PageDebug::PageRegisters::self = (const Page *)&pRegisters;
 
 
-DEF_PAGE_2( pConsole, // -V641 // -V1027                                                                                                                          //--- ОТЛАДКА - КОНСОЛЬ ---
+DEF_PAGE_2( pConsole,                                                                                                                            //--- ОТЛАДКА - КОНСОЛЬ ---
     "КОНСОЛЬ",
     "Управляет отображением и параметрами отладочной консоли",
     &cShow,
