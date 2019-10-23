@@ -42,7 +42,7 @@ void FPGA::Init()
     HAL_ADC3::Init();
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 static bool CalculateGate(uint16 rand, uint16 *eMin, uint16 *eMax)
 {
     static float minGate = 0.0F;
@@ -108,7 +108,7 @@ static bool CalculateGate(uint16 rand, uint16 *eMin, uint16 *eMax)
     return retValue;
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 int FPGA::CalculateShift()
 {
     uint16 min = 0;
@@ -139,7 +139,7 @@ int FPGA::CalculateShift()
     return NULL_TSHIFT;
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 bool FPGA::ReadDataChanenlRand(Chan::E ch, const uint8 *address, uint8 *data)
 {
     int Tsm = CalculateShift();
@@ -185,7 +185,7 @@ bool FPGA::ReadDataChanenlRand(Chan::E ch, const uint8 *address, uint8 *data)
     return true;
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 bool FPGA::ReadDataChanenl(Chan::E ch, uint8 data[FPGA::MAX_NUM_POINTS])
 {
     uint numPoints = FPGA_NUM_POINTS;

@@ -14,7 +14,7 @@ int LowSignedBit(uint value)
 
     for (int i = 0; i < 32; i++)
     {
-        if (verValue & ((int)value))
+        if (verValue & (static_cast<int>(value)))
         {
             return i;
         }
@@ -25,7 +25,7 @@ int LowSignedBit(uint value)
     return -1;
 }
 
-//----------------------------------------------------------------------------------------------------------------------------------------------------
+
 void Math::Smoothing(uint8 *data, int numPoints, int numSmooth)
 {
     if (numSmooth == 0 || numSmooth == 1)
@@ -33,8 +33,8 @@ void Math::Smoothing(uint8 *data, int numPoints, int numSmooth)
         return;
     }
 
-    float *buffer = (float *)std::malloc((size_t)(numPoints * (int)sizeof(float)));
-    int  *num = (int *)std::malloc((size_t)(numPoints * (int)sizeof(int)));
+    float *buffer = static_cast<float *>(std::malloc(static_cast<size_t>(numPoints * sizeof(float))));
+    int  *num = static_cast<int *>(std::malloc(static_cast<size_t>(numPoints * sizeof(int))));
 
     for (int i = 1; i < numPoints; i++)
     {
@@ -54,20 +54,20 @@ void Math::Smoothing(uint8 *data, int numPoints, int numSmooth)
     
     for (int i = 1; i < numPoints; i++)
     {
-        data[i] = (uint8)(buffer[i] / num[i] + 0.5F);
+        data[i] = static_cast<uint8>(buffer[i] / num[i] + 0.5F);
     }
 
     std::free(buffer);
     std::free(num);
 }
 
-//----------------------------------------------------------------------------------------------------------------------------------------------------
+
 bool IntInRange(int value, int min, int max)
 {
     return (value >= min) && (value <= max);
 }
 
-//----------------------------------------------------------------------------------------------------------------------------------------------------
+
 float MaxFloat(float val1, float val2, float val3)
 {
     float retValue = val1;
@@ -82,7 +82,7 @@ float MaxFloat(float val1, float val2, float val3)
     return retValue;
 }
 
-//----------------------------------------------------------------------------------------------------------------------------------------------------
+
 int Math::MinFrom2Int(int val0, int val1)
 {
     if (val0 < val1)
@@ -92,7 +92,7 @@ int Math::MinFrom2Int(int val0, int val1)
     return val1;
 }
 
-//----------------------------------------------------------------------------------------------------------------------------------------------------
+
 int Pow10(int pow)
 {
     int retValue = 1;
@@ -105,7 +105,7 @@ int Pow10(int pow)
     return retValue;
 }
 
-//----------------------------------------------------------------------------------------------------------------------------------------------------
+
 uint8 Math::MaxFromArray(const uint8 *data, int firstPoint, int lastPoint)
 {
 
@@ -130,7 +130,7 @@ uint8 Math::MaxFromArray(const uint8 *data, int firstPoint, int lastPoint)
     return max;
 }
 
-//----------------------------------------------------------------------------------------------------------------------------------------------------
+
 uint8 Math::MinFromArray(const uint8 *data, int firstPoint, int lastPoint)
 {
 
@@ -155,25 +155,25 @@ uint8 Math::MinFromArray(const uint8 *data, int firstPoint, int lastPoint)
     return min;
 }
 
-//----------------------------------------------------------------------------------------------------------------------------------------------------
+
 float RandFloat(float min, float max)
 {
     float delta = max - min;
     return min + ((std::rand() / (float)RAND_MAX) * delta);
 }
 
-//----------------------------------------------------------------------------------------------------------------------------------------------------
+
 float Math::GetIntersectionWithHorizontalLine(int x0, int y0, int x1, int y1, int yHorLine)
 {
     if (y0 == y1)
     {
-        return (float)x1;
+        return static_cast<float>(x1);
     }
 
-    return (yHorLine - y0) / ((float)(y1 - y0) / (float)(x1 - x0)) + x0;
+    return (yHorLine - y0) / (static_cast<float>(y1 - y0) / static_cast<float>(x1 - x0)) + x0;
 }
 
-//----------------------------------------------------------------------------------------------------------------------------------------------------
+
 uint8 Math::CalculateFiltr(const uint8 *data, int x, int numPoints, int numSmoothing)
 {
     if (numSmoothing < 2)
@@ -207,15 +207,15 @@ uint8 Math::CalculateFiltr(const uint8 *data, int x, int numPoints, int numSmoot
         }
     }
 
-    return (uint8)(sum / (float)count);
+    return static_cast<uint8>(sum / static_cast<float>(count));
 }
 
-//----------------------------------------------------------------------------------------------------------------------------------------------------
+
 void Math::CalculateFiltrArray(const uint8 *dataIn, uint8 *dataOut, int numPoints, int numSmoothing)
 {
     if (numSmoothing < 2)
     {
-        std::memcpy(dataOut, dataIn, (size_t)numPoints);
+        std::memcpy(dataOut, dataIn, static_cast<size_t>(numPoints));
     }
     else
     {
@@ -248,12 +248,12 @@ void Math::CalculateFiltrArray(const uint8 *dataIn, uint8 *dataOut, int numPoint
                 }
             }
 
-            dataOut[i] = (uint8)(sum / (float)count);
+            dataOut[i] = static_cast<uint8>(sum / static_cast<float>(count));
         }
     }
 }
 
-//----------------------------------------------------------------------------------------------------------------------------------------------------
+
 uint8 Math::MaxFromArray_RAM(const uint16 *data, int firstPoint, int lastPoint)
 {
     uint8 max = 0;
@@ -266,13 +266,13 @@ uint8 Math::MaxFromArray_RAM(const uint16 *data, int firstPoint, int lastPoint)
     {
         uint16 d16 = *pointer++;
 
-        uint8 d8 = (uint8)d16;
+        uint8 d8 = static_cast<uint8>(d16);
         if (d8 > max)
         {
             max = d8;
         }
 
-        d8 = (uint8)(d16 >> 8);
+        d8 = static_cast<uint8>(d16 >> 8);
         if (d8 > max)
         {
             max = d8;
@@ -282,7 +282,7 @@ uint8 Math::MaxFromArray_RAM(const uint16 *data, int firstPoint, int lastPoint)
     return max;
 }
 
-//----------------------------------------------------------------------------------------------------------------------------------------------------
+
 uint8 Math::MinFromArray_RAM(const uint16 *data, int firstPoint, int lastPoint)
 {
     uint8 min = 255;
@@ -295,12 +295,12 @@ uint8 Math::MinFromArray_RAM(const uint16 *data, int firstPoint, int lastPoint)
     {
         uint16 d16 = *pointer++;
 
-        uint8 d8 = (uint8)d16;
+        uint8 d8 = static_cast<uint8>(d16);
         if (d8 < min)
         {
             min = d8;
         }
-        d8 = (uint8)(d16 >> 8);
+        d8 = static_cast<uint8>(d16 >> 8);
         if (d8 < min)
         {
             min = d8;
@@ -310,7 +310,7 @@ uint8 Math::MinFromArray_RAM(const uint16 *data, int firstPoint, int lastPoint)
     return min;
 }
 
-//----------------------------------------------------------------------------------------------------------------------------------------------------
+
 int Math::FindAnotherElement(const uint8 *data, uint8 value, int numElements)
 {
     for (int i = 0; i < numElements; i++)
@@ -324,7 +324,7 @@ int Math::FindAnotherElement(const uint8 *data, uint8 value, int numElements)
     return -1;
 }
 
-//----------------------------------------------------------------------------------------------------------------------------------------------------
+
 int Math::DigitsInIntPart(float value)
 {
     float absValue = fabsf(value);
@@ -340,7 +340,7 @@ int Math::DigitsInIntPart(float value)
     return num;
 }
 
-//----------------------------------------------------------------------------------------------------------------------------------------------------
+
 float Math::RoundFloat(float value, int numDigits)
 {
     float absValue = fabsf(value);
@@ -350,13 +350,13 @@ float Math::RoundFloat(float value, int numDigits)
     if (digsInInt < numDigits)  // Подстрахуемся
     {
         int pow = Pow10(numDigits - digsInInt);
-        absValue = ((int)(absValue * pow + 0.5F)) / (float)pow;
+        absValue = (static_cast<int>(absValue * pow + 0.5F)) / static_cast<float>(pow);
     }
 
     return value > 0.0F ? absValue : -absValue;
 }
 
-//----------------------------------------------------------------------------------------------------------------------------------------------------
+
 bool IsEquals(float x, float y)
 {
 #ifdef WIN32
@@ -366,7 +366,7 @@ bool IsEquals(float x, float y)
 #endif
 }
 
-//----------------------------------------------------------------------------------------------------------------------------------------------------
+
 bool FloatsIsEquals(float value0, float value1, float epsilonPart)
 {
     float max = fabsf(value0) > fabsf(value1) ? fabsf(value0) : fabsf(value1);

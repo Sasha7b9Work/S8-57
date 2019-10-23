@@ -12,12 +12,12 @@
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-typedef enum
+enum TypeWelcomeScreen
 {
     TypeWelcomeScreen_Vague,
     TypeWelcomeScreen_Wave,
     TypeWelcomeScreen_VagueWave
-} TypeWelcomeScreen;
+};
 
 
 
@@ -27,12 +27,12 @@ static void DrawBigMNIPI();
 static int RandValue(int min, int max);
 static void InitPoints();
 
-typedef struct
+struct Vector
 {
     uint16 x;
     uint8  y;
     uint8  notUsed;
-} Vector;
+};
 
 #ifdef MSVC
 #define __attribute__(x)
@@ -66,7 +66,7 @@ static void InitHardware()
 }
 
 
-//----------------------------------------------------------------------------------------------------------------------------------------------------
+
 void Display::Init()
 {
     ms->display.value = 0.0F;
@@ -81,7 +81,7 @@ void Display::Init()
         float red = i / 14.0F * 31.0F + 0.5F;
         float green = i / 14.0F * 63.0F + 0.5F;
         float blue = i / 14.0F * 31.0F + 0.5F;
-        set.display.colors[i + 2] = (uint16)MAKE_COLOR((int)red, (int)green, (int)blue);
+        set.display.colors[i + 2] = static_cast<uint16>(MAKE_COLOR(red, green, blue));
     }
 
     Painter::ResetFlash();
@@ -98,7 +98,7 @@ void Display::Init()
 }
 
 
-//----------------------------------------------------------------------------------------------------------------------------------------------------
+
 static void DrawButton(int x, int y, const char *text)
 {
     int width = 25;
@@ -107,7 +107,7 @@ static void DrawButton(int x, int y, const char *text)
     Painter::DrawStringInCenterRect(x, y, width + 2, height - 1, text);
 }
 
-//----------------------------------------------------------------------------------------------------------------------------------------------------
+
 void Display::Update()
 {
     ms->display.isRun = true;
@@ -153,7 +153,7 @@ void Display::Update()
 
         int height = 30;
         int fullWidth = 280;
-        int width = (int)(fullWidth * ms->percentUpdate);
+        int width = static_cast<int>(fullWidth * ms->percentUpdate);
 
         Painter::FillRegion(20, 130, width, height);
         Painter::DrawRectangle(20, 130, fullWidth, height);
@@ -168,7 +168,7 @@ void Display::Update()
 }
 
 
-//----------------------------------------------------------------------------------------------------------------------------------------------------
+
 void DrawProgressBar(uint dT)
 {
     const int WIDTH = 300;
@@ -203,18 +203,18 @@ void DrawProgressBar(uint dT)
     Painter::DrawStringInCenterRect(X, y0 + 2 * dH, WIDTH, 10, "Подождите...");
 
     Painter::DrawRectangle(X, Y, WIDTH, HEIGHT);
-    Painter::FillRegion(X, Y, (int)ms->display.value, HEIGHT);
+    Painter::FillRegion(X, Y, static_cast<int>(ms->display.value), HEIGHT);
 }
 
 
-//----------------------------------------------------------------------------------------------------------------------------------------------------
+
 bool Display::IsRun()
 {
     return ms->display.isRun;
 }
 
 
-//----------------------------------------------------------------------------------------------------------------------------------------------------
+
 static void DrawBigMNIPI()
 {
     static uint startTime = 0;
@@ -231,7 +231,7 @@ static void DrawBigMNIPI()
     int numColor = (int)(time / (float)TIME_WAIT * 14.0F);
     Limitation(&numColor, 0, 13);
 
-    Painter::SetColor((Color)((uint8)(numColor + 2)));
+    Painter::SetColor(static_cast<Color>(static_cast<uint8>(numColor + 2)));
 
     float amplitude = 3.0F - (time / (TIME_WAIT / 2.0F)) * 3;
     LIMIT_BELOW(amplitude, 0.0F);
@@ -249,8 +249,8 @@ static void DrawBigMNIPI()
 
     for (int i = 0; i < numPoints; i++)
     {
-        int x = array[i].x + (VAGUE_OR_ALL ? RandValue((int)-radius, (int)radius) : 0) + (int)shift[array[i].y]; //-V537
-        int y = array[i].y + (VAGUE_OR_ALL ? RandValue((int)-radius, (int)radius) : 0);
+        int x = array[i].x + (VAGUE_OR_ALL ? RandValue(static_cast<int>(-radius), static_cast<int>(radius)) : 0) + static_cast<int>(shift[array[i].y]);
+        int y = array[i].y + (VAGUE_OR_ALL ? RandValue(static_cast<int>(-radius), static_cast<int>(radius)) : 0);
         if (x > 0 && x < 319 && y > 0 && y < 239)
         {
             Painter::SetPoint(x, y);
@@ -258,15 +258,15 @@ static void DrawBigMNIPI()
     }
 }
 
-//----------------------------------------------------------------------------------------------------------------------------------------------------]
+
 static int RandValue(int min, int max)
 {
-    int value = (int)(std::rand() % (max - min + 1));
+    int value = static_cast<int>(std::rand() % (max - min + 1));
 
     return value + min;
 }
 
-//----------------------------------------------------------------------------------------------------------------------------------------------------
+
 static int DrawBigCharInBuffer(int eX, int eY, int size, uint8 symbol, uint8 buffer[320][240])
 {
     uint8 width = Font::GetWidth (symbol);
@@ -305,7 +305,7 @@ static int DrawBigCharInBuffer(int eX, int eY, int size, uint8 symbol, uint8 buf
     return eX + width * size;
 }
 
-//----------------------------------------------------------------------------------------------------------------------------------------------------
+
 static void DrawBigTextInBuffer(int eX, int eY, int size, const char* text, uint8 buffer[320][240])
 {
     for (int x = 0; x < 320; x++)
@@ -316,18 +316,18 @@ static void DrawBigTextInBuffer(int eX, int eY, int size, const char* text, uint
         }
     }
 
-    int numSymbols = (int)strlen(text);
+    int numSymbols = static_cast<int>(strlen(text));
 
     int x = eX;
 
     for (int i = 0; i < numSymbols; i++)
     {
-        x = DrawBigCharInBuffer(x, eY, size, (uint8)text[i], buffer);
+        x = DrawBigCharInBuffer(x, eY, size, static_cast<uint8>(text[i]), buffer);
         x += size;
     }
 }
 
-//----------------------------------------------------------------------------------------------------------------------------------------------------
+
 static void InitPoints()
 {
     uint8 buffer[320][240];
@@ -340,15 +340,15 @@ static void InitPoints()
         {
             if (buffer[x][y])
             {
-                array[numPoints].x = (uint16)x;
-                array[numPoints].y = (uint8)y;
+                array[numPoints].x = static_cast<uint16>(x);
+                array[numPoints].y = static_cast<uint8>(y);
                 numPoints++;
             }
         }
     }
 }
 
-//----------------------------------------------------------------------------------------------------------------------------------------------------
+
 void Display::AddStringToIndicating(pString)
 {
 

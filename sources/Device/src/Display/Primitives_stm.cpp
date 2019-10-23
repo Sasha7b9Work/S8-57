@@ -24,7 +24,7 @@ void Region::Fill(int x, int y, Color color)
     Transceiver::Send(buffer, 7);
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void Rectangle::Draw(int x, int y, Color color)
 {
     color.SetAsCurrent();
@@ -43,7 +43,7 @@ void Rectangle::Draw(int x, int y, Color color)
     Transceiver::Send(buffer, 7);
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void HLine::Draw(int x, int y, Color color)
 {
     color.SetAsCurrent();
@@ -64,7 +64,7 @@ void HLine::Draw(int x, int y, Color color)
     Transceiver::Send(buffer, 6);
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void VLine::Draw(int x, int y, Color color)
 {
     color.SetAsCurrent();
@@ -84,7 +84,7 @@ void VLine::Draw(int x, int y, Color color)
     Transceiver::Send(buffer, 5);
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void Pixel::Draw(int x, int y, Color color)
 {
     color.SetAsCurrent();
@@ -100,7 +100,7 @@ void Pixel::Draw(int x, int y, Color color)
     Transceiver::Send(buffer, 4);
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void Line::Draw(Color color)
 {
     color.SetAsCurrent();
@@ -119,7 +119,7 @@ void Line::Draw(Color color)
     Transceiver::Send(buffer, 7);
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 int Text::DrawSmall(int x, int y, Color color)
 {
     color.SetAsCurrent();
@@ -140,7 +140,7 @@ int Text::DrawSmall(int x, int y, Color color)
     return x + Font::GetLengthText(text) + 1;
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void Text::DrawBig(int x, int y, Color color)
 {
 #define MAX_SIZE_BUFFER 100
@@ -169,7 +169,7 @@ void Text::DrawBig(int x, int y, Color color)
     Transceiver::Send(buffer, 1 + 2 + 1 + 1 + numSymbols + 1);
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void MultiHPointLine::Draw(int x, Color color)
 {
     color.SetAsCurrent();
@@ -194,7 +194,7 @@ void MultiHPointLine::Draw(int x, Color color)
     }
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void MultiVPointLine::Draw(int y0, Color color)
 {
     color.SetAsCurrent();

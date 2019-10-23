@@ -137,7 +137,7 @@ void HAL_FSMC::Init()
     __FMC_NORSRAM_ENABLE(hsram->Instance, hsram->Init.NSBank);
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 static void Configure()
 {
     DataBusMode::state = DataBusMode::FPGA;
@@ -183,7 +183,7 @@ static void Configure()
     GPIOE->MODER |= HEX_FROM_2(002a, 8fff);     // Alternate function mode
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void HAL_FSMC::WriteToFPGA16(uint8 *address, uint16 value)
 {
     if (DataBusMode::state != DataBusMode::FPGA)
@@ -197,7 +197,7 @@ void HAL_FSMC::WriteToFPGA16(uint8 *address, uint16 value)
     *(address + 1) = static_cast<uint8>(value >> 8);
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void HAL_FSMC::WriteToFPGA8(uint8 *address, uint8 value)
 {
     if (DataBusMode::state != DataBusMode::FPGA)
@@ -208,7 +208,7 @@ void HAL_FSMC::WriteToFPGA8(uint8 *address, uint8 value)
     *address = value;
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 uint8 HAL_FSMC::ReadFromFPGA(const uint8 *address)
 {
     if (DataBusMode::state != DataBusMode::FPGA)

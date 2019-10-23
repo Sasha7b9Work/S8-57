@@ -66,7 +66,7 @@ void CPU::FDrive::Init()
 }
 
 
-//----------------------------------------------------------------------------------------------------------------------------------------------------
+
 void USBH_UserProcess(USBH_HandleTypeDef *, uint8 id)
 {
     switch (id)
@@ -98,7 +98,7 @@ void USBH_UserProcess(USBH_HandleTypeDef *, uint8 id)
 }
 
 
-//----------------------------------------------------------------------------------------------------------------------------------------------------
+
 bool CPU::FDrive::Update()
 {
     USBH_Process(&handleUSBH);
@@ -118,7 +118,7 @@ bool CPU::FDrive::Update()
 }
 
 
-//----------------------------------------------------------------------------------------------------------------------------------------------------
+
 static void ToLower(char *str)
 {
     while (*str)
@@ -129,7 +129,7 @@ static void ToLower(char *str)
 }
 
 
-//----------------------------------------------------------------------------------------------------------------------------------------------------
+
 bool CPU::FDrive::FileExist(const char *fileName)
 {
     char nameFile[255];
@@ -159,7 +159,7 @@ bool CPU::FDrive::FileExist(const char *fileName)
 }
 
 
-//----------------------------------------------------------------------------------------------------------------------------------------------------
+
 static bool GetNameFile(const char *fullPath, int numFile, char *nameFileOut, StructForReadDir *s)
 {
     memcpy((uint8 *)s->nameDir, (uint8 *)fullPath, strlen(fullPath));
@@ -204,7 +204,7 @@ static bool GetNameFile(const char *fullPath, int numFile, char *nameFileOut, St
 }
 
 
-//----------------------------------------------------------------------------------------------------------------------------------------------------
+
 static bool GetNextNameFile(char *nameFileOut, StructForReadDir *s)
 {
     FILINFO *pFNO = &s->fno;
@@ -238,7 +238,7 @@ static bool GetNextNameFile(char *nameFileOut, StructForReadDir *s)
     }
 }
 
-//----------------------------------------------------------------------------------------------------------------------------------------------------
+
 int CPU::FDrive::OpenFileForRead(const char *fileName)
 {
     if (f_open(&ms->drive.file, fileName, FA_READ) == FR_OK)
@@ -248,7 +248,7 @@ int CPU::FDrive::OpenFileForRead(const char *fileName)
     return -1;
 }
 
-//----------------------------------------------------------------------------------------------------------------------------------------------------
+
 int CPU::FDrive::ReadFromFile(int numBytes, uint8 *buffer)
 {
     uint readed = 0;
@@ -259,13 +259,13 @@ int CPU::FDrive::ReadFromFile(int numBytes, uint8 *buffer)
     return -1;
 }
 
-//----------------------------------------------------------------------------------------------------------------------------------------------------
+
 void CPU::FDrive::CloseOpenedFile()
 {
     f_close(&ms->drive.file);
 }
 
-//----------------------------------------------------------------------------------------------------------------------------------------------------
+
 void CPU::FDrive::LL_::InitHCD(USBH_HandleTypeDef *phost)
 {
     /* Set the LL driver parameters */
@@ -288,7 +288,7 @@ void CPU::FDrive::LL_::InitHCD(USBH_HandleTypeDef *phost)
     USBH_LL_SetTimer(phost, HAL_HCD_GetCurrentFrame(&FDrive::handleHCD));
 }
 
-//----------------------------------------------------------------------------------------------------------------------------------------------------
+
 void CPU::FDrive::LL_::SetToggle(uint8 pipe, uint8 toggle)
 {
     if (FDrive::handleHCD.hc[pipe].ep_is_in)
@@ -301,7 +301,7 @@ void CPU::FDrive::LL_::SetToggle(uint8 pipe, uint8 toggle)
     }
 }
 
-//----------------------------------------------------------------------------------------------------------------------------------------------------
+
 uint8 CPU::FDrive::LL_::GetToggle(uint8 pipe)
 {
     uint8 toggle = 0;
@@ -317,7 +317,7 @@ uint8 CPU::FDrive::LL_::GetToggle(uint8 pipe)
     return toggle;
 }
 
-//----------------------------------------------------------------------------------------------------------------------------------------------------
+
 void CPU::FDrive::HCD_IRQHandler()
 {
 

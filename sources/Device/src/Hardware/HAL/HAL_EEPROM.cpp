@@ -44,7 +44,7 @@ void HAL_EEPROM::EraseSector(uint startAddress)
     HAL_FLASH_Lock();
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 static uint GetSector(uint startAddress)
 {
     static const uint addresses[24] =
@@ -89,7 +89,7 @@ static uint GetSector(uint startAddress)
     return 24;
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void HAL_EEPROM::WriteBytes(uint address, const uint8 *data, int size)
 {
     CLEAR_FLASH_FLAGS;
@@ -108,7 +108,7 @@ void HAL_EEPROM::WriteBytes(uint address, const uint8 *data, int size)
     HAL_FLASH_Lock();
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void HAL_EEPROM::WriteBufferBytes(uint address, const void *buffer, int size)
 {
     Beeper::WaitForCompletion();

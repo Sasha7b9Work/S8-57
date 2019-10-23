@@ -49,7 +49,7 @@ static bool PrevSendingComplete()
     return pCDC->TxState == 0;
 }
 
-//----------------------------------------------------------------------------------------------------------------------------------------------------
+
 void VCP::SendDataAsynch(const uint8 *buffer, uint size)
 {
 #define SIZE_BUFFER 64U
@@ -63,12 +63,12 @@ void VCP::SendDataAsynch(const uint8 *buffer, uint size)
     USBD_CDC_TransmitPacket(&handleUSBD);
 }
 
-//----------------------------------------------------------------------------------------------------------------------------------------------------
+
 #define SIZE_BUFFER_VCP 256     /// \todo если поставить размер буфера 512, то на ТЕ207 глюки
 static uint8 buffSend[SIZE_BUFFER_VCP];
 static int sizeBuffer = 0;
 
-//----------------------------------------------------------------------------------------------------------------------------------------------------
+
 void VCP::Flush()
 {
     if (sizeBuffer)
@@ -85,7 +85,7 @@ void VCP::Flush()
     sizeBuffer = 0;
 }
 
-//----------------------------------------------------------------------------------------------------------------------------------------------------
+
 void VCP::SendDataSynch(const void *_buffer, uint size)
 {
     if (CONNECTED_TO_USB)
@@ -124,19 +124,19 @@ void VCP::SendDataSynch(const void *_buffer, uint size)
     }
 }
 
-//----------------------------------------------------------------------------------------------------------------------------------------------------
+
 void VCP::SendStringAsynch(char *data)
 {
     SendDataAsynch(reinterpret_cast<uint8 *>(data), std::strlen(data));
 }
 
-//----------------------------------------------------------------------------------------------------------------------------------------------------
+
 void VCP::SendStringSynch(char *data)
 {
     SendDataSynch(reinterpret_cast<uint8 *>(data), std::strlen(data));
 }
 
-//----------------------------------------------------------------------------------------------------------------------------------------------------
+
 void VCP::SendFormatStringAsynch(char *format, ...)
 {
     if (CONNECTED_TO_USB)
@@ -151,7 +151,7 @@ void VCP::SendFormatStringAsynch(char *format, ...)
     }
 }
 
-//----------------------------------------------------------------------------------------------------------------------------------------------------
+
 void VCP::SendFormatStringSynch(char *format, ...)
 {
     char buffer[200];
@@ -163,7 +163,7 @@ void VCP::SendFormatStringSynch(char *format, ...)
     SendDataSynch(reinterpret_cast<uint8 *>(buffer), std::strlen(buffer));
 }
 
-//----------------------------------------------------------------------------------------------------------------------------------------------------
+
 void VCP::SendByte(uint8 byte)
 {
     SendDataSynch(&byte, 1);

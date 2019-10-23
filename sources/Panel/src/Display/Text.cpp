@@ -17,13 +17,13 @@ void Text::SetMinWidthFont(uint8 width)
     minWidth = width;
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void Text::SetSpacing(uint8 space)
 {
     spacing = space;
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 int Text::DrawChar(int eX, int eY, uint8 symbol, Color color)
 {
     Painter::SetColor(color);
@@ -53,7 +53,7 @@ int Text::DrawChar(int eX, int eY, uint8 symbol, Color color)
     return eX + width;
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void Text::DrawBigText(int eX, int eY, uint8 size, pString text)
 {
     uint numSymbols = std::strlen(text);
@@ -69,7 +69,7 @@ void Text::DrawBigText(int eX, int eY, uint8 size, pString text)
     }
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 int Text::DrawBigChar(int eX, int eY, int size, uint8 symbol)
 {
     uint8 width = Font::GetWidth(symbol);
@@ -101,7 +101,7 @@ int Text::DrawBigChar(int eX, int eY, int size, uint8 symbol)
     return eX + width * size;
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 int Text::Draw(int x, int y, const char *text)
 {
     uint numSymbols = std::strlen(text);

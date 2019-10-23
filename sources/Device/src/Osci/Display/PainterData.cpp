@@ -89,7 +89,7 @@ static void DrawRAM()
     DisplayOsci::MemoryWindow::Draw();
 }
 
-//----------------------------------------------------------------------------------------------------------------------------------------------------
+
 static void DrawSpectrumChannel(const float *spectrum, Color color)
 {
     color.SetAsCurrent();
@@ -104,7 +104,7 @@ static void DrawSpectrumChannel(const float *spectrum, Color color)
     }
 }
 
-//----------------------------------------------------------------------------------------------------------------------------------------------------
+
 static void WriteParametersFFT(Chan::E ch, float freq0, float density0, float freq1, float density1)
 {
     int x = Grid::Left() + 259;
@@ -138,7 +138,7 @@ static void WriteParametersFFT(Chan::E ch, float freq0, float density0, float fr
     Text((set.fft.scale == ScaleFFT::Log) ? SU::Db2String(density1, 4, buffer) : AutoMeasurements::Float2String(density1, false, buffer)).Draw(x, y);
 }
 
-//----------------------------------------------------------------------------------------------------------------------------------------------------
+
 static void DRAW_SPECTRUM(const uint8 *dataIn, int numPoints, Chan::E ch)
 {
     if (!set.ch[ch].enabled)

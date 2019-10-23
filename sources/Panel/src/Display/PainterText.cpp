@@ -25,7 +25,7 @@ int Painter::DrawTextOnBackground(int x, int y, const char *text, Color colorBac
     return Text::Draw(x, y, text);
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 int Painter::DrawFormatText(int x, int y, char *format, ...)
 {
     char buffer[200];
@@ -36,7 +36,7 @@ int Painter::DrawFormatText(int x, int y, char *format, ...)
     return Text::Draw(x, y, buffer);
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 int Painter::DrawFormText(int x, int y, Color color, pString text, ...)
 {
     Painter::SetColor(color);

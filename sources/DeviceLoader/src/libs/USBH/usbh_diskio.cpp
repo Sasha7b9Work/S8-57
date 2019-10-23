@@ -4,11 +4,11 @@
 #include "Hardware/CPU.h"
 
 
-/* Private typedef -----------------------------------------------------------*/
-/* Private define ------------------------------------------------------------*/
-/* Private variables ---------------------------------------------------------*/
+/* Private typedef --------------------*/
+/* Private define ---------------------*/
+/* Private variables ------------------*/
 
-/* Private function prototypes -----------------------------------------------*/
+/* Private function prototypes --------*/
 DSTATUS USBH_initialize (BYTE);
 DSTATUS USBH_status (BYTE);
 DRESULT USBH_read (BYTE, BYTE*, DWORD, UINT);
@@ -34,7 +34,7 @@ const Diskio_drvTypeDef  USBH_Driver =
 #endif /* _USE_IOCTL == 1 */
 };
 
-/* Private functions ---------------------------------------------------------*/
+/* Private functions ------------------*/
 
 /**
   * @brief  Initializes a Drive

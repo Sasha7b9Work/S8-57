@@ -50,13 +50,13 @@
 #ifndef __USBH_DISKIO_H
 #define __USBH_DISKIO_H
 
-/* Includes ------------------------------------------------------------------*/
+/* Includes ---------------------------*/
 #include "ff_gen_drv.h"
 #include "usbh_core.h"
 #include "usbh_msc.h"
-/* Exported types ------------------------------------------------------------*/
-/* Exported constants --------------------------------------------------------*/
-/* Exported functions ------------------------------------------------------- */
+/* Exported types ---------------------*/
+/* Exported constants -----------------*/
+/* Exported functions ---------------- */
 extern const Diskio_drvTypeDef  USBH_Driver;
 
 #endif /* __USBH_DISKIO_H */

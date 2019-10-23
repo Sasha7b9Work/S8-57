@@ -427,7 +427,7 @@ void Page::DrawPagesUGO(int right, int bottom) const
     }
 }
 
-//---------------------------------------------------------------------------------------------------------------------------------------------------
+//------------------------------
 void Page::DrawNestingPage(int left, int bottom) const
 {
     Page *parent = const_cast<Page *>(Keeper());

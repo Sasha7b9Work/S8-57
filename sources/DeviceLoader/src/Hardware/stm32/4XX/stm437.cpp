@@ -10,7 +10,7 @@ void STM437::Init()
     HAL_Init();
 }
 
-//----------------------------------------------------------------------------------------------------------------------------------------------------
+
 void HAL_MspInit()
 {
     HAL_NVIC_SetPriorityGrouping(NVIC_PRIORITYGROUP_4);
@@ -32,7 +32,7 @@ void HAL_MspInit()
     HAL_NVIC_SetPriority(SysTick_IRQn, 0, 0);
 }
 
-//----------------------------------------------------------------------------------------------------------------------------------------------------
+
 void STM437::SystemClockConfig()
 {
     RCC_OscInitTypeDef RCC_OscInitStruct;

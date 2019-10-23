@@ -527,7 +527,7 @@ float GetStretchADC(Chan::E ch)
 }
 
 
-//---------------------------------------------------------------------------------------------------------------------------------------------------
+//------------------------------
 void SetStretchADC(Chan::E ch, float kStretch)
 {
     set.dbg.nrst.stretchADC[ch][set.dbg.nrst.stretchADCtype] = static_cast<int16>((kStretch - 1.0F) * 1e4F);

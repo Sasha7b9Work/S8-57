@@ -92,7 +92,7 @@ void LTDC_::Init(uint front, uint back)
     Painter::LoadPalette();
 }
 
-//----------------------------------------------------------------------------------------------------------------------------------------------------
+
 void LTDC_::SetBuffers(uint front, uint back)
 {
     frontBuffer = front;
@@ -121,7 +121,7 @@ void LTDC_::SetBuffers(uint front, uint back)
     }
 }
 
-//----------------------------------------------------------------------------------------------------------------------------------------------------
+
 void LTDC_::SetColors(uint *clut, uint numColors)
 {
     HAL_LTDC_ConfigCLUT(&handleLTDC, clut, numColors, 0);
@@ -129,7 +129,7 @@ void LTDC_::SetColors(uint *clut, uint numColors)
     HAL_LTDC_EnableCLUT(&handleLTDC, 0);
 }
 
-//----------------------------------------------------------------------------------------------------------------------------------------------------
+
 void LTDC_::ToggleBuffers()
 {
     DMA2D_HandleTypeDef hDMA2D;

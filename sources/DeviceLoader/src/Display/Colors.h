@@ -117,9 +117,9 @@ private:
 
 #else
 
-#define MAKE_COLOR(r, g, b) ((uint16)(((b) & 0x1f) + (((g) & 0x3f) << 5) + (((r) & 0x1f) << 11)))
-#define R_FROM_COLOR(color) (((uint16)(color) >> 11) & (uint16)0x1f)
-#define G_FROM_COLOR(color) (((uint16)(color) >> 5) & (uint16)0x3f)
-#define B_FROM_COLOR(color) ((uint16)(color) & 0x1f)
+#define MAKE_COLOR(r, g, b) (static_cast<uint16>((static_cast<uint16>(b) & 0x1f) + ((static_cast<uint16>(g) & 0x3f) << 5) + ((static_cast<uint16>(r) & 0x1f) << 11)))
+#define R_FROM_COLOR(color) ((static_cast<uint16>(color) >> 11) & static_cast<uint16>(0x1f))
+#define G_FROM_COLOR(color) ((static_cast<uint16>(color) >> 5) & static_cast<uint16>(0x3f))
+#define B_FROM_COLOR(color) (static_cast<uint16>(color) & 0x1f)
 
 #endif

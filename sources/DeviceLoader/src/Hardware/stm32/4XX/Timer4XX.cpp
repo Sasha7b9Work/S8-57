@@ -27,7 +27,7 @@ void Timer4XX::Init(TIM_TypeDef *instance, uint prescaler, uint counterMode, uin
     HAL_TIM_Base_Init(&handler);
 }
 
-//----------------------------------------------------------------------------------------------------------------------------------------------------
+
 void Timer4XX::EnabledIRQ(uint mainPriority, uint subPriority)
 {
     IRQn_Type type = GetIRQn_Type();
@@ -37,7 +37,7 @@ void Timer4XX::EnabledIRQ(uint mainPriority, uint subPriority)
     HAL_NVIC_SetPriority(type, mainPriority, subPriority);
 }
 
-//----------------------------------------------------------------------------------------------------------------------------------------------------
+
 IRQn_Type Timer4XX::GetIRQn_Type()
 {
     if (handler.Instance == TIM3)
@@ -47,25 +47,25 @@ IRQn_Type Timer4XX::GetIRQn_Type()
     return SysTick_IRQn;
 }
 
-//----------------------------------------------------------------------------------------------------------------------------------------------------
+
 void Timer4XX::DisableIRQ()
 {
     HAL_NVIC_DisableIRQ(GetIRQn_Type());
 }
 
-//----------------------------------------------------------------------------------------------------------------------------------------------------
+
 void Timer4XX::Start()
 {
     HAL_TIM_Base_Start(&handler);
 }
 
-//----------------------------------------------------------------------------------------------------------------------------------------------------
+
 void Timer4XX::Stop()
 {
     HAL_TIM_Base_Stop(&handler);
 }
 
-//----------------------------------------------------------------------------------------------------------------------------------------------------
+
 void Timer4XX::StartIT(uint period)
 {
     handler.Init.Period = period;
@@ -73,13 +73,13 @@ void Timer4XX::StartIT(uint period)
     HAL_TIM_Base_Start_IT(&handler);
 }
 
-//----------------------------------------------------------------------------------------------------------------------------------------------------
+
 void Timer4XX::StopIT()
 {
     HAL_TIM_Base_Stop_IT(&handler);
 }
 
-//----------------------------------------------------------------------------------------------------------------------------------------------------
+
 void Timer4XX::DeInit()
 {
     HAL_TIM_Base_DeInit(&handler);

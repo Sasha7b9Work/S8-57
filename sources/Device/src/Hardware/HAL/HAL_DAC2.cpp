@@ -44,7 +44,7 @@ void HAL_DAC2::Init()
     HAL_DAC_Start(&handle, DAC1_CHANNEL_2);
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void HAL_DAC2::SetValue(uint value)
 {
     HAL_DAC_SetValue(&handle, DAC1_CHANNEL_2, DAC_ALIGN_8B_R, value);

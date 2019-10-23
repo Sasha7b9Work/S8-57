@@ -35,7 +35,7 @@ void Log::Write(TypeTrace type, const char *format, ...)
     AddToConsole(buffer);
 }
 
-//----------------------------------------------------------------------------------------------------------------------------------------------------
+
 void Log::Trace(TypeTrace type, const char *module, const char *func, int numLine, char *format, ...)
 {
     char buffer[SIZE_BUFFER_LOG];
@@ -70,7 +70,7 @@ void Log::Trace(TypeTrace type, const char *module, const char *func, int numLin
     AddToConsole(buffer);
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 static void AddToConsole(const char *text)
 {
     uint8 *buffer = (uint8 *)std::malloc(std::strlen(text) + 3U);
