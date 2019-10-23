@@ -24,15 +24,15 @@ uint8 *Display::backBuffer = back;
 
 void Display::Init()
 {   
-    LTDC_::Init((uint)frontBuffer, (uint)backBuffer); //-V205
+    LTDC_::Init(reinterpret_cast<uint>(frontBuffer), reinterpret_cast<uint>(backBuffer));
     Painter::LoadPalette();
 }
 
 
 void Display::ToggleBuffers(void)
 {
-    uint destination = (uint)frontBuffer; //-V205
-    uint source = (uint)backBuffer; //-V205
+    uint destination = reinterpret_cast<uint>(frontBuffer);
+    uint source = reinterpret_cast<uint>(backBuffer);
 
     DMA2D_HandleTypeDef hDMA2D;
 

@@ -18,11 +18,11 @@ void Painter::BeginScene()
 {   
     Color col = currentColor;
 
-    uint *address = (uint *)Display::GetBuffer();
+    uint *address = reinterpret_cast<uint *>(Display::GetBuffer());
 
     uint *end = address + (BUFFER_HEIGHT * BUFFER_WIDTH) / 4;
 
-    uint value = (uint)col.value + (uint)(col.value << 8) + (uint)(col.value << 16) + (uint)(col.value << 24);
+    uint value = static_cast<uint>(col.value) + static_cast<uint>(col.value << 8) + static_cast<uint>(col.value << 16) + static_cast<uint>(col.value << 24);
 
     while (address != end)
     {
@@ -50,7 +50,9 @@ void Painter::EndScene(void)
     if (sendingString >= 0)                                               // Если нужно отправить картинку
     {
 #define SIZE  (SIZE_STRING + 2)
-        uint8 buffer[SIZE] = { Command::Screen, (uint8)sendingString };
+
+        uint8 buffer[SIZE] = { Command::Screen, static_cast<uint8>(sendingString) };
+
         std::memcpy(buffer + 2, Display::GetBuffer() + sendingString * SIZE_STRING, SIZE_STRING);
 
         Transceiver::Send(buffer, SIZE_STRING);
@@ -117,8 +119,8 @@ void Painter::DrawLine(int x1, int y1, int x2, int y2)
 
     int x = x1;
     int y = y1;
-    int dx = (int)std::fabsf((float)(x2 - x1));
-    int dy = (int)std::fabsf((float)(y2 - y1));
+    int dx = static_cast<int>(std::fabsf(static_cast<float>(x2 - x1)));
+    int dy = static_cast<int>(std::fabsf(static_cast<float>(y2 - y1)));
     int s1 = Math::Sign(x2 - x1);
     int s2 = Math::Sign(y2 - y1);
     int temp;
@@ -256,7 +258,7 @@ void Painter::SendRow(int row)
 {
     uint8 *points = Display::GetBuffer() + row * BUFFER_WIDTH;
 
-    uint8 data[322] = { Command::Screen, (uint8)row };
+    uint8 data[322] = { Command::Screen, static_cast<uint8>(row) };
 
     std::memcpy(&data[2], points, 320);
 
