@@ -195,7 +195,7 @@ static bool DrawTesterPoints(uint8 data)
 
         if(numY == TESTER_NUM_POINTS)
         {
-            Painter::DrawTesterData(mode, color, (uint16 *)buffer, buffer + TESTER_NUM_POINTS * 2); //-V1032
+            Painter::DrawTesterData(mode, color, reinterpret_cast<uint16 *>(buffer), buffer + TESTER_NUM_POINTS * 2); //-V1032
             return true;
         }
     }
@@ -218,7 +218,7 @@ static bool SetColor(uint8 data)
     }
     if (step == 1)
     {
-        Painter::SetColor((Color)data);
+        Painter::SetColor(static_cast<Color>(data));
     }
     return true;
 }
@@ -251,13 +251,13 @@ static bool FillRegion(uint8 data)
 
     switch (step)
     {
-        case 0:                                     break;
-        case 1:     x = data;                       break;
-        case 2:     x += (((int)data) << 8);        break;
-        case 3:     y = data;                       break;
-        case 4:     width = data;                   break;
-        case 5:     width += (((int)data) << 8);    break;
-        case 6:     height = (int)data;
+        case 0:                                             break;
+        case 1:     x = data;                               break;
+        case 2:     x += static_cast<int>(data) << 8;       break;
+        case 3:     y = data;                               break;
+        case 4:     width = data;                           break;
+        case 5:     width += static_cast<int>(data) << 8;   break;
+        case 6:     height = static_cast<int>(data);
             Painter::FillRegion(x, y, width, height);
             result = true;
             break;
@@ -281,13 +281,13 @@ static bool DrawRectangle(uint8 data)
 
     switch (step)
     {
-        case 0:                                     break;
-        case 1:     x = data;                       break;
-        case 2:     x += (((int)data) << 8);        break;
-        case 3:     y = data;                       break;
-        case 4:     width = data;                   break;
-        case 5:     width += (((int)data) << 8);    break;
-        case 6:     height = (int)data;
+        case 0:                                             break;
+        case 1:     x = data;                               break;
+        case 2:     x += static_cast<int>(data) << 8;       break;
+        case 3:     y = data;                               break;
+        case 4:     width = data;                           break;
+        case 5:     width += static_cast<int>(data) << 8;   break;
+        case 6:     height = static_cast<int>(data);
             Painter::DrawRectangle(x, y, width, height);
             result = true;
             break;
@@ -310,10 +310,10 @@ static bool DrawVLine(uint8 data)
 
     switch (step)
     {
-        case 0:                             break;
-        case 1: x = data;                   break;
-        case 2: x += (((int)data) << 8);    break;
-        case 3: y0 = data;                  break;
+        case 0:                                     break;
+        case 1: x = data;                           break;
+        case 2: x += static_cast<int>(data) << 8;   break;
+        case 3: y0 = data;                          break;
         case 4: y1 = data;
             Painter::DrawVLine(x, y0, y1);
             result = true;
@@ -337,12 +337,12 @@ static bool DrawHLine(uint8 data)
 
     switch (step)
     {
-        case 0:                             break;
-        case 1:     y = data;               break;
-        case 2:     x0 = data;              break;
-        case 3:     x0 += (int)data << 8;   break;
-        case 4:     x1 = data;              break;
-        case 5:     x1 += (int)data << 8;
+        case 0:                                         break;
+        case 1:     y = data;                           break;
+        case 2:     x0 = data;                          break;
+        case 3:     x0 += static_cast<int>(data) << 8;  break;
+        case 4:     x1 = data;                          break;
+        case 5:     x1 += static_cast<int>(data) << 8;
             Painter::DrawHLine(y, x0, x1);
             result = true;
             break;
@@ -366,11 +366,11 @@ static bool DrawVPointLine(uint8 data)
 
     switch (step)
     {
-    case 0:                         break;
-    case 1: x = data;               break;
-    case 2: x += ((int)data) << 8;  break;
-    case 3: y = data;               break;
-    case 4: delta = data;           break;
+    case 0:                                     break;
+    case 1: x = data;                           break;
+    case 2: x += static_cast<int>(data) << 8;   break;
+    case 3: y = data;                           break;
+    case 4: delta = data;                       break;
     case 5: count = data;
         Painter::DrawVPointLine(x, y, delta, count);
         result = true;
@@ -395,11 +395,11 @@ static bool DrawHPointLine(uint8 data)
 
     switch (step)
     {
-    case 0:                         break;
-    case 1: x = data;               break;
-    case 2: x += ((int)data) << 8;  break;
-    case 3: y = data;               break;
-    case 4: delta = data;           break;
+    case 0:                                     break;
+    case 1: x = data;                           break;
+    case 2: x += static_cast<int>(data) << 8;   break;
+    case 3: y = data;                           break;
+    case 4: delta = data;                       break;
     case 5: count = data;
         Painter::DrawHPointLine(x, y, delta, count);
         result = true;
@@ -453,12 +453,12 @@ static bool DrawLine(uint8 data)
 
     switch (step)
     {
-        case 0:                         break;
-        case 1: x0 = data;              break;
-        case 2: x0 += ((int)data << 8); break;
-        case 3: y0 = data;              break;
-        case 4: x1 = data;              break;
-        case 5: x1 += ((int)data << 8); break;
+        case 0:                                     break;
+        case 1: x0 = data;                          break;
+        case 2: x0 += static_cast<int>(data) << 8;  break;
+        case 3: y0 = data;                          break;
+        case 4: x1 = data;                          break;
+        case 5: x1 += static_cast<int>(data) << 8;  break;
         case 6: Painter::DrawLine(x0, y0, x1, data);
             result = true;
             break;
@@ -479,9 +479,9 @@ static bool SetPoint(uint8 data)
 
     switch (step)
     {
-        case 0:                         break;
-        case 1: x = data;               break;
-        case 2: x += ((int)data << 8);  break;
+        case 0:                                     break;
+        case 1: x = data;                           break;
+        case 2: x += static_cast<int>(data) << 8;   break;
         case 3: Painter::SetPoint(x, data);
             result = true;
             break;
@@ -504,9 +504,9 @@ static bool DrawText(uint8 data)
 
     switch (step)
     {
-        case 0:                             break;
-        case 1:     x = data;               break;
-        case 2:     x += (int)data << 8;    break;
+        case 0:                                         break;
+        case 1:     x = data;                           break;
+        case 2:     x += static_cast<int>(data) << 8;   break;
         case 3:
             y = data;
             if (y > 239)
@@ -517,10 +517,10 @@ static bool DrawText(uint8 data)
         case 4:
             numSymbols = data;
             readingSymbols = 0;
-            buffer = new char[(uint)(numSymbols + 1)];
+            buffer = new char[static_cast<uint>(numSymbols + 1)];
             break;
         default:
-            buffer[readingSymbols++] = (char)data;
+            buffer[readingSymbols++] = static_cast<char>(data);
             if (readingSymbols == numSymbols)
             {
                 buffer[readingSymbols] = 0;
@@ -545,18 +545,18 @@ static bool DrawBigText(uint8 data)
 
     switch (step)
     {
-    case 0:                             break;
-    case 1:     x = data;               break;
-    case 2:     x += (int)data << 8;    break;
-    case 3:     y = data;               break;
-    case 4:     size = data;            break;
+    case 0:                                         break;
+    case 1:     x = data;                           break;
+    case 2:     x += static_cast<int>(data) << 8;   break;
+    case 3:     y = data;                           break;
+    case 4:     size = data;                        break;
     case 5:
         numSymbols = data;
         readingSymbols = 0;
-        buffer = new char[(uint)(numSymbols + 1)];
+        buffer = new char[static_cast<uint>(numSymbols + 1)];
         break;
     default:
-        buffer[readingSymbols++] = (char)data;
+        buffer[readingSymbols++] = static_cast<char>(data);
         if (readingSymbols == numSymbols)
         {
             buffer[readingSymbols] = 0;
@@ -579,12 +579,12 @@ static bool SetPalette(uint8 data)
 
     switch (step)
     {
-        case 0:                                 break;
-        case 1: numColor = data;                break;
-        case 2: valueColor = data;              break;
-        case 3: valueColor |= (uint)data << 8;  break;
-        case 4: valueColor |= (uint)data << 16; break;
-        case 5: valueColor |= (uint)data << 24;
+        case 0:                                                 break;
+        case 1: numColor = data;                                break;
+        case 2: valueColor = data;                              break;
+        case 3: valueColor |= static_cast<uint>(data) << 8;     break;
+        case 4: valueColor |= static_cast<uint>(data) << 16;    break;
+        case 5: valueColor |= static_cast<uint>(data) << 24;
             Painter::SetColorValue(Color(numColor), valueColor);
             result = true;
             break;
@@ -604,7 +604,7 @@ static bool SetFont(uint8 data)
         return false;
     }
 
-    Font::SetCurrent((TypeFont::E)data);
+    Font::SetCurrent(static_cast<TypeFont::E>(data));
 
     return true;
 }
