@@ -147,11 +147,11 @@ void Range::Change(Chan::E ch, int delta)
 
     if (delta > 0)
     {
-        ::Math::LimitationIncrease<uint8>(reinterpret_cast<uint8 *>(&set.ch[static_cast<int>(ch)].range), static_cast<uint8>(Range::Count - 1)); // -V206
+        ::Math::LimitationIncrease<uint8>(reinterpret_cast<uint8 *>(&set.ch[ch].range), static_cast<uint8>(Range::Count - 1)); // -V206
     }
     else
     {
-        ::Math::LimitationDecrease<uint8>(reinterpret_cast<uint8 *>(&set.ch[static_cast<int>(ch)].range), 0);  // -V206
+        ::Math::LimitationDecrease<uint8>(reinterpret_cast<uint8 *>(&set.ch[ch].range), 0);  // -V206
     }
     Range::LoadBoth();
 

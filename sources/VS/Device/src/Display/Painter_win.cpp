@@ -260,10 +260,10 @@ static void CreateButtons(Frame *frame)
 
 static void CreateButton(Key::E key, Frame *frame, const wxPoint &pos, const wxSize &size, pString title)
 {
-    wxButton *button = new wxButton(frame, (wxWindowID)key, title, pos, size);
+    wxButton *button = new wxButton(frame, static_cast<wxWindowID>(key), title, pos, size);
 
-    button->Connect((wxWindowID)key, wxEVT_LEFT_DOWN, wxCommandEventHandler(Frame::OnDown));
-    button->Connect((wxWindowID)key, wxEVT_LEFT_UP, wxCommandEventHandler(Frame::OnUp));
+    button->Connect(static_cast<wxWindowID>(key), wxEVT_LEFT_DOWN, wxCommandEventHandler(Frame::OnDown));
+    button->Connect(static_cast<wxWindowID>(key), wxEVT_LEFT_UP, wxCommandEventHandler(Frame::OnUp));
 
     buttons[key] = button;
 }
@@ -309,7 +309,7 @@ static void CreateButtonsTrig(Frame *frame, int x, int y)
 
 void Frame::OnDown(wxCommandEvent &event)
 {
-    Key::E key = (Key::E)event.GetId();
+    Key::E key = static_cast<Key::E>(event.GetId());
 
     std::cout << "down " << Key(key).Name() << std::endl;
     event.Skip();
@@ -324,7 +324,7 @@ void Frame::OnDown(wxCommandEvent &event)
 
 void Frame::OnUp(wxCommandEvent &event)
 {
-    Key::E key = (Key::E)event.GetId();
+    Key::E key = static_cast<Key::E>(event.GetId());
 
     std::cout << "up   " << Key(key).Name() << std::endl;
     event.Skip();

@@ -22,13 +22,14 @@ struct Chan
         B,
         Count
     } value;
-    explicit Chan(E v) : value(v) { };
+    Chan(E v) : value(v) { };
     bool IsA() { return value == A; };
     bool IsB() { return value == B; }
     int PointsInChannel() const;
     /// Возвращает количество памяти, требуемой для сохранения данных одного канала
     int RequestBytes(DataSettings *ds) const;
     pString Name() const;
+    operator int() { return static_cast<int>(value); };
 };
 
 

@@ -127,7 +127,7 @@ void Frame::DrawFPS()
 
     if (SDL_GetTicks() - prevTime > 1000)
     {
-        float fps = (float)count / (SDL_GetTicks() - prevTime) * 1000.0F;
+        float fps = static_cast<float>(count) / (SDL_GetTicks() - prevTime) * 1000.0F;
 
         char buffer[100];
         sprintf(buffer, "fps %f", fps);

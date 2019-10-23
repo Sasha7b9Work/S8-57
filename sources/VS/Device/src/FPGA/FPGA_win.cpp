@@ -45,7 +45,7 @@ bool FPGA::ReadDataChanenl(Chan::E ch, uint8 data[MAX_NUM_POINTS])
 
     for (uint i = 0; i < FPGA_NUM_POINTS; i++)
     {
-        data[i] = (uint8)(VALUE::AVE + amplitude * (sinf(i * 0.1F)) + NextNoise());
+        data[i] = static_cast<uint8>(VALUE::AVE + amplitude * (sinf(i * 0.1F)) + NextNoise());
     }
 
     return true;

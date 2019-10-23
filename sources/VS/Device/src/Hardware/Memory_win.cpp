@@ -69,7 +69,7 @@ void MemoryLoad()
 
 bool SectorTypeDef::IsConsist(uint addr) const
 {
-    return (addr >= (uint)memory) && (addr < (uint)(memory + size));
+    return (addr >= reinterpret_cast<uint>(memory)) && (addr < reinterpret_cast<uint>(memory + size));
 }
 
 
@@ -77,6 +77,6 @@ void SectorTypeDef::WriteByte(uint addr, uint8 value) const
 {
     if (IsConsist(addr))
     {
-        *((uint8 *)addr) = value;
+        *(reinterpret_cast<uint8 *>(addr)) = value;
     }
 }

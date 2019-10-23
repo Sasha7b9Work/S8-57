@@ -95,12 +95,12 @@ void Text::DrawBig(int x, int y, Color color)
 }
 
 
-static int DrawChar(int eX, int eY, char _symbol)
+static int DrawChar(int eX, int eY, char s)
 {
-    uint8 symbol = (uint8)_symbol;
+    uint8 symbol = static_cast<uint8>(s);
 
-    int8 width = (int8)Font::GetWidth(symbol);
-    int8 height = (int8)Font::GetHeight();
+    int8 width = static_cast<int8>(Font::GetWidth(symbol));
+    int8 height = static_cast<int8>(Font::GetHeight());
 
     int delta = Font::IsBig() ? 0 : (9 - height);
 
@@ -125,12 +125,12 @@ static int DrawChar(int eX, int eY, char _symbol)
 }
 
 
-static int DrawBigChar(int eX, int eY, int size, char _symbol)
+static int DrawBigChar(int eX, int eY, int size, char s)
 {
-    uint8 symbol = (uint8)_symbol;
+    uint8 symbol = static_cast<uint8>(s);
 
-    int8 width = (int8)Font::GetWidth(symbol);
-    int8 height = (int8)Font::GetHeight();
+    int8 width = static_cast<int8>(Font::GetWidth(symbol));
+    int8 height = static_cast<int8>(Font::GetHeight());
 
     for (int b = 0; b < height; b++)
     {
