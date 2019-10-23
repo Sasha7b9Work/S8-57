@@ -10,5 +10,5 @@ struct Chan
         B,
         Number
     } value;
-    operator uint8() const { return (uint8)value; }
+    operator uint8() const { return static_cast<uint8>(value); }
 };

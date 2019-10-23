@@ -64,7 +64,7 @@ void Text::DrawBigText(int eX, int eY, uint8 size, pString text)
 
     for (uint i = 0; i < numSymbols; i++)
     {
-        x = DrawBigChar(x, eY, size, (uint8)text[i]);
+        x = DrawBigChar(x, eY, size, static_cast<uint8>(text[i]));
         x += size;
     }
 }
@@ -108,7 +108,7 @@ int Text::Draw(int x, int y, const char *text)
     for (uint i = 0; i < numSymbols; ++i)
     {
         int prevX = x;
-        x = DrawChar(x, y, (uint8)text[i]);
+        x = DrawChar(x, y, static_cast<uint8>(text[i]));
 
         if (x - prevX < minWidth)
         {

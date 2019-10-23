@@ -45,7 +45,7 @@ int Painter::DrawFormText(int x, int y, Color color, pString text, ...)
     char buffer[SIZE_BUFFER_DRAW_FORM_TEXT];
     std::va_list args;
     va_start(args, text); //-V2528
-    vsprintf(buffer, (char *)text, args);
+    vsprintf(buffer, const_cast<char *>(text), args);
     va_end(args);
     return Text::Draw(x, y, buffer);
 }

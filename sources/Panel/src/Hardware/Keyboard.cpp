@@ -197,7 +197,13 @@ void Keyboard::Update()
 
 static void SendCommand(Control control, Control::Action::E action)
 {
-    uint8 data[3] = {Command::ButtonPress, (uint8)control, (uint8)action};
+    uint8 data[3] =
+    {
+        Command::ButtonPress,
+        static_cast<uint8>(control),
+        static_cast<uint8>(action)
+    };
+
     Transceiver::Send(data, 3);
 }   
 
@@ -266,7 +272,7 @@ bool Control::IsRepeatable() const
 
 static uint TimeBetweenRepeats(uint prev)
 {
-    uint retValue = (uint)(prev / 1.1F);
+    uint retValue = static_cast<uint>(prev / 1.1F);
 
     if (retValue < 10)
     {

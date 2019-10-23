@@ -73,13 +73,13 @@ void Log::Trace(TypeTrace type, const char *module, const char *func, int numLin
 
 static void AddToConsole(const char *text)
 {
-    uint8 *buffer = (uint8 *)std::malloc(std::strlen(text) + 3U);
+    uint8 *buffer = static_cast<uint8 *>(std::malloc(std::strlen(text) + 3U));
 
     if (buffer)
     {
         buffer[0] = Command::AddToConsole;
-        buffer[1] = (uint8)std::strlen(text);
-        std::strcpy((char *)(buffer + 1), text);
+        buffer[1] = static_cast<uint8>(std::strlen(text));
+        std::strcpy(reinterpret_cast<char *>(buffer + 1), text);
         Transceiver::Send(buffer, std::strlen(text) + 2);
 
         std::free(buffer);
