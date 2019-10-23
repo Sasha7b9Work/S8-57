@@ -65,7 +65,7 @@ public:
     class FLASH_
     {
     public:
-        static const uint ADDR_SECTOR_PROGRAM_0 = ((uint)0x08020000);   // Адрес первого сектора с программой
+        static const uint ADDR_SECTOR_PROGRAM_0 = (static_cast<uint>(0x08020000));   // Адрес первого сектора с программой
 
         /// Очищает сектора, предназначенные для записи прошивки.
         static void Prepare();

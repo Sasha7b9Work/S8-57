@@ -85,7 +85,7 @@ void USBH_UserProcess(USBH_HandleTypeDef *, uint8 id)
         case HOST_USER_CONNECTION:
             ms->drive.connection++;
             ms->state = State_Mount;
-            f_mount(NULL, (TCHAR const*)"", 0);
+            f_mount(NULL, static_cast<TCHAR const*>(""), 0);
             break;
 
         case HOST_USER_DISCONNECTION:
@@ -104,7 +104,7 @@ bool CPU::FDrive::Update()
     USBH_Process(&handleUSBH);
     if (ms->drive.state == StateDisk_Start)
     {
-        if (f_mount(&(ms->drive.USBDISKFatFS), (TCHAR const*)ms->drive.USBDISKPath, 0) == FR_OK)
+        if (f_mount(&(ms->drive.USBDISKFatFS), static_cast<TCHAR const*>(ms->drive.USBDISKPath), 0) == FR_OK)
         {
             return true;
         }
@@ -123,7 +123,7 @@ static void ToLower(char *str)
 {
     while (*str)
     {
-        *str = (char)tolower(*str);
+        *str = static_cast<char>(tolower(*str));
         str++;
     }
 }
@@ -162,7 +162,7 @@ bool CPU::FDrive::FileExist(const char *fileName)
 
 static bool GetNameFile(const char *fullPath, int numFile, char *nameFileOut, StructForReadDir *s)
 {
-    memcpy((uint8 *)s->nameDir, (uint8 *)fullPath, strlen(fullPath));
+    memcpy(reinterpret_cast<uint8 *>(s->nameDir), const_cast<char *>(fullPath), strlen(fullPath));
     s->nameDir[strlen(fullPath)] = '\0';
 
     DIR *pDir = &s->dir;
@@ -252,9 +252,9 @@ int CPU::FDrive::OpenFileForRead(const char *fileName)
 int CPU::FDrive::ReadFromFile(int numBytes, uint8 *buffer)
 {
     uint readed = 0;
-    if (f_read(&ms->drive.file, buffer, (UINT)numBytes, &readed) == FR_OK)
+    if (f_read(&ms->drive.file, buffer, static_cast<UINT>(numBytes), &readed) == FR_OK)
     {
-        return (int)readed;
+        return static_cast<int>(readed);
     }
     return -1;
 }

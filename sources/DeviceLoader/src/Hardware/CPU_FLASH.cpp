@@ -57,8 +57,8 @@ void CPU::FLASH_::WriteData(uint address, uint8 *data, int size)
         size /= 4;
         for (int i = 0; i < size; i++)
         {
-            uint *data32 = (uint *)data;
-            HAL_FLASH_Program(TYPEPROGRAM_WORD, address, (uint64_t)(data32[i]));
+            uint *data32 = reinterpret_cast<uint *>(data);
+            HAL_FLASH_Program(TYPEPROGRAM_WORD, address, static_cast<uint64_t>(data32[i]));
             address += 4;
         }
     }
@@ -66,7 +66,7 @@ void CPU::FLASH_::WriteData(uint address, uint8 *data, int size)
     {
         for (int i = 0; i < size; i++)
         {
-            HAL_FLASH_Program(TYPEPROGRAM_BYTE, address++, (uint64_t)data[i]);
+            HAL_FLASH_Program(TYPEPROGRAM_BYTE, address++, static_cast<uint64_t>(data[i]));
         }
     }
 

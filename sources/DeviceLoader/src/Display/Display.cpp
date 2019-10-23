@@ -249,7 +249,7 @@ static void DrawBigMNIPI()
 
     for (int i = 0; i < numPoints; i++)
     {
-        int x = array[i].x + (VAGUE_OR_ALL ? RandValue(static_cast<int>(-radius), static_cast<int>(radius)) : 0) + static_cast<int>(shift[array[i].y]);
+        int x = array[i].x + (VAGUE_OR_ALL ? RandValue(static_cast<int>(-radius), static_cast<int>(radius)) : 0) + static_cast<int>(shift[array[i].y]); //-V537
         int y = array[i].y + (VAGUE_OR_ALL ? RandValue(static_cast<int>(-radius), static_cast<int>(radius)) : 0);
         if (x > 0 && x < 319 && y > 0 && y < 239)
         {

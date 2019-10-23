@@ -37,8 +37,8 @@ int Painter::DrawFormatText(int x, int y, char *format, ...)
 
 int Painter::DrawCharWithLimitation(int eX, int eY, uint8 symbol, int limitX, int limitY, int limitWidth, int limitHeight)
 {
-    int8 width = (int8)Font::GetWidth(symbol);
-    int8 height = (int8)Font::GetHeight();
+    int8 width = static_cast<int8>(Font::GetWidth(symbol));
+    int8 height = static_cast<int8>(Font::GetHeight());
 
     for (int b = 0; b < height; b++)
     {
@@ -71,7 +71,7 @@ int Painter::DrawTextWithLimitationC(int x, int y, const char *text, Color color
     int retValue = x;
     while (*text)
     {
-        x = DrawCharWithLimitation(x, y, (uint8)*text, limitX, limitY, limitWidth, limitHeight);
+        x = DrawCharWithLimitation(x, y, static_cast<uint8>(*text), limitX, limitY, limitWidth, limitHeight);
         retValue += Font::GetLengthSymbol(*text);
         text++;
     }
@@ -101,7 +101,7 @@ static bool IsLetter(char symbol)
         true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true
     };
 
-    return isLetter[(uint8)symbol];
+    return isLetter[static_cast<uint8>(symbol)];
 }
 
 
@@ -145,7 +145,7 @@ static bool IsConsonant(char symbol)
         true, true, true, false, true, true, true, true, true, true, true, false, true, false, false, false
     };
 
-    return isConsonat[(uint8)symbol];
+    return isConsonat[static_cast<uint8>(symbol)];
 }
 
 
@@ -170,7 +170,7 @@ static bool FindNextTransfer(const char *letters, int8 *lettersInSyllable)
 #define VOWEL       0   // Гласная
 #define CONSONANT   1   // Согласная
 
-    *lettersInSyllable = (int8)strlen(letters);
+    *lettersInSyllable = static_cast<int8>(strlen(letters));
     if (strlen(letters) <= 3)
     {
         return false;
@@ -187,7 +187,7 @@ static bool FindNextTransfer(const char *letters, int8 *lettersInSyllable)
 
     bool consonant[20];
 
-    int size = (int)strlen(letters);
+    int size = static_cast<int>(strlen(letters));
     for (int i = 0; i < size; i++)
     {
         consonant[i] = IsConsonant(letters[i]);
@@ -261,14 +261,14 @@ static int8 *BreakWord(char *word)
 
 
 // Возвращает часть слова до слога numSyllable(включительн) вместе со знаком переноса
-static char *PartWordForTransfer(char *word, const int8 *lengthSyllables, int numSyllable, char buffer[30])
+static char *PartWordForTransfer(const char *word, const int8 *lengthSyllables, int numSyllable, char buffer[30])
 {
     size_t length = 0;
     for (int i = 0; i <= numSyllable; i++)
     {
-        length += (size_t)lengthSyllables[i];
+        length += static_cast<size_t>(lengthSyllables[i]);
     }
-    memcpy((void *)buffer, (void *)word, length);
+    memcpy(buffer, word, length);
     buffer[length] = '-';
     buffer[length + 1] = '\0';
     return buffer;
@@ -300,7 +300,7 @@ static int DrawPartWord(char *word, int x, int y, int xRight, bool draw)
             {
                 Painter::DrawText(x, y, subString);
             }
-            return (int)strlen(subString) - 1;
+            return static_cast<int>(strlen(subString)) - 1;
         }
     }
 
@@ -316,7 +316,7 @@ int Painter::DrawTextInRectWithTransfers(int eX, int eY, int eWidth, int eHeight
     int bottom = eY + eHeight;
 
     char buffer[20];
-    int numSymbols = (int)strlen(text);
+    int numSymbols = static_cast<int>(strlen(text));
 
     int y = top - 1;
     int x = left;
@@ -373,7 +373,7 @@ int Painter::DrawTextInRectWithTransfers(int eX, int eY, int eWidth, int eHeight
 static bool GetHeightTextWithTransfers(int left, int top, int right, const char *text, int *height)
 {
     char buffer[20];
-    int numSymbols = (int)strlen(text);
+    int numSymbols = static_cast<int>(strlen(text));
 
     int y = top - 1;
     int x = left;
@@ -601,7 +601,7 @@ void Painter::DrawBigText(int eX, int eY, int size, const char *text, Color colo
 
     for (uint i = 0; i < numSymbols; i++)
     {
-        x = DrawBigChar(x, eY, size, (uint8)text[i]);
+        x = DrawBigChar(x, eY, size, static_cast<uint8>(text[i]));
         x += size;
     }
 }
