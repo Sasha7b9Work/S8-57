@@ -55,7 +55,7 @@ static PanelButton ButtonIsPress(uint16 command)
     {
         if(TIME_MS - timePrevPressButton > 100)
         {
-            button = (PanelButton)(command & 0x7f);
+            button = static_cast<PanelButton>(command & 0x7f);
             timePrevPressButton = TIME_MS;
         }
     }

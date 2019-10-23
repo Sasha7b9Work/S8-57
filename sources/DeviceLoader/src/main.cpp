@@ -150,9 +150,9 @@ void Upgrade()
         int readedBytes = CPU::FDrive::ReadFromFile(sizeSector, buffer);
         CPU::FLASH_::WriteData(address, buffer, readedBytes);
         size -= readedBytes;
-        address += (uint)readedBytes;
+        address += static_cast<uint>(readedBytes);
 
-        ms->percentUpdate = 1.0F - (float)size / fullSize;
+        ms->percentUpdate = 1.0F - static_cast<float>(size) / fullSize;
     }
     
     CPU::FDrive::CloseOpenedFile();

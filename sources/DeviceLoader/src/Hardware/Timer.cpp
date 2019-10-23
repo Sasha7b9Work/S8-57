@@ -72,7 +72,7 @@ void Timer::Init()
     tim3.Init(TIM3, 54000 - 1, TIM_COUNTERMODE_UP, 1, TIM_CLOCKDIVISION_DIV1);
     tim3.EnabledIRQ(1, 1);
 
-    tim2.Init(TIM2, 0, TIM_COUNTERMODE_UP, (uint)-1, TIM_CLOCKDIVISION_DIV1);
+    tim2.Init(TIM2, 0, TIM_COUNTERMODE_UP, static_cast<uint>(-1), TIM_CLOCKDIVISION_DIV1);
     tim2.Start();
 }
 
