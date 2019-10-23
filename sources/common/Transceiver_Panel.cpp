@@ -223,7 +223,7 @@ void SetData(uint8 data)
 
     for (int i = 0; i < 8; i++)
     {
-        HAL_GPIO_WritePin(GPIOE, pins[i], (GPIO_PinState)(data & 0x01));
+        HAL_GPIO_WritePin(GPIOE, pins[i], static_cast<GPIO_PinState>(data & 0x01));
         data >>= 1;
     }
 }
