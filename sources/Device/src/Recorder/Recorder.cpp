@@ -100,7 +100,7 @@ void Recorder::Start()
     RShift::Set(Chan::A, RShift::ZERO);
     RShift::Set(Chan::B, RShift::ZERO);
 
-    EEPROM::EraseSector(S10_SETTINGS_1);
+    EEPROM::EraseSector(S17_RECORDER_1);
 
     StorageRecorder::CreateNewRecord();
 
