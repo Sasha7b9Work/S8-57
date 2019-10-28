@@ -2,51 +2,31 @@
 #include "Utils/String.h"
 
 
-#ifdef GUI
-
-struct SectorTypeDef
-{
-    uint address;
-    uint8 *memory;
-    uint size;
-    /// ¬озвращает true, если сектор содержит €чейку пам€ти с адресом addr
-    bool IsConsist(uint addr) const;
-
-    void WriteByte(uint addr, uint8 value) const;
-};
-
-extern const SectorTypeDef sectors[24];
-
-#define ADDR_SECTOR_SETTINGS_1 ((uint)sectors[10].memory)
-#define ADDR_SECTOR_RECORDER_1 ((uint)sectors[17].memory)
-
-#endif
-
-#define S00            ((uint)0x08000000)
-#define S01            ((uint)0x08004000)
-#define S02            ((uint)0x08008000)
-#define S03            ((uint)0x0800C000)
-#define S04            ((uint)0x08010000)
-#define S05            ((uint)0x08020000)
-#define S06            ((uint)0x08040000)
-#define S07            ((uint)0x08060000)
-#define S08            ((uint)0x08080000)
-#define S09            ((uint)0x080A0000)
+#define S00            ((uint)0x08000000)	//  16k
+#define S01            ((uint)0x08004000)	//  16k
+#define S02            ((uint)0x08008000)	//  16k
+#define S03            ((uint)0x0800C000)	//  16k
+#define S04            ((uint)0x08010000)	//  64k
+#define S05            ((uint)0x08020000)	// 128k
+#define S06            ((uint)0x08040000)	// 128k
+#define S07            ((uint)0x08060000)	// 128k
+#define S08            ((uint)0x08080000)	// 128k
+#define S09            ((uint)0x080A0000)	// 128k
 /// ѕервый сектор дл€ сохранени€ настроек. ѕри его заполнении начинает использоватьс€ сектор 2.
-#define S10_SETTINGS_1 ((uint)0x080C0000)
-#define S11            ((uint)0x080E0000)
-#define S12            ((uint)0x08100000)
-#define S13            ((uint)0x08104000)
-#define S14            ((uint)0x08108000)
-#define S15            ((uint)0x0810C000)
-#define S16            ((uint)0x08110000)
-#define S17_RECORDER_1 ((uint)0x08120000)
-#define S18_RECORDER_2 ((uint)0x08140000)
-#define S19            ((uint)0x08160000)
-#define S20            ((uint)0x08180000)
-#define S21            ((uint)0x081A0000)
-#define S22            ((uint)0x081C0000)
-#define S23            ((uint)0x081E0000)
+#define S10_SETTINGS_1 ((uint)0x080C0000)	// 128k
+#define S11            ((uint)0x080E0000)	// 128k
+#define S12            ((uint)0x08100000)	//  16k
+#define S13            ((uint)0x08104000)	//  16k
+#define S14            ((uint)0x08108000)	//  16k
+#define S15            ((uint)0x0810C000)	//  16k
+#define S16            ((uint)0x08110000)	//  64k
+#define S17_RECORDER_1 ((uint)0x08120000)	// 128k
+#define S18_RECORDER_2 ((uint)0x08140000)	// 128k
+#define S19            ((uint)0x08160000)	// 128k
+#define S20            ((uint)0x08180000)	// 128k
+#define S21            ((uint)0x081A0000)	// 128k
+#define S22            ((uint)0x081C0000)	// 128k
+#define S23            ((uint)0x081E0000)	// 128k
 
 
 struct DataSettings;
@@ -57,6 +37,8 @@ struct DataSettings;
 
 struct EEPROM
 {
+	static const uint SIZE = 2 * 1024 * 1024;
+
     static void SaveSettings();
 
     static bool LoadSettings();
