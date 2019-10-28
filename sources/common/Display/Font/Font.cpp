@@ -175,15 +175,17 @@ bool Font::RowNotEmpty(uint8 symbol, int row)
     {
         result = font->symbols[symbol].bytes[row] != 0;
     }
-
-    FullSymbol fullSymbol;
-
-    if (bigFont->GetFullSymbol(fullSymbol, symbol))
+    else
     {
-        result = fullSymbol.RowNotEmpty(row);
+        FullSymbol fullSymbol;
+
+        if (bigFont->GetFullSymbol(fullSymbol, symbol))
+        {
+            result = fullSymbol.RowNotEmpty(row);
+        }
     }
 
-    return false;
+    return result;
 }
 
 
