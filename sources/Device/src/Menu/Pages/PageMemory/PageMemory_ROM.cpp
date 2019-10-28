@@ -180,7 +180,7 @@ static bool HandlerKey_ROM(const KeyEvent &event)
         
     }
 
-    return false;
+    return result;
 }
 
 DEF_PAGE_4( pROM,                                                                                                                                                 //--- œ¿Ãﬂ“‹ - ¬Õ”“– «” ---
