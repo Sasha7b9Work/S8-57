@@ -31,7 +31,6 @@ static const SectorTypeDef sectors[24] =
     {0x080A0000, &eeprom[_128K * 5],             _128K},    // sector9
     {0x080C0000, &eeprom[_128K * 6],             _128K},    // sector10
     {0x080E0000, &eeprom[_128K * 7],             _128K},    // sector11
-
     {0x08100000, &eeprom[_128K * 8],             _16K},     // sector12
     {0x08104000, &eeprom[_128K * 8 + _16K],      _16K},     // sector13
     {0x08108000, &eeprom[_128K * 8 + _16K * 2],  _16K},     // sector14

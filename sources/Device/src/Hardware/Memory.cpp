@@ -46,12 +46,12 @@ void EEPROM::SaveSettings()
 
     uint address = FirstFreeAddressForSettings();
 
-    uint freeMemory = ADDR_SECTOR_SETTINGS_1 + SIZE_SECTOR_128 - address;
+    uint freeMemory = S10_SETTINGS_1 + SIZE_SECTOR_128 - address;
 
-    if((address == MAX_UINT) || (freeMemory <= sizeof(Settings)) || (address < ADDR_SECTOR_SETTINGS_1))
+    if((address == MAX_UINT) || (freeMemory <= sizeof(Settings)) || (address < S10_SETTINGS_1))
     {
-        EraseSector(ADDR_SECTOR_SETTINGS_1);
-        address = ADDR_SECTOR_SETTINGS_1;
+        EraseSector(S10_SETTINGS_1);
+        address = S10_SETTINGS_1;
     }
 
     set.size = sizeof(set);
@@ -74,7 +74,7 @@ void EEPROM::WriteData(uint address, const void *data, int size)
 
 static uint FirstFreeAddressForSettings() //-V2506
 {
-    uint address = ADDR_SECTOR_SETTINGS_1;
+    uint address = S10_SETTINGS_1;
 
     do
     {
@@ -87,7 +87,7 @@ static uint FirstFreeAddressForSettings() //-V2506
 
         address += value;                   // Переходим на первый свободный байт за структурой
 
-    } while(address < (ADDR_SECTOR_SETTINGS_1 + SIZE_SECTOR_128));
+    } while(address < (S10_SETTINGS_1 + SIZE_SECTOR_128));
     
     
     return MAX_UINT;        // Вообще-то до этой точки дойти никак не может. Если мы оказались здесь, произошла ошибка
@@ -98,7 +98,7 @@ static uint AddressSavedSettings(int)
 {
     uint addrPrev = 0;
 
-    uint address = ADDR_SECTOR_SETTINGS_1;
+    uint address = S10_SETTINGS_1;
 
     while (ReadDoubleWord(address) != MAX_UINT)
     {
