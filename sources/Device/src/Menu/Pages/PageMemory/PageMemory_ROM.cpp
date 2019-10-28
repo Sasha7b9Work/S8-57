@@ -157,20 +157,28 @@ static bool HandlerKey_ROM(const KeyEvent &event)
         if (key == Key::Left || key == Key::Down)
         {
             Math::CircleDecrease<int8>((int8 *)&NUM_ROM_SIGNAL, 0, MAX_NUM_SAVED_WAVES - 1);
+
+            Color::ResetFlash();
+
+            return true;
         }
         else if (key == Key::Right || key == Key::Up)
         {
             Math::CircleIncrease<int8>((int8 *)&NUM_ROM_SIGNAL, 0, MAX_NUM_SAVED_WAVES - 1);
+
+            Color::ResetFlash();
+
+            return true;
         }
         else
         {
             // остальные кнопки не обрабатываем
         }
 
-        Color::ResetFlash();
+        
     }
 
-    return true;
+    return false;
 }
 
 DEF_PAGE_4( pROM,                                                                                                                                                 //--- ѕјћя“№ - ¬Ќ”“– «” ---
