@@ -148,6 +148,8 @@ static void DrawMemoryMap(int num, bool exist)
 
 static bool HandlerKey_ROM(const KeyEvent &event)
 {
+    bool result = false;
+
     if (event.type == TypePress::Release || event.type == TypePress::Long)
     {
         Key::E key = event.key;
@@ -160,7 +162,7 @@ static bool HandlerKey_ROM(const KeyEvent &event)
 
             Color::ResetFlash();
 
-            return true;
+            result = true;
         }
         else if (key == Key::Right || key == Key::Up)
         {
@@ -168,7 +170,7 @@ static bool HandlerKey_ROM(const KeyEvent &event)
 
             Color::ResetFlash();
 
-            return true;
+            result = true;
         }
         else
         {

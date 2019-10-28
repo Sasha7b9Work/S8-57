@@ -143,38 +143,44 @@ static bool FontIsSmall()
 
 uint8 Font::GetWidth(uint8 symbol)
 {
+    uint8 result = bigFont->GetWidth(symbol);
+
     if (FontIsSmall())
     {
-        return font->symbols[symbol].width;
+        result = font->symbols[symbol].width;
     }
 
-    return bigFont->GetWidth(symbol);
+    return result;
 }
 
 
 uint8 Font::GetHeight()
 {
+    uint8 result = bigFont->height;
+
     if (FontIsSmall())
     {
-        return static_cast<uint8>(font->_height);
+        result = static_cast<uint8>(font->_height);
     }
 
-    return bigFont->height;
+    return result;
 }
 
 
 bool Font::RowNotEmpty(uint8 symbol, int row)
 {
+    bool result = false;
+
     if (FontIsSmall())
     {
-        return font->symbols[symbol].bytes[row] != 0;
+        result = font->symbols[symbol].bytes[row] != 0;
     }
 
     FullSymbol fullSymbol;
 
     if (bigFont->GetFullSymbol(fullSymbol, symbol))
     {
-        return fullSymbol.RowNotEmpty(row);
+        result = fullSymbol.RowNotEmpty(row);
     }
 
     return false;
