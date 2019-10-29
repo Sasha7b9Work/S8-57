@@ -10,6 +10,7 @@
 #include "Hardware/Beeper.h"
 #include "Menu/MenuItems.h"
 #include "Menu/Pages/Include/PageMemory.h"
+#include "Osci/Osci.h"
 #include "Settings/Settings.h"
 #include "Utils/Math.h"
 #include "Utils/Values.h"
@@ -107,9 +108,9 @@ DEF_GRAPH_BUTTON( bSave,                                                        
 )
 
 
-static void OnOpenClose_ROM(bool)
+static void OnOpenClose_ROM(bool open)
 {
-    set.mem.modeWork = ModeWork::ROM;
+    Osci::SetModeWork(open ? ModeWork::ROM : ModeWork::Dir);
 }
 
 static void AfterDraw_ROM()

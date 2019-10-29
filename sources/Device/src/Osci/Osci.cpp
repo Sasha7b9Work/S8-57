@@ -309,3 +309,9 @@ Osci::StructReadRand Osci::GetInfoForReadRand(int Tsm, const uint8 *address)
 
     return result;
 }
+
+
+void Osci::SetModeWork(ModeWork::E mode)
+{
+    set.mem.modeWork = mode;
+}

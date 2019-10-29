@@ -1,5 +1,5 @@
 #pragma once
-#include "Settings/SettingsOsci.h"
+#include "Settings/Settings.h"
 
 
 struct Osci
@@ -13,6 +13,8 @@ struct Osci
     static void Start();
 
     static void Stop(bool pause = false);
+
+    static void SetModeWork(ModeWork::E mode);
 
     static bool IsRunning();
     /// Это вызываем в случае изменения настройки
