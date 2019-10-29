@@ -183,6 +183,11 @@ static bool HandlerKey_ROM(const KeyEvent &event)
     return result;
 }
 
+static bool NormalTitle_ROM()
+{
+    return false;
+}
+
 DEF_PAGE_4( pROM,                                                                                                                                                 //--- ѕјћя“№ - ¬Ќ”“– «” ---
     "¬Ќ”“– «”",
     "ѕереход в режим работы с внутренней пам€тью",
@@ -191,7 +196,7 @@ DEF_PAGE_4( pROM,                                                               
     &bSave,
     &bDelete,
     PageName::Memory_Internal,
-    &PageMemory::self, Item::Active, Page::NormalTitle, OnOpenClose_ROM, AfterDraw_ROM, HandlerKey_ROM
+    &PageMemory::self, Item::Active, NormalTitle_ROM, OnOpenClose_ROM, AfterDraw_ROM, HandlerKey_ROM
 )
 
 const Page *const PageROM::self = static_cast<const Page *>(&pROM);

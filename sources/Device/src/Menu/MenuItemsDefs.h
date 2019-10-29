@@ -141,7 +141,7 @@ static const DataPage dp##name = { namePage, i##name, normalTitle, funcOpenClose
 static const DataItem di##name = { TypeItem::Page, title, hint, keeper, funcActive, &dp##name};                                                                                             \
 static const Page name(&di##name);
 
-#define DEF_PAGE_4(name, title, hint, item1, item2, item3, item4, namePage, keeper, normalTitle, funcActive, funcOpenClose, funcBeforeDraw, funcArrows)                                     \
+#define DEF_PAGE_4(name, title, hint, item1, item2, item3, item4, namePage, keeper, funcActive, normalTitle, funcOpenClose, funcBeforeDraw, funcArrows)                                     \
 static const Item * const i##name[] = { (Item *)item1, (Item *)item2, (Item *)item3, (Item *)item4, nullptr };                                                                              \
 static const DataPage dp##name = { namePage, i##name, normalTitle, funcOpenClose, funcBeforeDraw, funcArrows };                                                                             \
 static const DataItem di##name = { TypeItem::Page, title, hint, keeper, funcActive, &dp##name };                                                                                            \

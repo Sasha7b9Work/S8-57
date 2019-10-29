@@ -313,6 +313,11 @@ void Page::Draw(int x, int y, bool opened) const
 
 void Page::DrawTitle(int y) const
 {
+    if (!OwnData()->normalTitle())
+    {
+        return;
+    }
+
     if (Warnings::IsShown())
     {
         y = Grid::Top();
