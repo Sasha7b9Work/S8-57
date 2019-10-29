@@ -35,6 +35,11 @@ struct DataSettings;
                                 ///< вывести в одну линию внизу сетки.
 
 
+struct Address
+{
+    uint address;
+};
+
 struct EEPROM
 {
 	static const uint SIZE = 2 * 1024 * 1024;
