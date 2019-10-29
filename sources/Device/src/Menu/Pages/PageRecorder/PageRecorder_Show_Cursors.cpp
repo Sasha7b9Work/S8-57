@@ -55,7 +55,7 @@ DEF_PAGE_3(pCursors,
     &bLeft,
     &bRight,
     PageName::Recorder_Show_Choice_Cursors,
-    &PageRecorder::PageShow::self, Item::Active, Page::OpenClose, Page::BeforeDraw, Page::HandlerKeyEvent
+    &PageRecorder::PageShow::self, Item::Active, Page::NormalTitle, Page::OpenClose, Page::BeforeDraw, Page::HandlerKeyEvent
 )
 
 const Page *const PageRecorder::PageShow::PageCursors::self = static_cast<const Page *>(&pCursors);

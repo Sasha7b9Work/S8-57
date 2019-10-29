@@ -44,7 +44,7 @@ DEF_PAGE_3( pSource,                                                            
     &cChanA,
     &cChanB,
     &cSensor,
-    PageName::Recorder_Source, &PageRecorder::self, IsActive_Source, Page::OpenClose, Page::BeforeDraw, Page::HandlerKeyEvent
+    PageName::Recorder_Source, &PageRecorder::self, IsActive_Source, Page::NormalTitle, Page::OpenClose, Page::BeforeDraw, Page::HandlerKeyEvent
 )
 
 const Page * const PageRecorder::PageSource::self = static_cast<const Page *>(&pSource);

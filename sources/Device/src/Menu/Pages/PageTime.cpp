@@ -100,7 +100,7 @@ DEF_PAGE_4( pTime,                                                              
     &cTPos,
     //&cDivRole,
     &cShiftXtype,
-    PageName::Time, nullptr, Item::Active, Page::OpenClose, Page::BeforeDraw, Page::HandlerKeyEvent
+    PageName::Time, nullptr, Item::Active, Page::NormalTitle, Page::OpenClose, Page::BeforeDraw, Page::HandlerKeyEvent
 )
 
 const Page * const PageTime::self = static_cast<const Page *>(&pTime);

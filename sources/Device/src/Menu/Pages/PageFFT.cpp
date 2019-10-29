@@ -121,7 +121,7 @@ DEF_PAGE_1( pCursors,                                                           
     "КУРСОРЫ", 
     "Включает курсоры для измерения параметров спектра",
     &bCursors_Source,
-    PageName::FFT_Cursors, &PageFFT::self, IsActive_Cursors, Page::OpenClose, Page::BeforeDraw, HandlerKey_FFT_Cursors
+    PageName::FFT_Cursors, &PageFFT::self, IsActive_Cursors, Page::NormalTitle, Page::OpenClose, Page::BeforeDraw, HandlerKey_FFT_Cursors
 )
 
 const Page * const PageFFT::PageCursors::self = static_cast<const Page *>(&pCursors);
@@ -148,7 +148,7 @@ DEF_PAGE_6( pFFT,                                                               
     &cWindow,
     &pCursors,
     &cRange,
-    PageName::FFT, &PageFunction::self, IsActive_FFT, OnOpenClose_FFT, Page::BeforeDraw, Page::HandlerKeyEvent
+    PageName::FFT, &PageFunction::self, IsActive_FFT, Page::NormalTitle, OnOpenClose_FFT, Page::BeforeDraw, Page::HandlerKeyEvent
 )
 
 const Page * const PageFFT::self = static_cast<const Page *>(&pFFT);

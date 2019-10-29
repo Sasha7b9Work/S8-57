@@ -97,7 +97,7 @@ DEF_PAGE_5_VAR( pTester,
     &cPolarity,
     &cViewMode,
     &cAveraging,
-    PageName::Tester, &PageFunction::self, Item::Active, OnOpenClose_Tester, Page::BeforeDraw, Page::HandlerKeyEvent
+    PageName::Tester, &PageFunction::self, Item::Active, Page::NormalTitle, OnOpenClose_Tester, Page::BeforeDraw, Page::HandlerKeyEvent
 )
 
 const Page * const PageTester::self = static_cast<const Page *>(&pTester);

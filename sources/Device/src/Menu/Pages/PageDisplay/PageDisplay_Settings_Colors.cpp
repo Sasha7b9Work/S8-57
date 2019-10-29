@@ -50,7 +50,7 @@ DEF_PAGE_4( pColors,                                                            
     &gcChannelA,
     &gcChannelB,
     &gcGrid,
-    PageName::Display_Settings_Colors, &PageDisplay::PageSettings::self, Item::Active, Page::OpenClose, Page::BeforeDraw, Page::HandlerKeyEvent
+    PageName::Display_Settings_Colors, &PageDisplay::PageSettings::self, Item::Active, Page::NormalTitle, Page::OpenClose, Page::BeforeDraw, Page::HandlerKeyEvent
 )
 
 const Page * const PageDisplay::PageSettings::PageColors::self = static_cast<const Page *>(&pColors);

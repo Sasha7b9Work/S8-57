@@ -71,7 +71,7 @@ DEF_PAGE_4( pHelp,                                                              
     &bLeave,
     &bPrev,
     &bNext,
-    PageName::Help, nullptr, Item::Active, Page::OpenClose, HelpContent::Draw, HandlerKey_Help
+    PageName::Help, nullptr, Item::Active, Page::NormalTitle, Page::OpenClose, HelpContent::Draw, HandlerKey_Help
 )
 
 const Page *const PageHelp::self = static_cast<const Page *>(&pHelp);

@@ -35,7 +35,7 @@ DEF_PAGE_2( pFind,                                                              
     &cMode,
     &bSearch,
     PageName::Trig_Search,
-    &PageTrig::self, Item::Active, Page::OpenClose, Page::BeforeDraw, Page::HandlerKeyEvent
+    &PageTrig::self, Item::Active, Page::NormalTitle, Page::OpenClose, Page::BeforeDraw, Page::HandlerKeyEvent
 )
 
 const Page * const PageTrig::PageFind::self = static_cast<const Page *>(&pFind);

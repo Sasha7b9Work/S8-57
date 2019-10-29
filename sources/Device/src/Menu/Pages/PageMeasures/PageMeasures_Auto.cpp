@@ -60,7 +60,7 @@ DEF_PAGE_4( pAuto,                                                              
     &cNumber,
     &cChannels,
     PageAutoMeasures::PageTune::self,
-    PageName::AutoMeasures, &PageMeasures::self, Item::Active, Page::OpenClose, Page::BeforeDraw, Page::HandlerKeyEvent
+    PageName::AutoMeasures, &PageMeasures::self, Item::Active, Page::NormalTitle, Page::OpenClose, Page::BeforeDraw, Page::HandlerKeyEvent
 )
 
 const Page * const PageAutoMeasures::self = static_cast<const Page *>(&pAuto);

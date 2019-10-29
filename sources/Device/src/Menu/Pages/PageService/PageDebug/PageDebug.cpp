@@ -93,7 +93,7 @@ DEF_PAGE_3( pBalance,                                                           
     &gShiftA,
     &gShiftB,
     PageName::Debug_ADC_Balance,
-    &PageDebug::PageADC::self, Item::Active, Page::OpenClose, Page::BeforeDraw, Page::HandlerKeyEvent
+    &PageDebug::PageADC::self, Item::Active, Page::NormalTitle, Page::OpenClose, Page::BeforeDraw, Page::HandlerKeyEvent
 )
 
 const Page * const PageDebug::PageADC::PageBalance::self = static_cast<const Page *>(&pBalance);
@@ -165,7 +165,7 @@ DEF_PAGE_3( pStretch,                                                           
     &gStretch_A,
     &gStretch_B,
     PageName::Debug_ADC_Stretch,
-    &PageDebug::PageADC::self, Item::Active, Page::OpenClose, Page::BeforeDraw, Page::HandlerKeyEvent
+    &PageDebug::PageADC::self, Item::Active, Page::NormalTitle, Page::OpenClose, Page::BeforeDraw, Page::HandlerKeyEvent
 )
 
 const Page * const PageDebug::PageADC::PageStretch::self = static_cast<const Page *>(&pStretch);
@@ -250,7 +250,7 @@ DEF_GOVERNOR( gShift_B10mV,                                                     
 )
 
 
-DEF_PAGE_7( pShift,                                                                                                                       //--- Œ“À¿ƒ ¿ - ¿÷œ - ƒŒœ —Ã≈Ÿ ---
+DEF_PAGE_7( pShift,                                                                                                                                        //--- Œ“À¿ƒ ¿ - ¿÷œ - ƒŒœ —Ã≈Ÿ ---
     "ƒŒœ —Ã≈Ÿ",
     "",
     &bShift_Reset,
@@ -261,7 +261,7 @@ DEF_PAGE_7( pShift,                                                             
     &gShift_A10mV,
     &gShift_B10mV,
     PageName::Debug_ADC_Shift,
-    &PageDebug::PageADC::self, Item::Active, Page::OpenClose, Page::BeforeDraw, Page::HandlerKeyEvent
+    &PageDebug::PageADC::self, Item::Active, Page::NormalTitle, Page::OpenClose, Page::BeforeDraw, Page::HandlerKeyEvent
 )
 
 const Page * const PageDebug::PageADC::PageShift::self = static_cast<const Page *>(&pShift);
@@ -274,7 +274,7 @@ DEF_PAGE_3( pADC,  //-V1027
     &pStretch,
     PageDebug::PageADC::PageShift::self,
     PageName::Debug_ADC,
-    &PageDebug::self, Item::Active, Page::OpenClose, Page::BeforeDraw, Page::HandlerKeyEvent
+    &PageDebug::self, Item::Active, Page::NormalTitle, Page::OpenClose, Page::BeforeDraw, Page::HandlerKeyEvent
 )
 
 const Page * const PageDebug::PageADC::self = static_cast<const Page *>(&pADC);
@@ -377,7 +377,7 @@ DEF_PAGE_5( pSettings,                                                          
     0,
     0,
     PageName::Debug_Settings,
-    &PageDebug::self, Item::Active, OnOpenClose_Settings, Page::BeforeDraw, Page::HandlerKeyEvent
+    &PageDebug::self, Item::Active, Page::NormalTitle, OnOpenClose_Settings, Page::BeforeDraw, Page::HandlerKeyEvent
 )
 
 const Page * const PageDebug::PageSettings::self = static_cast<const Page *>(&pSettings);
@@ -475,7 +475,7 @@ DEF_PAGE_2( pSerialNumber,                                                      
     &bSerialNumber_Change,
     &bSerialNumber_Save,
     PageName::Debug_SerialNumber,
-    &PageDebug::self, Item::Active, OnOpenClose_SerialNumber, Page::BeforeDraw, HandlerKey_SerialNumber
+    &PageDebug::self, Item::Active, Page::NormalTitle, OnOpenClose_SerialNumber, Page::BeforeDraw, HandlerKey_SerialNumber
 )
 
 const Page * const PageDebug::PageSerialNumber::self = static_cast<const Page *>(&pSerialNumber);
@@ -490,7 +490,7 @@ DEF_PAGE_5( pDebug,                                                             
     &cStats,
     &bSaveFirmware,
     PageName::Debug,
-    &PageService::self, Item::Active, Page::OpenClose, Page::BeforeDraw, Page::HandlerKeyEvent
+    &PageService::self, Item::Active, Page::NormalTitle, Page::OpenClose, Page::BeforeDraw, Page::HandlerKeyEvent
 )
 
 const Page * const PageDebug::self = static_cast<const Page *>(&pDebug);

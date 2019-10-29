@@ -74,14 +74,14 @@ static bool HandlerKey_PageShow(const KeyEvent &event)
     return false;
 }
 
-DEF_PAGE_4( pShow,                                                                                                                //--- ‘”Õ ÷»ﬂ - –≈√»—“–¿“Œ– - œ–Œ—ÃŒ“– ---
+DEF_PAGE_4( pShow,                                                                                                                                 //--- ‘”Õ ÷»ﬂ - –≈√»—“–¿“Œ– - œ–Œ—ÃŒ“– ---
     "œ–Œ—ÃŒ“–",
     "œÓÒÏÓÚ Á‡ÔËÒ‡ÌÌ˚ı ‰‡ÌÌ˚ı",
     PageRecorder::PageShow::PageChoice::self,
     &bScreenLeft,
     &bScreenRight,
     PageRecorder::PageShow::PageCursors::self,
-    PageName::Recorder_Show, &PageRecorder::self, IsActive_PageShow, Page::OpenClose, Page::BeforeDraw, HandlerKey_PageShow
+    PageName::Recorder_Show, &PageRecorder::self, IsActive_PageShow, Page::NormalTitle, Page::OpenClose, Page::BeforeDraw, HandlerKey_PageShow
 )
 
 const Page * const PageRecorder::PageShow::self = static_cast<const Page *>(&pShow);

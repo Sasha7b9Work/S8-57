@@ -41,7 +41,7 @@ DEF_PAGE_3( pSettings,                                                          
     PageDisplay::PageSettings::PageColors::self,
     &gBrightness,
     &cAutoHide,
-    PageName::Display_Settings, &PageDisplay::self, Item::Active, Page::OpenClose, Page::BeforeDraw, Page::HandlerKeyEvent
+    PageName::Display_Settings, &PageDisplay::self, Item::Active, Page::NormalTitle, Page::OpenClose, Page::BeforeDraw, Page::HandlerKeyEvent
 )
 
 const Page * const PageDisplay::PageSettings::self = static_cast<const Page *>(&pSettings);

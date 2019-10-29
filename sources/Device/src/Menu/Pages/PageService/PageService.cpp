@@ -53,7 +53,7 @@ DEF_PAGE_7( pService,                                                           
     PageRTC::self,
     PageService::PageInformation::self,
     PageDebug::self,
-    PageName::Service, nullptr, Item::Active, Page::OpenClose, Page::BeforeDraw, Page::HandlerKeyEvent
+    PageName::Service, nullptr, Item::Active, Page::NormalTitle, Page::OpenClose, Page::BeforeDraw, Page::HandlerKeyEvent
 )
 
 const Page * const PageService::self = static_cast<const Page *>(&pService);

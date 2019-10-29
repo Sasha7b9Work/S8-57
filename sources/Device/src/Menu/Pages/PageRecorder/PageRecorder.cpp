@@ -67,14 +67,14 @@ static void OnOpenClose_Recorder(bool enter)
     Device::State::SetMode(enter ? Device::Mode::Recorder : Device::Mode::Osci);
 }
 
-DEF_PAGE_4( pRecorder,                                                                                                                       //--- ФУНКЦИЯ - РЕГИСТРАТОР ---
+DEF_PAGE_4( pRecorder,                                                                                                                                        //--- ФУНКЦИЯ - РЕГИСТРАТОР ---
     "РЕГИСТРАТОР",
     "Запись и воспроизведение сигналов входов и датчиков",
     PageRecorder::PageSource::self,
     &cTypeMemory,
     PageRecorder::PageShow::self,
     &bStart,
-    PageName::Recorder, &PageFunction::self, Item::Active, OnOpenClose_Recorder, Page::BeforeDraw, Page::HandlerKeyEvent
+    PageName::Recorder, &PageFunction::self, Item::Active, Page::NormalTitle, OnOpenClose_Recorder, Page::BeforeDraw, Page::HandlerKeyEvent
 )
 
 const Page *const PageRecorder::self = static_cast<const Page *>(&pRecorder);

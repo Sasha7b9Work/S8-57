@@ -43,7 +43,7 @@ DEF_PAGE_3( pCursors,                                                           
     &cShow,
     &cShowFreq,
     PageCursorsMeasures::PageSet::self,
-    PageName::CursorsMeasures, &PageMeasures::self, Item::Active, Page::OpenClose, Page::BeforeDraw, Page::HandlerKeyEvent
+    PageName::CursorsMeasures, &PageMeasures::self, Item::Active, Page::NormalTitle, Page::OpenClose, Page::BeforeDraw, Page::HandlerKeyEvent
 )
 
 const Page * const PageCursorsMeasures::self = static_cast<const Page *>(&pCursors);

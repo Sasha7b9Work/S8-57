@@ -152,7 +152,7 @@ DEF_PAGE_12( pRegisters,                                                        
     &cChanParamB,
     &cTBase,
     &cTShift,
-    PageName::Debug_Console_Registers, &PageDebug::PageConsole::self, Item::Active, Page::OpenClose, Page::BeforeDraw, Page::HandlerKeyEvent
+    PageName::Debug_Console_Registers, &PageDebug::PageConsole::self, Item::Active, Page::NormalTitle, Page::OpenClose, Page::BeforeDraw, Page::HandlerKeyEvent
 )
 
 const Page * const PageDebug::PageRegisters::self = static_cast<const Page *>(&pRegisters);
@@ -163,7 +163,7 @@ DEF_PAGE_2( pConsole,                                                           
     "Управляет отображением и параметрами отладочной консоли",
     &cShow,
     &gNumStrings,
-    PageName::Debug_Console, &PageDebug::self, Item::Active, Page::OpenClose, Page::BeforeDraw, Page::HandlerKeyEvent
+    PageName::Debug_Console, &PageDebug::self, Item::Active, Page::NormalTitle, Page::OpenClose, Page::BeforeDraw, Page::HandlerKeyEvent
 )
 
 const Page * const PageDebug::PageConsole::self = static_cast<const Page *>(&pConsole);

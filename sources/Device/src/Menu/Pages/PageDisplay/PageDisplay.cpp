@@ -100,7 +100,7 @@ DEF_PAGE_8( pDisplay,                                                           
     &cRefreshFPS,
     &cScaleYtype,
     PageDisplay::PageSettings::self,
-    PageName::Display, nullptr, Item::Active, Page::OpenClose, Page::BeforeDraw, Page::HandlerKeyEvent
+    PageName::Display, nullptr, Item::Active, Page::NormalTitle, Page::OpenClose, Page::BeforeDraw, Page::HandlerKeyEvent
 )
 
 const Page * const PageDisplay::self = static_cast<const Page *>(&pDisplay);

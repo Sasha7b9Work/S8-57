@@ -282,7 +282,7 @@ DEF_PAGE_5( pMath,                                                              
     &bModeArrows,
     &bRangeA,
     &bRangeB,
-    PageName::Math, &PageMeasures::self, IsActive_Math, OnOpenClose_Math, Page::BeforeDraw, HandlerKey_Function
+    PageName::Math, &PageMeasures::self, IsActive_Math, Page::NormalTitle, OnOpenClose_Math, Page::BeforeDraw, HandlerKey_Function
 )
 
 const Page * const PageMath::self = static_cast<const Page *>(&pMath);

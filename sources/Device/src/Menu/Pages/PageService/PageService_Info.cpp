@@ -75,7 +75,7 @@ DEF_PAGE_1 ( pInfo,
     "ИНФОРМАЦИЯ",
     "Информация об изделии",
     &bClose,
-    PageName::Service_Info, &PageService::self, Item::Active, OnOpenClose_Page, Page::BeforeDraw, Page::HandlerKeyEvent
+    PageName::Service_Info, &PageService::self, Item::Active, Page::NormalTitle, OnOpenClose_Page, Page::BeforeDraw, Page::HandlerKeyEvent
 )
 
 const Page *const PageService::PageInformation::self = static_cast<const Page *>(&pInfo);

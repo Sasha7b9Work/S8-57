@@ -16,7 +16,7 @@ DEF_PAGE_5( pFunction,                                                          
     PageMultimeter::self,
     PageTester::self,
     PageRecorder::self,
-    PageName::Function, nullptr, Item::Active, Page::OpenClose, Page::BeforeDraw, Page::HandlerKeyEvent
+    PageName::Function, nullptr, Item::Active, Page::NormalTitle, Page::OpenClose, Page::BeforeDraw, Page::HandlerKeyEvent
 )
 
 const Page * const PageFunction::self = static_cast<const Page *>(&pFunction);

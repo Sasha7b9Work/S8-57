@@ -375,7 +375,7 @@ static bool IsActive_Set()
     return set.curs.showCursors;
 }
 
-DEF_PAGE_5( pSet,                                                                                                                //--- ÈÇÌÅĞÅÍÈß - ÊÓĞÑÎĞÛ - ÓÑÒÀÍÎÂÈÒÜ ---
+DEF_PAGE_5( pSet,                                                                                                                                  //--- ÈÇÌÅĞÅÍÈß - ÊÓĞÑÎĞÛ - ÓÑÒÀÍÎÂÈÒÜ ---
     "ÓÑÒÀÍÎÂÈÒÜ",
     "Ïåğåõîä â ğåæèì êóğñîğíûõ èçìåğåíèé",
     &bChannel,
@@ -383,7 +383,7 @@ DEF_PAGE_5( pSet,                                                               
     &bT,
     &b100,
     &bMovement,
-    PageName::CursorsMeasures_Set, &PageCursorsMeasures::self, IsActive_Set, Page::OpenClose, Page::BeforeDraw, PageCursorsMeasures::PageSet::HandlerKey
+    PageName::CursorsMeasures_Set, &PageCursorsMeasures::self, IsActive_Set, Page::NormalTitle, Page::OpenClose, Page::BeforeDraw, PageCursorsMeasures::PageSet::HandlerKey
 )
 
 const Page * const PageCursorsMeasures::PageSet::self = static_cast<const Page *>(&pSet);

@@ -58,7 +58,7 @@ DEF_PAGE_2( pRand,                                                              
     "",
     &gGateMin,
     &gGateMax,
-    PageName::Debug_Rand, &PageDebug::self, Item::Active, Page::OpenClose, Page::BeforeDraw, Page::HandlerKeyEvent
+    PageName::Debug_Rand, &PageDebug::self, Item::Active, Page::NormalTitle, Page::OpenClose, Page::BeforeDraw, Page::HandlerKeyEvent
 )
 
 const Page *const PageDebug::PageRand::self = static_cast<const Page *>(&pRand);

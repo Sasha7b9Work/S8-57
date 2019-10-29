@@ -111,7 +111,7 @@ DEF_PAGE_3( pManager,                                                           
     &bManager_LevelUp,
     &bManager_LevelDown,
     PageName::Memory_Drive_Manager,
-    &PageDrive::self, IsActive_Drive_Manager, PageMemory::OnOpenClose_Drive_Manager, Page::BeforeDraw, FileManager::HandlerKey
+    &PageDrive::self, IsActive_Drive_Manager, Page::NormalTitle, PageMemory::OnOpenClose_Drive_Manager, Page::BeforeDraw, FileManager::HandlerKey
 )
 
 const Page * const PageDrive::PageManager::self = static_cast<const Page *>(&pManager);
@@ -388,7 +388,7 @@ DEF_PAGE_3( pMask,                                                              
     &bMask_Backspace,
     &bMask_Insert,
     PageName::Memory_Drive_Mask,
-    &PageDrive::self, IsActive_Mask, OnOpenClose_Mask, Page::BeforeDraw, HandlerKey_Mask
+    &PageDrive::self, IsActive_Mask, Page::NormalTitle, OnOpenClose_Mask, Page::BeforeDraw, HandlerKey_Mask
 )
 
 const Page * const PageDrive::PageMask::self = static_cast<const Page *>(&pMask);
@@ -413,8 +413,7 @@ DEF_CHOICE_2( cDrive_Autoconnect,                                               
     &cDrive_ModeBtnMemory,
     &cDrive_Autoconnect,
     PageName::Memory_Drive,
-    &PageMemory::self,
-    Item::Active, Page::OpenClose, Page::BeforeDraw, Page::HandlerKeyEvent
+    &PageMemory::self, Item::Active, Page::NormalTitle, Page::OpenClose, Page::BeforeDraw, Page::HandlerKeyEvent
 )
 
 const Page * const PageDrive::self = static_cast<const Page *>(&pDrive);
@@ -426,8 +425,7 @@ DEF_PAGE_4( pMemory,                                                            
     &cPoints,
     PageRAM::self,
     PageROM::self,
-    PageDrive::self,
-    PageName::Memory, nullptr, Item::Active, Page::OpenClose, Page::BeforeDraw, Page::HandlerKeyEvent
+    PageDrive::self,  PageName::Memory, nullptr, Item::Active, Page::NormalTitle, Page::OpenClose, Page::BeforeDraw, Page::HandlerKeyEvent
 )
 
 const Page * const PageMemory::self = static_cast<const Page *>(&pMemory);
@@ -624,7 +622,7 @@ DEF_PAGE_4( pSetName,                                                           
     &bSetName_Backspace,
     &bSetName_Insert,
     &bSetName_Save,
-    PageName::Memory_SetName, nullptr, Item::Active, Page::OpenClose, Page::BeforeDraw, HandlerKey_SetName
+    PageName::Memory_SetName, nullptr, Item::Active, Page::NormalTitle, Page::OpenClose, Page::BeforeDraw, HandlerKey_SetName
 )
 
 const Page * const PageSetName::self = static_cast<const Page *>(&pSetName);
