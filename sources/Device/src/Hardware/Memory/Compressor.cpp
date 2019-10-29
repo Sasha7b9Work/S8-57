@@ -12,7 +12,6 @@ struct Packet
                     // 0xFF00FF00 - действующий пакет
     uint16 size;    // Размер пакета - sizeof(size) + sizeof(type) + sizeof(data)
     uint16 type;    // Тип данных :
-                    // 0 - DataSettings
 };
 
 
@@ -20,7 +19,7 @@ struct Packet
 #define ERASED  0x00000000U
 #define VALID   0xFF00FF00U
 
-#define TYPE_DATA 0U
+#define TYPE_DATA     0U
 
 
 uint Compressor::GetPackedSize(const DataSettings *ds)
@@ -38,7 +37,7 @@ static void WriteToROM(uint *address, const void *data, int size)
 }
 
 
-void Compressor::PackToROM(const DataSettings *ds, Address address)
+void Compressor::Pack(const DataSettings *ds, Address address)
 {
     Packet packet = { VALID, static_cast<uint16>(GetPackedSize(ds)), TYPE_DATA };
 
