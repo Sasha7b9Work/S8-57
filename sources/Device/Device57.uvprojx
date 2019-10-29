@@ -806,26 +806,6 @@
               <FilePath>.\src\Hardware\Beeper.h</FilePath>
             </File>
             <File>
-              <FileName>Memory.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Hardware\Memory.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Memory.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Hardware\Memory.h</FilePath>
-            </File>
-            <File>
-              <FileName>MemoryRAM.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Hardware\MemoryRAM.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>MemoryRAM.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Hardware\MemoryRAM.h</FilePath>
-            </File>
-            <File>
               <FileName>Timer.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Hardware\Timer.cpp</FilePath>
@@ -964,6 +944,31 @@
               <FileName>HAL_USART3.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Hardware\HAL\HAL_USART3.cpp</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Hardware/Memory</GroupName>
+          <Files>
+            <File>
+              <FileName>Memory.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\Memory\Memory.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Memory.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Hardware\Memory\Memory.h</FilePath>
+            </File>
+            <File>
+              <FileName>MemoryRAM.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\Memory\MemoryRAM.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>MemoryRAM.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Hardware\Memory\MemoryRAM.h</FilePath>
             </File>
           </Files>
         </Group>

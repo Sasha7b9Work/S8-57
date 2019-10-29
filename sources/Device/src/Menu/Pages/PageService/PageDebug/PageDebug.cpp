@@ -6,7 +6,7 @@
 #include "Display/Painter.h"
 #include "FlashDrive/FlashDrive.h"
 #include "FPGA/FPGA.h"
-#include "Hardware/Memory.h"
+#include "Hardware/Memory/Memory.h"
 #include "Hardware/Beeper.h"
 #include "Menu/Menu.h"
 #include "Menu/Pages/Include/PageService.h"

@@ -2,7 +2,7 @@
 #include "Recorder/StorageRecorder.h"
 #include "Hardware/Timer.h"
 #include "Data/Heap.h"
-#include "Hardware/Memory.h"
+#include "Hardware/Memory/Memory.h"
 
 
 /// Обёртка для Heap()

@@ -1,5 +1,5 @@
 #include "defines.h"
-#include "Hardware/Memory.h"
+#include "Hardware/Memory/Memory.h"
 #include "Hardware/Timer.h"
 #include "Hardware/HAL/HAL.h"
 #include <cstring>
@@ -36,18 +36,18 @@ uint8 eeprom[EEPROM::SIZE];
 
 static const SectorTypeDef sectors[24] =
 {
-	{S00,            &eeprom[0],                     _16K},
-	{S01,            &eeprom[_16K],                  _16K},
+	{S00_BOOT_1,     &eeprom[0],                     _16K},
+	{S01_BOOT_2,     &eeprom[_16K],                  _16K},
 	{S02,            &eeprom[_16K * 2],              _16K},
 	{S03,            &eeprom[_16K * 3],              _16K},
 	{S04,            &eeprom[_16K * 4],              _64K},
-	{S05,            &eeprom[_128K],                 _128K},
-	{S06,            &eeprom[_128K * 2],             _128K},
-	{S07,            &eeprom[_128K * 3],             _128K},
+	{S05_FIRM_1,     &eeprom[_128K],                 _128K},
+	{S06_FIRM_2,     &eeprom[_128K * 2],             _128K},
+	{S07_FIRM_3,     &eeprom[_128K * 3],             _128K},
 	{S08,            &eeprom[_128K * 4],             _128K},
 	{S09,            &eeprom[_128K * 5],             _128K},
 	{S10_SETTINGS_1, &eeprom[_128K * 6],             _128K},
-	{S11,            &eeprom[_128K * 7],             _128K},
+	{S11_SETTINGS_2, &eeprom[_128K * 7],             _128K},
 	{S12,            &eeprom[_128K * 8],             _16K},
 	{S13,            &eeprom[_128K * 8 + _16K],      _16K},
 	{S14,            &eeprom[_128K * 8 + _16K * 2],  _16K},

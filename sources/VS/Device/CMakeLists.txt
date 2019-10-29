@@ -133,11 +133,6 @@ source_group(Hardware           FILES   ../../Device/src/Hardware/Battery.h
                                         ../../Device/src/Hardware/Beeper.cpp
                                         ../../Device/src/Hardware/Clock.h
                                         ../../Device/src/Hardware/Clock.cpp
-                                        ../../Device/src/Hardware/Memory.h
-                                        ../../Device/src/Hardware/Memory.cpp
-                                                     src/Hardware/Memory_win.cpp
-                                        ../../Device/src/Hardware/MemoryRAM.h
-                                        ../../Device/src/Hardware/MemoryRAM.cpp
                                         ../../Device/src/Hardware/Timer.h
                                         ../../Device/src/Hardware/Timer.cpp
                                         ../../Device/src/Hardware/VCP.h
@@ -160,6 +155,11 @@ source_group(Hardware\\HAL      FILES   ../../Device/src/Hardware/HAL/HAL.h
                                                      src/Hardware/HAL/HAL_TIM_win.cpp
                                         ../../Device/src/Hardware/HAL/HAL_USART3.cpp
                                                      src/Hardware/HAL/HAL_win.cpp)
+source_group(Hardware\\Memory   FILES   ../../Device/src/Hardware/Memory/Memory.h
+                                        ../../Device/src/Hardware/Memory/Memory.cpp
+                                                     src/Hardware/Memory/Memory_win.cpp
+                                        ../../Device/src/Hardware/Memory/MemoryRAM.h
+                                        ../../Device/src/Hardware/Memory/MemoryRAM.cpp)
 source_group(Recorder           FILES   ../../Device/src/Recorder/DisplayRecorder.h
                                         ../../Device/src/Recorder/DisplayRecorder.cpp
                                         ../../Device/src/Recorder/Recorder.h
@@ -246,11 +246,6 @@ file(GLOB SOURCES   ../../common/_VS/*
                     ../../Device/src/Hardware/Beeper.cpp
                     ../../Device/src/Hardware/Clock.h
                     ../../Device/src/Hardware/Clock.cpp
-                    ../../Device/src/Hardware/Memory.h
-                    ../../Device/src/Hardware/Memory.cpp
-                                 src/Hardware/Memory_win.cpp
-                    ../../Device/src/Hardware/MemoryRAM.h
-                    ../../Device/src/Hardware/MemoryRAM.cpp
                     ../../Device/src/Hardware/Timer.h
                     ../../Device/src/Hardware/Timer.cpp
                     ../../Device/src/Hardware/VCP.h
@@ -274,6 +269,12 @@ file(GLOB SOURCES   ../../common/_VS/*
                     ../../Device/src/Hardware/HAL/HAL_RTC.cpp
                                  src/Hardware/HAL/HAL_TIM_win.cpp
                     ../../Device/src/Hardware/HAL/HAL_USART3.cpp
+                    
+                    ../../Device/src/Hardware/Memory/Memory.h
+                    ../../Device/src/Hardware/Memory/Memory.cpp
+                                 src/Hardware/Memory/Memory_win.cpp
+                    ../../Device/src/Hardware/Memory/MemoryRAM.h
+                    ../../Device/src/Hardware/Memory/MemoryRAM.cpp
                     
                     ../../Device/src/Keyboard/*
                     ../../Device/src/Menu/*

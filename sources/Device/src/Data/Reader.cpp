@@ -1,7 +1,7 @@
 #include "defines.h"
 #include "Data/DataSettings.h"
 #include "Data/Reader.h"
-#include "Hardware/MemoryRAM.h"
+#include "Hardware/Memory/MemoryRAM.h"
 #include "Osci/Osci.h"
 #include "Osci/StorageOsci.h"
 #include "Settings/Settings.h"

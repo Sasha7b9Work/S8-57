@@ -45,6 +45,7 @@ source_group(FPGA                                    REGULAR_EXPRESSION src/FPGA
 source_group(Hardware                                REGULAR_EXPRESSION src/Hardware/*)
 source_group(Hardware\\stm32                         REGULAR_EXPRESSION src/Hardware/stm32/*)
 source_group(Hardware\\HAL                           REGULAR_EXPRESSION src/Hardware/HAL/*)
+source_group(Hardware\\Memory                        REGULAR_EXPRESSION src/Hardware/Memory/*)
 source_group(Keyboard                                REGULAR_EXPRESSION src/Keyboard/*)
 source_group(Menu                                    REGULAR_EXPRESSION src/Menu/*)
 source_group(Menu\\Pages                             REGULAR_EXPRESSION src/Menu/Pages/*)
@@ -92,6 +93,7 @@ file(GLOB SOURCES   ../common/_VS/*
                     src/FPGA/*.*
                     src/Hardware/*.*
                     src/Hardware/HAL/*.*
+                    src/Hardware/Memory/*
                     src/Hardware/stm32/*.*
                     src/Keyboard/*
                     src/Menu/*
