@@ -41,7 +41,7 @@ void Compressor::Pack(const DataSettings *ds, Address address)
 {
     Packet packet = { VALID, static_cast<uint16>(GetPackedSize(ds)), TYPE_DATA };
 
-    uint addr = address.address;
+    uint addr = address.addressMC;
 
     WriteToROM(&addr, &packet, sizeof(packet));
 
@@ -61,14 +61,14 @@ void Compressor::Pack(const DataSettings *ds, Address address)
 
 bool Compressor::UnPack(Address address, DataSettings **ds)
 {
-    Packet packet = *reinterpret_cast<Packet *>(address.address);
+    Packet packet = *reinterpret_cast<Packet *>(address.addressMC);
 
     if (packet.state != VALID || packet.type != TYPE_DATA)
     {
         return false;
     }
 
-    **ds = *reinterpret_cast<DataSettings *>(address.address + sizeof(Packet));
+    **ds = *reinterpret_cast<DataSettings *>(address.addressMC + sizeof(Packet));
 
     return true;
 }

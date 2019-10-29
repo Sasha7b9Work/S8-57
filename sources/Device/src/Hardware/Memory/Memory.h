@@ -35,9 +35,19 @@ struct DataSettings;
                                 ///< вывести в одну линию внизу сетки.
 
 
+/// Структура описывает адрес в адресном пространстве контроллера
 struct Address
 {
-    uint address;
+    uint addressMC;
+    /// Возвращает адрес из адресного пространства контроллера, рассчитанный из адреса PC
+    static Address FromPC(uint addr);
+    static Address FromPC(uint8 *addr);
+    /// Формируте адрес из адресного пространства микроконтроллера
+    static Address FromMC(uint addr);
+    /// Преобразует в адрес PC
+    uint8 *ToPC() const;
+private:
+    explicit Address(uint addr) : addressMC(addr) {};
 };
 
 struct EEPROM
