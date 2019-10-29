@@ -62,7 +62,7 @@ void StorageRecorder::CreateNewRecord()
 
 void Record::SetDataAddress(uint16 *address)
 {
-    start = reinterpret_cast<Point *>(address);
+    startMC = reinterpret_cast<Point *>(address);
     numPoints = 0;
     pointer = MAX_UINT;
 }
@@ -85,7 +85,16 @@ Point Record::NextPoint(uint maxPoints)
         return Point::CreateEmpty();
     }
 
-    return Point(start[pointer]);
+#ifdef GUI
+
+    Point *address = reinterpret_cast<Point *>(Address::FromMC(reinterpret_cast<uint>(startMC)).ToPC());
+    return Point(address[pointer]);
+
+#else
+
+    return Point(startMC[pointer]);
+
+#endif
 }
 
 
