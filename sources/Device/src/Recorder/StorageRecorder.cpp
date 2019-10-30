@@ -43,7 +43,7 @@ void Record::AddPoint(BitSet16 dataA, BitSet16 dataB)
 {
     BitSet32 bs(dataA.halfWord, dataB.halfWord);
 
-    FlashMemory::Write(SEC_17_RECORDER_1 + numPoints * sizeof(Point), &bs, sizeof(BitSet32));
+    FlashMemory::Write(HAL_FLASH::Sector::address[SEC_17_RECORDER_1] + numPoints * sizeof(Point), &bs, sizeof(BitSet32));
 
     numPoints++;
 }
