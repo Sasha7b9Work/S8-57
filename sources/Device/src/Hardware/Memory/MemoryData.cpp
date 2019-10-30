@@ -3,7 +3,7 @@
 #include "Hardware/HAL/HAL.h"
 
 
-static void FillInfoFromSector(uint /*address*/, bool /*existData*/[MAX_NUM_SAVED_WAVES])
+static void FillInfoFromSector(Sector::E /*numSector*/, bool /*existData*/[MAX_NUM_SAVED_WAVES])
 {
 
 }
@@ -18,7 +18,7 @@ void FlashMemory::Data::GetInfo(bool existData[MAX_NUM_SAVED_WAVES])
 
     static const int NUM_SECTORS = 5;
 
-    static const uint sectors[NUM_SECTORS] = { SEC_19_DATA_1, SEC_20_DATA_2, SEC_21_DATA_3, SEC_22_DATA_4, SEC_23_DATA_5 };
+    static const Sector::E sectors[5] = { Sector::_19_DATA_1, Sector::_20_DATA_2, Sector::_21_DATA_3, Sector::_22_DATA_4, Sector::_23_DATA_5 };
 
     for (int i = 0; i < NUM_SECTORS; i++)
     {

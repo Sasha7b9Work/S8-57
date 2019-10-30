@@ -44,12 +44,13 @@ void FlashMemory::Settings::Save()
 
     uint address = FirstFreeAddressForSettings();
 
-    uint freeMemory = HAL_FLASH::Sector::address[SEC_10_SETTINGS_1] + HAL_FLASH::Sector::size[SEC_10_SETTINGS_1] - address;
+    uint freeMemory = END_SECTOR(Sector::_10_SETTINGS_1) - address;
 
-    if((address == MAX_UINT) || (freeMemory <= sizeof(Settings)) || (address < HAL_FLASH::Sector::address[SEC_10_SETTINGS_1]))
+    if((address == MAX_UINT) || (freeMemory <= sizeof(Settings)) || (address < ADDR_SECTOR(Sector::_10_SETTINGS_1)))
     {
-        HAL_FLASH::Sector::Erase(SEC_10_SETTINGS_1);
-        address = HAL_FLASH::Sector::address[SEC_10_SETTINGS_1];
+        SECTOR(Sector::_10_SETTINGS_1).Erase();
+
+        address = ADDR_SECTOR(Sector::_10_SETTINGS_1);
     }
 
     set.size = sizeof(set);
@@ -65,7 +66,7 @@ void FlashMemory::Write(uint address, const void *data, int size)
 
 static uint FirstFreeAddressForSettings() //-V2506
 {
-    uint address = HAL_FLASH::Sector::address[SEC_10_SETTINGS_1];
+    uint address = ADDR_SECTOR(Sector::_10_SETTINGS_1);
 
     do
     {
@@ -78,8 +79,7 @@ static uint FirstFreeAddressForSettings() //-V2506
 
         address += value;                   // Переходим на первый свободный байт за структурой
 
-    } while(address < (HAL_FLASH::Sector::address[SEC_10_SETTINGS_1] + HAL_FLASH::Sector::size[SEC_10_SETTINGS_1]));
-    
+    } while (address < END_SECTOR(Sector::_10_SETTINGS_1));
     
     return MAX_UINT;        // Вообще-то до этой точки дойти никак не может. Если мы оказались здесь, произошла ошибка
 }
@@ -89,7 +89,7 @@ static uint AddressSavedSettings(int)
 {
     uint addrPrev = 0;
 
-    uint address = HAL_FLASH::Sector::address[SEC_10_SETTINGS_1];
+    uint address = ADDR_SECTOR(Sector::_10_SETTINGS_1);
 
     while (ReadDoubleWord(address) != MAX_UINT)
     {

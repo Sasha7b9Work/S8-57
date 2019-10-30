@@ -77,44 +77,55 @@ struct HAL_DAC2
     static void SetValue(uint value);
 };
 
+struct Sector
+{
+    enum E
+    {
+        _00_BOOT_1,
+        _01_BOOT_2,
+        _02,
+        _03,
+        _04,
+        _05_FIRM_1,
+        _06_FIRM_2,
+        _07_FIRM_3,
+        _08,
+        _09,
+        /// ѕервый сектор дл€ сохранени€ настроек. ѕри его заполнении начинает использоватьс€ сектор 2.
+        _10_SETTINGS_1,
+        _11_SETTINGS_2,
+        _12,
+        _13,
+        _14,
+        _15,
+        _16,
+        _17_RECORDER_1,
+        _18_RECORDER_2,
+        _19_DATA_1,
+        _20_DATA_2,
+        _21_DATA_3,
+        _22_DATA_4,
+        _23_DATA_5,
+        Count
+    } number;
+
+    uint address;
+
+    uint size;
+
+    void Erase() const;
+    /// ¬озвращает номер сектора, которому принадлежит address
+    static int Num(uint address);
+};
+
+#define SECTOR(i) HAL_FLASH::sectors[i]
+#define ADDR_SECTOR(i) (SECTOR(i).address)
+#define SIZE_SECTOR(i) (SECTOR(i).size)
+#define END_SECTOR(i) (ADDR_SECTOR(i) + SIZE_SECTOR(i))
+
 struct HAL_FLASH
 {
-    struct Sector
-    {
-        #define SEC_00_BOOT_1     0
-        #define SEC_01_BOOT_2     1
-        #define SEC_02            2
-        #define SEC_03            3
-        #define SEC_04            4
-        #define SEC_05_FIRM_1     5
-        #define SEC_06_FIRM_2     6
-        #define SEC_07_FIRM_3     7
-        #define SEC_08            8
-        #define SEC_09            9
-        /// ѕервый сектор дл€ сохранени€ настроек. ѕри его заполнении начинает использоватьс€ сектор 2.
-        #define SEC_10_SETTINGS_1 10
-        #define SEC_11_SETTINGS_2 11
-        #define SEC_12            12
-        #define SEC_13            13
-        #define SEC_14            14
-        #define SEC_15            15
-        #define SEC_16            16
-        #define SEC_17_RECORDER_1 17
-        #define SEC_18_RECORDER_2 18
-        #define SEC_19_DATA_1     19
-        #define SEC_20_DATA_2     20
-        #define SEC_21_DATA_3     21
-        #define SEC_22_DATA_4     22
-        #define SEC_23_DATA_5     23
-        #define SEC_NUM_SECTORS   24
-
-        static const uint address[SEC_NUM_SECTORS];
-        static const uint size[SEC_NUM_SECTORS];
-
-        static void Erase(int num);
-        /// ¬озвращает номер сектора, которому принадлежит address
-        static int Num(uint address);
-    };
+    static const Sector sectors[Sector::Count];
 
     static void WriteBytes(uint address, const uint8 *data, int size);
     static void WriteBufferBytes(uint address, const void *buffer, int size);

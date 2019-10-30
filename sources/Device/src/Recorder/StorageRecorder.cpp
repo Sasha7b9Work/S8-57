@@ -15,7 +15,7 @@ struct Stack
     static void Push(const Record &_record)
     {
         record = _record;
-        record.SetDataAddress((uint16 *)HAL_FLASH::Sector::address[SEC_17_RECORDER_1]); //-V566
+        record.SetDataAddress((uint16 *)SECTOR(Sector::_17_RECORDER_1).address);
     }
 
     static Record *Top()
@@ -43,7 +43,7 @@ void Record::AddPoint(BitSet16 dataA, BitSet16 dataB)
 {
     BitSet32 bs(dataA.halfWord, dataB.halfWord);
 
-    FlashMemory::Write(HAL_FLASH::Sector::address[SEC_17_RECORDER_1] + numPoints * sizeof(Point), &bs, sizeof(BitSet32));
+    FlashMemory::Write(SECTOR(Sector::_17_RECORDER_1).address + numPoints * sizeof(Point), &bs, sizeof(BitSet32));
 
     numPoints++;
 }

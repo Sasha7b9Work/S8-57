@@ -13,60 +13,32 @@
 uint8 eeprom[FlashMemory::SIZE];
 
 
-const uint HAL_FLASH::Sector::address[SEC_NUM_SECTORS] =
+const Sector HAL_FLASH::sectors[Sector::Count] =
 {
-    reinterpret_cast<uint>(&eeprom[0]),                     // 00_BOOT_1
-    reinterpret_cast<uint>(&eeprom[_16K]),                  // 01_BOOT_2
-    reinterpret_cast<uint>(&eeprom[_16K * 2]),              // 02
-    reinterpret_cast<uint>(&eeprom[_16K * 3]),              // 03
-    reinterpret_cast<uint>(&eeprom[_16K * 4]),              // 04
-    reinterpret_cast<uint>(&eeprom[_128K]),                 // 05_FIRM_1
-    reinterpret_cast<uint>(&eeprom[_128K * 2]),             // 06_FIRM_2
-    reinterpret_cast<uint>(&eeprom[_128K * 3]),             // 07_FIRM_3
-    reinterpret_cast<uint>(&eeprom[_128K * 4]),             // 08
-    reinterpret_cast<uint>(&eeprom[_128K * 5]),             // 09
-    reinterpret_cast<uint>(&eeprom[_128K * 6]),             // 10_SETTINGS_1
-    reinterpret_cast<uint>(&eeprom[_128K * 7]),             // 11_SETTINGS_2
-    reinterpret_cast<uint>(&eeprom[_128K * 8]),             // 12
-    reinterpret_cast<uint>(&eeprom[_128K * 8 + _16K]),      // 13
-    reinterpret_cast<uint>(&eeprom[_128K * 8 + _16K * 2]),  // 14
-    reinterpret_cast<uint>(&eeprom[_128K * 8 + _16K * 3]),  // 15
-    reinterpret_cast<uint>(&eeprom[_128K * 8 + _16K * 4]),  // 16
-    reinterpret_cast<uint>(&eeprom[_128K * 8 + _128K]),     // 17_RECORDER_1
-    reinterpret_cast<uint>(&eeprom[_128K * 8 + _128K * 2]), // 18_RECORDER_2
-    reinterpret_cast<uint>(&eeprom[_128K * 8 + _128K * 3]), // 19_DATA_1
-    reinterpret_cast<uint>(&eeprom[_128K * 8 + _128K * 4]), // 20_DATA_2
-    reinterpret_cast<uint>(&eeprom[_128K * 8 + _128K * 5]), // 21_DATA_3
-    reinterpret_cast<uint>(&eeprom[_128K * 8 + _128K * 6]), // 22_DATA_4
-    reinterpret_cast<uint>(&eeprom[_128K * 8 + _128K * 7])  // 23_DATA_5
-};
-
-const uint HAL_FLASH::Sector::size[SEC_NUM_SECTORS] =
-{
-    _16K,   // 00_BOOT_1
-    _16K,   // 01_BOOT_2
-    _16K,   // 02
-    _16K,   // 03
-    _64K,   // 04
-    _128K,  // 05_FIRM_1
-    _128K,  // 06_FIRM_2
-    _128K,  // 07_FIRM_3
-    _128K,  // 08
-    _128K,  // 09
-    _128K,  // 10_SETTINGS_1
-    _128K,  // 11_SETTINGS_2
-    _16K,   // 12
-    _16K,   // 13
-    _16K,   // 14
-    _16K,   // 15
-    _64K,   // 16
-    _128K,  // 17_RECORDER_1
-    _128K,  // 18_RECORDER_2
-    _128K,  // 19_DATA_1
-    _128K,  // 20_DATA_2
-    _128K,  // 21_DATA_3
-    _128K,  // 22_DATA_4
-    _128K   // 23_DATA_5
+    { Sector::_00_BOOT_1,     reinterpret_cast<uint>(&eeprom[0]),                     _16K },
+    { Sector::_01_BOOT_2,     reinterpret_cast<uint>(&eeprom[_16K]),                  _16K },
+    { Sector::_02,            reinterpret_cast<uint>(&eeprom[_16K * 2]),              _16K },
+    { Sector::_03,            reinterpret_cast<uint>(&eeprom[_16K * 3]),              _16K },
+    { Sector::_04,            reinterpret_cast<uint>(&eeprom[_16K * 4]),              _64K },
+    { Sector::_05_FIRM_1,     reinterpret_cast<uint>(&eeprom[_128K]),                 _128K },
+    { Sector::_06_FIRM_2,     reinterpret_cast<uint>(&eeprom[_128K * 2]),             _128K },
+    { Sector::_07_FIRM_3,     reinterpret_cast<uint>(&eeprom[_128K * 3]),             _128K },
+    { Sector::_08,            reinterpret_cast<uint>(&eeprom[_128K * 4]),             _128K },
+    { Sector::_09,            reinterpret_cast<uint>(&eeprom[_128K * 5]),             _128K },
+    { Sector::_10_SETTINGS_1, reinterpret_cast<uint>(&eeprom[_128K * 6]),             _128K },
+    { Sector::_11_SETTINGS_2, reinterpret_cast<uint>(&eeprom[_128K * 7]),             _128K },
+    { Sector::_12,            reinterpret_cast<uint>(&eeprom[_128K * 8]),             _16K },
+    { Sector::_13,            reinterpret_cast<uint>(&eeprom[_128K * 8 + _16K]),      _16K },
+    { Sector::_14,            reinterpret_cast<uint>(&eeprom[_128K * 8 + _16K * 2]),  _16K },
+    { Sector::_15,            reinterpret_cast<uint>(&eeprom[_128K * 8 + _16K * 3]),  _16K },
+    { Sector::_16,            reinterpret_cast<uint>(&eeprom[_128K * 8 + _16K * 4]),  _64K },
+    { Sector::_17_RECORDER_1, reinterpret_cast<uint>(&eeprom[_128K * 8 + _128K]),     _128K },
+    { Sector::_18_RECORDER_2, reinterpret_cast<uint>(&eeprom[_128K * 8 + _128K * 2]), _128K },
+    { Sector::_19_DATA_1,     reinterpret_cast<uint>(&eeprom[_128K * 8 + _128K * 3]), _128K },
+    { Sector::_20_DATA_2,     reinterpret_cast<uint>(&eeprom[_128K * 8 + _128K * 4]), _128K },
+    { Sector::_21_DATA_3,     reinterpret_cast<uint>(&eeprom[_128K * 8 + _128K * 5]), _128K },
+    { Sector::_22_DATA_4,     reinterpret_cast<uint>(&eeprom[_128K * 8 + _128K * 6]), _128K },
+    { Sector::_23_DATA_5,     reinterpret_cast<uint>(&eeprom[_128K * 8 + _128K * 7]), _128K }
 };
 
 
@@ -86,11 +58,11 @@ void HAL_FLASH::WriteBytes(uint address, const uint8 *buffer, int size)
     }
 }
 
-int HAL_FLASH::Sector::Num(uint startAddress)
+int Sector::Num(uint address)
 {
-    for (int i = 0; i < SEC_NUM_SECTORS; i++)
+    for (int i = 0; i < Sector::Count; i++)
     {
-        if (startAddress < address[i] + size[i])
+        if (address < END_SECTOR(i))
         {
             return i;
         }
@@ -99,7 +71,7 @@ int HAL_FLASH::Sector::Num(uint startAddress)
     return -1;
 }
 
-void HAL_FLASH::Sector::Erase(int num)
+void Sector::Erase() const
 {
-    std::memset(reinterpret_cast<void *>(address[num]), 0xFF, HAL_FLASH::Sector::size[num]);
+    std::memset(reinterpret_cast<void *>(address), 0xFF, size);
 }

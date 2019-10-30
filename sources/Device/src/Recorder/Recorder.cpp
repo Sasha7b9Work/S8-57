@@ -100,7 +100,7 @@ void Recorder::Start()
     RShift::Set(Chan::A, RShift::ZERO);
     RShift::Set(Chan::B, RShift::ZERO);
 
-    HAL_FLASH::Sector::Erase(SEC_17_RECORDER_1);
+    SECTOR(Sector::_17_RECORDER_1).Erase();
 
     StorageRecorder::CreateNewRecord();
 
