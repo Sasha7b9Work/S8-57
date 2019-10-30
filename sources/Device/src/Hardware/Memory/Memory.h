@@ -64,13 +64,17 @@ struct FlashMemory
 
     static void WriteData(uint address, const void *data, int size);
 
-    static bool GetData(int num, DataSettings *ds, uint8 *dataA, uint8 *dataB);
+    /// Функция для сохранения/восстановления данных во флеш-памяти
+    struct Data
+    {
+        static bool Get(int num, DataSettings *ds, uint8 *dataA, uint8 *dataB);
 
-    static void DeleteData(int num);
+        static void Delete(int num);
 
-    static void SaveData(int num, const DataSettings *ds, uint8 *dataA, uint8 *dataB);
-    /// Если даннные есть, соответствующий элемент массива равен true.
-    static void GetDataInfo(bool existData[MAX_NUM_SAVED_WAVES]);
+        static void Save(int num, const DataSettings *ds, uint8 *dataA, uint8 *dataB);
+        /// Если даннные есть, соответствующий элемент массива равен true.
+        static void GetInfo(bool existData[MAX_NUM_SAVED_WAVES]);
+    };
 };
 
 

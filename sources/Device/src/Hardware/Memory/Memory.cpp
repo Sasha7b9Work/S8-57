@@ -121,23 +121,23 @@ static void ReadBytes(uint address, void *data, uint size)
 }
 
 
-bool FlashMemory::GetData(int /*num*/, DataSettings * /*ds*/, uint8 * /*dataA*/, uint8 * /*dataB*/)
+bool FlashMemory::Data::Get(int /*num*/, DataSettings * /*ds*/, uint8 * /*dataA*/, uint8 * /*dataB*/)
 {
     return false;
 }
 
 
-void FlashMemory::DeleteData(int /*num*/)
+void FlashMemory::Data::Delete(int /*num*/)
 {
 }
 
 
-void FlashMemory::GetDataInfo(bool /*existData*/[MAX_NUM_SAVED_WAVES])
+void FlashMemory::Data::GetInfo(bool /*existData*/[MAX_NUM_SAVED_WAVES])
 {
 }
 
 
-void FlashMemory::SaveData(int /*num*/, const DataSettings * /*ds*/, uint8 * /*dataA*/, uint8 * /*dataB*/)
+void FlashMemory::Data::Save(int /*num*/, const DataSettings * /*ds*/, uint8 * /*dataA*/, uint8 * /*dataB*/)
 {
 }
 
