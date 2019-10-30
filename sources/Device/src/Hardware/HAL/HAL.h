@@ -114,8 +114,6 @@ struct HAL_FLASH
         static void Erase(int num);
         /// ¬озвращает номер сектора, которому принадлежит address
         static int Num(uint address);
-
-        static bool IsConsist(int num, uint address);
     };
 
     static void WriteBytes(uint address, const uint8 *data, int size);

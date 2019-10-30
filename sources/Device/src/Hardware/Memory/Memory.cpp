@@ -16,9 +16,6 @@ static void ReadBytes(uint address, void *data, uint size);
 static uint ReadDoubleWord(uint address);
 
 
-
-#define SIZE_SECTOR_128         (128 * 1024)
-
 #define READ_BYTE(address)      (*((uint8 *)address))
 
 
@@ -47,12 +44,12 @@ void FlashMemory::Settings::Save()
 
     uint address = FirstFreeAddressForSettings();
 
-    uint freeMemory = SEC_10_SETTINGS_1 + SIZE_SECTOR_128 - address;
+    uint freeMemory = HAL_FLASH::Sector::address[SEC_10_SETTINGS_1] + HAL_FLASH::Sector::size[SEC_10_SETTINGS_1] - address;
 
-    if((address == MAX_UINT) || (freeMemory <= sizeof(Settings)) || (address < SEC_10_SETTINGS_1))
+    if((address == MAX_UINT) || (freeMemory <= sizeof(Settings)) || (address < HAL_FLASH::Sector::address[SEC_10_SETTINGS_1]))
     {
         HAL_FLASH::Sector::Erase(SEC_10_SETTINGS_1);
-        address = SEC_10_SETTINGS_1;
+        address = HAL_FLASH::Sector::address[SEC_10_SETTINGS_1];
     }
 
     set.size = sizeof(set);
@@ -68,7 +65,7 @@ void FlashMemory::Write(uint address, const void *data, int size)
 
 static uint FirstFreeAddressForSettings() //-V2506
 {
-    uint address = SEC_10_SETTINGS_1;
+    uint address = HAL_FLASH::Sector::address[SEC_10_SETTINGS_1];
 
     do
     {
@@ -81,7 +78,7 @@ static uint FirstFreeAddressForSettings() //-V2506
 
         address += value;                   // Переходим на первый свободный байт за структурой
 
-    } while(address < (SEC_10_SETTINGS_1 + SIZE_SECTOR_128));
+    } while(address < (HAL_FLASH::Sector::address[SEC_10_SETTINGS_1] + HAL_FLASH::Sector::size[SEC_10_SETTINGS_1]));
     
     
     return MAX_UINT;        // Вообще-то до этой точки дойти никак не может. Если мы оказались здесь, произошла ошибка
@@ -92,7 +89,7 @@ static uint AddressSavedSettings(int)
 {
     uint addrPrev = 0;
 
-    uint address = SEC_10_SETTINGS_1;
+    uint address = HAL_FLASH::Sector::address[SEC_10_SETTINGS_1];
 
     while (ReadDoubleWord(address) != MAX_UINT)
     {
