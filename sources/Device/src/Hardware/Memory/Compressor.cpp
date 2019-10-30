@@ -4,24 +4,6 @@
 #include "Data/DataSettings.h"
 
 
-struct Packet
-{
-    uint  state;    // Состояние пакета:
-                    // 0xFFFFFFFF - в пакет запись не производилась
-                    // 0x00000000 - пакет стёрт
-                    // 0xFF00FF00 - действующий пакет
-    uint16 size;    // Размер пакета - sizeof(size) + sizeof(type) + sizeof(data)
-    uint16 type;    // Тип данных :
-};
-
-
-#define FREE    0xFFFFFFFFU
-#define ERASED  0x00000000U
-#define VALID   0xFF00FF00U
-
-#define TYPE_DATA     0U
-
-
 uint Compressor::GetPackedSize(const DataSettings *ds)
 {
     return sizeof(Packet) +         // Packet
@@ -39,7 +21,7 @@ static void WriteToROM(uint *address, const void *data, int size)
 
 void Compressor::Pack(const DataSettings *ds, Address address)
 {
-    Packet packet = { VALID, static_cast<uint16>(GetPackedSize(ds)), TYPE_DATA };
+    Packet packet = { STATE_VALID, static_cast<uint16>(GetPackedSize(ds)), TYPE_DATA };
 
     uint addr = address.addressMC;
 
@@ -63,7 +45,7 @@ bool Compressor::UnPack(Address address, DataSettings **ds)
 {
     Packet packet = *reinterpret_cast<Packet *>(address.addressMC);
 
-    if (packet.state != VALID || packet.type != TYPE_DATA)
+    if (packet.state != STATE_VALID || packet.type != TYPE_DATA)
     {
         return false;
     }

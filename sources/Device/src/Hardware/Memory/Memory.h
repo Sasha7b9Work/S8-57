@@ -70,11 +70,8 @@ struct FlashMemory
     /// Функция для сохранения/восстановления данных
     struct Data
     {
-        /*
-
-        */
-
-        static bool Get(int num, DataSettings *ds, uint8 *dataA, uint8 *dataB);
+        /// Получает данные о сигнале номер num. Если сигнала нет, в ds записывается 0
+        static bool Get(int num, DataSettings **ds, uint8 **dataA, uint8 **dataB);
 
         static void Delete(int num);
 

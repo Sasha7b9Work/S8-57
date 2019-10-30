@@ -155,7 +155,9 @@ source_group(Hardware\\HAL      FILES   ../../Device/src/Hardware/HAL/HAL.h
                                                      src/Hardware/HAL/HAL_TIM_win.cpp
                                         ../../Device/src/Hardware/HAL/HAL_USART3.cpp
                                                      src/Hardware/HAL/HAL_win.cpp)
-source_group(Hardware\\Memory   FILES   ../../Device/src/Hardware/Memory/Memory.h
+source_group(Hardware\\Memory   FILES   ../../Device/src/Hardware/Memory/Compressor.h
+                                        ../../Device/src/Hardware/Memory/Compressor.cpp
+                                        ../../Device/src/Hardware/Memory/Memory.h
                                         ../../Device/src/Hardware/Memory/Memory.cpp
                                                      src/Hardware/Memory/Memory_win.cpp
                                         ../../Device/src/Hardware/Memory/MemoryRAM.h
@@ -270,6 +272,8 @@ file(GLOB SOURCES   ../../common/_VS/*
                                  src/Hardware/HAL/HAL_TIM_win.cpp
                     ../../Device/src/Hardware/HAL/HAL_USART3.cpp
                     
+                    ../../Device/src/Hardware/Memory/Compressor.h
+                    ../../Device/src/Hardware/Memory/Compressor.cpp
                     ../../Device/src/Hardware/Memory/Memory.h
                     ../../Device/src/Hardware/Memory/Memory.cpp
                                  src/Hardware/Memory/Memory_win.cpp

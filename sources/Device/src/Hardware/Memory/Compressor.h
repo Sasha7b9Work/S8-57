@@ -2,6 +2,24 @@
 #include "Hardware/Memory/Memory.h"
 
 
+struct Packet
+{
+    uint  state;    // Состояние пакета:
+                    // 0xFFFFFFFF - в пакет запись не производилась
+                    // 0x00000000 - пакет стёрт
+                    // 0xFF00FF00 - действующий пакет
+    uint16 size;    // Размер пакета - sizeof(size) + sizeof(type) + sizeof(data)
+    uint16 type;    // Тип данных :
+};
+
+
+#define STATE_FREE    0xFFFFFFFFU
+#define STATE_ERASED  0x00000000U
+#define STATE_VALID   0xFF00FF00U
+
+#define TYPE_DATA     0U
+
+
 struct Compressor
 {
     /// Возвращает количество байт, необходимое для хранения данных
