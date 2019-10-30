@@ -51,7 +51,7 @@ void FlashMemory::Settings::Save()
 
     if((address == MAX_UINT) || (freeMemory <= sizeof(Settings)) || (address < SEC_10_SETTINGS_1))
     {
-        EraseSector(SEC_10_SETTINGS_1);
+        HAL_FLASH::Sector::Erase(SEC_10_SETTINGS_1);
         address = SEC_10_SETTINGS_1;
     }
 
@@ -59,13 +59,6 @@ void FlashMemory::Settings::Save()
 
     Write(address, &set, sizeof(set));
 }
-
-
-void FlashMemory::EraseSector(uint address)
-{
-    HAL_FLASH::EraseSector(address);
-}
-
 
 void FlashMemory::Write(uint address, const void *data, int size)
 {

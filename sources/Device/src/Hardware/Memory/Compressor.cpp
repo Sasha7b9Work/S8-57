@@ -19,38 +19,36 @@ static void WriteToROM(uint *address, const void *data, int size)
 }
 
 
-void Compressor::Pack(const DataSettings *ds, Address address)
+void Compressor::Pack(const DataSettings *ds, uint address)
 {
     Packet packet = { STATE_VALID, static_cast<uint16>(GetPackedSize(ds)), TYPE_DATA };
 
-    uint addr = address.addressMC;
+    WriteToROM(&address, &packet, sizeof(packet));
 
-    WriteToROM(&addr, &packet, sizeof(packet));
-
-    WriteToROM(&addr, ds, sizeof(DataSettings));
+    WriteToROM(&address, ds, sizeof(DataSettings));
 
     if (ds->enableA)
     {
-        WriteToROM(&addr, ds->dataA, ds->SizeChannel());
+        WriteToROM(&address, ds->dataA, ds->SizeChannel());
     }
 
     if (ds->enableB)
     {
-        WriteToROM(&addr, ds->dataB, ds->SizeChannel());
+        WriteToROM(&address, ds->dataB, ds->SizeChannel());
     }
 }
 
 
-bool Compressor::UnPack(Address address, DataSettings **ds)
+bool Compressor::UnPack(uint address, DataSettings **ds)
 {
-    Packet packet = *reinterpret_cast<Packet *>(address.addressMC);
+    Packet packet = *reinterpret_cast<Packet *>(address);
 
     if (packet.state != STATE_VALID || packet.type != TYPE_DATA)
     {
         return false;
     }
 
-    **ds = *reinterpret_cast<DataSettings *>(address.addressMC + sizeof(Packet));
+    **ds = *reinterpret_cast<DataSettings *>(address + sizeof(Packet));
 
     return true;
 }

@@ -22,7 +22,7 @@ private:
 /// Описывает данные регистратора - цельную запись точек
 struct Record
 {
-    Record() : startMC(nullptr), numPoints(0), pointer(0) {} //-V730
+    Record() : start(nullptr), numPoints(0), pointer(0) {} //-V730
 
     void SetDataAddress(uint16 *addressMC);
     /// Добавление считаной точки
@@ -39,7 +39,7 @@ struct Record
     int FreeMemory();
 private:
     /// Указатель на буфер данных - фактически адрес первой сохранённой точки
-    Point *startMC;
+    Point *start;
     /// Количество сохранённых точек
     uint numPoints;
     /// Указатель на последние считаннные данные

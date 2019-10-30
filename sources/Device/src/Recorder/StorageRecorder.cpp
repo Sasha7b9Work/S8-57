@@ -1,8 +1,10 @@
 #include "defines.h"
-#include "Recorder/StorageRecorder.h"
-#include "Hardware/Timer.h"
 #include "Data/Heap.h"
+#include "Hardware/Timer.h"
+#include "Hardware/HAL/HAL.h"
 #include "Hardware/Memory/Memory.h"
+#include "Recorder/StorageRecorder.h"
+
 
 
 /// Обёртка для Heap()
@@ -13,7 +15,7 @@ struct Stack
     static void Push(const Record &_record)
     {
         record = _record;
-        record.SetDataAddress((uint16 *)SEC_17_RECORDER_1); //-V566
+        record.SetDataAddress((uint16 *)HAL_FLASH::Sector::address[SEC_17_RECORDER_1]); //-V566
     }
 
     static Record *Top()
@@ -62,7 +64,7 @@ void StorageRecorder::CreateNewRecord()
 
 void Record::SetDataAddress(uint16 *address)
 {
-    startMC = reinterpret_cast<Point *>(address);
+    start = reinterpret_cast<Point *>(address);
     numPoints = 0;
     pointer = MAX_UINT;
 }
@@ -85,16 +87,7 @@ Point Record::NextPoint(uint maxPoints)
         return Point::CreateEmpty();
     }
 
-#ifdef GUI
-
-    Point *address = reinterpret_cast<Point *>(Address::FromMC(reinterpret_cast<uint>(startMC)).ToPC());
-    return Point(address[pointer]);
-
-#else
-
-    return Point(startMC[pointer]);
-
-#endif
+    return Point(start[pointer]);
 }
 
 

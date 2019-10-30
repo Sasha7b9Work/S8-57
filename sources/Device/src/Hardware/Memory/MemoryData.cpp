@@ -1,5 +1,6 @@
 #include "defines.h"
 #include "Hardware/Memory/Memory.h"
+#include "Hardware/HAL/HAL.h"
 
 
 static void FillInfoFromSector(uint /*address*/, bool /*existData*/[MAX_NUM_SAVED_WAVES])
