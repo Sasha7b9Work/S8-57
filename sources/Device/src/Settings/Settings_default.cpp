@@ -96,6 +96,7 @@ const Settings Settings::defaultSettings =
     {
         ENumPointsFPGA::_1k,        // enumPoints
         ModeBtnMemory::Menu,        // modeBtnMemory
+        TypeSignalROM::Recorded,    // typeSignalROM
         ModeWork::Dir,              // modeWork
         false,                      // flashAutoConnect
         0,                          // indexCurSymbolNameMask

@@ -108,6 +108,38 @@ DEF_GRAPH_BUTTON( bSave,                                                        
 )
 
 
+static void OnPress_TypeSignal()
+{
+    Math::CircleIncrease<uint8>(reinterpret_cast<uint8*>(&set.mem.typeSignalROM), 0, 1);
+}
+
+static void Draw_Recorded(int x, int y)
+{
+    Char(SymbolUGO2::RECORDERD).Draw4SymbolsInRect(x + 1, y + 1);
+}
+
+static void Draw_Current(int x, int y)
+{
+    Char(SymbolUGO2::CURRENT).Draw4SymbolsInRect(x + 1, y + 1);
+}
+
+static void Draw_TypeSignal(int x, int y)
+{
+    typedef void (*pFuncDraw)(int, int);
+
+    static const pFuncDraw func[2] = { Draw_Recorded, Draw_Current };
+    func[set.mem.typeSignalROM](x, y);
+}
+
+DEF_GRAPH_BUTTON_HINTS_2( bTypeSignal,                                                                                                              //--- ПАМЯТЬ - ВНУТР ЗУ - Тип сигнала ---
+    "Тип сигнала",
+    "Какой сигнал выводить",
+    &PageROM::self, Item::Active, OnPress_TypeSignal, Draw_TypeSignal,
+    Draw_Recorded, "Выводится записанный сигнал из памяти",
+    Draw_Current, "Выводится текущий сигнал"
+)
+
+
 static void OnOpenClose_ROM(bool open)
 {
     Osci::SetModeWork(open ? ModeWork::ROM : ModeWork::Dir);
@@ -189,13 +221,14 @@ static bool NormalTitle_ROM()
     return false;
 }
 
-DEF_PAGE_4( pROM,                                                                                                                                                 //--- ПАМЯТЬ - ВНУТР ЗУ ---
+DEF_PAGE_5( pROM,                                                                                                                                                 //--- ПАМЯТЬ - ВНУТР ЗУ ---
     "ВНУТР ЗУ",
     "Переход в режим работы с внутренней памятью",
     &bPrev,
     &bNext,
     &bSave,
     &bDelete,
+    &bTypeSignal,
     PageName::Memory_Internal,
     &PageMemory::self, Item::Active, NormalTitle_ROM, OnOpenClose_ROM, AfterDraw_ROM, HandlerKey_ROM
 )

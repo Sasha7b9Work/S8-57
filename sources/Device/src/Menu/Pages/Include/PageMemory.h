@@ -78,12 +78,23 @@ struct ENumPointsFPGA
     uint PointsInChannel() const;
 };
 
+/// Какой сигнал показывать в режиме ПАМЯТЬ - ВНЕШН ЗУ
+struct TypeSignalROM
+{
+    enum E
+    {
+        Recorded,
+        Current
+    };
+};
+
 
 struct SettingsMemory
 {
 #define MAX_SYMBOLS_IN_FILE_NAME 35
     ENumPointsFPGA::E   enumPoints;                             ///< Число точек
     ModeBtnMemory::E    modeBtnMemory;
+    TypeSignalROM::E    typeSignalROM;                          ///< Какой сигнал выводить в режиме ПАМЯТЬ-ВНУТР ЗУ
     ModeWork::E         modeWork;                               ///< Режим работы.
     bool                flashAutoConnect;                       ///< Если true, при подключении флешки автоматически выводится Файл-Менеджер.
     int8                indexCurSymbolNameMask;                 ///< Индекс текущего символа в режиме задания маски или выбора имени.
