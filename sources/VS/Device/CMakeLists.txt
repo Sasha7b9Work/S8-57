@@ -159,6 +159,7 @@ source_group(Hardware\\Memory   FILES   ../../Device/src/Hardware/Memory/Compres
                                         ../../Device/src/Hardware/Memory/Compressor.cpp
                                         ../../Device/src/Hardware/Memory/Memory.h
                                         ../../Device/src/Hardware/Memory/Memory.cpp
+                                        ../../Device/src/Hardware/Memory/MemoryData.cpp
                                                      src/Hardware/Memory/Memory_win.cpp
                                         ../../Device/src/Hardware/Memory/MemoryRAM.h
                                         ../../Device/src/Hardware/Memory/MemoryRAM.cpp)
@@ -276,6 +277,7 @@ file(GLOB SOURCES   ../../common/_VS/*
                     ../../Device/src/Hardware/Memory/Compressor.cpp
                     ../../Device/src/Hardware/Memory/Memory.h
                     ../../Device/src/Hardware/Memory/Memory.cpp
+                    ../../Device/src/Hardware/Memory/MemoryData.cpp
                                  src/Hardware/Memory/Memory_win.cpp
                     ../../Device/src/Hardware/Memory/MemoryRAM.h
                     ../../Device/src/Hardware/Memory/MemoryRAM.cpp

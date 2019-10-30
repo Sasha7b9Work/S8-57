@@ -121,43 +121,6 @@ static void ReadBytes(uint address, void *data, uint size)
     }
 }
 
-
-bool FlashMemory::Data::Get(int /*num*/, DataSettings ** /*ds*/, uint8 ** /*dataA*/, uint8 ** /*dataB*/)
-{
-    return false;
-}
-
-
-void FlashMemory::Data::Delete(int /*num*/)
-{
-}
-
-
-void FlashMemory::Data::GetInfo(bool /*existData*/ [MAX_NUM_SAVED_WAVES])
-{
-    /*
-        Данные хранятся таким образом.
-        Есть набор секторов, условно с 1-го по 5-й.
-    */
-
-//    static const int NUM_SECTORS = 5;
-//
-//    static const uint sectors[NUM_SECTORS] = { SEC_19_DATA_1, SEC_20_DATA_2, SEC_21_DATA_3, SEC_22_DATA_4, SEC_23_DATA_5 };
-
-
-}
-
-
-void FlashMemory::Data::Save(int /*num*/, const DataSettings * /*ds*/, uint8 * /*dataA*/, uint8 * /*dataB*/)
-{
-}
-
-
-void FlashMemory::Data::DeleteAll()
-{
-}
-
-
 String OTPmem::GetSerialNumber(int *freeForWrite)
 {
     char buffer[20];

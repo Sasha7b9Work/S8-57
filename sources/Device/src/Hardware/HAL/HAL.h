@@ -79,6 +79,12 @@ struct HAL_DAC2
 
 struct HAL_EEPROM
 {
+    struct Sector
+    {
+        uint StartAddress(int num);
+        uint Size(int num);
+    };
+
     static void EraseSector(uint startAddress);
     static void WriteBytes(uint address, const uint8 *data, int size);
     static void WriteBufferBytes(uint address, const void *buffer, int size);

@@ -54,3 +54,22 @@ bool Compressor::UnPack(Address address, DataSettings **ds)
 
     return true;
 }
+
+
+Packet *Compressor::NextPacket(Packet *packet)
+{
+    if (packet->state == STATE_FREE)
+    {
+        return nullptr;
+    }
+    else if (packet->state == STATE_ERASED || packet->state == STATE_VALID)
+    {
+        return reinterpret_cast<Packet *>(reinterpret_cast<uint8 *>(packet) + packet->size);
+    }
+    else
+    {
+        LOG_WRITE("Ошибка следующего пакета");
+    }
+
+    return nullptr;
+}

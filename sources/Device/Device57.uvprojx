@@ -971,6 +971,11 @@
               <FilePath>.\src\Hardware\Memory\Memory.cpp</FilePath>
             </File>
             <File>
+              <FileName>MemoryData.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\Memory\MemoryData.cpp</FilePath>
+            </File>
+            <File>
               <FileName>MemoryRAM.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Hardware\Memory\MemoryRAM.h</FilePath>

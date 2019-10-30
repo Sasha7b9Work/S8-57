@@ -22,6 +22,8 @@ struct Packet
 
 struct Compressor
 {
+    /// ¬озвращает адрес следующего пакета в адресном пространстве микроконтроллера.
+    static Packet *NextPacket(Packet *packet);
     /// ¬озвращает количество байт, необходимое дл€ хранени€ данных
     static uint GetPackedSize(const DataSettings *ds);
     /// ”паковывает данные с настойками ds по адресу address
