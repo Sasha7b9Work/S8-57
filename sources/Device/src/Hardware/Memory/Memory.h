@@ -50,7 +50,7 @@ private:
     explicit Address(uint addr) : addressMC(addr) {};
 };
 
-struct EEPROM
+struct FlashMemory
 {
 	static const uint SIZE = 2 * 1024 * 1024;
 

@@ -60,7 +60,7 @@ DEF_GRAPH_BUTTON( bPrev,
 static void OnPress_Delete()
 {
     Display::FuncOnWaitStart("”дал€ю сохранЄнные данные", false);
-    EEPROM::DeleteData(NUM_ROM_SIGNAL);
+    FlashMemory::DeleteData(NUM_ROM_SIGNAL);
     Display::FuncOnWaitStop();
 }
 
@@ -151,7 +151,7 @@ static void AfterDraw_ROM()
 
     bool exist[MAX_NUM_SAVED_WAVES] = { false };
 
-    EEPROM::GetDataInfo(exist);
+    FlashMemory::GetDataInfo(exist);
 
     for (int i = 0; i < MAX_NUM_SAVED_WAVES; i++)
     {

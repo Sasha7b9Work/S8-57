@@ -21,7 +21,7 @@ bool operator<(const Address &left, const Address &right)
 }
 
 
-uint8 eeprom[EEPROM::SIZE];
+uint8 eeprom[FlashMemory::SIZE];
 
 
 struct SectorTypeDef

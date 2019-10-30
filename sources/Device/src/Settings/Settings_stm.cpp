@@ -8,7 +8,7 @@
 
 void Settings::Load(bool _default)
 {
-    if(_default || !EEPROM::LoadSettings())
+    if(_default || !FlashMemory::LoadSettings())
     {
         Reset();
         Osci::Init();
@@ -20,5 +20,5 @@ void Settings::Load(bool _default)
 
 void Settings::Save()
 {
-    EEPROM::SaveSettings();
+    FlashMemory::SaveSettings();
 }

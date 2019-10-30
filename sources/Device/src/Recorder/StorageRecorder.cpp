@@ -41,7 +41,7 @@ void Record::AddPoint(BitSet16 dataA, BitSet16 dataB)
 {
     BitSet32 bs(dataA.halfWord, dataB.halfWord);
 
-    EEPROM::WriteData(S17_RECORDER_1 + numPoints * sizeof(Point), &bs, sizeof(BitSet32));
+    FlashMemory::WriteData(S17_RECORDER_1 + numPoints * sizeof(Point), &bs, sizeof(BitSet32));
 
     numPoints++;
 }
