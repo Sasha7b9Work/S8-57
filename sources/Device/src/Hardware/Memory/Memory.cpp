@@ -56,7 +56,7 @@ void FlashMemory::Settings::Save()
 
     set.size = sizeof(set);
 
-    WriteData(address, &set, sizeof(set));
+    Write(address, &set, sizeof(set));
 }
 
 
@@ -66,7 +66,7 @@ void FlashMemory::EraseSector(uint address)
 }
 
 
-void FlashMemory::WriteData(uint address, const void *data, int size)
+void FlashMemory::Write(uint address, const void *data, int size)
 {
     HAL_EEPROM::WriteBytes(address, static_cast<const uint8 *>(data), size);
 }

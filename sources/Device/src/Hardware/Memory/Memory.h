@@ -57,7 +57,7 @@ struct FlashMemory
     /// Стирает сектор с начальным адресом address
     static void EraseSector(uint address);
 
-    static void WriteData(uint address, const void *data, int size);
+    static void Write(uint address, const void *data, int size);
 
     /// Функция для сохранения/восстановления настроек
     struct Settings
