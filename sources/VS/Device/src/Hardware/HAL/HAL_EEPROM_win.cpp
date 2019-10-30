@@ -100,7 +100,58 @@ static const SectorTypeDef sectors[24] =
 
 const uint HAL_FLASH::Sector::address[HAL_FLASH::Sector::NUM_SECTORS] =
 {
-    0
+    reinterpret_cast<uint>(&eeprom[0]),                     // 00_BOOT_1
+    reinterpret_cast<uint>(&eeprom[_16K]),                  // 01_BOOT_2
+    reinterpret_cast<uint>(&eeprom[_16K * 2]),              // 02
+    reinterpret_cast<uint>(&eeprom[_16K * 3]),              // 03
+    reinterpret_cast<uint>(&eeprom[_16K * 4]),              // 04
+    reinterpret_cast<uint>(&eeprom[_128K]),                 // 05_FIRM_1
+    reinterpret_cast<uint>(&eeprom[_128K * 2]),             // 06_FIRM_2
+    reinterpret_cast<uint>(&eeprom[_128K * 3]),             // 07_FIRM_3
+    reinterpret_cast<uint>(&eeprom[_128K * 4]),             // 08
+    reinterpret_cast<uint>(&eeprom[_128K * 5]),             // 09
+    reinterpret_cast<uint>(&eeprom[_128K * 6]),             // 10_SETTINGS_1
+    reinterpret_cast<uint>(&eeprom[_128K * 7]),             // 11_SETTINGS_2
+    reinterpret_cast<uint>(&eeprom[_128K * 8]),             // 12
+    reinterpret_cast<uint>(&eeprom[_128K * 8 + _16K]),      // 13
+    reinterpret_cast<uint>(&eeprom[_128K * 8 + _16K * 2]),  // 14
+    reinterpret_cast<uint>(&eeprom[_128K * 8 + _16K * 3]),  // 15
+    reinterpret_cast<uint>(&eeprom[_128K * 8 + _16K * 4]),  // 16
+    reinterpret_cast<uint>(&eeprom[_128K * 8 + _128K]),     // 17_RECORDER_1
+    reinterpret_cast<uint>(&eeprom[_128K * 8 + _128K * 2]), // 18_RECORDER_2
+    reinterpret_cast<uint>(&eeprom[_128K * 8 + _128K * 3]), // 19_DATA_1
+    reinterpret_cast<uint>(&eeprom[_128K * 8 + _128K * 4]), // 20_DATA_2
+    reinterpret_cast<uint>(&eeprom[_128K * 8 + _128K * 5]), // 21_DATA_3
+    reinterpret_cast<uint>(&eeprom[_128K * 8 + _128K * 6]), // 22_DATA_4
+    reinterpret_cast<uint>(&eeprom[_128K * 8 + _128K * 7])  // 23_DATA_5
+};
+
+const uint HAL_FLASH::Sector::size[HAL_FLASH::Sector::NUM_SECTORS] =
+{
+    _16K,   // 00_BOOT_1
+    _16K,   // 01_BOOT_2
+    _16K,   // 02
+    _16K,   // 03
+    _64K,   // 04
+    _128K,  // 05_FIRM_1
+    _128K,  // 06_FIRM_2
+    _128K,  // 07_FIRM_3
+    _128K,  // 08
+    _128K,  // 09
+    _128K,  // 10_SETTINGS_1
+    _128K,  // 11_SETTINGS_2
+    _16K,   // 12
+    _16K,   // 13
+    _16K,   // 14
+    _16K,   // 15
+    _64K,   // 16
+    _128K,  // 17_RECORDER_1
+    _128K,  // 18_RECORDER_2
+    _128K,  // 19_DATA_1
+    _128K,  // 20_DATA_2
+    _128K,  // 21_DATA_3
+    _128K,  // 22_DATA_4
+    _128K   // 23_DATA_5
 };
 
 

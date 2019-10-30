@@ -12,7 +12,6 @@
 #define SEC_07_FIRM_3     ((uint)0x08060000)   // 128k
 #define SEC_08            ((uint)0x08080000)   // 128k
 #define SEC_09            ((uint)0x080A0000)   // 128k
-/// ѕервый сектор дл€ сохранени€ настроек. ѕри его заполнении начинает использоватьс€ сектор 2.
 #define SEC_10_SETTINGS_1 ((uint)0x080C0000)   // 128k
 #define SEC_11_SETTINGS_2 ((uint)0x080E0000)   // 128k
 #define SEC_12            ((uint)0x08100000)   //  16k
