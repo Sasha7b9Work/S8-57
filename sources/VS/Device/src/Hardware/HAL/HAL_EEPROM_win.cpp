@@ -119,13 +119,13 @@ static const SectorTypeDef &GetSector(Address address)
 }
 
 
-void HAL_EEPROM::WriteBufferBytes(uint address, const void *buffer, int size)
+void HAL_FLASH::WriteBufferBytes(uint address, const void *buffer, int size)
 {
     WriteBytes(address, static_cast<const uint8 *>(buffer), size);
 }
 
 
-void HAL_EEPROM::EraseSector(uint address)
+void HAL_FLASH::EraseSector(uint address)
 {
     const SectorTypeDef &sector = GetSector(Address::FromMC(address));
 
@@ -133,7 +133,7 @@ void HAL_EEPROM::EraseSector(uint address)
 }
 
 
-void HAL_EEPROM::WriteBytes(uint address, const uint8 *buffer, int size)
+void HAL_FLASH::WriteBytes(uint address, const uint8 *buffer, int size)
 {
     for (int i = 0; i < size; i++)
     {

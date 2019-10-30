@@ -63,13 +63,13 @@ void FlashMemory::Settings::Save()
 
 void FlashMemory::EraseSector(uint address)
 {
-    HAL_EEPROM::EraseSector(address);
+    HAL_FLASH::EraseSector(address);
 }
 
 
 void FlashMemory::Write(uint address, const void *data, int size)
 {
-    HAL_EEPROM::WriteBytes(address, static_cast<const uint8 *>(data), size);
+    HAL_FLASH::WriteBytes(address, static_cast<const uint8 *>(data), size);
 }
 
 

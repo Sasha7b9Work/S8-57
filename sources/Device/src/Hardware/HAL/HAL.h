@@ -77,7 +77,7 @@ struct HAL_DAC2
     static void SetValue(uint value);
 };
 
-struct HAL_EEPROM
+struct HAL_FLASH
 {
     struct Sector
     {

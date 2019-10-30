@@ -14,7 +14,7 @@ uint Compressor::GetPackedSize(const DataSettings *ds)
 
 static void WriteToROM(uint *address, const void *data, int size)
 {
-    HAL_EEPROM::WriteBufferBytes(*address, data, size);
+    HAL_FLASH::WriteBufferBytes(*address, data, size);
     *address += size;
 }
 
