@@ -49,7 +49,7 @@ Address Address::FromPC(uint addr)
 {
     uint deltaPC = addr - reinterpret_cast<uint>(&eeprom[0]);
 
-    return Address(S00_BOOT_1 + deltaPC);
+    return Address(SEC_00_BOOT_1 + deltaPC);
 }
 
 Address Address::FromMC(uint addr)
@@ -64,7 +64,7 @@ Address Address::FromPC(uint8 *addr)
 
 uint8 *Address::ToPC() const
 {
-    uint deltaMC = addressMC - S00_BOOT_1;
+    uint deltaMC = addressMC - SEC_00_BOOT_1;
 
     return eeprom + deltaMC;
 }
@@ -72,30 +72,30 @@ uint8 *Address::ToPC() const
 
 static const SectorTypeDef sectors[24] =
 {
-	{Address::FromMC(S00_BOOT_1),     &eeprom[0],                     _16K},
-	{Address::FromMC(S01_BOOT_2),     &eeprom[_16K],                  _16K},
-	{Address::FromMC(S02),            &eeprom[_16K * 2],              _16K},
-	{Address::FromMC(S03),            &eeprom[_16K * 3],              _16K},
-	{Address::FromMC(S04),            &eeprom[_16K * 4],              _64K},
-	{Address::FromMC(S05_FIRM_1),     &eeprom[_128K],                 _128K},
-	{Address::FromMC(S06_FIRM_2),     &eeprom[_128K * 2],             _128K},
-	{Address::FromMC(S07_FIRM_3),     &eeprom[_128K * 3],             _128K},
-	{Address::FromMC(S08),            &eeprom[_128K * 4],             _128K},
-	{Address::FromMC(S09),            &eeprom[_128K * 5],             _128K},
-	{Address::FromMC(S10_SETTINGS_1), &eeprom[_128K * 6],             _128K},
-	{Address::FromMC(S11_SETTINGS_2), &eeprom[_128K * 7],             _128K},
-	{Address::FromMC(S12),            &eeprom[_128K * 8],             _16K},
-	{Address::FromMC(S13),            &eeprom[_128K * 8 + _16K],      _16K},
-	{Address::FromMC(S14),            &eeprom[_128K * 8 + _16K * 2],  _16K},
-	{Address::FromMC(S15),            &eeprom[_128K * 8 + _16K * 3],  _16K},
-	{Address::FromMC(S16),            &eeprom[_128K * 8 + _16K * 4],  _64K},
-	{Address::FromMC(S17_RECORDER_1), &eeprom[_128K * 8 + _128K],     _128K},
-	{Address::FromMC(S18_RECORDER_2), &eeprom[_128K * 8 + _128K * 2], _128K},
-	{Address::FromMC(S19),            &eeprom[_128K * 8 + _128K * 3], _128K},
-	{Address::FromMC(S20),            &eeprom[_128K * 8 + _128K * 4], _128K},
-	{Address::FromMC(S21),            &eeprom[_128K * 8 + _128K * 5], _128K},
-	{Address::FromMC(S22),            &eeprom[_128K * 8 + _128K * 6], _128K},
-	{Address::FromMC(S23),            &eeprom[_128K * 8 + _128K * 7], _128K}
+	{Address::FromMC(SEC_00_BOOT_1),     &eeprom[0],                     _16K},
+	{Address::FromMC(SEC_01_BOOT_2),     &eeprom[_16K],                  _16K},
+	{Address::FromMC(SEC_02),            &eeprom[_16K * 2],              _16K},
+	{Address::FromMC(SEC_03),            &eeprom[_16K * 3],              _16K},
+	{Address::FromMC(SEC_04),            &eeprom[_16K * 4],              _64K},
+	{Address::FromMC(SEC_05_FIRM_1),     &eeprom[_128K],                 _128K},
+	{Address::FromMC(SEC_06_FIRM_2),     &eeprom[_128K * 2],             _128K},
+	{Address::FromMC(SEC_07_FIRM_3),     &eeprom[_128K * 3],             _128K},
+	{Address::FromMC(SEC_08),            &eeprom[_128K * 4],             _128K},
+	{Address::FromMC(SEC_09),            &eeprom[_128K * 5],             _128K},
+	{Address::FromMC(SEC_10_SETTINGS_1), &eeprom[_128K * 6],             _128K},
+	{Address::FromMC(SEC_11_SETTINGS_2), &eeprom[_128K * 7],             _128K},
+	{Address::FromMC(SEC_12),            &eeprom[_128K * 8],             _16K},
+	{Address::FromMC(SEC_13),            &eeprom[_128K * 8 + _16K],      _16K},
+	{Address::FromMC(SEC_14),            &eeprom[_128K * 8 + _16K * 2],  _16K},
+	{Address::FromMC(SEC_15),            &eeprom[_128K * 8 + _16K * 3],  _16K},
+	{Address::FromMC(SEC_16),            &eeprom[_128K * 8 + _16K * 4],  _64K},
+	{Address::FromMC(SEC_17_RECORDER_1), &eeprom[_128K * 8 + _128K],     _128K},
+	{Address::FromMC(SEC_18_RECORDER_2), &eeprom[_128K * 8 + _128K * 2], _128K},
+	{Address::FromMC(SEC_19_DATA_1),     &eeprom[_128K * 8 + _128K * 3], _128K},
+	{Address::FromMC(SEC_20_DATA_2),     &eeprom[_128K * 8 + _128K * 4], _128K},
+	{Address::FromMC(SEC_21_DATA_3),     &eeprom[_128K * 8 + _128K * 5], _128K},
+	{Address::FromMC(SEC_22_DATA_4),     &eeprom[_128K * 8 + _128K * 6], _128K},
+	{Address::FromMC(SEC_23_DATA_5),     &eeprom[_128K * 8 + _128K * 7], _128K}
 };
 
 

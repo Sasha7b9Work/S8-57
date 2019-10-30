@@ -100,7 +100,7 @@ void Recorder::Start()
     RShift::Set(Chan::A, RShift::ZERO);
     RShift::Set(Chan::B, RShift::ZERO);
 
-    FlashMemory::EraseSector(S17_RECORDER_1);
+    FlashMemory::EraseSector(SEC_17_RECORDER_1);
 
     StorageRecorder::CreateNewRecord();
 

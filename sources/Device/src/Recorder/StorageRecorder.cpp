@@ -13,7 +13,7 @@ struct Stack
     static void Push(const Record &_record)
     {
         record = _record;
-        record.SetDataAddress((uint16 *)S17_RECORDER_1); //-V566
+        record.SetDataAddress((uint16 *)SEC_17_RECORDER_1); //-V566
     }
 
     static Record *Top()
@@ -41,7 +41,7 @@ void Record::AddPoint(BitSet16 dataA, BitSet16 dataB)
 {
     BitSet32 bs(dataA.halfWord, dataB.halfWord);
 
-    FlashMemory::Write(S17_RECORDER_1 + numPoints * sizeof(Point), &bs, sizeof(BitSet32));
+    FlashMemory::Write(SEC_17_RECORDER_1 + numPoints * sizeof(Point), &bs, sizeof(BitSet32));
 
     numPoints++;
 }

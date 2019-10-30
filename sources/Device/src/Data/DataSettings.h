@@ -45,7 +45,8 @@ struct DataSettings
     uint        multiplierA : 1;
     uint        multiplierB : 1;
     uint        enumPoints : 3;
-    uint        notUsed : 12;
+    uint        numROM : 5;        ///< Номер данных в памяти ROM
+    uint        notUsed : 7;
     PackedTime  time;
     /// Заполняет структуру в соответствии с текущими настройками
     void Fill(uint8 *dataA = 0, uint8 *dataB = 0);
