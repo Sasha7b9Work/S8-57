@@ -54,22 +54,27 @@ struct FlashMemory
 {
 	static const uint SIZE = 2 * 1024 * 1024;
 
-    static void SaveSettings();
-
-    static bool LoadSettings();
-
-    static void DeleteAllData();
     /// Стирает сектор с начальным адресом address
     static void EraseSector(uint address);
 
     static void WriteData(uint address, const void *data, int size);
 
-    /// Функция для сохранения/восстановления данных во флеш-памяти
+    /// Функция для сохранения/восстановления настроек
+    struct Settings
+    {
+        static void Save();
+
+        static bool Load();
+    };
+
+    /// Функция для сохранения/восстановления данных
     struct Data
     {
         static bool Get(int num, DataSettings *ds, uint8 *dataA, uint8 *dataB);
 
         static void Delete(int num);
+
+        static void DeleteAll();
 
         static void Save(int num, const DataSettings *ds, uint8 *dataA, uint8 *dataB);
         /// Если даннные есть, соответствующий элемент массива равен true.

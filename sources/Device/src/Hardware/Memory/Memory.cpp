@@ -22,7 +22,7 @@ static uint ReadDoubleWord(uint address);
 
 
 
-void FlashMemory::SaveSettings()
+void FlashMemory::Settings::Save()
 {
     /*
         Алгоритм нахождения первого свободного слова
@@ -142,7 +142,7 @@ void FlashMemory::Data::Save(int /*num*/, const DataSettings * /*ds*/, uint8 * /
 }
 
 
-void FlashMemory::DeleteAllData()
+void FlashMemory::Data::DeleteAll()
 {
 }
 
@@ -167,7 +167,7 @@ static uint ReadDoubleWord(uint address)
 }
 
 
-bool FlashMemory::LoadSettings()
+bool FlashMemory::Settings::Load()
 {
     uint address = AddressSavedSettings(0);
 
