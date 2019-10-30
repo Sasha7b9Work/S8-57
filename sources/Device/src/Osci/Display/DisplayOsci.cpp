@@ -91,13 +91,9 @@ void DisplayOsci::DrawCursorTrigLevel()
         Char(Symbol8::TRIG_LEV_NORMAL).Draw(x + 1, y - 4);
     }
 
-    Font::SetCurrent(TypeFont::_5);
-
     static const char symbols[2] = {'1', '2'};
 
-    Char(symbols[static_cast<uint8>(set.trig.source)]).Draw(x + 5, y - 6, Color::BACK);
-
-    Font::SetCurrent(TypeFont::_8);
+    Char(symbols[static_cast<uint8>(set.trig.source)], TypeFont::_5).Draw(x + 5, y - 6, Color::BACK);
 
     Trig::DrawOnGrid();
 }

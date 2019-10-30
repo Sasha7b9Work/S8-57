@@ -390,11 +390,7 @@ void RShift::Draw(Chan::E ch)
 
     Char(Symbol8::RSHIFT_NORMAL).Draw(Grid::Left() - 8, y - 4);
 
-    Font::SetCurrent(TypeFont::_5);
-
-    Char(Chan(ch).IsA() ? '1' : '2').Draw(Grid::Left() - 7, y - 6, Color::BACK);
-
-    Font::SetCurrent(TypeFont::_8);
+    Char(Chan(ch).IsA() ? '1' : '2', TypeFont::_5).Draw(Grid::Left() - 7, y - 6, Color::BACK);
 }
 
 
