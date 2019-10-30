@@ -9,7 +9,11 @@ struct Packet
                     // 0x00000000 - пакет стёрт
                     // 0xFF00FF00 - действующий пакет
     uint16 size;    // Размер пакета - sizeof(size) + sizeof(type) + sizeof(data)
-    uint16 type;    // Тип данных :
+    uint16 type;    // Тип данных
+
+    bool IsData() const;
+    Packet *Next() const;
+    bool UnPack(DataSettings **ds);
 };
 
 

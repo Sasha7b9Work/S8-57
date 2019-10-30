@@ -71,3 +71,15 @@ Packet *Compressor::NextPacket(Packet *packet)
 
     return nullptr;
 }
+
+
+bool Packet::IsData() const
+{
+    return (state == STATE_VALID) && (type == TYPE_DATA);
+}
+
+
+Packet *Packet::Next() const
+{
+    return Compressor::NextPacket(this);
+}

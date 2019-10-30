@@ -1,11 +1,27 @@
 #include "defines.h"
-#include "Hardware/Memory/Memory.h"
 #include "Hardware/HAL/HAL.h"
+#include "Hardware/Memory/Compressor.h"
+#include "Hardware/Memory/Memory.h"
 
 
-static void FillInfoFromSector(Sector::E /*numSector*/, bool /*existData*/[MAX_NUM_SAVED_WAVES])
+
+/// ѕоставить true в те элементы массива existData[], которые соотвествуют существующим в данном секторе записанным данным
+static void FillInfoFromSector(const Sector *sector, bool existData[MAX_NUM_SAVED_WAVES])
 {
+    Packet *packet = reinterpret_cast<Packet *>(sector->address);
 
+    while (packet)
+    {
+        if (packet->IsData())
+        {
+            DataSettings *ds;
+            if (packet->UnPack(&ds))
+            {
+                existData[ds->numROM] = true;
+            }
+        }
+        packet = packet->Next();
+    }
 }
 
 
@@ -16,9 +32,21 @@ void FlashMemory::Data::GetInfo(bool existData[MAX_NUM_SAVED_WAVES])
         ≈сть набор секторов, условно с 1-го по 5-й.
     */
 
+    for (int i = 0; i < MAX_NUM_SAVED_WAVES; i++)
+    {
+        existData[i] = false;
+    }
+
     static const int NUM_SECTORS = 5;
 
-    static const Sector::E sectors[5] = { Sector::_19_DATA_1, Sector::_20_DATA_2, Sector::_21_DATA_3, Sector::_22_DATA_4, Sector::_23_DATA_5 };
+    static const Sector *sectors[5] =
+    {
+        &SECTOR(Sector::_19_DATA_1),
+        &SECTOR(Sector::_20_DATA_2),
+        &SECTOR(Sector::_21_DATA_3),
+        &SECTOR(Sector::_22_DATA_4),
+        &SECTOR(Sector::_23_DATA_5)
+    };
 
     for (int i = 0; i < NUM_SECTORS; i++)
     {
