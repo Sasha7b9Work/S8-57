@@ -98,6 +98,11 @@ static const SectorTypeDef sectors[24] =
 	{Address::FromMC(SEC_23_DATA_5),     &eeprom[_128K * 8 + _128K * 7], _128K}
 };
 
+const uint HAL_FLASH::Sector::address[HAL_FLASH::Sector::NUM_SECTORS] =
+{
+    0
+};
+
 
 /// Возвращает ссылку на структуру описания сектора с начальным адресом address
 static const SectorTypeDef &GetSector(Address address)

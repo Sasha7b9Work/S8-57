@@ -81,8 +81,35 @@ struct HAL_FLASH
 {
     struct Sector
     {
-        uint StartAddress(int num);
-        uint Size(int num);
+        static const int _00_BOOT_1     = 0;
+        static const int _01_BOOT_2     = 1;
+        static const int _02            = 2;
+        static const int _03            = 3;
+        static const int _04            = 4;
+        static const int _05_FIRM_1     = 5;
+        static const int _06_FIRM_2     = 6;
+        static const int _07_FIRM_3     = 7;
+        static const int _08            = 8;
+        static const int _09            = 9;
+        /// ѕервый сектор дл€ сохранени€ настроек. ѕри его заполнении начинает использоватьс€ сектор 2.
+        static const int _10_SETTINGS_1 = 10;
+        static const int _11_SETTINGS_2 = 11;
+        static const int _12            = 12;
+        static const int _13            = 13;
+        static const int _14            = 14;
+        static const int _15            = 15;
+        static const int _16            = 16;
+        static const int _17_RECORDER_1 = 17;
+        static const int _18_RECORDER_2 = 18;
+        static const int _19_DATA_1     = 19;
+        static const int _20_DATA_2     = 20;
+        static const int _21_DATA_3     = 21;
+        static const int _22_DATA_4     = 22;
+        static const int _23_DATA_5     = 23;
+        static const int NUM_SECTORS    = 24;
+
+        static const uint address[NUM_SECTORS];
+        static const uint size[NUM_SECTORS];
     };
 
     static void EraseSector(uint startAddress);
