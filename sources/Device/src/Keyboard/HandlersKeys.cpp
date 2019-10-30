@@ -155,24 +155,21 @@ static void ChangeRShift(Chan::E ch, int delta)
         static bool stop[Chan::Count] = { false, false };      // Признак того, что смещение изменять не нужно - оно равно нулю и прошло мало времени
         static uint timeStop[Chan::Count] = { 0, 0 };          // Время устновки признака stop
 
-        if (stop[static_cast<int>(ch)])
+        if (stop[ch])
         {
-            if (TIME_MS - timeStop[static_cast<int>(ch)] > 500)
+            if (TIME_MS - timeStop[ch] > 500)
             {
-                stop[static_cast<int>(ch)] = false;
+                stop[ch] = false;
             }
         }
         else
         {
             RShift::Change(ch, delta);
-        }
 
-        if (!stop[static_cast<int>(ch)])
-        {
             if (SET_RSHIFT(ch) == RShift::ZERO)
             {
-                stop[static_cast<int>(ch)] = true;
-                timeStop[static_cast<int>(ch)] = TIME_MS;
+                stop[ch] = true;
+                timeStop[ch] = TIME_MS;
             }
 
             DisplayOsci::SetFlagRedraw();
