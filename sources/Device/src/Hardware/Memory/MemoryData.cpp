@@ -4,6 +4,18 @@
 #include "Hardware/Memory/Memory.h"
 
 
+static const int NUM_SECTORS = 5;
+
+/// Эти секторы предназначены для хранения данных
+static const Sector *sectors[5] =
+{
+    &SECTOR(Sector::_19_DATA_1),
+    &SECTOR(Sector::_20_DATA_2),
+    &SECTOR(Sector::_21_DATA_3),
+    &SECTOR(Sector::_22_DATA_4),
+    &SECTOR(Sector::_23_DATA_5)
+};
+
 
 /// Поставить true в те элементы массива existData[], которые соотвествуют существующим в данном секторе записанным данным
 static void FillInfoFromSector(const Sector *sector, bool existData[MAX_NUM_SAVED_WAVES])
@@ -32,17 +44,6 @@ void FlashMemory::Data::GetInfo(bool existData[MAX_NUM_SAVED_WAVES])
         existData[i] = false;
     }
 
-    static const int NUM_SECTORS = 5;
-
-    static const Sector *sectors[5] =
-    {
-        &SECTOR(Sector::_19_DATA_1),
-        &SECTOR(Sector::_20_DATA_2),
-        &SECTOR(Sector::_21_DATA_3),
-        &SECTOR(Sector::_22_DATA_4),
-        &SECTOR(Sector::_23_DATA_5)
-    };
-
     for (int i = 0; i < NUM_SECTORS; i++)
     {
         FillInfoFromSector(sectors[i], existData);
@@ -50,8 +51,36 @@ void FlashMemory::Data::GetInfo(bool existData[MAX_NUM_SAVED_WAVES])
 }
 
 
-bool FlashMemory::Data::Get(int /*num*/, DataSettings ** /*ds*/, uint8 ** /*dataA*/, uint8 ** /*dataB*/)
+static bool GetData(const Sector *sector, int num, DataSettings **ds, uint8 **dataA, uint8 **dataB)
 {
+    Packet *packet = reinterpret_cast<Packet *>(ADDR_SECTOR(num));
+
+    while (packet && !packet->IsFree())
+    {
+        if (packet->IsData())
+        {
+
+        }
+
+        packet = packet->Next();
+    }
+
+    return false;
+}
+
+
+bool FlashMemory::Data::Get(int num, DataSettings **ds, uint8 **dataA, uint8 **dataB)
+{
+    *ds = nullptr;
+
+    for (int i = 0; i < NUM_SECTORS; i++)
+    {
+        if (GetData(sectors[i], num, ds, dataA, dataB))
+        {
+            return true;
+        }
+    }
+
     return false;
 }
 
