@@ -10,7 +10,7 @@ static void FillInfoFromSector(const Sector *sector, bool existData[MAX_NUM_SAVE
 {
     Packet *packet = reinterpret_cast<Packet *>(sector->address);
 
-    while (packet)
+    while (packet && !packet->IsFree())
     {
         if (packet->IsData())
         {
@@ -27,11 +27,6 @@ static void FillInfoFromSector(const Sector *sector, bool existData[MAX_NUM_SAVE
 
 void FlashMemory::Data::GetInfo(bool existData[MAX_NUM_SAVED_WAVES])
 {
-    /*
-        Данные хранятся таким образом.
-        Есть набор секторов, условно с 1-го по 5-й.
-    */
-
     for (int i = 0; i < MAX_NUM_SAVED_WAVES; i++)
     {
         existData[i] = false;

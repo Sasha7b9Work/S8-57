@@ -39,30 +39,30 @@ void Compressor::Pack(const DataSettings *ds, uint address)
 }
 
 
-bool Compressor::UnPack(uint address, DataSettings **ds)
+bool Packet::UnPack(DataSettings **ds) const
 {
-    Packet packet = *reinterpret_cast<Packet *>(address);
-
-    if (packet.state != STATE_VALID || packet.type != TYPE_DATA)
+    if (!IsValid() || !IsData())
     {
         return false;
     }
 
-    **ds = *reinterpret_cast<DataSettings *>(address + sizeof(Packet));
+    uint8 *pointer = const_cast<uint8 *>(reinterpret_cast<const uint8 *>(this) + sizeof(Packet));
+
+    *ds = reinterpret_cast<DataSettings *>(pointer);
 
     return true;
 }
 
 
-Packet *Compressor::NextPacket(Packet *packet)
+Packet *Packet::Next() const
 {
-    if (packet->state == STATE_FREE)
+    if (IsFree())
     {
         return nullptr;
     }
-    else if (packet->state == STATE_ERASED || packet->state == STATE_VALID)
+    else if (IsErased() || IsValid())
     {
-        return reinterpret_cast<Packet *>(reinterpret_cast<uint8 *>(packet) + packet->size);
+        return reinterpret_cast<Packet *>(reinterpret_cast<uint8 *>(const_cast<Packet *>(this)) + size);
     }
     else
     {
@@ -70,16 +70,4 @@ Packet *Compressor::NextPacket(Packet *packet)
     }
 
     return nullptr;
-}
-
-
-bool Packet::IsData() const
-{
-    return (state == STATE_VALID) && (type == TYPE_DATA);
-}
-
-
-Packet *Packet::Next() const
-{
-    return Compressor::NextPacket(this);
 }
