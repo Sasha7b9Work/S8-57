@@ -51,7 +51,7 @@ void FlashMemory::Data::GetInfo(bool existData[MAX_NUM_SAVED_WAVES])
 }
 
 
-static bool GetData(const Sector *sector, int num, DataSettings **ds, uint8 **dataA, uint8 **dataB)
+static bool GetData(const Sector *, int num, DataSettings **, uint8 **, uint8 **)
 {
     Packet *packet = reinterpret_cast<Packet *>(ADDR_SECTOR(num));
 
