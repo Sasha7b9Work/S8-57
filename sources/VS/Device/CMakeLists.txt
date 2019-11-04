@@ -71,6 +71,7 @@ source_group(Osci                                       REGULAR_EXPRESSION      
 source_group(Osci\\Display                              REGULAR_EXPRESSION              src/Osci/Display/*)
 source_group(Osci\\Measurements\\                       REGULAR_EXPRESSION              src/Osci/Measurements/*)
 source_group(SCPI                                       REGULAR_EXPRESSION              src/SCPI/*)
+source_group(Test                                       REGULAR_EXPRESSION              src/Test/*)
 source_group(Tester                                     REGULAR_EXPRESSION              src/Tester/*)
 source_group(Utils                                      REGULAR_EXPRESSION              src/Utils/*)
 source_group(src                FILES                src/Application.cpp
@@ -318,6 +319,7 @@ file(GLOB SOURCES   ../../common/_VS/*
                     ../../Device/src/Settings/SettingsOsci.h
                     ../../Device/src/Settings/SettingsTransformation.cpp
                     
+					../../Device/src/Test/*
                     ../../Device/src/Tester/*
                     ../../Device/src/Utils/*
                     

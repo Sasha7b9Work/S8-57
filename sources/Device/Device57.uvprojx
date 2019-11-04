@@ -1673,6 +1673,21 @@
           </Files>
         </Group>
         <Group>
+          <GroupName>Test</GroupName>
+          <Files>
+            <File>
+              <FileName>Test.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Test\Test.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Test.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Test\Test.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
           <GroupName>Tester</GroupName>
           <Files>
             <File>

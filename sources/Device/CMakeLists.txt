@@ -66,6 +66,7 @@ source_group(Osci\\Measurements\\                    REGULAR_EXPRESSION src/Osci
 source_group(Recorder                                REGULAR_EXPRESSION src/Recorder/*)
 source_group(SCPI                                    REGULAR_EXPRESSION src/SCPI/*)
 source_group(Settings                                REGULAR_EXPRESSION src/Settings/*)
+source_group(Settings                                REGULAR_EXPRESSION src/Test/*)
 source_group(Tester                                  REGULAR_EXPRESSION src/Tester/*)
 source_group(ThirdParty\\HAL                         FILES ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rtc.h
                                                            ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rtc_ex.h)
@@ -115,6 +116,7 @@ file(GLOB SOURCES   ../common/_VS/*
                     src/Recorder/*
                     src/SCPI/*
                     src/Settings/*
+					src/Test/*
                     src/Tester/*
                     src/Utils/*
                     src/*.*)
