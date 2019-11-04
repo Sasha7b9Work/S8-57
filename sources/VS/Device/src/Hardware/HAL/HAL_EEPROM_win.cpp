@@ -79,7 +79,7 @@ void Sector::Erase() const
 }
 
 
-void Sector::MovePacketsFromSector(const Sector *src) const
+void Sector::MovePacketsFromSector(const Sector *) const
 {
 
 }

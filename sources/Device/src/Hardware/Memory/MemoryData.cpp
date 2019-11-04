@@ -22,21 +22,21 @@ static void Compress();
 /// ¬озвращает количество полностью свободных дл€ записи секторов
 static int NumberFreeSectors();
 /// ¬озвращает указатель на первый свободный сектор
-static const Sector *GetFirstFreeSector();
+//static const Sector *GetFirstFreeSector();
 /// ¬озвращает указатель на наиболее потЄртый сектор - где стЄртые пакеты занимают больше всего места
 static const Sector *GetMostWornSector();
 /// ¬озвращает количество байт, занимаемых стЄртыми пакетами
 static int GetNumberWornBytes(const Sector *sector);
 /// —копировать данные из сектора src в сектор dest
-static void CopyData(const Sector *sectorDest, const Sector *sectorSrc);
+//static void CopyData(const Sector *sectorDest, const Sector *sectorSrc);
 /// —копировать данные в свободное место
 static void CopyDataToFreeSpace(const Sector *src);
 /// ѕереписать данные из сектора src в сектор dest
-static void CopyDataToSector(const Sector *dest, const Sector *src);
+//static void CopyDataToSector(const Sector *dest, const Sector *src);
 /// ¬озвращает указатель на первый пакет с данными из сектора sector и nullptr, если данных в секторе нет
 static const Packet *GetFirstPacketWithData(const Sector *sector);
 /// ¬озвращает указатель на первый пакет с данными за packet, или nullptr, если пакетов с данными в секторе больше нет
-static const Packet *GetNextPacketWithData(const Sector *sector, const Packet *packet);
+//static const Packet *GetNextPacketWithData(const Sector *sector, const Packet *packet);
 /// ¬озвращает true, если в сектор не было записано ни одного пакета
 static bool SectorIsFree(const Sector *sector);
 
@@ -119,11 +119,11 @@ void FlashMemory::Data::Save(int, const DataSettings *, uint8 *, uint8 *)
 {
     Compress();
 
-
+    //uint size = Packet::GetPackedSize(ds);
 
     for (int i = 0; i < NUM_SECTORS; i++)
     {
-
+        
     }
 }
 
@@ -164,20 +164,20 @@ static int NumberFreeSectors()
 }
 
 
-static const Sector *GetFirstFreeSector()
-{
-    for (int i = 0; i < NUM_SECTORS; i++)
-    {
-        Packet *packet = reinterpret_cast<Packet *>(sectors[i]->address);
-
-        if (packet->IsFree())
-        {
-            return sectors[i];
-        }
-    }
-
-    return nullptr;
-}
+//static const Sector *GetFirstFreeSector()
+//{
+//    for (int i = 0; i < NUM_SECTORS; i++)
+//    {
+//        Packet *packet = reinterpret_cast<Packet *>(sectors[i]->address);
+//
+//        if (packet->IsFree())
+//        {
+//            return sectors[i];
+//        }
+//    }
+//
+//    return nullptr;
+//}
 
 
 static const Sector *GetMostWornSector()
@@ -221,23 +221,23 @@ static int GetNumberWornBytes(const Sector *sector)
 }
 
 
-static void CopyData(const Sector *sectorDest, const Sector *sectorSrc)
-{
-    Packet *src = reinterpret_cast<Packet *>(sectorSrc->address);
-
-    Packet *dest = reinterpret_cast<Packet *>(sectorDest->address);
-
-    while (src && !src->IsFree())
-    {
-        if(!src->IsErased())
-        {
-            Compressor::Copy(dest, src);
-            dest = dest->Next();
-        }
-
-        src = src->Next();
-    }
-}
+//static void CopyData(const Sector *sectorDest, const Sector *sectorSrc)
+//{
+//    Packet *src = reinterpret_cast<Packet *>(sectorSrc->address);
+//
+//    Packet *dest = reinterpret_cast<Packet *>(sectorDest->address);
+//
+//    while (src && !src->IsFree())
+//    {
+//        if(!src->IsErased())
+//        {
+//            Compressor::Copy(dest, src);
+//            dest = dest->Next();
+//        }
+//
+//        src = src->Next();
+//    }
+//}
 
 
 static void CopyDataToFreeSpace(const Sector *sectorSrc)
@@ -276,20 +276,20 @@ static void CopyDataToFreeSpace(const Sector *sectorSrc)
 }
 
 
-static void CopyDataToSector(const Sector *sectorDest, const Sector *sectorSrc)
-{
-    const Packet *src = GetFirstPacketWithData(sectorSrc);
-
-    if (!src)
-    {
-        return;
-    }
-
-    while (src)
-    {
-
-    }
-}
+//static void CopyDataToSector(const Sector *, const Sector *sectorSrc)
+//{
+//    const Packet *src = GetFirstPacketWithData(sectorSrc);
+//
+//    if (!src)
+//    {
+//        return;
+//    }
+//
+//    while (src)
+//    {
+//
+//    }
+//}
 
 
 static const Packet *GetFirstPacketWithData(const Sector *sector)

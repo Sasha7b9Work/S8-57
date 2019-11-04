@@ -125,6 +125,8 @@ struct Sector
     const Packet *GetFirstPacketWithData() const;
     /// Возвращает номер сектора, которому принадлежит address
     static int Number(uint address);
+    /// true означает, что в сектор не записан ни один пакет
+    bool NotExistPackets();
 };
 
 #define SECTOR(i) HAL_FLASH::sectors[i]
