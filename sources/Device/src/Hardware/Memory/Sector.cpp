@@ -34,9 +34,7 @@ Packet *Packet::Next() const
         return nullptr;
     }
 
-    Packet *result = reinterpret_cast<Packet *>(reinterpret_cast<uint8 *>(const_cast<Packet *>(this)) + size);
-
-    return result;
+    return reinterpret_cast<Packet *>(reinterpret_cast<uint8 *>(const_cast<Packet *>(this)) + size);
 }
 
 
@@ -159,7 +157,7 @@ const Packet *Sector::WriteData(int numInROM, const DataSettings *ds) const
 }
 
 
-bool Sector::ReadData(int, DataSettings **) const
+const Packet *Sector::ReadData(int, DataSettings **) const
 {
     const Packet *packet = FirstPacket();
 
@@ -173,7 +171,7 @@ bool Sector::ReadData(int, DataSettings **) const
         packet = packet->Next();
     }
 
-    return false;
+    return nullptr;
 }
 
 
@@ -202,7 +200,7 @@ const Packet *Sector::GetFirstFreePacket() const
 
 void Sector::GetDataInfo(bool existData[FlashMemory::Data::MAX_NUM_SAVED_WAVES]) const
 {
-    Packet *packet = reinterpret_cast<Packet *>(address);
+    const Packet *packet = FirstPacket();
 
     while (packet && !packet->IsFree())
     {

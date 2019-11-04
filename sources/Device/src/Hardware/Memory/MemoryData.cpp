@@ -128,7 +128,7 @@ static int NumberFreeSectors()
 
     for (int i = 0; i < NUM_SECTORS; i++)
     {
-        Packet *packet = reinterpret_cast<Packet *>(sectors[i]->address);
+        const Packet *packet = sectors[i]->FirstPacket();
 
         if (packet->IsFree())
         {
