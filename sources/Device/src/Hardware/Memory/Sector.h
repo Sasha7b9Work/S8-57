@@ -93,7 +93,9 @@ struct Sector
 
     Packet *GetFirstFreePacket() const;
 
-    const Packet *WriteData(const DataSettings *ds) const;
+    const Packet *WriteData(int numInROM, const DataSettings *ds) const;
+
+    bool ReadData(int numInROM, DataSettings **ds) const;
     /// Получить информацию о сохранённх в секторе данных
     void GetDataInfo(bool existData[FlashMemory::Data::MAX_NUM_SAVED_WAVES]) const;
     /// Возвращает номер сектора, которому принадлежит address

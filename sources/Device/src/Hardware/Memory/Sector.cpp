@@ -101,39 +101,81 @@ static void WriteToROM(uint *address, const void *data, int size)
 }
 
 
-const Packet *Sector::WriteData(const DataSettings *ds) const
+static void TranslateAddressToROM(const DataSettings *ds, Packet *packet)
 {
-    Packet *firstPacket = GetFirstFreePacket();
-
-    if (firstPacket == nullptr)
-    {
-        return nullptr;
-    }
-
-    uint packetAddress = firstPacket->Address();
-
-    if (firstPacket->Address() + Packet::GetPackedSize(ds) > End())      // Если пакет при записи вылезет за границу сектора
-    {
-        return nullptr;
-    }
-
-    Packet packet = { STATE_VALID, static_cast<uint16>(Packet::GetPackedSize(ds)), TYPE_DATA };
-
-    WriteToROM(&packetAddress, &packet, sizeof(packet));
-
-    WriteToROM(&packetAddress, ds, sizeof(DataSettings));
+    uint8 *addressData = reinterpret_cast<uint8 *>(packet->Address() + sizeof(Packet) + sizeof(DataSettings)); // По этому адресу будут записаны данные первого из записываемых каналов
 
     if (ds->enableA)
     {
-        WriteToROM(&packetAddress, ds->dataA, ds->SizeChannel());
+        const_cast<DataSettings *>(ds)->dataA = addressData;
+        addressData += ds->SizeChannel();
     }
 
     if (ds->enableB)
     {
-        WriteToROM(&packetAddress, ds->dataB, ds->SizeChannel());
+        const_cast<DataSettings *>(ds)->dataB = addressData;
+    }
+}
+
+
+const Packet *Sector::WriteData(int numInROM, const DataSettings *ds) const
+{
+    Packet *packet = GetFirstFreePacket();
+
+    if (packet == nullptr)
+    {
+        return nullptr;
     }
 
-    return firstPacket;
+    uint recordAddress = packet->Address();
+
+    if (packet->Address() + Packet::GetPackedSize(ds) > End())      // Если пакет при записи вылезет за границу сектора
+    {
+        return nullptr;
+    }
+
+    Packet record = { STATE_VALID, static_cast<uint16>(Packet::GetPackedSize(ds)), TYPE_DATA };
+
+    WriteToROM(&recordAddress, &record, sizeof(record));
+
+    const_cast<DataSettings *>(ds)->numROM = numInROM;
+
+    uint8 *addressDataA = ds->dataA;   // По этим адресам хранятся данные, подлежащие записи. Сохраним их перед тем, как в ds будут записаны новые - по которым данные будут храниться в ROM.
+    uint8 *addressDataB = ds->dataB;   // По этим адресам хранятся данные, подлежащие записи. Сохраним их перед тем, как в ds будут записаны новые - по которым данные будут храниться в ROM.
+
+    TranslateAddressToROM(ds, packet);
+
+    WriteToROM(&recordAddress, ds, sizeof(DataSettings));
+
+    if (ds->enableA)
+    {
+        WriteToROM(&recordAddress, addressDataA, ds->SizeChannel());
+    }
+
+    if (ds->enableB)
+    {
+        WriteToROM(&recordAddress, addressDataB, ds->SizeChannel());
+    }
+
+    return packet;
+}
+
+
+bool Sector::ReadData(int, DataSettings **) const
+{
+    Packet *packet = reinterpret_cast<Packet *>(address);
+
+    while (packet && !packet->IsFree())
+    {
+        if (packet->IsData())
+        {
+
+        }
+
+        packet = packet->Next();
+    }
+
+    return false;
 }
 
 

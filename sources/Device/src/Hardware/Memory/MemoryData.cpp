@@ -55,31 +55,13 @@ void FlashMemory::Data::GetInfo(bool existData[MAX_NUM_SAVED_WAVES])
 }
 
 
-static bool GetData(const Sector *, int num, DataSettings **, uint8 **, uint8 **)
-{
-    Packet *packet = reinterpret_cast<Packet *>(ADDR_SECTOR(num));
-
-    while (packet && !packet->IsFree())
-    {
-        if (packet->IsData())
-        {
-
-        }
-
-        packet = packet->Next();
-    }
-
-    return false;
-}
-
-
-bool FlashMemory::Data::Get(int num, DataSettings **ds, uint8 **dataA, uint8 **dataB)
+bool FlashMemory::Data::Read(int numInROM, DataSettings **ds)
 {
     *ds = nullptr;
 
     for (int i = 0; i < NUM_SECTORS; i++)
     {
-        if (GetData(sectors[i], num, ds, dataA, dataB))
+        if (sectors[i]->ReadData(numInROM, ds))
         {
             return true;
         }
@@ -94,7 +76,7 @@ void FlashMemory::Data::Delete(int /*num*/)
 }
 
 
-void FlashMemory::Data::Save(int, const DataSettings *ds, uint8 *dataA, uint8 *dataB)
+void FlashMemory::Data::Save(int numInROM, const DataSettings *ds, uint8 *dataA, uint8 *dataB)
 {
     Compress();
 
@@ -107,7 +89,7 @@ void FlashMemory::Data::Save(int, const DataSettings *ds, uint8 *dataA, uint8 *d
 
         if (sector->ExistPackets())                 // Пишем только в сектор, в который уже производилась запись
         {
-            if (sector->WriteData(ds))
+            if (sector->WriteData(numInROM, ds))
             {
                 return;
             }
@@ -116,7 +98,7 @@ void FlashMemory::Data::Save(int, const DataSettings *ds, uint8 *dataA, uint8 *d
 
     // Если места в частично занятых секторах нет, будем записывать в свободный
 
-    GetFirstFreeSector()->WriteData(ds);
+    GetFirstFreeSector()->WriteData(numInROM, ds);
 }
 
 
