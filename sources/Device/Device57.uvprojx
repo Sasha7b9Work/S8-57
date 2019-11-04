@@ -891,14 +891,14 @@
               <FilePath>.\src\Hardware\HAL\HAL_DAC2.cpp</FilePath>
             </File>
             <File>
-              <FileName>HAL_EEPROM_stm.cpp</FileName>
+              <FileName>HAL_FLASH.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\Hardware\HAL\HAL_EEPROM_stm.cpp</FilePath>
+              <FilePath>.\src\Hardware\HAL\HAL_FLASH.cpp</FilePath>
             </File>
             <File>
-              <FileName>HAL_EEPROM.cpp</FileName>
+              <FileName>HAL_FLASH_stm.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\Hardware\HAL\HAL_EEPROM.cpp</FilePath>
+              <FilePath>.\src\Hardware\HAL\HAL_FLASH_stm.cpp</FilePath>
             </File>
             <File>
               <FileName>HAL_FSMC.cpp</FileName>
