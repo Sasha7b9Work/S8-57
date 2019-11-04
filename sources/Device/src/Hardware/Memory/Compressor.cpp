@@ -60,14 +60,49 @@ Packet *Packet::Next() const
     {
         return nullptr;
     }
-    else if (IsErased() || IsValid())
+
+    Packet *result = reinterpret_cast<Packet *>(reinterpret_cast<uint8 *>(const_cast<Packet *>(this)) + size);
+
+    return result;
+}
+
+
+int Packet::Size() const
+{
+    if (IsFree())
     {
-        return reinterpret_cast<Packet *>(reinterpret_cast<uint8 *>(const_cast<Packet *>(this)) + size);
-    }
-    else
-    {
-        LOG_WRITE("Ошибка следующего пакета");
+        return 0;
     }
 
-    return nullptr;
+    return size;
+}
+
+
+void Compressor::Copy(Packet *dest, const Packet *src)
+{
+    FlashMemory::Write(reinterpret_cast<uint>(dest), const_cast<const Packet *>(src), src->Size());
+}
+
+
+bool Packet::WriteToSector(const Sector *sector) const
+{
+    Packet *dest = reinterpret_cast<Packet *>(sector->address);
+
+    while (dest && !dest->IsFree())
+    {
+        dest = dest->Next();
+    }
+
+    uint addressWrite = reinterpret_cast<uint>(dest);      // По этому адресу будет производиться запись пакета
+
+    uint lastAddress = addressWrite + size;                   // А это последний адрес записи
+
+    if (lastAddress > sector->End())
+    {
+        return false;
+    }
+
+    FlashMemory::Write(addressWrite, this, size);
+
+    return true;
 }

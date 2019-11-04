@@ -52,6 +52,24 @@ int DataSettings::SizeChannel() const
 }
 
 
+int DataSettings::SizeData() const
+{
+    int result = 0;
+
+    if (enableA)
+    {
+        result += SizeChannel();
+    }
+
+    if (enableB)
+    {
+        result += SizeChannel();
+    }
+
+    return result;
+}
+
+
 int DataSettings::PointsInChannel() const
 {
     return static_cast<int>(ENumPointsFPGA((ENumPointsFPGA::E)ENUM_POINTS(this)).PointsInChannel());

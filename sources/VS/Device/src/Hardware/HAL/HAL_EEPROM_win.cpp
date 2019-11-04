@@ -58,7 +58,8 @@ void HAL_FLASH::WriteBytes(uint address, const uint8 *buffer, int size)
     }
 }
 
-int Sector::Num(uint address)
+
+int Sector::Number(uint address)
 {
     for (int i = 0; i < Sector::Count; i++)
     {
@@ -71,7 +72,14 @@ int Sector::Num(uint address)
     return -1;
 }
 
+
 void Sector::Erase() const
 {
     std::memset(reinterpret_cast<void *>(address), 0xFF, size);
+}
+
+
+void Sector::MovePacketsFromSector(const Sector *src) const
+{
+
 }

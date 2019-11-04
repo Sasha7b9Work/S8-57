@@ -891,19 +891,24 @@
               <FilePath>.\src\Hardware\HAL\HAL_DAC2.cpp</FilePath>
             </File>
             <File>
+              <FileName>HAL_EEPROM_stm.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\HAL\HAL_EEPROM_stm.cpp</FilePath>
+            </File>
+            <File>
               <FileName>HAL_EEPROM.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Hardware\HAL\HAL_EEPROM.cpp</FilePath>
             </File>
             <File>
-              <FileName>HAL_IT.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Hardware\HAL\HAL_IT.cpp</FilePath>
-            </File>
-            <File>
               <FileName>HAL_FSMC.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Hardware\HAL\HAL_FSMC.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>HAL_IT.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\HAL\HAL_IT.cpp</FilePath>
             </File>
             <File>
               <FileName>HAL_MSP.cpp</FileName>

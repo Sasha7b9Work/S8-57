@@ -77,6 +77,9 @@ struct HAL_DAC2
     static void SetValue(uint value);
 };
 
+
+struct Packet;
+
 struct Sector
 {
     enum E
@@ -112,10 +115,16 @@ struct Sector
     uint address;
 
     uint size;
+    /// јдрес первого байта за сектором
+    uint End() const;
 
     void Erase() const;
+    /// ѕеремещает пакеты из сектора src. ѕакеты в исходном секторе src затираютс€
+    void MovePacketsFromSector(const Sector *src) const;
+    /// ¬озвращает указатель на первый пакет с данными. nullptr, если пакетов с данными нет
+    const Packet *GetFirstPacketWithData() const;
     /// ¬озвращает номер сектора, которому принадлежит address
-    static int Num(uint address);
+    static int Number(uint address);
 };
 
 #define SECTOR(i) HAL_FLASH::sectors[i]

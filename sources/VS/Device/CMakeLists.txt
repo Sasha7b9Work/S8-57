@@ -143,6 +143,7 @@ source_group(Hardware\\HAL      FILES   ../../Device/src/Hardware/HAL/HAL.h
                                         ../../Device/src/Hardware/HAL/HAL_CRC32.cpp
                                         ../../Device/src/Hardware/HAL/HAL_DAC1.cpp
                                                      src/Hardware/HAL/HAL_DAC2_win.cpp
+                                        ../../Device/src/Hardware/HAL/HAL_EEPROM.cpp
                                                      src/Hardware/HAL/HAL_EEPROM_win.cpp
                                                      src/Hardware/HAL/HAL_FSMC_win.cpp
                                         ../../Device/src/Hardware/HAL/HAL_IT.cpp
@@ -261,6 +262,7 @@ file(GLOB SOURCES   ../../common/_VS/*
                     ../../Device/src/Hardware/HAL/HAL_CRC32.cpp
                     ../../Device/src/Hardware/HAL/HAL_DAC1.cpp
                                  src/Hardware/HAL/HAL_DAC2_win.cpp
+                    ../../Device/src/Hardware/HAL/HAL_EEPROM.cpp
                                  src/Hardware/HAL/HAL_EEPROM_win.cpp
                                  src/Hardware/HAL/HAL_FSMC_win.cpp
                     ../../Device/src/Hardware/HAL/HAL_IT.cpp

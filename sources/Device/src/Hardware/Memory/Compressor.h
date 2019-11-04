@@ -24,6 +24,9 @@ struct Packet
     bool IsValid() const { return (state == STATE_VALID); }
     Packet *Next() const;
     bool UnPack(DataSettings **ds) const;
+    int Size() const;
+    /// Делает попытку записи пакета в сектор sector. В случае неудачи возвращает false
+    bool WriteToSector(const Sector *sector) const;
 };
 
 
@@ -33,4 +36,6 @@ struct Compressor
     static uint GetPackedSize(const DataSettings *ds);
     /// Упаковывает данные с настойками ds по адресу address
     static void Pack(const DataSettings *ds, uint address);
+    /// Скопировать пакет из src в dest
+    static void Copy(Packet *dest, const Packet *src);
 };
