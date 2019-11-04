@@ -91,13 +91,15 @@ struct Sector
     /// true означает, что в сектор не записан ни один пакет
     bool ExistPackets() const;
 
-    Packet *GetFirstFreePacket() const;
+    const Packet *GetFirstFreePacket() const;
 
     const Packet *WriteData(int numInROM, const DataSettings *ds) const;
 
     bool ReadData(int numInROM, DataSettings **ds) const;
     /// Получить информацию о сохранённх в секторе данных
     void GetDataInfo(bool existData[FlashMemory::Data::MAX_NUM_SAVED_WAVES]) const;
+    /// Возвращает указатель на первый пакет
+    const Packet *FirstPacket() const;
     /// Возвращает номер сектора, которому принадлежит address
     static int Number(uint address);
 

@@ -59,7 +59,7 @@ void Compressor::Copy(Packet *dest, const Packet *src)
 
 bool Packet::WriteToSector(const Sector *sector) const
 {
-    Packet *dest = reinterpret_cast<Packet *>(sector->address);
+    const Packet *dest = sector->FirstPacket();
 
     while (dest && !dest->IsFree())
     {
@@ -88,9 +88,7 @@ uint Sector::End() const
 
 bool Sector::ExistPackets() const
 {
-    Packet *packet = reinterpret_cast<Packet *>(address);
-
-    return !packet->IsFree();
+    return !FirstPacket()->IsFree();
 }
 
 
@@ -101,7 +99,7 @@ static void WriteToROM(uint *address, const void *data, int size)
 }
 
 
-static void TranslateAddressToROM(const DataSettings *ds, Packet *packet)
+static void TranslateAddressToROM(const DataSettings *ds, const Packet *packet)
 {
     uint8 *addressData = reinterpret_cast<uint8 *>(packet->Address() + sizeof(Packet) + sizeof(DataSettings)); // По этому адресу будут записаны данные первого из записываемых каналов
 
@@ -120,7 +118,7 @@ static void TranslateAddressToROM(const DataSettings *ds, Packet *packet)
 
 const Packet *Sector::WriteData(int numInROM, const DataSettings *ds) const
 {
-    Packet *packet = GetFirstFreePacket();
+    const Packet *packet = GetFirstFreePacket();
 
     if (packet == nullptr)
     {
@@ -163,7 +161,7 @@ const Packet *Sector::WriteData(int numInROM, const DataSettings *ds) const
 
 bool Sector::ReadData(int, DataSettings **) const
 {
-    Packet *packet = reinterpret_cast<Packet *>(address);
+    const Packet *packet = FirstPacket();
 
     while (packet && !packet->IsFree())
     {
@@ -179,9 +177,15 @@ bool Sector::ReadData(int, DataSettings **) const
 }
 
 
-Packet *Sector::GetFirstFreePacket() const
+const Packet *Sector::FirstPacket() const
 {
-    Packet *packet = reinterpret_cast<Packet *>(address);
+    return reinterpret_cast<const Packet *>(address);
+}
+
+
+const Packet *Sector::GetFirstFreePacket() const
+{
+    const Packet *packet = FirstPacket();
 
     while (packet)
     {

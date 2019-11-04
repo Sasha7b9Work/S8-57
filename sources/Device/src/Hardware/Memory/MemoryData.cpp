@@ -37,8 +37,6 @@ static void CopyDataToFreeSpace(const Sector *src);
 static const Packet *GetFirstPacketWithData(const Sector *sector);
 /// Возвращает указатель на первый пакет с данными за packet, или nullptr, если пакетов с данными в секторе больше нет
 //static const Packet *GetNextPacketWithData(const Sector *sector, const Packet *packet);
-/// Возвращает true, если в сектор не было записано ни одного пакета
-static bool SectorIsFree(const Sector *sector);
 
 
 void FlashMemory::Data::GetInfo(bool existData[MAX_NUM_SAVED_WAVES])
@@ -146,7 +144,7 @@ static const Sector *GetFirstFreeSector()
 {
     for (int i = 0; i < NUM_SECTORS; i++)
     {
-        Packet *packet = reinterpret_cast<Packet *>(sectors[i]->address);
+        const Packet *packet = sectors[i]->FirstPacket();
 
         if (packet->IsFree())
         {
@@ -183,7 +181,7 @@ static int GetNumberWornBytes(const Sector *sector)
 {
     int result = 0;
 
-    Packet *packet = reinterpret_cast<Packet *>(sector->address);
+    const Packet *packet = sector->FirstPacket();
 
     while (packet && !packet->IsFree())
     {
@@ -201,9 +199,9 @@ static int GetNumberWornBytes(const Sector *sector)
 
 //static void CopyData(const Sector *sectorDest, const Sector *sectorSrc)
 //{
-//    Packet *src = reinterpret_cast<Packet *>(sectorSrc->address);
+//    Packet *src = sectorSrc->FirstPacket();
 //
-//    Packet *dest = reinterpret_cast<Packet *>(sectorDest->address);
+//    Packet *dest = sectorDest->FirstPacket();
 //
 //    while (src && !src->IsFree())
 //    {
@@ -236,7 +234,7 @@ static void CopyDataToFreeSpace(const Sector *sectorSrc)
     {
         const Sector *sector = sectors[i];
 
-        if (sector == sectorSrc || SectorIsFree(sector))
+        if (sector == sectorSrc || !sector->ExistPackets())
         {
             continue;
         }
@@ -272,7 +270,7 @@ static void CopyDataToFreeSpace(const Sector *sectorSrc)
 
 static const Packet *GetFirstPacketWithData(const Sector *sector)
 {
-    const Packet *result = reinterpret_cast<const Packet *>(sector->address);
+    const Packet *result = sector->FirstPacket();
 
     while (result && !result->IsFree())
     {
@@ -285,12 +283,4 @@ static const Packet *GetFirstPacketWithData(const Sector *sector)
     }
 
     return nullptr;
-}
-
-
-static bool SectorIsFree(const Sector *sector)
-{
-    Packet *packet = reinterpret_cast<Packet *>(sector->address);
-
-    return packet->IsFree();
 }
