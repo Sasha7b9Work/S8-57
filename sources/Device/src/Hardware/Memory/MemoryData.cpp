@@ -1,6 +1,6 @@
 #include "defines.h"
 #include "Hardware/HAL/HAL.h"
-#include "Hardware/Memory/Packet.h"
+#include "Hardware/Memory/Sector.h"
 #include "Hardware/Memory/Memory.h"
 
 

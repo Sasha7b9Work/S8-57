@@ -891,11 +891,6 @@
               <FilePath>.\src\Hardware\HAL\HAL_DAC2.cpp</FilePath>
             </File>
             <File>
-              <FileName>HAL_FLASH.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Hardware\HAL\HAL_FLASH.cpp</FilePath>
-            </File>
-            <File>
               <FileName>HAL_FLASH_stm.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Hardware\HAL\HAL_FLASH_stm.cpp</FilePath>
@@ -981,14 +976,14 @@
               <FilePath>.\src\Hardware\Memory\MemoryRAM.cpp</FilePath>
             </File>
             <File>
-              <FileName>Packet.cpp</FileName>
+              <FileName>Sector.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\Hardware\Memory\Packet.cpp</FilePath>
+              <FilePath>.\src\Hardware\Memory\Sector.cpp</FilePath>
             </File>
             <File>
-              <FileName>Packet.h</FileName>
+              <FileName>Sector.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\src\Hardware\Memory\Packet.h</FilePath>
+              <FilePath>.\src\Hardware\Memory\Sector.h</FilePath>
             </File>
           </Files>
         </Group>
