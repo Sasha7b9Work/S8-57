@@ -25,16 +25,16 @@ struct FlashMemory
         static const int MAX_NUM_SAVED_WAVES = 23;  ///< \brief Число сохраняемых во внутреннем ППЗУ измерений. Пока ограничено количеством квадратиков, которые можно 
                                                     ///< вывести в одну линию внизу сетки.
 
+        /// Если даннные есть, соответствующий элемент массива равен true.
+        static void GetInfo(bool existData[MAX_NUM_SAVED_WAVES]);
+
+        static void Save(int num, const DataSettings *ds, uint8 *dataA, uint8 *dataB);
         /// Получает данные о сигнале номер num. Если сигнала нет, в ds записывается 0
         static bool Get(int num, DataSettings **ds, uint8 **dataA, uint8 **dataB);
 
         static void Delete(int num);
 
         static void DeleteAll();
-
-        static void Save(int num, const DataSettings *ds, uint8 *dataA, uint8 *dataB);
-        /// Если даннные есть, соответствующий элемент массива равен true.
-        static void GetInfo(bool existData[MAX_NUM_SAVED_WAVES]);
     };
 };
 

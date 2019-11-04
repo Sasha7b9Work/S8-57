@@ -86,11 +86,11 @@ uint Sector::End() const
 }
 
 
-bool Sector::NotExistPackets() const
+bool Sector::ExistPackets() const
 {
     Packet *packet = reinterpret_cast<Packet *>(address);
 
-    return packet->IsFree();
+    return !packet->IsFree();
 }
 
 
@@ -101,7 +101,7 @@ static void WriteToROM(uint *address, const void *data, int size)
 }
 
 
-const Packet *Sector::WritePacket(const DataSettings *ds) const
+const Packet *Sector::WriteData(const DataSettings *ds) const
 {
     Packet *firstPacket = GetFirstFreePacket();
 

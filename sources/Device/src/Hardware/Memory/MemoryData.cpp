@@ -105,27 +105,27 @@ void FlashMemory::Data::Save(int, const DataSettings *ds, uint8 *dataA, uint8 *d
     {
         const Sector *sector = sectors[i];
 
-        if (sector->NotExistPackets())          // ѕропускаем сектора, в которых ещЄ нет пакетов
+        if (sector->ExistPackets())                 // ѕишем только в сектор, в который уже производилась запись
         {
-            continue;
-        }
-
-        if (sector->WritePacket(ds))
-        {
-            return;
+            if (sector->WriteData(ds))
+            {
+                return;
+            }
         }
     }
 
     // ≈сли места в частично зан€тых секторах нет, будем записывать в свободный
 
-    const Sector *sector = GetFirstFreeSector();
-
-    sector->WritePacket(ds);
+    GetFirstFreeSector()->WriteData(ds);
 }
 
 
 void FlashMemory::Data::DeleteAll()
 {
+    for (int i = 0; i < NUM_SECTORS; i++)
+    {
+        sectors[i]->Erase();
+    }
 }
 
 
