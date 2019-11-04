@@ -116,7 +116,7 @@ static void TranslateAddressToROM(const DataSettings *ds, const Packet *packet)
 
 const Packet *Sector::WriteData(int numInROM, const DataSettings *ds) const
 {
-    const Packet *packet = GetFirstFreePacket();
+    const Packet *packet = FirstFreePacket();
 
     if (packet == nullptr)
     {
@@ -125,8 +125,8 @@ const Packet *Sector::WriteData(int numInROM, const DataSettings *ds) const
 
     uint recordAddress = packet->Address();
 
-    if (packet->Address() + Packet::GetPackedSize(ds) > End())      // Если пакет при записи вылезет за границу сектора
-    {
+    if (packet->Address() + Packet::GetPackedSize(ds) > End() - 10)      // Если пакет при записи вылезет за границу сектора. Даём запас - в конце сектора должны остаться миниму 4 байта,
+    {                                                                    // помеченные 0xFFFFFFFF во избежание лишних проверок за выход за пределы сектора.
         return nullptr;
     }
 
@@ -134,7 +134,7 @@ const Packet *Sector::WriteData(int numInROM, const DataSettings *ds) const
 
     WriteToROM(&recordAddress, &record, sizeof(record));
 
-    const_cast<DataSettings *>(ds)->numROM = numInROM;
+    const_cast<DataSettings *>(ds)->numInROM = numInROM;
 
     uint8 *addressDataA = ds->dataA;   // По этим адресам хранятся данные, подлежащие записи. Сохраним их перед тем, как в ds будут записаны новые - по которым данные будут храниться в ROM.
     uint8 *addressDataB = ds->dataB;   // По этим адресам хранятся данные, подлежащие записи. Сохраним их перед тем, как в ds будут записаны новые - по которым данные будут храниться в ROM.
@@ -157,7 +157,7 @@ const Packet *Sector::WriteData(int numInROM, const DataSettings *ds) const
 }
 
 
-const Packet *Sector::ReadData(int, DataSettings **) const
+const Packet *Sector::ReadData(int numInROM, DataSettings **ds) const
 {
     const Packet *packet = FirstPacket();
 
@@ -165,7 +165,16 @@ const Packet *Sector::ReadData(int, DataSettings **) const
     {
         if (packet->IsData())
         {
+            DataSettings *settings;
 
+            packet->UnPack(&settings);
+
+            if(settings->numInROM == numInROM)
+            {
+                *ds = settings;
+
+                return packet;
+            }
         }
 
         packet = packet->Next();
@@ -181,7 +190,7 @@ const Packet *Sector::FirstPacket() const
 }
 
 
-const Packet *Sector::GetFirstFreePacket() const
+const Packet *Sector::FirstFreePacket() const
 {
     const Packet *packet = FirstPacket();
 
@@ -209,7 +218,7 @@ void Sector::GetDataInfo(bool existData[FlashMemory::Data::MAX_NUM_SAVED_WAVES])
             DataSettings *ds;
             if (packet->UnPack(&ds))
             {
-                existData[ds->numROM] = true;
+                existData[ds->numInROM] = true;
             }
         }
         packet = packet->Next();

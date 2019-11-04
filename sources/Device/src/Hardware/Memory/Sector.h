@@ -91,7 +91,7 @@ struct Sector
     /// true означает, что в сектор не записан ни один пакет
     bool ExistPackets() const;
 
-    const Packet *GetFirstFreePacket() const;
+    const Packet *FirstFreePacket() const;
 
     const Packet *WriteData(int numInROM, const DataSettings *ds) const;
 
