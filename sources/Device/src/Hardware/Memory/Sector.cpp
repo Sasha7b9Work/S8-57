@@ -152,3 +152,22 @@ Packet *Sector::GetFirstFreePacket() const
 
     return nullptr;
 }
+
+
+void Sector::GetDataInfo(bool existData[FlashMemory::Data::MAX_NUM_SAVED_WAVES]) const
+{
+    Packet *packet = reinterpret_cast<Packet *>(address);
+
+    while (packet && !packet->IsFree())
+    {
+        if (packet->IsData())
+        {
+            DataSettings *ds;
+            if (packet->UnPack(&ds))
+            {
+                existData[ds->numROM] = true;
+            }
+        }
+        packet = packet->Next();
+    }
+}

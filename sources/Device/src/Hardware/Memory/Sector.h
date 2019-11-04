@@ -88,12 +88,15 @@ struct Sector
     void MovePacketsFromSector(const Sector *src) const;
     /// ¬озвращает указатель на первый пакет с данными. nullptr, если пакетов с данными нет
     const Packet *GetFirstPacketWithData() const;
-    /// ¬озвращает номер сектора, которому принадлежит address
-    static int Number(uint address);
     /// true означает, что в сектор не записан ни один пакет
     bool NotExistPackets() const;
 
     Packet *GetFirstFreePacket() const;
 
     const Packet *WritePacket(const DataSettings *ds) const;
+    /// ѕолучить информацию о сохранЄннх в секторе данных
+    void GetDataInfo(bool existData[FlashMemory::Data::MAX_NUM_SAVED_WAVES]) const;
+    /// ¬озвращает номер сектора, которому принадлежит address
+    static int Number(uint address);
+
 };

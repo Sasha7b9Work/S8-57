@@ -41,27 +41,6 @@ static const Packet *GetFirstPacketWithData(const Sector *sector);
 static bool SectorIsFree(const Sector *sector);
 
 
-
-/// Поставить true в те элементы массива existData[], которые соотвествуют существующим в данном секторе записанным данным
-static void FillInfoFromSector(const Sector *sector, bool existData[MAX_NUM_SAVED_WAVES])
-{
-    Packet *packet = reinterpret_cast<Packet *>(sector->address);
-
-    while (packet && !packet->IsFree())
-    {
-        if (packet->IsData())
-        {
-            DataSettings *ds;
-            if (packet->UnPack(&ds))
-            {
-                existData[ds->numROM] = true;
-            }
-        }
-        packet = packet->Next();
-    }
-}
-
-
 void FlashMemory::Data::GetInfo(bool existData[MAX_NUM_SAVED_WAVES])
 {
     for (int i = 0; i < MAX_NUM_SAVED_WAVES; i++)
@@ -71,7 +50,7 @@ void FlashMemory::Data::GetInfo(bool existData[MAX_NUM_SAVED_WAVES])
 
     for (int i = 0; i < NUM_SECTORS; i++)
     {
-        FillInfoFromSector(sectors[i], existData);
+        sectors[i]->GetDataInfo(existData);
     }
 }
 

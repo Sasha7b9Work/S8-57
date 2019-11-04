@@ -149,11 +149,11 @@ static void AfterDraw_ROM()
 {
     // Теперь нарисуем состояние памяти
 
-    bool exist[MAX_NUM_SAVED_WAVES] = { false };
+    bool exist[FlashMemory::Data::MAX_NUM_SAVED_WAVES] = { false };
 
     FlashMemory::Data::GetInfo(exist);
 
-    for (int i = 0; i < MAX_NUM_SAVED_WAVES; i++)
+    for (int i = 0; i < FlashMemory::Data::MAX_NUM_SAVED_WAVES; i++)
     {
         DrawMemoryMap(i, exist[i]);
     }
@@ -191,7 +191,7 @@ static bool HandlerKey_ROM(const KeyEvent &event)
 
         if (key == Key::Left || key == Key::Down)
         {
-            Math::CircleDecrease<int8>((int8 *)&NUM_ROM_SIGNAL, 0, MAX_NUM_SAVED_WAVES - 1);
+            Math::CircleDecrease<int8>((int8 *)&NUM_ROM_SIGNAL, 0, FlashMemory::Data::MAX_NUM_SAVED_WAVES - 1);
 
             Color::ResetFlash();
 
@@ -199,7 +199,7 @@ static bool HandlerKey_ROM(const KeyEvent &event)
         }
         else if (key == Key::Right || key == Key::Up)
         {
-            Math::CircleIncrease<int8>((int8 *)&NUM_ROM_SIGNAL, 0, MAX_NUM_SAVED_WAVES - 1);
+            Math::CircleIncrease<int8>((int8 *)&NUM_ROM_SIGNAL, 0, FlashMemory::Data::MAX_NUM_SAVED_WAVES - 1);
 
             Color::ResetFlash();
 
