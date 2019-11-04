@@ -56,7 +56,6 @@ struct DataSettings
     /// Возвращает требуемое количество памяти для хранения данных каналов
     int NeedMemoryForData() const;
     bool Equals(const DataSettings &ds) const;
-    int SizeData() const;
 };
 
 

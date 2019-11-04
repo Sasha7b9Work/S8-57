@@ -86,15 +86,15 @@ file(GLOB SOURCES   ../common/_VS/*
                     ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rtc.h
                     ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rtc_ex.h
                     
-                    src/Data/*.*
-                    src/Display/*.*
-                    ../common/Display/Font/*.*
-                    src/FlashDrive/*.*
-                    src/FPGA/*.*
-                    src/Hardware/*.*
-                    src/Hardware/HAL/*.*
+                    src/Data/*
+                    src/Display/*
+                    ../common/Display/Font/*
+                    src/FlashDrive/*
+                    src/FPGA/*
+                    src/Hardware/*
+                    src/Hardware/HAL/*
                     src/Hardware/Memory/*
-                    src/Hardware/stm32/*.*
+                    src/Hardware/stm32/*
                     src/Keyboard/*
                     src/Menu/*
                     src/Menu/Pages/*

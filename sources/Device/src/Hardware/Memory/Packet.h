@@ -27,13 +27,13 @@ struct Packet
     int Size() const;
     /// Делает попытку записи пакета в сектор sector. В случае неудачи возвращает false
     bool WriteToSector(const Sector *sector) const;
+    /// Возвращает количество байт, необходимое для хранения данных
+    static uint GetPackedSize(const DataSettings *ds);
 };
 
 
 struct Compressor
 {
-    /// Возвращает количество байт, необходимое для хранения данных
-    static uint GetPackedSize(const DataSettings *ds);
     /// Упаковывает данные с настойками ds по адресу address
     static void Pack(const DataSettings *ds, uint address);
     /// Скопировать пакет из src в dest

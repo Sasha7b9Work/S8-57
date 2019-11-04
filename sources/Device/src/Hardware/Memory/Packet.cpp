@@ -1,10 +1,10 @@
 #include "defines.h"
 #include "Hardware/HAL/HAL.h"
-#include "Hardware/Memory/Compressor.h"
+#include "Hardware/Memory/Packet.h"
 #include "Data/DataSettings.h"
 
 
-uint Compressor::GetPackedSize(const DataSettings *ds)
+uint Packet::GetPackedSize(const DataSettings *ds)
 {
     return sizeof(Packet) +         // Packet
         sizeof(DataSettings) +      // DataSettings
@@ -21,7 +21,7 @@ static void WriteToROM(uint *address, const void *data, int size)
 
 void Compressor::Pack(const DataSettings *ds, uint address)
 {
-    Packet packet = { STATE_VALID, static_cast<uint16>(GetPackedSize(ds)), TYPE_DATA };
+    Packet packet = { STATE_VALID, static_cast<uint16>(Packet::GetPackedSize(ds)), TYPE_DATA };
 
     WriteToROM(&address, &packet, sizeof(packet));
 

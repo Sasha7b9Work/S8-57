@@ -956,16 +956,6 @@
           <GroupName>Hardware/Memory</GroupName>
           <Files>
             <File>
-              <FileName>Compressor.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Hardware\Memory\Compressor.h</FilePath>
-            </File>
-            <File>
-              <FileName>Compressor.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Hardware\Memory\Compressor.cpp</FilePath>
-            </File>
-            <File>
               <FileName>Memory.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Hardware\Memory\Memory.h</FilePath>
@@ -989,6 +979,16 @@
               <FileName>MemoryRAM.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Hardware\Memory\MemoryRAM.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Packet.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\Memory\Packet.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Packet.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Hardware\Memory\Packet.h</FilePath>
             </File>
           </Files>
         </Group>

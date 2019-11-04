@@ -2,7 +2,7 @@
 #include "Memory.h"
 #include "Settings/Settings.h"
 #include "Hardware/HAL/HAL.h"
-#include "Hardware/Memory/Compressor.h"
+#include "Hardware/Memory/Packet.h"
 
 
 /// Возвращает адрес первого свободного байта в секторе настроек
