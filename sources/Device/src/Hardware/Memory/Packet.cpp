@@ -19,26 +19,6 @@ static void WriteToROM(uint *address, const void *data, int size)
 }
 
 
-void Compressor::Pack(const DataSettings *ds, uint address)
-{
-    Packet packet = { STATE_VALID, static_cast<uint16>(Packet::GetPackedSize(ds)), TYPE_DATA };
-
-    WriteToROM(&address, &packet, sizeof(packet));
-
-    WriteToROM(&address, ds, sizeof(DataSettings));
-
-    if (ds->enableA)
-    {
-        WriteToROM(&address, ds->dataA, ds->SizeChannel());
-    }
-
-    if (ds->enableB)
-    {
-        WriteToROM(&address, ds->dataB, ds->SizeChannel());
-    }
-}
-
-
 bool Packet::UnPack(DataSettings **ds) const
 {
     if (!IsValid() || !IsData())

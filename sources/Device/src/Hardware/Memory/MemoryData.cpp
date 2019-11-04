@@ -22,7 +22,7 @@ static void Compress();
 /// ¬озвращает количество полностью свободных дл€ записи секторов
 static int NumberFreeSectors();
 /// ¬озвращает указатель на первый свободный сектор
-//static const Sector *GetFirstFreeSector();
+static const Sector *GetFirstFreeSector();
 /// ¬озвращает указатель на наиболее потЄртый сектор - где стЄртые пакеты занимают больше всего места
 static const Sector *GetMostWornSector();
 /// ¬озвращает количество байт, занимаемых стЄртыми пакетами
@@ -115,16 +115,33 @@ void FlashMemory::Data::Delete(int /*num*/)
 }
 
 
-void FlashMemory::Data::Save(int, const DataSettings *, uint8 *, uint8 *)
+void FlashMemory::Data::Save(int, const DataSettings *ds, uint8 *dataA, uint8 *dataB)
 {
     Compress();
 
-    //uint size = Packet::GetPackedSize(ds);
+    const_cast<DataSettings *>(ds)->dataA = dataA;
+    const_cast<DataSettings *>(ds)->dataB = dataB;
 
     for (int i = 0; i < NUM_SECTORS; i++)
     {
-        
+        const Sector *sector = sectors[i];
+
+        if (sector->NotExistPackets())          // ѕропускаем сектора, в которых ещЄ нет пакетов
+        {
+            continue;
+        }
+
+        if (sector->WritePacket(ds))
+        {
+            return;
+        }
     }
+
+    // ≈сли места в частично зан€тых секторах нет, будем записывать в свободный
+
+    const Sector *sector = GetFirstFreeSector();
+
+    sector->WritePacket(ds);
 }
 
 
@@ -164,20 +181,20 @@ static int NumberFreeSectors()
 }
 
 
-//static const Sector *GetFirstFreeSector()
-//{
-//    for (int i = 0; i < NUM_SECTORS; i++)
-//    {
-//        Packet *packet = reinterpret_cast<Packet *>(sectors[i]->address);
-//
-//        if (packet->IsFree())
-//        {
-//            return sectors[i];
-//        }
-//    }
-//
-//    return nullptr;
-//}
+static const Sector *GetFirstFreeSector()
+{
+    for (int i = 0; i < NUM_SECTORS; i++)
+    {
+        Packet *packet = reinterpret_cast<Packet *>(sectors[i]->address);
+
+        if (packet->IsFree())
+        {
+            return sectors[i];
+        }
+    }
+
+    return nullptr;
+}
 
 
 static const Sector *GetMostWornSector()

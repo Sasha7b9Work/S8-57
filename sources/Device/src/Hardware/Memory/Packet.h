@@ -25,6 +25,7 @@ struct Packet
     Packet *Next() const;
     bool UnPack(DataSettings **ds) const;
     int Size() const;
+    uint Address() const { return reinterpret_cast<uint>(this); };
     /// Делает попытку записи пакета в сектор sector. В случае неудачи возвращает false
     bool WriteToSector(const Sector *sector) const;
     /// Возвращает количество байт, необходимое для хранения данных
@@ -34,8 +35,6 @@ struct Packet
 
 struct Compressor
 {
-    /// Упаковывает данные с настойками ds по адресу address
-    static void Pack(const DataSettings *ds, uint address);
     /// Скопировать пакет из src в dest
     static void Copy(Packet *dest, const Packet *src);
 };
