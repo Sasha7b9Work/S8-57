@@ -41,7 +41,8 @@ bool DataSettings::Equals(const DataSettings &ds) const
         TBASE(this) == TBASE(&ds) &&
         TSHIFT(this) == TSHIFT(&ds) &&
         TRIGLEV_A(this) == TRIGLEV_A(&ds) &&
-        TRIGLEV_B(this) == TRIGLEV_B(&ds);
+        TRIGLEV_B(this) == TRIGLEV_B(&ds) &&
+        ENUM_POINTS(this) == ENUM_POINTS(&ds);
 }
 
 

@@ -83,6 +83,8 @@ void FlashMemory::Data::Delete(uint numInROM)
 
 void FlashMemory::Data::Save(uint numInROM, const DataSettings *ds)
 {
+    Delete(numInROM);
+
     Compress();
 
     for (int i = 0; i < NUM_SECTORS; i++)

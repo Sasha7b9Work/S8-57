@@ -152,7 +152,7 @@ bool FPGA::ReadDataChanenlRand(Chan::E ch, const uint8 *address, uint8 *data)
 
     Osci::StructReadRand infoRead = Osci::GetInfoForReadRand(Tsm, address);
 
-    int step = infoRead.step;
+    uint step = infoRead.step;
 
     uint8 *dataRead = &dataRand[ch][infoRead.posFirst];
 
@@ -192,7 +192,7 @@ bool FPGA::ReadDataChanenl(Chan::E ch, uint8 data[FPGA::MAX_NUM_POINTS])
 
     if (addrRead == 0xffff)
     {
-        int k = 1;
+        uint k = 1;
 
         if (Osci::InModeRandomizer())
         {

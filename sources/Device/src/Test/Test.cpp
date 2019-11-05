@@ -64,16 +64,11 @@ bool Test::FlashMemory::Data::Test()
 {
     ::FlashMemory::Data::DeleteAll();
 
-    for (int i = 0; i < 1000; i++)
+    for (int i = 0; i < 800; i++)
     {
         DataSettings ds;
 
         PrepareDS(&ds);
-
-        if (i == 9)
-        {
-            i = i;
-        }
 
         uint numInROM = std::rand() % ::FlashMemory::Data::MAX_NUM_SAVED_WAVES;
 
