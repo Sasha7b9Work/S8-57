@@ -190,7 +190,7 @@ const Packet *Sector::FindValidPacket(uint numInROM) const
 {
     const Packet *packet = FirstPacket();
 
-    while (packet && packet->Address() < End() && !packet->IsFree())
+    while (packet && !packet->IsFree())
     {
         if (packet->IsData())
         {
@@ -249,7 +249,7 @@ const Packet *Sector::FirstFreePacket() const
 {
     const Packet *packet = FirstPacket();
 
-    while (packet && packet->Address() < End())
+    while (packet)
     {
         if (packet->IsFree())
         {
