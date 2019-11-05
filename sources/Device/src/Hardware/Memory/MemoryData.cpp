@@ -163,13 +163,13 @@ static const Sector *GetFirstFreeSector()
 
 static const Sector *GetMostWornSector()
 {
-    int numWornBytes = 0;               /// Количество стёртых байт 
+    uint numWornBytes = 0;               /// Количество стёртых байт 
 
     const Sector *sector = nullptr;
 
     for (int i = 0; i < NUM_SECTORS; i++)
     {
-        int numBytes = sectors[i]->GetNumberWornBytes();
+        uint numBytes = sectors[i]->GetNumberWornBytes();
 
         if (numBytes > numWornBytes)
         {
@@ -207,9 +207,12 @@ static void CopyDataToFreeSpace(const Sector *sectorSrc)
 
         while (src)
         {
-            if (!src->WriteToSector(sector))
+            if (src->IsData())
             {
-                break;
+                if (!src->WriteToSector(sector))
+                {
+                    break;
+                }
             }
 
             src = src->Next();

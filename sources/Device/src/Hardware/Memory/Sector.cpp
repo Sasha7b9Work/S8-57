@@ -255,6 +255,7 @@ const Packet *Sector::FirstFreePacket() const
         {
             return packet;
         }
+
         packet = packet->Next();
     }
 
@@ -281,9 +282,9 @@ void Sector::GetDataInfo(bool existData[FlashMemory::Data::MAX_NUM_SAVED_WAVES])
 }
 
 
-int Sector::GetNumberWornBytes() const
+uint Sector::GetNumberWornBytes() const
 {
-    int result = 0;
+    uint result = 0;
 
     const Packet *packet = FirstPacket();
 
@@ -316,4 +317,18 @@ const Packet *Sector::GetFirstPacketWithData() const
     }
 
     return nullptr;
+}
+
+
+int Sector::Number(uint address)
+{
+    for (int i = 0; i < Sector::Count; i++)
+    {
+        if (address < END_SECTOR(i))
+        {
+            return i;
+        }
+    }
+
+    return -1;
 }

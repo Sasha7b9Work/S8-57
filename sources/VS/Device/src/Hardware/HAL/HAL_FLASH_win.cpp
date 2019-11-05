@@ -2,7 +2,6 @@
 #include "Hardware/Memory/Memory.h"
 #include "Hardware/Timer.h"
 #include "Hardware/HAL/HAL.h"
-#include <cstring>
 
 
 #define  _16K (16 * 1024)
@@ -56,30 +55,4 @@ void HAL_FLASH::WriteBytes(uint address, const uint8 *buffer, uint size)
         address++;
         buffer++;
     }
-}
-
-
-int Sector::Number(uint address)
-{
-    for (int i = 0; i < Sector::Count; i++)
-    {
-        if (address < END_SECTOR(i))
-        {
-            return i;
-        }
-    }
-
-    return -1;
-}
-
-
-void Sector::Erase() const
-{
-    std::memset(reinterpret_cast<void *>(address), 0xFF, size);
-}
-
-
-void Sector::MovePacketsFromSector(const Sector *) const
-{
-
 }

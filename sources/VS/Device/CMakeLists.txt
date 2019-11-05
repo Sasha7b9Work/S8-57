@@ -158,6 +158,7 @@ source_group(Hardware\\HAL      FILES   ../../Device/src/Hardware/HAL/HAL.h
                                                      src/Hardware/HAL/HAL_win.cpp)
 source_group(Hardware\\Memory   FILES   ../../Device/src/Hardware/Memory/Sector.h
                                         ../../Device/src/Hardware/Memory/Sector.cpp
+                                                     src/Hardware/Memory/Sector_win.cpp
                                         ../../Device/src/Hardware/Memory/Memory.h
                                         ../../Device/src/Hardware/Memory/Memory.cpp
                                         ../../Device/src/Hardware/Memory/MemoryData.cpp
@@ -276,6 +277,7 @@ file(GLOB SOURCES   ../../common/_VS/*
                     
                     ../../Device/src/Hardware/Memory/Sector.h
                     ../../Device/src/Hardware/Memory/Sector.cpp
+                                 src/Hardware/Memory/Sector_win.cpp
                     ../../Device/src/Hardware/Memory/Memory.h
                     ../../Device/src/Hardware/Memory/Memory.cpp
                     ../../Device/src/Hardware/Memory/MemoryData.cpp

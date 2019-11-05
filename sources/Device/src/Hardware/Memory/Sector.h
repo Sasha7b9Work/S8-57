@@ -85,9 +85,6 @@ struct Sector
     uint End() const;
 
     void Erase() const;
-    /// ѕеремещает пакеты из сектора src. ѕакеты в исходном секторе src затираютс€
-    void MovePacketsFromSector(const Sector *src) const;
-    //const Packet *GetFirstPacketWithData() const;
     /// true означает, что в сектор не записан ни один пакет
     bool ExistPackets() const;
 
@@ -105,7 +102,7 @@ struct Sector
 
     const Packet *FindValidPacket(uint numInROM) const;
     /// ¬озвращает количество байт, занимаемых стЄртыми пакетами
-    int GetNumberWornBytes() const;
+    uint GetNumberWornBytes() const;
     /// ¬озвращает указатель на первый пакет с данными из сектора sector и nullptr, если данных в секторе нет
     const Packet *GetFirstPacketWithData() const;
     /// ¬озвращает номер сектора, которому принадлежит address
