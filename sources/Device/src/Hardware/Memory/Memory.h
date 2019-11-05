@@ -28,13 +28,13 @@ struct FlashMemory
         /// Если даннные есть, соответствующий элемент массива равен true.
         static void GetInfo(bool existData[MAX_NUM_SAVED_WAVES]);
 
-        static void Save(int numInROM, const DataSettings *ds);
+        static void Save(uint numInROM, const DataSettings *ds);
 
-        static void Save(int numInROM, const DataSettings *ds, uint8 *dataA, uint8 *dataB);
+        static void Save(uint numInROM, const DataSettings *ds, uint8 *dataA, uint8 *dataB);
         /// Получает данные о сигнале номер num. Если сигнала нет, в ds записывается 0
-        static bool Read(int numInROM, DataSettings **ds);
+        static bool Read(uint numInROM, DataSettings **ds);
 
-        static void Delete(int numInROM);
+        static void Delete(uint numInROM);
 
         static void DeleteAll();
     };

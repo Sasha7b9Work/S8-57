@@ -19,7 +19,13 @@ bool Packet::UnPack(DataSettings **ds) const
         return false;
     }
 
+    DataSettings *settings;
+
     uint8 *pointer = const_cast<uint8 *>(reinterpret_cast<const uint8 *>(this) + sizeof(Packet));
+
+    settings = reinterpret_cast<DataSettings *>(pointer);
+
+    settings = settings;
 
     *ds = reinterpret_cast<DataSettings *>(pointer);
 
@@ -121,7 +127,7 @@ static void TranslateAddressToROM(const DataSettings *ds, const Packet *packet)
 }
 
 
-const Packet *Sector::WriteData(int numInROM, const DataSettings *ds) const
+const Packet *Sector::WriteData(uint numInROM, const DataSettings *ds) const
 {
     const Packet *packet = FirstFreePacket();
 
@@ -164,7 +170,7 @@ const Packet *Sector::WriteData(int numInROM, const DataSettings *ds) const
 }
 
 
-const Packet *Sector::FindValidPacket(int numInROM) const
+const Packet *Sector::FindValidPacket(uint numInROM) const
 {
     const Packet *packet = FirstPacket();
 
@@ -189,7 +195,7 @@ const Packet *Sector::FindValidPacket(int numInROM) const
 }
 
 
-const Packet *Sector::ReadData(int numInROM, DataSettings **ds) const
+const Packet *Sector::ReadData(uint numInROM, DataSettings **ds) const
 {
     const Packet *packet = FindValidPacket(numInROM);
 
@@ -203,7 +209,7 @@ const Packet *Sector::ReadData(int numInROM, DataSettings **ds) const
 }
 
 
-const Packet *Sector::DeleteData(int numInROM) const
+const Packet *Sector::DeleteData(uint numInROM) const
 {
     const Packet *packet = FindValidPacket(numInROM);
 

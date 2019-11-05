@@ -229,7 +229,7 @@ union BitSet64 //-V2514
 
 struct BitField
 {
-    int8 currentNumROMSignal;               ///< Текущий номер сигнала, сохранённого в ППЗУ.
+    uint8 currentNumROMSignal;              ///< Текущий номер сигнала, сохранённого в ППЗУ.
     uint showHelpHints : 1;                 ///< Если 1, то при нажатии кнопки вместо выполнения её фунции выводится подсказка о её назначении.
     uint showDebugMenu : 1;
     uint needForSaveToFlashDrive : 1;       ///< Если 1, то нужно сохранить после отрисовки на флешку.

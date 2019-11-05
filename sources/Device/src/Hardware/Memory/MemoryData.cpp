@@ -53,7 +53,7 @@ void FlashMemory::Data::GetInfo(bool existData[MAX_NUM_SAVED_WAVES])
 }
 
 
-bool FlashMemory::Data::Read(int numInROM, DataSettings **ds)
+bool FlashMemory::Data::Read(uint numInROM, DataSettings **ds)
 {
     *ds = nullptr;
 
@@ -69,7 +69,7 @@ bool FlashMemory::Data::Read(int numInROM, DataSettings **ds)
 }
 
 
-void FlashMemory::Data::Delete(int numInROM)
+void FlashMemory::Data::Delete(uint numInROM)
 {
     for (int i = 0; i < NUM_SECTORS; i++)
     {
@@ -81,7 +81,7 @@ void FlashMemory::Data::Delete(int numInROM)
 }
 
 
-void FlashMemory::Data::Save(int numInROM, const DataSettings *ds)
+void FlashMemory::Data::Save(uint numInROM, const DataSettings *ds)
 {
     Compress();
 
@@ -104,7 +104,7 @@ void FlashMemory::Data::Save(int numInROM, const DataSettings *ds)
 }
 
 
-void FlashMemory::Data::Save(int numInROM, const DataSettings *ds, uint8 *dataA, uint8 *dataB)
+void FlashMemory::Data::Save(uint numInROM, const DataSettings *ds, uint8 *dataA, uint8 *dataB)
 {
     const_cast<DataSettings *>(ds)->dataA = dataA;
     const_cast<DataSettings *>(ds)->dataB = dataB;

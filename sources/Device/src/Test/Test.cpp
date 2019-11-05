@@ -48,6 +48,8 @@ namespace Test
 
 bool Test::FlashMemory::Data::Test()
 {
+    ::FlashMemory::Data::DeleteAll();
+
     for (int i = 0; i < 1000; i++)
     {
         ENumPointsFPGA enumPoints(static_cast<ENumPointsFPGA::E>(std::rand() % ENumPointsFPGA::Count));
@@ -63,11 +65,20 @@ bool Test::FlashMemory::Data::Test()
         DataSettings ds;
         ds.Fill(dataA, dataB);
 
-        int numInROM = static_cast<int>(std::rand() % ::FlashMemory::Data::MAX_NUM_SAVED_WAVES);
+        uint numInROM = std::rand() % ::FlashMemory::Data::MAX_NUM_SAVED_WAVES;
 
-        ::FlashMemory::Data::Save(numInROM, &ds, dataA, dataB);
+        ::FlashMemory::Data::Save(numInROM, &ds);
 
         DataSettings *dsRead = nullptr;
+
+        static int counter = 0;
+
+        counter++;
+
+        if (counter == 2)
+        {
+            counter = counter;
+        }
 
         ::FlashMemory::Data::Read(numInROM, &dsRead);
 
