@@ -64,21 +64,18 @@ bool Test::FlashMemory::Data::Test()
 
         DataSettings ds;
         ds.Fill(dataA, dataB);
+        ds.enumPoints = enumPoints.value;
 
         uint numInROM = std::rand() % ::FlashMemory::Data::MAX_NUM_SAVED_WAVES;
 
         ::FlashMemory::Data::Save(numInROM, &ds);
 
-        DataSettings *dsRead = nullptr;
-
-        static int counter = 0;
-
-        counter++;
-
-        if (counter == 2)
+        if (i == 9)
         {
-            counter = counter;
+            i = i;
         }
+
+        DataSettings *dsRead = nullptr;
 
         ::FlashMemory::Data::Read(numInROM, &dsRead);
 
