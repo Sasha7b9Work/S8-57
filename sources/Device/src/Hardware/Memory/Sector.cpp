@@ -299,3 +299,21 @@ int Sector::GetNumberWornBytes() const
 
     return result;
 }
+
+
+const Packet *Sector::GetFirstPacketWithData() const
+{
+    const Packet *result = FirstPacket();
+
+    while (result && !result->IsFree())
+    {
+        if (result->IsValid())
+        {
+            return result;
+        }
+
+        result = result->Next();
+    }
+
+    return nullptr;
+}

@@ -25,14 +25,8 @@ static int NumberFreeSectors();
 static const Sector *GetFirstFreeSector();
 /// ¬озвращает указатель на наиболее потЄртый сектор - где стЄртые пакеты занимают больше всего места
 static const Sector *GetMostWornSector();
-/// —копировать данные из сектора src в сектор dest
-//static void CopyData(const Sector *sectorDest, const Sector *sectorSrc);
 /// —копировать данные в свободное место
 static void CopyDataToFreeSpace(const Sector *src);
-/// ѕереписать данные из сектора src в сектор dest
-//static void CopyDataToSector(const Sector *dest, const Sector *src);
-/// ¬озвращает указатель на первый пакет с данными из сектора sector и nullptr, если данных в секторе нет
-static const Packet *GetFirstPacketWithData(const Sector *sector);
 
 
 void FlashMemory::Data::GetInfo(bool existData[MAX_NUM_SAVED_WAVES])
@@ -195,7 +189,7 @@ static void CopyDataToFreeSpace(const Sector *sectorSrc)
         ѕотом пишем в стЄртые сектора.
     */
 
-    const Packet *src = GetFirstPacketWithData(sectorSrc);
+    const Packet *src = sectorSrc->GetFirstPacketWithData();
 
     if (!src)
     {
@@ -221,22 +215,4 @@ static void CopyDataToFreeSpace(const Sector *sectorSrc)
             src = src->Next();
         }
     }
-}
-
-
-static const Packet *GetFirstPacketWithData(const Sector *sector)
-{
-    const Packet *result = sector->FirstPacket();
-
-    while (result && !result->IsFree())
-    {
-        if (result->IsValid())
-        {
-            return result;
-        }
-
-        result = result->Next();
-    }
-
-    return nullptr;
 }

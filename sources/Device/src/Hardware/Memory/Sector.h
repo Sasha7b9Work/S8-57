@@ -106,6 +106,8 @@ struct Sector
     const Packet *FindValidPacket(uint numInROM) const;
     /// ¬озвращает количество байт, занимаемых стЄртыми пакетами
     int GetNumberWornBytes() const;
+    /// ¬озвращает указатель на первый пакет с данными из сектора sector и nullptr, если данных в секторе нет
+    const Packet *GetFirstPacketWithData() const;
     /// ¬озвращает номер сектора, которому принадлежит address
     static int Number(uint address);
 };
