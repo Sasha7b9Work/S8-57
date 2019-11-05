@@ -315,7 +315,6 @@ static void DrawHintItem(int x, int y, int width)
 {
     if (itemHint)
     {
-        //DEF__STRUCT(StructName, pString) names[Item::Type::Number] =
         static pString names[TypeItem::Count] =
         {
             "",                   // Item_None

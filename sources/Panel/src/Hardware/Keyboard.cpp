@@ -210,7 +210,7 @@ static void SendCommand(Control control, Control::Action::E action)
 
 const char *Keyboard::ControlName(Control control)
 {
-    static const char *names[Control::Number] =
+    static const char *names[Control::Count] =
     {
         "None",
         "Функция",

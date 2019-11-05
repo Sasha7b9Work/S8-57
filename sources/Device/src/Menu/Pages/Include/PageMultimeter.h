@@ -68,12 +68,12 @@ struct MultimeterMeasure
         Resistance,
         TestDiode,
         Bell,
-        Size
+        Count
     } value;
     explicit MultimeterMeasure(E v) : value(v) { };
     char Symbol() const
     {
-        static const char symbols[Size] = { 'U', 'V', 'I', 'J', 'R', 'Y', 'W' };
+        static const char symbols[Count] = { 'U', 'V', 'I', 'J', 'R', 'Y', 'W' };
         return symbols[value]; //-V2006
     }
     /// Получить код измерения из принятого буфера

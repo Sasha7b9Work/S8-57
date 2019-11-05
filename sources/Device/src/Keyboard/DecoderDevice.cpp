@@ -76,7 +76,7 @@ static void RunStep(uint8 data)
         pFuncBU8 func;
         StructFunc(pFuncBU8 f) : func(f) {};
     }
-    commands[Command::Size] =
+    commands[Command::Count] =
     {
         EmptyFunc,      // None,
         ButtonPress,    // ButtonPress,
@@ -104,7 +104,7 @@ static void RunStep(uint8 data)
 
     if (step == 0)
     {
-        if (data < Command::Size)
+        if (data < Command::Count)
         {
             curFunc = commands[data].func;
             if (curFunc == 0)

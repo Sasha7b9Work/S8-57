@@ -69,7 +69,7 @@ bool FlashMemory::Data::Read(int numInROM, DataSettings **ds)
 }
 
 
-void FlashMemory::Data::Delete(int /*num*/)
+void FlashMemory::Data::Delete(int num )
 {
 }
 

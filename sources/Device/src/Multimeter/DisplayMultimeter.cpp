@@ -137,7 +137,7 @@ void DisplayMultimeter::ChangedMode()
 
     std::memset(outBuffer, '-', 7); //-V512
 
-    static const int position[MultimeterMeasure::Size][4] =
+    static const int position[MultimeterMeasure::Count][4] =
     {
         {2, 3, 4},      // VoltageDC
         {2, 3, 4},      // VoltageAC
@@ -148,7 +148,7 @@ void DisplayMultimeter::ChangedMode()
         (2),            // Bell
     };
     
-    static const pString suffix[MultimeterMeasure::Size][4] =
+    static const pString suffix[MultimeterMeasure::Count][4] =
     {
         {"V=", "V=", "V="},
         {"V~", "V~", "V~"},
@@ -174,7 +174,7 @@ void DisplayMultimeter::SetMeasure(const uint8 buf[13])
         pFuncVCC func;
         Func(pFuncVCC f) : func(f) {};
     }
-    funcs[MultimeterMeasure::Size] =
+    funcs[MultimeterMeasure::Count] =
     {
         PrepareConstantVoltage,
         PrepareVariableVoltage,
@@ -187,7 +187,7 @@ void DisplayMultimeter::SetMeasure(const uint8 buf[13])
 
     MultimeterMeasure::E meas = MultimeterMeasure::GetCode(reinterpret_cast<const char *>(buf));
 
-    if (meas >= MultimeterMeasure::Size)
+    if (meas >= MultimeterMeasure::Count)
     {
         return;
     }

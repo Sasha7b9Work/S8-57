@@ -53,7 +53,7 @@ pString Key::Name()
 
 pString TypePress::ToString()
 {
-    static const pString names[TypePress::Size] =
+    static const pString names[TypePress::Count] =
     {
         "Вниз",
         "Повтор",

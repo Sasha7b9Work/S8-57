@@ -70,7 +70,7 @@ void Decoder::AddData(uint8 data)
         pFuncBU8 func;
         StructFunc(pFuncBU8 f) : func(f) {};
     }
-    command[Command::Size] =
+    command[Command::Count] =
     {
         EmptyFunc,
         InButtonPress,
@@ -98,7 +98,7 @@ void Decoder::AddData(uint8 data)
 
     if (step == 0)
     {
-        if (data < Command::Size)
+        if (data < Command::Count)
         {
             curFunc = command[data].func;
             if (curFunc == 0)

@@ -198,7 +198,7 @@ int TShift::Min()
         int m[3];
         StructENumPoints(int m0, int m1, int m2) { m[0] = m0; m[1] = m1; m[2] = m2; }
     }
-    m[ENumPointsFPGA::Size] =
+    m[ENumPointsFPGA::Count] =
     {
         StructENumPoints(-256 * mul + k,  -128 * mul + k, 0 * mul + k),  // 512
         StructENumPoints(-512 * mul + k,  -256 * mul + k, 0 * mul + k),  // 1024

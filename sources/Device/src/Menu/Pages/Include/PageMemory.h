@@ -71,7 +71,7 @@ struct ENumPointsFPGA
         _2k,
         _4k,
         _8k,
-        Size
+        Count
     } value;
     explicit ENumPointsFPGA(E v) : value(v) {};
     uint BytesInChannel(PeakDetMode::E mode) const;

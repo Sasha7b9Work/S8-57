@@ -63,7 +63,7 @@ struct TypePress
         Release,    ///< Отпускание кнопки
         Long,       ///< "Длинное" нажатие кнопки
         None,
-        Size
+        Count
     } value;
 
     explicit TypePress(E v) : value(v)  { };

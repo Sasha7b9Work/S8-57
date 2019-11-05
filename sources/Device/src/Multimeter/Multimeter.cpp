@@ -122,7 +122,7 @@ void Multimeter::Update()
 
 MultimeterMeasure::E MultimeterMeasure::GetCode(const char buffer[13])
 {
-    MultimeterMeasure::E result = MultimeterMeasure::Size;
+    MultimeterMeasure::E result = MultimeterMeasure::Count;
 
     int pos = 0;
 
@@ -133,7 +133,7 @@ MultimeterMeasure::E MultimeterMeasure::GetCode(const char buffer[13])
 
     if (pos == 13)
     {
-        return MultimeterMeasure::Size;
+        return MultimeterMeasure::Count;
     }
 
     switch (buffer[pos - 2])

@@ -397,8 +397,8 @@ void RShift::Draw(Chan::E ch)
 
 int Chan::PointsInChannel() const
 {
-    //DEF__STRUCT(StructNumPoints, int) numPoints[ENumPointsFPGA::Size] =
-    static const int numPoints[ENumPointsFPGA::Size] =
+    //DEF__STRUCT(StructNumPoints, int) numPoints[ENumPointsFPGA::Count] =
+    static const int numPoints[ENumPointsFPGA::Count] =
     {
         512,
         1024,

@@ -41,7 +41,7 @@ struct Control
         B_3,
         B_4,
         B_5,
-        Number
+        Count
     } value;
 
     struct Action

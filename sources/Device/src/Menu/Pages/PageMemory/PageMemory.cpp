@@ -645,7 +645,7 @@ ENumPointsFPGA::E NumPoints_2_ENumPoints(int numPoints)
 
 int ENumPoints_2_NumPoints(ENumPointsFPGA::E numPoints)
 {
-    static const int n[ENumPointsFPGA::Size] =
+    static const int n[ENumPointsFPGA::Count] =
     {
         512,
         1024,
