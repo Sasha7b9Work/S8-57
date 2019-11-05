@@ -190,7 +190,7 @@ const Packet *Sector::FindValidPacket(uint numInROM) const
 {
     const Packet *packet = FirstPacket();
 
-    while (packet && !packet->IsFree())
+    while (packet && packet->Address() < End() && !packet->IsFree())
     {
         if (packet->IsData())
         {
@@ -249,7 +249,7 @@ const Packet *Sector::FirstFreePacket() const
 {
     const Packet *packet = FirstPacket();
 
-    while (packet)
+    while (packet && packet->Address() < End())
     {
         if (packet->IsFree())
         {
@@ -278,4 +278,24 @@ void Sector::GetDataInfo(bool existData[FlashMemory::Data::MAX_NUM_SAVED_WAVES])
         }
         packet = packet->Next();
     }
+}
+
+
+int Sector::GetNumberWornBytes() const
+{
+    int result = 0;
+
+    const Packet *packet = FirstPacket();
+
+    while (packet && !packet->IsFree())
+    {
+        if (packet->IsErased())
+        {
+            result += packet->Size();
+        }
+
+        packet = packet->Next();
+    }
+
+    return result;
 }

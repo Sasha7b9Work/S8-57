@@ -102,8 +102,10 @@ struct Sector
     void GetDataInfo(bool existData[FlashMemory::Data::MAX_NUM_SAVED_WAVES]) const;
     /// ¬озвращает указатель на первый пакет
     const Packet *FirstPacket() const;
-    /// ¬озвращает номер сектора, которому принадлежит address
-    static int Number(uint address);
 
     const Packet *FindValidPacket(uint numInROM) const;
+    /// ¬озвращает количество байт, занимаемых стЄртыми пакетами
+    int GetNumberWornBytes() const;
+    /// ¬озвращает номер сектора, которому принадлежит address
+    static int Number(uint address);
 };
