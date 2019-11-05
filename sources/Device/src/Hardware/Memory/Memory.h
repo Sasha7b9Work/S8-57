@@ -34,9 +34,9 @@ struct FlashMemory
         /// Получает данные о сигнале номер num. Если сигнала нет, в ds записывается 0
         static bool Read(uint numInROM, DataSettings **ds);
 
-        static void Delete(uint numInROM);
+        static void Erase(uint numInROM);
 
-        static void DeleteAll();
+        static void EraseAll();
     };
 };
 

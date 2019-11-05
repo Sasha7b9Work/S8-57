@@ -59,7 +59,7 @@ bool FlashMemory::Data::Read(uint numInROM, DataSettings **ds)
 }
 
 
-void FlashMemory::Data::Delete(uint numInROM)
+void FlashMemory::Data::Erase(uint numInROM)
 {
     for (int i = 0; i < NUM_SECTORS; i++)
     {
@@ -73,7 +73,7 @@ void FlashMemory::Data::Delete(uint numInROM)
 
 void FlashMemory::Data::Save(uint numInROM, const DataSettings *ds)
 {
-    Delete(numInROM);
+    Erase(numInROM);
 
     Compress();
 
@@ -105,7 +105,7 @@ void FlashMemory::Data::Save(uint numInROM, const DataSettings *ds, uint8 *dataA
 }
 
 
-void FlashMemory::Data::DeleteAll()
+void FlashMemory::Data::EraseAll()
 {
     for (int i = 0; i < NUM_SECTORS; i++)
     {

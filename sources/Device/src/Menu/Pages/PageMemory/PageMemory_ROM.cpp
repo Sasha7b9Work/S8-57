@@ -60,7 +60,7 @@ DEF_GRAPH_BUTTON( bPrev,
 static void OnPress_Delete()
 {
     Display::FuncOnWaitStart("”дал€ю сохранЄнные данные", false);
-    FlashMemory::Data::Delete(NUM_ROM_SIGNAL);
+    FlashMemory::Data::Erase(NUM_ROM_SIGNAL);
     Display::FuncOnWaitStop();
 }
 

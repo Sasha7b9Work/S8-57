@@ -2,6 +2,7 @@
 #include "Data/DataSettings.h"
 #include "Data/Heap.h"
 #include "Hardware/Memory/Memory.h"
+#include "Hardware/Memory/Sector.h"
 #include "Menu/Pages/Include/PageMemory.h"
 #include "Test/Test.h"
 #include <cstdlib>
@@ -62,9 +63,11 @@ namespace Test
 
 bool Test::FlashMemory::Data::Test()
 {
-    ::FlashMemory::Data::DeleteAll();
+    static uint totalMemory = 0;
 
-    for (int i = 0; i < 600; i++)
+    ::FlashMemory::Data::EraseAll();
+
+    for (int i = 0; i < 100000; i++)
     {
         DataSettings ds;
 
@@ -73,6 +76,8 @@ bool Test::FlashMemory::Data::Test()
         uint numInROM = std::rand() % ::FlashMemory::Data::MAX_NUM_SAVED_WAVES;
 
         ::FlashMemory::Data::Save(numInROM, &ds);
+
+        totalMemory += sizeof(Packet) + sizeof(DataSettings) + ds.SizeChannel() + ds.SizeChannel();
 
         DataSettings *dsRead = nullptr;
 
