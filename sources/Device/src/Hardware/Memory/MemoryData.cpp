@@ -69,17 +69,21 @@ bool FlashMemory::Data::Read(int numInROM, DataSettings **ds)
 }
 
 
-void FlashMemory::Data::Delete(int num )
+void FlashMemory::Data::Delete(int numInROM)
 {
+    for (int i = 0; i < NUM_SECTORS; i++)
+    {
+        if (sectors[i]->DeleteData(numInROM))
+        {
+            return;
+        }
+    }
 }
 
 
-void FlashMemory::Data::Save(int numInROM, const DataSettings *ds, uint8 *dataA, uint8 *dataB)
+void FlashMemory::Data::Save(int numInROM, const DataSettings *ds)
 {
     Compress();
-
-    const_cast<DataSettings *>(ds)->dataA = dataA;
-    const_cast<DataSettings *>(ds)->dataB = dataB;
 
     for (int i = 0; i < NUM_SECTORS; i++)
     {
@@ -97,6 +101,15 @@ void FlashMemory::Data::Save(int numInROM, const DataSettings *ds, uint8 *dataA,
     // Если места в частично занятых секторах нет, будем записывать в свободный
 
     GetFirstFreeSector()->WriteData(numInROM, ds);
+}
+
+
+void FlashMemory::Data::Save(int numInROM, const DataSettings *ds, uint8 *dataA, uint8 *dataB)
+{
+    const_cast<DataSettings *>(ds)->dataA = dataA;
+    const_cast<DataSettings *>(ds)->dataB = dataB;
+
+    Save(numInROM, ds);
 }
 
 

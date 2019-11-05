@@ -22,11 +22,13 @@ struct FlashMemory
     /// Функция для сохранения/восстановления данных
     struct Data
     {
-        static const int MAX_NUM_SAVED_WAVES = 23;  ///< \brief Число сохраняемых во внутреннем ППЗУ измерений. Пока ограничено количеством квадратиков, которые можно 
+        static const uint MAX_NUM_SAVED_WAVES = 23; ///< \brief Число сохраняемых во внутреннем ППЗУ измерений. Пока ограничено количеством квадратиков, которые можно 
                                                     ///< вывести в одну линию внизу сетки.
 
         /// Если даннные есть, соответствующий элемент массива равен true.
         static void GetInfo(bool existData[MAX_NUM_SAVED_WAVES]);
+
+        static void Save(int numInROM, const DataSettings *ds);
 
         static void Save(int numInROM, const DataSettings *ds, uint8 *dataA, uint8 *dataB);
         /// Получает данные о сигнале номер num. Если сигнала нет, в ds записывается 0

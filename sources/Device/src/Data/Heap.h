@@ -5,9 +5,9 @@
 class Heap
 {
 public:
-    static void *Begin();
+    static uint8 *Begin();
 
-    static void *End();
+    static uint8 *End();
 
     static uint Size();
 };

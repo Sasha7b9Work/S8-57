@@ -78,6 +78,13 @@ bool Packet::WriteToSector(const Sector *sector) const
     return true;
 }
 
+void Packet::Erase() const
+{
+    uint data = STATE_ERASED;
+
+    HAL_FLASH::WriteBufferBytes(Address(), &data, 4);
+}
+
 uint Sector::End() const
 {
     return address + size;
@@ -157,7 +164,7 @@ const Packet *Sector::WriteData(int numInROM, const DataSettings *ds) const
 }
 
 
-const Packet *Sector::ReadData(int numInROM, DataSettings **ds) const
+const Packet *Sector::FindValidPacket(int numInROM) const
 {
     const Packet *packet = FirstPacket();
 
@@ -169,15 +176,41 @@ const Packet *Sector::ReadData(int numInROM, DataSettings **ds) const
 
             packet->UnPack(&settings);
 
-            if(settings->numInROM == numInROM)
+            if (settings->numInROM == numInROM)
             {
-                *ds = settings;
-
                 return packet;
             }
         }
 
         packet = packet->Next();
+    }
+
+    return nullptr;
+}
+
+
+const Packet *Sector::ReadData(int numInROM, DataSettings **ds) const
+{
+    const Packet *packet = FindValidPacket(numInROM);
+
+    if (packet)
+    {
+        packet->UnPack(ds);
+        return packet;
+    }
+
+    return nullptr;
+}
+
+
+const Packet *Sector::DeleteData(int numInROM) const
+{
+    const Packet *packet = FindValidPacket(numInROM);
+
+    if (packet)
+    {
+        packet->Erase();
+        return packet;
     }
 
     return nullptr;

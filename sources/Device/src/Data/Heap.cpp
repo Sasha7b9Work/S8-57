@@ -8,13 +8,13 @@ static uint8 buffer[SIZE_BUFFER];
 
 
 
-void *Heap::Begin()
+uint8 *Heap::Begin()
 {
     return buffer;
 }
 
 
-void *Heap::End()
+uint8 *Heap::End()
 {
     return buffer + Size();
 }

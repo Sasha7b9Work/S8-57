@@ -15,7 +15,7 @@
 
 struct Sector;
 
-struct Packet
+struct Packet   
 {
     uint  state;    // Состояние пакета:
                     // 0xFFFFFFFF - в пакет запись не производилась
@@ -34,6 +34,7 @@ struct Packet
     uint Address() const { return reinterpret_cast<uint>(this); };
     /// Делает попытку записи пакета в сектор sector. В случае неудачи возвращает false
     bool WriteToSector(const Sector *sector) const;
+    void Erase() const;
     /// Возвращает количество байт, необходимое для хранения данных
     static uint GetPackedSize(const DataSettings *ds);
 };
@@ -96,6 +97,8 @@ struct Sector
     const Packet *WriteData(int numInROM, const DataSettings *ds) const;
 
     const Packet *ReadData(int numInROM, DataSettings **ds) const;
+
+    const Packet *DeleteData(int numInROM) const;
     /// Получить информацию о сохранённх в секторе данных
     void GetDataInfo(bool existData[FlashMemory::Data::MAX_NUM_SAVED_WAVES]) const;
     /// Возвращает указатель на первый пакет
@@ -103,4 +106,5 @@ struct Sector
     /// Возвращает номер сектора, которому принадлежит address
     static int Number(uint address);
 
+    const Packet *FindValidPacket(int numInROM) const;
 };
