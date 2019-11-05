@@ -58,7 +58,7 @@ void FlashMemory::Settings::Save()
     Write(address, &set, sizeof(set));
 }
 
-void FlashMemory::Write(uint address, const void *data, int size)
+void FlashMemory::Write(uint address, const void *data, uint size)
 {
     HAL_FLASH::WriteBytes(address, static_cast<const uint8 *>(data), size);
 }

@@ -41,6 +41,20 @@ namespace Test
 
                 return true;
             }
+
+            static void PrepareDS(DataSettings *ds)
+            {
+                uint8 *dataA = static_cast<uint8 *>(Heap::Begin());
+                uint8 *dataB = static_cast<uint8 *>(Heap::Begin() + ds->SizeChannel());
+
+                FillData(dataA, ds->SizeChannel());
+                FillData(dataB, ds->SizeChannel());
+
+                ds->Fill(dataA, dataB);
+
+                ds->enumPoints = static_cast<uint>(std::rand() % ENumPointsFPGA::Count);
+                ds->peackDet = PeakDetMode::Disabled;
+            }
         }
     }
 }
@@ -52,39 +66,29 @@ bool Test::FlashMemory::Data::Test()
 
     for (int i = 0; i < 1000; i++)
     {
-        ENumPointsFPGA enumPoints(static_cast<ENumPointsFPGA::E>(std::rand() % ENumPointsFPGA::Count));
-
-        uint sizeChannel = enumPoints.BytesInChannel(PeakDetMode::Disabled);
-
-        uint8 *dataA = static_cast<uint8 *>(Heap::Begin());
-        uint8 *dataB = static_cast<uint8 *>(Heap::Begin() + sizeChannel);
-
-        FillData(dataA, sizeChannel);
-        FillData(dataB, sizeChannel);
-
         DataSettings ds;
-        ds.Fill(dataA, dataB);
-        ds.enumPoints = enumPoints.value;
 
-        uint numInROM = std::rand() % ::FlashMemory::Data::MAX_NUM_SAVED_WAVES;
-
-        ::FlashMemory::Data::Save(numInROM, &ds);
+        PrepareDS(&ds);
 
         if (i == 9)
         {
             i = i;
         }
 
+        uint numInROM = std::rand() % ::FlashMemory::Data::MAX_NUM_SAVED_WAVES;
+
+        ::FlashMemory::Data::Save(numInROM, &ds);
+
         DataSettings *dsRead = nullptr;
 
         ::FlashMemory::Data::Read(numInROM, &dsRead);
 
-        if (!Compare(dataA, dsRead->dataA, sizeChannel))
+        if (!Compare(ds.dataA, dsRead->dataA, ds.SizeChannel()))
         {
             return false;
         }
 
-        if (!Compare(dataB, dsRead->dataB, sizeChannel))
+        if (!Compare(ds.dataB, dsRead->dataB, ds.SizeChannel()))
         {
             return false;
         }

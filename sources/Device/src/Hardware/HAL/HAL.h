@@ -83,8 +83,8 @@ struct HAL_FLASH
 {
     static const Sector sectors[Sector::Count];
 
-    static void WriteBytes(uint address, const uint8 *data, int size);
-    static void WriteBufferBytes(uint address, const void *buffer, int size);
+    static void WriteBytes(uint address, const uint8 *data, uint size);
+    static void WriteBufferBytes(uint address, const void *buffer, uint size);
 };
 
 struct HAL_OTP

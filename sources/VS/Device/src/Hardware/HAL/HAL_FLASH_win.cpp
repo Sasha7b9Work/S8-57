@@ -42,15 +42,15 @@ const Sector HAL_FLASH::sectors[Sector::Count] =
 };
 
 
-void HAL_FLASH::WriteBufferBytes(uint address, const void *buffer, int size)
+void HAL_FLASH::WriteBufferBytes(uint address, const void *buffer, uint size)
 {
     WriteBytes(address, static_cast<const uint8 *>(buffer), size);
 }
 
 
-void HAL_FLASH::WriteBytes(uint address, const uint8 *buffer, int size)
+void HAL_FLASH::WriteBytes(uint address, const uint8 *buffer, uint size)
 {
-    for (int i = 0; i < size; i++)
+    for (uint i = 0; i < size; i++)
     {
         *reinterpret_cast<uint8 *>(address) = *buffer;
         address++;

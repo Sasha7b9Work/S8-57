@@ -51,10 +51,10 @@ struct DataSettings
     /// «аполн€ет структуру в соответствии с текущими настройками
     void Fill(uint8 *dataA = 0, uint8 *dataB = 0);
     /// ¬озвращает размер занимаемый данными одного канала
-    int SizeChannel() const;
-    int PointsInChannel() const;
+    uint SizeChannel() const;
+    uint PointsInChannel() const;
     /// ¬озвращает требуемое количество пам€ти дл€ хранени€ данных каналов
-    int NeedMemoryForData() const;
+    uint NeedMemoryForData() const;
     bool Equals(const DataSettings &ds) const;
 };
 

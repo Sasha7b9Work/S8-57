@@ -79,7 +79,7 @@ void TShift::LoadReal()
 }
 
 
-static int GetK()
+static uint GetK()
 {
     return (-TShift::Min()) % Osci::Kr[static_cast<int>(set.time.base)];
 }
@@ -87,11 +87,11 @@ static int GetK()
 
 void TShift::LoadRandomize()
 {
-    int k = Osci::Kr[static_cast<int>(set.time.base)];
+    uint k = Osci::Kr[static_cast<int>(set.time.base)];
 
     FPGA::post = static_cast<uint16>((set.time.shift - TShift::Min() - GetK()) / k);
 
-    int Pred = static_cast<int>(FPGA_NUM_POINTS) / k - static_cast<int>(FPGA::post);
+    int Pred = static_cast<int>(FPGA_NUM_POINTS) / static_cast<int>(k) - static_cast<int>(FPGA::post);
 
     if (Pred < 0)
     {
@@ -105,11 +105,11 @@ void TShift::LoadRandomize()
     HAL_FSMC::WriteToFPGA16(WR::PRED_LO, FPGA::pred);
     HAL_FSMC::WriteToFPGA16(WR::POST_LO, FPGA::post);
 
-    Osci::addShift = (set.time.shift) % k;
+    Osci::addShift = static_cast<int>((set.time.shift) % k);
 
     if (Osci::addShift < 0)
     {
-        Osci::addShift = k + Osci::addShift;
+        Osci::addShift = static_cast<int>(k + Osci::addShift);
     }
 }
 

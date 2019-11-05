@@ -116,7 +116,7 @@ static const int voltsInPixelInt[] =   // Коэффициент 20000
 
 
 
-static void MultiplyToWindow(float *data, int numPoints);
+static void MultiplyToWindow(float *data, uint numPoints);
 
 static void Normalize(float *data, int numPoints);
 /// Возвращает напряжение, соответствующее верхней границе сетки
@@ -157,14 +157,14 @@ float MathFPGA::TimeCursor(float shiftCurT, TBase::E tBase)
 }
 
 
-void MathFPGA::PointsRel2Voltage(const uint8 *points, int numPoints, Range::E range, int16 rShift, float *voltage)
+void MathFPGA::PointsRel2Voltage(const uint8 *points, uint numPoints, Range::E range, int16 rShift, float *voltage)
 {
     int voltInPixel = voltsInPixelInt[range];
     float maxVoltsOnScreen = MaxVoltageOnScreen(range);
     float rShiftAbs = RShift2Abs(rShift, range);
     int diff = static_cast<int>((VALUE::MIN * voltInPixel) + (maxVoltsOnScreen + rShiftAbs) * 20e3F);
     float koeff = 1.0F / 20e3F;
-    for (int i = 0; i < numPoints; i++)
+    for (uint i = 0; i < numPoints; i++)
     {
         voltage[i] = (points[i] * voltInPixel - diff) * koeff; //-V636
     }
@@ -269,7 +269,7 @@ static float const *Koeff(int numPoints)
 #endif
 
 
-void MathFPGA::CalculateFFT(float *dataR, int numPoints, float *result, float *freq0, float *density0, float *freq1, float *density1, int *y0, int *y1)
+void MathFPGA::CalculateFFT(float *dataR, uint numPoints, float *result, float *freq0, float *density0, float *freq1, float *density1, int *y0, int *y1)
 {
     float scale = 1.0F / absStepTShift[set.time.base] / 1024.0F;
 
@@ -284,7 +284,7 @@ void MathFPGA::CalculateFFT(float *dataR, int numPoints, float *result, float *f
         *freq1 *= 2;
     }
 
-    for (int i = 0; i < numPoints; i++)
+    for (uint i = 0; i < numPoints; i++)
     {
         result[i] = 0.0F;
     }
@@ -324,8 +324,8 @@ void MathFPGA::CalculateFFT(float *dataR, int numPoints, float *result, float *f
         -0.0007669903187427F, -0.0003834951875714F
     };
 
-    int nn = numPoints >> 1;
-    int ie = numPoints;
+    int nn = static_cast<int>(numPoints >> 1);
+    int ie = static_cast<int>(numPoints);
 
     for (int n = 1; n <= logN; n++)
     {
@@ -336,7 +336,7 @@ void MathFPGA::CalculateFFT(float *dataR, int numPoints, float *result, float *f
         float iu = 0.0F;
         for (int j = 0; j < in; j++)
         {
-            for (int i = j; i < numPoints; i += ie)
+            for (int i = j; i < static_cast<int>(numPoints); i += ie)
             {
                 int io = i + in;
                 float dRi = dataR[i];
@@ -357,7 +357,7 @@ void MathFPGA::CalculateFFT(float *dataR, int numPoints, float *result, float *f
         ie >>= 1;
     }
 
-    for (int j = 1, i = 1; i < numPoints; i++)
+    for (int j = 1, i = 1; i < static_cast<int>(numPoints); i++)
     {
         if (i < j)
         {
@@ -434,7 +434,7 @@ void MathFPGA::CalculateFFT(float *dataR, int numPoints, float *result, float *f
 }
 
 
-static void MultiplyToWindow(float *data, int numPoints)
+static void MultiplyToWindow(float *data, uint numPoints)
 {
 #ifndef DEBUG
     float const *koeff = Koeff(numPoints);
@@ -447,7 +447,7 @@ static void MultiplyToWindow(float *data, int numPoints)
 
     if (set.fft.window == WindowFFT::Hamming)
     {
-        for (int i = 0; i < numPoints; i++)
+        for (uint i = 0; i < numPoints; i++)
         {
             data[i] *= 0.53836F - 0.46164F * std::cosf(2 * PI * i / (numPoints - 1));
         }
@@ -458,14 +458,14 @@ static void MultiplyToWindow(float *data, int numPoints)
         float a0 = (1.0F - alpha) / 2.0F;
         float a1 = 0.5F;
         float a2 = alpha / 2.0F;
-        for (int i = 0; i < numPoints; i++)
+        for (uint i = 0; i < numPoints; i++)
         {
             data[i] *= a0 - a1 * std::cosf(2 * PI * i / (numPoints - 1)) + a2 * std::cosf(4 * PI * i / (numPoints - 1));
         }
     }
     else if (set.fft.window == WindowFFT::Hann)
     {
-        for (int i = 0; i < numPoints; i++)
+        for (uint i = 0; i < numPoints; i++)
         {
             data[i] *= 0.5F * (1.0F - std::cosf(2.0F * PI * i / (numPoints - 1.0F)));
         }

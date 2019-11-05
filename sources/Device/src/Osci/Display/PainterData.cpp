@@ -139,7 +139,7 @@ static void WriteParametersFFT(Chan::E ch, float freq0, float density0, float fr
 }
 
 
-static void DRAW_SPECTRUM(const uint8 *dataIn, int numPoints, Chan::E ch)
+static void DRAW_SPECTRUM(const uint8 *dataIn, uint numPoints, Chan::E ch)
 {
     if (!set.ch[ch].enabled)
     {
@@ -200,7 +200,7 @@ static void DrawSpectrum()
     
     if (set.mem.modeWork == ModeWork::Dir)
     {
-        int numPoints = DS->SizeChannel();
+        uint numPoints = DS->SizeChannel();
     
         if (numPoints > 2048)       /// \todo Пока 8к и более не хочет считать
         {

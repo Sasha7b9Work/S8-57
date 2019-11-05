@@ -45,22 +45,22 @@ bool DataSettings::Equals(const DataSettings &ds) const
 }
 
 
-int DataSettings::SizeChannel() const
+uint DataSettings::SizeChannel() const
 {
     ENumPointsFPGA points((ENumPointsFPGA::E)ENUM_POINTS(this));
-    return static_cast<int>(points.BytesInChannel(PEAKDET(this)));
+    return points.BytesInChannel(PEAKDET(this));
 }
 
 
-int DataSettings::PointsInChannel() const
+uint DataSettings::PointsInChannel() const
 {
-    return static_cast<int>(ENumPointsFPGA((ENumPointsFPGA::E)ENUM_POINTS(this)).PointsInChannel());
+    return ENumPointsFPGA((ENumPointsFPGA::E)ENUM_POINTS(this)).PointsInChannel();
 }
 
 
-int DataSettings::NeedMemoryForData() const
+uint DataSettings::NeedMemoryForData() const
 {
-    int result = 0;
+    uint result = 0;
 
     if (enableA)
     {

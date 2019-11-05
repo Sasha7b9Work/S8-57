@@ -44,7 +44,7 @@ Packet *Packet::Next() const
 }
 
 
-int Packet::Size() const
+uint Packet::Size() const
 {
     if (IsFree())
     {
@@ -103,7 +103,7 @@ bool Sector::ExistPackets() const
 }
 
 
-static void WriteToROM(uint *address, const void *data, int size)
+static void WriteToROM(uint *address, const void *data, uint size)
 {
     HAL_FLASH::WriteBufferBytes(*address, data, size);
     *address += size;
@@ -137,6 +137,22 @@ const Packet *Sector::WriteData(uint numInROM, const DataSettings *ds) const
     }
 
     uint recordAddress = packet->Address();
+
+    uint end = End();
+
+    uint sizePacket = sizeof(Packet);
+
+    uint sizeDS = sizeof(DataSettings);
+
+    uint sizeData = static_cast<uint>(ds->SizeChannel() * 2);
+
+    volatile uint needSpace = sizePacket + sizeDS + sizeData;
+
+    needSpace = needSpace;
+
+    volatile uint existSpace = end - recordAddress;
+
+    existSpace = existSpace;
 
     if (packet->Address() + Packet::GetPackedSize(ds) > End() - 10)      // Если пакет при записи вылезет за границу сектора. Даём запас - в конце сектора должны остаться миниму 4 байта,
     {                                                                    // помеченные 0xFFFFFFFF во избежание лишних проверок за выход за пределы сектора.

@@ -12,7 +12,7 @@
 static uint16 numSignals[2] = { 0, 0 };
 
 
-void AveragerOsci::Process(Chan::E ch, const uint8 *dataNew, int size)
+void AveragerOsci::Process(Chan::E ch, const uint8 *dataNew, uint size)
 {
     /*
         ¬ режиме рандомизатора в усреднении надо использовать только те данные, которы считаны. Ќельз€ брать данные дл€ усреднени€ из предыдущего сохранЄнного сигнала.
@@ -21,8 +21,8 @@ void AveragerOsci::Process(Chan::E ch, const uint8 *dataNew, int size)
 
     uint16 numAve = static_cast<uint16>(set.disp.ENumAverage);
 
-    int index = 0;
-    int step = 1;
+    uint index = 0;
+    uint step = 1;
 
     if (Osci::InModeRandomizer())
     {
@@ -43,14 +43,14 @@ void AveragerOsci::Process(Chan::E ch, const uint8 *dataNew, int size)
         {
             std::memset(AVE_DATA(ch), 0, static_cast<uint>(size) * 2);
 
-            for (int i = 0; i < size; i++)
+            for (uint i = 0; i < size; i++)
             {
                 av[i] = dataNew[i];
             }
         }
         else
         {
-            for (int i = index; i < size; i += step)
+            for (uint i = index; i < size; i += step)
             {
                 av[i] += *_new;
 
@@ -60,7 +60,7 @@ void AveragerOsci::Process(Chan::E ch, const uint8 *dataNew, int size)
     }
     else
     {
-        for (int i = index; i < size; i += step)
+        for (uint i = index; i < size; i += step)
         {
             av[i] = static_cast<uint16>(av[i] - (av[i] >> numAve) + *_new);
 

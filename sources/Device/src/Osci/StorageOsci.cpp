@@ -449,7 +449,7 @@ void DataOsciP2P::FillBufferForPeakDetDisabled(Chan::E ch, Buffer *buffer)
     }
     else
     {
-        for (int i = 0; i < NUM_BYTES; i++)
+        for (uint i = 0; i < NUM_BYTES; i++)
         {
             buffer->data[NUM_BYTES - i] = ByteFromEnd(ch, i);
         }
@@ -470,7 +470,7 @@ void DataOsciP2P::FillBufferForPeakDetEnabled(Chan::E ch, Buffer *buffer)
     }
     else
     {
-        for (int i = 0; i < NUM_BYTES; i++)
+        for (uint i = 0; i < NUM_BYTES; i++)
         {
             buffer->data[NUM_BYTES - i] = ByteFromEnd(ch, i);
         }
@@ -485,14 +485,14 @@ void DataOsciP2P::PrepareBuffer(Buffer *buffer, uint size)
 }
 
 
-uint8 DataOsciP2P::ByteFromEnd(Chan::E ch, int fromEnd)
+uint8 DataOsciP2P::ByteFromEnd(Chan::E ch, uint fromEnd)
 {
     if (fromEnd > data.settings.SizeChannel())      // Если требуется значение, большее чем возможно сохранить
     {
         return VALUE::NONE;
     }
 
-    int index = pointerToByte;        // index будет указывать на позицию возвращаемого значения
+    int index = static_cast<int>(pointerToByte);        // index будет указывать на позицию возвращаемого значения
 
     while (fromEnd != 0)
     {
@@ -500,7 +500,7 @@ uint8 DataOsciP2P::ByteFromEnd(Chan::E ch, int fromEnd)
         index--;
         if (index < 0)
         {
-            index = data.settings.SizeChannel() - 1;
+            index = static_cast<int>(data.settings.SizeChannel() - 1);
         }
     }
 

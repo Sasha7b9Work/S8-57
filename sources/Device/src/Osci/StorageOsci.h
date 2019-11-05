@@ -62,7 +62,7 @@ private:
     /// ¬озвращает true, если считано меньше точек, чем требуетс€ дл€ данного времени
     bool NeedAdditionPoints(uint timeMS) const;
     /// ¬озвращает fromEnd-й байт с конца данных
-    uint8 ByteFromEnd(Chan::E ch, int fromEnd);
+    uint8 ByteFromEnd(Chan::E ch, uint fromEnd);
     /// ¬озвращает количество прочитанных байт
     uint ReadingBytes() const;
     /// «аполнить буфер дл€ отрисовки при включенном детекторе
@@ -74,7 +74,7 @@ private:
     ///  оличество считанных точек
     uint readingPoints;
     /// ”казатель на положение байта, который будет записан следующим
-    int pointerToByte;
+    uint pointerToByte;
 };
 
 class StorageOsci

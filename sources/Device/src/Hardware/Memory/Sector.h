@@ -30,7 +30,7 @@ struct Packet
     bool IsValid() const { return (state == STATE_VALID); }
     Packet *Next() const;
     bool UnPack(DataSettings **ds) const;
-    int Size() const;
+    uint Size() const;
     uint Address() const { return reinterpret_cast<uint>(this); };
     /// ƒелает попытку записи пакета в сектор sector. ¬ случае неудачи возвращает false
     bool WriteToSector(const Sector *sector) const;
@@ -87,8 +87,7 @@ struct Sector
     void Erase() const;
     /// ѕеремещает пакеты из сектора src. ѕакеты в исходном секторе src затираютс€
     void MovePacketsFromSector(const Sector *src) const;
-    /// ¬озвращает указатель на первый пакет с данными. nullptr, если пакетов с данными нет
-    const Packet *GetFirstPacketWithData() const;
+    //const Packet *GetFirstPacketWithData() const;
     /// true означает, что в сектор не записан ни один пакет
     bool ExistPackets() const;
 

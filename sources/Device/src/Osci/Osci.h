@@ -34,13 +34,13 @@ struct Osci
 
     static int addShift;
 
-    static const int Kr[TBase::Count];
+    static const uint Kr[TBase::Count];
 
     /// Структура для хранения информации, необходимой для чтения в режиме рандомизатора
     struct StructReadRand
     {
-        int step;       ///< Шаг между точками
-        int posFirst;   ///< Позиция первой считанной точки
+        uint step;       ///< Шаг между точками
+        uint posFirst;   ///< Позиция первой считанной точки
     };
     /// Возвращает данные, необходимые для чтения даннхы в режмиме рандомизатора.
     /// Если Tsm == 0, то структура будет использоваться не для чтения данных, а для правильного усредения.
@@ -50,7 +50,7 @@ struct Osci
 
 struct AveragerOsci
 {
-    static void Process(Chan::E ch, const uint8 *dataNew, int size);
+    static void Process(Chan::E ch, const uint8 *dataNew, uint size);
     static void SettingChanged();
     static void Draw();
 };
