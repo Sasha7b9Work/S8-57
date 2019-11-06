@@ -69,7 +69,7 @@ bool Test::FlashMemory::Data::Test()
     {
         static int num = -1;
 
-        num = Display::AddMessage(String("Запись %d из %d", i, numRecord).CString(), num);
+        num = Display::AddMessage(String("Запись %d из %d, %3.1f%%", i, numRecord, 100.0F * i / numRecord).CString(), num);
 
         DataSettings ds;
 

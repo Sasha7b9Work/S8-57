@@ -52,7 +52,7 @@ static void Update()
 
 static String *CreateMessage(char *message)
 {
-    return new String("%d %s", Timer::TimeMS() / 1000, message);
+    return new String("%3d %s", Timer::TimeMS() / 1000, message);
 }
 
 
