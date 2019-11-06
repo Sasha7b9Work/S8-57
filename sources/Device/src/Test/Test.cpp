@@ -2,9 +2,11 @@
 #include "Test/Test.h"
 
 
-bool Test::Run()
+void Test::Run()
 {
+    Display::Init();
+
     FlashMemory::Data::Test();
-    
-    return false;
+
+    Display::DeInit();
 }

@@ -3,7 +3,14 @@
 
 namespace Test
 {
-    bool Run();
+    void Run();
+
+    namespace Display
+    {
+        void Init();
+
+        void DeInit();
+    }
 
     namespace FlashMemory
     {
