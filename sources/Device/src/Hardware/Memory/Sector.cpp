@@ -16,18 +16,11 @@ bool Packet::UnPack(DataSettings **ds) const
 {
     if (!IsValid() || !IsData())
     {
+        *ds = nullptr;
         return false;
     }
 
-    DataSettings *settings;
-
-    uint8 *pointer = const_cast<uint8 *>(reinterpret_cast<const uint8 *>(this) + sizeof(Packet));
-
-    settings = reinterpret_cast<DataSettings *>(pointer);
-
-    settings = settings;
-
-    *ds = reinterpret_cast<DataSettings *>(pointer);
+    *ds = const_cast<DataSettings *>(reinterpret_cast<const DataSettings *>(reinterpret_cast<const uint8 *>(this) + sizeof(Packet)));
 
     return true;
 }

@@ -67,7 +67,7 @@ bool Test::FlashMemory::Data::Test()
 
     ::FlashMemory::Data::EraseAll();
 
-    for (int i = 0; i < 100000; i++)
+    for (int i = 0; i < 10000; i++)
     {
         DataSettings ds;
 
