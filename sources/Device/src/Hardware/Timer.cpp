@@ -125,13 +125,6 @@ void Timer::SetAndStartOnce(TypeTimer::E type, pFuncVV func, uint dTms)
 }
 
 
-void Timer::SetAndEnable(TypeTimer::E type, pFuncVV func, uint dTms)
-{
-    Set(type, func, dTms);
-    Enable(type);
-}
-
-
 void Timer::StartOnce(TypeTimer::E type)
 {
     timers[type].repeat = false;

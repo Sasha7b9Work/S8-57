@@ -776,19 +776,14 @@
           <GroupName>Hardware</GroupName>
           <Files>
             <File>
-              <FileName>AT25160N.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Hardware\AT25160N.cpp</FilePath>
-            </File>
-            <File>
               <FileName>AT25160N.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Hardware\AT25160N.h</FilePath>
             </File>
             <File>
-              <FileName>Battery.cpp</FileName>
+              <FileName>AT25160N.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\Hardware\Battery.cpp</FilePath>
+              <FilePath>.\src\Hardware\AT25160N.cpp</FilePath>
             </File>
             <File>
               <FileName>Battery.h</FileName>
@@ -796,9 +791,9 @@
               <FilePath>.\src\Hardware\Battery.h</FilePath>
             </File>
             <File>
-              <FileName>Beeper.cpp</FileName>
+              <FileName>Battery.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\Hardware\Beeper.cpp</FilePath>
+              <FilePath>.\src\Hardware\Battery.cpp</FilePath>
             </File>
             <File>
               <FileName>Beeper.h</FileName>
@@ -806,9 +801,9 @@
               <FilePath>.\src\Hardware\Beeper.h</FilePath>
             </File>
             <File>
-              <FileName>Timer.cpp</FileName>
+              <FileName>Beeper.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\Hardware\Timer.cpp</FilePath>
+              <FilePath>.\src\Hardware\Beeper.cpp</FilePath>
             </File>
             <File>
               <FileName>Timer.h</FileName>
@@ -816,14 +811,24 @@
               <FilePath>.\src\Hardware\Timer.h</FilePath>
             </File>
             <File>
-              <FileName>VCP.cpp</FileName>
+              <FileName>Timer.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\Hardware\VCP.cpp</FilePath>
+              <FilePath>.\src\Hardware\Timer.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Timer_stm.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\Timer_stm.cpp</FilePath>
             </File>
             <File>
               <FileName>VCP.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Hardware\VCP.h</FilePath>
+            </File>
+            <File>
+              <FileName>VCP.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\VCP.cpp</FilePath>
             </File>
           </Files>
         </Group>
