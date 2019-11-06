@@ -1685,6 +1685,16 @@
               <FileType>5</FileType>
               <FilePath>.\src\Test\Test.h</FilePath>
             </File>
+            <File>
+              <FileName>Test_Display.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Test\Test_Display.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Test_Memory.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Test\Test_Memory.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
