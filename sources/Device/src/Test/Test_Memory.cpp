@@ -59,21 +59,17 @@ bool Test::FlashMemory::Data::Test()
 
     Display::AddMessage("Стираю память");
 
-    Display::Update();
-
     static uint totalMemory = 0;
 
     ::FlashMemory::Data::EraseAll();
 
-    int numRecord = 64;
+    int numRecord = 8192;
 
     for (int i = 0; i < numRecord; i++)
     {
         static int num = -1;
 
-        num = Display::AddMessage(String("Запись %d из %d", i, numRecord).CString());
-
-        Display::Update();
+        num = Display::AddMessage(String("Запись %d из %d", i, numRecord).CString(), num);
 
         DataSettings ds;
 
