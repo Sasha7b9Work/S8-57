@@ -11,7 +11,7 @@ int main(void)
 
     AT25160N::Init();
 
-//    Test::Run();
+    Test::Run();
 
     while (1)
     {
