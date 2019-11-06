@@ -26,18 +26,17 @@ class LogEntity
 #define SHIFT_IN_MEMORY_IN_POINTS   Display::ShiftInMemoryInPoints()
 
 
+struct DrawMode
+{
+    enum E
+    {
+        Auto,
+        Hand
+    } value;
+};
 
 struct Display
 {
-    struct DrawMode
-    {
-        enum E
-        {
-            Auto,
-            Hand
-        } value;
-    };
-
     static const int HEIGHT = 240;
 
     static const int WIDTH = 320;

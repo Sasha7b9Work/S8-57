@@ -65,12 +65,6 @@ struct HAL_TIM3
     static void StopIT();
 };
 
-struct HAL_TIM4
-{
-    static void Init(uint timeMS, void (*func)());
-    static void DeInit();
-};
-
 struct HAL_USART3
 {
     static void Init(pFuncVV recvCallback);

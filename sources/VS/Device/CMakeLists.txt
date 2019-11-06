@@ -155,7 +155,6 @@ source_group(Hardware\\HAL      FILES   ../../Device/src/Hardware/HAL/HAL.h
                                         ../../Device/src/Hardware/HAL/HAL_RTC.cpp
                                                      src/Hardware/HAL/HAL_TIM2_win.cpp
                                                      src/Hardware/HAL/HAL_TIM3_win.cpp
-                                                     src/Hardware/HAL/HAL_TIM4_win.cpp
                                         ../../Device/src/Hardware/HAL/HAL_USART3.cpp
                                                      src/Hardware/HAL/HAL_win.cpp)
 source_group(Hardware\\Memory   FILES   ../../Device/src/Hardware/Memory/Sector.h
@@ -276,7 +275,6 @@ file(GLOB SOURCES   ../../common/_VS/*
                     ../../Device/src/Hardware/HAL/HAL_RTC.cpp
                                  src/Hardware/HAL/HAL_TIM2_win.cpp
                                  src/Hardware/HAL/HAL_TIM3_win.cpp
-                                 src/Hardware/HAL/HAL_TIM4_win.cpp
                     ../../Device/src/Hardware/HAL/HAL_USART3.cpp
                     
                     ../../Device/src/Hardware/Memory/Sector.h

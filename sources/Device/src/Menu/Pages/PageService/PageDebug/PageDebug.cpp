@@ -365,7 +365,7 @@ static void DebugShowSetInfo_Draw()
 
 static void OnOpenClose_Settings(bool)
 {
-    Display::SetDrawMode(Display::DrawMode::Auto, DebugShowSetInfo_Draw);
+    Display::SetDrawMode(DrawMode::Auto, DebugShowSetInfo_Draw);
 }
 
 DEF_PAGE_5( pSettings,                                                                                                                         //--- Œ“À¿ƒ ¿ - Õ¿—“–Œ… » ---

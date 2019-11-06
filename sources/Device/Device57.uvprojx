@@ -951,11 +951,6 @@
               <FilePath>.\src\Hardware\HAL\HAL_TIM3_stm.cpp</FilePath>
             </File>
             <File>
-              <FileName>HAL_TIM4_stm.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Hardware\HAL\HAL_TIM4_stm.cpp</FilePath>
-            </File>
-            <File>
               <FileName>HAL_USART3.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Hardware\HAL\HAL_USART3.cpp</FilePath>
