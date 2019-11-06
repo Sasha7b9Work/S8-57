@@ -856,6 +856,11 @@
           <GroupName>Hardware/HAL</GroupName>
           <Files>
             <File>
+              <FileName>stm32f4xx_hal_conf.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Hardware\HAL\stm32f4xx_hal_conf.h</FilePath>
+            </File>
+            <File>
               <FileName>HAL.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Hardware\HAL\HAL.h</FilePath>
@@ -886,9 +891,9 @@
               <FilePath>.\src\Hardware\HAL\HAL_DAC1.cpp</FilePath>
             </File>
             <File>
-              <FileName>HAL_DAC2.cpp</FileName>
+              <FileName>HAL_DAC2_stm.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\Hardware\HAL\HAL_DAC2.cpp</FilePath>
+              <FilePath>.\src\Hardware\HAL\HAL_DAC2_stm.cpp</FilePath>
             </File>
             <File>
               <FileName>HAL_FLASH_stm.cpp</FileName>
@@ -896,9 +901,9 @@
               <FilePath>.\src\Hardware\HAL\HAL_FLASH_stm.cpp</FilePath>
             </File>
             <File>
-              <FileName>HAL_FSMC.cpp</FileName>
+              <FileName>HAL_FSMC_stm.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\Hardware\HAL\HAL_FSMC.cpp</FilePath>
+              <FilePath>.\src\Hardware\HAL\HAL_FSMC_stm.cpp</FilePath>
             </File>
             <File>
               <FileName>HAL_IT.cpp</FileName>
@@ -936,29 +941,24 @@
               <FilePath>.\src\Hardware\HAL\HAL_RTC.cpp</FilePath>
             </File>
             <File>
-              <FileName>HAL_TIM2.cpp</FileName>
+              <FileName>HAL_TIM2_stm.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\Hardware\HAL\HAL_TIM2.cpp</FilePath>
+              <FilePath>.\src\Hardware\HAL\HAL_TIM2_stm.cpp</FilePath>
             </File>
             <File>
-              <FileName>HAL_TIM3.cpp</FileName>
+              <FileName>HAL_TIM3_stm.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\Hardware\HAL\HAL_TIM3.cpp</FilePath>
+              <FilePath>.\src\Hardware\HAL\HAL_TIM3_stm.cpp</FilePath>
             </File>
             <File>
-              <FileName>HAL_TIM4.cpp</FileName>
+              <FileName>HAL_TIM4_stm.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\Hardware\HAL\HAL_TIM4.cpp</FilePath>
+              <FilePath>.\src\Hardware\HAL\HAL_TIM4_stm.cpp</FilePath>
             </File>
             <File>
               <FileName>HAL_USART3.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Hardware\HAL\HAL_USART3.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f4xx_hal_conf.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Hardware\HAL\stm32f4xx_hal_conf.h</FilePath>
             </File>
           </Files>
         </Group>
