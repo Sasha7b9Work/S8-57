@@ -55,12 +55,26 @@ namespace Test
 
 bool Test::FlashMemory::Data::Test()
 {
+    Display::StartTest("Тест флеш-памяти");
+
+    Display::AddMessage("Стираю память");
+
+    Display::Update();
+
     static uint totalMemory = 0;
 
     ::FlashMemory::Data::EraseAll();
 
-    for (int i = 0; i < 12800; i++)
+    int numRecord = 64;
+
+    for (int i = 0; i < numRecord; i++)
     {
+        static int num = -1;
+
+        num = Display::AddMessage(String("Запись %d из %d", i, numRecord).CString());
+
+        Display::Update();
+
         DataSettings ds;
 
         PrepareDS(&ds);
@@ -88,7 +102,11 @@ bool Test::FlashMemory::Data::Test()
         continue;
     }
     
+    Display::AddMessage("Cтираю память");
+
     ::FlashMemory::Data::EraseAll();
+
+    Display::AddMessage("Завершено успешно");
 
     return true;
 }

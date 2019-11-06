@@ -4,6 +4,7 @@
 
 
 template class Queue<WarningStruct>;
+template class Queue<String *>;
 
 
 template<typename T>

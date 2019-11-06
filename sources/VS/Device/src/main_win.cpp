@@ -8,13 +8,20 @@
 void init()
 {
     Device::Init();
-
-    Test::Run();
 }
 
 
 
 void update()
 {
+    static bool first = true;
+
+    if (first)
+    {
+        first = false;
+
+        Test::Run();
+    }
+
     Device::Update();
 }

@@ -10,6 +10,12 @@ namespace Test
         void Init();
 
         void DeInit();
+
+        void Update();
+
+        void StartTest(char *nameTest);
+
+        int AddMessage(char *message, int num = -1);
     }
 
     namespace FlashMemory
