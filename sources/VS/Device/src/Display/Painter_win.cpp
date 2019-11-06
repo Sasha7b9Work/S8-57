@@ -360,6 +360,10 @@ void Frame::HandlerEvents()
                 Close(true);
             }
             break;
+
+        case SDL_USEREVENT:
+            reinterpret_cast<void (*)()>(event.user.data1)();
+            break;
         }
     }
 

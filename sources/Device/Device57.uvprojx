@@ -811,11 +811,6 @@
               <FilePath>.\src\Hardware\Timer.h</FilePath>
             </File>
             <File>
-              <FileName>Timer.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Hardware\Timer.cpp</FilePath>
-            </File>
-            <File>
               <FileName>Timer_stm.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Hardware\Timer_stm.cpp</FilePath>
