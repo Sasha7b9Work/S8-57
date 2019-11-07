@@ -115,8 +115,6 @@ bool Queue<T>::IsEmpty() const
 template<typename T>
 T &Queue<T>::operator[](int n)
 {
-    static T result(0);
-
     if (pointer != nullptr)
     {
         int index = iFront + n;
@@ -125,6 +123,8 @@ T &Queue<T>::operator[](int n)
             return pointer[index];
         }
     }
+
+	static T result(0);
 
     return result;
 }
