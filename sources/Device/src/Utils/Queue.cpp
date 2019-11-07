@@ -122,7 +122,7 @@ T &Queue<T>::operator[](int n)
         int index = iFront + n;
         if (index >= iFront && index < iBack)
         {
-            result = pointer[index];
+            return pointer[index];
         }
     }
 
