@@ -18,6 +18,7 @@ struct Symbol8
         GOVERNOR_SHIFT_3 = '\x0e',  ///< Символ регулятора
         GOVERNOR_LEFT    = '\x80',
         GOVERNOR_RIGHT   = '\x81',
+        CROSS            = '\x88',  ///< Символ диагонального креста
         TPOS_1           = '\x8a',  ///< 2-я часть символа TPos
         TPOS_2           = '\x8b',  ///< 1-я часть символа TPos
         RSHIFT_NORMAL    = '\x93',  ///< Символ смещения по напряжению нормальный

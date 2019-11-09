@@ -16,8 +16,8 @@
 #include "Utils/Values.h"
 
 
-/// Ќарисовать карту пам€ти сохраннных сигналов
-static void DrawMemoryMap(int num, bool exist);
+/// Ќарисовать одну €чейчку пам€ти
+static void DrawMemoryCell(int num, bool exist);
 
 static bool HandlerKey_ROM(const KeyEvent &event);
 
@@ -155,11 +155,11 @@ static void AfterDraw_ROM()
 
     for (int i = 0; i < FlashMemory::Data::MAX_NUM_SAVED_WAVES; i++)
     {
-        DrawMemoryMap(i, exist[i]);
+        DrawMemoryCell(i, exist[i]);
     }
 }
 
-static void DrawMemoryMap(int num, bool exist)
+static void DrawMemoryCell(int num, bool exist)
 {
     int x = Grid::Left() + 2 + num * 12;
     int y = Grid::FullBottom() - 13;
@@ -175,7 +175,7 @@ static void DrawMemoryMap(int num, bool exist)
     }
     else
     {
-        String("\x88").Draw(x + 3, y + 1);
+        String(Symbol8::CROSS).Draw(x + 3, y + 1);
     }
 }
 
