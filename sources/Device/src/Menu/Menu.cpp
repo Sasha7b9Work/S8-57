@@ -210,10 +210,6 @@ static void ClosePage(Page *page)
 // Закрыть parent, если он является хранителем page
 static void CloseIfSubPage(Page *parent, Page *page)
 {
-    PageName::E name = page->GetName();
-
-    name = name;
-
     if (page == parent)
     {
         ClosePage(parent);

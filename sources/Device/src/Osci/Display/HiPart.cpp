@@ -15,25 +15,13 @@
 #include <cstdio>
 
 
-class Separator
+struct Separator
 {
-private:
-    VLine *line;
-public:
-    Separator()
+    static void Draw(int x, int y)
     {
-        line = new VLine(17);
-    }
-    ~Separator()
-    {
-        delete line;
-    }
-    void Draw(int x, int y)
-    {
-        line->Draw(x, y, Color::FILL);
+        VLine(17).Draw(x, y, Color::FILL);
     }
 };
-
 
 
 /// Написать параметры вертикального тракта заданного канала
@@ -54,7 +42,6 @@ static void WriteCursors();
 static void DrawPeakDet(int x, int y);
 
 
-
 void DisplayOsci::HiPart::Draw()
 {
     const int y0 = 0;
@@ -71,7 +58,7 @@ void DisplayOsci::HiPart::Draw()
 
     Font::SetCurrent(TypeFont::_8);
 
-    Separator().Draw(x + 1, y0);
+    Separator::Draw(x + 1, y0);
 
     if (set.mem.modeWork == ModeWork::Dir)
     {
@@ -133,7 +120,7 @@ static int DrawMainParameters(int _x, int _y)
 
     x += 98;
 
-    Separator().Draw(x - 3, _y - 1);
+    Separator::Draw(x - 3, _y - 1);
 
     const int SIZE = 100;
     char buffer[SIZE] = { 0 };
@@ -205,7 +192,7 @@ static int DrawMainParameters(int _x, int _y)
 
     x += 77;
 
-    Separator().Draw(x - 2, y0 - 1);
+    Separator::Draw(x - 2, y0 - 1);
 
     if (set.mem.modeWork == ModeWork::Dir)
     {
@@ -214,7 +201,7 @@ static int DrawMainParameters(int _x, int _y)
         WriteStringAndNumber("мн\x93мкс", x, y2, NUM_MIN_MAX);
     }
 
-    Separator().Draw(x + 43, y0 - 1);
+    Separator::Draw(x + 43, y0 - 1);
 
     return _x + 93;
 }
@@ -317,7 +304,7 @@ static void DrawRightPart(int x0, int y0)
 {
     // Синхроимпульс
 
-    Separator().Draw(x0 - 1, y0);
+    Separator::Draw(x0 - 1, y0);
 
     static const int xses[3] = { 280, 271, 251 };
     int x = xses[set.mem.modeWork];
