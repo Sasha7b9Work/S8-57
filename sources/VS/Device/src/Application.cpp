@@ -49,8 +49,7 @@ int main(int argc, char **argv)
 
     if (SDL_Init(SDL_INIT_EVERYTHING) != 0U) //-V2517
     {
-        AllocConsole();
-        std::cout << "SDL_Init Error:" << SDL_GetError() << std::endl;
+        LOG_ERROR("SDL_Init Error: %s", SDL_GetError());
     }
 
     return wxEntry(argc, argv);

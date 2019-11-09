@@ -81,11 +81,7 @@ void Painter::Init()
 
     if (window == nullptr)
     {
-        std::cout << "SDL_CreateWindowFrom() Error: " << SDL_GetError() << std::endl;
-    }
-    else
-    {
-        std::cout << "Create SDL window is ok" << std::endl;
+        LOG_ERROR("SDL_CreateWindowFrom() Error: %s", SDL_GetError());
     }
 
     renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
@@ -311,7 +307,6 @@ void Frame::OnDown(wxCommandEvent &event)
 {
     Key::E key = static_cast<Key::E>(event.GetId());
 
-    std::cout << "down " << Key(key).Name() << std::endl;
     event.Skip();
 
     BufferButtons::Push(KeyEvent(key, TypePress::Press));
@@ -326,7 +321,6 @@ void Frame::OnUp(wxCommandEvent &event)
 {
     Key::E key = static_cast<Key::E>(event.GetId());
 
-    std::cout << "up   " << Key(key).Name() << std::endl;
     event.Skip();
 
     BufferButtons::Push(KeyEvent(key, TypePress::Release));

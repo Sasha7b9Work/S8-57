@@ -3,11 +3,6 @@
 
 
 
-class LogEntity
-{
-    friend class Log;
-};
-
 #define DISPLAY_SHOW_WARNING(warn)  Display::ShowWarning(warn)
 
 #define MOSI_HEIGHT         9

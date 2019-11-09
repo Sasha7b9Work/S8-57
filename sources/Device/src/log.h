@@ -12,10 +12,8 @@
 
 
 
-class Log
+struct Log
 {
-public:
     static void Message(const char *message);
     static void Message(const char *file, int line, char *message);
-private:
 };

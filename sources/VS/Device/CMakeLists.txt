@@ -74,19 +74,19 @@ source_group(SCPI                                       REGULAR_EXPRESSION      
 source_group(Test                                       REGULAR_EXPRESSION              src/Test/*)
 source_group(Tester                                     REGULAR_EXPRESSION              src/Tester/*)
 source_group(Utils                                      REGULAR_EXPRESSION              src/Utils/*)
-source_group(src                FILES                src/Application.cpp
-                                                     src/Application.h
+source_group(src                FILES                src/Application.h
+                                                     src/Application.cpp
                                                      src/main_win.cpp
-                                        ../../Device/src/defines.cpp
                                         ../../Device/src/defines.h
-                                        ../../Device/src/device.cpp
+                                        ../../Device/src/defines.cpp
                                         ../../Device/src/device.h
-                                        ../../Device/src/log_stm.cpp
+                                        ../../Device/src/device.cpp
                                         ../../Device/src/log.h
-                                        ../../Device/src/tables.cpp
+                                                     src/log_win.cpp
                                         ../../Device/src/tables.h
-                                        ../../Device/src/MessageMgr.cpp
-                                        ../../Device/src/MessageMgr.h)
+                                        ../../Device/src/tables.cpp
+                                        ../../Device/src/MessageMgr.h
+                                        ../../Device/src/MessageMgr.cpp)
 source_group(Display            FILES   ../../Device/src/Display/Colors.h
                                         ../../Device/src/Display/Colors.cpp
                                                      src/Display/Colors_win.cpp
@@ -327,19 +327,19 @@ file(GLOB SOURCES   ../../common/_VS/*
                     ../../Device/src/Tester/*
                     ../../Device/src/Utils/*
                     
-                                 src/Application.cpp
                                  src/Application.h
+                                 src/Application.cpp
                                  src/main_win.cpp
-                    ../../Device/src/defines.cpp
                     ../../Device/src/defines.h
-                    ../../Device/src/device.cpp
+                    ../../Device/src/defines.cpp
                     ../../Device/src/device.h
-                    ../../Device/src/log_stm.cpp
+                    ../../Device/src/device.cpp
                     ../../Device/src/log.h
-                    ../../Device/src/tables.cpp
+                                 src/log_win.cpp
                     ../../Device/src/tables.h
-                    ../../Device/src/MessageMgr.cpp
+                    ../../Device/src/tables.cpp
                     ../../Device/src/MessageMgr.h
+                    ../../Device/src/MessageMgr.cpp
                     )
                     
 add_executable(Device57 ${SOURCES})
