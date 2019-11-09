@@ -300,7 +300,7 @@ bool Color::WriteFlashColor()
 
 void Color::ResetFlash()
 {
-    Timer::SetAndEnable(TypeTimer::FlashDisplay, OnTimerFlashDisplay, 500);
+    Timer::SetAndEnable(TypeTimer::ColorFlash, OnTimerFlashDisplay, 500);
     inverseColor = false;
     WriteFlashColor();
 }
