@@ -304,7 +304,7 @@ static char* VoltageToString(float voltage, bool alwaysSign, char buffer[20]) //
         return buffer;
     }
 
-    pString suf[4] =
+    static const pString suf[4] =
     {
         "\x10ìêÂ", "\x10ìÂ", "\x10Â", "\x10êÂ"
     };
@@ -483,6 +483,17 @@ static char *FloatToString(float value, bool alwaysSign, int numDigits, char buf
         std::strcat(bufferOut, "0");
     }
     
+    char *pointer = bufferOut;
+
+    while(*pointer)
+    {
+        if(*pointer == ',')
+        {
+            *pointer = '.';
+        }
+        pointer++;
+    }
+
     return bufferOut;
 }
 
