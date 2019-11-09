@@ -108,6 +108,7 @@ struct HAL_NVIC
     static void EnableIRQ(uint irq);
     static void DisableIRQ(uint irq);
     static void SetPriorityIRQ(uint irq, uint main, uint sub);
+    static void SystemReset();
 };
 
 struct HAL_FSMC

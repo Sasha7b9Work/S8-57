@@ -23,3 +23,9 @@ void HAL_NVIC::SetPriorityIRQ(uint irq, uint main, uint sub)
 {
     HAL_NVIC_SetPriority(static_cast<IRQn_Type>(irq), main, sub);
 }
+
+
+void HAL_NVIC::SystemReset()
+{
+    HAL_NVIC_SystemReset();
+}

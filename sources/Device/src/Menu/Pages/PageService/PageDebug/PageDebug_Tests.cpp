@@ -7,6 +7,7 @@
 static void OnPress_Run()
 {
     set.dbg.runTest = true;
+    set.Save();
     Device::Reset();
 }
 

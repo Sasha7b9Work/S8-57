@@ -28,6 +28,11 @@ extern "C"
     {
 
     }
+
+    void HAL_NVIC_SystemReset()
+    {
+
+    }
 }
 
 

@@ -23,6 +23,7 @@ extern "C"
     uint32_t HAL_SYSTICK_Config(uint32_t TicksNumb);
     void HAL_NVIC_EnableIRQ(IRQn_Type IRQn);
     void HAL_NVIC_DisableIRQ(IRQn_Type IRQn);
+    void HAL_NVIC_SystemReset();
     void HAL_SYSTICK_IRQHandler(void);
     void HAL_SYSTICK_CLKSourceConfig(uint32_t CLKSource);
     void HAL_NVIC_SetPriorityGrouping(uint32_t PriorityGroup);

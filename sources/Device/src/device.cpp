@@ -214,5 +214,5 @@ bool Device::State::InModeRecorder()
 
 void Device::Reset()
 {
-
+    HAL_NVIC::SystemReset();
 }
