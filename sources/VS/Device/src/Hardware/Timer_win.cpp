@@ -17,15 +17,9 @@ static SDL_Event events[TypeTimer::Count];
 static SDL_UserEvent userEvents[TypeTimer::Count];
 
 
-static uint CallbackFunc(uint interval, void *pointer)
+static uint CallbackFunc(uint interval, void *parameter)
 {
-    SDL_TimerID *typeID = reinterpret_cast<SDL_TimerID *>(pointer);
-
-    int index = typeID - &id[0];
-
-    events[index].user = userEvents[index];
-
-    SDL_PushEvent(&events[index]);
+    SDL_PushEvent(reinterpret_cast<SDL_Event *>(parameter));
     return interval;
 }
 
@@ -41,9 +35,9 @@ void Timer::SetAndEnable(TypeTimer::E type, pFuncVV func, uint dTms)
 
     Disable(type);
 
-    SDL_TimerID *pointer = &id[type];
+    SDL_Event *paramter = &events[type];
 
-    id[type] = SDL_AddTimer(dTms, CallbackFunc, pointer);
+    id[type] = SDL_AddTimer(dTms, CallbackFunc, paramter);
 }
 
 
