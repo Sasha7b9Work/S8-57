@@ -1,11 +1,9 @@
 #include "defines.h"
-#include "Command.h"
-#include "Message.h"
+#include "structs.h"
+#include "common/Command.h"
+#include "common/Message.h"
 #include <cstdlib>
 #include <cstring>
-#include <cstdlib>
-#include "structs.h"
-
 
 
 Message::Message() : allocated(0), used(0), data(0)

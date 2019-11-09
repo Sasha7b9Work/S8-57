@@ -3,7 +3,6 @@
 #include "Settings/Settings.h"
 
 
-
 void DataSettings::Fill(uint8 *_dataA, uint8 * _dataB)
 {
     dataA = _dataA;

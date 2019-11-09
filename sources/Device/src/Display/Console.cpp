@@ -1,5 +1,5 @@
 #include "defines.h"
-#include "Console.h"
+#include "Display/Console.h"
 #include "Display/Primitives.h"
 #include "Display/Painter.h"
 #include "Settings/Settings.h"

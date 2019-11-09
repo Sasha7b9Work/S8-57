@@ -3,7 +3,6 @@
 #include <stdlib.h>
 
 
-
 uint8 *PainterMem::buffer = 0;
 uint8 *PainterMem::endBuffer = 0;
 int   PainterMem::width = 0;

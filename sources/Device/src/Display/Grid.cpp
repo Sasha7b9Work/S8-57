@@ -1,12 +1,7 @@
 #include "defines.h"
-#include "log.h"
 #include "device.h"
 #include "Display/Primitives.h"
 #include "Display/Grid.h"
-#include "Menu/MenuItems.h"
-#include "Settings/Settings.h"
-#include "Utils/Debug.h"
-
 
 /// Нарисовать сетку для режима осциллографа
 static void DrawOsci();

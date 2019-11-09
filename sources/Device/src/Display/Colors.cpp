@@ -1,12 +1,8 @@
 #include "defines.h"
-#include "log.h"
 #include "common/Transceiver.h"
-#include "Display/Painter.h"
-#include "Hardware/HAL/HAL.h"
 #include "Hardware/Timer.h"
 #include "Settings/Settings.h"
 #include "Utils/Math.h"
-#include <cmath>
 
 
 extern uint GlobalColors[256] =

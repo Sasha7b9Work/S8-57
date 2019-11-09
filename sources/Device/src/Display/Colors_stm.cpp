@@ -2,7 +2,6 @@
 #include "Display/Colors.h"
 
 
-
 void Color::SetAsCurrent()
 {
     if (value != Color::NUMBER.value)
