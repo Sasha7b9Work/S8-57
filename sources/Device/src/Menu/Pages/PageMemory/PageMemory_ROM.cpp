@@ -142,6 +142,10 @@ DEF_GRAPH_BUTTON_HINTS_2( bTypeSignal,                                          
 
 static void OnOpenClose_ROM(bool open)
 {
+    if(open)
+    {
+        Color::ResetFlash();
+    }
     Osci::SetModeWork(open ? ModeWork::ROM : ModeWork::Dir);
 }
 

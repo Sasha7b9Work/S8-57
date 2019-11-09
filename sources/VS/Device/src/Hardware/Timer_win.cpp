@@ -44,6 +44,8 @@ void Timer::SetAndEnable(TypeTimer::E type, pFuncVV func, uint dTms)
     userEvt.data1 = func;
     userEvt.code = TIMER_PERIODIC;
 
+    Disable(type);
+
     id[type] = SDL_AddTimer(dTms, CallbackFunc, nullptr);
 }
 
