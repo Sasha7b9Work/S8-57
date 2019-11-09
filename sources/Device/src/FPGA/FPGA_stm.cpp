@@ -1,17 +1,9 @@
 #include "defines.h"
-#include "log.h"
-#include "device.h"
-#include "FPGA.h"
-#include "AD9286.h"
-#include "Display/Display.h"
-#include "Hardware/Timer.h"
-#include "Settings/Settings.h"
-#include "Utils/Buffer.h"
-#include "Utils/Values.h"
+#include "FPGA/AD9286.h"
+#include "FPGA/FPGA.h"
 #include "Hardware/HAL/HAL.h"
-#include "Osci/StorageOsci.h"
-#include "Data/Reader.h"
-#include <stdlib.h>
+#include "Osci/Osci.h"
+#include "Settings/Settings.h"
 #include <cstring>
 
 

@@ -1,17 +1,11 @@
 #include "defines.h"
 #include "device.h"
-#include "log.h"
 #include "FPGA/FPGA.h"
 #include "Hardware/HAL/HAL.h"
-#include "Hardware/Timer.h"
-#include "Menu/Pages/Include/PageChannels.h"
-#include "Utils/Math.h"
 #include "Settings/Settings.h"
 #include "Recorder/Recorder.h"
 #include "Osci/StorageOsci.h"
-#include "Data/Reader.h"
 #include <cstring>
-#include <stdlib.h>
 
 
 uint16 FPGA::valueADC = 0;

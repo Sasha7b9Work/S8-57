@@ -1,7 +1,7 @@
 #include "defines.h"
+#include "Display/Display.h"
 #include "Display/Grid.h"
 #include "FPGA/FPGA.h"
-#include "FPGA/MathFPGA.h"
 #include "Settings/Settings.h"
 #include "Utils/Math.h"
 #include <cmath>
