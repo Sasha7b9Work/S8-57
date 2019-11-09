@@ -14,7 +14,6 @@ static SDL_TimerID id[TypeTimer::Count] = { -1, -1, -1 -1, -1, -1, -1, -1, -1, -
 static bool busy = false;
 
 static SDL_Event events[TypeTimer::Count];
-static SDL_UserEvent userEvents[TypeTimer::Count];
 
 
 static uint CallbackFunc(uint interval, void *parameter)
@@ -26,18 +25,20 @@ static uint CallbackFunc(uint interval, void *parameter)
 
 void Timer::SetAndEnable(TypeTimer::E type, pFuncVV func, uint dTms)
 {
-    userEvents[type].type = SDL_USEREVENT + static_cast<uint>(type);
-    userEvents[type].data1 = func;
-    userEvents[type].code = TIMER_PERIODIC;
+    SDL_UserEvent userEvent;
 
-    events[type].type = userEvents[type].type;
-    events[type].user = userEvents[type];
+    userEvent.type = SDL_USEREVENT + static_cast<uint>(type);
+    userEvent.data1 = func;
+    userEvent.code = TIMER_PERIODIC;
+
+    events[type].type = userEvent.type;
+    events[type].user = userEvent;
 
     Disable(type);
 
-    SDL_Event *paramter = &events[type];
+    SDL_Event *parameter = &events[type];
 
-    id[type] = SDL_AddTimer(dTms, CallbackFunc, paramter);
+    id[type] = SDL_AddTimer(dTms, CallbackFunc, parameter);
 }
 
 
