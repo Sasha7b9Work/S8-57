@@ -4,7 +4,7 @@
 #include <SDL.h>
 
 
-static SDL_TimerID id[TypeTimer::Count] = { -1, -1, -1 -1, -1, -1, -1, -1, -1, -1, -1, -1};
+static SDL_TimerID id[TypeTimer::Count] = { -1, -1, -1 - 1, -1, -1, -1, -1, -1, -1, -1, -1 };`
 
 
 #define TIMER_PERIODIC 1        // Таймер работает периодически
