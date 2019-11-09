@@ -50,12 +50,12 @@ void Timer::SetAndEnable(TypeTimer::E type, pFuncVV func, uint dTms)
 }
 
 
-void Timer::SetAndStartOnce(TypeTimer::E type, pFuncVV func, uint)
+void Timer::SetAndStartOnce(TypeTimer::E type, pFuncVV, uint)
 {
     Disable(type);
 
-    userEvt.data1 = func;
-    userEvt.code = TIMER_ONCE;
+//    userEvt.data1 = func;
+//    userEvt.code = TIMER_ONCE;
 }
 
 
