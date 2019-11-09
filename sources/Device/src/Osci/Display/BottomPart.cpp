@@ -1,7 +1,7 @@
 #include "defines.h"
 #include "Display/Symbols.h"
 #include "Display/Primitives.h"
-#include "Display/Font/Font.h"
+#include "common/Display/Font/Font.h"
 #include "FlashDrive/FlashDrive.h"
 #include "Hardware/Battery.h"
 #include "Hardware/VCP.h"

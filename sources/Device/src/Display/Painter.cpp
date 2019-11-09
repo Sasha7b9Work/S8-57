@@ -1,6 +1,6 @@
 #include "defines.h"
-#include "Command.h"
-#include "Transceiver.h"
+#include "common/Command.h"
+#include "common/Transceiver.h"
 #include "Display/Painter.h"
 #include "Hardware/Timer.h"
 #include "Utils/Buffer.h"

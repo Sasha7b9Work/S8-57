@@ -1,6 +1,6 @@
 #include "defines.h"
-#include "Command.h"
-#include "Transceiver.h"
+#include "common/Command.h"
+#include "common/Transceiver.h"
 #include "Display/Primitives.h"
 #include "Utils/Buffer.h"
 #include <cstring>

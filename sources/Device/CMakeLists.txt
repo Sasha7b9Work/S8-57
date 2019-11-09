@@ -11,7 +11,7 @@ include_directories(../common/_VS
                     ../common/libs/STM32Cube_F4/Middlewares/ST/STM32_USB_Host_Library/Class/MSC/Inc
                     ../common/libs/STM32Cube_F4/Middlewares/ST/STM32_USB_Device_Library/Core/Inc
                     ../common/libs/STM32Cube_F4/Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc
-                    ../common
+                    ../
                     src
                     src/Hardware/HAL
                     src/Hardware/FatFS
@@ -119,6 +119,6 @@ file(GLOB SOURCES   ../common/_VS/*
 					src/Test/*
                     src/Tester/*
                     src/Utils/*
-                    src/*.*)
+                    src/*)
 
 add_library(Device57 ${SOURCES})

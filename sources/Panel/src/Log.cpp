@@ -1,7 +1,7 @@
 #include "defines.h"
-#include "Command.h"
-#include "Transceiver.h"
-#include "Log.h"
+#include "common/Command.h"
+#include "common/Transceiver.h"
+#include "log.h"
 #include <Display/Display.h>
 #include <Hardware/CPU.h>
 #include <stdarg.h>

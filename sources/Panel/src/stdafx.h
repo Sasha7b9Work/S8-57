@@ -2,8 +2,8 @@
 
 #ifdef WIN32
 #include "defines.h"
-#include "Command.h"
-#include "Message.h"
+#include "common/Command.h"
+#include "common/Message.h"
 
 #include <cstring>
 

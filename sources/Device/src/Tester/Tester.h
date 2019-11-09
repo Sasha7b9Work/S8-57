@@ -1,5 +1,5 @@
 #pragma once
-#include "Command.h"
+#include "common/Command.h"
 #include "Hardware/HAL/HAL_PIO.h"
 #include "Settings/SettingsOsci.h"
 

@@ -1,9 +1,9 @@
 #pragma once
 #include "defines.h"
-#include "Command.h"
+#include "common/Command.h"
 #include "Display/Colors.h"
 #include "Display/DisplayTypes.h"
-#include "Display/Font/Font.h"
+#include "common/Display/Font/Font.h"
 
 
 struct Painter

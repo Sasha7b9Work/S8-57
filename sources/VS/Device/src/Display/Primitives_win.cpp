@@ -1,5 +1,5 @@
 #include "defines.h"
-#include "Transceiver.h"
+#include "common/Transceiver.h"
 #include "Display/Primitives.h"
 #include "Display/Painter.h"
 #include <SDL.h>

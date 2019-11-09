@@ -3,7 +3,7 @@
 #include "Display.h"
 #include "Display/Painter.h"
 #include "main.h"
-#include "Display/Font/Font.h"
+#include "common/Display/Font/Font.h"
 #include "Hardware/Timer.h"
 #include "Utils/Math.h"
 #include "Settings/Settings.h"

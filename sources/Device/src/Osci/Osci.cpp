@@ -1,6 +1,6 @@
 #include "defines.h"
 #include "device.h"
-#include "Transceiver.h"
+#include "common/Transceiver.h"
 #include "Data/Reader.h"
 #include "FPGA/ContextOsci.h"
 #include "Hardware/Timer.h"

@@ -3,7 +3,7 @@
 #include "Display/Grid.h"
 #include "Display/Painter.h"
 #include "Display/Primitives.h"
-#include "Display/Font/Font.h"
+#include "common/Display/Font/Font.h"
 #include "FileManager.h"
 #include "FlashDrive/FlashDrive.h"
 #include "Hardware/Beeper.h"

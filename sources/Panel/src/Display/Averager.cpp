@@ -1,6 +1,6 @@
 #include "defines.h"
 #include "Log.h"
-#include "Command.h"
+#include "common/Command.h"
 #include "Averager.h"
 #include <cstring>
 

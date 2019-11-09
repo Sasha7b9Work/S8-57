@@ -8,7 +8,7 @@ include_directories(../../VS/Device/src
                     ../../Device/src/Hardware/HAL
                     ../../Device/src/Hardware/USBD
                     ../../Device/src/Hardware/USBH
-                    ../../common
+                    ../..
                     ../../common/_VS/CMSIS
                     ../../common/_VS/FatFS
                     ../../common/_VS/HAL

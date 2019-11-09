@@ -1,0 +1,14 @@
+Скачать - https://www.softloading.ru/neinternet/grafika/14/sg-bitmap-font-editor/2142.html
+
+Настройки экспорта SG Bitmap Font Editor 1.9
+
+Construction units - "Right to left"
+Construction lines - "Right to left"
+Bytes per unit     - "1"
+Align line by start point - off
+Align scan by start point - off
+
+Block size - "1"
+Skip       - "0"
+
+Binary output - on

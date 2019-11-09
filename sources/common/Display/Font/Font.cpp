@@ -1,6 +1,6 @@
 #include "defines.h"
-#include "Command.h"
-#include "Transceiver.h"
+#include "common/Command.h"
+#include "common/Transceiver.h"
 #include "Hardware/HAL/HAL.h"
 #include "font8.inc"
 #include "font5.inc"
