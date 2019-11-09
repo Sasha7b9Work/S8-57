@@ -1,8 +1,6 @@
 #include "defines.h"
-#pragma warning(push)
-#pragma warning(disable:4018 4076 4091 4189 4365 4459 4571 4625 4668 5026 5027)
+#pragma warning(push, 0)
 #include "Application.h"
-
 
 #define uint    unsigned int
 #define int8    signed char
@@ -13,14 +11,14 @@
 #define uchar   unsigned char
 #define pString const char * const
 
-#include "Display/Painter.h"
-#include "Keyboard/BufferButtons.h"
-
 #include <SDL.h>
-
 #include <wx/display.h>
 
 #pragma warning(pop)
+
+#include "Display/Painter.h"
+#include "Hardware/Timer.h"
+#include "Keyboard/BufferButtons.h"
 
 
 #undef uint   
@@ -348,6 +346,13 @@ void Frame::HandlerEvents()
     while (SDL_PollEvent(&event))
     {
         SDL_PumpEvents();
+
+        if(event.type >= SDL_USEREVENT && event.type < SDL_USEREVENT + TypeTimer::Count)
+        {
+            reinterpret_cast<void (*)()>(event.user.data1)();
+            continue;
+        }
+
         switch (event.type)
         {
         case SDL_KEYDOWN:
@@ -355,10 +360,6 @@ void Frame::HandlerEvents()
             {
                 Close(true);
             }
-            break;
-
-        case SDL_USEREVENT:
-            reinterpret_cast<void (*)()>(event.user.data1)();
             break;
         }
     }

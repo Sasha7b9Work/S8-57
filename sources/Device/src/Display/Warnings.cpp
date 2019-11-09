@@ -114,5 +114,5 @@ int WarningStruct::Height(int) const
 
 void WarningStruct::Draw(int x, int y, int width) const
 {
-    Text(message).DrawInBoundedRectWithTransfers(x, y, width, Color::BACK, Color::FILL);
+    Text(message).DrawInBoundedRectWithTransfers(x, y, width, Color::FLASH_10, Color::FLASH_01);
 }

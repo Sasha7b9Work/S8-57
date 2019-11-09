@@ -8,6 +8,8 @@
 /// Количество тиков, прошедших с момента последнего вызова функции Timer_StartMultiMeasurement(). Не более (1 << 32)
  /// В одной секунде 120.000.000 тиков для С8-53 и 90.000.000 тиков для С8-54.
  /// Максимальный отрезок времени, который можно отсчитать с её помощью - 35 сек.
+#undef TIME_TICKS
+#undef TIME_MS
 #define TIME_TICKS Timer::TimeTicks()
 #define TIME_US    Timer::TimeUS()
 #define TIME_MS    Timer::TimeMS()

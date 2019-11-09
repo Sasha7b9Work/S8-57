@@ -31,7 +31,6 @@ static uint CallbackFunc(uint interval, void *)
     SDL_Event event = evt;
     SDL_UserEvent userEvent = userEvt;
 
-    event.type = SDL_USEREVENT;
     event.user = userEvent;
 
     SDL_PushEvent(&event);
@@ -41,6 +40,9 @@ static uint CallbackFunc(uint interval, void *)
 
 void Timer::SetAndEnable(TypeTimer::E type, pFuncVV func, uint dTms)
 {
+    evt.type = SDL_USEREVENT + static_cast<uint>(type);
+
+    userEvt.type = SDL_USEREVENT + static_cast<uint>(type);
     userEvt.data1 = func;
     userEvt.code = TIMER_PERIODIC;
 
