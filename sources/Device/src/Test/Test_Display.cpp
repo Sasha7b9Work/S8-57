@@ -50,7 +50,7 @@ static void Update()
 }
 
 
-static String *CreateMessage(char *message)
+static String *CreateMessage(const char *message)
 {
     return new String("%3d %s", Timer::TimeMS() / 1000, message);
 }

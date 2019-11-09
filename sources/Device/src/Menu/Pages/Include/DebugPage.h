@@ -46,10 +46,10 @@ struct SettingsNRST
 
 struct SettingsDebug
 { //-V802
-    int8         showConsole;               ///< Показывать ли консоль
-    int16        numStrings;                ///< Число строк в консоли.
-    int8         sizeFont;                  ///< Размер шрифта консоли - 0 - 5, 1 - 8.
-    bool         modePauseConsole;          ///< Если true, то вывод в консоль останавливается нажатием кнопки ПУСК/СТОП.
+    int8         showConsole;                   ///< Показывать ли консоль
+    int16        numStrings;                    ///< Число строк в консоли.
+    int8         sizeFont;                      ///< Размер шрифта консоли - 0 - 5, 1 - 8.
+    bool         modePauseConsole;              ///< Если true, то вывод в консоль останавливается нажатием кнопки ПУСК/СТОП.
     bool         showAll;
     bool         showFlag;
     bool         showRShift[2];
@@ -59,16 +59,17 @@ struct SettingsDebug
     bool         showTrigParam;
     bool         showTShift;
     bool         showTBase;
-    int16        numMeasuresForGates;       ///< Число измерений для ворот.
-    bool         showRandInfo;              ///< Выводить информацию по рандомизатору - ворота и считанное значение.
-    bool         showRandStat;              ///< Выводить график статистики.
-    int16        timeCompensation;          ///< Дополнительное смещение по времени для данной развёртки режима рандомизатора.
-    int16        pretriggered;              ///< Регулируемая величина предзапуска для исследования рандомизатора.
-    bool         ShowStats;                 ///< Показывать статистику на экране (fps, например).
-    int16        enum_gate_max;             ///< Ограничение ворот в рандомизаторе сверху
-    int16        enum_gate_min;             ///< Ограничение ворот в рандомизаторе снизу
-    int8         addRShift[2][Range::Count]; ///< Добавочные смещения для 
+    int16        numMeasuresForGates;           ///< Число измерений для ворот.
+    bool         showRandInfo;                  ///< Выводить информацию по рандомизатору - ворота и считанное значение.
+    bool         showRandStat;                  ///< Выводить график статистики.
+    int16        timeCompensation;              ///< Дополнительное смещение по времени для данной развёртки режима рандомизатора.
+    int16        pretriggered;                  ///< Регулируемая величина предзапуска для исследования рандомизатора.
+    bool         ShowStats;                     ///< Показывать статистику на экране (fps, например).
+    int16        enum_gate_max;                 ///< Ограничение ворот в рандомизаторе сверху
+    int16        enum_gate_min;                 ///< Ограничение ворот в рандомизаторе снизу
+    int8         addRShift[2][Range::Count];    ///< Добавочные смещения для 
     SettingsNRST nrst;
+    bool         runTest;                       ///< Если true, то нужно выполнять тест при запуске
 };
 
 float   GetStretchADC(Chan::E ch);

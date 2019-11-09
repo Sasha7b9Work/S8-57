@@ -210,10 +210,10 @@ const Settings Settings::defaultSettings =
 
     // Ìåíþ ÑÅÐÂÈÑ
     {
-        ColorScheme::WhiteLetters,          // colorScheme
-        CalibratorMode::Freq,               // calibratorMode
-        0,                                  // soundVolume
-        false                               // showInfoVoltage
+        ColorScheme::WhiteLetters,              // colorScheme
+        CalibratorMode::Freq,                   // calibratorMode
+        0,                                      // soundVolume
+        false                                   // showInfoVoltage
     },
         
     // Ìåíþ ÎÒËÀÄÊÀ
@@ -254,5 +254,6 @@ const Settings Settings::defaultSettings =
             {},                                 // rShiftAdd[Chan::Count][Range::Count][2]
             0                                   // correctionTime
         },
+        false                                   // runTest
     }
 };

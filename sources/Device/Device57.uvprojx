@@ -421,11 +421,6 @@
               <FilePath>.\src\defines.h</FilePath>
             </File>
             <File>
-              <FileName>main.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\main.cpp</FilePath>
-            </File>
-            <File>
               <FileName>defines.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\defines.cpp</FilePath>
@@ -441,24 +436,24 @@
               <FilePath>.\src\device.h</FilePath>
             </File>
             <File>
-              <FileName>log.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\log.cpp</FilePath>
-            </File>
-            <File>
               <FileName>log.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\log.h</FilePath>
             </File>
             <File>
-              <FileName>tables.cpp</FileName>
+              <FileName>log_stm.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\tables.cpp</FilePath>
+              <FilePath>.\src\log_stm.cpp</FilePath>
             </File>
             <File>
-              <FileName>tables.h</FileName>
+              <FileName>main.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\main.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>MessageMgr.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\src\tables.h</FilePath>
+              <FilePath>.\src\MessageMgr.h</FilePath>
             </File>
             <File>
               <FileName>MessageMgr.cpp</FileName>
@@ -466,9 +461,14 @@
               <FilePath>.\src\MessageMgr.cpp</FilePath>
             </File>
             <File>
-              <FileName>MessageMgr.h</FileName>
+              <FileName>tables.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\src\MessageMgr.h</FilePath>
+              <FilePath>.\src\tables.h</FilePath>
+            </File>
+            <File>
+              <FileName>tables.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\tables.cpp</FilePath>
             </File>
           </Files>
         </Group>

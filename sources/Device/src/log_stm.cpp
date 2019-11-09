@@ -2,13 +2,9 @@
 #include "log.h"
 #include "Display/Console.h"
 #include "Utils/String.h"
-#include <cstring>
-#include <stdio.h>
-
 
 
 #define SIZE_BUFFER 100
-
 
 
 void Log::Message(const char *message)

@@ -45,8 +45,11 @@ int main(int argc, char **argv)
 {
     setlocale(LC_ALL, "Russian");
 
+    FreeConsole();
+
     if (SDL_Init(SDL_INIT_EVERYTHING) != 0U) //-V2517
     {
+        AllocConsole();
         std::cout << "SDL_Init Error:" << SDL_GetError() << std::endl;
     }
 

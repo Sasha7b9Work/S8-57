@@ -20,7 +20,12 @@ void update()
     {
         first = false;
 
-        Test::Run();
+        if(set.dbg.runTest)
+        {
+            set.dbg.runTest = false;
+
+            Test::Run();
+        }
     }
 
     Device::Update();

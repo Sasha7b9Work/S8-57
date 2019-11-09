@@ -1,7 +1,6 @@
 #pragma once
 #include "Keyboard/Keyboard.h"
 #include "Menu/MenuItems.h"
-#include "Object.h"
 
 
 /// ¬озвращает позицию активного пункта на странице Page::Name.

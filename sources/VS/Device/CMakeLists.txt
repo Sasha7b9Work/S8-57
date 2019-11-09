@@ -81,7 +81,7 @@ source_group(src                FILES                src/Application.cpp
                                         ../../Device/src/defines.h
                                         ../../Device/src/device.cpp
                                         ../../Device/src/device.h
-                                        ../../Device/src/log.cpp
+                                        ../../Device/src/log_stm.cpp
                                         ../../Device/src/log.h
                                         ../../Device/src/tables.cpp
                                         ../../Device/src/tables.h
@@ -334,7 +334,7 @@ file(GLOB SOURCES   ../../common/_VS/*
                     ../../Device/src/defines.h
                     ../../Device/src/device.cpp
                     ../../Device/src/device.h
-                    ../../Device/src/log.cpp
+                    ../../Device/src/log_stm.cpp
                     ../../Device/src/log.h
                     ../../Device/src/tables.cpp
                     ../../Device/src/tables.h
