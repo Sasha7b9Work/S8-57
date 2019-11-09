@@ -27,7 +27,8 @@ static void OnTimerAutoHide();
 static void ProcessButtonForHint(Key::E button);
 /// Написать подсказку
 static void DrawHint();
-
+/// Закрыть все страницы, которые не могут быть открытыми при включении
+static void CloseAllBadOpenedPages();
 
 
 void Menu::ProcessingAllKeyboardEvents()
@@ -209,6 +210,10 @@ static void ClosePage(Page *page)
 // Закрыть parent, если он является хранителем page
 static void CloseIfSubPage(Page *parent, Page *page)
 {
+    PageName::E name = page->GetName();
+
+    name = name;
+
     if (page == parent)
     {
         ClosePage(parent);
@@ -235,13 +240,7 @@ void Menu::Init()
         ClosePage(const_cast<Page *>(PageMultimeter::self));
     }
 
-    Page *opened = static_cast<Page *>(LastOpened(const_cast<Page *>(PageFunction::self))); //-V1027
-
-    CloseIfSubPage(const_cast<Page *>(PageMultimeter::self), opened);
-    CloseIfSubPage(const_cast<Page *>(PageRecorder::self), opened);
-    CloseIfSubPage(const_cast<Page *>(PageTester::self), opened);
-    CloseIfSubPage(const_cast<Page *>(PageFreqMeter::self), opened);
-    CloseIfSubPage(const_cast<Page *>(PageFFT::self), opened);
+    CloseAllBadOpenedPages();
 }
 
 
@@ -456,4 +455,22 @@ const Item *Menu::ItemUnderFunctionalKey(Key::E key)
     }
 
     return result;
+}
+
+
+static void CloseAllBadOpenedPages()
+{
+    Page *opened = static_cast<Page *>(LastOpened(const_cast<Page *>(PageFunction::self))); //-V1027
+
+    CloseIfSubPage(const_cast<Page *>(PageMultimeter::self), opened);
+    CloseIfSubPage(const_cast<Page *>(PageRecorder::self), opened);
+    CloseIfSubPage(const_cast<Page *>(PageTester::self), opened);
+    CloseIfSubPage(const_cast<Page *>(PageFreqMeter::self), opened);
+    CloseIfSubPage(const_cast<Page *>(PageFFT::self), opened);
+    CloseIfSubPage(const_cast<Page *>(PageMemory::self), opened);
+
+    opened = static_cast<Page *>(LastOpened(const_cast<Page *>(PageMemory::self)));
+
+    CloseIfSubPage(const_cast<Page *>(PageROM::self), opened);
+    CloseIfSubPage(const_cast<Page *>(PageRAM::self), opened);
 }
