@@ -483,16 +483,20 @@ static char *FloatToString(float value, bool alwaysSign, int numDigits, char buf
         std::strcat(bufferOut, "0");
     }
     
-    char *pointer = bufferOut;
+#ifdef WIN32
 
-    while(*pointer)
-    {
-        if(*pointer == ',')
-        {
-            *pointer = '.';
-        }
-        pointer++;
-    }
+    char *pointer = bufferOut;  //\
+                                //|
+    while(*pointer)             //|
+    {                           //| Это нужно на PC, где вместо точки может быть запятая
+        if(*pointer == ',')     //| 
+        {                       //|
+            *pointer = '.';     //|
+        }                       //|
+        pointer++;              //|
+    }                           ///
+
+#endif
 
     return bufferOut;
 }
