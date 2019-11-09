@@ -521,11 +521,6 @@
               <FilePath>.\src\Display\Colors.cpp</FilePath>
             </File>
             <File>
-              <FileName>Colors_stm.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Display\Colors_stm.cpp</FilePath>
-            </File>
-            <File>
               <FileName>Console.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Display\Console.h</FilePath>

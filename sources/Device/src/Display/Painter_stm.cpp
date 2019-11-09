@@ -8,7 +8,7 @@
 
 void Painter::Init()
 {
-    Timer::SetAndEnable(TypeTimer::ColorFlash, Color::OnTimerFlashDisplay, 500);
+    Color::InitGlobalColors();
 }
 
 

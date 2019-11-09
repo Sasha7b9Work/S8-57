@@ -38,7 +38,6 @@ extern uint GlobalColors[256] =
 };
 
 
-
 Color Color::BLACK(COLOR_BLACK);
 Color Color::WHITE(COLOR_WHITE);
 Color Color::MENU_FIELD(COLOR_MENU_FIELD);
@@ -77,14 +76,17 @@ Color Color::currentColor = Color::NUMBER;
 static bool  inverseColor = false;
 
 
+/// Каллбэк для изменения мерцающего цвета
+static void OnTimerFlashDisplay();
+/// Записывает мигающй цвет в дисплей. Возвращает false, если текущий цвет немигающий
+static bool WriteFlashColor();
+/// Записывает цвет в дисплей
+static void WriteToDisplay(Color color);
+
 
 void Color::InitGlobalColors()
 {
-    Color::BACK.value = (set.disp.background == Background::Black) ? Color::BLACK.value : Color::WHITE.value;
-    Color::FILL.value = (set.disp.background == Background::Black) ? Color::WHITE.value : Color::BLACK.value;
-    Color::CHAN[Chan::A].value = (set.disp.background == Background::Black) ? Color::CHAN[Chan::A].value : Color::DATA_WHITE_ACCUM_A.value;
-    Color::CHAN[Chan::B].value = (set.disp.background == Background::Black) ? Color::CHAN[Chan::B].value : Color::DATA_WHITE_ACCUM_B.value;
-    //Color::CHAN[A_B].value = Color::CHAN[MathCh].value = BACKGROUND_BLACK ? Color::WHITE.value : Color::BLACK.value;
+    Timer::SetAndEnable(TypeTimer::ColorFlash, OnTimerFlashDisplay, 500);
 }
 
 
@@ -279,16 +281,16 @@ Color Color::GetCurent()
 }
 
 
-bool Color::WriteFlashColor()
+static bool WriteFlashColor()
 {
     bool result = false;
 
-    if (currentColor == Color::FLASH_01)
+    if (Color::GetCurent() == Color::FLASH_01)
     {
         WriteToDisplay(inverseColor ? Color::FILL : Color::BACK);
         result = true;
     }
-    if (currentColor == Color::FLASH_10)
+    if (Color::GetCurent() == Color::FLASH_10)
     {
         WriteToDisplay(inverseColor ? Color::BACK : Color::FILL);
         result = true;
@@ -306,14 +308,14 @@ void Color::ResetFlash()
 }
 
 
-void Color::OnTimerFlashDisplay()
+static void OnTimerFlashDisplay()
 {
     inverseColor = !inverseColor;
     WriteFlashColor();
 }
 
 
-void Color::WriteToDisplay(Color color)
+static void WriteToDisplay(Color color)
 {
     static Color lastColor = Color::NUMBER;
 
@@ -341,4 +343,18 @@ void Color::LoadValueRGB()
     };
 
     Transceiver::Send(buffer, 6);
+}
+
+
+void Color::SetAsCurrent()
+{
+    if(value != Color::NUMBER.value)
+    {
+        currentColor = *this;
+    }
+
+    if(!WriteFlashColor())
+    {
+        WriteToDisplay(currentColor);
+    }
 }

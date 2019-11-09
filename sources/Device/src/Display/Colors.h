@@ -50,8 +50,6 @@ public:
     static Color GetCurent();
 
     static void ResetFlash();
-    /// Это системная функция. Вызывать самому нельзя
-    static void OnTimerFlashDisplay();
   
     static void InitGlobalColors();
     static void Log(Color color);
@@ -103,11 +101,6 @@ private:
         COLOR_FLASH_01 = 34,
         COLOR_INVERSE = 35
     };
-
-    /// Записывает мигающй цвет в дисплей. Возвращает false, если текущий цвет немигающий
-    static bool WriteFlashColor();
-    /// Записывает цвет в дисплей
-    static void WriteToDisplay(Color color);
 
     static Color currentColor;
 };
