@@ -13,7 +13,7 @@ void Log::Message(const char *message)
 }
 
 
-void Log::Message(const char *file, int line, char *message)
+void Log::Message(const char *file, int line, const char *message)
 {
     Console::AddString(String("%s %d %s", file, line, message).CString());
 }

@@ -15,5 +15,5 @@
 struct Log
 {
     static void Message(const char *message);
-    static void Message(const char *file, int line, char *message);
+    static void Message(const char *file, int line, const char *message);
 };

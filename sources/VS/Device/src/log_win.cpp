@@ -34,7 +34,7 @@ void Log::Message(const char *message)
 }
 
 
-void Log::Message(const char *file, int line, char *message)
+void Log::Message(const char *file, int line, const char *message)
 {
     String msg("%s %d %s", file, line, message);
 

@@ -11,9 +11,9 @@ namespace Test
 
         void DeInit();
 
-        void StartTest(char *nameTest);
+        void StartTest(const char *nameTest);
 
-        int AddMessage(char *message, int num = -1);
+        int AddMessage(const char *message, int num = -1);
     }
 
     namespace FlashMemory

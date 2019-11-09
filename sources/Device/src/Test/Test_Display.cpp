@@ -56,7 +56,7 @@ static String *CreateMessage(const char *message)
 }
 
 
-void Test::Display::StartTest(char *nameTest)
+void Test::Display::StartTest(const char *nameTest)
 {
     queue->Push(CreateMessage(nameTest));
 
@@ -64,7 +64,7 @@ void Test::Display::StartTest(char *nameTest)
 }
 
 
-int Test::Display::AddMessage(char *message, int num)
+int Test::Display::AddMessage(const char *message, int num)
 {
     int result = num;
 
