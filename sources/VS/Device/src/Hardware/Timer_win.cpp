@@ -13,42 +13,37 @@ static SDL_TimerID id[TypeTimer::Count] = { -1, -1, -1 -1, -1, -1, -1, -1, -1, -
 
 static bool busy = false;
 
+static SDL_Event events[TypeTimer::Count];
+static SDL_UserEvent userEvents[TypeTimer::Count];
 
-static SDL_Event evt;
-static SDL_UserEvent userEvt =
+
+static uint CallbackFunc(uint interval, void *pointer)
 {
-    SDL_USEREVENT,
-    0,
-    0,
-    0,                      // Если 
-    nullptr,                // Здесь указатель на функцию обработки
-    nullptr
-};
+    SDL_TimerID *typeID = reinterpret_cast<SDL_TimerID *>(pointer);
 
+    int index = typeID - &id[0];
 
-static uint CallbackFunc(uint interval, void *)
-{
-    SDL_Event event = evt;
-    SDL_UserEvent userEvent = userEvt;
+    events[index].user = userEvents[index];
 
-    event.user = userEvent;
-
-    SDL_PushEvent(&event);
+    SDL_PushEvent(&events[index]);
     return interval;
 }
 
 
 void Timer::SetAndEnable(TypeTimer::E type, pFuncVV func, uint dTms)
 {
-    evt.type = SDL_USEREVENT + static_cast<uint>(type);
+    userEvents[type].type = SDL_USEREVENT + static_cast<uint>(type);
+    userEvents[type].data1 = func;
+    userEvents[type].code = TIMER_PERIODIC;
 
-    userEvt.type = SDL_USEREVENT + static_cast<uint>(type);
-    userEvt.data1 = func;
-    userEvt.code = TIMER_PERIODIC;
+    events[type].type = userEvents[type].type;
+    events[type].user = userEvents[type];
 
     Disable(type);
 
-    id[type] = SDL_AddTimer(dTms, CallbackFunc, nullptr);
+    SDL_TimerID *pointer = &id[type];
+
+    id[type] = SDL_AddTimer(dTms, CallbackFunc, pointer);
 }
 
 
