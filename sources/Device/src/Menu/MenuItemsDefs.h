@@ -24,6 +24,7 @@ struct PageName
         Debug_Rand,
         Debug_SerialNumber,
         Debug_Settings,
+        Debug_Tests,
         /// ÄÈÑÏËÅÉ
         Display,
         Display_Accumulation,

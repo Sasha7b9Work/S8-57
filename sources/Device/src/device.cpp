@@ -210,3 +210,9 @@ bool Device::State::InModeRecorder()
 {
     return (CurrentMode() == Device::Mode::Recorder);
 }
+
+
+void Device::Reset()
+{
+
+}

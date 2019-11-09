@@ -1,5 +1,7 @@
 #pragma once
 #include "Menu/MenuItems.h"
+#include "Settings/SettingsOsci.h"
+
 
 /// \brief Тип балансировки АЦП каналов.
 /// Дело в том, что уровни АЦП не совпадают из-за отличия характеристик ( ? ), поэтому мы вводим дополнительное смещение для одного из АЦП канала.
@@ -97,7 +99,6 @@ struct PageDebug
     };
 
 
-
     struct PageRand
     {
         static const Page *const self;
@@ -111,6 +112,12 @@ struct PageDebug
 
 
     struct PageSerialNumber
+    {
+        static const Page *const self;
+    };
+
+
+    struct PageTests
     {
         static const Page *const self;
     };

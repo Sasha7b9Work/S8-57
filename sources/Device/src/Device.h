@@ -24,6 +24,8 @@ struct Device
 
     static void Update();
 
+    static void Reset();
+
 
     struct State
     {
