@@ -25,20 +25,12 @@ enum
 
 enum
 {
-    TIMER_ID = 1,
-    TIMER_LONG_ID = 2
+    TIMER_ID = 10,
+    TIMER_LONG_ID
 };
 
-wxBEGIN_EVENT_TABLE(Frame, wxFrame)
-    EVT_MENU(File_Size, Frame::OnSize)
-    EVT_MENU(File_Quit, Frame::OnQuit)
-    EVT_MENU(Help_About, Frame::OnAbout)
-    EVT_TIMER(TIMER_ID, Frame::OnTimer)
-    EVT_TIMER(TIMER_LONG_ID, Frame::OnTimerLong)
-wxEND_EVENT_TABLE()
 
 wxIMPLEMENT_APP_NO_MAIN(Application);
-
 
 
 int main(int argc, char **argv)
@@ -101,6 +93,12 @@ Frame::Frame(const wxString& title)
 
     CreateStatusBar(2);
     SetStatusText("Welcome to wxWidgets!");
+
+    Bind(wxEVT_MENU, &Frame::OnSize, this, File_Size);
+    Bind(wxEVT_MENU, &Frame::OnQuit, this, File_Quit);
+    Bind(wxEVT_MENU, &Frame::OnAbout, this, Help_About);
+    Bind(wxEVT_TIMER, &Frame::OnTimer, this, TIMER_ID);
+    Bind(wxEVT_TIMER, &Frame::OnTimerLong, this, TIMER_LONG_ID);
 
     timer.SetOwner(this, TIMER_ID);
 
