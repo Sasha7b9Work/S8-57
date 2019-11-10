@@ -78,23 +78,15 @@ DEF_GRAPH_BUTTON( bDelete,                                                      
 )
 
 
-static void SaveSignalToIntMemory()
-{
-    // Заносим в указатели DS, DATA_A, DATA_B данные из ОЗУ или последний считанный сигнал, в зависимости от того, из какого режима зашли в 
-    // "ПАМЯТЬ-ВНУТР ЗУ"
-    //Reader::ReadFromRAM(EXIT_FROM_ROM_TO_RAM ? NUM_RAM_SIGNAL : 0, 0, false);
-
-    if (DS)                                             // Если есть что сохранять
-    {
-//        Memory::SaveData(NUM_ROM_SIGNAL, DS, IN_A, IN_B);   // То сохраняем данные из DS, DATA_A, DATA_B на место NUM_ROM_SIGNAL в ППЗУ
-        Display::ShowWarning("СИГНАЛ СОХРАНЕН");
-    }
-}
-
 static void OnPress_SaveToMemory()
 {
     Display::FuncOnWaitStart("Записываю в память", false);
-    SaveSignalToIntMemory();
+
+    if(DS)
+    {
+
+    }
+
     Display::FuncOnWaitStop();
 }
 
