@@ -4,14 +4,6 @@
 #include "Data/DataSettings.h"
 
 
-uint Packet::GetPackedSize(const DataSettings *ds)
-{
-    return sizeof(Packet) +         // Packet
-        sizeof(DataSettings) +      // DataSettings
-        ds->NeedMemoryForData();    // data
-}
-
-
 bool Packet::UnPack(DataSettings **ds) const
 {
     if (!IsValid() || !IsData())
@@ -48,12 +40,6 @@ uint Packet::Size() const
 }
 
 
-void Compressor::Copy(Packet *dest, const Packet *src)
-{
-    HAL_FLASH::WriteBufferBytes(reinterpret_cast<uint>(dest), const_cast<const Packet *>(src), src->Size());
-}
-
-
 bool Packet::WriteToSector(const Sector *sector) const
 {
     const Packet *dest = sector->FirstPacket();
@@ -77,12 +63,22 @@ bool Packet::WriteToSector(const Sector *sector) const
     return true;
 }
 
+
 void Packet::Erase() const
 {
     uint data = STATE_ERASED;
 
     HAL_FLASH::WriteBufferBytes(Address(), &data, 4);
 }
+
+
+uint Packet::GetPackedSize(const DataSettings *ds)
+{
+    return sizeof(Packet) +         // Packet
+        sizeof(DataSettings) +      // DataSettings
+        ds->NeedMemoryForData();    // data
+}
+
 
 uint Sector::End() const
 {

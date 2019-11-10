@@ -13,7 +13,9 @@
 #define SIZE_SECTOR(i) (SECTOR(i).size)
 #define END_SECTOR(i) (ADDR_SECTOR(i) + SIZE_SECTOR(i))
 
+
 struct Sector;
+
 
 struct Packet   
 {
@@ -39,12 +41,6 @@ struct Packet
     static uint GetPackedSize(const DataSettings *ds);
 };
 
-
-struct Compressor
-{
-    /// Скопировать пакет из src в dest
-    static void Copy(Packet *dest, const Packet *src);
-};
 
 struct Sector
 {
