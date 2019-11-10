@@ -70,7 +70,7 @@ static void AfterDraw_RAM()
     int height = 10;
     Region(width, height).Fill(Grid::Right() - width, Grid::Top(), Color::BACK);
     Rectangle(width, height).Draw(Grid::Right() - width, Grid::Top(), Color::FILL);
-    Integer(MemoryRAM::CurrentSignal() + 1).ToString(false, 3).Draw(Grid::Right() - width + 2, Grid::Top() + 1);
+    Integer(MemoryRAM::currentSignal + 1).ToString(false, 3).Draw(Grid::Right() - width + 2, Grid::Top() + 1);
     String("/").Draw(Grid::Right() - width + 17, Grid::Top() + 1);
     Integer(StorageOsci::NumElementsInStorage()).ToString(false, 3).Draw(Grid::Right() - width + 23, Grid::Top() + 1);
 }

@@ -8,12 +8,6 @@ int16 MemoryRAM::currentSignal = 0;
 
 
 
-int16 MemoryRAM::CurrentSignal()
-{
-    return currentSignal;
-}
-
-
 void MemoryRAM::SelectNextSignal()
 {
     Math::CircleIncrease<int16>(&currentSignal, 0, static_cast<int16>(StorageOsci::NumElementsInStorage()) - 1);
