@@ -8,6 +8,11 @@
 
 int16 MemoryRAM::currentSignal = 0;
 
+/// Указатель на самый старый записанный пакет. Он будет стёрт первым
+PacketRAM *oldest = reinterpret_cast<PacketRAM *>(Heap::Begin());
+/// Указатель на последний записанный пакет. Он будет стёрт последним
+PacketRAM *newest = reinterpret_cast<PacketRAM *>(Heap::Begin());
+
 
 void MemoryRAM::Init()
 {
@@ -17,17 +22,22 @@ void MemoryRAM::Init()
 
 void MemoryRAM::Save(const DataSettings *ds)
 {
-    PacketRAM *packet = PacketRAM::Newest();
+    PacketRAM *packet = newest;
 
-    if(packet == nullptr)                                   
+    if(packet->IsEmpty())
     {
-        packet = reinterpret_cast<PacketRAM *>(Heap::Begin());
         packet->Pack(ds);
     }
     else
     {
         packet->PackNewest(ds);
     }
+}
+
+
+bool PacketRAM::IsEmpty() const
+{
+    return (addrNext == 0x0);
 }
 
 
@@ -40,18 +50,6 @@ bool MemoryRAM::Read(DataSettings **, uint)
 uint MemoryRAM::NumberDatas()
 {
     return 0;
-}
-
-
-PacketRAM *PacketRAM::Oldest()
-{
-    return nullptr;
-}
-
-
-PacketRAM *PacketRAM::Newest()
-{
-    return nullptr;
 }
 
 
