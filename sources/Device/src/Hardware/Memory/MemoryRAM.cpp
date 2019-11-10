@@ -15,11 +15,19 @@ void MemoryRAM::Init()
 }
 
 
-void MemoryRAM::Save(const DataSettings *)
+void MemoryRAM::Save(const DataSettings *ds)
 {
-    //PacketRAM *oldest = PacketRAM::Oldest();
-    //
-    //PacketRAM *newest = PacketRAM::Newest();
+    PacketRAM *packet = PacketRAM::Newest();
+
+    if(packet == nullptr)                                   
+    {
+        packet = reinterpret_cast<PacketRAM *>(Heap::Begin());
+        packet->Pack(ds);
+    }
+    else
+    {
+        packet->PackNewest(ds);
+    }
 }
 
 
@@ -42,6 +50,18 @@ PacketRAM *PacketRAM::Oldest()
 
 
 PacketRAM *PacketRAM::Newest()
+{
+    return nullptr;
+}
+
+
+void PacketRAM::Pack(const DataSettings *)
+{
+
+}
+
+
+PacketRAM *PacketRAM::PackNewest(const DataSettings *)
 {
     return nullptr;
 }

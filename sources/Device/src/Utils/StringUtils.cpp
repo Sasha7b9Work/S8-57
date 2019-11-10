@@ -315,7 +315,7 @@ char SU::ToUpper(char symbol)
 
     if(s == 0x40)        // ¸
     {
-        return static_cast<char>(0xc5);
+        return '\xc5';
     }
     else if(s >= 0x60 && s <= 0x7a)
     {

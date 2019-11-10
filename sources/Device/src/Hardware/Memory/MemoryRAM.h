@@ -14,6 +14,10 @@ struct PacketRAM
     static PacketRAM *Oldest();
     /// Возвращает указатель на самый новый пакет. Но будет перезаписан последним
     static PacketRAM *Newest();
+    /// Упаковать данные по адресу this
+    void Pack(const DataSettings *ds);
+    /// Упаковать данные после данного пакета. Возвращает указатель на упкованный пакет, котоырй становится самым новым
+    PacketRAM *PackNewest(const DataSettings *ds);
 };
 
 
