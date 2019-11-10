@@ -50,7 +50,7 @@ uint Packet::Size() const
 
 void Compressor::Copy(Packet *dest, const Packet *src)
 {
-    FlashMemory::Write(reinterpret_cast<uint>(dest), const_cast<const Packet *>(src), src->Size());
+    MemoryROM::Write(reinterpret_cast<uint>(dest), const_cast<const Packet *>(src), src->Size());
 }
 
 
@@ -72,7 +72,7 @@ bool Packet::WriteToSector(const Sector *sector) const
         return false;
     }
 
-    FlashMemory::Write(addressWrite, this, size);
+    MemoryROM::Write(addressWrite, this, size);
 
     return true;
 }
@@ -256,7 +256,7 @@ const Packet *Sector::FirstFreePacket() const
 }
 
 
-void Sector::GetDataInfo(bool existData[FlashMemory::Data::MAX_NUM_SAVED_WAVES]) const
+void Sector::GetDataInfo(bool existData[MemoryROM::Data::MAX_NUM_SAVED_WAVES]) const
 {
     const Packet *packet = FirstPacket();
 

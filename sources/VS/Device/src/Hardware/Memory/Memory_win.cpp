@@ -7,7 +7,7 @@
 #define FILE_NAME "memory.bin"
 
 
-extern uint8 eeprom[FlashMemory::SIZE];
+extern uint8 eeprom[MemoryROM::SIZE];
 
 
 void MemorySave()
@@ -17,7 +17,7 @@ void MemorySave()
     if (file)
     {
         SDL_RWseek(file, 0, RW_SEEK_SET);
-        SDL_RWwrite(file, eeprom, 1, FlashMemory::SIZE);
+        SDL_RWwrite(file, eeprom, 1, MemoryROM::SIZE);
         SDL_RWclose(file);
     }
 }
@@ -29,11 +29,11 @@ void MemoryLoad()
 
     if (file)
     {
-        SDL_RWread(file, eeprom, 1, FlashMemory::SIZE);
+        SDL_RWread(file, eeprom, 1, MemoryROM::SIZE);
         SDL_RWclose(file);
     }
 	else
 	{
-		std::memset(eeprom, 0xFF, FlashMemory::SIZE);
+		std::memset(eeprom, 0xFF, MemoryROM::SIZE);
 	}
 }

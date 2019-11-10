@@ -9,7 +9,7 @@
 #define _128K (128 * 1024)
 
 
-uint8 eeprom[FlashMemory::SIZE];
+uint8 eeprom[MemoryROM::SIZE];
 
 
 const Sector HAL_FLASH::sectors[Sector::Count] =

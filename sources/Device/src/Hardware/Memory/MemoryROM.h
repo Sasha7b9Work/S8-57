@@ -5,7 +5,7 @@
 struct DataSettings;
 
 
-struct FlashMemory
+struct MemoryROM
 {
 	static const uint SIZE = 2 * 1024 * 1024;
 

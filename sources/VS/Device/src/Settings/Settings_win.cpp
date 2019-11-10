@@ -16,7 +16,7 @@ void Settings::Load(bool _default)
 
     MemoryLoad();
 
-    if(_default || !FlashMemory::Settings::Load())
+    if(_default || !MemoryROM::Settings::Load())
     {
         Reset();
         Osci::Init();
@@ -28,7 +28,7 @@ void Settings::Load(bool _default)
 
 void Settings::Save()
 {
-    FlashMemory::Settings::Save();
+    MemoryROM::Settings::Save();
 
     MemorySave();
 }

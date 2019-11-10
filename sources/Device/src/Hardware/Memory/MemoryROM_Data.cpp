@@ -29,7 +29,7 @@ static const Sector *GetMostWornSector();
 static void CopyDataToFreeSpace(const Sector *src);
 
 
-void FlashMemory::Data::GetInfo(bool existData[MAX_NUM_SAVED_WAVES])
+void MemoryROM::Data::GetInfo(bool existData[MAX_NUM_SAVED_WAVES])
 {
     for (int i = 0; i < MAX_NUM_SAVED_WAVES; i++)
     {
@@ -43,7 +43,7 @@ void FlashMemory::Data::GetInfo(bool existData[MAX_NUM_SAVED_WAVES])
 }
 
 
-bool FlashMemory::Data::Read(uint numInROM, DataSettings **ds)
+bool MemoryROM::Data::Read(uint numInROM, DataSettings **ds)
 {
     *ds = nullptr;
 
@@ -59,7 +59,7 @@ bool FlashMemory::Data::Read(uint numInROM, DataSettings **ds)
 }
 
 
-void FlashMemory::Data::Erase(uint numInROM)
+void MemoryROM::Data::Erase(uint numInROM)
 {
     for (int i = 0; i < NUM_SECTORS; i++)
     {
@@ -71,7 +71,7 @@ void FlashMemory::Data::Erase(uint numInROM)
 }
 
 
-void FlashMemory::Data::Save(uint numInROM, const DataSettings *ds)
+void MemoryROM::Data::Save(uint numInROM, const DataSettings *ds)
 {
     Erase(numInROM);
 
@@ -96,7 +96,7 @@ void FlashMemory::Data::Save(uint numInROM, const DataSettings *ds)
 }
 
 
-void FlashMemory::Data::Save(uint numInROM, const DataSettings *ds, uint8 *dataA, uint8 *dataB)
+void MemoryROM::Data::Save(uint numInROM, const DataSettings *ds, uint8 *dataA, uint8 *dataB)
 {
     const_cast<DataSettings *>(ds)->dataA = dataA;
     const_cast<DataSettings *>(ds)->dataB = dataB;
@@ -105,7 +105,7 @@ void FlashMemory::Data::Save(uint numInROM, const DataSettings *ds, uint8 *dataA
 }
 
 
-void FlashMemory::Data::EraseAll()
+void MemoryROM::Data::EraseAll()
 {
     for (int i = 0; i < NUM_SECTORS; i++)
     {

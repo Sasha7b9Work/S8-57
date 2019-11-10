@@ -20,7 +20,7 @@ static uint ReadDoubleWord(uint address);
 
 
 
-void FlashMemory::Settings::Save()
+void MemoryROM::Settings::Save()
 {
     /*
         Алгоритм нахождения первого свободного слова
@@ -58,7 +58,7 @@ void FlashMemory::Settings::Save()
     Write(address, &set, sizeof(set));
 }
 
-void FlashMemory::Write(uint address, const void *data, uint size)
+void MemoryROM::Write(uint address, const void *data, uint size)
 {
     HAL_FLASH::WriteBytes(address, static_cast<const uint8 *>(data), size);
 }
@@ -131,7 +131,7 @@ static uint ReadDoubleWord(uint address)
 }
 
 
-bool FlashMemory::Settings::Load()
+bool MemoryROM::Settings::Load()
 {
     uint address = AddressSavedSettings(0);
 

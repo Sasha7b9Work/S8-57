@@ -96,7 +96,7 @@ struct Sector
 
     const Packet *DeleteData(uint numInROM) const;
     /// Получить информацию о сохранённх в секторе данных
-    void GetDataInfo(bool existData[FlashMemory::Data::MAX_NUM_SAVED_WAVES]) const;
+    void GetDataInfo(bool existData[MemoryROM::Data::MAX_NUM_SAVED_WAVES]) const;
     /// Возвращает указатель на первый пакет
     const Packet *FirstPacket() const;
 
