@@ -311,17 +311,23 @@ char *SU::ToUpper(void *_str, uint size)
 
 char SU::ToUpper(char symbol)
 {
-    if(symbol == '\x40')        // ё
+    uint8 s = static_cast<uint8>(symbol);
+
+    if(s == 0x40)        // ё
     {
-        symbol = '\xc5';
+        return static_cast<char>(0xc5);
     }
-    else if(symbol >= '\x60' && symbol <= '\x7a')
+    else if(s >= 0x60 && s <= 0x7a)
     {
-        return (symbol - 0x20);
+        return static_cast<char>(s - 0x20);
     }
-    else if(symbol >= 0xf0)
+    else if(s >= 0xf0)
     {
-        return (symbol - 0x20);
+        return static_cast<char>(s - 0x20);
+    }
+    else
+    {
+        // здесь ничего
     }
 
     return symbol;
@@ -339,6 +345,10 @@ char SU::ToLower(char symbol)
     else if(s >= 0xc0 && s < 0xE0)
     {
         return static_cast<char>(s + 0x20);
+    }
+    else
+    {
+        // здесь ничего
     }
 
     return symbol;

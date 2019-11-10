@@ -5,6 +5,7 @@
 #include "FPGA/ContextOsci.h"
 #include "Hardware/Timer.h"
 #include "Hardware/HAL/HAL.h"
+#include "Hardware/Memory/MemoryRAM.h"
 #include "Osci/Display/DisplayOsci.h"
 #include "Osci/Measurements/AutoMeasurements.h"
 #include "Settings/Settings.h"
@@ -32,6 +33,8 @@ const uint Osci::Kr[TBase::Count] = { 50, 20, 10,  5,   2 };
 void Osci::Init()
 {
     Stop();
+
+    MemoryRAM::Init();
 
     ContextOsci::LoadRegUPR();
     Range::LoadBoth();

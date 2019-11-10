@@ -1,19 +1,29 @@
 #include "defines.h"
+#include "Data/Heap.h"
 #include "Hardware/Memory/MemoryRAM.h"
-#include "Utils/Math.h"
 #include "Osci/StorageOsci.h"
+#include "Utils/Math.h"
+#include <cstring>
 
 
 int16 MemoryRAM::currentSignal = 0;
 
 
-void MemoryRAM::Save(const DataSettings *ds)
+void MemoryRAM::Init()
 {
-
+    std::memset(Heap::Begin(), 0x00, 4);
 }
 
 
-bool MemoryRAM::Read(DataSettings **ds, uint num)
+void MemoryRAM::Save(const DataSettings *)
+{
+    //PacketRAM *oldest = PacketRAM::Oldest();
+    //
+    //PacketRAM *newest = PacketRAM::Newest();
+}
+
+
+bool MemoryRAM::Read(DataSettings **, uint)
 {
     return false;
 }
@@ -22,4 +32,16 @@ bool MemoryRAM::Read(DataSettings **ds, uint num)
 uint MemoryRAM::NumberDatas()
 {
     return 0;
+}
+
+
+PacketRAM *PacketRAM::Oldest()
+{
+    return nullptr;
+}
+
+
+PacketRAM *PacketRAM::Newest()
+{
+    return nullptr;
 }

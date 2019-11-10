@@ -44,12 +44,6 @@ struct PacketROM
 };
 
 
-struct PacketRAM
-{
-
-};
-
-
 struct Sector
 {
     enum E
