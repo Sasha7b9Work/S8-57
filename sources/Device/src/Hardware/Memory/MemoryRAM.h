@@ -9,17 +9,23 @@ struct PacketRAM
     /*
         Данные хранятся таким образом
     */
-    uint addrNext;      /// Адрес следующего пакета.
+    uint addrNewest;    /// Адрес следующего пакета, более "свежего"
                         /// addrNext == 0x00000000 - в пакете ничего не записано
                         /// addrNext == 0xffffffff - в пакете записаны данные, но это последний пакет
-    /// Упаковать данные по адресу this
-    void Pack(const DataSettings *ds);
+    /// Упаковать данные по адресу this. Возвращает указатель на пакет, следующий за ним
+    PacketRAM *Pack(const DataSettings *ds);
     /// Упаковать данные после данного пакета. Возвращает указатель на упкованный пакет, котоырй становится самым новым
     PacketRAM *PackNewest(const DataSettings *ds);
     /// Возвращает указатель на следующий пакет
     PacketRAM *Next() const;
     /// Возвращает true, если пакет пустой (size == 0x0000)
     bool IsEmpty() const;
+
+    uint Size() const;
+
+    DataSettings *GetDataSettings() const;
+
+    uint Address() const { return reinterpret_cast<uint>(this); };
 };
 
 

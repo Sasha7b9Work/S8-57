@@ -37,7 +37,7 @@ void MemoryRAM::Save(const DataSettings *ds)
 
 bool PacketRAM::IsEmpty() const
 {
-    return (addrNext == 0x0);
+    return (addrNewest == 0x0000000);
 }
 
 
@@ -53,13 +53,42 @@ uint MemoryRAM::NumberDatas()
 }
 
 
-void PacketRAM::Pack(const DataSettings *)
+PacketRAM *PacketRAM::Pack(const DataSettings *)
 {
+    if(IsEmpty())
+    {
 
+    }
+
+    return nullptr;
 }
 
 
 PacketRAM *PacketRAM::PackNewest(const DataSettings *)
 {
     return nullptr;
+}
+
+
+uint PacketRAM::Size() const
+{
+    uint result = 0;
+
+    if(!IsEmpty())
+    {
+        result = sizeof(PacketRAM) + sizeof(DataSettings) + GetDataSettings()->NeedMemoryForData();
+    }
+
+    return result;
+}
+
+
+DataSettings *PacketRAM::GetDataSettings() const
+{
+    if(IsEmpty())
+    {
+        return nullptr;
+    }
+
+    return reinterpret_cast<DataSettings *>(Address() + sizeof(PacketRAM));
 }
