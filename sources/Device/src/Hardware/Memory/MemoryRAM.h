@@ -3,8 +3,8 @@
 
 struct MemoryRAM
 {
-    /// Установить текущим сигнал по умолчанию
-    static void ResetSignal();
+    static int16 currentSignal;
+
     /// Установить текущим следующий сигнал
     static void SelectNextSignal();
     /// Установить текущим предыдущий сигнал

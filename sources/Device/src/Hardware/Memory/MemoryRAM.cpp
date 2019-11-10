@@ -4,7 +4,7 @@
 #include "Osci/StorageOsci.h"
 
 
-static int16 currentSignal = 0;
+int16 MemoryRAM::currentSignal = 0;
 
 
 
@@ -23,10 +23,4 @@ void MemoryRAM::SelectNextSignal()
 void MemoryRAM::SelectPrevSignal()
 {
     Math::CircleDecrease<int16>(&currentSignal, 0, static_cast<int16>(StorageOsci::NumElementsInStorage()) - 1);
-}
-
-
-void MemoryRAM::ResetSignal()
-{
-    currentSignal = 0;
 }

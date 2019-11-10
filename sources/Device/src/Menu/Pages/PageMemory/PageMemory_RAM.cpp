@@ -52,7 +52,7 @@ static void OnOpenClose_RAM(bool enter)
         RUN_FPGA_BEFORE_SB = Osci::IsRunning() ? 1U : 0U;
         Osci::Stop(false);
         set.mem.modeWork = ModeWork::RAM;
-        MemoryRAM::ResetSignal();
+        MemoryRAM::currentSignal = 0;
     }
     else
     {
