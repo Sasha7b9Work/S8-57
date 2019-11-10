@@ -8,12 +8,13 @@
 #include "Osci/Osci.h"
 #include "Osci/StorageOsci.h"
 #include "Settings/Settings.h"
+#include "Utils/Math.h"
 #include "Utils/Values.h"
 
 
 static void OnPress_Next()
 {
-    MemoryRAM::SelectNextSignal();
+    Math::CircleIncrease<int16>(&MemoryRAM::currentSignal, 0, static_cast<int16>(StorageOsci::NumElementsInStorage()) - 1);
 }
 
 static void Draw_Next(int x, int y)

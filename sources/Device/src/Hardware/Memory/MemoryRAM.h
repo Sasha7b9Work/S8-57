@@ -5,8 +5,6 @@ struct MemoryRAM
 {
     static int16 currentSignal;
 
-    /// Установить текущим следующий сигнал
-    static void SelectNextSignal();
     /// Установить текущим предыдущий сигнал
     static void SelectPrevSignal();
 };
