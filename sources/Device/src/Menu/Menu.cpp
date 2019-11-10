@@ -261,6 +261,13 @@ Item *Menu::OpenedItem()
 }
 
 
+Page *Menu::OpenedPage()
+{
+    Item *item = OpenedItem();
+
+    return (item->IsPage()) ? static_cast<Page *>(item) : nullptr;
+}
+
 static Item *LastOpened(Page *page)
 {
     Item *result = &Item::empty;

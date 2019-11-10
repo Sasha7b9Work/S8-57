@@ -70,13 +70,9 @@ static void DrawMessages()
 
     int y = Grid::BottomForWarnings();                   // Координата y нижнего левого угла прямоугольника, в котором будет отрисовано очередное сообщение
 
-    int size = warnings.Size();
-
-    for (int i = size - 1; i >= 0; i--)
+    for (int i = warnings.Size() - 1; i >= 0; i--)
     {
-        int h = warnings[i].Height(Grid::Width());
-
-        y -= h;
+        y -= warnings[i].Height(Grid::Width());
 
         if (y < Grid::Top())
         {
@@ -112,5 +108,5 @@ int WarningStruct::Height(int) const
 
 void WarningStruct::Draw(int x, int y, int width) const
 {
-    Text(message).DrawInBoundedRectWithTransfers(x, y, width, Color::BACK, Color::FLASH_01, Color::FILL);
+    Text(message).DrawInBoundedRectWithTransfers(x, y, width, Color::FLASH_10, Color::FLASH_01, Color::FILL);
 }

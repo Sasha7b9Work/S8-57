@@ -497,9 +497,11 @@ int Grid::BottomForWarnings()
 {
     int result = Bottom();
 
-    if (Menu::IsShown() && Menu::OpenedItem()->IsPage())
+    Page *page = Menu::OpenedPage();
+
+    if (Menu::IsShown() && page)
     {
-        result -= Item::Height();
+        result = Display::HEIGHT - page->Height() - 1;
     }
 
     return result;

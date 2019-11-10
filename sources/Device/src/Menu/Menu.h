@@ -38,6 +38,8 @@ struct Menu
     /// Возвращает адрес текущего элемента меню (текущим, как правило, является элемент, кнопка которого была нажата последней
     static Item *CurrentItem();
 
+    static Page *OpenedPage();
+
     static void CloseOpenedItem();
 
     static void SetItemForHint(const Item *item);
