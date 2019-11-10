@@ -336,7 +336,7 @@ char SU::ToLower(char symbol)
     {
         return static_cast<char>(s + 0x20);
     }
-    else if(s >= 0xc0 && s < 0xF0)
+    else if(s >= 0xc0 && s < 0xE0)
     {
         return static_cast<char>(s + 0x20);
     }

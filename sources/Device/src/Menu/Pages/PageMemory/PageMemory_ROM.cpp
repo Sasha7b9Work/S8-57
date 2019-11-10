@@ -62,6 +62,8 @@ static void OnPress_Delete()
     Display::FuncOnWaitStart("”дал€ю сохранЄнные данные", false);
     FlashMemory::Data::Erase(NUM_ROM_SIGNAL);
     Display::FuncOnWaitStop();
+
+    Display::ShowWarning("—игнал удален");
 }
 
 static void Draw_Delete(int x, int y)

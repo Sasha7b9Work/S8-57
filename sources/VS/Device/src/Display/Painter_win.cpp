@@ -102,6 +102,13 @@ void Painter::EndScene()
 {
     SDL_SetRenderTarget(renderer, NULL);
 
+//    int width = 0;
+//    int height = 0;
+//
+//    SDL_GetRendererOutputSize(renderer, &width, &height);
+//
+//    LOG_WRITE("R %d %d", width, height);
+
     SDL_Rect rect = {0, 0, Frame::WIDTH, Frame::HEIGHT};
 
     if (texture)

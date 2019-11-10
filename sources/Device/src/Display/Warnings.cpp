@@ -12,8 +12,8 @@ Queue<WarningStruct> warnings;
 
 /// Удалить предупреждения с истёкшим времени жизни
 static void RemoveOld();
-/// Возвращает true, если последнее сообщение в очереди такое же
-static bool BackMessageSame(const char *message);
+/// Возвращает true, 
+static bool BackMessagesSame();
 
 static void DrawMessages();
 
@@ -21,23 +21,24 @@ static void DrawMessages();
 
 void Warnings::AddWarning(const char *warning)
 {
-    if (BackMessageSame(warning))
+    warnings.Push(WarningStruct(warning));
+
+    if(BackMessagesSame())
     {
+        warnings[warnings.Size() - 2].timeStart = warnings[warnings.Size() - 1].timeStart;
         warnings.Back();
     }
-
-    warnings.Push(WarningStruct(warning));
 }
 
 
-static bool BackMessageSame(const char *message)
+static bool BackMessagesSame()
 {
-    if (warnings.IsEmpty())
+    if (warnings.Size() < 2)
     {
         return false;
     }
 
-    return (std::strcmp(message, warnings[warnings.Size() - 1].message.CString()) == 0);
+    return (std::strcmp(warnings[warnings.Size() - 2].message.CString(), warnings[warnings.Size() - 1].message.CString()) == 0);
 }
 
 
@@ -132,7 +133,7 @@ void WarningStruct::Draw(int x, int y) const
 {
     int width = Font::GetLengthText(message.CString());
 
-    Region(width, 10).DrawBounded(x, y, Color::FLASH_10, Color::FILL);
+    Region(width + 3, 10).DrawBounded(x, y, Color::FLASH_10, Color::FILL);
 
     Text(message).Draw(x + 2, y + 1, Color::FLASH_01);
 }
