@@ -10,7 +10,7 @@ struct WarningStruct
     uint        timeStart;
     bool IsDead() const;
     int Height(int width) const;
-    void Draw(int x, int y, int width) const;
+    void Draw(int x, int y) const;
     WarningStruct &operator=(const WarningStruct &s);
 };
 

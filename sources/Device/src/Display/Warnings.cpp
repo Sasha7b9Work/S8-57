@@ -79,7 +79,7 @@ static void DrawMessages()
             break;
         }
 
-        warnings[i].Draw(Grid::Left(), y, Grid::Width());
+        warnings[i].Draw(Grid::Left(), y);
     }
 }
 
@@ -125,10 +125,14 @@ bool WarningStruct::IsDead() const
 
 int WarningStruct::Height(int) const
 {
-    return 12;
+    return 10;
 }
 
-void WarningStruct::Draw(int x, int y, int width) const
+void WarningStruct::Draw(int x, int y) const
 {
-    Text(message).DrawInBoundedRectWithTransfers(x, y, width, Color::FLASH_10, Color::FLASH_01, Color::FILL);
+    int width = Font::GetLengthText(message.CString());
+
+    Region(width, 10).DrawBounded(x, y, Color::FLASH_10, Color::FILL);
+
+    Text(message).Draw(x + 2, y + 1, Color::FLASH_01);
 }
