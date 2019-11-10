@@ -17,7 +17,7 @@
 struct Sector;
 
 
-struct Packet
+struct PacketROM
 {
     uint  state;    // —осто€ние пакета:
                     // 0xFFFFFFFF - в пакет запись не производилась
@@ -32,11 +32,7 @@ struct Packet
     bool IsValid() const { return (state == STATE_VALID); }
 
     uint Address() const { return reinterpret_cast<uint>(this); };
-};
 
-
-struct PacketROM : public Packet
-{
     PacketROM *Next() const;
     bool UnPack(DataSettings **ds) const;
     uint Size() const;
@@ -45,6 +41,12 @@ struct PacketROM : public Packet
     void Erase() const;
     /// ¬озвращает количество байт, необходимое дл€ хранени€ данных
     static uint GetPackedSize(const DataSettings *ds);
+};
+
+
+struct PacketRAM
+{
+
 };
 
 

@@ -12,7 +12,7 @@ bool PacketROM::UnPack(DataSettings **ds) const
         return false;
     }
 
-    *ds = const_cast<DataSettings *>(reinterpret_cast<const DataSettings *>(reinterpret_cast<const uint8 *>(this) + sizeof(Packet)));
+    *ds = const_cast<DataSettings *>(reinterpret_cast<const DataSettings *>(reinterpret_cast<const uint8 *>(this) + sizeof(PacketROM)));
 
     return true;
 }
@@ -99,9 +99,9 @@ static void WriteToROM(uint *address, const void *data, uint size)
 }
 
 
-static void TranslateAddressToROM(const DataSettings *ds, const Packet *packet)
+static void TranslateAddressToROM(const DataSettings *ds, const PacketROM *packet)
 {
-    uint8 *addressData = reinterpret_cast<uint8 *>(packet->Address() + sizeof(Packet) + sizeof(DataSettings)); // По этому адресу будут записаны данные первого из записываемых каналов
+    uint8 *addressData = reinterpret_cast<uint8 *>(packet->Address() + sizeof(PacketROM) + sizeof(DataSettings)); // По этому адресу будут записаны данные первого из записываемых каналов
 
     if (ds->enableA)
     {
@@ -129,7 +129,7 @@ const PacketROM *Sector::WriteData(uint numInROM, const DataSettings *ds) const
 
     uint end = End();
 
-    uint sizePacket = sizeof(Packet);
+    uint sizePacket = sizeof(PacketROM);
 
     uint sizeDS = sizeof(DataSettings);
 
@@ -148,7 +148,7 @@ const PacketROM *Sector::WriteData(uint numInROM, const DataSettings *ds) const
         return nullptr;
     }
 
-    Packet record = { STATE_VALID, static_cast<uint16>(PacketROM::GetPackedSize(ds)), TYPE_DATA };
+    PacketROM record = { STATE_VALID, static_cast<uint16>(PacketROM::GetPackedSize(ds)), TYPE_DATA };
 
     WriteToROM(&recordAddress, &record, sizeof(record));
 

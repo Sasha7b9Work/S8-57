@@ -79,7 +79,7 @@ bool Test::FlashMemory::Data::Test()
 
         ::MemoryROM::Data::Save(numInROM, &ds);
 
-        totalMemory += sizeof(Packet) + sizeof(DataSettings) + ds.SizeChannel() + ds.SizeChannel();
+        totalMemory += sizeof(PacketROM) + sizeof(DataSettings) + ds.SizeChannel() + ds.SizeChannel();
 
         DataSettings *dsRead = nullptr;
 

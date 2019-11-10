@@ -133,7 +133,7 @@ static int NumberFreeSectors()
 
     for (int i = 0; i < NUM_SECTORS; i++)
     {
-        const Packet *packet = sectors[i]->FirstPacket();
+        const PacketROM *packet = sectors[i]->FirstPacket();
 
         if (packet->IsFree())
         {
@@ -149,7 +149,7 @@ static const Sector *GetFirstFreeSector()
 {
     for (int i = 0; i < NUM_SECTORS; i++)
     {
-        const Packet *packet = sectors[i]->FirstPacket();
+        const PacketROM *packet = sectors[i]->FirstPacket();
 
         if (packet->IsFree())
         {
