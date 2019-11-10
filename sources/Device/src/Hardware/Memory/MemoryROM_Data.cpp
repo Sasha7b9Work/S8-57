@@ -1,7 +1,7 @@
 #include "defines.h"
 #include "Hardware/HAL/HAL.h"
 #include "Hardware/Memory/Sector.h"
-#include "Hardware/Memory/Memory.h"
+#include "Hardware/Memory/MemoryROM.h"
 
 
 static const int NUM_SECTORS = 5;

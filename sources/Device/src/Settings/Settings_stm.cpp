@@ -1,6 +1,6 @@
 #include "defines.h"
 #include "Settings.h"
-#include "Hardware/Memory/Memory.h"
+#include "Hardware/Memory/MemoryROM.h"
 #include "FPGA/ContextOsci.h"
 #include "Osci/Osci.h"
 

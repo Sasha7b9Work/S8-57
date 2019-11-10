@@ -1,5 +1,5 @@
 #include "defines.h"
-#include "Hardware/Memory/Memory.h"
+#include "Hardware/Memory/MemoryROM.h"
 #include <cstring>
 #include <SDL.h>
 

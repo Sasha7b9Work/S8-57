@@ -1,5 +1,5 @@
 #include "defines.h"
-#include "Memory.h"
+#include "Hardware/Memory/MemoryROM.h"
 #include "Settings/Settings.h"
 #include "Hardware/HAL/HAL.h"
 #include "Hardware/Memory/Sector.h"
@@ -111,7 +111,7 @@ static void ReadBytes(uint address, void *data, uint size)
     }
 }
 
-String OTPmem::GetSerialNumber(int *freeForWrite)
+String MemoryOTP::GetSerialNumber(int *freeForWrite)
 {
     char buffer[20];
     *freeForWrite = HAL_OTP::GetSerialNumber(buffer);
@@ -119,7 +119,7 @@ String OTPmem::GetSerialNumber(int *freeForWrite)
 }
 
 
-bool OTPmem::SaveSerialNumber(char *servialNumber)
+bool MemoryOTP::SaveSerialNumber(char *servialNumber)
 {
     return HAL_OTP::SaveSerialNumber(servialNumber);
 }

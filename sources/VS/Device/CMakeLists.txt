@@ -156,15 +156,15 @@ source_group(Hardware\\HAL      FILES   ../../Device/src/Hardware/HAL/HAL.h
                                                      src/Hardware/HAL/HAL_TIM3_win.cpp
                                         ../../Device/src/Hardware/HAL/HAL_USART3.cpp
                                                      src/Hardware/HAL/HAL_win.cpp)
-source_group(Hardware\\Memory   FILES   ../../Device/src/Hardware/Memory/Sector.h
-                                        ../../Device/src/Hardware/Memory/Sector.cpp
-                                                     src/Hardware/Memory/Sector_win.cpp
-                                        ../../Device/src/Hardware/Memory/Memory.h
-                                        ../../Device/src/Hardware/Memory/Memory.cpp
-                                        ../../Device/src/Hardware/Memory/MemoryData.cpp
+source_group(Hardware\\Memory   FILES   ../../Device/src/Hardware/Memory/MemoryRAM.h
+                                        ../../Device/src/Hardware/Memory/MemoryRAM.cpp
+                                        ../../Device/src/Hardware/Memory/MemoryROM.h
+                                        ../../Device/src/Hardware/Memory/MemoryROM.cpp
+                                        ../../Device/src/Hardware/Memory/MemoryROM_Data.cpp
                                                      src/Hardware/Memory/Memory_win.cpp
-                                        ../../Device/src/Hardware/Memory/MemoryRAM.h
-                                        ../../Device/src/Hardware/Memory/MemoryRAM.cpp)
+                                        ../../Device/src/Hardware/Memory/Sector.h
+                                        ../../Device/src/Hardware/Memory/Sector.cpp
+                                                     src/Hardware/Memory/Sector_win.cpp)
 source_group(Recorder           FILES   ../../Device/src/Recorder/DisplayRecorder.h
                                         ../../Device/src/Recorder/DisplayRecorder.cpp
                                         ../../Device/src/Recorder/Recorder.h
@@ -275,15 +275,15 @@ file(GLOB SOURCES   ../../common/_VS/*
                                  src/Hardware/HAL/HAL_TIM3_win.cpp
                     ../../Device/src/Hardware/HAL/HAL_USART3.cpp
                     
+                    ../../Device/src/Hardware/Memory/MemoryRAM.h
+                    ../../Device/src/Hardware/Memory/MemoryRAM.cpp
+                    ../../Device/src/Hardware/Memory/MemoryROM.h
+                    ../../Device/src/Hardware/Memory/MemoryROM.cpp
+                    ../../Device/src/Hardware/Memory/MemoryROM_Data.cpp
+                                 src/Hardware/Memory/Memory_win.cpp
                     ../../Device/src/Hardware/Memory/Sector.h
                     ../../Device/src/Hardware/Memory/Sector.cpp
                                  src/Hardware/Memory/Sector_win.cpp
-                    ../../Device/src/Hardware/Memory/Memory.h
-                    ../../Device/src/Hardware/Memory/Memory.cpp
-                    ../../Device/src/Hardware/Memory/MemoryData.cpp
-                                 src/Hardware/Memory/Memory_win.cpp
-                    ../../Device/src/Hardware/Memory/MemoryRAM.h
-                    ../../Device/src/Hardware/Memory/MemoryRAM.cpp
                     
                     ../../Device/src/Keyboard/*
                     ../../Device/src/Menu/*

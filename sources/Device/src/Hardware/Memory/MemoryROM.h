@@ -42,9 +42,8 @@ struct FlashMemory
 
 
 
-class OTPmem
+struct MemoryOTP
 {
-public:
     static bool SaveSerialNumber(char *servialNumber);
     /// ¬озвращает текстовое представление серийного номера. ¬ freeForWrite количество свободных мест дл€ записи
     static String GetSerialNumber(int *freeForWrite);

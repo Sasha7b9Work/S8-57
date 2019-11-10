@@ -1,7 +1,7 @@
 #include "defines.h"
 #include "Data/DataSettings.h"
 #include "Data/Heap.h"
-#include "Hardware/Memory/Memory.h"
+#include "Hardware/Memory/MemoryROM.h"
 #include "Hardware/Memory/Sector.h"
 #include "Settings/Settings.h"
 #include "Test/Test.h"
