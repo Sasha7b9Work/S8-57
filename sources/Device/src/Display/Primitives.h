@@ -110,7 +110,7 @@ public:
     /// Пишет текст с переносами
     int DrawInRectWithTransfers(int x, int y, int width, int height, Color color = Color::NUMBER);
     /// Возвращает нижнюю координату прямоугольника
-    int DrawInBoundedRectWithTransfers(int x, int y, int width, Color colorBackground, Color colorFill);
+    int DrawInBoundedRectWithTransfers(int x, int y, int width, Color colorBackground, Color colorFill, Color colorBound = Color::NUMBER);
 
     void DrawInCenterRectAndBoundIt(int x, int y, int width, int height, Color colorBackground, Color colorFill);
     /// Пишет строку текста в центре области(x, y, width, height)цветом ColorText на прямоугольнике с шириной бордюра widthBorder цвета colorBackground

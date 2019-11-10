@@ -593,12 +593,12 @@ static bool GetHeightTextWithTransfers(int left, int top, int right, const char 
 }
 
 
-int Text::DrawInBoundedRectWithTransfers(int x, int y, int width, Color colorBackground, Color colorFill)
+int Text::DrawInBoundedRectWithTransfers(int x, int y, int width, Color colorBackground, Color colorFill, Color colorBound)
 {
     int height = 0;
     GetHeightTextWithTransfers(x + 3, y + 3, x + width - 8, text, &height);
 
-    Rectangle(width, height).Draw(x, y, colorFill);
+    Rectangle(width, height).Draw(x, y, (colorBound == Color::NUMBER) ? colorFill : colorBound);
     Region(width - 2, height - 2).Fill(x + 1, y + 1, colorBackground);
     DrawInRectWithTransfers(x + 3, y + 3, width - 8, height, colorFill);
     return y + height;

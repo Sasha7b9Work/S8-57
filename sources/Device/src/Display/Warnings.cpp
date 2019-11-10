@@ -43,16 +43,14 @@ static bool BackMessageSame(const char *message)
 
 void Warnings::Draw()
 {
-    if (warnings.Size() == 0)
+    if(warnings.Size())
     {
-        return;
-    }
+        RemoveOld();
 
-    RemoveOld();
-
-    if (!warnings.IsEmpty())
-    {
-        DrawMessages();
+        if(warnings.Size())
+        {
+            DrawMessages();
+        }
     }
 }
 
@@ -114,5 +112,5 @@ int WarningStruct::Height(int) const
 
 void WarningStruct::Draw(int x, int y, int width) const
 {
-    Text(message).DrawInBoundedRectWithTransfers(x, y, width, Color::FLASH_10, Color::FLASH_01);
+    Text(message).DrawInBoundedRectWithTransfers(x, y, width, Color::BACK, Color::FLASH_01, Color::FILL);
 }
