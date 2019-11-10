@@ -238,7 +238,10 @@ static void DrawSpectrum()
 
 static void DrawROM()
 {
-
+    if(set.mem.typeSignalROM == TypeSignalROM::Current)
+    {
+        DrawCurrent();
+    }
 }
 
 

@@ -321,7 +321,7 @@ static void DrawRightPart(int x0, int y0)
     }
 
     // Режим работы
-    static pString strs[] =
+    static const pString strs[] =
     {
         "ИЗМ",
         "ПОСЛ",
@@ -332,7 +332,7 @@ static void DrawRightPart(int x0, int y0)
     {
         x += 18;
 
-        VLine(Grid::Top() - 3).Draw(x, 1, Color::FILL);
+//        VLine(Grid::Top() - 3).Draw(x, 1, Color::FILL);
 
         x += 2;
         String("режим").Draw(x, -1);
