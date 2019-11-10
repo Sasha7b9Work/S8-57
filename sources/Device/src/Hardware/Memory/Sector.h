@@ -17,7 +17,7 @@
 struct Sector;
 
 
-struct Packet   
+struct Packet
 {
     uint  state;    // Состояние пакета:
                     // 0xFFFFFFFF - в пакет запись не производилась
@@ -30,10 +30,16 @@ struct Packet
     bool IsFree() const { return (state == STATE_FREE); }
     bool IsErased() const { return (state == STATE_ERASED); }
     bool IsValid() const { return (state == STATE_VALID); }
-    Packet *Next() const;
+
+    uint Address() const { return reinterpret_cast<uint>(this); };
+};
+
+
+struct PacketROM : public Packet
+{
+    PacketROM *Next() const;
     bool UnPack(DataSettings **ds) const;
     uint Size() const;
-    uint Address() const { return reinterpret_cast<uint>(this); };
     /// Делает попытку записи пакета в сектор sector. В случае неудачи возвращает false
     bool WriteToSector(const Sector *sector) const;
     void Erase() const;
@@ -84,23 +90,23 @@ struct Sector
     /// true означает, что в сектор не записан ни один пакет
     bool ExistPackets() const;
 
-    const Packet *FirstFreePacket() const;
+    const PacketROM *FirstFreePacket() const;
 
-    const Packet *WriteData(uint numInROM, const DataSettings *ds) const;
+    const PacketROM *WriteData(uint numInROM, const DataSettings *ds) const;
 
-    const Packet *ReadData(uint numInROM, DataSettings **ds) const;
+    const PacketROM *ReadData(uint numInROM, DataSettings **ds) const;
 
-    const Packet *DeleteData(uint numInROM) const;
+    const PacketROM *DeleteData(uint numInROM) const;
     /// Получить информацию о сохранённх в секторе данных
     void GetDataInfo(bool existData[MemoryROM::Data::MAX_NUM_SAVED_WAVES]) const;
     /// Возвращает указатель на первый пакет
-    const Packet *FirstPacket() const;
+    const PacketROM *FirstPacket() const;
 
-    const Packet *FindValidPacket(uint numInROM) const;
+    const PacketROM *FindValidPacket(uint numInROM) const;
     /// Возвращает количество байт, занимаемых стёртыми пакетами
     uint GetNumberWornBytes() const;
     /// Возвращает указатель на первый пакет с данными из сектора sector и nullptr, если данных в секторе нет
-    const Packet *GetFirstPacketWithData() const;
+    const PacketROM *GetFirstPacketWithData() const;
     /// Возвращает номер сектора, которому принадлежит address
     static int Number(uint address);
 };

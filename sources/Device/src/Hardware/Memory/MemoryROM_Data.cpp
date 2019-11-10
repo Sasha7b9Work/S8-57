@@ -189,7 +189,7 @@ static void CopyDataToFreeSpace(const Sector *sectorSrc)
         Потом пишем в стёртые сектора.
     */
 
-    const Packet *src = sectorSrc->GetFirstPacketWithData();
+    const PacketROM *src = sectorSrc->GetFirstPacketWithData();
 
     if (!src)
     {

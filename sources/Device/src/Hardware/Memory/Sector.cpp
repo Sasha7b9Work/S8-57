@@ -4,7 +4,7 @@
 #include "Data/DataSettings.h"
 
 
-bool Packet::UnPack(DataSettings **ds) const
+bool PacketROM::UnPack(DataSettings **ds) const
 {
     if (!IsValid() || !IsData())
     {
@@ -18,18 +18,18 @@ bool Packet::UnPack(DataSettings **ds) const
 }
 
 
-Packet *Packet::Next() const
+PacketROM *PacketROM::Next() const
 {
     if (IsFree())
     {
         return nullptr;
     }
 
-    return reinterpret_cast<Packet *>(reinterpret_cast<uint8 *>(const_cast<Packet *>(this)) + size);
+    return reinterpret_cast<PacketROM *>(reinterpret_cast<uint8 *>(const_cast<PacketROM *>(this)) + size);
 }
 
 
-uint Packet::Size() const
+uint PacketROM::Size() const
 {
     if (IsFree())
     {
@@ -40,9 +40,9 @@ uint Packet::Size() const
 }
 
 
-bool Packet::WriteToSector(const Sector *sector) const
+bool PacketROM::WriteToSector(const Sector *sector) const
 {
-    const Packet *dest = sector->FirstPacket();
+    const PacketROM *dest = sector->FirstPacket();
 
     while (dest && !dest->IsFree())
     {
@@ -64,7 +64,7 @@ bool Packet::WriteToSector(const Sector *sector) const
 }
 
 
-void Packet::Erase() const
+void PacketROM::Erase() const
 {
     uint data = STATE_ERASED;
 
@@ -72,9 +72,9 @@ void Packet::Erase() const
 }
 
 
-uint Packet::GetPackedSize(const DataSettings *ds)
+uint PacketROM::GetPackedSize(const DataSettings *ds)
 {
-    return sizeof(Packet) +         // Packet
+    return sizeof(PacketROM) +      // Packet
         sizeof(DataSettings) +      // DataSettings
         ds->NeedMemoryForData();    // data
 }
@@ -116,9 +116,9 @@ static void TranslateAddressToROM(const DataSettings *ds, const Packet *packet)
 }
 
 
-const Packet *Sector::WriteData(uint numInROM, const DataSettings *ds) const
+const PacketROM *Sector::WriteData(uint numInROM, const DataSettings *ds) const
 {
-    const Packet *packet = FirstFreePacket();
+    const PacketROM *packet = FirstFreePacket();
 
     if (packet == nullptr)
     {
@@ -143,12 +143,12 @@ const Packet *Sector::WriteData(uint numInROM, const DataSettings *ds) const
 
     existSpace = existSpace;
 
-    if (packet->Address() + Packet::GetPackedSize(ds) > End() - 10)      // ≈сли пакет при записи вылезет за границу сектора. ƒаЄм запас - в конце сектора должны остатьс€ миниму 4 байта,
+    if (packet->Address() + PacketROM::GetPackedSize(ds) > End() - 10)      // ≈сли пакет при записи вылезет за границу сектора. ƒаЄм запас - в конце сектора должны остатьс€ миниму 4 байта,
     {                                                                    // помеченные 0xFFFFFFFF во избежание лишних проверок за выход за пределы сектора.
         return nullptr;
     }
 
-    Packet record = { STATE_VALID, static_cast<uint16>(Packet::GetPackedSize(ds)), TYPE_DATA };
+    Packet record = { STATE_VALID, static_cast<uint16>(PacketROM::GetPackedSize(ds)), TYPE_DATA };
 
     WriteToROM(&recordAddress, &record, sizeof(record));
 
@@ -175,9 +175,9 @@ const Packet *Sector::WriteData(uint numInROM, const DataSettings *ds) const
 }
 
 
-const Packet *Sector::FindValidPacket(uint numInROM) const
+const PacketROM *Sector::FindValidPacket(uint numInROM) const
 {
-    const Packet *packet = FirstPacket();
+    const PacketROM *packet = FirstPacket();
 
     while (packet && !packet->IsFree())
     {
@@ -200,9 +200,9 @@ const Packet *Sector::FindValidPacket(uint numInROM) const
 }
 
 
-const Packet *Sector::ReadData(uint numInROM, DataSettings **ds) const
+const PacketROM *Sector::ReadData(uint numInROM, DataSettings **ds) const
 {
-    const Packet *packet = FindValidPacket(numInROM);
+    const PacketROM *packet = FindValidPacket(numInROM);
 
     if (packet)
     {
@@ -214,9 +214,9 @@ const Packet *Sector::ReadData(uint numInROM, DataSettings **ds) const
 }
 
 
-const Packet *Sector::DeleteData(uint numInROM) const
+const PacketROM *Sector::DeleteData(uint numInROM) const
 {
-    const Packet *packet = FindValidPacket(numInROM);
+    const PacketROM *packet = FindValidPacket(numInROM);
 
     if (packet)
     {
@@ -228,15 +228,15 @@ const Packet *Sector::DeleteData(uint numInROM) const
 }
 
 
-const Packet *Sector::FirstPacket() const
+const PacketROM *Sector::FirstPacket() const
 {
-    return reinterpret_cast<const Packet *>(address);
+    return reinterpret_cast<const PacketROM *>(address);
 }
 
 
-const Packet *Sector::FirstFreePacket() const
+const PacketROM *Sector::FirstFreePacket() const
 {
-    const Packet *packet = FirstPacket();
+    const PacketROM *packet = FirstPacket();
 
     while (packet)
     {
@@ -254,7 +254,7 @@ const Packet *Sector::FirstFreePacket() const
 
 void Sector::GetDataInfo(bool existData[MemoryROM::Data::MAX_NUM_SAVED_WAVES]) const
 {
-    const Packet *packet = FirstPacket();
+    const PacketROM *packet = FirstPacket();
 
     while (packet && !packet->IsFree())
     {
@@ -275,7 +275,7 @@ uint Sector::GetNumberWornBytes() const
 {
     uint result = 0;
 
-    const Packet *packet = FirstPacket();
+    const PacketROM *packet = FirstPacket();
 
     while (packet && !packet->IsFree())
     {
@@ -291,9 +291,9 @@ uint Sector::GetNumberWornBytes() const
 }
 
 
-const Packet *Sector::GetFirstPacketWithData() const
+const PacketROM *Sector::GetFirstPacketWithData() const
 {
-    const Packet *result = FirstPacket();
+    const PacketROM *result = FirstPacket();
 
     while (result && !result->IsFree())
     {
