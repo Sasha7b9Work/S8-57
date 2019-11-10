@@ -9,8 +9,6 @@ struct MemoryROM
 {
 	static const uint SIZE = 2 * 1024 * 1024;
 
-    static void Write(uint address, const void *data, uint size);
-
     /// Функция для сохранения/восстановления настроек
     struct Settings
     {

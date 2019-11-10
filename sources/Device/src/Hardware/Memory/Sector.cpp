@@ -50,7 +50,7 @@ uint Packet::Size() const
 
 void Compressor::Copy(Packet *dest, const Packet *src)
 {
-    MemoryROM::Write(reinterpret_cast<uint>(dest), const_cast<const Packet *>(src), src->Size());
+    HAL_FLASH::WriteBufferBytes(reinterpret_cast<uint>(dest), const_cast<const Packet *>(src), src->Size());
 }
 
 
@@ -72,7 +72,7 @@ bool Packet::WriteToSector(const Sector *sector) const
         return false;
     }
 
-    MemoryROM::Write(addressWrite, this, size);
+    HAL_FLASH::WriteBufferBytes(addressWrite, this, size);
 
     return true;
 }

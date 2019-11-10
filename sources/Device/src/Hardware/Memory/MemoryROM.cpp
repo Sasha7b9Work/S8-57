@@ -55,12 +55,7 @@ void MemoryROM::Settings::Save()
 
     set.size = sizeof(set);
 
-    Write(address, &set, sizeof(set));
-}
-
-void MemoryROM::Write(uint address, const void *data, uint size)
-{
-    HAL_FLASH::WriteBytes(address, static_cast<const uint8 *>(data), size);
+    HAL_FLASH::WriteBufferBytes(address, &set, sizeof(set));
 }
 
 
