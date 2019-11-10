@@ -2,6 +2,15 @@
 #include "Display/Colors.h"
 
 
+struct TypeConversionString
+{
+    enum E
+    {
+        None,           // Преобразование строки не производится
+        FirstUpper      // Первый символ - в вернем регистре, остальные - в нижнем
+    };
+};
+
 
 class String // -V690
 {
@@ -12,7 +21,7 @@ public:
     explicit String(const char *format, ...);
     ~String();
 
-    void Set(const char *format, ...);
+    void Set(TypeConversionString::E conv, const char *format, ...);
 
     char *CString() const;
     /// Отобразить текст на экране в заданнх координатах
@@ -20,10 +29,12 @@ public:
 
     static const char * const ERROR;
 
+    void Free();
+
 private:
 
     bool Allocate(uint size);
-    void Free();
+    void Conversion(TypeConversionString::E conv);
 
     char *buffer;
 };

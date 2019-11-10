@@ -37,7 +37,7 @@ static bool BackMessageSame(const char *message)
         return false;
     }
 
-    return (std::strcmp(message, warnings[warnings.Size() - 1].message) == 0);
+    return (std::strcmp(message, warnings[warnings.Size() - 1].message.CString()) == 0);
 }
 
 
@@ -90,9 +90,31 @@ bool Warnings::IsShown()
 }
 
 
-WarningStruct::WarningStruct(const char *msg) : message(msg)
+WarningStruct::WarningStruct(const char *msg)
 {
+    message.Set(TypeConversionString::FirstUpper, msg);
     timeStart = TIME_MS;
+}
+
+
+WarningStruct::WarningStruct(const WarningStruct &s)
+{
+    message.Set(TypeConversionString::None, s.message.CString());
+    timeStart = s.timeStart;
+}
+
+
+WarningStruct &WarningStruct::operator=(const WarningStruct &s)
+{
+    timeStart = s.timeStart;
+    message.Set(TypeConversionString::None, s.message.CString());
+    return *this;
+}
+
+
+WarningStruct::~WarningStruct()
+{
+    message.Free();
 }
 
 

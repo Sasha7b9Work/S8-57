@@ -3,7 +3,7 @@
 #include "Utils/StringUtils.h"
 #include "Utils/Values.h"
 #include <cstring>
-#include <ctype.h>
+#include <cctype>
 #include <locale>
 
 #ifndef LANG
@@ -136,7 +136,7 @@ bool SU::GetWord(const char *string, Word *word, const int numWord)
             int numSymbols = word->numSymbols;
             for (int i = 0; i < numSymbols; i++)
             {
-                *pointer = static_cast<char>(toupper(*pointer));
+                *pointer = static_cast<char>(std::toupper(*pointer));
                 pointer++;
             }
             return true;
@@ -302,8 +302,44 @@ char *SU::ToUpper(void *_str, uint size)
 
     for(uint i = 0; i < size; i++)
     {
-        str[i] = static_cast<char>(toupper(str[i]));
+        str[i] = static_cast<char>(std::toupper(str[i]));
     }
 
     return str;
+}
+
+
+char SU::ToUpper(char symbol)
+{
+    if(symbol == '\x40')        // ¸
+    {
+        symbol = '\xc5';
+    }
+    else if(symbol >= '\x60' && symbol <= '\x7a')
+    {
+        return (symbol - 0x20);
+    }
+    else if(symbol >= 0xf0)
+    {
+        return (symbol - 0x20);
+    }
+
+    return symbol;
+}
+
+
+char SU::ToLower(char symbol)
+{
+    uint8 s = static_cast<uint8>(symbol);
+
+    if(s >= 0x41 && s <= 0x5a)
+    {
+        return static_cast<char>(s + 0x20);
+    }
+    else if(s >= 0xc0 && s < 0xF0)
+    {
+        return static_cast<char>(s + 0x20);
+    }
+
+    return symbol;
 }

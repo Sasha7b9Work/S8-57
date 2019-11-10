@@ -63,19 +63,19 @@ void Queue<T>::Push(T elem)
 template<typename T>
 T Queue<T>::Front()
 {
-    T result(0);
-
     if (pointer != nullptr)
     {
-        result = pointer[iFront];
+        T result = pointer[iFront];
         iFront++;
         if (iFront == iBack)
         {
             Destroy();
         }
+
+        return result;
     }
 
-    return result;
+    return T(0);
 }
 
 

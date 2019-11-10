@@ -35,4 +35,8 @@ public:
     static float StringToFloat(char *string);
 
     static char *ToUpper(void *str, uint size);
+
+    static char ToUpper(char symbol);
+
+    static char ToLower(char symbol);
 };
