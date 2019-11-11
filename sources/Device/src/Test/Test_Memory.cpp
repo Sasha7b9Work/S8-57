@@ -63,7 +63,7 @@ bool Test::FlashMemory::Data::Test()
 
     ::MemoryROM::Data::EraseAll();
 
-    int numRecord = 8192;
+    int numRecord = 128;
 
     for (int i = 0; i < numRecord; i++)
     {
