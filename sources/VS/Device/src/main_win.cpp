@@ -20,7 +20,7 @@ void update()
     {
         first = false;
 
-        if(set.dbg.runTest)
+        //if(set.dbg.runTest)
         {
             set.dbg.runTest = false;
 

@@ -23,4 +23,9 @@ namespace Test
             bool Test();
         }
     }
+
+    namespace RAM
+    {
+        bool Test();
+    }
 }

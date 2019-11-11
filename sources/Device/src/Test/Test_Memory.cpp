@@ -1,6 +1,7 @@
 #include "defines.h"
 #include "Data/DataSettings.h"
 #include "Data/Heap.h"
+#include "Hardware/Memory/RAM.h"
 #include "Hardware/Memory/ROM.h"
 #include "Hardware/Memory/Sector.h"
 #include "Settings/Settings.h"
@@ -53,9 +54,48 @@ namespace Test
 }
 
 
+bool Test::RAM::Test()
+{
+    Display::StartTest("Тест RAM");
+
+    int numRecord = 8192;
+
+    for (int i = 0; i < numRecord; i++)
+    {
+        static int line = -1;
+        
+        line = Display::AddMessage(String("Запись %d из %d, %3.1f%%", i, numRecord, 100.0F * i / numRecord).CString(), line);
+
+        DataSettings ds;
+
+        Test::ROM::Data::PrepareDS(&ds);
+
+        ::RAM::Save(&ds);
+
+        DataSettings *read;
+
+        ::RAM::Read(&read);
+
+        if (!Test::ROM::Data::Compare(ds.dataA, read->dataA, ds.SizeChannel()))
+        {
+            return false;
+        }
+
+        if (!Test::ROM::Data::Compare(ds.dataB, read->dataB, ds.SizeChannel()))
+        {
+            return false;
+        }
+
+        continue;
+    }
+
+    return true;
+}
+
+
 bool Test::ROM::Data::Test()
 {
-    Display::StartTest("Тест флеш-памяти");
+    Display::StartTest("Тест ROM");
 
     Display::AddMessage("Стираю память");
 
