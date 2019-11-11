@@ -6,7 +6,7 @@
 #include <cstring>
 
 
-int16 MemoryRAM::currentSignal = 0;
+int16 RAM::currentSignal = 0;
 
 /// Указатель на самый старый записанный пакет. Он будет стёрт первым
 PacketRAM *oldest = reinterpret_cast<PacketRAM *>(Heap::Begin());
@@ -14,13 +14,13 @@ PacketRAM *oldest = reinterpret_cast<PacketRAM *>(Heap::Begin());
 PacketRAM *newest = reinterpret_cast<PacketRAM *>(Heap::Begin());
 
 
-void MemoryRAM::Init()
+void RAM::Init()
 {
     std::memset(Heap::Begin(), 0x00, 4);
 }
 
 
-void MemoryRAM::Save(const DataSettings *ds)
+void RAM::Save(const DataSettings *ds)
 {
     PacketRAM *packet = newest;
 
@@ -41,13 +41,13 @@ bool PacketRAM::IsEmpty() const
 }
 
 
-bool MemoryRAM::Read(DataSettings **, uint)
+bool RAM::Read(DataSettings **, uint)
 {
     return false;
 }
 
 
-uint MemoryRAM::NumberDatas()
+uint RAM::NumberDatas()
 {
     return 0;
 }

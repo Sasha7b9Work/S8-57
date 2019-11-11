@@ -34,7 +34,7 @@ void Osci::Init()
 {
     Stop();
 
-    MemoryRAM::Init();
+    RAM::Init();
 
     ContextOsci::LoadRegUPR();
     Range::LoadBoth();
