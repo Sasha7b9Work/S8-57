@@ -8,7 +8,7 @@
 
 void Settings::Load(bool _default)
 {
-    if(_default || !MemoryROM::Settings::Load())
+    if(_default || !ROM::Settings::Load())
     {
         Reset();
         Osci::Init();
@@ -20,5 +20,5 @@ void Settings::Load(bool _default)
 
 void Settings::Save()
 {
-    MemoryROM::Settings::Save();
+    ROM::Settings::Save();
 }

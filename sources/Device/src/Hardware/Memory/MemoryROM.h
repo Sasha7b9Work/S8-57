@@ -5,7 +5,7 @@
 struct DataSettings;
 
 
-struct MemoryROM
+struct ROM
 {
 	static const uint SIZE = 2 * 1024 * 1024;
 

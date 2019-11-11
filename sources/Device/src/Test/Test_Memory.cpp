@@ -61,7 +61,7 @@ bool Test::FlashMemory::Data::Test()
 
     static uint totalMemory = 0;
 
-    ::MemoryROM::Data::EraseAll();
+    ::ROM::Data::EraseAll();
 
     int numRecord = 128;
 
@@ -75,15 +75,15 @@ bool Test::FlashMemory::Data::Test()
 
         PrepareDS(&ds);
 
-        uint numInROM = std::rand() % ::MemoryROM::Data::MAX_NUM_SAVED_WAVES;
+        uint numInROM = std::rand() % ::ROM::Data::MAX_NUM_SAVED_WAVES;
 
-        ::MemoryROM::Data::Save(numInROM, &ds);
+        ::ROM::Data::Save(numInROM, &ds);
 
         totalMemory += sizeof(PacketROM) + sizeof(DataSettings) + ds.SizeChannel() + ds.SizeChannel();
 
         DataSettings *dsRead = nullptr;
 
-        ::MemoryROM::Data::Read(numInROM, &dsRead);
+        ::ROM::Data::Read(numInROM, &dsRead);
 
         if (!Compare(ds.dataA, dsRead->dataA, ds.SizeChannel()))
         {
@@ -100,7 +100,7 @@ bool Test::FlashMemory::Data::Test()
     
     Display::AddMessage("Cтираю память");
 
-    ::MemoryROM::Data::EraseAll();
+    ::ROM::Data::EraseAll();
 
     Display::AddMessage("Завершено успешно");
 

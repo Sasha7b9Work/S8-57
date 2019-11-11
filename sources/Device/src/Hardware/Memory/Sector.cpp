@@ -252,7 +252,7 @@ const PacketROM *Sector::FirstFreePacket() const
 }
 
 
-void Sector::GetDataInfo(bool existData[MemoryROM::Data::MAX_NUM_SAVED_WAVES]) const
+void Sector::GetDataInfo(bool existData[ROM::Data::MAX_NUM_SAVED_WAVES]) const
 {
     const PacketROM *packet = FirstPacket();
 

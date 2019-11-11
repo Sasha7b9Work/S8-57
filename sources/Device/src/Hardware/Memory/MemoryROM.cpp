@@ -20,7 +20,7 @@ static uint ReadDoubleWord(uint address);
 
 
 
-void MemoryROM::Settings::Save()
+void ROM::Settings::Save()
 {
     /*
         Алгоритм нахождения первого свободного слова
@@ -126,7 +126,7 @@ static uint ReadDoubleWord(uint address)
 }
 
 
-bool MemoryROM::Settings::Load()
+bool ROM::Settings::Load()
 {
     uint address = AddressSavedSettings(0);
 
