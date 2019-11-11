@@ -11,7 +11,11 @@ int main(void)
 
     AT25160N::Init();
 
-    Test::Run();
+    if (set.dbg.runTest)
+    {
+        set.dbg.runTest = false;
+        Test::Run();
+    }
 
     while (1)
     {
