@@ -40,7 +40,7 @@ struct ROM
 
 
 
-struct MemoryOTP
+struct OTP
 {
     static bool SaveSerialNumber(char *servialNumber);
     /// ¬озвращает текстовое представление серийного номера. ¬ freeForWrite количество свободных мест дл€ записи

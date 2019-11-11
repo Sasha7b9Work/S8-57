@@ -106,7 +106,7 @@ static void ReadBytes(uint address, void *data, uint size)
     }
 }
 
-String MemoryOTP::GetSerialNumber(int *freeForWrite)
+String OTP::GetSerialNumber(int *freeForWrite)
 {
     char buffer[20];
     *freeForWrite = HAL_OTP::GetSerialNumber(buffer);
@@ -114,7 +114,7 @@ String MemoryOTP::GetSerialNumber(int *freeForWrite)
 }
 
 
-bool MemoryOTP::SaveSerialNumber(char *servialNumber)
+bool OTP::SaveSerialNumber(char *servialNumber)
 {
     return HAL_OTP::SaveSerialNumber(servialNumber);
 }
