@@ -6,7 +6,7 @@ void Test::Run()
 {
     Display::Init();
 
-    FlashMemory::Data::Test();
+    ROM::Data::Test();
 
     Display::DeInit();
 }

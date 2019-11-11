@@ -10,7 +10,7 @@
 
 namespace Test
 {
-    namespace FlashMemory
+    namespace ROM
     {
         namespace Data
         {
@@ -53,7 +53,7 @@ namespace Test
 }
 
 
-bool Test::FlashMemory::Data::Test()
+bool Test::ROM::Data::Test()
 {
     Display::StartTest("Тест флеш-памяти");
 

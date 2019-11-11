@@ -16,7 +16,7 @@ namespace Test
         int AddMessage(const char *message, int num = -1);
     }
 
-    namespace FlashMemory
+    namespace ROM
     {
         namespace Data
         {
