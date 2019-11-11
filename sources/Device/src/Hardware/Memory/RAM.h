@@ -4,31 +4,6 @@
 struct DataSettings;
 
 
-struct PacketRAM
-{
-    /*
-        ƒанные хран€тс€ таким образом
-    */
-    uint addrNewest;    /// јдрес следующего пакета, более "свежего"
-                        /// addrNext == 0x00000000 - в пакете ничего не записано
-                        /// addrNext == 0xffffffff - в пакете записаны данные, но это последний пакет
-    /// ”паковать данные по адресу this. ¬озвращает указатель на пакет, следующий за ним
-    PacketRAM *Pack(const DataSettings *ds);
-    /// ”паковать данные после данного пакета. ¬озвращает указатель на упкованный пакет, котоырй становитс€ самым новым
-    PacketRAM *PackNewest(const DataSettings *ds);
-    /// ¬озвращает указатель на следующий пакет
-    PacketRAM *Next() const;
-    /// ¬озвращает true, если пакет пустой (size == 0x0000)
-    bool IsEmpty() const;
-
-    uint Size() const;
-
-    DataSettings *GetDataSettings() const;
-
-    uint Address() const { return reinterpret_cast<uint>(this); };
-};
-
-
 struct RAM
 {
     /// Ќомер текущего с конца сигнала. 0 - последний считанный сигнал, 1 - предпоследний считанный сигнал.

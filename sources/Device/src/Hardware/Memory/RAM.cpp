@@ -6,12 +6,73 @@
 #include <cstring>
 
 
+
+struct Packet
+{
+    /*
+        Данные хранятся таким образом
+    */
+    uint addrNewest;    /// Адрес следующего пакета, более "свежего"
+                        /// addrNext == 0x00000000 - в пакете ничего не записано
+                        /// addrNext == 0xffffffff - в пакете записаны данные, но это последний пакет
+    /// Упаковать данные по адресу this. Возвращает указатель на пакет, следующий за ним
+    Packet *Pack(const DataSettings *)
+    {
+        if (IsEmpty())
+        {
+
+        }
+
+        return nullptr;
+    }
+    /// Упаковать данные после данного пакета. Возвращает указатель на упкованный пакет, котоырй становится самым новым
+    Packet *PackNewest(const DataSettings *)
+    {
+        return nullptr;
+    }
+    /// Возвращает указатель на следующий пакет
+    Packet *Next() const
+    {
+        return nullptr;
+    }
+    /// Возвращает true, если пакет пустой (size == 0x0000)
+    bool IsEmpty() const
+    {
+        return (addrNewest == 0x0000000);
+    }
+
+    uint Size() const
+    {
+        uint result = 0;
+
+        if (!IsEmpty())
+        {
+            result = sizeof(Packet) + sizeof(DataSettings) + GetDataSettings()->NeedMemoryForData();
+        }
+
+        return result;
+    }
+
+    DataSettings *GetDataSettings() const
+    {
+        if (IsEmpty())
+        {
+            return nullptr;
+        }
+
+        return reinterpret_cast<DataSettings *>(Address() + sizeof(Packet));
+    }
+
+    uint Address() const { return reinterpret_cast<uint>(this); };
+};
+
+
 int16 RAM::currentSignal = 0;
 
 /// Указатель на самый старый записанный пакет. Он будет стёрт первым
-PacketRAM *oldest = reinterpret_cast<PacketRAM *>(Heap::Begin());
+Packet *oldest = reinterpret_cast<Packet *>(Heap::Begin());
 /// Указатель на последний записанный пакет. Он будет стёрт последним
-PacketRAM *newest = reinterpret_cast<PacketRAM *>(Heap::Begin());
+Packet *newest = reinterpret_cast<Packet *>(Heap::Begin());
 
 
 void RAM::Init()
@@ -22,7 +83,7 @@ void RAM::Init()
 
 void RAM::Save(const DataSettings *ds)
 {
-    PacketRAM *packet = newest;
+    Packet *packet = newest;
 
     if(packet->IsEmpty())
     {
@@ -35,12 +96,6 @@ void RAM::Save(const DataSettings *ds)
 }
 
 
-bool PacketRAM::IsEmpty() const
-{
-    return (addrNewest == 0x0000000);
-}
-
-
 bool RAM::Read(DataSettings **, uint)
 {
     return false;
@@ -50,45 +105,4 @@ bool RAM::Read(DataSettings **, uint)
 uint RAM::NumberDatas()
 {
     return 0;
-}
-
-
-PacketRAM *PacketRAM::Pack(const DataSettings *)
-{
-    if(IsEmpty())
-    {
-
-    }
-
-    return nullptr;
-}
-
-
-PacketRAM *PacketRAM::PackNewest(const DataSettings *)
-{
-    return nullptr;
-}
-
-
-uint PacketRAM::Size() const
-{
-    uint result = 0;
-
-    if(!IsEmpty())
-    {
-        result = sizeof(PacketRAM) + sizeof(DataSettings) + GetDataSettings()->NeedMemoryForData();
-    }
-
-    return result;
-}
-
-
-DataSettings *PacketRAM::GetDataSettings() const
-{
-    if(IsEmpty())
-    {
-        return nullptr;
-    }
-
-    return reinterpret_cast<DataSettings *>(Address() + sizeof(PacketRAM));
 }
