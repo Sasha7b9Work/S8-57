@@ -143,7 +143,6 @@ source_group(Hardware\\HAL      FILES   ../../Device/src/Hardware/HAL/HAL.h
                                         ../../Device/src/Hardware/HAL/HAL_CRC32.cpp
                                         ../../Device/src/Hardware/HAL/HAL_DAC1.cpp
                                                      src/Hardware/HAL/HAL_DAC2_win.cpp
-                                                     src/Hardware/HAL/HAL_FLASH_win.cpp
                                                      src/Hardware/HAL/HAL_FSMC_win.cpp
                                         ../../Device/src/Hardware/HAL/HAL_IT.cpp
                                         ../../Device/src/Hardware/HAL/HAL_MSP.cpp
@@ -151,6 +150,7 @@ source_group(Hardware\\HAL      FILES   ../../Device/src/Hardware/HAL/HAL.h
                                         ../../Device/src/Hardware/HAL/HAL_OTP.cpp
                                         ../../Device/src/Hardware/HAL/HAL_PIO.cpp
                                         ../../Device/src/Hardware/HAL/HAL_PIO.h
+                                                     src/Hardware/HAL/HAL_ROM_win.cpp
                                         ../../Device/src/Hardware/HAL/HAL_RTC.cpp
                                                      src/Hardware/HAL/HAL_TIM2_win.cpp
                                                      src/Hardware/HAL/HAL_TIM3_win.cpp
@@ -262,7 +262,6 @@ file(GLOB SOURCES   ../../common/_VS/*
                     ../../Device/src/Hardware/HAL/HAL_CRC32.cpp
                     ../../Device/src/Hardware/HAL/HAL_DAC1.cpp
                                  src/Hardware/HAL/HAL_DAC2_win.cpp
-                                 src/Hardware/HAL/HAL_FLASH_win.cpp
                                  src/Hardware/HAL/HAL_FSMC_win.cpp
                     ../../Device/src/Hardware/HAL/HAL_IT.cpp
                     ../../Device/src/Hardware/HAL/HAL_MSP.cpp
@@ -270,6 +269,7 @@ file(GLOB SOURCES   ../../common/_VS/*
                     ../../Device/src/Hardware/HAL/HAL_OTP.cpp
                     ../../Device/src/Hardware/HAL/HAL_PIO.cpp
                     ../../Device/src/Hardware/HAL/HAL_PIO.h
+                                 src/Hardware/HAL/HAL_ROM_win.cpp
                     ../../Device/src/Hardware/HAL/HAL_RTC.cpp
                                  src/Hardware/HAL/HAL_TIM2_win.cpp
                                  src/Hardware/HAL/HAL_TIM3_win.cpp

@@ -891,11 +891,6 @@
               <FilePath>.\src\Hardware\HAL\HAL_DAC2_stm.cpp</FilePath>
             </File>
             <File>
-              <FileName>HAL_FLASH_stm.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Hardware\HAL\HAL_FLASH_stm.cpp</FilePath>
-            </File>
-            <File>
               <FileName>HAL_FSMC_stm.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Hardware\HAL\HAL_FSMC_stm.cpp</FilePath>
@@ -929,6 +924,11 @@
               <FileName>HAL_PIO.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Hardware\HAL\HAL_PIO.h</FilePath>
+            </File>
+            <File>
+              <FileName>HAL_ROM_stm.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\HAL\HAL_ROM_stm.cpp</FilePath>
             </File>
             <File>
               <FileName>HAL_RTC.cpp</FileName>
