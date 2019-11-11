@@ -34,19 +34,19 @@ struct DataSettings
     uint16      trigLev[2];
     int16       tShift;             ///< Смещение по времени
     Range::E    range[2];           ///< Масштаб по напряжению обоих каналов.
-    uint        tBase : 5;          ///< Масштаб по времени
-    uint        enableA : 1;        ///< Включён ли канал A
-    uint        enableB : 1;        ///< Включен ли канал B
-    uint        coupleA : 2;        ///< Режим канала по входу
-    uint        coupleB : 2;
-    uint        peackDet : 2;       ///< Включен ли пиковый детектор
-    uint        inverseA : 1;
-    uint        inverseB : 1;
+    uint        tBase       : 5;    ///< Масштаб по времени
+    uint        enableA     : 1;    ///< Включён ли канал A
+    uint        enableB     : 1;    ///< Включен ли канал B
+    uint        coupleA     : 2;    ///< Режим канала по входу
+    uint        coupleB     : 2;
+    uint        peackDet    : 2;    ///< Включен ли пиковый детектор
+    uint        inverseA    : 1;
+    uint        inverseB    : 1;
     uint        multiplierA : 1;
     uint        multiplierB : 1;
-    uint        enumPoints : 3;
-    uint        numInROM : 5;       ///< Номер данных в памяти ROM
-    uint        notUsed : 7;
+    uint        enumPoints  : 3;
+    uint        numInROM    : 5;    ///< Номер данных в памяти ROM
+    uint        notUsed     : 7;
     PackedTime  time;
     /// Заполняет структуру в соответствии с текущими настройками
     void Fill(uint8 *dataA = 0, uint8 *dataB = 0);
