@@ -1,6 +1,6 @@
 #include "defines.h"
 #include "Data/Heap.h"
-#include "Hardware/Memory/MemoryRAM.h"
+#include "Hardware/Memory/RAM.h"
 #include "Osci/StorageOsci.h"
 #include "Utils/Math.h"
 #include <cstring>

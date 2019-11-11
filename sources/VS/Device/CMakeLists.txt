@@ -156,12 +156,12 @@ source_group(Hardware\\HAL      FILES   ../../Device/src/Hardware/HAL/HAL.h
                                                      src/Hardware/HAL/HAL_TIM3_win.cpp
                                         ../../Device/src/Hardware/HAL/HAL_USART3.cpp
                                                      src/Hardware/HAL/HAL_win.cpp)
-source_group(Hardware\\Memory   FILES   ../../Device/src/Hardware/Memory/MemoryRAM.h
-                                        ../../Device/src/Hardware/Memory/MemoryRAM.cpp
-                                        ../../Device/src/Hardware/Memory/MemoryROM.h
+source_group(Hardware\\Memory   FILES   ../../Device/src/Hardware/Memory/MemoryROM.h
                                         ../../Device/src/Hardware/Memory/MemoryROM.cpp
                                         ../../Device/src/Hardware/Memory/MemoryROM_Data.cpp
                                                      src/Hardware/Memory/Memory_win.cpp
+                                        ../../Device/src/Hardware/Memory/RAM.h
+                                        ../../Device/src/Hardware/Memory/RAM.cpp
                                         ../../Device/src/Hardware/Memory/Sector.h
                                         ../../Device/src/Hardware/Memory/Sector.cpp
                                                      src/Hardware/Memory/Sector_win.cpp)
@@ -275,12 +275,12 @@ file(GLOB SOURCES   ../../common/_VS/*
                                  src/Hardware/HAL/HAL_TIM3_win.cpp
                     ../../Device/src/Hardware/HAL/HAL_USART3.cpp
                     
-                    ../../Device/src/Hardware/Memory/MemoryRAM.h
-                    ../../Device/src/Hardware/Memory/MemoryRAM.cpp
                     ../../Device/src/Hardware/Memory/MemoryROM.h
                     ../../Device/src/Hardware/Memory/MemoryROM.cpp
                     ../../Device/src/Hardware/Memory/MemoryROM_Data.cpp
                                  src/Hardware/Memory/Memory_win.cpp
+                    ../../Device/src/Hardware/Memory/RAM.h
+                    ../../Device/src/Hardware/Memory/RAM.cpp
                     ../../Device/src/Hardware/Memory/Sector.h
                     ../../Device/src/Hardware/Memory/Sector.cpp
                                  src/Hardware/Memory/Sector_win.cpp

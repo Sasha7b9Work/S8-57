@@ -5,7 +5,7 @@
 #include "FPGA/ContextOsci.h"
 #include "Hardware/Timer.h"
 #include "Hardware/HAL/HAL.h"
-#include "Hardware/Memory/MemoryRAM.h"
+#include "Hardware/Memory/RAM.h"
 #include "Osci/Display/DisplayOsci.h"
 #include "Osci/Measurements/AutoMeasurements.h"
 #include "Settings/Settings.h"

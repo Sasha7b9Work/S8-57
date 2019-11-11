@@ -956,16 +956,6 @@
           <GroupName>Hardware/Memory</GroupName>
           <Files>
             <File>
-              <FileName>MemoryRAM.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Hardware\Memory\MemoryRAM.h</FilePath>
-            </File>
-            <File>
-              <FileName>MemoryRAM.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Hardware\Memory\MemoryRAM.cpp</FilePath>
-            </File>
-            <File>
               <FileName>Sector.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Hardware\Memory\Sector.cpp</FilePath>
@@ -989,6 +979,16 @@
               <FileName>MemoryROM_Data.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Hardware\Memory\MemoryROM_Data.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>RAM.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\Memory\RAM.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>RAM.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Hardware\Memory\RAM.h</FilePath>
             </File>
           </Files>
         </Group>
