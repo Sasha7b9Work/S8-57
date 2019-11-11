@@ -9,48 +9,39 @@
 #include <cstdlib>
 
 
-namespace Test
+static void FillData(uint8 *data, uint numPoints)
 {
-    namespace ROM
+    for (uint i = 0; i < numPoints; i++)
     {
-        namespace Data
+        data[i] = static_cast<uint8>(i);
+    }
+}
+
+static bool Compare(uint8 *src, uint8 *dest, uint numPoints)
+{
+    for (uint i = 0; i < numPoints; i++)
+    {
+        if (*src++ != *dest++)
         {
-            static void FillData(uint8 *data, uint numPoints)
-            {
-                for (uint i = 0; i < numPoints; i++)
-                {
-                    data[i] = static_cast<uint8>(i);
-                }
-            }
-
-            static bool Compare(uint8 *src, uint8 *dest, uint numPoints)
-            {
-                for (uint i = 0; i < numPoints; i++)
-                {
-                    if (*src++ != *dest++)
-                    {
-                        return false;
-                    }
-                }
-
-                return true;
-            }
-
-            static void PrepareDS(DataSettings *ds)
-            {
-                uint8 *dataA = static_cast<uint8 *>(Heap::Begin());
-                uint8 *dataB = static_cast<uint8 *>(Heap::Begin() + ds->SizeChannel());
-
-                FillData(dataA, ds->SizeChannel());
-                FillData(dataB, ds->SizeChannel());
-
-                ds->Fill(dataA, dataB);
-
-                ds->enumPoints = static_cast<uint>(std::rand() % ENumPointsFPGA::Count);
-                ds->peackDet = PeakDetMode::Disabled;
-            }
+            return false;
         }
     }
+
+    return true;
+}
+
+static void PrepareDS(DataSettings *ds)
+{
+    uint8 *dataA = static_cast<uint8 *>(Heap::Begin());
+    uint8 *dataB = static_cast<uint8 *>(Heap::Begin() + ds->SizeChannel());
+
+    FillData(dataA, ds->SizeChannel());
+    FillData(dataB, ds->SizeChannel());
+
+    ds->Fill(dataA, dataB);
+
+    ds->enumPoints = static_cast<uint>(std::rand() % ENumPointsFPGA::Count);
+    ds->peackDet = PeakDetMode::Disabled;
 }
 
 
@@ -68,7 +59,7 @@ bool Test::RAM::Test()
 
         DataSettings ds;
 
-        Test::ROM::Data::PrepareDS(&ds);
+        PrepareDS(&ds);
 
         ::RAM::Save(&ds);
 
@@ -76,12 +67,12 @@ bool Test::RAM::Test()
 
         ::RAM::Read(&read);
 
-        if (!Test::ROM::Data::Compare(ds.dataA, read->dataA, ds.SizeChannel()))
+        if (!Compare(ds.dataA, read->dataA, ds.SizeChannel()))
         {
             return false;
         }
 
-        if (!Test::ROM::Data::Compare(ds.dataB, read->dataB, ds.SizeChannel()))
+        if (!Compare(ds.dataB, read->dataB, ds.SizeChannel()))
         {
             return false;
         }

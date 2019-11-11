@@ -164,7 +164,8 @@ uint RAM::NumberDatas()
 static uint AllocateMemoryForPacket(const DataSettings *ds)
 {
     if (newest == nullptr)                                                  // ≈щЄ нет ни одной записи
-    {                                                                       
+    {
+        newest = reinterpret_cast<Packet *>(BEGIN);
         return BEGIN;                                                       
     }                                                                       
 
