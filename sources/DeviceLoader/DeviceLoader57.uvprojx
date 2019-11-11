@@ -411,14 +411,14 @@
           <GroupName>common</GroupName>
           <Files>
             <File>
-              <FileName>Transceiver.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\common\Transceiver.cpp</FilePath>
-            </File>
-            <File>
               <FileName>Transceiver.h</FileName>
               <FileType>5</FileType>
               <FilePath>..\common\Transceiver.h</FilePath>
+            </File>
+            <File>
+              <FileName>Transceiver.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\common\Transceiver.cpp</FilePath>
             </File>
             <File>
               <FileName>Transceiver_Device.cpp</FileName>
@@ -681,19 +681,14 @@
           <GroupName>Display</GroupName>
           <Files>
             <File>
-              <FileName>Colors.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Display\Colors.cpp</FilePath>
-            </File>
-            <File>
               <FileName>Colors.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Display\Colors.h</FilePath>
             </File>
             <File>
-              <FileName>Display.cpp</FileName>
+              <FileName>Colors.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\Display\Display.cpp</FilePath>
+              <FilePath>.\src\Display\Colors.cpp</FilePath>
             </File>
             <File>
               <FileName>Display.h</FileName>
@@ -701,19 +696,24 @@
               <FilePath>.\src\Display\Display.h</FilePath>
             </File>
             <File>
+              <FileName>Display.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Display\Display.cpp</FilePath>
+            </File>
+            <File>
               <FileName>DisplayTypes.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Display\DisplayTypes.h</FilePath>
             </File>
             <File>
-              <FileName>Painter.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Display\Painter.cpp</FilePath>
-            </File>
-            <File>
               <FileName>Painter.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Display\Painter.h</FilePath>
+            </File>
+            <File>
+              <FileName>Painter.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Display\Painter.cpp</FilePath>
             </File>
             <File>
               <FileName>PainterText.cpp</FileName>
