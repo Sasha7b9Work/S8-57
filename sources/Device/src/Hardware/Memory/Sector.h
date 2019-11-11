@@ -1,5 +1,5 @@
 #pragma once
-#include "Hardware/Memory/MemoryROM.h"
+#include "Hardware/Memory/ROM.h"
 
 
 #define STATE_FREE    0xFFFFFFFFU

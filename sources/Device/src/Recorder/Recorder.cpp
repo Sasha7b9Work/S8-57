@@ -3,7 +3,7 @@
 #include "Display/Primitives.h"
 #include "FPGA/ContextRecorder.h"
 #include "Hardware/Timer.h"
-#include "Hardware/Memory/MemoryROM.h"
+#include "Hardware/Memory/ROM.h"
 #include "Hardware/HAL/HAL.h"
 #include "Osci/Osci.h"
 #include "Recorder/Recorder.h"

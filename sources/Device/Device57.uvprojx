@@ -956,29 +956,9 @@
           <GroupName>Hardware/Memory</GroupName>
           <Files>
             <File>
-              <FileName>Sector.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Hardware\Memory\Sector.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Sector.h</FileName>
+              <FileName>RAM.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\src\Hardware\Memory\Sector.h</FilePath>
-            </File>
-            <File>
-              <FileName>MemoryROM.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Hardware\Memory\MemoryROM.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>MemoryROM.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Hardware\Memory\MemoryROM.h</FilePath>
-            </File>
-            <File>
-              <FileName>MemoryROM_Data.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Hardware\Memory\MemoryROM_Data.cpp</FilePath>
+              <FilePath>.\src\Hardware\Memory\RAM.h</FilePath>
             </File>
             <File>
               <FileName>RAM.cpp</FileName>
@@ -986,9 +966,29 @@
               <FilePath>.\src\Hardware\Memory\RAM.cpp</FilePath>
             </File>
             <File>
-              <FileName>RAM.h</FileName>
+              <FileName>ROM.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\src\Hardware\Memory\RAM.h</FilePath>
+              <FilePath>.\src\Hardware\Memory\ROM.h</FilePath>
+            </File>
+            <File>
+              <FileName>ROM.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\Memory\ROM.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>ROM_Data.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\Memory\ROM_Data.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Sector.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Hardware\Memory\Sector.h</FilePath>
+            </File>
+            <File>
+              <FileName>Sector.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\Memory\Sector.cpp</FilePath>
             </File>
           </Files>
         </Group>
