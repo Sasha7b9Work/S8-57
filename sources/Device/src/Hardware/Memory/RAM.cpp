@@ -109,15 +109,55 @@ void RAM::Save(const DataSettings *ds)
 }
 
 
-bool RAM::Read(DataSettings **, uint)
+bool RAM::Read(DataSettings **ds, uint numFromEnd)
 {
-    return false;
+    uint number = NumberDatas();
+    
+    if (numFromEnd + 1 > number)
+    {
+        *ds = nullptr;
+        return false;
+    }
+
+    uint counter = number - 1 - numFromEnd;
+
+    Packet *packet = oldest;
+
+    while (counter > 0)
+    {
+        packet = reinterpret_cast<Packet *>(packet->addrNewest);
+        counter--;
+    }
+
+    *ds = packet->GetDataSettings();
+
+    return true;
 }
 
 
 uint RAM::NumberDatas()
 {
-    return 0;
+    if (newest == nullptr)
+    {
+        return 0;
+    }
+
+    if (oldest == nullptr)
+    {
+        return 1;
+    }
+
+    uint result = 0;
+
+    Packet *packet = oldest;
+
+    while (packet != nullptr)
+    {
+        result++;
+        packet = reinterpret_cast<Packet *>(packet->addrNewest);
+    }
+
+    return result;
 }
 
 
