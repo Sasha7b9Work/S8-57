@@ -40,7 +40,7 @@ struct Packet
     uint addrNewest;
 
     /// Упаковать данные по адресу this. Возвращает указатель на пакет, следующий за ним
-    Packet *Pack(const DataSettings *ds)
+    void Pack(const DataSettings *ds)
     {
         DataSettings data = *ds;
         data.dataA = data.dataB = nullptr;
@@ -64,8 +64,6 @@ struct Packet
         }
 
         std::memcpy(reinterpret_cast<uint *>(Address() + sizeof(Packet)), &data, sizeof(DataSettings)); // Записываем скорректированные настройки
-
-        return reinterpret_cast<Packet *>(addrNewest);
     }
 
     uint Address() const
@@ -85,7 +83,9 @@ struct Packet
 
     DataSettings *GetDataSettings() const
     {
-        return reinterpret_cast<DataSettings *>(Address() + sizeof(Packet));
+        uint address = Address() + sizeof(Packet);
+
+        return reinterpret_cast<DataSettings *>(address);
     }
 };
 
@@ -101,7 +101,10 @@ void RAM::Save(const DataSettings *ds)
 {
     uint address = AllocateMemoryForPacket(ds);         // Находим адрес для записи нового пакета
 
-    newest->addrNewest = address;                       // Указываем его в качестве адреса следующего пакета для предыдущего
+    if (newest)
+    {
+        newest->addrNewest = address;                       // Указываем его в качестве адреса следующего пакета для предыдущего
+    }
 
     newest = reinterpret_cast<Packet *>(address);       // Устанавилваем этот адрес в качестве новейшего пакета
 
@@ -165,7 +168,6 @@ static uint AllocateMemoryForPacket(const DataSettings *ds)
 {
     if (newest == nullptr)                                                  // Ещё нет ни одной записи
     {
-        newest = reinterpret_cast<Packet *>(BEGIN);
         return BEGIN;                                                       
     }                                                                       
 

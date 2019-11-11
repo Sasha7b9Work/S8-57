@@ -17,7 +17,7 @@ static void FillData(uint8 *data, uint numPoints)
     }
 }
 
-static bool Compare(uint8 *src, uint8 *dest, uint numPoints)
+static bool CheckData(uint8 *data, uint numPoints)
 {
     for (uint i = 0; i < numPoints; i++)
     {
@@ -58,6 +58,8 @@ bool Test::RAM::Test()
         line = Display::AddMessage(String("Запись %d из %d, %3.1f%%", i, numRecord, 100.0F * i / numRecord).CString(), line);
 
         DataSettings ds;
+
+        uint8 *oldA = ds.
 
         PrepareDS(&ds);
 
