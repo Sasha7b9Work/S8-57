@@ -55,7 +55,7 @@ void ROM::Settings::Save()
 
     set.size = sizeof(set);
 
-    HAL_FLASH::WriteBufferBytes(address, &set, sizeof(set));
+    HAL_ROM::WriteBufferBytes(address, &set, sizeof(set));
 }
 
 

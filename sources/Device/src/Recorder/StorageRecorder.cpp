@@ -43,7 +43,7 @@ void Record::AddPoint(BitSet16 dataA, BitSet16 dataB)
 {
     BitSet32 bs(dataA.halfWord, dataB.halfWord);
 
-    HAL_FLASH::WriteBufferBytes(SECTOR(Sector::_17_RECORDER_1).address + numPoints * sizeof(Point), &bs, sizeof(BitSet32));
+    HAL_ROM::WriteBufferBytes(SECTOR(Sector::_17_RECORDER_1).address + numPoints * sizeof(Point), &bs, sizeof(BitSet32));
 
     numPoints++;
 }

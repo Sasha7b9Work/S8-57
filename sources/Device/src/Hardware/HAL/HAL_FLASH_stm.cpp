@@ -19,7 +19,7 @@
 #define _128K (128 * 1024)
 
 
-const Sector HAL_FLASH::sectors[Sector::Count] =
+const Sector HAL_ROM::sectors[Sector::Count] =
 {
     { Sector::_00_BOOT_1,     0x08000000U, _16K },
     { Sector::_01_BOOT_2,     0x08004000U, _16K },
@@ -74,7 +74,7 @@ void Sector::Erase() const
 }
 
 
-void HAL_FLASH::WriteBytes(uint address, const uint8 *data, uint size)
+void HAL_ROM::WriteBytes(uint address, const uint8 *data, uint size)
 {
     CLEAR_FLASH_FLAGS;
 
@@ -93,7 +93,7 @@ void HAL_FLASH::WriteBytes(uint address, const uint8 *data, uint size)
 }
 
 
-void HAL_FLASH::WriteBufferBytes(uint address, const void *buffer, uint size)
+void HAL_ROM::WriteBufferBytes(uint address, const void *buffer, uint size)
 {
     Beeper::WaitForCompletion();
 

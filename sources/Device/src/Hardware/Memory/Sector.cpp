@@ -58,7 +58,7 @@ bool PacketROM::WriteToSector(const Sector *sector) const
         return false;
     }
 
-    HAL_FLASH::WriteBufferBytes(addressWrite, this, size);
+    HAL_ROM::WriteBufferBytes(addressWrite, this, size);
 
     return true;
 }
@@ -68,7 +68,7 @@ void PacketROM::Erase() const
 {
     uint data = STATE_ERASED;
 
-    HAL_FLASH::WriteBufferBytes(Address(), &data, 4);
+    HAL_ROM::WriteBufferBytes(Address(), &data, 4);
 }
 
 
@@ -94,7 +94,7 @@ bool Sector::ExistPackets() const
 
 static void WriteToROM(uint *address, const void *data, uint size)
 {
-    HAL_FLASH::WriteBufferBytes(*address, data, size);
+    HAL_ROM::WriteBufferBytes(*address, data, size);
     *address += size;
 }
 

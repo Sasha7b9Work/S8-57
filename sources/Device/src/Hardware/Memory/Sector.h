@@ -8,7 +8,7 @@
 
 #define TYPE_DATA     0U
 
-#define SECTOR(i) HAL_FLASH::sectors[i]
+#define SECTOR(i) HAL_ROM::sectors[i]
 #define ADDR_SECTOR(i) (SECTOR(i).address)
 #define SIZE_SECTOR(i) (SECTOR(i).size)
 #define END_SECTOR(i) (ADDR_SECTOR(i) + SIZE_SECTOR(i))

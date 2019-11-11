@@ -12,7 +12,7 @@
 uint8 eeprom[ROM::SIZE];
 
 
-const Sector HAL_FLASH::sectors[Sector::Count] =
+const Sector HAL_ROM::sectors[Sector::Count] =
 {
     { Sector::_00_BOOT_1,     reinterpret_cast<uint>(&eeprom[0]),                     _16K },
     { Sector::_01_BOOT_2,     reinterpret_cast<uint>(&eeprom[_16K]),                  _16K },
@@ -41,13 +41,13 @@ const Sector HAL_FLASH::sectors[Sector::Count] =
 };
 
 
-void HAL_FLASH::WriteBufferBytes(uint address, const void *buffer, uint size)
+void HAL_ROM::WriteBufferBytes(uint address, const void *buffer, uint size)
 {
     WriteBytes(address, static_cast<const uint8 *>(buffer), size);
 }
 
 
-void HAL_FLASH::WriteBytes(uint address, const uint8 *buffer, uint size)
+void HAL_ROM::WriteBytes(uint address, const uint8 *buffer, uint size)
 {
     for (uint i = 0; i < size; i++)
     {

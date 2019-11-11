@@ -79,7 +79,7 @@ struct HAL_DAC2
 };
 
 
-struct HAL_FLASH
+struct HAL_ROM
 {
     static const Sector sectors[Sector::Count];
 
