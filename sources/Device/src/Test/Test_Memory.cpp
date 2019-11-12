@@ -1,6 +1,7 @@
 #include "defines.h"
 #include "Data/DataSettings.h"
 #include "Data/Heap.h"
+#include "Data/Reader.h"
 #include "Hardware/Memory/RAM.h"
 #include "Hardware/Memory/ROM.h"
 #include "Hardware/Memory/Sector.h"
@@ -21,7 +22,7 @@ static bool CheckData(uint8 *data, uint numPoints)
 {
     for (uint i = 0; i < numPoints; i++)
     {
-        if (*src++ != *dest++)
+        if (data[i] != static_cast<uint8>(i))
         {
             return false;
         }
@@ -32,13 +33,10 @@ static bool CheckData(uint8 *data, uint numPoints)
 
 static void PrepareDS(DataSettings *ds)
 {
-    uint8 *dataA = static_cast<uint8 *>(Heap::Begin());
-    uint8 *dataB = static_cast<uint8 *>(Heap::Begin() + ds->SizeChannel());
+    FillData(OUT_A, ds->SizeChannel());
+    FillData(OUT_B, ds->SizeChannel());
 
-    FillData(dataA, ds->SizeChannel());
-    FillData(dataB, ds->SizeChannel());
-
-    ds->Fill(dataA, dataB);
+    ds->Fill(OUT_A, OUT_B);
 
     ds->enumPoints = static_cast<uint>(std::rand() % ENumPointsFPGA::Count);
     ds->peackDet = PeakDetMode::Disabled;
@@ -59,8 +57,6 @@ bool Test::RAM::Test()
 
         DataSettings ds;
 
-        uint8 *oldA = ds.
-
         PrepareDS(&ds);
 
         ::RAM::Save(&ds);
@@ -69,12 +65,12 @@ bool Test::RAM::Test()
 
         ::RAM::Read(&read);
 
-        if (!Compare(ds.dataA, read->dataA, ds.SizeChannel()))
+        if (!CheckData(read->dataA, read->SizeChannel()))
         {
             return false;
         }
 
-        if (!Compare(ds.dataB, read->dataB, ds.SizeChannel()))
+        if (!CheckData(read->dataB, read->SizeChannel()))
         {
             return false;
         }
@@ -118,12 +114,12 @@ bool Test::ROM::Data::Test()
 
         ::ROM::Data::Read(numInROM, &dsRead);
 
-        if (!Compare(ds.dataA, dsRead->dataA, ds.SizeChannel()))
+        if (!CheckData(dsRead->dataA, dsRead->SizeChannel()))
         {
             return false;
         }
 
-        if (!Compare(ds.dataB, dsRead->dataB, ds.SizeChannel()))
+        if (!CheckData(dsRead->dataB, dsRead->SizeChannel()))
         {
             return false;
         }
