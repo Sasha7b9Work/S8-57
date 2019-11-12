@@ -32,16 +32,19 @@ static bool CheckData(uint8 *data, uint numPoints)
 
 static void PrepareDS(DataSettings *ds)
 {
+    set.mem.enumPoints = static_cast<ENumPointsFPGA::E>(std::rand() % ENumPointsFPGA::Count);
+    set.time.peakDet = PeakDetMode::Disabled;
+    
+    ds->Fill(0, 0);
+
     uint8 *dataA = static_cast<uint8 *>(Heap::Begin());
     uint8 *dataB = static_cast<uint8 *>(Heap::Begin() + ds->SizeChannel());
-
+    
     FillData(dataA, ds->SizeChannel());
     FillData(dataB, ds->SizeChannel());
 
-    ds->Fill(dataA, dataB);
-
-    ds->enumPoints = static_cast<uint>(std::rand() % ENumPointsFPGA::Count);
-    ds->peackDet = PeakDetMode::Disabled;
+    ds->dataA = dataA;
+    ds->dataB = dataB;
 }
 
 
@@ -94,7 +97,7 @@ bool Test::ROM::Data::Test()
 
     ::ROM::Data::EraseAll();
 
-    int numRecord = 128000;
+    int numRecord = 128;
 
     for (int i = 0; i < numRecord; i++)
     {
