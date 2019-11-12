@@ -13,6 +13,10 @@ struct Packet;
 #define END   reinterpret_cast<uint>(Heap::End())
 
 
+static uint8 *heapBegin = Heap::Begin();
+static uint8 *heapEnd = Heap::End();
+
+
 int16 RAM::currentSignal = 0;
 /// Указатель на самый старый записанный пакет. Он будет стёрт первым
 Packet *oldest = reinterpret_cast<Packet *>(BEGIN);
@@ -28,9 +32,11 @@ static void AllocateMemoryFromBegin(uint size);
 /// Записывает по адресу dest. Возвращает адрес первого байта после записи
 static uint *WriteToRAM(uint *dest, const void *src, uint size)
 {
-    std::memcpy(dest, src, size);
+    uint8 *address = reinterpret_cast<uint8 *>(dest);
+
+    std::memcpy(address, src, size);
     
-    return (dest + size);
+    return reinterpret_cast<uint *>(address + size);
 }
 
 
