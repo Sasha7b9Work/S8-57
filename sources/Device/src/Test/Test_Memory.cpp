@@ -53,7 +53,7 @@ bool Test::RAM::Test()
 {
     Display::StartTest("Тест RAM");
 
-    int numRecord = 8192;
+    int numRecord = 1024 * 1024 * 1024;
 
     for (int i = 0; i < numRecord; i++)
     {
