@@ -1,7 +1,6 @@
 #include "defines.h"
 #include "Data/DataSettings.h"
 #include "Data/Heap.h"
-#include "Data/Reader.h"
 #include "Hardware/Memory/RAM.h"
 #include "Hardware/Memory/ROM.h"
 #include "Hardware/Memory/Sector.h"
@@ -18,11 +17,11 @@ static void FillData(uint8 *data, uint numPoints)
     }
 }
 
-static bool CheckData(uint8 *data, uint numPoints)
+static bool Compare(uint8 *src, uint8 *dest, uint numPoints)
 {
     for (uint i = 0; i < numPoints; i++)
     {
-        if (data[i] != static_cast<uint8>(i))
+        if (*src++ != *dest++)
         {
             return false;
         }
@@ -33,10 +32,13 @@ static bool CheckData(uint8 *data, uint numPoints)
 
 static void PrepareDS(DataSettings *ds)
 {
-    FillData(OUT_A, ds->SizeChannel());
-    FillData(OUT_B, ds->SizeChannel());
+    uint8 *dataA = static_cast<uint8 *>(Heap::Begin());
+    uint8 *dataB = static_cast<uint8 *>(Heap::Begin() + ds->SizeChannel());
 
-    ds->Fill(OUT_A, OUT_B);
+    FillData(dataA, ds->SizeChannel());
+    FillData(dataB, ds->SizeChannel());
+
+    ds->Fill(dataA, dataB);
 
     ds->enumPoints = static_cast<uint>(std::rand() % ENumPointsFPGA::Count);
     ds->peackDet = PeakDetMode::Disabled;
@@ -65,12 +67,12 @@ bool Test::RAM::Test()
 
         ::RAM::Read(&read);
 
-        if (!CheckData(read->dataA, read->SizeChannel()))
+        if (!Compare(ds.dataA, read->dataA, ds.SizeChannel()))
         {
             return false;
         }
 
-        if (!CheckData(read->dataB, read->SizeChannel()))
+        if (!Compare(ds.dataB, read->dataB, ds.SizeChannel()))
         {
             return false;
         }
@@ -92,7 +94,7 @@ bool Test::ROM::Data::Test()
 
     ::ROM::Data::EraseAll();
 
-    int numRecord = 128;
+    int numRecord = 128000;
 
     for (int i = 0; i < numRecord; i++)
     {
@@ -114,12 +116,12 @@ bool Test::ROM::Data::Test()
 
         ::ROM::Data::Read(numInROM, &dsRead);
 
-        if (!CheckData(dsRead->dataA, dsRead->SizeChannel()))
+        if (!Compare(ds.dataA, dsRead->dataA, ds.SizeChannel()))
         {
             return false;
         }
 
-        if (!CheckData(dsRead->dataB, dsRead->SizeChannel()))
+        if (!Compare(ds.dataB, dsRead->dataB, ds.SizeChannel()))
         {
             return false;
         }
