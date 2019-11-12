@@ -1,6 +1,7 @@
 #include "defines.h"
 #include "Data/DataSettings.h"
 #include "Data/Heap.h"
+#include "Data/Reader.h"
 #include "Hardware/Memory/RAM.h"
 #include "Hardware/Memory/ROM.h"
 #include "Hardware/Memory/Sector.h"
@@ -32,13 +33,13 @@ static bool CheckData(uint8 *data, uint numPoints)
 
 static void PrepareDS(DataSettings *ds)
 {
-    set.mem.enumPoints = static_cast<ENumPointsFPGA::E>(std::rand() % ENumPointsFPGA::Count);
-    set.time.peakDet = PeakDetMode::Disabled;
-    
     ds->Fill(0, 0);
 
-    uint8 *dataA = static_cast<uint8 *>(Heap::Begin());
-    uint8 *dataB = static_cast<uint8 *>(Heap::Begin() + ds->SizeChannel());
+    ds->peackDet = static_cast<uint>(PeakDetMode::Disabled);
+    ds->enumPoints = static_cast<uint>(std::rand() % ENumPointsFPGA::Count);
+
+    uint8 *dataA = OUT_A;
+    uint8 *dataB = OUT_B;
     
     FillData(dataA, ds->SizeChannel());
     FillData(dataB, ds->SizeChannel());
