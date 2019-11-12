@@ -15,6 +15,9 @@ struct Packet;
 
 static uint8 *heapBegin = Heap::Begin();
 static uint8 *heapEnd = Heap::End();
+/// Объём записанных данных
+static uint writedData = 0;
+static uint sizeStorage = static_cast<uint>(heapEnd - heapBegin);
 
 
 int16 RAM::currentSignal = 0;
@@ -105,6 +108,14 @@ void RAM::Init()
 
 void RAM::Save(const DataSettings *ds)
 {
+    static int counter = 0;
+    counter++;
+
+    if (counter == 0x19)
+    {
+        counter = 0x19;
+    }
+
     uint address = AllocateMemoryForPacket(ds);         // Находим адрес для записи нового пакета
 
     if (newest)
@@ -115,6 +126,8 @@ void RAM::Save(const DataSettings *ds)
     newest = reinterpret_cast<Packet *>(address);       // Устанавилваем этот адрес в качестве новейшего пакета
 
     newest->Pack(ds);                                   // И упаковываем данные
+
+    writedData += newest->Size();
 }
 
 
@@ -169,7 +182,6 @@ uint RAM::NumberDatas()
     return result;
 }
 
-
 static uint AllocateMemoryForPacket(const DataSettings *ds)
 {
     if (newest == nullptr)                                                  // Ещё нет ни одной записи
@@ -217,5 +229,20 @@ static void AllocateMemoryFromBegin(uint size)
 
 static void RemoveOldest()
 {
+    static int counter = 0;
+    counter++;
+
+    Packet *oldOldest = oldest;
+    Packet *newOldest = newest;
+
     oldest = reinterpret_cast<Packet *>(oldest->addrNewest);
+
+    if (oldest == nullptr)
+    {
+        oldest = oldest;
+        oldOldest = oldOldest;
+        newOldest = newOldest;
+        writedData = writedData;
+        sizeStorage = sizeStorage;
+    }
 }
