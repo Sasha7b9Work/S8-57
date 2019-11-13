@@ -73,12 +73,12 @@ bool Test::RAM::Test()
 
     Display::StartTest("Тест RAM");
 
-    int numRecord = 1024 * 1024 * 1024;
+    int numRecord = 1024;
 
     for (int i = 0; i < numRecord; i++)
     {
         static int line = -1;
-        
+       
         line = Display::AddMessage(String("Запись %d из %d, %3.1f%%", i, numRecord, 100.0F * i / numRecord).CString(), line);
 
         DataSettings ds;

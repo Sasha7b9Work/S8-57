@@ -11,7 +11,7 @@ int main(void)
 
     AT25160N::Init();
 
-    if (set.dbg.runTest)
+    //if (set.dbg.runTest)
     {
         set.dbg.runTest = false;
         Test::Run();

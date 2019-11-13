@@ -12,14 +12,6 @@ struct Packet;
 #define BEGIN reinterpret_cast<uint>(Heap::Begin())
 #define END   reinterpret_cast<uint>(Heap::End())
 
-
-static uint8 *heapBegin = Heap::Begin();
-static uint8 *heapEnd = Heap::End();
-/// Объём записанных данных
-static uint writedData = 0;
-static uint sizeStorage = static_cast<uint>(heapEnd - heapBegin);
-
-
 int16 RAM::currentSignal = 0;
 /// Указатель на самый старый записанный пакет. Он будет стёрт первым
 Packet *oldest = reinterpret_cast<Packet *>(BEGIN);
@@ -79,6 +71,11 @@ struct Packet
     {
         return reinterpret_cast<uint>(this);
     };
+    /// Возвращает адрес первого следующего за пакетом байта
+    uint End() const
+    {
+        return Address() + Size();
+    }
     /// Возвращает размер памяти, необходимой для хранения данных в соответсвии с настройками ds
     static uint NeedMemoryForPacedData(const DataSettings *ds)
     {
@@ -116,6 +113,11 @@ void RAM::Save(const DataSettings *ds)
         counter = 0x19;
     }
 
+    if (NumberDatas() == 16)
+    {
+        counter = counter;
+    }
+
     uint address = AllocateMemoryForPacket(ds);         // Находим адрес для записи нового пакета
 
     if (newest)
@@ -126,8 +128,6 @@ void RAM::Save(const DataSettings *ds)
     newest = reinterpret_cast<Packet *>(address);       // Устанавилваем этот адрес в качестве новейшего пакета
 
     newest->Pack(ds);                                   // И упаковываем данные
-
-    writedData += newest->Size();
 }
 
 
@@ -186,10 +186,10 @@ static uint AllocateMemoryForPacket(const DataSettings *ds)
 {
     if (newest == nullptr)                                                  // Ещё нет ни одной записи
     {
-        return BEGIN;                                                       
-    }                                                                       
+        return BEGIN;
+    }
 
-    uint addrFirst = newest->Address() + newest->Size();                    // По этому адресу должна быть следующая запись
+    uint addrFirst = newest->End();                                         // По этому адресу должна быть следующая запись
     uint addrLast = addrFirst + Packet::NeedMemoryForPacedData(ds);         // А это последний байт следующей записи
                                                                             
     if (newest > oldest)                                                    // Нормальный порядок следования - более новые записи расположены после более старых
@@ -211,6 +211,10 @@ static uint AllocateMemoryForPacket(const DataSettings *ds)
         while (addrLast >= reinterpret_cast<uint>(oldest))
         {
             RemoveOldest();
+            if (oldest->Address() == BEGIN)
+            {
+                break;
+            }
         }
     }
 
@@ -229,20 +233,5 @@ static void AllocateMemoryFromBegin(uint size)
 
 static void RemoveOldest()
 {
-    static int counter = 0;
-    counter++;
-
-    Packet *oldOldest = oldest;
-    Packet *newOldest = newest;
-
     oldest = reinterpret_cast<Packet *>(oldest->addrNewest);
-
-    if (oldest == nullptr)
-    {
-        oldest = oldest;
-        oldOldest = oldOldest;
-        newOldest = newOldest;
-        writedData = writedData;
-        sizeStorage = sizeStorage;
-    }
 }
