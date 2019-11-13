@@ -9,6 +9,8 @@ namespace Test
     {
         void Init();
 
+        void DeInit();
+
         void StartTest(const char *nameTest);
 
         int AddMessage(const char *message, int num = -1);

@@ -26,6 +26,8 @@ void Test::Run()
     set.Save();
 
     Device::Reset();
+
+    Display::DeInit();
 }
 
 
