@@ -14,9 +14,6 @@ static void FillData(uint8 *dataA, uint8 *dataB, uint numPoints)
 {
     for (uint i = 0; i < numPoints; i++)
     {
-        //dataA[i] = static_cast<uint8>(std::rand());
-        //dataB[i] = static_cast<uint8>(std::rand());
-
         dataA[i] = static_cast<uint8>(i);
         dataB[i] = static_cast<uint8>(i);
     }
@@ -35,16 +32,6 @@ static bool CheckData(uint8 *dataA, uint8 *dataB, uint numPoints)
         {
             return false;
         }
-
-        //if (dataA[i] != OUT_A[i])
-        //{
-        //    return false;
-        //}
-        //
-        //if (dataB[i] != OUT_B[i])
-        //{
-        //    return false;
-        //}
     }
 
     return true;
@@ -73,13 +60,16 @@ bool Test::RAM::Test()
 
     Display::StartTest("Тест RAM");
 
-    int numRecord = 1024;
+    int numRecord = 2048;
 
     for (int i = 0; i < numRecord; i++)
     {
         static int line = -1;
-       
-        line = Display::AddMessage(String("Запись %d из %d, %3.1f%%", i, numRecord, 100.0F * i / numRecord).CString(), line);
+
+        if (numRecord % 128 == 0)
+        {
+            line = Display::AddMessage(String("Запись %d из %d, %3.1f%%", i, numRecord, 100.0F * i / numRecord).CString(), line);
+        }
 
         DataSettings ds;
 
@@ -89,7 +79,7 @@ bool Test::RAM::Test()
 
         DataSettings *read;
 
-        ::RAM::Read(&read);
+        ::RAM::Read(&read, std::rand() % ::RAM::NumberDatas());
 
         if (!CheckData(read->dataA, read->dataB, read->SizeChannel()))
         {
