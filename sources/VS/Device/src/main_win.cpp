@@ -19,13 +19,8 @@ void update()
     if (first)
     {
         first = false;
-
-        //if(set.dbg.runTest)
-        {
-            set.dbg.runTest = false;
-
-            Test::Run();
-        }
+        set.dbg.runTest = true;
+        Test::Run();
     }
 
     Device::Update();

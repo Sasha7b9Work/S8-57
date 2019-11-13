@@ -18,17 +18,6 @@ void Test::Display::Init()
 }
 
 
-void Test::Display::DeInit()
-{
-    while (queue->Size())
-    {
-        delete queue->Back();
-    }
-
-    delete queue;
-}
-
-
 static void Update()
 {
     Painter::BeginScene(Color::BACK);

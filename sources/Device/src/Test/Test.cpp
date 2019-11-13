@@ -1,14 +1,42 @@
 #include "defines.h"
+#include "Device.h"
+#include "Settings/Settings.h"
 #include "Test/Test.h"
+
+
+
+static void RunTest(bool (*func)());
 
 
 void Test::Run()
 {
+    if (!set.dbg.runTest)
+    {
+        return;
+    }
+
+    set.dbg.runTest = false;
+    
     Display::Init();
 
-    //ROM::Data::Test();
+    RunTest(RAM::Test);
 
-    RAM::Test();
+    RunTest(ROM::Data::Test);
 
-    Display::DeInit();
+    set.Save();
+
+    Device::Reset();
+}
+
+
+static void RunTest(bool (*func)())
+{
+    if (!func())
+    {
+        Test::Display::AddMessage("!!! Ошибка !!!");
+        while (true)
+        {
+
+        }
+    }
 }

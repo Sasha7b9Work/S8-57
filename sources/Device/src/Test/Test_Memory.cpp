@@ -60,13 +60,13 @@ bool Test::RAM::Test()
 
     Display::StartTest("Тест RAM");
 
-    int numRecord = 2048;
+    int numRecord = 4096;
 
-    for (int i = 0; i < numRecord; i++)
+    for (int i = 1; i <= numRecord; i++)
     {
         static int line = -1;
 
-        if (numRecord % 128 == 0)
+        if (i % 32 == 0)
         {
             line = Display::AddMessage(String("Запись %d из %d, %3.1f%%", i, numRecord, 100.0F * i / numRecord).CString(), line);
         }
@@ -107,7 +107,7 @@ bool Test::ROM::Data::Test()
 
     int numRecord = 128;
 
-    for (int i = 0; i < numRecord; i++)
+    for (int i = 1; i <= numRecord; i++)
     {
         static int num = -1;
 
@@ -138,8 +138,6 @@ bool Test::ROM::Data::Test()
     Display::AddMessage("Cтираю память");
 
     ::ROM::Data::EraseAll();
-
-    Display::AddMessage("Завершено успешно");
 
     return true;
 }
