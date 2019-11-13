@@ -76,20 +76,3 @@ private:
     /// Указатель на положение байта, который будет записан следующим
     uint pointerToByte;
 };
-
-class StorageOsci
-{
-public:
-    /// Возвращает указатель на данные
-    static DataOsci *GetData(int fromEnd = 0);
-    /// Очистка. Выполняется после переключения длины памяти
-    static void Clear();
-    /// Подготавливает место в хранилище для новых данных. Возвращает указатель на структуру, которую можно заполнять данными
-    static DataOsci *PrepareForNewData();
-    /// Подготавливает новый фрейм для хранения данных поточечного вывода
-    static void PrepareNewFrameP2P();
-    /// Возвращает фрейм поточечного вывода
-    static DataOsciP2P *GetFrameP2P();
-
-    static int NumElementsInStorage();
-};

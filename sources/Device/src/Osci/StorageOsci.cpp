@@ -230,50 +230,6 @@ DataOsci *HeapWorker::newest = nullptr;
 
 
 
-DataOsci *StorageOsci::PrepareForNewData()
-{
-    if (SET_DISABLED_BOTH)
-    {
-        return nullptr;
-    }
-
-    DataSettings ds;
-    ds.Fill();
-
-    DataOsci *data = HeapWorker::GetMemoryForData(&ds);
-
-    data->Create();
-
-    DataAccessor::FillNewData(data);
-
-    return data;
-}
-
-
-void StorageOsci::PrepareNewFrameP2P()
-{
-    DataOsciP2P *data = HeapWorker::GetMemoryForDataP2P();
-
-    data->Create();
-
-    DataAccessor::FillNewData(data);
-
-    data->timeStart = TIME_MS;
-}
-
-
-DataOsci *StorageOsci::GetData(int fromEnd)
-{
-    return HeapWorker::GetData(fromEnd);
-}
-
-
-DataOsciP2P *StorageOsci::GetFrameP2P()
-{
-    return HeapWorker::GetDataP2P();
-}
-
-
 void DataOsci::Create()
 {
     num = allDatas++;
@@ -516,16 +472,4 @@ uint DataOsciP2P::ReadingBytes() const
     }
 
     return readingPoints * 2;
-}
-
-
-int StorageOsci::NumElementsInStorage()
-{
-    return HeapWorker::NumElementsInStorage();
-}
-
-
-void StorageOsci::Clear()
-{
-    HeapWorker::Reset();
 }
