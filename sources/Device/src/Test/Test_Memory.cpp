@@ -9,9 +9,9 @@
 #include <cstdlib>
 
 
-static void FillData(uint8 *dataA, uint8 *dataB, uint numPoints);
-static bool CheckData(const uint8 *dataA, const uint8 *dataB, uint numPoints);
 static void PrepareDS(DataSettings *ds);
+static void FillData(DataSettings *ds);
+static bool CheckData(const DataSettings *ds);
 /// Создаёт данные в RAM под индексом "0"
 static DataSettings *CreateDataInRAM(DataSettings *ds);
 
@@ -39,11 +39,11 @@ bool Test::RAM::Test()
 
         ::RAM::PrepareForNewData(&ds);
 
-        FillData(ds.dataA, ds.dataB, ds.SizeChannel());
+        FillData(&ds);
 
         DataSettings *read = ::RAM::Read(std::rand() % ::RAM::NumberDatas());
 
-        if (!CheckData(read->dataA, read->dataB, read->SizeChannel()))
+        if (!CheckData(read))
         {
             return false;
         }
@@ -83,7 +83,7 @@ bool Test::ROM::Data::Test()
 
         ::ROM::Data::Read(numInROM, &dsRead);
 
-        if (!CheckData(dsRead->dataA, dsRead->dataB, dsRead->SizeChannel()))
+        if (!CheckData(dsRead))
         {
             return false;
         }
@@ -99,25 +99,37 @@ bool Test::ROM::Data::Test()
 }
 
 
-static void FillData(uint8 *dataA, uint8 *dataB, uint numPoints)
-{
-    for (uint i = 0; i < numPoints; i++)
-    {
-        dataA[i] = static_cast<uint8>(i);
-        dataB[i] = static_cast<uint8>(i);
+#define FILL(en, dat)                           \
+    if (en) {                                   \
+        uint8 *data = dat;                      \
+        for (uint i = 0; i < numPoints; i++) {  \
+            data[i] = static_cast<uint8>(i);    \
+        }                                       \
     }
+
+static void FillData(DataSettings *ds)
+{
+    uint numPoints = ds->SizeChannel();
+
+    FILL(ds->enableA, ds->dataA);
+    FILL(ds->enableB, ds->dataB);
 }
 
 
-static bool CheckData(const uint8 *dataA, const uint8 *dataB, uint numPoints)
-{
-    for (uint i = 0; i < numPoints; i++)
-    {
-        if (dataA[i] != static_cast<uint8>(i) || dataB[i] != static_cast<uint8>(i))
-        {
-            return false;
-        }
+#define CHECK(en, dat)                                           \
+    if (en) {                                                    \
+        uint8 *data = dat;                                       \
+        for (uint i = 0; i < numPoints; i++)                     \
+            if (data[i] != static_cast<uint8>(i)) return false;  \
     }
+
+
+static bool CheckData(const DataSettings *ds)
+{
+    uint numPoints = ds->SizeChannel();
+
+    CHECK(ds->enableA, ds->dataA);
+    CHECK(ds->enableB, ds->dataB);
 
     return true;
 }
@@ -126,7 +138,8 @@ static bool CheckData(const uint8 *dataA, const uint8 *dataB, uint numPoints)
 static void PrepareDS(DataSettings *ds)
 {
     ds->Fill();
-    ds->enableA = ds->enableB = true;
+    ds->enableA = static_cast<uint>(std::rand() % 2);
+    ds->enableB = ds->enableA ? static_cast<uint>(std::rand() % 2) : 0;
     ds->peackDet = static_cast<uint>(PeakDetMode::Disabled);
     ds->enumPoints = static_cast<uint>(std::rand() % ENumPointsFPGA::Count);
 }
@@ -135,10 +148,7 @@ static void PrepareDS(DataSettings *ds)
 static DataSettings *CreateDataInRAM(DataSettings *ds)
 {
     PrepareDS(ds);
-
     ::RAM::PrepareForNewData(ds);
-    
-    FillData(ds->dataA, ds->dataB, ds->SizeChannel());
-
+    FillData(ds);
     return ds;
 }
