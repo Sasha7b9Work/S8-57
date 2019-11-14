@@ -28,7 +28,7 @@ struct ROM
 
         static void Save(uint numInROM, const DataSettings *ds);
 
-        static void Save(uint numInROM, const DataSettings *ds, uint8 *dataA, uint8 *dataB);
+        //static void Save(uint numInROM, const DataSettings *ds, uint8 *dataA, uint8 *dataB);
         /// Получает данные о сигнале номер num. Если сигнала нет, в ds записывается 0
         static const DataSettings *Read(uint numInROM);
 

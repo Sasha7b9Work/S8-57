@@ -19,7 +19,7 @@ void Test::Run()
     
     Display::Init();
 
-    RunTest(RAM::Test);
+    //RunTest(RAM::Test);
 
     RunTest(ROM::Data::Test);
 

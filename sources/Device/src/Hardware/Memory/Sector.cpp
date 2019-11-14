@@ -174,16 +174,51 @@ const PacketROM *Sector::WriteData(uint numInROM, const DataSettings *ds) const
 
 const PacketROM *Sector::FindValidPacket(uint numInROM) const
 {
+    static uint64 counter = 0;
+
+    static bool first = true;
+
+    if (first)
+    {
+        first = false;
+        counter = 0;
+    }
+
+    counter++;
+
+    if (counter == 1045)
+    {
+        counter = counter;
+    }
+
     const PacketROM *packet = FirstPacket();
 
     while (packet && !packet->IsFree())
     {
         if (packet->IsData())
         {
-            const DataSettings *settings = packet->UnPack();
+            const DataSettings *ds = packet->UnPack();
 
-            if (settings->numInROM == numInROM)
+            if (ds->numInROM == numInROM)
             {
+                for (uint j = 0; j < ds->SizeChannel(); j++)
+                {
+                    if (ds->enableA)
+                    {
+                        if (ds->dataA[j] != static_cast<uint8>(j))
+                        {
+                            return packet;
+                        }
+                    }
+                    if (ds->enableB)
+                    {
+                        if (ds->dataB[j] != static_cast<uint8>(j))
+                        {
+                            return packet;
+                        }
+                    }
+                }
+
                 return packet;
             }
         }

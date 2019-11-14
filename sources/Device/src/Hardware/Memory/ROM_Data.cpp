@@ -45,12 +45,38 @@ void ROM::Data::GetInfo(bool existData[MAX_NUM_SAVED_WAVES])
 
 const DataSettings *ROM::Data::Read(uint numInROM)
 {
+    static int counter = 0;
+    counter++;
+
+    if (counter == 4745)
+    {
+        counter = counter;
+    }
+
     for (int i = 0; i < NUM_SECTORS; i++)
     {
         const DataSettings *ds = sectors[i]->ReadData(numInROM);
 
         if (ds)
         {
+            for (uint j = 0; j < ds->SizeChannel(); j++)
+            {
+                if (ds->enableA)
+                {
+                    if (ds->dataA[j] != static_cast<uint8>(j))
+                    {
+                        return ds;
+                    }
+                }
+                if (ds->enableB)
+                {
+                    if (ds->dataB[j] != static_cast<uint8>(j))
+                    {
+                        return ds;
+                    }
+                }
+            }
+
             return ds;
         }
     }
@@ -73,6 +99,14 @@ void ROM::Data::Erase(uint numInROM)
 
 void ROM::Data::Save(uint numInROM, const DataSettings *ds)
 {
+    static int counter = 0;
+    counter++;
+
+    if (counter == 4745)
+    {
+        counter = counter;
+    }
+
     Erase(numInROM);
 
     Compress();
@@ -96,13 +130,13 @@ void ROM::Data::Save(uint numInROM, const DataSettings *ds)
 }
 
 
-void ROM::Data::Save(uint numInROM, const DataSettings *ds, uint8 *dataA, uint8 *dataB)
-{
-    const_cast<DataSettings *>(ds)->dataA = dataA;
-    const_cast<DataSettings *>(ds)->dataB = dataB;
-
-    Save(numInROM, ds);
-}
+//void ROM::Data::Save(uint numInROM, const DataSettings *ds, uint8 *dataA, uint8 *dataB)
+//{
+//    const_cast<DataSettings *>(ds)->dataA = dataA;
+//    const_cast<DataSettings *>(ds)->dataB = dataB;
+//
+//    Save(numInROM, ds);
+//}
 
 
 void ROM::Data::EraseAll()
