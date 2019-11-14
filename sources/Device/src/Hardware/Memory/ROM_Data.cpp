@@ -45,16 +45,18 @@ void ROM::Data::GetInfo(bool existData[MAX_NUM_SAVED_WAVES])
 
 const DataSettings *ROM::Data::Read(uint numInROM)
 {
+    //LOG_WRITE("read %d", numInROM);
     static int counter = 0;
-    counter++;
-
-    if (counter == 4745)
-    {
-        counter = counter;
-    }
 
     for (int i = 0; i < NUM_SECTORS; i++)
     {
+        counter++;
+
+        if(counter == 0x29ac)
+        {
+            counter = counter;
+        }
+
         const DataSettings *ds = sectors[i]->ReadData(numInROM);
 
         if (ds)

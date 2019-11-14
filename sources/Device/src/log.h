@@ -2,7 +2,8 @@
 #include "Utils/String.h"
 
 
-#define LOG_WRITE(...)          Log::Message(String(__VA_ARGS__).CString())
+//#define LOG_WRITE(...)          Log::Message(String(__VA_ARGS__).CString())
+#define LOG_WRITE(...)          Log::Message(__VA_ARGS__);
 #define LOG_WRITE_AND_SHOW(...) Log::Message(String(__VA_ARGS__).CString()); Painter::EndScene();
 #define LOG_ERROR(...)          Log::Message(__FILE__, __LINE__, String(__VA_ARGS__).CString())
 
@@ -14,6 +15,7 @@
 
 struct Log
 {
-    static void Message(const char *message);
+    //static void Message(const char *message);
+    static void Message(const char *format, ...);
     static void Message(const char *file, int line, const char *message);
 };

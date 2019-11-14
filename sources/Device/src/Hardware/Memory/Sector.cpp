@@ -174,27 +174,20 @@ const PacketROM *Sector::WriteData(uint numInROM, const DataSettings *ds) const
 
 const PacketROM *Sector::FindValidPacket(uint numInROM) const
 {
+    LOG_WRITE("");
+    LOG_WRITE("address %x", address);
     static uint64 counter = 0;
-
-    static bool first = true;
-
-    if (first)
-    {
-        first = false;
-        counter = 0;
-    }
-
-    counter++;
-
-    if (counter == 1045)
-    {
-        counter = counter;
-    }
 
     const PacketROM *packet = FirstPacket();
 
     while (packet && !packet->IsFree())
     {
+        counter++;
+        //LOG_WRITE("count = %d, addr = %d, size = %d, packet = %d, d = %d", counter, address, size, packet, static_cast<int>(End()) - reinterpret_cast<int>(packet));
+
+        LOG_WRITE("packet = %x", packet);
+        LOG_WRITE("delta = %x", static_cast<int>(End()) - reinterpret_cast<int>(packet));
+
         if (packet->IsData())
         {
             const DataSettings *ds = packet->UnPack();
@@ -233,6 +226,8 @@ const PacketROM *Sector::FindValidPacket(uint numInROM) const
 const DataSettings *Sector::ReadData(uint numInROM) const
 {
     const PacketROM *packet = FindValidPacket(numInROM);
+
+    //LOG_WRITE("address = %x, size = %x, packet = %x, delta = %d", , size, packet, static_cast<int>(End()) - reinterpret_cast<int>(packet));
 
     if (packet)
     {
