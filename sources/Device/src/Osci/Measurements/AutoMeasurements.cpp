@@ -1395,7 +1395,7 @@ bool AutoMeasurements::DataIsSetting()
 
 void AutoMeasurements::SetData()
 {
-    isSet = (DATA != nullptr);
+    isSet = (DS != nullptr);
 
     if (isSet)
     {

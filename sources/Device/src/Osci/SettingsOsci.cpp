@@ -336,7 +336,7 @@ uint ENumPointsFPGA::PointsInChannel() const
 
 void TrigLevel::Find()
 {
-    if (DATA)
+    if (DS)
     {
         Chan::E ch = static_cast<Chan::E>(set.trig.source);
 

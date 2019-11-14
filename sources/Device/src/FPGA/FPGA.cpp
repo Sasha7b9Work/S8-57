@@ -2,9 +2,9 @@
 #include "device.h"
 #include "FPGA/FPGA.h"
 #include "Hardware/HAL/HAL.h"
+#include "Hardware/Memory/RAM.h"
 #include "Settings/Settings.h"
 #include "Recorder/Recorder.h"
-#include "Osci/StorageOsci.h"
 #include <cstring>
 
 
@@ -105,11 +105,13 @@ void FPGA::ClearDataRand()
 
 void FPGA::ReadData()
 {
-    DataOsci *data = StorageOsci::PrepareForNewData();
+    DataSettings ds;
+    ds.Fill();
+    RAM::PrepareForNewData(&ds);
 
-    if (ReadDataChanenl(Chan::A, data->dataA))
+    if (ReadDataChanenl(Chan::A, ds.dataA))
     {
-        if (ReadDataChanenl(Chan::B, data->dataB))
+        if (ReadDataChanenl(Chan::B, ds.dataB))
         {
         }
         else
@@ -120,23 +122,23 @@ void FPGA::ReadData()
 
     if (set.disp.ENumAverage != ENumAverage::_1)               // Если включено усреднение
     {
-        DataOsci *last = StorageOsci::GetData(0);
-        DataOsci *prev = StorageOsci::GetData(1);
+        DataSettings *last = nullptr;
+        DataSettings *prev = nullptr;
+
+        RAM::Read(&last, 0);
+        RAM::Read(&prev, 1);
 
         if (prev && last)
         {
-            const DataSettings *setLast = last->Settings();
-            const DataSettings *setPrev = prev->Settings();
-
-            if (setLast->Equals(*setPrev))
+            if (last->Equals(*prev))
             {
-                if (ENABLED_A(setLast))
+                if (ENABLED_A(last))
                 {
-                    AveragerOsci::Process(Chan::A, last->DataA(), setLast->SizeChannel());
+                    AveragerOsci::Process(Chan::A, last->dataA, last->SizeChannel());
                 }
-                if (ENABLED_B(setLast))
+                if (ENABLED_B(last))
                 {
-                    AveragerOsci::Process(Chan::B, last->DataB(), setLast->SizeChannel());
+                    AveragerOsci::Process(Chan::B, last->dataB, last->SizeChannel());
                 }
             }
         }

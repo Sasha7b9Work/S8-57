@@ -116,3 +116,15 @@ void PackedTime::ChangeYear(int delta)
 {
     CHANGE(year, delta, 50);
 }
+
+
+void FrameP2P::AddPoints(BitSet16, BitSet16)
+{
+
+}
+
+
+void FrameP2P::FillBufferForDraw(Chan::E, Buffer *)
+{
+
+}

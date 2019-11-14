@@ -35,7 +35,6 @@ void Osci::Init()
     Stop();
 
     RAM::Init();
-
     ContextOsci::LoadRegUPR();
     Range::LoadBoth();
     RShift::Load(Chan::A);
@@ -48,7 +47,6 @@ void Osci::Init()
     ContextOsci::LoadCalibratorMode();
     LoadHoldfOff();
     HAL_PIO::Init(HPort::_G, HPin::_1, HMode::Input, HPull::Up);
-    StorageOsci::Clear();
     ContextOsci::OnPressStart();
 }
 
@@ -72,7 +70,7 @@ void Osci::Start()
 
     if (InModeP2P())
     {
-        StorageOsci::PrepareNewFrameP2P();
+        RAM::PrepareNewFrameP2P();
     }
 
     ContextOsci::isRunning = true;
@@ -182,7 +180,7 @@ void Osci::ReadPointP2P()
     {
         BitSet16 dataA(HAL_FSMC::ReadFromFPGA(RD::DATA_A), HAL_FSMC::ReadFromFPGA(RD::DATA_A + 1));
         BitSet16 dataB(HAL_FSMC::ReadFromFPGA(RD::DATA_B), HAL_FSMC::ReadFromFPGA(RD::DATA_B + 1));
-        StorageOsci::GetFrameP2P()->AddPoints(dataA, dataB);
+        RAM::GetFrameP2P()->AddPoints(dataA, dataB);
     }
 }
 
@@ -286,7 +284,7 @@ void Osci::OnChangedPoints()
     ContextOsci::Reset();
     TShift::Set(set.time.shift);
     ContextOsci::Reset();
-    StorageOsci::Clear();
+    RAM::Init();
 }
 
 

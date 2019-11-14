@@ -267,12 +267,12 @@ static void DrawChannel(Chan::E ch)
 
     if (Osci::InModeP2P())
     {
-        if (DATA_P2P)
+        if (FRAME_P2P)
         {
-            DATA_P2P->FillBufferForDraw(ch, &buffer);
+            FRAME_P2P->FillBufferForDraw(ch, &buffer);
             data = buffer.data;
         }
-        else if(DATA == nullptr)
+        else if(DS == nullptr)
         {
             return;
         }

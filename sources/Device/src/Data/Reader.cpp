@@ -3,7 +3,6 @@
 #include "Data/Reader.h"
 #include "Hardware/Memory/RAM.h"
 #include "Osci/Osci.h"
-#include "Osci/StorageOsci.h"
 #include "Settings/Settings.h"
 
 
@@ -16,34 +15,24 @@ uint8 *dataOUT[2] = { ccm[0], ccm[1] };
 /// 
 uint16 *ave[2] = { reinterpret_cast<uint16 *>(ccm[2]), reinterpret_cast<uint16 *>(ccm[3]) };
 /// Указатель на настройки считанных данных
-const DataSettings *pDS = nullptr;
-/// Указатель на считанные даныне
-DataOsci *pData = nullptr;
-/// Указатель на фрейм поточечного вывода
-DataOsciP2P *pDataP2P = nullptr;
+DataSettings *pDS = nullptr;
 
+FrameP2P *frameP2P = nullptr;
 
 /// Поиск уровня синхронизации, если установлен автоматический режим поиска
 static void FindTrigLevelIfNeed();
 
 
-
 void Reader::ReadDataFromStorage()
 {
-    DATA_P2P = nullptr;
-    DATA = nullptr;
     DS = nullptr;
 
     IN_A = IN_B = nullptr;
 
-    DATA = StorageOsci::GetData((set.mem.modeWork == ModeWork::RAM) ? RAM::currentSignal : 0);
-
-    if (DATA != nullptr)
+    if (RAM::Read(&DS, (set.mem.modeWork == ModeWork::RAM) ? static_cast<uint>(RAM::currentSignal) : 0U))
     {
-        DS = DATA->Settings();
-
-        IN_A = DATA->DataA();
-        IN_B = DATA->DataB();
+        IN_A = DS->dataA;
+        IN_B = DS->dataB;
 
         FindTrigLevelIfNeed();
     }
@@ -59,19 +48,18 @@ void Reader::ReadDataP2P()
 {
     if (Osci::InModeP2P())
     {
-        DATA_P2P = StorageOsci::GetFrameP2P();
-
-        if (DATA_P2P)
+        FRAME_P2P = RAM::GetFrameP2P();
+        if (FRAME_P2P)
         {
             if (DS)
             {
-                if ((set.trig.startMode == TrigStartMode::Wait) && DS->Equals(*DATA_P2P->Settings()))
+                if ((set.trig.startMode == TrigStartMode::Wait) && DS->Equals(*FRAME_P2P->ds))
                 {
-                    DATA_P2P = nullptr;
+                    FRAME_P2P = nullptr;
                 }
                 else
                 {
-                    DS = DATA_P2P->Settings();
+                    DS = FRAME_P2P->ds;
                 }
             }
         }

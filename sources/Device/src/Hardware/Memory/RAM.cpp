@@ -1,7 +1,7 @@
 #include "defines.h"
+#include "Data/DataSettings.h"
 #include "Data/Heap.h"
 #include "Hardware/Memory/RAM.h"
-#include "Osci/StorageOsci.h"
 #include "Utils/Math.h"
 #include <cstring>
 
@@ -234,4 +234,22 @@ static void AllocateMemoryFromBegin(uint size)
 static void RemoveOldest()
 {
     oldest = reinterpret_cast<Packet *>(oldest->addrNewest);
+}
+
+
+FrameP2P *RAM::GetFrameP2P()
+{
+    return nullptr;
+}
+
+
+void RAM::PrepareForNewData(DataSettings *)
+{
+
+}
+
+
+void RAM::PrepareNewFrameP2P()
+{
+
 }

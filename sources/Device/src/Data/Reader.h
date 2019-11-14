@@ -1,19 +1,19 @@
 #pragma once
-#include "Osci/StorageOsci.h"
+#include "Data/DataSettings.h"
+#include "Hardware/Memory/RAM.h"
 #include "Menu/Pages/Include/PageMemory.h"
 
 
-extern DataOsciP2P*        pDataP2P;
-extern DataOsci*           pData;
-extern const DataSettings *pDS;         ///< ”казатель на настройки текущего рисуемого сигнала. ќбращатьс€ к нему следует через макрос DS.
-extern uint8 *dataOUT[2];               ///< —читанные данные второго канала
-extern const uint8 *dataIN[2];
+struct FrameP2P;
 
+extern FrameP2P *frameP2P;
+extern DataSettings *pDS;           ///< ”казатель на настройки текущего рисуемого сигнала. ќбращатьс€ к нему следует через макрос DS.
+extern uint8 *dataOUT[2];           ///< —читанные данные второго канала
+extern const uint8 *dataIN[2];
 extern uint16 *ave[2];
 
-#define DATA_P2P    pDataP2P
-#define DATA        pData
-#define DS          pDS                 ///< ”казатель на настройки текущего рисуемого сигнала.
+#define DS          pDS             ///< ”казатель на настройки текущего рисуемого сигнала.
+#define FRAME_P2P   frameP2P
 
 #define IN(ch)  (dataIN[static_cast<int>(ch)])
 #define IN_A    IN(Chan::A)

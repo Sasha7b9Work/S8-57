@@ -1506,16 +1506,6 @@
               <FilePath>.\src\Osci\SettingsOsci.cpp</FilePath>
             </File>
             <File>
-              <FileName>StorageOsci.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Osci\StorageOsci.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>StorageOsci.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Osci\StorageOsci.h</FilePath>
-            </File>
-            <File>
               <FileName>FreqMeter.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Osci\FreqMeter.cpp</FilePath>

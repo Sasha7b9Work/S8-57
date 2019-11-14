@@ -6,7 +6,6 @@
 #include "Hardware/Memory/RAM.h"
 #include "Menu/MenuItems.h"
 #include "Osci/Osci.h"
-#include "Osci/StorageOsci.h"
 #include "Settings/Settings.h"
 #include "Utils/Math.h"
 #include "Utils/Values.h"
@@ -14,7 +13,7 @@
 
 static void OnPress_Next()
 {
-    Math::CircleIncrease<int16>(&RAM::currentSignal, 0, static_cast<int16>(StorageOsci::NumElementsInStorage()) - 1);
+    Math::CircleIncrease<int16>(&RAM::currentSignal, 0, static_cast<int16>(RAM::NumberDatas()) - 1);
 }
 
 static void Draw_Next(int x, int y)
@@ -31,7 +30,7 @@ DEF_GRAPH_BUTTON( bNext,                                                        
 
 static void OnPress_Prev()
 {
-    Math::CircleDecrease<int16>(&RAM::currentSignal, 0, static_cast<int16>(StorageOsci::NumElementsInStorage()) - 1);
+    Math::CircleDecrease<int16>(&RAM::currentSignal, 0, static_cast<int16>(RAM::NumberDatas()) - 1);
 }
 
 static void Draw_Prev(int x, int y)
@@ -73,7 +72,7 @@ static void AfterDraw_RAM()
     Rectangle(width, height).Draw(Grid::Right() - width, Grid::Top(), Color::FILL);
     Integer(RAM::currentSignal + 1).ToString(false, 3).Draw(Grid::Right() - width + 2, Grid::Top() + 1);
     String("/").Draw(Grid::Right() - width + 17, Grid::Top() + 1);
-    Integer(StorageOsci::NumElementsInStorage()).ToString(false, 3).Draw(Grid::Right() - width + 23, Grid::Top() + 1);
+    Integer(static_cast<int>(RAM::NumberDatas())).ToString(false, 3).Draw(Grid::Right() - width + 23, Grid::Top() + 1);
 }
 
 static bool HandlerKey_RAM(const KeyEvent &)

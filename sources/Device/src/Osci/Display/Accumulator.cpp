@@ -1,4 +1,5 @@
 #include "defines.h"
+#include "Data/DataSettings.h"
 #include "Data/Reader.h"
 #include "Osci/Display/DisplayOsci.h"
 #include "Settings/Settings.h"
@@ -52,5 +53,5 @@ void DisplayOsci::Accumulator::Reset()
 
 static uint CurrentFrame()
 {
-    return (DATA) ? DATA->Number() : 0;
+    return (DS) ? DS->id : 0;
 }

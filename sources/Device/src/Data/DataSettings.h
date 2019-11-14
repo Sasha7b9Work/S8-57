@@ -2,6 +2,9 @@
 #include "Settings/SettingsOsci.h"
 
 
+class Buffer;
+
+
 struct PackedTime
 {
     unsigned timeMS : 32;   /// \brief Время в миллисекундах от старта системы. Т.к. структура заполняется во время сохранения данных в хранилище, то 
@@ -119,3 +122,12 @@ struct DataSettings
 
 #define ENUM_POINTS(ds)         ((ds)->enumPoints)
 #define BYTES_IN_CHANNEL(ds)    ((uint)(ds)->SizeChannel())
+
+
+struct FrameP2P
+{
+    uint numPoints;
+    DataSettings *ds;
+    void FillBufferForDraw(Chan::E ch, Buffer *buffer);
+    void AddPoints(BitSet16 dataA, BitSet16 dataB);
+};
