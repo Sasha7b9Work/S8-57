@@ -1,7 +1,6 @@
 #include "defines.h"
 #include "Data/DataSettings.h"
 #include "Data/Heap.h"
-#include "Data/Reader.h"
 #include "Hardware/Memory/RAM.h"
 #include "Hardware/Memory/ROM.h"
 #include "Hardware/Memory/Sector.h"
@@ -36,7 +35,9 @@ bool Test::RAM::Test()
 
         PrepareDS(&ds);
 
-        ::RAM::Save(&ds);
+        ::RAM::PrepareForNewData(&ds);
+
+        FillData(ds.dataA, ds.dataB, ds.SizeChannel());
 
         DataSettings *read = ::RAM::Read(std::rand() % ::RAM::NumberDatas());
 
@@ -128,16 +129,7 @@ static bool CheckData(const uint8 *dataA, const uint8 *dataB, uint numPoints)
 
 static void PrepareDS(DataSettings *ds)
 {
-    ds->Fill(0, 0);
-
+    ds->Fill();
     ds->peackDet = static_cast<uint>(PeakDetMode::Disabled);
     ds->enumPoints = static_cast<uint>(std::rand() % ENumPointsFPGA::Count);
-
-    uint8 *dataA = OUT_A;
-    uint8 *dataB = OUT_B;
-
-    FillData(dataA, dataB, ds->SizeChannel());
-
-    ds->dataA = dataA;
-    ds->dataB = dataB;
 }

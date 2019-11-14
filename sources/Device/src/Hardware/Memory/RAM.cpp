@@ -66,6 +66,28 @@ struct Packet
 
         std::memcpy(reinterpret_cast<uint *>(Address() + sizeof(Packet)), &data, sizeof(DataSettings)); // Записываем скорректированные настройки
     }
+    /// Подготовить пакет для сохранения данных в соответствии с настройками ds
+    void Prepare(DataSettings *ds)
+    {
+        addrNewest = 0x00000000;
+        uint *address = reinterpret_cast<uint *>(Address() + sizeof(Packet));
+
+        ds->dataA = ds->dataB = nullptr;
+        uint8 *addrData = reinterpret_cast<uint8 *>(reinterpret_cast<uint8 *>(address) + sizeof(DataSettings));
+
+        if (ds->enableA)
+        {
+            ds->dataA = addrData;
+            addrData += ds->SizeChannel();
+        }
+
+        if (ds->enableB)
+        {
+            ds->dataB = addrData;
+        }
+
+        WriteToRAM(address, ds, sizeof(DataSettings));
+    }
 
     uint Address() const
     {
@@ -103,18 +125,20 @@ void RAM::Init()
 }
 
 
-void RAM::Save(const DataSettings *ds)
+void RAM::PrepareForNewData(DataSettings *ds)
 {
+    ds->id = NumberDatas() ? Read()->id + 1 : 0;
+
     uint address = AllocateMemoryForPacket(ds);         // Находим адрес для записи нового пакета
 
     if (newest)
     {
-        newest->addrNewest = address;                       // Указываем его в качестве адреса следующего пакета для предыдущего
+        newest->addrNewest = address;                   // Указываем его в качестве адреса следующего пакета для предыдущего
     }
 
     newest = reinterpret_cast<Packet *>(address);       // Устанавилваем этот адрес в качестве новейшего пакета
 
-    newest->Pack(ds);                                   // И упаковываем данные
+    newest->Prepare(ds);                                   // И упаковываем данные
 }
 
 
@@ -224,12 +248,6 @@ static void RemoveOldest()
 FrameP2P *RAM::GetFrameP2P()
 {
     return nullptr;
-}
-
-
-void RAM::PrepareForNewData(DataSettings *)
-{
-
 }
 
 

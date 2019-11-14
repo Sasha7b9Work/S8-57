@@ -21,7 +21,7 @@ void Test::Run()
 
     RunTest(RAM::Test);
 
-    RunTest(ROM::Data::Test);
+    //RunTest(ROM::Data::Test);
 
     set.Save();
 
