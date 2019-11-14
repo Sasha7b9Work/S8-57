@@ -12,6 +12,8 @@
 static void FillData(uint8 *dataA, uint8 *dataB, uint numPoints);
 static bool CheckData(const uint8 *dataA, const uint8 *dataB, uint numPoints);
 static void PrepareDS(DataSettings *ds);
+/// Создаёт данные в RAM под индексом "0"
+static DataSettings *CreateDataInRAM(DataSettings *ds);
 
 
 bool Test::RAM::Test()
@@ -61,8 +63,6 @@ bool Test::ROM::Data::Test()
 
     Display::AddMessage("Стираю память");
 
-    static uint totalMemory = 0;
-
     ::ROM::Data::EraseAll();
 
     int numRecord = 128;
@@ -73,15 +73,11 @@ bool Test::ROM::Data::Test()
 
         num = Display::AddMessage(String("Запись %d из %d, %3.1f%%", i, numRecord, 100.0F * i / numRecord).CString(), num);
 
-        DataSettings ds;
-
-        PrepareDS(&ds);
-
         uint numInROM = std::rand() % ::ROM::Data::MAX_NUM_SAVED_WAVES;
 
-        ::ROM::Data::Save(numInROM, &ds);
+        DataSettings ds;
 
-        totalMemory += sizeof(PacketROM) + sizeof(DataSettings) + ds.SizeChannel() + ds.SizeChannel();
+        ::ROM::Data::Save(numInROM, CreateDataInRAM(&ds));
 
         DataSettings *dsRead = nullptr;
 
@@ -130,6 +126,19 @@ static bool CheckData(const uint8 *dataA, const uint8 *dataB, uint numPoints)
 static void PrepareDS(DataSettings *ds)
 {
     ds->Fill();
+    ds->enableA = ds->enableB = true;
     ds->peackDet = static_cast<uint>(PeakDetMode::Disabled);
     ds->enumPoints = static_cast<uint>(std::rand() % ENumPointsFPGA::Count);
+}
+
+
+static DataSettings *CreateDataInRAM(DataSettings *ds)
+{
+    PrepareDS(ds);
+
+    ::RAM::PrepareForNewData(ds);
+    
+    FillData(ds->dataA, ds->dataB, ds->SizeChannel());
+
+    return ds;
 }
