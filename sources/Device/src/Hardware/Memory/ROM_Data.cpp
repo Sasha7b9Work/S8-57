@@ -43,19 +43,19 @@ void ROM::Data::GetInfo(bool existData[MAX_NUM_SAVED_WAVES])
 }
 
 
-bool ROM::Data::Read(uint numInROM, DataSettings **ds)
+const DataSettings *ROM::Data::Read(uint numInROM)
 {
-    *ds = nullptr;
-
     for (int i = 0; i < NUM_SECTORS; i++)
     {
-        if (sectors[i]->ReadData(numInROM, ds))
+        const DataSettings *ds = sectors[i]->ReadData(numInROM);
+
+        if (ds)
         {
-            return true;
+            return ds;
         }
     }
 
-    return false;
+    return nullptr;
 }
 
 

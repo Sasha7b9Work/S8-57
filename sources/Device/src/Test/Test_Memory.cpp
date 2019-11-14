@@ -20,7 +20,7 @@ bool Test::RAM::Test()
 {
     ::RAM::Init();
 
-    Display::StartTest("Тест RAM");
+    Display::StartTest("Тест ОЗУ");
 
     int numRecord = 4096;
 
@@ -59,7 +59,7 @@ bool Test::RAM::Test()
 
 bool Test::ROM::Data::Test()
 {
-    Display::StartTest("Тест ROM");
+    Display::StartTest("Тест ППЗУ");
 
     Display::AddMessage("Стираю память");
 
@@ -79,11 +79,9 @@ bool Test::ROM::Data::Test()
 
         ::ROM::Data::Save(numInROM, CreateDataInRAM(&ds));
 
-        DataSettings *dsRead = nullptr;
+        const DataSettings *dsRead = ::ROM::Data::Read(numInROM);
 
-        ::ROM::Data::Read(numInROM, &dsRead);
-
-        if (!CheckData(dsRead))
+        if (dsRead == nullptr || !CheckData(dsRead))
         {
             return false;
         }

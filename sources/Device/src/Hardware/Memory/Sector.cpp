@@ -4,17 +4,14 @@
 #include "Data/DataSettings.h"
 
 
-bool PacketROM::UnPack(DataSettings **ds) const
+const DataSettings *PacketROM::UnPack() const
 {
     if (!IsValid() || !IsData())
     {
-        *ds = nullptr;
-        return false;
+        return nullptr;
     }
 
-    *ds = const_cast<DataSettings *>(reinterpret_cast<const DataSettings *>(reinterpret_cast<const uint8 *>(this) + sizeof(PacketROM)));
-
-    return true;
+    return const_cast<DataSettings *>(reinterpret_cast<const DataSettings *>(reinterpret_cast<const uint8 *>(this) + sizeof(PacketROM)));
 }
 
 
@@ -183,9 +180,7 @@ const PacketROM *Sector::FindValidPacket(uint numInROM) const
     {
         if (packet->IsData())
         {
-            DataSettings *settings;
-
-            packet->UnPack(&settings);
+            const DataSettings *settings = packet->UnPack();
 
             if (settings->numInROM == numInROM)
             {
@@ -200,14 +195,13 @@ const PacketROM *Sector::FindValidPacket(uint numInROM) const
 }
 
 
-const PacketROM *Sector::ReadData(uint numInROM, DataSettings **ds) const
+const DataSettings *Sector::ReadData(uint numInROM) const
 {
     const PacketROM *packet = FindValidPacket(numInROM);
 
     if (packet)
     {
-        packet->UnPack(ds);
-        return packet;
+        return packet->UnPack();
     }
 
     return nullptr;
@@ -260,8 +254,8 @@ void Sector::GetDataInfo(bool existData[ROM::Data::MAX_NUM_SAVED_WAVES]) const
     {
         if (packet->IsData())
         {
-            DataSettings *ds;
-            if (packet->UnPack(&ds))
+            const DataSettings *ds = packet->UnPack();
+            if (ds)
             {
                 existData[ds->numInROM] = true;
             }

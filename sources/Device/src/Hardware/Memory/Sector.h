@@ -34,7 +34,7 @@ struct PacketROM
     uint Address() const { return reinterpret_cast<uint>(this); };
 
     PacketROM *Next() const;
-    bool UnPack(DataSettings **ds) const;
+    const DataSettings *UnPack() const;
     uint Size() const;
     /// Делает попытку записи пакета в сектор sector. В случае неудачи возвращает false
     bool WriteToSector(const Sector *sector) const;
@@ -90,7 +90,7 @@ struct Sector
 
     const PacketROM *WriteData(uint numInROM, const DataSettings *ds) const;
 
-    const PacketROM *ReadData(uint numInROM, DataSettings **ds) const;
+    const DataSettings *ReadData(uint numInROM) const;
 
     const PacketROM *DeleteData(uint numInROM) const;
     /// Получить информацию о сохранённх в секторе данных
