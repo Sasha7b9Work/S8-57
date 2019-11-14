@@ -25,11 +25,11 @@ static void FindTrigLevelIfNeed();
 
 void Reader::ReadDataFromStorage()
 {
-    DS = nullptr;
-
     IN_A = IN_B = nullptr;
 
-    if (RAM::Read(&DS, (set.mem.modeWork == ModeWork::RAM) ? static_cast<uint>(RAM::currentSignal) : 0U))
+    DS = RAM::Read((set.mem.modeWork == ModeWork::RAM) ? static_cast<uint>(RAM::currentSignal) : 0U);
+
+    if (DS)
     {
         IN_A = DS->dataA;
         IN_B = DS->dataB;

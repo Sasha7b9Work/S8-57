@@ -105,19 +105,6 @@ void RAM::Init()
 
 void RAM::Save(const DataSettings *ds)
 {
-    static int counter = 0;
-    counter++;
-
-    if (counter == 0x19)
-    {
-        counter = 0x19;
-    }
-
-    if (NumberDatas() == 16)
-    {
-        counter = counter;
-    }
-
     uint address = AllocateMemoryForPacket(ds);         // Ќаходим адрес дл€ записи нового пакета
 
     if (newest)
@@ -131,14 +118,13 @@ void RAM::Save(const DataSettings *ds)
 }
 
 
-bool RAM::Read(DataSettings **ds, uint numFromEnd)
+DataSettings *RAM::Read(uint numFromEnd)
 {
     uint number = NumberDatas();
     
     if (numFromEnd + 1 > number)
     {
-        *ds = nullptr;
-        return false;
+        return nullptr;
     }
 
     uint counter = number - 1 - numFromEnd;
@@ -151,9 +137,7 @@ bool RAM::Read(DataSettings **ds, uint numFromEnd)
         counter--;
     }
 
-    *ds = packet->GetDataSettings();
-
-    return true;
+    return packet->GetDataSettings();
 }
 
 

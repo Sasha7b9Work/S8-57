@@ -10,48 +10,9 @@
 #include <cstdlib>
 
 
-static void FillData(uint8 *dataA, uint8 *dataB, uint numPoints)
-{
-    for (uint i = 0; i < numPoints; i++)
-    {
-        dataA[i] = static_cast<uint8>(i);
-        dataB[i] = static_cast<uint8>(i);
-    }
-}
-
-static bool CheckData(uint8 *dataA, uint8 *dataB, uint numPoints)
-{
-    for (uint i = 0; i < numPoints; i++)
-    {
-        if (dataA[i] != static_cast<uint8>(i))
-        {
-            return false;
-        }
-
-        if (dataB[i] != static_cast<uint8>(i))
-        {
-            return false;
-        }
-    }
-
-    return true;
-}
-
-static void PrepareDS(DataSettings *ds)
-{
-    ds->Fill(0, 0);
-
-    ds->peackDet = static_cast<uint>(PeakDetMode::Disabled);
-    ds->enumPoints = static_cast<uint>(std::rand() % ENumPointsFPGA::Count);
-
-    uint8 *dataA = OUT_A;
-    uint8 *dataB = OUT_B;
-    
-    FillData(dataA, dataB, ds->SizeChannel());
-
-    ds->dataA = dataA;
-    ds->dataB = dataB;
-}
+static void FillData(uint8 *dataA, uint8 *dataB, uint numPoints);
+static bool CheckData(const uint8 *dataA, const uint8 *dataB, uint numPoints);
+static void PrepareDS(DataSettings *ds);
 
 
 bool Test::RAM::Test()
@@ -77,9 +38,7 @@ bool Test::RAM::Test()
 
         ::RAM::Save(&ds);
 
-        DataSettings *read;
-
-        ::RAM::Read(&read, std::rand() % ::RAM::NumberDatas());
+        DataSettings *read = ::RAM::Read(std::rand() % ::RAM::NumberDatas());
 
         if (!CheckData(read->dataA, read->dataB, read->SizeChannel()))
         {
@@ -140,4 +99,45 @@ bool Test::ROM::Data::Test()
     ::ROM::Data::EraseAll();
 
     return true;
+}
+
+
+static void FillData(uint8 *dataA, uint8 *dataB, uint numPoints)
+{
+    for (uint i = 0; i < numPoints; i++)
+    {
+        dataA[i] = static_cast<uint8>(i);
+        dataB[i] = static_cast<uint8>(i);
+    }
+}
+
+
+static bool CheckData(const uint8 *dataA, const uint8 *dataB, uint numPoints)
+{
+    for (uint i = 0; i < numPoints; i++)
+    {
+        if (dataA[i] != static_cast<uint8>(i) || dataB[i] != static_cast<uint8>(i))
+        {
+            return false;
+        }
+    }
+
+    return true;
+}
+
+
+static void PrepareDS(DataSettings *ds)
+{
+    ds->Fill(0, 0);
+
+    ds->peackDet = static_cast<uint>(PeakDetMode::Disabled);
+    ds->enumPoints = static_cast<uint>(std::rand() % ENumPointsFPGA::Count);
+
+    uint8 *dataA = OUT_A;
+    uint8 *dataB = OUT_B;
+
+    FillData(dataA, dataB, ds->SizeChannel());
+
+    ds->dataA = dataA;
+    ds->dataB = dataB;
 }
