@@ -199,6 +199,12 @@ static uint AllocateMemoryForPacket(const DataSettings *ds)
 
     uint addrFirst = newest->End();                                         // По этому адресу должна быть следующая запись
     uint addrLast = addrFirst + Packet::NeedMemoryForPacedData(ds);         // А это последний байт следующей записи
+
+    if (addrLast > END)
+    {
+        addrFirst = BEGIN;
+        addrLast = addrFirst + Packet::NeedMemoryForPacedData(ds);
+    }
                                                                             
     if (newest > oldest)                                                    // Нормальный порядок следования - более новые записи расположены после более старых
     {                                                                       
