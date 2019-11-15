@@ -66,7 +66,7 @@ bool Test::ROM::Data::Test()
 
     ::ROM::Data::EraseAll();
 
-    int numRecord = 300;
+    int numRecord = 300 * 100;
 
     for (int i = 1; i <= numRecord; i++)
     {
@@ -88,15 +88,7 @@ bool Test::ROM::Data::Test()
             {
                 if (!CheckData(dsRead))
                 {
-                    LOG_WRITE("counter = %d, Ошибка в данных %d", i, j);
                     return false;
-                }
-            }
-            else
-            {
-                if (i > 112)
-                {
-                    LOG_WRITE("Нет данных %d", i);
                 }
             }
         }

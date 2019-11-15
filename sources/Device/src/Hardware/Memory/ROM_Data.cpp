@@ -180,46 +180,30 @@ static void CopyDataToFreeSpace(const Sector *sectorSrc)
         Потом пишем в стёртые сектора.
     */
 
-    const PacketROM *src = sectorSrc->GetFirstPacketWithData();
+    const PacketROM *packet = sectorSrc->GetFirstPacketWithData();
 
-    if (!src)
+    if (!packet)
     {
         return;
     }
 
     for (int i = 0; i < NUM_SECTORS; i++)                           // Сначала производим запись в уже початые сектора
     {
-        if (src->IsFree())
-        {
-            break;
-        }
-
         const Sector *sector = sectors[i];
 
-        if (sector == sectorSrc || !sector->ExistPackets())
+        if (sector != sectorSrc && sector->ExistPackets())
         {
-            continue;
-        }
-
-        while (src)
-        {
-            if (src->IsData())
+            while (packet && !packet->IsFree())
             {
-                if (!src->WriteToSector(sector))
+                if (packet->IsData())
                 {
-                    break;
+                    if (!packet->WriteToSector(sector))
+                    {
+                        break;
+                    }
                 }
-            }
 
-            do 
-            {
-                src = src->Next();
-
-            } while (src->IsErased());
-
-            if (src->IsFree())
-            {
-                break;
+                packet = packet->Next();
             }
         }
     }
