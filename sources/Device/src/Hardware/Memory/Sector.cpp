@@ -4,6 +4,9 @@
 #include "Data/DataSettings.h"
 
 
+bool Sector::needLog = false;
+
+
 const DataSettings *PacketROM::UnPack() const
 {
     if (!IsValid() || !IsData())
@@ -168,6 +171,24 @@ const PacketROM *Sector::WriteData(uint numInROM, const DataSettings *ds) const
         WriteToROM(&recordAddress, addressDataB, ds->SizeChannel());
     }
 
+    if (number == 21 && needLog)
+    {
+        uint offset = reinterpret_cast<uint>(packet) - address;
+        LOG_WRITE("«аписал данные %2d(%d/%d) в  сектор  %d 0x%x, пакет 0x%x, смещ. от нач. сект. 0x%x/%d",
+            numInROM, ds->NeedMemoryForData(), PacketROM::GetPackedSize(ds), number, address, packet, offset, offset);
+        offset = reinterpret_cast<uint>(packet->Next()) - address;
+        LOG_WRITE("след. пакет 0x%x, смещ. от нач. сект. 0x%x/%d", packet->Next(), offset, offset);
+        ds->Log();
+        LOG_WRITE("");
+    }
+
+    if (ROM::needLog)
+    {
+        LOG_WRITE("«аписал данные %2d в сектор  %d 0x%x адрес пакета 0x%x", numInROM, number, address, packet);
+        LOG_WRITE("ѕам€ти нужно %d, от конца сектора находитс€ на %d", PacketROM::GetPackedSize(ds), static_cast<int>(End()) - reinterpret_cast<int>(packet));
+        ds->Log();
+    }
+
     return packet;
 }
 
@@ -217,11 +238,20 @@ const DataSettings *Sector::ReadData(uint numInROM) const
 {
     const PacketROM *packet = FindValidPacket(numInROM);
 
-    //LOG_WRITE("address = %x, size = %x, packet = %x, delta = %d", , size, packet, static_cast<int>(End()) - reinterpret_cast<int>(packet));
-
     if (packet)
     {
-        return packet->UnPack();
+        const DataSettings *ds = packet->UnPack();
+
+        if (ROM::needLog)
+        {
+            LOG_WRITE("");
+            uint offset = reinterpret_cast<uint>(packet) - address;
+            LOG_WRITE("—читал данные %2d из сектора %d 0x%x адрес пакета 0x%x, смещ. от нач. сект. 0x%x/%d", numInROM, number, address, packet, offset, offset);
+            LOG_WRITE("ѕам€ти нужно %d, от конца сектора находитс€ на %d", PacketROM::GetPackedSize(ds), static_cast<int>(End()) - reinterpret_cast<int>(packet));
+            ds->Log();
+        }
+
+        return ds;
     }
 
     return nullptr;
@@ -234,6 +264,11 @@ const PacketROM *Sector::DeleteData(uint numInROM) const
 
     if (packet)
     {
+        if (number == 21 && needLog)
+        {
+            LOG_WRITE("—тираю  данные %2d из сектора %d 0x%x, пакет 0x%x", numInROM, number, address, packet);
+        }
+
         packet->Erase();
         return packet;
     }
@@ -334,4 +369,10 @@ int Sector::Number(uint address)
     }
 
     return -1;
+}
+
+
+void Sector::Log() const
+{
+    LOG_WRITE("—ектор %d адрес 0x%x, размер 0x%x", number, address, size);
 }

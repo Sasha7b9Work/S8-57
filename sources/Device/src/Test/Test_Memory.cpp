@@ -71,7 +71,10 @@ bool Test::ROM::Data::Test()
     {
         static int num = -1;
 
-        num = Display::AddMessage(String("Запись %d из %d, %3.1f%%", i, numRecord, 100.0F * i / numRecord).CString(), num);
+        if (i % 128 == 0)
+        {
+            num = Display::AddMessage(String("Запись %d из %d, %3.1f%%", i, numRecord, 100.0F * i / numRecord).CString(), num);
+        }
 
         uint numInROM = std::rand() % ::ROM::Data::MAX_NUM_SAVED_WAVES;
 

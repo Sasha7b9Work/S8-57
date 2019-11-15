@@ -105,4 +105,8 @@ struct Sector
     const PacketROM *GetFirstPacketWithData() const;
     /// ¬озвращает номер сектора, которому принадлежит address
     static int Number(uint address);
+
+    void Log() const;
+
+    static bool needLog;
 };

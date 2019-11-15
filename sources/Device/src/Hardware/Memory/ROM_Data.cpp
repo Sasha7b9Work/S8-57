@@ -29,6 +29,9 @@ static const Sector *GetMostWornSector();
 static void CopyDataToFreeSpace(const Sector *src);
 
 
+bool ROM::needLog = false;
+
+
 void ROM::Data::GetInfo(bool existData[MAX_NUM_SAVED_WAVES])
 {
     for (int i = 0; i < MAX_NUM_SAVED_WAVES; i++)
@@ -45,40 +48,12 @@ void ROM::Data::GetInfo(bool existData[MAX_NUM_SAVED_WAVES])
 
 const DataSettings *ROM::Data::Read(uint numInROM)
 {
-    //LOG_WRITE("read %d", numInROM);
-    static int counter = 0;
-
     for (int i = 0; i < NUM_SECTORS; i++)
     {
-        counter++;
-
-        if(counter == 0x29ac)
-        {
-            counter = counter;
-        }
-
         const DataSettings *ds = sectors[i]->ReadData(numInROM);
 
         if (ds)
         {
-            for (uint j = 0; j < ds->SizeChannel(); j++)
-            {
-                if (ds->enableA)
-                {
-                    if (ds->dataA[j] != static_cast<uint8>(j))
-                    {
-                        return ds;
-                    }
-                }
-                if (ds->enableB)
-                {
-                    if (ds->dataB[j] != static_cast<uint8>(j))
-                    {
-                        return ds;
-                    }
-                }
-            }
-
             return ds;
         }
     }
@@ -106,7 +81,14 @@ void ROM::Data::Save(uint numInROM, const DataSettings *ds)
 
     if (counter == 4745)
     {
-        counter = counter;
+        needLog = true;
+
+        for (int i = 0; i < NUM_SECTORS; i++)
+        {
+            sectors[i]->Log();
+        }
+
+        LOG_WRITE("");
     }
 
     Erase(numInROM);
@@ -121,6 +103,33 @@ void ROM::Data::Save(uint numInROM, const DataSettings *ds)
         {
             if (sector->WriteData(numInROM, ds))
             {
+                const DataSettings *d = Read(numInROM);
+
+                if (d)
+                {
+                    if (!ds->Equals(*d))
+                    {
+                        LOG_WRITE("Îøèáêà");
+                    }
+
+                    uint numPoints = d->SizeChannel();
+
+                    for (uint j = 0; j < numPoints; j++)
+                    {
+                        if (ds->enableA)
+                        {
+                            if (ds->dataA[j] != d->dataA[j])
+                            {
+                                //LOG_WRITE("Îøèáêà");
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    LOG_WRITE("Îøèáêà");
+                }
+
                 return;
             }
         }
@@ -130,15 +139,6 @@ void ROM::Data::Save(uint numInROM, const DataSettings *ds)
 
     GetFirstFreeSector()->WriteData(numInROM, ds);
 }
-
-
-//void ROM::Data::Save(uint numInROM, const DataSettings *ds, uint8 *dataA, uint8 *dataB)
-//{
-//    const_cast<DataSettings *>(ds)->dataA = dataA;
-//    const_cast<DataSettings *>(ds)->dataB = dataB;
-//
-//    Save(numInROM, ds);
-//}
 
 
 void ROM::Data::EraseAll()

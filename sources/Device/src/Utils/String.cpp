@@ -37,7 +37,7 @@ String::String(char symbol) : buffer(0)
 
 String::String(const char *format, ...)
 {
-#define SIZE 100
+#define SIZE 150
     char buf[SIZE + 1];
 
     std::va_list args;
