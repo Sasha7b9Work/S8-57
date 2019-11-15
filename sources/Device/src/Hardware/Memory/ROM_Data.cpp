@@ -29,9 +29,6 @@ static const Sector *GetMostWornSector();
 static void CopyDataToFreeSpace(const Sector *src);
 
 
-static void LogAllSectors();
-
-
 void ROM::Data::GetInfo(bool existData[MAX_NUM_SAVED_WAVES])
 {
     for (int i = 0; i < MAX_NUM_SAVED_WAVES; i++)
@@ -112,21 +109,11 @@ static void Compress()
 {
     while (NumberFreeSectors() < 2)
     {
-        LogAllSectors();
-
-        if (Sector::needLog)
-        {
-            LOG_WRITE("");
-            LOG_WRITE("Делаю компрессию");
-        }
-
         const Sector *src = GetMostWornSector();
 
         CopyDataToFreeSpace(src);
 
         src->Erase();
-
-        LogAllSectors();
     }
 }
 
@@ -193,11 +180,6 @@ static void CopyDataToFreeSpace(const Sector *sectorSrc)
         Потом пишем в стёртые сектора.
     */
 
-    if (Sector::needLog)
-    {
-        LOG_WRITE("Копирую данные из сектора %d", sectorSrc->number);
-    }
-
     const PacketROM *src = sectorSrc->GetFirstPacketWithData();
 
     if (!src)
@@ -240,14 +222,5 @@ static void CopyDataToFreeSpace(const Sector *sectorSrc)
                 break;
             }
         }
-    }
-}
-
-
-static void LogAllSectors()
-{
-    for (int i = 0; i < NUM_SECTORS; i++)
-    {
-        sectors[i]->Log();
     }
 }

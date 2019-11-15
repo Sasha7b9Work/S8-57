@@ -109,6 +109,4 @@ struct Sector
     static int Number(uint address);
 
     void Log() const;
-
-    static bool needLog;
 };

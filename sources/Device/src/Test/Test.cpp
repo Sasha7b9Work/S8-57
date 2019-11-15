@@ -1,7 +1,9 @@
 #include "defines.h"
 #include "Device.h"
+#include "Hardware/Timer.h"
 #include "Settings/Settings.h"
 #include "Test/Test.h"
+#include <cstdlib>
 
 
 
@@ -15,11 +17,13 @@ void Test::Run()
         return;
     }
 
+    std::srand(TIME_MS);
+
     set.dbg.runTest = false;
     
     Display::Init();
 
-    //RunTest(RAM::Test);
+    RunTest(RAM::Test);
 
     RunTest(ROM::Data::Test);
 

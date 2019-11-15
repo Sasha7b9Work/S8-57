@@ -4,9 +4,6 @@
 #include "Data/DataSettings.h"
 
 
-bool Sector::needLog = false;
-
-
 const DataSettings *PacketROM::UnPack() const
 {
     if (!IsValid() || !IsData())
@@ -49,16 +46,49 @@ bool PacketROM::WriteToSector(const Sector *sector) const
         dest = dest->Next();
     }
 
-    uint addressWrite = reinterpret_cast<uint>(dest);      // По этому адресу будет производиться запись пакета
+    uint addressWrite = reinterpret_cast<uint>(dest);       // По этому адресу будет производиться запись пакета
 
-    uint lastAddress = addressWrite + size;                   // А это последний адрес записи
+    uint lastAddress = addressWrite + size;                 // А это последний адрес записи
 
     if (lastAddress > sector->End())
     {
         return false;
     }
 
-    HAL_ROM::WriteBufferBytes(addressWrite, this, size);
+    DataSettings ds = *UnPack();
+
+    ds.dataA = ds.dataB = nullptr;
+    if (ds.enableA)
+    {
+        ds.dataA = reinterpret_cast<uint8 *>(addressWrite) + sizeof(PacketROM) + sizeof(DataSettings);
+    }
+    if (ds.enableB)
+    {
+        ds.dataB = reinterpret_cast<uint8 *>(addressWrite) + sizeof(PacketROM) + sizeof(DataSettings);
+        if (ds.enableA)
+        {
+            ds.dataB += ds.SizeChannel();
+        }
+    }
+
+    HAL_ROM::WriteBufferBytes(addressWrite, this, sizeof(PacketROM));
+
+    addressWrite += sizeof(PacketROM);
+
+    HAL_ROM::WriteBufferBytes(addressWrite, &ds, sizeof(DataSettings));
+
+    addressWrite += sizeof(DataSettings);
+
+    if (ds.enableA)
+    {
+        HAL_ROM::WriteBufferBytes(addressWrite, UnPack()->dataA, ds.SizeChannel());
+        addressWrite += ds.SizeChannel();
+    }
+
+    if (ds.enableB)
+    {
+        HAL_ROM::WriteBufferBytes(addressWrite, UnPack()->dataB, ds.SizeChannel());
+    }
 
     return true;
 }
@@ -198,26 +228,6 @@ const PacketROM *Sector::WriteData(uint numInROM, const DataSettings *ds) const
         WriteToROM(&recordAddress, addressDataB, ds->SizeChannel());
     }
 
-    static int counter = 0;
-    counter++;
-
-    if (counter == 110)
-    {
-        needLog = true;
-
-        for (uint i = 0; i < Sector::Count; i++)
-        {
-            LOG_WRITE("Сектор %d 0x%x - 0x%x", i, ADDR_SECTOR(i), END_SECTOR(i));
-        }
-    }
-
-    if (needLog)
-    {
-        LOG_WRITE("");
-        LOG_WRITE("Save data %d, counter = %d", numInROM, counter);
-        packet->Log();
-    }
-
     return packet;
 }
 
@@ -269,12 +279,6 @@ const DataSettings *Sector::ReadData(uint numInROM) const
 
     if (packet)
     {
-        if (numInROM == 7 && needLog)
-        {
-            LOG_WRITE("Read data %d", numInROM);
-            packet->Log();
-        }
-
         return packet->UnPack();
     }
 

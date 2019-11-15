@@ -22,13 +22,13 @@ bool Test::RAM::Test()
 
     Display::StartTest("Тест ОЗУ");
 
-    int numRecord = 8192;
+    int numRecord = 5000;
 
     for (int i = 1; i <= numRecord; i++)
     {
         static int line = -1;
 
-        if (i % 32 == 0)
+        if (i % 50 == 0)
         {
             line = Display::AddMessage(String("Запись %d из %d, %3.1f%%", i, numRecord, 100.0F * i / numRecord).CString(), line);
         }
@@ -66,7 +66,7 @@ bool Test::ROM::Data::Test()
 
     ::ROM::Data::EraseAll();
 
-    int numRecord = 256;
+    int numRecord = 300;
 
     for (int i = 1; i <= numRecord; i++)
     {
