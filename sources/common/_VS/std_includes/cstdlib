@@ -5,6 +5,7 @@ namespace std
     void *malloc(size_t);
     void free(void *);
     uint rand();
+    void srand(unsigned int);
 
     #include <stdlib.h>
 }
