@@ -4,6 +4,9 @@
 #include "Data/DataSettings.h"
 
 
+bool Sector::needLog = false;
+
+
 const DataSettings *PacketROM::UnPack() const
 {
     if (!IsValid() || !IsData())
@@ -30,7 +33,7 @@ uint PacketROM::Size() const
 {
     if (IsFree())
     {
-        return 0;
+        return END_SECTOR(Sector::Number(Address())) - Address();
     }
 
     return size;
@@ -74,6 +77,33 @@ uint PacketROM::GetPackedSize(const DataSettings *ds)
     return sizeof(PacketROM) +      // Packet
         sizeof(DataSettings) +      // DataSettings
         ds->NeedMemoryForData();    // data
+}
+
+
+void PacketROM::Log() const
+{
+    const DataSettings *ds = UnPack();
+
+    int numInROM = ds ? static_cast<int>(ds->numInROM) : -1;
+    uint address = Address();
+    int numSector = Sector::Number(Address());
+    PacketROM *next = Next();
+
+    LOG_WRITE("PacketROM : data %d, address 0x%x(sector %d), next 0x%x(sector %d)",
+        numInROM,
+        address,
+        numSector,
+        next,
+        Sector::Number(reinterpret_cast<uint>(Next())));
+
+    if (ds)
+    {
+        ds->Log();
+    }
+    else
+    {
+        LOG_WRITE("Пакет стёрт либо пуст");
+    }
 }
 
 
@@ -168,6 +198,26 @@ const PacketROM *Sector::WriteData(uint numInROM, const DataSettings *ds) const
         WriteToROM(&recordAddress, addressDataB, ds->SizeChannel());
     }
 
+    static int counter = 0;
+    counter++;
+
+    if (counter == 110)
+    {
+        needLog = true;
+
+        for (uint i = 0; i < Sector::Count; i++)
+        {
+            LOG_WRITE("Сектор %d 0x%x - 0x%x", i, ADDR_SECTOR(i), END_SECTOR(i));
+        }
+    }
+
+    if (needLog)
+    {
+        LOG_WRITE("");
+        LOG_WRITE("Save data %d, counter = %d", numInROM, counter);
+        packet->Log();
+    }
+
     return packet;
 }
 
@@ -219,6 +269,12 @@ const DataSettings *Sector::ReadData(uint numInROM) const
 
     if (packet)
     {
+        if (numInROM == 7 && needLog)
+        {
+            LOG_WRITE("Read data %d", numInROM);
+            packet->Log();
+        }
+
         return packet->UnPack();
     }
 
@@ -323,6 +379,11 @@ const PacketROM *Sector::GetFirstPacketWithData() const
 
 int Sector::Number(uint address)
 {
+    if (address < ADDR_SECTOR(0))
+    {
+        return -1;
+    }
+
     for (int i = 0; i < Sector::Count; i++)
     {
         if (address < END_SECTOR(i))
@@ -335,7 +396,65 @@ int Sector::Number(uint address)
 }
 
 
+char *TypePacket(PacketROM *packet)
+{
+    if (packet == nullptr)
+    {
+        return "nullptr";
+    }
+
+    if (packet->IsErased())
+    {
+        return "erased";
+    }
+
+    if (packet->IsFree())
+    {
+        return "free";
+    }
+
+    if (packet->IsData())
+    {
+        return "data";
+    }
+
+    return "not determinated";
+}
+
+int NumberPacket(PacketROM *packet)
+{
+    const DataSettings *ds = packet->UnPack();
+
+    if (ds == nullptr)
+    {
+        return -1;
+    }
+
+    return static_cast<int>(ds->numInROM);
+}
+
+
 void Sector::Log() const
 {
-    LOG_WRITE("Сектор %d адрес 0x%x, размер 0x%x", number, address, size);
+    LOG_WRITE("    Сектор %d адрес 0x%x, размер 0x%x", number, address, size);
+    LOG_WRITE("             #   адрес  размер  следующий");
+
+    PacketROM *packet = reinterpret_cast<PacketROM *>(address);
+
+    static int counter = 0;
+    counter = 0;
+
+    while (packet)
+    {
+        LOG_WRITE("%2d : %6s %2d 0x%x 0x%4x 0x%x",
+            counter,
+            TypePacket(packet),
+            NumberPacket(packet),
+            packet->Address(),
+            packet->Size(),
+            packet->Next());
+
+        packet = packet->Next();
+        counter++;
+    }
 }

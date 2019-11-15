@@ -41,6 +41,8 @@ struct PacketROM
     void Erase() const;
     /// Возвращает количество байт, необходимое для хранения данных
     static uint GetPackedSize(const DataSettings *ds);
+
+    void Log() const;
 };
 
 
@@ -107,4 +109,6 @@ struct Sector
     static int Number(uint address);
 
     void Log() const;
+
+    static bool needLog;
 };

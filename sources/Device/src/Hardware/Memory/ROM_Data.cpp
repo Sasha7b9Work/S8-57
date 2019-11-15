@@ -29,6 +29,9 @@ static const Sector *GetMostWornSector();
 static void CopyDataToFreeSpace(const Sector *src);
 
 
+static void LogAllSectors();
+
+
 void ROM::Data::GetInfo(bool existData[MAX_NUM_SAVED_WAVES])
 {
     for (int i = 0; i < MAX_NUM_SAVED_WAVES; i++)
@@ -85,33 +88,6 @@ void ROM::Data::Save(uint numInROM, const DataSettings *ds)
         {
             if (sector->WriteData(numInROM, ds))
             {
-                const DataSettings *d = Read(numInROM);
-
-                if (d)
-                {
-                    if (!ds->Equals(*d))
-                    {
-                        LOG_WRITE("Ошибка");
-                    }
-
-                    uint numPoints = d->SizeChannel();
-
-                    for (uint j = 0; j < numPoints; j++)
-                    {
-                        if (ds->enableA)
-                        {
-                            if (ds->dataA[j] != d->dataA[j])
-                            {
-                                //LOG_WRITE("Ошибка");
-                            }
-                        }
-                    }
-                }
-                else
-                {
-                    LOG_WRITE("Ошибка");
-                }
-
                 return;
             }
         }
@@ -136,11 +112,21 @@ static void Compress()
 {
     while (NumberFreeSectors() < 2)
     {
+        LogAllSectors();
+
+        if (Sector::needLog)
+        {
+            LOG_WRITE("");
+            LOG_WRITE("Делаю компрессию");
+        }
+
         const Sector *src = GetMostWornSector();
 
         CopyDataToFreeSpace(src);
 
         src->Erase();
+
+        LogAllSectors();
     }
 }
 
@@ -207,6 +193,11 @@ static void CopyDataToFreeSpace(const Sector *sectorSrc)
         Потом пишем в стёртые сектора.
     */
 
+    if (Sector::needLog)
+    {
+        LOG_WRITE("Копирую данные из сектора %d", sectorSrc->number);
+    }
+
     const PacketROM *src = sectorSrc->GetFirstPacketWithData();
 
     if (!src)
@@ -216,6 +207,11 @@ static void CopyDataToFreeSpace(const Sector *sectorSrc)
 
     for (int i = 0; i < NUM_SECTORS; i++)                           // Сначала производим запись в уже початые сектора
     {
+        if (src->IsFree())
+        {
+            break;
+        }
+
         const Sector *sector = sectors[i];
 
         if (sector == sectorSrc || !sector->ExistPackets())
@@ -233,7 +229,25 @@ static void CopyDataToFreeSpace(const Sector *sectorSrc)
                 }
             }
 
-            src = src->Next();
+            do 
+            {
+                src = src->Next();
+
+            } while (src->IsErased());
+
+            if (src->IsFree())
+            {
+                break;
+            }
         }
+    }
+}
+
+
+static void LogAllSectors()
+{
+    for (int i = 0; i < NUM_SECTORS; i++)
+    {
+        sectors[i]->Log();
     }
 }

@@ -84,9 +84,20 @@ bool Test::ROM::Data::Test()
         {
             const DataSettings *dsRead = ::ROM::Data::Read(j);
 
-            if (dsRead && !CheckData(dsRead))
+            if (dsRead)
             {
-                return false;
+                if (!CheckData(dsRead))
+                {
+                    LOG_WRITE("counter = %d, Ошибка в данных %d", i, j);
+                    return false;
+                }
+            }
+            else
+            {
+                if (i > 112)
+                {
+                    LOG_WRITE("Нет данных %d", i);
+                }
             }
         }
     }
