@@ -41,14 +41,15 @@ bool Test::RAM::Test()
 
         FillData(&ds);
 
-        DataSettings *read = ::RAM::Read(std::rand() % ::RAM::NumberDatas());
-
-        if (!CheckData(read))
+        for (uint j = 0; j < ::RAM::NumberDatas(); j++)
         {
-            return false;
-        }
+            DataSettings *read = ::RAM::Read(std::rand() % ::RAM::NumberDatas());
 
-        continue;
+            if (read && !CheckData(read))
+            {
+                return false;
+            }
+        }
     }
 
     ::RAM::Init();
