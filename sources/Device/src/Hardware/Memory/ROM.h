@@ -7,8 +7,6 @@ struct DataSettings;
 
 struct ROM
 {
-    static bool needLog;
-
 	static const uint SIZE = 2 * 1024 * 1024;
 
     /// Функция для сохранения/восстановления настроек

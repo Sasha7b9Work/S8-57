@@ -140,7 +140,7 @@ static void PrepareDS(DataSettings *ds)
 {
     ds->Fill();
     ds->enableA = static_cast<uint>(std::rand() % 2);
-    ds->enableB = ds->enableA ? static_cast<uint>(std::rand() % 2) : 0;
+    ds->enableB = ds->enableA ? static_cast<uint>(std::rand() % 2) : 1;
     ds->peackDet = static_cast<uint>(PeakDetMode::Disabled);
     ds->enumPoints = static_cast<uint>(std::rand() % ENumPointsFPGA::Count);
 }

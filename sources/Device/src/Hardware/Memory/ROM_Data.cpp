@@ -29,9 +29,6 @@ static const Sector *GetMostWornSector();
 static void CopyDataToFreeSpace(const Sector *src);
 
 
-bool ROM::needLog = false;
-
-
 void ROM::Data::GetInfo(bool existData[MAX_NUM_SAVED_WAVES])
 {
     for (int i = 0; i < MAX_NUM_SAVED_WAVES; i++)
@@ -76,21 +73,6 @@ void ROM::Data::Erase(uint numInROM)
 
 void ROM::Data::Save(uint numInROM, const DataSettings *ds)
 {
-    static int counter = 0;
-    counter++;
-
-    if (counter == 4745)
-    {
-        needLog = true;
-
-        for (int i = 0; i < NUM_SECTORS; i++)
-        {
-            sectors[i]->Log();
-        }
-
-        LOG_WRITE("");
-    }
-
     Erase(numInROM);
 
     Compress();
