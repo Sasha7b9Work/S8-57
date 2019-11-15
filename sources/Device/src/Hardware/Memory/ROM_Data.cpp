@@ -175,35 +175,26 @@ static const Sector *GetMostWornSector()
 
 static void CopyDataToFreeSpace(const Sector *sectorSrc)
 {
-    /*
-        Пока есть свободное место в нестёртых секторах, пишем туда.
-        Потом пишем в стёртые сектора.
-    */
-
     const PacketROM *packet = sectorSrc->GetFirstPacketWithData();
 
-    if (!packet)
+    if (packet)
     {
-        return;
-    }
-
-    for (int i = 0; i < NUM_SECTORS; i++)                           // Сначала производим запись в уже початые сектора
-    {
-        const Sector *sector = sectors[i];
-
-        if (sector != sectorSrc && sector->ExistPackets())
+        for (int i = 0; i < NUM_SECTORS; i++)
         {
-            while (packet && !packet->IsFree())
+            if (sectors[i] != sectorSrc)
             {
-                if (packet->IsData())
+                while (packet && !packet->IsFree())
                 {
-                    if (!packet->WriteToSector(sector))
+                    if (packet->IsData())
                     {
-                        break;
+                        if (!packet->WriteToSector(sectors[i]))
+                        {
+                            break;
+                        }
                     }
-                }
 
-                packet = packet->Next();
+                    packet = packet->Next();
+                }
             }
         }
     }
