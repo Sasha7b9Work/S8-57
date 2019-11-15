@@ -22,7 +22,7 @@ bool Test::RAM::Test()
 
     Display::StartTest("Тест ОЗУ");
 
-    int numRecord = 4096;
+    int numRecord = 8192;
 
     for (int i = 1; i <= numRecord; i++)
     {
@@ -65,16 +65,13 @@ bool Test::ROM::Data::Test()
 
     ::ROM::Data::EraseAll();
 
-    int numRecord = 128 * 128;
+    int numRecord = 256;
 
     for (int i = 1; i <= numRecord; i++)
     {
         static int num = -1;
 
-        if (i % 128 == 0)
-        {
-            num = Display::AddMessage(String("Запись %d из %d, %3.1f%%", i, numRecord, 100.0F * i / numRecord).CString(), num);
-        }
+        num = Display::AddMessage(String("Запись %d из %d, %3.1f%%", i, numRecord, 100.0F * i / numRecord).CString(), num);
 
         uint numInROM = std::rand() % ::ROM::Data::MAX_NUM_SAVED_WAVES;
 
@@ -82,14 +79,15 @@ bool Test::ROM::Data::Test()
 
         ::ROM::Data::Save(numInROM, CreateDataInRAM(&ds));
 
-        const DataSettings *dsRead = ::ROM::Data::Read(numInROM);
-
-        if (dsRead == nullptr || !CheckData(dsRead))
+        for (uint j = 0; j < ::ROM::Data::MAX_NUM_SAVED_WAVES; j++)
         {
-            return false;
-        }
+            const DataSettings *dsRead = ::ROM::Data::Read(j);
 
-        continue;
+            if (dsRead && !CheckData(dsRead))
+            {
+                return false;
+            }
+        }
     }
     
     Display::AddMessage("Cтираю память");

@@ -37,7 +37,7 @@ String::String(char symbol) : buffer(0)
 
 String::String(const char *format, ...)
 {
-#define SIZE 150
+    static const int SIZE = 100;
     char buf[SIZE + 1];
 
     std::va_list args;
@@ -47,10 +47,9 @@ String::String(const char *format, ...)
 
     if (numSymbols < 0 || numSymbols > SIZE)
     {
-        LOG_ERROR("Буфер слишком мал");
+        std::strcpy(buffer, "Буфер слишком мал");
     }
-
-    if (Allocate(std::strlen(buf) + 1))
+    else if (Allocate(std::strlen(buf) + 1))
     {
         std::strcpy(buffer, buf);
     }
@@ -63,7 +62,7 @@ void String::Set(TypeConversionString::E conv, const char *format, ...)
 
     if(format)
     {
-#define SIZE 100
+        static const int SIZE = 100;
         char buf[SIZE + 1];
 
         std::va_list args;
@@ -73,10 +72,9 @@ void String::Set(TypeConversionString::E conv, const char *format, ...)
 
         if(numSymbols < 0 || numSymbols > SIZE)
         {
-            LOG_ERROR("Буфер слишком мал");
+            std::strcpy(buffer, "Буфер слишком мал");
         }
-
-        if(Allocate(std::strlen(buf) + 1))
+        else if(Allocate(std::strlen(buf) + 1))
         {
             std::strcpy(buffer, buf);
             Conversion(conv);
