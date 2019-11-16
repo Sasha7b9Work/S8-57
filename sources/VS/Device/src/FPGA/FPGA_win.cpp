@@ -1,9 +1,10 @@
 #include "defines.h"
 #include "FPGA/FPGA.h"
-#include <cstring>
+#include "GUI/Dialogs/TuneGeneratorDialog.h"
 #include "Settings/Settings.h"
-#include <cstdlib>
 #include "Utils/Math.h"
+#include <cstdlib>
+#include <cstring>
 
 
 uint16 addrRead = 0;
@@ -41,11 +42,17 @@ bool FPGA::ReadDataChanenl(Chan::E ch, uint8 data[MAX_NUM_POINTS])
         return false;
     }
 
-    float amplitude = 100.0F;
+    float amplitude = 100.0F * TuneGeneratorDialog::amplitude;
+    float offset = 0.0F + TuneGeneratorDialog::offset;
+    float frequency = TuneGeneratorDialog::frequency;
 
     for (uint i = 0; i < FPGA_NUM_POINTS; i++)
     {
-        data[i] = static_cast<uint8>(VALUE::AVE + amplitude * (sinf(i * 0.1F)) + NextNoise());
+        float value = offset + VALUE::AVE + amplitude * (sinf(i * 0.1F)) + NextNoise();
+
+        LIMITATION(value, static_cast<float>(VALUE::MIN), static_cast<float>(VALUE::MAX));
+
+        data[i] = static_cast<uint8>(value);
     }
 
     return true;
