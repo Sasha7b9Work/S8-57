@@ -10,13 +10,14 @@ public:
     Dialog(const wxString &title);
     virtual ~Dialog();
 
-    void OnControlEvent(wxCommandEvent &);
-
     static const int WIDTH_PANEL = 220;
 
 protected:
 
     void SetBoxSizer(wxBoxSizer *sizer, wxSize size);
+
+    virtual void ApplyParameters() = 0;
+    virtual void CancelParameters() = 0;
 
 private:
     wxBoxSizer *panelBox = nullptr;

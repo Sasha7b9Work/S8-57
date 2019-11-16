@@ -15,6 +15,8 @@ struct Word
 class SU
 {
 public:
+    static const double ERROR_VALUE_DOUBLE;
+
     /// Эта команда сразу преобразует к верхенму регистру слово.
     static bool GetWord(const char *string, Word *word, const int numWord);
 
@@ -39,4 +41,15 @@ public:
     static char ToUpper(char symbol);
 
     static char ToLower(char symbol);
+
+    static char *DoubleToString(double value);
+
+    static double StringToDouble(const char *buffer);
 };
+
+
+#ifndef USE_SDL2
+
+int strcpy_s(char *dest, uint dest_size, const char *src);
+
+#endif

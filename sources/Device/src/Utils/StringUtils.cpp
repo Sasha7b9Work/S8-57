@@ -2,9 +2,11 @@
 #include "Utils/Stack.h"
 #include "Utils/StringUtils.h"
 #include "Utils/Values.h"
+#include <iomanip>
 #include <cstring>
 #include <cctype>
-#include <locale>
+#include <sstream>
+#include <cstdlib>
 
 #ifndef LANG
 #define LANG 0
@@ -17,6 +19,8 @@ static bool ChooseSymbols(const char **string);
 /// Возвращает false, если выбор невозможен - строка кончилась.
 static bool ChooseSpaces(const char **string);
 
+
+const double SU::ERROR_VALUE_DOUBLE = 1.6e308;
 
 
 bool String2Int(char *str, int *value)
@@ -353,3 +357,84 @@ char SU::ToLower(char symbol)
 
     return symbol;
 }
+
+
+#ifdef VS_KEIL
+
+char *SU::DoubleToString(double)
+{
+    return nullptr;
+}
+
+#else
+
+char *SU::DoubleToString(double value)
+{
+    static char result[100];
+
+    std::stringstream stream;
+    stream << std::fixed << std::setprecision(5) << value;
+
+    strcpy_s(result, 90, stream.str().c_str());
+
+    char *p = result;
+
+    while (*p)
+    {
+        if (*p == '.')
+        {
+            *p = ',';
+        }
+        p++;
+    }
+
+    return result;
+}
+
+#endif
+
+
+double SU::StringToDouble(const char *value)
+{
+    static const int SIZE_BUFFER = 100;
+    char buffer[SIZE_BUFFER];
+
+    strcpy_s(buffer, SIZE_BUFFER - 1, value);
+
+    char *p = buffer;
+
+    while (*p)
+    {
+        if (*p == '.')
+        {
+            *p = ',';
+        }
+        p++;
+    }
+
+    char *end = nullptr;
+
+    double result = std::strtod(buffer, &end);
+
+    if (end == buffer)
+    {
+        return SU::ERROR_VALUE_DOUBLE;
+    }
+
+    return result;
+}
+
+#ifndef USE_SDL2
+
+int strcpy_s(char *dest, uint dest_size, const char *src)
+{
+    if (std::strlen(src) + 1 < dest_size)
+    {
+        std::strcpy(dest, src);
+        return 0;
+    }
+
+    return 1;
+}
+
+#endif

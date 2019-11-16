@@ -3,6 +3,7 @@
 
 
 float atof(char *);
+double strtod(const char *string, char **endptr);
 void *malloc(size_t);
 //void memcpy(void *, void *, unsigned int);
 void free(void *);

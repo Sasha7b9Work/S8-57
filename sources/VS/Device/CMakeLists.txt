@@ -18,7 +18,7 @@ include_directories(../../VS/Device/src
                     ../../../../ThirdParty/wxWidgets/generated/lib/vc_dll/mswud
                     ../../../../ThirdParty/SDL2/SDL2-2.0.10/include)
                     
-add_definitions(-DSTM32F437xx -DOLD_RECORDER -DWXUSINGDLL -DUSE_SDL2 -DGUI)
+add_definitions(-DSTM32F437xx -DWXUSINGDLL -DUSE_SDL2 -DGUI)
 
 SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -MP -Wall")
 

@@ -1,0 +1,30 @@
+#pragma once
+
+
+namespace std
+{
+    struct asdf
+    {
+        char *c_str();
+    };
+
+    struct stringstream
+    {
+        asdf &str();
+    };
+
+    struct ostream
+    {
+    };
+
+    struct fixed
+    {
+    };
+
+    stringstream &operator<<(stringstream &, const fixed &);
+
+    struct setprecision
+    {
+        setprecision(int) {};
+    };
+}

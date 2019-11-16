@@ -69,18 +69,15 @@ void Dialog::OnMove(wxMoveEvent &)
 
 void Dialog::OnButtonApply(wxCommandEvent &)
 {
+    ApplyParameters();
     Destroy();
 }
 
 
 void Dialog::OnButtonCancel(wxCommandEvent &)
 {
+    CancelParameters();
     Destroy();
-}
-
-
-void Dialog::OnControlEvent(wxCommandEvent &)
-{
 }
 
 
