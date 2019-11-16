@@ -28,6 +28,7 @@
 
 namespace Math
 {
+    const float PI_F = 3.14159265358979f;
     /// Возвращает номер младшего бита, равного единице
     int LowSignedBit(uint value);
     /// \brief Сравнивает два числа. Возвращает true, если числа отличаются друг от друга не более, чем на epsilonPart. При этом для расчёта epsilonPart 

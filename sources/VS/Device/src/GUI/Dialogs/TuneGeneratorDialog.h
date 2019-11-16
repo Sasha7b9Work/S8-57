@@ -9,9 +9,9 @@ public:
 
     void OnChangeParameter(wxCommandEvent &);
 
-    static double frequency;
-    static double amplitude;
-    static double offset;
+    static float frequency;
+    static float amplitude;
+    static float offset;
 
 protected:
     virtual void ApplyParameters();

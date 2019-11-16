@@ -1,6 +1,7 @@
 #include "defines.h"
 #include "FPGA/FPGA.h"
 #include "GUI/Dialogs/TuneGeneratorDialog.h"
+#include "Osci/Osci.h"
 #include "Settings/Settings.h"
 #include "Utils/Math.h"
 #include <cstdlib>
@@ -8,7 +9,6 @@
 
 
 uint16 addrRead = 0;
-
 
 
 void FPGA::Init()
@@ -35,6 +35,28 @@ static float NextNoise()
 }
 
 
+static bool GenerateNormalModeData(Chan::E ch, uint8 data[FPGA::MAX_NUM_POINTS])
+{
+    float amplitude = TuneGeneratorDialog::amplitude * 120;
+    float offset = TuneGeneratorDialog::offset;
+    float frequency = TuneGeneratorDialog::frequency;
+
+    float d = frequency * MathFPGA::TShift2Abs(1, set.time.base);
+
+    for (uint i = 0; i < FPGA::MAX_NUM_POINTS; i++)
+    {
+        float value = offset + VALUE::AVE + amplitude * (sinf(2 * Math::PI_F * i * d));
+
+        LIMITATION(value, static_cast<float>(VALUE::MIN), static_cast<float>(VALUE::MAX));
+
+        data[i] = static_cast<uint8>(value);
+    }
+
+
+    return true;
+}
+
+
 bool FPGA::ReadDataChanenl(Chan::E ch, uint8 data[MAX_NUM_POINTS])
 {
     if (!set.ch[ch].enabled)
@@ -42,9 +64,21 @@ bool FPGA::ReadDataChanenl(Chan::E ch, uint8 data[MAX_NUM_POINTS])
         return false;
     }
 
+    if (Osci::InModeP2P())
+    {
+
+    }
+    else if (Osci::InModeRandomizer())
+    {
+
+    }
+    else
+    {
+        return GenerateNormalModeData(ch, data);
+    }
+
     float amplitude = 100.0F * TuneGeneratorDialog::amplitude;
     float offset = 0.0F + TuneGeneratorDialog::offset;
-    float frequency = TuneGeneratorDialog::frequency;
 
     for (uint i = 0; i < FPGA_NUM_POINTS; i++)
     {

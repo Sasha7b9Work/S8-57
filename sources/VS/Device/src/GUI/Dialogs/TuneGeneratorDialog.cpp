@@ -11,9 +11,9 @@ enum
 };
 
 
-static double oldFrequency = 1e3;
-static double oldAmplitude = 1.0;
-static double oldOffset = 0.0;
+static float oldFrequency = 1e3F;
+static float oldAmplitude = 1.0F;
+static float oldOffset = 0.0F;
 
 
 static wxTextCtrl *tcFrequency = nullptr;
@@ -21,9 +21,9 @@ static wxTextCtrl *tcAmplitude = nullptr;
 static wxTextCtrl *tcOffset = nullptr;
 
 
-double TuneGeneratorDialog::frequency = oldFrequency;
-double TuneGeneratorDialog::amplitude = oldAmplitude;
-double TuneGeneratorDialog::offset = oldOffset;
+float TuneGeneratorDialog::frequency = oldFrequency;
+float TuneGeneratorDialog::amplitude = oldAmplitude;
+float TuneGeneratorDialog::offset = oldOffset;
 
 
 static wxPanel *CreatePanelParameters(wxDialog *dlg)
@@ -62,12 +62,12 @@ TuneGeneratorDialog::TuneGeneratorDialog() : Dialog(wxT("Настройки генератора"))
 
 
 /// Присвоить значеение параметру parameter из tc, если оно действительное
-static void SetIfValid(double *parameter, wxTextCtrl *tc)
+static void SetIfValid(float *parameter, wxTextCtrl *tc)
 {
     double value = SU::StringToDouble(tc->GetValue());
     if (value != SU::ERROR_VALUE_DOUBLE)
     {
-        *parameter = value;
+        *parameter = static_cast<float>(value);
     }
 }
 
