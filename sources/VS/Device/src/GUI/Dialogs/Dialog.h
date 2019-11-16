@@ -15,18 +15,8 @@ public:
     static const int WIDTH_PANEL = 220;
 
 protected:
-    /// Послать форму для ознакомительной отрисовки
-    virtual void SendAdditionForm() = 0;
 
     void SetBoxSizer(wxBoxSizer *sizer, wxSize size);
-
-    /// Создаёт панель полярности сигнала
-    wxPanel *CreatePanelPolarity();
-    wxRadioButton *rbPolarityDirect = nullptr;
-    wxRadioButton *rbPolarityBack = nullptr;
-
-    /// Создаёт панель уровней сигнала
-    wxPanel *CreatePanelLevels();
 
 private:
     wxBoxSizer *panelBox = nullptr;

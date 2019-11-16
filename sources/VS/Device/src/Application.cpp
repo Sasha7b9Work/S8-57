@@ -1,4 +1,5 @@
 #include "defines.h"
+#include "GUI/Dialogs/TuneGeneratorDialog.h"
 #include "Settings/Settings.h"
 
 #pragma warning(push)
@@ -154,7 +155,9 @@ void Frame::OnQuit(wxCommandEvent& WXUNUSED(event))
 
 void Frame::OnGeneratorTune(wxCommandEvent &)
 {
+    TuneGeneratorDialog dialog;
 
+    dialog.ShowModal();
 }
 
 

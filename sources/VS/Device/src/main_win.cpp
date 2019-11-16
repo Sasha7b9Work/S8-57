@@ -19,7 +19,6 @@ void update()
     if (first)
     {
         first = false;
-        set.dbg.runTest = true;
         Test::Run();
     }
 
