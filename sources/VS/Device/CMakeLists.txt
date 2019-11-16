@@ -52,6 +52,7 @@ source_group(_VS\\USBH                                  REGULAR_EXPRESSION ../co
 source_group(Display\\Font                              REGULAR_EXPRESSION ../common/Display/Font/*)
 source_group(Data                                       REGULAR_EXPRESSION              src/Data/*)
 source_group(FlashDrive                                 REGULAR_EXPRESSION              src/FlashDrive/*)
+source_group(GUI\\Dialogs                               REGULAR_EXPRESSION              src/GUI/Dialogs/*)
 source_group(Keyboard                                   REGULAR_EXPRESSION              src/Keyboard/*)
 source_group(Menu                                       REGULAR_EXPRESSION              src/Menu/*)
 source_group(Menu\\Pages                                REGULAR_EXPRESSION              src/Menu/Pages/*)
@@ -243,6 +244,8 @@ file(GLOB SOURCES   ../../common/_VS/*
                     ../../Device/src/FPGA/MathFPGA.cpp
                     ../../Device/src/FPGA/MathFPGA.h
                     ../../Device/src/FPGA/TypesFPGA.h
+                    
+                                 src/GUI/Dialogs/*
                     
                     ../../Device/src/Hardware/Battery.h
                     ../../Device/src/Hardware/Battery.cpp

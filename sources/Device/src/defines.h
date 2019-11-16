@@ -285,3 +285,6 @@ enum StateWorkFPGA
 
 #define NAME_FILE_FIRMWARE "S8-57.bin"
 #define SIZE_FILE_FIRMWARE (128 * 1024 * 4)
+
+
+#define BUTTON_SIZE wxSize(70, 30)

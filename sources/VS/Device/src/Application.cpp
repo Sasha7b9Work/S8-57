@@ -18,9 +18,9 @@ extern void init();
 
 enum
 {
-    File_Size = wxID_HIGHEST + 1,
-    File_Quit = wxID_EXIT,
-    Help_About = wxID_ABOUT
+    FILE_SIZE = wxID_HIGHEST + 1,
+    FILE_QUIT = wxID_EXIT,
+    GENERATOR_TUNE
 };
 
 enum
@@ -77,26 +77,26 @@ Frame::Frame(const wxString& title)
     SetIcon(wxICON(sample));
 
     wxMenu *fileMenu = new wxMenu;
-
-    wxMenu *helpMenu = new wxMenu;
-    helpMenu->Append(Help_About, "&About\tF1", "Show about dialog");
+    wxMenu *generatorMenu = new wxMenu;
 
     //fileMenu->Append(File_Size, "&Size", "Resize screen");
 
-    fileMenu->Append(File_Quit, "E&xit\tAlt-X", "Quit this program");
+    fileMenu->Append(FILE_QUIT, "Выход\tAlt-X", "Закрывает окно программы");
+
+    generatorMenu->Append(GENERATOR_TUNE, "Настроить");
 
     wxMenuBar *menuBar = new wxMenuBar();
-    menuBar->Append(fileMenu, "&File");
-    menuBar->Append(helpMenu, "&Help");
+    menuBar->Append(fileMenu, "Файл");
+    menuBar->Append(generatorMenu, "Генератор");
 
     SetMenuBar(menuBar);
 
     CreateStatusBar(2);
     SetStatusText("Welcome to wxWidgets!");
 
-    Bind(wxEVT_MENU, &Frame::OnSize, this, File_Size);
-    Bind(wxEVT_MENU, &Frame::OnQuit, this, File_Quit);
-    Bind(wxEVT_MENU, &Frame::OnAbout, this, Help_About);
+    Bind(wxEVT_MENU, &Frame::OnSize, this, FILE_SIZE);
+    Bind(wxEVT_MENU, &Frame::OnQuit, this, FILE_QUIT);
+    Bind(wxEVT_MENU, &Frame::OnGeneratorTune, this, GENERATOR_TUNE);
     Bind(wxEVT_TIMER, &Frame::OnTimer, this, TIMER_ID);
     Bind(wxEVT_TIMER, &Frame::OnTimerLong, this, TIMER_LONG_ID);
 
@@ -149,6 +149,12 @@ void Frame::OnSize(wxCommandEvent&)
 void Frame::OnQuit(wxCommandEvent& WXUNUSED(event))
 {
     Close(true);
+}
+
+
+void Frame::OnGeneratorTune(wxCommandEvent &)
+{
+
 }
 
 

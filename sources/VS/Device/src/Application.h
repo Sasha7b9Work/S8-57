@@ -23,11 +23,12 @@ public:
 
     Frame(const wxString& title);
 
-    void OnSize(wxCommandEvent& event);
-    void OnQuit(wxCommandEvent& event);
-    void OnAbout(wxCommandEvent& event);
-    void OnTimer(wxTimerEvent& event);
-    void OnTimerLong(wxTimerEvent& event);
+    void OnSize(wxCommandEvent &);
+    void OnQuit(wxCommandEvent &);
+    void OnGeneratorTune(wxCommandEvent &);
+    void OnAbout(wxCommandEvent &);
+    void OnTimer(wxTimerEvent &);
+    void OnTimerLong(wxTimerEvent &);
 
 private:
     wxTimer timer;

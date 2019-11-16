@@ -66,7 +66,7 @@ bool Test::ROM::Data::Test()
 
     ::ROM::Data::EraseAll();
 
-    int numRecord = 300 * 100;
+    int numRecord = 300;
 
     for (int i = 1; i <= numRecord; i++)
     {
