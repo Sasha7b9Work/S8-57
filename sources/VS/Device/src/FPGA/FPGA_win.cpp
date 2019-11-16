@@ -38,8 +38,10 @@ static float NextNoise()
 static bool GenerateNormalModeData(Chan::E ch, uint8 data[FPGA::MAX_NUM_POINTS])
 {
     float amplitude = TuneGeneratorDialog::amplitude / MathFPGA::RShift2Abs(1, set.ch[ch].range) * 315;
-    float offset = TuneGeneratorDialog::offset;
+    //float offset = TuneGeneratorDialog::offset / MathFPGA::RShift2Abs(1, set.ch[ch].range) * -315;
     float frequency = TuneGeneratorDialog::frequency * MathFPGA::TShift2Abs(1, set.time.base);
+
+    float offset = MathFPGA::RShift2Abs(set.ch[ch].rShift, set.ch[ch].range);
 
     for (uint i = 0; i < FPGA::MAX_NUM_POINTS; i++)
     {
