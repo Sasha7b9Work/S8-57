@@ -181,11 +181,6 @@ uint8 MathFPGA::Voltage2Point(float voltage, Range::E range, uint16 rShift)
 
 float MathFPGA::Point2Voltage(uint8 value, Range::E range, uint16 rShift)
 {
-    if(range == Range::_1V)
-    {
-        range = range;
-    }
-    
     uint8 delta = static_cast<uint8>(value - VALUE::MIN);
 
     float rShiftAbs = RShift2Abs(rShift, range);

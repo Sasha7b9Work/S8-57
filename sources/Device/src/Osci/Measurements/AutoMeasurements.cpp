@@ -1443,6 +1443,7 @@ static void CountedToCurrentSettings()
     if (ENABLED_DS_A)
     {
         Smoother::Run(IN_A, OUT_A, NUM_BYTES, set.disp.ENumSmoothing.ToNumber());
+        std::memcpy(DS->dataA, OUT_A, NUM_BYTES);
         CountedToCurrentSettings(Chan::A, NUM_BYTES);
         LimitationData(Chan::A, NUM_BYTES);
     }
@@ -1450,6 +1451,7 @@ static void CountedToCurrentSettings()
     if (ENABLED_DS_B)
     {
         Smoother::Run(IN_B, OUT_B, NUM_BYTES, set.disp.ENumSmoothing.ToNumber());
+        std::memcpy(DS->dataB, OUT_B, NUM_BYTES);
         CountedToCurrentSettings(Chan::B, NUM_BYTES);
         LimitationData(Chan::B, NUM_BYTES);
     }
@@ -1474,7 +1476,24 @@ static void LimitationData(Chan::E ch, uint numBytes)
 }
 
 
-static void CountedToCurrentRShift(Chan::E /*ch*/, uint /*numBytes*/)
+static void CountedToCurrentRShift(Chan::E ch, uint numBytes)
 {
+    uint16 shiftDS = RSHIFT_DS(ch);
+    Range::E rangeDS = RANGE_DS(ch);
 
+    uint16 shiftSET = set.ch[ch].rShift;
+    Range::E rangeSET = set.ch[ch].range;
+
+    if((shiftDS == shiftSET) && (rangeDS == rangeSET))
+    {
+        std::memcpy(OUT(ch), IN(ch), numBytes);
+    }
+    else
+    {
+        for(uint i = 0; i < numBytes; i++)
+        {
+            float voltage = MathFPGA::Point2Voltage(IN(ch)[i], rangeDS, shiftDS);
+            OUT(ch)[i] = MathFPGA::Voltage2Point(voltage, rangeSET, shiftSET);
+        }
+    }
 }
