@@ -1,11 +1,12 @@
 #include "defines.h"
 #include "GUI/Dialogs/TuneGeneratorDialog.h"
 #include "Settings/Settings.h"
-
-#pragma warning(push)
-#pragma warning(disable:4018 4189 4355 4365 4459 4571 4625 4668 4774 5026 5027)
 #include "Application.h"
+#pragma warning(push, 0)
 #include <SDL.h>
+#include <wx/config.h>
+#include <wx/file.h>
+#include <wx/fileconf.h>
 #pragma warning(pop)
 
 #undef main
@@ -15,6 +16,8 @@
 extern void update();
 extern void init();
 
+
+#define FILE_CONFIG wxT("config.ini")
 
 
 enum
@@ -59,6 +62,10 @@ bool Application::OnInit()
 
     init();
 
+    locale.Init(locale.GetSystemLanguage());
+
+    LoadSettings();
+
     return true;
 }
 
@@ -67,7 +74,55 @@ int Application::OnExit()
 {
     set.Save();
 
+    SaveSettings();
+
     return wxApp::OnExit();
+}
+
+
+void Application::SaveSettings()
+{
+    wxString wsFile(FILE_CONFIG);
+    wxFileConfig *pConfig = new wxFileConfig(wxEmptyString, wxEmptyString, wsFile, wxEmptyString, wxCONFIG_USE_LOCAL_FILE | wxCONFIG_USE_RELATIVE_PATH);
+    wxConfigBase::Set(pConfig);
+
+    pConfig->SetPath(wxT("Cenerator/A"));
+
+    pConfig->Write(wxT("frequency"), (float)TuneGeneratorDialog::frequency);
+    pConfig->Write(wxT("amplitude"), (float)TuneGeneratorDialog::amplitude);
+    pConfig->Write(wxT("offset"), (float)TuneGeneratorDialog::offset);
+
+    pConfig->SetPath(wxT("../B"));
+    pConfig->Write(wxT("frequency"), (float)TuneGeneratorDialog::frequency);
+    pConfig->Write(wxT("amplitude"), (float)TuneGeneratorDialog::amplitude);
+    pConfig->Write(wxT("offset"), (float)TuneGeneratorDialog::offset);
+
+    delete wxConfigBase::Set((wxConfigBase *)nullptr);
+}
+
+
+void Application::LoadSettings()
+{
+    wxString wsFile(FILE_CONFIG);   
+    wxFileConfig *pConfig = new wxFileConfig(wxEmptyString, wxEmptyString, wsFile, wxEmptyString, wxCONFIG_USE_LOCAL_FILE | wxCONFIG_USE_RELATIVE_PATH);
+    wxConfigBase::Set(pConfig);
+
+    wxConfigBase *config = wxConfigBase::Get(false);
+
+    wxString entry;
+    entry = wxT("frequency");
+    long index = 1;
+
+    config->SetPath(wxT("Cenerator/A"));
+
+    config->Read(wxT("frequency"), &TuneGeneratorDialog::frequency, TuneGeneratorDialog::frequency);
+    config->Read(wxT("amplitude"), &TuneGeneratorDialog::amplitude, TuneGeneratorDialog::amplitude);
+    config->Read(wxT("offset"), &TuneGeneratorDialog::offset, TuneGeneratorDialog::offset);
+
+    config->SetPath(wxT("../B"));
+    config->Read(wxT("frequency"), &TuneGeneratorDialog::frequency, TuneGeneratorDialog::frequency);
+    config->Read(wxT("amplitude"), &TuneGeneratorDialog::amplitude, TuneGeneratorDialog::amplitude);
+    config->Read(wxT("offset"), &TuneGeneratorDialog::offset, TuneGeneratorDialog::offset);
 }
 
 
@@ -176,3 +231,5 @@ void Frame::OnAbout(wxCommandEvent& WXUNUSED(event))
         wxOK | wxICON_INFORMATION,
         this);
 }
+
+

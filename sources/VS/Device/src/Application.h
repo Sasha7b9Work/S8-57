@@ -10,6 +10,11 @@ class Application : public wxApp
 public:
     virtual bool OnInit() wxOVERRIDE;
     virtual int OnExit() wxOVERRIDE;
+
+private:
+    void SaveSettings();
+    void LoadSettings();
+    wxLocale locale;
 };
 
 
