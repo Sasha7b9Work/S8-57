@@ -11,19 +11,18 @@ enum
 };
 
 
-static float oldFrequency = 1e3F;
-static float oldAmplitude = 1.0F;
-static float oldOffset = 0.0F;
-
+static float storeFrequency = 1e3F;
+static float storeAmplitude = 0.0F;
+static float storeOffset = 0.0F;
 
 static wxTextCtrl *tcFrequency = nullptr;
 static wxTextCtrl *tcAmplitude = nullptr;
 static wxTextCtrl *tcOffset = nullptr;
 
 
-float TuneGeneratorDialog::frequency = oldFrequency;
-float TuneGeneratorDialog::amplitude = oldAmplitude;
-float TuneGeneratorDialog::offset = oldOffset;
+float TuneGeneratorDialog::frequency = storeFrequency;
+float TuneGeneratorDialog::amplitude = storeAmplitude;
+float TuneGeneratorDialog::offset = storeOffset;
 
 
 static wxPanel *CreatePanelParameters(wxDialog *dlg)
@@ -33,17 +32,17 @@ static wxPanel *CreatePanelParameters(wxDialog *dlg)
     int y = 10, x = 10, dY = 26;
     int dX = 80;
 
-    tcFrequency = new wxTextCtrl(panel, ID_FREQUENCY, SU::DoubleToString(oldFrequency), wxPoint(x, y), wxSize(75, 20));
+    tcFrequency = new wxTextCtrl(panel, ID_FREQUENCY, SU::DoubleToString(TuneGeneratorDialog::frequency), wxPoint(x, y), wxSize(75, 20));
     dlg->Connect(ID_FREQUENCY, wxEVT_COMMAND_TEXT_UPDATED, wxCommandEventHandler(TuneGeneratorDialog::OnChangeParameter));
     new wxStaticText(panel, wxID_ANY, wxT("Частота"), { x + dX, y + 3 });
 
     y += dY;
-    tcAmplitude = new wxTextCtrl(panel, ID_AMPLITUDE, SU::DoubleToString(oldAmplitude), wxPoint(x, y), wxSize(75, 20));
+    tcAmplitude = new wxTextCtrl(panel, ID_AMPLITUDE, SU::DoubleToString(TuneGeneratorDialog::amplitude), wxPoint(x, y), wxSize(75, 20));
     dlg->Connect(ID_AMPLITUDE, wxEVT_COMMAND_TEXT_UPDATED, wxCommandEventHandler(TuneGeneratorDialog::OnChangeParameter));
     new wxStaticText(panel, wxID_ANY, wxT("Амплитуда"), { x + dX, y + 3 });
 
     y += dY;
-    tcOffset = new wxTextCtrl(panel, ID_OFFSET, SU::DoubleToString(oldOffset), wxPoint(x, y), wxSize(75, 20));
+    tcOffset = new wxTextCtrl(panel, ID_OFFSET, SU::DoubleToString(TuneGeneratorDialog::offset), wxPoint(x, y), wxSize(75, 20));
     dlg->Connect(ID_OFFSET, wxEVT_COMMAND_TEXT_UPDATED, wxCommandEventHandler(TuneGeneratorDialog::OnChangeParameter));
     new wxStaticText(panel, wxID_ANY, wxT("Смещение"), { x + dX, y + 3 });
 
@@ -58,6 +57,10 @@ TuneGeneratorDialog::TuneGeneratorDialog() : Dialog(wxT("Настройки генератора"))
     vBox->Add(CreatePanelParameters(this));
 
     SetBoxSizer(vBox, { 175, 80 });
+
+    storeFrequency = frequency;
+    storeOffset = offset;
+    storeAmplitude = amplitude;
 }
 
 
@@ -74,10 +77,6 @@ static void SetIfValid(float *parameter, const wxTextCtrl *tc)
 
 void TuneGeneratorDialog::OnChangeParameter(wxCommandEvent &)
 {
-    oldFrequency = frequency;
-    oldAmplitude = amplitude;
-    oldOffset = offset;
-
     SetIfValid(&frequency, tcFrequency);
 
     SetIfValid(&amplitude, tcAmplitude);
@@ -94,7 +93,7 @@ void TuneGeneratorDialog::ApplyParameters()
 
 void TuneGeneratorDialog::CancelParameters()
 {
-    frequency = oldFrequency;
-    amplitude = oldAmplitude;
-    offset = oldOffset;
+    frequency = storeFrequency;
+    amplitude = storeAmplitude;
+    offset = storeOffset;
 }
