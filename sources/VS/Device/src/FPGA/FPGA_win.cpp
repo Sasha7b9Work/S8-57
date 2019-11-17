@@ -20,7 +20,7 @@ static float NextNoise()
 {
     static float prev = 0.0F;   // Предыдущее значение шума
 
-    const float ampl = 20.0F;    // Амплитуда шума
+    const float ampl = 2.0F;    // Амплитуда шума
     const float step = 7.0F;
 
     float min = prev - step;
@@ -62,7 +62,7 @@ static bool GenerateNormalModeData(Chan::E ch, uint8 data[ENumPointsFPGA::MAX_NU
 
     for (uint i = 0; i < ENumPointsFPGA::MAX_NUM; i++)
     {
-        double value = offset + VALUE::AVE + amplitude * (sin(2 * Math::PI * i * frequency));
+        double value = offset + VALUE::AVE + amplitude * (sin(2 * Math::PI * i * frequency)) + NextNoise();
 
         LIMITATION(value, static_cast<float>(VALUE::MIN), static_cast<float>(VALUE::MAX));
 
