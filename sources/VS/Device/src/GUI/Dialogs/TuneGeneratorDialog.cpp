@@ -73,30 +73,30 @@ TuneGeneratorDialog::TuneGeneratorDialog() : Dialog(wxT("Ќастройки генератора"))
 }
 
 
-/// ѕрисвоить значеение параметру parameter из tc, если оно действительное
 static void SetIfValid(float *parameter, wxTextCtrl *tc)
 {
     double value = 0.0;
-    if (SU::StringToDouble(&value, tc->GetValue()))
+    if(SU::StringToDouble(&value, tc->GetValue()))
     {
         *parameter = static_cast<float>(value);
     }
 }
 
+/// ѕрисвоить значеение параметру parameter из tc, если оно действительное
+static void SetIfValid(float parameter[2], wxTextCtrl *tc[2])
+{
+    SetIfValid(&parameter[0], tc[0]);
+    SetIfValid(&parameter[1], tc[1]);
+}
+
 
 void TuneGeneratorDialog::OnChangeParameter(wxCommandEvent &)
 {
-    SetIfValid(&frequency[0], tcFrequency[0]);
+    SetIfValid(frequency, tcFrequency);
 
-    SetIfValid(&amplitude[0], tcAmplitude[0]);
+    SetIfValid(amplitude, tcAmplitude);
 
-    SetIfValid(&offset[0], tcOffset[0]);
-
-    SetIfValid(&frequency[1], tcFrequency[1]);
-
-    SetIfValid(&amplitude[1], tcAmplitude[1]);
-
-    SetIfValid(&offset[1], tcOffset[1]);
+    SetIfValid(offset, tcOffset);
 }
 
 
