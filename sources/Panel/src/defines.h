@@ -3,9 +3,6 @@
 #ifdef WIN32
 #define __attribute(x)
 #define __attribute__(x)
-#pragma warning(disable:4514)   // unreferenced inline function has been removed
-#pragma warning(disable:4820)   // ... bytes padding added after data member ...
-#pragma warning(disable:5045)   // Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
 #endif
 
 

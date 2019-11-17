@@ -15,8 +15,11 @@ add_definitions(-DSTM32F437xx -DPANEL)
 SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -MP -Wall")
 
 add_compile_options(/wd4159)    # #pragma pack(pop,...): has popped previously pushed identifier xxx
-add_compile_options(/wd4710)
-add_compile_options(/wd4996)
+add_compile_options(/wd4514)    # 'function' : unreferenced inline function has been removed
+add_compile_options(/wd4710)    # 'xxx': function not inlined
+add_compile_options(/wd4820)    # 'xxx': '4' bytes padding added after data member 'yyy'
+add_compile_options(/wd4996)    # 'xxx': This function or variable may be unsafe.
+add_compile_options(/wd5045)    # Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
 
 source_group(common                    FILES ../common/Command.h
                                              ../common/DataBus.cpp

@@ -22,9 +22,15 @@ add_definitions(-DSTM32F437xx -DDEVICE -DVS_KEIL)
 
 SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -MP -Wall")
 
-add_compile_options(/wd4159)    #pragma pack(pop,...): has popped previously pushed identifier xxx
+add_compile_options(/wd4159)    # #pragma pack(pop,...): has popped previously pushed identifier xxx
+add_compile_options(/wd4201)    # nonstandard extension used: nameless struct/union
+add_compile_options(/wd4514)    # 'function' : unreferenced inline function has been removed
+add_compile_options(/wd4623)    # 'derived class' : default constructor was implicitly defined as deleted because a base class default constructor is inaccessible or deleted
+add_compile_options(/wd4626)    # 'xxx': assignment operator was implicitly defined as deleted
 add_compile_options(/wd4820)    # '<anonymous-tag>': 'N' bytes padding added after data member
+add_compile_options(/wd5027)    # 'type': move assignment operator was implicitly defined as deleted
 add_compile_options(/wd5039)    # 'xxx': pointer or reference to potentially throwing function passed to extern C function under -EHc.
+add_compile_options(/wd5045)    # Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
 
 source_group(common                                  FILES ../common/Command.h
                                                            ../common/DataBus.cpp
