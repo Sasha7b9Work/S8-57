@@ -37,28 +37,28 @@ static float NextNoise()
 
 static bool GenerateNormalModeData(Chan::E ch, uint8 data[ENumPointsFPGA::MAX_NUM])
 {
-    static const float kOffset[Range::Count] =
+    static const double kOffset[Range::Count] =
     {
-        12500.0F,  //   2 mV
-        5000.0F,   //   5 mV
-        2500.0F,   //  10 mV
-        1250.0F,   //  20 mV
-        500.0F,    //  50 mV
-        250.0F,    // 100 mV
-        125.0F,    // 200 mV
-        50.0F,     // 500 mV
-        25.0F,     //   1 V
-        12.5F,     //   2 V
-        5.0F,      //   5 V
-        2.5F,      //  10 V
-        1.25F      //  20 V
+        12500.0,    //   2 mV
+        5000.0,     //   5 mV
+        2500.0,     //  10 mV
+        1250.0,     //  20 mV
+        500.0,      //  50 mV
+        250.0,      // 100 mV
+        125.0,      // 200 mV
+        50.0,       // 500 mV
+        25.0,       //   1 V
+        12.5,       //   2 V
+        5.0,        //   5 V
+        2.5,        //  10 V
+        1.25        //  20 V
     };
 
     double amplitude = TuneGeneratorDialog::amplitude[ch] / MathFPGA::RShift2Abs(1, set.ch[ch].range) * 315;
 
     double frequency = TuneGeneratorDialog::frequency[ch] * MathFPGA::TShift2Abs(1, set.time.base);
 
-    double offset = MathFPGA::RShift2Abs(set.ch[ch].rShift, set.ch[ch].range) * kOffset[set.ch[ch].range];
+    double offset = MathFPGA::RShift2Abs(static_cast<int>(set.ch[ch].rShift), set.ch[ch].range) * kOffset[set.ch[ch].range];
 
     for (uint i = 0; i < ENumPointsFPGA::MAX_NUM; i++)
     {
