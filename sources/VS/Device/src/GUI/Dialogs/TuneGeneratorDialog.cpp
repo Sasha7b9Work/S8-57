@@ -25,11 +25,13 @@ float TuneGeneratorDialog::amplitude = storeAmplitude;
 float TuneGeneratorDialog::offset = storeOffset;
 
 
-static wxPanel *CreatePanelParameters(wxDialog *dlg)
+static wxPanel *CreatePanelParameters(wxDialog *dlg, const wxString &name)
 {
     wxPanel *panel = new wxPanel(dlg);
 
-    int y = 10, x = 10, dY = 26;
+    new wxStaticBox(panel, wxID_ANY, name, wxDefaultPosition, { 160, 105 });
+
+    int y = 20, x = 10, dY = 26;
     int dX = 80;
 
     tcFrequency = new wxTextCtrl(panel, ID_FREQUENCY, SU::DoubleToString(TuneGeneratorDialog::frequency), wxPoint(x, y), wxSize(75, 20));
@@ -52,11 +54,12 @@ static wxPanel *CreatePanelParameters(wxDialog *dlg)
 
 TuneGeneratorDialog::TuneGeneratorDialog() : Dialog(wxT("Настройки генератора"))
 {
-    wxBoxSizer *vBox = new wxBoxSizer(wxVERTICAL);
+    wxBoxSizer *hBox = new wxBoxSizer(wxHORIZONTAL);
 
-    vBox->Add(CreatePanelParameters(this));
+    hBox->Add(CreatePanelParameters(this, wxT("Канал 1")));
+    hBox->Add(CreatePanelParameters(this, wxT("Канал 2")));
 
-    SetBoxSizer(vBox, { 175, 80 });
+    SetBoxSizer(hBox, { 320, 105 });
 
     storeFrequency = frequency;
     storeOffset = offset;
