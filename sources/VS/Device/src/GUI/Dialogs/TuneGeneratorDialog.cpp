@@ -73,7 +73,7 @@ TuneGeneratorDialog::TuneGeneratorDialog() : Dialog(wxT("Настройки генератора"))
 }
 
 
-static void SetIfValid(float *parameter, wxTextCtrl *tc)
+static void SetIfValid(float *parameter, const wxTextCtrl *tc)
 {
     double value = 0.0;
     if(SU::StringToDouble(&value, tc->GetValue()))
