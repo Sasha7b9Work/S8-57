@@ -50,9 +50,6 @@ struct Osci
 
 struct AveragerOsci
 {
-    /// ѕроизводит усреднение по следующему принципу. ƒл€ усреднени€ используютс€ записи из RAM с индексами -1 и 0.
-    /// ѕо нидексу -1 хран€тс€ усреднЄнные данные, по индексу 0 - последние считанные данные.
-    /// ѕосле выполнени€ усреднени€ по индексу -1 хран€тс€ последние считан
     static void Process(Chan::E ch, const uint8 *dataNew, uint size);
     static void SettingChanged();
     static void Draw();

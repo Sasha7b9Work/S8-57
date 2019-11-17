@@ -165,33 +165,6 @@ DataSettings *RAM::Read(uint numFromEnd)
 }
 
 
-void RAM::RemoveNewest()
-{
-    uint numDatas = RAM::NumberDatas();
-
-    if(numDatas == 1)
-    {
-        newest = nullptr;
-        oldest->addrNewest = 0U;
-    }
-    else if(numDatas > 1)
-    {
-        uint counter = numDatas - 1;
-
-        Packet *packet = oldest;
-
-        while(counter > 1)
-        {
-            packet = reinterpret_cast<Packet *>(packet->addrNewest);
-            counter++;
-        }
-
-        newest = reinterpret_cast<Packet *>(packet->addrNewest);
-        newest->addrNewest = 0U;
-    }
-}
-
-
 uint RAM::NumberDatas()
 {
     if (newest == nullptr)
