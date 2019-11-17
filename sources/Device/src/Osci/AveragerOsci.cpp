@@ -12,12 +12,23 @@
 static uint16 numSignals[2] = { 0, 0 };
 
 
+/// Меняет местами данные в RAM. Возвращает false, если обмен не удался - разные настройки или недостаточно данных в памяти
+static bool ExchangeDatas(uint numInRAM0, uint numInRAM1);
+/// Скопировать данные d0 в d1, а d1 в d0
+static void ExchangeData(uint8 *d0, uint8 *d1, uint numPoints);
+
+
 void AveragerOsci::Process(Chan::E ch, const uint8 *dataNew, uint size)
 {
     /*
         В режиме рандомизатора в усреднении надо использовать только те данные, которы считаны. Нельзя брать данные для усреднения из предыдущего сохранённого сигнала.
         Для этого нужно завести битовый массив, в котором отмечать те точки, которые считаны в данной итерации.
     */
+
+    if(!ExchangeDatas(0, 1))                                            // Первым делом поместим последние считаныые данные предпоследними в RAM, а усреднённые - последними
+    {
+        return;
+    }
 
     uint16 numAve = static_cast<uint16>(set.disp.ENumAverage);
 
@@ -32,7 +43,7 @@ void AveragerOsci::Process(Chan::E ch, const uint8 *dataNew, uint size)
         step = str.step;
     }
 
-    uint8 *_new = const_cast<uint8 *>(dataNew) + index;
+    uint8 *data = const_cast<uint8 *>(dataNew) + index;
     uint16 *av = AVE_DATA(ch);
 
     /// \todo Здесь неправильно - места в AVE_DATA слишком мало для 8к * 16биты
@@ -52,9 +63,9 @@ void AveragerOsci::Process(Chan::E ch, const uint8 *dataNew, uint size)
         {
             for (uint i = index; i < size; i += step)
             {
-                av[i] += *_new;
+                av[i] += *data;
 
-                _new += step;
+                data += step;
             }
         }
     }
@@ -62,11 +73,11 @@ void AveragerOsci::Process(Chan::E ch, const uint8 *dataNew, uint size)
     {
         for (uint i = index; i < size; i += step)
         {
-            av[i] = static_cast<uint16>(av[i] - (av[i] >> numAve) + *_new);
+            av[i] = static_cast<uint16>(av[i] - (av[i] >> numAve) + *data);
 
-            *_new = static_cast<uint8>(av[i] >> numAve);
+            *data = static_cast<uint8>(av[i] >> numAve);
 
-            _new += step;
+            data += step;
         }
     }
 
@@ -92,5 +103,51 @@ void AveragerOsci::Draw()
         Rectangle(Grid::Width(), height).Draw(Grid::Left(), Grid::Top(), Color::GRID);
 
         Region(static_cast<int>(Grid::Width() * static_cast<float>(numSignals[0]) / set.disp.ENumAverage), height).Fill(Grid::Left(), Grid::Top());
+    }
+}
+
+
+static bool ExchangeDatas(uint numInRAM0, uint numInRAM1)
+{
+    if(RAM::NumberDatas() < 2)
+    {
+        return false;
+    }
+
+    DataSettings *ds0 = RAM::Read(numInRAM0);
+    DataSettings *ds1 = RAM::Read(numInRAM1);
+
+    if(!ds0->Equals(*ds1))
+    {
+        return false;
+    }
+
+    if(ENABLED_A(ds0) && ENABLED_A(ds1))
+    {
+        ExchangeData(ds0->dataA, ds1->dataA, ds0->SizeChannel());
+    }
+
+    if(ENABLED_B(ds0) && ENABLED_B(ds1))
+    {
+        ExchangeData(ds0->dataB, ds1->dataB, ds0->SizeChannel());
+    }
+
+    return true;
+}
+
+
+static void ExchangeData(uint8 *d0, uint8 *d1, uint numPoints)
+{
+    static const uint SIZE_BLOCK = 32;
+
+    uint8 buffer[SIZE_BLOCK];
+
+    while(numPoints)
+    {
+        std::memcpy(buffer, d0, SIZE_BLOCK);
+        std::memcpy(d0, d1, SIZE_BLOCK);
+        std::memcpy(d1, buffer, SIZE_BLOCK);
+
+        numPoints -= SIZE_BLOCK;
     }
 }
