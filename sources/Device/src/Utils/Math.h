@@ -1,9 +1,6 @@
 #pragma once
 
 
-
-#define PI 3.141592653589793F
-
 #define LIMIT_BELOW(x, min)                 if((x) < (min)) { x = (min); }
 
 #define LIMIT_ABOVE(x, max)                 if((x) > (max)) { x = (max); }
@@ -28,7 +25,8 @@
 
 namespace Math
 {
-    const float PI_F = 3.14159265358979F;
+    const double PI = 3.141592653589793238463;
+    const float PI_F = 3.141592653589793F;
     /// Возвращает номер младшего бита, равного единице
     int LowSignedBit(uint value);
     /// \brief Сравнивает два числа. Возвращает true, если числа отличаются друг от друга не более, чем на epsilonPart. При этом для расчёта epsilonPart 

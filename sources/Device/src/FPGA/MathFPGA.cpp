@@ -449,7 +449,7 @@ static void MultiplyToWindow(float *data, uint numPoints)
     {
         for (uint i = 0; i < numPoints; i++)
         {
-            data[i] *= 0.53836F - 0.46164F * std::cosf(2 * PI * i / (numPoints - 1));
+            data[i] *= 0.53836F - 0.46164F * std::cosf(2 * Math::PI_F * i / (numPoints - 1));
         }
     }
     else if (set.fft.window == WindowFFT::Blackman)
@@ -460,14 +460,14 @@ static void MultiplyToWindow(float *data, uint numPoints)
         float a2 = alpha / 2.0F;
         for (uint i = 0; i < numPoints; i++)
         {
-            data[i] *= a0 - a1 * std::cosf(2 * PI * i / (numPoints - 1)) + a2 * std::cosf(4 * PI * i / (numPoints - 1));
+            data[i] *= a0 - a1 * std::cosf(2 * Math::PI_F * i / (numPoints - 1)) + a2 * std::cosf(4 * Math::PI_F * i / (numPoints - 1));
         }
     }
     else if (set.fft.window == WindowFFT::Hann)
     {
         for (uint i = 0; i < numPoints; i++)
         {
-            data[i] *= 0.5F * (1.0F - std::cosf(2.0F * PI * i / (numPoints - 1.0F)));
+            data[i] *= 0.5F * (1.0F - std::cosf(2.0F * Math::PI_F * i / (numPoints - 1.0F)));
         }
     }
     else

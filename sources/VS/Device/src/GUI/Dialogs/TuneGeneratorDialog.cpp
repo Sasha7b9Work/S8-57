@@ -15,18 +15,18 @@ enum
 };
 
 
-static float storeFrequency[2] = { 0.0F, 0.0F };
-static float storeAmplitude[2] = { 0.0F, 0.0F };
-static float storeOffset[2] = { 0.0F, 0.0F };
+static double storeFrequency[2] = { 0.0, 0.0 };
+static double storeAmplitude[2] = { 0.0, 0.0 };
+static double storeOffset[2] = { 0.0, 0.0 };
 
 static wxTextCtrl *tcFrequency[2] = { nullptr, nullptr };
 static wxTextCtrl *tcAmplitude[2] = { nullptr, nullptr };
 static wxTextCtrl *tcOffset[2] = { nullptr, nullptr };
 
 
-float TuneGeneratorDialog::frequency[2] = { 1e3F, 1e3F };
-float TuneGeneratorDialog::amplitude[2] = { 1.0F, 1.0F };
-float TuneGeneratorDialog::offset[2] = { 0.0F, 0.0F };
+double TuneGeneratorDialog::frequency[2] = { 1e3, 1e3 };
+double TuneGeneratorDialog::amplitude[2] = { 1.0, 1.0 };
+double TuneGeneratorDialog::offset[2] = { 0.0, 0.0 };
 
 
 static wxPanel *CreatePanelParameters(wxDialog *dlg, int ch)
@@ -73,17 +73,17 @@ TuneGeneratorDialog::TuneGeneratorDialog() : Dialog(wxT("Настройки генератора"))
 }
 
 
-static void SetIfValid(float *parameter, const wxTextCtrl *tc)
+static void SetIfValid(double *parameter, const wxTextCtrl *tc)
 {
     double value = 0.0;
     if(SU::StringToDouble(&value, tc->GetValue()))
     {
-        *parameter = static_cast<float>(value);
+        *parameter = value;
     }
 }
 
 /// Присвоить значеение параметру parameter из tc, если оно действительное
-static void SetIfValid(float parameter[2], wxTextCtrl *tc[2])
+static void SetIfValid(double parameter[2], wxTextCtrl *tc[2])
 {
     SetIfValid(&parameter[0], tc[0]);
     SetIfValid(&parameter[1], tc[1]);

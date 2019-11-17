@@ -62,7 +62,7 @@ static void CalculateSine()
 {
     for(int i = 0; i < POINTS_IN_PERIOD_SOUND; i++)
     {
-        float step = 2.0F * PI / (POINTS_IN_PERIOD_SOUND - 1);
+        float step = 2.0F * Math::PI_F / (POINTS_IN_PERIOD_SOUND - 1);
         float value = (std::sinf(i * step) + 1.0F) / 2.0F;
         float v = value * amplitude * 255.0F;
         points[i] = static_cast<uint8>(v);

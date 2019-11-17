@@ -1225,9 +1225,9 @@ void InterpolationSinX_X(uint8 *data, int numPoints, TBase::E tBase)
         }
     }
 
-    float deltaX = PI;
-    float stepX0 = PI / static_cast<float>(delta);
-    float x0 = PI - stepX0;
+    float deltaX = Math::PI_F;
+    float stepX0 = Math::PI_F / static_cast<float>(delta);
+    float x0 = Math::PI_F - stepX0;
     int num = 0;
     
     for(int i = 0; i < numPoints; i++)
@@ -1241,7 +1241,7 @@ void InterpolationSinX_X(uint8 *data, int numPoints, TBase::E tBase)
         {
             int part = num % ((delta - 1) * 2);
             num++;
-            float sinX = (part < delta - 1) ? std::sinf(PI / delta * (part + 1)) : std::sinf(PI / delta * (part - (delta - 1) * 2));
+            float sinX = (part < delta - 1) ? std::sinf(Math::PI_F / delta * (part + 1)) : std::sinf(Math::PI_F / delta * (part - (delta - 1) * 2));
 
             if (tBase > TBase::_5ns)                 // Здесь используем более быструю, но более неправильную арифметику целвых чисел
             {
