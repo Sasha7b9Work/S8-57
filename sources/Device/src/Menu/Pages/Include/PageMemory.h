@@ -76,6 +76,7 @@ struct ENumPointsFPGA
     explicit ENumPointsFPGA(E v) : value(v) {};
     uint BytesInChannel(PeakDetMode::E mode) const;
     uint PointsInChannel() const;
+    static const uint MAX_NUM = 8192;
 };
 
 ///  акой сигнал показывать в режиме ѕјћя“№ - ¬Ќ≈ЎЌ «”

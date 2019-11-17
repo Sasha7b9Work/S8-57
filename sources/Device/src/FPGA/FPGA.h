@@ -1,5 +1,5 @@
 #pragma once
-#include "Settings/SettingsOsci.h"
+#include "Settings/Settings.h"
 #include "FPGA/TypesFPGA.h"
 #include "FPGA/MathFPGA.h"
 
@@ -45,8 +45,6 @@ struct FPGA
     friend struct TShift;
     friend struct TrigLevel;
 
-    static const uint MAX_NUM_POINTS = (16 * 1024U);
-
 private:
 
     static void Init();
@@ -67,7 +65,7 @@ private:
 
     static uint16 ReadLastRecord(Chan::E ch);
 
-    static bool ReadDataChanenl(Chan::E ch, uint8 data[MAX_NUM_POINTS]);
+    static bool ReadDataChanenl(Chan::E ch, uint8 data[ENumPointsFPGA::MAX_NUM]);
 
     static void ClearDataRand();
     /// ¬ключить/выключить калибратор.

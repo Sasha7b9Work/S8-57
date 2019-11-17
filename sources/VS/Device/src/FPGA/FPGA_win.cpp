@@ -35,7 +35,7 @@ static float NextNoise()
 }
 
 
-static bool GenerateNormalModeData(Chan::E ch, uint8 data[FPGA::MAX_NUM_POINTS])
+static bool GenerateNormalModeData(Chan::E ch, uint8 data[ENumPointsFPGA::MAX_NUM])
 {
     static const float kOffset[Range::Count] =
     {
@@ -54,13 +54,13 @@ static bool GenerateNormalModeData(Chan::E ch, uint8 data[FPGA::MAX_NUM_POINTS])
         1.25F      //  20 V
     };
 
-    float amplitude = TuneGeneratorDialog::amplitude / MathFPGA::RShift2Abs(1, set.ch[ch].range) * 315;
+    float amplitude = TuneGeneratorDialog::amplitude[ch] / MathFPGA::RShift2Abs(1, set.ch[ch].range) * 315;
 
-    float frequency = TuneGeneratorDialog::frequency * MathFPGA::TShift2Abs(1, set.time.base);
+    float frequency = TuneGeneratorDialog::frequency[ch] * MathFPGA::TShift2Abs(1, set.time.base);
 
     float offset = MathFPGA::RShift2Abs(set.ch[ch].rShift, set.ch[ch].range) * kOffset[set.ch[ch].range];
 
-    for (uint i = 0; i < FPGA::MAX_NUM_POINTS; i++)
+    for (uint i = 0; i < ENumPointsFPGA::MAX_NUM; i++)
     {
         float value = offset + VALUE::AVE + amplitude * (sinf(2 * Math::PI_F * i * frequency));
 
@@ -74,7 +74,7 @@ static bool GenerateNormalModeData(Chan::E ch, uint8 data[FPGA::MAX_NUM_POINTS])
 }
 
 
-bool FPGA::ReadDataChanenl(Chan::E ch, uint8 data[MAX_NUM_POINTS])
+bool FPGA::ReadDataChanenl(Chan::E ch, uint8 data[ENumPointsFPGA::MAX_NUM])
 {
     if (!set.ch[ch].enabled)
     {
@@ -94,8 +94,8 @@ bool FPGA::ReadDataChanenl(Chan::E ch, uint8 data[MAX_NUM_POINTS])
         return GenerateNormalModeData(ch, data);
     }
 
-    float amplitude = 100.0F * TuneGeneratorDialog::amplitude;
-    float offset = 0.0F + TuneGeneratorDialog::offset;
+    float amplitude = 100.0F * TuneGeneratorDialog::amplitude[ch];
+    float offset = 0.0F + TuneGeneratorDialog::offset[ch];
 
     for (uint i = 0; i < FPGA_NUM_POINTS; i++)
     {

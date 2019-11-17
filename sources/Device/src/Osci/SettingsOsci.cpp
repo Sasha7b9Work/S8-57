@@ -413,7 +413,7 @@ int Chan::PointsInChannel() const
 
 int Chan::RequestBytes(DataSettings *) const
 {
-    return FPGA::MAX_NUM_POINTS;
+    return ENumPointsFPGA::MAX_NUM;
 }
 
 

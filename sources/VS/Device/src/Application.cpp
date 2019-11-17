@@ -88,14 +88,14 @@ void Application::SaveSettings()
 
     pConfig->SetPath(wxT("Cenerator/A"));
 
-    pConfig->Write(wxT("frequency"), (float)TuneGeneratorDialog::frequency);
-    pConfig->Write(wxT("amplitude"), (float)TuneGeneratorDialog::amplitude);
-    pConfig->Write(wxT("offset"), (float)TuneGeneratorDialog::offset);
+    pConfig->Write(wxT("frequency"), (float)TuneGeneratorDialog::frequency[0]);
+    pConfig->Write(wxT("amplitude"), (float)TuneGeneratorDialog::amplitude[0]);
+    pConfig->Write(wxT("offset"), (float)TuneGeneratorDialog::offset[0]);
 
     pConfig->SetPath(wxT("../B"));
-    pConfig->Write(wxT("frequency"), (float)TuneGeneratorDialog::frequency);
-    pConfig->Write(wxT("amplitude"), (float)TuneGeneratorDialog::amplitude);
-    pConfig->Write(wxT("offset"), (float)TuneGeneratorDialog::offset);
+    pConfig->Write(wxT("frequency"), (float)TuneGeneratorDialog::frequency[1]);
+    pConfig->Write(wxT("amplitude"), (float)TuneGeneratorDialog::amplitude[1]);
+    pConfig->Write(wxT("offset"), (float)TuneGeneratorDialog::offset[1]);
 
     delete wxConfigBase::Set((wxConfigBase *)nullptr);
 }
@@ -109,20 +109,18 @@ void Application::LoadSettings()
 
     wxConfigBase *config = wxConfigBase::Get(false);
 
-    wxString entry;
-    entry = wxT("frequency");
-    long index = 1;
-
     config->SetPath(wxT("Cenerator/A"));
 
-    config->Read(wxT("frequency"), &TuneGeneratorDialog::frequency, TuneGeneratorDialog::frequency);
-    config->Read(wxT("amplitude"), &TuneGeneratorDialog::amplitude, TuneGeneratorDialog::amplitude);
-    config->Read(wxT("offset"), &TuneGeneratorDialog::offset, TuneGeneratorDialog::offset);
+    config->Read(wxT("frequency"), &TuneGeneratorDialog::frequency[0], TuneGeneratorDialog::frequency[0]);
+    config->Read(wxT("amplitude"), &TuneGeneratorDialog::amplitude[0], TuneGeneratorDialog::amplitude[0]);
+    config->Read(wxT("offset"), &TuneGeneratorDialog::offset[0], TuneGeneratorDialog::offset[0]);
 
     config->SetPath(wxT("../B"));
-    config->Read(wxT("frequency"), &TuneGeneratorDialog::frequency, TuneGeneratorDialog::frequency);
-    config->Read(wxT("amplitude"), &TuneGeneratorDialog::amplitude, TuneGeneratorDialog::amplitude);
-    config->Read(wxT("offset"), &TuneGeneratorDialog::offset, TuneGeneratorDialog::offset);
+    config->Read(wxT("frequency"), &TuneGeneratorDialog::frequency[1], TuneGeneratorDialog::frequency[1]);
+    config->Read(wxT("amplitude"), &TuneGeneratorDialog::amplitude[1], TuneGeneratorDialog::amplitude[1]);
+    config->Read(wxT("offset"), &TuneGeneratorDialog::offset[1], TuneGeneratorDialog::offset[1]);
+
+    delete wxConfigBase::Set((wxConfigBase *)nullptr);
 }
 
 

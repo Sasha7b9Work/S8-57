@@ -8,7 +8,7 @@
 
 
 extern bool givingStart;
-extern uint8 dataRand[Chan::Count][FPGA::MAX_NUM_POINTS];
+extern uint8 dataRand[Chan::Count][ENumPointsFPGA::MAX_NUM];
 
 /// Здесь хранится адрес, начиная с которого будем читать данные по каналам. Если addrRead == 0xffff, то адрес вначале нужно считать
 uint16 addrRead = 0xffff;
@@ -178,7 +178,7 @@ bool FPGA::ReadDataChanenlRand(Chan::E ch, const uint8 *address, uint8 *data)
 }
 
 
-bool FPGA::ReadDataChanenl(Chan::E ch, uint8 data[FPGA::MAX_NUM_POINTS])
+bool FPGA::ReadDataChanenl(Chan::E ch, uint8 data[ENumPointsFPGA::MAX_NUM])
 {
     uint numPoints = FPGA_NUM_POINTS;
 
