@@ -53,6 +53,10 @@ String::String(const char *format, ...)
     {
         std::strcpy(buffer, buf);
     }
+    else
+    {
+        // здесь ничего
+    }
 }
 
 
@@ -78,6 +82,10 @@ void String::Set(TypeConversionString::E conv, const char *format, ...)
         {
             std::strcpy(buffer, buf);
             Conversion(conv);
+        }
+        else
+        {
+            // здесь ничего
         }
     }
 }

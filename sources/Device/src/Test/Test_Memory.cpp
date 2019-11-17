@@ -102,12 +102,12 @@ bool Test::ROM::Data::Test()
 }
 
 
-#define FILL(en, dat)                                   \
-    if (en) {                                           \
-        uint8 *data = dat;                              \
-        data[0] = static_cast<uint8>(std::rand());      \
-        for (uint i = 1; i < numPoints; i++)            \
-            data[i] = static_cast<uint8>(data[0] * i);  \
+#define FILL(en, dat)                                       \
+    if (en) {                                               \
+        uint8 *data = dat;                                  \
+        data[0] = static_cast<uint8>(std::rand());          \
+        for (uint i = 1; i < numPoints; i++)                \
+            { data[i] = static_cast<uint8>(data[0] * i); }  \
     }
 
 static void FillData(DataSettings *ds)
@@ -119,11 +119,11 @@ static void FillData(DataSettings *ds)
 }
 
 
-#define CHECK(en, dat)                                                      \
-    if (en) {                                                               \
-        uint8 *data = dat;                                                  \
-        for (uint i = 1; i < numPoints; i++)                                \
-            if (data[i] != static_cast<uint8>(data[0] * i)) return false;   \
+#define CHECK(en, dat)                                                              \
+    if (en) {                                                                       \
+        uint8 *data = dat;                                                          \
+        for (uint i = 1; i < numPoints; i++)                                        \
+            { if (data[i] != static_cast<uint8>(data[0] * i)) { return false; } }   \
     }
 
 

@@ -62,10 +62,10 @@ TuneGeneratorDialog::TuneGeneratorDialog() : Dialog(wxT("Настройки генератора"))
 
 
 /// Присвоить значеение параметру parameter из tc, если оно действительное
-static void SetIfValid(float *parameter, wxTextCtrl *tc)
+static void SetIfValid(float *parameter, const wxTextCtrl *tc)
 {
-    double value = SU::StringToDouble(tc->GetValue());
-    if (value != SU::ERROR_VALUE_DOUBLE)
+    double value = 0.0;
+    if (SU::StringToDouble(&value, tc->GetValue()))
     {
         *parameter = static_cast<float>(value);
     }

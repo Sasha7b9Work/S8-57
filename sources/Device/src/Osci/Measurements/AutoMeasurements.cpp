@@ -1104,7 +1104,7 @@ float Measure::CalculateCursorU(Chan::E ch, float posCurT)
 #define SCALE (200.0F / (VALUE::MAX - VALUE::MIN))
 
     float value = 200.0F - rel * SCALE;
-    LIMITATION(value, 0.0F, 200.0F); //-V2516
+    LIMITATION(value, 0.0F, 200.0F);
     return value;
 }
 

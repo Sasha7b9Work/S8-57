@@ -224,7 +224,7 @@ int TShift::Max()
 
 void TShift::Set(int tShift)
 {
-    LIMITATION(tShift, Min(), Max()); //-V2516
+    LIMITATION(tShift, Min(), Max());
 
     set.time.shift = tShift;
 

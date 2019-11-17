@@ -20,9 +20,6 @@ static bool ChooseSymbols(const char **string);
 static bool ChooseSpaces(const char **string);
 
 
-const double SU::ERROR_VALUE_DOUBLE = 1.6e308;
-
-
 bool String2Int(char *str, int *value)
 {
     int sign = str[0] == '-' ? -1 : 1;
@@ -394,12 +391,12 @@ char *SU::DoubleToString(double value)
 #endif
 
 
-double SU::StringToDouble(const char *value)
+bool SU::StringToDouble(double *value, const char *str)
 {
     static const int SIZE_BUFFER = 100;
     char buffer[SIZE_BUFFER];
 
-    strcpy_s(buffer, SIZE_BUFFER - 1, value);
+    strcpy_s(buffer, SIZE_BUFFER - 1, str);
 
     char *p = buffer;
 
@@ -414,14 +411,9 @@ double SU::StringToDouble(const char *value)
 
     char *end = nullptr;
 
-    double result = std::strtod(buffer, &end);
+    *value = std::strtod(buffer, &end);
 
-    if (end == buffer)
-    {
-        return SU::ERROR_VALUE_DOUBLE;
-    }
-
-    return result;
+    return (end != buffer);
 }
 
 #ifndef USE_SDL2

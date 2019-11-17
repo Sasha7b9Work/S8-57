@@ -20,7 +20,7 @@
 
 #define LIMITATION_ABOVE(var, value, max)   var = (value); if((var) > (max)) { (var) = (max); }
 
-#define LIMITATION(var, min, max)           if(var < (min)) { (var) = (min); } else if(var > (max)) { var = (max); };
+#define LIMITATION(var, min, max)           if(var < (min)) { (var) = (min); } else if(var > (max)) { var = (max); } else  { var = var; };
 
 #define IN_RANGE(x, min, max)               ((x) >= (min) && (x) <= (max))
 
@@ -28,7 +28,7 @@
 
 namespace Math
 {
-    const float PI_F = 3.14159265358979f;
+    const float PI_F = 3.14159265358979F;
     /// Возвращает номер младшего бита, равного единице
     int LowSignedBit(uint value);
     /// \brief Сравнивает два числа. Возвращает true, если числа отличаются друг от друга не более, чем на epsilonPart. При этом для расчёта epsilonPart 

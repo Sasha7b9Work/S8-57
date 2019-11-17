@@ -260,7 +260,7 @@ static void DecCurrentDir()
         {
             numCurDir = numDirs - 1;
             numFirstDir = numDirs - RECS_ON_PAGE;
-            LIMITATION(numFirstDir, 0, numCurDir); //-V2516
+            LIMITATION(numFirstDir, 0, numCurDir);
         }
 
         if (numCurDir < numFirstDir)
@@ -299,7 +299,7 @@ static void DecCurrentFile()
         {
             numCurFile = numFiles - 1;
             numFirstFile = numFiles - RECS_ON_PAGE;;
-            LIMITATION(numFirstFile, 0, numCurFile); //-V2516
+            LIMITATION(numFirstFile, 0, numCurFile);
         }
 
         if (numCurFile < numFirstFile)
@@ -347,7 +347,7 @@ bool FileManager::GetNameForNewFile(char name[255]) //-V2506
 
     if (set.mem.fileNamingMode == FileNamingMode::Manually)
     {
-        LIMITATION(size, 1, 95); //-V2516
+        LIMITATION(size, 1, 95);
         std::strcat(name, set.mem.fileName);
         std::strcat(name, ".");
         std::strcat(name, (set.mem.modeSaveSignal == ModeSaveSignal::BMP) ? "bmp" : "txt");

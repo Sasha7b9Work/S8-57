@@ -39,6 +39,11 @@ uint PacketROM::Size() const
 
 bool PacketROM::WriteToSector(const Sector *sector) const
 {
+    if(UnPack() == nullptr)
+    {
+        return false;
+    }
+
     const PacketROM *dest = sector->FirstPacket();
 
     while (dest && !dest->IsFree())
@@ -55,7 +60,7 @@ bool PacketROM::WriteToSector(const Sector *sector) const
         return false;
     }
 
-    DataSettings ds = *UnPack();
+    DataSettings ds = *UnPack(); //-V522
 
     ds.dataA = ds.dataB = nullptr;
     if (ds.enableA)
@@ -242,7 +247,7 @@ const PacketROM *Sector::FindValidPacket(uint numInROM) const
         {
             const DataSettings *ds = packet->UnPack();
 
-            if (ds->numInROM == numInROM)
+            if (ds && ds->numInROM == numInROM)
             {
                 for (uint j = 0; j < ds->SizeChannel(); j++)
                 {
@@ -400,7 +405,7 @@ int Sector::Number(uint address)
 }
 
 
-char *TypePacket(PacketROM *packet)
+char *TypePacket(const PacketROM *packet)
 {
     if (packet == nullptr)
     {
@@ -425,7 +430,7 @@ char *TypePacket(PacketROM *packet)
     return "not determinated";
 }
 
-int NumberPacket(PacketROM *packet)
+int NumberPacket(const PacketROM *packet)
 {
     const DataSettings *ds = packet->UnPack();
 

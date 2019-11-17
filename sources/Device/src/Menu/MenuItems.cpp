@@ -609,7 +609,7 @@ void Governor::ChangeValue(int16 delta)
 
     int16 newValue = GetValue() + static_cast<int16>(Math::Sign(delta) * Math::Pow10(currentDigit));
 
-    LIMITATION(newValue, OwnData()->min, OwnData()->max); //-V2516
+    LIMITATION(newValue, OwnData()->min, OwnData()->max);
 
     SetValue(newValue);
 
