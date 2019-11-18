@@ -85,7 +85,9 @@ struct TypeSignalROM
     enum E
     {
         Recorded,
-        Current
+        Current,
+        Both,
+        Count
     };
 };
 

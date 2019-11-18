@@ -104,33 +104,39 @@ DEF_GRAPH_BUTTON( bSave,                                                        
 
 static void OnPress_TypeSignal()
 {
-    Math::CircleIncrease<uint8>(reinterpret_cast<uint8*>(&set.mem.typeSignalROM), 0, 1);
+    Math::CircleIncrease<uint8>(reinterpret_cast<uint8*>(&set.mem.typeSignalROM), 0, TypeSignalROM::Count - 1);
 }
 
 static void Draw_Recorded(int x, int y)
 {
-    Char(SymbolUGO2::RECORDERD).Draw4SymbolsInRect(x + 1, y + 1);
+    Text("ЗАП").Draw(x + 1, y + 5);
 }
 
 static void Draw_Current(int x, int y)
 {
-    Char(SymbolUGO2::CURRENT).Draw4SymbolsInRect(x + 1, y + 1);
+    Text("ТЕК").Draw(x + 1, y + 5);
+}
+
+static void Draw_Both(int x, int y)
+{
+    Text("ОБА").Draw(x + 1, y + 5);
 }
 
 static void Draw_TypeSignal(int x, int y)
 {
     typedef void (*pFuncDraw)(int, int);
 
-    static const pFuncDraw func[2] = { Draw_Recorded, Draw_Current };
+    static const pFuncDraw func[TypeSignalROM::Count] = { Draw_Recorded, Draw_Current, Draw_Both };
     func[set.mem.typeSignalROM](x, y);
 }
 
-DEF_GRAPH_BUTTON_HINTS_2( bTypeSignal,                                                                                                              //--- ПАМЯТЬ - ВНУТР ЗУ - Тип сигнала ---
+DEF_GRAPH_BUTTON_HINTS_3( bTypeSignal,                                                                                                              //--- ПАМЯТЬ - ВНУТР ЗУ - Тип сигнала ---
     "Тип сигнала",
     "Какой сигнал выводить",
     &PageROM::self, Item::Active, OnPress_TypeSignal, Draw_TypeSignal,
     Draw_Recorded, "Выводится записанный сигнал из памяти",
-    Draw_Current, "Выводится текущий сигнал"
+    Draw_Current, "Выводится текущий сигнал",
+    Draw_Both, "Выводить оба сигнала одновременно"
 )
 
 

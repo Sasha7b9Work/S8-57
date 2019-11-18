@@ -60,8 +60,6 @@ struct SymbolUGO2
         BIG_M           = '\x60',   ///< Большая буква "М"
         SETTINGS        = '\x62',   ///< Значок настроек
         ARROW_RIGHT     = '\x64',
-        CURRENT         = '\x6a',   ///< "ТЕК"
-        RECORDERD       = '\x6c',   ///< "ЗАП"
         TAB             = '\x6e',
         FLASH_DRIVE     = '\x80',   ///< Символ флешки внизу экрана
         ETHERNET        = '\x82',   ///< Символ Ethernet внизу экрана
