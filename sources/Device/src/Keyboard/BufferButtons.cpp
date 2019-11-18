@@ -5,10 +5,7 @@
 
 
 
-enum
-{
-    SIZE = 100
-};
+static const int SIZE = 100;
 
 /// Здесь хранятся все события
 static KeyEvent buffer[SIZE];
