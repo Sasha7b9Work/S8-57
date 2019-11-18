@@ -599,7 +599,7 @@ void OnMemExtSetMaskNameRegSet(int angle, int maxIndex)
 {
     typedef void (*pFuncVpI8I8I8)(int8 *, int8, int8);
 
-    static pFuncVpI8I8I8 func[3] =
+    static const pFuncVpI8I8I8 func[3] =
     {
         Math::CircleDecrease<int8>,
         Math::CircleDecrease<int8>,
