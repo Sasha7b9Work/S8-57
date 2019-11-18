@@ -67,9 +67,9 @@ TuneGeneratorDialog::TuneGeneratorDialog() : Dialog(wxT("Настройки генератора"))
 
     SetBoxSizer(hBox, { 320, 105 });
 
-    std::memcpy(storeFrequency, frequency, sizeof(float) * 2);
-    std::memcpy(storeAmplitude, amplitude, sizeof(float) * 2);
-    std::memcpy(storeOffset, offset, sizeof(float) * 2);
+    std::memcpy(storeFrequency, frequency, sizeof(frequency[0]) * 2);
+    std::memcpy(storeAmplitude, amplitude, sizeof(amplitude[0]) * 2);
+    std::memcpy(storeOffset, offset, sizeof(offset[0]) * 2);
 }
 
 
@@ -108,7 +108,7 @@ void TuneGeneratorDialog::ApplyParameters()
 
 void TuneGeneratorDialog::CancelParameters()
 {
-    std::memcpy(frequency, storeFrequency, sizeof(float) * 2);
-    std::memcpy(amplitude, storeAmplitude, sizeof(float) * 2);
-    std::memcpy(offset, storeOffset, sizeof(float) * 2);
+    std::memcpy(frequency, storeFrequency, sizeof(frequency[0]) * 2);
+    std::memcpy(amplitude, storeAmplitude, sizeof(amplitude[0]) * 2);
+    std::memcpy(offset, storeOffset, sizeof(offset[0]) * 2);
 }
