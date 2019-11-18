@@ -21,7 +21,10 @@ void ContextOsci::LoadCalibratorMode()
 
 void ContextOsci::OnPressStart()
 {
-    FPGA::OnPressStart();
+    if (set.mem.modeWork == ModeWork::Dir)
+    {
+        FPGA::OnPressStart();
+    }
 }
 
 bool ContextOsci::IsRunning()
