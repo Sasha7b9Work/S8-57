@@ -361,7 +361,7 @@ void TrigLevel::Find()
 
         float additionShift = deltaValue + deltaRShift / k;     // Итоговое смщение, которое нужно добавить к TrigLev::Zero
 
-        Set(static_cast<int16>(ZERO - (additionShift * k + 0.5F)));
+        Set(static_cast<int16>(HARDWARE_ZERO + additionShift * k + 0.5F));
     }
 }
 
@@ -432,7 +432,7 @@ pString Chan::Name() const
 void TrigLevel::Load()
 {
     /// \todo Здесь много лишних движений. Нужно что-то сделать с вводом SET_TRIGLEV_SOURCE
-    uint16 value = static_cast<uint16>((TrigLevel::MAX + TrigLevel::MIN) - set.trig.lev[set.trig.source]);
+    uint16 value = static_cast<uint16>(HARDWARE_ZERO + set.trig.lev[set.trig.source]);
 
     GPIO::WriteRegisters(FPin::SPI3_CS1, static_cast<uint16>(0xa000 | (value << 2)));
 

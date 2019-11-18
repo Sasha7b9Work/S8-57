@@ -73,7 +73,7 @@ const Settings Settings::defaultSettings =
         TrigSource::A,                      // source
         TrigInput::Full,                    // input
         TrigPolarity::Rising,               // polarity
-        {TrigLevel::ZERO, TrigLevel::ZERO}, // lev[Chan::Count]
+        { 0, 0},                            // lev[Chan::Count]
         TrigStartMode::Auto,                // startMode
         TrigModeFind::Hand,                 // modeFind
         10,                                 // holdOff

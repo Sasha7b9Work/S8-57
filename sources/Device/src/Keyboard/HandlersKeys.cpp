@@ -444,7 +444,7 @@ static void Trig_Release()
 
 static void Trig_Long()
 {
-    TrigLevel::Set(TrigLevel::ZERO);
+    TrigLevel::Set(0);
 }
 
 
