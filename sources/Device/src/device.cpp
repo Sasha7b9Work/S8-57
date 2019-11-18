@@ -8,7 +8,6 @@
 #include "Hardware/Timer.h"
 #include "Hardware/VCP.h"
 #include "Hardware/HAL/HAL.h"
-#include "Keyboard/BufferButtons.h"
 #include "Keyboard/DecoderDevice.h"
 #include "Menu/MenuItems.h"
 #include "Recorder/Recorder.h"
@@ -116,21 +115,6 @@ void Device::Update()
 
     while (Transceiver::Receive()) {};
 
-    if (Menu::OpenedPage() == PageROM::self)
-    {
-        static uint timePrev = 0;
-
-        if (Timer::TimeMS() - timePrev > 1000)
-        {
-            timePrev = Timer::TimeMS();
-
-            Key::E key = static_cast<Key::E>(std::rand() % 5 + Key::F1);
-
-            BufferButtons::Push(KeyEvent(key, TypePress::Press));
-            BufferButtons::Push(KeyEvent(key, TypePress::Release));
-        }
-    }
-    
     Decoder::Update();
 }
 
