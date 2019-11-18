@@ -111,7 +111,7 @@ void Osci::Update()
         UpdateFPGA();
     };
 
-    Reader::ReadDataFromStorage();
+    Reader::ReadDataFromRAM();
 
     AutoMeasurements::SetData();
 }

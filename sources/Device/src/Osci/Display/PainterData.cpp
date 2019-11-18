@@ -68,6 +68,11 @@ void DisplayOsci::PainterData::DrawData()
 
 static void DrawCurrent()
 {
+    if (DS == nullptr)
+    {
+        return;
+    }
+
     if(set.disp.lastAffectedChannel == Chan::A)
     {
         DrawChannel(Chan::B);
@@ -238,8 +243,15 @@ static void DrawSpectrum()
 
 static void DrawROM()
 {
-    if(set.mem.typeSignalROM == TypeSignalROM::Current)
+    if(set.mem.typeSignalROM == TypeSignalROM::Current || set.mem.typeSignalROM == TypeSignalROM::Both)
     {
+        DrawCurrent();
+    }
+
+    if (set.mem.typeSignalROM == TypeSignalROM::Recorded || set.mem.typeSignalROM == TypeSignalROM::Both)
+    {
+        Reader::ReadDataFromROM();
+        AutoMeasurements::SetData();
         DrawCurrent();
     }
 }

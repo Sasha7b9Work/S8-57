@@ -7,7 +7,7 @@
 struct FrameP2P;
 
 extern FrameP2P *frameP2P;
-extern DataSettings *pDS;           ///< Указатель на настройки текущего рисуемого сигнала. Обращаться к нему следует через макрос DS.
+extern const DataSettings *pDS;           ///< Указатель на настройки текущего рисуемого сигнала. Обращаться к нему следует через макрос DS.
 extern uint8 *dataOUT[2];           ///< Считанные данные второго канала
 extern const uint8 *dataIN[2];
 extern uint16 *ave[2];
@@ -61,8 +61,10 @@ struct StructDataDrawing
 class Reader
 {
 public:
-    /// Читает данные из хранилища. Возвращает 0, если данных там нет
-    static void ReadDataFromStorage();
+    /// Читает данные из хранилища
+    static void ReadDataFromRAM();
+
+    static void ReadDataFromROM();
 private:
     /// Читает фрейм поточечного вывода
     static void ReadDataP2P();

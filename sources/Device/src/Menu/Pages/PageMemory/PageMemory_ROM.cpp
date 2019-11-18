@@ -82,12 +82,18 @@ static void OnPress_SaveToMemory()
 {
     Display::FuncOnWaitStart("Записываю в память", false);
 
-    if(DS)
-    {
+    const DataSettings *ds = RAM::Read();
 
+    if (ds)
+    {
+        ROM::Data::Save(NUM_ROM_SIGNAL, ds);
     }
 
     Display::FuncOnWaitStop();
+
+    Color::ChangeFlash(true);
+
+    Display::ShowWarning("Сигнал сохранен");
 }
 
 static void Draw_SaveToMemory(int x, int y)

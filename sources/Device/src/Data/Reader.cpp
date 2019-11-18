@@ -2,6 +2,7 @@
 #include "Data/DataSettings.h"
 #include "Data/Reader.h"
 #include "Hardware/Memory/RAM.h"
+#include "Hardware/Memory/ROM.h"
 #include "Osci/Osci.h"
 #include "Settings/Settings.h"
 
@@ -15,7 +16,7 @@ uint8 *dataOUT[2] = { ccm[0], ccm[1] };
 /// 
 uint16 *ave[2] = { reinterpret_cast<uint16 *>(ccm[2]), reinterpret_cast<uint16 *>(ccm[3]) };
 /// ”казатель на настройки считанных данных
-DataSettings *pDS = nullptr;
+const DataSettings *pDS = nullptr;
 
 FrameP2P *frameP2P = nullptr;
 
@@ -23,16 +24,24 @@ FrameP2P *frameP2P = nullptr;
 static void FindTrigLevelIfNeed();
 
 
-void Reader::ReadDataFromStorage()
+void Reader::ReadDataFromRAM()
 {
     IN_A = IN_B = nullptr;
+
+    DS = nullptr;
 
     DS = RAM::Read((set.mem.modeWork == ModeWork::RAM) ? static_cast<uint>(RAM::currentSignal) : 0U);
 
     if (DS)
     {
-        IN_A = DS->dataA;
-        IN_B = DS->dataB;
+        if (DS->enableA)
+        {
+            IN_A = DS->dataA;
+        }
+        if (DS->enableB)
+        {
+            IN_B = DS->dataB;
+        }
 
         FindTrigLevelIfNeed();
     }
@@ -40,6 +49,28 @@ void Reader::ReadDataFromStorage()
     if ((set.mem.modeWork == ModeWork::Dir) && Osci::InModeP2P())
     {
         ReadDataP2P();
+    }
+}
+
+
+void Reader::ReadDataFromROM()
+{
+    IN_A = IN_B = nullptr;
+
+    DS = nullptr;
+
+    DS = ROM::Data::Read(NUM_ROM_SIGNAL);
+
+    if (DS)
+    {
+        if (DS->enableA)
+        {
+            IN_A = DS->dataA;
+        }
+        if (DS->enableB)
+        {
+            IN_B = DS->dataB;
+        }
     }
 }
 
