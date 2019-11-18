@@ -37,7 +37,7 @@ void RShift::Load(Chan::E ch)
 
     static const uint16 mask[2] = { 0x2000, 0x6000 };
 
-    int16 shift = SET_RSHIFT(ch) - RShift::MIN;
+    int16 shift = SET_RSHIFT(ch) + RShift::HARDWARE_ZERO;
 
     int8 add = set.dbg.addRShift[static_cast<int>(ch)][static_cast<int>(set.ch[static_cast<int>(ch)].range)];
 

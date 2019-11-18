@@ -125,6 +125,8 @@ struct RShift
     static const int16 MIN = -480;
     /// Это значение соотвествует максимуму смещения
     static const int16 MAX = 480;
+    /// Это знаение, которое нужно засылать в аппаратную часть, чтобы получить смещение "0"
+    static const int16 HARDWARE_ZERO = 500;
     
     /// Изменить на delta
     static void Change(Chan::E ch, int16 delta);
