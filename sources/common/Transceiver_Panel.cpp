@@ -38,8 +38,8 @@ struct State
 {
     enum E
     {
-        Passive,
-        Active
+        Passive,    ///< Установлен "0"
+        Active      ///< Установлена "1"
     };
 };
 

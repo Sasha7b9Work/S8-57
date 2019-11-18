@@ -146,7 +146,7 @@ void Transceiver::Send(const uint8 *data, uint size)
         uint8 d = *data++;
 
         //                                                                             биты 0,1                                 биты 2,3
-        GPIOD->ODR = (GPIOD->ODR & 0x3ffc) + static_cast<uint16>((static_cast<int16>(d) & 0x03) << 14) + ((static_cast<uint16>(d & 0x0c)) >> 2);           // Записываем данные в выходные пины
+        GPIOD->ODR = (GPIOD->ODR & 0x3ffc) + static_cast<uint16>((static_cast<int16>(d) & 0x03) << 14) + ((static_cast<uint16>(d & 0x0c)) >> 2);  // Записываем данные в выходные пины
         //                                                                          Биты 4,5,6,7
         GPIOE->ODR = (GPIOE->ODR & 0xf87f) + static_cast<uint16>((static_cast<int16>(d) & 0xf0) << 3);
 
