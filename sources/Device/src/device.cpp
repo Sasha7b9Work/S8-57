@@ -1,24 +1,18 @@
 #include "defines.h"
-#include "Device.h"
+#include "device.h"
 #include "common/Transceiver.h"
-#include "Display/Display.h"
 #include "FlashDrive/FlashDrive.h"
 #include "FPGA/FPGA.h"
+#include "Hardware/Battery.h"
 #include "Hardware/Beeper.h"
 #include "Hardware/Timer.h"
 #include "Hardware/VCP.h"
-#include "Keyboard/DecoderDevice.h"
-#include "Menu/Menu.h"
-#include "Menu/Pages/Include/PageFunction.h"
-#include "Menu/Pages/Include/PageRecorder.h"
-#include "Recorder/Recorder.h"
-#include "Settings/Settings.h"
-#include "Utils/Math.h"
-#include <stdlib.h>
-#include <cmath>
-#include "Hardware/Battery.h"
 #include "Hardware/HAL/HAL.h"
-#include "Utils/Debug.h"
+#include "Keyboard/BufferButtons.h"
+#include "Keyboard/DecoderDevice.h"
+#include "Menu/MenuItems.h"
+#include "Recorder/Recorder.h"
+#include <cstdlib>
 
 
 /// Настроить устройство в соответствии с установленным режимом
@@ -121,6 +115,21 @@ void Device::Update()
     FDrive::Update();
 
     while (Transceiver::Receive()) {};
+
+    if (Menu::OpenedPage() == PageROM::self)
+    {
+        static uint timePrev = 0;
+
+        if (Timer::TimeMS() - timePrev > 1000)
+        {
+            timePrev = Timer::TimeMS();
+
+            Key::E key = static_cast<Key::E>(std::rand() % 5 + Key::F1);
+
+            BufferButtons::Push(KeyEvent(key, TypePress::Press));
+            BufferButtons::Push(KeyEvent(key, TypePress::Release));
+        }
+    }
     
     Decoder::Update();
 }
