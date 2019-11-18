@@ -12,7 +12,7 @@
 
 
 typedef void (*pFuncVCh)(Chan::E);
-typedef void (*pFuncVChI)(Chan::E, int);
+typedef void (*pFuncVChI16)(Chan::E, int16);
 typedef void (*pFuncVI)(int);
 
 
@@ -29,7 +29,7 @@ static void FX_Release();
 /// Обработчик длительного нажатия функциональной кнопки
 static void FX_Long();
 /// Общий обработчик изменения параметра канала - масштаба или смещения
-static void OnChangeParameterChannel(pFuncVChI, Chan::E, int);
+static void OnChangeParameterChannel(pFuncVChI16, Chan::E, int16);
 /// Общий обработчик изменения временных параметров
 static void OnChangeParameterTime(pFuncVI, int);
 /// Открывает страницу или закрывает меню в зависимости от того, какая страница сейчас раскрыта
@@ -148,7 +148,7 @@ static void Empty()
 {
 }
 
-static void ChangeRShift(Chan::E ch, int delta)
+static void ChangeRShift(Chan::E ch, int16 delta)
 {
     if (!Device::State::InModeRecorder())
     {
@@ -217,7 +217,7 @@ static void RangeMoreB()
     OnChangeParameterChannel(Range::Change, Chan::B, +1);
 }
 
-static void OnChangeParameterChannel(pFuncVChI func, Chan::E ch, int delta)
+static void OnChangeParameterChannel(pFuncVChI16 func, Chan::E ch, int16 delta)
 {
     if (Device::State::InModeOsci())
     {

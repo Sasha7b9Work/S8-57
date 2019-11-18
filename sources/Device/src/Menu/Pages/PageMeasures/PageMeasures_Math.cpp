@@ -207,8 +207,8 @@ static bool HandlerKey_Function(const KeyEvent &event) // -V2506
 
     if (set.math.modeRegSet == ModeRegSet::RShift)
     {
-        uint16 prevRShift = set.math.rShift;
-        uint16 rShift = prevRShift;
+        int16 prevRShift = set.math.rShift;
+        int16 rShift = prevRShift;
         if (delta > 0)
         {
             if (rShift < RShift::MAX)
@@ -250,7 +250,7 @@ static bool HandlerKey_Function(const KeyEvent &event) // -V2506
             if (set.math.range < Range::Count - 1)
             {
                 set.math.range = static_cast<Range::E>(static_cast<uint8>(set.math.range + 1));  // SET_RANGE_MATH++;
-                set.math.rShift = static_cast<uint16>(MathFPGA::RShift2Rel(rShiftAbs, set.math.range));
+                set.math.rShift = MathFPGA::RShift2Rel(rShiftAbs, set.math.range);
                 Beeper::RegulatorSwitchRotate();
             }
             sum = 0;
@@ -260,7 +260,7 @@ static bool HandlerKey_Function(const KeyEvent &event) // -V2506
             if (set.math.range > 0)
             {
                 set.math.range = static_cast<Range::E>(static_cast<uint8>(set.math.range - 1));  // SET_RANGE_MATH--;
-                set.math.rShift = static_cast<uint16>(MathFPGA::RShift2Rel(rShiftAbs, set.math.range));
+                set.math.rShift = MathFPGA::RShift2Rel(rShiftAbs, set.math.range);
                 Beeper::RegulatorSwitchRotate();
             }
             sum = 0;

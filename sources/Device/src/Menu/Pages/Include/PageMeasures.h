@@ -159,7 +159,7 @@ struct SettingsMath
     MathFunction::E function;
     ModeRegSet::E   modeRegSet;     ///< Функция ручки УСТАНОВКА - масштаб по времени или смещение по вертикали.
     int8            divider;
-    uint16          rShift;
+    int16           rShift;
     Range::E        range;
 };
 

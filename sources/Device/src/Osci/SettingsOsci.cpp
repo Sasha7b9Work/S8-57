@@ -361,7 +361,7 @@ void TrigLevel::Find()
 
         float additionShift = deltaValue + deltaRShift / k;     // Итоговое смщение, которое нужно добавить к TrigLev::Zero
 
-        Set(static_cast<int>(ZERO - (additionShift * k + 0.5F)));
+        Set(static_cast<int16>(ZERO - (additionShift * k + 0.5F)));
     }
 }
 
@@ -440,9 +440,9 @@ void TrigLevel::Load()
 }
 
 
-void TrigLevel::Change(int delta)
+void TrigLevel::Change(int16 delta)
 {
-    Math::AdditionThisLimitation<uint16>(&set.trig.lev[set.trig.source], STEP_TRIGLEV * delta, TrigLevel::MIN, TrigLevel::MAX);
+    Math::AdditionThisLimitation(&set.trig.lev[set.trig.source], STEP_TRIGLEV * delta, TrigLevel::MIN, TrigLevel::MAX);
 
     Load();
 
@@ -467,11 +467,11 @@ void Trig::NeedForDraw()
 }
 
 
-void TrigLevel::Set(int level)
+void TrigLevel::Set(int16 level)
 {
-    set.trig.lev[set.trig.source] = static_cast<uint16>(level);
+    set.trig.lev[set.trig.source] = level;
 
-    Math::Limitation<uint16>(&set.trig.lev[set.trig.source], TrigLevel::MIN, TrigLevel::MAX);
+    Math::Limitation(&set.trig.lev[set.trig.source], TrigLevel::MIN, TrigLevel::MAX);
 
     Load();
 

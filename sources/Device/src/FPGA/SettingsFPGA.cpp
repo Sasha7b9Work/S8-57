@@ -138,7 +138,7 @@ void TShift::Change(int delta)
 }
 
 
-void Range::Change(Chan::E ch, int delta)
+void Range::Change(Chan::E ch, int16 delta)
 {
     if (Recorder::IsRunning())
     {
@@ -166,7 +166,7 @@ void Range::Set(Chan::E ch, E range)
 }
 
 
-void RShift::Change(Chan::E ch, int delta)
+void RShift::Change(Chan::E ch, int16 delta)
 {
     ::Math::AdditionThisLimitation<int16>(&SET_RSHIFT(ch), STEP_RSHIFT * delta, RShift::MIN, RShift::MAX);
 

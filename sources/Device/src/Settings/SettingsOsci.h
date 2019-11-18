@@ -88,7 +88,7 @@ struct TBase
 
 struct Range
 {
-    static void Change(Chan::E ch, int delta);
+    static void Change(Chan::E ch, int16 delta);
     /// Загружаться эта настройка может только для обоих каналов одновременно
     static void LoadBoth();
 
@@ -122,13 +122,14 @@ struct Range
 struct RShift
 {
     /// Это значение соответствует минимуму смещения
-    static const int16 MIN = 20;
-    /// Это значение соотвествует максимуму смещения
-    static const int16 MAX = 980;
+    static const int16 MIN = -480;
     /// Это значение соответствует середине экрана
-    static const int16 ZERO = 500;
+    static const int16 ZERO = 0;
+    /// Это значение соотвествует максимуму смещения
+    static const int16 MAX = 480;
+    
     /// Изменить на delta
-    static void Change(Chan::E ch, int delta);
+    static void Change(Chan::E ch, int16 delta);
     /// Установить значение
     static void Set(Chan::E ch, int16 rShift);
     /// Загрузить в аппаратуру
@@ -209,15 +210,15 @@ struct Trig
 
 struct TrigLevel
 {
-    static const int MIN = 20;
-    static const int MAX = 980;
-    static const int ZERO = 500;
+    static const int16 MIN = -480;
+    static const int16 ZERO = 0;
+    static const int16 MAX = 480;
     /// Загрузить уровень синхронизации в аппаратную часть
     static void Load();
     /// Изменить уровень синхронизации на delta единиц
-    static void Change(int delta);
+    static void Change(int16 delta);
     /// Установить заданный уровень синхронизации
-    static void Set(int level);
+    static void Set(int16 level);
     /// Однократно найти уровень синхронизации
     static void Find();
 };
