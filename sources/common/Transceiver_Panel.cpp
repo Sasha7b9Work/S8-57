@@ -22,7 +22,8 @@
 #define FL0         PORT_FL0, PIN_FL0
 
 
-struct Mode
+/// Режим работы устройства (не панели)
+struct ModeDevice
 {
     enum E
     {
@@ -50,7 +51,7 @@ void DeInitPins();
 /// Удалить из буфера переданные данные
 void DiscardTransmittedData();
 
-Mode::E Mode_Device();
+ModeDevice::E Mode_Device();
 
 void Set_READY(State::E state);
 ///  Деинициализировать D
@@ -139,16 +140,16 @@ void Transceiver::Send(const uint8 *data, uint size)
 
 bool Transceiver::Receive()
 {
-    Mode::E mode = Mode_Device();
+    ModeDevice::E mode = Mode_Device();
 
-    if (mode == Mode::Receive)
+    if (mode == ModeDevice::Receive)
     {
         TransmitData();
 
         return true;
     }
 
-    if (mode == Mode::Send)
+    if (mode == ModeDevice::Send)
     {
         Decoder::AddData((uint8)GPIOE->IDR);        // Читаем и обрабатываем байт данных
         
@@ -186,7 +187,7 @@ void TransmitData()
 
     Set_READY(State::Active);                   // Устанавливаем признак того, что данные выставлены
 
-    while (Mode_Device() == Mode::Receive) {};  // Ждём от прибора подтверждения того, что данные приняты
+    while (Mode_Device() == ModeDevice::Receive) {};  // Ждём от прибора подтверждения того, что данные приняты
 
     Set_READY(State::Passive);                  // Выходим из режима передачи
 
@@ -248,13 +249,13 @@ void DeInit_FL0()
 }
 
 
-Mode::E Mode_Device()
+ModeDevice::E Mode_Device()
 {
     //                  MODE    0  1
-    static const Mode::E modes [2][2] =
+    static const ModeDevice::E modes [2][2] =
     {
-        {Mode::Disabled, Mode::Send},
-        {Mode::Receive,  Mode::Forbidden}
+        {ModeDevice::Disabled, ModeDevice::Send},
+        {ModeDevice::Receive,  ModeDevice::Forbidden}
     };
 
     //int m0 = HAL_GPIO_ReadPin(MODE0);
