@@ -76,18 +76,10 @@ Color Color::currentColor = Color::NUMBER;
 static bool  inverseColor = false;
 
 
-/// Каллбэк для изменения мерцающего цвета
-static void OnTimerFlashDisplay();
 /// Записывает мигающй цвет в дисплей. Возвращает false, если текущий цвет немигающий
 static bool WriteFlashColor();
 /// Записывает цвет в дисплей
 static void WriteToDisplay(Color color);
-
-
-void Color::InitGlobalColors()
-{
-    Timer::SetAndEnable(TypeTimer::ColorFlash, OnTimerFlashDisplay, 500);
-}
 
 
 void Color::Log(Color color)
@@ -300,21 +292,6 @@ static bool WriteFlashColor()
 }
 
 
-void Color::ResetFlash()
-{
-    Timer::SetAndEnable(TypeTimer::ColorFlash, OnTimerFlashDisplay, 500);
-    inverseColor = false;
-    WriteFlashColor();
-}
-
-
-static void OnTimerFlashDisplay()
-{
-    inverseColor = !inverseColor;
-    WriteFlashColor();
-}
-
-
 static void WriteToDisplay(Color color)
 {
     static Color lastColor = Color::NUMBER;
@@ -357,4 +334,26 @@ void Color::SetAsCurrent()
     {
         WriteToDisplay(currentColor);
     }
+}
+
+
+void Color::ChangeFlash(bool reset)
+{
+    static uint time = 0;
+
+    if (reset)
+    {
+        inverseColor = true;
+        time = 0;
+    }
+
+    if (TIME_MS - time < 500)
+    {
+        return;
+    }
+
+    time = TIME_MS;
+
+    inverseColor = !inverseColor;
+    WriteFlashColor();
 }

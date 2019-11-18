@@ -57,7 +57,7 @@ void PageChoiceMeasures::OnKeyEvent(const KeyEvent &event)
         }
 
         set.meas.measures[AutoMeasurements::posActive] = static_cast<TypeMeasure::E>(posCursor);
-        Color::ResetFlash();
+        Color::ChangeFlash(true);
     }
     else
     {

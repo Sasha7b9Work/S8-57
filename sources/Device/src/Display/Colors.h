@@ -49,9 +49,6 @@ public:
     /// Возвращает текущий цвет отрисовки
     static Color GetCurent();
 
-    static void ResetFlash();
-  
-    static void InitGlobalColors();
     static void Log(Color color);
 
     void LoadValueRGB();
@@ -61,6 +58,8 @@ public:
     uint8 value;
 
     static Color CHAN[4];
+    /// Переключить "мигающий" цвет. Если reset == true, сбрасывется на белый
+    static void ChangeFlash(bool reset = false);
 
 private:
    

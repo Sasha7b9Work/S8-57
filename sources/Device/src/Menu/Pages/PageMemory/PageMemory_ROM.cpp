@@ -144,7 +144,7 @@ static void OnOpenClose_ROM(bool open)
 {
     if(open)
     {
-        Color::ResetFlash();
+        Color::ChangeFlash(true);
     }
     Osci::SetModeWork(open ? ModeWork::ROM : ModeWork::Dir);
 }
@@ -197,7 +197,7 @@ static bool HandlerKey_ROM(const KeyEvent &event)
         {
             Math::CircleDecrease<int8>((int8 *)&NUM_ROM_SIGNAL, 0, ROM::Data::MAX_NUM_SAVED_WAVES - 1);
 
-            Color::ResetFlash();
+            Color::ChangeFlash(true);
 
             result = true;
         }
@@ -205,7 +205,7 @@ static bool HandlerKey_ROM(const KeyEvent &event)
         {
             Math::CircleIncrease<int8>((int8 *)&NUM_ROM_SIGNAL, 0, ROM::Data::MAX_NUM_SAVED_WAVES - 1);
 
-            Color::ResetFlash();
+            Color::ChangeFlash(true);
 
             result = true;
         }

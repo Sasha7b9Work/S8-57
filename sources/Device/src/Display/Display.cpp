@@ -32,15 +32,11 @@ static pFuncVV funcAfterUpdateOnce = EmptyFunc;
 
 static int numRow = -1;
 
-
-
-
 static void SaveScreenToFlash();
 
 static void ReadRow(uint8 row);
 /// Выполняет функцию, определённую для выполнения после отрисовки
 static void ExecuteFuncAfterUpdateOnce();
-
 
 
 void Display::Init()
@@ -56,6 +52,8 @@ void Display::Init()
 
 void Display::Update()
 {
+    Color::ChangeFlash(false);
+
     inStateDraw = true;
 
     static const pFuncVV funcs[Device::Mode::Count] =

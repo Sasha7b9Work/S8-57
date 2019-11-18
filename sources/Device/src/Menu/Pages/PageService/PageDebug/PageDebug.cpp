@@ -424,7 +424,7 @@ DEF_BUTTON( bSaveFirmware,                                                      
 
 static void OnPress_SerialNumber_Change()
 {
-    Color::ResetFlash();
+    Color::ChangeFlash(true);
 }
 
 static void Draw_SerialNumber_Change(int x, int y)

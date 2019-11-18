@@ -606,7 +606,8 @@ void OnMemExtSetMaskNameRegSet(int angle, int maxIndex)
         Math::CircleIncrease<int8>
     };
 
-    Color::ResetFlash();
+    Color::ChangeFlash(true);
+
     if (set.mem.indexCurSymbolNameMask > maxIndex)
     {
         set.mem.indexCurSymbolNameMask = static_cast<int8>(maxIndex - 1);
