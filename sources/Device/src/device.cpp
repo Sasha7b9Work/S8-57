@@ -8,6 +8,7 @@
 #include "Hardware/Timer.h"
 #include "Hardware/VCP.h"
 #include "Hardware/HAL/HAL.h"
+#include "Keyboard/BufferButtons.h"
 #include "Keyboard/DecoderDevice.h"
 #include "Menu/MenuItems.h"
 #include "Recorder/Recorder.h"
@@ -114,6 +115,18 @@ void Device::Update()
     FDrive::Update();
 
     while (Transceiver::Receive()) {};
+
+//    if (Menu::OpenedPage() == PageROM::self)
+//    {
+//        BufferButtons::Push(KeyEvent(Key::F3, TypePress::Press));
+//        BufferButtons::Push(KeyEvent(Key::F3, TypePress::Release));
+//
+//        BufferButtons::Push(KeyEvent(Key::F4, TypePress::Press));
+//        BufferButtons::Push(KeyEvent(Key::F4, TypePress::Release));
+//
+//        BufferButtons::Push(KeyEvent(Key::F1, TypePress::Press));
+//        BufferButtons::Push(KeyEvent(Key::F1, TypePress::Release));
+//    }
 
     Decoder::Update();
 }

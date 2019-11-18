@@ -60,10 +60,12 @@ DEF_GRAPH_BUTTON( bPrev,
 static void OnPress_Delete()
 {
     Display::FuncOnWaitStart("Удаляю сохранённые данные", false);
+
     ROM::Data::Erase(NUM_ROM_SIGNAL);
+
     Display::FuncOnWaitStop();
 
-    Display::ShowWarning("Сигнал удален");
+    Color::ChangeFlash(true);
 }
 
 static void Draw_Delete(int x, int y)
@@ -78,7 +80,7 @@ DEF_GRAPH_BUTTON( bDelete,                                                      
 )
 
 
-static void OnPress_SaveToMemory()
+static void OnPress_Save()
 {
     Display::FuncOnWaitStart("Записываю в память", false);
 
@@ -92,8 +94,6 @@ static void OnPress_SaveToMemory()
     Display::FuncOnWaitStop();
 
     Color::ChangeFlash(true);
-
-    Display::ShowWarning("Сигнал сохранен");
 }
 
 static void Draw_SaveToMemory(int x, int y)
@@ -104,7 +104,7 @@ static void Draw_SaveToMemory(int x, int y)
 DEF_GRAPH_BUTTON( bSave,                                                                                                                     //--- ПАМЯТЬ - ВНУТР ЗУ - Сохранить в памяти ---
     "Сохранить в памяти",
     "Сохранить сигнал во внутреннем запоминующем устройстве",
-    &PageROM::self, Item::Active, OnPress_SaveToMemory, Draw_SaveToMemory
+    &PageROM::self, Item::Active, OnPress_Save, Draw_SaveToMemory
 )
 
 
