@@ -46,7 +46,7 @@ struct Tester
     /// Устанавливает шаг изменения напряжения в соотвествии с настройками Settings
     static void LoadStep();
 
-    static int DeltaRShiftA();
+    static int16 DeltaRShiftA();
 
     /// Масштаб
     struct Scale
@@ -76,10 +76,10 @@ struct Tester
     /// Смещение
     struct Shift
     {
-        Shift(uint16 rShift, Chan::E _ch) : shift(rShift), ch(_ch) {};
+        Shift(int16 rShift, Chan::E _ch) : shift(rShift), ch(_ch) {};
         String ToString(Scale::E scale);
     private:
-        uint16 shift;
+        int16 shift;
         Chan::E ch;
     };
 };

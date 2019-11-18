@@ -35,7 +35,7 @@ struct Divider
 
 struct SettingsChannel
 { //-V802
-    uint16              rShift;              ///< Сдвиг канала по вертикали
+    int16               rShift;              ///< Сдвиг канала по вертикали
     Range::E            range;               ///< Масштаб канала по вертикали
     ModeCouple::E       couple;              ///< Связь по входу
     bool                enabled;             ///< Включен/выключен канал

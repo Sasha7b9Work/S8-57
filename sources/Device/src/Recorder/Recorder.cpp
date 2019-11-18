@@ -16,7 +16,7 @@
 struct StateOsci
 {
     /// Смещение по вертикали для первого и второго каналов
-    uint16 storedRShift[2];
+    int16 storedRShift[2];
 };
 
 

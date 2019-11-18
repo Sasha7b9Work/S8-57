@@ -133,7 +133,7 @@ void Tester::Enable() // -V2506
 }
 
 
-int Tester::DeltaRShiftA()
+int16 Tester::DeltaRShiftA()
 {
     return 18;
 }

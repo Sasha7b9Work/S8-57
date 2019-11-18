@@ -6,7 +6,7 @@ struct MathFPGA
 {
     static float RShift2Abs(int rShift, Range::E range);
 
-    static float VoltageCursor(float shiftCurU, Range::E range, uint16 rShift);
+    static float VoltageCursor(float shiftCurU, Range::E range, int16 rShift);
 
     static int RShift2Rel(float rShixftAbs, Range::E range);
 
@@ -14,9 +14,9 @@ struct MathFPGA
 
     static void PointsRel2Voltage(const uint8 *points, uint numPoints, Range::E range, int16 rShift, float *voltage);
 
-    static uint8 Voltage2Point(float voltage, Range::E range, uint16 rShift);
+    static uint8 Voltage2Point(float voltage, Range::E range, int16 rShift);
 
-    static float Point2Voltage(uint8 value, Range::E range, uint16 rShift);
+    static float Point2Voltage(uint8 value, Range::E range, int16 rShift);
 
     static void PointsVoltage2Rel(const float *voltage, int numPoints, Range::E range, int16 rShift, uint8 *points);
 

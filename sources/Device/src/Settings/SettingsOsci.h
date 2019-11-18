@@ -122,23 +122,23 @@ struct Range
 struct RShift
 {
     /// Это значение соответствует минимуму смещения
-    static const int MIN = 20;
+    static const int16 MIN = 20;
     /// Это значение соотвествует максимуму смещения
-    static const int MAX = 980;
+    static const int16 MAX = 980;
     /// Это значение соответствует середине экрана
-    static const int ZERO = 500;
+    static const int16 ZERO = 500;
     /// Изменить на delta
     static void Change(Chan::E ch, int delta);
     /// Установить значение
-    static void Set(Chan::E ch, uint16 rShift);
+    static void Set(Chan::E ch, int16 rShift);
     /// Загрузить в аппаратуру
     static void Load(Chan::E ch);
     /// Отрисовать оба на экране
     static void DrawBoth();
     /// Преобразовать в строку
-    static String ToString(uint16 rShiftRel, Range::E range, int8 divider);
+    static String ToString(int16 rShiftRel, Range::E range, int8 divider);
     /// Возвращает ссылку на значение
-    static uint16 &Value(Chan::E ch);
+    static int16 &Value(Chan::E ch);
 private:
     /// Отрисовать маркер вертикального смещения на сетке
     static void Draw(Chan::E ch);

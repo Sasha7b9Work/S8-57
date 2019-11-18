@@ -37,7 +37,7 @@ void RShift::Load(Chan::E ch)
 
     static const uint16 mask[2] = { 0x2000, 0x6000 };
 
-    uint16 shift = SET_RSHIFT(ch);
+    int16 shift = SET_RSHIFT(ch);
 
     int8 add = set.dbg.addRShift[static_cast<int>(ch)][static_cast<int>(set.ch[static_cast<int>(ch)].range)];
 
@@ -45,7 +45,7 @@ void RShift::Load(Chan::E ch)
 
     if (Chan(ch).IsA() && Device::State::InModeTester())
     {
-        shift = static_cast<uint16>(static_cast<int>(shift) - Tester::DeltaRShiftA());
+        shift -= Tester::DeltaRShiftA();
     }
 
     GPIO::WriteRegisters(FPin::SPI3_CS1, static_cast<uint16>(mask[static_cast<int>(ch)] | (shift << 2)));
@@ -168,15 +168,15 @@ void Range::Set(Chan::E ch, E range)
 
 void RShift::Change(Chan::E ch, int delta)
 {
-    ::Math::AdditionThisLimitation<uint16>(&SET_RSHIFT(ch), STEP_RSHIFT * delta, RShift::MIN, RShift::MAX);
+    ::Math::AdditionThisLimitation<int16>(&SET_RSHIFT(ch), STEP_RSHIFT * delta, RShift::MIN, RShift::MAX);
 
     Load(ch);
 }
 
 
-void RShift::Set(Chan::E ch, uint16 rShift)
+void RShift::Set(Chan::E ch, int16 rShift)
 {
-    ::Math::Limitation<uint16>(&rShift, MIN, MAX);
+    ::Math::Limitation<int16>(&rShift, MIN, MAX);
     SET_RSHIFT(ch) = rShift;
     Load(ch);
 }
@@ -242,7 +242,7 @@ String TShift::ToString(TBase::E tBase)
 }
 
 
-String RShift::ToString(uint16 rShiftRel, Range::E range, int8 _divider)
+String RShift::ToString(int16 rShiftRel, Range::E range, int8 _divider)
 {
     float rShiftVal = MathFPGA::RShift2Abs(rShiftRel, range) * Divider(static_cast<uint>(_divider)).ToAbs();
     return Voltage(rShiftVal).ToString(true);

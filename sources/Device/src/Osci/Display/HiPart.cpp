@@ -234,7 +234,7 @@ static void WriteTextVoltage(Chan::E ch, int x, int y)
     String(buffer).Draw(x + 1, y, colorDraw);
 
     char bufferTemp[SIZE];
-    std::snprintf(bufferTemp, SIZE, "\xa5%s", RShift::ToString((uint16)SET_RSHIFT(ch), range, static_cast<int8>(set.ch[ch].divider)).CString());
+    std::snprintf(bufferTemp, SIZE, "\xa5%s", RShift::ToString(SET_RSHIFT(ch), range, static_cast<int8>(set.ch[ch].divider)).CString());
     String(bufferTemp).Draw(x + 46, y);
 }
 

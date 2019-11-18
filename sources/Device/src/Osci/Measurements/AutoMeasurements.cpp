@@ -196,7 +196,7 @@ float CalculateVoltageMax(Chan::E ch)
     
     Range::E range = RANGE_DS(ch);
 
-    uint16 rShift = RSHIFT_DS(ch);
+    int16 rShift = RSHIFT_DS(ch);
 
     uint8 value = ROUND(uint8, max);
 
@@ -279,7 +279,7 @@ float CalculateVoltageVybrosPlus(Chan::E ch)
         Measure::SetMarkerVoltage(ch, 1, maxSteady);
     }
 
-    uint16 rShift = RSHIFT_DS(ch);
+    int16 rShift = RSHIFT_DS(ch);
     return std::fabsf(MathFPGA::Point2Voltage(ROUND(uint8, maxSteady), RANGE_DS(ch), rShift) - MathFPGA::Point2Voltage(ROUND(uint8, max), RANGE_DS(ch), rShift));
 }
 
@@ -297,7 +297,7 @@ float CalculateVoltageVybrosMinus(Chan::E ch)
         Measure::SetMarkerVoltage(ch, 1, minSteady);
     }
 
-    uint16 rShift = RSHIFT_DS(ch);
+    int16 rShift = RSHIFT_DS(ch);
     return std::fabsf(MathFPGA::Point2Voltage(ROUND(uint8, minSteady), RANGE_DS(ch), rShift) - MathFPGA::Point2Voltage(ROUND(uint8, min), RANGE_DS(ch), rShift));
 }
 
@@ -356,7 +356,7 @@ float CalculateVoltageRMS(Chan::E ch)
     float rms = 0.0F;
 
     Range::E range = RANGE_DS(ch);
-    uint16 rShift = RSHIFT_DS(ch);
+    int16 rShift = RSHIFT_DS(ch);
 
     uint8 *dataIn = &CHOICE_BUFFER[firstByte];
 
@@ -1478,10 +1478,10 @@ static void LimitationData(Chan::E ch, uint numBytes)
 
 static void CountedToCurrentRShift(Chan::E ch, uint numBytes)
 {
-    uint16 shiftDS = RSHIFT_DS(ch);
+    int16 shiftDS = RSHIFT_DS(ch);
     Range::E rangeDS = RANGE_DS(ch);
 
-    uint16 shiftSET = set.ch[ch].rShift;
+    int16 shiftSET = set.ch[ch].rShift;
     Range::E rangeSET = set.ch[ch].range;
 
     if((shiftDS == shiftSET) && (rangeDS == rangeSET))

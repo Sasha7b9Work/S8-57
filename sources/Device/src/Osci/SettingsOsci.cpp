@@ -310,7 +310,7 @@ static uint8 ValueForRange(Chan::E ch) // -V2506
 }
 
 
-uint16 &RShift::Value(Chan::E ch)
+int16 &RShift::Value(Chan::E ch)
 {
     return set.ch[ch].rShift;
 }
