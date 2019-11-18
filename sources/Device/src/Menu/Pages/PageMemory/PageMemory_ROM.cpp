@@ -33,7 +33,9 @@ static void Draw_Next(int x, int y)
     Char(SymbolUGO2::ARROW_RIGHT).Draw4SymbolsInRect(x + 2, y + 2);
 }
 
-DEF_GRAPH_BUTTON( bNext,
+DEF_GRAPH_BUTTON
+(
+    bNext,
     "—ледующий",
     "ѕерейти к следующему сигналу",
     &PageROM::self, Item::Active, OnPress_Next, Draw_Next
@@ -50,7 +52,9 @@ static void Draw_Prev(int x, int y)
     Char(SymbolUGO2::ARROW_LEFT).Draw4SymbolsInRect(x + 2, y + 2);
 }
 
-DEF_GRAPH_BUTTON( bPrev,
+DEF_GRAPH_BUTTON
+(
+    bPrev,
     "ѕредыдущий",
     "ѕерейти к предыдущему сигналу",
     &PageROM::self, Item::Active, OnPress_Prev, Draw_Prev
@@ -73,7 +77,9 @@ static void Draw_Delete(int x, int y)
     Char(SymbolUGO2::DELETE).Draw4SymbolsInRect(x + 2, y + 1);
 }
 
-DEF_GRAPH_BUTTON( bDelete,                                                                                                                              //--- ѕјћя“№ - ¬Ќ”“– «” - ”далить ---
+DEF_GRAPH_BUTTON                                                                                                                                        //--- ѕјћя“№ - ¬Ќ”“– «” - ”далить ---
+(
+    bDelete,
     "”далить",
     "”дал€ет выбранный сигнал из внутреннего запоминающего устройства",
     &PageROM::self, Item::Active, OnPress_Delete, Draw_Delete
@@ -101,7 +107,9 @@ static void Draw_SaveToMemory(int x, int y)
     Char(SymbolUGO2::SAVE_TO_MEM).Draw4SymbolsInRect(x + 2, y + 1);
 }
 
-DEF_GRAPH_BUTTON( bSave,                                                                                                                     //--- ѕјћя“№ - ¬Ќ”“– «” - —охранить в пам€ти ---
+DEF_GRAPH_BUTTON                                                                                                                             //--- ѕјћя“№ - ¬Ќ”“– «” - —охранить в пам€ти ---
+(
+    bSave,
     "—охранить в пам€ти",
     "—охранить сигнал во внутреннем запоминующем устройстве",
     &PageROM::self, Item::Active, OnPress_Save, Draw_SaveToMemory
@@ -136,7 +144,9 @@ static void Draw_TypeSignal(int x, int y)
     func[set.mem.typeSignalROM](x, y);
 }
 
-DEF_GRAPH_BUTTON_HINTS_3( bTypeSignal,                                                                                                              //--- ѕјћя“№ - ¬Ќ”“– «” - “ип сигнала ---
+DEF_GRAPH_BUTTON_HINTS_3                                                                                                                            //--- ѕјћя“№ - ¬Ќ”“– «” - “ип сигнала ---
+(
+    bTypeSignal,
     "“ип сигнала",
     " акой сигнал выводить",
     &PageROM::self, Item::Active, OnPress_TypeSignal, Draw_TypeSignal,
@@ -231,7 +241,9 @@ static bool NormalTitle_ROM()
     return false;
 }
 
-DEF_PAGE_5( pROM,                                                                                                                                                 //--- ѕјћя“№ - ¬Ќ”“– «” ---
+DEF_PAGE_5                                                                                                                                                        //--- ѕјћя“№ - ¬Ќ”“– «” ---
+(
+    pROM,
     "¬Ќ”“– «”",
     "ѕереход в режим работы с внутренней пам€тью",
     &bPrev,
