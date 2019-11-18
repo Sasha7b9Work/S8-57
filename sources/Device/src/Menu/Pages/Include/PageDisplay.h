@@ -183,6 +183,10 @@ struct SettingsDisplay
                                                   ///< байтах. “.е. дл€ пикового детектора будет в два раза больше количества точек на экране.
     Chan::E                lastAffectedChannel;   ///< \brief ѕоследний управл€емый канал. »спользуетс€ дл€ правильного вывода сигналов
                                                   ///< на экран с наложением один поверх другого
+    void SetLastAffectedChannel(Chan::E ch)
+    {
+        lastAffectedChannel = ch;
+    }
 };
 
 

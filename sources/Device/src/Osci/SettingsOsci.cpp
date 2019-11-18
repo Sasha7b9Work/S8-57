@@ -255,9 +255,16 @@ void Range::LoadBoth()
     set.ch[Chan::A].bandwidth.Load();
     set.ch[Chan::B].bandwidth.Load();
 
-    RShift::Load(Chan::A);
-
-    RShift::Load(Chan::B);
+    if(set.disp.lastAffectedChannel == Chan::B)
+    {
+        RShift::Load(Chan::A);
+        RShift::Load(Chan::B);
+    }
+    else
+    {
+        RShift::Load(Chan::B);
+        RShift::Load(Chan::A);
+    }
 
     Osci::Restart();
 
@@ -368,8 +375,16 @@ void TrigLevel::Find()
 
 void RShift::DrawBoth()
 {
-    Draw(Chan::A);
-    Draw(Chan::B);
+    if(set.disp.lastAffectedChannel == Chan::B)
+    {
+        Draw(Chan::A);
+        Draw(Chan::B);
+    }
+    else
+    {
+        Draw(Chan::B);
+        Draw(Chan::A);
+    }
 }
 
 

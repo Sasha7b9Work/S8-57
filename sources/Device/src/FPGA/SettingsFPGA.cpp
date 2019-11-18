@@ -31,9 +31,33 @@ void TrigInput::Load()
 }
 
 
+static bool NeedLoadRShift(Chan::E ch)
+{
+    bool result = true;
+
+    static Range::E prevRanges[Chan::Count] = { Range::Count, Range::Count };
+    static int16 prevShift[Chan::Count] = { -1000, -1000 };
+
+    if((prevShift[ch] == set.ch[ch].rShift) && (prevRanges[ch] == set.ch[ch].range))
+    {
+        result = false;
+    }
+
+    prevRanges[ch] = set.ch[ch].range;
+    prevShift[ch] = set.ch[ch].rShift;
+
+    return result;
+}
+
+
 void RShift::Load(Chan::E ch)
 {
-    set.disp.lastAffectedChannel = ch;
+    if(!NeedLoadRShift(ch))
+    {
+        return;
+    }
+
+    set.disp.SetLastAffectedChannel(ch);
 
     static const uint16 mask[2] = { 0x2000, 0x6000 };
 
@@ -51,8 +75,6 @@ void RShift::Load(Chan::E ch)
     GPIO::WriteRegisters(FPin::SPI3_CS1, static_cast<uint16>(mask[static_cast<int>(ch)] | (shift << 2)));
 
     Osci::Restart();
-
-    set.disp.lastAffectedChannel = ch;
 }
 
 
@@ -147,6 +169,8 @@ void Range::Change(Chan::E ch, int16 delta)
         return;
     }
 
+    set.disp.SetLastAffectedChannel(ch);
+
     if (delta > 0)
     {
         ::Math::LimitationIncrease<uint8>(reinterpret_cast<uint8 *>(&set.ch[ch].range), static_cast<uint8>(Range::Count - 1)); // -V206
@@ -163,8 +187,10 @@ void Range::Change(Chan::E ch, int16 delta)
 
 void Range::Set(Chan::E ch, E range)
 {
-    set.disp.lastAffectedChannel = ch;
+    set.disp.SetLastAffectedChannel(ch);
+
     set.ch[static_cast<int>(ch)].range = range;
+
     LoadBoth();
 }
 

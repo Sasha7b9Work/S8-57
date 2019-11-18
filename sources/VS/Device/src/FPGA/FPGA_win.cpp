@@ -74,7 +74,6 @@ static bool GenerateNormalModeData(Chan::E ch, uint8 data[ENumPointsFPGA::MAX_NU
         data[i] = static_cast<uint8>(value);
     }
 
-
     return true;
 }
 
