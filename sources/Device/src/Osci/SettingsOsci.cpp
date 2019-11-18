@@ -354,7 +354,7 @@ void TrigLevel::Find()
 
         int deltaValue = static_cast<int>(VALUE::AVE) - (max + min) / 2;
 
-        int deltaRShift = SET_RSHIFT(ch) - RShift::ZERO;
+        int deltaRShift = SET_RSHIFT(ch);
 
         float k = 200 / 125.0F;     // Этот коэффициент получается так, что на верхей границе экрана лежит 125-я точка сигнала от центра экрана (нулевого значение),
                                     // а маркер в этой точке смещён на 200 единиц относительно цента экрана
@@ -377,7 +377,7 @@ void RShift::Draw(Chan::E ch)
 {
     Color::CHAN[ch].SetAsCurrent();
 
-    int delta = (SET_RSHIFT(ch) - ZERO) / STEP_RSHIFT;
+    int delta = SET_RSHIFT(ch) / STEP_RSHIFT;
 
     if (set.fft.enabled)
     {

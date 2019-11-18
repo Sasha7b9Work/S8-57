@@ -166,7 +166,7 @@ static void ChangeRShift(Chan::E ch, int16 delta)
         {
             RShift::Change(ch, delta);
 
-            if (SET_RSHIFT(ch) == RShift::ZERO)
+            if (SET_RSHIFT(ch) == 0)
             {
                 stop[ch] = true;
                 timeStop[ch] = TIME_MS;
@@ -370,13 +370,13 @@ static void ChannelB_Release()
 
 static void ChannelA_Long()
 {
-    RShift::Set(Chan::A, RShift::ZERO);
+    RShift::Set(Chan::A, 0);
 }
 
 
 static void ChannelB_Long()
 {
-    RShift::Set(Chan::B, RShift::ZERO);
+    RShift::Set(Chan::B, 0);
 }
 
 

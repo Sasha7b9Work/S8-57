@@ -45,7 +45,7 @@ const Settings Settings::defaultSettings =
     // Μενώ ΚΐΝΐΛ 1, ΚΐΝΐΛ 2
     {
         {
-            RShift::ZERO,                   // shift
+            0,                              // shift
             Range::_500mV,                  // range
             ModeCouple::DC,                 // couple
             true,                           // enabled
@@ -56,7 +56,7 @@ const Settings Settings::defaultSettings =
             CalibrationMode::Disable,       // calibrationMode
         },
         {
-            RShift::ZERO,                   // shift
+            0,                              // shift
             Range::_500mV,                  // range
             ModeCouple::DC,                 // couple
             true,                           // enabled
@@ -150,7 +150,7 @@ const Settings Settings::defaultSettings =
         MathFunction::Sum,          // function
         ModeRegSet::Range,          // modeRegSet
         Divider::_1,                // divider
-        RShift::ZERO,
+        0,
         Range::_500mV
     },
 

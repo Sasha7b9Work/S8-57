@@ -132,7 +132,7 @@ float MathFPGA::VoltageCursor(float shiftCurU, Range::E range, int16 rShift)
 
 int16 MathFPGA::RShift2Rel(float rShiftAbs, Range::E range)
 {
-    int16 retValue = RShift::ZERO + static_cast<int16>(rShiftAbs / absStepRShift[range]);
+    int16 retValue = static_cast<int16>(rShiftAbs / absStepRShift[range]);
 
     if (retValue < RShift::MIN)
     {
@@ -506,5 +506,5 @@ static float MaxVoltageOnScreen(Range::E range)
 
 float MathFPGA::RShift2Abs(int16 rShift, Range::E range)
 {
-    return -(RShift::ZERO - static_cast<int>(rShift)) * absStepRShift[range];
+    return (rShift * absStepRShift[range]);
 }

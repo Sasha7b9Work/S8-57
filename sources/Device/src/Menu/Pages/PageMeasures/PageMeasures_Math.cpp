@@ -215,9 +215,9 @@ static bool HandlerKey_Function(const KeyEvent &event) // -V2506
             {
                 rShift += 4 * STEP_RSHIFT;  // -V112
                 LIMIT_ABOVE(rShift, RShift::MAX);
-                if (prevRShift < RShift::ZERO && rShift > RShift::ZERO)
+                if (prevRShift < 0 && rShift > 0)
                 {
-                    rShift = RShift::ZERO;
+                    rShift = 0;
                 }
                 Beeper::RegulatorShiftRotate();
                 set.math.rShift = rShift;
@@ -229,9 +229,9 @@ static bool HandlerKey_Function(const KeyEvent &event) // -V2506
             {
                 rShift -= 4 * STEP_RSHIFT; // -V112
                 LIMIT_BELOW(rShift, RShift::MIN);
-                if (prevRShift > RShift::ZERO && rShift < RShift::ZERO)
+                if (prevRShift > 0 && rShift < 0)
                 {
-                    rShift = RShift::ZERO;
+                    rShift = 0;
                 }
                 Beeper::RegulatorShiftRotate();
                 set.math.rShift = rShift;

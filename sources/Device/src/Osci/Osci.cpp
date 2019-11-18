@@ -193,7 +193,7 @@ static void BalanceChannel(Chan::E ch, Range::E range)
 
     set.dbg.addRShift[ch][range] = 0;
 
-    RShift::Set(ch, RShift::ZERO);
+    RShift::Set(ch, 0);
 
     Osci::Start();
 

@@ -97,8 +97,8 @@ void Recorder::Start()
     Text("Подготовка к записи").DrawInCenterBoundedRect(85, 100, 150, 50, Color::FILL);
     Painter::EndScene();
 
-    RShift::Set(Chan::A, RShift::ZERO);
-    RShift::Set(Chan::B, RShift::ZERO);
+    RShift::Set(Chan::A, 0);
+    RShift::Set(Chan::B, 0);
 
     SECTOR(Sector::_17_RECORDER_1).Erase();
 
