@@ -37,7 +37,7 @@ void RShift::Load(Chan::E ch)
 
     static const uint16 mask[2] = { 0x2000, 0x6000 };
 
-    int16 shift = SET_RSHIFT(ch);
+    int16 shift = SET_RSHIFT(ch) - RShift::MIN;
 
     int8 add = set.dbg.addRShift[static_cast<int>(ch)][static_cast<int>(set.ch[static_cast<int>(ch)].range)];
 
@@ -51,6 +51,8 @@ void RShift::Load(Chan::E ch)
     GPIO::WriteRegisters(FPin::SPI3_CS1, static_cast<uint16>(mask[static_cast<int>(ch)] | (shift << 2)));
 
     Osci::Restart();
+
+    set.disp.lastAffectedChannel = ch;
 }
 
 
@@ -161,6 +163,7 @@ void Range::Change(Chan::E ch, int16 delta)
 
 void Range::Set(Chan::E ch, E range)
 {
+    set.disp.lastAffectedChannel = ch;
     set.ch[static_cast<int>(ch)].range = range;
     LoadBoth();
 }
