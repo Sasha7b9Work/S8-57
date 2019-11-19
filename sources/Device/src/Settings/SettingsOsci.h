@@ -5,10 +5,6 @@
 #define SET_RSHIFT_A    (SET_RSHIFT(Chan::A))
 #define SET_RSHIFT_B    (SET_RSHIFT(Chan::B))
 
-#define STEP_TRIGLEV    STEP_RSHIFT
-
-
-
 struct DataSettings;
 
 
@@ -119,16 +115,7 @@ struct Range
 
 struct RShift
 {
-private:
-    /// Это значение соответствует минимуму смещения
-    static const int16 MIN = -480;
-    /// Это значение соотвествует максимуму смещения
-    static const int16 MAX = 480;
-    /// Это знаение, которое нужно засылать в аппаратную часть, чтобы получить смещение "0"
-    static const int16 HARDWARE_ZERO = 500;
 public:
-    /// На столько единиц нужно изменить значение смещения, чтобы маркер смещения по напряжению передвинулся на одну точку.
-    static const int16 STEP = (((MAX - MIN) / 24) / 20);
     /// Изменить на delta
     static void Change(Chan::E ch, int16 delta);
     /// Установить значение
@@ -151,6 +138,16 @@ public:
 private:
     /// Отрисовать маркер вертикального смещения на сетке
     static void Draw(Chan::E ch);
+
+    static const float absStep[Range::Count];
+    /// Это значение соответствует минимуму смещения
+    static const int16 MIN = -480;
+    /// Это значение соотвествует максимуму смещения
+    static const int16 MAX = 480;
+    /// Это знаение, которое нужно засылать в аппаратную часть, чтобы получить смещение "0"
+    static const int16 HARDWARE_ZERO = 500;
+    /// На столько единиц нужно изменить значение смещения, чтобы маркер смещения по напряжению передвинулся на одну точку.
+    static const int16 STEP = (((MAX - MIN) / 24) / 20);
 };
 
 /// Режим канала по входу.
@@ -233,4 +230,7 @@ private:
     static const int16 MIN = -480;
     static const int16 MAX = 480;
     static const int16 HARDWARE_ZERO = 500;
+public:
+    static const int16 STEP = (((MAX - MIN) / 24) / 20);
+
 };
