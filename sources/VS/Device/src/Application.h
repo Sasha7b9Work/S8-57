@@ -30,7 +30,8 @@ public:
 
     void OnSize(wxCommandEvent &);
     void OnQuit(wxCommandEvent &);
-    void OnGeneratorTune(wxCommandEvent &);
+    void OnGenerator(wxCommandEvent &);
+    void OnSCPI(wxCommandEvent &);
     void OnAbout(wxCommandEvent &);
     void OnTimer(wxTimerEvent &);
     void OnTimerLong(wxTimerEvent &);

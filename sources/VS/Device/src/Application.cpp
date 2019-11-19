@@ -22,9 +22,10 @@ extern void init();
 
 enum
 {
-    FILE_SIZE = wxID_HIGHEST + 1,
     FILE_QUIT = wxID_EXIT,
-    GENERATOR_TUNE
+    FILE_SIZE = wxID_HIGHEST + 1,
+    GENERATOR,
+    SCPI
 };
 
 enum
@@ -131,17 +132,16 @@ Frame::Frame(const wxString& title)
     SetIcon(wxICON(sample));
 
     wxMenu *fileMenu = new wxMenu;
-    wxMenu *generatorMenu = new wxMenu;
-
-    //fileMenu->Append(File_Size, "&Size", "Resize screen");
+    wxMenu *toolsMenu = new wxMenu;
 
     fileMenu->Append(FILE_QUIT, "Выход\tAlt-X", "Закрывает окно программы");
 
-    generatorMenu->Append(GENERATOR_TUNE, "Настроить");
+    toolsMenu->Append(GENERATOR, "Генератор");
+    toolsMenu->Append(SCPI, "SCPI");
 
     wxMenuBar *menuBar = new wxMenuBar();
     menuBar->Append(fileMenu, "Файл");
-    menuBar->Append(generatorMenu, "Генератор");
+    menuBar->Append(toolsMenu, "Инструменты");
 
     SetMenuBar(menuBar);
 
@@ -150,7 +150,8 @@ Frame::Frame(const wxString& title)
 
     Bind(wxEVT_MENU, &Frame::OnSize, this, FILE_SIZE);
     Bind(wxEVT_MENU, &Frame::OnQuit, this, FILE_QUIT);
-    Bind(wxEVT_MENU, &Frame::OnGeneratorTune, this, GENERATOR_TUNE);
+    Bind(wxEVT_MENU, &Frame::OnGenerator, this, GENERATOR);
+    Bind(wxEVT_MENU, &Frame::OnSCPI, this, SCPI);
     Bind(wxEVT_TIMER, &Frame::OnTimer, this, TIMER_ID);
     Bind(wxEVT_TIMER, &Frame::OnTimerLong, this, TIMER_LONG_ID);
 
@@ -206,11 +207,17 @@ void Frame::OnQuit(wxCommandEvent& WXUNUSED(event))
 }
 
 
-void Frame::OnGeneratorTune(wxCommandEvent &)
+void Frame::OnGenerator(wxCommandEvent &)
 {
     TuneGeneratorDialog dialog;
 
     dialog.ShowModal();
+}
+
+
+void Frame::OnSCPI(wxCommandEvent &)
+{
+
 }
 
 
