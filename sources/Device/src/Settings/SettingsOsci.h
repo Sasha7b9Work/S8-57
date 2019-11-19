@@ -214,7 +214,7 @@ struct TShift
 
     static String ToString(TBase::E tBase);
 
-    static float ToAbs(int tShift, TBase::E tBase);
+    static float ToAbs(int shift, TBase::E tBase);
 
     static void Reset();
 

@@ -18,8 +18,8 @@ void DataSettings::Fill(uint8 *_dataA, uint8 * _dataB)
     RSHIFT_B(this) = RShift(Chan::B);
     Lval_TBASE(this) = static_cast<uint>(TBase());
     TSHIFT(this) = TShift();
-    Lval_COUPLE_A(this) = static_cast<uint>(set.ch[Chan::A].couple);
-    Lval_COUPLE_B(this) = static_cast<uint>(set.ch[Chan::B].couple);
+    Lval_COUPLE_A(this) = static_cast<uint>(ModeCouple(Chan::A));
+    Lval_COUPLE_B(this) = static_cast<uint>(ModeCouple(Chan::B));
     TRIGLEV_A(this) = set.trig.lev[Chan::A];
     TRIGLEV_B(this) = set.trig.lev[Chan::B];
     Lval_PEAKDET(this) = static_cast<uint>(set.time.peakDet);
