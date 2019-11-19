@@ -1,10 +1,6 @@
 #pragma once
 
 
-#define SET_RSHIFT(ch)  (RShift::Value(ch))
-#define SET_RSHIFT_A    (SET_RSHIFT(Chan::A))
-#define SET_RSHIFT_B    (SET_RSHIFT(Chan::B))
-
 struct DataSettings;
 
 

@@ -96,7 +96,7 @@ void RShift::Load(Chan::E ch)
 
     static const uint16 mask[2] = { 0x2000, 0x6000 };
 
-    int16 shift = SET_RSHIFT(ch) + RShift::HARDWARE_ZERO;
+    int16 shift = Value(ch) + HARDWARE_ZERO;
 
     int8 add = set.dbg.addRShift[static_cast<int>(ch)][static_cast<int>(set.ch[static_cast<int>(ch)].range)];
 
@@ -232,7 +232,7 @@ void Range::Set(Chan::E ch, E range)
 
 void RShift::Change(Chan::E ch, int16 delta)
 {
-    ::Math::AdditionThisLimitation<int16>(&SET_RSHIFT(ch), RShift::STEP * delta, RShift::MIN, RShift::MAX);
+    ::Math::AdditionThisLimitation<int16>(&RShift::Value(ch), RShift::STEP * delta, RShift::MIN, RShift::MAX);
 
     Load(ch);
 }
@@ -241,7 +241,7 @@ void RShift::Change(Chan::E ch, int16 delta)
 void RShift::Set(Chan::E ch, int16 rShift)
 {
     ::Math::Limitation<int16>(&rShift, MIN, MAX);
-    SET_RSHIFT(ch) = rShift;
+    RShift::Value(ch) = rShift;
     Load(ch);
 }
 

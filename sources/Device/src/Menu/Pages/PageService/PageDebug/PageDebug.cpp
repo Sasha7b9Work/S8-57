@@ -181,8 +181,8 @@ static void OnPress_ADC_Shift_Reset()
             set.dbg.nrst.rShiftAddStable[ch][range] = 0;
         }
     }
-    RShift::Set(Chan::A, SET_RSHIFT_A);
-    RShift::Set(Chan::B, SET_RSHIFT_B);
+    RShift::Set(Chan::A, RShift::Value(Chan::A));
+    RShift::Set(Chan::B, RShift::Value(Chan::B));
 }
 
 DEF_BUTTON( bShift_Reset,                                                                                                                       //-- Œ“À¿ƒ ¿ - ¿÷œ - ƒŒœ —Ã≈Ÿ - —·ÓÒ ---
@@ -194,7 +194,7 @@ DEF_BUTTON( bShift_Reset,                                                       
 
 static void OnChanged_Shift_A()
 {
-    RShift::Set(Chan::A, SET_RSHIFT_A);
+    RShift::Set(Chan::A, RShift::Value(Chan::A));
 }
 
 DEF_GOVERNOR( gShift_A2mV,                                                                                                         //--- Œ“À¿ƒ ¿ - ¿÷œ - ƒŒœ —Ã≈Ÿ - —Ï 1Í 2Ï¬ ÔÓÒÚ ---
@@ -207,7 +207,7 @@ DEF_GOVERNOR( gShift_A2mV,                                                      
 
 static void OnChanged_Shift_B()
 {
-    RShift::Set(Chan::B, SET_RSHIFT_B);
+    RShift::Set(Chan::B, RShift::Value(Chan::B));
 }
 
 DEF_GOVERNOR( gShift_B2mV,                                                                                                                //--- Œ“À¿ƒ ¿ - ¿÷œ - ƒŒœ —Ã≈Ÿ - —Ï 2Í 2Ï¬ ÔÓÒÚ ---

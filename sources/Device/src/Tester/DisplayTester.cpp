@@ -142,7 +142,7 @@ static String ValueForStep(int step)
 static void DrawParametersChannel(Chan::E ch, int x, int y)
 {
     Range range = Range(set.ch[ch].range);
-    int16 rShift = SET_RSHIFT(ch);
+    int16 rShift = RShift::Value(ch);
     Tester::Scale scale(range.value, ch);
     Tester::Shift shift(rShift, ch);
 
