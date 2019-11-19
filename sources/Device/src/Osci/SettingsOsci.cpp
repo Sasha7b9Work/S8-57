@@ -808,7 +808,7 @@ Range::Range(Chan::E ch, E range)
 {
     set.disp.SetLastAffectedChannel(ch);
 
-    set.ch[ch].range = range;
+    value = set.ch[ch].range = range;
 
     LoadBoth();
 }

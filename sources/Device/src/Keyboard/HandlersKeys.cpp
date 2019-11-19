@@ -19,7 +19,7 @@ typedef void (*pFuncVI)(int);
 /// Обрабатываемое событие
 static KeyEvent event;
 /// Канал, параметры которого нужно временно выводить
-static Chan drawingChan = Chan(Chan::A);
+static Chan drawingChan(Chan::A);
 
 
 /// Обработчик нажатия функциональной кнопки
