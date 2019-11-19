@@ -3,7 +3,6 @@
 
 struct DataSettings;
 
-
 struct Chan
 {
     enum E
@@ -100,6 +99,7 @@ struct Range
         Count
     } value;
     explicit Range(E v) : value(v) {};
+    Range(Chan::E ch);
     pString Name() const;
 
     static void Set(Chan::E ch, E range);
@@ -107,6 +107,8 @@ struct Range
     pString ToString(int8 divider);
     /// Возвращает напряжение, соответствующее верхней границе сетки
     static float MaxVoltageOnScreen(Range::E range);
+
+    static Range::E Get(Chan::E ch);
 };
 
 
@@ -252,4 +254,15 @@ struct VALUE
 
 private:
     static const float voltsInPoint[Range::Count];
+};
+
+
+struct ChanA
+{
+    static Range::E Range();
+};
+
+struct ChanB
+{
+    static Range::E Range();
 };

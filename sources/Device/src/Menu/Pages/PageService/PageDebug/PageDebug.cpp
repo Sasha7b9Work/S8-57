@@ -515,7 +515,7 @@ float GetStretchADC(Chan::E ch)
         {0, 0}
     };
 
-    const int16 *address = addStretch[set.ch[ch].range][ch];
+    const int16 *address = addStretch[Range::Get(ch)][ch];
 
     int16 stretch = set.dbg.nrst.stretchADC[ch][set.dbg.nrst.stretchADCtype];
 

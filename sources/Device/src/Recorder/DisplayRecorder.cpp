@@ -62,9 +62,9 @@ static void DrawSettings(int x, int y)
 
     Text(RecorderScaleX::Current().ToString()).Draw(x + 2, y + 2);
 
-    Text(Range(set.ch[Chan::A].range).ToString(static_cast<int8>(set.ch[Chan::A].divider))).Draw(x + 2, y + 11, Color::CHAN[Chan::A]);
+    Text(Range(ChanA::Range()).ToString(static_cast<int8>(set.ch[Chan::A].divider))).Draw(x + 2, y + 11, Color::CHAN[Chan::A]);
 
-    Text(Range(set.ch[Chan::B].range).ToString(static_cast<int8>(set.ch[Chan::B].divider))).Draw(x + 2, y + 20, Color::CHAN[Chan::B]);
+    Text(Range(ChanB::Range()).ToString(static_cast<int8>(set.ch[Chan::B].divider))).Draw(x + 2, y + 20, Color::CHAN[Chan::B]);
 }
 
 
@@ -121,7 +121,7 @@ static char *VoltageCursor(Chan::E ch, int numCur, char buffer[20])
 
     uint8 value = static_cast<uint8>((point.Min(ch) + point.Max(ch)) / 2);
 
-    float voltage = VALUE::ToVoltage(value, set.ch[ch].range, 0);
+    float voltage = VALUE::ToVoltage(value, Range::Get(ch), 0);
 
     std::strcpy(buffer, Voltage(voltage).ToString(false).CString());
 

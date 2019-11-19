@@ -331,12 +331,12 @@ void Range::LoadBoth()
         BIN_U8(00000011)   // 20V      // -V2501
     };
 
-    uint8 valueA = vals[set.ch[Chan::A].range];
+    uint8 valueA = vals[ChanA::Range()];
 
     GPIO::WritePin(FPin::A1, _GET_BIT(valueA, 1));
     GPIO::WritePin(FPin::A2, _GET_BIT(valueA, 0));
 
-    uint8 valueB = vals[set.ch[Chan::B].range];
+    uint8 valueB = vals[ChanB::Range()];
 
     GPIO::WritePin(FPin::A3, _GET_BIT(valueB, 1));
     GPIO::WritePin(FPin::A4, _GET_BIT(valueB, 0));
@@ -395,14 +395,13 @@ static uint8 ValueForRange(Chan::E ch) // -V2506
     };
 
     ModeCouple::E couple = (Device::State::InModeRecorder()) ? ModeCouple::DC : set.ch[ch].couple;
-    Range::E range = set.ch[ch].range;
 
     if (Device::State::InModeOsci() && couple == ModeCouple::GND)
     {
         return datas[ModeCouple::GND];
     }
 
-    return static_cast<uint8>(values[range][ch] | datas[couple]);
+    return static_cast<uint8>(values[Range::Get(ch)][ch] | datas[couple]);
 }
 
 
@@ -601,7 +600,7 @@ void Trig::DrawOnGrid()
 
         Region(width, height).DrawBounded(x, y, Color::BACK, Color::FILL);
 
-        float trigLevVal = RShift::ToAbs(set.trig.lev[set.trig.source], set.ch[set.trig.source].range) * Divider(static_cast<uint8>(set.ch[set.trig.source].divider)).ToAbs();
+        float trigLevVal = RShift::ToAbs(set.trig.lev[set.trig.source], set.ch[set.trig.source]._range) * Divider(static_cast<uint8>(set.ch[set.trig.source].divider)).ToAbs();
 
         Voltage voltage(trigLevVal);
 
@@ -796,4 +795,28 @@ void VALUE::PointsFromVoltage(const float *voltage, int numPoints, Range::E rang
 
         points[i] = static_cast<uint8>(value);
     }
+}
+
+
+Range::E ChanA::Range()
+{
+    return set.ch[Chan::A]._range;
+}
+
+
+Range::E ChanB::Range()
+{
+    return set.ch[Chan::B]._range;
+}
+
+
+Range::E Range::Get(Chan::E ch)
+{
+    return set.ch[ch]._range;
+}
+
+
+Range::Range(Chan::E ch)
+{
+    value = set.ch[ch]._range;
 }

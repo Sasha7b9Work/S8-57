@@ -38,12 +38,12 @@ static bool NeedLoadRShift(Chan::E ch)
     static Range::E prevRanges[Chan::Count] = { Range::Count, Range::Count };
     static int16 prevShift[Chan::Count] = { -1000, -1000 };
 
-    if((prevShift[ch] == RShift::Value(ch)) && (prevRanges[ch] == set.ch[ch].range))
+    if((prevShift[ch] == RShift::Value(ch)) && (prevRanges[ch] == Range::Get(ch)))
     {
         result = false;
     }
 
-    prevRanges[ch] = set.ch[ch].range;
+    prevRanges[ch] = Range::Get(ch);
     prevShift[ch] = RShift::Value(ch);
 
     return result;
@@ -63,7 +63,7 @@ void RShift::Load(Chan::E ch)
 
     int16 shift = Value(ch) + HARDWARE_ZERO;
 
-    int8 add = set.dbg.addRShift[static_cast<int>(ch)][static_cast<int>(set.ch[static_cast<int>(ch)].range)];
+    int8 add = set.dbg.addRShift[ch][Range::Get(ch)];
 
     shift += add;
 
@@ -72,7 +72,7 @@ void RShift::Load(Chan::E ch)
         shift -= Tester::DeltaRShiftA();
     }
 
-    GPIO::WriteRegisters(FPin::SPI3_CS1, static_cast<uint16>(mask[static_cast<int>(ch)] | (shift << 2)));
+    GPIO::WriteRegisters(FPin::SPI3_CS1, static_cast<uint16>(mask[ch] | (shift << 2)));
 
     Osci::Restart();
 }
@@ -173,11 +173,11 @@ void Range::Change(Chan::E ch, int16 delta)
 
     if (delta > 0)
     {
-        ::Math::LimitationIncrease<uint8>(reinterpret_cast<uint8 *>(&set.ch[ch].range), static_cast<uint8>(Range::Count - 1)); // -V206
+        ::Math::LimitationIncrease<uint8>(reinterpret_cast<uint8 *>(&set.ch[ch]._range), static_cast<uint8>(Range::Count - 1)); // -V206
     }
     else
     {
-        ::Math::LimitationDecrease<uint8>(reinterpret_cast<uint8 *>(&set.ch[ch].range), 0);  // -V206
+        ::Math::LimitationDecrease<uint8>(reinterpret_cast<uint8 *>(&set.ch[ch]._range), 0);  // -V206
     }
     Range::LoadBoth();
 
@@ -189,7 +189,7 @@ void Range::Set(Chan::E ch, E range)
 {
     set.disp.SetLastAffectedChannel(ch);
 
-    set.ch[ch].range = range;
+    set.ch[ch]._range = range;
 
     LoadBoth();
 }
