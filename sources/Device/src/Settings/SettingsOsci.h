@@ -196,6 +196,10 @@ struct TShift
 
     static String ToString(TBase::E tBase);
 
+    static float ToAbs(int tShift, TBase::E tBase);
+
+    static const float absStep[TBase::Count];
+
 private:
     static void LoadReal();
     static void LoadRandomize();

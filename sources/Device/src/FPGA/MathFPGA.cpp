@@ -7,41 +7,6 @@
 #include <cmath>
 
 
-static const float absStepTShift[TBase::Count] =
-{
-    /* 2 нс    */ 2e-9F   / 20, 
-    /* 5 нс    */ 5e-9F   / 20, 
-    /* 10 нс   */ 10e-9F  / 20, 
-    /* 20 нс   */ 20e-9F  / 20,
-    /* 50 нс   */ 50e-9F  / 20,   // 1.0  Это коэффициенты для реализации алгоритма прореживания отсчётов
-    /* 100 нс  */ 100e-9F / 20,   // 2.0
-    /* 200 нс  */ 200e-9F / 20,   // 4.0
-    /* 500 нс  */ 500e-9F / 20,   // 10.0
-    /* 1 мкс   */ 1e-6F   / 20,   // 20.0
-    /* 2 мкс   */ 2e-6F   / 20,   // 40.0
-    /* 5 мкс   */ 5e-6F   / 20,   // 100.0
-    /* 10 мкс  */ 10e-6F  / 20,   // 200.0
-    /* 20 мкс  */ 20e-6F  / 20,   // 400.0
-    /* 50 мкс  */ 50e-6F  / 20,   // 1e3
-    /* 100 мкс */ 100e-6F / 20,   // 2e3
-    /* 200 мкс */ 200e-6F / 20,   // 4e3
-    /* 500 мкс */ 500e-6F / 20,   // 10e3
-    /* 1 мс    */ 1e-3F   / 20,   // 20e3
-    /* 2 мс    */ 2e-3F   / 20,   // 40e3
-    /* 5 мс    */ 5e-3F   / 20,   // 100e3
-    /* 10 мс   */ 10e-3F  / 20,   // 200e3
-    /* 20 мс   */ 20e-3F  / 20,   // 400e3
-    /* 50 мс   */ 50e-3F  / 20,   // 1e4
-    /* 100 мс  */ 100e-3F / 20,   // 2e4
-    /* 200 мс  */ 200e-3F / 20,   // 4e4
-    /* 500 мс  */ 500e-3F / 20,   // 10e4
-    /* 1 с     */ 1.0F    / 20,   // 20e4
-    /* 2 с     */ 2.0F    / 20,   // 40e4
-    /* 5 с     */ 5.0F    / 20,   // 100e4
-    /* 10 с    */ 10.0F   / 20    // 200e4
-};
-
-
 /// Столько вольт содержится в одной точке сигнала по вертикали
 
 //DEF__STRUCT(StructInPoints, float) voltsInPoint[Range::Count] =
@@ -115,7 +80,7 @@ float MathFPGA::VoltageCursor(float shiftCurU, Range::E range, int16 rShift)
 
 float MathFPGA::TimeCursor(float shiftCurT, TBase::E tBase)
 {
-    return shiftCurT * absStepTShift[tBase];
+    return shiftCurT * TShift::absStep[tBase];
 }
 
 
@@ -187,12 +152,6 @@ void MathFPGA::PointsVoltage2Rel(const float *voltage, int numPoints, Range::E r
 }
 
 
-float MathFPGA::TShift2Abs(int tShift, TBase::E tBase)
-{
-    return absStepTShift[tBase] * tShift;
-}
-
-
 /*
     Быстрое преобразование Фурье. Вычисляет модуль спектра для дейсвтительного сигнала.
     Количество отсчётов должно быть 2**N
@@ -228,7 +187,7 @@ static float const *Koeff(int numPoints)
 
 void MathFPGA::CalculateFFT(float *dataR, uint numPoints, float *result, float *freq0, float *density0, float *freq1, float *density1, int *y0, int *y1)
 {
-    float scale = 1.0F / absStepTShift[set.time.base] / 1024.0F;
+    float scale = 1.0F / TShift::absStep[set.time.base] / 1024.0F;
 
     float koeff = 1024.0F / numPoints;
 

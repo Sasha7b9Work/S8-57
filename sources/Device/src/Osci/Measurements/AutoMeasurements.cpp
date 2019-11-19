@@ -405,7 +405,7 @@ float CalculatePeriod(Chan::E ch)
 
             EXIT_IF_ERRORS_FLOAT(firstIntersection, secondIntersection); //-V2507
 
-            float per = MathFPGA::TShift2Abs(ROUND(uint16, secondIntersection - firstIntersection), set.time.base);
+            float per = TShift::ToAbs(ROUND(uint16, secondIntersection - firstIntersection), set.time.base);
 
             period[static_cast<int>(ch)] = per;
 
@@ -610,7 +610,7 @@ float CalculateDurationPlus(Chan::E ch)
 
     EXIT_IF_ERROR_FLOAT(secondIntersection); //-V2507
 
-    return MathFPGA::TShift2Abs(ROUND(uint16, (secondIntersection - firstIntersection) / 2.0F * 2.0F), (TBase::E)TBASE_DS);
+    return TShift::ToAbs(ROUND(uint16, (secondIntersection - firstIntersection) / 2.0F * 2.0F), (TBase::E)TBASE_DS);
 }
 
 
@@ -638,7 +638,7 @@ float CalculateDurationMinus(Chan::E ch)
 
     EXIT_IF_ERROR_FLOAT(secondIntersection); //-V2507
 
-    return MathFPGA::TShift2Abs(ROUND(uint16, (secondIntersection - firstIntersection) / 2.0F * 2.0F), TBASE_DS);
+    return TShift::ToAbs(ROUND(uint16, (secondIntersection - firstIntersection) / 2.0F * 2.0F), TBASE_DS);
 }
 
 
@@ -667,7 +667,7 @@ float CalculateTimeNarastaniya(Chan::E ch)   /** \todo Здесь, возможно, нужно ув
 
     EXIT_IF_ERROR_FLOAT(secondIntersection); //-V2507
 
-    float retValue = MathFPGA::TShift2Abs(ROUND(uint16, (secondIntersection - firstIntersection) / 2.0F * 2.0F), TBASE_DS);
+    float retValue = TShift::ToAbs(ROUND(uint16, (secondIntersection - firstIntersection) / 2.0F * 2.0F), TBASE_DS);
 
     if (set.meas.marked == TypeMeasure::TimeNarastaniya)
     {
@@ -705,7 +705,7 @@ float CalculateTimeSpada(Chan::E ch)        /// \todo Аналогично времени нараста
 
     EXIT_IF_ERROR_FLOAT(secondIntersection); //-V2507
 
-    float retValue = MathFPGA::TShift2Abs(ROUND(uint16, (secondIntersection - firstIntersection) / 2.0F * 2.0F), TBASE_DS);
+    float retValue = TShift::ToAbs(ROUND(uint16, (secondIntersection - firstIntersection) / 2.0F * 2.0F), TBASE_DS);
 
     if (set.meas.marked == TypeMeasure::TimeSpada)
     {
@@ -1009,7 +1009,7 @@ float CalculateDelayPlus(Chan::E ch)
 
     EXIT_IF_ERROR_FLOAT(secondIntersection); //-V2507
 
-    return MathFPGA::TShift2Abs(ROUND(uint16, (secondIntersection - firstIntersection) / 2.0F * 2.0F), TBASE_DS);
+    return TShift::ToAbs(ROUND(uint16, (secondIntersection - firstIntersection) / 2.0F * 2.0F), TBASE_DS);
 }
 
 
@@ -1056,7 +1056,7 @@ float CalculateDelayMinus(Chan::E ch)
 
     EXIT_IF_ERROR_FLOAT(secondIntersection); //-V2507
 
-    return MathFPGA::TShift2Abs(ROUND(uint16, (secondIntersection - firstIntersection) / 2.0F * 2.0F), TBASE_DS);
+    return TShift::ToAbs(ROUND(uint16, (secondIntersection - firstIntersection) / 2.0F * 2.0F), TBASE_DS);
 }
 
 
