@@ -277,7 +277,7 @@ void Osci::OnChangedPoints()
     ContextOsci::Reset();
     DisplayOsci::PainterData::ChangeTPos();
     ContextOsci::Reset();
-    TShift::Set(set.time.shift);
+    TShift(set.time.shift);
     ContextOsci::Reset();
     RAM::Init();
 }

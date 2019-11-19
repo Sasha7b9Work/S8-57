@@ -198,11 +198,11 @@ private:
 
 struct TShift
 {
+    explicit TShift(int tShift);
+
     static int Min();
     static int Zero();
     static int Max();
-
-    static void Set(int tShift);
 
     static void Load();
 
@@ -212,10 +212,14 @@ struct TShift
 
     static float ToAbs(int tShift, TBase::E tBase);
 
+    static void Reset();
+
 private:
     static void LoadReal();
     static void LoadRandomize();
     static const float absStep[TBase::Count];
+
+    int shift;
 };
 
 struct Trig

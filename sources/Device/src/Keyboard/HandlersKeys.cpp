@@ -8,6 +8,7 @@
 #include "Menu/MenuItems.h"
 #include "Osci/Display/DisplayOsci.h"
 #include "Settings/Settings.h"
+#include "Settings/SettingsOsci.h"
 #include "device.h"
 
 
@@ -419,7 +420,7 @@ static void Time_Release()
 
 static void Time_Long()
 {
-    TShift::Set(TShift::Zero());
+    TShift::Reset();
 }
 
 

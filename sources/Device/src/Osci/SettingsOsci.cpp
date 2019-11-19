@@ -823,3 +823,23 @@ uint TBase::RandK()
 {
     return Kr[value];
 }
+
+
+TShift::TShift(int tShift)
+{
+    LIMITATION(tShift, Min(), Max());
+
+    shift = set.time.shift = tShift;
+
+    TShift::Load();
+
+    Osci::Restart();
+
+    DisplayOsci::SetFlagRedraw();
+}
+
+
+void TShift::Reset()
+{
+    TShift zero(Zero());
+}

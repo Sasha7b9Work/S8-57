@@ -158,7 +158,7 @@ void TShift::Change(int delta)
         return;
     }
 
-    TShift::Set(set.time.shift + delta);
+    TShift(set.time.shift + delta);
 }
 
 
@@ -244,19 +244,6 @@ int TShift::Zero()
 int TShift::Max()
 {
     return 60000;
-}
-
-void TShift::Set(int tShift)
-{
-    LIMITATION(tShift, Min(), Max());
-
-    set.time.shift = tShift;
-
-    TShift::Load();
-
-    Osci::Restart();
-
-    DisplayOsci::SetFlagRedraw();
 }
 
 
