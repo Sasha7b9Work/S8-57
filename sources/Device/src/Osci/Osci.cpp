@@ -121,7 +121,7 @@ static void UpdateFPGA()
 {
     bool needStop = false;
     
-    uint number = (Osci::InModeRandomizer()) ? Osci::Kr[set.time.base] : 1;
+    uint number = (Osci::InModeRandomizer()) ? Osci::Kr[TBase()] : 1;
 
     for (uint i = 0; i < number; i++)
     {
@@ -233,9 +233,7 @@ void Osci::Balance(Chan::E ch)
 {
     ModeCouple::Set(ch, ModeCouple::GND);
 
-    set.time.base = TBase::_100ms;
-
-    TBase::Load();
+    TBase(_100ms);
 
     for (int range = 0; range < Range::Count; range++)
     {
@@ -246,13 +244,13 @@ void Osci::Balance(Chan::E ch)
 
 bool Osci::InModeP2P()
 {
-    return (set.time.base >= TBase::MIN_P2P);
+    return (TBase() >= TBase::MIN_P2P);
 }
 
 
 bool Osci::InModeRandomizer()
 {
-    return (set.time.base <= TBase::_50ns);
+    return (TBase() <= TBase::_50ns);
 }
 
 
@@ -294,7 +292,7 @@ Osci::StructReadRand Osci::GetInfoForReadRand(int Tsm, const uint8 *address)
 
     if (Tsm != NULL_TSHIFT)
     {
-        result.step = Kr[set.time.base];
+        result.step = Kr[TBase()];
 
         int index = Tsm - addShift;
 

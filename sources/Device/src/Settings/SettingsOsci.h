@@ -58,7 +58,8 @@ struct TBase
         _10s,
         Count
     } value;
-    explicit TBase(E v) : value(v) {};
+
+    explicit TBase(E v);
 
     TBase();
 

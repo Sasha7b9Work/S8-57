@@ -14,11 +14,9 @@ void ContextTester::OnPressStart()
 bool ContextTester::Start()
 {
     // У нас двенадцать делений. На двенадцать делений должно приходиться не менее 2.5 мс
-// 2.5мс / 12дел = 0.2 мс/дел = 10мкс/тчк
+    // 2.5мс / 12дел = 0.2 мс/дел = 10мкс/тчк
 
-    set.time.base = TBase::_500us;
-
-    TBase::Load();
+    TBase(_500us);
 
     HAL_FSMC::WriteToFPGA16(WR::POST_LO, static_cast<uint16>(~(400)));
     HAL_FSMC::WriteToFPGA16(WR::PRED_LO, static_cast<uint16>(~(1)));

@@ -62,7 +62,7 @@ struct LinkingTShift
  struct SettingsTime
 {
     int                 shift;
-    TBase::E            base;
+    TBase::E            _base;
     PeakDetMode::E      peakDet;
     TPos::E             TPos;
     SampleType::E       sampleType;

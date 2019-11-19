@@ -105,13 +105,13 @@ void TShift::LoadReal()
 
 static uint GetK()
 {
-    return (-TShift::Min()) % Osci::Kr[static_cast<int>(set.time.base)];
+    return (-TShift::Min()) % Osci::Kr[TBase()];
 }
 
 
 void TShift::LoadRandomize()
 {
-    uint k = Osci::Kr[static_cast<int>(set.time.base)];
+    uint k = Osci::Kr[TBase()];
 
     FPGA::post = static_cast<uint16>((set.time.shift - TShift::Min() - GetK()) / k);
 
@@ -273,9 +273,16 @@ String RShift::ToString(int16 rShiftRel, Range::E range, int8 _divider)
 }
 
 
+TBase::TBase(TBase::E base)
+{
+    value = set.time._base = base;
+    Load();
+}
+
+
 TBase::TBase()
 {
-    value = set.time.base;
+    value = set.time._base;
 }
 
 

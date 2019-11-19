@@ -405,7 +405,7 @@ float CalculatePeriod(Chan::E ch)
 
             EXIT_IF_ERRORS_FLOAT(firstIntersection, secondIntersection); //-V2507
 
-            float per = TShift::ToAbs(ROUND(uint16, secondIntersection - firstIntersection), set.time.base);
+            float per = TShift::ToAbs(ROUND(uint16, secondIntersection - firstIntersection), TBase());
 
             period[static_cast<int>(ch)] = per;
 
