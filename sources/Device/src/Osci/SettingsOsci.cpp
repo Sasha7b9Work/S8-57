@@ -530,7 +530,7 @@ void Trig::DrawOnGrid()
 
         Region(width, height).DrawBounded(x, y, Color::BACK, Color::FILL);
 
-        float trigLevVal = MathFPGA::RShift2Abs(set.trig.lev[set.trig.source], set.ch[set.trig.source].range) * Divider(static_cast<uint8>(set.ch[set.trig.source].divider)).ToAbs();
+        float trigLevVal = RShift::ToAbs(set.trig.lev[set.trig.source], set.ch[set.trig.source].range) * Divider(static_cast<uint8>(set.ch[set.trig.source].divider)).ToAbs();
 
         Voltage voltage(trigLevVal);
 
@@ -575,4 +575,10 @@ void TrigLevel::Draw()
     Char(symbols[static_cast<uint8>(set.trig.source)], TypeFont::_5).Draw(x + 5, y - 6, Color::BACK);
 
     Trig::DrawOnGrid();
+}
+
+
+float RShift::ToAbs(int16 rShift, Range::E range)
+{
+    return (rShift * absStep[range]);
 }

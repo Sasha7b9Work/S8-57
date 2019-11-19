@@ -4,8 +4,6 @@
 
 struct MathFPGA
 {
-    static float RShift2Abs(int16 rShift, Range::E range);
-
     static float VoltageCursor(float shiftCurU, Range::E range, int16 rShift);
 
     static int16 RShift2Rel(float rShixftAbs, Range::E range);

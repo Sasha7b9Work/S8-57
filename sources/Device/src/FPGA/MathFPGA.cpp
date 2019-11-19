@@ -109,7 +109,7 @@ static float MaxVoltageOnScreen(Range::E range);
 
 float MathFPGA::VoltageCursor(float shiftCurU, Range::E range, int16 rShift)
 {
-    return MaxVoltageOnScreen(range) - shiftCurU * voltsInPixel[range] - RShift2Abs(rShift, range);
+    return MaxVoltageOnScreen(range) - shiftCurU * voltsInPixel[range] - RShift::ToAbs(rShift, range);
 }
 
 
@@ -144,7 +144,7 @@ void MathFPGA::PointsRel2Voltage(const uint8 *points, uint numPoints, Range::E r
 {
     int voltInPixel = voltsInPixelInt[range];
     float maxVoltsOnScreen = MaxVoltageOnScreen(range);
-    float rShiftAbs = RShift2Abs(rShift, range);
+    float rShiftAbs = RShift::ToAbs(rShift, range);
     int diff = static_cast<int>((VALUE::MIN * voltInPixel) + (maxVoltsOnScreen + rShiftAbs) * 20e3F);
     float koeff = 1.0F / 20e3F;
     for (uint i = 0; i < numPoints; i++)
@@ -156,7 +156,7 @@ void MathFPGA::PointsRel2Voltage(const uint8 *points, uint numPoints, Range::E r
 
 uint8 MathFPGA::Voltage2Point(float voltage, Range::E range, int16 rShift)
 {
-    int relValue = static_cast<int>((voltage + MaxVoltageOnScreen(range) + RShift2Abs(rShift, range)) / voltsInPoint[range] + VALUE::MIN);
+    int relValue = static_cast<int>((voltage + MaxVoltageOnScreen(range) + RShift::ToAbs(rShift, range)) / voltsInPoint[range] + VALUE::MIN);
     ::Math::Limitation<int>(&relValue, 0, 255);
     return static_cast<uint8>(relValue);
 }
@@ -166,7 +166,7 @@ float MathFPGA::Point2Voltage(uint8 value, Range::E range, int16 rShift)
 {
     uint8 delta = static_cast<uint8>(value - VALUE::MIN);
 
-    float rShiftAbs = RShift2Abs(rShift, range);
+    float rShiftAbs = RShift::ToAbs(rShift, range);
 
     float maxVoltage = MaxVoltageOnScreen(range);
 
@@ -177,7 +177,7 @@ float MathFPGA::Point2Voltage(uint8 value, Range::E range, int16 rShift)
 void MathFPGA::PointsVoltage2Rel(const float *voltage, int numPoints, Range::E range, int16 rShift, uint8 *points)
 {
     float maxVoltOnScreen = MaxVoltageOnScreen(range);
-    float rShiftAbs = RShift2Abs(rShift, range);
+    float rShiftAbs = RShift::ToAbs(rShift, range);
     float voltInPixel = 1.0F / (voltsInPoint[range] / ((VALUE::MAX - VALUE::MIN) / 200.0F));
 
     float add = maxVoltOnScreen + rShiftAbs;
@@ -484,10 +484,4 @@ static float MaxVoltageOnScreen(Range::E range)
     };
 
     return table[range] * 5.0F;
-}
-
-
-float MathFPGA::RShift2Abs(int16 rShift, Range::E range)
-{
-    return (rShift * RShift::absStep[range]);
 }

@@ -273,7 +273,7 @@ String TShift::ToString(TBase::E tBase)
 
 String RShift::ToString(int16 rShiftRel, Range::E range, int8 _divider)
 {
-    float rShiftVal = MathFPGA::RShift2Abs(rShiftRel, range) * Divider(static_cast<uint>(_divider)).ToAbs();
+    float rShiftVal = RShift::ToAbs(rShiftRel, range) * Divider(static_cast<uint>(_divider)).ToAbs();
     return Voltage(rShiftVal).ToString(true);
 }
 

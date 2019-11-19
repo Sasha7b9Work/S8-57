@@ -243,7 +243,7 @@ static bool HandlerKey_Function(const KeyEvent &event) // -V2506
         static int sum = 0;
         sum -= delta;
 
-        float rShiftAbs = MathFPGA::RShift2Abs(set.math.rShift, set.math.range);
+        float rShiftAbs = RShift::ToAbs(set.math.rShift, set.math.range);
 
         if (sum > 2)
         {

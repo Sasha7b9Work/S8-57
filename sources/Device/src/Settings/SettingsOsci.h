@@ -140,6 +140,8 @@ struct RShift
 
     static const float absStep[Range::Count];
 
+    static float ToAbs(int16 rShift, Range::E range);
+
 private:
     /// Отрисовать маркер вертикального смещения на сетке
     static void Draw(Chan::E ch);
