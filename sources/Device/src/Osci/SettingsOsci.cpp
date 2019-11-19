@@ -724,7 +724,7 @@ void VALUE::PointsToVoltage(const uint8 *points, uint numPoints, Range::E range,
     int voltInPixel = voltsInPixelInt[range];
     float maxVoltsOnScreen = Range::MaxVoltageOnScreen(range);
     float rShiftAbs = RShift::ToAbs(rShift, range);
-    int diff = static_cast<int>((VALUE::MIN * voltInPixel) + (maxVoltsOnScreen + rShiftAbs) * 20e3F);
+    int diff = static_cast<int>((MIN * voltInPixel) + (maxVoltsOnScreen + rShiftAbs) * 20e3F);
     float koeff = 1.0F / 20e3F;
     for (uint i = 0; i < numPoints; i++)
     {
@@ -747,7 +747,7 @@ float Range::MaxVoltageOnScreen(Range::E range)
 
 uint8 VALUE::FromVoltage(float voltage, Range::E range, int16 rShift)
 {
-    int relValue = static_cast<int>((voltage + Range::MaxVoltageOnScreen(range) + RShift::ToAbs(rShift, range)) / voltsInPoint[range] + VALUE::MIN);
+    int relValue = static_cast<int>((voltage + Range::MaxVoltageOnScreen(range) + RShift::ToAbs(rShift, range)) / voltsInPoint[range] + MIN);
     ::Math::Limitation<int>(&relValue, 0, 255);
     return static_cast<uint8>(relValue);
 }
@@ -755,11 +755,45 @@ uint8 VALUE::FromVoltage(float voltage, Range::E range, int16 rShift)
 
 float VALUE::ToVoltage(uint8 value, Range::E range, int16 rShift)
 {
-    uint8 delta = static_cast<uint8>(value - VALUE::MIN);
+    uint8 delta = static_cast<uint8>(value - MIN);
 
     float rShiftAbs = RShift::ToAbs(rShift, range);
 
     float maxVoltage = Range::MaxVoltageOnScreen(range);
 
     return delta * voltsInPoint[range] - maxVoltage - rShiftAbs;
+}
+
+
+void VALUE::PointsFromVoltage(const float *voltage, int numPoints, Range::E range, int16 rShift, uint8 *points)
+{
+    float maxVoltOnScreen = Range::MaxVoltageOnScreen(range);
+    float rShiftAbs = RShift::ToAbs(rShift, range);
+    float voltInPixel = 1.0F / (voltsInPoint[range] / ((MAX - MIN) / 200.0F));
+
+    float add = maxVoltOnScreen + rShiftAbs;
+
+    float delta = add * voltInPixel + MIN;
+
+    for (int i = 0; i < numPoints; i++)
+    {
+        int value = static_cast<int>(voltage[i] * voltInPixel + delta);
+
+        if (value < 0)
+        {
+            points[i] = 0;
+            continue;
+        }
+        else if (value > 255)
+        {
+            points[i] = 255;
+            continue;
+        }
+        else
+        {
+            // здесь ничего не делаем
+        }
+
+        points[i] = static_cast<uint8>(value);
+    }
 }

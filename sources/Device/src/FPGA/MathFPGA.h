@@ -8,7 +8,5 @@ struct MathFPGA
 
     static float TimeCursor(float shiftCurT, TBase::E tBase);
 
-    static void PointsVoltage2Rel(const float *voltage, int numPoints, Range::E range, int16 rShift, uint8 *points);
-
     static void CalculateFFT(float *data, uint numPoints, float *result, float *freq0, float *density0, float *freq1, float *density1, int *y0, int *y1);
 };

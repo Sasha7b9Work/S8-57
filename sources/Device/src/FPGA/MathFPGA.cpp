@@ -45,40 +45,6 @@ float MathFPGA::TimeCursor(float shiftCurT, TBase::E tBase)
 }
 
 
-void MathFPGA::PointsVoltage2Rel(const float *voltage, int numPoints, Range::E range, int16 rShift, uint8 *points)
-{
-    float maxVoltOnScreen = Range::MaxVoltageOnScreen(range);
-    float rShiftAbs = RShift::ToAbs(rShift, range);
-    float voltInPixel = 1.0F / (VALUE::voltsInPoint[range] / ((VALUE::MAX - VALUE::MIN) / 200.0F));
-
-    float add = maxVoltOnScreen + rShiftAbs;
-
-    float delta = add * voltInPixel + VALUE::MIN;
-
-    for (int i = 0; i < numPoints; i++)
-    {
-        int value = static_cast<int>(voltage[i] * voltInPixel + delta);
-
-        if (value < 0)
-        {
-            points[i] = 0;
-            continue;
-        }
-        else if (value > 255)
-        {
-            points[i] = 255;
-            continue;
-        }
-        else
-        {
-            // здесь ничего не делаем
-        }
-
-        points[i] = static_cast<uint8>(value);
-    }
-}
-
-
 /*
     Быстрое преобразование Фурье. Вычисляет модуль спектра для дейсвтительного сигнала.
     Количество отсчётов должно быть 2**N
