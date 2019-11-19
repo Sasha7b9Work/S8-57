@@ -228,7 +228,7 @@ static void BalanceChannel(Chan::E ch, Range::E range)
 
 void Osci::Balance(Chan::E ch)
 {
-    ModeCouple::Set(ch, ModeCouple::GND);
+    ModeCouple(ch, ModeCouple::GND);
 
     TBase(_100ms);
 

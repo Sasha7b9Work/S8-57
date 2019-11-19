@@ -174,10 +174,13 @@ struct ModeCouple
         GND,     ///< Вход заземлён.
         Count
     } value;
-    explicit ModeCouple(E v) : value(v) {};
+    /// С помощью этого можно узнать значение
     ModeCouple(Chan::E ch);
+    /// С помощью этого можно установить новое значение
+    ModeCouple(Chan::E ch, ModeCouple::E couple);
+
     operator ModeCouple::E() { return value; }
-    static void Set(Chan::E ch, ModeCouple::E couple);
+    
     pString UGO() const;
 };
 

@@ -32,7 +32,7 @@ DEF_CHOICE_2( cInputA,                                                          
 
 void PageChannelA::OnChanged_Couple(bool)
 {
-    ModeCouple::Set(Chan::A, ModeCouple(Chan::A));
+    ModeCouple(Chan::A, ModeCouple(Chan::A));
 }
 
 DEF_CHOICE_3( cCoupleA,                                                                                                                                             //--- КАНАЛ 1 - Связь ---
@@ -41,7 +41,7 @@ DEF_CHOICE_3( cCoupleA,                                                         
     "Пост",
     "Перем",
     "Земля",
-    set.ch[Chan::A]._couple, &PageChannelA::self, Item::Active, PageChannelA::OnChanged_Couple, Choice::AfterDraw
+    set.ch[Chan::A].couple, &PageChannelA::self, Item::Active, PageChannelA::OnChanged_Couple, Choice::AfterDraw
 )
 
 
@@ -133,7 +133,7 @@ DEF_CHOICE_2( cInputB,                                                          
 
 void PageChannelB::OnChanged_Couple(bool)
 {
-    ModeCouple::Set(Chan::B, ModeCouple(Chan::B));
+    ModeCouple(Chan::B, ModeCouple(Chan::B));
 }
 
 DEF_CHOICE_3( cCoupleB,                                                                                                                                             //--- КАНАЛ 2 - Связь ---
@@ -142,7 +142,7 @@ DEF_CHOICE_3( cCoupleB,                                                         
     "Пост",
     "Перем",
     "Земля",
-    set.ch[Chan::B]._couple, &PageChannelB::self, Item::Active, PageChannelB::OnChanged_Couple, Choice::AfterDraw
+    set.ch[Chan::B].couple, &PageChannelB::self, Item::Active, PageChannelB::OnChanged_Couple, Choice::AfterDraw
 )
 
 

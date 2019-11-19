@@ -107,8 +107,8 @@ void Tester::Enable() // -V2506
 
     oldSet = set;
 
-    ModeCouple::Set(Chan::A, ModeCouple::GND);
-    ModeCouple::Set(Chan::B, ModeCouple::GND);
+    ModeCouple(Chan::A, ModeCouple::GND);
+    ModeCouple(Chan::B, ModeCouple::GND);
 
     Range(Chan::A, Range::_2V);
     Range(Chan::B, Range::_2V);

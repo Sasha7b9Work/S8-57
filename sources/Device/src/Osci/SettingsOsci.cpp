@@ -853,5 +853,5 @@ void TShift::Reset()
 
 ModeCouple::ModeCouple(Chan::E ch)
 {
-    value = set.ch[ch]._couple;
+    value = set.ch[ch].couple;
 }
