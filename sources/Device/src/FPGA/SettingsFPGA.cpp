@@ -195,6 +195,12 @@ void Range::Set(Chan::E ch, E range)
 }
 
 
+RShift::RShift(Chan::E ch)
+{
+    shift = set.ch[ch].rShift;
+}
+
+
 void RShift::Change(Chan::E ch, int16 delta)
 {
     ::Math::AdditionThisLimitation<int16>(&set.ch[ch].rShift, STEP * delta, MIN, MAX);

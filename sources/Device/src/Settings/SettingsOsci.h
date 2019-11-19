@@ -111,12 +111,15 @@ struct Range
     static Range::E Get(Chan::E ch);
     static Range::E GetA();
     static Range::E GetB();
+
+    operator Range::E() { return value; }
 };
 
 
 struct RShift
 {
 public:
+    RShift(Chan::E ch);
     /// Изменить на delta
     static void Change(Chan::E ch, int16 delta);
     /// Установить значение
@@ -140,6 +143,8 @@ public:
 
     static bool ChangeMath(int delta);
 
+    operator int16() { return shift; };
+
 private:
     /// Отрисовать маркер вертикального смещения на сетке
     static void Draw(Chan::E ch);
@@ -153,6 +158,8 @@ private:
     static const int16 HARDWARE_ZERO = 500;
     /// На столько единиц нужно изменить значение смещения, чтобы маркер смещения по напряжению передвинулся на одну точку.
     static const int16 STEP = (((MAX - MIN) / 24) / 20);
+
+    int16 shift;
 };
 
 /// Режим канала по входу.
