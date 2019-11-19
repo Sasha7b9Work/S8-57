@@ -331,12 +331,12 @@ void Range::LoadBoth()
         BIN_U8(00000011)   // 20V      // -V2501
     };
 
-    uint8 valueA = vals[Range::GetA()];
+    uint8 valueA = vals[Range(Chan::A)];
 
     GPIO::WritePin(FPin::A1, _GET_BIT(valueA, 1));
     GPIO::WritePin(FPin::A2, _GET_BIT(valueA, 0));
 
-    uint8 valueB = vals[Range::GetB()];
+    uint8 valueB = vals[Range(Chan::B)];
 
     GPIO::WritePin(FPin::A3, _GET_BIT(valueB, 1));
     GPIO::WritePin(FPin::A4, _GET_BIT(valueB, 0));
@@ -795,18 +795,6 @@ void VALUE::PointsFromVoltage(const float *voltage, int numPoints, Range::E rang
 
         points[i] = static_cast<uint8>(value);
     }
-}
-
-
-Range::E Range::GetA()
-{
-    return set.ch[Chan::A].range;
-}
-
-
-Range::E Range::GetB()
-{
-    return set.ch[Chan::B].range;
 }
 
 

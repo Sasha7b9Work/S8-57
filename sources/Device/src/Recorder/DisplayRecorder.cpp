@@ -62,9 +62,9 @@ static void DrawSettings(int x, int y)
 
     Text(RecorderScaleX::Current().ToString()).Draw(x + 2, y + 2);
 
-    Text(Range(Range::GetA()).ToString(static_cast<int8>(set.ch[Chan::A].divider))).Draw(x + 2, y + 11, Color::CHAN[Chan::A]);
+    Text(Range(Chan::A).ToString(static_cast<int8>(set.ch[Chan::A].divider))).Draw(x + 2, y + 11, Color::CHAN[Chan::A]);
 
-    Text(Range(Range::GetB()).ToString(static_cast<int8>(set.ch[Chan::B].divider))).Draw(x + 2, y + 20, Color::CHAN[Chan::B]);
+    Text(Range(Chan::B).ToString(static_cast<int8>(set.ch[Chan::B].divider))).Draw(x + 2, y + 20, Color::CHAN[Chan::B]);
 }
 
 

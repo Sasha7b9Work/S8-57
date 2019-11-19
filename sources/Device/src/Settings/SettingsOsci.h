@@ -112,9 +112,6 @@ struct Range
     /// Возвращает напряжение, соответствующее верхней границе сетки
     static float MaxVoltageOnScreen(Range::E range);
 
-    static Range::E GetA();
-    static Range::E GetB();
-
     operator Range::E() { return value; }
 };
 
