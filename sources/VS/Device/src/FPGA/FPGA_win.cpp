@@ -60,7 +60,7 @@ static bool GenerateNormalModeData(Chan::E ch, uint8 data[ENumPointsFPGA::MAX_NU
 
     double offset = RShift::ToAbs(RShift(ch), Range(ch)) * kOffset[Range(ch)];
 
-    if(set.ch[ch].couple == ModeCouple::DC)
+    if(ModeCouple(ch) == ModeCouple::DC)
     {
         offset += TuneGeneratorDialog::offset[ch] * kOffset[Range(ch)];
     }

@@ -175,9 +175,10 @@ struct ModeCouple
         Count
     } value;
     explicit ModeCouple(E v) : value(v) {};
-    pString UGO() const;
-
+    ModeCouple(Chan::E ch);
+    operator ModeCouple::E() { return value; }
     static void Set(Chan::E ch, ModeCouple::E couple);
+    pString UGO() const;
 };
 
 struct Bandwidth
