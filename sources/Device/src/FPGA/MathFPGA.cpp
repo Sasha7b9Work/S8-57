@@ -45,36 +45,15 @@ static const float voltsInPixel[] =
     20.0F   / GRID_DELTA    // 20V
 };
 
-static const int voltsInPixelInt[] =   // Коэффициент 20000
-{
-    2,      // 2
-    5,      // 5
-    10,     // 10
-    20,     // 20
-    50,     // 50
-    100,    // 100
-    200,    // 200
-    500,    // 500
-    1000,   // 1
-    2000,   // 2
-    5000,   // 5
-    1000,   // 10
-    20000   // 20
-};
-
-
 
 static void MultiplyToWindow(float *data, uint numPoints);
 
 static void Normalize(float *data, int numPoints);
-/// Возвращает напряжение, соответствующее верхней границе сетки
-static float MaxVoltageOnScreen(Range::E range);
-
 
 
 float MathFPGA::VoltageCursor(float shiftCurU, Range::E range, int16 rShift)
 {
-    return MaxVoltageOnScreen(range) - shiftCurU * voltsInPixel[range] - RShift::ToAbs(rShift, range);
+    return VALUE::MaxVoltageOnScreen(range) - shiftCurU * voltsInPixel[range] - RShift::ToAbs(rShift, range);
 }
 
 
@@ -83,24 +62,9 @@ float MathFPGA::TimeCursor(float shiftCurT, TBase::E tBase)
     return TShift::ToAbs(static_cast<int>(shiftCurT), tBase);
 }
 
-
-void MathFPGA::PointsRel2Voltage(const uint8 *points, uint numPoints, Range::E range, int16 rShift, float *voltage)
-{
-    int voltInPixel = voltsInPixelInt[range];
-    float maxVoltsOnScreen = MaxVoltageOnScreen(range);
-    float rShiftAbs = RShift::ToAbs(rShift, range);
-    int diff = static_cast<int>((VALUE::MIN * voltInPixel) + (maxVoltsOnScreen + rShiftAbs) * 20e3F);
-    float koeff = 1.0F / 20e3F;
-    for (uint i = 0; i < numPoints; i++)
-    {
-        voltage[i] = (points[i] * voltInPixel - diff) * koeff; //-V636
-    }
-}
-
-
 uint8 MathFPGA::Voltage2Point(float voltage, Range::E range, int16 rShift)
 {
-    int relValue = static_cast<int>((voltage + MaxVoltageOnScreen(range) + RShift::ToAbs(rShift, range)) / voltsInPoint[range] + VALUE::MIN);
+    int relValue = static_cast<int>((voltage + VALUE::MaxVoltageOnScreen(range) + RShift::ToAbs(rShift, range)) / voltsInPoint[range] + VALUE::MIN);
     ::Math::Limitation<int>(&relValue, 0, 255);
     return static_cast<uint8>(relValue);
 }
@@ -112,7 +76,7 @@ float MathFPGA::Point2Voltage(uint8 value, Range::E range, int16 rShift)
 
     float rShiftAbs = RShift::ToAbs(rShift, range);
 
-    float maxVoltage = MaxVoltageOnScreen(range);
+    float maxVoltage = VALUE::MaxVoltageOnScreen(range);
 
     return delta * voltsInPoint[range] - maxVoltage - rShiftAbs;
 }
@@ -120,7 +84,7 @@ float MathFPGA::Point2Voltage(uint8 value, Range::E range, int16 rShift)
 
 void MathFPGA::PointsVoltage2Rel(const float *voltage, int numPoints, Range::E range, int16 rShift, uint8 *points)
 {
-    float maxVoltOnScreen = MaxVoltageOnScreen(range);
+    float maxVoltOnScreen = VALUE::MaxVoltageOnScreen(range);
     float rShiftAbs = RShift::ToAbs(rShift, range);
     float voltInPixel = 1.0F / (voltsInPoint[range] / ((VALUE::MAX - VALUE::MIN) / 200.0F));
 
@@ -410,16 +374,4 @@ static void Normalize(float *data, int)
     {
         data[i] /= max;
     }
-}
-
-
-static float MaxVoltageOnScreen(Range::E range)
-{
-    //DEF__STRUCT(StructRange, float) table[Range::Count] =
-    static const float table[Range::Count] =
-    {
-        2e-3F, 5e-3F, 10e-3F, 20e-3F, 50e-3F, 100e-3F, 200e-3F, 500e-3F, 1.0F, 2.0F, 5.0F, 10.0F, 20.0F
-    };
-
-    return table[range] * 5.0F;
 }

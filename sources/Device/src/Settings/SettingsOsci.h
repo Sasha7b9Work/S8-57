@@ -231,3 +231,17 @@ private:
     static const int16 HARDWARE_ZERO = 500;
     static const int16 STEP = (((MAX - MIN) / 24) / 20);
 };
+
+
+struct VALUE
+{
+    static const uint8 AVE = 127;
+    static const uint8 MIN = AVE - 125;
+    static const uint8 MAX = AVE + 125;
+    /// Если значение == 0, значит, его нет. Это нужно для режимов рандомизатора и поточечного вывода p2p, а также для tShift ранее считанного сигнала
+    static const uint8 NONE = 0;
+
+    static void PointsToVoltage(const uint8 *points, uint numPoints, Range::E range, int16 rShift, float *voltage);
+    /// Возвращает напряжение, соответствующее верхней границе сетки
+    static float MaxVoltageOnScreen(Range::E range);
+};

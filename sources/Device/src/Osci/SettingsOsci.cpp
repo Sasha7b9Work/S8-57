@@ -20,6 +20,24 @@
 #endif
 
 
+static const int voltsInPixelInt[] =   // Коэффициент 20000
+{
+    2,      // 2
+    5,      // 5
+    10,     // 10
+    20,     // 20
+    50,     // 50
+    100,    // 100
+    200,    // 200
+    500,    // 500
+    1000,   // 1
+    2000,   // 2
+    5000,   // 5
+    1000,   // 10
+    20000   // 20
+};
+
+
 // Массив структур описаний масштабов по напряжению.
 static const struct RangeStruct
 {
@@ -681,4 +699,29 @@ bool RShift::ChangeMath(int delta)
 float TShift::ToAbs(int tShift, TBase::E tBase)
 {
     return absStep[tBase] * tShift;
+}
+
+void VALUE::PointsToVoltage(const uint8 *points, uint numPoints, Range::E range, int16 rShift, float *voltage)
+{
+    int voltInPixel = voltsInPixelInt[range];
+    float maxVoltsOnScreen = MaxVoltageOnScreen(range);
+    float rShiftAbs = RShift::ToAbs(rShift, range);
+    int diff = static_cast<int>((VALUE::MIN * voltInPixel) + (maxVoltsOnScreen + rShiftAbs) * 20e3F);
+    float koeff = 1.0F / 20e3F;
+    for (uint i = 0; i < numPoints; i++)
+    {
+        voltage[i] = (points[i] * voltInPixel - diff) * koeff; //-V636
+    }
+}
+
+
+float VALUE::MaxVoltageOnScreen(Range::E range)
+{
+    //DEF__STRUCT(StructRange, float) table[Range::Count] =
+    static const float table[Range::Count] =
+    {
+        2e-3F, 5e-3F, 10e-3F, 20e-3F, 50e-3F, 100e-3F, 200e-3F, 500e-3F, 1.0F, 2.0F, 5.0F, 10.0F, 20.0F
+    };
+
+    return table[range] * 5.0F;
 }

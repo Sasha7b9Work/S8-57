@@ -173,7 +173,7 @@ static void DRAW_SPECTRUM(const uint8 *dataIn, uint numPoints, Chan::E ch)
 
     if (spectrum)
     {
-        MathFPGA::PointsRel2Voltage(dataIn, numPoints, RANGE_DS(ch), (int16)RSHIFT_DS(ch), dataR);
+        VALUE::PointsToVoltage(dataIn, numPoints, RANGE_DS(ch), (int16)RSHIFT_DS(ch), dataR);
 
         MathFPGA::CalculateFFT(dataR, numPoints, spectrum, &freq0, &density0, &freq1, &density1, &y0, &y1);
 
