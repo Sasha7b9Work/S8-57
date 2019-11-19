@@ -275,14 +275,14 @@ String RShift::ToString(int16 rShiftRel, Range::E range, int8 _divider)
 
 TBase::TBase(TBase::E base)
 {
-    value = set.time._base = base;
+    value = set.time.base = base;
     Load();
 }
 
 
 TBase::TBase()
 {
-    value = set.time._base;
+    value = set.time.base;
 }
 
 

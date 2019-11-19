@@ -167,18 +167,18 @@ void TBase::Change(int delta)
 
     if (delta > 0)
     {
-        ::Math::LimitationIncrease<uint8>(reinterpret_cast<uint8 *>(&set.time._base), static_cast<uint8>(TBase::Count - 1));
+        ::Math::LimitationIncrease<uint8>(reinterpret_cast<uint8 *>(&set.time.base), static_cast<uint8>(TBase::Count - 1));
     }
     else
     {
         if ((set.time.peakDet == PeakDetMode::Enabled) &&           // Если вклюён режим пикового детектора
-            set.time._base == TBase::MIN_PEAK_DET)                   // и установлен масштаб по времени, соответствующий минмальному в режиме пикового детектора :
+            set.time.base == TBase::MIN_PEAK_DET)                   // и установлен масштаб по времени, соответствующий минмальному в режиме пикового детектора :
         {
             ::Display::ShowWarning("ВКЛЮЧЕН ПИКОВЫЙ ДЕТЕКТОР");		// выводим сообщение об этом
             return;													// и выходим
         }
 
-        ::Math::LimitationDecrease<uint8>(reinterpret_cast<uint8 *>(&set.time._base), 0);
+        ::Math::LimitationDecrease<uint8>(reinterpret_cast<uint8 *>(&set.time.base), 0);
     }
 
     if (old == TBase())
