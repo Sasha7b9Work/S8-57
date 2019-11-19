@@ -137,6 +137,9 @@ struct RShift
     static String ToString(int16 rShiftRel, Range::E range, int8 divider);
     /// ¬озвращает ссылку на значение
     static int16 &Value(Chan::E ch);
+
+    static const float absStep[Range::Count];
+
 private:
     /// ќтрисовать маркер вертикального смещени€ на сетке
     static void Draw(Chan::E ch);

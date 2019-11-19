@@ -44,6 +44,24 @@ ranges[Range::Count][2] =
 };
 
 
+const float RShift::absStep[Range::Count] =
+{
+    2e-3F   / 20 / RShift::STEP,
+    5e-3F   / 20 / RShift::STEP,
+    10e-3F  / 20 / RShift::STEP,
+    20e-3F  / 20 / RShift::STEP,
+    50e-3F  / 20 / RShift::STEP,
+    100e-3F / 20 / RShift::STEP,
+    200e-3F / 20 / RShift::STEP,
+    500e-3F / 20 / RShift::STEP,
+    1.0F    / 20 / RShift::STEP,
+    2.0F    / 20 / RShift::STEP,
+    5.0F    / 20 / RShift::STEP,
+    10.0F   / 20 / RShift::STEP,
+    20.0F   / 20 / RShift::STEP
+};
+
+
 ///< Нужно ли рисовать горизонтальную линию уровня смещения уровня синхронизации.
 static bool needDraw = false;
 /// Установленное в true значение означает, что нужно выводить значок синхроимпульса

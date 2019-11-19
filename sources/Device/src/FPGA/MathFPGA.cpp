@@ -7,23 +7,6 @@
 #include <cmath>
 
 
-static const float absStepRShift[] =
-{
-    2e-3F   / 20 / RShift::STEP,
-    5e-3F   / 20 / RShift::STEP,
-    10e-3F  / 20 / RShift::STEP,
-    20e-3F  / 20 / RShift::STEP,
-    50e-3F  / 20 / RShift::STEP,
-    100e-3F / 20 / RShift::STEP,
-    200e-3F / 20 / RShift::STEP,
-    500e-3F / 20 / RShift::STEP,
-    1.0F    / 20 / RShift::STEP,
-    2.0F    / 20 / RShift::STEP,
-    5.0F    / 20 / RShift::STEP,
-    10.0F   / 20 / RShift::STEP,
-    20.0F   / 20 / RShift::STEP
-};
-
 static const float absStepTShift[TBase::Count] =
 {
     /* 2 нс    */ 2e-9F   / 20, 
@@ -132,7 +115,7 @@ float MathFPGA::VoltageCursor(float shiftCurU, Range::E range, int16 rShift)
 
 int16 MathFPGA::RShift2Rel(float rShiftAbs, Range::E range)
 {
-    int16 retValue = static_cast<int16>(rShiftAbs / absStepRShift[range]);
+    int16 retValue = static_cast<int16>(rShiftAbs / RShift::absStep[range]);
 
     if (retValue < RShift::MIN)
     {
@@ -506,5 +489,5 @@ static float MaxVoltageOnScreen(Range::E range)
 
 float MathFPGA::RShift2Abs(int16 rShift, Range::E range)
 {
-    return (rShift * absStepRShift[range]);
+    return (rShift * RShift::absStep[range]);
 }
