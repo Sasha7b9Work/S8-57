@@ -185,16 +185,6 @@ void Range::Change(Chan::E ch, int16 delta)
 }
 
 
-void Range::Set(Chan::E ch, E range)
-{
-    set.disp.SetLastAffectedChannel(ch);
-
-    set.ch[ch].range = range;
-
-    LoadBoth();
-}
-
-
 RShift::RShift(Chan::E ch)
 {
     shift = set.ch[ch].rShift;

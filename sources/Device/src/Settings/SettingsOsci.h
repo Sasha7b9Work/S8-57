@@ -103,10 +103,13 @@ struct Range
         Count
     } value;
     explicit Range(E v) : value(v) {};
-    Range(Chan::E ch);
-    pString Name() const;
 
-    static void Set(Chan::E ch, E range);
+    /// Этот конструктор - чтобы узнать текущее знаечение Range
+    Range(Chan::E ch);
+    /// Этот конструктор устанавливает новоез значениеRange
+    Range(Chan::E ch, E range);
+    
+    pString Name() const;
 
     pString ToString(int8 divider);
     /// Возвращает напряжение, соответствующее верхней границе сетки
