@@ -3,6 +3,22 @@
 #include "Osci/Measurements/Measures.h"
 
 
+/// ѕо какому каналу производить автоматические измерени€
+#define SOURCE_MEASURES                 (set.meas.source)
+/// јвтоматические измерени€ производ€тс€ только по каналу A
+#define SOURCE_MEASURES_IS_A            (SOURCE_MEASURES == MeasuresSource::A)
+/// јвтоматические измерени€ производ€тс€ только по каналу B
+#define SOURCE_MEASURES_IS_B            (SOURCE_MEASURES == MeasuresSource::B)
+/// јвтоматические измерени€ производ€тс€ по каналам A и B
+#define SOURCE_MEASURES_IS_BOTH         (SOURCE_MEASURES == MeasuresSource::A_B)
+/// ¬ыводить автоматические измерени€ по каналу A
+#define VIEW_MEASURES_A                 (set.ch[Chan::A].enabled && (SOURCE_MEASURES_IS_A || SOURCE_MEASURES_IS_BOTH))
+/// ¬ыводить автоматические измерени€ по каналу B
+#define VIEW_MEASURES_B                 (set.ch[Chan::B].enabled && (SOURCE_MEASURES_IS_B || SOURCE_MEASURES_IS_BOTH))
+/// ¬ыводить автоматические измерени€ по обоим каналам
+#define VIEW_MEASURES_BOTH              (SET_ENABLED_BOTH && SOURCE_MEASURES_IS_BOTH)
+
+
 
 /// —колько автоматических измерений помещаетс€ на экран
 struct MeasuresOnDisplay

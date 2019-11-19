@@ -169,12 +169,12 @@ void AutoMeasurements::CalculateMeasures()
                     markerVoltage[Chan::A][0] = markerVoltage[Chan::A][1] = markerVoltage[Chan::B][0] = markerVoltage[Chan::B][1] = Integer::ERROR;
                 }
                 
-                if(set.meas.source == MeasuresSource::A)
+                if(VIEW_MEASURES_A)
                 {
                     values[static_cast<int>(type)].value[Chan::A] = func(Chan::A);
                 }
                 
-                if(set.meas.source == MeasuresSource::B)
+                if(VIEW_MEASURES_B)
                 {
                     values[static_cast<int>(type)].value[Chan::B] = func(Chan::B);
                 }
