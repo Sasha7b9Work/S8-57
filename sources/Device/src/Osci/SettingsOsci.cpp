@@ -704,7 +704,7 @@ float TShift::ToAbs(int tShift, TBase::E tBase)
 void VALUE::PointsToVoltage(const uint8 *points, uint numPoints, Range::E range, int16 rShift, float *voltage)
 {
     int voltInPixel = voltsInPixelInt[range];
-    float maxVoltsOnScreen = MaxVoltageOnScreen(range);
+    float maxVoltsOnScreen = Range::MaxVoltageOnScreen(range);
     float rShiftAbs = RShift::ToAbs(rShift, range);
     int diff = static_cast<int>((VALUE::MIN * voltInPixel) + (maxVoltsOnScreen + rShiftAbs) * 20e3F);
     float koeff = 1.0F / 20e3F;
@@ -715,7 +715,7 @@ void VALUE::PointsToVoltage(const uint8 *points, uint numPoints, Range::E range,
 }
 
 
-float VALUE::MaxVoltageOnScreen(Range::E range)
+float Range::MaxVoltageOnScreen(Range::E range)
 {
     //DEF__STRUCT(StructRange, float) table[Range::Count] =
     static const float table[Range::Count] =

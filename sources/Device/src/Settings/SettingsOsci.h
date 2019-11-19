@@ -105,7 +105,8 @@ struct Range
     static void Set(Chan::E ch, E range);
 
     pString ToString(int8 divider);
-
+    /// Возвращает напряжение, соответствующее верхней границе сетки
+    static float MaxVoltageOnScreen(Range::E range);
 };
 
 
@@ -242,6 +243,4 @@ struct VALUE
     static const uint8 NONE = 0;
 
     static void PointsToVoltage(const uint8 *points, uint numPoints, Range::E range, int16 rShift, float *voltage);
-    /// Возвращает напряжение, соответствующее верхней границе сетки
-    static float MaxVoltageOnScreen(Range::E range);
 };
