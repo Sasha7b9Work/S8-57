@@ -14,8 +14,8 @@ void DataSettings::Fill(uint8 *_dataA, uint8 * _dataB)
     INVERSE_B(this) = set.ch[Chan::B].inverse ? 1U : 0U;
     Lval_RANGE_A(this) = Range::GetA();
     Lval_RANGE_B(this) = Range::GetB();
-    RSHIFT_A(this) = RShift::Value(Chan::A);
-    RSHIFT_B(this) = RShift::Value(Chan::B);
+    RSHIFT_A(this) = RShift::GetA();
+    RSHIFT_B(this) = RShift::GetB();
     Lval_TBASE(this) = static_cast<uint>(set.time.base);
     TSHIFT(this) = static_cast<int16>(set.time.shift);
     Lval_COUPLE_A(this) = static_cast<uint>(set.ch[Chan::A].couple);

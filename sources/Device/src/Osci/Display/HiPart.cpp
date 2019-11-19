@@ -234,7 +234,7 @@ static void WriteTextVoltage(Chan::E ch, int x, int y)
     String(buffer).Draw(x + 1, y, colorDraw);
 
     char bufferTemp[SIZE];
-    std::snprintf(bufferTemp, SIZE, "\xa5%s", RShift::ToString(RShift::Value(ch), range, static_cast<int8>(set.ch[ch].divider)).CString());
+    std::snprintf(bufferTemp, SIZE, "\xa5%s", RShift::ToString(RShift::Get(ch), range, static_cast<int8>(set.ch[ch].divider)).CString());
     String(bufferTemp).Draw(x + 46, y);
 }
 
@@ -402,8 +402,8 @@ static void WriteCursors()
             CursorsMeasurements::Voltage(source, 0).Draw(x, y1);
             CursorsMeasurements::Voltage(source, 1).Draw(x, y2);
             x = 49;
-            float pos0 = MathFPGA::VoltageCursor(CursorsMeasurements::PosU(source, 0), Range::Get(source), RShift::Value(source));
-            float pos1 = MathFPGA::VoltageCursor(CursorsMeasurements::PosU(source, 1), Range::Get(source), RShift::Value(source));
+            float pos0 = MathFPGA::VoltageCursor(CursorsMeasurements::PosU(source, 0), Range::Get(source), RShift::Get(source));
+            float pos1 = MathFPGA::VoltageCursor(CursorsMeasurements::PosU(source, 1), Range::Get(source), RShift::Get(source));
             float delta = std::fabsf(pos1 - pos0) * DIVIDER_ABS(source);
             String(":dU=").Draw(x, y1);
             Voltage(delta).ToString(false).Draw(x + 17, y1);

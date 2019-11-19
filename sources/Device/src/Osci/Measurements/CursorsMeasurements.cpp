@@ -33,7 +33,7 @@ bool CursorsMeasurements::NecessaryDraw()
 
 String CursorsMeasurements::Voltage(Chan::E source, int numCur)
 {
-    float voltage = MathFPGA::VoltageCursor(PosU(source, numCur), Range::Get(source), RShift::Value(source));
+    float voltage = MathFPGA::VoltageCursor(PosU(source, numCur), Range::Get(source), RShift::Get(source));
     if (set.ch[source].divider == 1)
     {
         voltage *= 10.0F;

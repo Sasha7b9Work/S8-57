@@ -166,7 +166,7 @@ static void ChangeRShift(Chan::E ch, int16 delta)
         {
             RShift::Change(ch, delta);
 
-            if (RShift::Value(ch) == 0)
+            if (RShift::Get(ch) == 0)
             {
                 stop[ch] = true;
                 timeStop[ch] = TIME_MS;

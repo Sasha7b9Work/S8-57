@@ -38,13 +38,13 @@ static bool NeedLoadRShift(Chan::E ch)
     static Range::E prevRanges[Chan::Count] = { Range::Count, Range::Count };
     static int16 prevShift[Chan::Count] = { -1000, -1000 };
 
-    if((prevShift[ch] == RShift::Value(ch)) && (prevRanges[ch] == Range::Get(ch)))
+    if((prevShift[ch] == RShift::Get(ch)) && (prevRanges[ch] == Range::Get(ch)))
     {
         result = false;
     }
 
     prevRanges[ch] = Range::Get(ch);
-    prevShift[ch] = RShift::Value(ch);
+    prevShift[ch] = RShift::Get(ch);
 
     return result;
 }
@@ -61,7 +61,7 @@ void RShift::Load(Chan::E ch)
 
     static const uint16 mask[2] = { 0x2000, 0x6000 };
 
-    int16 shift = Value(ch) + HARDWARE_ZERO;
+    int16 shift = Get(ch) + HARDWARE_ZERO;
 
     int8 add = set.dbg.addRShift[ch][Range::Get(ch)];
 
@@ -197,7 +197,7 @@ void Range::Set(Chan::E ch, E range)
 
 void RShift::Change(Chan::E ch, int16 delta)
 {
-    ::Math::AdditionThisLimitation<int16>(&RShift::Value(ch), STEP * delta, MIN, MAX);
+    ::Math::AdditionThisLimitation<int16>(&set.ch[ch].rShift, STEP * delta, MIN, MAX);
 
     Load(ch);
 }
@@ -206,7 +206,7 @@ void RShift::Change(Chan::E ch, int16 delta)
 void RShift::Set(Chan::E ch, int16 rShift)
 {
     ::Math::Limitation(&rShift, MIN, MAX);
-    Value(ch) = rShift;
+    set.ch[ch].rShift = rShift;
     Load(ch);
 }
 
