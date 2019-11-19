@@ -8,8 +8,6 @@ struct DisplayOsci
 {
     static void Update();
 
-    static void DrawCursorTrigLevel();
-
     void DrawScaleLine(int x, bool forTrigLev);
     /// Установить признак того, что дисплей нуждается в перерисовке
     static void SetFlagRedraw();

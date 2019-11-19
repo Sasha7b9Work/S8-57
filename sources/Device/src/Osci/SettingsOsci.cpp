@@ -519,3 +519,42 @@ void Trig::DrawOnGrid()
         String("Синхр %s", voltage.ToString(true).CString()).Draw(x + 7, y + 5, Color::FILL);
     }
 }
+
+
+void TrigLevel::Draw()
+{
+    Chan::E ch = static_cast<Chan::E>(set.trig.source);
+
+    int trigLev = set.trig.lev[set.trig.source] + SET_RSHIFT(ch);
+    float scale = 1.0F / ((MAX - MIN) / 2.4F / Grid::Height());
+    int y0 = (Grid::Top() + Grid::ChannelBottom()) / 2 + static_cast<int>(scale * (HARDWARE_ZERO - MIN));
+    int y = y0 - static_cast<int>(scale * (trigLev - MIN));
+
+    y = (y - Grid::ChannelCenterHeight()) + Grid::ChannelCenterHeight();
+
+    int x = Grid::Right();
+    Color::Trig().SetAsCurrent();
+
+    if (y > Grid::ChannelBottom())
+    {
+        Char(Symbol8::TRIG_LEV_LOWER).Draw(x + 3, Grid::ChannelBottom() - 11);
+        Pixel().Draw(x + 5, Grid::ChannelBottom() - 2);
+        y = Grid::ChannelBottom() - 7;
+        x--;
+    }
+    else if (y < Grid::Top())
+    {
+        Char(Symbol8::TRIG_LEV_ABOVE).Draw(x + 3, Grid::Top() + 2);
+        Pixel().Draw(x + 5, Grid::Top() + 2);
+    }
+    else
+    {
+        Char(Symbol8::TRIG_LEV_NORMAL).Draw(x + 1, y - 4);
+    }
+
+    static const char symbols[2] = { '1', '2' };
+
+    Char(symbols[static_cast<uint8>(set.trig.source)], TypeFont::_5).Draw(x + 5, y - 6, Color::BACK);
+
+    Trig::DrawOnGrid();
+}

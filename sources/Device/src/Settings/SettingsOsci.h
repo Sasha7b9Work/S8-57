@@ -221,4 +221,6 @@ struct TrigLevel
     static void Set(int16 level);
     /// Однократно найти уровень синхронизации
     static void Find();
+
+    static void Draw();
 };
