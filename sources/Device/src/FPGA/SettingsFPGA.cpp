@@ -189,7 +189,7 @@ void Range::Set(Chan::E ch, E range)
 {
     set.disp.SetLastAffectedChannel(ch);
 
-    set.ch[static_cast<int>(ch)].range = range;
+    set.ch[ch].range = range;
 
     LoadBoth();
 }

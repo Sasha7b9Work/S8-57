@@ -250,5 +250,6 @@ struct VALUE
 
     static float ToVoltage(uint8 value, Range::E range, int16 rShift);
 
+private:
     static const float voltsInPoint[Range::Count];
 };
