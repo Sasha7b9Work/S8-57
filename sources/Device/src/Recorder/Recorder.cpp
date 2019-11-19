@@ -120,8 +120,8 @@ void Recorder::Stop()
 
 static void StoreOsciSettings()
 {
-    osci.storedRShift[Chan::A] = RShift::GetA();
-    osci.storedRShift[Chan::B] = RShift::GetB();
+    osci.storedRShift[Chan::A] = RShift(Chan::A);
+    osci.storedRShift[Chan::B] = RShift(Chan::B);
 }
 
 

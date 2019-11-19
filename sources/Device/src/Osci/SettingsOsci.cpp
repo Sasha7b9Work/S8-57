@@ -405,7 +405,7 @@ static uint8 ValueForRange(Chan::E ch) // -V2506
 }
 
 
-int16 RShift::Get(Chan::E ch)
+int16 RShift(Chan::E ch)
 {
     return set.ch[ch].rShift;
 }
@@ -449,7 +449,7 @@ void TrigLevel::Find()
 
         int deltaValue = static_cast<int>(VALUE::AVE) - (max + min) / 2;
 
-        int deltaRShift = RShift::Get(ch);
+        int deltaRShift = RShift(ch);
 
         float k = 200 / 125.0F;     // Этот коэффициент получается так, что на верхей границе экрана лежит 125-я точка сигнала от центра экрана (нулевого значение),
                                     // а маркер в этой точке смещён на 200 единиц относительно цента экрана
@@ -480,7 +480,7 @@ void RShift::Draw(Chan::E ch)
 {
     Color::CHAN[ch].SetAsCurrent();
 
-    int delta = Get(ch) / STEP;
+    int delta = RShift(ch) / STEP;
 
     if (set.fft.enabled)
     {
@@ -613,7 +613,7 @@ void TrigLevel::Draw()
 {
     Chan::E ch = static_cast<Chan::E>(set.trig.source);
 
-    int trigLev = set.trig.lev[set.trig.source] + RShift::Get(ch);
+    int trigLev = set.trig.lev[set.trig.source] + RShift(ch);
     float scale = 1.0F / ((MAX - MIN) / 2.4F / Grid::Height());
     int y0 = (Grid::Top() + Grid::ChannelBottom()) / 2 + static_cast<int>(scale * (HARDWARE_ZERO - MIN));
     int y = y0 - static_cast<int>(scale * (trigLev - MIN));
@@ -801,16 +801,4 @@ void VALUE::PointsFromVoltage(const float *voltage, int numPoints, Range::E rang
 Range::Range(Chan::E ch)
 {
     value = set.ch[ch].range;
-}
-
-
-int16 RShift::GetA()
-{
-    return set.ch[Chan::A].rShift;
-}
-
-
-int16 RShift::GetB()
-{
-    return set.ch[Chan::B].rShift;
 }

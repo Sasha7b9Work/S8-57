@@ -38,13 +38,13 @@ static bool NeedLoadRShift(Chan::E ch)
     static Range::E prevRanges[Chan::Count] = { Range::Count, Range::Count };
     static int16 prevShift[Chan::Count] = { -1000, -1000 };
 
-    if((prevShift[ch] == RShift::Get(ch)) && (prevRanges[ch] == Range(ch)))
+    if((prevShift[ch] == RShift(ch)) && (prevRanges[ch] == Range(ch)))
     {
         result = false;
     }
 
     prevRanges[ch] = Range(ch);
-    prevShift[ch] = RShift::Get(ch);
+    prevShift[ch] = RShift(ch);
 
     return result;
 }
@@ -61,7 +61,7 @@ void RShift::Load(Chan::E ch)
 
     static const uint16 mask[2] = { 0x2000, 0x6000 };
 
-    int16 shift = Get(ch) + HARDWARE_ZERO;
+    int16 shift = RShift(ch) + HARDWARE_ZERO;
 
     int8 add = set.dbg.addRShift[ch][Range(ch)];
 

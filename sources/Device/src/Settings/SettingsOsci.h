@@ -130,12 +130,6 @@ public:
     static void DrawBoth();
     /// Преобразовать в строку
     static String ToString(int16 rShiftRel, Range::E range, int8 divider);
-    /// Возвращает ссылку на значение
-    static int16 Get(Chan::E ch);
-
-    static int16 GetA();
-
-    static int16 GetB();
 
     static float ToAbs(int16 rShift, Range::E range);
 
