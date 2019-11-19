@@ -84,10 +84,6 @@ struct TBase
 
 struct Range
 {
-    static void Change(Chan::E ch, int16 delta);
-    /// Загружаться эта настройка может только для обоих каналов одновременно
-    static void LoadBoth();
-
     enum E
     {
         _2mV,
@@ -111,6 +107,8 @@ struct Range
     Range(Chan::E ch);
     /// Этот конструктор устанавливает новоез значениеRange
     Range(Chan::E ch, E range);
+
+    operator Range::E() { return value; }
     
     pString Name() const;
 
@@ -118,7 +116,9 @@ struct Range
     /// Возвращает напряжение, соответствующее верхней границе сетки
     static float MaxVoltageOnScreen(Range::E range);
 
-    operator Range::E() { return value; }
+    static void Change(Chan::E ch, int16 delta);
+    /// Загружаться эта настройка может только для обоих каналов одновременно
+    static void LoadBoth();
 };
 
 
