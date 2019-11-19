@@ -232,7 +232,7 @@ void Range::Set(Chan::E ch, E range)
 
 void RShift::Change(Chan::E ch, int16 delta)
 {
-    ::Math::AdditionThisLimitation<int16>(&RShift::Value(ch), RShift::STEP * delta, RShift::MIN, RShift::MAX);
+    ::Math::AdditionThisLimitation<int16>(&RShift::Value(ch), STEP * delta, MIN, MAX);
 
     Load(ch);
 }
@@ -240,8 +240,8 @@ void RShift::Change(Chan::E ch, int16 delta)
 
 void RShift::Set(Chan::E ch, int16 rShift)
 {
-    ::Math::Limitation<int16>(&rShift, MIN, MAX);
-    RShift::Value(ch) = rShift;
+    ::Math::Limitation(&rShift, MIN, MAX);
+    Value(ch) = rShift;
     Load(ch);
 }
 
@@ -314,7 +314,7 @@ float TShift::ToAbs(int tShift, TBase::E tBase)
 
 String RShift::ToString(int16 rShiftRel, Range::E range, int8 _divider)
 {
-    float rShiftVal = RShift::ToAbs(rShiftRel, range) * Divider(static_cast<uint>(_divider)).ToAbs();
+    float rShiftVal = ToAbs(rShiftRel, range) * Divider(static_cast<uint>(_divider)).ToAbs();
     return Voltage(rShiftVal).ToString(true);
 }
 

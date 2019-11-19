@@ -410,7 +410,7 @@ void RShift::Draw(Chan::E ch)
 {
     Color::CHAN[ch].SetAsCurrent();
 
-    int delta = RShift::Value(ch) / RShift::STEP;
+    int delta = Value(ch) / STEP;
 
     if (set.fft.enabled)
     {
