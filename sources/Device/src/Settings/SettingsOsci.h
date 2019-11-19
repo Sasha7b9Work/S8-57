@@ -138,15 +138,17 @@ struct RShift
     /// ¬озвращает ссылку на значение
     static int16 &Value(Chan::E ch);
 
-    static const float absStep[Range::Count];
-
     static float ToAbs(int16 rShift, Range::E range);
+
+    static int16 ToRel(float rShiftAbs, Range::E range);
 
 private:
     /// ќтрисовать маркер вертикального смещени€ на сетке
     static void Draw(Chan::E ch);
     /// Ёто знаение, которое нужно засылать в аппаратную часть, чтобы получить смещение "0"
     static const int16 HARDWARE_ZERO = 500;
+
+    static const float absStep[Range::Count];
 };
 
 /// –ежим канала по входу.

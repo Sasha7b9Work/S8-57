@@ -113,27 +113,6 @@ float MathFPGA::VoltageCursor(float shiftCurU, Range::E range, int16 rShift)
 }
 
 
-int16 MathFPGA::RShift2Rel(float rShiftAbs, Range::E range)
-{
-    int16 retValue = static_cast<int16>(rShiftAbs / RShift::absStep[range]);
-
-    if (retValue < RShift::MIN)
-    {
-        retValue = RShift::MIN;
-    }
-    else if (retValue > RShift::MAX)
-    {
-        retValue = RShift::MAX;
-    }
-    else
-    {
-        // здесь ничего делать не нужно
-    }
-
-    return retValue;
-}
-
-
 float MathFPGA::TimeCursor(float shiftCurT, TBase::E tBase)
 {
     return shiftCurT * absStepTShift[tBase];

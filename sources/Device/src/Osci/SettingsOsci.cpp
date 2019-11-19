@@ -582,3 +582,23 @@ float RShift::ToAbs(int16 rShift, Range::E range)
 {
     return (rShift * absStep[range]);
 }
+
+int16 RShift::ToRel(float rShiftAbs, Range::E range)
+{
+    int16 retValue = static_cast<int16>(rShiftAbs / RShift::absStep[range]);
+
+    if (retValue < RShift::MIN)
+    {
+        retValue = RShift::MIN;
+    }
+    else if (retValue > RShift::MAX)
+    {
+        retValue = RShift::MAX;
+    }
+    else
+    {
+        // здесь ничего делать не нужно
+    }
+
+    return retValue;
+}
