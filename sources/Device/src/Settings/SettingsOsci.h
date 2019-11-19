@@ -147,8 +147,6 @@ private:
     static void Draw(Chan::E ch);
     /// Это знаение, которое нужно засылать в аппаратную часть, чтобы получить смещение "0"
     static const int16 HARDWARE_ZERO = 500;
-
-    static const float absStep[Range::Count];
 };
 
 /// Режим канала по входу.

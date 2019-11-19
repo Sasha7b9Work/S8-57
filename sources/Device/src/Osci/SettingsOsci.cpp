@@ -44,7 +44,7 @@ ranges[Range::Count][2] =
 };
 
 
-const float RShift::absStep[Range::Count] =
+static const float absStepRShift[Range::Count] =
 {
     2e-3F   / 20 / RShift::STEP,
     5e-3F   / 20 / RShift::STEP,
@@ -580,20 +580,20 @@ void TrigLevel::Draw()
 
 float RShift::ToAbs(int16 rShift, Range::E range)
 {
-    return (rShift * absStep[range]);
+    return (rShift * absStepRShift[range]);
 }
 
 int16 RShift::ToRel(float rShiftAbs, Range::E range)
 {
-    int16 retValue = static_cast<int16>(rShiftAbs / RShift::absStep[range]);
+    int16 retValue = static_cast<int16>(rShiftAbs / absStepRShift[range]);
 
-    if (retValue < RShift::MIN)
+    if (retValue < MIN)
     {
-        retValue = RShift::MIN;
+        retValue = MIN;
     }
-    else if (retValue > RShift::MAX)
+    else if (retValue > MAX)
     {
-        retValue = RShift::MAX;
+        retValue = MAX;
     }
     else
     {
