@@ -95,16 +95,16 @@ void TableMeasures::Cell::DrawStringMeasure(int x, int y)
     Color colA = Color::CHAN[Chan::A];
     Color colB = Color::CHAN[Chan::B];
 
-    if (set.meas.source == MeasuresSource::A_B)
+    if (SOURCE_MEASURES_IS_BOTH)
     {
         measureA.Draw(x + 2, y + 11, colA);
         measureB.Draw(x + 2, y + (set.ch[Chan::A].enabled ? 20 : 11), colB); //-V547
     }
-    else if (set.meas.source == MeasuresSource::A)
+    else if (SOURCE_MEASURES_IS_A)
     {
         measureA.Draw(x + 2, y + 11, colA);
     }
-    else if (set.meas.source == MeasuresSource::B)
+    else if (SOURCE_MEASURES_IS_B)
     {
         measureB.Draw(x + 2, y + 11, colB);
     }

@@ -359,15 +359,15 @@ static int DeltaVforLineGrid()
     {
         if (set.meas.number == MeasuresOnDisplay::_1_5)
         {
-            result = set.meas.source == MeasuresSource::A_B ? 55 : 59;
+            result = (SOURCE_MEASURES_IS_BOTH) ? 55 : 59;
         }
         else if (set.meas.number == MeasuresOnDisplay::_2_5)
         {
-            result = (set.meas.source == MeasuresSource::A_B) ? 69 : 51;
+            result = (SOURCE_MEASURES_IS_BOTH) ? 69 : 51;
         }
         else if (set.meas.number == MeasuresOnDisplay::_3_5)
         {
-            result = (set.meas.source == MeasuresSource::A_B) ? 54 : 68;
+            result = (SOURCE_MEASURES_IS_BOTH) ? 54 : 68;
         }
         else
         {
