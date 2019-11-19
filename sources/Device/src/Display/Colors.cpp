@@ -254,7 +254,7 @@ Color Color::Trig()
 {
     Color result = Color::FILL;
 
-    if(set.trig.source == TrigSource::A)
+    if(set.trig.source == Chan::A)
     {
         result = CHAN[Chan::A];
     }

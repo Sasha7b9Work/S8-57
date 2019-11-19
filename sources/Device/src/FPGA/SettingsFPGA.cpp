@@ -25,9 +25,9 @@ void TrigInput::Load()
         {BIN_U8(00000000), BIN_U8(00000110)}  // -V2501      // อื
     };
 
-    GPIO::WritePin(FPin::A1S, _GET_BIT(datas[static_cast<int>(set.trig.input)][static_cast<int>(set.trig.source)], 2));
-    GPIO::WritePin(FPin::A0S, _GET_BIT(datas[static_cast<int>(set.trig.input)][static_cast<int>(set.trig.source)], 1));
-    GPIO::WritePin(FPin::LFS, _GET_BIT(datas[static_cast<int>(set.trig.input)][static_cast<int>(set.trig.source)], 0));
+    GPIO::WritePin(FPin::A1S, _GET_BIT(datas[set.trig.input][set.trig.source], 2));
+    GPIO::WritePin(FPin::A0S, _GET_BIT(datas[set.trig.input][set.trig.source], 1));
+    GPIO::WritePin(FPin::LFS, _GET_BIT(datas[set.trig.input][set.trig.source], 0));
 }
 
 
@@ -173,11 +173,11 @@ void Range::Change(Chan::E ch, int16 delta)
 
     if (delta > 0)
     {
-        ::Math::LimitationIncrease<uint8>(reinterpret_cast<uint8 *>(&set.ch[ch]._range), static_cast<uint8>(Range::Count - 1)); // -V206
+        ::Math::LimitationIncrease<uint8>(reinterpret_cast<uint8 *>(&set.ch[ch].range), static_cast<uint8>(Range::Count - 1)); // -V206
     }
     else
     {
-        ::Math::LimitationDecrease<uint8>(reinterpret_cast<uint8 *>(&set.ch[ch]._range), 0);  // -V206
+        ::Math::LimitationDecrease<uint8>(reinterpret_cast<uint8 *>(&set.ch[ch].range), 0);  // -V206
     }
     Range::LoadBoth();
 
@@ -189,7 +189,7 @@ void Range::Set(Chan::E ch, E range)
 {
     set.disp.SetLastAffectedChannel(ch);
 
-    set.ch[ch]._range = range;
+    set.ch[ch].range = range;
 
     LoadBoth();
 }

@@ -600,7 +600,7 @@ void Trig::DrawOnGrid()
 
         Region(width, height).DrawBounded(x, y, Color::BACK, Color::FILL);
 
-        float trigLevVal = RShift::ToAbs(set.trig.lev[set.trig.source], set.ch[set.trig.source]._range) * Divider(static_cast<uint8>(set.ch[set.trig.source].divider)).ToAbs();
+        float trigLevVal = RShift::ToAbs(set.trig.lev[set.trig.source], set.ch[set.trig.source].range) * Divider(static_cast<uint8>(set.ch[set.trig.source].divider)).ToAbs();
 
         Voltage voltage(trigLevVal);
 
@@ -800,23 +800,23 @@ void VALUE::PointsFromVoltage(const float *voltage, int numPoints, Range::E rang
 
 Range::E Range::Get(Chan::E ch)
 {
-    return set.ch[ch]._range;
+    return set.ch[ch].range;
 }
 
 
 Range::E Range::GetA()
 {
-    return set.ch[Chan::A]._range;
+    return set.ch[Chan::A].range;
 }
 
 
 Range::E Range::GetB()
 {
-    return set.ch[Chan::B]._range;
+    return set.ch[Chan::B].range;
 }
 
 
 Range::Range(Chan::E ch)
 {
-    value = set.ch[ch]._range;
+    value = set.ch[ch].range;
 }

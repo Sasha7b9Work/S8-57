@@ -36,7 +36,7 @@ struct Divider
 struct SettingsChannel
 { //-V802
     int16               rShift;              ///< Сдвиг канала по вертикали
-    Range::E            _range;               ///< Масштаб канала по вертикали
+    Range::E            range;               ///< Масштаб канала по вертикали
     ModeCouple::E       couple;              ///< Связь по входу
     bool                enabled;             ///< Включен/выключен канал
     int8                balanceShiftADC;     ///< Добавочное смещение для балансировки АЦП

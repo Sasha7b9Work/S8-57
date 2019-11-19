@@ -6,12 +6,6 @@
 /// Источник синхронизации
 struct TrigSource
 {
-    enum E
-    {
-        A,    /// Канал 1
-        B     /// Канал 2
-    } value;
-
     static void Load();
 };
 
@@ -66,7 +60,7 @@ struct TrigStartMode
 
 struct SettingsTrig
 {
-    TrigSource::E    source;
+    Chan::E          source;
     TrigInput::E     input;
     TrigPolarity::E  polarity;
     int16            lev[Chan::Count];

@@ -70,7 +70,7 @@ const Settings Settings::defaultSettings =
 
     // Ìåíş ÑÈÍÕĞÎÍÈÇÀÖÈß
     {
-        TrigSource::A,                      // source
+        Chan::A,                            // source
         TrigInput::Full,                    // input
         TrigPolarity::Rising,               // polarity
         { 0, 0},                            // lev[Chan::Count]
