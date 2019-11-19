@@ -119,8 +119,10 @@ struct Range
 
 struct RShift
 {
+private:
     /// Это значение соответствует минимуму смещения
     static const int16 MIN = -480;
+public:
     /// Это значение соотвествует максимуму смещения
     static const int16 MAX = 480;
     /// На столько единиц нужно изменить значение смещения, чтобы маркер смещения по напряжению передвинулся на одну точку.
@@ -141,6 +143,8 @@ struct RShift
     static float ToAbs(int16 rShift, Range::E range);
 
     static int16 ToRel(float rShiftAbs, Range::E range);
+
+    static bool ChangeMath(int delta);
 
 private:
     /// Отрисовать маркер вертикального смещения на сетке

@@ -602,3 +602,42 @@ int16 RShift::ToRel(float rShiftAbs, Range::E range)
 
     return retValue;
 }
+
+
+bool RShift::ChangeMath(int delta)
+{
+    int16 prevRShift = set.math.rShift;
+    int16 rShift = prevRShift;
+
+    if (delta > 0)
+    {
+
+        if (rShift < MAX)
+        {
+            rShift += 4 * STEP;  // -V112
+            LIMIT_ABOVE(rShift, MAX);
+            if (prevRShift < 0 && rShift > 0)
+            {
+                rShift = 0;
+            }
+            set.math.rShift = rShift;
+            return true;
+        }
+    }
+    else
+    {
+        if (rShift > MIN)
+        {
+            rShift -= 4 * STEP; // -V112
+            LIMIT_BELOW(rShift, MIN);
+            if (prevRShift > 0 && rShift < 0)
+            {
+                rShift = 0;
+            }
+            set.math.rShift = rShift;
+            return true;
+        }
+    }
+
+    return false;
+}

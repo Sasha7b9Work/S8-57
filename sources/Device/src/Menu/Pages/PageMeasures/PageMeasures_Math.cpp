@@ -207,35 +207,9 @@ static bool HandlerKey_Function(const KeyEvent &event) // -V2506
 
     if (set.math.modeRegSet == ModeRegSet::RShift)
     {
-        int16 prevRShift = set.math.rShift;
-        int16 rShift = prevRShift;
-        if (delta > 0)
+        if (RShift::ChangeMath(delta))
         {
-            if (rShift < RShift::MAX)
-            {
-                rShift += 4 * RShift::STEP;  // -V112
-                LIMIT_ABOVE(rShift, RShift::MAX);
-                if (prevRShift < 0 && rShift > 0)
-                {
-                    rShift = 0;
-                }
-                Beeper::RegulatorShiftRotate();
-                set.math.rShift = rShift;
-            }
-        }
-        else
-        {
-            if (rShift > RShift::MIN)
-            {
-                rShift -= 4 * RShift::STEP; // -V112
-                LIMIT_BELOW(rShift, RShift::MIN);
-                if (prevRShift > 0 && rShift < 0)
-                {
-                    rShift = 0;
-                }
-                Beeper::RegulatorShiftRotate();
-                set.math.rShift = rShift;
-            }
+            Beeper::RegulatorShiftRotate();
         }
     }
     if (set.math.modeRegSet == ModeRegSet::Range)
