@@ -137,7 +137,7 @@ DEF_GRAPH_BUTTON_HINTS_2( bModeArrows,                                          
 
 static void OnPress_RangeA()
 {
-    set.math.range = ChanA::Range();
+    set.math.range = Range::GetA();
     set.math.divider = static_cast<int8>(set.ch[Chan::A].divider);
 }
 
@@ -160,7 +160,7 @@ DEF_GRAPH_BUTTON( bRangeA,                                                      
 
 static void OnPress_RangeB()
 {
-    set.math.range = ChanB::Range();
+    set.math.range = Range::GetB();
     set.math.divider = static_cast<int8>(set.ch[Chan::B].divider);
 }
 

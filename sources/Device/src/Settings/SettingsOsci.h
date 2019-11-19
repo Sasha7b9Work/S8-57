@@ -109,6 +109,8 @@ struct Range
     static float MaxVoltageOnScreen(Range::E range);
 
     static Range::E Get(Chan::E ch);
+    static Range::E GetA();
+    static Range::E GetB();
 };
 
 
@@ -256,13 +258,3 @@ private:
     static const float voltsInPoint[Range::Count];
 };
 
-
-struct ChanA
-{
-    static Range::E Range();
-};
-
-struct ChanB
-{
-    static Range::E Range();
-};
