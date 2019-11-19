@@ -199,7 +199,10 @@ private:
 
 struct TShift
 {
+    TShift();
     explicit TShift(int tShift);
+
+    operator int() { return shift; }
 
     static int Min();
     static int Zero();

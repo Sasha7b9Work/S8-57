@@ -825,11 +825,17 @@ uint TBase::RandK()
 }
 
 
+TShift::TShift()
+{
+    shift = set.time._shift;
+}
+
+
 TShift::TShift(int tShift)
 {
     LIMITATION(tShift, Min(), Max());
 
-    shift = set.time.shift = tShift;
+    shift = set.time._shift = tShift;
 
     TShift::Load();
 
