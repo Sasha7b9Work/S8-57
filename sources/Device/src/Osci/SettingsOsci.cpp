@@ -751,3 +751,15 @@ uint8 VALUE::FromVoltage(float voltage, Range::E range, int16 rShift)
     ::Math::Limitation<int>(&relValue, 0, 255);
     return static_cast<uint8>(relValue);
 }
+
+
+float VALUE::ToVoltage(uint8 value, Range::E range, int16 rShift)
+{
+    uint8 delta = static_cast<uint8>(value - VALUE::MIN);
+
+    float rShiftAbs = RShift::ToAbs(rShift, range);
+
+    float maxVoltage = Range::MaxVoltageOnScreen(range);
+
+    return delta * voltsInPoint[range] - maxVoltage - rShiftAbs;
+}

@@ -246,5 +246,7 @@ struct VALUE
 
     static uint8 FromVoltage(float voltage, Range::E range, int16 rShift);
 
+    static float ToVoltage(uint8 value, Range::E range, int16 rShift);
+
     static const float voltsInPoint[Range::Count];
 };

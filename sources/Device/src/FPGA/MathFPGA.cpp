@@ -45,18 +45,6 @@ float MathFPGA::TimeCursor(float shiftCurT, TBase::E tBase)
 }
 
 
-float MathFPGA::Point2Voltage(uint8 value, Range::E range, int16 rShift)
-{
-    uint8 delta = static_cast<uint8>(value - VALUE::MIN);
-
-    float rShiftAbs = RShift::ToAbs(rShift, range);
-
-    float maxVoltage = Range::MaxVoltageOnScreen(range);
-
-    return delta * VALUE::voltsInPoint[range] - maxVoltage - rShiftAbs;
-}
-
-
 void MathFPGA::PointsVoltage2Rel(const float *voltage, int numPoints, Range::E range, int16 rShift, uint8 *points)
 {
     float maxVoltOnScreen = Range::MaxVoltageOnScreen(range);
