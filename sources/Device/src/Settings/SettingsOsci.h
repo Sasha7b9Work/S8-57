@@ -198,11 +198,10 @@ struct TShift
 
     static float ToAbs(int tShift, TBase::E tBase);
 
-    static const float absStep[TBase::Count];
-
 private:
     static void LoadReal();
     static void LoadRandomize();
+    static const float absStep[TBase::Count];
 };
 
 struct Trig

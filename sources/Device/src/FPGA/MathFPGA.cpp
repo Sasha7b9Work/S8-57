@@ -80,7 +80,7 @@ float MathFPGA::VoltageCursor(float shiftCurU, Range::E range, int16 rShift)
 
 float MathFPGA::TimeCursor(float shiftCurT, TBase::E tBase)
 {
-    return shiftCurT * TShift::absStep[tBase];
+    return TShift::ToAbs(static_cast<int>(shiftCurT), tBase);
 }
 
 
@@ -187,7 +187,7 @@ static float const *Koeff(int numPoints)
 
 void MathFPGA::CalculateFFT(float *dataR, uint numPoints, float *result, float *freq0, float *density0, float *freq1, float *density1, int *y0, int *y1)
 {
-    float scale = 1.0F / TShift::absStep[set.time.base] / 1024.0F;
+    float scale = 1.0F / TShift::ToAbs(1, set.time.base) / 1024.0F;
 
     float koeff = 1024.0F / numPoints;
 
