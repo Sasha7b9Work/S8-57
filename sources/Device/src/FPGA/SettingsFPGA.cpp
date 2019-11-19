@@ -200,19 +200,18 @@ RShift::RShift(Chan::E ch)
     shift = set.ch[ch].rShift;
 }
 
+RShift::RShift(Chan::E ch, int16 rShift)
+{
+    ::Math::Limitation(&rShift, MIN, MAX);
+    shift = set.ch[ch].rShift = rShift;
+    Load(ch);
+}
+
 
 void RShift::Change(Chan::E ch, int16 delta)
 {
     ::Math::AdditionThisLimitation<int16>(&set.ch[ch].rShift, STEP * delta, MIN, MAX);
 
-    Load(ch);
-}
-
-
-void RShift::Set(Chan::E ch, int16 rShift)
-{
-    ::Math::Limitation(&rShift, MIN, MAX);
-    set.ch[ch].rShift = rShift;
     Load(ch);
 }
 

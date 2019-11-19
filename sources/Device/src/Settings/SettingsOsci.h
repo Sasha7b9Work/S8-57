@@ -119,11 +119,15 @@ struct Range
 struct RShift
 {
 public:
+    /// Этим конструктором можно узнать значение
     RShift(Chan::E ch);
+    /// Этим конструктором можно установить значение
+    RShift(Chan::E ch, int16 rShift);
+
+    operator int16() { return shift; };
+
     /// Изменить на delta
     static void Change(Chan::E ch, int16 delta);
-    /// Установить значение
-    static void Set(Chan::E ch, int16 rShift);
     /// Загрузить в аппаратуру
     static void Load(Chan::E ch);
     /// Отрисовать оба на экране
@@ -136,8 +140,6 @@ public:
     static int16 ToRel(float rShiftAbs, Range::E range);
 
     static bool ChangeMath(int delta);
-
-    operator int16() { return shift; };
 
 private:
     /// Отрисовать маркер вертикального смещения на сетке

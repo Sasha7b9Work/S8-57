@@ -97,8 +97,8 @@ void Recorder::Start()
     Text("Подготовка к записи").DrawInCenterBoundedRect(85, 100, 150, 50, Color::FILL);
     Painter::EndScene();
 
-    RShift::Set(Chan::A, 0);
-    RShift::Set(Chan::B, 0);
+    RShift(Chan::A, 0);
+    RShift(Chan::B, 0);
 
     SECTOR(Sector::_17_RECORDER_1).Erase();
 
@@ -127,8 +127,8 @@ static void StoreOsciSettings()
 
 static void RestoreOsciSettings()
 {
-    RShift::Set(Chan::A, osci.storedRShift[Chan::A]);
-    RShift::Set(Chan::B, osci.storedRShift[Chan::B]);
+    RShift(Chan::A, osci.storedRShift[Chan::A]);
+    RShift(Chan::B, osci.storedRShift[Chan::B]);
 }
 
 

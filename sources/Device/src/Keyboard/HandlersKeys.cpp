@@ -370,13 +370,13 @@ static void ChannelB_Release()
 
 static void ChannelA_Long()
 {
-    RShift::Set(Chan::A, 0);
+    RShift(Chan::A, 0);
 }
 
 
 static void ChannelB_Long()
 {
-    RShift::Set(Chan::B, 0);
+    RShift(Chan::B, 0);
 }
 
 
