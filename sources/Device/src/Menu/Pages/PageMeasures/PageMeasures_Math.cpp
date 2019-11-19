@@ -213,7 +213,7 @@ static bool HandlerKey_Function(const KeyEvent &event) // -V2506
         {
             if (rShift < RShift::MAX)
             {
-                rShift += 4 * STEP_RSHIFT;  // -V112
+                rShift += 4 * RShift::STEP;  // -V112
                 LIMIT_ABOVE(rShift, RShift::MAX);
                 if (prevRShift < 0 && rShift > 0)
                 {
@@ -227,7 +227,7 @@ static bool HandlerKey_Function(const KeyEvent &event) // -V2506
         {
             if (rShift > RShift::MIN)
             {
-                rShift -= 4 * STEP_RSHIFT; // -V112
+                rShift -= 4 * RShift::STEP; // -V112
                 LIMIT_BELOW(rShift, RShift::MIN);
                 if (prevRShift > 0 && rShift < 0)
                 {

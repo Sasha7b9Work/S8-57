@@ -392,7 +392,7 @@ void RShift::Draw(Chan::E ch)
 {
     Color::CHAN[ch].SetAsCurrent();
 
-    int delta = SET_RSHIFT(ch) / STEP_RSHIFT;
+    int delta = SET_RSHIFT(ch) / RShift::STEP;
 
     if (set.fft.enabled)
     {
@@ -457,7 +457,7 @@ void TrigLevel::Load()
 
 void TrigLevel::Change(int16 delta)
 {
-    Math::AdditionThisLimitation(&set.trig.lev[set.trig.source], STEP_TRIGLEV * delta, TrigLevel::MIN, TrigLevel::MAX);
+    Math::AdditionThisLimitation(&set.trig.lev[set.trig.source], RShift::STEP * delta, TrigLevel::MIN, TrigLevel::MAX);
 
     Load();
 

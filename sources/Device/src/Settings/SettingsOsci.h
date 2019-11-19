@@ -5,8 +5,6 @@
 #define SET_RSHIFT_A    (SET_RSHIFT(Chan::A))
 #define SET_RSHIFT_B    (SET_RSHIFT(Chan::B))
 
-/// На столько единиц нужно изменить значение смещения, чтобы маркер смещения по напряжению передвинулся на одну точку.
-#define STEP_RSHIFT     (((RShift::MAX - RShift::MIN) / 24) / 20)
 #define STEP_TRIGLEV    STEP_RSHIFT
 
 
@@ -125,7 +123,8 @@ struct RShift
     static const int16 MIN = -480;
     /// Это значение соотвествует максимуму смещения
     static const int16 MAX = 480;
-    
+    /// На столько единиц нужно изменить значение смещения, чтобы маркер смещения по напряжению передвинулся на одну точку.
+    static const int16 STEP = (((MAX - MIN) / 24) / 20);
     /// Изменить на delta
     static void Change(Chan::E ch, int16 delta);
     /// Установить значение

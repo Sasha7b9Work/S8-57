@@ -197,7 +197,7 @@ void Range::Set(Chan::E ch, E range)
 
 void RShift::Change(Chan::E ch, int16 delta)
 {
-    ::Math::AdditionThisLimitation<int16>(&SET_RSHIFT(ch), STEP_RSHIFT * delta, RShift::MIN, RShift::MAX);
+    ::Math::AdditionThisLimitation<int16>(&SET_RSHIFT(ch), RShift::STEP * delta, RShift::MIN, RShift::MAX);
 
     Load(ch);
 }
