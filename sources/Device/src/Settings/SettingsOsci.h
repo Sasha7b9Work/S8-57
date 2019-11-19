@@ -230,7 +230,5 @@ private:
     static const int16 MIN = -480;
     static const int16 MAX = 480;
     static const int16 HARDWARE_ZERO = 500;
-public:
     static const int16 STEP = (((MAX - MIN) / 24) / 20);
-
 };
