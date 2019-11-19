@@ -38,13 +38,13 @@ static bool NeedLoadRShift(Chan::E ch)
     static Range::E prevRanges[Chan::Count] = { Range::Count, Range::Count };
     static int16 prevShift[Chan::Count] = { -1000, -1000 };
 
-    if((prevShift[ch] == set.ch[ch].rShift) && (prevRanges[ch] == set.ch[ch].range))
+    if((prevShift[ch] == RShift::Value(ch)) && (prevRanges[ch] == set.ch[ch].range))
     {
         result = false;
     }
 
     prevRanges[ch] = set.ch[ch].range;
-    prevShift[ch] = set.ch[ch].rShift;
+    prevShift[ch] = RShift::Value(ch);
 
     return result;
 }

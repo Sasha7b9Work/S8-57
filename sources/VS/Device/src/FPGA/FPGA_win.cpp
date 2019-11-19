@@ -58,7 +58,7 @@ static bool GenerateNormalModeData(Chan::E ch, uint8 data[ENumPointsFPGA::MAX_NU
 
     double frequency = TuneGeneratorDialog::frequency[ch] * MathFPGA::TShift2Abs(1, set.time.base);
 
-    double offset = MathFPGA::RShift2Abs(set.ch[ch].rShift, set.ch[ch].range) * kOffset[set.ch[ch].range];
+    double offset = MathFPGA::RShift2Abs(RShift::Value(ch), set.ch[ch].range) * kOffset[set.ch[ch].range];
 
     if(set.ch[ch].couple == ModeCouple::DC)
     {
