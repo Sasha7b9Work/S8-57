@@ -210,9 +210,6 @@ struct Trig
 
 struct TrigLevel
 {
-    static const int16 MIN = -480;
-    static const int16 MAX = 480;
-    static const int16 HARDWARE_ZERO = 500;
     /// Загрузить уровень синхронизации в аппаратную часть
     static void Load();
     /// Изменить уровень синхронизации на delta единиц
@@ -223,4 +220,9 @@ struct TrigLevel
     static void Find();
 
     static void Draw();
+
+private:
+    static const int16 MIN = -480;
+    static const int16 MAX = 480;
+    static const int16 HARDWARE_ZERO = 500;
 };
