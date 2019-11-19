@@ -60,6 +60,8 @@ struct TBase
     } value;
     explicit TBase(E v) : value(v) {};
 
+    TBase();
+
     pString Name() const;
 
     pString ToString() const;
@@ -72,6 +74,8 @@ struct TBase
     static const E MIN_P2P = _50ms;
     /// Минимальный масштаб по времени, при котором ещё возможно включение режима пикового детектора
     static const E MIN_PEAK_DET = _200ns;
+
+    operator TBase::E() { return value; }
 };
 
 

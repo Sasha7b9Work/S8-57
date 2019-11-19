@@ -56,7 +56,7 @@ static bool GenerateNormalModeData(Chan::E ch, uint8 data[ENumPointsFPGA::MAX_NU
 
     double amplitude = TuneGeneratorDialog::amplitude[ch] / RShift::ToAbs(1, Range(ch)) * 0.6;
 
-    double frequency = TuneGeneratorDialog::frequency[ch] * TShift::ToAbs(1, set.time.base);
+    double frequency = TuneGeneratorDialog::frequency[ch] * TShift::ToAbs(1, TBase());
 
     double offset = RShift::ToAbs(RShift(ch), Range(ch)) * kOffset[Range(ch)];
 
