@@ -25,9 +25,6 @@ static bool CanReadData();
 static void UpdateFPGA();
 
 int Osci::addShift = 0;
-//  2нс 5нс 10нс 20нс 50нс
-const uint Osci::Kr[TBase::Count] = { 50, 20, 10,  5,   2 };
-
 
 
 void Osci::Init()
@@ -121,7 +118,7 @@ static void UpdateFPGA()
 {
     bool needStop = false;
     
-    uint number = (Osci::InModeRandomizer()) ? Osci::Kr[TBase()] : 1;
+    uint number = (Osci::InModeRandomizer()) ? TBase().RandK() : 1;
 
     for (uint i = 0; i < number; i++)
     {
@@ -292,7 +289,7 @@ Osci::StructReadRand Osci::GetInfoForReadRand(int Tsm, const uint8 *address)
 
     if (Tsm != NULL_TSHIFT)
     {
-        result.step = Kr[TBase()];
+        result.step = TBase().RandK();
 
         int index = Tsm - addShift;
 

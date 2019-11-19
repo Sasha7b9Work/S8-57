@@ -34,8 +34,6 @@ struct Osci
 
     static int addShift;
 
-    static const uint Kr[TBase::Count];
-
     /// Структура для хранения информации, необходимой для чтения в режиме рандомизатора
     struct StructReadRand
     {

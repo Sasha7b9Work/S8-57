@@ -58,10 +58,12 @@ struct TBase
         _10s,
         Count
     } value;
-
+    /// Этим констуктором можно установить новое значение
     explicit TBase(E v);
-
+    /// Через этот конструктор можно узнать установленное значение
     TBase();
+
+    operator TBase::E() { return value; }
 
     pString Name() const;
 
@@ -76,7 +78,7 @@ struct TBase
     /// Минимальный масштаб по времени, при котором ещё возможно включение режима пикового детектора
     static const E MIN_PEAK_DET = _200ns;
 
-    operator TBase::E() { return value; }
+    uint RandK();
 };
 
 

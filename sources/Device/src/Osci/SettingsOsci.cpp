@@ -20,6 +20,11 @@
 #endif
 
 
+//                                           2нс 5нс 10нс 20нс 50нс
+static const uint Kr[TBase::Count] = { 50, 20, 10,  5,   2 };
+
+
+
 static const int voltsInPixelInt[] =   // Коэффициент 20000
 {
     2,      // 2
@@ -811,4 +816,10 @@ Range::Range(Chan::E ch, E range)
     value = set.ch[ch].range = range;
 
     LoadBoth();
+}
+
+
+uint TBase::RandK()
+{
+    return Kr[value];
 }

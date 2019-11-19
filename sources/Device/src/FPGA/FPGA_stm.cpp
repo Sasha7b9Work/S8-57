@@ -123,7 +123,7 @@ int FPGA::CalculateShift()
     {
 
         float tin = static_cast<float>(valueADC - min + deltaMIN) / (max - deltaMAX - (min + deltaMIN));
-        int retValue = static_cast<int>(tin * Osci::Kr[TBase()]);
+        int retValue = static_cast<int>(tin * TBase().RandK());
 
         return retValue;
     }
@@ -188,7 +188,7 @@ bool FPGA::ReadDataChanenl(Chan::E ch, uint8 data[ENumPointsFPGA::MAX_NUM])
 
         if (Osci::InModeRandomizer())
         {
-            k = Osci::Kr[TBase()];
+            k = TBase().RandK();
         }
 
         addrRead = static_cast<uint16>(ReadLastRecord(ch) - static_cast<int>(numPoints) / k);
