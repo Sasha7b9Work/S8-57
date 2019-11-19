@@ -370,7 +370,7 @@ float CalculateVoltageRMS(Chan::E ch)
 
     if(set.meas.marked == TypeMeasure::VoltageRMS)
     {
-        Measure::SetMarkerVoltage(ch, 0, MathFPGA::Voltage2Point(rms, range, rShift));
+        Measure::SetMarkerVoltage(ch, 0, VALUE::FromVoltage(rms, range, rShift));
     }
 
     return rms;
@@ -1493,7 +1493,7 @@ static void CountedToCurrentRShift(Chan::E ch, uint numBytes)
         for(uint i = 0; i < numBytes; i++)
         {
             float voltage = MathFPGA::Point2Voltage(IN(ch)[i], rangeDS, shiftDS);
-            OUT(ch)[i] = MathFPGA::Voltage2Point(voltage, rangeSET, shiftSET);
+            OUT(ch)[i] = VALUE::FromVoltage(voltage, rangeSET, shiftSET);
         }
     }
 }

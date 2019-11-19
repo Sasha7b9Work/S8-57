@@ -243,4 +243,8 @@ struct VALUE
     static const uint8 NONE = 0;
 
     static void PointsToVoltage(const uint8 *points, uint numPoints, Range::E range, int16 rShift, float *voltage);
+
+    static uint8 FromVoltage(float voltage, Range::E range, int16 rShift);
+
+    static const float voltsInPoint[Range::Count];
 };

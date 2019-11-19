@@ -38,6 +38,24 @@ static const int voltsInPixelInt[] =   // Коэффициент 20000
 };
 
 
+const float VALUE::voltsInPoint[Range::Count] =
+{
+    2e-3F / 20 * Grid::Height() / (VALUE::MAX - VALUE::MIN),    // 2mV
+    5e-3F / 20 * Grid::Height() / (VALUE::MAX - VALUE::MIN),    // 5mV
+    10e-3F / 20 * Grid::Height() / (VALUE::MAX - VALUE::MIN),    // 10mV
+    20e-3F / 20 * Grid::Height() / (VALUE::MAX - VALUE::MIN),    // 20mV
+    50e-3F / 20 * Grid::Height() / (VALUE::MAX - VALUE::MIN),    // 50mV
+    100e-3F / 20 * Grid::Height() / (VALUE::MAX - VALUE::MIN),    // 100mV
+    200e-3F / 20 * Grid::Height() / (VALUE::MAX - VALUE::MIN),    // 200mV
+    500e-3F / 20 * Grid::Height() / (VALUE::MAX - VALUE::MIN),    // 500mV
+    1.0F / 20 * Grid::Height() / (VALUE::MAX - VALUE::MIN),    // 1V
+    2.0F / 20 * Grid::Height() / (VALUE::MAX - VALUE::MIN),    // 2V
+    5.0F / 20 * Grid::Height() / (VALUE::MAX - VALUE::MIN),    // 5V
+    10.0F / 20 * Grid::Height() / (VALUE::MAX - VALUE::MIN),    // 10V
+    20.0F / 20 * Grid::Height() / (VALUE::MAX - VALUE::MIN)     // 20V
+};
+
+
 // Массив структур описаний масштабов по напряжению.
 static const struct RangeStruct
 {
@@ -724,4 +742,12 @@ float Range::MaxVoltageOnScreen(Range::E range)
     };
 
     return table[range] * 5.0F;
+}
+
+
+uint8 VALUE::FromVoltage(float voltage, Range::E range, int16 rShift)
+{
+    int relValue = static_cast<int>((voltage + Range::MaxVoltageOnScreen(range) + RShift::ToAbs(rShift, range)) / voltsInPoint[range] + VALUE::MIN);
+    ::Math::Limitation<int>(&relValue, 0, 255);
+    return static_cast<uint8>(relValue);
 }

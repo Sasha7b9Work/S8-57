@@ -9,24 +9,6 @@
 
 /// Столько вольт содержится в одной точке сигнала по вертикали
 
-//DEF__STRUCT(StructInPoints, float) voltsInPoint[Range::Count] =
-static const float voltsInPoint[Range::Count] =
-{
-    2e-3F   / 20 * Grid::Height() / (VALUE::MAX - VALUE::MIN),    // 2mV
-    5e-3F   / 20 * Grid::Height() / (VALUE::MAX - VALUE::MIN),    // 5mV
-    10e-3F  / 20 * Grid::Height() / (VALUE::MAX - VALUE::MIN),    // 10mV
-    20e-3F  / 20 * Grid::Height() / (VALUE::MAX - VALUE::MIN),    // 20mV
-    50e-3F  / 20 * Grid::Height() / (VALUE::MAX - VALUE::MIN),    // 50mV
-    100e-3F / 20 * Grid::Height() / (VALUE::MAX - VALUE::MIN),    // 100mV
-    200e-3F / 20 * Grid::Height() / (VALUE::MAX - VALUE::MIN),    // 200mV
-    500e-3F / 20 * Grid::Height() / (VALUE::MAX - VALUE::MIN),    // 500mV
-    1.0F    / 20 * Grid::Height() / (VALUE::MAX - VALUE::MIN),    // 1V
-    2.0F    / 20 * Grid::Height() / (VALUE::MAX - VALUE::MIN),    // 2V
-    5.0F    / 20 * Grid::Height() / (VALUE::MAX - VALUE::MIN),    // 5V
-    10.0F   / 20 * Grid::Height() / (VALUE::MAX - VALUE::MIN),    // 10V
-    20.0F   / 20 * Grid::Height() / (VALUE::MAX - VALUE::MIN)     // 20V
-};
-
 /// Столько вольт в одной точке экрана
 static const float voltsInPixel[] =
 {
@@ -62,13 +44,6 @@ float MathFPGA::TimeCursor(float shiftCurT, TBase::E tBase)
     return TShift::ToAbs(static_cast<int>(shiftCurT), tBase);
 }
 
-uint8 MathFPGA::Voltage2Point(float voltage, Range::E range, int16 rShift)
-{
-    int relValue = static_cast<int>((voltage + Range::MaxVoltageOnScreen(range) + RShift::ToAbs(rShift, range)) / voltsInPoint[range] + VALUE::MIN);
-    ::Math::Limitation<int>(&relValue, 0, 255);
-    return static_cast<uint8>(relValue);
-}
-
 
 float MathFPGA::Point2Voltage(uint8 value, Range::E range, int16 rShift)
 {
@@ -78,7 +53,7 @@ float MathFPGA::Point2Voltage(uint8 value, Range::E range, int16 rShift)
 
     float maxVoltage = Range::MaxVoltageOnScreen(range);
 
-    return delta * voltsInPoint[range] - maxVoltage - rShiftAbs;
+    return delta * VALUE::voltsInPoint[range] - maxVoltage - rShiftAbs;
 }
 
 
@@ -86,7 +61,7 @@ void MathFPGA::PointsVoltage2Rel(const float *voltage, int numPoints, Range::E r
 {
     float maxVoltOnScreen = Range::MaxVoltageOnScreen(range);
     float rShiftAbs = RShift::ToAbs(rShift, range);
-    float voltInPixel = 1.0F / (voltsInPoint[range] / ((VALUE::MAX - VALUE::MIN) / 200.0F));
+    float voltInPixel = 1.0F / (VALUE::voltsInPoint[range] / ((VALUE::MAX - VALUE::MIN) / 200.0F));
 
     float add = maxVoltOnScreen + rShiftAbs;
 
