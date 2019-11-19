@@ -401,7 +401,7 @@ static uint8 ValueForRange(Chan::E ch) // -V2506
         return datas[ModeCouple::GND];
     }
 
-    return static_cast<uint8>(values[Range::Get(ch)][ch] | datas[couple]);
+    return static_cast<uint8>(values[Range(ch)][ch] | datas[couple]);
 }
 
 
@@ -600,7 +600,7 @@ void Trig::DrawOnGrid()
 
         Region(width, height).DrawBounded(x, y, Color::BACK, Color::FILL);
 
-        float trigLevVal = RShift::ToAbs(set.trig.lev[set.trig.source], Range::Get(set.trig.source)) * Divider(static_cast<uint8>(set.ch[set.trig.source].divider)).ToAbs();
+        float trigLevVal = RShift::ToAbs(set.trig.lev[set.trig.source], Range(set.trig.source)) * Divider(static_cast<uint8>(set.ch[set.trig.source].divider)).ToAbs();
 
         Voltage voltage(trigLevVal);
 
@@ -795,12 +795,6 @@ void VALUE::PointsFromVoltage(const float *voltage, int numPoints, Range::E rang
 
         points[i] = static_cast<uint8>(value);
     }
-}
-
-
-Range::E Range::Get(Chan::E ch)
-{
-    return set.ch[ch].range;
 }
 
 

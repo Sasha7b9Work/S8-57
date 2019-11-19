@@ -218,7 +218,7 @@ static void WriteTextVoltage(Chan::E ch, int x, int y)
 
     bool inverse = set.ch[ch].inverse;
     //int8 divider = (int8)SET_DIVIDER(ch);
-    Range::E range = Range::Get(ch);
+    Range::E range = Range(ch);
 
     const int widthField = 91;
     const int heightField = 8;
@@ -402,8 +402,8 @@ static void WriteCursors()
             CursorsMeasurements::Voltage(source, 0).Draw(x, y1);
             CursorsMeasurements::Voltage(source, 1).Draw(x, y2);
             x = 49;
-            float pos0 = MathFPGA::VoltageCursor(CursorsMeasurements::PosU(source, 0), Range::Get(source), RShift::Get(source));
-            float pos1 = MathFPGA::VoltageCursor(CursorsMeasurements::PosU(source, 1), Range::Get(source), RShift::Get(source));
+            float pos0 = MathFPGA::VoltageCursor(CursorsMeasurements::PosU(source, 0), Range(source), RShift::Get(source));
+            float pos1 = MathFPGA::VoltageCursor(CursorsMeasurements::PosU(source, 1), Range(source), RShift::Get(source));
             float delta = std::fabsf(pos1 - pos0) * DIVIDER_ABS(source);
             String(":dU=").Draw(x, y1);
             Voltage(delta).ToString(false).Draw(x + 17, y1);

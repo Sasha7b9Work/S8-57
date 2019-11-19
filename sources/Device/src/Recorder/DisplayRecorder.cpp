@@ -121,7 +121,7 @@ static char *VoltageCursor(Chan::E ch, int numCur, char buffer[20])
 
     uint8 value = static_cast<uint8>((point.Min(ch) + point.Max(ch)) / 2);
 
-    float voltage = VALUE::ToVoltage(value, Range::Get(ch), 0);
+    float voltage = VALUE::ToVoltage(value, Range(ch), 0);
 
     std::strcpy(buffer, Voltage(voltage).ToString(false).CString());
 

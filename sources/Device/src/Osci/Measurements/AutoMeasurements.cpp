@@ -1482,7 +1482,7 @@ static void CountedToCurrentRShift(Chan::E ch, uint numBytes)
     Range::E rangeDS = RANGE_DS(ch);
 
     int16 shiftSET = RShift::Get(ch);
-    Range::E rangeSET = Range::Get(ch);
+    Range::E rangeSET = Range(ch);
 
     if((shiftDS == shiftSET) && (rangeDS == rangeSET))
     {
