@@ -13,5 +13,3 @@ type ..\..\Device\Device57.out
 
 copy ..\..\Device\S8-57.bin h:\
 copy ..\..\Device\S8-57.bin i:\
-
-@echo %TIME%   Complete

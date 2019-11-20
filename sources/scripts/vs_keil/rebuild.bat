@@ -31,7 +31,6 @@ echo .
 goto Exit
 
 :Success
-echo %TIME%   Complete
 
 :Exit
 

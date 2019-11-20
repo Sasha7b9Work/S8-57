@@ -8,5 +8,3 @@ call rebuild_device.bat
 call rebuild_panel.bat
 
 call rebuild_loader.bat
-
-@echo %TIME%   Complete

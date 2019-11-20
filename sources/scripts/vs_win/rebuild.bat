@@ -12,7 +12,6 @@ if %BUILD_STATUS%==0 goto Success
 goto Exit
 
 :Success
-@echo %TIME%   Complete
 
 :Exit
 

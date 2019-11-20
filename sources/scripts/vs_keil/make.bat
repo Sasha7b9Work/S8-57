@@ -7,5 +7,3 @@ cd ../..
 rmdir "generated/Keil" /s /q
 cd scripts/vs_keil
 cmake ../../CMakeLists.txt -B../../generated/Keil -DCMAKE_SYSTEM_VERSION=10.0.17763.0 -G "Visual Studio 16 2019" -A Win32
-
-@echo %TIME%   Complete

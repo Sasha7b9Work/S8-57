@@ -10,5 +10,3 @@ echo ERROR!!! Loader    failed!!!
 type ..\..\DeviceLoader\DeviceLoader.out
 
 :Exit
-
-@echo %TIME%   Complete

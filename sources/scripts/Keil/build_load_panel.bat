@@ -3,5 +3,3 @@
 call build_panel.bat
 
 call load_panel.bat
-
-@echo %TIME%   Complete...
