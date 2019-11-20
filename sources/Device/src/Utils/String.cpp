@@ -16,8 +16,10 @@ String::String() : buffer(nullptr)
 }
 
 
-String::String(const String &rhs) : buffer(0)
+String::String(const String &rhs) : buffer(nullptr)
 {
+    Set(TypeConversionString::None, "");
+
     if (Allocate(std::strlen(rhs.CString()) + 1))
     {
         std::strcpy(buffer, rhs.CString());
@@ -25,8 +27,10 @@ String::String(const String &rhs) : buffer(0)
 }
 
 
-String::String(char symbol) : buffer(0)
+String::String(char symbol) : buffer(nullptr)
 {
+    Set(TypeConversionString::None, "");
+
     if (Allocate(2))
     {
         buffer[0] = symbol;
@@ -35,8 +39,10 @@ String::String(char symbol) : buffer(0)
 }
 
 
-String::String(const char *format, ...)
+String::String(const char *format, ...) : buffer(nullptr)
 {
+    Set(TypeConversionString::None, "");
+
     if (format == nullptr)
     {
         Allocate(1);
@@ -118,7 +124,7 @@ void String::Append(const char *str)
 
 String::~String()
 {
-    Free();
+    std::free(buffer);
 }
 
 
@@ -141,6 +147,7 @@ char *String::CString() const
 
 bool String::Allocate(uint size)
 {
+    std::free(buffer);
     buffer = static_cast<char *>(std::malloc(size));
     if (buffer)
     {
