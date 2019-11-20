@@ -25,6 +25,8 @@ struct Device
     static void Update();
 
     static void Reset();
+    /// Обработать поступившую команду SCPI
+    static void ProcessDataSCPI(const char *data);
 
 
     struct State

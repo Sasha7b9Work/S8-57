@@ -1,5 +1,7 @@
 #include "defines.h"
 #include "ConsoleSCPI.h"
+#include "device.h"
+
 #pragma warning(push, 0)
 #include <wx/wx.h>
 #pragma warning(pop)
@@ -21,8 +23,8 @@ static ConsoleSCPI *TheConsole = nullptr;
 ConsoleSCPI::ConsoleSCPI(wxFrame *parent) : wxFrame(parent, wxID_ANY, wxT("SCPI"))
 {
     text = new wxTextCtrl(this, wxID_ANY, wxEmptyString, wxDefaultPosition, { 600, 300 }, wxTE_MULTILINE | wxTE_READONLY);
-    text->WriteText("String 1\n");
-    text->WriteText("Строка 2\n");
+    AddLine("String 1");
+    AddLine("Строка 2");
 
     line = new wxTextCtrl(this, ID_LINE, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxTE_PROCESS_ENTER);
     line->SetFocus();
@@ -81,5 +83,13 @@ void ConsoleSCPI::Open(wxFrame *parent)
 
 void ConsoleSCPI::OnTextEnter(wxCommandEvent &)
 {
+    Device::ProcessDataSCPI(line->GetLineText(0).mb_str());
+    line->Clear();
+}
 
+
+void ConsoleSCPI::AddLine(const wxString &str)
+{
+    text->WriteText(str);
+    text->WriteText(wxT("\n"));
 }

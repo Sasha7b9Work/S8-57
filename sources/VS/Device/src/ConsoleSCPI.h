@@ -9,6 +9,8 @@ class ConsoleSCPI : public wxFrame
 public:
     static void Open(wxFrame *parent);
 
+    static void AddLine(const wxString &line);
+
 private:
     ConsoleSCPI(wxFrame *parent);
 
