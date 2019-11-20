@@ -816,9 +816,9 @@
               <FilePath>.\src\Hardware\VCP.h</FilePath>
             </File>
             <File>
-              <FileName>VCP.cpp</FileName>
+              <FileName>VCP_stm.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\Hardware\VCP.cpp</FilePath>
+              <FilePath>.\src\Hardware\VCP_stm.cpp</FilePath>
             </File>
           </Files>
         </Group>
