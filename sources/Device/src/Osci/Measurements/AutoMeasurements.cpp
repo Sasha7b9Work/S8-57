@@ -1334,21 +1334,21 @@ String Measure::GetStringMeasure(Chan::E ch, char* buffer, int lenBuf)
 
 char* AutoMeasurements::Freq2String(float freq, bool, char buffer[20])
 {
-    std::strcpy(buffer, Frequency(freq).ToString().CString());
+    std::strcpy(buffer, Frequency(freq).ToString().c_str());
     return buffer;
 }
 
 
 char* Time2String(float time, bool always, char buffer[20])
 {
-    std::strcpy(buffer, Time(time).ToString(always).CString());
+    std::strcpy(buffer, Time(time).ToString(always).c_str());
     return buffer;
 }
 
 
 char* Voltage2String(float voltage, bool always, char buffer[20])
 {
-    std::strcpy(buffer, Voltage(voltage).ToString(always).CString());
+    std::strcpy(buffer, Voltage(voltage).ToString(always).c_str());
     return buffer;
 }
 
@@ -1361,7 +1361,7 @@ char* Phase2String(float phase, bool, char buffer[20])
 
 char* AutoMeasurements::Float2String(float value, bool always, char buffer[20])
 {
-    std::strcpy(buffer, Float(value).ToString(always, 4).CString());
+    std::strcpy(buffer, Float(value).ToString(always, 4).c_str());
     return buffer;
 }
 

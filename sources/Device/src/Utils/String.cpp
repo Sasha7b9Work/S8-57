@@ -20,9 +20,9 @@ String::String(const String &rhs) : buffer(nullptr)
 {
     Set(TypeConversionString::None, "");
 
-    if (Allocate(std::strlen(rhs.CString()) + 1))
+    if (Allocate(std::strlen(rhs.c_str()) + 1))
     {
-        std::strcpy(buffer, rhs.CString());
+        std::strcpy(buffer, rhs.c_str());
     }
 }
 
@@ -113,9 +113,9 @@ void String::Append(const char *str)
 
     Free();
 
-    Allocate(std::strlen(old.CString()) + std::strlen(str) + 1);
+    Allocate(std::strlen(old.c_str()) + std::strlen(str) + 1);
 
-    std::strcpy(buffer, old.CString());
+    std::strcpy(buffer, old.c_str());
     std::strcat(buffer, str);
 }
 
@@ -137,7 +137,7 @@ void String::Free()
 }
 
 
-char *String::CString() const
+char *String::c_str() const
 {
     return buffer;
 }
@@ -162,7 +162,7 @@ bool String::Allocate(uint size)
 int String::Draw(int x, int y, Color color) const
 {
     color.SetAsCurrent();
-    return Text(CString()).Draw(x, y);
+    return Text(c_str()).Draw(x, y);
 }
 
 
@@ -201,7 +201,7 @@ void String::RemoveFromBegin(uint numSymbols)
 
         Allocate(old.Size() - numSymbols + 1);
 
-        std::strcpy(buffer, old.CString() + numSymbols);
+        std::strcpy(buffer, old.c_str() + numSymbols);
     }
 }
 

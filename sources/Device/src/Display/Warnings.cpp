@@ -38,7 +38,7 @@ static bool BackMessagesSame()
         return false;
     }
 
-    return (std::strcmp(warnings[warnings.Size() - 2].message.CString(), warnings[warnings.Size() - 1].message.CString()) == 0);
+    return (std::strcmp(warnings[warnings.Size() - 2].message.c_str(), warnings[warnings.Size() - 1].message.c_str()) == 0);
 }
 
 
@@ -100,7 +100,7 @@ WarningStruct::WarningStruct(const char *msg)
 
 WarningStruct::WarningStruct(const WarningStruct &s)
 {
-    message.Set(TypeConversionString::None, s.message.CString());
+    message.Set(TypeConversionString::None, s.message.c_str());
     timeStart = s.timeStart;
 }
 
@@ -108,7 +108,7 @@ WarningStruct::WarningStruct(const WarningStruct &s)
 WarningStruct &WarningStruct::operator=(const WarningStruct &s)
 {
     timeStart = s.timeStart;
-    message.Set(TypeConversionString::None, s.message.CString());
+    message.Set(TypeConversionString::None, s.message.c_str());
     return *this;
 }
 
@@ -131,7 +131,7 @@ int WarningStruct::Height(int) const
 
 void WarningStruct::Draw(int x, int y) const
 {
-    int width = Font::GetLengthText(message.CString());
+    int width = Font::GetLengthText(message.c_str());
 
     Region(width + 3, 10).DrawBounded(x, y, Color::FLASH_10, Color::FILL);
 

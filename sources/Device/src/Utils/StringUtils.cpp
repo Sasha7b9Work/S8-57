@@ -59,7 +59,7 @@ bool String2Int(char *str, int *value)
 char *SU::Db2String(float value, int numDigits, char bufferOut[20])
 {
     bufferOut[0] = 0;
-    std::strcat(bufferOut, Float(value).ToString(false, numDigits).CString());
+    std::strcat(bufferOut, Float(value).ToString(false, numDigits).c_str());
     std::strcat(bufferOut, "Да");
     return bufferOut;
 }

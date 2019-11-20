@@ -609,7 +609,7 @@ void Trig::DrawOnGrid()
 
         Voltage voltage(trigLevVal);
 
-        String("Синхр %s", voltage.ToString(true).CString()).Draw(x + 7, y + 5, Color::FILL);
+        String("Синхр %s", voltage.ToString(true).c_str()).Draw(x + 7, y + 5, Color::FILL);
     }
 }
 

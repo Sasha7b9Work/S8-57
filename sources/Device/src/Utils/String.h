@@ -23,7 +23,7 @@ public:
 
     void Set(TypeConversionString::E conv, const char *format, ...);
 
-    char *CString() const;
+    char *c_str() const;
     /// Отобразить текст на экране в заданнх координатах
     int Draw(int x, int y, Color color = Color::NUMBER) const;
 

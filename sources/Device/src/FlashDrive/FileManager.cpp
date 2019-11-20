@@ -379,7 +379,7 @@ bool FileManager::GetNameForNewFile(char name[255]) //-V2506
                 if (*ch == 0x07)
                 {
                     number++;
-                    char *strNumber = Integer(number).ToString(false, *(ch + 1)).CString();
+                    char *strNumber = Integer(number).ToString(false, *(ch + 1)).c_str();
                     std::strcpy(wr, strNumber);
                     wr += std::strlen(strNumber);
                     ch++;
@@ -388,7 +388,7 @@ bool FileManager::GetNameForNewFile(char name[255]) //-V2506
                 {
                     if (*ch >= 0x01 && *ch <= 0x06)
                     {
-                        char *strValue = Integer(static_cast<int>(values[*ch])).ToString(false, 2).CString();
+                        char *strValue = Integer(static_cast<int>(values[*ch])).ToString(false, 2).c_str();
                         std::strcpy(wr, strValue);
                         wr += std::strlen(strValue);
                     }

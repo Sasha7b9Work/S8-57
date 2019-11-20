@@ -93,7 +93,7 @@ static char *DeltaTime(char buffer[20])
 {
     float delta = std::fabsf(static_cast<float>(posCursor[0] - posCursor[1])) * RecorderScaleX::Current().TimeForPointMS() / 1000.0F;
 
-    std::strcpy(buffer, Time(delta).ToString(false).CString());
+    std::strcpy(buffer, Time(delta).ToString(false).c_str());
 
     return buffer;
 }
@@ -105,7 +105,7 @@ static char *TimeCursor(int numCur, char buffer[20])
 
     float time = (static_cast<float>(numPoint) * RecorderScaleX::Current().TimeForPointMS()) / 1000.0F;
 
-    std::strcpy(buffer, Time(time).ToString(false).CString());
+    std::strcpy(buffer, Time(time).ToString(false).c_str());
 
     return buffer;
 }
@@ -123,7 +123,7 @@ static char *VoltageCursor(Chan::E ch, int numCur, char buffer[20])
 
     float voltage = VALUE::ToVoltage(value, Range(ch), 0);
 
-    std::strcpy(buffer, Voltage(voltage).ToString(false).CString());
+    std::strcpy(buffer, Voltage(voltage).ToString(false).c_str());
 
     return buffer;
 }

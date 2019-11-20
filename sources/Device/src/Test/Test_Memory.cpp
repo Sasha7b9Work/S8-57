@@ -30,7 +30,7 @@ bool Test::RAM::Test()
 
         if (i % 50 == 0)
         {
-            line = Display::AddMessage(String("Запись %d из %d, %3.1f%%", i, numRecord, 100.0F * i / numRecord).CString(), line);
+            line = Display::AddMessage(String("Запись %d из %d, %3.1f%%", i, numRecord, 100.0F * i / numRecord).c_str(), line);
         }
 
         DataSettings ds;
@@ -72,7 +72,7 @@ bool Test::ROM::Data::Test()
     {
         static int num = -1;
 
-        num = Display::AddMessage(String("Запись %d из %d, %3.1f%%", i, numRecord, 100.0F * i / numRecord).CString(), num);
+        num = Display::AddMessage(String("Запись %d из %d, %3.1f%%", i, numRecord, 100.0F * i / numRecord).c_str(), num);
 
         uint numInROM = std::rand() % ::ROM::Data::MAX_NUM_SAVED_WAVES;
 

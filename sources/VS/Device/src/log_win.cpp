@@ -62,7 +62,7 @@ void Log::Message(const char *f, int line, const char *message)
 {
     String msg("%s %d %s", f, line, message);
 
-    Console::AddString(msg.CString());
+    Console::AddString(msg.c_str());
 
-    AddToSystemConsole(msg.CString());
+    AddToSystemConsole(msg.c_str());
 }

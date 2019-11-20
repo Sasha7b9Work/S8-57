@@ -36,7 +36,7 @@ void GovernorColor::DrawOpened(int x, int y) const
     Rectangle(width, height).Draw(x, y, ColorFrame());
     Region(width - 2, height / 2 - 2).Fill(x + 1, y + 1, ColorTitleBackground());
     HLine(width).Draw(x, y + Height() / 2 + 2, ColorFrame());
-    Text(Title().CString()).DrawInCenterRect(x +  1, y - 1, width, Height() / 2 + 2, ColorTitleText());
+    Text(Title().c_str()).DrawInCenterRect(x +  1, y - 1, width, Height() / 2 + 2, ColorTitleText());
     DrawValue(x + 1, y + 14);
 }
 
@@ -266,7 +266,7 @@ void Button::Draw(int x, int y, bool) const
 {
     Region(Width() - 5, Height() - 4).Fill(x + 2, y + 3, ColorTitleBackground());
 
-    Text(Title().CString()).DrawInCenterRect(x + 2, y, Width(), Height(), ColorTitleText());
+    Text(Title().c_str()).DrawInCenterRect(x + 2, y, Width(), Height(), ColorTitleText());
 }
 
 
@@ -306,7 +306,7 @@ void Page::Draw(int x, int y, bool opened) const
     {
         Region(Width() - 5, Height() - 4).Fill(x + 2, y + 3, ColorTitleBackground());
 
-        Text(Title().CString()).DrawInCenterRect(x, y + 1, Width(), Height(), ColorTitleText());
+        Text(Title().c_str()).DrawInCenterRect(x, y + 1, Width(), Height(), ColorTitleText());
     }
 }
 
@@ -333,7 +333,7 @@ void Page::DrawTitle(int y) const
 
     int delta = condDrawRSet ? -10 : 0;
 
-    Text(Title().CString()).DrawInCenterRect(0, y, Menu::Title::WIDTH + 2 + delta, Menu::Title::HEIGHT, ColorTitleText());
+    Text(Title().c_str()).DrawInCenterRect(0, y, Menu::Title::WIDTH + 2 + delta, Menu::Title::HEIGHT, ColorTitleText());
 
     Color::GRAY_75.SetAsCurrent();
     DrawPagesUGO(Menu::Title::WIDTH - 3, y + Menu::Title::HEIGHT);

@@ -31,7 +31,7 @@ void SCPI::AppendNewData(const char *buffer, uint)
 {
     data.Append(buffer);
 
-    SU::ToUpper(data.CString());
+    SU::ToUpper(data.c_str());
 }
 
 
@@ -41,7 +41,7 @@ void SCPI::Update()
 
     ErrorSCPI error(ErrorSCPI::Success);
 
-    const char *end = Process(data.CString(), head, &error);
+    const char *end = Process(data.c_str(), head, &error);
 
     if (end)
     {
@@ -139,14 +139,14 @@ void ErrorSCPI::SendMessage()
     if (state == UnknownCommand)
     {
         VCP::SendStringAsynch("UNKNOWN COMMAND");
-        VCP::SendStringAsynch(additionalMessage.CString());
+        VCP::SendStringAsynch(additionalMessage.c_str());
     }
 }
 
 
 static void RemoveFromBegin(const char *begin)
 {
-    data.RemoveFromBegin(static_cast<uint>(begin - data.CString()));
+    data.RemoveFromBegin(static_cast<uint>(begin - data.c_str()));
 }
 
 

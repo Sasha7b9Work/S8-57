@@ -174,7 +174,7 @@ String CursorsMeasurements::PercentsU(Chan::E source)
     std::memcpy(&dPerc, &set.curs.deltaU100percents[source], sizeof(float));
 
     float dValue = std::fabsf(PosU(source, 0) - PosU(source, 1));
-    return String("%s%%", Float(dValue / dPerc * 100.0F).ToString(false, 5).CString());
+    return String("%s%%", Float(dValue / dPerc * 100.0F).ToString(false, 5).c_str());
 }
 
 
@@ -184,5 +184,5 @@ String CursorsMeasurements::PercentsT(Chan::E source)
     std::memcpy(&dPerc, &set.curs.deltaT100percents[source], sizeof(float));
 
     float dValue = std::fabsf(PosT(source, 0) - PosT(source, 1));
-    return String("%s%%", Float(dValue / dPerc * 100.0F).ToString(false, 6).CString());
+    return String("%s%%", Float(dValue / dPerc * 100.0F).ToString(false, 6).c_str());
 }

@@ -70,7 +70,7 @@ void DisplayOsci::HiPart::Draw()
         }
         else
         {
-            std::strcat(mesFreq, Frequency(freq).ToString().CString());
+            std::strcat(mesFreq, Frequency(freq).ToString().c_str());
         }
 
         String(mesFreq).Draw(x + 3, y0 + 1, Color::FILL); //-V2007
@@ -131,7 +131,7 @@ static int DrawMainParameters(int _x, int _y)
 
     buffer[0] = 'a';
     buffer[1] = 0;
-    std::snprintf(buffer, SIZE, "\xa5%s", TShift::ToString(TBase()).CString());
+    std::snprintf(buffer, SIZE, "\xa5%s", TShift::ToString(TBase()).c_str());
     String(buffer).Draw(x + 35, y0);
 
     buffer[0] = 0;
@@ -234,7 +234,7 @@ static void WriteTextVoltage(Chan::E ch, int x, int y)
     String(buffer).Draw(x + 1, y, colorDraw);
 
     char bufferTemp[SIZE];
-    std::snprintf(bufferTemp, SIZE, "\xa5%s", RShift::ToString(RShift(ch), range, static_cast<int8>(set.ch[ch].divider)).CString());
+    std::snprintf(bufferTemp, SIZE, "\xa5%s", RShift::ToString(RShift(ch), range, static_cast<int8>(set.ch[ch].divider)).c_str());
     String(bufferTemp).Draw(x + 46, y);
 }
 

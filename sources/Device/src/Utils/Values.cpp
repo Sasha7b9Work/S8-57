@@ -154,7 +154,7 @@ static char *FrequencyToString(float freq, char bufferOut[20]) //-V2506
         suffix = "√ц";
     }
 
-    std::sprintf(bufferOut, "%s%s", Float(freq).ToString(false, 4).CString(), suffix);
+    std::sprintf(bufferOut, "%s%s", Float(freq).ToString(false, 4).c_str(), suffix);
     return bufferOut;
 }
 
@@ -187,7 +187,7 @@ char *Frequency::ToStringAccuracy(char bufferOut[20], int numDigits) const //-V2
         // тут ничего не делаем
     }
 
-    std::strcat(bufferOut, Float(freq).ToString(false, numDigits).CString()); //-V2513
+    std::strcat(bufferOut, Float(freq).ToString(false, numDigits).c_str()); //-V2513
     std::strcat(bufferOut, suffix); //-V2513
     return bufferOut;
 }
@@ -242,7 +242,7 @@ char *TimeToString(float time, bool alwaysSign, char buffer[20]) //-V2506
         num = 3;
     }
 
-    std::strcpy(buffer, Float(time * factor[num]).ToString(alwaysSign, 4).CString()); //-V2513
+    std::strcpy(buffer, Float(time * factor[num]).ToString(alwaysSign, 4).c_str()); //-V2513
     std::strcat(buffer, suffix[num]); //-V2513
     return buffer;
 }
@@ -282,7 +282,7 @@ char* Time::ToStringAccuracy(bool alwaysSign, char buffer[20], int numDigits) co
         // тут ничего не делаем
     }
 
-    std::strcat(buffer, Float(time).ToString(alwaysSign, numDigits).CString()); //-V2513
+    std::strcat(buffer, Float(time).ToString(alwaysSign, numDigits).c_str()); //-V2513
     std::strcat(buffer, suffix); //-V2513
 
     return buffer;
@@ -331,7 +331,7 @@ static char* VoltageToString(float voltage, bool alwaysSign, char buffer[20]) //
         num = 3;
     }
 
-    std::strcpy(buffer, Float(voltage * factor[num]).ToString(alwaysSign, 4).CString()); //-V2513
+    std::strcpy(buffer, Float(voltage * factor[num]).ToString(alwaysSign, 4).c_str()); //-V2513
     std::strcat(buffer, suf[num]); //-V2513
     return buffer;
 }
@@ -382,7 +382,7 @@ char *Current::ToString(char buffer[50]) const //-V2506
         num = 3;
     }
 
-    std::strcpy(buffer, Float(current * factor[num]).ToString(true, 4).CString()); //-V2513
+    std::strcpy(buffer, Float(current * factor[num]).ToString(true, 4).c_str()); //-V2513
     std::strcat(buffer, suf[num]); //-V2513
     return buffer;
 }
@@ -390,7 +390,7 @@ char *Current::ToString(char buffer[50]) const //-V2506
 
 char* Phase::ToString(char bufferOut[20]) const
 {
-    std::sprintf(bufferOut, "%s\xa8", Float(value).ToString(false, 4).CString());
+    std::sprintf(bufferOut, "%s\xa8", Float(value).ToString(false, 4).c_str());
     return bufferOut;
 }
 

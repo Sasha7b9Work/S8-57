@@ -42,7 +42,7 @@ static void Update()
 
     for (int i = start; i < queue->Size(); i++)
     {
-        Text((*queue)[i]->CString()).Draw(10, (i - start) * 10);
+        Text((*queue)[i]->c_str()).Draw(10, (i - start) * 10);
     }
 
     Painter::EndScene();

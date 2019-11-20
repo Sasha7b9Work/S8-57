@@ -150,5 +150,5 @@ static void DrawParametersChannel(Chan::E ch, int x, int y)
     Text(scale.ToString()).DrawOnBackground(x, y, Color::BACK);
     Color::FILL.SetAsCurrent();
 
-    Text(shift.ToString(scale.value).CString()).DrawOnBackground(x + ((ch == Chan::A) ? 25 : 35), y, Color::BACK);
+    Text(shift.ToString(scale.value).c_str()).DrawOnBackground(x + ((ch == Chan::A) ? 25 : 35), y, Color::BACK);
 }

@@ -123,7 +123,7 @@ Text::Text(const char *_text, uint8 _size) : text(_text), sizeOfType(_size)
 
 Text::Text(const String &string, uint8 _size) : sizeOfType(_size)
 {
-    text = string.CString();
+    text = string.c_str();
 }
 
 
