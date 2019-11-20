@@ -13,7 +13,7 @@ static const char *BeginWith(const char *buffer, const char *word);
 /// Рекурсивная функция обработки массива структур StructSCPI.
 /// В случае успешного выполнения возвращает адрес символа, расположенного за последним обработанным символом.
 /// В случае неуспешного завершения - возвращает nullptr. Код ошибки находится в *error
-static const char *Process(const char *buffer, const StructSCPI structs[], ErrorSCPI *error);
+static const char *Process(const char *buffer, const StructSCPI structs[], ErrorSCPI *error); //-V2504
 /// Обработка узла дерева node
 static const char *ProcessNode(const char *begin, const StructSCPI *node, ErrorSCPI *error);
 /// Обработка листа node
@@ -32,7 +32,7 @@ void SCPI::AddNewData(const char *buffer, uint)
 }
 
 
-static const char *Process(const char *buffer, const StructSCPI *strct, ErrorSCPI *error)
+static const char *Process(const char *buffer, const StructSCPI strct[], ErrorSCPI *error) //-V2504
 {
     *error = SCPI_Success;
 

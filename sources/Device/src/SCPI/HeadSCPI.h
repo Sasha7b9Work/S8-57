@@ -3,4 +3,4 @@
 
 
 
-extern const StructSCPI head[];
+extern const StructSCPI head[]; //-V2504
