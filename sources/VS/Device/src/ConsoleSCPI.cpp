@@ -74,13 +74,11 @@ void ConsoleSCPI::Open(wxFrame *parent)
         else
         {
             TheConsole->Show();
-            TheConsole->SetFocus();
         }
     }
     else
     {
         TheConsole = new ConsoleSCPI(parent);
-        TheConsole->SetFocus();
     }
 }
 

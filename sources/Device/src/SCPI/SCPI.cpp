@@ -134,8 +134,8 @@ void ErrorSCPI::SendMessage()
 
     if (state == UnknownCommand)
     {
-        VCP::SendString("UNKNOWN COMMAND");
-        VCP::SendString(additionalMessage.CString());
+        VCP::SendStringAsynch("UNKNOWN COMMAND");
+        VCP::SendStringAsynch(additionalMessage.CString());
     }
 }
 
@@ -156,6 +156,10 @@ static void RemoveSymbolsBeforeSeparator()
         {
             char symbols[2] = { data[0], '\0' };
             error.additionalMessage.Append(symbols);
+
+            uint size = data.Size();
+            size = size;
+
             data.RemoveFromBegin(1);
         }
 

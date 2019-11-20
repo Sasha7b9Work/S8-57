@@ -12,7 +12,7 @@ const char * const String::ERROR = "---.---";
 
 String::String() : buffer(nullptr)
 {
-
+    Set(TypeConversionString::None, "");
 }
 
 
@@ -107,6 +107,8 @@ void String::Append(const char *str)
 
     String old(CString());
 
+    Free();
+
     Allocate(std::strlen(old.CString() + std::strlen(str) + 1));
 
     std::strcpy(buffer, old.CString());
@@ -126,6 +128,7 @@ void String::Free()
     {
         std::free(buffer);
         buffer = nullptr;
+        Set(TypeConversionString::None, "");
     }
 }
 
