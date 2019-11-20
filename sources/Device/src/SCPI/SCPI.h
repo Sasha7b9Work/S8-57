@@ -1,6 +1,12 @@
 #pragma once
 
 
+enum ErrorSCPI
+{
+    SCPI_Success
+};
+
+
 /// —труктура, соотвествующа€ узлу дерева.
 struct StructSCPI
 {

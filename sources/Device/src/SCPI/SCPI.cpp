@@ -7,20 +7,13 @@
 #include <cstring>
 
 
-enum ErrorCode
-{
-    Success
-};
-
-
 /// Если строка buffer начинается с последовательности символов word, то возвращает указатель на символ, следующий за последним символом последовательности word.
 /// Иначе возвращает nullptr.
 static char *BeginWith(const char *buffer, const char *word);
 /// Рекурсивная функция обработки массива структур StructSCPI.
 /// В случае успешного выполнения возвращает адрес символа, расположенного за последним обработанным символом.
 /// В случае неуспешного завершения - возвращает указатель на buffer.
-static char *Process(const char *buffer, const StructSCPI structs[], ErrorCode *error);
-
+static const char *Process(const char *buffer, const StructSCPI structs[], ErrorSCPI *error);
 
 
 void SCPI::AddNewData(const char *buffer, uint length)
@@ -39,13 +32,13 @@ void SCPI::AddNewData(const char *buffer, uint length)
         VCP::SendDataAsynch(reinterpret_cast<const uint8 *>(answer), std::strlen(answer) + 1);
     }
 
-    ErrorCode error(Success);
+    ErrorSCPI error(SCPI_Success);
 
     Process(buffer, head, &error);
 }
 
 
-static char *Process(const char *buffer, const StructSCPI *structs, ErrorCode *)
+static const char *Process(const char *buffer, const StructSCPI *structs, ErrorSCPI *)
 {
     const StructSCPI *str = structs;
 

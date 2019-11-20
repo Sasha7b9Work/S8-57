@@ -2,7 +2,7 @@
 #include "HeadSCPI.h"
 
 
-static char *FuncIDN(const char *buffer);
+static char *FuncIDN(const char *buffer, ErrorSCPI *);
 
 
 const StructSCPI head[] =
@@ -13,7 +13,7 @@ const StructSCPI head[] =
 
 
 
-static char *FuncIDN(const char *buffer)
+static char *FuncIDN(const char *buffer, ErrorSCPI *)
 {
     return const_cast<char *>(buffer);
 }
