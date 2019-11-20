@@ -7,8 +7,10 @@
 class ConsoleSCPI : public wxFrame
 {
 public:
-    ConsoleSCPI();
+    static void Open(wxFrame *parent);
 
 private:
+    ConsoleSCPI(wxFrame *parent);
+
     void OnSize(wxSizeEvent &);
 };

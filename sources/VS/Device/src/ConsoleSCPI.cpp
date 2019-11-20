@@ -9,11 +9,10 @@ static wxTextCtrl *text = nullptr;
 static wxTextCtrl *line = nullptr;
 
 
-static ConsoleSCPI *console = nullptr;
+static ConsoleSCPI *TheConsole = nullptr;
 
 
-
-ConsoleSCPI::ConsoleSCPI() : wxFrame(nullptr, wxID_ANY, wxT("SCPI"))
+ConsoleSCPI::ConsoleSCPI(wxFrame *parent) : wxFrame(parent, wxID_ANY, wxT("SCPI"))
 {
     text = new wxTextCtrl(this, wxID_ANY, wxEmptyString, wxDefaultPosition, { 600, 300 }, wxTE_MULTILINE | wxTE_READONLY);
     line = new wxTextCtrl(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize);
@@ -22,6 +21,8 @@ ConsoleSCPI::ConsoleSCPI() : wxFrame(nullptr, wxID_ANY, wxT("SCPI"))
     Bind(wxEVT_SIZE, &ConsoleSCPI::OnSize, this);
 
     Show();
+
+    TheConsole = this;
 }
 
 
@@ -38,4 +39,26 @@ void ConsoleSCPI::OnSize(wxSizeEvent &)
 
     line->SetPosition({ clientOrigin.x, clientSize.y - line->GetSize().y });
     line->SetSize({ text->GetSize().x, line->GetSize().y });
+}
+
+
+void ConsoleSCPI::Open(wxFrame *parent)
+{
+    if (TheConsole)
+    {
+        if (TheConsole->IsShown())
+        {
+            TheConsole->Hide();
+            text->Clear();
+            line->Clear();
+        }
+        else
+        {
+            TheConsole->Show();
+        }
+    }
+    else
+    {
+        TheConsole = new ConsoleSCPI(parent);
+    }
 }

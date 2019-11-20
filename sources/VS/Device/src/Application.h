@@ -33,8 +33,12 @@ public:
     void OnGenerator(wxCommandEvent &);
     void OnSCPI(wxCommandEvent &);
     void OnAbout(wxCommandEvent &);
+    void OnDown(wxCommandEvent &event);
+    void OnUp(wxCommandEvent &event);
+
     void OnTimer(wxTimerEvent &);
     void OnTimerLong(wxTimerEvent &);
+    void OnClose(wxCloseEvent &);
 
 private:
     wxTimer timer;
@@ -43,8 +47,4 @@ private:
 
     void DrawFPS();
     void HandlerEvents();
-
-public:
-    void OnDown(wxCommandEvent &event);
-    void OnUp(wxCommandEvent &event);
 };

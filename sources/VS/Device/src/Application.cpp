@@ -209,6 +209,12 @@ void Frame::OnQuit(wxCommandEvent& WXUNUSED(event))
 }
 
 
+void Frame::OnClose(wxCloseEvent &)
+{
+
+}
+
+
 void Frame::OnGenerator(wxCommandEvent &)
 {
     TuneGeneratorDialog dialog;
@@ -219,7 +225,7 @@ void Frame::OnGenerator(wxCommandEvent &)
 
 void Frame::OnSCPI(wxCommandEvent &)
 {
-    new ConsoleSCPI();
+    ConsoleSCPI::Open(this);
 }
 
 
