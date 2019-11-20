@@ -18,3 +18,6 @@ private:
     void OnSize(wxSizeEvent &);
     void OnTextEnter(wxCommandEvent &);
 };
+
+
+extern ConsoleSCPI *TheConsole;

@@ -17,7 +17,7 @@ static wxTextCtrl *text = nullptr;
 static wxTextCtrl *line = nullptr;
 
 
-static ConsoleSCPI *TheConsole = nullptr;
+ConsoleSCPI *TheConsole = nullptr;
 
 
 ConsoleSCPI::ConsoleSCPI(wxFrame *parent) : wxFrame(parent, wxID_ANY, wxT("SCPI"))
