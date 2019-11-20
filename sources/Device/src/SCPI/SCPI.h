@@ -56,7 +56,10 @@ struct SCPI
     /// Символ-разделить морфем команды
     static const char SEPARATOR = ':';
 
-    static void AddNewData(const char *buffer, uint length);
+    static void AppendNewData(const char *buffer, uint length);
+
+    static void Update();
+
     /// Возвращает true, если указатель указывает на завершающую последовательность
     static bool IsLineEnding(const char *bufer);
 };

@@ -45,8 +45,6 @@ String::String(const char *format, ...) : buffer(nullptr)
 
     if (format == nullptr)
     {
-        Allocate(1);
-        buffer[0] = '\0';
         return;
     }
 
@@ -111,11 +109,11 @@ void String::Append(const char *str)
         return;
     }
 
-    String old(CString());
+    String old(*this);
 
     Free();
 
-    Allocate(std::strlen(old.CString() + std::strlen(str) + 1));
+    Allocate(std::strlen(old.CString()) + std::strlen(str) + 1);
 
     std::strcpy(buffer, old.CString());
     std::strcat(buffer, str);

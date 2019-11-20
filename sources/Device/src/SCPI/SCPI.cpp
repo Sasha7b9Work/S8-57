@@ -27,13 +27,17 @@ static void RemoveSymbolsBeforeSeparator();
 static String data;
 
 
-void SCPI::AddNewData(const char *buffer, uint)
+void SCPI::AppendNewData(const char *buffer, uint)
 {
     data.Append(buffer);
 
-    RemoveSymbolsBeforeSeparator();
-
     SU::ToUpper(data.CString());
+}
+
+
+void SCPI::Update()
+{
+    RemoveSymbolsBeforeSeparator();
 
     ErrorSCPI error(ErrorSCPI::Success);
 

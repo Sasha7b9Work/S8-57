@@ -87,7 +87,7 @@ void ConsoleSCPI::OnTextEnter(wxCommandEvent &)
 {
     String txt("%s\x0d", static_cast<const char *>(line->GetLineText(0).mb_str()));
 
-    SCPI::AddNewData(txt.CString(), std::strlen(txt.CString()));
+    SCPI::AppendNewData(txt.CString(), std::strlen(txt.CString()));
 
     line->Clear();
 }

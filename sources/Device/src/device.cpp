@@ -12,6 +12,7 @@
 #include "Keyboard/DecoderDevice.h"
 #include "Menu/MenuItems.h"
 #include "Recorder/Recorder.h"
+#include "SCPI/SCPI.h"
 #include <cstdlib>
 
 
@@ -116,17 +117,7 @@ void Device::Update()
 
     while (Transceiver::Receive()) {};
 
-//    if (Menu::OpenedPage() == PageROM::self)
-//    {
-//        BufferButtons::Push(KeyEvent(Key::F3, TypePress::Press));
-//        BufferButtons::Push(KeyEvent(Key::F3, TypePress::Release));
-//
-//        BufferButtons::Push(KeyEvent(Key::F4, TypePress::Press));
-//        BufferButtons::Push(KeyEvent(Key::F4, TypePress::Release));
-//
-//        BufferButtons::Push(KeyEvent(Key::F1, TypePress::Press));
-//        BufferButtons::Push(KeyEvent(Key::F1, TypePress::Release));
-//    }
+    SCPI::Update();
 
     Decoder::Update();
 }
