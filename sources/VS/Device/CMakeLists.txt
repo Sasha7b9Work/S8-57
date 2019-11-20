@@ -83,17 +83,19 @@ source_group(Tester                                     REGULAR_EXPRESSION      
 source_group(Utils                                      REGULAR_EXPRESSION              src/Utils/*)
 source_group(src                FILES                src/Application.h
                                                      src/Application.cpp
-                                                     src/main_win.cpp
+                                                     src/ConsoleSCPI.h
+                                                     src/ConsoleSCPI.cpp
                                         ../../Device/src/defines.h
                                         ../../Device/src/defines.cpp
                                         ../../Device/src/device.h
                                         ../../Device/src/device.cpp
                                         ../../Device/src/log.h
                                                      src/log_win.cpp
-                                        ../../Device/src/tables.h
-                                        ../../Device/src/tables.cpp
+                                                     src/main_win.cpp
                                         ../../Device/src/MessageMgr.h
-                                        ../../Device/src/MessageMgr.cpp)
+                                        ../../Device/src/MessageMgr.cpp
+                                        ../../Device/src/tables.h
+                                        ../../Device/src/tables.cpp)
 source_group(Display            FILES   ../../Device/src/Display/Colors.h
                                         ../../Device/src/Display/Colors.cpp
                                         ../../Device/src/Display/Console.h
@@ -333,20 +335,22 @@ file(GLOB SOURCES   ../../common/_VS/*
 					../../Device/src/Test/*
                     ../../Device/src/Tester/*
                     ../../Device/src/Utils/*
-                    
+
                                  src/Application.h
                                  src/Application.cpp
-                                 src/main_win.cpp
+                                 src/ConsoleSCPI.h
+                                 src/ConsoleSCPI.cpp
                     ../../Device/src/defines.h
                     ../../Device/src/defines.cpp
                     ../../Device/src/device.h
                     ../../Device/src/device.cpp
                     ../../Device/src/log.h
                                  src/log_win.cpp
-                    ../../Device/src/tables.h
-                    ../../Device/src/tables.cpp
+                                 src/main_win.cpp
                     ../../Device/src/MessageMgr.h
                     ../../Device/src/MessageMgr.cpp
+                    ../../Device/src/tables.h
+                    ../../Device/src/tables.cpp
                     )
                     
 add_executable(Device57 ${SOURCES})

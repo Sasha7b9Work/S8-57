@@ -1,7 +1,9 @@
 #include "defines.h"
+#include "Application.h"
+#include "ConsoleSCPI.h"
 #include "GUI/Dialogs/TuneGeneratorDialog.h"
 #include "Settings/Settings.h"
-#include "Application.h"
+
 #pragma warning(push, 0)
 #include <SDL.h>
 #include <wx/config.h>
@@ -217,7 +219,7 @@ void Frame::OnGenerator(wxCommandEvent &)
 
 void Frame::OnSCPI(wxCommandEvent &)
 {
-
+    new ConsoleSCPI();
 }
 
 
