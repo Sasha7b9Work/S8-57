@@ -162,6 +162,8 @@ Frame::Frame(const wxString& title)
     timer.Start(0);
 
     timerLongPress.SetOwner(this, TIMER_LONG_ID);
+
+    ConsoleSCPI::Open(this);
 }
 
 

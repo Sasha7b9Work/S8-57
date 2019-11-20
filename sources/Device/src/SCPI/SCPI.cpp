@@ -15,9 +15,9 @@ void SCPI::AddNewData(const char *buffer, uint length)
     
     Buffer data(length + 1);
     std::memcpy(data.data, buffer, length);
-    data.data[length] = 0;
+    data.data[length - 1] = 0;
     
-    if (SU::EqualsStrings(buffer, "*IDN?"))
+    if (SU::EqualsStrings(reinterpret_cast<char *>(data.data), const_cast<char *>("*IDN?")))
     {
         const char *answer = "MNIPI, S8-57, v.1.2";
         VCP::SendDataAsynch(reinterpret_cast<const uint8 *>(answer), std::strlen(answer) + 1);
