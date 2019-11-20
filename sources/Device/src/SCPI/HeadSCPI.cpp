@@ -31,5 +31,5 @@ static const char *FuncIDN(const char *buffer, ErrorSCPI *error)
 
     error->Set(ErrorSCPI::InvalidSequence, buffer, buffer + 1);
 
-    return nullptr;
+    return buffer + 1;
 }
