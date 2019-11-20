@@ -5,6 +5,12 @@
 #pragma warning(pop)
 
 
+enum
+{
+    ID_LINE
+};
+
+
 static wxTextCtrl *text = nullptr;
 static wxTextCtrl *line = nullptr;
 
@@ -15,10 +21,19 @@ static ConsoleSCPI *TheConsole = nullptr;
 ConsoleSCPI::ConsoleSCPI(wxFrame *parent) : wxFrame(parent, wxID_ANY, wxT("SCPI"))
 {
     text = new wxTextCtrl(this, wxID_ANY, wxEmptyString, wxDefaultPosition, { 600, 300 }, wxTE_MULTILINE | wxTE_READONLY);
-    line = new wxTextCtrl(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize);
+    text->WriteText("String 1\n");
+    text->WriteText("Строка 2\n");
+
+    line = new wxTextCtrl(this, ID_LINE, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxTE_PROCESS_ENTER);
     line->SetFocus();
 
+    wxFont font = line->GetFont();
+    font.SetWeight(wxFONTWEIGHT_BOLD);
+    line->SetFont(font);
+    text->SetFont(font);
+
     Bind(wxEVT_SIZE, &ConsoleSCPI::OnSize, this);
+    line->Bind(wxEVT_TEXT_ENTER, &ConsoleSCPI::OnTextEnter, this, ID_LINE);
 
     Show();
 
@@ -61,4 +76,10 @@ void ConsoleSCPI::Open(wxFrame *parent)
     {
         TheConsole = new ConsoleSCPI(parent);
     }
+}
+
+
+void ConsoleSCPI::OnTextEnter(wxCommandEvent &)
+{
+
 }

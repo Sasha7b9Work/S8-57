@@ -13,4 +13,5 @@ private:
     ConsoleSCPI(wxFrame *parent);
 
     void OnSize(wxSizeEvent &);
+    void OnTextEnter(wxCommandEvent &);
 };
