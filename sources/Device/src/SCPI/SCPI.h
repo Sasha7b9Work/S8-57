@@ -15,19 +15,27 @@ struct ErrorSCPI
     enum State
     {
         Success,
-        UnknownCommand
+        InvalidSequence
     };
 
-    ErrorSCPI(State s) : state(s) {};
+    ErrorSCPI(State s = Success) : state(s), startInvalidSequence(nullptr), endInvalidSequence(nullptr) {};
+
+    void Set(State s, const char *start, const char *end)
+    {
+        state = s;
+        startInvalidSequence = start;
+        endInvalidSequence = end;
+    };
 
     void SendMessage();
     
     State state;
-
-    String additionalMessage;
+    /// ¬ случае определени€ неправильной последовательности этот указатель указывает на символ, следующий за последним
+    const char *startInvalidSequence;
+    const char *endInvalidSequence;
 
 private:
-    const char *prolog = "ERROR !!! ";
+    static const char *prolog;
 };
 
 
@@ -65,4 +73,6 @@ struct SCPI
 
     /// ¬озвращает true, если указатель указывает на завершающую последовательность
     static bool IsLineEnding(const char *bufer);
+    /// ѕослать ответ
+    static void SendAnswer(char *message);
 };

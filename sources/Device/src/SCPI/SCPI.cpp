@@ -7,6 +7,9 @@
 #include <cstring>
 
 
+const char *ErrorSCPI::prolog = "!!! ERROR !!! ";
+
+
 /// Если строка buffer начинается с последовательности символов word, то возвращает указатель на символ, следующий за последним символом последовательности word.
 /// Иначе возвращает nullptr.
 static const char *BeginWith(const char *buffer, const char *word);
@@ -39,17 +42,20 @@ void SCPI::Update()
 {
     RemoveSymbolsBeforeSeparator();
 
-    ErrorSCPI error(ErrorSCPI::Success);
+    if(data.Size() == 0)
+    {
+        return;
+    }
+
+    ErrorSCPI error;
 
     const char *end = Process(data.c_str(), head, &error);
 
-    if (end)
+    error.SendMessage();
+
+    if(end)
     {
         RemoveFromBegin(end);
-    }
-    else
-    {
-        error.SendMessage();
     }
 }
 
@@ -131,22 +137,31 @@ bool SCPI::IsLineEnding(const char *buffer)
 
 void ErrorSCPI::SendMessage()
 {
-    static const char *names[] =
-    {
-        "",
-        "UNKNOWN COMMAND"
-    };
-
-    if (state == Success)
+    if(state == Success)
     {
         return;
     }
 
-    if (state == UnknownCommand)
+    static const char *names[] =
     {
-        String message("%s %s : %s", prolog, names[state], additionalMessage.c_str());
+        "",
+        "Invalid sequence"
+    };
 
-        VCP::SendStringAsynch(message.c_str());
+    if (state == InvalidSequence)
+    {
+        String invalidSequence;
+
+        const char *p = startInvalidSequence;
+
+        while(p < endInvalidSequence)
+        {
+            invalidSequence.Append(*p++);
+        }
+
+        String message("%s %s : %s", prolog, names[state], invalidSequence.c_str());
+
+        SCPI::SendAnswer(message.c_str());
     }
 }
 
@@ -159,21 +174,26 @@ static void RemoveFromBegin(const char *begin)
 
 static void RemoveSymbolsBeforeSeparator()
 {
-    if (data.Size() && data[0] != SCPI::SEPARATOR)
+    if (data.Size() && data[0] != SCPI::SEPARATOR && data[0] != '*')
     {
-        ErrorSCPI error(ErrorSCPI::UnknownCommand);
+        ErrorSCPI error(ErrorSCPI::InvalidSequence);
 
-        while (data.Size() && data[0] != SCPI::SEPARATOR)
+        error.startInvalidSequence = data.c_str();
+        error.endInvalidSequence = data.c_str();
+
+        for(uint i = 0; i < data.Size() && data[i] != SCPI::SEPARATOR && data[i] != '*'; i++)
         {
-            char symbols[2] = { data[0], '\0' };
-            error.additionalMessage.Append(symbols);
-
-            uint size = data.Size();
-            size = size;
-
-            data.RemoveFromBegin(1);
+            error.endInvalidSequence++;
         }
 
         error.SendMessage();
+
+        data.RemoveFromBegin(static_cast<uint>(error.endInvalidSequence - error.startInvalidSequence));
     }
+}
+
+
+void SCPI::SendAnswer(char *message)
+{
+    VCP::SendStringAsynch(message);
 }

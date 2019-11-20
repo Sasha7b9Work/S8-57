@@ -120,6 +120,13 @@ void String::Append(const char *str)
 }
 
 
+void String::Append(char symbol)
+{
+    char b[2] = { symbol, '\0' };
+    Append(b);
+}
+
+
 String::~String()
 {
     std::free(buffer);

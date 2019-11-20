@@ -32,6 +32,8 @@ public:
     void Free();
 
     void Append(const char *str);
+
+    void Append(char symbol);
     /// Удаляет numSymbols из начала строки
     void RemoveFromBegin(uint numSymbols);
 

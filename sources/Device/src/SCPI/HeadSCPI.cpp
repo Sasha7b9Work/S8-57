@@ -15,14 +15,21 @@ const StructSCPI head[] =
 
 
 
-static const char *FuncIDN(const char *buffer, ErrorSCPI *)
+static const char *FuncIDN(const char *buffer, ErrorSCPI *error)
 {
+    if(*buffer == '\0')              // Подстраховка от того, что символ окончания команды не принят
+    {
+        return nullptr;
+    }
+
     if (SCPI::IsLineEnding(buffer))
     {
-        VCP::SendStringAsynch("MNIPI, S8-57, v.1.2");
+        SCPI::SendAnswer("MNIPI, S8-57, v.1.2");
 
         return buffer + 1;
     }
+
+    error->Set(ErrorSCPI::InvalidSequence, buffer, buffer + 1);
 
     return nullptr;
 }
