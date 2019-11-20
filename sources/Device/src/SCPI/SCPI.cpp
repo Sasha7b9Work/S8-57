@@ -12,8 +12,12 @@
 static char *BeginWith(const char *buffer, const char *word);
 /// Рекурсивная функция обработки массива структур StructSCPI.
 /// В случае успешного выполнения возвращает адрес символа, расположенного за последним обработанным символом.
-/// В случае неуспешного завершения - возвращает указатель на buffer.
+/// В случае неуспешного завершения - возвращает nullptr. Код ошибки находится в *error
 static const char *Process(const char *buffer, const StructSCPI structs[], ErrorSCPI *error);
+/// Обработка узла дерева node
+static const char *ProcessNode(const char *begin, const StructSCPI *node, ErrorSCPI *error);
+/// Обработка листа node
+static const char *ProcessLeaf(const char *begin, const StructSCPI *node, ErrorSCPI *error);
 
 
 void SCPI::AddNewData(const char *buffer, uint length)
@@ -38,11 +42,11 @@ void SCPI::AddNewData(const char *buffer, uint length)
 }
 
 
-static const char *Process(const char *buffer, const StructSCPI *structs, ErrorSCPI *)
+static const char *Process(const char *buffer, const StructSCPI *structs, ErrorSCPI *error)
 {
     const StructSCPI *str = structs;
 
-    while (str)
+    while (str->type != StructSCPI::Empty)
     {
         char *end = BeginWith(buffer, str->key);
 
@@ -50,11 +54,11 @@ static const char *Process(const char *buffer, const StructSCPI *structs, ErrorS
         {
             if (str->type == StructSCPI::Node)
             {
-
+                return ProcessNode(end, str, error);
             }
             else if (str->type == StructSCPI::Leaf)
             {
-
+                return ProcessLeaf(end, str, error);
             }
             else
             {
@@ -69,7 +73,29 @@ static const char *Process(const char *buffer, const StructSCPI *structs, ErrorS
 }
 
 
-char *BeginWith(const char *, const char *)
+static char *BeginWith(const char *, const char *)
 {
     return nullptr;
+}
+
+
+static const char *ProcessNode(const char *begin, const StructSCPI *node, ErrorSCPI *error)
+{
+    const StructSCPI *params = reinterpret_cast<const StructSCPI *>(node->param);
+
+    return Process(begin, params, error);
+}
+
+
+static const char *ProcessLeaf(const char *begin, const StructSCPI *node, ErrorSCPI *error)
+{
+    FuncSCPI func = reinterpret_cast<FuncSCPI>(node->param);
+
+    return func(begin, error);
+}
+
+
+bool SCPI::IsLineEnding(const char *buffer)
+{
+    return (*buffer == 0x0D);
 }

@@ -1,42 +1,6 @@
 #pragma once
 
 
-enum ErrorSCPI
-{
-    SCPI_Success
-};
-
-
-/// Структура, соотвествующая узлу дерева.
-struct StructSCPI
-{
-    enum Type
-    {
-        None,
-        Node,                           /// Структура является "узлом" дерева, нужно идти дальше по дереву через structs
-        Leaf                            /// Стурктура является "листом" дерева, нужно выполнять функцию func
-    };
-
-    Type type;                          /// Тип структуры
-    const char  *key;                   /// Ключевое слово узла (морфема)
-
-    void *path;
-
-    //union
-    //{
-    //    const StructSCPI *structs;      /// Если структура является узлом дерева, выполняем дальнейший обход структур structs
-    //    char *(*func)(const char *);    /// Если структура является оконечным листом дерева, выполняем функцию fuc
-    //};
-};
-
-
-class SCPI
-{
-public:
-    static void AddNewData(const char *buffer, uint length);
-};
-
-
 /*
     Формат команды.
     1. Команда всегда начинается с символа ':'.
@@ -44,3 +8,43 @@ public:
     3. Пробелы допускаются только перед параметром в количестве 1 шт.
     4. Команда должна заканчиваться символом с кодом 0x0D.
 */
+
+
+enum ErrorSCPI
+{
+    SCPI_Success
+};
+
+
+typedef const char *(*FuncSCPI)(const char *, ErrorSCPI *);
+
+
+/// Структура, соотвествующая узлу дерева.
+struct StructSCPI
+{
+    enum Type
+    {
+        Empty,
+        Node,           /// Структура является "узлом" дерева, нужно идти дальше по дереву через structs
+        Leaf            /// Стурктура является "листом" дерева, нужно выполнять функцию func
+    };
+
+    Type type;          /// Тип структуры
+
+    const char  *key;   /// Ключевое слово узла (морфема)
+
+    void *param;        /// Этот указатель следует интерпретировать в зависимости от типа структуры.
+                        /// Если структура имеет тип Node, то здесь хранится массив потомков - StructSCPI *structs.
+                        /// Если структура имеет тип Leaf, то здесь хранится функция - обработчик листа типа FuncSCPI
+};
+
+
+struct SCPI
+{
+    /// Символ-разделить морфем команды
+    static const char SEPARATOR = ':';
+
+    static void AddNewData(const char *buffer, uint length);
+    /// Возвращает true, если указатель указывает на завершающую последовательность
+    static bool IsLineEnding(const char *bufer);
+};
