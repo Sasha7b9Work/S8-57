@@ -10,6 +10,7 @@ public:
     static void Open(wxFrame *parent);
 
     static void AddLine(const wxString &line);
+    static void AddText(const wxString &text);
 
 private:
     ConsoleSCPI(wxFrame *parent);

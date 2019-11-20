@@ -95,6 +95,11 @@ void ConsoleSCPI::OnTextEnter(wxCommandEvent &)
 
 void ConsoleSCPI::AddLine(const wxString &str)
 {
+    AddText(str);
+    AddText(wxT("\n"));
+}
+
+void ConsoleSCPI::AddText(const wxString &str)
+{
     text->WriteText(str);
-    text->WriteText(wxT("\n"));
 }

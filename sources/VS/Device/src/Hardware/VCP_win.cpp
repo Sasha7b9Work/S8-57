@@ -23,11 +23,11 @@ void *VCP::HandlePCD()
 
 void VCP::SendDataAsynch(const uint8 *text, uint)
 {
-    ConsoleSCPI::AddLine(reinterpret_cast<const char *>(text));
+    ConsoleSCPI::AddText(reinterpret_cast<const char *>(text));
 }
 
 
 void VCP::SendStringAsynch(char *message)
 {
-    ConsoleSCPI::AddLine(message);
+    ConsoleSCPI::AddText(message);
 }

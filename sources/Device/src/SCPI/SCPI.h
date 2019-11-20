@@ -25,6 +25,9 @@ struct ErrorSCPI
     State state;
 
     String additionalMessage;
+
+private:
+    const char *prolog = "ERROR !!! ";
 };
 
 

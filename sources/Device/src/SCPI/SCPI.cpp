@@ -131,6 +131,12 @@ bool SCPI::IsLineEnding(const char *buffer)
 
 void ErrorSCPI::SendMessage()
 {
+    static const char *names[] =
+    {
+        "",
+        "UNKNOWN COMMAND"
+    };
+
     if (state == Success)
     {
         return;
@@ -138,8 +144,9 @@ void ErrorSCPI::SendMessage()
 
     if (state == UnknownCommand)
     {
-        VCP::SendStringAsynch("UNKNOWN COMMAND");
-        VCP::SendStringAsynch(additionalMessage.c_str());
+        String message("%s %s : %s", prolog, names[state], additionalMessage.c_str());
+
+        VCP::SendStringAsynch(message.c_str());
     }
 }
 
