@@ -34,7 +34,7 @@ public:
     /// Преобразует строку в float. Обрабатываются символы до первого нецифрового символа
     static float StringToFloat(char *string);
 
-    static char *ToUpper(void *str, uint size);
+    static char *ToUpper(char *str, uint size);
 
     static char ToUpper(char symbol);
 

@@ -222,9 +222,3 @@ void Device::Reset()
 {
     HAL_NVIC::SystemReset();
 }
-
-
-void Device::ProcessDataSCPI(const char *)
-{
-
-}

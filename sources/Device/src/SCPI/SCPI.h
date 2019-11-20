@@ -5,5 +5,5 @@
 class SCPI
 {
 public:
-    static void AddNewData(uint8 *buffer, uint length);
+    static void AddNewData(const char *buffer, uint length);
 };

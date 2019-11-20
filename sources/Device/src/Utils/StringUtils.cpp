@@ -297,7 +297,7 @@ float SU::StringToFloat(char *string)
 }
 
 
-char *SU::ToUpper(void *_str, uint size)
+char *SU::ToUpper(char *_str, uint size)
 {
     char *str = static_cast<char *>(_str);
 

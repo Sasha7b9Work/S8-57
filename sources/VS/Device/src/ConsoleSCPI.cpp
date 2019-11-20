@@ -1,6 +1,6 @@
 #include "defines.h"
 #include "ConsoleSCPI.h"
-#include "device.h"
+#include "SCPI/SCPI.h"
 
 #pragma warning(push, 0)
 #include <wx/wx.h>
@@ -83,7 +83,10 @@ void ConsoleSCPI::Open(wxFrame *parent)
 
 void ConsoleSCPI::OnTextEnter(wxCommandEvent &)
 {
-    Device::ProcessDataSCPI(line->GetLineText(0).mb_str());
+    String txt("%s\x0d", static_cast<const char *>(line->GetLineText(0).mb_str()));
+
+    SCPI::AddNewData(txt.CString(), std::strlen(txt.CString()));
+
     line->Clear();
 }
 
