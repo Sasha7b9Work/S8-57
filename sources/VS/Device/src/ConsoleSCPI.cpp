@@ -49,13 +49,15 @@ void ConsoleSCPI::OnSize(wxSizeEvent &)
 
     wxSize clientSize = GetClientSize();
 
+    int heightLine = line->GetSize().y;
+
     wxSize sizeText = clientSize;
-    sizeText.y -= line->GetSize().y;
+    sizeText.y -= heightLine;
 
     text->SetSize(sizeText);
 
-    line->SetPosition({ clientOrigin.x, clientSize.y - line->GetSize().y });
-    line->SetSize({ text->GetSize().x, line->GetSize().y });
+    line->SetPosition({ clientOrigin.x, clientSize.y - heightLine });
+    line->SetSize({ text->GetSize().x, heightLine });
 }
 
 

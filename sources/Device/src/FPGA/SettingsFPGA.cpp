@@ -158,7 +158,7 @@ void TShift::Change(int delta)
         return;
     }
 
-    TShift(set.time.shift + delta);
+    TShift tShift(set.time.shift + delta);
 }
 
 

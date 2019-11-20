@@ -1855,6 +1855,16 @@
               <FileType>5</FileType>
               <FilePath>.\src\SCPI\SCPI.h</FilePath>
             </File>
+            <File>
+              <FileName>HeadSCPI.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\SCPI\HeadSCPI.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>HeadSCPI.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\SCPI\HeadSCPI.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
