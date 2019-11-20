@@ -36,6 +36,8 @@ public:
 
     static char *ToUpper(char *str, uint size);
 
+    static char *ToUpper(char *str);
+
     static char ToUpper(char symbol);
 
     static char ToLower(char symbol);

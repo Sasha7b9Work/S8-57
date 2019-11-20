@@ -297,6 +297,12 @@ float SU::StringToFloat(char *string)
 }
 
 
+char *SU::ToUpper(char *str)
+{
+    return ToUpper(str, std::strlen(str));
+}
+
+
 char *SU::ToUpper(char *_str, uint size)
 {
     char *str = static_cast<char *>(_str);

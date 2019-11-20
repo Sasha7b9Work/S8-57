@@ -9,7 +9,7 @@
 
 /// Если строка buffer начинается с последовательности символов word, то возвращает указатель на символ, следующий за последним символом последовательности word.
 /// Иначе возвращает nullptr.
-static char *BeginWith(const char *buffer, const char *word);
+static const char *BeginWith(const char *buffer, const char *word);
 /// Рекурсивная функция обработки массива структур StructSCPI.
 /// В случае успешного выполнения возвращает адрес символа, расположенного за последним обработанным символом.
 /// В случае неуспешного завершения - возвращает nullptr. Код ошибки находится в *error
@@ -20,45 +20,35 @@ static const char *ProcessNode(const char *begin, const StructSCPI *node, ErrorS
 static const char *ProcessLeaf(const char *begin, const StructSCPI *node, ErrorSCPI *error);
 
 
-void SCPI::AddNewData(const char *buffer, uint length)
+void SCPI::AddNewData(const char *buffer, uint)
 {
-    String string(buffer);
+    String text(buffer);
 
-    SU::ToUpper(string.CString(), length);
-    
-    Buffer data(length + 1);
-    std::memcpy(data.data, buffer, length);
-    data.data[length - 1] = 0;
-    
-    if (SU::EqualsStrings(reinterpret_cast<char *>(data.data), const_cast<char *>("*IDN?")))
-    {
-        const char *answer = "MNIPI, S8-57, v.1.2";
-        VCP::SendDataAsynch(reinterpret_cast<const uint8 *>(answer), std::strlen(answer) + 1);
-    }
+    SU::ToUpper(text.CString());
 
     ErrorSCPI error(SCPI_Success);
 
-    Process(buffer, head, &error);
+    Process(text.CString(), head, &error);
 }
 
 
-static const char *Process(const char *buffer, const StructSCPI *structs, ErrorSCPI *error)
+static const char *Process(const char *buffer, const StructSCPI *strct, ErrorSCPI *error)
 {
-    const StructSCPI *str = structs;
+    *error = SCPI_Success;
 
-    while (str->type != StructSCPI::Empty)
+    while (strct->type != StructSCPI::Empty)
     {
-        char *end = BeginWith(buffer, str->key);
+        const char *end = BeginWith(buffer, strct->key);
 
         if (end)
         {
-            if (str->type == StructSCPI::Node)
+            if (strct->type == StructSCPI::Node)
             {
-                return ProcessNode(end, str, error);
+                return ProcessNode(end, strct, error);
             }
-            else if (str->type == StructSCPI::Leaf)
+            else if (strct->type == StructSCPI::Leaf)
             {
-                return ProcessLeaf(end, str, error);
+                return ProcessLeaf(end, strct, error);
             }
             else
             {
@@ -66,16 +56,25 @@ static const char *Process(const char *buffer, const StructSCPI *structs, ErrorS
             }
         }
 
-        str++;
+        strct++;
     }
 
     return nullptr;
 }
 
 
-static char *BeginWith(const char *, const char *)
+static const char *BeginWith(const char *buffer, const char *word)
 {
-    return nullptr;
+    while (*word)
+    {
+        if (*word == *buffer)
+        {
+            ++word;
+            ++buffer;
+        }
+    }
+
+    return (*word == '\0') ? buffer : nullptr;
 }
 
 
