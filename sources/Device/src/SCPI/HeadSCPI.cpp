@@ -15,12 +15,11 @@ const StructSCPI head[] =
 
 
 
-static const char *FuncIDN(const char *buffer, ErrorSCPI *)
+static const char *FuncIDN(const char *buffer, ErrorSCPI *error)
 {
     if (SCPI::IsLineEnding(buffer))
     {
-        const char *answer = "MNIPI, S8-57, v.1.2";
-        VCP::SendDataAsynch(reinterpret_cast<const uint8 *>(answer), std::strlen(answer) + 1);
+        VCP::SendString("MNIPI, S8-57, v.1.2");
 
         return buffer + 1;
     }

@@ -25,3 +25,9 @@ void VCP::SendDataAsynch(const uint8 *text, uint)
 {
     ConsoleSCPI::AddLine(reinterpret_cast<const char *>(text));
 }
+
+
+void VCP::SendString(char *message)
+{
+    ConsoleSCPI::AddLine(message);
+}

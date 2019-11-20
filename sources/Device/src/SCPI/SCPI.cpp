@@ -18,24 +18,40 @@ static const char *Process(const char *buffer, const StructSCPI structs[], Error
 static const char *ProcessNode(const char *begin, const StructSCPI *node, ErrorSCPI *error);
 /// Обработка листа node
 static const char *ProcessLeaf(const char *begin, const StructSCPI *node, ErrorSCPI *error);
+/// Удалить начальные символы до begin из data
+static void RemoveFromBegin(const char *begin);
+/// Удалить все символы до разделителя
+static void RemoveSymbolsBeforeSeparator();
+
+
+static String data;
 
 
 void SCPI::AddNewData(const char *buffer, uint)
 {
-    String text(buffer);
+    data.Append(buffer);
 
-    SU::ToUpper(text.CString());
+    RemoveSymbolsBeforeSeparator();
 
-    ErrorSCPI error(SCPI_Success);
+    SU::ToUpper(data.CString());
 
-    Process(text.CString(), head, &error);
+    ErrorSCPI error(ErrorSCPI::Success);
+
+    const char *end = Process(data.CString(), head, &error);
+
+    if (end)
+    {
+        RemoveFromBegin(end);
+    }
+    else
+    {
+        error.SendMessage();
+    }
 }
 
 
 static const char *Process(const char *buffer, const StructSCPI strct[], ErrorSCPI *error) //-V2504
 {
-    *error = SCPI_Success;
-
     while (strct->type != StructSCPI::Empty)
     {
         const char *end = BeginWith(buffer, strct->key);
@@ -106,4 +122,43 @@ static const char *ProcessLeaf(const char *begin, const StructSCPI *node, ErrorS
 bool SCPI::IsLineEnding(const char *buffer)
 {
     return (*buffer == 0x0D);
+}
+
+
+void ErrorSCPI::SendMessage()
+{
+    if (state == Success)
+    {
+        return;
+    }
+
+    if (state == UnknownCommand)
+    {
+        VCP::SendString("UNKNOWN COMMAND");
+        VCP::SendString(additionalMessage.CString());
+    }
+}
+
+
+static void RemoveFromBegin(const char *begin)
+{
+    data.RemoveFromBegin(static_cast<uint>(begin - data.CString()));
+}
+
+
+static void RemoveSymbolsBeforeSeparator()
+{
+    if (data.Size() && data[0] != SCPI::SEPARATOR)
+    {
+        ErrorSCPI error(ErrorSCPI::UnknownCommand);
+
+        while (data.Size() && data[0] != SCPI::SEPARATOR)
+        {
+            char symbols[2] = { data[0], '\0' };
+            error.additionalMessage.Append(symbols);
+            data.RemoveFromBegin(1);
+        }
+
+        error.SendMessage();
+    }
 }

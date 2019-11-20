@@ -10,9 +10,21 @@
 */
 
 
-enum ErrorSCPI
+struct ErrorSCPI
 {
-    SCPI_Success
+    enum State
+    {
+        Success,
+        UnknownCommand
+    };
+
+    ErrorSCPI(State s) : state(s) {};
+
+    void SendMessage();
+    
+    State state;
+
+    String additionalMessage;
 };
 
 

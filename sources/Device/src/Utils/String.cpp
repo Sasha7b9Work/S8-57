@@ -37,6 +37,13 @@ String::String(char symbol) : buffer(0)
 
 String::String(const char *format, ...)
 {
+    if (format == nullptr)
+    {
+        Allocate(1);
+        buffer[0] = '\0';
+        return;
+    }
+
     static const int SIZE = 100;
     char buf[SIZE + 1];
 
@@ -88,6 +95,22 @@ void String::Set(TypeConversionString::E conv, const char *format, ...)
             // здесь ничего
         }
     }
+}
+
+
+void String::Append(const char *str)
+{
+    if (!str || *str == '\0')
+    {
+        return;
+    }
+
+    String old(CString());
+
+    Allocate(std::strlen(old.CString() + std::strlen(str) + 1));
+
+    std::strcpy(buffer, old.CString());
+    std::strcat(buffer, str);
 }
 
 
@@ -153,4 +176,47 @@ void String::Conversion(TypeConversionString::E conv)
             pointer++;
         }
     }
+}
+
+
+void String::RemoveFromBegin(uint numSymbols)
+{
+    if (std::strlen(buffer) == numSymbols)
+    {
+        Free();
+    }
+    else
+    {
+        String old(buffer);
+
+        Free();
+
+        Allocate(old.Size() - numSymbols + 1);
+
+        std::strcpy(buffer, old.CString() + numSymbols);
+    }
+}
+
+
+uint String::Size() const
+{
+    if (buffer == nullptr)
+    {
+        return 0;
+    }
+
+    return std::strlen(buffer);
+}
+
+
+char &String::operator[](uint i)
+{
+    static char result = 0;
+
+    if (buffer == nullptr || Size() < i)
+    {
+        return result;
+    }
+
+    return buffer[i];
 }
