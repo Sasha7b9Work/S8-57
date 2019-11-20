@@ -67,10 +67,19 @@ static const char *BeginWith(const char *buffer, const char *word)
 {
     while (*word)
     {
+        if (*buffer == '\0')
+        {
+            return nullptr;
+        }
+
         if (*word == *buffer)
         {
             ++word;
             ++buffer;
+        }
+        else
+        {
+            break;
         }
     }
 
