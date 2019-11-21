@@ -72,8 +72,8 @@ struct StructSCPI
 #define DEF_LEAF(key, func) {key, nullptr, func}
 #define DEF_EMPTY() {""}
 
-#define SCPI_PROLOG(t)  if(SCPI::IsLineEnding(&t)) {
-#define SCPI_EPILOG()     } return nullptr;
+#define SCPI_PROLOG(t)  if(SCPI::IsLineEnding(&t)) { SCPI::SendBadSymbols();
+#define SCPI_EPILOG(t)  return t; } return nullptr;
 
 
 struct SCPI
@@ -94,4 +94,6 @@ struct SCPI
     /// Если строка buffer начинается с последовательности символов word, то возвращает указатель на символ, следующий за последним символом последовательности word.
     /// Иначе возвращает nullptr.
     static const char *BeginWith(const char *buffer, const char *word);
+    /// Послать сообщение об ошибочных символах, если таковые имеются
+    static void SendBadSymbols();
 };

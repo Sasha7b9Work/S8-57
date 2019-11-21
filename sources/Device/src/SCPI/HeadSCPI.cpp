@@ -77,9 +77,7 @@ static const char *FuncIDN(const char *buffer)
 
     SCPI::SendAnswer("MNIPI, S8-57, v.1.2");
 
-    return buffer;
-
-    SCPI_EPILOG()
+    SCPI_EPILOG(buffer)
 }
 
 
@@ -89,9 +87,7 @@ static const char *FuncReset(const char *buffer)
         
     PageService::OnPress_ResetSettings();
 
-    return buffer;
-
-    SCPI_EPILOG()
+    SCPI_EPILOG(buffer)
 }
 
 
@@ -106,9 +102,8 @@ static const char *FuncKeyPress(const char *buffer)
 
             BufferButtons::Push(KeyEvent(static_cast<Key::E>(i), TypePress::Press));
             BufferButtons::Push(KeyEvent(static_cast<Key::E>(i), TypePress::Release));
-            return end;
             
-            SCPI_EPILOG()
+            SCPI_EPILOG(end)
         }
     }
 
@@ -127,9 +122,8 @@ static const char *FuncKeyLong(const char *buffer)
 
             BufferButtons::Push(KeyEvent(static_cast<Key::E>(i), TypePress::Press));
             BufferButtons::Push(KeyEvent(static_cast<Key::E>(i), TypePress::Long));
-            return end;
 
-            SCPI_EPILOG()
+            SCPI_EPILOG(end)
         }
     }
 

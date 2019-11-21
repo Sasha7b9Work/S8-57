@@ -29,6 +29,7 @@ static bool RemoveSymbolsBeforeSeparator();
 
 static String data;
 
+static String badSymbols;
 
 void SCPI::AppendNewData(const char *buffer, uint)
 {
@@ -269,4 +270,13 @@ void SCPI::SendAnswer(char *message)
 static bool IsSeparator(const char &symbol)
 {
     return (symbol == SCPI::SEPARATOR) || (symbol == '*');
+}
+
+
+void SCPI::SendBadSymbols()
+{
+//    if (!badSymbols.Size())
+//    {
+//
+//    }
 }
