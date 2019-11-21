@@ -1,6 +1,6 @@
 #include "defines.h"
 #pragma warning(push, 0)
-#include "Application.h"
+#include "GUI/Application.h"
 
 #define uint    unsigned int
 #define int8    signed char

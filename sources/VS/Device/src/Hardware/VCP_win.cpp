@@ -1,6 +1,6 @@
 #include "defines.h"
 #include "Hardware/VCP.h"
-#include "ConsoleSCPI.h"
+#include "GUI/ConsoleSCPI.h"
 
 
 PCD_HandleTypeDef  handlePCD;
