@@ -3,14 +3,21 @@
 #include "Keyboard/BufferButtons.h"
 #include "Keyboard/Keyboard.h"
 #include "Menu/Pages/Include/PageService.h"
+#include "Settings/SettingsOsci.h"
 #include "SCPI/HeadSCPI.h"
 #include <cstring>
 
 
+// *IDN?
 static const char *FuncIDN(const char *);
+// *RST
 static const char *FuncReset(const char *);
+// :KEY:PRESS:
 static const char *FuncKeyPress(const char *);
+// :KEY:LONG:
 static const char *FuncKeyLong(const char *);
+// :TIME:SCALE:
+static const char *FuncTBaseScale(const char *);
 
 
 static const char *keyNames[Key::Count] =
@@ -52,11 +59,51 @@ static const char *keyNames[Key::Count] =
     "F5"
 };
 
+static const char *tBaseNames[TBase::Count] =
+{
+    "2NS",
+    "5NS",
+    "10NS",
+    "20NS",
+    "50NS",
+    "100NS",
+    "200NS",
+    "500NS",
+    "1US",
+    "2US",
+    "5US",
+    "10US",
+    "20US",
+    "50US",
+    "100US",
+    "200US",
+    "500US",
+    "1MS",
+    "2MS",
+    "5MS",
+    "10MS",
+    "20MS",
+    "50MS",
+    "100MS",
+    "200MS",
+    "500MS",
+    "1S",
+    "2S",
+    "5S",
+    "10S"
+};
+
 
 static const StructSCPI keys[] =
 {
     DEF_LEAF(":PRESS:", FuncKeyPress),
     DEF_LEAF(":LONG:",  FuncKeyLong),
+    DEF_EMPTY()
+};
+
+static const StructSCPI tBases[] =
+{
+    DEF_LEAF(":SCALE:", FuncTBaseScale),
     DEF_EMPTY()
 };
 
@@ -66,6 +113,7 @@ const StructSCPI head[] =
     DEF_LEAF("*IDN?", FuncIDN),
     DEF_LEAF("*RST",  FuncReset),
     DEF_NODE(":KEY",  keys),
+    DEF_NODE(":TIME", tBases),
     DEF_EMPTY()
 };
 
@@ -122,6 +170,25 @@ static const char *FuncKeyLong(const char *buffer)
 
             BufferButtons::Push(KeyEvent(static_cast<Key::E>(i), TypePress::Press));
             BufferButtons::Push(KeyEvent(static_cast<Key::E>(i), TypePress::Long));
+
+            SCPI_EPILOG(end)
+        }
+    }
+
+    return nullptr;
+}
+
+
+static const char *FuncTBaseScale(const char *buffer)
+{
+    for(int i = 0; i < TBase::Count; i++)
+    {
+        const char *end = SCPI::BeginWith(buffer, tBaseNames[i]);
+        if(end)
+        {
+            SCPI_PROLOG(end)
+
+            TBase(static_cast<TBase::E>(i));
 
             SCPI_EPILOG(end)
         }
