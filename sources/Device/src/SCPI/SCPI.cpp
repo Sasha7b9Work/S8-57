@@ -149,7 +149,7 @@ bool SCPI::IsLineEnding(const char **buffer)
 
     if (result)
     {
-        *(*buffer)++;
+        *(*buffer)++; //-V532
     }
 
     return result;

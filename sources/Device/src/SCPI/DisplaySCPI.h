@@ -4,5 +4,5 @@
 
 namespace SCPI
 {
-    extern const StructSCPI display[];
+    extern const StructSCPI display[]; //-V2504
 }
