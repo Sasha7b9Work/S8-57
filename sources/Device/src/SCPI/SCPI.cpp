@@ -7,17 +7,14 @@
 #include <cstring>
 
 
-const char *ErrorSCPI::prolog = "!!! ERROR !!! ";
-
-
 /// Рекурсивная функция обработки массива структур StructSCPI.
 /// В случае успешного выполнения возвращает адрес символа, расположенного за последним обработанным символом.
 /// В случае неуспешного завершения - возвращает nullptr. Код ошибки находится в *error
-static const char *Process(const char *buffer, const StructSCPI structs[], ErrorSCPI *error); //-V2504
+static const char *Process(const char *buffer, const StructSCPI structs[]); //-V2504
 /// Обработка узла дерева node
-static const char *ProcessNode(const char *begin, const StructSCPI *node, ErrorSCPI *error);
+static const char *ProcessNode(const char *begin, const StructSCPI *node);
 /// Обработка листа node
-static const char *ProcessLeaf(const char *begin, const StructSCPI *node, ErrorSCPI *error);
+static const char *ProcessLeaf(const char *begin, const StructSCPI *node);
 /// Возвращает true, если символ является разделителем или '*'
 static bool IsSeparator(const char &symbol);
 /// Удаляет неправильные символы из начала строки
@@ -45,14 +42,11 @@ void SCPI::Update()
 
     if(data.Size() == 0)
     {
+        SendBadSymbols();
         return;
     }
 
-    ErrorSCPI error;
-
-    const char *end = Process(data.c_str(), head, &error);
-
-    error.SendMessage();
+    const char *end = Process(data.c_str(), head);
 
     if(end)
     {
@@ -61,7 +55,7 @@ void SCPI::Update()
 }
 
 
-static const char *Process(const char *buffer, const StructSCPI strct[], ErrorSCPI *error) //-V2504
+static const char *Process(const char *buffer, const StructSCPI strct[]) //-V2504
 {
     while (!strct->IsEmpty())
     {
@@ -71,11 +65,11 @@ static const char *Process(const char *buffer, const StructSCPI strct[], ErrorSC
         {
             if (strct->IsNode())
             {
-                return ProcessNode(end, strct, error);
+                return ProcessNode(end, strct);
             }
             else if (strct->IsLeaf())
             {
-                return ProcessLeaf(end, strct, error);
+                return ProcessLeaf(end, strct);
             }
             else
             {
@@ -121,13 +115,13 @@ const char *SCPI::BeginWith(const char *buffer, const char *word)
 }
 
 
-static const char *ProcessNode(const char *begin, const StructSCPI *node, ErrorSCPI *error)
+static const char *ProcessNode(const char *begin, const StructSCPI *node)
 {
-    return Process(begin, node->strct, error);
+    return Process(begin, node->strct);
 }
 
 
-static const char *ProcessLeaf(const char *begin, const StructSCPI *node, ErrorSCPI *error)
+static const char *ProcessLeaf(const char *begin, const StructSCPI *node)
 {
     if (*begin == '\0')                     // Подстраховка от того, что символ окончания команды не принят
     {
@@ -141,7 +135,8 @@ static const char *ProcessLeaf(const char *begin, const StructSCPI *node, ErrorS
         return result;
     }
 
-    error->Set(ErrorSCPI::InvalidSequence, begin, begin + 1);
+    badSymbols.Append(*begin);
+    badSymbols.Append(*(begin + 1));
 
     return begin + 1;
 }
@@ -160,33 +155,13 @@ bool SCPI::IsLineEnding(const char **buffer)
 }
 
 
-void ErrorSCPI::SendMessage()
+void SCPI::SendBadSymbols()
 {
-    if(state == Success)
+    if (badSymbols.Size())
     {
-        return;
-    }
-
-    static const char *names[] =
-    {
-        "",
-        "Invalid sequence"
-    };
-
-    if (state == InvalidSequence)
-    {
-        String invalidSequence;
-
-        const char *p = startInvalidSequence;
-
-        while(p < endInvalidSequence)
-        {
-            invalidSequence.Append(*p++);
-        }
-
-        String message("%s %s : %s", prolog, names[state], invalidSequence.c_str());
-
+        String message("!!! ERROR !!! Invalid sequency : %s", badSymbols.c_str());
         SCPI::SendAnswer(message.c_str());
+        badSymbols.Free();
     }
 }
 
@@ -199,26 +174,16 @@ static void RemoveBadSymbolsFromBegin()
 
 static bool RemoveSymbolsBeforeSeparator()
 {
-    if (data.Size() && !IsSeparator(data[0]))
+    bool result = false;
+
+    while (data.Size() && !IsSeparator(data[0]))
     {
-        ErrorSCPI error(ErrorSCPI::InvalidSequence);
-
-        error.startInvalidSequence = data.c_str();
-        error.endInvalidSequence = data.c_str();
-
-        for(uint i = 0; i < data.Size() && data[i] != SCPI::SEPARATOR && data[i] != '*'; i++)
-        {
-            error.endInvalidSequence++;
-        }
-
-        error.SendMessage();
-
-        data.RemoveFromBegin(static_cast<uint>(error.endInvalidSequence - error.startInvalidSequence));
-
-        return true;
+        badSymbols.Append(data[0]);
+        data.RemoveFromBegin(1);
+        result = true;
     }
 
-    return false;
+    return result;
 }
 
 
@@ -226,26 +191,11 @@ static bool RemoveSeparatorsSequenceFromBegin()
 {
     bool result = false;
 
-    ErrorSCPI error;
-
-    error.Set(ErrorSCPI::Success, data.c_str(), data.c_str());
-
-    while ((error.endInvalidSequence - error.startInvalidSequence) + 2U <= data.Size()   &&
-        IsSeparator(*error.endInvalidSequence)                                          && 
-        IsSeparator(*(error.endInvalidSequence + 1)))
+    while (data.Size() > 1 && IsSeparator(data[0]) && IsSeparator(data[1]))
     {
+        badSymbols.Append(data[0]);
+        data.RemoveFromBegin(1);
         result = true;
-
-        error.state = ErrorSCPI::InvalidSequence;
-
-        error.endInvalidSequence++;
-    }
-
-    if (error.state == ErrorSCPI::InvalidSequence)
-    {
-        error.SendMessage();
-
-        data.RemoveFromBegin(static_cast<uint>(error.endInvalidSequence - error.startInvalidSequence));
     }
 
     return result;
@@ -270,13 +220,4 @@ void SCPI::SendAnswer(char *message)
 static bool IsSeparator(const char &symbol)
 {
     return (symbol == SCPI::SEPARATOR) || (symbol == '*');
-}
-
-
-void SCPI::SendBadSymbols()
-{
-//    if (!badSymbols.Size())
-//    {
-//
-//    }
 }

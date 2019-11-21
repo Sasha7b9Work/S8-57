@@ -10,61 +10,21 @@
 */
 
 
-struct ErrorSCPI
-{
-    enum State
-    {
-        Success,
-        InvalidSequence
-    };
-
-    ErrorSCPI(State s = Success) : state(s), startInvalidSequence(nullptr), endInvalidSequence(nullptr) {};
-
-    void Set(State s, const char *start, const char *end)
-    {
-        state = s;
-        startInvalidSequence = start;
-        endInvalidSequence = end;
-    };
-
-    void SendMessage();
-    
-    State state;
-    /// В случае определения неправильной последовательности этот указатель указывает на символ, следующий за последним
-    const char *startInvalidSequence;
-    const char *endInvalidSequence;
-
-private:
-    static const char *prolog;
-};
-
-
 typedef const char *(*FuncSCPI)(const char *);
 
 
 /// Структура, соотвествующая узлу дерева.
 struct StructSCPI
 {
-//    enum Type
-//    {
-//        Empty,
-//        Node,           /// Структура является "узлом" дерева, нужно идти дальше по дереву через structs
-//        Leaf            /// Стурктура является "листом" дерева, нужно выполнять функцию func
-//    };
-//
-//    Type type;          /// Тип структуры
-//
-    const char *key;    /// Ключевое слово узла (морфема)
+    const char *key;            /// Ключевое слово узла (морфема)
 
-    const StructSCPI *strct;  /// Этот указатель следует интерпретировать в зависимости от типа структуры.
-                        /// Если структура имеет тип Node, то здесь хранится массив потомков - StructSCPI *structs.
-                        /// Если структура имеет тип Leaf, то здесь хранится функция - обработчик листа типа FuncSCPI
+    const StructSCPI *strct;    /// Если структура имеет тип Node, то здесь хранится массив потомков - StructSCPI *structs.
 
-    FuncSCPI  func;
+    FuncSCPI  func;             /// Если структура имеет тип Leaf, то здесь хранится функция - обработчик листа типа FuncSCPI
 
     bool IsEmpty() const { return key[0] == '\0'; };
-    bool IsNode() const { return strct != nullptr; };
-    bool IsLeaf() const { return func != nullptr; };
+    bool IsNode() const { return strct != nullptr; };   /// Структура является "узлом" дерева, нужно идти дальше по дереву через structs
+    bool IsLeaf() const { return func != nullptr; };    /// Стурктура является "листом" дерева, нужно выполнять функцию func
 };
 
 
