@@ -64,17 +64,17 @@ void SCPI::Update()
 
 static const char *Process(const char *buffer, const StructSCPI strct[], ErrorSCPI *error) //-V2504
 {
-    while (strct->type != StructSCPI::Empty)
+    while (!strct->IsEmpty())
     {
         const char *end = SCPI::BeginWith(buffer, strct->key);
 
         if (end)
         {
-            if (strct->type == StructSCPI::Node)
+            if (strct->IsNode())
             {
                 return ProcessNode(end, strct, error);
             }
-            else if (strct->type == StructSCPI::Leaf)
+            else if (strct->IsLeaf())
             {
                 return ProcessLeaf(end, strct, error);
             }
@@ -124,20 +124,18 @@ const char *SCPI::BeginWith(const char *buffer, const char *word)
 
 static const char *ProcessNode(const char *begin, const StructSCPI *node, ErrorSCPI *error)
 {
-    const StructSCPI *params = reinterpret_cast<const StructSCPI *>(node->param);
-
-    return Process(begin, params, error);
+    return Process(begin, node->strct, error);
 }
 
 
 static const char *ProcessLeaf(const char *begin, const StructSCPI *node, ErrorSCPI *error)
 {
-    FuncSCPI func = reinterpret_cast<FuncSCPI>(node->param);
-
     if (*begin == '\0')                     // Подстраховка от того, что символ окончания команды не принят
     {
         return nullptr;
     }
+
+    FuncSCPI func = *node->func;
 
     const char *result = func(begin);
 

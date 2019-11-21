@@ -53,17 +53,17 @@ static const char *keyNames[Key::Count] =
 
 static const StructSCPI key[] =
 {
-    {StructSCPI::Leaf, ":PRESS:", reinterpret_cast<void *>(FuncKeyPress)},
-    {StructSCPI::Leaf, ":LONG:",  reinterpret_cast<void *>(FuncKeyLong)},
-    {StructSCPI::Empty}
+    {":PRESS:", nullptr, FuncKeyPress},
+    {":LONG:",  nullptr, FuncKeyLong},
+    {""}
 };
 
 
 const StructSCPI head[] =
 {
-    {StructSCPI::Leaf, "*IDN?", reinterpret_cast<void *>(FuncIDN)},
-    {StructSCPI::Node, ":KEY",  const_cast<StructSCPI *>(key)},
-    {StructSCPI::Empty}
+    {"*IDN?", nullptr, FuncIDN},
+    {":KEY",  key,     nullptr},
+    {""}
 };
 
 
