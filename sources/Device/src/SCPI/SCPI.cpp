@@ -80,14 +80,9 @@ static const char *Process(const char *buffer, const StructSCPI strct[]) //-V250
         strct++;
     }
 
-    if (data.Size())
-    {
-        data.RemoveFromBegin(1);
-    }
+    badSymbols.Append(*buffer);         // Перебрали все ключи в strct и не нашли ни одного соответствия. Поэтому помещаем начальный разделитель в бракованные символы
 
-    RemoveBadSymbolsFromBegin();
-
-    return nullptr;
+    return buffer + 1;
 }
 
 
