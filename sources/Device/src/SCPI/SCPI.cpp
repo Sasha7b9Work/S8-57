@@ -134,7 +134,21 @@ static const char *ProcessLeaf(const char *begin, const StructSCPI *node, ErrorS
 {
     FuncSCPI func = reinterpret_cast<FuncSCPI>(node->param);
 
-    return func(begin, error);
+    if (*begin == '\0')                     // Подстраховка от того, что символ окончания команды не принят
+    {
+        return nullptr;
+    }
+
+    const char *result = func(begin, error);
+
+    if (result)
+    {
+        return result;
+    }
+
+    error->Set(ErrorSCPI::InvalidSequence, begin, begin + 1);
+
+    return begin + 1;
 }
 
 

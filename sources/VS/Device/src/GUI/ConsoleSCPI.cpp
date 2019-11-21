@@ -95,7 +95,6 @@ void ConsoleSCPI::OnTextControlKeyDown(wxKeyEvent &event)
         {
             line->Clear();
             line->WriteText(txt);
-            line->SetInsertionPoint(txt.size() + 1);
         }
     }
     else if (event.GetKeyCode() == WXK_DOWN)
@@ -106,11 +105,12 @@ void ConsoleSCPI::OnTextControlKeyDown(wxKeyEvent &event)
         {
             line->Clear();
             line->WriteText(txt);
-            line->SetInsertionPoint(txt.size() + 1);
         }
     }
-
-    event.Skip();
+    else
+    {
+        event.Skip();
+    }
 }
 
 
@@ -140,8 +140,12 @@ void ConsoleSCPI::OnClose(wxCloseEvent &)
 
 void ConsoleSCPI::History::Add(const wxString &txt)
 {
-    history.push_back(txt);
-    position = history.size() - 1;
+    if ((history.size() == 0) || 
+        (history[history.size() - 1].compare(txt) != 0))
+    {
+        history.push_back(txt);
+        position = history.size() - 1;
+    }
 }
 
 

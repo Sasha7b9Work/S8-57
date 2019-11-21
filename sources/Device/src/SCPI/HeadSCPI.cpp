@@ -51,10 +51,10 @@ static const char *keyNames[Key::Count] =
 };
 
 
-static const StructSCPI keys[] =
+static const StructSCPI key[] =
 {
-    {StructSCPI::Leaf, ":PRESS:", FuncKeyPress},
-    {StructSCPI::Leaf, ":LONG:",  FuncKeyLong},
+    {StructSCPI::Leaf, ":PRESS:", reinterpret_cast<void *>(FuncKeyPress)},
+    {StructSCPI::Leaf, ":LONG:",  reinterpret_cast<void *>(FuncKeyLong)},
     {StructSCPI::Empty}
 };
 
@@ -62,19 +62,14 @@ static const StructSCPI keys[] =
 const StructSCPI head[] =
 {
     {StructSCPI::Leaf, "*IDN?", reinterpret_cast<void *>(FuncIDN)},
-    {StructSCPI::Node, ":KEY",  const_cast<StructSCPI *>(keys)},
+    {StructSCPI::Node, ":KEY",  const_cast<StructSCPI *>(key)},
     {StructSCPI::Empty}
 };
 
 
 
-static const char *FuncIDN(const char *buffer, ErrorSCPI *error)
+static const char *FuncIDN(const char *buffer, ErrorSCPI *)
 {
-    if(*buffer == '\0')              // Подстраховка от того, что символ окончания команды не принят
-    {
-        return nullptr;
-    }
-
     if (SCPI::IsLineEnding(buffer))
     {
         SCPI::SendAnswer("MNIPI, S8-57, v.1.2");
@@ -82,19 +77,12 @@ static const char *FuncIDN(const char *buffer, ErrorSCPI *error)
         return buffer + 1;
     }
 
-    error->Set(ErrorSCPI::InvalidSequence, buffer, buffer + 1);
-
-    return buffer + 1;
+    return nullptr;
 }
 
 
-static const char *FuncKeyPress(const char *buffer, ErrorSCPI *error)
+static const char *FuncKeyPress(const char *buffer, ErrorSCPI *)
 {
-    if (*buffer == '\0')
-    {
-        return nullptr;
-    }
-
     for (int i = 0; i < Key::Count; i++)
     {
         const char *end = SCPI::BeginWith(buffer, keyNames[i]);
@@ -113,9 +101,7 @@ static const char *FuncKeyPress(const char *buffer, ErrorSCPI *error)
         }
     }
 
-    error->Set(ErrorSCPI::InvalidSequence, buffer, buffer + 1);
-
-    return buffer + 1;
+    return nullptr;
 }
 
 
