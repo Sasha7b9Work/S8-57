@@ -33,6 +33,13 @@ void SCPI::AppendNewData(const char *buffer, uint)
     data.Append(buffer);
 
     SU::ToUpper(data.c_str());
+
+    RemoveBadSymbolsFromBegin();
+
+    if (data.Size() == 0)
+    {
+        SendBadSymbols();
+    }
 }
 
 
