@@ -17,7 +17,7 @@ static wxTextCtrl *text = nullptr;
 static wxTextCtrl *line = nullptr;
 
 
-ConsoleSCPI *TheConsole = nullptr;
+static ConsoleSCPI *self = nullptr;
 
 
 ConsoleSCPI::ConsoleSCPI(wxFrame *parent) : wxFrame(parent, wxID_ANY, wxT("SCPI"))
@@ -34,10 +34,9 @@ ConsoleSCPI::ConsoleSCPI(wxFrame *parent) : wxFrame(parent, wxID_ANY, wxT("SCPI"
 
     Bind(wxEVT_SIZE, &ConsoleSCPI::OnSize, this);
     line->Bind(wxEVT_TEXT_ENTER, &ConsoleSCPI::OnTextEnter, this, ID_LINE);
+    Bind(wxEVT_CLOSE_WINDOW, &ConsoleSCPI::OnClose, this);
 
     Show();
-
-    TheConsole = this;
 }
 
 
@@ -59,25 +58,14 @@ void ConsoleSCPI::OnSize(wxSizeEvent &)
 }
 
 
-void ConsoleSCPI::Open(wxFrame *parent)
+ConsoleSCPI *ConsoleSCPI::Self()
 {
-    if (TheConsole)
+    if (!self)
     {
-        if (TheConsole->IsShown())
-        {
-            TheConsole->Hide();
-            text->Clear();
-            line->Clear();
-        }
-        else
-        {
-            TheConsole->Show();
-        }
+        self = new ConsoleSCPI(nullptr);
     }
-    else
-    {
-        TheConsole = new ConsoleSCPI(parent);
-    }
+
+    return self;
 }
 
 
@@ -100,4 +88,16 @@ void ConsoleSCPI::AddLine(const wxString &str)
 void ConsoleSCPI::AddText(const wxString &str)
 {
     text->WriteText(str);
+}
+
+
+void ConsoleSCPI::SwitchVisibility()
+{
+    Self()->Show(!Self()->IsShown());
+}
+
+
+void ConsoleSCPI::OnClose(wxCloseEvent &)
+{
+    Self()->Show(false);
 }

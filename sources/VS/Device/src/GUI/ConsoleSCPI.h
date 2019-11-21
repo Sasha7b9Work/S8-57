@@ -7,17 +7,18 @@
 class ConsoleSCPI : public wxFrame
 {
 public:
-    static void Open(wxFrame *parent);
 
-    static void AddLine(const wxString &line);
-    static void AddText(const wxString &text);
+    static ConsoleSCPI *Self();
+
+    void SwitchVisibility();
+
+    void AddLine(const wxString &line);
+    void AddText(const wxString &text);
 
 private:
     ConsoleSCPI(wxFrame *parent);
 
     void OnSize(wxSizeEvent &);
     void OnTextEnter(wxCommandEvent &);
+    void OnClose(wxCloseEvent &);
 };
-
-
-extern ConsoleSCPI *TheConsole;

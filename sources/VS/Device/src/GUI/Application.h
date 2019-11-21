@@ -12,8 +12,7 @@ public:
     virtual int OnExit() wxOVERRIDE;
 
 private:
-    void SaveSettings();
-    void LoadSettings();
+
     wxLocale locale;
 };
 
@@ -47,4 +46,7 @@ private:
 
     void DrawFPS();
     void HandlerEvents();
+
+    void SaveSettings();
+    void LoadSettings();
 };

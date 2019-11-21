@@ -67,8 +67,6 @@ bool Application::OnInit()
 
     locale.Init(locale.GetSystemLanguage());
 
-    LoadSettings();
-
     return true;
 }
 
@@ -77,13 +75,11 @@ int Application::OnExit()
 {
     set.Save();
 
-    SaveSettings();
-
     return wxApp::OnExit();
 }
 
 
-void Application::SaveSettings()
+void Frame::SaveSettings()
 {
     wxString wsFile(FILE_CONFIG);
     wxFileConfig *pConfig = new wxFileConfig(wxEmptyString, wxEmptyString, wsFile, wxEmptyString, wxCONFIG_USE_LOCAL_FILE | wxCONFIG_USE_RELATIVE_PATH);
@@ -100,11 +96,17 @@ void Application::SaveSettings()
     pConfig->Write(wxT("amplitude"), TuneGeneratorDialog::amplitude[1]);
     pConfig->Write(wxT("offset"), TuneGeneratorDialog::offset[1]);
 
+    pConfig->SetPath(wxT("../ConsoleSCPI"));
+    pConfig->Write(wxT("x"), ConsoleSCPI::Self()->GetPosition().x);
+    pConfig->Write(wxT("y"), ConsoleSCPI::Self()->GetPosition().y);
+    pConfig->Write(wxT("width"), ConsoleSCPI::Self()->GetSize().x);
+    pConfig->Write(wxT("height"), ConsoleSCPI::Self()->GetSize().y);
+
     delete wxConfigBase::Set(nullptr);
 }
 
 
-void Application::LoadSettings()
+void Frame::LoadSettings()
 {
     wxString wsFile(FILE_CONFIG);   
     wxFileConfig *pConfig = new wxFileConfig(wxEmptyString, wxEmptyString, wsFile, wxEmptyString, wxCONFIG_USE_LOCAL_FILE | wxCONFIG_USE_RELATIVE_PATH);
@@ -123,6 +125,14 @@ void Application::LoadSettings()
     config->Read(wxT("amplitude"), &TuneGeneratorDialog::amplitude[1], TuneGeneratorDialog::amplitude[1]);
     config->Read(wxT("offset"), &TuneGeneratorDialog::offset[1], TuneGeneratorDialog::offset[1]);
 
+    config->SetPath(wxT("../ConsoleSCPI"));
+    wxRect rect;
+    config->Read(wxT("x"), &rect.x, ConsoleSCPI::Self()->GetPosition().x);
+    config->Read(wxT("y"), &rect.y, ConsoleSCPI::Self()->GetPosition().y);
+    config->Read(wxT("width"), &rect.width, ConsoleSCPI::Self()->GetSize().x);
+    config->Read(wxT("height"), &rect.height, ConsoleSCPI::Self()->GetSize().y);
+    ConsoleSCPI::Self()->SetSize(rect);
+
     delete wxConfigBase::Set(nullptr);
 }
 
@@ -131,6 +141,8 @@ void Application::LoadSettings()
 Frame::Frame(const wxString& title)
     : wxFrame(NULL, wxID_ANY, title)
 {
+    LoadSettings();
+
     SetIcon(wxICON(sample));
 
     wxMenu *fileMenu = new wxMenu;
@@ -156,6 +168,7 @@ Frame::Frame(const wxString& title)
     Bind(wxEVT_MENU, &Frame::OnSCPI, this, SCPI);
     Bind(wxEVT_TIMER, &Frame::OnTimer, this, TIMER_ID);
     Bind(wxEVT_TIMER, &Frame::OnTimerLong, this, TIMER_LONG_ID);
+    Bind(wxEVT_CLOSE_WINDOW, &Frame::OnClose, this);
 
     timer.SetOwner(this, TIMER_ID);
 
@@ -163,7 +176,7 @@ Frame::Frame(const wxString& title)
 
     timerLongPress.SetOwner(this, TIMER_LONG_ID);
 
-    ConsoleSCPI::Open(this);
+    ConsoleSCPI::Self()->Show();
 }
 
 
@@ -211,9 +224,13 @@ void Frame::OnQuit(wxCommandEvent& WXUNUSED(event))
 }
 
 
-void Frame::OnClose(wxCloseEvent &)
+void Frame::OnClose(wxCloseEvent &event)
 {
+    SaveSettings();
 
+    delete ConsoleSCPI::Self();
+
+    event.Skip();
 }
 
 
@@ -227,7 +244,7 @@ void Frame::OnGenerator(wxCommandEvent &)
 
 void Frame::OnSCPI(wxCommandEvent &)
 {
-    ConsoleSCPI::Open(this);
+    ConsoleSCPI::Self()->SwitchVisibility();
 }
 
 
