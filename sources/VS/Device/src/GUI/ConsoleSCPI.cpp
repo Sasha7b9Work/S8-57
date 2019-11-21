@@ -156,13 +156,15 @@ wxString ConsoleSCPI::History::Next()
         return "";
     }
 
+    wxString result = history[position];
+
     position++;
     if (position == history.size())
     {
         position = 0;
     }
 
-    return history[position];
+    return result;
 }
 
 
@@ -173,7 +175,9 @@ wxString ConsoleSCPI::History::Prev()
         return "";
     }
 
+    wxString result = history[position];
+
     position = (position == 0) ? (history.size() - 1) : (position - 1);
 
-    return history[position];
+    return result;
 }

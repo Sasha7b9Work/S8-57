@@ -152,9 +152,16 @@ static const char *ProcessLeaf(const char *begin, const StructSCPI *node, ErrorS
 }
 
 
-bool SCPI::IsLineEnding(const char *buffer)
+bool SCPI::IsLineEnding(const char **buffer)
 {
-    return (*buffer == 0x0D);
+    bool result = (**buffer == 0x0D);
+
+    if (result)
+    {
+        *(*buffer)++;
+    }
+
+    return result;
 }
 
 

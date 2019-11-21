@@ -70,11 +70,11 @@ const StructSCPI head[] =
 
 static const char *FuncIDN(const char *buffer)
 {
-    if (SCPI::IsLineEnding(buffer))
+    if (SCPI::IsLineEnding(&buffer))
     {
         SCPI::SendAnswer("MNIPI, S8-57, v.1.2");
 
-        return buffer + 1;
+        return buffer;
     }
 
     return nullptr;
@@ -88,11 +88,11 @@ static const char *FuncKeyPress(const char *buffer)
         const char *end = SCPI::BeginWith(buffer, keyNames[i]);
         if (end)
         {
-            if (SCPI::IsLineEnding(end))
+            if (SCPI::IsLineEnding(&end))
             {
                 BufferButtons::Push(KeyEvent(static_cast<Key::E>(i), TypePress::Press));
                 BufferButtons::Push(KeyEvent(static_cast<Key::E>(i), TypePress::Release));
-                return buffer + std::strlen(keyNames[i]) + SCPI::SIZE_SEPARATOR;
+                return end;
             }
             else
             {
@@ -112,11 +112,11 @@ static const char *FuncKeyLong(const char *buffer)
         const char *end = SCPI::BeginWith(buffer, keyNames[i]);
         if (end)
         {
-            if (SCPI::IsLineEnding(end))
+            if (SCPI::IsLineEnding(&end))
             {
                 BufferButtons::Push(KeyEvent(static_cast<Key::E>(i), TypePress::Press));
                 BufferButtons::Push(KeyEvent(static_cast<Key::E>(i), TypePress::Long));
-                return buffer + std::strlen(keyNames[i]) + SCPI::SIZE_SEPARATOR;
+                return end;
             }
             else
             {

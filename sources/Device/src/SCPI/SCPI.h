@@ -74,7 +74,7 @@ struct SCPI
     static void Update();
 
     /// ¬озвращает true, если указатель указывает на завершающую последовательность
-    static bool IsLineEnding(const char *bufer);
+    static bool IsLineEnding(const char **bufer);
     /// ѕослать ответ
     static void SendAnswer(char *message);
     /// ≈сли строка buffer начинаетс€ с последовательности символов word, то возвращает указатель на символ, следующий за последним символом последовательности word.
