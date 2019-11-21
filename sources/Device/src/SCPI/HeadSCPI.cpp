@@ -20,7 +20,7 @@ static const char *FuncKeyLong(const char *);
 static const char *FuncTBaseScale(const char *);
 
 
-static const char *keyNames[Key::Count] =
+static const char * const keyNames[Key::Count] =
 {
     "None",
     "FUNCTION",
@@ -59,7 +59,7 @@ static const char *keyNames[Key::Count] =
     "F5"
 };
 
-static const char *tBaseNames[TBase::Count] =
+static const char * const tBaseNames[TBase::Count] =
 {
     "2NS",
     "5NS",
