@@ -36,24 +36,23 @@ struct StructSCPI
 #define SCPI_EPILOG(t)  return t; } return nullptr;
 
 
-struct SCPI
+namespace SCPI
 {
     /// Символ-разделить морфем команды
-    static const char SEPARATOR = ':';
+    const char SEPARATOR = ':';
 
-    static const int SIZE_SEPARATOR = 1;
+    const int SIZE_SEPARATOR = 1;
 
-    static void AppendNewData(const char *buffer, uint length);
+    void AppendNewData(const char *buffer, uint length);
 
-    static void Update();
-
+    void Update();
     /// Возвращает true, если указатель указывает на завершающую последовательность
-    static bool IsLineEnding(const char **bufer);
+    bool IsLineEnding(const char **bufer);
     /// Послать ответ
-    static void SendAnswer(char *message);
+    void SendAnswer(char *message);
     /// Если строка buffer начинается с последовательности символов word, то возвращает указатель на символ, следующий за последним символом последовательности word.
     /// Иначе возвращает nullptr.
-    static const char *BeginWith(const char *buffer, const char *word);
+    const char *BeginWith(const char *buffer, const char *word);
     /// Послать сообщение об ошибочных символах, если таковые имеются
-    static void SendBadSymbols();
+    void SendBadSymbols();
 };

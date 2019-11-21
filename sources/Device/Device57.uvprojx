@@ -1846,14 +1846,14 @@
           <GroupName>SCPI</GroupName>
           <Files>
             <File>
-              <FileName>SCPI.cpp</FileName>
+              <FileName>DisplaySCPI.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\SCPI\SCPI.cpp</FilePath>
+              <FilePath>.\src\SCPI\DisplaySCPI.cpp</FilePath>
             </File>
             <File>
-              <FileName>SCPI.h</FileName>
+              <FileName>DisplaySCPI.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\src\SCPI\SCPI.h</FilePath>
+              <FilePath>.\src\SCPI\DisplaySCPI.h</FilePath>
             </File>
             <File>
               <FileName>HeadSCPI.cpp</FileName>
@@ -1864,6 +1864,36 @@
               <FileName>HeadSCPI.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\SCPI\HeadSCPI.h</FilePath>
+            </File>
+            <File>
+              <FileName>KeySCPI.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\SCPI\KeySCPI.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>KeySCPI.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\SCPI\KeySCPI.h</FilePath>
+            </File>
+            <File>
+              <FileName>SCPI.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\SCPI\SCPI.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>SCPI.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\SCPI\SCPI.h</FilePath>
+            </File>
+            <File>
+              <FileName>TimeSCPI.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\SCPI\TimeSCPI.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>TimeSCPI.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\SCPI\TimeSCPI.h</FilePath>
             </File>
           </Files>
         </Group>
