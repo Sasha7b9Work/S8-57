@@ -20,5 +20,20 @@ private:
 
     void OnSize(wxSizeEvent &);
     void OnTextEnter(wxCommandEvent &);
+    void OnTextControlKeyDown(wxKeyEvent &);
     void OnClose(wxCloseEvent &);
+
+    class History
+    {
+    public:
+        void Add(const wxString &text);
+        wxString Next();
+        wxString Prev();
+
+    private:
+        std::vector<wxString> history;
+        uint position = 1;
+    };
+
+    History history;
 };

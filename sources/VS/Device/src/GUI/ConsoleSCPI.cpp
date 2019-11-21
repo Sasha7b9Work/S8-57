@@ -34,6 +34,7 @@ ConsoleSCPI::ConsoleSCPI(wxFrame *parent) : wxFrame(parent, wxID_ANY, wxT("SCPI"
 
     Bind(wxEVT_SIZE, &ConsoleSCPI::OnSize, this);
     line->Bind(wxEVT_TEXT_ENTER, &ConsoleSCPI::OnTextEnter, this, ID_LINE);
+    line->Bind(wxEVT_KEY_DOWN, &ConsoleSCPI::OnTextControlKeyDown, this, ID_LINE);
     Bind(wxEVT_CLOSE_WINDOW, &ConsoleSCPI::OnClose, this);
 
     Show();
@@ -71,14 +72,43 @@ ConsoleSCPI *ConsoleSCPI::Self()
 
 void ConsoleSCPI::OnTextEnter(wxCommandEvent &)
 {
+    history.Add(line->GetLineText(0));
+
     String txt("%s\x0d", static_cast<const char *>(line->GetLineText(0).mb_str()));
 
     SCPI::AppendNewData(txt.c_str(), std::strlen(txt.c_str()));
 
-    txt.Set(TypeConversionString::None, "<<< %s", static_cast<const char *>(line->GetLineText(0).mb_str()));
+    txt.Set(TypeConversionString::None, "<      %s", static_cast<const char *>(line->GetLineText(0).mb_str()));
     AddLine(txt.c_str());
 
     line->Clear();
+}
+
+
+void ConsoleSCPI::OnTextControlKeyDown(wxKeyEvent &event)
+{
+    if (event.GetKeyCode() == WXK_UP)
+    {
+        wxString txt = history.Prev();
+
+        if (txt[0])
+        {
+            line->Clear();
+            line->WriteText(txt);
+        }
+    }
+    else if (event.GetKeyCode() == WXK_DOWN)
+    {
+        wxString txt = history.Next();
+
+        if (txt[0])
+        {
+            line->Clear();
+            line->WriteText(txt);
+        }
+    }
+
+    event.Skip();
 }
 
 
@@ -103,4 +133,41 @@ void ConsoleSCPI::SwitchVisibility()
 void ConsoleSCPI::OnClose(wxCloseEvent &)
 {
     Self()->Show(false);
+}
+
+
+void ConsoleSCPI::History::Add(const wxString &txt)
+{
+    history.push_back(txt);
+    position = history.size() - 1;
+}
+
+
+wxString ConsoleSCPI::History::Next()
+{
+    if (history.size() == 0)
+    {
+        return "";
+    }
+
+    position++;
+    if (position == history.size())
+    {
+        position = 0;
+    }
+
+    return history[position];
+}
+
+
+wxString ConsoleSCPI::History::Prev()
+{
+    if (history.size() == 0)
+    {
+        return "";
+    }
+
+    position = (position == 0) ? (history.size() - 1) : (position - 1);
+
+    return history[position];
 }

@@ -96,7 +96,7 @@ void Frame::SaveSettings()
     pConfig->Write(wxT("amplitude"), TuneGeneratorDialog::amplitude[1]);
     pConfig->Write(wxT("offset"), TuneGeneratorDialog::offset[1]);
 
-    pConfig->SetPath(wxT("../ConsoleSCPI"));
+    pConfig->SetPath(wxT("../../ConsoleSCPI"));
     pConfig->Write(wxT("x"), ConsoleSCPI::Self()->GetPosition().x);
     pConfig->Write(wxT("y"), ConsoleSCPI::Self()->GetPosition().y);
     pConfig->Write(wxT("width"), ConsoleSCPI::Self()->GetSize().x);
@@ -125,7 +125,7 @@ void Frame::LoadSettings()
     config->Read(wxT("amplitude"), &TuneGeneratorDialog::amplitude[1], TuneGeneratorDialog::amplitude[1]);
     config->Read(wxT("offset"), &TuneGeneratorDialog::offset[1], TuneGeneratorDialog::offset[1]);
 
-    config->SetPath(wxT("../ConsoleSCPI"));
+    config->SetPath(wxT("../../ConsoleSCPI"));
     wxRect rect;
     config->Read(wxT("x"), &rect.x, ConsoleSCPI::Self()->GetPosition().x);
     config->Read(wxT("y"), &rect.y, ConsoleSCPI::Self()->GetPosition().y);
