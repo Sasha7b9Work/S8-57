@@ -75,6 +75,9 @@ void ConsoleSCPI::OnTextEnter(wxCommandEvent &)
 
     SCPI::AppendNewData(txt.c_str(), std::strlen(txt.c_str()));
 
+    txt.Set(TypeConversionString::None, "<<< %s", static_cast<const char *>(line->GetLineText(0).mb_str()));
+    AddLine(txt.c_str());
+
     line->Clear();
 }
 
