@@ -23,9 +23,14 @@ static const char *ProcessNode(const char *begin, const StructSCPI *node, ErrorS
 static const char *ProcessLeaf(const char *begin, const StructSCPI *node, ErrorSCPI *error);
 /// Удалить начальные символы до begin из data
 static void RemoveFromBegin(const char *begin);
-/// Удалить все символы до разделителя
-static void RemoveSymbolsBeforeSeparator();
-
+/// Возвращает true, если символ является разделителем или '*'
+static bool IsSeparator(const char &symbol);
+/// Удаляет неправильные символы из начала строки
+static void RemoveBadSymbolsFromBegin();
+/// Удалить последовательность разделителей из начала строки до последнего имеющегося
+static bool RemoveSeparatorsSequenceFromBegin();
+/// Удалить все символы до первого разделителя
+static bool RemoveSymbolsBeforeSeparator();
 
 static String data;
 
@@ -40,7 +45,7 @@ void SCPI::AppendNewData(const char *buffer, uint)
 
 void SCPI::Update()
 {
-    RemoveSymbolsBeforeSeparator();
+    RemoveBadSymbolsFromBegin();
 
     if(data.Size() == 0)
     {
@@ -84,6 +89,13 @@ static const char *Process(const char *buffer, const StructSCPI strct[], ErrorSC
 
         strct++;
     }
+
+    if (data.Size())
+    {
+        data.RemoveFromBegin(1);
+    }
+
+    RemoveBadSymbolsFromBegin();
 
     return nullptr;
 }
@@ -172,9 +184,15 @@ static void RemoveFromBegin(const char *begin)
 }
 
 
-static void RemoveSymbolsBeforeSeparator()
+static void RemoveBadSymbolsFromBegin()
 {
-    if (data.Size() && data[0] != SCPI::SEPARATOR && data[0] != '*')
+    while (RemoveSymbolsBeforeSeparator() || RemoveSeparatorsSequenceFromBegin())  { }
+}
+
+
+static bool RemoveSymbolsBeforeSeparator()
+{
+    if (data.Size() && !IsSeparator(data[0]))
     {
         ErrorSCPI error(ErrorSCPI::InvalidSequence);
 
@@ -189,7 +207,41 @@ static void RemoveSymbolsBeforeSeparator()
         error.SendMessage();
 
         data.RemoveFromBegin(static_cast<uint>(error.endInvalidSequence - error.startInvalidSequence));
+
+        return true;
     }
+
+    return false;
+}
+
+
+static bool RemoveSeparatorsSequenceFromBegin()
+{
+    bool result = false;
+
+    ErrorSCPI error;
+
+    error.Set(ErrorSCPI::Success, data.c_str(), data.c_str());
+
+    while ((error.endInvalidSequence - error.startInvalidSequence) + 2U <= data.Size()   &&
+        IsSeparator(*error.endInvalidSequence)                                          && 
+        IsSeparator(*(error.endInvalidSequence + 1)))
+    {
+        result = true;
+
+        error.state = ErrorSCPI::InvalidSequence;
+
+        error.endInvalidSequence++;
+    }
+
+    if (error.state == ErrorSCPI::InvalidSequence)
+    {
+        error.SendMessage();
+
+        data.RemoveFromBegin(static_cast<uint>(error.endInvalidSequence - error.startInvalidSequence));
+    }
+
+    return result;
 }
 
 
@@ -205,4 +257,10 @@ void SCPI::SendAnswer(char *message)
     {
         VCP::SendStringAsynch(message);
     }
+}
+
+
+static bool IsSeparator(const char &symbol)
+{
+    return (symbol == SCPI::SEPARATOR) || (symbol == '*');
 }
