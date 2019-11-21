@@ -105,7 +105,25 @@ static const char *FuncKeyPress(const char *buffer, ErrorSCPI *)
 }
 
 
-static const char *FuncKeyLong(const char *, ErrorSCPI *)
+static const char *FuncKeyLong(const char *buffer, ErrorSCPI *)
 {
-    return "";
+    for (int i = 0; i < Key::Count; i++)
+    {
+        const char *end = SCPI::BeginWith(buffer, keyNames[i]);
+        if (end)
+        {
+            if (SCPI::IsLineEnding(end))
+            {
+                BufferButtons::Push(KeyEvent(static_cast<Key::E>(i), TypePress::Press));
+                BufferButtons::Push(KeyEvent(static_cast<Key::E>(i), TypePress::Long));
+                return buffer + std::strlen(keyNames[i]) + 1;
+            }
+            else
+            {
+                break;
+            }
+        }
+    }
+
+    return nullptr;
 }
