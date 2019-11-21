@@ -15,8 +15,8 @@ static const char *Process(const char *buffer, const StructSCPI structs[]); //-V
 static const char *ProcessNode(const char *begin, const StructSCPI *node);
 /// Обработка листа node
 static const char *ProcessLeaf(const char *begin, const StructSCPI *node);
-/// Возвращает true, если символ является разделителем или '*'
-static bool IsSeparator(const char &symbol);
+/// Возвращает true, если символ является началом комнады - разделителем или '*'
+static bool IsBeginCommand(const char &symbol);
 /// Удаляет неправильные символы из начала строки
 static void RemoveBadSymbolsFromBegin();
 /// Удалить последовательность разделителей из начала строки до последнего имеющегося
@@ -80,7 +80,7 @@ static const char *Process(const char *buffer, const StructSCPI strct[]) //-V250
         strct++;
     }
 
-    badSymbols.Append(*buffer);         // Перебрали все ключи в strct и не нашли ни одного соответствия. Поэтому помещаем начальный разделитель в бракованные символы
+    badSymbols.Append(*buffer);         // Перебрали все ключи в strct и не нашли ни одного соответствия. Поэтому помещаем начальный разделитель в бракованные символыа
 
     return buffer + 1;
 }
@@ -131,7 +131,6 @@ static const char *ProcessLeaf(const char *begin, const StructSCPI *node)
     }
 
     badSymbols.Append(*begin);
-    badSymbols.Append(*(begin + 1));
 
     return begin + 1;
 }
@@ -171,7 +170,7 @@ static bool RemoveSymbolsBeforeSeparator()
 {
     bool result = false;
 
-    while (data.Size() && !IsSeparator(data[0]))
+    while (data.Size() && !IsBeginCommand(data[0]))
     {
         badSymbols.Append(data[0]);
         data.RemoveFromBegin(1);
@@ -186,7 +185,7 @@ static bool RemoveSeparatorsSequenceFromBegin()
 {
     bool result = false;
 
-    while (data.Size() > 1 && IsSeparator(data[0]) && IsSeparator(data[1]))
+    while (data.Size() > 1 && IsBeginCommand(data[0]) && IsBeginCommand(data[1]))
     {
         badSymbols.Append(data[0]);
         data.RemoveFromBegin(1);
@@ -212,7 +211,7 @@ void SCPI::SendAnswer(char *message)
 }
 
 
-static bool IsSeparator(const char &symbol)
+static bool IsBeginCommand(const char &symbol)
 {
     return (symbol == SCPI::SEPARATOR) || (symbol == '*');
 }
