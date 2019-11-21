@@ -4,6 +4,7 @@
 
 #pragma warning(push, 0)
 #include <wx/wx.h>
+#include <wx/fontdlg.h>
 #pragma warning(pop)
 
 
@@ -27,8 +28,7 @@ ConsoleSCPI::ConsoleSCPI(wxFrame *parent) : wxFrame(parent, wxID_ANY, wxT("SCPI"
     line = new wxTextCtrl(this, ID_LINE, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxTE_PROCESS_ENTER);
     line->SetFocus();
 
-    wxFont font = line->GetFont();
-    font.SetWeight(wxFONTWEIGHT_BOLD);
+    wxFont font(11, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_BOLD, false, wxT("Courier New"));
     line->SetFont(font);
     text->SetFont(font);
 
@@ -74,12 +74,13 @@ void ConsoleSCPI::OnTextEnter(wxCommandEvent &)
 {
     history.Add(line->GetLineText(0));
 
-    String txt("%s\x0d", static_cast<const char *>(line->GetLineText(0).mb_str()));
+    String txt("    %s", static_cast<const char *>(line->GetLineText(0).mb_str()));
+
+    AddLine(txt.c_str());
+
+    txt.Set(TypeConversionString::None, "%s\x0d", static_cast<const char *>(line->GetLineText(0).mb_str()));
 
     SCPI::AppendNewData(txt.c_str(), std::strlen(txt.c_str()));
-
-    txt.Set(TypeConversionString::None, "<      %s", static_cast<const char *>(line->GetLineText(0).mb_str()));
-    AddLine(txt.c_str());
 
     line->Clear();
 }

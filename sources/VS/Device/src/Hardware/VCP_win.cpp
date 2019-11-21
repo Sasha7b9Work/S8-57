@@ -29,6 +29,6 @@ void VCP::SendDataAsynch(const uint8 *text, uint)
 
 void VCP::SendStringAsynch(char *message)
 {
-    String text("     > %s", message);
+    String text(">>> %s", message);
     ConsoleSCPI::Self()->AddText(text.c_str());
 }
