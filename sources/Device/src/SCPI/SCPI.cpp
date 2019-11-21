@@ -18,8 +18,6 @@ static const char *Process(const char *buffer, const StructSCPI structs[], Error
 static const char *ProcessNode(const char *begin, const StructSCPI *node, ErrorSCPI *error);
 /// Обработка листа node
 static const char *ProcessLeaf(const char *begin, const StructSCPI *node, ErrorSCPI *error);
-/// Удалить начальные символы до begin из data
-static void RemoveFromBegin(const char *begin);
 /// Возвращает true, если символ является разделителем или '*'
 static bool IsSeparator(const char &symbol);
 /// Удаляет неправильные символы из начала строки
@@ -57,7 +55,7 @@ void SCPI::Update()
 
     if(end)
     {
-        RemoveFromBegin(end);
+        data.RemoveFromBegin(static_cast<uint>(end - data.c_str()));
     }
 }
 
@@ -189,12 +187,6 @@ void ErrorSCPI::SendMessage()
 
         SCPI::SendAnswer(message.c_str());
     }
-}
-
-
-static void RemoveFromBegin(const char *begin)
-{
-    data.RemoveFromBegin(static_cast<uint>(begin - data.c_str()));
 }
 
 
