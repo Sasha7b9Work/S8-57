@@ -2,11 +2,13 @@
 #include "Hardware/VCP.h"
 #include "Keyboard/BufferButtons.h"
 #include "Keyboard/Keyboard.h"
+#include "Menu/Pages/Include/PageService.h"
 #include "SCPI/HeadSCPI.h"
 #include <cstring>
 
 
 static const char *FuncIDN(const char *);
+static const char *FuncReset(const char *);
 static const char *FuncKeyPress(const char *);
 static const char *FuncKeyLong(const char *);
 
@@ -51,33 +53,45 @@ static const char *keyNames[Key::Count] =
 };
 
 
-static const StructSCPI key[] =
+static const StructSCPI keys[] =
 {
-    {":PRESS:", nullptr, FuncKeyPress},
-    {":LONG:",  nullptr, FuncKeyLong},
-    {""}
+    DEF_LEAF(":PRESS:", FuncKeyPress),
+    DEF_LEAF(":LONG:",  FuncKeyLong),
+    DEF_EMPTY()
 };
 
 
 const StructSCPI head[] =
 {
-    {"*IDN?", nullptr, FuncIDN},
-    {":KEY",  key,     nullptr},
-    {""}
+    DEF_LEAF("*IDN?", FuncIDN),
+    DEF_LEAF("*RST",  FuncReset),
+    DEF_NODE(":KEY",  keys),
+    DEF_EMPTY()
 };
 
 
 
 static const char *FuncIDN(const char *buffer)
 {
-    if (SCPI::IsLineEnding(&buffer))
-    {
-        SCPI::SendAnswer("MNIPI, S8-57, v.1.2");
+    SCPI_PROLOG(buffer)
 
-        return buffer;
-    }
+    SCPI::SendAnswer("MNIPI, S8-57, v.1.2");
 
-    return nullptr;
+    return buffer;
+
+    SCPI_EPILOG()
+}
+
+
+static const char *FuncReset(const char *buffer)
+{
+    SCPI_PROLOG(buffer)
+        
+    PageService::OnPress_ResetSettings();
+
+    return buffer;
+
+    SCPI_EPILOG()
 }
 
 
@@ -88,16 +102,13 @@ static const char *FuncKeyPress(const char *buffer)
         const char *end = SCPI::BeginWith(buffer, keyNames[i]);
         if (end)
         {
-            if (SCPI::IsLineEnding(&end))
-            {
-                BufferButtons::Push(KeyEvent(static_cast<Key::E>(i), TypePress::Press));
-                BufferButtons::Push(KeyEvent(static_cast<Key::E>(i), TypePress::Release));
-                return end;
-            }
-            else
-            {
-                break;
-            }
+            SCPI_PROLOG(end)
+
+            BufferButtons::Push(KeyEvent(static_cast<Key::E>(i), TypePress::Press));
+            BufferButtons::Push(KeyEvent(static_cast<Key::E>(i), TypePress::Release));
+            return end;
+            
+            SCPI_EPILOG()
         }
     }
 
@@ -112,16 +123,13 @@ static const char *FuncKeyLong(const char *buffer)
         const char *end = SCPI::BeginWith(buffer, keyNames[i]);
         if (end)
         {
-            if (SCPI::IsLineEnding(&end))
-            {
-                BufferButtons::Push(KeyEvent(static_cast<Key::E>(i), TypePress::Press));
-                BufferButtons::Push(KeyEvent(static_cast<Key::E>(i), TypePress::Long));
-                return end;
-            }
-            else
-            {
-                break;
-            }
+            SCPI_PROLOG(end)
+
+            BufferButtons::Push(KeyEvent(static_cast<Key::E>(i), TypePress::Press));
+            BufferButtons::Push(KeyEvent(static_cast<Key::E>(i), TypePress::Long));
+            return end;
+
+            SCPI_EPILOG()
         }
     }
 

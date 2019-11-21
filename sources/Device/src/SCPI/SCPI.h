@@ -68,6 +68,14 @@ struct StructSCPI
 };
 
 
+#define DEF_NODE(key, strct) {key, strct, nullptr}
+#define DEF_LEAF(key, func) {key, nullptr, func}
+#define DEF_EMPTY() {""}
+
+#define SCPI_PROLOG(t)  if(SCPI::IsLineEnding(&t)) {
+#define SCPI_EPILOG()     } return nullptr;
+
+
 struct SCPI
 {
     /// Символ-разделить морфем команды

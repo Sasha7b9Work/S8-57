@@ -4,7 +4,7 @@
 #include "Settings/Settings.h"
 
 
-static void OnPress_ResetSettings()
+void PageService::OnPress_ResetSettings()
 {
     Settings::Load(true);
     if (Device::State::InModeOsci())
@@ -16,7 +16,7 @@ static void OnPress_ResetSettings()
 DEF_BUTTON( bResetSettings,                                                                                                                                 //--- —≈–¬»— - —брос настроек ---
     "—брос настр",
     "—брос настроек на настройки по умолчанию",
-    &PageService::self, Item::Active, OnPress_ResetSettings
+    &PageService::self, Item::Active, PageService::OnPress_ResetSettings
 )
 
 

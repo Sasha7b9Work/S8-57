@@ -38,6 +38,7 @@ struct PageService
 {
     static const Page * const self;
 
+    static void OnPress_ResetSettings();
 
     struct PageBattery
     {
