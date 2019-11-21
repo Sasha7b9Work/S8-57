@@ -139,7 +139,7 @@ static const char *ProcessLeaf(const char *begin, const StructSCPI *node, ErrorS
         return nullptr;
     }
 
-    const char *result = func(begin, error);
+    const char *result = func(begin);
 
     if (result)
     {

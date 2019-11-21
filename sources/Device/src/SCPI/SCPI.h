@@ -39,7 +39,7 @@ private:
 };
 
 
-typedef const char *(*FuncSCPI)(const char *, ErrorSCPI *);
+typedef const char *(*FuncSCPI)(const char *);
 
 
 /// Структура, соотвествующая узлу дерева.
@@ -66,6 +66,8 @@ struct SCPI
 {
     /// Символ-разделить морфем команды
     static const char SEPARATOR = ':';
+
+    static const int SIZE_SEPARATOR = 1;
 
     static void AppendNewData(const char *buffer, uint length);
 

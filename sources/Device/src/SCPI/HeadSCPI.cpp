@@ -6,9 +6,9 @@
 #include <cstring>
 
 
-static const char *FuncIDN(const char *, ErrorSCPI *);
-static const char *FuncKeyPress(const char *, ErrorSCPI *);
-static const char *FuncKeyLong(const char *, ErrorSCPI *);
+static const char *FuncIDN(const char *);
+static const char *FuncKeyPress(const char *);
+static const char *FuncKeyLong(const char *);
 
 
 static const char *keyNames[Key::Count] =
@@ -68,7 +68,7 @@ const StructSCPI head[] =
 
 
 
-static const char *FuncIDN(const char *buffer, ErrorSCPI *)
+static const char *FuncIDN(const char *buffer)
 {
     if (SCPI::IsLineEnding(buffer))
     {
@@ -81,7 +81,7 @@ static const char *FuncIDN(const char *buffer, ErrorSCPI *)
 }
 
 
-static const char *FuncKeyPress(const char *buffer, ErrorSCPI *)
+static const char *FuncKeyPress(const char *buffer)
 {
     for (int i = 0; i < Key::Count; i++)
     {
@@ -92,7 +92,7 @@ static const char *FuncKeyPress(const char *buffer, ErrorSCPI *)
             {
                 BufferButtons::Push(KeyEvent(static_cast<Key::E>(i), TypePress::Press));
                 BufferButtons::Push(KeyEvent(static_cast<Key::E>(i), TypePress::Release));
-                return buffer + std::strlen(keyNames[i]) + 1;
+                return buffer + std::strlen(keyNames[i]) + SCPI::SIZE_SEPARATOR;
             }
             else
             {
@@ -105,7 +105,7 @@ static const char *FuncKeyPress(const char *buffer, ErrorSCPI *)
 }
 
 
-static const char *FuncKeyLong(const char *buffer, ErrorSCPI *)
+static const char *FuncKeyLong(const char *buffer)
 {
     for (int i = 0; i < Key::Count; i++)
     {
@@ -116,7 +116,7 @@ static const char *FuncKeyLong(const char *buffer, ErrorSCPI *)
             {
                 BufferButtons::Push(KeyEvent(static_cast<Key::E>(i), TypePress::Press));
                 BufferButtons::Push(KeyEvent(static_cast<Key::E>(i), TypePress::Long));
-                return buffer + std::strlen(keyNames[i]) + 1;
+                return buffer + std::strlen(keyNames[i]) + SCPI::SIZE_SEPARATOR;
             }
             else
             {
