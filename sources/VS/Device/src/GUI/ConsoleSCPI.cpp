@@ -95,6 +95,7 @@ void ConsoleSCPI::OnTextControlKeyDown(wxKeyEvent &event)
         {
             line->Clear();
             line->WriteText(txt);
+            line->SetInsertionPoint(txt.size() + 1);
         }
     }
     else if (event.GetKeyCode() == WXK_DOWN)
@@ -105,6 +106,7 @@ void ConsoleSCPI::OnTextControlKeyDown(wxKeyEvent &event)
         {
             line->Clear();
             line->WriteText(txt);
+            line->SetInsertionPoint(txt.size() + 1);
         }
     }
 

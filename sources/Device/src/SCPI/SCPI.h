@@ -75,4 +75,7 @@ struct SCPI
     static bool IsLineEnding(const char *bufer);
     /// Послать ответ
     static void SendAnswer(char *message);
+    /// Если строка buffer начинается с последовательности символов word, то возвращает указатель на символ, следующий за последним символом последовательности word.
+    /// Иначе возвращает nullptr.
+    static const char *BeginWith(const char *buffer, const char *word);
 };

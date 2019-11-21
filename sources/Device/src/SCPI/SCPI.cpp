@@ -10,9 +10,6 @@
 const char *ErrorSCPI::prolog = "!!! ERROR !!! ";
 
 
-/// Если строка buffer начинается с последовательности символов word, то возвращает указатель на символ, следующий за последним символом последовательности word.
-/// Иначе возвращает nullptr.
-static const char *BeginWith(const char *buffer, const char *word);
 /// Рекурсивная функция обработки массива структур StructSCPI.
 /// В случае успешного выполнения возвращает адрес символа, расположенного за последним обработанным символом.
 /// В случае неуспешного завершения - возвращает nullptr. Код ошибки находится в *error
@@ -69,7 +66,7 @@ static const char *Process(const char *buffer, const StructSCPI strct[], ErrorSC
 {
     while (strct->type != StructSCPI::Empty)
     {
-        const char *end = BeginWith(buffer, strct->key);
+        const char *end = SCPI::BeginWith(buffer, strct->key);
 
         if (end)
         {
@@ -101,7 +98,7 @@ static const char *Process(const char *buffer, const StructSCPI strct[], ErrorSC
 }
 
 
-static const char *BeginWith(const char *buffer, const char *word)
+const char *SCPI::BeginWith(const char *buffer, const char *word)
 {
     while (*word)
     {
