@@ -30,15 +30,7 @@ static String badSymbols;
 
 void SCPI::AppendNewData(const char *buffer, uint size)
 {
-    String buf(buffer);
-
-    if (buf.Size() > size)
-    {
-        buf[size] = '\0';
-    }
-
-    data.Append(buf.c_str());
-
+    data.Append(buffer, size);
 
     SU::ToUpper(data.c_str());
 

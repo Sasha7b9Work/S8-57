@@ -33,7 +33,7 @@ public:
 
     void Append(const char *str);
 
-    //void Append(const char *str, uint numSymbols);
+    void Append(const char *str, uint numSymbols);
 
     void Append(char symbol);
     /// Удаляет numSymbols из начала строки

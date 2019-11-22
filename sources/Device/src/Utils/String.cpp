@@ -113,24 +113,32 @@ void String::Append(const char *str)
 
     Free();
 
-    Allocate(std::strlen(old.c_str()) + std::strlen(str) + 1);
+    Allocate(old.Size() + std::strlen(str) + 1);
 
     std::strcpy(buffer, old.c_str());
     std::strcat(buffer, str);
 }
 
 
-//void String::Append(const char *str, uint numSymbols)
-//{
-//    if (!str || *str == '\0')
-//    {
-//        return;
-//    }
-//
-//    String old(*this);
-//
-//    Free();
-//}
+void String::Append(const char *str, uint numSymbols)
+{
+    if (!str || *str == '\0')
+    {
+        return;
+    }
+
+    String old(*this);
+
+    Free();
+
+    uint size = numSymbols + old.Size() + 1;
+
+    Allocate(size);
+
+    std::strcpy(buffer, old.c_str());
+    std::memcpy(buffer + old.Size(), str, numSymbols);
+    buffer[size - 1] = '\0';
+}
 
 
 void String::Append(char symbol)
