@@ -4,7 +4,7 @@
 #include "Settings/Settings.h"
 
 
-static void OnPress_Run()
+void PageDebug::PageTests::OnPress_Run()
 {
     set.dbg.runTest = true;
     set.Save();
@@ -15,7 +15,7 @@ static void OnPress_Run()
 DEF_BUTTON( bRun,                                                                                                                                       //--- ОТЛАДКА - ТЕСТЫ - Выполнить ---
     "Выполнить",
     "Выполнение выбранных тестов",
-    &PageDebug::PageTests::self, Button::Active, OnPress_Run
+    &PageDebug::PageTests::self, Button::Active, PageDebug::PageTests::OnPress_Run
 )
 
 

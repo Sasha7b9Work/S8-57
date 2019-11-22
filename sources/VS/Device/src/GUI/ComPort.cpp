@@ -28,8 +28,9 @@ bool ComPort::Open()
                 openedPort = i;
                 return true;
             }
+
+            RS232_CloseComport(i);
         }
-        RS232_CloseComport(i);
     }
 
     return false;

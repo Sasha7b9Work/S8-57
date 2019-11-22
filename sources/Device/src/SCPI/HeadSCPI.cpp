@@ -1,4 +1,5 @@
 #include "defines.h"
+#include "Menu/Pages/Include/DebugPage.h"
 #include "Menu/Pages/Include/PageService.h"
 #include "SCPI/DisplaySCPI.h"
 #include "SCPI/HeadSCPI.h"
@@ -10,12 +11,15 @@
 static const char *FuncIDN(const char *);
 // *RST
 static const char *FuncReset(const char *);
+// :TEST
+static const char *FuncTest(const char *);
 
 
 const StructSCPI SCPI::head[] =
 {
     SCPI_LEAF("*IDN?",     FuncIDN),
     SCPI_LEAF("*RST",      FuncReset),
+    SCPI_LEAF(":TEST",     FuncTest),
     SCPI_NODE(":KEY",      SCPI::key),
     SCPI_NODE(":TIMEBASE", SCPI::tBase),
     SCPI_NODE(":DISPLAY",  SCPI::display),
@@ -40,4 +44,29 @@ static const char *FuncReset(const char *buffer)
     PageService::OnPress_ResetSettings();
 
     SCPI_EPILOG(buffer)
+}
+
+
+static const char *FuncTest(const char *buffer)
+{
+    static const char *const modes[2] =
+    {
+        " FULL",
+        " FAST"
+    };
+
+    for (int i = 0; i < 2; i++)
+    {
+        const char *end = SCPI::BeginWith(buffer, modes[i]);
+        if (end)
+        {
+            SCPI_PROLOG(end)
+
+            PageDebug::PageTests::OnPress_Run();
+
+            SCPI_EPILOG(end)
+        }
+    }
+
+    return nullptr;
 }

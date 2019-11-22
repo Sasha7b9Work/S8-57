@@ -120,6 +120,8 @@ struct PageDebug
     struct PageTests
     {
         static const Page *const self;
+
+        static void OnPress_Run();
     };
 
 
