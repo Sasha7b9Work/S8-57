@@ -67,7 +67,7 @@ struct LinkingTShift
 {
     int                 shift;
     TBase::E            base;
-    PeakDetMode::E      _peakDet;
+    PeakDetMode::E      peakDet;
     TPos::E             TPos;
     SampleType::E       sampleType;
     FunctionTime::E     timeDivXPos;
