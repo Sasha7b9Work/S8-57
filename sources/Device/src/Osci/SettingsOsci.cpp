@@ -255,7 +255,7 @@ int TPos::InBytes()
         {{0,  8192, 16382}, {0,  8192, 16382}},
         {{0, 16384, 32766}, {0, 16384, 32766}}
     };
-    return m[static_cast<int>(set.mem.enumPoints)][set.time.peakDet][value];
+    return m[static_cast<int>(ENumPointsFPGA())][set.time.peakDet][value];
 }
 
 
@@ -520,7 +520,7 @@ int Chan::PointsInChannel() const
         8192
     };
 
-    return numPoints[static_cast<int>(set.mem.enumPoints)];
+    return numPoints[static_cast<int>(ENumPointsFPGA())];
 }
 
 

@@ -503,10 +503,10 @@ void DisplayOsci::PainterData::ChangeTPos()
     }
     else if (set.time.TPos == TPos::Center)
     {
-        set.disp.shiftInMemory = (int16)(FPGA_NUM_POINTS / 2 - width / 2);
+        set.disp.shiftInMemory = (int16)(ENumPointsFPGA().PointsInChannel() / 2 - width / 2);
     }
     else // TPOS_IS_RIGHT
     {
-        set.disp.shiftInMemory = (int16)(FPGA_NUM_POINTS - width - 2);
+        set.disp.shiftInMemory = (int16)(ENumPointsFPGA().PointsInChannel() - width - 2);
     }
 }

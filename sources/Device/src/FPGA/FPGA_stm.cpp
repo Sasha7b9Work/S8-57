@@ -138,7 +138,7 @@ bool FPGA::ReadDataChanenlRand(Chan::E ch, const uint8 *address, uint8 *data)
 
     if (Tsm == NULL_TSHIFT)
     {
-        std::memcpy(data, &dataRand[ch][0], FPGA_NUM_POINTS);
+        std::memcpy(data, &dataRand[ch][0], ENumPointsFPGA().PointsInChannel());
         return false;
     }
 
@@ -148,7 +148,7 @@ bool FPGA::ReadDataChanenlRand(Chan::E ch, const uint8 *address, uint8 *data)
 
     uint8 *dataRead = &dataRand[ch][infoRead.posFirst];
 
-    uint8 *last = &dataRand[ch][FPGA_NUM_POINTS];
+    uint8 *last = &dataRand[ch][ENumPointsFPGA().PointsInChannel()];
 
     if (set.disp.ENumAverage > 1)
     {
@@ -171,7 +171,7 @@ bool FPGA::ReadDataChanenlRand(Chan::E ch, const uint8 *address, uint8 *data)
             dataRead += step;
         }
 
-        std::memcpy(data, &dataRand[ch][0], FPGA_NUM_POINTS);
+        std::memcpy(data, &dataRand[ch][0], ENumPointsFPGA().PointsInChannel());
     }
 
     return true;

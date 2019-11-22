@@ -26,7 +26,7 @@ void DataSettings::Fill(uint8 *_dataA, uint8 * _dataB)
     Lval_DIVIDER_A(this) = static_cast<uint>(set.ch[Chan::A].divider);
     Lval_DIVIDER_B(this) = static_cast<uint>(set.ch[Chan::B].divider);
     TIME_MS_DS(this) = 0;                        // Ёто важно дл€ режима поточеного вывода. ќзначает, что полный сигнал ещЄ не считан
-    ENUM_POINTS(this) = static_cast<uint>(set.mem.enumPoints);
+    ENUM_POINTS(this) = static_cast<uint>(ENumPointsFPGA());
 }
 
 

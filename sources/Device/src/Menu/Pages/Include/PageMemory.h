@@ -5,7 +5,6 @@
 
 /// Преобразует перечисление в количество точек
 #define ENUM_TO_REL_POINTS(enum)    ((uint)(1 << (static_cast<int>(enum) + 9)))
-#define FPGA_NUM_POINTS             ENUM_TO_REL_POINTS(set.mem.enumPoints)
 
 
 /// Режим работы.
@@ -76,6 +75,7 @@ struct ENumPointsFPGA
     ENumPointsFPGA();
     uint BytesInChannel() const;
     uint PointsInChannel() const;
+    operator int() { return value; }
     static const uint MAX_NUM = 8192;
 };
 
