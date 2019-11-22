@@ -22,7 +22,7 @@ void DataSettings::Fill(uint8 *_dataA, uint8 * _dataB)
     Lval_COUPLE_B(this) = static_cast<uint>(ModeCouple(Chan::B));
     TRIGLEV_A(this) = set.trig.lev[Chan::A];
     TRIGLEV_B(this) = set.trig.lev[Chan::B];
-    Lval_PEAKDET(this) = static_cast<uint>(set.time.peakDet);
+    Lval_PEAKDET(this) = static_cast<uint>(PeakDetMode());
     Lval_DIVIDER_A(this) = static_cast<uint>(set.ch[Chan::A].divider);
     Lval_DIVIDER_B(this) = static_cast<uint>(set.ch[Chan::B].divider);
     TIME_MS_DS(this) = 0;                        // Ёто важно дл€ режима поточеного вывода. ќзначает, что полный сигнал ещЄ не считан

@@ -7,10 +7,14 @@ struct PeakDetMode
     enum E
     {
         Disabled,
-        Enabled,
-        Average
+        Enabled
     } value;
-    explicit PeakDetMode(E v) : value(v) {};
+
+    PeakDetMode();
+
+    operator int() const { return value; }
+
+    bool IsEnabled() const;
 };
 
 /// Положение точки синхронизация на сигнале.
@@ -63,7 +67,7 @@ struct LinkingTShift
 {
     int                 shift;
     TBase::E            base;
-    PeakDetMode::E      peakDet;
+    PeakDetMode::E      _peakDet;
     TPos::E             TPos;
     SampleType::E       sampleType;
     FunctionTime::E     timeDivXPos;

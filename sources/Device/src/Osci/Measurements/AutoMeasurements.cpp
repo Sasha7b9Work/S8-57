@@ -549,7 +549,7 @@ float FindIntersectionWithHorLine(Chan::E ch, int numIntersection, bool downToUp
     int num = 0;
     int x = firstByte;
     int compValue = lastByte - 1;
-    int step = (set.time.peakDet == PeakDetMode::Enabled) ? 2 : 1;
+    int step = PeakDetMode().IsEnabled() ? 2 : 1;
 
     uint8 *data = &CHOICE_BUFFER[0];
 

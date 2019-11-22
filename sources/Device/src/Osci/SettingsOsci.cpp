@@ -171,8 +171,8 @@ void TBase::Change(int delta)
     }
     else
     {
-        if ((set.time.peakDet == PeakDetMode::Enabled) &&           // Если вклюён режим пикового детектора
-            set.time.base == TBase::MIN_PEAK_DET)                   // и установлен масштаб по времени, соответствующий минмальному в режиме пикового детектора :
+        if (PeakDetMode().IsEnabled() &&                            // Если вклюён режим пикового детектора
+            TBase() == TBase::MIN_PEAK_DET)                         // и установлен масштаб по времени, соответствующий минмальному в режиме пикового детектора :
         {
             ::Display::ShowWarning("ВКЛЮЧЕН ПИКОВЫЙ ДЕТЕКТОР");		// выводим сообщение об этом
             return;													// и выходим
@@ -255,7 +255,7 @@ int TPos::InBytes()
         {{0,  8192, 16382}, {0,  8192, 16382}},
         {{0, 16384, 32766}, {0, 16384, 32766}}
     };
-    return m[static_cast<int>(ENumPointsFPGA())][set.time.peakDet][value];
+    return m[static_cast<int>(ENumPointsFPGA())][PeakDetMode()][value];
 }
 
 
@@ -425,7 +425,7 @@ ENumPointsFPGA::ENumPointsFPGA()
 uint ENumPointsFPGA::BytesInChannel() const
 {
     uint result = ENUM_TO_REL_POINTS(value);
-    if (set.time.peakDet == PeakDetMode::Enabled)
+    if (PeakDetMode().IsEnabled())
     {
         result *= 2;
     }

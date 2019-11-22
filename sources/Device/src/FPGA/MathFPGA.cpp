@@ -87,7 +87,7 @@ void MathFPGA::CalculateFFT(float *dataR, uint numPoints, float *result, float *
     *freq0 = scale * set.fft.posCur[0] * koeff;
     *freq1 = scale * set.fft.posCur[1] * koeff;
 
-    if (set.time.peakDet)
+    if (PeakDetMode().IsEnabled())
     {
         *freq0 *= 2;
         *freq1 *= 2;

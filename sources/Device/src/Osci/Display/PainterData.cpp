@@ -269,7 +269,7 @@ static void DrawChannel(Chan::E ch)
 
     data += SHIFT_IN_MEMORY;
 
-    if (set.time.peakDet == PeakDetMode::Enabled)
+    if (PeakDetMode().IsEnabled())
     {
         data += SHIFT_IN_MEMORY;
     }
@@ -324,7 +324,7 @@ static void DrawModeLines(Chan::E ch, int left, int center, const uint8 *data, f
 
     int x = left;
 
-    if (set.time.peakDet == PeakDetMode::Enabled)
+    if (PeakDetMode().IsEnabled())
     {
         DrawModeLinesPeakDetOn(center, data, scale, x);
     }
@@ -379,7 +379,7 @@ static void DrawModePoints(Chan::E ch, int left, int center, const uint8 *data, 
 {
     Color::CHAN[ch].SetAsCurrent();
 
-    if (set.time.peakDet == PeakDetMode::Enabled)
+    if (PeakDetMode().IsEnabled())
     {
         DrawModePointsPeakDetOn(center, data, scale, left);
     }
@@ -484,7 +484,7 @@ BitSet64 DisplayOsci::PainterData::BytesOnDisplay()
     retValue.sword0 = SHIFT_IN_MEMORY;
     retValue.sword1 = retValue.sword0 + 281;
 
-    if (set.time.peakDet == PeakDetMode::Enabled)
+    if (PeakDetMode().IsEnabled())
     {
         retValue.sword1 += 281;
     }

@@ -8,6 +8,17 @@
 #include "Osci/Osci.h"
 
 
+PeakDetMode::PeakDetMode() : value(set.time._peakDet)
+{
+
+}
+
+
+bool PeakDetMode::IsEnabled() const
+{
+    return (value == PeakDetMode::Enabled) && (TBase() >= TBase::MIN_PEAK_DET);
+}
+
 
 static bool IsActive_Sample()
 {
@@ -49,7 +60,7 @@ DEF_CHOICE_2( cPeakDet,                                                         
     ,
     DISABLE_RU,
     ENABLE_RU,
-    set.time.peakDet, &PageTime::self, IsActive_PeakDet, PageTime::OnChanged_PeakDet, Choice::AfterDraw
+    set.time._peakDet, &PageTime::self, IsActive_PeakDet, PageTime::OnChanged_PeakDet, Choice::AfterDraw
 )
 
 

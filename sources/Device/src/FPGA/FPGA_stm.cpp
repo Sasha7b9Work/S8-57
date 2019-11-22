@@ -210,7 +210,7 @@ bool FPGA::ReadDataChanenl(Chan::E ch, uint8 *data, uint numPoints)
         *p = *addr0;    // Первая точка почему-то неправильная читается. Просто откидываем её.
         *p = *addr1;    // -V519
 
-        if (set.time.peakDet == PeakDetMode::Enabled)
+        if (PeakDetMode().IsEnabled())
         {
             for (uint i = 0; i < numPoints; i++)
             {

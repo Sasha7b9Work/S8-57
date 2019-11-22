@@ -20,13 +20,13 @@ static void DrawSetName();  // Эта функция рисует, когда нужно задать имя файла 
 
 static bool IsActive_Points()
 {
-    return (set.time.peakDet == PeakDetMode::Disabled);
+    return !PeakDetMode().IsEnabled();
 }
 
 void PageMemory::OnChanged_Points(bool active)
 {
     // Если включен пиковый детектор, то не можем переключать память
-    if ((set.time.peakDet == PeakDetMode::Enabled) && !active)
+    if (PeakDetMode().IsEnabled() && !active)
     {
         Display::ShowWarning("Чтобы изменить длину памяти, отключите пиковый детектор");
         return;
