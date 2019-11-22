@@ -1,12 +1,18 @@
 #include "defines.h"
-#include "Display/Painter.h"
 #include "Menu/Pages/Include/PageDisplay.h"
-#include "FPGA/FPGA.h"
-#include "Menu/Menu.h"
-#include "Utils/CommonFunctions.h"
-#include "Settings/Settings.h"
 #include "Osci/Osci.h"
+#include "Settings/Settings.h"
 
+
+DisplayMapping::DisplayMapping()
+{
+    value = set.disp.mapping;
+}
+
+DisplayMapping::DisplayMapping(DisplayMapping::E v)
+{
+    value = set.disp.mapping = v;
+}
 
 
 DEF_CHOICE_10( cSmoothing,                                                                                                                                    //--- ДИСПЛЕЙ - Сглаживание ---
@@ -85,7 +91,7 @@ DEF_CHOICE_2( cViewMode,                                                        
     "Задаёт режим отображения сигнала",
     "Вектор",
     "Точки",
-    set.disp.modeDrawSignal, &PageDisplay::self, Item::Active, Choice::Changed, Choice::AfterDraw
+    set.disp.mapping, &PageDisplay::self, Item::Active, Choice::Changed, Choice::AfterDraw
 )
 
 

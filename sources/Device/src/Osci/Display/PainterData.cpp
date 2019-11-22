@@ -307,7 +307,7 @@ static void DrawChannel(Chan::E ch)
     }
 
 
-    if (set.disp.modeDrawSignal == ModeDrawSignal::Lines)
+    if (DisplayMapping() == DisplayMapping::Lines)
     {
         DrawModeLines(ch, left, center, data, scale);
     }

@@ -10,7 +10,7 @@
 #define NUM_ACCUM       (1 << static_cast<int>(set.disp.ENumAccum))
 #define NUM_MIN_MAX     (1 << static_cast<int>(set.disp.ENumMinMax))
 
-struct ModeDrawSignal
+struct DisplayMapping
 {
     enum E
     {
@@ -18,6 +18,10 @@ struct ModeDrawSignal
         Points,
         Count
     } value;
+
+    DisplayMapping();
+    DisplayMapping(DisplayMapping::E v);
+    operator int() { return value; }
 };
 
 /// Цвет фона
@@ -166,7 +170,7 @@ struct MenuAutoHide
 
 struct SettingsDisplay
 { //-V802
-    ModeDrawSignal::E      modeDrawSignal;
+    DisplayMapping::E      mapping;
     Background::E          background;            ///< Цвет фона.
     ENumMinMax::E          ENumMinMax;            ///< Перечисление количества измерений для определения минимумов и масимумов.
     uint8                  notUsing0;

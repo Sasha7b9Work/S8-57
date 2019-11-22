@@ -8,7 +8,7 @@
 static const char *FuncDisplayMapping(const char *);
 
 
-static const char *const mapping[ModeDrawSignal::Count] =
+static const char *const mapping[DisplayMapping::Count] =
 {
     " LINES",
     " DOTS"
@@ -24,16 +24,16 @@ const StructSCPI SCPI::display[] =
 
 static const char *FuncDisplayMapping(const char *buffer)
 {
-    SCPI_REQUEST(SCPI::SendAnswer(mapping[set.disp.modeDrawSignal]));
+    SCPI_REQUEST(SCPI::SendAnswer(mapping[DisplayMapping()]));
 
-    for (int i = 0; i < ModeDrawSignal::Count; i++)
+    for (int i = 0; i < DisplayMapping::Count; i++)
     {
         end = SCPI::BeginWith(buffer, mapping[i]);
         if (end)
         {
             SCPI_PROLOG(end)
 
-            set.disp.modeDrawSignal = static_cast<ModeDrawSignal::E>(i);
+            DisplayMapping(static_cast<DisplayMapping::E>(i));
 
             SCPI_EPILOG(end)
         }
