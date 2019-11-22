@@ -344,8 +344,7 @@ file(GLOB SOURCES   ../../common/_VS/*
                     ../../Device/src/MessageMgr.h
                     ../../Device/src/MessageMgr.cpp
                     ../../Device/src/tables.h
-                    ../../Device/src/tables.cpp
-                    )
+                    ../../Device/src/tables.cpp)
                     
 add_executable(Device57 ${SOURCES})
 

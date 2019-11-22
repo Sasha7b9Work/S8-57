@@ -1,5 +1,6 @@
 #include "defines.h"
-#include "ConsoleSCPI.h"
+#include "GUI/ConsoleSCPI.h"
+#include "GUI/ComPort.h"
 #include "SCPI/SCPI.h"
 
 #pragma warning(push, 0)
@@ -38,6 +39,20 @@ ConsoleSCPI::ConsoleSCPI(wxFrame *parent) : wxFrame(parent, wxID_ANY, wxT("SCPI"
     Bind(wxEVT_CLOSE_WINDOW, &ConsoleSCPI::OnClose, this);
 
     Show();
+
+    if (ComPort::Open())
+    {
+        AddLine("Обнаружено внешнее устройство");
+    }
+    else
+    {
+        AddLine("Внешнее устройство не обнаружено. Работает эмулятор");
+    }
+}
+
+ConsoleSCPI::~ConsoleSCPI()
+{
+    ComPort::Close();
 }
 
 
@@ -80,7 +95,14 @@ void ConsoleSCPI::OnTextEnter(wxCommandEvent &)
 
     txt.Set(TypeConversionString::None, "%s\x0d", static_cast<const char *>(line->GetLineText(0).mb_str()));
 
-    SCPI::AppendNewData(txt.c_str(), std::strlen(txt.c_str()));
+    if (ComPort::IsOpened())
+    {
+        ComPort::Send(txt.c_str());
+    }
+    else
+    {
+        SCPI::AppendNewData(txt.c_str(), std::strlen(txt.c_str()));
+    }
 
     line->Clear();
 }

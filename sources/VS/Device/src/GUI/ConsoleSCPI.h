@@ -9,6 +9,7 @@ class ConsoleSCPI : public wxFrame
 public:
 
     static ConsoleSCPI *Self();
+    virtual ~ConsoleSCPI();
 
     void SwitchVisibility();
 
