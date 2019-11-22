@@ -29,7 +29,7 @@ struct Divider
     Divider(Chan::E ch);
     int ToAbs() const;
     static int ToAbs(Divider::E v) { return (v == _1) ? 1 : 10; };
-    operator int() { return value; }
+    operator uint() { return value; }
 };
 
 

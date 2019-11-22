@@ -12,7 +12,7 @@ struct PeakDetMode
 
     PeakDetMode();
 
-    operator int() const { return value; }
+    operator uint() const { return value; }
 
     bool IsEnabled() const;
 };

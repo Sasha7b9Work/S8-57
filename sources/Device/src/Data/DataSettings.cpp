@@ -16,17 +16,17 @@ void DataSettings::Fill(uint8 *_dataA, uint8 * _dataB)
     Lval_RANGE_B(this) = Range(Chan::B);
     RSHIFT_A(this) = RShift(Chan::A);
     RSHIFT_B(this) = RShift(Chan::B);
-    Lval_TBASE(this) = static_cast<uint>(TBase());
+    Lval_TBASE(this) = TBase();
     TSHIFT(this) = TShift();
-    Lval_COUPLE_A(this) = static_cast<uint>(ModeCouple(Chan::A));
-    Lval_COUPLE_B(this) = static_cast<uint>(ModeCouple(Chan::B));
+    Lval_COUPLE_A(this) = ModeCouple(Chan::A);
+    Lval_COUPLE_B(this) = ModeCouple(Chan::B);
     TRIGLEV_A(this) = set.trig.lev[Chan::A];
     TRIGLEV_B(this) = set.trig.lev[Chan::B];
-    Lval_PEAKDET(this) = static_cast<uint>(PeakDetMode());
-    Lval_DIVIDER_A(this) = static_cast<uint>(Divider(Chan::A));
-    Lval_DIVIDER_B(this) = static_cast<uint>(Divider(Chan::B));
+    Lval_PEAKDET(this) = PeakDetMode();
+    Lval_DIVIDER_A(this) = Divider(Chan::A);
+    Lval_DIVIDER_B(this) = Divider(Chan::B);
     TIME_MS_DS(this) = 0;                        // Ёто важно дл€ режима поточеного вывода. ќзначает, что полный сигнал ещЄ не считан
-    ENUM_POINTS(this) = static_cast<uint>(ENumPointsFPGA());
+    ENUM_POINTS(this) = ENumPointsFPGA();
 }
 
 
