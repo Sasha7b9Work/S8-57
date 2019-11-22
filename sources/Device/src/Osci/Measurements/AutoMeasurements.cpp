@@ -1307,7 +1307,7 @@ String Measure::GetStringMeasure(Chan::E ch, char* buffer, int lenBuf)
         pFuncPCFBPC func = sMeas[static_cast<int>(type)].FucnConvertate;
         float value = values[static_cast<int>(type)].value[static_cast<int>(ch)];
        
-        if ((set.ch[static_cast<int>(ch)].divider == Divider::_10) && (func == Voltage2String))
+        if ((Divider(ch) == Divider::_10) && (func == Voltage2String))
         {
             value *= 10.0F;                         // Домножаем, если включён делитель
         }

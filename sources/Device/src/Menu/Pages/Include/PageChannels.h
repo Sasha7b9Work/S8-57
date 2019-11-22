@@ -5,7 +5,6 @@
 
 #define SET_ENABLED_BOTH        (set.ch[Chan::A].enabled && set.ch[Chan::B].enabled)
 #define SET_DISABLED_BOTH       (!set.ch[Chan::A].enabled && !set.ch[Chan::B].enabled)
-#define DIVIDER_ABS(c)          ((set.ch[c].divider == Divider::_1) ? 1 : 10)
 
 
 /// Режим калибровки.
@@ -27,9 +26,10 @@ struct Divider
         _1,
         _10
     } value;
-    explicit Divider(E v) : value(v) { };
-    explicit Divider(uint v) : value(static_cast<E>(v)) { };
-    int ToAbs() const { return (value == _1) ? 1 : 10; };
+    Divider(Chan::E ch);
+    int ToAbs() const;
+    static int ToAbs(Divider::E v) { return (v == _1) ? 1 : 10; };
+    operator int() { return value; }
 };
 
 

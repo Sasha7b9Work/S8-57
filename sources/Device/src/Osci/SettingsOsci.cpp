@@ -610,7 +610,7 @@ void Trig::DrawOnGrid()
 
         Region(width, height).DrawBounded(x, y, Color::BACK, Color::FILL);
 
-        float trigLevVal = RShift::ToAbs(set.trig.lev[set.trig.source], Range(set.trig.source)) * Divider(static_cast<uint8>(set.ch[set.trig.source].divider)).ToAbs();
+        float trigLevVal = RShift::ToAbs(set.trig.lev[set.trig.source], Range(set.trig.source)) * Divider(set.trig.source).ToAbs();
 
         Voltage voltage(trigLevVal);
 

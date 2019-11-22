@@ -11,6 +11,17 @@
 #include <cstring>
 
 
+Divider::Divider(Chan::E ch) : value(set.ch[ch].divider)
+{
+
+}
+
+int Divider::ToAbs() const
+{
+    return (value == _1) ? 1 : 10;
+}
+
+
 static const char chanInput[] =   "1. \"¬кл\" - выводить сигнал на экран.\n"
                                   "2. \"ќткл\" - не выводить сигнал на экран.";
 

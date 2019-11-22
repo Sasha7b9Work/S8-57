@@ -138,7 +138,7 @@ DEF_GRAPH_BUTTON_HINTS_2( bModeArrows,                                          
 static void OnPress_RangeA()
 {
     set.math.range = Range(Chan::A);
-    set.math.divider = static_cast<int8>(set.ch[Chan::A].divider);
+    set.math.divider = static_cast<int8>(Divider(Chan::A));
 }
 
 static void Draw_RangeA(int x, int y)
@@ -161,7 +161,7 @@ DEF_GRAPH_BUTTON( bRangeA,                                                      
 static void OnPress_RangeB()
 {
     set.math.range = Range(Chan::B);
-    set.math.divider = static_cast<int8>(set.ch[Chan::B].divider);
+    set.math.divider = static_cast<int8>(Divider(Chan::B));
 }
 
 static void Draw_RangeB(int x, int y)
