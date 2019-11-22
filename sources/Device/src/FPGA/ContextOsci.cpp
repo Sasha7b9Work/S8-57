@@ -69,7 +69,7 @@ void ContextOsci::SetValueADC(uint16 value)
 
 uint ContextOsci::BytesInChannel()
 {
-    return FPGA::BytesInChannel();
+    return ENumPointsFPGA().BytesInChannel(set.time.peakDet);
 }
 
 bool ContextOsci::GetFlag::PRED()

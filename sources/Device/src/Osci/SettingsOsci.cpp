@@ -416,6 +416,12 @@ int16 RShift(Chan::E ch)
 }
 
 
+ENumPointsFPGA::ENumPointsFPGA()
+{
+    value = set.mem.enumPoints;
+}
+
+
 uint ENumPointsFPGA::BytesInChannel(PeakDetMode::E mode) const
 {
     uint result = ENUM_TO_REL_POINTS(value);
@@ -426,7 +432,6 @@ uint ENumPointsFPGA::BytesInChannel(PeakDetMode::E mode) const
 
     return result;
 }
-
 
 uint ENumPointsFPGA::PointsInChannel() const
 {

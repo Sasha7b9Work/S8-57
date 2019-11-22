@@ -78,13 +78,6 @@ void FPGA::Reset()
 }
 
 
-uint FPGA::BytesInChannel()
-{
-    ENumPointsFPGA points(set.mem.enumPoints);
-    return points.BytesInChannel(set.time.peakDet);
-}
-
-
 void FPGA::SetValueADC(uint16 value)
 {
     valueADC = value;

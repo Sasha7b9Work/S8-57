@@ -52,8 +52,6 @@ private:
     static void OnPressStart();
     /// Принудительный запуск синхронизации
     static void GiveStart();
-    /// Возвращает количество байт в канале на текущих настройках
-    static uint BytesInChannel();
 
     static bool IsRunning();
 
