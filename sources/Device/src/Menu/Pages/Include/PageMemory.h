@@ -74,7 +74,7 @@ struct ENumPointsFPGA
         Count
     } value;
     ENumPointsFPGA();
-    uint BytesInChannel(PeakDetMode::E mode) const;
+    uint BytesInChannel() const;
     uint PointsInChannel() const;
     static const uint MAX_NUM = 8192;
 };

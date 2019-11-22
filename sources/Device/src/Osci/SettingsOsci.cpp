@@ -422,10 +422,10 @@ ENumPointsFPGA::ENumPointsFPGA()
 }
 
 
-uint ENumPointsFPGA::BytesInChannel(PeakDetMode::E mode) const
+uint ENumPointsFPGA::BytesInChannel() const
 {
     uint result = ENUM_TO_REL_POINTS(value);
-    if (mode == PeakDetMode::Enabled)
+    if (set.time.peakDet == PeakDetMode::Enabled)
     {
         result *= 2;
     }
