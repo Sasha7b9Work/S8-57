@@ -15,7 +15,8 @@ struct ModeDrawSignal
     enum E
     {
         Lines,
-        Points
+        Points,
+        Count
     } value;
 };
 
