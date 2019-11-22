@@ -203,7 +203,7 @@ static bool RemoveSeparatorsSequenceFromBegin()
 }
 
 
-void SCPI::SendAnswer(char *message)
+void SCPI::SendAnswer(const char *message)
 {
     if(message[std::strlen(message) - 1] != 0x0D)
     {

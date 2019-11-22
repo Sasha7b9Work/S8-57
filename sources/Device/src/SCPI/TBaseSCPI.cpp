@@ -56,7 +56,7 @@ static const char *FuncTBaseScale(const char *buffer)
     {
         SCPI_PROLOG(end)
 
-        SCPI::SendAnswer(const_cast<char *>(tBaseNames[TBase()]));
+        SCPI::SendAnswer(tBaseNames[TBase()]);
 
         SCPI_EPILOG(end)
     }

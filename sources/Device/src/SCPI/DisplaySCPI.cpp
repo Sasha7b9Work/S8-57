@@ -29,7 +29,7 @@ static const char *FuncDisplayMapping(const char *buffer)
     {
         SCPI_PROLOG(end)
 
-        SCPI::SendAnswer(const_cast<char *>(mapping[set.disp.modeDrawSignal]));
+        SCPI::SendAnswer(mapping[set.disp.modeDrawSignal]);
 
         SCPI_EPILOG(end)
     }
