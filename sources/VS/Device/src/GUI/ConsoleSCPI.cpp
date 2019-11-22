@@ -43,6 +43,8 @@ ConsoleSCPI::ConsoleSCPI(wxFrame *parent) : wxFrame(parent, wxID_ANY, wxT("SCPI"
     if (ComPort::Open())
     {
         AddLine("Обнаружено внешнее устройство");
+        timerComPort.Bind(wxEVT_TIMER, &ConsoleSCPI::OnTimerComPort, this);
+        timerComPort.Start(10);
     }
     else
     {
@@ -71,6 +73,24 @@ void ConsoleSCPI::OnSize(wxSizeEvent &)
 
     line->SetPosition({ clientOrigin.x, clientSize.y - heightLine });
     line->SetSize({ text->GetSize().x, heightLine });
+}
+
+
+void ConsoleSCPI::OnTimerComPort(wxTimerEvent &)
+{
+    if (ComPort::IsOpened())
+    {
+        char buffer[4096];
+
+        int n = ComPort::Receive(buffer, 4095);
+
+        if (n)
+        {
+            buffer[n] = '\0';
+            String message(">>> %s", buffer);
+            AddText(message.c_str());
+        }
+    }
 }
 
 

@@ -1,6 +1,7 @@
 #pragma once
 #pragma warning(push, 0)
 #include <wx/frame.h>
+#include <wx/timer.h>
 #pragma warning(pop)
 
 
@@ -23,6 +24,9 @@ private:
     void OnTextEnter(wxCommandEvent &);
     void OnTextControlKeyDown(wxKeyEvent &);
     void OnClose(wxCloseEvent &);
+
+    wxTimer timerComPort;
+    void OnTimerComPort(wxTimerEvent &);
 
     class History
     {
