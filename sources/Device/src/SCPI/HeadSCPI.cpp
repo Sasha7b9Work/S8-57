@@ -3,7 +3,7 @@
 #include "SCPI/DisplaySCPI.h"
 #include "SCPI/HeadSCPI.h"
 #include "SCPI/KeySCPI.h"
-#include "SCPI/TimeSCPI.h"
+#include "SCPI/TBaseSCPI.h"
 
 
 // *IDN?
@@ -14,11 +14,11 @@ static const char *FuncReset(const char *);
 
 const StructSCPI SCPI::head[] =
 {
-    DEF_LEAF("*IDN?",    FuncIDN),
-    DEF_LEAF("*RST",     FuncReset),
-    DEF_NODE(":KEY",     SCPI::key),
-    DEF_NODE(":TIME",    SCPI::time),
-    DEF_NODE(":DISPLAY", SCPI::display),
+    DEF_LEAF("*IDN?",     FuncIDN),
+    DEF_LEAF("*RST",      FuncReset),
+    DEF_NODE(":KEY",      SCPI::key),
+    DEF_NODE(":TIMEBASE", SCPI::tBase),
+    DEF_NODE(":DISPLAY",  SCPI::display),
     DEF_EMPTY()
 };
 

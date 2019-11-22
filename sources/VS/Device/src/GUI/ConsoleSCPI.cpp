@@ -92,7 +92,7 @@ void ConsoleSCPI::OnTextControlKeyDown(wxKeyEvent &event)
     {
         wxString txt = history.Prev();
 
-        if (txt[0] != '\0')
+        if (txt.size())
         {
             line->Clear();
             line->WriteText(txt);
@@ -102,7 +102,7 @@ void ConsoleSCPI::OnTextControlKeyDown(wxKeyEvent &event)
     {
         wxString txt = history.Next();
 
-        if (txt[0] != '\0')
+        if (txt.size())
         {
             line->Clear();
             line->WriteText(txt);

@@ -4,5 +4,5 @@
 
 namespace SCPI
 {
-    extern const StructSCPI time[]; //-V2504
+    extern const StructSCPI tBase[]; //-V2504
 }
