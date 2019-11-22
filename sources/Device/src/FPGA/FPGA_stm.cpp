@@ -178,10 +178,8 @@ bool FPGA::ReadDataChanenlRand(Chan::E ch, const uint8 *address, uint8 *data)
 }
 
 
-bool FPGA::ReadDataChanenl(Chan::E ch, uint8 data[ENumPointsFPGA::MAX_NUM])
+bool FPGA::ReadDataChanenl(Chan::E ch, uint8 *data, uint numPoints)
 {
-    uint numPoints = FPGA_NUM_POINTS;
-
     if (addrRead == 0xffff)
     {
         uint k = 1;
