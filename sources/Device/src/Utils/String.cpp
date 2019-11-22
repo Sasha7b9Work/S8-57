@@ -120,6 +120,19 @@ void String::Append(const char *str)
 }
 
 
+//void String::Append(const char *str, uint numSymbols)
+//{
+//    if (!str || *str == '\0')
+//    {
+//        return;
+//    }
+//
+//    String old(*this);
+//
+//    Free();
+//}
+
+
 void String::Append(char symbol)
 {
     char b[2] = { symbol, '\0' };

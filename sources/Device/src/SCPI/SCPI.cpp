@@ -28,9 +28,17 @@ static String data;
 
 static String badSymbols;
 
-void SCPI::AppendNewData(const char *buffer, uint)
+void SCPI::AppendNewData(const char *buffer, uint size)
 {
-    data.Append(buffer);
+    String buf(buffer);
+
+    if (buf.Size() > size)
+    {
+        buf[size] = '\0';
+    }
+
+    data.Append(buf.c_str());
+
 
     SU::ToUpper(data.c_str());
 
