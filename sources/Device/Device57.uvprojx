@@ -1886,14 +1886,14 @@
               <FilePath>.\src\SCPI\SCPI.h</FilePath>
             </File>
             <File>
-              <FileName>TimeSCPI.cpp</FileName>
+              <FileName>TBaseSCPI.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\SCPI\TimeSCPI.cpp</FilePath>
+              <FilePath>.\src\SCPI\TBaseSCPI.cpp</FilePath>
             </File>
             <File>
-              <FileName>TimeSCPI.h</FileName>
+              <FileName>TBaseSCPI.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\src\SCPI\TimeSCPI.h</FilePath>
+              <FilePath>.\src\SCPI\TBaseSCPI.h</FilePath>
             </File>
           </Files>
         </Group>
