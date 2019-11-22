@@ -28,12 +28,20 @@ struct StructSCPI
 };
 
 
-#define DEF_NODE(key, strct) {key, strct, nullptr}
-#define DEF_LEAF(key, func) {key, nullptr, func}
-#define DEF_EMPTY() {""}
+#define SCPI_NODE(key, strct) {key, strct, nullptr}
+#define SCPI_LEAF(key, func) {key, nullptr, func}
+#define SCPI_EMPTY() {""}
 
 #define SCPI_PROLOG(t)  if(SCPI::IsLineEnding(&t)) { SCPI::SendBadSymbols();
 #define SCPI_EPILOG(t)  return t; } return nullptr;
+#define SCPI_REQUEST(func)                              \
+    const char *end = SCPI::BeginWith(buffer, "?");     \
+    if (end)                                            \
+    {                                                   \
+        SCPI_PROLOG(end)                                \
+        func;                                           \
+        SCPI_EPILOG(end)                                \
+    }
 
 
 namespace SCPI

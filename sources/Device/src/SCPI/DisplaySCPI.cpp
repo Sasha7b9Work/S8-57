@@ -17,22 +17,14 @@ static const char *const mapping[ModeDrawSignal::Count] =
 
 const StructSCPI SCPI::display[] =
 {
-    DEF_LEAF(":MAPPING", FuncDisplayMapping),
-    DEF_EMPTY()
+    SCPI_LEAF(":MAPPING", FuncDisplayMapping),
+    SCPI_EMPTY()
 };
 
 
 static const char *FuncDisplayMapping(const char *buffer)
 {
-    const char *end = SCPI::BeginWith(buffer, "?");
-    if (end)
-    {
-        SCPI_PROLOG(end)
-
-        SCPI::SendAnswer(mapping[set.disp.modeDrawSignal]);
-
-        SCPI_EPILOG(end)
-    }
+    SCPI_REQUEST(SCPI::SendAnswer(mapping[set.disp.modeDrawSignal]));
 
     for (int i = 0; i < ModeDrawSignal::Count; i++)
     {

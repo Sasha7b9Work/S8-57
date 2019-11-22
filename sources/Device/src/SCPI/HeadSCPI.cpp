@@ -14,12 +14,12 @@ static const char *FuncReset(const char *);
 
 const StructSCPI SCPI::head[] =
 {
-    DEF_LEAF("*IDN?",     FuncIDN),
-    DEF_LEAF("*RST",      FuncReset),
-    DEF_NODE(":KEY",      SCPI::key),
-    DEF_NODE(":TIMEBASE", SCPI::tBase),
-    DEF_NODE(":DISPLAY",  SCPI::display),
-    DEF_EMPTY()
+    SCPI_LEAF("*IDN?",     FuncIDN),
+    SCPI_LEAF("*RST",      FuncReset),
+    SCPI_NODE(":KEY",      SCPI::key),
+    SCPI_NODE(":TIMEBASE", SCPI::tBase),
+    SCPI_NODE(":DISPLAY",  SCPI::display),
+    SCPI_EMPTY()
 };
 
 

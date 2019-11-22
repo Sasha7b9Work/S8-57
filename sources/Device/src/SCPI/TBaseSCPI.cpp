@@ -44,23 +44,14 @@ static const char *const tBaseNames[TBase::Count] =
 
 const StructSCPI SCPI::tBase[] =
 {
-    DEF_LEAF(":SCALE", FuncTBaseScale),
-    DEF_EMPTY()
+    SCPI_LEAF(":SCALE", FuncTBaseScale),
+    SCPI_EMPTY()
 };
 
 
 static const char *FuncTBaseScale(const char *buffer)
 {
-    const char *end = SCPI::BeginWith(buffer, "?");
-    if (end)
-    {
-        SCPI_PROLOG(end)
-
-        SCPI::SendAnswer(tBaseNames[TBase()]);
-
-        SCPI_EPILOG(end)
-    }
-
+    SCPI_REQUEST(SCPI::SendAnswer(tBaseNames[TBase()]));
 
     for(int i = 0; i < TBase::Count; i++)
     {

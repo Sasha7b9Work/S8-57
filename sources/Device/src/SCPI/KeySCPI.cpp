@@ -51,9 +51,9 @@ static const char *const keyNames[Key::Count] =
 
 const StructSCPI SCPI::key[] =
 {
-    DEF_LEAF(":PRESS", FuncKeyPress),
-    DEF_LEAF(":LONG",  FuncKeyLong),
-    DEF_EMPTY()
+    SCPI_LEAF(":PRESS", FuncKeyPress),
+    SCPI_LEAF(":LONG",  FuncKeyLong),
+    SCPI_EMPTY()
 };
 
 
