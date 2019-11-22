@@ -35,7 +35,7 @@ static float NextNoise()
 }
 
 
-static bool GenerateNormalModeData(Chan::E ch, uint8 data[ENumPointsFPGA::MAX_NUM])
+static bool GenerateNormalModeData(Chan::E ch, uint8 *data, uint numBytes)
 {
     static const double kOffset[Range::Count] =
     {
@@ -65,7 +65,7 @@ static bool GenerateNormalModeData(Chan::E ch, uint8 data[ENumPointsFPGA::MAX_NU
         offset += TuneGeneratorDialog::offset[ch] * kOffset[Range(ch)];
     }
 
-    for (uint i = 0; i < ENumPointsFPGA::MAX_NUM; i++)
+    for (uint i = 0; i < numBytes; i++)
     {
         double value = offset + VALUE::AVE + amplitude * (sin(2 * Math::PI * i * frequency)) + NextNoise();
 
@@ -78,7 +78,7 @@ static bool GenerateNormalModeData(Chan::E ch, uint8 data[ENumPointsFPGA::MAX_NU
 }
 
 
-bool FPGA::ReadDataChanenl(Chan::E ch, uint8 data[ENumPointsFPGA::MAX_NUM])
+bool FPGA::ReadDataChanenl(Chan::E ch, uint8 *data, uint numBytes)
 {
     if (!set.ch[ch].enabled)
     {
@@ -95,13 +95,13 @@ bool FPGA::ReadDataChanenl(Chan::E ch, uint8 data[ENumPointsFPGA::MAX_NUM])
     }
     else
     {
-        return GenerateNormalModeData(ch, data);
+        return GenerateNormalModeData(ch, data, numBytes);
     }
 
     double amplitude = 100.0 * TuneGeneratorDialog::amplitude[ch];
     double offset = 0.0 + TuneGeneratorDialog::offset[ch];
 
-    for (uint i = 0; i < FPGA_NUM_POINTS; i++)
+    for (uint i = 0; i < numBytes; i++)
     {
         double value = offset + VALUE::AVE + amplitude * (sin(i * 0.1)) + NextNoise();
 

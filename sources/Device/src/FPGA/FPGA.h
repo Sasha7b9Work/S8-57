@@ -65,7 +65,7 @@ private:
 
     static uint16 ReadLastRecord(Chan::E ch);
 
-    static bool ReadDataChanenl(Chan::E ch, uint8 data[ENumPointsFPGA::MAX_NUM]);
+    static bool ReadDataChanenl(Chan::E ch, uint8 *data, uint numBytes);
 
     static void ClearDataRand();
     /// ¬ключить/выключить калибратор.

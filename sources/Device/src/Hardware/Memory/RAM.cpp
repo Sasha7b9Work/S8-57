@@ -4,6 +4,7 @@
 #include "Hardware/Memory/RAM.h"
 #include "Utils/Math.h"
 #include <cstring>
+#include <cstdlib>
 
 
 struct Packet;
@@ -202,8 +203,12 @@ static uint AllocateMemoryForPacket(const DataSettings *ds)
 
     if (addrLast > END)
     {
-        addrFirst = BEGIN;
-        addrLast = addrFirst + Packet::NeedMemoryForPacedData(ds);
+        addrLast = BEGIN + Packet::NeedMemoryForPacedData(ds);
+        while (reinterpret_cast<uint>(oldest) < addrLast)
+        {
+            RemoveOldest();
+        }
+        return BEGIN;
     }
                                                                             
     if (newest > oldest)                                                    // Нормальный порядок следования - более новые записи расположены после более старых
