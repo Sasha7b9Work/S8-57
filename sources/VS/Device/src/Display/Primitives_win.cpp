@@ -31,7 +31,7 @@ void Region::Fill(int x, int y, Color color)
 void Rectangle::Draw(int x, int y, Color color)
 {
     color.SetAsCurrent();
-    memDC.DrawRectangle({ x, y, width + 1, height + 1 });
+    //memDC.DrawRectangle({ x, y, width + 1, height + 1 });
     Transceiver::Send(nullptr, 0);                            // Это нужно лишь для того, чтобы регистратор читал точки
 }
 
