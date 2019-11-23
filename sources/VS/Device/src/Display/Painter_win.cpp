@@ -75,10 +75,15 @@ void Painter::Init()
 }
 
 
+/// true означает, что картинка перерисована на экран
+static bool isUpdated = true;
+static bool needUpdated = false;
+
 void Painter::BeginScene(Color color)
 {
-    if(buttonBitmap)
+    if(buttonBitmap && isUpdated)
     {
+        isUpdated = false;
         memDC.SelectObject(bitmapButton);
         wxBrush brush({ 0, 0, 0 }, wxTRANSPARENT);
         memDC.SetBrush(brush);
@@ -88,19 +93,27 @@ void Painter::BeginScene(Color color)
 
 void Painter_UpdateFrame()
 {
-    if(buttonBitmap)
+    if(buttonBitmap && needUpdated)
     {
-        memDC.SelectObject(wxNullBitmap);
-        buttonBitmap->SetBitmap(bitmapButton);
+        wxImage image = bitmapButton.ConvertToImage();
+        image = image.Rescale(Frame::WIDTH, Frame::HEIGHT);
+        wxBitmap bitmap(image);
+        buttonBitmap->SetBitmap(bitmap);
+        isUpdated = true;
     }
 }
 
 
 void Painter::EndScene()
 {
-    if(Frame::Self() && Frame::isRunning)
+    if(Frame::Self() && Frame::isRunning && !isUpdated)
     {
-        Frame::Self()->Refresh();
+        memDC.SelectObject(wxNullBitmap);
+        needUpdated = true;
+        if(&memDC.GetSelectedBitmap() != &wxNullBitmap)
+        {
+            Frame::Self()->Refresh();
+        }
     }
 }
 
@@ -147,7 +160,7 @@ static void CreateFrame()
 
     wxBoxSizer *sizer = new wxBoxSizer(wxHORIZONTAL);
 
-    buttonBitmap = new wxButton(frame, wxID_ANY, wxEmptyString, { 0, 0 }, { Display::WIDTH, Display::HEIGHT });
+    buttonBitmap = new wxButton(frame, wxID_ANY, wxEmptyString, { 0, 0 }, { Frame::WIDTH, Frame::HEIGHT });
     buttonBitmap->SetMaxSize({ Display::WIDTH, Display::HEIGHT });
     buttonBitmap->SetBitmap(bitmapButton);
     sizer->Add(buttonBitmap);

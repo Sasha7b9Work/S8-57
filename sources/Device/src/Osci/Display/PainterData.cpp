@@ -195,7 +195,7 @@ static void DRAW_SPECTRUM(const uint8 *dataIn, uint numPoints, Chan::E ch)
 
 static void DrawSpectrum()
 {
-    if (!set.fft.enabled)
+    if (!set.fft.enabled || !DS)
     {
         return;
     }
