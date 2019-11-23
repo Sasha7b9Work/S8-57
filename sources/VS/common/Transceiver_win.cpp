@@ -31,7 +31,7 @@ void Transceiver::Send(const uint8 *data, uint num)
 
         colorDraw = wxColour(b, g, r);
 
-        LOG_WRITE("r=%d, g=%d, b=%d", r, g, b);
+        //LOG_WRITE("r=%d, g=%d, b=%d", r, g, b);
 
         wxBrush brush(colorDraw, wxSOLID);
         memDC.SetBrush(brush);

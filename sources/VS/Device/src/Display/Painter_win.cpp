@@ -81,9 +81,9 @@ void Painter::BeginScene(Color color)
     if(buttonBitmap)
     {
         memDC.SelectObject(bitmapButton);
-        memDC.SetBackground(*wxWHITE_BRUSH);
+        memDC.SetBackground(*wxGREEN_BRUSH);
+        memDC.Clear();
     }
-    //Region(Display::WIDTH, Display::HEIGHT).Fill(0, 0, color);
 }
 
 
