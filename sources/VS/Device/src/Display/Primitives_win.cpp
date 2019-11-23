@@ -8,7 +8,7 @@
 #pragma warning(pop)
 
 
-extern wxColour colorDraw;
+//extern wxColour colorDraw;
 extern wxMemoryDC memDC;
 
 
@@ -24,14 +24,21 @@ static void DrawVPointLine(int x, int y, int count, int delta);
 void Region::Fill(int x, int y, Color color)
 {
     color.SetAsCurrent();
-    memDC.GradientFillLinear({ x, y, width + 1, height + 1 }, colorDraw, colorDraw);
+    wxBrush brush = memDC.GetBrush();
+    wxPen pen = memDC.GetPen();
+    memDC.SetBrush(wxBrush(pen.GetColour()));
+
+    memDC.DrawRectangle({ x, y, width + 1, height + 1 });
+
+    memDC.SetBrush(brush);
 }
 
 
 void Rectangle::Draw(int x, int y, Color color)
 {
     color.SetAsCurrent();
-    //memDC.DrawRectangle({ x, y, width + 1, height + 1 });
+
+    memDC.DrawRectangle({ x, y, width + 1, height + 1 });
     Transceiver::Send(nullptr, 0);                            // Это нужно лишь для того, чтобы регистратор читал точки
 }
 

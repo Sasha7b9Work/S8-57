@@ -29,12 +29,9 @@ void Transceiver::Send(const uint8 *data, uint num)
         uint8 g = static_cast<uint8>(color >> 8);
         uint8 r = static_cast<uint8>(color >> 16);
 
-        colorDraw = wxColour(b, g, r);
+        colorDraw = wxColour(r, g, b);
 
-        //LOG_WRITE("r=%d, g=%d, b=%d", r, g, b);
-
-        wxBrush brush(colorDraw, wxSOLID);
-        memDC.SetBrush(brush);
+        memDC.SetPen(wxPen(colorDraw));
     }
     else
     {

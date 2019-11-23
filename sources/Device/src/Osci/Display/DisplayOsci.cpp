@@ -40,23 +40,23 @@ void DisplayOsci::Update()
 
     HiPart::Draw();
 
-    //AveragerOsci::Draw();
-    //
-    //RShift::DrawBoth();
-    //
-    //TrigLevel::Draw();
-    //
-    //CursorsMeasurements::Draw();
-    //
-    //BottomPart::Draw(273, Grid::Bottom() + 1);
-    //
-    //FrequencyCounter::Draw();
-    //
-    //TableMeasures::Draw();
-    //
-    //Menu::Draw();
+    AveragerOsci::Draw();
+    
+    RShift::DrawBoth();
+    
+    TrigLevel::Draw();
+    
+    CursorsMeasurements::Draw();
+    
+    BottomPart::Draw(273, Grid::Bottom() + 1);
+    
+    FrequencyCounter::Draw();
+    
+    TableMeasures::Draw();
+    
+    Menu::Draw();
 
-    //Warnings::Draw();
+    Warnings::Draw();
 }
 
 

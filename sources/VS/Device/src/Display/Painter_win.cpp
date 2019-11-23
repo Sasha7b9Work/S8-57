@@ -42,7 +42,6 @@ static wxButton *buttonBitmap = nullptr;
 /// Здесь будем рисовать
 wxMemoryDC memDC;
 
-
 /// Здесь хранятся указатели на кнопки
 static wxButton *buttons[Key::Count] = { nullptr };
 /// Цвета
@@ -81,12 +80,9 @@ void Painter::BeginScene(Color color)
     if(buttonBitmap)
     {
         memDC.SelectObject(bitmapButton);
-        //memDC.SetBackground(*wxGREEN_BRUSH);
-        color = Color::WHITE;
-        color.SetAsCurrent();
-        memDC.Clear();
-        //Region(Display::WIDTH, Display::HEIGHT).Fill(0, 0, color);
-        //memDC.Clear();
+        wxBrush brush({ 0, 0, 0 }, wxTRANSPARENT);
+        memDC.SetBrush(brush);
+        Region(Display::WIDTH, Display::HEIGHT).Fill(0, 0, color);
     }
 }
 
@@ -146,7 +142,6 @@ static void CreateFrame()
     buttonBitmap = new wxButton(frame, wxID_ANY, wxEmptyString, { 0, 0 }, { Display::WIDTH, Display::HEIGHT });
     buttonBitmap->SetMaxSize({ Display::WIDTH, Display::HEIGHT });
     buttonBitmap->SetBitmap(bitmapButton);
-
     sizer->Add(buttonBitmap);
 
     frame->SetSizer(sizer);
