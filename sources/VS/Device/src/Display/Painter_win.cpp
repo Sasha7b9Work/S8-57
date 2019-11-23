@@ -86,13 +86,21 @@ void Painter::BeginScene(Color color)
     }
 }
 
-
-void Painter::EndScene()
+void Painter_UpdateFrame()
 {
     if(buttonBitmap)
     {
         memDC.SelectObject(wxNullBitmap);
         buttonBitmap->SetBitmap(bitmapButton);
+    }
+}
+
+
+void Painter::EndScene()
+{
+    if(Frame::Self() && Frame::isRunning)
+    {
+        Frame::Self()->Refresh();
     }
 }
 

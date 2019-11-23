@@ -1,6 +1,7 @@
 #include "defines.h"
 #include "Application.h"
 #include "ConsoleSCPI.h"
+#include "Display/Painter.h"
 #include "GUI/Dialogs/TuneGeneratorDialog.h"
 #include "Settings/Settings.h"
 #include <ctime>
@@ -34,6 +35,10 @@ enum
     TIMER_ID = 10,
     TIMER_LONG_ID
 };
+
+static Frame *frame = nullptr;
+
+bool Frame::isRunning = false;
 
 
 wxIMPLEMENT_APP_NO_MAIN(Application);
@@ -163,7 +168,7 @@ Frame::Frame(const wxString& title)
     Bind(wxEVT_TIMER, &Frame::OnTimer, this, TIMER_ID);
     Bind(wxEVT_TIMER, &Frame::OnTimerLong, this, TIMER_LONG_ID);
     Bind(wxEVT_CLOSE_WINDOW, &Frame::OnClose, this);
-    Bind(wxEVT_PAINT, &Frame::OnPaint, this);  
+    Bind(wxEVT_PAINT, &Frame::OnPaint, this);
 
     timer.SetOwner(this, TIMER_ID);
 
@@ -172,6 +177,9 @@ Frame::Frame(const wxString& title)
     timerLongPress.SetOwner(this, TIMER_LONG_ID);
 
     ConsoleSCPI::Self()->Show();
+
+    frame = this;
+    isRunning = true;
 }
 
 
@@ -215,12 +223,15 @@ void Frame::OnSize(wxCommandEvent&)
 
 void Frame::OnQuit(wxCommandEvent& WXUNUSED(event))
 {
+    isRunning = false;
     Close(true);
 }
 
 
 void Frame::OnClose(wxCloseEvent &event)
 {
+    isRunning = false;
+
     SaveSettings();
 
     delete ConsoleSCPI::Self();
@@ -257,4 +268,19 @@ void Frame::OnAbout(wxCommandEvent& WXUNUSED(event))
         "About wxWidgets minimal sample",
         wxOK | wxICON_INFORMATION,
         this);
+}
+
+
+extern void Painter_UpdateFrame();
+
+
+void Frame::OnPaint(wxPaintEvent &)
+{
+    Painter_UpdateFrame();
+}
+
+
+Frame *Frame::Self()
+{
+    return frame;
 }
