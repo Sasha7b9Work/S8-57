@@ -7,6 +7,9 @@
 #include <cctype>
 #include <sstream>
 #include <cstdlib>
+#ifdef WIN32
+#include <string.h>
+#endif
 
 #ifndef LANG
 #define LANG 0
@@ -422,7 +425,7 @@ bool SU::StringToDouble(double *value, const char *str)
     return (end != buffer);
 }
 
-#ifndef USE_SDL2
+#ifndef GUI
 
 int strcpy_s(char *dest, uint dest_size, const char *src)
 {

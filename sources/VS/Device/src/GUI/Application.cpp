@@ -3,9 +3,9 @@
 #include "ConsoleSCPI.h"
 #include "GUI/Dialogs/TuneGeneratorDialog.h"
 #include "Settings/Settings.h"
+#include <ctime>
 
 #pragma warning(push, 0)
-#include <SDL.h>
 #include <wx/config.h>
 #include <wx/file.h>
 #include <wx/fileconf.h>
@@ -13,6 +13,8 @@
 
 #undef main
 
+
+wxPaintDC *paintDC = nullptr;
 
 
 extern void update();
@@ -45,11 +47,6 @@ int main(int argc, char **argv)
     setlocale(LC_ALL, "Russian");
 
     FreeConsole();
-
-    if (SDL_Init(SDL_INIT_EVERYTHING) != 0U) //-V2517
-    {
-        LOG_ERROR("SDL_Init Error: %s", SDL_GetError());
-    }
 
     return wxEntry(argc, argv);
 }
@@ -169,6 +166,7 @@ Frame::Frame(const wxString& title)
     Bind(wxEVT_TIMER, &Frame::OnTimer, this, TIMER_ID);
     Bind(wxEVT_TIMER, &Frame::OnTimerLong, this, TIMER_LONG_ID);
     Bind(wxEVT_CLOSE_WINDOW, &Frame::OnClose, this);
+    Bind(wxEVT_PAINT, &Frame::OnPaint, this);
 
     timer.SetOwner(this, TIMER_ID);
 
@@ -197,16 +195,16 @@ void Frame::DrawFPS()
 
     count++;
 
-    if (SDL_GetTicks() - prevTime > 1000)
+    if (clock() - prevTime > 1000)
     {
-        float fps = static_cast<float>(count) / (SDL_GetTicks() - prevTime) * 1000.0F;
+        float fps = static_cast<float>(count) / (clock() - prevTime) * 1000.0F;
 
         char buffer[100];
         sprintf(buffer, "fps %f", fps);
 
         SetStatusText(buffer);
 
-        prevTime = SDL_GetTicks();
+        prevTime = (uint)clock();
         count = 0;
     }
 }
@@ -265,3 +263,11 @@ void Frame::OnAbout(wxCommandEvent& WXUNUSED(event))
 }
 
 
+void Frame::OnPaint(wxPaintEvent &)
+{
+    paintDC = new wxPaintDC(this);
+
+    Display::Update();
+
+    paintDC = nullptr;
+}

@@ -48,7 +48,7 @@ public:
 };
 
 
-#ifndef USE_SDL2
+#ifndef GUI
 
 int strcpy_s(char *dest, uint dest_size, const char *src);
 

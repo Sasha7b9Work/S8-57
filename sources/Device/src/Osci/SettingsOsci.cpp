@@ -255,7 +255,7 @@ int TPos::InBytes()
         {{0,  8192, 16382}, {0,  8192, 16382}},
         {{0, 16384, 32766}, {0, 16384, 32766}}
     };
-    return m[ENumPointsFPGA()][PeakDetMode()][value];
+    return m[static_cast<int>(ENumPointsFPGA())][static_cast<int>(PeakDetMode())][value];
 }
 
 

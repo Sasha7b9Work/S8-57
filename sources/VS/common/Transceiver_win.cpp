@@ -3,10 +3,13 @@
 #include "common/Transceiver.h"
 #include "Display/Colors.h"
 #include "Recorder/Recorder.h"
-#include <SDL.h>
+#pragma warning(push, 0)
+#include <wx/wx.h>
+#pragma warning(pop)
 
 
-extern SDL_Renderer *renderer;
+extern wxPaintDC *paintDC;
+wxColour colorDraw;
 
 
 void Transceiver::Init()
@@ -19,11 +22,12 @@ void Transceiver::Send(const uint8 *data, uint num)
 {
     if(num == 2 && *data == Command::Paint_SetColor)
     {
-        uint color = COLOR(data[1]);
-        uint8 blue = static_cast<uint8>(color);
-        uint8 green = static_cast<uint8>(color >> 8);
-        uint8 red = static_cast<uint8>(color >> 16);
-        SDL_SetRenderDrawColor(renderer, red, green, blue, 0x00);
+        colorDraw = COLOR(data[1]);
+        wxBrush brush(colorDraw, wxSOLID);
+        if(paintDC)
+        {
+            paintDC->SetBrush(brush);
+        }
     }
     else
     {

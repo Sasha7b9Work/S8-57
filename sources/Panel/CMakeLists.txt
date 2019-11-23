@@ -33,7 +33,6 @@ source_group(common                    FILES ../common/Command.h
 source_group(_VS                       REGULAR_EXPRESSION ../common/_VS/*)
 source_group(_VS\\std_includes         REGULAR_EXPRESSION ../common/_VS/std_includes/*)
 source_group(_VS\\CMSIS                REGULAR_EXPRESSION ../common/_VS/CMSIS/*)
-source_group(_VS\\HAL                  REGULAR_EXPRESSION ../common/_VS/HAL/*)
 source_group(src                       REGULAR_EXPRESSION src/*)
 source_group(libs\\HAL                 REGULAR_EXPRESSION src/libs/HAL/*.h)
 source_group(Display                   REGULAR_EXPRESSION src/Display/*)
@@ -48,7 +47,6 @@ source_group(Utils                     REGULAR_EXPRESSION src/Utils/*)
 file(GLOB SOURCES   ../common/_VS/*
                     ../common/_VS/std_includes/*
                     ../common/_VS/CMSIS/*
-                    ../common/_VS/HAL/*
                     ../common/Command.h
                     ../common/DataBus.cpp
                     ../common/DataBus.h

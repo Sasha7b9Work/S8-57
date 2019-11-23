@@ -15,10 +15,9 @@ include_directories(../../VS/Device/src
                     ../../common/_VS/USBD
                     ../../common/_VS/USBH
                     ../../../../ThirdParty/wxWidgets/include
-                    ../../../../ThirdParty/wxWidgets/generated/lib/vc_dll/mswud
-                    ../../../../ThirdParty/SDL2/SDL2-2.0.10/include)
+                    ../../../../ThirdParty/wxWidgets/generated/lib/vc_dll/mswud)
                     
-add_definitions(-DSTM32F437xx -DWXUSINGDLL -DUSE_SDL2 -DGUI)
+add_definitions(-DSTM32F437xx -DWXUSINGDLL -DGUI)
 
 SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -MP -Wall")
 
@@ -140,7 +139,7 @@ source_group(Hardware           FILES   ../../Device/src/Hardware/Battery.h
                                         ../../Device/src/Hardware/Clock.h
                                         ../../Device/src/Hardware/Clock.cpp
                                         ../../Device/src/Hardware/Timer.h
-                                                     src/Hardware/Timer_win.cpp
+                                        ../../Device/src/Hardware/Timer.cpp
                                         ../../Device/src/Hardware/VCP.h
                                                      src/Hardware/VCP_win.cpp)
 source_group(Hardware\\HAL      FILES   ../../Device/src/Hardware/HAL/HAL.h
@@ -260,7 +259,7 @@ file(GLOB SOURCES   ../../common/_VS/*
                     ../../Device/src/Hardware/Clock.h
                     ../../Device/src/Hardware/Clock.cpp
                     ../../Device/src/Hardware/Timer.h
-                                 src/Hardware/Timer_win.cpp
+                    ../../Device/src/Hardware/Timer.cpp
                     ../../Device/src/Hardware/VCP.h
                                  src/Hardware/VCP_win.cpp
 
@@ -350,7 +349,6 @@ add_executable(Device57 ${SOURCES})
 
 target_link_libraries(Device57 ../../../../../ThirdParty/wxWidgets/generated/lib/vc_dll/wxbase31ud)
 target_link_libraries(Device57 ../../../../../ThirdParty/wxWidgets/generated/lib/vc_dll/wxmsw31ud_core)
-target_link_libraries(Device57 ../../../../../ThirdParty/SDL2/SDL2-2.0.10/generated/Debug/SDL2-staticd)
 
 target_link_libraries(Device57 WinMM.lib)
 target_link_libraries(Device57 version.lib)

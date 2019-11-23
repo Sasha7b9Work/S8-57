@@ -40,6 +40,10 @@ struct SymbolUGO
     };
 };
 
+#ifdef DELETE
+#undef DELETE
+#endif
+
 struct SymbolUGO2
 {
     enum E

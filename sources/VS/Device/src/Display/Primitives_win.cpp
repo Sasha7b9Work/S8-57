@@ -2,12 +2,14 @@
 #include "common/Transceiver.h"
 #include "Display/Primitives.h"
 #include "Display/Painter.h"
-#include <SDL.h>
 #include <cstring>
+#pragma warning(push, 0)
+#include <wx/wx.h>
+#pragma warning(pop)
 
 
-extern SDL_Renderer *renderer;
-
+extern wxPaintDC *paintDC;
+extern wxColour colorDraw;
 
 
 static int DrawChar(int x, int y, char symbol);
@@ -23,16 +25,20 @@ static void DrawVPointLine(int x, int y, int count, int delta);
 void Region::Fill(int x, int y, Color color)
 {
     color.SetAsCurrent();
-    SDL_Rect rect = { x, y, width + 1, height + 1 };
-    SDL_RenderFillRect(renderer, &rect);
+    if(paintDC)
+    {
+        paintDC->GradientFillLinear({ x, y, width + 1, height + 1 }, colorDraw, colorDraw);
+    }
 }
 
 
 void Rectangle::Draw(int x, int y, Color color)
 {
     color.SetAsCurrent();
-    SDL_Rect rect = { x, y, width + 1, height + 1 };
-    SDL_RenderDrawRect(renderer, &rect);
+    if(paintDC)
+    {
+        paintDC->DrawRectangle({ x, y, width + 1, height + 1 });
+    }
     Transceiver::Send(nullptr, 0);                            // Это нужно лишь для того, чтобы регистратор читал точки
 }
 
@@ -40,28 +46,37 @@ void Rectangle::Draw(int x, int y, Color color)
 void HLine::Draw(int x, int y, Color color)
 {
     color.SetAsCurrent();
-    SDL_RenderDrawLine(renderer, x, y, x + width, y);
+    if(paintDC)
+    {
+        paintDC->DrawLine({ x, y }, { x + width, y });
+    }
 }
 
 
 void VLine::Draw(int x, int y, Color color)
 {
     color.SetAsCurrent();
-    SDL_RenderDrawLine(renderer, x, y, x, y + height);
+    if(paintDC)
+    {
+        paintDC->DrawLine({ x, y }, { x, y + height });
+    }
 }
 
 
 void Pixel::Draw(int x, int y, Color color)
 {
     color.SetAsCurrent();
-    SDL_RenderDrawPoint(renderer, x, y);
+    if(paintDC)
+    {
+        paintDC->DrawPoint({ x, y });
+    }
 }
 
 
 void Line::Draw(Color color)
 {
     color.SetAsCurrent();
-    SDL_RenderDrawLine(renderer, x0, y0, x1, y1);
+    paintDC->DrawLine({ x0, y0 }, { x1, y1 });
 }
 
 
@@ -104,6 +119,11 @@ static int DrawChar(int eX, int eY, char s)
 
     int delta = Font::IsBig() ? 0 : (9 - height);
 
+    if(!paintDC)
+    {
+        return eX;
+    }
+
     for (int row = 0; row < height; row++)
     {
         if (Font::RowNotEmpty(symbol, row))
@@ -114,7 +134,7 @@ static int DrawChar(int eX, int eY, char s)
             {
                 if (Font::BitIsExist(symbol, row, bit))
                 {
-                    SDL_RenderDrawPoint(renderer, x, y);
+                    paintDC->DrawPoint({ x, y });
                 }
                 x++;
             }
@@ -147,7 +167,7 @@ static int DrawBigChar(int eX, int eY, int size, char s)
                     {
                         for (int j = 0; j < size; j++)
                         {
-                            SDL_RenderDrawPoint(renderer, x + i, y + j);
+                            paintDC->DrawPoint({ x + i, y + j });
                         }
                     }
                 }
@@ -173,10 +193,13 @@ void MultiHPointLine::Draw(int x, Color color)
 
 static void DrawHPointLine(int x, int y, int count, int delta)
 {
-    for (int i = 0; i < count; i++)
+    if(paintDC)
     {
-        SDL_RenderDrawPoint(renderer, x, y);
-        x += delta;
+        for(int i = 0; i < count; i++)
+        {
+            paintDC->DrawPoint({ x, y });
+            x += delta;
+        }
     }
 }
 
@@ -194,9 +217,12 @@ void MultiVPointLine::Draw(int y, Color color)
 
 static void DrawVPointLine(int x, int y, int count, int delta)
 {
-    for (int i = 0; i < count; i++)
+    if(paintDC)
     {
-        SDL_RenderDrawPoint(renderer, x, y);
-        y += delta;
+        for(int i = 0; i < count; i++)
+        {
+            paintDC->DrawPoint({ x, y });
+            y += delta;
+        }
     }
 }

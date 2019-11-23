@@ -38,6 +38,7 @@ public:
     void OnTimer(wxTimerEvent &);
     void OnTimerLong(wxTimerEvent &);
     void OnClose(wxCloseEvent &);
+    void OnPaint(wxPaintEvent &);
 
 private:
     wxTimer timer;

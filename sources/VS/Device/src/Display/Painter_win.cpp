@@ -11,7 +11,6 @@
 #define uchar   unsigned char
 #define pString const char * const
 
-#include <SDL.h>
 #include <wx/display.h>
 
 #pragma warning(pop)
@@ -32,15 +31,14 @@
 
 
 #include "defines.h"
+#include "Display/Primitives.h"
 #include "Keyboard/Keyboard.h"
 #include "Menu/Menu.h"
 #include "Utils/Math.h"
 
 
+extern wxPaintDC *paintDC;
 
-SDL_Renderer *renderer = nullptr;
-static SDL_Window *window = nullptr;
-static SDL_Texture *texture = nullptr;
 
 /// Здесь хранятся указатели на кнопки
 static wxButton *buttons[Key::Count] = { nullptr };
@@ -52,10 +50,8 @@ static bool needStopTimerLong = false;
 /// Здесь имя нажатой кнопки
 static Key::E pressedKey = Key::None;
 
-
-
 /// Создаёт окно приложения. Возвращает хэндл виджета для отрисовки
-static HANDLE CreateFrame();
+static void CreateFrame();
 /// Установить размер и оптимальную позицию для окна приложения
 static void SetPositionAndSize(Frame *frame);
 /// Получить разрешение максимального имеющегося в системе монитора
@@ -73,48 +69,18 @@ static void CreateButtonsTrig(Frame *frame, int x, int y);
 
 void Painter::Init()
 {
-    HANDLE handle = CreateFrame();
-
-    window = SDL_CreateWindowFrom(handle);
-
-    if (window == nullptr)
-    {
-        LOG_ERROR("SDL_CreateWindowFrom() Error: %s", SDL_GetError());
-    }
-
-    renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
+    CreateFrame();
 }
 
 
 void Painter::BeginScene(Color color)
 {
-    texture = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_RGBA8888, SDL_RENDERER_ACCELERATED, Display::WIDTH, Display::HEIGHT);
-
-    SDL_SetRenderTarget(renderer, texture);
-    color.SetAsCurrent();
-    SDL_RenderClear(renderer);
+    Region(Display::WIDTH, Display::HEIGHT).Fill(0, 0, color);
 }
 
 
 void Painter::EndScene()
 {
-    SDL_SetRenderTarget(renderer, NULL);
-
-//    int width = 0;
-//    int height = 0;
-//
-//    SDL_GetRendererOutputSize(renderer, &width, &height);
-//
-//    LOG_WRITE("R %d %d", width, height);
-
-    SDL_Rect rect = {0, 0, Frame::WIDTH, Frame::HEIGHT};
-
-    if (texture)
-    {
-        SDL_RenderCopy(renderer, texture, NULL, &rect); //-V2001
-    }
-
-    SDL_RenderPresent(renderer);
 }
 
 
@@ -152,26 +118,15 @@ static wxRect GetMaxDisplay()
 }
 
 
-static HANDLE CreateFrame()
+static void CreateFrame()
 {
     Frame *frame = new Frame("");
 
     SetPositionAndSize(frame);
 
-    wxBoxSizer *sizer = new wxBoxSizer(wxHORIZONTAL);
-
-    wxButton *button = new wxButton(frame, wxID_ANY, "", {10, 10}, {Frame::WIDTH, Frame::HEIGHT});
-    button->SetMaxSize({Frame::WIDTH, Frame::HEIGHT});
-
-    sizer->Add(button);
-
-    frame->SetSizer(sizer);
-
     CreateButtons(frame);
 
     frame->Show(true);
-
-    return button->GetHandle();
 }
 
 
@@ -346,29 +301,6 @@ void Frame::OnTimerLong(wxTimerEvent&)
 
 void Frame::HandlerEvents()
 {
-    SDL_Event event;
-
-    while (SDL_PollEvent(&event))
-    {
-        SDL_PumpEvents();
-
-        if(event.type >= SDL_USEREVENT && event.type < SDL_USEREVENT + TypeTimer::Count)
-        {
-            reinterpret_cast<void (*)()>(event.user.data1)();
-            continue;
-        }
-
-        switch (event.type)
-        {
-        case SDL_KEYDOWN:
-            if (event.key.keysym.sym == SDLK_ESCAPE)
-            {
-                Close(true);
-            }
-            break;
-        }
-    }
-
     if (needStartTimerLong)
     {
         timerLongPress.StartOnce(500);

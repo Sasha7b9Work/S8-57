@@ -1,10 +1,11 @@
 #include "defines.h"
 #include "Hardware/Memory/ROM.h"
 #include <cstring>
-#include <SDL.h>
+#pragma warning(push, 0)
+#include <wx/file.h>
+#pragma warning(pop)
 
-
-#define FILE_NAME "memory.bin"
+#define FILE_NAME wxT("memory.bin")
 
 
 extern uint8 eeprom[ROM::SIZE];
@@ -12,28 +13,28 @@ extern uint8 eeprom[ROM::SIZE];
 
 void MemorySave()
 {
-    SDL_RWops *file = SDL_RWFromFile(FILE_NAME, "wb");
+    wxFile file;
 
-    if (file)
+    if(file.Open(FILE_NAME, wxFile::write))
     {
-        SDL_RWseek(file, 0, RW_SEEK_SET);
-        SDL_RWwrite(file, eeprom, 1, ROM::SIZE);
-        SDL_RWclose(file);
+        file.Seek(0);
+        file.Write(eeprom, ROM::SIZE);
+        file.Close();
     }
 }
 
 
 void MemoryLoad()
 {
-    SDL_RWops *file = SDL_RWFromFile(FILE_NAME, "rb");
+    wxFile file;
 
-    if (file)
+    if(file.Open(FILE_NAME, wxFile::read))
     {
-        SDL_RWread(file, eeprom, 1, ROM::SIZE);
-        SDL_RWclose(file);
+        file.Read(eeprom, ROM::SIZE);
+        file.Close();
     }
-	else
-	{
-		std::memset(eeprom, 0xFF, ROM::SIZE);
-	}
+    else
+    {
+        std::memset(eeprom, 0xFF, ROM::SIZE);
+    }
 }
