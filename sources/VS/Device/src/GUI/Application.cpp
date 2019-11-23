@@ -14,9 +14,6 @@
 #undef main
 
 
-wxPaintDC *paintDC = nullptr;
-
-
 extern void update();
 extern void init();
 
@@ -166,7 +163,7 @@ Frame::Frame(const wxString& title)
     Bind(wxEVT_TIMER, &Frame::OnTimer, this, TIMER_ID);
     Bind(wxEVT_TIMER, &Frame::OnTimerLong, this, TIMER_LONG_ID);
     Bind(wxEVT_CLOSE_WINDOW, &Frame::OnClose, this);
-    Bind(wxEVT_PAINT, &Frame::OnPaint, this);
+    Bind(wxEVT_PAINT, &Frame::OnPaint, this);  
 
     timer.SetOwner(this, TIMER_ID);
 
@@ -260,14 +257,4 @@ void Frame::OnAbout(wxCommandEvent& WXUNUSED(event))
         "About wxWidgets minimal sample",
         wxOK | wxICON_INFORMATION,
         this);
-}
-
-
-void Frame::OnPaint(wxPaintEvent &)
-{
-    paintDC = new wxPaintDC(this);
-
-    Display::Update();
-
-    paintDC = nullptr;
 }

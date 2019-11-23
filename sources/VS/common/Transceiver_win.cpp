@@ -8,8 +8,10 @@
 #pragma warning(pop)
 
 
-extern wxPaintDC *paintDC;
 wxColour colorDraw;
+
+
+extern wxMemoryDC memDC;
 
 
 void Transceiver::Init()
@@ -22,12 +24,17 @@ void Transceiver::Send(const uint8 *data, uint num)
 {
     if(num == 2 && *data == Command::Paint_SetColor)
     {
-        colorDraw = COLOR(data[1]);
+        uint color = COLOR(data[1]);
+        uint8 b = static_cast<uint8>(color);
+        uint8 g = static_cast<uint8>(color >> 8);
+        uint8 r = static_cast<uint8>(color >> 16);
+
+        colorDraw = wxColour(b, g, r);
+
+        LOG_WRITE("r=%d, g=%d, b=%d", r, g, b);
+
         wxBrush brush(colorDraw, wxSOLID);
-        if(paintDC)
-        {
-            paintDC->SetBrush(brush);
-        }
+        memDC.SetBrush(brush);
     }
     else
     {

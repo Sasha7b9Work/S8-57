@@ -37,7 +37,10 @@
 #include "Utils/Math.h"
 
 
-extern wxPaintDC *paintDC;
+static wxBitmap bitmapButton(Display::WIDTH, Display::HEIGHT);
+static wxButton *buttonBitmap = nullptr;
+/// Здесь будем рисовать
+wxMemoryDC memDC;
 
 
 /// Здесь хранятся указатели на кнопки
@@ -75,12 +78,22 @@ void Painter::Init()
 
 void Painter::BeginScene(Color color)
 {
-    Region(Display::WIDTH, Display::HEIGHT).Fill(0, 0, color);
+    if(buttonBitmap)
+    {
+        memDC.SelectObject(bitmapButton);
+        memDC.SetBackground(*wxWHITE_BRUSH);
+    }
+    //Region(Display::WIDTH, Display::HEIGHT).Fill(0, 0, color);
 }
 
 
 void Painter::EndScene()
 {
+    if(buttonBitmap)
+    {
+        memDC.SelectObject(wxNullBitmap);
+        buttonBitmap->SetBitmap(bitmapButton);
+    }
 }
 
 
@@ -123,6 +136,16 @@ static void CreateFrame()
     Frame *frame = new Frame("");
 
     SetPositionAndSize(frame);
+
+    wxBoxSizer *sizer = new wxBoxSizer(wxHORIZONTAL);
+
+    buttonBitmap = new wxButton(frame, wxID_ANY, wxEmptyString, { 0, 0 }, { Display::WIDTH, Display::HEIGHT });
+    buttonBitmap->SetMaxSize({ Display::WIDTH, Display::HEIGHT });
+    buttonBitmap->SetBitmap(bitmapButton);
+
+    sizer->Add(buttonBitmap);
+
+    frame->SetSizer(sizer);
 
     CreateButtons(frame);
 

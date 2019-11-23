@@ -8,8 +8,8 @@
 #pragma warning(pop)
 
 
-extern wxPaintDC *paintDC;
 extern wxColour colorDraw;
+extern wxMemoryDC memDC;
 
 
 static int DrawChar(int x, int y, char symbol);
@@ -21,24 +21,17 @@ static void DrawHPointLine(int x, int y, int count, int delta);
 static void DrawVPointLine(int x, int y, int count, int delta);
 
 
-
 void Region::Fill(int x, int y, Color color)
 {
     color.SetAsCurrent();
-    if(paintDC)
-    {
-        paintDC->GradientFillLinear({ x, y, width + 1, height + 1 }, colorDraw, colorDraw);
-    }
+    memDC.GradientFillLinear({ x, y, width + 1, height + 1 }, colorDraw, colorDraw);
 }
 
 
 void Rectangle::Draw(int x, int y, Color color)
 {
     color.SetAsCurrent();
-    if(paintDC)
-    {
-        paintDC->DrawRectangle({ x, y, width + 1, height + 1 });
-    }
+    memDC.DrawRectangle({ x, y, width + 1, height + 1 });
     Transceiver::Send(nullptr, 0);                            // Это нужно лишь для того, чтобы регистратор читал точки
 }
 
@@ -46,37 +39,28 @@ void Rectangle::Draw(int x, int y, Color color)
 void HLine::Draw(int x, int y, Color color)
 {
     color.SetAsCurrent();
-    if(paintDC)
-    {
-        paintDC->DrawLine({ x, y }, { x + width, y });
-    }
+    memDC.DrawLine({ x, y }, { x + width, y });
 }
 
 
 void VLine::Draw(int x, int y, Color color)
 {
     color.SetAsCurrent();
-    if(paintDC)
-    {
-        paintDC->DrawLine({ x, y }, { x, y + height });
-    }
+    memDC.DrawLine({ x, y }, { x, y + height });
 }
 
 
 void Pixel::Draw(int x, int y, Color color)
 {
     color.SetAsCurrent();
-    if(paintDC)
-    {
-        paintDC->DrawPoint({ x, y });
-    }
+    memDC.DrawPoint({ x, y });
 }
 
 
 void Line::Draw(Color color)
 {
     color.SetAsCurrent();
-    paintDC->DrawLine({ x0, y0 }, { x1, y1 });
+    memDC.DrawLine({ x0, y0 }, { x1, y1 });
 }
 
 
@@ -119,11 +103,6 @@ static int DrawChar(int eX, int eY, char s)
 
     int delta = Font::IsBig() ? 0 : (9 - height);
 
-    if(!paintDC)
-    {
-        return eX;
-    }
-
     for (int row = 0; row < height; row++)
     {
         if (Font::RowNotEmpty(symbol, row))
@@ -134,7 +113,7 @@ static int DrawChar(int eX, int eY, char s)
             {
                 if (Font::BitIsExist(symbol, row, bit))
                 {
-                    paintDC->DrawPoint({ x, y });
+                    memDC.DrawPoint({ x, y });
                 }
                 x++;
             }
@@ -167,7 +146,7 @@ static int DrawBigChar(int eX, int eY, int size, char s)
                     {
                         for (int j = 0; j < size; j++)
                         {
-                            paintDC->DrawPoint({ x + i, y + j });
+                            memDC.DrawPoint({ x + i, y + j });
                         }
                     }
                 }
@@ -193,13 +172,10 @@ void MultiHPointLine::Draw(int x, Color color)
 
 static void DrawHPointLine(int x, int y, int count, int delta)
 {
-    if(paintDC)
+    for(int i = 0; i < count; i++)
     {
-        for(int i = 0; i < count; i++)
-        {
-            paintDC->DrawPoint({ x, y });
-            x += delta;
-        }
+        memDC.DrawPoint({ x, y });
+        x += delta;
     }
 }
 
@@ -217,12 +193,9 @@ void MultiVPointLine::Draw(int y, Color color)
 
 static void DrawVPointLine(int x, int y, int count, int delta)
 {
-    if(paintDC)
+    for(int i = 0; i < count; i++)
     {
-        for(int i = 0; i < count; i++)
-        {
-            paintDC->DrawPoint({ x, y });
-            y += delta;
-        }
+        memDC.DrawPoint({ x, y });
+        y += delta;
     }
 }
