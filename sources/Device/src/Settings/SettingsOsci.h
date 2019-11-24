@@ -213,7 +213,7 @@ struct TShift
 
     operator int() { return shift; }
 
-    static int Min();
+    int Min();
     static int Zero();
     static int Max();
 
