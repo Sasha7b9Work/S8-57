@@ -299,7 +299,7 @@ void TBase::Load()
 
     HAL_FSMC::WriteToFPGA8(WR::TBASE, values[TBase()]);
 
-    TShift::Load();
+    TShift().Load();
 
     set.ch[Chan::A].bandwidth.Load();
     set.ch[Chan::B].bandwidth.Load();

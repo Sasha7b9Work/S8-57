@@ -217,7 +217,7 @@ struct TShift
     static int Zero();
     static int Max();
 
-    static void Load();
+    void Load();
 
     static void Change(int delta);
 

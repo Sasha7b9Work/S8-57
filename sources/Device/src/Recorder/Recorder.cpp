@@ -43,7 +43,7 @@ void Recorder::Init()
     Range::LoadBoth();
     TrigInput().Load();
     RecorderScaleX::Load();
-    TShift::Load();
+    TShift().Load();
     Osci::LoadHoldfOff();
 
     running = false;

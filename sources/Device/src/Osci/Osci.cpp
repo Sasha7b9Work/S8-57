@@ -40,7 +40,7 @@ void Osci::Init()
     TrigLevel().Load();
     TrigPolarity().Load();
     TBase().Load();
-    TShift::Load();
+    TShift().Load();
     ContextOsci::LoadCalibratorMode();
     LoadHoldfOff();
     HAL_PIO::Init(HPort::_G, HPin::_1, HMode::Input, HPull::Up);
