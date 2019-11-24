@@ -86,7 +86,7 @@ DEF_CHOICE_2( cPolarity, //-V206                                                
 
 static void OnChanged_Filtr(bool)
 {
-    TrigInput::Load();
+    TrigInput().Load();
 }
 
 DEF_CHOICE_3( cFiltr, // -V206                                                                                                                                         //--- —»Õ’– - ¬ıÓ‰ ---

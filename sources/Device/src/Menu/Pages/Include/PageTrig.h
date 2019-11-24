@@ -27,10 +27,10 @@ struct TrigInput
         Full,
         HF,
         LF
-    } value;
-
+    };
+    TrigInput() {};
     /// Установить в соотвествующие положения выводы, отвечающие за источник и вход синхронизации
-    static void Load();
+    void Load();
 };
 
 struct TrigPolarity

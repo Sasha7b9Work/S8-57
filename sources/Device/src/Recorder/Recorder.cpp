@@ -41,7 +41,7 @@ void Recorder::Init()
 
     ContextRecorder::LoadRegUPR();
     Range::LoadBoth();
-    TrigInput::Load();
+    TrigInput().Load();
     RecorderScaleX::Load();
     TShift::Load();
     Osci::LoadHoldfOff();

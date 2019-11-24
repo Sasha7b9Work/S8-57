@@ -12,7 +12,7 @@
 
 void TrigSource::Load()
 {
-    TrigInput::Load();
+    TrigInput().Load();
 }
 
 
