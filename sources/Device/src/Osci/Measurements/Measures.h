@@ -31,8 +31,7 @@ struct TypeMeasure
         PhazaPlus,
         PhazaMinus,
         Count
-    } value;
-    explicit TypeMeasure(E v) : value(v) {};
+    };
 
     static String GetName(TypeMeasure::E type);
 };
