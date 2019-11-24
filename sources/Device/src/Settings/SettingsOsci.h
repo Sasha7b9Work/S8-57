@@ -219,7 +219,7 @@ struct TShift
 
     void Load();
 
-    static void Change(int delta);
+    void Change(int delta);
 
     static String ToString(TBase::E tBase);
 

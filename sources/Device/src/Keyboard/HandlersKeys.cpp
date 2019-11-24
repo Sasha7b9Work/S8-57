@@ -208,20 +208,24 @@ static void RangeLessA()
     OnChangeParameterChannel(ChangeRange, Chan::A, -1);
 }
 
+
 static void RangeMoreA()
 {
     OnChangeParameterChannel(ChangeRange, Chan::A, +1);
 }
+
 
 static void RangeLessB()
 {
     OnChangeParameterChannel(ChangeRange, Chan::B, -1);
 }
 
+
 static void RangeMoreB()
 {
     OnChangeParameterChannel(ChangeRange, Chan::B, +1);
 }
+
 
 static void OnChangeParameterChannel(pFuncVChI16 func, Chan::E ch, int16 delta)
 {
@@ -233,25 +237,36 @@ static void OnChangeParameterChannel(pFuncVChI16 func, Chan::E ch, int16 delta)
     func(ch, delta);
 }
 
+
 static void OnChangeParameterTime(pFuncVI func, int delta)
 {
     func(delta);
 }
 
+
+void ChangeTShift(int delta)
+{
+    TShift().Change(delta);
+}
+
+
 static void TShiftLess()
 {
-    OnChangeParameterTime(TShift::Change, -1);
+    OnChangeParameterTime(ChangeTShift, -1);
 }
+
 
 static void TShiftMore()
 {
-    OnChangeParameterTime(TShift::Change, 1);
+    OnChangeParameterTime(ChangeTShift, 1);
 }
+
 
 static void ChangeTBase(int delta)
 {
     TBase().Change(delta);
 }
+
 
 static void TBaseLess()
 {
@@ -265,6 +280,7 @@ static void TBaseLess()
     }
 }
 
+
 static void TBaseMore()
 {
     if (Device::State::InModeRecorder())
@@ -276,6 +292,7 @@ static void TBaseMore()
         OnChangeParameterTime(ChangeTBase, 1);
     }
 }
+
 
 static void FX_Press()
 {
