@@ -1,4 +1,5 @@
 #include "defines.h"
+#include "Display/Grid.h"
 #include "Display/Primitives.h"
 #include "Menu/Pages/Include/PageMemory.h"
 #include "Menu/Pages/Include/PageTime.h"
@@ -17,14 +18,14 @@ TPos::operator TPos::E()
 
 void TPos::Draw()
 {
-    int leftX = 0;
-    int rightX = 0;
+    int x[] = { Grid::Left(), (Grid::Right() - Grid::Left()) / 2 + Grid::Left(), Grid::Right() };
+    int x0 = x[TPos()] - 3;
 
-    int x[] = { leftX, (rightX - leftX) / 2 + leftX, rightX };
-    int x0 = x[TPos()];
-    Region(6, 6).Fill(x0 - 3, 10, Color::BACK);
+    int y = Grid::Top() - 1;
+    
+    Region(6, 6).Fill(x0, y, Color::BACK);
 
-    Char(Symbol8::TPOS_1).Draw(x0 - 3, 10, Color::FILL);
+    Char(Symbol8::TPOS_1).Draw(x0, y, Color::FILL);
 }
 
 

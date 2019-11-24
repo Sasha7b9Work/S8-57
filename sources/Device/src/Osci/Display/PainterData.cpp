@@ -52,8 +52,6 @@ void DisplayOsci::PainterData::DrawData()
         func[set.mem.modeWork]();
     }
 
-    TPos().Draw();
-
     DrawSpectrum();
 
     Accumulator::NextFrame();
