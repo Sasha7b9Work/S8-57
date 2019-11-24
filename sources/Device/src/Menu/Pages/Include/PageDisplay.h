@@ -23,16 +23,6 @@ struct DisplayMapping
     operator DisplayMapping::E();
 };
 
-/// Цвет фона
-struct Background
-{
-    enum E
-    {
-        Black,
-        White
-    } value;
-};
-
 /// Количество измерений для расчёта минимального и максимального значений.
 struct ENumMinMax
 {
@@ -170,7 +160,6 @@ struct MenuAutoHide
 struct SettingsDisplay
 { //-V802
     DisplayMapping::E      mapping;
-    Background::E          background;            ///< Цвет фона.
     ENumMinMax::E          ENumMinMax;            ///< Перечисление количества измерений для определения минимумов и масимумов.
     uint8                  notUsing0;
     ENumAverage::E         ENumAverage;           ///< Число усреднений сигнала.
