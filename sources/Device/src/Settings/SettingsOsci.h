@@ -221,7 +221,7 @@ struct TShift
 
     void Change(int delta);
 
-    static String ToString(TBase::E tBase);
+    String ToString(TBase::E tBase = TBase::Count);
 
     static float ToAbs(int shift, TBase::E tBase);
 

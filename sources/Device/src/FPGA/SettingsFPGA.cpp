@@ -249,6 +249,11 @@ int TShift::Max()
 
 String TShift::ToString(TBase::E tBase)
 {
+    if(tBase == TBase::Count)
+    {
+        tBase = TBase();
+    }
+
     return Time(TShift::ToAbs(TShift(), tBase)).ToString(true);
 }
 
