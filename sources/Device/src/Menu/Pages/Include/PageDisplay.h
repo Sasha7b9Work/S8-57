@@ -17,11 +17,10 @@ struct DisplayMapping
         Lines,
         Points,
         Count
-    } value;
-
-    DisplayMapping();
+    };
+    DisplayMapping() {};
     DisplayMapping(DisplayMapping::E v);
-    operator int() { return value; }
+    operator DisplayMapping::E();
 };
 
 /// Цвет фона

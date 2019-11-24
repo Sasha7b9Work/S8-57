@@ -4,14 +4,15 @@
 #include "Settings/Settings.h"
 
 
-DisplayMapping::DisplayMapping()
-{
-    value = set.disp.mapping;
-}
-
 DisplayMapping::DisplayMapping(DisplayMapping::E v)
 {
-    value = set.disp.mapping = v;
+    set.disp.mapping = v;
+}
+
+
+DisplayMapping::operator DisplayMapping::E()
+{
+    return set.disp.mapping;
 }
 
 
