@@ -228,8 +228,8 @@ struct TShift
     void Reset();
 
 private:
-    static void LoadReal();
-    static void LoadRandomize();
+    void LoadReal();
+    void LoadRandomize();
     static const float absStep[TBase::Count];
 
     int shift;
