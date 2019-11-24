@@ -63,7 +63,7 @@ struct SettingsTrig
     Chan::E          source;
     TrigInput::E     input;
     TrigPolarity::E  polarity;
-    int16            lev[Chan::Count];
+    int16            level[Chan::Count];
     TrigStartMode::E startMode;         ///< Режим запуска.
     TrigModeFind::E  modeFind;          ///< Поиск синхронизации - вручную или автоматически.
                                         /// \todo разрядности trig_holdOff недостаточно

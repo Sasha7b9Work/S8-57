@@ -472,7 +472,7 @@ void TrigLevel::Find()
 
         float additionShift = deltaValue + deltaRShift / k;     // Итоговое смщение, которое нужно добавить к TrigLev::Zero
 
-        Set(static_cast<int16>(HARDWARE_ZERO + additionShift * k + 0.5F));
+        TrigLevel(set.trig.source, static_cast<int16>(HARDWARE_ZERO + additionShift * k + 0.5F));
     }
 }
 
@@ -551,7 +551,7 @@ pString Chan::Name() const
 void TrigLevel::Load()
 {
     /// \todo Здесь много лишних движений. Нужно что-то сделать с вводом SET_TRIGLEV_SOURCE
-    uint16 value = static_cast<uint16>(HARDWARE_ZERO + set.trig.lev[set.trig.source]);
+    uint16 value = static_cast<uint16>(HARDWARE_ZERO + set.trig.level[set.trig.source]);
 
     GPIO::WriteRegisters(FPin::SPI3_CS1, static_cast<uint16>(0xa000 | (value << 2)));
 
@@ -561,7 +561,7 @@ void TrigLevel::Load()
 
 void TrigLevel::Change(int16 delta)
 {
-    Math::AdditionThisLimitation(&set.trig.lev[set.trig.source], TrigLevel::STEP * delta, TrigLevel::MIN, TrigLevel::MAX);
+    Math::AdditionThisLimitation(&set.trig.level[set.trig.source], TrigLevel::STEP * delta, TrigLevel::MIN, TrigLevel::MAX);
 
     Load();
 
@@ -586,11 +586,17 @@ void Trig::NeedForDraw()
 }
 
 
-void TrigLevel::Set(int16 level)
+TrigLevel::operator int16()
 {
-    set.trig.lev[set.trig.source] = level;
+    return set.trig.level[ch];
+}
 
-    Math::Limitation(&set.trig.lev[set.trig.source], TrigLevel::MIN, TrigLevel::MAX);
+
+TrigLevel::TrigLevel(Chan::E _ch, int16 newLevel) : ch(_ch)
+{
+    set.trig.level[ch] = newLevel;
+
+    Math::Limitation(&set.trig.level[ch], TrigLevel::MIN, TrigLevel::MAX);
 
     Load();
 
@@ -616,7 +622,7 @@ void Trig::DrawOnGrid()
 
         Region(width, height).DrawBounded(x, y, Color::BACK, Color::FILL);
 
-        float trigLevVal = RShift::ToAbs(set.trig.lev[set.trig.source], Range(set.trig.source)) * Divider(set.trig.source).ToAbs();
+        float trigLevVal = RShift::ToAbs(set.trig.level[set.trig.source], Range(set.trig.source)) * Divider(set.trig.source).ToAbs();
 
         Voltage voltage(trigLevVal);
 
@@ -629,7 +635,7 @@ void TrigLevel::Draw()
 {
     Chan::E ch = static_cast<Chan::E>(set.trig.source);
 
-    int trigLev = set.trig.lev[set.trig.source] + RShift(ch);
+    int trigLev = set.trig.level[set.trig.source] + RShift(ch);
     float scale = 1.0F / ((MAX - MIN) / 2.4F / Grid::Height());
     int y0 = (Grid::Top() + Grid::ChannelBottom()) / 2 + static_cast<int>(scale * (HARDWARE_ZERO - MIN));
     int y = y0 - static_cast<int>(scale * (trigLev - MIN));
