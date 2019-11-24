@@ -590,6 +590,15 @@ TrigLevel::operator int16()
 }
 
 
+TrigLevel::TrigLevel(Chan::E _ch) : ch(_ch)
+{
+    if(ch == Chan::Count)
+    {
+        ch = set.trig.source;
+    }
+}
+
+
 TrigLevel::TrigLevel(Chan::E _ch, int16 newLevel) : ch(_ch)
 {
     set.trig.level[ch] = newLevel;

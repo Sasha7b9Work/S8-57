@@ -249,7 +249,7 @@ struct Trig
 
 struct TrigLevel
 {
-    TrigLevel(Chan::E _ch) : ch(_ch) {};
+    TrigLevel(Chan::E _ch = Chan::Count);
 
     TrigLevel(Chan::E ch, int16 level);
 
@@ -261,7 +261,7 @@ struct TrigLevel
     /// Однократно найти уровень синхронизации
     void Find();
 
-    static void Draw();
+    void Draw();
 
 private:
     static const int16 MIN = -480;

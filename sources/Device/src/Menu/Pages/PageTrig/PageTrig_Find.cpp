@@ -18,7 +18,7 @@ DEF_CHOICE_2( cMode,                                                            
 
 static void OnPress_Search()
 {
-    TrigLevel(set.trig.source).Find();
+    TrigLevel().Find();
 }
 
 DEF_BUTTON( bSearch,                                                                                                                                          //--- —»Õ’– - œŒ»—  - Õ‡ÈÚË ---

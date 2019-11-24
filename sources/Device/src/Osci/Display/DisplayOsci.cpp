@@ -44,7 +44,7 @@ void DisplayOsci::Update()
     
     RShift::DrawBoth();
     
-    TrigLevel::Draw();
+    TrigLevel().Draw();
     
     CursorsMeasurements::Draw();
     
