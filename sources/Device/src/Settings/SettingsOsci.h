@@ -251,7 +251,7 @@ struct TrigLevel
 {
     TrigLevel(Chan::E _ch = Chan::Count);
 
-    TrigLevel(Chan::E ch, int16 level);
+    void Set(int16 level);
 
     operator int16();
     /// Загрузить уровень синхронизации в аппаратную часть

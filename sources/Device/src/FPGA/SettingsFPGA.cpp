@@ -349,7 +349,7 @@ pString Range::Name() const
 };
 
 
-ModeCouple::ModeCouple(Chan::E ch, ModeCouple::E modeCoupe)
+ModeCouple::ModeCouple(Chan::E _ch, ModeCouple::E modeCoupe) : ch(_ch)
 {
     set.ch[ch].couple = modeCoupe;
     Range::LoadBoth();

@@ -443,7 +443,7 @@ void TrigLevel::Find()
 
         float additionShift = deltaValue + deltaRShift / k;     // Итоговое смщение, которое нужно добавить к TrigLev::Zero
 
-        TrigLevel(set.trig.source, static_cast<int16>(HARDWARE_ZERO + additionShift * k + 0.5F));
+        TrigLevel().Set(static_cast<int16>(HARDWARE_ZERO + additionShift * k + 0.5F));
     }
 }
 
@@ -550,7 +550,7 @@ TrigLevel::TrigLevel(Chan::E _ch) : ch(_ch)
 }
 
 
-TrigLevel::TrigLevel(Chan::E _ch, int16 newLevel) : ch(_ch)
+void TrigLevel::Set(int16 newLevel)
 {
     set.trig.level[ch] = newLevel;
 

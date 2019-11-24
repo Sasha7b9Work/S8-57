@@ -472,7 +472,7 @@ static void Trig_Release()
 
 static void Trig_Long()
 {
-    TrigLevel(set.trig.source, 0);
+    TrigLevel().Set(0);
 }
 
 
