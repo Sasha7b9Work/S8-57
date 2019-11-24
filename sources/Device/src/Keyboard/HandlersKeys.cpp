@@ -430,7 +430,7 @@ static void Time_Release()
 
 static void Time_Long()
 {
-    TShift::Reset();
+    TShift().Reset();
 }
 
 

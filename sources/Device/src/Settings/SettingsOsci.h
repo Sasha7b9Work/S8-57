@@ -225,7 +225,7 @@ struct TShift
 
     static float ToAbs(int shift, TBase::E tBase);
 
-    static void Reset();
+    void Reset();
 
 private:
     static void LoadReal();
