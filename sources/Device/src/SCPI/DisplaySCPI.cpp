@@ -26,18 +26,5 @@ static const char *FuncDisplayMapping(const char *buffer)
 {
     SCPI_REQUEST(SCPI::SendAnswer(mapping[DisplayMapping()]));
 
-    for (int i = 0; i < DisplayMapping::Count; i++)
-    {
-        end = SCPI::BeginWith(buffer, mapping[i]);
-        if (end)
-        {
-            SCPI_PROLOG(end)
-
-            DisplayMapping(static_cast<DisplayMapping::E>(i));
-
-            SCPI_EPILOG(end)
-        }
-    }
-
-    return nullptr;
+    SCPI_PROCESS_ARRAY(DisplayMapping::Count, mapping, DisplayMapping(static_cast<DisplayMapping::E>(i)));
 }

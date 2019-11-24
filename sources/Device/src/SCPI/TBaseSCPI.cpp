@@ -53,18 +53,5 @@ static const char *FuncTBaseScale(const char *buffer)
 {
     SCPI_REQUEST(SCPI::SendAnswer(tBaseNames[TBase()]));
 
-    for(int i = 0; i < TBase::Count; i++)
-    {
-        end = SCPI::BeginWith(buffer, tBaseNames[i]);
-        if(end)
-        {
-            SCPI_PROLOG(end)
-
-            TBase(static_cast<TBase::E>(i));
-
-            SCPI_EPILOG(end)
-        }
-    }
-
-    return nullptr;
+    SCPI_PROCESS_ARRAY(TBase::Count, tBaseNames, TBase(static_cast<TBase::E>(i)));
 }

@@ -34,15 +34,22 @@ struct StructSCPI
 
 #define SCPI_PROLOG(t)  if(SCPI::IsLineEnding(&t)) { SCPI::SendBadSymbols();
 #define SCPI_EPILOG(t)  return t; } return nullptr;
-#define SCPI_REQUEST(func)                              \
-    const char *end = SCPI::BeginWith(buffer, "?");     \
-    if (end)                                            \
-    {                                                   \
-        SCPI_PROLOG(end)                                \
-        func;                                           \
-        SCPI_EPILOG(end)                                \
-    }
 
+#define SCPI_REQUEST(func)                          \
+    const char *end = SCPI::BeginWith(buffer, "?"); \
+    if (end) {                                      \
+        SCPI_PROLOG(end)                            \
+        func;                                       \
+        SCPI_EPILOG(end) }
+
+#define SCPI_PROCESS_ARRAY(num, names, func)        \
+    for(int i = 0; i < num; i++) {                  \
+        end = SCPI::BeginWith(buffer, names[i]);    \
+        if(end) {                                   \
+            SCPI_PROLOG(end)                        \
+            func;                                   \
+            SCPI_EPILOG(end) }}                     \
+    return nullptr;
 
 namespace SCPI
 {
