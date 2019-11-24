@@ -31,8 +31,8 @@ struct StructSCPI
 };
 
 
-#define SCPI_NODE(key, strct, test) {key, strct,   nullptr, test}
-#define SCPI_LEAF(key, func,  test) {key, nullptr, func,    test}
+#define SCPI_NODE(key, strct)      {key, strct,   nullptr, nullptr}
+#define SCPI_LEAF(key, func, test) {key, nullptr, func,    test}
 #define SCPI_EMPTY() {""}
 
 #define SCPI_PROLOG(t)  if(SCPI::IsLineEnding(&t)) { SCPI::SendBadSymbols();

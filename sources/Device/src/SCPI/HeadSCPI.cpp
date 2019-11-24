@@ -19,10 +19,6 @@ static const char *FuncTest(const char *);
 static bool TestIDN();
 static bool TestReset();
 static bool TestTest();
-static bool TestChannels();
-static bool TestDisplay();
-static bool TestKey();
-static bool TestTimebase();
 
 
 const StructSCPI SCPI::head[] =
@@ -30,10 +26,10 @@ const StructSCPI SCPI::head[] =
     SCPI_LEAF("*IDN?",     FuncIDN,        TestIDN),
     SCPI_LEAF("*RST",      FuncReset,      TestReset),
     SCPI_LEAF(":TEST",     FuncTest,       TestTest),
-    SCPI_NODE(":CHANNEL",  SCPI::channels, TestChannels),
-    SCPI_NODE(":DISPLAY",  SCPI::display,  TestDisplay),
-    SCPI_NODE(":KEY",      SCPI::key,      TestKey),
-    SCPI_NODE(":TIMEBASE", SCPI::tBase,    TestTimebase),
+    SCPI_NODE(":CHANNEL",  SCPI::channels),
+    SCPI_NODE(":DISPLAY",  SCPI::display),
+    SCPI_NODE(":KEY",      SCPI::key),
+    SCPI_NODE(":TIMEBASE", SCPI::tBase),
     SCPI_EMPTY()
 };
 
@@ -96,30 +92,6 @@ static bool TestReset()
 
 
 static bool TestTest()
-{
-    return false;
-}
-
-
-static bool TestChannels()
-{
-    return false;
-}
-
-
-static bool TestDisplay()
-{
-    return false;
-}
-
-
-static bool TestKey()
-{
-    return false;
-}
-
-
-static bool TestTimebase()
 {
     return false;
 }

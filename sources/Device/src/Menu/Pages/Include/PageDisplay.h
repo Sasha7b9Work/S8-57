@@ -13,7 +13,7 @@ struct DisplayMapping
     enum E
     {
         Lines,
-        Points,
+        Dots,
         Count
     };
     DisplayMapping() {};
