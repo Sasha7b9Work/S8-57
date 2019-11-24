@@ -9,6 +9,10 @@ static const char *FuncKeyPress(const char *);
 static const char *FuncKeyLong(const char *);
 
 
+static bool TestKeyPress();
+static bool TestKeyLong();
+
+
 static const char *const keyNames[Key::Count] =
 {
     " NONE",
@@ -51,8 +55,8 @@ static const char *const keyNames[Key::Count] =
 
 const StructSCPI SCPI::key[] =
 {
-    SCPI_LEAF(":PRESS", FuncKeyPress),
-    SCPI_LEAF(":LONG",  FuncKeyLong),
+    SCPI_LEAF(":PRESS", FuncKeyPress, TestKeyPress),
+    SCPI_LEAF(":LONG",  FuncKeyLong, TestKeyLong),
     SCPI_EMPTY()
 };
 
@@ -94,4 +98,16 @@ static const char *FuncKeyLong(const char *buffer)
     }
 
     return nullptr;
+}
+
+
+static bool TestKeyPress()
+{
+    return false;
+}
+
+
+static bool TestKeyLong()
+{
+    return false;
 }

@@ -11,6 +11,7 @@
 
 
 typedef const char *(*FuncSCPI)(const char *);
+typedef bool (*FuncTestSCPI)();
 
 
 /// Структура, соотвествующая узлу дерева.
@@ -22,14 +23,16 @@ struct StructSCPI
 
     FuncSCPI  func;             /// Если структура имеет тип Leaf, то здесь хранится функция - обработчик листа типа FuncSCPI
 
+    FuncTestSCPI test;
+
     bool IsEmpty() const { return key[0] == '\0'; };
     bool IsNode() const { return strct != nullptr; };   /// Структура является "узлом" дерева, нужно идти дальше по дереву через structs
     bool IsLeaf() const { return func != nullptr; };    /// Стурктура является "листом" дерева, нужно выполнять функцию func
 };
 
 
-#define SCPI_NODE(key, strct) {key, strct, nullptr}
-#define SCPI_LEAF(key, func) {key, nullptr, func}
+#define SCPI_NODE(key, strct, test) {key, strct,   nullptr, test}
+#define SCPI_LEAF(key, func,  test) {key, nullptr, func,    test}
 #define SCPI_EMPTY() {""}
 
 #define SCPI_PROLOG(t)  if(SCPI::IsLineEnding(&t)) { SCPI::SendBadSymbols();

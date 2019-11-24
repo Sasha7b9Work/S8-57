@@ -7,6 +7,11 @@
 static const char *FuncRange(const char *);
 
 
+static bool TestRange();
+static bool TestChan1();
+static bool TestChan2();
+
+
 static const char *const rangeName[] =
 {
     " 2MV",
@@ -28,15 +33,15 @@ static const char *const rangeName[] =
 
 static const StructSCPI chan[] =
 {
-    SCPI_LEAF("RANGE", FuncRange),
+    SCPI_LEAF("RANGE", FuncRange, TestRange),
     SCPI_EMPTY()
 };
 
 
 const StructSCPI SCPI::channels[] =
 {
-    SCPI_NODE("1:", chan),
-    SCPI_NODE("2:", chan),
+    SCPI_NODE("1:", chan, TestChan1),
+    SCPI_NODE("2:", chan, TestChan2),
     SCPI_EMPTY()
 };
 
@@ -48,4 +53,22 @@ static const char *FuncRange(const char *buffer)
     SCPI_REQUEST(SCPI::SendAnswer(rangeName[Range(ch)]));
 
     SCPI_PROCESS_ARRAY(rangeName, Range(ch, static_cast<Range::E>(i)))
+}
+
+
+static bool TestRange()
+{
+    return false;
+}
+
+
+static bool TestChan1()
+{
+    return false;
+}
+
+
+static bool TestChan2()
+{
+    return false;
 }

@@ -5,7 +5,10 @@
 
 
 // :DISPLAY:MAPPING
-static const char *FuncDisplayMapping(const char *);
+static const char *FuncMapping(const char *);
+
+
+static bool TestMapping();
 
 
 static const char *const mapping[] =
@@ -18,14 +21,20 @@ static const char *const mapping[] =
 
 const StructSCPI SCPI::display[] =
 {
-    SCPI_LEAF(":MAPPING", FuncDisplayMapping),
+    SCPI_LEAF(":MAPPING", FuncMapping, TestMapping),
     SCPI_EMPTY()
 };
 
 
-static const char *FuncDisplayMapping(const char *buffer)
+static const char *FuncMapping(const char *buffer)
 {
     SCPI_REQUEST(SCPI::SendAnswer(mapping[DisplayMapping()]));
 
     SCPI_PROCESS_ARRAY(mapping, DisplayMapping(static_cast<DisplayMapping::E>(i)));
+}
+
+
+bool TestMapping()
+{
+    return false;
 }

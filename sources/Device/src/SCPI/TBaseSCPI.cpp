@@ -4,7 +4,10 @@
 
 
 // :TIME:SCALE:
-static const char *FuncTBaseScale(const char *);
+static const char *FuncScale(const char *);
+
+
+static bool TestScale();
 
 
 static const char *const tBaseNames[] =
@@ -45,14 +48,20 @@ static const char *const tBaseNames[] =
 
 const StructSCPI SCPI::tBase[] =
 {
-    SCPI_LEAF(":SCALE", FuncTBaseScale),
+    SCPI_LEAF(":SCALE", FuncScale, TestScale),
     SCPI_EMPTY()
 };
 
 
-static const char *FuncTBaseScale(const char *buffer)
+static const char *FuncScale(const char *buffer)
 {
     SCPI_REQUEST(SCPI::SendAnswer(tBaseNames[TBase()]));
 
     SCPI_PROCESS_ARRAY(tBaseNames, TBase(static_cast<TBase::E>(i)));
+}
+
+
+static bool TestScale()
+{
+    return false;
 }
