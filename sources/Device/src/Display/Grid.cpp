@@ -355,7 +355,7 @@ static int DeltaVforLineGrid()
 {
     int result = 49;
 
-    if (set.meas.show && set.meas.modeViewSignals == MeasuresModeViewSignals::Compress)
+    if (set.meas.show && MeasuresModeViewSignals().IsCompress())
     {
         if (MeasuresOnDisplay() == MeasuresOnDisplay::_1_5)
         {
@@ -383,7 +383,7 @@ static int DeltaHforLineGrid()
 {
     int result = 69;
 
-    if (set.meas.modeViewSignals == MeasuresModeViewSignals::Compress)
+    if (MeasuresModeViewSignals().IsCompress())
     {
         if (MeasuresOnDisplay() == MeasuresOnDisplay::_6_1)
         {

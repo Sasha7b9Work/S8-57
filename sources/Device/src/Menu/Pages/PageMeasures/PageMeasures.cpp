@@ -29,6 +29,12 @@ bool MeasuresSource::IsBoth() const
 }
 
 
+bool MeasuresModeViewSignals::IsCompress() const
+{
+    return (set.meas._modeViewSignals == MeasuresModeViewSignals::Compress);
+}
+
+
 bool MeasuresOnDisplay::IsVertical() const
 {
     return (set.meas.number == MeasuresOnDisplay::_6_1) || (set.meas.number == MeasuresOnDisplay::_6_2);

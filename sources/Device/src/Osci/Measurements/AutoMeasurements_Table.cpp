@@ -149,7 +149,7 @@ int TableMeasures::NumRows()
 
 int TableMeasures::GetDeltaGridLeft()
 {
-    if (set.meas.show && (set.meas.modeViewSignals == MeasuresModeViewSignals::Compress))
+    if (set.meas.show && MeasuresModeViewSignals().IsCompress())
     {
         if (MeasuresOnDisplay() == MeasuresOnDisplay::_6_1)
         {
