@@ -351,13 +351,13 @@ void Range::LoadBoth()
 
     if(set.disp.lastAffectedChannel == Chan::B)
     {
-        RShift::Load(Chan::A);
-        RShift::Load(Chan::B);
+        RShift(Chan::A).Load();
+        RShift(Chan::B).Load();
     }
     else
     {
-        RShift::Load(Chan::B);
-        RShift::Load(Chan::A);
+        RShift(Chan::B).Load();
+        RShift(Chan::A).Load();
     }
 
     Osci::Restart();

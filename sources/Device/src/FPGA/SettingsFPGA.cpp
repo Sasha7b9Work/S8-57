@@ -50,7 +50,7 @@ static bool NeedLoadRShift(Chan::E ch)
 }
 
 
-void RShift::Load(Chan::E ch)
+void RShift::Load()
 {
     if(!NeedLoadRShift(ch))
     {
@@ -189,7 +189,7 @@ RShift::RShift(Chan::E _ch, int16 rShift) : ch(_ch)
 {
     ::Math::Limitation(&rShift, MIN, MAX);
     set.ch[ch].rShift = rShift;
-    Load(ch);
+    Load();
 }
 
 RShift::operator int16()
@@ -202,7 +202,7 @@ void RShift::Change(Chan::E ch, int16 delta)
 {
     ::Math::AdditionThisLimitation<int16>(&set.ch[ch].rShift, STEP * delta, MIN, MAX);
 
-    Load(ch);
+    RShift(ch).Load();
 }
 
 

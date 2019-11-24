@@ -34,8 +34,8 @@ void Osci::Init()
     RAM::Init();
     ContextOsci::LoadRegUPR();
     Range::LoadBoth();
-    RShift::Load(Chan::A);
-    RShift::Load(Chan::B);
+    RShift(Chan::A).Load();
+    RShift(Chan::B).Load();
     TrigInput::Load();
     TrigLevel().Load();
     TrigPolarity::Load();

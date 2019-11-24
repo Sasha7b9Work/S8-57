@@ -138,7 +138,7 @@ public:
     /// Изменить на delta
     static void Change(Chan::E ch, int16 delta);
     /// Загрузить в аппаратуру
-    static void Load(Chan::E ch);
+    void Load();
     /// Отрисовать оба на экране
     static void DrawBoth();
     /// Преобразовать в строку
