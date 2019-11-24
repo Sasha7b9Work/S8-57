@@ -214,8 +214,8 @@ struct TShift
     operator int() { return shift; }
 
     int Min();
-    static int Zero();
-    static int Max();
+    int Zero();
+    int Max();
 
     void Load();
 
