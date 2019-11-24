@@ -640,8 +640,6 @@ void Trig::DrawOnGrid()
 
 void TrigLevel::Draw()
 {
-    Chan::E ch = static_cast<Chan::E>(set.trig.source);
-
     int trigLev = set.trig.level[set.trig.source] + RShift(ch);
     float scale = 1.0F / ((MAX - MIN) / 2.4F / Grid::Height());
     int y0 = (Grid::Top() + Grid::ChannelBottom()) / 2 + static_cast<int>(scale * (HARDWARE_ZERO - MIN));
