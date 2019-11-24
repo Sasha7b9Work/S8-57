@@ -416,12 +416,6 @@ static uint8 ValueForRange(Chan::E ch) // -V2506
 }
 
 
-int16 RShift(Chan::E ch)
-{
-    return set.ch[ch].rShift;
-}
-
-
 ENumPointsFPGA::ENumPointsFPGA()
 {
     value = set.mem.enumPoints;
@@ -635,14 +629,12 @@ void Trig::DrawOnGrid()
 
 void TrigLevel::Draw()
 {
-    int trigLev = set.trig.level[ch] + RShift(ch);
     float scale = 1.0F / ((MAX - MIN) / 2.4F / Grid::Height());
-    int y0 = (Grid::Top() + Grid::ChannelBottom()) / 2 + static_cast<int>(scale * (HARDWARE_ZERO - MIN));
-    int y = y0 - static_cast<int>(scale * (trigLev - MIN));
 
-    y = (y - Grid::ChannelCenterHeight()) + Grid::ChannelCenterHeight();
+    int y = Grid::ChannelCenterHeight() - (TrigLevel() + RShift(ch)) * scale;
 
     int x = Grid::Right();
+
     Color::Trig().SetAsCurrent();
 
     if (y > Grid::ChannelBottom())
