@@ -20,8 +20,6 @@ bool Test::RAM::Test()
 {
     ::RAM::Init();
 
-    Display::StartTest("Тест ОЗУ");
-
     int numRecord = 5000;
 
     for (int i = 1; i <= numRecord; i++)
@@ -60,8 +58,6 @@ bool Test::RAM::Test()
 
 bool Test::ROM::Data::Test()
 {
-    Display::StartTest("Тест ППЗУ");
-
     Display::AddMessage("Стираю память");
 
     ::ROM::Data::EraseAll();

@@ -72,4 +72,6 @@ namespace SCPI
     const char *BeginWith(const char *buffer, const char *word);
     /// Послать сообщение об ошибочных символах, если таковые имеются
     void SendBadSymbols();
+
+    bool Test();
 };

@@ -11,6 +11,8 @@
 /// В случае успешного выполнения возвращает адрес символа, расположенного за последним обработанным символом.
 /// В случае неуспешного завершения - возвращает nullptr. Код ошибки находится в *error
 static const char *Process(const char *buffer, const StructSCPI structs[]); //-V2504
+/// Рекурсивная функция тестирования
+static bool ProcessTest(const StructSCPI strct[]);
 /// Обработка узла дерева node
 static const char *ProcessNode(const char *begin, const StructSCPI *node);
 /// Обработка листа node
@@ -221,4 +223,36 @@ void SCPI::SendAnswer(const char *message)
 static bool IsBeginCommand(const char &symbol)
 {
     return (symbol == SCPI::SEPARATOR) || (symbol == '*');
+}
+
+
+bool SCPI::Test()
+{
+    return ProcessTest(head);
+}
+
+
+static bool ProcessTest(const StructSCPI strct[])
+{
+    while(!strct->IsEmpty())
+    {
+        if(strct->IsNode())
+        {
+            if(!ProcessTest(strct->strct))
+            {
+                return false;
+            }
+        }
+        else if(strct->IsLeaf())
+        {
+            if(!strct->test())
+            {
+                return false;
+            }
+        }
+
+        strct++;
+    }
+
+    return true;
 }

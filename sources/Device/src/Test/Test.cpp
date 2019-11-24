@@ -1,20 +1,22 @@
 #include "defines.h"
 #include "Device.h"
 #include "Hardware/Timer.h"
+#include "SCPI/SCPI.h"
+#include "SCPI/SCPI.h"
 #include "Settings/Settings.h"
 #include "Test/Test.h"
 #include <cstdlib>
 
 
 
-static void RunTest(bool (*func)());
+static void RunTest(bool (*func)(), char *message);
 
 
 void Test::Run()
 {
     if (!set.dbg.runTest)
     {
-        return;
+        //return;
     }
 
     std::srand(TIME_MS);
@@ -23,9 +25,11 @@ void Test::Run()
     
     Display::Init();
 
-    RunTest(RAM::Test);
+    RunTest(RAM::Test, "Тест ОЗУ");
+    
+    RunTest(ROM::Data::Test, "Тест ППЗУ");
 
-    RunTest(ROM::Data::Test);
+    RunTest(SCPI::Test, "Тест SCPI");
 
     set.Save();
 
@@ -35,8 +39,10 @@ void Test::Run()
 }
 
 
-static void RunTest(bool (*func)())
+static void RunTest(bool (*func)(), char *message)
 {
+    Test::Display::AddMessage(message);
+
     if (!func())
     {
         Test::Display::AddMessage("!!! Ошибка !!!");
