@@ -39,10 +39,9 @@ struct TrigPolarity
     {
         Rising,
         Falling
-    } value;
-    explicit TrigPolarity(E v) : value(v) {};
+    };
 
-    static void Load();
+    void Load();
 };
 
 /// Режим запуска.

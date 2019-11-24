@@ -69,7 +69,7 @@ DEF_CHOICE_2( cSource, // -V206                                                 
 
 static void OnChanged_Polarity(bool)
 {
-    TrigPolarity::Load();
+    TrigPolarity().Load();
 }
 
 DEF_CHOICE_2( cPolarity, //-V206                                                                                                                                 //--- СИНХР - Полярность ---

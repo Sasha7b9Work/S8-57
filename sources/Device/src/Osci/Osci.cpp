@@ -38,7 +38,7 @@ void Osci::Init()
     RShift(Chan::B).Load();
     TrigInput().Load();
     TrigLevel().Load();
-    TrigPolarity::Load();
+    TrigPolarity().Load();
     TBase::Load();
     TShift::Load();
     ContextOsci::LoadCalibratorMode();
