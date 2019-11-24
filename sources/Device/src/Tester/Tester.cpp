@@ -310,7 +310,7 @@ pString Tester::Scale::ToString() const // -V2506
 {
     if (Chan(ch).IsA())
     {
-        return Range(static_cast<Range::E>(value)).ToString(Divider::_1);
+        return Range::ToString(static_cast<Range::E>(value), Divider::_1);
     }
 
     static const pString names[] =

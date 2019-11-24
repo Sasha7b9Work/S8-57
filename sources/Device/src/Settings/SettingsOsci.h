@@ -101,8 +101,6 @@ struct Range
         _20V,
         Count
     } value;
-    explicit Range(E v) : value(v) {};
-
     /// Этот конструктор - чтобы узнать текущее знаечение Range
     Range(Chan::E ch);
     /// Этот конструктор устанавливает новоез значениеRange
@@ -113,6 +111,8 @@ struct Range
     pString Name() const;
 
     pString ToString(int8 divider);
+
+    static pString ToString(Range::E range, int8 divider);
     /// Возвращает напряжение, соответствующее верхней границе сетки
     static float MaxVoltageOnScreen(Range::E range);
 

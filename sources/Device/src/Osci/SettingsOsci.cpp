@@ -372,6 +372,12 @@ pString Range::ToString(int8 _divider)
 }
 
 
+pString Range::ToString(Range::E range, int8 _divider)
+{
+    return ranges[range][_divider].name;
+}
+
+
 static uint8 ValueForRange(Chan::E ch) // -V2506
 {
     static const uint8 datas[ModeCouple::Count] =
