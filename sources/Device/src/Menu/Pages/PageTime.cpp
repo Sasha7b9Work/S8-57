@@ -8,15 +8,15 @@
 #include "Osci/Osci.h"
 
 
-PeakDetMode::PeakDetMode() : value(set.time.peakDet)
-{
-
-}
-
-
 TPos::operator TPos::E()
 {
     return set.time.tPos;
+}
+
+
+PeakDetMode::operator PeakDetMode::E()
+{
+    return set.time.peakDet;
 }
 
 
@@ -38,7 +38,7 @@ int TPos::InBytes()
 
 bool PeakDetMode::IsEnabled() const
 {
-    return (value == PeakDetMode::Enabled) && (TBase() >= TBase::MIN_PEAK_DET);
+    return (set.time.peakDet == PeakDetMode::Enabled) && (TBase() >= TBase::MIN_PEAK_DET);
 }
 
 

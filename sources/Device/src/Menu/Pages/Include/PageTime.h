@@ -8,11 +8,11 @@ struct PeakDetMode
     {
         Disabled,
         Enabled
-    } value;
+    };
 
-    PeakDetMode();
+    PeakDetMode() {};
 
-    operator PeakDetMode::E() const { return value; }
+    operator PeakDetMode::E();
 
     bool IsEnabled() const;
 };
