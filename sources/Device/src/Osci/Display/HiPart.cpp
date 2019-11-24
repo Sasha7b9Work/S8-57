@@ -198,7 +198,7 @@ static int DrawMainParameters(int _x, int _y)
     {
         WriteStringAndNumber("накопл", x, y0 - 4, NUM_ACCUM);
         WriteStringAndNumber("усредн", x, y1, NUM_AVE);
-        WriteStringAndNumber("мн\x93мкс", x, y2, NUM_MIN_MAX);
+        WriteStringAndNumber("мн\x93мкс", x, y2, ENumMinMax().Number());
     }
 
     Separator::Draw(x + 43, y0 - 1);

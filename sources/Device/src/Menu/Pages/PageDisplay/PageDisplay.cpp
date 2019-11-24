@@ -4,6 +4,12 @@
 #include "Settings/Settings.h"
 
 
+int ENumMinMax::Number() const
+{
+    return (1 << set.disp.enumMinMax);
+}
+
+
 DisplayMapping::DisplayMapping(DisplayMapping::E v)
 {
     set.disp.mapping = v;

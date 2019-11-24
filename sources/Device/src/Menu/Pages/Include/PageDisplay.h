@@ -8,7 +8,7 @@
 #define NUM_AVE_MAX     256
 #define NUM_AVE         (1 << static_cast<int>(set.disp.ENumAverage))
 #define NUM_ACCUM       (1 << static_cast<int>(set.disp.ENumAccum))
-#define NUM_MIN_MAX     (1 << static_cast<int>(set.disp.ENumMinMax))
+
 
 struct DisplayMapping
 {
@@ -35,9 +35,11 @@ struct ENumMinMax
         _16,
         _32,
         _64,
-        _128
-    } value;
-    explicit ENumMinMax(E v) : value(v) {};
+        _128,
+        Count
+    };
+    ENumMinMax() {};
+    int Number() const;
 };
 
 ///  оличество усреднений по измерени€м.
@@ -160,7 +162,7 @@ struct MenuAutoHide
 struct SettingsDisplay
 { //-V802
     DisplayMapping::E      mapping;
-    ENumMinMax::E          ENumMinMax;            ///< ѕеречисление количества измерений дл€ определени€ минимумов и масимумов.
+    ENumMinMax::E          enumMinMax;            ///< ѕеречисление количества измерений дл€ определени€ минимумов и масимумов.
     uint8                  notUsing0;
     ENumAverage::E         ENumAverage;           ///< „исло усреднений сигнала.
     ENumAccum::E           ENumAccum;             ///< „исло накоплений сигнала на экране.
