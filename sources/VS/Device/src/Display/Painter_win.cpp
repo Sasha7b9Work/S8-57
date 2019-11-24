@@ -75,15 +75,10 @@ void Painter::Init()
 }
 
 
-/// true означает, что картинка перерисована на экран
-static bool isUpdated = true;
-static bool needUpdated = false;
-
 void Painter::BeginScene(Color color)
 {
-    if(buttonBitmap && isUpdated)
+    if(buttonBitmap)
     {
-        isUpdated = false;
         memDC.SelectObject(bitmapButton);
         wxBrush brush({ 0, 0, 0 }, wxTRANSPARENT);
         memDC.SetBrush(brush);
@@ -93,23 +88,21 @@ void Painter::BeginScene(Color color)
 
 void Painter_UpdateFrame()
 {
-    if(buttonBitmap && needUpdated)
+    if(buttonBitmap)
     {
         wxImage image = bitmapButton.ConvertToImage();
         image = image.Rescale(Frame::WIDTH, Frame::HEIGHT);
         wxBitmap bitmap(image);
         buttonBitmap->SetBitmap(bitmap);
-        isUpdated = true;
     }
 }
 
 
 void Painter::EndScene()
 {
-    if(Frame::Self() && Frame::isRunning && !isUpdated)
+    if(Frame::Self() && Frame::isRunning)
     {
         memDC.SelectObject(wxNullBitmap);
-        needUpdated = true;
         if(&memDC.GetSelectedBitmap() != &wxNullBitmap)
         {
             Frame::Self()->Refresh();
