@@ -368,7 +368,7 @@ void Range::LoadBoth()
 
 pString Range::ToString(int8 _divider)
 {
-    return ranges[value][_divider].name;
+    return ranges[set.ch[ch].range][_divider].name;
 }
 
 
@@ -814,19 +814,19 @@ void VALUE::PointsFromVoltage(const float *voltage, int numPoints, Range::E rang
 }
 
 
-Range::Range(Chan::E ch)
-{
-    value = set.ch[ch].range;
-}
-
-
-Range::Range(Chan::E ch, E range)
+Range::Range(Chan::E _ch, E range) : ch(_ch)
 {
     set.disp.SetLastAffectedChannel(ch);
 
-    value = set.ch[ch].range = range;
+    set.ch[ch].range = range;
 
     LoadBoth();
+}
+
+
+Range::operator Range::E()
+{
+    return set.ch[ch].range;
 }
 
 

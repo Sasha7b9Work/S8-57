@@ -100,13 +100,13 @@ struct Range
         _10V,
         _20V,
         Count
-    } value;
+    };
     /// Этот конструктор - чтобы узнать текущее знаечение Range
-    Range(Chan::E ch);
+    Range(Chan::E _ch) : ch(_ch) {}
     /// Этот конструктор устанавливает новоез значениеRange
     Range(Chan::E ch, E range);
 
-    operator Range::E() { return value; }
+    operator Range::E();
     
     pString Name() const;
 
@@ -119,6 +119,9 @@ struct Range
     static void Change(Chan::E ch, int16 delta);
     /// Загружаться эта настройка может только для обоих каналов одновременно
     static void LoadBoth();
+
+private:
+    Chan::E ch;
 };
 
 

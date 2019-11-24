@@ -340,7 +340,7 @@ pString Range::Name() const
         StructRange("20Â")
     };
 
-    return names[static_cast<int>(value)].name;
+    return names[set.ch[ch].range].name;
 };
 
 
