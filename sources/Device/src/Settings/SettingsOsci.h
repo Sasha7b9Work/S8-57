@@ -259,7 +259,7 @@ struct TrigLevel
     /// Изменить уровень синхронизации на delta единиц
     static void Change(int16 delta);
     /// Однократно найти уровень синхронизации
-    static void Find();
+    void Find();
 
     static void Draw();
 

@@ -102,6 +102,6 @@ static void FindTrigLevelIfNeed()
 {
     if (set.trig.modeFind == TrigModeFind::Auto)
     {
-        TrigLevel::Find();
+        TrigLevel(set.trig.source).Find();
     }
 }

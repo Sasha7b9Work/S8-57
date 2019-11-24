@@ -449,8 +449,6 @@ void TrigLevel::Find()
 {
     if (DS)
     {
-        Chan::E ch = static_cast<Chan::E>(set.trig.source);
-
         if (!ENABLED_DS(ch))
         {
             return;
