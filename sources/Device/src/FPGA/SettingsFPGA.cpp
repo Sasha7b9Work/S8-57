@@ -262,14 +262,14 @@ String RShift::ToString(int16 rShiftRel, Range::E range, int8 _divider)
 
 TBase::TBase(TBase::E base)
 {
-    value = set.time.base = base;
+    set.time.base = base;
     Load();
 }
 
 
-TBase::TBase()
+TBase::operator TBase::E()
 {
-    value = set.time.base;
+    return set.time.base;
 }
 
 
@@ -309,7 +309,7 @@ pString TBase::Name() const
         "10ñ"
     };
 
-    return names[static_cast<int>(value)];
+    return names[set.time.base];
 }
 
 

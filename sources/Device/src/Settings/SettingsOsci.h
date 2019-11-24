@@ -57,13 +57,13 @@ struct TBase
         _5,
         _10s,
         Count
-    } value;
+    };
+    /// Этот конструктор нужне для чтения значения
+    TBase() {};
     /// Этим констуктором можно установить новое значение
     explicit TBase(E v);
-    /// Через этот конструктор можно узнать установленное значение
-    TBase();
 
-    operator TBase::E() { return value; }
+    operator TBase::E();
 
     pString Name() const;
 

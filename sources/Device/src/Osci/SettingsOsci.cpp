@@ -205,7 +205,7 @@ pString TBase::ToString() const
             name = nRU;
         };
     }
-    tBases[TBase::Count] =
+    tBases[Count] =
     {
         StructTBase("2\x10нс"),
         StructTBase("5\x10нс"),
@@ -239,7 +239,7 @@ pString TBase::ToString() const
         StructTBase("10\x10с")
     };
 
-    return tBases[value].name;
+    return tBases[set.time.base].name;
 }
 
 
@@ -832,7 +832,7 @@ Range::operator Range::E()
 
 uint TBase::RandK()
 {
-    return Kr[value];
+    return Kr[set.time.base];
 }
 
 
