@@ -37,7 +37,7 @@ void Osci::Init()
     RShift::Load(Chan::A);
     RShift::Load(Chan::B);
     TrigInput::Load();
-    TrigLevel::Load();
+    TrigLevel().Load();
     TrigPolarity::Load();
     TBase::Load();
     TShift::Load();

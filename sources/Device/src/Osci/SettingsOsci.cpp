@@ -447,13 +447,8 @@ uint ENumPointsFPGA::PointsInChannel() const
 
 void TrigLevel::Find()
 {
-    if (DS)
+    if (DS && ENABLED_DS(ch))
     {
-        if (!ENABLED_DS(ch))
-        {
-            return;
-        }
-
         const uint8 *data = IN(ch);
 
         uint numBytes = DS->SizeChannel();
@@ -549,7 +544,7 @@ pString Chan::Name() const
 void TrigLevel::Load()
 {
     /// \todo Здесь много лишних движений. Нужно что-то сделать с вводом SET_TRIGLEV_SOURCE
-    uint16 value = static_cast<uint16>(HARDWARE_ZERO + set.trig.level[set.trig.source]);
+    uint16 value = static_cast<uint16>(HARDWARE_ZERO + set.trig.level[ch]);
 
     GPIO::WriteRegisters(FPin::SPI3_CS1, static_cast<uint16>(0xa000 | (value << 2)));
 
@@ -559,7 +554,7 @@ void TrigLevel::Load()
 
 void TrigLevel::Change(int16 delta)
 {
-    Math::AdditionThisLimitation(&set.trig.level[set.trig.source], TrigLevel::STEP * delta, TrigLevel::MIN, TrigLevel::MAX);
+    Math::AdditionThisLimitation(&set.trig.level[ch], TrigLevel::STEP * delta, TrigLevel::MIN, TrigLevel::MAX);
 
     Load();
 
@@ -640,7 +635,7 @@ void Trig::DrawOnGrid()
 
 void TrigLevel::Draw()
 {
-    int trigLev = set.trig.level[set.trig.source] + RShift(ch);
+    int trigLev = set.trig.level[ch] + RShift(ch);
     float scale = 1.0F / ((MAX - MIN) / 2.4F / Grid::Height());
     int y0 = (Grid::Top() + Grid::ChannelBottom()) / 2 + static_cast<int>(scale * (HARDWARE_ZERO - MIN));
     int y = y0 - static_cast<int>(scale * (trigLev - MIN));
@@ -669,7 +664,7 @@ void TrigLevel::Draw()
 
     static const char symbols[2] = { '1', '2' };
 
-    Char(symbols[static_cast<uint8>(set.trig.source)], TypeFont::_5).Draw(x + 5, y - 6, Color::BACK);
+    Char(symbols[ch], TypeFont::_5).Draw(x + 5, y - 6, Color::BACK);
 
     Trig::DrawOnGrid();
 }

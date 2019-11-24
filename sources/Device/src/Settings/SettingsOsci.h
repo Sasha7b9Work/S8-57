@@ -255,9 +255,9 @@ struct TrigLevel
 
     operator int16();
     /// Загрузить уровень синхронизации в аппаратную часть
-    static void Load();
+    void Load();
     /// Изменить уровень синхронизации на delta единиц
-    static void Change(int16 delta);
+    void Change(int16 delta);
     /// Однократно найти уровень синхронизации
     void Find();
 

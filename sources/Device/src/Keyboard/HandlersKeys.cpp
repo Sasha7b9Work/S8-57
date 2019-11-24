@@ -347,13 +347,13 @@ static void EnterLong()
 
 static void TrigLevMore_Press()
 {
-    TrigLevel::Change(1);
+    TrigLevel().Change(1);
 }
 
 
 static void TrigLevLess_Press()
 {
-    TrigLevel::Change(-1);
+    TrigLevel().Change(-1);
 }
 
 
