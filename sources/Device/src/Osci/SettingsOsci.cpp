@@ -479,28 +479,6 @@ void RShift::DrawBoth()
 }
 
 
-void RShift::Draw()
-{
-    Color::CHAN[ch].SetAsCurrent();
-
-    int delta = RShift(ch) / STEP;
-
-    if (set.fft.enabled)
-    {
-        delta /= 2;
-    }
-
-    int y = (Grid::ChannelBottom() - Grid::Top()) / 2 + Grid::Top() - delta;
-
-    Math::Limitation(&y, Grid::Top(), Grid::ChannelBottom());
-
-    Char(Symbol8::RSHIFT_NORMAL).Draw(Grid::Left() - 8, y - 4);
-
-    Char(Chan(ch).IsA() ? '1' : '2', TypeFont::_5).Draw(Grid::Left() - 7, y - 6, Color::BACK);
-}
-
-
-
 int Chan::PointsInChannel() const
 {
     //DEF__STRUCT(StructNumPoints, int) numPoints[ENumPointsFPGA::Count] =
@@ -631,9 +609,10 @@ void TrigLevel::Draw()
 {
     float scale = 1.0F / ((MAX - MIN) / 2.4F / Grid::Height());
 
-    int y = Grid::ChannelCenterHeight() - (TrigLevel() + RShift(ch)) * scale;
+    int y = Grid::ChannelCenterHeight() - static_cast<int>((TrigLevel() + RShift(ch)) * scale);
 
     int x = Grid::Right();
+    int xSymbol = Grid::Right() + 5;
 
     Color::Trig().SetAsCurrent();
 
@@ -642,12 +621,14 @@ void TrigLevel::Draw()
         Char(Symbol8::TRIG_LEV_LOWER).Draw(x + 3, Grid::ChannelBottom() - 11);
         Pixel().Draw(x + 5, Grid::ChannelBottom() - 2);
         y = Grid::ChannelBottom() - 7;
-        x--;
+        xSymbol--;
     }
     else if (y < Grid::Top())
     {
         Char(Symbol8::TRIG_LEV_ABOVE).Draw(x + 3, Grid::Top() + 2);
         Pixel().Draw(x + 5, Grid::Top() + 2);
+        y = Grid::Top() + 7;
+        xSymbol--;
     }
     else
     {
@@ -656,9 +637,30 @@ void TrigLevel::Draw()
 
     static const char symbols[2] = { '1', '2' };
 
-    Char(symbols[ch], TypeFont::_5).Draw(x + 5, y - 6, Color::BACK);
+    Char(symbols[ch], TypeFont::_5).Draw(xSymbol, y - 6, Color::BACK);
 
     Trig::DrawOnGrid();
+}
+
+
+void RShift::Draw()
+{
+    Color::CHAN[ch].SetAsCurrent();
+
+    int delta = RShift(ch) / STEP;
+
+    if(set.fft.enabled)
+    {
+        delta /= 2;
+    }
+
+    int y = (Grid::ChannelBottom() - Grid::Top()) / 2 + Grid::Top() - delta;
+
+    Math::Limitation(&y, Grid::Top(), Grid::ChannelBottom());
+
+    Char(Symbol8::RSHIFT_NORMAL).Draw(Grid::Left() - 8, y - 4);
+
+    Char(Chan(ch).IsA() ? '1' : '2', TypeFont::_5).Draw(Grid::Left() - 7, y - 6, Color::BACK);
 }
 
 
@@ -666,6 +668,7 @@ float RShift::ToAbs(int16 rShift, Range::E range)
 {
     return (rShift * absStep[range]);
 }
+
 
 int16 RShift::ToRel(float rShiftAbs, Range::E range)
 {
