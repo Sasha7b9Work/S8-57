@@ -7,7 +7,7 @@
 static const char *FuncRange(const char *);
 
 
-static const char *const rangeName[Range::Count] =
+static const char *const rangeName[] =
 {
     " 2MV",
     " 5MV",
@@ -21,7 +21,8 @@ static const char *const rangeName[Range::Count] =
     " 2V",
     " 5V",
     " 10V",
-    " 20V"
+    " 20V",
+    ""
 };
 
 
@@ -46,5 +47,5 @@ static const char *FuncRange(const char *buffer)
 
     SCPI_REQUEST(SCPI::SendAnswer(rangeName[Range(ch)]));
 
-    SCPI_PROCESS_ARRAY(Range::Count, rangeName, Range(ch, static_cast<Range::E>(i)))
+    SCPI_PROCESS_ARRAY(rangeName, Range(ch, static_cast<Range::E>(i)))
 }

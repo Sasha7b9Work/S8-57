@@ -7,7 +7,7 @@
 static const char *FuncTBaseScale(const char *);
 
 
-static const char *const tBaseNames[TBase::Count] =
+static const char *const tBaseNames[] =
 {
     " 2NS",
     " 5NS",
@@ -38,7 +38,8 @@ static const char *const tBaseNames[TBase::Count] =
     " 1S",
     " 2S",
     " 5S",
-    " 10S"
+    " 10S",
+    ""
 };
 
 
@@ -53,5 +54,5 @@ static const char *FuncTBaseScale(const char *buffer)
 {
     SCPI_REQUEST(SCPI::SendAnswer(tBaseNames[TBase()]));
 
-    SCPI_PROCESS_ARRAY(TBase::Count, tBaseNames, TBase(static_cast<TBase::E>(i)));
+    SCPI_PROCESS_ARRAY(tBaseNames, TBase(static_cast<TBase::E>(i)));
 }
