@@ -31,7 +31,7 @@ bool MeasuresSource::IsBoth() const
 
 bool MeasuresModeViewSignals::IsCompress() const
 {
-    return (set.meas._modeViewSignals == MeasuresModeViewSignals::Compress);
+    return (set.meas.modeViewSignals == MeasuresModeViewSignals::Compress);
 }
 
 
