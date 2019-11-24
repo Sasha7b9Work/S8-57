@@ -23,10 +23,6 @@ static void DrawROM();
 
 static void DrawChannel(Chan::E ch);
 
-static void DrawTPos(int leftX, int rightX);
-
-static void DrawTShift(int leftX, int rightX, int numPoints);
-
 static void DrawModeLines(Chan::E ch, int left, int center, const uint8 *data, float scale);
 
 static void DrawModeLinesPeakDetOn(int center, const uint8 *data, float scale, int x);
@@ -56,9 +52,7 @@ void DisplayOsci::PainterData::DrawData()
         func[set.mem.modeWork]();
     }
 
-    DrawTPos(0, 0);
-
-    DrawTShift(0, 0, 0);
+    TPos().Draw();
 
     DrawSpectrum();
 
@@ -408,55 +402,6 @@ static void DrawModePointsPeakDetOff(int center, const uint8 *data, float scale,
         float value = center - (data[i] - VALUE::AVE) * scale;
         Pixel().Draw(x + i, ROUND(uint8, value));
     }
-}
-
-
-static void DrawTPos(int leftX, int rightX)
-{
-    int x[] = {leftX, (rightX - leftX) / 2 + leftX, rightX};
-    int x0 = x[TPos()];
-    Region(6, 6).Fill(x0 - 3, 10, Color::BACK);
-
-    Char(Symbol8::TPOS_1).Draw(x0 - 3, 10, Color::FILL);
-}
-
-
-static void DrawTShift(int /*leftX*/, int /*rightX*/, int /*numBytes*/)
-{
-    //float scale = (float)(rightX - leftX + 1) / ((float)numBytes - (numBytes == 281 ? 1 : 0));
-    //int xShift = static_cast<int>(1.5F + (TPos(TPOS).InBytes() - SET_TSHIFT.InPoints()) * scale) - 1;
-    //if (SET_PEAKDET_EN && TPOS_IS_RIGHT)
-    //{
-    //    --xShift;
-    //}
-    //if (FPGA_POINTS_512)
-    //{
-    //    ++xShift;                           /// \todo Костыль
-    //}
-    //LIMIT_ABOVE(xShift, rightX - 2);
-    //
-    //int dX01 = 1, dX02 = 2, dX11 = 3, dY11 = 7, dY12 = 6;
-    //
-    //if (xShift < leftX - 2)
-    //{
-    //    xShift = leftX - 2;
-    //    dX01 = 3; dX02 = 1; dY12 = 6;
-    //}
-    //else if (xShift > rightX - 1)
-    //{
-    //    xShift = rightX - 2;
-    //    dX11 = 1;
-    //}
-    //else
-    //{
-    //    dY11 = 5; dY12 = 7;
-    //}
-    //
-    //Region(6, 6).Fill(static_cast<int>xShift - 1, 1, Color::BACK);
-    //Region(4, 4).Fill(static_cast<int>xShift, 2, Color::FILL);
-    //
-    //Line(static_cast<int>xShift + dX01, 3, static_cast<int>xShift + dX11, dY11 - 2).Draw(Color::BACK);
-    //Line(static_cast<int>xShift + dX02, 4, static_cast<int>xShift + 2, dY12 - 2).Draw();
 }
 
 

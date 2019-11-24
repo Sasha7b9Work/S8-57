@@ -1,4 +1,5 @@
 #include "defines.h"
+#include "Display/Primitives.h"
 #include "Menu/Pages/Include/PageMemory.h"
 #include "Menu/Pages/Include/PageTime.h"
 #include "FPGA/FPGA.h"
@@ -11,6 +12,19 @@
 TPos::operator TPos::E()
 {
     return set.time.tPos;
+}
+
+
+void TPos::Draw()
+{
+    int leftX = 0;
+    int rightX = 0;
+
+    int x[] = { leftX, (rightX - leftX) / 2 + leftX, rightX };
+    int x0 = x[TPos()];
+    Region(6, 6).Fill(x0 - 3, 10, Color::BACK);
+
+    Char(Symbol8::TPOS_1).Draw(x0 - 3, 10, Color::FILL);
 }
 
 
