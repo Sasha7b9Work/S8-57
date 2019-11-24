@@ -152,7 +152,7 @@ public:
 
 private:
     /// Отрисовать маркер вертикального смещения на сетке
-    static void Draw(Chan::E ch);
+    void Draw();
 
     static const float absStep[Range::Count];
     /// Это значение соответствует минимуму смещения

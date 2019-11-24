@@ -474,18 +474,18 @@ void RShift::DrawBoth()
 {
     if(set.disp.lastAffectedChannel == Chan::B)
     {
-        Draw(Chan::A);
-        Draw(Chan::B);
+        RShift(Chan::A).Draw();
+        RShift(Chan::B).Draw();
     }
     else
     {
-        Draw(Chan::B);
-        Draw(Chan::A);
+        RShift(Chan::B).Draw();
+        RShift(Chan::A).Draw();
     }
 }
 
 
-void RShift::Draw(Chan::E ch)
+void RShift::Draw()
 {
     Color::CHAN[ch].SetAsCurrent();
 
