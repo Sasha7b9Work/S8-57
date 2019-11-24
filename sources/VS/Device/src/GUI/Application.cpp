@@ -212,7 +212,7 @@ void Frame::DrawFPS()
 
         SetStatusText(buffer);
 
-        prevTime = (uint)clock();
+        prevTime = static_cast<uint>(clock());
         count = 0;
     }
 }
