@@ -6,7 +6,6 @@
 
 
 #define NUM_AVE_MAX     256
-#define NUM_AVE         (1 << static_cast<int>(set.disp.ENumAverage))
 #define NUM_ACCUM       (1 << static_cast<int>(set.disp.ENumAccum))
 
 
@@ -55,8 +54,12 @@ struct ENumAverage
         _32,
         _64,
         _128,
-        _256
-    } value;
+        _256,
+        Count
+    };
+    ENumAverage() {};
+    operator ENumAverage::E();
+    int Number() const;
 };
 
 /// Количество накоплений.
@@ -164,7 +167,7 @@ struct SettingsDisplay
     DisplayMapping::E      mapping;
     ENumMinMax::E          enumMinMax;            ///< Перечисление количества измерений для определения минимумов и масимумов.
     uint8                  notUsing0;
-    ENumAverage::E         ENumAverage;           ///< Число усреднений сигнала.
+    ENumAverage::E         enumAverage;           ///< Число усреднений сигнала.
     ENumAccum::E           ENumAccum;             ///< Число накоплений сигнала на экране.
     ModeAccumulation::E    modeAccumulation;      ///< Режим накопления сигналов.
     ENumSmoothing          ENumSmoothing;         ///< Перечисление количества точек для скользящего фильтра.

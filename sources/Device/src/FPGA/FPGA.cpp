@@ -113,7 +113,7 @@ void FPGA::ReadData()
         }
     }
 
-    if (set.disp.ENumAverage != ENumAverage::_1)               // Если включено усреднение
+    if (ENumAverage() != ENumAverage::_1)               // Если включено усреднение
     {
         DataSettings *last = RAM::Read(0);
         DataSettings *prev = RAM::Read(1);

@@ -19,7 +19,7 @@ void AveragerOsci::Process(Chan::E ch, const uint8 *dataNew, uint size)
         ƒл€ этого нужно завести битовый массив, в котором отмечать те точки, которые считаны в данной итерации.
     */
 
-    uint16 numAve = static_cast<uint16>(set.disp.ENumAverage);
+    uint16 numAve = static_cast<uint16>(ENumAverage().Number());
 
     uint index = 0;
     uint step = 1;
@@ -37,7 +37,7 @@ void AveragerOsci::Process(Chan::E ch, const uint8 *dataNew, uint size)
 
     /// \todo «десь неправильно - места в AVE_DATA слишком мало дл€ 8к * 16биты
 
-    if (numSignals[ch] < set.disp.ENumAverage)
+    if (numSignals[ch] < ENumAverage())
     {
         if (numSignals[ch] == 0)
         {
@@ -85,12 +85,12 @@ void AveragerOsci::SettingChanged()
 
 void AveragerOsci::Draw()
 {
-    if (set.disp.ENumAverage > 1 && numSignals[0] < set.disp.ENumAverage)
+    if (ENumAverage() > 1 && numSignals[0] < ENumAverage())
     {
         int height = 10;
 
         Rectangle(Grid::Width(), height).Draw(Grid::Left(), Grid::Top(), Color::GRID);
 
-        Region(static_cast<int>(Grid::Width() * static_cast<float>(numSignals[0]) / set.disp.ENumAverage), height).Fill(Grid::Left(), Grid::Top());
+        Region(static_cast<int>(Grid::Width() * static_cast<float>(numSignals[0]) / ENumAverage()), height).Fill(Grid::Left(), Grid::Top());
     }
 }

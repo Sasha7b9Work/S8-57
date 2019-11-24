@@ -10,6 +10,18 @@ int ENumMinMax::Number() const
 }
 
 
+ENumAverage::operator ENumAverage::E()
+{
+    return set.disp.enumAverage;
+}
+
+
+int ENumAverage::Number() const
+{
+    return (1 << set.disp.enumAverage);
+}
+
+
 DisplayMapping::DisplayMapping(DisplayMapping::E v)
 {
     set.disp.mapping = v;
@@ -89,7 +101,7 @@ DEF_CHOICE_9( cAverage_Num,                                                     
     "64",
     "128",
     "256",
-    set.disp.ENumAverage, &PageDisplay::self, Item::Active, OnChange_AverageNum, Choice::AfterDraw
+    set.disp.enumAverage, &PageDisplay::self, Item::Active, OnChange_AverageNum, Choice::AfterDraw
 )
 
 
