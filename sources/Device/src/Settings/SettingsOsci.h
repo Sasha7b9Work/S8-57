@@ -209,7 +209,7 @@ private:
 struct TShift
 {
     TShift();
-    explicit TShift(int tShift);
+    TShift(int tShift);
 
     operator int() { return shift; }
 

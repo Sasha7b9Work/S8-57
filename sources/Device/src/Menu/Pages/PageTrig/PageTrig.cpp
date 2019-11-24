@@ -23,12 +23,12 @@ void PageTrig::OnChanged_Mode(bool)
         // рандомизатора автоматический или ждущий
         if (set.trig.startMode == TrigStartMode::Single)
         {
-            set.time.sampleTypeOld = set.time.sampleType;
-            set.time.sampleType = SampleType::Real;
+            set.time.sampleTypeOld = SampleType();
+            SampleType().Set(SampleType::Real);
         }
         else if(set.trig.startMode == TrigStartMode::Auto)    // Иначе восстановим ранее сохранённый
         {
-            set.time.sampleType = set.time.sampleTypeOld;
+            SampleType().Set(set.time.sampleTypeOld);
         }
 		else
 		{

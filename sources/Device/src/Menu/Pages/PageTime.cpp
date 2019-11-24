@@ -20,6 +20,18 @@ PeakDetMode::operator PeakDetMode::E()
 }
 
 
+SampleType::operator SampleType::E()
+{
+    return set.time._sampleType;
+}
+
+
+void SampleType::Set(SampleType::E type)
+{
+    set.time._sampleType = type;
+}
+
+
 int TPos::InBytes()
 {
     static const int m[][2][3] =
@@ -55,7 +67,7 @@ DEF_CHOICE_2( cSample,                                                          
     ,
     "–еальное врем€",
     "Ёквивалентна€",
-    set.time.sampleType, &PageTime::self, IsActive_Sample, 0, 0
+    set.time._sampleType, &PageTime::self, IsActive_Sample, 0, 0
 )
 
 

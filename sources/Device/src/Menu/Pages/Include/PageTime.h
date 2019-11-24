@@ -26,6 +26,7 @@ struct TPos
         Center,        ///< Привязка к центру.
         Right          ///< Привязка к правому краю.
     };
+
     TPos() {};
 
     operator TPos::E();
@@ -41,6 +42,12 @@ struct SampleType
         Real,    ///< реальное время - в построении участвуют только реально считанные точки, ничего не рассчитывается.
         Equal    ///< эквивалентная - сигнал строится по последним точкам, полученным от рандомизатора.
     };
+
+    SampleType() {};
+
+    void Set(SampleType::E type);
+
+    operator SampleType::E();
 };
 
 /// Функция ВР/ДЕЛ.
@@ -50,7 +57,7 @@ struct FunctionTime
     {
         Time,
         ShiftInMemory
-    } value;
+    };
 };
 
 /// Тип привязки к смещению по горизонтали
@@ -60,7 +67,7 @@ struct LinkingTShift
     {
         Time,     ///< Смещение привязано к времени
         Position  ///< Смещение привязано к позиции
-    } value;
+    };
 };
 
 
@@ -70,7 +77,7 @@ struct LinkingTShift
     TBase::E            base;
     PeakDetMode::E      peakDet;
     TPos::E             tPos;
-    SampleType::E       sampleType;
+    SampleType::E       _sampleType;
     FunctionTime::E     timeDivXPos;
     LinkingTShift::E    linkingTShift;  ///< Тип привязки смещения по горизонтали
     SampleType::E       sampleTypeOld;
