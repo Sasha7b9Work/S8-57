@@ -42,20 +42,20 @@ bool TestMapping()
 
     for(int i = 0; i < 10; i++)
     {
-        SCPI::AppendNewData(commandLines.c_str(), std::strlen(commandLines.c_str()));
+        SCPI_APPEND_STRING(commandLines);
 
         if(DisplayMapping() != DisplayMapping::Lines)
         {
-            return false;
+            SCPI_EXIT_ERROR();
         }
 
-        SCPI::AppendNewData(commandDots.c_str(), std::strlen(commandDots.c_str()));
+        SCPI_APPEND_STRING(commandDots);
 
         if(DisplayMapping() != DisplayMapping::Dots)
         {
-            return false;
+            SCPI_EXIT_ERROR();
         }
     }
 
-    return false;
+    return true;
 }

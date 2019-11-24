@@ -63,5 +63,5 @@ static const char *FuncScale(const char *buffer)
 
 static bool TestScale()
 {
-    return false;
+   return true;
 }

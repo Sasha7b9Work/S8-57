@@ -25,9 +25,9 @@ void Test::Run()
     
     Display::Init();
 
-    RunTest(RAM::Test, "Тест ОЗУ");
-    
-    RunTest(ROM::Data::Test, "Тест ППЗУ");
+    //RunTest(RAM::Test, "Тест ОЗУ");
+    //
+    //RunTest(ROM::Data::Test, "Тест ППЗУ");
 
     RunTest(SCPI::Test, "Тест SCPI");
 

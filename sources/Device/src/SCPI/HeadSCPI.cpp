@@ -81,17 +81,17 @@ static const char *FuncTest(const char *buffer)
 
 static bool TestIDN()
 {
-    return false;
+    return true;
 }
 
 
 static bool TestReset()
 {
-    return false;
+    return true;
 }
 
 
 static bool TestTest()
 {
-    return false;
+    return true;
 }

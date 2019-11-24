@@ -103,11 +103,11 @@ static const char *FuncKeyLong(const char *buffer)
 
 static bool TestKeyPress()
 {
-    return false;
+    return true;
 }
 
 
 static bool TestKeyLong()
 {
-    return false;
+    return true;
 }
