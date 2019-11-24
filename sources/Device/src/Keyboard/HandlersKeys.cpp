@@ -198,24 +198,29 @@ static void RShiftMoreB()
     OnChangeParameterChannel(ChangeRShift, Chan::B, 1);
 }
 
+static void ChangeRange(Chan::E ch, int16 delta)
+{
+    Range(ch).Change(delta);
+}
+
 static void RangeLessA()
 {
-    OnChangeParameterChannel(Range::Change, Chan::A, -1);
+    OnChangeParameterChannel(ChangeRange, Chan::A, -1);
 }
 
 static void RangeMoreA()
 {
-    OnChangeParameterChannel(Range::Change, Chan::A, +1);
+    OnChangeParameterChannel(ChangeRange, Chan::A, +1);
 }
 
 static void RangeLessB()
 {
-    OnChangeParameterChannel(Range::Change, Chan::B, -1);
+    OnChangeParameterChannel(ChangeRange, Chan::B, -1);
 }
 
 static void RangeMoreB()
 {
-    OnChangeParameterChannel(Range::Change, Chan::B, +1);
+    OnChangeParameterChannel(ChangeRange, Chan::B, +1);
 }
 
 static void OnChangeParameterChannel(pFuncVChI16 func, Chan::E ch, int16 delta)
