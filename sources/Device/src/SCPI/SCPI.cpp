@@ -1,5 +1,4 @@
 #include "defines.h"
-#include "Hardware/Timer.h"
 #include "Hardware/VCP.h"
 #include "SCPI/HeadSCPI.h"
 #include "SCPI/SCPI.h"
@@ -34,8 +33,6 @@ static String badSymbols;
 
 void SCPI::AppendNewData(const char *buffer, uint size)
 {
-    uint start = TIME_MS;
-
     data.Append(buffer, size);
 
     SU::ToUpper(data.c_str());
@@ -46,9 +43,6 @@ void SCPI::AppendNewData(const char *buffer, uint size)
     {
         SendBadSymbols();
     }
-
-    uint time = TIME_MS - start;
-    time = time;
 }
 
 
@@ -62,12 +56,7 @@ void SCPI::Update()
         return;
     }
 
-    uint start = TIME_MS;
-
     const char *end = Process(data.c_str(), head);
-    
-    uint time = TIME_MS - start;
-    time = time;
 
     if(end)
     {
