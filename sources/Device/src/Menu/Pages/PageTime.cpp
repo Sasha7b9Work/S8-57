@@ -22,13 +22,13 @@ PeakDetMode::operator PeakDetMode::E()
 
 SampleType::operator SampleType::E()
 {
-    return set.time._sampleType;
+    return set.time.sampleType;
 }
 
 
 void SampleType::Set(SampleType::E type)
 {
-    set.time._sampleType = type;
+    set.time.sampleType = type;
 }
 
 
@@ -67,7 +67,7 @@ DEF_CHOICE_2( cSample,                                                          
     ,
     "–еальное врем€",
     "Ёквивалентна€",
-    set.time._sampleType, &PageTime::self, IsActive_Sample, 0, 0
+    set.time.sampleType, &PageTime::self, IsActive_Sample, 0, 0
 )
 
 

@@ -77,7 +77,7 @@ struct LinkingTShift
     TBase::E            base;
     PeakDetMode::E      peakDet;
     TPos::E             tPos;
-    SampleType::E       _sampleType;
+    SampleType::E       sampleType;
     FunctionTime::E     timeDivXPos;
     LinkingTShift::E    linkingTShift;  ///< Тип привязки смещения по горизонтали
     SampleType::E       sampleTypeOld;
