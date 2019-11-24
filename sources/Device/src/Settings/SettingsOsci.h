@@ -176,15 +176,18 @@ struct ModeCouple
         AC,      ///< Открытый вход
         GND,     ///< Вход заземлён.
         Count
-    } value;
+    };
     /// С помощью этого можно узнать значение
-    ModeCouple(Chan::E ch);
+    ModeCouple(Chan::E _ch) : ch(_ch) {};
     /// С помощью этого можно установить новое значение
     ModeCouple(Chan::E ch, ModeCouple::E couple);
 
-    operator ModeCouple::E() { return value; }
+    operator ModeCouple::E();
     
     pString UGO() const;
+
+private:
+    Chan::E ch;
 };
 
 struct Bandwidth

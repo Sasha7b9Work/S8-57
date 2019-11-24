@@ -354,7 +354,13 @@ ModeCouple::ModeCouple(Chan::E ch, ModeCouple::E modeCoupe)
 pString ModeCouple::UGO() const
 {
     static const pString couple[] = { "\x92", "\x91", "\x90" };
-    return couple[static_cast<int>(value)];
+    return couple[set.ch[ch].couple];
+}
+
+
+ModeCouple::operator ModeCouple::E()
+{
+    return set.ch[ch].couple;
 }
 
 

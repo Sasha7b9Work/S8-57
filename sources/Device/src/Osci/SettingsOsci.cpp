@@ -860,9 +860,3 @@ void TShift::Reset()
 {
     TShift zero(Zero());
 }
-
-
-ModeCouple::ModeCouple(Chan::E ch)
-{
-    value = set.ch[ch].couple;
-}
