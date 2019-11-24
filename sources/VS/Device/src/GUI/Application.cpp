@@ -8,6 +8,7 @@
 
 #pragma warning(push, 0)
 #include <wx/config.h>
+#include <wx/display.h>
 #include <wx/file.h>
 #include <wx/fileconf.h>
 #pragma warning(pop)
@@ -170,6 +171,8 @@ Frame::Frame(const wxString& title)
     Bind(wxEVT_CLOSE_WINDOW, &Frame::OnClose, this);
     Bind(wxEVT_PAINT, &Frame::OnPaint, this);
 
+    SetPositionAndSize();
+
     timer.SetOwner(this, TIMER_ID);
 
     timer.Start(0);
@@ -268,4 +271,39 @@ void Frame::OnAbout(wxCommandEvent& WXUNUSED(event))
         "About wxWidgets minimal sample",
         wxOK | wxICON_INFORMATION,
         this);
+}
+
+
+/// Получить разрешение максимального имеющегося в системе монитора
+static wxRect GetMaxDisplay()
+{
+    wxRect result = { 0, 0, 0, 0 };
+
+    for(uint i = 0; i < wxDisplay::GetCount(); i++)
+    {
+        wxDisplay display(i);
+
+        wxRect rect = display.GetClientArea();
+        if(rect.width > result.width)
+        {
+            result.width = rect.width;
+            result.height = rect.height;
+        }
+    }
+
+    return result;
+}
+
+
+void Frame::SetPositionAndSize()
+{
+    wxSize size = { Frame::WIDTH + 9, Frame::HEIGHT + 320 };
+
+    SetSize(size);
+    SetMinSize(size);
+    SetMaxSize(size);
+
+    wxRect rect = GetMaxDisplay();
+
+    SetPosition({ rect.width / 2 - size.GetWidth() / 2, rect.height / 2 - size.GetHeight() / 2 });
 }

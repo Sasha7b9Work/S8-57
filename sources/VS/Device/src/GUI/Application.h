@@ -49,4 +49,6 @@ private:
 
     void SaveSettings();
     void LoadSettings();
+    /// Установить размер и оптимальную позицию для окна приложения
+    void SetPositionAndSize();
 };

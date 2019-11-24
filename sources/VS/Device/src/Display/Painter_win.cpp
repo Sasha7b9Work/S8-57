@@ -53,10 +53,6 @@ static Key::E pressedKey = Key::None;
 
 /// Создаёт окно приложения. Возвращает хэндл виджета для отрисовки
 static void CreateFrame();
-/// Установить размер и оптимальную позицию для окна приложения
-static void SetPositionAndSize(Frame *frame);
-/// Получить разрешение максимального имеющегося в системе монитора
-static wxRect GetMaxDisplay();
 /// Создаёт все кнопки
 static void CreateButtons(Frame *frame);
 /// Создаёт одну кнопку
@@ -113,45 +109,9 @@ void Painter::EndScene()
 }
 
 
-static void SetPositionAndSize(Frame *frame)
-{
-    wxSize size = {Frame::WIDTH + 9, Frame::HEIGHT + 320 };
-    
-    frame->SetSize(size);
-    frame->SetMinSize(size);
-    frame->SetMaxSize(size);
-
-    wxRect rect = GetMaxDisplay();
-
-    frame->SetPosition({ rect.width / 2 - size.GetWidth() / 2, rect.height / 2 - size.GetHeight() / 2 });
-}
-
-
-static wxRect GetMaxDisplay()
-{
-    wxRect result = {0, 0, 0, 0};
-
-    for (uint i = 0; i < wxDisplay::GetCount(); i++)
-    {
-        wxDisplay display(i);
-
-        wxRect rect = display.GetClientArea();
-        if (rect.width > result.width)
-        {
-            result.width = rect.width;
-            result.height = rect.height;
-        }
-    }
-
-    return result;
-}
-
-
 static void CreateFrame()
 {
     Frame *frame = new Frame("");
-
-    SetPositionAndSize(frame);
 
     wxBoxSizer *sizer = new wxBoxSizer(wxHORIZONTAL);
 
