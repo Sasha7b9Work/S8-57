@@ -29,8 +29,11 @@ struct MeasuresOnDisplay
         _3_5,    ///< 3 строки по 5 измерений.
         _6_1,    ///< 6 строк по 1 измерению.
         _6_2     ///< 6 строк по 2 измерения.
-    } value;
-    explicit MeasuresOnDisplay(E v) : value(v) {};
+    };
+    MeasuresOnDisplay() {};
+    operator MeasuresOnDisplay::E();
+    /// Возвращает true, если измерения расположены вертикально с левой стороны экрана
+    bool IsVertical() const;
 };
 
 struct MeasuresSource

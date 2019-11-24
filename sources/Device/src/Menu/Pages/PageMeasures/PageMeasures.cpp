@@ -2,6 +2,19 @@
 #include "Menu/MenuItems.h"
 #include "Menu/Pages/Include/PageMeasures.h"
 #include "Menu/Menu.h"
+#include "Settings/Settings.h"
+
+
+MeasuresOnDisplay::operator MeasuresOnDisplay::E()
+{
+    return set.meas.number;
+}
+
+
+bool MeasuresOnDisplay::IsVertical() const
+{
+    return (set.meas.number == MeasuresOnDisplay::_6_1) || (set.meas.number == MeasuresOnDisplay::_6_2);
+}
 
 
 DEF_PAGE_3( pMeasures,                                                                                                                                                    //--- »«Ã≈–≈Õ»ﬂ ---

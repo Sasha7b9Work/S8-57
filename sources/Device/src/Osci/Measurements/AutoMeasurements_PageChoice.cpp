@@ -74,12 +74,13 @@ void PageChoiceMeasures::Draw()
     {
         return;
     }
-    int x = ((set.meas.number == MeasuresOnDisplay::_6_1) || (set.meas.number == MeasuresOnDisplay::_6_2)) ? (Grid::Right() - 3 * Grid::Width() / 5) : Grid::Left();
+    int x = MeasuresOnDisplay().IsVertical() ? (Grid::Right() - 3 * Grid::Width() / 5) : Grid::Left();
     int y = Grid::Top();
     int dX = Grid::Width() / 5;
     int dY = 22;
-    int maxRow = ((set.meas.number == MeasuresOnDisplay::_6_1) || (set.meas.number == MeasuresOnDisplay::_6_2)) ? 8 : 5;
-    int maxCol = ((set.meas.number == MeasuresOnDisplay::_6_1) || (set.meas.number == MeasuresOnDisplay::_6_2)) ? 3 : 5;
+    int maxRow = MeasuresOnDisplay().IsVertical() ? 8 : 5;
+    int maxCol = MeasuresOnDisplay().IsVertical() ? 3 : 5;
+
     TypeMeasure::E meas = TypeMeasure::None;
 
     for (int row = 0; row < maxRow; row++)
