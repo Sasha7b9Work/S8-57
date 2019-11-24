@@ -38,9 +38,6 @@ public:
     void OnTimer(wxTimerEvent &);
     void OnTimerLong(wxTimerEvent &);
     void OnClose(wxCloseEvent &);
-    void OnPaint(wxPaintEvent &);
-
-    static Frame *Self();
 
 private:
     wxTimer timer;

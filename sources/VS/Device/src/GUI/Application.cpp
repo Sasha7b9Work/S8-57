@@ -269,20 +269,3 @@ void Frame::OnAbout(wxCommandEvent& WXUNUSED(event))
         wxOK | wxICON_INFORMATION,
         this);
 }
-
-
-extern void Painter_UpdateFrame();
-
-
-void Frame::OnPaint(wxPaintEvent &)
-{
-    Painter_UpdateFrame();
-}
-
-
-Frame *Frame::Self()
-{
-    static wxFrame nullFrame;
-
-    return (frame && isRunning) ? frame : static_cast<Frame *>(&nullFrame);
-}

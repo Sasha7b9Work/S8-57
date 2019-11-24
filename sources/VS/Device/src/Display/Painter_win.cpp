@@ -38,7 +38,6 @@
 
 
 static wxBitmap bitmapButton(Display::WIDTH, Display::HEIGHT);
-static wxButton *buttonBitmap = nullptr;
 /// Здесь будем рисовать
 wxMemoryDC memDC;
 
@@ -68,6 +67,29 @@ static void CreateButtonsChannel(Frame *frame, const char *title, int x, int y, 
 static void CreateButtonsTrig(Frame *frame, int x, int y);
 
 
+class Screen : public wxPanel
+{
+public:
+    Screen(wxWindow *parent) : wxPanel(parent)
+    {
+        SetMinSize({ Frame::WIDTH, Frame::HEIGHT });
+        SetDoubleBuffered(true);
+        Bind(wxEVT_PAINT, &Screen::OnPaint, this);
+    }
+
+    void OnPaint(wxPaintEvent &)
+    {
+        wxPaintDC dc(this);
+        wxImage image = bitmapButton.ConvertToImage();
+        image = image.Rescale(Frame::WIDTH, Frame::HEIGHT);
+        wxBitmap bitmap(image);
+        dc.DrawBitmap(bitmap, 0, 0);
+    }
+};
+
+
+static Screen *screen = nullptr;
+
 
 void Painter::Init()
 {
@@ -83,22 +105,11 @@ void Painter::BeginScene(Color color)
     Region(Display::WIDTH, Display::HEIGHT).Fill(0, 0, color);
 }
 
-void Painter_UpdateFrame()
-{
-    wxImage image = bitmapButton.ConvertToImage();
-    image = image.Rescale(Frame::WIDTH, Frame::HEIGHT);
-    wxBitmap bitmap(image);
-    buttonBitmap->SetBitmap(bitmap);
-}
-
 
 void Painter::EndScene()
 {
     memDC.SelectObject(wxNullBitmap);
-    if(&memDC.GetSelectedBitmap() != &wxNullBitmap)
-    {
-        Frame::Self()->Refresh();
-    }
+    screen->Refresh();
 }
 
 
@@ -144,10 +155,9 @@ static void CreateFrame()
 
     wxBoxSizer *sizer = new wxBoxSizer(wxHORIZONTAL);
 
-    buttonBitmap = new wxButton(frame, wxID_ANY, wxEmptyString, { 0, 0 }, { Frame::WIDTH, Frame::HEIGHT });
-    buttonBitmap->SetMaxSize({ Display::WIDTH, Display::HEIGHT });
-    buttonBitmap->SetBitmap(bitmapButton);
-    sizer->Add(buttonBitmap);
+    screen = new Screen(frame);
+
+    sizer->Add(screen);
 
     frame->SetSizer(sizer);
 
