@@ -15,7 +15,7 @@ struct CalibrationMode
         x1,
         x10,
         Disable
-    } value;
+    };
 };
 
 /// Делитель.
@@ -25,11 +25,12 @@ struct Divider
     {
         _1,
         _10
-    } value;
-    Divider(Chan::E ch);
+    };
+    Divider(Chan::E _ch) : ch(_ch) {};
     int ToAbs() const;
     static int ToAbs(Divider::E v) { return (v == _1) ? 1 : 10; };
-    operator uint() { return value; }
+    operator Divider::E();
+    Chan::E ch;
 };
 
 

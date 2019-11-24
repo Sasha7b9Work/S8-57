@@ -11,14 +11,15 @@
 #include <cstring>
 
 
-Divider::Divider(Chan::E ch) : value(set.ch[ch].divider)
-{
-
-}
-
 int Divider::ToAbs() const
 {
-    return (value == _1) ? 1 : 10;
+    return (set.ch[ch].divider == _1) ? 1 : 10;
+}
+
+
+Divider::operator Divider::E()
+{
+    return set.ch[ch].divider;
 }
 
 
