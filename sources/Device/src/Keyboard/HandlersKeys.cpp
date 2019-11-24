@@ -243,6 +243,11 @@ static void TShiftMore()
     OnChangeParameterTime(TShift::Change, 1);
 }
 
+static void ChangeTBase(int delta)
+{
+    TBase().Change(delta);
+}
+
 static void TBaseLess()
 {
     if (Device::State::InModeRecorder())
@@ -251,7 +256,7 @@ static void TBaseLess()
     }
     else
     {
-        OnChangeParameterTime(TBase::Change, -1);
+        OnChangeParameterTime(ChangeTBase, -1);
     }
 }
 
@@ -263,7 +268,7 @@ static void TBaseMore()
     }
     else
     {
-        OnChangeParameterTime(TBase::Change, 1);
+        OnChangeParameterTime(ChangeTBase, 1);
     }
 }
 

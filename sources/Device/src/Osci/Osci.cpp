@@ -39,7 +39,7 @@ void Osci::Init()
     TrigInput().Load();
     TrigLevel().Load();
     TrigPolarity().Load();
-    TBase::Load();
+    TBase().Load();
     TShift::Load();
     ContextOsci::LoadCalibratorMode();
     LoadHoldfOff();
