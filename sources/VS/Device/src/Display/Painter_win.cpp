@@ -77,36 +77,27 @@ void Painter::Init()
 
 void Painter::BeginScene(Color color)
 {
-    if(buttonBitmap)
-    {
-        memDC.SelectObject(bitmapButton);
-        wxBrush brush({ 0, 0, 0 }, wxTRANSPARENT);
-        memDC.SetBrush(brush);
-        Region(Display::WIDTH, Display::HEIGHT).Fill(0, 0, color);
-    }
+    memDC.SelectObject(bitmapButton);
+    wxBrush brush({ 0, 0, 0 }, wxTRANSPARENT);
+    memDC.SetBrush(brush);
+    Region(Display::WIDTH, Display::HEIGHT).Fill(0, 0, color);
 }
 
 void Painter_UpdateFrame()
 {
-    if(buttonBitmap)
-    {
-        wxImage image = bitmapButton.ConvertToImage();
-        image = image.Rescale(Frame::WIDTH, Frame::HEIGHT);
-        wxBitmap bitmap(image);
-        buttonBitmap->SetBitmap(bitmap);
-    }
+    wxImage image = bitmapButton.ConvertToImage();
+    image = image.Rescale(Frame::WIDTH, Frame::HEIGHT);
+    wxBitmap bitmap(image);
+    buttonBitmap->SetBitmap(bitmap);
 }
 
 
 void Painter::EndScene()
 {
-    if(Frame::Self() && Frame::isRunning)
+    memDC.SelectObject(wxNullBitmap);
+    if(&memDC.GetSelectedBitmap() != &wxNullBitmap)
     {
-        memDC.SelectObject(wxNullBitmap);
-        if(&memDC.GetSelectedBitmap() != &wxNullBitmap)
-        {
-            Frame::Self()->Refresh();
-        }
+        Frame::Self()->Refresh();
     }
 }
 

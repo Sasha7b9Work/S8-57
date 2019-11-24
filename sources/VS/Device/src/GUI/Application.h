@@ -42,8 +42,6 @@ public:
 
     static Frame *Self();
 
-    static bool isRunning;
-
 private:
     wxTimer timer;
     /// Таймер для "длинного нажатия" кнопок

@@ -38,7 +38,7 @@ enum
 
 static Frame *frame = nullptr;
 
-bool Frame::isRunning = false;
+static bool isRunning = false;
 
 
 wxIMPLEMENT_APP_NO_MAIN(Application);
@@ -282,5 +282,7 @@ void Frame::OnPaint(wxPaintEvent &)
 
 Frame *Frame::Self()
 {
-    return frame;
+    static wxFrame nullFrame;
+
+    return (frame && isRunning) ? frame : static_cast<Frame *>(&nullFrame);
 }
