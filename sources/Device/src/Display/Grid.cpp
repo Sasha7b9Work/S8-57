@@ -359,15 +359,15 @@ static int DeltaVforLineGrid()
     {
         if (MeasuresOnDisplay() == MeasuresOnDisplay::_1_5)
         {
-            result = (SOURCE_MEASURES_IS_BOTH) ? 55 : 59;
+            result = MeasuresSource().IsBoth() ? 55 : 59;
         }
         else if (MeasuresOnDisplay() == MeasuresOnDisplay::_2_5)
         {
-            result = (SOURCE_MEASURES_IS_BOTH) ? 69 : 51;
+            result = MeasuresSource().IsBoth() ? 69 : 51;
         }
         else if (MeasuresOnDisplay() == MeasuresOnDisplay::_3_5)
         {
-            result = (SOURCE_MEASURES_IS_BOTH) ? 54 : 68;
+            result = MeasuresSource().IsBoth() ? 54 : 68;
         }
         else
         {

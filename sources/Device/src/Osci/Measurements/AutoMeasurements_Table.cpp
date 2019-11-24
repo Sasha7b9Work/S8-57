@@ -95,16 +95,16 @@ void TableMeasures::Cell::DrawStringMeasure(int x, int y)
     Color colA = Color::CHAN[Chan::A];
     Color colB = Color::CHAN[Chan::B];
 
-    if (SOURCE_MEASURES_IS_BOTH)
+    if (MeasuresSource().IsBoth())
     {
         measureA.Draw(x + 2, y + 11, colA);
         measureB.Draw(x + 2, y + (set.ch[Chan::A].enabled ? 20 : 11), colB); //-V547
     }
-    else if (SOURCE_MEASURES_IS_A)
+    else if (MeasuresSource().IsA())
     {
         measureA.Draw(x + 2, y + 11, colA);
     }
-    else if (SOURCE_MEASURES_IS_B)
+    else if (MeasuresSource().IsB())
     {
         measureB.Draw(x + 2, y + 11, colB);
     }
@@ -170,7 +170,7 @@ int TableMeasures::GetDeltaGridLeft()
 
 int TableMeasures::DY()
 {
-    if (set.meas.source == MeasuresSource::A_B)
+    if (MeasuresSource().IsBoth())
     {
         return 30;
     }

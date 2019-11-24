@@ -11,6 +11,24 @@ MeasuresOnDisplay::operator MeasuresOnDisplay::E()
 }
 
 
+bool MeasuresSource::IsA() const
+{
+    return (set.meas.source == MeasuresSource::A);
+}
+
+
+bool MeasuresSource::IsB() const
+{
+    return (set.meas.source == MeasuresSource::B);
+}
+
+
+bool MeasuresSource::IsBoth() const
+{
+    return (set.meas.source == MeasuresSource::A_B);
+}
+
+
 bool MeasuresOnDisplay::IsVertical() const
 {
     return (set.meas.number == MeasuresOnDisplay::_6_1) || (set.meas.number == MeasuresOnDisplay::_6_2);

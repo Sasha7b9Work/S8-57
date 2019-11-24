@@ -3,18 +3,10 @@
 #include "Osci/Measurements/Measures.h"
 
 
-/// ѕо какому каналу производить автоматические измерени€
-#define SOURCE_MEASURES                 (set.meas.source)
-/// јвтоматические измерени€ производ€тс€ только по каналу A
-#define SOURCE_MEASURES_IS_A            (SOURCE_MEASURES == MeasuresSource::A)
-/// јвтоматические измерени€ производ€тс€ только по каналу B
-#define SOURCE_MEASURES_IS_B            (SOURCE_MEASURES == MeasuresSource::B)
-/// јвтоматические измерени€ производ€тс€ по каналам A и B
-#define SOURCE_MEASURES_IS_BOTH         (SOURCE_MEASURES == MeasuresSource::A_B)
 /// ¬ыводить автоматические измерени€ по каналу A
-#define VIEW_MEASURES_A                 (set.ch[Chan::A].enabled && (SOURCE_MEASURES_IS_A || SOURCE_MEASURES_IS_BOTH))
+#define VIEW_MEASURES_A                 (set.ch[Chan::A].enabled && (MeasuresSource().IsA() || MeasuresSource().IsBoth()))
 /// ¬ыводить автоматические измерени€ по каналу B
-#define VIEW_MEASURES_B                 (set.ch[Chan::B].enabled && (SOURCE_MEASURES_IS_B || SOURCE_MEASURES_IS_BOTH))
+#define VIEW_MEASURES_B                 (set.ch[Chan::B].enabled && (MeasuresSource().IsB() || MeasuresSource().IsBoth()))
 
 
 /// —колько автоматических измерений помещаетс€ на экран
@@ -43,8 +35,11 @@ struct MeasuresSource
         A,
         B,
         A_B
-    } value;
-    explicit MeasuresSource(E v) : value(v) {};
+    };
+    MeasuresSource() {};
+    bool IsA() const;
+    bool IsB() const;
+    bool IsBoth() const;
 };
 
 /// —жимать ли сигналы при выводе измерений.
