@@ -22,6 +22,18 @@ int ENumAverage::Number() const
 }
 
 
+ENumAccum::operator ENumAccum::E()
+{
+    return set.disp.enumAccum;
+}
+
+
+int ENumAccum::Number() const
+{
+    return (1 << set.disp.enumAccum);
+}
+
+
 DisplayMapping::DisplayMapping(DisplayMapping::E v)
 {
     set.disp.mapping = v;

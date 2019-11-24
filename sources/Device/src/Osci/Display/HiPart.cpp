@@ -196,7 +196,7 @@ static int DrawMainParameters(int _x, int _y)
 
     if (set.mem.modeWork == ModeWork::Dir)
     {
-        WriteStringAndNumber("накопл", x, y0 - 4, NUM_ACCUM);
+        WriteStringAndNumber("накопл", x, y0 - 4, ENumAccum().Number());
         WriteStringAndNumber("усредн", x, y1, ENumAverage().Number());
         WriteStringAndNumber("мн\x93мкс", x, y2, ENumMinMax().Number());
     }
