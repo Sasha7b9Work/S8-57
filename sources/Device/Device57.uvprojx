@@ -806,9 +806,9 @@
               <FilePath>.\src\Hardware\Timer.h</FilePath>
             </File>
             <File>
-              <FileName>Timer_stm.cpp</FileName>
+              <FileName>Timer.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\Hardware\Timer_stm.cpp</FilePath>
+              <FilePath>.\src\Hardware\Timer.cpp</FilePath>
             </File>
             <File>
               <FileName>VCP.h</FileName>
@@ -1894,6 +1894,16 @@
               <FileName>TBaseSCPI.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\SCPI\TBaseSCPI.h</FilePath>
+            </File>
+            <File>
+              <FileName>ChannelsSCPI.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\SCPI\ChannelsSCPI.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>ChannelsSCPI.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\SCPI\ChannelsSCPI.h</FilePath>
             </File>
           </Files>
         </Group>

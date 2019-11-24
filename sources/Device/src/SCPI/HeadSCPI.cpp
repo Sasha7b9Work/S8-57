@@ -1,6 +1,7 @@
 #include "defines.h"
 #include "Menu/Pages/Include/DebugPage.h"
 #include "Menu/Pages/Include/PageService.h"
+#include "SCPI/ChannelsSCPI.h"
 #include "SCPI/DisplaySCPI.h"
 #include "SCPI/HeadSCPI.h"
 #include "SCPI/KeySCPI.h"
@@ -20,9 +21,10 @@ const StructSCPI SCPI::head[] =
     SCPI_LEAF("*IDN?",     FuncIDN),
     SCPI_LEAF("*RST",      FuncReset),
     SCPI_LEAF(":TEST",     FuncTest),
+    SCPI_NODE(":CHANNEL",  SCPI::channels),
+    SCPI_NODE(":DISPLAY",  SCPI::display),
     SCPI_NODE(":KEY",      SCPI::key),
     SCPI_NODE(":TIMEBASE", SCPI::tBase),
-    SCPI_NODE(":DISPLAY",  SCPI::display),
     SCPI_EMPTY()
 };
 
