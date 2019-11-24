@@ -231,7 +231,7 @@ int TShift::Min()
         StructENumPoints(-4096 * mul + k, -2048 * mul + k, 0 * mul + k)   // 8192
     };
 
-    return m[static_cast<int>(ENumPointsFPGA())].m[static_cast<int>(set.time.TPos)];
+    return m[ENumPointsFPGA()].m[TPos()];
 }
 
 

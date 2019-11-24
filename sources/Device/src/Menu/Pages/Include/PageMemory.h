@@ -75,7 +75,7 @@ struct ENumPointsFPGA
     ENumPointsFPGA();
     uint BytesInChannel() const;
     uint PointsInChannel() const;
-    operator uint() { return value; }
+    operator ENumPointsFPGA::E() { return value; }
     static const uint MAX_NUM = 8192;
 };
 

@@ -414,7 +414,7 @@ static void DrawModePointsPeakDetOff(int center, const uint8 *data, float scale,
 static void DrawTPos(int leftX, int rightX)
 {
     int x[] = {leftX, (rightX - leftX) / 2 + leftX, rightX};
-    int x0 = x[set.time.TPos];
+    int x0 = x[TPos()];
     Region(6, 6).Fill(x0 - 3, 10, Color::BACK);
 
     Char(Symbol8::TPOS_1).Draw(x0 - 3, 10, Color::FILL);
@@ -497,11 +497,11 @@ void DisplayOsci::PainterData::ChangeTPos()
 {
     int width = Grid::Width();
 
-    if (set.time.TPos == TPos::Left)
+    if (TPos() == TPos::Left)
     {
         set.disp.shiftInMemory = 0;
     }
-    else if (set.time.TPos == TPos::Center)
+    else if (TPos() == TPos::Center)
     {
         set.disp.shiftInMemory = static_cast<int16>(ENumPointsFPGA().PointsInChannel() / 2 - width / 2);
     }

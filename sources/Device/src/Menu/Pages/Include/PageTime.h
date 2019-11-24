@@ -12,7 +12,7 @@ struct PeakDetMode
 
     PeakDetMode();
 
-    operator uint() const { return value; }
+    operator PeakDetMode::E() const { return value; }
 
     bool IsEnabled() const;
 };
@@ -25,8 +25,10 @@ struct TPos
         Left,          ///< Привязка к левому краю.
         Center,        ///< Привязка к центру.
         Right          ///< Привязка к правому краю.
-    } value;
-    explicit TPos(E v) : value(v) {};
+    };
+    TPos() {};
+
+    operator TPos::E();
     /// Узнать привязку отсительно уровня синхронизации в байтах
     int InBytes();
 };
@@ -68,7 +70,7 @@ struct LinkingTShift
     int                 shift;
     TBase::E            base;
     PeakDetMode::E      peakDet;
-    TPos::E             TPos;
+    TPos::E             tPos;
     SampleType::E       sampleType;
     FunctionTime::E     timeDivXPos;
     LinkingTShift::E    linkingTShift;  ///< Тип привязки смещения по горизонтали

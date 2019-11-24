@@ -14,6 +14,28 @@ PeakDetMode::PeakDetMode() : value(set.time.peakDet)
 }
 
 
+TPos::operator TPos::E()
+{
+    return set.time.tPos;
+}
+
+
+int TPos::InBytes()
+{
+    static const int m[][2][3] =
+    {
+        {{0,   256,  510},  {0,   512,  1022}},
+        {{0,   512,  1022}, {0,  1024,  2046}},
+        {{0,  1024,  2046}, {0,  2048,  4094}},
+        {{0,  2048,  4094}, {0,  4096,  8190}},
+        {{0,  4096,  8190}, {0,  8192, 16382}},
+        {{0,  8192, 16382}, {0,  8192, 16382}},
+        {{0, 16384, 32766}, {0, 16384, 32766}}
+    };
+    return m[ENumPointsFPGA()][PeakDetMode()][set.time.tPos];
+}
+
+
 bool PeakDetMode::IsEnabled() const
 {
     return (value == PeakDetMode::Enabled) && (TBase() >= TBase::MIN_PEAK_DET);
@@ -77,7 +99,7 @@ DEF_CHOICE_3( cTPos,                                                            
     "Лево",
     "Центр",
     "Право",
-    set.time.TPos, &PageTime::self, Item::Active, PageTime::OnChanged_TPos, Choice::AfterDraw
+    set.time.tPos, &PageTime::self, Item::Active, PageTime::OnChanged_TPos, Choice::AfterDraw
 )
 
 
