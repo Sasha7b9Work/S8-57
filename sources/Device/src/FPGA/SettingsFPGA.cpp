@@ -185,16 +185,16 @@ void Range::Change(Chan::E ch, int16 delta)
 }
 
 
-RShift::RShift(Chan::E ch)
-{
-    shift = set.ch[ch].rShift;
-}
-
-RShift::RShift(Chan::E ch, int16 rShift)
+RShift::RShift(Chan::E _ch, int16 rShift) : ch(_ch)
 {
     ::Math::Limitation(&rShift, MIN, MAX);
-    shift = set.ch[ch].rShift = rShift;
+    set.ch[ch].rShift = rShift;
     Load(ch);
+}
+
+RShift::operator int16()
+{
+    return set.ch[ch].rShift;
 }
 
 

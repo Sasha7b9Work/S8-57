@@ -129,11 +129,11 @@ struct RShift
 {
 public:
     /// Этим конструктором можно узнать значение
-    RShift(Chan::E ch);
+    RShift(Chan::E _ch) : ch(_ch) {};
     /// Этим конструктором можно установить значение
     RShift(Chan::E ch, int16 rShift);
 
-    operator int16() { return shift; };
+    operator int16();
 
     /// Изменить на delta
     static void Change(Chan::E ch, int16 delta);
@@ -164,7 +164,7 @@ private:
     /// На столько единиц нужно изменить значение смещения, чтобы маркер смещения по напряжению передвинулся на одну точку.
     static const int16 STEP = (((MAX - MIN) / 24) / 20);
 
-    int16 shift;
+    Chan::E ch;
 };
 
 /// Режим канала по входу.
