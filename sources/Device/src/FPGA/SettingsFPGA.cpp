@@ -198,7 +198,7 @@ RShift::operator int16()
 }
 
 
-void RShift::Change(Chan::E ch, int16 delta)
+void RShift::Change(int16 delta)
 {
     ::Math::AdditionThisLimitation<int16>(&set.ch[ch].rShift, STEP * delta, MIN, MAX);
 

@@ -165,7 +165,7 @@ static void ChangeRShift(Chan::E ch, int16 delta)
         }
         else
         {
-            RShift::Change(ch, delta);
+            RShift(ch).Change(delta);
 
             if (RShift(ch) == 0)
             {

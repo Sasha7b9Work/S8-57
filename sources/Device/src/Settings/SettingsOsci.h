@@ -136,7 +136,7 @@ public:
     operator int16();
 
     /// Изменить на delta
-    static void Change(Chan::E ch, int16 delta);
+    void Change(int16 delta);
     /// Загрузить в аппаратуру
     void Load();
     /// Отрисовать оба на экране
