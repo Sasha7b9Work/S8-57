@@ -243,7 +243,7 @@ pString TBase::ToString() const
 }
 
 
-void TBase::Load()
+void TBase::Load() const
 {
     static const uint8 values[TBase::Count] =
     {
@@ -350,7 +350,7 @@ void Range::LoadBoth()
 }
 
 
-pString Range::ToString(int8 _divider)
+pString Range::ToString(int8 _divider) const
 {
     return ranges[set.ch[ch].range][_divider].name;
 }
@@ -497,7 +497,7 @@ pString Chan::Name() const
 }
 
 
-void TrigLevel::Load()
+void TrigLevel::Load() const
 {
     /// \todo Здесь много лишних движений. Нужно что-то сделать с вводом SET_TRIGLEV_SOURCE
     uint16 value = static_cast<uint16>(HARDWARE_ZERO + set.trig.level[ch]);
@@ -589,7 +589,7 @@ void Trig::DrawOnGrid()
 }
 
 
-void TrigLevel::Draw()
+void TrigLevel::Draw() const
 {
     float scale = 1.0F / ((MAX - MIN) / 2.4F / Grid::Height());
 
@@ -815,7 +815,7 @@ Range::operator Range::E()
 }
 
 
-uint TBase::RandK()
+uint TBase::RandK() const
 {
     return Kr[set.time.base];
 }

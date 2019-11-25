@@ -12,13 +12,13 @@ struct Chan
         Count
     } value;
     Chan(E v) : value(v) { };
-    bool IsA() { return value == A; };
-    bool IsB() { return value == B; }
+    bool IsA() const { return value == A; };
+    bool IsB() const { return value == B; }
     int PointsInChannel() const;
     /// Возвращает количество памяти, требуемой для сохранения данных одного канала
     int RequestBytes(DataSettings *ds) const;
     pString Name() const;
-    operator int() { return static_cast<int>(value); };
+    operator Chan::E() { return value; };
 };
 
 
@@ -69,7 +69,7 @@ struct TBase
 
     pString ToString() const;
 
-    void Load();
+    void Load() const;
 
     void Change(int delta);
 
@@ -78,7 +78,7 @@ struct TBase
     /// Минимальный масштаб по времени, при котором ещё возможно включение режима пикового детектора
     static const E MIN_PEAK_DET = _200ns;
 
-    uint RandK();
+    uint RandK() const;
 };
 
 
@@ -110,7 +110,7 @@ struct Range
     
     pString Name() const;
 
-    pString ToString(int8 divider);
+    pString ToString(int8 divider) const;
 
     static pString ToString(Range::E range, int8 divider);
     /// Возвращает напряжение, соответствующее верхней границе сетки
@@ -262,13 +262,13 @@ struct TrigLevel
 
     operator int16();
     /// Загрузить уровень синхронизации в аппаратную часть
-    void Load();
+    void Load() const;
     /// Изменить уровень синхронизации на delta единиц
     void Change(int16 delta);
     /// Однократно найти уровень синхронизации
     void Find();
 
-    void Draw();
+    void Draw() const;
 
 private:
     static const int16 MIN = -480;
