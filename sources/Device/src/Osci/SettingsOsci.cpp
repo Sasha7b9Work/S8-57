@@ -849,9 +849,20 @@ void TShift::Reset() const
 
 void TShift::Draw() const
 {
-    DrawNormal(TPos().PosX(), Grid::Top() - 1);
-    DrawLeft();
-    DrawRight();
+    int x = TPos().PosX() - set.time.shift;
+
+    if (x < Grid::Left())
+    {
+        DrawLeft();
+    }
+    else if (x > Grid::Right())
+    {
+        DrawRight();
+    }
+    else
+    {
+        DrawNormal(x, Grid::Top() - 1);
+    }
 }
 
 
