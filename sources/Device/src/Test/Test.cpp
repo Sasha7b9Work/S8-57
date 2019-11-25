@@ -16,7 +16,7 @@ void Test::Run()
 {
     if (!set.dbg.runTest)
     {
-        //return;
+        return;
     }
 
     std::srand(TIME_MS);
