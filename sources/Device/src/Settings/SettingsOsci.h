@@ -208,10 +208,10 @@ private:
 
 struct TShift
 {
-    TShift();
+    TShift() {};
     TShift(int tShift);
 
-    operator int() { return shift; }
+    operator int();
 
     int Min();
     int Zero();
@@ -240,7 +240,6 @@ private:
     /// Ќарисовать маркер смещени€, когда позици€ смещени€ находитс€ за правой границей экрана
     void DrawRight(int x, int y);
 
-    int shift;
     static const float absStep[TBase::Count];
 };
 

@@ -821,23 +821,23 @@ uint TBase::RandK()
 }
 
 
-TShift::TShift()
-{
-    shift = set.time.shift;
-}
-
-
 TShift::TShift(int tShift)
 {
     LIMITATION(tShift, Min(), Max());
 
-    shift = set.time.shift = tShift;
+    set.time.shift = tShift;
 
     TShift::Load();
 
     Osci::Restart();
 
     DisplayOsci::SetFlagRedraw();
+}
+
+
+TShift::operator int()
+{
+    return set.time.shift;
 }
 
 
