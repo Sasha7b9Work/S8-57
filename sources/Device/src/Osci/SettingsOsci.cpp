@@ -841,13 +841,13 @@ TShift::operator int()
 }
 
 
-void TShift::Reset()
+void TShift::Reset() const
 {
-    TShift zero(Zero());
+    TShift zero(0);
 }
 
 
-void TShift::Draw()
+void TShift::Draw() const
 {
     
 }

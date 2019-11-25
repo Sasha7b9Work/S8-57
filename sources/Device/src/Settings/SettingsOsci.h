@@ -213,26 +213,25 @@ struct TShift
 
     operator int();
 
-    int Min();
-    int Zero();
-    int Max();
+    int Min() const;
+    int Max() const;
 
-    void Load();
+    void Load() const;
 
     void Change(int delta);
 
-    String ToString(TBase::E tBase = TBase::Count);
+    String ToString(TBase::E tBase = TBase::Count) const;
 
     static float ToAbs(int shift, TBase::E tBase);
 
-    void Reset();
+    void Reset() const;
 
-    void Draw();
+    void Draw() const;
 
 private:
-    void LoadReal();
+    void LoadReal() const;
 
-    void LoadRandomize();
+    void LoadRandomize() const;
     /// Ќарисовать "нормальное" изображение маркера смещени€, когда позици€ смещени€ находитс€ на экране
     void DrawNormal(int x, int y);
     /// Ќарисовать маркер смещени€, когда позици€ смещени€ находитс€ за левой границей экрана
