@@ -12,7 +12,7 @@
 /// В случае неуспешного завершения - возвращает nullptr. Код ошибки находится в *error
 static const char *Process(const char *buffer, const StructSCPI structs[]); //-V2504
 /// Рекурсивная функция тестирования
-static bool ProcessTest(const StructSCPI strct[]);
+static bool ProcessTest(const StructSCPI strct[]); //-V2504
 /// Обработка узла дерева node
 static const char *ProcessNode(const char *begin, const StructSCPI *node);
 /// Обработка листа node
@@ -233,7 +233,7 @@ bool SCPI::Test()
 }
 
 
-static bool ProcessTest(const StructSCPI strct[])
+static bool ProcessTest(const StructSCPI strct[]) //-V2504
 {
     while(!strct->IsEmpty())
     {
@@ -250,6 +250,10 @@ static bool ProcessTest(const StructSCPI strct[])
             {
                 return false;
             }
+        }
+        else
+        {
+            // здесь ничего не нужно делать
         }
 
         strct++;

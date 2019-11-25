@@ -115,8 +115,8 @@ void Handlers::Process(KeyEvent e)
         {RangeLessB,        Empty,             Empty,            Empty},            // RangeLessB 
         {RShiftMoreB,       RShiftMoreB,       Empty,            Empty},            // RShiftMoreB
         {RShiftLessB,       RShiftLessB,       Empty,            Empty},            // RShiftLessB
-        {TBaseMore,         Empty,             Empty,            Empty},            // TBaseMore  
-        {TBaseLess,         Empty,             Empty,            Empty},            // TBaseLess  
+        {TBaseMore,         Empty,             Empty,            Empty},            // TBaseMore
+        {TBaseLess,         Empty,             Empty,            Empty},            // TBaseLess
         {TShiftMore,        TShiftMore,        Empty,            Empty},            // TShiftMore 
         {TShiftLess,        TShiftLess,        Empty,            Empty},            // TShiftLess 
         {TrigLevMore_Press, TrigLevMore_Press, Empty,            Empty},            // TrigLevMore

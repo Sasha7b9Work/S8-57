@@ -1,5 +1,4 @@
 #include "defines.h"
-#include "Hardware/Timer.h"
 #include "SCPI/ChannelsSCPI.h"
 #include "Settings/SettingsOsci.h"
 #include <cstdlib>
@@ -61,16 +60,10 @@ static bool TestRange()
 {
     for(int i = 0; i < 5; i++)
     {
-        uint start = TIME_MS;
-
         Range::E range = static_cast<Range::E>(std::rand() % Range::Count);
         String commandA(":channel1:range%s%c", rangeName[range], 0x0D);
 
-        
-
         SCPI_APPEND_STRING(commandA);
-
-        uint time = TIME_MS - start;
 
         if(Range(Chan::A) != range)
         {
@@ -87,7 +80,6 @@ static bool TestRange()
             SCPI_EXIT_ERROR();
         }
 
-        time = time;
     }
 
     return true;

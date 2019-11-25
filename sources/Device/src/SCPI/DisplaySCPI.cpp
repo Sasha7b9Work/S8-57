@@ -42,14 +42,14 @@ bool TestMapping()
 
     for(int i = 0; i < 10; i++)
     {
-        SCPI_APPEND_STRING(commandLines);
+        SCPI_APPEND_STRING(commandLines); //-V814
 
         if(DisplayMapping() != DisplayMapping::Lines)
         {
             SCPI_EXIT_ERROR();
         }
 
-        SCPI_APPEND_STRING(commandDots);
+        SCPI_APPEND_STRING(commandDots); //-V814
 
         if(DisplayMapping() != DisplayMapping::Dots)
         {
