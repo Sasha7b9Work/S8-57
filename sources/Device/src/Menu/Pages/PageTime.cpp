@@ -16,10 +16,17 @@ TPos::operator TPos::E()
 }
 
 
-void TPos::Draw()
+int TPos::PosX() const
 {
     int x[] = { Grid::Left(), (Grid::Right() - Grid::Left()) / 2 + Grid::Left(), Grid::Right() };
-    int x0 = x[TPos()] - 3;
+
+    return x[TPos()];
+}
+
+
+void TPos::Draw() const
+{
+    int x0 = PosX() - 3;
 
     int y = Grid::Top() - 1;
     
@@ -47,7 +54,7 @@ void SampleType::Set(SampleType::E type)
 }
 
 
-int TPos::InBytes()
+int TPos::InBytes() const
 {
     static const int m[][2][3] =
     {

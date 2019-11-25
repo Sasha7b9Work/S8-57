@@ -845,3 +845,26 @@ void TShift::Reset()
 {
     TShift zero(Zero());
 }
+
+
+void TShift::Draw()
+{
+    
+}
+
+
+void TShift::DrawNormal(int, int)
+{
+
+}
+
+
+void TShift::DrawLeft(int, int)
+{
+
+}
+
+void TShift::DrawRight(int, int)
+{
+
+}

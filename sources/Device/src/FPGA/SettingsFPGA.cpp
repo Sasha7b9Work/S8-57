@@ -95,8 +95,14 @@ void TShift::LoadReal()
     }
     FPGA::pred = static_cast<uint16>(Pred);
 
+//    LOG_WRITE("");
+//
+//    LOG_WRITE("before : pred %d   post %d", FPGA::pred, FPGA::post);
+
     FPGA::post = static_cast<uint16>(~(FPGA::post + 1));
     FPGA::pred = static_cast<uint16>(~(FPGA::pred + 3));
+
+//    LOG_WRITE("after : pred %d    post %d", FPGA::pred, FPGA::post);
 
     HAL_FSMC::WriteToFPGA16(WR::PRED_LO, FPGA::post);
     HAL_FSMC::WriteToFPGA16(WR::POST_LO, FPGA::pred);

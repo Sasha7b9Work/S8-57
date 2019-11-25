@@ -31,9 +31,11 @@ struct TPos
 
     operator TPos::E();
     /// Узнать привязку отсительно уровня синхронизации в байтах
-    int InBytes();
+    int InBytes() const;
 
-    void Draw();
+    void Draw() const;
+
+    int PosX() const;
 };
 
 /// Тип выборки для режима рандомизатора.

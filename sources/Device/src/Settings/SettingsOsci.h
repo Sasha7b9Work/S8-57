@@ -227,12 +227,21 @@ struct TShift
 
     void Reset();
 
+    void Draw();
+
 private:
     void LoadReal();
+
     void LoadRandomize();
-    static const float absStep[TBase::Count];
+    /// Нарисовать "нормальное" изображение маркера смещения, когда позиция смещения находится на экране
+    void DrawNormal(int x, int y);
+    /// Нарисовать маркер смещения, когда позиция смещения находится за левой границей экрана
+    void DrawLeft(int x, int y);
+    /// Нарисовать маркер смещения, когда позиция смещения находится за правой границей экрана
+    void DrawRight(int x, int y);
 
     int shift;
+    static const float absStep[TBase::Count];
 };
 
 struct Trig
