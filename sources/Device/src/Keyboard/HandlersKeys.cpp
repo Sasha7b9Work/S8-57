@@ -1,15 +1,13 @@
 #include "defines.h"
-#include "HandlersKeys.h"
+#include "device.h"
 #include "FlashDrive/FlashDrive.h"
 #include "FPGA/ContextOsci.h"
 #include "Hardware/Timer.h"
+#include "Keyboard/HandlersKeys.h"
 #include "Keyboard/Keyboard.h"
-#include "Menu/Menu.h"
 #include "Menu/MenuItems.h"
 #include "Osci/Display/DisplayOsci.h"
-#include "Settings/Settings.h"
 #include "Settings/SettingsOsci.h"
-#include "device.h"
 
 
 typedef void (*pFuncVCh)(Chan::E);
@@ -89,6 +87,11 @@ static void TShiftMore();
 /// Общий обработчик раскрытой страницы. Возвращает true, если отработал и дальнейшая обработка события клавиатуры не требуется.
 static bool CommonHandlerPage();
 
+/// Обрабатываемая клавиша
+static Key::E key = Key::None;
+/// Обрабатываемый тип события
+static TypePress::E type = TypePress::None;
+
 
 void Handlers::Process(KeyEvent e)
 {
@@ -133,14 +136,14 @@ void Handlers::Process(KeyEvent e)
         {FX_Press,          Empty,             FX_Release,       FX_Long}           // F5
     };
 
-    Key::E code = event.key;
-    TypePress::E type = event.type;
+    key = e.key;
+    type = e.type;
 
-    if (code < Key::Count && type < TypePress::None)
+    if (key < Key::Count && type < TypePress::None)
     {
         if (!CommonHandlerPage())
         {
-            func[static_cast<int>(code)][static_cast<int>(type)]();
+            func[key][type]();
         }
     }
 }
@@ -246,7 +249,26 @@ static void OnChangeParameterTime(pFuncVI func, int delta)
 
 void ChangeTShift(int delta)
 {
+    static int prevDelta = 0;                   // Предыдущее направление перемещения
+    static uint timeStartBrake = 0;             // Время начала торможения
+
+    if ((type == TypePress::Repeat) &&          // Если смещаемся не однокртаным нажатием кнопки
+        (prevDelta == delta) &&                 // В том же направлении, что и в прошлый раз
+        (timeStartBrake != 0) &&                // И "тормоз" включён
+        (TIME_MS - timeStartBrake < 500))       // и прошло ещё мало времени
+    {
+        return;                                 // то ничего не делаем
+    }
+
+    prevDelta = delta;
+    timeStartBrake = 0;
+
     TShift().Change(delta);
+
+    if ((TShift() == 0) && (type == TypePress::Repeat)) // Если новое пожение смещения - ноль, то включаем торможение
+    {
+        timeStartBrake = TIME_MS;
+    }
 }
 
 
