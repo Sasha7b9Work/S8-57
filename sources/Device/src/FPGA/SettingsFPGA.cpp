@@ -157,7 +157,7 @@ void TShift::Load() const
 }
 
 
-void TShift::Change(int delta)
+void TShift::Change(const int delta)
 {
     if (Device::State::InModeRecorder())
     {
@@ -247,8 +247,10 @@ int TShift::Max() const
 }
 
 
-String TShift::ToString(TBase::E tBase) const
+String TShift::ToString(const TBase::E _base) const
 {
+    TBase::E tBase = _base;
+
     if(tBase == TBase::Count)
     {
         tBase = TBase();

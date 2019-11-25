@@ -237,7 +237,7 @@ void Frame::OnClose(wxCloseEvent &event)
 
     SaveSettings();
 
-    delete ConsoleSCPI::Self();
+    ConsoleSCPI::Self()->Destroy();
 
     event.Skip();
 }

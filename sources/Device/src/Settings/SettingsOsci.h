@@ -209,7 +209,7 @@ private:
 struct TShift
 {
     TShift() {};
-    TShift(int tShift);
+    TShift(const int tShift);
 
     operator int();
 
@@ -218,11 +218,11 @@ struct TShift
 
     void Load() const;
 
-    void Change(int delta);
+    void Change(const int delta);
 
-    String ToString(TBase::E tBase = TBase::Count) const;
+    String ToString(const TBase::E tBase = TBase::Count) const;
 
-    static float ToAbs(int shift, TBase::E tBase);
+    static float ToAbs(const int shift, const TBase::E tBase);
 
     void Reset() const;
 
@@ -233,11 +233,11 @@ private:
 
     void LoadRandomize() const;
     /// Нарисовать "нормальное" изображение маркера смещения, когда позиция смещения находится на экране
-    void DrawNormal(int x, int y);
+    void DrawNormal(const int x, const int y) const;
     /// Нарисовать маркер смещения, когда позиция смещения находится за левой границей экрана
-    void DrawLeft(int x, int y);
+    void DrawLeft() const;
     /// Нарисовать маркер смещения, когда позиция смещения находится за правой границей экрана
-    void DrawRight(int x, int y);
+    void DrawRight() const;
 
     static const float absStep[TBase::Count];
 };

@@ -602,21 +602,21 @@ void TrigLevel::Draw()
 
     if (y > Grid::ChannelBottom())
     {
-        Char(Symbol8::TRIG_LEV_LOWER).Draw(x + 3, Grid::ChannelBottom() - 11);
+        Char(Symbol8::TRIGLEV_LOWER).Draw(x + 3, Grid::ChannelBottom() - 11);
         Pixel().Draw(x + 5, Grid::ChannelBottom() - 2);
         y = Grid::ChannelBottom() - 7;
         xSymbol--;
     }
     else if (y < Grid::Top())
     {
-        Char(Symbol8::TRIG_LEV_ABOVE).Draw(x + 3, Grid::Top() + 2);
+        Char(Symbol8::TRIGLEV_ABOVE).Draw(x + 3, Grid::Top() + 2);
         Pixel().Draw(x + 5, Grid::Top() + 2);
         y = Grid::Top() + 7;
         xSymbol--;
     }
     else
     {
-        Char(Symbol8::TRIG_LEV_NORMAL).Draw(x + 1, y - 4);
+        Char(Symbol8::TRIGLEV_NORMAL).Draw(x + 1, y - 4);
     }
 
     static const char symbols[2] = { '1', '2' };
@@ -714,7 +714,7 @@ bool RShift::ChangeMath(int delta)
 }
 
 
-float TShift::ToAbs(int tShift, TBase::E tBase)
+float TShift::ToAbs(const int tShift, const TBase::E tBase)
 {
     return absStep[tBase] * tShift;
 }
@@ -849,22 +849,27 @@ void TShift::Reset() const
 
 void TShift::Draw() const
 {
-    
+    DrawNormal(TPos().PosX(), Grid::Top() - 1);
+    DrawLeft();
+    DrawRight();
 }
 
 
-void TShift::DrawNormal(int, int)
+void TShift::DrawNormal(const int x, const int y) const
 {
-
+    Char(Symbol8::TSHIFT_NORMAL_BACK).Draw(x - 3, y, Color::BACK);
+    Char(Symbol8::TSHIFT_NORMAL).Draw(x - 3, y, Color::FILL);
 }
 
 
-void TShift::DrawLeft(int, int)
+void TShift::DrawLeft() const
 {
-
+    Char(Symbol8::TRIGLEV_NORMAL).Draw(Grid::Left(), Grid::Top(), Color::BACK);
+    Char(Symbol8::TSHIFT_LEFT).Draw(Grid::Left(), Grid::Top(), Color::FILL);
 }
 
-void TShift::DrawRight(int, int)
+void TShift::DrawRight() const
 {
-
+    Char(Symbol8::RSHIFT_NORMAL).Draw(Grid::Right() - 7, Grid::Top(), Color::BACK);
+    Char(Symbol8::TSHIFT_RIGHT).Draw(Grid::Right() - 7, Grid::Top(), Color::FILL);
 }
