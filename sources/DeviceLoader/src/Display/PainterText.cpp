@@ -72,7 +72,7 @@ int Painter::DrawTextWithLimitationC(int x, int y, const char *text, Color color
     while (*text)
     {
         x = DrawCharWithLimitation(x, y, static_cast<uint8>(*text), limitX, limitY, limitWidth, limitHeight);
-        retValue += Font::GetLengthSymbol(*text);
+        retValue += Font::GetWidth(*text);
         text++;
     }
     return retValue + 1;
@@ -399,7 +399,7 @@ static bool GetHeightTextWithTransfers(int left, int top, int right, const char 
                 {
                     continue;
                 }
-                x += Font::GetLengthSymbol(symbol);
+                x += Font::GetWidth(symbol);
             }
             else                                            // ј здесь найдено по крайней мере два буквенных символа, т.е. найдено слово
             {
@@ -497,7 +497,7 @@ int Painter::GetLenghtSubString(const char *text)
     int retValue = 0;
     while (((*text) != ' ') && ((*text) != '\0'))
     {
-        retValue += Font::GetLengthSymbol(*text);
+        retValue += Font::GetWidth(*text);
         text++;
     }
     return retValue;

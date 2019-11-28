@@ -27,7 +27,7 @@ int Font::GetLengthText(pString text)
 
     while (*symbol)
     {
-        result += Font::GetLengthSymbol(*symbol);
+        result += Font::GetWidth(*symbol);
         symbol++;
     }
     return result;
@@ -39,11 +39,6 @@ int Font::GetHeightSymbol(char)
     return 9;
 }
 
-
-int Font::GetLengthSymbol(char symbol)
-{
-    return GetWidth(static_cast<uint>(symbol));
-}
 
 #ifdef PANEL
 static void SendTypeFontToPanel(TypeFont::E) {};
@@ -150,6 +145,12 @@ uint8 Font::GetWidth(uint8 symbol)
     }
 
     return AdvancedFont::GetWidth(symbol);
+}
+
+
+uint8 Font::GetWidth(char symbol)
+{
+    return GetWidth(static_cast<uint8>(symbol));
 }
 
 

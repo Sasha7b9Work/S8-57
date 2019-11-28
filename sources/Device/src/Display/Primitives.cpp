@@ -76,7 +76,7 @@ int Char::Draw(int x, int y, Color color)
 
 	String("%c", ch).Draw(x, y, color);
 
-    int result = x + Font::GetLengthSymbol(ch) + 1;
+    int result = x + Font::GetWidth(ch) + 1;
 
     Font::Pop();
 
@@ -147,7 +147,7 @@ int Text::DrawWithLimitation(int x, int y, int limitX, int limitY, int limitWidt
     while (*text)
     {
         x = DrawCharWithLimitation(x, y, *text, limitX, limitY, limitWidth, limitHeight);
-        retValue += Font::GetLengthSymbol(*text);
+        retValue += Font::GetWidth(*text);
         text++;
     }
 
@@ -587,7 +587,7 @@ static bool GetHeightTextWithTransfers(int left, int top, int right, const char 
                 {
                     continue;
                 }
-                x += Font::GetLengthSymbol(symbol);
+                x += Font::GetWidth(symbol);
             }
             else                                            // ј здесь найдено по крайней мере два буквенных символа, т.е. найдено слово
             {
