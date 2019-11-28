@@ -6,7 +6,7 @@
 struct AdvancedFont
 {
     /// Установить действующий шрифт
-    static void Set(TypeFont::E type);
+    AdvancedFont(TypeFont::E type);
     /// Возвращает true, если в строке row есть пиксели
     static bool RowNotEmpty(uint8 symbol, int row);
     /// Возвращает ширину символа

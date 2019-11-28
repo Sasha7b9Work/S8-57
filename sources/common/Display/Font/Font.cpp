@@ -78,8 +78,10 @@ void Font::Set(const TypeFont::E typeFont)
             break;
         case TypeFont::_GOST28:
         case TypeFont::_GOST72bold:
+        {
             font = nullptr;
-            AdvancedFont::Set(typeFont);
+            volatile AdvancedFont f(typeFont);
+        }
             break;
         case TypeFont::None:
         case TypeFont::Count:

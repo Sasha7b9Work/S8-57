@@ -39,7 +39,7 @@ TypeFont::E AdvancedFont::currentType = TypeFont::None;
 static const unsigned char * font = nullptr;
 
 
-void AdvancedFont::Set(TypeFont::E t)
+AdvancedFont::AdvancedFont(TypeFont::E t)
 {
     currentType = t;
     
