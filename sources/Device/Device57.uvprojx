@@ -636,9 +636,9 @@
               <FilePath>..\common\Display\Font\fontUGO2.inc</FilePath>
             </File>
             <File>
-              <FileName>fontDigits64.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\common\Display\Font\fontDigits64.cpp</FilePath>
+              <FileName>fontGOST28.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\common\Display\Font\fontGOST28.c</FilePath>
             </File>
           </Files>
         </Group>

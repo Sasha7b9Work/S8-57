@@ -2,37 +2,6 @@
 #include "defines.h"
 
 
-struct BigSymbol
-{
-    uint8 code;     ///< ASCII-код символа
-    uint8 width;    ///< Ширина символа в битах
-    uint16 offset;  ///< Смещение первого байта символа относительно начала массива данных
-};
-
-struct FullSymbol
-{
-    BigSymbol symbol;
-    uint8     *offset;  /// Указать на первый байт глифа
-    bool RowNotEmpty(int row) const;
-    bool BitIsExist(int row, int bit) const;
-private:
-    /// Возвращает указатель на первый байт строки
-    uint8 *GetRow(int row) const;
-    uint8 BytesInRow() const;
-};
-
-struct BigFont
-{
-    uint8           height;       ///< Высота ссимволов
-    uint8           numSymbols;   ///< Число символов в шрифте
-    const uint8     *data;        ///< Массив данных символов
-    const BigSymbol *symbols;     ///< Ссылка на начало массива символов
-
-    uint8 GetWidth(uint8 symbol) const;
-    bool GetFullSymbol(FullSymbol &symbol, uint8 code) const;
-};
-
-
 struct Symbol
 {
     uchar width;
@@ -47,7 +16,7 @@ struct TypeFont
         _8,
         _UGO,
         _UGO2,
-        _Big64,
+        _GOST28,
         Count,
         None
     } value;
@@ -85,4 +54,3 @@ extern const uchar font5display[3080];
 extern const uchar font8display[3080];
 extern const uchar fontUGOdisplay[3080];
 extern const uchar fontUGO2display[3080];
-extern const BigFont fontDigits64;

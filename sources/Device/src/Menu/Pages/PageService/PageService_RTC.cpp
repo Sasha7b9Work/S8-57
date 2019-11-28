@@ -171,7 +171,7 @@ static void DrawTime()
 {
     uint time = TIME_MS;
 
-    Font::SetCurrent(TypeFont::_Big64);
+    Font::SetCurrent(TypeFont::_GOST28);
     int spacing = Font::GetSpacing();
     Font::SetSpacing(5);
     

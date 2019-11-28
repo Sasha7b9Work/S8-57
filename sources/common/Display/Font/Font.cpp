@@ -11,8 +11,6 @@
 const Font *fonts[TypeFont::Count] = {&font5, &font8, &fontUGO, &fontUGO2, nullptr};
 const Font *font = &font8;
 
-const BigFont *bigFont = &fontDigits64;
-
 TypeFont::E pushedFont = TypeFont::_8;
 TypeFont::E currentFont = TypeFont::_8;
 
@@ -88,8 +86,7 @@ void Font::SetCurrent(TypeFont::E typeFont)
         case TypeFont::_UGO2:
             font = &fontUGO2;
             break;
-        case TypeFont::_Big64:
-            bigFont = &fontDigits64;
+        case TypeFont::_GOST28:
             break;
         case TypeFont::None:
         case TypeFont::Count:
@@ -143,7 +140,9 @@ static bool FontIsSmall()
 
 uint8 Font::GetWidth(uint8 symbol)
 {
-    uint8 result = bigFont->GetWidth(symbol);
+    //uint8 result = bigFont->GetWidth(symbol);
+
+    uint8 result = 8;
 
     if (FontIsSmall())
     {
@@ -156,7 +155,9 @@ uint8 Font::GetWidth(uint8 symbol)
 
 uint8 Font::GetHeight()
 {
-    uint8 result = bigFont->height;
+    //uint8 result = bigFont->height;
+
+    uint8 result = 8;
 
     if (FontIsSmall())
     {
@@ -177,64 +178,15 @@ bool Font::RowNotEmpty(uint8 symbol, int row)
     }
     else
     {
-        FullSymbol fullSymbol;
-
-        if (bigFont->GetFullSymbol(fullSymbol, symbol))
-        {
-            result = fullSymbol.RowNotEmpty(row);
-        }
+        //FullSymbol fullSymbol;
+        //
+        //if (bigFont->GetFullSymbol(fullSymbol, symbol))
+        //{
+        //    result = fullSymbol.RowNotEmpty(row);
+        //}
     }
 
     return result;
-}
-
-
-bool FullSymbol::RowNotEmpty(int numRow) const
-{
-    uint8 *row = GetRow(numRow);
-
-    for (int i = 0; i < BytesInRow(); i++)
-    {
-        if (row[i] != 0)
-        {
-            return true;
-        }
-    }
-
-    return false;
-}
-
-
-bool FullSymbol::BitIsExist(int numRow, int bit) const
-{
-    uint8 *row = GetRow(numRow);
-
-    while (bit > 7)
-    {
-        bit -= 8;
-        row++;
-    }
-
-    return ((*row) >> bit) & 0x01;
-}
-
-
-uint8 *FullSymbol::GetRow(int row) const
-{
-    return offset + BytesInRow() * row;
-}
-
-
-uint8 FullSymbol::BytesInRow() const
-{
-    uint8 width = static_cast<uint8>(symbol.width >> 3);
-
-    if (symbol.width % 8 != 0)
-    {
-        width++;
-    }
-
-    return width;
 }
 
 
@@ -245,41 +197,12 @@ bool Font::BitIsExist(uint8 symbol, int row, int bit)
         return font->symbols[symbol].bytes[row] & (1 << (7 - bit));
     }
 
-    FullSymbol fullSymbol;
-
-    if (bigFont->GetFullSymbol(fullSymbol, symbol))
-    {
-        return fullSymbol.BitIsExist(row, bit);
-    }
-
-    return false;
-}
-
-
-uint8 BigFont::GetWidth(uint8 code) const
-{
-    FullSymbol symbol;
-
-    if (GetFullSymbol(symbol, code))
-    {
-        return symbol.symbol.width;
-    }
-
-    return 0;
-}
-
-
-bool BigFont::GetFullSymbol(FullSymbol &symbol, uint8 code) const
-{
-    for (uint i = 0; i < numSymbols; i++)
-    {
-        if (symbols[i].code == code)
-        {
-            symbol.symbol = symbols[i];
-            symbol.offset = const_cast<uint8 *>(data) + symbols[i].offset;
-            return true;
-        }
-    }
+//    FullSymbol fullSymbol;
+//
+//    if (bigFont->GetFullSymbol(fullSymbol, symbol))
+//    {
+//        return fullSymbol.BitIsExist(row, bit);
+//    }
 
     return false;
 }
