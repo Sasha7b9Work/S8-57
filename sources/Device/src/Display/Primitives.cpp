@@ -197,6 +197,38 @@ int Text::DrawInCenterRect(int eX, int eY, int width, int eHeight, Color color)
 }
 
 
+int Text::DrawDigitsMonospace(int x, int y, int width, Color color)
+{
+    color.SetAsCurrent();
+
+    for (uint i = 0; i < std::strlen(text); i++)
+    {
+        char symbol = text[i];
+
+        int dX = 0;
+
+        if (symbol >= 0x30 && symbol <= 0x39)
+        {
+            int widthSymbol = Font::GetWidth(static_cast<uint8>(symbol));
+
+            dX = (width - widthSymbol) / 2;
+
+            x += dX;
+        }
+
+        x = Text(String("%c", symbol)).Draw(x, y);
+        x += Font::GetSpacing();
+
+        if (symbol >= 0x30 && symbol <= 0x39)
+        {
+            x += dX;
+        }
+    }
+
+    return x;
+}
+
+
 void Text::DrawInCenterBoundedRect(int x, int y, int width, int height, Color color)
 {
     Region(width, height).DrawBounded(x, y, Color::BACK, color);

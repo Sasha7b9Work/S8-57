@@ -115,6 +115,9 @@ public:
     void DrawInCenterRectAndBoundIt(int x, int y, int width, int height, Color colorBackground, Color colorFill);
     /// Пишет строку текста в центре области(x, y, width, height)цветом ColorText на прямоугольнике с шириной бордюра widthBorder цвета colorBackground
     void DrawInCenterRectOnBackground(int x, int y, int width, int height, Color colorText, int widthBorder, Color colorBackground);
+    /// Нарисовать с выводом цифр в моноширинных позициях
+    int DrawDigitsMonospace(int x, int y, int width, Color color = Color::NUMBER);
+
 private:
     const char *text;
     int DrawCharWithLimitation(int eX, int eY, char _symbol, int limitX, int limitY, int limitWidth, int limitHeight);

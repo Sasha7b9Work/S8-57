@@ -288,7 +288,7 @@ static void DrawFrequency(int x, int _y)
     char strFreq[50];
     std::strcpy(strFreq, FreqSetToString(&freqActual));
 
-    Text(strFreq).Draw(x + dX, yF);
+    Text(strFreq).DrawDigitsMonospace(x + dX, yF, Font::GetWidth('0'));
 
     if (std::strcmp(strFreq, EMPTY_STRING) == 0)
     {
@@ -321,7 +321,7 @@ static void DrawFrequency(int x, int _y)
 
     Time time(1.0F / freq);
 
-    Text(time.ToStringAccuracy(false, strFreq, 6)).Draw(x + dX, yT);
+    Text(time.ToStringAccuracy(false, strFreq, 6)).DrawDigitsMonospace(x + dX, yT, Font::GetWidth('0'));
 }
 
 
@@ -390,7 +390,7 @@ void FrequencyCounter::Draw()
 
     Font::Set(TypeFont::_GOST28);
     int spacing = Font::GetSpacing();
-    Font::SetSpacing(5);
+    Font::SetSpacing(1);
 
     int width = 241;
     int height = 74;
@@ -420,6 +420,7 @@ void FrequencyCounter::Draw()
 
     Font::Pop();
     Font::SetSpacing(spacing);
+    Font::SetMinWidth(0);
 }
 
 

@@ -27,7 +27,7 @@ int Font::GetLengthText(pString text)
 
     while (*symbol)
     {
-        result += GetLengthSymbol(*symbol);
+        result += Font::GetLengthSymbol(*symbol);
         symbol++;
     }
     return result;
@@ -42,13 +42,7 @@ int Font::GetHeightSymbol(char)
 
 int Font::GetLengthSymbol(char symbol)
 {
-#ifdef WIN32
-    if (symbol < 0)
-    {
-        symbol += 128;                  // Т.к. char имеет знак в некоторых системах
-    }
-#endif
-    return font->symbols[symbol].width + 1;
+    return GetWidth(static_cast<uint>(symbol));
 }
 
 #ifdef PANEL
