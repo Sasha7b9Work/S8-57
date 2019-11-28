@@ -33,6 +33,11 @@ int Text::DrawChar(int eX, int eY, uint8 symbol, Color color)
 
     int delta = Font::IsBig() ? 0 : (9 - height);
 
+    if (Font::Current() == TypeFont::_GOST28)
+    {
+        int i = 0;
+    }
+
     for (int row = 0; row < height; row++)
     {
         if (Font::RowNotEmpty(symbol, row))

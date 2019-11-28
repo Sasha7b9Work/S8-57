@@ -1371,11 +1371,6 @@
               <FilePath>..\common\Display\Font\fontUGO2.inc</FilePath>
             </File>
             <File>
-              <FileName>fontGOST28.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\common\Display\Font\fontGOST28.c</FilePath>
-            </File>
-            <File>
               <FileName>AdvancedFont.h</FileName>
               <FileType>5</FileType>
               <FilePath>..\common\Display\Font\AdvancedFont.h</FilePath>
@@ -1384,6 +1379,11 @@
               <FileName>AdvancedFont.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\common\Display\Font\AdvancedFont.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>fontGOST28.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\common\Display\Font\fontGOST28.cpp</FilePath>
             </File>
           </Files>
         </Group>

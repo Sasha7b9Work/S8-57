@@ -1,4 +1,5 @@
 #include "defines.h"
+#include "AdvancedFont.h"
 #include "common/Command.h"
 #include "common/Transceiver.h"
 #include "Hardware/HAL/HAL.h"
@@ -66,7 +67,13 @@ static void SendTypeFontToPanel(TypeFont::E type)
 #endif
 
 
-void Font::Set(TypeFont::E typeFont)
+TypeFont::E Font::Current()
+{
+    return currentFont;
+}
+
+
+void Font::Set(const TypeFont::E typeFont)
 {
     pushedFont = currentFont;
 
@@ -87,6 +94,8 @@ void Font::Set(TypeFont::E typeFont)
             font = &fontUGO2;
             break;
         case TypeFont::_GOST28:
+            font = nullptr;
+            AdvancedFont::Set(typeFont);
             break;
         case TypeFont::None:
         case TypeFont::Count:
@@ -140,53 +149,34 @@ static bool FontIsSmall()
 
 uint8 Font::GetWidth(uint8 symbol)
 {
-    //uint8 result = bigFont->GetWidth(symbol);
-
-    uint8 result = 8;
-
     if (FontIsSmall())
     {
-        result = font->symbols[symbol].width;
+        return font->symbols[symbol].width;
     }
 
-    return result;
+    return AdvancedFont::GetWidth(symbol);
 }
 
 
 uint8 Font::GetHeight()
 {
-    //uint8 result = bigFont->height;
-
-    uint8 result = 8;
-
     if (FontIsSmall())
     {
-        result = static_cast<uint8>(font->_height);
+        return static_cast<uint8>(font->_height);
     }
 
-    return result;
+    return AdvancedFont::GetHeight();
 }
 
 
 bool Font::RowNotEmpty(uint8 symbol, int row)
 {
-    bool result = false;
-
     if (FontIsSmall())
     {
-        result = font->symbols[symbol].bytes[row] != 0;
-    }
-    else
-    {
-        //FullSymbol fullSymbol;
-        //
-        //if (bigFont->GetFullSymbol(fullSymbol, symbol))
-        //{
-        //    result = fullSymbol.RowNotEmpty(row);
-        //}
+        return font->symbols[symbol].bytes[row] != 0;
     }
 
-    return result;
+    return AdvancedFont::RowNotEmpty(symbol, row);
 }
 
 

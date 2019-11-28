@@ -32,6 +32,8 @@ add_compile_options(/wd4514)    # 'function' : unreferenced inline function has 
 add_compile_options(/wd4820)    # 'xxx': '4' bytes padding added after data member 'yyy'
 add_compile_options(/wd5039)    # 'xxx': pointer or reference to potentially throwing function passed to extern C function under -EHc.
 add_compile_options(/wd5045)    # Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
+add_compile_options(/wd26812)   #The enum type %type% is unscoped. Prefer 'enum class' over 'enum' (Enum.3)
+
 
 source_group(src                    FILES src/main.h
                                           src/main.cpp
