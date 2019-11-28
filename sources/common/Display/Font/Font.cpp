@@ -81,7 +81,7 @@ void Font::Set(const TypeFont::E typeFont)
         {
             font = nullptr;
             volatile AdvancedFont f(typeFont);
-        }
+        }       
             break;
         case TypeFont::None:
         case TypeFont::Count:
@@ -168,7 +168,7 @@ bool Font::RowNotEmpty(uint8 symbol, int row)
         return font->symbols[symbol].bytes[row] != 0;
     }
 
-    return AdvancedFont::RowNotEmpty(symbol, row);
+    return AdvancedFont().RowNotEmpty(symbol, row);
 }
 
 
