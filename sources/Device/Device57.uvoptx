@@ -159,7 +159,7 @@
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>&lt;2&gt;.\src\Multimeter\DisplayMultimeter.cpp</Filename>
+          <Filename>.\src\Multimeter\DisplayMultimeter.cpp</Filename>
           <ExecCommand></ExecCommand>
           <Expression>\\S8_57\src/Multimeter/DisplayMultimeter.cpp\85</Expression>
         </Bp>
@@ -175,7 +175,7 @@
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>0</BreakIfRCount>
-          <Filename>&lt;3&gt;.\src\Display\Text.cpp</Filename>
+          <Filename>d:\Projects\stm32\S8-57\sources\Device\src\Display\Text.cpp</Filename>
           <ExecCommand></ExecCommand>
           <Expression></Expression>
         </Bp>

@@ -2,6 +2,33 @@
 #include "AdvancedFont.h"
 
 
+struct NativeSymbol
+{
+    uint8 width;    // Ширина символа в пикселях
+    uint8 height;   // Высота символа в пикселях
+//    uint8 data;     // Первый байт первой строки символа
+
+    /// Возвращает количество байт в строке
+    int BytesInRow();
+    /// Возвращает указатель на первый байт строки
+    uint8 *GetRow(int row);
+    /// Возвращает указатель на первый байт данных
+    uint8 *Data();
+};
+
+/// Структрура заголовка
+struct HeaderFont
+{
+    uint         offsets[256];  // Смещения 256 символов таблицы. 0 означает, что символ отсутствует
+    NativeSymbol symbol;        // Первый символ в таблице его смещение 256
+
+    /// Возвращает указатель на символ, если он присутствует в таблице и nullptr в обратном случае
+    NativeSymbol *GetSymbol(uint8 num);
+
+    static HeaderFont *Sefl();
+};
+
+
 extern unsigned char fontGOST28[9158];
 
 
@@ -27,24 +54,108 @@ void AdvancedFont::Set(TypeFont::E t)
 }
 
 
-bool AdvancedFont::RowNotEmpty(uint8, int)
+bool AdvancedFont::RowNotEmpty(uint8 s, int r)
 {
+    HeaderFont *header = HeaderFont::Sefl();
+
+    NativeSymbol *symbol = header->GetSymbol(s);
+
+    if (symbol)
+    {
+        uint8 *row = symbol->GetRow(r);
+
+        for (int i = 0; i < symbol->BytesInRow(); i++)
+        {
+            if (row[i] != 0)
+            {
+                return true;
+            }
+        }
+    }
+
     return false;
 }
 
 
-uint8 AdvancedFont::GetWidth(uint8)
+uint8 AdvancedFont::GetWidth(uint8 num)
 {
-    return 0;
+    NativeSymbol *symbol = HeaderFont::Sefl()->GetSymbol(num);
+
+    return symbol ? symbol->width : 0U;
 }
 
-uint8 AdvancedFont::GetHeight(uint8)
+uint8 AdvancedFont::GetHeight(uint8 num)
 {
-    return 0;
+    NativeSymbol *symbol = HeaderFont::Sefl()->GetSymbol(num);
+
+    return symbol ? symbol->height : 0U;
 }
 
 
 uint8 AdvancedFont::GetHeight()
 {
-    return 0;
+    uint8 result = 0;
+
+    for (int i = 0; i < 256; i++)
+    {
+        NativeSymbol *symbol = HeaderFont::Sefl()->GetSymbol(static_cast<uint8>(i));
+
+        if (symbol && symbol->height > result)
+        {
+            result = symbol->height;
+        }
+    }
+
+    return result;
+}
+
+
+int NativeSymbol::BytesInRow()
+{
+    int result = width / 8;
+
+    if (width % 8)
+    {
+        result++;
+    }
+
+    return result;
+}
+
+
+uint8 *NativeSymbol::GetRow(int row)
+{
+    if (row > height - 1)
+    {
+        return nullptr;
+    }
+
+    return Data() + row * BytesInRow();
+}
+
+
+NativeSymbol *HeaderFont::GetSymbol(uint8 num)
+{
+    HeaderFont *header = HeaderFont::Sefl();
+
+    if (header->offsets[num] == 0)
+    {
+        return nullptr;
+    }
+
+    uint8 *offset = reinterpret_cast<uint8 *>(header) + header->offsets[num];
+
+    return reinterpret_cast<NativeSymbol *>(offset);
+}
+
+
+HeaderFont *HeaderFont::Sefl()
+{
+    return reinterpret_cast<HeaderFont *>(font);
+}
+
+
+uint8 *NativeSymbol::Data()
+{
+    return reinterpret_cast<uint8 *>(this) + sizeof(*this);
 }

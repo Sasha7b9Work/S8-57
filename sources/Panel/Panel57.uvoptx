@@ -164,7 +164,7 @@
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>&lt;3&gt;.\src\Display\Text.cpp</Filename>
+          <Filename>.\src\Display\Text.cpp</Filename>
           <ExecCommand></ExecCommand>
           <Expression>\\PanelOSC\src/Display/Text.cpp\38</Expression>
         </Bp>
