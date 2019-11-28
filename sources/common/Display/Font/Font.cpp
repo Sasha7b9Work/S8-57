@@ -94,6 +94,7 @@ void Font::Set(const TypeFont::E typeFont)
             font = &fontUGO2;
             break;
         case TypeFont::_GOST28:
+        case TypeFont::_GOST72bold:
             font = nullptr;
             AdvancedFont::Set(typeFont);
             break;

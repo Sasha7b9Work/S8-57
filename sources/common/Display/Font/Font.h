@@ -17,6 +17,7 @@ struct TypeFont
         _UGO,
         _UGO2,
         _GOST28,
+        _GOST72bold,
         Count,
         None
     } value;

@@ -1,6 +1,7 @@
 #include "defines.h"
 #include "AdvancedFont.h"
-#include "fontGOST28.cpp"
+#include "fontGOST28.inc"
+#include "fontGOST72bold.inc"
 
 
 struct NativeSymbol
@@ -32,28 +33,28 @@ struct HeaderFont
 };
 
 
-extern const unsigned char fontGOST28[9358];
-
-
 TypeFont::E AdvancedFont::currentType = TypeFont::None;
 
 
-static uint8 *fonts[TypeFont::Count] =
-{
-    nullptr,                        // _5
-    nullptr,                        // _8
-    nullptr,                        // _UGO
-    nullptr,                        // _UGO2
-    const_cast<uint8 *>(&fontGOST28[0]) // _GOST28
-};
-
-static uint8 *font = nullptr;
+static const unsigned char * font = nullptr;
 
 
 void AdvancedFont::Set(TypeFont::E t)
 {
     currentType = t;
-    font = fonts[currentType];
+    
+    if(currentType == TypeFont::_GOST28)
+    {
+        font = fontGOST28;
+    }
+    else if(currentType == TypeFont::_GOST72bold)
+    {
+        font = fontGOST72bold;
+    }
+    else
+    {
+        font = nullptr;
+    }
 }
 
 
@@ -154,7 +155,7 @@ NativeSymbol *HeaderFont::GetSymbol(uint8 num)
 
 HeaderFont *HeaderFont::Sefl()
 {
-    return reinterpret_cast<HeaderFont *>(font);
+    return reinterpret_cast<HeaderFont *>(const_cast<uint8 *>(font));
 }
 
 
