@@ -140,7 +140,7 @@ uint8 Font::GetWidth(uint8 symbol)
         return font->symbols[symbol].width;
     }
 
-    return AdvancedFont::GetWidth(symbol);
+    return AdvancedFont().GetWidth(symbol);
 }
 
 
@@ -157,7 +157,7 @@ uint8 Font::GetHeight()
         return static_cast<uint8>(font->_height);
     }
 
-    return AdvancedFont::GetHeight();
+    return AdvancedFont().GetHeight();
 }
 
 
@@ -179,7 +179,7 @@ bool Font::BitIsExist(uint8 symbol, int row, int bit)
         return font->symbols[symbol].bytes[row] & (1 << (7 - bit));
     }
 
-    return AdvancedFont::BitIsExist(symbol, row, bit);
+    return AdvancedFont().BitIsExist(symbol, row, bit);
 }
 
 

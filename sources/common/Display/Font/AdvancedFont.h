@@ -11,13 +11,13 @@ struct AdvancedFont
     /// Возвращает true, если в строке row есть пиксели
     bool RowNotEmpty(uint8 symbol, int row);
     /// Возвращает ширину символа
-    static uint8 GetWidth(uint8 symbol);
+    uint8 GetWidth(uint8 symbol);
     /// Возвращает высоту символа
-    static uint8 GetHeight(uint8 symbol);
+    uint8 GetHeight(uint8 symbol);
     /// Возвращает высоту самого высокого символа
-    static uint8 GetHeight();
+    uint8 GetHeight();
 
-    static bool BitIsExist(uint8 symbol, int row, int bit);
+    bool BitIsExist(uint8 symbol, int row, int bit);
 
 private:
     static TypeFont::E currentType;
