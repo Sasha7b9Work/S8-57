@@ -23,7 +23,6 @@ public:
     class Create
     {
     public:
-        static void DrawBigText(Message &message, int x, int y, uint8 size, pString string);
 
         static void DrawHLine(Message &message, int y, int x0, int x1);
 

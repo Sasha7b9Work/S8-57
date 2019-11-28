@@ -116,12 +116,12 @@ void Char::Draw10SymbolsInRect(int x, int y, Color color)
 }
 
 
-Text::Text(const char *_text, uint8 _size) : text(_text), sizeOfType(_size)
+Text::Text(const char *_text) : text(_text)
 {
 }
 
 
-Text::Text(const String &string, uint8 _size) : sizeOfType(_size)
+Text::Text(const String &string)
 {
     text = string.c_str();
 }
@@ -133,14 +133,7 @@ int Text::Draw(int x, int y, Color color)
 
     if (text[0] != '\0')
     {
-        if (sizeOfType != 1)
-        {
-            DrawBig(x, y);
-        }
-        else
-        {
-            x = DrawSmall(x, y);
-        }
+        x = DrawSmall(x, y);
     }
 
     return x;

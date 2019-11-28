@@ -141,35 +141,6 @@ int Text::DrawSmall(int x, int y, Color color)
 }
 
 
-void Text::DrawBig(int x, int y, Color color)
-{
-#define MAX_SIZE_BUFFER 100
-
-    color.SetAsCurrent();
-
-    uint numSymbols = std::strlen(text); //-V2513
-
-    uint8 buffer[MAX_SIZE_BUFFER] =
-    {
-        Command::Paint_DrawBigText,
-        static_cast<uint8>(x),
-        static_cast<uint8>(x >> 8),
-        static_cast<uint8>(y),
-        sizeOfType,
-        static_cast<uint8>(numSymbols)
-    };
-
-    uint8 *pointer = &buffer[6];
-
-    while (*text)
-    {
-        *pointer++ = static_cast<uint8>(*text++);
-    }
-
-    Transceiver::Send(buffer, 1 + 2 + 1 + 1 + numSymbols + 1);
-}
-
-
 void MultiHPointLine::Draw(int x, Color color)
 {
     color.SetAsCurrent();

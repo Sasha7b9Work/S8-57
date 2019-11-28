@@ -93,8 +93,8 @@ private:
 class Text
 {
 public:
-    Text(const char *text, uint8 size = 1);
-    Text(const String &string, uint8 size = 1);
+    Text(const char *text);
+    Text(const String &string);
 
     int Draw(int x, int y, Color color = Color::NUMBER);
 
@@ -117,10 +117,8 @@ public:
     void DrawInCenterRectOnBackground(int x, int y, int width, int height, Color colorText, int widthBorder, Color colorBackground);
 private:
     const char *text;
-    ///  егль. “олько в отличие от насто€щего он показывает, во сколько раз размер пиксел€ на экране больше единичного пиксел€
-    uint8 sizeOfType;
     int DrawCharWithLimitation(int eX, int eY, char _symbol, int limitX, int limitY, int limitWidth, int limitHeight);
-    void DrawBig(int x, int y, Color color = Color::NUMBER);
+
     int DrawSmall(int x, int y, Color color = Color::NUMBER);
 };
 

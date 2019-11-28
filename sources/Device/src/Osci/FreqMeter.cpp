@@ -259,7 +259,6 @@ float FrequencyCounter::GetFreq()
     return frequency;
 }
 
-#define SIZE 4
 
 #define EMPTY_STRING    "\xa9\xa9\xa9.\xa9\xa9\xa9"
 #define OVERFLOW_STRING ">>>"
@@ -267,8 +266,8 @@ float FrequencyCounter::GetFreq()
 
 static void DrawFrequency(int x, int y)
 {
-    Text("F", SIZE).Draw(x + 2, y + 1, Color::FILL);
-    Text("T", SIZE).Draw(x + 2, y + 10 * SIZE);
+    Text("F").Draw(x + 2, y + 1, Color::FILL);
+    Text("T").Draw(x + 2, y + 10);
 
     Rectangle(10, 10).Draw(x - 20, y);
     if (lampFreq)
@@ -276,17 +275,17 @@ static void DrawFrequency(int x, int y)
         Region(10, 10).Fill(x - 20, y);
     }
 
-    int dX = 7 * SIZE;
+    int dX = 7;
 
-    Text("=", SIZE).Draw(x + dX, y + 1);
-    Text("=", SIZE).Draw(x + dX, y + 10 * SIZE);
+    Text("=").Draw(x + dX, y + 1);
+    Text("=").Draw(x + dX, y + 10);
 
-    dX = SIZE * 12;
+    dX = 12;
 
     char strFreq[50];
     std::strcpy(strFreq, FreqSetToString(&freqActual));
 
-    Text(strFreq, SIZE).Draw(x + dX, y + 1);
+    Text(strFreq).Draw(x + dX, y + 1);
 
     if (std::strcmp(strFreq, EMPTY_STRING) == 0)
     {
@@ -319,14 +318,14 @@ static void DrawFrequency(int x, int y)
 
     Time time(1.0F / freq);
 
-    Text(time.ToStringAccuracy(false, strFreq, 6), SIZE).Draw(x + dX, y + 10 * SIZE);
+    Text(time.ToStringAccuracy(false, strFreq, 6)).Draw(x + dX, y + 10);
 }
 
 
 static void DrawPeriod(int x, int y)
 {
-    Text("T", SIZE).Draw(x + 2, y + 1, Color::FILL);
-    Text("F", SIZE).Draw(x + 2, y + 10 * SIZE);
+    Text("T").Draw(x + 2, y + 1, Color::FILL);
+    Text("F").Draw(x + 2, y + 10);
 
     Rectangle(10, 10).Draw(x - 20, y + 1);
     if (lampPeriod)
@@ -334,18 +333,18 @@ static void DrawPeriod(int x, int y)
         Region(10, 10).Fill(x - 20, y);
     }
 
-    int dX = 7 * SIZE;
+    int dX = 7;
 
-    Text("=", SIZE).Draw(x + dX, y + 1);
+    Text("=").Draw(x + dX, y + 1);
 
-    Text("=", SIZE).Draw(x + dX, y + 10 * SIZE);
+    Text("=").Draw(x + dX, y + 10);
 
-    dX = SIZE * 12;
+    dX = 12;
 
     char strPeriod[50];
     std::strcpy(strPeriod, PeriodSetToString(&periodActual));
 
-    Text(strPeriod, SIZE).Draw(x + dX, y + 1);
+    Text(strPeriod).Draw(x + dX, y + 1);
 
     if ((std::strcmp(strPeriod, EMPTY_STRING) == 0) || (std::strcmp(strPeriod, OVERFLOW_STRING) == 0))
     {
@@ -373,7 +372,7 @@ static void DrawPeriod(int x, int y)
 
     Frequency freq(1.0F / period);
 
-    Text(freq.ToStringAccuracy(strPeriod, 6), SIZE).Draw(x + dX, y + 10 * SIZE);
+    Text(freq.ToStringAccuracy(strPeriod, 6)).Draw(x + dX, y + 10);
 }
 
 

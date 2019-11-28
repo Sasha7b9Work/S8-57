@@ -180,32 +180,6 @@ void Message::Free()
 }
 
 
-void Message::Create::DrawBigText(Message &message, int x, int y, uint8 sizeSymbol, pString string)
-{
-    uint numSymbols = std::strlen(string); //-V2513
-    //          command | x | y | размер_символов | размер_строки | string
-    uint size = 1 +       2 + 1 + 1 +               1;
-
-    if (message.Allocate(size))
-    {
-        message.PutByte(Command::Paint_DrawBigText);
-        message.PutHalfWord(static_cast<uint16>(x));
-        message.PutByte(static_cast<uint8>(y));
-        message.PutByte(sizeSymbol);
-        message.PutByte(static_cast<uint8>(numSymbols));
-
-        uint8 *pointer = message.Data(6);
-
-        uint8 *text = reinterpret_cast<uint8 *>(const_cast<char *>(string));
-
-        while (*text)
-        {
-            *pointer++ = *text++;
-        }
-    }
-}
-
-
 void Message::Create::DrawHLine(Message &message, int y, int x0, int x1)
 {
     if (message.Allocate(6))

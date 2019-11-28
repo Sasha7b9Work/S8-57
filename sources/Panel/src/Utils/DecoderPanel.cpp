@@ -33,8 +33,6 @@ static bool FillRegion(uint8);
 
 static bool DrawText(uint8);
 
-static bool DrawBigText(uint8);
-
 static bool SetPalette(uint8);
 
 static bool DrawRectangle(uint8);
@@ -87,7 +85,7 @@ void Decoder::AddData(uint8 data)
         SetPoint,
         DrawLine,
         DrawTesterPoints,
-        DrawBigText,
+        EmptyFunc,
         FuncScreen,
         DrawVPointLine,
         DrawHPointLine,
@@ -529,42 +527,6 @@ static bool DrawText(uint8 data)
                 return true;
             }
             break;
-    }
-    return false;
-}
-
-
-static bool DrawBigText(uint8 data)
-{
-    static int x;
-    static int y;
-    static uint8 size;
-    static int numSymbols;
-    static int readingSymbols;
-    static char *buffer;
-
-    switch (step)
-    {
-    case 0:                                         break;
-    case 1:     x = data;                           break;
-    case 2:     x += static_cast<int>(data) << 8;   break;
-    case 3:     y = data;                           break;
-    case 4:     size = data;                        break;
-    case 5:
-        numSymbols = data;
-        readingSymbols = 0;
-        buffer = new char[static_cast<uint>(numSymbols + 1)];
-        break;
-    default:
-        buffer[readingSymbols++] = static_cast<char>(data);
-        if (readingSymbols == numSymbols)
-        {
-            buffer[readingSymbols] = 0;
-            Text::DrawBigText(x, y, size, buffer);
-            delete[] buffer;
-            return true;
-        }
-        break;
     }
     return false;
 }

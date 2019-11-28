@@ -54,54 +54,6 @@ int Text::DrawChar(int eX, int eY, uint8 symbol, Color color)
 }
 
 
-void Text::DrawBigText(int eX, int eY, uint8 size, pString text)
-{
-    uint numSymbols = std::strlen(text);
-
-    int x = eX;
-
-    /// \todo Здесь явно неправильно вычисляется ширина символа
-
-    for (uint i = 0; i < numSymbols; i++)
-    {
-        x = DrawBigChar(x, eY, size, static_cast<uint8>(text[i]));
-        x += size;
-    }
-}
-
-
-int Text::DrawBigChar(int eX, int eY, int size, uint8 symbol)
-{
-    uint8 width = Font::GetWidth(symbol);
-    uint8 height = Font::GetHeight();
-    
-    for (int b = 0; b < height; b++)
-    {
-        if (Font::RowNotEmpty(symbol, b))
-        {
-            int x = eX;
-            int y = eY + b * size + 9 - height;
-            for (int bit = 0; bit < width; bit++)
-            {
-                if (Font::BitIsExist(symbol, b, bit))
-                {
-                    for (int i = 0; i < size; i++)
-                    {
-                        for (int j = 0; j < size; j++)
-                        {
-                            Painter::SetPoint(x + i, y + j);
-                        }
-                    }
-                }
-                x += size;
-            }
-        }
-    }
-    
-    return eX + width * size;
-}
-
-
 int Text::Draw(int x, int y, const char *text)
 {
     uint numSymbols = std::strlen(text);

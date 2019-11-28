@@ -87,20 +87,6 @@ int Text::DrawSmall(int x, int y, Color color)
 }
 
 
-void Text::DrawBig(int x, int y, Color color)
-{
-    color.SetAsCurrent();
-
-    uint numSymbols = std::strlen(text);
-
-    for (uint i = 0; i < numSymbols; i++)
-    {
-        x = DrawBigChar(x, y, sizeOfType, text[i]);
-        x += sizeOfType;
-    }
-}
-
-
 static int DrawChar(int eX, int eY, char s)
 {
     uint8 symbol = static_cast<uint8>(s);
@@ -128,41 +114,6 @@ static int DrawChar(int eX, int eY, char s)
     }
 
     return eX + width;
-}
-
-
-static int DrawBigChar(int eX, int eY, int size, char s)
-{
-    uint8 symbol = static_cast<uint8>(s);
-
-    int8 width = static_cast<int8>(Font::GetWidth(symbol));
-    int8 height = static_cast<int8>(Font::GetHeight());
-
-    for (int b = 0; b < height; b++)
-    {
-        if (Font::RowNotEmpty(symbol, b))
-        {
-            int x = eX;
-            int y = eY + b * size + 9 - height;
-            int endBit = 8 - width;
-            for (int bit = 7; bit >= endBit; bit--)
-            {
-                if (Font::BitIsExist(symbol, b, bit))
-                {
-                    for (int i = 0; i < size; i++)
-                    {
-                        for (int j = 0; j < size; j++)
-                        {
-                            memDC.DrawPoint({ x + i, y + j });
-                        }
-                    }
-                }
-                x += size;
-            }
-        }
-    }
-
-    return eX + width * size;
 }
 
 
