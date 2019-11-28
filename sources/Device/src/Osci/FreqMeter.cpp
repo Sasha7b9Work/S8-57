@@ -264,28 +264,31 @@ float FrequencyCounter::GetFreq()
 #define OVERFLOW_STRING ">>>"
 
 
-static void DrawFrequency(int x, int y)
+static void DrawFrequency(int x, int _y)
 {
-    Text("F").Draw(x + 2, y + 1, Color::FILL);
-    Text("T").Draw(x + 2, y + 10);
+    int yF = _y + 1;
+    int yT = _y + 5 + Font::GetHeight();
 
-    Rectangle(10, 10).Draw(x - 20, y);
+    Text("F").Draw(x + 2, yF, Color::FILL);
+    Text("T").Draw(x + 2, yT);
+
+    Rectangle(10, 10).Draw(x - 20, _y);
     if (lampFreq)
     {
-        Region(10, 10).Fill(x - 20, y);
+        Region(10, 10).Fill(x - 20, _y);
     }
 
-    int dX = 7;
+    int dX = 17;
 
-    Text("=").Draw(x + dX, y + 1);
-    Text("=").Draw(x + dX, y + 10);
+    Text("=").Draw(x + dX, yF);
+    Text("=").Draw(x + dX, yT);
 
-    dX = 12;
+    dX = 32;
 
     char strFreq[50];
     std::strcpy(strFreq, FreqSetToString(&freqActual));
 
-    Text(strFreq).Draw(x + dX, y + 1);
+    Text(strFreq).Draw(x + dX, yF);
 
     if (std::strcmp(strFreq, EMPTY_STRING) == 0)
     {
@@ -318,7 +321,7 @@ static void DrawFrequency(int x, int y)
 
     Time time(1.0F / freq);
 
-    Text(time.ToStringAccuracy(false, strFreq, 6)).Draw(x + dX, y + 10);
+    Text(time.ToStringAccuracy(false, strFreq, 6)).Draw(x + dX, yT);
 }
 
 
@@ -385,6 +388,10 @@ void FrequencyCounter::Draw()
         return;
     }
 
+    Font::Set(TypeFont::_GOST28);
+    int spacing = Font::GetSpacing();
+    Font::SetSpacing(5);
+
     int width = 241;
     int height = 74;
     int x = Grid::Left() + (Grid::Width() - width) / 2;
@@ -410,6 +417,9 @@ void FrequencyCounter::Draw()
     {
         DrawDebugInfo();
     }
+
+    Font::Pop();
+    Font::SetSpacing(spacing);
 }
 
 
