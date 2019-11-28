@@ -28,20 +28,10 @@ int Text::DrawChar(int eX, int eY, uint8 symbol, Color color)
 {
     Painter::SetColor(color);
     
-    if (Font::Current() == TypeFont::_GOST28)
-    {
-        int i = 0;
-    }
-
     uint8 width = Font::GetWidth(symbol);
     uint8 height = Font::GetHeight();
 
     int delta = Font::IsBig() ? 0 : (9 - height);
-
-    if (Font::Current() == TypeFont::_GOST28)
-    {
-        int i = 0;
-    }
 
     for (int row = 0; row < height; row++)
     {

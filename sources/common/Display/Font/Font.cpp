@@ -187,14 +187,7 @@ bool Font::BitIsExist(uint8 symbol, int row, int bit)
         return font->symbols[symbol].bytes[row] & (1 << (7 - bit));
     }
 
-//    FullSymbol fullSymbol;
-//
-//    if (bigFont->GetFullSymbol(fullSymbol, symbol))
-//    {
-//        return fullSymbol.BitIsExist(row, bit);
-//    }
-
-    return false;
+    return AdvancedFont::BitIsExist(symbol, row, bit);
 }
 
 

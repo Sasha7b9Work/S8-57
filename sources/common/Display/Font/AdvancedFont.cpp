@@ -15,6 +15,8 @@ struct NativeSymbol
     uint8 *GetRow(int row);
     /// Возвращает указатель на первый байт данных
     uint8 *Data();
+
+    bool BitIsExist(int row, int bit);
 };
 
 /// Структрура заголовка
@@ -159,4 +161,31 @@ HeaderFont *HeaderFont::Sefl()
 uint8 *NativeSymbol::Data()
 {
     return reinterpret_cast<uint8 *>(this) + sizeof(*this);
+}
+
+
+bool AdvancedFont::BitIsExist(uint8 s, int row, int bit)
+{
+    NativeSymbol *symbol = HeaderFont::Sefl()->GetSymbol(s);
+
+    return symbol ? symbol->BitIsExist(row, bit) : false;
+}
+
+
+bool NativeSymbol::BitIsExist(int r, int b)
+{
+    uint8 *row = GetRow(r);
+
+    if (row == nullptr)
+    {
+        return false;
+    }
+
+    while (b > 7)       // Перемещаеммся к байту, содержащему наш бит
+    {
+        row++;
+        b -= 8;
+    }
+
+    return ((*row) & (1 << (7 - b))) != 0;
 }

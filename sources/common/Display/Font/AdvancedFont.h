@@ -16,6 +16,8 @@ struct AdvancedFont
     /// Возвращает высоту самого высокого символа
     static uint8 GetHeight();
 
+    static bool BitIsExist(uint8 symbol, int row, int bit);
+
 private:
     static TypeFont::E currentType;
 };

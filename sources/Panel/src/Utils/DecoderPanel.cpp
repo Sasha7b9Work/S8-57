@@ -521,10 +521,6 @@ static bool DrawText(uint8 data)
             buffer[readingSymbols++] = static_cast<char>(data);
             if (readingSymbols == numSymbols)
             {
-                if(Font::Current() == TypeFont::_GOST28)
-                {
-                    int i = 0;
-                }
                 buffer[readingSymbols] = 0;
                 Text::Draw(x, y, buffer);
                 delete [] buffer;
