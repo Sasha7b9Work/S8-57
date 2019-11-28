@@ -1,5 +1,6 @@
 #include "defines.h"
 #include "AdvancedFont.h"
+#include "fontGOST28.cpp"
 
 
 struct NativeSymbol
@@ -19,7 +20,7 @@ struct NativeSymbol
 /// Структрура заголовка
 struct HeaderFont
 {
-    uint         offsets[256];  // Смещения 256 символов таблицы. 0 означает, что символ отсутствует
+    uint16       offsets[256];  // Смещения 256 символов таблицы. 0 означает, что символ отсутствует
     NativeSymbol symbol;        // Первый символ в таблице его смещение 256
 
     /// Возвращает указатель на символ, если он присутствует в таблице и nullptr в обратном случае
@@ -29,7 +30,7 @@ struct HeaderFont
 };
 
 
-extern unsigned char fontGOST28[9158];
+extern const unsigned char fontGOST28[9358];
 
 
 TypeFont::E AdvancedFont::currentType = TypeFont::None;
@@ -37,11 +38,11 @@ TypeFont::E AdvancedFont::currentType = TypeFont::None;
 
 static uint8 *fonts[TypeFont::Count] =
 {
-    nullptr,        // _5
-    nullptr,        // _8
-    nullptr,        // _UGO
-    nullptr,        // _UGO2
-    fontGOST28      // _GOST28
+    nullptr,                        // _5
+    nullptr,                        // _8
+    nullptr,                        // _UGO
+    nullptr,                        // _UGO2
+    const_cast<uint8 *>(&fontGOST28[0]) // _GOST28
 };
 
 static uint8 *font = nullptr;

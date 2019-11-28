@@ -1,4 +1,4 @@
-unsigned char fontGOST28[9358] =
+const unsigned char fontGOST28[9358] =
 {
 /* 0x00 */   0x00, 0x00,
 /* 0x01 */   0x00, 0x00,
