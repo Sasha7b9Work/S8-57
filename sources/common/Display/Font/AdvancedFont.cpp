@@ -6,8 +6,9 @@
 
 struct NativeSymbol
 {
-    uint8 width;    // Ширина символа в пикселях
-    uint8 height;   // Высота символа в пикселях
+    uint8 width;        // Ширина символа в пикселях
+    uint8 height;       // Высота символа в пикселях
+    uint8 firstRow;     // Номер первой непустой строки. Именно её первый байт хранится в data
 //    uint8 data;     // Первый байт первой строки символа
 
     /// Возвращает количество байт в строке
@@ -66,13 +67,21 @@ bool AdvancedFont::RowNotEmpty(uint8 s, int r)
 
     if (symbol)
     {
+        if (r < symbol->firstRow)
+        {
+            return false;
+        }
+
         uint8 *row = symbol->GetRow(r);
 
-        for (int i = 0; i < symbol->BytesInRow(); i++)
+        if (row)
         {
-            if (row[i] != 0)
+            for (int i = 0; i < symbol->BytesInRow(); i++)
             {
-                return true;
+                if (row[i] != 0)
+                {
+                    return true;
+                }
             }
         }
     }
@@ -134,7 +143,12 @@ uint8 *NativeSymbol::GetRow(int row)
         return nullptr;
     }
 
-    return Data() + row * BytesInRow();
+    if (row < firstRow)
+    {
+        return nullptr;
+    }
+
+    return Data() + (row - firstRow) * BytesInRow();
 }
 
 
