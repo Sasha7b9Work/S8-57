@@ -66,7 +66,7 @@ static void SendTypeFontToPanel(TypeFont::E type)
 #endif
 
 
-void Font::SetCurrent(TypeFont::E typeFont)
+void Font::Set(TypeFont::E typeFont)
 {
     pushedFont = currentFont;
 
@@ -102,7 +102,7 @@ void Font::SetCurrent(TypeFont::E typeFont)
 
 void Font::Pop()
 {
-    SetCurrent(pushedFont);
+    Set(pushedFont);
 }
 
 

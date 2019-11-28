@@ -32,7 +32,7 @@ void Console::Draw()
 
     inProcessDrawConsole = true;
 
-    Font::SetCurrent(TypeFont::_5);
+    Font::Set(TypeFont::_5);
 
     int y = 1;
 
@@ -44,7 +44,7 @@ void Console::Draw()
         y += 6;
     }
 
-    Font::SetCurrent(TypeFont::_8);
+    Font::Set(TypeFont::_8);
 
     inProcessDrawConsole = false;
 }

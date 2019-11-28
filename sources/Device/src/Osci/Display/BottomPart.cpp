@@ -12,7 +12,7 @@
 
 void DisplayOsci::BottomPart::Draw(int x0, int y0)
 {
-    Font::SetCurrent(TypeFont::_UGO2);
+    Font::Set(TypeFont::_UGO2);
 
     // Флешка
     if (FDrive::IsConnected())

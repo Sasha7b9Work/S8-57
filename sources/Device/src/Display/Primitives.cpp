@@ -72,7 +72,7 @@ Char::Char(char _ch, TypeFont::E type) : ch(_ch), font(type)
 
 int Char::Draw(int x, int y, Color color)
 {
-    Font::SetCurrent(font);
+    Font::Set(font);
 
 	String("%c", ch).Draw(x, y, color);
 
@@ -88,7 +88,7 @@ void Char::Draw4SymbolsInRect(int x, int y, Color color)
 {
     color.SetAsCurrent();
 
-    Font::SetCurrent(font);
+    Font::Set(font);
 
     for (char i = 0; i < 2; i++)
     {
@@ -104,7 +104,7 @@ void Char::Draw10SymbolsInRect(int x, int y, Color color)
 {
     color.SetAsCurrent();
 
-    Font::SetCurrent(font);
+    Font::Set(font);
 
     for (char i = 0; i < 5; i++)
     {

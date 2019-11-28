@@ -36,7 +36,7 @@ void DisplayOsci::Update()
     Rectangle(Grid::Width(), Grid::Height()).Draw(Grid::Left(), Grid::Top(), Color::FILL);
 
     /// \todo Говнокод. Этого здесь быть не должно, но иначе напряжение в параметрах каналов выводится малыми буквами
-    Font::SetCurrent(TypeFont::_8);
+    Font::Set(TypeFont::_8);
 
     HiPart::Draw();
 

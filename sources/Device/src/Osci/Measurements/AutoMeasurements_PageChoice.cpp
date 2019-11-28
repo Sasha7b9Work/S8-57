@@ -95,12 +95,12 @@ void PageChoiceMeasures::Draw()
                 Rectangle(dX, dY).Draw(x0, y0, Color::WHITE);
                 Region(dX - 2, dY - 2).Fill(x0 + 1, y0 + 1, (active ? Color::FLASH_10 : Color::BACK));
                 Char(static_cast<SymbolUGO::E>(Measure::GetChar(meas))).Draw10SymbolsInRect(x0 + 2, y0 + 1, active ? Color::FLASH_01 : Color::FILL);
-                Font::SetCurrent(TypeFont::_5);
+                Font::Set(TypeFont::_5);
                 Text(TypeMeasure::GetName(meas)).DrawRelativelyRight(x0 + dX, y0 + 12);
                 meas = static_cast<TypeMeasure::E>(static_cast<int>(meas) + 1);    // meas++;
             }
         }
     }
 
-    Font::SetCurrent(TypeFont::_8);
+    Font::Set(TypeFont::_8);
 }

@@ -566,7 +566,7 @@ static bool SetFont(uint8 data)
         return false;
     }
 
-    Font::SetCurrent(static_cast<TypeFont::E>(data));
+    Font::Set(static_cast<TypeFont::E>(data));
 
     return true;
 }

@@ -32,7 +32,7 @@ public:
     static int  GetHeightSymbol(char symbol);
     static int  GetLengthSymbol(char symbol);
     /// Устанавливает текущий шрифт. Ранее установленный можно восстановить функцией Pop()
-    static void SetCurrent(TypeFont::E typeFont);
+    static void Set(TypeFont::E typeFont);
     /// Восстанавливает шрифт, бывший текущим перед последним вызовом SetCurrent()
     static void Pop();
     static bool IsBig();

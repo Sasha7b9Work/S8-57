@@ -67,7 +67,7 @@ static void RemoveOld()
 
 static void DrawMessages()
 {
-    Font::SetCurrent(TypeFont::_8);
+    Font::Set(TypeFont::_8);
 
     int y = Grid::BottomForWarnings();                   // Координата y нижнего левого угла прямоугольника, в котором будет отрисовано очередное сообщение
 
