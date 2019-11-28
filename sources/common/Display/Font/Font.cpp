@@ -34,12 +34,6 @@ int Font::GetLengthText(pString text)
 }
 
 
-int Font::GetHeightSymbol(char)
-{
-    return 9;
-}
-
-
 #ifdef PANEL
 static void SendTypeFontToPanel(TypeFont::E) {};
 #else

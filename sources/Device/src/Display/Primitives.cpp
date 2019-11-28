@@ -190,7 +190,7 @@ int Text::DrawCharWithLimitation(int eX, int eY, char _symbol, int limitX, int l
 int Text::DrawInCenterRect(int eX, int eY, int width, int eHeight, Color color)
 {
     int lenght = Font::GetLengthText(text);
-    int height = Font::GetHeightSymbol(text[0]);
+    int height = Font::GetHeight();
     int x = eX + (width - lenght) / 2;
     int y = eY + (eHeight - height) / 2 + 1;
     return Draw(x, y, color);

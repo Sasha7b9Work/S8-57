@@ -464,7 +464,7 @@ int Painter::DrawStringInCenterRect(int eX, int eY, int width, int eHeight, cons
 {
     SetColor(color);
     int lenght = Font::GetLengthText(text);
-    int height = Font::GetHeightSymbol(text[0]);
+    int height = Font::GetHeight();
     int x = eX + (width - lenght) / 2;
     int y = eY + (eHeight - height) / 2;
     return DrawText(x, y, text);
@@ -544,7 +544,7 @@ void Painter::DrawTextInRect(int x, int y, int width, const char *text)
         if (length + x > xEnd)
         {
             x = xStart;
-            y += Font::GetHeightSymbol(*text);
+            y += Font::GetHeight();
         }
         int numSymbols = 0;
         numSymbols = DrawSubString(x, y, text);

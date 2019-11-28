@@ -30,7 +30,6 @@ struct Font
 
 public:
     static int  GetLengthText(pString text);
-    static int  GetHeightSymbol(char symbol);
     /// Устанавливает текущий шрифт. Ранее установленный можно восстановить функцией Pop()
     static void Set(const TypeFont::E typeFont);
     static TypeFont::E Current();
