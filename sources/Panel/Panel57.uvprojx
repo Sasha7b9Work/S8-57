@@ -336,7 +336,7 @@
               <MiscControls></MiscControls>
               <Define>USE_HAL_DRIVER, STM32F429xx, DEBUG,PANEL</Define>
               <Undefine></Undefine>
-              <IncludePath>.\src;.\src\libs\CMSIS;.\src\libs\HAL;..\libs\common;..\common\libs\STM32Cube_F4\Drivers\CMSIS\Device\ST\STM32F4xx\Include;..\common\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc;..\common\libs\STM32Cube_F4\Drivers\CMSIS\Include;..\</IncludePath>
+              <IncludePath>.\src;.\src\libs\CMSIS;.\src\libs\HAL;..\libs\common;..\common\libs\STM32Cube_F4\Drivers\CMSIS\Device\ST\STM32F4xx\Include;..\common\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc;..\common\libs\STM32Cube_F4\Drivers\CMSIS\Include;..\;..\common</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -1341,11 +1341,6 @@
           <GroupName>Display/Font</GroupName>
           <Files>
             <File>
-              <FileName>Font.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\common\Display\Font\Font.cpp</FilePath>
-            </File>
-            <File>
               <FileName>Font.h</FileName>
               <FileType>5</FileType>
               <FilePath>..\common\Display\Font\Font.h</FilePath>
@@ -1389,6 +1384,11 @@
               <FileName>fontGOST28.inc</FileName>
               <FileType>5</FileType>
               <FilePath>..\common\Display\Font\fontGOST28.inc</FilePath>
+            </File>
+            <File>
+              <FileName>Font.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Display\Font\Font.cpp</FilePath>
             </File>
           </Files>
         </Group>

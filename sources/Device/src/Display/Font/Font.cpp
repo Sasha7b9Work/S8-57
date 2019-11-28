@@ -1,12 +1,12 @@
 #include "defines.h"
-#include "AdvancedFont.h"
+#include "Display/Font/AdvancedFont.h"
 #include "common/Command.h"
 #include "common/Transceiver.h"
 #include "Hardware/HAL/HAL.h"
-#include "font8.inc"
-#include "font5.inc"
-#include "fontUGO.inc"
-#include "fontUGO2.inc"
+#include "Display/Font/font8.inc"
+#include "Display/Font/font5.inc"
+#include "Display/Font/fontUGO.inc"
+#include "Display/Font/fontUGO2.inc"
 
 
 const Font *fonts[TypeFont::Count] = {&font5, &font8, &fontUGO, &fontUGO2, nullptr};
