@@ -15,10 +15,6 @@ const Font *font = &font8;
 TypeFont::E pushedFont = TypeFont::_8;
 TypeFont::E currentFont = TypeFont::_8;
 
-#ifndef PANEL
-static int spacing = 1;
-#endif
-
 
 int Font::GetLengthText(pString text)
 {
@@ -31,28 +27,6 @@ int Font::GetLengthText(pString text)
         symbol++;
     }
     return result;
-}
-
-
-#ifdef PANEL
-static void SendTypeFontToPanel(TypeFont::E) {};
-#else
-static void SendTypeFontToPanel(TypeFont::E type)
-{
-    static TypeFont::E prevType = TypeFont::Count;
-
-    if (prevType != type)
-    {
-        Transceiver::Send(Command::Paint_SetFont, static_cast<uint8>(type));
-        prevType = type;
-    }
-}
-#endif
-
-
-TypeFont::E Font::Current()
-{
-    return currentFont;
 }
 
 
@@ -88,43 +62,9 @@ void Font::Set(const TypeFont::E typeFont)
             break;
         }
 
-        SendTypeFontToPanel(typeFont);
-
         currentFont = typeFont;
     }
 }
-
-
-void Font::Pop()
-{
-    Set(pushedFont);
-}
-
-
-#ifdef PANEL
-void Font::SetSpacing(int) {}
-#else
-void Font::SetSpacing(int _spacing)
-{
-    spacing = _spacing;
-    Transceiver::Send(Command::Paint_SetTextSpacing, static_cast<uint8>(spacing));
-}
-
-int Font::GetSpacing()
-{
-    return spacing;
-}
-#endif
-
-
-#ifdef PANEL
-void Font::SetMinWidth(uint8) {}
-#else
-void Font::SetMinWidth(uint8 width)
-{
-    Transceiver::Send(Command::Paint_SetMinWidthFont, width);
-}
-#endif
 
 
 static bool FontIsSmall()
