@@ -58,6 +58,22 @@ void HAL_ADC1::Init()
 }
 
 
+uint HAL_ADC1::ReadValueAKK()
+{
+    SetActiveChannel2();
+
+    return ReadValue();
+}
+
+
+uint HAL_ADC1::ReadValuePOW()
+{
+    SetActiveChannel9();
+
+    return ReadValue();
+}
+
+
 uint HAL_ADC1::ReadValue()
 {
     if (HAL_ADC_Start(&handle) != HAL_OK)

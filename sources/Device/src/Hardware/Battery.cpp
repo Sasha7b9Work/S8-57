@@ -26,27 +26,6 @@ static float CalculatePercents(float volts);
 static void DrawBatteryUGO(int x, int y, float procents);
 
 
-class ADC1_
-{
-public:
-    /// Читает АЦП батареи
-    static uint ReadValueAKK()
-    {
-        HAL_ADC1::SetActiveChannel2();
-
-        return HAL_ADC1::ReadValue();
-    }
-    /// Читает АЦП зарядного устройства
-    static uint ReadValuePOW()
-    {
-        HAL_ADC1::SetActiveChannel9();
-
-        return HAL_ADC1::ReadValue();
-    }
-};
-
-
-
 void Battery::Init()
 {
     HAL_ADC1::Init();
@@ -57,7 +36,7 @@ float Battery::GetVoltageAKK(uint *adc)
 {
     static Utils::AroundAverager<float> averager(32);
 
-    *adc = ADC1_::ReadValueAKK();
+    *adc = HAL_ADC1::ReadValueAKK();
 
     averager.Push(static_cast<float>(*adc));
 
@@ -69,7 +48,7 @@ float Battery::GetVoltagePOW(uint *adc)
 {
     static Utils::AroundAverager<float> averager(32);
 
-    *adc = ADC1_::ReadValuePOW();
+    *adc = HAL_ADC1::ReadValuePOW();
 
     averager.Push(static_cast<float>(*adc));
 

@@ -24,6 +24,11 @@ struct HAL_RTC
 struct HAL_ADC1
 {
     static void Init();
+    /// Читает АЦП батареи
+    static uint ReadValueAKK();
+    /// Читает АЦП зарядного устройства
+    static uint ReadValuePOW();
+private:
     static void SetActiveChannel2();
     static void SetActiveChannel9();
     static uint ReadValue();
