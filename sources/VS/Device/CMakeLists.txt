@@ -14,7 +14,6 @@ include_directories(../../VS/Device/src
                     ../../common/_VS/HAL
                     ../../common/_VS/USBD
                     ../../common/_VS/USBH
-                    ../../common
                     ../../../../ThirdParty/wxWidgets/include
                     ../../../../ThirdParty/wxWidgets/generated/lib/vc_dll/mswud)
                     
@@ -55,6 +54,7 @@ source_group(_VS\\HAL                                   REGULAR_EXPRESSION ../co
 source_group(_VS\\HAL\\Legacy                           REGULAR_EXPRESSION ../common/_VS/HAL/Legacy/*)
 source_group(_VS\\USBD                                  REGULAR_EXPRESSION ../common/_VS/USBD/*)
 source_group(_VS\\USBH                                  REGULAR_EXPRESSION ../common/_VS/USBH/*)
+source_group(Display\\Font                              REGULAR_EXPRESSION ../common/Display/Font/*)
 source_group(Data                                       REGULAR_EXPRESSION              src/Data/*)
 source_group(FlashDrive                                 REGULAR_EXPRESSION              src/FlashDrive/*)
 source_group(GUI                                        REGULAR_EXPRESSION              src/GUI/*)
@@ -110,17 +110,6 @@ source_group(Display            FILES   ../../Device/src/Display/Colors.h
                                         ../../Device/src/Display/Symbols.h
                                         ../../Device/src/Display/Warnings.h
                                         ../../Device/src/Display/Warnings.cpp)
-source_group(Display\\Font      FILES   ../../common/Display/Font/AdvancedFont.h
-                                        ../../common/Display/Font/AdvancedFont.cpp
-                                        ../../common/Display/Font/Font.h
-                                        ../../common/Display/Font/font5.inc
-                                        ../../common/Display/Font/font8.inc
-                                        ../../common/Display/Font/fontGOST28.inc
-                                        ../../common/Display/Font/fontGOST72bold.inc
-                                        ../../common/Display/Font/fontUGO.inc
-                                        ../../common/Display/Font/fontUGO2.inc
-                                        ../../Panel/src/Display/Font/Font.cpp)
-
 source_group(FPGA               FILES   ../../Device/src/FPGA/AD9286.h
                                         ../../Device/src/FPGA/AD9286.cpp
                                         ../../Device/src/FPGA/Context.cpp
@@ -233,16 +222,7 @@ file(GLOB SOURCES   ../../common/_VS/*
                     ../../Device/src/Display/Symbols.h
                     ../../Device/src/Display/Warnings.h
                     ../../Device/src/Display/Warnings.cpp                    
-                    ../../common/Display/Font/AdvancedFont.h
-                    ../../common/Display/Font/AdvancedFont.cpp
-                    ../../common/Display/Font/Font.h
-                    ../../common/Display/Font/font5.inc
-                    ../../common/Display/Font/font8.inc
-                    ../../common/Display/Font/fontGOST28.inc
-                    ../../common/Display/Font/fontGOST72bold.inc
-                    ../../common/Display/Font/fontUGO.inc
-                    ../../common/Display/Font/fontUGO2.inc
-                    ../../Panel/src/Display/Font/Font.cpp
+                    ../../common/Display/Font/*
 
                     ../../Device/src/FlashDrive/*
                     

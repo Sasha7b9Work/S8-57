@@ -1,12 +1,12 @@
 #include "defines.h"
-#include "Display/Font/AdvancedFont.h"
+#include "AdvancedFont.h"
 #include "common/Command.h"
 #include "common/Transceiver.h"
 #include "Hardware/HAL/HAL.h"
-#include "Display/Font/font8.inc"
-#include "Display/Font/font5.inc"
-#include "Display/Font/fontUGO.inc"
-#include "Display/Font/fontUGO2.inc"
+#include "font8.inc"
+#include "font5.inc"
+#include "fontUGO.inc"
+#include "fontUGO2.inc"
 
 
 const Font *fonts[TypeFont::Count] = {&font5, &font8, &fontUGO, &fontUGO2, nullptr};
@@ -15,7 +15,9 @@ const Font *font = &font8;
 TypeFont::E pushedFont = TypeFont::_8;
 TypeFont::E currentFont = TypeFont::_8;
 
+#ifndef PANEL
 static int spacing = 1;
+#endif
 
 
 int Font::GetLengthText(pString text)
@@ -32,6 +34,9 @@ int Font::GetLengthText(pString text)
 }
 
 
+#ifdef PANEL
+static void SendTypeFontToPanel(TypeFont::E) {};
+#else
 static void SendTypeFontToPanel(TypeFont::E type)
 {
     static TypeFont::E prevType = TypeFont::Count;
@@ -41,6 +46,13 @@ static void SendTypeFontToPanel(TypeFont::E type)
         Transceiver::Send(Command::Paint_SetFont, static_cast<uint8>(type));
         prevType = type;
     }
+}
+#endif
+
+
+TypeFont::E Font::Current()
+{
+    return currentFont;
 }
 
 
@@ -89,6 +101,9 @@ void Font::Pop()
 }
 
 
+#ifdef PANEL
+void Font::SetSpacing(int) {}
+#else
 void Font::SetSpacing(int _spacing)
 {
     spacing = _spacing;
@@ -99,12 +114,17 @@ int Font::GetSpacing()
 {
     return spacing;
 }
+#endif
 
 
+#ifdef PANEL
+void Font::SetMinWidth(uint8) {}
+#else
 void Font::SetMinWidth(uint8 width)
 {
     Transceiver::Send(Command::Paint_SetMinWidthFont, width);
 }
+#endif
 
 
 static bool FontIsSmall()
@@ -160,4 +180,10 @@ bool Font::BitIsExist(uint8 symbol, int row, int bit)
     }
 
     return AdvancedFont().BitIsExist(symbol, row, bit);
+}
+
+
+bool Font::IsBig()
+{
+    return !FontIsSmall();
 }
