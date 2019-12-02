@@ -2,20 +2,28 @@
   ******************************************************************************
   * @file    usbh_pipes.c
   * @author  MCD Application Team
+  * @version V3.2.2
+  * @date    07-July-2015
   * @brief   This file implements functions for opening and closing Pipes
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2015 STMicroelectronics.
-  * All rights reserved.</center></h2>
+  * <h2><center>&copy; COPYRIGHT 2015 STMicroelectronics</center></h2>
   *
-  * This software component is licensed by ST under Ultimate Liberty license
-  * SLA0044, the "License"; You may not use this file except in compliance with
-  * the License. You may obtain a copy of the License at:
-  *                      http://www.st.com/SLA0044
+  * Licensed under MCD-ST Liberty SW License Agreement V2, (the "License");
+  * You may not use this file except in compliance with the License.
+  * You may obtain a copy of the License at:
+  *
+  *        http://www.st.com/software_license_agreement_liberty_v2
+  *
+  * Unless required by applicable law or agreed to in writing, software 
+  * distributed under the License is distributed on an "AS IS" BASIS, 
+  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  * See the License for the specific language governing permissions and
+  * limitations under the License.
   *
   ******************************************************************************
-  */
+  */ 
 
 /* Includes ------------------------------------------------------------------*/
 #include "usbh_pipes.h"
@@ -27,47 +35,47 @@
 /** @addtogroup USBH_LIB_CORE
 * @{
 */
-
+  
 /** @defgroup USBH_PIPES
   * @brief This file includes opening and closing Pipes
   * @{
-  */
+  */ 
 
 /** @defgroup USBH_PIPES_Private_Defines
   * @{
-  */
+  */ 
 /**
   * @}
-  */
+  */ 
 
 /** @defgroup USBH_PIPES_Private_TypesDefinitions
   * @{
-  */
+  */ 
 /**
   * @}
-  */
+  */ 
 
 
 /** @defgroup USBH_PIPES_Private_Macros
   * @{
-  */
+  */ 
 /**
   * @}
-  */
+  */ 
 
 
 /** @defgroup USBH_PIPES_Private_Variables
   * @{
-  */
+  */ 
 
 /**
   * @}
-  */
+  */ 
 
 
 /** @defgroup USBH_PIPES_Private_Functions
   * @{
-  */
+  */ 
 static uint16_t USBH_GetFreePipe (USBH_HandleTypeDef *phost);
 
 
@@ -98,8 +106,8 @@ USBH_StatusTypeDef USBH_OpenPipe  (USBH_HandleTypeDef *phost,
                         speed,
                         ep_type,
                         mps);
-
-  return USBH_OK;
+  
+  return USBH_OK; 
 
 }
 
@@ -115,8 +123,8 @@ USBH_StatusTypeDef USBH_ClosePipe  (USBH_HandleTypeDef *phost,
 {
 
   USBH_LL_ClosePipe(phost, pipe_num);
-
-  return USBH_OK;
+  
+  return USBH_OK; 
 
 }
 
@@ -130,28 +138,28 @@ USBH_StatusTypeDef USBH_ClosePipe  (USBH_HandleTypeDef *phost,
 uint8_t USBH_AllocPipe  (USBH_HandleTypeDef *phost, uint8_t ep_addr)
 {
   uint16_t pipe;
-
+  
   pipe =  USBH_GetFreePipe(phost);
 
-  if (pipe != 0xFFFFU)
+  if (pipe != 0xFFFF)
   {
-	phost->Pipes[pipe] = 0x8000U | ep_addr;
+	phost->Pipes[pipe] = 0x8000 | ep_addr;
   }
-  return (uint8_t)pipe;
+  return pipe;
 }
 
 /**
   * @brief  USBH_Free_Pipe
   *         Free the USB Pipe
   * @param  phost: Host Handle
-  * @param  idx: Pipe number to be freed
+  * @param  idx: Pipe number to be freed 
   * @retval USBH Status
   */
 USBH_StatusTypeDef USBH_FreePipe  (USBH_HandleTypeDef *phost, uint8_t idx)
 {
-   if(idx < 11U)
+   if(idx < 11)
    {
-	 phost->Pipes[idx] &= 0x7FFFU;
+	 phost->Pipes[idx] &= 0x7FFF;
    }
    return USBH_OK;
 }
@@ -164,20 +172,24 @@ USBH_StatusTypeDef USBH_FreePipe  (USBH_HandleTypeDef *phost, uint8_t idx)
   */
 static uint16_t USBH_GetFreePipe (USBH_HandleTypeDef *phost)
 {
-  uint8_t idx = 0U;
-
-  for (idx = 0U ; idx < 11U ; idx++)
+  uint8_t idx = 0;
+  
+  for (idx = 0 ; idx < 11 ; idx++)
   {
-	if ((phost->Pipes[idx] & 0x8000U) == 0U)
+	if ((phost->Pipes[idx] & 0x8000) == 0)
 	{
-	   return (uint16_t)idx;
-	}
+	   return idx;
+	} 
   }
-  return 0xFFFFU;
+  return 0xFFFF;
 }
 /**
 * @}
-*/
+*/ 
+
+/**
+* @}
+*/ 
 
 /**
 * @}
@@ -185,11 +197,7 @@ static uint16_t USBH_GetFreePipe (USBH_HandleTypeDef *phost)
 
 /**
 * @}
-*/
-
-/**
-* @}
-*/
+*/ 
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
 
