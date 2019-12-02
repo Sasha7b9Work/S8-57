@@ -4,6 +4,7 @@
 #include <stm32f4xx_hal.h>
 
 #ifdef DEVICE
+#include "Osci/Osci.h"
 #include "Recorder/Recorder.h"
 #endif
 
@@ -195,6 +196,12 @@ bool Transceiver::Receive()
     Set_MODE(Mode::Disabled);
 
     inInteraction = false;
+
+#ifdef DEVICE
+
+    Osci::ReadPointP2P();
+
+#endif
 
     return true;
 }

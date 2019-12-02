@@ -168,15 +168,13 @@ static void UpdateFPGA()
 
 void Osci::ReadPointP2P()
 {
-    if (!InModeP2P() || !ContextOsci::IsRunning())
-    {
-        return;
-    }
-
-    if (HAL_PIO::Read(HPort::_G, HPin::_1))
+    if (InModeP2P() && ContextOsci::IsRunning() && HAL_PIO::Read(HPort::_G, HPin::_1))
     {
         BitSet16 dataA(HAL_FSMC::ReadFromFPGA(RD::DATA_A), HAL_FSMC::ReadFromFPGA(RD::DATA_A + 1));
         BitSet16 dataB(HAL_FSMC::ReadFromFPGA(RD::DATA_B), HAL_FSMC::ReadFromFPGA(RD::DATA_B + 1));
+
+        LOG_WRITE("%d %d", dataA.halfWord, dataB.halfWord);
+
         RAM::GetFrameP2P()->AddPoints(dataA, dataB);
     }
 }

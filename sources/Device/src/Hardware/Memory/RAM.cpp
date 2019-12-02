@@ -258,7 +258,9 @@ static void RemoveOldest()
 
 FrameP2P *RAM::GetFrameP2P()
 {
-    return nullptr;
+    static FrameP2P frame;
+
+    return &frame;
 }
 
 
