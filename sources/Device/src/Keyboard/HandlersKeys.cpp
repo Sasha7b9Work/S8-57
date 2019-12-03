@@ -28,7 +28,7 @@ void Handlers::Process(KeyEvent e)
         {Empty,             Empty,             Service_Release,  Empty},            // Service    
         {Empty,             Empty,             ChannelA_Release, ChannelA_Long},    // ChannelA   
         {Empty,             Empty,             ChannelB_Release, ChannelB_Long},    // ChannelB   
-        {Empty,             Empty,             Time_Release,     Time_Long},        // Time       
+        {Empty,             Empty,             OnTime_Release,   OnTime_Long},      // Time       
         {Start,             Empty,             Empty,            Empty},            // Start      
         {Empty,             Empty,             Trig_Release,     Trig_Long},        // Trig       
         {Empty,             Empty,             Display_Release,  Empty},            // Display    
@@ -352,13 +352,13 @@ void Handlers::Service_Release()
 }
 
 
-void Handlers::Time_Release()
+void Handlers::OnTime_Release()
 {
     ShowHidePage(PageTime::self);
 }
 
 
-void Handlers::Time_Long()
+void Handlers::OnTime_Long()
 {
     TShift().Reset();
 }

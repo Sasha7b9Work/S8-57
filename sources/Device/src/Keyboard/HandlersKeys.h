@@ -39,8 +39,8 @@ private:
     static void OnArrow();              // Key::Left, Key::Up, Key::Right, Key::Down
     static void OnEnter_Release();      // Key::Enter
     static void OnEnter_Long();         // Key::Enter
-    static void Time_Long();            // Key::Time
-    static void Time_Release();         // Key::Time
+    static void OnTime_Long();          // Key::Time
+    static void OnTime_Release();       // Key::Time
     static void Start();                // Key::Start
     static void Function_Release();     // Key::Function
     static void Service_Release();      // Key::Service
