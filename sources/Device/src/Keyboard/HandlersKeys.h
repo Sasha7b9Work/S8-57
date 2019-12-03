@@ -43,10 +43,10 @@ private:
     static void OnTime_Release();       // Key::Time
     static void OnStart();              // Key::Start
     static void OnFunction();           // Key::Function
-    static void Service_Release();      // Key::Service
-    static void Measures_Release();     // Key::Measure
-    static void Display_Release();      // Key::Display
-    static void Memory_Release();       // Key::Memory
+    static void OnService();            // Key::Service
+    static void OnMeasures();           // Key::Measure
+    static void OnDisplay();            // Key::Display
+    static void OnMemory();             // Key::Memory
     static void ChannelA_Release();     // Key::ChannelA
     static void ChannelB_Release();     // Key::ChannelB
     static void ChannelA_Long();        // Key::ChannelA
@@ -61,8 +61,7 @@ private:
     static void RangeMoreB();           // Key::RangeMoreB
     static void RShiftLessA();          // Key::RShiftLessA
     static void RShiftMoreA();          // Key::RShiftMoreA
-    static void RShiftLessB();          // Key::RShiftLessB
-    static void RShiftMoreB();          // Key::RShiftMoreB
+    static void OnRShiftB();            // Key::RShiftLessB, Key::RShiftMoreB
     static void OnTBase();              // Key::TBaseLess, Key::TBase::More
     static void OnTShift();             // Key::TShiftLess, Key::TShiftMore
     static void OnFX();                 // Key::F1, Key::F2, Key::F3, Key::F4, Key::F5

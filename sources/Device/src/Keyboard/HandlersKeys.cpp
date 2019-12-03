@@ -23,23 +23,23 @@ void Handlers::Process(KeyEvent e)
     { // Press              Repead             Release           Long
         {Empty,             Empty,             Empty,            Empty},            // None       
         {Empty,             Empty,             OnFunction,       Empty},            // Function   
-        {Empty,             Empty,             Measures_Release, Empty},            // Measure    
-        {Empty,             Empty,             Memory_Release,   Empty},            // Memory     
-        {Empty,             Empty,             Service_Release,  Empty},            // Service    
+        {Empty,             Empty,             OnMeasures,       Empty},            // Measure    
+        {Empty,             Empty,             OnMemory,         Empty},            // Memory     
+        {Empty,             Empty,             OnService,        Empty},            // Service    
         {Empty,             Empty,             ChannelA_Release, ChannelA_Long},    // ChannelA   
         {Empty,             Empty,             ChannelB_Release, ChannelB_Long},    // ChannelB   
         {Empty,             Empty,             OnTime_Release,   OnTime_Long},      // Time       
         {OnStart,           Empty,             Empty,            Empty},            // Start      
         {Empty,             Empty,             Trig_Release,     Trig_Long},        // Trig       
-        {Empty,             Empty,             Display_Release,  Empty},            // Display    
+        {Empty,             Empty,             OnDisplay,        Empty},            // Display    
         {RangeMoreA,        Empty,             Empty,            Empty},            // RangeMoreA 
         {RangeLessA,        Empty,             Empty,            Empty},            // RangeLessA 
         {RShiftMoreA,       RShiftMoreA,       Empty,            Empty},            // RShiftMoreA
         {RShiftLessA,       RShiftLessA,       Empty,            Empty},            // RShiftLessA
         {RangeMoreB,        Empty,             Empty,            Empty},            // RangeMoreB 
         {RangeLessB,        Empty,             Empty,            Empty},            // RangeLessB 
-        {RShiftMoreB,       RShiftMoreB,       Empty,            Empty},            // RShiftMoreB
-        {RShiftLessB,       RShiftLessB,       Empty,            Empty},            // RShiftLessB
+        {OnRShiftB,         OnRShiftB,         Empty,            Empty},            // RShiftMoreB
+        {OnRShiftB,         OnRShiftB,         Empty,            Empty},            // RShiftLessB
         {OnTBase,           Empty,             Empty,            Empty},            // TBaseMore
         {OnTBase,           Empty,             Empty,            Empty},            // TBaseLess
         {OnTShift,          OnTShift,          Empty,            Empty},            // TShiftMore 
@@ -113,15 +113,12 @@ void Handlers::RShiftMoreA()
     OnChangeParameterChannel(ChangeRShift, Chan::A, 1);
 }
 
-void Handlers::RShiftLessB()
+
+void Handlers::OnRShiftB()
 {
-    OnChangeParameterChannel(ChangeRShift, Chan::B, -1);
+    OnChangeParameterChannel(ChangeRShift, Chan::B, (event.key == Key::RShiftMoreB) ? 1 : -1);
 }
 
-void Handlers::RShiftMoreB()
-{
-    OnChangeParameterChannel(ChangeRShift, Chan::B, 1);
-}
 
 void Handlers::ChangeRange(Chan::E ch, int16 delta)
 {
@@ -327,13 +324,13 @@ void Handlers::OnFunction()
 }
 
 
-void Handlers::Measures_Release()
+void Handlers::OnMeasures()
 {
     ShowHidePage(PageMeasures::self);
 }
 
 
-void Handlers::Memory_Release()
+void Handlers::OnMemory()
 {
     if (FDrive::IsConnected())
     {
@@ -346,7 +343,7 @@ void Handlers::Memory_Release()
 }
 
 
-void Handlers::Service_Release()
+void Handlers::OnService()
 {
     ShowHidePage(PageService::self);
 }
@@ -389,7 +386,7 @@ void Handlers::Trig_Long()
 }
 
 
-void Handlers::Display_Release()
+void Handlers::OnDisplay()
 {
     ShowHidePage(PageDisplay::self);
 }
