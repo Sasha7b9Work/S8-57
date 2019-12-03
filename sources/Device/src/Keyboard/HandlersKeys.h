@@ -37,8 +37,8 @@ private:
     static void ChangeRShift(Chan::E ch, int16 delta);
     /// Обработчики нажатия кнопок
     static void OnArrow();              // Key::Left, Key::Up, Key::Right, Key::Down
-    static void EnterRelease();         // Key::Enter
-    static void EnterLong();            // Key::Enter
+    static void OnEnterRelease();       // Key::Enter
+    static void OnEnterLong();          // Key::Enter
     static void Time_Long();            // Key::Time
     static void Time_Release();         // Key::Time
     static void Start();                // Key::Start
