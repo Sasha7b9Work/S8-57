@@ -295,6 +295,7 @@ void Tester::LoadStep()
     }
 }
 
+INTERRUPT_BEGIN
 
 void HAL_GPIO_EXTI_Callback(uint16 pin)
 {
@@ -304,7 +305,7 @@ void HAL_GPIO_EXTI_Callback(uint16 pin)
     }
 }
 
-
+INTERRUPT_END
 
 pString Tester::Scale::ToString() const // -V2506
 {
