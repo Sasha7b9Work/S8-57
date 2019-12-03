@@ -49,9 +49,3 @@ public:
     static int GetSpacing();
 #endif
 };
-
-
-extern const uchar font5display[3080];
-extern const uchar font8display[3080];
-extern const uchar fontUGOdisplay[3080];
-extern const uchar fontUGO2display[3080];
