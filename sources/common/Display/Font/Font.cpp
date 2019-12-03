@@ -15,9 +15,7 @@ const Font *font = &font8;
 TypeFont::E pushedFont = TypeFont::_8;
 TypeFont::E currentFont = TypeFont::_8;
 
-#ifndef PANEL
 static int spacing = 1;
-#endif
 
 
 int Font::GetLengthText(pString text)
@@ -27,7 +25,7 @@ int Font::GetLengthText(pString text)
 
     while (*symbol)
     {
-        result += Font::GetWidth(*symbol);
+        result += Font::GetWidth(*symbol) + spacing;
         symbol++;
     }
     return result;

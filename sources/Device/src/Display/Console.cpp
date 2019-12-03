@@ -30,7 +30,7 @@ void Console::Draw()
 
     Font::Set(TypeFont::_5);
 
-    int y = 1;
+    int y = -1;
 
     for (int i = 0; i < stringInConsole; i++)
     {
