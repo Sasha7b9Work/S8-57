@@ -51,11 +51,11 @@ void Handlers::Process(KeyEvent e)
         {HandlerArrow,      HandlerArrow,      HandlerArrow,     HandlerArrow},     // Up         
         {HandlerArrow,      HandlerArrow,      HandlerArrow,     HandlerArrow},     // Down       
         {Empty,             Empty,             EnterRelease,     EnterLong},        // Enter      
-        {FX,                Empty,             FX,               FX},               // F1
-        {FX,                Empty,             FX,               FX},               // F2
-        {FX,                Empty,             FX,               FX},               // F3
-        {FX,                Empty,             FX,               FX},               // F4
-        {FX,                Empty,             FX,               FX}                // F5
+        {OnFX,              Empty,             OnFX,             OnFX},             // F1
+        {OnFX,              Empty,             OnFX,             OnFX},             // F2
+        {OnFX,              Empty,             OnFX,             OnFX},             // F3
+        {OnFX,              Empty,             OnFX,             OnFX},             // F4
+        {OnFX,              Empty,             OnFX,             OnFX}              // F5
     };
 
     Key::E       key = e.key;
@@ -232,7 +232,7 @@ void Handlers::TBaseMore()
 }
 
 
-void Handlers::FX()
+void Handlers::OnFX()
 {
     if (Menu::IsShown())
     {

@@ -66,7 +66,7 @@ private:
     static void TBaseLess();            // Key::TBaseLess
     static void TBaseMore();            // Key::TBaseMore
     static void OnTShift();             // Key::TShiftLess, Key::TShiftMore
-    static void FX();                   // Key::F1, Key::F2, Key::F3, Key::F4, Key::F5
+    static void OnFX();                 // Key::F1, Key::F2, Key::F3, Key::F4, Key::F5
 };
 
 
