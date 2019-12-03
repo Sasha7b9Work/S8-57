@@ -20,7 +20,7 @@ DEF_CHOICE_2( cShow,                                                            
 DEF_GOVERNOR( gNumStrings,                                                                                                                          //--- ОТЛАДКА - КОНСОЛЬ - Число строк ---
     "Число строк",
     "",
-    set.dbg.numStrings, 0, 33, &PageDebug::PageConsole::self, 0, Console::OnChanged_MaxStringsInConsole
+    set.dbg.numStrings, 0, 33, &PageDebug::PageConsole::self, Item::Active, Console::OnChanged_MaxStringsInConsole
 )
 
 
