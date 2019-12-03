@@ -46,10 +46,10 @@ void Handlers::Process(KeyEvent e)
         {OnTShift,          OnTShift,          Empty,            Empty},            // TShiftLess 
         {TrigLevMore_Press, TrigLevMore_Press, Empty,            Empty},            // TrigLevMore
         {TrigLevLess_Press, TrigLevLess_Press, Empty,            Empty},            // TrigLevLess
-        {HandlerArrow,      HandlerArrow,      HandlerArrow,     HandlerArrow},     // Left       
-        {HandlerArrow,      HandlerArrow,      HandlerArrow,     HandlerArrow},     // Right      
-        {HandlerArrow,      HandlerArrow,      HandlerArrow,     HandlerArrow},     // Up         
-        {HandlerArrow,      HandlerArrow,      HandlerArrow,     HandlerArrow},     // Down       
+        {OnArrow,           OnArrow,           OnArrow,          OnArrow},          // Left       
+        {OnArrow,           OnArrow,           OnArrow,          OnArrow},          // Right      
+        {OnArrow,           OnArrow,           OnArrow,          OnArrow},          // Up         
+        {OnArrow,           OnArrow,           OnArrow,          OnArrow},          // Down       
         {Empty,             Empty,             EnterRelease,     EnterLong},        // Enter      
         {OnFX,              Empty,             OnFX,             OnFX},             // F1
         {OnFX,              Empty,             OnFX,             OnFX},             // F2
@@ -230,7 +230,7 @@ void Handlers::OnFX()
 }
 
 
-void Handlers::HandlerArrow()
+void Handlers::OnArrow()
 { 
     if (Menu::IsShown())
     {
