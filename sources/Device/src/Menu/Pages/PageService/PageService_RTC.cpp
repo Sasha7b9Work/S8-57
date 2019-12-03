@@ -38,14 +38,11 @@ struct StructRTC
 /// Также нужно проверять значение этого указателя в функции отрисовки. Если оно равно nullptr, значит, страница была открыта нестандартным способом и нужно провести инициализацию.
 static StructRTC *psRTC = nullptr;
 
-#define CUR_FIELD (psRTC->curField)
-#define TIME      (psRTC->time)
-
-
 
 static void OnPress_SetLeft()
 {
-    Math::CircleDecrease(&CUR_FIELD, 0, 5);
+    Math::CircleDecrease(&psRTC->curField, 0, 5);
+    Color::ChangeFlash(true);
 }
 
 static void Draw_Left(int x, int y)
@@ -62,7 +59,8 @@ DEF_GRAPH_BUTTON( bSet_Left,
 
 static void OnPress_SetRight()
 {
-    Math::CircleIncrease(&CUR_FIELD, 0, 5);
+    Math::CircleIncrease(&psRTC->curField, 0, 5);
+    Color::ChangeFlash(true);
 }
 
 static void Draw_Right(int x, int y)
@@ -144,14 +142,14 @@ static void DrawField(int numField)
     int x = x0 + posX * 93;
     int y = numField < 3 ? y0 : y0 + 100;
 
-    uint fields[6] = { TIME.hours, TIME.minutes, TIME.seconds, TIME.day, TIME.month, TIME.year };
+    uint fields[6] = { psRTC->time.hours, psRTC->time.minutes, psRTC->time.seconds, psRTC->time.day, psRTC->time.month, psRTC->time.year };
 
     Color::FILL.SetAsCurrent();
 
-    if (numField == CUR_FIELD)
+    if (numField == psRTC->curField)
     {
-        Region(76, 70).Fill(x - 2, y - 2, Color::FILL);
-        Color::BACK.SetAsCurrent();
+        Region(76, 70).Fill(x - 2, y - 2, Color::FLASH_10);
+        Color::FLASH_01.SetAsCurrent();
     }
 
     Integer value(static_cast<int>(fields[numField]));
