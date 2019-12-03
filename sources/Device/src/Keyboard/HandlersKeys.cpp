@@ -50,7 +50,7 @@ void Handlers::Process(KeyEvent e)
         {OnArrow,           OnArrow,           OnArrow,          OnArrow},          // Right      
         {OnArrow,           OnArrow,           OnArrow,          OnArrow},          // Up         
         {OnArrow,           OnArrow,           OnArrow,          OnArrow},          // Down       
-        {Empty,             Empty,             OnEnterRelease,   OnEnterLong},      // Enter      
+        {Empty,             Empty,             OnEnter_Release,  OnEnter_Long},     // Enter      
         {OnFX,              Empty,             OnFX,             OnFX},             // F1
         {OnFX,              Empty,             OnFX,             OnFX},             // F2
         {OnFX,              Empty,             OnFX,             OnFX},             // F3
@@ -268,7 +268,7 @@ bool Handlers::CommonHandlerPage()
     return result;
 }
 
-void Handlers::OnEnterRelease()
+void Handlers::OnEnter_Release()
 {
     if (!Menu::IsShown())
     {
@@ -280,7 +280,7 @@ void Handlers::OnEnterRelease()
     }
 }
 
-void Handlers::OnEnterLong()
+void Handlers::OnEnter_Long()
 {
     return Menu::IsShown() ? Menu::Hide() : Menu::Show();
 }
