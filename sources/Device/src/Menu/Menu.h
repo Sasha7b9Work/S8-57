@@ -57,4 +57,26 @@ struct Menu
         static const int HEIGHT = 9;
         static const int WIDTH = 320 / 5 * 2 - 1;
     };
+
+private:
+    /// Последний открытый контрол на дереве странице page
+    static Item *LastOpened(Page *page);
+    /// Обработка события таймера автоматического сокрытия меню
+    static void OnTimerAutoHide();
+
+    static void ProcessButtonForHint(Key::E button);
+    /// Написать подсказку
+    static void DrawHint();
+    /// Закрыть все страницы, которые не могут быть открытыми при включении
+    static void CloseAllBadOpenedPages();
+    // Закрыть parent, если он является хранителем page
+    static void CloseIfSubPage(Page *parent, Page *page);
+
+    static void ClosePage(Page *page);
+
+    static void DrawHintItem(int x, int y, int width);
+    /// Итем, для которого нужно выводить подсказку
+    static Item *itemHint;
+    /// Нужно для того, чтобы периодически сохранять настройки
+    static uint timeLastKeyboardEvent;
 };

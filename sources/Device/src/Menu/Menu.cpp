@@ -11,24 +11,15 @@
 #include <cstdio>
 
 
+Item *Menu::itemHint = nullptr;
+uint Menu::timeLastKeyboardEvent = MAX_UINT;
+
+
 const Page    *Menu::mainPage = nullptr;
 
-/// Итем, для которого нужно выводить подсказку
-static Item   *itemHint = nullptr;
 /// Строка подсказки, которую надо выводить в случае включённого режима подсказок.
 const char    *stringForHint = nullptr;
-/// Нужно для того, чтобы периодически сохранять настройки
-static uint timeLastKeyboardEvent = MAX_UINT;
-/// Последний открытый контрол на дереве странице page
-static Item *LastOpened(Page *page);
-/// Обработка события таймера автоматического сокрытия меню
-static void OnTimerAutoHide();
 
-static void ProcessButtonForHint(Key::E button);
-/// Написать подсказку
-static void DrawHint();
-/// Закрыть все страницы, которые не могут быть открытыми при включении
-static void CloseAllBadOpenedPages();
 
 
 void Menu::Update()
@@ -55,7 +46,7 @@ void Menu::Update()
 }
 
 
-static void ProcessButtonForHint(Key::E button)
+void Menu::ProcessButtonForHint(Key::E button)
 {
     if (button == Key::Enter)
     {
@@ -141,7 +132,7 @@ void Menu::SetAutoHide(bool)
 }
 
 
-static void OnTimerAutoHide()
+void Menu::OnTimerAutoHide()
 {
     Menu::Hide();
 }
@@ -189,7 +180,7 @@ bool Menu::IsShown()
 }
 
 
-static void ClosePage(Page *page)
+void Menu::ClosePage(Page *page)
 {
     page->OwnData()->funcOnOpenClose(false);
 
@@ -207,8 +198,7 @@ static void ClosePage(Page *page)
 }
 
 
-// Закрыть parent, если он является хранителем page
-static void CloseIfSubPage(Page *parent, Page *page)
+void Menu::CloseIfSubPage(Page *parent, Page *page)
 {
     if (page == parent)
     {
@@ -268,7 +258,7 @@ Page *Menu::OpenedPage()
     return (item->IsPage()) ? static_cast<Page *>(item) : nullptr;
 }
 
-static Item *LastOpened(Page *page)
+Item *Menu::LastOpened(Page *page)
 {
     Item *result = &Item::empty;
 
@@ -313,7 +303,7 @@ Item *Menu::CurrentItem()
 }
 
 
-static void DrawHintItem(int x, int y, int width)
+void Menu::DrawHintItem(int x, int y, int width)
 {
     if (itemHint)
     {
@@ -376,7 +366,7 @@ void Menu::Draw()
 }
 
 
-static void DrawHint()
+void Menu::DrawHint()
 {
     if (HINT_MODE_ENABLED)
     {
@@ -461,7 +451,7 @@ const Item *Menu::ItemUnderFunctionalKey(Key::E key)
 }
 
 
-static void CloseAllBadOpenedPages()
+void Menu::CloseAllBadOpenedPages()
 {
     Page *opened = static_cast<Page *>(LastOpened(const_cast<Page *>(PageFunction::self))); //-V1027
 
