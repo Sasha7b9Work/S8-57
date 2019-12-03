@@ -7,14 +7,10 @@
 #include <cstdio>
 
 
-static CHAR_BUF2(buffer, 33, 100);
-
-/// true означает, что идёт процесс вывода консоли и добавлять в неё новые строки нельзя (это происходит, когда добавление идёт из прерывания)
-static bool inProcessDrawConsole = false;
-/// Количество заполненных строк в консоли
-static int stringInConsole = 0;
-/// Здесь сохраняется предыдущее значение максимального количества строк в консоли
-static int16 prevMaxStrinsInConsole = -1;
+char Console::buffer[33][100];
+bool Console::inProcessDrawConsole = false;
+int Console::stringInConsole = 0;
+int16 Console::prevMaxStrinsInConsole = -1;
 
 
 
@@ -50,7 +46,7 @@ void Console::Draw()
 }
 
 
-static void DeleteFirstString()
+void Console::DeleteFirstString()
 {
     for (int16 i = 1; i < stringInConsole; i++)
     {
