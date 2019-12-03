@@ -31,7 +31,7 @@ static void DrawHint();
 static void CloseAllBadOpenedPages();
 
 
-void Menu::ProcessingAllKeyboardEvents()
+void Menu::Update()
 {
     while(!BufferButtons::IsEmpty())                // Если есть события клавиатуры
     {

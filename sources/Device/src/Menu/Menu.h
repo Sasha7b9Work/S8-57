@@ -22,7 +22,7 @@ struct Menu
 
     static void ChangeStateFlashDrive();
 
-    static void ProcessingAllKeyboardEvents();
+    static void Update();
 
     static void Draw();
     /// Установить время автоматического сокрытия меню в соответствии с установками.

@@ -111,7 +111,7 @@ void Device::Update()
 
     Multimeter::Update();
 
-    Menu::ProcessingAllKeyboardEvents();
+    Menu::Update();
 
     FDrive::Update();
 
