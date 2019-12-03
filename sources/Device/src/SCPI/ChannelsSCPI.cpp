@@ -52,7 +52,7 @@ static const char *FuncRange(const char *buffer)
 
     SCPI_REQUEST(SCPI::SendAnswer(rangeName[Range(ch)]));
 
-    SCPI_PROCESS_ARRAY(rangeName, Range(ch, static_cast<Range::E>(i)))
+    SCPI_PROCESS_ARRAY(rangeName, Range(ch).Load(static_cast<Range::E>(i)))
 }
 
 

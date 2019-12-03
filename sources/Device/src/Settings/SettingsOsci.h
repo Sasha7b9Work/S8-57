@@ -100,9 +100,9 @@ struct Range
         Count
     };
     /// Этот конструктор - чтобы узнать текущее знаечение Range
-    Range(Chan::E _ch) : ch(_ch) {}
-    /// Этот конструктор устанавливает новоез значениеRange
-    Range(Chan::E ch, E range);
+    explicit Range(Chan::E _ch) : ch(_ch) {}
+
+    void Load(E range);
 
     operator Range::E();
     

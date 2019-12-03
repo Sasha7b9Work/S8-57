@@ -184,7 +184,7 @@ static void BalanceChannel(Chan::E ch, Range::E range)
 {
     Osci::Stop();
 
-    Range(ch, range);
+    Range(ch).Load(range);
 
     set.dbg.addRShift[ch][range] = 0;
 
