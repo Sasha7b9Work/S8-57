@@ -42,8 +42,8 @@ void Handlers::Process(KeyEvent e)
         {RShiftLessB,       RShiftLessB,       Empty,            Empty},            // RShiftLessB
         {TBaseMore,         Empty,             Empty,            Empty},            // TBaseMore
         {TBaseLess,         Empty,             Empty,            Empty},            // TBaseLess
-        {TShiftMore,        TShiftMore,        Empty,            Empty},            // TShiftMore 
-        {TShiftLess,        TShiftLess,        Empty,            Empty},            // TShiftLess 
+        {OnTShift,          OnTShift,          Empty,            Empty},            // TShiftMore 
+        {OnTShift,          OnTShift,          Empty,            Empty},            // TShiftLess 
         {TrigLevMore_Press, TrigLevMore_Press, Empty,            Empty},            // TrigLevMore
         {TrigLevLess_Press, TrigLevLess_Press, Empty,            Empty},            // TrigLevLess
         {HandlerArrow,      HandlerArrow,      HandlerArrow,     HandlerArrow},     // Left       
@@ -194,15 +194,9 @@ void Handlers::ChangeTShift(int delta)
 }
 
 
-void Handlers::TShiftLess()
+void Handlers::OnTShift()
 {
-    OnChangeParameterTime(ChangeTShift, -1);
-}
-
-
-void Handlers::TShiftMore()
-{
-    OnChangeParameterTime(ChangeTShift, 1);
+    OnChangeParameterTime(ChangeTShift, (event.key == Key::TShiftMore) ? 1 : -1);
 }
 
 

@@ -65,8 +65,7 @@ private:
     static void RShiftMoreB();          // Key::RShiftMoreB
     static void TBaseLess();            // Key::TBaseLess
     static void TBaseMore();            // Key::TBaseMore
-    static void TShiftLess();           // Key::TShiftLess
-    static void TShiftMore();           // Key::TShiftMore
+    static void OnTShift();             // Key::TShiftLess, Key::TShiftMore
     static void FX();                   // Key::F1, Key::F2, Key::F3, Key::F4, Key::F5
 };
 
