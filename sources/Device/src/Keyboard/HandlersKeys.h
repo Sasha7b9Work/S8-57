@@ -42,7 +42,7 @@ private:
     static void OnTime_Long();          // Key::Time
     static void OnTime_Release();       // Key::Time
     static void OnStart();              // Key::Start
-    static void Function_Release();     // Key::Function
+    static void OnFunction();           // Key::Function
     static void Service_Release();      // Key::Service
     static void Measures_Release();     // Key::Measure
     static void Display_Release();      // Key::Display

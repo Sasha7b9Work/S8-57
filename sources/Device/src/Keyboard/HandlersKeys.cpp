@@ -22,7 +22,7 @@ void Handlers::Process(KeyEvent e)
     static const pFuncVV func[Key::Count][4] =
     { // Press              Repead             Release           Long
         {Empty,             Empty,             Empty,            Empty},            // None       
-        {Empty,             Empty,             Function_Release, Empty},            // Function   
+        {Empty,             Empty,             OnFunction,       Empty},            // Function   
         {Empty,             Empty,             Measures_Release, Empty},            // Measure    
         {Empty,             Empty,             Memory_Release,   Empty},            // Memory     
         {Empty,             Empty,             Service_Release,  Empty},            // Service    
@@ -321,7 +321,7 @@ void Handlers::ChannelB_Long()
 }
 
 
-void Handlers::Function_Release()
+void Handlers::OnFunction()
 {
     ShowHidePage(PageFunction::self);
 }
