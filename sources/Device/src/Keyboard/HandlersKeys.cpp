@@ -34,8 +34,8 @@ void Handlers::Process(KeyEvent e)
         {Empty,             Empty,             OnDisplay,        Empty},            // Display    
         {RangeMoreA,        Empty,             Empty,            Empty},            // RangeMoreA 
         {RangeLessA,        Empty,             Empty,            Empty},            // RangeLessA 
-        {RShiftMoreA,       RShiftMoreA,       Empty,            Empty},            // RShiftMoreA
-        {RShiftLessA,       RShiftLessA,       Empty,            Empty},            // RShiftLessA
+        {OnRShiftA,         OnRShiftA,         Empty,            Empty},            // RShiftMoreA
+        {OnRShiftA,         OnRShiftA,         Empty,            Empty},            // RShiftLessA
         {RangeMoreB,        Empty,             Empty,            Empty},            // RangeMoreB 
         {RangeLessB,        Empty,             Empty,            Empty},            // RangeLessB 
         {OnRShiftB,         OnRShiftB,         Empty,            Empty},            // RShiftMoreB
@@ -103,14 +103,10 @@ void Handlers::ChangeRShift(Chan::E ch, int16 delta)
     }
 }
 
-void Handlers::RShiftLessA()
-{
-    OnChangeParameterChannel(ChangeRShift, Chan::A, -1);
-}
 
-void Handlers::RShiftMoreA()
+void Handlers::OnRShiftA()
 {
-    OnChangeParameterChannel(ChangeRShift, Chan::A, 1);
+    OnChangeParameterChannel(ChangeRShift, Chan::A, (event.key == Key::RShiftMoreA) ? 1 : -1);
 }
 
 
@@ -124,6 +120,7 @@ void Handlers::ChangeRange(Chan::E ch, int16 delta)
 {
     Range(ch).Change(delta);
 }
+
 
 void Handlers::RangeLessA()
 {

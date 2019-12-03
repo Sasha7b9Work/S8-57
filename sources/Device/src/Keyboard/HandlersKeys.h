@@ -59,8 +59,7 @@ private:
     static void RangeMoreA();           // Key::RangeMoreA
     static void RangeLessB();           // Key::RangeLessB
     static void RangeMoreB();           // Key::RangeMoreB
-    static void RShiftLessA();          // Key::RShiftLessA
-    static void RShiftMoreA();          // Key::RShiftMoreA
+    static void OnRShiftA();            // Key::RShiftLessA, Key::RShiftMoreB
     static void OnRShiftB();            // Key::RShiftLessB, Key::RShiftMoreB
     static void OnTBase();              // Key::TBaseLess, Key::TBase::More
     static void OnTShift();             // Key::TShiftLess, Key::TShiftMore
