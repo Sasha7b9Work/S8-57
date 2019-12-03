@@ -29,7 +29,7 @@ void Handlers::Process(KeyEvent e)
         {Empty,             Empty,             ChannelA_Release, ChannelA_Long},    // ChannelA   
         {Empty,             Empty,             ChannelB_Release, ChannelB_Long},    // ChannelB   
         {Empty,             Empty,             OnTime_Release,   OnTime_Long},      // Time       
-        {Start,             Empty,             Empty,            Empty},            // Start      
+        {OnStart,           Empty,             Empty,            Empty},            // Start      
         {Empty,             Empty,             Trig_Release,     Trig_Long},        // Trig       
         {Empty,             Empty,             Display_Release,  Empty},            // Display    
         {RangeMoreA,        Empty,             Empty,            Empty},            // RangeMoreA 
@@ -364,7 +364,7 @@ void Handlers::OnTime_Long()
 }
 
 
-void Handlers::Start()
+void Handlers::OnStart()
 {
     if (Device::State::InModeTester())
     {

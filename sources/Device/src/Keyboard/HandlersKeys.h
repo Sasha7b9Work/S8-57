@@ -41,7 +41,7 @@ private:
     static void OnEnter_Long();         // Key::Enter
     static void OnTime_Long();          // Key::Time
     static void OnTime_Release();       // Key::Time
-    static void Start();                // Key::Start
+    static void OnStart();              // Key::Start
     static void Function_Release();     // Key::Function
     static void Service_Release();      // Key::Service
     static void Measures_Release();     // Key::Measure
