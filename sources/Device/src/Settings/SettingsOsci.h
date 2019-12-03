@@ -59,9 +59,9 @@ struct TBase
         Count
     };
     /// Этот конструктор нужне для чтения значения
-    TBase() {};
-    /// Этим констуктором можно установить новое значение
-    explicit TBase(E v);
+    explicit TBase() {};
+
+    void Set(E v);
 
     operator TBase::E();
 

@@ -57,7 +57,7 @@ static const char *FuncScale(const char *buffer)
 {
     SCPI_REQUEST(SCPI::SendAnswer(tBaseNames[TBase()]));
 
-    SCPI_PROCESS_ARRAY(tBaseNames, TBase(static_cast<TBase::E>(i)));
+    SCPI_PROCESS_ARRAY(tBaseNames, TBase().Set(static_cast<TBase::E>(i)));
 }
 
 

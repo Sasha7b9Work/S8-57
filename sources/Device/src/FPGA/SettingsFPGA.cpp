@@ -261,9 +261,10 @@ String RShift::ToString(int16 rShiftRel, Range::E range, int8 _divider)
 }
 
 
-TBase::TBase(TBase::E base)
+void TBase::Set(TBase::E base)
 {
     set.time.base = base;
+
     Load();
 }
 
