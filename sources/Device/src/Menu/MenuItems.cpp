@@ -628,6 +628,8 @@ bool Governor::HandlerKey(const KeyEvent &event)
         if (event.IsPress())
         {
             NextPosition();
+
+            return true;
         }
     }
     else if (event.IsRight())
@@ -635,6 +637,8 @@ bool Governor::HandlerKey(const KeyEvent &event)
         if (event.IsPress())
         {
             PrevPosition();
+
+            return true;
         }
     }
     else if (event.IsUp() || event.IsDown())
@@ -642,6 +646,8 @@ bool Governor::HandlerKey(const KeyEvent &event)
         if (event.IsPress() || event.IsRepeat())
         {
             ChangeValue(event.IsUp() ? 1 : -1);
+
+            return true;
         }
     }
     else
@@ -649,7 +655,7 @@ bool Governor::HandlerKey(const KeyEvent &event)
         // остальные случаи не обрабатываем
     }
 
-    return true;
+    return false;
 }
 
 
