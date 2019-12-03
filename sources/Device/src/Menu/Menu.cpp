@@ -1,25 +1,20 @@
 #include "defines.h"
 #include "device.h"
-#include "common/Transceiver.h"
 #include "Display/Primitives.h"
 #include "FlashDrive/FlashDrive.h"
 #include "Hardware/Timer.h"
 #include "Keyboard/BufferButtons.h"
 #include "Keyboard/HandlersKeys.h"
 #include "Menu/Menu.h"
+#include "Menu/Pages/Include/PageMemory.h"
 #include "Settings/Settings.h"
 #include <cstdio>
 
 
 Item *Menu::itemHint = nullptr;
 uint Menu::timeLastKeyboardEvent = MAX_UINT;
-
-
-const Page    *Menu::mainPage = nullptr;
-
-/// Строка подсказки, которую надо выводить в случае включённого режима подсказок.
-const char    *stringForHint = nullptr;
-
+const Page *Menu::mainPage = nullptr;
+const char *Menu::stringForHint = nullptr;
 
 
 void Menu::Update()

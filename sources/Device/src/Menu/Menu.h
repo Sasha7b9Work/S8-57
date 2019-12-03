@@ -79,4 +79,6 @@ private:
     static Item *itemHint;
     /// Нужно для того, чтобы периодически сохранять настройки
     static uint timeLastKeyboardEvent;
+    /// Строка подсказки, которую надо выводить в случае включённого режима подсказок.
+    static const char *stringForHint;
 };
