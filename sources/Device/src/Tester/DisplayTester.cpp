@@ -4,16 +4,18 @@
 #include "Display/Grid.h"
 #include "Display/Painter.h"
 #include "Display/Primitives.h"
+#include "Hardware/Timer.h"
 #include "Menu/Menu.h"
 #include "Settings/Settings.h"
 #include "Tester/Tester.h"
+#include "Utils/Values.h"
 
 
 /// В таком массиве хранятся считанные точки тестер-компонента
 typedef uint8 array8[Tester::NUM_STEPS][TESTER_NUM_POINTS];
 typedef uint16 array16[Tester::NUM_STEPS][TESTER_NUM_POINTS];
 
-static bool ready[Tester::NUM_STEPS] = {false, false, false, false, false};
+bool DisplayTester::ready[Tester::NUM_STEPS] = {false, false, false, false, false};
 
 static array8 *datY = (array8 *)OUT_A;
 static array16 *datX = (array16 *)OUT_B;
@@ -33,13 +35,12 @@ void DisplayTester::Update()
     DrawLegend(274, 2);
 
     DrawParametersChannel(Chan::A, 3, 3);
+
     DrawParametersChannel(Chan::B, 240, 206);
 
     Rectangle(::Display::WIDTH - 1, ::Display::HEIGHT - 1).Draw(0, 0, Color::FILL);
     
     Menu::Draw();
-
-    Console::Draw();
 }
 
 

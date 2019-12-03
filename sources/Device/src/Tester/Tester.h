@@ -74,6 +74,18 @@ struct Tester
         int16 shift;
         Chan::E ch;
     };
+
+private:
+    /// Текущий шаг
+    static int step;
+    /// Шаг изменения напряжения
+    static float stepU;
+    /// Установленное в true значение означает, что вклюён режим тестера
+    static bool enabled;
+    /// Считать данные очередной ступеньки
+    static void ReadData();
+    /// Пересчитать точки для засылки отрисовки
+    static void RecountPoints(uint16 *x, uint8 *y);
 };
 
 
@@ -84,6 +96,8 @@ struct DisplayTester
     static void SetPoints(int numStep, const uint16 dx[TESTER_NUM_POINTS], const uint8 dy[TESTER_NUM_POINTS]);
 
 private:
+    /// Если true, то шаг готов для вывода
+    static bool ready[Tester::NUM_STEPS];
     /// Написать легенду изображения
     static void DrawLegend(int x, int y);
     /// Отображает параметры одного канала

@@ -8,7 +8,8 @@
 
 
 char Console::buffer[33][100];
-bool Console::inProcessDrawConsole = false;
+bool Console::inProcessDraw = false;
+bool Console::inProcessAddingString = false;
 int Console::stringInConsole = 0;
 int16 Console::prevMaxStrinsInConsole = -1;
 
@@ -26,7 +27,7 @@ void Console::Draw()
         return;
     }
 
-    inProcessDrawConsole = true;
+    inProcessDraw = true;
 
     Font::Set(TypeFont::_5);
 
@@ -42,7 +43,7 @@ void Console::Draw()
 
     Font::Set(TypeFont::_8);
 
-    inProcessDrawConsole = false;
+    inProcessDraw = false;
 }
 
 
@@ -59,8 +60,11 @@ void Console::DeleteFirstString()
 void Console::AddString(char *string)
 {
     /// \todo Мы пропускаем некоторые строки. Сделать отложенное добавление
-    if (!inProcessDrawConsole)      // Страхуемся на предмет того, что сейчас не происходит вывод консоли в другом потоке
+
+    if (!IsBusy())      // Страхуемся на предмет того, что сейчас не происходит вывод консоли в другом потоке
     {
+        inProcessAddingString = true;
+
         static int count = 0;
         if (stringInConsole == set.dbg.numStrings)
         {
@@ -68,13 +72,9 @@ void Console::AddString(char *string)
         }
         std::sprintf(buffer[stringInConsole], "%d %s", count++, string);
         stringInConsole++;
+
+        inProcessAddingString = false;
     }
-}
-
-
-int Console::NumberOfLines()
-{
-    return stringInConsole;
 }
 
 
@@ -98,4 +98,10 @@ void Console::OnChanged_MaxStringsInConsole()
     prevMaxStrinsInConsole = set.dbg.numStrings;
 
 
+}
+
+
+bool Console::IsBusy()
+{
+    return inProcessDraw || inProcessAddingString;
 }

@@ -18,37 +18,12 @@ uint16 Tester::Pin_U = HPin::_15;
 uint16 Tester::Pin_I = HPin::_0;
 uint16 Tester::Pin_TEST_STR = HPin::_9;
 
-/// Загрузить FPGA в соответствии с установленными настройками
-static void LoadFPGA();
-/// Считать данные очередной ступеньки
-static void ReadData();
-/// Пересчитать точки для засылки отрисовки
-static void RecountPoints(uint16 *x, uint8 *y);
-/// Текущий шаг
-static int step = 0;
-/// Шаг изменения напряжения
-static float stepU = 0.0F;
-/// Установленное в true значение означает, что вклюён режим тестера
-static bool enabled = false;
+int Tester::step = 0;
+float Tester::stepU = 0.0F;
+bool Tester::enabled = false;
 
 static uint16 dataX[Tester::NUM_STEPS][TESTER_NUM_POINTS];  /// \todo Сделать так, чтобы при включении тестер-компонента необходимая память бралась из Heap.cpp
 static uint8  dataY[Tester::NUM_STEPS][TESTER_NUM_POINTS];
-
-
-
-class DAC2_
-{
-public:
-    static void Init()
-    {
-        HAL_DAC2::Init();
-    }
-    static void SetValue(uint value)
-    {
-        HAL_DAC2::SetValue(value);
-    }
-};
-
 
 
 void Tester::Init()
@@ -79,7 +54,7 @@ void Tester::Init()
 
     HAL_PIO::Set(Port_TEST_ON, Tester::Pin_TEST_ON);         // Отключаем тестер-компонет
 
-    DAC2_::Init();
+    HAL_DAC2::Init();
 
     Disable();
 }
@@ -119,8 +94,6 @@ void Tester::Enable() // -V2506
     RShift(Chan::B, 0);
 
     HAL_PIO::Reset(Port_TEST_ON, Pin_TEST_ON);       // Включаем тестер-компонент
-
-    LoadFPGA();
 
     Osci::Stop();
 
@@ -182,12 +155,6 @@ void Tester::StartStop()
 }
 
 
-static void LoadFPGA()
-{
-
-}
-
-
 void Tester::ProcessStep()
 {
                                                                                                                                                   /*
@@ -207,7 +174,7 @@ void Tester::ProcessStep()
 
     if ((step % 2) == 0)        // Если шаг кратен двум, то нужно устанавливать напряжение
     {
-        DAC2_::SetValue(static_cast<uint>(stepU * step / 2));
+        HAL_DAC2::SetValue(static_cast<uint>(stepU * step / 2));
         // Запускаем ПЛИС для записи необходимого количества точек. Набор будет производиться в течение 2.5 мс (длительсность одного такта)
         if (!ContextTester::Start())
         {
@@ -228,7 +195,7 @@ void Tester::ProcessStep()
 }
 
 
-static void ReadData()
+void Tester::ReadData()
 {
     int halfStep = step / 2;
 
@@ -244,7 +211,7 @@ static void ReadData()
 }
 
 
-static void RecountPoints(uint16 *x, uint8 *y)
+void Tester::RecountPoints(uint16 *x, uint8 *y)
 {
     static const float scaleX = 332.0F / 240.0F;
     static const float scaleY = 249.0F / 255.0F;
