@@ -10,87 +10,10 @@
 #include "Settings/SettingsOsci.h"
 
 
-typedef void (*pFuncVCh)(Chan::E);
-typedef void (*pFuncVChI16)(Chan::E, int16);
-typedef void (*pFuncVI)(int);
-
-
-/// Обрабатываемое событие
-static KeyEvent event;
-/// Канал, параметры которого нужно временно выводить
-static Chan drawingChan(Chan::A);
-
-
-/// Обработчик нажатия функциональной кнопки
-static void FX_Press();
-/// Обработчик отпускания функциональной кнопки
-static void FX_Release();
-/// Обработчик длительного нажатия функциональной кнопки
-static void FX_Long();
-/// Общий обработчик изменения параметра канала - масштаба или смещения
-static void OnChangeParameterChannel(pFuncVChI16, Chan::E, int16);
-/// Общий обработчик изменения временных параметров
-static void OnChangeParameterTime(pFuncVI, int);
-/// Открывает страницу или закрывает меню в зависимости от того, какая страница сейчас раскрыта
-static void ShowHidePage(const Page *page);
-
-
-/// Пустой обработчик
-static void Empty();
-/// Обработчик нажатия стрелки
-
-static void HandlerArrow();
-
-static void EnterRelease();
-static void EnterLong();
-
-static void Time_Long();
-static void Time_Release();
-
-static void Start();
-
-static void Function_Release();
-
-static void Service_Release();
-
-static void Measures_Release();
-
-static void Display_Release();
-
-static void Memory_Release();
-
-static void ChannelA_Release();
-static void ChannelB_Release();
-static void ChannelA_Long();
-static void ChannelB_Long();
-
-
-static void Trig_Release();
-static void Trig_Long();
-static void TrigLevLess_Press();
-static void TrigLevMore_Press();
-
-static void RangeLessA();
-static void RangeMoreA();
-static void RangeLessB();
-static void RangeMoreB();
-
-static void RShiftLessA();
-static void RShiftMoreA();
-static void RShiftLessB();
-static void RShiftMoreB();
-
-static void TBaseLess();
-static void TBaseMore();
-static void TShiftLess();
-static void TShiftMore();
-/// Общий обработчик раскрытой страницы. Возвращает true, если отработал и дальнейшая обработка события клавиатуры не требуется.
-static bool CommonHandlerPage();
-
-/// Обрабатываемая клавиша
-static Key::E key = Key::None;
-/// Обрабатываемый тип события
-static TypePress::E type = TypePress::None;
+KeyEvent Handlers::event;
+Chan Handlers::drawingChan(Chan::A);
+Key::E Handlers::key = Key::None;
+TypePress::E Handlers::type = TypePress::None;
 
 
 void Handlers::Process(KeyEvent e)
@@ -148,11 +71,11 @@ void Handlers::Process(KeyEvent e)
     }
 }
 
-static void Empty()
+void Handlers::Empty()
 {
 }
 
-static void ChangeRShift(Chan::E ch, int16 delta)
+void Handlers::ChangeRShift(Chan::E ch, int16 delta)
 {
     if (!Device::State::InModeRecorder())
     {
@@ -181,56 +104,56 @@ static void ChangeRShift(Chan::E ch, int16 delta)
     }
 }
 
-static void RShiftLessA()
+void Handlers::RShiftLessA()
 {
     OnChangeParameterChannel(ChangeRShift, Chan::A, -1);
 }
 
-static void RShiftMoreA()
+void Handlers::RShiftMoreA()
 {
     OnChangeParameterChannel(ChangeRShift, Chan::A, 1);
 }
 
-static void RShiftLessB()
+void Handlers::RShiftLessB()
 {
     OnChangeParameterChannel(ChangeRShift, Chan::B, -1);
 }
 
-static void RShiftMoreB()
+void Handlers::RShiftMoreB()
 {
     OnChangeParameterChannel(ChangeRShift, Chan::B, 1);
 }
 
-static void ChangeRange(Chan::E ch, int16 delta)
+void Handlers::ChangeRange(Chan::E ch, int16 delta)
 {
     Range(ch).Change(delta);
 }
 
-static void RangeLessA()
+void Handlers::RangeLessA()
 {
     OnChangeParameterChannel(ChangeRange, Chan::A, -1);
 }
 
 
-static void RangeMoreA()
+void Handlers::RangeMoreA()
 {
     OnChangeParameterChannel(ChangeRange, Chan::A, +1);
 }
 
 
-static void RangeLessB()
+void Handlers::RangeLessB()
 {
     OnChangeParameterChannel(ChangeRange, Chan::B, -1);
 }
 
 
-static void RangeMoreB()
+void Handlers::RangeMoreB()
 {
     OnChangeParameterChannel(ChangeRange, Chan::B, +1);
 }
 
 
-static void OnChangeParameterChannel(pFuncVChI16 func, Chan::E ch, int16 delta)
+void Handlers::OnChangeParameterChannel(pFuncVChI16 func, Chan::E ch, int16 delta)
 {
     if (Device::State::InModeOsci())
     {
@@ -241,13 +164,13 @@ static void OnChangeParameterChannel(pFuncVChI16 func, Chan::E ch, int16 delta)
 }
 
 
-static void OnChangeParameterTime(pFuncVI func, int delta)
+void Handlers::OnChangeParameterTime(pFuncVI func, int delta)
 {
     func(delta);
 }
 
 
-void ChangeTShift(int delta)
+void Handlers::ChangeTShift(int delta)
 {
     static int prevDelta = 0;                   // Предыдущее направление перемещения
     static uint timeStartBrake = 0;             // Время начала торможения
@@ -272,25 +195,25 @@ void ChangeTShift(int delta)
 }
 
 
-static void TShiftLess()
+void Handlers::TShiftLess()
 {
     OnChangeParameterTime(ChangeTShift, -1);
 }
 
 
-static void TShiftMore()
+void Handlers::TShiftMore()
 {
     OnChangeParameterTime(ChangeTShift, 1);
 }
 
 
-static void ChangeTBase(int delta)
+void Handlers::ChangeTBase(int delta)
 {
     TBase().Change(delta);
 }
 
 
-static void TBaseLess()
+void Handlers::TBaseLess()
 {
     if (Device::State::InModeRecorder())
     {
@@ -303,7 +226,7 @@ static void TBaseLess()
 }
 
 
-static void TBaseMore()
+void Handlers::TBaseMore()
 {
     if (Device::State::InModeRecorder())
     {
@@ -316,7 +239,7 @@ static void TBaseMore()
 }
 
 
-static void FX_Press()
+void Handlers::FX_Press()
 {
     if (Menu::IsShown())
     {
@@ -324,7 +247,7 @@ static void FX_Press()
     }
 }
 
-static void FX_Release()
+void Handlers::FX_Release()
 {
     if (Menu::IsShown())
     {
@@ -332,7 +255,7 @@ static void FX_Release()
     }
 }
 
-static void FX_Long()
+void Handlers::FX_Long()
 {
     if (Menu::IsShown())
     {
@@ -340,7 +263,7 @@ static void FX_Long()
     }
 }
 
-static void HandlerArrow()
+void Handlers::HandlerArrow()
 { 
     if (Menu::IsShown())
     {
@@ -353,7 +276,7 @@ static void HandlerArrow()
     }
 }
 
-static bool CommonHandlerPage()
+bool Handlers::CommonHandlerPage()
 {
     bool result = false;
 
@@ -377,7 +300,7 @@ static bool CommonHandlerPage()
     return result;
 }
 
-static void EnterRelease()
+void Handlers::EnterRelease()
 {
     if (!Menu::IsShown())
     {
@@ -389,60 +312,60 @@ static void EnterRelease()
     }
 }
 
-static void EnterLong()
+void Handlers::EnterLong()
 {
     return Menu::IsShown() ? Menu::Hide() : Menu::Show();
 }
 
-static void TrigLevMore_Press()
+void Handlers::TrigLevMore_Press()
 {
     TrigLevel().Change(1);
 }
 
 
-static void TrigLevLess_Press()
+void Handlers::TrigLevLess_Press()
 {
     TrigLevel().Change(-1);
 }
 
 
-static void ChannelA_Release()
+void Handlers::ChannelA_Release()
 {
     ShowHidePage(PageChannelA::self);
 }
 
 
-static void ChannelB_Release()
+void Handlers::ChannelB_Release()
 {
     ShowHidePage(PageChannelB::self);
 }
 
 
-static void ChannelA_Long()
+void Handlers::ChannelA_Long()
 {
     RShift(Chan::A, 0);
 }
 
 
-static void ChannelB_Long()
+void Handlers::ChannelB_Long()
 {
     RShift(Chan::B, 0);
 }
 
 
-static void Function_Release()
+void Handlers::Function_Release()
 {
     ShowHidePage(PageFunction::self);
 }
 
 
-static void Measures_Release()
+void Handlers::Measures_Release()
 {
     ShowHidePage(PageMeasures::self);
 }
 
 
-static void Memory_Release()
+void Handlers::Memory_Release()
 {
     if (FDrive::IsConnected())
     {
@@ -455,25 +378,25 @@ static void Memory_Release()
 }
 
 
-static void Service_Release()
+void Handlers::Service_Release()
 {
     ShowHidePage(PageService::self);
 }
 
 
-static void Time_Release()
+void Handlers::Time_Release()
 {
     ShowHidePage(PageTime::self);
 }
 
 
-static void Time_Long()
+void Handlers::Time_Long()
 {
     TShift().Reset();
 }
 
 
-static void Start()
+void Handlers::Start()
 {
     if (Device::State::InModeTester())
     {
@@ -486,25 +409,25 @@ static void Start()
 }
 
 
-static void Trig_Release()
+void Handlers::Trig_Release()
 {
     ShowHidePage(PageTrig::self);
 }
 
 
-static void Trig_Long()
+void Handlers::Trig_Long()
 {
     TrigLevel().Set(0);
 }
 
 
-static void Display_Release()
+void Handlers::Display_Release()
 {
     ShowHidePage(PageDisplay::self);
 }
 
 
-static void ShowHidePage(const Page *page)
+void Handlers::ShowHidePage(const Page *page)
 {
     if (Menu::OpenedItem() == page)
     {
