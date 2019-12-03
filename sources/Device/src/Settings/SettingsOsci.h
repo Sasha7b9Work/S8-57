@@ -58,10 +58,8 @@ struct TBase
         _10s,
         Count
     };
-    /// Этот конструктор нужне для чтения значения
-    explicit TBase() {};
 
-    void Set(E v);
+    explicit TBase() {};
 
     operator TBase::E();
 
@@ -69,7 +67,7 @@ struct TBase
 
     pString ToString() const;
 
-    void Load() const;
+    static void Load(E v = Count);
 
     void Change(int delta);
 

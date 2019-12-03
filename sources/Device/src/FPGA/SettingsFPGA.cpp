@@ -261,12 +261,22 @@ String RShift::ToString(int16 rShiftRel, Range::E range, int8 _divider)
 }
 
 
-void TBase::Set(TBase::E base)
-{
-    set.time.base = base;
+//void TBase::Load(TBase::E base)
+//{
+//    if (base != Count)
+//    {
+//        set.time.base = base;
+//    }
+//
+//    Load();
+//}
 
-    Load();
-}
+//void TBase::Set(TBase::E base)
+//{
+//    set.time.base = base;
+//
+//    Load();
+//}
 
 
 TBase::operator TBase::E()

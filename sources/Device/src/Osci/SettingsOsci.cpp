@@ -243,8 +243,14 @@ pString TBase::ToString() const
 }
 
 
-void TBase::Load() const
+void TBase::Load(TBase::E base)
 {
+    if (base != Count)
+    {
+        set.time.base = base;
+    }
+
+
     static const uint8 values[TBase::Count] =
     {
         BIN_U8(00000000),  // -V2501  // 2ns     1       200MHz
@@ -281,7 +287,7 @@ void TBase::Load() const
 
     FPGA::ClearDataRand();
 
-    HAL_FSMC::WriteToFPGA8(WR::TBASE, values[TBase()]);
+    HAL_FSMC::WriteToFPGA8(WR::TBASE, values[set.time.base]);
 
     TShift().Load();
 

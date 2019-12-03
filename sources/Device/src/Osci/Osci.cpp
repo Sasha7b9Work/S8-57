@@ -228,7 +228,7 @@ void Osci::Balance(Chan::E ch)
 {
     ModeCouple(ch, ModeCouple::GND);
 
-    TBase().Set(TBase::_100ms);
+    TBase::Load(TBase::_100ms);
 
     for (int range = 0; range < Range::Count; range++)
     {
