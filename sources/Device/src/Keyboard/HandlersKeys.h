@@ -17,69 +17,12 @@ private:
     static KeyEvent event;
     /// Канал, параметры которого нужно временно выводить
     static Chan drawingChan;
-    /// Обрабатываемая клавиша
-    static Key::E key;
-    /// Обрабатываемый тип события
-    static TypePress::E type;
     /// Общий обработчик изменения параметра канала - масштаба или смещения
     static void OnChangeParameterChannel(pFuncVChI16, Chan::E, int16);
     /// Пустой обработчик
     static void Empty();
-    /// Обработчик нажатия стрелки
-
-    static void HandlerArrow();
-
-    static void EnterRelease();
-    static void EnterLong();
-
-    static void Time_Long();
-    static void Time_Release();
-
-    static void Start();
-
-    static void Function_Release();
-
-    static void Service_Release();
-
-    static void Measures_Release();
-
-    static void Display_Release();
-
-    static void Memory_Release();
-
-    static void ChannelA_Release();
-    static void ChannelB_Release();
-    static void ChannelA_Long();
-    static void ChannelB_Long();
-
-
-    static void Trig_Release();
-    static void Trig_Long();
-    static void TrigLevLess_Press();
-    static void TrigLevMore_Press();
-
-    static void RangeLessA();
-    static void RangeMoreA();
-    static void RangeLessB();
-    static void RangeMoreB();
-
-    static void RShiftLessA();
-    static void RShiftMoreA();
-    static void RShiftLessB();
-    static void RShiftMoreB();
-
-    static void TBaseLess();
-    static void TBaseMore();
-    static void TShiftLess();
-    static void TShiftMore();
     /// Общий обработчик раскрытой страницы. Возвращает true, если отработал и дальнейшая обработка события клавиатуры не требуется.
     static bool CommonHandlerPage();
-    /// Обработчик нажатия функциональной кнопки
-    static void FX_Press();
-    /// Обработчик отпускания функциональной кнопки
-    static void FX_Release();
-    /// Обработчик длительного нажатия функциональной кнопки
-    static void FX_Long();
     /// Общий обработчик изменения временных параметров
     static void OnChangeParameterTime(pFuncVI, int);
     /// Открывает страницу или закрывает меню в зависимости от того, какая страница сейчас раскрыта
@@ -92,6 +35,39 @@ private:
     static void ChangeTBase(int delta);
 
     static void ChangeRShift(Chan::E ch, int16 delta);
+    /// Обработчики нажатия кнопок
+    static void HandlerArrow();         // Key::Left, Key::Up, Key::Right, Key::Down
+    static void EnterRelease();         // Key::Enter
+    static void EnterLong();            // Key::Enter
+    static void Time_Long();            // Key::Time
+    static void Time_Release();         // Key::Time
+    static void Start();                // Key::Start
+    static void Function_Release();     // Key::Function
+    static void Service_Release();      // Key::Service
+    static void Measures_Release();     // Key::Measure
+    static void Display_Release();      // Key::Display
+    static void Memory_Release();       // Key::Memory
+    static void ChannelA_Release();     // Key::ChannelA
+    static void ChannelB_Release();     // Key::ChannelB
+    static void ChannelA_Long();        // Key::ChannelA
+    static void ChannelB_Long();        // Key::ChannelB
+    static void Trig_Release();         // Key::Trig
+    static void Trig_Long();            // Key::Trig
+    static void TrigLevLess_Press();    // Key::TrigLevLess
+    static void TrigLevMore_Press();    // Key::TrigLevMore
+    static void RangeLessA();           // Key::RangeLessA
+    static void RangeMoreA();           // Key::RangeMoreA
+    static void RangeLessB();           // Key::RangeLessB
+    static void RangeMoreB();           // Key::RangeMoreB
+    static void RShiftLessA();          // Key::RShiftLessA
+    static void RShiftMoreA();          // Key::RShiftMoreA
+    static void RShiftLessB();          // Key::RShiftLessB
+    static void RShiftMoreB();          // Key::RShiftMoreB
+    static void TBaseLess();            // Key::TBaseLess
+    static void TBaseMore();            // Key::TBaseMore
+    static void TShiftLess();           // Key::TShiftLess
+    static void TShiftMore();           // Key::TShiftMore
+    static void FX();                   // Key::F1, Key::F2, Key::F3, Key::F4, Key::F5
 };
 
 

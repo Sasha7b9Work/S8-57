@@ -12,8 +12,7 @@
 
 KeyEvent Handlers::event;
 Chan Handlers::drawingChan(Chan::A);
-Key::E Handlers::key = Key::None;
-TypePress::E Handlers::type = TypePress::None;
+
 
 
 void Handlers::Process(KeyEvent e)
@@ -52,15 +51,15 @@ void Handlers::Process(KeyEvent e)
         {HandlerArrow,      HandlerArrow,      HandlerArrow,     HandlerArrow},     // Up         
         {HandlerArrow,      HandlerArrow,      HandlerArrow,     HandlerArrow},     // Down       
         {Empty,             Empty,             EnterRelease,     EnterLong},        // Enter      
-        {FX_Press,          Empty,             FX_Release,       FX_Long},          // F1
-        {FX_Press,          Empty,             FX_Release,       FX_Long},          // F2
-        {FX_Press,          Empty,             FX_Release,       FX_Long},          // F3
-        {FX_Press,          Empty,             FX_Release,       FX_Long},          // F4
-        {FX_Press,          Empty,             FX_Release,       FX_Long}           // F5
+        {FX,                Empty,             FX,               FX},               // F1
+        {FX,                Empty,             FX,               FX},               // F2
+        {FX,                Empty,             FX,               FX},               // F3
+        {FX,                Empty,             FX,               FX},               // F4
+        {FX,                Empty,             FX,               FX}                // F5
     };
 
-    key = e.key;
-    type = e.type;
+    Key::E       key = e.key;
+    TypePress::E type = e.type;
 
     if (key < Key::Count && type < TypePress::None)
     {
@@ -172,15 +171,15 @@ void Handlers::OnChangeParameterTime(pFuncVI func, int delta)
 
 void Handlers::ChangeTShift(int delta)
 {
-    static int prevDelta = 0;                   // Предыдущее направление перемещения
-    static uint timeStartBrake = 0;             // Время начала торможения
+    static int prevDelta = 0;                       // Предыдущее направление перемещения
+    static uint timeStartBrake = 0;                 // Время начала торможения
 
-    if ((type == TypePress::Repeat) &&          // Если смещаемся не однокртаным нажатием кнопки
-        (prevDelta == delta) &&                 // В том же направлении, что и в прошлый раз
-        (timeStartBrake != 0) &&                // И "тормоз" включён
-        (TIME_MS - timeStartBrake < 500))       // и прошло ещё мало времени
+    if ((event.type == TypePress::Repeat) &&        // Если смещаемся не однокртаным нажатием кнопки
+        (prevDelta == delta) &&                     // В том же направлении, что и в прошлый раз
+        (timeStartBrake != 0) &&                    // И "тормоз" включён
+        (TIME_MS - timeStartBrake < 500))           // и прошло ещё мало времени
     {
-        return;                                 // то ничего не делаем
+        return;                                     // то ничего не делаем
     }
 
     prevDelta = delta;
@@ -188,7 +187,7 @@ void Handlers::ChangeTShift(int delta)
 
     TShift().Change(delta);
 
-    if ((TShift() == 0) && (type == TypePress::Repeat)) // Если новое пожение смещения - ноль, то включаем торможение
+    if ((TShift() == 0) && (event.type == TypePress::Repeat))   // Если новое пожение смещения - ноль, то включаем торможение
     {
         timeStartBrake = TIME_MS;
     }
@@ -239,29 +238,14 @@ void Handlers::TBaseMore()
 }
 
 
-void Handlers::FX_Press()
+void Handlers::FX()
 {
     if (Menu::IsShown())
     {
-        Menu::ItemUnderFunctionalKey(event.key)->HandlerFX(TypePress::Press);
+        Menu::ItemUnderFunctionalKey(event.key)->HandlerFX(event.type);
     }
 }
 
-void Handlers::FX_Release()
-{
-    if (Menu::IsShown())
-    {
-        Menu::ItemUnderFunctionalKey(event.key)->HandlerFX(TypePress::Release);
-    }
-}
-
-void Handlers::FX_Long()
-{
-    if (Menu::IsShown())
-    {
-        Menu::ItemUnderFunctionalKey(event.key)->HandlerFX(TypePress::Long);
-    }
-}
 
 void Handlers::HandlerArrow()
 { 
