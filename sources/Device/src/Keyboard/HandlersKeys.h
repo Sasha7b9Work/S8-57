@@ -55,10 +55,8 @@ private:
     static void Trig_Long();            // Key::Trig
     static void TrigLevLess_Press();    // Key::TrigLevLess
     static void TrigLevMore_Press();    // Key::TrigLevMore
-    static void RangeLessA();           // Key::RangeLessA
-    static void RangeMoreA();           // Key::RangeMoreA
-    static void RangeLessB();           // Key::RangeLessB
-    static void RangeMoreB();           // Key::RangeMoreB
+    static void OnRangeA();             // Key::RangeLessA, Key::RangeMoreA
+    static void OnRangeB();             // Key::RangeLessB, Key::RangeMoreB
     static void OnRShiftA();            // Key::RShiftLessA, Key::RShiftMoreB
     static void OnRShiftB();            // Key::RShiftLessB, Key::RShiftMoreB
     static void OnTBase();              // Key::TBaseLess, Key::TBase::More

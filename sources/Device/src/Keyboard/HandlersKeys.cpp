@@ -32,12 +32,12 @@ void Handlers::Process(KeyEvent e)
         {OnStart,           Empty,             Empty,            Empty},            // Start      
         {Empty,             Empty,             Trig_Release,     Trig_Long},        // Trig       
         {Empty,             Empty,             OnDisplay,        Empty},            // Display    
-        {RangeMoreA,        Empty,             Empty,            Empty},            // RangeMoreA 
-        {RangeLessA,        Empty,             Empty,            Empty},            // RangeLessA 
+        {OnRangeA,          Empty,             Empty,            Empty},            // RangeMoreA 
+        {OnRangeA,          Empty,             Empty,            Empty},            // RangeLessA 
         {OnRShiftA,         OnRShiftA,         Empty,            Empty},            // RShiftMoreA
         {OnRShiftA,         OnRShiftA,         Empty,            Empty},            // RShiftLessA
-        {RangeMoreB,        Empty,             Empty,            Empty},            // RangeMoreB 
-        {RangeLessB,        Empty,             Empty,            Empty},            // RangeLessB 
+        {OnRangeB,          Empty,             Empty,            Empty},            // RangeMoreB 
+        {OnRangeB,          Empty,             Empty,            Empty},            // RangeLessB 
         {OnRShiftB,         OnRShiftB,         Empty,            Empty},            // RShiftMoreB
         {OnRShiftB,         OnRShiftB,         Empty,            Empty},            // RShiftLessB
         {OnTBase,           Empty,             Empty,            Empty},            // TBaseMore
@@ -122,27 +122,15 @@ void Handlers::ChangeRange(Chan::E ch, int16 delta)
 }
 
 
-void Handlers::RangeLessA()
+void Handlers::OnRangeA()
 {
-    OnChangeParameterChannel(ChangeRange, Chan::A, -1);
+    OnChangeParameterChannel(ChangeRange, Chan::A, (event.key == Key::RangeMoreA) ? 1 : -1);
 }
 
 
-void Handlers::RangeMoreA()
+void Handlers::OnRangeB()
 {
-    OnChangeParameterChannel(ChangeRange, Chan::A, +1);
-}
-
-
-void Handlers::RangeLessB()
-{
-    OnChangeParameterChannel(ChangeRange, Chan::B, -1);
-}
-
-
-void Handlers::RangeMoreB()
-{
-    OnChangeParameterChannel(ChangeRange, Chan::B, +1);
+    OnChangeParameterChannel(ChangeRange, Chan::B, (event.key == Key::RangeMoreB) ? 1 : -1);
 }
 
 
