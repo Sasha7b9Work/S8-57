@@ -19,6 +19,10 @@ struct Transceiver
     static void Send(uint8 data);
     static void Send(uint8 byte0, uint8 byte1);
 
+    static bool InInteraction() { return inInteraction; }
+
+private:
+
     static bool inInteraction;
 };
 

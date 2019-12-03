@@ -200,7 +200,7 @@ void Tester::ProcessStep()
        |<--------->|<--------->|<--------->|<--------->|<--------->|<--------->|<--------->|<--------->|<--------->|<--------->|                  */
 
 
-    if (Transceiver::inInteraction || 
+    if (Transceiver::InInteraction() || 
         Timer::IsBusy())
     {
         return;
